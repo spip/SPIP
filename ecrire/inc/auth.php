@@ -295,6 +295,9 @@ function auth_trace($row, $date=null)
 	}
 }
 
+/** ----------------------------------------------------------------------------
+ * API Authentification, gestion des identites centralisees
+ */
 
 /**
  * Fonction aiguillage, privee
@@ -313,10 +316,6 @@ function auth_administrer($fonction,$args,$defaut=false){
 	else
 		return $defaut;
 }
-
-/**
- * API Authentification, gestion des identites centralisees
- */
 
 /**
  * Pipeline pour inserer du contenu dans le formulaire de login
@@ -340,8 +339,8 @@ function auth_formulaire_login($flux){
  * @param string $login
  * @return string/bool
  */
-function auth_retrouver_login($login){
-	if (!spip_connect()) {
+function auth_retrouver_login($login, $serveur=''){
+	if (!spip_connect($serveur)) {
 		include_spip('inc/minipres');
 		echo minipres(_T('info_travaux_titre'),
 			      _T('titre_probleme_technique'));
@@ -349,7 +348,7 @@ function auth_retrouver_login($login){
 	}
 
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
-		if ($auteur = auth_administrer('retrouver_login',array($methode,$login))) {
+		if ($auteur = auth_administrer('retrouver_login',array($methode, $login, $serveur))) {
 			return $auteur;
 		}
 	}
@@ -367,25 +366,29 @@ function auth_retrouver_login($login){
  * @param string $login
  * @return array
  */
-function auth_informer_login($login){
+function auth_informer_login($login, $serveur=''){
 	if (!$login
-		OR !$login = auth_retrouver_login($login)
-		OR !$row = sql_fetsel('id_auteur,login,alea_actuel,alea_futur,prefs,source,login','spip_auteurs','login='.sql_quote($login))
+		OR !$login = auth_retrouver_login($login, $serveur)
+		OR !$row = sql_fetsel('*','spip_auteurs','login='.sql_quote($login),'','','','',$serveur)
 		)
 		return array();
+
+	$prefs = unserialize($row['prefs']);
+	$infos = array(
+		'id_auteur'=>$row['id_auteur'],
+		'login'=>$row['login'],
+		'cnx' => ($prefs['cnx'] == 'perma') ? '1' : '0',
+		'logo' => recuperer_fond('formulaires/inc-logo_auteur', $row),
+	);
 
 	// desactiver le hash md5 si pas auteur spip ?
 	if ($row['source']!=='spip'){
 		$row['alea_actuel']= '';
 		$row['alea_futur']= '';
 	}
-	$prefs = unserialize($row['prefs']);
-	$row['cnx'] = ($prefs['cnx'] == 'perma') ? '1' : '0';
-	$row['logo'] = recuperer_fond('formulaires/inc-logo_auteur', $row);
-	unset($row['prefs']);
-	unset($row['source']);
 	verifier_visiteur();
-	return $row;
+
+	return auth_administrer('informer_login',array($row['source'],$infos, $row, $serveur),$infos);
 }
 
 
@@ -399,10 +402,10 @@ function auth_informer_login($login){
  * @param string $md5next
  * @return mixed
  */
-function auth_identifier_login($login, $password){
+function auth_identifier_login($login, $password, $serveur=''){
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 		if ($auth = charger_fonction($methode, 'auth',true)
-		AND $auteur = $auth($login, $password)) {
+		AND $auteur = $auth($login, $password, $serveur)) {
 			spip_log("connexion de $login par methode $methode");
 			$auteur['auth'] = $methode;
 			return $auteur;
@@ -418,7 +421,7 @@ function auth_identifier_login($login, $password){
  * @param string $auth_methode
  * @return bool
  */
-function auth_autoriser_modifier_login($auth_methode){
+function auth_autoriser_modifier_login($auth_methode, $serveur=''){
 	$args = func_get_args();
 	return auth_administrer('autoriser_modifier_login',$args);
 }
@@ -433,7 +436,7 @@ function auth_autoriser_modifier_login($auth_methode){
  * @return string
  *  message d'erreur ou chaine vide si pas d'erreur
  */
-function auth_verifier_login($auth_methode, $new_login, $id_auteur=0){
+function auth_verifier_login($auth_methode, $new_login, $id_auteur=0, $serveur=''){
 	$args = func_get_args();
 	return auth_administrer('verifier_login',$args,'');
 }
@@ -446,7 +449,7 @@ function auth_verifier_login($auth_methode, $new_login, $id_auteur=0){
  * @param int $id_auteur
  * @return bool
  */
-function auth_modifier_login($auth_methode, $new_login, $id_auteur){
+function auth_modifier_login($auth_methode, $new_login, $id_auteur, $serveur=''){
 	$args = func_get_args();
 	return auth_administrer('modifier_login',$args);
 }
@@ -459,7 +462,7 @@ function auth_modifier_login($auth_methode, $new_login, $id_auteur){
  * @return bool
  *	succes ou echec
  */
-function auth_autoriser_modifier_pass($auth_methode){
+function auth_autoriser_modifier_pass($auth_methode, $serveur=''){
 	$args = func_get_args();
 	return auth_administrer('autoriser_modifier_pass',$args);
 }
@@ -475,7 +478,7 @@ function auth_autoriser_modifier_pass($auth_methode){
  * @return string
  *	message d'erreur ou chaine vide si pas d'erreur
  */
-function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0){
+function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0, $serveur=''){
 	$args = func_get_args();
 	return auth_administrer('verifier_pass',$args,'');
 }
@@ -491,7 +494,7 @@ function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0){
  * @return bool
  *	succes ou echec
  */
-function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
+function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur, $serveur=''){
 	$args = func_get_args();
 	return auth_administrer('modifier_pass',$args);
 }
@@ -507,10 +510,11 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
  * @param array $options
  * @return void
  */
-function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=array()){
+function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=array(), $options = array(), $serveur=''){
 	$args = func_get_args();
-	if ($auth_methode===true){
-		$args = array(true, 0, array(), array('all'=>true)); // ajouter une option all=>true pour chaque auth
+	if ($auth_methode===true OR (isset($options['all']) AND $options['all']==true)){
+		$options['all'] = true; // ajouter une option all=>true pour chaque auth
+		$args = array(true, $id_auteur, $champs, $options, $serveur); 
 		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 			array_shift($args);
 			array_unshift($args,$methode);
@@ -522,10 +526,10 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
 }
 
 
-function lire_php_auth($login, $pw){
+function lire_php_auth($login, $pw, $serveur=''){
 	// en auth php, le login est forcement celui en base
 	// pas la peine de passer par la methode auth/xxx pour identifier le login
-	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login));
+	$row = sql_fetsel('*', 'spip_auteurs', 'login=' . sql_quote($login),'','','','',$serveur);
 	if (!$row) return false; // n'existe pas
 
 	// su pas de source definie
@@ -535,7 +539,7 @@ function lire_php_auth($login, $pw){
 		$auth = charger_fonction('spip', 'auth', true);
 
 	if ($auth)
-		return $auth($login, $pw);
+		return $auth($login, $pw, $serveur);
 	return false;
 }
 
