@@ -23,7 +23,8 @@ function f_jQuery_prive ($texte) {
 		'javascript/jquery.autosave.js',
 		'javascript/ajaxCallback.js',
 		'javascript/jquery.colors.js',
-		'javascript/jquery.cookie.js'
+		'javascript/jquery.cookie.js',
+		'javascript/spip_barre.js',
 	))) as $script)
 		if ($script = find_in_path($script))
 			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
