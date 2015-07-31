@@ -74,7 +74,8 @@ function ajouter_session($auteur) {
 //
 // Cette fonction efface toutes les sessions appartenant a l'auteur
 // On en profite pour effacer toutes les sessions creees il y a plus de 48 h
-//
+// Tenir compte de l'ancien format où les noms commencaient par "session_"
+// et du meme coup des repertoires plats
 
 // http://doc.spip.org/@supprimer_sessions
 function supprimer_sessions($id_auteur) {
@@ -82,7 +83,7 @@ function supprimer_sessions($id_auteur) {
 	$dir = opendir(_DIR_SESSIONS);
 	$t = time()  - (48 * 3600);
 	while(($f = readdir($dir)) !== false) {
-		if (preg_match(",^session_([0-9]+)_[a-z0-9]+\.php[3]?$,", $f, $regs)){
+		if (preg_match(",^\D*(\d+)_\w{32}\.php[3]?$,", $f, $regs)){
 			$f = _DIR_SESSIONS . $f;
 			if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
 				@unlink($f);
@@ -157,8 +158,6 @@ function rejouer_session()
 //
 // http://doc.spip.org/@fichier_session
 function fichier_session($id_session, $alea, $tantpis=false) {
-	if (preg_match(",^([0-9]+)_,", $id_session, $regs))
-		$id_auteur = $regs[1];
 		
 	$repertoire = _DIR_SESSIONS;
 	if(!@file_exists($repertoire)) {
@@ -166,7 +165,7 @@ function fichier_session($id_session, $alea, $tantpis=false) {
 		$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
 		$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
 	}
-	return $repertoire . 'session_'.$id_auteur.'_'.md5($id_session.' '.$alea). '.php';
+	return $repertoire . intval($id_session).'_'.md5($id_session.' '.$alea). '.php';
 }
 
 //
