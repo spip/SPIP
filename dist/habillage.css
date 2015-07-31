@@ -15,7 +15,7 @@ div#conteneur { width: 100%; }
 div#contenu { float: left; width: 65%; padding-top: .3em; }
 div#navigation { float: right; width: 30%; }
 div#extra { float: right; clear: right; width: 30%; }
-div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 1px solid #666699; text-align: center; }
+div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 2px solid #666699; text-align: center; }
 div#pied img { vertical-align: bottom; }
 
 /* Couleurs temporaires */
@@ -32,17 +32,8 @@ div#pied img { vertical-align: bottom; }
 /* Typographie generale du site
 ---------------------------------------------- */
 body { font-size: 100%; font-family: "Trebuchet MS", Helvetica, sans-serif; color: #333; }
-
-/* Typo pour les menus et la navigation */
-/*body, #navigation, #extra, .formulaire_spip, h2 { font-family: Verdana, Tahoma, Geneva, sans-serif; }*/
-
-/* Typo pour le contenu */
-/*body, #contenu, #top { font-family: "Trebuchet MS", Helvetica, sans-serif; }*/
-
-/* * */
 #top, #contenu, #navigation, #extra, #pied { font-size: .9em; }
-
-#hierarchie, .formulaire_spip, .menu, .texte, .ps, .notes, .forum-repondre, .forum, small, #pied { font-family: Verdana, Tahoma, Geneva, sans-serif; font-size: .9em; }
+#hierarchie, .formulaire_spip, .menu, .texte, .ps, .notes, .repondre, .forum, .traductions, small, #pied { font-family: Verdana, Tahoma, Geneva, sans-serif; font-size: .9em; }
 
 
 /* Blocs du contenu
@@ -56,17 +47,16 @@ body { font-size: 100%; font-family: "Trebuchet MS", Helvetica, sans-serif; colo
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
-.cartouche .traductions { /*font-size: 0.71em;*/ }
+.cartouche .traductions { font-size: 0.77em; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
-.chapo { margin-bottom: 1.5em; /*font-size: 0.96em;*/ font-weight: bold; line-height: 1.4em; color: #666699; }
-.texte { /*font-size: 0.96em;*/ line-height: 1.4em; color: #000; }
+.chapo { margin-bottom: 1.5em; font-weight: bold; line-height: 1.4em; color: #666699; }
+.texte { line-height: 1.4em; color: #000; }
 .ps, .notes { margin-bottom: 2em; }
-.ps { /*font-size: 0.82em;*/ }
-.notes { clear: both; /*font-size: 0.77em;*/ }
+.notes { clear: both; font-size: .77em; }
 
-.hyperlien { /*font-size: 0.82em;*/ font-weight: bold; }
+.hyperlien { font-weight: bold; }
 
 
 /* Correction des styles HTML par defaut
@@ -87,15 +77,15 @@ small { font-size: 0.71em; color: #666; }
 .spip_puce { list-style-position: outside; }
 
 /* Citations, code et poesie */
-blockquote { margin: 1em 3em; padding-left: 1em; padding-right: 1em; border-left: 4px solid #DDD; }
+blockquote { padding-left: 1em; border-left: 4px solid #DDD; }
 .spip_poesie { margin: 1em 3em; padding-left: 1em; border-left: 1px solid #CCC; font-family: Garamond, Georgia, Times, serif; }
 .spip_poesie div { text-indent: -60px; margin-left: 60px; }
-.spip_code, .spip_cadre { margin-bottom: 1em; font-family: "Courier New", Courier, mono; font-style: normal; /*font-size: 1.1em;*/ color: #009; }
+.spip_code, .spip_cadre { margin-bottom: 1em; font-family: "Courier New", Courier, mono; font-size: 1.1em; font-style: normal; color: #009; }
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
 table.spip { margin-bottom: 1em; }
-table.spip caption { caption-side: top; padding: 3px; text-align: center; font-weight: bold; }
+table.spip caption { caption-side: top; font-weight: bold; color: #666; line-height: normal; }
 table.spip tr.row_first { background: #FFC; }
 table.spip tr.row_odd { background: #EEE; }
 table.spip tr.row_even { background: #DDD; }
@@ -204,7 +194,7 @@ table.spip_barre input.barre { width: 100%; background: #EEE; }
 
 /* Habillage des forums
 ---------------------------------------------- */
-.forum-repondre { clear: both; margin-top: 2.5em; padding-right: 1em; text-align: right; font-weight: bold; }
+.repondre { clear: both; margin-top: 2.5em; margin-right: 1em; text-align: right; font-weight: bold; }
 
 /* * Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
@@ -214,7 +204,7 @@ ul.forum, ul.forum ul { list-style: none; }
 .forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
 .forum-texte { margin: 0; padding: 0.5em 1em; color: #333; }
 .forum-texte .forum-lien {}
-.forum-texte .forum-repondre-message { margin: 0; padding: 1px 0; text-align: right; }
+.forum-texte .repondre { margin: 0; padding: .1em 0; text-align: right; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
 ul .forum-message { border: 1px solid #666; margin: 0; padding: 0; margin-bottom: 1em; }
