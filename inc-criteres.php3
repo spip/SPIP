@@ -52,10 +52,11 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@doublons
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->doublons = $boucle->type_requete . $crit->param[0][0]->texte;
+	$boucle->doublons = "'" . $boucle->type_requete . "' . " .
+	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	$boucle->where[] = '" .' .
 		"calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary."', "
-		.'"0".$doublons[\''.$boucle->doublons."'], 'NOT') . \"";
+		.'"0".$doublons['.$boucle->doublons."], 'NOT') . \"";
 }
 
 // {lang_select}
