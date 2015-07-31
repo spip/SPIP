@@ -729,7 +729,7 @@ function afficher_articles_trad($titre_table, $requete, $formater_article, $tmp_
 		$icone = 'langues-12.gif';
 	}
 
-	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : $cpt ;
+	$nb_aff = ($cpt  > floor(1.5 * _TRANCHES)) ? _TRANCHES : floor(1.5 * _TRANCHES) ;
 	$deb_aff = intval(_request($tmp_var));
 
 	$q = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
