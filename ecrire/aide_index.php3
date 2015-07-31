@@ -8,9 +8,9 @@ $lastmodified = filemtime("aide_index.php3");
 $headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
 if ($headers_only) exit;
 
+include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_layer.php3");
 include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_filtres.php3");
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (_FILE_CONNECT) {
