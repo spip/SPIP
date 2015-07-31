@@ -108,15 +108,6 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 
 function squelette_traduit($squelette, $sourcefile, $phpfile, $boucles)
 {
-	global $tableau_des_erreurs;
-
-	$code = '';
-	if (is_array($tableau_des_erreurs))  {
-		foreach ($tableau_des_erreurs as $err) {
-			$code .= "\n// "
-			. str_replace("\n", ' ', $err[0]);
-		}
-	}
 
 	// Le dernier index est '' (fonction principale)
 	$noms = substr(join (', ', array_keys($boucles)), 0, -2);

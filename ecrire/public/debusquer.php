@@ -46,7 +46,8 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 9);
 // Si l'erreur vient de SPIP,  en parler sur spip@rezo.net
 
 function public_debusquer_dist($message='', $lieu='') {
-	global $tableau_des_erreurs, $tableau_des_temps;
+	global $tableau_des_temps;
+	static $tableau_des_erreurs = array();
 
 	// Erreur ou appel final ?
 	if ($message) {
@@ -62,6 +63,7 @@ function public_debusquer_dist($message='', $lieu='') {
 		}
 
 		$tableau_des_erreurs[] = array($message, $lieu);
+		set_request('var_mode', 'debug');
 		spip_log("Debug: " . $message . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
@@ -75,7 +77,7 @@ function public_debusquer_dist($message='', $lieu='') {
 
 	include_spip('inc/autoriser');
 
-	$res = !autoriser('debug') ? '' :  debusquer_squelette($tableau_des_erreurs ? '' : $lieu);
+	$res = !autoriser('debug') ? '' :  debusquer_squelette($tableau_des_erreurs ? '' : $lieu, $tableau_des_erreurs);
 
 	if (!_DIR_RESTREINT) return $res;
 	echo $res;
@@ -356,7 +358,7 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 // l'environnement graphique du debuggueur 
 // fin de course pour unhappy-few.
 
-function debusquer_squelette ($texte) {
+function debusquer_squelette ($texte, $erreurs) {
 	global $debug_objets, $visiteur_session;
 
 	include_spip('inc/headers');
@@ -370,9 +372,9 @@ function debusquer_squelette ($texte) {
 	$fonc = _request('var_mode_objet');
 	$mode = _request('var_mode_affiche');
 	$res = '';
-	if (!empty($GLOBALS['tableau_des_erreurs'])) {
-		$n = count($GLOBALS['tableau_des_erreurs']) . ' ' . _T('zbug_erreur_squelette');
-		$res .= debusquer_navigation($GLOBALS['tableau_des_erreurs'], $n);
+	if (!empty($erreurs)) {
+		$n = count($erreurs) . ' ' . _T('zbug_erreur_squelette');
+		$res .= debusquer_navigation($erreurs, $n);
 	} else {
 		if (!empty($GLOBALS['tableau_des_temps'])) {
 			include_spip('public/tracer');
