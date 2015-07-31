@@ -59,6 +59,7 @@ $spip_referers = array(
 		"referer"	=> "VARCHAR (255) NOT NULL",
 		"visites"	=> "INT UNSIGNED NOT NULL",
 		"visites_jour"	=> "INT UNSIGNED NOT NULL",
+		"visites_veille"=> "INT UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_key = array(

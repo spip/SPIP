@@ -891,8 +891,8 @@ function maj_base() {
 	}
 
 	// tables d'orthographe
-	if ($version_installee < 1.806)
-		maj_version(1.806);
+	#if ($version_installee < 1.806)
+	#	maj_version(1.806);
 
 	// URLs propres (lab_version = 0.12)
 	if ($version_installee < 1.807) {
@@ -905,6 +905,13 @@ function maj_base() {
 		maj_version(1.807);
 	}
 
+	// referers de la veille
+	if ($version_installee < 1.808) {
+		spip_query("ALTER TABLE spip_referers
+		ADD visites_veille INT UNSIGNED NOT NULL");
+		maj_version(1.808);
+	}
+	
 
 	#	A remettre pour la 1.8 finale (cf. ci-dessus)
 	#	spip_query("DROP TABLE spip_forum_cache");

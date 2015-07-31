@@ -56,12 +56,18 @@ if ($connect_statut != '0minirezo') {
 
 // nombre de referers a afficher
 $limit = intval($limit);	//secu
-if ($limit == 0)
-	$limit = 100;
+if ($limit == 0) $limit = 100;
+
+if ($jour<>'veille')
+	$jour='jour';
+
+barre_onglets("stat_referers", $jour);
+
 
 // afficher quels referers ?
-$where = "visites_jour>0";
-$vis = "visites_jour";
+$where = "visites_$jour>0";
+$vis = "visites_$jour";
+
 $table_ref = "spip_referers";
 
 $query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
