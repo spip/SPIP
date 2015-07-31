@@ -21,7 +21,7 @@ function xml_rss_dist($rss, $intro = '') {
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
 
 	$u .= '
-<rss version="2.0" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
 <channel xml:lang="'.texte_backend($intro['language']).'">
 	<title>'.texte_backend($intro['title']).'</title>
 	<link>'.texte_backend(url_absolue($intro['url'])).'</link>
