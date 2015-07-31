@@ -32,6 +32,9 @@ function exec_breves_edit_args($id_breve, $id_rubrique, $new)
 	// on prend le dernier secteur cree
 	// dans une liste restreinte si admin restreint
 
+	if ($new === 'oui' AND $id_rubrique)
+		$id_rubrique = sql_getfetsel('id_secteur', 'spip_rubriques', "id_rubrique=$id_rubrique");
+
 	if (!$id_rubrique) {
 		$in = count($connect_id_rubrique)
 		? sql_in('id_rubrique', $connect_id_rubrique)   : '';
@@ -74,8 +77,6 @@ function breves_edit_ok($row, $id_breve, $id_rubrique, $new)
 	} else {
 		$titre = filtrer_entites(_T('titre_nouvelle_breve'));
 		$statut = "prop";
-		$row = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
-		$id_rubrique = $row['id_secteur'];
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
