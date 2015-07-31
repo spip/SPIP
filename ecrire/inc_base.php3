@@ -38,7 +38,7 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 	$query = "CREATE TABLE IF NOT EXISTS $nom ($query" .
 		($keys ? ",$keys" : '') .
 		")\n";
-	spip_query($query);
+	spip_query_db($query);
 
 }
 
@@ -62,14 +62,14 @@ function creer_base() {
 		"(1, 'jpg', 'JPEG', 'image'), ".
 		"(2, 'png', 'PNG', 'image'), ".
 		"(3, 'gif', 'GIF', 'image')";
-	spip_query($query);
+	spip_query_db($query);
 
 	// Autres images (peuvent utiliser le tag <img>)
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
 		"('bmp', 'BMP', 'image'), ".
 		"('psd', 'Photoshop', 'image'), ".
 		"('tif', 'TIFF', 'image')";
-	spip_query($query);
+	spip_query_db($query);
 
 	// Multimedia (peuvent utiliser le tag <embed>)
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
@@ -89,7 +89,7 @@ function creer_base() {
 		"('swf', 'Flash', 'embed'), ".
 		"('wav', 'WAV', 'embed'), ".
 		"('wmv', 'Windows Media', 'embed')";
-	spip_query($query);
+	spip_query_db($query);
 
 	// Documents varies
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".

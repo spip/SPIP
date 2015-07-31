@@ -147,7 +147,7 @@ function spip_cron() {
 			cron_archiver_stats($last_date);
 	
 		if ($t - lire_meta('date_stats_popularite') > 1800) {
-			if (timeout('archiver_stats')) {
+			if (timeout('calculer_popularite')) {
 				include_ecrire("inc_statistiques.php3");
 				calculer_popularites();
 			}
