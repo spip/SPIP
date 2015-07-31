@@ -50,10 +50,24 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 		. envoi_link($nom_site_spip,$minipres);
 
 	// anciennement verifForm
+	// et corriger position des sous-menus principaux (quand intitules sur 2 lignes)
 	$head .= '
 	<script type="text/javascript"><!--
+	function calculer_top_bandeau_sec() {
+		
+		var hauteur_max = 0;
+		var hauteur_bouton = 0;
+	
+		$(".boutons_admin a.boutons_admin").each(function(){
+			hauteur_bouton = parseInt($(this).height());
+			if (hauteur_bouton > hauteur_max) hauteur_max = hauteur_bouton;
+		});
+		$(".boutons_admin a.boutons_admin").height(hauteur_max);
+	}	
+
 	$(document).ready(function(){
 		verifForm();
+		calculer_top_bandeau_sec();
 		$("#page,#bandeau-principal")
 		.mouseover(function(){
 			if (typeof(window["changestyle"])!=="undefined") window.changestyle("garder-recherche");
