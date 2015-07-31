@@ -31,7 +31,7 @@ function afficher_boutons_admin() {
 	}
 	lang_select($lang);
 
-	echo '<div class="spip-admin">';
+	echo '<div class="spip-admin" dir="'.lang_dir($lang,'ltr','rtl').'">';
 	if ($id_article) {
 		bouton_admin(_T('admin_modifier_article')." ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
