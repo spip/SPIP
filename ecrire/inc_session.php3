@@ -195,6 +195,7 @@ function verifier_php_auth() {
 			$GLOBALS['auteur_session']['login'] = $row['login'];
 			$GLOBALS['auteur_session']['email'] = $row['email'];
 			$GLOBALS['auteur_session']['statut'] = $row['statut'];
+			$GLOBALS['auteur_session']['lang'] = $row['lang'];
 			$GLOBALS['auteur_session']['hash_env'] = hash_env();
 			return true;
 		}
