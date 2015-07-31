@@ -623,4 +623,25 @@ function email_valide($addresse) {
 		trim($addresse)));
 } 
 
+
+//
+// Afficher un bouton admin
+//
+
+function bouton_admin($titre, $lien) {
+	$lapage=substr($lien, 0, strpos($lien,"?"));
+	$lesvars=substr($lien, strpos($lien,"?") + 1, strlen($lien));
+
+	echo "\n<FORM ACTION='$lapage' METHOD='get'>\n";
+	$lesvars=explode("&",$lesvars);
+	
+	for($i=0;$i<count($lesvars);$i++){
+		$var_loc=explode("=",$lesvars[$i]);
+		if ($var_loc[0] != "submit")
+			echo "<INPUT TYPE='Hidden' NAME='$var_loc[0]' VALUE='$var_loc[1]'>\n";
+	}
+	echo "<INPUT TYPE='submit' NAME='submit' VALUE='$titre' CLASS='spip_bouton'>\n";
+	echo "</FORM>";
+}
+
 ?>

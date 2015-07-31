@@ -266,26 +266,6 @@ if ($use_cache && file_exists('CACHE/.purge')) {
 
 //include_local ("inc-debug.php3");
 
-//
-// Afficher un bouton 
-//
-
-function bouton_public($titre, $lien) {
-	$lapage=substr($lien, 0, strpos($lien,"?"));
-	$lesvars=substr($lien, strpos($lien,"?") + 1, strlen($lien));
-
-	echo "\n<FORM ACTION='$lapage' METHOD='get'>\n";
-	$lesvars=explode("&",$lesvars);
-	
-	for($i=0;$i<count($lesvars);$i++){
-		$var_loc=explode("=",$lesvars[$i]);
-		if ($var_loc[0] != "Submit")
-			echo "<INPUT TYPE='Hidden' NAME='$var_loc[0]' VALUE='$var_loc[1]'>\n";
-	}
-	echo "<INPUT TYPE='submit' NAME='Submit' VALUE='$titre' CLASS='spip_bouton'>\n";
-	echo "</FORM>";
-}
-
 
 //
 // Fonctionnalites administrateur (declenchees par le cookie admin, authentifie ou non)
@@ -296,34 +276,30 @@ $admin_ok = ($cookie_admin != '');
 
 if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
 	if ($id_article) {
-		bouton_public("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
+		bouton_admin("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
 	else if ($id_breve) {
-		bouton_public("Modifier cette br&egrave;ve ($id_breve)", "./ecrire/breves_voir.php3?id_breve=$id_breve");
+		bouton_admin("Modifier cette br&egrave;ve ($id_breve)", "./ecrire/breves_voir.php3?id_breve=$id_breve");
 	}
 	else if ($id_rubrique) {
-		bouton_public("Modifier cette rubrique ($id_rubrique)", "./ecrire/naviguer.php3?coll=$id_rubrique");
+		bouton_admin("Modifier cette rubrique ($id_rubrique)", "./ecrire/naviguer.php3?coll=$id_rubrique");
 	}
 	else if ($id_mot) {
-		bouton_public("Modifier ce mot-cl&eacute; ($id_mot)", "./ecrire/mots_edit.php3?id_mot=$id_mot");
+		bouton_admin("Modifier ce mot-cl&eacute; ($id_mot)", "./ecrire/mots_edit.php3?id_mot=$id_mot");
 	}
 	else if ($id_auteur) {
-		bouton_public("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
+		bouton_admin("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
 
 	$link = new Link;
 	$link->addVar('recalcul', 'oui');
+	$link->delVar('submit');
 	echo $link->getForm('GET');
 	if ($use_cache) $pop = " *";
 	else $pop = "";
 	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page$pop'>";
 	echo "</form>\n";
 }
-
-/* // protection contre tentative de piratage de cookie de session
-if ($spip_session) {
-    echo '<script src="spip_cookie.php3?rejoue=oui"></script>';
-} */
 
 
 //
