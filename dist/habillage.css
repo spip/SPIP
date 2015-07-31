@@ -56,9 +56,9 @@ body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, 
 
 /* Titraille */
 h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
-h2 { background: #8B6F92; margin: 0; padding: 0.20em; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
+h2 { margin: 0; padding: 0.20em; background: #8B6F92; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
 h2, h2 a, h2 a:hover { color: #EEE; }
-h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; font-weight: bold; }
+h3.spip { margin-top: 2em; margin-bottom: 1.4em; text-align: center; }
 
 /* Divers */
 hr { height: 2px; margin: 2em auto; background-color: #999; color: #999; border: 0; }
@@ -245,7 +245,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; padding: 0.40em 0.20em; }
-.articles ul li h3 { margin: 0; padding: 0; font-weight: bold; }
+.articles ul li h3 { margin: 0.40em 0; padding: 0; }
 .articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }
