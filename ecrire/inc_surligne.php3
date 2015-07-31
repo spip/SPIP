@@ -93,7 +93,7 @@ function surligner_mots($page, $mots) {
 
 	while (list(, $mot) = each ($mots)) {
 		if (strlen($mot) >= 2) {
-			$mot = surligner_regexp_accents($mot);
+			$mot = surligner_regexp_accents(preg_quote($mot));
 			$mots_surligne[] = $mot;
 		}
 	}
