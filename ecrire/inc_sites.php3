@@ -482,7 +482,8 @@ function analyser_backend($rss) {
 
 
 	$items = array();
-	while (preg_match($syndic_regexp['item'],$rss,$regs)) {
+	if (preg_match_all($syndic_regexp['item'],$rss,$r, PREG_SET_ORDER))
+	foreach ($r as $regs) {
 		$debut_item = strpos($rss,$regs[0]);
 		$fin_item = strpos($rss,
 			$syndic_regexp['itemfin'])+strlen($syndic_regexp['itemfin']);
