@@ -25,7 +25,8 @@ function generer_nom_fichier_cache($contexte) {
 	} else {
 		$fichier_requete = '';
 		foreach ($contexte as $var=>$val)
-			$fichier_requete .= "&$var=$val";
+			$fichier_requete .= '&'.$var.'='
+				. (is_array($val) ? var_export($val,true) : strval($val));
 	}
 
 	$fichier_cache = preg_replace(',^/+,', '', $fichier_requete);
