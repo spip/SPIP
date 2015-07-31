@@ -439,6 +439,8 @@ function corriger_extension($ext) {
 		return 'jpg';
 	case 'tiff':
 		return 'tif';
+	case 'aif':
+		return 'aiff';
 	default:
 		return $ext;
 	}
