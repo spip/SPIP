@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // selectionner les images qui vont subir une transformation sur un critere de taille
 // ls images exclues sont marquees d'une class no_image_filtrer qui bloque les filtres suivants
 // dans la fonction image_filtrer
+// http://doc.spip.org/@image_select
 function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $height_max=1000){
 	if (!$img) return $img;
 	include_spip('inc/logos');
