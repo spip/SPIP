@@ -40,7 +40,7 @@
 						</span>
 						<span class="choix">
 							<input type="checkbox" name="sans_redac" value="1"[(#ENV{sans_redac}|oui)checked="checked"] id="sans_redac"
-							onchange="if (jQuery(this).attr('checked')) jQuery(this).parent().siblings().hide('fast'); else jQuery(this).parent().siblings().show('fast');"
+							onchange="if (jQuery(this).prop('checked')) jQuery(this).parent().siblings().hide('fast'); else jQuery(this).parent().siblings().show('fast');"
 							/><label for="sans_redac"><:texte_date_publication_anterieure_nonaffichee:></label>
 						</span>
 	]
