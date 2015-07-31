@@ -61,6 +61,10 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
+	<langue code="et" url="http://trad.spip.net/tradlang_module/spip?lang_cible=et" total="633" traduits="464" relire="0" modifs="20" nouveaux="149" pourcent="73.30">
+		<traducteur nom="eddie" lien="http://trad.spip.net/auteur/eddie" />
+		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+	</langue>
 	<langue code="eu" url="http://trad.spip.net/tradlang_module/spip?lang_cible=eu" total="633" traduits="626" relire="0" modifs="3" nouveaux="4" pourcent="98.89">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
 	</langue>
