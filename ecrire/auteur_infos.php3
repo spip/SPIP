@@ -92,15 +92,15 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	// login et mot de passe
 	unset ($modif_login);
 	$old_login = $auteur['login'];
-	if (($login<>$old_login) AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $auteur['source'] == 'spip') {
-		if ($login) {
-			if (strlen($login) < 4)
+	if (($new_login<>$old_login) AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $auteur['source'] == 'spip') {
+		if ($new_login) {
+			if (strlen($new_login) < 4)
 				$echec .= "<p>"._T('info_login_trop_court');
-			else if (spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
+			else if (spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($new_login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
 				$echec .= "<p>"._T('info_login_existant');
-			else if ($login != $old_login) {
+			else if ($new_login != $old_login) {
 				$modif_login = true;
-				$auteur['login'] = $login;
+				$auteur['login'] = $new_login;
 			}
 		}
 		// suppression du login
@@ -350,7 +350,7 @@ if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
 if ($edit_login) {
 	echo "<B>"._T('item_login')."</B> ";
 	echo "<font color='red'>("._T('texte_plus_trois_car').")</font> :<BR>";
-	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"".entites_html($auteur['login'])."\" SIZE='40'><P>\n";
+	echo "<INPUT TYPE='text' NAME='new_login' CLASS='formo' VALUE=\"".entites_html($auteur['login'])."\" SIZE='40'><P>\n";
 }
 else {
 	echo "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><BR></legend><br><b>".$auteur['login']."</b> ";

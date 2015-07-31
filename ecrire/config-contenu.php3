@@ -97,14 +97,14 @@ echo " $gras<label for='forums_priori'>"._T('bouton_radio_moderation_priori')."<
 
 if (tester_mail()){
 	echo "\n<BR>";
-	if ($forums_publics=="abonnement") {
+	if ($forums_publics=="abo") {
 		$checked = ' CHECKED';
 		$gras = '<b>'; $fingras = '</b>';
 	} else {
 		$checked = '';
 		$gras = ''; $fingras = '';
 	}
-	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='abonnement' id='forums_abonnement'>";
+	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='abo' id='forums_abonnement'>";
 	echo " $gras<label for='forums_abonnement'>"._T('bouton_radio_enregistrement_obligatoire')."</label>$fingras ";
 }
 
