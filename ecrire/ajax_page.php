@@ -64,11 +64,14 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 
 		echo "<div><p><b>$titre</b></p></div>";
 		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
-		echo "</div>";
-		
+
 		echo "<div style='text-align: $spip_lang_right;'>";
 		echo "<input type='button' value='"._T('bouton_choisir')."' class='fondo' onClick=\"sel=findObj_forcer('".$rac."_sel').value; sel2=findObj_forcer('".$rac."_sel2').value; func = findObj('".$rac."_fonc').value; func = func.replace('::sel::', sel); func = func.replace('::sel2::', sel2); eval(func);\">";
 		echo "</div>";
+
+
+		echo "</div>";
+		
 	}
 
 

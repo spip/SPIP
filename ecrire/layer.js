@@ -45,7 +45,7 @@ var vis = new Array();
 			if (element.style.visibility != "hidden") element.style.visibility = "hidden";
 		}
 	}
-
+	
 function swap_couche(couche, rtl, dir, no_swap) {
 	triangle = findObj('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
@@ -130,6 +130,8 @@ function changerhighlight (couche) {
 function aff_selection (type, rac, id) {
 //	alert (type + " - " + rac + " - " + id);
 	
+	findObj_forcer(rac+"_selection").style.display = "none";
+	
 	charger_id_url("ajax_page.php?fonction=aff_info&type="+type+"&id="+id+"&rac="+rac, rac+"_selection");
 }
 
@@ -144,7 +146,6 @@ var image_search = new Array();
 function charger_id_url(myUrl, myField, jjscript) 
 {
 	var Field = findObj_forcer(myField); // selects the given element
-
 	if (!Field) return;
 		
 	if (xmlhttp[myField]) xmlhttp[myField].abort();
@@ -152,6 +153,7 @@ function charger_id_url(myUrl, myField, jjscript)
 	if (url_chargee['mem_'+myUrl]) {
 		Field.innerHTML = url_chargee['mem_'+myUrl];
 		Field.style.visibility = "visible";
+		Field.style.display = "block";
 		if(jjscript) eval(jjscript);
 	} else {
 		image_search[myField] = findObj_forcer('img_'+myField);
@@ -171,6 +173,7 @@ function charger_id_url(myUrl, myField, jjscript)
                         Field.innerHTML = xmlhttp[myField].responseText; // puts the result into the element
 						url_chargee['mem_'+myUrl] = Field.innerHTML;
 						Field.style.visibility = "visible";
+						Field.style.display = "block";
 						if (image_search[myField]) {
 							image_search[myField].style.visibility = "hidden";
 						}
@@ -181,6 +184,22 @@ function charger_id_url(myUrl, myField, jjscript)
     }
 }
 
+
+function charger_id_url_si_vide (myUrl, myField, jjscript) 
+{
+	var Field = findObj_forcer(myField); // selects the given element
+	if (!Field) return;
+
+	if (Field.innerHTML == "") {
+		charger_id_url(myUrl, myField, jjscript) 
+	}
+	else {
+						Field.style.visibility = "visible";
+						Field.style.display = "block";		
+	}
+
+
+}
 
 
 

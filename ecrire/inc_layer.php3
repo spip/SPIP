@@ -37,6 +37,7 @@ function debut_block_invisible($nom_block){
 		$compteur_block++;
 		$numero_block["$nom_block"] = $compteur_block;
 	}
+	
 	return http_script("vis['".$numero_block["$nom_block"]."'] = 'hide';
 document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');",
 			      '',
