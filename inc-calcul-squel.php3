@@ -815,7 +815,7 @@ function parser($texte) {
 	// Construire un tableau associatif des codes de champ utilisables
 	//
 
-	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP',
+	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER',
 		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE', 
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE', 
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
@@ -843,7 +843,7 @@ function parser($texte) {
 	//
 
 	// Textes utilisateur : ajouter la securite anti-script
-	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP',
+	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'IP', 'BIO', 'TYPE', 'PGP'
 	);
@@ -1345,6 +1345,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	case 'NOM_SITE_SPIP':
 		$code = "lire_meta('nom_site')";
+		break;
+
+	case 'EMAIL_WEBMASTER':
+		$code = "lire_meta('email_webmaster')";
 		break;
 
 	case 'PUCE':
