@@ -62,7 +62,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 		if (!$GLOBALS['var_preview']) {
 			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 			if ($GLOBALS['meta']["post_dates"] == 'non')
-				$boucle->where[]= array("'<='", "'$id_table" . ".date'", "_q(date('Y-m-d H:i:00'))");
+				$boucle->where[]= array("'<='", "'$id_table" . ".date'", "_q(date('Y-m-d H:i:59'))");
 		} else
 			$boucle->where[]= array("'IN'", "'$mstatut'", "'(\"publie\",\"prop\")'");
 	}
