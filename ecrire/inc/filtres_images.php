@@ -1239,6 +1239,83 @@ function image_sepia($im, $rgb = "896f5e")
 	return "<img src='$dest'$tags />";
 }
 
+
+// Renforcer la nettete d'une image
+function image_renforcement($im, $k=0.5)
+{
+	$image = image_valeurs_trans($im, "renforcement-$k");
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		@imagealphablending($im_, false);
+		@imagesavealpha($im_,true);
+		$color_t = ImageColorAllocateAlpha( $im_, 255, 255, 255 , 127 );
+		imagefill ($im_, 0, 0, $color_t);
+
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y=0; $y < $y_i; $y++) {		
+
+                $rgb[1][0]=imagecolorat($im,$x,$y-1);
+                $rgb[0][1]=imagecolorat($im,$x-1,$y);
+                $rgb[1][1]=imagecolorat($im,$x,$y);
+                $rgb[2][1]=imagecolorat($im,$x+1,$y);
+                $rgb[1][2]=imagecolorat($im,$x,$y+1);
+                
+                
+                if ($x-1 < 0) $rgb[0][1] = $rgb[1][1];
+                if ($y-1 < 0) $rgb[1][0] = $rgb[1][1];
+                if ($x+1 == $x_i) $rgb[2][1] = $rgb[1][1];
+                if ($y+1 == $y_i) $rgb[1][2] = $rgb[1][1];
+
+                $a = ($rgb[0][0] >> 24) & 0xFF;
+                $r = -$k *(($rgb[1][0] >> 16) & 0xFF) +
+                         -$k *(($rgb[0][1] >> 16) & 0xFF) +
+                        (1+4*$k) *(($rgb[1][1] >> 16) & 0xFF) +
+                         -$k *(($rgb[2][1] >> 16) & 0xFF) +
+                         -$k *(($rgb[1][2] >> 16) & 0xFF) ;
+
+                $g = -$k *(($rgb[1][0] >> 8) & 0xFF) +
+                         -$k *(($rgb[0][1] >> 8) & 0xFF) +
+                         (1+4*$k) *(($rgb[1][1] >> 8) & 0xFF) +
+                         -$k *(($rgb[2][1] >> 8) & 0xFF) +
+                         -$k *(($rgb[1][2] >> 8) & 0xFF) ;
+
+                $b = -$k *($rgb[1][0] & 0xFF) +
+                         -$k *($rgb[0][1] & 0xFF) +
+                        (1+4*$k) *($rgb[1][1] & 0xFF) +
+                         -$k *($rgb[2][1] & 0xFF) +
+                         -$k *($rgb[1][2] & 0xFF) ;
+
+                $r=min(255,max(0,$r));
+                $g=min(255,max(0,$g));
+                $b=min(255,max(0,$b));
+
+
+		$color = ImageColorAllocateAlpha( $im_, $r, $g, $b , $a );
+		imagesetpixel ($im_, $x, $y, $color);			
+			}
+		}		
+		$image["fonction_image"]($im_, "$dest");		
+	}
+
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	
+	return "<img src='$dest'$tags />";
+}
+
+
 // 1/ Aplatir une image semi-transparente (supprimer couche alpha)
 // en remplissant la transparence avec couleur choisir $coul.
 // 2/ Forcer le format de sauvegarde (jpg, png, gif)
