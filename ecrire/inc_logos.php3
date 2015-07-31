@@ -109,7 +109,7 @@ function afficher_logo($racine, $titre) {
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
-		echo "<P><CENTER><IMG SRC='../IMG/$fichier$fid' $taille_html>";
+		echo "<P><CENTER><IMG SRC='../IMG/$fichier$fid' $taille_html alt='' />";
 
 		echo debut_block_invisible(md5($titre));
 		echo "$taille_txt\n";
