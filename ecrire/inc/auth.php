@@ -651,10 +651,11 @@ function lire_php_auth($login, $pw, $serveur=''){
  * @param <type> $re
  * @param <type> $lien
  */
-function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
+function ask_php_auth($pb, $raison, $retour='', $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
 	$ici = generer_url_ecrire();
+	$retour = $retour?$retour:_T('icone_retour');
 	echo "<b>$pb</b><p>$raison</p>[<a href='$ici'>$retour</a>] ";
 	if ($url) {
 		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
