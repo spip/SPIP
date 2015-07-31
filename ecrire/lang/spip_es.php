@@ -226,6 +226,8 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'envoi_via_le_site' => 'Envío a través del sitio',
 'erreur' => 'Error',
 'erreur_balise_non_fermee' => 'última baliza no cerrada:',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'error(es)',
 'etape' => 'Etapa',
 

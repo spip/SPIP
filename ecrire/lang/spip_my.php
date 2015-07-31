@@ -221,6 +221,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoi_via_le_site' => 'ဝက်ဘ်ဆိုက်မှတဆင့် ပေးပို့ပါ',
 'erreur' => 'အမှားအယွင်း',
 'erreur_balise_non_fermee' => 'နောက်ဆုံး တေးမှတ်ချက် ပိတ်မထားပါ',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'အမှား(များ)',
 'etape' => 'Étape', # NEW
 

@@ -227,6 +227,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoi_via_le_site' => 'Envío vía o sitio web',
 'erreur' => 'Erro',
 'erreur_balise_non_fermee' => 'a última baliza non foi pechada :',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'erro(s)',
 'etape' => 'Etapa',
 

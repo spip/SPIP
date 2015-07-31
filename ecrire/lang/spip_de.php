@@ -227,6 +227,8 @@ Verzeichnisse zu setzen.Die Installationsanleitung erläutert die Details dazu.<
 'envoi_via_le_site' => 'Gesendet über Website ',
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'Fehler',
 'etape' => 'Schritt',
 

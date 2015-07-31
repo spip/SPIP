@@ -227,6 +227,8 @@ Dës Prozedur ass am Detail am Installatiouns-Guide beschriwwen.<p>
 'envoi_via_le_site' => 'Via ären Site schécken',
 'erreur' => 'Fehler',
 'erreur_balise_non_fermee' => 'Läschten Tag deen nët zou ass:',
+'erreur_technique_enregistrement_champs' => 'Une erreur technique a empêché l\'enregistrement correct du champ @champs@.', # NEW
+'erreur_technique_enregistrement_impossible' => 'Une erreur technique a empêché l\'enregistrement.', # NEW
 'erreur_texte' => 'Fehler(en)',
 'etape' => 'Etape',
 
