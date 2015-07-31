@@ -211,12 +211,16 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Roll-skigna&ntilde;',
 'ical_titre_rss' => 'Restro&ugrave; sindikada&ntilde;',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Gweredekaat an toupin heulia&ntilde;',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Mera&ntilde; an advezianto&ugrave;',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Diskouez ar skridaozerien',
 'icone_afficher_visiteurs' => 'Diskouez ar weladennerien',
 'icone_arret_discussion' => 'Paouez da gemer perzh er gaoz-ma&ntilde;',
 'icone_calendrier' => 'Deiziataer',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Kroui&ntilde; ur strollad gerio&ugrave; nevez',
 'icone_creation_mots_cles' => 'Kroui&ntilde; ur ger-stur nevez',
 'icone_creer_auteur' => 'Kroui&ntilde; ur skridaozer nevez, hag e staga&ntilde; ouzh ar pennad-ma&ntilde;',
@@ -226,8 +230,12 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'icone_creer_mot_cle_site' => 'Kroui&ntilde; ur ger-alc\'hwez nevez a vo liammet ouzh al lec\'hienn-ma&ntilde;',
 'icone_creer_rubrique_2' => 'Kroui&ntilde; ur rubrikenn nevez',
 'icone_ecrire_nouvel_article' => 'Ar berrskrido&ugrave; er rubrikenn-ma&ntilde;',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Kas ar gemennadenn-ma&ntilde;',
 'icone_evolution_visites' => 'Emdroadur ar gweladenno&ugrave; : <br />@visites@ gweladenn',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Kemma&ntilde; ar strollad gerio&ugrave;-ma&ntilde;',
 'icone_modifier_article' => 'Kemma&ntilde; ar pennad-ma&ntilde;',
 'icone_modifier_breve' => 'Kemma&ntilde; ar berrskrid-ma&ntilde;',
@@ -236,13 +244,16 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'icone_modifier_rubrique' => 'Kemma&ntilde; ar rubrikenn-ma&ntilde;',
 'icone_modifier_site' => 'Kemma&ntilde; al lec\'hienn-ma&ntilde;',
 'icone_poster_message' => 'Kas ur gemennadenn',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Embann ar berrskrid-ma&ntilde;',
 'icone_referencer_nouveau_site' => 'Menegeri&ntilde; ul lec\'hienn nevez',
 'icone_refuser_breve' => 'Nac\'ha&ntilde; ar berrskrid-ma&ntilde;',
 'icone_relancer_signataire' => 'Adla&ntilde;sa&ntilde; ar siner',
 'icone_retour' => 'Distro',
 'icone_retour_article' => 'Distrei&ntilde; d\'ar pennad',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'War ar forom foran&nbsp;: @nb_forums@&nbsp;evezhiadenn',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Diverka&ntilde; an toupin heulia&ntilde;',
 'icone_supprimer_groupe_mots' => 'Diverka&ntilde; ar strollad-ma&ntilde;',
 'icone_supprimer_rubrique' => 'Diverka&ntilde; ar rummad-ma&ntilde;',
@@ -252,8 +263,14 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'icone_voir_tous_mots_cles' => 'Gwelet an holl c\'herio&ugrave;-stur',
 'image_administrer_rubrique' => 'Gallout a rit mera&ntilde; ar rubrikenn-ma&ntilde;',
 'info_1_article' => '1 pennad',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 berrskrid',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 lec\'hienn',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Gallout a rit implijout un <b>toupin heulia&ntilde;</b>, ar pezh a dalvezo deoc\'h da dremen en un doare aes eus al lec\'hienn brevez d\'an hini foran.',
 'info_activer_forum_public' => '<i>Evit enaoui&ntilde; ar foromo&ugrave; foran, dibabit un doare da habaskaat dre ziouer:</i>',
 'info_admin_gere_rubriques' => 'Ar rubrikenno&ugrave; da-heul a vez meret gant ar merour-ma&ntilde; :',
@@ -319,6 +336,7 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_classement_2' => '<sup>vet</sup> war @liste@',
 'info_code_acces' => 'N\'ankouait ket ho kodo&ugrave; moned&nbsp;!',
 'info_comment_lire_tableau' => 'Penaos lenn an daolenn-ma&ntilde;',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Aliet eo gwiria&ntilde; mat en a-raok ha gwasket e vez dija en a-raok ar restro&ugrave; php ent emgefre gant an herberc\'hier pe get. Evit se e c\'hellit implijout ar servij-ma&ntilde; : @testgzip@',
 'info_compresseur_texte' => 'Ma ne vez ket gwasket ent emgefre ar pajenno&ugrave; HTML gant ho servijer evit o c\'has d\'al lennerien e c\'hellit klask gwaska&ntilde; dre ret evit bihanaat ment ar pajenno&ugrave; pellgarget.  <b>Diwallit</b> : gallout a ra kement-se gorrekaat servijerio&ugrave; zo.',
 'info_compresseur_titre' => 'Gwellekaat ha gwaska&ntilde;',
@@ -340,6 +358,7 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_connexion_ok' => 'Kevreet oc\'h.',
 'info_contact' => 'Darempred',
 'info_contenu_articles' => 'Danvez ar pennado&ugrave;',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Savit ha keflugnit ama&ntilde; gerio&ugrave;-stur al lec\'hienn.',
 'info_creation_paragraphe' => '(Evit kroui&ntilde; rannbennado&ugrave;, lezit goullo linenno&ugrave; zo traken)',
 'info_creation_rubrique' => 'A-benn gallout skriva&ntilde; pennado&ugrave; <br />e rankit beza&ntilde; krouet ur rubrikenn da nebeuta&ntilde;.<br />',
@@ -462,6 +481,15 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
   Ar yezho&ugrave; bet implijet betek-henn (diskouezet da genta&ntilde;) n\'hallont ket beza&ntilde; lamet kuit.',
 'info_multi_rubriques' => 'Ober gant ar la&ntilde;ser yezho&ugrave; war ar rubrikenno&ugrave;&nbsp;?',
 'info_multi_secteurs' => '...evit rubrikenno&ugrave; ar wrizienn hepken&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Anv',
 'info_nom_destinataire' => 'Anv an degemerer',
 'info_nom_site' => 'Anv ho lec\'hienn',
@@ -477,6 +505,7 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_non_envoi_liste_nouveautes' => 'Chom hep kas roll an nevezenti',
 'info_non_modifiable' => 'n\'hall ket beza&ntilde; kemmet',
 'info_non_suppression_mot_cle' => 'ne fell ket din diverka&ntilde; ar ger-stur-ma&ntilde;.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notenno&ugrave;',
 'info_nouveaux_message' => 'Kemennadenno&ugrave; nevez',
 'info_nouvel_article' => 'Pennad nevez',
@@ -764,12 +793,19 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'item_utiliser_moteur_recherche' => 'Implijout al lusker enklask',
 'item_utiliser_mots_cles' => 'Implijout ar gerio&ugrave;-stur',
 'item_utiliser_syndication' => 'Implijout ar sindikadur emgefre',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'gweladenner',
 
 // J
 'jour_non_connu_nc' => 'dianav',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&ecirc;rezh ar vaezienn @champ@',
 'ldap_correspondance_1' => 'H&ecirc;rezh ar maezienno&ugrave; LDAP',
 'ldap_correspondance_2' => 'Merka&ntilde; anv ar vaezienn LDAP evit pep hini eus ar maezienno&ugrave; SPIP da-heul. Lezel goullo kuit na vefe leuniet pa dispartia&ntilde; dre skejo&ugrave; evit esaea&ntilde; meur a vaezienn LDAP.',
@@ -800,6 +836,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'logo_article' => 'LOGO AR PENNAD',
 'logo_auteur' => 'LOGO AR SKRIDAOZER',
 'logo_breve' => 'LOGO AR BERRSKRID',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO AR GER-STUR',
 'logo_rubrique' => 'LOGO AR RUBRIKENN',
 'logo_site' => 'LOGO AL LEC\'HIENN-MA&Ntilde;',
@@ -951,6 +988,8 @@ adstalia&ntilde; SPIP hag adkroui&ntilde; un diaz titouro&ugrave; nevez hag ur m
   pa dremen al logodenn war an titl.',
 'texte_compacter_avertissement' => 'Diwallit da chom hep gweredekaat an dibarzhio&ugrave;-ma&ntilde; e-keit hag emeur o sevel ho lec\'hienn : n\'hall ket an elfenno&ugrave; gwasket beza&ntilde; lennet ken war-lerc\'h.',
 'texte_compacter_script_css' => 'Gallout a ra SPIP gwaska&ntilde; ar skripto&ugrave; javascript hag ar follenno&ugrave;-stil CSS, evit o enrolla&ntilde; er restro&ugrave; difi&ntilde;v;  buanoc\'h e teu al lec\'hienn war wel.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hennezh a c\'hell beza&ntilde; gwasket pe get)',
 'texte_compresseur_page' => 'Gallout a ra SPIP gwaska&ntilde; ent emgefre pep pajenn kaset da weladennerien al lec\'hienn. Ska&ntilde;voc\'h eo evit ar bann drafet (buanoc\'h ez aio evit ar c\'hevreadenno&ugrave; gorrek, da skouer), met goulenn a ra muioc\'h a nerzh digant ar servijer.',
 'texte_compte_element' => '@count@ elfenn',
@@ -1114,7 +1153,9 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
 'titre_config_fonctions' => 'Kefluniadur al lec\'hienn',
 'titre_config_forums_prive' => 'Foromo&ugrave; al lodenn brevez',
 'titre_config_groupe_mots_cles' => 'Keflunia&ntilde; ar strollado&ugrave; gerio&ugrave;-stur',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Keflunia&ntilde; al lec\'hienn',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Bec\'h e-ser embann',
 'titre_connexion_ldap' => 'Dibarzhio&ugrave; : <b>Ho kevreadenn LDAP</b>',
 'titre_dernier_article_syndique' => 'Pennado&ugrave; sindikadet da ziwezha&ntilde;',
@@ -1123,6 +1164,7 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
 'titre_forum_suivi' => 'Heulia&ntilde; ar foromo&ugrave;',
 'titre_gauche_mots_edit' => 'GER NIVERENN :',
 'titre_groupe_mots' => 'STROLLAD GERIO&Ugrave; :',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'YEZH AR PENNAD',
 'titre_langue_breve' => 'YEZH AR BERRSKRID',
 'titre_langue_rubrique' => 'YEZH AR RUBRIKENN',

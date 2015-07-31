@@ -210,12 +210,16 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-L&euml;scht',
 'ical_titre_rss' => 'Syndicatiouns-Fichier\'en',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'De Korrespondenz-Cookie activ&eacute;ieren',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Plugin\'en verwalten',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Auteuren weisen',
 'icone_afficher_visiteurs' => 'Visiteuren weisen',
 'icone_arret_discussion' => 'N&euml;t m&eacute;i un d&euml;ser Diskussioun deelhuelen',
 'icone_calendrier' => 'Kalenner',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'E Schl&euml;sselwierder-Grupp maachen',
 'icone_creation_mots_cles' => 'E Schl&euml;sselwuert maachen',
 'icone_creer_auteur' => 'E neien Auteur derb&auml;i setzen an un d&euml;sen Artikel bannen',
@@ -225,8 +229,12 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'icone_creer_mot_cle_site' => 'E neit Schl&euml;sselwuert maachen an et un d&euml;se Site bannen',
 'icone_creer_rubrique_2' => 'Nei Rubrik derb&auml;i setzen',
 'icone_ecrire_nouvel_article' => 'Kuerzmeldungen aus d&euml;ser Rubrik',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'D&euml;se Message sch&eacute;cken',
 'icone_evolution_visites' => 'Evolutioun vun den Visiten<br />@visites@ Visiten',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'D&euml;se Schl&euml;sselwierder-Grupp &auml;nneren',
 'icone_modifier_article' => 'D&euml;sen Artikel &auml;nneren',
 'icone_modifier_breve' => 'D&euml;s Kuerzmeldung &auml;nneren',
@@ -235,13 +243,16 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'icone_modifier_rubrique' => 'D&euml;s Rubrik &auml;nneren',
 'icone_modifier_site' => 'D&euml;se Site &auml;nneren',
 'icone_poster_message' => 'Message sch&eacute;cken',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'D&euml;s Kuerzmeldung publiz&eacute;ieren',
 'icone_referencer_nouveau_site' => 'Neie Site uginn',
 'icone_refuser_breve' => 'D&euml;s Kuerzmeldung refus&eacute;ieren',
 'icone_relancer_signataire' => 'Beim &Euml;nnerschreiwer nofro&euml;n',
 'icone_retour' => 'Zer&euml;ck',
 'icone_retour_article' => 'Zer&euml;ck bei den Artikel',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Den &ouml;ffentlechen Forum verfolgen: @nb_forums@&nbsp;Beitr&auml;g',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Korrespondenz-Cookie l&auml;schen',
 'icone_supprimer_groupe_mots' => 'D&euml;se Grupp l&auml;schen',
 'icone_supprimer_rubrique' => 'D&euml;s Rubrik l&auml;schen',
@@ -251,8 +262,14 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'icone_voir_tous_mots_cles' => 'All d\'Schl&euml;sselwierder weisen',
 'image_administrer_rubrique' => 'Dir k&euml;nnt d&euml;s Rubrik administr&eacute;ieren',
 'info_1_article' => '1 Artikel',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 Kuerzmeldung',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 Site',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Dir k&euml;nnt e <b>Korrespondenz-Cookie</b> aktiv&eacute;ieren, dien Iech erlaabt einfach vum &ouml;ffentl&euml;chen op de privaten Site ze wiesselen.',
 'info_activer_forum_public' => '<i>Fir d&eacute;i &ouml;ffentl&euml;ch Forum\'en anzeschalten, wielt d\'Default-Moderatiouns-Method:</i>',
 'info_admin_gere_rubriques' => 'D&euml;sen Administrateur k&euml;nmert s&euml;ch &euml;m folgend Rubriken:',
@@ -315,6 +332,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_classement_2' => '. an @liste@',
 'info_code_acces' => 'Vergiesst &auml;r Login-Informatiounen n&euml;t!',
 'info_comment_lire_tableau' => 'W&eacute;i een d&euml;s Tabell liesen soll',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.B.:</b> Kontroll&eacute;iert op &auml;ren Hebergeur PHP-Skripter komprim&eacute;iert; dir k&euml;nnt dofir d&euml;sen Service benotzen: @testgzip@',
 'info_compresseur_texte' => 'Wann &auml;re Server d\'HTML-S&auml;iten n&euml;t automat&euml;sch komprim&eacute;iert, k&euml;nnt dir prob&eacute;ieren eng Kompressioun ze forc&eacute;ieren. <b>Opgepasst</b>: dat kann verschidde Serveren m&eacute;i lues maachen.',
 'info_compresseur_titre' => 'Optimisatioun a Compressioun',
@@ -336,6 +354,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_connexion_ok' => 'D\'Verbindung huet geklappt.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Inhalt vun den Artikelen',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Setzt hei d\'Schl&euml;sselwierder vum Site derb&auml;i a konfigur&eacute;iert se',
 'info_creation_paragraphe' => '(Fir e neien Abschnitt, loosst einfach eng eidel Zeil.)',
 'info_creation_rubrique' => 'Ier d&euml;r k&euml;nnt en Artikel schreiwen<br />musst d&euml;r op manst eng Rubrik derb&auml;i setzen.<br />',
@@ -452,6 +471,15 @@ Hiren Zoustand ass duerch d\'Faarw ugewisen (Administrateur = gr&eacute;ng; Reda
 D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen n&euml;t ausgeschalt ginn.',
 'info_multi_rubriques' => 'Sprooche-Menu bei de Rubriken aschalten?',
 'info_multi_secteurs' => '... n&euml;mmen fir d\'Haapt-Rubriken?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Numm',
 'info_nom_destinataire' => 'Numm vum Destinataire',
 'info_nom_site' => 'Numm vun &auml;rem Site',
@@ -466,6 +494,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_non_envoi_liste_nouveautes' => 'Keng L&euml;scht vun de Neiegkeeten sch&eacute;cken',
 'info_non_modifiable' => 'kann n&euml;t ge&auml;nnert ginn',
 'info_non_suppression_mot_cle' => 'ech kann d&euml;st Schl&euml;sselwuert n&euml;t l&auml;schen.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notizen',
 'info_nouveaux_message' => 'Nei Messagen',
 'info_nouvel_article' => 'Neien Artikel',
@@ -742,12 +771,19 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'item_utiliser_moteur_recherche' => 'De Sich-Motor aschalten',
 'item_utiliser_mots_cles' => 'D\'Schl&euml;sselwierder aschalten',
 'item_utiliser_syndication' => 'D&eacute;i automatesch Syndicatioun aschalten',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'Visiteur',
 
 // J
 'jour_non_connu_nc' => '?',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -778,6 +814,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'logo_article' => 'LOGO VUM ARTIKEL',
 'logo_auteur' => 'LOGO VUM AUTEUR',
 'logo_breve' => 'LOGO VUN DER KUERZMELDUNG',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO VUM SCHL&Euml;SSELWUERT',
 'logo_rubrique' => 'LOGO VUN DER RUBRIK',
 'logo_site' => 'LOGO VUM SITE',
@@ -921,6 +958,8 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'texte_comment_lire_tableau' => 'D\'Plaz vum Artikel am Klassement no Popularit&eacute;it steet am Rand; d\'Popularit&eacute;it vum Artikel (eng Estimatioun vun der Zuel vun de Visiten pro Dag wann &euml;t esou weidergeet) an Zuel vun de Visiten z&euml;nter Ufank stinn an der Erkl&auml;rung d&eacute;i ersch&eacute;ngt wann dier mat der Maus iwwer den Titel fuert.',
 'texte_compacter_avertissement' => 'Schalt d&euml;s Optiounen n&euml;t w&auml;rend der Entw&euml;cklung vum Site an: d&eacute;i komprim&eacute;iert Elementer sinn n&euml;t einfach liesbar.',
 'texte_compacter_script_css' => 'SPIP kann Javascript oder CSS Style-Sheets komprim&eacute;ieren fir als stat&euml;sch Dokumenter ze sp&auml;icheren; da ginn d\'S&auml;ite vum Site m&eacute;i s&eacute;ier gewisen.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(dee kann komprim&eacute;iert sinn oder n&euml;t)',
 'texte_compresseur_page' => 'SPIP kann automat&euml;sch all S&auml;it komprim&eacute;ieren d&eacute;i ugewise g&euml;tt. D&euml;s Astellung erlaabt d\'Bandbreed ze spueren (de Site ass op enger lueser Leitung m&eacute;i s&eacute;ier), mais dat verlaangt m&eacute;i Leeschtung vum Server.',
 'texte_compte_element' => '@count@ Element',
@@ -1057,7 +1096,9 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_config_fonctions' => 'Astellen vum Site',
 'titre_config_forums_prive' => 'Forumen vum privaten Deel',
 'titre_config_groupe_mots_cles' => 'Astellen vun de Schl&euml;sselwierder-Gruppen',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Astellen vum Site',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Konflikt w&auml;rend der Editioun',
 'titre_connexion_ldap' => 'Optiounen: <b>&Auml;r LDAP-Verbindung</b>',
 'titre_dernier_article_syndique' => 'L&auml;scht syndiqu&eacute;iert Artikelen',
@@ -1066,6 +1107,7 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_forum_suivi' => 'Suivi vun de Forum\'en',
 'titre_gauche_mots_edit' => 'WUERT NUMMER:',
 'titre_groupe_mots' => 'WUERT-GRUPP:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'SPROOCH VUM ARTIKEL',
 'titre_langue_breve' => 'SPROOCH VUN DER KUERZMELDUNG',
 'titre_langue_rubrique' => 'SPROOCH VUN DER RUBRIK',

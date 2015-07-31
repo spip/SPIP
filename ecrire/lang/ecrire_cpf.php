@@ -247,12 +247,16 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'ical_titre_js' => 'Javascript (Zavaskrip)',
 'ical_titre_mailing' => 'L&egrave;tlim&egrave;l',
 'ical_titre_rss' => 'Bann fisy&eacute; pou la sindikasyon',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'F&eacute; zw&eacute; lo gatomakro d rokon&eacute;sans ',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'J&egrave;r&eacute; bann plugin',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Armontr bann lot&egrave;r',
 'icone_afficher_visiteurs' => 'Armontr bann vizit&egrave;r',
 'icone_arret_discussion' => 'Anbar ou m&egrave;t ansanm dann kozman-la ',
 'icone_calendrier' => 'Kalandriy&eacute;',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Kr&eacute; inn nouvo group ast&egrave;r pou bann molakl&eacute;',
 'icone_creation_mots_cles' => 'Kr&eacute; inn nouvo molakl&eacute;',
 'icone_creer_auteur' => 'Kr&eacute; inn nouvo lot&egrave;r &eacute; m&egrave;t ali  ansanm dann lartik-la',
@@ -262,8 +266,12 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => 'Kr&eacute; inn nouv&egrave;l rubrik',
 'icone_ecrire_nouvel_article' => 'Bann tit-nouv&egrave;l dann rubrik-la',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Anvwa mod&eacute;kri-la',
 'icone_evolution_visites' => 'L&eacute;volisyon do bann vizit<br />@visites@ visites',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Sanz lo group bann mo-la',
 'icone_modifier_article' => 'Sanz lartik-la',
 'icone_modifier_breve' => 'Sanz tit-nouv&egrave;l-la',
@@ -272,13 +280,16 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'icone_modifier_rubrique' => 'Sanz rubrik-la',
 'icone_modifier_site' => 'Sanz lo sitw&egrave;b-la',
 'icone_poster_message' => 'Anvwa inn mod&eacute;kri',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Pibliy&eacute; tit-nouv&egrave;l-la',
 'icone_referencer_nouveau_site' => 'R&eacute;f&egrave;rans inn nouvo sitw&egrave;b',
 'icone_refuser_breve' => 'Afront tit-nouv&egrave;l-la',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Bat-ary&egrave;r',
 'icone_retour_article' => 'Bat-ary&egrave;r si lartik',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Swiv lo forom piblik sir figirw&egrave;b&nbsp;: @nb_forums@&nbsp;contribution(s)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'D&eacute;gr&egrave;n gatomakro pou larokon&eacute;sans',
 'icone_supprimer_groupe_mots' => 'D&eacute;gr&egrave;n group-la',
 'icone_supprimer_rubrique' => 'D&eacute;gr&egrave;n rubrik-la',
@@ -288,8 +299,14 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'icone_voir_tous_mots_cles' => 'Vwar tout bann molakl&eacute;',
 'image_administrer_rubrique' => 'Ou n&eacute;na drwa d-komandman sir rubrik-la',
 'info_1_article' => '1 lartik',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 tit-nouv&egrave;l',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 sitw&egrave;b',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'I p&eacute; f&eacute; zw&eacute; inn <b>gatomakro drokon&eacute;sans </b>. Kom sa ou sra kav pas fasilman dopwi lafigirw&egrave;b piblik sir lo sit priv&eacute;.',
 'info_activer_forum_public' => '<i>Swazi inn manyir lamod&eacute;rasyon otomatik pou bann forom piblik :</i>',
 'info_admin_gere_rubriques' => 'Komand&egrave;r-la l&eacute; responsab si bann rubrik anba:',
@@ -355,6 +372,7 @@ inn liv-zimaz (s&eacute;dir inn galri).',
 'info_classement_2' => '<sup>&egrave;m</sup> si @liste@',
 'info_code_acces' => 'Oubliy pa out prop bann kod-laks&eacute;&nbsp;!',
 'info_comment_lire_tableau' => 'Koman i p&eacute; lir lo tablo-la',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimisations et compression', # NEW
@@ -376,6 +394,7 @@ inn liv-zimaz (s&eacute;dir inn galri).',
 'info_connexion_ok' => 'Lakostaz la finn mars&eacute;.',
 'info_contact' => 'Kontak',
 'info_contenu_articles' => 'Kosa bann zartik i kontyin ',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Kr&eacute; &egrave;k konfigir t&egrave;rla tout bann molakl&eacute; lo sit',
 'info_creation_paragraphe' => '(Pou kr&eacute; bann paragraf, l&egrave;s sinpman trwakat liyn vid.)',
 'info_creation_rubrique' => 'Avand &eacute;krir bann zartik minm ,<br /> i dwa kr&eacute; inn rubrik o mwin.<br />',
@@ -502,6 +521,15 @@ fisy&eacute; SPIP.}}',
  ',
 'info_multi_rubriques' => 'F&eacute; zw&eacute; lo m&eacute;ni-d&eacute;roul&egrave;r pou bann lang si bann ribrik&nbsp;?',
 'info_multi_secteurs' => '...s&egrave;lman pou bann ribrik ou la plas dann rasine&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Non',
 'info_nom_destinataire' => 'Non lo korespondan',
 'info_nom_site' => 'Lo non out sitw&egrave;b ',
@@ -517,6 +545,7 @@ la finn d&egrave;t publy&eacute;).',
 'info_non_envoi_liste_nouveautes' => 'Amp&egrave;s anvwa lo fil bann nouv&egrave;lt&eacute;',
 'info_non_modifiable' => 'ou p&eacute; pa sanz ali',
 'info_non_suppression_mot_cle' => 'Mi v&eacute; pa d&eacute;gr&egrave;n molakl&eacute;-la.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Bann komant&egrave;r',
 'info_nouveaux_message' => 'Bann nouvo mod&eacute;kri',
 'info_nouvel_article' => 'Nouvo lartik',
@@ -802,12 +831,19 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'item_utiliser_moteur_recherche' => 'Ans&egrave;rv lo rod&egrave;r',
 'item_utiliser_mots_cles' => 'Ans&egrave;rv bann molakl&eacute;',
 'item_utiliser_syndication' => 'Ans&egrave;rv lasindikasyon otomatik',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vizit&egrave;r',
 
 // J
 'jour_non_connu_nc' => 'p.k. (pa konu)',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -838,6 +874,7 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'logo_article' => 'LOGO LARTIK-LA',
 'logo_auteur' => 'LOGO LOT&Egrave;R-LA',
 'logo_breve' => 'LOGO LA TIT-NOUV&Egrave;L',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGO MOLAKL&Eacute;-LA',
 'logo_rubrique' => 'LOGO RUBRIK-LA',
 'logo_site' => 'LOGO SITW&Egrave;B-LA',
@@ -990,6 +1027,8 @@ ou bat-kar&eacute; si lo non inn lartik, n&eacute;na inn bil sak i apar&eacute; 
 lo nonb vizit posib sir lo sit por&eacute;zon lo ritm akty&egrave;l l&eacute; stab.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(i p&eacute; konp&egrave;rs ali si ou v&eacute;)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1154,7 +1193,9 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'titre_config_fonctions' => 'Lakonfigirasyon lo sitw&egrave;b',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Lakonfigirasyon pou bann group molakl&eacute;',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Lakonfigirasyon lo sit',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Bann lopsyon : <b>Out lakostaz LDAP</b>',
 'titre_dernier_article_syndique' => 'Bann derny&eacute; zartik sindik&eacute;',
@@ -1163,6 +1204,7 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'titre_forum_suivi' => 'Swivi bann forom',
 'titre_gauche_mots_edit' => 'MO NIM&Eacute;RO :',
 'titre_groupe_mots' => 'GROUP BANN MO :',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'LANG LARTIK-LA',
 'titre_langue_breve' => 'LANG LA TITE-NOUVEL',
 'titre_langue_rubrique' => 'LANG LARUBRIK-LA',

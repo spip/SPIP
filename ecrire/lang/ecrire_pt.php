@@ -222,12 +222,16 @@ ou da rede',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
 'ical_titre_rss' => 'Ficheiros &laquo; backend &raquo;', # MODIF
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Activar o cookie de correspond&ecirc;ncia',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Gestion des plugins', # NEW
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Exibir os autores',
 'icone_afficher_visiteurs' => 'Exibir os visitantes',
 'icone_arret_discussion' => 'N&atilde;o voltar a participar nesta discuss&atilde;o',
 'icone_calendrier' => 'Calend&aacute;rio',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Criar um novo grupo de palavras',
 'icone_creation_mots_cles' => 'Criar uma nova palavra-chave',
 'icone_creer_auteur' => 'Criar um novo autor e associ&aacute;-lo a este artigo',
@@ -237,8 +241,12 @@ ou da rede',
 'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
 'icone_ecrire_nouvel_article' => 'As not&iacute;cias contidas nesta rubrica',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Enviar esta mensagem',
 'icone_evolution_visites' => 'Evolu&ccedil;&atilde;o das visitas <br />@visites@ visitas', # MODIF
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Modificar este grupo de palavras',
 'icone_modifier_article' => 'Modificar este artigo',
 'icone_modifier_breve' => 'Modificar esta not&iacute;cia',
@@ -247,13 +255,16 @@ ou da rede',
 'icone_modifier_rubrique' => 'Modificar esta rubrica',
 'icone_modifier_site' => 'Modificar este s&iacute;tio',
 'icone_poster_message' => 'Enviar uma mensagem ',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Publicar esta not&iacute;cia',
 'icone_referencer_nouveau_site' => 'Referenciar um novo s&iacute;tio',
 'icone_refuser_breve' => 'Recusar esta not&iacute;cia',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'voltar',
 'icone_retour_article' => 'Voltar ao artigo',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Seguimento do f&oacute;rum p&uacute;blico&nbsp;: @nb_forums@&nbsp;contribui&ccedil;&atilde;o(&otilde;es)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Suprimir o cookie de correspond&ecirc;ncia',
 'icone_supprimer_groupe_mots' => 'Suprimir este grupo',
 'icone_supprimer_rubrique' => 'Suprimir esta rubrica',
@@ -263,8 +274,14 @@ ou da rede',
 'icone_voir_tous_mots_cles' => 'Ver todas as palavras-chave',
 'image_administrer_rubrique' => 'Pode administrar esta rubrica',
 'info_1_article' => '1 artigo',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 not&iacute;cia',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 s&iacute;tio',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Pode activar um <b>cookie de correspond&ecirc;ncia</b>, o que lhe
  permitir&aacute; passar facilmente do s&iacute;tio p&uacute;blico ao s&iacute;tio privado ',
 'info_activer_forum_public' => '<i>Para activar os f&oacute;runs p&uacute;blicos, favor escolher o seu modo
@@ -332,6 +349,7 @@ ou da rede',
 'info_classement_2' => '<sup>e</sup> no @liste@',
 'info_code_acces' => 'N&atilde;o se esque&ccedil;a dos seus pr&oacute;prios c&oacute;digos de acesso&nbsp;!',
 'info_comment_lire_tableau' => 'Como ler este quadro',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimisations et compression', # NEW
@@ -353,6 +371,7 @@ ou da rede',
 'info_connexion_ok' => 'A liga&ccedil;&atilde;o foi bem sucedida.',
 'info_contact' => 'Contacto',
 'info_contenu_articles' => 'Conte&uacute;do dos artigos',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Crie e configure aqui as palavras-chave do s&iacute;tio',
 'info_creation_paragraphe' => '(Para criar par&aacute;grafos, deixe simplesmente linhas vazias.)',
 'info_creation_rubrique' => 'Antes de poder escrever artigos, <br />deve criar pelo menos uma rubrica.<br />', # MODIF
@@ -485,6 +504,15 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
  As l&iacute;nguas j&aacute; utilizadas no seu s&iacute;tio (exibidas em primeiro lugar) n&atilde;o podem ser desactivadas.',
 'info_multi_rubriques' => 'Activar o menu de l&iacute;ngua sobre as rubricas&nbsp;? ',
 'info_multi_secteurs' => '... s&oacute; para as rubricas situadas na ra&iacute;z&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Nome',
 'info_nom_destinataire' => 'Nome do destinat&aacute;rio',
 'info_nom_site' => 'Nome do seu s&iacute;tio',
@@ -500,6 +528,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_non_envoi_liste_nouveautes' => 'N&atilde;o enviar a lista das novidades',
 'info_non_modifiable' => 'n&atilde;o pode ser modificado',
 'info_non_suppression_mot_cle' => 'n&atilde;o quero suprimir esta palavra-chave.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notas',
 'info_nouveaux_message' => 'Novas mensagens',
 'info_nouvel_article' => 'Novo artigo',
@@ -789,12 +818,19 @@ numa cor que indica o seu estado:',
 'item_utiliser_moteur_recherche' => 'Utilizar o motor de pesquisa',
 'item_utiliser_mots_cles' => 'Utilizar as palavras-chave',
 'item_utiliser_syndication' => 'Utilizar a vincula&ccedil;&atilde;o autom&aacute;tica',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'visitante',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -825,6 +861,7 @@ numa cor que indica o seu estado:',
 'logo_article' => 'LOGOTIPO DO ARTIGO',
 'logo_auteur' => 'LOGOTIPO DO AUTOR ',
 'logo_breve' => 'LOGOTIPO DA NOT&Iacute;CIA',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGOTIPO DA PALAVRA-CHAVE ',
 'logo_rubrique' => 'LOGOTIPO DA RUBRICA',
 'logo_site' => 'LOGOTIPO DESTE S&Iacute;TIO',
@@ -980,6 +1017,8 @@ desde o in&iacute;cio s&atilde;o exibidos no bal&atilde;o que
  aparece quando o rato sobrevoa o t&iacute;tulo.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(este pode ser comprimido ou n&atilde;o)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1187,7 +1226,9 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_config_fonctions' => 'Configura&ccedil;&atilde;o do s&iacute;tio',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Configura&ccedil;&atilde;o dos grupos de palavras-chave',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configura&ccedil;&atilde;o do s&iacute;tio',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Op&ccedil;&otilde;es: <b>Sua liga&ccedil;&atilde;o LDAP</b>',
 'titre_dernier_article_syndique' => '&Uacute;ltimos artigos vinculados',
@@ -1196,6 +1237,7 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_forum_suivi' => 'Acompanhamento dos f&oacute;runs',
 'titre_gauche_mots_edit' => 'PALAVRA N&Uacute;MERO :',
 'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'L&Iacute;NGUA DO ARTIGO ',
 'titre_langue_breve' => 'L&Iacute;NGUA DA NOT&Iacute;CIA',
 'titre_langue_rubrique' => 'L&Iacute;NGUA DA RUBRICA',

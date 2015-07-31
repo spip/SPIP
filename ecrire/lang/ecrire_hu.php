@@ -218,12 +218,16 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Levelez&#337; lista',
 'ical_titre_rss' => '&laquo; backend &raquo; f&aacute;jlok (rss)',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'A hivatkoz&aacute;si s&uuml;ti (cookie) aktiv&aacute;l&aacute;sa',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Plugin-ek be&aacute;ll&iacute;t&aacute;sa',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Megjelen&iacute;teni a szerz&#337;ket',
 'icone_afficher_visiteurs' => 'Megjelen&iacute;teni a l&aacute;togat&oacute;kat',
 'icone_arret_discussion' => 'Megsz&uuml;ntetni a vitahoz val&oacute; r&eacute;szv&eacute;telt ',
 'icone_calendrier' => 'Napt&aacute;r',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => '&Uacute;j sz&oacute;csoport l&eacute;trehoz&aacute;sa',
 'icone_creation_mots_cles' => '&Uacute;j kulcssz&oacute; l&eacute;trehoz&aacute;sa',
 'icone_creer_auteur' => '&Uacute;j szerz&#337; l&eacute;trehoz&aacute;sa, &eacute;s hozz&aacute;rendel&eacute;se ehhez a cikkekhez',
@@ -233,8 +237,12 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => '&Uacute;j rovat l&eacute;trehoz&aacute;sa',
 'icone_ecrire_nouvel_article' => 'E rovatban szerepl&#337; h&iacute;rek',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => '&Uuml;zenet k&uuml;ld&eacute;se',
 'icone_evolution_visites' => 'L&aacute;t&oacute;gat&aacute;sok kialakul&aacute;sa<br />@visites@ l&aacute;t&oacute;gat&aacute;s', # MODIF
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'A sz&oacute;csoport m&oacute;dos&iacute;t&aacute;sa',
 'icone_modifier_article' => 'A cikk m&oacute;dos&iacute;t&aacute;sa',
 'icone_modifier_breve' => 'A h&iacute;r m&oacute;dos&iacute;t&aacute;sa',
@@ -243,13 +251,16 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'icone_modifier_rubrique' => 'A rovat m&oacute;dos&iacute;t&aacute;sa',
 'icone_modifier_site' => 'A honlap m&oacute;dos&iacute;t&aacute;sa',
 'icone_poster_message' => '&Uuml;zenet k&uuml;ld&eacute;se',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'A h&iacute;r publik&aacute;l&aacute;sa',
 'icone_referencer_nouveau_site' => '&Uacute;j honlap felv&eacute;tele',
 'icone_refuser_breve' => 'A h&iacute;r elutas&iacute;t&aacute;sa',
 'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Vissza',
 'icone_retour_article' => 'Vissza a cikkhez',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'A nyilv&aacute;nos f&oacute;rum megfigyel&eacute;se&nbsp;: @nb_forums@&nbsp;hozz&aacute;szl&aacute;s',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'A hivatkoz&aacute;si s&uuml;ti (cookie) t&ouml;rl&eacute;se',
 'icone_supprimer_groupe_mots' => 'A csoport t&ouml;rl&eacute;se',
 'icone_supprimer_rubrique' => 'A rovat t&ouml;rl&eacute;se',
@@ -259,8 +270,14 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'icone_voir_tous_mots_cles' => 'AZ &ouml;sszes kulcssz&oacute; n&eacute;zete',
 'image_administrer_rubrique' => 'Ezt a rubrik&aacute;t adminisztr&aacute;lhatja',
 'info_1_article' => '1 cikk',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 h&iacute;r',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 honlap',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Egy <b>hivatkoz&aacute;si s&uuml;tit</b> (cookie) lehet aktiv&aacute;lni, melynek seg&iacute;ts&eacute;g&eacute;vel k&ouml;nnyen &aacute;t tud menni a nyilv&aacute;nos r&eacute;szr&#337;l a priv&aacute;t r&eacute;szre.',
 'info_activer_forum_public' => '<i>A nyilv&aacute;nos f&oacute;rumok aktiv&aacute;l&aacute;s&aacute;ra, v&aacute;lassza az alap&eacute;rtelmezett
  m&oacute;der&aacute;l&aacute;si m&oacute;djukat:</i>', # MODIF
@@ -326,6 +343,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_classement_2' => '<sup>.-dik</sup> &ouml;sszesen @liste@',
 'info_code_acces' => 'Ne felejtse el a saj&aacute;t hozz&aacute;f&eacute;r&eacute;si k&oacute;djait&nbsp;!',
 'info_comment_lire_tableau' => 'Hogyan kell &eacute;rtelmezni a t&aacute;bl&aacute;t',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimisations et compression', # NEW
@@ -347,6 +365,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_connexion_ok' => 'A csatlakoz&aacute;s sikeres.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Cikkek tartalma',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Itt hozza l&eacute;tre &eacute;s konfigur&aacute;lja a honlap kulcsszavait',
 'info_creation_paragraphe' => '(Paragraf&uacute;sok l&eacute;trehoz&aacute;s&aacute;ra, egyszer&#369;en csak &uuml;res sorokat kell hagyni.)',
 'info_creation_rubrique' => 'Miel&#337;bb cikkeket &iacute;rhasson,<br /> legal&aacute;bb egy rubrik&aacute;t kell l&eacute;trehozni.<br />', # MODIF
@@ -467,6 +486,15 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
   A honlapj&aacute;n m&aacute;r haszn&aacute;lt nyelveket (els&#337;knek jelennek meg) nem lehet inaktiv&aacute;lni.',
 'info_multi_rubriques' => 'A nyelvi men&uuml; aktiv&aacute;l&aacute;sa a rovatokn&aacute;l&nbsp;?',
 'info_multi_secteurs' => '... csak a gy&ouml;k&eacute;rben tal&aacute;lhat&oacute; rovatok eset&eacute;n&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'N&eacute;v',
 'info_nom_destinataire' => 'C&iacute;mzett neve',
 'info_nom_site' => 'Az &Ouml;n honlapja neve',
@@ -482,6 +510,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_non_envoi_liste_nouveautes' => 'Nem kell k&uuml;ldeni az ujdons&aacute;gok list&aacute;j&aacute;t',
 'info_non_modifiable' => 'nem m&oacute;dos&iacute;that&oacute;',
 'info_non_suppression_mot_cle' => 'ne akarom t&ouml;r&ouml;lni ezt a kulcssz&oacute;t.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Megjegyz&eacute;sek',
 'info_nouveaux_message' => '&Uacute;j &uuml;zenetek',
 'info_nouvel_article' => '&Uacute;j cikk',
@@ -766,12 +795,19 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'item_utiliser_moteur_recherche' => 'Keres&#337; motor haszn&aacute;lata',
 'item_utiliser_mots_cles' => 'Kulcsszavak haszn&aacute;lata',
 'item_utiliser_syndication' => 'Automatikus szindik&aacute;l&aacute;s haszn&aacute;lata',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vend&eacute;g',
 
 // J
 'jour_non_connu_nc' => 'n&eacute;vtelen',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -802,6 +838,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'logo_article' => 'A CIKK LOGOJA',
 'logo_auteur' => 'A SZERZ&#336; LOGOJA',
 'logo_breve' => 'A H&Iacute;R LOGOJA',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'A KULCSSZ&Oacute; LOGOJA',
 'logo_rubrique' => 'ROVAT LOGOJA',
 'logo_site' => 'A HONLAP LOGOJA',
@@ -951,6 +988,8 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
   ami megjelenik, ha az eg&eacute;r lebeg a c&iacute;m felett.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(ez t&ouml;m&ouml;r&iacute;tve lehet, vagy nem)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1133,7 +1172,9 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'titre_config_fonctions' => 'A honlap konfigur&aacute;l&aacute;sa',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'A kulcsszavak csoportjainak konfigur&aacute;l&aacute;sa',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'A honlap konfigur&aacute;l&aacute;sa',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Opci&oacute;k : <b>Az &Ouml;n LDAP csatlakoz&aacute;s</b>',
 'titre_dernier_article_syndique' => 'Utols&oacute; szindik&aacute;lt cikkek',
@@ -1142,6 +1183,7 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'titre_forum_suivi' => 'A f&oacute;rumok megfigyel&eacute;se',
 'titre_gauche_mots_edit' => 'SZ&Oacute; SZ&Aacute;MA :',
 'titre_groupe_mots' => 'SZ&Oacute;CSOPORT :',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'A CIKK NYELVE',
 'titre_langue_breve' => 'A H&Iacute;R NYELVE',
 'titre_langue_rubrique' => 'A ROVAT NYELVE',

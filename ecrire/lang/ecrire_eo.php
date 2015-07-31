@@ -215,12 +215,16 @@ forvi&#349;i ilin poste).',
 'ical_titre_js' => '&#284;avaskripto',
 'ical_titre_mailing' => 'Dissendlisto',
 'ical_titre_rss' => 'Abonligoj',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Aktivigi la korespond-kuketon',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Mastrumado de kromprogramoj',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Afi&#349;i la a&#365;torojn',
 'icone_afficher_visiteurs' => 'Afi&#349;i la vizitantojn',
 'icone_arret_discussion' => 'Ne plu partopreni en &#265;i tiu diskuto',
 'icone_calendrier' => 'Kalendaro',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Krei novan grupon de vortoj',
 'icone_creation_mots_cles' => 'Krei novan &#349;losilvorton',
 'icone_creer_auteur' => 'Krei novan a&#365;toron kaj ligi &#349;lin al tiu artikolo',
@@ -230,8 +234,12 @@ forvi&#349;i ilin poste).',
 'icone_creer_mot_cle_site' => 'Krei novan &#349;losilvorton kaj ligi &#285;in kun tiu &#265;i retejo',
 'icone_creer_rubrique_2' => 'Krei novan rubrikon',
 'icone_ecrire_nouvel_article' => 'La fulm-informoj trovi&#285;antaj en tiu rubriko',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Sendi tiun &#265;i mesa&#285;on',
 'icone_evolution_visites' => 'Evoluado de la vizitoj<br />@visites@ vizitoj',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Modifi tiun &#265;i vortgrupon',
 'icone_modifier_article' => 'Modifi tiun &#265;i artikolon',
 'icone_modifier_breve' => 'Modifi tiun &#265;i fulm-informon',
@@ -240,13 +248,16 @@ forvi&#349;i ilin poste).',
 'icone_modifier_rubrique' => 'Modifi tiun &#265;i rubrikon',
 'icone_modifier_site' => 'Modifi tiun &#265;i retejon',
 'icone_poster_message' => 'Sendi mesa&#285;on',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Publikigi tiun fulm-informon',
 'icone_referencer_nouveau_site' => 'Referencigi novan retejon',
 'icone_refuser_breve' => 'Rifuzi tiun fulm-informon',
 'icone_relancer_signataire' => 'Reinstigi tiun &#265;i subskribinton',
 'icone_retour' => 'Reen',
 'icone_retour_article' => 'Reen al la artikolo',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Superrigardo de la publika forumo&nbsp;: @nb_forums@ kontribuo(j)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Forvi&#349;i la por-korespondan kuketon ',
 'icone_supprimer_groupe_mots' => 'Forvi&#349;i tiun grupon',
 'icone_supprimer_rubrique' => 'Forvi&#349;i tiun rubrikon',
@@ -256,8 +267,14 @@ forvi&#349;i ilin poste).',
 'icone_voir_tous_mots_cles' => 'Vidi &#265;iujn &#349;losilvortojn',
 'image_administrer_rubrique' => 'Vi povas mastrumi tiun rubrikon',
 'info_1_article' => '1 artikolo',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 fulm-informo',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 retejo',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Vi povas aktivigi <b>por-korespondan kuketon</b>. Tio ebligos al vi facile iri de la publika spaco al la privata.',
 'info_activer_forum_public' => '<i>Por aktivigi la publikajn forumojn, bonvolu elekti ilian
  defa&#365;ltan moderig-re&#285;imon:</i>',
@@ -323,6 +340,7 @@ forvi&#349;i ilin poste).',
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn&nbsp;!',
 'info_comment_lire_tableau' => 'Kiel legi tiun &#265;i tabelon',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Estas rekomendate anta&#365;fare kontroli, &#265;u via retgastiganto jam &#265;iufoje densigas la php-skriptojn; por tio, vi povas ekzemple uzi la jenan servon&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'Se via servilo ne a&#365;tomate densigas la html-pa&#285;ojn por ilin sendi al interretanoj, vi povas provi trudi tiun densigon por malkreskigi la pezon de la el&#349;utitaj pa&#285;oj. <b>Atentu</b> :  tio povas forte malrapidigi iujn servilojn.',
 'info_compresseur_titre' => 'Plejbonigoj kaj densigoj',
@@ -344,6 +362,7 @@ forvi&#349;i ilin poste).',
 'info_connexion_ok' => 'La konekti&#285;o sukcesis.',
 'info_contact' => 'Kontakt-adreso',
 'info_contenu_articles' => 'Enhavo de la artikoloj',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => '&#264;i tie, kreu kaj konfiguru la &#349;losilvortojn de la retejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
 'info_creation_rubrique' => 'Anta&#365; ol skribi artikolojn,<br /> vi kreu almena&#365; po unu rubrikon.<br />',
@@ -469,6 +488,15 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
   Vi ne povas malaktivigi la lingvojn jam uzatajn (unue afi&#349;itajn) &#265;e via retejo.',
 'info_multi_rubriques' => '&#264;u aktivigi la lingvomenuon en la rubrikoj&nbsp;?',
 'info_multi_secteurs' => '... &#265;u nur por la rubrikoj situantaj &#265;e la radiko&nbsp;?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Nomo',
 'info_nom_destinataire' => 'Nomo de la adresato',
 'info_nom_site' => 'Nomo de via retejo',
@@ -483,6 +511,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_non_envoi_liste_nouveautes' => 'Ne sendi la liston de la nova&#309;oj.',
 'info_non_modifiable' => 'ne modifebla',
 'info_non_suppression_mot_cle' => 'mi ne volas forvi&#349;i tiun &#349;losilvorton.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notoj',
 'info_nouveaux_message' => 'Novaj mesa&#285;oj',
 'info_nouvel_article' => 'Nova artikolo',
@@ -769,12 +798,19 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_utiliser_moteur_recherche' => 'Uzi la ser&#265;ilon',
 'item_utiliser_mots_cles' => 'Uzi la &#349;losilvortojn',
 'item_utiliser_syndication' => 'Uzi la a&#365;tomatan abonrilaton',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'vizitanto',
 
 // J
 'jour_non_connu_nc' => 'ne konata',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -805,6 +841,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'logo_article' => 'VINJETO DE LA ARTIKOLO',
 'logo_auteur' => 'VINJETO DE LA A&#364;TORO',
 'logo_breve' => 'VINJETO DE LA FULM-INFORMO',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'VINJETO DE LA &#348;LOSILVORTO',
 'logo_rubrique' => 'VINJETO DE LA RUBRIKO',
 'logo_site' => 'VINJETO DE LA RETEJO',
@@ -962,6 +999,8 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
   aperas kiam la tajpmontrilo superpasas la titolon.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(tiu &#265;i povas a&#365; ne esti densigita)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1168,7 +1207,9 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_config_fonctions' => 'Agordo de la retejo',
 'titre_config_forums_prive' => 'Forumoj de la privata spaco',
 'titre_config_groupe_mots_cles' => 'Agordo de la &#349;losilvortaj grupoj',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Agordo de la retejo',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 'titre_dernier_article_syndique' => 'Laste abon&#349;utitaj artikoloj',
@@ -1177,6 +1218,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_forum_suivi' => 'Superrigardo de la forumoj',
 'titre_gauche_mots_edit' => 'VORTO NUMERO:',
 'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'LINGVO DE LA ARTIKOLO',
 'titre_langue_breve' => 'LINGVO DE LA FULM-INFORMO',
 'titre_langue_rubrique' => 'LINGVO DE LA RUBRIKO',

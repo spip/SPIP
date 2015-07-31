@@ -214,12 +214,16 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Llista de correu',
 'ical_titre_rss' => 'Fitxers de sindicaci&oacute;',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Activar la galeta de correspond&egrave;ncia',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Gesti&oacute; dels connectors',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Mostrar els autors',
 'icone_afficher_visiteurs' => 'Mostrar els visitants',
 'icone_arret_discussion' => 'No participar m&eacute;s en aquesta conversa',
 'icone_calendrier' => 'Calendari',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Crear un nou grup de paraules',
 'icone_creation_mots_cles' => 'Crear una nova paraula clau',
 'icone_creer_auteur' => 'Crear un nou autor i associar-lo a aquest article',
@@ -229,8 +233,12 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'icone_creer_mot_cle_site' => 'Crear una nova paraula clau i lligar-la a aquest lloc Web',
 'icone_creer_rubrique_2' => 'Crear una nova secci&oacute;',
 'icone_ecrire_nouvel_article' => 'Les breus contingudes en aquesta secci&oacute;',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Enviar aquest missatge',
 'icone_evolution_visites' => 'Evoluci&oacute; de les visites<br />@visites@ visites',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Modificar aquest grup de paraules',
 'icone_modifier_article' => 'Modificar aquest article',
 'icone_modifier_breve' => 'Modificar aquesta breu',
@@ -239,13 +247,16 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'icone_modifier_rubrique' => 'Modificar aquesta secci&oacute;',
 'icone_modifier_site' => 'Modificar aquest lloc',
 'icone_poster_message' => 'Enviar un missatge',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Publicar aquesta breu',
 'icone_referencer_nouveau_site' => 'Referenciar un nou lloc',
 'icone_refuser_breve' => 'Refusar aquesta breu',
 'icone_relancer_signataire' => 'Tornar a iniciar el signant',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Seguiment del f&ograve;rum p&uacute;blic: @nb_forums@&nbsp;contribution(s)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Suprimir la galeta de correspond&egrave;ncia',
 'icone_supprimer_groupe_mots' => 'Suprimir aquest grup',
 'icone_supprimer_rubrique' => 'Suprimir aquesta secci&oacute;',
@@ -255,8 +266,14 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'icone_voir_tous_mots_cles' => 'Mostrar totes les paraules clau',
 'image_administrer_rubrique' => 'Podeu administrar aquesta secci&oacute;',
 'info_1_article' => '1 article',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 breu',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 lloc',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Podeu activar una <b>galeta de correspond&egrave;ncia</b>, us permetr&agrave; passar f&agrave;cilment del lloc p&uacute;blic al lloc privat.',
 'info_activer_forum_public' => '<i>Per activar els f&ograve;rums p&uacute;blics, escolliu el seu mode
  de moderaci&oacute; per defecte:</i>',
@@ -320,6 +337,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_classement_2' => '<sup>n</sup> a la @liste@',
 'info_code_acces' => 'No oblideu els vostres codis d\'acc&eacute;s!',
 'info_comment_lire_tableau' => 'Com llegir aquest quadre',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Recomanem que verifiqueu pr&egrave;viament si l\'hostatjador ja comprimeix sistem&agrave;ticament els scripts php&nbsp;; per aix&ograve;, podeu utilitzar, per exemple, el seg&uuml;ent servei: @testgzip@',
 'info_compresseur_texte' => 'Si el vostre servidor no comprimeix autom&agrave;ticament les p&agrave;gines html per enviar-les als internautes, podeu provar for&ccedil;ar aquesta compressi&oacute; per disminuir el pes de les p&agrave;gines baixades. <b>Atenci&oacute;</b>: aix&ograve; pot reduir considerablement la velocitat d\'alguns servidors. ',
 'info_compresseur_titre' => 'Optimitzacions i compressi&oacute;',
@@ -341,6 +359,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_connexion_ok' => 'La connexi&oacute; ha reexit.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contingut dels articles',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Crear i configurar aqu&iacute; les paraules clau del lloc',
 'info_creation_paragraphe' => '(Per crear par&agrave;grafs, deixeu simplement  unes l&iacute;nies buides.)',
 'info_creation_rubrique' => 'Abans de poder escriure articles,<br /> heu de crear com a m&iacute;nim una secci&oacute;.<br />',
@@ -464,6 +483,15 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
   Els idiomes ja utilitzats en el vostre lloc (visualitzats en primer lloc) no es poden desactivar.',
 'info_multi_rubriques' => 'Activar el men&uacute; d\'idioma a les seccions?',
 'info_multi_secteurs' => '... nom&eacute;s per les seccions situades a l\'arrel?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Nom',
 'info_nom_destinataire' => 'Nom del destinatari',
 'info_nom_site' => 'Nom del vostre lloc',
@@ -479,6 +507,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_non_envoi_liste_nouveautes' => 'No enviar la llista de novetats',
 'info_non_modifiable' => 'no pot ser modificat',
 'info_non_suppression_mot_cle' => 'no vull suprimir aquesta paraula clau.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Notes',
 'info_nouveaux_message' => 'Nous missatges',
 'info_nouvel_article' => 'Nou article',
@@ -759,12 +788,19 @@ amb un color que indica el seu estat:',
 'item_utiliser_moteur_recherche' => 'Utilitzar el motor de cerca',
 'item_utiliser_mots_cles' => 'Utilitzar les paraules clau',
 'item_utiliser_syndication' => 'Utilitzar la sindicaci&oacute; autom&agrave;tica',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'visitant',
 
 // J
 'jour_non_connu_nc' => 'n.c.',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'her&egrave;ncia del camp @champ@',
 'ldap_correspondance_1' => 'Her&egrave;ncia dels camps LDAP',
 'ldap_correspondance_2' => 'Per cadascun dels camps seg&uuml;ents d\'SPIP, indiqueu el nom del camp LDAP corresponent. Deixeu-lo buit per no omplir-lo, separeu-lo amb espais o comes per assajar diversos camps LDAP.',
@@ -795,6 +831,7 @@ amb un color que indica el seu estat:',
 'logo_article' => 'LOGOTIP DE L\'ARTICLE',
 'logo_auteur' => 'LOGOTIP DE L\'AUTOR',
 'logo_breve' => 'LOGOTIP DE LA BREU',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'LOGOTIP DE LA PARAULA CLAU',
 'logo_rubrique' => 'LOGOTIP DE LA SECCI&Oacute;',
 'logo_site' => 'LOGOTIP D\'AQUEST LLOC',
@@ -944,6 +981,8 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
  des que va estar per primer cop en l&iacute;nia est&agrave;n visibles al men&uacute; que apareix quan passem el ratol&iacute; per sobre del t&iacute;tol.',
 'texte_compacter_avertissement' => 'Estigueu alerta de no activar aquestes opcions durant el desenvolupament del vostre lloc: els elements compactats perdent tota llegibilitat. ',
 'texte_compacter_script_css' => 'SPIP pot compactar els scripts javascript i els fulls d\'estil CSS, per enregistrar-los a dins dels fitxers est&agrave;tics; aix&ograve; accelera la presentaci&oacute; del lloc Web.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(a&ccedil;&ograve; pot ser comprimit o no)',
 'texte_compresseur_page' => 'SPIP pot comprimir autom&agrave;ticament cada p&agrave;gina que envia als visitants del lloc Web. Aquest reglatge permet optimitzar l\'ample de banda (el lloc &eacute;s m&eacute;s r&agrave;pid darrere una connexi&oacute; m&eacute;s lenta), per&ograve; demana m&eacute;s pot&egrave;ncia al sevidor.',
 'texte_compte_element' => ' @count@ element',
@@ -1099,7 +1138,9 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_config_fonctions' => 'Configuraci&oacute; del web',
 'titre_config_forums_prive' => 'F&ograve;rums de l\'espai privat',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute; dels grups de paraules clau',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Configuraci&oacute; del lloc',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflicte durant l\'edici&oacute;',
 'titre_connexion_ldap' => 'Opcions: <b>Vostre connexi&oacute; LDAP</b>',
 'titre_dernier_article_syndique' => 'Darrers articles sindicats',
@@ -1108,6 +1149,7 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_forum_suivi' => 'Seguiment dels f&ograve;rums',
 'titre_gauche_mots_edit' => 'MOT N&Uacute;MERO:',
 'titre_groupe_mots' => 'GRUP DE MOTS:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'LLENGUA DE L\'ARTICLE',
 'titre_langue_breve' => 'LLENGUA DEL BREU',
 'titre_langue_rubrique' => 'LLENGUA DE LA SECCI&Oacute;',

@@ -211,12 +211,16 @@ Ez balidatu inportazio galdera hau.
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Posta-zerrenda',
 'ical_titre_rss' => '&laquo;backend&raquo; fitxategiak',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'Korrespondentzi-“cookie”-a aktibatzea',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Plugin-en kudeaketa',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Egileak erakutsi',
 'icone_afficher_visiteurs' => 'Bisitariakerakutsi',
 'icone_arret_discussion' => 'Elkarrizketa honetan ez berriro parte hartu ',
 'icone_calendrier' => 'Egutegi',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Hitz talde berri bateratu',
 'icone_creation_mots_cles' => 'Gako-hitz berri bat eratu',
 'icone_creer_auteur' => 'Egile berri bat eratu eta artikulu honi elkartu',
@@ -226,8 +230,12 @@ Ez balidatu inportazio galdera hau.
 'icone_creer_mot_cle_site' => 'Gako-hitz berri bat sortu eta gune huni lotu',
 'icone_creer_rubrique_2' => 'Atal berribat eratu',
 'icone_ecrire_nouvel_article' => 'Atal honen berri laburrak',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'Mezua igorri',
 'icone_evolution_visites' => 'Bisiten eboluzioa @visites@ bisitak',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Hitz talde hau aldatu',
 'icone_modifier_article' => 'Artikulu hau aldatu',
 'icone_modifier_breve' => 'Berri laburhau aldatu',
@@ -236,13 +244,16 @@ Ez balidatu inportazio galdera hau.
 'icone_modifier_rubrique' => 'Atal hau aldatu',
 'icone_modifier_site' => 'Leku hau aldatu',
 'icone_poster_message' => 'Mezu bat igorri',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Berri labur hau argitaratu',
 'icone_referencer_nouveau_site' => 'Leku berri bat aipatu',
 'icone_refuser_breve' => 'Berri labur hau ez onartu',
 'icone_relancer_signataire' => 'Izenpetzaileari berreskatu',
 'icone_retour' => 'Itzuli',
 'icone_retour_article' => 'Artikuluraitzuli',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Foro publikoaren gaurkotasuna: @nb_forums@ekarpena(k)',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Korrespondentzi-“cookie”-a ezabatu',
 'icone_supprimer_groupe_mots' => 'Talde hau ezabatu',
 'icone_supprimer_rubrique' => 'Atal hau ezabatu',
@@ -252,8 +263,14 @@ Ez balidatu inportazio galdera hau.
 'icone_voir_tous_mots_cles' => 'Gako-hitz guztiak ikusi',
 'image_administrer_rubrique' => 'Atal hau kudeatu ahal duzu',
 'info_1_article' => 'artikulu 1',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => 'berri labur 1',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => 'Toki bat',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Egokitasun-"cookie" bat aktibatu dezakezu; horrek aukera emango dizu orrialdeakeguneratzeko, eta jendaurreko ataletik erredakziora errazki aldatzeko ere.',
 'info_activer_forum_public' => 'Foru publikoak aktibatzeko, aukeratu moderazio erabat',
 'info_admin_gere_rubriques' => 'Pertsona horrek honako atal hauek administratzenditu:',
@@ -316,6 +333,7 @@ Ez balidatu inportazio galdera hau.
 'info_classement_2' => '.@zerrendan@',
 'info_code_acces' => 'Zure sarbide kodeak ezahaztu !',
 'info_comment_lire_tableau' => 'Nola irakurri lauki hau',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Aterbetazileak ez dituenez jadanik php script-ak konprimitzen baieztatzea gomendatua da ; horretarako serbitsu hau erabiltzen ahal dezakezu&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'Zure sareburuak ez baditu automatikoki html orrialdeak konprimitzen erabiltzaileari igortzeko, konpresioa bortxatzen entsegatzen ahal zira deskargatutako orrien pisua ttipitzeko.<b>Kontuz</b> : teknika hunek zoinbeit sareburu zinez moteltzen ahal ditu.',
 'info_compresseur_titre' => 'Optimizatu eta konprimatu',
@@ -337,6 +355,7 @@ Ez balidatu inportazio galdera hau.
 'info_connexion_ok' => 'Konexioa ondo dabil',
 'info_contact' => 'Kontaktua',
 'info_contenu_articles' => 'Artikuluen edukia',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Guneko gako-hitzak sortu eta konfiguratu',
 'info_creation_paragraphe' => '(Paragrafoak sortzeko, utzi lerro hutsak.)',
 'info_creation_rubrique' => 'Artikuluak idatzi baino lehen Atal bat sortu behar duzu.',
@@ -454,6 +473,15 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_multi_langues_choisies' => 'Jarraian aukeratu zure tokiarenidazleek erabiltzeko baimena izango dituzten hizkuntzak. Tokian dagoeneko erabiltzendiren hizkuntzak (zerrendaren hasieran) ezin dira desaktibatu. ',
 'info_multi_rubriques' => 'Ataletan hizkuntza menu-a aktibatu?',
 'info_multi_secteurs' => '>... erroan dauden atalentzat bakarrik ?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Izena',
 'info_nom_destinataire' => 'Hartzailearen izena',
 'info_nom_site' => 'Zure gunearen izena',
@@ -468,6 +496,7 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_non_envoi_liste_nouveautes' => 'Ez bidali nobedadeen zerrenda',
 'info_non_modifiable' => 'ezin da aldatu',
 'info_non_suppression_mot_cle' => 'Ez dutgako-hitz hau ezabatu nahi',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Oharrak',
 'info_nouveaux_message' => 'Mezu berriak',
 'info_nouvel_article' => 'Artikulu berria',
@@ -750,12 +779,19 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_utiliser_moteur_recherche' => 'Bilaketa-motorra erabili',
 'item_utiliser_mots_cles' => 'Gako-hitzak erabili',
 'item_utiliser_syndication' => 'Sindikazio automatikoa erabili',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'bisitaria',
 
 // J
 'jour_non_connu_nc' => 'e.e.',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -786,6 +822,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'logo_article' => 'Artikuluaren logotipoa...',
 'logo_auteur' => 'EGILEAREN LOGOA',
 'logo_breve' => 'BERRI LABURRAREN LOGOA',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'GAKO-HITZAREN LOGOA',
 'logo_rubrique' => 'ATALAREN LOGOA',
 'logo_site' => 'GUNEAREN LOGOA',
@@ -930,6 +967,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 Artikuluaren onarpena (berak jasoko duen eguneroko bisiten kopuruaren estimazio bat oraingokontsulta-erritmoa mantentzen bada) eta hasieratik jasotako bisiten kopurua saguak izenburuaren gainetik pasatzen denean agertzen den argibidean erakusten dira.',
 'texte_compacter_avertissement' => 'Kontuz, aaukera horiek ez aktibatu zure gunearen garapenaren denboran : konprimitutako elementuek irakurgarritasuna galtzen dute.',
 'texte_compacter_script_css' => 'SPIPek javascript script-ak edo CSS estilo-orriak konprimitzen ahal ditu, fitxategi estatiko batzuetan grabatzeko ; horrek gunearen bistaratzea azeleratzen du.',
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
 'texte_compresseur_page' => 'SPIPek gunearen bisitariei bidaltzen duen orri bakotxa automatikoki konprimitzen ahal du. konfigurazio hunek banda-zabaleraren optimizatzea baimentzen du (abiadura ttipiko konexio baten gibelean gunea zaluago da), baina zerbitzariari indar gehiago eskatzen du.',
 'texte_compte_element' => '@count@ osagai',
@@ -1070,7 +1109,9 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_config_fonctions' => 'Tokiaren konfigurazioa',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Gako-hitzen taldeen konfigurazioa',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Tokiarenkonfigurazioa',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Aukerak: zure LDAP konexioa',
 'titre_dernier_article_syndique' => 'Azken artikulu elkartuak',
@@ -1079,6 +1120,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_forum_suivi' => 'Foruen kudeaketa',
 'titre_gauche_mots_edit' => 'Hitza',
 'titre_groupe_mots' => 'Hitzen taldea',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'ARTIKULUKOHIZKUNTZA',
 'titre_langue_breve' => 'LABURRAREN HIZKUNTZA',
 'titre_langue_rubrique' => 'ATALAREN HIZKUNTZA',

@@ -212,12 +212,16 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'E-postlista',
 'ical_titre_rss' => 'Syndikeringsfiler',
+'icone_accueil' => 'Accueil', # NEW
 'icone_activer_cookie' => 'S&auml;tt en cookie',
+'icone_activite' => 'Activit&eacute;', # NEW
 'icone_admin_plugin' => 'Hantera plugin\'s',
+'icone_administration' => 'Maintenance', # NEW
 'icone_afficher_auteurs' => 'Visa redakt&ouml;rer',
 'icone_afficher_visiteurs' => 'Visa bes&ouml;kare',
 'icone_arret_discussion' => 'Avsluta diskussionen',
 'icone_calendrier' => 'Kalender',
+'icone_configuration' => 'Configuration', # NEW
 'icone_creation_groupe_mots' => 'Skapa en ny nyckleordsgrupp',
 'icone_creation_mots_cles' => 'Skapa ett nytt nyckelord',
 'icone_creer_auteur' => 'Skapa en ny redakt&ouml;r och koppla honom (henne) till den h&auml;r artikeln',
@@ -227,8 +231,12 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'icone_creer_mot_cle_site' => 'Skapa ett nytt nyckelord och koppla det till den h&auml;r sajten',
 'icone_creer_rubrique_2' => 'Skapa en ny avdelning',
 'icone_ecrire_nouvel_article' => 'Nyheter i den h&auml;r sektionen',
+'icone_edition' => '&Eacute;dition', # NEW
 'icone_envoyer_message' => 'S&auml;nd detta meddelande',
 'icone_evolution_visites' => 'Bes&ouml;ksantal<br />@visites@ bes&ouml;k',
+'icone_ma_langue' => 'Ma langue', # NEW
+'icone_mes_infos' => 'Mes informations', # NEW
+'icone_mes_preferences' => 'Mes pr&eacute;f&eacute;rences', # NEW
 'icone_modif_groupe_mots' => 'Editera nyckelordsgruppen',
 'icone_modifier_article' => 'Editera artikeln',
 'icone_modifier_breve' => 'Editera nyheten',
@@ -237,13 +245,16 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'icone_modifier_rubrique' => 'Editera avdelningen',
 'icone_modifier_site' => 'Editera sajten',
 'icone_poster_message' => 'Ansl&aring; ett meddelande',
+'icone_publication' => 'Publication', # NEW
 'icone_publier_breve' => 'Publicera nyhet',
 'icone_referencer_nouveau_site' => 'L&auml;nka en ny sajt',
 'icone_refuser_breve' => 'Refusera nyheten',
 'icone_relancer_signataire' => 'Kontakta personen igen',
 'icone_retour' => 'Tillbaka',
 'icone_retour_article' => 'Tillbaka till artikeln',
+'icone_squelette' => 'Squelettes', # NEW
 'icone_suivi_forum' => 'Uppf&ouml;ljning av publika forum: @nb_forums@ bidrag',
+'icone_suivi_publication' => 'Suivi de la publication', # NEW
 'icone_supprimer_cookie' => 'Radera cookien',
 'icone_supprimer_groupe_mots' => 'Radera den h&auml;r gruppen',
 'icone_supprimer_rubrique' => 'Radera den h&auml;r avdelningen',
@@ -253,8 +264,14 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'icone_voir_tous_mots_cles' => 'Visa alla nyckelord',
 'image_administrer_rubrique' => 'Du kan hantera den h&auml;r avdelningen',
 'info_1_article' => '1 artikel',
+'info_1_article_syndique' => '1 article syndiqu&eacute;', # NEW
+'info_1_auteur' => '1 auteur', # NEW
 'info_1_breve' => '1 nyhet',
+'info_1_message' => '1 message', # NEW
+'info_1_mot_cle' => '1 mot-cl&eacute;', # NEW
+'info_1_rubrique' => '1 rubrique', # NEW
 'info_1_site' => '1 sajt',
+'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Du kan aktivera en <b>administrationscookie</b>, som till&aring;ter dig
  att enkelt v&auml;xla mellan den publika och den privata delen.',
 'info_activer_forum_public' => '<i>f&ouml;r att aktivera publika forum, var v&auml;nlig och v&auml;lj moderationss&auml;tt:</i>',
@@ -321,6 +338,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_classement_2' => '<sup>e</sup> sur @liste@', # NEW
 'info_code_acces' => 'Gl&ouml;m inte ditt eget l&ouml;senord!',
 'info_comment_lire_tableau' => 'Hur tolkar man den h&auml;r bilden',
+'info_compatibilite_html' => 'Norme HTML &agrave; suivre', # NEW
 'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
 'info_compresseur_titre' => 'Optimering och komprimering',
@@ -342,6 +360,7 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_connexion_ok' => 'F&ouml;rbindelsen lyckades.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Inneh&aring;ll i artiklarna',
+'info_contributions' => 'Contributions', # NEW
 'info_creation_mots_cles' => 'Skapa och hantera sajtens nyckelord h&auml;r.',
 'info_creation_paragraphe' => '(F&ouml;r att skapa stycken, r&auml;cker det att l&auml;mna tomma rader.)',
 'info_creation_rubrique' => 'Innan du kan skriva artiklar,<br /> m&aring;ste du skapa &aring;tminstone en avdelning.<br />',
@@ -476,6 +495,15 @@ funktioner hos SPIP inte anv&auml;ndas.',
   Spr&aring;k som redan anv&auml;nds p&aring; din sajt (h&ouml;gst upp p&aring; listan) kan inte avaktiveras.',
 'info_multi_rubriques' => 'Aktivera spr&aring;kmenyn f&ouml;r avdelningar?',
 'info_multi_secteurs' => '... bara f&ouml;r avdelningarna i roten?',
+'info_nb_articles' => '@nb@ articles', # NEW
+'info_nb_articles_syndiques' => '@nb@ articles syndiqu&eacute;s', # NEW
+'info_nb_auteurs' => '@nb@ auteurs', # NEW
+'info_nb_breves' => '@nb@ br&egrave;ves', # NEW
+'info_nb_messages' => '@nb@ messages', # NEW
+'info_nb_mots_cles' => '@nb@ mots-cl&eacute;s', # NEW
+'info_nb_rubriques' => '@nb@ rubriques', # NEW
+'info_nb_sites' => '@nb@ sites', # NEW
+'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 'info_nom' => 'Namn',
 'info_nom_destinataire' => 'Mottagarens namn',
 'info_nom_site' => 'Din sajts namn',
@@ -491,6 +519,7 @@ funktioner hos SPIP inte anv&auml;ndas.',
 'info_non_envoi_liste_nouveautes' => 'Skicka inte listan med senaste nyheterna',
 'info_non_modifiable' => 'kan inte f&ouml;r&auml;ndras',
 'info_non_suppression_mot_cle' => 'Jag vill inte radera nyckelordet.',
+'info_note_numero' => 'Note @numero@', # NEW
 'info_notes' => 'Fotnoter',
 'info_nouveaux_message' => 'Nya meddelanden',
 'info_nouvel_article' => 'Ny artikel',
@@ -780,12 +809,19 @@ med en f&auml;rg som visar deras status:',
 'item_utiliser_moteur_recherche' => 'Anv&auml;nd s&ouml;kmotorn',
 'item_utiliser_mots_cles' => 'Anv&auml;nd nyckelord',
 'item_utiliser_syndication' => 'Anv&auml;nd automatisk syndikering',
+'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+'item_version_html_max_html5' => 'Permettre le HTML5', # NEW
 'item_visiteur' => 'bes&ouml;kare',
 
 // J
 'jour_non_connu_nc' => 'ok&auml;nd',
 
 // L
+'label_choix_langue' => 'Selectionnez votre langue', # NEW
+'label_slogan_site' => 'Slogan du site', # NEW
+'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+'label_texte_et_icones_navigation' => 'Menu de navigation', # NEW
+'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
 'ldap_correspondance' => 'h&eacute;ritage du champ @champ@', # NEW
 'ldap_correspondance_1' => 'H&eacute;ritage des champs LDAP', # NEW
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
@@ -816,6 +852,7 @@ med en f&auml;rg som visar deras status:',
 'logo_article' => 'ARTIKELNS LOGOTYPE',
 'logo_auteur' => 'REDAKT&Ouml;RENS LOGOTYPE',
 'logo_breve' => 'NYHETENS LOGOTYPE',
+'logo_groupe' => 'LOGO DE CE GROUPE', # NEW
 'logo_mot_cle' => 'NYCKELORDETS LOGOTYPE',
 'logo_rubrique' => 'Avdelningens logotype',
 'logo_site' => 'SAJTENS LOGOTYPE',
@@ -972,6 +1009,8 @@ installera om SPIP f&ouml;r att skapa en ny databas och den f&ouml;rsta administ
   dyker upp n&auml;r muspekaren h&aring;lls &ouml;ver titeln.',
 'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
 'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
+'texte_compatibilite_html' => 'Vous pouvez demander &agrave; SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilit&eacute;s plus modernes du <i>HTML5</i>.', # NEW
+'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque &agrave; activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides&nbsp;: <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(Den kan vara komprimerad eller inte.)',
 'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
 visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
@@ -1177,7 +1216,9 @@ you can perform searches on sites and
 'titre_config_fonctions' => 'Sajtens konfiguration',
 'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Konfigurera nyckelordsgrupper',
+'titre_config_langage' => 'Configurer la langue', # NEW
 'titre_configuration' => 'Sajtens konfiguration',
+'titre_configurer_preferences' => 'Configurer vos pr&eacute;f&eacute;rences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Optioner: <b>Din LDAP koppling</b>',
 'titre_dernier_article_syndique' => 'Senaste syndikerade artiklar',
@@ -1186,6 +1227,7 @@ you can perform searches on sites and
 'titre_forum_suivi' => 'Suivi des forums', # NEW
 'titre_gauche_mots_edit' => 'NYCKELORDSNUMMER:',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
+'titre_identite_site' => 'Identit&eacute; du site', # NEW
 'titre_langue_article' => 'ARTIKELNS SPR&Aring;K',
 'titre_langue_breve' => 'NYHETENS SPR&Aring;K',
 'titre_langue_rubrique' => 'AVDELNINGENS SPR&Aring;K',
