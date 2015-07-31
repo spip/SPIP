@@ -35,7 +35,8 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 		$md5next = $regs[4];
 		$pass="";
 	}
-  // si envoi non crypte, crypter maintenant
+
+	// si envoi non crypte, crypter maintenant
 	elseif ($pass) {
 		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login),'','','','',$serveur);
 
@@ -63,7 +64,7 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	if ($shanext) {
 
 		include_spip('inc/acces'); // pour creer_uniqid
-		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'],'',$serveur);
+		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'].' AND pass IN ('.sql_quote($shapass).', '.sql_quote($md5pass).')','',$serveur);
 		// En profiter pour verifier la securite de tmp/
 		// Si elle ne fonctionne pas a l'installation, prevenir
 		if (!verifier_htaccess(_DIR_TMP) AND defined('_ECRIRE_INSTALL'))
