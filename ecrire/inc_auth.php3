@@ -100,18 +100,20 @@ function auth() {
 	}
 
 	// Tentative de login echec
-	else if ($GLOBALS['bonjour'] == 'oui') {
+	if ($HTTP_GET_VARS['bonjour'] == 'oui' AND !$auth_login) {
 		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
 		$url = str_replace('/./', '/', _DIR_RESTREINT_ABS .$clean_link->getUrl());
 		$link->addVar('var_url', $url);
 		redirige_par_entete($link->getUrl());
+		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
 		$url = (str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
 		redirige_par_entete($addr . "../spip_login.php3?var_url=$url");
+		exit;
 	}
 
 
