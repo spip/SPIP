@@ -49,7 +49,7 @@ $GLOBALS['i18n_spip_oci_gsc'] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Non cau pas aperar aquera foncion dens aqueth cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dens la sauvagarda (@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<MODIF> <B>Atencion! Lo fichi&egrave;r @archive@ que correspon a ua auta version d\'SPIP que la qui avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
+'avis_erreur_version_archive' => '<B>Atencion! Lo fichi&egrave;r @archive@ que correspon a ua auta version d\'SPIP que la qui avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP qu\'ei ja installat.',
@@ -519,7 +519,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_contenu_articles' => 'Contengut deus articles',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'qu\'ei un logiciau liure distribuit per<a href=\'copyright_fr.html\'>devath lic&eacute;ncia GPL.</a>',
-'info_copyright_doc' => '<MODIF> Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
 'info_cours_edition' => 'Los v&ograve;stes articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz ac&iacute; los mots claus deu sit',
 'info_creation_paragraphe' => '(Ent&agrave; crear paragrafs, que suf&iacute;s que deishetz linhas vueitas.)',
@@ -677,7 +677,6 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_moyenne' => 'mejana:',
 'info_multi_articles' => 'Activar lo menut de lenga taus articles?',
 'info_multi_cet_article' => 'Lenga d\'aqueste article:',
-'info_multi_cette_rubrique' => 'Lenga emplegada dens aquesta rubrica:',
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Volhatz seleccionar &ccedil;a devath las lengas qui son a posita deus redactors deu v&ograve;ste sit.
   Las lengas ja emplegadas dens lo v&ograve;ste sit (afichadas en perm&egrave;ras) ne\'s p&ograve;den pas desactivar.',
@@ -1008,7 +1007,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Gerir lo forum public d\'aqueth article',
 'lien_icones_interface' => 'Las ic&ograve;nas de l\'interf&agrave;cia que son de <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
-'lien_liberer' => '<MODIF> liberar',
+'lien_liberer' => 'liberar',
 'lien_liberer_tous' => 'liberar aqueths articles',
 'lien_mise_a_jour_syndication' => 'Actualizar ara',
 'lien_modifer_date' => 'Modificar la data',
@@ -1060,7 +1059,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'login_login2' => 'Login (identificant de connexion au sit):',
 'login_login_pass_incorrect' => '(Login o mot de santa Clara incorr&egrave;cte.)',
 'login_motpasseoublie' => 'mot&nbsp;de&nbsp;santa&nbsp;Clara&nbsp;oblidat?',
-'login_non_securise' => '<MODIF> Atencion, aqueth formulari n\'ei pas securizat.
+'login_non_securise' => 'Atencion, aqueth formulari n\'ei pas securizat.
     Se non voletz pas que lo v&ograve;ste mot de santa Clara sia
    interceptat sus l\'arret, volhatz activar Javascript 
    dens lo v&ograve;ste navigader e',
@@ -1240,9 +1239,9 @@ e tornar connect&agrave;\'vs au sit.
  incl&uacute;s <i>tots</i> los acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auratz executada, qu\'auratz de tornar lan&ccedil;ar l\'installacion d\'SPIP t&agrave; tornar crear ua basa nav&egrave;ra atau com un perm&egrave;r acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquera opcion que\'vs permet de sauvagardar lo contengut de la basa dens un fichi&egrave;r qui ser&agrave; servat dens lo repert&ograve;ri <i>ecrire/data/</i>.
 N\'oblidetz pas tanp&ograve;c de recuperar l\'integralitat deu repert&ograve;ri <i>IMG/</i>, qui contien los imatges e los documents utilizats dens los articles e rubricas.',
-'texte_admin_tech_02' => '<MODIF> Atencion: aquera sauvagarda que\'s poir&agrave; restaurar
+'texte_admin_tech_02' => 'Atencion: aquera sauvagarda que\'s poir&agrave; restaurar
  SONQUE dens un sit installat dab la medisha version d\'SPIP. L\'error
- qui consisteish a har ua sauvagarda abans de har ua actualizacion d\'SPIP qu\'ei correnta... Per mei de detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
+ qui consisteish a har ua sauvagarda abans de har ua actualizacion d\'SPIP qu\'ei correnta... Ent&agrave; mei detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Que podetz causir de sauvagardar lo fichi&egrave;r devath forma comprimida, ent&agrave;
  accelerar lo son transferiment a v&ograve;stre o a &ccedil;&ograve; d\'un servider de sauvagardas, e ent&agrave; estauviar espaci disc.',
 'texte_adresse_annuaire_1' => '(Se lo v&ograve;ste annuari ei installat sus la medisha maquina qu\'aqueth sit web, que s\'ageish probable de "localhost".)',
@@ -1582,6 +1581,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
+
 
 );
 

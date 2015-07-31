@@ -49,7 +49,7 @@ $GLOBALS['i18n_spip_oci_lnc'] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cal pas apelar aquela foncion dins aquel cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la salvagarda (@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<MODIF> <B>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
+'avis_erreur_version_archive' => '<B>Atencion! Lo fichi&egrave;r @archive@ correspond a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz cap a de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rses del sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
@@ -519,7 +519,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_contenu_articles' => 'Contengut dels articles',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'es un logicial liure distribuit per<a href=\'copyright_fr.html\'>jos lic&eacute;ncia GPL.</a>',
-'info_copyright_doc' => '<MODIF> Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => ' Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
 'info_cours_edition' => 'V&ograve;stres articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots claus del sit',
 'info_creation_paragraphe' => '(Per crear de paragrafes, basta que daissetz de linhas vu&egrave;jas.)',
@@ -677,7 +677,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_moyenne' => 'mejana:',
 'info_multi_articles' => 'Activar lo menut de lenga pels articles?',
 'info_multi_cet_article' => 'Lenga d\'aqueste article:',
-'info_multi_cette_rubrique' => '<NEW> Lenga emplegada dins aquesta rubrica:',
+'info_multi_cette_rubrique' => 'Lenga emplegada dins aquesta rubrica:',
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Volgatz seleccionar &ccedil;ai sota las lengas que son a posita dels redactors de v&ograve;stre sit.
   Las lengas ja emplegadas dins v&ograve;stre sit (afichadas primi&egrave;ras) se p&ograve;don pas desactivar.',
@@ -1009,7 +1009,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Gerir lo forum public d\'aquel article',
 'lien_icones_interface' => 'Las ic&ograve;nas de l\'interf&agrave;cia son de <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
-'lien_liberer' => '<MODIF> liberar',
+'lien_liberer' => 'liberar',
 'lien_liberer_tous' => 'liberar aqueles articles',
 'lien_mise_a_jour_syndication' => 'Actualizar ara',
 'lien_modifer_date' => 'Modificar la data',
@@ -1061,7 +1061,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'login_login2' => 'Login (identificant de connexion al sit)&nbsp;:',
 'login_login_pass_incorrect' => '(Login o mot de santa Clara incorr&egrave;cte.)',
 'login_motpasseoublie' => 'mot&nbsp;de&nbsp;santa&nbsp;Clara&nbsp;oblidat&nbsp;?',
-'login_non_securise' => '<MODIF> Atencion, aquel formulari es pas securizat.
+'login_non_securise' => 'Atencion, aquel formulari es pas securizat.
     Se vol&egrave;tz pas que v&ograve;stre mot de santa Clara si&aacute;
    interceptat sul ret, volgatz activar Javascript 
    dins v&ograve;stre navigador e',
@@ -1241,7 +1241,7 @@ e vos tornar connectar al sit.
  incluses <i>totes</i> los acc&egrave;sses redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e mai un primi&egrave;r acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquela opcion vos permet de salvagardar lo contengut de la basa dins un fichi&egrave;r que ser&agrave; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
 Oblidetz pas tanpauc de recuperar l\'integralitat del repert&ograve;ri <i>IMG/</i>, que conten los imatges e los documents utilizats dins los articles e rubricas.',
-'texte_admin_tech_02' => '<MODIF> Atencion: aquela salvagarda se poir&agrave; restaurar
+'texte_admin_tech_02' => 'Atencion: aquela salvagarda se poir&agrave; restaurar
  SONQUE dins un sit installat amb la meteissa version d\'SPIP. L\'error
  que consist&iacute;s a far una salvagarda abans de far una actualizacion d\'SPIP es correnta... Per mai de detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz causir de salvagardar lo fichi&egrave;r jos forma comprimida, pet tal
