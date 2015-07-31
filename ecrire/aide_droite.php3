@@ -68,7 +68,9 @@ table.spip td {
 
 --></style>
 </head>
-<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"<?php
+<?php
+
+echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"';
 if ($spip_lang_rtl)
 	echo " dir='rtl'";
 echo ">";
@@ -92,6 +94,9 @@ if (!$aide) {
 $html = join('', file($fichier_aide));
 $html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
 $html = substr($html, 0, strpos($html, "</$aide>"));
+
+if (!$html)
+	$html = _T('aide_non_disponible');
 
 // Localisation des images de l'aide (si disponibles)
 $suite = $html;
