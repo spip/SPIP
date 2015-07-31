@@ -253,6 +253,7 @@ function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, 
 	$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 	// et on l'enregistre sur le disque
 	if ($chemin_cache
+	AND is_array($page)
 	AND $page['entetes']['X-Spip-Cache'] > 0){
 		$cacher = charger_fonction('cacher', 'public');
 		$lastinclude = time();
