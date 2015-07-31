@@ -1598,7 +1598,7 @@ function affdate_heure($numdate) {
  * `$horaire='oui'` ou `true` permet d'afficher l'horaire,
  * toute autre valeur n'indique que le jour
  * `$forme` peut contenir une ou plusieurs valeurs parmi
- *  - `abbr` (afficher le nom des jours en abbrege)
+ *  - `abbr` (afficher le nom des jours en abrege)
  *  - `hcal` (generer une date au format hcal)
  *  - `jour` (forcer l'affichage des jours)
  *  - `annee` (forcer l'affichage de l'annee)
@@ -1607,7 +1607,7 @@ function affdate_heure($numdate) {
  * @param string $date_fin
  * @param string $horaire
  * @param string $forme
- *   abbr pour afficher le nom du jour en abbrege (Dim. au lieu de Dimanche)
+ *   abbr pour afficher le nom du jour en abrege (Dim. au lieu de Dimanche)
  *   annee pour forcer l'affichage de l'annee courante
  *   jour pour forcer l'affichage du nom du jour
  *   hcal pour pour avoir un markup microformat abbr
