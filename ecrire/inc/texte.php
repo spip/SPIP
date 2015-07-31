@@ -18,7 +18,7 @@ include_spip('inc/lien');
 
 // init du tableau principal des raccourcis
 
-global $spip_raccourcis_typo, $class_spip_plus, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique;
+global $spip_raccourcis_typo, $class_spip_plus, $ligne_horizontale, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique, $ouvre_ref, $ferme_ref, $ouvre_note, $ferme_note;
 
 
 if (is_null($ligne_horizontale)) $ligne_horizontale =  "\n<hr$class_spip_plus />\n";
