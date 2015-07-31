@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
+include_spip('base/abstract_sql');
 
 /*
 
@@ -35,27 +36,55 @@ Variante 'qs' (experimentale) : ce systeme fonctionne en "Query-String",
 c'est-a-dire sans utilisation de .htaccess ; les adresses sont de la forme
 "/?Mon-titre-d-article"
 	< ?php $type_urls = 'qs'; ? >
-
 */
 
 define ('_terminaison_urls_propres', '');
 define ('_debut_urls_propres', '');
 
 // Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
-// indiquer la table ou les chercher (articles, auteurs etc).
-// Maintenant que ce n'est plus necessaire, elles ne sont la que pour eviter
-// d'encombrer l'unique table des URL avec des doublons quasi identiques.
-// Si ce n'est pas un probleme, ou si le site est nouveau, 
-// les definir a '' produira des URL plus jolies.
+// indiquer la table ou les chercher (articles, auteurs etc),
+// et elles etaient retirees par les preg_match dans la fonction ci-dessous.
+// Elles sont a present definies a "" pour avoir des URL plus jolies
+// mais les preg_match restent necessaires pour gerer les anciens signets.
 
+/*
 define ('_marqueur_rubrique', '-');
 define ('_marqueur_auteur', '_');
 define ('_marqueur_breve', '+');
 define ('_marqueur_site', '@');
 define ('_marqueur_mot_d', '+-');
 define ('_marqueur_mot_f', '-+');
+*/
+define ('_marqueur_rubrique', '');
+define ('_marqueur_auteur', '');
+define ('_marqueur_breve', '');
+define ('_marqueur_site', '');
+define ('_marqueur_mot_d', '');
+define ('_marqueur_mot_f', '');
 
-include_spip('base/abstract_sql');
+// Retire les marqueurs de type dans une URL propre ancienne maniere
+
+function retirer_marqueurs_url_propre($url_propre)
+{
+	if (preg_match(',^\+\-(.*?)\-\+$,', $url_propre, $regs)) {
+		return $regs[1];
+	}
+	else if (preg_match(',^-(.*?)-?$,', $url_propre, $regs)) {
+		return $regs[1];
+	}
+	else if (preg_match(',^\+(.*?)\+?$,', $url_propre, $regs)) {
+		return $regs[1];
+	}
+	else if (preg_match(',^_(.*?)_?$,', $url_propre, $regs)) {
+		return $regs[1];
+	}
+	else if (preg_match(',^@(.*?)@?$,', $url_propre, $regs)) {
+		return $regs[1];
+	}
+	// les articles n'ont pas de marqueur
+	return $url_propre;
+}
+
 
 // http://doc.spip.org/@_generer_url_propre
 function _generer_url_propre($type, $id_objet) {
@@ -241,10 +270,10 @@ function generer_url_document($id_document, $args='', $ancre='') {
 	return generer_url_document_dist($id_document, $args, $ancre);
 }
 
-// http://doc.spip.org/@recuperer_parametres_url
-function recuperer_parametres_url(&$fond, $url) {
+// retrouve le fond et les parametres d'une URL propre
+function urls_propres_dist(&$fond, $url) {
 	global $contexte;
-	$id_objet = 0;
+	$id_objet = $type = 0;
 
 	// Migration depuis anciennes URLs ?
 	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -293,11 +322,10 @@ function recuperer_parametres_url(&$fond, $url) {
 		$url_propre = preg_replace(',[?].*,', '', $url);
 	}
 	// Mode Query-String ?
-	$adapter_le_fond = false;
+
 	if (!$url_propre
 	AND preg_match(',([?])([^=/?&]+)(&.*)?$,', $GLOBALS['REQUEST_URI'], $r)) {
 		$url_propre = $r[2];
-		$adapter_le_fond = true;
 	}
 
 	if (!$url_propre) return;
@@ -305,25 +333,9 @@ function recuperer_parametres_url(&$fond, $url) {
 	// Compatilibite avec propres2
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
 
-	// Retirer les marqueurs de type dans l'URL propre
-	// Detecter les differents types d'objets demandes
-	// Note: on pourrait evacuer ca maintenant qu'on a une seule table
-	if (preg_match(',^\+\-(.*?)\-\+$,', $url_propre, $regs)) {
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^-(.*?)-?$,', $url_propre, $regs)) {
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^\+(.*?)\+?$,', $url_propre, $regs)) {
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^_(.*?)_?$,', $url_propre, $regs)) {
-		$url_propre = $regs[1];
-	}
-	else if (preg_match(',^@(.*?)@?$,', $url_propre, $regs)) {
-		$url_propre = $regs[1];
-	}
-	// les articles n'ont pas de marqueur
+	// Compatibilite avec les anciennes URL propres
+
+	$url_propre = retirer_marqueurs_url_propre($url_propre);
 
 	$row = sql_fetch(spip_query("SELECT id_objet, type FROM spip_urls WHERE url=" . _q($url_propre)));
 
@@ -333,14 +345,10 @@ function recuperer_parametres_url(&$fond, $url) {
 		$contexte[$col_id] = $row['id_objet'];
 	}
 
-	// En mode Query-String, on fixe ici le $fond utilise
-	if ($adapter_le_fond) {
-		$fond = $type;
-		if ($type == 'syndic') $fond = 'site';
+	if ($type AND ($adapter_le_fond OR $fond='type_urls')) {
+
+	$fond =  ($type == 'syndic') ?  'site' : $type;
 	}
-
-	return;
 }
- }
-
+} // function_exists
 ?>

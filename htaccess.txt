@@ -79,23 +79,7 @@ RewriteRule ^spip_rss\.php3?$	spip.php?action=rss [QSA,L]
 # dans ecrire/mes_options.php
 # (fichier associe : ecrire/urls/propres.php)
 
-# Les mots-cles
-RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$	spip.php?page=mot [QSA,E=url_propre:$0,L]
-
-# Les breves
-RewriteRule ^\+[^/\.]+\+?(\.html)?$ 	spip.php?page=breve [QSA,E=url_propre:$0,L]
-
-# Les rubriques
-RewriteRule ^-[^/\.]+-?(\.html)?$	spip.php?page=rubrique [QSA,E=url_propre:$0,L]
-
-# les auteurs
-RewriteRule ^_[^/\.]+_?(\.html)?$	spip.php?page=auteur [QSA,E=url_propre:$0,L]
-
-# Les sites
-RewriteRule ^@[^/\.]+@?(\.html)?$	spip.php?page=site [QSA,E=url_propre:$0,L]
-
-# Les articles (en dernier car expression plus "large")
-RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=article [QSA,E=url_propre:$0,L]
+RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=type_urls [QSA,E=url_propre:$0,L]
 
 # Fin URLs "propres" et "propres2"
 ###

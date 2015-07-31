@@ -23,6 +23,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '.html');
 
-include_spip('urls/propres');
+function urls_propres2_dist(&$fond, $url) {
+	$f = charger_fonction('propres', 'urls', true);
+	if ($f) $f($fond, $url);
+}
 
 ?>

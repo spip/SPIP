@@ -31,8 +31,6 @@ if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 	include_once(_DIR_TMP."charger_plugins_fonctions.php");
 }
 
-charger_generer_url(); # pour recuperer_parametres_url
-
 //
 // Contexte : lors du calcul d'une page spip etablit le contexte a partir
 // des variables $_GET et $_POST, et leur ajoute la date
@@ -289,16 +287,25 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	// distinguer le premier appel des appels par inclusion
 	if (!is_array($local)) {
-		global $contexte;
-		// ATTENTION, gestion des URLs personnalises (propre etc):
+		include_spip('inc/filtres'); // pour normaliser_date
+
+		// ATTENTION, gestion des URLs transformee par le htaccess
+		// en appelant la fonction nommee urls_$type_urls
 		// 1. $contexte est global car cette fonction le modifie.
 		// 2. $fond est passe par reference, pour la meme raison
 		// Bref,  les URL dites propres ont une implementation sale.
 		// Interdit de nettoyer, faut assumer l'histoire.
-		include_spip('inc/filtres'); // pour normaliser_date
+		global $contexte;
 		$contexte = calculer_contexte();
-		if (function_exists("recuperer_parametres_url")) {
-			recuperer_parametres_url($fond, nettoyer_uri());
+		$f = charger_fonction($GLOBALS['type_urls'], 'urls', true);
+		if (!$f) {
+			// compatibilite < 1.9.3
+			charger_generer_url();
+			if (function_exists('recuperer_parametres_url'))
+				$f = 'recuperer_parametres_url';
+		}
+		if ($f) {
+			$f($fond, nettoyer_uri());
 			// remettre les globales (bouton "Modifier cet article" etc)
 			foreach ($contexte as $var=>$val) {
 				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;

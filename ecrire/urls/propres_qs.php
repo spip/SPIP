@@ -20,9 +20,9 @@ mode "Query-String", sans .htaccess ;
 
 	<http://mon-site-spip/?-Rubrique->
 
-Attention : le mode 'propres-qs' est moins fonctionnel que le mode 'propres' ou
+Attention : le mode 'propres_qs' est moins fonctionnel que le mode 'propres' ou
 'propres2'. Si vous pouvez utiliser le .htaccess, ces deux derniers modes sont
-preferables au mode 'propres-qs'.
+preferables au mode 'propres_qs'.
 
 */
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
@@ -31,6 +31,9 @@ if (!defined('_terminaison_urls_propres'))
 
 define ('_debut_urls_propres', './?');
 
-include_spip('urls/propres');
 
+function urls_propres_qs_dist(&$fond, $url) {
+	$f = charger_fonction('propres', 'urls', true);
+	if ($f) $f($fond, $url);
+}
 ?>

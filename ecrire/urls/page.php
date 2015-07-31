@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
-
 ####### modifications possibles dans ecrire/mes_options
 # on peut indiquer '.html' pour faire joli
 define ('_terminaison_urls_page', '');
@@ -69,8 +68,8 @@ function generer_url_document($id_document, $args='', $ancre='') {
 	return generer_url_document_dist($id_document);
 }
 
-// http://doc.spip.org/@recuperer_parametres_url
-function recuperer_parametres_url(&$fond, $url) {
+// retrouve le fond et les parametres d'une URL abregee
+function urls_page_dist(&$fond, $url) {
 	global $contexte;
 
 	// Ce bloc gere les urls page et la compatibilite avec les "urls standard"
