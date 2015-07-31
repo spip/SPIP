@@ -346,7 +346,7 @@ function phraser_criteres($params, &$result) {
 			else {
 			  preg_match("/^([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
 			  $op = $m[1];
-			  $v[1][0]->texte = $m[2];
+			  if ($m[2]) $v[1][0]->texte = $m[2]; else array_shift($v[1]);
 			}
 			array_shift($v);
 			$crit = new Critere;
@@ -475,8 +475,9 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 				       strlen(BALISE_PRE_BOUCLE),
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
-		  if (!($p = strpos($milieu, BALISE_BOUCLE . $id_boucle . "(")))
+		  if (!ereg(BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(", $milieu, $r))
 		    erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $id_boucle);
+		  $p = strpos($milieu, $r[0]);
 		  $result->avant = substr($milieu, $k+1, $p-$k-1);
 		  $milieu = substr($milieu, $p+strlen($id_boucle)+strlen(BALISE_BOUCLE));
 		}
