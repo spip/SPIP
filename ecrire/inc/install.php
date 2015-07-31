@@ -281,7 +281,7 @@ function install_select_serveur()
 }
 
 // http://doc.spip.org/@install_connexion_form
-function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
+function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape, $jquery=true)
 {
 	$server_db = (is_string($predef[0])) ? $predef[0] : '';
 
@@ -293,7 +293,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
 
-	. http_script('',  'jquery.js')
+	. ($jquery?http_script('',  'jquery.js'):'')
 	. http_script('
 		$(document).ready(function() {
 			$("input[type=hidden][name=server_db]").each(function(){
