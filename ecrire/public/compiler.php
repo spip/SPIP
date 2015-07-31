@@ -166,22 +166,14 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		$corps .= "
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle) {
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;\n";
-	
+
 	// Calculer les invalideurs si c'est une boucle non constante et si on
 	// souhaite invalider ces elements
-	if (!$constant AND $primary AND ($primary == 'id_forum'
-	OR in_array($primary, explode(',', $GLOBALS['invalider_caches']))))
-		$corps .= "\n\t\t\$Cache['$primary'][intval(" .
-		  (($primary != 'id_forum')  ? 
-		   index_pile($id_boucle, $primary, $boucles) :
-		   ("calcul_index_forum(" . 
-		// Retournera 4 [$SP] mais force la demande du champ a MySQL
-		    index_pile($id_boucle, 'id_article', $boucles) . ',' .
-		    index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
-		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
-		    index_pile($id_boucle, 'id_syndic', $boucles) .
-		    ")")) .
-		  ")] = 1; // invalideurs\n";
+	if (!$constant AND $primary) {
+		include_spip('inc/invalideur');
+		if (function_exists($i = 'calcul_invalideurs'))
+			$corps = $i($corps, $primary, $boucles, $id_boucle);
+	}
 
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
 	// et puis faire un [] plutot qu'un "','."
