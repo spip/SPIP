@@ -82,11 +82,11 @@ function f_boite_infos($flux) {
 function f_afficher_blocs_ecrire($flux) {
 	if (is_string($fond=$flux['args']['fond'])) {
 		if (strncmp($fond,"prive/squelettes/navigation/",28)==0)
-			$flux['data'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']));
+			$flux['data']['texte'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		if (strncmp($fond,"prive/squelettes/extra/",23)==0)
-			$flux['data'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']));
+			$flux['data']['texte'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 		if (strncmp($fond,"prive/squelettes/contenu/",25)==0)
-			$flux['data'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']));
+			$flux['data']['texte'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']['texte']));
 	}
 
 	return $flux;
