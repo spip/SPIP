@@ -4,6 +4,19 @@ include ("inc.php3");
 
 include_ecrire ("inc_config.php3");
 
+if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	echo _T('avis_non_acces_page');
+	fin_page();
+	exit;
+}
+
+init_config();
+if ($changer_config == 'oui') {
+	appliquer_modifs_config();
+}
+
+lire_metas();
+
 function mySel($varaut,$variable){
 		$retour= " VALUE=\"$varaut\"";
 
@@ -25,20 +38,6 @@ barre_onglets("configuration", "interactivite");
 debut_gauche();
 
 debut_droite();
-
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo _T('avis_non_acces_page');
-	fin_page();
-	exit;
-}
-
-init_config();
-if ($changer_config == 'oui') {
-	appliquer_modifs_config();
-}
-
-lire_metas();
-
 
 echo "<form action='config-contenu.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
