@@ -123,10 +123,10 @@ function sandbox_filtrer_squelette($skel, $corps, $filtres){
 	if ($skel['process_ins'] == 'php')
 		$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS','echapper_php_callback', $corps);
 
-	foreach($series_filtres as $filtes){
+	foreach($series_filtres as $filtres){
 		if (count($filtres))
 			foreach ($filtres as $filtre) {
-				if ($f = chercher_filtre($filtre))
+				if ($filtre AND $f = chercher_filtre($filtre))
 					$corps = $f($corps);
 			}
 	}
