@@ -239,7 +239,15 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 		$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 
 		if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
-			spip_abstract_insert('spip_signatures', "(id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut)", "($id_article, NOW(), " . _q($nom_email) . ", " . _q($adresse_email) . ", " . _q($nom_site) . ", " . _q($url_site) . ", " . _q($message) . ", '$passw')");
+			$id_signature = spip_abstract_insert('spip_signatures', "(id_article, date_time, statut)", "($id_article, NOW(), '$passw')");
+			include_spip('inc/modifier');
+			revision_signature($id_signature, array(
+				'nom_email' => $nom_email,
+				'ad_email' => $adresse_email,
+				'message' => $message,
+				'nom_site' => $nom_site,
+				'url_site' => $url_site
+			));
 			$texte = _T('form_pet_envoi_mail_confirmation');
 		}
 		else {

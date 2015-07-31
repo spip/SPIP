@@ -214,6 +214,14 @@ function autoriser_modifier_forum_dist($faire, $type, $id, $qui, $opt) {
 		false;
 }
 
+// Modifier une signature ?
+// = jamais !
+// http://doc.spip.org/@autoriser_modifier_signature_dist
+function autoriser_modifier_signature_dist($faire, $type, $id, $qui, $opt) {
+	return
+		false;
+}
+
 
 // Moderer la petition ?
 // = modifier l'article correspondant
