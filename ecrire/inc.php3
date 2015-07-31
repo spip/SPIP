@@ -1,8 +1,8 @@
 <?php
 
-
+// SPIP est-il installe ?
 if (!@file_exists("inc_connect.php3")) {
-	@header("Location: install.php3");
+	header("Location: install.php3");
 	exit;
 }
 
