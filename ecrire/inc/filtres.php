@@ -854,9 +854,20 @@ function date_relativecourt($date, $decalage_maxi=0) {
 	return $retour;
 }
 
-// http://doc.spip.org/@affdate_base
-function affdate_base($numdate, $vue, $param = '') { 
-	global $spip_lang;
+/**
+ * Formatage humain de la date $numdate selon le format $vue
+ * http://doc.spip.org/@affdate_base
+ *
+ * @param $numdate
+ * @param $vue
+ * @param array $options
+ *   param : 'abbr' ou 'initiale' permet d'afficher les jours au format court ou initiale
+ *   annee_courante : permet de definir l'annee de reference pour l'affichage des dates courtes
+ * @return mixed|string
+ */
+function affdate_base($numdate, $vue, $options = array()) {
+	if (is_string($options))
+		$options = array('param'=>$options);
 	$date_array = recup_date($numdate, false);
 	if (!$date_array) return;
 	list($annee, $mois, $jour, $heures, $minutes, $secondes)= $date_array;
@@ -901,14 +912,14 @@ function affdate_base($numdate, $vue, $param = '') {
 
 	case 'court':
 		if ($avjc) return $annee;
-		$a = date('Y');
+		$a = ((isset($options['annee_courante']) AND $options['annee_courante'])?$options['annee_courante']:date('Y'));
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
 		if ($annee != $a) return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>ucfirst($nommois), 'annee'=>$annee));
 		return _T('date_fmt_jour_mois', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 
 	case 'jourcourt':
 		if ($avjc) return $annee;
-		$a = date('Y');
+		$a = ((isset($options['annee_courante']) AND $options['annee_courante'])?$options['annee_courante']:date('Y'));
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
 		if ($annee != $a) return _T('date_fmt_jour_mois_annee', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 		return _T('date_fmt_jour_mois', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
@@ -939,7 +950,7 @@ function affdate_base($numdate, $vue, $param = '') {
 			return '';
 		$nom = mktime(1,1,1,$mois,$njour,$annee);
 		$nom = 1+date('w',$nom);
-		$param = $param ? '_'.$param : '';
+		$param = ((isset($options['param']) AND $options['param']) ? '_'.$options['param'] : '');
 		return _T('date_jour_'.$nom.$param);
 
 	case 'mois_annee':
@@ -998,13 +1009,13 @@ function affdate($numdate, $format='entier') {
 }
 
 // http://doc.spip.org/@affdate_court
-function affdate_court($numdate) {
-	return affdate_base($numdate, 'court');
+function affdate_court($numdate, $annee_courante=null) {
+	return affdate_base($numdate, 'court', array('annee_courante'=>$annee_courante));
 }
 
 // http://doc.spip.org/@affdate_jourcourt
-function affdate_jourcourt($numdate) {
-	return affdate_base($numdate, 'jourcourt');
+function affdate_jourcourt($numdate, $annee_courante=null) {
+	return affdate_base($numdate, 'jourcourt', array('annee_courante'=>$annee_courante));
 }
 
 // http://doc.spip.org/@affdate_mois_annee
