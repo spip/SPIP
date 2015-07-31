@@ -1397,6 +1397,7 @@ function balise_AUTORISER_dist($p) {
 
 // Appelle la fonction info_plugin
 // Afficher des informations sur les plugins dans le site public
+// http://doc.spip.org/@balise_PLUGIN_dist
 function balise_PLUGIN_dist($p) {
 	$plugin = interprete_argument_balise(1,$p);
 	$plugin = isset($plugin) ? str_replace('\'', '"', $plugin) : '""';

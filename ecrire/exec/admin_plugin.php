@@ -180,6 +180,7 @@ function affiche_les_plugins($liste_plugins, $liste_plugins_actifs, $format='arb
 	") . $res;
 }
 
+// http://doc.spip.org/@affiche_block_initiale
 function affiche_block_initiale($initiale,$block,$block_actif){
 	if (strlen($block)){
 		return "<li>"
