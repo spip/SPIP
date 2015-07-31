@@ -63,7 +63,7 @@ function install_fin_html() {
 function minipres($titre='', $corps="", $onload='')
 {
 	if (!$titre) {
-		if (!_request('var_ajaxcharset'))
+		if (!_AJAX)
 			http_status(403);
 		if (!$titre = _request('action')
 		AND !$titre = _request('exec')
@@ -79,7 +79,7 @@ function minipres($titre='', $corps="", $onload='')
 		spip_log($GLOBALS['visiteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 
-	if (!_request('var_ajaxcharset'))
+	if (!_AJAX)
 		return install_debut_html($titre, $onload)
 		. $corps
 		. install_fin_html();
@@ -88,7 +88,6 @@ function minipres($titre='', $corps="", $onload='')
 		$url = self('&',true);
 		foreach ($_POST as $v => $c)
 			$url = parametre_url($url, $v, $c, '&');
-		$url = parametre_url($url,'var_ajaxcharset','','&');
 		echo ajax_retour("<div>".$titre . redirige_formulaire($url)."</div>",false);
 	}
 }

@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
@@ -50,9 +50,9 @@ function exec_articles_forum_dist()
 	. '<br />'
 	. afficher_forum($res,"", '', $id_article);
 
-	if (_request('var_ajaxcharset'))
+	if (_AJAX) {
 		ajax_retour($mess);
-	else {
+	} else {
 
 	 	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 

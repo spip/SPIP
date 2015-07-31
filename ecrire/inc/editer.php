@@ -375,7 +375,7 @@ function signaler_conflits_edition($conflits, $redirect='') {
 		</form>\n";
 
 		// pour les documents, on est probablement en ajax : il faut ajaxer
-		if (_request('var_ajaxcharset'))
+		if (_AJAX)
 			$redirect .= '<script type="text/javascript">'
 			.'setTimeout(function(){$("#'.$id.'")
 			.ajaxForm({target:$("#'.$id.'").parent()});

@@ -343,8 +343,6 @@ function AjaxSqueezeNode(trig, target, f, event)
 	}
 
 	if (typeof(trig) == 'string') {
-		i = trig.split('?');
-		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
 		// laisser le choix de la touche enfoncee au moment du clic
 		// car beaucoup de systemes en prenne une a leur usage
 		if  (valid) {
@@ -382,7 +380,6 @@ function AjaxSqueezeNode(trig, target, f, event)
 			callback.apply(this,[res,status]);
 		},
 		"beforeSubmit":function (vars) {
-			vars.push({"name":"var_ajaxcharset","value":"utf-8"});
 			if (valid)
 				vars.push({"name":"transformer_xml","value":"valider_xml"});
 			return true;

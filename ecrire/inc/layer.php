@@ -17,7 +17,7 @@ $numero_block = array();
 
 $compteur_block = 0;
 
-if (_request('var_ajaxcharset') || _request("iframe")=="iframe")
+if (_AJAX)
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
 // http://doc.spip.org/@cadre_depliable

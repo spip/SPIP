@@ -35,7 +35,7 @@ jQuery.fn.deplie = function(){
 	jQuery(this).children('li').children('a.ajax').each(function(){
 		jQuery(this).before("<div>"+ajax_image_searching+"</div>");
 		var id = jQuery(this).parent().parent().attr('id');
-		jQuery(this).parent().parent().load(jQuery(this).attr('href')+"&var_ajaxcharset=utf-8",function(){jQuery("#"+id).set_expandImage().set_droppables();jQuery.recallDroppables();});
+		jQuery(this).parent().parent().load(jQuery(this).attr('href'),function(){jQuery("#"+id).set_expandImage().set_droppables();jQuery.recallDroppables();});
 	});
 	recall = true;
 	jQuery.recallDroppables();
@@ -50,7 +50,7 @@ jQuery.fn.bascule = function() {
 		subbranch.children('li').children('a.ajax').each(function(){
 			jQuery(this).before("<div>"+ajax_image_searching+"</div>");
 			var id = jQuery(this).parent().parent().attr('id');
-			jQuery(this).parent().parent().load(jQuery(this).attr('href')+"&var_ajaxcharset=utf-8",function(){jQuery("#"+id).set_expandImage().set_droppables();});
+			jQuery(this).parent().parent().load(jQuery(this).attr('href'),function(){jQuery("#"+id).set_expandImage().set_droppables();});
 		});
 	} else {
 		subbranch.hide();

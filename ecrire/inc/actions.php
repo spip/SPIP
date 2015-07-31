@@ -32,10 +32,6 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // revenant a l'envoyeur $script d'arguments $args.
 // Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
-// Precise le charset de l'envoyeur avec la variable d'url var_ajaxcharset
-// qui sert aussi a index.php de savoir que la requete est en Ajax.
-// Attention, la redirection doit propager cette variable, 
-// i.e. la mettre dans la 2e URL, et avant l'ancre de celle ci.
 
 // http://doc.spip.org/@ajax_action_auteur
 function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
@@ -70,7 +66,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			return redirige_action_auteur($action,
 				$id,
 				$action,
-				"var_ajaxcharset=utf-8&script=$script$args_ajax",
+				"script=$script$args_ajax",
 				$corps,
 				(" method='post'\nonsubmit="
 				 . ajax_action_declencheur('this', $ancre, $fct_ajax)));
@@ -93,7 +89,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 		$ajax = redirige_action_auteur($action,
 			$id,
 			$action,
-			"var_ajaxcharset=utf-8&script=$script$args_ajax");
+			"script=$script$args_ajax");
 
 		$cli = array_shift($corps);
 		return "<a href='$href'\nonclick="
@@ -155,7 +151,7 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 		return redirige_action_auteur($action,
 			$arg,
 			$action,
-			"var_ajaxcharset=utf-8&script=$retour$args_ajax",
+			"script=$retour$args_ajax",
 			$corps ,
 			" method='post' onsubmit=" . ajax_action_declencheur('this', $ancre));
 	}
@@ -189,9 +185,9 @@ function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
 function ajax_action_greffe($fonction, $id, $corps)
 {
 	$idom = $fonction.(strlen($id)?"-$id":"");
-	return _request('var_ajaxcharset')
-	? "$corps"
-	: "\n<div id='$idom' class='ajax-action $fonction'>$corps\n</div>\n";
+	return _AJAX
+		? "$corps"
+		: "\n<div id='$idom' class='ajax-action $fonction'>$corps\n</div>\n";
 }
 
 // http://doc.spip.org/@ajax_retour

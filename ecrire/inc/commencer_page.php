@@ -54,7 +54,7 @@ function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	<script type="text/javascript"><!--
 	$(document).ready(function(){
 		verifForm();
-		$("#page")
+		$("#page,#bandeau-principal")
 		.mouseover(function(){
 			if (window.changestyle) changestyle("garder-recherche");
 		});

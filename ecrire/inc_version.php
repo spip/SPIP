@@ -65,7 +65,6 @@ define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 define('_NOM_CONFIG', 'mes_options');
 
 // Son emplacement absolu si on le trouve
-
 if (@file_exists($f = _DIR_RESTREINT . _NOM_CONFIG . '.php')
 OR (_EXTENSION_PHP
 	AND @file_exists($f = _DIR_RESTREINT . _NOM_CONFIG . _EXTENSION_PHP))

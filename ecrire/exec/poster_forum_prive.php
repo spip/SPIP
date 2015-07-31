@@ -26,8 +26,7 @@ function exec_poster_forum_prive_dist()
 		    _request('texte'),
 		    _request('modif_forum'),
 		    _request('nom_site'),
-		    _request('url_site'),
-		    _request('var_ajaxcharset'));
+		    _request('url_site'));
 }
 
 // http://doc.spip.org/@forum_envoi
@@ -40,8 +39,7 @@ function forum_envoi(
 		     $texte,
 		     $modif_forum,
 		     $nom_site,
-		     $url_site,
-		     $ajax)
+		     $url_site)
 {
 	if ($modif_forum == 'fin') {
 		include_spip('inc/headers');
@@ -53,7 +51,7 @@ function forum_envoi(
 		$forum_envoi = charger_fonction('forum_envoi', 'inc');
 		$forum_envoi = $forum_envoi($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site);
 
-		if ($ajax) {
+		if (_AJAX) {
 			ajax_retour($forum_envoi);
 		} else {
 		$titre = $script == 'message' ? _T('onglet_messagerie') : _T('titre_cadre_forum_interne');

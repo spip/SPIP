@@ -38,9 +38,9 @@ function exec_calendrier_dist()
 
   $r = http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')) . "#$ancre");
 
-  if (_request('var_ajaxcharset')) 
+  if (_AJAX) {
     ajax_retour($r);
-  else {
+  } else {
 	  $commencer_page = charger_fonction('commencer_page', 'inc');
 	  echo $commencer_page($titre, "accueil", "calendrier");
 	  echo debut_grand_cadre(true);

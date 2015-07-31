@@ -18,7 +18,6 @@ include_spip('inc/barre');
 // http://doc.spip.org/@inc_forum_envoi_dist
 function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site) {
 
-	$ajax = _request('var_ajaxcharset');
 	$id_parent= intval($id_parent);
 	$id = intval($id);
 	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_parent");
@@ -47,7 +46,7 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 		} else 	$titre_message = _T('texte_nouveau_message');
 	}
 
-	$h = $ajax ? '' : generer_url_ecrire($script, $retour);
+	$h = _AJAX ? '' : generer_url_ecrire($script, $retour);
 
 	$form = forum_envoi_formulaire($id, $h, $statut, $texte, $titre_message, $nom_site, $url_site);
 
@@ -78,7 +77,7 @@ $form
 	. "' /></div>"
 	. fin_cadre_formulaire(true);
 
-	if (_request('var_ajaxcharset'))
+	if (_AJAX)
 	  return ajax_action_post('poster_forum_prive',$cat, $script, $args, $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
 	else return redirige_action_auteur('poster_forum_prive',$cat, $script, $args, $corps, "\nmethod='post' id='formulaire'");
 }
