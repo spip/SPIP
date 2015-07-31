@@ -52,7 +52,7 @@ function protege_champ($texte){
  * Teste si un formulaire demandé possède un squelette pour l'afficher
  *
  * @see trouver_fond()
- * @param string
+ * @param string $form
  *     Nom du formulaire
  * @return string|bool
  *     - string : chemin du squelette
