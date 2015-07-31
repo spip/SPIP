@@ -123,25 +123,26 @@ function fin_cadre_relief($return = false){
 
 function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
 	global $spip_display;
+	$img_pack = $GLOBALS['flag_ecrire'] ? 'img_pack' : 'ecrire/img_pack';
 
 	if ($spip_display != 1){	
 		if (strlen($icone)<3) $icone = "rien.gif";
 			$retour_aff.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
 			$retour_aff.= "<tr>";
-			$retour_aff.= "<td width='5'><img src='img_pack/cadre-hg.gif' alt='/' width='5' height='24'></td>";
-			$retour_aff.= "<td background='img_pack/cadre-h.gif'>";
+			$retour_aff.= "<td width='5'><img src='$img_pack/cadre-hg.gif' alt='/' width='5' height='24'></td>";
+			$retour_aff.= "<td background='$img_pack/cadre-h.gif'>";
 			if (strlen($fonction)>3) {
-				$retour_aff.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='' width='24' height='24'></td></tr></table>";
+				$retour_aff.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='$img_pack/$icone'><img src='$img_pack/$fonction' alt='' width='24' height='24'></td></tr></table>";
 			}
 			else {
-				$retour_aff.= "<img src='img_pack/$icone' alt='' width='24' height='24'>";
+				$retour_aff.= "<img src='$img_pack/$icone' alt='' width='24' height='24'>";
 			}
 			$retour_aff.= "</td>";
-			$retour_aff.= "<td width='5'><img src='img_pack/cadre-hd.gif' alt='\' width='5' height='24'></td>";
+			$retour_aff.= "<td width='5'><img src='$img_pack/cadre-hd.gif' alt='\' width='5' height='24'></td>";
 			$retour_aff.= "</tr>";
 	
 		$retour_aff.= "<TR>";
-		$retour_aff.= "<td background='img_pack/cadre-g.gif' width='5'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
+		$retour_aff.= "<td background='$img_pack/cadre-g.gif' width='5'><img src='$img_pack/rien.gif' alt='' width='5' height='5'></td>";
 		$retour_aff.= "<TD WIDTH=\"100%\" bgcolor='#e0e0e0' background=''>";
 		$retour_aff.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD WIDTH=\"100%\">";
 	}
@@ -155,16 +156,18 @@ function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
 
 function fin_cadre_enfonce($return = false){
 	global $spip_display;
+	$img_pack = $GLOBALS['flag_ecrire'] ? 'img_pack' : 'ecrire/img_pack';
+
 	if ($spip_display != 1){	
 		$retour_aff.= "</TD></TR></TABLE>";
 		$retour_aff.= "</TD>";
-		$retour_aff.= "<td background='img_pack/cadre-d.gif' width='5'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
+		$retour_aff.= "<td background='$img_pack/cadre-d.gif' width='5'><img src='$img_pack/rien.gif' alt='' width='5' height='5'></td>";
 		$retour_aff.= "<tr>";
-		$retour_aff.= "<td width='5'><img src='img_pack/cadre-bg.gif' alt='\' width='5' height='5'></td>";
-		$retour_aff.= "<td background='img_pack/cadre-b.gif'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
-		$retour_aff.= "<td width='5'><img src='img_pack/cadre-bd.gif' alt='/' width='5' height='5'></td>";
+		$retour_aff.= "<td width='5'><img src='$img_pack/cadre-bg.gif' alt='\' width='5' height='5'></td>";
+		$retour_aff.= "<td background='$img_pack/cadre-b.gif'><img src='$img_pack/rien.gif' alt='' width='5' height='5'></td>";
+		$retour_aff.= "<td width='5'><img src='$img_pack/cadre-bd.gif' alt='/' width='5' height='5'></td>";
 		$retour_aff.= "</tr>";
-		$retour_aff.= "<tr><td><img src='img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
+		$retour_aff.= "<tr><td><img src='$img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
 		$retour_aff.= "</table>";
 	}
 	else {
