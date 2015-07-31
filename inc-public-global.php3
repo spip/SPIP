@@ -74,7 +74,7 @@ if (!$use_cache OR !defined("_ECRIRE_INC_META_CACHE")) {
 // Authentification
 //
 
-if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
+if ($HTTP_COOKIE_VARS['spip_session'] OR ($PHP_AUTH_USER AND !$ignore_auth_http)) {
 	include_ecrire ("inc_session.php3");
 	verifier_visiteur();
 }
