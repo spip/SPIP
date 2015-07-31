@@ -65,7 +65,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	if (strlen($ids)){
 		$cible = explode(',',$ids);
 		$cible = '#'.implode(",#",$cible);
-		$bouton_id = ($deplie=='incertain')?$bouton_id:"";
+		$bouton_id = ($deplie==='incertain')?$bouton_id:"";
 	}
 	else{
 		$cible = "#$bouton_id + div.bloc_depliable";
@@ -78,7 +78,7 @@ function bouton_block_depliable($texte,$deplie,$ids=""){
 	  ." onmouseover=\"jQuery(this).addClass('hover');\""
 	  ." onmouseout=\"jQuery(this).removeClass('hover');\"")
 	  .">$texte</div>"
-	  . ($deplie=='incertain'?"<script><!--
+	  . ($deplie==='incertain'?"<script><!--
 	  jQuery(document).ready(function(){
 	  if (jQuery('$cible').is(':visible')) $('#$bouton_id').addClass('deplie').removeClass('replie');
 	  });
