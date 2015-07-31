@@ -102,7 +102,7 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 	global $abs_total;
 	global $taille;
 
-	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent='$id_parent' ORDER BY titre";
+	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent='$id_parent' ORDER BY 0+titre, titre";
 	$result=spip_query($query);
 	
 

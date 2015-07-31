@@ -34,7 +34,7 @@ echo "<div>&nbsp;</div>";
 	if ($id_rubrique) {
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
-			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
+			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre";
 			$result=spip_query($query);
 			while($row=spip_fetch_array($result)){
 				$j = $j-1;

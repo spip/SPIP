@@ -209,25 +209,6 @@ echo "<TR><td class='serif'>";
 
 
 
-function enfant($leparent){
-	global $id_parent;
-	global $id_rubrique;
-	global $i;
-	
-	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=spip_query($query);
-
-	while($row=spip_fetch_array($result)){
-		$my_rubrique=$row['id_rubrique'];
-		$titre=$row['titre'];
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">".supprimer_tags($titre)."\n";
-	}
-	$i=$i-1;
-
-}
-
-
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 gros_titre($titre);

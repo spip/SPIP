@@ -80,7 +80,7 @@ debut_html();
 	  if (isset($id_rubrique) && ($id_rubrique !== ''))
  {
 
-		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
+		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre";
 		$result=spip_query($query);
 		if ($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
@@ -100,7 +100,7 @@ debut_html();
 		}
 
 	
-		$query = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY titre";
+		$query = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre";
 		$result=spip_query($query);
 		while($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
