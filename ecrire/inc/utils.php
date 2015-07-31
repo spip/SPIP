@@ -1145,7 +1145,7 @@ function generer_url_action($script, $args="", $no_entities=false , $public = fa
 	// ou non de proceder a l'authentification (cas typique de l'install par exemple)
 	$url = (_DIR_RACINE  AND !$public)
 	  ? generer_url_ecrire(_request('exec'))
-	  :  generer_url_public();
+	  :  generer_url_public('','',false,false);
 	$url = parametre_url($url,'action',$script);
 	if ($args) $url .= quote_amp('&'.$args);
 
