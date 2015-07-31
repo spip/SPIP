@@ -33,7 +33,7 @@ function calcule_header_et_page ($fond) {
 
 	if (strlen($_POST['confirmer_forum']) > 0
 	    OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
-		$f = include_fonction('forum_insert', 'inc');
+		$f = charger_fonction('forum_insert', 'inc');
 		redirige_par_entete($f());
 	}
 
@@ -86,7 +86,7 @@ function afficher_page_globale ($fond) {
 	global $flag_dynamique, $flag_ob, $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
 
-	$fcache = include_fonction('utiliser_cache', 'public');
+	$fcache = charger_fonction('utiliser_cache', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 
@@ -127,7 +127,7 @@ function afficher_page_globale ($fond) {
 		if (!$use_cache)
 			restaurer_globales($page['contexte']);
 		else {
-			$f = include_fonction('localiser_page', 'public');
+			$f = charger_fonction('localiser_page', 'public');
 			$page = $f($fond, '', $chemin_cache);
 			if ($chemin_cache)
 				$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
@@ -197,7 +197,7 @@ function auto_expire($page)
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	global $lastmodified;
 
-	$fcache = include_fonction('utiliser_cache', 'public');
+	$fcache = charger_fonction('utiliser_cache', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
@@ -222,7 +222,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
 	} else {
-		$f = include_fonction('localiser_page', 'public');
+		$f = charger_fonction('localiser_page', 'public');
 		$page = $f($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
 		if ($chemin_cache) 

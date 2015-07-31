@@ -138,16 +138,16 @@ function calculer_champ($p) {
 }
 
 // Cette fonction sert d'API pour demander une balise SPIP sans filtres.
-// Pour une balise nommmee NOM, elle demande a include_fonction de chercher
+// Pour une balise nommmee NOM, elle demande a charger_fonction de chercher
 // s'il existe une fonction balise_NOM ou balise_NOM_dist
 // eventuellement en chargeant le fichier balise/NOM.php.
 // Si ce n'est pas le cas, hormis le cas historique des balise LOGO_*,
 // elle estime que c'est une reference a une colonne de table connue.
-// Les surcharges via include_fonction sont donc possibles.
+// Les surcharges via charger_fonction sont donc possibles.
 
 function calculer_balise($nom, $p) {
 
-	$f = include_fonction($nom, 'balise', true);
+	$f = charger_fonction($nom, 'balise', true);
 
 	if ($f) return $f($p);
 

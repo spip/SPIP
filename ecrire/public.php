@@ -44,7 +44,7 @@ if (defined('_INC_PUBLIC')) {
 
 	// Est-ce une action ?
 	if ($action = _request('action')) {
-		$var_f = include_fonction($action, 'action');
+		$var_f = charger_fonction($action, 'action');
 		$var_f();
 		if ($redirect) redirige_par_entete($redirect);
 		exit;
@@ -160,7 +160,7 @@ if (defined('_INC_PUBLIC')) {
 		if ($xhtml === true) $xhtml ='tidy';
 		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
 
-		if ($f = include_fonction($xhtml, 'inc'))
+		if ($f = charger_fonction($xhtml, 'inc'))
 			$page['texte'] = $f($page['texte']);
 	}
 

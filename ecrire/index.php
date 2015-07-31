@@ -83,7 +83,7 @@ if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 } else {
 	include_spip('inc/session');
-	$var_auth = include_fonction('auth', 'inc');
+	$var_auth = charger_fonction('auth', 'inc');
 	$var_auth = $var_auth();
 	if ($var_auth) redirige_par_entete($var_auth);
 }
@@ -174,7 +174,7 @@ AND $GLOBALS['meta']["debut_restauration"]
 AND !($exec=='js_menu_rubriques'))
 	$exec = 'import_all';
 
-$var_f = include_fonction($exec);
+$var_f = charger_fonction($exec);
 $var_f();
 
 ?>

@@ -430,7 +430,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    $titre = 'zbug_' . $titre;
 	  }
 
-	  else if ($sax = include_fonction('sax', 'inc')
+	  else if ($sax = charger_fonction('sax', 'inc')
 	  AND $res = $sax($texte)) {
 	     if (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
 		$fermant = $r[2];

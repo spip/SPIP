@@ -591,7 +591,7 @@ function public_compiler_squelette_dist($squelette, $nom, $gram, $sourcefile) {
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-	$f = include_fonction('phraser_'.$gram, 'public');
+	$f = charger_fonction('phraser_'.$gram, 'public');
 
 	$racine = $f($squelette, '',$boucles, $nom);
 
