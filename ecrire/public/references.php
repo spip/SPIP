@@ -546,25 +546,22 @@ function rindex_pile($p, $champ, $motif)
 	$b = $p->id_boucle;
 	$p->code = '';
 	while ($b != '') {
-	if ($s = $p->boucles[$b]->param) {
-	  foreach($s as $v) {
-		if (strpos($v[1][0]->texte,$motif) !== false) {
-		  $p->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
-			"]['$champ']";
-		  $b = '';
-		  break;
+		foreach($p->boucles[$b]->criteres as $critere) {
+			if ($critere->op == $motif) {
+				$p->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
+					"]['$champ']";
+				$b = '';
+				break 2;
+			}
 		}
-	  }
+		$n++;
+		$b = $p->boucles[$b]->id_parent;
 	}
-	$n++;
-	$b = $p->boucles[$b]->id_parent;
-	}
-	if (!$p->code) {
-		erreur_squelette(_T('zbug_champ_hors_motif',
-			array('champ' => '#' . strtoupper($champ),
-				'motif' => $motif)
-		), $p->id_boucle);
-	}
+
+	// si on est hors d'une boucle de {recherche}, cette balise est vide
+	if (!$p->code)
+		$p->code = "''";
+
 	$p->interdire_scripts = false;
 	return $p;
 }

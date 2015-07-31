@@ -130,7 +130,7 @@ function critere_fragment_dist($idb, &$boucles, $crit) {
 }
 
 
-// {recherche}
+// {recherche} ou {recherche susan}
 // http://www.spip.net/@recherche
 // http://doc.spip.org/@critere_recherche_dist
 function critere_recherche_dist($idb, &$boucles, $crit) {
@@ -140,10 +140,15 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	if (in_array($t,$table_des_tables))
 		$t = "spip_$t";
 
+	if (isset($crit->param[0]))
+		$quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	else
+		$quoi = '$Pile[0]["recherche"]';
+
 	// Ne pas executer la requete en cas de hash vide
 	$boucle->hash = '
 	// RECHERCHE
-	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$t.'", "'.$crit->cond.'");
+	list($rech_select, $rech_where) = prepare_recherche('.$quoi.', "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$t.'", "'.$crit->cond.'");
 	';
 
 	// Sauf si le critere est conditionnel {recherche ?}
@@ -701,7 +706,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	else if (($col == 'id_secteur')&& ($type == 'forums')) {
 		$table = critere_secteur_forum($idb, $boucles, $val, $crit);
 	}
-	
+
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
 	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
