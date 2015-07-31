@@ -22,9 +22,10 @@ function exec_sites_dist()
 {
 	global $spip_lang_left,  $spip_lang_right, $spip_display;
 
-	global $cherche_mot, $select_groupe, $id_syndic;
+	$cherche_mot = _request('cherche_mot');
+	$select_groupe = _request('select_groupe');
+	$id_syndic = intval(_request('id_syndic'));
 
-	$id_syndic = intval($id_syndic);
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if (!autoriser('voir','site',$id_syndic)){
 		echo $commencer_page("$titre_page","naviguer","sites", $id_rubrique);
