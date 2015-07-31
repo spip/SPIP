@@ -15,11 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('inc/getdocument');
 include_spip('base/abstract_sql');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
 {
-	global $hash, $id_auteur, $url, $chemin, $ancre, $type, $id, $id_document,
+	global $hash, $url, $chemin, $ancre,
 	  $sousaction1,
 	  $sousaction2,
 	  $sousaction3,
@@ -27,13 +28,15 @@ function action_joindre_dist()
 	  $sousaction5,
 	  $_FILES,  $HTTP_POST_FILES;
 
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 
-	$arg = _request('arg');
 	$redirect = _request('redirect');
-
+	if (!preg_match(',^(\d+)\D(\d+)\D(\w+)/(\w+)$,',_request('arg'),$r)) {
+	  spip_log("action_joindre_dist incompris: " . _request('arg'));
+	  redirige_par_entete($redirect);
+	}
+	list($arg, $id, $id_document, $mode, $type) = $r;
 
      // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
      // et son transcodage est couteux et perilleux
@@ -50,8 +53,8 @@ function action_joindre_dist()
      $documents_actifs = array();
 
      if (function_exists($sousaction))
-       $sousaction($path, $arg, $type, intval($id), $id_document, 
-	       $hash, $id_auteur, $redirect, $documents_actifs);
+       $sousaction($path, $mode, $type, $id, $id_document, 
+	       $hash, $GLOBALS['auteur_session']['id_auteur'], $redirect, $documents_actifs);
 
      else spip_log("spip_action: sousaction inconnue $sousaction");
 
@@ -74,40 +77,40 @@ function action_joindre_dist()
 // Cas d'un document distant reference sur internet
 
 // http://doc.spip.org/@spip_action_joindre2
-function spip_action_joindre2($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	examiner_les_fichiers(array(
-				   array('name' => basename($arg),
-					 'tmp_name' => $arg)
+				   array('name' => basename($path),
+					 'tmp_name' => $path)
 				   ), 'distant', $type, $id, $id_document,
-			     $hash, $id_auteur, $redirect, $actifs);
+			     $hash, $redirect, $actifs);
 }
 
 // Cas d'un fichier transmis
 
 // http://doc.spip.org/@spip_action_joindre1
-function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	$files = array();
-	if (is_array($arg))
-	  foreach ($arg as $file) {
+	if (is_array($path))
+	  foreach ($path as $file) {
 		if (!($file['error'] == 4) /* UPLOAD_ERR_NO_FILE */)
 			$files[]=$file;
 	}
 
 	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $id_auteur, $redirect, $actifs);
+			     $hash, $redirect, $actifs);
 } 
 
 // copie de tout ou partie du repertoire upload
 
 // http://doc.spip.org/@spip_action_joindre3
-function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
-	if (!$arg || strstr($arg, '..')) return;
+	if (!$path || strstr($path, '..')) return;
 	    
 	$upload = determine_upload();
-	if ($arg != '/' AND $arg != './') $upload .= $arg;
+	if ($path != '/' AND $path != './') $upload .= $path;
 
 	if (!is_dir($upload))
 	  // seul un fichier est demande
@@ -125,34 +128,33 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	  }
 	}
 
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $id_auteur, $redirect, $actifs);
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, $actifs);
 }
 
 //  Zip avec confirmation "tel quel"
 
 // http://doc.spip.org/@spip_action_joindre5
-function spip_action_joindre5($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
-  	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
+  	ajouter_un_document($path, basename($path), $type, $id, $mode, $id_document, $actifs);
 }
 
 // cas du zip a deballer. On ressort la bibli 
 
 // http://doc.spip.org/@spip_action_joindre6
-function spip_action_joindre6($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
 	    include_spip('inc/pclzip');
-	    $archive = new PclZip($arg);
+	    $archive = new PclZip($path);
 	    $archive->extract(
 			      PCLZIP_OPT_PATH, _tmp_dir,
 			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
 			      );
 	    $contenu = verifier_compactes($archive);
 	    //  on supprime la copie temporaire
-	    @unlink($arg);
+	    @unlink($path);
 	    
 	    foreach ($contenu as $fichier)
 		ajouter_un_document(_tmp_dir.basename($fichier),

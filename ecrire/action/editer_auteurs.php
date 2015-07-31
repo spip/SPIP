@@ -13,11 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('base/abstract_sql');
+include_spip('inc/actions');
 
 // http://doc.spip.org/@action_ajouter_dist
 function action_editer_auteurs_dist() {
 	
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 
@@ -31,9 +31,9 @@ function action_editer_auteurs_dist() {
 		ajouter_auteur_et_rediriger($r[1], $r[2], $redirect);
 	}
 	elseif (preg_match(",^\W*(\d+)$,", $arg, $r)) {
-		if  ($nouv_auteur = intval($_POST['nouv_auteur'])) {
-		  ajouter_auteur_et_rediriger($r[1], $nouv_auteur, $redirect);
-		} else if ($cherche = $_POST['cherche_auteur']) {
+		if  ($nouv_auteur = intval(_request('nouv_auteur'))) {
+			ajouter_auteur_et_rediriger($r[1], $nouv_auteur, $redirect);
+		} else if ($cherche = _request('cherche_auteur')) {
 			$res = rechercher_auteurs($cherche);
 			$n = count($res);
 			if ($n == 1)

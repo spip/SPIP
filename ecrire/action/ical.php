@@ -43,7 +43,7 @@ function action_ical_dist()
 
 		if ($row = spip_fetch_array($result)) {
 			$id_utilisateur=$row['id_auteur'];
-			$nom_utilisateur=$row['nom'];
+			$nom_utilisateur=extraire_multi($row['nom']);
 			$statut_utilisateur=$row['statut'];
 			$langue_utilisateur=$row['lang'];
 		}

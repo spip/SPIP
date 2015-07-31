@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/rubriques');
+include_spip('inc/actions');
 include_spip('inc/forum');
 include_spip('inc/mots');
 include_spip('inc/documents');
@@ -24,14 +25,15 @@ charger_generer_url();
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
-	global $new, $id_parent, $id_rubrique, $spip_display,  $connect_statut, $champs_extra, $cherche_mot,  $select_groupe, $descriptif, $texte, $titre;
+	global $new, $id_parent, $id_rubrique, $spip_display, $champs_extra, $cherche_mot,  $select_groupe, $descriptif, $texte, $titre;
 
-
-	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
 
 	$id_rubrique = intval($id_rubrique);
 	$id_parent = intval($id_parent);
 	if ($id_parent == $id_rubrique && $id_parent) exit;
+
+	$flag_editable = (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique)); // id_parent necessaire en cas de creation de sous-rubrique
+
 	if ($flag_editable AND $new) {
 		if ($new == 'oui')
 			$id_rubrique = enregistre_creer_naviguer($id_parent);
@@ -162,8 +164,6 @@ function exec_naviguer_dist()
 // http://doc.spip.org/@infos_naviguer
 function infos_naviguer($id_rubrique, $statut)
 {
-	global $connect_statut, $connect_toutes_rubriques;
-
 	if ($id_rubrique > 0) {
 		debut_boite_info();
 		echo "<CENTER>";
@@ -173,7 +173,7 @@ function infos_naviguer($id_rubrique, $statut)
 	
 		voir_en_ligne ('rubrique', $id_rubrique, $statut);
 	
-		if ($connect_statut == "0minirezo" && acces_rubrique($id_rubrique)) {
+		if (acces_rubrique($id_rubrique)) {
 			$id_parent = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			if (!$id_parent['id_parent']) {
 			  list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/texte');
 include_spip('inc/rubriques');
+include_spip('inc/actions');
 include_spip('inc/mots');
 include_spip('inc/date');
 include_spip('inc/documents');
@@ -153,8 +154,9 @@ $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 // Liste des auteurs de l'article
 //
 
+ echo "\n<div id='editer_auteurs-$id_article'>";
  echo formulaire_editer_auteurs($cherche_auteur, $ids, $id_article,$flag_editable);
-
+ echo "</div>";
 //
 // Liste des mots-cles de l'article
 //
@@ -208,8 +210,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   echo "\n<div align='center'>";
   icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=$tm&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif");
   echo "</div><br />";
-  
-  echo exec_discuter_dist($id_article, $debut);
+  echo  "<div id='forum'>", exec_discuter_dist($id_article, $debut),"</div>";
 
   fin_page();
 

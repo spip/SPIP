@@ -33,11 +33,7 @@ function exec_memoriser_dist()
 // http://doc.spip.org/@ajax_page_sql
 function ajax_page_sql()
 {
-	global $connect_id_auteur;
-	global $id, $exclus, $col, $id_ajax_fonc, $type, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$col = intval($col);
+	global $connect_id_auteur, $id_ajax_fonc;
 
 	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur");
 	if ($row = spip_fetch_array($res)) {
@@ -57,11 +53,6 @@ function ajax_page_sql()
 		elseif ($fonction == "afficher_articles_trad") {
 			afficher_articles_trad ($titre_table, $requete,
 				$afficher_visites, $afficher_auteurs);
-		}
-		elseif ($fonction == "afficher_groupe_mots") {
-			include_spip('inc/texte');
-			include_spip('exec/mots_tous');
-			echo afficher_groupe_mots ($id_groupe);
 		}
 	}
 }

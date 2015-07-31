@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 // http://doc.spip.org/@inc_chercher_logo_dist
 function inc_chercher_logo_dist($id, $type, $mode='on') {
 	global $formats_logos;
@@ -106,7 +108,6 @@ function afficher_boite_logo($id_objet, $id, $texteon, $texteoff, $script) {
 function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 
 	global $formats_logos;
-	include_spip('inc/actions');
 	$dir_ftp = determine_upload();
 	$afficher = "";
 	$reg = '[.](' . join('|', $formats_logos) . ')$';

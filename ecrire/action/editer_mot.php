@@ -58,6 +58,11 @@ function action_editer_mot_dist() {
 
 	$redirect = rawurldecode($redirect);
 
+	// hack du retour croise editer/grouper 
+
+	if (($p =(strpos($redirect, '=editer_mot&script=grouper_mots&'))) !== false)
+	    $redirect = substr($redirect,0,$p) . substr($redirect,$p+18);
+	    
 	if ($cherche_mot) {
 		if ($p = strpos($redirect, '#')) {
 			$a = substr($redirect,$p);

@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 //
 // Charger un fichier langue
 //
@@ -262,7 +264,6 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		} else {
 			$cible = _DIR_RESTREINT_ABS . $lien;
 			if (_FILE_CONNECT) {
-				include_spip('inc/actions');
 				$lien = generer_action_auteur('cookie','var_lang_ecrire');
 			} else $lien = generer_url_action('cookie');
 		}

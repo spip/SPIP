@@ -32,19 +32,14 @@ function inc_install_4()
 		$sel_db = $choix_db;
 	}
 	echo "$sel_db ";
+
 	mysql_select_db($sel_db);
-
-	// Message pour spip_query : tout va bien !
-	$GLOBALS['db_ok'] = 'spip_connect_db';
-	$GLOBALS['spip_connect_version'] = 0.3;
-
-	// Test si SPIP deja installe
 	spip_query("SELECT COUNT(*) FROM spip_meta");
 	$nouvelle = spip_sql_errno();
 	creer_base();
 	include_spip('base/upgrade');
 	maj_base();
-
+	
 	// Tester $mysql_rappel_nom_base
 	$GLOBALS['mysql_rappel_nom_base'] = true;
 	$GLOBALS['spip_mysql_db'] = $sel_db;

@@ -23,7 +23,8 @@ function inc_controler_action_auteur_dist()
 	$arg = _request('arg');
 	$hash = _request('hash');
 	$action = _request('action');
-	$id_auteur = _request('id_auteur');
+	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
@@ -33,7 +34,8 @@ function inc_controler_action_auteur_dist()
 // http://doc.spip.org/@caracteriser_auteur
 function caracteriser_auteur($id_auteur=0) {
 	global $auteur_session;
-	if (!($id_auteur = intval($id_auteur))) {
+	if (!($id_auteur = intval($id_auteur))
+	AND $auteur_session['pass']) {
 		return array($auteur_session['id_auteur'], $auteur_session['pass']); 
 	}
 	else {
@@ -76,14 +78,13 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 	}
 	$hash = _action_auteur("$action-$arg", $id_auteur, $pass, 'alea_ephemere');
 	if (!is_string($mode))
-	  return generer_url_action($action, "arg=$arg&id_auteur=$id_auteur&hash=$hash" . (!$redirect ? '' : ("&redirect=" . rawurlencode($redirect))), $mode);
+	  return generer_url_action($action, "arg=$arg&hash=$hash" . (!$redirect ? '' : ("&redirect=" . rawurlencode($redirect))), $mode);
 	if ($redirect)
 		$redirect = "\n\t\t<input name='redirect' type='hidden' value='$redirect' />";
 	// Attention, JS n'aime pas le melange de param GET/POST
 	return "\n<form action='" .
 		generer_url_public('') .
 		"'$att>\n\t<div>
-		<input name='id_auteur' type='hidden' value='$id_auteur' />
 		<input name='hash' type='hidden' value='$hash' />
 		<input name='action' type='hidden' value='$action' />
 		<input name='arg' type='hidden' value='$arg' />" .
@@ -111,7 +112,7 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
 
 // http://doc.spip.org/@ajax_action_auteur
-function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_ajax='')
+function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='')
 {
 	$ancre = "$action-" . intval($id);
 

@@ -12,11 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 // http://doc.spip.org/@action_editer_article_dist
 function action_editer_article_dist() {
 
-
-	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 
@@ -40,8 +40,6 @@ function action_editer_article_dist() {
 function insert_article($id_rubrique) {
 
 	include_spip('base/abstract_sql');
-	$id_auteur = _request('id_auteur');
-
 
 	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
 	// dans la premiere rubrique racine
@@ -74,7 +72,7 @@ function insert_article($id_rubrique) {
 		"($id_rubrique, 'prepa', NOW(), '"
 			. substr($GLOBALS['meta']['forums_publics'],0,3)
 			. "', '$lang', '$choisie')");
-	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('$id_auteur','$id_article')");
+	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('" . $GLOBALS['auteur_session']['id_auteur'] . "','$id_article')");
 	return $id_article;
 }
 
@@ -99,14 +97,12 @@ function articles_set($id_article, $new, $lier_trad) {
 function revisions_articles ($id_article, $new) {
 	global $flag_revisions;
 
-	$id_auteur = _request('id_auteur');
-
 	// unifier $texte en cas de texte trop long
 	trop_longs_articles();
 
 	// ne pas accepter de titre vide
 	if (_request('titre') === '')
-		$_POST['titre'] = _T('ecrire:info_sans_titre');
+		_request('titre', _T('ecrire:info_sans_titre'));
 
 	foreach (array(
 	'surtitre', 'titre', 'soustitre', 'descriptif',
@@ -156,7 +152,7 @@ function revisions_articles ($id_article, $new) {
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		ajouter_version($id_article, $champs, '', $id_auteur);
+		ajouter_version($id_article, $champs, '', $GLOBALS['auteur_session']['id_auteur']);
 	}
 
 	// marquer le fait que l'article est travaille par toto a telle date
@@ -164,7 +160,7 @@ function revisions_articles ($id_article, $new) {
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if ($id_article)
-			signale_edition ($id_article, $id_auteur, 'article');
+			signale_edition ($id_article, $GLOBALS['auteur_session']['id_auteur'], 'article');
 	}
 
 
@@ -220,10 +216,10 @@ function revisions_articles ($id_article, $new) {
 
 // http://doc.spip.org/@trop_longs_articles
 function trop_longs_articles() {
-	if (isset($_POST['texte_plus']) && is_array($_POST['texte_plus'])) {
-		foreach ($_POST['texte_plus'] as $t) {
-			$_POST['texte'] = preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
-				. $_POST['texte'];
+	if (is_array($plus = _request('texte_plus'))) {
+		foreach ($plus as $t) {
+			_request('texte', preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
+				. _request('texte'));
 		}
 	}
 }
