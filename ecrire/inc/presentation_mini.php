@@ -42,7 +42,7 @@ function parametres_css_prive(){
 
 	$p = "&p=".substr(md5($GLOBALS['meta']['plugin']),0,4);
 
-	$skin = "&skins=".implode(',',get_skins());
+	$theme = "&themes=".implode(',',lister_themes_prives());
 	
 	$c = (is_array($visiteur_session)
 	AND is_array($visiteur_session['prefs']))
@@ -51,7 +51,7 @@ function parametres_css_prive(){
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$recalcul = _request('var_mode')=='recalcul' ? '&var_mode=recalcul':'';
-	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $skin . $v . $p . $ie . $recalcul ;
+	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $theme . $v . $p . $ie . $recalcul ;
 }
 
 

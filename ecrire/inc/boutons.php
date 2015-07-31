@@ -99,7 +99,7 @@ function definir_barre_onglets($script) {
 			&& $parent == $script
 			&& autoriser('onglet',$id)) {
 				$onglets[$id] = new Bouton(
-					find_in_skin($infos['icone']),  // icone
+					find_in_theme($infos['icone']),  // icone
 					$infos['titre'],	// titre
 					$infos['url']?generer_url_ecrire($infos['url'],$infos['args']?$infos['args']:''):null
 					);

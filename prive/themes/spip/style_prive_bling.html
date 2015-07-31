@@ -1,15 +1,7 @@
 [(#REM)
 
-	Ce squelette definit les styles de l'espace prive
+  Distribue sous licence GPL
 
-	Note: l'entete "Vary:" sert a repousser l'entete par
-	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-	genant en cas de "rotation du cookie de session" apres
-	un changement d'IP (effet de clignotement).
-
-	ATTENTION: il faut absolument le charset sinon Firefox croit que
-	c'est du text/html !
-	<style>
 ]
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
@@ -21,22 +13,11 @@
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
-/* pour les icones pochoir de diala */
-
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a { background-color: #[(#GET{claire}|couleur_eclaircir)];}
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:hover,
-.navigation_avec_icones #bando_navigation ul.deroulant > li > a:focus { background-color: #GET{claire}; }
-
-.navigation_avec_icones #bando_navigation ul li a {background-position:center top;background-repeat:no-repeat;padding-top:57px;}
-.navigation_avec_icones #bando_navigation ul li ul li a {margin-#GET{left}:7px;background-position:[(#GET{left})] center;margin-top:0;padding-#GET{left}:24px;padding-top:0.8em;}
-
-
-[(#REM)</style>]
-
+/* bling */
 
 /* Modifications des intitules */
 
-.accueil #navigation .titrem { 
+.accueil #navigation .titrem {
 	background-color: white;
 	padding-bottom: 10px;
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{[(#GET{claire})], bottom [(#GET{left})] no-repeat })]
@@ -52,7 +33,7 @@
 	padding-top: 0px;
 }
 .configuration #contenu .cadre-couleur .cadre_padding .titrem,
-.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem { 
+.configuration #contenu .cadre-trait-couleur .cadre_padding .titrem {
 	background-color: white;
 	padding-bottom: 11px;
 	color: #444444;
@@ -73,42 +54,42 @@
 
 /* Chemin */
 
-#chemin { 
-	font-size: 0.85em; 
-	overflow: hidden; 
-	margin: 0; 
-	padding: 0; 
+#chemin {
+	font-size: 0.85em;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
 	padding-bottom: 0.5em;
 	padding-top: 0.5em;
 }
 #chemin li em { display: none; }
 #chemin li a { color: black;  }
-#chemin ul, #chemin li, #chemin li .bloc {  
-	margin: 0; 
-	padding: 0; 
-	margin-top: 0; 
-	padding-top: 0; 
+#chemin ul, #chemin li, #chemin li .bloc {
+	margin: 0;
+	padding: 0;
+	margin-top: 0;
+	padding-top: 0;
 	list-style-type: none;
-	display: inline; 
+	display: inline;
 }
 
-#chemin li .bloc {	
+#chemin li .bloc {
 	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{left})] no-repeat })]
-	padding: 2px;	
+	padding: 2px;
 	padding-bottom: 4px;
-	padding-#GET{left}: 10px;	
-	padding-#GET{right}: 12px;	
+	padding-#GET{left}: 10px;
+	padding-#GET{right}: 12px;
 	margin-#GET{left}: -5px;
-	display: -moz-inline-box; 
-	display: inline-block; 
+	display: -moz-inline-box;
+	display: inline-block;
 	font-weight: bold;
 }
 #chemin li .bloc:hover {
 	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_foncee})], center [(#GET{left})] no-repeat })]
 }
 
-#chemin li li .bloc { 
-	margin-top: 2px; 
+#chemin li li .bloc {
+	margin-top: 2px;
 	font-weight: normal;
 	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], center [(#GET{left})] no-repeat })]
 }
@@ -127,7 +108,7 @@
 .formulaire_spip li.gauche label {
 	width: 114px;
 	float:#GET{left};
-	margin-#GET{left}:-130px; 
+	margin-#GET{left}:-130px;
 	text-align: #GET{left};
 	/*vertical-align: top;*/
 	/* for IE 6*/
@@ -212,7 +193,7 @@ padding-top:10px;
 .formulaire_spip li.haut .erreur_message {
 	clear:#GET{left};
 }
- 
+
 
 
 /* Formulaires obligatoires */
@@ -279,7 +260,7 @@ padding-top:10px;
 
 
 
-.formulaire_spip li.editer_parent label, 
+.formulaire_spip li.editer_parent label,
 .formulaire_spip li.editer_groupe_mot label {
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|background_image{bbbbbb, bottom [(#GET{left})] no-repeat })]
 	color: black;

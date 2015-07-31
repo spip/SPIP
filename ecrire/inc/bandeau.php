@@ -113,7 +113,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				$position = $infos['position']?$infos['position']:count($boutons_admin[$parent]->sousmenu);
 				$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
 				+ array($id=> new Bouton(
-					($icones AND $infos['icone'])?find_in_skin($infos['icone']):'',  // icone
+					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
 					$infos['url']?$infos['url']:null,
 					$infos['args']?$infos['args']:null
@@ -128,7 +128,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				$position = $infos['position']?$infos['position']:count($boutons_admin);
 				$boutons_admin = array_slice($boutons_admin,0,$position)
 				+array($id=> new Bouton(
-					($icones AND $infos['icone'])?find_in_skin($infos['icone']):'',  // icone
+					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
 					$infos['titre'],	// titre
 					$infos['url']?$infos['url']:null,
 					$infos['args']?$infos['args']:null
@@ -246,13 +246,13 @@ function bando_navigation($boutons, $contexte = array())
 function bando_identite(){
 
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
-	$img_info = find_in_skin('images/information-24.png');
+	$img_info = find_in_theme('images/information-24.png');
 	$url_config_identite = generer_url_ecrire('config_identite');
 
 	$res = "";
 
 	$moi = typo($GLOBALS['visiteur_session']['nom']);
-	$img_langue = find_in_skin('images/langues.png');
+	$img_langue = find_in_theme('images/langues.png');
 	$url_aide = generer_url_ecrire('aide_index',"var_lang=".$GLOBALS['spip_lang']);
 	$url_lang = generer_url_ecrire('config_langage');
 
@@ -297,7 +297,7 @@ function bando_outils_rapides($boutons, $contexte = array()){
 
 
 	// le navigateur de rubriques
-	$img = find_in_skin('images/boussole-24.png');
+	$img = find_in_theme('images/boussole-24.png');
 	$url = generer_url_ecrire("brouteur");
 	$res .= "<ul class='bandeau_rubriques deroulant'><li class='boussole'>";
 	$res .= "<a href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";

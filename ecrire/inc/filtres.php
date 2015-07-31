@@ -2538,13 +2538,14 @@ function bando_images_background(){
 }
 
 /**
- * Trouver une eventuelle css de surcharge dans la skin
+ * Trouver une eventuelle css de surcharge dans le theme prive
  * a inclure dans les styles prives
  * 
  * @return <type>
  */
-function bando_style_prive_skin() {
-	if ($f = find_in_skin('style_prive_skin.html'))
+function bando_style_prive_theme() {
+	if ($f = find_in_theme('style_prive_theme.html'))
+	var_dump($f);
 		return preg_replace(',[.]html$,Ui','',$f);
 	return '';
 }
