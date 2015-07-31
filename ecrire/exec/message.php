@@ -54,7 +54,8 @@ $row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_mess
 if ($row['type'] != "affich"){
 	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
 	if (!$n['n']) {
-		debut_page(_T('info_acces_refuse'));
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('info_acces_refuse'));
 		debut_gauche();
 		debut_droite();
 		echo "<b>"._T('avis_non_acces_message')."</b><p>";
@@ -502,7 +503,8 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 	if ($type != "affich")
 		spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
 
-	debut_page($titre, "accueil", "messagerie");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($titre, "accueil", "messagerie");
 
 	debut_gauche();
 	

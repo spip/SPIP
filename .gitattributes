@@ -440,6 +440,7 @@ ecrire/inc/autoriser.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
+ecrire/inc/commencer_page.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/dater.php -text
 ecrire/inc/discuter.php -text

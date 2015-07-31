@@ -136,7 +136,8 @@ function forum_envoi(
 		$titre_page = $q['titre'];
 	}
 
-	debut_page($titre_page, "accueil", $id_message ? "messagerie" : "accueil");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page($titre_page, "accueil", $id_message ? "messagerie" : "accueil");
 	debut_gauche();
 	debut_droite();
 	gros_titre($titre_page . $num);

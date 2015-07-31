@@ -48,7 +48,8 @@ if ($new=='oui') {
 	}
 
 	if (!$ok) {
-		debut_page(_T('info_acces_refuse'));
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('info_acces_refuse'));
 		debut_gauche();
 		debut_droite();
 		echo "<b>"._T('avis_non_acces_message')."</b><p>";
@@ -94,7 +95,8 @@ $statut = $row["statut"];
 $rv = $row["rv"];
 $expediteur = $row["id_auteur"];
 
-debut_page(_T('titre_page_message_edit'), "accueil", "messagerie");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_message_edit'), "accueil", "messagerie");
 
 if (!($expediteur = $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) die();
 

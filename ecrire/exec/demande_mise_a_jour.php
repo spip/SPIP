@@ -16,7 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_demande_mise_a_jour_dist
 function exec_demande_mise_a_jour_dist() {
 	include_spip('inc/presentation');
-	debut_page();
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page();
 	echo "<blockquote><blockquote><h4><font color='red'>",
 	_T('info_message_technique'),
 	"</font><br> ",

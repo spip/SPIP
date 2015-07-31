@@ -22,7 +22,8 @@ function exec_recherche_dist()
 
 	$recherche_aff = entites_html($recherche);
 
-	debut_page(_T('titre_page_recherche', array('recherche' => $recherche_aff)));
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_recherche', array('recherche' => $recherche_aff)));
  
 	debut_gauche();
 

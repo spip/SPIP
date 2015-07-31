@@ -79,7 +79,8 @@ else {
 if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 if ($origine) {
-	debut_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "statistiques");
 	echo "<br /><br />";
 	gros_titre(_T('titre_liens_entrants'));
 	barre_onglets("statistiques", "referers");
@@ -93,7 +94,8 @@ if ($origine) {
 
 }
 else {
-	debut_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_statistiques_visites').$pourarticle, "statistiques_visites", "statistiques");
 	echo "<br /><br />";
 	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
 //	barre_onglets("statistiques", "evolution");

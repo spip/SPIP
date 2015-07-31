@@ -234,7 +234,8 @@ function exec_controle_forum_dist()
 		ajax_retour($mess);
 	} else {
 
-		debut_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
 
 		echo "<br><br><br>";
 		gros_titre(_T('titre_forum_suivi'));

@@ -36,7 +36,8 @@ if ($changer_config == 'oui') {
 lire_metas();
 
 pipeline('exec_init',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
-debut_page(_T('titre_page_config_contenu'), "configuration", "configuration");
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");
 
 echo "<br><br><br>";
 gros_titre(_T('titre_page_config_contenu'));

@@ -16,7 +16,8 @@ function exec_admin_plugin() {
 	$surligne = "";
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 		echo _T('avis_non_acces_page');
 		echo fin_page();
 		exit;
@@ -35,7 +36,8 @@ function exec_admin_plugin() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 	global $couleur_claire;
-	debut_page(_T('icone_admin_plugin'), "configuration", "plugin");
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {

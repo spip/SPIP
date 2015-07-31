@@ -42,7 +42,8 @@ else {
 }
 pipeline('exec_init',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
 
-debut_page(_T('info_site_reference_2'), "naviguer", "sites", "", $id_rubrique);
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T('info_site_reference_2'), "naviguer", "sites", "", $id_rubrique);
 
 debut_grand_cadre();
 

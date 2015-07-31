@@ -55,7 +55,8 @@ global
  
 	 pipeline('exec_init',array('args'=>array('exec'=>'mots_edit','id_mot'=>$id_mot),'data'=>''));
 
-	 debut_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
+	 $commencer_page = charger_fonction('commencer_page', 'inc');
+	 echo $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
 	 debut_gauche();
 
 

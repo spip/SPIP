@@ -45,7 +45,8 @@ function exec_naviguer_dist()
 
 	pipeline('exec_init',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
-	debut_page(($titre ? ("&laquo; ".textebrut(typo($titre))." &raquo;") :
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(($titre ? ("&laquo; ".textebrut(typo($titre))." &raquo;") :
 		    _T('titre_naviguer_dans_le_site')),
 		   "naviguer",
 		   "rubriques",

@@ -30,7 +30,8 @@ function exec_suivi_revisions_dist()
 $debut = intval($debut);
 $id_auteur = ($id_auteur == $connect_id_auteur) ? $id_auteur : false;
 
-debut_page(_T("icone_suivi_revisions"));
+$commencer_page = charger_fonction('commencer_page', 'inc');
+echo $commencer_page(_T("icone_suivi_revisions"));
 
 
 //////////////////////////////////////////////////////

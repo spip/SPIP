@@ -48,11 +48,13 @@ function exec_auteur_infos_dist()
 
 	if (_request('var_ajaxcharset')) ajax_retour($legender_auteur);
 
-	if ($connect_id_auteur == $id_auteur)
-		debut_page($auteur['nom'], "auteurs", "perso");
-	else
-		debut_page($auteur['nom'],"auteurs","redacteurs");
-
+	if ($connect_id_auteur == $id_auteur) {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page($auteur['nom'], "auteurs", "perso");
+	} else {
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page($auteur['nom'],"auteurs","redacteurs");
+	}
 	echo "<br /><br /><br />";
 
 	debut_gauche();
