@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="12" height="12" border="0" align="middle"></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="12" height="12" border="0" align="middle"></a>'; // "
 }
 
 
@@ -305,7 +305,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 			$link = new Link;
 			$link->addTmpVar($tmp_var, -1);
 			$texte .= "<A HREF=\"".$link->getUrl()."\">Tout afficher</A>";
-		}		
+		}
 	
 		$texte .= "</td>\n";
 		$texte .= "</tr>\n";
@@ -1014,8 +1014,14 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "suivi_forum"){
-		onglet("Tous les messages", "controle_forum.php3", "tous", $onglet);
-		onglet("Messages sans texte", "controle_forum.php3?controle_sans=oui", "sans", $onglet);
+		onglet("Messages publics", "controle_forum.php3?page=public", "public", $onglet, "racine-site-24.gif");
+		onglet("Messages internes", "controle_forum.php3?page=interne", "interne", $onglet, "forum-interne-24.gif");
+
+		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 0,1";
+		$result_forum = spip_query($query_forum);
+		if ($row = spip_fetch_array($result_forum)) {
+			onglet("Messages sans texte", "controle_forum.php3?page=vide", "sans", $onglet);
+		}
 	}
 
 	fin_onglet();
@@ -1137,7 +1143,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	else {
 		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
-		if ($spip_display != 1){	
+		if ($spip_display != 1){
 			echo "<tr><td background='' align='center'>";
 			echo "<a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
 			if (strlen($aide)>0) echo aide($aide);
@@ -1682,7 +1688,7 @@ function debut_gauche($rubrique = "asuivre") {
 
 
 //
-// Presentation de l'interface privee, marge de droite
+// Presentation de l''interface privee, marge de droite
 //
 
 function creer_colonne_droite($rubrique=""){
@@ -1698,10 +1704,10 @@ function creer_colonne_droite($rubrique=""){
 	global $flag_3_colonnes, $flag_centre_large;
 
 
-	
+
 	if ($flag_3_colonnes AND !$deja_colonne_droite) {
 		$deja_colonne_droite = true;
-		
+
 		if ($flag_centre_large) {
 			$espacement = 17;
 			$largeur = 140;
