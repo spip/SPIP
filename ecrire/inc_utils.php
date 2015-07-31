@@ -46,11 +46,11 @@ function include_fonction($nom) {
 #	spip_log("if $inc");
 	$f = find_in_path($inc  . '.php');
 	if ($f && is_readable($f)) {
-		if (!$GLOBALS['included_files'][$inc]++) include($f);
+		if (!$GLOBALS['included_files'][$f]++) include($f);
 	} else {
 		$f = _DIR_INCLUDE . $inc . '.php';
 		if (is_readable($f)) {
-			if (!$GLOBALS['included_files'][$inc]++) include($f);
+			if (!$GLOBALS['included_files'][$f]++) include($f);
 		} else {
 		  if (!$f = include_rustine($inc)) # provisoire php/php3
 		    $inc = "";
