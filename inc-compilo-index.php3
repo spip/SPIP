@@ -157,10 +157,10 @@ function calculer_balise($nom, $p) {
 	// ET s'il n'y a ni filtre ni etoile
 	// ALORS retourner la couleur.
 	// Ca permet si l'on veut vraiment de recuperer [(#ACCEDE*)]
-	if (ereg("^[\$]Pile[[]0[]][[]'([A-F]{1,6})'[]]$", $p->code, $match)
+	if (preg_match("/^[A-F]{1,6}$/i", $nom)
 	AND !$p->etoile
 	AND !$p->fonctions) {
-		$p->code = "'#". $match[1]."'";
+		$p->code = "'#$nom'";
 		$p->statut = 'php';
 	}
 
