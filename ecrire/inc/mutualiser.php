@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Options :
 // creer_site => on va creer les repertoires qui vont bien (defaut: false)
 // cookie_prefix, table_prefix => regler les prefixes (defaut: true)
+// http://doc.spip.org/@demarrer_site
 function demarrer_site($site = '', $options = array()) {
 	if (!$site) return;
 
@@ -69,6 +70,7 @@ function demarrer_site($site = '', $options = array()) {
 }
 
 
+// http://doc.spip.org/@echec_init_mutualisation
 function echec_init_mutualisation($e, $options) {
 	include_spip('inc/minipres');
 
