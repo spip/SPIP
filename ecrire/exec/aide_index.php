@@ -23,8 +23,8 @@ include_spip('inc/texte');
 // http://doc.spip.org/@help_frame
 function help_frame ($aide, $lang) {
 
-	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=menu", false, true) . "' name=\"gauche\" scrolling=\"auto\" noresize>\n";
-	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=body", false, true) . "' name=\"droite\" scrolling=\"auto\" noresize>\n";
+	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=menu", false, true) . "' name=\"gauche\" scrolling=\"auto\" />\n";
+	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=body", false, true) . "' name=\"droite\" scrolling=\"auto\" />\n";
 
 	if ($GLOBALS['spip_lang_rtl']) {
 	  echo '<frameset cols="*,160" border="0" frameborder="0" framespacing="0">', $frame_body,$frame_menu, '</frameset>';

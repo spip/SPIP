@@ -147,7 +147,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
   } else {
 
 	$res = "<div style='text-align:center;'><b> <span class='verdana1'>"
-	. (($statut == 'publie')
+	  . (($statut == 'publie' OR $type != 'article')
 		? _T('texte_date_publication_article')
 		: _T('texte_date_creation_article'))
 	. "</span> "
