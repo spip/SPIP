@@ -16,21 +16,27 @@ include_spip('inc/sax');
 
 class IndenteurXML {
 
+// http://doc.spip.org/@debutElement
 function debutElement($phraseur, $name, $attrs)
 { xml_debutElement($phraseur, $name, $attrs);}
 
+// http://doc.spip.org/@finElement
 function finElement($phraseur, $name)
 { xml_finElement($phraseur, $name);}
 
+// http://doc.spip.org/@textElement
 function textElement($phraseur, $data)
 { xml_textElement($phraseur, $data);}
 
+// http://doc.spip.org/@PiElement
 function PiElement($phraseur, $target, $data)
 { xml_PiElement($phraseur, $target, $data);}
 
+// http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
 {  xml_defautElement($phraseur, $data);}
 
+// http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 {
 	xml_parsestring($phraseur, $data);
@@ -46,6 +52,7 @@ function phraserTout($phraseur, $data)
  var $entites = array();
 }
 
+// http://doc.spip.org/@inc_indenter_xml_dist
 function inc_indenter_xml_dist($page, $apply=false)
 {
 	$sax = charger_fonction('sax', 'inc');
