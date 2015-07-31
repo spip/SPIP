@@ -256,15 +256,23 @@ function fichier_copie_locale($source) {
 		return $source;
 	}
 
-	// Si l'extension n'est pas precisee, aller la chercher dans la table
-	// des documents -- si la source n'est pas dans la table des documents,
-	// on ne fait rien
-	$t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui'"));
-	if ($t) {
-		$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type=".$t['id_type']));
-		if ($t)
-		  return nom_fichier_copie_locale($source, $t['extension']);
+	$extension = "";
+	$path_parts = pathinfo($source);
+	if (isset($path_parts['extension']) && strlen($path_parts['extension']))
+		$extension = $path_parts['extension'];
+	else {
+		// Si l'extension n'est pas precisee, aller la chercher dans la table
+		// des documents -- si la source n'est pas dans la table des documents,
+		// on ne fait rien
+		$t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui'"));
+		if ($t) {
+			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type=".$t['id_type']));
+			if ($t)
+				$extension = $t['extension'];
+		}
 	}
+	if (strlen($extension))
+		return nom_fichier_copie_locale($source, $extension);
 }
 
 
