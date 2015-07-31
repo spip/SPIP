@@ -3,13 +3,13 @@
 <rss version="0.91">
 
 <channel>
-	<title>[(#NOM_SITE_SPIP|textebrut|entites_unicode)]</title>
+	<title>[(#NOM_SITE_SPIP|textebrut|htmlspecialchars|entites_unicode)]</title>
 	<link>#URL_SITE_SPIP/</link>
 	<description></description>
 	<language>fr-fr</language>
 
 	<image>
-		<title>[(#NOM_SITE_SPIP|textebrut|entites_unicode)]</title>
+		<title>[(#NOM_SITE_SPIP|textebrut|htmlspecialchars|entites_unicode)]</title>
 		<url>#URL_SITE_SPIP/IMG/ruboff0.gif</url>
 		<link>#URL_SITE_SPIP/</link>
 		<description></description>
@@ -20,11 +20,11 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
 	<BOUCLE1(articles){id_secteur}{par date}{inverse}{0,10}>
 		<item>
-			<title>[(#TITRE|textebrut|entites_unicode)]</title>
+			<title>[(#TITRE|textebrut|htmlspecialchars|entites_unicode)]</title>
 			<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 			<date>#DATE</date>
-			<description>[(#DESCRIPTIF|textebrut|entites_unicode)]</description>
-			<author><BOUCLE23(auteurs){id_article}{", "}>[(#NOM|textebrut|entites_unicode)]</BOUCLE23></author>
+			<description>[(#DESCRIPTIF|textebrut|htmlspecialchars|entites_unicode)]</description>
+			<author><BOUCLE23(auteurs){id_article}{", "}>[(#NOM|textebrut|htmlspecialchars|entites_unicode)]</BOUCLE23></author>
 		</item>
 	</BOUCLE1>
 </BOUCLE_rub>
@@ -33,20 +33,20 @@
 
 	<BOUCLE2(articles){tout}{par date}{inverse}{0,10}{unique}>
 	    <item>
-	      <title>[(#TITRE|textebrut|entites_unicode)]</title>
+	      <title>[(#TITRE|textebrut|htmlspecialchars|entites_unicode)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 	      <date>#DATE</date>
-	      <description>[(#DESCRIPTIF|textebrut|entites_unicode)]</description>
-	      <author><BOUCLE_aut2(auteurs){id_article}{", "}>[(#NOM|textebrut|entites_unicode)]</BOUCLE_aut2></author>
+	      <description>[(#DESCRIPTIF|textebrut|htmlspecialchars|entites_unicode)]</description>
+	      <author><BOUCLE_aut2(auteurs){id_article}{", "}>[(#NOM|textebrut|htmlspecialchars|entites_unicode)]</BOUCLE_aut2></author>
 	    </item>
 	</BOUCLE2>
 	<BOUCLE3(articles){tout}{par date}{inverse}{age<3}{unique}>
 	    <item>
-	      <title>[(#TITRE|textebrut|entites_unicode)]</title>
+	      <title>[(#TITRE|textebrut|htmlspecialchars|entites_unicode)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 	      <date>#DATE</date>
-	      <description>[(#DESCRIPTIF|textebrut|entites_unicode)]</description>
-	      <author><BOUCLE_aut3(auteurs){id_article}{","}>[(#NOM|textebrut|entites_unicode)]</BOUCLE_aut3></author>
+	      <description>[(#DESCRIPTIF|textebrut|htmlspecialchars|entites_unicode)]</description>
+	      <author><BOUCLE_aut3(auteurs){id_article}{","}>[(#NOM|textebrut|htmlspecialchars|entites_unicode)]</BOUCLE_aut3></author>
 	    </item>
 	</BOUCLE3>
 <//B_rub>

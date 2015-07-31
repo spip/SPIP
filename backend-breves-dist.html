@@ -4,22 +4,22 @@
 
 <channel>
 
-	<title>#NOM_SITE_SPIP</title>
+	<title>[(#NOM_SITE_SPIP|textebrut|htmlspecialchars|entites_unicode)]</title>
 	<link>#URL_SITE_SPIP/</link>
 	<description></description>
 	<language>fr-fr</language>
 
 	<image>
-		<title>#NOM_SITE_SPIP</title>
+		<title>[(#NOM_SITE_SPIP|textebrut|htmlspecialchars|entites_unicode)]</title>
 		<url>#URL_SITE_SPIP/IMG/ruboff0.gif</url>
 		<link>#URL_SITE_SPIP/</link>
 		<description></description>
 	</image>
 
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
-	<BOUCLE1(BREVES){id_secteur}{par date}{inverse}{0,10}>
+	<BOUCLE1(BREVES){id_rubrique}{par date}{inverse}{0,10}>
 	<item>
-		<title>#TITRE</title>
+		<title>[(#TITRE|textebrut|htmlspecialchars|entites_unicode)]</title>
 		<link>#URL_SITE_SPIP/#URL_BREVE</link>
 		<date>#DATE</date>
 	</item>
@@ -28,7 +28,7 @@
 
 	<BOUCLE2(BREVES){tout}{par date}{inverse}{0,10}>
 	<item>
-		<title>#TITRE</title>
+		<title>[(#TITRE|textebrut|htmlspecialchars|entites_unicode)]</title>
 		<link>#URL_SITE_SPIP/#URL_BREVE</link>
 		<date>#DATE</date>
 	</item>
