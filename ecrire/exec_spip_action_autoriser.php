@@ -24,8 +24,9 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 function spip_action_autoriser_dist()
 {
-  global $file, $arg;
+  global $file, $arg, $toujours;
 
+  if ($toujours) return spip_action_telecharger_dist();
   $file = urldecode($file);
 
   $refus = false;
@@ -111,7 +112,7 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
 
 function spip_action_telecharger_dist()
 {
-  global $$arg;
+  global $arg;
   $r = spip_query("
 SELECT	texte, soustitre, titre, date
 FROM	spip_articles
