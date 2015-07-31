@@ -108,7 +108,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 		$type = $GLOBALS['table_logos'][$id_objet];
 		return generer_action_auteur('iconifier',
 			"$id+$type$mode$id",
-			generer_url_ecrire($script, "$id_objet=$id"), 
+			generer_url_ecrire($script, "$id_objet=$id", true), 
 			$afficher,
 			" method='post' enctype='multipart/form-data'");
 }
