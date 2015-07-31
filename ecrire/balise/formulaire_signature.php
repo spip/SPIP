@@ -60,26 +60,25 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_obli, $message) {
 
 	if (_request('var_confirm')) # _GET
-		return reponse_confirmation($id_article);
+		$reponse = reponse_confirmation($id_article);
 
 	else if (_request('nom_email') AND _request('adresse_email')) # _POST
-		return  reponse_signature($id_article,
+		$reponse = reponse_signature($id_article,
 			_request('nom_email'), _request('adresse_email'),
 			_request('message'), _request('signature_nom_site'),
 			_request('signature_url_site'), _request('url_page')
 		);
 
-	else {
-		return array('formulaire_signature', $GLOBALS['delais'],
-		array(
-			'id_article' => $id_article,
-			'petition' => $petition,
-			'texte' => $texte,
-			'site_obli' => $site_obli,
-			'message' => $message,
-			'self' => str_replace('&amp;', '&', self())
-		));
-	}
+	return array('formulaire_signature', $GLOBALS['delais'],
+	array(
+		'id_article' => $id_article,
+		'petition' => $petition,
+		'texte' => $texte,
+		'site_obli' => $site_obli,
+		'message' => $message,
+		'self' => $reponse ? '' : str_replace('&amp;', '&', self()),
+		'reponse' => $reponse
+	));
 }
 
 

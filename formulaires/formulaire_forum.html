@@ -20,7 +20,7 @@
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
 	<fieldset class="spip_encadrer">
 	<legend><:mots_clefs:> : #TITRE</legend>
-	    <INCLURE{fond=choix_mots}{id_groupe}{ajouter_mot}{unseul}>
+		<INCLURE{fond=choix_mots}{id_groupe}{ajouter_mot}{unseul}>
 	</fieldset>
 ]</BOUCLE_G>
 
@@ -30,36 +30,34 @@
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
-		<fieldset class="spip_encadrer">
-		<legend><:form_pet_message_commentaire:></legend>
-		<p><label for="titre"><:forum_titre:></label>
-			<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
+	<fieldset class="spip_encadrer">
+	<legend><:form_pet_message_commentaire:></legend>
+	<p><label for="titre"><:forum_titre:></label>
+	<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
 
-		<label><:forum_texte:></label>
-		<p><small><:info_creation_paragraphe:></small></p>
-		[(#ENV**{texte}|barre_textarea{12,40})]
-		</fieldset>
-		
-		<fieldset class="spip_encadrer">
-			<legend><:forum_lien_hyper:></legend>
-			<p><:forum_page_url:></p>
-			<p><label for="nom_site_forum"><:forum_titre:></label>
-				<input type="text" class="forml" name="nom_site_forum" id="nom_site_forum" size="40" value="[(#ENV{nom_site_forum})]" /></p>
-			<p><label for="url_site"><:forum_url:></label>
-			<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" /></p>
-		</fieldset>
-		
-		<fieldset class="spip_encadrer">
-			<legend><:forum_qui_etes_vous:></legend>
-			<p><label for="auteur"><:forum_votre_nom:></label>
-				<input type="text" class="forml" name="auteur" id="auteur" value="[(#ENV{auteur})]" size="40"[readonly="(#ENV{readonly})"] /></p>
-			<p><label for="email_auteur"><:forum_votre_email:></label>
-				<input type="text" class="forml" name="email_auteur" id="email_auteur" value="[(#ENV{email_auteur})]" size="40" [readonly="(#ENV{readonly})"] /></p>
-		</fieldset>
+	<label><:forum_texte:></label>
+	<p><small><:info_creation_paragraphe:></small></p>
+	[(#ENV**{texte}|barre_textarea{12,40})]
+	</fieldset>
 
+	<fieldset class="spip_encadrer">
+	<legend><:forum_lien_hyper:></legend>
+	<p><:forum_page_url:></p>
+	<p><label for="nom_site_forum"><:forum_titre:></label>
+	<input type="text" class="forml" name="nom_site_forum" id="nom_site_forum" size="40" value="#ENV{nom_site_forum}" /></p>
+	<p><label for="url_site"><:forum_url:></label>
+	<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
+	</fieldset>
 
+	<fieldset class="spip_encadrer">
+	<legend><:forum_qui_etes_vous:></legend>
+	<p><label for="auteur"><:forum_votre_nom:></label>
+	<input type="text" class="forml" name="auteur" id="auteur" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	<p><label for="email_auteur"><:forum_votre_email:></label>
+	<input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
+	</fieldset>
 
-		<input type="submit" class="spip_bouton" value="<:forum_voir_avant:>" />
+	<input type="submit" class="spip_bouton" value="<:forum_voir_avant:>" />
 ]
 
 </form>
