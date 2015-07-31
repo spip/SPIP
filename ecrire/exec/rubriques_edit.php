@@ -136,7 +136,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	. "</li>\n";
 
 	if (($GLOBALS['meta']['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
-		$form .= "<li class='gauche'><label>"
+		$form .= "<li class='haut'><label>"
 			. _T('texte_descriptif_rapide')
 			."</label>\n"
 			. "<div class='commentaire'>" 
