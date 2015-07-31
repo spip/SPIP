@@ -174,7 +174,7 @@ $spip_lang_right;
 		)
 		. afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 		. ($dater ? $dater($id_syndic, $flag_editable, $statut, 'syndic', 'sites', $date_heure) : "")
-	  . $editer_mots('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable, true)
+	  . $editer_mots('syndic', $id_syndic,  $cherche_mot,  $select_groupe, $flag_editable, true, 'sites')
 	  . (_INTERFACE_ONGLETS?($flag_administrable ? options_moderation($row) : ""):"")
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''))
 	  ;
