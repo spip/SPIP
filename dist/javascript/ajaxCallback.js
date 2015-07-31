@@ -67,12 +67,12 @@ jQuery.fn.animeajax = function(end) {
 // s'il n'est pas totalement visible, scroller pour positionner
 // le bloc cible en haut de l'ecran
 jQuery.fn.positionner = function() {
-	var offset = $(this).offset({'scroll':false});
-	var hauteur = parseInt($(this).css('height'));
+	var offset = jQuery(this).offset({'scroll':false});
+	var hauteur = parseInt(jQuery(this).css('height'));
 	var scrolltop = self['pageYOffset'] ||
 		$.boxModel && document.documentElement[ 'scrollTop' ] ||
 		document.body[ 'scrollTop' ];
-	var h = $(window).height();
+	var h = jQuery(window).height();
 	var scroll=0;
 	if (offset['top'] - 5 <= scrolltop)
 		scroll = offset['top'] - 5;
