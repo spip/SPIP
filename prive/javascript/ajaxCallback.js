@@ -160,6 +160,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 	if (this.length)
 		jQuery.spip.initReaderBuffer();
   return this.each(function() {
+	  var scrollwhensubmit = !jQuery(this).is('.noscroll');
 		var cible = target || this;
 	  jQuery(cible).formulaire_setARIA();
 		jQuery('form:not(.noajax):not(.bouton_action_post)', this).each(function(){
@@ -179,7 +180,9 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
         }
 				jQuery(cible).wrap('<div />');
 				cible = jQuery(cible).parent();
-				jQuery(cible).closest('.ariaformprop').animateLoading().positionner(false,false);
+				jQuery(cible).closest('.ariaformprop').animateLoading();
+				if (scrollwhensubmit)
+					jQuery(cible).positionner(false,false);
 			},
 			success: function(c){
 				if (c=='noajax'){
@@ -213,6 +216,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					if (!d.length){
 						// si pas .ajax dans le form, remettre la classe sur le div que l'on a insere
 						jQuery(cible).addClass('ajax');
+						if (!scrollwhensubmit)
+							jQuery(cible).addClass('noscroll');
 					}
 					else {
 						// sinon nettoyer les br ajaxie
