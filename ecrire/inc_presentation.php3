@@ -1433,8 +1433,8 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 ?>
 <script type="text/javascript" src="js_detectplugins.js"></script>
-
-<script type='text/javascript' src="layer.js"><!--
+<script type='text/javascript' src="layer.js"></script>
+<script type='text/javascript'><!--
 	var init_gauche = true;
 
 	function changestyle(id_couche, element, style) {
