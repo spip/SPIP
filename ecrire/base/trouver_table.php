@@ -129,8 +129,9 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 
 		// charger les infos declarees pour cette table
 		// en lui passant les infos connues
+		// $desc est prioritaire pour la description de la table
 		include_spip('base/objets');
-		$desc = array_merge($desc,lister_tables_objets_sql($nom_sql,$desc));
+		$desc = array_merge(lister_tables_objets_sql($nom_sql,$desc),$desc);
 		
 		$connexion['tables'][$nom] = $desc;
 		// une nouvelle table a ete decrite
