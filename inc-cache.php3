@@ -53,7 +53,7 @@ function generer_nom_fichier_cache($contexte, $fond) {
 
 	$gzip = $flag_gz ? '.gz' : '';
 
-	return _DIR_CACHE . $subdir.$fichier_cache.$gzip;
+	return $subdir.$fichier_cache.$gzip;
 }
 
 //
@@ -63,11 +63,11 @@ function generer_nom_fichier_cache($contexte, $fond) {
 // Securite : est sur que c'est un cache
 function retire_cache($cache) {
 
-	if (preg_match('|^' . preg_quote(_DIR_CACHE) .
-		"([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
-		       $cache)) {
+	if (preg_match(
+	"|^([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
+	$cache)) {
 		// supprimer le fichier (de facon propre)
-		supprimer_fichier($cache);
+		supprimer_fichier(_DIR_CACHE . $cache);
 	} else
 		spip_log("Impossible de retirer $cache");
 }
@@ -172,7 +172,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	// cas sans jamais de calcul pour raison interne
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
-		return array($chemin_cache, @filemtime($chemin_cache), 0);
+		return array($chemin_cache, @filemtime(_DIR_CACHE . $chemin_cache), 0);
 	}
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
@@ -187,11 +187,11 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 		($GLOBALS['_COOKIE']['spip_session']
 		 || $GLOBALS['_COOKIE']['spip_admin']
 		 || @file_exists(_ACCESS_FILE_NAME))) {
-	    supprimer_fichier($chemin_cache);
+			supprimer_fichier(_DIR_CACHE . $chemin_cache);
 	}
 
-	$ok = lire_fichier($chemin_cache, $page);
-	$time = @filemtime($chemin_cache);
+	$ok = lire_fichier(_DIR_CACHE . $chemin_cache, $page);
+	$time = @filemtime(_DIR_CACHE . $chemin_cache);
 	$page = restaurer_meta_donnees ($page);
 	$use_cache = cache_valide_autodetermine($chemin_cache, $page, $time);
 
@@ -200,7 +200,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 
 	if (!$GLOBALS['db_ok']) {
-		if (file_exists($chemin_cache))
+		if (file_exists(_DIR_CACHE . $chemin_cache))
   			$use_cache = 0 ;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
@@ -231,7 +231,7 @@ function creer_cache(&$page, $chemin_cache, $duree) {
 	// 2) son contenu
 	$page['signal']['process_ins'] = $page['process_ins'];
 	$page['signal']['entetes'] = $page['entetes'];
-	$r = ecrire_fichier($chemin_cache,
+	$r = ecrire_fichier(_DIR_CACHE . $chemin_cache,
 		"<!-- "
 		. str_replace("\n", " ", serialize($page['signal']))
 		. " -->\n"
@@ -243,7 +243,7 @@ function creer_cache(&$page, $chemin_cache, $duree) {
 			// Ici on ajoute 3600s pour eviter toute concurrence
 			// entre un invalideur et un appel public de page
 		$bedtime = time() + $duree + 3600;
-		$taille = @filesize($chemin_cache);
+		$taille = @filesize(_DIR_CACHE . $chemin_cache);
 		$fichier = addslashes($chemin_cache);
 		spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('$fichier','$bedtime','t','$taille')");
 	}
@@ -270,7 +270,7 @@ function restaurer_meta_donnees ($contenu) {
 // vieux fichiers
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'CACHE/rech/'
-	$dircache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,$prefix);
+	$dircache = _DIR_CACHE . creer_repertoire(_DIR_CACHE,$prefix);
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
 		if ($h = @opendir($dircache)) {
 			while (($f = @readdir($h)) !== false) {
