@@ -12,30 +12,47 @@ function ecrire_cache_lang($lang, $module) {
 	include_ecrire('inc_filtres.php3');
 
 	$fichier_lang = $module.'_'.$lang.'.php3';
-	if ($t = @fopen('CACHE/i18n_'.$fichier_lang.'_'.getmypid(), "wb")) {
+	if ($t = @fopen('CACHE/lang_'.$fichier_lang.'_'.getmypid(), "wb")) {
 		@fwrite($t, "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n");
 		if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
-			@fwrite($t, "\$GLOBALS['i18n_${module}_$lang'] = array(\n");
-			while (list(,$code) = each($cache))
+			@fwrite($t, "\$GLOBALS['i18n_".$module."_$lang'] = array(\n");
+			$texte = '';
+			reset($cache);
+			while (list($code, ) = each($cache))
 				$texte .= ",\n\t'".$code."' => '".texte_script($GLOBALS['i18n_'.$module.'_'.$lang][$code])."'";
 			@fwrite($t, substr($texte,2)."\n);\n\n");
-			@fwrite($t, "\$GLOBALS['cache_lang']['$lang'] = array(\n\t'".join("',\n\t'",$cache)."'\n);\n");
+			@fwrite($t, "\$GLOBALS['cache_lang']['$lang'] = array(\n");
+			$texte = '';
+			reset($cache);
+			while (list($code, ) = each($cache))
+				$texte .= ",\n\t'".$code."' => 1";
+			@fwrite($t, substr($texte,2)."\n);\n\n");
 		}
 		@fwrite($t, "\n\n?".">\n");
 		@fclose($t);
-		@rename('CACHE/i18n_'.$fichier_lang.'_'.getmypid(), 'CACHE/i18n_'.$fichier_lang);
+		@rename('CACHE/lang_'.$fichier_lang.'_'.getmypid(), 'CACHE/lang_'.$fichier_lang);
+	}
+}
+
+function ecrire_caches_langues() {
+	global $cache_lang_modifs;
+	reset($cache_lang_modifs);
+	while(list($lang, ) = each($cache_lang_modifs)) {
+		ecrire_cache_lang($lang, 'spip');
 	}
 }
 
 //
 // Charger un fichier langue
 //
-function charger_langue($lang, $module='spip', $forcer=false) {
-	global $dir_ecrire;
-
+function charger_langue($lang, $module = 'spip', $forcer = false) {
+	global $dir_ecrire, $flag_ecrire;
 	// chercher dans le fichier cache ?
-	if ($dir_ecrire AND !$forcer AND @file_exists('CACHE/i18n_'.$module.'_'.$lang.'.php3'))
-		return include_local('CACHE/i18n_'.$module.'_'.$lang.'.php3');
+	if (!$flag_ecrire) {
+		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3'))
+			return include_local('CACHE/lang_'.$module.'_'.$lang.'.php3');
+		else $GLOBALS['cache_lang_modifs'][$lang] = true;
+	}
 
 	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
 
@@ -55,12 +72,13 @@ function charger_langue($lang, $module='spip', $forcer=false) {
 	}
 
 	// mettre en cache les morceaux de langue utilises dans le site public
-	if ($dir_ecrire AND !@file_exists('CACHE/i18n_'.$module.'_'.$lang.'.php3')) {
-		ecrire_cache_lang($lang, $module);
-	} else if ($forcer) {
-		$GLOBALS['cache_lang'][$lang][] = $forcer;
+	/*if ($dir_ecrire AND !@file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')) {
 		ecrire_cache_lang($lang, $module);
 	}
+	else if ($forcer) {
+		$GLOBALS['cache_lang'][$lang][] = $forcer;
+		ecrire_cache_lang($lang, $module);
+	}*/
 }
 
 //
@@ -114,21 +132,29 @@ function regler_langue_navigateur() {
 // Traduire une chaine internationalisee
 //
 function traduire_chaine($code, $args) {
-	global $spip_lang;
+	global $spip_lang, $flag_ecrire;
 
-	if (ereg("^([a-z]+):(.*)$", $code, $regs)) {
-		$module = $regs[1];
-		$code = $regs[2];
-	} else
-		$module = 'spip';
+	$module = 'spip';
+	if (strpos($code, ':')) {
+		if (ereg("^([a-z]+):(.*)$", $code, $regs)) {
+			$module = $regs[1];
+			$code = $regs[2];
+		}
+	}
 
 	$var = "i18n_".$module."_".$spip_lang;
 	if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
-	if (!isset($GLOBALS[$var][$code])) charger_langue($spip_lang, $module, $code);
+	if (!$flag_ecrire) {
+		global $cache_lang;
+		if (!isset($GLOBALS[$var][$code])) {
+			charger_langue($spip_lang, $module, $code);
+		}
+		$cache_lang[$spip_lang][$code] = 1;
+	}
 
 	$text = $GLOBALS[$var][$code];
 
-	if (!is_array($args)) return $text;
+	if (!$args) return $text;
 
 	while (list($name, $value) = each($args))
 		$text = str_replace ("@$name@", $value, $text);
@@ -375,10 +401,12 @@ function utiliser_langue_visiteur() {
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $dir_ecrire, $langue_site;
+	global $all_langs, $dir_ecrire, $langue_site, $cache_lang, $cache_lang_modifs;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
+	$cache_lang = array();
+	$cache_lang_modifs = array();
 
 	if (!$all_langs || !$langue_site || !$dir_ecrire) {
 		if (!$d = @opendir($dir_ecrire.'lang')) return;

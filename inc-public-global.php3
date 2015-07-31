@@ -233,7 +233,6 @@ if ($admin_ok AND !$flag_preserver AND !$flag_boutons_admin) {
 // ---------------------------------------------------------------------------------------------
 // Taches de fond
 
-
 //
 // Envoi du mail quoi de neuf
 //
@@ -271,6 +270,14 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 	}
 	$timeout = true;
 }
+
+
+// Mise a jour des fichiers langues de l'espace public
+if ($cache_lang_modifs) {
+	include_ecrire('inc_lang.php3');
+	ecrire_caches_langues();
+}
+
 
 // recalcul des rubriques publiques (cas de la publication post-datee)
 if (!$timeout AND $db_ok AND (time()-lire_meta('calcul_rubriques') > 3600)) {
