@@ -267,17 +267,34 @@ function ecrire_acces() {
 }
 
 
-// http://doc.spip.org/@generer_htpass
+/**
+ * Créer un password htaccess
+ *
+ * @uses crypt()
+ * @link http://docs.php.net/manual/fr/function.crypt.php
+ * 
+ * @global string $htsalt
+ *   Une chaîne de sel sur laquelle sera fondée le hachage.
+ * @param string $pass
+ *   Le mot de passe
+ * @return void|string 
+ *  La chaîne hachée si fonction crypt présente, rien sinon.
+ */
 function generer_htpass($pass) {
 	global $htsalt;
 	if (function_exists('crypt'))
 		return crypt($pass, $htsalt);
 }
 
-//
-// Installe ou verifie un .htaccess, y compris sa prise en compte par Apache
-//
-// http://doc.spip.org/@verifier_htaccess
+/**
+ * Installe ou vérifie un fichier .htaccess, y compris sa prise en compte par Apache
+ * 
+ * @uses recuperer_lapage()
+ * @param string $rep
+ *        Nom du répertoire où SPIP doit vérifier l'existence d'un fichier .htaccess
+ * @param bool $force
+ * @return boolean
+ */
 function verifier_htaccess($rep, $force=false) {
 	$htaccess = rtrim($rep,"/") . "/" . _ACCESS_FILE_NAME;
 	if (((@file_exists($htaccess)) OR defined('_TEST_DIRS')) AND !$force)
@@ -304,7 +321,20 @@ function verifier_htaccess($rep, $force=false) {
 
 
 
-// http://doc.spip.org/@gerer_htaccess
+/**
+ * Créer un fichier .htaccess pour chaque répertoire d'extension 
+ * dans `_DIR_IMG` si la configuration le demande
+ *
+ * @note 
+ *     La variable de configuration `creer_htaccess` peut être posée 
+ *     par un plugin tel acces_restreint.
+ * 
+ * @uses _DIR_IMG
+ * @uses verifier_htaccess()
+ *
+ * @return string
+ *         Valeur de la configuration `creer_htaccess`
+ */
 function gerer_htaccess() {
 	// Cette variable de configuration peut etre posee par un plugin
 	// par exemple acces_restreint
