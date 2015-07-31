@@ -405,7 +405,7 @@ cez FTP.</p>',
   ktoré boli na tejto stránke nainštalované predtým: hrozí riziko, že vaša databáza sa stratí
   a vaša stránka už viac nebude fungovať správne.<br />{{Preinštalute
   súbory SPIPu.}}',
-	'info_modification_enregistree' => 'Vaše zmeny sa uložili',
+	'info_modification_enregistree' => 'Vaše zmeny boli uložené',
 	'info_modifier_auteur' => 'Upraviť údaje o autorovi:',
 	'info_modifier_rubrique' => 'Upraviť rubriku:',
 	'info_modifier_titre' => 'Upraviť: @titre@',
@@ -751,7 +751,7 @@ a stav ich spracovania je označený farbou:',
 	'plugin_info_install_ok' => 'Inštalácia úspešná',
 	'plugin_info_necessite' => 'Treba:',
 	'plugin_info_non_compatible_spip' => 'Tento zásuvný modul nie je kompatibilný s touto verziou SPIPu',
-	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a sú tam aktivované tieto zásuvné moduly.', # MODIF
+	'plugin_info_plugins_dist_1' => 'Do priečinka @plugins_dist@ boli nahrané a boli v ňom aktivované tieto zásuvné moduly.',
 	'plugin_info_plugins_dist_2' => 'Nedajú sa deaktivovať.',
 	'plugin_info_telecharger' => 'spustiť z @url@ a nainštalovať na @rep@',
 	'plugin_librairies_installees' => 'Nainštalované knižnice',

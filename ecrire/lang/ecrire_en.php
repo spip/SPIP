@@ -750,7 +750,7 @@ and their status is colour-coded:',
 	'plugin_info_install_ok' => 'Installation successful',
 	'plugin_info_necessite' => 'Required:',
 	'plugin_info_non_compatible_spip' => 'This plugin is incompatible with this version of SPIP',
-	'plugin_info_plugins_dist_1' => 'The following plugins are loaded and activated in the @plugins_dist@ directory.', # MODIF
+	'plugin_info_plugins_dist_1' => 'The following plugins are loaded and activated in the @plugins_dist@ directory.',
 	'plugin_info_plugins_dist_2' => 'They cannot be disabled.',
 	'plugin_info_telecharger' => 'load from @url@ and install to @rep@',
 	'plugin_librairies_installees' => 'Libraries installed',

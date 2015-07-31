@@ -655,13 +655,13 @@ in einer Farbe, die den Status anzeigt :',
 	'lien_ajout_destinataire' => 'Empfänger hinzufügen',
 	'lien_ajouter_auteur' => 'Autor hinzufügen',
 	'lien_ajouter_participant' => 'Teilnehmer hinzufügen',
-	'lien_ajouter_une_rubrique' => 'Ajouter cette rubrique', # NEW
+	'lien_ajouter_une_rubrique' => 'Diese Rubrik hinzufügen',
 	'lien_email' => 'E-Mail',
 	'lien_nom_site' => 'NAME DER WEBSITE:',
 	'lien_retirer_auteur' => 'Autor entfernen',
-	'lien_retirer_rubrique' => 'Retirer la rubrique', # NEW
+	'lien_retirer_rubrique' => 'Rubrik entfernen',
 	'lien_retirer_tous_auteurs' => 'Alle Autoren entfernen',
-	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
+	'lien_retirer_toutes_rubriques' => 'Alle Rubriken entfernen ',
 	'lien_retrait_particpant' => 'Teilnehmer entfernen',
 	'lien_site' => 'Website',
 	'lien_supprimer_rubrique' => 'Rubrik löschen',
@@ -739,7 +739,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_librairies_installees' => 'Installierte Bibliotheken',
 	'plugin_necessite_lib' => 'Dieses Plugin benötigt die Bibliothek @lib@',
 	'plugin_necessite_plugin' => 'Benötigt mindestens Version @version@ des Plugin @plugin@.',
-	'plugin_necessite_plugin_sans_version' => 'Nécessite le plugin @plugin@', # NEW
+	'plugin_necessite_plugin_sans_version' => 'Benötigt das Plugin @plugin@',
 	'plugin_necessite_spip' => 'Benötigt mindestens Version @version@ von SPIP.',
 	'plugin_source' => 'Quelle: ',
 	'plugin_titre_automatique' => 'Automatische Installation',
@@ -793,7 +793,7 @@ in einer Farbe, die den Status anzeigt :',
 	'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons für Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdrücke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 	'taille_cache_infinie' => 'Die Grösse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 	'taille_cache_maxi' => 'SPIP versucht die Grösse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',
-	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_moins_de' => 'Die Größe des Caches beträgt mindestens  @octets@.',
 	'taille_cache_octets' => 'Aktuelle Grösse des Cache: @octets@ Byte', # MODIF
 	'taille_cache_vide' => 'Der Cache ist leer.',
 	'taille_repertoire_cache' => 'Grösse des Cache-Verzeichnis',
@@ -827,11 +827,11 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_crash_base' => 'Wenn Ihre Datenbank abgestürzt ist, können Sie eine automatische Reparatur versuchen.',
 	'texte_creer_rubrique' => 'Bevor Sie Artikel schreiben können,<br /> müssen Sie eine Rubrik anlegen.',
 	'texte_date_creation_article' => 'ARTIKEL ANGELEGT AM:',
-	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
+	'texte_date_creation_objet' => 'Erstellungsdatum:', # on ajoute le &quot;:&quot;
 	'texte_date_publication_anterieure' => 'DATUM EINER FRÜHEREN BEARBEITUNG',
 	'texte_date_publication_anterieure_nonaffichee' => 'Kein Datum einer früheren Bearbeitung anzeigen.',
 	'texte_date_publication_article' => 'ONLINE VERÖFFENTLICHT AM:',
-	'texte_date_publication_objet' => 'Date de publication en ligne :', # NEW
+	'texte_date_publication_objet' => 'Veröffentlichungs-Datum:',
 	'texte_descriptif_petition' => 'Beschreibung der Petition',
 	'texte_descriptif_rapide' => 'Kurzbeschreibung',
 	'texte_effacer_base' => 'SPIP-Datenbank löschen',
@@ -919,7 +919,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 	'titre_admin_vider' => 'Wartung',
 	'titre_ajouter_un_auteur' => 'Autor hinzufügen',
 	'titre_ajouter_un_mot' => 'Schlagwort hinzufügen',
-	'titre_ajouter_une_rubrique' => 'Ajouter une rubrique', # NEW
+	'titre_ajouter_une_rubrique' => 'Eine Rubrik hinzufügen',
 	'titre_cadre_afficher_article' => 'Artikel anzeigen',
 	'titre_cadre_afficher_traductions' => 'Stand der Übersetzungen für diese Sprachen anzeigen',
 	'titre_cadre_ajouter_auteur' => 'AUTOR HINZUFÜGEN: ',
