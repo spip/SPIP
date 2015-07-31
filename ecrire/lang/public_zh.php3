@@ -99,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'popularite' => '&#28909;&#28857;',
 'poster_message' => '&#21457;&#34920;&#28040;&#24687;',
 'poster_un_message' => '&#21457;&#34920;&#28040;&#24687;',
+'proposer_site' => '<NEW>Vous pouvez proposer un site &agrave; ajouter dans cette rubrique&nbsp;:',
 
 
 // R

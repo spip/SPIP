@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'access_interface_graphique' => 'Reiro al kompletan grafikan interfacon',
-'access_mode_texte' => 'Afi&#349;igi la simpligita teksta interfaco',
+'access_mode_texte' => 'Afi&#349;igi la simpligita tekstan interfacon',
 'admin_modifier_article' => 'Modifu tiun &#265;i artikolon',
 'admin_modifier_auteur' => 'Modifu tiun &#265;i a&#365;toron',
 'admin_modifier_breve' => 'Modifu tiun &#265;i informeton',
@@ -164,7 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Dosieroj de ka&#349;ilo estas regitritaj en densigita modo.',
 'cache_mode_non_compresse' => 'La dosieroj de ka&#349;ilo estas registritaj en ne-densigita modo.',
-'cache_modifiable_webmestre' => 'Tiujn opciojn eblas modifii la mastrumanto de teksejo.',
+'cache_modifiable_webmestre' => 'Tiujn opciojn povas modifi la mastrumanto de la teksejo.',
 'calendrier_synchro' => 'Se vi uzas agend-programon kongruan kun <b>iCal</b> formato, vi povas &#285;isdatigi tiun kun la datenoj de tiu teksejo.',
 'confirm_changer_statut' => 'Atentu, vi petis por &#349;an&#285;i la statuson de tiu elemento. &#264;u vi deziras da&#365;rigi ?',
 
@@ -335,7 +335,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(tio estas a&#365;tomata mesa&#285;o)',
 'form_forum_pass' => 'pasvorto:',
 'form_forum_probleme_mail' => 'Retpo&#349;ta problemo: la identigilo ne sendeblas.',
-'form_forum_voici1' => 'Jen viaj identigiloj por partopreni la funkciadon de la teksejo "@nom_site_spip@" (@adresse_site@/):',
+'form_forum_voici1' => 'Jen viaj identigiloj por partopreni la funkciadon de teksejo "@nom_site_spip@" (@adresse_site@/):',
 'form_forum_voici2' => '&#264;i tie estas viaj identigiloj por proponi artikolojn en la teksejo "@nom_site_spip@" (@adresse_site@/ecrire/):',
 'form_indiquer_email' => 'Bonvolu indiki vian retpo&#349;tadreson.',
 'form_indiquer_nom' => 'Bonvolu indiki vian nomon.',
@@ -400,7 +400,7 @@ Dankon pro via partopreno
 'forum_message_trop_long' => 'Via mesa&#285;o estas tro longa. La maksimuma longeco estas 20.000 signoj.',
 'forum_ne_repondez_pas' => 'Ne respondu al tiu &#265;i mesa&#285;o, sed en la forumo &#265;e sekva adreso:',
 'forum_non_inscrit' => 'Vi ne estas enskribita, a&#365; la adreso a&#365; la pasvorto ne &#285;ustas.',
-'forum_page_url' => '(Se via mesa&#285;o rilatas al artikolo publikigita en la TTT, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj &#285;ian URL-adreson.)',
+'forum_page_url' => '(Se via mesa&#285;o rilatas al artikolo publikigita en la TTT, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj &#285;ian ret-adreson.)',
 'forum_par_auteur' => 'de @auteur@',
 'forum_poste_par' => 'Mesa&#285;o poste@parauteur@ post via artikolo.',
 'forum_probleme_database' => 'Problemo de datenbazo, via mesa&#285;o ne estas registrita.',
@@ -697,7 +697,7 @@ Dankon pro via partopreno
 'info_gauche_messagerie' => 'La mesa&#285;ilo ebligas al vi inter&#349;an&#285;i mesa&#285;ojn inter la a&#365;toroj, konservi memorigilojn (por via propra uzado) a&#365; afi&#349;i anoncojn en la akceptopa&#285;o de la privata spaco (se vi estas administranto).',
 'info_gauche_numero_auteur' => 'A&#364;TORO NUMERO',
 'info_gauche_numero_breve' => 'INFORMETO NUMERO',
-'info_gauche_statistiques_referers' => 'Tiu pa&#285;o prezentas la liston de la referencejoj (<i>referers</i>), tio estas teksejoj enhavantaj ligilojn al via propra teksejo, nur hiera&#365; kaj hodia&#365;: efektive, tiu listo estas aktualigita &#265;iujn 24 horojn.',
+'info_gauche_statistiques_referers' => 'Tiu pa&#285;o prezentas la liston de la  (<i>referencejoj</i>). Tio estas teksejoj enhavantaj ligilojn al via propra teksejo, nur hiera&#365; kaj hodia&#365;: efektive, tiu listo estas aktualigita &#265;iujn 24 horojn.',
 'info_gauche_suivi_forum' => 'La pa&#285;o pri <i>kontrolo de la forumoj</i> estas mastrumilo de via teksejo (kaj ne loko por diskutoj a&#365; redaktoj). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
 'info_gauche_suivi_forum_2' => 'La pa&#285;o pri <i>kontrolo de la forumoj</i> estas mastrumilo de via teksejo (kaj ne loko por diskutoj a&#365; redaktoj). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la forumoj (de la publika teksejo same kiel de la privata parto), kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
 'info_gauche_visiteurs_enregistres' => 'Vi trovos &#265;i tie la registritajn vizitantojn
@@ -719,7 +719,7 @@ Dankon pro via partopreno
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_aide' => 'HELPILO',
 'info_image_process' => 'Bonvolu elekti la pli bonan metodon por fabriki vinjetojn alklakante la tiurilatan bildon.',
-'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, la servilo kiu gastas vian teksejon ne estas konfigurita por tial iloj. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika administranto.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, la servilo kiu gastas vian teksejon ne estas konfigurita por tia iloj. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika administranto.</i>',
 'info_image_process_titre' => 'Metodo de fabrikado de vinjetoj',
 'info_impossible_lire_page' => '<B>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 'info_inclusion_directe' => 'Rekta inkludo:',
@@ -860,8 +860,8 @@ Dankon pro via partopreno
 'info_premier_resultat_sur' => '[@debut_limit@ unuaj rezultoj el @total@]',
 'info_preview_admin' => 'Nur la mastrumantoj povas anta&#365;vidi la teksejon',
 'info_preview_comite' => '&#264;iuj redaktistoj povas anta&#365;vidi la teksejon',
-'info_preview_desactive' => 'La anta&#365;vida&#309;o estas malaktivita',
-'info_preview_texte' => 'Eblas anta&#365;vidi la tekesejon tiel kiel ciuj artikoloj kaj informetoj (kiuj almena&#365; havas la &laquo;&nbsp;proponita&nbsp;&raquo; statuson) estus publikigitaj. &#264;u tio eblos nur por mastrumantoj, por &#265;iuj redaktistoj, a&#365; por neniu&nbsp;?',
+'info_preview_desactive' => 'La anta&#365;vidado estas malaktivita',
+'info_preview_texte' => 'Eblas anta&#365;vidi la teksejon kvaza&#365; ciuj artikoloj kaj informetoj (kiuj almena&#365; havas la &laquo;&nbsp;proponita&nbsp;&raquo; statuson) estus publikigitaj. &#264;u tio eblu nur por mastrumantoj, por &#265;iuj redaktistoj, a&#365; por neniu&nbsp;?',
 'info_principaux_correspondants' => 'Viaj &#265;efaj koresponduloj',
 'info_probleme_grave' => 'problemo de',
 'info_procedez_par_etape' => 'procedu la&#365;etape',
@@ -879,7 +879,7 @@ Dankon pro via partopreno
 'info_publie_2' => 'Artikolo publikigita;
 --------------',
 'info_publies' => 'Viaj artikoloj rete publikigitaj',
-'info_question_accepter_visiteurs' => 'Se via skeleto permesas la registradon de vizitantoj kiuj ne eblas aliri la privatan spacon, bonvolu aktivi la &#265;i-supre opcion:',
+'info_question_accepter_visiteurs' => 'Se via skeleto permesas la registradon de vizitantoj kiuj ne rajtas aliri la privatan spacon, bonvolu aktivigi la &#265;i-supran opcion:',
 'info_question_gerer_statistiques' => '&#264;u via retpa&#285;o devas mastrumi la statistikojn de la vizitoj&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => '&#264;u vi akceptas la enskribi&#285;on de novaj redaktistoj ekde
 		la publika spaco&nbsp;? Se vi akceptas tion, la vizitantoj povos enskribi sin
@@ -1223,23 +1223,23 @@ Dankon pro via partopreno
 'onglet_origine_visites' => 'Deveno de la vizitoj',
 'onglet_repartition_actuelle' => 'nun',
 'onglet_repartition_debut' => 'dekomence',
-'onglet_repartition_lang' => 'Distribuo per lingvoj',
+'onglet_repartition_lang' => 'Distribuo la&#365; lingvo',
 'onglet_repartition_rubrique' => 'Dispartigo la&#365; rubrikoj',
 'onglet_save_restaur_base' => 'Konservi/restarigi la bazon',
 'onglet_vider_cache' => 'Malplenigi la tenejon',
-'ortho_ajouter_ce_mot' => 'Aldoni tiun vorton al vortaro',
-'ortho_aucune_suggestion' => 'Nenia sugesto estis trovita por tiu vorto.',
-'ortho_avis_privacy' => 'SPIP enhavas kontrolilon de ortografio. Tamen, anta&#365; aktivi tiun funkcion, atentu legi la jenan paragrafon:',
-'ortho_avis_privacy2' => 'Por kontroli la ortografon de teksto, la teksejo sendas liston de kontrolotaj vortoj al eksteraj &laquo;&nbsp;serviloj de ortografio&nbsp;&raquo; kiujn disponigas al vi SPIP-anoj. Vortoj estas sendita malorde por ka&#349;i la tutan tekston. Tamen, se vi havas tima&#309;ojn pri via data&#309;oj, ne aktivi tiun opcion (kaj anka&#365; malprenu nun viajn informa&#309;ojn de la reto).',
-'ortho_ce_mot_connu' => 'Tiu vorto estas en la vortaro de teksejo.',
+'ortho_ajouter_ce_mot' => 'Aldoni tiun vorton al la vortaro',
+'ortho_aucune_suggestion' => 'Nenia propono estis trovita por tiu vorto.',
+'ortho_avis_privacy' => 'SPIP enhavas kontrolilon de ortografio. Tamen, anta&#365; aktivigi tiun funkcion, atente legu jenan paragrafon:',
+'ortho_avis_privacy2' => 'Por kontroli la ortografion de teksto, la teksejo sendas liston de kontrolotaj vortoj al eksteraj &laquo;&nbsp;serviloj de ortografio&nbsp;&raquo; kiujn disponigas al vi SPIP-anoj. Vortoj estas senditaj malorde por ka&#349;i la tutan tekston. Tamen, se vi havas timon pri via datenoj, ne aktivu tiun opcion (kaj anka&#365; forprenu tuj viajn datenoj en la reto).',
+'ortho_ce_mot_connu' => 'Tiu vorto estas en la vortaro de la teksejo.',
 'ortho_dico_absent' => 'Neniu vortaro estis trovita por tiu lingvo',
-'ortho_mode_demploi' => 'Nekonitaj vortoj estas ru&#285;e substrekitaj. Vi povas alklaki &#265;iun vorton por afi&#349;igi sugestojn de korekta&#309;o.',
+'ortho_mode_demploi' => 'Nerekonitaj vortoj estas ru&#285;e substrekitaj. Vi povas alklaki &#265;iun vorton por afi&#349;igi korekto-proponojn.',
 'ortho_mots_a_corriger' => 'korektota vorto',
 'ortho_orthographe' => 'Ortografio',
 'ortho_supprimer_ce_mot' => 'Forigi tiun vorton de vortaro',
-'ortho_trop_de_fautes' => 'Atentu: via teksto enhavas tro da eraroj. Nenia korekta&#309;o estas sugestita por ne en&#349;ar&#285;i la sistemon.',
-'ortho_trop_de_fautes2' => 'Bonvolu korekti la pli evidentajn erarojn kaj tiam reprovu.',
-'ortho_verif_impossible' => 'La sistemo ne eblas kontroli la ortografion de tiu teksto.',
+'ortho_trop_de_fautes' => 'Atentu: via teksto enhavas tro da eraroj. Nenia korekta&#309;o estas proponita por ne tro&#349;ar&#285;i la sistemon.',
+'ortho_trop_de_fautes2' => 'Bonvolu korekti la plej evidentajn erarojn kaj tiam reprovu.',
+'ortho_verif_impossible' => 'La sistemo ne povas kontroli la ortografion de tiu teksto.',
 'ortho_verifier' => 'Kontrolu la ortografion',
 
 
@@ -1295,9 +1295,9 @@ kaj rekonekti vin al la teksejo.
 
 
 // T
-'taille_cache_infinie' => 'Tiu teksejo ne limigas grandecon de la <code>CACHE/</code> dosierujo.',
-'taille_cache_maxi' => 'SPIP provas limigi grandecon de la <code>CACHE/</coche> dosierujo cirka&#365; <b>@octets@</b> de data&#309;oj.',
-'taille_cache_octets' => 'Grandeco de la ka&#349;ilo estas nun de @octets@.',
+'taille_cache_infinie' => 'Tiu teksejo ne limigas grandecon de la dosierujo <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP provas limigi grandecon de la dosierujo <code>CACHE/</coche> cirka&#365; <b>@octets@</b> da datenoj.',
+'taille_cache_octets' => 'Grandeco de la ka&#349;ilo estas nun @octets@.',
 'taille_cache_vide' => 'La ka&#349;ilo estas malplena.',
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
@@ -1328,7 +1328,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_article_virtuel' => 'Virtuala artikolo',
 'texte_article_virtuel_reference' => '<b>Virtuala artikolo&nbsp;:</b> artikolo referencita en via SPIP-retejo, sed alidirektita al alia URL. Por forigi la alidirektigon, forvi&#349;u la &#265;i-supran URL.',
 'texte_aucun_resultat_auteur' => 'Nenia rezulto por "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Tiu teksejo povas permanente indiki la liston de la konektitaj redaktistoj, kio ebligas al vi rekte inter&#349;an&#285;i mesa&#285;ojn. Vi povas decidi ne aperi en tiu listo (vi estas &laquo;&nbsp;nevidebla&nbsp;&raquo; por la aliaj uzantoj).',
+'texte_auteur_messagerie' => 'Tiu teksejo povas konstante indiki la liston de la konektitaj redaktistoj, kio ebligas al vi rekte inter&#349;an&#285;i mesa&#285;ojn. Vi povas decidi ne aperi en tiu listo (vi estas &laquo;&nbsp;nevidebla&nbsp;&raquo; por la aliaj uzantoj).',
 'texte_auteur_messagerie_1' => 'Tiu teksejo ebligas la inter&#349;an&#285;on de mesa&#285;oj kaj la estigon de privataj forumoj inter la partoprenantoj de la retejo. Vi povas decidi ne partopreni en tiuj inter&#349;an&#285;oj.',
 'texte_auteurs' => 'LA A&#364;TOROJ',
 'texte_breves' => 'La informetoj estas mallongaj kaj simplaj tekstoj ebligantaj
@@ -1376,7 +1376,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 				La&#365; la enpa&#285;igo de la publika spaco,
 				ili povos aperi en formo de kunmetitaj dokumentoj.',
 'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficejajn dosierojn, bildojn,
- son- kaj filma&#309;oj, ktp.) al la artikoloj kaj/a&#365; al la rubrikoj. Tiuj dosieroj
+ a&#365;d-vida&#309;ojn, ktp.) al la artikoloj kaj/a&#365; al la rubrikoj. Tiuj dosieroj
  povas poste esti referencitaj en la artikolo
  a&#365; afi&#349;itaj sendepende.<p>',
 'texte_documents_joints_2' => 'Tiu aran&#285;o ne malhelpas la enigon de bildoj rekte en la artikolojn.',
@@ -1389,11 +1389,11 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 		Notu bone tiun referencon, reprovu la niveligon,
 		kaj fine kontrolu ke la bildoj aperu
 		ankora&#365; en la artikoloj.',
-'texte_fichier_authent' => '<b>&#264;u SPIP devas krei la specialajn dosierojn <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<b>&#264;u SPIP kreu la specialajn dosierojn <tt>.htpasswd</tt>
   kaj <tt>.htpasswd-admin</tt> en la dosierujo <tt>ecrire/data/</tt> ?</b><p>
   Tiuj dosieroj povas servi vin por limigi la aliron al la a&#365;toroj
   kaj administrantoj en aliaj lokoj de via teksejo
-  (ekzemple, ekstera statistik-programopro).<p>
+  (ekzemple, ekstera statistik-programo).<p>
   Se tio ne utilas al vi, vi povas lasi tiun opcion
   en &#285;ia defa&#365;lta valoro (ne kreado
   de dosieroj).',
@@ -1408,7 +1408,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 	familiara kun la funkcionado de la sistemo SPIP. <P align="justify"><B>Pli
 	&#285;enerale, estas tre konsilinde lasi la mastrumadon de tiuj &#265;i pa&#285;oj
 	al la &#265;efa teksestro de via teksejo.</B>',
-'texte_inc_meta_1' => 'Sistemo enkontris eraron dum skriba&#309;o de dosiero <code>ecrire/data/meta_cache.php3</code>.Bonvolu, kiel administranto de la teksejo,',
+'texte_inc_meta_1' => 'Sistemo malkovris eraron dum skribado de dosiero <code>ecrire/data/meta_cache.php3</code>.Bonvolu, kiel administranto de la teksejo,',
 'texte_inc_meta_2' => 'kontroli la skriborajtojn',
 'texte_inc_meta_3' => 'en la dosierujo <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'La sistemo kreos al vi nun personan aliron al la teksejo.',
@@ -1604,7 +1604,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_langue_rubrique' => 'LINGVO DE LA RUBRIKO',
 'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
 'titre_les_articles' => 'LA ARTIKOLOJ',
-'titre_liens_entrants' => 'Enantaj ligojn',
+'titre_liens_entrants' => 'Enirantaj ligoj',
 'titre_mots_cles' => '&#348;LOSILVORTOJ',
 'titre_mots_cles_dans_forum' => '&#348;losilvortoj en la forumoj de la publikejo',
 'titre_mots_tous' => 'La &#349;losilvortoj',
@@ -1666,16 +1666,16 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 
 
 // U
-'upload_fichier_zip' => 'ZIP Dosiero',
-'upload_fichier_zip_texte' => 'La dosiero kiun vi proponas instali estas Zip dosiero.',
+'upload_fichier_zip' => 'ZIP-Dosiero',
+'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas ZIP-dosiero.',
 'upload_fichier_zip_texte2' => 'Tiu dosiero eble estas&nbsp;:',
-'upload_limit' => 'Tiu dosiero estas tro granda por la servilo; la maksimuma grandeco permisita en <i>upload</i> estas de @max@.',
-'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento kiun &#285;i enhavas instalita en la teksejo. La dosieroj kiujn estos tiam instalitaj en la teksejo estas:',
-'upload_zip_telquel' => 'instalita tiel, kiel densigita Zip arkivo;',
+'upload_limit' => 'Tiu dosiero estas tro granda por la servilo; la maksimuma grandeco permesita en <i>upload</i> estas @max@.',
+'upload_zip_decompacter' => 'maldensigita kaj &#265;iu elemento kiun &#285;i enhavas instalita en la teksejo. La dosieroj kiuj estos tiam instalitaj en la teksejo estas:',
+'upload_zip_telquel' => 'instalita kiel tia, kiel densigita Zip-arkivo;',
 
 
 // V
-'version_initiale' => 'Iniciala versio'
+'version_initiale' => 'Komenca versio'
 
 );
 

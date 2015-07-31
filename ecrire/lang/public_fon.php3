@@ -6,46 +6,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => 'H&#596;ntogbo&#769;',
-'articles' => 'Wekpa&#769; l&#603;&#770;',
-'articles_auteur' => 'Ny&#596;wla&#769;nt&#596; &eacute; l&#596; si&#769;n wekpa&#769; l&#603;&#770;',
-'articles_populaires' => 'wekpa&#769; l&#603;&#770;  &ecirc; to&#769; bi t&ugrave;n y&eacute;',
-'articles_recents' => 'wekpa&#769; g&ugrave;do&#769;g&ugrave;dot&#596;n l&#603;&#770;  ',
-'articles_rubrique' => 'wekpa&#769; &#598;i&#768;&#598;&#603; &eacute; l&#596; t&#596;n',
-'aucun_article' => 'wekpa&#769; &#598;e&#772;&#772;  do&#768; gesi&#769; &eacute; l&#596; ji&#769; a ',
-'aucun_auteur' => 'Ny&#596;wla&#769;nt&#596; &#598;e&#772;&#772;  do&#768;  gesi&#769; &eacute; l&#596; ji&#769; a ',
-'aucun_site' => 'Gblogbloji&#769; &#598;e&#772;&#772;  do&#768;  gesi&#769; &eacute; l&#596; ji&#769; a',
-'aucune_breve' => 'Xo&#769;gb&egrave; kl&eacute;wun &#598;e&#772;&#772;  do&#768;  gesi&#769; &eacute; l&#596; ji&#769; a',
-'aucune_rubrique' => '&#598;i&#768;&#598;&#603; &#598;e&#772;&#772; do&#768; gesi&#769; &eacute; l&#596; ji&#769; a ',
-'autres_breves' => 'Xo&#769;gb&egrave; kl&eacute;wun de vo&#769;',
-'autres_groupes_mots_clefs' => 'Xo&#769;ta b&#603; do&#769;kp&#596; l&#603;&#770; ',
-'autres_sites' => 'Gblogbloji&#769; &#598;e&#772;&#772; vo&#769; l&#603;&#770;',
+'accueil_site' => 'H&#596;ntogbo',
+'articles' => 'Wekpa l&#603;&#770;',
+'articles_auteur' => 'Ny&#596;wlant&#596; &eacute; l&#596; sin wekpa l&#603;&#770;',
+'articles_populaires' => 'wekpa l&#603;&#770;  &ecirc; to bi t&ugrave;n y&eacute;',
+'articles_recents' => 'wekpa g&ugrave;dog&ugrave;dot&#596;n l&#603;&#770;  ',
+'articles_rubrique' => 'wekpa &#598;i&#598;&#603; &eacute; l&#596; t&#596;n',
+'aucun_article' => 'wekpa &#598;e&#772;&#772;  do gesi &eacute; l&#596; ji a ',
+'aucun_auteur' => 'Ny&#596;wlant&#596; &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a ',
+'aucun_site' => 'Gblogbloji &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a',
+'aucune_breve' => 'Xogb&egrave; kl&eacute;wun &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a',
+'aucune_rubrique' => '&#598;i&#598;&#603; &#598;e&#772;&#772; do gesi &eacute; l&#596; ji a ',
+'autres_breves' => 'Xogb&egrave; kl&eacute;wun de vo',
+'autres_groupes_mots_clefs' => 'Xota b&#603; dokp&#596; l&#603;&#770; ',
+'autres_sites' => 'Gblogbloji &#598;e&#772;&#772; vo l&#603;&#770;',
 
 
 // B
 'bonjour' => 'kwab&#596;   ',
-'breves' => 'Xo&#769;gb&egrave; kl&eacute;wun',
+'breves' => 'Xogb&egrave; kl&eacute;wun',
 
 
 // C
-'commenter_site' => 'T&#603;&#598;&#603; xo&#769; l&#603;&#770; ji&#769;',
+'commenter_site' => 'wl&#596;k&agrave;nn&uacute; xo l&#603;&#770;',
 
 
 // D
-'date' => 'azan',
-'dernier_ajout' => 'G&#596;na&#769; g&ugrave;do&#769;g&ugrave;dot&#596;n',
-'dernieres_breves' => 'Xo&#769;gb&egrave; kl&eacute;wun g&ugrave;do&#769;g&ugrave;dot&#596;n',
-'derniers_articles' => 'Wekpa&#769; g&ugrave;do&#769;g&ugrave;dot&#596;n',
-'derniers_commentaires' => '&#598;&#603;tit&#603; g&ugrave;do&#769;g&ugrave;dot&#596;n',
-'derniers_messages_forum' => 'wh&#603;n g&ugrave;do&#769;g&ugrave;dot&#596;n ye&#772; &#598;&#596; do&#769; to&#768; ji&#769;',
+'date' => 'Azan',
+'dernier_ajout' => 'G&#596;na g&ugrave;dog&ugrave;dot&#596;n',
+'dernieres_breves' => 'Xogb&egrave; kl&eacute;wun g&ugrave;dog&ugrave;dot&#596;n',
+'derniers_articles' => 'Wekpa g&ugrave;dog&ugrave;dot&#596;n',
+'derniers_commentaires' => '&#598;&#603;tit&#603; g&ugrave;dog&ugrave;dot&#596;n',
+'derniers_messages_forum' => 'wh&#603;n g&ugrave;dog&ugrave;dot&#596;n ye&#772; &#598;&#596;dotoji',
 
 
 // E
-'edition_mode_texte' => 'wiwla&#769;nm&#603;',
-'en_reponse' => '&#598;o&#768; gb&egrave;yi&#769;yi&#769; m&#603; nu&#769; &nbsp;:',
-'en_resume' => '&#598;o&#768; xo&#769;kl&eacute;wun m&#603; &#596;',
-'envoyer_message' => 's&#603; w&#603;n do&#769; ',
-'espace_prive' => 't&#603;nka&#769;ndo&#769;vo&#768;',
+'edition_mode_texte' => 'winwlanm&#603;',
+'en_reponse' => '&#598;ogb&egrave;yiyi m&#603; nu &nbsp;:',
+'en_resume' => '&#598;o xo kl&eacute;wun m&#603; &#596;',
+'envoyer_message' => 'S&#603; w&#603;n do ',
+'espace_prive' => 't&#603;nkandovo',
 
 
 // F
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // H
-'hierarchie_site' => 'Tito&#768; gblogbloji&#769; &#596; t&#596;n',
+'hierarchie_site' => 'Tito gblogbloji &#596; t&#596;n',
 
 
 // J
@@ -61,10 +61,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // M
-'meme_auteur' => 'Ny&#596;wla&#769;nt&#596; &#598;okpo &#596;',
-'meme_rubrique' => '&#598;o&#768; akpa &#598;okpo&#769; &#596; m&#603;',
-'memes_auteurs' => 'Ny&#596;wla&#769;nt&#596; &#598;okpo&#769; l&#603;&#770;',
-'message' => 'w&#603;n',
+'meme_auteur' => 'Ny&#596;wlant&#596; &#598;okpo &#596;',
+'meme_rubrique' => '&#598;o akpaxw&eacute; &#598;okpo &#596; m&#603;',
+'memes_auteurs' => 'Ny&#596;wlant&#596; &#598;okpo l&#603;&#770;',
+'message' => 'W&#603;n',
 'messages_forum' => 'w&#603;n pk&eacute;kpl&eacute; &#596; t&#596;n l&ecirc;',
 'messages_recents' => 'w&#603;n g&ugrave;do&#769;g&ugrave;dot&#596;n pk&eacute;kpl&eacute; &#596; t&#596;n l&ecirc;',
 'mots_clefs' => 'xo&#769;ta&#769; l&#603;&#770;',
@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Zin wema',
-'voir_en_ligne' => 'kp&#596;n Gblogbloji&#769;'
+'voir_en_ligne' => 'kp&#596;n Gblogbloji'
 
 );
 
