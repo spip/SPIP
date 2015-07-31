@@ -260,9 +260,10 @@ function liste_chemin_plugin($liste, $dir_plugins=_DIR_PLUGINS){
  * Liste les chemins vers les plugins actifs du dossier fourni en argument
  * a partir d'une liste d'elelements construits par plugin_valide_resume
  *
+ * @param string $dir_plugins
+ *     Chemin du répertoire de plugins
  * @return array
  */
-// http://doc.spip.org/@liste_chemin_plugin_actifs
 function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 	include_spip('plugins/installer');
 	return liste_chemin_plugin(liste_plugin_actifs(), $dir_plugins);
@@ -430,12 +431,26 @@ function actualise_plugins_actifs($pipe_recherche = false){
 	return ecrire_plugin_actifs('', $pipe_recherche, 'force');
 }
 
-// mise a jour du meta en fonction de l'etat du repertoire
-// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
-// si elle n'existe pas
-// risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
-// @return true/false si il y a du nouveau
-// http://doc.spip.org/@ecrire_plugin_actifs
+
+/**
+ * Modifie la liste des plugins actifs et recompile les fichiers caches
+ * qui leurs sont relatifs
+ *
+ * @note
+ *   Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
+ *   si elle n'existe pas risque de pb en php5 a cause du typage ou de null
+ *   (verifier dans la doc php)
+ * @param string|string[] $plugin
+ *     Plugin ou plugins concernés (leur chemin depuis le répertoire plugins)
+ * @param bool $pipe_recherche
+ *     ?
+ * @param string $operation
+ *     - raz : recalcule tout
+ *     - ajoute : ajoute le plugin indiqué à la liste des plugins actifs
+ *     - enleve : enleve le plugin indiqué de la liste des plugins actifs
+ * @return bool
+ *     true|false si il y a du nouveau
+**/
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 	// creer le repertoire cache/ si necessaire ! (installation notamment)
