@@ -554,10 +554,15 @@ function phraser_criteres($params, &$result) {
 				elseif ($param == 'plat') 
 					$result->modificateur['plat'] = true;
 
-				// Boucle hierarchie, analyser le critere id_rubrique ou non
-				// afin, dans les cas autres que {id_rubrique}, de
-				// forcer {tout} pour avoir la rubrique mere...
-				elseif (strcasecmp($type, 'hierarchie')==0 AND !preg_match(",^id_rubrique\b,",$param)) {
+				// Boucle hierarchie, analyser le critere id_rubrique
+				// et les autres critères {id_x} pour forcer {tout} sur
+				// ceux-ci pour avoir la rubrique mere...
+				// Les autres critères de la boucle hierarchie doivent être
+				// traités normalement.
+				elseif (strcasecmp($type, 'hierarchie')==0
+					AND !preg_match(",^id_rubrique\b,",$param)
+					AND preg_match(",^id_\w+\s*$,", $param))
+				{
 					$result->modificateur['tout'] = true;
 				}
 				elseif (strcasecmp($type, 'hierarchie')==0 AND $param=="id_rubrique") {
@@ -626,6 +631,7 @@ function phraser_criteres($params, &$result) {
 			}
 		}
 	}
+
 	// les doublons non nies doivent etre le dernier critere
 	// pour que la variable $doublon_index ait la bonne valeur
 	// cf critere_doublon
