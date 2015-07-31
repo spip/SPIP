@@ -49,6 +49,7 @@ class Boucle {
 	var $jointures_explicites = false;
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
+	var $fragment; # definir un fragment de page
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)
 	// champs pour la construction de la requete SQL
 	var $tout = false;
