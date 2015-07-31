@@ -159,8 +159,14 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 	if (!$page) return 1;
 
-	if (strlen($duree = $page['entetes']['X-Spip-Cache']))
-		return ($date + intval($duree) > time()) ? 0 : $duree;
+	if (strlen($duree = $page['entetes']['X-Spip-Cache'])) {
+		if ($duree == 0)  #CACHE{0}
+			return -1;
+		else if ($date + intval($duree) < time())
+			return $duree;
+		else
+			return 0;
+	}
 
 	// squelette ancienne maniere, on se rabat sur le vieux modele
 	return cache_valide($chemin_cache, $date);
