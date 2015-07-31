@@ -196,6 +196,7 @@ function action_rss_dist()
 	$id = _request('id');
 	$lang = _request('lang');
 	$op  = _request('op');
+	$a = array();
 
 	charger_generer_url();
 
@@ -208,58 +209,53 @@ function action_rss_dist()
 // 1.9: spip.php?action=rss&op=forums&args=page-public&id=4&cle=047b4183&lang=fr
 // ou encore spip.php?action=rss&op=a-suivre&id=5&cle=5731e121&lang=fr
 
-spip_timer('rss');
-if (!verifier_low_sec ($id, $cle,
-"rss $op $args"
-)) {
-	$op = 'erreur securite';
-	unset($a);
-} else {
-	$a = array();
-	foreach (split(':', $args) as $bout) {
-		list($var, $val) = split('-', $bout, 2);
-		$a[$var] = $val;
+	spip_timer('rss');
+	if (!verifier_low_sec($id, $cle, "rss $op $args")) {
+		$op = 'erreur securite';
+	} else {
+		foreach (split(':', $args) as $bout) {
+			list($var, $val) = split('-', $bout, 2);
+			$a[$var] = $val;
+		}
+		lang_select($lang);
 	}
-	lang_select($lang);
-}
 
 //
 // Choisir la fonction de calcul du RSS
 //
 
-spip_connect();
-switch($op) {
+	switch($op) {
 	# forum public
 	case 'forum':
 		include_spip('inc/forum');
 		if ($id = intval($a['id_article'])) {
 			$critere = "statut='publie' AND id_article=$id";
-			$r = sql_fetsel("titre", "spip_articles", "id_article=$id");
+			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
 			$url = generer_url_article($id);
 		}
 		else if ($id = intval($a['id_syndic'])) {
 			$critere = "statut='publie' AND id_syndic=$id";
-			$r = sql_fetsel("nom_site AS titre", "spip_syndic", "id_article=$id");
+			$title = sql_getfetsel("nom_site", "spip_syndic", "id_syndic=$id");
 			$url = generer_url_site($id);
 		}
 		else if ($id = intval($a['id_breve'])) {
 			$critere = "statut='publie' AND id_breve=$id";
-			$r = sql_fetsel("titre", "spip_articles", "id_article=$id");
+			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
 			$url = generer_url_breve($id);
 		}
 		else if ($id = intval($a['id_rubrique'])) {
 			$critere = "statut='publie' AND id_rubrique=$id";
-			$r = sql_fetsel("titre", "spip_articles", "id_article=$id");
+			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
 			$url = generer_url_rubrique($id);
 		}
 		else if ($id = intval($a['id_thread'])) {
 			$critere = "statut='publie' AND id_thread=$id";
-			$r = sql_fetsel("titre", "spip_articles", "id_article=$id");
+			$title = sql_getfetsel('titre', "spip_articles", "id_article=$id");
 			$url = generer_url_forum($id);
 		}
 		if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);
 
-		$title = $r['titre'] . ' (' . _T("ecrire:titre_page_forum_suivi") .')';
+		$title .=  ' (' . _T("ecrire:titre_page_forum_suivi") .')';
 		break;
 	# suivi prive des forums
 	case 'forums':
