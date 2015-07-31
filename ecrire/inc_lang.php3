@@ -254,7 +254,7 @@ function traduire_nom_langue($lang) {
 //
 // Afficher un menu de selection de langue
 //
-function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
+function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit=false) {
 	global $couleur_foncee;
 
 	if ($default == '')
@@ -268,6 +268,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 		$parenthese_f = ')';
 		$default = substr($default,1);
 	}
+	
+	
 
 	if ($nom_select == 'var_lang') {
 		$langues = explode(',', $GLOBALS['all_langs']);
@@ -283,19 +285,32 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 	$lien = $GLOBALS['clean_link'];
 	$lien->delVar($nom_select);
 	$lien = $lien->getUrl();
-
+	
 	$amp = (strpos(' '.$lien,'?') ? '&' : '?');
 
-	$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
+	$ret = "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 	$ret .= $texte;
 	if ($nom_select == 'var_lang') $ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
 	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
 	$ret .= $premier_option;
+
+	
+	if (lire_meta('multi_rubriques') == "oui") {
+		if ($herit) {
+			$ret .= "<option value='herit' selected> ("._T('info_multi_herit').")</option>\n";
+		} else if ($nom_select == 'changer_lang') {
+			$ret .= "<option value='herit'> ("._T('info_multi_herit').")</option>\n";
+		}
+	}
+
 	while (list(,$l) = each ($langues)) {
-		if ($l == $default)
-			$ret .= "<option value='$l' selected>$parenthese_o".traduire_nom_langue($l)."$parenthese_f</option>\n";
-		else
+		if ($l == $default) {
+			if (!$herit) $ret .= "<option value='$l' selected>$parenthese_o".traduire_nom_langue($l)."$parenthese_f</option>\n";
+			else $ret .= "<option value='$l'>$parenthese_o".traduire_nom_langue($l)."$parenthese_f</option>\n";
+		}
+		else {
 			$ret .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
+		}
 	}
 	$ret .= "</select>\n";
 	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
