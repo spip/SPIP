@@ -194,34 +194,26 @@ function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='
 	include_spip('inc/distant');
 	include_spip('inc/filtres');
 	include_spip('inc/filtres_images_mini');
-	$gd = ($GLOBALS['meta']['creer_preview'] === 'oui');
 	$e = $doc['extension'];
 	if (!$img) {
 		if (!$img = image_du_document($doc)) {
-			if (strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
-				$img = get_spip_doc($doc['fichier']);
-			else {
-				$img = vignette_par_defaut($e, false);
-				$x = $y = 0;
-				$class = '';
-			}
+			$img = vignette_par_defaut($e, false);
+			$x = $y = 0;
+			$class = '';
 		}
 	}
-	if ($gd) {
-		if ($x OR $y) {
-			$img = image_reduire($img, $x, $y);
-		} else 	$img = image_reduire($img);
-		$img = inserer_attribut($img, 'width', $x);
-		$img = inserer_attribut($img, 'height', $y);
-		$img = inserer_attribut($img, 'alt', '');
-		$img = inserer_attribut($img, 'class', $class);
-		if ($align) $img = inserer_attribut($img, 'align', $align);
-	} else {
-		if ($x AND $y)
-		  $size = " width='$x' $height='$y'";
-		else list($size) = @getimagesize($img);
-		$img = "<img src='$img' ".$size. " alt='' class='$class'" . ($align ? " align='$align'" : '') . " />";
+	// on appelle image_reduire independamment de la presence ou non
+	// des librairies graphiques
+	// la fonction sait se debrouiller et faire de son mieux dans tous les cas
+	if ($x OR $y) {
+		$img = image_reduire($img, $x, $y);
 	}
+	else
+		$img = image_reduire($img);
+//	$img = inserer_attribut($img, 'alt', '');
+	$img = inserer_attribut($img, 'class', $class);
+	if ($align) $img = inserer_attribut($img, 'align', $align);
+
 	if (!$lien) return $img;
 
 	$titre = supprimer_tags(typo($doc['titre']));
@@ -246,10 +238,12 @@ function image_du_document($document)
 {
 	$e = $document['extension'];
 	if ((strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
-	AND  $GLOBALS['meta']['creer_preview'] === 'oui') {
+	  AND (!test_espace_prive() OR $GLOBALS['meta']['creer_preview']=='oui')) {
 		if ($document['distant'] == 'oui') {
 			$image = _DIR_RACINE.copie_locale($document['fichier']);
-		} else 	$image = get_spip_doc($document['fichier']);
+		} 
+		else
+			$image = get_spip_doc($document['fichier']);
 		if (@file_exists($image)) return $image;
 	}
 	return '';
