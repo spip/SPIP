@@ -97,9 +97,10 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
 	$referencer_traduction = charger_fonction('referencer_traduction', 'inc');
 
-	if ($flag_editable AND ($spip_display != 4)) 
+	if ($flag_editable AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-	else $iconifier = '';
+		$icone = $iconifier('id_article', $id_article,'articles','iconifier');
+	} else $icone = '';
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');
 
@@ -107,7 +108,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	.	boite_info_articles($id_article, $statut_article, $visites, $id_version)
 
-	.	(!$iconifier ? '' : $iconifier('id_article', $id_article,'articles','iconifier'))
+	.	$icone
 
 	.	boites_de_config_articles($id_article)
 	.	boite_article_virtuel($id_article, $virtuel, $flag_editable)
