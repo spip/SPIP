@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="12" height="12" border="0" align="middle"></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="top"></a>';
 }
 
 
@@ -51,9 +51,12 @@ function bouton_imessage($destinataire, $row = '') {
 	}
 	$url .= "dest=$destinataire&";
 	$url .= "new=oui&type=normal";
-	
-	$texte_bouton = "<IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='-'>";
-	return "<a href='$url'>$texte_bouton</a>";
+
+	if ($destinataire) $title = "Envoyer un message priv&eacute; &agrave; cet auteur";
+	else $title = "Ecrire un message priv&eacute;";
+
+	$texte_bouton = "<img src='img_pack/m_envoi.gif' width='14' height='7' border='0'>";
+	return "<a href='$url' title=\"$title\">$texte_bouton</a>";
 }
 
 //
@@ -237,6 +240,15 @@ function debut_raccourcis() {
 	debut_cadre_enfonce();
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	echo "<b>RACCOURCIS :</b><p>";
+
+	/*echo "<form method='get' action='recherche.php3'>";
+	echo "<div class='iconeon' style='padding:5px;'>";
+	echo "<input type='Hidden' name='id_article' value='$id_article'>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>Rechercher</b> un article, une rubrique, une br&egrave;ve&nbsp;:</font>";
+	echo '<input type="text" class="forml" size="*" value="" name="recherche" class="spip_recherche">';
+	echo "</div>";
+	echo "</form>";
+	*/
 }
 
 function fin_raccourcis() {
@@ -1287,18 +1299,18 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	debut_html($titre);
 	
 		echo "\n<map name='map_couleur'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=6' coords='0,0,10,10' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=1' coords='12,0,22,10' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=2' coords='24,0,34,10' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=3' coords='36,0,46,10' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=4' coords='48,0,58,10' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=5' coords='60,0,70,10' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=7' coords='0,11,10,21' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=8' coords='12,11,22,21' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=9' coords='24,11,34,21' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=10' coords='36,11,46,21' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=11' coords='48,11,58,21' title=\"Changer la couleur de l'interface\"'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=12' coords='60,11,70,21' title=\"Changer la couleur de l'interface\"'>";
+		echo "\n<area shape='rect' href='$lien&set_couleur=6' coords='0,0,10,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=1' coords='12,0,22,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=2' coords='24,0,34,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=3' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=4' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=5' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=7' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=8' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=9' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=10' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=11' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=12' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
@@ -1313,8 +1325,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td background=''>";
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 	echo "</td>";
-	echo "<td background=''>";// Attention: "edition, ici, c'est du jargon informatique"
-		icone_bandeau_principal ("Contenu du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
+	echo "<td background=''>";
+		icone_bandeau_principal ("Edition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
 	echo "</td>";
@@ -1415,12 +1427,12 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire ("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
 			bandeau_barre_verticale();
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
+			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "suivi-petition", $sous_rubrique);
 		}
-		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+/*		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 			bandeau_barre_verticale();
 			icone_bandeau_secondaire ("Messagerie interne", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
-		}
+		}*/
 	}
 	else if ($rubrique == "administration"){
 		if ($connect_toutes_rubriques) {
@@ -1433,26 +1445,29 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 
 	if ($options == "avancees") {
-		global $recherche;
+/*		global $recherche;
 		if (strlen($recherche) == 0) {
 			if ($spip_display == 2) $recherche = "Titre ou num&eacute;ro";
 			else $recherche = "Rechercher";
 		}
 		bandeau_barre_verticale();
-		echo "<td width='5'><img src='img_pack/rien.gif' width=5></td>";
+		echo "<td width='10'><img src='img_pack/rien.gif' width=10></td>";
 		echo "<td>";
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2") {
-			echo "<font face='verdana,arial,helvetica,san-serif' size=1><b>Rechercher&nbsp;:</b></font><br>";
+			echo "<font face='verdana,arial,helvetica,san-serif' size=2><b>Rechercher&nbsp;:</b></font><br>";
 		}
 		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="spip_recherche">';
 		echo "</form>";
-		echo "</td>";
+		echo "</td>";*/
 	}
 
 	echo "<td width='100%'>   </td>";
 
-	if ($auth_can_disconnect) {
+	if ($options == "avancees" AND $activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+		icone_bandeau_secondaire ("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+	}
+	if ($auth_can_disconnect AND $options == "avancees") {
 		echo "<td width='5'>&nbsp;</td>";
 		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
 	}
@@ -1492,8 +1507,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
-	if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span style='padding: 3px; margin: 1px; border: 1px solid #cccccc; color: #cccccc'><b>interface compl&egrave;te</b></span>";
-	else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+	if ($connect_statut != "0minirezo") {
+		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span class='fondgrison2'><b>interface compl&egrave;te</b></span>";
+		else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+	}
+	else echo "<b><span class='fondgrison2'>Interface compl&egrave;te</span></b>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
@@ -1599,32 +1617,46 @@ function debut_gauche($rubrique = "asuivre") {
 			$nb_connectes = mysql_num_rows($result_auteurs);
 		}
 
-		$flag_cadre = ($nb_connectes > 0 OR $options == "avancees");
+		$flag_cadre = ($options == "avancees" AND ($rubrique == "messagerie" OR $nb_connectes > 0));
 		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-
-		if ($options == "avancees") {
+		if ($options == "avancees" AND $rubrique == "messagerie") {
 			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
 			echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
 			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a><p>";
 		}
-		
+
 		if ($flag_cadre) {
 			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 			if ($nb_connectes > 0) {
-				if ($options == "avancees") echo "<p>";
 				echo "<b>Actuellement en ligne&nbsp;:</b>";
 				while ($row = mysql_fetch_array($result_auteurs)) {
 					$id_auteur = $row["id_auteur"];
 					$nom_auteur = typo($row["nom"]);
-					if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-					else  echo "<br> $nom_auteur";
+					echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
 				}
 			}
+			else echo "Aucun utilisateur n'est en ligne actuellement.";
 			echo "</font>";
 		}
 		if ($flag_cadre) fin_cadre_relief();
 	}	
+
+	if ($options == "avancees") {
+		debut_cadre_enfonce();
+		global $recherche, $spip_display;
+		if (strlen($recherche) == 0) {
+			if ($spip_display != "3") $recherche = "Titre ou num&eacute;ro";
+			else $recherche = "Rechercher";
+		}
+		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
+		if ($spip_display != "3") {
+			echo "<font face='verdana,arial,helvetica,san-serif' size=2><b>Rechercher&nbsp;:</b></font><br>";
+		}
+		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="formo">';
+		echo "</form>";
+		fin_cadre_enfonce();
+	}
 }
 
 
@@ -1632,7 +1664,22 @@ function debut_gauche($rubrique = "asuivre") {
 // Presentation de l'interface privee, marge de droite
 //
 
-function debut_droite() {	
+function debut_droite() {
+	/*
+	//
+	// Boite de recherche
+	//
+
+	echo '<p><form method="get" action="recherche.php3">';
+	debut_cadre_relief();
+	echo '<font face="verdana,arial,helvetica,sans-serif" size="2">';
+	echo 'Recherche sur les titres des articles et des br&egrave;ves&nbsp;:<br>';
+	echo '<input type="text" size="18" name="recherche" class="spip_recherche">';
+	echo "</font>\n";
+	fin_cadre_relief();
+	echo "</form>";
+	*/
+	
 	?>
 	<br></font>
 	&nbsp;
@@ -1643,24 +1690,16 @@ function debut_droite() {
 	<?php
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && $GLOBALS['bonjour']=='oui' && $zapnum = zap_sessions($GLOBALS['auteur_session']['login'], false)) {
+	if ($GLOBALS['spip_session'] && $GLOBALS['zap']=='oui' && zap_sessions($GLOBALS['auteur_session']['login'], false)) {
 		debut_cadre_enfonce();
-		if ($zapnum == 1) {
-			$uneautre="une autre connexion";
-			$lautre="l'autre connexion";
-		} else {
-			$uneautre="$zapnum autres connexions";
-			$lautre="les autres connexions";
-		}
-		echo propre('<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5">
-			Attention: il y a '.$uneautre.'
-			&agrave; votre nom. Probablement est-ce parce que vous ne vous
+		echo propre('<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5"> Attention: une autre connexion
+			&agrave; votre nom est en cours. Probablement est-ce parce que vous ne vous
 			&ecirc;tes pas d&eacute;connect&eacute; apr&egrave;s votre dernier passage,
 			ou parce que vous vous connectez simultan&eacute;ment avec deux navigateurs.
 			Si tel est le cas, cela ne pr&ecirc;te pas &agrave; cons&eacute;quence.
 
 			En cas de doute, toutefois, [cliquez sur ce texte pour supprimer
-			'.$lautre.'->../spip_cookie.php3?zap_session=oui&redirect='.$GLOBALS['REQUEST_URI'].'].');
+			l\'autre session->../spip_cookie.php3?zap_session=oui&redirect=./ecrire/].');
 		fin_cadre_enfonce();
 	}
 }

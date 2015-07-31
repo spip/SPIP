@@ -48,9 +48,9 @@ function creer_base() {
 		email tinytext NOT NULL,
 		nom_site tinytext NOT NULL,
 		url_site text NOT NULL,
-		login tinytext NOT NULL,
+		login VARCHAR(255) BINARY NOT NULL,
 		pass tinytext NOT NULL,
-		statut tinyblob NOT NULL,
+		statut VARCHAR(255) NOT NULL,
 		maj TIMESTAMP,
 		pgp BLOB NOT NULL,
 		htpass tinyblob NOT NULL,
@@ -875,8 +875,6 @@ function maj_base() {
 	if ($version_installee < 1.438) {
 		spip_query("ALTER TABLE spip_articles ADD INDEX id_secteur (id_secteur)");
 		spip_query("ALTER TABLE spip_articles ADD INDEX statut (statut, date)");
-		spip_query("ALTER TABLE spip_auteurs ADD INDEX login (login)");
-		spip_query("ALTER TABLE spip_auteurs ADD INDEX statut (statut)");
 	}
 
 	if ($version_installee < 1.439) {
@@ -899,6 +897,13 @@ function maj_base() {
 	if ($version_installee < 1.442) {
 		$query = "ALTER TABLE spip_auteurs ADD prefs TINYTEXT NOT NULL";
 		spip_query($query);
+	}
+
+	if ($version_installee < 1.443) {
+		spip_query("ALTER TABLE spip_auteurs CHANGE login login VARCHAR(255) BINARY NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE statut statut VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX login (login)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX statut (statut)");
 	}
 
 	//
