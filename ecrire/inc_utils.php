@@ -718,14 +718,7 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 // Detecter le fichier de base, a la racine, comme etant spip.php ou ''
 // dans le cas de '', un $default = './' peut servir (comme dans urls/page.php)
 function get_spip_script($default='') {
-	if (!defined('_SPIP_SCRIPT')) {
-		if (lire_fichier(_DIR_RACINE.'index.php', $contenu)
-		AND preg_match(',spip\.php,', $contenu))
-			@define('_SPIP_SCRIPT', '');
-		else
-			@define('_SPIP_SCRIPT', 'spip.php');
-	}
-
+	# cas define('_SPIP_SCRIPT', '');
 	if (_SPIP_SCRIPT)
 		return _SPIP_SCRIPT;
 	else
@@ -904,6 +897,10 @@ function spip_initialisation() {
 	define('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 
 	define('_SPIP_PATH', './:squelettes/:dist/:formulaires/:ecrire/');
+
+	// L'adresse de base du site ; on peut mettre '' si la racine est geree par
+	// le script index.php
+	define('_SPIP_SCRIPT', 'spip.php');
 
 
 	// *********** traiter les variables ************
