@@ -61,7 +61,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 		$i++;
 	}
 	$cols = 1+count($err);
-	$style = _DIR_RESTREINT ? " position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
+	$style = (_DIR_RESTREINT AND headers_sent()) ? " position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
 
 	return "\n<table id='spip-debug' cellpadding='2'  border='1'
 	style='text-align: left;$style'><tr><th style='text-align: center' colspan='$cols'>"
@@ -217,22 +217,7 @@ function erreur_squelette($message='', $lieu='') {
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
 	if (count($tableau_des_erreurs) > _DEBUG_MAX_SQUELETTE_ERREURS AND _DEBUG_MAX_SQUELETTE_ERREURS) {
-		include_spip('inc/minipres');
-		if (!headers_sent()) http_status(503);
-		if ($_COOKIE['spip_admin'] OR
-		($GLOBALS['var_mode'] == 'debug')) {
-
-			$titre = 'SPIP '
-				. $GLOBALS['spip_version_affichee']
-				. ' '
-				. _T('admin_debug')
-				. ' '
-				. supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
-
-			echo minipres($titre, affiche_erreurs_page($tableau_des_erreurs));
-		}
-		spip_log("je sors du debug, squelette " . $GLOBALS['fond']);
-		exit;
+		debug_dumpfile('','','', affiche_erreurs_page($tableau_des_erreurs));
 	}
 }
 
@@ -285,7 +270,7 @@ function boucle_debug_compile ($id, $nom, $code) {
 
 // appelee a chaque compilation de squelette (compilo.php)
 // http://doc.spip.org/@squelette_debug_compile
-function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
+function squelette_debug_compile($nom, $sourcefile, $squelette) {
 	global $debug_objets;
 
 	$debug_objets['squelette'][$nom] = $squelette;
@@ -456,29 +441,71 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 }
 
 // l'environnement graphique du debuggueur 
+// fin de course pour unhappy-few.
 // http://doc.spip.org/@debug_dumpfile
-function debug_dumpfile ($texte, $fonc, $type) {
+function debug_dumpfile ($texte, $fonc, $type, $corps='') {
 	global $debug_objets, $spip_lang_right;
 	$var_mode_objet = _request('var_mode_objet');
 	$var_mode_affiche = _request('var_mode_affiche');
 
-	$debug_objets[$type][$fonc . 'tout'] = $texte;
+	if (autoriser('debug')) {
 
-	if (!$debug_objets['sourcefile']) return;
-	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
-		return;
-	if (!$fonc) $fonc = $debug_objets['principal'];
+		$debug_objets[$type][$fonc . 'tout'] = $texte;
+		if (!$debug_objets['sourcefile']) return;
+		if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
+			return;
+		if (!$fonc) $fonc = $debug_objets['principal'];
 
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
-	if (ob_get_length()) ob_end_clean();
-	$self = str_replace("\\'", '&#39;', self());
-	$self = parametre_url($self,'var_mode', 'debug');
-	echo debug_debut($fonc);
+		if (ob_get_length()) ob_end_clean();
+		$self = str_replace("\\'", '&#39;', self());
+		$self = parametre_url($self,'var_mode', 'debug');
+		echo debug_debut($fonc, $corps);
 
-	if ($var_mode_affiche !== 'validation') {
-	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
+		if ($var_mode_affiche !== 'validation') {
+			affiche_debug_validation($fonc, $self);
+		}
+		if ($texte) {
+			$err = "";
+			$titre = _request('var_mode_affiche');
+			if ($titre != 'validation') {
+			  $titre = 'zbug_' . $titre;
+			  $texte = ancre_texte($texte, array('',''));
+			} else {
+			  $valider = charger_fonction('valider', 'xml');
+			  $res = $valider($texte);
+		  // Si erreur, signaler leur nombre dans le formulaire admin
+			  $debug_objets['validation'] = $res[1] ? count($res[1]):'';
+			  list($texte, $err) = emboite_texte($res, $fonc, $self);
+				if ($err === false)
+					$err = _T('impossible');
+				elseif ($err === true)
+				  $err = _T('correcte');
+				else $err = ": $err";
+			}
+
+			echo "<div id=\"debug_boucle\"><fieldset><legend>",
+				_T($titre),	       
+				' ',
+				$err,
+				"</legend>";
+			echo $texte;
+			echo "</fieldset></div>";
+		}
+		debug_fin();
+	}
+	exit;
+}
+
+function affiche_debug_validation($fonc, $self)
+{
+	global $debug_objets, $spip_lang_right;
+	$var_mode_objet = _request('var_mode_objet');
+	$var_mode_affiche = _request('var_mode_affiche');
+
+	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		$self2 = parametre_url($self,'var_mode_objet', $nom_skel);
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
 		echo "\n<a href='$self2&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
@@ -509,38 +536,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  }
 	  echo "</div>\n<a id='$fonc'></a>\n"; 
 	  echo debug_affiche($fonc, $debug_objets, $var_mode_objet, $var_mode_affiche);
-	}
-	if ($texte) {
-		$err = "";
-		$titre = _request('var_mode_affiche');
-		if ($titre != 'validation') {
-			$titre = 'zbug_' . $titre;
-			$texte = ancre_texte($texte, array('',''));
-		} else {
-		  $valider = charger_fonction('valider', 'xml');
-		  $res = $valider($texte);
-		  // Si erreur, signaler leur nombre dans le formulaire admin
-		  $debug_objets['validation'] = $res[1] ? count($res[1]):'';
-		  list($texte, $err) = emboite_texte($res, $fonc, $self);
-			if ($err === false)
-				$err = _T('impossible');
-			elseif ($err === true)
-			  $err = _T('correcte');
-			else $err = ": $err";
-		}
-
-		echo "<div id=\"debug_boucle\"><fieldset><legend>",
-		  _T($titre),	       
-		  ' ',
-		  $err,
-		  "</legend>";
-		echo $texte;
-		echo "</fieldset></div>";
-	}
-	debug_fin();
-	exit;
 }
-
 // http://doc.spip.org/@debug_affiche_navig
 function debug_affiche_navig($aff, $nom_skel, $color, $self, $i)
 {
@@ -625,12 +621,15 @@ function debug_affiche($fonc, $tout, $objet, $affiche)
 }
 
 // http://doc.spip.org/@debug_debut
-function debug_debut($titre)
+function debug_debut($titre, $erreurs='')
 {
 	global $visiteur_session;
 	include_spip('inc/headers');
 	include_spip('inc/filtres');
-	http_no_cache();
+	if (!headers_sent()) {
+		http_status(503);
+		http_no_cache();
+	}
 	lang_select($visiteur_session['lang']);
 	return _DOCTYPE_ECRIRE .
 	  html_lang_attributes() .
@@ -646,7 +645,9 @@ function debug_debut($titre)
 	  . "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
 	  . "' type='text/css' />" .
 	  "</head>\n<body style='margin:0 10px;'>" .
-	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
+	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>" .
+	  $erreurs .
+	  "<div id='spip-boucles'>\n"; 
 }
 
 // http://doc.spip.org/@debug_fin
