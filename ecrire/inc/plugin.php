@@ -610,7 +610,6 @@ function plugin_verifie_conformite($plug,&$arbre){
 			}
 		}
 		$arbre['utilise'] = $utilise;
-		$path = array(array('dir'=>'')); // initialiser par defaut (provisoire)
 		$path = array();
 		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
 			foreach(array_keys($paths) as $tag){
@@ -618,6 +617,8 @@ function plugin_verifie_conformite($plug,&$arbre){
 				$path[] = $att;
 			}
 		}
+		else 
+			$path = array(array('dir'=>'')); // initialiser par defaut
 		$arbre['path'] = $path;
 	}
 }
