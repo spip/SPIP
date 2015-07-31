@@ -55,14 +55,12 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false) {
 			$masque = debut_block_depliable($visible,'on') . $clic . fin_block() . $survol;
 	}
 
-		$res = "$img<div style='text-align: center'>$masque</div>";;
+		$res = "$img$masque";
 	}
 
 	if ($res) {
 		$res = debut_cadre('r', 'image-24.gif', '', $bouton, '', '', false)
-			. "<div class='verdana1' style='text-align: center;'>"
 			. $res
-			. "</div>"
 			. fin_cadre_relief(true);
 
 		$js = "";

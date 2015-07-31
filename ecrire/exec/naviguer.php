@@ -179,7 +179,7 @@ function exec_naviguer_dist()
 	// Logos de la rubrique
 	$iconifier = charger_fonction('iconifier', 'inc');
 	$onglet_documents = array(_L('Documents'),
-	  $iconifier('id_rubrique', $id_rubrique, 'naviguer')
+	  $iconifier('id_rubrique', $id_rubrique, 'naviguer', true)
 		/// Documents associes a la rubrique
 		. ($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
 	);
