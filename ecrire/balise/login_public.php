@@ -58,27 +58,30 @@ function login_explicite($login, $cible) {
 	verifier_visiteur();
 
 	// Si on est connecte, envoyer vers la destination
-	// sauf si on y est deja
-	if ($auteur_session AND
-	($auteur_session['statut']=='0minirezo'
-	OR $auteur_session['statut']=='1comite')) {
-		$auth = charger_fonction('auth','inc');
-		$auth = $auth();
-		if ($auth==="") {
-			if ($cible != $action) {
-				if (!headers_sent() AND !$_GET['var_mode']) {
-					include_spip('inc/headers');
-					redirige_par_entete($cible);
-				} else {
-					return "<a href='$cible'>" .
-					  _T('login_par_ici') .
-					  "</a>";
-				}
-			} else
-				return ''; # on est arrive on bon endroit, et logue'...
+	// si on en a le droit, et sauf si on y est deja
+	if (!strncmp($cible, _DIR_RESTREINT_ABS, strlen(_DIR_RESTREINT_ABS))) {
+		include_spip('inc/autoriser');
+		$loge = autoriser('ecrire');
+	} else {
+		$loge = ($auteur_session != '');
+	}
+
+	if ($loge) {
+		// on est a destination ?
+		if ($cible == $action)
+			return '';
+
+		// sinon on y va
+		if (!headers_sent() AND !$_GET['var_mode']) {
+			include_spip('inc/headers');
+			redirige_par_entete($cible);
+		} else {
+			return "<a href='$cible'>" .
+			  _T('login_par_ici') .
+			  "</a>";
 		}
 	}
-	
+
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
@@ -90,12 +93,12 @@ function login_pour_tous($login, $cible, $action) {
 	// pose de cookie ; s'il n'est pas la, c'est echec cookie
 	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
 	// et pas un echec cookie.
-	if (_request('var_echec_cookie'))
+	if (_request('var_erreur') == 'cookie')
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
 	else $echec_cookie = '';
 
-	// hack grossier pour changer le message en cas d'echec d'un visiteur(6forum) sur ecrire/
-	$echec_visiteur = _request('var_echec_visiteur')?' ':'';
+	// hack grossier pour changer le message en cas d'echec d'un statut interdit sur ecrire/
+	$echec_visiteur = (_request('var_erreur') == 'statut') ?' ':'';
 
 
 	$pose_cookie = generer_url_action('cookie');

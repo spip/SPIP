@@ -109,6 +109,11 @@ function autoriser_defaut_dist($faire, $type, $id, $qui, $opt) {
 		AND !$qui['restreint'];
 }
 
+// A-t-on acces a l'espace prive ?
+function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
+}
+
 // Autoriser a publier dans la rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_publierdans_dist
 function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
