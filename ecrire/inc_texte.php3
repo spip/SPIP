@@ -902,6 +902,7 @@ function traiter_raccourcis($letexte) {
 	global $ouvre_note;
 	global $ferme_note;
 	global $lang_dir;
+	static $notes_vues;
 
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
@@ -964,7 +965,13 @@ function traiter_raccourcis($letexte) {
 				$mn = $marqueur_notes.'-';
 			$ancre = $mn.urlencode($num_note);
 
-			$lien = "<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\">";
+			// ne mettre qu'une ancre par appel de note (XHTML)
+			if (!$notes_vues[$ancre]++)
+				$name_id = " name=\"nh$ancre\" id=\"nh$ancre\"";
+			else
+				$name_id = "";
+
+			$lien = "<a href=\"#nb$ancre\"$name_id class=\"spip_note\">";
 
 			// creer le popup 'title' sur l'appel de note
 			if ($title = supprimer_tags(propre($note_texte))) {
