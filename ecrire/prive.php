@@ -18,14 +18,17 @@ include_spip('inc/cookie');
 
 $auth = charger_fonction('auth', 'inc');
 $auth = $auth();
-spip_log("authen: $auth");
+
 if ($auth) {
 	if ($auth===-1) exit();
 	include_spip('inc/headers');
 	if ($auth == '6forum') {
-	  $auth = generer_url_public('', $_SERVER['QUERY_STRING'], true);
-	  spip_log("6forum pour $auth");
-	}	else
+		$auth = '../?' . $_SERVER['QUERY_STRING'];
+		preg_match(',^[^/]*//[^/]*(.*)/.*/$,',
+				   url_de_base(),
+				   $r);
+		spip_setcookie('spip_session', $spip_session, time() + 3600 * 24 * 14, $r[1]);
+	} else
 	  $auth = generer_url_public('login',
 			"url=" . 
 			rawurlencode(str_replace('/./', '/',
@@ -34,7 +37,7 @@ if ($auth) {
 	redirige_par_entete($auth);
  }
 
-# au travail...
-include_once 'public.php';
+// En somme, est prive' ce qui est publiquement nomme'...
 
+include_once 'public.php';
 ?>

@@ -140,8 +140,8 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 
 // http://doc.spip.org/@balise_DOSSIER_SQUELETTE_dist
 function balise_DOSSIER_SQUELETTE_dist($p) {
-	$code = addslashes(dirname($p->descr['sourcefile']));
-	$p->code = "'$code'" . 
+	$code = substr(addslashes(dirname($p->descr['sourcefile'])), strlen(_DIR_RACINE));
+	$p->code = "_DIR_RACINE . '$code'" . 
 	$p->interdire_scripts = false;
 	return $p;
 }
