@@ -1,0 +1,10 @@
+<div class="formulaire_spip formulaire_recherche">
+<form action="[(#ENV{action})]" method="get"><div>
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<label for="recherche"><:info_rechercher_02:></label>
+	<input type="text" class="text" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
+	<input type='image' src='[(#CHEMIN_IMAGE{loupe.png})]' name='submit' class="image" alt='<:info_rechercher|attribut_html:>' />
+	[(#ENV{recherche}|oui)<a href='#ENV{action}' title='<:annuler_recherche|attribut_html:>'>[(#CHEMIN{img_pack/annuler-recherche.png}|balise_img|inserer_attribut{alt,<:annuler_recherche:>})]</a>]
+</div></form>
+</div>
