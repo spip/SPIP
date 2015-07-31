@@ -267,7 +267,8 @@ function controler_contenu($type, $id, $options=array(), $c=false, $serveur='') 
 				'spip_table_objet' => $spip_table_objet,
 				'type' =>$type,
 				'id_objet' => $id,
-				'champs' => $options['champs']
+				'champs' => $options['champs'],
+				'action' => 'controler'
 			),
 			'data' => $champs
 		)
