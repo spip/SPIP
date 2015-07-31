@@ -142,7 +142,7 @@ function info_copyright() {
 
 	// et la version de l'ecran de securite
 	$secu = defined('_ECRAN_SECURITE')
-		? "<br />"._L(' + ecran_securite v&nbsp;')._ECRAN_SECURITE
+		? "<br />"._T('ecran_securite',array('version'=>_ECRAN_SECURITE))
 		: '';
 
 	return _T('info_copyright',
