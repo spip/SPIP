@@ -22,6 +22,7 @@ if (!isset($delais))
 //
 
 function inclure_fichier($fond, $delais, $contexte_inclus = "") {
+	global $fichier_cache;
 	$fichier_requete = $fond;
 	if (is_array($contexte_inclus)) {
 		reset($contexte_inclus);
