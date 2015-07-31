@@ -197,9 +197,9 @@ function aff_referers ($result, $limit, $plus) {
 			if ($lesdomaines[$numero] == '') next;
 
 			$visites = pos($nbvisites);
-			$ret = "\n<li>";
+			$ret = "\n<li style='clear:$spip_lang_right;'>";
 
-			if (strlen($source_vignettes) > 0) $ret .= "\n<span style='clear: $spip_lang_right;'></span>\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
+			if (strlen($source_vignettes) > 0) $ret .= "\n<a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\"\nstyle=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" alt='' /></a>";
 
 			if ($visites > 5) $ret .= "<span style='color: red'>$visites "._T('info_visites')."</span> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
@@ -216,7 +216,7 @@ function aff_referers ($result, $limit, $plus) {
 				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><span style='color: $couleur_foncee; font-weight: bold;'>".$lesdomaines[$numero]."</span></a>";
 				if ($rac = $lesliensracine[$numero]) $aff .= " <span class='spip_x-small'>($rac)</span>";
 				$aff .= "\n<ul style='font-size:x-small;'><li>$referers</li></ul>\n";
-				$aff .= "</li></ul>\n<ul style='font-size:small;'>\n";
+				$aff .= "</li></ul>\n<ul style='font-size:small;clear:$spip_lang_right;'>\n";
 			} else {
 				$aff .= $ret;
 				$lien = $lesreferers[$numero][0];
