@@ -181,15 +181,15 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 		# Espace avant LEFT JOIN indispensable pour insertion de AS
 		# a refaire plus proprement
 		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_articles AS a
-			ON `$id_table`.id_document=a.id_document
+			ON $id_table.id_document=a.id_document
 			LEFT JOIN spip_articles AS aa
 				ON a.id_article=aa.id_article
 		LEFT JOIN spip_documents_breves AS b
-			ON `$id_table`.id_document=b.id_document
+			ON $id_table.id_document=b.id_document
 			LEFT JOIN spip_breves AS bb
 				ON b.id_breve=bb.id_breve
 		LEFT JOIN spip_documents_rubriques AS r
-			ON `$id_table`.id_document=r.id_rubrique
+			ON $id_table.id_document=r.id_rubrique
 			LEFT JOIN spip_rubriques AS rr
 				ON r.id_rubrique=rr.id_rubrique
 		";
