@@ -4,7 +4,7 @@ include("ecrire/inc_version.php3");
 
 include_ecrire("inc_presentation.php3");
 
-gerer_menu_langues();
+utiliser_langue_visiteur();
 
 function bad_dirs($bad_dirs, $test_dir, $install) {
 	install_debut_html();
@@ -19,7 +19,7 @@ function bad_dirs($bad_dirs, $test_dir, $install) {
 	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
 
 	echo "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
-	echo "<div align='right'>". menu_langues()."</div><p>";
+	echo "<div align='right'>". menu_langues('var_lang_ecrire')."</div><p>";
 
 	echo _T('dirs_repertoires_suivants', array('bad_dirs' => $bad_dirs));
 	echo "<B>". _T('login_recharger')." $continuer.";
@@ -46,7 +46,7 @@ function absent_dirs($bad_dirs, $test_dir) {
 	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
 
 	echo "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
-	echo "<div align='right'>". menu_langues()."</div><p>";
+	echo "<div align='right'>". menu_langues('var_lang_ecrire')."</div><p>";
 
 	echo _T('dirs_repertoires_absents', array('bad_dirs' => $bad_dirs));
 	echo "<B>". _T('login_recharger')." $continuer.";

@@ -1619,7 +1619,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<td>   </td>";
 
 		echo "<td align='center'>";
-		echo menu_langues();
+		echo menu_langues('var_lang_ecrire');
 		echo "</td>";
 
 	}
