@@ -193,11 +193,6 @@ function appliquer_modifs_config() {
 		set_request('langues_multilingue', join($i, ","));
 	}
 
-	if ($i = _request('email_webmaster'))
-		ecrire_meta("email_webmaster", $i);
-	if ($i = _request('email_envoi'))
-		ecrire_meta("email_envoi", $i);
-
 	$liste_meta = array_keys(liste_metas());
 
 	// Modification du reglage accepter_inscriptions => vider le cache
