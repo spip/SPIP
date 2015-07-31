@@ -12,165 +12,22 @@
 
 
 include ("inc.php3");
-include_ecrire ("inc_index.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_auteur_infos.php");
 
-function supp_auteur($id_auteur) {
-	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
-	$result=spip_query($query);
-}
+// prendre $var_* comme variables pour eviter les conflits avec les http_vars
 
-if (!$id_auteur = intval($id_auteur)) {
-	die ('erreur');
-}
+$var_nom = "auteurs_edit";
+$var_f = find_in_path('inc_' . $var_nom . '.php');
 
-$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
-$result = spip_query($query);
+if ($var_f) 
+  include($var_f);
+elseif (file_exists($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
+  include($var_f);
 
-
-if ($auteur = spip_fetch_array($result)) {
-	$id_auteur=$auteur['id_auteur'];
-	$nom=$auteur['nom'];
-	$bio=$auteur['bio'];
-	$email=$auteur['email'];
-	$nom_site_auteur=$auteur['nom_site'];
-	$url_site=$auteur['url_site'];
-	$login=$auteur['login'];
-	$pass=$auteur['pass'];
-	$statut=$auteur['statut'];
-	$pgp=$auteur["pgp"];
-	$messagerie=$auteur["messagerie"];
-	$imessage=$auteur["imessage"];
-	$extra = $auteur["extra"];
-	$low_sec = $auteur["low_sec"];
-
-
-// Appliquer des modifications de statut
-modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_rubrique'], $_GET['supp_rub']);
-
-if ($connect_id_auteur == $id_auteur) debut_page($nom, "auteurs", "perso");
-else debut_page($nom,"auteurs","redacteurs");
-
-
-echo "<br><br><br>";
-
-debut_gauche();
-
-
-
-debut_boite_info();
-
-echo "<CENTER>";
-
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('info_gauche_numero_auteur')."&nbsp;:</B></FONT>";
-echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
-echo "</CENTER>";
-
-
-// "Voir en ligne" si l'auteur a un article publie
-// seuls les admins peuvent "previsualiser" une page auteur
-if (spip_num_rows(spip_query("SELECT lien.id_article
-FROM spip_auteurs_articles AS lien,
-spip_articles AS articles
-WHERE lien.id_auteur=$id_auteur
-AND lien.id_article=articles.id_article
-AND articles.statut='publie'")))
-	voir_en_ligne ('auteur', $id_auteur, 'publie');
-else if ($connect_statut == '0minirezo')
-	voir_en_ligne ('auteur', $id_auteur, 'prop');
-
-fin_boite_info();
-
-
-
-
-//////////////////////////////////////////////////////
-// Logos de l'auteur
-//
-
-if (statut_modifiable_auteur($id_auteur, $auteur)) {
-	afficher_boite_logo('aut', 'id_auteur', $id_auteur,
-	_T('logo_auteur').aide ("logoart"), _T('logo_survol'));
- }
-
-debut_droite();
-
-	debut_cadre_relief("redacteurs-24.gif");
-	
-	
-	echo "<table width='100%' cellpadding='0' border='0' cellspacing='0'>";
-	
-	echo "<tr>";
-
-	echo "<td valign='top' width='100%'>";	
-
-
-	gros_titre($nom);
-
-	echo "<div>&nbsp;</div>";
-
-	if (strlen($email) > 2) echo "<div>"._T('email_2')." <B><A HREF='mailto:$email'>$email</A></B></div>";
-	if (strlen($nom_site_auteur) > 2) echo "<div>"._T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B></div>";
-
-		
-	echo "</td>";
-	
-	echo "<td>";
-	
-	if (statut_modifiable_auteur($id_auteur, $auteur)) {
-		icone (_T("admin_modifier_auteur"), "auteur_infos.php3?id_auteur=$id_auteur", "redacteurs-24.gif", "edit.gif");
-	}
-	echo "</td></tr></table>";
-
-	if (strlen($bio) > 0) { echo "<div>".propre("<quote>".$bio."</quote>")."</div>"; }
-	if (strlen($pgp) > 0) { echo "<div>".propre("PGP:<cadre>".$pgp."</cadre>")."</div>"; }
-
-	if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra.php3");
-		extra_affichage($extra, "auteurs");
-	}
-
-	// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
-	if ($options == 'avancees')
-	  afficher_formulaire_statut_auteur ($id_auteur,
-			$auteur['statut'],
-			"auteurs_edit.php3?id_auteur=$id_auteur");
-
-	fin_cadre_relief();
-
-
-echo "<div>&nbsp;</div>";
-if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
-else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
-else $aff_art = "'prop','publie'";
-
-afficher_articles(_T('info_articles_auteur'),
-	", spip_auteurs_articles AS lien WHERE lien.id_auteur='$id_auteur' ".
-	"AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art) ".
-	"ORDER BY articles.date DESC", true);
-}
-
-
-if ($id_auteur != $connect_id_auteur
-AND ($statut == '0minirezo' OR $statut == '1comite')
-) {
-	echo "<div>&nbsp;</div>";
-	debut_cadre_couleur();
-	
-	$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 ".
-		"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
-	afficher_messages(_T('info_discussion_cours'), $query_message, false, false);
-	
-	$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 ".
-		"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
-	afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
-	
-	icone_horizontale(_T('info_envoyer_message_prive'),
-		"message_edit.php3?new=oui&type=normal&dest=$id_auteur", "message.gif");
-	fin_cadre_couleur();
-}
-
-fin_page();
-
+if (function_exists($var_nom))
+  $var_nom($id_auteur);
+elseif (function_exists($var_f = $var_nom . "_dist"))
+  $var_f($id_auteur);
+else
+   spip_log("fonction $var_nom indisponible");
 ?>
+

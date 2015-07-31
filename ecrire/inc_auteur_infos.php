@@ -23,14 +23,7 @@ function affiche_auteur_info_dist($id_auteur, $auteur,  $echec)
 
   debut_gauche();
 
-  if ($id_auteur) {
-	debut_boite_info();
-	echo "<CENTER>";
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_cadre_numero_auteur')."&nbsp;:</B></FONT>";
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
-	echo "</CENTER>";
-	fin_boite_info();
-}
+  cadre_auteur_infos($id_auteur, $auteur);
 
   debut_droite();
 
@@ -53,6 +46,36 @@ function affiche_auteur_info_dist($id_auteur, $auteur,  $echec)
 
   fin_page();
 }
+
+
+function cadre_auteur_infos($id_auteur, $auteur)
+{
+  global $connect_statut;
+
+  if ($id_auteur) {
+	debut_boite_info();
+	echo "<CENTER>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_cadre_numero_auteur')."&nbsp;:</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
+	echo "</CENTER>";
+
+
+// "Voir en ligne" si l'auteur a un article publie
+// seuls les admins peuvent "previsualiser" une page auteur
+if (spip_num_rows(spip_query("SELECT lien.id_article
+FROM spip_auteurs_articles AS lien,
+spip_articles AS articles
+WHERE lien.id_auteur=$id_auteur
+AND lien.id_article=articles.id_article
+AND articles.statut='publie'")))
+	voir_en_ligne ('auteur', $id_auteur, 'publie');
+else if ($connect_statut == '0minirezo')
+	voir_en_ligne ('auteur', $id_auteur, 'prop');
+
+	fin_boite_info();
+  }
+}
+
 
 function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $champs_extra, $redirect, $apparait=true)
 {
@@ -404,13 +427,14 @@ function statut_modifiable_auteur($id_auteur, $auteur)
 function modifier_statut_auteur (&$auteur, $statut, $add_rub='', $supp_rub='') {
 	global $connect_statut, $connect_toutes_rubriques;
 	// changer le statut ?
-	if ($connect_statut == '0minirezo' AND $statut) {
-		if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut)) {
+	$id_auteur= $auteur['id_auteur'];
+	if (statut_modifiable_auteur($id_auteur, $auteur) &&
+	    ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut)) {
 			$auteur['statut'] = $statut;
 			spip_query("UPDATE spip_auteurs SET statut='".$statut."'
-			WHERE id_auteur=".$auteur['id_auteur']);
-		}
+			WHERE id_auteur=". intval($id_auteur));
 	}
+
 	// modif auteur restreint, seulement pour les admins
 	if ($connect_toutes_rubriques) {
 		if ($add_rub=intval($add_rub))
