@@ -50,7 +50,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 			if ((@file_exists($dir_plugins))&&(is_dir($dir_plugins))){
 				if (@file_exists($f = $dir_plugins."$plug/plugin.xml")) {
 					$arbre = spip_xml_load($f);
-					if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
+					if (!$arbre OR !spip_xml_match_nodes(",^plugin(\s|$),", $arbre, $m))
 						$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
 				}
 				else {
