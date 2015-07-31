@@ -50,7 +50,8 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	global $dir_ecrire, $flag_ecrire;
 	// chercher dans le fichier cache ?
 	if (!$flag_ecrire) {
-		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3'))
+		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')
+		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3')))
 			return include_local('CACHE/lang_'.$module.'_'.$lang.'.php3');
 		else $GLOBALS['cache_lang_modifs'][$lang] = true;
 	}
@@ -72,14 +73,6 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		include_ecrire('lang/perso.php3');
 	}
 
-	// mettre en cache les morceaux de langue utilises dans le site public
-	/*if ($dir_ecrire AND !@file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')) {
-		ecrire_cache_lang($lang, $module);
-	}
-	else if ($forcer) {
-		$GLOBALS['cache_lang'][$lang][] = $forcer;
-		ecrire_cache_lang($lang, $module);
-	}*/
 }
 
 //
