@@ -453,7 +453,7 @@ function lang_rtl ($lang) {
 function lang_select ($lang='') {
 	global $pile_langues, $spip_lang;
 	include_ecrire('inc_lang.php3');
-	array_push($pile_langues, $spip_lang);
+	php3_array_push($pile_langues, $spip_lang);
 	changer_langue(lang_supprimer_point($lang));
 }
 
@@ -461,12 +461,60 @@ function lang_select ($lang='') {
 function lang_dselect ($rien='') {
 	global $pile_langues;
 	include_ecrire('inc_lang.php3');
-	changer_langue(array_pop($pile_langues));
+	changer_langue(php3_array_pop($pile_langues));
 }
 
 // nettoyer les langues affectees automatiquement (cf. calculer_langues_rubriques)
 function lang_supprimer_point ($langue) {
 	return ereg_replace('^\.', '', $langue);
+}
+
+
+//
+// array_push et array_pop pour php3 (a virer si on n'a pas besoin de la compatibilite php3
+// et a passer dans inc_version si on a besoin de ces fonctions ailleurs qu'ici)
+//
+/*
+ * Avertissement : Cette librairie de fonctions PHP est distribuee avec l'espoir 
+ * qu'elle sera utile, mais elle l'est SANS AUCUNE GARANTIE; sans meme la garantie de 
+ * COMMERCIALISATION ou d'UTILITE POUR UN BUT QUELCONQUE.
+ * Elle est librement redistribuable tant que la presente licence, ainsi que les credits des 
+ * auteurs respectifs de chaque fonctions sont laisses ensembles. 
+ * En aucun cas, Nexen.net ne pourra etre tenu responsable de quelques consequences que ce soit
+ * de l'utilisation ou la mesutilisation de ces fonctions PHP.
+ */
+/****
+ * Titre : array_push() et array_pop() pour PHP3 
+ * Auteur : Cedric Fronteau 
+ * Email : charlie@nexen.net
+ * Url : 
+ * Description : Implementation de array_push() et array_pop pour PHP3
+****/
+function php3_array_push(&$stack,$value){
+	if (!is_array($stack))
+		return FALSE;
+	end($stack);
+	do {
+		$k = key($stack);
+		if (is_long($k));
+			break;
+	} while(prev($stack));
+
+	if (is_long($k))
+		$stack[$k+1] = $value;
+	else
+		$stack[0] = $value;
+	return count($stack);
+}
+
+function php3_array_pop(&$stack){
+	if (!is_array($stack) || count($stack) == 0)
+		return NULL;
+	end($stack);
+	$v = current($stack);
+	$k = key($stack);
+	unset($stack[$k]);
+	return $v;
 }
 
 ?>
