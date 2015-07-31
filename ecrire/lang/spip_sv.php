@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Ladda om sidan',
 'afficher_trad' => 'Visa &ouml;vers&auml;ttning',
 'alerte_maj_impossible' => '<b>Varning!</b> Misslyckades med att uppdatera SQL-databasen till version @version@. Det kan bero p&aring; ett &aring;tkomstproblem med databasen. Var v&auml;nlig ta kontakt med din ISP.',
-'alerte_modif_info_concourante' => 'VARNING: Denna information har f&ouml;r&auml;ndrats av n&aring;gon annan. Det aktuella inneh&aring;llet &auml;r:', # MODIF
+'alerte_modif_info_concourante' => 'VARNING: Denna information har &auml;ndrats p&aring; annan plats. Det aktuella inneh&aring;llet &auml;r:',
 'analyse_xml' => 'Unders&ouml;k XML',
 'annuler' => 'Avbryt',
 'antispam_champ_vide' => 'Var v&auml;nlig, l&auml;mna f&auml;ltet tomt',
@@ -188,19 +188,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'v&aring;r',
 'date_saison_3' => 'sommar',
 'date_saison_4' => 'h&ouml;st',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => 'sekunder',
 'date_semaines' => 'veckor',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
-'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_un_mois' => 'm&aring;nad',
+'date_une_heure' => 'timme',
+'date_une_minute' => 'minut',
+'date_une_seconde' => 'sekund',
+'date_une_semaine' => 'vecka',
 'dirs_commencer' => ' f&ouml;r att verkligen kunna p&aring;b&ouml;rja installationen',
 'dirs_preliminaire' => 'Prelimin&amp;auml;rt: <b>St&amp;auml;ller in r&amp;auml;ttigheterna</b>',
 'dirs_probleme_droits' => 'Problem med &aring;tkomst-r&auml;ttigheter',
 'dirs_repertoires_absents' => '<b>F&ouml;ljande kataloger har inte hittats: <ul>@bad_dirs@.</ul> </b><p>Det beror antagligen p&aring; d&aring;ligt anv&auml;ndande av gemena och VERSALER i namngivandet. Var god kontrollera att de gemena och VERSALA bokst&auml;verna i namnet p&aring; katalogerna motsvarar det som visas ovan; om s&aring; inte &auml;r fallet, &auml;ndra namnen med hj&auml;lp av dini FTP-klient f&ouml;r att &aring;tg&auml;rda felet.</p><p>N&auml;r det &auml;r gjort, kan du ',
 'dirs_repertoires_suivants' => '<b>F&ouml;ljande kataloger saknar skriv-r&auml;ttigheter: <ul>@bad_dirs@.</ul> </b><p>F&ouml;r att &auml;ndra det, anv&auml;nd din FTP-klient f&ouml;r att s&auml;tta korrekta &aring;tkomstr&auml;ttigheter f&ouml;r katalogerna. Proceduren beskrivs i installationsguiden.</p><p>N&auml;r det &auml;r avklarat, kan du ',
-'double_occurrence' => 'Tv&aring; instanser', # MODIF
+'double_occurrence' => 'Tv&aring; exempel p&aring; @balise@',
 
 // E
 'en_cours' => 'arbetar',
@@ -215,18 +215,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Fil som inte kunde hittas: @fichier@',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Bekr&auml;fta din e-postadress',
+'form_auteur_email_modifie' => 'Din e-postadress &auml;r nu &auml;ndrad.',
+'form_auteur_envoi_mail_confirmation' => 'En bekr&auml;ftelse har skickats med e-post till @email@. Klicka p&aring; den l&auml;nk som du hittar i detta meddelande f&ouml;r att bekr&auml;fta din e-postadress.',
+'form_auteur_mail_confirmation' => 'Hej,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+du vill &auml;ndra din e-postadress.
+F&ouml;r att bekr&auml;fta din nya adress m&aring;ste du g&aring; till
+ adressen nedan. (Annars kommer adress&auml;ndringen inte att genomf&ouml;ras.):
 
     @url@
-', # NEW
+',
 'form_deja_inscrit' => 'Du &auml;r redan registrerad',
 'form_email_non_valide' => 'Din epost-adress &auml;r ogiltig',
 'form_forum_access_refuse' => 'Du har inte l&auml;ngre tillg&aring;ng till den h&auml;r sajten',
@@ -400,23 +399,23 @@ Tack f&ouml;r ditt deltagande
 'info_article_supprime' => 'Raderad artikel',
 'info_articles' => 'Artiklar',
 'info_articles_a_valider' => 'Artiklar som ska godk&auml;nnas',
-'info_articles_nb' => '@nb@ articles', # NEW
+'info_articles_nb' => '@nb@ artiklar',
 'info_articles_proposes' => 'Sparade artiklar',
-'info_articles_un' => '1 article', # NEW
+'info_articles_un' => '1 artikel',
 'info_auteurs_nombre' => 'f&ouml;rfattare:',
 'info_authentification_ftp' => 'Authentifiering (via FTP)',
 'info_bloquer_lien' => 'blockera l&auml;nken',
 'info_breves_02' => 'Nyheter',
 'info_breves_2' => 'nyheter',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ nyheter',
+'info_breves_un' => '1 nyhet',
 'info_breves_valider' => 'Nyheter som ska godk&auml;nnas',
 'info_connexion_refusee' => 'Anslutning nekad',
 'info_contact_developpeur' => 'Var god och ta kontakt med en utvecklare',
 'info_contenance' => 'Sajten inneh&aring;ller:',
 'info_contribution' => 'bidrag till forumen',
 'info_copyright' => '@spip@ &auml;r fri programvara och distribueras @lien_gpl@.',
-'info_copyright_doc' => 'F&ouml;r mer information, se (p&aring; engelska)<a href="@spipnet@">http://www.spip.net/en</a>.', # MODIF
+'info_copyright_doc' => 'F&ouml;r mer information, se (p&aring; engelska)<a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under GPL-licensen',
 'info_cours_edition' => 'Dina artiklar under bearbetning',
 'info_creer_repertoire' => 'Var god och skapa en katalog som heter:',
@@ -430,8 +429,8 @@ Tack f&ouml;r ditt deltagande
 'info_document' => 'Dokument',
 'info_document_indisponible' => 'Dokumentet &auml;r inte tillg&auml;ngligt',
 'info_documents' => 'Dokument',
-'info_documents_nb' => '@nb@ documents', # NEW
-'info_documents_un' => '1 document', # NEW
+'info_documents_nb' => '@nb@ dokument',
+'info_documents_un' => '1 dokument',
 'info_echange_message' => 'SPIP till&aring;ter utbyte av meddelanden och skapandet av privata
   diskussionsforum bland sajtens deltagare. Du kan till&aring;ta
   eller f&ouml;rbjuda det.',
@@ -478,8 +477,8 @@ Tack f&ouml;r ditt deltagande
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'MEDDELANDE',
 'info_message_supprime' => 'RADERAT MEDDELANDE',
-'info_messages_nb' => '@nb@ messages', # NEW
-'info_messages_un' => '1 message', # NEW
+'info_messages_nb' => '@nb@ meddelanden',
+'info_messages_un' => '1 meddelande',
 'info_mise_en_ligne' => 'Datum f&ouml;r publicering online',
 'info_modification_parametres_securite' => 'uppdaterar s&auml;kerhetsinst&auml;llningar',
 'info_mois_courant' => 'I m&aring;naden:',
@@ -524,8 +523,8 @@ Tack f&ouml;r ditt deltagande
 'info_retablir_lien' => '&aring;terskapa den h&auml;r l&auml;nken',
 'info_retirer_mot' => 'Radera nyckelordet',
 'info_retirer_mots' => 'Radera alla nyckelord',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ avdelningar',
+'info_rubriques_un' => '1 avdelning',
 'info_sans_titre_2' => 'utan titel',
 'info_selectionner_fichier' => 'Du kan v&auml;lja en fil i foldern @upload@',
 'info_selectionner_fichier_2' => 'V&auml;lj en fil:',
@@ -534,9 +533,9 @@ Tack f&ouml;r ditt deltagande
 'info_site_attente' => 'Webbsajten v&auml;ntar p&aring; godk&auml;nnande',
 'info_site_reference' => 'L&auml;nkade sajter ',
 'info_site_refuse' => 'Webbsajten refuserad',
-'info_sites_nb' => '@nb@ sites', # NEW
+'info_sites_nb' => '@nb@ sidor',
 'info_sites_referencer' => 'L&auml;nka till en sajt',
-'info_sites_un' => '1 site', # NEW
+'info_sites_un' => '1 sida',
 'info_supprimer_vignette' => 'radera ikonen',
 'info_symbole_bleu' => 'En <b>bl&aring;</b> symbol visar ett <b>meddelande</b>: ett personligt meddelande.',
 'info_symbole_jaune' => 'En <b>gul</b> symbol visar ett <b>meddelande till alla redakt&ouml;rer</b>: det kan editeras av alla administrat&ouml;rer, och &auml;r synligt f&ouml;r alla redakt&ouml;rer.',
@@ -610,7 +609,7 @@ Tack f&ouml;r ditt deltagande
 'login_retour_site' => 'Tillbaka till den publika delen',
 'login_retoursitepublic' => 'Tillbaka till den publika delen',
 'login_sans_cookiie' => 'Logga in utan cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'S&auml;ker inloggning',
 'login_sinscrire' => 'registrera dig',
 'login_test_navigateur' => 'testar webbl&auml;sare/&aring;teruppkoppling',
 'login_verifiez_navigateur' => '(Kontrollera att din webbl&auml;sare inte sparade l&ouml;senordet...)',
@@ -764,7 +763,7 @@ och koppla upp dig mot sajten igen.
 
 // Z
 'zbug_balise_b_aval' => ': B taggen f&ouml;r sent i loopen',
-'zbug_balise_inexistante' => 'fel @from@: taggen #@balise@ finns inte', # MODIF
+'zbug_balise_inexistante' => 'fel @from@: taggen #@balise@ finns inte',
 'zbug_balise_sans_argument' => 'Det saknas ett argument i taggen @balise@',
 'zbug_boucle' => 'loop',
 'zbug_boucle_recursive_undef' => 'recursiv slinga ej definierad', # MODIF
@@ -772,7 +771,7 @@ och koppla upp dig mot sajten igen.
 'zbug_champ_hors_boucle' => 'F&auml;lt @champ@ utanf&ouml;r slingan',
 'zbug_champ_hors_motif' => 'F&auml;ltet @champ@ utanf&ouml;r slingan med taggen @motif@', # MODIF
 'zbug_code' => 'kod',
-'zbug_critere_inconnu' => 'Kriteriet @critere@ ok&auml;nt', # MODIF
+'zbug_critere_inconnu' => 'Kriteriet @critere@ ok&auml;nt',
 'zbug_distant_interdit' => 'externt data f&ouml;rbjudet', # MODIF
 'zbug_doublon_table_sans_cle_primaire' => 'dubletter i en tabell utan prim&auml;r nyckel', # MODIF
 'zbug_doublon_table_sans_index' => 'dubbletter i en tabell utan index', # MODIF

@@ -23,12 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Modificar esta palavra-chave',
 'admin_modifier_rubrique' => 'Modificar esta rubrica',
 'admin_recalculer' => 'Recompor esta p&aacute;gina',
-'afficher_trad' => 'afficher les traductions', # NEW
+'afficher_trad' => 'show translations', # NEW
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualiza&ccedil;&atilde;o da base SQL para a vers&atilde;o @version@ &eacute;  imposs&iacute;vel, talvez por causa de um problema de direito de modifica&ccedil;&atilde;o na base de dados. Contactar com o seu servi&ccedil;o de hospedagem.', # MODIF
 'alerte_modif_info_concourante' => 'ATTENTION : Cette information a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est&nbsp;:', # MODIF
 'analyse_xml' => 'An&aacute;lise XML',
 'annuler' => 'Cancelar',
-'antispam_champ_vide' => 'Veuillez laisser ce champ vide&nbsp;:', # NEW
+'antispam_champ_vide' => 'Please leave this field empty:', # NEW
 'articles_recents' => 'Artigos mais recentes',
 'avis_archive_incorrect' => 'o ficheiro arquivo n&atilde;o &eacute; um ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivo n&atilde;o &eacute; v&aacute;lido ',
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erro de programa&ccedil;&atilde;o. N&atilde;o se deve chamar esta fun&ccedil;&atilde;o neste contexto.',
 'avis_erreur_mysql' => 'Erro SQL', # MODIF
 'avis_erreur_sauvegarde' => 'Erro na salvaguarda  (@type@ @id_objet@) !',
-'avis_erreur_visiteur' => 'Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;', # NEW
+'avis_erreur_visiteur' => 'Problem entering the private area', # NEW
 
 // B
 'barre_a_accent_grave' => 'Inserir um A mai&uacute;sculo com acento grave',
@@ -60,15 +60,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_lien' => 'Transformar em [liga&ccedil;&atilde;o hipertexto->http://...]',
 'barre_lien_input' => 'Favor indicar o endere&ccedil;o da sua liga&ccedil;&atilde;o (pode indicar um endere&ccedil;o Web sob a forma  http://www.monsite/com ou simplesmente indicar o n&uacute;mero de um artigo deste s&iacute;tio.) ',
 'barre_note' => 'Transformar em  [[Nota de rodap&eacute; ]]',
-'barre_paragraphe' => 'Cr&#233;er un paragraphe', # NEW
+'barre_paragraphe' => 'Create a paragraph', # NEW
 'barre_quote' => '<quote>Citar uma  mensagem</quote>',
 'bouton_ajouter_document' => 'ACRESCENTAR UM  DOCUMENTO', # MODIF
 'bouton_ajouter_image' => 'ACRESCENTAR UMA IMAGEM', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou&nbsp;un&nbsp;document', # NEW
+'bouton_ajouter_image_document' => 'Add an image or a document', # NEW
 'bouton_changer' => 'Mudar',
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
-'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
+'bouton_download' => 'Download', # NEW
 'bouton_enregistrer' => 'Gravar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar a caixa de correio interno',
 'bouton_radio_envoi_annonces' => 'Enviar os an&uacute;ncios editoriais',
@@ -86,10 +86,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calend&aacute;rio por m&ecirc;s',
 'cal_par_semaine' => 'calend&aacute;rio por semana',
 'choix_couleur_interface' => 'cor',
-'choix_interface' => 'choix  de l\'interface', # NEW
-'colonne' => 'Colonne', # NEW
+'choix_interface' => 'choice of interface', # NEW
+'colonne' => 'Column', # NEW
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, solicitou a altera&ccedil;&atilde;o do estatuto deste elemento. Deseja continuar?',
-'correcte' => 'correcte', # NEW
+'correcte' => 'correct', # NEW
 
 // D
 'date_aujourdhui' => 'hoje',
@@ -149,26 +149,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => 'domingo',
-'date_jour_1_abbr' => 'dim.', # NEW
-'date_jour_1_initiale' => 'd.', # NEW
+'date_jour_1_abbr' => 'Sun.', # NEW
+'date_jour_1_initiale' => 'S.', # NEW
 'date_jour_2' => 'segunda-feira',
-'date_jour_2_abbr' => 'lun.', # NEW
-'date_jour_2_initiale' => 'l.', # NEW
+'date_jour_2_abbr' => 'Mon.', # NEW
+'date_jour_2_initiale' => 'M.', # NEW
 'date_jour_3' => 'ter&ccedil;a-feira',
-'date_jour_3_abbr' => 'mar.', # NEW
-'date_jour_3_initiale' => 'm.', # NEW
+'date_jour_3_abbr' => 'Tue.', # NEW
+'date_jour_3_initiale' => 'T.', # NEW
 'date_jour_4' => 'quarta-feira',
-'date_jour_4_abbr' => 'mer.', # NEW
-'date_jour_4_initiale' => 'm.', # NEW
+'date_jour_4_abbr' => 'Wed.', # NEW
+'date_jour_4_initiale' => 'W.', # NEW
 'date_jour_5' => 'quinta-feira',
-'date_jour_5_abbr' => 'jeu.', # NEW
-'date_jour_5_initiale' => 'j.', # NEW
+'date_jour_5_abbr' => 'Thu.', # NEW
+'date_jour_5_initiale' => 'T.', # NEW
 'date_jour_6' => 'sexta-feira',
-'date_jour_6_abbr' => 'ven.', # NEW
-'date_jour_6_initiale' => 'v.', # NEW
+'date_jour_6_abbr' => 'Fri.', # NEW
+'date_jour_6_initiale' => 'F.', # NEW
 'date_jour_7' => 's&aacute;bado',
-'date_jour_7_abbr' => 'sam.', # NEW
-'date_jour_7_initiale' => 's.', # NEW
+'date_jour_7_abbr' => 'Sat.', # NEW
+'date_jour_7_initiale' => 'S.', # NEW
 'date_jours' => 'dias',
 'date_minutes' => 'minutos',
 'date_mois' => 'meses',
@@ -188,13 +188,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'ver&atilde;o',
 'date_saison_4' => 'outono',
-'date_secondes' => 'secondes', # NEW
+'date_secondes' => 'seconds', # NEW
 'date_semaines' => 'semanas',
-'date_un_mois' => 'mois', # NEW
-'date_une_heure' => 'heure', # NEW
+'date_un_mois' => 'month', # NEW
+'date_une_heure' => 'hour', # NEW
 'date_une_minute' => 'minute', # NEW
-'date_une_seconde' => 'seconde', # NEW
-'date_une_semaine' => 'semaine', # NEW
+'date_une_seconde' => 'second', # NEW
+'date_une_semaine' => 'week', # NEW
 'dirs_commencer' => 'a fim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar : <b>Configurar os direitos de acesso</b>',
 'dirs_probleme_droits' => 'Problema de direitos de acesso', # MODIF
@@ -210,27 +210,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Double occurrence', # MODIF
 
 // E
-'en_cours' => 'en cours', # NEW
+'en_cours' => 'processing', # NEW
 'entree_dimensions' => 'Dimens&otilde;es&nbsp;:',
 'entree_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
 'entree_titre_image' => 'T&iacute;tulo da imagem&nbsp;:',
 'envoi_via_le_site' => 'Envio pelo site',
-'erreur' => 'Erreur', # NEW
-'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :', # NEW
-'erreur_texte' => 'erreur(s)', # NEW
-'etape' => '&Eacute;tape', # NEW
+'erreur' => 'Error', # NEW
+'erreur_balise_non_fermee' => 'last tag not closed:', # NEW
+'erreur_texte' => 'error(s)', # NEW
+'etape' => 'Stage', # NEW
 
 // F
 'fichier_introuvable' => 'Ficheiro @fichier@ n&atilde;o localizado',
-'form_auteur_confirmation' => 'Confirmez votre adresse email', # NEW
-'form_auteur_email_modifie' => 'Votre adresse email a &eacute;t&eacute; modifi&eacute;e.', # NEW
-'form_auteur_envoi_mail_confirmation' => 'Un courrier &eacute;lectronique de confirmation vient d\'&ecirc;tre envoy&eacute; &agrave; @email@. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre adresse mail.', # NEW
-'form_auteur_mail_confirmation' => 'Bonjour,
+'form_auteur_confirmation' => 'Please confirm your email address', # NEW
+'form_auteur_email_modifie' => 'Your email address has been changed.', # NEW
+'form_auteur_envoi_mail_confirmation' => 'A confirmation email has been sent to @email@. You need to visit the URL mentioned in this message in order to validate your email address.', # NEW
+'form_auteur_mail_confirmation' => 'Hello,
 
-Vous avez demand&eacute; &agrave; changer votre adresse email.
-Pour confirmer votre nouvelle adresse, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera ignor&eacute;e) :
+You have asked to change your email address.
+To confirm your new address, you need to connect to
+the address below. (Otherwise your request will be ignored.):
 
     @url@
 ', # NEW
@@ -280,7 +279,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 ', # MODIF
 'form_pet_message_commentaire' => 'Uma mensagem, um coment&aacute;rio&nbsp;?',
 'form_pet_nom_site2' => 'Nome do seu s&iacute;tio Web',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
+'form_pet_probleme_liens' => 'Please edit your message, taking out all hyperlinks.', # NEW
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, as assinaturas est&atilde;o temporariamente suspensas.',
 'form_pet_signature_pasprise' => 'A sua assinatura n&atilde;o est&aacute; tomada em conta.',
 'form_pet_signature_validee' => 'A sua assinatura foi validada. Obrigado!',
@@ -304,7 +303,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'forum_acces_refuse' => 'J&aacute; n&atilde;o tem acesso a esses f&oacute;runs.',
 'forum_attention_dix_caracteres' => '<b>Aten&ccedil;&atilde;o&nbsp;!</b> a sua mensagem cont&eacute;m menos de dez car&aacute;cteres.',
 'forum_attention_trois_caracteres' => '<b>Aten&ccedil;&atilde;o&nbsp;!</b> o seu t&iacute;tulo cont&eacute;m menos de tr&ecirc;s car&aacute;cteres.',
-'forum_attention_trop_caracteres' => '<b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.', # NEW
+'forum_attention_trop_caracteres' => '<b>Warning&nbsp;!</b> your message is too long (@compte@ characters)&nbsp;: to be able to save it, the message should not contain more than @max@ characters.', # NEW
 'forum_avez_selectionne' => 'Seleccionou&nbsp;:',
 'forum_cliquer_retour' => 'Clicar <a href=\'@retour_forum@\'>ici</a> para continuar.',
 'forum_forum' => 'f&oacute;rum',
@@ -418,8 +417,8 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_bloquer_lien' => 'bloquear este v&iacute;nculo',
 'info_breves_02' => 'Not&iacute;cias',
 'info_breves_2' => 'not&iacute;cias',
-'info_breves_nb' => '@nb@ br&egrave;ves', # NEW
-'info_breves_un' => '1 br&egrave;ve', # NEW
+'info_breves_nb' => '@nb@ news items', # NEW
+'info_breves_un' => '1 news item', # NEW
 'info_breves_valider' => 'Not&iacute;cias a validar',
 'info_connexion_refusee' => 'Liga&ccedil;&atilde;o recusada',
 'info_contact_developpeur' => 'Favor contactar com um programador',
@@ -438,7 +437,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_description_2' => 'Descri&ccedil;&atilde;o&nbsp;:',
 'info_dimension' => 'Dimens&otilde;es&nbsp;:',
 'info_document' => 'Documento',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
+'info_document_indisponible' => 'This document is unavailable', # NEW
 'info_documents' => 'Documentos',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
@@ -505,11 +504,11 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_nouveau_message' => 'TEM UMA NOVA MENSAGEM',
 'info_nouveaux_messages' => 'TEM @total_messages@ NOVAS MENSAGENS',
 'info_numero_abbreviation' => '<N&deg;&nbsp;>',
-'info_obligatoire' => 'Cette information est obligatoire', # NEW
+'info_obligatoire' => 'This information is required', # NEW
 'info_panne_site_syndique' => 'S&iacute;tio vinculado avariado',
 'info_pense_bete' => 'MEMORANDO',
 'info_petit_ecran' => 'Ecr&atilde; Pequeno',
-'info_petition_close' => 'P&eacute;tition close', # NEW
+'info_petition_close' => 'Petition closed', # NEW
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Muitas palavras-chave encontradas para "@cherche_mot@":',
 'info_popularite_5' => 'popularidade&nbsp;:',
@@ -534,13 +533,13 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_retablir_lien' => 'restabelecer este v&iacute;nculo',
 'info_retirer_mot' => 'Retirar esta palavra',
 'info_retirer_mots' => 'Retirar todas as palavras',
-'info_rubriques_nb' => '@nb@ rubriques', # NEW
-'info_rubriques_un' => '1 rubrique', # NEW
+'info_rubriques_nb' => '@nb@ sections', # NEW
+'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'sem t&iacute;tulo',
 'info_selectionner_fichier' => 'Pode seleccionar um ficheiro do dossier @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Seleccionar um ficheiro&nbsp;:',
-'info_signature_supprimee' => 'Signature supprim&eacute;e', # NEW
-'info_signature_supprimee_erreur' => 'Erreur&nbsp;: ce code de suppression ne correspond a aucune signature', # NEW
+'info_signature_supprimee' => 'Signature deleted', # NEW
+'info_signature_supprimee_erreur' => 'Error: this deletion code does not correspond to any signature', # NEW
 'info_site_attente' => 'S&iacute;tio Web &agrave; espera de valida&ccedil;&atilde;o',
 'info_site_reference' => 'S&iacute;tio referenciado em linha',
 'info_site_refuse' => 'S&iacute;tio Web recusado',
@@ -592,8 +591,8 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'lien_visite_site' => 'visitar este s&iacute;tio',
 'lien_visites' => '@visites@&nbsp;visitas',
 'lien_voir_auteur' => 'Ver este autor',
-'ligne' => 'Ligne', # NEW
-'login' => 'Connexion', # NEW
+'ligne' => 'Line', # NEW
+'login' => 'Connection', # NEW
 'login_acces_prive' => 'acesso ao espa&ccedil;o privado',
 'login_autre_identifiant' => 'ligar-se sob um outro identificador',
 'login_cookie_accepte' => 'Favor configurar o seu navegador para que os aceite ( pelo menos para este s&iacute;tio).',
@@ -620,22 +619,22 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'login_retour_site' => 'Regresso ao s&iacute;tio p&uacute;blico',
 'login_retoursitepublic' => 'Regresso&nbsp;ao&nbsp;s&iacute;tio&nbsp;p&uacute;blico',
 'login_sans_cookiie' => 'identifica&ccedil;&atilde;o sem cookie',
-'login_securise' => 'Login s&eacute;curis&eacute;', # NEW
+'login_securise' => 'Secured login', # NEW
 'login_sinscrire' => 'inscrever-se',
 'login_test_navigateur' => 'teste navega&ccedil;&atilde;o/nova liga&ccedil;&atilde;o',
 'login_verifiez_navigateur' => '(Verifique, por&eacute;m, que o seu navegador n&atilde;o memorizou a sua palavra-passe...)',
 
 // M
-'masquer_colonne' => 'Masquer cette colonne', # NEW
-'masquer_trad' => 'masquer les traductions', # NEW
+'masquer_colonne' => 'Hide this column', # NEW
+'masquer_trad' => 'hide translations', # NEW
 'module_fichiers_langues' => 'Ficheiros de l&iacute;ngua',
 
 // N
 'navigateur_pas_redirige' => 'Se o seu browser n&atilde;o est&aacute; redireccionado, clique aqui para continuar.',
-'numero' => 'Num&eacute;ro', # NEW
+'numero' => 'Number', # NEW
 
 // O
-'occurence' => 'Occurrence', # NEW
+'occurence' => 'Instance', # NEW
 'onglet_affacer_base' => 'Apagar a base',
 'onglet_auteur' => 'O autor',
 'onglet_contenu_site' => 'Conte&uacute;do do s&iacute;tio',
@@ -699,13 +698,13 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'previsualiser' => 'Visualizar',
 
 // R
-'retour' => 'Retour', # NEW
+'retour' => 'Return', # NEW
 
 // S
-'spip_conforme_dtd' => 'SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :', # NEW
-'squelette' => 'squelette', # NEW
-'squelette_inclus_ligne' => 'squelette inclus, ligne', # NEW
-'squelette_ligne' => 'squelette, ligne', # NEW
+'spip_conforme_dtd' => 'SPIP finds this page to be in compliance with its DOCTYPE:', # NEW
+'squelette' => 'template', # NEW
+'squelette_inclus_ligne' => 'included template, line', # NEW
+'squelette_ligne' => 'template, line', # NEW
 'stats_visites_et_popularite' => '@visites@ visitas&nbsp;; popularidade&nbsp;: @popularite@',
 'suivant' => 'seguinte',
 
@@ -726,7 +725,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
   Notar bem esta refer&ecirc;ncia, voltar a tentar o nivelamento
 , e enfim verificar que as imagens aparecem
  sempre nos artigos.', # MODIF
-'texte_erreur_visiteur' => 'Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.', # NEW
+'texte_erreur_visiteur' => 'You have tried to enter the private area using a login which does not permit this.', # NEW
 'texte_inc_auth_1' => 'Voc&ecirc; est&aacute; identificado sob o
    login <b>@auth_login@</b>, mas este j&aacute;/ n&atilde;o existe na base.
  Tente', # MODIF
@@ -764,20 +763,20 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'titre_mots_cles' => 'PALAVRAS-CHAVE',
 'titre_probleme_technique' => 'Aten&ccedil;&atilde;o&nbsp;: um problema t&eacute;cnico (servidor SQL) impede o acesso a esta parte do s&iacute;tio. Obrigado pela sua compreens&atilde;o.', # MODIF
 'titre_publier_document' => 'PUBLICAR UM DOCUMENTO NESTA RUBRICA',
-'titre_signatures_attente' => 'Signatures en attente de validation', # NEW
-'titre_signatures_confirmees' => 'Signatures confirm&eacute;es', # NEW
+'titre_signatures_attente' => 'Signatures awaiting validation', # NEW
+'titre_signatures_confirmees' => 'Confirmed signatures', # NEW
 'titre_statistiques' => 'Estat&iacute;sticas do s&iacute;tio',
 'titre_titre_document' => 'T&iacute;tulo do documento&nbsp;:',
-'todo' => '&agrave; venir', # NEW
+'todo' => 'to come', # NEW
 'trad_reference' => '(artigo de refer&ecirc;ncia)',
 
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',
 'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
-'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
+'zbug_balise_sans_argument' => 'Missing argument in the @balise@ tag', # NEW
 'zbug_boucle' => 'la&ccedil;o',
 'zbug_boucle_recursive_undef' => 'la&ccedil;o recursivo n&atilde;o definido', # MODIF
-'zbug_calcul' => 'calcul', # NEW
+'zbug_calcul' => 'calculation', # NEW
 'zbug_champ_hors_boucle' => 'Campo @champ@ fora do la&ccedil;o',
 'zbug_champ_hors_motif' => 'Campo @champ@ fora de um la&ccedil;o de motivo @motif@', # MODIF
 'zbug_code' => 'c&oacute;digo',
@@ -788,37 +787,37 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: Dupla Defini&ccedil;&atilde;o ', # MODIF
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag final em falta   ', # MODIF
 'zbug_erreur_boucle_syntaxe' => 'Loop com sintaxe incorrecta', # MODIF
-'zbug_erreur_compilation' => 'Erreur de compilation', # NEW
+'zbug_erreur_compilation' => 'Compilation error', # NEW
 'zbug_erreur_execution_page' => 'erro de execu&ccedil;&atilde;o da p&aacute;gina', # MODIF
 'zbug_erreur_filtre' => 'Erro : filtro <b>&laquo; @filtre@ &raquo;</b> indefinido', # MODIF
 'zbug_erreur_meme_parent' => '{meme_parent} aplica-se exclusivamente aos links (FORUMS) ou (RUBRIQUES)', # MODIF
 'zbug_erreur_squelette' => 'Erro(s) no gabarito',
-'zbug_hors_compilation' => 'Hors Compilation', # NEW
+'zbug_hors_compilation' => 'Uncompiled', # NEW
 'zbug_info_erreur_squelette' => 'Erro no s&iacute;tio',
 'zbug_inversion_ordre_inexistant' => 'invers&atilde;o de uma ordem inexistente', # MODIF
 'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive', # MODIF
 'zbug_parametres_inclus_incorrects' => 'Par&acirc;metros de inclus&atilde;o incorrectos', # MODIF
-'zbug_profile' => 'Temps de calcul&nbsp;: @time@', # NEW
+'zbug_profile' => 'Calculation time: @time@', # NEW
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'sevidor SQL n&atilde;o definido', # MODIF
-'zbug_statistiques' => 'Statistiques des requ&ecirc;tes SQL class&eacute;es par dur&eacute;e', # NEW
+'zbug_statistiques' => 'SQL query statistics in order of duration', # NEW
 'zbug_table_inconnue' => 'Tabela SQL &laquo;@table@&raquo; desconhecida',
-'zxml_connus_attributs' => 'attributs connus', # NEW
-'zxml_de' => 'de', # NEW
-'zxml_inconnu_attribut' => 'attribut inconnu', # NEW
-'zxml_inconnu_balise' => 'balise inconnue', # NEW
-'zxml_inconnu_entite' => 'entit&eacute; inconnue', # NEW
-'zxml_inconnu_id' => 'ID inconnu', # NEW
-'zxml_mais_de' => 'mais de', # NEW
-'zxml_non_conforme' => 'n\'est pas conforme au motif', # NEW
-'zxml_non_fils' => 'n\'est pas un fils de', # NEW
-'zxml_nonvide_balise' => 'balise non vide', # NEW
-'zxml_obligatoire_attribut' => 'attribut obligatoire mais absent dans', # NEW
-'zxml_succession_fils_incorrecte' => 'succession des fils incorrecte', # NEW
-'zxml_survoler' => 'survoler pour voir les corrects', # NEW
-'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
-'zxml_vide_balise' => 'balise vide', # NEW
-'zxml_vu' => 'vu auparavant', # NE
+'zxml_connus_attributs' => 'known attributes', # NEW
+'zxml_de' => 'from', # NEW
+'zxml_inconnu_attribut' => 'unknown attribute', # NEW
+'zxml_inconnu_balise' => 'unknown tag', # NEW
+'zxml_inconnu_entite' => 'unknown entity', # NEW
+'zxml_inconnu_id' => 'unknown ID', # NEW
+'zxml_mais_de' => 'but from', # NEW
+'zxml_non_conforme' => 'not true to the principle', # NEW
+'zxml_non_fils' => 'is not a child of', # NEW
+'zxml_nonvide_balise' => 'tag not empty', # NEW
+'zxml_obligatoire_attribut' => 'required attribute absent in', # NEW
+'zxml_succession_fils_incorrecte' => 'incorrect child inheritance', # NEW
+'zxml_survoler' => 'to see the correct ones, hover with the cursor', # NEW
+'zxml_valeur_attribut' => 'attribute value', # NEW
+'zxml_vide_balise' => 'empty tag', # NEW
+'zxml_vu' => 'seen before', # NE
 );
 
 ?>
