@@ -192,16 +192,25 @@ function revisions_articles ($id_article, $c=false) {
 		include_spip('inc/revisions');
 		$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
 		if (!spip_num_rows($query)) {
-			$select = join(", ", array_keys($champs_normaux));
-			$query = spip_query("SELECT $select FROM spip_articles WHERE id_article=$id_article");
+			$select = join(", ", $champs_normaux);
+			$query = spip_query("SELECT $select, date, date_modif FROM spip_articles WHERE id_article=$id_article");
 			$champs_originaux = spip_fetch_array($query);
-
 			// Si le titre est vide, c'est qu'on vient de creer l'article
 			if ($champs_originaux['titre'] != '') {
+				$date_modif = $champs_originaux['date_modif'];
+				$date = $champs_originaux['date'];
+				unset ($champs_originaux['date_modif']);
+				unset ($champs_originaux['date']);
 				$id_version = ajouter_version($id_article, $champs_originaux,
 					_T('version_initiale'), 0);
-				// Remettre une date un peu ancienne pour la version initiale
-				spip_query("UPDATE spip_versions SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR) WHERE id_article=$id_article AND id_version=$id_version");
+				// Inventer une date raisonnable pour la version initiale
+				if ($date_modif>'1970-')
+					$date_modif = strtotime($date_modif);
+				else if ($date>'1970-')
+					$date_modif = strtotime($date);
+				else
+					$date_modif = time()-7200;
+				spip_query("UPDATE spip_versions SET date=FROM_UNIXTIME($date_modif) WHERE id_article=$id_article AND id_version=$id_version");
 			}
 		}
 	}
