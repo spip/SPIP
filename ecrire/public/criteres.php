@@ -431,6 +431,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	}
 }
 
+// http://doc.spip.org/@critere_par_joint
 function critere_par_joint($table, $champ, &$boucle, $idb)
 {
 	$t = array_search($table, $boucle->from);
