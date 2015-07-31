@@ -163,6 +163,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'calendrier_synchro' => 'Se vi uzas agend-programon kongruantan la <b>iCal</b> formato, vi povas &#285;isdatigi tiun kun la datenoj de tiu teksejo.',
+'calendrier_synchro_lien' => '<NEW> R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => '<NEW> Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'calendrier_synchro_public' => '<NEW> Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'calendrier_synchro_sync' => '<NEW> Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -585,6 +589,7 @@ Dankon pro via partopreno
 'info_dimension' => 'Dimensioj:',
 'info_discussion_cours' => 'Nunaj diskutoj',
 'info_document' => 'Dokumento ',
+'info_donner_rendez_vous' => 'Tiu butono ebligas al vi doni rendevuon al alia partoprenanto.',
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj inter la partoprenantoj de la teksejo. Vi povas aktivigi a&#365; malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesa&#285;on',
 'info_ecrire_article' => 'Anta&#365; ol havi la eblecon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
@@ -743,6 +748,7 @@ Dankon pro via partopreno
 'info_notes' => 'Notoj',
 'info_nouveau' => '(Nova)',
 'info_nouveau_message' => 'VI HAVAS NOVAN MESA&#284;ON',
+'info_nouveau_pense_bete' => 'Tiu butono ebligas al vi krei novan propran memorigilon.',
 'info_nouveaux_message' => 'Novaj mesa&#285;oj',
 'info_nouveaux_messages' => 'VI HAVAS @total_messages@ NOVA(J)N MESA&#284;O(J)N',
 'info_nouvel_article' => 'Nova artikolo',
@@ -1591,6 +1597,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
 'titre_les_articles' => 'LA ARTIKOLOJ',
 'titre_liens_entrants' => 'La enantaj ligojn de la tago',
+'titre_liens_entrants_total' => '<NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => '&#348;LOSILVORTOJ',
 'titre_mots_cles_dans_forum' => '&#348;losilvortoj en la forumoj de la publikejo',
 'titre_mots_tous' => 'La &#349;losilvortoj',
@@ -1650,17 +1657,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'trad_delier' => 'Ne plu ligi tiun artikolon kun &#285;iaj tradukoj',
 'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numerita&nbsp;:',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo',
-'trad_reference' => '(artikolo referenca)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => '<NEW> R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => '<NEW> Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
-'calendrier_synchro_public' => '<NEW> Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
-'calendrier_synchro_sync' => '<NEW> Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
-'info_donner_rendez_vous' => 'Tiu butono ebligas al vi doni rendevuon al alia partoprenanto.',
-'info_nouveau_pense_bete' => 'Tiu butono ebligas al vi krei novan propran memorigilon.',
-'titre_liens_entrants_total' => '<NEW> Les liens entrants depuis le d&eacute;but'
+'trad_reference' => '(artikolo referenca)'
 
 );
 

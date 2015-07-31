@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Geen editoriale aankondigingen versturen',
 'bouton_radio_non_envoi_liste_nouveautes' => 'De lijst met nieuwe bijdragen niet versturen',
 'bouton_radio_non_syndication' => 'Geen syndicatie',
-'bouton_radio_occidental' => 'Westers alfabet&nbsp; (<tt>iso-8859-1</tt>): ondersteund door alle browsers, maar geeft enkel 
+'bouton_radio_occidental' => '<MODIF> Westers alfabet&nbsp; (<tt>iso-8859-1</tt>): ondersteund door alle browsers, maar geeft enkel 
   de West-Europese talen weer (Engels, Frans, Duits, Nederlands ...).',
 'bouton_radio_pas_petition' => 'Geen petitie',
 'bouton_radio_personnalise' => 'Gepersonaliseerde tekenset: kies deze optie als je een specifieke tekenset
@@ -152,7 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'niet-gecomprimeerde opslag onder  <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'De petitie verwijderen',
 'bouton_radio_syndication' => 'Syndicatie :',
-'bouton_radio_universel' => 'Universeel alfabet&nbsp; (<tt>utf-8</tt>): toont alle talen maar wordt helaas nog niet door alle bladerprogramma\'s herkend.',
+'bouton_radio_universel' => '<MODIF> Universeel alfabet&nbsp; (<tt>utf-8</tt>): toont alle talen maar wordt helaas nog niet door alle bladerprogramma\'s herkend.',
 'bouton_recharger_page' => 'pagina vernieuwen',
 'bouton_redirection' => 'OMLEIDING',
 'bouton_relancer_installation' => 'Installatie herbeginnen',
@@ -384,7 +384,7 @@ Bedankt voor je deelname
 'icone_articles' => 'Artikels',
 'icone_auteurs' => 'Auteurs',
 'icone_breves' => 'Berichten',
-'icone_brouteur' => '<NEW> Snelle navigatie',
+'icone_brouteur' => '<NEW> Navigation rapide',
 'icone_calendrier' => 'Kalender',
 'icone_calendrier_messagerie' => 'Agenda en berichtensysteem',
 'icone_configuration_site' => 'Configuratie van de site',
@@ -398,7 +398,7 @@ Bedankt voor je deelname
 'icone_creer_rubrique_2' => 'Een nieuwe rubriek aanmaken',
 'icone_creer_sous_rubrique' => 'Een subrubriek aanmaken',
 'icone_deconnecter' => 'Uitloggen',
-'icone_discussions' => '<NEW> Discussies',
+'icone_discussions' => '<NEW> Discussions',
 'icone_doc_rubrique' => 'Bijlagen van de rubrieken',
 'icone_ecrire_article' => 'Een nieuw artikel schrijven',
 'icone_ecrire_nouvel_article' => 'De berichten van deze rubriek',
@@ -411,7 +411,7 @@ Bedankt voor je deelname
 'icone_forum_interne' => 'Intern forum',
 'icone_forum_suivi' => 'Opvolging van de forums',
 'icone_forums_petitions' => 'Forums en petities',
-'icone_gestion_langues' => '<NEW> Talenbeheer',
+'icone_gestion_langues' => '<NEW> Gestion des langues',
 'icone_informations_personnelles' => 'Persoonlijke gegevens',
 'icone_interface_complet' => 'Volledige interface',
 'icone_interface_simple' => 'Eenvoudige interface',
@@ -432,7 +432,7 @@ Bedankt voor je deelname
 'icone_refuser_breve' => 'Dit nieuwsbericht weigeren',
 'icone_repartition_actuelle' => 'De huidige verdeling tonen',
 'icone_repartition_debut' => 'De verdeling sinds het begin tonen',
-'icone_repartition_visites' => '<NEW> Bezoekenverspreiding',
+'icone_repartition_visites' => '<NEW> R&eacute;partition des visites',
 'icone_retour' => 'Terug',
 'icone_retour_article' => 'Terug naar artikel',
 'icone_rubriques' => 'Rubrieken',
@@ -441,8 +441,8 @@ Bedankt voor je deelname
 'icone_sites_references' => 'Gekoppelde sites',
 'icone_statistiques' => 'Statistieken van de site',
 'icone_statistiques_visites' => 'Statistieken aantal bezoeken',
-'icone_suivi_activite' => '<NEW> Opvolging van het leven van de site',
-'icone_suivi_actualite' => '<NEW> Site evolutie',
+'icone_suivi_activite' => '<NEW> Suivre la vie du site',
+'icone_suivi_actualite' => '<NEW> &Eacute;volution du&nbsp;site',
 'icone_suivi_forum' => 'Opvolging van het publieke forum: @nb_forums@&nbsp;bijdrage(n)',
 'icone_suivi_forums' => 'Forums opvolgen/beheren',
 'icone_suivi_pettions' => 'Petities opvolgen/beheren',
@@ -778,6 +778,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_nouveaux_message' => 'Nieuwe berichten',
 'info_nouveaux_messages' => 'JE HEBT @total_messages@ NIEUWE BERICHTEN',
 'info_nouvel_article' => 'Nieuw artikel',
+'info_nouvelle_traduction' => '<NEW> Nouvelle traduction&nbsp;:',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Verplicht]',
 'info_option_email' => 'Wanneer een bezoeker van de site een bericht post in het forum over een bepaald artikel, kan de auteur van dat artikel via e-mail verwittigd worden. Wil je van deze mogelijkheid gebruik maken?',
@@ -1420,7 +1421,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u cre&euml;ren.',
 'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
-'texte_jeu_caractere' => 'Deze optie is nuttig wanneer je site een ander alfabet dan het Romeinse (of &laquo;westerse&raquo;) of zijn afgeleiden, dient weer te geven.
+'texte_jeu_caractere' => '<MODIF> Deze optie is nuttig wanneer je site een ander alfabet dan het Romeinse (of &laquo;westerse&raquo;) of zijn afgeleiden, dient weer te geven.
 In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen. Vergeet ook niet je publieke site hieraan te passen (balise <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Deze instelling heeft geen terugwerkend effect. Teksten
  die reeds werden ingevoerd, zullen mogelijk foutief
