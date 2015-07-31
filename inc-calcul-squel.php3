@@ -413,14 +413,11 @@ function parser_boucle($texte, $id_parent) {
 							$col_table = '';
 						}
 						else if ($col == 'age_relatif') {
-							$date_prec = "($"."date)";
-							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($table.$col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('$date_prec')-MONTH($table.$col_date))+365.2422*(YEAR('$date_prec')-YEAR($table.$col_date))))";
+							$col = "(LEAST((TO_DAYS('(\$date)')-TO_DAYS($table.$col_date)),(DAYOFMONTH('(\$date)')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('(\$date)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date)')-YEAR($table.$col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_mail_nouv') {
-							$datenouv = lire_meta('date_envoi') ? lire_meta('date_envoi') : time() - 3600*24*lire_meta('jours_neuf');
-							$datenouv = date('Y-m-d H:i:s', $datenouv);
-							$col = "(LEAST((TO_DAYS('$datenouv')-TO_DAYS($table.$col_date)),(DAYOFMONTH('$datenouv')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('$datenouv')-MONTH($table.$col_date))+365.2422*(YEAR('$datenouv')-YEAR($table.$col_date))))";
+							$col = "(LEAST((TO_DAYS('(\$date_nouv)')-TO_DAYS($table.$col_date)),(DAYOFMONTH('(\$date_nouv)')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('(\$date_nouv)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date_nouv)')-YEAR($table.$col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_redac') {
@@ -1348,10 +1345,11 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'DATE_MAIL_NOUV':
-		if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('date_envoi'))
-			$code = "date('Y-m-d H:i:s', lire_meta('date_envoi'))";
+		$milieu = "if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv'))
+			\$$nom_var = date('Y-m-d H:i:s', lire_meta('majnouv'));
 		else
-			$code = "'0000-00-00'";
+			\$$nom_var = \"'0000-00-00'\";
+		";
 		break;
 
 	case 'URL_ARTICLE':
@@ -1723,7 +1721,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 
 	$texte .= "function $func".'($contexte) {
-	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $syn_rubriques, $rubriques_publiques, $id_article_img;
+	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $syn_rubriques, $rubriques_publiques, $id_article_img, $date_nouv;
 
 	';
 

@@ -296,7 +296,7 @@ if (tester_mail()) {
 	$jours_neuf=lire_meta("jours_neuf");
 
 	if ($envoi_now) {
-		effacer_meta('majnouv');
+		ecrire_meta('majnouv', time()-3600*24*$jours_neuf);
 		ecrire_metas();
 	}
 

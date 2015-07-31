@@ -70,6 +70,9 @@ if ($ajout_forum) {
 }
 
 
+// date relative a l'envoi du mail nouveautes
+$GLOBALS['date_nouv'] = date('Y-m-d H:i:s', lire_meta('majnouv'));
+
 if (!$use_cache) {
 	$lastmodified = time();
 	if (($lastmodified - lire_meta('date_purge_cache')) > 24 * 3600) {
@@ -212,10 +215,9 @@ if ($admin_ok AND !$flag_preserver AND !$flag_boutons_admin) {
 //
 // Envoi du mail quoi de neuf
 //
-
-$majnouv = lire_meta('majnouv');
 if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta('jours_neuf')
-	AND $adresse_neuf = lire_meta('adresse_neuf') AND (time() - $majnouv) > 3600 * 24 * $jours_neuf) { //lire_meta('date_envoi') ? lire_meta('date_envoi') : $majnouv
+	AND $adresse_neuf = lire_meta('adresse_neuf') AND (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
+
 	include_ecrire('inc_connect.php3');
 	if ($db_ok) {
 		// lock && indication du prochain envoi
@@ -238,8 +240,6 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 
 		// envoi
 		if ($mail_nouveautes) {
-			ecrire_meta('date_envoi', lire_meta('majnouv'));
-			ecrire_metas();
 			spip_log("envoi mail nouveautes");
 			include_ecrire('inc_mail.php3');
 			envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
