@@ -630,7 +630,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$res = (!$avant ? "" : "$avant . ") . 
 					$t .
 					(!$apres ? "" : " . $apres");
-				$code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab$altern)";
+				$code = "(($t = $code)!=='' ?\n\t$tab($res) :\n\t$tab$altern)";
 			}
 
 			// gestion d'une boucle-fragment (ahah)
