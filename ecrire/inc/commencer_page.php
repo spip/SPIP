@@ -66,6 +66,9 @@ function init_head($titre='', $dummy=0, $minipres=false) {
 	jQuery(document).ready(function(){
 	" .	repercuter_gadgets() . '
 	});
+	var style = document.createElement("style");
+	style.innerHTML = ".jsnone {display:none;}";
+	document.getElementsByTagName("head")[0].appendChild(style);
 	// --></script>
 	';
 	return pipeline('header_prive', $head);
