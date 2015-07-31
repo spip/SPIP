@@ -10,7 +10,7 @@ if (defined("_INC_PUBLIC")) {
 	echo $fichier_requete."<p>";
 	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
 	$chemin_cache = "CACHE/".$fichier_cache;
-	$use_cache = utiliser_cache($chemin_cache);
+	$use_cache = utiliser_cache($chemin_cache, $delais);
 
 	if (!$use_cache) {
 		include_ecrire("inc_connect.php3");
@@ -58,7 +58,7 @@ $fichier_cache = generer_nom_fichier_cache($fichier_requete);
 $chemin_cache = "CACHE/".$fichier_cache;
 
 
-$use_cache = utiliser_cache($chemin_cache);
+$use_cache = utiliser_cache($chemin_cache, $delais);
 
 
 if ($use_cache) {
