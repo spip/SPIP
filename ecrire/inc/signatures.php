@@ -99,8 +99,12 @@ function signatures_edit($script, $id, $arg, $row) {
 		if (!$nom_site) $nom_site = _T('info_site');
 		$res .= "<div class='site'><span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a></div>\n";
 		}
-	if (strlen($ad_email)>0){
-		$res .= "<div class='ad_email'><span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a></div>\n";
+	if ($ad_email) {
+		$res .= "<div class='ad_email'><span class='spip_x-small'>"
+			._T('info_adresse_email')
+			."</span> "
+			. (!email_valide($ad_email)
+				? $ad_email : ("<a href='mailto:" . attribut_html($ad_email) . "'>$ad_email</a></div>\n"));
 	}
 
 	$res .= "<div class='texte'>" . message_de_signature($row) . "</div>";
