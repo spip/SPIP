@@ -19,7 +19,6 @@ define("_ECRIRE_INC_MINI_NAV", "1");
 
 function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $rub_exclus=0) {
 	global $couleur_claire, $couleur_foncee, $spip_lang_left;
-	include_ecrire("inc_db_mysql.php3");
 	
 	if (strlen($liste) > 0) {
 		$rubs = explode(",", $liste);

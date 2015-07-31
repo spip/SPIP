@@ -145,6 +145,14 @@ var url_chargee = new Array();
 var xmlhttp = new Array();
 var image_search = new Array();
 
+// Ajax
+function createXmlHttp() {
+	if(window.XMLHttpRequest)
+		return new XMLHttpRequest(); 
+	else if(window.ActiveXObject)
+		return new ActiveXObject("Microsoft.XMLHTTP");
+}
+
 function charger_id_url(myUrl, myField, jjscript) 
 {
 	var Field = findObj_forcer(myField); // selects the given element
@@ -160,35 +168,32 @@ function charger_id_url(myUrl, myField, jjscript)
 	} else {
 		image_search[myField] = findObj_forcer('img_'+myField);
 		if (image_search[myField]) image_search[myField].style.visibility = "visible";
-    
-    	if(window.XMLHttpRequest) {
-                xmlhttp[myField] = new XMLHttpRequest(); 
-        } else if(window.ActiveXObject) {
-                xmlhttp[myField] = new ActiveXObject("Microsoft.XMLHTTP");
-        } else {
-                return false;
-        }
-        xmlhttp[myField].open("GET", myUrl, true);
 
-        xmlhttp[myField].onreadystatechange = function() {
-                if (xmlhttp[myField].readyState == 4) { 
-                        Field.innerHTML = xmlhttp[myField].responseText; // puts the result into the element
-						url_chargee['mem_'+myUrl] = Field.innerHTML;
-						Field.style.visibility = "visible";
-						Field.style.display = "block";
-						if (image_search[myField]) {
-							image_search[myField].style.visibility = "hidden";
-						}
-						if(jjscript) eval(jjscript);
-               }
-        }
-        xmlhttp[myField].send(null); 
-    }
+		if (!(xmlhttp[myField] = createXmlHttp())) return false;
+		xmlhttp[myField].open("GET", myUrl, true);
+
+		// traiter la reponse du serveur
+		xmlhttp[myField].onreadystatechange = function() {
+			if (xmlhttp[myField].readyState == 4) { 
+				// si elle est non vide, l'afficher
+				if (xmlhttp[myField].responseText != '') {
+					Field.innerHTML = xmlhttp[myField].responseText;
+					url_chargee['mem_'+myUrl] = Field.innerHTML;
+				}
+				Field.style.visibility = "visible";
+				Field.style.display = "block";
+				if (image_search[myField]) {
+					image_search[myField].style.visibility = "hidden";
+				}
+				if(jjscript) eval(jjscript);
+			}
+		}
+		xmlhttp[myField].send(null); 
+	}
 }
 
 
-function charger_id_url_si_vide (myUrl, myField, jjscript) 
-{
+function charger_id_url_si_vide (myUrl, myField, jjscript) {
 	var Field = findObj_forcer(myField); // selects the given element
 	if (!Field) return;
 
@@ -196,16 +201,8 @@ function charger_id_url_si_vide (myUrl, myField, jjscript)
 		charger_id_url(myUrl, myField, jjscript) 
 	}
 	else {
-						Field.style.visibility = "visible";
-						Field.style.display = "block";		
+		Field.style.visibility = "visible";
+		Field.style.display = "block";
 	}
-
-
 }
-
-
-
-
-
-
 

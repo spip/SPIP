@@ -26,6 +26,8 @@
 if (defined("_INC_CALCUL_OUTILS")) return;
 define("_INC_CALCUL_OUTILS", "1");
 
+include_ecrire('inc_rubriques.php3'); # pour calcul_branche()
+
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
 // remarquable, mais a conserver pour compatibilite ascendante.
@@ -241,29 +243,6 @@ function table_from_primary($id) {
 			return array($k, array_key_exists('id_rubrique', $v['field']));
 	}
 	return '';
-}
-
-function calcul_generation ($generation) {
-	$lesfils = array();
-	$result = spip_abstract_select(array('id_rubrique'),
-				array('spip_rubriques AS rubriques'),
-				array(calcul_mysql_in('id_parent', 
-					$generation,
-						      '')));
-	while ($row = spip_abstract_fetch($result))
-		$lesfils[] = $row['id_rubrique'];
-	return join(",",$lesfils);
-}
-
-function calcul_branche ($generation) {
-	if (!$generation) 
-		return '0';
-	else {
-		$branche[] = $generation;
-		while ($generation = calcul_generation ($generation))
-			$branche[] = $generation;
-		return join(",",$branche);
-	}
 }
 
 // fonction appelee par la balise #LOGO_DOCUMENT

@@ -11,9 +11,22 @@
 
 
 include ("inc.php3");
+
+# gerer un charset minimaliste en convertissant tout en unicode &#xxx;
+if ($flag_ob) {
+	ob_start();
+}
 $charset = lire_meta("charset");
 @header('Content-type: text/html; charset=$charset');
 echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
+
+// securite
+$id_rubrique = intval($id_rubrique);
+$id = intval($id);
+$rac = htmlentities($rac);
+$exclus = intval($exclus);
+$col = intval($col);
+
 
 	if ($fonction == "aff_rub") {
 		include_ecrire("inc_mini_nav.php");
@@ -31,6 +44,8 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 		include_ecrire("inc_mini_nav.php");
 		echo mini_nav ($id_rubrique, "aff_nav_recherche", "document.location.href='naviguer.php3?id_rubrique=::sel::'", 0, $aff_racine=true);
 	}
+	
+	// Affiche les infos d'une rubrique selectionnee dans le mini navigateur
 	else if ($fonction == "aff_info") {
 		// echo "$type - $id - $rac";
 		
@@ -40,13 +55,14 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 				$titre = typo($row["titre"]);
 				$descriptif = propre($row["descriptif"]);
 			} else {
-				$titre = addslashes(_T('info_racine_site'));
+				$titre = _T('info_racine_site');
 			}
-		} 
+		} else
+			$titre = '';
 		
 		echo "<div style='display: none;'>";
 		echo "<input type='text' id='".$rac."_sel' value='$id' />";
-		echo "<input type='text' id='".$rac."_sel2' value='".addslashes($titre)."' />";
+		echo "<input type='text' id='".$rac."_sel2' value=\"".entites_html($titre)."\" />";
 		echo "</div>";
 
 		include_ecrire ("inc_logos.php3");
@@ -68,7 +84,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
 
 		echo "<div style='text-align: $spip_lang_right;'>";
-		echo "<input type='button' value='"._T('bouton_choisir')."' class='fondo' onClick=\"sel=findObj_forcer('".$rac."_sel').value; sel2=findObj_forcer('".$rac."_sel2').value; func = findObj('".$rac."_fonc').value; func = func.replace('::sel::', sel); func = func.replace('::sel2::', sel2); eval(func);\">";
+		echo "<input type='button' value='"._T('bouton_choisir')."' class='fondo' onClick=\"sel=findObj_forcer('".$rac."_sel').value; sel2=findObj_forcer('".$rac."_sel2').value; func = findObj('".$rac."_fonc').value; func = func.replace('::sel::', sel); func = func.replace('::sel2::', sel2.replace(/<\/?[^>]+>/gi, '')); eval(func);\">";
 		echo "</div>";
 
 
@@ -77,23 +93,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 	}
 	else if ($recherche_rub) {
 	
-		function exclure_enfants ($id_parent, $liste_exclus) {
-			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_parent");
-			while ($row = spip_fetch_array($res)) {
-				$id_rubrique = $row["id_rubrique"];
-				$liste_exclus .= ", $id_rubrique";
-				$liste_exclus = exclure_enfants($id_rubrique, $liste_exclus);
-			}
-			return $liste_exclus;
-		}
-	
-	
-		if ($exclus > 0) {
-			$liste_exclus = $exclus;
-			$liste_exclus = exclure_enfants($exclus, $liste_exclus);
-		}
-	
-		$recherche = str_replace("%","\%",$recherche_rub);
+		$recherche = addslashes(str_replace("%","\%",$recherche_rub));
 		$rech2 = split("[[:space:]]+", $recherche);
 		if ($rech2) {
 			$where_titre = " (titre LIKE '%".join("%' AND titre LIKE '%", $rech2)."%') ";
@@ -105,29 +105,33 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 			$where_desc = " 1=2";
 			$where_id = " 1=2";
 		}
-		if ($liste_exclus) $where_exclus = " AND id_rubrique NOT IN ($liste_exclus)";
-		
+
+		if ($exclus) {
+			include_ecrire('inc_rubriques.php3');
+			$where_exclus = " AND id_rubrique NOT IN (".calcul_branche($exclus).")";
+		} else
+			$where_exclus = '';
 
 		$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_id$where_exclus");
 		while ($row = spip_fetch_array($res)) {
 			$id_rubrique = $row["id_rubrique"];
 			$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 			$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
-			$points[$id_rubrique] = $points[$id_rubrique] + 3;			
+			$points[$id_rubrique] = $points[$id_rubrique] + 3;
 		}
 		$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_titre$where_exclus");
 		while ($row = spip_fetch_array($res)) {
 			$id_rubrique = $row["id_rubrique"];
 			$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 			$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
-			$points[$id_rubrique] = $points[$id_rubrique] + 2;			
+			$points[$id_rubrique] = $points[$id_rubrique] + 2;
 		}
 		$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_desc$where_exclus");
 		while ($row = spip_fetch_array($res)) {
 			$id_rubrique = $row["id_rubrique"];
 			$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
 			$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
-			$points[$id_rubrique] = $points[$id_rubrique] + 1;			
+			$points[$id_rubrique] = $points[$id_rubrique] + 1;
 		}
 		
 		if ($points) {
@@ -150,7 +154,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 				
 		}
 		if ($ret) echo $ret;
-		else echo "<div style='padding: 5px; color: red;'><b>$recherche_rub</b> :  "._T('avis_aucun_resultat')."</div>";
+		else echo "<div style='padding: 5px; color: red;'><b>".htmlentities($recherche_rub)."</b> :  "._T('avis_aucun_resultat')."</div>";
 		
 		
 	}
@@ -182,6 +186,19 @@ echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 
 	}
 
+	# test ajax : si on arrive a cette fonction, c'est qu'ajax marche :
+	# on le note dans un cookie qui expire en fin de session (on recommencera)
+	else if ($fonction == 'test_ajax') {
+		spip_setcookie('spip_accepte_ajax', 1);
+	}
 
+
+# fin gestion charset
+if ($flag_ob) {
+	$a = ob_get_contents();
+	ob_end_clean();
+	include_ecrire('inc_charsets.php3');
+	echo charset2unicode($a, 'AUTO', true);
+}
 
 ?>
