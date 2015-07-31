@@ -191,7 +191,7 @@ function http_afficher_forum_perso($id_message)
 // http://doc.spip.org/@http_message_avec_participants
 function http_message_avec_participants($id_message, $statut, $forcer_dest, $cherche_auteur, $expediteur='')
 {
-	global $connect_id_auteur, $couleur_claire ;
+	global $connect_id_auteur ;
 
 	if ($cherche_auteur) {
 		echo "\n<div align='left'><div class='cadre-info'>"
@@ -208,7 +208,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 	$total_dest = spip_num_rows($result_auteurs);
 
 	if ($total_dest > 0) {
-			$couleurs = array("#FFFFFF",$couleur_claire);
+			$couleurs = array('toile_gris_leger','toile_claire');
 			$auteurs_tmp = array();
 			$ze_auteurs = array();
 			$ifond = 0;
@@ -228,8 +228,8 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $che
 				$aut =  (($id_auteur != $expediteur) ? '' :
 					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));
 
-				$res .= "<tr><td style='background-color: $couleur'><span class='verdana1 spip_small'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
-				  "<td style='background-color: $couleur' align='right'><span class='verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
+				$res .= "<tr><td class='$couleur verdana1 spip_small'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</td>" .
+				  "<td  align='right' class='$couleur verdana1 spip_x-small'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . redirige_action_auteur("editer_message","$id_message/-$id_auteur", 'message', "id_message=$id_message") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</td></tr>\n";
 			}
 			echo
 			  http_visualiser_participants($auteurs_tmp),
@@ -259,22 +259,22 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	if ($type == 'normal') {
 		$le_type = _T('info_message_2').aide ("messut");
 		$la_couleur = "#02531b";
-		$couleur_fond = "#cffede";
+		$fond = "#cffede";
 	}
 	else if ($type == 'pb') {
 		$le_type = _T('info_pense_bete').aide ("messpense");
 		$la_couleur = "#3874b0";
-		$couleur_fond = "#edf3fe";
+		$fond = "#edf3fe";
 	}
 	else if ($type == 'affich') {
 		$le_type = _T('info_annonce');
 		$la_couleur = "#ccaa00";
-		$couleur_fond = "#ffffee";
+		$fond = "#ffffee";
 	}
 	
 	// affichage des caracteristiques du message
 
-	echo "<div style='border: 1px solid $la_couleur; background-color: $couleur_fond; padding: 5px;'>"; // debut cadre de couleur
+	echo "<div style='border: 1px solid $la_couleur; background-color: $fond; padding: 5px;'>"; // debut cadre de couleur
 	//debut_cadre_relief("messagerie-24.gif");
 	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	echo "<tr><td>"; # uniques

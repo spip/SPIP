@@ -303,9 +303,9 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
 		$couleur_texte = "black";
-		$couleur_fond = "";
+		$fond = "";
 
-		if ($jour_semaine == 0) $couleur_fond = ' toile_claire';
+		if ($jour_semaine == 0) $fond = ' toile_claire';
 		else if ($jour_semaine==1)
 			  { 
 			    if ($ligne||$init)
@@ -315,7 +315,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		
 		if ($amj == $today) {
 			$couleur_texte = "red";
-			$couleur_fond = " toile_blanche";
+			$fond = " toile_blanche";
 		}
 		$res = '';
 		if ($evts = $evenements[$amj]) {
@@ -327,7 +327,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		    }
 		}
 
-		$ligne .= "\n\t\t<td\tclass='calendrier-td$couleur_fond'
+		$ligne .= "\n\t\t<td\tclass='calendrier-td$fond'
 			style='height: 100px; border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;" .
 		  ($ligne ? "" :
 		   " border-$spip_lang_left: 1px solid $couleur_claire;") .
@@ -1233,21 +1233,12 @@ function http_calendrier_rv($messages, $type) {
 
 	if ($type == 'annonces') {
 		$titre = _T('info_annonces_generales');
-		$couleur_titre = "ccaa00";
-		$couleur_texte = "black";
-		$couleur_fond = "#ffffee";
 	}
 	else if ($type == 'pb') {
 		$titre = _T('infos_vos_pense_bete');
-		$couleur_titre = "#3874B0";
-		$couleur_fond = "#EDF3FE";
-		$couleur_texte = "white";
 	}
 	else if ($type == 'rv') {
 		$titre = _T('info_vos_rendez_vous');
-		$couleur_titre = "#666666";
-		$couleur_fond = "#eeeeee";
-		$couleur_texte = "white";
 	}
 
 	return

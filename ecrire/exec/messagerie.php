@@ -19,7 +19,7 @@ include_spip('inc/message_select');
 function exec_messagerie_dist()
 {
 
-global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;
+global $connect_id_auteur, $connect_statut, $spip_lang_rtl;
 
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
@@ -112,23 +112,16 @@ if (spip_num_rows($result) > 0) {
 
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' width='50%'>";
-	$count = $i = 0;
+	$count = 0;
 	while($row = spip_fetch_array($result)) {
 		$count ++;
-		if ($i == 1) {
-			$bgcolor = "white";
-			$i = 0;
-		} else {
-			$bgcolor = $couleur_claire;
-			$i = 1;
-		}
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
 		echo "<div class='tr_liste'\nonmouseover=\"changeclass(this,'tr_liste_over');\"\nonmouseout=\"changeclass(this,'tr_liste');\"\nstyle='padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif'\nstyle='border: 0px' alt=' ' /> <a href='" . generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "'>",
 		  $nom,
 		  "</a> ($total)</div></div>";
-		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' style='background-color: #eeeeee;'>";
+		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' class='toile_gris_leger'>";
 	}
 	echo "</td></tr></table>";
 	echo "</div>";
