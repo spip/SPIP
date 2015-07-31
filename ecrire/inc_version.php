@@ -311,11 +311,14 @@ $liste_des_authentifications = array(
 // Droits d'acces maximum par defaut
 @umask(0);
 
+// numero de branche, utilise par les plugins 
+// pour specifier les versions de SPIP necessaire
+$spip_version_branche = "1.9.3";
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite et/ou necessitant un recalcul des squelettes)
 $spip_version_code = 11911;
 // version de la base SQL (= numero SVN de sa derniere modif)
-$spip_version = 11961;
+$spip_version_base = 11961;
 
 // version de l'interface a la base
 $spip_sql_version = 1;
@@ -323,7 +326,7 @@ $spip_sql_version = 1;
 // version de spip en chaine
 // 1.xxyy : xx00 versions stables publiees, xxyy versions de dev
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
-$spip_version_affichee = '1.9.3 dev';
+$spip_version_affichee = "$spip_version_branche dev";
 
 // ** Securite **
 $visiteur_session = $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';

@@ -286,7 +286,7 @@ function import_tables($request, $dir) {
 		affiche_progression_javascript('100 %', $size);
 	}
 	
-	if ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))){
+	if ($GLOBALS['spip_version_base'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))){
 		include_spip('base/upgrade');
 		maj_base(); // upgrade jusqu'a la version courante
 	}
@@ -338,7 +338,7 @@ function import_tables($request, $dir) {
 function import_init_meta($tag, $atts, $charset, $request)
 {
 	$version_base = $atts['version_base'];
-	if (version_compare($version_base,$GLOBALS['spip_version'],'<')
+	if (version_compare($version_base,$GLOBALS['spip_version_base'],'<')
 	 && !isset($GLOBALS['meta']['restauration_table_prefix'])
 	 && ($request['insertion']!='on')
 	 && ($request['insertion']!='passe2')){

@@ -43,7 +43,7 @@ function base_upgrade_dist($titre='', $reprise='')
 
 // http://doc.spip.org/@maj_base
 function maj_base($version_cible = 0) {
-	global $spip_version;
+	global $spip_version_base;
 
 	$version_installee = @$GLOBALS['meta']['version_installee'];
 	//
@@ -54,17 +54,17 @@ function maj_base($version_cible = 0) {
 	//
 	// version_installee = 1.702; quand on a besoin de forcer une MAJ
 	
-	spip_log("Version anterieure: $version_installee. Courante: $spip_version");
-	if (!$version_installee OR ($spip_version < $version_installee)) {
+	spip_log("Version anterieure: $version_installee. Courante: $spip_version_base");
+	if (!$version_installee OR ($spip_version_base < $version_installee)) {
 		sql_replace('spip_meta', 
 		      array('nom' => 'version_installee',
-			    'valeur' => $spip_version,
+			    'valeur' => $spip_version_base,
 			    'impt' => 'non'));
 		return;
 	}
 	if (!upgrade_test()) return;
 	
-	$cible = ($version_cible ? $version_cible : $spip_version);
+	$cible = ($version_cible ? $version_cible : $spip_version_base);
 
 	if ($version_installee <= 1.926) {
 		$n = floor($version_installee * 10);
@@ -73,7 +73,7 @@ function maj_base($version_cible = 0) {
 			$f = charger_fonction($nom, 'maj', true);
 			if ($f) {
 				spip_log("$f repercute les modifications de la version " . ($n/10));
-				$f($version_installee, $spip_version);
+				$f($version_installee, $spip_version_base);
 			} else spip_log("pas de fonction pour la maj $n $nom");
 			$n++;
 		}

@@ -83,7 +83,7 @@ function import_queldir()
 
 // http://doc.spip.org/@verifier_sauvegarde
 function verifier_sauvegarde ($archive) {
-	global $spip_version;
+	global $spip_version_base;
 
 	$g = preg_match(",\.gz$,", $archive);
 	$_fopen = $g ? 'gzopen' : 'fopen';
@@ -96,7 +96,7 @@ function verifier_sauvegarde ($archive) {
 	$buf = $_fread($f, $buf_len);
 
 	if (preg_match('/<SPIP\s+[^>]*version_base="([0-9.]+)"[^>]*version_archive="([^"]+)"/', $buf, $regs)
-	AND $regs[1] == $spip_version
+	AND $regs[1] == $spip_version_base
 	AND import_charge_version($regs[2]) )
 		return ''; // c'est bon
 
