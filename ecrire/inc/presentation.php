@@ -2451,29 +2451,30 @@ if (true /*$gadgets*/) {
 
 	// GADGET Agenda
 	$gadget = '';
-		$today = getdate(time());
-		$jour_today = $today["mday"];
-		$mois_today = $today["mon"];
-		$annee_today = $today["year"];
-		$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
-		$mois = mois($date);
-		$annee = annee($date);
-		$jour = jour($date);
-	
-		// Taches (ne calculer que la valeur booleenne...)
-		if (spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' LIMIT 1")) OR
-		    spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 1"))) {
+	$today = getdate(time());
+	$jour_today = $today["mday"];
+	$mois_today = $today["mon"];
+	$annee_today = $today["year"];
+	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
+	$mois = mois($date);
+	$annee = annee($date);
+	$jour = jour($date);
+
+	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' LIMIT 1"));
+	if (!$n['n'])
+		$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 1"));
+	if ($n['n']) {
 			$largeur = "410px";
 			$afficher_cal = true;
 		}
-		else {
+	else {
 			$largeur = "200px";
 			$afficher_cal = false;
-		}
+	}
 
 
 
-		// Calendrier
+	// Calendrier
 			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
 			$gadget .= "<a href='" . generer_url_ecrire("calendrier","type=semaine") . "' class='lien_sous'>";
 			$gadget .= _T('icone_agenda');
@@ -2597,7 +2598,7 @@ function debut_corps_page() {
 	// Petite verif pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
 	echo "<center onMouseOver=\"if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
 
-			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
+			$result_messages = spip_query("SELECT lien.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
 			if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
@@ -2957,9 +2958,10 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 
 	switch ($type) {
 		case 'article':
-			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non'
-			AND !spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()")))
-				$statut = 'prop';
+			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
+				$n = spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()"));
+				if (!$n) $statut = 'prop';
+			}
 			if ($statut == 'publie')
 				$en_ligne = 'calcul';
 			else if ($statut == 'prop')
