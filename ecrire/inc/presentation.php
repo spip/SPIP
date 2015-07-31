@@ -416,6 +416,12 @@ function forum_logo($statut)
 // http://doc.spip.org/@parametres_css_prive
 function parametres_css_prive(){
 	global $visiteur_session;
+	global $browser_name, $browser_version;
+
+	$ie = "";
+	include_spip('inc/layer');
+	if ($browser_name=='MSIE')
+		$ie = "&ie=$browser_version";
 
 	$c = (is_array($visiteur_session)
 	AND is_array($visiteur_session['prefs']))
@@ -423,7 +429,7 @@ function parametres_css_prive(){
 		: 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c);
+	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c) . $ie;
 }
 
 
