@@ -155,12 +155,12 @@ function spip_mysql_select($select, $from, $where='',
 
 
 	$from = (!is_array($from) ? $from : spip_mysql_select_as($from));
-	$query = 'SELECT ' .
-		(!is_array($select) ? $select : join(", ", $select)) .
-		(!$from ? '' :"\nFROM $from")
-		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_mysql_where', $where))))))
-		. (!$groupby ? '' : ("\nGROUP BY " . (is_array($groupby) ? join(',',$groupby) : $groupby)))
-		. (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_mysql_where', $having)))))
+	$query = 
+		  calculer_mysql_expression('SELECT', $select, ', ')
+		. calculer_mysql_expression('FROM', $from, ', ')
+		. calculer_mysql_expression('WHERE', $where)
+		. calculer_mysql_expression('GROUP BY', $groupby, ',')
+		. calculer_mysql_expression('HAVING', $having)
 		. ($orderby ? ("\nORDER BY " . spip_mysql_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
@@ -211,6 +211,22 @@ function calculer_mysql_where($v)
 				return "($arg $op $arg2)";
 			} else return "($arg $op ($arg2) : $v[0])";
 		}
+	}
+}
+
+function calculer_mysql_expression($expression, $v, $join = 'AND'){
+	if (empty($v))
+		return '';
+	
+	$exp = "\n$expression ";
+	
+	if (!is_array($v)) {
+		return $exp . $v;
+	} else {
+		if (strtoupper($join) === 'AND')
+			return $exp . join("\n\t$join ", array_map('calculer_mysql_where', $v));
+		else
+			return $exp . join($join, $v);
 	}
 }
 
@@ -466,11 +482,15 @@ function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur=''
 
 // http://doc.spip.org/@spip_mysql_update
 function spip_mysql_update($table, $champs, $where='', $desc='', $serveur='') {
-	$r = '';
+	$set = array();
 	foreach ($champs as $champ => $val)
-		$r .= ',' . $champ . "=$val";
-	if ($r = substr($r, 1))
-		return spip_mysql_query("UPDATE $table SET $r" . ($where ? " WHERE $where" : ''), $serveur);
+		$set[] = $champ . "=$val";
+	if (!empty($set))
+		return spip_mysql_query(
+			  calculer_mysql_expression('UPDATE', $table, ',')
+			. calculer_mysql_expression('SET', $set, ',')
+			. calculer_mysql_expression('WHERE', $where), 
+			$serveur);
 }
 
 // idem, mais les valeurs sont des constantes a mettre entre apostrophes
@@ -482,17 +502,23 @@ function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur=
 	if (!$desc) $desc = description_table($table);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
-	$r = '';
+	$set = array();
 	foreach ($champs as $champ => $val) {
-		$r .= ',' . $champ . '=' . spip_mysql_cite($val, $fields[$champ]);
+		$set[] = $champ . '=' . spip_mysql_cite($val, $fields[$champ]);
 	}
-	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
-	return spip_mysql_query($r, $serveur);
+	return spip_mysql_query(
+			  calculer_mysql_expression('UPDATE', $table, ',')
+			. calculer_mysql_expression('SET', $set, ',')
+			. calculer_mysql_expression('WHERE', $where),
+			$serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_delete
 function spip_mysql_delete($table, $where='', $serveur='') {
-	return spip_mysql_query("DELETE FROM $table" . ($where ? " WHERE $where" : ''), $serveur);
+	return spip_mysql_query(
+			  calculer_mysql_expression('DELETE FROM', $table, ',')
+			. calculer_mysql_expression('WHERE', $where),
+			$serveur);
 }
 
 // http://doc.spip.org/@spip_mysql_replace
