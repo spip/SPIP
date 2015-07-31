@@ -147,9 +147,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),
 		array("login=" . _q($login)));
 	if ($alang['lang']) {
-		lang_select($alang['lang']);
+		$l = lang_select($alang['lang']);
 		$lang = $GLOBALS['spip_lang'];
-		lang_dselect();
+		if ($l) lang_select();
 	} else
 		$lang = '';
 

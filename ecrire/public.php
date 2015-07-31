@@ -28,8 +28,9 @@ if (defined('_INC_PUBLIC')) {
 		else
 			eval('?' . '>' . $subpage['texte']);
 	
+		// est-ce possible ?
 		if ($subpage['lang_select'] === true)
-			lang_dselect();
+			lang_select();
 	}
 } else {
 	define ('_INC_PUBLIC', 1);

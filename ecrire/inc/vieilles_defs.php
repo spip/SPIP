@@ -234,4 +234,11 @@ function spip_insert_id() {
 	return mysql_insert_id();
 }
 
+
+// revenir a la langue precedente
+// http://doc.spip.org/@lang_dselect
+function lang_dselect () {
+	spip_log("lang_dselect: utiliser lang_select sans argument");
+	lang_select();
+}
 ?>

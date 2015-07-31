@@ -320,11 +320,9 @@ function repertoire_lang($module='spip', $lang='fr') {
 //
 // http://doc.spip.org/@init_langues
 function init_langues() {
-	global $all_langs, $langue_site;
-	global $pile_langues, $lang_objet, $lang_dir;
+	global $all_langs, $langue_site,  $lang_objet, $lang_dir;
 
 	$all_langs = @$GLOBALS['meta']['langues_proposees'];
-	$pile_langues = array();
 	$lang_objet = '';
 	$lang_dir = '';
 

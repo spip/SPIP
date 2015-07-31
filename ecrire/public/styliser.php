@@ -57,9 +57,9 @@ function public_styliser_dist($fond, $id_rubrique, $lang) {
 
 	// Affiner par lang
 	if ($lang) {
-		lang_select($lang);
+		$l = lang_select($lang);
 		$f = "$squelette.".$GLOBALS['spip_lang'];
-		lang_dselect();
+		if ($l) lang_select();
 		if (@file_exists("$f.$ext"))
 			$squelette = $f;
 	}
