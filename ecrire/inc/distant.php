@@ -472,12 +472,12 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		$t = null;
 		if (in_array($mime_type,array('text/plain','','application/octet-stream'))){
 			if (!$t
-				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
+				AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)) {
 				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
 			}
 			if (!$t
 				  AND preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)$,Uims",$headers,$m)
-					AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $m[1], $rext)){
+					AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $m[1], $rext)){
 				$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
 			}
 		}
@@ -490,7 +490,7 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 		// On essaie de nouveau avec l'extension
 		if (!$t
 		AND $mime_type != 'text/plain'
-		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,', $source, $rext)) {
+		AND preg_match(',\.([a-z0-9]+)(\?.*)?$,i', $source, $rext)) {
 			$t = sql_fetsel("extension", "spip_types_documents", "extension=" . sql_quote($rext[1]));
 		}
 
