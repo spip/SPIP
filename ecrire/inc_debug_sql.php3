@@ -23,19 +23,20 @@ function afficher_debug_contexte($env) {
 	if (is_array($env_tab = @unserialize($env)))
 		$env = $env_tab;
 
-	$env_texte="<div id='spip-env'>"
-		. bouton_block_invisible("env$n")
-		. "<b>#ENV</b>\n"
-		. debut_block_invisible("env$n")
-		. "<table>\n";
-	foreach ($env as $nom => $valeur) {
-		$env_texte .= "<tr><td><strong>".nl2br(entites_html($nom))
-			. "</strong></td>";
-		$env_texte .= "<td>:&nbsp;".nl2br(entites_html($valeur))
-			. "</td></tr>\n";
+	$env_texte="";
+	if (count($env)>0) {
+		$env_texte="<div class='spip-env'>"
+			. "<fieldset><legend>#ENV</legend>\n"
+			. "<div><table>\n";
+		foreach ($env as $nom => $valeur) {
+			$env_texte .= "<tr><td><strong>".nl2br(entites_html($nom))
+				. "</strong></td>";
+			$env_texte .= "<td>:&nbsp;".nl2br(entites_html($valeur))
+				. "</td></tr>\n";
+		}
+		$env_texte .= "\n</table></div>\n";
+		$env_texte .= "</fieldset></div>\n";
 	}
-	$env_texte .= "\n</table>\n";
-	$env_texte .= fin_block()."</div>\n";
 	return $env_texte;
 }
 
@@ -51,6 +52,7 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 	}
 	return "<div id='spip-debug' style='"
 	. "position: absolute; top: 20px; left: 20px; z-index: 1000;"
+	. "filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6;"
 	. "'><ul><li>"
 	. _T('zbug_erreur_squelette')
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
@@ -207,23 +209,20 @@ function debug_dumpfile ($texte, $fonc, $type) {
 
 	echo debut_entete('Spip ' . _T('admin_debug')), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
-	  "</head>\n<body>",
-	  "<div id='spip-debug' style='position: absolute; top: 20px; z-index: 1000;'><ul>\n"; 
-
-	include_ecrire('inc_layer.php3');
-	echo $GLOBALS['browser_layer'];
+	  "</head>\n<body style='margin:0 10px;'>",
+	  "<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
-		echo "<li><b>",$sourcefile,"</b>";
-		echo " <a href='",$self, "&var_mode_objet=$nom_skel&var_mode_affiche=resultat'>"._T('zbug_resultat')."</a>";
-		echo " <a href='", $self, "&var_mode_objet=$nom_skel&var_mode_affiche=code'>"._T('zbug_code')."</a>";
+		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
+		echo " <a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat'>"._T('zbug_resultat')."</a>";
+		echo " <a href='", $self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code'>"._T('zbug_code')."</a></legend>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
 			echo afficher_debug_contexte($contexte);
 
 		echo "<table width='100%'>\n";
 		$i = 0;
-		$colors = array('#c0c0c0', '#c0cad4');
+		$colors = array('#e0e0f0', '#f8f8ff');
 		if (is_array($debug_objets['pretty']))
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
@@ -231,18 +230,18 @@ function debug_dumpfile ($texte, $fonc, $type) {
 				$aff = "&lt;".$pretty."&gt;";
 				if ($var_mode_objet == $nom)
 					$aff = "<b>$aff</b>";
-				echo "<tr bgcolor='" . $colors[$i%2] . "'><td  align='right'>$i</td><td><a href='",$self,"&var_mode_objet=$nom&var_mode_affiche=boucle' class='debug_link_boucle'>"._T('zbug_boucle')."</a></td><td><a href='",$self, "&var_mode_objet=$nom&var_mode_affiche=resultat' class='debug_link_resultat'>"._T('zbug_resultat')."</a></td><td><a href='", $self, "&var_mode_objet=$nom&var_mode_affiche=code' class='debug_link_code'>"._T('zbug_code')."</a></td><td>$aff</td></tr>";
+				echo "<tr bgcolor='" . $colors[$i%2] . "'><td  align='right'>$i</td><td><a href='",$self,"&amp;var_mode_objet=$nom&amp;var_mode_affiche=boucle' class='debug_link_boucle'>"._T('zbug_boucle')."</a></td><td><a href='",$self, "&amp;var_mode_objet=$nom&amp;var_mode_affiche=resultat' class='debug_link_resultat'>"._T('zbug_resultat')."</a></td><td><a href='", $self, "&amp;var_mode_objet=$nom&amp;var_mode_affiche=code' class='debug_link_code'>"._T('zbug_code')."</a></td><td>$aff</td></tr>";
 			}
-		echo "</table>\n</li>\n";
+		echo "</table>\n</fieldset>\n";
 	}
-	echo "</ul>\n";
+	echo "</div>\n";
 	if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
 	  if ($var_mode_affiche == 'resultat') {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
 		highlight_string($debug_objets['requete'][$var_mode_objet]);
 #		echo "<p class='spip-admin-bloc'>les premiers appels &agrave; cette boucle ont donn&eacute;&nbsp;:</p>";
 		foreach ($res as $view) 
-			if ($res) echo "<br><fieldset>",interdire_scripts($view),"</fieldset>";
+			if ($res) echo "<br /><fieldset>",interdire_scripts($view),"</fieldset>";
 		echo "</fieldset></div>";
 
       } else if ($var_mode_affiche == 'code') {
