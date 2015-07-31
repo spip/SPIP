@@ -220,3 +220,4 @@ webmail([0-9]*)\.wanadoo\.fr
 www\.laposte\.net
 mail([0-9]*)\.voila\.fr
 \/(web)?mail\/
+
