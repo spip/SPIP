@@ -21,65 +21,36 @@ function exec_forum_envoi_dist()
 	forum_envoi(  
 		    intval(_request('id')),
 		    intval(_request('id_parent')),
+		    _request('script'),
+		    _request('statut'),
+		    _request('titre_message'),
+		    _request('texte'),
 		    _request('modif_forum'),
 		    _request('nom_site'),
-		    _request('statut'),
-		    _request('texte'),
-		    _request('titre_message'),
-		    _request('url_site'),
-		    _request('script'));
+		    _request('url_site'));
 }
 
 // http://doc.spip.org/@forum_envoi
-function forum_envoi(  
+function forum_envoi(
 		     $id,
 		     $id_parent,
+		     $script,
+		     $statut,
+		     $titre_message,
+		     $texte,
 		     $modif_forum,
 		     $nom_site,
-		     $statut,
-		     $texte,
-		     $titre_message,
-		     $url_site,
-		     $script)
+		     $url_site)
 {
-	// Chercher a quoi on repond pour preremplir le titre
-	// et le bouton "retour"
-	if ($id_parent) {
-		$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_parent");
-		if ($row = spip_fetch_array($result)) {
-			$id_article = $row['id_article'];
-			$id_breve = $row['id_breve'];
-			$id_rubrique = $row['id_rubrique'];
-			$id_message = $row['id_message'];
-			$id_syndic = $row['id_syndic'];
-			$statut = $row['statut'];
-			$titre_parent = typo($row['titre']);
-			$texte_parent = $row['texte'];
-			$auteur_parent = $row['auteur'];
-			$id_auteur_parent = $row['id_auteur'];
-			$date_heure_parent = $row['date_heure'];
-			$nom_site_parent = $row['nom_site'];
-			$url_site_parent = $row['url_site'];
+	// trouver a quoi on repond
+	$row = forum_envoi_parent($id_parent);
 
-			$parent = debut_cadre_forum("forum-interne-24.gif", true, "", $titre_parent)
-			. "<span class='arial2'>$date_heure_parent</span> ";
+	// apres le premier appel, afficher la saisie precedente
+	if ($modif_forum == "oui") {
+		$row['texte'] = forum_envoi_entete($row, $texte, $titre_message, $nom_site, $url_site);
+	}
 
-			if ($id_auteur_parent) {
-				$formater_auteur = charger_fonction('formater_auteur', 'inc');
-				list($s, $mail, $nom, $w, $p) = $formater_auteur($id_auteur_parent);
-				$parent .="$mail&nbsp;$nom";
-			} else 	$parent .=" " . typo($auteur_parent);
-
-			$parent .= justifier(propre($texte_parent));
-
-			if (strlen($url_site_parent) > 10 AND $nom_site_parent) {
-				$parent .="<p style='text-align: left; font-weight: bold;' class='verdana1'><a href='$url_site_parent'>$nom_site_parent</a></p>";
-			}
-			$parent .= fin_cadre_forum(true);
-		}
-
-	} else { $parent = $titre_parent = $id_message = ''; $row = array();}
-
+	// determiner le retour et l'action
 	list($script,$retour) = split('\?', urldecode($script));
 	if (function_exists($f = 'forum_envoi_' . $script))
 	  list($table, $objet, $titre, $num, $retour, $id, $corps) =
@@ -94,27 +65,51 @@ function forum_envoi(
 		} else 	$titre_message = _T('texte_nouveau_message');
 	}
 
-	// debut de page
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('texte_nouveau_message'), "accueil", $id_message ? "messagerie" : "accueil");
-	debut_gauche();
+	// construire le formulaire de saisie
+	$form =  forum_envoi_formulaire($id, generer_url_ecrire($script, $retour), $statut, $texte, $titre_message, $nom_site, $url_site);
 
-	debut_droite();
-	gros_titre(($num ? "$num $id<br />" :'') . $titre_message);
+	// afficher le tout
+	forum_envoi_affiche($id, $id_parent, $script, $statut, $titre_message, $row['texte'] . $corps, $id_message, $form, $num, $objet, $retour);
+}
 
-	// previsualisation/validation
-	if ($modif_forum == "oui") {
-		$corps .= forum_envoi_entete($parent, $titre_parent, $texte, $titre_message, $nom_site, $url_site);
-		$parent = '';
+// Chercher a quoi on repond pour l'afficher au debut
+
+function forum_envoi_parent($id)
+{
+	$r = spip_query("SELECT * FROM spip_forum WHERE id_forum=" . _q($id));
+	if (!$row = spip_fetch_array($r))
+		return array('titre' =>'', 'texte' =>'', 'id_message' =>'');
+
+	$titre = typo($row['titre']);
+	$texte = $row['texte'];
+	$auteur = $row['auteur'];
+	$id_auteur = $row['id_auteur'];
+	$date_heure = $row['date_heure'];
+	$nom_site = $row['nom_site'];
+	$url_site = $row['url_site'];
+	
+	$parent = debut_cadre_forum("forum-interne-24.gif", true, "", $titre)
+	  . "<span class='arial2'>$date_heure</span> ";
+
+	if ($id_auteur) {
+		$formater_auteur = charger_fonction('formater_auteur', 'inc');
+		list($s, $mail, $nom, $w, $p) = $formater_auteur($id_auteur);
+		$parent .="$mail&nbsp;$nom";
+	} else 	$parent .=" " . typo($auteur);
+
+	$parent .= justifier(propre($texte));
+
+	if (strlen($url_site) > 10 AND $nom_site) {
+		$parent .="<p style='text-align: left; font-weight: bold;' class='verdana1'><a href='$url_site'>$nom_site</a></p>";
 	}
+	$parent .= fin_cadre_forum(true);
 
-	// formulaire
-	$corps .= debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
-	. forum_envoi_formulaire($id, generer_url_ecrire($script, $retour), $statut, $texte, $titre_message,  $nom_site, $url_site)
-	. "<div style='text-align: right'><input class='fondo' type='submit' value='"
-	. _T('bouton_voir_message')
-	. "' /></div>"
-	. fin_cadre_formulaire(true);
+	$row['texte'] = $parent;
+	
+	return $row;
+}
+
+function forum_envoi_affiche($id, $id_parent, $script, $statut, $titre, $corps, $id_message, $form, $num, $objet, $retour) {
 
 	$cat = intval($id) . '/'
 	  . intval($id_parent) . '/'
@@ -122,8 +117,21 @@ function forum_envoi(
 	  . $script . '/'
 	  . $objet;
 
-	echo  $parent,
-	  "\n<div>&nbsp;</div>"
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('texte_nouveau_message'), "accueil", $id_message ? "messagerie" : "accueil");
+	debut_gauche();
+	debut_droite();
+	gros_titre(($num ? "$num $id<br />" :'') . $titre);
+
+	$corps .= "\n<div>&nbsp;</div>"
+	.  debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)
+	. $form
+	. "<div style='text-align: right'><input class='fondo' type='submit' value='"
+	. _T('bouton_voir_message')
+	. "' /></div>"
+	. fin_cadre_formulaire(true);
+
+	echo "\n<div>&nbsp;</div>"
 	  . redirige_action_auteur('poster_forum_prive',$cat, $script, $retour, $corps, "\nmethod='post' id='formulaire'")
 	  . fin_gauche()
 	  . fin_page();
@@ -245,10 +253,12 @@ function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre_page, $nom
 }
 
 // http://doc.spip.org/@forum_envoi_entete
-function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_site, $url_site)
+function forum_envoi_entete($row, $texte, $titre_texte, $nom_site, $url_site)
 {
 	global $spip_lang_rtl;
 
+	$parent = $row['texte'];
+	$titre_parent = $row['titre'];
 	return "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
 		. "<tr>"
@@ -275,8 +285,6 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 			  . "rien.gif);'>"
 			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, " style='width: 10px; height: 13px'")
 		      . "</td>\n</tr>"))
-		. "</table>"
-		. "\n<div>&nbsp;</div>";
+		. "</table>";
 }
-
 ?>
