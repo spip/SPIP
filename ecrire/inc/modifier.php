@@ -128,7 +128,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 
 		// marquer les documents vus dans le texte si il y a lieu
 		include_spip('base/auxiliaires');
-		if (isset($GLOBALS['tables_auxiliaires']["spip_documents_liens"]["field"]["vu"]))
+		if (isset($GLOBALS['tables_auxiliaires']["spip_documents_liens"]["field"][$id_table_objet]))
 			marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
 
 		// Notifications, gestion des revisions...
