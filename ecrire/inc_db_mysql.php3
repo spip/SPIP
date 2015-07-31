@@ -74,11 +74,10 @@ function spip_mysql_select($select, $from, $where,
 		. ", COUNT(".$sousrequete.") AS compteur " . $q
 		.") AS S_$table WHERE compteur=" . $cpt;
 
-	// Erreur ? C'est du debug, ou une erreur du serveur
-	// il faudrait mettre ici le déclenchement du message MySQL
-	// actuellement dans erreur_requete_boucle
+	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
+
 	if (!($res = @spip_query($q))) {
-		include_local('inc-admin.php3');
+		include_ecrire('inc_debug_sql.php3');
 		echo erreur_requete_boucle($q, $id, $table);
 	}
 
