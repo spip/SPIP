@@ -21,12 +21,12 @@ function lire_metas() {
 
 	$meta = '';
 	$meta_maj = '';
-	$query = 'SELECT * FROM spip_meta';
+	$query = 'SELECT nom,valeur,UNIX_TIMESTAMP(maj) AS d FROM spip_meta';
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$nom = $row['nom'];
 		$meta[$nom] = $row['valeur'];
-		$meta_maj[$nom] = $row['maj'];
+		$meta_maj[$nom] = $row['d'];
 	}
 }
 
