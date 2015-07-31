@@ -533,7 +533,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'عودة إلى الموقع العام',
 	'login_retour_site' => 'عودة إلى الموقع العام',
 	'login_retoursitepublic' => 'عودة إلى الموقع العام',
-	'login_sans_cookie' => 'تعريف بدون الكعكة',
 	'login_securise' => 'تعريف مؤمّن',
 	'login_sinscrire' => 'تسجيل',
 	'login_test_navigateur' => 'تجربة المتصفح/إعادة الاتصال',

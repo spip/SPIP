@@ -529,7 +529,6 @@ wird Ihre Adresse beibehalten):
 	'login_retour_public' => 'Zurück zur öffentlichen Website',
 	'login_retour_site' => 'Zurück zur öffentlichen Website',
 	'login_retoursitepublic' => 'Zurück zur öffentlichen Website',
-	'login_sans_cookie' => 'Anmeldung ohne Cookies',
 	'login_securise' => 'Sicheres Login',
 	'login_sinscrire' => 'anmelden',
 	'login_test_navigateur' => 'Test Webbrowser/Verbindung',

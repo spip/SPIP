@@ -471,7 +471,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'パブリックなサイトへ戻る',
 	'login_retour_site' => 'パブリックなサイトへ戻る',
 	'login_retoursitepublic' => 'パブリックなサイトへ戻る',
-	'login_sans_cookie' => 'クッキーなしで認証',
 	'login_sinscrire' => '登録',
 	'login_test_navigateur' => 'ブラウザが再接続を試みている',
 	'login_verifiez_navigateur' => '(しかし、あなたのブラウザがあなたのパスワードを記憶しなかったかどうか確かめて下さい...)',

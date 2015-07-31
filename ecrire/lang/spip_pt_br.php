@@ -527,7 +527,6 @@ Se você não quiser que a sua senha possa ser interceptada na rede, por favor a
 	'login_retour_public' => 'Voltar ao site público',
 	'login_retour_site' => 'Voltar ao site público',
 	'login_retoursitepublic' => 'voltar ao site público',
-	'login_sans_cookie' => 'Identificação sem cookie',
 	'login_securise' => 'Login seguro',
 	'login_sinscrire' => 'cadastrar-se',
 	'login_test_navigateur' => 'testar navegador/reconexão',

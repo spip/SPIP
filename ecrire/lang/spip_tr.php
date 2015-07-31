@@ -466,7 +466,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Kamusal siteye dön',
 	'login_retour_site' => 'Kamusal siteye dön',
 	'login_retoursitepublic' => 'Kamusal siteye dön',
-	'login_sans_cookie' => 'Çerezsiz tanımlanma',
 	'login_sinscrire' => 'Kayıt ol',
 	'login_test_navigateur' => 'Gezgini dene / Tekrar bağlan',
 	'login_verifiez_navigateur' => '(Ancak gezginin şifrenizi belleğe almadığından emin olunuz...)',

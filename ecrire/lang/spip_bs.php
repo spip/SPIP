@@ -430,7 +430,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'login_retour_public' => 'Nazad na javnu stranicu',
 	'login_retour_site' => 'Nazad na javnu stranicu',
 	'login_retoursitepublic' => 'nazad na javnu stranicu',
-	'login_sans_cookie' => 'Identifikacija bez cookie',
 	'login_sinscrire' => 'registruj se',
 	'login_test_navigateur' => 'test navigatora/ponovna konekcija',
 	'login_verifiez_navigateur' => '(Svakako se uvjerite da vas navigator nije zapamtio vasu lozinku...)',
