@@ -36,6 +36,19 @@ function exec_install_dist()
 	$fonc();
 }
 
+//  Pour ecrire les fichiers memorisant les parametres de connexion
+
+function install_fichier_connexion($nom, $texte)
+{
+	$texte = "<"."?php\n"
+	. "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n"
+	. $texte 
+	. "?".">";
+
+	if (!ecrire_fichier($nom, $texte))
+		redirige_par_entete(generer_url_ecrire('install'));
+}
+
 //
 // Verifier que l'hebergement est compatible SPIP ... ou l'inverse :-)
 // (sert a l'etape 1 de l'installation)
@@ -125,7 +138,7 @@ function bouton_suivant($code = '') {
 // http://doc.spip.org/@info_progression_etape
 function info_progression_etape($en_cours,$phase,$dir){
 	//$en_cours = _request('etape')?_request('etape'):"";
-	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php');
+	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php$');
 	$debut = 1; $etat = "ok";
 	$last = count($liste);
 	
@@ -171,4 +184,5 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset .= "$horchamps</fieldset>\n";
 	return $fieldset;
 }
+
 ?>
