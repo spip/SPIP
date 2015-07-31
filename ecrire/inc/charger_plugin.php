@@ -86,10 +86,17 @@ function interface_plugins_auto($retour) {
 		$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
 
 		$menu = array();
-		foreach ($liste as $url => $titre) {
+		foreach ($liste as $url => $info) {
+			$titre = $info[0];
+			$url_doc = $info[1];
 			$titre = typo('<multi>'.$titre.'</multi>'); // recuperer les blocs multi du flux de la zone (temporaire?)
+			
+			if ($url_doc)
+				$titre = "<a href='$url_doc' title='$url_doc'>$titre</a>";
+			
+			
 			$nick = strtolower(basename($url, '.zip'));
-			$menu[$nick] = '<div style="height:1.9em;overflow:hidden;border-bottom:1px dotted grey;"><label><input type="radio" name="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b> | ".$titre."</label></div>\n";
+			$menu[$nick] = '<div style="height:1.9em;overflow:hidden;border-bottom:1px dotted grey;"><label><input type="radio" name="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b></label> | ".$titre."</div>\n";
 		}
 		ksort($menu);
 		$res .= "<div style='border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto;' class='cadre-trait-couleur'>\n";
@@ -406,7 +413,7 @@ function chercher_enclosures_zip($rss) {
 		AND $zips = extraire_balises($item['enclosures'], 'a'))
 			foreach ($zips as $zip)
 				if (extraire_attribut($zip, 'type') == 'application/zip')
-					$liste[extraire_attribut($zip, 'href')] = $item['titre'];
+					$liste[extraire_attribut($zip, 'href')] = array($item['titre'], $item['url']);
 	spip_log(count($liste).' enclosures au format zip');
 	return $liste;
 }
@@ -418,18 +425,23 @@ function chercher_enclosures_zip($rss) {
 function liste_plugins_distants() {
 	// TODO une liste multilingue a telecharger
 	$liste = array(
-		'http://files.spip.org/spip-zone/crayons.zip' => 'Les Crayons',
-		'http://files.spip.org/spip-zone/forms_et_tables_1_9_1.zip' => 'Forms &amp; tables',
-		'http://files.spip.org/spip-zone/autorite.zip' => 'Autorit&#233;',
-		'http://files.spip.org/spip-zone/cfg.zip' => 'CFG, outil de configuration',
-		'http://files.spip.org/spip-zone/ortho.zip' => 'Correcteur d\'orthographe'
+		'http://files.spip.org/spip-zone/crayons.zip' =>
+			array('Les Crayons', 'http://www.spip-contrib.net/Les-Crayons'),
+		'http://files.spip.org/spip-zone/forms_et_tables_1_9_1.zip' =>
+			array('Forms &amp; tables', 'http://www.spip-contrib.net/Forms'),
+		'http://files.spip.org/spip-zone/autorite.zip' =>
+			array('Autorit&#233;', 'http://www.spip-contrib.net/-Autorite-'),
+		'http://files.spip.org/spip-zone/cfg.zip' =>
+			array('CFG, outil de configuration', 'http://www.spip-contrib.net/cfg-references'),
+		'http://files.spip.org/spip-zone/ortho.zip' =>
+			array('Correcteur d\'orthographe')
 	);
 
 	if (is_array($flux = @unserialize($GLOBALS['meta']['syndic_plug']))) {
 		foreach ($flux as $url => $c) {
 			if (file_exists($cache=_DIR_TMP.'syndic_plug_'.md5($url).'.xml')
 			AND lire_fichier($cache, $rss))
-				$liste = array_merge($liste,chercher_enclosures_zip($rss));
+				$liste = array_merge(chercher_enclosures_zip($rss),$liste);
 		}
 	}
 
