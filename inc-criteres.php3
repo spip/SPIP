@@ -608,7 +608,6 @@ function calculer_params_dynamiques($liste, &$boucles, $idb) {
 	foreach (split(" *, *", $reg[1]) as $v) {
 	  $v = calculer_param_dynamique($v, $boucles, $idb);
 	  if (is_array($v)) erreur_squelette($v);
-	  spip_log("'$v'");
 	  if (strpos('0123456789',$v[0]) !== false)
 	    $res[] = $v;
 	  else if ($v[0]=='"')

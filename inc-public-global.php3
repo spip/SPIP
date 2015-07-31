@@ -242,6 +242,10 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	return $page;
 }
 
+# les balises dynamiques sont traitees comme des inclusions
+# Attention, un appel explicite a cette fonction suppose certains include
+# (voir l'exemple de spip_inscription et spip_pass)
+
 function inclure_balise_dynamique($r) {
 	if (is_string($r))
 		echo $r;
@@ -250,7 +254,14 @@ function inclure_balise_dynamique($r) {
 		if ((!$contexte_inclus['lang']) AND
 		($GLOBALS['spip_lang'] != lire_meta('langue_site')))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang']; 
-		include('inc-public.php3');
+		$page = inclure_page($fond, $delais, $contexte_inclus);
+		if ($page['process_ins'] == 'html')
+			echo $page['texte'];
+		else
+			eval('?' . '>' . $page['texte']);
+		
+		if ($page['lang_select'])
+			lang_dselect();
 	}
 }
 ?>

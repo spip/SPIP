@@ -38,37 +38,38 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscri
 					 '(nom, email, login, pass, statut, htpass)',
 					 "('".addslashes($nom_inscription)."',  '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
 			ecrire_acces();
-			return envoyer_inscription($mail_inscription, $statut, $mode, $login, $pass);
+			$message = envoyer_inscription($mail_inscription, $statut, $mode, $login, $pass);
 		  }
 
 		else {
 		  // existant mais encore muet, renvoyer les infos
 			if ($row['statut'] == 'nouveau') {
-			  return (envoyer_inscription($mail_inscription, $row['statut'], $mode, $row['login'], $row['pass']));
+			  $message = (envoyer_inscription($mail_inscription, $row['statut'], $mode, $row['login'], $row['pass']));
 			} else {
 				if ($row['statut'] == '5poubelle')
 		  // dead
-				  return _T('form_forum_access_refuse');
+				  $message = _T('form_forum_access_refuse');
 				else  
 		  // deja inscrit
-				  return _T('form_forum_email_deja_enregistre');
+				  $message = _T('form_forum_email_deja_enregistre');
 			}
 		}
 	}
 	// demande du formulaire
 	else {
 		if (!$nom_inscription) 
-		  {
-		    return array("formulaire_inscription",0,
-				 array('focus' => $focus,
-				       'target' => $target,
-				       'mode' => $mode));
-		  }
+		    $message = '';
 		else {
 		  spip_log("Mail incorrect: '$mail_inscription'");
-		  return _L('adresse mail incorrecte');
+		  $message = _L('adresse mail incorrecte');
 		}
 	}
+
+	return array("formulaire_inscription",0,
+		     array('focus' => $focus,
+			   'target' => $target,
+			   'message' => $message,
+			   'mode' => $mode));
 }
 
 // fonction qu'on peut redefinir pour filtrer selon l'adresse mail

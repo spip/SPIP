@@ -15,7 +15,7 @@
 	  </label>
 	</fieldset>
 	<br />
-	<p>[(#HTTP_VARS{site_obli}|choixsiegal{oui,'', ' '})<:form_pet_votre_site:><br />]
+	<p>[(#HTTP_VARS{site_obli}|=={oui}|?{'':' '})<:form_pet_votre_site:><br />]
 	<fieldset style='font-size: 110%; font-weight: bold;'>
 	  <legend></legend>
 	  <label>
@@ -30,7 +30,7 @@
 	<br />
 	<fieldset style='font-weight: bold'>
 	  <legend></legend>
-	(#HTTP_VARS{message}|choixsiegal{oui,' ', ''})
+	(#HTTP_VARS{message}|=={oui}|?{' ':''})
 	  <label>
 	  <:form_pet_message_commentaire:><br />
 	    <textarea name="message" rows="3" class="forml" cols="20"></textarea>

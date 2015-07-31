@@ -1,7 +1,15 @@
 [
-(#HTTP_VARS{mode}|choixsiegal{forum,' ',''})<:pass_forum_bla:><br /><br />][
-(#HTTP_VARS{mode}|choixsiegal{redac,' ',''})<:pass_espace_prive_bla:><br /><br />]<:form_forum_indiquer_nom_email:>
-<form id="inscription" method='post' action='#SELF' style='border: 0px; margin: 0px;'> 
+(#HTTP_VARS*{message})
+][
+(#HTTP_VARS*{message}|?{'':' '})[
+ (#HTTP_VARS{mode}|=={forum}|?{' ':''})
+	<:pass_forum_bla:><br /><br />
+][
+ (#HTTP_VARS{mode}|=={redac}|?{' ':''})
+	<:pass_espace_prive_bla:><br /><br />
+]<:form_forum_indiquer_nom_email:>
+ <form	id="inscription" method='post' action='#SELF'
+	style='border: 0px; margin: 0px;'> 
       <fieldset style="border: none; font-weight: bold"><legend></legend>
 	<label>
 	  <:form_pet_votre_nom:>
@@ -14,8 +22,21 @@
       </fieldset>
       <div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" />
 	</div> 
-</form>[
+ </form>[
 <script type="text/javascript"><!--
 document.inscription.(#HTTP_VARS{focus}).focus()
 --></script>
+ ]
+][<br />
+<div align="right">
+(#HTTP_VARS{target}|?{' ':''})
+<script type="text/javascript"><!--
+document.write("<a href='")
+document.write((window.opener) ? "javascript:close()" : "./")
+document.write("'><:pass_quitter_fenetre:><" + "/a>");
+//--></script>
+<noscript>
+        &#91;<a href='./'><:pass_retour_public:></a>&#93;
+</noscript>
+</div>
 ]
