@@ -40,7 +40,7 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	$href = generer_url_ecrire("auteurs","statut=$statut");
 	$vals[] = "<a href='$href'>" . bonhomme_statut($row) . '</a>';
 
-	if (($id_auteur == $connect_id_auteur) OR $row['parti'] OR !in_array($statut, array('0minirezo', '1comite')))
+	if (($id_auteur == $connect_id_auteur) OR $row['parti'])
 		$vals[]= '&nbsp;';
 	else	$vals[]= formater_auteur_mail($row, $id_auteur);
 
@@ -77,7 +77,8 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 // http://doc.spip.org/@formater_auteur_mail
 function formater_auteur_mail($row, $id_auteur)
 {
-	global $spip_lang_rtl;
+	if (!in_array($row['statut'], array('0minirezo', '1comite')))
+		return '';
 
 	if ($row['imessage'] != 'non'
 	AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
@@ -85,14 +86,10 @@ function formater_auteur_mail($row, $id_auteur)
 	else if (strlen($row['email'])
 	AND autoriser('voir', 'auteur', $id_auteur))
 		$href = 'mailto:' . $row['email'];
-	else
-		$href = '';
+	else	return '';
 
-	if ($href)
-		return "<a href='$href' title=\""
+	return "<a href='$href' title=\""
 	  .  _T('info_envoyer_message_prive')
 	  . "\" class='message'>&nbsp;</a>";
-	else
-		return '';
 }
 ?>
