@@ -794,6 +794,11 @@ function table_objet_sql($type,$serveur='') {
 		$infos_tables = lister_tables_objets_sql();
 		if (isset($infos_tables["spip_$nom"]))
 			$nom = "spip_$nom";
+		elseif($serveur!==false) {
+			$trouver_table = charger_fonction('trouver_table', 'base');
+			if ($desc = $trouver_table($nom,$serveur))
+				return $desc['table_sql'];
+		}
 	}
 
 	return $nom ;
