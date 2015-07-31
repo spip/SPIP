@@ -352,8 +352,9 @@ if (!$origine) {
 			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
 
 			// prevision de visites jusqu'a minuit
-			// basee sur la moyenne
-			$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $moyenne;
+			// basee sur la moyenne (site) ou popularite (article)
+			if (! $id_article) $val_popularite = $moyenne;
+			$prevision = (1 - (date("H")*60 - date("i"))/(24*60)) * $val_popularite;
 			$prevision = ceil($prevision * $rapport);
 			echo "<img src='img_pack/rien.gif' width=$largeur height=$prevision style='background-color:#cccccc;'>";
 
