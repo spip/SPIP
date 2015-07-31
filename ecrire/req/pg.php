@@ -766,14 +766,14 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 }
 
 // http://doc.spip.org/@spip_pg_error
-function spip_pg_error($query) {
+function spip_pg_error($query, $serveur='') {
 	$s = str_replace('ERROR', 'errcode: 1000 ', pg_last_error());
 	if ($s) spip_log("$s - $query", 'pg');
 	return $s;
 }
 
 // http://doc.spip.org/@spip_pg_errno
-function spip_pg_errno() {
+function spip_pg_errno($serveur='') {
 	$s = pg_last_error(); 
 	if ($s) spip_log("Erreur PG $s");
 	return $s ? 1 : 0;

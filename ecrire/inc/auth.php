@@ -192,8 +192,9 @@ function inc_auth_dist() {
 	// Indiquer la connexion. A la minute pres ca suffit.
 	if (!is_numeric($connect_quand = $row['quand']))
 		$connect_quand = strtotime($connect_quand);
-
+	
 	if ((time() - $connect_quand)  >= 60) {
+		unset($result); // sinon sqlite ne peut pas faire l'update (database table is locked)
 		sql_update("spip_auteurs", array("en_ligne" => "NOW()"), "id_auteur=$connect_id_auteur");
 	}
 

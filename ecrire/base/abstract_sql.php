@@ -228,13 +228,13 @@ function sql_multi($sel, $lang, $serveur='')
 // http://doc.spip.org/@sql_error
 function sql_error($query='requete inconnue', $serveur='') {
   	$f = sql_serveur('error', $serveur);
-	return $f($query);
+	return $f($query, $serveur);
 }
 
 // http://doc.spip.org/@sql_errno
 function sql_errno($serveur='') {
   	$f = sql_serveur('errno', $serveur);
-	return $f();
+	return $f($serveur);
 }
 
 // http://doc.spip.org/@sql_explain

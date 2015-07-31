@@ -209,9 +209,18 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 {
 	$pg = function_exists('pg_connect');
 	$mysql = function_exists('mysql_connect');
+	// demander les version dispo de sqlite
+	include_spip("req/sqlite_generique");
+	$versions = spip_versions_sqlite();
+	$sqlite2 = in_array(2, $versions);
+	$sqlite3 = in_array(3, $versions);
 
-	if (!($pg AND $mysql))
-		$server_db = $mysql ? 'mysql' : 'pg';
+	if (($pg + $mysql + $sqlite2 + $sqlite3) == 1){
+		if ($mysql) 	$server_db = 'mysql';
+		if ($pg) 		$server_db = 'pg';
+		if ($sqlite2) 	$server_db = 'sqlite2';
+		if ($sqlite3) 	$server_db = 'sqlite3';
+	}
 
 	else if ($predef[0]) {
 		if (!is_string($predef[0])) {
@@ -221,6 +230,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			$server_db ='';
 			$m = strcasecmp($predef[0], 'mysql') ? '' : " selected='selected'";
 			$p = strcasecmp($predef[0], 'pg') ? '' : " selected='selected'";
+	  		$s2 = strcasecmp($predef[0], 'sqlite2') ? '' : " selected='selected'";
+	  		$s3 = strcasecmp($predef[0], 'sqlite3') ? '' : " selected='selected'";
 		}
 	}
 
@@ -231,21 +242,44 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			("<p><b>"._T('avis_connexion_echec_1').
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
-
+			
+	. '<script language="javascript" src=' . find_in_path('javascript/jquery.js') . '></script>'
+	. '<script language="javascript">
+		$(document).ready(function() {
+			$("#sql_serveur_db").change(function(){
+				if ($(this).find("option:selected").attr("value").match("sqlite*")){
+					$("#install_adresse_base_hebergeur").hide();
+					$("#install_login_base_hebergeur").hide();
+					$("#install_pass_base_hebergeur").hide();
+				} else {
+					$("#install_adresse_base_hebergeur").show();
+					$("#install_login_base_hebergeur").show();
+					$("#install_pass_base_hebergeur").show();					
+				}
+			});
+		});
+		</script>'
+	
 	. ($server_db
 		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
 		: ('<fieldset><legend>'
 		._L('Indiquer le type de base de donn&eacute;es :')
-		. "\n<select name='server_db'>"
+		. "\n<select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
 			? "\n<option value='mysql'$m>"._L('MySQL')."</option>"
 			: '')
 		. ($pg
 			? "\n<option value='pg'$p>"._L('PostGreSQL')."</option>"
 			: '')
+		. (($sqlite2)
+			? "\n<option value='sqlite2'$s2>"._L('SQLite2')."</option>"
+			: '')
+		. (($sqlite3)
+			? "\n<option value='sqlite3'$s3>"._L('SQLite3')."</option>"
+			: '')
 		   . "\n</select></legend></fieldset>")
 	)
-
+	. '<div id="install_adresse_base_hebergeur">'
 	. ($predef[1]
 	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),
@@ -257,7 +291,9 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		)
 	)
 	)
-
+	. '</div>'
+	
+	. '<div id="install_login_base_hebergeur">'
 	. ($predef[2]
 	? '<h3>'._T('install_login_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_login_connexion_1'),
@@ -269,7 +305,9 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		)
 	)
 	)
-
+	. '</div>'
+	
+	. '<div id="install_pass_base_hebergeur">'
 	. ($predef[3]
 	? '<h3>'._T('install_pass_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_mot_passe_1'),
@@ -281,7 +319,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		)
 	)
 	)
-
+	. '</div>'
+	
 	. bouton_suivant()));
 
 }
@@ -292,20 +331,20 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 // http://doc.spip.org/@predef_ou_cache
 function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
 {
-	return (defined('_INSTALL_HOST_DB')
+	return ((defined('_INSTALL_HOST_DB'))
 		? ''
 		: "\n<input type='hidden' name='adresse_db'  value=\"".htmlspecialchars($adresse_db)."\" />"
 	)
-	. (defined('_INSTALL_USER_DB')
+	. ((defined('_INSTALL_USER_DB'))
 		? ''
 		: "\n<input type='hidden' name='login_db' value=\"".htmlspecialchars($login_db)."\" />"
 	)
-	. (defined('_INSTALL_PASS_DB')
+	. ((defined('_INSTALL_PASS_DB'))
 		? ''
 		: "\n<input type='hidden' name='pass_db' value=\"".htmlspecialchars($pass_db)."\" />"
 	)
 
-	. (defined('_INSTALL_SERVER_DB')
+	. ((defined('_INSTALL_SERVER_DB'))
 		? ''
 		: "\n<input type='hidden' name='server_db' value=\"".htmlspecialchars($server_db)."\" />"
 	   );
@@ -318,11 +357,18 @@ function install_etape_liste_bases($server_db, $disabled=array())
 {
 	$result = sql_listdbs($server_db);
 	if (!$result) return '';
-	$bases = $checked = array();
 
-	while ($row = sql_fetch($result, $server_db)) {
+	$bases = $checked = $noms = array();
 
-		$nom = array_shift($row);
+	// si sqlite : result est deja un tableau
+	if (is_array($result)){
+		$noms = $result;
+	} else {
+		while ($row = sql_fetch($result, $server_db)) {
+			$noms[] = array_shift($row);
+		}
+	}
+	foreach ($noms as $nom){
 		$id = htmlspecialchars($nom);
 		$dis = in_array($nom, $disabled) ? " disabled='disabled'" : '';
 		$base = " name=\"choix_db\" value=\""
@@ -342,7 +388,8 @@ function install_etape_liste_bases($server_db, $disabled=array())
 			$bases[]= "<input$base />\n$label";
 		}
 	}
-	if (!$bases) return false;
+
+	if (!$bases && !$checked) return false;
 
 	if ($checked) {array_unshift($bases, $checked); $checked = true;}
 

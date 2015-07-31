@@ -35,7 +35,6 @@ function install_etape_2_dist()
 	$chmod = _request('chmod');
 
 	$link = spip_connect_db($adresse_db, 0, $login_db, $pass_db, '', $server_db);
-
 	$GLOBALS['connexions'][$server_db] = $link;
 
 	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
@@ -45,14 +44,21 @@ function install_etape_2_dist()
 
 // prenons toutes les dispositions possibles pour que rien ne s'affiche !
 
-	echo "\n<!--\n", join(', ', $link), " $login_db ";
+	/*
+	 * /!\ sqlite3/PDO : erreur sur join(', ', $link)
+	 * L'objet PDO ne peut pas etre transformee en chaine
+	 * Un echo $link ne fonctionne pas non plus
+	 * Il faut utiliser par exemple print_r($link)
+	 */
+	//echo "\n<!--\n", join(', ', $link), " $login_db ";
 	$db_connect = 0; // revoirfunction_exists($ferrno) ? $ferrno() : 0;
-	echo join(', ', $GLOBALS['connexions'][$server_db]);
-	echo "\n-->\n";
+	//echo join(', ', $GLOBALS['connexions'][$server_db]);
+	//echo "\n-->\n";
 
 	if (($db_connect=="0") && $link) {
 		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>\n";
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
+
 		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
 
 		echo "\n", '<!-- ',  sql_version($server_db), ' -->' ;
