@@ -793,10 +793,7 @@ prive/rss/messagerie.html -text
 prive/rss/revisions.html -text
 prive/rss/signatures.html -text
 prive/rss_fonctions.php -text
-prive/spip_glossaire.gif -text
-prive/spip_out.gif -text
 prive/spip_style.css -text
-prive/spip_url.gif -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
 prive/style_prive_defaut.css -text
