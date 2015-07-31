@@ -485,6 +485,8 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_redacteurs' => 'Idazleak',
 'info_redaction_en_cours' => 'Idaztekobidean',
 'info_redirection' => 'Birbidirekzioa',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Zure artikulu ezetsiak',
 'info_reglage_ldap' => 'Aukerak : LDAP inportazioaren konfigurazioa',
 'info_renvoi_article' => 'Birbidirekzioa. Artikulu hau orrialdera itzultzen da:',

@@ -511,6 +511,8 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_redacteurs' => 'Redactores',
 'info_redaction_en_cours' => 'EN CURSU DE REDAICIÓN',
 'info_redirection' => 'Redireición',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Los tos artículos refugáos',
 'info_reglage_ldap' => 'Opciones: <b>Axuste de la importación LDAP</b>',
 'info_renvoi_article' => '<b>Redireición.</b> Esti artículu reunvía a la páxina:',

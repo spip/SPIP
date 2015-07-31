@@ -475,6 +475,8 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_redacteurs' => 'Redatores',
 'info_redaction_en_cours' => 'EM FASE DE REDAÇÃO',
 'info_redirection' => 'Redirecionamento',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Suas matérias recusadas',
 'info_reglage_ldap' => 'Opções: <b>Configuração da importação LDAP</b>',
 'info_renvoi_article' => '<b>Redirecionamento.</b> Esta matéria redireciona para a página:',

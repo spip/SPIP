@@ -506,6 +506,8 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
 'info_redacteurs' => 'Redaktè yo',
 'info_redaction_en_cours' => 'KI AP POU EKRI ANKO',
 'info_redirection' => 'Tounyen déyè sou yon lòt adrès ',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Atik w-a ki te finn refize',
 'info_reglage_ldap' => 'Opsyon : <b>Reglaj lempotasyon LDAP</b>',
 'info_renvoi_article' => '<b>Tounyen dèyè sou yon lòt adrès.</b> Atik-la ap sòti sou lapaj-la:',

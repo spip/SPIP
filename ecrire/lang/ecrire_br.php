@@ -492,6 +492,8 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 'info_redacteurs' => 'Skridaozerien',
 'info_redaction_en_cours' => 'O VEZAÑ SKRIDAOZET',
 'info_redirection' => 'Adheñchañ',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Ho pennadoù bet nac\'het',
 'info_reglage_ldap' => 'Dibarzhioù : <b>Reizhañ an enporzhiañ LDAP</b>',
 'info_renvoi_article' => '<b>Adheñchañ.</b> Adkas a ra ar pennad-mañ d\'ar bajenn :',

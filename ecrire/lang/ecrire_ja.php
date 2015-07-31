@@ -486,6 +486,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_redacteurs' => 'エディターズ',
 'info_redaction_en_cours' => '進行中の編集',
 'info_redirection' => 'リダイレクション',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'あなたの記事は拒絶された',
 'info_reglage_ldap' => 'オプション：<b>LDAPインポートの調整</b>',
 'info_renvoi_article' => '<b>リダイレクション。</b> この記事はそのページを参照します:',

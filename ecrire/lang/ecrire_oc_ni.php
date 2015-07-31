@@ -487,6 +487,8 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Lu voastres articles refudats',
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article torna mandar à la pàgina:',

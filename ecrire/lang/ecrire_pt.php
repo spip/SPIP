@@ -508,6 +508,8 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_redacteurs' => 'Redactores',
 'info_redaction_en_cours' => 'EM CURSO DE REDACÇÃO',
 'info_redirection' => 'Redirigir',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Os seus artigos recusados',
 'info_reglage_ldap' => 'Opções : <b>Acerto da importação LDAP</b>', # MODIF
 'info_renvoi_article' => '<b>Redirigir.</b> Este artigo remete para a página:', # MODIF

@@ -501,6 +501,8 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_redacteurs' => 'עורכים',
 'info_redaction_en_cours' => 'עריכה בהתקדמות',
 'info_redirection' => 'הכוונה מחודשת',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'המאמרים שלך נדחו',
 'info_reglage_ldap' => 'Options : <b>Réglage de l\'importation LDAP</b>', # NEW
 'info_renvoi_article' => '<b>Redirection.</b> Cet article renvoie à la page:', # NEW

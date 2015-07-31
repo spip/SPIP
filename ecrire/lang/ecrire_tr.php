@@ -497,6 +497,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_redacteurs' => 'Editörler',
 'info_redaction_en_cours' => 'YAZIM AŞAMASINDA',
 'info_redirection' => 'Yönlendirme',
+'info_redirection_activee' => 'La redirection est activée.', # NEW
+'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 'info_refuses' => 'Reddedilen makaleleriniz',
 'info_reglage_ldap' => 'Seçenekler : <b>LDAP ithalinin ayarlanması.</b>',
 'info_renvoi_article' => '<b>Yönlendirme.</b> Bu makalenin bizi şu sayfaya yönlendirir:',
