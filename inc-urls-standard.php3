@@ -10,9 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-// executer une seule fois
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 function generer_url_article($id_article) {
 	return "article.php3?id_article=$id_article";
@@ -84,5 +83,5 @@ function generer_url_forum($id_forum, $show_thread=false) {
 	include_ecrire('inc_forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
-
+ }
 ?>

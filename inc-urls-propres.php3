@@ -10,9 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-// executer une seule fois
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 /*
 
@@ -283,5 +282,6 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 
 	return;
 }
+ }
 
 ?>
