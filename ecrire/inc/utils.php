@@ -964,10 +964,37 @@ function http_script($script, $src='', $noscript='') {
 	: '';
 }
 
-// Transforme n'importe quel champ en une chaine utilisable
-// en PHP ou Javascript en toute securite
-// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
-// http://doc.spip.org/@texte_script
+
+/**
+ * Sécurise du texte à écrire dans du PHP ou du Javascript.
+ * 
+ * Transforme n'importe quel texte en une chaîne utilisable
+ * en PHP ou Javascript en toute sécurité, à l'intérieur d'apostrophes
+ * simples (`'` uniquement ; pas `"`)
+ *
+ * Utile particulièrement en filtre dans un squelettes
+ * pour écrire un contenu dans une variable JS ou PHP.
+ *
+ * Échappe les apostrophes (') du contenu transmis.
+ *
+ * @link http://www.spip.net/4281
+ * @example
+ *     PHP dans un squelette
+ *     ```
+ *     $x = '[(#TEXTE|texte_script)]';
+ *     ```
+ *
+ *     JS dans un squelette (transmettre une chaîne de langue)
+ *     ```
+ *     $x = '<:afficher_calendrier|texte_script:>';
+ *     ```
+ *
+ * @filtre
+ * @param string $texte
+ *     Texte à échapper
+ * @return string
+ *     Texte échappé
+**/
 function texte_script($texte) {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
 }
