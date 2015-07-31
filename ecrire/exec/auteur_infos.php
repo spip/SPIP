@@ -165,7 +165,7 @@ if (strval($nom)!='') {
 		}
 
 		$n = spip_query("UPDATE spip_auteurs SET $query_pass		nom='".addslashes($auteur['nom'])."',						login='".addslashes($auteur['login'])."',					bio='".addslashes($auteur['bio'])."',						email='".addslashes($auteur['email'])."',					nom_site='".addslashes($auteur['nom_site'])."',				url_site='".addslashes($auteur['url_site'])."',				pgp='".addslashes($auteur['pgp'])."'						$add_extra WHERE id_auteur=".$auteur['id_auteur']);
-		if ($n) die('UPDATE');
+		if (!$n) die('UPDATE');
 	}
  }
 
