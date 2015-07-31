@@ -71,13 +71,8 @@ if (strlen($aide) < 2) $aide = "spip";
 $lang_aide = $GLOBALS['spip_lang'];
 
 if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
-	if (file_exists($fichier_aide = "AIDE/en/aide")) {
-		$lang_aide = "en";
-	}
-	else {
-		$fichier_aide = "AIDE/fr/aide";
-		$lang_aide = 'fr';
-	}
+	$fichier_aide = "AIDE/fr/aide";
+	$lang_aide = 'fr';
 }
 
 $html = join('', file($fichier_aide));
@@ -91,7 +86,6 @@ $html = "";
 while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 	$f = $r[1];
 	if (file_exists("AIDE/$lang_aide/$f")) $f = "$lang_aide/$f";
-	else if (file_exists("AIDE/en/$f")) $f = "en/$f";
 	else if (file_exists("AIDE/fr/$f")) $f = "fr/$f";
 	$p = strpos($suite, $r[0]);
 	$html .= substr($suite, 0, $p) . "AIDE/$f";
