@@ -151,7 +151,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
 {
 	include_spip('inc/distant');
-	include_spip('inc/filtres');
+	include_spip('inc/texte');
 	include_spip('inc/filtres_images_mini');
 	$e = $doc['extension'];
 	if (!$img) {
