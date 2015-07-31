@@ -26,7 +26,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$largeur_gauche = 130;
 	} else {
 		$largeur_table = 750;
-	$largeur_gauche = 100;
+		$largeur_gauche = 100;
 	}
 	$largeur_table = $largeur_table - ($largeur_gauche+20);
 	$largeur_col = round($largeur_table/7);
@@ -42,14 +42,12 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$mois=$today["mon"];
 		$annee=$today["year"];
 		
-		if ($mois != $mois_today OR $annee != $annee_today) {
-			icone(_T("info_aujourdhui")."<br>".affdate_mois_annee("$annee-$mois-1"), "calendrier.php3", "calendrier-24.gif", "", "center");
-			echo "<p />";
-		}
+		if ($mois != $mois_today OR $annee != $annee_today) $afficher_lien_aujourdhui = true;
 		$annee_avant = $annee_today - 1;
 		$annee_apres = $annee_today + 1;
 		
-		
+		echo "<div>&nbsp;</div>";
+		echo "<div>&nbsp;</div>";
 		echo "<div class='verdana1'>";
 			echo "<div><b>$annee_avant</b></div>";
 			for ($i=$mois_today; $i < 13; $i++) {
@@ -76,7 +74,6 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	echo "<td width='20'>&nbsp;</td>";
 	
 	echo "<td width='$largeur_table' valign='top'>";
-	
 	echo "<TABLE border=0 CELLSPACING=0 CELLPADDING=3 WIDTH='$largeur_table'>";
 
 	$mois_suiv=$mois_today+1;
@@ -145,9 +142,34 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$les_rv["$lejour"][]="<div style='padding: 2px; margin-top: 2px; background-color: $couleur_fond; border: 1px solid $la_couleur; -moz-border-radius: 3px;' class='arial0'><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message' style='color: black;'>$titre</a></div>";
 	}
 
+	$activer_messagerie = lire_meta("activer_messagerie");
+	$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 
 	echo "<TR><TD style='text-align:$spip_lang_left;'><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
-	echo "<TD style='text-align:center;' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>".affdate_mois_annee("$annee_today-$mois_today-1")." ".aide ("messcalen")."</B></FONT></TD>";
+	echo "<TD style='text-align:center;' COLSPAN=5>";
+	
+		if ($afficher_lien_aujourdhui) {
+			echo "<div style='float: $spip_lang_left; width: 150px; align: left;'>";
+			icone_horizontale(_T("info_aujourdhui")."<br>".affdate_mois_annee("$annee-$mois-1"), "calendrier.php3", "calendrier-24.gif", "", "left");
+			echo "</div>";
+		}
+
+
+	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
+		echo "<div style='float: $spip_lang_right; width: 120px;'>";
+		if (!$afficher_lien_aujourdhui) echo "<a href='calendrier_jour.php3'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		else  echo "<a href='calendrier_jour.php3?jour=1&mois=$mois&annee=$annee'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		echo "&nbsp;";
+		echo "<img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'>";
+		echo "&nbsp;";
+		echo "<img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='border:1px solid black;'>";
+		echo "</div>";
+	}
+
+	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE='4'><B>".affdate_mois_annee("$annee_today-$mois_today-1")." ".aide ("messcalen")."</B></FONT>";
+
+	
+	echo "</TD>";
 	echo "<TD style='text-align:$spip_lang_right;'><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
 
 	echo "<TR>";
@@ -184,13 +206,11 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 			}
 		
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-				echo "<td width='$largeur_col' HEIGHT=80 BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois_today&annee=$annee_today'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></a></font>";
+				echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois_today&annee=$annee_today'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></a></font>";
 			} else {
-				echo "<td width='$largeur_col' HEIGHT=80 BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></font>";
+				echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></font>";
 			}
 
-			$activer_messagerie = lire_meta("activer_messagerie");
-			$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
 				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb' title='"._T("lien_nouvea_pense_bete")."'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>";
 				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal' title='"._T("lien_nouveau_message")."'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>";
@@ -232,19 +252,21 @@ if (!$mois){
 
 $nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 
-debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee))), "asuivre", "calendrier");
+debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee))), "redacteurs", "calendrier");
 $activer_messagerie = lire_meta("activer_messagerie");
 $connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 
 //echo "<BR><BR><BR>";
-if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
+/*if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
 	barre_onglets("calendrier", "calendrier");
 	echo "<br /><br />";
-}
+}*/
 
 // marges et pied de page supprimes pour prendre toute la largeur
 // debut_gauche();
 // debut_droite();
+
+echo "<div>&nbsp;</div>";
 
 afficher_mois($jour,sprintf("%02d", $mois),$annee,$nom_mois);
 
