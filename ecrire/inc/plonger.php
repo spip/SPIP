@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@inc_plonger_dist
 function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0) {
@@ -24,20 +25,26 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 	$ordre = array();
 	$rub = array();
 
-	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique AND rub2.id_rubrique = rub1.id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$exclu GROUP BY rub1.id_rubrique");
-
+	// en deux etapes : d'abord on recupere les enfants
+	$res = spip_query($q="SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1 WHERE rub1.id_parent = $id_rubrique AND rub1.id_rubrique!=$exclu GROUP BY rub1.id_rubrique ORDER BY 0+rub1.titre,rub1.titre");
 	while ($row = spip_fetch_array($res)) {
 		if (autoriser('voir','rubrique',$row['id_rubrique'])){
-			$rub[$row['id_parent']]['enfants'] = true;
 			if ($row['id_parent'] == $id_rubrique)
 				$ordre[$row['id_rubrique']]= trim(typo($row['titre']))
 				. (($row['langue_choisie'] != 'oui')
 				   ? '' : (' [' . $row['lang'] . ']'));
 		}
 	}
+	$liste_rub = calcul_mysql_in('id_parent',implode(',',array_keys($ordre)));
+	$res = spip_query($q="SELECT id_parent,count(id_rubrique) as n FROM spip_rubriques WHERE $liste_rub GROUP BY id_parent");
+
+	while ($row = spip_fetch_array($res)) {
+		$rub[$row['id_parent']]['enfants'] = true;
+	}
+	
 	$next = isset($list[$col]) ? $list[$col] : 0;
 	if ($ordre) {
-		asort($ordre);
+		//asort($ordre);
 		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&col=".($col+1));
 		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
 		$args = "'$idom',this,$col,'$spip_lang_left','$info',event";
