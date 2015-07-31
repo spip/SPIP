@@ -342,7 +342,7 @@ function spip_mysql_showtable($nom_table)
 	$a = spip_mysql_query("SHOW TABLES LIKE '$nom_table'");
 	if (!$a) return "";
 	if (!spip_fetch_array($a)) return "";
-	list(,$a) = spip_mysql_fetch(spip_mysql_query("SHOW CREATE TABLE $nom_table"),SPIP_NUM);
+	list(,$a) = spip_mysql_fetch(spip_mysql_query("SHOW CREATE TABLE $nom_table"),MYSQL_NUM);
 	if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
 		return "";
 	else {

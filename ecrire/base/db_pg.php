@@ -10,13 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-//constantes spip pour spip_fetch_array()
-define('SPIP_BOTH', PGSQL_BOTH);
-define('SPIP_ASSOC', PGSQL_ASSOC);
-define('SPIP_NUM', PGSQL_NUM);
 
 // Se connecte et retourne le nom de la fonction a connexion persistante
 
@@ -165,17 +159,15 @@ function spip_pg_select_as($args)
 }
 
 // http://doc.spip.org/@spip_pg_fetch
-function spip_pg_fetch($res, $extra='') {
-	  static $n = array();
-	  if ($extra) spip_log("fetch argument 2: $extra a revoir");
-	  if ($res) $res = pg_fetch_array($res, $n[$res]++, PGSQL_ASSOC);
-	  return $res;
+function spip_pg_fetch($res, $t=PGSQL_ASSOC) {
+	static $n = array();
+	if ($res) $res = pg_fetch_array($res, $n[$res]++, $t);
+	return $res;
 }
  
 // http://doc.spip.org/@spip_fetch_array
-function spip_fetch_array($r, $extra='') {
-	  if ($extra) spip_log("fetch argument 2: $extra a revoir");
-	  if ($r) return pg_fetch_array($r);
+function spip_fetch_array($r, $t=PGSQL_ASSOC) {
+	if ($r) return spip_pg_fetch($r, $t);
 }
 
 // http://doc.spip.org/@spip_pg_countsel

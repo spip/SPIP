@@ -82,8 +82,8 @@ function convert_sql_utf8(){
 	include_spip('base/auxiliaires');
 
 	$res = spip_query("SHOW TABLES");
-	while (($row = spip_fetch_array($res,SPIP_NUM)) /*&& ($count<1)*/){
-		$nom = $row[0];
+	while (($row = spip_fetch_array($res)) /*&& ($count<1)*/){
+		$nom = array_shift($row);
 		if (preg_match(',^'.$GLOBALS['table_prefix'].'_(.*)$,',$nom,$regs)){
 			$count++;
 			$nom = $regs[1];

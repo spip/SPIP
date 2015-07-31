@@ -306,10 +306,7 @@ function conserver_original($id_forum) {
 		return ''; // pas d'erreur
 
 	// recopier le forum
-	$t = spip_fetch_array(
-		spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum)),
-		SPIP_ASSOC
-	);
+	$t = spip_fetch_array(spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum)));
 
 	if ($t) {
 		unset($t['id_forum']);
