@@ -283,7 +283,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	  debut_cadre_relief("forum-interne-24.gif");
 
 
-	list($nb_forums) = spip_fetch_array(spip_query("SELECT count(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
+	list($nb_forums) = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
 	list($nb_signatures) = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 
@@ -737,10 +737,8 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			spip_query("UPDATE spip_articles SET id_trad=0, date_modif=NOW() WHERE id_article = $id_article");
 
 			// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
-			$result_autres_trad= spip_query("SELECT COUNT(id_article) AS total FROM spip_articles WHERE id_trad = $id_trad");
-			if ($row = spip_fetch_array($result_autres_trad))
-				$nombre_autres_trad = $row["total"];
-			if ($nombre_autres_trad == 1)
+			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad = $id_trad"));
+			if ($cpt['n'] == 1)
 				spip_query("UPDATE spip_articles SET id_trad = 0, date_modif=NOW() WHERE id_trad = $id_trad");
 
 			$id_trad = 0;
@@ -1042,41 +1040,34 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			
 			$les_auteurs[] = $id_auteur;
 
-			if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
-			else $aff_articles = "('prop', 'publie')";
-
-			$result2 = spip_query("SELECT COUNT(articles.id_article) AS compteur FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN $aff_articles GROUP BY lien.id_auteur");
-
-			if ($result2) list($nombre_articles) = spip_fetch_array($result2);
-			else $nombre_articles = 0;
-
 			$vals[] = bonhomme_statut($row);
 
-			$vals[] = "<A href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur") . "' $bio_auteur>".typo($nom_auteur)."</A>";
+			$vals[] = "<a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur") . "' $bio_auteur>".typo($nom_auteur)."</a>";
 
 			$vals[] = bouton_imessage($id_auteur);
-
 		
-		
-		if ($email_auteur) $vals[] =  "<A href='mailto:$email_auteur'>"._T('email')."</A>";
-		else $vals[] =  "&nbsp;";
+			if ($email_auteur) $vals[] =  "<A href='mailto:$email_auteur'>"._T('email')."</A>";
+			else $vals[] =  "&nbsp;";
 
-		if ($url_site_auteur) $vals[] =  "<A href='$url_site_auteur'>"._T('info_site_min')."</A>";
-		else $vals[] =  "&nbsp;";
+			if ($url_site_auteur) $vals[] =  "<A href='$url_site_auteur'>"._T('info_site_min')."</A>";
+			else $vals[] =  "&nbsp;";
 
-		if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
-		else if ($nombre_articles == 1) $vals[] =  _T('info_1_article');
-		else $vals[] =  "&nbsp;";
+			$cpt = spip_fetch_array(spip_query("SELECT COUNT(articles.id_article) AS n FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')") . " GROUP BY lien.id_auteur"));
 
-		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
+			$nombre_articles = intval($cpt['n']);
+
+			if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
+			else if ($nombre_articles == 1) $vals[] =  _T('info_1_article');
+			else $vals[] =  "&nbsp;";
+
+			if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
 		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
-		} else {
-			$vals[] = "";
-		}
+			} else {
+			  $vals[] = "";
+			}
 		
-		$table[] = $vals;
+			$table[] = $vals;
 		}
-	
 	
 	$largeurs = array('14', '', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial11', 'arial1');
@@ -1447,7 +1438,8 @@ function insert_article($id_parent, $new)
 	if ($new!='oui')  redirige_par_entete("./");
 	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
 	if (!$id_rubrique = intval($id_parent)) {
-		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$id_rubrique = $row['id_rubrique'];
 	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));

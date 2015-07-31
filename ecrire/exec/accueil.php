@@ -61,23 +61,29 @@ if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirez
 
 	// Les articles syndiques en attente de validation
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$result = spip_query("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
-		if (($row = spip_fetch_array($result)) AND $row['compte'])
-			echo "<br><small><a href='" . generer_url_ecrire("sites_tous","") . "' style='color: black;'>".$row['compte']." "._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')."</a></small>";
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
+	if ($cpt = $cpt['n'])
+		echo "<br /><small><a href='" ,
+			generer_url_ecrire("sites_tous","") ,
+			"' style='color: black;'>",
+			$cpt,
+			" ",
+			_T('info_liens_syndiques_1'),
+			" ",
+			_T('info_liens_syndiques_2'),
+			"</a></small>";
 	}
 
 	// Les forums en attente de moderation
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$result = spip_query("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
-		if (($row = spip_fetch_array($result)) AND $row['compte']) {
-			echo "<br><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$row['compte'];
-			if ($row['compte']>1)
-				echo " "._T('info_liens_syndiques_3')
-				." "._T('info_liens_syndiques_4');
-			else
-				echo " "._T('info_liens_syndiques_5')
-				." "._T('info_liens_syndiques_6');
-			echo " "._T('info_liens_syndiques_7').".</a></small>";
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum WHERE statut='prop'"));
+	if ($cpt = $cpt['n']) {
+		echo "<br><small> <a href='" , generer_url_ecrire("controle_forum","") , "' style='color: black;'>",$cpt;
+		if ($cpt>1)
+			echo " ",_T('info_liens_syndiques_3')," ",_T('info_liens_syndiques_4');
+		else
+			echo " ",_T('info_liens_syndiques_5')," ",_T('info_liens_syndiques_6');
+		echo " ",_T('info_liens_syndiques_7'),",</a></small>";
 		}
  }
 if ($flag_ob) {
@@ -176,8 +182,8 @@ if ($spip_display == 4) {
 	
 		$gadget .= "<center><table><tr>";
 	
-		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
-		if ($nombre_articles > 0) {
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
+		if ($cpt['n'] > 0) {
 			$gadget .= "<td>";
 			$gadget .= icone_horizontale (_T('icone_tous_articles'), generer_url_ecrire("articles_page",""), "article-24.gif", "", false);
 			$gadget .= "</td>";
@@ -316,7 +322,7 @@ if ($spip_display != 4) {
 	if(strlen(propre($GLOBALS['meta']["descriptif_site"])))
 	echo "<div>".propre($GLOBALS['meta']["descriptif_site"])."</div><br />";
 
-    $res = spip_query("SELECT count(*) AS cnt, statut FROM spip_articles GROUP BY statut");
+    $res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_articles GROUP BY statut");
   
   while($row = spip_fetch_array($res)) {
     $var  = 'nb_art_'.$row['statut'];
@@ -334,7 +340,7 @@ if ($spip_display != 4) {
 
 	}
 
-	$res = spip_query("SELECT count(*) AS cnt, statut FROM spip_breves GROUP BY statut");
+	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_breves GROUP BY statut");
 
 
 	while($row = spip_fetch_array($res)) {
@@ -350,20 +356,17 @@ if ($spip_display != 4) {
 		echo "</ul>";
 	}
 
-	$result = spip_fetch_array(spip_query("SELECT count(*) AS cnt FROM spip_forum where statut='publie'"));
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_forum where statut='publie'"));
 
-	$nb_forum = $result['cnt'];
-
-	if ($nb_forum) {
+	if ($cpt = $cpt['n']) {
 		if ($connect_statut == "0minirezo") echo afficher_plus(generer_url_ecrire("controle_forum",""));
-		echo "<b>"._T('onglet_messages_publics')."</b>";
+		echo "<b>",_T('onglet_messages_publics'),"</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
-		echo "<li><b>".$nb_forum."</b>";
+		echo "<li><b>",$cpt , "</b>";
 		echo "</ul>";
 	}
 
-	$res = spip_query("SELECT count(*) AS cnt, statut FROM spip_auteurs GROUP BY statut");
-
+	$res = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut");
 
 	while($row = spip_fetch_array($res)) {
 		$var  = 'nb_aut_'.$row['statut'];

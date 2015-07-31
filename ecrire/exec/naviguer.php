@@ -168,8 +168,7 @@ function infos_naviguer($id_rubrique, $statut)
 		if ($connect_statut == "0minirezo" && acces_rubrique($id_rubrique)) {
 			list($id_parent) = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			if (!$id_parent) {
-			  list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) " .
-								 critere_statut_controle_forum('prop', $id_rubrique)));
+			  $n = spip_num_rows(spip_query("SELECT id_forum " . critere_statut_controle_forum('prop', $id_rubrique)));
 			  if ($n)
 			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
 			}
@@ -329,13 +328,17 @@ if ($relief) {
 	// Les articles syndiques en attente de validation
 	if ($id_rubrique == 0
 	AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS compte 
-		FROM spip_syndic_articles WHERE statut='dispo'"));
-		if ($row['compte'] > 0)
-			echo "<br><small><a href='" . generer_url_ecrire("sites_tous")
-			. "' style='color: black;'>".$row['compte']." "
-			._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')
-			."</a></small>";
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE statut='dispo'"));
+		if ($cpt = $cpt['n'])
+			echo "<br /><small><a href='",
+				generer_url_ecrire("sites_tous"),
+				"' style='color: black;'>",
+				$cpt,
+				" ",
+				_T('info_liens_syndiques_1'),
+				" ",
+				_T('info_liens_syndiques_2'),
+				"</a></small>";
 	}
 
 	fin_cadre_couleur();

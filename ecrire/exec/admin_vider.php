@@ -83,10 +83,10 @@ echo "\n<div>&nbsp;</div>";
 //
 debut_cadre_relief("", false, "", _T('taille_repertoire_cache'));
 
-list ($taille) = spip_fetch_array(spip_query("SELECT SUM(taille) FROM spip_caches WHERE type='t'"));
+$cpt = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type='t'"));
 
-if ($taille>0) {
-	$info = _T('taille_cache_octets', array('octets' => taille_en_octets($taille)));
+if ($cpt = $cpt['n']) {
+	$info = _T('taille_cache_octets', array('octets' => taille_en_octets($cpt)));
 } else
 	$info = _T('taille_cache_vide');
 
@@ -156,8 +156,8 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 		echo _T('texte_moteur_recherche_active');
 	else {
 		echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";
-		$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index"));
-		if ($row['cnt'])
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_index"));
+		if ($cpt['n'])
 			echo _T('texte_commande_vider_tables_indexation');
 		else
 			echo _T('texte_tables_indexation_vides');

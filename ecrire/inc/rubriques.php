@@ -504,9 +504,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	// creer une structure contenant toute l'arborescence
 	//
 
-	$q = spip_query("SELECT	id_rubrique, id_parent, titre, statut, lang, langue_choisie FROM spip_rubriques " .
-			($type == 'breve' ?  'WHERE id_parent=0 ' : '') .
-	"ORDER BY 0+titre,titre");
+	$q = spip_query("SELECT id_rubrique, id_parent, titre, statut, lang, langue_choisie FROM spip_rubriques " . ($type == 'breve' ?  'WHERE id_parent=0 ' : '') . "ORDER BY 0+titre,titre");
 	while ($r = spip_fetch_array($q)) {
 		// titre largeur maxi a 50
 		$titre = couper(supprimer_tags(typo(extraire_multi($r['titre']
