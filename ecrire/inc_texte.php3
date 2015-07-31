@@ -18,9 +18,9 @@ include_ecrire ("inc_filtres");
 
 //
 // Initialisation de quelques variables globales
-// (on peut les modifier globalement dans mes_fonctions.php3,
-//  OU individuellement pour chaque type de page dans article.php3,
-//  rubrique.php3, etc. cf doc...)
+// (on peut les modifier globalement dans mes_fonctions,
+//  OU individuellement pour chaque type de page dans article, rubrique, etc.
+// cf doc...)
 //
 function tester_variable($nom_var, $val){
 	if (!isset($GLOBALS[$nom_var])) {
@@ -523,7 +523,7 @@ function charger_generer_url()
 		// Traitement des liens internes
 	if (!_DIR_RESTREINT)
 		include_ecrire('inc_urls');
-	else if (@file_exists("inc-urls.php3"))
+	else if (@file_exists("inc-urls" . _EXTENSIONS_PHP))
 		include_local("inc-urls");
 	else	include_local("inc-urls-".$GLOBALS['type_urls']);
 }
