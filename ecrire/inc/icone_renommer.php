@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/boutons');
+include_spip('base/connect_sql');
 
 function inc_icone_renommer_dist($fond,$fonction){
 	$size = 24;
@@ -35,14 +36,9 @@ function inc_icone_renommer_dist($fond,$fonction){
 		$type = substr($type,0,-strlen($match[0]));
 	}
 
-	$remplacement = array(
-		//'secteur'=>'rubrique',
-		'racine-site'=>'site',
-		'mot-cle'=>'mot',
-		'syndic'=>'site',
-	);
-	if (isset($remplacement[$type]))
-		$type = $remplacement[$type];
+	// objet_type garde invariant tout ce qui ne commence par par id_, spip_
+	// et ne finit pas par un s, sauf si c'est une exception declaree
+	$type = objet_type($type);
 
 	$dir = "images/";
 	$f = "$type-$size.png";

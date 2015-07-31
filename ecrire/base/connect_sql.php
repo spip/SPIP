@@ -283,7 +283,7 @@ function objet_type($table_objet){
 	if (!$table_objet) return;
 	if (!$surnoms)
 		// passer dans un pipeline qui permet aux plugins de declarer leurs exceptions
-		$surnoms = pipeline('declarer_type_surnoms', array());
+		$surnoms = pipeline('declarer_type_surnoms', array('racine-site'=>'site'));
 
 	// scenario de base
 	// le type est decline a partir du nom de la table en enlevant le prefixe eventuel
@@ -291,8 +291,10 @@ function objet_type($table_objet){
 	// on accepte id_xx en entree aussi
 	$type = preg_replace(',^spip_|^id_|s$,', '', $table_objet);
 	if (isset($surnoms[$type]))
-		$type = $surnoms[$type];
+		return $surnoms[$type];
+	
 	// si le type redonne bien la table c'est bon
+	// oui si table_objet ressemblait deja a un type
 	if ( $type==$table_objet
 		OR (table_objet($type)==$table_objet)
 	  OR (table_objet_sql($type)==$table_objet))
