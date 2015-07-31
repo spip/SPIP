@@ -32,9 +32,9 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 	return array('formulaire_recherche', 3600, 
-		     array('lien' => ($lien ? $lien : generer_url_public('recherche')),
-			'recherche' => (
-				_request('recherche') ? _request('recherche') : $rech )
+		array(
+			'lien' => ($lien ? $lien : generer_url_public('recherche')),
+			'recherche' => _request('recherche')
 		));
 }
 
