@@ -1943,6 +1943,10 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 
 	$boucle = $boucles[$idb];
 	$table = $boucle->show;
+
+	// si c'est une colonne de la table, ne rien faire
+	if(isset($table['field'][$col])) return '';
+
 	if (!$table['date'] && !isset($GLOBALS['table_date'][$table['id_table']])) return '';
 	$pred = $date_orig = isset($GLOBALS['table_date'][$table['id_table']])? $GLOBALS['table_date'][$table['id_table']] : $table['date'];
 	$pred = $date_orig = $table['date'];
@@ -1951,7 +1955,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 		# Recherche de l'existence du champ date_xxxx,
 		# si oui choisir ce champ, sinon choisir xxxx
 
-		if ($table['field']["date$suite"])
+		if (isset($table['field']["date$suite"]))
 			$date_orig = 'date'.$suite;
 		else
 			$date_orig = substr($suite, 1);
