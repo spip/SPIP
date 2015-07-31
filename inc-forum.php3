@@ -498,7 +498,8 @@ function ajout_forum() {
 				$courr .= "$url\n";
 				$courr .= "\n\n".$titre."\n\n".textebrut(propre($texte))."\n\n$nom_site_forum\n$url_site\n";
 				$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
-				$query = "SELECT spip_auteurs.* FROM spip_auteurs, spip_auteurs_articles AS lien WHERE lien.id_article='$id_article' AND spip_auteurs.id_auteur=lien.id_auteur";
+				$query = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
+					"WHERE lien.id_article='$id_article' AND auteurs.id_auteur=lien.id_auteur";
 				$result = spip_query($query);
 
 				while ($row = spip_fetch_array($result)) {
