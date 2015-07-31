@@ -54,7 +54,7 @@ if ($modif_forum == "oui") {
 		echo "<p><a href='$url_site'>$nom_site</a>";
 	}
 	
-	echo "<p><DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='Message d&eacute;finitif : envoyer le message'></div>";
+	echo "<p><DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='Message d&eacute;finitif : envoyer'></div>";
 
 	fin_cadre_relief();
 }
