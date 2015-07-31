@@ -486,7 +486,9 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "safehtml($_lesauteurs)";
 		// $p->interdire_scripts = true;
 	} else {
-		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+		$connect = !$p->id_boucle ? '' 
+		  : $p->boucles[$p->id_boucle]->sql_serveur;
+
 		$p->code = "recuperer_fond(
 			'modeles/lesauteurs',
 			array('id_article' => ".champ_sql('id_article', $p)
@@ -999,7 +1001,8 @@ function balise_INCLUDE_dist($p) {
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
 	$champ = phraser_arguments_inclure($p, true);
-	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	$id_boucle = $p->id_boucle;
+	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $id_boucle, false);
 
 	if (isset($_contexte['fond'])) {
 		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
@@ -1013,7 +1016,9 @@ function balise_INCLURE_dist($p) {
 		if ($flag_env) {
 			$l = "array_merge(\$Pile[0],$l)";
 		}
-		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+		$connect = !$id_boucle ? '' 
+		  : $p->boucles[$id_boucle]->sql_serveur;
+
 		$p->code = "recuperer_fond('',".$l.", false, " . sql_quote($connect) .")";
 	} else {
 		$n = interprete_argument_balise(1,$p);

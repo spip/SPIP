@@ -482,6 +482,7 @@ function calculer_select ($select = array(), $from = array(),
 
 	$menage = false;
 	foreach($where as $k => $v) { 
+		if (is_array($v)) $v = $v[0];
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
 			unset($where[$k]);
 			$menage = true;

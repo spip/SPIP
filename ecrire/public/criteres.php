@@ -61,7 +61,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
 	$boucle->where[]= array("sql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
-	  '"0".$doublons[' . 
+	  '$doublons[' . 
 	  ($crit->not ? '' : ($boucle->doublons . "[]= ")) .
 	  "('" .
 	  $boucle->type_requete . 
