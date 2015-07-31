@@ -122,6 +122,7 @@ function autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Autoriser a creer un article dans la rubrique $id
+// http://doc.spip.org/@autoriser_rubrique_creerrubriquedans_dist
 function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		autoriser('voir','rubrique',$id)
@@ -129,6 +130,7 @@ function autoriser_rubrique_creerrubriquedans_dist($faire, $type, $id, $qui, $op
 }
 
 // Autoriser a creer un article dans la rubrique $id
+// http://doc.spip.org/@autoriser_rubrique_creerarticledans_dist
 function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$id
@@ -136,6 +138,7 @@ function autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt
 }
 
 // Autoriser a creer une breve dans la rubrique $id
+// http://doc.spip.org/@autoriser_rubrique_creerbrevedans_dist
 function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) {
 	$s = spip_query(
 	"SELECT id_parent FROM spip_rubriques WHERE id_rubrique="._q($id));
@@ -148,6 +151,7 @@ function autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt) 
 }
 
 // Autoriser a creer un site dans la rubrique $id
+// http://doc.spip.org/@autoriser_rubrique_creersitedans_dist
 function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 	return
 		$id
