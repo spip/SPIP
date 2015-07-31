@@ -17,9 +17,9 @@ if (defined("_ECRIRE_INC_CHARSETS")) return;
 define("_ECRIRE_INC_CHARSETS", "1");
 
 
-/* charsets supportes :
+/* charsets supportes en natif (les autres via mb_string) :
 	utf-8 ;
-	iso-8859-1 ; iso-8859-15 ;
+	iso-8859-1 ; iso-8859-9 ; iso-8859-15 ;
 	windows-1251  = CP1251 ;
 */
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
@@ -57,6 +57,20 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		240=>240, 241=>241, 242=>242, 243=>243, 244=>244, 245=>245, 246=>246, 247=>247,
 		248=>248, 249=>249, 250=>250, 251=>251, 252=>252, 253=>253, 254=>254, 255=>255
 		);
+		return $charset;
+
+
+	// iso latin 9 - Turc <alexis@nds.k12.tr>
+	case 'iso-8859-9':
+		load_charset('iso-8859-1');
+		$trans = $GLOBALS['CHARSET']['iso-8859-1'];
+		$trans[240]=287; //gbreve
+		$trans[208]=286; //Gbreve
+		$trans[221]=304; //Idot
+		$trans[253]=305; //inodot
+		$trans[254]=351; //scedil
+		$trans[222]=350; //Scedil
+		$GLOBALS['CHARSET'][$charset] = $trans;
 		return $charset;
 
 
