@@ -22,6 +22,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 
 	# recherche les filles et petites-filles de la rubrique donnee
 	$ordre = array();
+	$rub = array();
 
 	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$exclu GROUP BY rub1.id_rubrique");
 
@@ -36,7 +37,8 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 	$next = $list[$col];
 	if ($ordre) {
 		asort($ordre);
-
+		$rec = generer_url_ecrire('plonger',"rac=$rac&exclus=$exclu&col=".($col+1));
+		$args = "'$rac',this,$col,'$spip_lang_left'";
 		while (list($id, $titrebrut) = each($ordre)) {
 
 			$titre = "<div class='"
@@ -45,28 +47,27 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 			. supprimer_numero($titrebrut)
 			. "</div>";
 
-			if ($rub[$id]["enfants"]) {
-				$titre = "\n<div class='rub-ouverte'>$titre</div>";
+			if (isset($rub[$id]["enfants"])) {
+				$titre = "<div class='rub-ouverte'>$titre</div>";
 
-		# ensuite, ouverture ou fermeture du menu des sous-rubriques
-				$url = generer_url_ecrire('plonger',"rac=$rac&exclus=$exclu&id=$id&col=".($col+1), true);
+				$acces = "firstChild.";
+				$url = "\nhref='$rec&amp;id=$id'" ;
+			} else {  $url = $acces = ''; }
 
-			} else {  $url = ''; }
-
-			$class= ($id == $next) ? "highlight" : "pashighlight";
-
-			$onClick = "\naff_selection_provisoire($id,\n\t'$rac',\n\t'$url',\n\t$col,\n\t'$spip_lang_left');";
-				
+			$ret .= "<div class='"
+			. (($id == $next) ? "highlight" : "pashighlight")
+			. "'><a"
+			. $url
+# "this" sur une balise A retourne son attribut href, pas le noeud A !
+			. "\nonClick=\"changerhighlight(this.parentNode);"
+			. "return aff_selection_provisoire($id,$args);"
 # ce lien provoque la selection (directe) de la rubrique cliquee
 # et l'affichage de son titre dans le bandeau
-			$ondbClick = "aff_selection_titre($id,'"
-			. strtr(str_replace("'", "&#8217;",
-						str_replace('"', "&#34;",
-							textebrut($titrebrut))),
-					"\n\r", "  ")
-			. "');";
-
-			$ret .= "\n<div class='$class'\nonClick=\"changerhighlight(this);$onClick\"\nondblclick=\"$ondbClick$onClick\">$titre\n</div>";
+			. "\"\nondblclick=\""
+			. "return aff_selection_titre(this."
+			. $acces
+			. "firstChild.firstChild.nodeValue,$id,$args);"
+			. "\">$titre</a></div>";
 		}
 	}
 
