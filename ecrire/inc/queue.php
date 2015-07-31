@@ -505,6 +505,11 @@ function queue_affichage_cron(){
 	if (queue_sleep_time_to_next_job() OR defined('_DEBUG_BLOCK_QUEUE'))
 		return $texte;
 
+	// ne pas relancer si on vient de lancer dans la meme seconde par un hit concurent
+	if (file_exists($lock=_DIR_TMP."cron.lock") AND !(@filemtime($lock)<$_SERVER['REQUEST_TIME']))
+		return $texte;
+	@touch($lock);
+
 	// il y a des taches en attentes
 
 	$url_cron = generer_url_action('cron','',false,true);
@@ -529,7 +534,7 @@ function queue_affichage_cron(){
 		}
 	}
 
-	// ici lancer le cron par un CURL asynchrone si CURL est pr�sent
+	// ici lancer le cron par un CURL asynchrone si CURL est present
 	if (function_exists("curl_init")){
 		//setting the curl parameters.
 		$ch = curl_init($url_cron);
