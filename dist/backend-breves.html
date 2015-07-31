@@ -34,8 +34,7 @@
 		[<dc:language>(#LANG)</dc:language>]
 		[(#REM)
 			Le bloc qui suit diffuse diffuse les mots-cles a la mode RSS
-		]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>
-<BOUCLE_mots_rss(MOTS){id_breve}>
+		]<BOUCLE_mots_rss(MOTS){id_breve}>
 		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
 
 		<description>[(#INTRODUCTION|texte_backend)]
