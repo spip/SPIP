@@ -242,10 +242,11 @@ debut_boite_info();
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=1><b>"._T('titre_site_numero')."</b></font>";
 	echo "<br><font face='Verdana,Arial,Sans,sans-serif' size=6><b>$id_syndic</b></font>\n";
 
+	echo "</center>";
+
 	voir_en_ligne ('site', $id_syndic, $statut);
 
 
-	echo "</center>";
 fin_boite_info();
 
 
