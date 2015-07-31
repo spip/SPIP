@@ -26,7 +26,7 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
 {
-	global $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $trad_err; 
+	global $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $debut, $id_article, $trad_err; 
 
 	global  $connect_id_auteur, $connect_statut, $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
@@ -70,9 +70,7 @@ function exec_articles_dist()
 
 	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
 
-	$flag_modifiable = ($flag_auteur OR $statut_rubrique);
-
-	$flag_editable = ($flag_modifiable OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", "", $id_rubrique);
 
@@ -146,7 +144,7 @@ $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
  echo "<div class='serif' align='$spip_lang_left'>";
 
  debut_cadre_couleur();
- dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $date_redac);
+ echo formulaire_dater($id_article, $flag_editable, $statut_article, $date, $date_redac);
  fin_cadre_couleur();
 
 //
@@ -165,8 +163,7 @@ debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide
 // complement de action/ajouter.php pour notifier la recherche d'auteur
 //
 
- $bouton_creer_auteur =  ($GLOBALS['connect_statut'] == '0minirezo' 
-			  AND $GLOBALS['connect_toutes_rubriques']);
+ $bouton_creer_auteur =  $GLOBALS['connect_toutes_rubriques'];
 
  if ($cherche_auteur) {
 
@@ -191,7 +188,15 @@ debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide
 // Afficher les auteurs
 //
 
-$les_auteurs = afficher_auteurs_articles($id_article, $flag_editable);
+	$les_auteurs = array();
+
+	$result = spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article");
+
+	while ($row = spip_fetch_array($result))
+		$les_auteurs[]= $row['id_auteur'];
+
+	if ($les_auteurs = join(',', $les_auteurs)) 
+		echo afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs);
 
 //
 // Ajouter un auteur
@@ -223,7 +228,7 @@ fin_cadre_enfonce(false);
 //
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  echo formulaire_mots('articles', $id_article, $cherche_mot, $flag_editable);
+  echo formulaire_mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable);
 }
 
 // Les langues
@@ -363,7 +368,7 @@ function boites_de_config_articles($id_article)
 	}
 
 	echo "<div id='poster-$id_article'>",
-	  formulaire_poster($id_article,"articles","&id_article=$id_article#poster-$id_article"),
+	  formulaire_poster($id_article,"articles","id_article=$id_article"),
 	  '</div>';
 
 	echo '<br />';
@@ -371,7 +376,7 @@ function boites_de_config_articles($id_article)
 	// Petitions
 
 	echo "<div id='petitionner-$id_article'>",
-	  formulaire_petitionner($id_article,"articles","&id_article=$id_article#petitionner-$id_article"),
+	  formulaire_petitionner($id_article,"articles","id_article=$id_article"),
 	  '</div>';
 
 	echo fin_block();
@@ -400,7 +405,7 @@ function boite_article_virtuel($id_article, $virtuel)
 	else
 		echo debut_block_invisible("redirection");
 	echo "<div id='virtualiser-$id_article'>";
-	echo formulaire_virtualiser($id_article, $virtuel, "articles", "&id_article=$id_article");
+	echo formulaire_virtualiser($id_article, $virtuel, "articles", "id_article=$id_article");
 	echo "</div>";
 	echo fin_block();
 	fin_cadre_relief();
@@ -516,10 +521,9 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 }
 
 
-// http://doc.spip.org/@dates_articles
-function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $date_redac)
+// http://doc.spip.org/@formulaire_dater
+function formulaire_dater($id_article, $flag_editable, $statut_article, $date, $date_redac)
 {
-
 	global $spip_lang_left, $spip_lang_right, $options;
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
@@ -543,11 +547,13 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
 
 	if ($statut_article == 'publie') {
 
-		echo redirige_action_auteur("dater", 
+		$js = "onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
+		$res = ajax_action_auteur("dater", 
 			"$id_article",
 			'articles',
 			"id_article=$id_article",
-			(bouton_block_invisible("datepub") .
+			(
+ bouton_block_invisible("datepub") .
  "<b><span class='verdana1'>".
  _T('texte_date_publication_article').
  '</span> ' . 
@@ -556,26 +562,26 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
  aide('artdate') . 
  debut_block_invisible("datepub") .
  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>" .
- afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true) .
- afficher_mois($mois, "name='mois' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true) .
- afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"") .
+ afficher_jour($jour, "name='jour' size='1' class='fondl' $js", true) .
+ afficher_mois($mois, "name='mois' size='1' class='fondl' $js", true) .
+ afficher_annee($annee, "name='annee' size='1' class='fondl' $js") .
  ' - ' .
- afficher_heure($heure, "name='heure' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"") .
- afficher_minute($minute, "name='minute' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"") .
+ afficher_heure($heure, "name='heure' size='1' class='fondl' $js") .
+ afficher_minute($minute, "name='minute' size='1' class='fondl' $js") .
  "<span class='visible_au_chargement' id='valider_date'>" .
- " &nbsp; <input type='submit' class='fondo' value='".
+ " &nbsp;\n<input type='submit' class='fondo' value='".
  _T('bouton_changer')."' />" .
  "</span>" .
  "</div>" .
- fin_block()) ,
-			"method='post'"); 
-	}
-	else {
-		echo "<div><b> <span class='verdana1'>"._T('texte_date_creation_article').'</span> ';
-		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+ fin_block()));
+	} else {
+		$res = "\n<div><b> <span class='verdana1'>"
+		. _T('texte_date_creation_article')
+		. "</span>\n"
+		. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 	}
 
-	$possedeDateRedac=($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00');
+	$possedeDateRedac= ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00');
 	if (($options == 'avancees' AND $GLOBALS['meta']["articles_redac"] != 'non')
 	OR $possedeDateRedac) {
 		if ($possedeDateRedac)
@@ -585,7 +591,8 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
 		else
 			$date_affichee = majuscules(_T('jour_non_connu_nc'));
 
-		echo redirige_action_auteur("dater", 
+		$js = "\"findObj_forcer('valider_date_redac').style.visibility='visible';\"";
+		$res .= ajax_action_auteur("dater", 
 			"$id_article",
 			'articles',
 			"id_article=$id_article",
@@ -604,56 +611,57 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
  '<tr><td align="$spip_lang_left">' .
  '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
  ($possedeDateRedac ? '' : ' checked="checked"') .
- " onClick=\"setvisibility('valider_date_prec', 'visible')\"" .
+ " onClick=$js" .
  ' /> <label for="avec_redac_on">'.
  _T('texte_date_publication_anterieure_nonaffichee').
  '</label>' .
  '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"' .
  (!$possedeDateRedac ? '' : ' checked="checked"') .
- " onClick=\"setvisibility('valider_date_prec', 'visible')\"" .
- ' /> <label for="avec_redac_off">'.
+ " onClick=$js /> <label for='avec_redac_off'>" .
  _T('bouton_radio_afficher').
  ' :</label> ' .
- afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
- afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
- "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>" .
-
+ afficher_jour($jour_redac, "name='jour_redac' class='fondl' onchange=$js", true) .
+ afficher_mois($mois_redac, "name='mois_redac' class='fondl' onchange=$js", true) .
+ "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onclick=$js />" .
  '<div align="center">' .
- afficher_heure($heure_redac, "name='heure_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
- afficher_minute($minute_redac, "name='minute_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true) .
+ afficher_heure($heure_redac, "name='heure_redac' class='fondl' onchange=$js", true) .
+ afficher_minute($minute_redac, "name='minute_redac' class='fondl' onchange=$js", true) .
  "</div>\n" .
 
  '</td><td align="$spip_lang_right">' .
- "<span class='visible_au_chargement' id='valider_date_prec'>" .
- '<input type="submit" name="Changer" class="fondo" value="'.
+ "<span class='visible_au_chargement' id='valider_date_redac'>" .
+ '<input type="submit" class="fondo" value="'.
  _T('bouton_changer').'" />' .
  "</span>" .
  '</td></tr>' .
  '</table>' .
  '</div>' .
- fin_block()),
-					    " method='post'");
+ fin_block()) #, " method='post'"
+);
 	}
   } else {
 
-	echo "<div style='text-align:center;'><b> <span class='verdana1'>",
-	  (($statut_article == 'publie') ?
-	   _T('texte_date_publication_article') :
-	   _T('texte_date_creation_article')),
-	  "</span> ",
-	  majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+	$res .= "<div style='text-align:center;'><b> <span class='verdana1'>"
+	. (($statut_article == 'publie')
+		? _T('texte_date_publication_article')
+		: _T('texte_date_creation_article'))
+	. "</span> "
+	.  majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 
-	if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') {
-	  echo "<div style='text-align:center;'><b> <span class='verdana1'>",
-	    _T('texte_date_publication_anterieure'),
-	    "</span> ",
-	    ' : ',
-	    majuscules(affdate($date_redac)),
-	    "</b>",
-	    aide('artdate_redac'),
-	    "</div>";
+	if ($possedeDateRedac) {
+		$res .= "<div style='text-align:center;'><b><span class='verdana1'>"
+		. _T('texte_date_publication_anterieure')
+		. "</span> "
+		. ' : '
+		. majuscules(affdate($date_redac))
+		. "</b>"
+		. aide('artdate_redac')
+		. "</div>";
 	}
- }
+  }
+  return ($flag_editable === 'ajax')
+    ? $res
+    : "<div id='dater-$id_article'>$res</div>";
 }
 
 
@@ -851,19 +859,15 @@ function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 }
 
 // http://doc.spip.org/@afficher_auteurs_articles
-function afficher_auteurs_articles($id_article, $flag_editable)
+function afficher_auteurs_articles($id_article, $flag_editable, $les_auteurs)
 {
 	global $connect_statut, $options,$connect_id_auteur;
 
-	$les_auteurs = array();
+	$table = array();
 
-	$result = spip_query("SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article GROUP BY auteurs.id_auteur ORDER BY auteurs.nom");
+	$result = spip_query("SELECT * FROM spip_auteurs AS A WHERE A.id_auteur IN ($les_auteurs) ORDER BY A.nom");
 
-	if (spip_num_rows($result)) {
-		echo "<div class='liste'>";
-		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
-		$table = array();
-		while ($row = spip_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 			$vals = array();
 			$id_auteur = $row["id_auteur"];
 			$nom_auteur = $row["nom"];
@@ -873,8 +877,6 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			$url_site_auteur = $row["url_site"];
 			$statut_auteur = $row["statut"];
 			if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
-			
-			$les_auteurs[] = $id_auteur;
 
 			$vals[] = bonhomme_statut($row);
 
@@ -903,18 +905,14 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			}
 		
 			$table[] = $vals;
-		}
+	}
 	
 	$largeurs = array('14', '', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial11', 'arial1');
-	echo afficher_liste($largeurs, $table, $styles);
 
-	
-	echo "</table></div>\n";
-
-	$les_auteurs = join(',', $les_auteurs);
-	}
-	return $les_auteurs ;
+	return "<div class='liste'><table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
+	. afficher_liste($largeurs, $table, $styles)
+	. "</table></div>\n";
 }
 
 
@@ -1120,8 +1118,8 @@ function formulaire_instituer_article($id_article, $statut, $script, $args)
   
   return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
 
-  /* pour plus tard
-  return ajax_action_auteur("instituer_article", $id_article, $res, $script, $args, $args);
+  /* quand la mise en page sera plus regroupee
+  return ajax_action_auteur("instituer_article", $id_article, $script, $args, $res, $args);
   */
 }
 
