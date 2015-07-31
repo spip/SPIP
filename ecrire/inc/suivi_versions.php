@@ -175,6 +175,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 //    - diff => seulement les modifs (suivi_revisions)
 //    - apercu => idem, mais en plus tres cout s'il y en a bcp
 //    - complet => tout, avec surlignage des modifications (articles_versions)
+// http://doc.spip.org/@revision_comparee
 function revision_comparee($id_article, $id_version, $format='diff', $id_diff=NULL) {
 	include_spip('inc/diff');
 
