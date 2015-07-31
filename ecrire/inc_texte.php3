@@ -76,17 +76,30 @@ function nettoyer_chapo($chapo){
 
 // points d'entree de pre- et post-traitement pour propre() et typo()
 function spip_avant_propre ($letexte) {
+	$letexte = avant_propre_ancres($letexte);
 	$letexte = extraire_multi($letexte);
-	return appliquer_fonction ("avant_propre", $letexte);
+
+	if (function_exists('avant_propre'))
+		$letexte = avant_propre($letexte);
+
+	return $letexte;
 }
 
 function spip_apres_propre ($letexte) {
-	return appliquer_fonction ("apres_propre", $letexte);
+	if (function_exists('apres_propre'))
+		$letexte = apres_propre($letexte);
+
+	return $letexte;
 }
 
 function spip_avant_typo ($letexte) {
 	$letexte = extraire_multi($letexte);
-	return appliquer_fonction ("avant_typo", $letexte);
+	$letexte = avant_typo_smallcaps($letexte);
+
+	if (function_exists('avant_typo'))
+		$letexte = avant_typo($letexte);
+
+	return $letexte;
 }
 
 function spip_apres_typo ($letexte) {
@@ -99,7 +112,10 @@ function spip_apres_typo ($letexte) {
 	if (!_DIR_RESTREINT AND $GLOBALS['revision_nbsp'])
 		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
 
-	return appliquer_fonction ("apres_typo", $letexte);
+	if (function_exists('apres_typo'))
+		$letexte = apres_typo($letexte);
+
+	return $letexte;
 }
 
 
@@ -248,7 +264,7 @@ function supprime_img($letexte) {
 }
 
 # il y a 3 couples de fonctions homonymes au prefixe _doublons pres
-# pour éviter à tous les appels de se trimbaler ce qui concerne les squelettes
+# pour eviter a tous les appels de se trimbaler ce qui concerne les squelettes
 
 function echappe_retour_doublon($letexte, $les_echap, $source, &$doublons)
 {
@@ -698,9 +714,6 @@ function traiter_raccourcis_generale($letexte) {
 
 	// Appeler la fonction de pre_traitement
 	$letexte = spip_avant_propre ($letexte);
-	// Appeler les fonctions complementaires
-	$letexte = appliquer_fonction_avant("propre", $letexte);
-
 
 	// Puce
 	if (!$lang_dir) {
@@ -918,9 +931,6 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = ereg_replace('</table>[[:space:]]*(</p>)?', '</table>', $letexte);
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<ul', "<ul", $letexte);
 	$letexte = ereg_replace('</ul>[[:space:]]*(</p>)?', '</ul>', $letexte);
-
-	// Appeler les fonctions complementaires
-	$letexte = appliquer_fonction_apres("propre", $letexte);
 
 	// Appeler la fonction de post-traitement
 	$letexte = spip_apres_propre ($letexte);

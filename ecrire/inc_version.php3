@@ -246,7 +246,7 @@ $convert_command = 'convert';
 
 // creation des vignettes avec pnmscale
 // Note: plus facile a installer par FTP,
-// voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2
+// voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2#43
 $pnmscale_command = 'pnmscale';
 
 // faut-il passer les connexions MySQL en mode debug ?
@@ -336,8 +336,7 @@ define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
 define_once('_DIR_PREFIX2', _DIR_RESTREINT);
 
-// les repertoires des logos, des pieces rapportees, du CACHE et des sessions
-
+// les repertoires des logos, des documents joints, du CACHE et des sessions
 define_once('_DIR_IMG', _DIR_PREFIX1 ."IMG/");
 define_once('_DIR_DOC', _DIR_PREFIX1 ."IMG/");
 define_once('_DIR_CACHE', _DIR_PREFIX1 ."CACHE/");
@@ -345,11 +344,6 @@ define_once('_DIR_CACHE', _DIR_PREFIX1 ."CACHE/");
 define_once('_DIR_SESSIONS', _DIR_PREFIX2 . "data/");
 define_once('_DIR_TRANSFERT', _DIR_PREFIX2 . "upload/");
 
-
-## c'est tres bete de charger ce fichier a chaque hit sur le serveur !
-if (@file_exists(_DIR_SESSIONS . 'inc_plugins.php3')) {
-	include(_DIR_SESSIONS . 'inc_plugins.php3');
-}
 
 // exemples de redefinition possible, 
 // SOUS RESERVE QUE php.ini N'AIT PAS pas openbasedir=. !!!!!!
@@ -568,61 +562,6 @@ function spip_query($query) {
 
 	// Faire la requete
 	return spip_query_db($query);
-}
-
-function appliquer_fonction($lafonction, $entree) {
-
-	$sortie = $entree;
-	
-	if (isset($GLOBALS["fonctions"]["$lafonction"]["avant"])) {
-		foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
-			if (@function_exists($value)) $sortie = $value($sortie);
-		}
-	}
-	
-	if (@function_exists($lafonction)) $sortie = $lafonction($sortie);
-
-	if (isset($GLOBALS["fonctions"]["$lafonction"]["apres"])) {
-		foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
-			if (@function_exists($value)) $sortie = $value($sortie);
-		}
-	}	
-	return $sortie;
-}
-
-function appliquer_fonction_avant($lafonction, $entree) {
-	$sortie = $entree;
-	
-	if (isset($GLOBALS["fonctions"]["$lafonction"]["avant"])) {
-		foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
-			if (@function_exists($value)) $sortie = $value($sortie);
-		}
-	}
-			
-	return $sortie;
-}
-
-function appliquer_fonction_apres($lafonction, $entree) {
-
-	$sortie = $entree;
-	
-	if (isset($GLOBALS["fonctions"]["$lafonction"]["apres"])) {
-		foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
-			if (@function_exists($value)) $sortie = $value($sortie);
-		}
-	}	
-		
-	return $sortie;
-}
-
-
-// Destine a "completer" une fonction
-function completer_fonction($fonction_base, $fonction_avant="", $fonction_apres="") {
-	if (strlen($fonction_avant) > 0) 
-		$GLOBALS["fonctions"]["$fonction_base"]["avant"][] = $fonction_avant;
-		
-	if (strlen($fonction_apres) > 0) 
-		$GLOBALS["fonctions"]["$fonction_base"]["apres"][] = $fonction_apres;	
 }
 
 

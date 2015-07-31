@@ -739,6 +739,23 @@ function ajoute_popup_multi($langue_demandee, $trads, $texte) {
 	return $texte;
 }
 
+// Raccourci ancre [#ancre<-]
+function avant_propre_ancres($texte) {
+	$regexp = "|\[#?([^][]*)<-\]|";
+	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs)
+		$texte = str_replace($regs[0],
+		'<a name="'.entites_html($regs[1]).'"></a>', $texte);
+	return $texte;
+}
+
+// Raccourci typographique <sc></sc>
+function avant_typo_smallcaps($texte) {
+	$texte = str_replace("<sc>", "<span style=\"font-variant: small-caps\">", $texte);
+	$texte = str_replace("</sc>", "</span>", $texte);
+	
+	return $texte;
+}
 
 function extraire_attribut($balise, $attribut) {
 # la mise en facteur ne marche pas....

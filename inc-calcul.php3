@@ -31,9 +31,7 @@ include_ecrire("inc_forum.php3");
 include_ecrire("inc_debug_sql.php3");
 include_local("inc-calcul-outils.php3");
 
-// Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
-// le repertoire du source des squelettes (les pseudo-html avec BOUCLE...)
-
+// NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 if ($f = find_in_path("mes_fonctions.php3"))
 	include_local ($f);
 

@@ -46,19 +46,18 @@ include_ecrire('inc_serialbase.php3');
 // Calculer un <INCLURE()>
 //
 function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
-	global $dossier_squelettes;
 
 	$l = array();
 	if ($params) {
 		foreach($params as $var => $val) {
 			if ($val) {
-			  $val = trim($val);
-			  $val = ereg_replace('^["\'](.*)["\']$', "\\1",$val);
-			  $l[] = "\'$var\' => \'" .
-				 addslashes(calculer_param_dynamique($val,
-								     $boucles,
-								     $idb)) .
-				  "\'";
+				$val = trim($val);
+				$val = ereg_replace('^["\'](.*)["\']$', "\\1",$val);
+				$l[] = "\'$var\' => \'" .
+					addslashes(calculer_param_dynamique($val,
+						$boucles,
+						$idb)) .
+					"\'";
 			}
 			else {
 			// Cas de la langue : passer $spip_lang
