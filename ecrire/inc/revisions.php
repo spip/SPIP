@@ -534,6 +534,7 @@ function propre_diff($texte) {
 
 	$span_diff = array();
 	if (preg_match_all(',<(/)?(span|div) (class|rem)="diff-[^>]*>,', $texte, $regs, PREG_SET_ORDER)) {
+		$regs = array_slice($regs,0,500); #limiter la casse s'il y en a trop
 		foreach ($regs as $c => $reg) {
 			$texte = str_replace($reg[0], '@@@SPIP_DIFF'.$c.'@@@', $texte);
 		}
