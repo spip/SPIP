@@ -151,11 +151,13 @@ function auteurs_interventions($auteur) {
 	if (!$id_auteur = intval($auteur['id_auteur']))
 		return;
 	$statut = $auteur['statut'];
-
+	
+	global $connect_id_auteur;
+	
 	include_spip('inc/message_select');
 
 	if (autoriser('voir', 'article')) $aff_art = array('prepa','prop','publie','refuse'); 
-	else if ($GLOBALS['auteur_session']['id_auteur'] == $id_auteur) $aff_art = array('prepa','prop','publie');
+	else if ($connect_id_auteur == $id_auteur) $aff_art = array('prepa','prop','publie');
 	else $aff_art = array('prop','publie'); 
 
 	$lister_objets = charger_fonction('lister_objets','inc');
@@ -163,7 +165,7 @@ function auteurs_interventions($auteur) {
 
 	// Messages de l'auteur et discussions en cours
 	if ($GLOBALS['meta']['messagerie_agenda'] != 'non'
-	AND $id_auteur != $GLOBALS['auteur_session']['id_auteur']
+	AND $id_auteur != $connect_id_auteur
 	AND autoriser('ecrire', '', '', $auteur)
 	) {
 		echo "<div class='nettoyeur'>&nbsp;</div>";
