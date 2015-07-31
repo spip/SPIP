@@ -107,6 +107,22 @@ function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	return $retour ? $retour : ' ';
 }
 
+# retourne le champ 'accepter_forum' d'un article
+// http://doc.spip.org/@quete_accepter_forum
+function quete_accepter_forum($id_article) {
+	// si la fonction est appelee en dehors d'une boucle
+	// article (forum de breves), $id_article est nul
+	// mais il faut neanmoins accepter l'affichage du forum
+	// d'ou le 0=>'' (et pas 0=>'non').
+	static $cache = array(0 => '');
+	
+	$id_article = intval($id_article);
+
+	if (isset($cache[$id_article]))	return $cache[$id_article];
+
+	return $cache[$id_article] = sql_getfetsel('accepter_forum','spip_articles',"id_article=$id_article");
+}
+
 // recuperer une meta sur un site distant (en local il y a plus simple)
 // http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {
