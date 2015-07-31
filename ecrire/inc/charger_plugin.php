@@ -170,8 +170,14 @@ function interface_plugins_auto($retour) {
 			jQuery('#bouton_charger_plugin').show();
 			});
 		});
+		// petit selecteur texte
+		jQuery(\"<form><input type='text' /></form>\")
+		.keyup(function(){
+			jQuery('div.desc_plug').hide();
+			jQuery('div.desc_plug:contains(\"' + jQuery('input', this).val() + '\")').show();
+		})
+		.insertBefore('#liste_plug');
 		");
-			
 	}
 	return $res;
 }
