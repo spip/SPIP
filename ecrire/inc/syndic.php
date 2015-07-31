@@ -58,16 +58,14 @@ function analyser_backend($rss, $url_syndic='') {
 		$les_auteurs_du_site = join(', ', array_unique($les_auteurs_du_site));
 	} else
 		$les_auteurs_du_site = '';
+	if ((preg_match(',<([^>]*xml:)?lang(uage)?'.'>([^<>]+)<,i',
+	$header, $match) AND $l = $match[3])
+	OR ($l = extraire_attribut(extraire_balise($header, 'feed'), 'xml:lang'))
+	)
+		$langue_du_site = $l;
 
-	if (preg_match(',<([^>]*xml:)?lang(uage)?'.'>([^<>]+)<,i',
-	$header, $match))
-		$langue_du_site = $match[3];
-
-	// Attention en PCRE 6.7 preg_match_all casse sur un backend avec de gros <content:encoded>
-	$items = preg_split(',<(item|entry)\b.*>,Uims', $rss);
-	array_shift($items);
-	foreach ($items as $k=>$item)
-		$items[$k] = preg_replace(',</(item|entry)\b.*>.*$,UimsS', '', $item);
+	// Recuperer les blocs item et entry
+	$items = array_merge(extraire_balises($rss, 'item'), extraire_balises($rss, 'entry'));
 
 	//
 	// Analyser chaque <item>...</item> du backend et le transformer en tableau
@@ -354,9 +352,9 @@ function ajouter_tags($matches, $item) {
 		}
 		else if (
 			// cas atom1, a faire apres flickr
-			$scheme = extraire_attribut($match[0], 'scheme')
-			AND $term = extraire_attribut($match[0], 'term')
+			$term = extraire_attribut($match[0], 'term')
 		) {
+				$scheme = extraire_attribut($match[0], 'scheme');
 				$url = suivre_lien($scheme,$term);
 		}
 		else {
