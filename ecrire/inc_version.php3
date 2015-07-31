@@ -1198,6 +1198,8 @@ function spip_timer($t='rien') {
 // Une fonction service pour tout le monde
 //
 function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
+	if (!$id_rubrique)
+		return '0';
 	if (!$exclure_feuille)
 		$hierarchie = ",$id_rubrique";
 
