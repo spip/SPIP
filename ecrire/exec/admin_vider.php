@@ -31,7 +31,7 @@ $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('onglet_vider_cache'), "configuration", "cache");
 
 
-echo "<br><br><br>";
+echo "<br /><br /><br />";
 gros_titre(_T('titre_admin_vider'));
 // barre_onglets("administration", "vider");
 
@@ -86,28 +86,28 @@ if ($quota_cache) {
    generer_action_auteur('purger',
 	'cache',
 	generer_url_ecrire("admin_vider"),
-	"\n<p><div align='right'><input class='fondo' type='submit' value=\"" .
+	"\n<div align='right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
-			 "\">",
-	" method='POST'");
+			 "\" /></div>",
+	" method='post'");
  fin_cadre_relief();
 
 
  debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
 
  echo "<div style='text-align: center;'>
-<iframe width='530px' height='65px' src='",
-   generer_action_auteur('purger','taille_vignettes') . "&lang=$spip_lang",
+<iframe width='530px' height='65px'\nsrc='",
+   generer_action_auteur('purger','taille_vignettes') . "&amp;lang=$spip_lang",
    "'></iframe>
 </div>";
 
  echo generer_action_auteur('purger',
 	'vignettes',
 	generer_url_ecrire("admin_vider"),
-	"\n<p><div align='right'><input class='fondo' type='submit' value=\"" .
+	"\n<div align='right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
-			 "\">",
-	" method='POST'");
+			 "\" /></div>",
+	" method='post'");
 
 fin_cadre_relief();
 
@@ -130,14 +130,14 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 			echo _T('texte_tables_indexation_vides');
 	
 	}
-	
+	echo '</p>';
 	echo generer_action_auteur('purger',
 		'index',
 		generer_url_ecrire("admin_vider"),
-		"\n<p><div align='right'><input class='fondo' type='submit' value=\"" .
+		"\n<div align='right'><input class='fondo' type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_effacer_index')) .
-			 "\">",
-		" method='POST'");
+			 "\" /></div>",
+		" method='post'");
 
 fin_cadre_trait_couleur();
 

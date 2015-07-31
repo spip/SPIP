@@ -232,9 +232,19 @@ function choix_couleur() {
 	global $couleurs_spip;
 	$res = '';
 	if ($couleurs_spip) {
+		$evt = '
+onmouseover="changestyle(\'bandeauinterface\');"
+onfocus="changestyle(\'bandeauinterface\');"
+onblur="changestyle(\'bandeauinterface\');"';
+
 		foreach ($couleurs_spip as $key => $val) {
-			$res .= "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif",  _L('couleur').$key, "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\" onfocus=\"changestyle('bandeauinterface');\" onblur=\"changestyle('bandeauinterface');\""). "</a>";
+			$res .= "<a href=\""
+			. parametre_url(self(), 'set_couleur', $key)
+			. "\"$evt>"
+			. http_img_pack("rien.gif",
+					_L('couleur') . $key,
+					"width='8' height='8' style='margin: 1px; background-color: "	. $val['couleur_claire'] . ";'")
+			. "</a>";
 		}
 	}
 	return $res;
