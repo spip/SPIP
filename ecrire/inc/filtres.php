@@ -2411,9 +2411,10 @@ function compacte_head_css($flux) {
 //</IfModule>
 // http://doc.spip.org/@compacte_head
 function compacte_head($flux){
-	if ($GLOBALS['meta']['auto_compress_css'] == 'oui')
+	// dans l'espace prive on compacte toujours, c'est concu pour
+	if ($GLOBALS['meta']['auto_compress_css'] == 'oui' OR test_espace_prive())
 		$flux = compacte_head_css($flux);
-	if ($GLOBALS['meta']['auto_compress_js'] == 'oui')
+	if ($GLOBALS['meta']['auto_compress_js'] == 'oui' OR test_espace_prive())
 		$flux = compacte_head_js($flux);
 	return $flux;
 }
