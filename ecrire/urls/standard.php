@@ -59,6 +59,10 @@ function generer_url_document($id_document) {
 function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
+	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
+	if ($GLOBALS['profondeur_url']>0){
+		$fond = '404';
+	}
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
@@ -73,22 +77,18 @@ function recuperer_parametres_url(&$fond, $url) {
 		(isset($_ENV['url_propre']) ?
 			$_ENV['url_propre'] :
 			'');
-	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls)$,', $fond)) {
-		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
-			'$1', $url_propre));
-	
-		include_spip('base/abstract_sql'); // chercher dans la table des URLS
-
-		$r = sql_fetsel("id_objet,type", "spip_urls", "url=" . sql_quote($url_propre));
-		if ($r) {
-			$fond = ($r['type'] == 'syndic') ?  'site' : $r['type'];
-			$contexte[id_table_objet($fond)] = $r['id_objet'];
-		}
+	if ($url_propre AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls|404)$,', $fond)) {
+		if ($GLOBALS['profondeur_url']<=0)
+			$urls_anciennes = charger_fonction('propres','urls');
+		else
+			$urls_anciennes = charger_fonction('arbo','urls');
+		$urls_anciennes($url_propre,$fond);
 	}
 	/* Fin du bloc compatibilite url-propres */
 
 	/* Compatibilite urls-page */
-	else if (preg_match(
+	else if ($GLOBALS['profondeur_url']<=0
+	AND preg_match(
 	',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
 	$url, $r)) {
 		$fond = $r[1];

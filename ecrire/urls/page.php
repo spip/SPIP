@@ -55,6 +55,10 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 		return _generer_url_page($entite, $i, $args, $ancre);
 
 	$url = $i;
+	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
+	if ($GLOBALS['profondeur_url']>0){
+		$entite = '404';
+	}
 
 	// Ce bloc gere les urls page et la compatibilite avec les "urls standard"
 	if ($entite=='sommaire'){
@@ -101,19 +105,12 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	if (
 		 (isset($_SERVER['REDIRECT_url_propre']) AND $url_propre = $_SERVER['REDIRECT_url_propre'])
 	OR (isset($_ENV['url_propre']) AND $url_propre = $_ENV['url_propre'])
-	AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls)$,', $entite)) {
-		$url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
-			'$1', $url_propre));
-		$r = sql_fetsel("id_objet,type", "spip_urls", "url=" . _q($url_propre));
-		if ($r) {
-			$entite = ($r['type'] == 'syndic') ?  'site' : $r['type'];
-			$contexte[id_table_objet($entite)] = $r['id_objet'];
-		}
-		// vraiment on n'a rien trouve
-		if ($entite == 'type_urls') {
-			$entite = '404';
-			$contexte['erreur'] = '';
-		}
+	AND preg_match(',^(article|breve|rubrique|mot|auteur|site|type_urls|404)$,', $entite)) {
+		if ($GLOBALS['profondeur_url']<=0)
+			$urls_anciennes = charger_fonction('propres','urls');
+		else
+			$urls_anciennes = charger_fonction('arbo','urls');
+		$urls_anciennes($url_propre,$entite);
 	}
 	/* Fin du bloc compatibilite url-propres */
 }

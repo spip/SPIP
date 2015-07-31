@@ -410,11 +410,19 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 	if (is_numeric($i))
 		return _generer_url_arbo($entite, $i, $args, $ancre);
 
+	// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
+	if ($GLOBALS['profondeur_url']>0){
+		$entite = 'type_urls';
+	}
+
 	$url = $i;
 	$id_objet = $type = 0;
 
 	// Migration depuis anciennes URLs ?
-	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+	if (
+		// traiter les injections du type domaine.org/spip.php/cestnimportequoi/ou/encore/plus/rubrique23
+	  $GLOBALS['profondeur_url']<=0
+	  AND $_SERVER['REQUEST_METHOD'] != 'POST') {
 		if (preg_match(
 		',(^|/)(article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+(\.html)?)'
 		.'([?&].*)?$,', $url, $regs)
@@ -452,7 +460,12 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 	elseif (isset($_ENV['url_propre']))
 		$url_propre = $_ENV['url_propre'];
 	else {
-		$url = substr($url, strrpos($url, '/') + 1);
+		// ne prendre que le segment d'url qui correspond, en fonction de la profondeur calculee
+		$url = ltrim($url,'/');
+		$url = explode('/',$url);
+		while (count($url)>$GLOBALS['profondeur_url']+1)
+			array_shift($url);
+		$url = implode('/',$url);
 		$url_propre = preg_replace(',[?].*,', '', $url);
 	}
 
@@ -516,6 +529,11 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 		}
 	}
 
+	// gerer le retour depuis des urls propres
+	if ($entite=='type_urls' AND $GLOBALS['profondeur_url']<=0){
+		$urls_anciennes = charger_fonction('propres','urls');
+		$urls_anciennes($url_propre,$entite);
+	}
 	if ($entite=='type_urls') {
 		if ($type)
 			$entite =  ($type == 'syndic') ?  'site' : $type;
