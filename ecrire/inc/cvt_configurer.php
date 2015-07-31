@@ -30,17 +30,25 @@ include_spip('inc/config');
  * @return array
  */
 function cvtconf_formulaire_charger($flux){
-	if ($form = $flux['args']['form']
-	  AND strncmp($form,'configurer_',11)==0 // un #FORMULAIRE_CONFIGURER_XXX
-		AND !charger_fonction("charger","formulaires/$form/",true) // sans fonction charger()
-		) {
-
-		$flux['data'] = cvtconf_formulaires_configurer_recense($form);
-		$flux['data']['editable'] = true;
-		if (_request('var_mode')=='configurer' AND autoriser('webmestre')){
-			if (!_AJAX) var_dump($flux['data']);
-			// reinjecter pour la trace au traitement
-			$flux['data']['_hidden'] = "<input type='hidden' name='var_mode' value='configurer' />";
+	if (
+		$form = $flux['args']['form']
+		and strncmp($form,'configurer_',11)==0 // un #FORMULAIRE_CONFIGURER_XXX
+	) {
+		// Pour tous les formulaires CONFIGURER, ayant une fonction charger ou pas, on teste si autorisé
+		include_spip('inc/autoriser');
+		if (!autoriser('configurer', "_$form")) {
+			return false;
+		}
+		
+		// S'il n'y a pas de fonction charger(), on génère un contexte automatiquement
+		if (!charger_fonction("charger","formulaires/$form/",true)) {
+			$flux['data'] = cvtconf_formulaires_configurer_recense($form);
+			$flux['data']['editable'] = true;
+			if (_request('var_mode')=='configurer' AND autoriser('webmestre')){
+				if (!_AJAX) var_dump($flux['data']);
+				// reinjecter pour la trace au traitement
+				$flux['data']['_hidden'] = "<input type='hidden' name='var_mode' value='configurer' />";
+			}
 		}
 	}
 	return $flux;
