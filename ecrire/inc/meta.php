@@ -32,9 +32,10 @@ function lire_metas() {
 }
 
 function ecrire_meta($nom, $valeur) {
-	$GLOBALS['meta'][$nom] = $valeur; 
-
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . spip_abstract_quote($valeur) . " )");
+	if (strlen($nom)){
+		$GLOBALS['meta'][$nom] = $valeur; 
+		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', " . spip_abstract_quote($valeur) . " )");
+	}
 }
 
 function effacer_meta($nom) {
