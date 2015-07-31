@@ -72,8 +72,9 @@ img, .spip_logos { margin: 0; padding: 0; border: none; }
 span.spip_documents_center { display:block; margin-top:1em; }
 .spip_documents_left { float: left; margin-right: 15px; margin-bottom: 5px; }
 .spip_documents_right { float: right; margin-left: 15px; margin-bottom: 5px; }
-.spip_doc_titre { font-weight: bold; font-size: 0.8em; }
-.spip_doc_descriptif { clear: both; font-size: 0.8em; }
+.spip_doc_titre { font-weight: bold; font-size: 0.8em; margin-left:auto; margin-right:auto;}
+.spip_doc_descriptif { clear: both; font-size: 0.8em; margin-left:auto; margin-right:auto;
+}
 
 /* Images typographiques (via image_typo), URL a revoir... */
 .format_png { behavior: url(win_png.htc); }
