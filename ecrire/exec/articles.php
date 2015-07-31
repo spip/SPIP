@@ -359,7 +359,10 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 // http://doc.spip.org/@afficher_corps_articles
 function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
-  global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;
+  global $champs_extra, $les_notes, $dir_lang;
+
+// HACK TEMPORAIRE POUR TESTER les crayons dans l'espace prive
+global $id_article;
 
 	$res = '';
 
@@ -372,27 +375,25 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		. '</div>'
 		.  fin_boite_info(true);
 	} else {
-		$revision_nbsp = $activer_revision_nbsp;
 
 		if (strlen($chapo) > 0) {
-			$res .= "\n<div $dir_lang style='font-weight: bold;' class='spip_small'>"
+			$res .= "\n<div $dir_lang style='font-weight: bold;' class='spip_small crayon article-chapo-$id_article'>"
 			. propre($chapo)
 			. "</div>";
 		}
 
-		$res .= "\n<div $dir_lang>"
+		$res .= "\n<div $dir_lang class='crayon article-texte-$id_article'>"
 		.  propre($texte)
 		.  "<br style='clear: both;' />"
 		.  "</div>";
 
 		if ($ps) {
 			$res .= debut_cadre_enfonce('',true)
-			. "\n<div $dir_lang style='font-size: small;' class='verdana1'>"
+			. "\n<div $dir_lang style='font-size: small;' class='verdana1 crayon article-ps-$id_article'>"
 			. justifier("<b>"._T('info_ps')."</b> ".propre($ps))
 			. "</div>"
 			. fin_cadre_enfonce(true);
 		}
-		$revision_nbsp = false;
 
 		if ($les_notes) {
 			$res .= debut_cadre_relief('',true)
