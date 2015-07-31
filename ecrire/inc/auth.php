@@ -53,6 +53,8 @@ function acces_statut($id_auteur, $statut, $bio)
 	instituer_auteur($id_auteur,array('statut'=> $s));
 	include_spip('inc/modifier');
 	revision_auteur($id_auteur, array('bio'=>''));
+	include_spip('inc/session');
+	session_set('statut',$s);
 	return $s;
 }
 
@@ -76,7 +78,7 @@ function inc_auth_dist() {
 	// Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
 	// C'est soit parce que la base est inutilisable,
 	// soit parce que la table des auteurs a changee (restauration etc)
-	// Pas la peine d'insister. 
+	// Pas la peine d'insister.
 	// Renvoyer le nom fautif et une URL de remise a zero
 
 	if (spip_connect())
@@ -99,8 +101,8 @@ function auth_echec($raison)
 	// pas authentifie. Pourquoi ?
 	if (is_string($raison)) {
 		// redirection vers une page d'authentification
-		// on ne revient pas de cette fonction 
-		// sauf si pb de header 
+		// on ne revient pas de cette fonction
+		// sauf si pb de header
 		$raison = redirige_formulaire($raison);
 	} elseif (is_int($raison)) {
 		// erreur SQL a afficher
@@ -112,7 +114,7 @@ function auth_echec($raison)
 	} else {
 		// auteur en fin de droits ...
 		$h = $raison['site'];
-		$raison = minipres(_T('avis_erreur_connexion'), 
+		$raison = minipres(_T('avis_erreur_connexion'),
 				"<br /><br /><p>"
 				. _T('texte_inc_auth_1',
 				array('auth_login' => $raison['login']))
@@ -147,7 +149,7 @@ function auth_mode()
 	// Session valide en cours ?
 	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
-		if ($id_auteur = $session() 
+		if ($id_auteur = $session()
 		OR $id_auteur===0 // reprise sur restauration
 		) {
 			$auth_can_disconnect = true;
@@ -202,7 +204,7 @@ function auth_mode()
 	return sql_fetsel("*, en_ligne AS quand", "spip_auteurs", "$where AND statut!='5poubelle'");
 }
 
-// 
+//
 // Init des globales pour tout l'espace prive si visiteur connu
 // Le tableau global visiteur_session contient toutes les infos pertinentes et
 // a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
@@ -218,7 +220,7 @@ function auth_init_droits($row)
 	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
-	
+
 	$GLOBALS['visiteur_session'] = array_merge((array)$GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
 	$GLOBALS['visiteur_session']['prefs'] =
@@ -265,7 +267,7 @@ function auth_init_droits($row)
 		if (is_array($GLOBALS['visiteur_session']['restreint']))
 			$connect_id_rubrique = $GLOBALS['visiteur_session']['restreint'];
 		$connect_toutes_rubriques = !$connect_id_rubrique;
-	} 
+	}
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale
 
 	return ''; // i.e. pas de pb.
@@ -299,7 +301,7 @@ function auth_trace($row, $date=null)
 
 	if (is_null($date))
 		$date = date('Y-m-d H:i:s');
-	
+
 	if (abs(strtotime($date) - $connect_quand)  >= 60) {
 		sql_updateq("spip_auteurs", array("en_ligne" => $date), "id_auteur=" .$row['id_auteur']);
 	}
@@ -600,7 +602,7 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
 	$args = func_get_args();
 	if ($auth_methode===true OR (isset($options['all']) AND $options['all']==true)){
 		$options['all'] = true; // ajouter une option all=>true pour chaque auth
-		$args = array(true, $id_auteur, $champs, $options, $serveur); 
+		$args = array(true, $id_auteur, $champs, $options, $serveur);
 		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 			array_shift($args);
 			array_unshift($args,$methode);
@@ -658,7 +660,7 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	if ($url) {
 		echo "[<a href='", generer_url_action('cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
 	}
-	
+
 	if ($lien)
 		echo " [<a href='$ici'>"._T('login_espace_prive')."</a>]";
 	exit;
