@@ -139,8 +139,8 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	// (compilation automatique au besoin) et calculer
 
 	if ($skel) {
-		if ($fonc = charger_squelette($skel));
-			$page = $fonc(array('cache' => $cache), array($contexte));
+		if ($fonc = charger_squelette($skel))
+		  $page = $fonc(array('cache' => $cache), array($contexte));
 
 			// Passer la main au debuggueur)
 		if ($GLOBALS['var_debug'] AND 
