@@ -314,7 +314,8 @@ function spip_mysql_selectdb($db) {
 
 // http://doc.spip.org/@spip_mysql_listdbs
 function spip_mysql_listdbs($serveur='',$requeter=true) {
-	return @mysql_list_dbs();
+	$res = spip_mysql_query("SHOW DATABASES");
+	return $res;
 }
 
 // Fonction de creation d'une table SQL nommee $nom
