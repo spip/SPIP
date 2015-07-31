@@ -1123,7 +1123,12 @@ function spip_desinfecte(&$t) {
 function verifier_visiteur() {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
 // que les constantes principales soient initialisees
-	spip_initialisation_parametree(_DIR_CONFIG, _DIR_IMG, _DIR_TMP_IMG, _DIR_TMP) ;
+	spip_initialisation_parametree(
+	       (_DIR_RACINE  . _DIRNAME_PERMANENT_INACCESSIBLE),
+	       (_DIR_RACINE  . _DIRNAME_PERMANENT_ACCESSIBLE),
+	       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_INACCESSIBLE),
+	       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_ACCESSIBLE)
+	       );
 
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {

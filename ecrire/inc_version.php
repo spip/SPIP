@@ -35,17 +35,18 @@ define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 $profondeur_url = _DIR_RESTREINT ? 0 : 1;
 
-# LES 4 repertoires que les scripts lances par httpd doivent pouvoir modifier
+# Le nom des 4 repertoires modifiables par les scripts lances par httpd
 # Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
-# mais on peut les mettre ailleurs et changer completement leur nom
+# mais on peut les mettre ailleurs et changer completement les noms
+
 # le nom du repertoire des fichiers Permanents Inaccessibles par http://
-define('_DIR_CONFIG', _DIR_RACINE . "config/");
+define('_DIRNAME_PERMANENT_INACCESSIBLE', "config/");
 # le nom du repertoire des fichiers Permanents Accessibles par http://
-define('_DIR_IMG', _DIR_RACINE . "IMG/");
-# le nom du repertoire des fichiers Temporaires Accessibles par http://
-define('_DIR_TMP_IMG', _DIR_RACINE . "tmp_img/");
+define('_DIRNAME_PERMANENT_ACCESSIBLE', "IMG/");
 # le nom du repertoire des fichiers Temporaires Inaccessibles par http://
-define('_DIR_TMP', _DIR_RACINE . "tmp/");
+define('_DIRNAME_TEMPORAIRE_INACCESSIBLE', "tmp/");
+# le nom du repertoire des fichiers Temporaires Accessibles par http://
+define('_DIRNAME_TEMPORAIRE_ACCESSIBLE', "tmp_img/");
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -284,20 +285,22 @@ function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
 	define('_DIR_LOGOS', $pa);
 	define('_DIR_IMG_ICONES', $pa . "icones/");
 
-	define('_DIR_TeX', _DIR_TMP . "cache-TeX/");
+	define('_DIR_DUMP', $ti . "data/");
+	define('_DIR_SESSIONS', $ti . "sessions/");
+	define('_DIR_TRANSFERT', $ti . "upload/");
+	define('_DIR_CACHE', $ti . "CACHE/");
+	define('_DIR_SKELS', $ti . "CACHE/skel/");
+	define('_DIR_TMP', $ti);
 
-	define('_DIR_DUMP', $ta . "data/");
-	define('_DIR_SESSIONS', $ta . "sessions/");
-	define('_DIR_TRANSFERT', $ta . "upload/");
-	define('_DIR_CACHE', $ta . "CACHE/");
-	define('_DIR_SKELS', $ta . "CACHE/skel/");
+	define('_FILE_CRON_LOCK', $ti . 'cron.lock');
+	define('_FILE_MYSQL_OUT', $ti . 'mysql_out');
+	define('_FILE_GARBAGE', $ti . '.poubelle');
+	define('_FILE_META', $ti . 'meta_cache.txt');
 
-	// les fichiers qu'on y met, entre autres
-	define('_FILE_CRON_LOCK', _DIR_TMP . 'cron.lock');
-	define('_FILE_MYSQL_OUT', _DIR_TMP . 'mysql_out');
-	define('_FILE_GARBAGE', _DIR_TMP . '.poubelle');
-	define('_FILE_META', _DIR_TMP . 'meta_cache.txt');
+	define('_DIR_TMP_IMG', $ta);
+	define('_DIR_TeX', $ta . "cache-TeX/");
 
+	define('_DIR_CONFIG', $pi);
 
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS_ANTE_192', (_DIR_RESTREINT . "inc_connect"));
@@ -322,7 +325,7 @@ if (defined('_FILE_OPTIONS')) {
 	}
 } else {
 	if (@file_exists(_DIR_PI . 'mes_options.php')) {
-		define('_FILE_OPTIONS',_DIR_CONFIG . 'mes_options.php');
+		define('_FILE_OPTIONS', _DIRNAME_PERMANENT_INACCESSIBLE . 'mes_options.php');
 		include_once(_FILE_OPTIONS);
 	}
 	else if (@file_exists(_DIR_RESTREINT . 'mes_options.php')) {
@@ -342,7 +345,12 @@ if (defined('_FILE_OPTIONS')) {
 // 
 // mais cette fonction a peut-etre deja ete appelee par mes_options
 
-spip_initialisation_parametree(_DIR_CONFIG, _DIR_IMG, _DIR_TMP_IMG, _DIR_TMP);
+spip_initialisation_parametree(
+       (_DIR_RACINE  . _DIRNAME_PERMANENT_INACCESSIBLE),
+       (_DIR_RACINE  . _DIRNAME_PERMANENT_ACCESSIBLE),
+       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_INACCESSIBLE),
+       (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_ACCESSIBLE)
+       );
 
 //
 // Definitions standards (charge aussi inc/flock)
