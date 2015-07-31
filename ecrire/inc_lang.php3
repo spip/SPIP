@@ -318,7 +318,7 @@ function init_codes_langues() {
 	'su' => "Sundanese",
 	'sv' => "svenska",
 	'sw' => "Kiswahili",
-	'ta' => "&#2980;&#2990;&#3007;&#2996;&#3021; - tamil",
+	'ta' => "&#2980;&#2990;&#3007;&#2996;&#3021;", // Tamil
 	'te' => "Telugu",
 	'tg' => "Tajik",
 	'th' => "&#3652;&#3607;&#3618;",

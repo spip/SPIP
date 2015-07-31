@@ -245,10 +245,13 @@ ecrire/img_pack/warning-24.gif -text
 ecrire/img_pack/warning.gif -text
 ecrire/img_pack/xml.gif -text
 ecrire/lang/ecrire_br.php3 -text
+ecrire/lang/ecrire_cs.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_br.php3 -text
+ecrire/lang/public_cs.php3 -text
 ecrire/lang/public_ru.php3 -text
 ecrire/lang/spip_br.php3 -text
+ecrire/lang/spip_cs.php3 -text
 ecrire/lang/spip_ru.php3 -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
