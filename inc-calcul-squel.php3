@@ -391,16 +391,16 @@ function parser_boucle($texte, $id_parent) {
 							$col_table = '';
 						}
 						else if ($col == 'age') {
-							$col = "(LEAST((TO_DAYS(now())-TO_DAYS($col_date)),(DAYOFMONTH(now())-DAYOFMONTH($col_date))+31*(MONTH(now())-MONTH($col_date))+365*(YEAR(now())-YEAR($col_date))))";
+							$col = "(LEAST((TO_DAYS(now())-TO_DAYS($col_date)),(DAYOFMONTH(now())-DAYOFMONTH($col_date))+30.4368*(MONTH(now())-MONTH($col_date))+365.2422*(YEAR(now())-YEAR($col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_relatif') {
 							$date_prec = "($"."date)";
-							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($col_date))+31*(MONTH('$date_prec')-MONTH($col_date))+365*(YEAR('$date_prec')-YEAR($col_date))))";
+							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($col_date))+30.4368*(MONTH('$date_prec')-MONTH($col_date))+365.2422*(YEAR('$date_prec')-YEAR($col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_redac') {
-							$col = "(LEAST((TO_DAYS(now())-TO_DAYS(date_redac)),(DAYOFMONTH(now())-DAYOFMONTH(date_redac))+31*(MONTH(now())-MONTH(date_redac))+365*(YEAR(now())-YEAR(date_redac))))";
+							$col = "(LEAST((TO_DAYS(now())-TO_DAYS(date_redac)),(DAYOFMONTH(now())-DAYOFMONTH(date_redac))+30.4368*(MONTH(now())-MONTH(date_redac))+365.2422*(YEAR(now())-YEAR(date_redac))))";
 							$col_table = '';
 						}
 
@@ -417,7 +417,7 @@ function parser_boucle($texte, $id_parent) {
 						}
 
 						if ($col_table) $col_table .= '.';
-						$where = "$col_table$col$op'$val'";
+						$where = "$col_table$col$op'".addslashes($val)."'";
 						if ($match[3] == '!') $where = "NOT ($where)";
 						$req_where[] = $where;
 					}
@@ -772,12 +772,14 @@ function parser($texte) {
 	$tables_relations['articles']['id_mot'] = 'spip_mots_articles';
 	$tables_relations['articles']['id_auteur'] = 'spip_auteurs_articles';
 	$tables_relations['articles']['id_document'] = 'spip_documents_articles';
+	$tables_relations['rubriques']['id_document'] = 'spip_documents_rubriques';
 
 	$tables_relations['auteurs']['id_article'] = 'spip_auteurs_articles';
 
 	$tables_relations['breves']['id_mot'] = 'spip_mots_breves';
 
 	$tables_relations['documents']['id_article'] = 'spip_documents_articles';
+	$tables_relations['documents']['id_rubrique'] = 'spip_documents_rubriques';
 
 	$tables_relations['mots']['id_article'] = 'spip_mots_articles';
 	$tables_relations['mots']['id_breve'] = 'spip_mots_breves';
@@ -1393,10 +1395,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'FORMULAIRE_ECRIRE_AUTEUR':
 
 		$milieu = '
-		if (eregi("([^\"<>?[:space:]]+@[^\"<>?[:space:]]+)",$row[email],$match)) {
-			$email = $match[1];
+		if (email_valide($row[\'email\'])) {
+			$email = trim($row[\'email\']);
 			$'.$nom_var.' = "<?php
-				include (\'inc-formulaires.php3\'); ecrire_auteur($row[id_auteur],\'$email\');
+				include (\'inc-formulaires.php3\'); ecrire_auteur(".$row[\'id_auteur\'].",\'$email\');
 			?'.'>";
 		}
 		';
@@ -1635,7 +1637,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$texte .= '
 	if ($contexte) {
 		reset($contexte);
-		while (list($key, $val) = each($contexte)) $$key = $val;
+		while (list($key, $val) = each($contexte)) $$key = addslashes($val);
 	}
 
 	$id_instance = $ptr_pile_boucles++;

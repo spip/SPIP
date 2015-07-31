@@ -205,7 +205,7 @@ function ajout_image($source, $dest) {
 //
 
 function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='', $titre_automatique=true) {
-	global $hash_id_auteur, $hash, $id_article;
+	global $hash_id_auteur, $hash, $id_article, $type;
 
 	//
 	// Securite
@@ -247,7 +247,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$id_document = mysql_insert_id();
 		$nouveau = true;
 		if ($id_article) {
-			$query = "INSERT spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)";
+			$query = "INSERT spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
 			spip_query($query);
 		}
 	}
@@ -422,6 +422,7 @@ if ($doc_supp) {
 		spip_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
 		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
 		@unlink($fichier);
 	}
 
@@ -435,6 +436,7 @@ if ($doc_supp) {
 		}	
 		spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
+		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
 	}
 
 

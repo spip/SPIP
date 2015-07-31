@@ -5,6 +5,7 @@ include_local ("inc_logos.php3");
 include_local ("inc_index.php3");
 include_local ("inc_meta.php3");
 include_local ("inc_mots.php3");
+include_local ("inc_documents.php3");
 
 
 $coll = intval($coll);
@@ -43,9 +44,7 @@ function enfant($collection){
 
 		$les_enfants.= "</FONT>";
 
-		$les_enfants.="<FONT FACE='arial, helvetica'>";
 		$les_enfants .= $les_sous_enfants;
-		$les_enfants .="</FONT>&nbsp;";
 		$les_enfants .= fin_cadre_relief(true);
 	}
 }
@@ -55,7 +54,7 @@ function sous_enfant($collection2){
 	$result3 = spip_query($query3);
 
 	if (mysql_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
+		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1 face='arial,helvetica,sans-serif'><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
 		while($row=mysql_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
@@ -74,6 +73,10 @@ function sous_enfant($collection2){
 //
 // Gerer les modifications...
 //
+
+if ($modifier_rubrique == "oui") {
+	calculer_rubriques_publiques();
+}
 
 if ($titre) {
 	$id_parent = intval($id_parent);
@@ -230,7 +233,7 @@ else {
 		echo "<p>Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>";
 	}
 }
-if ($connect_statut == '0minirezo') {
+if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 	icone_horizontale("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif","creer.gif");
 }
 
@@ -418,6 +421,14 @@ if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 	echo "</div><p>";
 
 
+}
+
+
+
+/// Documents associes a la rubrique
+
+if ($coll>0){
+	afficher_documents_non_inclus($coll, "rubrique", $flag_editable);
 }
 
 

@@ -285,7 +285,7 @@ else if ($statut == 'publie') {
 	$logo_statut = "puce-verte.gif";
 }
 else if ($statut == 'prop') {
-	$logo_statut = "puce-banche.gif";
+	$logo_statut = "puce-blanche.gif";
 }
 else if ($statut == 'refuse') {
 	$logo_statut = "puce-rouge.gif";

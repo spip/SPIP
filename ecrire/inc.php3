@@ -25,22 +25,6 @@ if (!file_exists("inc_meta_cache.php3")) ecrire_metas();
 
 
 //
-// Gestion de version
-//
-
-$version_installee = (double) lire_meta("version_installee");
-if ($version_installee < $spip_version) {
-	debut_page();
-	if (!$version_installee) $version_installee = "ant&eacute;rieure";
-	echo "<h4>Message technique : la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d'adapter
-	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.</h4>
-	Si vous &ecirc;tes administrateur du site, veuillez <a href='upgrade.php3'>cliquer sur ce lien</a>.<p>";
-	fin_page();
-	exit;
-}
-
-
-//
 // Cookies de presentation
 //
 
@@ -154,6 +138,22 @@ switch ($spip_couleur) {
 
 
 //
+// Gestion de version
+//
+
+$version_installee = (double) lire_meta("version_installee");
+if ($version_installee < $spip_version) {
+	debut_page();
+	if (!$version_installee) $version_installee = "ant&eacute;rieure";
+	echo "<blockquote><blockquote><h4><font color='red'>Message technique :</font><br> la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d'adapter
+	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.</h4>
+	Si vous &ecirc;tes administrateur du site, veuillez <a href='upgrade.php3'>cliquer sur ce lien</a>.</blockquote></blockquote><p>";
+	fin_page();
+	exit;
+}
+
+
+//
 // Gestion de la configuration globale du site
 //
 
@@ -204,6 +204,10 @@ function tester_rubrique_vide($id_rubrique) {
 	list($n) = mysql_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
+	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 0,1";
+	list($n) = mysql_fetch_row(spip_query($query));
+	if ($n > 0) return false;
+
 	return true;
 }
 
@@ -214,19 +218,6 @@ function tester_rubrique_vide($id_rubrique) {
 
 $cookie_admin = $HTTP_COOKIE_VARS["spip_admin"];
 
-
-//
-// Ajouter un message de forum
-//
-
-if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
-	$titre = addslashes($titre);
-	$texte = addslashes($texte);
-	$nom_site = addslashes($nom_site);
-	$auteur = addslashes($auteur);
-	$query_forum = "INSERT INTO spip_forum (id_parent, id_rubrique, id_article, id_breve, id_message, id_syndic, date_heure, titre, texte, nom_site, url_site, auteur, email_auteur, statut, id_auteur) VALUES ('$forum_id_parent','$forum_id_rubrique','$forum_id_article','$forum_id_breve','$forum_id_message', '$forum_id_syndic', NOW(),\"$titre\",\"$texte\",\"$nom_site\",\"$url_site\",\"$auteur\",\"$email_auteur\",\"$forum_statut\",\"$connect_id_auteur\")";
-	$result_forum = spip_query($query_forum);
-}
 
 
 //
@@ -379,6 +370,11 @@ function calculer_rubriques_publiques()
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 	$query = "SELECT DISTINCT id_rubrique FROM spip_syndic WHERE statut = 'publie'";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
+	}
+	$query = "SELECT DISTINCT id_rubrique FROM spip_documents_rubriques";
 	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];

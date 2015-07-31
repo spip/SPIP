@@ -7,6 +7,23 @@ define("_ECRIRE_INC_VERSION", "1");
 
 
 //
+// Version courante de SPIP
+// Stockee sous forme de nombre decimal afin de faciliter les comparaisons
+// (utilise pour les modifs de la base de donnees)
+//
+
+// version de la base
+$spip_version = 1.422;
+
+// version de spip
+// (mettre a jour a la main et conserver la mention "CVS")
+$spip_version_affichee = "1.4c8 CVS";
+
+// version de spip / tag
+if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
+
+
+//
 // Parametrage du prefixe des tables dans la base de donnees
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 //
@@ -59,23 +76,6 @@ function spip_query($query) {
 	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
 	return mysql_query($query);
 }
-
-//
-// Version courante de SPIP
-// Stockee sous forme de nombre decimal afin de faciliter les comparaisons
-// (utilise pour les modifs de la base de donnees)
-//
-
-// version de la base
-$spip_version = 1.418;
-
-// version de spip
-// (mettre a jour a la main et conserver la mention "CVS")
-$spip_version_affichee = "1.4c7 CVS";
-
-// version de spip / tag
-if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
-
 
 //
 // Infos de version PHP
@@ -607,5 +607,17 @@ function getTmpVar($name) {
 $this_link = new Link();
 
 
+//
+// Verifier la conformite d'une adresse email
+//
+
+function email_valide($addresse) {
+	return (eregi( 
+		'^[-!#$%&\'*+\\./0-9=?a-z^_`{|}~]+'.	// nom d'utilisateur
+		'@'.									// @
+		'([-0-9a-z]+\.)+' .						// hote, sous-domaine
+		'([0-9a-z]){2,4}$',						// tld 
+		trim($addresse)));
+} 
 
 ?>

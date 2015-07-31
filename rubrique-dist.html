@@ -247,6 +247,34 @@
 
 
 
+
+	<B_documents>
+	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+	<TR WIDTH=100%>
+	<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+	</TR>
+	</TABLE>
+	
+	<center>Documents li&eacute;s</center>
+	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+	<BOUCLE_documents(DOCUMENTS){id_rubrique}{par titre}{mode=document}{doublons}>
+		<tr>
+		<td align='center'>
+		[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+		</td>
+		<td width=10>&nbsp;</td>
+		<td>
+		<font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
+		[: (#DESCRIPTIF)]<br>
+		[(#TYPE_DOCUMENT) -] [(#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]
+		</td></tr>
+	</BOUCLE_documents>
+	<tr><td>&nbsp;</td></tr></table>
+	</B_documents>
+
+
+
+
 	<B_sites_web><p><FONT FACE="arial,helvetica,sans-serif" SIZE=1>LIRE SUR LE WEB :</font>
 	<ul><BOUCLE_sites_web(SITES){id_rubrique}{par nom_site}{syndication=non}>
 	<li><FONT FACE="arial,helvetica,sans-serif" SIZE=2>
