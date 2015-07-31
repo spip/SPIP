@@ -153,7 +153,7 @@ function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id
 	$ret .= "</td>";
 
 	$ret .= "<td style='text-align: $spip_lang_right'>";
-	$ret .= "<input id='".$rac."_champ_recherche' type='search' onkeypress=\"key = event.keyCode; if (key == 13 || key == 3) { return false;} t=setTimeout('lancer_recherche_rub(\'".$rac."_champ_recherche\',\'$rac\',\'$rub_exclus\')', 200);\" style='width: 100px;' />";
+	$ret .= "<input id='".$rac."_champ_recherche' type='search' onkeypress=\"t=setTimeout('lancer_recherche_rub(\'".$rac."_champ_recherche\',\'$rac\',\'$rub_exclus\')', 200); key = event.keyCode; if (key == 13 || key == 3) { return false;} \" style='width: 100px;' />";
 	$ret .= "</td></tr></table>\n";
 	
 	$ret .= mini_nav_principal($sel, $rac, $rub_exclus);
