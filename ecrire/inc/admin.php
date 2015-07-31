@@ -22,7 +22,7 @@ function debut_admin($form, $action, $commentaire='') {
 	global $connect_statut;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
-		include_ecrire ("inc_minipres");
+		include_spip('inc/minipres');
 		minipres(_T('info_acces_refuse'));
 	}
 	$fichier = fichier_admin($action);
@@ -31,10 +31,10 @@ function debut_admin($form, $action, $commentaire='') {
 		return true;
 	}
 	if ($commentaire) {
-		include_ecrire ("inc_texte");
+		include_spip('inc/texte');
 		$commentaire = ("\n<p>".propre($commentaire)."</p>\n");
 	}
-	include_ecrire ("inc_minipres");
+	include_spip('inc/minipres');
 	minipres(_T('info_action', array('action' => $action)),
 		  $commentaire
 		. $form
@@ -61,7 +61,7 @@ function fin_admin($action) {
 
 
 function demande_maj_version() {
-	include_ecrire("inc_presentation");
+	include_spip('inc/presentation');
 	debut_page();
 	echo "<blockquote><blockquote><h4><font color='red'>",
 	_T('info_message_technique'),

@@ -12,13 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_texte");
+include_spip('inc/presentation');
+include_spip('inc/texte');
 charger_generer_url();
-include_ecrire("inc_rubriques");
-include_ecrire('inc_forum');
-include_ecrire("inc_logos");
-include_ecrire("inc_mots");
+include_spip('inc/rubriques');
+include_spip('inc/forum');
+include_spip('inc/logos');
+include_spip('inc/mots');
 include_spip('inc/documents');
 include_ecrire("inc_abstract_sql");
 
@@ -50,7 +50,7 @@ function exec_naviguer_dist()
 			calculer_langues_rubriques();
 
 			if ($GLOBALS['invalider_caches']) {
-				include_ecrire ("inc_invalideur");
+				include_spip('inc/invalideur');
 				suivre_invalideur("id='id_rubrique/$id_rubrique'");
 			}
 		}
@@ -117,7 +117,7 @@ function exec_naviguer_dist()
 	  montre_naviguer($id_rubrique, $titre, $descriptif, $ze_logo, $flag_editable);
 
 	  if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_affichage($extra, "rubriques");
 	  }
 
@@ -323,7 +323,7 @@ if ($relief) {
 	// Les sites references a valider
 	//
 	if ($GLOBALS['meta']['activer_syndic'] != 'non') {
-		include_ecrire("inc_sites_voir");
+		include_spip('inc/sites_voir');
 		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' ORDER BY nom_site");
 	}
 
@@ -331,7 +331,7 @@ if ($relief) {
 	// Les sites a probleme
 	//
 	if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		include_ecrire("inc_sites_voir");
+		include_spip('inc/sites_voir');
 		afficher_sites(_T('avis_sites_syndiques_probleme'),
 			"SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
@@ -389,7 +389,7 @@ if ($relief) {
 //// Les sites references
 
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
-		include_ecrire("inc_sites_voir");
+		include_spip('inc/sites_voir');
 		afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus') ORDER BY nom_site");
 
 		if ($id_rubrique > 0 AND ($flag_editable OR $GLOBALS['meta']["proposer_sites"]> 0)) {
@@ -541,7 +541,7 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 		$id_parent = 0;
 
 	if ($GLOBALS['champs_extra']) {
-			  include_ecrire("inc_extra");
+			  include_spip('inc/extra');
 			  $GLOBALS['champs_extra'] = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
 		}
 	spip_query("UPDATE spip_rubriques SET " .

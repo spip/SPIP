@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_charsets");	# pour le nom de fichier
+include_spip('inc/charsets');	# pour le nom de fichier
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 //  acces aux documents joints securise
@@ -37,7 +37,7 @@ function action_autoriser_dist()
 	## code inutile ?? $auteur_session est connu des qu'on a charge inc_utils.
     if ($cookie_session = $_COOKIE['spip_session']) 
       {
-	include_ecrire("inc_session");
+	include_spip('inc/session');
 	global $auteur_session;
 
 	if (verifier_session($cookie_session)) 

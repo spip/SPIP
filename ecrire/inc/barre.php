@@ -36,7 +36,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 function afficher_barre($champ, $forum=false) {
 	static $num_barre = 0;
-	include_ecrire ("inc_layer");
+	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 
 	global $spip_lang, $spip_lang_right, $spip_lang_left;
@@ -124,7 +124,7 @@ function afficher_barre($champ, $forum=false) {
 // pour compatibilite arriere. utiliser directement le corps a present.
 
 function afficher_claret() {
-	include_ecrire ("inc_layer");
+	include_spip('inc/layer');
 	return $GLOBALS['browser_caret'];
 }
 

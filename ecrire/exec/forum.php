@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_texte");
+include_spip('inc/presentation');
+include_spip('inc/texte');
 charger_generer_url();
-include_ecrire("inc_rubriques");
+include_spip('inc/rubriques');
 
 function liste_numeros_forum($urlforum, $debut, $total)
 {

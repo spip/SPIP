@@ -15,12 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 function action_purger_dist()
 {
   global $action, $arg, $hash, $id_auteur;
-  include_ecrire("inc_session");
+  include_spip('inc/session');
   if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
   }
-  include_ecrire("inc_invalideur");
+  include_spip('inc/invalideur');
 
   switch ($arg) {
 
@@ -56,8 +56,8 @@ function action_purger_dist()
 	}
 	closedir($handle);
 	
-	include_ecrire("inc_filtres");
-	include_ecrire('inc_lang');
+	include_spip('inc/filtres');
+	include_spip('inc/lang');
 	lang_select($lang);
 	echo "<html><body>\n";
 	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";

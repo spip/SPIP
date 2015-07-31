@@ -239,7 +239,7 @@ function renouvelle_alea()
 {
 	if (abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
 	  	spip_log("renouvellement de l'alea_ephemere");
-		include_ecrire("inc_session");
+		include_spip('inc/session');
 		$alea = md5(creer_uniqid());
 		ecrire_meta('alea_ephemere_ancien', $GLOBALS['meta']['alea_ephemere']);
 		ecrire_meta('alea_ephemere', $alea);

@@ -86,7 +86,7 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script
 	  $redirect = urlencode(generer_url_ecrire($script, "$id_objet=$id", true));
 		$logon = $type.'on'.$id;
 		$logoff = $type.'off'.$id;
-		include_ecrire('inc_session');
+		include_spip('inc/session');
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
 		echo "<div class='verdana1' style='text-align: center;'>";
@@ -480,7 +480,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (!$logo) return '';
 
 	// Si c'est une image distante, la recuperer (si possible)
-	include_ecrire('inc_distant');
+	include_spip('inc/distant');
 	if (!$local = copie_locale($logo)) {
 		spip_log("pas de version locale de $logo");
 		return $img;

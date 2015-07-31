@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_session"); // action_auteur
-include_ecrire ("inc_date");
+include_spip('inc/session'); // action_auteur
+include_spip('inc/date');
 
 //
 // Vignette pour les documents lies
@@ -92,13 +92,13 @@ function document_et_vignette($document, $url, $portfolio=false) {
 		if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 			$image = image_pattern($vignette);
 		} else {
-			include_ecrire("inc_logos");
+			include_spip('inc/logos');
 			$image = reduire_image_logo((_DIR_RACINE . $vignette['fichier']), 120, 110);
 		}
 	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
-		include_ecrire('inc_distant');
-		include_ecrire('inc_logos');
+		include_spip('inc/distant');
+		include_spip('inc/logos');
 		#var_dump($document);
 		$local = copie_locale($document['fichier']);
 		if ($portfolio)

@@ -13,9 +13,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_minipres");
-include_ecrire("inc_acces");
-include_ecrire("inc_texte"); // utile pour l'espace public, deja fait sinon
+include_spip('inc/minipres');
+include_spip('inc/acces');
+include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
 // mais d'abord un tri par date (inverse)
 function trier_par_date($a, $b) {
@@ -177,7 +177,7 @@ END:'.$type.'
 
 // Suivi des revisions d'articles
 function rss_suivi_versions($a) {
-	include_ecrire("inc_suivi_versions");
+	include_spip('inc/suivi_versions');
 	return  afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
 
 }
@@ -185,7 +185,7 @@ function rss_suivi_versions($a) {
 // Suivi des forums
 function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 	$rss = array();
-	include_ecrire("inc_forum");
+	include_spip('inc/forum');
 
 	$result_forum = spip_query("
 	SELECT	* " . $query_forum . "
@@ -375,7 +375,7 @@ if (!verifier_low_sec ($id, $cle,
 		list($var, $val) = split('-', $bout, 2);
 		$a[$var] = $val;
 	}
-	include_ecrire('inc_lang');
+	include_spip('inc/lang');
 	lang_select($lang);
 }
 
@@ -410,7 +410,7 @@ switch($op) {
 		break;
 	# suivi prive des forums
 	case 'forums':
-		include_ecrire("inc_forum");
+		include_spip('inc/forum');
 		$critere = critere_statut_controle_forum($a['page']);
 		$rss = rss_suivi_forums($a, $critere, true);
 		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";

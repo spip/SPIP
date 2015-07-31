@@ -61,7 +61,7 @@ function exec_upgrade_dist() {
 		redirige_par_entete('./');
 
 	// On passe a l'upgrade
-	include_ecrire('inc_admin');
+	include_spip('inc/admin');
 
 	debut_admin(generer_url_post_ecrire("upgrade"),
 		$upgrade_titre, $commentaire);
@@ -71,8 +71,8 @@ function exec_upgrade_dist() {
 	$ok = maj_base();
 
 	if ($ok) {
-		include_ecrire ("inc_acces");
-		include_ecrire ("inc_config");
+		include_spip('inc/acces');
+		include_spip('inc/config');
 		ecrire_acces();
 		init_config();
 	}

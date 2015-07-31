@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-include_ecrire('inc_admin');
+include_spip('inc/admin');
 
 
 function demander_conversion($tables_a_convertir, $action) {
@@ -72,7 +72,7 @@ function demander_conversion($tables_a_convertir, $action) {
 
 function exec_convert_utf8_dist() {
 	include_ecrire('inc_meta');
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	lire_metas();
 
 	// une liste des tables a convertir, avec le champ dans lequel on

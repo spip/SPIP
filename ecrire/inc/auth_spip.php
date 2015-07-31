@@ -69,7 +69,7 @@ class Auth_spip {
 				WHERE login='".addslashes($this->login)."'");
 		}
 		if ($this->md5next) {
-			include_ecrire("inc_session");
+			include_spip('inc/session');
 			// fait tourner le codage du pass dans la base
 			$nouvel_alea_futur = creer_uniqid();
 			$query = "UPDATE spip_auteurs SET alea_actuel = alea_futur, ".

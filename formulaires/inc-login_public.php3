@@ -14,9 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_local(_FILE_CONNECT);
 include_ecrire("inc_meta");
-include_ecrire("inc_session");
-include_ecrire("inc_filtres");
-include_ecrire("inc_logos");
+include_spip('inc/session');
+include_spip('inc/filtres');
+include_spip('inc/logos');
 
 global $balise_LOGIN_PUBLIC_collecte;
 $balise_LOGIN_PUBLIC_collecte = array('url');
@@ -61,7 +61,7 @@ function login_explicite($login, $cible) {
 	    $cible = _DIR_RESTREINT ;
 	}
 	      
-	include_ecrire("inc_session");
+	include_spip('inc/session');
 	verifier_visiteur();
 
 	if ($auteur_session AND 
@@ -69,7 +69,7 @@ function login_explicite($login, $cible) {
 		if (($cible != $action) && !headers_sent()
 		AND !$_GET['var_mode'])
 			redirige_par_entete($cible);
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		return http_href($cible, _T('login_par_ici'));
 	}
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
@@ -129,7 +129,7 @@ function login_pour_tous($login, $cible, $action) {
 				array('login' => htmlspecialchars($login)));
 			$row = array();
 			$login = '';
-			include_ecrire('inc_cookie');
+			include_spip('inc/cookie');
 			spip_setcookie("spip_admin", "", time() - 3600);
 		} else {
 			// on laisse le menu decider de la langue

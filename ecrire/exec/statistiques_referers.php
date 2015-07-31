@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
+include_spip('inc/presentation');
 include_spip('inc/statistiques');
 
 function exec_statistiques_referers_dist()

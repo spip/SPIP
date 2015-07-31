@@ -11,9 +11,9 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire("inc_presentation");
-include_ecrire("inc_auteur_voir");
-include_ecrire ("inc_acces");
+include_spip('inc/presentation');
+include_spip('inc/auteur_voir');
+include_spip('inc/acces');
 include_ecrire ("inc_abstract_sql");
 
 function exec_auteur_infos_dist()
@@ -107,7 +107,7 @@ if (strval($nom)!='') {
 	}
 
 	if ($modif_login) {
-		include_ecrire('inc_session');
+		include_spip('inc/session');
 		zap_sessions ($auteur['id_auteur'], true);
 		if ($connect_id_auteur == $auteur['id_auteur'])
 			supprimer_session($GLOBALS['spip_session']);
@@ -151,7 +151,7 @@ if (strval($nom)!='') {
 
 	// recoller les champs du extra
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		$extra = extra_recup_saisie("auteurs");
 		$add_extra = ", extra = '".addslashes($extra)."'";
 	} else
@@ -301,7 +301,7 @@ else {
 
 echo "<p>";
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
 	}
 

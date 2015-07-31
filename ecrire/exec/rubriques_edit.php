@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_rubriques");
+include_spip('inc/presentation');
+include_spip('inc/rubriques');
 
 function exec_rubriques_edit_dist()
 {
@@ -112,7 +112,7 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $
 debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').aide ("rubrub"));
 
 // selecteur de rubriques
-include_ecrire('inc_rubriques');
+include_spip('inc/rubriques');
 $restreint = ($GLOBALS['statut'] == 'publie');
 echo selecteur_rubrique($id_parent, 'rubrique', $restreint, $id_rubrique);
 
@@ -158,7 +158,7 @@ echo entites_html($texte);
 echo "</TEXTAREA>\n";
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 

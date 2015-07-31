@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_rubriques");
-include_ecrire ("inc_config");
+include_spip('inc/presentation');
+include_spip('inc/rubriques');
+include_spip('inc/config');
 
 function exec_config_multilang_dist()
 {
@@ -107,7 +107,7 @@ fin_cadre_couleur();
 		echo _T('info_multi_langues_choisies');
 		echo '</p>';
 
-		include_ecrire('inc_lang_liste');
+		include_spip('inc/lang_liste');
 		$langues = $GLOBALS['codes_langues'];
 		$cesure = floor((count($langues) + 1) / 2);
 

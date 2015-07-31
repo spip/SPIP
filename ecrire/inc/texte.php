@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_filtres");
+include_spip('inc/filtres');
 
 // Verifier les variables de personnalisation
 tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
@@ -37,7 +37,7 @@ function definir_puce() {
 	// Attention au sens, qui n'est pas defini de la meme facon dans
 	// l'espace prive (spip_lang est la langue de l'interface, lang_dir
 	// celle du texte) et public (spip_lang est la langue du texte)
-	include_ecrire('inc_lang');
+	include_spip('inc/lang');
 	$dir = _DIR_RESTREINT ?
 		lang_dir($GLOBALS['spip_lang']) : $GLOBALS['lang_dir'];
 	$p = ($dir == 'rtl') ? 'puce_rtl' : 'puce';
@@ -170,7 +170,7 @@ function echappe_html($letexte, $source='', $no_transform=false) {
 
 	// Gestion du TeX
 	if (strpos($letexte, "<math>") !== false) {
-		include_ecrire("inc_math");
+		include_spip('inc/math');
 		$letexte = traiter_math($letexte, $source);
 	}
 
@@ -203,7 +203,7 @@ function echappe_retour($letexte, $source='') {
 // Gerer les outils mb_string
 //
 function spip_substr($c, $start=0, $end='') {
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	if (init_mb_string()) {
 		if ($end)
 			return mb_substr($c, $start, $end);
@@ -221,7 +221,7 @@ function spip_substr($c, $start=0, $end='') {
 }
 
 function spip_strlen($c) {
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	if (init_mb_string())
 		return mb_strlen($c);
 	else
@@ -386,7 +386,7 @@ function typo_fr($letexte) {
 		);
 		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
 
-		include_ecrire('inc_charsets');
+		include_spip('inc/charsets');
 		while (list($c, $r) = each($chars)) {
 			$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
 			$trans[$c] = $r;
@@ -494,7 +494,7 @@ function typo($letexte, $echapper=true) {
 	// un texte anglais en interface francaise (ou l'inverse) ;
 	// sinon determiner la typo en fonction de la langue
 	if (!$lang = $GLOBALS['lang_typo']) {
-		include_ecrire('inc_lang');
+		include_spip('inc/lang');
 		$lang = lang_typo($GLOBALS['spip_lang']);
 	}
 	if ($lang == 'fr')

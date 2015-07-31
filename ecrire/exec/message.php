@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
+include_spip('inc/presentation');
 charger_generer_url();
-include_ecrire("inc_rubriques");
-include_ecrire ("inc_mots");
+include_spip('inc/rubriques');
+include_spip('inc/mots');
 
 function exec_message_dist()
 {

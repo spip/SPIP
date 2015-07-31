@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_lang");
+include_spip('inc/lang');
 utiliser_langue_visiteur();
 
 //
@@ -189,7 +189,7 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 // Attention: generer_url_ecrire peut rajouter des args
 
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='') {
-	include_ecrire('inc_filtres');
+	include_spip('inc/filtres');
 	$action = generer_url_ecrire($script, $args);
 	if ($name) $name = " name='$name'";
 	return "\n<form action='$action$ancre'$name method='post'>"

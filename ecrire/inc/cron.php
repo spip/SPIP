@@ -302,7 +302,7 @@ function cron_invalideur($t) {
 				$taille_supprimee += $r['taille'];
 			}
 			spip_log ("Quota cache: efface $taille_supprimee octets");
-			include_ecrire('inc_invalideur');
+			include_spip('inc/invalideur');
 			suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
 		}
 	return 1;

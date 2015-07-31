@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_rubriques'); # pour calcul_branche()
+include_spip('inc/rubriques'); # pour calcul_branche()
 
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
@@ -70,7 +70,7 @@ function affiche_logos($logos, $lien, $align) {
 //
 
 function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
-	include_ecrire('inc_logos');
+	include_spip('inc/logos');
 
 	$table_logos = array (
 	'ARTICLE' => 'art',

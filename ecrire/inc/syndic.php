@@ -64,7 +64,7 @@ function creer_tag($mot,$type,$url) {
 }
 
 function ajouter_tags($matches, $item) {
-	include_ecrire('inc_filtres');
+	include_spip('inc/filtres');
 	$tags = array();
 	foreach ($matches as $match) {
 		$type = ($match[3] == 'category') ? 'category':'tag';
@@ -116,7 +116,7 @@ function cdata_echappe_retour(&$table, &$echappe_cdata) {
 // prend un fichier backend et retourne un tableau des items lus,
 // et une chaine en cas d'erreur
 function analyser_backend($rss, $url_syndic='') {
-	include_ecrire("inc_texte"); # pour couper()
+	include_spip('inc/texte'); # pour couper()
 
 	$rss = pipeline('pre_syndication', $rss);
 
@@ -402,7 +402,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 // Mettre a jour le site
 //
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
-	include_ecrire("inc_texte");
+	include_spip('inc/texte');
 
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result = spip_query($query);
@@ -426,7 +426,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
 	// Aller chercher les donnees du RSS et les analyser
-	include_ecrire("inc_distant");
+	include_spip('inc/distant');
 	$rss = recuperer_page($url_syndic, true);
 	if (!$rss)
 		$articles = _T('avis_echec_syndication_02');
@@ -476,7 +476,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	if ($liens_ajoutes) {
 		spip_log("Syndication: $liens_ajoutes nouveau(x) lien(s)");
-		include_ecrire('inc_rubriques');
+		include_spip('inc/rubriques');
 		calculer_rubriques();
 	}
 

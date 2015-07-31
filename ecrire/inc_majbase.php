@@ -856,7 +856,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_rubriques
 			ADD statut_tmp VARCHAR(10) NOT NULL,
 			ADD date_tmp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
-		include_ecrire('inc_rubriques');
+		include_spip('inc/rubriques');
 		calculer_rubriques();
 		maj_version(1.801);
 	}
@@ -898,7 +898,7 @@ function maj_base() {
 	if ($version_installee < 1.805) {
 		spip_query("ALTER TABLE spip_forum
 		ADD id_thread bigint(21) DEFAULT '0' NOT NULL");
-		include_ecrire('inc_forum');
+		include_spip('inc/forum');
 		calculer_threads();
 		maj_version(1.805);
 	}

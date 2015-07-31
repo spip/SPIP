@@ -11,8 +11,8 @@
 \***************************************************************************/
 
 function action_cookie_dist() {
-	include_ecrire ("inc_session");
-	include_ecrire('inc_cookie');
+	include_spip('inc/session');
+	include_spip('inc/cookie');
 	action_spip_cookie_dist();
 }
 
@@ -227,7 +227,7 @@ if ($cookie_session) {
 
 // changement de langue espace public
 if ($var_lang) {
-	include_ecrire('inc_lang');
+	include_spip('inc/lang');
 
 	if (changer_langue($var_lang)) {
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
@@ -238,14 +238,14 @@ if ($var_lang) {
 
 // changer de langue espace prive (ou login)
 if ($var_lang_ecrire) {
-	include_ecrire('inc_lang');
+	include_spip('inc/lang');
 
 	if (changer_langue($var_lang_ecrire)) {
 		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
 		if (_FILE_CONNECT AND $id_auteur) {
-			include_ecrire('inc_admin');
+			include_spip('inc/admin');
 			if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
 				spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
 				$auteur_session['lang'] = $var_lang_ecrire;

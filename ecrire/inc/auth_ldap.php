@@ -113,7 +113,7 @@ class Auth_ldap {
 		}
 
 		// Convertir depuis UTF-8 (jeu de caracteres par defaut)
-		include_ecrire('inc_charsets');
+		include_spip('inc/charsets');
 		$this->nom = importer_charset($this->nom, 'utf-8');
 		$this->email = importer_charset($this->email, 'utf-8');
 		$this->login = importer_charset($this->login, 'utf-8');

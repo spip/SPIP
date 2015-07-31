@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_admin');
+include_spip('inc/admin');
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
@@ -69,7 +69,7 @@ function exec_import_all_dist()
 		import_all_check();
 
 	// sinon commencer ou continuer
-	include_ecrire('inc_import');
+	include_spip('inc/import');
 	import_all_continue(array(
 'spip_auteurs',
 'spip_articles',

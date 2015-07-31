@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_texte");
+include_spip('inc/presentation');
+include_spip('inc/texte');
 charger_generer_url();
-include_ecrire("inc_rubriques");
+include_spip('inc/rubriques');
 
 function enfant_breves($leparent){
 	global $spip_lang_left, $spip_lang_right;
@@ -57,7 +57,7 @@ function exec_breves_dist()
 		list($statut_ancien) = spip_fetch_array(spip_query("SELECT statut FROM spip_breves $cond"));
 		if ($statut != $statut_ancien) {
 			spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut'" . $cond);
-			include_ecrire("inc_rubriques");
+			include_spip('inc/rubriques');
 			calculer_rubriques();
 		}
 		redirige_par_entete(generer_url_ecrire("naviguer","id_rubrique=$id_rubrique", true));

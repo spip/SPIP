@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_layer");
-include_ecrire("inc_agenda");
-include_ecrire("inc_boutons");
+include_spip('inc/layer');
+include_spip('inc/agenda');
+include_spip('inc/boutons');
 
 // Choix dynamique de la couleur
 
@@ -797,7 +797,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		
 		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-		if ($voir_logo) include_ecrire("inc_logos");
+		if ($voir_logo) include_spip('inc/logos');
 
 		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 		echo afficher_liste_debut_tableau();
@@ -1156,7 +1156,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
 		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-		if ($voir_logo) include_ecrire("inc_logos");
+		if ($voir_logo) include_spip('inc/logos');
 
 		while ($row = spip_fetch_array($result)) {
 			$vals = '';
@@ -1567,7 +1567,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
  
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-	if ($voir_logo) include_ecrire("inc_logos");
+	if ($voir_logo) include_spip('inc/logos');
 
  	while($row = spip_fetch_array($request)) {
 		$id_forum=$row['id_forum'];
@@ -1787,7 +1787,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 function debut_javascript($admin, $stat)
 {
 	global $spip_lang_left, $browser_name, $browser_version;
-	include_ecrire("inc_charsets");
+	include_spip('inc/charsets');
 
 
 	# teste la capacite ajax : on envoie un cookie -1
@@ -3165,7 +3165,7 @@ function http_style_background($img, $att='')
 // Creer un bouton qui renvoie vers la bonne url spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
-	include_ecrire('inc_acces');
+	include_spip('inc/acces');
 	if (is_array($args))
 		foreach ($args as $val => $var)
 			if ($var) $a .= ':' . $val.'-'.$var;

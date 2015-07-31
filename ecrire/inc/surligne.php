@@ -36,7 +36,7 @@ function surligner_sans_accents ($mot) {
 		/* yNn */ chr(255).chr(209).chr(241);
 
 	if ($GLOBALS['meta']['charset'] == 'utf-8') {
-		include_ecrire('inc_charsets');
+		include_spip('inc/charsets');
 		$mot = unicode2charset(utf_8_to_unicode($mot), 'iso-8859-1');
 	}
 
@@ -82,7 +82,7 @@ function surligner_regexp_accents ($mot) {
 // mettre en rouge les mots passes dans $var_recherche
 function surligner_mots($page, $mots) {
 	global $nombre_surligne;
-	include_ecrire("inc_texte"); // pour le reglage de $nombre_surligne
+	include_spip('inc/texte'); // pour le reglage de $nombre_surligne
 
 	// Remplacer les caracteres potentiellement accentues dans la chaine
 	// de recherche par les choix correspondants en syntaxe regexp (!)

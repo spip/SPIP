@@ -90,7 +90,7 @@ function unserialize_join($extra){
 function contenu_page_accueil($url){
 	$texte = '';
 	if ($GLOBALS['meta']["visiter_sites"] == "oui") {
-		include_ecrire('inc_distant');
+		include_spip('inc/distant');
 		spip_log ("indexation contenu syndic $url");
 		$texte = supprimer_tags(recuperer_page($url, true, false, 50000));
 	}
@@ -102,7 +102,7 @@ function nettoie_nom_fichier($fichier){
 
 // Renvoie la liste des "mots" d'un texte (ou d'une requete adressee au moteur)
 function mots_indexation($texte, $min_long = 3) {
-	include_ecrire("inc_charsets");
+	include_spip('inc/charsets');
 
 	// Point d'entree pour traiter le texte avant indexation
 	$texte = pipeline('pre_indexation', $texte);
@@ -277,7 +277,7 @@ function extracteur_txt($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
 	// Reconnaitre le BOM utf-8 (0xEFBBBF)
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	if (bom_utf8($contenu))
 		$charset = 'utf-8';
 
@@ -289,7 +289,7 @@ function extracteur_html($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
 	// Importer dans le charset local
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	$contenu = transcoder_page($contenu);
 	$charset = $GLOBALS['meta']['charset'];
 
@@ -314,7 +314,7 @@ function indexer_contenu_document ($row) {
 	if (function_exists($lire = $extracteur[$extension])) {
 		// Voir si on a deja une copie du doc distant
 		// Note: si copie_locale() charge le doc, elle demande une reindexation
-		include_ecrire('inc_distant');
+		include_spip('inc/distant');
 		if (!$fichier = copie_locale($row['fichier'], 'test')) {
 			spip_log("pas de copie locale de '$fichier'");
 			return;
@@ -419,7 +419,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	// marquer "en cours d'indexation"
 	spip_query("UPDATE $table SET idx='idx' WHERE $col_id=$id_objet");
 
-	include_ecrire("inc_texte");
+	include_spip('inc/texte');
 
 	spip_log("indexation $table $id_objet");
 	$index = '';

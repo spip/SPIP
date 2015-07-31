@@ -27,10 +27,10 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 }
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
-	include_ecrire('inc_filtres');
+	include_spip('inc/filtres');
 	if (!$recherche = _request('recherche')
 	AND !$recherche = $rech) {
-		include_ecrire('inc_charsets');
+		include_spip('inc/charsets');
 		$recherche = html2unicode(_T('info_rechercher'));
 	}
 

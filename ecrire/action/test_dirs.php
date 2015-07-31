@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
-include_ecrire("inc_minipres");
+include_spip('inc/minipres');
 
 //
 // Tente d'ecrire

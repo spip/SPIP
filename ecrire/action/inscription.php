@@ -14,7 +14,7 @@ function action_inscription_dist() {
 
 	include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
 	include_spip('public/global'); 
-	include_ecrire("inc_lang");
+	include_spip('inc/lang');
 	include_ecrire('inc_headers');
 
 	utiliser_langue_site();

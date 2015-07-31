@@ -366,7 +366,7 @@ class DiffPhrase {
 
 
 function preparer_diff($texte) {
-	include_ecrire("inc_charsets");
+	include_spip('inc/charsets');
 
 	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8')

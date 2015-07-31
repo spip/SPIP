@@ -240,7 +240,7 @@ function modifier_forums_publics($id_article, $forums_publics) {
 			ecrire_meta('accepter_visiteurs', 'oui');
 			ecrire_metas();
 		}
-		include_ecrire('inc_invalideur');
+		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_forum/a$id_article'");
 
 }

@@ -12,11 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_minipres");
-include_ecrire("inc_texte");
-include_ecrire("inc_charsets");
+include_spip('inc/minipres');
+include_spip('inc/texte');
+include_spip('inc/charsets');
 include_ecrire("inc_meta");
-include_ecrire("inc_acces");
+include_spip('inc/acces');
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.
 

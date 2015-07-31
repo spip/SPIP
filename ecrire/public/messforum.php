@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire('inc_meta');
-include_ecrire('inc_forum');
-include_ecrire('inc_filtres');
+include_spip('inc/forum');
+include_spip('inc/filtres');
 include_ecrire("inc_abstract_sql");
 include_local(_FILE_CONNECT);
 
@@ -21,9 +21,9 @@ include_local(_FILE_CONNECT);
 // Voir commentaires dans celui-ci et dans inc-formulaire_forum
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
-	include_ecrire('inc_texte');
-	include_ecrire('inc_filtres');
-	include_ecrire('inc_mail');
+	include_spip('inc/texte');
+	include_spip('inc/filtres');
+	include_spip('inc/mail');
 	charger_generer_url();
 
 	if ($statut == 'prop') # forum modere
@@ -137,7 +137,7 @@ function enregistre_forum() {
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($GLOBALS['afficher_texte'] <> 'non') {
-		include_ecrire("inc_session");
+		include_spip('inc/session');
 
 		$ids = array();
 		foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
@@ -237,7 +237,7 @@ function enregistre_forum() {
 		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 
 	// Poser un cookie pour ne pas retaper le nom / email
-	include_ecrire('inc_cookie');
+	include_spip('inc/cookie');
 	spip_setcookie('spip_forum_user',
 		       serialize(array('nom' => $auteur, 'email' => $email_auteur)));
 
@@ -245,7 +245,7 @@ function enregistre_forum() {
 	//
 	// INVALIDATION DES CACHES LIES AUX FORUMS
 	//
-		include_ecrire('inc_invalideur');
+		include_spip('inc/invalideur');
 		suivre_invalideur ("id='id_forum/" .
 			calcul_index_forum($id_article,
 				$id_breve,

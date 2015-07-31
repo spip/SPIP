@@ -238,7 +238,7 @@ function enfant_rub($collection){
 	
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-	if ($voir_logo) include_ecrire("inc_logos");
+	if ($voir_logo) include_spip('inc/logos');
 
 	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];

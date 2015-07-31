@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
-include_ecrire ("inc_minipres");
+include_spip('inc/minipres');
 include_ecrire ("inc_base");
 include_ecrire("inc_db_mysql");
 
@@ -131,7 +131,7 @@ function install_6()
 	lire_metas();
 
 	if ($login) {
-		include_ecrire ('inc_charsets');
+		include_spip('inc/charsets');
 
 		$nom = addslashes(importer_charset($nom, _DEFAULT_CHARSET));
 		$login = addslashes(importer_charset($login, _DEFAULT_CHARSET));
@@ -160,10 +160,10 @@ function install_6()
 			VALUES ('email_webmaster', '".addslashes($email)."')");
 	}
 
-	include_ecrire("inc_config");
+	include_spip('inc/config');
 	init_config();
 
-	include_ecrire ("inc_acces");
+	include_spip('inc/acces');
 	ecrire_acces();
 
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
@@ -776,7 +776,7 @@ function install_unpack()
 {
   global  $connect_id_auteur;
 
-  include_ecrire('inc_admin');
+  include_spip('inc/admin');
 
   $action = _T('texte_unpack');
  

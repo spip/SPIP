@@ -126,7 +126,7 @@ function action_tester_dist() {
 
 	// et maintenant envoyer la vignette de tests
 	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $arg)) {
-		include_ecrire('inc_logos');
+		include_spip('inc/logos');
 		//$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 150;
 		if ($preview = creer_vignette(
