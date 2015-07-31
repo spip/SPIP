@@ -28,12 +28,11 @@ function balise_LOGO__dist ($p) {
 	if ($type == 'site_spip') {
 		$type = 'site';
 		$_id_objet = "\"'0'\"";
-		$id_objet = 'id_syndic'; # parait faux mais donne bien "siteNN"
-	} else {
-		$id_objet = "id_".$type;
-		if ($id_objet == 'id_site') $id_objet = "id_syndic"; # correction
-		$_id_objet = champ_sql($id_objet, $p);
 	}
+
+	$id_objet = id_table_objet($type);
+	if (!$_id_objet)
+		$_id_objet = champ_sql($id_objet, $p);
 
 	$fichier = ($p->etoile === '**') ? -1 : 0;
 	$coord = array();
