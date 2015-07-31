@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activar el plugin',
 'affichage' => 'Compaxinación',
 'aide_non_disponible' => 'Esta parte de l\'aida en llínia tovía nun tá iguada n\'esta llingua.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Accesu torgau.',
 'avis_article_modifie' => 'Atención, @nom_auteur_modif@ trabayó n\'esti artículo hai @date_diff@ minutos.',

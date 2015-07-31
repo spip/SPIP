@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Fé zoué lo plugin',
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Astèr i mank ankor inn bout lo koudmin an liyn pou la lang ou la swazi.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Lotèr :',
 'avis_acces_interdit' => 'Ou nana pwinn lapermisyon pou rant dann kwind sit-la.',
 'avis_article_modifie' => 'Tansyon pangar, @nom_auteur_modif@ la fin travayé lartik-la, néna  @date_diff@ minit pasé',

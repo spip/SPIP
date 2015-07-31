@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Включить плагин',
 'affichage' => 'Отобразить',
 'aide_non_disponible' => 'Эта часть он-лайн помощи еще не доступна на русском языке',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Автор:',
 'avis_acces_interdit' => 'Доступ запрещен',
 'avis_article_modifie' => 'Внимание, @nom_auteur_modif@ работал над этой статьёй @date_diff@ минут назад',

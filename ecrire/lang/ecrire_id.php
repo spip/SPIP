@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Aktifkan plugin',
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Bagian dari bantuan online ini belum tersedia dalam bahasa pengantar yang digunakan sekarang.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Penulis:',
 'avis_acces_interdit' => 'Dilarang mengakses.',
 'avis_article_modifie' => 'Perhatian, @nom_auteur_modif@ telah mengedit artikel ini @date_diff@ menit yang lalu',

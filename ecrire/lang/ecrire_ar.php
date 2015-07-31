@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'تفعيل الملحق',
 'affichage' => 'عرض',
 'aide_non_disponible' => 'هذا القسم من التعليمات الفورية غير متوافر حالياً بهذه اللغة.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'المؤلف:',
 'avis_acces_interdit' => 'الدخول محظور',
 'avis_article_modifie' => 'تحذير، @nom_auteur_modif@ عمل على هذا المقال منذ @date_diff@ دقيقة',

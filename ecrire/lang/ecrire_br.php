@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Enaouiñ an adveziant',
 'affichage' => 'Diskwel',
 'aide_non_disponible' => 'Al lodenn-mañ eus ar skoazell evit ar yezh-mañ n\'emañ ket enlinenn c\'hoazh.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Skridaozer :',
 'avis_acces_interdit' => 'Arabat mont tre.',
 'avis_article_modifie' => 'Diwallit, labouret ez eus bet war ar pennad-mañ gant @nom_auteur_modif@, @date_diff@ munutenn zo',

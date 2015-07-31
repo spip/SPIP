@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Aktivigi la kromprogramon',
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Tiu ĉi parto de la rethelpilo ankoraŭ ne disponeblas en tiu ĉi lingvo.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Aŭtoro :',
 'avis_acces_interdit' => 'Malpermesata aliro.',
 'avis_article_modifie' => 'Atentu, @nom_auteur_modif@ laboris pri tiu artikolo antaŭ @date_diff@ minutoj',

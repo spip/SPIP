@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'plugin را فعال کنید',
 'affichage' => 'ارايه',
 'aide_non_disponible' => 'اين بخش كمكى براى اين زبان هنوز در دسترس نمى باشد',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'نویسنده:',
 'avis_acces_interdit' => 'دسترسى به اين بخش ممنوع مى باشد',
 'avis_article_modifie' => 'توجه ،              @nom_auteur_modif@                                        روى اين مقاله @date_diff@ پيش كار ميكرده',

@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Plugin aktiválása',
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Ez a része a súgónak még nincs lefordítva arra a nyelvre.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Szerzőr :',
 'avis_acces_interdit' => 'Hozzáférés nincs engedélyezve',
 'avis_article_modifie' => 'Vigyázat, @nom_auteur_modif@ dolgozott ezen a cikken @date_diff@ perccel ezelőtt',

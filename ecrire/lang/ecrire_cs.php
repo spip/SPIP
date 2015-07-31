@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Aktivovat plugin',
 'affichage' => 'Zobrazit',
 'aide_non_disponible' => 'Tato část vestavěné nápovědy není ještě v tomto jazykovém znění k dispozici.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Autor:',
 'avis_acces_interdit' => 'Přístup zakázán.',
 'avis_article_modifie' => 'Varování: Na tomto článku pracoval před @date_diff@ minutou/minutami @nom_auteur_modif@.',

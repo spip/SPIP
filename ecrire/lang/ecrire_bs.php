@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Activer le plugin', # NEW
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Pomoc nije dostupna',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Auteur :', # NEW
 'avis_acces_interdit' => 'Pristup zabranjen.',
 'avis_article_modifie' => 'Paznja, @nom_auteur_modif@ je radio na ovom artiklu prije @date_diff@ minuta',

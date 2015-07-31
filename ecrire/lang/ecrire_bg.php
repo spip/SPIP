@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_plugin' => 'Активирайте плъгина',
 'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Тази част от рубриката "Помощник" все още не е публикувана на български език.',
+'annuler_recherche' => 'Annuler la recherche', # NEW
 'auteur' => 'Автор:',
 'avis_acces_interdit' => 'Забранен достъп.',
 'avis_article_modifie' => 'Предупреждение! @nom_auteur_modif@ е работил по тази статия преди @date_diff@ минути',
