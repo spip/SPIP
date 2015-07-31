@@ -94,6 +94,9 @@ function corriger_caracteres ($texte) {
 // Nettoyer les backend
 function texte_backend($texte) {
 
+	// importer les &eacute;
+	$texte = filtrer_entites($texte);
+
 	// " -> &quot; et tout ce genre de choses
 	$texte = str_replace("&nbsp;", " ", $texte);
 	$texte = preg_replace("/[[:space:]][[:space:]]+/", " ", $texte);
