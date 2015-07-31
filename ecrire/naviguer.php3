@@ -284,7 +284,7 @@ if ($flag_mots!= 'non' AND $connect_statut == '0minirezo' AND acces_rubrique($co
 if (strlen($texte) > 1) {
 	echo "\n<p><font size=3 face='verdana,arial,helvetica,sans-serif'><div align='justify'>";
 	echo justifier(propre($texte));
-	echo "&nbsp;</font>";
+	echo "&nbsp;</font></div>";
 }
 
 fin_cadre_relief();
