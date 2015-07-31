@@ -250,49 +250,58 @@ function supprimer_referers($type = "") {
 }
 
 
+
 function optimiser_referers() {
 	$popularite_update = "";
 
-	// Calcul des gains en popularite
-	$query = "SELECT id_article, COUNT(*) AS referers, SUM(visites) AS visites ".
-		"FROM spip_referers_articles GROUP BY id_article";
+	$query = "SELECT id_article, visites FROM spip_articles WHERE statut = 'publie'";
 	$result = spip_query($query);
+
 	while ($row = mysql_fetch_array($result)) {
 		$id_article = $row['id_article'];
-		$referers = $row['referers'];
-		$visites = $row['visites'];
-
-		$popularite = ($referers + 1) * $visites;
-		$popularite_update[$popularite][] = $id_article;
-		if ($max < $popularite) $max = $popularite;
+		$visites = $row['visites'] + 1;
+		$valeurs[$id_article]['visites'] = $visites;
+		$valeurs[$id_article]['externes'] = 1;
+		
+		if ($visites > $max_popularite) $max_popularite = $visites;
+		$tous_articles[] = $id_article;
 	}
-
-	// Mise a jour des valeurs de referers et popularite
-	if (is_array($popularite_update)) {
-		// Normalisation avant (limiter l'influence des visites recentes)
-		if ($max < 100) $max = 100;
-
-		while (list($popularite, $articles) = each($popularite_update)) {
-			$query = "UPDATE spip_articles SET popularite = popularite + $popularite * 100 / $max ".
-				"WHERE id_article IN (".join(', ', $articles).")";
-			$result = spip_query($query);
-		}
-
-		// Normalisation apres
-		$query = "SELECT MAX(popularite) AS max FROM spip_articles";
+	
+	if ($tous_articles) {	
+		$tous_articles = join(",", $tous_articles);
+	
+		// Calcul des gains en popularite
+		$query = "SELECT id_article, SUM(visites) AS externes ".
+			"FROM spip_referers_articles WHERE id_article IN ($tous_articles) GROUP BY id_article";
 		$result = spip_query($query);
-		if ($row = mysql_fetch_array($result)) {
-			$max = $row['max'];
-			if ($max > 100) {
-				$query = "UPDATE spip_articles SET popularite = popularite * 100 / $max";
+	
+		while ($row = mysql_fetch_array($result)) {
+			$id_article = $row['id_article'];
+			$externes = ($row['externes']) + 1;
+			$visites = $valeurs[$id_article]['visites'];
+					
+			if ($visites * $externes > $max_popularite) $max_popularite = $visites * $externes;
+			$valeurs[$id_article]['externes'] = $externes;
+		}
+	
+		while (list($id_article) = each ($valeurs)) {
+			$visites = $valeurs[$id_article]['visites'];
+			$externes = $valeurs[$id_article]['externes'];
+			$popularite = floor(sqrt(sqrt(($visites * $externes) / $max_popularite)) * 100);
+			$popularite_update[$popularite][] = $id_article;
+		}
+		
+		if (is_array($popularite_update)) {
+			while (list($popularite, $articles) = each($popularite_update)) {
+				$articles = join(",",$articles);
+				$query = "UPDATE spip_articles SET popularite = $popularite ".
+					"WHERE id_article IN ($articles)";
 				$result = spip_query($query);
 			}
-		}
+		}		
 	}
-
 	supprimer_referers();
 	supprimer_referers("article");
 }
-
 
 ?>

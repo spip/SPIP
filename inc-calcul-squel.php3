@@ -443,6 +443,10 @@ function parser_boucle($texte, $id_parent) {
 						else if ($match[1] == 'points'){
 							$req_order= " ORDER BY points";
 						}
+						else if ($match[1] == 'activite'){
+							$req_select[] = "($table.popularite * $table.popularite / (LEAST((TO_DAYS(now())-TO_DAYS($table.$col_date)),(DAYOFMONTH(now())-DAYOFMONTH($table.$col_date))+30.4368*(MONTH(now())-MONTH($table.$col_date))+365.2422*(YEAR(now())-YEAR($table.$col_date)))+1)) AS activite";
+							$req_order= " ORDER BY activite";
+						}
 						else {
 							// numerique
 							if (ereg("^num[[:space:]]+(.*)",$match[1], $match2)) {
