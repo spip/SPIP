@@ -311,6 +311,7 @@ if (_FILE_OPTIONS) include_once _FILE_OPTIONS;
 
 // Masquer les warning
 define('SPIP_ERREUR_REPORT',E_ALL ^ E_NOTICE);
+define('SPIP_ERREUR_REPORT_INCLUDE_PLUGINS',0);
 error_reporting(SPIP_ERREUR_REPORT);
 
 //
