@@ -12,12 +12,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('public/iterateur');
 include_spip('inc/texte');
 include_spip('inc/documents');
 include_spip('inc/distant');
 include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
 include_spip('inc/acces'); // Gestion des acces pour ical
+include_spip('public/iterateur');
 include_spip('public/interfaces');
 include_spip('public/quete');
 

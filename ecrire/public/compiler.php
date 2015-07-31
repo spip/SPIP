@@ -242,7 +242,7 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
-	$iter = new Iter("SQL");
+	$iter = new %s();
 	$iter->init( array(
 		"select"=>$select,
 		"from"=>$from,
@@ -401,7 +401,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	. calculer_requete_sql($boucles[$id_boucle]);
 
 	$contexte = memoriser_contexte_compil($boucle);
-	$a = sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $nums, $init_lang, $corps, $fin_lang, $trace);
+	$a = sprintf(CODE_CORPS_BOUCLE, $init, $boucle->iterateur, $contexte, $nums, $init_lang, $corps, $fin_lang, $trace);
 
 #	var_dump($a);exit;
 	return $a;
@@ -880,14 +880,22 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			// si la table n'existe pas avec le connecteur par defaut, 
 			// c'est peut etre une table qui necessite son connecteur dedie fourni
 			// permet une ecriture allegee (GEO) -> (geo:GEO)
-			if (!$show AND $show=$trouver_table($type, strtolower($type)))
+			if (!$show
+			AND $show=$trouver_table($type, strtolower($type))) {
 				$boucles[$id]->sql_serveur = strtolower($type);
-			if ($show) {
+			}
+
+			if ($g = charger_fonction(
+			'creer_boucle_'.$boucle->type_requete, 'public', true)) {
+				$boucles[$id] = $g($boucle);
+
+			} else if ($show) {
 				$boucles[$id]->show = $show;
 				// recopie les infos les plus importantes
 				$boucles[$id]->primary = $show['key']["PRIMARY KEY"];
 				$boucles[$id]->id_table = $x = $show['id_table'];
 				$boucles[$id]->from[$x] = $nom_table = $show['table'];
+				$boucles[$id]->iterateur = 'IterSQL';
 
 				$boucles[$id]->descr = &$descr;
 				if ((!$boucles[$id]->jointures)
