@@ -180,7 +180,7 @@ function public_assembler_dist($fond, $connect='') {
 	  global $forcer_lang, $ignore_auth_http;
 
 	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non')) {
+	if ($forcer_lang AND ($forcer_lang!=='non') AND !_request('action')) {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
