@@ -50,6 +50,18 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
+	// pipeline styliser
+	$squelette = pipeline('styliser', array(
+		'args' => array(
+			'id_rubrique' => $id_rubrique,
+			'ext' => $ext,
+			'fond' => $fond,
+			'lang' => $lang,
+			'connect' => $connect
+		),
+		'data' => $squelette,
+	));
+
 	// On selectionne, dans l'ordre :
 	// fond=10
 	if ($id_rubrique) {
