@@ -22,6 +22,12 @@ include("ecrire/inc_version.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire('inc_sites.php3');
 include_ecrire("inc_acces.php3");
+// Gestionnaire d'URLs
+if (@file_exists("inc-urls.php3"))
+	include_local("inc-urls.php3");
+else
+	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+
 
 //
 // Verifier la securite du lien et decoder les arguments
@@ -45,12 +51,32 @@ if (!verifier_low_sec ($id, $cle,
 // Choisir la fonction de calcul du RSS
 //
 switch($op) {
+	# forum public
+	case 'forum':
+		include_ecrire("inc_forum.php3");
+		if ($id = intval($a['id_article']))
+			$critere = "statut='publie' AND id_article=$id";
+		else if ($id = intval($a['id_syndic']))
+			$critere = "statut='publie' AND id_syndic=$id";
+		else if ($id = intval($a['id_breve']))
+			$critere = "statut='publie' AND id_breve=$id";
+		else if ($id = intval($a['id_rubrique']))
+			$critere = "statut='publie' AND id_rubrique=$id";
+		else if ($id = intval($a['id_thread']))
+			$critere = "statut='publie' AND id_thread=$id";
+		if ($id) $rss = rss_suivi_forums($a, $critere, false);
+		$title = _T("ecrire:titre_page_forum_suivi");
+		$url = generer_url_article($id);
+		break;
+	# suivi prive des forums
 	case 'forums':
 		include_ecrire("inc_forum.php3");
-		$rss = rss_suivi_forums($a);
+		$critere = critere_statut_controle_forum($a['page']);
+		$rss = rss_suivi_forums($a, $critere, true);
 		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
 		$url = _DIR_RESTREINT_ABS .'controle_forum.php3?page='.$a['page'];
 		break;
+	# revisions des articles
 	case 'revisions':
 		include_ecrire("inc_suivi_revisions.php");
 		$rss = rss_suivi_versions($a);

@@ -51,18 +51,27 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 // faible via les URLs (suivi RSS, iCal...)
 //
 function low_sec($id_auteur) {
-	if (!$id_auteur = intval($id_auteur)) return; // jamais trop prudent ;)
-	$query = "SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur";
-	$result = spip_query($query);
-
-	if ($row = spip_fetch_array($result)) {
-		$low_sec = $row["low_sec"];
-		if (!$low_sec) {
-			$low_sec = creer_pass_aleatoire();
-			spip_query("UPDATE spip_auteurs SET low_sec = '$low_sec' WHERE id_auteur = $id_auteur");
+	// Pas d'id_auteur : low_sec
+	if (!$id_auteur = intval($id_auteur)) {
+		if (!$low_sec = lire_meta('low_sec')) {
+			include_ecrire('inc_meta.php3');
+			ecrire_meta('low_sec', $low_sec = creer_pass_aleatoire());
+			ecrire_metas();
 		}
-		return $low_sec;
 	}
+	else {
+		$query = "SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur";
+		$result = spip_query($query);
+
+		if ($row = spip_fetch_array($result)) {
+			$low_sec = $row["low_sec"];
+			if (!$low_sec) {
+				$low_sec = creer_pass_aleatoire();
+				spip_query("UPDATE spip_auteurs SET low_sec = '$low_sec' WHERE id_auteur = $id_auteur");
+			}
+		}
+	}
+	return $low_sec;
 }
 
 function afficher_low_sec ($id_auteur, $action='') {
