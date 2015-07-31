@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Startseite',
-'article' => 'Article', # NEW
+'article' => 'Artikel',
 'articles' => 'Artikel',
 'articles_auteur' => 'Artikel dieses Autors',
 'articles_populaires' => 'Die beliebtesten Artikel',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Unter dieser Adresse gibt es keien Website.',
 'aucune_breve' => 'Unter dieser Adresse gibt es keine Meldung.',
 'aucune_rubrique' => 'Unter dieser Adresse gibt es keine Rubrik.',
-'auteur' => 'Auteur', # NEW
+'auteur' => 'Autor',
 'autres' => 'Andere',
 'autres_breves' => 'Weitere Meldungen.',
 'autres_groupes_mots_clefs' => 'Weitere Schlagwortgruppen',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hallo',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Meldung',
 'breves' => 'Meldungen',
 
 // C
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Nachricht',
 'messages_forum' => 'Forumsbeitr&auml;ge',
 'messages_recents' => 'Neuste Forumsbeitr&auml;ge',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Schlagwort',
 'mots_clefs' => 'Schlagworte',
 'mots_clefs_meme_groupe' => 'Schlagworte der gleichen Kategorie',
 
