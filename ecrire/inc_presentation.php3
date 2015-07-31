@@ -1083,7 +1083,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	else {
 		$hauteur = 80;
 		$largeur = 80;
-		$alt = " alt=\"\" ";
+		$alt = " alt=\" \" ";
 	}
 
 	if (!$menu_accesskey) $menu_accesskey = 1;
