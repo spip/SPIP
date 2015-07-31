@@ -47,7 +47,7 @@ function get_spip_doc($fichier) {
 // Filtre pour #FICHIER
 
 // http://doc.spip.org/@contenu_document
-function contenu_document($arg)
+function contenu_document($arg, $charset='')
 {
 	if (is_numeric($arg)) {
 		$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($arg));
@@ -63,7 +63,12 @@ function contenu_document($arg)
 		}
 	}
 
-	return spip_file_get_contents($f);
+	$r = spip_file_get_contents($f);
+	if ($charset) {
+	  include_spip('inc/charset');
+	  $r = importer_charset($r, $charset);
+	}
+	return $r;
 }
 
 // http://doc.spip.org/@generer_url_document_dist
