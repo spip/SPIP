@@ -274,7 +274,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	$champs = array();
 
 	$d = ($date AND isset($c[$champ_date]))?$c[$champ_date]:null;
-	$s = ($statut AND isset($c['statut']))?$c['statut']:$statut;
+	$s = (isset($c['statut']))?$c['statut']:$statut;
 
 	// cf autorisations dans inc/instituer_objet
 	if ($s != $statut OR ($d AND $d != $date)) {
