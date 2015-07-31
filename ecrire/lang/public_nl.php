@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Beginpagina',
-'article' => 'Article', # NEW
+'article' => 'Artikel',
 'articles' => 'Artikels',
 'articles_auteur' => 'Artikels van deze auteur',
 'articles_populaires' => 'Meest bekeken artikels',
@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Op dit adres is geen site te vinden',
 'aucune_breve' => 'Op dit adres is geen nieuwsbericht te vinden',
 'aucune_rubrique' => 'Op dit adres is geen rubriek te vinden',
-'auteur' => 'Auteur', # NEW
+'auteur' => 'Auteur',
 'autres' => 'Anderen',
 'autres_breves' => 'Andere nieuwsberichten',
 'autres_groupes_mots_clefs' => 'Andere groepen trefwoorden',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Commentaar geven op de site',
-'contact' => 'Contact', # NEW
+'contact' => 'Contact',
 'copie_document_impossible' => 'Onmogelijk om het document te kopiëren',
 
 // D
@@ -65,9 +65,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'In dezelfde rubriek',
 'memes_auteurs' => 'Van dezelfde auteurs',
 'message' => 'Bericht',
-'messages_forum' => 'Berichten van het forum', # MODIF
+'messages_forum' => 'Berichten',
 'messages_recents' => 'Meest recente berichten van de forums',
-'mots_clef' => 'Mot-clé', # NEW
+'mots_clef' => 'Trefwoord',
 'mots_clefs' => 'Trefwoorden',
 'mots_clefs_meme_groupe' => 'Trefwoorden van dezelfde groep',
 
@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Ziehier de nieuwsbrief van de site',
-'texte_lettre_information_2' => 'De nieuwsbrief vermedlt alle artikels en berichten gepubliceerd sinds', # MODIF
+'texte_lettre_information_2' => 'Deze brief geeft de laatste gepubliceerde sinds',
 
 // V
 'ver_imprimer' => 'Afdrukversie',
