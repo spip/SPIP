@@ -145,12 +145,14 @@ function pipeline($action, $val=null) {
 function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	static $compteur = array();
 	global $nombre_de_logs, $taille_des_logs;
+	$logname = ($logname===NULL ? _FILE_LOG : $logname);
+	if (!isset($compteur[$logname])) $compteur[$logname] = 0;
 	if (($logname != 'maj') AND
-	    ($compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs))
+	    ( $compteur[$logname]++ > 100 || !$nombre_de_logs || !$taille_des_logs))
 		return;
 
 	$logfile = ($logdir===NULL ? _DIR_LOG : $logdir)
-	  . ($logname===NULL ? _FILE_LOG : $logname)
+	  . ($logname)
 	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logname);
 
 	$rotate = 0;
@@ -183,7 +185,7 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	}
 
 	// Dupliquer les erreurs specifiques dans le log general
-	if ($logname !== NULL)
+	if ($logname !== _FILE_LOG)
 		spip_log($logname=='maj' ? 'cf maj.log' : $message);
 }
 

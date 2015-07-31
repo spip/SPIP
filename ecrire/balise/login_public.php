@@ -116,7 +116,7 @@ function login_pour_tous($login, $cible, $action) {
 
 	// Le login est memorise dans le cookie d'admin eventuel
 	if (!$login) {
-		if (preg_match(",^@(.*)$,", $_COOKIE['spip_admin'], $regs))
+		if (isset($_COOKIE['spip_admin']) && preg_match(",^@(.*)$,", $_COOKIE['spip_admin'], $regs))
 			$login = $regs[1];
 	} else if ($login == '-1')
 		$login = '';

@@ -330,7 +330,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache']))
-			$page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'];
+			$page['entetes']['X-Spip-Cache'] = isset($GLOBALS['delais'])?$GLOBALS['delais']:36000;
 
 	} else
 		$page = array();

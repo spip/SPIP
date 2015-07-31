@@ -44,7 +44,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) 
 	// si squelette est deja compile et perenne, le charger
 	if (!squelette_obsolete($phpfile, $source)
 	AND lire_fichier ($phpfile, $contenu,
-	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
+	array('critique' => 'oui', 'phpcheck' => 'oui')))
 		eval('?'.'>'.$contenu);
 #	spip_log($contenu, 'comp')
 	if (@file_exists($fonc = $squelette . '_fonctions'.'.php')
