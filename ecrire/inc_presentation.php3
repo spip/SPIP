@@ -1952,12 +1952,15 @@ function fin_page($credits='') {
 	if ($multi_popup) {
 		echo "<script type='text/javascript'><!-- \n";
 		echo "function openmulti(i) {\n";
-		echo "textes_multi = new Array;\n";
-		echo $multi_popup;
-		echo "alert (textes_multi[i]);
+
+		/*	// desactivation de ce truc pas fini ; il faudrait
 			// afficher le texte i dans une fenetre du type
 			// http://www.dynamicdrive.com/dynamicindex11/abox.htm
-		}\n";
+		echo "textes_multi = new Array;\n";
+		echo $multi_popup;
+		echo "alert (textes_multi[i]);";
+		*/
+		echo "}\n";
 		echo "// --></script>\n";
 	}
 
