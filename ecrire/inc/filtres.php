@@ -2557,8 +2557,7 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	if ($ajaxid AND is_string($ajaxid)){
 		$class .= ' ajax-id-'.$ajaxid;
 	}
-	$compl = "aria-live='polite' aria-atomic='true' ";
-	return "<div class='$class' ".$compl."data-ajax-env='$env'$r>\n$emboite</div><!--ajaxbloc-->\n";
+	return "<div class='$class' "."data-ajax-env='$env'$r>\n$emboite</div><!--ajaxbloc-->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()
