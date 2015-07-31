@@ -958,14 +958,9 @@ function attribut_html($texte,$textebrut = true) {
 function vider_url($url, $entites = true) {
 	# un message pour abs_url
 	$GLOBALS['mode_abs_url'] = 'url';
-
 	$url = trim($url);
-	if (preg_match(",^(http:?/?/?|mailto:?)$,iS", $url))
-		return '';
-
-	if ($entites) $url = entites_html($url);
-
-	return $url;
+	$r = ",^(?:" . _PROTOCOLES_STD . '):?/?/?$,iS';
+	return preg_match($r, $url) ? '': ($entites ? entites_html($url) : $url);
 }
 
 // Extraire une date de n'importe quel champ (a completer...)

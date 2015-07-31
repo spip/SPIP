@@ -59,7 +59,7 @@ function typographie_fr_dist($letexte) {
 
 	$cherche2 = array(
 		'/([^-\n]|^)--([^-]|$)/S',
-		',(http|https|ftp|mailto)~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S',
+		',(' ._PROTOCOLES_STD . ')~((://[^"\'\s\[\]\}\)<>]+)~([?]))?,S',
 		'/~/'
 	);
 	$remplace2 = array(
