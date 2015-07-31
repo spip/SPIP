@@ -35,16 +35,7 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 	if ($id_article AND !($titre = sql_getfetsel("titre", "spip_articles", "id_article=$id_article"))) {
 		include_spip('inc/minipres');
                 echo minipres(_T('public:aucun_article'));
-	} elseif (!(
-		autoriser('modererpetition')
-		OR (
-			$id_article > 0
-			AND autoriser('modererpetition', 'article', $id_article)
-			)
-		)) {
-		include_spip('inc/minipres'); 
-		echo minipres();}
-	else controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas);
+	}	else controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas);
 }
 
 function controle_petition_args($id_article, $type, $date, $debut, $titre, $where, $pas)
@@ -71,9 +62,19 @@ function controle_petition_args($id_article, $type, $date, $debut, $titre, $wher
 	if (_AJAX) {
 			ajax_retour($res);
 	} else {
-		  $ong = controle_petition_onglet($id_article, $debut, $type);
-		  controle_petition_page($id_article, $titre, $ong, $res);
+
+		if (autoriser('modererpetition')
+		OR (
+			$id_article > 0
+			AND autoriser('modererpetition', 'article', $id_article)
+			))
+			$ong = controle_petition_onglet($id_article, $debut, $type);
+		else {
+		  $type = 'public';
+		  $ong = '';
 		}
+		controle_petition_page($id_article, $titre, $ong, $res);
+	}
 }
 
 // http://doc.spip.org/@controle_petition_page
