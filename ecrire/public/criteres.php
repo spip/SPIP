@@ -583,10 +583,10 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 
 	if ($type == 'jour')
 		$boucle->where[]= array("'='", "'DATE_FORMAT($date, \'%Y%m%d\')'",
-					("$annee . $mois . $jour"));
+					("sql_quote($annee . $mois . $jour)"));
 	elseif ($type == 'mois')
 		$boucle->where[]= array("'='", "'DATE_FORMAT($date, \'%Y%m\')'",
-					("$annee . $mois"));
+					("sql_quote($annee . $mois)"));
 	elseif ($type == 'semaine')
 		$boucle->where[]= array("'AND'", 
 					array("'>='",
@@ -599,8 +599,8 @@ function critere_agenda_dist($idb, &$boucles, $crit)
 		$boucle->where[]= array("'AND'",
 					array("'>='",
 					      "'DATE_FORMAT($date, \'%Y%m%d\')'",
-					      ("$annee . $mois . $jour")),
-					array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("$annee2 . $mois2 . $jour2")));
+					      ("sql_quote($annee . $mois . $jour)")),
+					array("'<='", "'DATE_FORMAT($date, \'%Y%m%d\')'", ("sql_quote($annee2 . $mois2 . $jour2)")));
 	// sinon on prend tout
 }
 
