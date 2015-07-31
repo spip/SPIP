@@ -44,31 +44,38 @@ function surligner_mots($page) {
   if($surcharge_surligne=_request("var_recherche")) {
     $surcharge_surligne = preg_replace(",(?<!\\\\)((?:(?>\\\\){2})*)('),","$1\\\\$2",$surcharge_surligne);
     $surcharge_surligne = str_replace("\\","\\\\",$surcharge_surligne);
-    if($GLOBALS['meta']['charset']=='utf-8') $surcharge_surligne = utf8_encode($surcharge_surligne);
+    if($GLOBALS['meta']['charset']=='utf-8') {
+      include_spip('inc/charsets');
+      if(!is_utf8($surcharge_surligne)) $surcharge_surligne = utf8_encode($surcharge_surligne);
+    }  
   }
   foreach($surlignejs_engines as $engine) 
     if($surcharge_surligne || (preg_match($engine[0],$ref) && preg_match($engine[1],$ref))) { 
       
       //good referrer found or var_recherche is not null
-      $script = "<script src='".find_in_path("javascript/SearchHighlight.js")."'></script>
-      <script type='text/javascript'>
+      $script = "<script type='text/javascript'>
         jQuery(function(){
           jQuery(document).SearchHighlight({
             style_name:'spip_surligne',
             exact:'whole',
             style_name_suffix:false,
             engines:[/^".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site'])."/i,/recherche=([^&]+)/i],
-            startHighlightComment:'".MARQUEUR_SURLIGNE."',
-            stopHighlightComment:'".MARQUEUR_FSURLIGNE."'".
+            highlight:'.surlignable',
+            nohighlight:'.pas_surlignable'".
             ($surcharge_surligne?",
             keys:'$surcharge_surligne'":"")."
           })
         });
-      </script>";
-      $page = preg_replace(",</head>,",$script."\n</head>",$page);
+      </script>
+      ";
+      if(jquery_chargee($page)) {
+       //add javascript/SearchHighlight.js to the template jquery.js.html
+       $page = ajouter_js_affichage_final($page,"SearchHighlight");
+       //add a script inline into the <head>
+       $page = ajouter_js_affichage_final($page,$script,true);        
+      }
       break;
     }
   return $page;
 }
-
 ?>
