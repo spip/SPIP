@@ -1676,7 +1676,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$url = "&url=".$fonctions[0];
 			$fonctions = array();
 		} else {
-			$url = '';
+			$url = '&url=\'.urlencode(\$clean_link->getUrl()).\'';
 		}
 		$milieu = '
 			$'.$nom_var.' = "<"."?php
