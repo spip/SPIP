@@ -1249,7 +1249,7 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.925, $version_installee, $version_cible)) {
 		include_spip('inc/flock');
 		/* deplacement des sessions */
-		$f_session = preg_files('data', 'session_');
+		$f_session = preg_fis('data', 'session_');
 		$repertoire = _DIR_SESSIONS;
 		if(!@file_exists($repertoire)) {
 			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
@@ -1282,6 +1282,17 @@ function maj_base($version_cible = 0) {
 		}
 		foreach($f_upload as $f) {
 			@copy($f, _DIR_TMP.$f);
+		}
+		/* deplacement des dumps */
+		$f_session = preg_files('data', 'dump');
+		$repertoire = _DIR_DUMP;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		foreach($f_session as $f) {
+			$d = basename($f);
+			@copy($f, $repertoire.$d);
 		}
 		maj_version('1.925');
 	}
