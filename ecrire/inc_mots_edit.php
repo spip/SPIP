@@ -242,7 +242,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<P>";
 	debut_cadre_formulaire();
 
-	echo "<FORM ACTION='mots_edit.php3' METHOD='post'>";
+	echo "<FORM action=" . http_php_script("mots_edit","") . " METHOD='post'>";
 	echo "<div class='serif'>";
 	
 	if ($id_mot)

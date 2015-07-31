@@ -139,7 +139,7 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
 function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
 	global $spip_lang_right;
-echo "<form action='articles_tous.php3' method='get'>";
+echo "<form action=" . http_php_script("articles_tous","") . " method='get'>";
 echo "<input type='hidden' name='aff_art[]' value='x'>";
 
 debut_boite_info();

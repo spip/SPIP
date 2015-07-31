@@ -85,7 +85,7 @@ echo aide("motsgroupes");
 if ($connect_statut =="0minirezo"){
 	$type=entites_html(urldecode($type));
 	echo "<p><font face='Verdana,Arial,Sans,sans-serif'>";
-	echo "<FORM ACTION='mots_tous.php3' METHOD='post'>\n";
+	echo "<FORM action=" . http_php_script("mots_tous","") . " METHOD='post'>\n";
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='id_groupe' VALUE=\"$id_groupe\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";

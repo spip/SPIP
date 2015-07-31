@@ -101,7 +101,7 @@ if ($quota_cache) {
 }
 echo ' ('._T('cache_modifiable_webmestre').')</p>';
 
-echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
+echo "\n<FORM action=" . http_php_script("../spip_cache","") . " METHOD='post'>";
 echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
 echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "'>";
 echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
@@ -116,7 +116,7 @@ debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
 	echo "<iframe width='530px' height='65px' src='../spip_cache.php3?id_auteur=$connect_id_auteur&hash=".calculer_action_auteur("afficher_cache_images")."&afficher_cache_images=oui&lang=$spip_lang'></iframe>";
 	echo "</div>";
 
-echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
+echo "\n<FORM action=" . http_php_script("../spip_cache","") . " METHOD='post'>";
 echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
 echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache_images") . "'>";
 echo "\n<INPUT TYPE='hidden' NAME='purger_cache_images' VALUE='oui'>";
@@ -144,7 +144,7 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	
-	echo "\n<FORM ACTION='admin_vider.php3' METHOD='post'>";
+	echo "\n<FORM action=" . http_php_script("admin_vider","") . " METHOD='post'>";
 	
 	$hash = calculer_action_auteur("purger_index");
 	

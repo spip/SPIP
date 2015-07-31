@@ -184,7 +184,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
     if (spip_num_rows($result_ajout_auteurs) > 0) {
 
-      echo "<FORM ACTION='message.php3' METHOD='post'>";
+      echo "<FORM action=" . http_php_script("message","") . " METHOD='post'>";
       echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b>"._T('bouton_ajouter_participant')." &nbsp; </b></FONT>\n";
       echo "<input TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
