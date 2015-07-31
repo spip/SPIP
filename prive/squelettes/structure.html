@@ -1,0 +1,12 @@
+[#EVAL{_DOCTYPE_ECRIRE}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=prive/squelettes/head/#ENV{type},env}>
+</head>
+<body class="page_#ENV{type,page}[ #ENV{type,page}_(#ENV{composition,''})] [(#REM|init_body_class)]">
+<INCLURE{fond=prive/squelettes/body,env}>
+</body>
+</html>
+(#EVAL{#VAL{var_zajax}|_request}|non)][
+<INCLURE{fond=#VAL{prive/squelettes/}|concat{#VAL{var_zajax}|_request}|concat{'/',#ENV{type}},env}>
+(#EVAL{#VAL{var_zajax}|_request}|oui)]

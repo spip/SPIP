@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 
 // http://doc.spip.org/@repercuter_gadgets
-function repercuter_gadgets($id_rubrique) {
+function repercuter_gadgets() {
 
 	if (!_SPIP_AJAX) return '';
 
