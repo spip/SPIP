@@ -15,7 +15,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_connect.php3");
-include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
 define("_DIR_LOGIN", _DIR_RESTREINT ? "" : "../");
