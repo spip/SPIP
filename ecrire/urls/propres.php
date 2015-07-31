@@ -103,7 +103,7 @@ function urls_propres_creer_chaine_url($x) {
 function declarer_url_propre($type, $id_objet) {
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table(table_objet($type));
-	$champ_titre = $desc['titre'];
+	$champ_titre = $desc['titre'] ? $desc['titre'] : 'titre';
 	$col_id =  @$desc['key']["PRIMARY KEY"];
 	//  $type doit designer une table, avec champ indiquant un titre
 	if (!$col_id OR !$champ_titre) return false; 
