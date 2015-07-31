@@ -390,14 +390,17 @@ function formulaire_inscription($type) {
 	}
 	else {
 		echo _T('form_forum_indiquer_nom_email');
-		$link = $GLOBALS['clean_link'];
-		echo $link->getForm('GET');
-		echo  "<P><B>"._T('form_pet_votre_nom')."</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"nom_inscription\" VALUE=\"\" SIZE=\"30\">";
-		echo  "<P><B>"._T('form_pet_votre_email')."</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"mail_inscription\" VALUE=\"\" SIZE=\"30\">";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('bouton_valider')."\">";
-		echo  "</DIV></FORM>";
+
+		$link = new Link;
+		$url = $link->getUrl();
+		$url = ereg_replace("\&", "&amp;", $url);
+		echo "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n";
+		echo  "<div><b>"._T('form_pet_votre_nom')."</b></div>";
+		echo  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>";
+		echo  "<div><b>"._T('form_pet_votre_email')."</b></div>";
+		echo  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>";
+		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>";
+		echo  "</form>";
 	}
 }
 

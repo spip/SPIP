@@ -51,6 +51,7 @@ function xhtml ($buffer) {
 		tidy_setopt('indent-spaces', 4);
 		tidy_setopt('output-xhtml', true);
 		tidy_setopt('indent', 5);
+		tidy_setopt('show-body-only', false);
 	
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();

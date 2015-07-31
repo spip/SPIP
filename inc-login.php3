@@ -41,12 +41,12 @@ function ouvre_login($titre='') {
 
 	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
 
-	$retour .= '<font size="2" face="Verdana,arial,helvetica,sans-serif">';
+	$retour .= '<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 2;">';
 	return $retour;
 }
 
 function ferme_login() {
-	$retour =  "</font>";
+	$retour =  "</div>";
 	$retour .= "</div>";
 	return $retour;
 }
@@ -213,12 +213,12 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 
 		echo "<form name='form_login' action='$action' method='post'>\n";
 		echo "<div class='spip_encadrer'>";
-		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
+		if ($erreur) echo "<span style='color:red;'><b>$erreur</b></span><p />";
 		echo "<label><b>"._T('login_login2')."</b><br></label>";
-		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40'>\n";
+		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40' />\n";
 
-		echo "<input type='hidden' name='var_url' value='$url'>\n";
-		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='"._T('bouton_valider')."'></div>\n";
+		echo "<input type='hidden' name='var_url' value='$url' />\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='"._T('bouton_valider')."' /></div>\n";
 		echo "</div>";
 		echo "</form>";
 	}
@@ -230,9 +230,9 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<form action='spip_cookie.php3' method='get'>";
 		echo "<fieldset>\n<p>";
 		echo _T('login_preferez_refuser')." \n";
-		echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
+		echo "<input type='hidden' name='essai_auth_http' value='oui' /> ";
 		$url = $cible->getUrl();
-		echo "<input type='hidden' name='url' value='$url'>\n";
+		echo "<input type='hidden' name='url' value='$url' />\n";
 		echo "<div align='right'><input type='submit' name='submit' class='spip_bouton' value='"._T('login_sans_cookiie')."'></div>\n";
 		echo "</fieldset></form>\n";
 	}
