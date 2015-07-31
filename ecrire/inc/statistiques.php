@@ -600,7 +600,7 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 	} else $res = '';
 
 	$mois = statistiques_collecte_date( "COUNT(*)",
-		"FROM_UNIXTIME(UNIX_TIMESTAMP(date_time),'%Y-%m')",
+		"DATE_FORMAT(date_time,'%Y-%m')",
 		"spip_signatures",
 		"date_time > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL 2700 DAY)"
 		. (" AND id_article=$id_article"),

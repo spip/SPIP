@@ -128,7 +128,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	  $res = statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement, $liste);
 	  
 	$mois = statistiques_collecte_date("SUM(visites)",
-		"FROM_UNIXTIME(UNIX_TIMESTAMP($order),'%Y-%m')", 
+		"DATE_FORMAT($order,'%Y-%m')", 
 		$table,
 		"$order > DATE_SUB(NOW(),INTERVAL 2700 DAY)"
 		. ($where ? " AND $where" : ''),
