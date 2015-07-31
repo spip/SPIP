@@ -206,17 +206,17 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		. '</div><br />';
 
 	//// Documents associes
-	$res = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l", "l.id_".$type."=" .sql_quote($id) . " AND l.id_document=docs.id_document AND docs.mode='document'", "", "docs.id_document");
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_".$type."s AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='document'", "", "D.id_document");
 
 	$documents_lies = array();
 	while ($row = sql_fetch($res))
 		$documents_lies[]= $row['id_document'];
 
 	//// Images sans documents
-	$images_liees = sql_select("docs.id_document", "spip_documents AS docs, spip_documents_".$type."s AS l "."", "l.id_".$type."=" . sql_quote($id) . " AND l.id_document=docs.id_document AND docs.mode='image'", "", "docs.id_document");
+	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_".$type."s AS T ON T.id_document=D.id_document", "T.id_".$type."=" .sql_quote($id) . " AND D.mode='image'", "", "D.id_document");
 
 	$ret .= "\n<div id='liste_images'>";
-	while ($doc = sql_fetch($images_liees)) {
+	while ($doc = sql_fetch($res)) {
 		$id_document = $doc['id_document'];
 		$deplier = $id_document_actif==$id_document;
 		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
