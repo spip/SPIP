@@ -21,6 +21,7 @@ function exec_editer_auteurs_dist()
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
+		exit;
 	}
 
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');

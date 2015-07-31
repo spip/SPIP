@@ -46,6 +46,7 @@ function erreur_aide_indisponible() {
 	global $help_server;
 	echo minipres(_T('forum_titre_erreur'),
 		 "<div>$help_server: "._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>");
+	exit;
 }
 
 // Selection de l'aide correspondant a la langue demandee

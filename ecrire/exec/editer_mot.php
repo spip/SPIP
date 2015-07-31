@@ -36,6 +36,7 @@ function exec_editer_mot_dist()
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
+		exit;
 	}
 
 	$ch = _request('cherche_mot');

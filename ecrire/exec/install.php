@@ -19,9 +19,10 @@ define('_FILE_TMP', '_install');
 function exec_install_dist()
 {
 	$etape = _request('etape');
-	if (_FILE_CONNECT) 
+	if (_FILE_CONNECT) {
 		echo minipres('AUTO', _T('avis_espace_interdit'));
-	else {
+		exit;
+	} else {
 
 	// On va supprimer les eventuelles vieilles valeurs de meta,
 	// mais il faut relancer init_langues pour savoir quelles

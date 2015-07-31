@@ -26,6 +26,7 @@ function exec_dater_dist()
 		spip_log("Tentative d'intrusion du " . $GLOBALS['auteur_session']['statut'] . ' ' . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec'] . " sur $type $id.");
 		include_spip('inc/minipres');
 		echo minipres(_T('info_acces_interdit'));
+		exit;
 	}
 
 	$table = ($type=='syndic') ? 'syndic' : ($type . 's');

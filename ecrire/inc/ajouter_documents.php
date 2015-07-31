@@ -475,6 +475,7 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		_T('upload_fichier_zip_texte2') .
 	  "</p>" .
 	  $action);
+	exit;
 	// a tout de suite en joindre4, joindre5, ou joindre6
 }
 

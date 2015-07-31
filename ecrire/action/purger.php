@@ -71,7 +71,7 @@ function action_purger_dist()
  _T('ecrire:taille_cache_image',
 		     array('dir' => _DIR_VAR,
 			   'taille' => "<b>".taille_en_octets($taille)."</b>")) .'</div>'); 
-	break;
+	exit;
   }
 }
 ?>
