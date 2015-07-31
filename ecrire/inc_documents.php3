@@ -109,6 +109,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 					$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 				if ($titre) {
 					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+					$titre_ko = supprimer_tags(propre($titre_ko))
 					$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
 				}
 				$vignette .= ">";
@@ -200,6 +201,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre) {
 				$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+				$titre_ko = supprimer_tags(propre($titre_ko));
 				$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
 			}
 			if ($affichage_detaille)
