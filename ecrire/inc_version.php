@@ -283,7 +283,7 @@ include(_DIR_INCLUDE . 'inc_utils.php');
 $spip_version = 1.906;
 
 // version de spip
-$spip_version_affichee = "1.9 alpha 2";
+$spip_version_affichee = "1.9 alpha 3";
 
 // appliquer le cookie_prefix
 if ($cookie_prefix != 'spip') {
@@ -314,16 +314,11 @@ $flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
 
 //
 // Sommes-nous dans l'empire du Mal ?
+// (ou sous le signe du Pingouin, ascendant GNU ?)
 //
+
 if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
 	define ('os_serveur', 'windows');
-
-
-//
-// Non ! Car le GNU veille... (Entete HTTP de frimeur)
-//
-if (!headers_sent())
-	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net");
 
 //
 // Infos sur le fichier courant
@@ -335,6 +330,74 @@ if (!$REQUEST_URI) {
 	if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
 		$REQUEST_URI .= '?'.$QUERY_STRING;
 }
+
+
+// tidy en ligne de commande (si on ne l'a pas en module php,
+// ou si le module php ne marche pas)
+// '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
+#define_once('_TIDY_COMMAND', 'tidy');
+
+//
+// Module de lecture/ecriture/suppression de fichiers utilisant flock()
+//
+include_ecrire('inc_flock');
+
+// Lire les meta cachees
+
+if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
+		$meta = @unserialize($meta);
+	// en cas d'echec refaire le fichier
+if (!is_array($meta) AND _FILE_CONNECT) {
+		include_ecrire('inc_meta');
+		ecrire_metas();
+	}
+
+
+// Langue principale du site
+$langue_site = $GLOBALS['meta']['langue_site'];
+if (!$langue_site) include_ecrire('inc_lang');
+$spip_lang = $langue_site;
+
+
+// chargement des plugins : doit arriver en dernier
+// car dans les plugins on peut inclure inc-version
+// qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
+// donc il faut avoir tout fini ici avant de charger les plugins
+if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
+	// chargement optimise precompile
+	include_once(_DIR_SESSIONS."charger_plugins_options.php");
+}
+else
+{
+	include_ecrire('inc_plugin');
+	// generer les fichiers php precompiles
+	// de chargement des plugins et des pipelines
+	verif_plugin();
+	if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
+		include_once(_DIR_SESSIONS."charger_plugins_options.php");
+	}
+	else
+		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
+}
+
+
+//
+// Installer Spip si pas installe... sauf si justement on est en train
+//
+if (!(_FILE_CONNECT
+OR autoriser_sans_cookie($_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie")
+OR (basename($REQUEST_URI) == 'spip_action.php?action=test_dirs'))) {
+
+	// Si on peut installer, on lance illico
+	if (@file_exists('inc_version.php'))
+		redirige_par_entete(generer_url_ecrire("install"));
+	else if (defined("_INC_PUBLIC")) {
+	// Si on est dans le site public, dire que qq s'en occupe
+		include_ecrire ("inc_minipres");
+		minipres(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
+	}
+	// autrement c'est une install ad hoc (spikini...), on sait pas faire 
+ }
 
 //
 // Reglage de l'output buffering : si possible, generer une sortie
@@ -365,74 +428,14 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 		ob_start('ob_gzhandler');
 }
 
+// Vanter notre art de la composition typographique
+
+if (!headers_sent())
+	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net");
 
 // Lien vers la page demandee et lien nettoye ne contenant que des id_objet
 $clean_link = new Link();
 
-// tidy en ligne de commande (si on ne l'a pas en module php,
-// ou si le module php ne marche pas)
-// '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
-#define_once('_TIDY_COMMAND', 'tidy');
-
-//
-// Module de lecture/ecriture/suppression de fichiers utilisant flock()
-//
-include_ecrire('inc_flock');
-
-// Lire les meta cachees
-
-if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
-		$meta = @unserialize($meta);
-	// en cas d'echec refaire le fichier
-if (!is_array($meta) AND _FILE_CONNECT) {
-		include_ecrire('inc_meta');
-		ecrire_metas();
-	}
-
-// Langue principale du site
-$langue_site = $GLOBALS['meta']['langue_site'];
-if (!$langue_site) include_ecrire('inc_lang');
-$spip_lang = $langue_site;
-
-
-// chargement des plugins : doit arriver en dernier
-// car dans les plugins on peut inclure inc-version
-// qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
-// donc il faut avoir tout fini ici avant de charger les plugins
-if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
-	// chargement optimise precompile
-	include_once(_DIR_SESSIONS."charger_plugins_options.php");
-}
-else
-{
-	include_ecrire('inc_plugin');
-	// generer les fichiers php precompiles
-	// de chargement des plugins et des pipelines
-	verif_plugin();
-	if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
-		include_once(_DIR_SESSIONS."charger_plugins_options.php");
-	}
-	else
-		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
-}
-
-//
-// Installer Spip si pas installe... sauf si justement on est en train
-//
-if (!(_FILE_CONNECT
-OR autoriser_sans_cookie($_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie")
-OR (basename($REQUEST_URI) == 'spip_action.php?action=test_dirs'))) {
-
-	// Si on peut installer, on lance illico
-	if (@file_exists('inc_version.php'))
-		redirige_par_entete(generer_url_ecrire("install"));
-	else if (defined("_INC_PUBLIC")) {
-	// Si on est dans le site public, dire que qq s'en occupe
-		include_ecrire ("inc_minipres");
-		minipres(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
-	}
-	// autrement c'est une install ad hoc (spikini...), on sait pas faire 
- }
 # spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
 
 ?>
