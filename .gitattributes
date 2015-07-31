@@ -23,8 +23,6 @@ ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_breve.php -text
 ecrire/action/editer_groupe_mot.php -text
 ecrire/action/editer_message.php -text
-ecrire/action/editer_mot.php -text
-ecrire/action/editer_mots.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/editer_site.php -text
 ecrire/action/etre_webmestre.php -text
@@ -34,7 +32,6 @@ ecrire/action/instituer_article.php -text
 ecrire/action/instituer_auteur.php -text
 ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
-ecrire/action/instituer_groupe_mots.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/instituer_site.php -text
 ecrire/action/instituer_syndic.php -text
@@ -49,7 +46,6 @@ ecrire/action/reorganiser.php -text
 ecrire/action/session.php -text
 ecrire/action/supprimer.php -text
 ecrire/action/supprimer_document.php -text
-ecrire/action/supprimer_mot.php -text
 ecrire/action/supprimer_traduction.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
@@ -94,7 +90,6 @@ ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
 ecrire/configuration/moderniseur_html.php -text
-ecrire/configuration/mots.php -text
 ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
 ecrire/configuration/redirection.php -text
@@ -146,7 +141,6 @@ ecrire/exec/documenter.php -text
 ecrire/exec/documents_colonne.php -text
 ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
-ecrire/exec/editer_mots.php -text
 ecrire/exec/fond.php -text
 ecrire/exec/fond_monobloc.php -text
 ecrire/exec/iconifier.php -text
@@ -165,9 +159,6 @@ ecrire/exec/menu_rubriques.php -text
 ecrire/exec/message.php -text
 ecrire/exec/message_edit.php -text
 ecrire/exec/messagerie.php -text
-ecrire/exec/mots_edit.php -text
-ecrire/exec/mots_tous.php -text
-ecrire/exec/mots_type.php -text
 ecrire/exec/navigation.php -text
 ecrire/exec/naviguer.php -text
 ecrire/exec/plonger.php -text
@@ -215,7 +206,6 @@ ecrire/inc/documenter.php -text
 ecrire/inc/drapeau_edition.php -text
 ecrire/inc/editer.php -text
 ecrire/inc/editer_auteurs.php -text
-ecrire/inc/editer_mots.php -text
 ecrire/inc/envoyer_mail.php -text
 ecrire/inc/filtres_ecrire.php -text
 ecrire/inc/filtres_images_lib_mini.php -text
@@ -402,9 +392,7 @@ prive/contenu/syndic_article.html -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/breve.html -text
-prive/editer/groupe_mot.html -text
 prive/editer/logo.html -text
-prive/editer/mot.html -text
 prive/editer/rubrique.html -text
 prive/editer/site.html -text
 prive/formulaires/configurer_identite.html -text
@@ -424,12 +412,8 @@ prive/formulaires/editer_auteur.html -text
 prive/formulaires/editer_auteur.php -text
 prive/formulaires/editer_breve.html -text
 prive/formulaires/editer_breve.php -text
-prive/formulaires/editer_groupe_mot.html -text
-prive/formulaires/editer_groupe_mot.php -text
 prive/formulaires/editer_logo.html -text
 prive/formulaires/editer_logo.php -text
-prive/formulaires/editer_mot.html -text
-prive/formulaires/editer_mot.php -text
 prive/formulaires/editer_rubrique.html -text
 prive/formulaires/editer_rubrique.php -text
 prive/formulaires/editer_site.html -text
@@ -703,9 +687,6 @@ prive/listes/articles.html -text
 prive/listes/auteurs.html -text
 prive/listes/auteurs_fonctions.php -text
 prive/listes/breves.html -text
-prive/listes/mots-admin.html -text
-prive/listes/mots-admin_fonctions.php -text
-prive/listes/mots.html -text
 prive/listes/rubriques.html -text
 prive/listes/syndic.html -text
 prive/listes/syndic_articles.html -text

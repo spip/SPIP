@@ -35,9 +35,6 @@ function liste_des_champs() {
 			'site' => array(
 				'nom_site' => 5, 'url_site' => 1, 'descriptif' => 3
 			),
-			'mot' => array(
-				'titre' => 8, 'texte' => 1, 'descriptif' => 5
-			),
 			'auteur' => array(
 				'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
 			),

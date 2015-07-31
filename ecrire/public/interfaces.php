@@ -185,8 +185,6 @@ $table_des_tables['auteurs']='auteurs';
 $table_des_tables['breves']='breves';
 $table_des_tables['documents']='documents';
 $table_des_tables['types_documents']='types_documents';
-$table_des_tables['mots']='mots';
-$table_des_tables['groupes_mots']='groupes_mots';
 $table_des_tables['rubriques']='rubriques';
 $table_des_tables['syndication']='syndic';
 $table_des_tables['syndic']='syndic';
@@ -212,7 +210,6 @@ $exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs';
 $exceptions_des_tables['syndic_articles']['url_site']=array('syndic', 'url_site');
 $exceptions_des_tables['syndic_articles']['nom_site']=array('syndic', 'nom_site');
 
-$table_titre['mots']= "titre, '' AS lang";
 $table_titre['breves']= 'titre , lang';
 $table_titre['articles']= 'titre, lang';
 $table_titre['rubriques']= 'titre, lang';
@@ -227,8 +224,6 @@ $table_date['auteurs']='date';
 $table_date['breves']='date_heure';
 $table_date['documents']='date';
 $table_date['types_documents']='date';
-$table_date['groupes_mots']='date';
-$table_date['mots']='date';
 $table_date['rubriques']='date';
 $table_date['syndication']='date';
 $table_date['syndic_articles']='date';
@@ -239,48 +234,24 @@ $table_date['syndic_articles']='date';
 
 global $tables_jointures;
 
-$tables_jointures['spip_articles'][]= 'mots_articles';
 $tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
 $tables_jointures['spip_articles'][]= 'documents_liens';
-$tables_jointures['spip_articles'][]= 'mots';
 
 $tables_jointures['spip_auteurs'][]= 'auteurs_articles';
 
-$tables_jointures['spip_breves'][]= 'mots_breves';
 $tables_jointures['spip_breves'][]= 'documents_liens';
-$tables_jointures['spip_breves'][]= 'mots';
 
 $tables_jointures['spip_documents'][]= 'documents_liens';
-$tables_jointures['spip_documents'][]= 'mots_documents';
 $tables_jointures['spip_documents'][]= 'types_documents';
-$tables_jointures['spip_documents'][]= 'mots';
 
-$tables_jointures['spip_rubriques'][]= 'mots_rubriques';
 $tables_jointures['spip_rubriques'][]= 'documents_liens';
-$tables_jointures['spip_rubriques'][]= 'mots';
-
-$tables_jointures['spip_syndic'][]= 'mots_syndic';
-$tables_jointures['spip_syndic'][]= 'mots';
 
 $tables_jointures['spip_syndic_articles'][]= 'syndic';
-$tables_jointures['spip_syndic_articles'][]= 'mots_syndic';
-$tables_jointures['spip_syndic_articles'][]= 'mots';
 
-$tables_jointures['spip_mots'][]= 'mots_articles';
-$tables_jointures['spip_mots'][]= 'mots_breves';
-$tables_jointures['spip_mots'][]= 'mots_rubriques';
-$tables_jointures['spip_mots'][]= 'mots_syndic';
-$tables_jointures['spip_mots'][]= 'mots_documents';
-
-$tables_jointures['spip_groupes_mots'][]= 'mots';
 
 
 global  $exceptions_des_jointures;
-$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre');
-$exceptions_des_jointures['type_mot'] = array('spip_mots', 'type');
-$exceptions_des_jointures['id_mot_syndic']= array('spip_mots_syndic','id_mot');
-$exceptions_des_jointures['titre_mot_syndic']= array('spip_mots','titre');
-$exceptions_des_jointures['type_mot_syndic']= array('spip_mots','type');
+#$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
 
 global  $table_des_traitements;
 

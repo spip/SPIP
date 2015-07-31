@@ -57,9 +57,6 @@ function exec_configurer_contenu_dist(){
 	$breves = charger_fonction('breves', 'configuration');
 	echo $breves();
 
-	$mots = charger_fonction('mots', 'configuration');
-	echo $mots();
-
 	$logos = charger_fonction('logos', 'configuration');
 	echo $logos();
 

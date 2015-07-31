@@ -61,47 +61,6 @@ $spip_documents_liens_key = array(
 		"PRIMARY KEY"		=> "id_document,id_objet,objet",
 		"KEY id_document"	=> "id_document");
 
-
-$spip_mots_articles = array(
-		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_mots_articles_key = array(
-		"PRIMARY KEY"	=> "id_article, id_mot",
-		"KEY id_mot"	=> "id_mot");
-
-$spip_mots_breves = array(
-		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_mots_breves_key = array(
-		"PRIMARY KEY"	=> "id_breve, id_mot",
-		"KEY id_mot"	=> "id_mot");
-
-$spip_mots_rubriques = array(
-		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_mots_rubriques_key = array(
-		"PRIMARY KEY"	=> "id_rubrique, id_mot",
-		"KEY id_mot"	=> "id_mot");
-
-$spip_mots_syndic = array(
-		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_syndic"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_mots_syndic_key = array(
-		"PRIMARY KEY"	=> "id_syndic, id_mot",
-		"KEY id_mot"	=> "id_mot");
-
-$spip_mots_documents = array(
-		"id_mot"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_document"	=> "bigint(21) DEFAULT '0' NOT NULL");
-
-$spip_mots_documents_key = array(
-		"PRIMARY KEY"	=> "id_document, id_mot",
-		"KEY id_mot"	=> "id_mot");
-
 $spip_meta = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",
 		"valeur"	=> "text DEFAULT ''",
@@ -129,21 +88,6 @@ $tables_auxiliaires['spip_documents_liens'] = array(
 	'field' => &$spip_documents_liens,
 	'key' => &$spip_documents_liens_key);
 
-$tables_auxiliaires['spip_mots_articles'] = array(
-	'field' => &$spip_mots_articles,
-	'key' => &$spip_mots_articles_key);
-$tables_auxiliaires['spip_mots_breves'] = array(
-	'field' => &$spip_mots_breves,
-	'key' => &$spip_mots_breves_key);
-$tables_auxiliaires['spip_mots_rubriques'] = array(
-	'field' => &$spip_mots_rubriques,
-	'key' => &$spip_mots_rubriques_key);
-$tables_auxiliaires['spip_mots_syndic'] = array(
-	'field' => &$spip_mots_syndic,
-	'key' => &$spip_mots_syndic_key);
-$tables_auxiliaires['spip_mots_documents'] = array(
-	'field' => &$spip_mots_documents,
-	'key' => &$spip_mots_documents_key);
 $tables_auxiliaires['spip_meta'] = array(
 	'field' => &$spip_meta,
 	'key' => &$spip_meta_key);

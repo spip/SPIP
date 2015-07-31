@@ -356,7 +356,6 @@ function liste_metas()
 		'articles_texte' => 'oui',
 		'articles_ps' => 'non',
 		'articles_redac' => 'non',
-		'articles_mots' => 'non',
 		'post_dates' => 'non',
 		'articles_urlref' => 'non',
 		'articles_redirection' => 'non',

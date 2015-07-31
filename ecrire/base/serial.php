@@ -133,41 +133,6 @@ $spip_messages_key = array(
 		"PRIMARY KEY"	=> "id_message",
 		"KEY id_auteur"	=> "id_auteur");
 
-$spip_mots = array(
-		"id_mot"	=> "bigint(21) NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		"id_groupe"	=> "bigint(21) DEFAULT 0 NOT NULL",
-		"type"	=> "text DEFAULT '' NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_mots_key = array(
-		"PRIMARY KEY"	=> "id_mot",
-#		"KEY url_propre"	=> "url_propre"
-);
-
-$spip_groupes_mots = array(
-		"id_groupe"	=> "bigint(21) NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		"unseul"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"obligatoire"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"tables_liees" => "text DEFAULT '' NOT NULL",
-		# suppression des champs a faire dans la maj
-		#"articles"	=> "varchar(3) DEFAULT '' NOT NULL",
-		#"breves"	=> "varchar(3) DEFAULT '' NOT NULL",
-		#"rubriques"	=> "varchar(3) DEFAULT '' NOT NULL",
-		#"syndic"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"minirezo"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"comite"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"forum"	=> "varchar(3) DEFAULT '' NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_groupes_mots_key = array(
-		"PRIMARY KEY"	=> "id_groupe");
-
 $spip_rubriques = array(
 		"id_rubrique"	=> "bigint(21) NOT NULL",
 		"id_parent"	=> "bigint(21) DEFAULT '0' NOT NULL",
@@ -297,10 +262,6 @@ $tables_principales['spip_breves']   =
 	array('field' => &$spip_breves, 'key' => &$spip_breves_key,'join' => &$spip_breves_join);
 $tables_principales['spip_messages'] =
 	array('field' => &$spip_messages, 'key' => &$spip_messages_key);
-$tables_principales['spip_mots']     =
-	array('field' => &$spip_mots, 'key' => &$spip_mots_key);
-$tables_principales['spip_groupes_mots'] =
-	array('field' => &$spip_groupes_mots, 'key' => &$spip_groupes_mots_key);
 $tables_principales['spip_rubriques'] =
 	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
 $tables_principales['spip_documents'] =

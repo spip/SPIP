@@ -28,11 +28,6 @@
 		<icone>images/breve-16.png</icone>
 		<titre>icone_breves</titre>
 	</bouton>
-	<bouton id='mots' parent="bando_edition">
-		<icone>images/mot-16.png</icone>
-		<titre>icone_mots_cles</titre>
-		<url>mots_tous</url>
-	</bouton>
 	<bouton id='sites' parent="bando_edition">
 		<icone>images/site-16.png</icone>
 		<titre>icone_sites_references</titre>
@@ -165,12 +160,6 @@
 		<url>auteur_infos</url>
 		<args>new=oui</args>
 	</bouton>
-	<bouton id='mot_creer' parent="outils_rapides">
-		<icone>images/mot-new-16.png</icone>
-		<titre>icone_creation_mots_cles</titre>
-		<url>mots_edit</url>
-		<args>new=oui</args>
-	</bouton>
 	<bouton id='site_creer' parent="outils_rapides">
 		<icone>images/site-new-16.png</icone>
 		<titre>icone_referencer_nouveau_site</titre>
@@ -287,8 +276,6 @@
 	<pipeline><nom>lister_tables_noerase</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noexport</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noimport</nom><action></action></pipeline>
-	<pipeline><nom>libelle_association_mots</nom><action></action></pipeline>
-	<pipeline><nom>mots_indexation</nom><action></action></pipeline>
 	<pipeline><nom>nettoyer_raccourcis_typo</nom><action></action></pipeline>
 	<pipeline><nom>notifications</nom><action></action></pipeline>
 	<pipeline><nom>objet_compte_enfants</nom><action></action></pipeline>
