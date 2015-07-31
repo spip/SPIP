@@ -370,8 +370,18 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
+	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	if (mysql_query("INSERT INTO $table $champs VALUES $valeurs", $link))
 		$r = mysql_insert_id($link);
+	else {
+	  if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
+		$e .= spip_mysql_error($query); // et du fautif
+	}
+	return $t ? trace_query_end($query, $t, $r, $e) : $r;
+
+	if ($e = spip_mysql_errno())	// Log de l'erreur eventuelle
+		$e .= spip_mysql_error($query); // et du fautif
+
 	return $r ? $r : (($r===0) ? -1 : 0);
 }
 
@@ -495,7 +505,10 @@ function spip_release_lock($nom) {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($val, $type) {
-	if ((strpos($type, 'datetime')===0) OR (strpos($type, 'TIMESTAMP')===0))
+	if ((strpos($type, 'datetime')===0)
+	OR (strpos($type, 'TIMESTAMP')===0)
+	OR (strpos($type, 'int')===0)
+	OR (strpos($type, 'bigint')===0))
 	  return $val;
 	else return _q($val);
 }
