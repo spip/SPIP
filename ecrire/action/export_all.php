@@ -80,11 +80,11 @@ function export_all_fin($file, $meta, $rub)
 		if ($rub) {
 			$titre = sql_getfetsel('titre', 'spip_rubriques', "id_rubrique=$rub");
 			$titre = _T('info_sauvegarde_rubrique_reussi',
-				    array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)", 'titre' => "<b>$titre</b>"));
+				    array('archive' => ':<br /><b>'.joli_repertoire("$dir/$nom")."</b> ($n)", 'titre' => "<b>$titre</b>"));
 		}
 		else
 			$titre = _T('info_sauvegarde_reussi_02',
-			      array('archive' => ':<br /><b>'.joli_repertoire($nom)."</b> ($n)"));
+			      array('archive' => ':<br /><b>'.joli_repertoire("$dir/$nom")."</b> ($n)"));
 
 		$corps = "<p style='text-align: $spip_lang_left'>".
 			  $titre .
