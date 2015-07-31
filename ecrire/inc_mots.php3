@@ -385,7 +385,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
 			if (test_layer()) echo "<script type='text/javascript'><!--
 			triangle = findObj('triangle' + $couche_a_redresser);
-			if (triangle) triangle.src = 'img_pack/deplierbas$spip_lang_rtl.gif';
+			if (triangle) triangle.src = '" .
+			  _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';
 			//--></script>";
 		}
 		else
