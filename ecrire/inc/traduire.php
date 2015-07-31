@@ -218,22 +218,22 @@ function inc_traduire_dist($ori, $lang) {
 
 		if (empty($GLOBALS[$var])) {
 			charger_langue($lang, $module);
+			// surcharges persos -- on cherche
+			// (lang/)local_xx.php et/ou (lang/)local.php ...
+			if (!isset($local['local_'.$lang])) {
+				// redéfinir la langue en cours pour les surcharges (chercher_langue a pu le changer)
+				$GLOBALS['idx_lang']= $var;
+				// ... (lang/)local_xx.php
+				$local['local_'.$lang] = chercher_module_lang('local', $lang);
+			}
+			if ($local['local_'.$lang])
+				surcharger_langue($local['local_'.$lang]);
+			// ... puis (lang/)local.php
+			if (!isset($local['local']))
+				$local['local'] = chercher_module_lang('local');
+			if ($local['local'])
+				surcharger_langue($local['local']);
 		}
-		// surcharges persos -- on cherche 
-		// (lang/)local_xx.php et/ou (lang/)local.php ...
-		if (!isset($local['local_'.$lang])) {
-			// redéfinir la langue en cours pour les surcharges (chercher_langue a pu le changer)
-			$GLOBALS['idx_lang']= $var;
-			// ... (lang/)local_xx.php
-			$local['local_'.$lang] = chercher_module_lang('local', $lang);
-		}
-		if ($local['local_'.$lang])
-			surcharger_langue($local['local_'.$lang]);
-		// ... puis (lang/)local.php
-		if (!isset($local['local']))
-			$local['local'] = chercher_module_lang('local');
-		if ($local['local'])
-			surcharger_langue($local['local']);
 
 		if (isset($GLOBALS[$var][$code])) {
 			$module_retenu = $module;
