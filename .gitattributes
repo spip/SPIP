@@ -76,7 +76,6 @@ ecrire/configuration/avertisseur.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/moderniseur_html.php -text
 ecrire/configuration/previsualiseur.php -text
-ecrire/configuration/reducteur.php -text
 ecrire/configuration/relayeur.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
@@ -373,6 +372,8 @@ prive/formulaires/configurer_preferences.html -text
 prive/formulaires/configurer_preferences.php -text
 prive/formulaires/configurer_redacteurs.html -text
 prive/formulaires/configurer_redacteurs.php -text
+prive/formulaires/configurer_reducteur.html -text
+prive/formulaires/configurer_reducteur.php -text
 prive/formulaires/configurer_rubriques.html -text
 prive/formulaires/configurer_rubriques.php -text
 prive/formulaires/configurer_transcodeur.html -text
