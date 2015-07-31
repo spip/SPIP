@@ -18,19 +18,10 @@ include_spip('inc/lien');
 
 // init du tableau principal des raccourcis
 
-function definir_raccourcis()
-{
-	global $class_spip, $class_spip_plus, $ligne_horizontale, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique;
-	static $spip_raccourcis_typo = array();
-	$x = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
-	if (!isset($spip_raccourcis_typo[$x])) {
-        
-		$spip_raccourcis_typo[$x] = array(
-		array(
-		/* 0 */ 	"/\n(----+|____+)/S",
-		/* 1 */ 	"/\n-- */S",
-		/* 2 */ 	"/\n- */S",  /* DOIT rester a cette position */
-		/* 3 */ 	"/\n_ +/S",
+global $spip_raccourcis_typo, $class_spip_plus, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique;
+
+$spip_raccourcis_typo = array(
+			      array(
 		/* 4 */		"/(^|[^{])[{][{][{]/S",
 		/* 5 */		"/[}][}][}]($|[^}])/S",
 		/* 6 */ 	"/(( *)\n){2,}(<br\s*\/?".">)?/S",
@@ -44,11 +35,7 @@ function definir_raccourcis()
 		/* 14 */	"/<\/quote>/S",
 		/* 15 */	"/<\/?intro>/S"
 				),
-		array(
-		/* 0 */ 	"\n\n" . $ligne_horizontale . "\n\n",
-		/* 1 */ 	"\n<br />&mdash;&nbsp;",
-		/* 2 */ 	"\n<br />".definir_puce()."&nbsp;",
-		/* 3 */ 	"\n<br />",
+			      array(
 		/* 4 */ 	"\$1\n\n" . $debut_intertitre,
 		/* 5 */ 	$fin_intertitre ."\n\n\$1",
 		/* 6 */ 	"<p>",
@@ -62,9 +49,33 @@ function definir_raccourcis()
 		/* 14 */	"</blockquote><p>",
 		/* 15 */	""
 				)
+);
+
+// Raccourcis dependant du sens de la langue
+
+function definir_raccourcis_alineas()
+{
+	global $ligne_horizontale;
+	static $alineas = array();
+	$x = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
+	if (!isset($alineas[$x])) {
+        
+		$alineas[$x] = array(
+		array(
+		/* 0 */ 	"/\n(----+|____+)/S",
+		/* 1 */ 	"/\n-- */S",
+		/* 2 */ 	"/\n- */S", /* DOIT rester a cette position */
+		/* 3 */ 	"/\n_ +/S"
+				),
+		array(
+		/* 0 */ 	"\n\n" . $ligne_horizontale . "\n\n",
+		/* 1 */ 	"\n<br />&mdash;&nbsp;",
+		/* 2 */ 	"\n<br />".definir_puce()."&nbsp;",
+		/* 3 */ 	"\n<br />"
+				)
 		);
 	}
-	return $spip_raccourcis_typo[$x];
+	return $alineas[$x];
 }
 
 // On initialise la puce pour eviter find_in_path() a chaque rencontre de \n-
@@ -900,8 +911,11 @@ function traiter_raccourcis($letexte) {
 		}
 	}
 
+	// Traitement des alineas
+	list($a,$b) = definir_raccourcis_alineas();
+	$letexte = preg_replace($a, $b,	$letexte);
 	//  Introduction des attributs class_spip* et autres raccourcis
-	list($a,$b) = definir_raccourcis();
+	list($a,$b) = $GLOBALS['spip_raccourcis_typo'];
 	$letexte = preg_replace($a, $b,	$letexte);
 	$letexte = preg_replace('@^\n<br />@S', '', $letexte);
 
