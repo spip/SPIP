@@ -295,7 +295,7 @@ $spip_version = 1.925;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.2 beta 3';
-$spip_version_code = 1.9205;
+$spip_version_code = 1.9206;
 
 // ** Securite **
 $auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubrique = $hash_recherche = $hash_recherche_strict = '';
