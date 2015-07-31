@@ -10,9 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php");
-include_ecrire ("inc_session");
-include_ecrire('inc_cookie');
+function spip_action_cookie_dist() {
+	include_ecrire ("inc_session");
+	include_ecrire('inc_cookie');
+	spip_cookie_dist();
+}
 
 function auth_http($url, $essai_auth_http) {
 	global $_SERVER;
@@ -273,7 +275,5 @@ else {
 	echo "<body><a href='".$redirect."'>"._T('navigateur_pas_redirige')."</a></body></html>";
 }
 }
-
-spip_cookie_dist()
 
 ?>

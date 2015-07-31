@@ -27,7 +27,10 @@
 	alt="[(#ENV{login_alt})]" /></div>]
 	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
-document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a style='color: #e86519' href='[(#ENV{action2})]?cookie_admin=non[&amp;url=(#ENV*{url}|urlencode)][&amp;retour=(#ENV*{self}|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
+document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a style='color: #e86519' href='[(#ENV{action2}
+	|parametre_url{cookie_admin,non}
+	|parametre_url{url,#ENV*{url}}
+	|parametre_url{retour,#ENV*{self}})]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
 //--></script>
 <noscript>
 	<p class='notes' style='font-size: 130%'>

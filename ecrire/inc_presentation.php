@@ -1773,7 +1773,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	// CSS espace prive
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('spip_style_prive', $args) .'" />
+	. generer_url_public('style_prive', $args) .'" />
 '
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
