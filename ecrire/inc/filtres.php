@@ -2453,19 +2453,19 @@ function f_extra_editer_contenu_objet($flux){
 
 
 // http://doc.spip.org/@chercher_rubrique
-function chercher_rubrique($msg, $id_rubrique, $type, $id_secteur, $restreint){
+function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint){
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$opt = $chercher_rubrique($id_rubrique, $type, $restreint);
+	$opt = $chercher_rubrique($id_parent, $type, $restreint);
 
-	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
-	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+	if ($id_parent == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_parent) $logo = "secteur-24.gif";
 	else $logo = "rubrique-24.gif";
 
 	$confirm = "";
 	if ($type=='rubrique') {
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
-		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',2);
+		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id",'',2);
 	
 		if ($contient_breves > 0) {
 			$scb = ($contient_breves>1? 's':'');
