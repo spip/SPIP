@@ -165,10 +165,10 @@ function balise_SPIP_VERSION_dist($p) {
 // http://doc.spip.org/@balise_NOM_SITE_dist
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
-		$p->code = "construire_titre_lien(" .
+		$p->code = "supprimer_numero(calculer_url(" .
 		champ_sql('nom_site',$p) ."," .
 		champ_sql('url_site',$p) . 
-		")";
+		", 'titre'))";
 	} else
 		$p->code = champ_sql('nom_site',$p);
 
