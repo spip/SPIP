@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'mi lilɛ ɖo[[Note de bas de page]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => 'Mi xlɛ wɛn ɖokpo',
-'bouton_ajouter_document' => 'Mi zé wémà dokpo gɔna', # MODIF
-'bouton_ajouter_image' => 'Mi zé yɛwli ɖo wémaji gɔna', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'ɖyɔ̂',
 'bouton_chercher' => 'Bà',
 'bouton_choisir' => 'Cyán',
@@ -219,9 +216,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'jlɛjlɛ',
-'entree_titre_document' => 'wěmá xótá ',
-'entree_titre_image' => 'titá xótá',
 'envoi_via_le_site' => 'mī sɛ gbɔn gblògblójí ɔ jì',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -341,9 +335,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Jónɔ', # MODIF
 'icone_voir_en_ligne' => 'Mi kpɔn ɖò àtɛ ɔ jí ',
-'image_tourner_180' => 'lìlɛlílɛ 180°',
-'image_tourner_droite' => 'lìlɛlílɛ 90° yì àɖùsímɛ ',
-'image_tourner_gauche' => 'lìlɛlílɛ 90° yì  àmyɔmɛ',
 'img_indisponible' => 'Yɛ ɖébú ɖò àtɛ ɔ jí a',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'mi ná kpɔn',
@@ -389,9 +380,6 @@ sera ignorée) :
 'info_description' => 'ɖìɖèmɛ:',
 'info_description_2' => 'ɖìɖèmɛ:',
 'info_dimension' => 'ɖìɖèmɛ:',
-'info_document' => 'wémà',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Wêmà lɛ',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'wlán wɛn nú mɛ ɖê',
@@ -410,14 +398,11 @@ sera ignorée) :
 'info_image_aide' => 'Alɔdó',
 'info_image_process_titre' => 'Mi cyán wàlɔ ɖàgbè lɛ',
 'info_impossible_lire_page' => 'Wémà ɔ gblé', # MODIF
-'info_inclusion_directe' => 'Wémà ɔ gblé:',
-'info_inclusion_vignette' => 'Wémà ɔ gblé:',
 'info_installation_systeme_publication' => 'nyíkɔníná nyɔwlántɔ lɛ tɔn...',
 'info_installer_documents' => 'mi sɔ wémà lɛ sɛɖó càcà.', # MODIF
 'info_installer_ftp' => 'mi sɔ wémà lɛ sɛɖó càcà', # MODIF
 'info_installer_images' => 'mi síwú sɔ ɖìdè lɛ dó JPEG, GIF et PNG.',
 'info_installer_images_dossier' => 'mi síwú sɔ ɖìdè lɛ dó.', # MODIF
-'info_installer_tous_documents' => 'mi sɔ wémà lɛ bí',
 'info_interface_complete' => 'Atɛ ɔ bí',
 'info_interface_simple' => 'Atɛ ɔ bí',
 'info_joindre_document_article' => 'Mi sɔ wémà càdó',
@@ -431,7 +416,6 @@ sera ignorée) :
 'info_les_auteurs_1' => 'gbɔn@',
 'info_logo_format_interdit' => 'Ntùn é dò ɖéxlɛ lɛ kɛɖɛ@formats@  wɛ yè ɖègbè ná .',
 'info_logo_max_poids' => 'Ntùn lɛ dó ná gbló gègé à @maxi@ (xótòɖáyí é lɔ@actuel@).',
-'info_logo_max_taille' => 'Ntùn lɛ dó ná gbló gègé à  @maxi@ (xótòɖáyí é lɔ blo @actuel@).',
 'info_mail_fournisseur' => 'miɖê @nátɔ.com',
 'info_message_2' => 'wɛn',
 'info_message_supprime' => 'yè súsú wɛn',
@@ -460,7 +444,6 @@ sera ignorée) :
 'info_pixels' => 'cíkícíkí',
 'info_plusieurs_mots_trouves' => 'Yé mɔ gbètákɛn gégé"@cherche_mot@":',
 'info_popularite_5' => 'Tòbítùn :',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Portfolio càcà :',
 'info_premier_resultat' => '[@debut_limit@ premiers résultats sur @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premiers résultats sur @total@]',
@@ -500,7 +483,6 @@ sera ignorée) :
 'info_symbole_vert' => 'kwín   àmàmú nɔ xlɛ wɛn yé má xá mɛ ɖévó', # MODIF
 'info_syndication' => 'mìmámɛ :',
 'info_syndication_articles' => 'wěmà lɛ',
-'info_telecharger' => 'ɖɔn sín mɔxwítíxwítí ɔ mɛ :',
 'info_telecharger_nouveau_logo' => 'ɖɔn sín mɔxwítíxwítí ɔ mɛ :',
 'info_telecharger_ordinateur' => 'ɖɔn sín mɔxwítíxwítí ɔ mɛ :',
 'info_tous_resultats_enregistres' => '[yé wlí xógbè lɛ bí hɛn]',

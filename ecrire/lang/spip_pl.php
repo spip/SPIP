@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Zmień w [[Przypis]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Zacytuj wiadomość</quote>',
-'bouton_ajouter_document' => 'DODAJ DOKUMENT', # MODIF
-'bouton_ajouter_image' => 'DODAJ OBRAZEK', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Zatwierdź',
 'bouton_chercher' => 'Szukaj',
 'bouton_choisir' => 'Wybierz',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Rozmiar:',
-'entree_titre_document' => 'Tytuł dokumentu:',
-'entree_titre_image' => 'Tytuł obrazka:',
 'envoi_via_le_site' => 'Wyślij ze strony',
 'erreur' => 'Błąd',
 'erreur_balise_non_fermee' => 'ostatni znacznik nie jest zamknięty :',
@@ -369,9 +363,6 @@ Dziękujemy za wzięcie udziału.
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Odwiedź', # MODIF
 'icone_voir_en_ligne' => 'Obejrzyj online',
-'image_tourner_180' => 'Obrót o 180°',
-'image_tourner_droite' => 'Obrót o 90° w prawo',
-'image_tourner_gauche' => 'Obrót o 90° w lewo',
 'img_indisponible' => 'obrazek niedostępny',
 'impossible' => 'niemożliwe',
 'info_a_suivre' => 'KONTYNUUJ »',
@@ -417,9 +408,6 @@ Dziękujemy za wzięcie udziału.
 'info_description' => 'Opis:',
 'info_description_2' => 'Opis:',
 'info_dimension' => 'Rozmiar:',
-'info_document' => 'Dokument',
-'info_document_indisponible' => 'Dokument niedostępny',
-'info_documents' => 'Dokumenty',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Napisz prywatną wiadomość',
@@ -440,14 +428,11 @@ Dziękujemy za wzięcie udziału.
 'info_image_aide' => 'POMOC',
 'info_image_process_titre' => 'Sposób generowania miniaturek',
 'info_impossible_lire_page' => '<b>Błąd !</b> Nie można odczytać strony<tt><html>@test_proxy@</html></tt> za pośrednictwem proxy<tt>',
-'info_inclusion_directe' => 'Bezpośrednie dołączenie :',
-'info_inclusion_vignette' => 'Dołączenie miniaturki :',
 'info_installation_systeme_publication' => 'Instalacja systemu publikacji...',
 'info_installer_documents' => 'Możesz automatycznie dodawać wszystkie dokumenty znajdujące się w folderze @upload@.',
 'info_installer_ftp' => 'Jako administrator możesz umieszczać (przez FTP) pliki w folderze @upload@, aby później wybierać je bezpośrednio stąd.',
 'info_installer_images' => 'Możesz umieszczać obrazki w formatach JPEG, GIF i PNG.',
 'info_installer_images_dossier' => 'Umieść obrazki w folderze @upload@ aby móc je stąd wybierać.',
-'info_installer_tous_documents' => 'Umieść wszystkie dokumenty',
 'info_interface_complete' => 'cały interfejs',
 'info_interface_simple' => 'Uproszczony interfejs',
 'info_joindre_document_article' => 'Do tego artykułu możesz załączać dokumenty typu',
@@ -461,7 +446,6 @@ Dziękujemy za wzięcie udziału.
 'info_les_auteurs_1' => 'wg @les_auteurs@',
 'info_logo_format_interdit' => 'Dla logo dozwolone są następujące formaty: @formats@.',
 'info_logo_max_poids' => 'Logo może mieć maksymalnie @maxi@ (teraz ma @actuel@).',
-'info_logo_max_taille' => 'Logo może mieć maksymalną wielkość @maxi@ (teraz ma wielkość @actuel@).',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'WIADOMOŚĆ',
 'info_message_supprime' => 'WIADOMOŚĆ USUNIĘTA',
@@ -490,7 +474,6 @@ Dziękujemy za wzięcie udziału.
 'info_pixels' => 'piksele',
 'info_plusieurs_mots_trouves' => 'Kilkanaście słów kluczowych zostało znalezionych dla "@cherche_mot@":',
 'info_popularite_5' => 'popularność:',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automatyczne portfolio:',
 'info_premier_resultat' => '[@debut_limit@ pierwsze wyniki z @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ pierwsze wyniki z @total@]',
@@ -530,7 +513,6 @@ Dziękujemy za wzięcie udziału.
 'info_symbole_vert' => 'Symbol <b>zielony</b> oznacza <b>wiadomości wymieniane z innymi użytkownikami</b> strony.',
 'info_syndication' => 'syndykacja :',
 'info_syndication_articles' => 'artykuł(y)',
-'info_telecharger' => 'Załaduj ze swojego komputera:',
 'info_telecharger_nouveau_logo' => 'Załaduj nowe logo:',
 'info_telecharger_ordinateur' => 'Załaduj ze swojego komputera:',
 'info_tous_resultats_enregistres' => '[wszystkie wyniki są zapisane]',

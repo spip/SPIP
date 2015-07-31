@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Transformar em  [[Nota de rodapé ]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Citar uma  mensagem</quote>',
-'bouton_ajouter_document' => 'ACRESCENTAR UM  DOCUMENTO', # MODIF
-'bouton_ajouter_image' => 'ACRESCENTAR UMA IMAGEM', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Mudar',
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Dimensões :',
-'entree_titre_document' => 'Título do documento :',
-'entree_titre_image' => 'Título da imagem :',
 'envoi_via_le_site' => 'Envio pelo site',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -368,9 +362,6 @@ Obrigado pela sua participação
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Visitar', # MODIF
 'icone_voir_en_ligne' => 'Ver em linha',
-'image_tourner_180' => 'Rodar 180°',
-'image_tourner_droite' => 'Rodar 90° à direita',
-'image_tourner_gauche' => 'Rodar 90° à esquerda',
 'img_indisponible' => 'imagem indisponível',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'A SEGUIR »',
@@ -416,9 +407,6 @@ Obrigado pela sua participação
 'info_description' => 'Descrição :',
 'info_description_2' => 'Descrição :',
 'info_dimension' => 'Dimensões :',
-'info_document' => 'Documento',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Documentos',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Escrever uma mensagem privada',
@@ -439,14 +427,11 @@ Obrigado pela sua participação
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'Método de fabricaçao das vinhetas',
 'info_impossible_lire_page' => '<b>Erro !</b> Impossível ler a página<tt><html>@test_proxy@</html></tt> através do proxy <tt>', # MODIF
-'info_inclusion_directe' => 'Inclusão directa :',
-'info_inclusion_vignette' => 'Inclusão da vinheta :',
 'info_installation_systeme_publication' => 'Instalação do sistema de publicação',
 'info_installer_documents' => '<MODIF>Pode instalar automaticamente todos os documentos contidos no processo @upload@.',
 'info_installer_ftp' => 'Como administrador, pode instalar (por FTP) ficheiros no dossier @upload@ para depois seleccioná-los directamente aqui.', # MODIF
 'info_installer_images' => 'Pode instalar imagens nos formatos JPEG, GIF e PNG.',
 'info_installer_images_dossier' => 'Instalar imagens no dossier @upload@ para poder seleccioná-los aqui.', # MODIF
-'info_installer_tous_documents' => 'Instalar todos os documentos',
 'info_interface_complete' => 'Interface completa',
 'info_interface_simple' => 'Interface simplificada',
 'info_joindre_document_article' => 'Pode juntar a este artigo documentos de tipo',
@@ -460,7 +445,6 @@ Obrigado pela sua participação
 'info_les_auteurs_1' => 'por @les_auteurs@',
 'info_logo_format_interdit' => 'Apenas os ícones nos formatos @formats@ estão autorizados.',
 'info_logo_max_poids' => 'Os ícones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
-'info_logo_max_taille' => 'Os ícones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
 'info_mail_fournisseur' => 'você@seucorreio.com',
 'info_message_2' => 'MENSAGEM',
 'info_message_supprime' => 'MENSAGEM SUPRIMIDA',
@@ -489,7 +473,6 @@ Obrigado pela sua participação
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Muitas palavras-chave encontradas para "@cherche_mot@":',
 'info_popularite_5' => 'popularidade :',
-'info_portfolio' => 'Portfólio',
 'info_portfolio_automatique' => 'Portfolio automático :',
 'info_premier_resultat' => '[@debut_limit@ primeiros resultados em @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeiros resultados em @total@]',
@@ -529,7 +512,6 @@ Obrigado pela sua participação
 'info_symbole_vert' => 'O símbolo<b>verde</b> indica as <b>mensagens trocadas com outros utilizadores</b> do sítio.', # MODIF
 'info_syndication' => 'vinculação:',
 'info_syndication_articles' => 'artigo(s)',
-'info_telecharger' => 'Telecarregar do seu computador :',
 'info_telecharger_nouveau_logo' => 'Telecarregar um novo logotipo :',
 'info_telecharger_ordinateur' => 'Telecarregar do seu computador :',
 'info_tous_resultats_enregistres' => '[todos os  resultados estão registados]',

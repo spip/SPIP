@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'បំលែង ជា [[កំណត់ចំណាំ​ នៅបាតទំព័រ]]',
 'barre_paragraphe' => 'បង្កើត មួយកថាខណ្ឌ',
 'barre_quote' => 'បរិយាយ មួយសារ </quote>', # quote
-'bouton_ajouter_document' => 'បន្ថែម មួយ​ឯកសារ',
-'bouton_ajouter_image' => 'បន្ថែម​ មួយរូបភាព',
-'bouton_ajouter_image_document' => 'បន្ថែម មួយរូបភាព  ឬ  មួយឯកសារ',
 'bouton_changer' => 'ផ្លាស់ប្តូរ',
 'bouton_chercher' => 'ស្វែងរក',
 'bouton_choisir' => 'ជ្រើសរើស',
@@ -224,9 +221,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'កំពុងធ្វើការ',
-'entree_dimensions' => 'ខ្មាត  ៖',
-'entree_titre_document' => 'ចំណងជើង ​ឯកសារ៖',
-'entree_titre_image' => 'ចំណងជើង ​រូបភាព៖',
 'envoi_via_le_site' => 'បញ្ញើ តាមវ៉ែបសៃថ៍',
 'erreur' => 'កំហុស ៖',
 'erreur_balise_non_fermee' => '​មិន​បានដាក់ ប្លាក​បិទ៖',
@@ -362,9 +356,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'ទស្សនា', # MODIF
 'icone_voir_en_ligne' => '​មើល​ លើអិនរើណែត',
-'image_tourner_180' => 'បង្វិល ១៨០ អង្សា',
-'image_tourner_droite' => 'បង្វិល ៩០ អង្សា ទៅ​ស្ដាំ',
-'image_tourner_gauche' => 'បង្វិល ៩០ អង្សា ទៅ​ឆ្វេង',
 'img_indisponible' => 'គ្មាន​រូបភាព',
 'impossible' => 'មិន​អាចទៅរួច',
 'info_a_suivre' => 'នៅមាន បន្ត  →',
@@ -410,9 +401,6 @@ sera ignorée) :
 'info_description' => 'ការពិពណ៌នា ៖',
 'info_description_2' => 'ការពិពណ៌នា ៖',
 'info_dimension' => 'ខ្នាត ៖',
-'info_document' => 'ឯកសារ ៖',
-'info_document_indisponible' => 'ឯកសារនេះ គ្មានស្រាប់',
-'info_documents' => 'ឯកសារ',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'សរសេរ​ សារ​ឯកជន',
@@ -432,14 +420,11 @@ sera ignorée) :
 'info_image_aide' => 'ជំនួយ',
 'info_image_process_titre' => 'វិធី​បង្កើត ​កូនរូបភាព',
 'info_impossible_lire_page' => '<b>​កំហុស​!</b> គ្មានអាចអានទំព័រ<tt><html>@test_proxy@</html></tt> ​តាម​ខំព្យូរើបំរើសេវា Proxy',
-'info_inclusion_directe' => 'ការ​រួមបញ្ចូល​ ដោយ​ផ្ទាល់ ៖',
-'info_inclusion_vignette' => 'ការរួមបញ្ចូល កូន​រូបភាព ៖',
 'info_installation_systeme_publication' => 'ការ​តំលើង ​ប្រ​ព័ន្ធផ្សព្វផ្សាយ​...',
 'info_installer_documents' => 'អ្នក​អាចតំលើង ​ស្វ័យប្រវត្ដិ​ គ្រប់ឯកសារ ដែល​មានផ្ទុក ​ក្នុង​ថត​ឯកសារ​@upload@។',
 'info_installer_ftp' => 'ក្នុង​នាម​ជា ​អ្នកអភិបាល, អ្នក​អាចតំលើង (​តាមខំព្យូរើបំរើសេវា FTP) សំណុំឯកសារ ​ក្នុង​ថត​ឯកសារ @upload@ ដើម្បី​បន្ត ជ្រើសយកដោយផ្ទាល់ ពួកវា នៅទីនេះ។',
 'info_installer_images' => 'អ្នក​អាច​តំលើង រូបភាព​ មានទ្រង់ទ្រាយ .JPEG, .GIF និង .PNG។',
 'info_installer_images_dossier' => 'តំលើង​រូបភាព ​ក្នុង​ថត​ឯកសារ @upload@ ដើម្បី​អាច​ជ្រើសយកពួកវា នៅទី​នេះ។',
-'info_installer_tous_documents' => 'តំលើង គ្រប់ឯកសារ',
 'info_interface_complete' => 'ផ្ទាំង​ប្រទាក់ ​ពេញលេញ',
 'info_interface_simple' => 'ផ្ទាំង​ប្រទាក់​ ត្រូវបានសាមញ្ញ',
 'info_joindre_document_article' => 'អ្នក​អាច​ភ្ជាប់​ ទៅ​អត្ថបទ​នេះ ឯកសារប្រភេទ',
@@ -453,7 +438,6 @@ sera ignorée) :
 'info_les_auteurs_1' => 'ដោយ @les_auteurs@',
 'info_logo_format_interdit' => 'អនុញ្ញ្តាតិ ត្រឹម​តែ​រូប​សញ្ញា​ មានទ្រង់ទ្រាយ @formats@ ។',
 'info_logo_max_poids' => 'រូប​សញ្ញា​ ត្រូវ​តែ​តិច​ជាង @maxi@ (សំណុំឯកសារនេះមាន @actuel@)។',
-'info_logo_max_taille' => 'រូប​សញ្ញា​ ត្រូវ​តែ​តិច​ជាង @maxi@ (​សំណុំឯកសារនេះ​ មាន @actuel@)។',
 'info_mail_fournisseur' => 'you@isp.com',
 'info_message_2' => 'សារ',
 'info_message_supprime' => 'បានលុបចេញ សារ​',
@@ -482,7 +466,6 @@ sera ignorée) :
 'info_pixels' => 'ធាតុរូបភព',
 'info_plusieurs_mots_trouves' => 'បានរកឃើញ ច្រើនពាក្យ​គន្លឹះ​ សំរាប់ \\"@cherche_mot@\\":',
 'info_popularite_5' => 'ប្រជាប្រិយភាព៖',
-'info_portfolio' => 'ផលប័ត្រ',
 'info_portfolio_automatique' => 'ផលប័ត្រ​ស្វ័យប្រវត្ដិ',
 'info_premier_resultat' => '[@debut_limit@​លទ្ធិ​ផល​ដំបូង លើ @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ លទ្ធិ​ផល​ដំបូង​ លើ @total@]',
@@ -521,7 +504,6 @@ sera ignorée) :
 'info_symbole_vert' => '​និមិត្ដសញា​<b>ពណ៌​បៃតង​</b> បង្ហាញ <b>បណ្តូរសារ ជាមួយ​អ្នកប្រើប្រាស់ដទៃ</b> នៃវ៉ែបសៃថ៍។',
 'info_syndication' => 'ការ​បញ្ជាប់​គ្នា ៖',
 'info_syndication_articles' => 'អត្ថបទ ៖',
-'info_telecharger' => 'ផ្ទុក​ឡើង​ ពី​ខំព្យូរើ របស់​អ្នក ៖',
 'info_telecharger_nouveau_logo' => 'ផ្ទុក​ឡើង​ មួយរូប​សញ្ញា​ថ្មី ៖',
 'info_telecharger_ordinateur' => 'ផ្ទុក​ឡើង​ ពីខំព្យូរើ របស់​អ្នក ៖',
 'info_tous_resultats_enregistres' => '[​គ្រប់លទ្ធផល ត្រូវ​បាន​រក្សាទុក]',

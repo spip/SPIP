@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Включване режим на [[забележка под линия (footnote)]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Цитат на съобщение</quote>',
-'bouton_ajouter_document' => 'ДОБАВЯНЕ НА ДОКУМЕНТ', # MODIF
-'bouton_ajouter_image' => 'ДОБАВЯНЕ НА ИЗОБРАЖЕНИЕ', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Изпращане',
 'bouton_chercher' => 'Търсене',
 'bouton_choisir' => 'Избор',
@@ -228,9 +225,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Размер:',
-'entree_titre_document' => 'Наименование на документа:',
-'entree_titre_image' => 'Наименование на изображението:',
 'envoi_via_le_site' => 'Изпращане през сайта',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -369,9 +363,6 @@ sera ignorée) :
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Посещаване на сайта', # MODIF
 'icone_voir_en_ligne' => 'Изглед на сайта',
-'image_tourner_180' => 'Завъртане на 180°',
-'image_tourner_droite' => 'Завъртане на 90° надясно',
-'image_tourner_gauche' => 'Завъртане на 90° наляво',
 'img_indisponible' => 'изображението липсва',
 'impossible' => 'невъзможно',
 'info_a_suivre' => 'НАЧАЛО»',
@@ -417,9 +408,6 @@ sera ignorée) :
 'info_description' => 'Описание:',
 'info_description_2' => 'Описание:',
 'info_dimension' => 'Размер:',
-'info_document' => 'Документ',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Документи',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Писане на лично съобщение',
@@ -440,14 +428,11 @@ sera ignorée) :
 'info_image_aide' => 'ПОМОЩНИК',
 'info_image_process_titre' => 'Метод за създаване на умалени образи (винетки)',
 'info_impossible_lire_page' => '<<b>Грешка!</b> Страницата <tt><html>@test_proxy@</html></tt> не се чете през проксито <tt>',
-'info_inclusion_directe' => 'Пряко включване:',
-'info_inclusion_vignette' => 'Включване на винетка:',
 'info_installation_systeme_publication' => 'Инсталация на системата за публикуване ...',
 'info_installer_documents' => 'Можете автоматично да качвате всички документи от следната папка @upload@.',
 'info_installer_ftp' => 'Като администратор можете да качите файлове (чрез FTP) в папката @upload@, за да ги използвате направо от там, когато Ви потрябват по-късно.',
 'info_installer_images' => 'Форматът на изображенията може да е JPEG, GIF и PNG.',
 'info_installer_images_dossier' => 'Качете изображения в папка @upload@, за да можете да ги използвате направо от там, когато Ви потрябват по-късно.',
-'info_installer_tous_documents' => 'Качване на всички документи',
 'info_interface_complete' => 'Пълен интерфейс',
 'info_interface_simple' => 'Опростен интерфейс',
 'info_joindre_document_article' => 'Можете към статията да прилагате документи от вида:',
@@ -461,7 +446,6 @@ sera ignorée) :
 'info_les_auteurs_1' => 'от @les_auteurs@',
 'info_logo_format_interdit' => 'Форматът на логото може да бъде следният: @formats@.',
 'info_logo_max_poids' => 'Логото трябва да е по-малко от @maxi@ (настоящият файл е @actuel@).',
-'info_logo_max_taille' => 'Размерът на логото трябва да е по-малък от @maxi@ пиксели (настоящият файл е @actuel@).',
 'info_mail_fournisseur' => 'Вие@isp.com',
 'info_message_2' => 'СЪОБЩЕНИЕ',
 'info_message_supprime' => 'СЪОБЩЕНИЕТО Е ИЗТРИТО',
@@ -490,7 +474,6 @@ sera ignorée) :
 'info_pixels' => 'пиксели',
 'info_plusieurs_mots_trouves' => 'Бяха намерени няколко ключови думи за @cherche_mot@:',
 'info_popularite_5' => 'популярност:',
-'info_portfolio' => 'Портфолио',
 'info_portfolio_automatique' => 'Автоматична папка за документи:',
 'info_premier_resultat' => '[@debut_limit@ първи резултати от общо @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ първи резултати от общо @total@]',
@@ -530,7 +513,6 @@ sera ignorée) :
 'info_symbole_vert' => 'Символът <b>зелено</b> указва <b>съобщения, обменени с други потребители</b> на сайта.',
 'info_syndication' => 'обединение:',
 'info_syndication_articles' => 'статия (статии)',
-'info_telecharger' => 'Качете от своя компютър на сайта:',
 'info_telecharger_nouveau_logo' => 'Качване на ново лого:',
 'info_telecharger_ordinateur' => 'Качете от своя компютър на сайта:',
 'info_tous_resultats_enregistres' => '[всички резултати са записани]',

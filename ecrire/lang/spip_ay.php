@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Mayjt\'ayañan [[kayu laphi uñnaq yatiyawi]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => 'Mä yatiyaw aytaña',
-'bouton_ajouter_document' => 'MÄ QILLQA Q\'IP APKATAÑAWA',
-'bouton_ajouter_image' => 'MÄ SALTA APKATAÑAWA',
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Turkaña',
 'bouton_chercher' => 'Thaqhaña',
 'bouton_choisir' => 'Chijllaña',
@@ -229,9 +226,6 @@ Uk lurasinsti jutir imañ q\'ipinaka jikitawa.&lt;/p&gt;
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Ukch\'anaka',
-'entree_titre_document' => 'Qillqa q´ipin sutinchatapa',
-'entree_titre_image' => 'Saltan sutinchatapa',
 'envoi_via_le_site' => 'Qamawitkam apayaña',
 'erreur' => 'Pantjawi',
 'erreur_balise_non_fermee' => 'Qhipir markhax jan jist\'antata:',
@@ -375,9 +369,6 @@ Arsusiwitamatxa yuspagara
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Aka qamaw tumpaña', # MODIF
 'icone_voir_en_ligne' => 'Naktat uñjaña',
-'image_tourner_180' => 'Patak kimsa qallq tunk ukch\' muytawi',
-'image_tourner_droite' => 'Llatunk tunk ukch\' kupi tuqir muytawi',
-'image_tourner_gauche' => 'Llatunk tunk ukch\' ch\'iqa tuqir muytawi',
 'img_indisponible' => 'Salta wakita',
 'impossible' => 'janipini',
 'info_a_suivre' => 'NAN LURAWINAKAJAXA',
@@ -423,9 +414,6 @@ Arsusiwitamatxa yuspagara
 'info_description' => 'Uñicht\'ayawi:',
 'info_description_2' => 'Uñicht\'ayawi:',
 'info_dimension' => 'Ukch\'a pachanaka',
-'info_document' => 'Qillqa q\'ipi',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Qillqa q\'ipinaka',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Mä jark\'at yatiyaw qillqaña',
@@ -448,14 +436,11 @@ Arsusiwitamatxa yuspagara
 'info_image_aide' => 'Yanapa',
 'info_image_process_titre' => 'Kunjams jisk\'aptatanak uñstayaña',
 'info_impossible_lire_page' => '¡Pantjata! &lt;/b&gt; Janiw laphi uñnaq liyiñjamakiti &lt;tt&gt;&lt;html&gt;@test_proxy@&lt;/html&gt;&lt;/tt&gt;  \\&quot;proxy\\&quot; &lt;tt&gt; ukampi',
-'info_inclusion_directe' => 'Chiqaq apthapiwi',
-'info_inclusion_vignette' => 'Saltat apthapiwi',
 'info_installation_systeme_publication' => 'Apnaqaw yatiyat uchantawipa',
 'info_installer_documents' => 'Taqpach qillqa q\'ipinak, jach\'a q\'ipin utjkix ukanaksustupak uchantasmax @upload@',
 'info_installer_ftp' => 'Iyaws apnaqirinakampi, q\'ipinak uchantasmawa imañ q\'ipina (FTP ukampi) @upload@ ukatxa akan  ajlliñataki.',
 'info_installer_images' => 'Saltanak utt\'ayat uchantasmaw JPEG, GIF Y PNG.',
 'info_installer_images_dossier' => 'Imañ q\'ipin saltanak uchantaña @upload@ ukat akjan ajlliñataki.',
-'info_installer_tous_documents' => 'Taqpach qillqa k\'ipinak uchantaña',
 'info_interface_complete' => 'Phuqat ajanu',
 'info_interface_simple' => 'Má ajanuki',
 'info_joindre_document_article' => 'Aka qillqatanakarux kasta qillqa q\'ipinak jaqkatasmaw',
@@ -469,7 +454,6 @@ Arsusiwitamatxa yuspagara
 'info_les_auteurs_1' => 'lurata @les_auteurs@',
 'info_logo_format_interdit' => 'Utt\'ayat uñachir chimpunakak iyaw sataxa @formats@.',
 'info_logo_max_poids' => 'Uñachir chimpunakaxa phisnakiñapawa @maxi@ (q\'ipix jathiwa @actuel@).',
-'info_logo_max_taille' => 'Uñachir chimpunakax janiw jach\'a mirt\'añapakiti @maxi@ (q\'ipix mirt\'iwa @actuel@).',
 'info_mail_fournisseur' => 'Juman@churirima.com',
 'info_message_2' => 'YATIYAWI',
 'info_message_supprime' => 'Yatiyaw apaqata',
@@ -500,7 +484,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_pixels' => 'píxeles',
 'info_plusieurs_mots_trouves' => 'Walja imt\'at arunak jiktan kunataki',
 'info_popularite_5' => 'Juk\'amp tumpata:',
-'info_portfolio' => 'Justup imañ q\'ìpi',
 'info_portfolio_automatique' => 'Justup imañ q\'ìpi',
 'info_premier_resultat' => '[@debut_limit@ pnayraqat askichawinakat @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ nayraqat askichawinakat @total@]',
@@ -540,7 +523,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_symbole_vert' => '&lt;b&gt;Ch\'uxña&lt;/b&gt; chimpux turkat yatiyawinaka yaqha qamaw jaqinakamp uk uñachayi',
 'info_syndication' => 'apxasiwi:',
 'info_syndication_articles' => 'qillqat(anaka)',
-'info_telecharger' => 'Computaturamat apkataña:',
 'info_telecharger_nouveau_logo' => 'Mä machaq uñachir chimpu apkataña:',
 'info_telecharger_ordinateur' => 'Computaturamat apkataña:',
 'info_tous_resultats_enregistres' => '[taqpach askichatawinak qillqatawa]',

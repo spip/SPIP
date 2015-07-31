@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => 'Chanje pou mèt yon [[Not enba la paj]]',
 'barre_paragraphe' => 'Créer un paragraphe', # NEW
 'barre_quote' => '<quote>Rapòt yon mesaj</quote>',
-'bouton_ajouter_document' => 'AJOUTE YON DOKIMAN', # MODIF
-'bouton_ajouter_image' => 'AJOUTE YON IMAJ', # MODIF
-'bouton_ajouter_image_document' => 'Ajouter une image ou un document', # NEW
 'bouton_changer' => 'Chanje',
 'bouton_chercher' => 'Chèche',
 'bouton_choisir' => 'Chwazi',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'en cours', # NEW
-'entree_dimensions' => 'Tay :',
-'entree_titre_document' => 'Kouman dokiman i rele :',
-'entree_titre_image' => 'Kouman imaj i rele :',
 'envoi_via_le_site' => 'Voye ek sit-la',
 'erreur' => 'Erreur', # NEW
 'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
@@ -365,9 +359,6 @@ Mèsi  w soutni petisyon-nan
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Fè yon vire', # MODIF
 'icone_voir_en_ligne' => 'Gad an liy',
-'image_tourner_180' => 'Touné 180°',
-'image_tourner_droite' => 'Touné 90° drwat ',
-'image_tourner_gauche' => 'Touné 90° gòch',
 'img_indisponible' => 'imaj-la se pa disponib',
 'impossible' => 'enposib',
 'info_a_suivre' => 'AKEY »',
@@ -413,9 +404,6 @@ Mèsi  w soutni petisyon-nan
 'info_description' => 'Dekrisyon :',
 'info_description_2' => 'Dekrisyon :',
 'info_dimension' => 'Tay :',
-'info_document' => 'Dokiman',
-'info_document_indisponible' => 'Ce document n\'est pas disponible', # NEW
-'info_documents' => 'Dokiman yo',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Ekri yon mesaj prive',
@@ -436,14 +424,11 @@ Mèsi  w soutni petisyon-nan
 'info_image_aide' => 'ED',
 'info_image_process_titre' => 'Kouman fè pou kreye kèk vinyèt',
 'info_impossible_lire_page' => '<b>Erè !</b> Fè lekti paj <tt><html>@test_proxy@</html></tt> pa proksi ou-a se pa posib  <tt>', # MODIF
-'info_inclusion_directe' => 'Enklizyon dirèk :',
-'info_inclusion_vignette' => 'Enklizyon viyèt sa-a :',
 'info_installation_systeme_publication' => 'Enstalasyon sistèm de piblikasyon...',
 'info_installer_documents' => 'W kap enstalé otomatikman tout dokiman yo ki kontni nan dosyé-a @upload@.', # MODIF
 'info_installer_ftp' => 'Tankou komandè, w kap enstalé(pa FTP)kèk fichyé nn dosyé-a @upload@ pou aprè w kap chwazi yo isit-la direkman.', # MODIF
 'info_installer_images' => 'W kapab enstale kèk imaj nan fòma sa-yo JPEG, GIF ak PNG.',
 'info_installer_images_dossier' => 'Enstal imaj nan dosye @upload@ pou w ke kapab swazi yo isit aprè.', # MODIF
-'info_installer_tous_documents' => 'Enstal tout dokiman',
 'info_interface_complete' => 'entèfas konplé',
 'info_interface_simple' => 'Entèfas senp',
 'info_joindre_document_article' => 'W kap jwenn sou atik-la tout dokiman nan tip',
@@ -457,7 +442,6 @@ Mèsi  w soutni petisyon-nan
 'info_les_auteurs_1' => 'pa @les_auteurs@',
 'info_logo_format_interdit' => 'W selman kapab itilize yon logo nan fòma @formats@.',
 'info_logo_max_poids' => 'Fok logo yo se mwen @maxi@ (fichye sa-a se @actuel@).',
-'info_logo_max_taille' => 'Fok logo yo se mwen @maxi@ (fichye sa-a se @actuel@).',
 'info_mail_fournisseur' => 'w@fournisseur.com',
 'info_message_2' => 'MESAJ',
 'info_message_supprime' => 'MESAJ KRAZE',
@@ -486,7 +470,6 @@ Mèsi  w soutni petisyon-nan
 'info_pixels' => 'piksèl yo',
 'info_plusieurs_mots_trouves' => 'Kèk mokle te fin sòti pou "@cherche_mot@":',
 'info_popularite_5' => 'Kouman se popilè :',
-'info_portfolio' => 'Pòtfolio',
 'info_portfolio_automatique' => 'Livlimaj otomatik :',
 'info_premier_resultat' => '[@debut_limit@ premye rezilta sa-yo si  @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premye rezilta sa-yo si @total@]',
@@ -526,7 +509,6 @@ Mèsi  w soutni petisyon-nan
 'info_symbole_vert' => 'Senbol <b>vèr</b> ki endik <b> yon mesaj  voye ant zot zitilizatè</b> sit la.', # MODIF
 'info_syndication' => 'sendikasyon :',
 'info_syndication_articles' => 'atik (yo)',
-'info_telecharger' => 'Telechaj sou lòdinatè ou :',
 'info_telecharger_nouveau_logo' => 'Téléchaj yon nouvo logo :',
 'info_telecharger_ordinateur' => 'Telechaj sou lòdinatè ou :',
 'info_tous_resultats_enregistres' => '[tout rézilta yo ki enskri nan memwar ]',

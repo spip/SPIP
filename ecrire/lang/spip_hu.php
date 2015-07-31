@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_note' => '[[Lábjegyzet stílus]] alkalmazása',
 'barre_paragraphe' => 'Új bekezdés',
 'barre_quote' => '<quote>Üzenet idézése</quote>',
-'bouton_ajouter_document' => 'ÚJ DOKUMENTUM', # MODIF
-'bouton_ajouter_image' => 'ÚJ KÉP', # MODIF
-'bouton_ajouter_image_document' => 'Add an image or a document', # NEW
 'bouton_changer' => 'Módosítás',
 'bouton_chercher' => 'Keresés',
 'bouton_choisir' => 'Kiválasztás',
@@ -226,9 +223,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'en_cours' => 'processing', # NEW
-'entree_dimensions' => 'Méret :',
-'entree_titre_document' => 'Dokumentum címe :',
-'entree_titre_image' => 'Kép címe :',
 'envoi_via_le_site' => 'Küldés a honlapon keresztül',
 'erreur' => 'Hiba',
 'erreur_balise_non_fermee' => 'az utolsó tag nincs lezárva:',
@@ -366,9 +360,6 @@ Köszönjük részvételét!
 'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
 'icone_visiter_site' => 'Látogatás', # MODIF
 'icone_voir_en_ligne' => 'Nézni élőben',
-'image_tourner_180' => '180° fordulás',
-'image_tourner_droite' => 'Fordulás 90° jobbra',
-'image_tourner_gauche' => 'Fordulás 90° balra',
 'img_indisponible' => 'hiányzó kép',
 'impossible' => 'nem lehetséges',
 'info_a_suivre' => 'FOLYTATNI »',
@@ -414,9 +405,6 @@ Köszönjük részvételét!
 'info_description' => 'Leírás :',
 'info_description_2' => 'Leírás :',
 'info_dimension' => 'Méretek :',
-'info_document' => 'Dokumentum',
-'info_document_indisponible' => 'Ez a dokumentum nem érhető el.',
-'info_documents' => 'Dokumentumok',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
 'info_ecire_message_prive' => 'Magán üzenet írása',
@@ -437,14 +425,11 @@ Köszönjük részvételét!
 'info_image_aide' => 'SÚGÓ',
 'info_image_process_titre' => 'Bélyegképek készítési módszer',
 'info_impossible_lire_page' => '<b>Hiba !</b> Az opdal nem olvasható  <tt><html>@test_proxy@</html></tt> a proxyn keresztül <tt>', # MODIF
-'info_inclusion_directe' => 'Közvetlen beszúrás :',
-'info_inclusion_vignette' => 'Bélyegkép beszúrása :',
 'info_installation_systeme_publication' => 'A publikálási rendszer telepítése...',
 'info_installer_documents' => 'Automatikusan telepítheti az összes dokumentumot, amit tartalmaz az @upload@ nevű mappa.',
 'info_installer_ftp' => 'Mint adminisztrátor, az @upload@ mappába másolhat (FTP-vel) fájlokat, és később közvetlenül kijelölheti őket itt.',
 'info_installer_images' => 'JPEG, GIF és PNG tipusú képek telepíthetők.',
 'info_installer_images_dossier' => 'Képeket másolni a @upload@ mappába ahhoz, hogy itt lehessen kijelölni.',
-'info_installer_tous_documents' => 'Az összes dokumentum telepítése',
 'info_interface_complete' => 'teljes felület',
 'info_interface_simple' => 'Egyszerűsített felület',
 'info_joindre_document_article' => 'Olyan tipusú dokumentumokat csatolhat ehhez a cikkhez',
@@ -458,7 +443,6 @@ Köszönjük részvételét!
 'info_les_auteurs_1' => 'írta @les_auteurs@',
 'info_logo_format_interdit' => 'Csak a @formats@ tipusú formatumak vannak engedlyezve.',
 'info_logo_max_poids' => 'Egy logo kisebb legyen, mint @maxi@ (ez a fájl pedig @actuel@).',
-'info_logo_max_taille' => 'Egy logo kisebb legyen, mint @maxi@ (ez a fájl pedig @actuel@).',
 'info_mail_fournisseur' => 'önmaga@szolgaltato.com',
 'info_message_2' => 'ÜZENET',
 'info_message_supprime' => 'ÜZENET TÖRÖLVE',
@@ -487,7 +471,6 @@ Köszönjük részvételét!
 'info_pixels' => 'pixelek',
 'info_plusieurs_mots_trouves' => 'Néhany kulcsszó talált azzal "@cherche_mot@":',
 'info_popularite_5' => 'népszerűség :',
-'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automatikus portfolio :',
 'info_premier_resultat' => '[@debut_limit@ első eredmények, @total@ összesen]',
 'info_premier_resultat_sur' => '[@debut_limit@ eredmény, összesen @total@]',
@@ -527,7 +510,6 @@ Köszönjük részvételét!
 'info_symbole_vert' => 'A <b>zöld</b> jel a honlap <b>többi felhasználóival cserélt üzeneteket</b> jelzi.', # MODIF
 'info_syndication' => 'szindikálás :',
 'info_syndication_articles' => 'cikk(ek)',
-'info_telecharger' => 'Feltöltés a gépéről :',
 'info_telecharger_nouveau_logo' => 'Új logo feltöltése :',
 'info_telecharger_ordinateur' => 'Feltöltés a gépéről :',
 'info_tous_resultats_enregistres' => '[minden eredmény mentve]',
