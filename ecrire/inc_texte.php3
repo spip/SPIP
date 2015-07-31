@@ -7,7 +7,7 @@ define("_ECRIRE_INC_TEXTE", "1");
 
 
 function tester_variable($nom_var, $val){
-	if ($_GET[$nom_var]) {
+	if ($_GET[$nom_var] OR $GLOBALS['HTTP_GET_VARS'][$nom_var]) {
 		$GLOBALS[$nom_var] = $val;
 	}
 	else if (!$GLOBALS[$nom_var]) {
