@@ -35,8 +35,6 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
   	$charset = 'AUTO';
   	if (preg_match(",<\?xml\s(.*?)encoding=['\"]?(.*?)['\"]?(\s(.*))?\?>,im",$texte,$regs))
   		$charset = $regs[2];
-  	var_dump($regs);
-  	var_dump($charset);
 	  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
 	  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
 		include_spip('inc/charsets');
