@@ -18,9 +18,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Une reconception generale est a prevoir apres l'experience des premiers
 // portages.
 
-// Chargement a la volee de la description d'un serveur de base de donnees
-// via la fonction spip_connect()
-// qui etablira la premiere connexion si ce n'est fait.
+// Cette fonction charge la description d'un serveur de base de donnees
+// (via la fonction spip_connect qui etablira la connexion si ce n'est fait)
+// et retourne la fonction produisant la requête SQL demandee
 // Erreur fatale si la fonctionnalite est absente
 
 // http://doc.spip.org/@sql_serveur
@@ -33,17 +33,28 @@ function sql_serveur($ins_sql, $serveur='') {
 	exit;
 }
 
-// Regler le codage de connexion
+// Dans quelques cas, l'absence de fonctionnalite ne doit pas declencher
+// d'erreur fatale ==> ne pas utiliser la fonction generale
 
-// http://doc.spip.org/@sql_set_charset
-function sql_set_charset($charset,$serveur=''){
-	$f = sql_serveur('set_charset', $serveur);
-	return $f($charset, $serveur);
+// http://doc.spip.org/@sql_explain
+function sql_explain($q, $serveur='') {
+	$desc = spip_connect($serveur);
+	if (function_exists($f = @$desc['explain'])) {
+		return $f($q, $serveur);
+	}
+	spip_log("Le serveur '$serveur' ne dispose pas de 'explain'");
+	return false;
+}
+
+function sql_optimize($q, $serveur='') {
+	$desc = spip_connect($serveur);
+	if (function_exists($f = @$desc['optimize'])) {
+		return $f($q, $serveur);
+	}
+	spip_log("Le serveur '$serveur' ne dispose pas de 'optimize'");
 }
 
 // Demande si un charset est disponible. 
-// Pas d'erreur fatale ==> ne pas utiliser la fonction generale
-
 // http://doc.spip.org/@sql_get_charset
 function sql_get_charset($charset, $serveur=''){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
@@ -55,6 +66,14 @@ function sql_get_charset($charset, $serveur=''){
 	}
 	spip_log("SPIP ne connait pas les Charsets disponibles sur le serveur $serveur. Le serveur choisira seul.");
 	return false;
+}
+
+// Regler le codage de connexion
+
+// http://doc.spip.org/@sql_set_charset
+function sql_set_charset($charset,$serveur=''){
+	$f = sql_serveur('set_charset', $serveur);
+	return $f($charset, $serveur);
 }
 
 // Cette fonction est systematiquement appelee par les squelettes
@@ -95,12 +114,6 @@ function sql_select (
 // http://doc.spip.org/@sql_alter
 function sql_alter($q, $serveur='') {
 	$f = sql_serveur('alter', $serveur);
-	return $f($q, $serveur);
-}
-
-// http://doc.spip.org/@sql_explain
-function sql_explain($q, $serveur='') {
-	$f = sql_serveur('explain', $serveur);
 	return $f($q, $serveur);
 }
 

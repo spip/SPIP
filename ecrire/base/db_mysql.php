@@ -48,6 +48,7 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		'insertq' => 'spip_mysql_insertq',
 		'listdbs' => 'spip_mysql_listdbs',
 		'multi' => 'spip_mysql_multi',
+		'optimize' => 'spip_mysql_optimize',
 		'query' => 'spip_mysql_query',
 		'replace' => 'spip_mysql_replace',
 		'select' => 'spip_mysql_select',
@@ -112,6 +113,11 @@ function spip_mysql_query($query, $serveur='') {
 // http://doc.spip.org/@spip_mysql_alter
 function spip_mysql_alter($query, $serveur=''){
 	return spip_mysql_query("ALTER ".$query); # i.e. que PG se debrouille
+}
+
+function spip_mysql_optimize($table, $serveur=''){
+	spip_mysql_query("OPTIMIZE TABLE ". $table);
+	return true;
 }
 
 // http://doc.spip.org/@spip_mysql_explain
