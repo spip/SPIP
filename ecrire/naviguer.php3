@@ -136,7 +136,7 @@ debut_page($titre_page, "documents", "rubriques");
 debut_grand_cadre();
 
 afficher_parents($id_parent);
-$parents="~ <IMG SRC='img_pack/racine-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <IMG SRC='img_pack/racine-site-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -233,7 +233,7 @@ else if ($id_parent == 0) $ze_logo = "secteur-24.png";
 else $ze_logo = "rubrique-24.png";
 
 
-debut_cadre_enfonce($ze_logo);
+debut_cadre_relief($ze_logo);
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
@@ -282,12 +282,12 @@ if ($flag_mots!= 'non' AND $connect_statut == '0minirezo' AND acces_rubrique($co
 
 
 if (strlen($texte) > 1) {
-	echo "\n<p><font size=3 face='Georgia,Garamond,Times,serif'><b><div align='justify'>";
+	echo "\n<p><font size=3 face='verdana,arial,helvetica,sans-serif'><div align='justify'>";
 	echo justifier(propre($texte));
-	echo "&nbsp;</b></font>";
+	echo "&nbsp;</font>";
 }
 
-fin_cadre_enfonce();
+fin_cadre_relief();
 
 
 

@@ -229,7 +229,7 @@ debut_page("$titre_page","documents","sites");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <IMG SRC='img_pack/racine-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <IMG SRC='img_pack/racine-site-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -275,7 +275,7 @@ debut_droite();
 
 
 
-debut_cadre_enfonce("site-24.png");
+debut_cadre_relief("site-24.png");
 echo "<center>";
 
 if ($syndication == 'off') {
@@ -339,7 +339,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		}
 
 
-		debut_cadre_relief();
+		debut_cadre_enfonce();
 		echo "<FORM ACTION='sites.php3?id_syndic=$id_syndic' METHOD='GET'>";
 		echo "<INPUT TYPE='hidden' NAME='id_syndic' VALUE='$id_syndic'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
@@ -347,7 +347,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE R&Eacute;F&Eacute;RENCEMENT DE CE SITE&nbsp;:";
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
-		echo "<TR><TD ALIGN='center' BGCOLOR='#FFFFFF'>";
+		echo "<TR><TD ALIGN='center'>";
 		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 		afficher_jour($jour);
 		echo "</SELECT> ";
@@ -358,11 +358,11 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		afficher_annee($annee);
 		echo "</SELECT>";
  		
-		echo "</TD><TD ALIGN='right' BGCOLOR='#FFFFFF'>";
+		echo "</TD><TD ALIGN='right'>";
 		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
 		echo "</TD></TR></TABLE>";
 		echo "</FORM>";
-		fin_cadre_relief();	
+		fin_cadre_enfonce();	
 	}
 	else {
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Site propos&eacute; le : <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
@@ -377,17 +377,12 @@ if ($flag_administrable) {
 	$link = new Link();
 	$link->delVar('new');
 	echo $link->getForm('GET');
-	debut_cadre_relief();
+	debut_cadre_relief("racine-site-24.png");
 	echo "\n<center>";
 
 	echo "<b>Ce site est&nbsp;:</b> &nbsp;&nbsp; \n";
 
 	echo "<select name='nouveau_statut' size=1 class='fondl'>\n";
-	/*
-	echo "<option".mySel("publie", $statut).">Publi&eacute;\n";
-	echo "<option".mySel("prop", $statut).">Propos&eacute;\n";
-	echo "<option".mySel("refuse", $statut).">A la poubelle\n";
-	*/
 
 	my_sel("publie","Publi&eacute;",$statut);
 	my_sel("prop","Propos&eacute;",$statut);
@@ -420,7 +415,7 @@ if ($syndication == "oui" OR $syndication == "off") {
 		"SELECT * FROM spip_syndic_articles WHERE id_syndic='$id_syndic' ORDER BY date DESC");
 }
 
-fin_cadre_enfonce();
+fin_cadre_relief();
 
 
 

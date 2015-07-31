@@ -133,7 +133,7 @@ while($row = mysql_fetch_array($result_message)) {
 	
 	debut_droite();
 
-	debut_cadre_enfonce("messagerie-24.png");
+	debut_cadre_relief("messagerie-24.png");
 	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 	echo "<TR><TD>";
 
@@ -166,7 +166,7 @@ while($row = mysql_fetch_array($result_message)) {
 	//
 	
 	if ($type == 'normal') {
-		debut_cadre_relief();
+		debut_cadre_enfonce("redacteurs-24.png");
 
 		//
 		// Expediteur
@@ -438,7 +438,7 @@ while($row = mysql_fetch_array($result_message)) {
 				echo "<br><div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>Ajouter un participant</a></font>";
 			}
 		}
-		fin_cadre_relief();
+		fin_cadre_enfonce();
 	}
 	
 	else {
@@ -543,7 +543,7 @@ while($row = mysql_fetch_array($result_message)) {
 	}
 
 	echo "</td></tr></table>";
-	fin_cadre_enfonce();
+	fin_cadre_relief();
 	
 	//////////////////////////////////////////////////////
 	// Forums

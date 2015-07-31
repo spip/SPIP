@@ -252,7 +252,7 @@ debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -637,7 +637,7 @@ function afficher_jour($jour){
 
 
 
-debut_cadre_enfonce("article-24.png");
+debut_cadre_relief("article-24.png");
 echo "<CENTER>";
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 echo "<TR>";
@@ -732,7 +732,7 @@ echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
 //
 
 if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) {
-	debut_cadre_relief();
+	debut_cadre_enfonce();
 
 	echo "<FORM ACTION='articles.php3' METHOD='GET'>";
 	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
@@ -742,7 +742,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		echo aide ("artdate");
 		echo "</B></FONT></TR>";
-		echo "<TR><TD ALIGN='center' BGCOLOR='#FFFFFF'>";
+		echo "<TR><TD ALIGN='center'>";
 		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 		afficher_jour($jour);
 		echo "</SELECT> ";
@@ -753,7 +753,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		afficher_annee($annee);
 		echo "</SELECT>";
  		
-		echo "</TD><TD ALIGN='right' BGCOLOR='#FFFFFF'>";
+		echo "</TD><TD ALIGN='right'>";
 		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
 		echo "</TD></TR></TABLE>";
 	}
@@ -762,7 +762,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE CREATION DE L'ARTICLE";
 		echo " :</B></FONT></TR>";
 
-		echo "<TR><TD ALIGN='center' BGCOLOR='#FFFFFF'>";
+		echo "<TR><TD ALIGN='center'>";
 		echo "<B>";
 		echo affdate($date);
 		echo aide ("artdate");
@@ -773,13 +773,13 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	
 	if (($options == 'avancees' AND $articles_redac != "non") OR ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00")) {
 		echo "<P><TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='#E4E4E4' COLSPAN=2><FONT SIZE=2 COLOR='#000000'>";
+		echo "<TR><TD BGCOLOR='#cccccc' COLSPAN=2><FONT SIZE=2 COLOR='#000000'>";
 		if ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00") $date_affichee = " : ".majuscules(affdate($date_redac));
 		echo bouton_block_invisible('dateredac');
 		echo "<B>DATE DE PUBLICATION ANT&Eacute;RIEURE$date_affichee</B></FONT></TR></table>";
 		echo debut_block_invisible('dateredac');
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD ALIGN='left' BGCOLOR='#FFFFFF'>";
+		echo "<TR><TD ALIGN='left'>";
 		if ("$annee_redac-$mois_redac-$jour_redac" == "0000-00-00") {
 			echo "<INPUT TYPE='radio' NAME='avec_redac' VALUE='non' id='on' checked>  <B><label for='on'>Ne pas afficher de date de publication ant&eacute;rieure.</label></B>";
 			echo "<BR><INPUT TYPE='radio' NAME='avec_redac' VALUE='oui' id='off'>";
@@ -802,7 +802,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 			echo "</SELECT> &nbsp;";
 			echo "<INPUT TYPE='text' NAME='annee_redac' CLASS='fondl' VALUE=\"$annee_redac\" SIZE='5'>";
 		}
-		echo "</TD><TD ALIGN='right' BGCOLOR='#FFFFFF'>";
+		echo "</TD><TD ALIGN='right'>";
 		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
 		echo aide ("artdate-redac");
 		echo "</TD></TR>";
@@ -812,7 +812,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	}
 
 	echo "</FORM>";
-	fin_cadre_relief();
+	fin_cadre_enfonce();
 }
 
 if (!$flag_editable AND $statut_article == 'publie') {
@@ -825,7 +825,7 @@ if (!$flag_editable AND $statut_article == 'publie') {
 // Liste des auteurs de l'article
 //
 
-debut_cadre_relief("redacteurs-24.png");
+debut_cadre_enfonce("redacteurs-24.png");
 
 echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 if ($flag_editable AND $options == 'avancees') {
@@ -1108,7 +1108,7 @@ if ($flag_editable AND $options == 'avancees') {
 	echo fin_block();
 }
 
-fin_cadre_relief();
+fin_cadre_enfonce();
 
 
 
@@ -1156,7 +1156,7 @@ function change_bouton(selObj){
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo "<FORM ACTION='articles.php3' METHOD='get'>";
-	debut_cadre_relief();
+	debut_cadre_relief("racine-site-24.png");
 	echo "<CENTER>";
 	
 	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
@@ -1257,7 +1257,7 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 echo "</DIV>";
 
 
-fin_cadre_enfonce();
+fin_cadre_relief();
 
 //
 // Forums
