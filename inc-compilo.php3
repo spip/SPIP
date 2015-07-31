@@ -76,8 +76,8 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 	else {
 		spip_log("ERREUR: <INCLURE($fichier)> impossible");
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
-			"&lt;INCLURE($fichier)&gt;");
-		return "'&lt;INCLURE(".texte_script($fichier).")&gt;'";
+			"&lt;INCLURE($fichier)&gt; - "._L("Fichier $fichier introuvable"));
+		return "'<!-- INCLURE(".texte_script($fichier).") -->'";
 	}
 
 	return "\n'<".
