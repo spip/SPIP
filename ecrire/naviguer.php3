@@ -403,7 +403,7 @@ if ($id_parent == "0" AND $activer_breves!="non"){
 
 //// Les sites references
 
-afficher_sites("Les sites contenus dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
+afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
 
 
 $proposer_sites=lire_meta("proposer_sites");
