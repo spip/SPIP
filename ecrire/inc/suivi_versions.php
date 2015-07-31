@@ -96,7 +96,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 						$bouton_id = "b$id_version-$id_article-$id_auteur";
 						$aff = bouton_block_depliable($aff,false,$bouton_id)
 						  . debut_block_depliable(false,$bouton_id)
-						  . revisions_diff ($id_article, $id_version, $court)
+						  . safehtml(revisions_diff ($id_article, $id_version, $court))
 						  . fin_block();
 				}
 				$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>$aff</div>";
