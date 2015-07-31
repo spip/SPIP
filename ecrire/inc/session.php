@@ -253,7 +253,7 @@ function fichier_session($alea, $tantpis=false) {
 		include_spip('base/abstract_sql');
 		$GLOBALS['meta'][$alea] = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea));
 		if (!$GLOBALS['meta'][$alea]){
-			spip_log("$alea indisponible");
+			spip_log("fichier session ($tantpis): $alea indisponible");
 			if (!$tantpis) {
 				include_spip('inc/minipres');
 				echo minipres();
