@@ -277,8 +277,6 @@ $exceptions_des_jointures['type_mot_syndic']= array('spip_mots','type');
 $exceptions_des_jointures['petition'] = array('spip_petitions', 'texte');
 $exceptions_des_jointures['id_signature']= array('spip_signatures', 'id_signature');
 
-$exceptions_des_jointures['destinataire']= array('spip_auteurs_messages', 'id_auteur');
-
 global  $table_des_traitements;
 
 define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect)');
