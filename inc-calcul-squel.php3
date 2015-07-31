@@ -307,7 +307,7 @@ function parser_boucle($texte, $id_parent) {
 					}
 	
 					// Restriction de valeurs (implicite ou explicite)
-					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *([^<>=! ]*))?$', $param, $match)) {
+					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *([^<>=!]*))?$', $param, $match)) {
 						// Variable comparee
 						$col = $match[1];
 						$col_table = $table;
@@ -326,7 +326,6 @@ function parser_boucle($texte, $id_parent) {
 							$val = '$'.$val;
 						}
 
-
 						// Traitement general des relations externes
 						if ($s = $tables_relations[$type][$col]) {
 							$col_table = $s;
@@ -336,9 +335,10 @@ function parser_boucle($texte, $id_parent) {
 							$flag_lien = true;
 						}
 						// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
-						else if (($type == 'articles' OR $type == 'rubriques' OR $type == 'breves')
-							AND ($col == 'type_mot' OR $col == 'titre_mot')) {
+						else if ($type != mots AND ($col == 'type_mot' OR $col == 'titre_mot')) {
 							$col_lien = 'spip_mots_'."$type";
+							if ($type == 'forums') $col_lien = "spip_mots_forum";
+							if ($type == 'syndication') $col_lien = "spip_mots_syndic";
 							$req_from[] = $col_lien;
 							$col_table = 'spip_mots';
 							$req_from[] = $col_table;
@@ -347,15 +347,12 @@ function parser_boucle($texte, $id_parent) {
 							$req_where[] = "$col_lien.id_mot=$col_table.id_mot";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
+							echo "HOP";
 						}
-						else if ($type == 'syndication' AND ($col == 'type_mot' OR $col == 'titre_mot')) {
-							$col_lien = 'spip_mots_syndic';
-							$req_from[] = $col_lien;
-							$col_table = 'spip_mots';
+						else if	($type == 'mots' AND ($col == 'id_syndic' OR $col == 'id_forum')) {
+							$col_table = 'spip_'.$type.'_'.substr($col, 3);
 							$req_from[] = $col_table;
-							$col = substr($col, 0, strlen($col)-4);
-							$req_where[] = "$table.$id_objet=$col_lien.$id_objet";
-							$req_where[] = "$col_lien.id_mot=$col_table.id_mot";
+							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
@@ -786,6 +783,7 @@ function parser($texte) {
 	$tables_relations['mots']['id_syndic'] = 'spip_mots_syndic';
 
 	$tables_relations['rubriques']['id_mot'] = 'spip_mots_rubriques';
+	$tables_relations['forums']['id_mot'] = 'spip_mots_forum';
 
 	$tables_relations['syndication']['id_mot'] = 'spip_mots_syndic';
 
