@@ -225,4 +225,35 @@ function executer_une_indexation_syndic() {
 	}
 }
 
+function creer_liste_indexation() {
+	$fichier_index = 'data/indexation.txt';
+	$elements = array('article', 'breve', 'mot', 'auteur', 'rubrique', 'syndic');
+
+	while (list(,$element) = each ($elements)) {
+		$table = "spip_".$element."s";
+		if ($element == 'syndic') $table = 'spip_syndic';
+		switch($element) {
+			case 'article':
+			case 'breve':
+			case 'syndic':
+				$statut = "WHERE statut='publie'";
+				break;
+			case 'auteur':
+				$statut = "WHERE FIND_IN_SET(statut,'0minirezo,1comite')";
+				break;
+			default:
+				$statut = '';
+		}
+
+		$res = spip_query("SELECT id_$element FROM $table $statut");
+		while ($row = mysql_fetch_array($res))
+			$liste .= "$element ".$row["id_$element"]."\n";
+	}
+
+	if ($f = @fopen("$fichier_index", "w")) {
+		@fputs($f, $liste);
+		@fclose($f);
+	}
+}
+
 ?>
