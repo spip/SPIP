@@ -107,7 +107,7 @@ function inc_documenter_dist(
 
 	$s = ($ancre =='documents' ? '': '-');
 	if (is_int($doc)) {
-		$head = "\n<div style='padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2 $toile'>\n<b>".majuscules(_T("info_$ancre"))."</b></div>";
+		$head = "\n<div style='padding: 4px; color: black;' class='verdana2 $toile'>\n<b>".majuscules(_T("info_$ancre"))."</b></div>";
 
 		if (count($documents) > 3) {
 			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'>"
