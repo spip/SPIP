@@ -1265,7 +1265,8 @@ function image_typo() {
 	$dossier = _DIR_IMG. creer_repertoire(_DIR_IMG, 'cache-texte');
 	$fichier = "$dossier$query.png";
 
-	$flag_gd_typo = function_exists("imageftbbox");
+	$flag_gd_typo = function_exists("imageftbbox")
+		&& function_exists('imageCreateTrueColor');
 
 	
 	if (!file_exists($fichier) AND $flag_gd_typo) {
