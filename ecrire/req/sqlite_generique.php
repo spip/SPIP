@@ -382,8 +382,13 @@ function spip_sqlite_errno($serveur='') {
 function spip_sqlite_explain($query, $serveur=''){
 	if (strpos(ltrim($query), 'SELECT') !== 0) return array();
 
-	$query = 'EXPLAIN ' . _sqlite_traite_query($query, $db, $prefixe);
-	$r = spip_sqlite_query($query, $serveur);
+	$requete = new sqlite_traiter_requete("$query", $serveur);
+	$requete->traduire_requete(); // mysql -> sqlite
+	$requete->query = 'EXPLAIN ' . $requete->query;
+	// on ne trace pas ces requetes, sinon on obtient un tracage sans fin...
+	$requete->tracer = false; 
+	$r = $requete->executer_requete();
+
 	return $r ? spip_sqlite_fetch($r, null, $serveur) : false; // hum ? etrange ca... a verifier
 }
 
@@ -1183,6 +1188,7 @@ class sqlite_traiter_requete{
 	var $link = ''; // le link (ressource) sqlite
 	var $prefixe = ''; // le prefixe des tables
 	var $db = ''; // le nom de la base 
+	var $tracer = false; // doit-on tracer les requetes (var_profile)
 	
 	/* constructeur */
 	function sqlite_traiter_requete($query, $serveur = ''){
@@ -1196,6 +1202,9 @@ class sqlite_traiter_requete{
 
 		$this->prefixe 	= $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['prefixe'];
 		$this->db 		= $GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['db'];
+		
+		// tracage des requetes ?
+		$this->tracer = (isset($_GET['var_profile']) && $_GET['var_profile']);
 	}
 	
 	
@@ -1206,24 +1215,25 @@ class sqlite_traiter_requete{
 		$analyse->creerLesRequetes();
 		// renvoyer
 		$this->query = $analyse->query;
-		$this->queryCount = $analyse->queryCount;
 	}
 	
 	
 	/* lancer la requete $this->requete et faire le tracage si demande */
 	function executer_requete(){
-		$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
+		$t = $this->tracer ? trace_query_start(): 0;
 		//echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
 		if ($this->link){
 			if (_sqlite_is_version(3, $this->link)) {
 				$r = $this->link->query($this->query);
-				// comptage : oblige de compter le nombre d'entrees retournees par la requete
+				// comptage : oblige de compter le nombre d'entrees retournees 
+				// par une requete SELECT
 				// aucune autre solution ne donne le nombre attendu :( !
 				// particulierement s'il y a des LIMIT dans la requete.
-				if ($this->queryCount){
+				if (strpos($this->query,'SELECT')!==false){
 					if ($r) {
-						$l = $this->link->query($this->queryCount);
+						$l = $this->link->query($this->query);
 						$r->spipSqliteRowCount =  count($l->fetchAll());
+						unset($l);
 					} elseif (is_a($r, 'PDOStatement')) {
 						$r->spipSqliteRowCount = 0;
 					}
@@ -1241,7 +1251,7 @@ class sqlite_traiter_requete{
 		//}
 		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
 			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
-
+		
 		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;
 	}
 }
@@ -1286,10 +1296,6 @@ class sqlite_analyse_requete {
 		$this->corrigerTout();
 		// hop, on remet les 'textes'
 		$this->afficherLesTextes();
-		// requete pour comptage
-		if ($this->sqlite_version == 3){
-			$this->creerRequeteCount();
-		}
 	}
 	
 	
@@ -1424,15 +1430,6 @@ class sqlite_analyse_requete {
 	}
 	
 	
-	// les creations !
-	
-	function creerRequeteCount(){
-		if (strpos($this->query,'SELECT')!==false){
-			$this->queryCount = $this->query;
-				//preg_replace('/SELECT(\s*)(DISTINCT)?(\s*)/s','SELECT$1$2$3COUNT(*) AS sqlite_count, ', $this->query, 1); // 1 seul !	
-		}
-	}		
-			
 	// les callbacks
 	
 	// remplacer DATE_ / INTERVAL par DATE...strtotime
