@@ -1,3 +1,25 @@
+plugins 2.1.13->2.1.14 (22/04/2012)
+----------------------------------------
+r61251 | kent1     | 2012-05-13 12:08:13|Pas besoin de ces logs intempestifs
+
+Core 2.1.13->2.1.14 (14/05/2012)
+--------------------------------
+
+r19298 | cedric    | 2012-04-23 17:47:02| Comme r19253 mais compatible PHP 4
+r19308 | b_b       | 2012-04-25 18:31:10| suivre les changements dans les paramètres du callback success de jquery.form suite à r18809
+r19309 | b_b       | 2012-04-25 19:33:47| oubli dans r19308 pour les zip à déballer
+r19322 | esj       | 2012-04-27 18:29:54| Régression de SPIP 2 par rapport à SPIP 1.9: la boucle syndic_article (et aussi certains cas pour la boucle Auteur) était compilée avec un Group By inutile, particulièrement mal venu à cause d'un bug de certaines versions de MYSQL. Bug  [http://comments.gmane.org/gmane.comp.web.spip.devel/46063 signalé sur spip-dev] il y a déjà longtemps, et relancé par Sebastien Rebaudo.
+r19330 | esj       | 2012-04-30 11:11:41| Certaines instllations de PostGres ne considère pas le backslash comme un caratère d'échappement dans une chaîne, il ne faut donc pas utiliser "addslashes" mais pg_escape_string. La présente correction n'est toutefois pas tout à faite suffisante, à cause de la fonction _q qui n'est toujours pas intégrée à l'interface SPIP/SQL, mais il n'est même pas sûr que le cas problématique puisse émerger.
+r19333 | cedric    | 2012-04-30 17:28:42| Report de r19331 : Evitons aux pirates schizophrènes de se faire du mal
+r19334 | denisb    | 2012-04-30 22:05:19| inc/ajouter_documents.php : on retrouve la fonctionnalité de titrage automatique des fichiers extraits de l'upload d'un zip.
+r19358 | marcimat  | 2012-05-11 15:45:10| Report de r19256 (Éviter une erreur en PHP 5.4)
+r19364 | fil       | 2012-05-14 10:12:12| un son n'a pas de #HAUTEUR /#LARGEUR naturelle : fournir des valeurs par defaut permettant de voir le player
+r19365 | fil       | 2012-05-14 10:13:46| d'autres cas ou il ne faut pas ajouter d'insecable
+r19366 | fil       | 2012-05-14 10:14:43| savoir appliquer les filtres d'images sur les img src=data:...base64
+r19367 | fil       | 2012-05-14 10:16:51| sur un fichier vide ou inexistant, taille en octet renvoie une chaine vide plutot que '0 octets'
+r19368 | fil       | 2012-05-14 10:17:41| detection un peu plus laxiste des blocs echappes
+
+
 plugins 2.1.12->2.1.13 (22/04/2012)
 ----------------------------------------
 r56754 | b_b        | 2012-01-07 20:13:34 +0100 (sam. 07 janv. 2012) | 2 lignesorthographe
