@@ -162,8 +162,7 @@ $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', 
 
 // http://doc.spip.org/@declarer_interfaces
 function declarer_interfaces(){
-global $exceptions_des_tables, $table_des_tables;
-global $table_date;
+ global $exceptions_des_tables, $table_des_tables, $table_date, $table_titre;
 
 $table_des_tables['articles']='articles';
 $table_des_tables['auteurs']='auteurs';
@@ -208,6 +207,16 @@ $exceptions_des_tables['syndic_articles']['url_article']='url';
 $exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs';
 $exceptions_des_tables['syndic_articles']['url_site']=array('syndic', 'url_site');
 $exceptions_des_tables['syndic_articles']['nom_site']=array('syndic', 'nom_site');
+
+$table_titre['mots']= "titre, '' AS lang";
+$table_titre['breves']= 'titre , lang';
+$table_titre['articles']= 'titre, lang';
+$table_titre['rubriques']= 'titre, lang';
+$table_titre['forums']= "titre, '' AS lang";
+$table_titre['messages']= "titre, '' AS lang";
+$table_titre['auteurs']= "nom AS titre, '' AS lang";
+$table_titre['site']= "nom_site AS titre, '' AS lang";
+$table_titre['documents']= "titre, fichier AS surnom, '' AS lang";
 
 $table_date['articles']='date';
 $table_date['auteurs']='date';
