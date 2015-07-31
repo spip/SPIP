@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Ces sites ont rencontr&eacute; un probl&egrave;me de syndication',
 'avis_sites_syndiques_probleme' => 'Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me',
 'avis_suppression_base' => 'ATTENTION, la suppression des donn&eacute;es est irr&eacute;versible',
-'avis_version_mysql' => 'Votre version de SQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
+'avis_version_mysql' => 'Votre serveur SQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
 
 
 // B
@@ -879,7 +879,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_config_groupe_mots_cles' => 'Souhaitez-vous activer la configuration avanc&eacute;e des mots-cl&eacute;s,
    en indiquant par exemple qu\'on peut s&eacute;lectionner un mot unique
    par groupe, qu\'un groupe est important...&nbsp;?',
-'texte_connexion_mysql' => 'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver, si votre h&eacute;bergeur supporte SQL, les codes de connexion au serveur SQL.',
+'texte_connexion_mysql' => 'Consultez les informations fournies par votre h&eacute;bergeur&nbsp;: vous devez y trouver les identifiants de connexion au serveur SQL.',
 'texte_contenu_article' => '(Contenu de l\'article en quelques mots.)',
 'texte_contenu_articles' => 'Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
 		que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s.
@@ -977,7 +977,7 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es
   elle-m&ecirc;me.</b><p />
-  SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
+  Votre serveur SQL dispose d\'une facult&eacute; de r&eacute;paration de ses
   tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
   accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
   cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
