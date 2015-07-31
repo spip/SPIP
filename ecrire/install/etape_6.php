@@ -22,8 +22,8 @@ function install_etape_6_dist()
 	if($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3) {
 		echo minipres(
 			'AUTO',
-			"<h2>"._L('Echec de saisie du mot de passe')."</h2>\n".
-			"<p>"._L('Revenez à la page précédente, et vérifiez les informations que vous avez fournies.')."</p>"
+			"<h2>"._T('info_passes_identiques')."</h2>\n".
+			"<p>"._T('avis_connexion_echec_2')."</p>"
 		);
 		exit;
 	}
