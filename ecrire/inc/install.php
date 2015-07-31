@@ -356,7 +356,7 @@ function install_select_serveur()
 			if (function_exists($v) AND $v()) {
 				$titre = _T("install_select_type_$s");
 				// proposer sqlite3 par defaut si dispo
-				$checked = ($s=='sqlite3'?" checked='checked'":"");
+				$checked = ($s=='mysql'?" checked='checked'":"");
 				$options[$s] =  "<li><input type='radio' id='$s' value='$s' name='server_db'$checked>"
 					."<label for='$s'>" . ($titre ? $titre : $s)."</label></li>";
 			} else spip_log("$s: portage indisponible");
