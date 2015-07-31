@@ -47,6 +47,28 @@ function generer_url_document($id_document) {
 
 function recuperer_parametres_url($fond, $url) {
 	global $contexte;
+
+
+	/*
+	 * Le bloc qui suit sert a faciliter les transitions depuis
+	 * le mode 'urls-propres' vers les modes 'urls-standard' et 'url-html'
+	 * Il est inutile de le recopier si vous personnalisez vos URLs
+	 * et votre .htaccess
+	 */
+	// Si on est revenu en mode html, mais c'est une ancienne url_propre
+	// on ne redirige pas, on assume le nouveau contexte (si possible)
+	if ($url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre']
+	OR $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre']
+	AND preg_match(',^(article|breve|rubrique|mot|auteur)$,', $fond)) {
+		$url_propre = preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
+			'$1', $url_propre);
+		if ($r = spip_query("SELECT id_$fond AS id FROM spip_".$fond."s
+		WHERE url_propre = '".addslashes($url_propre)."'")
+		AND $t = spip_fetch_array($r))
+			$contexte["id_$fond"] = $t['id'];
+	}
+	/* Fin du bloc compatibilite url-propres */
+
 	return;
 }
 
