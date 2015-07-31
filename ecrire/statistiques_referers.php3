@@ -57,7 +57,7 @@ if ($connect_statut != '0minirezo') {
 			}
 		}
 
-		while (list($key, $value) = each($referers)) {
+		while ($referers && (list($key, $value) = each($referers))) {
 			$referer = $key;
 			$ref_md5 = substr(md5($referer), 0, 15);
 
