@@ -160,6 +160,7 @@ function info_progression_etape($en_cours,$phase,$dir){
 	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php$');
 	$debut = 1; $etat = "ok";
 	$last = count($liste);
+	$texte_etat = array('ok'=>'OK','encours'=>_L('en cours'),'todo'=>_L('&agrave; venir'));
 	
 	$aff_etapes = "<span id='etapes'>";
 	foreach($liste as $etape=>$fichier){
@@ -167,7 +168,7 @@ function info_progression_etape($en_cours,$phase,$dir){
 			$etat = "encours";
 		}
 		$aff_etapes .= ($debut<$last)
-			? "<span class='$etat'><em>$debut</em><span>,</span> </span>"
+			? "<span class='$etat'><span>Etape </span><em>$debut</em><span> " . $texte_etat[$etat] . ",<br /></span> </span>"
 			: '';
 		if ($etat == "encours")
 			$etat = 'todo';

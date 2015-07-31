@@ -60,7 +60,7 @@ function install_etape_2_dist()
 	//echo "\n-->\n";
 
 	if (($db_connect=="0") && $link) {
-		echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>\n";
+		echo "<p class='resultat ok'><b>"._T('info_connexion_ok')."</b></p>\n";
 		echo info_etape(_T('menu_aide_installation_choix_base').aide ("install2"));
 
 		spip_connect_db($adresse_db, 0, $login_db, $pass_db, '',$server_db);
@@ -76,7 +76,7 @@ function install_etape_2_dist()
 		echo install_etape_2_form($hidden, $checked, $res, 3);
 	} else  {
 		echo info_etape(_T('info_connexion_base'));
-		echo "<p class='resultat'><b>",
+		echo "<p class='resultat echec'><b>",
 #		  _T('avis_connexion_echec_1'),
 		  _L('La connexion &agrave; la base de donn&eacute;es a &eacute;chou&eacute;.'),
 		  "</b></p>";

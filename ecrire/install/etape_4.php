@@ -38,7 +38,7 @@ function install_etape_4_dist()
 			echo minipres(
 			'AUTO',
 			"<h2>$echec</h2>\n".
-			"<p class='resultat'>"._T('avis_connexion_echec_2')."</p>"
+			"<p class='resultat echec'>"._T('avis_connexion_echec_2')."</p>"
 			);
 			exit;
 		}
