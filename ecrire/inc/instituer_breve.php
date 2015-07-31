@@ -35,7 +35,7 @@ function inc_instituer_breve_dist($id_breve, $statut=-1)
 	foreach($liste_statuts as $s=>$affiche){
 		$href = parametre_url($href,'statut',$s);
 		$sel = ($s==$statut) ? " selected":"";
-		$res .= "<li class='$s$sel'><a href='$href'>" . puce_statut($s) . $affiche[0] . '</a></li>';
+		$res .= "<li class='$s$sel'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $affiche[0] . '</a></li>';
 	}
 
 	$res .= "</ul></li></ul>";
