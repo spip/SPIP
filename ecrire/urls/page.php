@@ -56,6 +56,7 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	}
 
 	// voir s'il faut recuperer le id_* implicite et les &debut_xx;
+	include_spip('inc/urls');
 	$r = nettoyer_url_page($i, $GLOBALS['contexte']);
 	if ($r) return $r;
 
@@ -85,23 +86,5 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
- 
-function nettoyer_url_page($url, $contexte=array())
-{
-	$url_objets = pipeline('url_objets');
-	$raccourci_url_page_html = ',^(?:[^?]*/)?('. $url_objets . ')([0-9]+)(?:\.html)?([?&].*)?$,';
-	$raccourci_url_page_id = ',^(?:[^?]*/)?('. $url_objets .')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,';
-	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?]('. $url_objets .')([0-9]+)(&.*)?$,';
-	
-	if (preg_match($raccourci_url_page_html, $url, $regs)
-	OR preg_match($raccourci_url_page_id, $url, $regs)
-	OR preg_match($raccourci_url_page_spip, $url, $regs)) {
-		$type = preg_replace(',s$,', '', table_objet($regs[1]));
-		if ($type == 'syndic') $type = 'site';
-		$_id = id_table_objet($regs[1]);
-		$contexte[$_id] = $regs[2];
-		return array($contexte, $type, null, $type);
-	}
-	return array();
-}
+
 ?>
