@@ -152,7 +152,7 @@ function test_login($nom, $mail) {
 
 function creer_pass_pour_auteur($id_auteur) {
 	include_ecrire("inc_acces.php3");
-	$pass = creer_pass_aleatoire(8, $mail_inscription);
+	$pass = creer_pass_aleatoire(8, $id_auteur);
 	$mdpass = md5($pass);
 	$htpass = generer_htpass($pass);
 	spip_query("UPDATE spip_auteurs
