@@ -189,7 +189,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		foreach ($matches as $match) {
 			$num_echap++;
 
-			// Si le resultat contient des <div>, forcer la sortie de paragraphes			
+			// Si le resultat contient des <div>, forcer la sortie du paragraphe
 			if ( $match[1] == "doc" OR $match[1] == "emb" OR eregi("^\|center", $match[3]) )  {
 				$letexte = str_replace($match[0],
 					"\n\n</no p>@@SPIP_$source$num_echap@@<no p>\n\n", $letexte);
@@ -942,13 +942,22 @@ function traiter_raccourcis_generale($letexte) {
 	//
 	// Tableaux
 	//
+
+	// traiter le cas particulier des echappements (<doc...> par exemple)
+	// qui auraient provoque des \n\n</no p> devant les | des tableaux
+	$letexte = preg_replace(',[|]\n\n</no p>@@,','|@@', $letexte);
+	$letexte = preg_replace(',@@<no p>\n\n[|],','@@|', $letexte);
+
+	// ne pas oublier les tableaux au debut ou a la fin du texte
 	$letexte = preg_replace(",^\n?[|],", "\n\n|", $letexte);
 	$letexte = preg_replace(",\n\n+[|],", "\n\n\n\n|", $letexte);
 	$letexte = preg_replace(",[|](\n\n+|\n?$),", "|\n\n\n\n", $letexte);
-	if (preg_match_all(',\n\n[|].*[|]\n\n,Ums', $letexte,
+
+	// traiter chaque tableau
+	if (preg_match_all(',[^|](\n[|].*[|]\n)[^|],Ums', $letexte,
 	$regs, PREG_SET_ORDER))
 	foreach ($regs as $tab) {
-		$letexte = str_replace($tab[0], traiter_tableau($tab[0]), $letexte);
+		$letexte = str_replace($tab[1], traiter_tableau($tab[1]), $letexte);
 	}
 
 	//
