@@ -43,7 +43,7 @@
 
 	<BOUCLE_articles(ARTICLES){0,3}{par date}{inverse}>
 		<a id="ar#ID_ARTICLE"></a>
-		<BOUCLE_RUB_AR(RUBRIQUES){ID_RUBRIQUE}>
+		<BOUCLE_RUB_AR(RUBRIQUES){id_rubrique}>
 			Rubrique : <a href="#URL_RUBRIQUE">{#TITRE}</a>
 		</BOUCLE_RUB_AR>
 
@@ -63,7 +63,7 @@
 
 	<BOUCLE_breves(BREVES){0,5}{par date}{inverse}>
 		<a id="br#ID_BREVE" />
-		<BOUCLE_RUB_BR(RUBRIQUES){ID_RUBRIQUE}>
+		<BOUCLE_RUB_BR(RUBRIQUES){id_rubrique}>
 			Rubrique : <a href="#URL_RUBRIQUE">{#TITRE}</a>
 		</BOUCLE_RUB_BR>
 		<h2>#TITRE</h2>
@@ -81,7 +81,7 @@
 	
 	[<p>Rechercher sur ce site : (#FORMULAIRE_RECHERCHE|recherche.php3)</p>]
 	<table><tr>
-		<td><a href="http://www.uzine.net/spip">{Site r&eacute;alis&eacute; avec le logiciel SPIP}</a></td>
+		<td><a href="http://www.spip.net/">{Site r&eacute;alis&eacute; avec le logiciel SPIP}</a></td>
 		[<td><a href="#URL_SITE_SPIP">{(#NOM_SITE_SPIP|majuscules)}</a></td>]
 		<td><a href="#URL_SITE_SPIP/plan.php3">{<:plan_site:>}</a></td>
 	</tr></table>
