@@ -292,7 +292,7 @@ function calculer_criteres ($idb, &$boucles) {
 # Criteres numériques et de comparaison
 
 function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
-  global $tables_relations, $table_primary, $table_des_tables, $table_date, $tables_des_serveurs_sql;
+  global $tables_relations, $table_des_tables, $table_date, $tables_des_serveurs_sql;
 	$boucle = &$boucles[$idb];				# nom de la boucle
 	$type = $boucle->type_requete;			# articles
 	$id_table = $boucle->id_table;	# articles ->   'table';

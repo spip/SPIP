@@ -308,7 +308,6 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 		$f = ereg_replace(".$ext$", '-s', basename($dest_path));
 		$d = lire_meta('taille_preview');
 		creer_fichier_vignette($dest_path);
-		//creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
 	}
 }
 
@@ -384,7 +383,7 @@ function creer_fichier_vignette($vignette) {
 		$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
-		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s'))
+		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, '', basename($vignette).'-s'))
 		{
 			inserer_vignette_base($vignette, $preview['fichier']);
 			return $preview['fichier'];

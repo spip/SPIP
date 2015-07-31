@@ -256,7 +256,7 @@ define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 define('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
 define('_DIR_TeX', _DIR_IMG . "TeX/");
 
-// define('_DIR_VIGNETTES', _DIR_IMG . "vignettes/"); a finaliser
+define('_DIR_VIGNETTES', _DIR_IMG . "vignettes/"); 
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -995,7 +995,7 @@ function creer_repertoire($base, $subdir) {
 
 function creer_repertoire_documents($ext) {
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
+	return  _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
 }
 
 // Pour les documents comme pour les logos, le filtre |fichier donne
