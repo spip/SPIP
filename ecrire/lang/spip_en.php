@@ -675,6 +675,7 @@ and log in to the site.
 	'titre_statistiques' => 'Site statistics',
 	'titre_titre_document' => 'Document title:',
 	'todo' => 'to come',
+	'trad_definir_reference' => 'Choose "@titre@" as a reference for translations',
 	'trad_reference' => '(reference for translations)',
 
 	// Z
