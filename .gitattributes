@@ -409,6 +409,14 @@ ecrire/maj/v017.php -text
 ecrire/maj/v018.php -text
 ecrire/maj/v019.php -text
 ecrire/maj/v019_pre193.php -text
+ecrire/maj/vieille_base/10000/auxiliaires.php -text
+ecrire/maj/vieille_base/10000/create.php -text
+ecrire/maj/vieille_base/10000/serial.php -text
+ecrire/maj/vieille_base/10000/typedoc.php -text
+ecrire/maj/vieille_base/13000/auxiliaires.php -text
+ecrire/maj/vieille_base/13000/create.php -text
+ecrire/maj/vieille_base/13000/serial.php -text
+ecrire/maj/vieille_base/13000/typedoc.php -text
 ecrire/maj/vieille_base/1813/create.php -text
 ecrire/maj/vieille_base/1813/inc_auxbase.php -text
 ecrire/maj/vieille_base/1813/inc_serialbase.php -text
