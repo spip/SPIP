@@ -31,7 +31,7 @@ function exec_dater_dist()
 
 	$statut = $row['statut'];
 	$date = $row[($type!='breve')?"date":"date_heure"];
-	$date_redac = $row["date_redac"];
+	$date_redac = isset($row["date_redac"]) ? $row["date_redac"] : '';
 
 	$script = ($type=='article')? 'articles' : ($type == 'breve' ? 'breves_voir' : 'sites');
 	$dater = charger_fonction('dater', 'inc');

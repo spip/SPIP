@@ -29,7 +29,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 		$heure_redac = $regs[5];
 		$minute_redac = $regs[6];
 		if ($annee_redac > 4000) $annee_redac -= 9000;
-	}
+	} else $annee_redac = $mois_redac = $jour_redac = 0;
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
 		$annee = $regs[1];
