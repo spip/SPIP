@@ -113,7 +113,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 // http://doc.spip.org/@selecteur_rubrique_html
 function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	$data = array();
-	if ($type == 'rubrique')
+	if ($type == 'rubrique' AND autoriser('publiersans','rubrique',0))
 		$data[0] = _T('info_racine_site');
 	# premier choix = neant
 	# si auteur (rubriques restreintes)
