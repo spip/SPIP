@@ -96,9 +96,9 @@ function help_body($aide) {
 	// Recherche des images de l'aide
 	$suite = $html;
 	$html = "";
-	while (ereg("(AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
+	while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 		$f = $r[1];
-
+		
 		# Image installee a l'ancienne
 		if (@file_exists("AIDE/$l/$f"))
 			$f = "AIDE/$l/$f";
