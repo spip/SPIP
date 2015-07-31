@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 //
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CALENDRIER")) return;
@@ -1044,16 +1043,16 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 			if ($bas > $bas_prec) $bas_prec = $bas;
 			$url = $evenement['URL']; 
 			$desc = propre($evenement['DESCRIPTION']);
+			$perso = $evenement['ATTENDEE'];
+			$lieu = $evenement['LOCATION'];
 			$sum = ereg_replace(' +','&nbsp;', typo($evenement['SUMMARY']));
 			if (!$sum) { $sum = $desc; $desc = '';}
+			if (!$sum) { $sum = $lieu; $lieu = '';}
+			if (!$sum) { $sum = $perso; $perso = '';}
 			if ($sum)
-			  $sum = "<span style='font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;'><b>$sum</b></span>";
-			if ($largeur > 90) {
-			  if ($desc)
-			    $sum .=  "<br /><span style='color: black'>$desc</span>" . (!$evenement['ATTENDEE'] ? '' : ("<br />" . $evenement['ATTENDEE']));
-			}
-			else 
-			  $desc .= " " . $evenement['ATTENDEE'];
+			  $sum = "<span style='font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;'><b>$sum</b>$lieu $perso</span>";
+			if (($largeur > 90) && $desc)
+			  $sum .=  "<br /><span style='color: black'>$desc</span>";
 			$colors = $detcolor($evenement);
 			if ($colors)
 			{
@@ -1088,8 +1087,6 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 			  ((!$url) ? 
 					$sum :
 				 http_href($url, $sum, $desc,"color: $fcolor")) . 
-			  ((!$evenement['LOCATION']) ? '' : 
-			   ("<br />" . $evenement['LOCATION'])) .
 				"</div>";
 			}
 		}
