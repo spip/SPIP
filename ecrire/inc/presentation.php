@@ -62,7 +62,15 @@ function afficher_onglets_pages($ordre,$onglets){
 	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'>$res</div>"
 	. (_INTERFACE_ONGLETS ?
 	 "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });
-	 $('ul.tabs-nav li').hover(function(){\$('#boite_onglet_$onglet_compteur').triggerTab(parseInt(\$(this).attr('rel')));},function(){});
+	 if (!$.browser.safari)
+	 $('ul.tabs-nav li').hover(
+	 	function(){
+	 		\$('#boite_onglet_$onglet_compteur').triggerTab(parseInt(\$(this).attr('rel')));
+	 		return false;
+	 	}
+	 	,
+	 	function(){}
+	 	);
 	 </script>"
 	 :"");
 }
