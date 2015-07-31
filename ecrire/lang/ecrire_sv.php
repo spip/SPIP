@@ -151,7 +151,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 
 	// I
 	'ical_info1' => 'Denna sida visar flera metoder att hålla dig informerad om aktiviteter på sajten.',
-	'ical_info2' => 'För mer information, tveka inte om att besöka <a href="@spipnet@">SPIP\'s dokumentation</a>.', # MODIF
+	'ical_info2' => 'För mer information, tveka inte om att besöka <a href="@spipnet@">SPIP’s dokumentation</a>.', # MODIF
 	'ical_info_calendrier' => 'Du kan använda två kalendrar. En är en sajtkarta med alla publicerade artiklar. Den andra innehåller redaktionella meddelanden och dina senaste privata meddelanden: Den är personlig, tack vare en genererad nyckel som du kan förändra när som helst genom att byta lösenord.',
 	'ical_methode_http' => 'Nerladdning',
 	'ical_methode_webcal' => 'Synkronisering (webcal://)',
@@ -163,7 +163,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 	'ical_titre_mailing' => 'E-postlista',
 	'ical_titre_rss' => 'Syndikeringsfiler',
 	'icone_activer_cookie' => 'Sätt en cookie',
-	'icone_admin_plugin' => 'Hantera plugin\'s',
+	'icone_admin_plugin' => 'Hantera plugin’s',
 	'icone_afficher_auteurs' => 'Visa redaktörer',
 	'icone_afficher_visiteurs' => 'Visa besökare',
 	'icone_arret_discussion' => 'Avsluta diskussionen',
@@ -235,7 +235,7 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 	'info_chemin_acces_annuaire' => 'Inställningar: <b>Sökväg i katalogen</b>',
 	'info_choix_base' => 'Tredje steget:',
 	'info_code_acces' => 'Glöm inte ditt eget lösenord!',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_config_suivi' => 'Om den här adressen är en mailing lista, kan du under adressen visa var man kan registrera sig. Det kan vara en URL (till exempel en webbsida där man kan registrera sig), eller en e-postadress med en speciell ärenderad (till exempel: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 	'info_config_suivi_explication' => 'Du kan anmäla dig till sajtens nyhetsbrev. Du kommer då att automatiskt få meddelanden om artiklar och nyheter som laddats upp för publicering.',
 	'info_confirmer_passe' => 'Bekräfta ditt nya lösenord:',
@@ -275,11 +275,11 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 	'info_fichiers_authent' => 'Lösenordsfil ".htpasswd"',
 	'info_gauche_admin_effacer' => '<b>Endast administratörer har tillgång till denna sida.</b><p> Den ger tillgång till tekniska underhållsrutiner av olika slag. En del av dem kommer, om de används, att kräva FTP-tillgång till Webservern för autentifiering.</p>', # MODIF
 	'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
-fonctions de maintenance technique. Certaines d\'entre elles donnent lieu à un processus d\'authentification spécifique, qui
-exige d\'avoir un accès FTP au site Web.</p>', # MODIF
+fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
+exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p> Elle donne accès aux différentes
-fonctions de maintenance technique. Certaines d\'entre elles donnent lieu à un processus d\'authentification spécifique, qui
-exige d\'avoir un accès FTP au site Web.</p>', # MODIF
+fonctions de maintenance technique. Certaines d’entre elles donnent lieu à un processus d’authentification spécifique, qui
+exige d’avoir un accès FTP au site Web.</p>', # MODIF
 	'info_gauche_auteurs' => 'Här hittar du alla redaktörer på sajten.
  Status på var och en av dem visas av färgen på ikonen (administratör = grön; redaktör = gul).',
 	'info_gauche_auteurs_exterieurs' => 'Externa redaktörer utan behörighet på sajten, visas med en blå ikon; raderade redaktörer med en soptunna.', # MODIF
@@ -363,7 +363,7 @@ funktioner hos SPIP inte användas.',
 	'info_par_nom' => 'efter namn',
 	'info_par_nombre_article' => 'efter antal artiklar',
 	'info_par_statut' => 'efter status',
-	'info_par_tri' => '\'(efter @tri@)\'',
+	'info_par_tri' => '’(efter @tri@)’',
 	'info_passe_trop_court' => 'lösenordet är för kort.',
 	'info_passes_identiques' => 'De två lösenorden är inte identiska.',
 	'info_pense_bete_ancien' => 'Dina gamla meddelanden', # MODIF
@@ -387,13 +387,13 @@ funktioner hos SPIP inte användas.',
 	'info_publies' => 'Dina onlinepublicerade artiklar',
 	'info_question_accepter_visiteurs' => 'Om sajtens template tillåter besökare att registrera sig utan att gå in i den privata delen, var vänlig och aktivera följande option:',
 	'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux rédacteurs à
-  partir du site public ? Si vous acceptez, les visiteurs pourront s\'inscrire
-  depuis un formulaire automatisé et accéderont alors à l\'espace privé pour
-  proposer leurs propres articles. <blockquote><i>Lors de la phase d\'inscription,
+  partir du site public ? Si vous acceptez, les visiteurs pourront s’inscrire
+  depuis un formulaire automatisé et accéderont alors à l’espace privé pour
+  proposer leurs propres articles. <blockquote><i>Lors de la phase d’inscription,
   les utilisateurs reçoivent un courrier électronique automatique
-  leur fournissant leurs codes d\'accès au site privé. Certains
-  hébergeurs désactivent l\'envoi de mails depuis leurs
-  serveurs : dans ce cas, l\'inscription automatique est
+  leur fournissant leurs codes d’accès au site privé. Certains
+  hébergeurs désactivent l’envoi de mails depuis leurs
+  serveurs : dans ce cas, l’inscription automatique est
   impossible.', # MODIF
 	'info_question_utilisation_moteur_recherche' => 'Vill du använda SPIPŽs integrerade sökfunktion?
  (Att stänga av den ökar systemets prestanda.)',
@@ -472,7 +472,7 @@ med en färg som visar deras status:',
 	'info_une_rubrique' => 'en avdelning,',
 	'info_une_rubrique_02' => '1 avdelning',
 	'info_url' => 'URL:',
-	'info_url_site' => 'SAJTEN\'S URL:',
+	'info_url_site' => 'SAJTEN’S URL:',
 	'info_urlref' => 'Hyperlänk:',
 	'info_utilisation_spip' => 'SPIP är nu färdig att användas..',
 	'info_visites_par_mois' => 'Besökare per månad:',
@@ -644,7 +644,7 @@ installera om SPIP för att skapa en ny databas och den första administratören
 	'texte_non_compresse' => '<i>okomprimerad</i> (din server stöder inte denna funktion)',
 	'texte_nouveau_message' => 'Nytt meddelande',
 	'texte_nouvelle_version_spip_1' => 'Du har installerat en ny version av SPIP.',
-	'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu\'à l\'accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l\'installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
+	'texte_nouvelle_version_spip_2' => 'Cette nouvelle version nécessite une mise à jour plus complète qu’à l’accoutumée. Si vous êtes webmestre du site, veuillez effacer le fichier @connect@ et reprendre l’installation afin de mettre à jour vos paramètres de connexion à la base de données.<p> (NB. : si vous avez oublié vos paramètres de connexion, jetez un œil au fichier @connect@ avant de le supprimer...)</p>', # MODIF
 	'texte_plus_trois_car' => 'mer än tre tecken',
 	'texte_plusieurs_articles' => 'Flera redaktörer hittades för  "@cherche_auteur@":',
 	'texte_recalcul_page' => 'Om du vill uppdatera
@@ -654,10 +654,10 @@ enbart en sida, är det bäst att göra det från den publika delen genom att kl
   systématiquement et sans raison apparente, il est possible
   que ce soit à cause de la base de données
   elle-même.</b><p>
-  Votre serveur SQL dispose d\'une faculté de réparation de ses
-  tables lorsqu\'elles ont été endommagées par
+  Votre serveur SQL dispose d’une faculté de réparation de ses
+  tables lorsqu’elles ont été endommagées par
   accident. Vous pouvez ici tenter cette réparation ; en
-  cas d\'échec, conservez une copie de l\'affichage, qui contient
+  cas d’échec, conservez une copie de l’affichage, qui contient
   peut-être des indices de ce qui ne va pas...</p><p>
   Si le problème persiste, prenez contact avec votre
   hébergeur.</p>', # MODIF
@@ -667,7 +667,7 @@ enbart en sida, är det bäst att göra det från den publika delen genom att kl
 	'texte_statut_publies' => 'publicerad online',
 	'texte_statut_refuses' => 'avvisad',
 	'texte_suppression_fichiers' => 'Använd detta kommando för att radera alla filer
-i SPIP\'s cache. Det gör det möjligt att tvinga fram en uppdatering av alla sidor om du
+i SPIP’s cache. Det gör det möjligt att tvinga fram en uppdatering av alla sidor om du
 gjort viktiga förändringar i sajtens utseende eller struktur.',
 	'texte_sur_titre' => 'Övertitel',
 	'texte_table_ok' => ': den här tabellen är OK.',
@@ -678,7 +678,7 @@ gjort viktiga förändringar i sajtens utseende eller struktur.',
 	'texte_titre_obligatoire' => '<b>Titel</b> [Krävs]',
 	'texte_travail_article' => '@nom_auteur_modif@ arbetade med den här artikeln för @date_diff@ minuter sedan',
 	'texte_trop_resultats_auteurs' => 'För många resultat för "@cherche_auteur@"; Var vänlig att smalna av frågan.',
-	'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
+	'texte_utilisation_moteur_syndiques' => 'When you use SPIP’s integrated search engine, 
 you can perform searches on sites and
  articles syndicated in two different ways. <br />- The simplest
  way is to search only in the
@@ -687,7 +687,7 @@ you can perform searches on sites and
  SPIP to search also in the text
  of the referenced sites. If you
  reference a site, SPIP will perform
- the search in the site\'s text itself.', # MODIF
+ the search in the site’s text itself.', # MODIF
 	'texte_vide' => 'tom',
 	'texte_vider_cache' => 'töm cachen',
 	'titre_admin_effacer' => 'Tekniskt underhåll',

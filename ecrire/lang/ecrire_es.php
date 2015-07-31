@@ -444,7 +444,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 	'info_par_nom' => 'por nombre',
 	'info_par_nombre_article' => 'por número de artículos',
 	'info_par_statut' => 'por estatuto',
-	'info_par_tri' => '\'(por @tri@)\'',
+	'info_par_tri' => '’(por @tri@)’',
 	'info_passe_trop_court' => 'Contraseña demasiado corta',
 	'info_passe_trop_court_car_pluriel' => 'La contraseña debe contener al menos @nb@ caracteres.',
 	'info_passes_identiques' => 'Hay diferencias entre las dos contraseñas',
@@ -857,7 +857,7 @@ Si no le ves utilidad, puedes dejar esta opción con su valor por omisión (no c
 	'texte_jeu_caractere_2' => 'Cuidado: este parametro no provoca la conversión de textos ya ingresados en el sitio. ',
 	'texte_jeu_caractere_3' => 'Tu sitio está actualmente instalado con el juego de caracteres:',
 	'texte_jeu_caractere_4' => 'Si no corresponde a la realidad de tus datos (por ejemplo, después de una restauración de base de datos), o si <em>empiezas este sitio</em> y deseas hacerlo con otro juego de caracteres, indícalo aquí:',
-	'texte_jeu_caractere_conversion' => 'Nota: puedes decidir de convertir una vez por todas el conjunto de los textos de tu sitio (artículos, breves, foros, etc.) haciael alfabeto <tt>utf-8</tt>, visitando <a href="@url@">la página de conversión hacia el l\'utf-8</a>.',
+	'texte_jeu_caractere_conversion' => 'Nota: puedes decidir de convertir una vez por todas el conjunto de los textos de tu sitio (artículos, breves, foros, etc.) haciael alfabeto <tt>utf-8</tt>, visitando <a href="@url@">la página de conversión hacia el l’utf-8</a>.',
 	'texte_lien_hypertexte' => '(Si su mensaje se refiere a un artículo publicado en la Web, o a una página que contiene más información, indique a continuación el título de la página y su dirección URL)',
 	'texte_login_ldap_1' => '(Dejar en blanco para un acceso anónimo, o indicar la ruta completa, por ejemplo "<tt>uid=perez, ou=users, dc=mi-dominio, dc=com</tt>".)',
 	'texte_login_precaution' => '¡Atención! Este es el nombre de usuario con el cual estás conectado actualmente.

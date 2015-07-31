@@ -193,7 +193,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_classement_1' => '<sup>er</sup> iz @liste@',
 	'info_classement_2' => '<sup>e</sup> iz @liste@',
 	'info_code_acces' => 'Ne zaboravite vas kod za pristup!',
-	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
+	'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l’hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # MODIF
 	'info_config_suivi' => 'Ako ova adresa odgovara mailing listi, ispod mozete naznaciti adresu na koju se ucesnici mogu registrovati. Ta adresa moze biti URL (npr. strana za  upisivanje na listu putem web-a), ili e-mail adresa opremljena  specificnim subjektom(npr.:  <tt>@adresse_suivi@?subject=prijava</tt>):',
 	'info_config_suivi_explication' => 'Mozete se prikljuciti mailing-listi ove stranice. Poslije cete u elektronskim putem primiti najave clanaka i kratkih poruka, koje su predlozene za publikaciju',
 	'info_confirmer_passe' => 'Potvrdi novu lozinku:',

@@ -351,7 +351,7 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
 	'info_par_nom' => 'podle jména',
 	'info_par_nombre_article' => 'podle počtu článků',
 	'info_par_statut' => 'podle stavu',
-	'info_par_tri' => '\'(podle @tri@)\'',
+	'info_par_tri' => '’(podle @tri@)’',
 	'info_passe_trop_court' => 'Heslo je příliš krátké.',
 	'info_passes_identiques' => 'Zadaná hesla nesouhlasí.',
 	'info_pense_bete_ancien' => 'Staré interní poznámky', # MODIF
