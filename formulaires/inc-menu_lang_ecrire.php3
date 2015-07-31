@@ -43,7 +43,7 @@ function menu_lang_pour_tous($nom, $opt) {
 
 	$site = lire_meta("adresse_site");
 	$post = ($site ? $site : '..') . "/spip_cookie.php3";
-	$cible = new Link();
+	$cible = new Link('', /* racine */ true); # lien a partir de /
 	$cible->delVar('lang');
 	$cible = $cible->getUrl();
 	$postcomplet = new Link($post);

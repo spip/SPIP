@@ -688,7 +688,8 @@ class Link {
 	// Contructeur : a appeler soit avec l'URL du lien a creer,
 	// soit sans parametres, auquel cas l'URL est l'URL courante
 	//
-	function Link($url = '', $reentrant = false) {
+	// parametre $root = demander un lien a partir de la racine du serveur /
+	function Link($url = '', $root = false) {
 		global $_POST;
 		static $link = '';
 
@@ -735,7 +736,7 @@ class Link {
 			if ($v = strpos($url,'?'))
 			  $v = strrpos(substr($url, 0, $v), '/');
 			else $v = strrpos($url, '/');
-			$url = substr($url, $v + 1);
+			if (!$root) $url = substr($url, $v + 1);
 			if (!$url) $url = "./";
 			if (count($_POST)) {
 				$vars = array();
