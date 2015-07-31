@@ -1627,7 +1627,7 @@ function env_to_params ($texte){
 	$tableau = unserialize($texte);
 	$texte = "";
 	foreach ($tableau as $i => $j)
-		if (!in_array($i,$ignore))
+		if (!in_array($i,$ignore_params))
 			$texte .= "<param name='".$i."' value='".$j."' />";
 	return $texte;
 }
@@ -1637,8 +1637,8 @@ function env_to_attributs ($texte){
 	$tableau = unserialize($texte);
 	$texte = "";
 	foreach ($tableau as $i => $j)
-		if (!in_array($i,$ne_pas_garder))
-			$texte .= $i."='".$j."' "; 
+		if (!in_array($i,$ignore_params))
+			$texte .= $i."='".$j."' ";
 	return $texte;
 }
 
