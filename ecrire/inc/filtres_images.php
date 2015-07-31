@@ -27,7 +27,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 	if (!file_exists($fichier)) return false;
 	
-	if (preg_match(",\.(gif|jpg|png)$,", $fichier, $regs)) {
+	if (preg_match(",^.*+(?<=\.(gif|jpg|png)),", $fichier, $regs)) {
 		$terminaison = $regs[1];
 		$terminaison_dest = $terminaison;
 		
@@ -50,8 +50,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		$creer = false;
 	}
 	
-	$ret["largeur"] = largeur($img);
-	$ret["hauteur"] = hauteur($img);
+	include_spip('inc/logos');
+	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
 	$ret["fonction_image"] = "image".$term_fonction_dest;
@@ -91,8 +91,11 @@ function image_reduire($img, $taille=-1, $taille_y=-1) {
 // Reduire une image d'un certain facteur
 // http://doc.spip.org/@image_reduire_par
 function image_reduire_par ($img, $val=1) {
-	$l = round(largeur($img)/$val);
-	$h = round(hauteur($img)/$val);
+	include_spip('inc/logos');
+	list ($hauteur,$largeur) = taille_image($img);
+
+	$l = round($largeur/$val);
+	$h = round($hauteur/$val);
 	
 	if ($l > $h) $h = 0;
 	else $l = 0;
@@ -314,9 +317,9 @@ function image_masque($im, $masque, $pos="") {
 	}
 	else $placer = false;
 
+	include_spip('inc/logos'); // bicoz presence reduire_image, taille_image
 	if ($creer) {
-		include_spip('inc/logos'); // bicoz presence reduire_image
-	
+		
 		$masque = find_in_path($masque);
 		$mask = image_valeurs_trans($masque,"");
 		if (!is_array($mask)) return("");
@@ -589,9 +592,8 @@ function image_masque($im, $masque, $pos="") {
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
 	$style = $image["style"];
-	if (strlen($style) > 1) $tags="$tags style='$style'";
-	$x_dest = largeur($dest);
-	$y_dest = hauteur($dest);
+	if (strlen($style) > 1) $tags="$tags style='$style'";	
+	list ($y_dest,$x_dest) = taille_image($dest);
 	return "<img src='$dest' width='".$x_dest."' height='".$y_dest."'$tags />";
 
 }
@@ -984,8 +986,8 @@ function image_rotation($im, $angle, $crop=false)
 		$image["fonction_image"]($im, "$dest");
 		imagedestroy($im);
 	}
-  	$src_x = largeur($dest);
-   	$src_y = hauteur($dest);
+	include_spip('inc/logos');
+	list ($src_y,$src_x) = taille_image($dest);
 	
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
