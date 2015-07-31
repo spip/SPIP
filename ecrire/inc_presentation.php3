@@ -2302,11 +2302,11 @@ document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="") {
 
-       init_entete($titre, $rubrique, $css);
-       init_body($rubrique, $sous_rubrique);
+	init_entete($titre, $rubrique, $onLoad, $css);
+	init_body($rubrique, $sous_rubrique);
 }
  
-function init_entete($titre, $rubrique, $css) {
+function init_entete($titre, $rubrique, $onLoad="", $css="") {
 	global $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
