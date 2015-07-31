@@ -149,8 +149,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 function afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url)
 {
 	$q = array('SELECT' => "M.id_mot, M.titre, M.id_groupe", 'FROM' => "spip_mots AS M LEFT JOIN spip_mots_$table AS L ON M.id_mot=L.id_mot", 'WHERE' => "L.$table_id=$id_objet", 'ORDER BY' => "M.type, M.titre");
-	
-	$cle = http_img_pack('petite-cle.gif', "", "width='23' height='12'");
+
 	$ret = generer_url_retour($url, "$table_id=$id_objet#editer_mots-$id_objet");
 	$styles = array(array('arial11',25), array('arial2'), array('arial2'), array('arial1'));
 
@@ -159,7 +158,7 @@ function afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url)
 	// cette variable est passee par reference
 	// pour recevoir les valeurs du champ indique 
 	$mots = 'id_mot'; 
-	$a=array($cle,$flag,$id_objet, $objet, $ret, $table, $table_id, $url);
+	$a = array($flag,$id_objet, $objet, $ret, $table, $table_id, $url);
 	$res = $presenter_liste($q, 'editer_mots_un', $mots, $a, false, $styles);
 
 	return array($res, $mots);
@@ -168,7 +167,9 @@ function afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url)
 // http://doc.spip.org/@editer_mots_un
 function editer_mots_un($row, $own)
 {
-	list ($cle, $flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base) = $own;
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+
+	list ($flag_editable, $id_objet, $objet, $ret, $table, $table_id, $url_base) = $own;
 
 	$id_mot = $row['id_mot'];
 	$titre_mot = $row['titre'];
@@ -202,6 +203,8 @@ function editer_mots_un($row, $own)
 	} else {
 		$mot = "<a href='$url'>".typo($titre_mot)."</a>";
 	}
+
+	$cle = $puce_statut($id_mot, 'publie', $id_groupe, 'mot');
 
 	return array("<a href='$url'>$cle</a>", $mot, $groupe, $retire);
 }

@@ -48,6 +48,7 @@ function inc_grouper_mots_dist($id_groupe, $total) {
 function presenter_groupe_mots_boucle($row, $own)
 {
 	global $connect_statut;
+	$puce_statut = charger_fonction('puce_statut', 'inc');
 
 	list($occurrences, $total, $deb_aff) = $own;
 	$id_mot = $row['id_mot'];
@@ -59,7 +60,8 @@ function presenter_groupe_mots_boucle($row, $own)
 	OR $occurrences['articles'][$id_mot] > 0) {
 		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mots-$id_groupe");
 		if ($descriptif)  $descriptif = " title=\"$descriptif\"";
-		$titre = "<a href='$h' class='liste-mot'$descriptif>$titre</a>";
+		$cle = $puce_statut($id_mot, 'publie', $id_groupe, 'mot');
+		$titre = "<a href='$h' $descriptif>$cle $titre</a>";
 	}
 	$vals = array($titre);
 
