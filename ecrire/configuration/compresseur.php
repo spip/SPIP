@@ -33,7 +33,7 @@ site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
 demande plus de puissance au serveur.")
 			. "</p>"
 			. "<p class='verdana2'>"
-			. _L("<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@", array('testgzip' => propre('[->http://www.whatsmyip.org/mod_gzip_test/]'))
+			. _L("<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@", array('testgzip' => propre('[->http://www.gidnetwork.com/tools/gzip-test.php]'))
 			)
 			. "</p>"
 
