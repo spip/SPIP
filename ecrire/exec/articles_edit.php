@@ -24,11 +24,11 @@ function exec_articles_edit_dist()
 		intval(_request('lier_trad')),
 		intval(_request('id_version')),
 		((_request('new') == 'oui') ? 'new' : ''),
-		articles_edit_config());
+		'articles_edit_config');
 }
 
 // http://doc.spip.org/@articles_edit_config
-function articles_edit_config()
+function articles_edit_config($row)
 {
 	global $champs_extra, $spip_ecran, $options, $spip_lang;
 
@@ -50,11 +50,12 @@ function articles_edit_config()
 		$config['extra'] = true;
 	} else $config['extra'] = false;
 
+	$config['restreint'] = ($row['statut'] == 'publie');
 	return $config;
 }
 
 // http://doc.spip.org/@articles_edit
-function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config)
+function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new, $config_fonc)
 {
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
@@ -64,7 +65,6 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
-	$config['restreint'] = ($row['statut'] == 'publie');
 
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
 	else $titre = $row['titre'];
@@ -106,7 +106,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	debut_cadre_formulaire();
 	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre']);
 	$editer_article = charger_fonction('editer_article', 'inc');
-	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config, $row);
+	echo $editer_article($new, $id_rubrique, $lier_trad, generer_url_ecrire("articles"), $config_fonc($row), $row);
 	fin_cadre_formulaire();
 
 	echo fin_page();
