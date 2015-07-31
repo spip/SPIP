@@ -186,6 +186,13 @@ function calculer_balise($nom, $p) {
 			return $res;
 	}
 
+	$f = charger_fonction('DEFAUT', 'calculer_balise');
+
+	return $f($nom, $p);
+}
+
+function calculer_balise_DEFAUT_dist($nom, $p) {
+
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 
