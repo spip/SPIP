@@ -1203,6 +1203,9 @@ function spip_initialisation_suite() {
 	static $too_late = 0;
 	if ($too_late++) return;
 
+	// taille mini des login
+	define('_LOGIN_TROP_COURT', 4);
+
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
 	define('_LOGO_MAX_WIDTH', 0); # largeur en pixels

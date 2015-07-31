@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
-
 // http://doc.spip.org/@action_editer_auteur_dist
 function action_editer_auteur_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
