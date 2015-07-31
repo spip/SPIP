@@ -1268,7 +1268,9 @@ function image_masque($im, $masque, $pos="") {
 	$tags = "$tags alt='".$image["alt"]."'";
 	$style = $image["style"];
 	if (strlen($style) > 1) $tags="$tags style='$style'";
-	return "<img src='$dest'$tags />";
+	$x_dest = largeur($dest);
+	$y_dest = hauteur($dest);
+	return "<img src='$dest' width='".$x_dest."' height='".$y_dest."'$tags />";
 
 }
 
