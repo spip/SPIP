@@ -2586,14 +2586,11 @@ function debut_droite($rubrique="") {
 					
 					echo "<div class='$statut'><a style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$ze_titre</a>";
 
-					if ($ze_article != $GLOBALS['id_article_bloque']) {
-						$nb_liberer ++;
-						echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
-					}
+					$nb_liberer ++;
+					echo "<div style='text-align:right; font-size: 9px;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
 
-					echo "</div>";	
-						
-				
+					echo "</div>";
+
 				}
 				echo "</div></div>";
 			}

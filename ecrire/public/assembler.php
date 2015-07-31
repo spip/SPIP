@@ -408,14 +408,14 @@ function creer_contexte_de_modele($args) {
 
 // Calcule le modele et retourne la mini-page ainsi calculee
 // http://doc.spip.org/@inclure_modele
-function inclure_modele($squelette, $type, $id) {
+function inclure_modele($type, $id, $params, $lien) {
 	static $compteur;
 	if (++$compteur>10) return ''; # ne pas boucler indefiniment
 
 	$type = strtolower($type);
 
 	$fond = 'modeles/'.$type;
-	if (preg_match(',^([a-z_0-9-]+)([|]|$),i', $squelette, $sub)) {
+	if (preg_match(',^([a-z_0-9-]+)([|]|$),i', $params, $sub)) {
 		if (in_array(strtolower($sub[1]),
 		array('left', 'right', 'center')))
 			$align = $sub[0];
@@ -429,10 +429,11 @@ function inclure_modele($squelette, $type, $id) {
 		}
 	}
 
-	// en cas d'echec, si l'objet demande a une url, on cree un petit encadre
+	// en cas d'echec : si l'objet demande a une url, on cree un petit encadre
 	// avec un lien vers l'objet ; sinon on passe la main au suivant
 	if (!find_in_path($fond.'.html')) {
-		$lien = calculer_url("$type$id", '', 'tout');
+		if (!$lien)
+			$lien = calculer_url("$type$id", '', 'tout');
 		if ($lien[1] == 'spip_url')
 			return false;
 		else
@@ -460,10 +461,16 @@ function inclure_modele($squelette, $type, $id) {
 	if ($class)
 		$contexte['class'] = $class;
 
+	// Si un lien a ete passe en parametre, ex: [<modele1>->url]
+	if ($lien) {
+		$contexte['lien'] = $lien[0];
+		$contexte['lien_class'] = $lien[1];
+	}
+
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$contexte = array_merge($contexte,
-		creer_contexte_de_modele(explode('|', $squelette))); 
+		creer_contexte_de_modele(explode('|', $params))); 
 
 	// On cree un marqueur de notes unique lie a ce modele
 	$enregistre_marqueur_notes = $GLOBALS['marqueur_notes'];
@@ -479,6 +486,16 @@ function inclure_modele($squelette, $type, $id) {
 	// quand le modele serait calcule, et on aurait des resultats incoherents)
 	$GLOBALS['les_notes'] = '';
 	$GLOBALS['marqueur_notes'] = $enregistre_marqueur_notes;
+
+	// Regarder si le modele tient compte des liens (il *doit* alors indiquer
+	// spip_lien_ok dans les classes de son conteneur de premier niveau ;
+	// sinon, s'il y a un lien, on l'ajoute classiquement
+	if (strstr(' ' . ($classes = extraire_attribut($retour, 'class')).' ',
+	'spip_lien_ok')) {
+		$retour = inserer_attribut($retour, 'class',
+			trim(str_replace(' spip_lien_ok ', ' ', " $classes ")));
+	} else if ($lien)
+		$retour = "<a href='".$lien[0]."' class='".$lien[1]."'>".$retour."</a>";
 
 	$compteur--;
 	return $retour;
