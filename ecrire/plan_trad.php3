@@ -3,6 +3,12 @@
 include ("inc.php3");
 
 debut_page(_T('titre_page_etat_traductions'), "asuivre", "plan-trad");
+
+if ($connect_statut == '0minirezo') {
+	echo "<br>";
+	barre_onglets("traductions", "detail");
+}
+
 debut_gauche();
 
 if (!$trad_lang) $trad_lang = $spip_lang;

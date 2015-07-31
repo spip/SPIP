@@ -1069,6 +1069,11 @@ function barre_onglets($rubrique, $onglet){
 		if ($activer_statistiques_ref != "non")	onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
 
+	if ($rubrique == "traductions") {
+		onglet(_T('onglet_detail_traductions'), "plan_trad.php3", "detail", $onglet, "langues-24.gif");
+		onglet(_T('onglet_bilan_traductions'), "statistiques_trad.php3", "bilan", $onglet, "statistiques-24.gif");
+	}
+
 	if ($rubrique == "administration"){
 		onglet(_T('onglet_save_restaur_base'), "admin_tech.php3", "sauver", $onglet, "base-24.gif");
 		onglet(_T('onglet_vider_cache'), "admin_vider.php3", "vider", $onglet, "cache-24.gif");
@@ -1524,7 +1529,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 
 	// Bandeau
-	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' style='text-align:center;'>";
+	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%'>";
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'><td>";
 		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 			echo "<font face='arial,helvetica,sans-serif' size=1><b>";
