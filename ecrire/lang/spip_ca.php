@@ -373,7 +373,7 @@ Per confirmar la nova adreça, només heu de connectar-vos a l’adreça que hi 
 	'info_erreur_squelette2' => 'No hi ha cap esquelet <b>@fichier@</b> que estigui disponible...',
 	'info_erreur_systeme' => 'Error del sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'És probable que el disc dur estigui ple, o la base de dades feta malbé. <br />
- <font color=’red’>Proveu de <a href=’@script@’>reparar la base</a>,
+ <font color=\'red\'>Proveu de <a href=\'@script@\'>reparar la base</a>,
  o contacteu amb el vostre hostatjador.</font>',
 	'info_fini' => 'S’ha acabat! ',
 	'info_format_image' => 'Formats d’imatges que es poden fer servir per crear vinyetes: @gd_formats@.',

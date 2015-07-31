@@ -388,7 +388,7 @@ stránku "@nom_site_spip@" (@adresse_login@):',
 	'info_erreur_squelette2' => 'Žiadna dostupná šablóna <b>@fichier@</b>...',
 	'info_erreur_systeme' => 'Chyba systému (ch. č. @errsys@)',
 	'info_erreur_systeme2' => 'Buď je plný pevný disk, alebo je poškodený databáza. <br />
- <font color=’red’>Poskúste sa <a href=’@script@’>opraviť databázu,</a>
+ <font color=\'red\'>Poskúste sa <a href=\'@script@\'>opraviť databázu,</a>
  alebo kontaktujte poskytovateľa služby.</font>',
 	'info_fini' => 'Hotovo!',
 	'info_format_image' => 'Formát obrázkov, ktorý sa použije na vytváranie miniatúr: @gd_formats@.',

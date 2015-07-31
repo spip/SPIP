@@ -315,7 +315,7 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 	'info_contenance' => 'Aka qamawinx utjiwa:',
 	'info_contribution' => 'Aruskipañat yanapawinaka', # MODIF
 	'info_copyright' => '@spip@ mä software libre lakiratawa @lien_qpl@.',
-	'info_copyright_doc' => 'Juk’amp yatxatañatakix qamaw uñjaña &lt;a href=’http://www.spip.net/es’&gt;http://www.spip.net/es&lt;/a&gt;.   ', # MODIF
+	'info_copyright_doc' => 'Juk’amp yatxatañatakix qamaw uñjaña <a href=\'http://www.spip.net/es\'>http://www.spip.net/es</a>.   ', # MODIF
 	'info_copyright_gpl' => 'GLP iyaw sakiñampi',
 	'info_cours_edition' => 'Qillqatanakamax qillqt’asiskiwa', # MODIF
 	'info_creer_repertoire' => 'Mä q’ipi jan ukjax mä imañ q’ipi akham sutin uñstayañamaxa',
@@ -334,11 +334,9 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 	'info_erreur_requete' => 'Mayiwin pantjawiw utji:',
 	'info_erreur_squelette2' => 'Janiw ni mä ch’akha ch’akhas &lt;b&gt;@fichier@&lt;/b&gt; wakitakiti...   ',
 	'info_erreur_systeme' => 'Apnaqawin pantjawiw utji (errno @errsys@)   ',
-	'info_erreur_systeme2' => 'Disco duruxa phuqataspawa jan ukasti yatiyawinak pirwax janiw askikiti. &lt;br /&gt;
-
- &lt;font color=’red’&gt;Pirwam &lt;a href=’@script@’&gt; askichañ yant’am&lt;/a&gt;,
-
- jan ukax tampuma jikxatam.&lt;/font&gt;   ',
+	'info_erreur_systeme2' => 'Disco duruxa phuqataspawa jan ukasti yatiyawinak pirwax janiw askikiti.<br />
+<font color=\'red\'>Pirwam <a href=\'@script@\'> askichañ yant’am</a>,
+ jan ukax tampuma jikxatam.</font>  ',
 	'info_fini' => '¡Tukuyata!',
 	'info_format_image' => 'Saltan utt’ayata jisk’a saltanak apnaqawitaki @gd_formats@.',
 	'info_format_non_defini' => 'utt’ayatax janiw uñacht’ayatakiti',

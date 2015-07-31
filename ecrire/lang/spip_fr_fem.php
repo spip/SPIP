@@ -389,7 +389,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'info_erreur_squelette2' => 'Aucun squelette <b>@fichier@</b> n’est disponible...',
 	'info_erreur_systeme' => 'Erreur système (errno @errsys@)',
 	'info_erreur_systeme2' => 'Le disque dur est peut-être plein, ou la base de données endommagée. <br />
-	<font color=’red’>Essayez de <a href=’@script@’>réparer la base</a>,
+	<font color=\'red\'>Essayez de <a href=\'@script@\'>réparer la base</a>,
 	ou contactez votre hébergeur.</font>',
 	'info_fini' => 'C’est fini !',
 	'info_format_image' => 'Formats d’images pouvant être utilisées pour créer des vignettes : @gd_formats@.',

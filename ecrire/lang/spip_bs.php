@@ -303,7 +303,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreur_squelette2' => 'Nijedan predlozak <b>@fichier@</b> nije dostupan...',
 	'info_erreur_systeme' => 'Sistemska greska (errno @errsys@)',
 	'info_erreur_systeme2' => '<b>Hard disk je mozda pun ili je baza podataka ostecena. <br />
-	<font color=’red’>Pokusajte <a href=’ecrire/admin_repair.php3’>popravku baze podataka</a>, ili kontaktirajte vaseg hosta.</font><br /></b>', # MODIF
+	<font color=\'red\'>Pokusajte <a href=\'ecrire/admin_repair.php3\'>popravku baze podataka</a>, ili kontaktirajte vaseg hosta.</font><br /></b>', # MODIF
 	'info_fini' => 'Zavrseno je!',
 	'info_format_image' => 'Format fotografija koji se moze koristiti za kreiranje vinjeta: @gd_formats@.',
 	'info_format_non_defini' => 'neodredjen format',
