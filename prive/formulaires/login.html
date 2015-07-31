@@ -96,7 +96,7 @@ function actualise_auteur(){
 	if (login != jQuery('#var_login').attr('value')) {
 		informe_auteur_en_cours = true;
 		login = jQuery('#var_login').attr('value');
-		jQuery.get('#URL_ACTION{informer_auteur}',{var_login:login},informe_auteur);
+		jQuery.get('#URL_PAGE{authentifier_login}',{var_login:login},informe_auteur);
 	}
 }
 jQuery('#password')

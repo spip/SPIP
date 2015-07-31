@@ -74,7 +74,6 @@ ecrire/action/editer_site.php -text
 ecrire/action/export_all.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
-ecrire/action/informer_auteur.php -text
 ecrire/action/instituer_article.php -text
 ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
@@ -452,6 +451,7 @@ ecrire/xml/interfaces.php -text
 ecrire/xml/valider.php -text
 /index.php -text
 local/remove.txt -text
+prive/authentifier_login.html -text
 prive/contenu/article.html -text
 prive/contenu/breve.html -text
 prive/contenu/rubrique.html -text

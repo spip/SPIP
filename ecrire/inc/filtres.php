@@ -655,6 +655,20 @@ function securiser_acces($id_auteur, $cle, $dir, $op='', $args='')
 	return verifier_low_sec($id_auteur, $cle, $dir);
 }
 
+// Filtre ad hoc pour le formulaire de login:
+// le parametre var_login n'est pas dans le contexte pour optimiser le cache
+// il faut aller le chercher a la main
+function authentifier_login($bof)
+{
+  	include_spip('inc/json');
+	include_spip('inc/identifier_login');
+	$row = informer_login(_request('var_login'));
+	if (is_array($row))
+		unset($row['id_auteur']);
+	else $row = array();
+	return json_export($row);
+}
+
 // sinon{texte, rien} : affiche "rien" si la chaine est vide,
 // affiche la chaine si non vide ;
 // attention c'est compile directement dans inc/references
