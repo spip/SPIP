@@ -33,6 +33,7 @@ function exec_fond_monobloc_dist(){
 	} else {
 
 	$titre = "exec_$exec";
+	$hierarchie = "";
 	$navigation = "";
 	$extra = "";
 
