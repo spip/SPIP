@@ -2417,12 +2417,19 @@ function bando_style_prive_theme() {
  * @param string $class
  * @param string $confirm
  * @param string $title
+ * @param string $callback
  * @return string
  */
-function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
-	$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
+function bouton_action($libelle, $url, $class="", $confirm="", $title="", $callback=""){
+	if ($confirm) {
+		$confirm = "confirm(\"" . attribut_html($confirm) . "\")";
+	  if ($callback)
+		  $callback = "$confirm?($callback):false";
+	  else
+		  $callback = $confirm;
+	}
+	$onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
 	$title = $title ? " title='$title'" : "";
-
 	return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
 		."<button type='submit' class='submit'$title$onclick>$libelle</button></div></form>";
 }
