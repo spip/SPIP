@@ -131,10 +131,11 @@ function controle_forum_boucle($row, $args) {
 	$valeur = $r['valeur'];
 	$pref = $r['pref'];
 
-	if ($documents = sql_allfetsel('doc.fichier AS fichier', 'spip_documents AS doc, spip_documents_liens AS lien', 'doc.id_document=lien.id_document AND lien.id_objet='.intval($id_forum)." AND objet='forum'")) {
+	if ($documents = sql_allfetsel('doc.id_document, doc.fichier AS fichier', 'spip_documents AS doc LEFT JOIN spip_documents_liens AS lien ON doc.id_document=lien.id_document', 'lien.id_objet='.intval($id_forum)." AND objet='forum'")) {
 		include_spip('inc/documents');
 		foreach ($documents as $k => $t) {
-			$documents[$k] = "<a href='".get_spip_doc($t['fichier'])."'>".basename($t['fichier'])."</a>";
+			$h = generer_url_entite($t['id_document'], 'document');
+			$documents[$k] = "<a href='".$h."'>".basename($t['fichier'])."</a>";
 		}
 	}
 
