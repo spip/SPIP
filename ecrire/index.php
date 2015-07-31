@@ -157,11 +157,11 @@ $var_f = charger_fonction($exec);
 // Z'y va
 $var_f();
 
-if ($GLOBALS['var_mode'] == 'debug') {
-	include_spip('public/debug');
+$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
+if ($debug) {
 	$var_mode_affiche = _request('var_mode_affiche');
-	$var_mode_objet = _request('var_mode_objet');
-	debug_dumpfile("",$var_mode_objet,$var_mode_affiche);
+	$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+	echo erreur_squelette();
 }
 if (isset($tableau_des_erreurs) AND count($tableau_des_erreurs) AND $affiche_boutons_admin)
 	echo affiche_erreurs_page($tableau_des_erreurs);

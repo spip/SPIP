@@ -39,6 +39,7 @@ function base_trouver_table_dist($nom, $serveur=''){
 	if (!isset($nom_cache_desc_sql[$serveur]))
 		$nom_cache_desc_sql[$serveur] = _DIR_CACHE . 'sql_desc' . ($serveur ? '_'.md5($serveur):'') . '.txt';
 
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	// un appel avec $nom vide est une demande explicite de vidange du cache des descriptions
 	if (!$nom){
 		spip_unlink($nom_cache_desc_sql[$serveur]);
@@ -53,7 +54,6 @@ function base_trouver_table_dist($nom, $serveur=''){
 		$nom_sql = $nom;
 
 	$desc = '';
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 
 	// base sous SPIP: gerer les abreviations des noms de table
 	if ($connexion['spip_connect_version']) {

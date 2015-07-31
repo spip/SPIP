@@ -615,6 +615,11 @@ function installe_un_plugin($plug,$infos,$dir_plugins = '_DIR_PLUGINS'){
 // http://doc.spip.org/@installe_plugins
 function installe_plugins(){
 	$meta_plug_installes = array();
+
+	// vider le cache des descriptions de tables avant installation
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$trouver_table('');
+
 	$liste = liste_plugin_actifs();
 	$get_infos = charger_fonction('get_infos','plugins');
 
@@ -628,6 +633,8 @@ function installe_plugins(){
 			// du panneau -> cela suivra si le plugin demenage
 			if ($ok)
 				$meta_plug_installes[] = $plug;
+			// vider le cache des descriptions de tables apres chaque installation
+			$trouver_table('');
 		}
 	}
 	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
