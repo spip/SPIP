@@ -310,13 +310,13 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		$boucles[$id_boucle]->select[]= $count; 
 	}
 	$sql_args = '$result, ' . _q($boucle->sql_serveur);
-	if ($boucle->numrows) {
 
+	if ($boucle->numrows) {
 		if ($count == 'count(*)')
 			$count = "array_shift(sql_fetch($sql_args))";
 		else $count = "sql_count($sql_args)";
 		$count = "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);";
-	}
+	} else $count = '';
 	
 	return (!$boucle->mode_partie ? $count : calculer_parties($boucles, $id_boucle)) .
 		(!$flag_cpt  ? "" :
