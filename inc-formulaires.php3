@@ -236,7 +236,7 @@ function reponse_signature($id_article) {
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 	
-				echo $messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
+				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
 
 				if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
 					$reponse_signature .= "<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
