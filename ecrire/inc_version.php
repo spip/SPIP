@@ -281,6 +281,7 @@ function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
 	if ($too_late) return;
 	$too_late = true;
 
+	define('_DIR_IMG', $pa);
 	define('_DIR_DOC', $pa);
 	define('_DIR_LOGOS', $pa);
 	define('_DIR_IMG_ICONES', $pa . "icones/");
@@ -324,7 +325,7 @@ if (defined('_FILE_OPTIONS')) {
 		include_once(_FILE_OPTIONS);
 	}
 } else {
-	if (@file_exists(_DIR_PI . 'mes_options.php')) {
+	if (@file_exists(_DIRNAME_PERMANENT_INACCESSIBLE . 'mes_options.php')) {
 		define('_FILE_OPTIONS', _DIRNAME_PERMANENT_INACCESSIBLE . 'mes_options.php');
 		include_once(_FILE_OPTIONS);
 	}
