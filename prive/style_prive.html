@@ -10,7 +10,7 @@
 	ATTENTION: il faut absolument le charset sinon Firefox croit que
 	c'est du text/html !
 ]
-#CACHE{0*3600*100,cache-client}
+#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
@@ -149,10 +149,17 @@ select.fondl { padding: 0; }
 #bandeau_couleur5 .menu-item { width: 114px; }
 #bandeau_couleur6 .menu-item { width: 32px; }
 
+
+
 #preferences_couleurs,
 #preferences_menu,
 #preferences_ecran {display:inline; padding:0 3px;}
 #preferences_map {display:none;}
+
+#preferences_couleurs {
+	white-space: nowrap;
+}
+
 
 /* * Icones et bandeaux */
 
