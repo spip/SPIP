@@ -350,15 +350,15 @@ ecrire/inc/syndic.php -text
 ecrire/inc_headers.php -text
 ecrire/inc_plugin.php -text
 ecrire/inc_utils.php -text
-ecrire/lang/ecrire_br.php3 -text
-ecrire/lang/ecrire_cs.php3 -text
-ecrire/lang/ecrire_ru.php3 -text
-ecrire/lang/public_br.php3 -text
-ecrire/lang/public_cs.php3 -text
-ecrire/lang/public_ru.php3 -text
-ecrire/lang/spip_br.php3 -text
-ecrire/lang/spip_cs.php3 -text
-ecrire/lang/spip_ru.php3 -text
+ecrire/lang/ecrire_br.php -text
+ecrire/lang/ecrire_cs.php -text
+ecrire/lang/ecrire_ru.php -text
+ecrire/lang/public_br.php -text
+ecrire/lang/public_cs.php -text
+ecrire/lang/public_ru.php -text
+ecrire/lang/spip_br.php -text
+ecrire/lang/spip_cs.php -text
+ecrire/lang/spip_ru.php -text
 ecrire/page.php -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
