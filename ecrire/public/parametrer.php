@@ -116,10 +116,16 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 			.' ('.strlen($page['texte']).' octets)');
 
 		if ($debug) {
-			include_spip('public/debug');
-			debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
+		// si c'est ce que demande le debusqueur, lui passer la main
+			$t = strlen($page['texte']) ? $page['texte'] : " ";
+			$GLOBALS['debug_objets']['resultat'][$fonc . 'tout'] = $t;
 			$GLOBALS['debug_objets']['courant'] = $courant;
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
+			if ($GLOBALS['debug_objets']['sourcefile']
+			AND (_request('var_mode_objet') == $fonc)
+			AND (_request('var_mode_affiche') == 'resultat')) {
+				erreur_squelette('', $t, $fonc);
+			}
 		}
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
 		if (!isset($page['entetes']['X-Spip-Cache']))

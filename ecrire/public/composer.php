@@ -66,8 +66,14 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
+		// si c'est ce que demande le debusqueur, lui passer la main
 		if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug') {
-			debug_dumpfile ($skel_code, $nom, 'code');
+			$GLOBALS['debug_objets']['code'][$nom . 'tout'] = $skel_code;
+			if ($GLOBALS['debug_objets']['sourcefile']
+			AND (_request('var_mode_objet') == $nom)
+			AND (_request('var_mode_affiche') == 'code')
+)
+				erreur_squelette('', $skel_code, $nom);
 		}
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {

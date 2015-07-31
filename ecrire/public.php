@@ -184,17 +184,18 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 			include_spip('public/debug');
 			erreur_squelette(_T('zbug_erreur_execution_page'));
 		}
-
 	}
 
 	// Passer la main au debuggueur le cas echeant
 
 	if ($var_mode == 'debug') {
-		include_spip('public/debug');
 		$var_mode_affiche = _request('var_mode_affiche');
 		$var_mode_objet = _request('var_mode_objet');
-		debug_dumpfile($var_mode_affiche== 'validation' ? $page['texte'] :"",
-			       $var_mode_objet,$var_mode_affiche);
+		$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+		include_spip('public/debug');
+		if ($GLOBALS['debug_objets']['sourcefile']) {
+			erreur_squelette('', '', $var_mode_objet);
+		}
 	} 
 
 	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
