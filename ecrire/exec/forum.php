@@ -54,9 +54,9 @@ function exec_forum_dist()
 	}
 
   	debut_gauche();
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer'),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'forum'),'data'=>''));
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer'),'data'=>''));
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'forum'),'data'=>''));
 
 	debut_droite();
 
@@ -70,7 +70,7 @@ function exec_forum_dist()
 	  exit;
 	}
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer'),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'forum'),'data'=>''));
 
 	$result_forum = spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 LIMIT 11");
 
