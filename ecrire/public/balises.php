@@ -26,30 +26,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Definition des balises
 //
+// http://doc.spip.org/@balise_NOM_SITE_SPIP_dist
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['nom_site']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_EMAIL_WEBMASTER_dist
 function balise_EMAIL_WEBMASTER_dist($p) {
 	$p->code = "\$GLOBALS['meta']['email_webmaster']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_DESCRIPTIF_SITE_SPIP_dist
 function balise_DESCRIPTIF_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['descriptif_site']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_CHARSET_dist
 function balise_CHARSET_dist($p) {
 	$p->code = "\$GLOBALS['meta']['charset']";
 	#$p->interdire_scripts = true;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_LANG_LEFT_dist
 function balise_LANG_LEFT_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'left','right')";
@@ -57,6 +62,7 @@ function balise_LANG_LEFT_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_LANG_RIGHT_dist
 function balise_LANG_RIGHT_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'right','left')";
@@ -64,6 +70,7 @@ function balise_LANG_RIGHT_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_LANG_DIR_dist
 function balise_LANG_DIR_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'ltr','rtl')";
@@ -71,6 +78,7 @@ function balise_LANG_DIR_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_PUCE_dist
 function balise_PUCE_dist($p) {
 	$p->code = "definir_puce()";
 	$p->interdire_scripts = false;
@@ -81,6 +89,7 @@ function balise_PUCE_dist($p) {
 // Cette fonction sait aller chercher dans le contexte general
 // quand #DATE est en dehors des boucles
 // http://www.spip.net/fr_article1971.html
+// http://doc.spip.org/@balise_DATE_dist
 function balise_DATE_dist ($p) {
 	$_date = champ_sql('date', $p);
 	$p->code = "$_date";
@@ -90,6 +99,7 @@ function balise_DATE_dist ($p) {
 
 // #DATE_REDAC
 // http://www.spip.net/fr_article1971.html
+// http://doc.spip.org/@balise_DATE_REDAC_dist
 function balise_DATE_REDAC_dist ($p) {
 	$_date = champ_sql('date_redac', $p);
 	$p->code = "$_date";
@@ -99,6 +109,7 @@ function balise_DATE_REDAC_dist ($p) {
 
 // #DATE_MODIF
 // http://www.spip.net/fr_article1971.html
+// http://doc.spip.org/@balise_DATE_MODIF_dist
 function balise_DATE_MODIF_dist ($p) {
 	$_date = champ_sql('date_modif', $p);
 	$p->code = "$_date";
@@ -108,6 +119,7 @@ function balise_DATE_MODIF_dist ($p) {
 
 // #DATE_NOUVEAUTES
 // http://www.spip.net/fr_article1971.html
+// http://doc.spip.org/@balise_DATE_NOUVEAUTES_dist
 function balise_DATE_NOUVEAUTES_dist($p) {
 	$p->code = "((\$GLOBALS['meta']['quoi_de_neuf'] == 'oui'
 	AND @file_exists(_DIR_TMP . 'mail.lock')) ?
@@ -117,6 +129,7 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_DOSSIER_SQUELETTE_dist
 function balise_DOSSIER_SQUELETTE_dist($p) {
 	$code = addslashes(dirname($p->descr['sourcefile']));
 	$p->code = "'$code'" . 
@@ -124,6 +137,7 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_SITE_SPIP_dist
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['adresse_site']";
 	#$p->interdire_scripts = true;
@@ -131,6 +145,7 @@ function balise_URL_SITE_SPIP_dist($p) {
 }
 
 
+// http://doc.spip.org/@balise_URL_ARTICLE_dist
 function balise_URL_ARTICLE_dist($p) {
 	$_type = $p->type_requete;
 
@@ -160,6 +175,7 @@ function balise_URL_ARTICLE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_RUBRIQUE_dist
 function balise_URL_RUBRIQUE_dist($p) {
 	$_id_rubrique = '';
 	if ($p->param && !$p->param[0][0]){
@@ -179,6 +195,7 @@ function balise_URL_RUBRIQUE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_BREVE_dist
 function balise_URL_BREVE_dist($p) {
 	$_id_breve = '';
 	if ($p->param && !$p->param[0][0]){
@@ -198,6 +215,7 @@ function balise_URL_BREVE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_MOT_dist
 function balise_URL_MOT_dist($p) {
 	$_id_mot = '';
 	if ($p->param && !$p->param[0][0]){
@@ -218,6 +236,7 @@ function balise_URL_MOT_dist($p) {
 }
 
 // #NOM_SITE affiche le nom du site, ou sinon l'URL ou le titre de l'objet
+// http://doc.spip.org/@balise_NOM_SITE_dist
 function balise_NOM_SITE_dist($p) {
 	if (!$p->etoile) {
 		$p->code = "construire_titre_lien(" .
@@ -236,6 +255,7 @@ function balise_NOM_SITE_dist($p) {
 # Il n'existe pas de balise pour afficher generer_url_site($id_syndic),
 # a part [(#ID_SYNDIC|generer_url_site)]
 
+// http://doc.spip.org/@balise_URL_FORUM_dist
 function balise_URL_FORUM_dist($p, $show_thread = 'false') {
 	$_id_forum = '';
 	if ($p->param && !$p->param[0][0]){
@@ -255,6 +275,7 @@ function balise_URL_FORUM_dist($p, $show_thread = 'false') {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_DOCUMENT_dist
 function balise_URL_DOCUMENT_dist($p) {
 	$_id_document = '';
 	if ($p->param && !$p->param[0][0]){
@@ -271,6 +292,7 @@ function balise_URL_DOCUMENT_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_URL_AUTEUR_dist
 function balise_URL_AUTEUR_dist($p) {
 	$_id_auteur = '';
 	if ($p->param && !$p->param[0][0]){
@@ -290,6 +312,7 @@ function balise_URL_AUTEUR_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_NOTES_dist
 function balise_NOTES_dist($p) {
 	// Recuperer les notes
 	$p->code = 'calculer_notes()';
@@ -297,12 +320,14 @@ function balise_NOTES_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_RECHERCHE_dist
 function balise_RECHERCHE_dist($p) {
 	$p->code = 'entites_html(_request("recherche"))';
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_COMPTEUR_BOUCLE_dist
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
@@ -319,6 +344,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 	}
 }
 
+// http://doc.spip.org/@balise_TOTAL_BOUCLE_dist
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
@@ -336,6 +362,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 }
 
 // Si on est hors d'une boucle {recherche}, ne pas "prendre" cette balise
+// http://doc.spip.org/@balise_POINTS_dist
 function balise_POINTS_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 		return rindex_pile($p, 'points', 'recherche');
@@ -343,6 +370,7 @@ function balise_POINTS_dist($p) {
 		return NULL;
 }
 
+// http://doc.spip.org/@balise_POPULARITE_ABSOLUE_dist
 function balise_POPULARITE_ABSOLUE_dist($p) {
 	$p->code = 'ceil(' .
 	champ_sql('popularite', $p) .
@@ -351,18 +379,21 @@ function balise_POPULARITE_ABSOLUE_dist($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_POPULARITE_SITE_dist
 function balise_POPULARITE_SITE_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_total\'])';
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_POPULARITE_MAX_dist
 function balise_POPULARITE_MAX_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_max\'])';
 	$p->interdire_scripts = false;
 	return $p;
 }
 
+// http://doc.spip.org/@balise_EXPOSE_dist
 function balise_EXPOSE_dist($p) {
 	$on = "'on'";
 	$off= "''";
@@ -386,6 +417,7 @@ function balise_EXPOSE_dist($p) {
 
 // obsolete. utiliser la precedente
 
+// http://doc.spip.org/@balise_EXPOSER_dist
 function balise_EXPOSER_dist($p)
 {
 	$on = "'on'";
@@ -402,6 +434,7 @@ function balise_EXPOSER_dist($p)
 	return calculer_balise_expose($p, $on, $off);
 }
 
+// http://doc.spip.org/@calculer_balise_expose
 function calculer_balise_expose($p, $on, $off)
 {
 	$primary_key = $p->boucles[$p->id_boucle]->primary;
@@ -422,6 +455,7 @@ function calculer_balise_expose($p, $on, $off)
 //
 // Inserer directement un document dans le squelette
 //
+// http://doc.spip.org/@balise_EMBED_DOCUMENT_dist
 function balise_EMBED_DOCUMENT_dist($p) {
 	balise_distante_interdite($p);
 	$_id_document = champ_sql('id_document',$p);
@@ -438,11 +472,13 @@ function balise_EMBED_DOCUMENT_dist($p) {
 // c'est transparent s'il n'y a pas de recherche,
 // sinon elles seront remplacees par les fontions de inc_surligne
 
+// http://doc.spip.org/@balise_DEBUT_SURLIGNE_dist
 function balise_DEBUT_SURLIGNE_dist($p) {
 	include_spip('inc/surligne');
 	$p->code = "'<" . MARQUEUR_SURLIGNE . "'";
 	return $p;
 }
+// http://doc.spip.org/@balise_FIN_SURLIGNE_dist
 function balise_FIN_SURLIGNE_dist($p) {
 	include_spip('inc/surligne');
 	$p->code = "'<" . MARQUEUR_FSURLIGNE . "'";
@@ -456,6 +492,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // Si cette balise est presente sur la page de sommaire, le site ne devrait
 // quasiment jamais se trouver ralenti par des taches de fond un peu lentes
 // ATTENTION: cette balise efface parfois les boutons admin implicites
+// http://doc.spip.org/@balise_SPIP_CRON_dist
 function balise_SPIP_CRON_dist ($p) {
 	$p->code = '"' . str_replace('"', '\"', (generer_spip_cron())) . '"';
 	$p->interdire_scripts = false;
@@ -465,6 +502,7 @@ function balise_SPIP_CRON_dist ($p) {
 
 // #INTRODUCTION
 // http://www.spip.net/@introduction
+// http://doc.spip.org/@balise_INTRODUCTION_dist
 function balise_INTRODUCTION_dist ($p) {
 	$_type = $p->type_requete;
 	$_texte = champ_sql('texte', $p);
@@ -481,6 +519,7 @@ function balise_INTRODUCTION_dist ($p) {
 // affiche la langue de l'objet (ou superieure), et a defaut la langue courante
 // (celle du site ou celle qui a ete passee dans l'URL par le visiteur)
 // #LANG* n'affiche rien si aucune langue n'est trouvee dans le sql/le contexte
+// http://doc.spip.org/@balise_LANG_dist
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	if (!$p->etoile)
@@ -495,6 +534,7 @@ function balise_LANG_dist ($p) {
 // affiche le "numero de l'article" quand on l'a titre '1. Premier article';
 // ceci est transitoire afin de preparer une migration vers un vrai systeme de
 // tri des articles dans une rubrique (et plus si affinites)
+// http://doc.spip.org/@balise_RANG_dist
 function balise_RANG_dist ($p) {
 	$_titre = champ_sql('titre', $p);
 	$p->code = "recuperer_numero($_titre)";
@@ -507,6 +547,7 @@ function balise_RANG_dist ($p) {
 // les auteurs d'un article (ou d'un article syndique)
 // http://www.spip.net/fr_article902.html
 // http://www.spip.net/fr_article911.html
+// http://doc.spip.org/@balise_LESAUTEURS_dist
 function balise_LESAUTEURS_dist ($p) {
 	// Cherche le champ 'lesauteurs' dans la pile
 	$_lesauteurs = champ_sql('lesauteurs', $p); 
@@ -534,6 +575,7 @@ function balise_LESAUTEURS_dist ($p) {
 // le texte de celle-ci sinon (et ' ' si il est vide)
 // cf FORMULAIRE_PETITION
 
+// http://doc.spip.org/@balise_PETITION_dist
 function balise_PETITION_dist ($p) {
 	$nom = $p->id_boucle;
 	$p->code = "sql_petitions(" .
@@ -552,6 +594,7 @@ function balise_PETITION_dist ($p) {
 
 // #POPULARITE
 // http://www.spip.net/fr_article1846.html
+// http://doc.spip.org/@balise_POPULARITE_dist
 function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "(ceil(min(100, 100 * $_popularite
@@ -562,6 +605,7 @@ function balise_POPULARITE_dist ($p) {
 
 // #PAGINATION
 // http://www.spip.net/fr_articleXXXX.html
+// http://doc.spip.org/@balise_PAGINATION_dist
 function balise_PAGINATION_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 
@@ -610,6 +654,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 
 // N'afficher que l'ancre de la pagination (au-dessus, par exemple, alors
 // qu'on mettra les liens en-dessous de la liste paginee)
+// http://doc.spip.org/@balise_ANCRE_PAGINATION_dist
 function balise_ANCRE_PAGINATION_dist($p) {
 	$p = balise_PAGINATION_dist($p, $liste='false');
 	return $p;
@@ -617,6 +662,7 @@ function balise_ANCRE_PAGINATION_dist($p) {
 
 // equivalent a #TOTAL_BOUCLE sauf pour les boucles paginees, ou elle
 // indique le nombre total d'articles repondant aux criteres hors pagination
+// http://doc.spip.org/@balise_GRAND_TOTAL_dist
 function balise_GRAND_TOTAL_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '' || !isset($p->boucles[$b])) {
@@ -638,6 +684,7 @@ function balise_GRAND_TOTAL_dist($p) {
 // Fonction commune aux balises #LOGO_XXXX
 // (les balises portant ce type de nom sont traitees en bloc ici)
 //
+// http://doc.spip.org/@calculer_balise_logo
 function calculer_balise_logo ($p) {
 
 	eregi("^LOGO_([A-Z]+)(_.*)?$", $p->nom_champ, $regs);
@@ -760,6 +807,7 @@ function calculer_balise_logo ($p) {
 // ou [(#EXTRA|isbn)] (ce dernier applique les filtres definis dans mes_options)
 // Champs extra
 // Non documentes, en voie d'obsolescence, cf. ecrire/inc/extra
+// http://doc.spip.org/@balise_EXTRA_dist
 function balise_EXTRA_dist ($p) {
 	$_extra = champ_sql('extra', $p);
 	$p->code = $_extra;
@@ -799,6 +847,7 @@ function balise_EXTRA_dist ($p) {
 // Parametres de reponse a un forum
 //
 
+// http://doc.spip.org/@balise_PARAMETRES_FORUM_dist
 function balise_PARAMETRES_FORUM_dist($p) {
 	$_id_article = champ_sql('id_article', $p);
 	$p->code = '
@@ -861,6 +910,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
+// http://doc.spip.org/@code_invalideur_forums
 function code_invalideur_forums($p, $code) {
 	$type = 'id_forum';
 	$valeur = "\n\t\tcalcul_index_forum("
@@ -880,6 +930,7 @@ function code_invalideur_forums($p, $code) {
 // mettre en cache #SELF car il peut correspondre a une autre page (attaque XSS)
 // (Dans ce cas faire <INCLURE{self=#SELF}> pour differencier les caches.)
 // http://www.spip.net/@self
+// http://doc.spip.org/@balise_SELF_dist
 function balise_SELF_dist($p) {
 	$p->code = 'quote_amp(self())';
 	$p->interdire_scripts = false;
@@ -892,6 +943,7 @@ function balise_SELF_dist($p) {
 // Pour les pages qui commencent par "spip_", il faut eventuellement
 // aller chercher spip_action.php?action=xxxx
 //
+// http://doc.spip.org/@balise_URL_PAGE_dist
 function balise_URL_PAGE_dist($p) {
 
 	if ($p->param && !$p->param[0][0]) {
@@ -921,6 +973,7 @@ function balise_URL_PAGE_dist($p) {
 //
 // #URL_ECRIRE{naviguer} -> ecrire/?exec=naviguer
 //
+// http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {
 
 	if ($p->param && !$p->param[0][0]) {
@@ -950,6 +1003,7 @@ function balise_URL_ECRIRE_dist($p) {
 //
 // #CHEMIN{fichier} -> find_in_path(fichier)
 //
+// http://doc.spip.org/@balise_CHEMIN_dist
 function balise_CHEMIN_dist($p) {
 	if ($p->param && !$p->param[0][0]) {
 		$p->code =  calculer_liste($p->param[0][1],
@@ -977,6 +1031,7 @@ function balise_CHEMIN_dist($p) {
 //
 // La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
 //
+// http://doc.spip.org/@balise_ENV_dist
 function balise_ENV_dist($p, $src = NULL) {
 	// le tableau de base de la balise (cf #META ci-dessous)
 	if (!$src) $src = '$Pile[0]';
@@ -1018,6 +1073,7 @@ function balise_ENV_dist($p, $src = NULL) {
 //
 // La balise fonctionne exactement comme #ENV (ci-dessus)
 //
+// http://doc.spip.org/@balise_CONFIG_dist
 function balise_CONFIG_dist($p) {
 	if(function_exists('balise_ENV'))
 		return balise_ENV($p, '$GLOBALS["meta"]');
@@ -1036,6 +1092,7 @@ function balise_CONFIG_dist($p) {
 // passe tel quel (entre parentheses, et protege par interdire_scripts)
 // Exemples : #EVAL**{6+9} #EVAL**{_DIR_IMG_PACK} #EVAL{'date("Y-m-d")'}
 // #EVAL{'str_replace("r","z", "roger")'}  (attention les "'" sont interdits)
+// http://doc.spip.org/@balise_EVAL_dist
 function balise_EVAL_dist($p) {
 	if ($p->param && !$p->param[0][0]) {
 		$php = array_shift( $p->param );
@@ -1066,6 +1123,7 @@ function balise_EVAL_dist($p) {
 // #REM
 // pour les remarques : renvoie toujours ''
 //
+// http://doc.spip.org/@balise_REM_dist
 function balise_REM_dist($p) {
 	$p->code="''";
 	$p->interdire_scripts = false;
@@ -1079,6 +1137,7 @@ function balise_REM_dist($p) {
 // Ne fonctionne pas sur les INCLURE !
 // #HTTP_HEADER{Content-Type: text/css}
 //
+// http://doc.spip.org/@balise_HTTP_HEADER_dist
 function balise_HTTP_HEADER_dist($p) {
 
 	$header = calculer_liste($p->param[0][1],
@@ -1097,6 +1156,7 @@ function balise_HTTP_HEADER_dist($p) {
 // #CACHE
 // definit la duree de vie ($delais) du squelette
 // #CACHE{24*3600}
+// http://doc.spip.org/@balise_CACHE_dist
 function balise_CACHE_dist($p) {
 	$duree = valeur_numerique($p->param[0][1][0]->texte);
 
@@ -1127,6 +1187,7 @@ function balise_CACHE_dist($p) {
 // dans l'entete sans modification du squelette
 // #INSERT_HEAD
 //
+// http://doc.spip.org/@balise_INSERT_HEAD_dist
 function balise_INSERT_HEAD_dist($p) {
 	$p->code = "pipeline('insert_head','')";
 	$p->interdire_scripts = false;
@@ -1138,12 +1199,14 @@ function balise_INSERT_HEAD_dist($p) {
 // l'inclusion est realisee au calcul du squelette, pas au service
 // corrolairement, le produit du squelette peut etre utilise en entree de filtres a suivre
 //
+// http://doc.spip.org/@balise_INCLUDE_dist
 function balise_INCLUDE_dist($p) {
 	if(function_exists('balise_INCLURE'))
 		return balise_INCLURE($p);
 	else
 		return balise_INCLURE_dist($p);
 }
+// http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
 	$champ = new Inclure;
 	// on assimile {var=val} a une liste de un argument sans fonction
@@ -1190,6 +1253,7 @@ function balise_INCLURE_dist($p) {
 // Affecte une variable locale au squelette
 // #SET{nom,valeur}
 // la balise renvoie la valeur
+// http://doc.spip.org/@balise_SET_dist
 function balise_SET_dist($p){
 	if ($p->param && !$p->param[0][0]) {
 		$_nom =  calculer_liste($p->param[0][1],
@@ -1220,6 +1284,7 @@ function balise_SET_dist($p){
 // Recupere une variable locale au squelette
 // #GET{nom,defaut} renvoie defaut si la variable nom n'a pas ete affectee
 //
+// http://doc.spip.org/@balise_GET_dist
 function balise_GET_dist($p) {
 	if (function_exists('balise_ENV'))
 		return balise_ENV($p, '$Pile["vars"]');

@@ -20,6 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Boucle standard, sans condition rajoutee
 //
+// http://doc.spip.org/@boucle_DEFAUT
 function boucle_DEFAUT($id_boucle, &$boucles) {
 	global $table_des_tables;
 	$boucle = &$boucles[$id_boucle];
@@ -40,6 +41,7 @@ function boucle_DEFAUT($id_boucle, &$boucles) {
 //
 // <BOUCLE(BOUCLE)> boucle dite recursive
 //
+// http://doc.spip.org/@boucle_BOUCLE_dist
 function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 
 	return calculer_boucle($id_boucle, $boucles); 
@@ -48,6 +50,7 @@ function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(ARTICLES)>
 //
+// http://doc.spip.org/@boucle_ARTICLES_dist
 function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -69,6 +72,7 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(AUTEURS)>
 //
+// http://doc.spip.org/@boucle_AUTEURS_dist
 function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -98,6 +102,7 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(BREVES)>
 //
+// http://doc.spip.org/@boucle_BREVES_dist
 function boucle_BREVES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -119,6 +124,7 @@ function boucle_BREVES_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(FORUMS)>
 //
+// http://doc.spip.org/@boucle_FORUMS_dist
 function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -143,6 +149,7 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(SIGNATURES)>
 //
+// http://doc.spip.org/@boucle_SIGNATURES_dist
 function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -161,6 +168,7 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(DOCUMENTS)>
 //
+// http://doc.spip.org/@boucle_DOCUMENTS_dist
 function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -175,6 +183,7 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(RUBRIQUES)>
 //
+// http://doc.spip.org/@boucle_RUBRIQUES_dist
 function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -195,6 +204,7 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(HIERARCHIE)>
 //
+// http://doc.spip.org/@boucle_HIERARCHIE_dist
 function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -223,6 +233,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(SYNDICATION)>
 //
+// http://doc.spip.org/@boucle_SYNDICATION_dist
 function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
@@ -243,6 +254,7 @@ function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 //
 // <BOUCLE(SYNDIC_ARTICLES)>
 //
+// http://doc.spip.org/@boucle_SYNDIC_ARTICLES_dist
 function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;

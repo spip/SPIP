@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_upgrade_dist
 function exec_upgrade_dist() {
 
 	global $connect_id_auteur, $spip_version, $reinstall;

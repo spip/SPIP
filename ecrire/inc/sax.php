@@ -13,8 +13,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@PhraseurXML
 class PhraseurXML {
 
+// http://doc.spip.org/@debutElement
 function debutElement($parser, $name, $attrs)
 {
   global $phraseur_xml;
@@ -50,6 +52,7 @@ function debutElement($parser, $name, $attrs)
   $reperes[$depth] = xml_get_current_line_number($parser);
 }
 
+// http://doc.spip.org/@finElement
 function finElement($parser, $name)
 {
   global $phraseur_xml;
@@ -72,6 +75,7 @@ function finElement($parser, $name)
     $res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
 }
 
+// http://doc.spip.org/@textElement
 function textElement($parser, $data)
 {
   global $phraseur_xml;
@@ -80,6 +84,7 @@ function textElement($parser, $data)
   $contenu[$depth] .= $phraseur_xml->translate_entities($data);
 }
 
+// http://doc.spip.org/@PiElement
 function PiElement($parser, $target, $data)
 {
   global $phraseur_xml, $xml_parser;
@@ -97,6 +102,7 @@ function PiElement($parser, $target, $data)
 }
 
 
+// http://doc.spip.org/@defautElement
 function defautElement($parser, $data)
 {
   global $phraseur_xml;
@@ -106,6 +112,7 @@ function defautElement($parser, $data)
   $contenu[$depth] .= $data;
 }
 
+ // http://doc.spip.org/@translate_entities
  function translate_entities($data)
  {
    return
@@ -116,6 +123,7 @@ function defautElement($parser, $data)
 					 $data)));
  }
 
+// http://doc.spip.org/@xml_parsefile
 function xml_parsefile($xml_parser, $file)
 {
   if (!($fp = fopen($file, "r"))) {
@@ -131,6 +139,7 @@ function xml_parsefile($xml_parser, $file)
   return "";
 }
 
+// http://doc.spip.org/@xml_parsestring
 function xml_parsestring($xml_parser, $data)
 {
 	global $phraseur_xml;
@@ -176,6 +185,7 @@ xml_set_processing_instruction_handler($xml_parser, array($phraseur_xml, 'PiElem
 xml_set_default_handler($xml_parser, array($phraseur_xml, "defautElement"));
 xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
+// http://doc.spip.org/@inc_sax_dist
 function inc_sax_dist($page) {
 	global $phraseur_xml, $xml_parser, $xhtml_error;
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);

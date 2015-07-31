@@ -15,6 +15,7 @@
  * une classe definissant un bouton dans la barre du haut de l'interface
  * privee ou dans un de ses sous menus
  */
+// http://doc.spip.org/@Bouton
 class Bouton {
   var $icone;         /* l'icone a mettre dans le bouton */
   var $libelle;       /* le nom de l'entree d'i18n associe */
@@ -24,6 +25,7 @@ class Bouton {
   var $target= null;  /* pour ouvrir dans une fenetre a part */
   var $sousmenu= null;/* sous barre de boutons / onglets */
 
+  // http://doc.spip.org/@Bouton
   function Bouton($icone, $libelle, $url=null, $urlArg=null,
 				  $url2=null, $target=null) {
 	$this->icone  = $icone;
@@ -41,6 +43,7 @@ class Bouton {
  * puis on balance le tout au pipeline "ajouter_boutons" pour que des plugins
  * puissent y mettre leur grain de sel
  */
+// http://doc.spip.org/@definir_barre_boutons
 function definir_barre_boutons() {
 	global $boutons_admin;
 
@@ -201,6 +204,7 @@ function definir_barre_boutons() {
  * definir la liste des onglets dans une page de l'interface privee
  * on passe la main au pipeline "ajouter_onglets".
  */
+// http://doc.spip.org/@definir_barre_onglets
 function definir_barre_onglets($rubrique) {
 	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
 
@@ -297,6 +301,7 @@ function definir_barre_onglets($rubrique) {
 	return $onglets;
 }
 
+// http://doc.spip.org/@definir_barre_gadgets
 function definir_barre_gadgets() {
 	global $barre_gadgets;
 	$barre_gadgets= array(

@@ -15,6 +15,7 @@
 // puis les boutons
 // Feuilles de style admin : d'abord la CSS officielle, puis la perso,
 
+// http://doc.spip.org/@affiche_boutons_admin
 function affiche_boutons_admin($contenu) {
 	include_spip('inc/filtres');
 	$css = "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))

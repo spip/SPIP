@@ -16,6 +16,7 @@ include_spip('inc/auteur_voir');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist()
 {
 global $ajouter_id_article,
@@ -191,6 +192,7 @@ exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_
 
 }
 
+// http://doc.spip.org/@exec_affiche_auteur_info_dist
 function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus)
 {
   global $connect_id_auteur;
@@ -235,6 +237,7 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
 
 
 
+// http://doc.spip.org/@formulaire_auteur_infos
 function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajouter_id_article)
 {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
@@ -384,6 +387,7 @@ echo "</form>";
 // Apparaitre dans la liste des redacteurs connectes
 //
 
+// http://doc.spip.org/@apparait_auteur_infos
 function apparait_auteur_infos($id_auteur, $auteur)
 {
 	global $connect_id_auteur ;

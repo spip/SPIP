@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/cookie');
 
+// http://doc.spip.org/@action_logout_dist
 function action_logout_dist()
 {
 	global $auteur_session, $ignore_auth_http;

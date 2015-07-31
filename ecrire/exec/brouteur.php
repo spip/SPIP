@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_brouteur_dist
 function exec_brouteur_dist()
 {
 	global $spip_ecran, $spip_lang_left, $id_rubrique;

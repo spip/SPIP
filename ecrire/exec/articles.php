@@ -23,6 +23,7 @@ include_spip('inc/petition');
 include_spip('exec/virtualiser');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
 {
 	global $cherche_auteur, $ids, $cherche_mot, $debut, $id_article, $nouv_mot, $supp_mot, $trad_err; 
@@ -274,6 +275,7 @@ fin_page();
 
 }
 
+// http://doc.spip.org/@demande_publication
 function demande_publication($id_article)
 {
 	return debut_cadre_relief('',true) .
@@ -291,6 +293,7 @@ function demande_publication($id_article)
 		fin_cadre_relief(true);
 }
 
+// http://doc.spip.org/@boite_info_articles
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
   global $connect_statut, $options, $flag_revisions;
@@ -329,6 +332,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 // Boites de configuration avancee
 //
 
+// http://doc.spip.org/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
 	  debut_cadre_relief("forum-interne-24.gif");
@@ -379,6 +383,7 @@ function boites_de_config_articles($id_article)
 	fin_cadre_relief();
 }
 
+// http://doc.spip.org/@boite_article_virtuel
 function boite_article_virtuel($id_article, $virtuel)
 {
 
@@ -405,6 +410,7 @@ function boite_article_virtuel($id_article, $virtuel)
 	fin_cadre_relief();
 }
 
+// http://doc.spip.org/@meme_rubrique_articles
 function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left;
@@ -430,6 +436,7 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='dat
 		}
 }
 
+// http://doc.spip.org/@bouton_modifier_articles
 function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
@@ -443,6 +450,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 
 }
 
+// http://doc.spip.org/@titres_articles
 function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique)
 {
 	global  $dir_lang, $spip_lang_left, $connect_id_auteur;
@@ -510,6 +518,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 }
 
 
+// http://doc.spip.org/@dates_articles
 function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $date_redac)
 {
 
@@ -650,6 +659,7 @@ function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_artic
 }
 
 
+// http://doc.spip.org/@langues_articles
 function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err)
 {
 
@@ -754,6 +764,7 @@ function langues_articles($id_article, $flag_editable, $id_rubrique, $id_trad, $
 }
 
 
+// http://doc.spip.org/@articles_traduction
 function articles_traduction($id_article, $id_trad)
 {
 	global $connect_toutes_rubriques, $dir_lang;
@@ -799,6 +810,7 @@ function articles_traduction($id_article, $id_trad)
 	return $table;
 }
 
+// http://doc.spip.org/@rechercher_auteurs_articles
 function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 {
 	if (!$ids) {
@@ -839,6 +851,7 @@ function rechercher_auteurs_articles($cherche_auteur, $ids, $id_article)
 
 }
 
+// http://doc.spip.org/@afficher_auteurs_articles
 function afficher_auteurs_articles($id_article, $flag_editable)
 {
 	global $connect_statut, $options,$connect_id_auteur;
@@ -906,6 +919,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 }
 
 
+// http://doc.spip.org/@ajouter_auteurs_articles
 function ajouter_auteurs_articles($id_article, $les_auteurs)
 {
 	$result = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
@@ -928,6 +942,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs)
 					    " method='post'");
 }
 
+// http://doc.spip.org/@articles_auteur_select
 function articles_auteur_select($result)
 {
 	global $couleur_claire ;
@@ -967,6 +982,7 @@ function articles_auteur_select($result)
 	return $res;
 }
 
+// http://doc.spip.org/@afficher_corps_articles
 function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
   global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;
@@ -1020,6 +1036,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 	}
 }
 
+// http://doc.spip.org/@affiche_forums_article
 function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute=false)
 {
   global $spip_lang_left;
@@ -1077,6 +1094,7 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 	echo "</div>\n";
 }
 
+// http://doc.spip.org/@formulaire_instituer_article
 function formulaire_instituer_article($id_article, $statut, $script, $args)
 {
   $res =
@@ -1112,6 +1130,7 @@ function formulaire_instituer_article($id_article, $statut, $script, $args)
 
 // Passer les images/docs en "inclus=non"
 
+// http://doc.spip.org/@inclus_non_articles
 function inclus_non_articles($id_article)
 {
   $result = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document");

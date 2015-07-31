@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
 // n'est pas effacable
 
+// http://doc.spip.org/@boutons_controle_forum
 function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
 	$controle = '';
 
@@ -105,6 +106,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 }
 
 // recuperer le critere SQL qui selectionne nos forums
+// http://doc.spip.org/@critere_statut_controle_forum
 function critere_statut_controle_forum($page, $id_rubrique=0) {
 	if (!$id_rubrique) {
 		$from = 'spip_forum AS F';
@@ -138,6 +140,7 @@ function critere_statut_controle_forum($page, $id_rubrique=0) {
 }
 
 // Index d'invalidation des forums
+// http://doc.spip.org/@calcul_index_forum
 function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 	if ($id_article) return 'a'.$id_article; 
 	if ($id_breve) return 'b'.$id_breve;
@@ -148,6 +151,7 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 //
 // Recalculer tous les threads
 //
+// http://doc.spip.org/@calculer_threads
 function calculer_threads() {
 	// fixer les id_thread des debuts de discussion
 	spip_query("UPDATE spip_forum SET id_thread=id_forum WHERE id_parent=0");
@@ -172,6 +176,7 @@ function calculer_threads() {
 }
 
 // Calculs des URLs des forums (pour l'espace public)
+// http://doc.spip.org/@racine_forum
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
 	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
@@ -189,6 +194,7 @@ function racine_forum($id_forum){
 	}
 } 
 
+// http://doc.spip.org/@generer_url_forum_dist
 function generer_url_forum_dist($id_forum, $show_thread=false) {
 	if (!$id_forum) return '';
 	list($type, $id, $id_thread) = racine_forum($id_forum);
@@ -214,6 +220,7 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 
 
 // Recuperer le reglage des forums publics de l'article x
+// http://doc.spip.org/@get_forums_publics
 function get_forums_publics($id_article=0) {
 	$forums_publics = $GLOBALS['meta']["forums_publics"];
 	if ($id_article) {
@@ -228,6 +235,7 @@ function get_forums_publics($id_article=0) {
 }
 
 // Cree le formulaire de modification du reglage des forums de l'article
+// http://doc.spip.org/@formulaire_poster
 function formulaire_poster($id_article, $script, $args, $ajax=false) {
 	global $spip_lang_right;
 

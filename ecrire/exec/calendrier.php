@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_calendrier_dist
 function exec_calendrier_dist()
 {
   global $type, $css, $var_ajax;
@@ -50,6 +51,7 @@ function exec_calendrier_dist()
   fin_page();
 }
 
+// http://doc.spip.org/@http_calendrier_ics_message
 function http_calendrier_ics_message($annee, $mois, $jour, $large)
 {	
   global $bleu, $vert,$jaune;
@@ -78,6 +80,7 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
 		'calendrier-arial10')));
 }
 
+// http://doc.spip.org/@http_calendrier_aide_mess
 function http_calendrier_aide_mess()
 {
   global $bleu, $vert, $jaune, $spip_lang_left;

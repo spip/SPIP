@@ -17,6 +17,7 @@ include_spip('inc/meta');
 // fonction de securite appelee par les scripts de action/
 // cf fabrication des arguments dans genere_action
 
+// http://doc.spip.org/@inc_controler_action_auteur_dist
 function inc_controler_action_auteur_dist()
 {
 	$arg = _request('arg');
@@ -29,6 +30,7 @@ function inc_controler_action_auteur_dist()
 	}
 }
 
+// http://doc.spip.org/@caracteriser_auteur
 function caracteriser_auteur($id_auteur=0) {
 	global $auteur_session;
 	if (!($id_auteur = intval($id_auteur))) {
@@ -40,15 +42,18 @@ function caracteriser_auteur($id_auteur=0) {
 	}
 }
 
+// http://doc.spip.org/@_action_auteur
 function _action_auteur($action, $id_auteur, $pass, $nom_alea) {
 	return md5($action.$id_auteur.$pass .$GLOBALS['meta'][$nom_alea]);
 }
 
+// http://doc.spip.org/@calculer_action_auteur
 function calculer_action_auteur($action, $id_auteur = 0) {
 	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
 	return _action_auteur($action, $id_auteur, $pass, 'alea_ephemere');
 }
 
+// http://doc.spip.org/@verifier_action_auteur
 function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 	list($id_auteur, $pass) = caracteriser_auteur($id_auteur);
 
@@ -61,6 +66,7 @@ function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
 }
 
 
+// http://doc.spip.org/@generer_action_auteur
 function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att='')
 {
 	static $id_auteur=0, $pass;
@@ -85,6 +91,7 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 		"\n\t</div>\n</form>\n";
 }
 
+// http://doc.spip.org/@redirige_action_auteur
 function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts='') {
 	if (!$redirect = _request('redirect')) {
 		$gra = preg_replace(',^&,', '', $gra);
@@ -106,6 +113,7 @@ function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts=''
 // Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
 
+// http://doc.spip.org/@ajax_action_auteur
 function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
 {
 
@@ -152,6 +160,7 @@ function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
 	}
 }
 
+// http://doc.spip.org/@determine_upload
 function determine_upload()
 {
 	global $connect_toutes_rubriques, $connect_login, $connect_statut ;
@@ -169,6 +178,7 @@ function determine_upload()
 //
 // retourne le statut d'un utilisateur authentifie en php_auth, false sinon
 //
+// http://doc.spip.org/@verifier_php_auth
 function verifier_php_auth() {
 	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !$GLOBALS['ignore_auth_http']) {
@@ -199,6 +209,7 @@ function verifier_php_auth() {
 //
 // entete php_auth (est-encore utilise ?)
 //
+// http://doc.spip.org/@ask_php_auth
 function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");

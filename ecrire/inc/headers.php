@@ -16,11 +16,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Interdire les attaques par manipulation des headers
+// http://doc.spip.org/@spip_header
 function spip_header($h) {
 	@header(strtr($h, "\n\r", "  "));
 }
 
 // cf. liste des sapi_name - http://fr.php.net/php_sapi_name
+// http://doc.spip.org/@php_module
 function php_module() {
 	global $SERVER_SOFTWARE, $flag_sapi_name;
 	return (
@@ -30,6 +32,7 @@ function php_module() {
 }
 
 
+// http://doc.spip.org/@http_status
 function http_status($status) {
 	global $REDIRECT_STATUS, $flag_sapi_name;
 	static $status_string = array(
@@ -52,6 +55,7 @@ function http_status($status) {
 }
 
 // Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
+// http://doc.spip.org/@http_no_cache
 function http_no_cache() {
 	if (headers_sent()) return;
 	if (!$charset = $GLOBALS['meta']['charset']) $charset = 'utf-8';

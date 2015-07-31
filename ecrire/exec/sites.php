@@ -20,6 +20,7 @@ include_spip('inc/date');
 include_spip('inc/config');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_sites_dist
 function exec_sites_dist()
 {
   global   $connect_statut,   $options,   $spip_lang_left,  $spip_lang_right;
@@ -529,6 +530,7 @@ afficher_forum($result_forum, "sites","id_syndic=$id_syndic");
 fin_page();
 }
 
+// http://doc.spip.org/@analyser_site
 function analyser_site($url) {
 	include_spip('inc/filtres'); # pour filtrer_entites()
 	include_spip('inc/distant');

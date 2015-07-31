@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/admin');
 
 
+// http://doc.spip.org/@demander_conversion
 function demander_conversion($tables_a_convertir, $action) {
 	global $spip_lang_right;
 
@@ -69,6 +70,7 @@ function demander_conversion($tables_a_convertir, $action) {
 }
 
 // stocker le nouvel extra
+// http://doc.spip.org/@convert_extra
 function convert_extra($v) {
 	if ($extra = @unserialize($v)) {
 		foreach ($extra as $key=>$val)
@@ -79,6 +81,7 @@ function convert_extra($v) {
 }
 
 
+// http://doc.spip.org/@exec_convert_utf8_dist
 function exec_convert_utf8_dist() {
 	include_spip('inc/meta');
 	include_spip('inc/charsets');

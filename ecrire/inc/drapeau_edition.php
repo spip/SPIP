@@ -27,6 +27,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // (en cas de communication orale c'est plus pratique)
 
 
+// http://doc.spip.org/@lire_tableau_edition
 function lire_tableau_edition () {
 	$edition = @unserialize($GLOBALS['meta']['drapeau_edition']);
 	if (!$edition) $edition = array();
@@ -45,6 +46,7 @@ function lire_tableau_edition () {
 	return $edition;
 }
 
+// http://doc.spip.org/@ecrire_tableau_edition
 function ecrire_tableau_edition($edition) {
 	include_spip('inc/meta');
 	ecrire_meta('drapeau_edition', serialize($edition));
@@ -52,6 +54,7 @@ function ecrire_tableau_edition($edition) {
 }
 
 // J'edite tel objet
+// http://doc.spip.org/@signale_edition
 function signale_edition ($id, $id_auteur, $type='article') {
 	$edition = lire_tableau_edition();
 	$edition[$type.$id] = array ($id_auteur, time());
@@ -59,6 +62,7 @@ function signale_edition ($id, $id_auteur, $type='article') {
 }
 
 // Qui edite mon objet ?
+// http://doc.spip.org/@qui_edite
 function qui_edite ($id, $type='article') {
 	$edition = lire_tableau_edition();
 	if (list($id_auteur, $date) = $edition[$type.$id]
@@ -80,6 +84,7 @@ function qui_edite ($id, $type='article') {
 }
 
 // Quels sont les articles en cours d'edition par X ?
+// http://doc.spip.org/@liste_drapeau_edition
 function liste_drapeau_edition ($id_auteur, $type = 'article') {
 	$edition = lire_tableau_edition();
 
@@ -103,6 +108,7 @@ function liste_drapeau_edition ($id_auteur, $type = 'article') {
 }
 
 // Quand l'auteur veut liberer tous ses articles
+// http://doc.spip.org/@debloquer_tous
 function debloquer_tous($id_auteur) {
 	$edition = lire_tableau_edition();
 	foreach ($edition as $objet => $data)
@@ -115,6 +121,7 @@ function debloquer_tous($id_auteur) {
 }
 
 // quand l'auteur libere un article precis
+// http://doc.spip.org/@debloquer_edition
 function debloquer_edition($id_auteur, $debloquer_article, $type='article') {
 	$edition = lire_tableau_edition();
 	foreach ($edition as $objet => $data)

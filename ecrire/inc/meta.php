@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@lire_metas
 function lire_metas() {
 	$result = spip_query("SELECT nom,valeur FROM spip_meta");
 	if($GLOBALS['db_ok']) {
@@ -23,6 +24,7 @@ function lire_metas() {
 		ecrire_meta('charset', _DEFAULT_CHARSET);
 }
 
+// http://doc.spip.org/@ecrire_meta
 function ecrire_meta($nom, $valeur) {
 	if (strlen($nom)){
 		$GLOBALS['meta'][$nom] = $valeur; 
@@ -30,6 +32,7 @@ function ecrire_meta($nom, $valeur) {
 	}
 }
 
+// http://doc.spip.org/@effacer_meta
 function effacer_meta($nom) {
 	spip_query("DELETE FROM spip_meta WHERE nom='$nom'");
 }
@@ -39,6 +42,7 @@ function effacer_meta($nom) {
 //
 // Ne pas oublier d'appeler cette fonction apres ecrire_meta() et effacer_meta() !
 //
+// http://doc.spip.org/@ecrire_metas
 function ecrire_metas() {
 
 	lire_metas();

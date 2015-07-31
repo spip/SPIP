@@ -17,6 +17,7 @@ include_spip('inc/texte');
 charger_generer_url();
 include_spip('inc/rubriques');
 
+// http://doc.spip.org/@enfants
 function enfants($id_parent, $critere){
 	global $nombre_vis;
 
@@ -45,6 +46,7 @@ function enfants($id_parent, $critere){
 }
 
 
+// http://doc.spip.org/@enfants_aff
 function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 
 	global $ifond;
@@ -123,6 +125,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	}
 }
 
+// http://doc.spip.org/@exec_statistiques_repartition_dist
 function exec_statistiques_repartition_dist()
 {
 

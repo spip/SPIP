@@ -15,11 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/signatures');
 
+// http://doc.spip.org/@message_de_signature
 function message_de_signature($row)
 {
   return propre(echapper_tags($row['message']));
 }
 
+// http://doc.spip.org/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
   global $connect_statut, $id_article, $add_petition, $supp_petition, $debut;

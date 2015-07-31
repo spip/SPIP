@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Les deux fonctions suivantes sont adaptees du code des "Visiteurs",
 // par Jean-Paul Dezelus (http://www.phpinfo.net/applis/visiteurs/)
 
+// http://doc.spip.org/@stats_load_engines
 function stats_load_engines() {
 	// le moteur de recherche interne
 	$arr_engines = Array();
@@ -53,6 +54,7 @@ function stats_load_engines() {
 	return $arr_engines;
 }
 
+// http://doc.spip.org/@stats_show_keywords
 function stats_show_keywords($kw_referer, $kw_referer_host) {
 	static $arr_engines;
 	static $url_site;
@@ -143,6 +145,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 //
 // Afficher les referers d'un article (ou du site)
 //
+// http://doc.spip.org/@aff_referers
 function aff_referers ($result, $limit, $plus) {
 	global $spip_lang_right, $source_vignettes;
 	// Charger les moteurs de recherche

@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 
+// http://doc.spip.org/@auth_http
 function auth_http($url) {
 
 	if (verifier_php_auth())
@@ -27,6 +28,7 @@ function auth_http($url) {
 }
 
 
+// http://doc.spip.org/@action_cookie_dist
 function action_cookie_dist()
 {
   include_spip('inc/actions');

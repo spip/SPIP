@@ -21,6 +21,7 @@ if (_request('var_ajax'))
 $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
 
 
+// http://doc.spip.org/@debut_block_visible
 function debut_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
 	if (!$browser_layer) return '';
@@ -32,6 +33,7 @@ function debut_block_visible($nom_block){
 
 }
 
+// http://doc.spip.org/@debut_block_invisible
 function debut_block_invisible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
 
@@ -44,11 +46,13 @@ function debut_block_invisible($nom_block){
 		return inserer_attribut($a, 'style', 'display:none;');
 }
 
+// http://doc.spip.org/@fin_block
 function fin_block() {
 	if ($GLOBALS['browser_layer'])
 		return "<div style='clear: both;'></div></div>";
 }
 
+// http://doc.spip.org/@bouton_block_invisible
 function bouton_block_invisible($nom_block, $icone='') {
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 	if (!$browser_layer) return '';
@@ -73,6 +77,7 @@ function bouton_block_invisible($nom_block, $icone='') {
 }
 
 
+// http://doc.spip.org/@bouton_block_visible
 function bouton_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 	if (!$browser_layer) return '';
@@ -93,6 +98,7 @@ function bouton_block_visible($nom_block){
 	return produire_acceder_couche($couches, $numero_block[$nom_block], "deplierbas.gif");
 }
 
+// http://doc.spip.org/@produire_acceder_couche
 function produire_acceder_couche($couches, $nom, $icone) {
 
 	// ne rien afficher si js desactive
@@ -115,6 +121,7 @@ onclick="'.join(' ',$onclick).'" />';
 //
 // Tests sur le nom du butineur
 //
+// http://doc.spip.org/@verif_butineur
 function verif_butineur() {
 
 	global $browser_name, $browser_version;
@@ -172,6 +179,7 @@ function verif_butineur() {
 
 // teste si accepte le SVG et pose un cookie en cas de demande explicite
 // (fonction a appeler en debut de page, avant l'envoi de contenu)
+// http://doc.spip.org/@flag_svg
 function flag_svg() {
 	global $browser_name, $browser_rev;
 
@@ -198,7 +206,9 @@ function flag_svg() {
 }
 
 // Obsolete. Present pour compatibilite 
+// http://doc.spip.org/@afficher_script_layer
 function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
+// http://doc.spip.org/@test_layer
 function test_layer(){return $GLOBALS['browser_layer'];}
 
 verif_butineur();
@@ -213,6 +223,7 @@ ondblclick='storeCaret(this);'");
 	// meme principe que le behavior win_width.htc pour MSIE
 $GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
 
+// http://doc.spip.org/@http_script
 function http_script($script, $src='', $noscript='') {
 	return '<script type="text/javascript"'
 		. ($src ? " src=\"$src\"" : '')

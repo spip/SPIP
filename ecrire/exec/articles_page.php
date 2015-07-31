@@ -17,6 +17,7 @@ include_spip('inc/texte');
 charger_generer_url();
 include_spip('inc/rubriques');
 
+// http://doc.spip.org/@exec_articles_page_dist
 function exec_articles_page_dist()
 {
   global $connect_statut, $connect_id_auteur;

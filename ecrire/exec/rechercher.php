@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
 
+// http://doc.spip.org/@exec_rechercher_dist
 function exec_rechercher_dist()
 {
 	global $flag_ob;
@@ -29,6 +30,7 @@ function exec_rechercher_dist()
 }
 
 # Un moteur de recherche ?
+// http://doc.spip.org/@ajax_page_recherche
 function ajax_page_recherche()
 {
 	global $id, $exclus, $type, $rac;

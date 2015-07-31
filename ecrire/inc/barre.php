@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 
+// http://doc.spip.org/@bouton_barre_racc
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 	$a = attribut_html($help);
@@ -35,6 +36,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 // construit un tableau de raccourcis pour un noeud de DOM 
 
+// http://doc.spip.org/@afficher_barre
 function afficher_barre($champ, $forum=false, $lang='') {
 	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
@@ -124,6 +126,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 // pour compatibilite arriere. utiliser directement le corps a present.
 
+// http://doc.spip.org/@afficher_claret
 function afficher_claret() {
 	include_spip('inc/layer');
 	return $GLOBALS['browser_caret'];

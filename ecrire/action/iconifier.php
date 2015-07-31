@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@action_iconifier_dist
 function action_iconifier_dist()
 {
 	include_spip('inc/actions');
@@ -25,6 +26,7 @@ function action_iconifier_dist()
 	else	action_spip_image_effacer_dist($arg);
 }
 
+// http://doc.spip.org/@action_spip_image_effacer_dist
 function action_spip_image_effacer_dist($arg) {
 
 	$arg = preg_replace(',^unlink\s*,','',rawurldecode($arg));
@@ -38,6 +40,7 @@ function action_spip_image_effacer_dist($arg) {
 
 // $source = $_FILES[0]
 // $dest = arton12.xxx
+// http://doc.spip.org/@action_spip_image_ajouter_dist
 function action_spip_image_ajouter_dist($arg) {
 	global $sousaction2, $source, $formats_logos;
 

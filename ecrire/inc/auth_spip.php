@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
 
+// http://doc.spip.org/@inc_auth_spip_dist
 function inc_auth_spip_dist ($login, $pass) {
 
   // recuperer le cryptage par JavaScript

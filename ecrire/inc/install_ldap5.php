@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// http://doc.spip.org/@inc_install_ldap5
 function inc_install_ldap5()
 {
 	global $spip_lang_right, $statut_ldap;

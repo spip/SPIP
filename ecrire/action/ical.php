@@ -22,10 +22,12 @@ include_spip('inc/acces');
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.
 
+// http://doc.spip.org/@ligne_uid
 function ligne_uid ($texte) {
 	echo filtrer_ical("UID:$texte @ " . $GLOBALS['meta']["adresse_site"])."\n";
 }
 
+// http://doc.spip.org/@action_ical_dist
 function action_ical_dist()
 {
 	global $id_auteur, $arg, $action, $titres;
@@ -95,6 +97,7 @@ function action_ical_dist()
 	echo filtrer_ical ("END:VCALENDAR"), "\n";
 }
 
+// http://doc.spip.org/@spip_ical_rendez_vous
 function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 {
 	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
@@ -145,6 +148,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 	}
 }
 
+// http://doc.spip.org/@spip_ical_taches
 function spip_ical_taches($id_utilisateur, $nom_site)
 {
 	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
@@ -189,6 +193,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 	}
 }
 
+// http://doc.spip.org/@spip_ical_articles
 function spip_ical_articles($nom_site)
 {
 	global $titres;
@@ -212,6 +217,7 @@ function spip_ical_articles($nom_site)
 }
 
 
+// http://doc.spip.org/@spip_ical_breves
 function spip_ical_breves($nom_site)
 {
 	global $titres;
@@ -235,6 +241,7 @@ function spip_ical_breves($nom_site)
 }
 
 
+// http://doc.spip.org/@spip_ical_messages
 function spip_ical_messages($id_utilisateur, $nom_site)
 {
 	$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$id_utilisateur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
@@ -295,6 +302,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 	}	
 }
 
+// http://doc.spip.org/@spip_ical_forums
 function spip_ical_forums($id_utilisateur, $nom_site)
 {
 	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");

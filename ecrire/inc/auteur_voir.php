@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+// http://doc.spip.org/@cadre_auteur_infos
 function cadre_auteur_infos($id_auteur, $auteur)
 {
   global $connect_statut;
@@ -37,6 +38,7 @@ function cadre_auteur_infos($id_auteur, $auteur)
 
 //  affiche le statut de l'auteur dans l'espace prive
 
+// http://doc.spip.org/@afficher_formulaire_statut_auteur
 function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 	global $spip_lang_right;
@@ -100,6 +102,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	fin_cadre_relief();
 }
 
+// http://doc.spip.org/@auteur_voir_rubriques
 function auteur_voir_rubriques($id_auteur, $url_self)
 {
 	global $connect_toutes_rubriques, $connect_id_auteur;
@@ -137,6 +140,7 @@ function auteur_voir_rubriques($id_auteur, $url_self)
 	return $restreint;
 }
 
+// http://doc.spip.org/@statut_modifiable_auteur
 function statut_modifiable_auteur($id_auteur, $auteur)
 {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
@@ -150,6 +154,7 @@ function statut_modifiable_auteur($id_auteur, $auteur)
 		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 
+// http://doc.spip.org/@modifier_statut_auteur
 function modifier_statut_auteur (&$auteur, $statut, $add_rub='') {
 	global $connect_statut, $connect_toutes_rubriques;
 	// changer le statut ?
@@ -170,6 +175,7 @@ function modifier_statut_auteur (&$auteur, $statut, $add_rub='') {
 }
 
 // Menu de choix d'un statut d'auteur
+// http://doc.spip.org/@choix_statut_auteur
 function choix_statut_auteur($statut) {
 	global $connect_toutes_rubriques;
 

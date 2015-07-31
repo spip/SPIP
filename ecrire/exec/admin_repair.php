@@ -27,6 +27,7 @@ include_spip('inc/texte');
 include_spip('inc/minipres');
 include_spip('base/db_mysql');
 
+// http://doc.spip.org/@verifier_base
 function verifier_base() {
 	$res1= spip_query("SHOW TABLES");
 	if (!$res1) return false;
@@ -62,6 +63,7 @@ function verifier_base() {
 	return $res;
 }
 
+// http://doc.spip.org/@exec_admin_repair_dist
 function exec_admin_repair_dist()
 {
 	$version_mysql = spip_mysql_version();

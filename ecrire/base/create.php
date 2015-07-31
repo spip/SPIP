@@ -24,6 +24,7 @@ include_spip('base/typedoc');
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
 
+// http://doc.spip.org/@spip_create_table
 function spip_create_table($nom, $champs, $cles, $autoinc=false, $temporary=false) {
 	$query = ''; $keys = ''; $s = ''; $p='';
 
@@ -50,6 +51,7 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false, $temporary=fals
 }
 
 
+// http://doc.spip.org/@creer_base
 function creer_base() {
   global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
@@ -82,6 +84,7 @@ function creer_base() {
 		SET mime_type='$type_mime' WHERE extension='$extension'");
 }
 
+// http://doc.spip.org/@stripslashes_base
 function stripslashes_base($table, $champs) {
 	$modifs = '';
 	reset($champs);

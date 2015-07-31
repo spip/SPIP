@@ -8,6 +8,7 @@ include_spip('inc/presentation');
 include_spip('inc/layer');
 
 
+// http://doc.spip.org/@exec_admin_plugin
 function exec_admin_plugin() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
@@ -147,6 +148,7 @@ EOF;
 
 }
 
+// http://doc.spip.org/@tree_open_close_dir
 function tree_open_close_dir(&$current,$target,$deplie=array()){
 	if ($current == $target) return "";
 	$tcur = explode("/",$current);
@@ -180,6 +182,7 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 	return $output;
 }
 
+// http://doc.spip.org/@affiche_arbre_plugins
 function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	$racine = basename(_DIR_PLUGINS);
 	$init_dir = $current_dir = "";
@@ -225,6 +228,7 @@ function affiche_arbre_plugins($liste_plugins,$liste_plugins_actifs){
 	echo tree_open_close_dir($current_dir,$init_dir);
 }
 
+// http://doc.spip.org/@ligne_plug
 function ligne_plug($plug_file, $actif, $id){
 	static $id_input=0;
 
@@ -233,6 +237,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$info = plugin_get_infos($plug_file);
 	$s = "<script type='text/javascript'>";
 $s .= <<<EOF
+// http://doc.spip.org/@verifchange
 function verifchange$id(inputp) {
 	if(inputp.checked == true)
 	{

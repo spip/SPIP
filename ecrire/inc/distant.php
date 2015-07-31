@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // mode = 'auto' - charger au besoin
 // mode = 'force' - charger toujours (mettre a jour)
 //
+// http://doc.spip.org/@copie_locale
 function copie_locale($source, $mode='auto') {
 	// Si copie_locale() est appele depuis l'espace prive
 	if (!_DIR_RESTREINT
@@ -59,6 +60,7 @@ function copie_locale($source, $mode='auto') {
 	return $local;
 }
 
+// http://doc.spip.org/@prepare_donnees_post
 function prepare_donnees_post($donnees, $boundary = '') {
   /* boundary automatique */
   // Si on a plus de 500 octects de donnees, on "boundarise"
@@ -124,6 +126,7 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // datas, une chaine ou un tableau pour faire un POST de donnees
 // boundary, pour forcer l'envoi par cette methode
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
+// http://doc.spip.org/@recuperer_page
 function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576,
   $datas='', $boundary='', $refuser_gz = false) {
   	$gz = false;
@@ -218,6 +221,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
 // des filesystems
+// http://doc.spip.org/@nom_fichier_copie_locale
 function nom_fichier_copie_locale($source, $extension) {
 	$dir = sous_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
 	$dir2 = sous_repertoire($dir, $extension); 		# IMG/distant/pdf/
@@ -228,6 +232,7 @@ function nom_fichier_copie_locale($source, $extension) {
 //
 // Donne le nom de la copie locale de la source
 //
+// http://doc.spip.org/@fichier_copie_locale
 function fichier_copie_locale($source) {
 	// Si c'est une image de IMG/ pas de souci
 	if (preg_match(',^'._DIR_IMG.',', $source))
@@ -251,6 +256,7 @@ function fichier_copie_locale($source) {
 
 
 // Recuperer les infos d'un document distant, sans trop le telecharger
+// http://doc.spip.org/@recuperer_infos_distantes
 function recuperer_infos_distantes($source, $max=0) {
 
 	$a = array();
@@ -325,6 +331,7 @@ function recuperer_infos_distantes($source, $max=0) {
 // Demarre une transaction HTTP (s'arrete a la fin des entetes)
 // retourne un descripteur de fichier
 //
+// http://doc.spip.org/@init_http
 function init_http($get, $url, $refuse_gz=false) {
 	$via_proxy = ''; $proxy_user = ''; $fopen = false;
 	$http_proxy = $GLOBALS['meta']["http_proxy"];

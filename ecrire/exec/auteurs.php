@@ -19,6 +19,7 @@ include_spip('inc/presentation');
 // et memoriser la liste des lettres initiales
 //
 
+// http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()
 {
   global  $debut, $tri, $visiteurs;
@@ -60,6 +61,7 @@ while ($auteur = spip_fetch_array($result)) {
 affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs);
 }
 
+// http://doc.spip.org/@affiche_auteurs
 function affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs)
 {
   global $debut, $options, $spip_lang_right, $tri, $visiteurs, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
@@ -218,6 +220,7 @@ fin_cadre_relief();
 fin_page();
 }
 
+// http://doc.spip.org/@requete_auteurs
 function requete_auteurs($tri, $visiteurs)
 {
   global $connect_statut, $spip_lang, $connect_id_auteur;
@@ -272,6 +275,7 @@ default:
  return $row;
 }
 
+// http://doc.spip.org/@afficher_n_auteurs
 function afficher_n_auteurs($auteurs) {
 	global $connect_statut, $options, $messagerie;
 

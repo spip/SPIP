@@ -53,6 +53,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // est automatiquement charge si besoin, et est supposee la definir si ce
 // n'est fait ici.
 
+// http://doc.spip.org/@spip_cron
 function spip_cron($taches = array()) {
 	$t = time();
 	if (@file_exists(_FILE_MYSQL_OUT)
@@ -130,6 +131,7 @@ function spip_cron($taches = array()) {
 // deux memes taches
 // NE PAS METTRE UNE VALEUR INFERIEURE A 30 (cf ci-dessus)
 //
+// http://doc.spip.org/@taches_generales
 function taches_generales() {
 	$taches_generales = array();
 
@@ -170,6 +172,7 @@ function taches_generales() {
 
 // Cas particulier : optimiser est dans base/optimiser, et pas dans inc/
 // il faut donc definir la fonction _cron ici.
+// http://doc.spip.org/@cron_optimiser
 function cron_optimiser($t) {
 	include_spip('base/optimiser');
 	optimiser_base();

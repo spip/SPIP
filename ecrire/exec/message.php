@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 include_spip('base/abstract_sql');
 include_spip('inc/mots');
 
+// http://doc.spip.org/@exec_message_dist
 function exec_message_dist()
 {
 global 
@@ -91,6 +92,7 @@ if ($supp_dest) {
 
 
 
+// http://doc.spip.org/@http_afficher_rendez_vous
 function http_afficher_rendez_vous($date_heure, $date_fin)
 {
   global $spip_lang_rtl;
@@ -105,6 +107,7 @@ function http_afficher_rendez_vous($date_heure, $date_fin)
 	}
 }
 
+// http://doc.spip.org/@sql_nouveau_participant
 function sql_nouveau_participant($nouv_auteur, $id_message)
 {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$nouv_auteur' AND id_message='$id_message'");
@@ -113,6 +116,7 @@ function sql_nouveau_participant($nouv_auteur, $id_message)
 		"('$nouv_auteur','$id_message','non')");
 }
 
+// http://doc.spip.org/@http_auteurs_ressemblants
 function http_auteurs_ressemblants($cherche_auteur, $id_message)
 {
   global $connect_id_auteur;
@@ -161,6 +165,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   }
 }
 
+// http://doc.spip.org/@http_visualiser_participants
 function http_visualiser_participants($auteurs_tmp)
 {
   return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%' background=''><tr><td bgcolor='#EEEECC'>" .
@@ -173,6 +178,7 @@ function http_visualiser_participants($auteurs_tmp)
     "</td></tr></table>";
 }
 
+// http://doc.spip.org/@http_ajouter_participants
 function http_ajouter_participants($ze_auteurs, $id_message)
 {	
     $result_ajout_auteurs = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$ze_auteurs ? '' : "id_auteur NOT IN ($ze_auteurs) AND ") . " messagerie<>'non' AND statut IN ('0minirezo', '1comite') ORDER BY statut, nom");
@@ -231,6 +237,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
     }
 }
 
+// http://doc.spip.org/@http_afficher_forum_perso
 function http_afficher_forum_perso($id_message, $titre)
 {
 	$utitre = rawurlencode($titre);
@@ -245,6 +252,7 @@ function http_afficher_forum_perso($id_message, $titre)
 }
 
 
+// http://doc.spip.org/@http_message_avec_participants
 function http_message_avec_participants($id_message, $statut, $forcer_dest, $nouv_auteur, $cherche_auteur)
 {
 	global $connect_id_auteur, $couleur_claire ;
@@ -320,6 +328,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  return $total_dest;
 }
 
+// http://doc.spip.org/@http_affiche_message
 function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest)
 {
   global $connect_id_auteur,$connect_statut, $les_notes;
@@ -433,6 +442,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 // Convertir dates a calendrier correct (exemple: 31 fevrier devient debut mars, 24h12 devient 00h12 du lendemain)
 
+// http://doc.spip.org/@change_date_message
 function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin)
 {
 			$date = date("Y-m-d H:i:s", mktime($heures,$minutes,0,$mois, $jour, $annee));
@@ -467,6 +477,7 @@ function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee,
 }
 
 
+// http://doc.spip.org/@exec_affiche_message_dist
 function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $forcer_dest)
 {
   global $connect_id_auteur, $echelle, $partie_cal;

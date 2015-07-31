@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction principale declenchant tout le service
 // elle-meme ne fait que traiter les cas particuliers, puis passe la main.
+// http://doc.spip.org/@public_assembler_dist
 function public_assembler_dist($fond) {
 	  global $auteur_session, $forcer_lang, $ignore_auth_http,
 	  $var_confirm, $var_mode;
@@ -58,6 +59,7 @@ function public_assembler_dist($fond) {
 }
 
 
+// http://doc.spip.org/@is_preview
 function is_preview()
 {
 	global $var_mode;
@@ -70,6 +72,7 @@ function is_preview()
 //
 // calcule la page et les entetes
 //
+// http://doc.spip.org/@assembler_page
 function assembler_page ($fond) {
 	global $flag_dynamique, $flag_ob, $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
@@ -165,6 +168,7 @@ function assembler_page ($fond) {
 // 2 fonctions pour compatibilite arriere. Sont probablement superflues
 //
 
+// http://doc.spip.org/@auto_content_type
 function auto_content_type($page)
 {
 	global $flag_preserver;
@@ -174,6 +178,7 @@ function auto_content_type($page)
 	  }
 }
 
+// http://doc.spip.org/@auto_expire
 function auto_expire($page)
 {
 	global $flag_dynamique;
@@ -185,12 +190,14 @@ function auto_expire($page)
 	}
 }
 
+// http://doc.spip.org/@stop_inclure
 function stop_inclure($fragment) {
 	if ($fragment == _request('var_fragment')) {
 		define('_STOP_INCLURE', 1);
 		#spip_log("fin du fragment $fragment, on arrete d'inclure");
 	}
 }
+// http://doc.spip.org/@inclure_page
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	global $lastmodified;
 
@@ -243,6 +250,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 # (voir l'exemple de spip_inscription et spip_pass)
 # $echo = faut-il faire echo ou return
 
+// http://doc.spip.org/@inclure_balise_dynamique
 function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 	global $contexte_inclus; # provisoire : c'est pour le debuggueur
 
@@ -292,6 +300,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 }
 
 // Traiter var_recherche pour surligner les mots
+// http://doc.spip.org/@f_surligne
 function f_surligne ($texte) {
 	if (isset($_GET['var_recherche'])) {
 		include_spip('inc/surligne');
@@ -301,6 +310,7 @@ function f_surligne ($texte) {
 }
 
 // Valider/indenter a la demande.
+// http://doc.spip.org/@f_tidy
 function f_tidy ($texte) {
 	global $xhtml;
 
@@ -321,6 +331,7 @@ function f_tidy ($texte) {
 }
 
 // Inserer au besoin les boutons admins
+// http://doc.spip.org/@f_admin
 function f_admin ($texte) {
 	if ($GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
@@ -330,6 +341,7 @@ function f_admin ($texte) {
 	return $texte;
 }
 
+// http://doc.spip.org/@message_erreur_404
 function message_erreur_404 ($erreur= "") {
 	if (!$erreur) {
 		if (isset($GLOBALS['id_article']))
@@ -353,6 +365,7 @@ function message_erreur_404 ($erreur= "") {
 
 // fonction permettant de recuperer le resultat du calcul d'un squelette
 // pour une inclusion dans un flux
+// http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array()) {
 	// on est peut etre dans l'espace prive au moment de l'appel
 	define ('_INC_PUBLIC', 1);

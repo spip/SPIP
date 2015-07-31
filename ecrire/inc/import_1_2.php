@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@description_table
 function description_table($nom){
 	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
 
@@ -36,6 +37,7 @@ function description_table($nom){
 }
 
 // pour le support des vieux dump
+// http://doc.spip.org/@inc_import_1_2_dist
 function inc_import_1_2_dist($f, $gz=false) {
   global $import_ok, $abs_pos, $my_pos;
 	static $field_desc = array ();

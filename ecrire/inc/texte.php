@@ -24,6 +24,7 @@ include_spip('inc/lang');
 // des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
 // par le visiteur (sinon, pas de cache)
 //
+// http://doc.spip.org/@tester_variable
 function tester_variable($var, $val){
 	if (!isset($GLOBALS[$var]))
 		$GLOBALS[$var] = $val;
@@ -50,6 +51,7 @@ tester_variable('url_glossaire_externe', "http://@lang@.wikipedia.org/wiki/");
 
 // on initialise la puce ici car il serait couteux de faire le find_in_path()
 // a chaque hit, alors qu'on n'a besoin de cette valeur que lors du calcul
+// http://doc.spip.org/@definir_puce
 function definir_puce() {
 	static $les_puces = array();
 
@@ -91,6 +93,7 @@ define('_BALISES_BLOCS',
 
 
 // Ne pas afficher le chapo si article virtuel
+// http://doc.spip.org/@nettoyer_chapo
 function nettoyer_chapo($chapo){
 	if (substr($chapo,0,1) == "="){
 		$chapo = "";
@@ -106,6 +109,7 @@ function nettoyer_chapo($chapo){
 // Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
 // une $source differente ; le script detecte automagiquement si ce qu'on
 // echappe est un div ou un span
+// http://doc.spip.org/@code_echappement
 function code_echappement($rempl, $source='') {
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
@@ -122,6 +126,7 @@ function code_echappement($rempl, $source='') {
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
+// http://doc.spip.org/@echappe_html
 function echappe_html($letexte, $source='', $no_transform=false,
 $preg=',<(html|code|cadre|frame)>(.*)</\1>,UimsS') {
 	if (preg_match_all(
@@ -203,6 +208,7 @@ $preg=',<(html|code|cadre|frame)>(.*)</\1>,UimsS') {
 // Rq: $source sert a faire des echappements "a soi" qui ne sont pas nettoyes
 // par propre() : exemple dans ecrire/inc_articles_ortho.php, $source='ORTHO'
 // ou encore dans typo()
+// http://doc.spip.org/@echappe_retour
 function echappe_retour($letexte, $source='') {
 	if (strpos($letexte,"base64$source")) {
 		# echo htmlspecialchars($letexte);  ## pour les curieux
@@ -218,6 +224,7 @@ function echappe_retour($letexte, $source='') {
 	return $letexte;
 }
 
+// http://doc.spip.org/@nettoyer_raccourcis_typo
 function nettoyer_raccourcis_typo($texte){
 	$texte = pipeline('nettoyer_raccourcis_typo',$texte);
 	// remplacer les liens
@@ -241,6 +248,7 @@ function nettoyer_raccourcis_typo($texte){
 	return $texte;
 }
 
+// http://doc.spip.org/@couper
 function couper($texte, $taille=50) {
 	$offset = 400 + 2*$taille;
 	if (	$offset<strlen($texte)
@@ -311,6 +319,7 @@ function couper($texte, $taille=50) {
 }
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
+// http://doc.spip.org/@couper_intro
 function couper_intro($texte, $long) {
 	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
 	$intro = '';
@@ -338,12 +347,14 @@ function couper_intro($texte, $long) {
 //
 
 // Securite : empecher l'execution de code PHP ou javascript ou autre malice
+// http://doc.spip.org/@interdire_scripts
 function interdire_scripts($source) {
 	$source = preg_replace(",<(\%|\?|/?[[:space:]]*(script|base)),imsS", "&lt;\\1", $source);
 	return $source;
 }
 
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
+// http://doc.spip.org/@safehtml
 function safehtml($t) {
 	static $process, $test;
 
@@ -381,6 +392,7 @@ function safehtml($t) {
 }
 
 // Correction typographique francaise
+// http://doc.spip.org/@typo_fr
 function typo_fr($letexte) {
 	static $trans;
 
@@ -437,6 +449,7 @@ function typo_fr($letexte) {
 }
 
 // rien sauf les "~" et "-,"
+// http://doc.spip.org/@typo_en
 function typo_en($letexte) {
 
 	$cherche1 = array(
@@ -468,6 +481,7 @@ function typo_en($letexte) {
 // Typographie generale
 // note: $echapper = false lorsqu'on appelle depuis propre() [pour accelerer]
 //
+// http://doc.spip.org/@typo
 function typo($letexte, $echapper=true) {
 
 	// Echapper les codes <html> etc
@@ -548,6 +562,7 @@ function typo($letexte, $echapper=true) {
 
 // obsolete, utiliser calculer_url
 
+// http://doc.spip.org/@extraire_lien
 function extraire_lien ($regs) {
 	list($lien, $class, $texte) = calculer_url($regs[3], $regs[1],'tout');
 	// Preparer le texte du lien ; attention s'il contient un <div>
@@ -563,6 +578,7 @@ function extraire_lien ($regs) {
 // 'titre': seulement T ci-dessus (i.e. le TITRE ci-dessus ou dans table SQL)
 // 'url':   seulement L (i.e. generer_url_RACCOURCI)
 
+// http://doc.spip.org/@calculer_url
 function calculer_url ($lien, $texte='', $pour='url') {
 
 	// Cherche un lien du type [->raccourci 123]
@@ -623,6 +639,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	return ($pour == 'url') ? $lien : array($lien, $class, $texte);
 }
 
+// http://doc.spip.org/@calculer_url_article
 function calculer_url_article($id, $texte, $ancre)
 {
 	$lien = generer_url_article($id) . $ancre;
@@ -633,6 +650,7 @@ function calculer_url_article($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_rubrique
 function calculer_url_rubrique($id, $texte, $ancre)
 {
 	$lien = generer_url_rubrique($id) . $ancre;
@@ -643,6 +661,7 @@ function calculer_url_rubrique($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_mot
 function calculer_url_mot($id, $texte, $ancre)
 {
 	$lien = generer_url_mot($id) . $ancre;
@@ -653,6 +672,7 @@ function calculer_url_mot($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_breve
 function calculer_url_breve($id, $texte, $ancre)
 {
 	$lien = generer_url_breve($id) . $ancre;
@@ -663,6 +683,7 @@ function calculer_url_breve($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_auteur
 function calculer_url_auteur($id, $texte, $ancre)
 {
 	$lien = generer_url_auteur($id) . $ancre;
@@ -673,6 +694,7 @@ function calculer_url_auteur($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_document
 function calculer_url_document($id, $texte, $ancre)
 {
 	$lien = generer_url_document($id) . $ancre;
@@ -685,6 +707,7 @@ function calculer_url_document($id, $texte, $ancre)
 	return array($lien, 'spip_in', $texte);
 }
 
+// http://doc.spip.org/@calculer_url_site
 function calculer_url_site($id, $texte, $ancre)
 {
 	# attention dans le cas des sites le lien pointe non pas sur
@@ -701,6 +724,7 @@ function calculer_url_site($id, $texte, $ancre)
 //
 // Tableaux
 //
+// http://doc.spip.org/@traiter_tableau
 function traiter_tableau($bloc) {
 
 	// Decouper le tableau en lignes
@@ -814,6 +838,7 @@ function traiter_tableau($bloc) {
 //
 // Traitement des listes (merci a Michael Parienti)
 //
+// http://doc.spip.org/@traiter_listes
 function traiter_listes ($texte) {
 	$parags = preg_split(",\n[[:space:]]*\n,S", $texte);
 	$texte ='';
@@ -898,6 +923,7 @@ define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS');
 // fonction en cas de texte extrait d'un serveur distant:
 // on ne sait pas (encore) rapatrier les documents joints
 
+// http://doc.spip.org/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
 	preg_replace(__preg_img, "($message)", $letexte);
@@ -910,6 +936,7 @@ function supprime_img($letexte) {
 // des paragraphes indiques a la main dans le texte
 // (par ex: on ne modifie pas un <p align='center'>)
 //
+// http://doc.spip.org/@paragrapher
 function paragrapher($letexte) {
 
 	if (preg_match(',<p[>[:space:]],iS',$letexte)) {
@@ -946,6 +973,7 @@ function paragrapher($letexte) {
 }
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
+// http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
 	global $compt_note;
@@ -1212,6 +1240,7 @@ function traiter_raccourcis($letexte) {
 	return $letexte;
 }
 
+// http://doc.spip.org/@traiter_les_notes
 function traiter_les_notes($mes_notes) {
 	$mes_notes = propre('<p>'.$mes_notes);
 	$mes_notes = str_replace(
@@ -1221,6 +1250,7 @@ function traiter_les_notes($mes_notes) {
 
 
 // Filtre a appliquer aux champs du type #TEXTE*
+// http://doc.spip.org/@propre
 function propre($letexte) {
 
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>

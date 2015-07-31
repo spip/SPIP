@@ -19,6 +19,7 @@ include_spip('inc/texte');
 /////////////////////////////
 // La frame de base
 //
+// http://doc.spip.org/@help_frame
 function help_frame ($aide) {
 	global $spip_lang;
 
@@ -42,6 +43,7 @@ function help_frame ($aide) {
 //
 
 // Erreur aide non disponible
+// http://doc.spip.org/@erreur_aide_indisponible
 function erreur_aide_indisponible() {
 	global $help_server;
 	minipres(_T('forum_titre_erreur'),
@@ -49,6 +51,7 @@ function erreur_aide_indisponible() {
 }
 
 // Selection de l'aide correspondant a la langue demandee
+// http://doc.spip.org/@fichier_aide
 function fichier_aide($lang_aide = '') {
 	global $help_server;
 
@@ -133,6 +136,7 @@ table.spip td {
 
 --></style>');
 
+// http://doc.spip.org/@help_body
 function help_body($aide, $html) {
 	global $help_server;
 
@@ -204,6 +208,7 @@ function help_body($aide, $html) {
 /////////////////////////////////////
 // Recuperer une image dans le cache
 //
+// http://doc.spip.org/@help_img
 function help_img($regs) {
 	global $help_server;
 
@@ -284,11 +289,13 @@ define('AIDE_STYLE_MENU', '<style type="text/css">
 ///////////////////////////////////////
 // Le menu de gauche
 //
+// http://doc.spip.org/@help_menu
 function help_menu($aide, $html) {
 	global $spip_lang_rtl; 
 
 	echo "<head><title>",_T('info_aide_en_ligne'), "</title>\n",AIDE_STYLE_MENU, '<script type="text/javascript"><!--
 var curr_article;
+// http://doc.spip.org/@activer_article
 function activer_article(id) {
 	if (curr_article)
 		document.getElementById(curr_article).className = "article-inactif";
@@ -325,6 +332,7 @@ function activer_article(id) {
 }
 
 
+// http://doc.spip.org/@rubrique
 function rubrique($titre, $statut = "redac") {
 	global $ligne_rubrique;
 	global $block_rubrique;
@@ -346,6 +354,7 @@ function rubrique($titre, $statut = "redac") {
 	}
 }
 
+// http://doc.spip.org/@fin_rubrique
 function fin_rubrique() {
 	global $ligne_rubrique;
 	global $block_rubrique;
@@ -375,6 +384,7 @@ function fin_rubrique() {
 	}
 }
 
+// http://doc.spip.org/@article
 function article($titre, $lien, $statut = "redac") {
 	global $aide;
 	global $ligne;
@@ -406,6 +416,7 @@ function article($titre, $lien, $statut = "redac") {
 }
 
 
+// http://doc.spip.org/@analyse_aide
 function analyse_aide($html, $aide=false) {
 
 	preg_match_all(',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism',
@@ -423,6 +434,7 @@ function analyse_aide($html, $aide=false) {
 //
 // Distribuer le travail
 //
+// http://doc.spip.org/@exec_aide_index_dist
 function exec_aide_index_dist()
 {
 global $img, $frame, $aide, $var_lang, $lang, $help_server;

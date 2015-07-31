@@ -12,11 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@fichier_admin
 function fichier_admin($action) {
 	global $connect_login;
 	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
 }
 
+// http://doc.spip.org/@debut_admin
 function debut_admin($form, $action, $commentaire='') {
 	global $connect_login, $connect_statut, $connect_toutes_rubriques;
 
@@ -59,6 +61,7 @@ function debut_admin($form, $action, $commentaire='') {
 		. "</form>");
 }
 
+// http://doc.spip.org/@fin_admin
 function fin_admin($action) {
 	global $connect_login, $connect_toutes_rubriques;
 	if ($connect_toutes_rubriques) {
@@ -72,6 +75,7 @@ function fin_admin($action) {
 }
 
 
+// http://doc.spip.org/@demande_maj_version
 function demande_maj_version() {
 	include_spip('inc/presentation');
 	debut_page();

@@ -19,6 +19,7 @@ include_spip('inc/filtres');
 // spip_register_globals ne fournira donc pas les globales esperees
 // ==> passer par _request() qui simule $_REQUEST sans $_COOKIE
 
+// http://doc.spip.org/@action_documenter_dist
 function action_documenter_dist() {
 	
 	include_spip('inc/actions');

@@ -20,6 +20,7 @@ include_spip('base/abstract_sql');
 // Vignette pour les documents lies
 //
 
+// http://doc.spip.org/@vignette_par_defaut
 function vignette_par_defaut($ext, $size=true, $loop = true) {
 
 	if (!$ext)
@@ -51,6 +52,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 
 
 // Quels documents a-t-on deja vu ? (gestion des doublons dans l'espace prive)
+// http://doc.spip.org/@document_vu
 function document_vu($id_document=0) {
 	static $vu = array();
 
@@ -64,6 +66,7 @@ function document_vu($id_document=0) {
 # utile pour un affichage differencie des image "libres" et des images
 # integrees via <imgXX|left> dans le texte
 
+// http://doc.spip.org/@document_a_voir
 function document_a_voir($texte) {
 	preg_match_all(__preg_img, $texte, $matches, PREG_SET_ORDER);
 	foreach ($matches as $match) document_vu($match[2]);
@@ -78,6 +81,7 @@ function document_a_voir($texte) {
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
+// http://doc.spip.org/@image_pattern
 function image_pattern($vignette) {
 	return "<img src='"
 			. _DIR_RACINE
@@ -86,6 +90,7 @@ function image_pattern($vignette) {
 			height='".$vignette['hauteur']."' />";
 }
 
+// http://doc.spip.org/@document_et_vignette
 function document_et_vignette($document, $url, $portfolio=false) {
 	// a supprimer avec spip_types_documents
 	$extension = spip_fetch_array(spip_query("SELECT extension, mime_type FROM	spip_types_documents WHERE id_type=".$document['id_type']));
@@ -128,6 +133,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 // Integration (embed) multimedia
 //
 
+// http://doc.spip.org/@embed_document
 function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
 	document_vu($id_document);
 	charger_generer_url();
@@ -216,6 +222,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	return $retour;
 }
 
+// http://doc.spip.org/@parametrer_embed_document
 function parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $extension, $les_parametres, $params)
 {
 	if ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension)))
@@ -286,6 +293,7 @@ function parametrer_embed_document($fichier, $id_document, $hauteur, $largeur, $
 // Integration des images et documents
 //
 
+// http://doc.spip.org/@integre_image
 function integre_image($id_document, $align, $type_aff) {
 	document_vu($id_document);
 	charger_generer_url();
@@ -423,6 +431,7 @@ function integre_image($id_document, $align, $type_aff) {
 //
 // Traitement des images et documents <IMGxx|right> pour inc_texte
 //
+// http://doc.spip.org/@inserer_documents
 function inserer_documents($letexte) {
 	# HACK: empecher les boucles infernales lorsqu'un document est mentionne
 	# dans son propre descriptif (on peut citer un document dans un autre,
@@ -480,6 +489,7 @@ function inserer_documents($letexte) {
 // Retourner le code HTML d'utilisation de fichiers envoyes
 //
 
+// http://doc.spip.org/@texte_upload_manuel
 function texte_upload_manuel($dir, $inclus = '', $mode = 'document') {
 	$fichiers = preg_files($dir);
 	$exts = array();
@@ -533,6 +543,7 @@ function texte_upload_manuel($dir, $inclus = '', $mode = 'document') {
 
 
 // Bloc d'edition de la taille du doc (pour embed)
+// http://doc.spip.org/@formulaire_taille
 function formulaire_taille($document) {
 
 	// (on ne le propose pas pour les images qu'on sait
@@ -570,6 +581,7 @@ function formulaire_taille($document) {
 // Construire un formulaire pour telecharger un fichier
 //
 
+// http://doc.spip.org/@formulaire_upload
 function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", $ancre='', $id_document=0) {
 	global $spip_lang_right;
 	static $num_form = 0; $num_form ++;
@@ -649,6 +661,7 @@ function formulaire_upload($id, $intitule='', $inclus = '', $mode='', $type="", 
 		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
 }
 
+// http://doc.spip.org/@construire_upload
 function construire_upload($corps, $args, $enctype='')
 {
 	$res = "";
@@ -667,6 +680,7 @@ function construire_upload($corps, $args, $enctype='')
 	  $res . $corps . "</div></form>";
 }
 
+// http://doc.spip.org/@afficher_transferer_upload
 function afficher_transferer_upload($type, $texte_upload)
 {
 	$doc = array('upload' => '<b>' . joli_repertoire(determine_upload()) . '</b>');
@@ -696,6 +710,7 @@ function afficher_transferer_upload($type, $texte_upload)
 // Afficher les documents non inclus
 // (page des articles)
 
+// http://doc.spip.org/@afficher_portfolio
 function afficher_portfolio(
 	$documents = array(),	# liste des documents, avec toutes les donnees
 	$type = "article",	# article ou rubrique ?
@@ -755,6 +770,7 @@ function afficher_portfolio(
 }
 
 
+// http://doc.spip.org/@formulaire_tourner
 function formulaire_tourner($id_document, $document, $script, $flag_modif, $type)
 {
 	include_spip('inc/filtres');
@@ -814,6 +830,7 @@ function formulaire_tourner($id_document, $document, $script, $flag_modif, $type
 
 }
 
+// http://doc.spip.org/@boutons_rotateurs
 function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vignette) {
 	global $spip_lang_right;
 	static $ftype = array(1 => 'jpg', 2 => 'png', 3 => 'gif');
@@ -844,6 +861,7 @@ function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vig
 	}
 }
 
+// http://doc.spip.org/@bouton_tourner_document
 function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, $title)
 {
   return ajax_action_auteur("tourner",
@@ -855,6 +873,7 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 "&show_docs=$id_document&id_$type=$id#tourner-$id_document");
 }
 
+// http://doc.spip.org/@afficher_documents_non_inclus
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
 	global $couleur_claire, $connect_id_auteur, $connect_statut;
 	global $options, $spip_lang_left, $spip_lang_right;
@@ -930,6 +949,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 // Afficher un document dans la colonne de gauche
 //
 
+// http://doc.spip.org/@afficher_documents_colonne
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut, $options, $id_doc_actif;
 
@@ -991,6 +1011,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 // Affiche le raccourci &lt;doc123|left&gt;
 // et l'insere quand on le clique
 //
+// http://doc.spip.org/@affiche_raccourci_doc
 function affiche_raccourci_doc($doc, $id, $align) {
 	if ($align) {
 		$pipe = "|$align";
@@ -1007,6 +1028,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 // Afficher un document sous forme de ligne depliable
 //
 
+// http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $type, $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
 	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
@@ -1157,6 +1179,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 	}
 }
 
+// http://doc.spip.org/@teste_doc_deplie
 function teste_doc_deplie($id_document) {
 	global $show_docs;
 	static $deplies;
@@ -1168,6 +1191,7 @@ function teste_doc_deplie($id_document) {
 }
 
 
+// http://doc.spip.org/@date_formulaire_documenter
 function date_formulaire_documenter($date, $id_document) {
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
@@ -1187,6 +1211,7 @@ function date_formulaire_documenter($date, $id_document) {
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
+// http://doc.spip.org/@formulaire_documenter
 function formulaire_documenter($id_document, $document, $type, $id, $ancre) {
 
 	// + securite (avec le script exec=documenter ca vient de dehors)

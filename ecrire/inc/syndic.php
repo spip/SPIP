@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Effectuer la syndication d'un unique site, retourne 0 si aucun a faire.
 //
 
+// http://doc.spip.org/@executer_une_syndication
 function executer_une_syndication() {
 	$id_syndic = 0;
 
@@ -52,6 +53,7 @@ function executer_une_syndication() {
 
 // A partir d'un <dc:subject> ou autre essayer de recuperer
 // le mot et son url ; on cree <a href="url" rel="tag">mot</a>
+// http://doc.spip.org/@creer_tag
 function creer_tag($mot,$type,$url) {
 	if (!strlen($mot = trim($mot))) return '';
 	$mot = "<a rel=\"tag\">$mot</a>";
@@ -62,6 +64,7 @@ function creer_tag($mot,$type,$url) {
 	return $mot;
 }
 
+// http://doc.spip.org/@ajouter_tags
 function ajouter_tags($matches, $item) {
 	include_spip('inc/filtres');
 	$tags = array();
@@ -103,6 +106,7 @@ function ajouter_tags($matches, $item) {
 
 
 // Retablit le contenu des blocs [[CDATA]] dans un tableau
+// http://doc.spip.org/@cdata_echappe_retour
 function cdata_echappe_retour(&$table, &$echappe_cdata) {
 	foreach ($table as $var => $val) {
 		$table[$var] = filtrer_entites($table[$var]);
@@ -115,6 +119,7 @@ function cdata_echappe_retour(&$table, &$echappe_cdata) {
 
 // prend un fichier backend et retourne un tableau des items lus,
 // et une chaine en cas d'erreur
+// http://doc.spip.org/@analyser_backend
 function analyser_backend($rss, $url_syndic='') {
 	include_spip('inc/texte'); # pour couper()
 
@@ -341,6 +346,7 @@ function analyser_backend($rss, $url_syndic='') {
 //
 // Insere un article syndique (renvoie true si l'article est nouveau)
 //
+// http://doc.spip.org/@inserer_article_syndique
 function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume, $documents) {
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
@@ -402,6 +408,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 //
 // Mettre a jour le site
 //
+// http://doc.spip.org/@syndic_a_jour
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_spip('inc/texte');
 
@@ -473,6 +480,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 // helas strtotime ne reconnait pas le format W3C
 // http://www.w3.org/TR/NOTE-datetime
+// http://doc.spip.org/@my_strtotime
 function my_strtotime($la_date) {
 
 	// format complet
@@ -503,6 +511,7 @@ function my_strtotime($la_date) {
 }
 
 
+// http://doc.spip.org/@cron_syndic
 function cron_syndic($t) {
 	$r = executer_une_syndication();
 	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&

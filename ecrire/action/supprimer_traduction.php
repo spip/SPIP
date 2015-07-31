@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@action_supprimer_traduction_dist
 function action_supprimer_traduction_dist() {
 
 	include_spip('inc/actions');

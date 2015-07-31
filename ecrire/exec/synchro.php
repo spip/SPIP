@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 charger_generer_url();
 include_spip('inc/acces'); // pour low_sec (iCal)
 
+// http://doc.spip.org/@afficher_liens_calendrier
 function afficher_liens_calendrier($lien, $icone, $texte) {
 
 	echo debut_cadre_enfonce($icone);
@@ -30,6 +31,7 @@ function afficher_liens_calendrier($lien, $icone, $texte) {
 	echo fin_cadre_enfonce();
 }
 
+// http://doc.spip.org/@exec_synchro_dist
 function exec_synchro_dist()
 {
 global   $connect_id_auteur;

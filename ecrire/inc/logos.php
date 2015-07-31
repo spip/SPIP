@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+// http://doc.spip.org/@cherche_image_nommee
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
 	if (ereg("^" . _DIR_IMG, $nom)) {
@@ -43,6 +44,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 }
 
 
+// http://doc.spip.org/@creer_vignette
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destfile, $process='AUTO', $force=false, $test_cache_only = false) {
 	global $convert_command, $pnmscale_command;
 	// ordre de preference des formats graphiques pour creer les vignettes
@@ -260,6 +262,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	return $retour;
 }
 
+// http://doc.spip.org/@recupere_image_originale
 function recupere_image_originale($image, $format)
 {
 	if ($format == "jpg") { 
@@ -279,6 +282,7 @@ function recupere_image_originale($image, $format)
 // Retourner taille d'une image
 // pour les filtres |largeur et |hauteur
 //
+// http://doc.spip.org/@taille_image
 function taille_image($img) {
 	static $largeur_img =array(), $hauteur_img= array();
 
@@ -324,6 +328,7 @@ function taille_image($img) {
 
 // Cette fonction accepte en entree un nom de fichier ou un tag <img ...>
 
+// http://doc.spip.org/@reduire_image_logo
 function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 
 	// Determiner la taille x,y maxi

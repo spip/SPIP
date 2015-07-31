@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// http://doc.spip.org/@inc_install_unpack
 function inc_install_unpack()
 {
   global  $connect_id_auteur;

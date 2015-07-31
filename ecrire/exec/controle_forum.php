@@ -16,6 +16,7 @@ include_spip('inc/presentation');
 charger_generer_url();
 include_spip('inc/forum');
 
+// http://doc.spip.org/@forum_parent
 function forum_parent($id_forum) {
 	$row=spip_fetch_array(spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'"));
 	if (!$row) return '';
@@ -105,6 +106,7 @@ function forum_parent($id_forum) {
 
 // $rappel n'est pas utilise. Pourquoi ?
 
+// http://doc.spip.org/@controle_un_forum
 function controle_un_forum($row, $rappel) {
 
 	$id_forum = $row['id_forum'];
@@ -191,6 +193,7 @@ function controle_un_forum($row, $rappel) {
 // Debut de la page de controle
 //
 
+// http://doc.spip.org/@exec_controle_forum_dist
 function exec_controle_forum_dist()
 {
 

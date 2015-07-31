@@ -36,6 +36,7 @@ define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)' . SQL_ARGS . '?`?');
 
+// http://doc.spip.org/@phraser_inclure
 function phraser_inclure($texte, $ligne, $result) {
 
 	while (ereg(BALISE_INCLURE, $texte, $match)) {
@@ -74,6 +75,7 @@ function phraser_inclure($texte, $ligne, $result) {
 	return (($texte==="") ? $result : phraser_idiomes($texte, $ligne, $result));
 }
 
+// http://doc.spip.org/@phraser_polyglotte
 function phraser_polyglotte($texte,$ligne, $result) {
 
 	if (preg_match_all(",<multi>(.*)</multi>,Uims", $texte, $m, PREG_SET_ORDER))
@@ -114,6 +116,7 @@ function phraser_polyglotte($texte,$ligne, $result) {
 }
 
 
+// http://doc.spip.org/@phraser_idiomes
 function phraser_idiomes($texte,$ligne,$result) {
 
 	// Reperer les balises de traduction <:toto:>
@@ -136,6 +139,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 	return $result;
 }
 
+// http://doc.spip.org/@phraser_champs
 function phraser_champs($texte,$ligne,$result) {
 	while (ereg(NOM_DE_CHAMP, $texte, $match)) {
 	  $p = strpos($texte, $match[0]);
@@ -170,6 +174,7 @@ function phraser_champs($texte,$ligne,$result) {
 // %###N@ ou N indexe un tableau comportant le resultat de leur analyse
 // on recommence tant qu'il y a des [...] en substituant a l'appel suivant
 
+// http://doc.spip.org/@phraser_champs_etendus
 function phraser_champs_etendus($texte, $ligne,$result) {
 	if ($texte==="") return $result;
 	$sep = '##';
@@ -184,6 +189,7 @@ function phraser_champs_etendus($texte, $ligne,$result) {
 // sert aussi aux arguments des includes et aux criteres de boucles
 // Tres chevelu
 
+// http://doc.spip.org/@phraser_args
 function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
@@ -195,6 +201,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   return $result;
 }
 
+// http://doc.spip.org/@phraser_arg
 function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
       preg_match(",^(\|?[^}{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
@@ -287,6 +294,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 }
 
 
+// http://doc.spip.org/@phraser_champs_exterieurs
 function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	$res = array();
 	while (($p=strpos($texte, "%$sep"))!==false) {
@@ -302,6 +310,7 @@ function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	return (($texte==='') ? $res : phraser_inclure($texte, $ligne, $res));
 }
 
+// http://doc.spip.org/@phraser_champs_interieurs
 function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 	$i = 0; // en fait count($result)
 	$x = "";
@@ -355,6 +364,7 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 
 // analyse des criteres de boucle, 
 
+// http://doc.spip.org/@phraser_criteres
 function phraser_criteres($params, &$result) {
 
 	$args = array();
@@ -477,6 +487,7 @@ function phraser_criteres($params, &$result) {
 	$result->criteres = $args;
 }
 
+// http://doc.spip.org/@phraser_critere_infixe
 function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 {
 	$args[0] = new Texte;
@@ -491,6 +502,7 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 	return $crit;
 }
 
+// http://doc.spip.org/@public_phraser_html
 function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 	$all_res = array();

@@ -16,6 +16,7 @@ include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('base/abstract_sql');
 
 // Effacer un doc (et sa vignette)
+// http://doc.spip.org/@action_supprimer_dist
 function action_supprimer_dist() {
 
 	include_spip('inc/actions');
@@ -34,6 +35,7 @@ function action_supprimer_dist() {
 		spip_log("action supprimer $arg incompris");
 }
 
+// http://doc.spip.org/@action_supprimer_document
 function action_supprimer_document($arg) {
 	global $redirect;
 	$arg = intval($arg);
@@ -71,6 +73,7 @@ function action_supprimer_document($arg) {
 }
 
 
+// http://doc.spip.org/@action_supprimer_rubrique
 function action_supprimer_rubrique($id_rubrique)
 {
 	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
@@ -84,6 +87,7 @@ function action_supprimer_rubrique($id_rubrique)
 
 }
 
+// http://doc.spip.org/@action_supprimer_auteur_rubrique
 function action_supprimer_auteur_rubrique($arg)
 {
 	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r))
@@ -91,6 +95,7 @@ function action_supprimer_auteur_rubrique($arg)
 	else spip_log("action_supprimer_auteur_rubrique $arg pas compris");
 }
 
+// http://doc.spip.org/@action_supprimer_auteur_article
 function action_supprimer_auteur_article($arg)
 {
 	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r)) {

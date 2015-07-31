@@ -43,6 +43,7 @@ $verif_complete = 0; //mettez le à 1 si vous voulez controler la validité des fe
 
 //une fonction qui permet de si un lien est un feed ou nom, si c'est un feed elle retourne son type
 //si c'est pas un feed elle retourne 0, cette vérification est évidemment tres tres légère
+// http://doc.spip.org/@is_feed
 function is_feed($url){
 
 	# methode SPIP
@@ -97,6 +98,7 @@ echo is_feed("http://spip.net/") . "<br>"; //retoune 0
 //est relative et on vérifie que c'est bien un feed si oui on l'ajoute
 //au tableau des feed si on ne trouve rien ou si aucun feed est trouvé on retourne 
 //un tableau vide
+// http://doc.spip.org/@get_feed_from_url
 function get_feed_from_url($url, $buffer=false){
          global $verif_complete;
          //j'ai prévenu ce sera pas fin
@@ -182,6 +184,7 @@ Array
 
 //petite fonction qui prend en charge les problemes de double slash
 //qunad on concatene les lien 
+// http://doc.spip.org/@concat_url
 function concat_url($url1, $path){
 	# methode spip
 	if(function_exists('suivre_lien')) {

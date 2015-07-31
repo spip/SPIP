@@ -87,6 +87,7 @@ $GLOBALS['champs_extra_proposes'] = Array (
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
+// http://doc.spip.org/@extra_saisie
 function extra_saisie($extra, $type, $ensemble='', $aff=true) {
 	if ($affiche = extra_form($extra, $type, $ensemble)) {
 	  if ($aff) {
@@ -99,6 +100,7 @@ function extra_saisie($extra, $type, $ensemble='', $aff=true) {
 	}
 }
 
+// http://doc.spip.org/@extra_form
 function extra_form($extra, $type, $ensemble='') {
 	$extra = unserialize($extra);
 
@@ -248,6 +250,7 @@ function extra_form($extra, $type, $ensemble='') {
 }
 
 // recupere les valeurs postees pour reconstituer l'extra
+// http://doc.spip.org/@extra_recup_saisie
 function extra_recup_saisie($type) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	if (is_array($champs)) {
@@ -288,6 +291,7 @@ function extra_recup_saisie($type) {
 }
 
 // Retourne la liste des filtres a appliquer pour un champ extra particulier
+// http://doc.spip.org/@extra_filtres
 function extra_filtres($type, $nom_champ) {
 	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
 	if (!$champ) return array();
@@ -300,6 +304,7 @@ function extra_filtres($type, $nom_champ) {
 
 // Retourne la liste des filtres a appliquer a la recuperation
 // d'un champ extra particulier
+// http://doc.spip.org/@extra_filtres_recup
 function extra_filtres_recup($type, $nom_champ) {
 	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
 	if (!$champ) return array();
@@ -310,11 +315,13 @@ function extra_filtres_recup($type, $nom_champ) {
 	return array();
 }
 
+// http://doc.spip.org/@extra_champ_valide
 function extra_champ_valide($type, $nom_champ) {
 	return isset($GLOBALS['champs_extra'][$type][$nom_champ]);
 }
 
 // a partir de la liste des champs, generer l'affichage
+// http://doc.spip.org/@extra_affichage
 function extra_affichage($extra, $type) {
 	$extra = unserialize ($extra);
 	if (!is_array($extra)) return;

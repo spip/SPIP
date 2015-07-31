@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@creer_pass_aleatoire
 function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	$seed = (double) (microtime() + 1) * time();
 	mt_srand($seed);
@@ -44,6 +45,7 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 // Creer un identifiant aleatoire (a fusionnner avec le precedent ?)
 //
 
+// http://doc.spip.org/@creer_uniqid
 function creer_uniqid() {
 	static $seeded;
 
@@ -63,6 +65,7 @@ function creer_uniqid() {
 // Renouvellement de l'alea utilise pour sécuriser les scripts dans action/
 //
 
+// http://doc.spip.org/@renouvelle_alea
 function renouvelle_alea()
 {
 	$alea = md5(creer_uniqid());
@@ -77,6 +80,7 @@ function renouvelle_alea()
 // low-security : un ensemble de fonctions pour gerer de l'identification
 // faible via les URLs (suivi RSS, iCal...)
 //
+// http://doc.spip.org/@low_sec
 function low_sec($id_auteur) {
 	// Pas d'id_auteur : low_sec
 	if (!$id_auteur = intval($id_auteur)) {
@@ -100,19 +104,23 @@ function low_sec($id_auteur) {
 	return $low_sec;
 }
 
+// http://doc.spip.org/@afficher_low_sec
 function afficher_low_sec ($id_auteur, $action='') {
 	return substr(md5($action.low_sec($id_auteur)),0,8);
 }
 
+// http://doc.spip.org/@verifier_low_sec
 function verifier_low_sec ($id_auteur, $cle, $action='') {
 	return ($cle == afficher_low_sec($id_auteur, $action));
 }
 
+// http://doc.spip.org/@effacer_low_sec
 function effacer_low_sec($id_auteur) {
 	if (!$id_auteur = intval($id_auteur)) return; // jamais trop prudent ;)
 	spip_query("UPDATE spip_auteurs SET low_sec = '' WHERE id_auteur = $id_auteur");
 }
 
+// http://doc.spip.org/@initialiser_sel
 function initialiser_sel() {
 	global $htsalt;
 
@@ -120,6 +128,7 @@ function initialiser_sel() {
 }
 
 
+// http://doc.spip.org/@ecrire_logins
 function ecrire_logins($fichier, $tableau_logins) {
 	reset($tableau_logins);
 
@@ -131,6 +140,7 @@ function ecrire_logins($fichier, $tableau_logins) {
 }
 
 
+// http://doc.spip.org/@ecrire_acces
 function ecrire_acces() {
 	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
 	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
@@ -170,6 +180,7 @@ function ecrire_acces() {
 }
 
 
+// http://doc.spip.org/@generer_htpass
 function generer_htpass($pass) {
 	global $htsalt;
 	if (function_exists('crypt'))
@@ -179,6 +190,7 @@ function generer_htpass($pass) {
 //
 // Verifier la presence des .htaccess
 //
+// http://doc.spip.org/@verifier_htaccess
 function verifier_htaccess($rep) {
 	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
 	if ((!@file_exists($htaccess)) AND 
@@ -208,6 +220,7 @@ function verifier_htaccess($rep) {
 	}
 }
 
+// http://doc.spip.org/@gerer_htaccess
 function gerer_htaccess() {
 	$mode = $GLOBALS['meta']['creer_htaccess'];
 	$r = spip_query("SELECT extension FROM spip_types_documents");

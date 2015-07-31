@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
 
+// http://doc.spip.org/@exec_install_dist
 function exec_install_dist()
 {
 	global $etape;
@@ -41,6 +42,7 @@ function exec_install_dist()
 //
 // Verifier que l'hebergement est compatible SPIP ... ou l'inverse :-)
 // (sert a l'etape 1 de l'installation)
+// http://doc.spip.org/@tester_compatibilite_hebergement
 function tester_compatibilite_hebergement() {
 	$err = array();
 
@@ -80,6 +82,7 @@ function tester_compatibilite_hebergement() {
 
 
 // Une fonction pour faciliter la recherche du login (superflu ?)
+// http://doc.spip.org/@login_hebergeur
 function login_hebergeur() {
 	global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
 

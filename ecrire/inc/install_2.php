@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// http://doc.spip.org/@inc_install_2
 function inc_install_2()
 {
 	global $adresse_db, $login_db, $pass_db, $spip_lang_right;

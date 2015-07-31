@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
+// http://doc.spip.org/@exec_brouteur_frame_dist
 function exec_brouteur_frame_dist() {
   global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left, $frame, $effacer_suivant, $special;
 	$id_rubrique = is_numeric(_request('rubrique')) ? intval(_request('rubrique')) : "";
@@ -201,6 +202,7 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 echo "</body></html>";
 }
 
+// http://doc.spip.org/@frame_background_image
 function frame_background_image($f)
 {
 	return "background-image: url(" . 

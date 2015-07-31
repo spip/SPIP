@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@exec_mots_edit_dist
 function exec_mots_edit_dist()
 {
 global
@@ -282,6 +283,7 @@ fin_page();
 }
 
 
+// http://doc.spip.org/@determine_groupe_mots
 function determine_groupe_mots($table, $id_groupe) {
 
 	$result = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " ORDER BY titre");
@@ -311,12 +313,14 @@ function determine_groupe_mots($table, $id_groupe) {
 	fin_cadre_relief();
 }
 
+// http://doc.spip.org/@un_seul_mot_dans_groupe
 function un_seul_mot_dans_groupe($id_groupe)
 {
 	$u = spip_fetch_array(spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
 	return ($u['unseul'] == 'oui');
 }
 
+// http://doc.spip.org/@ajouter_nouveau_mot
 function ajouter_nouveau_mot($id_groupe, $table, $table_id, $id_mot, $id)
 {
 	if (un_seul_mot_dans_groupe($id_groupe)) {

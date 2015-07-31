@@ -58,6 +58,7 @@ if (!isset($EXPORT_tables_noexport)){
 }
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
+// http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
 {
   global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive, $connect_login, $connect_toutes_rubriques;
@@ -255,6 +256,7 @@ function exec_export_all_dist()
 
 }
 
+// http://doc.spip.org/@ramasse_parties
 function ramasse_parties($archive, $gz, $partfile){
 	// a ameliorer par un preg_file
 	// si le rammassage est interrompu par un timeout, on perd des morceaux
@@ -275,6 +277,7 @@ function ramasse_parties($archive, $gz, $partfile){
 //
 // Exportation generique d'objets (fichier ou retour de fonction)
 //
+// http://doc.spip.org/@export_objets
 function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_actuelle="", $nom_etape="",$limit=0) {
 	static $etape_affichee=array();
 	static $table_fields=array();
@@ -347,6 +350,7 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 
 // Exporter les champs de la table
 
+// http://doc.spip.org/@build_while
 function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump, $table, $fields) {
 	global $connect_toutes_rubriques ;
 	$string = '';
@@ -376,15 +380,18 @@ function build_while($file,$gz, $nfields, &$pos_in_table, $result, &$status_dump
 	return $string;
 }
 
+// http://doc.spip.org/@build_begin_tag
 function build_begin_tag($tag) {
 	return "<$tag>\n";
 }
 
+// http://doc.spip.org/@build_end_tag
 function build_end_tag($tag) {
 	return "</$tag>\n\n";
 }
 
 // Conversion texte -> xml (ajout d'entites)
+// http://doc.spip.org/@text_to_xml
 function text_to_xml($string) {
 	return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
 }

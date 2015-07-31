@@ -17,6 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 # fonction obsolete, assurant la compatilibite ascendante. cf include_spip
+// http://doc.spip.org/@include_ecrire
 function include_ecrire($file, $silence=false) {
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
@@ -39,6 +40,7 @@ function include_ecrire($file, $silence=false) {
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
 // ou de suffixe _dist
+// http://doc.spip.org/@charger_fonction
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	// Securite de base
@@ -72,6 +74,7 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 //
 // une fonction cherchant un fichier dans une liste de repertoires
 //
+// http://doc.spip.org/@include_spip
 function include_spip($f, $include = true) {
 
 	// Dans le noyau ?
@@ -106,6 +109,7 @@ function include_spip($f, $include = true) {
 
 // appel unitaire d'une fonction du pipeline
 // utilisee dans le script pipeline precompile
+// http://doc.spip.org/@minipipe
 function minipipe($fonc,$val){
 	// fonction
 	if (function_exists($fonc))
@@ -122,6 +126,7 @@ function minipipe($fonc,$val){
 }
 
 // chargement du pipeline sous la forme d'un fichier php prepare
+// http://doc.spip.org/@pipeline
 function pipeline($action,$val) {
 	static $charger;
 
@@ -164,6 +169,7 @@ function pipeline($action,$val) {
 //
 // Enregistrement des evenements
 //
+// http://doc.spip.org/@spip_log
 function spip_log($message, $logname='spip') {
 	static $compteur;
 	if ($compteur++ > 100) return;
@@ -199,6 +205,7 @@ function spip_log($message, $logname='spip') {
 
 
 // API d'appel a la base de donnees
+// http://doc.spip.org/@spip_connect
 function spip_connect() {
 	static $t;
 	if ($t++) return;
@@ -226,6 +233,7 @@ function spip_connect() {
 	}
 }
 
+// http://doc.spip.org/@spip_query
 function spip_query($query) {
 
 	// Remarque : si on est appele par l'install,
@@ -246,11 +254,13 @@ function spip_query($query) {
 
 // a demenager dans base/abstract_sql a terme
 
+// http://doc.spip.org/@spip_abstract_quote
 function spip_abstract_quote($arg_sql) {
 	return (is_int($arg_sql)) ? $arg_sql : ("'" . addslashes($arg_sql) . "'");
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
+// http://doc.spip.org/@_request
 function _request($var) {
 	global $_GET, $_POST;
 	if (isset($_GET[$var])) return $_GET[$var];
@@ -266,6 +276,7 @@ function _request($var) {
 //            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
 // http://www.spip.net/@parametre_url
 //
+// http://doc.spip.org/@parametre_url
 function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 	// lever l'#ancre
@@ -315,6 +326,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 //
 // Prend une URL et lui ajoute/retire une ancre.
+// http://doc.spip.org/@ancre_url
 function ancre_url($url, $ancre) {
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
@@ -326,6 +338,7 @@ function ancre_url($url, $ancre) {
 //
 // pour calcul du nom du fichier cache et autres
 //
+// http://doc.spip.org/@nettoyer_uri
 function nettoyer_uri() {
 	$uri1 = $GLOBALS['REQUEST_URI'];
 	do {
@@ -342,6 +355,7 @@ function nettoyer_uri() {
 // donner l'URL de base d'un lien vers "soi-meme", modulo
 // les trucs inutiles
 //
+// http://doc.spip.org/@self
 function self($root = false) {
 	$url = nettoyer_uri();
 	if (!$root)
@@ -372,12 +386,14 @@ function self($root = false) {
 
 
 // Fonction abandonnee. . Ne plus utiliser, remplacer par son contenu
+// http://doc.spip.org/@lire_meta
 function lire_meta($nom) { global $meta; return $meta[$nom];}
 
 
 //
 // Traduction des textes de SPIP
 //
+// http://doc.spip.org/@_T
 function _T($texte, $args=array()) {
 	# petite optimisation pour ne passer qu'une fois dans include_spip
 	static $c; $c OR $c = include_spip('inc/lang');
@@ -401,6 +417,7 @@ function _T($texte, $args=array()) {
 }
 
 // chaines en cours de traduction
+// http://doc.spip.org/@_L
 function _L($text, $args=array()) {
 	while (list($name, $value) = @each($args))
 		$text = str_replace ("@$name@", $value, $text);
@@ -411,6 +428,7 @@ function _L($text, $args=array()) {
 }
 
 // Afficher "ecrire/data/" au lieu de "data/" dans les messages
+// http://doc.spip.org/@joli_repertoire
 function joli_repertoire($rep) {
 	$a = substr($rep,0,1);
 	if ($a<>'.' AND $a<>'/')
@@ -419,6 +437,7 @@ function joli_repertoire($rep) {
 }
 
 // Nommage bizarre des tables d'objets
+// http://doc.spip.org/@table_objet
 function table_objet($type) {
 	static $surnoms = array(
                 'article' => 'articles',
@@ -440,6 +459,7 @@ function table_objet($type) {
 	return $surnoms[$type];
 }
 
+// http://doc.spip.org/@id_table_objet
 function id_table_objet($type) {
 	if ($type == 'site' OR $type == 'syndic')
 		return 'id_syndic';
@@ -453,6 +473,7 @@ function id_table_objet($type) {
 //
 // spip_timer : on l'appelle deux fois et on a la difference, affichable
 //
+// http://doc.spip.org/@spip_timer
 function spip_timer($t='rien') {
 	static $time;
 	$a=time(); $b=microtime();
@@ -470,6 +491,7 @@ function spip_timer($t='rien') {
 // et le cas echeant le touch() ; renvoie true si la condition est verifiee
 // et fait touch() sauf si ca n'est pas souhaite
 // (regle aussi le probleme des droits sur les fichiers touch())
+// http://doc.spip.org/@spip_touch
 function spip_touch($fichier, $duree=0, $touch=true) {
 	if (!($exists = @is_readable($fichier))
 	|| ($duree == 0)
@@ -490,12 +512,14 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // Cette fonction est utilisee pour l'espace prive (cf inc_presentation)
 // et pour l'espace public (cf #SPIP_CRON dans inc_balise)
 
+// http://doc.spip.org/@generer_spip_cron
 function generer_spip_cron() {
   return '<div style="background-image: url(\'' . generer_url_action('cron') .
 	'\');"></div>';
 }
 
 // envoi de l'image demandee dans le code ci-dessus
+// http://doc.spip.org/@envoie_image_vide
 function envoie_image_vide() {
 	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
 	header("Content-Type: image/gif");
@@ -506,6 +530,7 @@ function envoie_image_vide() {
 	echo $image;
 	flush();
 }
+// http://doc.spip.org/@action_cron
 function action_cron() {
 	envoie_image_vide();
 	cron (1);
@@ -516,6 +541,7 @@ function action_cron() {
 // quand il est appele par public.php il n'est pas gourmand;
 // quand il est appele par ?action=cron, il est gourmand
 
+// http://doc.spip.org/@cron
 function cron ($gourmand=false) {
 
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
@@ -536,6 +562,7 @@ function cron ($gourmand=false) {
 // envoyer le navigateur sur une nouvelle adresse
 // en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
+// http://doc.spip.org/@redirige_par_entete
 function redirige_par_entete($url) {
 	# en theorie on devrait faire ca tout le temps, mais quand la chaine
 	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
@@ -559,6 +586,7 @@ function redirige_par_entete($url) {
 }
 
 // transformation XML des "&" en "&amp;"
+// http://doc.spip.org/@quote_amp
 function quote_amp($u) {
 	return preg_replace(
 		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
@@ -568,6 +596,7 @@ function quote_amp($u) {
 // Transforme n'importe quel champ en une chaine utilisable
 // en PHP ou Javascript en toute securite
 // < ? php $x = '[(#TEXTE|texte_script)]'; ? >
+// http://doc.spip.org/@texte_script
 function texte_script($texte) {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
 }
@@ -575,6 +604,7 @@ function texte_script($texte) {
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
+// http://doc.spip.org/@creer_chemin
 function creer_chemin() {
 	static $path_a = array();
 	static $c = '';
@@ -617,6 +647,7 @@ function creer_chemin() {
 	return $path_a;
 }
 
+// http://doc.spip.org/@find_in_path
 function find_in_path ($filename) {
 	// Parcourir le chemin
 	foreach (creer_chemin() as $dir) {
@@ -632,6 +663,7 @@ function find_in_path ($filename) {
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
 
+// http://doc.spip.org/@autoriser_sans_cookie
 function autoriser_sans_cookie($nom)
 {
   static $autsanscookie = array('aide_index', 'install', 'admin_repair');
@@ -641,6 +673,7 @@ function autoriser_sans_cookie($nom)
 
 // Cette fonction charge le bon inc-urls selon qu'on est dans l'espace
 // public ou prive, la presence d'un (old style) inc-urls.php3, etc.
+// http://doc.spip.org/@charger_generer_url
 function charger_generer_url() {
 	static $ok;
 
@@ -663,6 +696,7 @@ function charger_generer_url() {
 
 // Sur certains serveurs, la valeur 'Off' tient lieu de false dans certaines
 // variables d'environnement comme $_SERVER[HTTPS] ou ini_get(register_globals)
+// http://doc.spip.org/@test_valeur_serveur
 function test_valeur_serveur($truc) {
 	if (!$truc) return false;
 	if (strtolower($truc) == 'off') return false;
@@ -679,6 +713,7 @@ function test_valeur_serveur($truc) {
 // indiquer le nombre de sous-repertoires de l'url courante par rapport a la
 // racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et a
 // la racine 0. Sur url/perso/ elle vaut 2
+// http://doc.spip.org/@url_de_base
 function url_de_base() {
 	global $REQUEST_URI;
 
@@ -723,6 +758,7 @@ function url_de_base() {
 // Attention, X?y=z et "X/?y=z" sont completement differents!
 // http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 
+// http://doc.spip.org/@generer_url_ecrire
 function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	if (!$rel)
 		$rel = url_de_base() . _DIR_RESTREINT_ABS;
@@ -742,6 +778,7 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	return $rel . ($no_entities ? $args : str_replace('&', '&amp;', $args));
 }
 
+// http://doc.spip.org/@generer_url_retour
 function generer_url_retour($script, $args="")
 {
 	return rawurlencode(generer_url_ecrire($script, $args, true, true));
@@ -753,6 +790,7 @@ function generer_url_retour($script, $args="")
 
 // Detecter le fichier de base, a la racine, comme etant spip.php ou ''
 // dans le cas de '', un $default = './' peut servir (comme dans urls/page.php)
+// http://doc.spip.org/@get_spip_script
 function get_spip_script($default='') {
 	# cas define('_SPIP_SCRIPT', '');
 	if (_SPIP_SCRIPT)
@@ -762,6 +800,7 @@ function get_spip_script($default='') {
 }
 
 
+// http://doc.spip.org/@generer_url_public
 function generer_url_public($script, $args="", $no_entities=false) {
 
 	// si le script est une action (spip_pass, spip_inscription),
@@ -787,6 +826,7 @@ function generer_url_public($script, $args="", $no_entities=false) {
 	return url_de_base() . $action;
 }
 
+// http://doc.spip.org/@generer_url_prive
 function generer_url_prive($script, $args="", $no_entities=false) {
 
 	$action = 'prive.php';
@@ -803,6 +843,7 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 	return url_de_base() . _DIR_RESTREINT_ABS . $action;
 }
 
+// http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false) {
 
 	return  generer_url_public('',
@@ -816,6 +857,7 @@ function generer_url_action($script, $args="", $no_entities=false) {
 // A remplacer (bientot ?) par une gestion propre des variables admissibles ;-)
 // Attention pour compatibilite max $_GET n'est pas superglobale
 // NB: c'est une fonction de maniere a ne pas pourrir $GLOBALS
+// http://doc.spip.org/@spip_register_globals
 function spip_register_globals() {
 
 	// Liste des variables dont on refuse qu'elles puissent provenir du client
@@ -879,6 +921,7 @@ function spip_register_globals() {
 	}
 }
 
+// http://doc.spip.org/@spip_initialisation
 function spip_initialisation() {
 
 	// la taille maxi des logos (0 : pas de limite)
@@ -1042,6 +1085,7 @@ function spip_initialisation() {
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
 // la commande is_readable('chemin/vers/fichier/interdit%00truc_normal')
+// http://doc.spip.org/@spip_desinfecte
 function spip_desinfecte(&$t) {
 	static $magic_quotes;
 	if (!isset($magic_quotes))
@@ -1061,6 +1105,7 @@ function spip_desinfecte(&$t) {
 
 //  retourne le statut du visiteur s'il s'annonce
 
+// http://doc.spip.org/@verifier_visiteur
 function verifier_visiteur() {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
 // que les constantes principales soient initialisees

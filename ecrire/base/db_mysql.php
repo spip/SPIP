@@ -21,6 +21,7 @@ define('SPIP_NUM', MYSQL_NUM);
 // Appel de requetes SQL
 //
 
+// http://doc.spip.org/@spip_query_db
 function spip_query_db($query) {
 
 	$query = traite_query($query);
@@ -34,6 +35,7 @@ function spip_query_db($query) {
 			mysql_query($query)));
 }
 
+// http://doc.spip.org/@spip_mysql_trace
 function spip_mysql_trace($query, $start, $result)
 {
 	$s = mysql_errno();
@@ -60,6 +62,7 @@ function spip_mysql_trace($query, $start, $result)
 	return $result;
 }
 
+// http://doc.spip.org/@spip_mysql_timing
 function spip_mysql_timing($m1, $m2, $query, $result)
 {
 	static $tt = 0;
@@ -77,6 +80,7 @@ function spip_mysql_timing($m1, $m2, $query, $result)
 
 // La parametre sous_requete n'est plus utilise
 
+// http://doc.spip.org/@spip_mysql_select
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
 			   $sousrequete, $having,
@@ -108,6 +112,7 @@ function spip_mysql_select($select, $from, $where,
 	return $res;
 }
 
+// http://doc.spip.org/@calculer_where
 function calculer_where($v)
 {
 	if (!is_array($v))
@@ -129,6 +134,7 @@ function calculer_where($v)
 	}
 }
 
+// http://doc.spip.org/@spip_select_as
 function spip_select_as($args)
 {
 	$argsas = "";
@@ -142,6 +148,7 @@ function spip_select_as($args)
 // Passage d'une requete standardisee
 // Quand tous les appels SQL seront abstraits on pourra l'ameliorer
 
+// http://doc.spip.org/@traite_query
 function traite_query($query) {
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
 	else $table_pref = "";
@@ -161,6 +168,7 @@ function traite_query($query) {
 // Connexion a la base
 //
 
+// http://doc.spip.org/@spip_connect_db
 function spip_connect_db($host, $port, $login, $pass, $db) {
 	global $spip_mysql_link, $spip_mysql_db;	// pour connexions multiples
 
@@ -193,6 +201,7 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 	return $GLOBALS['db_ok'];
 }
 
+// http://doc.spip.org/@spip_mysql_showtable
 function spip_mysql_showtable($nom_table)
 {
 	$a = spip_query("SHOW TABLES LIKE '$nom_table'");
@@ -232,33 +241,40 @@ function spip_mysql_showtable($nom_table)
 // Recuperation des resultats
 //
 
+// http://doc.spip.org/@spip_fetch_array
 function spip_fetch_array($r, $t=SPIP_BOTH) {
 	if ($r) return mysql_fetch_array($r, $t);
 }
 
+// http://doc.spip.org/@spip_sql_error
 function spip_sql_error() {
 	return mysql_error();
 }
 
+// http://doc.spip.org/@spip_sql_errno
 function spip_sql_errno() {
 	return mysql_errno();
 }
 
+// http://doc.spip.org/@spip_num_rows
 function spip_num_rows($r) {
 	if ($r)
 		return mysql_num_rows($r);
 }
 
+// http://doc.spip.org/@spip_free_result
 function spip_free_result($r) {
 	if ($r)
 		return mysql_free_result($r);
 }
 
+// http://doc.spip.org/@spip_mysql_insert
 function spip_mysql_insert($table, $champs, $valeurs) {
 	spip_query("INSERT INTO $table $champs VALUES $valeurs");
 	return  mysql_insert_id();
 }
 
+// http://doc.spip.org/@spip_insert_id
 function spip_insert_id() {
 	return mysql_insert_id();
 }
@@ -266,6 +282,7 @@ function spip_insert_id() {
 //
 // Poser un verrou local a un SPIP donne
 //
+// http://doc.spip.org/@spip_get_lock
 function spip_get_lock($nom, $timeout = 0) {
 	global $spip_mysql_db, $table_prefix;
 	if ($table_prefix) $nom = "$table_prefix:$nom";
@@ -282,6 +299,7 @@ function spip_get_lock($nom, $timeout = 0) {
 	return $lock_ok;
 }
 
+// http://doc.spip.org/@spip_release_lock
 function spip_release_lock($nom) {
 	global $spip_mysql_db, $table_prefix;
 	if ($table_prefix) $nom = "$table_prefix:$nom";
@@ -292,11 +310,13 @@ function spip_release_lock($nom) {
 	spip_query("SELECT RELEASE_LOCK(" . spip_abstract_quote($nom) . ")");
 }
 
+// http://doc.spip.org/@spip_mysql_version
 function spip_mysql_version() {
 	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
 	return ($row['n']);
 }
 
+// http://doc.spip.org/@creer_objet_multi
 function creer_objet_multi ($objet, $lang) {
 	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
 		"     TRIM(".$objet."), ".

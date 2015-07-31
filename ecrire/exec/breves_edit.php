@@ -17,6 +17,7 @@ include_spip('inc/rubriques');
 include_spip('inc/documents');
 include_spip ('inc/barre');
 
+// http://doc.spip.org/@exec_breves_edit_dist
 function exec_breves_edit_dist()
 {
 global

@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Fonctions de traitement d'image
 // uniquement pour GD2
+// http://doc.spip.org/@image_valeurs_trans
 function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	if (strlen($img)==0) return false;
 
@@ -79,6 +80,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 
 // fonctions individuelles qui s'appliquent a une image
+// http://doc.spip.org/@image_reduire
 function image_reduire($img, $taille=-1, $taille_y=-1) {
 	include_spip('inc/logos');
 
@@ -99,6 +101,7 @@ function image_reduire($img, $taille=-1, $taille_y=-1) {
 }
 
 // Reduire une image d'un certain facteur
+// http://doc.spip.org/@image_reduire_par
 function image_reduire_par ($img, $val=1) {
 	$l = round(largeur($img)/$val);
 	$h = round(hauteur($img)/$val);
@@ -114,6 +117,7 @@ function image_reduire_par ($img, $val=1) {
 // Transforme l'image en PNG transparent
 // alpha = 0: aucune transparence
 // alpha = 127: completement transparent
+// http://doc.spip.org/@image_alpha
 function image_alpha($im, $alpha = 63)
 {
 	$image = image_valeurs_trans($im, "alpha-$alpha", "png");
@@ -176,6 +180,7 @@ function image_alpha($im, $alpha = 63)
 	return "<img src='$dest'$tags />";
 }
 
+// http://doc.spip.org/@image_flip_vertical
 function image_flip_vertical($im)
 {
 	$image = image_valeurs_trans($im, "flip_v");
@@ -218,6 +223,7 @@ function image_flip_vertical($im)
 	return "<img src='$dest'$tags />";
 }
 
+// http://doc.spip.org/@image_flip_horizontal
 function image_flip_horizontal($im)
 {
 	$image = image_valeurs_trans($im, "flip_h");
@@ -258,6 +264,7 @@ function image_flip_horizontal($im)
 	return "<img src='$dest'$tags />";
 }
 
+// http://doc.spip.org/@image_masque
 function image_masque($im, $masque, $pos="") {
 	// Passer, en plus de l'image d'origine,
 	// une image de "masque": un fichier PNG24 transparent.
@@ -581,6 +588,7 @@ function image_masque($im, $masque, $pos="") {
 // un noir & blanc "photo" n'est pas "neutre": les composantes de couleur sont
 // ponderees pour obtenir le niveau de gris;
 // on peut ici regler cette ponderation en "pour mille"
+// http://doc.spip.org/@image_nb
 function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 {
 	$image = image_valeurs_trans($im, "nb-$val_r-$val_g-$val_b");
@@ -640,6 +648,7 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 	return "<img src='$dest'$tags />";
 }
 
+// http://doc.spip.org/@image_flou
 function image_flou($im,$niveau=3)
 {
 	// Il s'agit d'une modification du script blur qu'on trouve un peu partout:
@@ -768,6 +777,7 @@ function image_flou($im,$niveau=3)
 	return "<img src='$dest'$tags />";
 }
 
+// http://doc.spip.org/@image_RotateBicubic
 function image_RotateBicubic($src_img, $angle, $bicubic=0) {
    
    if (round($angle/90)*90 == $angle) {
@@ -942,6 +952,7 @@ function image_RotateBicubic($src_img, $angle, $bicubic=0) {
 
 // permet de faire tourner une image d'un angle quelconque
 // la fonction "crop" n'est pas implementee...
+// http://doc.spip.org/@image_rotation
 function image_rotation($im, $angle, $crop=false)
 {
 
@@ -981,6 +992,7 @@ function image_rotation($im, $angle, $crop=false)
 // (le bicubic deconnait completement,
 // et j'ai ajoute la ponderation par la distance au pixel)
 
+// http://doc.spip.org/@image_distance_pixel
 function image_distance_pixel($xo, $yo, $x0, $y0) {
 	$vx = $xo - $x0;
 	$vy = $yo - $y0;
@@ -988,6 +1000,7 @@ function image_distance_pixel($xo, $yo, $x0, $y0) {
 	return $d;
 }
 
+// http://doc.spip.org/@image_decal_couleur
 function image_decal_couleur($coul, $gamma) {
 	$coul = $coul + $gamma;
 	
@@ -998,6 +1011,7 @@ function image_decal_couleur($coul, $gamma) {
 // Permet de rendre une image
 // plus claire (gamma > 0)
 // ou plus foncee (gamma < 0)
+// http://doc.spip.org/@image_gamma
 function image_gamma($im, $gamma = 0)
 {
 	$image = image_valeurs_trans($im, "gamma-$gamma");
@@ -1053,6 +1067,7 @@ function image_gamma($im, $gamma = 0)
 // On peut fixer les valeurs RVB 
 // de la couleur "complementaire" pour forcer une dominante
 
+// http://doc.spip.org/@image_decal_couleur_127
 function image_decal_couleur_127 ($coul, $val) {
 	if ($coul < 127) $y = round((($coul - 127) / 127) * $val) + $val;
 	else if ($coul >= 127) $y = round((($coul - 127) / 128) * (255-$val)) + $val;
@@ -1063,6 +1078,7 @@ function image_decal_couleur_127 ($coul, $val) {
 	return $y;
 }
 //function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
+// http://doc.spip.org/@image_sepia
 function image_sepia($im, $rgb = "896f5e")
 {
 	
@@ -1130,6 +1146,7 @@ function image_sepia($im, $rgb = "896f5e")
 // 1/ Aplatir une image semi-transparente (supprimer couche alpha)
 // en remplissant la transparence avec couleur choisir $coul.
 // 2/ Forcer le format de sauvegarde (jpg, png, gif)
+// http://doc.spip.org/@image_aplatir
 function image_aplatir($im, $format='jpg', $coul='000000')
 {
 	$image = image_valeurs_trans($im, "aplatir-$coul", $format);
@@ -1198,6 +1215,7 @@ function image_aplatir($im, $format='jpg', $coul='000000')
 // renvoit sous la forme hexadecimale ("F26C4E" par exemple).
 // Par defaut, la couleur choisie se trouve un peu au-dessus du centre de l'image.
 // On peut forcer un point en fixant $x et $y, entre 0 et 20.
+// http://doc.spip.org/@image_couleur_extraire
 function image_couleur_extraire($img, $x=10, $y=6) {
 	$fichier = extraire_attribut($img, 'src');
 	if (strlen($fichier) < 1) $fichier = $img;
@@ -1254,6 +1272,7 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 	return $GLOBALS["couleur_extraite"]["$fichier-$x-$y"];
 }
 
+// http://doc.spip.org/@couleur_dec_to_hex
 function couleur_dec_to_hex($red, $green, $blue) {
 	$red = dechex($red);
 	$green = dechex($green);
@@ -1266,6 +1285,7 @@ function couleur_dec_to_hex($red, $green, $blue) {
 	return "$red$green$blue";
 }
 
+// http://doc.spip.org/@couleur_hex_to_dec
 function couleur_hex_to_dec($couleur) {
 	$couleur = ereg_replace("^#","",$couleur);
 	$retour["red"] = hexdec(substr($couleur, 0, 2));
@@ -1275,6 +1295,7 @@ function couleur_hex_to_dec($couleur) {
 	return $retour;
 }
 
+// http://doc.spip.org/@couleur_extreme
 function couleur_extreme ($couleur) {
 	// force la couleur au noir ou au blanc le plus proche
 	// -> donc couleur foncee devient noire
@@ -1293,6 +1314,7 @@ function couleur_extreme ($couleur) {
 	return $couleur_texte;
 }
 
+// http://doc.spip.org/@couleur_inverser
 function couleur_inverser ($couleur) {
 	$couleurs = couleur_hex_to_dec($couleur);
 	$red = 255 - $couleurs["red"];
@@ -1304,6 +1326,7 @@ function couleur_inverser ($couleur) {
 	return $couleur;
 }
 
+// http://doc.spip.org/@couleur_eclaircir
 function couleur_eclaircir ($couleur) {
 	$couleurs = couleur_hex_to_dec($couleur);
 
@@ -1316,6 +1339,7 @@ function couleur_eclaircir ($couleur) {
 	return $couleur;
 
 }
+// http://doc.spip.org/@couleur_foncer
 function couleur_foncer ($couleur) {
 	$couleurs = couleur_hex_to_dec($couleur);
 
@@ -1327,6 +1351,7 @@ function couleur_foncer ($couleur) {
 	
 	return $couleur;
 }
+// http://doc.spip.org/@couleur_foncer_si_claire
 function couleur_foncer_si_claire ($couleur) {
 	// ne foncer que les couleurs claires
 	// utile pour ecrire sur fond blanc, 
@@ -1341,6 +1366,7 @@ function couleur_foncer_si_claire ($couleur) {
 	if ($moyenne > 122) return couleur_foncer($couleur);
 	else return $couleur;
 }
+// http://doc.spip.org/@couleur_eclaircir_si_foncee
 function couleur_eclaircir_si_foncee ($couleur) {
 	$couleurs = couleur_hex_to_dec($couleur);
 	$red = $couleurs["red"];
@@ -1355,6 +1381,7 @@ function couleur_eclaircir_si_foncee ($couleur) {
 
 // Image typographique
 
+// http://doc.spip.org/@printWordWrapped
 function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text, $textSize, $align="left", $hauteur_ligne = 0) {
 	
 	// calculer les couleurs ici, car fonctionnement different selon TTF ou PS
@@ -1438,6 +1465,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 //array imagefttext ( resource image, float size, float angle, int x, int y, int col, string font_file, string text [, array extrainfo] )
 //array imagettftext ( resource image, float size, float angle, int x, int y, int color, string fontfile, string text )
 
+// http://doc.spip.org/@produire_image_typo
 function produire_image_typo() {
 	/*
 	arguments autorises:

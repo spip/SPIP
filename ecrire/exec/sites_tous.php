@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/sites_voir');
 
+// http://doc.spip.org/@exec_sites_tous_dist
 function exec_sites_tous_dist()
 {
 	global $connect_statut, $options;

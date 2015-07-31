@@ -34,6 +34,7 @@ $IMPORT_tables_noerase[]='spip_ajax_fonc';
 $IMPORT_tables_noerase[]='spip_meta';
 $GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
+// http://doc.spip.org/@xml_fetch_tag
 function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
 	global $buf, $abs_pos;
 	static $buf_len = 500;
@@ -61,6 +62,7 @@ function xml_fetch_tag($f, &$before, $gz=false, $skip_comment=true) {
 		return $tag;
 }
 
+// http://doc.spip.org/@xml_parse_tag
 function xml_parse_tag($texte) {
 	list($tag, $atts) = split('[[:space:]]+', $texte, 2);
 	$result[0] = $tag;
@@ -79,6 +81,7 @@ function xml_parse_tag($texte) {
 }
 
 
+// http://doc.spip.org/@import_debut
 function import_debut($f, $gz=false) {
 	$b = "";
 	$flag_phpmyadmin = false;
@@ -114,6 +117,7 @@ function import_debut($f, $gz=false) {
 $tables_trans = array(
 );
 
+// http://doc.spip.org/@import_fin
 function import_fin() {
 	// Effacer l'ancien acces admin
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
@@ -132,6 +136,7 @@ function import_fin() {
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@import_abandon
 function import_abandon() {
 	// Probleme pour restaurer l'ancien acces admin : il conserve un id_auteur = 0
 
@@ -146,6 +151,7 @@ function import_abandon() {
 	ecrire_metas();
 }
 
+// http://doc.spip.org/@import_init_tables
 function import_init_tables()
 {
   global $IMPORT_tables_noerase, $connect_id_auteur;
@@ -165,6 +171,7 @@ function import_init_tables()
 	return $tables;
 }
 
+// http://doc.spip.org/@import_tables
 function import_tables($f, $gz=false) {
 	global $import_ok, $abs_pos, $my_pos;
 	static $time_javascript;
@@ -237,12 +244,14 @@ function import_tables($f, $gz=false) {
 
 // Destruction des entrees non restaurees
 
+// http://doc.spip.org/@detruit_restaurateur
 function detruit_restaurateur()
 {
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 }
 
 
+// http://doc.spip.org/@affiche_progression_javascript
 function affiche_progression_javascript($abs_pos,$table="") {
 	global $affiche_progression_pourcent;
 	include_spip('inc/charsets');
@@ -276,6 +285,7 @@ function affiche_progression_javascript($abs_pos,$table="") {
 }
 
 
+// http://doc.spip.org/@import_table_choix
 function import_table_choix()
 {
 	// construction de la liste des tables pour le dump :
@@ -336,6 +346,7 @@ function import_table_choix()
 }	
 
 
+// http://doc.spip.org/@import_all_continue
 function import_all_continue()
 {
   global $meta, $flag_gz, $buf, $abs_pos, $my_pos, $connect_toutes_rubriques;

@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@spip_file_get_contents
 function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
@@ -27,6 +28,7 @@ function spip_file_get_contents ($fichier) {
 // options = array(
 // 'phpcheck' => 'oui' # verifier qu'on a bien du php
 // dezippe automatiquement les fichiers .gz
+// http://doc.spip.org/@lire_fichier
 function lire_fichier ($fichier, &$contenu, $options=false) {
 	$contenu = '';
 	if (!@file_exists($fichier))
@@ -70,6 +72,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 // Ecrire un fichier de maniere un peu sure
 //
 // zippe les fichiers .gz
+// http://doc.spip.org/@ecrire_fichier
 function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
@@ -116,6 +119,7 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 //
 // Supprimer le fichier de maniere sympa (flock)
 //
+// http://doc.spip.org/@supprimer_fichier
 function supprimer_fichier($fichier) {
 	if (!@file_exists($fichier))
 		return;
@@ -139,6 +143,7 @@ function supprimer_fichier($fichier) {
 // Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
 // $base/${subdir}_ sinon ; le flag $nobase signale qu'on ne veut pas de $base/
 //
+// http://doc.spip.org/@sous_repertoire
 function sous_repertoire($base, $subdir, $nobase = false) {
 	if (!preg_match(',[/_]$,', $base)) $base .= '/';
 	$base = str_replace("//", "/", $base);
@@ -185,6 +190,7 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 	return "$baseaff${subdir}_";
 }
 // compatibilite ascendante
+// http://doc.spip.org/@creer_repertoire
 function creer_repertoire($base, $subdir) {
 	return sous_repertoire($base, $subdir, true);
 }
@@ -200,6 +206,7 @@ function creer_repertoire($base, $subdir) {
 // si $dir = 'rep/sous_rep_' au lieu de 'rep/sous_rep/' on scanne 'rep/' et on
 // applique un pattern '^rep/sous_rep_'
 //
+// http://doc.spip.org/@preg_files
 function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array()) {
 	$nbfiles = 0;
 	if ($pattern == -1)

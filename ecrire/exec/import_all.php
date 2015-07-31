@@ -37,6 +37,7 @@ if ($f = include_spip('mes_fonctions', false)) {
 	@include_once ($f); 
 }
 
+// http://doc.spip.org/@verifier_version_sauvegarde
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
 	global $flag_gz, $connect_toutes_rubriques;
@@ -65,6 +66,7 @@ function verifier_version_sauvegarde ($archive) {
 }
 
 
+// http://doc.spip.org/@import_charge_version
 function import_charge_version($version_archive)
 {
 	if (preg_match("{^phpmyadmin::}is",$version_archive)){
@@ -75,6 +77,7 @@ function import_charge_version($version_archive)
 	return  charger_fonction($fimport, 'inc', true);
 }
 
+// http://doc.spip.org/@exec_import_all_dist
 function exec_import_all_dist()
 {
 	global $archive;

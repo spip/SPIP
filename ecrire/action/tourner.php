@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@action_tourner_dist
 function action_tourner_dist() {
 	
 	global $convert_command;
@@ -81,6 +82,7 @@ function action_tourner_dist() {
 //
 // Faire tourner une image
 //
+// http://doc.spip.org/@gdRotate
 function gdRotate ($imagePath,$rtt){
 	$src_img = '';
 	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $imagePath, $regs)) {
@@ -179,6 +181,7 @@ function gdRotate ($imagePath,$rtt){
 }
 
 // Creation
+// http://doc.spip.org/@creer_fichier_vignette
 function creer_fichier_vignette($vignette, $test_cache_only=false) {
 	if ($vignette && $GLOBALS['meta']["creer_preview"] == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
@@ -199,6 +202,7 @@ function creer_fichier_vignette($vignette, $test_cache_only=false) {
 
 
 // Insertion d'une vignette dans la base
+// http://doc.spip.org/@inserer_vignette_base
 function inserer_vignette_base($image, $vignette) {
 
 	$taille = @filesize($vignette);

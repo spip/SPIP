@@ -36,30 +36,37 @@ pouvez l'editer pour ne conserver que la partie concernant les URLS 'html'.
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
+// http://doc.spip.org/@generer_url_article
 function generer_url_article($id_article) {
 	return "article$id_article.html";
 }
 
+// http://doc.spip.org/@generer_url_rubrique
 function generer_url_rubrique($id_rubrique) {
 	return "rubrique$id_rubrique.html";
 }
 
+// http://doc.spip.org/@generer_url_breve
 function generer_url_breve($id_breve) {
 	return "breve$id_breve.html";
 }
 
+// http://doc.spip.org/@generer_url_mot
 function generer_url_mot($id_mot) {
 	return "mot$id_mot.html";
 }
 
+// http://doc.spip.org/@generer_url_site
 function generer_url_site($id_syndic) {
 	return "site$id_syndic.html";
 }
 
+// http://doc.spip.org/@generer_url_auteur
 function generer_url_auteur($id_auteur) {
 	return "auteur$id_auteur.html";
 }
 
+// http://doc.spip.org/@generer_url_document
 function generer_url_document($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
@@ -71,6 +78,7 @@ function generer_url_document($id_document) {
 }
 
 
+// http://doc.spip.org/@recuperer_parametres_url
 function recuperer_parametres_url($fond, $url) {
 	global $contexte;
 
@@ -104,6 +112,7 @@ function recuperer_parametres_url($fond, $url) {
 // URLs des forums
 //
 
+// http://doc.spip.org/@generer_url_forum
 function generer_url_forum($id_forum, $show_thread=false) {
 	include_spip('inc/forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
