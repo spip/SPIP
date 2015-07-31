@@ -99,7 +99,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	if ($flag_editable AND ($spip_display != 4)) {
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$icone = $iconifier('id_article', $id_article,'articles', true);
+		$icone = $iconifier('id_article', $id_article,'articles', false);
 	} else $icone = '';
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');
@@ -114,13 +114,13 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$navigation =
 	  debut_boite_info(true). $boite . fin_boite_info(true)
-	  . (_INTERFACE_ONGLETS?"":$icone)
+	  . $icone
 		. (_INTERFACE_ONGLETS?"":boites_de_config_articles($id_article))
 	  . ($flag_editable ? boite_article_virtuel($id_article, $virtuel):'')
-		. meme_rubrique($id_rubrique, $id_article, 'article')
 	  . pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 	
 	$extra = creer_colonne_droite('', true)
+		. meme_rubrique($id_rubrique, $id_article, 'article')
 	  . pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  . debut_droite('',true);
 
@@ -158,8 +158,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  ;
 
 	$onglet_documents =
-	  (_INTERFACE_ONGLETS?$icone:"")
-	  . articles_documents('article', $id_article)
+	  articles_documents('article', $id_article)
 	  ;
 	
 	$onglet_interactivite =

@@ -84,7 +84,7 @@ function exec_naviguer_dist()
 	$iconifier = charger_fonction('iconifier', 'inc');
 
 	echo infos_naviguer($id_rubrique, $statut, $ze_logo, $n_forums);
-	echo (_INTERFACE_ONGLETS?"":$iconifier('id_rubrique', $id_rubrique, 'naviguer', true));
+	echo ($iconifier('id_rubrique', $id_rubrique, 'naviguer', false));
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	//
@@ -172,9 +172,8 @@ function exec_naviguer_dist()
 
 	// Logos de la rubrique
 	$onglet_documents = 
-	  (_INTERFACE_ONGLETS?$iconifier('id_rubrique', $id_rubrique, 'naviguer', true):"")
 		/// Documents associes a la rubrique
-		. ($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
+		($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
 	;
 	
 	$onglet_interactivite = "";

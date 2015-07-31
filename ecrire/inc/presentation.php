@@ -52,7 +52,7 @@ function afficher_onglets_pages($ordre,$onglets){
 		$cpt++;
 		$disabled = strlen(trim($onglets[$id]))?"":" class='tabs-disabled'";
 		if (!$actif && !$disabled) $actif = $cpt;
-		$res .= "<li$disabled><a href='#$id'><span>" . $label . "</span></a></li>";
+		$res .= "<li$disabled rel='$cpt'><a href='#$id'><span>" . $label . "</span></a></li>";
 	}
 	$res = "<ul class='tabs-nav'>$res</ul>";
 	foreach((_INTERFACE_ONGLETS ? array_keys($ordre):array_keys($onglets)) as $id){
@@ -61,7 +61,9 @@ function afficher_onglets_pages($ordre,$onglets){
 	$onglet_compteur++;
 	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'>$res</div>"
 	. (_INTERFACE_ONGLETS ?
-	 "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });</script>"
+	 "<script type='text/javascript'>$('#boite_onglet_$onglet_compteur').tabs(".($actif?"$actif,":"")."{ fxAutoHeight: true });
+	 $('ul.tabs-nav li').hover(function(){\$('#boite_onglet_$onglet_compteur').triggerTab(parseInt(\$(this).attr('rel')));},function(){});
+	 </script>"
 	 :"");
 }
 
