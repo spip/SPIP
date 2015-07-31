@@ -74,7 +74,8 @@ function initiale($nom){
  */
 function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 	static $memo = null;
-	$res = '';
+	static $res = array();
+	$out = "";
 	if (!$memo
 		OR (!$initiale AND !$url)
 		OR ($initiale!==$memo['initiale'])
@@ -87,14 +88,17 @@ function afficher_initiale($url,$initiale,$compteur,$debut,$pas){
 				AND (
 						$newcompt>$debut OR ($newcompt==$debut AND $newcompt==$memo['compteur'])
 						));
-			$res = lien_ou_expose($memo['url'],$memo['initiale'],$on,'lien_pagination');
+			$res[] = lien_ou_expose($memo['url'],$memo['initiale'],$on,'lien_pagination');
 		}
 		if ($initiale)
 			$memo = array('entree'=>isset($memo['entree'])?$memo['entree']+1:0,'initiale'=>$initiale,'url'=>parametre_url($url,'i',$initiale),'compteur'=>$newcompt);
 	}
-	if (!$initiale AND !$url)
-		$memo=null;
-	return ($res?" $res":"");
+	if (!$initiale AND !$url) {
+		if (count($res)>1)
+			$out = implode(' ',$res);
+		$memo=$res=null;
+	}
+	return $out;
 }
 
 /**
