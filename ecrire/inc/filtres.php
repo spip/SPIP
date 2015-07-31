@@ -473,8 +473,9 @@ function PtoBR($texte){
 }
 
 // Couper les "mots" de plus de $l caracteres (souvent des URLs)
+// en mettant des espaces (par defaut, soft hyphen &#173: = &shy;)
 // http://doc.spip.org/@lignes_longues
-function lignes_longues($texte, $l = 70) {
+function lignes_longues($texte, $l = 70, $espace='&#173;') {
 	if ($l<1) return $texte;
 	if (!preg_match("/[\w,\/.]{".$l."}/UmsS", $texte))
 		return $texte;
@@ -499,7 +500,7 @@ function lignes_longues($texte, $l = 70) {
 	// note : on pourrait preferer couper sur les / , etc.
 	if (preg_match_all("/[\w,\/.]{".$l."}/UmsS", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
-			$texte = str_replace($long[0], $long[0].' ', $texte);
+			$texte = str_replace($long[0], $long[0].$espace, $texte);
 		}
 	}
 
