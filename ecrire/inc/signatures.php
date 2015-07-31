@@ -88,7 +88,7 @@ function signatures_edit($script, $id, $arg, $row) {
 				false);
 			}
 		}
-
+		$res = "<div class='editer_auteurs'>$res</div>";
 	}
 
 	$res .= "<div class='spip_small date'>".date_interface($date_time)."</div>\n";
