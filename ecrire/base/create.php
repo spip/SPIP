@@ -18,6 +18,24 @@ include_spip('base/auxiliaires');
 include_spip('base/typedoc');
 include_spip('base/abstract_sql');
 
+
+function creer_ou_upgrader_table($table,$desc,$autoinc,$upgrade=false) {
+	static $fcreate = null;
+	if (!$fcreate) $fcreate = sql_serveur('create', $serveur);
+
+	if (!$upgrade OR !($sql_desc = sql_showtable($table,true,$serveur)))
+		$fcreate($k, $desc['field'], $desc['key'], $autoinc, false, $serveur);
+	if ($upgrade && ($sql_desc OR $sql_desc = sql_showtable($k,true,$serveur))) {
+		// ajouter les champs manquants
+		$last = '';
+		foreach($desc['field'] as $field=>$type){
+			if (!isset($sql_desc['field'][$field]))
+				sql_alter("TABLE $table ADD $field $type".($last?" AFTER $last":""),$serveur);
+			$last = $field;
+		}
+	}
+}
+
 // http://doc.spip.org/@creer_base
 function creer_base($serveur='') {
 	global $tables_principales, $tables_auxiliaires;
@@ -26,13 +44,22 @@ function creer_base($serveur='') {
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
-	$fcreate = sql_serveur('create', $serveur);
-
 	foreach($tables_principales as $k => $v)
-		$fcreate($k, $v['field'], $v['key'], true, false, $serveur);
+		creer_ou_upgrader_table($k,$v,true);
 
 	foreach($tables_auxiliaires as $k => $v)
-		$fcreate($k, $v['field'], $v['key'], false, false, $serveur);
+		creer_ou_upgrader_table($k,$v,false);
+}
+
+function maj_base($upgrade_tables=array(),$serveur=''){
+	global $tables_principales, $tables_auxiliaires;
+	foreach($tables_principales as $k => $v)
+		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
+			creer_ou_upgrader_table($k,$v,true,true);
+
+	foreach($tables_auxiliaires as $k => $v)
+		if (($upgrade_tables==$k OR (is_array($upgrade_tables) && in_array($k,$upgrade_tables))))
+			creer_ou_upgrader_table($k,$v,false,true);
 }
 
 
