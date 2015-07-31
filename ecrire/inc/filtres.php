@@ -919,7 +919,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 		if ($avjc) return $annee;
 		$a = ((isset($options['annee_courante']) AND $options['annee_courante'])?$options['annee_courante']:date('Y'));
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>ucfirst($nommois), 'annee'=>$annee));
+		if ($annee != $a) return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>spip_ucfirst($nommois), 'annee'=>$annee));
 		return _T('date_fmt_jour_mois', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 
 	case 'jourcourt':
@@ -1084,7 +1084,7 @@ function affdate_debut_fin($date_debut, $date_fin, $horaire = 'oui', $forme=''){
 	$du = _T('date_fmt_periode_from') . " ";
 	if ($d==$f)
 	{ // meme jour
-		$s = ucfirst(nom_jour($d,$abbr))." ".$affdate($d);
+		$s = spip_ucfirst(nom_jour($d,$abbr))." ".$affdate($d);
 		if ($h)
 			if ($hd!=$hf)
 				$s .= " $hd";
