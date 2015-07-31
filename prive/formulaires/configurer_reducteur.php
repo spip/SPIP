@@ -62,10 +62,11 @@ function formulaires_configurer_reducteur_traiter_dist(){
 
 	foreach(array(
 		"creer_preview",
-		"taille_preview",
 		) as $m)
 		if (!is_null($v=_request($m)))
 			ecrire_meta($m, $v=='oui'?'oui':'non');
+	if (!is_null($v=_request('taille_preview')))
+		ecrire_meta("taille_preview", intval($v));
 
 	$res['message_ok'] = _T('config_info_enregistree');
 	return $res;
