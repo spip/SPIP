@@ -59,14 +59,7 @@ function demander_conversion($tables_a_convertir, $action) {
 	}
 
 	// Ici en cas d'erreur, une page admin normale avec bouton de retour
-	install_debut_html($action);
-	echo '<p>'.$message;
-
-	echo "<p align='right'> <a href='" . generer_url_ecrire("config_lang")
-	. "'> &gt;&gt; "._T('icone_retour')."</a>";
-
-	install_fin_html();
-	exit;
+	minipres($action, ('<p>'.$message. "</p><p align='right'> <a href='" . generer_url_ecrire("config_lang"). "'> &gt;&gt; "._T('icone_retour')."</a>"));
 }
 
 // stocker le nouvel extra

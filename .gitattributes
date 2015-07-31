@@ -435,6 +435,7 @@ ecrire/exec/upgrade.php -text
 ecrire/exec/virtualiser.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/agenda.php -text
+ecrire/inc/aider.php -text
 ecrire/inc/article_select.php -text
 ecrire/inc/autoriser.php -text
 ecrire/inc/boutons.php -text
