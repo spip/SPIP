@@ -213,9 +213,9 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 			}
 		}
 	}
-	
+
 	if ($html) $page = analyse_js_ajoutee($page);
-  
+
 	// Passer la main au debuggueur le cas echeant
 
 	if ($var_mode == 'debug') {
@@ -235,7 +235,7 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 	//
 
 	// Report du hack pour <?xml (cf. public/compiler.php)
-	if (strpos($page['texte'],"<\1?xml")!==FALSE)
+	if ($xml_hack)
 		$page['texte'] = str_replace("<\1?xml", '<'.'?xml', $page['texte']);
 
 	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
