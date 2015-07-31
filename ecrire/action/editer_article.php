@@ -232,7 +232,6 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 		AND !autoriser('publierdans', 'rubrique', $id_rubrique))
 			$champs['statut'] = 'prop';
 	}
-var_dump($champs);
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
