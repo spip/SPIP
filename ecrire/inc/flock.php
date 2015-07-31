@@ -167,6 +167,17 @@ function raler_fichier($fichier)
 }
 
 //
+// Retourne Vrai si son premier argument a ete cree il y a moins de N secondes
+//
+
+function jeune_fichier($fichier, $n)
+{
+	if (!file_exists($fichier)) return false;
+	if (!$c = @filemtime($fichier)) return false;
+	return (time()-$duree <= $c);
+}
+
+//
 // Supprimer le fichier de maniere sympa (flock)
 //
 // http://doc.spip.org/@supprimer_fichier
