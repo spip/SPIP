@@ -102,79 +102,81 @@ else if ($ajout_doc == 'oui') {
 	//
 	// Upload d'un ZIP
 	//
+    if (function_exists('gzopen')) {
 
-	// traiter la reponse de l'utilisateur ('telquel' ou 'decompacter')
-	if ($_POST['source_zip']
-	AND !strstr($_POST['source_zip'], '..')) # securite
-	{
-		$_FILES = array(
-			array('name' => basename($_POST['source_zip']),
-				'tmp_name' => $_POST['source_zip'])
-		);
-	}
-
-	// traiter le zip si c'en est un tout seul
-	if (count($_FILES) == 1
-	AND $action_zip!='telquel') {
-		$desc = array_pop($_FILES); # recuperer la description
-		$_FILES = array($desc);
-
-		if (preg_match('/\.zip$/i', $desc['name'])
-		OR ($desc['type'] == 'application/zip')) {
-
-			// on pose le fichier dans le repertoire zip et on met
-			// a jour $_FILES (nota : copier_document n'ecrase pas
-			// un fichier avec lui-meme : ca autorise a boucler)
-			$zip = copier_document("zip",
-				$desc['name'],
-				$desc['tmp_name']
+		// traiter la reponse de l'utilisateur ('telquel' ou 'decompacter')
+		if ($_POST['source_zip']
+		AND !strstr($_POST['source_zip'], '..')) # securite
+		{
+			$_FILES = array(
+				array('name' => basename($_POST['source_zip']),
+					'tmp_name' => $_POST['source_zip'])
 			);
-			if (!$zip) die ('Erreur upload zip'); # pathologique
-			$desc['tmp_name'] = $zip;	# nouvel emplacement du fichier
+		}
+	
+		// traiter le zip si c'en est un tout seul
+		if (count($_FILES) == 1
+		AND $action_zip!='telquel') {
+			$desc = array_pop($_FILES); # recuperer la description
 			$_FILES = array($desc);
-
-			// Est-ce qu'on sait le lire ?
-			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
-			$archive = new PclZip($zip);
-			$contenu = verifier_compactes($archive);
-
-			// si non, on le force comme document
-			if (!$contenu) {
-				$forcer_document = 'oui';
-			}
-
-			// si le deballage est demande
-			else if ($action_zip == 'decompacter') {
-				// 1. on deballe
-				define('_tmp_dir', creer_repertoire_documents($hash));
-				$archive->extract(PCLZIP_OPT_PATH,
-					_tmp_dir,
-					PCLZIP_OPT_REMOVE_ALL_PATH);
-				// 2. on supprime le fichier temporaire
+	
+			if (preg_match('/\.zip$/i', $desc['name'])
+			OR ($desc['type'] == 'application/zip')) {
+	
+				// on pose le fichier dans le repertoire zip et on met
+				// a jour $_FILES (nota : copier_document n'ecrase pas
+				// un fichier avec lui-meme : ca autorise a boucler)
+				$zip = copier_document("zip",
+					$desc['name'],
+					$desc['tmp_name']
+				);
+				if (!$zip) die ('Erreur upload zip'); # pathologique
+				$desc['tmp_name'] = $zip;	# nouvel emplacement du fichier
+				$_FILES = array($desc);
+	
+				// Est-ce qu'on sait le lire ?
+				require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+				$archive = new PclZip($zip);
 				$contenu = verifier_compactes($archive);
-				@unlink($zip);
-
-				$_FILES = array();
-				foreach ($contenu as $fichier) {
-					$_FILES[] = array(
-						'name' => basename($fichier),
-						'tmp_name' => _tmp_dir.$fichier);
+	
+				// si non, on le force comme document
+				if (!$contenu) {
+					$forcer_document = 'oui';
 				}
-			}
-
-			// sinon on demande une reponse
-			else {
-				$link = new Link('spip_image.php3');
-				$link->addVar('ajout_doc', 'oui');
-				$link->addVar('redirect', $redirect);
-				$link->addVar('id_article', $id_article);
-				$link->addVar('mode', $mode);
-				$link->addVar('type', $type);
-				$link->addVar('hash', $hash);
-				$link->addVar('hash_id_auteur', $hash_id_auteur);
-				$link->addVar('source_zip', $zip);
-				afficher_compactes($desc, $contenu, $link);
-				exit;
+	
+				// si le deballage est demande
+				else if ($action_zip == 'decompacter') {
+					// 1. on deballe
+					define('_tmp_dir', creer_repertoire_documents($hash));
+					$archive->extract(PCLZIP_OPT_PATH,
+						_tmp_dir,
+						PCLZIP_OPT_REMOVE_ALL_PATH);
+					// 2. on supprime le fichier temporaire
+					$contenu = verifier_compactes($archive);
+					@unlink($zip);
+	
+					$_FILES = array();
+					foreach ($contenu as $fichier) {
+						$_FILES[] = array(
+							'name' => basename($fichier),
+							'tmp_name' => _tmp_dir.$fichier);
+					}
+				}
+	
+				// sinon on demande une reponse
+				else {
+					$link = new Link('spip_image.php3');
+					$link->addVar('ajout_doc', 'oui');
+					$link->addVar('redirect', $redirect);
+					$link->addVar('id_article', $id_article);
+					$link->addVar('mode', $mode);
+					$link->addVar('type', $type);
+					$link->addVar('hash', $hash);
+					$link->addVar('hash_id_auteur', $hash_id_auteur);
+					$link->addVar('source_zip', $zip);
+					afficher_compactes($desc, $contenu, $link);
+					exit;
+				}
 			}
 		}
 	}
