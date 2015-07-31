@@ -25,13 +25,14 @@ function exec_import_all_dist()
 {
 	$archive=_request('archive');
 	if (!strlen($archive)) $archive=_request('archive_perso');
+
 	if ($archive) {
 			$dir = import_queldir();
 			$_POST['dir'] = $dir;
 			$commentaire = verifier_sauvegarde($dir . $archive);
-	} else 		$commentaire ='';
+	} else 		$commentaire = _T('avis_probleme_archive', array('archive' => $archive));
 
-	if ($commentaire OR isset($GLOBALS['meta']['import_all'])) {
+	if (!$commentaire OR isset($GLOBALS['meta']['import_all'])) {
 		$action = _T('info_restauration_sauvegarde', 
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
