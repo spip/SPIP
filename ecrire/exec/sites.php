@@ -49,7 +49,7 @@ function exec_sites_dist()
 		$mod = $row['moderation'];
 		$extra=$row["extra"];
 
-		$flag_administrable = autoriser('publierdans','rubrique',$id_rubrique);
+		$flag_administrable = autoriser('modifier','site',$id_syndic);
 
 		$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
 	
@@ -127,10 +127,9 @@ function exec_sites_dist()
 	gros_titre($nom_site, $logo_statut);
 	echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
-	if (strlen($descriptif) > 1) {
-		echo "<div style='text-align: left padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; ' class='verdana1 spip_small'>";
-		echo "<b>"._T('info_descriptif')."</b> ";
-		echo propre($descriptif);
+	if (strlen($descriptif)) {
+		echo "<div style='text-align: left; padding: 0 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin: 5px 15px 0 0; ' class='verdana1 spip_xsmall'>";
+		echo propre('{{'._T('info_descriptif').'}} '. $descriptif);
 		echo "</div>";
 	}
 	echo "</td>";

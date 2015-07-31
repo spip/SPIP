@@ -54,6 +54,11 @@ function action_editer_site_dist() {
 			revisions_sites($id_syndic, $auto);
 			if ($auto['syndication'] == 'oui')
 				set_request('reload', 'oui');
+
+			// Enregistrer le logo s'il existe
+			if ($auto['logo'] AND $auto['format_logo'])
+				@rename($auto['logo'],
+				_DIR_IMG . 'siteon'.$id_syndic.'.'.$auto['format_logo']);
 		}
 		else
 			redirige_par_entete(
@@ -293,7 +298,16 @@ function analyser_site($url) {
 
 		if (preg_match(',<(description|tagline)([[:space:]][^>]*)?'
 		.'>(.*)</\1>,Uims', $header, $r))
-			$result['descriptif'] = filtrer_entites($r[3]);
+			$result['descriptif'] = supprimer_tags(filtrer_entites($r[3]));
+
+		if (preg_match(',<image.*<url.*>(.*)</url>.*</image>,Uims',
+		$header, $r)
+		AND preg_match(',(https?://.*/.*(gif|png|jpg)),ims', $r[1], $r)
+		AND $image = recuperer_infos_distantes($r[1])
+		AND in_array($image['extension'], array('gif', 'jpg', 'png'))) {
+			$result['format_logo'] = $image['extension'];
+			$result['logo'] = $image['fichier'];
+		}
 	}
 	else {
 		$result['syndication'] = 'non';
