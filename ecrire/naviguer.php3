@@ -11,7 +11,7 @@ $flag_mots = lire_meta("articles_mots");
 
 
 function enfant($collection){
-	global $les_enfants, $couleur_foncee;
+	global $les_enfants, $couleur_foncee, $lang_dir;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 
@@ -19,15 +19,17 @@ function enfant($collection){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
-		$descriptif=propre($row['descriptif']);
 
 		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
 		$les_sous_enfants = sous_enfant($id_rubrique);
 
+		changer_typo($row['lang']);
+		$descriptif=propre($row['descriptif']);
+
 		$les_enfants.= "<P>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		$les_enfants.= "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\">";
+		$les_enfants.= "<span dir='$lang_dir'><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\">";
 
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants.= $bouton_layer;
@@ -39,7 +41,7 @@ function enfant($collection){
 		if (strlen($descriptif)>1)
 			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
 
-		$les_enfants.= "</FONT>";
+		$les_enfants.= "</FONT></span>";
 
 		$les_enfants .= $les_sous_enfants;
 		$les_enfants .= fin_cadre_relief(true);
@@ -47,6 +49,7 @@ function enfant($collection){
 }
 
 function sous_enfant($collection2){
+	global $lang_dir;
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
 	$result3 = spip_query($query3);
 
@@ -56,8 +59,9 @@ function sous_enfant($collection2){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
-			
-			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'>$titre2</A>\n";
+			changer_typo($row['lang']);
+
+			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></A>\n";
 		}
 		$retour .= "</FONT></ul>\n\n".fin_block()."\n\n";
 	}
@@ -172,6 +176,23 @@ if ($titre) {
 	}
 }
 
+//
+// Appliquer le changement de langue
+//
+if ($changer_lang AND $coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
+	if ($changer_lang != "herit")
+		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$coll");
+	else {
+		if ($id_parent == 0)
+			$langue_parent = lire_meta('langue_site');
+		else {
+			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+			$langue_parent = $row['lang'];
+		}
+		spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$coll");
+	}
+	calculer_langues_rubriques();
+}
 
 //
 // infos sur cette rubrique
@@ -248,6 +269,7 @@ if ($coll  > 0) {
 
 fin_grand_cadre();
 
+changer_typo('', 'rubrique'.$coll);
 
 
 debut_gauche();
@@ -377,20 +399,6 @@ if (strlen($texte) > 1) {
 // Langue de la rubrique
 //
 if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
-	if ($changer_lang) {
-		if ($changer_lang != "herit") {
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$coll");
-		} else {
-			if ($id_parent == 0) {
-				$langue_parent = lire_meta('langue_site');
-			} else {
-				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
-				$langue_parent = $row['lang'];
-			}
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$coll");
-		}
-		calculer_langues_rubriques();
-	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$coll"));
 	$langue_rubrique = $row['lang'];
@@ -400,14 +408,6 @@ if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_sect
 		$langue_parent = $row[0];
 	}
 	else $langue_parent = lire_meta('langue_site');
-
-/*	debut_cadre_enfonce("langues-24.gif");
-	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-	echo menu_langues('changer_lang', $langue_rubrique, _T('info_multi_cette_rubrique').' ', $langue_parent);
-	echo "</font></center>\n";
-	fin_cadre_enfonce();
-*/
-
 
 	debut_cadre_enfonce('langues-24.gif');
 	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";

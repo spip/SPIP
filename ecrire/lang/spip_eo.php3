@@ -998,6 +998,7 @@ Dankon pro via partopreno
 'lien_forum_public' => 'Mastrumi la publikan forumon de tiu &#265;i artikolo',
 'lien_icones_interface' => 'La piktogramoj de la interfaco estas de <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'liberigi',
+'lien_liberer_tous' => '<NEW> lib&eacute;rer ces articles',
 'lien_mise_a_jour_syndication' => '&#284;isdatigi nun',
 'lien_modifer_date' => '&#348;an&#285;i la daton',
 'lien_nom_site' => 'NOMO DE LA teksejo:',
