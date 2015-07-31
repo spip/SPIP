@@ -4,6 +4,7 @@
 // Afficher les referers d'un article (ou du site)
 //
 
+// http://doc.spip.org/@inc_referenceurs_dist
 function inc_referenceurs_dist ($script, $args, $select, $table, $where, $groupby, $limit, $serveur='') {
 	global $spip_lang_right, $source_vignettes;
 
