@@ -235,7 +235,7 @@ function include_ecrire($file) {
 $flag_connect = file_exists(($flag_ecrire ? "" : "ecrire/")."inc_connect.php3");
 
 function spip_query($query) {
-	if ($GLOBALS['flag_connect'] && !$GLOBALS['db_ok']) {
+	if ($GLOBALS['flag_connect']) {
 		include_ecrire("inc_connect.php3");
 		if (!$GLOBALS['db_ok'])
 			return;
