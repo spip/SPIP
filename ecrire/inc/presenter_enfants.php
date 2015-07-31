@@ -57,7 +57,7 @@ function enfant_rub($collection){
 			$lib_bouton = (!acces_restreint_rubrique($id_rubrique) ? "" :
 			   http_img_pack(chemin_image('auteur-0minirezo-16.png'), '', " width='16' height='16'", _T('image_administrer_rubrique'))) .
 			  " <span dir='$lang_dir'><a href='" .
-			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
+			  generer_url_entite($id_rubrique,'rubrique') .
 			  "'>".
 			  typo($titre) .
 			  "</a></span>";
@@ -98,7 +98,7 @@ function sous_enfant_rub($collection2){
 		changer_typo($row['lang']);
 		$lang_dir = lang_dir($row['lang']);
 		if (autoriser('voir','rubrique',$id_rubrique2))
-			$retour.="\n<li class='arial11 rubrique_12' dir='$lang_dir'><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'>".typo($titre2)."</a></li>\n";
+			$retour.="\n<li class='arial11 rubrique_12' dir='$lang_dir'><a href='" . generer_url_entite($id_rubrique2,'rubrique') . "'>".typo($titre2)."</a></li>\n";
 	}
 
 	if (!$retour) return '';

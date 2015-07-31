@@ -27,8 +27,8 @@ ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
 ecrire/action/reorganiser.php -text
 ecrire/action/session.php -text
-ecrire/action/supprimer.php -text
 ecrire/action/supprimer_lien.php -text
+ecrire/action/supprimer_rubrique.php -text
 ecrire/action/tester.php -text
 ecrire/action/tester_taille.php -text
 ecrire/auth/sha256.inc.php -text
@@ -767,6 +767,7 @@ prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
 prive/squelettes/contenu/rubrique.html -text
+prive/squelettes/contenu/rubrique_edit.html -text
 prive/squelettes/contenu/visiteurs.html -text
 prive/squelettes/extra/article.html -text
 prive/squelettes/extra/dist.html -text
@@ -799,6 +800,7 @@ prive/squelettes/navigation/configurer_preferences.html -text
 prive/squelettes/navigation/dist.html -text
 prive/squelettes/navigation/infos_perso.html -text
 prive/squelettes/navigation/rubrique.html -text
+prive/squelettes/navigation/rubrique_edit.html -text
 prive/squelettes/navigation/visiteurs.html -text
 prive/squelettes/objet.html -text
 prive/squelettes/page.html -text
