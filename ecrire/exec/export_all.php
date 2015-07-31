@@ -73,7 +73,12 @@ function exec_export_all_dist()
   global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive, $connect_login, $connect_toutes_rubriques;
 
 	if ($connect_toutes_rubriques) {
-		$dir = _DIR_DUMP;
+		$repertoire = _DIR_DUMP;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		$dir = $repertoire;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}

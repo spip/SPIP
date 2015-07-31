@@ -14,10 +14,3 @@ IMG/siteon*
 IMG/test_*
 ecrire/inc_connect.php3
 ecrire/inc_meta_cache.php3
-tmp/data/.htaccess
-tmp/data/.htpasswd
-tmp/data/.htpasswd-admin
-tmp/data/.index
-tmp/data/inc_meta_cache.php3
-tmp/data/session_*
-tmp/data/spip.log*
