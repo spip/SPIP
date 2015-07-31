@@ -67,7 +67,6 @@ ecrire/charsets/iso-8859-9.php -text
 ecrire/charsets/mathml.php -text
 ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
-ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/admin_plugin.php -text
@@ -231,6 +230,7 @@ ecrire/notifications/article_propose.html -text
 ecrire/notifications/article_publie.html -text
 ecrire/notifications/article_valide.html -text
 ecrire/notifications/instituerarticle.php -text
+ecrire/plugin.xml -text
 ecrire/plugins/afficher_liste.php -text
 ecrire/plugins/afficher_nom_plugin.php -text
 ecrire/plugins/afficher_plugin.php -text

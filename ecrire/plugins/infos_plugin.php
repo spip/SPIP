@@ -59,6 +59,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
+	$ret['procure'] = $arbre['procure'];
 
 	$ret['path'] = $arbre['path'];
 	if (isset($arbre['pipeline']))

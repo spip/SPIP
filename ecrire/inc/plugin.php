@@ -158,6 +158,7 @@ function plugin_valide_resume(&$liste, $plug, $infos, $dir)
  */
 // http://doc.spip.org/@liste_chemin_plugin_actifs
 function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
+	include_spip('plugins/installer');
 	$liste = liste_plugin_actifs();
 	foreach ($liste as $prefix=>$infos) {
 		if (defined($infos['dir_type']) 
