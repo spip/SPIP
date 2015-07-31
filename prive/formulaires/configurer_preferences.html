@@ -7,89 +7,101 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <ul>
+		<ul>
 	  	#SET{name,spip_ecran}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label><:label_taille_ecran:></label>[
-			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_etroit'[(#ENV{#GET{name}}|=={large}|non)checked="checked" ]value="etroit"
-				onchange="if (this.checked) jQuery('body').addClass('etroit').removeClass('large'); else jQuery('body').removeClass('etroit').addClass('large');"/>
-				<label for="[(#GET{name})]_etroit"><:info_petit_ecran:></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_large'[(#ENV{#GET{name}}|=={large}|oui)checked="checked" ]value="large"
-				onchange="if (this.checked) jQuery('body').addClass('large').removeClass('etroit'); else jQuery('body').removeClass('large').addClass('etroit');"/>
-				<label for="[(#GET{name})]_large"><:info_grand_ecran:></label>
-			</div>
-		</li>
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_etroit'[(#ENV{#GET{name}}|=={large}|non)checked="checked" ]value="etroit"
+					onchange="if (this.checked) jQuery('body').addClass('etroit').removeClass('large'); else jQuery('body').removeClass('etroit').addClass('large');"/>
+					<label for="[(#GET{name})]_etroit"><:info_petit_ecran:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_large'[(#ENV{#GET{name}}|=={large}|oui)checked="checked" ]value="large"
+					onchange="if (this.checked) jQuery('body').addClass('large').removeClass('etroit'); else jQuery('body').removeClass('large').addClass('etroit');"/>
+					<label for="[(#GET{name})]_large"><:info_grand_ecran:></label>
+				</div>
+			</li>
 	  	#SET{name,display_navigation}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label><:label_texte_et_icones_navigation:></label>[
-			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={navigation_sans_icone}|oui)checked="checked" ]value="navigation_sans_icone" 
-				onchange="if (this.checked) jQuery('body').addClass('navigation_sans_icone').removeClass('navigation_avec_icones'); else jQuery('body').removeClass('navigation_sans_icone').addClass('navigation_avec_icones');"/>
-				<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={navigation_sans_icone}|non)checked="checked" ]value="navigation_avec_icones"
-				onchange="if (!this.checked) jQuery('body').addClass('navigation_sans_icone').removeClass('navigation_avec_icones'); else jQuery('body').removeClass('navigation_sans_icone').addClass('navigation_avec_icones');"/>
-				<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
-			</div>
-		</li>
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={navigation_sans_icone}|oui)checked="checked" ]value="navigation_sans_icone"
+					onchange="if (this.checked) jQuery('body').addClass('navigation_sans_icone').removeClass('navigation_avec_icones'); else jQuery('body').removeClass('navigation_sans_icone').addClass('navigation_avec_icones');"/>
+					<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={navigation_sans_icone}|non)checked="checked" ]value="navigation_avec_icones"
+					onchange="if (!this.checked) jQuery('body').addClass('navigation_sans_icone').removeClass('navigation_avec_icones'); else jQuery('body').removeClass('navigation_sans_icone').addClass('navigation_avec_icones');"/>
+					<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
+				</div>
+			</li>
 	  	#SET{name,display}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label><:label_texte_et_icones_page:></label>[
-			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1" />
-				<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2" />
-				<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3" />
-				<label for="[(#GET{name})]_3"><:lien_afficher_icones_seuls:></label>
-			</div>
-		</li>
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1" />
+					<label for="[(#GET{name})]_1"><:lien_afficher_texte_seul:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2" />
+					<label for="[(#GET{name})]_2"><:lien_afficher_texte_icones:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3" />
+					<label for="[(#GET{name})]_3"><:lien_afficher_icones_seuls:></label>
+				</div>
+			</li>
 	  	#SET{name,couleur}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 	    	<label><:titre_changer_couleur_interface:></label>[
-			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1" 
-				onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{1})]').appendTo(jQuery('head'));" />
-				<label for="[(#GET{name})]_1"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{1})];" /></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2" 
-				onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{2})]').appendTo(jQuery('head'));" />
-				<label for="[(#GET{name})]_2"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 2" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{2})];" /></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3" 
-				onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{3})]').appendTo(jQuery('head'));" />
-				<label for="[(#GET{name})]_3"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 3" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{3})];" /></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_4'[(#ENV{#GET{name}}|=={4}|oui)checked="checked" ]value="4" 
-				onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{4})]').appendTo(jQuery('head'));" />
-				<label for="[(#GET{name})]_4"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 4" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{4})];" /></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_5'[(#ENV{#GET{name}}|=={5}|oui)checked="checked" ]value="5" 
-				onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{5})]').appendTo(jQuery('head'));" />
-				<label for="[(#GET{name})]_5"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 5" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{5})];" /></label>
-			</div>
-			<div class="choix">
-				<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_6'[(#ENV{#GET{name}}|=={6}|oui)checked="checked" ]value="6" 
-				onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{6})]').appendTo(jQuery('head'));" />
-				<label for="[(#GET{name})]_6"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 6" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{6})];" /></label>
-			</div>
-		</li>
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_1'[(#ENV{#GET{name}}|=={1}|oui)checked="checked" ]value="1"
+					onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{1})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_1"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 1" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{1})];" /></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_2'[(#ENV{#GET{name}}|=={2}|oui)checked="checked" ]value="2"
+					onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{2})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_2"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 2" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{2})];" /></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_3'[(#ENV{#GET{name}}|=={3}|oui)checked="checked" ]value="3"
+					onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{3})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_3"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 3" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{3})];" /></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_4'[(#ENV{#GET{name}}|=={4}|oui)checked="checked" ]value="4"
+					onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{4})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_4"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 4" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{4})];" /></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_5'[(#ENV{#GET{name}}|=={5}|oui)checked="checked" ]value="5"
+					onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{5})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_5"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 5" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{5})];" /></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='#GET{name}' id='[(#GET{name})]_6'[(#ENV{#GET{name}}|=={6}|oui)checked="checked" ]value="6"
+					onchange="if (this.checked) jQuery('head>link#cssprivee').clone().removeAttr('id').attr('href', '[(#ENV{couleurs_url}|table_valeur{6})]').appendTo(jQuery('head'));" />
+					<label for="[(#GET{name})]_6"><img src="#CHEMIN{rien.gif}" alt="<:choix_couleur_interface|attribut_html:> 6" width="16" height="16" style="background-color:[(#ENV{couleurs}|table_valeur{6})];" /></label>
+				</div>
+			</li>
+			<li class="editer_imessage">
+				<label><:info_liste_redacteurs_connectes:></label>
+				<p class='explication'><:texte_auteur_messagerie:></p>
+				<div class="choix">
+					<input type='radio' class='radio' name='imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' #GET{disable}/>
+					<label for='perso_activer_imessage_on'><:bouton_radio_apparaitre_liste_redacteurs_connectes:></label>
+				</div>
+				<div class="choix">
+					<input type='radio' class='radio' name='imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' #GET{disable}/>
+					<label for='perso_activer_imessage_off'><:bouton_radio_non_apparaitre_liste_redacteurs_connectes:></label>
+				</div>
+			</li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->

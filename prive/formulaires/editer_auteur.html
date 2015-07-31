@@ -115,32 +115,7 @@
 			</fieldset>
 		</li>
 
-		[(#REM)
-			Apparaitre connecte ?
-		]
-		#SET{disable,''}
-		[(#SESSION{id_auteur}|=={#ENV{id_auteur}}|non)
-			#SET{disable,disabled='disabled'}
-		]
-		<li class='editer_redacteurs_connectes fieldset'>
-			<fieldset>
-				<h3 class="legend"><:info_liste_redacteurs_connectes:></h3>
-				<p class='explication'><:texte_auteur_messagerie:></p>
-				<ul>
-					<li class="editer_imessage">
-						<div class="choix">
-							<input type='radio' class='radio' name='imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' #GET{disable}/>
-							<label for='perso_activer_imessage_on'><:bouton_radio_apparaitre_liste_redacteurs_connectes:></label>
-						</div>
-						<div class="choix">
-							<input type='radio' class='radio' name='imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' #GET{disable}/>
-							<label for='perso_activer_imessage_off'><:bouton_radio_non_apparaitre_liste_redacteurs_connectes:></label>
-						</div>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-	  </ul>
+		</ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
