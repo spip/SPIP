@@ -12,7 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
-include_spip('public/debug');
+
+// Script de validation XML selon une DTD
+// l'argument var_url peut indiquer un fichier ou un repertoire
+// l'argument ext peut valoir "php" ou "html"
+// Si "php", le script est execute et la page valide
+// Si "html", on suppose que c'est un squelette dont on devine les args
+// en cherchant les occurrences de Pile[0].
+// Exemples:
+// ecrire?exec=valider_xml&var_url=exec&ext=php pour tester l'espace prive
+// ecrire?exec=valider_xml&var_url=../squelettes-dist&ext=html pour le public
 
 // http://doc.spip.org/@exec_valider_xml_dist
 function exec_valider_xml_dist()
@@ -33,8 +42,8 @@ function valider_xml_ok($url, $req_ext)
 		$onfocus = "this.value='';";
 		$texte = $bandeau = $err = '';
 	} else {
-		include_spip('public/debug');
 		include_spip('inc/distant');
+
 		if (is_dir($url)) {
 			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";
 			$ext = (!$req_ext) ? 'php' : $req_ext;
@@ -145,7 +154,7 @@ function valider_script($transformer_xml, $f, $dir)
 // ne pas se controler soi-meme ni l'index du repertoire
 
 	$script = basename($f, '.php');
-	if ($script == $GLOBALS['exec'] OR $script=='index')
+	if ($script == _request('exec') OR $script=='index')
 		return array('/', 0, '', $script,''); 
 
 	$f = charger_fonction($script, $dir, true);
@@ -200,6 +209,8 @@ function valider_skel($transformer_xml, $file, $dir)
 	$composer = charger_fonction('composer', 'public');
 	list($skel_nom, $skel_code) = $composer($skel, 'html', 'html', $file);
 	spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
+	$url = '';
+	if (!$skel_nom) return array('/', '/', $file,''); 
 	$contexte = valider_contexte($skel_code, $file);
 	$page = $skel_nom(array('cache'=>''), array($contexte));
 	list($texte, $err) = $transformer_xml($page['texte']);
@@ -207,8 +218,8 @@ function valider_skel($transformer_xml, $file, $dir)
 	$script = basename($file,'.html');
 	// pas de validation solitaire pour les squelettes internes, a revoir.
 	if (substr_count($dir, '/') <= 1) {
-		$url = generer_url_public($script, $contexte);
-	} else 	$url = '';
+			$url = generer_url_public($script, $contexte);
+	}
 	return array(count($err), $res, $err, $script, $url);
 }
 
@@ -220,7 +231,7 @@ function valider_skel($transformer_xml, $file, $dir)
 // http://doc.spip.org/@valider_contexte
 function valider_contexte($code, $file)
 {
-	static $exceptions = array('action', 'browser_caret', 'doublons', 'lang');
+	static $exceptions = array('action', 'doublons', 'lang');
 	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]]/', $code, $r, PREG_SET_ORDER);
 	$args = array();
 
