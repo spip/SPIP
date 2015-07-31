@@ -220,7 +220,7 @@ function revisions_articles ($id_article, $new) {
 
 // http://doc.spip.org/@trop_longs_articles
 function trop_longs_articles() {
-	if (is_array($plus = _request('texte_plus')) {
+	if (is_array($plus = _request('texte_plus'))) {
 		foreach ($plus as $t) {
 			_request('texte', preg_replace(",<!--SPIP-->[\n\r]*,","", $t)
 				. _request('texte'));
