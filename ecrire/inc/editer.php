@@ -100,8 +100,9 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$row[$id_table_objet] = $id;
 
 	$contexte = $row;
-	if ($id_parent && (!isset($contexte['id_parent']) OR $new))
+	if (strlen($id_parent) && is_numeric($id_parent) && (!isset($contexte['id_parent']) OR $new))
 		$contexte['id_parent']=$id_parent;
+
 	if ($config_fonc)
 		$contexte['config'] = $config = $config_fonc($contexte);
 	$att_text = " class='textarea' "

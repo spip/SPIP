@@ -302,8 +302,13 @@ function trouver_rubrique_creer_objet($id_rubrique,$objet){
 			? ''
 			: (" AND ".sql_in('id_rubrique', $connect_id_rubrique));
 
-		$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', "id_rubrique DESC", 1);
-
+		// on tente d'abord l'ecriture a la racine dans le cas des rubriques uniquement
+		if ($objet == 'rubrique') {
+			$id_rubrique = 0;
+		} else {
+			$id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', "id_parent=0$in", '', "id_rubrique DESC", 1);
+		}
+		
 		if (!autoriser("creer{$objet}dans", 'rubrique', $id_rubrique)){
 			// manque de chance, la rubrique n'est pas autorisee, on cherche un des secteurs autorises
 			$res = sql_select("id_rubrique", "spip_rubriques", "id_parent=0");
