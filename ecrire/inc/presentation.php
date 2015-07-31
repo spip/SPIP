@@ -739,7 +739,7 @@ function forum_logo($statut)
 
 // http://doc.spip.org/@envoi_link
 function envoi_link($nom_site_spip, $minipres=false) {
-	global $auteur_session, $connect_toutes_rubriques, $spip_display, $spip_lang;
+	global $auteur_session, $spip_display, $spip_lang;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$paramcss = 'ltr='
@@ -784,8 +784,8 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. '<link rel="shortcut icon" href="'
 	. url_absolue(find_in_path('favicon.ico'))
 	. "\" />\n";
-	$js = debut_javascript($connect_toutes_rubriques,
-			($GLOBALS['meta']["activer_statistiques"] != 'non'));
+
+	$js = debut_javascript();
 
 	if ($spip_display == 4) return $res . $js;
 
@@ -807,11 +807,10 @@ function envoi_link($nom_site_spip, $minipres=false) {
 }
 
 // http://doc.spip.org/@debut_javascript
-function debut_javascript($admin, $stat)
+function debut_javascript()
 {
 	global $spip_lang_left, $browser_name, $browser_version;
 	include_spip('inc/charsets');
-
 
 	// tester les capacites JS :
 
@@ -838,7 +837,7 @@ function debut_javascript($admin, $stat)
 			: "jQuery.ajax({'url':'$testeur'});") .
 			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
 			"\nvar ajax_image_searching = \n'<div style=\"float: ".$GLOBALS['spip_lang_right'].";\"><img src=\"".url_absolue(_DIR_IMG_PACK."searching.gif")."\" alt=\"\" /></div>';" .
-			"\nvar stat = " . ($stat ? 1 : 0) .
+			"\nvar stat = " . (($GLOBALS['meta']["activer_statistiques"] != 'non') ? 1 : 0) .
 			"\nvar largeur_icone = " .
 			intval(_LARGEUR_ICONES_BANDEAU) .
 			"\nvar  bug_offsetwidth = " .

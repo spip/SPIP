@@ -137,13 +137,15 @@ AND isset($GLOBALS['meta']["import_all"])) {
 	if (isset($var_ajaxcharset)) exit;
 	$exec = 'import_all';
 }
+// si nom pas plausible, prendre le script par defaut
+elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 // Verification des plugins
 // (ne pas interrompre une restauration ou un upgrade)
 elseif ($exec!='upgrade'
 AND !$var_auth
-AND $GLOBALS['auteur_session']['statut']=='0minirezo'
 AND !_DIR_RESTREINT
+AND autoriser('configurer')
 AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
 AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
@@ -155,12 +157,8 @@ AND $l = @unserialize($l)) {
 	}
 }
 
-// si nom pas plausible, prendre le script par defaut
-if (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
-
-// Passer la main aux outils XML a la demande.
-if (isset($GLOBALS['transformer_xml'])
-AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
+// Passer la main aux outils XML a la demande (meme les redac s'ils veulent).
+if (isset($GLOBALS['transformer_xml'])) {
 	set_request('var_url', $exec);
 	$exec = $GLOBALS['transformer_xml'];
  }
