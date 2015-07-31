@@ -91,6 +91,9 @@ class Champ {
 //
 // Globales de description de la base
 
+//ces variabales ne sont pas initialisees par "$var = array()"
+// afin de permettre leur extension dans mes_options.php etc
+
 global $tables_des_serveurs_sql, $tables_principales; // (voir inc_serialbase)
 global $exceptions_des_tables, $table_des_tables;
 global $tables_relations,  $table_primary, $table_date;
@@ -98,139 +101,106 @@ global $tables_relations,  $table_primary, $table_date;
 $tables_des_serveurs_sql = array('localhost' => &$tables_principales);
 	
 
-	// champ principal des tables SQL
-	$table_primary = array(
-		'articles' => "id_article",
-		'auteurs' => "id_auteur",
-		'breves' => "id_breve",
-		'documents' => "id_document",
-		'forums' => "id_forum",
-		'groupes_mots' => "id_groupe",
-		'hierarchie' => "id_rubrique",
-		'mots' => "id_mot",
-		'rubriques' => "id_rubrique",
-		'signatures' => "id_signature",
-		'syndication' => "id_syndic",
-		'syndic_articles' => "id_syndic_article",
-		'types_documents' => "id_type"
-	);
-	
-	# cf. fonction table_objet dans inc_version
-	$table_des_tables = array(
-		'articles' => 'articles',
-		'auteurs' => 'auteurs',
-		'breves' => 'breves',
-		'forums' => 'forum',
-		'signatures' => 'signatures',
-		'documents' => 'documents',
-		'types_documents' => 'types_documents',
-		'mots' => 'mots',
-		'groupes_mots' => 'groupes_mots',
-		'rubriques' => 'rubriques',
-		'syndication' => 'syndic',
-		'syndic_articles' => 'syndic_articles',
-		'hierarchie' => 'rubriques'
-	);
-	
-	$exceptions_des_tables = array(
-		'breves' => array(
-			'id_secteur' => 'id_rubrique',
-			'date' => 'date_heure',
-			'nom_site' => 'lien_titre',
-			'url_site' => 'lien_url'
-			),
-		'forums' => array(
-			'date' => 'date_heure',
-			'nom' => 'auteur',
-			'email' => 'email_auteur'
-			),
-		'signatures' => array(
-			'date' => 'date_time',
-			'nom' => 'nom_email',
-			'email' => 'ad_email'
-		),
-		'documents' => array(
-			'type_document' => array('types_documents', 'titre'),
-			'extension_document' => array('types_documents', 'extension')
-		),
-		'syndic_articles' => array(
-			'url_article' => 'url',		  # ne sert pas ? cf balise_URL_ARTICLE
-			'lesauteurs' => 'lesauteurs', # ne sert pas ? cf balise_LESAUTEURS
-			'url_site' => array('syndic', 'url_site'),
-			'nom_site' => array('syndic', 'nom_site')
-		)
-	);
-	
-	$table_date = array (
-		'articles' => 'date',
-		'auteurs' =>  'date',
-		'breves' =>  'date_heure',
-		'forums' =>  'date_heure',
-		'signatures' => 'date_time',
-		'documents' => 'date',
-		'types_documents' => 'date',
-		'groupes_mots' => 'date',
-		'mots' => 'date',
-		'rubriques' => 'date',
-		'syndication' => 'date',
-		'syndic_articles' => 'date'
-	);
+ // champ principal des tables SQL
+$table_primary['articles']="id_article";
+$table_primary['auteurs']="id_auteur";
+$table_primary['breves']="id_breve";
+$table_primary['documents']="id_document";
+$table_primary['forums']="id_forum";
+$table_primary['groupes_mots']="id_groupe";
+$table_primary['hierarchie']="id_rubrique";
+$table_primary['mots']="id_mot";
+$table_primary['rubriques']="id_rubrique";
+$table_primary['signatures']="id_signature";
+$table_primary['syndication']="id_syndic";
+$table_primary['syndic_articles']="id_syndic_article";
+$table_primary['types_documents']="id_type";
 
+ # cf. fonction table_objet dans inc_version
+$table_des_tables['articles']='articles';
+$table_des_tables['auteurs']='auteurs';
+$table_des_tables['breves']='breves';
+$table_des_tables['forums']='forum';
+$table_des_tables['signatures']='signatures';
+$table_des_tables['documents']='documents';
+$table_des_tables['types_documents']='types_documents';
+$table_des_tables['mots']='mots';
+$table_des_tables['groupes_mots']='groupes_mots';
+$table_des_tables['rubriques']='rubriques';
+$table_des_tables['syndication']='syndic';
+$table_des_tables['syndic_articles']='syndic_articles';
+$table_des_tables['hierarchie']='rubriques';
+
+$exceptions_des_tables['breves']['id_secteur']='id_rubrique';
+$exceptions_des_tables['breves']['date']='date_heure';
+$exceptions_des_tables['breves']['nom_site']='lien_titre';
+$exceptions_des_tables['breves']['url_site']='lien_url';
+
+$exceptions_des_tables['forums']['date']='date_heure';
+$exceptions_des_tables['forums']['nom']='auteur';
+$exceptions_des_tables['forums']['email']='email_auteur';
+
+$exceptions_des_tables['signatures']['date']='date_time';
+$exceptions_des_tables['signatures']['nom']='nom_email';
+$exceptions_des_tables['signatures']['email']='ad_email';
+
+$exceptions_des_tables['documents']['type_document']=array('types_documents'
+, 'titre');
+$exceptions_des_tables['documents']['extension_document']=array('types_docum
+ents', 'extension');
+
+# ne sert plus ? verifier balise_URL_ARTICLE
+$exceptions_des_tables['syndic_articles']['url_article']='url';
+# ne sert plus ? verifier balise_LESAUTEURS
+$exceptions_des_tables['syndic_articles']['lesauteurs']='lesauteurs'; 
+$exceptions_des_tables['syndic_articles']['url_site']=array('syndic',
+'url_site');
+$exceptions_des_tables['syndic_articles']['nom_site']=array('syndic',
+'nom_site');
+
+$table_date['articles']='date';
+$table_date['auteurs']='date';
+$table_date['breves']='date_heure';
+$table_date['forums']='date_heure';
+$table_date['signatures']='date_time';
+$table_date['documents']='date';
+$table_date['types_documents']='date';
+$table_date['groupes_mots']='date';
+$table_date['mots']='date';
+$table_date['rubriques']='date';
+$table_date['syndication']='date';
+$table_date['syndic_articles']='date';
 
 //
 // tableau des tables de relations,
 // Ex: gestion du critere {id_mot} dans la boucle(ARTICLES)
 //
+$tables_relations['articles']['id_mot']='mots_articles';
+$tables_relations['articles']['id_auteur']='auteurs_articles';
+$tables_relations['articles']['id_document']='documents_articles';
 
-$tables_relations = array(
-	'articles' => array (
-		'id_mot' => 'mots_articles',
-		'id_auteur' => 'auteurs_articles',
-		'id_document' => 'documents_articles'
-		),
+$tables_relations['auteurs']['id_article']='auteurs_articles';
 
-	'auteurs' => array (
-		'id_article' => 'auteurs_articles'
-		),
+$tables_relations['breves']['id_mot']='mots_breves';
+$tables_relations['breves']['id_document']='documents_breves';
 
-	'breves' => array (
-		'id_mot' => 'mots_breves',
-		'id_document' => 'documents_breves'
-		),
+$tables_relations['documents']['id_article']='documents_articles';
+$tables_relations['documents']['id_rubrique']='documents_rubriques';
+$tables_relations['documents']['id_breve']='documents_breves';
 
-	'documents' => array (
-		'id_article' => 'documents_articles',
-		'id_rubrique' => 'documents_rubriques',
-		'id_breve' => 'documents_breves',
-		'id_mot' => 'mots_documents',
-		'id_syndic' => 'documents_syndic',
-		'id_syndic_article' => 'documents_syndic'
-		),
+$tables_relations['forums']['id_mot']='mots_forum';
 
-	'forums' => array (
-		'id_mot' => 'mots_forum',
-		),
+$tables_relations['mots']['id_article']='mots_articles';
+$tables_relations['mots']['id_breve']='mots_breves';
+$tables_relations['mots']['id_forum']='mots_forum';
+$tables_relations['mots']['id_rubrique']='mots_rubriques';
+$tables_relations['mots']['id_syndic']='mots_syndic';
 
-	'mots' => array (
-		'id_article' => 'mots_articles',
-		'id_breve' => 'mots_breves',
-		'id_forum' => 'mots_forum',
-		'id_rubrique' => 'mots_rubriques',
-		'id_syndic' => 'mots_syndic',
-		'id_document' => 'mots_documents'
-		),
+$tables_relations['groupes_mots']['id_groupe']='mots';
 
-	'groupes_mots' => array (
-		'id_groupe' => 'mots'
-		),
+$tables_relations['rubriques']['id_mot']='mots_rubriques';
+$tables_relations['rubriques']['id_document']='documents_rubriques';
 
-	'rubriques' => array (
-		'id_mot' => 'mots_rubriques',
-		'id_document' => 'documents_rubriques'
-		),
+$tables_relations['syndication']['id_mot']='mots_syndic';
 
-	'syndication' => array (
-		'id_mot' => 'mots_syndic'
-		)
-	);
 ?>
