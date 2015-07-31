@@ -32,7 +32,7 @@ function chercher_module_lang($module, $lang = '') {
 function charger_langue($lang, $module = 'spip') {
 	if ($lang AND $fichier_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
-		include_once($fichier_lang);
+		include($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// la langue par defaut du site -- et au pire sur le francais, qui
