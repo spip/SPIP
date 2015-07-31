@@ -186,6 +186,12 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	else {
 		// sinon, inclure_balise_dynamique nous enverra peut-etre
 		// quelques en-tetes de plus (voire qq envoyes directement)
+
+		// restaurer l'etat des notes
+		if (isset($page['notes']) AND $page['notes']){
+			$notes = charger_fonction("notes","inc");
+			$notes($page['notes'],'restaurer_etat');
+		}
 		ob_start(); 
 		xml_hack($page, true);
 		$res = eval('?' . '>' . $page['texte']);

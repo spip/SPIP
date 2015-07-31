@@ -25,11 +25,8 @@ function assembler($fond, $connect='') {
 	global $flag_preserver,$lastmodified, $use_cache, $contexte;
 
 	$contexte = calculer_contexte();
-
-	$page = $fond .
-		preg_replace(',\.[a-zA-Z0-9]*$,', '', 
-		preg_replace('/[?].*$/', '', $GLOBALS['REQUEST_URI']));
-
+	$page = array('contexte_implicite'=>calculer_contexte_implicite());
+	$page['contexte_implicite']['cache'] = $fond . preg_replace(',\.[a-zA-Z0-9]*$,', '', preg_replace('/[?].*$/', '', $GLOBALS['REQUEST_URI']));
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
 	// Les quatre derniers parametres sont modifies par la fonction:
@@ -201,6 +198,26 @@ function calculer_contexte() {
 	return $contexte;
 }
 
+/**
+ * Calculer le contexte implicite, qui n'apparait pas dans le ENV d'un cache
+ * mais est utilise pour distinguer deux caches differents
+ *
+ * @staticvar string $notes
+ * @return array
+ */
+function calculer_contexte_implicite(){
+	static $notes = null;
+	if (is_null($notes))
+		$notes = charger_fonction('notes','inc');
+	$contexte_implicite = array(
+		'squelettes' => $GLOBALS['dossier_squelettes'],
+		'host' => $_SERVER['HTTP_HOST'],
+		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
+		'notes' => $notes('','contexter_cache'),
+	);
+	return $contexte_implicite;
+}
+
 //
 // fonction pour compatibilite arriere, probablement superflue
 //
@@ -224,15 +241,18 @@ function inclure_page($fond, $contexte, $connect='') {
 	// dans les sous inclusions -> boucle infinie d'inclusion identique
 	// (cette precaution n'est probablement plus utile)
 	unset($contexte['fond']);
-	$page = $fond; 
+	$page = array('contexte_implicite'=>calculer_contexte_implicite());
+	$page['contexte_implicite']['cache'] = $fond;
 	$cacher = charger_fonction('cacher', 'public');
 	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
 	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
+	// $res = message d'erreur : on sort de la
 	if ($res) {return array('texte' => $res);}
 
 	// Si use_cache ne vaut pas 0, la page doit etre calculee
 	// produire la page : peut mettre a jour $lastinclude
+	// le contexte_cache envoye a cacher() a ete conserve et est passe a produire
 	if ($use_cache) {
 		$produire_page = charger_fonction('produire_page','public');
 		$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, $contexte, $page, $lastinclude, $connect);
@@ -258,6 +278,7 @@ function inclure_page($fond, $contexte, $connect='') {
  * @return array
  */
 function public_produire_page_dist($fond, $contexte, $use_cache, $chemin_cache, $contexte_cache, &$page, &$lastinclude, $connect=''){
+	#var_dump($page);
 	$parametrer = charger_fonction('parametrer', 'public');
 	$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 	// et on l'enregistre sur le disque
@@ -569,6 +590,12 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 	if (!$page) return $page;
 
 	if ($page['process_ins'] != 'html') {
+		// restaurer l'etat des notes
+		if (isset($page['notes']) AND $page['notes']){
+			$notes = charger_fonction("notes","inc");
+			$notes($page['notes'],'restaurer_etat');
+		}
+
 		ob_start();
 		xml_hack($page, true);
 		eval('?' . '>' . $page['texte']);

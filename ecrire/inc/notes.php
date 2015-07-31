@@ -24,42 +24,64 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // en particulier, envoyer un tableau vide permet de tout recuperer
 // C'est stocke dans la globale $les_notes, mais pas besoin de le savoir
 
-function inc_notes_dist($arg)
+function inc_notes_dist($arg,$operation='traiter')
 {
 	static $pile = array();
 	static $next_marqueur = 1;
 	static $marqueur = 1;
 	global $les_notes, $compt_note, $notes_vues;
-	if (is_string($arg)) return traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
-	elseif (is_array($arg)) return traiter_les_notes($arg);
-	elseif ($arg === true) {
-		#var_dump(">$compt_note:$marqueur");
-		if ($compt_note==0)
-			// si le marqueur n'a pas encore ete utilise, on le recycle dans la pile courante
-			array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,0));
-		else {
-			// sinon on le stocke au chaud, et on en cree un nouveau
-			array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,$marqueur));
-			$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
-			$marqueur = $next_marqueur; // et on le prend comme marqueur courant
-		}
-		$les_notes = '';
-		$compt_note = 0;
-	} elseif ($arg === false) {
-		#$prev_notes = $les_notes;
-		if (strlen($les_notes)) spip_log("notes perdues");
-		// si le marqueur n'a pas servi, le liberer
-		if (!strlen($les_notes) AND $marqueur==$next_marqueur)
-			$next_marqueur--;
-		// on redepile tout suite a une fin d'inclusion ou d'un affichage des notes
-		list($les_notes, $compt_note, $notes_vues, $marqueur) = array_pop($pile);
-		#$les_notes .= $prev_notes;
-		#var_dump("<$compt_note:$marqueur");
-		// si pas de marqueur attribue, on le fait
-		if (!$marqueur){
-			$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
-			$marqueur = $next_marqueur; // et on le prend comme marqueur courant
-		}
+	switch ($operation){
+		case 'traiter':
+			if (is_array($arg)) return traiter_les_notes($arg);
+			else
+				return traiter_raccourci_notes($arg, $marqueur>1?$marqueur:'');
+			break;
+		case 'empiler':
+			#var_dump(">$compt_note:$marqueur");
+			if ($compt_note==0)
+				// si le marqueur n'a pas encore ete utilise, on le recycle dans la pile courante
+				array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,0));
+			else {
+				// sinon on le stocke au chaud, et on en cree un nouveau
+				array_push($pile, array(@$les_notes, @$compt_note, $notes_vues,$marqueur));
+				$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
+				$marqueur = $next_marqueur; // et on le prend comme marqueur courant
+			}
+			$les_notes = '';
+			$compt_note = 0;
+			break;
+		case 'depiler':
+			#$prev_notes = $les_notes;
+			if (strlen($les_notes)) spip_log("notes perdues");
+			// si le marqueur n'a pas servi, le liberer
+			if (!strlen($les_notes) AND $marqueur==$next_marqueur)
+				$next_marqueur--;
+			// on redepile tout suite a une fin d'inclusion ou d'un affichage des notes
+			list($les_notes, $compt_note, $notes_vues, $marqueur) = array_pop($pile);
+			#$les_notes .= $prev_notes;
+			#var_dump("<$compt_note:$marqueur");
+			// si pas de marqueur attribue, on le fait
+			if (!$marqueur){
+				$next_marqueur++; // chaque fois qu'on rempile on incremente le marqueur general
+				$marqueur = $next_marqueur; // et on le prend comme marqueur courant
+			}
+			break;
+		case 'sauver_etat':
+			if ($compt_note OR $marqueur>1 OR $next_marqueur>1)
+				return array($les_notes, $compt_note, $notes_vues, $marqueur,$next_marqueur);
+			else
+				return ''; // rien a sauver
+			break;
+		case 'restaurer_etat':
+			if ($arg AND is_array($arg)) // si qqchose a restaurer
+				list($les_notes, $compt_note, $notes_vues, $marqueur,$next_marqueur) = $arg;
+			break;
+		case 'contexter_cache':
+			if ($compt_note OR $marqueur>1 OR $next_marqueur>1)
+				return array("$compt_note:$marqueur:$next_marqueur");
+			else
+				return '';
+			break;
 	}
 }
 
