@@ -15,10 +15,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres');
 
 // http://doc.spip.org/@action_editer_message_dist
-function action_editer_message_dist() {
+function action_editer_message_dist($arg=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	if (preg_match(',^(\d+)$,', $arg, $r))
 		action_editer_message_post_vieux($arg); 

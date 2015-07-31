@@ -13,9 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_editer_auteur_dist
-function action_editer_auteur_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_editer_auteur_dist($arg=null) {
+
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 
 	// si id_auteur n'est pas un nombre, c'est une creation
