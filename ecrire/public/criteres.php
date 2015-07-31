@@ -60,20 +60,29 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$primary = $boucle->primary;
+	$type = $boucle->type_requete;
+	// Dans le cas NOT, la table du doublon peut etre indiquee
+	// si la table courante a un champ homonyme de sa cle primaire.
+	// Tres utile pour la table des forums.
+	if (isset($crit->param[1])) {
+	  $primary = '';
+	  $x = !$crit->not ? '' : calculer_liste($crit->param[1], array(), $boucles, $boucle->id_parent);
+	  # attention au commentaire "// x signes" qui precede
+	  if (preg_match(",^(?:\s*//[^\n]*\n)?'([^']+)'*$,ms", $x, $m))  {
+	    $x = id_table_objet($type = $m[1]);
+	    if (isset($boucle->show['field'][$x]))
+	      $primary = $x; // sinon erreur declenchee ci-dessous
+	  }
+	}
 
 	if (!$primary OR strpos($primary,',')) {
 		return (array('zbug_doublon_sur_table_sans_cle_primaire'));
 	}
-
 	$not = ($crit->not ? '' : 'NOT');
-
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
 
-	$nom = "'" .
-	  $boucle->type_requete . 
-	  "'" .
-	  ($nom == "''" ? '' : " . $nom");
+	$nom = "'" . $type .  "'" .  ($nom == "''" ? '' : " . $nom");
 
 	$debutdoub = '$doublons['
 	.  (!$not ? '' : ($boucle->doublons . "[]= "));
@@ -92,9 +101,6 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 		}
 	}
 	$boucle->where[]= array($suitin . $findoub . ", '" . $not . "')");
-
-
-
 
 # la ligne suivante avait l'intention d'eviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
