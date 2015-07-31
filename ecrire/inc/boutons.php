@@ -108,7 +108,8 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	$nombre_articles = sql_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur =".$GLOBALS['connect_id_auteur']." AND art.id_article = lien.id_article");
+	$nombre_articles = sql_fetsel('id_article', 'spip_auteurs_articles', "id_auteur=".$GLOBALS['connect_id_auteur']);
+
 	if ($nombre_articles > 0) {
 		$sousmenu['articles_page']=
 		  new Bouton('article-24.gif', 'icone_tous_articles');
