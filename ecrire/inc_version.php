@@ -289,12 +289,8 @@ $liste_des_forums = array(
 // Droits d'acces maximum par defaut
 @umask(0);
 
-// Version courante de SPIP
-// Stockee sous forme de nombre decimal afin de faciliter les comparaisons
-// (utilise pour les modifs de la base de donnees)
-
-// version de la base
-$spip_version = 1.958;
+// version de la base (= numero SVN de sa derniere modif)
+$spip_version = 10990;
 
 // version de l'interface a la base
 $spip_sql_version = 1;

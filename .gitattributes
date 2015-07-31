@@ -710,6 +710,7 @@ ecrire/lib/safehtml/index.php -text
 ecrire/lib/safehtml/license.txt -text
 ecrire/lib/safehtml/readme-SPIP.txt -text
 ecrire/lib/safehtml/readme.txt -text
+ecrire/maj/svn10000.php -text
 ecrire/maj/v009.php -text
 ecrire/maj/v010.php -text
 ecrire/maj/v011.php -text

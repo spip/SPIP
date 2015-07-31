@@ -59,21 +59,35 @@ function maj_base($version_cible = 0) {
 		return;
 	}
 	if (!upgrade_test()) return;
-	
-	$n = floor($version_installee * 10);
-	$cible = ($version_cible ? $version_cible : $spip_version) * 10;
-	while ($n < $cible) {
-		$nom  = sprintf("v%03d",$n);
-		$f = charger_fonction($nom, 'maj', true);
-		if ($f) {
-			spip_log("$f repercute les modifications de la version " . ($n/10));
-			$f($version_installee, $spip_version);
-		} else spip_log("pas de fonction pour la maj $n $nom");
-		$n++;
+
+	$cible = ($version_cible ? $version_cible : $spip_version);
+
+	if ($version_installee <= 1.926) {
+		$n = floor($version_installee * 10);
+		while ($n < 19) {
+			$nom  = sprintf("v%03d",$n);
+			$f = charger_fonction($nom, 'maj', true);
+			if ($f) {
+				spip_log("$f repercute les modifications de la version " . ($n/10));
+				$f($version_installee, $spip_version);
+			} else spip_log("pas de fonction pour la maj $n $nom");
+			$n++;
+		}
+		include_spip('maj/v019_pre193');
+		v019_pre193($version_installee, $version_cible);
 	}
+	if ($version_installee < 2) {
+		$version_installee = $version_installee*1000;
+		include_spip('maj/v019');
+	}
+	if ($cible < 2)
+		$cible = $cible*1000;
+
+	maj_while($version_installee, $cible);
 }
 
-// A partir des > 1.926 (i.e SPIP > 1.9.2), le while ci-dessus aboutit ici.
+
+// A partir des > 1.926 (i.e SPIP > 1.9.2), cette fonction gere les MAJ.
 // Se relancer soi-meme pour eviter l'interruption pendant une operation SQL
 // (qu'on espere pas trop longue chacune)
 // evidemment en ecrivant dans la meta a quel numero on en est.
@@ -81,24 +95,21 @@ function maj_base($version_cible = 0) {
 define('_UPGRADE_TIME_OUT', 20);
 
 // http://doc.spip.org/@maj_while
-function maj_while($version_installee, $version_cible)
+function maj_while($installee, $cible)
 {
-	$pref = floor($version_installee);
-	$cible = substr($version_cible*1000,-3);
-	$installee = substr($version_installee*1000,-3);
-	$time = time();
-	$n = 0;
+	include_spip('maj/svn10000');
 
-	$chgt = $GLOBALS['maj'][$pref];
+	$n = 0;
+	$time = time();
+
 	while ($installee < $cible) {
 		$installee++;
-		$version = ($pref . '.' . $installee);
-		if (isset($chgt[$installee])) {
-			serie_alter($installee, $chgt[$installee]);
+		if (isset($GLOBALS['maj'][$installee])) {
+			serie_alter($installee, $GLOBALS['maj'][$installee]);
 			$n = time() - $time;
-			spip_log("MAJ de $version_installee a $version en $n secondes",'maj');
-		} else spip_log("MAJ $version: rien pour SQL", 'maj');
-		ecrire_meta('version_installee', $version,'non');
+			spip_log("MAJ vers $installee en $n secondes",'maj');
+		} // rien pour SQL
+		ecrire_meta('version_installee', $installee,'non');
 		if ($n >= _UPGRADE_TIME_OUT) {
 			redirige_par_entete(generer_url_ecrire('upgrade', "reinstall=$installee", true));
 		}
@@ -140,6 +151,14 @@ function convertir_un_champ_blob_en_text($table,$champ,$type){
 			sql_alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
 		}
 	}
+}
+
+// La fonction a appeler dans le tableau global $maj 
+// quand on rajoute des types MIME. cf par exemple la 1.953
+
+function upgrade_types_documents() {
+	include_spip('base/create');
+	creer_base_types_doc();
 }
 
 // http://doc.spip.org/@upgrade_test
