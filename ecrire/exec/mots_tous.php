@@ -120,31 +120,32 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	//
 	// Afficher les mots-cles du groupe
 	//
-	$supprimer_groupe = afficher_groupe_mots($id_groupe);
 
-	echo "<div id='editer_mot-$id_groupe' style='position: relative;'>";
+	$groupe = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
+	$groupe = $groupe['n'];
+
+	echo "<div\nid='editer_mot-$id_groupe' style='position: relative;'>";
 
 	// Preliminaire: confirmation de suppression d'un mot lie à qqch
 	// (cf fin de afficher_groupe_mots_boucle executee a l'appel precedent)
 	if ($conf_mot  AND $son_groupe==$id_groupe)
-		echo confirmer_mot($conf_mot, $id_groupe);
+		echo confirmer_mot($conf_mot, $id_groupe, $groupe);
 
-	echo $supprimer_groupe;
+	if ($groupe) echo afficher_groupe_mots($id_groupe, $groupe);
 
 	echo "</div>";
 
-	if (acces_mots() AND !$conf_mot){
+	if (acces_mots()){
 		echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		echo "<tr>";
 		echo "<td>";
 		icone(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
 		echo "</td>";
-		if (!$supprimer_groupe) {
-			echo "<td>";
-			icone(_T('icone_supprimer_groupe_mots'), generer_url_ecrire("mots_tous","supp_group=$id_groupe"), "groupe-mot-24.gif", "supprimer.gif");
-			echo "</td>";
-			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
-		}
+		echo "\n<td id=editer_mot-$id_groupe-supprimer",
+		  (!$groupe ? '' : " style='visibility: hidden'"),
+		  ">";
+		icone(_T('icone_supprimer_groupe_mots'), generer_url_ecrire("mots_tous","supp_group=$id_groupe"), "groupe-mot-24.gif", "supprimer.gif");
+		echo "</td>";
 		echo "<td>";
 		echo "<div align='$spip_lang_right'>";
 		icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')), "mot-cle-24.gif", "creer.gif");
@@ -164,29 +165,31 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 fin_page();
 }
 
-function confirmer_mot ($conf_mot, $son_groupe)
+function confirmer_mot ($conf_mot, $son_groupe, $total)
 {
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_mots WHERE id_mot=$conf_mot"));
+	if (!$row) return ""; // deja detruit (acces concurrent etc)
+
 	$id_mot = $row['id_mot'];
 	$titre_mot = typo($row['titre']);
 	$type_mot = typo($row['type']);
 
-	if (($na = intval($na)) == 1) {
+	if (($na = intval(_request('na'))) == 1) {
 		$texte_lie = _T('info_un_article')." ";
 	} else if ($na > 1) {
 		$texte_lie = _T('info_nombre_articles', array('nb_articles' => $na)) ." ";
 	}
-	if (($nb = intval($nb)) == 1) {
+	if (($nb = intval(_request('nb'))) == 1) {
 		$texte_lie .= _T('info_une_breve')." ";
 	} else if ($nb > 1) {
 		$texte_lie .= _T('info_nombre_breves', array('nb_breves' => $nb))." ";
 	}
-	if (($ns = intval($ns)) == 1) {
+	if (($ns = intval(_request('ns'))) == 1) {
 		$texte_lie .= _T('info_un_site')." ";
 	} else if ($ns > 1) {
 		$texte_lie .= _T('info_nombre_sites', array('nb_sites' => $ns))." ";
 	}
-	if (($nr = intval($nr)) == 1) {
+	if (($nr = intval(_request('nr'))) == 1) {
 		$texte_lie .= _T('info_une_rubrique')." ";
 	} else if ($nr > 1) {
 		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nr))." ";
@@ -195,10 +198,11 @@ function confirmer_mot ($conf_mot, $son_groupe)
 	return debut_boite_info(true)
 	. "<div class='serif'>"
 	. _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie))
-	. "<p>"
-	  . ajax_action_auteur('editer_mot', "$son_groupe,$id_mot,,,",'grouper_mots', "&id_groupe=$son_groupe", array("<b>" . _T('item_oui') . "</b>", ''))
-	. '&nbsp;'
+	. "<p style='text-align: right'>"
+	. generer_supprimer_mot($id_mot, $son_groupe, ("<b>" . _T('item_oui') . "</b>"), $total)
+	. "<br />\n"
 	.  _T('info_oui_suppression_mot_cle')
+	. '</p>'
 	  /* troublant. A refaire avec une visibility
 	 . "<LI><B><A href='" 
 	. generer_url_ecrire("mots_tous")
@@ -209,7 +213,6 @@ function confirmer_mot ($conf_mot, $son_groupe)
 	. _T('info_non_suppression_mot_cle')
 	. "</UL>" */
 	. "</div>"
-	. fin_boite_info(true)
-	. "<br />";
+	. fin_boite_info(true);
 }
 ?>

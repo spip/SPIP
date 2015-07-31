@@ -112,7 +112,7 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
 
 // http://doc.spip.org/@ajax_action_auteur
-function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='')
+function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 {
 	$ancre = "$action-" . intval($id);
 
@@ -133,12 +133,14 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 		// Methode Ajax
 		else {
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
-				return redirige_action_auteur($action,
+			return redirige_action_auteur($action,
 				$id,
 				$action,
 				"script=$script$args_ajax&var_ajaxcharset=utf-8",
 				$corps,
-				" method='post'\nonsubmit='return AjaxSqueeze(this, \"$ancre\")'");
+				(" method='post'\nonsubmit="
+				 . declencheur_ajax('this', $ancre, $fct_ajax)));
+				 
 		}
 	}
 
@@ -153,14 +155,28 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			false);
 
 		if ($args AND !$args_ajax) $args_ajax = "&$args";
+
 		$ajax = redirige_action_auteur($action,
 			$id,
 			$action,
 			"script=$script$args_ajax&var_ajaxcharset=utf-8");
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
-		return "<a href='$href'\nonclick='return AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
+		return "<a href='$href'\nonclick="
+		.  declencheur_ajax("\"$ajax\"", $ancre, $fct_ajax)
+		. ">$clic</a>";
 	}
+}
+
+function declencheur_ajax($request, $noeud, $fct_ajax)
+{
+	return "'return AjaxSqueeze("
+	. $request
+	. ',"'
+	. $noeud
+	. '"'
+	. (!$fct_ajax ? '' : ",$fct_ajax")
+	. ")'";
 }
 
 // http://doc.spip.org/@determine_upload
