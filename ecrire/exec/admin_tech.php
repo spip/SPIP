@@ -46,7 +46,15 @@ function exec_admin_tech_dist()
 		$dir_dump = $repertoire;
 	} else {
 		debut_gauche();
-		$dir_dump = _DIR_TRANSFERT . $connect_login . '/';
+		$repertoire = _DIR_TRANSFERT;
+		if(!@file_exists($repertoire)) {
+			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
+			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+		}
+		if(!@file_exists($repertoire.$connect_login)) {
+			$sous_rep = sous_repertoire($repertoire, $connect_login);
+		}
+		$dir_dump = $sous_rep . '/';
 	}
 	include_spip('exec/export_all');
 	$file = joli_repertoire($dir_dump . export_nom_fichier_dump($dir_dump,false));
