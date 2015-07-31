@@ -55,6 +55,7 @@ function filtre_text_csv_dist($t)
 
 // Incrustation de HTML, si on est capable de le securiser
 // sinon, afficher le source
+// http://doc.spip.org/@filtre_text_html_dist
 function filtre_text_html_dist($t)
 {
 	if (!preg_match(',<head>(.*?)</head>.*<body[^>]*>(.*)</body>,is', $t, $r))
