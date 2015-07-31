@@ -1,0 +1,75 @@
+SPIP 3.0.0 -> SPIP 3.0.2 (12 juin 2012)
+---------------------------------------
+r19429 | cedric    | (sam. 19 mai 2012) | Eviter une réentrance infinie lors de l'upgrade depuis une SPIP 2.x qui n'a pas de table spip_jobs
+r19430 | cedric    | (dim. 20 mai 2012) | on complète r19429 en évitant de lancer les crons qui sont tous insérés d'un coup sur le premier hit lors de l'upgrade
+r19431 | cedric    | (dim. 20 mai 2012) | Ferme #2716 : ne pas appeller mysql_free sur un booleen lorsque la requete precedente a échoué
+r19436 | cedric    | (dim. 20 mai 2012) | Version 3.0.1
+r19438 | cedric    | (dim. 20 mai 2012) | masquer les erreurs sql sur la page des mises a jour, car proviennent justement de la base pas a jour !
+r19439 | cedric    | (dim. 20 mai 2012) | error_get_last n'est disponible qu'a partir de PHP 5.2.0 et on veut assurer le support de PHP 5.1.0
+r19440 | cedric    | (dim. 20 mai 2012) | error_get_last n'est disponible qu'a partir de PHP 5.2.0 et on veut assurer le support de PHP 5.1.0
+r19442 | cedric    | (dim. 20 mai 2012) | Eviter un warning lors de la connexion sur un serveur externe qui n'a pas de table spip_meta (dump sqlite par exemple) (cyaltern)
+r19443 | gilles    | (dim. 20 mai 2012) | Si PHP n'est pas dans la bonne version, est est inutile de tenter une installation de SPIP 3.0
+r19444 | gilles    | (dim. 20 mai 2012) | report de r19443 dans la branche de dev - et formatage
+r19456 | gilles    | (mar. 22 mai 2012) | Notice: Use of undefined constant intval - assumed 'intval' (PatV)
+r19457 | gilles    | (mar. 22 mai 2012) | Use of undefined constant _VAR_MODE - assumed '_VAR_MODE' (PatV)
+r19462 | cedric    | (jeu. 24 mai 2012) | Report de r19461 : gestion des erreurs de recuperation lors de copie_locale pour eviter le stockage de fichiers corrompus et inutilisables"
+r19464 | denisb    | (jeu. 24 mai 2012) | inc/chercher_rubrique.php : résout #2731 ; suppression de la ligne blanche qui affectait d'office la sous-rubrique à la racine
+r19465 | denisb    | (jeu. 24 mai 2012) | inc/rechercher.php : résout #2730 ; bug démonté par marcimat et corrigé par _fil_
+r19468 | cedric    | (jeu. 24 mai 2012) | Report de r19467 : appliquer texte_script sur le nom du site avant de l'injecter dans du JS...
+r19470 | marcimat  | (ven. 25 mai 2012) | Report de r19469#2705 : Purger les vieilles sessions en cron. Tous les 7 jours, ce devrait être largement suffisant.
+r19478 | denisb    | (lun. 28 mai 2012) | exceptions.css.html : affichage en rtl ; report de r19477
+r19485 | cedric    | (mar. 29 mai 2012) | Report de r19483 : css manquante sur <input type='reset' /> (Eric)
+r19486 | cedric    | (mar. 29 mai 2012) | Report de r19484 :Extraire la fonction cvtconf_formulaires_configurer_enregistre() du pipeline cvtconf_formulaire_traiter()La fonction cvtconf_formulaires_configurer_enregistre() peut etre appelée depuis la fonction traiter() d'un formulaire de configuration dont on veut personaliser le traitement sans reecrire le stockage
+r19488 | b_b       | (mer. 30 mai 2012) | report de r19487 : r19411 utilise autoriser voir auteur mais celle-ci était mal définie (il faut peut être créer une fonction spécifique pour ça ?)
+r19490 | denisb    | (jeu. 31 mai 2012) | ecrire_fr.php : "c'est toi le déchet !" report de r19489
+r19491 | cedric    | (ven. 01 juin 2012)| eviter une boucle infinie quand _DIR_SESSIONS n'existe pas encore (il semble qu'on ne récupère pas un false sur le readdir quand on l'appelle avec un false venant d'un opendir echoue)
+r19494 | denisb    | (ven. 01 juin 2012)| faire disparaître quelques warnings PHP ; report de r19493
+r19496 | denisb    | (ven. 01 juin 2012)| évacuation de quelques encombrants notice PHP ; report de r19495
+r19498 | cedric    | (ven. 01 juin 2012)| Report de r19497 :Reparer les criteres age, age_relatif, et (jour|mois|annee)_relatif qui se comparent tous a un entier et non une date (bug visible sous sqlite uniquement, mysql etant laxiste), suite a r19343Reparer le critere heure qui était cassé partout par la faute d'un echappement manquant
+r19501 | cedric    | (sam. 02 juin 2012)| Dans certains cas forcer_lang provoquait une redirection en GET sur un POST de formulaire : il ne faut pas, cela fait perdre la saisie !
+r19502 | cedric    | (sam. 02 juin 2012)| forcer le reload si redirection demandee par form ajax : si url differente c'est ignoré, mais si seul l'ancre change, ça force la mise a jour de la page
+r19505 | marcimat  | (lun. 04 juin 2012)| Report de r19504 : Erreurs de compilation possible avec le critère {si}
+r19507 | marcimat  | (lun. 04 juin 2012)| Reports de r19504 et r19506 : Corrections de quelques notices PHP
+r19524 | marcimat  | (mar. 05 juin 2012)| Report de r19253 : Ne pas se planter dans les parenthèses, ça évite d'avoir des boutons désordonnés !
+r19525 | cedric    | (mar. 05 juin 2012)| Ne forcer un reload que si c'est un changement d'ancre simple (sinon le reload se declenche parfois plus vite que le redirect et ça provoque un comportement indesirable)
+r19534 | cedric    | (mar. 05 juin 2012)| Report de r19527 + r19528 : l'usage d'un in minuscule dans {id_rubrique in 1,23} passe en mySQL mais pas en SQLite pour une sombre histoire de quote. Corrigeons
+r19535 | cedric    | (mar. 05 juin 2012)| Report de r19531: rotéger var_ajax_ancre à la reinjection dans le HTML (Boris - Avatam Studio)
+r19538 | cedric    | (mar. 05 juin 2012)| Report de tous les commits de spip/ecrire/lang de r19370 a r19533
+r19547 | cedric    | (jeu. 07 juin 2012)| Report de r19546 : pas de required sur input password : cela bloque la soumission dans certains navigateurs
+r19552 | cedric    | (ven. 08 juin 2012)| devrait résoudre #2732 : ne pas dupliquer le character set ou le collate quand on créé un champ qui en possède déjà un
+r19560 | denisb    | (ven. 08 juin 2012)| ne pas réinjecter dans le html de variable client non nettoyée (AS ASafety)
+r19564 | rasta     | (lun. 11 juin 2012)| Utiliser la pagination habituelle du privé.
+r19569 | denisb    | (lun. 11 juin 2012)| écran de sécu : filtrages modifiés et ajout de var_ajax_ancre (report de http://zone.spip.org/trac/spip-zone/changeset/62391)
+r19571 | marcimat  | (lun. 11 juin 2012)| Report de r19567 (Test de compatibilité des plugins en erreur dans le calcul de l'ordre des plugins)
+r19572 | cedric    | (mar. 12 juin 2012)| Report oublie de r15047 (Pascale LC)
+r19575 | cedric    | (mar. 12 juin 2012)| Report de r19574 : La globale ldap_attributes peut être personalisée dans mes_options.php : ne pas l'écraser dans ce cas
+r19576 | kent1     | (mar. 12 juin 2012)| Le navigateur de rubriques est issu de zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2/formulaires/selecteur/navigateur.html mais avait perdu la fonctionnalité de {limite_branche}... N'étant plus dans spip-bonux_3, on réintroduite ce possible critère ici
+
+
+PLUGINS-DIST SPIP 3.0.0 -> SPIP 3.0.2 (12 juin 2012)
+----------------------------------------------------
+r61477 | marcimat  |  (lun. 21 mai 2012) | Report de r61476 : Les styles SPIP, ce n'est pas la même chose que la base CSS. On les déplace dans le point 2 (Tetue)
+r61600 | b_b       |  (mer. 23 mai 2012) | report de r61599 : évitons de perdre les visiteurs en classant les rubriques des menus de navigation par date
+r61643 | marcimat  |  (jeu. 24 mai 2012) | Report de r 61642 via la commande :svn merge -c 61642  svn://zone.spip.org/spip-zone/_core_/plugins/compresseurhttp://core.spip.org/issues/2733(Fermer #2733 en évitant que le compresseur HTML touche aux commentaires <!--extra--> que l'on sème à divers endroits.)
+r61682 | marcimat  |  (ven. 25 mai 2012) | Report de r61362 (redirection infinie en url arbo et article-page)
+r61687 | cedric    |  (ven. 25 mai 2012) | Correction et doc sur r59769 (fil)
+r61767 | denisb    |  (lun. 28 mai 2012) | style_prive_plugin_svp.html : affichage rtl ; report de http://zone.spip.org/trac/spip-zone/changeset/61766/
+r61784 | denisb    |  (mar. 29 mai 2012) | revisions - liste/versions.html : un rédacteur ne peut lire les révisions d'articles en cours de rédaction s'il n'en est pas auteur. inutile de les lui proposer dans la liste. report de r61783
+r61797 | denisb    |  (mar. 29 mai 2012) | revisions - liste/versions.html : manquer de crochet nuit gravement à la santé (tofulm)
+r61809 | rasta     |  (mar. 29 mai 2012) | Ça ne sert à rien d'encapsuler une unique fonction du core dans une fonction propre à ce plugin, si ce n'est pas possible de surcharger son résultat.On permet donc avec un pipeline de modifier les statuts qui ont le droit de recevoir des messages.
+r62008 | eric      |  (sam. 02 juin 2012)| Correction d'une erreur dans la regexp de détection d'une abréviation.
+r62013 | cedric    |  (sam. 02 juin 2012)| esReport de r62011 :Resout http://core.spip.org/issues/2740 en complement de http://zone.spip.org/trac/spip-zone/changeset/62009 :- accepter que les crochets contenus dans un lien contienent n'importe quoi sauf -> (raccourci abbr par exemple)- ne pas confondre un |{} d'un raccourci dans le lien, en acceptant uniquement des paires de crochet [] dans le libelle du lien :// accepte un niveau de paire de crochets dans le texte :// [texte[]|title{lang}->...]// mais refuse// [texte[|title{lang}->...]// pour ne pas confondre avec un autre raccourci
+r62025 | eric      |  (sam. 02 juin 2012)| Petite erreur inclusion du head (seds)
+r62032 | cedric    |  (sam. 02 juin 2012)| Notifier forumprive quand on insere un forum prive, et non forumposte
+r62092 | marcimat  |  (lun. 04 juin 2012)| Report de r62090 : Corrections de notices PHP
+r62094 | marcimat  |  (lun. 04 juin 2012)| Report de r62093 : Corrections de notices PHP
+r62159 | marcimat  |  (mar. 05 juin 2012)| Report de r62157 et r62158 : sinon() n'est pas toujours present (Oil) et évitons de charger inc/filtres pour si peu
+r62168 | cedric    |  (mar. 05 juin 2012)| Report de r61806 : Ne pas generer de balise script ou link vide si pas de js ou css a compacter
+r62169 | cedric    |  (mar. 05 juin 2012)| Report de r62154 : homogeneiser avec la moderation des forums : border 1px sur tout le bloc et 8px sur le haut
+r62173 | cedric    |  (mar. 05 juin 2012)| Reports des commits de salvatore compris entre r61274 et r62170
+r62221 | b_b       |  (jeu. 07 juin 2012)| report de r62220 : passer l'id_rubrique des breves et sites à la nav pour exposer la rubrique en cours (bug repéré par seds)
+r62241 | marcimat  |  (jeu. 07 juin 2012)| Report de r62240 : La coloration des week end tombait au milieu de la semaine ! (cerdic)
+r62243 | marcimat  |  (jeu. 07 juin 2012)| Report de r62242 : Le lien des réferers aujourd'hui doivent partir sur le jour d'aujourd'hui !
+r62245 | marcimat  |  (jeu. 07 juin 2012)| Report de r62244 : Coloration du début du mois au début du mois et non sur la veille (cerdic)
+r62247 | marcimat  |  (jeu. 07 juin 2012)| Report de r62246 : Version ++ suite au débug de coloriage
+r62322 | kent1     |  (ven. 08 juin 2012)| Report de http://zone.spip.org/trac/spip-zone/changeset/62321On ajoute une screenshot aussi pour le coup : http://photospip3.arscenic.org/sites/photospip3.arscenic.org/IMG/png/capture_doc2img_-_medias.png
