@@ -18,7 +18,6 @@ function action_editer_site_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-
 	if (preg_match(',options/(\d+),',$arg, $r)) {
 		$id_syndic = $r[1];
 		editer_site_options($id_syndic);
@@ -299,13 +298,13 @@ function analyser_site($url) {
 	else {
 		$result['syndication'] = 'non';
 		$result['url_site'] = $url;
-		if (preg_match(',<head>(.*),i', $texte, $regs))
-			$head = filtrer_entites(preg_replace(',</head>.*,i', '', $regs[1]));
-		else
+		if (preg_match(',<head>(.*(description|title).*)</head>,Uims', $texte, $regs)) {
+			$head = filtrer_entites($regs[1]);
+		} else
 			$head = $texte;
 		if (preg_match(',<title[^>]*>(.*),i', $head, $regs))
 			$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
-		if (preg_match(',<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>,i', $head, $regs))
+		if (preg_match(',<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>,Uims', $head, $regs))
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
 
 		// Cherchons quand meme un backend
