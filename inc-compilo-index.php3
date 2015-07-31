@@ -174,7 +174,7 @@ function calculer_balise($nom, $p) {
 // Ca donne les arguments a chercher dans la pile,on compile leur localisation
 // Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
 // qui recevra a l'execution la valeurs des arguments, 
-// ainsi que les filtres (qui ne sont donc pas traites à la compil)
+// ainsi que les filtres (qui ne sont donc pas traites a la compil)
 
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
@@ -187,11 +187,15 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
 	$p->fonctions = '';
+
+	// Cas particulier de #FORMULAIRE_FORUM : inserer l'invalideur
+	if ($nom == 'FORMULAIRE_FORUM')
+		$p->code = code_invalideur_forums($p, $p->code);
+
 	return $p;
 }
 
-function param_balise(&$p) 
-{
+function param_balise(&$p) {
 	$a = $p->fonctions;
 	if ($a) list(,$nom) = each($a) ; else $nom = '';
 	if (!ereg(' *\{ *([^}]+) *\} *',$nom, $m))

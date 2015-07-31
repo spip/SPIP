@@ -453,14 +453,19 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 
 	$forums_publics = get_forums_publics($id_article);
 
-	if ($change_accepter_forum) {
-		$query_forum = "UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";
+	if (isset($change_accepter_forum)
+	AND $change_accepter_forum <> $forums_publics) {
+		$query_forum = "UPDATE spip_articles
+			SET accepter_forum='$change_accepter_forum'
+			WHERE id_article='$id_article'";
 		$result_forum = spip_query($query_forum);
 		$forums_publics = $change_accepter_forum;
 		if ($change_accepter_forum == 'abo') {
 			ecrire_meta('accepter_visiteurs', 'oui');
 			ecrire_metas();
 		}
+		include_ecrire('inc_invalideur.php3');
+		suivre_invalideur("id='id_forum/a$id_article'");
 	}
 
 	echo "\n<form action='articles.php3' method='get'>";
