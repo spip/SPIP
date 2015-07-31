@@ -12,6 +12,7 @@
 
 
 include ("inc.php3");
+include_ecrire("inc_mots.php3");
 
 // suppression d'un mot ?
 if ($conf_mot = intval($conf_mot)) {
@@ -239,97 +240,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	//
 	// Afficher les mots-cles du groupe
 	//
-	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
-
-	$tranches = afficher_tranches_requete($query, 3);
-
-	$table = '';
-
-	if (strlen($tranches)) {
-		echo "<div class='liste'>";
-		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
-
-		echo $tranches;
-
-		$result = spip_query($query);
-		while ($row = spip_fetch_array($result)) {
-		
-			$vals = '';
-			
-			$id_mot = $row['id_mot'];
-			$titre_mot = $row['titre'];
-			
-			if ($connect_statut == "0minirezo")
-				$aff_articles="prepa,prop,publie,refuse";
-			else
-				$aff_articles="prop,publie";
-
-			if ($id_mot!=$conf_mot) {
-				$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
-				$ifond = $ifond ^ 1;
-
-				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
-					$s = "<a href='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3' class='liste-mot'>".typo($titre_mot)."</a>";
-				else
-					$s = typo($titre_mot);
-
-				$vals[] = $s;
-
-				$texte_lie = array();
-
-				if ($nb_articles[$id_mot] == 1)
-					$texte_lie[] = _T('info_1_article');
-				else if ($nb_articles[$id_mot] > 1)
-					$texte_lie[] = $nb_articles[$id_mot]." "._T('info_articles_02');
-
-				if ($nb_breves[$id_mot] == 1)
-					$texte_lie[] = _T('info_1_breve');
-				else if ($nb_breves[$id_mot] > 1)
-					$texte_lie[] = $nb_breves[$id_mot]." "._T('info_breves_03');
-
-				if ($nb_sites[$id_mot] == 1)
-					$texte_lie[] = _T('info_1_site');
-				else if ($nb_sites[$id_mot] > 1)
-					$texte_lie[] = $nb_sites[$id_mot]." "._T('info_sites');
-
-				if ($nb_rubriques[$id_mot] == 1)
-					$texte_lie[] = _T('info_une_rubrique_02');
-				else if ($nb_rubriques[$id_mot] > 1)
-					$texte_lie[] = $nb_rubriques[$id_mot]." "._T('info_rubriques_02');
-
-				$texte_lie = join($texte_lie,", ");
-				
-				$vals[] = $texte_lie;
-
-
-				if ($connect_statut=="0minirezo") {
-					$vals[] = "<div style='text-align:right;'><a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
-				} 
-
-				$table[] = $vals;
-
-				
-			}
-				
-		}
-		if ($connect_statut=="0minirezo") {
-			$largeurs = array('', 100, 130);
-			$styles = array('arial11', 'arial1', 'arial1');
-		}
-		else {
-			$largeurs = array('', 100);
-			$styles = array('arial11', 'arial1');
-		}
-		afficher_liste($largeurs, $table, $styles);
-
-		echo "</table>";
-//		fin_cadre_relief();
-		echo "</div>";
-		$supprimer_groupe = false;
-	} 
-	else
-		if ($connect_statut =="0minirezo")
-			$supprimer_groupe = true;
+	$supprimer_groupe = afficher_groupe_mots($id_groupe);
 
 	if ($connect_statut =="0minirezo" AND !$conf_mot){
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";

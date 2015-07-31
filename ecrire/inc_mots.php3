@@ -406,8 +406,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			// vilain hack pour redresser un triangle
 			$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
 			if ($GLOBALS['browser_layer']) echo http_script("
-triangle = findObj('triangle' + $couche_a_redresser);
-if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
+				triangle = findObj('triangle' + $couche_a_redresser);
+				if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
 		}
 		else
 			echo debut_block_invisible("lesmots");
@@ -535,5 +535,123 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 	fin_cadre_enfonce();
 }
 
+function afficher_groupe_mots($id_groupe) {
+	global $connect_id_auteur, $connect_statut;
+
+	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
+
+	$jjscript["fonction"] = "afficher_groupe_mots";
+	$jjscript["id_groupe"] = $id_groupe;
+	$jjscript = addslashes(serialize($jjscript));
+	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
+	$tmp_var = substr(md5($jjscript), 0, 4);
+	
+			
+	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::\',\'$tmp_var\')";
+	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
+
+
+	$table = '';
+
+	if (strlen($tranches)) {
+
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res_proch)) {
+			$id_ajax_fonc = $row["id_ajax_fonc"];
+		} else  {
+			include_ecrire ("inc_abstract_sql.php3");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
+		}
+		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
+
+		if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var'>";
+
+		echo "<div class='liste'>";
+		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
+
+		echo $tranches;
+
+		$result = spip_query($query);
+		while ($row = spip_fetch_array($result)) {
+		
+			$vals = '';
+			
+			$id_mot = $row['id_mot'];
+			$titre_mot = $row['titre'];
+			
+			if ($connect_statut == "0minirezo")
+				$aff_articles="prepa,prop,publie,refuse";
+			else
+				$aff_articles="prop,publie";
+
+			if ($id_mot!=$conf_mot) {
+				$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
+				$ifond = $ifond ^ 1;
+
+				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
+					$s = "<a href='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3' class='liste-mot'>".typo($titre_mot)."</a>";
+				else
+					$s = typo($titre_mot);
+
+				$vals[] = $s;
+
+				$texte_lie = array();
+
+				if ($nb_articles[$id_mot] == 1)
+					$texte_lie[] = _T('info_1_article');
+				else if ($nb_articles[$id_mot] > 1)
+					$texte_lie[] = $nb_articles[$id_mot]." "._T('info_articles_02');
+
+				if ($nb_breves[$id_mot] == 1)
+					$texte_lie[] = _T('info_1_breve');
+				else if ($nb_breves[$id_mot] > 1)
+					$texte_lie[] = $nb_breves[$id_mot]." "._T('info_breves_03');
+
+				if ($nb_sites[$id_mot] == 1)
+					$texte_lie[] = _T('info_1_site');
+				else if ($nb_sites[$id_mot] > 1)
+					$texte_lie[] = $nb_sites[$id_mot]." "._T('info_sites');
+
+				if ($nb_rubriques[$id_mot] == 1)
+					$texte_lie[] = _T('info_une_rubrique_02');
+				else if ($nb_rubriques[$id_mot] > 1)
+					$texte_lie[] = $nb_rubriques[$id_mot]." "._T('info_rubriques_02');
+
+				$texte_lie = join($texte_lie,", ");
+				
+				$vals[] = $texte_lie;
+
+
+				if ($connect_statut=="0minirezo") {
+					$vals[] = "<div style='text-align:right;'><a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
+				} 
+
+				$table[] = $vals;			
+			}
+		}
+		if ($connect_statut=="0minirezo") {
+			$largeurs = array('', 100, 130);
+			$styles = array('arial11', 'arial1', 'arial1');
+		}
+		else {
+			$largeurs = array('', 100);
+			$styles = array('arial11', 'arial1');
+		}
+		afficher_liste($largeurs, $table, $styles);
+
+		echo "</table>";
+//		fin_cadre_relief();
+		echo "</div>";
+		
+		if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
+
+		$supprimer_groupe = false;
+	} 
+	else
+		if ($connect_statut =="0minirezo")
+			$supprimer_groupe = true;
+
+	return $supprimer_groupe;
+}
 
 ?>
