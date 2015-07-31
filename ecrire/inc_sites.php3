@@ -548,8 +548,6 @@ function analyser_backend($rss) {
 			foreach ($echappe_cdata as $n => $e)
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
 			$data[$var] = trim(textebrut($data[$var]));
-			if ($var == 'descriptif')
-				$data[$var] = couper($data[$var], 300);
 		}
 
 		// Honorer le <lastbuilddate> en forcant la date
@@ -579,7 +577,7 @@ function analyser_backend($rss) {
 //
 // Insere un article syndique (renvoie true si l'article est nouveau)
 //
-function inserer_article_syndique ($data, $now_id_syndic, $statut) {
+function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site) {
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 	$le_lien = addslashes(substr($data['url'], 0,255));
@@ -593,6 +591,16 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut) {
 		('$now_id_syndic', '$le_lien',
 		FROM_UNIXTIME(".$data['date']."), '$statut')");
 		$ajout = true;
+	}
+
+	// Nettoyer le descriptif par une fonction personnalisee ?
+	if (function_exists('nettoyer_descriptif_syndication')) {
+		$data['descriptif'] = nettoyer_descriptif_syndication(
+			$data['descriptif'], $now_id_syndic, $url_site
+		);
+	} else {
+		// fonction standard
+		$data['descriptif'] = couper($data['descriptif'], 300);
 	}
 
 	// Mise a jour du contenu (titre,auteurs,description)
@@ -626,9 +634,12 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result = spip_query($query);
-	if ($row = spip_fetch_array($result))
-		$url_syndic = $row["url_syndic"];
-	else return;
+	if (!$row = spip_fetch_array($result))
+		return;
+
+	$url_syndic = $row['url_syndic'];
+	$url_site = $row['url_site'];
+
 	if ($row['moderation'] == 'oui')
 		$moderation = 'dispo';	// a valider
 	else
@@ -651,7 +662,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	if (is_array($articles)) {
 		foreach ($articles as $data) {
 			if ($data['url'])
-				inserer_article_syndique ($data, $now_id_syndic, $moderation);
+				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site);
 		}
 
 		// Noter que la syndication est OK
