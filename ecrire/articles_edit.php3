@@ -392,18 +392,15 @@ echo "<P><HR><P>";
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
 	{
-		include "inc_32ko_browsers.php3";
-		if (! browser_32ko($HTTP_USER_AGENT)){ // browser pas connu comme "sur"
-			$textes_supplement = "<br><font color='red'>(le texte est long&nbsp;: il appara&icirc;t donc en plusieurs parties qui seront recoll&eacute;es apr&egrave;s validation.)</font>\n";
-			while (strlen($texte)>29*1024)
-			{
-				$nombre_textes ++;
-				list($texte1,$texte) = coupe_trop_long($texte);
+		$textes_supplement = "<br><font color='red'>(le texte est long&nbsp;: il appara&icirc;t donc en plusieurs parties qui seront recoll&eacute;es apr&egrave;s validation.)</font>\n";
+		while (strlen($texte)>29*1024)
+		{
+			$nombre_textes ++;
+			list($texte1,$texte) = coupe_trop_long($texte);
 
-				$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
-					" CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>" .
-					$texte1 . "</TEXTAREA><P>\n";
-			}
+			$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
+				" CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>" .
+				$texte1 . "</TEXTAREA><P>\n";
 		}
 	}
 	echo "<B>Texte</B>";
