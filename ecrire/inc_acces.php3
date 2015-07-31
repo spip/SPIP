@@ -10,7 +10,8 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	$seed = (double) (microtime() + 1) * time();
 	mt_srand($seed);
 	srand($seed);
-
+	$s = '';
+	$pass = '';
 	for ($i = 0; $i < $longueur; $i++) {
 		if (!$s) {
 			$s = mt_rand();
@@ -106,8 +107,7 @@ function ecrire_acces() {
 		ecrire_logins($fichier, $logins);
 		fclose($fichier);
 	} else {
-		@header ("Location: ../spip_test_dirs.php3");
-		exit;
+		redirige_par_entete("../spip_test_dirs.php3");
 	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'";

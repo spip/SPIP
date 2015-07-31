@@ -49,8 +49,5 @@ ecrire_metas();
 
 fin_admin($action);
 
-@header("Location: index.php3");
-
-exit;
-
+redirige_par_entete("index.php3");
 ?>

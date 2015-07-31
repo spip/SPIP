@@ -62,11 +62,7 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 
-	if (!$url)	// ecrire
-		@Header("Location: ./spip_login.php3");
-	else
-		@Header("Location: $url");
-	exit;
+	redirige_par_entete($url ? $url : "./spip_login.php3");
 }
 
 
@@ -77,8 +73,7 @@ if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
 	$link = new Link("spip_login.php3?var_echec_cookie=oui");
 	$link->addVar("var_url", $cible->getUrl());
-	@header("Location: ".$link->getUrl());
-	exit;
+	redirige_par_entete($link->getUrl());
 }
 
 // Tentative de login
@@ -203,7 +198,7 @@ if ($var_lang_ecrire) {
 // Sous Apache, les cookies avec une redirection fonctionnent
 // Sinon, on fait un refresh HTTP
 if (ereg("^Apache", $SERVER_SOFTWARE)) {
-	@header("Location: " . $cible->getUrl());
+	redirige_par_entete($cible->getUrl());
 }
 else {
 	@header("Refresh: 0; url=" . $cible->getUrl());

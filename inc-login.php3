@@ -23,8 +23,7 @@ function auth_http($cible, $essai_auth_http) {
 			ask_php_auth($page_erreur);
 		}
 		else
-			@header("Location: " . $cible->getUrl() );
-		exit;
+			redirige_par_entete($cible->getUrl());
 	}
 	// si demande logout auth_http
 	else if ($essai_auth_http == 'logout') {
@@ -91,7 +90,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 	if ($auteur_session AND !$logout AND
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
 		if ($url != $GLOBALS['clean_link']->getUrl())
-			@Header("Location: $url");
+			redirige_par_entete($url);
 		echo "<a href='$url'>"._T('login_par_ici')."</a>\n";
 		return;
 	}

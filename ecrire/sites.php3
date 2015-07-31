@@ -193,7 +193,7 @@ if ($jour AND $flag_administrable) {
 
 
 if ($redirect AND $redirect_ok == 'oui') {
-	@header("Location: $redirect");
+	redirige_par_entete($redirect);
 }
 
 

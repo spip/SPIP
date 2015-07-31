@@ -281,26 +281,4 @@ function admin_page($cached, $texte) {
 	}
 	return false; // pas de boutons admin
 }
-
-
-// Gestion des taches de fond ?  toutes les 5 secondes
-// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
-function taches_de_fond() {
-	
-	verifier_htaccess(_DIR_SESSIONS);
-	if (!@file_exists(_FILE_CRON_LOCK)
-	OR (time() - @filemtime(_FILE_CRON_LOCK) > 5)) {
-
-		// Si MySQL est out, laisser souffler
-		if (!@file_exists(_FILE_MYSQL_OUT)
-		OR (time() - @filemtime(_FILE_MYSQL_OUT) > 300)) {
-#		  spip_log("cron");
-			include_ecrire('inc_cron.php3');
-
-			spip_cron();
-		}
-	}
-}
-
-
 ?>

@@ -217,14 +217,7 @@ if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
 
 // Redirection
 if (!$echec AND $redirect_ok == "oui") {
-	if ($redirect) {
-		@Header("Location: ".rawurldecode($redirect));
-		exit; 
-	}
-	else {
-		@Header("Location:auteurs_edit.php3?id_auteur=$id_auteur");
-		exit; 
-	}
+	redirige_par_entete($redirect ? rawurldecode($redirect) : "auteurs_edit.php3?id_auteur=$id_auteur");
 }
 
 

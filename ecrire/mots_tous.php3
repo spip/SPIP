@@ -36,8 +36,7 @@ if ($conf_mot>0) {
 		$nb_sites = $nb_sites[0];
 
 		if ($nb_articles + $nb_breves + $nb_sites == 0) {
-			header("Location: mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3");
-			exit();
+			redirige_par_entete("mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3");
 		} // else traite plus loin
 	}
 }

@@ -356,11 +356,12 @@ else if ($etape == 1) {
 
 }
 else if ($etape == 'dirs') {
-	header("Location: ../spip_test_dirs.php3");
+	redirige_par_entete(" ../spip_test_dirs.php3");
 }
 else if (!$etape) {
 	$menu_langues = menu_langues('var_lang_ecrire');
-	if (!$menu_langues) header("Location: ../spip_test_dirs.php3");
+	if (!$menu_langues)
+	  redirige_par_entete(" ../spip_test_dirs.php3");
 	else {
 		install_debut_html();
 

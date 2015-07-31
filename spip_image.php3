@@ -137,8 +137,8 @@ function deplacer_fichier_upload($source, $dest) {
 		if ($f)
 			fclose ($f);
 		else {
-			@header ("Location: spip_test_dirs.php3?test_dir=".dirname($dest));
-			exit;
+			redirige_par_entete("spip_test_dirs.php3?test_dir=".
+					    dirname($dest));
 		}
 		@unlink($dest);
 
@@ -646,9 +646,5 @@ if (!$redirect) {
 	
 	$redirect = $link->getUrl();
 }
-header("Location: $redirect");
-# QQ trucs a vérifier avant de lancer ça:
-#header("Connection: close");
-#taches_de_fond();
-
+redirige_par_entete($redirect);
 ?>

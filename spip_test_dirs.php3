@@ -93,10 +93,9 @@ if ($bad_dirs OR $absent_dirs) {
 	install_fin_html();
 
 } else {
-	if (!_FILE_CONNECT)
-		header("Location: ./ecrire/install.php3?etape=1");
-	else
-		header("Location: ./ecrire/");
+	redirige_par_entete(_FILE_CONNECT ? 
+			    "./ecrire/" : 
+			    "./ecrire/install.php3?etape=1");
 }
 
 ?>
