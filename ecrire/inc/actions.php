@@ -211,7 +211,7 @@ function ajax_retour($corps,$xml = true)
 		} else {
 			$c = $GLOBALS['meta']["charset"];
 			header('Content-Type: text/html; charset='. $c);
-			$debut = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
+			$debut = (($xml AND strlen(trim($corps)))?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'');
 		}
 		echo $debut, $corps, $fin;
 	}
