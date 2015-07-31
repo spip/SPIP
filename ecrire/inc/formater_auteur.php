@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/lien');
+
 //
 // Construit un tableau des 5 informations principales sur un auteur,
 // avec des liens vers les scripts associes:
@@ -53,17 +55,23 @@ function inc_formater_auteur_dist($id_auteur, $row=NULL) {
 	. (!$row['bio'] ? '' : (" title=\"" . attribut_html(couper(textebrut($row["bio"]), 200)) ."\""))
 	. ">$nom</a>";
 
-	if ($url_site_auteur = $row["url_site"]) $vals[] =  "<a href='$url_site_auteur'>".couper(sinon(typo($row['nom_site']), $row["url_site"]),30)."</a>";
-	else $vals[] =  "&nbsp;";
+	$url = traiter_lien_explicite($row["url_site"]);
+
+	$vals[] =  !$url ? "&nbsp;"
+	  :  "<a href='$url'>".couper(sinon(typo($row['nom_site']), $row["url_site"]),30)."</a>";
 
 	if (autoriser('modifier', 'auteur', $id_auteur, $row)) {
-	  $cpt = sql_countsel("spip_auteurs_articles AS lien, spip_articles AS articles", "lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN " . ($connect_statut == "0minirezo" ? "('prepa', 'prop', 'publie', 'refuse')" : "('prop', 'publie')"));
-	  $t = _T('info_article_2');
-	  $t1 = _T('info_1_article'); 
+		$in = sql_in('statut', 
+			($connect_statut == "0minirezo"
+			? array('prepa', 'prop', 'publie', 'refuse')
+			: array('prop', 'publie')));
+		$cpt = sql_countsel("spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON A.id_article=L.id_article", "L.id_auteur=$id_auteur AND $in"); 
+		$t = _T('info_article_2');
+		$t1 = _T('info_1_article'); 
 	} else {
-	  $cpt = sql_countsel("spip_forum AS F", "F.id_auteur=$id_auteur");
-	  $t = _T('public:messages_forum');
-	  $t1 = '1 ' . _T('public:message');
+		$cpt = sql_countsel("spip_forum AS F", "F.id_auteur=$id_auteur");
+		$t = _T('public:messages_forum');
+		$t1 = '1 ' . _T('public:message');
 	}
 
 	if ($cpt > 1) $vals[] =  $cpt.' '.$t;
