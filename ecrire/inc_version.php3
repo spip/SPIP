@@ -44,6 +44,8 @@ $mysql_profile = false;
 // la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
 $mysql_rappel_connexion = false;
 
+// faut-il afficher en rouge les chaines non traduites ?
+$test_i18n = false;
 
 //
 // 	*** Fin du parametrage ***
@@ -753,7 +755,10 @@ function _T($text, $args = '') {
 
 // chaines en cours de traduction
 function _L($text) {
-	return "<div style='font-color:red;'>$text</div>";
+	if ($GLOBALS['test_i18n'])
+		return "<span style='color:red;'>$text</span>";
+	else
+		return $text;
 }
 
 
