@@ -391,26 +391,15 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	while (list(, $l) = each ($langues)) {
 		if ($l == $default) {
 			$selected = ' selected';
-			$style = "background-color: $couleur_foncee; color: white; font-style: bold;";
-		} else {
+		}
+		else {
 			$selected = '';
-			$style = "background-color: $couleur_claire;";
 		}
-		//$selected = ($l == $default) ? ' selected' : '';
 		if ($l == $herit) {
-			//$selected = ($herit == $default) ? ' selected' : '';
-			if ($herit == $default) {
-				$selected = 'selected';
-				$style = "background-color: $couleur_foncee; color: white; font-style: bold;";
-			} else {
-				$selected = '';
-				$style = "background-color: white;";
-			}
-			$ret .= "<option style='$style' value='herit'$selected>"
+			$ret .= "<option style='font-weight: bold;' value='herit'$selected>"
 				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
-			if ($selected) $default = '';
 		}
-		else $ret .= "<option style='$style' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+		else $ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
 	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
