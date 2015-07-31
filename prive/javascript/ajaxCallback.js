@@ -919,7 +919,7 @@ function parametre_url(url,c,v,sep,force_vide){
 		var r=val.match(regexp);
 		if (r && r.length){
 			if (v==null){
-				return (r.length>2)?r[2].substring(1):'';
+				return (r.length>2 && typeof r[2]!=='undefined')?r[2].substring(1):'';
 			}
 			// suppression
 			else if (!v.length) {
