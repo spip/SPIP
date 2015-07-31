@@ -29,7 +29,13 @@ include_spip('base/connect_sql');
 
 // http://doc.spip.org/@sql_serveur
 function sql_serveur($ins_sql='', $serveur='', $continue=false) {
-	return spip_connect_sql(sql_ABSTRACT_VERSION, $ins_sql, $serveur, $continue);
+	static $sql_serveur = array();
+	if (!isset($sql_serveur[$serveur][$ins_sql])){
+		$f = spip_connect_sql(sql_ABSTRACT_VERSION, $ins_sql, $serveur, $continue);
+		if (!is_string($f) OR !$f) return $f;
+		$sql_serveur[$serveur][$ins_sql] = $f;
+	}
+	return $sql_serveur[$serveur][$ins_sql];
 }
 
 // Demande si un charset est disponible. 
