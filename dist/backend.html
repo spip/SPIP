@@ -26,9 +26,10 @@
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
 		<dc:format>text/html</dc:format>
-		<dc:language>#LANG</dc:language>
+		[<dc:language>(#LANG)</dc:language>]
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
 
 [(#REM)

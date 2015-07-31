@@ -55,16 +55,23 @@ function affiche_rss_rss($rss, $intro = '') {
 	if (is_array($rss)) {
 		usort($rss, 'trier_par_date');
 		foreach ($rss as $article) {
-			if ($article['email'])
-				$article['author'].=' <'.$article['email'].'>';
 			$u .= '
 	<item>
 		<title>'.texte_backend($article['title']).'</title>
 		<link>'.texte_backend(url_absolue($article['url'])).'</link>
+		<guid isPermaLink="true">'.texte_backend(url_absolue($article['url'])).'</guid>
 		<dc:date>'.date_iso($article['date']).'</dc:date>
-		<dc:format>text/html</dc:format>
-		<dc:language>'.texte_backend($article['lang']).'</dc:language>
-		<dc:creator>'.texte_backend($article['author']).'</dc:creator>
+		<dc:format>text/html</dc:format>';
+			if ($article['lang']) $u .= '
+		<dc:language>'.texte_backend($article['lang']).'</dc:language>';
+			if ($article['author']) {
+				if ($article['email'])
+					$article['author'].=' <'.$article['email'].'>';
+
+				$u .= '
+		<dc:creator>'.texte_backend($article['author']).'</dc:creator>';
+			}
+			$u .= '
 		<description>'.texte_backend(liens_absolus($article['description'])).'</description>
 	</item>
 ';
@@ -107,11 +114,15 @@ function affiche_rss_atom($rss, $intro = '') {
 		<id>'.texte_backend(url_absolue($article['url'])).'</id>
 		<link rel="alternate" type="text/html" href="'.texte_backend(url_absolue($article['url'])).'"/>
 		<published>'.date_iso($article['date']).'</published>
-		<updated>'.date_iso($article['date']).'</updated>
+		<updated>'.date_iso($article['date']).'</updated>';
+			if ($article['author']) {
+				$u .= '
 		<author><name>'.texte_backend($article['author']).'</name>';
-			if ($article['email'])
-				$u .= '<email>'.texte_backend($article['email']).'</email>';
-			$u .= '</author>
+				if ($article['email'])
+					$u .= '<email>'.texte_backend($article['email']).'</email>';
+				$u .= '</author>';
+			}
+			$u .='
 		<summary type="html">'.texte_backend(liens_absolus($article['description'])).'</summary>
 	</entry>
 ';
