@@ -335,14 +335,16 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	if (!$a) $a= './';
 
 	// ajout de la globale ?
-	if ($v === NULL)
-		$v = _request($c);
+	//if ($v === NULL)
+	//	$v = _request($c);
 
 	// lire les variables et agir
 	foreach ($url as $n => $val) {
-		if (preg_match(',^'.preg_quote($c,',').'(=.*)?$,', urldecode($val))) {
-			// suppression
-			if (!$v) {
+		if (preg_match(',^'.preg_quote($c,',').'(=.*)?$,', urldecode($val), $r)) {
+			if ($v === NULL) {
+				return $r[1]?substr($r[1],1):''; 
+			}
+			elseif (!$v) {// suppression
 				unset($url[$n]);
 			} else {
 				$url[$n] = $c.'='.rawurlencode($v);
@@ -352,7 +354,9 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 	}
 
 	// ajouter notre parametre si on ne l'a pas encore trouve
-	if ($v)
+	if ($v === NULL)
+		return $v;
+	elseif ($v)
 		$url[] = $c.'='.rawurlencode($v);
 
 	// eliminer les vides
