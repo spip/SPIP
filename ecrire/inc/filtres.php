@@ -880,6 +880,7 @@ function date_iso($date_heure) {
 
 // date_822 retourne la date au format "RFC 822"
 // utilise pour <pubdate> dans certains feeds RSS
+// http://doc.spip.org/@date_822
 function date_822($date_heure) {
 	list($annee, $mois, $jour) = recup_date($date_heure);
 	list($heures, $minutes, $secondes) = recup_heure($date_heure);
