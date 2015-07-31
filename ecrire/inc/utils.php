@@ -127,8 +127,7 @@ function minipipe($fonc,&$val){
 
 // chargement du pipeline sous la forme d'un fichier php prepare
 // http://doc.spip.org/@pipeline
-function pipeline($action, $val=null , $create_ifnotexists = true) {
-	static $create_ifnecessary = true;
+function pipeline($action, $val=null) {
 	static $charger;
 
 	// chargement initial des fonctions mises en cache, ou generation du cache
@@ -153,17 +152,12 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
 		$val = $fonc($val);
 	}
 	// plantage ?
-	elseif ($create_ifnecessary AND $create_ifnotexists) {
-		$create_ifnecessary = false; // ne plus repasser ici
-		include_spip('inc/plugin');
-		// on passe $action en arg pour creer la fonction meme si le pipe
-		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
-		actualise_plugins_actifs(strtolower($action));
-		spip_log("fonction $fonc absente : pipeline desactive");
+	else {
+		spip_log("fonction $fonc absente : pipeline desactive",_LOG_ERREUR);
 	}
 
-	// si le flux est une table qui encapsule donnees et autres
-	// on ne ressort du pipe que les donnees
+	// si le flux est une table avec 2 cle args&data
+	// on ne ressort du pipe que les donnees dans 'data'
 	// array_key_exists pour php 4.1.0
 	if (is_array($val)
 	  AND count($val)==2
