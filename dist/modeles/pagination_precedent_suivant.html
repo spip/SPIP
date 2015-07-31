@@ -1,0 +1,10 @@
+#ENV{bloc_ancre}
+[(#SET{i,#ENV{page_courante}|moins{1}}|>{0}|?{' ',''})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} }|rien)
+	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=<:public:page_precedente:>}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+	[(#SET{i,#GET{i}|plus{2}}|<{#ENV{nombre_pages}}|?{'|',''})]
+]
+[(#SET{i,#ENV{page_courante}|plus{1}}|<{#ENV{nombre_pages}}|?{' ',''})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} }|rien)
+	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=<:public:page_suivante:>}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+]

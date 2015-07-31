@@ -314,6 +314,16 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 }
 
 //
+// Prend une URL et lui ajoute/retire une ancre.
+function ancre_url($url, $ancre) {
+	// lever l'#ancre
+	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
+		$url = $r[1];
+	}
+	return $url .'#'. $ancre;
+}
+
+//
 // pour calcul du nom du fichier cache et autres
 //
 function nettoyer_uri() {
