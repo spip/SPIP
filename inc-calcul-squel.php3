@@ -1202,6 +1202,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			}
 		}
 		break;
+	
+	case 'ON_OFF':
+		$code = 'calcul_on_off($contexte)';
+		break;
 
 	//
 	// Inserer directement un document dans le squelette
