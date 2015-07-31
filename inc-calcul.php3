@@ -6,14 +6,10 @@ if (defined("_INC_CALCUL")) return;
 define("_INC_CALCUL", "1");
 
 
-
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 
-// Globales a redefinir si l'on veut dans mes_fonctions.php3
-//$GLOBALS['espace_logos'] = 3;  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
-//$GLOBALS['espace_images'] = 3;  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
 tester_variable('espace_logos',3);  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
 tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
 
@@ -93,15 +89,6 @@ function image_document($id_document){
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
 
-
-
-	/*
-		// Gerer les inclusions des documents
-		spip_query("UPDATE spip_documents SET inclus = 'oui' WHERE id_document=$id_document");
-		if ($id_vignette > 0)
-			spip_query("UPDATE spip_documents SET inclus = 'oui' WHERE id_document=$id_vignette");
-	*/
-
 		// recuperer la vignette pour affichage inline
 		if ($id_vignette) {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
@@ -177,7 +164,7 @@ function image_rubrique($id_rubrique) {
 }
 
 
-/* renvoie le html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc. */
+// renvoie le html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
 function affiche_logos($arton, $artoff, $lien, $align) {
 	global $num_survol;
 	global $espace_logos;
@@ -232,6 +219,27 @@ function construire_hierarchie($id_rubrique) {
 	return $hierarchie;
 }
 
+
+//
+// Critere {branche} : les descendants d'une rubrique
+// On procede par generation - tous les fils, puis tous les petits-fils, etc.
+//
+function calcul_generation ($generation) {
+	$lesfils = array();
+	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($generation)"); 
+	while ($row = mysql_fetch_array($result))
+		$lesfils[] = $row['id_rubrique'];
+	return join(",",$lesfils);
+}
+function calcul_branche ($generation) {
+	if ($generation) {
+		$branche[] = $generation;
+		while ($generation = calcul_generation ($generation))
+			$branche[] = $generation;
+		return join(",",$branche);
+	} else
+		return '0';
+}
 
 
 //////////////////////////////////////////////////////////////////////////////
