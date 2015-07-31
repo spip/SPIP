@@ -42,6 +42,17 @@ $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "width='14' height=
 $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "width='14' height='7' border='0'");
 $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "width='14' height='7' border='0'");
 
+function http_calendrier_init($date='', $type='semaine', $echelle='', $partie_cal='', $script='')
+{
+	if (!$date) $date = date("Y-m-d");
+	if (!$script) $script = $GLOBALS['REQUEST_URI']; 
+	$script = http_calendrier_retire_args($script,
+					      array('echelle','jour','mois','annee', 'type'));
+
+	$f = 'http_calendrier_init_' . $type;
+	return $f($date, $echelle, $partie_cal, $script);
+}
+
 // Conversion en HTML d'un tableau de champ ics
 // Le champ URL devient une balise A 
 // 	avec href=URL et clic sur les champs SUMMARY et DESC
@@ -437,8 +448,6 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 {
   global $couleur_claire, $couleur_foncee;
 
-	$script = http_calendrier_retire_args($GLOBALS['REQUEST_URI'], 
-					array('echelle','jour','mois','annee', 'type'));
 	$today=getdate(time());
 	$j=$today["mday"];
 	if ($dernier_jour > 31) {
