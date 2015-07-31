@@ -34,12 +34,13 @@ function verifier_base() {
 
 	$res = "";
 	while ($tab = spip_fetch_array($res1,SPIP_NUM)) {
-		$res .= "<p><b>".$tab[0]."</b> ";
+		$tab = $tab[0];
+		$res .= "<p><b>".$tab."</b> ";
 
-		$result_repair = spip_query("REPAIR TABLE ".$tab[0]);
+		$result_repair = spip_query("REPAIR TABLE `$tab`");
 		if (!$result_repair) return false;
 
-		$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM ".$tab[0]));
+		$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM `$tab`"));
 		if (!$result) return false;
 
 		$count = $result['n'];
