@@ -70,6 +70,7 @@ class Boucle {
 	var $hierarchie = '';
 	var $statut = false; # definition/surcharge du statut des elements retournes
 	// champs pour la construction du corps PHP
+	var $show = array();
 	var $id_table;
 	var $primary;
 	var $return;
