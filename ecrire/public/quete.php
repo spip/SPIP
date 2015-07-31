@@ -214,7 +214,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	$logo = inserer_attribut($logo, 'alt', '');
 	$logo = inserer_attribut($logo, 'class', 'spip_logos');
 	if ($align) $logo = inserer_attribut($logo, 'align', $align);
-
+	if (!$lien) return $logo;
 	$titre = supprimer_tags(typo($row['titre']));
 	$taille = taille_en_octets($row['taille']);
 
