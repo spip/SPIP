@@ -100,7 +100,7 @@ function verifier_php_auth() {
 
 		$row = spip_fetch_array($result);
 		if ($row AND $row['source'] != 'ldap') {
-		  if ($row['pass'] != md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
+		  if ($row['pass'] == md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW'])) {
 			$GLOBALS['auteur_session'] = $row;
 			return $row['statut'];
 		  } else return false;
