@@ -74,7 +74,7 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 	if (is_array($extra))
 		while (list($key,) = each($extra))
 			if (!$champs[$key])
-				$champs[$key] = 'ligne|typo';
+				$champs[$key] = "masque||($key?)";
 
 	// quels sont les extras proposes...
 	// ... si l'ensemble est connu
@@ -107,6 +107,9 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 				case "bloc":
 				case "block":
 					$affiche .= "<TEXTAREA NAME='suppl_$champ' CLASS='forml' style='font-size:9px;' ROWS='5' COLS='40'>".entites_html($extra[$champ])."</TEXTAREA>\n";
+					break;
+				case "masque":
+					$affiche .= "<font color='#555555'>".interdire_scripts($extra[$champ])."</font>\n";
 					break;
 				case "ligne":
 				case "line":

@@ -63,7 +63,6 @@ if ($new == "oui") {
 		$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
 		$descriptif = "";
 		$texte = "";
-		$extra=array();
 	}
 	else {
 		echo _T('avis_acces_interdit');
@@ -79,7 +78,7 @@ else {
 		$titre = $row['titre'];
 		$descriptif = $row['descriptif'];
 		$texte = $row['texte'];
-		$extra = unserialize($row["extra"]);
+		$extra = $row["extra"];
 	}
 }
 

@@ -41,7 +41,7 @@ if ($new != "oui") {
 		$lien_url=$row['lien_url'];
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
-		
+		$extra = $row['extra'];
 		$pour_doublons = propre ("$titre.$texte");
 	}
 }
