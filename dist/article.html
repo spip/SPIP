@@ -35,6 +35,7 @@
 
 				[(#REM) Inclure le modele des liens de traductions ]
 				#MODELE{article_traductions}
+
 			</div>
 			
 			#DEBUT_SURLIGNE
@@ -115,16 +116,8 @@
 			</B_articles_rubrique>
 
 			[(#REM) Menu de navigation mots-cles ]
-			<B_mots>
-			<div class="divers">
-				<h2 class="menu-titre"><:mots_clefs:></h2>
-				<ul>
-					<BOUCLE_mots(MOTS) {id_article} {par titre}>
-					<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
-					</BOUCLE_mots>
-				</ul>
-			</div>
-			</B_mots>
+			#MODELE{article_mots}
+
 		</div><!-- fin navigation -->
 
 	</div><!-- fin conteneur -->

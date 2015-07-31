@@ -9,6 +9,7 @@ dist/inc-head.html -text
 dist/inc-petition.html -text
 dist/inc-pied.html -text
 dist/inc-rubriques.html -text
+dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/doc.html -text
 dist/modeles/emb.html -text
