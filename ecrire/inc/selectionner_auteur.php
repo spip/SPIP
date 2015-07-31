@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/editer_auteurs');
+include_spip('inc/selectionner');
 
 //
 // Affiche un mini-navigateur ajax sur les auteurs
@@ -23,12 +24,6 @@ function inc_selectionner_auteur_dist($id_article)
 	global $spip_lang_right, $couleur_foncee;
 
 	$idom = 'bloc_selectionner_auteur';
-	$idom1 = $idom . "_champ_recherche";
-	$idom2 = $idom . "_principal";
-	$idom3 = $idom . "_selection";
-	$idom4 = $idom . "_col_1";
-	$idom5 = 'img_' . $idom4;
-	$idom6 = $idom."_fonc";
 
 	$les_auteurs = determiner_auteurs_article($id_article);
 	$futurs = selectionner_auteur_boucle(determiner_non_auteurs($les_auteurs, "nom, statut"), $idom);
@@ -36,21 +31,7 @@ function inc_selectionner_auteur_dist($id_article)
 	// url completee par la fonction JS onkeypress_rechercher
 	$url = generer_url_ecrire('rechercher_auteur', "idom=$idom&nom=");
 
-	return "<div id='$idom'>"
-	. "<input style='width: 100px;' type='search' id='$idom1'"
-	. "\nonkeypress=\"t=setTimeout('onkeypress_rechercher(\'"
-	. $idom1
-	. "\',\'"
-	. $idom4
-	. "\',\'"
-	. $url
-	. "\')', 200); key = event.keyCode; if (key == 13 || key == 3) { return false;} \" />"
-	. http_img_pack("searching.gif", "*", "style='visibility: hidden;' id='$idom5'") 
-	. "<div id='$idom2'"
-	. " style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'><div id='$idom4'"
-	. " class='arial1'>" 
-	. $futurs
-	. "</div></div>\n<div id='$idom3'></div></div>\n";
+	return construire_selectionner_hierarchie($idom, $futurs, '', $url, 'nouv_auteur');
 }
 
 function selectionner_auteur_boucle($query, $idom)
@@ -58,9 +39,7 @@ function selectionner_auteur_boucle($query, $idom)
 	global  $spip_lang_left;
 
 	$info = generer_url_ecrire('informer_auteur', "id=");
-#	$args = "'$idom',this, '$col', '$spip_lang_left', '$info'";
 	$args = "'$idom" . "_selection', '$info'";
-	
 	$res = '';
 
 	while ($row = spip_fetch_array($query)) {
@@ -76,6 +55,9 @@ function selectionner_auteur_boucle($query, $idom)
 
 		// attention, les <a></a> doivent etre au premier niveau
 		// et se suivrent pour que changerhighligth fonctionne
+		// De plus, leur zone doit avoir une balise et une seule
+		// autour de la valeur pertinente pour que aff_selection
+		// fonctionne (faudrait concentrer tout ca).
 
 		$res .= "<a class='pashighlight'"
 		. "\nonclick=\"changerhighlight(this);"
@@ -85,7 +67,7 @@ function selectionner_auteur_boucle($query, $idom)
 		. $commun  
 		  . ";findObj_forcer('selection_auteur').style.display="
 		. "'none'; return false"
-		. "\">$titre</a>";
+		. "\"><b>$titre</b></a>";
 	}
 
 	return $res;

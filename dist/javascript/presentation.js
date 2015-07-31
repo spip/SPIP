@@ -159,23 +159,6 @@ function changeVisible(input, id, select, nonselect) {
 // livesearchlike...
 
 
-function lancer_recherche(champ, cible) {
-	// Desactive pour l'instant (bouffe trop de ressources)
-	/* et a reprendre suite au cght d'interface Ajax du 7/8/06
-	valeur = findObj(champ).value;
-	if (valeur.length > 3) {
-		charger_id_url('./?exec=recherche_sugg='+valeur,'sugg_recherche');
-		charger_id_url('./?exec=recherche='+valeur,'resultats_recherche');
-	}
-	*/
-}
-
-function onkeypress_rechercher(champ, rac, url) {
-	valeur = findObj(champ).value;
-	if (valeur.length > 0) {
-		charger_id_url(url+valeur, rac);
-	}
-}
 
 // effacement titre quand new=oui
 var antifocus=false;

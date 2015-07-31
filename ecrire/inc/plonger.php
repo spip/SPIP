@@ -65,7 +65,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 			. "\"\nondblclick=\""
 			. "aff_selection_titre(this."
 			. $acces
-			. "firstChild.firstChild.nodeValue,$id,'selection_rubrique');"
+			. "firstChild.firstChild.nodeValue,$id,'selection_rubrique','id_parent');"
 			. "return aff_selection_provisoire($id,$args);"
 			. "\">$titre</a>";
 		}

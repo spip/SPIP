@@ -1,5 +1,6 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
+var xhr_actifs = new Array();
 var load_handlers = new Array();
 
 function findObj_test_forcer(n, forcer) { 
@@ -113,20 +114,25 @@ function changerhighlight (couche) {
 
 function aff_selection (arg, idom, url)
 {
+
 	noeud = findObj_forcer(idom);
 	if (noeud) {
 		noeud.style.display = "none";
 		charger_node_url(url+arg, noeud);
 	}
+	return false;
 }
 
 // selecteur de rubrique et affichage de son titre dans le bandeau
 
-function aff_selection_titre(titre, id, idom)
+function aff_selection_titre(titre, id, idom, nid)
 {
-	findObj_forcer('titreparent').value=titre;
-	findObj_forcer('id_parent').value=id;
-	findObj_forcer(idom).style.display='none';
+	t = findObj_forcer('titreparent');
+	t.value= titre;
+	t=findObj_forcer(nid);
+	t.value=id;
+	t=findObj_forcer(idom);
+	t.style.display='none';
 }
 
 function aff_selection_provisoire(id, racine, url, col, sens,informer)
@@ -141,6 +147,35 @@ function aff_selection_provisoire(id, racine, url, col, sens,informer)
   // empecher le chargement non Ajax
   return false;
 }
+
+// Lanche une requete Ajax a chaque frappe au clavier dans une balise de saisie.
+// Si l'entree redevient vide, rappeler l'URL initiale si dispo.
+// Sinon, controler au retour si le resultat est unique, 
+// auquel cas forcer la selection.
+
+function onkey_rechercher(valeur, rac, url, img, nid, init) {
+	var Field = findObj_forcer(rac);
+	if (!valeur.length) {	
+		init = findObj_forcer(init);
+		if (init && init.href) { charger_node_url(init.href, Field);}
+	} else {	
+	  charger_node_url(url+valeur,
+			 Field,
+			 function () {
+			   	var n = Field.childNodes.length - 1;
+				// Safari = 0  & Firefox  = 1 !
+				// et gare aux negatifs en cas d'abort
+				if (!n  || (n == 1)) {
+				  noeud = Field.childNodes[n].firstChild;
+				  aff_selection_titre(noeud.firstChild.nodeValue, noeud.title, rac, nid);
+				}
+			   },
+			   img);
+	}
+	return false;
+}
+
+function lancer_recherche(champ, cible) {} // obsolete
 
 //
 // Cette fonction charge du contenu - dynamiquement - dans un 
@@ -185,6 +220,10 @@ function triggerAjaxLoad(root) {
 	load_handlers[i].apply( root );
 }
 
+// Alloue un gestionnaire Ajax, et le lance sur les parametres donnes
+// Retourne False si l'allocation est impossible,
+// le gestionnaire lui-meme autrement (utile pour memoriser ceux alloues).
+
 function ajah(method, url, flux, rappel)
 {
 	var xhr = createXmlHttp();
@@ -198,14 +237,22 @@ function ajah(method, url, flux, rappel)
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
 	xhr.send(flux);
-	return true;
+	return xhr;
 }
+
+// Avancees de la requete HTTP.
+// Attention:
+// 1. Opera dit toujours 0, pas 200 ou 404 etc
+// 2. si la methode abort a ete invoquee, acceder au status provoque
+// 	NS_ERROR_NOT_AVAILABLE 
+// il faut try/catch pour rester discret (l'avortement decidement ...)
 
 function ajahReady(xhr, f) {
 	if (xhr.readyState == 4) {
-		if (xhr.status > 200) // Opera dit toujours 0 !
-                      {f('Erreur HTTP :  ' +  xhr.status);}
-                else  { f(xhr.responseText); }
+	  try { s = xhr.status > 200} catch (e) {s = 0; }
+	  if (s) // 
+	    {f('Erreur HTTP :  ' +  xhr.status);}
+	  else  { f(xhr.responseText); }
         }
 }
 
@@ -232,8 +279,13 @@ function AjaxSqueeze(trig, id, f)
 		g.innerHTML = ajax_image_searching;
 		id.insertBefore(g, id.firstChild);
 	}
-	return  AjaxSqueezeNode(trig, id, f);
+	return  !AjaxSqueezeNode(trig, id, f);
 }
+
+// La fonction qui fait vraiment le travail decrit ci-dessus.
+// Son premier argument est deja le noeud du DOM
+// et son resultat booleen est inverse ce qui lui permet de retourner 
+// le gestionnaire Ajax comme valeur non fausse
 
 function AjaxSqueezeNode(trig, noeud, f)
 {
@@ -247,7 +299,7 @@ function AjaxSqueezeNode(trig, noeud, f)
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
-		return !ajah('GET', trig, null, callback);
+		return ajah('GET', trig, null, callback);
 	}
 
 	for (i=0;i < trig.elements.length;i++) {
@@ -262,7 +314,7 @@ function AjaxSqueezeNode(trig, noeud, f)
 	s = trig.getAttribute('action');
 	if (typeof(s)!='string') // pour IE qui a foire la ligne precedente
 		s = trig.attributes.action.value;
-	return !ajah('POST', // ou 'GET'
+	return ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,
 		     callback);
@@ -271,6 +323,8 @@ function AjaxSqueezeNode(trig, noeud, f)
 
 // Comme AjaxSqueeze, 
 // mais avec un cache sur le noeud et un cache sur la reponse
+// et une memorisation des greffes en attente afin de les abandonner
+// (utile surtout a la frappe interactive au clavier)
 // De plus, la fonction optionnelle n'a pas besoin de greffer la reponse.
 
 function charger_id_url(myUrl, myField, jjscript) 
@@ -290,22 +344,24 @@ function charger_id_url(myUrl, myField, jjscript)
 
 function charger_node_url(myUrl, Field, jjscript, img) 
 {
-	  var r = url_chargee[myUrl];
 	// disponible en cache ?
-	  if (r) {
-			retour_id_url(r, Field, jjscript);
+	if (url_chargee[myUrl]) {
+			retour_id_url(url_chargee[myUrl], Field, jjscript);
 			triggerAjaxLoad(Field);
 			return false; 
 	  } else {
-			if (img) img.style.visibility = "visible";
-			return AjaxSqueezeNode(myUrl,
+		if (img) img.style.visibility = "visible";
+		if (xhr_actifs[Field]) { xhr_actifs[Field].abort(); }
+		xhr_actifs[Field] = AjaxSqueezeNode(myUrl,
 				'',
 				function (r) {
+					xhr_actifs[Field] = undefined;
 					if (img) img.style.visibility = "hidden";
 					url_chargee[myUrl] = r;
 					retour_id_url(r, Field, jjscript);
-				})
-		}
+								   });
+		return !xhr_actifs[Field];
+	}
 }
 
 function retour_id_url(r, Field, jjscript)

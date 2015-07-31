@@ -204,11 +204,11 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 		$titre = _T('info_racine_site');
 
 	$titre = str_replace('&amp;', '&', entites_html(textebrut(typo($titre))));
-	$titre = "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"" . $titre . "\" />";
+	$init = " disabled='disabled' type='text' value=\"" . $titre . '"';
 
 	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type" . (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))));
 
-	return construire_selecteur($url, '', 'selection_rubrique', 'id_parent', $titre, $id_rubrique);
+	return construire_selecteur($url, '', 'selection_rubrique', 'id_parent', $init, $id_rubrique);
 }
 
 // construit un bloc comportant une icone clicable avec image animee a cote
@@ -217,7 +217,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 // (la fonction JS charger_node ignore l'attribut id qui ne sert en fait pas;
 // getElement en mode Ajax est trop couteux).
 
-function construire_selecteur($url, $js, $idom, $name, $titre='', $id=0)
+function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 {
 	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
 	return 	"<table width='100%'><tr width='100%'><td width='45'><a	href='#'\nonclick=\""
@@ -232,7 +232,9 @@ function construire_selecteur($url, $js, $idom, $name, $titre='', $id=0)
 	. "searching.gif' id='img_"
 	.  $idom
 	. "' style='visibility: hidden;' /></td><td>"
-	. $titre
+	. "<input id='titreparent' name='titreparent'"
+	. $init
+	. " />" 
 	. "<input type='hidden' id='$name' name='$name' value='"
 	. $id
 	. "' /></td></tr></table><div id='"
