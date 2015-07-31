@@ -140,7 +140,7 @@ function precharger_traduction_objet($type, $id_objet, $id_rubrique=0, $lier_tra
 			// Si le menu de langues est autorise sur l'objet,
 			// on peut changer la langue quelle que soit la rubrique
 			// donc on reste dans la meme rubrique
-			if (in_array($table, explode(',',$GLOBALS['meta']['multi_objets'] == 'oui'))) {
+			if (in_array($table, explode(',',$GLOBALS['meta']['multi_objets']))) {
 				$row['id_rubrique'] = $row['id_rubrique']; # explicite :-)
 
 			// Sinon, chercher la rubrique la plus adaptee pour
