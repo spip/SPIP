@@ -899,11 +899,8 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	$term_fonction_dest = $terminaison_dest;
 	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
 
-	// Placer le fichier destination dans IMG/cache-gd2/
-	if (ereg("\/", $fichier_dest)) {
-		$fichier_dest = substr($fichier_dest, strrpos($fichier_dest,"/")+1, strlen($fichier_dest));
-	}
 	$fichier_dest = md5($fichier_dest);
+	
 	$fichier_dest = sous_repertoire(_DIR_IMG, "cache-gd2") . $fichier_dest . "." .$terminaison_dest;
 	
 	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
@@ -1124,7 +1121,7 @@ function image_masque($im, $masque, $pos="") {
 
 	$pos = md5(serialize($variable));
 
-	$image = valeurs_image_trans($im, "$masque$pos", "png");
+	$image = valeurs_image_trans($im, "masque-$masque-$pos", "png");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
