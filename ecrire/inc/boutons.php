@@ -141,13 +141,5 @@ function barre_onglets($rubrique, $ongletCourant){
 	return  !$res ? '' : (debut_onglet() . $res . fin_onglet());
 }
 
-// http://doc.spip.org/@definir_barre_gadgets
-function definir_barre_gadgets() {
-	global $barre_gadgets;
-	$barre_gadgets= array(
-						  // ?????????
-	);
-}
-
 
 ?>
