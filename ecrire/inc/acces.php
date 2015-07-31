@@ -96,6 +96,7 @@ function low_sec($id_auteur) {
 	return $low_sec;
 }
 
+// http://doc.spip.org/@generer_url_low_sec
 function generer_url_low_sec($action, $args, $id_auteur=0, $lang='') {
 	$a = '';
 	if (is_array($args)) {

@@ -562,7 +562,7 @@ function statistiques_moyenne($tab)
 }
 
 
-// http://doc.spip.org/@statistiques_signatures
+// http://doc.spip.org/@statistiques_signatures_dist
 function statistiques_signatures_dist($duree, $interval, $type, $id_article, $serveur)
 {
 	$where = "id_article=$id_article";
@@ -597,7 +597,7 @@ function statistiques_signatures_dist($duree, $interval, $type, $id_article, $se
 	. statistiques_par_mois($mois, $script)));
 }
 
-// http://doc.spip.org/@statistiques_forums
+// http://doc.spip.org/@statistiques_forums_dist
 function statistiques_forums_dist($duree, $interval, $type, $id_article, $serveur)
 {
 	$where = "id_article=$id_article AND statut='publie'";
