@@ -496,9 +496,16 @@ function verifier_lang_url() {
 	{
 		$destination = $clean_link;
 		$destination->addvar('lang', $lang_demandee);
+		if ($GLOBALS['recalcul'] == 'oui')
+			$destination->addvar('recalcul', 'oui');
 		@header("Location: ".$destination->getUrl());
 		exit;
 	}
+
+	// Subtilite : si la langue demandee par cookie est la bonne
+	// alors on fait comme si $lang etait passee dans l'URL
+	// (pour criteres {lang}).
+	$GLOBALS['lang'] = $spip_lang;
 }
 
 
