@@ -156,8 +156,10 @@ function chargeur_charger_zip($quoi = array())
 			$p[] = $x;
 		}
 	}
+
 	$i = 0;
-	while (count($paths[$i])<=1)
+	while (count($paths[$i])<=1
+	AND $i < count($paths))
 		$i++;
 	$racine = $i
 		? array_pop(array_keys($paths[$i-1])).'/'
