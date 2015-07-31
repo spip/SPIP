@@ -216,7 +216,7 @@ function echappe_html($letexte,$source) {
 			while (list(,$reg) = each($regs)) {
 				$num_echap++;
 				$les_echap[$num_echap] = $reg[0];
-				echo htmlspecialchars($reg[0])."<p>";
+				//echo htmlspecialchars($reg[0])."<p>";
 				$pos = strpos($letexte, $les_echap[$num_echap]);
 				$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 					.substr($letexte,$pos+strlen($les_echap[$num_echap]));
