@@ -145,7 +145,9 @@ function pipeline($action, $val=null) {
 function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	static $compteur = array();
 	global $nombre_de_logs, $taille_des_logs;
-	$logname = ($logname===NULL ? _FILE_LOG : $logname);
+
+	if (is_null($logname))
+		$logname = defined('_FILE_LOG') ? _FILE_LOG : 'spip';
 	if (!isset($compteur[$logname])) $compteur[$logname] = 0;
 	if (($logname != 'maj') AND
 	    ( $compteur[$logname]++ > _MAX_LOG || !$nombre_de_logs || !$taille_des_logs))
@@ -155,6 +157,10 @@ function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	  . (test_espace_prive()?'prive_':'') //distinguer les logs prives et publics
 	  . ($logname)
 	  . ($logsuf===NULL ? _FILE_LOG_SUFFIX : $logsuf);
+
+	// si spip_log() dans mes_options, poser dans spip.log
+	if (!defined('_DIR_LOG'))
+		$logfile = _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.$logname.'.log';
 
 	$rotate = 0;
 	$pid = '(pid '.@getmypid().')';
