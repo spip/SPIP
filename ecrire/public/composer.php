@@ -54,7 +54,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 		include_once $lib;
 
 	// tester si le eval ci-dessus a mis le squelette en memoire
-	spip_log("composer $nom a fabriquer");
+
 	if (function_exists($nom)) return array($nom, $skel_code);
 
 	// charger le source, si possible, et compiler 

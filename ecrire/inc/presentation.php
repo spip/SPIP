@@ -930,8 +930,6 @@ function fin_page()
 		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
 	} else $chrono = '';
 
-	include_spip('public/assembler');
-
 	// cf. public/assembler, fonction f_msie()
 	// test si MSIE et sinon quitte
 	if (
