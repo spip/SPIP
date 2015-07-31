@@ -269,7 +269,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
 					"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 					"statut_tmp"	=> "varchar(10) DEFAULT '0' NOT NULL",
-						"date_tmp"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
+					"date_tmp"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+					"profondeur" => "smallint(5) DEFAULT '0' NOT NULL"
 				),
 				'key' => array(
 					"PRIMARY KEY"	=> "id_rubrique",
