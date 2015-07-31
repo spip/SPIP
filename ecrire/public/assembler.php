@@ -139,8 +139,7 @@ function assembler($fond, $connect='') {
 				) {
 				  $code = ($page !== false) ?
 				    '404 Not Found' : '503 Service Unavailable';
-				  $msg = assembler_erreur_404 ($contexte);
-				  $page = message_erreur_404($msg, $code);
+				  $page = message_erreur_404('', $code);
 				}
 				// pas de cache client en mode 'observation'
 				if ($GLOBALS['var_mode']) {
@@ -391,20 +390,6 @@ function message_erreur_404 ($erreur= "", $code='404 Not Found') {
 	$page = inclure_page('404', $contexte_inclus);
 	$page['status'] = intval($code);
 	return $page;
-}
-
-function assembler_erreur_404 ($contexte)
-{
-	if (isset($contexte['id_article']))
-	return'public:aucun_article';
-	else if (isset($contexte['id_rubrique']))
-	return'public:aucune_rubrique';
-	else if (isset($contexte['id_breve']))
-	return'public:aucune_breve';
-	else if (isset($contexte['id_auteur']))
-	return'public:aucun_auteur';
-	else if (isset($contexte['id_syndic']))
-	return'public:aucun_site';
 }
 
 // temporairement ici : a mettre dans le futur inc/modeles
