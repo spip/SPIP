@@ -20,7 +20,7 @@ function action_documenter_dist()
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)$,", $arg, $r))
+	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\d*)$,", $arg, $r))
 		spip_log("action_documenter $arg pas compris");
 	else action_documenter_post($r);
 }
@@ -28,7 +28,7 @@ function action_documenter_dist()
 // http://doc.spip.org/@action_documenter_post
 function action_documenter_post($r)
 {
-	list($x, $sign, $id, $type, $vignette) = $r;
+  list($x, $sign, $id, $type, $vignette, $suite) = $r;
 
 	if ($vignette) {
 		// on ne supprime pas, on dissocie
@@ -36,6 +36,9 @@ function action_documenter_post($r)
 		// on dissocie, mais si le doc est utilise dans le texte, il sera reassocie ..., donc condition sur vu !
 		sql_delete("spip_documents_".$type."s",
 			"id_$type=".sql_quote($id)." AND id_document=".sql_quote($vignette)." AND (vu='non' OR vu IS NULL)");
+		// Cas de destruction de la vignette seulement
+		if ($suite)
+			sql_updateq("spip_documents", array('id_vignette' => 0), "id_document=$suite");
 
 		// Ensuite on supprime les docs orphelins, ca supprimera
 		// physiquement notre document s'il n'est pas attache ailleurs

@@ -16,11 +16,35 @@ include_spip('inc/actions'); // *action_auteur et determine_upload
 include_spip('base/abstract_sql');
 
 //
-// Construire un formulaire pour telecharger un fichier
+// Construire un formulaire pour telecharger un fichier an Ajax
 //
 
 // http://doc.spip.org/@inc_joindre_dist
 function inc_joindre_dist($v) {
+
+	// calculer le formulaire de base (et affecter $v si necessaire)
+
+	$res = joindre_formulaire($v);
+
+	if ($v['cadre']) {
+		$debut_cadre = 'debut_cadre_'.$v['cadre'];
+		$fin_cadre = 'fin_cadre_'.$v['cadre'];
+		$res = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre'])
+			. $res
+			. $fin_cadre(true);
+	}
+
+	if (test_espace_prive())
+		$v['script'] = generer_url_ecrire($v['script'], $v['args'], true);
+
+	return generer_action_auteur('joindre',
+		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$v['mode'].'/'.$v['type']),
+		$v['script'],
+		"\n<div class='joindre'>".$res."</div>\n",
+		" method='post' enctype='multipart/form-data' class='form_upload'");
+}
+
+function joindre_formulaire(&$v) {
 	global $spip_lang_right;
 	$depliable = false;
 
@@ -62,7 +86,7 @@ function inc_joindre_dist($v) {
 
 		$milieu = debut_block_depliable(false,$bloc);
 		$fin = "\n\t" . fin_block();
-		$depliable = true;
+		$v['titre'] = bouton_block_depliable($v['titre'],false,$bloc);
 
 	} else
 		$debut = $milieu = $fin = '';
@@ -95,25 +119,7 @@ function inc_joindre_dist($v) {
 	else
 		$res = $res . $milieu;
 
-
-	$res = generer_action_auteur('joindre',
-		(intval($v['id']) .'/' .intval($v['id_document']) . "/".$mode.'/'.$v['type']),
-		(!test_espace_prive())?$v['script']:generer_url_ecrire($v['script'], $v['args'], true),
-		"$iframe$debut$res$dir_ftp$distant$fin",
-		" method='post' enctype='multipart/form-data' class='form_upload'");
-
-	if ($v['cadre']) {
-		if ($depliable) {
-			$v['titre'] = bouton_block_depliable($v['titre'],false,$bloc);
-		}
-		$debut_cadre = 'debut_cadre_'.$v['cadre'];
-		$fin_cadre = 'fin_cadre_'.$v['cadre'];
-		$res = $debut_cadre($v['icone'], true, $v['fonction'], $v['titre'])
-			. $res
-			. $fin_cadre(true);
-	}
-
-	return "\n<div class='joindre'>".$res."</div>\n";
+	return "$iframe$debut$res$dir_ftp$distant$fin";
 }
 
 
