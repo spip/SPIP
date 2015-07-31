@@ -191,8 +191,8 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 		if ($align) $align="align='$align' ";
 
 		$milieu = "<img src='$arton' $align".
-			" name='image$num_survol' ".$taille_image." border='0' ALT=''".
-			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos'>";
+			" name='image$num_survol' ".$taille_image." border='0' alt=''".
+			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
 
 		if ($artoff) {
 			if ($lien) {

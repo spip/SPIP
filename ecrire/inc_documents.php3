@@ -90,7 +90,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 		else if ($inclus == "embed" AND $real) {
 			$vignette .= embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
-			$vignette .= "<br>";
+			$vignette .= "<br />";
 			$vignette .= embed_document ($id_document, "controls=PlayButton|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			$vignette .= embed_document ($id_document, "controls=PositionSlider|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 		}
@@ -116,8 +116,8 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<br><b>$titre</b>";
-			if ($descriptif) $retour .= "<br>$descriptif";
+			if ($titre) $retour .= "<br /><b>$titre</b>";
+			if ($descriptif) $retour .= "<br />$descriptif";
 
 			$retour .= "</div>\n</td></tr>\n</table>\n";
 		}
@@ -224,11 +224,11 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<br><b>$titre</b>";
-			if ($descriptif) $retour .= "<br>$descriptif";
+			if ($titre) $retour .= "<br /><b>$titre</b>";
+			if ($descriptif) $retour .= "<br />$descriptif";
 
 			if ($mode == 'document')
-				$retour .= "<br>(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)";
+				$retour .= "<br />(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)";
 
 			$retour .= "</div>\n</td></tr>\n</table>\n";
 		}
@@ -327,7 +327,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 
 	if (tester_upload()) {
 		echo "<b>$intitule</b>";
-		echo "<br><small><input name='image' type='File' class='fondl' size='15'>\n";
+		echo "<br /><small><input name='image' type='File' class='fondl' size='15'>\n";
 		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div></small>\n";
 	}
 
@@ -336,7 +336,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 		if ($texte_upload) {
 			echo "<p><div style='border: 1px #303030 dashed; padding: 4px; color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
-			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br>";
+			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br />";
 			echo "\n<select name='image2' size='1' class='fondl'>";
 			echo $texte_upload;
 			echo "\n</select>";
@@ -345,7 +345,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 			if ($afficher_texte_ftp){
 				if ($dossier_complet){
 					echo "\n<p><b>"._T('info_portfolio_automatique')."</b>";
-					echo "\n<br>"._T('info_installer_documents');
+					echo "\n<br />"._T('info_installer_documents');
 					echo "\n<div align='".$GLOBALS['spip_lang_right']."'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo'></div>";
 				}
 			}
@@ -623,7 +623,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<p></p><div style='border: 1px solid #666666; padding: 0px; background-color: #f0f0f0;'>";
 
 		echo "<div style='padding: 5px;'>";	
-		if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
+		if (strlen($descriptif)>0) echo propre($descriptif)."<br />";
 
 		if ($type_titre)
 			echo "$type_titre";
@@ -637,8 +637,8 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		if ($flag_modif) {
 			echo $link->getForm('POST');
 
-			echo "<b>"._T('titre_titre_document')."</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
+			echo "<b>"._T('titre_titre_document')."</b><br />\n";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br />";
 
 			if ($GLOBALS['coll'] > 0){
 				if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
@@ -646,7 +646,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 					$jour = $regs[3];
 					$annee = $regs[1];
 				}
-				echo "<b>"._T('info_mise_en_ligne')."</b><br>\n";
+				echo "<b>"._T('info_mise_en_ligne')."</b><br />\n";
 				echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
 				afficher_jour($jour);
 				echo "</SELECT> ";
@@ -655,16 +655,16 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				echo "</SELECT> ";
 				echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
 				afficher_annee($annee);
-				echo "</SELECT><br>";
+				echo "</SELECT><br />";
 			}
 
-			echo "<b>"._T('info_description')."</b><br>\n";
+			echo "<b>"._T('info_description')."</b><br />\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
 
 			if ($type_inclus == "embed" OR $type_inclus == "image") {
-				echo "<br><b>"._T('info_dimension')."</b><br>\n";
+				echo "<br /><b>"._T('info_dimension')."</b><br />\n";
 				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 			}
@@ -1000,7 +1000,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		//
 
 		echo "<div style='border: 1px solid #666666; padding: 5px; background-color: #f0f0f0;'>";
-		if (strlen($descriptif) > 0) echo propre($descriptif)."<br>";
+		if (strlen($descriptif) > 0) echo propre($descriptif)."<br />";
 
 		echo "<font size='2'>";
 		if ($options == "avanceees") {
@@ -1017,18 +1017,18 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		$link->addVar('id_document', $id_document);
 		echo $link->getForm('POST');
 
-		echo "<b>"._T('entree_titre_document')."</b><br>\n";
-		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br>";
+		echo "<b>"._T('entree_titre_document')."</b><br />\n";
+		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br />";
 
 		if ($descriptif OR $options == "avancees") {
-			echo "<b>"._T('info_description_2')."</b><br>\n";
+			echo "<b>"._T('info_description_2')."</b><br />\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";
 		}
 
 		if (($type_inclus == "embed" OR $type_inclus == "image") AND $options == "avancees") {
-			echo "<br><b>"._T('entree_dimensions')."</b><br>\n";
+			echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 		}
@@ -1110,7 +1110,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		else  echo debut_block_invisible($block);
 
 		if (ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
-		echo "\n<div align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br></font></div>\n";
+		echo "\n<div align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br /></font></div>\n";
 
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
@@ -1118,11 +1118,11 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo $link->getForm('POST');
 
 		echo "<p></p><div class='iconeoff'>";
-		echo "<b>"._T('entree_titre_image')."</b><br>\n";
-		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br>";
+		echo "<b>"._T('entree_titre_image')."</b><br />\n";
+		echo "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre)."\" size='40'><br />";
 
 		if ($descriptif OR $options == "avancees") {
-			echo "<b>"._T('info_description_2')."</b><br>\n";
+			echo "<b>"._T('info_description_2')."</b><br />\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' style='font-size:9px;' wrap='soft'>";
 			echo entites_html($descriptif);
 			echo "</textarea>\n";

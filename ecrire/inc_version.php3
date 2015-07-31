@@ -633,7 +633,7 @@ class Link {
 	// (tag ouvrant + entrees cachees representant les variables)
 	//
 
-	function getForm($method = 'GET', $anchor = '', $enctype = '') {
+	function getForm($method = 'get', $anchor = '', $enctype = '') {
 		if ($anchor) $anchor = '#'.$anchor;
 		$form = "<form method='$method' action='".$this->file.$anchor."'";
 		if ($enctype) $form .= " enctype='$enctype'";
@@ -643,7 +643,7 @@ class Link {
 			reset($vars);
 			while (list($name, $value) = each($vars)) {
 				$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
-				$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
+				$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\" />\n";
 			}
 		}
 		if (is_array($this->arrays)) {
@@ -652,7 +652,7 @@ class Link {
 				reset($table);
 				while (list(, $value) = each($table)) {
 					$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
-					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"$value\">\n";
+					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"$value\" />\n";
 				}
 			}
 		}
