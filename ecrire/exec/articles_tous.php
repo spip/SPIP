@@ -73,7 +73,7 @@ var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 		  "</a></div>",
 		  redirige_action_post("reorganiser","",'articles_tous', '', $out),
 		  "<ul id='articles_tous'><li id='rubrique-0' class='treeItem racine verdana2'>",
-		  "<span class='holder icone'>&nbsp;</span>",
+		  "<span class='holder iconeholder'>&nbsp;</span>",
 		  _T('info_racine_site'),
 		  "\n<ul class=''>\n",
 		  afficher_contenu_rubrique($article, $enfant, $text_article, 0, $flag_trad, 2),
