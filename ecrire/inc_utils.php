@@ -559,4 +559,12 @@ function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 			  (!$retour_args ? "" : ('?' . $retour_args))));
 }
 
+// cas particulier des scripts publics appeles a partir de l'espace prive
+// il faudra substituer a l'appel ci-dessous la definition ci-dessus
+// lorsque celle-ci deviendra generique
+
+function generer_url_public($script, $args="", $retour="", $retour_args="") {
+  return generer_url_ecrire("../$script", $args, $retour, $retour_args);
+}
+
 ?>

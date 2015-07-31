@@ -2328,7 +2328,7 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 if ($spip_display == "4") {
 	// Icones principales
 	echo "<ul>";
-	echo "<li><a href='" . generer_url_ecrire("index") . "'>"._T('icone_a_suivre')."</a>";
+	echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
 	echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
 	echo "<li><a href='" . generer_url_ecrire("forum_admin"). "'>"._T('titre_forum')."</a>";
 	echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
@@ -2350,7 +2350,7 @@ else {
 	echo "<div class='bandeau-icones'>\n";
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
 
-	icone_bandeau_principal (_T('icone_a_suivre'), generer_url_ecrire("index",""), "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_a_suivre'), './', "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_edition_site'), generer_url_ecrire("naviguer",""), "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
 	icone_bandeau_principal (_T('titre_forum'), generer_url_ecrire("forum_admin",""), "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_auteurs'), generer_url_ecrire("auteurs",""), "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
@@ -2664,7 +2664,7 @@ if (true /*$bandeau_colore*/) {
 		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
 			if ($auth_can_disconnect) {	
-				echo "<a href='" . generer_url_ecrire("../spip_cookie","logout=$connect_login") . "' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">" .
+				echo "<a href='" . generer_url_public("spip_cookie","logout=$connect_login") . "' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">" .
 				  http_img_pack("deconnecter-24.gif", "", "border='0'") . "</a>";
 			}
 		echo "</td>";
@@ -2730,7 +2730,7 @@ if (true /*$gadgets*/) {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus(generer_url_ecrire("index"))._T('info_articles_proposes'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus('./')._T('info_articles_proposes'), "article-24.gif", '', '', false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -2916,7 +2916,7 @@ if (true /*$gadgets*/) {
 	
 		// Deconnection
 		echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
-		echo "<a href='" . generer_url_ecrire("../spip_cookie","logout=$connect_login") . "' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
+		echo "<a href='" . generer_url_public("spip_cookie","logout=$connect_login") . "' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
 		echo "</div>";
 	
 		$decal = 0;
@@ -2944,7 +2944,7 @@ if (true /*$gadgets*/) {
 			echo $simple;
 
 			if ($options != "avancees") {		
-				echo "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='" . generer_url_ecrire("index","&set_options=avancees") . "'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>";
+				echo "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='./?set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>";
 			}
 
 		echo "</div>";
@@ -3236,7 +3236,7 @@ function fin_html() {
 	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
 		echo 
 		  http_img_pack('rien.gif', " ", "name='img_session' width='0' height='0'"),
-		  http_script("\ndocument.img_session.src='" . generer_url_ecrire('../spip_cookie','change_session=oui') . "'");
+		  http_script("\ndocument.img_session.src='" . generer_url_public('spip_cookie','change_session=oui') . "'");
 	}
 
 	echo "</body></html>\n";
@@ -3253,11 +3253,11 @@ function fin_page($credits='') {
 
 	# ici on en profite pour glisser une tache de fond
 	echo "<div align='right' class='verdana2' style='background: url(\"", 
-	  generer_url_ecrire('../spip_background'),
+	  generer_url_public('spip_background'),
 	  "\");'>";
 
 	if ($spip_display == 4) {
-	  echo "<div><a href='", generer_url_ecrire('index', 'set_disp=2'), "'>",
+	  echo "<div><a href='./?set_disp=2'>",
 	    _T("access_interface_graphique"),
 	    "</a></div>";
 	} else {
@@ -3388,7 +3388,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, generer_url_ecrire("../spip_redirect","id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
+		icone_horizontale($message, generer_url_public("spip_redirect","id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif");
 }
 
 

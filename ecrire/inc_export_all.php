@@ -102,7 +102,7 @@ export_objets($query, "spip_referers", $f, $gz, $etape, 15, _T('info_sauvegarde_
 
 if (!$etape OR $etape == 13){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
-	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='" . generer_url_ecrire("index","") . "'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
+	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 }
 else {
 	$etape_suivante = $etape + 1;
