@@ -40,7 +40,6 @@ function action_converser_dist()
 function action_converser_post()
 {
 	if ($lang = _request('var_lang_ecrire')) {
-		include_spip('inc/lang');
 		include_spip('inc/cookie');
 		spip_setcookie('spip_lang_ecrire', $lang, time() + 365 * 24 * 3600);
 		spip_setcookie('spip_lang', $lang, time() + 365 * 24 * 3600);
