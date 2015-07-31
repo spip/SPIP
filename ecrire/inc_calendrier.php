@@ -26,7 +26,6 @@ function http_calendrier_ics($evenements, $amj = "")
 	$class_mois = '
 		padding: 2px;
 		margin-top: 2px;
-		-moz-border-radius: 3px;
 		font-family: Arial, Sans, sans-serif;
 		font-size: 10px; ';
 	$res = '';
@@ -49,6 +48,9 @@ function http_calendrier_ics($evenements, $amj = "")
 
 			
 			if ($afficher_ev) {			
+				$radius_top = " -moz-border-radius-topleft: 6px; -moz-border-radius-topright: 6px;";
+				$radius_bottom = " -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px;";
+
 				$deb_h = substr($evenement['DTSTART'],-6,2);
 				$deb_m = substr($evenement['DTSTART'],-4,2);
 				$fin_h = substr($evenement['DTEND'],-6,2);
@@ -66,11 +68,17 @@ function http_calendrier_ics($evenements, $amj = "")
 				if ($deb_h >0 OR $deb_m > 0) {
 					if ((($deb_h > 0) OR ($deb_m > 0)) AND $amj == $jour_debut)
 						{ $deb = '<b>' . $deb_h . ':' . $deb_m . '</b> ';}
-					else { $deb = '...'; }
+					else { 
+						$deb = '...'; 
+						$radius_top = "";
+					}
 		
 					if ((($fin_h > 0) OR ($fin_m > 0)) AND $amj == $jour_fin)
 						{ $fin = '<b>' . $fin_h . ':' . $fin_m . '</b> ';}
-					else { $fin = '...'; }
+					else { 
+						$fin = '...'; 
+						$radius_bottom = "";
+					}
 	
 					if ($amj == $jour_debut OR $amj == $jour_fin) {
 						$date_affichee = "<div>$deb-$fin</div>";
@@ -92,7 +100,7 @@ function http_calendrier_ics($evenements, $amj = "")
 				else 
 				{
 					list($b,$c) = $c;
-					$c = "$class_mois background-color: $b; color: $c; border: 1px solid $c;$opacity";
+					$c = "$class_mois$radius_top$radius_bottom background-color: $b; color: $c; border: 1px solid $c;$opacity";
 				}
 				$res .=
 					"\n<div style='$c'>" .
@@ -122,109 +130,113 @@ function http_calendrier_aujourdhui_et_aide($now, $texte, $href)
 
 function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 {
-  global $spip_lang_left, $largeur_table, $largeur_gauche;
-  if ($spip_ecran == "large") {
-    $largeur_gauche = 130;
-    $largeur_table  = 954;
-  } else {
-    $largeur_gauche = 100;
-    $largeur_table = 730;
-  }
-  $fclic = ((lire_meta("activer_messagerie") == "oui") AND 
-	    ($GLOBALS["connect_activer_messagerie"] != "non"))?
-    'http_calendrier_clics' : 
-    'http_calendrier_sans_clics';
-  while (!(checkdate($mois,$dernier_jour,$annee))) $dernier_jour--;
-  $today=getdate(time());
-  $m=$today["mon"];
-  $a=$today["year"];
+	global $spip_lang_left, $largeur_table, $largeur_gauche, $spip_ecran;
 
-  $annee_avant = $annee - 1;
-  $annee_apres = $annee + 1;
+	if ($spip_ecran == "large") {
+		$largeur_gauche = 130;
+		$largeur_table  = 954;
+	} else {
+		$largeur_gauche = 100;
+		$largeur_table = 730;
+	}
+	$fclic = ((lire_meta("activer_messagerie") == "oui") AND 
+		($GLOBALS["connect_activer_messagerie"] != "non"))?
+		'http_calendrier_clics' : 
+		'http_calendrier_sans_clics';
+	while (!(checkdate($mois,$dernier_jour,$annee))) $dernier_jour--;
+	$today=getdate(time());
+	$m=$today["mon"];
+	$a=$today["year"];
 
-  $class_avant = '
-	margin-$spip_lang_left: 10px;
-	padding: 2px;
-	-moz-border-radius: 5px;
-	margin-top: 2px;
-	border: 1px solid #cccccc;
-	background-color: #cccccc;';
-  $class_cemois = '
-	margin-$spip_lang_left: 10px;
-	padding: 2px;
-	margin-top: 2px;
-	-moz-border-radius: 5px;
-	border: 1px solid #666666;
+	$annee_avant = $annee - 1;
+	$annee_apres = $annee + 1;
+
+	$class_avant = '
+		margin-$spip_lang_left: 10px;
+		padding: 2px;
+		-moz-border-radius: 5px;
+		margin-top: 2px;
+		border: 1px solid #cccccc;
+		background-color: #cccccc;';
+	$class_cemois = '
+		margin-$spip_lang_left: 10px;
+		padding: 2px;
+		margin-top: 2px;
+		-moz-border-radius: 5px;
+		border: 1px solid #666666;
 	background-color: white;';
 
-  $total = "<tr>" .
-    "<td width='$largeur_gauche' class='verdana1' valign='top'>" .
-    http_calendrier_aujourdhui_et_aide((($mois == $m) AND ($annee == $a)),
-			       affdate_mois_annee("$a-$m-1"),
-			       'calendrier.php3?type=mois') .
-    "<div>&nbsp;</div>" .
-    "<div><b>$annee_avant</b></div>";
-  for ($i=$mois; $i < 13; $i++) {
-    $total .= "<div style='$class_avant'>" .
-      http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
-		   nom_mois("$annee_avant-$i-1"),'','') .
-      "</div>";
-  }
+	$total = "<tr>" .
+		"<td width='$largeur_gauche' class='verdana1' valign='top'>" .
+		http_calendrier_aujourdhui_et_aide((($mois == $m) AND ($annee == $a)),
+			affdate_mois_annee("$a-$m-1"),
+			'calendrier.php3?type=mois') .
+		"<div>&nbsp;</div>" .
+		"<div><b>$annee_avant</b></div>";
+	for ($i=$mois; $i < 13; $i++) {
+		$total .= "<div style='$class_avant'>" .
+			http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
+			nom_mois("$annee_avant-$i-1"),'','') .
+			"</div>";
+	}
   
-  $total .= "<div><b>$annee</b></div>";
-  for ($i=1; $i < 13; $i++) {
-    if ($i == $mois) {
-      $total .=  "<div style='$class_cemois'><b>".nom_mois("$annee-$i-1")."</b></div>";
-	  }
-    else {
-      $total .=
-	"<div  style='$class_avant'>" .
-	http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
-		     nom_mois("$annee-$i-1"),'','') .
-	"</div>";
-    }
-  }
+	$total .= "<div><b>$annee</b></div>";
+	for ($i=1; $i < 13; $i++) {
+		if ($i == $mois) {
+			$total .=  "<div style='$class_cemois'><b>".nom_mois("$annee-$i-1")."</b></div>";
+		}
+		else {
+			$total .=
+				"<div  style='$class_avant'>" .
+				http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+				nom_mois("$annee-$i-1"),'','') .
+			"</div>";
+		}
+	}
 
-  $total .=  "<div><b>$annee_apres</b></div>";
-  for ($i=1; $i < $mois+1; $i++) {
-    $total .=
-      "<div style='$class_avant'>" .
-      http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
-		   nom_mois("$annee_apres-$i-1"),'','') .
-      "</div>";
-  }
-     list($articles, $breves, $messages) = 
-       sql_calendrier_interval_mois($annee,$mois, $premier_jour);
-  if ($articles)
-      foreach($articles as $d => $v) 
-	{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
-  if ($breves)
-      foreach($breves as $d => $v) 
-	{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
-  $total .=  "</td>" .
-    "<td width='20' valign='top'>&nbsp;</td>" .
-    "<td width='" . ($largeur_table -$largeur_gauche-10) . "' valign='top'>" .
-    http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, 
-		 $GLOBALS['HTTP_GET_VARS']['echelle'], $messages, $fclic);
+	$total .=  "<div><b>$annee_apres</b></div>";
+	for ($i=1; $i < $mois+1; $i++) {
+		$total .=
+			"<div style='$class_avant'>" .
+			http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
+			nom_mois("$annee_apres-$i-1"),'','') .
+			"</div>";
+	}
+	list($articles, $breves, $messages) = 
+		sql_calendrier_interval_mois($annee,$mois, $premier_jour);
+	if ($articles)
+		foreach($articles as $d => $v) 
+			{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
+	if ($breves)
+		foreach($breves as $d => $v) 
+			{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
 
-  $total = "<div>&nbsp;</div>" .
-    "<table cellpadding=0 cellspacing=0 border=0 width='".
-    ($largeur_table+10+$largeur_gauche).
-    "'>" .
-    $total .
-    "</td></tr></table>";
-  # messages sans date ?
-  if ($messages["0"]){ 
-    $total .=  "\n<table width='200'><tr><td><font face='arial,helvetica,sans-serif' size='1'><b>".
-	  _T('info_mois_courant').
-	  "</b>" .
-	  http_calendrier_ics($messages["0"]) .
-	  "</font></td></tr></table>";
- }
+	$total .=  "</td>" .
+		"<td width='20' valign='top'>&nbsp;</td>" .
+		"<td width='" . ($largeur_table) . "' valign='top'>" .
+		http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, 
+			$GLOBALS['HTTP_GET_VARS']['echelle'], $messages, $fclic);
 
-  if ($fclic == 'http_calendrier_clics')
-    $total .= http_calendrier_aide_mess();
-  return $total;
+	$total = "<div>&nbsp;</div>" .
+		"<table cellpadding=0 cellspacing=0 border=0 width='".
+		($largeur_table).
+		"'>" .
+		$total .
+		"</td></tr></table>";
+
+	# messages sans date ?
+	if ($messages["0"]){ 
+		$total .=  "\n<table width='200'><tr><td><font face='arial,helvetica,sans-serif' size='1'><b>".
+		_T('info_mois_courant').
+		"</b>" .
+		http_calendrier_ics($messages["0"]) .
+		"</font></td></tr></table>";
+	}
+
+	if ($fclic == 'http_calendrier_clics')
+		$total .= http_calendrier_aide_mess();
+
+	return $total;
 }
 
 function http_calendrier_aide_mess()
@@ -440,13 +452,6 @@ function http_calendrier_les_jours($intitul, $claire, $foncee)
 
 function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic)
 {
-/*  $class_dispose = '
-	border-bottom: 1px solid white;
-	border-right: 1px solid white;
-	border-left: 1px solid #aaaaaa;
-	border-top: 1px solid #aaaaaa; ';
-*/
-
 	$class_dispose = 'border-bottom: 1px solid #aaaaaa;'; 
   
 // affichage du debut de semaine hors periode
@@ -776,30 +781,69 @@ function http_calendrier_articles_et_breves($articles, $breves, $style)
 
 function http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize)
 {
-  global $spip_lang_left;
-  $slice = floor($dimheure/(2*$fontsize));
-  if ($slice%2) $slice--;
-  if (!$slice) $slice = 1;
+	global $spip_lang_left, $spip_lang_right;
+	$slice = floor($dimheure/(2*$fontsize));
+	if ($slice%2) $slice --;
+	if (!$slice) $slice = 1;
 
-  $total = '';
-  for ($i = $debut; $i <= $fin; $i++) {
-    for ($j=0; $j < $slice; $j++) 
-      {
-    	if ($j == 0) $gras = " font-weight: bold;";
-    	else $gras = "";
+	$total = '';
+	for ($i = $debut; $i < $fin; $i++) {
+		for ($j=0; $j < $slice; $j++) 
+		{
+			if ($j == 0) $gras = " font-weight: bold;";
+			else $gras = "";
+			
+			$total .= "\n<div style='position: absolute; width: 100%; $spip_lang_left: 0px; top: ".
+				http_cal_top ("$i:".sprintf("%02d",floor(($j*60)/$slice)), $debut, $fin, $dimheure, $dimjour, $fontsize) .
+				"px; border-top: 1px solid #cccccc;$gras'>
+				<div style='margin-$spip_lang_left: 2px'>$i:" . 
+				sprintf("%02d",floor(($j*60)/$slice)) . 
+				"</div>\n</div>";
+		}
+	}
+	
 	$total .= "\n<div style='position: absolute; width: 100%; top: ".
-	  ((($i-$debut+1)*$dimheure) + floor(($j*$dimheure)/$slice)) .
-	  "px; border-top: 1px solid #aaaaaa;$gras'>
-		<div style='margin-$spip_lang_left: 2px'>$i:" . 
-	  sprintf("%02d",floor(($j*60)/$slice)) . 
-	  "</div>\n</div>";
-      }
-  }
-  return "\n<div style='position: absolute; $spip_lang_left: 2px; top: 2px;'><b>0:00</b></div>" .
-    $total .
-    "\n<div style='position: absolute; $spip_lang_left: 2px; top: ".
-    ($dimjour - $fontsize) .
-    "px;'><b>23:59</b></div>";
+		http_cal_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize).
+		"px; border-top: 1px solid #cccccc; font-weight: bold;'>
+		<div style='margin-$spip_lang_left: 2px'>$fin:00" . 
+		"</div>\n</div>";
+	
+	
+	return "\n<div style='position: absolute; $spip_lang_left: 2px; top: 2px;'><b>0:00</b></div>" .
+		$total .
+		"\n<div style='position: absolute; $spip_lang_left: 2px; top: ".
+		($dimjour - $fontsize - 2) .
+		"px;'><b>23:59</b></div>";
+}
+
+# Calcule le "top" d'une heure
+
+function http_cal_top ($heure, $debut, $fin, $dimheure, $dimjour, $fontsize) {
+	
+	$h_heure = substr($heure, 0, strpos($heure, ":"));
+	$m_heure = substr($heure, strpos($heure,":") + 1, strlen($heure));
+	$heure100 = $h_heure + ($m_heure/60);
+
+	if ($heure100 < $debut) $heure100 = ($heure100 / $debut) + $debut - 1;
+	if ($heure100 > $fin) $heure100 = (($heure100-$fin) / (24 - $fin)) + $fin;
+
+	$top = floor(($heure100 - $debut + 1) * $dimheure);
+
+	return $top;	
+}
+
+# Calcule la hauteur entre deux heures
+function http_cal_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour, $fontsize) {
+
+	$height = http_cal_top ($heurefin, $debut, $fin, $dimheure, $dimjour, $fontsize) 
+				- http_cal_top ($heure, $debut, $fin, $dimheure, $dimjour, $fontsize);
+
+	$padding = floor(($dimheure / 3600) * 240);
+	$height = $height - (2* $padding + 2); // pour padding interieur
+	
+	if ($height < ($dimheure/4)) $height = floor($dimheure/4); // eviter paves totalement ecrases
+	
+	return $height;	
 }
 
     
@@ -814,8 +858,8 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 
 	if ($echelle==0) $echelle = DEFAUT_D_ECHELLE;
 
-	list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin, $echelle);
-	$modif_decalage = round($largeur/8);
+
+list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin, $echelle);		$modif_decalage = round($largeur/8);
 
 	$total = '';
 
@@ -832,6 +876,10 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 			$debut_avant = false;
 			$fin_apres = false;
 			
+			
+			$radius_top = " -moz-border-radius-topleft: 6px; -moz-border-radius-topright: 6px;";
+			$radius_bottom = " -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px;";
+			
 			if ($d_jour <= $date AND $e_jour >= $date)
 			{
 
@@ -842,13 +890,12 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 			{
 				$heure_debut = 0; $minutes_debut = 0;
 				$debut_avant = true;
+				$radius_top = "";
 			}
 			else
 			{
 				$heure_debut = substr($d,-6,2);
 				$minutes_debut = substr($d,-4,2);
-				if ($heure_debut < $debut) { $heure_debut = $debut; $minutes_debut = 0; }
-				if ($heure_debut > $fin)   { $heure_debut = $fin; $minutes_debut = 0; }
 			}
 
 			if (!$e)
@@ -865,24 +912,22 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 				{
 					$heure_fin = 23; $minutes_fin = 59;
 					$fin_apres = true;
+					$radius_bottom = "";
 				}
 				else
 				{
 					$heure_fin = substr($e,-6,2);
 					$minutes_fin = substr($e,-4,2);
 				}
-				if ($heure_fin < ($debut+1)) { $heure_fin = $debut+1; $minutes_fin = 00; }
-				if ($heure_fin > $fin)       { $heure_fin = $fin+1; $minutes_fin = 00; }
-				$haut = (($heure_debut - $debut +1)*60) + $minutes_debut;
 			}
 			
-			if ($haut < 0) $haut = 0;
 			if ($debut_avant && $fin_apres)  $opacity = "-moz-opacity: 0.6; filter: alpha(opacity=60);";
 			else $opacity = "";
 						
-			$bas = (($heure_fin - $debut + 1)*60) + $minutes_fin;
-			$hauteur = $bas-$haut;
-			if ($hauteur < 60) $hauteur = 60;
+						
+			$haut = http_cal_top ("$heure_debut:$minutes_debut", $debut, $fin, $dimheure, $dimjour, $fontsize);
+			$bas = http_cal_top ("$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
+			$hauteur = http_cal_height ("$heure_debut:$minutes_debut", "$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			if ($bas_prec > $haut) $decale += $modif_decalage;
 			else $decale = (2 * $fontsize);
 			if ($bas > $bas_prec) $bas_prec = $bas;
@@ -904,16 +949,16 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 				$bcolor = 'white';
 				$fcolor = 'black';
 			}
-			$total .= "\n<div style='cursor: auto; position: absolute; overflow: hidden; -moz-border-radius: 5px;$opacity z-index: " .
+			$total .= "\n<div style='cursor: auto; position: absolute; overflow: hidden;$radius_top$radius_bottom$opacity z-index: " .
 				$i .
 				"; $spip_lang_left: " .
 				$decale .
 				"px; top: " .
-				floor(60*$haut/$echelle) .
+				$haut .
 				"px; height: " .
-				(floor(60*$hauteur/$echelle) - $padding - $padding) .
+				$hauteur .
 				"px; width: ".
-				$largeur .
+				($largeur - 2 * (padding+1)) .
 				"px; font-size: ".
 				floor($fontsize * 1.3) .
 				"px; padding: " .
