@@ -273,7 +273,7 @@ function inc_traduire_dist($ori, $lang) {
 		if ($text)  {
 			$classe = 'debug-traduction' . ($module_retenu == 'ecrire' ? '-prive' : '');
 			$text = '<span lang=' . $langue_retenue . ' class=' . $classe . ' title=' . $ori_complet . '(' . $langue_retenue . ')>' . $text . '</span>';
-			$text = str_replace($module_retenu, "*$module_retenu*", $text);
+			$text = str_replace("$module_retenu:", "*$module_retenu*:", $text);
 		}
 	}
 	else {
