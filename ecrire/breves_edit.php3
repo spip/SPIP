@@ -46,7 +46,7 @@ if ($new != "oui") {
 	}
 }
 else {
-	$titre = _T('titre_nouvelle_breve');
+	$titre = filtrer_entites(_T('titre_nouvelle_breve'));
 	$statut = "prop";
 }
 

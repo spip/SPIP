@@ -46,7 +46,7 @@ $GLOBALS['i18n_es'] = array(
 'avis_erreur_fonction_contexte' => 'Error de programaci&oacute;n. Esta funci&oacute;n no debe ser llamada en este contexto.',
 'avis_erreur_mysql' => 'Error MySQL',
 'avis_erreur_sauvegarde' => 'Error en la copia de seguridad (@type@ @id_objet@) !',
-'avis_erreur_version_archive' => '<B>Atenci&oacute;n! El fichero @archive@ corresponde a otra versi&oacute;n de SPIP diferente a la instalada.</B> Se arriesga a tener grandes problemas: riesgo de destrucci&oacute;n de su base de datos, disfuncionamientos varios del sitio, etc. No validar esta petici&oacute;n de importaci&oacute;n.<p>Para m&aacute;s informaci&oacute;n, ver <A HREF=\'http://www.uzine.net/article1489.html\'>la documentaci&oacute;n de SPIP</A>.',
+'avis_erreur_version_archive' => '<B>&iexcl;ATENCION! El fichero @archive@ corresponde a otra versi&oacute;n de SPIP diferente a la instalada.</B> Se arriesga a tener grandes problemas: riesgo de destrucci&oacute;n de su base de datos, disfuncionamientos varios del sitio, etc. No valide esta importaci&oacute;n.<p>Para m&aacute;s informaci&oacute;n, ver <A HREF=\'http://www.uzine.net/article1489.html\'>la documentaci&oacute;n de SPIP</A>.',
 'avis_espace_interdit' => '<B>Espacio inaccesible</B><p>SPIP ya ha sido instalado.',
 'avis_lecture_noms_bases_1' => 'El programa de instalaci&oacute;n no ha logrado leer los nombres de las bases de datos instaladas.',
 'avis_lecture_noms_bases_2' => 'Dos posibilidades: o no hay ninguna base disponible o la funci&oacute;n de listado de las bases ha sido desactivada por razones de seguridad (caso frecuente en muchos servidores).',
@@ -85,7 +85,7 @@ $GLOBALS['i18n_es'] = array(
 'bouton_effacer_tout' => 'Borrar TODO!',
 'bouton_envoi_message_02' => 'Enviar un mensaje',
 'bouton_envoyer_message' => 'Mensaje definitivo: enviar',
-'bouton_forum_petition' => 'FORO Y PETICI&Oacute;N',
+'bouton_forum_petition' => 'Foro y petici&oacute;n',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'Recordatorio personal',
 'bouton_radio_activer_messagerie' => 'Activar la mensajer&iacute;a',
@@ -116,13 +116,13 @@ $GLOBALS['i18n_es'] = array(
 'bouton_radio_personnalise' => 'Juego de caracteres personalizado. Seleccionar esta opci&oacute;n para utilizar un juego de caracteres espec&iacute;fico.',
 'bouton_radio_petition_activee' => 'Petici&oacute;n activada',
 'bouton_radio_publication_immediate' => 'Publicaci&oacute;n inmediata de los mensajes (pueden suprimirse posteriormente desde la administraci&oacute;n).',
-'bouton_radio_sauvegarde_compressee' => 'copia de seguridad comprimida en <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'copia de seguridad no comprimida en <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'copia comprimida en <b>ecrire/data/dump.xml.gz</b>',
+'bouton_radio_sauvegarde_non_compressee' => 'copia no comprimida en <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la petici&oacute;n',
 'bouton_radio_syndication' => 'Sindicaci&oacute;n',
 'bouton_radio_universel' => 'Alfabeto universal (<tt>utf-8</tt>): permite mostrar todas las lenguas, pero actualmente no es reconocido por todos los navegadores.',
 'bouton_recharger_page' => 'Recargar esta p&aacute;gina',
-'bouton_redirection' => 'REDIRECCI&Oacute;N',
+'bouton_redirection' => 'Redirecci&oacute;n',
 'bouton_relancer_installation' => 'Relanzar la instalaci&oacute;n',
 'bouton_restaurer_base' => 'Restaurar la base',
 'bouton_suivant' => 'Siguiente',
@@ -717,7 +717,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_panne_site_syndique' => 'El sitio sindicado tiene problemas',
 'info_par_nombre_article' => '(por n&uacute;mero de art&iacute;culos)',
 'info_par_tri' => '(por @tri@)',
-'info_pas_de_forum' => 'Sin foro',
+'info_pas_de_forum' => 'sin foro',
 'info_passe_trop_court' => 'Contrase&ntilde;a demasiado corta',
 'info_passes_identiques' => 'Hay diferencias entre las dos contrase&ntilde;as',
 'info_pense_bete' => 'Recordatorio para memorizar',
@@ -1193,14 +1193,14 @@ Entonces podr&eacute;is poner una nueva contrase&ntilde;a y volver a conectaros 
 'taille_octets' => '@taille@&nbsp;bytes',
 'text_article_propose_publication' => 'Este art&iacute;culo ha sido propuesto para ser publicado.<br> No duc&eacute;is en dar vuestra opini&oacute;n en el foro que le concierne y que se encuentra m&aacute;s abajo en esta p&aacute;gina.',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso deb&eacute;is especificar un identificador de acceso inicial para poder luego buscar informaciones en el anuario. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
-'texte_actualite_site_1' => 'Esta p&aacute;gina contiene la actualidad del sitio y te permite seguir de cerca tus contribuciones. Encontrar&aacute;s tus art&iacute;culos en curso de redacci&oacute;n, los art&iacute;culos y las breves a las que est&aacute;s invitado/a a dar tu opini&oacute;n, m&aacute;s un recordatorio de tus anteriores contribuciones.<p><hr><p> Una vez que te hayas familiarizado con la interfaz, pulsa en &laquo;',
+'texte_actualite_site_1' => 'Esta p&aacute;gina contiene la actualidad del sitio y te permite seguir de cerca tus contribuciones. Encontrar&aacute;s tus art&iacute;culos en curso de redacci&oacute;n, los art&iacute;culos y las breves a las que est&aacute;s invitado/a a dar tu opini&oacute;n, m&aacute;s un recordatorio de tus anteriores contribuciones.<p><hr><p> Una vez que te hayas familiarizado con la interfaz, pulsa en ',
 'texte_actualite_site_2' => 'interfaz completa',
 'texte_actualite_site_3' => '&raquo; que tiene a&uacute;n m&aacute;s posibilidades.',
 'texte_admin_effacer_01' => 'Esta comando borra <i>TODO</i>  el contenido de la base de datos, redactores/as, administradores/as inclu&iacute;dos. Despu&eacute;s de ejecutarla deber&eacute;is reinstalar SPIP, creando una nueva base as&iacute; como tambi&eacute;n un primer acceso en tanto que administrador/a.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite crear una copia de seguridad de la base  en un fichero que se guardar&aacute; en el directorio <i>ecrire/data/</i>.
 
 No olvid&eacute;is igualmente recuperar la totalidad del directorio <i>IMG/</i>, que contiene las im&aacute;genes utilizadas en los art&iacute;culos y las secciones.',
-'texte_admin_tech_02' => '&iexcl;ATENCI&Oacute;N! Esta copia de seguridad NO PODR&Aacute; ser utilizada con otra versi&oacute;n de SPIP. Un error corriente es crear una copia de seguridad antes de hacer una actualizaci&oacute;n. Consulte la documentaci&oacute;n <a href="http://www.uzine.net/article1489.html">la documentation de SPIP</a>.',
+'texte_admin_tech_02' => '&iexcl;ATENCI&Oacute;N! Esta copia de seguridad NO PODR&Aacute; ser utilizada con otra versi&oacute;n de SPIP. Un error corriente es crear una copia de seguridad antes de hacer una actualizaci&oacute;n. Consulte la <a href="http://www.uzine.net/article1489.html">documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&eacute;is comprimir la copia de seguridad y as&iacute; facilitar la transferencia hacia vuestro ordenador, aparte de ganar espacio en el disco.',
 'texte_adresse_annuaire_1' => '(Si vuestro anuario est&aacute; instalado en la misma m&aacute;quina que el sitio Web, se trata probablemente de "localhost".)',
 'texte_ajout_auteur' => 'El siguiente autor/a ha sido a&ntilde;adido al art&iacute;culo:',
@@ -1226,7 +1226,7 @@ No olvid&eacute;is igualmente recuperar la totalidad del directorio <i>IMG/</i>,
 'texte_connexion_mysql' => 'Consultad las informaciones facilitadas por vuestro proveedor de hospedaje: deber&eacute;is encontrar, si vuestro proveedor soporta MySQL, los c&oacute;digos de conexi&oacute;n al servidor MySQL.',
 'texte_contenu_article' => '(Contenido del art&iacute;culo en pocas palabras)',
 'texte_contenu_articles' => 'Seg&uacute;n el dise&ntilde;o de vuestro sitio, pod&eacute;is seleccionar aqu&iacute; los elementos a utilizar.',
-'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aqu&iacute; de reparala.',
+'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aqu&iacute; de repararla.',
 'texte_creation_automatique_vignette' => 'Este sitio permite la creaci&oacute;n autom&aacute;tica de iconos en los siguientes formatos: @gd_formats@. Las im&aacute;genes que instales con este formulario tendr&aacute;n iconos de @taille_preview@ p&iacute;xeles.',
 'texte_creer_rubrique' => 'Antes de escribir un art&iacute;culo, debes crear una secci&oacute;n.',
 'texte_date_creation_article' => 'Fecha de creaci&oacute;n del art&iacute;culo',
@@ -1255,7 +1255,7 @@ Si no ves la utilidad puedes dejar esta opci&oacute;n con su valor por defecto (
 Deb&eacute;is intentar',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => 'despu&eacute;s de cerrar y reiniciar vuestro navegador.',
-'texte_inc_config' => 'Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <P align="justify"><B> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al/la webmaster principal de vuestro sitio. .</b>',
+'texte_inc_config' => 'Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <P align="justify"><B> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al/la webmaster principal de vuestro sitio. </b>',
 'texte_inc_meta_1' => 'Proceder, como administrador del sitio,',
 'texte_inc_meta_2' => 'a verificar los derechos de escritura',
 'texte_inc_meta_3' => 'del directorio ecrire/',
@@ -1297,7 +1297,7 @@ En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt
 'texte_rappel_selection_champs' => '[Selecciona correctamente este campo.]',
 'texte_recalcul_page' => 'Si deseas recalcular una sola p&aacute;gina utiliza el bot&oacute;n "Recalcular" en el espacio p&uacute;blico.',
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;gina recapitula la lista de documentos que has insertado en las secciones. Para modificar las informaciones de cada documento, utiliza el enlace de su secci&oacute;n.',
-'texte_recuperer_base' => 'Reparar la base de datos.',
+'texte_recuperer_base' => 'Reparar la base de datos',
 'texte_reference_mais_redirige' => 'Art&iacute;culo referenciado en tu sitio y redirigido hacia otra URL.',
 'texte_referencement_automatique' => '<b>Referenciar autom&aacute;ticamente un sitio</b><br>Si escribes aqu&iacute; la URL de un sitio o la direcci&oacute;n del fichero "backend" del sitio, SPIP recuperar&aacute; autom&aacute;ticamente las informaciones (t&iacute;tulo, descripcci&oacute;n...).',
 'texte_requetes_echouent' => '<B>Cuando algunas peticiones MySQL fracasan sistem&aacute;ticamente y sin raz&oacute;n aparente, es posible que sea por culpa de la propia base de datos.</b>
@@ -1305,17 +1305,21 @@ En ese caso, indica a continuaci&oacute;n su direcci&oacute;n, bajo la forma <tt
 MySQL dispone de una facultad de reparaci&oacute;n de sus tablas cuando han sido da&ntilde;adas por accidente. Aqu&iacute; pod&eacute;is intentar esta reparaci&oacute;n; en caso de fallo, conservad una copia del resultado, que posiblemente contiene indicios de lo que no funciona...
 
 Si el problema persiste, contacta con tu proveedor de hospedaje.',
-'texte_restaurer_base' => 'Restaurar el contenido de la copia de seguridad de la base.',
+'texte_restaurer_base' => 'Restaurar el contenido de la copia de seguridad',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n os permite restaurar una copia de seguridad de la base efectuada anteriormente. A este efecto, el fichero que contiene la copia de seguridad se debe haber situado en el directorio <i>ecrire/data/</i>.
-Sed prudentes con  esta funcionalidad: <b>las modificaciones, p&eacute;rdidas eventuales, son irreversibles.</b>',
-'texte_sauvegarde' => 'Crear una copia de seguridad del contenido de la base.',
+Sed prudentes con  esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',
+'texte_sauvegarde' => 'Crear una copia de seguridad de la base',
 'texte_sauvegarde_base' => 'Crear una copia de seguridad de la base',
 'texte_sauvegarde_compressee' => 'La copia de seguridad ser&aacute; realizada en un fichero sin compressi&oacute;n <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => 'A continuaci&oacute;n puedes seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! &radic; a escribir los art&iacute;culos en el idioma elegido, pero permite determinar:
-	<ul><li> el formato por defecto de las fechas en el sitio p&uacute;blico;</li>
-	<li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
-	<li> el idioma utilizado en los formularios del sitio p&uacute;blico;</li>
-	<li> el idioma mostrado por defecto en el espacio privado.</li></ul>',
+'texte_selection_langue_principale' => 'A continuaci&oacute;n puedes seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! - a escribir los art&iacute;culos en el idioma elegido, pero permite determinar:
+
+<ul><li> el formato por defecto de las fechas en el sitio p&uacute;blico;</li>
+
+<li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
+
+<li> el idioma utilizado en los formularios del sitio p&uacute;blico;</li>
+
+<li> el idioma mostrado por defecto en el espacio privado.</li></ul>',
 'texte_signification' => 'Las barras rojas representan las entradas acumuladas (total de las subsecciones), las barras verdes el n&uacute;mero de visitas de cada secci&oacute;n.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(Barras oscuras: domingo / curva oscura: evoluci&oacute;n del promedio)',
@@ -1382,10 +1386,10 @@ Sed prudentes con  esta funcionalidad: <b>las modificaciones, p&eacute;rdidas ev
 'titre_image_redacteur' => 'Redactor/a sin acceso',
 'titre_image_redacteur_02' => 'Redactor/a',
 'titre_image_visiteur' => 'Visitante',
-'titre_joindre_document' => 'A&Ntilde;ADIR UN DOCUMENTO',
-'titre_les_articles' => 'LOS ART&Iacute;CULOS',
+'titre_joindre_document' => 'A&ntilde;adir un documento',
+'titre_les_articles' => 'Los art&iacute;culos',
 'titre_liens_entrants' => 'Los enlaces entrantes del d&iacute;a',
-'titre_mots_cles' => 'PALABRAS CLAVE',
+'titre_mots_cles' => 'Palabras clave',
 'titre_mots_cles_dans_forum' => 'Palabras clave en los foros del sitio p&uacute;blico',
 'titre_mots_tous' => 'Las palabras clave',
 'titre_naviguer_dans_le_site' => 'Navegar por el sitio...',

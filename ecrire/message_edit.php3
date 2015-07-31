@@ -16,7 +16,7 @@ if ($new == "oui") {
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
 
-	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('".addslashes(_T('texte_nouveau_message'))."', NOW(), '$statut', '$type', $connect_id_auteur)";
+	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('".addslashes(filtrer_entites(_T('texte_nouveau_message')))."', NOW(), '$statut', '$type', $connect_id_auteur)";
 	$result = spip_query($query);
 	$id_message = spip_insert_id();
 	

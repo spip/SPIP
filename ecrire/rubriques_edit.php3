@@ -60,7 +60,7 @@ if ($new == "oui") {
 	if (($connect_statut=='0minirezo') AND acces_rubrique($id_parent)) {
 		$id_parent = intval($id_parent);
 		$id_rubrique = 0;
-		$titre = _T('titre_nouvelle_rubrique');
+		$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
 		$descriptif = "";
 		$texte = "";
 	}

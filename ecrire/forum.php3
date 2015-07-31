@@ -60,7 +60,7 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 
 
 	echo "<p><div align='center'>";
-	icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message=".urlencode(_T('texte_nouveau_message')), "forum-interne-24.gif", "creer.gif");
+	icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message=".urlencode(filtrer_entites(_T('texte_nouveau_message'))), "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 
 

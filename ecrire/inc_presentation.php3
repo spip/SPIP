@@ -1730,6 +1730,7 @@ function creer_colonne_droite($rubrique=""){
 	global $options;
 	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
+	global $spip_lang_rtl;
 
 	if ($flag_3_colonnes AND !$deja_colonne_droite) {
 		$deja_colonne_droite = true;
@@ -1765,12 +1766,12 @@ function creer_colonne_droite($rubrique=""){
 			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
 			if ($rubrique == "messagerie") {
 				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>";
-				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>";
+				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>\n";
+				echo "<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
+				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>\n";
 				if ($connect_statut == "0minirezo") {
-					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>";
+					echo "<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
+					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>\n";
 				}
 			}
 
