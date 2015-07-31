@@ -351,7 +351,7 @@ function typo_fr($letexte) {
 	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
 		$remplace2 = array(
 			'\1:',
-			'<font color=grey>~</font>'
+			'<span class="spip-nbsp">&nbsp;</span>'
 		);
 	else
 		$remplace2 = array(

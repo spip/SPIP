@@ -690,6 +690,10 @@ blockquote.spip {
 	padding: 5px;
 }
 
+.spip-nbsp {
+	color: #d8d8d8;
+	background-color: #d8d8d8;
+}
 .boutonlien {
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
