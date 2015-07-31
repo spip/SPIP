@@ -62,14 +62,17 @@ function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
 	if (intval($id)) {
 		$conflits = controler_contenu($type,$id);
 		if ($conflits AND count($conflits)) {
-			foreach($conflits as $champ=>$conflit){
+			foreach($conflits as $champ=>$conflit) {
+				if (!isset($erreurs[$champ])) { $erreurs[$champ] = ''; }
 				$erreurs[$champ] .= _T("alerte_modif_info_concourante")."<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>";
 			}
 		}
 	}
-	foreach($oblis as $obli){
-		if (!_request($obli))
+	foreach($oblis as $obli) {
+		if (!_request($obli)) {
+			if (!isset($erreurs[$obli])) { $erreurs[$obli] = ''; }
 			$erreurs[$obli] .= _T("info_obligatoire");
+		}
 	}
 	return $erreurs;
 }

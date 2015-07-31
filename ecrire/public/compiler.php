@@ -276,16 +276,18 @@ function instituer_boucle(&$boucle, $echapper=true){
 }
 
 /**
- * calculer_boucle() produit le corps PHP d'une boucle Spip.
- * ce corps remplit une variable $t0 retournee en valeur.
- * Ici on distingue boucles recursives et boucle a requete SQL
- * et on insere le code d'envoi au debusqueur du resultat de la fonction.
+ * Produit le corps PHP d'une boucle Spip.
+ * 
+ * Ce corps remplit une variable $t0 retournée en valeur.
+ * Ici on distingue boucles recursives et boucle à requête SQL
+ * et on insère le code d'envoi au debusqueur du resultat de la fonction.
  *
- * http://doc.spip.org/@calculer_boucle
- *
- * @param  $id_boucle
- * @param  $boucles
+ * @param string $id_boucle
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
  * @return string
+ * 		Code PHP compilé de la boucle
  */
 function calculer_boucle($id_boucle, &$boucles) {
 
@@ -307,31 +309,49 @@ function calculer_boucle($id_boucle, &$boucles) {
 	: calculer_boucle_nonrec($id_boucle, $boucles, $trace);
 }
 
-// compil d'une boucle recursive. 
-// il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
-// reference, car par definition un tel passage ne les sauvegarde pas
 
-// http://doc.spip.org/@calculer_boucle_rec
+/**
+ * Compilation d'une boucle recursive. 
+ *
+ * @internal
+ * 		Il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
+ * 		reference, car par definition un tel passage ne les sauvegarde pas
+ * 
+ * @param string $id_boucle
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param string $trace
+ * 		Code PHP (en mode debug uniquement) servant à conserver une
+ * 		trace des premières valeurs de la boucle afin de pouvoir
+ * 		les afficher dans le débugueur ultérieurement
+ * @return string
+ * 		Code PHP compilé de la boucle récursive
+**/
 function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 	$nom = $boucles[$id_boucle]->param[0];
-	return "\n\t\$save_numrows = (\$Numrows['$nom']);"
+	return
+	  // Numrows[$nom] peut ne pas être encore defini
+	  "\n\t\$save_numrows = (isset(\$Numrows['$nom']) ? \$Numrows['$nom'] : array());"
 	. "\n\t\$t0 = " . $boucles[$id_boucle]->return . ";"
 	. "\n\t\$Numrows['$nom'] = (\$save_numrows);"
 	. $trace
 	. "\n\treturn \$t0;";
 }
 
-// Compilation d'une boucle non recursive. 
-// Ci-dessous la constante donnant le cadre systematique du code:
-// %s1: initialisation des arguments de calculer_select
-// %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
-// %s3: initialisation du sous-tableau Numrows[id_boucle]
-// %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
-// %s5: boucle while sql_fetch ou str_repeat si corps monotone
-// %s6: restauration de la langue
-// %s7: liberation de la ressource, en tenant compte du serveur SQL 
-// %s8: code de trace eventuel avant le retour
-
+/**
+ * Compilation d'une boucle non recursive.
+ * 
+ * La constante donne le cadre systématique du code:
+ * %s1: initialisation des arguments de calculer_select
+ * %s2: appel de calculer_select en donnant un contexte pour les cas d'erreur
+ * %s3: initialisation du sous-tableau Numrows[id_boucle]
+ * %s4: sauvegarde de la langue et calcul des invariants de boucle sur elle
+ * %s5: boucle while sql_fetch ou str_repeat si corps monotone
+ * %s6: restauration de la langue
+ * %s7: liberation de la ressource, en tenant compte du serveur SQL 
+ * %s8: code de trace eventuel avant le retour
+**/
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
@@ -349,7 +369,20 @@ define('CODE_CORPS_BOUCLE', '%s
 	return $t0;'
 );
 
-// http://doc.spip.org/@calculer_boucle_nonrec
+/**
+ * Compilation d'une boucle (non recursive). 
+ *
+ * @param string $id_boucle
+ * 		Identifiant de la boucle
+ * @param array $boucles
+ * 		AST du squelette
+ * @param string $trace
+ * 		Code PHP (en mode debug uniquement) servant à conserver une
+ * 		trace des premières valeurs de la boucle afin de pouvoir
+ * 		les afficher dans le débugueur ultérieurement
+ * @return string
+ * 		Code PHP compilé de la boucle récursive
+**/
 function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	$boucle = &$boucles[$id_boucle];
@@ -497,7 +530,17 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 }
 
 
-// http://doc.spip.org/@calculer_requete_sql
+/**
+ * Calcule le code PHP d'une boucle contenant les informations qui produiront une requête SQL
+ *
+ * Le code produit est un tableau associatif $command contenant les informations
+ * pour que la boucle produise ensuite sa requête, tel que $command['from'] = 'spip_articles';
+ *
+ * @param Boucle $boucle
+ * 		AST de la boucle 
+ * @return string
+ * 		Code PHP compilé définissant les informations de requête
+**/
 function calculer_requete_sql($boucle)
 {
 	$init = array();
@@ -521,8 +564,8 @@ function calculer_requete_sql($boucle)
 	foreach ($init as $i){
 		if (reset($i))
 			$s .= "\n\t\t".end($i);
-	  else
-		  $d .= "\n\t".end($i);
+		else
+			$d .= "\n\t".end($i);
 	}
 
 	return ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
