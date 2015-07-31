@@ -114,10 +114,10 @@ function exec_import_all_dist()
 				$nom = "spip_$table";
 			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
 				foreach($liste_relations as $link_table){
-					if (isset($tables_auxiliaires[$link_table])||isset($tables_principales[$link_table])){
+					if (isset($tables_auxiliaires[$link_table])/*||isset($tables_principales[$link_table])*/){
 						$tables_for_link[$link_table][] = $nom;
 					}
-					else if (isset($tables_auxiliaires["spip_$link_table"])||isset($tables_principales["spip_$link_table"])){
+					else if (isset($tables_auxiliaires["spip_$link_table"])/*||isset($tables_principales["spip_$link_table"])*/){
 						$tables_for_link["spip_$link_table"][] = $nom;
 					}
 				}
@@ -148,7 +148,6 @@ function exec_import_all_dist()
 	
 	// puis commencer ou continuer
 	include_spip('inc/import');
-
 	import_all_continue($tables_for_dump);
 }
 ?>
