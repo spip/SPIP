@@ -59,14 +59,15 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 		  ."&nbsp;</b></a>\n</td><td>"
 		  .join("</td>\n<td>",$err)
 		  ."</td></tr>\n";
-		$anc .= "<a  title='"
-		  .  textebrut($err[0])
-		  . "' href='#req$i'><tt>"
+
+		$anc .= "<a style='font-family: monospace' title='"
+		  .  textebrut(preg_replace(',</?tr>,', "\n",$err[0]))
+		  . "' href='#req$i'>"
 		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
-		  . "</tt></a>"
+		  . "</a>"
 		  . (($i % 50) ? '' : "<br />\n");
+
 		$i++;
-		
 	}
 	$cols = 1+count($err);
 	$style = _DIR_RESTREINT ? " position: absolute; top: 90px; left: 10px; width: 200px; z-index: 1000; filter:alpha(opacity=95); -moz-opacity:0.9; opacity: 0.95;" : '';
@@ -84,23 +85,30 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 // http://doc.spip.org/@chrono_requete
 function chrono_requete($temps)
 {
-	$res = _DIR_RESTREINT ? '' :
-		affiche_erreurs_page($GLOBALS['tableau_des_erreurs']);
-
 	$t = $q = $n = array();
 	foreach ($temps as $key => $row) {
-		list($dt, $nb, $boucle, $req, $explain, $r) = $row;
+		list($dt, $nb, $boucle, $query, $explain, $res) = $row;
+		$boucle .= '&nbsp;(' . @++$n[$boucle] . ")";
 		$t[$key] = $dt;
 		$q[$key] = $nb;
-		$temps[$key] = array($boucle . ' (' . @++$n[$boucle] . ")<br />" . 
-				     _T('zbug_profile', array('time'=> "<br />$dt")) .
-				     "<br />Chronologie: $nb<br />Resultat: $r",
-				     $req,
-				     $explain);
+
+		$e = "<tr><th colspan='2' style='text-align:center'>$boucle</th></tr>"
+		.  "<tr><td>Time</td><td>$dt</td></tr>" 
+		.  "<tr><td>Order</td><td>$nb</td></tr>" 
+		. "<tr><td>Res</td><td>$res</td></tr>" ;
+
+		foreach($explain as $k => $v) {
+			$e .= "<tr><td>$k</td><td>"
+			  . str_replace(';','<br />',$v)
+			  . "</td></tr>";
+		}
+
+		$temps[$key] = array("<br /><table border='1'>$e</table>", $query);
 	}
 	array_multisort($t, SORT_DESC, $q, $temps);
 
-	return $res . affiche_erreurs_page($temps, _T('icone_statistiques_visites'));
+	return (_DIR_RESTREINT ? '' : affiche_erreurs_page($GLOBALS['tableau_des_erreurs']))
+	. affiche_erreurs_page($temps, _T('icone_statistiques_visites'));
 }
 
 //
@@ -709,18 +717,15 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	$tt += $dt;
 	$nb++;
 
-	$explain = '';
-	foreach (sql_explain($query, $serveur) as $k => $v) {
-		$explain .= "<tr><td>$k</td><td>" .str_replace(';','<br />',$v) ."</td></tr>";
-	}
-	if ($explain) $explain = "<table border='1'>$explain</table>";
 	if (isset($GLOBALS['debug']['aucasou'])) {
 		list(, $boucle, $serveur) = $GLOBALS['debug']['aucasou'];
 		if ($serveur) $boucle .= " ($serveur)";
 		$boucle = "<b>$boucle</b>";
 	} else $boucle = '<i>hors compilation</i>';
+
 	$q = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
+	$e =  sql_explain($query, $serveur);
 	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
-	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $explain, $r);
+	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r);
 }
 ?>
