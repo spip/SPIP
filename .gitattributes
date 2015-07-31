@@ -495,6 +495,7 @@ ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/regler_moderation.php -text
+ecrire/inc/safehtml.php -text
 ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/selectionner_auteur.php -text
