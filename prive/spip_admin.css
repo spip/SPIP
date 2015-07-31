@@ -7,7 +7,7 @@ a:hover.spip-admin-boutons { background-color: #fc3; border-bottom: 2px solid #3
 a:active.spip-admin-boutons { background-color: #ccc; border-bottom: 2px solid #f00; }
 
 /* Style pour le mode debug */
-#spip-debug { background-color: #f0f0f0; font-family: Verdana, Geneva, Helvetica, sans-serif; position:relative;z-index:10000; font-size:1em; }
+#spip-debug { background-color: #f0f0f0; font-family: Verdana, Geneva, Helvetica, sans-serif; position:absolute;top:20px;left:0;width:100%;height:100%;z-index:10000; font-size:1em; text-align:left; }
 #spip-debug ul table { font-size: 80%; }
 #spip-debug fieldset { background-color: #fff; font-family: Courier, "Courier New", monospace; font-size: 12px; margin-bottom: 1em; }
 #spip-debug fieldset fieldset { background-color: #ccf; font-family: Verdana, Geneva, Helvetica, sans-serif; font-size: 80%; }
@@ -24,8 +24,17 @@ a:active.spip-admin-boutons { background-color: #ccc; border-bottom: 2px solid #
 .spip-env fieldset { background-color: #fff; border: solid 1px #008; margin: 2px 2em; }
 .spip-env legend { background-color: #fff; border: solid 1px #f00; padding: 1px 1em; font-weight: bold; }
 .spip-env fieldset div { max-height: 10em; overflow: auto; }
-fieldset.blocs {
-border:1px dashed blue !important;
+.inclure_blocs {
+	padding:0 !important;
+	margin:0 !important;
+	border:0 !important;
+	border-bottom:2px solid #FEFF7F !important;
+	background:url(images/fond-inclure.png) repeat top left !important;
+}
+.inclure_blocs > h6 {background:#FEFF7F;margin:0;padding:2px;margin-bottom:2px;font-family: Courier;font-size: 0.8em;}
+.inclure_blocs > h6:hover,
+.inclure_blocs.hover {
+	background-color: #FDFF1F !important;
 }
 
 #debug-nav {position:absolute;top:90px;left:10px;width:200px;border:0; background:#f0d9d9; padding:20px; filter:alpha(opacity=90); -moz-opacity:0.9; opacity: 0.90; z-index: 1000; text-align: left; }
