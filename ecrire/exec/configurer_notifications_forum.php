@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_configurer_previsualiseur_dist
+// http://doc.spip.org/@exec_configurer_notifications_forum_dist
 function exec_configurer_notifications_forum_dist()
 {
 	$f = charger_fonction('notifications_forum', 'configuration');
