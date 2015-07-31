@@ -28,7 +28,7 @@ body {
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
 td {
-	text-align: <? echo $left; ?>;
+	text-align: <?php echo $left; ?>;
 }
 /*
  * Formulaires
@@ -649,12 +649,12 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, a.creer, a.creer:hover {
 }
 
 a.foncee, a.foncee:hover {
-	background-color: <? echo $couleur_foncee; ?>;
+	background-color: <?php echo $couleur_foncee; ?>;
 	color: white;
 }
 a.claire, a.claire:hover {
-	background-color: <? echo $couleur_claire; ?>;
-	color: <? echo $couleur_foncee; ?>;
+	background-color: <?php echo $couleur_claire; ?>;
+	color: <?php echo $couleur_foncee; ?>;
 }
 a.creer, a.creer:hover {
 	background-color: white;
@@ -691,8 +691,11 @@ blockquote.spip {
 }
 
 .spip-nbsp {
-	color: #d8d8d8;
-	background-color: #d8d8d8;
+	border-bottom: 2px solid #c8c8c8;
+	padding-left: 2px;
+	padding-right: 2px;
+	margin-left: -1px;
+	margin-right: -1px;
 }
 .boutonlien {
 	font-family: Verdana,Arial,Sans,sans-serif;
