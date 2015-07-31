@@ -145,6 +145,7 @@ function action_tester_dist() {
 		$image = _image_valeurs_trans(_DIR_IMG_PACK.'test_image.jpg',"reduire-$taille_preview-$taille_preview",'jpg');
 
 		$image['fichier_dest']=_DIR_VAR."test_$arg";
+
 		if ($preview = _image_creer_vignette($image, $taille_preview, $taille_preview, $arg, true)
 		AND ($preview['width'] * $preview['height'] > 0))
 			redirige_par_entete($preview['fichier']);

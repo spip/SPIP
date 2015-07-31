@@ -116,7 +116,7 @@ function url_vignette_choix($process){
 				return '';
 			break;
 		case 'imagick':
-			if (!function_exists('imagick_readimage'))
+			if (!method_exists('Imagick','readImage'))
 				return '';
 			break;
 		case 'convert':
