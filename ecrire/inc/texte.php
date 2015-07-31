@@ -990,9 +990,8 @@ function traiter_listes ($texte) {
 // http://doc.spip.org/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
-	preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS',
+	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS',
 		"($message)", $letexte);
-	return $letexte;
 }
 
 // traite les modeles (dans la fonction typo), en remplacant
