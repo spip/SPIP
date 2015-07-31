@@ -1426,7 +1426,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		if (email_valide($row[\'email\'])) {
 			$email = trim($row[\'email\']);
-			$'.$nom_var.' = "<?'.'php
+			$'.$nom_var.' = "<'.'?php
 				include (\'inc-formulaires.php3\'); ecrire_auteur(".$row[\'id_auteur\'].",\'$email\');
 			?'.'>";
 		}
