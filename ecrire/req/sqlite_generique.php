@@ -1127,15 +1127,21 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 				$namedkeys = "";
 
 			$fields = array();
+			$keys   = array();
+			
 			foreach (explode(",", $dec) as $v){
 				preg_match("/^\s*([^\s]+)\s+(.*)/", $v, $r);
 				// trim car 'Sqlite Manager' (plugin Firefox) utilise des guillemets
 				// lorsqu'on modifie une table avec cet outil.
 				// possible que d'autres fassent de meme.
 				$fields[trim(strtolower($r[1]), '"')] = $r[2];
+				// la primary key peut etre dans une des descriptions de champs
+				// et non en fin de table, cas encore decouvert avec Sqlite Manager
+				if (stripos($r[2], 'PRIMARY KEY') !== false) {
+					$keys['PRIMARY KEY'] = trim(strtolower($r[1]), '"');
+				}			
 			}
 			// key inclues dans la requete
-			$keys = array();
 			foreach (preg_split('/\)\s*,?/', $namedkeys) as $v){
 				if (preg_match("/^\s*([^(]*)\((.*)$/", $v, $r)){
 					$k = str_replace("`", '', trim($r[1]));
