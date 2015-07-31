@@ -13,7 +13,7 @@
 	</fieldset>]
 
 	[(#ENV{editable})
-	<form id='formulaire_login' method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	<form id='formulaire_login' method='post' action='#ENV{action}'>
 	[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset>
