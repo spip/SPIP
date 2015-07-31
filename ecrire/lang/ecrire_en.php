@@ -873,7 +873,7 @@ reinstall SPIP, create a new database and a new administrator account.',
   with its default value (no file 
   creation).</p>',
 	'texte_informations_personnelles_1' => 'The system will now  create your personal account for this site.',
-	'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your login account is still working, you can', # MODIF
+	'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, if your former access is still working, you can',
 	'texte_introductif_article' => '(Introductory text for the article.)',
 	'texte_jeu_caractere' => 'We advise using the universal alphabet (<tt>utf-8</tt>) on your site. This will make it possible to display text in any language. All modern browsers are fully comptabile with this character set.',
 	'texte_jeu_caractere_2' => 'N.B. This setting will not convert text which  already figures in the database.',
