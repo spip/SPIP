@@ -6,6 +6,11 @@ if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
 
+
+function define_once ($constant, $valeur) {
+	if (!defined($constant)) define($constant, $valeur);
+}
+
 // *********** traiter les variables ************
 // Magic quotes : on n'en veut pas sur la base,
 // et on nettoie les GET/POST/COOKIE le cas echeant
@@ -217,14 +222,14 @@ if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
 	include(_DIR_RESTREINT . 'mes_options.php3');
 }
 
-define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
+define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
 
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
-define('_DIR_IMG', (_DIR_RESTREINT ? "" : "../")."IMG/");
-define('_DIR_DOC', (_DIR_RESTREINT ? "" : "../")."IMG/");
-define('_DIR_CACHE', (_DIR_RESTREINT ? "" : "../")."CACHE/");
-define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
+define_once('_DIR_IMG', (_DIR_RESTREINT ? "" : "../")."IMG/");
+define_once('_DIR_DOC', (_DIR_RESTREINT ? "" : "../")."IMG/");
+define_once('_DIR_CACHE', (_DIR_RESTREINT ? "" : "../")."CACHE/");
+define_once('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
 
 // exemples de redefinition possible, 
 // SOUS RESERVE QUE php.ini N'AIT PAS pas openbasedir=. !!!!!!
@@ -244,23 +249,23 @@ $test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
 
 // les fichiers qu'on y met, entre autres,
 
-define('_FILE_LOCK', _DIR_SESSIONS . 'lock');
-define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
-define('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
-define('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
+define_once('_FILE_LOCK', _DIR_SESSIONS . 'lock');
+define_once('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
+define_once('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
+define_once('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
 
-define('_FILE_CONNECT', (@file_exists(_DIR_RESTREINT . "inc_connect.php3") ?
+define_once('_FILE_CONNECT', (@file_exists(_DIR_RESTREINT . "inc_connect.php3") ?
 			(_DIR_RESTREINT . "inc_connect.php3") : ''));
 
 // et qq sous-repertoires
 
-define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
-define('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
-define('_DIR_TeX', _DIR_IMG . "TeX/");
+define_once('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
+define_once('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
+define_once('_DIR_TeX', _DIR_IMG . "TeX/");
 
 // qq chaines standard
 
-define('_ACCESS_FILE_NAME', '.htaccess');
+define_once('_ACCESS_FILE_NAME', '.htaccess');
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
