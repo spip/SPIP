@@ -513,9 +513,12 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 				$spip_table_objet = table_objet_sql($type);
 				$id_table_objet = id_table_objet($type);
 				$res = sql_select("L.$primary AS id,L.id_objet",
+					// la condition de jointure inclue L.objet='xxx' pour ne joindre que les bonnes lignes
+					// du coups toutes les lignes avec un autre objet ont un id_xxx=NULL puisque LEFT JOIN
+					// il faut les eliminier en repetant la condition dans le where L.objet='xxx'
 								"$table_lien AS L
 									LEFT JOIN $spip_table_objet AS O
-										ON O.$id_table_objet=L.id_objet",
+										ON (O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type).")",
 						"L.objet=".sql_quote($type)." AND O.$id_table_objet IS NULL");
 				// sur une cle primaire composee, pas d'autres solutions que de virer un a un
 				while ($row = sql_fetch($res)){
