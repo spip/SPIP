@@ -267,7 +267,7 @@ function balise_EXPOSE_dist($p) {
 
 // #VALEUR renvoie le champ valeur
 // #VALEUR{x} renvoie #VALEUR|table_valeur{x}
-// #VALEUR{a.b} renvoie #VALEUR|table_valeur{a.b}
+// #VALEUR{a/b} renvoie #VALEUR|table_valeur{a/b}
 // http://doc.spip.org/@balise_VALEUR_dist
 function balise_VALEUR_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
@@ -275,7 +275,7 @@ function balise_VALEUR_dist($p) {
 	if (($v = interprete_argument_balise(1,$p))!==NULL){
 		$p->code = 'table_valeur('.$p->code.', '.$v.')';
 	}
-	$p->interdire_scripts = false;
+	$p->interdire_scripts = true;
 	return $p;
 }
 
