@@ -20,6 +20,9 @@ h3.spip {
 	font-weight: bold;
 	font-size: 120%;
 	text-align: center;
+	margin-top: 2em;
+	margin-bottom: 1.5em;
+	padding: 0em;
 }
 
 .spip_documents{
