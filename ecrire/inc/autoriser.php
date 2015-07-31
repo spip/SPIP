@@ -296,11 +296,17 @@ function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- *  Options de la fonction autoriser_previsualiser_dist
+ * Options de la fonction autoriser_previsualiser_dist
  *
  * commande l'affichage dans l'espace prive du bouton "previsualiser"
  * voir prive/objets/infos/article.html etc.
- *
+ * 
+ * @uses lister_tables_objets_sql()
+ * @uses table_objet_sql()
+ * 
+ * @param string|null $type
+ * @param array $opt
+ * @return boolean
  */
 function test_previsualiser_objet_champ($type=null, $opt=array()) {
 

@@ -10,23 +10,64 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des boutons de l'interface privée
+ *
+ * @package SPIP\Core\Boutons
+ */
+
+ * @var nulll|string $url2
+ *      URL du javascript
+ * @var null|string $target
+ *      Pour ouvrir dans une fenêtre à part
+ * @var null|mixed $sousmenu
+ *      Sous-barre de boutons/onglets
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * une classe definissant un bouton dans la barre du haut de l'interface
- * privee ou dans un de ses sous menus
+ * Classe définissant un bouton dans la barre du haut de l'interface
+ * privée ou dans un de ses sous menus
  */
-// http://doc.spip.org/@Bouton
 class Bouton {
-  var $icone;         /* l'icone a mettre dans le bouton */
-  var $libelle;       /* le nom de l'entree d'i18n associe */
-  var $url= null;     /* l'url de la page (null => ?exec=nom) */
-  var $urlArg= null;  /* arguments supplementaires de l'url */
-  var $url2= null;    /* url jscript */
-  var $target= null;  /* pour ouvrir dans une fenetre a part */
-  var $sousmenu= null;/* sous barre de boutons / onglets */
+  /** @var string L'icone à mettre dans le bouton */
+  var $icone;
 
-// http://doc.spip.org/@Bouton
+  /* @var string Le nom de l'entrée d'i18n associé */
+  var $libelle;
+
+  /** @var null|string L'URL de la page (null => ?exec=nom) */
+  var $url= null;
+
+  /** @var null|string|array Arguments supplementaires de l'URL */
+  var $urlArg= null;
+
+  /** @var null|string URL du javascript */
+  var $url2= null;
+
+  /** @var null|string Pour ouvrir dans une fenetre a part */
+  var $target= null;
+
+  /** @var null|mixed Sous-barre de boutons / onglets */
+  var $sousmenu= null;
+
+  /**
+   * Définit un bouton
+   *
+   * @param string $icone 
+   *    L'icone à mettre dans le bouton
+   * @param string $libelle 
+   *    Le nom de l'entrée i18n associé
+   * @param null|string $url
+   *    L'URL de la page
+   * @param null|string|array $urlArg
+   *    Arguments supplémentaires de l'URL
+   * @param null|string $url2
+   *    URL du javascript
+   * @param null|mixed $target
+   *    Pour ouvrir une fenêtre à part
+   */
   function Bouton($icone, $libelle, $url=null, $urlArg=null,
 				  $url2=null, $target=null) {
 	$this->icone  = $icone;
@@ -40,10 +81,18 @@ class Bouton {
 
 
 /**
- * definir la liste des onglets dans une page de l'interface privee
- * on passe la main au pipeline "ajouter_onglets".
+ * Définir la liste des onglets dans une page de l'interface privée.
+ *
+ * On passe la main au pipeline "ajouter_onglets".
+ * 
+ * @uses onglets_plugins()
+ * @uses autoriser()
+ * 
+ * @pipeline_appel ajouter_onglets
+ * 
+ * @param string $script
+ * @return array
  */
-// http://doc.spip.org/@definir_barre_onglets
 function definir_barre_onglets($script) {
 
 	$onglets=array();
@@ -72,7 +121,20 @@ function definir_barre_onglets($script) {
 }
 
 
-// http://doc.spip.org/@barre_onglets
+/**
+ * 
+ * Création de la barre d'onglets
+ * 
+ * @uses definir_barre_onglets()
+ * @uses onglet()
+ * @uses debut_onglet()
+ * @uses fin_onglet()
+ * 
+ * @param string $rubrique
+ * @param string $ongletCourant
+ * @param string $class
+ * @return string
+ */
 function barre_onglets($rubrique, $ongletCourant, $class="barre_onglet"){
 	include_spip('inc/presentation');
 
