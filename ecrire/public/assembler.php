@@ -477,19 +477,25 @@ function inclure_modele($type, $id, $params, $lien) {
 		creer_contexte_de_modele($params)); 
 
 	// On cree un marqueur de notes unique lie a ce modele
+	// et on enregistre l'etat courant des globales de notes...
 	$enregistre_marqueur_notes = $GLOBALS['marqueur_notes'];
+	$enregistre_les_notes = $GLOBALS['les_notes'];
+	$enregistre_compt_note = $GLOBALS['compt_note'];
 	$GLOBALS['marqueur_notes'] = substr(md5(serialize($contexte)),0,8);
+	$GLOBALS['les_notes'] = '';
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
 	$retour = trim(recuperer_fond($fond, $contexte));
 
-	// Si le modele n'a pas affiche ses notes, les supprimer (elles *doivent*
+	// On restitue les globales de notes telles qu'elles etaient avant l'appel
+	// du modele. Si le modele n'a pas affiche ses notes, tant pis (elles *doivent*
 	// etre dans le cache du modele, autrement elles ne seraient pas prises en
 	// compte a chaque calcul d'un texte contenant un modele, mais seulement
 	// quand le modele serait calcule, et on aurait des resultats incoherents)
-	$GLOBALS['les_notes'] = '';
+	$GLOBALS['les_notes'] = $enregistre_les_notes;
 	$GLOBALS['marqueur_notes'] = $enregistre_marqueur_notes;
+	$GLOBALS['compt_note'] = $enregistre_compt_note;
 
 	// Regarder si le modele tient compte des liens (il *doit* alors indiquer
 	// spip_lien_ok dans les classes de son conteneur de premier niveau ;
