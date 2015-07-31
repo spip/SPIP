@@ -346,7 +346,7 @@ ser&agrave; refudada) :
 Merc&eacute; de la v&ograve;stra participacion
 ',
 'form_pet_message_commentaire' => 'Un messatge, una remarca&nbsp;?',
-'form_pet_nom_site2' => '<b>Nom dau v&ograve;stre sit web',
+'form_pet_nom_site2' => 'Nom dau v&ograve;stre sit web',
 'form_pet_probleme_technique' => 'Probl&egrave;ma tecnic, li signaturas son tempor&agrave;riament arrestadi.',
 'form_pet_signature_pasprise' => 'La v&ograve;stra signatura es pas pilhada en c&ograve;mpte.',
 'form_pet_signature_validee' => 'La v&ograve;stra signatura es validada. Apareisser&agrave; sus lo sit a la mesa a jorn que ven. Merc&eacute;&nbsp;!',

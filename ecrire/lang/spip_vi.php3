@@ -238,7 +238,7 @@ H&#7891; s&#417; SPIP</a>.',
 'dirs_commencer' => ' &#273;&#7875; th&#7921;c s&#7921; b&#7855;t &#273;&#7847;u vi&#7879;c thi&#7871;t tr&iacute;',
 'dirs_preliminaire' => 'Ti&ecirc;n kh&#7903;i: <B>Thi&#7871;t k&#7871; quy&#7873;n h&#7841;n ra/v&ocirc;</B>',
 'dirs_probleme_droits' => '<b>C&oacute; v&#7845;n &#273;&#7873; v&#7899;i quy&#7873;n h&#7841;n ra/v&ocirc;</b>',
-'dirs_repertoires_absents' => '<MODIF> <B>Kh&ocirc;ng t&igrave;m th&#7845;y c&aacute;c ng&#259;n ch&#7913;a sau &#273;&acirc;y: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<B>Kh&ocirc;ng t&igrave;m th&#7845;y c&aacute;c ng&#259;n ch&#7913;a sau &#273;&acirc;y: <ul>@bad_dirs@.</ul> </b>
   <P>C&oacute; th&#7875; l&agrave; v&igrave; kh&aacute;c bi&#7879;t ch&#7919; th&#432;&#7901;ng, ch&#7919; HOA.
   Xin xem l&#7841;i c&aacute;ch &#273;&aacute;nh v&#7847;n t&ecirc;n c&aacute;c ng&#259;n ch&#7913;a n&agrave;y cho &#273;&uacute;ng.
   N&#7871;u c&#7847;n ph&#7843;i s&#7917;a, d&ugrave;ng FTP &#273;&#7875; s&#7917;a.
@@ -335,7 +335,7 @@ QUAN TR&#7884;NG...
 
 C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'form_pet_message_commentaire' => 'C&oacute; nh&#7855;n tin hay b&igrave;nh lu&#7853;n g&igrave; kh&ocirc;ng?',
-'form_pet_nom_site2' => '<B>T&ecirc;n c&#7911;a website b&#7841;n</B>',
+'form_pet_nom_site2' => 'T&ecirc;n c&#7911;a website b&#7841;n',
 'form_pet_probleme_technique' => 'Tr&#7909;c tr&#7863;c k&#7929; thu&#7853;t, ch&#7919; k&yacute; b&#7883; &#273;&igrave;nh tr&#7879; trong gi&acirc;y l&aacute;t.',
 'form_pet_signature_pasprise' => 'Ch&#7919; k&yacute; b&#7841;n &#273;&atilde; b&#7883; l&#7901; &#273;i.',
 'form_pet_signature_validee' => 'Ch&#7919; k&yacute; b&#7841;n &#273;&#432;&#7907;c x&aacute;c nh&#7853;n. Ch&#7919; k&yacute; s&#7869; xu&#7845;t hi&#7879;n khi trang web &#273;&#432;&#7907;c c&#7853;p nh&#7853;t. C&aacute;m &#417;n b&#7841;n!',
@@ -640,10 +640,10 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_envoyer_message_prive' => 'G&#7917;i th&#432; ri&ecirc;ng cho t&aacute;c gi&#7843; n&agrave;y',
 'info_erreur_requete' => 'V&#7845;n &#273;&#225;p c&#243; l&#7895;i: ',
 'info_erreur_restauration' => 'L&#7895;i ph&#7909;c h&#7891;i: kh&#244;ng t&#236;m th&#7845;y h&#7891; s&#417;.',
-'info_erreur_squelette' => '<NEW> Erreur sur le site',
-'info_erreur_squelette2' => '<NEW> Aucun squelette <b>@fichier@</b> n\'est disponible...',
-'info_erreur_systeme' => '<NEW> Erreur syst&egrave;me (errno @errsys@)',
-'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+'info_erreur_squelette' => 'C&oacute; l&#7895;i tr&ecirc;n Website',
+'info_erreur_squelette2' => 'Kh&ocirc;ng c&oacute; m&#7851;u cho trang web n&agrave;y. Kh&ocirc;ng t&igrave;m thay h&#7891; s&#417; <b>@fichier@</b>...',
+'info_erreur_systeme' => '<NEW>Erreur syst&egrave;me (errno @errsys@)',
+'info_erreur_systeme2' => '<NEW><b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
 	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
 	ou contactez votre h&eacute;bergeur.</font><br></b>',
 'info_etape_suivante' => 'Qua b&#432;&#7899;c k&#7871;',
@@ -680,7 +680,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_hier' => 'h&#244;m qua: ',
 'info_identification_publique' => 'Danh t&#225;nh c&#244;ng c&#7897;ng c&#7911;a b&#7841;n...',
 'info_image_aide' => 'GI&#218;P &#272;&#7904;',
-'info_image_process' => '<NEW> Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
+'info_image_process' => '<NEW>Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
 'info_impossible_lire_page' => '<B>L&#7895;i!</b> Kh&#244;ng &#273;&#7885;c &#273;&#432;&#7907;c trang <tt><html>@test_proxy@</html></tt> qua proxy <tt>',
 'info_inclusion_directe' => 'G&#7897;p v&#224;o tr&#7921;c ti&#7871;p:',
 'info_inclusion_vignette' => 'G&#7897;p c&#225;c h&#236;nh nh&#7887; xem tr&#432;&#7899;c:',
