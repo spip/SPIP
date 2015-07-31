@@ -22,6 +22,7 @@ function formulaires_configurer_multilinguisme_charger_dist(){
 
 		$selection = (is_null(_request('multi_objets'))?explode(',', $GLOBALS['meta']['langues_multilingue']):_request('langues_auth'));
 		$valeurs['_langues'] = saisie_langues_utiles('langues_auth',$selection?$selection:array());
+		$valeurs['_nb_langues_selection'] = count($selection);
 	}
 
 	return $valeurs;
