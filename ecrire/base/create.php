@@ -27,7 +27,7 @@ function creer_base($server='') {
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
 	$fcreate = sql_serveur('create', $server);
-	$finsert = sql_serveur('insert', $server);
+	$freplace = sql_serveur('replace', $server);
 	$fupdate = sql_serveur('update', $server);
 	foreach($tables_principales as $k => $v)
 		$fcreate($k, $v['field'], $v['key'], true);
@@ -36,27 +36,35 @@ function creer_base($server='') {
 		$fcreate($k, $v['field'], $v['key'], false);
 
 
-	// Pas de panique avec les messages d'erreur a la mise a jour
+	// Init ou Re-init ==> replace pas insert
+	$desc = $tables_principales['spip_types_documents'];
 	foreach($tables_images as $k => $v) {
-		@$finsert('spip_types_documents',
-		   "(extension, inclus, titre)",
-		   '('. _q($k).", 'image'," . _q($v).')');
+		$freplace('spip_types_documents',
+			 array('extension' => $k,
+			       'inclus' => 'image',
+			       'titre' => $v),
+			 $desc);
 	}
 
 	foreach($tables_sequences as $k => $v)
-		@$finsert('spip_types_documents',
-			 "(extension, titre, inclus)",
-			 "('$k', '$v', 'embed')");
+		$freplace('spip_types_documents',
+			 array('extension' => $k,
+			       'titre' => $v,
+			       'inclus'=> 'embed'),
+			 $desc);
 
 	foreach($tables_documents as $k => $v)
-		@$finsert('spip_types_documents',
-			 "(extension, titre, inclus)",
-			 "('$k', '$v', 'non')");
+		$freplace('spip_types_documents',
+			 array('extension' => $k,
+			       'titre' => $v,
+			       'inclus' => 'non'),
+			 $desc);
 
 	foreach ($tables_mime as $extension => $type_mime)
-		@$fupdate('spip_types_documents',
-			 "mime_type='$type_mime'",
-			 "extension='$extension'");
+		$freplace('spip_types_documents',
+			 array("mime_type" => $type_mime,
+			       "extension" => $extension),
+			 $desc);
 }
 
 // http://doc.spip.org/@stripslashes_base
