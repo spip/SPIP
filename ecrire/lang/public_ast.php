@@ -9,16 +9,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Entamu del sitiu',
-'article' => 'Art&iacute;culu',
-'articles' => 'Art&iacute;culos',
-'articles_auteur' => 'Art&iacute;culos d\'esti autor',
-'articles_populaires' => 'Los art&iacute;culos m&aacute;s c&eacute;lebres',
-'articles_rubrique' => 'Art&iacute;culos d\'esta estaya',
-'aucun_article' => 'N\'esta direici&oacute;n nun hai deng&uacute;n art&iacute;culu',
-'aucun_auteur' => 'Nesta direici&oacute;n nun hai deng&uacute;n autor',
-'aucun_site' => 'Nesta direici&oacute;n nun hai deng&uacute;n sitiu',
-'aucune_breve' => 'Nesta direici&oacute;n nun hai denguna breve',
-'aucune_rubrique' => 'Nesta direici&oacute;n nun hai denguna estaya',
+'article' => 'Artículu',
+'articles' => 'Artículos',
+'articles_auteur' => 'Artículos d\'esti autor',
+'articles_populaires' => 'Los artículos más célebres',
+'articles_rubrique' => 'Artículos d\'esta estaya',
+'aucun_article' => 'N\'esta direición nun hai dengún artículu',
+'aucun_auteur' => 'Nesta direición nun hai dengún autor',
+'aucun_site' => 'Nesta direición nun hai dengún sitiu',
+'aucune_breve' => 'Nesta direición nun hai denguna breve',
+'aucune_rubrique' => 'Nesta direición nun hai denguna estaya',
 'auteur' => 'Autor',
 'autres' => 'Otros',
 'autres_breves' => 'Otres breves',
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_sites' => 'Otros sitios',
 
 // B
-'bonjour' => 'Bon d&iacute;a',
+'bonjour' => 'Bon día',
 'breve' => 'Breve',
 'breves' => 'Breves',
 
@@ -36,29 +36,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Fecha',
-'dernier_ajout' => '&Uacute;ltimu a&ntilde;ad&iacute;u',
-'dernieres_breves' => '&Uacute;ltimes breves',
-'derniers_articles' => '&Uacute;ltimos art&iacute;culos',
+'dernier_ajout' => 'Últimu añadíu',
+'dernieres_breves' => 'Últimes breves',
+'derniers_articles' => 'Últimos artículos',
 'derniers_commentaires' => 'Caberos comentarios',
-'derniers_messages_forum' => '&Uacute;ltimos mensaxes espublizaos nos foros',
+'derniers_messages_forum' => 'Últimos mensaxes espublizaos nos foros',
 'documents_interdits_forum' => 'Documentos torgaos nel foru',
 
 // E
-'edition_mode_texte' => 'Edici&oacute;n en mou testu de',
+'edition_mode_texte' => 'Edición en mou testu de',
 'en_reponse' => 'En respuesta a:',
 'en_resume' => 'En resumen',
 'envoyer_message' => 'Mandar un mensaxe',
-'espace_prive' => 'Espaciu acut&aacute;u',
+'espace_prive' => 'Espaciu acutáu',
 
 // F
 'formats_acceptes' => 'Formats aceptaos: @formats@.',
 'forum' => 'Foru',
 
 // H
-'hierarchie_site' => 'Xerarqu&iacute;a del sitiu',
+'hierarchie_site' => 'Xerarquía del sitiu',
 
 // J
-'jours' => 'd&iacute;es',
+'jours' => 'díes',
 
 // L
 'lien_connecter' => 'Coneutase',
@@ -69,31 +69,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'memes_auteurs' => 'De los mesmos autores',
 'message' => 'Mensaxe',
 'messages_forum' => 'Mensaxes del foru',
-'messages_recents' => 'Mensaxes m&aacute;s nuevos nos foros',
+'messages_recents' => 'Mensaxes más nuevos nos foros',
 'mots_clef' => 'Pallabra-clave',
 'mots_clefs' => 'Pallabres-clave',
 'mots_clefs_meme_groupe' => 'Pallabres-clave nel mesmu grupu',
 
 // N
-'navigation' => 'Navegaci&oacute;n',
+'navigation' => 'Navegación',
 'nom' => 'Nome',
-'nouveautes' => 'Les noved&aacute;es',
-'nouveautes_web' => 'Noved&aacute;es na Web',
-'nouveaux_articles' => 'Art&iacute;culos nuevos',
+'nouveautes' => 'Les novedáes',
+'nouveautes_web' => 'Novedáes na Web',
+'nouveaux_articles' => 'Artículos nuevos',
 'nouvelles_breves' => 'Breves nueves',
 
 // P
-'page_precedente' => 'p&aacute;xina anterior',
-'page_suivante' => 'p&aacute;xina siguiente',
+'page_precedente' => 'páxina anterior',
+'page_suivante' => 'páxina siguiente',
 'par_auteur' => 'por ',
-'participer_site' => 'Puedes participar na vida d\'esti sitiu y proponer los tos propios art&iacute;culos apunt&aacute;ndote equ&iacute;. Vas recibir de secute un corr&eacute;u electr&oacute;nicu colos tos c&oacute;digos pa poder entrar nel espaciu privau del sitiu.',
+'participer_site' => 'Puedes participar na vida d\'esti sitiu y proponer los tos propios artículos apuntándote equí. Vas recibir de secute un corréu electrónicu colos tos códigos pa poder entrar nel espaciu privau del sitiu.',
 'plan_site' => 'Mapa d\'esti sitiu',
-'popularite' => 'Popularid&aacute;',
+'popularite' => 'Popularidá',
 'poster_message' => 'Unviar un mensaxe',
-'proposer_site' => 'Puedes proponer un sitiu Web pa amestar nesta seici&oacute;n:',
+'proposer_site' => 'Puedes proponer un sitiu Web pa amestar nesta seición:',
 
 // R
-'repondre_article' => 'Responder a esti art&iacute;culu',
+'repondre_article' => 'Responder a esti artículu',
 'repondre_breve' => 'Responder a esta breve',
 'repondre_message' => 'Responder a esti mensaxe',
 'resultats_recherche' => 'Resultaos de la gueta',
@@ -103,23 +103,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 'signatures_petition' => 'Firmes',
-'site_realise_avec_spip' => 'Sitiu fechu mand&aacute;ndose de SPIP',
+'site_realise_avec_spip' => 'Sitiu fechu mandándose de SPIP',
 'sites_web' => 'Sitios Web',
 'sous_rubriques' => 'Sub-estayes',
 'spam' => 'Puxarra',
 'suite' => 'sigue',
 'sur_web' => 'Na Rede',
-'syndiquer_rubrique' => 'Sindicar esta seici&oacute;n',
+'syndiquer_rubrique' => 'Sindicar esta seición',
 'syndiquer_site' => 'Sindicar tou el sitiu',
 
 // T
 'texte_lettre_information' => 'Esta ye la carta informativa del sitiu',
-'texte_lettre_information_2' => 'Esta carta recueye los art&iacute;culos y les breves espublizaos dende',
+'texte_lettre_information_2' => 'Esta carta recueye los artículos y les breves espublizaos dende',
 
 // V
-'ver_imprimer' => 'Versi&oacute;n pa imprentar',
-'voir_en_ligne' => 'Velo en ll&iacute;nia',
-'voir_squelette' => 'ver la cadarma d\'esta p&aacute;xina'
+'ver_imprimer' => 'Versión pa imprentar',
+'voir_en_ligne' => 'Velo en llínia',
+'voir_squelette' => 'ver la cadarma d\'esta páxina'
 );
 
 ?>

@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'accueil_site' => 'Acu&egrave;lh dau sit',
+'accueil_site' => 'Acuèlh dau sit',
 'article' => 'Article', # NEW
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquel autor',
 'articles_populaires' => 'Los articles mai populars',
 'articles_rubrique' => 'Articles d\'aquela rubrica',
-'aucun_article' => 'I a ges d\'article a aquela adre&ccedil;a ',
-'aucun_auteur' => 'I a ges d\'autor a aquela adre&ccedil;a ',
-'aucun_site' => 'I a ges de sit a aquela adre&ccedil;a ',
-'aucune_breve' => 'I a ges de br&egrave;va a aquela adre&ccedil;a ',
-'aucune_rubrique' => 'I a ges de rubrica a aquela adre&ccedil;a ',
+'aucun_article' => 'I a ges d\'article a aquela adreça ',
+'aucun_auteur' => 'I a ges d\'autor a aquela adreça ',
+'aucun_site' => 'I a ges de sit a aquela adreça ',
+'aucune_breve' => 'I a ges de brèva a aquela adreça ',
+'aucune_rubrique' => 'I a ges de rubrica a aquela adreça ',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Autres', # NEW
-'autres_breves' => 'Autras br&egrave;vas',
+'autres_breves' => 'Autras brèvas',
 'autres_groupes_mots_clefs' => 'Autres grops de mots claus',
 'autres_sites' => 'Autres sits',
 
 // B
 'bonjour' => 'Bonjorn',
-'breve' => 'Br&egrave;ve', # NEW
-'breves' => 'Br&egrave;vas',
+'breve' => 'Brève', # NEW
+'breves' => 'Brèvas',
 
 // C
 'commenter_site' => 'Comentar aquel sit',
@@ -36,22 +36,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Data',
-'dernier_ajout' => 'Darr&egrave;ir apondon',
-'dernieres_breves' => 'Darr&egrave;iras br&egrave;vas',
-'derniers_articles' => 'Darr&egrave;irs articles',
-'derniers_commentaires' => 'Darr&egrave;irs comentaris',
-'derniers_messages_forum' => 'Darr&egrave;irs messatges publicats dins los forums',
+'dernier_ajout' => 'Darrèir apondon',
+'dernieres_breves' => 'Darrèiras brèvas',
+'derniers_articles' => 'Darrèirs articles',
+'derniers_commentaires' => 'Darrèirs comentaris',
+'derniers_messages_forum' => 'Darrèirs messatges publicats dins los forums',
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
-'edition_mode_texte' => 'Edicion en m&ograve;de t&egrave;xt de',
+'edition_mode_texte' => 'Edicion en mòde tèxt de',
 'en_reponse' => 'En responsa a:',
 'en_resume' => 'En resumit',
 'envoyer_message' => 'Mandar un messatge',
 'espace_prive' => 'Espaci privat',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Los messatges de forums mai recents',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Mots claus',
 'mots_clefs_meme_groupe' => 'Mots claus dins lo mesme grop',
 
@@ -79,25 +79,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Nom',
 'nouveautes' => 'Las novetats',
 'nouveautes_web' => 'Novetats sobre lo web',
-'nouveaux_articles' => 'Articles nu&ograve;us',
-'nouvelles_breves' => 'Br&egrave;vas nu&ograve;vas',
+'nouveaux_articles' => 'Articles nuòus',
+'nouvelles_breves' => 'Brèvas nuòvas',
 
 // P
 'page_precedente' => 'pagina precedenta',
 'page_suivante' => 'pagina seguenta',
-'par_auteur' => 'per&nbsp;',
-'participer_site' => 'Pod&egrave;tz participar a la vida d\'aquel sit e prepausar los articles v&ograve;stres en vos inscriure &ccedil;ai sos. Recebretz tot sit&ograve;st un e-mail que vos indicar&aacute; v&ograve;stres c&ograve;des per accedir a l\'espaci privat dau sit.',
+'par_auteur' => 'per ',
+'participer_site' => 'Podètz participar a la vida d\'aquel sit e prepausar los articles vòstres en vos inscriure çai sos. Recebretz tot sitòst un e-mail que vos indicará vòstres còdes per accedir a l\'espaci privat dau sit.',
 'plan_site' => 'Plan dau sit',
 'popularite' => 'Popularitat',
 'poster_message' => 'Postar un messatge',
-'proposer_site' => 'Pod&egrave;tz prepausar un sit d\'apondre a aquesta rubrica:',
+'proposer_site' => 'Podètz prepausar un sit d\'apondre a aquesta rubrica:',
 
 // R
 'repondre_article' => 'Respondre a aquel article',
-'repondre_breve' => 'Respondre a aquela br&egrave;va',
+'repondre_breve' => 'Respondre a aquela brèva',
 'repondre_message' => 'Respondre a aquel messatge',
-'resultats_recherche' => 'Resultats de la c&egrave;rcha',
-'retour_debut_forums' => 'Retorn au comen&ccedil;ament daus forums',
+'resultats_recherche' => 'Resultats de la cèrcha',
+'retour_debut_forums' => 'Retorn au començament daus forums',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubricas',
 
@@ -113,8 +113,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_site' => 'Sindicar tot lo sit',
 
 // T
-'texte_lettre_information' => 'Vaic&iacute; la letra d\'informacion dau sit',
-'texte_lettre_information_2' => 'Aquela letra recensa los articles e br&egrave;vas publicats dempu&egrave;i',
+'texte_lettre_information' => 'Vaicí la letra d\'informacion dau sit',
+'texte_lettre_information_2' => 'Aquela letra recensa los articles e brèvas publicats dempuèi',
 
 // V
 'ver_imprimer' => 'Version d\'estampar',

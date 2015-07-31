@@ -8,118 +8,118 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'accueil_site' => 'H&#596;ntogbo',
+'accueil_site' => 'Hɔntogbo',
 'article' => 'Article', # NEW
-'articles' => 'Wekpa l&#603;&#770;',
-'articles_auteur' => 'Ny&#596;wlant&#596; &eacute; l&#596; sin wekpa l&#603;&#770;',
-'articles_populaires' => 'wekpa l&#603;&#770;  &ecirc; to bi t&ugrave;n y&eacute;',
-'articles_rubrique' => 'wekpa &#598;i&#598;&#603; &eacute; l&#596; t&#596;n',
-'aucun_article' => 'wekpa &#598;e&#772;&#772;  do gesi &eacute; l&#596; ji a ',
-'aucun_auteur' => 'Ny&#596;wlant&#596; &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a ',
-'aucun_site' => 'Gblogbloji &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a',
-'aucune_breve' => 'Xogb&egrave; kl&eacute;wun &#598;e&#772;&#772;  do  gesi &eacute; l&#596; ji a',
-'aucune_rubrique' => '&#598;i&#598;&#603; &#598;e&#772;&#772; do gesi &eacute; l&#596; ji a ',
+'articles' => 'Wekpa lɛ̂',
+'articles_auteur' => 'Nyɔwlantɔ é lɔ sin wekpa lɛ̂',
+'articles_populaires' => 'wekpa lɛ̂  ê to bi tùn yé',
+'articles_rubrique' => 'wekpa ɖiɖɛ é lɔ tɔn',
+'aucun_article' => 'wekpa ɖē̄  do gesi é lɔ ji a ',
+'aucun_auteur' => 'Nyɔwlantɔ ɖē̄  do  gesi é lɔ ji a ',
+'aucun_site' => 'Gblogbloji ɖē̄  do  gesi é lɔ ji a',
+'aucune_breve' => 'Xogbè kléwun ɖē̄  do  gesi é lɔ ji a',
+'aucune_rubrique' => 'ɖiɖɛ ɖē̄ do gesi é lɔ ji a ',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Autres', # NEW
-'autres_breves' => 'Xogb&egrave; kl&eacute;wun de vo',
-'autres_groupes_mots_clefs' => 'Xota b&#603; dokp&#596; l&#603;&#770; ',
-'autres_sites' => 'Gblogbloji &#598;e&#772;&#772; vo l&#603;&#770;',
+'autres_breves' => 'Xogbè kléwun de vo',
+'autres_groupes_mots_clefs' => 'Xota bɛ dokpɔ lɛ̂ ',
+'autres_sites' => 'Gblogbloji ɖē̄ vo lɛ̂',
 
 // B
-'bonjour' => 'kwab&#596;   ',
-'breve' => 'Br&egrave;ve', # NEW
-'breves' => 'Xogb&egrave; kl&eacute;wun',
+'bonjour' => 'kwabɔ   ',
+'breve' => 'Brève', # NEW
+'breves' => 'Xogbè kléwun',
 
 // C
-'commenter_site' => 'wl&#596;k&agrave;nn&uacute; xo l&#603;&#770;',
+'commenter_site' => 'wlɔkànnú xo lɛ̂',
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
 'date' => 'Azan',
-'dernier_ajout' => 'G&#596;na g&ugrave;dog&ugrave;dot&#596;n',
-'dernieres_breves' => 'Xogb&egrave; kl&eacute;wun g&ugrave;dog&ugrave;dot&#596;n',
-'derniers_articles' => 'Wekpa g&ugrave;dog&ugrave;dot&#596;n',
-'derniers_commentaires' => '&#598;&#603;tit&#603; g&ugrave;dog&ugrave;dot&#596;n',
-'derniers_messages_forum' => 'wh&#603;n g&ugrave;dog&ugrave;dot&#596;n ye&#772; &#598;&#596;dotoji',
+'dernier_ajout' => 'Gɔna gùdogùdotɔn',
+'dernieres_breves' => 'Xogbè kléwun gùdogùdotɔn',
+'derniers_articles' => 'Wekpa gùdogùdotɔn',
+'derniers_commentaires' => 'ɖɛtitɛ gùdogùdotɔn',
+'derniers_messages_forum' => 'whɛn gùdogùdotɔn yē ɖɔdotoji',
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
-'edition_mode_texte' => 'winwlanm&#603;',
-'en_reponse' => '&#598;ogb&egrave;yiyi m&#603; nu &nbsp;:',
-'en_resume' => '&#598;o xo kl&eacute;wun m&#603; &#596;',
-'envoyer_message' => 'S&#603; w&#603;n do ',
-'espace_prive' => 't&#603;nkandovo',
+'edition_mode_texte' => 'winwlanmɛ',
+'en_reponse' => 'ɖogbèyiyi mɛ nu  :',
+'en_resume' => 'ɖo xo kléwun mɛ ɔ',
+'envoyer_message' => 'Sɛ wɛn do ',
+'espace_prive' => 'tɛnkandovo',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
-'forum' => 'Kpl&eacute;kpl&eacute; ',
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
+'forum' => 'Kplékplé ',
 
 // H
-'hierarchie_site' => 'Tito gblogbloji &#596; t&#596;n',
+'hierarchie_site' => 'Tito gblogbloji ɔ tɔn',
 
 // J
-'jours' => 'Azan l&#603;&#770;',
+'jours' => 'Azan lɛ̂',
 
 // L
 'lien_connecter' => 'Se connecter', # NEW
 
 // M
-'meme_auteur' => 'Ny&#596;wlant&#596; &#598;okpo &#596;',
-'meme_rubrique' => '&#598;o akpaxw&eacute; &#598;okpo &#596; m&#603;',
-'memes_auteurs' => 'Ny&#596;wlant&#596; &#598;okpo l&#603;&#770;',
-'message' => 'W&#603;n',
-'messages_forum' => 'w&#603;n pk&eacute;kpl&eacute; &#596; t&#596;n l&ecirc;',
-'messages_recents' => 'w&#603;n g&ugrave;do&#769;g&ugrave;dot&#596;n pk&eacute;kpl&eacute; &#596; t&#596;n l&ecirc;',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
-'mots_clefs' => 'xo&#769;ta&#769; l&#603;&#770;',
-'mots_clefs_meme_groupe' => 'xo&#769;ta&#769; akpa &#598;okpo&#769; &#596; l&#603;&#770; t&#596;n',
+'meme_auteur' => 'Nyɔwlantɔ ɖokpo ɔ',
+'meme_rubrique' => 'ɖo akpaxwé ɖokpo ɔ mɛ',
+'memes_auteurs' => 'Nyɔwlantɔ ɖokpo lɛ̂',
+'message' => 'Wɛn',
+'messages_forum' => 'wɛn pkékplé ɔ tɔn lê',
+'messages_recents' => 'wɛn gùdógùdotɔn pkékplé ɔ tɔn lê',
+'mots_clef' => 'Mot-clé', # NEW
+'mots_clefs' => 'xótá lɛ̂',
+'mots_clefs_meme_groupe' => 'xótá akpa ɖokpó ɔ lɛ̂ tɔn',
 
 // N
-'navigation' => 'nuk&eacute;j&eacute;k&eacute;j&eacute;',
-'nom' => 'nyi&#769;k&#596;',
-'nouveautes' => 'Nu y&#596;y&#596; l&#603;&#770;',
-'nouveautes_web' => 'Nu y&#596;y&#596; l&#603;&#770;  e &#598;o at&#603; &#596; ji&#769; &#596;',
-'nouveaux_articles' => 'W&eacute;kpa y&#596;y&#596; l&#603;&#770;',
-'nouvelles_breves' => 'w&#603;n kl&eacute;wun l&#603;&#770;',
+'navigation' => 'nukéjékéjé',
+'nom' => 'nyíkɔ',
+'nouveautes' => 'Nu yɔyɔ lɛ̂',
+'nouveautes_web' => 'Nu yɔyɔ lɛ̂  e ɖo atɛ ɔ jí ɔ',
+'nouveaux_articles' => 'Wékpa yɔyɔ lɛ̂',
+'nouvelles_breves' => 'wɛn kléwun lɛ̂',
 
 // P
-'page_precedente' => 'W&eacute;kpa e wai',
-'page_suivante' => 'W&eacute;kpa e b&#596;&#598;&eacute;u',
-'par_auteur' => 'Gb&#596;n',
-'participer_site' => 'Mi&#768; &#598;&egrave; mi&#768; &#598;&eacute; xl&#603; bo&#769; na&#769;  siwu k&#603; nu&#768; do&#769; wal&#596; gblogbloji&#769; &#596; t&#596;n  en&#603; gu&#769;do &#596; mi&#768;  singan    s&#596; w&eacute;kpa mi t&#596;n l&#603;&#770; s&#603;  do&#769;. &#598;o m&#596; &#596;, mi&#768; n&agrave; s&#603; gb&egrave;t&agrave;kwin na&#769; na&#769; gb&egrave; b&#596; mi&#768; &#598;o t&agrave;f&#596; at&#603; &#596; ji&#769;  z&#596;n&#598;okpo e.',
-'plan_site' => 'titom&#603; gblogbloji &#596; t&#596;n ',
-'popularite' => 'Nuku&#769;n &#598;&eacute;ji&#769;',
-'poster_message' => 's&#603; w&#603;n do',
-'proposer_site' => 'Nu mi do gblogbloji&#769; &#598;&eacute; &#596;  Mi&#768; siwu z&eacute; g&#596; na&#769; akpa &eacute; l&#596; ',
+'page_precedente' => 'Wékpa e wai',
+'page_suivante' => 'Wékpa e bɔɖéu',
+'par_auteur' => 'Gbɔn',
+'participer_site' => 'Mì ɖè mì ɖé xlɛ bó ná  siwu kɛ nù dó walɔ gblogblojí ɔ tɔn  enɛ gúdo ɔ mì  singan    sɔ wékpa mi tɔn lɛ̂ sɛ  dó. ɖo mɔ ɔ, mì nà sɛ gbètàkwin ná ná gbè bɔ mì ɖo tàfɔ atɛ ɔ jí  zɔnɖokpo e.',
+'plan_site' => 'titomɛ gblogbloji ɔ tɔn ',
+'popularite' => 'Nukún ɖéjí',
+'poster_message' => 'sɛ wɛn do',
+'proposer_site' => 'Nu mi do gblogblojí ɖé ɔ  Mì siwu zé gɔ ná akpa é lɔ ',
 
 // R
-'repondre_article' => '&#598;o&#768; sin nu w&eacute;kpa e l&#596;',
-'repondre_breve' => '&#598;o&#768; sin nu xo&#769; klewun &eacute; l&#596;',
-'repondre_message' => '&#598;o&#768; sin nu w&#603;n  &eacute; l&#596;',
-'resultats_recherche' => 'Gb&egrave;tak&#603;n nu do biba t&#596;n l&#603;&#770;',
-'retour_debut_forums' => 'k&#596;l&#603; s&#596; yi&#768;  kpl&eacute;kpl&eacute; sin bib&#603;',
+'repondre_article' => 'ɖò sin nu wékpa e lɔ',
+'repondre_breve' => 'ɖò sin nu xó klewun é lɔ',
+'repondre_message' => 'ɖò sin nu wɛn  é lɔ',
+'resultats_recherche' => 'Gbètakɛn nu do biba tɔn lɛ̂',
+'retour_debut_forums' => 'kɔlɛ sɔ yì  kplékplé sin bibɛ',
 'rubrique' => 'Akpa ',
-'rubriques' => 'Akpa l&#603;',
+'rubriques' => 'Akpa lɛ',
 
 // S
-'signatures_petition' => 'al&#596;dowemam&#603; l&#603;',
-'site_realise_avec_spip' => 'Kpo al&#596;g&#596; Supipu t&#596;n kpo&#769; w&#603; gblogbloji&#769; &#596; nyi&#769; wiwa',
-'sites_web' => 'At&#603; l&#603;&#770;',
-'sous_rubriques' => 'Akpa xw&eacute;',
+'signatures_petition' => 'alɔdowemamɛ lɛ',
+'site_realise_avec_spip' => 'Kpo alɔgɔ Supipu tɔn kpó wɛ gblogblojí ɔ nyí wiwa',
+'sites_web' => 'Atɛ lɛ̂',
+'sous_rubriques' => 'Akpa xwé',
 'spam' => 'Spam', # NEW
-'suite' => 'B&#596; &#598;&eacute; wu t&#596;n',
-'sur_web' => '&#598;o&#768; at&#603; &#596;  ji&#768;',
-'syndiquer_rubrique' => 'Ze&#770; aceji do akpa &eacute; l&#596; ji&#769;',
-'syndiquer_site' => 'ac&eacute;ji&#769;ni&#769;n&#596;',
+'suite' => 'Bɔ ɖé wu tɔn',
+'sur_web' => 'ɖò atɛ ɔ  jì',
+'syndiquer_rubrique' => 'Zê aceji do akpa é lɔ jí',
+'syndiquer_site' => 'acéjínínɔ',
 
 // T
-'texte_lettre_information' => 'Xojlawema&#769; gblogbloji &#596; t&#596;n &#598;i&egrave;',
-'texte_lettre_information_2' => 'Xojlawema&#769; &eacute; l&#596;&#596; n&#596; cian w&eacute;kpa kpodo&#769; xo&#769; klewun &#598;&#596;&#768;dotoji&#769; xoxo l&#603;&#770;',
+'texte_lettre_information' => 'Xojlawemá gblogbloji ɔ tɔn ɖiè',
+'texte_lettre_information_2' => 'Xojlawemá é lɔɔ nɔ cian wékpa kpodó xó klewun ɖɔ̀dotojí xoxo lɛ̂',
 
 // V
 'ver_imprimer' => 'Zin wema',
-'voir_en_ligne' => 'kp&#596;n Gblogbloji',
-'voir_squelette' => 'S&#603; titom&#603; wema &eacute;l&#596; t&#596;n do '
+'voir_en_ligne' => 'kpɔn Gblogbloji',
+'voir_squelette' => 'Sɛ titomɛ wema élɔ tɔn do '
 );
 
 ?>

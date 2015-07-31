@@ -8,26 +8,26 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'accueil_site' => 'Hejmpa&#285;o',
+'accueil_site' => 'Hejmpaĝo',
 'article' => 'Article', # NEW
 'articles' => 'Artikoloj',
-'articles_auteur' => 'Artikoloj de tiu a&#365;toro',
+'articles_auteur' => 'Artikoloj de tiu aŭtoro',
 'articles_populaires' => 'La plej popularaj artikoloj',
 'articles_rubrique' => 'Artikoloj el tiu rubriko',
-'aucun_article' => 'Neniu artikolo &#265;e tiu adreso',
-'aucun_auteur' => 'Neniu a&#365;toro por tiu adreso',
-'aucun_site' => 'Neniu retejo &#265;e tiu adreso',
-'aucune_breve' => 'Neniu fulm-informo &#265;e tiu adreso',
-'aucune_rubrique' => 'Neniu rubriko &#265;e tiu adreso',
+'aucun_article' => 'Neniu artikolo ĉe tiu adreso',
+'aucun_auteur' => 'Neniu aŭtoro por tiu adreso',
+'aucun_site' => 'Neniu retejo ĉe tiu adreso',
+'aucune_breve' => 'Neniu fulm-informo ĉe tiu adreso',
+'aucune_rubrique' => 'Neniu rubriko ĉe tiu adreso',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Aliaj',
 'autres_breves' => 'Neniu fulm-informo',
-'autres_groupes_mots_clefs' => 'Aliaj grupoj de &#349;losilvortoj',
+'autres_groupes_mots_clefs' => 'Aliaj grupoj de ŝlosilvortoj',
 'autres_sites' => 'Aliaj retejoj',
 
 // B
 'bonjour' => 'Bonan tagon',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Fulm-informoj',
 
 // C
@@ -40,14 +40,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dernieres_breves' => 'Lastaj fulm-informoj',
 'derniers_articles' => 'Lastaj artikoloj',
 'derniers_commentaires' => 'Lastaj komentoj',
-'derniers_messages_forum' => 'Lastaj mesa&#285;oj publikigitaj en la forumoj',
+'derniers_messages_forum' => 'Lastaj mesaĝoj publikigitaj en la forumoj',
 'documents_interdits_forum' => 'Dokumentoj malpermesitaj en la forumo',
 
 // E
 'edition_mode_texte' => 'Teksta eldono de',
-'en_reponse' => 'Responde al&nbsp;:',
+'en_reponse' => 'Responde al :',
 'en_resume' => 'Resume',
-'envoyer_message' => 'Sendi mesa&#285;on',
+'envoyer_message' => 'Sendi mesaĝon',
 'espace_prive' => 'Privata spaco',
 
 // F
@@ -64,39 +64,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Ensaluti',
 
 // M
-'meme_auteur' => 'De la sama a&#365;toro',
+'meme_auteur' => 'De la sama aŭtoro',
 'meme_rubrique' => 'En la sama rubriko',
-'memes_auteurs' => 'De samaj a&#365;toroj',
-'message' => 'Mesa&#285;o',
-'messages_forum' => 'Forum-mesa&#285;oj',
-'messages_recents' => 'La plej fre&#349;aj forum-mesa&#285;oj',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
-'mots_clefs' => '&#348;losilvortoj',
-'mots_clefs_meme_groupe' => '&#348;losilvortoj en la sama grupo',
+'memes_auteurs' => 'De samaj aŭtoroj',
+'message' => 'Mesaĝo',
+'messages_forum' => 'Forum-mesaĝoj',
+'messages_recents' => 'La plej freŝaj forum-mesaĝoj',
+'mots_clef' => 'Mot-clé', # NEW
+'mots_clefs' => 'Ŝlosilvortoj',
+'mots_clefs_meme_groupe' => 'Ŝlosilvortoj en la sama grupo',
 
 // N
 'navigation' => 'Retumado',
 'nom' => 'Nomo',
-'nouveautes' => 'La nova&#309;oj',
-'nouveautes_web' => 'Nova&#309;oj &#265;e la reto',
+'nouveautes' => 'La novaĵoj',
+'nouveautes_web' => 'Novaĵoj ĉe la reto',
 'nouveaux_articles' => 'Novaj artikoloj',
 'nouvelles_breves' => 'Novaj fulm-informoj',
 
 // P
-'page_precedente' => 'anta&#365;a pa&#285;o',
-'page_suivante' => 'sekvanta pa&#285;o',
+'page_precedente' => 'antaŭa paĝo',
+'page_suivante' => 'sekvanta paĝo',
 'par_auteur' => 'de ',
-'participer_site' => 'Por partopreni la vivon de tiu retejo kaj proponi viajn propajn artikolojn, registri&#285;u &#265;i sube. Vi tuj ricevos retleteron indikante ensalutilojn por eniri la privatan spacon.',
+'participer_site' => 'Por partopreni la vivon de tiu retejo kaj proponi viajn propajn artikolojn, registriĝu ĉi sube. Vi tuj ricevos retleteron indikante ensalutilojn por eniri la privatan spacon.',
 'plan_site' => 'Mapo de la retejo',
 'popularite' => 'Populareco',
-'poster_message' => 'Sendi mesa&#285;on',
-'proposer_site' => 'Vi povas proponi retejon aldonotan al tiu rubriko&nbsp;:',
+'poster_message' => 'Sendi mesaĝon',
+'proposer_site' => 'Vi povas proponi retejon aldonotan al tiu rubriko :',
 
 // R
 'repondre_article' => 'Respondi al tiu artikolo',
 'repondre_breve' => 'Respondi al tiu fulm-informo',
-'repondre_message' => 'Respondi al tiu mesa&#285;o',
-'resultats_recherche' => 'Ser&#265;o-rezultoj',
+'repondre_message' => 'Respondi al tiu mesaĝo',
+'resultats_recherche' => 'Serĉo-rezultoj',
 'retour_debut_forums' => 'Reen al forumoj-komenco',
 'rubrique' => 'Rubriko',
 'rubriques' => 'Rubrikoj',
@@ -106,9 +106,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Retejo pelata de SPIP',
 'sites_web' => 'Retejoj',
 'sous_rubriques' => 'Sub-rubrikoj',
-'spam' => 'Trudmesa&#285;o',
+'spam' => 'Trudmesaĝo',
 'suite' => 'sekvo',
-'sur_web' => '&#264;e la reto',
+'sur_web' => 'Ĉe la reto',
 'syndiquer_rubrique' => 'Abonrilatigi tiun rubrikon',
 'syndiquer_site' => 'Abonrilatigi la tutan retejon',
 
@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // V
 'ver_imprimer' => 'Elprintota versio',
 'voir_en_ligne' => 'Vidi konektite',
-'voir_squelette' => 'vidi la skeleton de tiu pa&#285;o'
+'voir_squelette' => 'vidi la skeleton de tiu paĝo'
 );
 
 ?>

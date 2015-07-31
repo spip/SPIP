@@ -11,14 +11,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accueil_site' => 'Hemsida',
 'article' => 'Article', # NEW
 'articles' => 'Artiklar',
-'articles_auteur' => 'F&ouml;rfattarens artiklar',
-'articles_populaires' => 'De mest l&auml;sta artiklarna',
+'articles_auteur' => 'Författarens artiklar',
+'articles_populaires' => 'De mest lästa artiklarna',
 'articles_rubrique' => 'Avdelningens artiklar',
-'aucun_article' => 'Det finns ingen artikel p&aring; denna adress',
-'aucun_auteur' => 'Det finns ingen f&ouml;rfattare p&aring; denna adress',
-'aucun_site' => 'Det finns ingen sajt p&aring; denna adress',
-'aucune_breve' => 'Det finns ingen nyhet p&aring; denna adress',
-'aucune_rubrique' => 'Det finns ingen avdelning p&aring; denna adress',
+'aucun_article' => 'Det finns ingen artikel på denna adress',
+'aucun_auteur' => 'Det finns ingen författare på denna adress',
+'aucun_site' => 'Det finns ingen sajt på denna adress',
+'aucune_breve' => 'Det finns ingen nyhet på denna adress',
+'aucune_rubrique' => 'Det finns ingen avdelning på denna adress',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Andra',
 'autres_breves' => 'Andra nyheter',
@@ -27,12 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hej',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Nyheter',
 
 // C
 'commenter_site' => 'Kommentera sajten',
-'copie_document_impossible' => 'Det g&aring;r inte att kopiera dokumentet',
+'copie_document_impossible' => 'Det går inte att kopiera dokumentet',
 
 // D
 'date' => 'Datum',
@@ -41,17 +41,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Senaste artiklarna',
 'derniers_commentaires' => 'Senaste kommentarerna',
 'derniers_messages_forum' => 'Senaste forum-meddelandena',
-'documents_interdits_forum' => 'Dokument &auml;r inte till&aring;tna i forumet',
+'documents_interdits_forum' => 'Dokument är inte tillåtna i forumet',
 
 // E
 'edition_mode_texte' => 'Textversion',
-'en_reponse' => 'Svarar p&aring;:',
+'en_reponse' => 'Svarar på:',
 'en_resume' => 'Sammanfattning',
-'envoyer_message' => 'F&ouml;r att skicka ett meddelande',
+'envoyer_message' => 'För att skicka ett meddelande',
 'espace_prive' => 'Privat del',
 
 // F
-'formats_acceptes' => 'Godk&auml;nda format: @formats@.',
+'formats_acceptes' => 'Godkända format: @formats@.',
 'forum' => 'Forum',
 
 // H
@@ -64,13 +64,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Logga in',
 
 // M
-'meme_auteur' => 'Av samma f&ouml;rfattare',
+'meme_auteur' => 'Av samma författare',
 'meme_rubrique' => 'Inom samma avdelning',
-'memes_auteurs' => 'Av samma f&ouml;rfattare',
+'memes_auteurs' => 'Av samma författare',
 'message' => 'Meddelande',
 'messages_forum' => 'Forum-meddelande',
 'messages_recents' => 'Senaste forum-meddelandena',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Nyckelord',
 'mots_clefs_meme_groupe' => 'Nyckelord i samma grupp',
 
@@ -78,26 +78,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'navigation' => 'Navigering',
 'nom' => 'Namn',
 'nouveautes' => 'Nytt',
-'nouveautes_web' => 'Nytt p&aring; webben',
+'nouveautes_web' => 'Nytt på webben',
 'nouveaux_articles' => 'Nya artiklar',
 'nouvelles_breves' => 'Nya nyheter',
 
 // P
-'page_precedente' => 'f&ouml;reg&aring;ende sida',
-'page_suivante' => 'n&auml;sta sida',
+'page_precedente' => 'föregående sida',
+'page_suivante' => 'nästa sida',
 'par_auteur' => 'av ',
-'participer_site' => 'Du kan ta en aktiv roll i den h&auml;r sajten och skriva dina egna artiklar genom att registrera dig nedan. Du kommer d&aring; genast att f&aring; ett epost med uppgifter som du anv&auml;nder f&ouml;r att logga in p&aring; sajtens privata del.',
+'participer_site' => 'Du kan ta en aktiv roll i den här sajten och skriva dina egna artiklar genom att registrera dig nedan. Du kommer då genast att få ett epost med uppgifter som du använder för att logga in på sajtens privata del.',
 'plan_site' => 'Sajtkarta',
 'popularite' => 'Popularitet',
-'poster_message' => 'F&ouml;r att skicka ett meddelande',
-'proposer_site' => 'Du kan f&ouml;resl&aring; en sajt att l&auml;gga till i avdelningen:',
+'poster_message' => 'För att skicka ett meddelande',
+'proposer_site' => 'Du kan föreslå en sajt att lägga till i avdelningen:',
 
 // R
-'repondre_article' => 'Svara p&aring; artikeln',
-'repondre_breve' => 'Svara p&aring; nyheten',
-'repondre_message' => 'Svara p&aring; meddelandet',
-'resultats_recherche' => 'S&ouml;k-resultat',
-'retour_debut_forums' => 'Tillbaka till forumens b&ouml;rjan',
+'repondre_article' => 'Svara på artikeln',
+'repondre_breve' => 'Svara på nyheten',
+'repondre_message' => 'Svara på meddelandet',
+'resultats_recherche' => 'Sök-resultat',
+'retour_debut_forums' => 'Tillbaka till forumens början',
 'rubrique' => 'Avdelning',
 'rubriques' => 'Avdelningar',
 
@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sites_web' => 'Websajter',
 'sous_rubriques' => 'Underavdelningar',
 'spam' => 'Spam',
-'suite' => 'forts&auml;tt',
-'sur_web' => 'P&aring; webben',
+'suite' => 'fortsätt',
+'sur_web' => 'På webben',
 'syndiquer_rubrique' => 'Syndikera avdelning',
 'syndiquer_site' => 'Syndikera hela sajten',
 
 // T
-'texte_lettre_information' => 'H&auml;r &auml;r sajtens nyhetsbrev',
-'texte_lettre_information_2' => 'Det h&auml;r brevet inneh&aring;ller en sammanfattning av de artiklar och nyheter som publicerats sedan ',
+'texte_lettre_information' => 'Här är sajtens nyhetsbrev',
+'texte_lettre_information_2' => 'Det här brevet innehåller en sammanfattning av de artiklar och nyheter som publicerats sedan ',
 
 // V
 'ver_imprimer' => 'Utskrifts-version',

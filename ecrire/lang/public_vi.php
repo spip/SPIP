@@ -8,116 +8,116 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'accueil_site' => 'Trang nh&agrave;',
+'accueil_site' => 'Trang nhà',
 'article' => 'Article', # NEW
-'articles' => 'B&agrave;i',
-'articles_auteur' => 'B&agrave;i v&#7903; c&#7911;a t&aacute;c gi&#7843; n&agrave;y',
-'articles_populaires' => 'Nh&#7919;ng b&agrave;i &#273;&#432;&#7907;c chu&#7897;ng nh&#7845;t',
-'articles_rubrique' => 'B&agrave;i v&#7903; c&#7911;a &#273;&#7873; m&#7909;c n&agrave;y',
-'aucun_article' => 'Kh&ocirc;ng c&oacute; b&agrave;i t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y  ',
-'aucun_auteur' => 'Kh&ocirc;ng c&oacute; t&aacute;c gi&#7843; t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
-'aucun_site' => 'Kh&ocirc;ng c&oacute; trang Web t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y ',
-'aucune_breve' => 'Kh&ocirc;ng c&oacute; tin ng&#7855;n t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
-'aucune_rubrique' => 'Kh&ocirc;ng c&oacute; &#273;&#7873; m&#7909;c t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
+'articles' => 'Bài',
+'articles_auteur' => 'Bài vở của tác giả này',
+'articles_populaires' => 'Những bài được chuộng nhất',
+'articles_rubrique' => 'Bài vở của đề mục này',
+'aucun_article' => 'Không có bài tại địa chì này  ',
+'aucun_auteur' => 'Không có tác giả tại địa chì này',
+'aucun_site' => 'Không có trang Web tại địa chì này ',
+'aucune_breve' => 'Không có tin ngắn tại địa chì này',
+'aucune_rubrique' => 'Không có đề mục tại địa chì này',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Autres', # NEW
-'autres_breves' => 'Nh&#7919;ng tin ng&#7857;n kh&aacute;c ',
-'autres_groupes_mots_clefs' => 'Nh&#7919;ng nh&oacute;m t&#7915; then ch&#7889;t kh&aacute;c ',
-'autres_sites' => 'Nh&#7919;ng trang Web kh&aacute;c',
+'autres_breves' => 'Những tin ngằn khác ',
+'autres_groupes_mots_clefs' => 'Những nhóm từ then chốt khác ',
+'autres_sites' => 'Những trang Web khác',
 
 // B
-'bonjour' => 'Th&acirc;n ch&agrave;o',
-'breve' => 'Br&egrave;ve', # NEW
-'breves' => 'Tin ng&#7855;n',
+'bonjour' => 'Thân chào',
+'breve' => 'Brève', # NEW
+'breves' => 'Tin ngắn',
 
 // C
-'commenter_site' => 'Ph&ecirc; b&igrave;nh trang Web n&agrave;y',
+'commenter_site' => 'Phê bình trang Web này',
 'copie_document_impossible' => 'Impossible de copier le document', # NEW
 
 // D
-'date' => 'Ng&agrave;y',
-'dernier_ajout' => 'B&agrave;i &#273;&#432;&#7907;c th&ecirc;m sau ch&oacute;t',
-'dernieres_breves' => 'Nh&#7919;ng tin ng&#7855;n m&#7899;i nh&#7845;t ',
-'derniers_articles' => 'Nh&#7919;ng b&agrave;i m&#7899;i nh&#7845;t ',
-'derniers_commentaires' => 'C&aacute;c g&oacute;p &yacute; m&#7899;i nh&#7845;t',
-'derniers_messages_forum' => 'Trao &#273;&#7893;i m&#7899;i nh&#7845;t hi&#7879;n trong di&#7877;n &#273;&agrave;n',
+'date' => 'Ngày',
+'dernier_ajout' => 'Bài được thêm sau chót',
+'dernieres_breves' => 'Những tin ngắn mới nhất ',
+'derniers_articles' => 'Những bài mới nhất ',
+'derniers_commentaires' => 'Các góp ý mới nhất',
+'derniers_messages_forum' => 'Trao đổi mới nhất hiện trong diễn đàn',
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
-'edition_mode_texte' => 'v&#259;n b&#7843;n th&#432;&#7901;ng',
-'en_reponse' => 'Tr&#7843; l&#7901;i cho&nbsp;:',
-'en_resume' => 'T&oacute;m t&#7855;t',
-'envoyer_message' => 'G&#7917;i th&#432; t&iacute;n m&#7899;i',
-'espace_prive' => 'M&#7841;ng c&aacute; nh&acirc;n',
+'edition_mode_texte' => 'văn bản thường',
+'en_reponse' => 'Trả lời cho :',
+'en_resume' => 'Tóm tắt',
+'envoyer_message' => 'Gửi thư tín mới',
+'espace_prive' => 'Mạng cá nhân',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
-'forum' => 'Di&#7877;n &#273;&agrave;n',
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
+'forum' => 'Diễn đàn',
 
 // H
-'hierarchie_site' => 'C&#7845;u tr&uacute;c th&#7913; b&#7853;c c&#7911;a trang web',
+'hierarchie_site' => 'Cấu trúc thứ bậc của trang web',
 
 // J
-'jours' => 'ng&agrave;y',
+'jours' => 'ngày',
 
 // L
 'lien_connecter' => 'Se connecter', # NEW
 
 // M
-'meme_auteur' => 'C&ugrave;ng t&aacute;c gi&#7843;',
-'meme_rubrique' => 'Trong c&ugrave;ng &#273;&#7873; m&#7909;c',
-'memes_auteurs' => 'C&ugrave;ng t&aacute;c gi&#7843;',
-'message' => 'Th&#432; t&iacute;n',
-'messages_forum' => 'Th&#432; t&iacute;n di&#7877;n &#273;&agrave;n',
-'messages_recents' => 'Tin m&#7899;i nh&#7845;t trong di&#7877;n &#273;&agrave;n',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
-'mots_clefs' => 'T&#7915; then ch&#7889;t',
-'mots_clefs_meme_groupe' => 'T&#7915; then ch&#7889;t c&ugrave;ng nh&ograve;m  ',
+'meme_auteur' => 'Cùng tác giả',
+'meme_rubrique' => 'Trong cùng đề mục',
+'memes_auteurs' => 'Cùng tác giả',
+'message' => 'Thư tín',
+'messages_forum' => 'Thư tín diễn đàn',
+'messages_recents' => 'Tin mới nhất trong diễn đàn',
+'mots_clef' => 'Mot-clé', # NEW
+'mots_clefs' => 'Từ then chốt',
+'mots_clefs_meme_groupe' => 'Từ then chốt cùng nhòm  ',
 
 // N
-'navigation' => '&#272;i&#7873;u h&#432;&#7899;ng',
-'nom' => 'T&ecirc;n',
-'nouveautes' => 'Nh&#7919;ng &#273;i&#7875;m m&#7899;i',
-'nouveautes_web' => 'Nh&#7919;ng &#273;i&#7873;u m&#7899;i tr&ecirc;n trang web',
-'nouveaux_articles' => 'B&agrave;i m&#7899;i',
-'nouvelles_breves' => 'Tin ng&#7855;n m&#7899;i',
+'navigation' => 'Điều hướng',
+'nom' => 'Tên',
+'nouveautes' => 'Những điểm mới',
+'nouveautes_web' => 'Những điều mới trên trang web',
+'nouveaux_articles' => 'Bài mới',
+'nouvelles_breves' => 'Tin ngắn mới',
 
 // P
-'page_precedente' => 'trang tr&#432;&#7899;c',
+'page_precedente' => 'trang trước',
 'page_suivante' => 'trang sau',
-'par_auteur' => 'b&#7903;i',
-'participer_site' => 'B&#7841;n c&oacute; th&#7875; tham gia &#273;&oacute;ng g&oacute;p t&iacute;ch c&#7921;c v&agrave;o trang web n&agrave;y &#273;&#7875; so&#7841;n v&agrave; &#273;&#259;ng b&agrave;i v&#7903;. B&#7841;n ph&#7843;i ghi danh d&#432;&#7899;i &#273;&acirc;y. Sau &#273;&oacute; b&#7841;n s&#7869; nh&#7853;n email cho bi&#7871;t chi ti&#7871;t &#273;&#7875; v&agrave;o trang web.',
-'plan_site' => 'S&#417; &#273;&#7891;',
-'popularite' => 'M&#7913;c &#273;&#7897; ph&#7893; th&ocirc;ng',
-'poster_message' => '&#272;&#7875; &#273;&#259;ng tin',
-'proposer_site' => 'B&#7841;n c&oacute; th&#7875; &#273;&#7873; ngh&#7883; th&ecirc;m m&#7897;t trang web v&agrave;o ph&#7847;n n&agrave;y:',
+'par_auteur' => 'bởi',
+'participer_site' => 'Bạn có thể tham gia đóng góp tích cực vào trang web này để soạn và đăng bài vở. Bạn phải ghi danh dưới đây. Sau đó bạn sẽ nhận email cho biết chi tiết để vào trang web.',
+'plan_site' => 'Sơ đồ',
+'popularite' => 'Mức độ phổ thông',
+'poster_message' => 'Để đăng tin',
+'proposer_site' => 'Bạn có thể đề nghị thêm một trang web vào phần này:',
 
 // R
-'repondre_article' => 'Tr&#7843; l&#7901;i b&agrave;i n&agrave;y',
-'repondre_breve' => 'Tr&#7843; l&#7901;i tin ng&#7855;n n&agrave;y',
-'repondre_message' => 'Tr&#7843; l&#7901;i m&#7851;u tin n&agrave;y',
-'resultats_recherche' => 'K&#7871;t qu&#7843; t&igrave;m ki&#7871;m',
-'retour_debut_forums' => 'Tr&#7903; v&#7873; trang &#273;&#7847;u c&#7911;a di&#7877;n &#273;&agrave;n',
-'rubrique' => '&ETH;&#7873; M&#7909;c',
-'rubriques' => '&ETH;&#7873; M&#7909;c',
+'repondre_article' => 'Trả lời bài này',
+'repondre_breve' => 'Trả lời tin ngắn này',
+'repondre_message' => 'Trả lời mẫu tin này',
+'resultats_recherche' => 'Kết quả tìm kiếm',
+'retour_debut_forums' => 'Trở về trang đầu của diễn đàn',
+'rubrique' => 'Ðề Mục',
+'rubriques' => 'Ðề Mục',
 
 // S
-'signatures_petition' => 'Ch&#7919; k&yacute;',
-'site_realise_avec_spip' => 'Trang web &#273;&#432;&#7907;c so&#7841;n b&#7857;ng SPIP',
+'signatures_petition' => 'Chữ ký',
+'site_realise_avec_spip' => 'Trang web được soạn bằng SPIP',
 'sites_web' => 'Trang web',
-'sous_rubriques' => '&#272;&#7873; m&#7909;c ph&#7909;',
+'sous_rubriques' => 'Đề mục phụ',
 'spam' => 'Spam', # NEW
-'suite' => 'ti&#7871;p t&#7909;c',
-'sur_web' => 'Tr&ecirc;n trang web',
-'syndiquer_rubrique' => 'Ph&#7893; bi&#7871;n &#273;&#7873; m&#7909;c n&agrave;y',
-'syndiquer_site' => 'Ph&#7893; bi&#7871;n tr&#7885;n trang web',
+'suite' => 'tiếp tục',
+'sur_web' => 'Trên trang web',
+'syndiquer_rubrique' => 'Phổ biến đề mục này',
+'syndiquer_site' => 'Phổ biến trọn trang web',
 
 // T
-'texte_lettre_information' => '&#272;&acirc;y l&agrave; b&#7843;n tin c&#7911;a trang web',
-'texte_lettre_information_2' => 'T&oacute;m t&#7855;t c&aacute;c b&agrave;i v&#7903; v&agrave; tin ng&#7855;n &#273;&atilde; ph&aacute;t h&agrave;nh t&#7915; ',
+'texte_lettre_information' => 'Đây là bản tin của trang web',
+'texte_lettre_information_2' => 'Tóm tắt các bài vở và tin ngắn đã phát hành từ ',
 
 // V
-'ver_imprimer' => 'Ki&#7875;u d&#7875; in',
+'ver_imprimer' => 'Kiểu dể in',
 'voir_en_ligne' => 'Xem online',
 'voir_squelette' => 'voir le squelette de cette page' # NEW
 );

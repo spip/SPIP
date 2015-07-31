@@ -11,24 +11,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'accueil_site' => 'Lakey lo sit',
 'article' => 'Article', # NEW
 'articles' => 'Bann zartik',
-'articles_auteur' => 'Bann zartik lot&egrave;r-la',
-'articles_populaires' => 'Bann zartik sak l&eacute; pli popil&egrave;r',
+'articles_auteur' => 'Bann zartik lotèr-la',
+'articles_populaires' => 'Bann zartik sak lé pli popilèr',
 'articles_rubrique' => 'Bann zartik andann ribrik-la',
-'aucun_article' => 'N&eacute;na pa okinn lartik si ladr&egrave;s-la',
-'aucun_auteur' => 'N&eacute;na pa okinn lot&egrave;r si ladr&egrave;s-la',
-'aucun_site' => 'N&eacute;na pa okin sitw&egrave;b si ladr&egrave;s-la',
-'aucune_breve' => 'N&eacute;na pa okin titnouv&egrave;l si ladr&egrave;s-la',
-'aucune_rubrique' => 'N&eacute;na pa okinn ribrik si ladr&egrave;s-la',
+'aucun_article' => 'Néna pa okinn lartik si ladrès-la',
+'aucun_auteur' => 'Néna pa okinn lotèr si ladrès-la',
+'aucun_site' => 'Néna pa okin sitwèb si ladrès-la',
+'aucune_breve' => 'Néna pa okin titnouvèl si ladrès-la',
+'aucune_rubrique' => 'Néna pa okinn ribrik si ladrès-la',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Autres', # NEW
-'autres_breves' => 'Bann zot tite-nouv&egrave;l',
-'autres_groupes_mots_clefs' => 'Bann zot bann molakl&eacute;',
-'autres_sites' => 'Bann zot sitw&egrave;b',
+'autres_breves' => 'Bann zot tite-nouvèl',
+'autres_groupes_mots_clefs' => 'Bann zot bann molaklé',
+'autres_sites' => 'Bann zot sitwèb',
 
 // B
-'bonjour' => 'Ot&eacute;',
-'breve' => 'Br&egrave;ve', # NEW
-'breves' => 'Bann tite-nouv&egrave;l',
+'bonjour' => 'Oté',
+'breve' => 'Brève', # NEW
+'breves' => 'Bann tite-nouvèl',
 
 // C
 'commenter_site' => 'Donn out lavi si lo sit-la',
@@ -36,26 +36,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Ladat',
-'dernier_ajout' => 'Derny&eacute; piblikasyon',
-'dernieres_breves' => 'Bann derniy&egrave;r tit-nouv&egrave;l',
-'derniers_articles' => 'Bann d&egrave;rny&eacute; zartik',
-'derniers_commentaires' => 'Bann d&egrave;rny&eacute; lavi',
-'derniers_messages_forum' => 'Bann d&egrave;rny&eacute; mod&eacute;kri andann bann forom',
+'dernier_ajout' => 'Dernyé piblikasyon',
+'dernieres_breves' => 'Bann derniyèr tit-nouvèl',
+'derniers_articles' => 'Bann dèrnyé zartik',
+'derniers_commentaires' => 'Bann dèrnyé lavi',
+'derniers_messages_forum' => 'Bann dèrnyé modékri andann bann forom',
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
-'edition_mode_texte' => 'Po &eacute;dit&eacute; andann mod t&egrave;ks',
-'en_reponse' => 'Po r&eacute;ponn a&nbsp;:',
-'en_resume' => 'Po r&eacute;zim&eacute;',
-'envoyer_message' => 'Po anvway&eacute; inn mod&eacute;kri',
-'espace_prive' => 'L&eacute;spas priv&eacute;',
+'edition_mode_texte' => 'Po édité andann mod tèks',
+'en_reponse' => 'Po réponn a :',
+'en_resume' => 'Po rézimé',
+'envoyer_message' => 'Po anvwayé inn modékri',
+'espace_prive' => 'Léspas privé',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Forom kozman',
 
 // H
-'hierarchie_site' => 'Bardrin lo sitw&egrave;b',
+'hierarchie_site' => 'Bardrin lo sitwèb',
 
 // J
 'jours' => 'bann zour',
@@ -64,62 +64,62 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_connecter' => 'Se connecter', # NEW
 
 // M
-'meme_auteur' => 'Pa lot&egrave;r minm sa-minm',
+'meme_auteur' => 'Pa lotèr minm sa-minm',
 'meme_rubrique' => 'Andan minm ribrik-la',
-'memes_auteurs' => 'Po bann zot&egrave;r minm',
-'message' => 'Mod&eacute;kri',
-'messages_forum' => 'Bann mod&eacute;kri andann forom',
-'messages_recents' => 'Bann mod&eacute;kri la finn m&egrave;t an derny&eacute; andan forom',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
-'mots_clefs' => 'Bann molakl&eacute;',
-'mots_clefs_meme_groupe' => 'Bann molakl&eacute; andann lo minm bann sa-minm',
+'memes_auteurs' => 'Po bann zotèr minm',
+'message' => 'Modékri',
+'messages_forum' => 'Bann modékri andann forom',
+'messages_recents' => 'Bann modékri la finn mèt an dernyé andan forom',
+'mots_clef' => 'Mot-clé', # NEW
+'mots_clefs' => 'Bann molaklé',
+'mots_clefs_meme_groupe' => 'Bann molaklé andann lo minm bann sa-minm',
 
 // N
-'navigation' => 'Bat-kar&eacute; si lo sit',
+'navigation' => 'Bat-karé si lo sit',
 'nom' => 'Non',
-'nouveautes' => 'Bann nouv&egrave;lt&eacute;',
-'nouveautes_web' => 'Bann nouv&egrave;lt&eacute; si lo sitw&egrave;b',
+'nouveautes' => 'Bann nouvèlté',
+'nouveautes_web' => 'Bann nouvèlté si lo sitwèb',
 'nouveaux_articles' => 'Bann nouvo lartik',
-'nouvelles_breves' => 'Bann nouv&egrave;l tite-nouv&egrave;l',
+'nouvelles_breves' => 'Bann nouvèl tite-nouvèl',
 
 // P
 'page_precedente' => 'lapaz dovan',
-'page_suivante' => 'Lapaz d&eacute;y&egrave;r',
+'page_suivante' => 'Lapaz déyèr',
 'par_auteur' => 'sanm',
-'participer_site' => 'Ou p&eacute; m&egrave;t ansanm bann zot dalon po la vi lo sit-la, &egrave; propoz&eacute; out prop bann zartik, si ou l&eacute; inskri anba-la. Inskri aou : ou sar gayn inn lim&egrave;l i don aou out bann kodlaks&eacute; po l&eacute;spas priv&eacute; lo sit. ',
+'participer_site' => 'Ou pé mèt ansanm bann zot dalon po la vi lo sit-la, è propozé out prop bann zartik, si ou lé inskri anba-la. Inskri aou : ou sar gayn inn limèl i don aou out bann kodlaksé po léspas privé lo sit. ',
 'plan_site' => 'Lakart lo sit',
-'popularite' => 'Koman l&eacute; popil&egrave;r',
-'poster_message' => 'Anvwa in mod&eacute;kri',
-'proposer_site' => 'Ou p&eacute; propoz azout inn sit dann ribrik-la&nbsp;:',
+'popularite' => 'Koman lé popilèr',
+'poster_message' => 'Anvwa in modékri',
+'proposer_site' => 'Ou pé propoz azout inn sit dann ribrik-la :',
 
 // R
-'repondre_article' => 'Po r&eacute;ponn si lartik-la',
-'repondre_breve' => 'Po r&eacute;ponn la tite-nouv&egrave;l-la',
-'repondre_message' => 'Po r&eacute;ponn mod&eacute;kri-la',
-'resultats_recherche' => 'Kosa lo rod&egrave;r la finn trouv&eacute;',
-'retour_debut_forums' => 'Artourn bann d&eacute;bi bann forom',
+'repondre_article' => 'Po réponn si lartik-la',
+'repondre_breve' => 'Po réponn la tite-nouvèl-la',
+'repondre_message' => 'Po réponn modékri-la',
+'resultats_recherche' => 'Kosa lo rodèr la finn trouvé',
+'retour_debut_forums' => 'Artourn bann débi bann forom',
 'rubrique' => 'Ribrik',
 'rubriques' => 'Bann ribrik',
 
 // S
 'signatures_petition' => 'Bann sinyatir',
-'site_realise_avec_spip' => 'Sit-la ni la f&eacute; &egrave;k SPIP',
-'sites_web' => 'Bann sitw&egrave;b',
+'site_realise_avec_spip' => 'Sit-la ni la fé èk SPIP',
+'sites_web' => 'Bann sitwèb',
 'sous_rubriques' => 'Bann souribrik',
 'spam' => 'Spam', # NEW
 'suite' => 'laswit',
-'sur_web' => 'Si lo w&egrave;b',
-'syndiquer_rubrique' => 'Po sindik&eacute; ribrik-la',
-'syndiquer_site' => 'Po sindik&eacute; si lo sit',
+'sur_web' => 'Si lo wèb',
+'syndiquer_rubrique' => 'Po sindiké ribrik-la',
+'syndiquer_site' => 'Po sindiké si lo sit',
 
 // T
-'texte_lettre_information' => 'Ala lal&egrave;t zinformasyon lo sit',
-'texte_lettre_information_2' => 'L&egrave;t-la i ramas tout bann zartik &egrave;k bann tite-nouv&egrave;l dopwi',
+'texte_lettre_information' => 'Ala lalèt zinformasyon lo sit',
+'texte_lettre_information_2' => 'Lèt-la i ramas tout bann zartik èk bann tite-nouvèl dopwi',
 
 // V
-'ver_imprimer' => 'V&egrave;rsyon pou inprim&eacute;',
+'ver_imprimer' => 'Vèrsyon pou inprimé',
 'voir_en_ligne' => 'Anon vwar an liyn',
-'voir_squelette' => 'Apiy po t&eacute;l&eacute;sarz l&eacute;sk&eacute;let lapaz-la'
+'voir_squelette' => 'Apiy po télésarz léskélet lapaz-la'
 );
 
 ?>

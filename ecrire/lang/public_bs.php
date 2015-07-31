@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Dobar dan',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Kratke poruke',
 
 // C
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Privatni prostor',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Poruka',
 'messages_forum' => 'Poruke iz foruma',
 'messages_recents' => 'Recentne poruke iz foruma',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Kljucne rijeci',
 'mots_clefs_meme_groupe' => 'Kljucne rijeci u istoj grupi',
 

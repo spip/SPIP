@@ -14,11 +14,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles_auteur' => 'Articles de quel autor',
 'articles_populaires' => 'Los articles mai populars',
 'articles_rubrique' => 'Articles de quela rubrica',
-'aucun_article' => 'I a brisa d\'article a quela adre&ccedil;a ',
-'aucun_auteur' => 'I a brisa d\'autor a quela adre&ccedil;a ',
-'aucun_site' => 'I a brisa de sit a quela adre&ccedil;a ',
-'aucune_breve' => 'I a brisa de breva a quela adre&ccedil;a ',
-'aucune_rubrique' => 'I a brisa de rubrica a quela adre&ccedil;a ',
+'aucun_article' => 'I a brisa d\'article a quela adreça ',
+'aucun_auteur' => 'I a brisa d\'autor a quela adreça ',
+'aucun_site' => 'I a brisa de sit a quela adreça ',
+'aucune_breve' => 'I a brisa de breva a quela adreça ',
+'aucune_rubrique' => 'I a brisa de rubrica a quela adreça ',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Autres', # NEW
 'autres_breves' => 'Autras brevas',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bonjorn',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Brevas',
 
 // C
@@ -44,14 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
-'edition_mode_texte' => 'Edicion en m&ograve;de text de',
+'edition_mode_texte' => 'Edicion en mòde text de',
 'en_reponse' => 'En responsa a:',
 'en_resume' => 'En resumit',
 'envoyer_message' => 'Mandar un messatge',
 'espace_prive' => 'Espaci privat',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Los messatges de forums mai recents',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Mots clau',
 'mots_clefs_meme_groupe' => 'Mots clau dins lo mesme grop',
 
@@ -79,14 +79,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Nom',
 'nouveautes' => 'Las novetats',
 'nouveautes_web' => 'Novetats subre lo web',
-'nouveaux_articles' => 'Articles nu&ograve;us',
-'nouvelles_breves' => 'Brevas nu&ograve;vas',
+'nouveaux_articles' => 'Articles nuòus',
+'nouvelles_breves' => 'Brevas nuòvas',
 
 // P
 'page_precedente' => 'pagina precedenta',
 'page_suivante' => 'pagina seguenta',
-'par_auteur' => 'per&nbsp;',
-'participer_site' => 'Podetz participar a la vida de queu sit e prepausar los articles v&ograve;stres en vos inscriure &ccedil;ai jos. Recebretz c&ograve;p sec un e-mail que vos indicar&aacute; v&ograve;stres c&ograve;des per accedir a l\'espaci privat dau sit.',
+'par_auteur' => 'per ',
+'participer_site' => 'Podetz participar a la vida de queu sit e prepausar los articles vòstres en vos inscriure çai jos. Recebretz còp sec un e-mail que vos indicará vòstres còdes per accedir a l\'espaci privat dau sit.',
 'plan_site' => 'Plan dau sit',
 'popularite' => 'Popularitat',
 'poster_message' => 'Postar un messatge',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repondre_breve' => 'Respondre a quela breva',
 'repondre_message' => 'Respondre a queu messatge',
 'resultats_recherche' => 'Resultats de la recercha',
-'retour_debut_forums' => 'Retorn au comen&ccedil;ament daus forums',
+'retour_debut_forums' => 'Retorn au començament daus forums',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubricas',
 
@@ -113,7 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_site' => 'Sindicar tot lo sit',
 
 // T
-'texte_lettre_information' => 'Vaic&iacute; la letra d\'informacion dau sit',
+'texte_lettre_information' => 'Vaicí la letra d\'informacion dau sit',
 'texte_lettre_information_2' => 'Quela letra recensa los articles e brevas publicats dempuei',
 
 // V

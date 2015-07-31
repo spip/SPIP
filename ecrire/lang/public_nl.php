@@ -27,12 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Hallo',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Nieuwsberichten',
 
 // C
 'commenter_site' => 'Commentaar geven op de site',
-'copie_document_impossible' => 'Onmogelijk om het document te kopi&euml;ren',
+'copie_document_impossible' => 'Onmogelijk om het document te kopiëren',
 
 // D
 'date' => 'Datum',
@@ -45,10 +45,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'edition_mode_texte' => 'Uitgave in tekstmodus van',
-'en_reponse' => 'Als antwoord op&nbsp;:',
+'en_reponse' => 'Als antwoord op :',
 'en_resume' => 'Samengevat',
 'envoyer_message' => 'Een bericht sturen',
-'espace_prive' => 'Priv&eacute;-site',
+'espace_prive' => 'Privé-site',
 
 // F
 'formats_acceptes' => 'Aanvaarde formaten : @formats@.',
@@ -70,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Bericht',
 'messages_forum' => 'Berichten van het forum',
 'messages_recents' => 'Meest recente berichten van de forums',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
+'mots_clef' => 'Mot-clé', # NEW
 'mots_clefs' => 'Trefwoorden',
 'mots_clefs_meme_groupe' => 'Trefwoorden van dezelfde groep',
 
@@ -86,11 +86,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_precedente' => 'vorige pagina',
 'page_suivante' => 'volgende pagina',
 'par_auteur' => 'door ',
-'participer_site' => 'Je kan bijdragen tot deze site door je eigen artikels voor te stellen als je je hieronder inschrijft. Je krijgt meteen een e-mail met daarin de toegangscode voor de priv&eacute;-deel van de site.',
+'participer_site' => 'Je kan bijdragen tot deze site door je eigen artikels voor te stellen als je je hieronder inschrijft. Je krijgt meteen een e-mail met daarin de toegangscode voor de privé-deel van de site.',
 'plan_site' => 'Overzicht van de site',
 'popularite' => 'Populariteit',
 'poster_message' => 'Een bericht plaatsen',
-'proposer_site' => 'Je kan voorstellen een site in deze rubriek op te nemen&nbsp;:',
+'proposer_site' => 'Je kan voorstellen een site in deze rubriek op te nemen :',
 
 // R
 'repondre_article' => 'Dit artikel beantwoorden',

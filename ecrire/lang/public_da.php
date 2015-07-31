@@ -12,22 +12,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'article' => 'Article', # NEW
 'articles' => 'Artikler',
 'articles_auteur' => 'Denne forfatters artikler',
-'articles_populaires' => 'De mest l&aelig;ste artikler',
-'articles_rubrique' => 'Dette omr&aring;des artikler',
-'aucun_article' => 'Der er ingen artikel p&aring; denne adresse',
-'aucun_auteur' => 'Der er ingen forfatter p&aring; denne adresse',
-'aucun_site' => 'Der er intet websted p&aring; denne adresse',
-'aucune_breve' => 'Der er ingen nyhed p&aring; denne adresse',
-'aucune_rubrique' => 'Der er ikke noget afsnit p&aring; denne adresse',
+'articles_populaires' => 'De mest læste artikler',
+'articles_rubrique' => 'Dette områdes artikler',
+'aucun_article' => 'Der er ingen artikel på denne adresse',
+'aucun_auteur' => 'Der er ingen forfatter på denne adresse',
+'aucun_site' => 'Der er intet websted på denne adresse',
+'aucune_breve' => 'Der er ingen nyhed på denne adresse',
+'aucune_rubrique' => 'Der er ikke noget afsnit på denne adresse',
 'auteur' => 'Auteur', # NEW
 'autres' => 'Autres', # NEW
 'autres_breves' => 'Andre nyheder',
-'autres_groupes_mots_clefs' => 'Andre grupper af n&oslash;gleord',
+'autres_groupes_mots_clefs' => 'Andre grupper af nøgleord',
 'autres_sites' => 'Andre websteder',
 
 // B
 'bonjour' => 'Hej',
-'breve' => 'Br&egrave;ve', # NEW
+'breve' => 'Brève', # NEW
 'breves' => 'Nyheder',
 
 // C
@@ -36,22 +36,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Dato',
-'dernier_ajout' => 'Seneste tilf&oslash;jelse',
+'dernier_ajout' => 'Seneste tilføjelse',
 'dernieres_breves' => 'Seneste nyhed',
 'derniers_articles' => 'Seneste artikler',
 'derniers_commentaires' => 'Seneste kommentarer',
-'derniers_messages_forum' => 'Seneste indl&aelig;g offentliggjort i forummer',
+'derniers_messages_forum' => 'Seneste indlæg offentliggjort i forummer',
 'documents_interdits_forum' => 'Documents interdits dans le forum', # NEW
 
 // E
 'edition_mode_texte' => 'Tekstudgave',
 'en_reponse' => 'Svaradresse:',
 'en_resume' => 'Opsummering',
-'envoyer_message' => 'Lav indl&aelig;g',
-'espace_prive' => 'Privat omr&aring;de',
+'envoyer_message' => 'Lav indlæg',
+'espace_prive' => 'Privat område',
 
 // F
-'formats_acceptes' => 'Formats accept&#233;s : @formats@.', # NEW
+'formats_acceptes' => 'Formats acceptés : @formats@.', # NEW
 'forum' => 'Forum',
 
 // H
@@ -67,37 +67,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_auteur' => 'Af samme forfatter',
 'meme_rubrique' => 'I samme afsnit',
 'memes_auteurs' => 'Af samme forfattere',
-'message' => 'Indl&aelig;g',
-'messages_forum' => 'Forumindl&aelig;g',
-'messages_recents' => 'Seneste forumindl&aelig;g',
-'mots_clef' => 'Mot-cl&eacute;', # NEW
-'mots_clefs' => 'N&oslash;gleord',
-'mots_clefs_meme_groupe' => 'N&oslash;gleord i samme gruppe',
+'message' => 'Indlæg',
+'messages_forum' => 'Forumindlæg',
+'messages_recents' => 'Seneste forumindlæg',
+'mots_clef' => 'Mot-clé', # NEW
+'mots_clefs' => 'Nøgleord',
+'mots_clefs_meme_groupe' => 'Nøgleord i samme gruppe',
 
 // N
 'navigation' => 'Navigering',
 'nom' => 'Navn',
 'nouveautes' => 'Hvad nyt',
-'nouveautes_web' => 'Hvad nyt p&aring; Internettet',
+'nouveautes_web' => 'Hvad nyt på Internettet',
 'nouveaux_articles' => 'Nye artikler',
 'nouvelles_breves' => 'Nyheder',
 
 // P
-'page_precedente' => 'foreg&aring;ende side',
-'page_suivante' => 'n&aelig;ste side',
+'page_precedente' => 'foregående side',
+'page_suivante' => 'næste side',
 'par_auteur' => 'af',
-'participer_site' => 'Du kan deltage aktivt p&aring; dette websted og skrive dine egne artikler ved at tilmelde dig nedenfor. Du vil da straks modtage en email med en adgangskode til webstedets private omr&aring;de.',
+'participer_site' => 'Du kan deltage aktivt på dette websted og skrive dine egne artikler ved at tilmelde dig nedenfor. Du vil da straks modtage en email med en adgangskode til webstedets private område.',
 'plan_site' => 'Indholdsoversigt',
 'popularite' => 'Popularitet',
-'poster_message' => 'Indl&aelig;g',
-'proposer_site' => 'Vous pouvez proposer un site &agrave; ajouter dans cette rubrique&nbsp;:', # NEW
+'poster_message' => 'Indlæg',
+'proposer_site' => 'Vous pouvez proposer un site à ajouter dans cette rubrique :', # NEW
 
 // R
 'repondre_article' => 'Lav et svar til denne artikel',
-'repondre_breve' => 'Lav et svar p&aring; denne nyhed',
-'repondre_message' => 'Lav et svar p&aring; dette indl&aelig;g',
-'resultats_recherche' => 'S&oslash;geresultater',
-'retour_debut_forums' => 'Tilbage til starten p&aring; forummet',
+'repondre_breve' => 'Lav et svar på denne nyhed',
+'repondre_message' => 'Lav et svar på dette indlæg',
+'resultats_recherche' => 'Søgeresultater',
+'retour_debut_forums' => 'Tilbage til starten på forummet',
 'rubrique' => 'Afsnit',
 'rubriques' => 'Afsnit',
 
@@ -107,8 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sites_web' => 'Websteder',
 'sous_rubriques' => 'Underafsnit',
 'spam' => 'Spam', # NEW
-'suite' => 'forts&aelig;t',
-'sur_web' => 'P&aring; Internettet',
+'suite' => 'fortsæt',
+'sur_web' => 'På Internettet',
 'syndiquer_rubrique' => 'Syndiker dette afsnit',
 'syndiquer_site' => 'Syndiker hele webstedet',
 
