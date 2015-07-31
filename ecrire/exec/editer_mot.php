@@ -40,7 +40,7 @@ function exec_editer_mot_dist()
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
-	spip_log(" $objet $id_objet ");
+
 	return formulaire_mots($objet, $id_objet, _request('cherche_mot'),
 			      _request('select_groupe'),
 			      'ajax'
