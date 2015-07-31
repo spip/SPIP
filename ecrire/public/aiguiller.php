@@ -36,7 +36,7 @@ function traiter_appels_actions(){
 		if (!isset($GLOBALS['redirect'])) {
 			$GLOBALS['redirect'] = _request('redirect');
 			if ($_SERVER['REQUEST_METHOD'] == 'POST')
-				$GLOBALS['redirect'] = urldecode($v);
+				$GLOBALS['redirect'] = urldecode($GLOBALS['redirect']);
 		}
 		if ($url = $GLOBALS['redirect']) {
 			// si l'action est provoque par un hit {ajax}
