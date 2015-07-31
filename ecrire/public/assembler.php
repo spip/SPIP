@@ -145,7 +145,7 @@ function assembler_page ($fond) {
 		// Definir les entetes si ce n'est fait 
 		if (!$flag_preserver) {
 			if ($flag_ob) {
-				// Si la page est vide, produire l'erreur 404
+				// Si la page est vide, produire l'erreur 404 ou message d'erreur pour les inclusions
 				if (trim($page['texte']) === ''
 				AND $var_mode != 'debug') {
 					$page = message_erreur_404();
@@ -193,6 +193,8 @@ function stop_inclure($fragment) {
 // http://doc.spip.org/@inclure_page
 function inclure_page($fond, $contexte_inclus) {
 	global $lastmodified;
+	//if (!defined('_PAS_DE_PAGE_404'))
+		define('_PAS_DE_PAGE_404',1);
 
 	// Si un fragment est demande et deja obtenu, inutile de continuer a inclure
 	if (defined('_STOP_INCLURE')) {
@@ -360,6 +362,8 @@ function f_admin ($texte) {
 
 // http://doc.spip.org/@message_erreur_404
 function message_erreur_404 ($erreur= "") {
+	if (defined('_PAS_DE_PAGE_404'))
+		return "erreur";
 	if (!$erreur) {
 		if (isset($GLOBALS['id_article']))
 		$erreur = 'public:aucun_article';
