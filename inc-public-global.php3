@@ -346,6 +346,8 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 # (voir l'exemple de spip_inscription et spip_pass)
 # $r = complexe (fond, delais, contexte) ; $echo = faut-il faire echo ou return
 function inclure_balise_dynamique($r, $echo=true) {
+	global $contexte_inclus;	# provisoire : c'est pour le debuggueur
+
 	if (is_string($r))
 		if ($echo)
 			echo $r;
