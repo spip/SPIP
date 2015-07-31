@@ -173,36 +173,13 @@ function spip_cron() {
 
 
 	//
-	// Gerer l'indexation automatique
+	// Gerer l'indexation
 	//
 
-	if (lire_meta('activer_moteur') == 'oui') {
-		$fichier_index = $dir_ecrire.'data/.index';
-		if ($id_article OR $id_auteur OR $id_breve OR $id_mot OR $id_rubrique) {
+	if ($use_cache AND (lire_meta('activer_moteur') == 'oui')) {
+		if (timeout('indexation')) {
 			include_ecrire("inc_index.php3");
-			$s = '';
-			if ($id_article AND !deja_indexe('article', $id_article))
-				$s .= "article $id_article\n";
-			if ($id_auteur AND !deja_indexe('auteur', $id_auteur))
-				$s .= "auteur $id_auteur\n";
-			if ($id_breve AND !deja_indexe('breve', $id_breve))
-				$s .= "breve $id_breve\n";
-			if ($id_mot AND !deja_indexe('mot', $id_mot))
-				$s .= "mot $id_mot\n";
-			if ($id_rubrique AND !deja_indexe('rubrique', $id_rubrique))
-				$s .= "rubrique $id_rubrique\n";
-			if ($s) {
-				if ($f = @fopen($fichier_index, 'a')) {
-					fputs($f, $s);
-					fclose($f);
-				}
-			}
-		}
-		if ($use_cache AND @file_exists($fichier_index)) {
-			if (timeout('indexation')) {
-				include_ecrire("inc_index.php3");
-				effectuer_une_indexation();
-			}
+			effectuer_une_indexation();
 		}
 	}
 

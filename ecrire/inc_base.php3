@@ -42,9 +42,10 @@ function creer_base() {
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		langue_choisie VARCHAR(3) DEFAULT 'non',
 		id_trad bigint(21) DEFAULT '0' NOT NULL,
-		extra longblob NULL,
 		nom_site tinytext NOT NULL,
 		url_site VARCHAR(255) NOT NULL,
+		extra longblob NULL,
+		index ENUM('', '1', 'non', 'oui', 'indx') DEFAULT '' NOT NULL,
 		id_version int unsigned DEFAULT '0' NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
@@ -53,7 +54,8 @@ function creer_base() {
 		KEY lang (lang),
 		KEY statut (statut, date),
 		KEY url_site (url_site),
-		KEY date_modif (date_modif))";
+		KEY date_modif (date_modif),
+		KEY index (index))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs (
@@ -80,11 +82,13 @@ function creer_base() {
 		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		extra longblob NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut),
 		KEY lang (lang),
-		KEY en_ligne (en_ligne))";
+		KEY en_ligne (en_ligne),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_breves (
@@ -100,8 +104,10 @@ function creer_base() {
 		langue_choisie VARCHAR(3) DEFAULT 'non',
 		maj TIMESTAMP,
 		extra longblob NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		PRIMARY KEY (id_breve),
-		KEY id_rubrique (id_rubrique))";
+		KEY id_rubrique (id_rubrique),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_messages (
@@ -127,9 +133,11 @@ function creer_base() {
 		texte longblob NOT NULL,
 		id_groupe bigint(21) NOT NULL,
 		extra longblob NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		maj TIMESTAMP,
 		PRIMARY KEY (id_mot),
-		KEY type(type))";
+		KEY type(type),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_groupes_mots (
@@ -163,9 +171,11 @@ function creer_base() {
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		langue_choisie VARCHAR(3) DEFAULT 'non',
 		extra longblob NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		PRIMARY KEY (id_rubrique),
 		KEY lang (lang),
-		KEY id_parent (id_parent))";
+		KEY id_parent (id_parent),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_documents (
@@ -210,6 +220,7 @@ function creer_base() {
 		url_site blob NOT NULL,
 		url_syndic blob NOT NULL,
 		descriptif blob NOT NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		maj TIMESTAMP,
 		syndication VARCHAR(3) NOT NULL,
 		statut VARCHAR(10) NOT NULL,
@@ -220,7 +231,8 @@ function creer_base() {
 		PRIMARY KEY (id_syndic),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
-		KEY statut (statut, date_syndic))";
+		KEY statut (statut, date_syndic),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_syndic_articles (
@@ -259,6 +271,7 @@ function creer_base() {
 		nom_site text NOT NULL,
 		url_site text NOT NULL,
 		statut varchar(8) NOT NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		ip varchar(16),
 		maj TIMESTAMP,
 		id_auteur BIGINT DEFAULT '0' NOT NULL,
@@ -271,7 +284,8 @@ function creer_base() {
 		KEY id_breve (id_breve),
 		KEY id_message (id_message),
 		KEY id_syndic (id_syndic),
-		KEY statut (statut, date_heure))";
+		KEY statut (statut, date_heure),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_petitions (
@@ -295,10 +309,12 @@ function creer_base() {
 		url_site text NOT NULL,
 		message mediumtext NOT NULL,
 		statut varchar(10) NOT NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		maj TIMESTAMP,
 		PRIMARY KEY (id_signature),
 		KEY id_article (id_article),
-		KEY statut(statut))";
+		KEY statut(statut),
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites_temp (
@@ -552,6 +568,22 @@ function creer_base() {
 		id_syndic int unsigned NOT NULL,
 		KEY hash (hash),
 		KEY id_syndic (id_syndic))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_index_signatures (
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_signature int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_signature (id_signature))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_index_forum (
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_forum int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_forum (id_forum))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_dico (
@@ -1434,6 +1466,26 @@ function maj_base() {
 	if ($version_installee < 1.728) {
 		spip_query("ALTER TABLE spip_articles ADD id_version int unsigned DEFAULT '0' NOT NULL");
 		maj_version (1.728);
+	}
+
+	if ($version_installee < 1.730) {
+		spip_query("ALTER TABLE spip_articles ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_auteurs ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_breves ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_breves INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_mots ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_mots INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_rubriques ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_syndic ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_forum ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_signatures ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_signatures INDEX idx (idx)");
+		maj_version (1.730);
 	}
 
 	return true;

@@ -156,7 +156,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.728;
+$spip_version = 1.730;
 
 // version de spip
 $spip_version_affichee = "1.7 CVS";
@@ -815,6 +815,16 @@ function _L($text) {
 $langue_site = lire_meta('langue_site');
 if (!$langue_site) include_ecrire('inc_lang.php3');
 $spip_lang = $langue_site;
+
+
+// Nommage bizarre des tables d'objets
+function table_objet($type) {
+	if ($type == 'syndic' OR $type == 'forum')
+		return $type;
+	else
+		return $type.'s';
+}
+
 
 //
 // Enregistrement des evenements
