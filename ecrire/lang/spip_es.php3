@@ -190,7 +190,7 @@ de los directorios mencionados. El procedimiento se explica detalladamente en la
 'form_deja_inscrit' => 'Ya est&aacute;s inscrito.',
 'form_email_non_valide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
 'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',
-'form_forum_bonjour' => 'Hola,',
+'form_forum_bonjour' => 'Hola, @nom@,',
 'form_forum_email_deja_enregistre' => 'Esta direcci&oacute;n de correo electr&oacute;nico ya est&aacute; registrada, por lo que puedes utilizar tu contrase&ntilde;a habitual.',
 'form_forum_identifiant_mail' => 'Hemos enviado tu nuevo identificador por correo electr&oacute;nico.',
 'form_forum_identifiants' => 'Identificadores personales',

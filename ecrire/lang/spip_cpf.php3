@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Artoun si lint&egrave;rfas grafik konpl&eacute;',
 'access_mode_texte' => 'Afis lint&egrave;rfas t&egrave;ks sinp',
+'admin_debug' => 'debug',
 'admin_modifier_article' => 'Sanz lartik-la',
 'admin_modifier_auteur' => 'Sanz linformasyon lot&egrave;r',
 'admin_modifier_breve' => 'Sanz tit-nouv&egrave;l-la',
@@ -71,6 +72,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => 'apr&eacute;midi',
+'cal_jour_entier' => 'jou konpl&eacute;',
+'cal_matin' => 'matin',
+'cal_par_jour' => 'kalandrye pa jou',
+'cal_par_mois' => 'kalandrye pa mwa',
+'cal_par_semaine' => 'kalandrye pa sem&egrave;n',
 'confirm_changer_statut' => 'Pangar, ou la domann po sanz lo statu z&eacute;l&eacute;man-la. L&eacute; byin sertin y v&eacute; sanz a li ?',
 
 
@@ -189,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'Ou l&eacute; d&eacute;za inskri.',
 'form_email_non_valide' => 'Out ladr&egrave;s im&egrave;l la pa mars&eacute;.',
 'form_forum_access_refuse' => 'Ou n&eacute;na plid drwa pou akost dann sitw&egrave;b-la.',
-'form_forum_bonjour' => 'Ot&eacute;,',
+'form_forum_bonjour' => 'Ot&eacute; @nom@,,',
 'form_forum_email_deja_enregistre' => 'Ladr&egrave;s im&egrave;l-la l&eacute; d&eacute;za anrozistr&eacute; : ou  p&eacute; anserv modpas sa-minm sak nana labitid.',
 'form_forum_identifiant_mail' => 'Inn nouvo kod-lidentit&eacute; la finn d&egrave;t anvway&eacute; dann out kazim&egrave;l.',
 'form_forum_identifiants' => 'Out bann kod-lidantit&eacute;',
@@ -275,7 +282,7 @@ Mersi aou m&egrave;t ansanm isi
 'forum_votre_email' => 'Out ladr&egrave;s im&egrave;l  :',
 'forum_votre_nom' => 'Out vr&eacute;non (ou ti-non-gat&eacute;) :',
 'forum_vous_enregistrer' => 'Pou m&egrave;t ansanm dann forom-la, ifo anrozistr aou. Mersi pou m&egrave;t anba lat&egrave;r nondkod-lidantit&eacute; sak ni la donn aou. Si ou l&eacute; pa anrozistr&eacute;, i dwa',
-'forum_vous_inscrire' => 'dabor domann linskrisyon </a>.',
+'forum_vous_inscrire' => 'inskri a ou </a>.',
 
 
 // I
@@ -333,6 +340,10 @@ Mersi aou m&egrave;t ansanm isi
 'icone_valider_message' => 'Konfirm mod&eacute;kri-la',
 'icone_visiter_site' => 'Bat-kar&eacute; ',
 'icone_voir_en_ligne' => 'Vwar an liyn',
+'image_tourner_180' => 'Toun&eacute; 180&deg;',
+'image_tourner_droite' => 'toun&eacute; drwat 90&deg; ',
+'image_tourner_gauche' => 'Toun&eacute; goch 90&deg; ',
+'img_indisponible' => 'zimaj-la l&eacute; pa posib giny ali',
 'info_a_suivre' => 'POU SWIV&nbsp;&raquo;',
 'info_a_valider' => '[pou konfirmasyon]',
 'info_acces_interdit' => 'Ou n&eacute;na pwinn permisyon akost lapazw&egrave;b-la.',
@@ -362,17 +373,20 @@ Mersi aou m&egrave;t ansanm isi
 'info_contact_developpeur' => 'Mersi kontak inn d&eacute;vlop&egrave;r.',
 'info_contenance' => 'Dann sit-la nana&nbsp;:',
 'info_contribution' => 'bann kontribusyon dann forom',
-'info_copyright' => 'l&eacute; inn lozisyel lib sak l&eacute; don&eacute; <a href=\'copyright_fr.html\'>sou lisans GPL.</a>',
+'info_copyright' => '@spip@ l&eacute; inn lozisyel lib sak l&eacute; don&eacute; @lien_gpl@.',
 'info_copyright_doc' => 'Pou plid zinformasyon anon vizit lo sit <a href=\'http://www.spip.net/cpf\'>http://www.spip.net/cpf</a>.',
+'info_copyright_gpl' => 'sou lisans GPL',
 'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon',
 'info_creer_repertoire' => 'Mersi kr&eacute; inn fisy&eacute; o inn r&eacute;pertwar &egrave;k non-la&nbsp;:',
 'info_creer_repertoire_2' => 'an dodan lo sou-r&eacute;pertwar <b>ecrire/data/</b>, &eacute; apr&egrave;&nbsp;:',
+'info_creer_vignette' => 'pou kr&eacute;y inn tite-limaz otomatikman',
 'info_deplier' => 'D&eacute;pliy',
 'info_descriptif_nombre' => 'Bann zaf&egrave;r sak i kontyin&nbsp;:',
 'info_description' => 'Kosa ou va trouv isi&nbsp;:',
 'info_description_2' => 'Kosa ou va trouv isi&nbsp;:',
 'info_dimension' => 'Dimansyon&nbsp;:',
 'info_document' => 'Dokiman',
+'info_documents' => 'Bann dokiman',
 'info_echange_message' => '&Egrave;k SPIP ou p&eacute; anvway&eacute; bann mod&eacute;kri &eacute; f&eacute; zw&eacute; bann forom kozman
 (forom priv&eacute;) antrozot. L&eacute; posib m&egrave;t ou d&eacute;gr&egrave;n fonksyon-la kom sak ou v&eacute;.',
 'info_ecire_message_prive' => 'Pou kr&eacute; inn mod&eacute;kri priv&eacute;',
@@ -412,6 +426,9 @@ Mersi aou m&egrave;t ansanm isi
 'info_langue_principale' => 'Lang prinsipal lo sitw&egrave;b',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ bann piks&egrave;l',
 'info_les_auteurs_1' => '&egrave;k @les_auteurs@',
+'info_logo_format_interdit' => 'L&eacute; posib m&egrave;t s&egrave;lman bann logo dann bann forma @formats@.',
+'info_logo_max_poids' => 'Fok out bann logo nena in pwa andsou @maxi@ (fichy&eacute; la li f&eacute; @actuel@).',
+'info_logo_max_taille' => 'Fok out bann logo nena inn tay andsou  @maxi@ (fichye la li f&eacute; @actuel@).',
 'info_mail_fournisseur' => 'out@fournis&egrave;r.com',
 'info_message_2' => 'MODEKRI',
 'info_message_supprime' => 'MOD&Eacute;KRI SUPRIM&Eacute;',
@@ -435,6 +452,8 @@ Mersi aou m&egrave;t ansanm isi
 'info_petit_ecran' => 'Tit &eacute;kran',
 'info_pixels' => 'bann piks&egrave;l',
 'info_plusieurs_mots_trouves' => 'Nana plizi&egrave;r bann molakl&eacute; pou "@cherche_mot@":',
+'info_popularite_5' => 'popularit&eacute;&nbsp;:',
+'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Livzimaz otomatik&nbsp;:',
 'info_premier_resultat' => '[@debut_limit@ bann promy&eacute; r&eacute;zilta si @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ bann promy&eacute; r&eacute;zilta si @total@]',
@@ -484,6 +503,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_visite' => 'vizit :',
 'info_visites' => 'bann vizit :',
 'info_vos_rendez_vous' => 'Out bann prosin rand&eacute;vou',
+'info_zoom' => 'zoum',
 'infos_vos_pense_bete' => 'Out bann gardant&egrave;t',
 'item_breve_proposee' => 'Tit-nouv&egrave;l-la l&eacute; propoz&eacute;',
 
@@ -606,12 +626,14 @@ Apr&eacute;sa, zi poura m&egrave;t inn nouvo modpas
 'pass_retour_public' => 'Artourn sir figirw&egrave;b',
 'pass_rien_a_faire_ici' => 'Nana ryinn a f&egrave;r isi.',
 'pass_vousinscrire' => 'Inskri aou sir lo sit',
+'precedent' => 'dovan',
 'previsualisation' => 'Po vwar avann komsi l&eacute; an liny',
 'previsualiser' => 'Po vwar avan',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ vizit&nbsp;; popularit&eacute;&nbsp;: @popularite@',
+'suivant' => 'd&egrave;ry&egrave;r',
 
 
 // T
@@ -681,11 +703,27 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 
 
 // Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle' => '<NEW>boucle',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => '<NEW>code',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>externe interdit',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: n&eacute;na d&eacute; d&eacute;finisyon',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: n&eacute;na in "tag" sat i mank po tak in boukl.',
 'zbug_erreur_boucle_syntaxe' => 'Sintask lo boukl-l&agrave; l&eacute; pa kor&egrave;k',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'N&eacute;na in kanar andan lo filt <b>&laquo; @filtre@ &raquo;</b> sat l&eacute; pa d&eacute;fini',
-'zbug_info_erreur_squelette' => 'Kanar sir lo sit'
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => 'Kanar sir lo sit',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => '<NEW>r&eacute;sultat',
+'zbug_serveur_indefini' => 'serv&egrave;r SQL la l&eacute; pa d&eacute;fini',
+'zbug_table_inconnue' => 'Lo tab SQL &laquo; @table@ &raquo;  la , li l&eacute; pa konu'
 
 );
 

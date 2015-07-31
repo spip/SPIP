@@ -185,7 +185,7 @@ Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios
 'form_deja_inscrit' => 'Voc&ecirc; j&aacute; est&aacute; inscrito.',
 'form_email_non_valide' => 'Seu endere&ccedil;o de e-mail n&atilde;o &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Voc&ecirc; n&atilde;o tem mais acesso a este site.',
-'form_forum_bonjour' => 'Bom dia,',
+'form_forum_bonjour' => 'Bom dia @nom@,',
 'form_forum_email_deja_enregistre' => 'Este endere&ccedil;o de e-mail j&aacute; est&aacute; cadastrado, voc&ecirc; pode usar a sua senha habitual.',
 'form_forum_identifiant_mail' => 'Seu novo login foi enviado por e-mail.',
 'form_forum_identifiants' => 'Identificadores pessoais',

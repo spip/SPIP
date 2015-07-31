@@ -70,12 +70,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
-'cal_jour_entier' => '<NEW>jour entier',
-'cal_matin' => '<NEW>matin',
-'cal_par_jour' => '<NEW>calendrier par jour',
-'cal_par_mois' => '<NEW>calendrier par mois',
-'cal_par_semaine' => '<NEW>calendrier par semaine',
+'cal_apresmidi' => '<NEW>afternoon (p.m.)',
+'cal_jour_entier' => '<NEW>entire day',
+'cal_matin' => '<NEW>morning (a.m.)',
+'cal_par_jour' => '<NEW>daily calendar',
+'cal_par_mois' => '<NEW>monthly calendar',
+'cal_par_semaine' => '<NEW>weekly calendar',
 'confirm_changer_statut' => '&#1048;&#1079;&#1080;&#1089;&#1082;&#1074;&#1072; &#1089;&#1077; &#1087;&#1086;&#1090;&#1074;&#1098;&#1088;&#1078;&#1076;&#1077;&#1085;&#1080;&#1077;: &#1047;&#1072;&#1076;&#1072;&#1083;&#1080; &#1089;&#1090;&#1077; &#1087;&#1088;&#1086;&#1084;&#1103;&#1085;&#1072; &#1085;&#1072; &#1089;&#1090;&#1072;&#1090;&#1091;&#1089;&#1072; &#1085;&#1072; &#1089;&#1090;&#1072;&#1090;&#1080;&#1103;&#1090;&#1072;. &#1046;&#1077;&#1083;&#1072;&#1077;&#1090;&#1077; &#1083;&#1080; &#1076;&#1086; &#1087;&#1088;&#1086;&#1076;&#1098;&#1083;&#1078;&#1080;&#1090;&#1077;?',
 
 
@@ -343,10 +343,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_valider_message' => '&#1054;&#1076;&#1086;&#1073;&#1088;&#1103;&#1074;&#1072;&#1085;&#1077; &#1085;&#1072; &#1089;&#1098;&#1086;&#1073;&#1097;&#1077;&#1085;&#1080;&#1077;&#1090;&#1086;',
 'icone_visiter_site' => '&#1055;&#1086;&#1089;&#1077;&#1097;&#1072;&#1074;&#1072;&#1085;&#1077; &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;&#1072;',
 'icone_voir_en_ligne' => '&#1048;&#1079;&#1075;&#1083;&#1077;&#1076; &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;&#1072;',
-'image_tourner_180' => '<NEW>Rotation 180&deg;',
-'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
-'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
-'img_indisponible' => '<NEW>image indisponible',
+'image_tourner_180' => '<NEW>Rotate 180&deg;',
+'image_tourner_droite' => '<NEW>Rotate 90&deg; right',
+'image_tourner_gauche' => '<NEW>Rotate 90&deg; left',
+'img_indisponible' => '<NEW>image unavailable',
 'info_a_suivre' => '&#1053;&#1040;&#1063;&#1040;&#1051;&#1054;&raquo;',
 'info_a_valider' => '[&#1079;&#1072; &#1086;&#1076;&#1086;&#1073;&#1088;&#1077;&#1085;&#1080;&#1077;]',
 'info_acces_interdit' => '&#1047;&#1072;&#1073;&#1088;&#1072;&#1085;&#1077;&#1085; &#1076;&#1086;&#1089;&#1090;&#1098;&#1087;',
@@ -382,7 +382,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_cours_edition' => '&#1057;&#1072;&#1090;&#1080;&#1080;&#1090;&#1077; &#1042;&#1080; &#1074; &#1087;&#1088;&#1086;&#1094;&#1077;&#1089; &#1085;&#1072; &#1086;&#1073;&#1088;&#1072;&#1073;&#1086;&#1090;&#1082;&#1072;',
 'info_creer_repertoire' => '&#1052;&#1086;&#1083;&#1103;, &#1089;&#1098;&#1079;&#1076;&#1072;&#1081;&#1090;&#1077; &#1092;&#1072;&#1081;&#1083; &#1080;&#1083;&#1080; &#1076;&#1080;&#1088;&#1077;&#1082;&#1090;&#1086;&#1088;&#1080;&#1103;, &#1085;&#1072;&#1088;&#1077;&#1095;&#1077;&#1085;&#1072;:',
 'info_creer_repertoire_2' => '&#1074; &#1087;&#1086;&#1076;-&#1076;&#1080;&#1088;&#1077;&#1082;&#1090;&#1086;&#1088;&#1080;&#1103;&#1090;&#1072; <b>ecrire/data/</b>, &#1089;&#1083;&#1077;&#1076; &#1090;&#1086;&#1074;&#1072;',
-'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
+'info_creer_vignette' => '<NEW>automated creation of the thumbnail',
 'info_dans_espace_prive' => '[&#1074; &#1083;&#1080;&#1095;&#1085;&#1072;&#1090;&#1072; &#1079;&#1086;&#1085;&#1072;]',
 'info_deplier' => '&#1057;&#1075;&#1098;&#1074;&#1072;&#1085;&#1077;',
 'info_descriptif_nombre' => '&#1086;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;(&#1103;):',
@@ -438,9 +438,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_les_auteurs_1' => '&#1086;&#1090; @les_auteurs@',
 'info_lettre_heures' => ':',
 'info_lien' => '&#1087;&#1088;&#1077;&#1087;&#1088;&#1072;&#1090;&#1082;&#1072;:',
-'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
-'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
-'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_format_interdit' => '<NEW>Only logos in the formats @formats@ are allowed.',
+'info_logo_max_poids' => '<NEW>Logos must be less than @maxi@ (this file is @actuel@).',
+'info_logo_max_taille' => '<NEW>Logos must be less than @maxi@ (this file is @actuel@).',
 'info_mail_fournisseur' => '&#1042;&#1080;&#1077;@isp.com',
 'info_message_2' => '&#1057;&#1066;&#1054;&#1041;&#1065;&#1045;&#1053;&#1048;&#1045;',
 'info_message_supprime' => '&#1057;&#1066;&#1054;&#1041;&#1065;&#1045;&#1053;&#1048;&#1045;&#1058;&#1054; &#1045; &#1048;&#1047;&#1058;&#1056;&#1048;&#1058;&#1054;',
@@ -666,14 +666,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pass_retour_public' => '&#1054;&#1073;&#1088;&#1072;&#1090;&#1085;&#1086; &#1074; &#1087;&#1091;&#1073;&#1083;&#1080;&#1095;&#1085;&#1080;&#1103; &#1089;&#1072;&#1081;&#1090;',
 'pass_rien_a_faire_ici' => '&#1053;&#1103;&#1084;&#1072;&#1090;&#1077; &#1088;&#1072;&#1073;&#1086;&#1090;&#1072; &#1090;&#1091;&#1082;.',
 'pass_vousinscrire' => '&#1056;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1080;&#1088;&#1072;&#1085;&#1077; &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;&#1072;',
-'precedent' => '<NEW>pr&eacute;c&eacute;dent',
+'precedent' => '<NEW>previous',
 'previsualisation' => '&#1055;&#1088;&#1077;&#1076;&#1074;&#1072;&#1088;&#1080;&#1090;&#1077;&#1083;&#1077;&#1085; &#1087;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076;',
 'previsualiser' => '&#1055;&#1086;&#1082;&#1072;&#1079;&#1074;&#1072;&#1085;&#1077; &#1085;&#1072; &#1087;&#1088;&#1077;&#1076;&#1074;&#1072;&#1088;&#1080;&#1090;&#1077;&#1083;&#1085;&#1080;&#1103; &#1087;&#1088;&#1077;&#1075;&#1083;&#1077;&#1076;',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ &#1087;&#1086;&#1089;&#1077;&#1097;&#1077;&#1085;&#1080;&#1103;; &#1087;&#1086;&#1087;&#1091;&#1083;&#1103;&#1088;&#1085;&#1086;&#1089;&#1090;: @popularite@',
-'suivant' => '<NEW>suivant',
+'suivant' => '<NEW>next',
 
 
 // T
@@ -758,27 +758,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // Z
-'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
-'zbug_boucle' => '<NEW>boucle',
-'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
-'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
-'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_balise_b_aval' => '<NEW>: B tag too late in loop',
+'zbug_boucle' => '<NEW>loop',
+'zbug_boucle_recursive_undef' => '<NEW>undefined recursive loop',
+'zbug_champ_hors_boucle' => '<NEW>Field @champ@ outside loop',
+'zbug_champ_hors_motif' => '<NEW>Field @champ@ outside loop tagged @motif@',
 'zbug_code' => '<NEW>code',
-'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
-'zbug_distant_interdit' => '<NEW>externe interdit',
+'zbug_critere_inconnu' => '<NEW>unknown criterion @critere@',
+'zbug_distant_interdit' => '<NEW>external data forbidden',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: &#1076;&#1074;&#1086;&#1081;&#1085;&#1072; &#1076;&#1077;&#1092;&#1080;&#1085;&#1080;&#1094;&#1080;&#1103;',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: &#1083;&#1080;&#1087;&#1089;&#1074;&#1072; &#1079;&#1072;&#1090;&#1074;&#1072;&#1088;&#1103;&#1097; "&#1090;&#1072;&#1075;" (<>)',
 'zbug_erreur_boucle_syntaxe' => '&#1053;&#1077;&#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1077;&#1085; &#1089;&#1080;&#1085;&#1090;&#1072;&#1082;&#1089; &#1085;&#1072; &#1094;&#1080;&#1082;&#1098;&#1083; (BOUCLE)',
-'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
+'zbug_erreur_execution_page' => '<NEW>error in page calculation',
 'zbug_erreur_filtre' => '&#1043;&#1088;&#1077;&#1096;&#1082;&#1072;: &#1085;&#1077;&#1086;&#1087;&#1088;&#1077;&#1076;&#1077;&#1083;&#1077;&#1085; &#1092;&#1080;&#1083;&#1090;&#1098;&#1088;: <b>„@filtre@“</b>',
-'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
-'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Error(s) in template',
 'zbug_info_erreur_squelette' => '&#1615;&#1043;&#1088;&#1077;&#1096;&#1082;&#1072; &#1085;&#1072; &#1089;&#1072;&#1081;&#1090;&#1072;',
-'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
-'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
-'zbug_resultat' => '<NEW>r&eacute;sultat',
-'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
-'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
+'zbug_inversion_ordre_inexistant' => '<NEW>reversal of nonexistent order',
+'zbug_parametres_inclus_incorrects' => '<NEW>Wrong inclusion parameters',
+'zbug_resultat' => '<NEW>result',
+'zbug_serveur_indefini' => '<NEW>undefined SQL server',
+'zbug_table_inconnue' => '<NEW>Unknown SQL table "@table@"'
 
 );
 
