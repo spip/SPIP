@@ -170,7 +170,7 @@ function spip_apres_typo ($letexte) {
 
 
 // Mise de cote des echappements
-function echappe_html($letexte,$source) {
+function echappe_html($letexte, $source, $no_transform=false) {
 	global $flag_pcre;
 
 	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
@@ -189,6 +189,10 @@ function echappe_html($letexte,$source) {
 		|| (!$flag_pcre && eregi($regexp_echap, $letexte, $regs))) {
 		$num_echap++;
 
+		if ($no_transform) {	// echappements bruts
+			$les_echap[$num_echap] = $regs[0];
+		}
+		else
 		if ($regs[1]) {
 			// Echapper les <html>...</ html>
 			$les_echap[$num_echap] = $regs[2];

@@ -508,10 +508,16 @@ echo "<P><HR><P>";
 	echo afficher_barre('formulaire', 'texte');
 	echo "<TEXTAREA NAME='texte' ".afficher_claret()." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
-	echo "</TEXTAREA><P>\n";
+	echo "</TEXTAREA>\n";
+
+	if ($options == "avancees") {
+		echo '<div class="verdana2">';
+		echo '<input type="checkbox" class="checkbox" name="post_autobr" id="autobr" value="1" />';
+		echo '<label for="autobr">'._L("prendre en compte les sauts de ligne simples").'</label></div>';
+	}
 
 	if (($articles_ps != "non" AND $options == "avancees") OR $ps) {
-		echo "<B>"._T('info_post_scriptum')."</B><BR>";
+		echo "<P><B>"._T('info_post_scriptum')."</B><BR>";
 		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
 		echo $ps;
 		echo "</TEXTAREA><P>\n";

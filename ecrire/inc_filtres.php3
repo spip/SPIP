@@ -550,4 +550,29 @@ function extra($letexte, $champ) {
 	return $champs[$champ];
 }
 
+// postautobr : transforme les sauts de ligne en _
+function post_autobr($texte) {
+	$texte = str_replace("\r\n", "\r", $texte);
+	$texte = str_replace("\r", "\n", $texte);
+	list($texte, $les_echap) = echappe_html($texte, "POSTAUTOBR", true);
+
+	$debut = '';
+	$suite = $texte;
+	while ($t = strpos('-'.$suite, "\n", 1)) {
+		$debut .= substr($suite, 0, $t);
+		$suite = substr($suite, $t);
+		$car = substr($suite, 0, 1);
+		if (($car<>'-') AND ($car<>'_') AND ($car<>"\n"))
+			$debut .='_ ';
+		if (ereg("^\n+", $suite, $regs)) {
+			$debut.=$regs[0];
+			$suite = substr($suite, strlen($regs[0]));
+		}
+	}
+	$texte = $debut.$suite;
+
+	$texte = echappe_retour($texte, $les_echap, "POSTAUTOBR");
+	return $texte;
+}
+
 ?>
