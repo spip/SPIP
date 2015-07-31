@@ -3389,6 +3389,7 @@ function http_style_background($img, $att='')
 // Creer un bouton qui renvoie vers la bonne url spip_rss
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
+	include_ecrire('inc_acces');
 	if (is_array($args))
 		foreach ($args as $val => $var)
 			if ($var) $a .= ':' . $val.'-'.$var;
