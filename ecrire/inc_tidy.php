@@ -87,7 +87,7 @@ function xhtml ($buffer) {
 		fputs($f, $buffer);
 		fclose($f);
 		
-		exec("$tidy_command --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $nomfich");
+		exec("$tidy_command --tidy-mark false --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $nomfich");
 		
 		$tidy = join(file($nomfich),"");
 		@unlink($nomfich);
