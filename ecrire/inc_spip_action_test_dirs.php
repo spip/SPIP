@@ -105,7 +105,7 @@ if ($bad_dirs OR $absent_dirs) {
 
  } else {
 	if (!_FILE_CONNECT)
-		header("Location: " . _DIR_RESTREINT_ABS . "install" . _EXTENSION_PHP . "?etape=1");
+		header("Location: " . generer_url_ecrire(_DIR_RESTREINT_ABS . "install",  "etape=1"));
 	else
 		header("Location: " . _DIR_RESTREINT_ABS);
  }
