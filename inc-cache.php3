@@ -142,12 +142,14 @@ function utiliser_cache(&$chemin_cache, $delais) {
 	}
 
 	// recalcul obligatoire
-	$ok_cache &= ($GLOBALS['recalcul'] != 'oui');
+
+	$ok_cache &= (($GLOBALS['recalcul'] != 'oui') ||
+		      (!$GLOBALS['HTTP_COOKIE_VARS']['spip_session']));
 
 	// ne jamais recalculer pour les moteurs de recherche, proxies...
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
 		$ok_cache = true;
-
+	spip_log("'$ok_cache'");
 	return $ok_cache;
 }
 
