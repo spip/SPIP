@@ -47,13 +47,13 @@
 				<BOUCLE_boutons(POUR)
 					{tableau #GET{boutons}}
 					{cle!=outils_rapides}
-					{cle!=outils_collaboratifs}><li
+					{cle!=outils_collaboratifs}>[<li (#CLE|=={bando_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
 						[class="(#VAL{first}|unique)"]><a
 						href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
-						id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><B_sous><ul><BOUCLE_sous(POUR)
+						id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a>]<B_sous><ul><BOUCLE_sous(POUR)
 						{tableau #VALEUR{sousmenu}}>[<li><a
 								href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#ENV**})]"
-								class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous></li></BOUCLE_boutons></ul>
+								class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous>#GET{li}</BOUCLE_boutons></ul>
 			</B_boutons>
 			[(#SESSION{prefs}|table_valeur{display_outils}|is_null|non)
 				[(#SET{display_outils,[(#SESSION{prefs}|table_valeur{display_outils})]})]
