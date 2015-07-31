@@ -62,10 +62,19 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 		# Pour les forums, unifier par id_thread et forcer statut='publie'
 		if ($x == 'forum' AND $points) {
 			$p2 = array();
-			$s = sql_select("id_thread, id_forum", "spip_forum", "statut='publie' AND ".sql_in('id_forum', array_keys($points)), '','','','', $serveur);
-			while ($t = sql_fetch($s, $serveur))
-				$p2[intval($t['id_thread'])]['score']
-					+= $points[intval($t['id_forum'])]['score'];
+            $s = sql_select("id_thread, id_forum, statut", "spip_forum", sql_in('id_forum', array_keys($points)), '','','','', $serveur);
+            while ($t = sql_fetch($s, $serveur)){
+                   $id_thread = intval($t['id_thread']);
+                   $id_forum = intval($t['id_forum']);
+                   if ($id_thread){
+                           if ($t['statut'] == 'publie')
+                                   $p2[$id_thread]['score']
+                                           += $points[$id_forum]['score'];
+                   }
+                   else{
+                           $p2[$id_forum]['score'] = points[$id_forum]['score'];
+                   }
+            }			
 			$points = $p2;
 		}
 
