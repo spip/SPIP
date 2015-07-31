@@ -95,28 +95,6 @@ $spip_auteurs_join = array(
 		"login"=>"login");
 
 
-$spip_breves = array(
-		"id_breve"	=> "bigint(21) NOT NULL",
-		"date_heure"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"titre"	=> "text DEFAULT '' NOT NULL",
-		"texte"	=> "longtext DEFAULT '' NOT NULL",
-		"lien_titre"	=> "text DEFAULT '' NOT NULL",
-		"lien_url"	=> "text DEFAULT '' NOT NULL",
-		"statut"	=> "varchar(6)  DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
-		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
-		"maj"	=> "TIMESTAMP");
-
-$spip_breves_key = array(
-		"PRIMARY KEY"	=> "id_breve",
-		"KEY id_rubrique"	=> "id_rubrique",
-#		"KEY url_propre"	=> "url_propre"
-);
-$spip_breves_join = array(
-		"id_breve"=>"id_breve",
-		"id_rubrique"=>"id_rubrique");
-
 $spip_messages = array(
 		"id_message"	=> "bigint(21) NOT NULL",
 		"titre"	=> "text DEFAULT '' NOT NULL",
@@ -202,8 +180,6 @@ $tables_principales['spip_articles'] =
 	array('field' => &$spip_articles, 'key' => &$spip_articles_key, 'join' => &$spip_articles_join);
 $tables_principales['spip_auteurs']  =
 	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key,'join' => &$spip_auteurs_join);
-$tables_principales['spip_breves']   =
-	array('field' => &$spip_breves, 'key' => &$spip_breves_key,'join' => &$spip_breves_join);
 $tables_principales['spip_messages'] =
 	array('field' => &$spip_messages, 'key' => &$spip_messages_key);
 $tables_principales['spip_rubriques'] =

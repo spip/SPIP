@@ -346,7 +346,6 @@ function liste_metas()
 		'nom_site' => _T('info_mon_site_spip'),
 		'adresse_site' => preg_replace(",/$,", "", url_de_base()),
 		'descriptif_site' => '',
-		'activer_breves' => 'non',
 		'activer_logos' => 'oui',
 		'activer_logos_survol' => 'non',
 		'articles_surtitre' => 'non',
