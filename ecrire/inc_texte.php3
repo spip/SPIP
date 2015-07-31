@@ -755,10 +755,11 @@ function traiter_raccourcis_generale($letexte) {
 			$ancre = $mn.urlencode($num_note);
 
 			// creer le popup 'title' sur l'appel de note
-			$title = supprimer_tags(propre($note_texte));
-			if ($title)
+			if ($title = supprimer_tags(propre($note_texte))) {
+				$title = $ouvre_note.$ancre.$ferme_note.$title;
 				$title = ' title="<html>'
-				. texte_backend(couper($title,200)).'</html>"';
+				. texte_backend(couper($title,80)).'</html>"';
+			}
 
 			$insert = "$ouvre_ref<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\"$title>$num_note</a>$ferme_ref";
 			$appel = "<html>$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note</html>";
