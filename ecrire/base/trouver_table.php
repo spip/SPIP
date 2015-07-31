@@ -137,7 +137,7 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		// une nouvelle table a ete decrite
 		// mettons donc a jour le cache des descriptions de ce serveur
 		if (is_writeable(_DIR_CACHE))
-			ecrire_fichier($nom_cache_desc_sql[$serveur][$objets_sql],serialize($connexion['tables']));
+			ecrire_fichier($nom_cache_desc_sql[$serveur][$objets_sql],serialize($connexion['tables']),true);
 	}
 	else
 		$res = &$connexion['tables'][$nom_sql];
