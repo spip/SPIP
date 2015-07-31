@@ -319,8 +319,8 @@ function formulaire_inscription($type) {
 
 		// envoyer identifiants par mail
 		if ($continue) {
-			include_local("inc-forum.php3");
-			$pass = generer_pass_forum($mail_inscription);
+			include_ecrire("inc_acces.php3");
+			$pass = creer_pass_aleatoire(8,$mail_inscription);
 			$login = test_login($mail_inscription);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);

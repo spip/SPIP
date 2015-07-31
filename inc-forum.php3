@@ -33,30 +33,6 @@ function get_forums_publics($id_article=0) {
 	return $forums_publics;
 }
 
-function generer_pass_forum($email = '') {
-	$passw = creer_pass_aleatoire(9, $email);
-	$passw = ereg_replace("[./]", "a", $passw);
-	$passw = ereg_replace("[I1l]", "L", $passw);
-	$passw = ereg_replace("[0O]", "o", $passw);
-	return $passw;
-}
-
-function generer_hash_forum($email, $id_auteur) {
-	return calculer_action_auteur("forum public $email", $id_auteur);
-}
-
-function poser_cookie_forum($email, $id_auteur, $duree = 30) {
-	$hash = generer_hash_forum($email, $id_auteur);
-	setcookie("spip_forum_email", $email, time() + (3600 * 24 * $duree));
-	setcookie("spip_forum_hash", $hash, time() + (3600 * 24 * $duree));
-}
-
-function enlever_cookie_forum() {
-	setcookie("spip_forum_email", "", time() - 3600 * 24);
-	setcookie("spip_forum_hash", "", time() - 3600 * 24);
-}
-
-
 function afficher_petits_logos_mots($id_mot) {
 	$racine = "IMG/moton$id_mot";
 	if (file_exists("$racine.gif")) {

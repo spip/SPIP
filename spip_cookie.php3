@@ -28,7 +28,7 @@ if ($change_session == 'oui') {
 			$auteur_session['ip_change'] = false;
 			$cookie = creer_cookie_session($auteur_session);
 			supprimer_session($spip_session);
-			setcookie('spip_session', $cookie);
+			spip_setcookie('spip_session', $cookie);
 		}
 		@header('Content-Type: image/gif');
 		@header('Expires: 0');
@@ -56,7 +56,7 @@ if ($logout) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
 			zap_sessions($auteur_session['id_auteur'], true);
-			setcookie('spip_session', $spip_session, time() - 3600 * 24);
+			spip_setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
 		if ($PHP_AUTH_USER) {
 			include_local ("inc-login.php3");
@@ -77,7 +77,7 @@ if ($logout) {
 // puis de passer a spip_login qui diagnostiquera l'echec de cookie
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
-	setcookie('spip_session', 'test_echec_cookie');
+	spip_setcookie('spip_session', 'test_echec_cookie');
 	$link = new Link("spip_login.php3?var_echec_cookie=oui");
 	$link->addVar("var_url", $cible->getUrl());
 	@header("Location: ".$link->getUrl());
@@ -156,17 +156,17 @@ if ($essai_login == "oui") {
 
 // cookie d'admin ?
 if ($cookie_admin == "non") {
-	setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
+	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$cible->delVar('var_login');
 	$cible->addVar('var_login', '-1');
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
-	setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
+	spip_setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
 }
 
 // cookie de session ?
 if ($cookie_session)
-	setcookie('spip_session', $cookie_session);
+	spip_setcookie('spip_session', $cookie_session);
 
 // Redirection
 // Sous Apache 1.x, les cookies avec une redirection fonctionnent
