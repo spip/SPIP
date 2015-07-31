@@ -577,6 +577,8 @@ function spip_query($query) {
 		return;
 
 	// Vieux format de fichier connexion
+	// Note: la version 0.1 est compatible avec la 0.2 (mais elle gere
+	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
 		@Header("Location: upgrade.php3?reinstall=oui");

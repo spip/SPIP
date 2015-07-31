@@ -258,7 +258,7 @@ else if ($etape == 4) {
 
 	// Message pour spip_query : tout va bien !
 	$GLOBALS['db_ok'] = true;
-	$GLOBALS['spip_connect_version'] = 0.1; # cf. inc_version
+	$GLOBALS['spip_connect_version'] = 0.2; # cf. inc_version
 
 	// Test si SPIP deja installe
 	spip_query("SELECT COUNT(*) FROM spip_meta");
@@ -297,11 +297,11 @@ else if ($etape == 4) {
 		$conn = "<"."?php\n";
 		$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
 		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
-		$conn .= "\$GLOBALS['spip_connect_version'] = 0.1;\n";
+		$conn .= "\$GLOBALS['spip_connect_version'] = 0.2;\n";
 		$conn .= "include_ecrire('inc_db_mysql.php3');\n";
 		$conn .= $ligne_rappel;
-		$conn .= "@spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
-		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
+		$conn .= "spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
+#		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
 		$myFile = fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb");
 		fputs($myFile, $conn);
