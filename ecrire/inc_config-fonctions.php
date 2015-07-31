@@ -113,7 +113,7 @@ function afficher_choix_vignette($process) {
 
 function vignettes_config()
 {
-  global $image_process, $flag_gd, $flag_imagick, $convert_command, $flag_ImageCreateTrueColor, $spip_lang_left, $spip_lang_right;
+  global $image_process, $convert_command, $spip_lang_left, $spip_lang_right;
 
 	debut_cadre_trait_couleur("image-24.gif");
 
@@ -153,12 +153,16 @@ function vignettes_config()
 
 	echo "<table width='100%' align='center'><tr>";
 
-			// Tester les formats
-	if ($flag_gd) {
+	// Tester les formats
+	if ( /* GD disponible ? */
+	function_exists('ImageGif')
+	OR function_exists('ImageJpeg')
+	OR function_exists('ImagePng')
+	) {
 		$nb_process ++;
 		afficher_choix_vignette($p = 'gd1');
 
-		if ($flag_ImageCreateTrueColor) {
+		if (function_exists("ImageCreateTrueColor")) {
 			afficher_choix_vignette($p = 'gd2');
 			$nb_process ++;
 		}
@@ -167,17 +171,15 @@ function vignettes_config()
 	afficher_choix_vignette($p = 'netpbm');
 	$nb_process ++;
 
-	if ($flag_imagick) {
-				afficher_choix_vignette('imagick');
-				$nb_process ++;
-			}
+	if (function_exists('imagick_readimage')) {
+		afficher_choix_vignette('imagick');
+		$nb_process ++;
+	}
 
 	if ($convert_command) {
 		afficher_choix_vignette($p = 'convert');
 		$nb_process ++;
 	}
-			
-			
 
 	echo "</tr></table>\n";
 	
@@ -218,24 +220,13 @@ function vignettes_config()
 		$block= "'none', 'block'";
 		echo bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', $block);");
 	
-
-
-
-/*		afficher_choix('creer_preview', $creer_preview,
-			array('non' => _T('item_choix_non_generation_miniature'),
-				'oui' => _T('item_choix_generation_miniature')));
-		echo "</p>\n";
-		*/
-
-
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 		
 		fin_cadre_trait_couleur();
 	}
 
 
-	if ($flag_gd OR $flag_imagick OR $convert_command)
-		fin_cadre_trait_couleur();
+	fin_cadre_trait_couleur();
 
 	echo "<p>";
 }

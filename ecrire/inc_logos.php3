@@ -323,7 +323,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			$gd_formats = lire_meta("gd_formats");
 			foreach ($formats_sortie as $fmt) {
 				if (ereg($fmt, $gd_formats)) {
-					if ($format <> "gif" OR $GLOBALS['flag_ImageGif'])
+					if ($format <> "gif" OR function_exists('ImageGif'))
 						$destFormat = $fmt;
 					break;
 				}

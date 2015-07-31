@@ -219,7 +219,7 @@ else if ($etape == 5) {
 	echo "</FORM>";
 	echo "<p>\n";
 
-	if ($flag_ldap AND !$ldap_present) {
+	if (function_exists('ldap_connect') AND !$ldap_present) {
 		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
 		echo "<b>"._T('info_authentification_externe')."</b>";
 		echo "<p>\n"._T('texte_annuaire_ldap_1');
