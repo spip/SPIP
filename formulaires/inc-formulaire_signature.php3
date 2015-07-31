@@ -261,7 +261,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				$link->addVar('var_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 	
-				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
+				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 
 				if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
 
