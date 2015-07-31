@@ -1304,6 +1304,27 @@ function maj_base($version_cible = 0) {
 		spip_query("UPDATE spip_types_documents	SET mime_type='application/mp4' WHERE extension='mp4'");
 		maj_version('1.926');
 	}
+	// Ajout de CSV
+	if (upgrade_vers(1.927, $version_installee, $version_cible)) {
+		//pas de psd en <img> 
+		spip_query("UPDATE spip_types_documents	SET inclus='non' WHERE extension='psd'");
+		//ajout csv
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre) VALUES ('csv', 'CSV')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='text/csv' WHERE extension='csv'");
+		//ajout mkv
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('mkv', 'Matroska Video', 'embed')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='video/x-mkv' WHERE extension='mkv'");
+		//ajout mka
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('mka', 'Matroska Audio', 'embed')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='audio/x-mka' WHERE extension='mka'");
+		//ajout kml
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre) VALUES ('kml', 'Keyhole Markup Language')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='application/vnd.google-earth.kml+xml' WHERE extension='kml'");
+		//ajout kmz
+		spip_query("INSERT IGNORE INTO spip_types_documents (extension, titre) VALUES ('kmz', 'Google Earth Placemark File')");
+		spip_query("UPDATE spip_types_documents	SET mime_type='application/vnd.google-earth.kmz' WHERE extension='kmz'");
+		maj_version('1.927');
+	}
 
 }
 

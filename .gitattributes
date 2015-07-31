@@ -275,7 +275,11 @@ dist/vignettes/h.png -text
 dist/vignettes/html.png -text
 dist/vignettes/index.php -text
 dist/vignettes/jpg.png -text
+dist/vignettes/kml.png -text
+dist/vignettes/kmz.png -text
 dist/vignettes/mid.png -text
+dist/vignettes/mka.png -text
+dist/vignettes/mkv.png -text
 dist/vignettes/mng.png -text
 dist/vignettes/mov.png -text
 dist/vignettes/mp3.png -text
