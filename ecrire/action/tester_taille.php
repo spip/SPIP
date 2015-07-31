@@ -35,7 +35,7 @@ include_spip('inc/headers');
 function action_tester_taille_error_handler($output)
 {
 	// on est ici, donc echec lors de la creation de l'image
-	if ($GLOBALS['redirect']){
+	if (!empty($GLOBALS['redirect'])){
 		return redirige_formulaire($GLOBALS['redirect']);
 	}
 	return $output;
@@ -55,10 +55,10 @@ function action_tester_taille_error_handler($output)
  * 
 **/
 function action_tester_taille_dist() {
-	
+
 	if (!autoriser('configurer'))
 		return;
-	
+
 	$taille = _request('arg');
 	$taille = explode('-',$taille);
 
@@ -70,12 +70,10 @@ function action_tester_taille_dist() {
 	// si l'intervalle est assez petit, on garde la valeur min
 	if ($GLOBALS['taille_max']*$GLOBALS['taille_max']-$GLOBALS['taille_min']*$GLOBALS['taille_min']<50000){
 		$t = ($GLOBALS['taille_min']*$GLOBALS['taille_min']);
-		if ($GLOBALS['taille_min']!==$GLOBALS['taille_max']){
+		if ($GLOBALS['taille_min']!==$GLOBALS['taille_max']) {
 			$t = $t * 0.9; // marge de securite
-			ecrire_meta('max_taille_vignettes', $t = ($GLOBALS['taille_min']*$GLOBALS['taille_min'])*0.9, 'non');
 			echo round($t/1000000, 3) . ' Mpx';
-		}
-		else {
+		} else {
 			// c'est un cas "on a reussi la borne max initiale, donc on a pas de limite connue"
 			$t = 0;
 			echo "OK";
@@ -123,8 +121,8 @@ function action_tester_taille_dist() {
 	}
 	ob_end_clean();
 
+
 	// on est ici, donc pas de plantage
 	echo redirige_formulaire($GLOBALS['redirect']);
 }
 
-?>
