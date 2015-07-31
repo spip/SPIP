@@ -19,6 +19,18 @@ function exec_gadgets_dist()
 	$gadget = _request('gadget');
 	$gadgets = charger_fonction('gadgets', 'inc');
 
-	ajax_retour($gadgets($id_rubrique, $gadget));
+	header("Cache-Control: max-age=3600");
+
+	if ($date = intval(_request('date')))
+		header("Last-Modified: ".gmdate("D, d M Y H:i:s", $date)." GMT");
+
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
+	AND !strstr($_SERVER['SERVER_SOFTWARE'],'IIS/')) {
+		include_spip('inc/headers');
+		http_status(304);
+		exit;
+	} else {
+		ajax_retour($gadgets($id_rubrique, $gadget));
+	}
 }
 ?>

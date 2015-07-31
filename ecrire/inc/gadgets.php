@@ -301,12 +301,9 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	. "<a href='"
 	. generer_url_ecrire("articles_tous")
 	. "' class='lien_sous'" 
-/* retire par la 7033 car bugge. a reintroduire ? 
-onmouseover=\"findObj_forcer('bandeautoutsite').style.visibility='visible'; charger_id_url_si_vide('" . generer_url_ecrire('rubriquer',"&var_ajax=1&id=$id_rubrique") . "','nav-recherche');\" */
 	. ">"
 	._T('icone_site_entier')
 	. "</a>"
-	. "\n<div id='nav-recherche'></div>"
 	. "\n<div id='gadget-rubriques'></div>"
 	. "</div>";
 	// FIN GADGET Menu rubriques
@@ -482,25 +479,48 @@ function repercuter_gadgets($id_rubrique) {
 
 	if (!_SPIP_AJAX) return '';
 
-	// ne sert ici qu'a caracteriser l'asyncrhonisme de ces scripts,
+	// ne sert ici qu'a caracteriser l'asynchronisme de ces scripts,
 	// afin de les neutraliser lors d'une restauration
 	$ajax = "\\x26var_ajaxcharset=utf8" ;
 
 	$rub = $ajax . ($id_rubrique ? "\\x26id_rubrique=$id_rubrique" : '');
 
+	// comme on cache fortement ce menu, son url change en fonction de sa date de modif
+	$date = $GLOBALS['meta']['date_calcul_rubriques'];
+
 	return
+
+	// Seul le gadget des rubriques (potentiellement lourd) est charge en ajax
 	 "
-	jQuery('#gadget-rubriques')
-	.load('./?exec=gadgets\\x26gadget=rubriques$ajax');" #pas de $rub
+	jQuery('#boutonbandeautoutsite')
+	.parent()
+	.one('mouseover',function(){
+		changestyle('bandeautoutsite');
+		jQuery('#gadget-rubriques')
+		.load('./?exec=gadgets\\x26gadget=rubriques$ajax\\x26date=$date');
+	})
+	.one('focus', function(){jQuery(this).mouseover();});"
+
+	// les autres sont remplis ici
 	."
 	jQuery('#gadget-navigation')
-	.load('./?exec=gadgets\\x26gadget=navigation$rub');"
+	.html('".addslashes(strtr(gadget_navigation($id_rubrique),"\n\r","  "))."');
+	"
 	."
 	jQuery('#gadget-agenda')
-	.load('./?exec=gadgets\\x26gadget=agenda$rub');"
+	.html('".addslashes(strtr(gadget_agenda($id_rubrique),"\n\r","  "))."');
+	"
 	."
 	jQuery('#gadget-messagerie')
-	.load('./?exec=gadgets\\x26gadget=messagerie$rub');";
+	.html('".addslashes(strtr(gadget_messagerie($id_rubrique),"\n\r","  "))."');
+	"
+
+	// la case de recherche s'efface la premiere fois qu'on la clique
+	."
+	jQuery('#form_recherche')
+	.one('click',function(){this.value='';});
+	";
+
 }
 
 ?>
