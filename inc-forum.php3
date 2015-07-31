@@ -105,11 +105,10 @@ function forum_abonnement($retour) {
 		$message_login = propre("Pour participer &agrave;
 		ce forum, vous devez vous enregistrer au pr&eacute;alable. Merci
 		d'indiquer ci-dessous l'identifiant personnel qui vous a
-		&eacute;t&eacute; fourni.\n_ Si vous l'avez oubli&eacute;, ou si
-		vous n'en avez pas encore, vous pouvez").
+		&eacute;t&eacute; fourni. Si vous n'&ecirc;tes pas enregistr&eacute;, vous devez").
 ' <script language="JavaScript"><!--
-document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=740,height=580\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander un nouvel identifiant</a>.<br>';
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=500,height=370\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>vous inscrire</a> au pr&eacute;alable.<br>';
 		login('', false, $message_login);
 		return false;
 	} 
