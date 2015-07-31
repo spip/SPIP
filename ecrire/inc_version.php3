@@ -781,7 +781,7 @@ class Link {
 	// Effacer une variable
 	//
 	function delVar($name) {
-		if($this->vars[$name]) unset($this->vars[$name]);
+		if(isset($this->vars[$name])) unset($this->vars[$name]);
 		if($this->arrays[$name]) unset($this->arrays[$name]);
 	}
 
