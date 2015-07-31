@@ -25,9 +25,11 @@ include_spip('inc/date');
 function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre, $deplier=false) {
 
 	// + securite (avec le script exec=legender ca vient de dehors)
-	if (!preg_match('/^\w+$/',$type, $r)) {
-	  return;
-	}
+	$table = 'spip_documents_' . $type . 's';
+	$prim = id_table_objet($table);
+	if (!$prim) return '';
+	$prim = 'id_' . $type;
+
 	// premier appel
 	if ($document) {
 		$flag = $deplier;
@@ -36,7 +38,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if ($id_document) {
 		$res = sql_select("*", "spip_documents", "id_document = " . intval($id_document));
 		$document = sql_fetch($res);
-		$document['vu'] = sql_getfetsel("vu", "spip_documents_".$type."s", "id_$type=" . intval($id) ." AND id_document=".intval($id_document));
+		$document['vu'] = sql_getfetsel("vu", $table, "$prim=" . intval($id) ." AND id_document=".intval($id_document));
 
 		if (!$document['vu']) $document['vu'] = 'non';
 		$flag = 'ajax';
