@@ -36,7 +36,7 @@ function nettoyer_uri() {
 //
 function generer_nom_fichier_cache($contexte='', $fond='') {
 	global $delais;
-	global $flag_gz, $compresser_cache;
+	global $flag_gz;
 
 	if ($delais == 0) return '';
 
@@ -73,7 +73,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	include_ecrire('inc_acces.php3');
 	verifier_htaccess(_DIR_CACHE);
 
-	$gzip = $flag_gz && $compresser_cache ? '.gz' : '';
+	$gzip = $flag_gz ? '.gz' : '';
 
 	return _DIR_CACHE . $subdir.$subdir2.$fichier_cache.$gzip;
 }
