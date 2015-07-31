@@ -530,11 +530,21 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 }
 
 
-// http://doc.spip.org/@need_proxy
-function need_proxy($host)
-{
-	$http_proxy = @$GLOBALS['meta']["http_proxy"];
-	$http_noproxy = @$GLOBALS['meta']["http_noproxy"];
+/**
+ * Tester si un host peut etre recuperer directement ou doit passer par un proxy
+ * on peut passer en parametre le proxy et la liste des host exclus,
+ * pour les besoins des tests, lors de la configuration
+ * 
+ * @param string $host
+ * @param string $http_proxy
+ * @param string $http_noproxy
+ * @return string
+ */
+function need_proxy($host, $http_proxy=null,$http_noproxy=null){
+	if (is_null($http_proxy))
+		$http_proxy = @$GLOBALS['meta']["http_proxy"];
+	if (is_null($http_noproxy))
+		$http_noproxy = @$GLOBALS['meta']["http_noproxy"];
 
 	$domain = substr($host,strpos($host,'.'));
 
