@@ -308,6 +308,12 @@ padding-top:10px;
 	[(#EVAL{_DIR_IMG_PACK}|concat{label-fond-haut-,#ENV{ltr},.gif}|image_bg{[(#ENV{couleur_foncee})], bottom [(#GET{left})] no-repeat })]
 }
 
+.formulaire_spip li.fieldset.editer_liens_sites {
+	border-bottom: 1px solid [(#GET{foncee})];
+}
+
+
+
 /* Extra */
 
 .formulaire_spip extra {
