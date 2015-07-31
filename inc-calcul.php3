@@ -14,7 +14,7 @@ include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
-include_ecrire("inc_forum.php3");
+include_local("inc-forum.php3");
 include_local("inc-calcul-outils.php3");
 
 #include_local("inc-calcul_html");	# anciens noms des fichiers
