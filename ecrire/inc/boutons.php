@@ -508,7 +508,7 @@ function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubr
 		
 	return "<li style='width: "
 	. _LARGEUR_ICONES_BANDEAU
-	. "px' class='$class boutons_admin' onmouseover=\"changestyle('bandeau$rubrique_icone');\"><a$accesskey$a_href$class_select$title onfocus=\"$(this).parent().siblings('li').find('.bandeau_sec').hide();\" onkeypress=\"$(this).siblings('.bandeau_sec').show();\">"
+	. "px' class='$class boutons_admin'><a$accesskey$a_href$class_select$title onfocus=\"$(this).parent().siblings('li').find('.bandeau_sec').hide();\" onkeypress=\"$(this).siblings('.bandeau_sec').show();\">"
 	. $texte
 	. "</a>\n"
 	. bandeau_principal2($detail->sousmenu,$rubrique, $sous_rubrique, $largeur, $decal)
