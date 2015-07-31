@@ -205,7 +205,7 @@ jQuery(function(){
 
 			}
 	
-			$result=spip_query("SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' ORDER BY nom_site");
+			$result=spip_query("SELECT * FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut!='refuse' ORDER BY nom_site");
 			if (spip_num_rows($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
 				while($row=spip_fetch_array($result)){

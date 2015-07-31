@@ -21,7 +21,7 @@ include_spip("inc/indexation");
 function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 {
 	global $champs_extra, $les_notes, $spip_display;
-	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve'");
+	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
 
 	if ($row = spip_fetch_array($result)) {
 		$id_breve=$row['id_breve'];
@@ -231,7 +231,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 	echo "<br />";
 	
-	echo afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), "breves_voir", "id_breve=$id_breve");
+	echo afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve=$id_breve AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), "breves_voir", "id_breve=$id_breve");
 	
 	echo fin_gauche(), fin_page();
 }

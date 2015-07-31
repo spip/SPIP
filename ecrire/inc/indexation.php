@@ -272,11 +272,11 @@ function update_index_tables(){
 					&&($old_id!=$new_id)){
 				$temp_id = 254;
 				// liberer le nouvel id
-				spip_query("UPDATE spip_index SET id_table='$temp_id' WHERE id_table='$new_id'");
+				spip_query("UPDATE spip_index SET id_table=$temp_id WHERE id_table=$new_id");
 				// deplacer les indexation de l'ancien id sous le nouvel id
-				spip_query("UPDATE spip_index SET id_table='$new_id' WHERE id_table='$old_id'");
+				spip_query("UPDATE spip_index SET id_table=$new_id WHERE id_table=$old_id");
 				// remettre les indexation deplacees sous l'id qui vient d'etre libere
-				spip_query("UPDATE spip_index SET id_table='$old_id' WHERE id_table='$temp_id'");
+				spip_query("UPDATE spip_index SET id_table=$old_id WHERE id_table=$temp_id");
 	
 				$old_liste_tables[$old_id] = $old_liste_tables[$new_id]; 
 				unset($old_liste_tables[$new_id]);
@@ -911,14 +911,14 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 			}
 			$count_groupes = join(" + ",$hash_groupes);
 			
-			$s = spip_query("SELECT id_objet as id,COUNT(DISTINCT $count_groupes) as count_groupes FROM spip_index WHERE id_table='$index_id_table' AND hash IN ($list_hashes) GROUP BY id HAVING count_groupes=".count($hash_recherche_and));
+			$s = spip_query("SELECT id_objet as id,COUNT(DISTINCT $count_groupes) as count_groupes FROM spip_index WHERE id_table=$index_id_table AND hash IN ($list_hashes) GROUP BY id HAVING count_groupes=".count($hash_recherche_and));
 			//if no ids are found, pass at least id = 0 in order to exclude any result
 			$objet_and[] = 0;
 			while ($r = spip_fetch_array($s)) 
 				$objet_and[]=$r['id'];
 		}
 		if($hash_recherche_not) {
-			$s = spip_query("SELECT DISTINCT id_objet as id FROM spip_index WHERE hash IN ($hash_recherche_not) AND id_table='$index_id_table'");
+			$s = spip_query("SELECT DISTINCT id_objet as id FROM spip_index WHERE hash IN ($hash_recherche_not) AND id_table=$index_id_table");
 			while ($r = spip_fetch_array($s))
 				$objet_not[]=$r['id'];														
 		}
@@ -931,7 +931,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 		}
 		
 		if($list_hash || $list_and || $list_not) {
-			$query = "SELECT hash,points,id_objet as id FROM spip_index WHERE id_table='$index_id_table'".$list_and.$list_not.$list_hash;  
+			$query = "SELECT hash,points,id_objet as id FROM spip_index WHERE id_table=$index_id_table".$list_and.$list_not.$list_hash;  
 			
 			$s = spip_query($query);
 				

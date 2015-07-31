@@ -31,7 +31,7 @@ function exec_articles_versions_dist()
 // Lire l'article
 //
 
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 
 	if (!autoriser('voirrevisions', 'article', $id_article) 
 		OR !$row) {

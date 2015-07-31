@@ -78,7 +78,7 @@ function exec_breves_edit_dist()
 		$lien_titre='';
 		$lien_url='';
 		$statut = "prop";
-		$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique = ".intval($id_rubrique)));
+		$row = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$id_rubrique = $row['id_secteur'];
 	}
 
@@ -121,7 +121,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
-		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
+		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 
 		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];

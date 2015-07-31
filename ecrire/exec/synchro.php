@@ -81,6 +81,7 @@ function exec_synchro_dist()
 	echo '<p>'._T('ical_info_calendrier').'</p>';
 
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+
 	afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
 
 	afficher_liens_calendrier(generer_url_action("ical", "id_auteur=$id_auteur&arg=".afficher_low_sec($id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));

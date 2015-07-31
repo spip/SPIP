@@ -53,22 +53,22 @@ function action_editer_message_post_supprimer($id_message) {
 
 // http://doc.spip.org/@action_editer_message_post_vu
 function action_editer_message_post_vu($id_message, $id_auteur) {
-  spip_log("efface $id_message $id_auteur");
-	spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$id_auteur'");
+	spip_log("efface $id_message $id_auteur");
+	spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message=$id_message AND id_auteur=$id_auteur");
 
 }
 
 // http://doc.spip.org/@action_editer_message_post_retirer
 function action_editer_message_post_retirer($id_message, $id_auteur) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$id_auteur'");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$id_auteur");
 }
 
 // http://doc.spip.org/@action_editer_message_post_ajouter
 function action_editer_message_post_ajouter($id_message, $id_auteur) {
-	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur='$id_auteur' AND id_message='$id_message'");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_auteur=$id_auteur AND id_message=$id_message");
 	spip_abstract_insert('spip_auteurs_messages',
 		"(id_auteur,id_message,vu)",
-		"('$id_auteur','$id_message','non')");
+		"($id_auteur,$id_message,'non')");
 
 	// Ne pas notifier ici, car si on se trompe d'auteur, on veut avoir le temps
 	// de supprimer celui qu'on vient d'ajouter... c'est fait en cron
@@ -108,8 +108,8 @@ function action_editer_message_post_choisir($id_message) {
 // http://doc.spip.org/@action_editer_message_post_envoyer
 function action_editer_message_post_envoyer($id_message, $statut) {
 
-	spip_query("UPDATE spip_messages SET statut=" . _q($statut) . " WHERE id_message='$id_message'");
-	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
+	spip_query("UPDATE spip_messages SET statut=" . _q($statut) . " WHERE id_message=$id_message");
+	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message=$id_message AND rv<>'oui'");
 }
 
 // http://doc.spip.org/@action_editer_message_post_nouveau
@@ -148,9 +148,9 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 // http://doc.spip.org/@action_editer_message_post_vieux
 function action_editer_message_post_vieux($id_message)
 {
-	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . " WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET titre=" . _q(_request('titre')) . ", texte=" . _q(_request('texte')) . " WHERE id_message=$id_message");
 
-	spip_query("UPDATE spip_messages SET rv=" . _q(_request('rv')) . " WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET rv=" . _q(_request('rv')) . " WHERE id_message=$id_message");
 
 	if (_request('jour'))
 		change_date_message($id_message, _request('heures'),_request('minutes'),_request('mois'), _request('jour'), _request('annee'), _request('heures_fin'),_request('minutes_fin'),_request('mois_fin'), _request('jour_fin'), _request('annee_fin'));
@@ -190,7 +190,7 @@ function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee,
 	$heures_fin = heures($date_fin);
 	$minutes_fin = minutes($date_fin);
 
-	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00' WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00' WHERE id_message=$id_message");
 }
 
 ?>

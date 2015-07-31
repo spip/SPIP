@@ -119,7 +119,7 @@ function exec_sites_edit_dist()
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	else {
-		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
+		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 
 		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];

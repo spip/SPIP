@@ -43,7 +43,7 @@ function exec_brouteur_dist()
 	if ($id_rubrique) {
 		$j = $nb_col;
 		while ($id_rubrique > 0) {
-			$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
+			$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 			if ($row=spip_fetch_array($result)){
 				$j--;
 				$dest[$j] = $id_rubrique;
