@@ -14,10 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function exec_brouteur_frame_dist()
-{
-  global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left,$id_rubrique, $frame, $effacer_suivant, $special;
-	$id_rubrique = is_numeric($id_rubrique) ? intval($id_rubrique) : "";
+function exec_brouteur_frame_dist() {
+  global $connect_statut,$connect_id_auteur, $spip_ecran, $spip_lang_left, $frame, $effacer_suivant, $special;
+	$id_rubrique = is_numeric(_request('rubrique')) ? intval(_request('rubrique')) : "";
 
 	init_entete("","","");
 
@@ -114,18 +113,18 @@ onMouseOver=\"changeclass(this, 'brouteur_rubrique_on');\"
 onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 
 			if ($id_parent == '0') 	{
-			  echo "<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe", ($frame+1), "'>",
+			  echo "<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe", ($frame+1), "'>",
 			    $titre,
 			    "</a></div>";
 			}
 			else {
 				if ($frame+1 < $nb_col)
 				  echo "<div style='",
-				    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
+				    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
 				    ($frame+1),
 				    "'>$titre</a></div>";
 				else  echo "<div style='",
-				  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
+				  frame_background_image("rubrique-24.gif"), ";'><a href='javascript:window.parent.location=\"" . generer_url_ecrire('brouteur',"rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
 			}
 			echo "</div>\n";
 		}
