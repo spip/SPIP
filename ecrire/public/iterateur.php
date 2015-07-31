@@ -396,7 +396,7 @@ class IterDecorator extends FilterIterator {
 		while ($this->pos < $n AND $this->valid()) {
 			$this->next();
 		}
-		
+
 		return true;
 	}
 
