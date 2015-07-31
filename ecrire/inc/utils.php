@@ -149,12 +149,7 @@ function pipeline($action,$val) {
 	$fonc = 'execute_pipeline_'.$action;
 	if (function_exists($fonc)) {
 		$val = $fonc($val);
-		// si le flux est une table qui encapsule donnees et autres
-		// on ne ressort du pipe que les donnees
-		if (is_array($val)&&isset($val['data']))
-			$val = $val['data'];
 	}
-
 	// plantage ?
 	else {
 		include_spip('inc/plugin');
@@ -162,6 +157,12 @@ function pipeline($action,$val) {
 		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
 		verif_plugin($action);
 		spip_log("fonction $f absente : pipeline desactive");
+	}
+	// si le flux est une table qui encapsule donnees et autres
+	// on ne ressort du pipe que les donnees
+	if (is_array($val)){
+		if (!isset($val['data'])) {spip_log('pipeline $action flux de retour array sans element data :'.serialize($val));$val['data']='';}
+		$val = $val['data'];
 	}
 	return $val;
 }

@@ -190,7 +190,7 @@ $spip_pipeline = array(
 	'post_propre' => '',
 	'post_syndication' => '',
 	'post_typo' => '|quote_amp',
-	'rendu_evenement' => '',
+	'agenda_rendu_evenement' => '',
 	'taches_generales_cron' => ''
 );
 
