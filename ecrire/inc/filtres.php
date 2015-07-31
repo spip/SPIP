@@ -2275,7 +2275,10 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 	else {
 		$get_infos = charger_fonction('get_infos','plugins');
 		$infos = $get_infos($plugins_actifs[$plugin]['dir']);
-		return strval($infos[$type_info]);
+		if ($type_info == 'tout')
+			return $infos;
+		else
+			return strval($infos[$type_info]);
 	}
 }
 
