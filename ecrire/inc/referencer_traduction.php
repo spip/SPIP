@@ -40,7 +40,8 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		if (!$langue_article)
 			$langue_article = $langue_parent;
 
-		if ($menu = menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, 'ajax')) {
+		if ($menu = liste_options_langues('changer_lang', $langue_article, $langue_parent)) {
+			$menu =  _T('info_multi_cet_article').' ' . select_langues('changer_lang', 'ajax', $menu);
 			$menu = ajax_action_post('referencer_traduction', "$id_article,$id_rubrique","articles","id_article=$id_article", $menu, _T('bouton_changer'), " class='visible_au_chargement fondo'");
 
 			$reponse .= debut_cadre_couleur('',true)
