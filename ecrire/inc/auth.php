@@ -101,7 +101,7 @@ function inc_auth_dist() {
 		}
 
 		return (generer_url_public('login',
-			"url=".urlencode(str_replace('/./', '/',
+			"url=".rawurlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
 			. str_replace('&amp;', '&', self()))),true).$erreurcookie);
 	}

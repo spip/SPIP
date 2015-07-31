@@ -199,8 +199,8 @@ function ordonne_plugin(){
 	foreach($liste as $plug){
 		$index = $i;
 		$i = $i+2;
-		if (urldecode($_GET['monter'])==$plug) $index = $index-3;
-		if (urldecode($_GET['descendre'])==$plug) $index = $index+3;
+		if (rawurldecode($_GET['monter'])==$plug) $index = $index-3;
+		if (rawurldecode($_GET['descendre'])==$plug) $index = $index+3;
 		$liste_triee[$index] = $plug;
 	}
 	ksort($liste_triee);

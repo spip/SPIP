@@ -73,10 +73,10 @@ function prepare_donnees_post($donnees, $boundary = '') {
 			foreach ($donnees as $cle => $valeur) {
 				if (is_array($valeur)) {
 					foreach ($valeur as $val2) {
-						$chaine[] = urlencode($cle).'='.urlencode($val2);
+						$chaine[] = rawurlencode($cle).'='.urlencode($val2);
 					}
 				} else {
-					$chaine[] = urlencode($cle).'='.urlencode($valeur);
+					$chaine[] = rawurlencode($cle).'='.urlencode($valeur);
 				}
 			}
 			$chaine = implode('&', $chaine);

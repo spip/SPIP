@@ -83,7 +83,7 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script
 
 	if ($spip_display != 4) {
 	
-	  $redirect = urlencode(generer_url_ecrire($script, "$id_objet=$id", true));
+	  $redirect = rawurlencode(generer_url_ecrire($script, "$id_objet=$id", true));
 		$logon = $type.'on'.$id;
 		$logoff = $type.'off'.$id;
 		include_spip('inc/session');

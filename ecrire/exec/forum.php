@@ -73,9 +73,9 @@ function exec_forum_dist()
   echo "<p><div align='center'>";
   icone (_T('icone_poster_message'), generer_url_ecrire("forum_envoi", 
 			 "statut=$statutforum&adresse_retour=" .
-			 urlencode($urlforum) . 
+			 rawurlencode($urlforum) . 
 			 "&titre_message=" .
-			 urlencode(filtrer_entites(_T('texte_nouveau_message')))),
+			 rawurlencode(filtrer_entites(_T('texte_nouveau_message')))),
        $logo, "creer.gif");
   echo "</div></p>";
 

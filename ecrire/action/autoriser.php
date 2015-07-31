@@ -26,7 +26,7 @@ function action_autoriser_dist()
 {
   global $file, $arg, $toujours;
 
-  $file = urldecode($file);
+  $file = rawurldecode($file);
 
   $refus = false;
   if (strpos($file,'../') !== false)

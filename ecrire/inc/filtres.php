@@ -281,7 +281,7 @@ function url_var_recherche($url) {
 		list ($url,$ancre) = preg_split(',#,', $url, 2);
 		if ($ancre) $ancre='#'.$ancre;
 
-		$x = "var_recherche=".urlencode(_request('recherche'));
+		$x = "var_recherche=".rawurlencode(_request('recherche'));
 
 		if (strpos($url, '?') === false)
 			return "$url?$x$ancre";

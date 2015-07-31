@@ -42,7 +42,7 @@ function image_math($tex) {
 	if (!@file_exists($fichier)) {
 		// Aller chercher l'image sur le serveur
 		if ($server) {
-			spip_log($url = $server.'?'.urlencode($tex));
+			spip_log($url = $server.'?'.rawurlencode($tex));
 			include_spip('inc/distant');
 			if ($image = recuperer_page($url)) {
 				if ($f = @fopen($fichier, 'w')) {

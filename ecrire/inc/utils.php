@@ -296,7 +296,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 			if (!$v) {
 				unset($url[$n]);
 			} else {
-				$url[$n] = $c.'='.urlencode($v);
+				$url[$n] = $c.'='.rawurlencode($v);
 				$v = '';
 			}
 		}
@@ -304,7 +304,7 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
 	// ajouter notre parametre si on ne l'a pas encore trouve
 	if ($v)
-		$url[] = $c.'='.urlencode($v);
+		$url[] = $c.'='.rawurlencode($v);
 
 	// eliminer les vides
 	$url = array_filter($url);

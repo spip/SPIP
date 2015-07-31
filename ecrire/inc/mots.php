@@ -105,7 +105,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
   global $connect_statut, $connect_toutes_rubriques, $options;
 	global $spip_lang_rtl, $spip_lang_right;
 
-	$retour = urlencode($retour);
+	$retour = rawurlencode($retour);
 	$select_groupe = $GLOBALS['select_groupe'];
 
 	if ($table == 'articles') {
@@ -232,7 +232,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if ($GLOBALS['connect_statut'] == '0minirezo'
 		     AND $connect_toutes_rubriques ) {
 			echo "<div style='width: 200px;'>";
-			$titre = urlencode($cherche_mot);
+			$titre = rawurlencode($cherche_mot);
 			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 		}
@@ -652,7 +652,7 @@ function afficher_groupe_mots($id_groupe) {
 
 				if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 				  $s = "<a href='" .
-				    generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . urlencode(generer_url_ecrire('mots_tous'))) .
+				    generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . rawurlencode(generer_url_ecrire('mots_tous'))) .
 				    "' class='liste-mot'>".typo($titre_mot)."</a>";
 				else
 					$s = typo($titre_mot);

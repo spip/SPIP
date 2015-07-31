@@ -934,7 +934,7 @@ function traiter_raccourcis($letexte) {
 			if ($marqueur_notes) // quand il y a plusieurs series
 								 // de notes sur une meme page
 				$mn = $marqueur_notes.'-';
-			$ancre = $mn.urlencode($num_note);
+			$ancre = $mn.rawurlencode($num_note);
 
 			// ne mettre qu'une ancre par appel de note (XHTML)
 			if (!$notes_vues[$ancre]++)
@@ -985,7 +985,7 @@ function traiter_raccourcis($letexte) {
 		if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
 			$terme = trim($regs[1]);
-			$terme_underscore = urlencode(preg_replace(',\s+,', '_', $terme));
+			$terme_underscore = rawurlencode(preg_replace(',\s+,', '_', $terme));
 			if (strstr($url_glossaire_externe,"%s"))
 				$url = str_replace("%s", $terme_underscore, $url_glossaire_externe);
 			else

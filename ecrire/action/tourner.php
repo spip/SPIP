@@ -71,7 +71,7 @@ function action_tourner_dist() {
 		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
 
 	}
-	redirige_par_entete(urldecode($redirect));
+	redirige_par_entete(rawurldecode($redirect));
 
 }
 
