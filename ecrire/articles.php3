@@ -1399,24 +1399,21 @@ if ((lire_meta('multi_articles') == 'oui')
 ?>
 <script type='text/javascript'>
 <!--
-function change_bouton(selObj,urlbase){
-
-	var selection=selObj.options[selObj.selectedIndex].value;
-
+function puce_statut(selection){
 	if (selection=="publie"){
-		document.statut.src=urlbase+;
+		return "img_pack/puce-verte.gif";
 	}
 	if (selection=="prepa"){
-		document.statut.src="img_pack/puce-blanche.gif";
+		return "img_pack/puce-blanche.gif";
 	}
 	if (selection=="prop"){
-		document.statut.src="img_pack/puce-orange.gif";
+		return "img_pack/puce-orange.gif";
 	}
 	if (selection=="refuse"){
-		document.statut.src="img_pack/puce-rouge.gif";
+		return "img_pack/puce-rouge.gif";
 	}
 	if (selection=="poubelle"){
-		document.statut.src="img_pack/puce-poubelle.gif";
+		return "img_pack/puce-poubelle.gif";
 	}
 }
 // -->
@@ -1432,7 +1429,8 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 	echo "<B>"._T('texte_article_statut')."</B> ";
 
-	$statut_url_javascript="\"articles.php3?id_article=$id_article&methode=image&alea=\"+Math.random()+\"&statut_nouv=\"+options[selectedIndex].value";
+	// $statut_url_javascript="\"articles.php3?id_article=$id_article&methode=image&alea=\"+Math.random()+\"&statut_nouv=\"+options[selectedIndex].value";
+	$statut_url_javascript="puce_statut(options[selectedIndex].value);";
 	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange='document.statut.src=$statut_url_javascript;'>";
 	echo "<OPTION" . mySel("prepa", $statut_article) ." style='background-color: white'>"._T('texte_statut_en_cours_redaction')."\n";
 	echo "<OPTION" . mySel("prop", $statut_article) . " style='background-color: #FFF1C6'>"._T('texte_statut_propose_evaluation')."\n";
@@ -1443,7 +1441,8 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 	echo "<img src='img_pack/puce-".puce_statut($statut_article).".gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 
-	echo "<noscript><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'></noscript>";
+	// echo "<noscript><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'></noscript>";
+	echo "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
 	echo aide ("artstatut");
 	echo "</CENTER>";
 	fin_cadre_relief();
