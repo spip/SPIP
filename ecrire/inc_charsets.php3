@@ -2138,6 +2138,8 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
+	$charset = strtolower($charset);
+
 	switch ($charset) {
 	case 'utf-8':
 		return utf_8_to_unicode($texte);

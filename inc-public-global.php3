@@ -326,7 +326,14 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
 	}
-	
+
+	// Une fois le chemin-cache decide, on ajoute la date (et date_redac) 
+	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent 
+	if (!isset($contexte_inclus['date'])) 
+		$contexte_inclus['date'] = date('Y-m-d H:i:s'); 
+	if (!isset($contexte_inclus['date_redac'])) 
+		$contexte_inclus['date_redac'] = $contexte_inclus['date']; 
+
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
 	$use_cache, $fond, true);
 

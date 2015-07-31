@@ -395,7 +395,7 @@ function safehtml($t) {
 	if (!$test) {
 		define('XML_HTMLSAX3', _DIR_INCLUDE."safehtml/classes/");
 		if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
-			include_local(XML_HTMLSAX3.'safehtml');
+			include_local(XML_HTMLSAX3.'safehtml.php');
 			$process = new safehtml();
 		}
 		if ($process)

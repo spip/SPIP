@@ -237,7 +237,7 @@ function spip_release_lock($nom) {
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
 function calcul_mysql_in($val, $valeurs, $not='') {
-	if (!$valeurs) return '0=0';
+	if (!$valeurs) return ($not ? "0=0" : '0=1');
 
 	$n = $i = 0;
 	$in_sql ="";
