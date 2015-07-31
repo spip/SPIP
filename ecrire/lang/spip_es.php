@@ -232,6 +232,7 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 	'envoi_via_le_site' => 'Envío a través del sitio',
 	'erreur' => 'Error',
 	'erreur_balise_non_fermee' => 'última baliza no cerrada:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Un erreor técnico impidió guardar correctamente el campo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Un erreor técnico impidió guardar los datos.',
 	'erreur_texte' => 'error(es)',

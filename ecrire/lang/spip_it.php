@@ -233,6 +233,7 @@ di ciascuna di queste cartelle. La procedura è spiegata in dettaglio nella guid
 	'envoi_via_le_site' => 'Invio tramite il sito',
 	'erreur' => 'Errore',
 	'erreur_balise_non_fermee' => 'ultimo tag non chiuso:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Un errore tecnico ha impedito la corretta registrazione del campo @champs@.',
 	'erreur_technique_enregistrement_impossible' => 'Un errore tecnico ha impedito la registrazione.',
 	'erreur_texte' => 'errore/i',

@@ -233,6 +233,7 @@ Verzeichnisse zu setzen.Die Installationsanleitung erläutert die Details dazu.<
 	'envoi_via_le_site' => 'Gesendet über Website ',
 	'erreur' => 'Fehler',
 	'erreur_balise_non_fermee' => 'Letzter Tag nicht geschlossen:',
+	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
 	'erreur_technique_enregistrement_champs' => 'Das Feld @champs@ konnte aufgrund eines technischen Problems nicht gespeichert werden.',
 	'erreur_technique_enregistrement_impossible' => 'Technisches Prolem: Speichern nicht möglich.',
 	'erreur_texte' => 'Fehler',
