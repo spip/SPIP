@@ -78,7 +78,7 @@ jQuery.fn.animeAppend = function(){
 	$(this).css('opacity','0.0').animate({opacity: "1.0"}, 1000,function(){
 		jQuery(this).animate({backgroundColor: '#ffffff'}, 3000,function(){
 				jQuery(this).removeClass('append').parents('.append').removeClass('append');
-				jQuery(this).css({backgroundColor: 'inherit'});
+				jQuery(this).css({backgroundColor: ''});
 		});
 	});
 }
