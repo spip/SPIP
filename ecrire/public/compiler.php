@@ -808,7 +808,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		  // Erreur de construction de l'arbre de syntaxe abstraite
 			$code = "''";
 			$p->descr = $descr;
-			$err_e_c = array('zbug_erreur_compilation');
+			$err_e_c = _T('zbug_erreur_compilation');
 			erreur_squelette($err_e_c, $p);
 		} // switch
 
