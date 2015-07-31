@@ -26,3 +26,4 @@ function exec_rubriquer_dist()
 			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
 			"';", 0, true);
 }
+?>
