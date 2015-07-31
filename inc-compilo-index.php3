@@ -235,7 +235,7 @@ function applique_filtres($p) {
 	// Appliquer les filtres perso
 	if ($p->param) $code = compose_filtres($p, $code);
 	// post-traitement securite
-	if ($p->statut == 'html' AND $p->etoile != '**') $code = "interdire_scripts($code)";
+	if ($p->statut == 'html') $code = "interdire_scripts($code)";
 	return $code;
 }
 

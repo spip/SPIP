@@ -30,8 +30,7 @@ define('TYPE_RECURSIF', 'boucle');
 define('SPEC_BOUCLE','[[:space:]]*\(([^)]*)\)');
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
-define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
-#define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?)");
+define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
@@ -149,9 +148,6 @@ function phraser_champs($texte,$ligne,$result) {
 		$champ->nom_boucle = $match[2];
 		$champ->nom_champ = $match[3];
 		$champ->etoile = $match[5];
-		if ($suite[0] == '{') {
-		  phraser_arg($suite, '', '', array(), $champ);
-		}
 		$texte = $suite;
 		$result[] = $champ;
 	  } else {
@@ -186,15 +182,6 @@ function phraser_champs_etendus($texte, $ligne,$result) {
 function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
-	$result = phraser_arg($texte, $fin, $sep, $result, $pointeur_champ);
-  }
-# mettre ici la suite du texte, 
-# notamment pour que l'appelant vire le caractere fermant si besoin
-  $pointeur_champ->apres = $texte;
-  return $result;
-}
-
-function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
       preg_match(",^(\|?[^{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = trim($match[1]);
@@ -228,7 +215,6 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
 		      }   
 		}
 		$arg = $regs[2];
-
 		if (trim($regs[1])) {
 			$champ = new Texte;
 			$champ->texte = $arg;
@@ -240,7 +226,6 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
 		  if (!ereg(NOM_DE_CHAMP ."[{|]", $arg, $r)) {
 		    // 0 est un aveu d'impuissance. A completer
 		    $arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
-
 		    $args = ltrim($regs[count($regs)-1]);
 		    $collecte = array_merge($collecte, $arg);
 		    $result = array_merge($result, $arg);
@@ -276,16 +261,20 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
 		  if ($collecte)
 		    {$res[] = $collecte; $collecte = array();}
 		}
+
 	}
 	if ($collecte) {$res[] = $collecte; $collecte = array();}
 	$args = substr($args,1);
       }
       $n = strlen($suite) - strlen($args);
-      if ($fonc || count($res) > 1) $pointeur_champ->param[] = $res;
+      $pointeur_champ->param[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, substr($suite, 0, $n));
       $texte = ltrim($args);
-      return $result;
+  }
+  # laisser l'appelant virer le caractere fermant
+  $pointeur_champ->apres = $texte;
+  return $result;
 }
 
 function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
