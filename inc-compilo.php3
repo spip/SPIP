@@ -134,7 +134,7 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
 // remplissant une variable $t0 retourne'e en valeur
 //
 function calculer_boucle($id_boucle, &$boucles) {
-	global $table_primary, $table_des_tables; 
+  global $table_primary, $table_des_tables, $tables_des_serveurs_sql; 
 
 	$boucle = &$boucles[$id_boucle];
 	$type_boucle = $boucle->type_requete;
@@ -152,7 +152,16 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if (!function_exists($f)) $f = $f.'_dist';			// definition spip
 	if (!function_exists($f)) $f = 'boucle_DEFAUT';		// definition par defaut
 	$id_table = $table_des_tables[$type_boucle];
-	$id_field = $id_table . "." . $table_primary[$type_boucle];
+	if ($id_table) {
+		$primary = $table_primary[$type_boucle];
+	} else { // table non Spip. Pas mal l'indexation, hein ?
+		$id_table = $type_boucle;
+		$serveur = $boucle->sql_serveur;
+		$primary = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type_boucle]['key']["PRIMARY KEY"]; 
+	}
+
+	$id_field = $id_table . "." . $primary; # articles.id_article -> 'table_id'
+	spip_log($id_field);
 	$f($boucle, $boucles, $type_boucle, $id_table, $id_field);
 
 
@@ -177,21 +186,17 @@ function calculer_boucle($id_boucle, &$boucles) {
 			// cas general ({lang_select} sur une table externe)
 			. 'lang';
 
-	// Qui sommes-nous ?
-	$primary_key = $table_primary[$type_boucle];
-
 	// Calculer les invalideurs si c'est une boucle non constante
 	$constant = ereg("^\(?'[^']*'\)?$",$return);
 
-	if ((!$primary_key) || $constant)
+	if ((!$primary) || $constant)
 		$invalide = '';
 	else {
-		$id_table = $table_des_tables[$type_boucle]; 
-		$boucle->select[] = "$id_table.$primary_key";
+		$boucle->select[] = $id_field;
 
-		$invalide = "\n			\$Cache['$primary_key']";
-		if ($primary_key != 'id_forum')
-			$invalide .= "[\$Pile[\$SP]['$primary_key']] = 1;";
+		$invalide = "\n			\$Cache['$primary']";
+		if ($primary != 'id_forum')
+			$invalide .= "[\$Pile[\$SP]['$primary']] = 1;";
 		else
 			$invalide .= "[calcul_index_forum(" . 
 				// Retournera 4 [$SP] mais force la demande du champ a MySQL
@@ -227,7 +232,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	if ($boucle->doublons)
 		$debut .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
-		index_pile($id_boucle, $primary_key, $boucles)
+		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons";
 
 	// gestion optimale des separateurs et des boucles constantes
@@ -304,11 +309,11 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// En absence de champ c'est un decompte : 
 	// on prend la primary pour avoir qqch
 	// car le COUNT incompatible avec le cas general
-	// pour les tables sans primary, prendre * mais faudrait trouver mieux
+
 	$init .= "spip_abstract_select(\n\t\tarray(\"". 
 		(($boucle->select) ? 
 			join("\",\n\t\t\"", array_unique($boucle->select)) :
-			((strlen($id_field) > 1) ? $id_field : '*')) .
+			$id_field) .
 		'"), # SELECT
 		array("' .
 		join('","', array_unique($boucle->from)) .
@@ -568,7 +573,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		    if ($boucle->type_requete != 'boucle') 
 		      {
 			$descr['id_mere'] = $id;
-			$res = calculer_criteres($id, $boucles, $descr);
+			$res = calculer_criteres($id, $boucles);
 			if (is_array($res)) return $res; # erreur
 			$boucles[$id]->return =
 			  calculer_liste($boucle->milieu,
