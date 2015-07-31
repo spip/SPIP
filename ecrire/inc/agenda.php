@@ -208,7 +208,7 @@ function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	} else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
-	  "<table class='agendagrrr $spip_ecran' cellspacing='0' cellpadding='0'>" .
+	  "<table class='agenda $spip_ecran' cellspacing='0' cellpadding='0'>" .
 	  http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_jour, $echelle, $partie_cal, $script, $ancre) .
 	  $evt .
 	  '</table>' .
@@ -393,7 +393,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 	  } else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
-	  "\n<table class='agendagrrr $spip_ecran' cellspacing='0' cellpadding='0'>" .
+	  "\n<table class='agenda $spip_ecran' cellspacing='0' cellpadding='0'>" .
 	  http_calendrier_semaine_navigation($annee, $mois, $init, $echelle, $partie_cal, $script, $ancre) .
 	  $evt .
 	  "</table>" .
@@ -489,7 +489,7 @@ function http_calendrier_jour($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	if (!isset($spip_ecran)) $spip_ecran = 'large';
 
 	return 	
-	  "\n<table class='agendagrrr $spip_ecran'>" .
+	  "\n<table class='agenda $spip_ecran'>" .
 	  "\n<tr><td class='calendrier-td-gauche'></td>" .
 	  "<td colspan='5' class='calendrier-td-centre'>" .
 	  http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
