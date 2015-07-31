@@ -16,91 +16,108 @@
 // Iterateur SQL
 //
 
-class Iter {
-	var $ok = false;
-	var $type;
-	var $command;
-	var $info;
+class Iter implements Iterator {
+	# http://php.net/manual/fr/class.iterator.php
+	public function __construct() {} // initialise
+	public function rewind() {} // revient au depart
+	public function valid() {} // avons-nous un element
+	public function current() {} // quel est sa valeur
+	public function key() {} // quelle est sa cle
+	public function next() {} // avancer d'un cran
 
-	private $result = false;
+	# Iter SPIP
+	var $type; # type de l'iterateur
+	var $command; # parametres de l'iterateur
+	var $info; # infos de compilateur
 
-	/*
-	 * array command: les commandes d'initialisation
-	 * array info: les infos sur le squelette
-	 */
-	public function Iter($command, $info=array()) {
-		$this->type = '??';
-		$this->command = $command;
-		$this->info = $info;
+	// avancer en position n
+	public function seek($n=0, $continue=null) {
+		$this->rewind();
+		while($n-->0 AND $this->valid()) $this->next();
+		return true;
 	}
-	public function seek($n=0, $continue=null) {}
-	public function next() {}
-	public function free() {}
-	public function count() {}
+	public function fetch() {
+		if ($this->valid()) {
+			$r = array('cle' => $this->key(), 'valeur' => $this->current());
+			$this->next();
+		} else
+			$r = false;
+		return $r;
+	}
+	public function free() {} // liberer la ressource
+	public function total() {} // #TOTAL_BOUCLE
 }
 
 class IterSQL extends Iter {
-	var $ok = false;
-	var $type;
-	var $command;
-	var $info;
 
-	private $result = false;
+	private $sqlresult = false; # ressource sql
+	private $row = null; # row sql courante
 
 	private function select() {
 		$v = &$this->command;
-		$this->result = calculer_select($v['select'], $v['from'], $v['type'], $v['where'], $v['join'], $v['groupby'], $v['orderby'], $v['limit'], $v['having'], $v['table'], $v['id'], $v['connect'], $this->info);
-		$this->ok = !!$this->result;
+		$this->sqlresult = calculer_select($v['select'], $v['from'], $v['type'], $v['where'], $v['join'], $v['groupby'], $v['orderby'], $v['limit'], $v['having'], $v['table'], $v['id'], $v['connect'], $this->info);
+		$this->ok = !!$this->sqlresult;
+		if ($this->ok)
+			$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
 	}
 
 	/*
 	 * array command: les commandes d'initialisation
 	 * array info: les infos sur le squelette
 	 */
-	public function IterSQL($command, $info=array()) {
+	public function __construct($command, $info=array()) {
 		$this->type='SQL';
 		$this->command = $command;
 		$this->info = $info;
 		$this->select();
 	}
+	public function rewind() {
+		return $this->seek(0);
+	}
+	public function valid() {
+		return is_array($this->row);
+	}
+	public function current() {
+		return $this->row;
+	}
 	public function seek($n=0, $continue=null) {
 		# SQLite ne sait pas seek(), il faut relancer la query
-		if (!$a = sql_seek($this->result, $this->command['connect'], $n, $continue)) {
+		if (!$a = sql_seek($this->sqlresult, $this->command['connect'], $n, $continue)) {
 			$this->free();
 			$this->select();
-			return true; # ??
+			return true;
 		}
 		return $a;
 	}
 	public function next(){
-		return sql_fetch($this->result, $this->command['connect']);
+		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
+	}
+	public function fetch(){
+		if ($this->valid()) {
+			$r = $this->current();
+			$this->next();
+		} else
+			$r = false;
+		return $r;
 	}
 	public function free(){
-		return sql_free($this->result, $this->command['connect']);
+		return sql_free($this->sqlresult, $this->command['connect']);
 	}
-	public function count() {
-		return sql_count($this->result, $this->command['connect']);
+	public function total() {
+		return sql_count($this->sqlresult, $this->command['connect']);
 	}
 }
 
 class IterENUM extends Iter {
-	var $ok = true;
-	var $type;
-	var $command;
-	var $info;
+	private $n = 0;
+	private $pos = 0;
+	private $start = 0;
+	private $offset = 0;
+	private $total = 1000000;
+	private $max = 1000000;
+	private $filtre = array();
 
-	var $n = 0;
-	var $max = 1000000;
-
-	var $filtre = array();
-
-	private $result = false;
-
-	/*
-	 * array command: les commandes d'initialisation
-	 * array info: les infos sur le squelette
-	 */
-	public function IterENUM($command, $info=array()) {
+	public function __construct($command=array(), $info=array()) {
 		$this->type='ENUM';
 		$this->command = $command;
 		$this->info = $info;
@@ -128,60 +145,82 @@ class IterENUM extends Iter {
 		// critere {2,7}
 		if ($this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
-			$this->n = $limit[0];
-			$this->max = $limit[0]+$limit[1]-1;
+			$this->offset = $limit[0];
+			$this->total = $limit[1];
 		}
 
 
 		// Appliquer les filtres sur (valeur)
 		if ($this->filtre) {
-			$this->filtre = create_function('$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
+			$this->filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
 		}
 
 	}
-	public function seek($n=0, $continue=null) {
-		$this->n = $n;
-		return true;
+	public function rewind() {
+		$this->n = $this->start-1;
+		$this->pos = -1;
+		for ($i=0; $i<=$this->offset; $i++) {
+			$this->next(); # pour filtre
+			$this->pos=0;
+		}
+	}
+	public function valid(){
+		return
+			$this->n <= $this->max
+			AND $this->pos < $this->total;
+	}
+	public function current() {
+		return $this->n;
+	}
+	public function key() {
+		return $this->pos;
 	}
 	public function next() {
+		$this->pos++;
+		$this->n++;
 		if ($f = $this->filtre) {
 			while (
-			$this->n < $this->max
-			AND !$f($a = $this->n++)){};
-		} else
-			$a = $this->n++;
+			$this->n <= $this->max
+			AND !$f($this->pos,$this->n)) {
+				$this->n++;
+			}
+		}
+	}
 
-		if ($this->n <= 1+$this->max)
-			return array('valeur' => $a);
+	public function seek($n=0, $continue=null) {
+		$this->n = $this->start-1;
+		$this->pos = -1;
+		for ($i=0; $i<=$n; $i++) {
+			$this->next(); # pour filtre
+		}
+		return true;
 	}
-	public function free(){
-	}
-	public function count() {
-		return $this->max;
+	public function total() {
+		return $this->total;
 	}
 }
 
 
-class IterPOUR extends Iter {
-	var $ok = false;
-	var $type;
-	var $command;
-	var $info;
+class IterDATA extends Iter {
+	private $tableau = array();
+	private $filtre = array();
+	private $cle = null;
+	private $valeur = null;
 
-	var $tableau = array();
-	var $filtre = array();
-
-	private $result = false;
-
-	/*
-	 * array command: les commandes d'initialisation
-	 * array info: les infos sur le squelette
-	 */
-	public function IterPOUR($command, $info=array()) {
-		$this->type='POUR';
+	public function __construct($command, $info=array()) {
+		$this->type='DATA';
 		$this->command = $command;
 		$this->info = $info;
 
+		$this->select($command);
+	}
+
+	public function rewind() {
+		reset($this->tableau);
+		list($this->cle, $this->valeur) = each($this->tableau);
+	}
+
+	private function select($command) {
 		// les commandes connues pour l'iterateur POUR
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
@@ -305,23 +344,29 @@ class IterPOUR extends Iter {
 				$limit[0],$limit[1],true);
 		}
 
-
-		reset($this->tableau);
+		$this->rewind();
 		#var_dump($this->tableau);
 	}
 	public function seek($n=0, $continue=null) {
-		reset($this->tableau);
-		while($n-->0 AND list($cle, $valeur) = each($this->tableau)){};
+		$this->rewind();
+		while($n-->0
+		AND list($this->cle, $this->valeur) = each($this->tableau)){};
 		return true;
 	}
+	public function valid(){
+		return !is_null($this->cle);
+	}
+	public function current() {
+		return $this->valeur;
+	}
+	public function key() {
+		return $this->cle;
+	}
 	public function next(){
-		if (list($cle, $valeur) = each($this->tableau)) {
-			return array('cle' => $cle, 'valeur' => $valeur);
-		}
+		if ($this->valid())
+			list($this->cle, $this->valeur) = each($this->tableau);
 	}
-	public function free(){
-	}
-	public function count() {
+	public function total() {
 		return count($this->tableau);
 	}
 }

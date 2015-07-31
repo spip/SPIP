@@ -362,7 +362,7 @@ define('CODE_CORPS_BOUCLE', '%s
 		%s,
 		array(%s)
 	);
-	if ($iter->ok) {
+	if ($iter->valid()) {
 	%s%s$SP++;
 	// RESULTATS
 	%s
@@ -472,7 +472,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 			$boucle->numrows = true;
 			$corps = "\n\t\$t0 = str_repeat($corps, \$Numrows['$id_boucle']['total']);";
 		}
-	} else $corps = "while (\$Pile[\$SP] = \$iter->next()) {\n$corps\n	}"; 
+	} else $corps = "while (\$Pile[\$SP]=\$iter->fetch()) {\n$corps\n	}"; 
 
 	$count = '';
 	if (!$boucle->select) {
@@ -490,7 +490,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	if ($boucle->numrows OR $boucle->mode_partie) {
 		if ($count == 'count(*)')
 			$count = "array_shift(\$iter->next())";
-		else $count = "\$iter->count()";
+		else $count = "\$iter->total()";
 		$nums .= "\$Numrows['$id_boucle']['total'] = @intval($count);"
 		. $boucle->mode_partie
 		. "\n\t";
@@ -523,7 +523,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		)';
 			break;
 
-		case 'IterPOUR':
+		case 'IterDATA':
 		case 'IterENUM':
 			$command = 'array("where" => $where, "source"=>$source, "sourcemode"=>$sourcemode, "limit" => $limit)';
 			break;
