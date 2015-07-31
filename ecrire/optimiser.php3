@@ -30,6 +30,8 @@ function optimiser_base() {
 		spip_query($query);
 		$query = "DELETE FROM spip_auteurs_rubriques WHERE id_rubrique NOT IN ($rubriques)";
 		spip_query($query);
+		$query = "DELETE FROM spip_documents_rubriques WHERE id_rubrique NOT IN ($rubriques)";
+		spip_query($query);
 		$query = "DELETE FROM spip_mots_rubriques WHERE id_rubrique NOT IN ($rubriques)";
 		spip_query($query);
 	}
@@ -49,6 +51,8 @@ function optimiser_base() {
 		$articles = join(",", $articles);
 
 		$query = "DELETE FROM spip_auteurs_articles WHERE id_article NOT IN ($articles)";
+		spip_query($query);
+		$query = "DELETE FROM spip_documents_articles WHERE id_article NOT IN ($articles)";
 		spip_query($query);
 		$query = "DELETE FROM spip_mots_articles WHERE id_article NOT IN ($articles)";
 		spip_query($query);
@@ -70,6 +74,8 @@ function optimiser_base() {
 	if ($breves) {
 		$breves = join(",", $breves);
 
+		$query = "DELETE FROM spip_documents_breves WHERE id_breve NOT IN ($breves)";
+		spip_query($query);
 		$query = "DELETE FROM spip_mots_breves WHERE id_breve NOT IN ($breves)";
 		spip_query($query);
 		$query = "DELETE FROM spip_forum WHERE id_breve NOT IN (0,$breves)";
@@ -200,6 +206,9 @@ function optimiser_base() {
 	$query = "SELECT id_document FROM spip_documents_breves";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
+	$query = "SELECT DISTINCT id_vignette FROM spip_documents WHERE id_vignette != 0";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) $documents[] = $row['id_vignette'];
 	
 	if ($documents) {
 		$documents = join(",", $documents);
