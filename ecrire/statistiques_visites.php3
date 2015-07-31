@@ -424,7 +424,6 @@ if (count($log)>0){
 			}
 		} else {
 			echo "<font size=1>";
-			echo "<br>popularité du site&nbsp;: ";
 			echo "<br>popularit&eacute; du site&nbsp;: ";
 			echo ceil(lire_meta('popularite_total'));
 			echo "</font>";
