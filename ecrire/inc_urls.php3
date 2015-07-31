@@ -54,6 +54,11 @@ function generer_url_mot($id_mot) {
 	return $url;
 }
 
+function generer_url_site($id_syndic) {
+	$url = "../spip_redirect.php3?id_syndic=$id_syndic";
+	return $url;
+}
+
 function generer_url_auteur($id_auteur) {
 	$url = "../spip_redirect.php3?id_auteur=$id_auteur";
 	return $url;

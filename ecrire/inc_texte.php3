@@ -617,7 +617,8 @@ function extraire_lien ($regs) {
 			case 'do':
 				$lien_url = generer_url_document($id_lien);
 				if (!$lien_texte) {
-					$req = "select titre,fichier from spip_documents where id_document=$id_lien";
+					$req = "select titre,fichier from spip_documents
+					WHERE id_document=$id_lien";
 					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
 					if (!$lien_texte)
@@ -625,7 +626,10 @@ function extraire_lien ($regs) {
 				}
 				break;
 			case 'si':
-				$row = @spip_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
+				# attention dans le cas des sites le lien pointe non pas sur
+				# la page locale du site, mais directement sur le site lui-meme
+				$row = @spip_fetch_array(@spip_query("SELECT nom_site,url_site
+				FROM spip_syndic WHERE id_syndic=$id_lien"));
 				if ($row) {
 					$lien_url = $row['url_site'];
 					if (!$lien_texte)

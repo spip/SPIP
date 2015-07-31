@@ -53,6 +53,10 @@ function generer_url_mot($id_mot) {
 	return "mot$id_mot.html";
 }
 
+function generer_url_site($id_syndic) {
+	return "site$id_syndic.html";
+}
+
 function generer_url_auteur($id_auteur) {
 	return "auteur$id_auteur.html";
 }
@@ -81,13 +85,14 @@ function recuperer_parametres_url($fond, $url) {
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
 	if ($url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre']
 	OR $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre']
-	AND preg_match(',^(article|breve|rubrique|mot|auteur)$,', $fond)) {
+	AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
 		$url_propre = preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre);
-		if ($r = spip_query("SELECT id_$fond AS id FROM spip_".$fond."s
+		if ($r = spip_query("SELECT ".id_table_objet($fond)." AS id
+		FROM spip_".table_objet($fond)."
 		WHERE url_propre = '".addslashes($url_propre)."'")
 		AND $t = spip_fetch_array($r))
-			$contexte["id_$fond"] = $t['id'];
+			$contexte[id_table_objet($fond)] = $t['id'];
 	}
 	/* Fin du bloc compatibilite url-propres */
 

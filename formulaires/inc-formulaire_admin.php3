@@ -20,7 +20,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	global $var_preview, $use_cache, $forcer_debug;
-	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
+	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic;
 	static $dejafait = false;
 
 	if (!$GLOBALS['spip_admin'])
@@ -50,11 +50,12 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	$action = ($action . ((strpos($action, '?') === false) ? '?' : '&'));
 
 	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
-	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur') as $type) {
-		$id_type = 'id_'.$type;
+	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
+		$id_type = id_table_objet($type);
 		if (!($$id_type = intval($$id_type)
 		AND $s = spip_query(
-		"SELECT $id_type FROM spip_${type}s WHERE $id_type=".$$id_type)
+		"SELECT $id_type FROM spip_".table_objet($type)."
+		WHERE $id_type=".$$id_type)
 		AND spip_num_rows($s)))
 			$$id_type=0;
 		else {
@@ -95,7 +96,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	if ($id_article OR $id_breve) unset ($id_rubrique);
 
 	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
-	if (!($id_article || $id_rubrique || $id_auteur || $id_breve || $id_mot))
+	if (!($id_article || $id_rubrique || $id_auteur || $id_breve || $id_mot || $id_syndic))
 		$ecrire = 'ecrire';
 
 	// Bouton "preview" si l'objet demande existe et est previsualisable
@@ -107,10 +108,11 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	)) {
 		if ($objet_affiche == 'article'
 		OR $objet_affiche == 'breve'
-		OR $objet_affiche == 'rubrique')
+		OR $objet_affiche == 'rubrique'
+		OR $objet_affiche == 'syndic')
 			if (spip_num_rows(spip_query(
-			"SELECT id_$objet_affiche FROM spip_".$objet_affiche."s
-			WHERE id_$objet_affiche=".${"id_".$objet_affiche}."
+			"SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)."
+			WHERE ".id_table_objet($objet_affiche)."=".$$id_type."
 			AND statut IN ('prop', 'prive')")))
 				$preview = 'preview';
 	}
@@ -122,6 +124,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				'id_auteur' => $id_auteur,
 				'id_breve' => $id_breve,
 				'id_mot' => $id_mot,
+				'id_syndic' => $id_syndic,
 				'ecrire' => $ecrire,
 				'action' => $action,
 				'preview' => $preview,

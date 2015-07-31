@@ -42,6 +42,9 @@ else if ($id_mot) {
 else if ($id_auteur) {
 	$url = generer_url_auteur($id_auteur);
 }
+else if ($id_syndic OR $id_syndic = $id_site) {
+	$url = generer_url_site($id_syndic);
+}
 else {
 	$url = _DIR_RESTREINT_ABS;
 }

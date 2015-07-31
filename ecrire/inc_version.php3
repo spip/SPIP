@@ -921,10 +921,20 @@ $spip_lang = $langue_site;
 
 // Nommage bizarre des tables d'objets
 function table_objet($type) {
-	if ($type == 'syndic' OR $type == 'forum')
-		return $type;
+	if ($type == 'site' OR $type == 'syndic')
+		return 'syndic';
+	else if ($type == 'forum')
+		return 'forum';
 	else
 		return $type.'s';
+}
+function id_table_objet($type) {
+	if ($type == 'site' OR $type == 'syndic')
+		return 'id_syndic';
+	else if ($type == 'forum')
+		return 'id_forum';
+	else
+		return 'id_'.$type;
 }
 
 
