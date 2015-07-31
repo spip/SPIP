@@ -250,6 +250,10 @@ class IterateurDATA implements Iterator {
 
 		// Critere {liste X1, X2, X3}
 		if (isset($this->command['liste'])) {
+			# s'il n'y a qu'une valeur dans la liste, sans doute une #BALISE
+			if (!isset($this->command['liste'][1])) {
+				$this->command['liste'] = explode(',', $this->command['liste'][0]);
+			}
 			$this->tableau = $this->command['liste'];
 		}
 
