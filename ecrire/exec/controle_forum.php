@@ -106,6 +106,7 @@ function forum_parent($id_forum) {
 	}
 }
 
+// http://doc.spip.org/@controle_forum_boucle
 function controle_forum_boucle($row) {
 
 	$id_forum = $row['id_forum'];
