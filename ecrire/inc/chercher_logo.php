@@ -21,8 +21,9 @@ function inc_chercher_logo_dist($id, $_id_objet, $mode='on') {
 	$nom = $type . $mode . intval($id);
 
 	foreach ($formats_logos as $format) {
-		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
-			return array($d, _DIR_LOGOS, $nom, $format);
+		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format))) {
+			return array($d, _DIR_LOGOS, $nom, $format, @filemtime($d));
+		}
 	}
 	# coherence de type pour servir comme filtre (formulaire_login)
 	return array();
