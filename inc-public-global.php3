@@ -24,10 +24,6 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
 	$chemin_cache = "CACHE/".$fichier_cache;
 
-	// Faire varier aleatoirement le delai (50 - 150 %)
-	// afin d'obtenir des recalculs non simultanes
-	$delais = $delais / 2 + $delais * rand(0, 255) / 256;
-
 	$use_cache = utiliser_cache($chemin_cache, $delais);
 
 	if (!$use_cache) {
@@ -70,7 +66,7 @@ else {
 
 
 //
-// Authentification, le cas echeant
+// Authentification
 //
 $auteur_session = '';
 if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
@@ -382,11 +378,13 @@ if (lire_meta("activer_statistiques") != "non") {
 //
 // Envoi du mail quoi de neuf
 //
-if ($db_ok) {
-	$majnouv = lire_meta('majnouv');
-	if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide($adresse_neuf = lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
 
+$majnouv = lire_meta('majnouv');
+if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide($adresse_neuf = lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
+	include_ecrire('inc_connect.php3');
+	if ($db_ok) {
 		// lock && indication du prochain envoi
+		include_ecrire('inc_meta.php3');
 		ecrire_meta('majnouv', time());
 		ecrire_metas();
 
@@ -405,6 +403,7 @@ if ($db_ok) {
 		if ($mail_nouveautes) {
 			include_ecrire('inc_mail.php3');
 			$nom_site = lire_meta('nom_site');
+			spip_log("envoi mail nouveautes");
 			envoyer_mail($adresse_neuf, "[$nom_site] Les nouveautes", $mail_nouveautes);
 		}
 	}
