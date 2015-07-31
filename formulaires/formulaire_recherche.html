@@ -1,9 +1,10 @@
 <div class="formulaire_spip formulaire_recherche">
+<a name="formulaire_recherche" id="formulaire_recherche"></a>
 
 <form action="[(#ENV{lien})]" method="get">
-[(#ENV{lien}|form_hidden)]
-
-<input type="text" class="forml" name="recherche" id="formulaire_recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>})]" />
-
+	[(#ENV{lien}|form_hidden)]
+	<label for="recherche"><:info_rechercher:></label>
+	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>})]" />
 </form>
+
 </div>
