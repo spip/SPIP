@@ -117,6 +117,8 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 				// on retombe sur la description donnee dans les fichiers spip
 				$desc = $fdesc;
 			}
+			else
+				$desc['exist'] = true;
 		}
 
 		$desc['table']= $nom_sql;
