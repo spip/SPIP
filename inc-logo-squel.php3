@@ -143,7 +143,7 @@ function calcul_balise_logo ($p) {
 	else if ($lien) {
 		$code_lien = "'".texte_script(trim($lien))."'";
 		while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $code_lien, $match)) {
-			list($c,$m) = calculer_champ(array(), $match[2], $p->id_boucle, $p->boucles, $p->id_mere);
+			$c = calculer_champ(array(), $match[2], $p->id_boucle, $p->boucles, $p->id_mere);
 			$code_lien = str_replace('#'.$match[2], "'.".$c.".'", $code_lien);
 		}
 		// supprimer les '' disgracieux
