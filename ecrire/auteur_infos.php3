@@ -221,7 +221,7 @@ debut_droite();
 
 if ($echec){
 	debut_cadre_relief();
-	echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="left">';
+	echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="left">';
 	echo "<font color='red'>$echec <p>Veuillez recommencer.</font>";
 	fin_cadre_relief();	
 	echo "<p>";
@@ -284,7 +284,7 @@ if (($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_i
 
 	if ($connect_id_auteur == $id_auteur) {
 		debut_cadre_enfonce();	
-		echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">';
+		echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">';
 		echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
 		<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</font></b>\n";
 		fin_cadre_enfonce();	

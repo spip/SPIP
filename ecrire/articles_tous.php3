@@ -26,7 +26,7 @@ if ($connect_statut == "0minirezo") {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='prepa' id='prepa'>";
 	}
-	echo " <label for='prepa'><img src='img_pack/puce-blanche.gif' alt='X' width='9' height='9' border='0'>";
+	echo " <label for='prepa'><img src='img_pack/puce-blanche.gif' alt='' width='9' height='9' border='0'>";
 	echo "  en cours de r&eacute;daction</label><BR>";
 }
 
@@ -37,7 +37,7 @@ if (ereg('prop', $aff_art)) {
 else {
 	echo "<input type='checkbox' name='aff_art[]' value='prop' id='prop'>";
 }
-echo " <label for='prop'><img src='img_pack/puce-orange.gif' alt='X' width='9' height='9' border='0'>";
+echo " <label for='prop'><img src='img_pack/puce-orange.gif' alt='' width='9' height='9' border='0'>";
 echo "  en attente de validation</label><BR>";
 
 if (ereg('publie', $aff_art)) {
@@ -46,7 +46,7 @@ if (ereg('publie', $aff_art)) {
 else {
 	echo "<input type='checkbox' name='aff_art[]' value='publie' id='publie'>";
 }
-echo " <label for='publie'><img src='img_pack/puce-verte.gif' alt='X' width='9' height='9' border='0'>";
+echo " <label for='publie'><img src='img_pack/puce-verte.gif' alt='' width='9' height='9' border='0'>";
 echo "  publi&eacute;s en ligne</label><BR>";
 
 if ($connect_statut == "0minirezo") {
@@ -56,7 +56,7 @@ if ($connect_statut == "0minirezo") {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='refuse' id='refuse'>";
 	}
-	echo " <label for='refuse'><img src='img_pack/puce-rouge.gif' alt='X' width='9' height='9' border='0'>";
+	echo " <label for='refuse'><img src='img_pack/puce-rouge.gif' alt='' width='9' height='9' border='0'>";
 	echo "  refus&eacute;s</label><BR>";
 
 	if (ereg('poubelle',$aff_art)) {
@@ -65,7 +65,7 @@ if ($connect_statut == "0minirezo") {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='poubelle' id='poubelle'>";
 	}
-	echo " <label for='poubelle'><img src='img_pack/puce-poubelle.gif' alt='X' width='9' height='9' border='0'>";
+	echo " <label for='poubelle'><img src='img_pack/puce-poubelle.gif' alt='' width='9' height='9' border='0'>";
 	echo "  &agrave; la poubelle</label>";
 }
 
@@ -120,7 +120,7 @@ function enfants($id_parent, $decalage = 0) {
 				echo "<TD WIDTH=$decalage><IMG SRC='img_pack/rien.gif' BORDER=0 HEIGHT=1 WIDTH=$decalage></TD><TD WIDTH='100%'>";
 			}
 			$bandeau = "<A HREF='$lien'>";
-			$bandeau .= "<img src='img_pack/triangle-bleu-bas.gif' alt='&gt;' width='14' height='14' border='0'></A>";
+			$bandeau .= "<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'></A>";
 			$bandeau .= " <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='white'>$titre</FONT></A> $sucrer";
 			$requete = "SELECT id_article, titre, id_rubrique, statut, date FROM spip_articles WHERE id_rubrique=$id_rubrique AND FIND_IN_SET(statut,'$aff_art') ORDER BY date DESC";
 			afficher_articles($bandeau, $requete, false, false, true, false);
@@ -137,7 +137,7 @@ function enfants($id_parent, $decalage = 0) {
 			echo "<TABLE CELLPADDING=3 CELLSPACING=1 BORDER=0 WIDTH=\"100%\">";
 			echo "<TR><TD BGCOLOR='$couleur_foncee' WIDTH=\"100%\"><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 
-			echo "<B><A HREF='$lien'><img src='img_pack/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'></A> <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='#FFFFFF'>$titre</FONT></A></B> $sucrer";
+			echo "<B><A HREF='$lien'><img src='img_pack/triangle-bleu.gif' alt='' width='14' height='14' border='0'></A> <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='#FFFFFF'>$titre</FONT></A></B> $sucrer";
 			echo "</FONT></TD></TR></TABLE>";
 			if ($decalage) {
 				echo "</TD></TR></TABLE>";

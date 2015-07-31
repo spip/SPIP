@@ -189,7 +189,7 @@ debut_cadre_relief('redacteurs-24.gif');
 echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH='100%' class='arial2'>\n";
 echo "<tr bgcolor='#DBE1C5'>";
 echo "<td width='50'>";
-	$img = "<img src='img_pack/bonhomme-noir.gif' alt='Statut' border='0'>";
+	$img = "<img src='img_pack/bonhomme-noir.gif' alt='' border='0'>";
 	if ($tri=='statut')
 		echo $img;
 	else

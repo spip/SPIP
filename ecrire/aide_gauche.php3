@@ -183,12 +183,12 @@ for ($i=0; $i<=count($texte); $i++) {
 		if ($aff == 1) {
 			$supp_rub="$larubrique";
 			
-			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu-bas.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
+			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
 			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide",$texte[$i]);
 		}
 		else {
 			$ajouter_rub="$larubrique";
-			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
+			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
 			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide",$texte[$i]);
 
 		}

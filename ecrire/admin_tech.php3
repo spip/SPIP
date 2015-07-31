@@ -49,7 +49,7 @@ echo "\n<FORM ACTION='export_all.php3' METHOD='get'>";
 
 echo "\n<p align='justify'>";
 
-echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">';
+echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">';
 echo "Cette option vous permet de sauvegarder
 le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.
 N'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient
