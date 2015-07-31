@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_site' => 'Gen pa oken sit sou ladr&egrave;s la',
 'aucune_breve' => 'Gen pa oken tinouv&egrave;l sou ladr&egrave;s la',
 'aucune_rubrique' => 'Gen pa oken ribrik sou ladr&egrave;s la',
+'autres' => '<NEW>Ot',
 'autres_breves' => 'L&ograve;t tinouv&egrave;l yo',
 'autres_groupes_mots_clefs' => 'L&ograve;t gwoup mokle yo',
 'autres_sites' => 'L&ograve;t sit yo',
@@ -28,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'L&egrave;s yon komant&egrave; sou sit la',
+'copie_document_impossible' => '<NEW>Pa ka kopye dokiman la',
 
 // D
 'date' => 'Dat',
@@ -36,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'D&egrave;nye atik yo',
 'derniers_commentaires' => 'D&egrave;nye komant&egrave; yo',
 'derniers_messages_forum' => 'D&egrave;nye mesaj yo ki te piblye nan fowom yo',
+'documents_interdits_forum' => '<NEW>Documents interdits dans le forum',
 
 // E
 'edition_mode_texte' => 'Ledisyon modt&egrave;ks pou',
@@ -45,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espas priv&eacute;',
 
 // F
+'formats_acceptes' => '<NEW>Formats accept&#233;s : @formats@.',
 'forum' => 'Fowom',
 
 // H
@@ -52,6 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // J
 'jours' => 'jou yo',
+
+// L
+'lien_connecter' => '<NEW>Se connecter',
 
 // M
 'meme_auteur' => 'M&egrave;m lot&egrave; ki ekri ank&ograve;',
@@ -95,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'Sit la  se sit ki te f&egrave; ak SPIP',
 'sites_web' => 'Sitw&egrave;b yo',
 'sous_rubriques' => 'Souribrik yo',
+'spam' => '<NEW>Spam',
 'suite' => 'swit',
 'sur_web' => 'Sou w&egrave;b',
 'syndiquer_rubrique' => 'Sindike ribrik la',
