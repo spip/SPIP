@@ -286,38 +286,26 @@ function boites_de_config_articles($id_article)
 	$nb_signatures = $nb_signatures['count'];
 	$visible = $nb_forums || $nb_signatures;
 
-	$res = '';
-
-	$res .=debut_cadre_relief("forum-interne-24.gif", true);
-	$res .="<div class='verdana1' style='text-align: center;'><b>";
-	if ($visible)
-		$res .=bouton_block_visible("forumpetition");
-	else
-		$res .=bouton_block_invisible("forumpetition");
-	$res .=_T('bouton_forum_petition') .aide('confforums');
-	$res .="</b></div>";
-	if ($visible)
-		$res .=debut_block_visible("forumpetition");
-	else
-		$res .=debut_block_invisible("forumpetition");
-
-	$res .="<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
-
-	if ($nb_forums) {
-		$res .="<br />\n"
-		.  icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
-	}
+	$invite = "<span class='verdana1'<b>"
+	. _T('bouton_forum_petition')
+	. aide('confforums')
+	. "</b></span>";
 
 	$f = charger_fonction('poster', 'inc');
 	$g = charger_fonction('petitionner', 'inc');
 
-	$res .= $f($id_article,"articles","id_article=$id_article")
-	.  '<br />'
-	.  $g($id_article,"articles","id_article=$id_article")
-	.  fin_block()
-	.  fin_cadre_relief(true);
+	if ($nb_forums) {
+		$masque = "<br />\n"
+		.  icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
+	} else 	$masque = '';
 
-	return $res;
+	$masque .= $f($id_article,"articles","id_article=$id_article")
+	. '<br />'
+	. $g($id_article,"articles","id_article=$id_article");
+
+	return debut_cadre_relief("forum-interne-24.gif", true)
+	. block_parfois_visible('forumpetition', $invite, $masque, 'text-align: center;', $visible)
+	. fin_cadre_relief(true);
 }
 
 // http://doc.spip.org/@boite_article_virtuel
@@ -326,18 +314,18 @@ function boite_article_virtuel($id_article, $virtuel)
 
 	$f = charger_fonction('virtualiser', 'inc');
 
-	return debut_cadre_relief("site-24.gif", true)
-	. "\n<div class='verdana1' style='text-align: center;'>"
-	. ($virtuel ? bouton_block_visible("redirection") : bouton_block_invisible("redirection"))
+	$masque = $f($id_article, false, $virtuel, "articles", "id_article=$id_article");
+
+	$invite = "\n<span class='verdana1'>"
 	. '<b>'
 	._T('bouton_redirection')
 	. '</b>'
 	. aide ("artvirt")
-	. "</div>"
-	. ($virtuel ? debut_block_visible("redirection") : debut_block_invisible("redirection"))
-	. $f($id_article, false, $virtuel, "articles", "id_article=$id_article")
-	. fin_block()
-	. fin_cadre_relief(true);
+	. "</span>";
+
+	$f = block_parfois_visible('redirection', $invite, $masque, 'text-align: center;', $virtuel);
+
+	return debut_cadre_relief("site-24.gif", true) . $f . fin_cadre_relief(true);
 }
 
 // http://doc.spip.org/@meme_rubrique_articles
