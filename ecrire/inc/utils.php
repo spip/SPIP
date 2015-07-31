@@ -58,15 +58,18 @@ function charger_fonction($nom, $dossier='exec', $continue=false) {
 	exit;
 }
 
-$GLOBALS['prefetch']['inc/autoriser']['fetch']='service_mini';
-$GLOBALS['prefetch']['inc/auth']['fetch']='service_mini';
-$GLOBALS['prefetch']['inc/charsets']['fetch']='service_mini';
-$GLOBALS['prefetch']['inc/filtres']['fetch']='service_mini';
+// definition des lots de fichier precharges en blocs pour reduire les find_in_path en usage courant
+// mecanisme desactivable par define('_PAS_DE_PRECHARGEMENT_PHP',1);
+// cas typique de service d'une page en cache
 $GLOBALS['prefetch']['inc/meta']['fetch']='service_mini';
 $GLOBALS['prefetch']['inc/session']['fetch']='service_mini';
 $GLOBALS['prefetch']['public/assembler']['fetch']='service_mini';
 $GLOBALS['prefetch']['public/cacher']['fetch']='service_mini';
+$GLOBALS['prefetch']['public/stats']['fetch']='service_mini';
 
+// cas typique de calcul d'un squelette
+$GLOBALS['prefetch']['inc/charsets']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/filtres']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['base/abstract_sql']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['base/auxiliaires']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['base/db_mysql']['fetch']='calcul_skel';
@@ -75,13 +78,12 @@ $GLOBALS['prefetch']['base/typedoc']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['inc/actions']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['inc/acces']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['inc/date']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/invalideur']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/forum']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['inc/texte']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['public/parametrer']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['public/styliser']['fetch']='calcul_skel';
 $GLOBALS['prefetch']['public/composer']['fetch']='calcul_skel';
-$GLOBALS['prefetch']['inc/documents']['fetch']='calcul_skel'; // ne passe pas dans le compacteur a cause des <<<
+$GLOBALS['prefetch']['public/interfaces']['fetch']='calcul_skel';
+$GLOBALS['prefetch']['inc/documents']['fetch']='calcul_skel';
 
 // inclusion anticipee par bloc pour optimisation des find_in_path
 // chaque fichier inclus est place dans une fonction ad-hoc pour ne pas etre execute
@@ -110,6 +112,7 @@ function include_prefetch($f){
 	$encours = true; // ne plus fetcher lors de ce hit la, on construit
 	$prologue = "";
 	$source = "";
+	include_spip('inc/filtres');
 	foreach($GLOBALS['prefetch'] as $fichier=>$pre)
 		if ($pre['fetch']==$fetch){
 			$s = include_spip($fichier,false);
@@ -118,13 +121,13 @@ function include_prefetch($f){
 				$fun = 'prefetch_'.str_replace("/","_",$fichier);
 				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fichier']='$s';\n";
 				$prologue .= "\$GLOBALS['prefetch']['$fichier']['fonction']='$fun';\n";
-				$contenu = "<"."?php\nfunction $fun(){\n\$GLOBALS['prefetch']['$fichier']['fetch']=false; ?".">" . $contenu . "<"."?php } ?".">";
+				$contenu = "<"."?php\nfunction $fun(){\n\$GLOBALS['prefetch']['$fichier']['fetch']=false; ?".">" 
+				  . compacte_php($contenu) . "<"."?php } ?".">";
 				$source .= $contenu;
 			}
 		}
 	$source = "<"."?php\n$prologue?".">".$source;
 	$source = preg_replace(',\?'.'>\s*<'.'\?php,ms','',$source); // remplacer les successions fermeture/ouverture des balises php
-	include_spip('inc/filtres');
 	ecrire_fichier($nom_fetch,$source); #compacte_php($source) si on a un compacteur qui marche ...
 	return true;
 }
@@ -134,7 +137,7 @@ function include_prefetch($f){
 // http://doc.spip.org/@include_spip
 function include_spip($f, $include = true) {
 	$s = "";
-	if (isset($GLOBALS['prefetch'][$f])){
+	if (isset($GLOBALS['prefetch'][$f]) AND !defined('_PAS_DE_PRECHARGEMENT_PHP')){
 		$include = ($include AND include_prefetch($f)); // si include est deja false, on ne prefetch pas
 		if (isset($GLOBALS['prefetch'][$f]['fichier'])) // mais si on sait ou est le fichier, on repond
 			$s = $GLOBALS['prefetch'][$f]['fichier'];
