@@ -439,7 +439,6 @@ if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0m
 
 
 if ($relief) {
-	echo "<p>";
 	debut_cadre_couleur_foncee("",false, "", _T('texte_en_cours_validation'));
 	
 	//echo "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')."</b></div><p>";

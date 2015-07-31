@@ -2192,10 +2192,10 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 //
 
 function afficher_menu_rubriques() {
-	global $spip_lang_rtl;
+	global $spip_lang_rtl, $spip_ecran;
 	$date_maj = lire_meta("date_calcul_rubriques");
 
-	echo "<script type='text/javascript' src='js_menu_rubriques.php?date=$date_maj&dir=$spip_lang_rtl'></script>";
+	echo "<script type='text/javascript' src='js_menu_rubriques.php?date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl'></script>";
 }
 
 
@@ -2571,7 +2571,7 @@ else {
 
 	// GADGET Menu rubriques
 	echo "<div style='position: relative; z-index: 1000;'>";
-	echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
+	echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>";
 	echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
 	afficher_menu_rubriques();
 	echo "</div>";
