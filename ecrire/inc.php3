@@ -12,7 +12,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
-include_ecrire(_FILE_CONNECT);
 include_ecrire ("inc_session.php3");
 include_ecrire('inc_cookie.php');
 

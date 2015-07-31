@@ -59,10 +59,12 @@ function spip_cron($taches = array()) {
 	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
 		return;
 
+	include_ecrire("inc_meta.php3");
+	// force un spip_query
+	lire_metas();
+
 	if (!$taches)
 		$taches = taches_generales();
-
-	include_ecrire("inc_meta.php3");
 
 	// Quelle est la tache la plus urgente ?
 	$tache = '';
@@ -86,16 +88,11 @@ function spip_cron($taches = array()) {
 	}
 	if (!$tache) return;
 
-	// Connexion DB
-	include_ecrire(_FILE_CONNECT);
-	if (!$GLOBALS['db_ok']) {
-		spip_log('pas de connexion DB pour taches de fond (cron)');
-		return;
-	}
-
 	// Interdire des taches paralleles, de maniere a eviter toute concurrence
 	// entre deux SPIP partageant la meme base, ainsi que toute interaction
 	// bizarre entre des taches differentes
+	// Ne rien lancer non plus si serveur naze evidemment
+
 	if (!spip_get_lock('cron')) {
 		spip_log("tache $tache: pas de lock cron");
 		return;
