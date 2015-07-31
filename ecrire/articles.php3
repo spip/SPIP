@@ -1514,12 +1514,12 @@ else {
 	$revision_nbsp = $activer_revision_nbsp;
 
 	if (strlen($chapo) > 0) {
-		echo "<div $dir_lang><b>";
+		echo "<div $dir_lang style='font-size: small;'><b>";
 		echo propre($chapo);
 		echo "</b></div>\n\n";
 	}
 
-	echo "<div $dir_lang>";
+	echo "<div $dir_lang style='font-size: small;'>";
 	echo propre($texte);
 	echo "</div>";
 
