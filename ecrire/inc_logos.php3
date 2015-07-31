@@ -7,23 +7,6 @@ define("_ECRIRE_INC_LOGOS", "1");
 global $flag_ecrire;
 define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
-function get_image($racine) {
-	foreach (array('gif','jpg','png') as $fmt) {
-		$fichier = "$racine.".$fmt;
-		$fid = _DIR_IMG . $fichier;
-		if (@file_exists($fid)) {
-			$limage = @getimagesize( _DIR_IMG . $fichier);
-
-			// contrer le cache du navigateur
-			if ($fid = @filesize($fid) . @filemtime($fid))
-				$fid = "&".md5($fid);
-			return array($fichier, 
-				     (!$limage ? '' : resize_logo($limage)),
-				     $fid);
-		}
-	}
-	return '';
-}
 
 function decrire_logo($racine) {
 	global $connect_id_auteur;
@@ -46,7 +29,8 @@ function decrire_logo($racine) {
 				     calculer_action_auteur ("reduire $w $h") .
 				     "&hash_id_auteur=$connect_id_auteur" .
 				     (!$contre ? '' : ("&".md5($contre))) .
-				     "'$taille alt='' />");
+				     "'$taille alt='' />",
+				     $x, $y);
 			  }
 	}
 	return '';
@@ -120,7 +104,7 @@ function afficher_logo($racine, $titre, $logo) {
 		spip_log("$fichier, $taille, $img");
 		$hash = calculer_action_auteur("supp_image $fichier");
 
-		echo "<p><center>$img";
+		echo "<p><center><div>$img</div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";

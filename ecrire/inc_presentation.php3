@@ -634,12 +634,13 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
 			
 			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
-				$logo = get_image("arton$id_article");
+				include_ecrire("inc_logos.php3");
+				$logo = decrire_logo("arton$id_article");
 				if ($logo) {
 					$fichier = $logo[0];
 					$taille = $logo[1];
-					$taille_x = $taille[0];
-					$taille_y = $taille[1];
+					$taille_x = $logo[3];
+					$taille_y = $logo[4];
 					$taille = image_ratio($taille_x, $taille_y, 26, 18);
 					$w = $taille[0];
 					$h = $taille[1];
@@ -1206,12 +1207,11 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
 				include_ecrire("inc_logos.php3");
-				$logo_auteur = get_image("auton$id_auteur");
+				$logo_auteur = decrire_logo("auton$id_auteur");
 				if ($logo_auteur) {
 					$fichier = $logo_auteur[0];
-					$taille = $logo_auteur[1];
-					$taille_x = $taille[0];
-					$taille_y = $taille[1];
+					$taille_x = $logo_auteur[3];
+					$taille_y = $logo_auteur[4];
 					$taille = image_ratio($taille_x, $taille_y, 48, 48);
 					$w = $taille[0];
 					$h = $taille[1];
