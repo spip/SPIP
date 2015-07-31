@@ -403,11 +403,13 @@ function table_objet($type,$serveur='') {
 	if (isset($surnoms[$type]))
 		return $surnoms[$type];
 
-	$trouver_table = charger_fonction('trouver_table', 'base');
-	if ($desc = $trouver_table(rtrim($type,'s')."s",$serveur))
-		return $desc['id_table'];
-	elseif ($desc = $trouver_table($type,$serveur))
-		return $desc['id_table'];
+	if ($serveur!==false){
+		$trouver_table = charger_fonction('trouver_table', 'base');
+		if ($desc = $trouver_table(rtrim($type,'s')."s",$serveur))
+			return $desc['id_table'];
+		elseif ($desc = $trouver_table($type,$serveur))
+			return $desc['id_table'];
+	}
 
 	spip_log( 'table_objet('.$type.') calculee sans verification', _LOG_AVERTISSEMENT);
 	return rtrim($type,'s')."s"; # cas historique ne devant plus servir
@@ -465,8 +467,8 @@ function objet_type($table_objet, $serveur=''){
 	// si le type redonne bien la table c'est bon
 	// oui si table_objet ressemblait deja a un type
 	if ( $type==$table_objet
-		OR (table_objet($type)==$table_objet)
-	  OR (table_objet_sql($type)==$table_objet))
+		OR (table_objet($type,$serveur)==$table_objet)
+	  OR (table_objet_sql($type,$serveur)==$table_objet))
 	  return $type;
 
 	// si on ne veut pas chercher en base
