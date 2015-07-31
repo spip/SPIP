@@ -152,6 +152,8 @@ fin_raccourcis();
 
 debut_droite();
 
+
+
 //
 // Restauration d'une archive
 //

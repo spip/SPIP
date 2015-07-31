@@ -45,18 +45,14 @@ fin_boite_info();
 creer_colonne_droite();
 
 debut_cadre_relief("messagerie-24.gif");
-	echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-	echo "<font color='#169249' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>\n";
-	echo "<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-	echo "<font color='#044476' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>\n";
-	if ($connect_statut == "0minirezo") {
-		echo "<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-		echo "<font color='#ff9900' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>\n";
-	}
+		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
+		icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif");
+		
+		if ($connect_statut == "0minirezo") {
+			icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif");
+		}
 fin_cadre_relief();
 
-
-afficher_taches();
 
 
 afficher_ical($connect_id_auteur);
@@ -70,7 +66,7 @@ debut_droite("messagerie");
 $messages_vus = '';
 
 
-$query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' AND (date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
+$query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
 afficher_messages(_T('infos_vos_pense_bete'), $query_message, false, true);
 
 
@@ -81,7 +77,8 @@ afficher_messages(_T('info_nouveaux_message'), $query_message, true, true);
 
 
 $query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-	"WHERE lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message";
+	"WHERE lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message ".
+	"AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
 afficher_messages(_T('info_discussion_cours'), $query_message, true, false);
 
 
@@ -91,8 +88,9 @@ afficher_messages(_T('info_message_en_redaction'), $query_message, true, false, 
 
 
 $query = "SELECT auteurs.id_auteur, auteurs.nom, COUNT(*) AS total FROM spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien ".
-	"WHERE (lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message) ".
-	"AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur) GROUP BY auteurs.id_auteur ORDER BY total DESC LIMIT 0,10";
+	"WHERE (lien.id_auteur = $connect_id_auteur AND lien.id_message = messages.id_message AND messages.statut = 'publie' AND (messages.rv != 'oui' OR messages.date_fin > NOW() )) ".
+	"AND (lien2.id_auteur = lien2.id_auteur AND lien2.id_message = messages.id_message AND lien2.id_auteur != $connect_id_auteur AND auteurs.id_auteur = lien2.id_auteur) ".
+	"GROUP BY auteurs.id_auteur ORDER BY total DESC LIMIT 0,10";
 
 $result = spip_query($query);
 if (spip_num_rows($result) > 0) {
@@ -117,21 +115,18 @@ if (spip_num_rows($result) > 0) {
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'>".bouton_imessage($id_auteur, $row)." <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom</a> ($total)</div></div>";
+		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='img_pack/redac-12.gif' border='0'> <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom</a> ($total)</div></div>";
 		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' style='background-color: #eeeeee;'>";
 	}
 	echo "</td></tr></table>";
 	echo "</div>";
 }
 
-
-
-
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'";
 afficher_messages(_T('info_pense_bete_ancien'), $query_message, false, false, false);
 
 
-$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich' AND rv = 'oui'";
+$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
 afficher_messages(_T('info_tous_redacteurs'), $query_message, false, false, false);
 
 fin_page();

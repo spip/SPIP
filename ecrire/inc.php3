@@ -17,6 +17,7 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 include_ecrire("inc_rubriques.php3");
 
+
 if (!@file_exists("data/inc_meta_cache.php3")) ecrire_metas();
 
 
