@@ -798,7 +798,8 @@ een kleur geeft hun status aan :',
 
 	// S
 	'sans_heure' => 'zonder huur',
-	'statut_admin_restreint' => '(beperkte toegang)',
+	'statut_admin_restreint' => '(beperkte toegang)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # MODIF

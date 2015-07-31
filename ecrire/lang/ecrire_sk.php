@@ -809,7 +809,8 @@ a stav ich spracovania je označený farbou:',
 
 	// S
 	'sans_heure' => 'neurčený čas',
-	'statut_admin_restreint' => '(administrátor s obmedzeniami)',
+	'statut_admin_restreint' => '(administrátor s obmedzeniami)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Funkcia CRON @function@ (ihneď)',

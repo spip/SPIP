@@ -791,7 +791,8 @@ in einer Farbe, die den Status anzeigt :',
 
 	// S
 	'sans_heure' => 'Ohne Zeit',
-	'statut_admin_restreint' => '(Rubrik-Admin)',
+	'statut_admin_restreint' => '(Rubrik-Admin)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)', # MODIF

@@ -124,7 +124,7 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'date_mot_heures' => 'horas',
 
 	// E
-	'ecran_securite' => ' + écran de segurança @version@',
+	'ecran_securite' => ' + ecrã de segurança @version@',
 	'email' => 'email',
 	'email_2' => 'email :',
 	'en_savoir_plus' => 'Para saber mais', # MODIF
@@ -133,28 +133,27 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'entree_adresse_email_2' => 'Endereço electrónico', # MODIF
 	'entree_base_donnee_1' => 'Endereço da base de dados',
 	'entree_base_donnee_2' => '(Muitas vezes, este endereço corresponde ao do seu sítio, outras vezes, corresponde à menção «localhost», às vezes, fica totalmente vazio.)',
-	'entree_biographie' => 'Curta biografia, em poucas palavras',
+	'entree_biographie' => 'Curta biografia',
 	'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso :', # MODIF
 	'entree_cle_pgp' => 'A sua chave PGP',
 	'entree_cle_pgp_2' => 'Chave PGP', # MODIF
 	'entree_contenu_rubrique' => '(Conteúdo da rubrica em poucas palavras.)',
 	'entree_identifiants_connexion' => 'Os seus identificadores de ligação',
 	'entree_identifiants_connexion_2' => 'Identifcadores de conexão', # MODIF
-	'entree_informations_connexion_ldap' => 'Favor pôr neste formulário as informações de ligação ao seu anuário LDAP.
-Essas informações devem poder ser fornecidas pelo administrador do sistema,
-ou da rede',
+	'entree_informations_connexion_ldap' => 'Por favor preencha este formulário com as informações de ligação ao seu anuário LDAP.
+Essas informações devem poder ser fornecidas pelo administrador do sistema ou da rede',
 	'entree_infos_perso' => 'Quem é você?',
 	'entree_infos_perso_2' => 'Quem é o autor?',
 	'entree_interieur_rubrique' => 'Dentro da rubrica :',
 	'entree_liens_sites' => '<b>Laço hipertexto</b> (referência, sítio a visitar ...)', # MODIF
 	'entree_login' => 'O seu login',
 	'entree_login_connexion_1' => 'O login de ligação',
-	'entree_login_connexion_2' => '(Corresponde às vezes ao seu login de acesso ao FTP; deixado vazio outrs vezes)',
+	'entree_login_connexion_2' => '(Corresponde às vezes ao seu login de acesso ao FTP; outras vezes deixado vazio.)',
 	'entree_login_ldap' => 'Login LDAP inicial',
 	'entree_mot_passe' => 'A sua palavra-passe',
 	'entree_mot_passe_1' => 'A palavra-passe de ligação',
 	'entree_mot_passe_2' => '(Corresponde, às vezes, à sua palavra-passe para o FTP; outras vezes, vazio)',
-	'entree_nom_fichier' => 'Favor introduzir o nome do ficheiro @texte_compresse@:',
+	'entree_nom_fichier' => 'Por favor introduza o nome do ficheiro @texte_compresse@:',
 	'entree_nom_pseudo' => 'O seu nome ou o seu pseudónimo',
 	'entree_nom_pseudo_1' => '(O seu nome ou o seu pseudónimo)',
 	'entree_nom_pseudo_2' => 'Nome ou pseudónimo', # MODIF
@@ -183,12 +182,12 @@ ou da rede',
 	'htaccess_inoperant' => 'htaccess inoperacional', # MODIF
 
 	// I
-	'ical_info1' => 'Esta página apresenta muitos métodos para permanecer em contacto com a vida deste sítio.',
+	'ical_info1' => 'Esta página apresenta muitos modos de permanecer em contacto com as actividades deste sítio.',
 	'ical_info2' => 'Para mais informações sobre estas técnicas, consultar  <a href="@spipnet@">a documentação de SPIP</a>.', # MODIF
-	'ical_info_calendrier' => 'Dois calendários estão à sua disposição. O primeiro é uma planta do sítio anunciando todos os artigos publicados. O segundo contém os anúncios editoriais assim como as últimas mensagens privadas : está reservado para si graças a uma chave pessoal, que pode modificar a qualquer momento com a renovação da sua palavra-passe.',
-	'ical_methode_http' => 'Telecarregamento',
+	'ical_info_calendrier' => 'estão disponíveis dois calendários. O primeiro é uma planta do sítio anunciando todos os artigos publicados. O segundo é pessoal e contém os anúncios editoriais assim como as últimas mensagens privadas : está reservado para si graças a uma chave pessoal, que pode modificar a qualquer momento com a renovação da sua palavra-passe.',
+	'ical_methode_http' => 'Download',
 	'ical_methode_webcal' => 'Sincronização (webcal://)',
-	'ical_texte_js' => 'Uma linha de javascript permite-lhe exibir, muito simplesmente, em qualquer sítio que lhe pertença, os artigos recentes publicados neste sítio.',
+	'ical_texte_js' => 'Uma linha de javascript permite-lhe facilmente exibir, em qualquer sítio que lhe pertença, os artigos recentes publicados neste sítio.',
 	'ical_texte_prive' => 'Este calendário, de uso estritamente pessoal, informa sobre a actividade editorial privada deste sítio (tarefas e encontros pessoais, artigos e notícias propostos...).',
 	'ical_texte_public' => 'Este calendário permite acompanhar a actividade pública deste sítio (artigos e notícias publicados).',
 	'ical_texte_rss' => 'Pode vincular as novidades deste sítio em qualquer leitor de ficheiros de formato XML/RSS (Rich Site Summary). É também o formato que permite a SPIP ler as novidades publicadas em outros sítios que utilizam um formato de troca compatível.',
@@ -816,7 +815,8 @@ numa cor que indica o seu estado:',
 
 	// S
 	'sans_heure' => 'sans heure', # NEW
-	'statut_admin_restreint' => '(admin restrito)',
+	'statut_admin_restreint' => '(admin restrito)', # MODIF
+	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
