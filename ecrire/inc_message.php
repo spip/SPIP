@@ -13,10 +13,80 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_mots.php3");
+
+function message_dist()
+{
+global 
+$ajout_forum,
+$annee,
+$annee_fin,
+$change_statut,
+$changer_rv,
+$connect_id_auteur,
+$heures,
+$heures_fin,
+$id_message,
+$jour,
+$jour_fin,
+$minutes,
+$minutes_fin,
+$modifier_message,
+$mois,
+$mois_fin,
+$rv,
+$supp_dest,
+$texte,
+$titre;
+
+$id_message = intval($id_message);
+$supp_dest = intval($supp_dest);
+
+if (!spip_num_rows(spip_query("
+SELECT id_auteur FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"))) {
+
+	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
+	if ($row['type'] != "affich"){
+		debut_page(_T('info_acces_refuse'));
+		debut_gauche();
+		debut_droite();
+		echo "<b>"._T('avis_non_acces_message')."</b><p>";
+		fin_page();
+		exit;
+	}
+}
+
+if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
+	spip_query("UPDATE spip_auteurs_messages SET vu='non' WHERE id_message='$id_message'");
+}
+
+if ($modifier_message == "oui") {
+	$titre = addslashes($titre);
+	$texte = addslashes($texte);
+	spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");
+}
+
+if ($changer_rv) {
+  spip_query("UPDATE spip_messages SET rv='" . addslashes($rv) . "' WHERE id_message='$id_message'");
+}
+
+if ($jour)
+  change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee, $heures_fin,$minutes_fin,$mois_fin, $jour_fin, $annee_fin);
+
+if ($change_statut) {
+  spip_query("UPDATE spip_messages SET statut='" . addslashes($change_statut) . "' WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
+}
+
+if ($supp_dest) {
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
+}
+
+affiche_message_dist($id_message);
+}
+
 
 
 function http_afficher_rendez_vous($date_heure, $date_fin)
