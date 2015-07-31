@@ -572,7 +572,7 @@ class Link {
 			while (list($name, $table) = each($this->vars)) {
 				reset($table);
 				while (list(, $value) = each($table)) {
-					$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($texte));
+					$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
 					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"$value\">\n";
 				}
 			}
