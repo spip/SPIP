@@ -1431,16 +1431,11 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			\$$nom_var = '';
 		}
 		else {
-			if (!\$rech = attribut_html(interdire_scripts(\$GLOBALS['recherche']))) {
-				\$rech = _T('info_rechercher');
-				\$focus_recherche = true;
-			} else
-				\$focus_recherche = false;
+			\$rech = _T('info_rechercher');
 			\$$nom_var = \"\n<a name='formulaire_recherche'></a>
 				<form action='$lien' method='get' name='form_rech'>
 				<input type='text' id='formulaire_recherche' name='recherche' value=\\\"\$rech\\\" size='20' class='formrecherche'\";
-			if (\$focus_recherche)
-				\$$nom_var .= \"
+			\$$nom_var .= \"
 				onFocus='if(!focus_r) { document.form_rech.recherche.value = \".chr(34).chr(34).\"; focus_r = 1; }'
 				onBlur='if (document.form_rech.recherche.value == \".chr(34).chr(34).\") { document.form_rech.recherche.value = \".chr(34).\"\"._T('info_rechercher').\"\".chr(34).\"; focus_r = 0; }'\";
 			\$$nom_var .= \"></form>\";
