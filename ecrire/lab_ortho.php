@@ -79,7 +79,7 @@ function lire_miroirs_ortho() {
 		}
 	}
 	lire_metas();
-	srand(time());
+	mt_srand(time());
 }
 
 // Sauvegarder les infos de langues pour le miroir
@@ -139,7 +139,7 @@ function choisir_miroirs_ortho($lang) {
 	$liste = chercher_miroirs_ortho($lang);
 	if (!count($liste)) return false;
 	foreach ($liste as $url) {
-		$miroirs[md5(rand().$url)] = $url;
+		$miroirs[md5(mt_rand().$url.rand())] = $url;
 	}
 	ksort($miroirs);
 	return $miroirs;
@@ -403,12 +403,8 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	}
 	else {
 		// Ici bidouilles si PCRE en mode UTF-8 ne fonctionne pas correctement ...
-		// Guillemets francais (plage iso-latin)
-		$trans = array(chr(194).chr(171) => ' ', chr(194).chr(187) => ' ');
-		$texte = strtr($texte, $trans);
-		// Saloperies non-conformes
-		$trans = array(chr(194).chr(133) => ' ', chr(194).chr(150) => ' ', chr(194).chr(151) => ' ');
-		$texte = strtr($texte, $trans);
+		// Caracteres non-alphanumeriques de la plage latin-1 + saloperies non-conformes
+		$texte = preg_replace(',\xC2[\x80-\xBF],', ' ', $texte);
 		// Poncutation etendue (unicode)
 		$texte = preg_replace(",".plage_punct_unicode().",", ' ', $texte);
 		// Caracteres ASCII non-alphanumeriques
@@ -450,7 +446,7 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 		// POST de la requete et recuperation du resultat XML
 		$urls = choisir_miroirs_ortho($lang);
 		if (!$urls) return false;
-		$ok = '';
+		unset($ok);
 		$erreur = false;
 		foreach ($urls as $url) {
 			$xml = post_ortho($url, $texte_envoi, $lang);
@@ -458,13 +454,14 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 				$xml = $r[1];
 				if (preg_match(',<erreur>.*<code>(.*)</code>.*</erreur>,s', $xml, $r)) 
 					$erreur = $r[1];
-				if (preg_match(',<ok>(.*)</ok>,s', $xml, $r))
+				if (preg_match(',<ok>(.*)</ok>,s', $xml, $r)) {
 					$ok = $r[1];
-				if ($ok) break;
+					break;
+				}
 			}
 			reset_miroir($url);
 		}
-		if (!$ok) return $erreur;
+		if (!isset($ok)) return $erreur;
 
 		// Remplir le tableau des resultats (mots mal orthographies)
 		if ($trans_rev) {
