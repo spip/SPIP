@@ -776,6 +776,7 @@ function balise_HTTP_dist($p) {
   $code = "";
   foreach($a as $v) $code .= 'header("' . $v[0]->texte . '");';
   $p->code="('<'.'?php $code  ?' . '>')";
+  $p->interdire_scripts = false;
   return $p;
 }
 
