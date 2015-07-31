@@ -179,7 +179,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 // D
 'date_aujourdhui' => 'dzi&#347;',
 'date_avant_jc' => 'P.N.E.',
-'date_dans' => 'w @terminie@',
+'date_dans' => 'w @delai@',
 'date_de_mois_1' => '@j@ stycznia',
 'date_de_mois_10' => '@j@ pa&#378;dziernika',
 'date_de_mois_11' => '@j@ listopada',
