@@ -12,10 +12,33 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function description_table($nom){
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+
+	$nom_table = $nom;
+	if (in_array($nom, $table_des_tables))
+	   $nom_table = 'spip_' . $nom;
+
+	include_spip('base/serial');
+	if (isset($tables_principales[$nom_table]))
+		return array($nom_table, $tables_principales[$nom_table]);
+
+	include_spip('base/auxiliaires');
+	$nom_table = 'spip_' . $nom;
+	if (isset($tables_auxiliaires[$nom_table]))
+		return array($nom_table, $tables_auxiliaires[$nom_table]);
+
+	if ($desc = spip_abstract_showtable($nom, '', true))
+	  if (isset($desc['field'])) {
+	    return array($nom, $desc);
+	  }
+	return array($nom,array());
+}
 
 // pour le support des vieux dump
 function inc_import_1_2_dist($f, $gz=false) {
 	global $import_ok, $pos, $abs_pos;
+	static $field_desc = array ();
 
 	// detruire les tables a restaurer
 	if (!$abs_pos) import_init_tables();
@@ -46,6 +69,17 @@ function inc_import_1_2_dist($f, $gz=false) {
 	$id = "id_$type";
 	$id_objet = 0;
 
+	$table = isset($tables[$type]) ? $tables[$type] : $type;
+	if (!isset($field_desc[$table])){
+		// recuperer la description de la table pour connaitre ses champs valides
+		list($nom,$desc) = description_table($table);
+		if (isset($desc['field']))
+			$field_desc[$table] = $desc['field'];
+		else
+			$field_desc[$table] = NULL;
+	}
+	$fields = $field_desc[$table];
+
 	// Lire les champs de l'objet
 	for (;;) {
 		$b = '';
@@ -69,17 +103,14 @@ function inc_import_1_2_dist($f, $gz=false) {
 					$GLOBALS['erreur_restauration'] = true;
 				}
 			}
-			else {
-				$cols[] = $col;
-				$values[] = spip_abstract_quote($value);
+			else if ($fields==NULL or isset($fields[$col])) {
+				$values[$col] = spip_abstract_quote($value);
 				if ($col == $id) $id_objet = $value;
 			}
 		}
 	}
 
-	$table = isset($tables[$type]) ? $tables[$type] : $type;
-	
-	if (!spip_query("REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')')) {
+	if (!spip_query("REPLACE $table (" . join(',', array_keys($values)) . ') VALUES (' . join(',', $values) . ')')) {
 		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
