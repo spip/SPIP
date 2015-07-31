@@ -9,6 +9,7 @@ include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
 
+
 $taille_preview = lire_meta("taille_preview");
 if ($taille_preview < 10) $taille_preview = 120;
 
@@ -280,7 +281,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 }
 
 
-
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 // par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
 if (!$image_name AND $image2) {
@@ -295,15 +295,15 @@ else {
 //
 // ajouter un document
 //
-if ($ajout_doc == 'oui') {
 
+if ($ajout_doc == 'oui') {
 	if (eregi(".zip$",$image_name) AND !$action_zip){
 		// Pretraitement des fichiers ZIP
 		// Recopier le fichier
 
 		creer_repertoire('IMG', "tmp");
 		creer_repertoire('IMG', "tmp_zip");
-
+		
 		$dest = 'IMG/tmp_zip/';
 		$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($image_name)))));
 		$dest .= ".zip";

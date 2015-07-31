@@ -1891,49 +1891,13 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 // Debut du corps de la page
 //
 
-function bandeau_rubrique ($id_rubrique, $titre_rubrique, $z = 1) {
-	global $zdecal;
-	global $spip_ecran, $spip_display;
-	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+function afficher_menu_rubriques() {
+	global $spip_lang_rtl;
+	$date_maj = lire_meta("date_calcul_rubriques");
 
-	// Calcul du nombre max de sous-menus	
-	$zdecal = $zdecal + 1;
-	if ($spip_ecran == "large") $zmax = 8;
-	else $zmax= 6;
-	
-	// Limiter volontairement le nombre de sous-menus 
-	$zmax = 3;
-	
-	
-	if ($zindex < 1) $zindex = 1;
-	if ($zdecal == 1) $image = "secteur-12.gif";
-	else $image = "rubrique-12.gif";
-	
-	
-	
-	$result_rub = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=$id_rubrique ORDER BY titre");
-
-	$i = spip_num_rows($result_rub);
-	if ($i > 0 AND $zdecal < $zmax) {
-//		echo "<div style='position: relative; z-index: $z;' onMouseOver=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'visible';\" onMouseOut=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'hidden';\">\n";
-		echo "<div style='position: relative; z-index: $z;' onMouseOver=\"setvisibility('bandeau_rub$id_rubrique', 'visible');\" onMouseOut=\"setvisibility('bandeau_rub$id_rubrique', 'hidden');\">\n";
-		echo "<div style='background: url(img_pack/triangle-droite$spip_lang_rtl.gif) $spip_lang_right center no-repeat;'><a href='naviguer.php3?coll=$id_rubrique' class='bandeau_rub' style='background-image: url(img_pack/$image);'>$titre_rubrique</a></div>\n";
-		echo "<div class='bandeau_rub' style='z-index: ".($z+1).";' id='bandeau_rub$id_rubrique'>";
-		while ($row_rub = spip_fetch_array($result_rub)) {
-			$id_rub = $row_rub["id_rubrique"];
-			$titre_rub = supprimer_numero(typo($row_rub["titre"]));
-			//echo "<a href='naviguer.php3?coll=$id_rub' class='bandeau_rub'>$titre_rub</a>";
-			bandeau_rubrique ($id_rub, $titre_rub, ($z+$i));
-			$i = $i - 1;
-		}
-		echo "</div>";
-		echo "</div></n>";
-	} else {
-		echo "<div><a href='naviguer.php3?coll=$id_rubrique' class='bandeau_rub' style='background-image: url(img_pack/$image); padding-$spip_lang_right: 2px;'>$titre_rubrique</a></div>";
-	}
-	$zdecal = $zdecal - 1;
-
+	echo '<script type="text/javascript" src="js_menu_rubriques.php?'.$date_maj.'&dir='.$spip_lang_rtl.'"></script>';
 }
+
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
 	global $couleurs_spip;
@@ -2297,7 +2261,7 @@ else {
 		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
 		echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
 		
-
+/*
 		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 		$result = spip_query($query);
 		
@@ -2327,9 +2291,13 @@ else {
 			}
 			
 		}
+		*/
 
 
 		// Mettre en attente l'affichage du menu de navigation (trop lourd)
+		
+		afficher_menu_rubriques();
+		
 		/*
 		$result_racine = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY titre");
 		$i = spip_num_rows($result_racine);
@@ -2347,6 +2315,7 @@ else {
 			echo "</div>";
 		}
 		*/
+		
 		
 		echo "</div>";
 	
