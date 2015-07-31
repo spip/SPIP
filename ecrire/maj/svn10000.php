@@ -140,6 +140,7 @@ function maj_12008 () {
 				$t['id_objet'] = $t["id_$l"];
 				$t['objet'] = $l;
 				unset($t["id_$l"]);
+				unset($t['maj']);
 				$tampon[] = $t;
 				if (count($tampon)>10000) {
 					sql_insertq_multi('spip_documents_liens',$tampon);
