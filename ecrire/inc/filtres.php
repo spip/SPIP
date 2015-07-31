@@ -563,6 +563,7 @@ function recup_date($numdate){
 
 // une date pour l'interface : utilise date_relative si le decalage
 // avec time() est de moins de douze heures, sinon la date complete
+// http://doc.spip.org/@date_interface
 function date_interface($date, $decalage_maxi = 43200/* 12*3600 */) {
 	return sinon(
 		date_relative($date, $decalage_maxi),

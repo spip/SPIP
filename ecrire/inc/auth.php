@@ -40,6 +40,7 @@ function acces_mots() {
 	return $connect_toutes_rubriques;
 }
 
+// http://doc.spip.org/@acces_article
 function acces_article($id_article)
 {
 	global $connect_id_auteur;
