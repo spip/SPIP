@@ -108,7 +108,8 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	$nombre_articles = sql_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur =".$GLOBALS['connect_id_auteur']." AND art.id_article = lien.id_article");
+	$nombre_articles = sql_fetsel('id_article', 'spip_auteurs_articles', "id_auteur=".$GLOBALS['connect_id_auteur']);
+
 	if ($nombre_articles > 0) {
 		$sousmenu['articles_page']=
 		  new Bouton('article-24.gif', 'icone_tous_articles');
@@ -179,7 +180,7 @@ function definir_barre_boutons() {
 	// sous menu statistiques
 	if (isset($boutons_admin['statistiques_visites'])) {
 		$sousmenu=array(
-			//'espacement' => null,// les espacements debloquent si on a des icones sur 2 lignes
+			'espacement' => null,
 			'statistiques_repartition' =>
 				new Bouton("rubrique-24.gif", "icone_repartition_visites")
 		);
@@ -200,7 +201,7 @@ function definir_barre_boutons() {
 	if (autoriser('configurer', 'lang')) {
 		$sousmenu['config_lang'] =
 			new Bouton("langues-24.gif", "icone_gestion_langues");
-		//$sousmenu['espacement'] = null; // les espacements debloquent si on a des icones sur 2 lignes
+		$sousmenu['espacement'] = null;
 	}
 
 	if (autoriser('sauvegarder')) {
@@ -552,7 +553,7 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 				$largitem = 0;
 				if($souspage=='espacement') {
 					if ($width>0){
-						$res .= "<li class='separateur' style='width:20px;'></li>\n";
+						$res .= "<li class='separateur'></li>\n";
 					}
 				} else {
 				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle),
