@@ -366,6 +366,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
  * info_1_objet
  * info_nb_objets
  *
+ * texte_logo_objet
+ *
  * principale
  * champs_contenu : utlise pour generer l'affichage par defaut du contenu
  * editable
@@ -472,6 +474,8 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['tables_jointures'] = array_merge($infos['tables_jointures'],$GLOBALS['tables_jointures'][$table_sql]);
 	
 
+	if (!isset($infos['champs_editables']))
+		$infos['champs_editables'] = array();
 	if (!isset($infos['champs_versionnes']))
 		$infos['champs_versionnes'] = array();
 	if (!isset($infos['rechercher_champs']))
