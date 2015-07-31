@@ -52,7 +52,6 @@ function action_editer_message_post_supprimer($id_message) {
 
 // http://doc.spip.org/@action_editer_message_post_vu
 function action_editer_message_post_vu($id_message, $id_auteur) {
-	spip_log("efface $id_message $id_auteur");
 	sql_updateq("spip_auteurs_messages", array("vu" => 'oui'), "id_message=$id_message AND id_auteur=$id_auteur");
 
 }
@@ -148,7 +147,7 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 			 'vu' =>'oui'));
 		if ($dest) {
 			sql_insertq('spip_auteurs_messages',
-				    array('id_auteur' => $id_auteur,
+				    array('id_auteur' => $dest,
 					  'id_message' => $id_message,
 					  'vu' =>'non'));
 		}
