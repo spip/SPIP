@@ -1357,6 +1357,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	}
 	$compteur_survol++;
 
+	echo "<div align='left'>";
 	if ($spip_display == 1) {
 		echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
 		echo "<tr>";
@@ -1382,7 +1383,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	echo "</a>";
 	echo "</td></tr>";
 
-	echo "</table>\n";
+	echo "</table></div>\n";
 }
 
 
