@@ -512,23 +512,24 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	if ($raz) unset($restreint[$id_auteur]);
 	elseif (isset($restreint[$id_auteur])) return $restreint[$id_auteur];
 
-	$where = "id_auteur=$id_auteur AND id_objet!=0 AND objet='rubrique'";
-	$table =  "spip_auteurs_liens";
-	// Recurrence sur les sous-rubriques
 	$rubriques = array();
-	while (true) {
-		$q = sql_select("id_rubrique", $table, $where);
-		$r = array();
-		while ($row = sql_fetch($q)) {
-			$id_rubrique = $row['id_rubrique'];
-			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
-		}
+	if ($GLOBALS['meta']['version_installee']>16428
+	  AND $r = sql_allfetsel('id_objet', 'spip_auteurs_liens', "id_auteur=".intval($id_auteur)." AND objet='rubrique' AND id_objet!=0")
+	  AND count($r)) {
+		$r = array_map('reset',$r);
 
-		// Fin de la recurrence : $rubriques est complet
-		if (!$r) break;
-		$table = 'spip_rubriques';
-		$where = sql_in('id_parent', $r) . ' AND ' .
-		  sql_in('id_rubrique', $r, 'NOT');
+		// recuperer toute la branche, au format chaine enumeration
+		include_spip('inc/rubriques');
+		$r = calcul_branche_in($r);
+		$r = explode(',',$r);
+
+		// passer les rubriques en index, elimine les doublons
+		$r = array_flip($r);
+		// recuperer les index seuls
+		$r = array_keys($r);
+		// combiner pour avoir un tableau id_rubrique=>id_rubrique
+		// est-ce vraiment utile ? (on preserve la forme donnee par le code precedent)
+		$rubriques = array_combine($r,$r);
 	}
 
 	// Affecter l'auteur session le cas echeant
