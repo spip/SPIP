@@ -390,7 +390,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 				$aff = "&lt;".$pretty."&gt;";
 				if ($var_mode_objet == $nom)
 					$aff = "<b>$aff</b>";
-				$res .= "\n<tr bgcolor='" .
+				$res .= "\n<tr style='background-color: " .
 				  $colors[$i%2] .
 				  "'><td  align='right'>$i</td><td>\n" .
 				  "<a  class='debug_link_boucle' href='" .

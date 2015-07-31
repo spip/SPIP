@@ -169,7 +169,7 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
 // http://doc.spip.org/@http_visualiser_participants
 function http_visualiser_participants($auteurs_tmp)
 {
-  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td bgcolor='#EEEECC'>" .
+  return "\n<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #EEEECC'>" .
     bouton_block_invisible("auteurs,ajouter_auteur") .
     "<span class='serif2'><b>" .
     _T('info_nombre_partcipants') .
@@ -296,8 +296,8 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				$aut =  (($id_auteur != $expediteur) ? '' :
 					 ("<span class='arial0'>".  _T('info_auteur_message') ."</span> "));
 
-				$res .= "<tr><td bgcolor='$couleur'><span style='font-size: 14px;' class='verdana1'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
-				  "<td bgcolor='$couleur' align='right'><span style='font-size: 12px;' class='verdana1'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
+				$res .= "<tr><td style='background-color: $couleur'><span style='font-size: 14px;' class='verdana1'>&nbsp;". bonhomme_statut($row)."&nbsp;" .  $aut .	  $nom_auteur .  "</span></td>" .
+				  "<td style='background-color: $couleur' align='right'><span style='font-size: 12px;' class='verdana1'>" . (($id_auteur == $connect_id_auteur) ?  "&nbsp;" : ("[<a href='" . generer_url_ecrire("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .  "</span></td></tr>\n";
 			}
 			echo
 			  http_visualiser_participants($auteurs_tmp),

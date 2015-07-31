@@ -222,7 +222,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 		$langue_rubrique = $langue_parent;
 
 	debut_cadre_enfonce('langues-24.gif');
-	echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td bgcolor='#eeeecc' class='serif2'>";
+	echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #eeeecc' class='serif2'>";
 	echo bouton_block_invisible('languesrubrique');
 	echo "<b>";
 	echo _T('titre_langue_rubrique');

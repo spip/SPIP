@@ -84,14 +84,14 @@ function signatures_edit($script, $id, $debut, $row) {
 		$res = "";
 		
 		if ($statut=="poubelle"){
-			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td bgcolor='#FF0000'>";
+			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>";
 		}
 		
-		$res .= "<table width='100%' cellpadding='3' cellspacing='0'><tr><td bgcolor='$couleur_foncee' class='verdana2' style='color: white;'><b>"
+		$res .= "<table width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2' style='background-color: $couleur_foncee; color: white;'><b>"
 		.  ($nom_site ? "$nom_site / " : "")
 		.  $nom_email
 		.  "</b></td></tr>"
-		.  "<tr><td bgcolor='#FFFFFF' class='serif'>";
+		.  "<tr><td style='background-color: #ffffff' class='serif'>";
 				
 		if ($statut=="publie"){
 			$res .= icone (_T('icone_supprimer_signature'),

@@ -95,11 +95,11 @@ function afficher_raccourcis($module = "public") {
 	}
 
 	echo "\n<table cellpadding='3' cellspacing='1' border='0'>";
-	echo "\n<tr bgcolor='$couleur_foncee' style='color:white;'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b></td></tr>\n";
+	echo "\n<tr style='background-color: $couleur_foncee; color:white;'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b></td></tr>\n";
 
 	foreach ($tableau as $raccourci => $val) {
 		$bgcolor = alterner($i++, '#eeeeee','white');
-		echo "\n<tr bgcolor='$bgcolor'><td class='verdana2'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
+		echo "\n<tr style='background-color: $bgcolor'><td class='verdana2'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
 	}
 
 	echo "</table>";

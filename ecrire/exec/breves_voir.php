@@ -168,7 +168,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	
 		debut_cadre_enfonce('langues-24.gif');
 	
-		echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td bgcolor='#EEEECC' class='serif2'>";
+		echo "<table border='0' cellspacing='0' cellpadding='3' width='100%'><tr><td style='background-color: #eeeecc' class='serif2'>";
 		echo bouton_block_invisible('languesbreve');
 		echo "<b>";
 		echo _T('titre_langue_breve');

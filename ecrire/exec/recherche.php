@@ -159,7 +159,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
 			echo "<tr><td style='width: 100%'>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td style='width: 100%' colspan='5'><span style='font-size: 16px; color: #FFFFFF;' class='verdana1'><b>$titre_table</b></span></td></tr>";
+			echo "<tr style='background-color: #333333'><td style='width: 100%' colspan='5'><span style='font-size: 16px; color: #FFFFFF;' class='verdana1'><b>$titre_table</b></span></td></tr>";
 		}
 	else {
 			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";

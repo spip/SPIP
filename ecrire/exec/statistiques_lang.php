@@ -88,7 +88,7 @@ function exec_statistiques_lang_dist()
 					$couleur="eeeeee";
 				}
 	
-				echo "\n<tr bgcolor='$couleur'>";
+				echo "\n<tr style='background-color: $couleur'>";
 				$dir=lang_dir($lang,'',' dir=rtl');
 				echo "<td style='width: 100%; border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><span style='float: $spip_lang_right;'>$pourcent%</span>".traduire_nom_langue($lang)."</span></td>";
 				
