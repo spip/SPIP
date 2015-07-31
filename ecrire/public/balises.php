@@ -1026,11 +1026,11 @@ function balise_CACHE_dist($p) {
 // http://doc.spip.org/@balise_INSERT_HEAD_dist
 function balise_INSERT_HEAD_dist($p) {
 	$p->code = "pipeline('insert_head','<!-- insert_head -->')";
-	$p->interdire_scripts = false;
-	$p->code = '\'<'
+	$p->code .= '. \'<'
 		.'?php header("X-Spip-Filtre: \'.'
 			.'\'compacte_head\''
 		. " . '\"); ?'.'>'";
+	$p->interdire_scripts = false;
 	return $p;
 }
 
