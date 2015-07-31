@@ -116,12 +116,6 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 
 // D
 'date_mot_heures' => 'horas',
-'diff_para_ajoute' => 'Parágrafo incluído',
-'diff_para_deplace' => 'Parágrafo movido',
-'diff_para_supprime' => 'Parágrafo excluído',
-'diff_texte_ajoute' => 'Texto incluído',
-'diff_texte_deplace' => 'Texto movido',
-'diff_texte_supprime' => 'Texto excluído',
 
 // E
 'email' => 'e-mail',
@@ -361,14 +355,11 @@ os autores excluídos por uma lixeira.',
 'info_gerer_trad_objets' => '@objets@ : gerenciar os links de tradução',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns serviços de hospedagem desativam o envio automático de e-mails a partir dos seus servidores. Neste caso, as funcionalidades a seguir não funcionarão.',
 'info_hier' => 'ontem:',
-'info_historique' => 'Versões:',
 'info_historique_activer' => 'Ativar o acompanhamento de versões',
 'info_historique_affiche' => 'Exibir esta versão',
 'info_historique_comparaison' => 'comparação',
 'info_historique_desactiver' => 'Desativar o acompanhamento de versões',
-'info_historique_lien' => 'Exibir o histórico de alterações',
 'info_historique_texte' => 'O acompanhamento de versões permite conservar um histórico de todas as modificações feitas ao conteúdo de uma matéria, e de exibir as diferenças entre as versões sucessivas.',
-'info_historique_titre' => 'Acompanhamento de versões',
 'info_identification_publique' => 'Sua identificação pública...',
 'info_image_process' => 'Por favor, selecione o melhor método de criação dos ícones, clicando na imagem correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se nenhuma imagem está sendo exibida, o servidor que hospeda o seu site não foi configurado para utilizar essas ferramentas. Se você deseja usar essas funções, contate o responsável técnico e solicite as extensões «GD» ou «Imagick».</i>',
@@ -1024,9 +1015,7 @@ neste caso, você não poderá usar a sindicação de conteúdo no seu site.</i>
 'utf8_convertir_votre_site' => 'Converter o seu site para utf-8',
 
 // V
-'version' => 'Versão:',
-'version_deplace_rubrique' => 'Mover de <b>«@from@»</b> para <b>«@to@»</b>.',
-'version_initiale' => 'versão inicial'
+'version' => 'Versão:'
 );
 
 ?>

@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'timer',
-'diff_para_ajoute' => 'Added paragraph', # NEW
-'diff_para_deplace' => 'Moved paragraph', # NEW
-'diff_para_supprime' => 'Deleted paragraph', # NEW
-'diff_texte_ajoute' => 'Added text', # NEW
-'diff_texte_deplace' => 'Moved text', # NEW
-'diff_texte_supprime' => 'Deleted text', # NEW
 
 // E
 'email' => 'e-mail',
@@ -368,14 +362,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Nogle webhoteller tillader ikke automatisk udsendelse af e-mails. I så fald kan følgende funktioner i SPIP ikke benyttes.',
 'info_hier' => 'i går:',
-'info_historique' => 'Revisions:', # NEW
 'info_historique_activer' => 'Enable revisions follow-up', # NEW
 'info_historique_affiche' => 'Display this version', # NEW
 'info_historique_comparaison' => 'compare', # NEW
 'info_historique_desactiver' => 'Disable revisions follow-up', # NEW
-'info_historique_lien' => 'Display list of versions', # NEW
 'info_historique_texte' => 'Revisions follow-up allows you to keep track of every modifications added to an article and displays the differences between successive versions.', # NEW
-'info_historique_titre' => 'Revisions follow-up', # NEW
 'info_identification_publique' => 'Din offentlige identitet...',
 'info_image_process' => 'Vælg den bedste metode til at skabe miniaturebilleder ved at klikke på det korresponderende billede.',
 'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>', # NEW
@@ -1081,9 +1072,7 @@ i en farve, der angiver deres status:',
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Initial version' # NEW
+'version' => 'Version :' # NEW
 );
 
 ?>

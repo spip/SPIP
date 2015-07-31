@@ -114,12 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'sati',
-'diff_para_ajoute' => 'Dodan paragraf',
-'diff_para_deplace' => 'Premjesten paragraf',
-'diff_para_supprime' => 'Izbrisan paragraf',
-'diff_texte_ajoute' => 'Dodan tekst',
-'diff_texte_deplace' => 'Premjesten tekst',
-'diff_texte_supprime' => 'Izbrisan paragraf',
 
 // E
 'email' => 'e-mail',
@@ -356,14 +350,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Neki kompjuteri dezaktiviraju automatsko slanje mailova njihovim serverima. U tom slucaju sljedece funkcije SPIP-a nece biti u uptrebi.',
 'info_hier' => 'Jucer:',
-'info_historique' => 'Revizije:',
 'info_historique_activer' => 'Aktivirati pracenje revizija',
 'info_historique_affiche' => 'Prikazati reviziju',
 'info_historique_comparaison' => 'uporedi',
 'info_historique_desactiver' => 'Dezaktivirati pracenje revizija',
-'info_historique_lien' => 'Prikazati historiju izmjena',
 'info_historique_texte' => 'Pracenje revizija omogucuje ocuvanje historije svih izmjena na sadrzaju clanka i  prikazivanje razlika verzija koje slijede.',
-'info_historique_titre' => 'Pracenje revizija',
 'info_identification_publique' => 'Vas javni identitet...',
 'info_image_process' => 'Izaberite najbolju metodu pravljenja vinjeta tako sto cete kliknuti na odgovarajucu sliku.',
 'info_image_process2' => '<b>N.B.</b> <i>Ako se ne pojavljuje nijedna slika, onda vas server nije konfigurisan za koristenje tih funkcija. Ako zelite koristiti te funkcije, kontaktirajte ososbu odgovornu za tehnicko odrzavanje i pitajte za extenzije «GD» ili  «Imagick».</i>',
@@ -1011,9 +1002,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Inicijalna verzija'
+'version' => 'Version :' # NEW
 );
 
 ?>

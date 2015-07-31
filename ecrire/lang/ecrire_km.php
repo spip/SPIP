@@ -115,12 +115,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ម៉ោង',
-'diff_para_ajoute' => 'បានបន្ថែម កថាខណ្ឌ',
-'diff_para_deplace' => 'បានប្តូរទីតាំង កថាខណ្ឌ',
-'diff_para_supprime' => 'បានលុបចេញ កថាខណ្ឌ',
-'diff_texte_ajoute' => '​បាន​បន្ថែម អត្ថបទ​',
-'diff_texte_deplace' => 'បានប្តូរទីតាំង អត្ថបទ​',
-'diff_texte_supprime' => 'បានលុបចេញ អត្ថបទ',
 
 // E
 'email' => 'អ៊ីមែវល៍',
@@ -363,14 +357,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => '“​កុំព្យូទ័រ​ខ្លះ​បិទមុខ​ងារ​ផ្ញើ​សារ​ស្វ័យប្រវត្ដិ',
 'info_hier' => 'ម្សិល​ម៉ិ​ញៈ',
-'info_historique' => 'អត្ថបទកែប្រែ ៖',
 'info_historique_activer' => 'ធ្វើអោយសកម្ម ការតាមដាន អត្ថបទបានកែប្រែ',
 'info_historique_affiche' => 'បង្ហាញ​អត្ថបទ​នេះ',
 'info_historique_comparaison' => 'ប្រៀបធៀប',
 'info_historique_desactiver' => 'ធ្វើអោយអសកម្ម ការតាមដាន នៃអត្តបទបានកែប្រែ',
-'info_historique_lien' => 'បង្ហាញចេញ បញ្ជី នៃកំណែ',
 'info_historique_texte' => 'មុខងារ​ពិនិត្យ​អត្ថបទ​កែសម្រួល​អាច​ឱ្យ​លោក​អ្នក​មើលឃើញ​នូវ​ចំណុច​កែប្រែ ឬ​បន្ថែម​នានា​នៅ​ក្នុង​អត្ថបទ ព្រមទាំង​បង្ហាញ​អំពី​ភាព​ខុស​គ្នា​នៃ​អត្ថបទ​បន្ដបន្ទាប់',
-'info_historique_titre' => 'ការតាមដាន អត្ថបទបានកែប្រែ',
 'info_identification_publique' => 'អត្តសញ្ញា សាធារណះ របស់អ្នក...',
 'info_image_process' => 'ជ្រើសយក វិធីប្រពៃបំផុត សំរាប់បង្កើត កូនរូបភាព ដោយ ចុចលើ រូបភាពទាក់ទិន។',
 'info_image_process2' => '<b>ចំណាំ៖</b> <i>បើគ្មានរូបភាព លេចឡើង, ពេលខំព្យូរើបំរើសេវា ដែលទទួលផ្ទុកវ៉ែបសៃថ៍ របស់អ្នក គ្មានត្រូវបានកំណត់ទំរង់ សំរាប់ប្រើប្រាស់ ឧបករបែបចឹង។ បើអ្នក ចង់ប្រើប្រាស់ មុខងារទាំងនេះ, ទាក់ទងអ្នកទទួលខុសត្រូវ ផ្នែកបច្ចេកទេស និងសួរ ផ្នែកបន្ថែម «GD» ឬ «Imagick»</i>',
@@ -1022,9 +1013,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utf8_convertir_votre_site' => 'បំ​លែង​ សៃថ៍ របស់អ្នក ជា utf-8',
 
 // V
-'version' => 'កំណែ  ៖',
-'version_deplace_rubrique' => 'បានប្តូរទីតាំង ពី <b>« @from@ »</b> ទៅ <b>« @to@ »</b>។',
-'version_initiale' => 'កំណែដើម'
+'version' => 'កំណែ  ៖'
 );
 
 ?>

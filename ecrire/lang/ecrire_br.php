@@ -118,12 +118,6 @@ Arabat aotren an enporzhiadenn-mañ.<p>Evit muioc\'h a ditouroù, sellit ouzh <a
 
 // D
 'date_mot_heures' => 'eur',
-'diff_para_ajoute' => 'Rannbennad ouzhpennet',
-'diff_para_deplace' => 'Rannbennad dilec\'hiet',
-'diff_para_supprime' => 'Rannbennad diverket',
-'diff_texte_ajoute' => 'Testenn ouzhpennet',
-'diff_texte_deplace' => 'Testenn dilec\'hiet',
-'diff_texte_supprime' => 'Testenn diverket',
 
 // E
 'email' => 'postel',
@@ -368,14 +362,11 @@ ar skeudennoù enframmet. Evel-se e c\'heller krouiñ, da skouer,
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Herberc\'herien zo a nac\'h ma vefe kaset postelioù emgedre adal o servijerioù. En deoguezh-se, ne\'z aio ket ar servijoù-se en-dro.',
 'info_hier' => 'dec\'h :',
-'info_historique' => 'Adweladennoù :',
 'info_historique_activer' => 'Heuliañ an adweladennoù',
 'info_historique_affiche' => 'Diskouez ar stumm-mañ',
 'info_historique_comparaison' => 'keñveriañ',
 'info_historique_desactiver' => 'Chom hep heuliañ an adweladennoù',
-'info_historique_lien' => 'Diskouez roll an holl gemmoù',
 'info_historique_texte' => 'En ur heuliañ an adweladennoù e c\'heller rollaén an holl gemmoù bet degaset d\'ar pennad, ha gwelet an diforc\'hioù etre an stummoù disheñvel.',
-'info_historique_titre' => 'Heuliañ an adweladennoù',
 'info_identification_publique' => 'Hoc\'h anv foran...',
 'info_image_process' => 'Diuzit an hentenn wellañ da sevel skeudennoùigoù o klikañ war ar skeudenn a zere.',
 'info_image_process2' => '<b>Evezh.</b> <i>Ma ne weler skeudenn ebet e talvez n\'eo ket bet kefluniet ar servijer a ro bod deoc\'h evit ober gant seurt binvioù. Mar fell deoc\'h implijout ar servijoù-se, kit e darempred gant an dud e-karg, ha goulennit war-lerc\'h an astennoù «GD» pe «Imagick».</i>',
@@ -1071,9 +1062,7 @@ adstaliañ SPIP hag adkrouiñ un diaz titouroù nevez hag ur moned merour kenta�
 'utf8_convertir_votre_site' => 'Amdreiñ ho lec\'hienn davet uft-8',
 
 // V
-'version' => 'Stumm :',
-'version_deplace_rubrique' => 'Dilec\'hiet adalek <b>« @from@ »</b> betek <b>« @to@ »</b>.',
-'version_initiale' => 'Stumm orin'
+'version' => 'Stumm :'
 );
 
 ?>

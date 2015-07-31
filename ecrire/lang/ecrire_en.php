@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'H',
-'diff_para_ajoute' => 'Added paragraph',
-'diff_para_deplace' => 'Moved paragraph',
-'diff_para_supprime' => 'Deleted paragraph',
-'diff_texte_ajoute' => 'Added text',
-'diff_texte_deplace' => 'Moved text',
-'diff_texte_supprime' => 'Deleted text',
 
 // E
 'email' => 'email',
@@ -378,14 +372,11 @@ via FTP.</p>',
 		on their servers. In this case the following features
 		of SPIP cannot be implemented.',
 'info_hier' => 'yesterday:',
-'info_historique' => 'Revisions:',
 'info_historique_activer' => 'Enable revision tracking',
 'info_historique_affiche' => 'Display this version',
 'info_historique_comparaison' => 'compare',
 'info_historique_desactiver' => 'Disable revision tracking',
-'info_historique_lien' => 'Display list of versions',
 'info_historique_texte' => 'Revision tracking allows you to view changes  made to an article and displays the differences between successive versions.',
-'info_historique_titre' => 'Revision tracking',
 'info_identification_publique' => 'Your public identity...',
 'info_image_process' => 'Select the best method to create thumbnails by clicking on the corresponding picture.',
 'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any images, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the «GD» or «Imagick» extensions to be installed.</i>',
@@ -1117,9 +1108,7 @@ you can perform searches on syndicated sites and
 'utf8_convertir_votre_site' => 'Convert your site to utf-8',
 
 // V
-'version' => 'Version:',
-'version_deplace_rubrique' => 'Moved from <b>« @from@ »</b> to <b>« @to@ »</b>.',
-'version_initiale' => 'Initial version'
+'version' => 'Version:'
 );
 
 ?>

@@ -114,12 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'H',
-'diff_para_ajoute' => 'စာပိုဒ်ထပ်ဖြည့်ပါ',
-'diff_para_deplace' => 'စာပိုဒ်ရွေ့ပါ',
-'diff_para_supprime' => 'စာပိုဒ်ဖျက်ပစ်ပါ',
-'diff_texte_ajoute' => 'စာသားထပ်ထည့်ပါ',
-'diff_texte_deplace' => 'စာသားရွေ့ပါ',
-'diff_texte_supprime' => 'စာသားဖျက်ပစ်ပါ',
 
 // E
 'email' => 'အီးမေးလ်',
@@ -356,14 +350,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'အချို့ပင်မဆာဗာများသည် ၎င်းတို့ဆာဗာပေါ်တွင် အလိုလျောက် အီးမေးလ်မပို့နိုင်ပါ၊ ဤသို့ဖြစ်ပါက အေက်ပါ SPIPသဏ္ဍန်များကိုလည်း အကောင်ထည်မဖော်နိုင်ပါ',
 'info_hier' => 'မနေ့က',
-'info_historique' => 'ပြန်လည်ကြည့်ရှုခြင်း',
 'info_historique_activer' => 'မူကွဲခြေရာ ပြန်ကောက်နိုင်သည်',
 'info_historique_affiche' => 'ဤမူကွဲကို ဖော်ပြပါ',
 'info_historique_comparaison' => 'နှိုင်းယှဉ်ပါ',
 'info_historique_desactiver' => 'ခြေရာပြန်ကောက်ကြည့်၍မရပါ',
-'info_historique_lien' => 'မူကွဲများစာရင်းကို ပြပါ',
 'info_historique_texte' => 'ပြန်လည်မွမ်းမံမှုခြေရာက အောင်မြင်စွာ တည်းဖြတ်ခြင်းနှင့် ထပ်ပေါင်းခြင်း ပြုလုပ်ထားသော ဆောင်းပါးတွင် ပြုပြင်ချက် ကွဲပြားမှုများကို မြင်သာစေရန် လုပ်ဆောင်​ပေးနိုင်သည်။',
-'info_historique_titre' => 'ခြေရာပြန်ကောက်ကြည့်ရန်',
 'info_identification_publique' => 'အများသုံး အမှတ်အသား',
 'info_image_process' => 'ဆက်သွယ်ထားသောပုံပေါ်တွင်နှိပ်လိုက်သောအခါ ရုပ်ပုံမြင်နိုင်ရန်အတွက် အကောင်းဆုံးဖန်တီးမှုနည်းလမ်းကိုရွေးပါ',
 'info_image_process2' => '<b>N.B.</b> <i>ပုံရိပ်တခုမှ မတွေ့ရလျှင်၊ သင့်ဆာဗာသည် အဲဒီအတွက် တပ်ဆင်ထားခြင်း မရှိလို့ဖြစ်ပါမည်။ ဤလုပ်ဆောင်မှုကို သင်အလိုရှိတယ်ဆိုရင် ဝက်ဘ်ဝန်ဆောင်မှုကို ဆက်သွယ်ပြီးတော့ «GD» သို့မဟုတ် «Imagick» extensions ကို ထည့်သွင်းပေးပါရန် တောင်းဆိုပါ။</i>',
@@ -1012,9 +1003,7 @@ proxy လိပ်စာကို အောက်တွင်​ဖော်ပ�
 'utf8_convertir_votre_site' => 'သင့်ဝက်ဘ်ဆိုက်ကို ယူနီကုဒ် သို့ပြောင်းပါ',
 
 // V
-'version' => 'မူကွဲ',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'မူကွဲအစ'
+'version' => 'မူကွဲ'
 );
 
 ?>

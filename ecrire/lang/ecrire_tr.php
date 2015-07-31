@@ -119,12 +119,6 @@ Bu ithal istemini onaylamayın.
 
 // D
 'date_mot_heures' => 'saat ',
-'diff_para_ajoute' => 'Eklenmiş paragraf ',
-'diff_para_deplace' => 'Yeri değiştirilmiş paragraf ',
-'diff_para_supprime' => 'Silinmiş paragraf ',
-'diff_texte_ajoute' => 'Eklenmiş metin ',
-'diff_texte_deplace' => 'Yeri değiştirilmiş metin ',
-'diff_texte_supprime' => 'Silinmiş metin ',
 
 // E
 'email' => 'e-posta',
@@ -370,14 +364,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
                                            otomatik e-posta gönderisini durduruyorlar. 
                                            Bu durumda SPIP\'in şu işlevleri çalışmaz :',
 'info_hier' => 'Dün :',
-'info_historique' => 'Gözden geçirmeler :',
 'info_historique_activer' => 'Gözden geçirmelerin izlenmesini başlat',
 'info_historique_affiche' => 'Bu uyarlamayı göster',
 'info_historique_comparaison' => 'Karşılaştırma',
 'info_historique_desactiver' => 'Gözden geçirmelerin izlenmesini durdur',
-'info_historique_lien' => 'Değişikliklerin tarihçesini göster',
 'info_historique_texte' => 'Gözden geçirmeleri izleme bir makalenin içeriğine getirilen tüm değişikliklerin bir tarihçesini saklamaya yarar ve de birbirini izleyen uyarlamalar arasındaki farkları gösterir. ',
-'info_historique_titre' => 'Gözden geçirmeleri izle',
 'info_identification_publique' => 'Kamu kimliğiniz ...',
 'info_image_process' => 'Lütfen, uygun resme tıklayarak en iyi ikon üretim yöntemini seçiniz. ',
 'info_image_process2' => '<b>NOT:</b> <i> Hiç resim çıkmıyorsa, sitenizi yayınlayan sunucu bu tür araçlar kullanmak için konfifüre edilmemiş demektir. Eğer bu işlevleri kullanmak istiyorsanız teknik yetkiliye başvurun ve «GD» ya da «Imagick» aksesuarlarını isteyin.</i>',
@@ -1055,9 +1046,7 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'utf8_convertir_votre_site' => 'Sitenizi utf-8\'e dönüştürmek',
 
 // V
-'version' => 'Sürüm :',
-'version_deplace_rubrique' => '<b>« @from@ »</b> den <b>« @to@ »</b> ye taşınmış.',
-'version_initiale' => 'İlk sürüm'
+'version' => 'Sürüm :'
 );
 
 ?>

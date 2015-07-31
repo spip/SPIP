@@ -120,12 +120,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 
 // D
 'date_mot_heures' => 'h',
-'diff_para_ajoute' => 'Tillaggt stycke',
-'diff_para_deplace' => 'Flyttat stycke',
-'diff_para_supprime' => 'Raderat stycke',
-'diff_texte_ajoute' => 'Tillaggd text',
-'diff_texte_deplace' => 'Flyttad text',
-'diff_texte_supprime' => 'Raderad text',
 
 // E
 'email' => 'e-post',
@@ -376,14 +370,11 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 på deras servrar. Om så är fallet kan följande
 funktioner hos SPIP inte användas.',
 'info_hier' => 'I går:',
-'info_historique' => 'Versioner:',
 'info_historique_activer' => 'Aktivera versionshantering',
 'info_historique_affiche' => 'Visa denna version',
 'info_historique_comparaison' => 'jämför',
 'info_historique_desactiver' => 'Avaktivera versionshantering',
-'info_historique_lien' => 'Visa versioner',
 'info_historique_texte' => 'Versionshantering tillåter dig att se förändringar i och tillägg till en artikel och visar skillnader mellan versioner.',
-'info_historique_titre' => 'Versionshantering',
 'info_identification_publique' => 'Din publika identitet...',
 'info_image_process' => 'Välj den bästa metoden för att skapa miniatyrer genom att klicka på motsvarande bild.',
 'info_image_process2' => '<b>OBS!.</b> <i>Om du inte kan se någon bild, så är din server inte konfigurerad för att använda sådana verktyg. Om du vill använda dessa finesser så kontakta din leverantörs tekniska support och be dem installera utökningarna för «GD» eller «Imagick».</i>',
@@ -1120,9 +1111,7 @@ you can perform searches on sites and
 'utf8_convertir_votre_site' => 'Konvertera din webbplats till utf-8',
 
 // V
-'version' => 'Version:',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Utgångsversion'
+'version' => 'Version:'
 );
 
 ?>

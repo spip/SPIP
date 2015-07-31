@@ -116,12 +116,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 
 // D
 'date_mot_heures' => 'oras',
-'diff_para_ajoute' => 'Paragraf apondut',
-'diff_para_deplace' => 'Paragraf desplaçat',
-'diff_para_supprime' => 'Paragraf suprimit',
-'diff_texte_ajoute' => 'Tèxt apondut',
-'diff_texte_deplace' => 'Tèxt apondut',
-'diff_texte_supprime' => 'Tèxt suprimit',
 
 // E
 'email' => 'e-mail',
@@ -363,14 +357,11 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
  d\'e-mails despí lu sieus servidors. En aqueu cas, li foncionalitats seguenti
  d\'SPIP non foncionaràn.',
 'info_hier' => 'ièr:',
-'info_historique' => 'Revisions:',
 'info_historique_activer' => 'Activar lo seguiment dei revisions',
 'info_historique_affiche' => 'Afichar aquela version',
 'info_historique_comparaison' => 'comparason',
 'info_historique_desactiver' => 'Desactivar lo seguiment dei revisions',
-'info_historique_lien' => 'Afichar l\'istoric dei modificacions',
 'info_historique_texte' => 'Lo seguiment dei revisions permete de servar un istoric de toti li modificacions que s\'es portat au contengut d\'un article, e d\'afichar li diferéncias entre li versions successivi.',
-'info_historique_titre' => 'Seguiment dei revisions',
 'info_identification_publique' => 'La vòstra identitat publica...',
 'info_image_process' => 'Vorgatz seleccionar lo melhor metòde de fabricacion dei vinhetas en clicant sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se minga d\'imatge apareisse, alora lo servidor qu\'aubèrga lo vòstre sit non l\'an configurat per utilizar d\'aisinas tali. Se desiratz d\'utilizar aqueli foncions, contactatz lo responsable tecnic e demandatz li extensions «GD» ò «Imagick».</i>',
@@ -1111,9 +1102,7 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Version iniciala'
+'version' => 'Version :' # NEW
 );
 
 ?>

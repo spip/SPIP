@@ -116,12 +116,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 
 // D
 'date_mot_heures' => 'òras',
-'diff_para_ajoute' => 'Paragraf ajustat',
-'diff_para_deplace' => 'Paragraf desplaçat',
-'diff_para_supprime' => 'Paragraf suprimit',
-'diff_texte_ajoute' => 'Tèxt ajustat',
-'diff_texte_deplace' => 'Tèxt ajustat',
-'diff_texte_supprime' => 'Tèxt suprimit',
 
 // E
 'email' => 'e-mail',
@@ -363,14 +357,11 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
  d\'e-mails dempuish los lors serviders. En aqueth cas, las foncionalitats seguentas
  d\'SPIP non foncionaràn pas.',
 'info_hier' => 'gèr:',
-'info_historique' => 'Revisions:',
 'info_historique_activer' => 'Activar lo seguiment de las revisions',
 'info_historique_affiche' => 'Afichar aquera version',
 'info_historique_comparaison' => 'comparason',
 'info_historique_desactiver' => 'Desactivar lo seguiment de las revisions',
-'info_historique_lien' => 'Afichar l\'istoric de las modificacions',
 'info_historique_texte' => 'Lo seguiment de las revisions que permet de servar un istoric de totas las modificacions que s\'ei portat au contengut d\'un article, e d\'afichar las diferéncias entre las versions successivas.',
-'info_historique_titre' => 'Seguiment de las revisions',
 'info_identification_publique' => 'La vòsta identitat publica...',
 'info_image_process' => 'Volhatz seleccionar lo melhor metòde de fabricacion de las vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se nat imatge n\'apareish pas, alavetz lo servider qu\'aubèrga lo vòste sit non l\'an pas configurat entà utilizar aisinas taus. Se desiratz d\'utilizar aqueras foncions, contactatz lo responsable tecnic e demandatz las extensions «GD» o «Imagick».</i>',
@@ -1111,9 +1102,7 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Version iniciau'
+'version' => 'Version :' # NEW
 );
 
 ?>

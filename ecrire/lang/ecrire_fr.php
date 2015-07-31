@@ -120,12 +120,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'heures',
-'diff_para_ajoute' => 'Paragraphe ajouté',
-'diff_para_deplace' => 'Paragraphe déplacé',
-'diff_para_supprime' => 'Paragraphe supprimé',
-'diff_texte_ajoute' => 'Texte ajouté',
-'diff_texte_deplace' => 'Texte déplacé',
-'diff_texte_supprime' => 'Texte supprimé',
 
 // E
 'email' => 'email',
@@ -380,14 +374,11 @@ exige d\'avoir un accès FTP au site Web.</p>',
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalités suivantes
 		de SPIP ne fonctionneront pas.',
 'info_hier' => 'hier :',
-'info_historique' => 'Révisions :',
 'info_historique_activer' => 'Activer le suivi des révisions',
 'info_historique_affiche' => 'Afficher cette version',
 'info_historique_comparaison' => 'comparaison',
 'info_historique_desactiver' => 'Désactiver le suivi des révisions',
-'info_historique_lien' => 'Afficher l\'historique des modifications',
 'info_historique_texte' => 'Le suivi des révisions permet de conserver un historique de toutes les modifications apportées au contenu d\'un article, et d\'afficher les différences entre les versions successives.',
-'info_historique_titre' => 'Suivi des révisions',
 'info_identification_publique' => 'Votre identité publique...',
 'info_image_process' => 'Veuillez sélectionner la meilleure méthode de fabrication des vignettes en cliquant sur l\'image correspondante.',
 'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'apparaît, alors le serveur qui héberge votre site n\'a pas été configuré pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions «GD» ou «Imagick».</i>',
@@ -1126,9 +1117,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8',
 
 // V
-'version' => 'Version :',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.',
-'version_initiale' => 'Version initiale'
+'version' => 'Version :'
 );
 
 ?>

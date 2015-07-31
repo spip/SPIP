@@ -114,12 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'ore',
-'diff_para_ajoute' => 'Paragraf adăugat',
-'diff_para_deplace' => 'Paragraf deplasat',
-'diff_para_supprime' => 'Paragraf şters',
-'diff_texte_ajoute' => 'Text adăugat',
-'diff_texte_deplace' => 'Text deplasat',
-'diff_texte_supprime' => 'Text şters',
 
 // E
 'email' => 'email',
@@ -363,14 +357,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   email-uri de pe server-ele lor. În acest caz, funcţiile următoare
   din SPIP nu sunt disponibile.',
 'info_hier' => 'ieri :',
-'info_historique' => 'Revizii :',
 'info_historique_activer' => 'Activaţi urmărirea reviziilor',
 'info_historique_affiche' => 'Afişaţi această versiune',
 'info_historique_comparaison' => 'comparaţie',
 'info_historique_desactiver' => 'Dezactivaţi urmărirea reviziilor',
-'info_historique_lien' => 'Afişaţi istoricul modificărilor',
 'info_historique_texte' => 'Urmărirea reviziilor permite să conservaţi un istoric al tuturor modificărilor aduse conţinutului unui articol şi să afişaţi diferenţele între versiunile succesive.',
-'info_historique_titre' => 'Urmărirea reviziilor',
 'info_identification_publique' => 'Identitatea dumneavoastră publică...',
 'info_image_process' => 'Vă rugăm să selecţionaţi cea mai bună metodă de generare a viniételor făcând click pe imaginea corespunzătoare.',
 'info_image_process2' => '<b>Nota Bene</b> <i> Dacă nici o imagine nu este afişată, înseamnă ca server-ul care găzduieşte site-ul dumneavoastră nu a fost configurat să folosească unelte de acest tip. Dacă doriţi să folosiţi aceste funcţii, vă rugăm să-l contactaţi pe responsabilul tehnic şi să îi cereţi instalarea extensiilor «GD» sau «Imagick».</i>',
@@ -1081,9 +1072,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'utf8_convertir_votre_site' => 'Convertiţi site-ul dumneavoastră în utf-8',
 
 // V
-'version' => 'Versiune :',
-'version_deplace_rubrique' => 'Deplasat de la <b>« @from@ »</b> către <b>« @to@ »</b>.',
-'version_initiale' => 'Versiunea iniţială'
+'version' => 'Versiune :'
 );
 
 ?>

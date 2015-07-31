@@ -116,12 +116,6 @@ la documentacion de SPIP</a>.</p>', # MODIF
 
 // D
 'date_mot_heures' => 'oras',
-'diff_para_ajoute' => 'Paragraf ajustat',
-'diff_para_deplace' => 'Paragraf desplaçat',
-'diff_para_supprime' => 'Paragraf suprimit',
-'diff_texte_ajoute' => 'Tèxt ajustat',
-'diff_texte_deplace' => 'Tèxt desplaçat',
-'diff_texte_supprime' => 'Tèxt suprimit',
 
 // E
 'email' => 'e-mail',
@@ -361,14 +355,11 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'I son d\'aubergadors que desactivan lo mandadís automatic d\'e-mails despi lu sieus servidors. En aqueu cas, li foncionalitats seguenti de SPIP foncionaràn pas.',
 'info_hier' => 'ièr :',
-'info_historique' => 'Revisions:',
 'info_historique_activer' => 'Activar lo seguiment dei revisions',
 'info_historique_affiche' => 'Afichar aquela version',
 'info_historique_comparaison' => 'comparason',
 'info_historique_desactiver' => 'Desactivar lo seguiment dei revisions',
-'info_historique_lien' => 'Afichar l\'istoric',
 'info_historique_texte' => 'Lo seguiment dei revisions permet de conservar un istoric de toti li modificacions que s\'es portat au contengut d\'un article, e d\'afichar li diferenças entre li versions successivas.',
-'info_historique_titre' => 'Seguiment dei revisions',
 'info_identification_publique' => 'La voastra identitat publica...',
 'info_image_process' => 'Vorgatz seleccionar lo melhor metòde de fabricacion dei vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se minga d\'imatge apareisse, alora lo servidor qu\'auberga lo voastre site es pas estat configurat per utilisar de tau autis. Se desiratz utilisar aqueli foncions, contactatz lo responsable tecnic e demandatz li extensions «GD» ò «Imagick».</i>',
@@ -1101,9 +1092,7 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'utf8_convertir_votre_site' => 'Convertir lo voastre site en utf-8',
 
 // V
-'version' => 'Version:',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Version iniciala'
+'version' => 'Version:'
 );
 
 ?>

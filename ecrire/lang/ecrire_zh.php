@@ -120,12 +120,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => '时',
-'diff_para_ajoute' => '增加的段落',
-'diff_para_deplace' => '移动的段落',
-'diff_para_supprime' => '删除的段落',
-'diff_texte_ajoute' => '增加的文字',
-'diff_texte_deplace' => '移动的文字',
-'diff_texte_supprime' => '删除的文字',
 
 // E
 'email' => '电子邮件',
@@ -375,14 +369,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  . 这种情况下SPIP的
   以下特性不能用.',
 'info_hier' => '昨天:',
-'info_historique' => '修订：',
 'info_historique_activer' => '使用修订跟踪功能。',
 'info_historique_affiche' => '显示这一版本。',
 'info_historique_comparaison' => '比较',
 'info_historique_desactiver' => '不使用修订跟踪功能',
-'info_historique_lien' => '显示修订历史',
 'info_historique_texte' => '修订跟踪功能可以保存对一篇文章内容所做的所有的修改，并且显示前后不同版本之间的区别。',
-'info_historique_titre' => '修订跟踪',
 'info_identification_publique' => '你的公开标识...',
 'info_image_process' => '点击相关图片选取最佳的标志制作方法.',
 'info_image_process2' => '<b>注意</b> <i>如果没有任何图片显示，那么储存您的网站的服务器不支持该工具。如果您希望使用这些功能，请联系您的服务器的技术支持，请他们安装《GD》或者《Imagick》扩展。</i>',
@@ -1124,9 +1115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
-'version' => 'Version :', # NEW
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => '原版本'
+'version' => 'Version :' # NEW
 );
 
 ?>

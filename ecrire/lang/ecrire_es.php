@@ -119,12 +119,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'horas',
-'diff_para_ajoute' => 'Párrafo añadido',
-'diff_para_deplace' => 'Párrafo desplazado',
-'diff_para_supprime' => 'Párrafo suprimido',
-'diff_texte_ajoute' => 'Texto añadido',
-'diff_texte_deplace' => 'Texto desplazado',
-'diff_texte_supprime' => 'Texto suprimido',
 
 // E
 'email' => 'correo electrónico',
@@ -362,14 +356,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_gerer_trad_objets' => '@objets@ : gérer les liens de traduction', # NEW
 'info_hebergeur_desactiver_envoi_email' => 'Algunos servidores no permiten el envío automático de correos electrónicos. En esos casos, las siguientes funciones de SPIP no darán ningún resultado.',
 'info_hier' => 'ayer:',
-'info_historique' => 'Revisiones :',
 'info_historique_activer' => 'Activar el seguimiento de revisiones',
 'info_historique_affiche' => 'Mostrar esta versión',
 'info_historique_comparaison' => 'comparación',
 'info_historique_desactiver' => 'Desactivar el seguimiento de revisiones',
-'info_historique_lien' => 'Mostrar el historial de modificaciones',
 'info_historique_texte' => 'El seguimiento de revisiones permite conservar un historial de todas las modificaciones hechas en el contenido de un artículo, y mostrar las diferencias entre las sucesivas versiones.',
-'info_historique_titre' => 'Seguimiento de revisiones',
 'info_identification_publique' => 'Tu identidad pública...',
 'info_image_process' => 'Por favor selecciona el mejor método de fabricación de viñetas pinchando en la imágen correspondiente. ',
 'info_image_process2' => '<b>N.B.</b> <i>Si no aparece ninguna imagen, se debe a que el servidor que alberga su sitio web no está configurado para usar estas funciones. Si necesita utilizarlas, contacte con el responsable técnico y solicite las extensiones «GD» o «Imagick».</i>',
@@ -1042,9 +1033,7 @@ títulos y las descripciones de los artículos. <br />- Un segundo método, much
 'utf8_convertir_votre_site' => 'Convertir tu sitio en utf-8',
 
 // V
-'version' => 'Versión:',
-'version_deplace_rubrique' => 'Desplazado de <b>« @from@ »</b> a <b>« @to@ »</b>.',
-'version_initiale' => 'Versión inicial'
+'version' => 'Versión:'
 );
 
 ?>

@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'H',
-'diff_para_ajoute' => 'Paragraf yang ditambah',
-'diff_para_deplace' => 'Paragraf yang dipindahkan',
-'diff_para_supprime' => 'Paragraf yang dihapus',
-'diff_texte_ajoute' => 'Teks yang ditambah',
-'diff_texte_deplace' => 'Teks yang dipindahkan',
-'diff_texte_supprime' => 'Teks yang dihapus',
 
 // E
 'email' => 'e-mail',
@@ -374,14 +368,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   otomatis di server mereka. Dalam hal ini fitur-fitur SPIP berikut tidak
   dapat diimplementasikan.',
 'info_hier' => 'kemarin:',
-'info_historique' => 'Revisi:',
 'info_historique_activer' => 'Aktifkan pelacakan revisi',
 'info_historique_affiche' => 'Tampilkan versi ini',
 'info_historique_comparaison' => 'bandingkan',
 'info_historique_desactiver' => 'Non aktifkan pelacakan revisi',
-'info_historique_lien' => 'Tampilkan daftar versi',
 'info_historique_texte' => 'Pelacakan revisi mengizinkan anda untuk melihat perubahan dan penambahan yang dibuat pada sebuah artikel dan menampilkan perbedaan di antara versi-versi yang ada.',
-'info_historique_titre' => 'Pelacakan revisi',
 'info_identification_publique' => 'Identitas umum anda...',
 'info_image_process' => 'Pilih metode terbaik untuk membuat gambar kecil dengan mengklik gambar yang terkait.',
 'info_image_process2' => '<b>Catatan:</b> <i>Jika anda tidak dapat melihat gambar, berarti server anda tidak dikonfigurasi untuk menggunakan peralatan yang ada. Jika anda ingin menggunakan fitur-fitur ini, hubungi bagian teknis penyedia hosting anda dan minta ekstensi «GD» atau «Imagick» diinstal.</i>',
@@ -1107,9 +1098,7 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'utf8_convertir_votre_site' => 'Ubah situs anda ke utf-8',
 
 // V
-'version' => 'Versi:',
-'version_deplace_rubrique' => 'Déplacé de <b>« @from@ »</b> vers <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Versi awal'
+'version' => 'Versi:'
 );
 
 ?>

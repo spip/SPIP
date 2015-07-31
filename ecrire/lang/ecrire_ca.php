@@ -115,12 +115,6 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 
 // D
 'date_mot_heures' => 'hores',
-'diff_para_ajoute' => 'Paràgraf afegit',
-'diff_para_deplace' => 'Paràgraf desplaçat',
-'diff_para_supprime' => 'Paràgraf suprimit',
-'diff_texte_ajoute' => 'Text afegit',
-'diff_texte_deplace' => 'Text desplaçat',
-'diff_texte_supprime' => 'Text suprimit',
 
 // E
 'email' => 'correu electrònic',
@@ -362,14 +356,11 @@ desactivada per raons de seguretat (cosa normal en molts proveïdors d\'hostatge
 'info_gerer_trad_objets' => '@objets@ : administrar els enllaços de traducció',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns proveïdors d\'hostatge desactiven l\'enviament automàtic de correus electrònics des dels seus servidors. En aquest cas, les següents funcions d\'SPIP no funcionen. ',
 'info_hier' => 'ahir:',
-'info_historique' => 'Revisions:',
 'info_historique_activer' => 'Activar el seguiment de les revisions',
 'info_historique_affiche' => 'Mostrar aquesta versió',
 'info_historique_comparaison' => 'comparació',
 'info_historique_desactiver' => 'Desactivar el seguiment de les revisions',
-'info_historique_lien' => 'Mostrar l\'històric de les modificacions',
 'info_historique_texte' => 'El seguiment de les revisions permet conservar un històric de totes les modificacions fetes al contingut d\'un article, i mostrar les diferències entre les versions successives. ',
-'info_historique_titre' => 'Seguiment de les revisions',
 'info_identification_publique' => 'La vostra identitat pública...',
 'info_image_process' => 'Vulgueu seleccionar el millor mètode de fabricació de vinyetes fent un clic damunt de la imatge corresponent. ',
 'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores és que el servidor que allotja la vostra web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable tècnic i demaneu les extensions «GD» o «Imagick».</i>',
@@ -1050,9 +1041,7 @@ el que pot provocar un lleuger alentiment de la vostra pròpia web.',
 'utf8_convertir_votre_site' => 'Convertir el vostre lloc Web a utf-8',
 
 // V
-'version' => 'Versió:',
-'version_deplace_rubrique' => 'Desplaçament de <b>« @from@ »</b> cap a <b>« @to@ »</b>.',
-'version_initiale' => 'Versió inicial'
+'version' => 'Versió:'
 );
 
 ?>

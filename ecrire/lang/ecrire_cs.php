@@ -121,12 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'hodina',
-'diff_para_ajoute' => 'Vložený odstavec',
-'diff_para_deplace' => 'Přemístěný odstavec',
-'diff_para_supprime' => 'Odstraněný odstavec',
-'diff_texte_ajoute' => 'Vložený text',
-'diff_texte_deplace' => 'Přemístěný text',
-'diff_texte_supprime' => 'Odstraněný text',
 
 // E
 'email' => 'e-mail',
@@ -378,14 +372,11 @@ pro technickou údržbu. Některé z nich spouští autentifikaci, jež vyžaduj
   mají vypnuté automatické zasílání emailů ze svých serverů.
   Níže uvedené funkce systému SPIP pak nelze používat.',
 'info_hier' => 'včera:',
-'info_historique' => 'Revize:',
 'info_historique_activer' => 'Zapnout sledování revizí',
 'info_historique_affiche' => 'Zobrazit tuto verzi',
 'info_historique_comparaison' => 'porovnání',
 'info_historique_desactiver' => 'Vypnout sledování revizí',
-'info_historique_lien' => 'Zobrazit historii změn',
 'info_historique_texte' => 'Sledování revizí umožňuje zachovat historii všech změn obsahu článku a zobrazit změny mezi jeho jednotlivými verzemi.',
-'info_historique_titre' => 'Sledování revizí',
 'info_identification_publique' => 'Vaše veřejná identita...',
 'info_image_process' => 'Nejlepší metodu tvorby náhledů zvolíte klepnutím na příslušný obrázek.',
 'info_image_process2' => '<b>Pozn.:</b> <i>Neobjeví-li se žádný obrázek, není hostitelský server vašeho webu nastaven k používání těchto nástrojů. Chcete-li je používat, spojete se s příslušnou technickou podporou a požádejte o rozšíření "GD" nebo "Imagick".</i>',
@@ -1109,9 +1100,7 @@ změny grafického uspořádání nebo struktury vašeho webu.',
 'utf8_convertir_votre_site' => 'Zkovertujte web do UTF-8',
 
 // V
-'version' => 'Verze:',
-'version_deplace_rubrique' => 'Moved from <b>« @from@ »</b> to <b>« @to@ »</b>.', # NEW
-'version_initiale' => 'Původní verze'
+'version' => 'Verze:'
 );
 
 ?>

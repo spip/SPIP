@@ -122,12 +122,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_mot_heures' => 'hores',
-'diff_para_ajoute' => 'Párrafu amestau',
-'diff_para_deplace' => 'Párrafu movíu',
-'diff_para_supprime' => 'Párrafu desaniciau',
-'diff_texte_ajoute' => 'Testu amestau',
-'diff_texte_deplace' => 'Testu movíu',
-'diff_texte_supprime' => 'Testu desaniciau',
 
 // E
 'email' => 'corréu electrónicu',
@@ -382,14 +376,11 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
   correos dende los sos sirvidores. Nesti casu, les siguientes
   carauterístiques de SPIP nun funcionarán.',
 'info_hier' => 'ayeri:',
-'info_historique' => 'Revisiones:',
 'info_historique_activer' => 'Activar el siguimientu de les revisiones',
 'info_historique_affiche' => 'Amosar esta versión',
 'info_historique_comparaison' => 'comparanza',
 'info_historique_desactiver' => 'Desactivar el siguimientu de les revisiones',
-'info_historique_lien' => 'Amosar l\'históricu de los cambéos',
 'info_historique_texte' => 'El siguimientu de les revisiones permite conservar un históricu de toles modificaciones amestaes al conteníu d\'un artículu, y amosar les diferencies ente les versiones sucesives.',
-'info_historique_titre' => 'Siguimientu de les revisiones',
 'info_identification_publique' => 'La to identidá pública...',
 'info_image_process' => 'Has d\'escoyer el meyor métodu de fabricación de les viñetes calcando enriba de la imaxe correspondiente.',
 'info_image_process2' => '<b>N.B.</b> <i>Si nun apaez imaxe dala, el sirvidor que agospia el to sitiu nun ta configuráu pa mandase d\'estes ferramientes. Si quiés utilizar estes funciones, contauta col responsable téunicu y pide-y les estensiones «GD» o «Imagick».</i>',
@@ -1128,9 +1119,7 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'utf8_convertir_votre_site' => 'Convertir esti sitiu a utf-8',
 
 // V
-'version' => 'Versión:',
-'version_deplace_rubrique' => 'Desasitiáo de <b>« @from@ »</b> pa <b>« @to@ »</b>.',
-'version_initiale' => 'Versión d\'entamu'
+'version' => 'Versión:'
 );
 
 ?>
