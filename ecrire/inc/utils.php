@@ -1451,7 +1451,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	# attention .php obligatoire pour ecrire_fichier_securise
 	if (!defined('_FILE_META')) define('_FILE_META', $ti . 'meta_cache.php');
-	if (!defined('_DIR_LOG')) define('_DIR_LOG', _DIR_TMP);
+	if (!defined('_DIR_LOG')) define('_DIR_LOG', _DIR_TMP . 'log/');
 	if (!defined('_FILE_LOG')) define('_FILE_LOG', 'spip');
 	if (!defined('_FILE_LOG_SUFFIX')) define('_FILE_LOG_SUFFIX', '.log');
 
