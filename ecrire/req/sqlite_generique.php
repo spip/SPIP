@@ -191,7 +191,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 		$do = trim($do);
 		if (!preg_match('/(DROP PRIMARY KEY|DROP INDEX|DROP COLUMN|DROP'
 		                .'|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME'
-		                .'|ADD PRIMARY KEY|ADD INDEX|ADD COLUMN|ADD'
+		                .'|ADD PRIMARY KEY|ADD INDEX|ADD UNIQUE|ADD COLUMN|ADD'
 		                .')\s*([^\s]*)\s*(.*)?/', $do, $matches)){
 			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $do \n(requete d'origine : $query)", 'sqlite.'._LOG_ERREUR);
 			return false;
@@ -299,6 +299,8 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 				}
 				break;
 			// ajout d'un index
+			case 'ADD UNIQUE':
+				$unique=true;
 			case 'ADD INDEX':
 				// peut etre "(colonne)" ou "nom_index (colonnes)"
 				// bug potentiel si qqn met "(colonne, colonne)"
@@ -325,7 +327,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 						$nom_index = $colonnes = $colonne_origine;
 					}
 				}
-				spip_sqlite_create_index($nom_index, $table, $colonnes, $serveur);
+				spip_sqlite_create_index($nom_index, $table, $colonnes, $unique, $serveur);
 				break;
 
 			// pas geres en sqlite2
@@ -396,9 +398,10 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc = false, $temporary =
 	$ok = $res ? true : false;
 	if ($ok){
 		foreach ($cles as $k => $v){
-			if (strpos($k, "KEY ")===0){
-				$index = preg_replace("/KEY +/", '', $k);
-				$ok &= $res = spip_sqlite_create_index($index, $nom, $v, $serveur);
+			if (preg_match(',^(KEY|UNIQUE)\s,i',$k,$m)){
+				$index = trim(substr($k,strlen($m[1])));
+				$unique = (strlen($m[1])>3);
+				$ok &= spip_sqlite_create_index($index, $nom, $v, $unique, $serveur);
 			}
 		}
 	}
@@ -465,7 +468,7 @@ function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter =
  *
  * @return bool ou requete
  */
-function spip_sqlite_create_index($nom, $table, $champs, $serveur = '', $requeter = true){
+function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = '', $requeter = true){
 	if (!($nom OR $table OR $champs)){
 		spip_log("Champ manquant pour creer un index sqlite ($nom, $table, (".join(',', $champs)."))", 'sqlite.'._LOG_ERREUR);
 		return false;
@@ -479,7 +482,7 @@ function spip_sqlite_create_index($nom, $table, $champs, $serveur = '', $requete
 		if ($champs[0]=="(") $champs = substr($champs, 1, -1);
 		$champs = array($champs);
 	}
-	$query = "CREATE INDEX $nom ON $table (".join(',', $champs).")";
+	$query = "CREATE ".($unique?"UNIQUE ":"")."INDEX $nom ON $table (".join(',', $champs).")";
 	$res = spip_sqlite_query($query, $serveur, $requeter);
 	if (!$requeter) return $res;
 	if ($res)
