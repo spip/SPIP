@@ -70,7 +70,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$found = false;
 
 	if (strpos('-'.$kw_referer, $url_site)) {
-		if (eregi("recherche=([^=]+)", $kw_referer, $regs)) {
+		if (eregi("recherche=([^&]+)", $kw_referer, $regs)) {
 			$keywords = $regs[1];
 			$kw_referer_host = "Recherche SPIP";
 		} else

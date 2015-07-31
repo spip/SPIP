@@ -22,6 +22,7 @@ www.google.cd
 www.google.co.cr
 www.google.co.uk
 www.google.com.br
+www.google.com.co
 www.google.com.tw
 www.google.de
 www.google.it
