@@ -124,7 +124,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 //	$bandeau .= $couleurs() . "</div>";
 
 	// menu
-	$self = self();
+	$self = self('&');
 	$bandeau .= "\n<div id='preferences_map'><map name='map_layout' id='map_layout'>"
 	  . lien_change_var (generer_action_auteur('preferer',"display:1", $self),'','', '1,0,18,15', _T('lien_afficher_texte_seul'))
 	  . lien_change_var (generer_action_auteur('preferer',"display:2", $self),'','', '19,0,40,15', _T('lien_afficher_texte_icones'))

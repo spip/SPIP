@@ -87,7 +87,7 @@ onfocus="changestyle(\'bandeauinterface\');"
 onblur="changestyle(\'bandeauinterface\');"';
 
 		$bloc = '';
-		$ret = self();
+		$ret = self('&');
 		foreach ($couleurs_spip as $key => $val) {
 			$bloc .=
 			'<a href="'
