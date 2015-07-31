@@ -1814,7 +1814,8 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 
 	// n'afficher l'ancre qu'une fois
 	if (!isset($ancres[$ancre]))
-		$ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
+		$bloc_ancre = $ancres[$ancre] = "<a name='$ancre' id='$ancre'></a>";
+	else $bloc_ancre = '';
 	// liste = false : on ne veut que l'ancre
 	if (!$liste)
 		return $ancres[$ancre];
@@ -1836,7 +1837,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 		'nombre_pages' => floor(($total-1)/$pas)+1,
 		'page_courante' => floor(intval($position)/$pas)+1,
 		'ancre' => $ancre,
-		'bloc_ancre' => $ancres[$ancre]
+		'bloc_ancre' => $bloc_ancre
 	);
 	if (is_array($env))
 		$pagination = array_merge($env,$pagination);
