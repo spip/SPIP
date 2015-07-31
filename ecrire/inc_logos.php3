@@ -21,7 +21,7 @@ function decrire_logo($racine) {
 			$contre = @filesize($fid) . @filemtime($fid);
 			if ($taille = @getimagesize($fid)) {
 				list($x, $y, $w, $h) = resize_logo($taille);
-				$xy = "$x x $y "._T('info_pixels');
+				$xy = "$x &#215; $y "._T('info_pixels');
 				$taille = " width='$w' height='$h'";
 			} else { $xy =''; $w = 0; $h = 0;}
 			return array($fichier, 
