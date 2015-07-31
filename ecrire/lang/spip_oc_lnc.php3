@@ -6,8 +6,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oci',
-'0_langue' => 'occitan (lengadocian) [oci_lnc]',
+'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
+'0_langue' => 'occitan (lengadocian) [oc_lnc]',
 '0_liste' => 'escambis.pedagogics@aprene.org',
 '0_mainteneur' => 'M&ograve;ni&nbsp;:&nbsp;escambis.pedagogics@aprene.org <br> Est&egrave;ve (Servici de l\'Emplec)&nbsp;:&nbsp;cros@emplec.net',
 
@@ -562,7 +562,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_contenu_articles' => 'Contengut dels articles',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'es un logicial liure distribuit <a href=\'copyright_fr.html\'>jos lic&eacute;ncia GPL.</a>',
-'info_copyright_doc' => ' Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => ' Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
 'info_cours_edition' => '<MODIF> V&ograve;stres articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots claus del sit',
 'info_creation_paragraphe' => '(Per crear de paragrafes, basta que daissetz de linhas vu&egrave;jas.)',

@@ -6,9 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oci',
-'0_langue' => 'Ni&ccedil;ard [oci_ni]',
-'0_liste' => 'spip-oci@rezo.net',
+'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oc',
+'0_langue' => 'Ni&ccedil;ard [oc_ni]',
+'0_liste' => 'spip-oc@rezo.net',
 '0_mainteneur' => 'S&eacute;bastien Donato&nbsp;: seb@planetenice.com',
 
 
@@ -159,6 +159,10 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 
 // C
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
+'calendrier_synchro_lien' => '-vide-',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -555,7 +559,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_contenu_articles' => 'Contengut dei articles',
 'info_contribution' => 'contribucions de forum',
 'info_copyright' => 'es un logiciau liure distribuit <a href=\'copyright_fr.html\'>sota licen&ccedil;a GPL.</a>',
-'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
 'info_cours_edition' => 'Lu v&ograve;stres articles en cors de redacion',
 'info_creation_mots_cles' => 'Creatz e configuratz aqu&iacute; lu m&ograve;ts claus dau sit',
 'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vueii, tot simplament)',
@@ -1622,14 +1626,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_delier' => 'Ligar plus aquest article ai reviradas sieui',
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
 'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
-'trad_reference' => '(article de referen&ccedil;a)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => '-vide-',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(article de referen&ccedil;a)'
 
 );
 

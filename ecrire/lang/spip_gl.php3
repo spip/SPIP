@@ -79,9 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => '<NEW> Ins&eacute;rer un E accent aigu majuscule',
 'barre_eo' => '<NEW> Ins&eacute;rer un E dans l\'O',
 'barre_eo_maj' => '<NEW> Ins&eacute;rer un Edans l\'O majuscule',
+'barre_euro' => '<NEW> Ins&eacute;rer le symbole &euro;',
 'barre_gras' => '<NEW> Mettre en {{gras}}',
-'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
-'barre_guillemets_simples' => '<NEW> Entourer de &bdquo;guillemets&ldquo;',
+'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets &raquo;',
+'barre_guillemets_simples' => '<NEW> Entourer de &ldquo;guillemets de second niveau&rdquo;',
 'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
 'barre_italic' => '<NEW> Mettre en {italique}',
 'barre_lien' => '<NEW> Transformer en [lien hypertexte->http://...]',
@@ -138,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non enviar as novidades editoriais',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Non enviar &aacute; lista de novidades',
 'bouton_radio_non_syndication' => 'Sen afiliaci&oacute;n',
-'bouton_radio_occidental' => 'Alfabeto occidental (<tt>ISO-8859-1</tt>): soportado por todo.los navegadores, mais s&oacute; permite
+'bouton_radio_occidental' => '<MODIF> Alfabeto occidental (<tt>ISO-8859-1</tt>): soportado por todo.los navegadores, mais s&oacute; permite
 		amosar linguas do oeste da Europa (ingl&eacute;s, franc&eacute;s, alem&aacute;n, galego...).',
 'bouton_radio_pas_petition' => 'Sen petici&oacute;n',
 'bouton_radio_personnalise' => 'Xogo de caracteres persoalizado: elixe esta opci&oacute;n se queres
@@ -151,7 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		 en <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Eliminar a petici&oacute;n',
 'bouton_radio_syndication' => 'Afiliaci&oacute;n:',
-'bouton_radio_universel' => 'Alfabeto occidental (<tt>UTF-8</tt>): permite amosar toda.las linguas, mais non &eacute; reco&ntilde;ecido
+'bouton_radio_universel' => '<MODIF> Alfabeto occidental (<tt>UTF-8</tt>): permite amosar toda.las linguas, mais non &eacute; reco&ntilde;ecido
 		por todo.los navegadores ata o de agora.',
 'bouton_recharger_page' => 'recargar a p&aacute;xina',
 'bouton_redirection' => 'REDIRECCI&Oacute;N',
@@ -164,6 +165,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_valider' => 'Validar',
 'bouton_vider_cache' => 'Valeirar a cach&eacute;',
 'bouton_voir_message' => 'Ver a mensaxe antes de valida.la',
+
+
+// C
+'calendrier_synchro' => '<NEW> Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 
 
 // D
@@ -357,17 +362,32 @@ Gracias pola t&uacute;a participaci&oacute;n
 
 
 // I
+'ical_info1' => '<NEW> Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
+'ical_info2' => '<NEW> Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => '<NEW> Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
+'ical_methode_http' => '<NEW> T&eacute;l&eacute;chargement',
+'ical_methode_webcal' => '<NEW> Synchronisation (webcal://)',
+'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
+'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
+'ical_titre_js' => '<NEW> Javascript',
+'ical_titre_mailing' => '<NEW> Mailing-list',
+'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
 'icone_a_suivre' => 'Panel de control',
 'icone_activer_cookie' => 'Activar a cookie de correspondencia',
 'icone_admin_site' => 'Xesti&oacute;n do lugar',
 'icone_afficher_auteurs' => 'Amosar o equipo de redacci&oacute;n',
 'icone_afficher_visiteurs' => 'Amosar as visitas',
+'icone_agenda' => '<NEW> Agenda',
 'icone_aide_ligne' => 'Axuda en li&ntilde;a',
 'icone_arret_discussion' => 'Non volver participar nesta discusi&oacute;n',
 'icone_articles' => 'Artigos',
 'icone_auteurs' => 'Equipo de redacci&oacute;n',
 'icone_breves' => 'Breves',
+'icone_brouteur' => '<NEW> Navigation rapide',
 'icone_calendrier' => 'Calend&aacute;rio',
+'icone_calendrier_messagerie' => '<NEW> Agenda et messagerie',
 'icone_configuration_site' => 'Configuraci&oacute;n do lugar',
 'icone_configurer_site' => 'Configurar o teu lugar',
 'icone_creation_groupe_mots' => 'Crear un novo grupo de palabras',
@@ -379,17 +399,20 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_creer_rubrique_2' => 'Crear un novo tema',
 'icone_creer_sous_rubrique' => 'Crear un apartado',
 'icone_deconnecter' => 'Desligar',
+'icone_discussions' => '<NEW> Discussions',
 'icone_doc_rubrique' => 'Documento dos temas',
 'icone_ecrire_article' => 'Escreber un novo artigo',
 'icone_ecrire_nouvel_article' => 'As breves contidas neste tema',
-'icone_edition_site' => 'Edici&oacute;n do lugar',
+'icone_edition_site' => '<MODIF> Edici&oacute;n do lugar',
 'icone_envoyer_message' => 'Enviar a mensaxe',
+'icone_etat_traductions' => '<NEW> &Eacute;tat des traductions',
 'icone_evolution_visites' => 'Evoluci&oacute;n das visitas<br>@visites@ visitas@aff_ref@',
 'icone_evolution_visites_2' => 'Evoluci&oacute;n das visitas',
 'icone_forum_administrateur' => 'Foro de xesti&oacute;n',
 'icone_forum_interne' => 'Foro interno',
 'icone_forum_suivi' => 'Seguemento dos foros',
 'icone_forums_petitions' => 'Foros e petici&oacute;ns',
+'icone_gestion_langues' => '<NEW> Gestion des langues',
 'icone_informations_personnelles' => 'Informaci&oacute;n persoal',
 'icone_interface_complet' => 'Interface completa',
 'icone_interface_simple' => 'Interface sinxela',
@@ -410,6 +433,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_refuser_breve' => 'Rexeitar esta breve',
 'icone_repartition_actuelle' => 'Amosar a distribuci&oacute;n actual',
 'icone_repartition_debut' => 'Amosar a distribuci&oacute;n dende o principio',
+'icone_repartition_visites' => '<NEW> R&eacute;partition des visites',
 'icone_retour' => 'Voltar',
 'icone_retour_article' => 'Voltar &oacute; artigo',
 'icone_rubriques' => 'Temas',
@@ -418,6 +442,8 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_sites_references' => 'Lugares referidos',
 'icone_statistiques' => 'Estat&iacute;sticas do lugar',
 'icone_statistiques_visites' => 'Estat&iacute;sticas das visitas',
+'icone_suivi_activite' => '<NEW> Suivre la vie du site',
+'icone_suivi_actualite' => '<NEW> &Eacute;volution du&nbsp;site',
 'icone_suivi_forum' => 'Seguemento do foro publico: @nb_forums@ contribuci&oacute;n(s)',
 'icone_suivi_forums' => 'Seguir os foros',
 'icone_suivi_pettions' => 'Seguir as petici&oacute;ns',
@@ -462,7 +488,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_adresse_email' => 'ENDEREZO DE E-MAIL:',
 'info_adresse_non_indiquee' => 'Non escribiches un enderezo a probar!',
 'info_adresse_url' => 'Enderezo (URL) do lugar p&uacute;blico',
-'info_afficher_visites' => 'Amosar as visitas para:',
+'info_afficher_visites' => '<MODIF> Amosar as visitas para:',
 'info_affichier_visites_articles_plus_visites' => 'Amosar as visitas para <b>os artigos m&aacute;is visitados dende o principio:</b>',
 'info_aide' => 'AXUDA:',
 'info_aide_en_ligne' => 'Axuda en li&ntilde;a do SPIP',
@@ -528,6 +554,8 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Non esquezas os teus c&oacute;digos de acceso!',
 'info_comment_lire_tableau' => 'C&oacute;mo interpretar este cadro',
+'info_config_suivi' => '<NEW> Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => '<NEW> Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Confirmar o novo contrasinal:',
 'info_connexion_base' => 'Segunda etapa: <B>Intento de conexi&oacute;n &aacute; base</B>',
 'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</B><P> Podes pasar &aacute; etapa seguinte.',
@@ -541,7 +569,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_contribution' => 'contribuci&oacute;ns no foro',
 'info_copyright' => '&eacute; un programa libre distribuido <a href=\'copyright_fr.html\'>baixo licencia GPL.</a>',
 'info_copyright_doc' => '<MODIF> Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.spip.net/gl\'>http://www.spip.net/gl</a>.',
-'info_cours_edition' => 'Os teus artigos en proceso de edici&oacute;n',
+'info_cours_edition' => '<MODIF> Os teus artigos en proceso de edici&oacute;n',
 'info_creation_mots_cles' => 'Crea e configura eiqu&iacute; as palabras chave do lugar',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as valeiras.)',
 'info_creation_rubrique' => 'Antes de poder escreber artigos,<BR> tes que crear, alomenos un tema.<BR>',
@@ -686,6 +714,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_mail_fournisseur' => 'oteu@proveedor.com',
 'info_maximum' => 'm&aacute;ximo:',
 'info_message' => 'Mensaxe de',
+'info_message_2' => '<NEW> MESSAGE',
 'info_message_efface' => 'MENSAXE BORRADA',
 'info_message_en_redaction' => 'As t&uacute;as mensaxes en proceso de redacci&oacute;n',
 'info_message_supprime' => 'MENSAXE ELIMINADA',
@@ -717,6 +746,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_multi_herit' => '<NEW> Langue par d&eacute;faut',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
+'info_multi_langues_soulignees' => '<NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multi_rubriques' => '<NEW> Activer le menu de langue sur les rubriques&nbsp;?',
 'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => '<NEW> Multilinguisme',
@@ -752,6 +782,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_nouveaux_message' => 'Novas mensaxes',
 'info_nouveaux_messages' => 'TES @total_messages@ NOVAS MENSAXES',
 'info_nouvel_article' => 'Novo artigo',
+'info_nouvelle_traduction' => '<NEW> Nouvelle traduction&nbsp;:',
 'info_numero_article' => 'ARTIGO N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obrigatorio]',
 'info_option_email' => 'Cando unha visita env&iacute;a unha nova mensaxe no foro
@@ -788,6 +819,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_pour' => 'para',
 'info_premier_resultat' => '[@debut_limit@ primeiros resultados de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeiros resultados de @total@]',
+'info_principaux_correspondants' => '<NEW> Vos principaux correspondants',
 'info_probleme_grave' => 'problema de',
 'info_procedez_par_etape' => 'procede etapa por etapa',
 'info_procedure_maj_version' => 'o procedemento da posta &oacute; d&iacute;a ten que ser lanzado a fin
@@ -1184,7 +1216,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'menu_aide_sites_syndiquer' => 'lugares afiliados',
 'menu_aide_suivi_forum' => 'Seguemento dos foros',
 'menu_aide_suivi_forum_articles_postes' => 'Artigos con data posterior',
-'menu_aide_suivi_forum_configuration' => 'Configuraci&oacute;n precisa',
+'menu_aide_suivi_forum_configuration' => '<MODIF> Configuraci&oacute;n precisa',
 'menu_aide_suivi_forum_contenu_articles' => 'Contido dos artigos',
 'menu_aide_suivi_forum_envoi_emails' => 'Env&iacute;o autom&aacute;tico de e-mails',
 'menu_aide_suivi_forum_fonctionnement' => 'Funcionamento dos foros',
@@ -1194,13 +1226,23 @@ Gracias pola t&uacute;a participaci&oacute;n
 'menu_aide_suivi_forum_statistiques' => 'Estat&iacute;sticas das visitas',
 'menu_aide_suivi_forum_suivi' => 'Seguemento dos foros',
 'menu_aide_suivi_forum_systeme_breves' => 'Sistema de breves',
+'module_fichier_langue' => '<NEW> Fichier de langue',
+'module_fichiers_langues' => '<NEW> Fichiers de langue',
+'module_raccourci' => '<NEW> Raccourci',
+'module_texte_affiche' => '<NEW> Texte affich&eacute;',
+'module_texte_explicatif' => '<NEW> Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
+'module_texte_traduction' => '<NEW> Le fichier de langue &laquo;&nbsp;@module@&nbsp;&raquo; est disponible en&nbsp;:',
 'mois_non_connu' => 'desco&ntilde;ecido',
 
 
 // O
 'onglet_affacer_base' => 'Eliminar a base',
+'onglet_agenda' => '<NEW> Agenda',
 'onglet_auteur' => 'A persoa',
+'onglet_bilan_traductions' => '<NEW> Bilan des traductions',
+'onglet_calendrier' => '<NEW> Calendrier',
 'onglet_contenu_site' => 'Contido do lugar',
+'onglet_detail_traductions' => '<NEW> Les articles &agrave; traduire',
 'onglet_evolution_visite' => 'Evoluci&oacute;n das visitas',
 'onglet_evolution_visite_mod' => '<NEW> &Eacute;volution',
 'onglet_fonctions_avances' => 'Funci&oacute;ns avanzadas',
@@ -1209,6 +1251,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'onglet_langue' => 'Idiomas do lugar',
 'onglet_langues' => '<NEW> Langues',
 'onglet_messagerie' => 'Mensaxer&iacute;a',
+'onglet_messagerie_personnelle' => '<NEW> Messagerie personnelle',
 'onglet_messages_internes' => 'Mensaxes internas',
 'onglet_messages_publics' => 'Mensaxes p&uacute;blicas',
 'onglet_messages_vide' => 'Mensaxes sen texto',
@@ -1301,9 +1344,10 @@ e reconectar co lugar.
 'texte_article_virtuel_reference' => '<b>Artigo virtual:</b> artigo referido no teu lugar SPIP,
 		mais redirixido cara a outra URL. Para eliminar a redirecci&oacute;n, elimina a URL eiqu&iacute;.',
 'texte_aucun_resultat_auteur' => 'Neng&uacute;n resultado para "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Este lugar pode indicar permanentemente a lista dos redactores/as conectad@s, o que che permite intercambiar mensaxes en directo (cando a mensaxer&iacute;a est&aacute; desactivada enbaixo, a lista d@s redactoras/es estar&aacute; igualmente desactivada). Podes decidir non aparecer nesta lista (dese xeito ser&aacute;s &laquo;invisible&raquo; para @s dem&aacute;is).',
+'texte_auteur_messagerie' => '<MODIF> Este lugar pode indicar permanentemente a lista dos redactores/as conectad@s, o que che permite intercambiar mensaxes en directo (cando a mensaxer&iacute;a est&aacute; desactivada enbaixo, a lista d@s redactoras/es estar&aacute; igualmente desactivada). Podes decidir non aparecer nesta lista (dese xeito ser&aacute;s &laquo;invisible&raquo; para @s dem&aacute;is).',
 'texte_auteur_messagerie_1' => 'Este lugar permite o intercambio de mensaxes e a constituci&oacute;n de foros de discusi&oacute;n privados entre os participantes do lugar. Podes decidir non participar nestas lerias',
 'texte_auteurs' => 'A AUTOR&Iacute;A',
+'texte_bilan_traductions' => '<NEW> Dans ce graphique, les barres vertes repr&eacute;sentent les articles traduits et &agrave; jour, les barres rouges les traductions devant &ecirc;tre mises &agrave; jour.',
 'texte_breves' => 'As breves son textos curtos e simples que permeten
 		publicar r&aacute;pidamente informaci&oacute;ns concisas, xestionar unha
 		revista de prensa, un calendario de eventos...',
@@ -1380,7 +1424,7 @@ e reconectar co lugar.
 'texte_informations_personnelles_1' => 'O sistema hache crear agora un acceso persoalizado ao lugar',
 'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalaci&oacute;n, e o teu acceso vai sen atrancos, podes',
 'texte_introductif_article' => '(Texto introductorio do artigo.)',
-'texte_jeu_caractere' => 'Esta opci&oacute;n &eacute; util se o teu lugar debe amosar alfabetos
+'texte_jeu_caractere' => '<MODIF> Esta opci&oacute;n &eacute; util se o teu lugar debe amosar alfabetos
 		diferentes do alfabeto rom&aacute;n (ou &laquo;occidental&raquo;) e os seus derivados.
 		Neste caso, ter&aacute;s que trocar o axuste por defecto para empregar
 		un xogo de caracteres axeitado. L&eacute;mbrate de adaptar
@@ -1428,6 +1472,16 @@ e reconectar co lugar.
 'texte_nouvelle_version_spip_1' => 'Instalaches unha nova versi&oacute;n de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Esta nova versi&oacute;n precisa unha posta &oacute; d&iacute;a m&aacute;is completa que a acostumada. Se eres webmestra/e do lugar, elimina o ficheiro <tt>inc_connect.php3</tt> do directorio <tt>ecrire</tt> e retoma a instalaci&oacute;n para po&ntilde;er &oacute; d&iacute;a os par&aacute;metros de conexi&oacute;n &aacute; base de datos.<p> (NB.: se esquenciches os teus datos de conexi&oacute;n, b&oacute;talle un ollo &oacute; ficheiro <tt>inc_connect.php3</tt> antes de borralo...)',
 'texte_operation_echec' => 'Volta &aacute; p&aacute;xina anterior, selecciona outra base ou crea unha nova. Verifica as informaci&oacute;ns que che dera o teu proveedor.',
+'texte_plan_trad' => '<NEW> Cette page vous permet de visualiser l\'&eacute;tat des traductions pour la langue choisie. 
+		La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave jour, 
+		ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
+'texte_plan_trad_en_cours' => '<NEW> Ce symbole indique qu\'un article est en cours de traduction&nbsp;: cela veut dire qu\'une traduction 
+		a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
+		&agrave; la traduction. ',
+'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave 
+		un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
+		traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
+'texte_plan_trad_note' => '<NEW> Note&nbsp;: seuls les articles publi&eacute;s sont affich&eacute;s dans cette page.',
 'texte_plus_trois_car' => 'm&aacute;is de 3 caracteres',
 'texte_plusieurs_articles' => 'Atop&aacute;ron.se varias entradas para "@cherche_auteur@":',
 'texte_port_annuaire' => '(En xeral, conv&eacute;n po&ntilde;er o valor indicado por defecto.)',
@@ -1514,12 +1568,15 @@ e reconectar co lugar.
 'titre_admin_tech' => 'Mantemento t&eacute;cnico',
 'titre_admin_vider' => 'Mantemento t&eacute;cnico',
 'titre_ajouter_mot_cle' => 'ENGADIR UNHA PALABRA CHAVE:',
+'titre_articles_populaires' => '<NEW> Articles les plus populaires',
 'titre_articles_syndiques' => 'Artigos afiliados extraidos deste lugar',
+'titre_articles_visites' => '<NEW> Articles les plus visit&eacute;s',
 'titre_breve_proposee' => 'Breve proposta',
 'titre_breve_publiee' => 'Breve publicada',
 'titre_breve_refusee' => 'Breve rexeitada',
 'titre_breves' => 'As breves',
 'titre_cadre_afficher_article' => 'Amosar os artigos',
+'titre_cadre_afficher_traductions' => '<NEW> Afficher l\'&eacute;tat des traductions pour cette langue',
 'titre_cadre_ajouter_auteur' => 'ENGADIR UN/UNHA AUTOR/A:',
 'titre_cadre_forum_administrateur' => 'Foro privado de xesti&oacute;n',
 'titre_cadre_forum_interne' => 'Foro interno',
@@ -1576,6 +1633,7 @@ e reconectar co lugar.
 'titre_page_controle_petition' => 'Seguemento das petici&oacute;ns',
 'titre_page_delete_all' => 'Supresi&oacute;n total e irreversible',
 'titre_page_documents_liste' => 'Os documentos dos temas',
+'titre_page_etat_traductions' => '<NEW> &Eacute;tat des traductions',
 'titre_page_forum' => 'Foro de xesti&oacute;n',
 'titre_page_forum_envoi' => 'Enviar unha mensaxe',
 'titre_page_forum_suivi' => 'Seguemento dos foros',
