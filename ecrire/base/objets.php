@@ -885,6 +885,7 @@ function table_objet($type,$serveur='') {
 			return $desc['id_table'];
 
 		spip_log( 'table_objet('.$type.') calculee sans verification');
+		spip_log(debug_backtrace(),'db');
 	}
 
 	return rtrim($type,'s')."s"; # cas historique ne devant plus servir, sauf si $serveur=false

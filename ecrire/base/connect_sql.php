@@ -144,7 +144,7 @@ function spip_sql_erreur($serveur='')
 	$connexion = spip_connect($serveur);
 	$e = sql_errno($serveur);
 	$t = (isset($connexion['type']) ? $connexion['type'] : 'sql');
-	$m = "Erreur $e de $t: " . sql_error($serveur) . "\n" . $connexion['last'];
+	$m = "Erreur $e de $t: " . sql_error($serveur) . "\nin ".sql_error_backtrace()."\n" . trim($connexion['last']);
 	$f = $t . $serveur;
 	spip_log($m, $f.'.'._LOG_ERREUR);
 }
