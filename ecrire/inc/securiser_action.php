@@ -80,6 +80,7 @@ function caracteriser_auteur() {
 	if (isset($visiteur_session['pass']) AND $visiteur_session['pass'])
 		return $caracterisation = array($id_auteur, $visiteur_session['pass']); 
 	else if ($id_auteur>0) {
+		include_spip('base/abstract_sql');
 		$t = sql_select("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
 		if ($t = sql_fetch($t))
 			return $caracterisation = array($t['id_auteur'], $t['pass']);
