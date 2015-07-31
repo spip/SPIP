@@ -20,9 +20,9 @@ include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
 include_spip('inc/acces'); // Gestion des acces pour ical
 include_spip('public/debug'); # toujours prevoir le pire
 include_spip('public/interfaces');
+include_spip('public/quete');
 
-# Charge et retourne un composeur, i.e. la fonction principale d'un squelette
-# ou '' s'il est inconnu. Le compile au besoin
+# Charge et retourne un composeur ou '' s'il est inconnu. Le compile au besoin
 # Charge egalement un fichier homonyme de celui du squelette
 # mais de suffixe '_fonctions.php' pouvant contenir:
 # 1. des filtres
@@ -31,22 +31,31 @@ include_spip('public/interfaces');
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 // http://doc.spip.org/@public_composer_dist
-function public_composer_dist($squelette, $nom, $gram, $source, $connect='') {
+function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='') {
+
+	$nom = calculer_nom_fonction_squel($squelette, $mime_type, $connect);
+
+	//  si deja en memoire (INCLURE  a repetition) c'est bon.
+
+	if (function_exists($nom)) return array($nom);
+	spip_log("composer $nom a fabriquer");
+	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
+		$GLOBALS['debug_objets']['courant'] = $nom;
 
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
 	// si squelette est deja compile et perenne, le charger
 	if (!squelette_obsolete($phpfile, $source)
-	AND lire_fichier ($phpfile, $contenu,
+	AND lire_fichier ($phpfile, $skel_code,
 	array('critique' => 'oui', 'phpcheck' => 'oui')))
-		eval('?'.'>'.$contenu);
-#	spip_log($contenu, 'comp')
-	if (@file_exists($fonc = $squelette . '_fonctions'.'.php'))
-		include_once $fonc;
+		eval('?'.'>'.$skel_code);
+#	spip_log($skel_code, 'comp')
+	if (@file_exists($lib = $squelette . '_fonctions'.'.php'))
+		include_once $lib;
 
 	// tester si le eval ci-dessus a mis le squelette en memoire
-
-	if (function_exists($nom)) return $contenu;
+	spip_log("composer $nom a fabriquer");
+	if (function_exists($nom)) return array($nom, $skel_code);
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($source, $skel)) {
@@ -64,7 +73,7 @@ function public_composer_dist($squelette, $nom, $gram, $source, $connect='') {
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
-			return $skel_code;
+			return array($nom, $skel_code);
 		} else {
 			erreur_squelette(_T('zbug_erreur_compilation'), $source);
 		}
@@ -102,6 +111,74 @@ function invalideur_session(&$Cache, $code=NULL) {
 // trouver un modele de donnees qui les associe physiquement au fichier
 // definissant leur balise ???
 //
+
+// http://doc.spip.org/@echapper_php_callback
+function echapper_php_callback($r) {
+	static $src = array();
+	static $dst = array();
+
+	// si on recoit un tableau, on est en mode echappement
+	// on enregistre le code a echapper dans dst, et le code echappe dans src
+	if (is_array($r)) {
+		$dst[] = $r[0];
+		return $src[] = '___'.md5($r[0]).'___';
+	}
+
+	// si on recoit une chaine, on est en mode remplacement
+	$r = str_replace($src, $dst, $r);
+	$src = $dst = array(); // raz de la memoire
+	return $r;
+}
+
+// http://doc.spip.org/@analyse_resultat_skel
+function analyse_resultat_skel($nom, $cache, $corps, $source='') {
+	$headers = array();
+
+	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
+	// note: on essaie d'attrapper aussi certains de ces entetes codes
+	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
+	if (preg_match_all(
+	'/(<[?]php\s+)@?header\s*\(\s*.([^:]*):\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
+	$corps, $regs, PREG_SET_ORDER))
+	foreach ($regs as $r) {
+		$corps = str_replace($r[0], '', $corps);
+		# $j = Content-Type, et pas content-TYPE.
+		$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
+		$headers[$j] = $r[3];
+	}
+
+	// S'agit-il d'un resultat constant ou contenant du code php
+	$process_ins = (
+		strpos($corps,'<'.'?') === false
+		OR strpos(str_replace('<'.'?xml', '', $corps),'<'.'?') === false
+	)
+		? 'html'
+		: 'php';
+
+	// traiter #FILTRE{} ?
+	if (isset($headers['X-Spip-Filtre'])
+	AND strlen($headers['X-Spip-Filtre'])) {
+		// proteger les <INCLUDE> et tous les morceaux de php
+		if ($process_ins == 'php')
+			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
+				echapper_php_callback, $corps);
+		foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
+			$corps = appliquer_filtre($corps, $filtre);
+		}
+		// restaurer les echappements
+		$corps = echapper_php_callback($corps);
+		unset($headers['X-Spip-Filtre']);
+	}
+
+	return array('texte' => $corps,
+		'squelette' => $nom,
+		'source' => $source,
+		'process_ins' => $process_ins,
+		'invalideurs' => $cache,
+		'entetes' => $headers,
+		'duree' => isset($headers['X-Spip-Cache']) ? intval($headers['X-Spip-Cache']) : 0 
+	);
+}
 
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
@@ -300,63 +377,6 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
 }
 
 
-//
-// FONCTIONS FAISANT DES APPELS SQL
-//
-
-# NB : a l'exception des fonctions pour les balises dynamiques
-
-// http://doc.spip.org/@calcul_exposer
-function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
-	static $exposer = array();
-	static $ref_precedente =-1;
-
-	// Que faut-il exposer ? Tous les elements de $reference
-	// ainsi que leur hierarchie ; on ne fait donc ce calcul
-	// qu'une fois (par squelette) et on conserve le resultat
-	// en static.
-	if (!isset($exposer[$m=md5(serialize($reference))][$prim])) {
-		$principal = $reference[$type];
-		if (!$principal) { // regarder si un enfant est dans le contexte, auquel cas il expose peut etre le parent courant
-			$enfants = array('id_rubrique'=>array('id_article'),'id_groupe'=>array('id_mot'));
-			if (isset($enfants[$type]))
-				foreach($enfants[$type] as $t)
-					if (isset($reference[$t])) {
-						$type = $t;
-						$principal = $reference[$type];
-						$parent=0;
-						continue;
-					}
-		}
-		$exposer[$m][$type] = array();
-		$parent = intval($parent);
-		if ($principal) {
-			$exposer[$m][$type][$principal] = true;
-			if ($type == 'id_mot'){
-				if (!$parent) {
-					$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
-					$parent = $parent['id_groupe'];
-				}
-				if ($parent)
-					$exposer[$m]['id_groupe'][$parent] = true;
-			}
-			else if ($type != 'id_groupe') {
-			  if (!$parent) {
-			  	if ($type == 'id_rubrique')
-			  		$parent = $principal;
-			  	if ($type == 'id_article') {
-						$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal, '','','','',$connect);
-						$parent = $parent['id_rubrique'];
-			  	}
-			  }
-			  do { $exposer[$m]['id_rubrique'][$parent] = true; }
-			  while ($parent = quete_parent($parent, $connect));
-			}
-		}
-	}
-	// And the winner is...
-	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
-}
 
 // http://doc.spip.org/@lister_objets_avec_logos
 function lister_objets_avec_logos ($type) {
@@ -377,98 +397,6 @@ function lister_objets_avec_logos ($type) {
 	}
 	@closedir($d);
 	return join(',',$logos);
-}
-
-// fonction appelee par la balise #LOGO_DOCUMENT
-// http://doc.spip.org/@calcule_logo_document
-function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params, $connect='') {
-	include_spip('inc/documents');
-
-	if (!$id_document) return '';
-	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
-
-	if (!($row = sql_fetsel('extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
-		// pas de document. Ne devrait pas arriver
-		spip_log("Erreur du compilateur doc $id_document inconnu");
-		return ''; 
-	}
-
-	$extension = $row['extension'];
-	$id_vignette = $row['id_vignette'];
-	$fichier = $row['fichier'];
-	$mode = $row['mode'];
-	$logo = '';
-
-	// Y a t il une vignette personnalisee ?
-	// Ca va echouer si c'est en mode distant. A revoir.
-	if ($id_vignette) {
-		$vignette = sql_fetsel('fichier','spip_documents',("id_document = $id_vignette"), '','','','',$connect);
-		if (@file_exists(get_spip_doc($vignette['fichier'])))
-		  $logo = generer_url_entite($id_vignette, 'document');
-	} else if ($mode == 'vignette') {
-		$logo = generer_url_entite($id_vignette, 'document');
-		if (!@file_exists($logo))
-			$logo = '';
-	}
-
-	// taille maximum [(#LOGO_DOCUMENT{300,52})]
-	if ($params
-	AND preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
-		$x = intval($r[1]);
-		$y = intval($r[2]);
-	}
-
-	if ($logo AND @file_exists($logo)) {
-		if ($x OR $y)
-			$logo = reduire_image($logo, $x, $y);
-		else {
-			$size = @getimagesize($logo);
-			$logo = "<img src='$logo' ".$size[3]." />";
-		}
-	}
-	else {
-		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false) {
-		  if ($img = _DIR_RACINE.copie_locale(get_spip_doc($fichier))
-			AND @file_exists($img)) {
-				if (!$x AND !$y) {
-					$logo = reduire_image($img);
-				} else {
-					# eviter une double reduction
-					$size = @getimagesize($img);
-					$logo = "<img src='$img' ".$size[3]." />";
-				}
-		  }
-		  // cas de la vignette derriere un htaccess
-		} elseif ($logo) $logo = "<img src='$logo'>";
-
-		// Document sans vignette ni image : vignette par defaut
-		if (!$logo) {
-			$img = vignette_par_defaut($extension, false);
-			$size = @getimagesize($img);
-			$logo = "<img src='$img' ".$size[3]." />";
-		}
-	}
-
-	// Reduire si une taille precise est demandee
-	if ($x OR $y)
-		$logo = reduire_image($logo, $x, $y);
-
-	// flag_fichier : seul le fichier est demande
-	if ($flag_fichier)
-		return set_spip_doc(extraire_attribut($logo, 'src'));
-
-	// Calculer le code html complet (cf. calcule_logo)
-	$logo = inserer_attribut($logo, 'alt', '');
-	$logo = inserer_attribut($logo, 'class', 'spip_logos');
-	if ($align)
-		$logo = inserer_attribut($logo, 'align', $align);
-
-	if ($lien) {
-		$mime = sql_getfetsel('mime_type','spip_types_documents', "extension = " . sql_quote($extension));
-		$logo = "<a href='$lien' type='$mime'>$logo</a>";
-	}
-	return $logo;
 }
 
 // fonction appelee par la balise #NOTES
@@ -501,31 +429,6 @@ function nettoyer_env_doublons($envd) {
 	}
 	return $envd;
 }
-
-
-
-// Ajouter "&lang=..." si la langue de base n'est pas celle du site.
-// Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
-// determiner la table a la compil, on le fait maintenant.
-// Il faudrait encore completer: on ne connait pas la langue
-// pour une boucle forum sans id_article ou id_rubrique donné par le contexte
-// et c'est signale par un message d'erreur abscons: "table inconnue forum".
-// 
-// http://doc.spip.org/@lang_parametres_forum
-function lang_parametres_forum($qs, $lang) {
-	if (is_array($lang) AND preg_match(',id_(\w+)=([0-9]+),', $qs, $r)) {
-		$id = 'id_' . $r[1];
-		if ($t = $lang[$id])
-			$lang = sql_getfetsel('lang', $t, "$id=" . $r[2]);
-	}
-  // Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
-
-	if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
-		return $qs . "&lang=" . $lang;
-
-	return $qs;
-}
-
 
 // http://doc.spip.org/@match_self
 function match_self($w){
@@ -748,4 +651,14 @@ function remplacer_jointnul($cle, $exp, $equiv='')
 		return $exp;
 	}
 }
+
+// calcul du nom du squelette
+// http://doc.spip.org/@calculer_nom_fonction_squel
+function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
+{
+	return $mime_type
+	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
+	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel);
+}
+
 ?>

@@ -429,6 +429,7 @@ ecrire/maj/vieille_base/create.php -text
 ecrire/prive.php -text
 ecrire/public/index.php -text
 ecrire/public/jointures.php -text
+ecrire/public/quete.php -text
 ecrire/public/vertebrer.php -text
 ecrire/req/pg.php -text
 ecrire/req/sqlite2.php -text

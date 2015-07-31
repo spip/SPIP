@@ -194,11 +194,10 @@ function valider_skel($transformer_xml, $file, $dir)
 		if ($r[1] === 'css' OR $r[1] === 'plain')
 			return array('/', 'DOCTYPE?', $file,'');
 	}
-	include_spip('public/parametrer'); // pour la fct suivante
-	$skel_nom = calculer_nom_fonction_squel($skel);
-	include_spip('public/assembler'); // pour recuperer_fond
-	$composer = charger_fonction('composer', 'public', 'html', $file);
-	$skel_code = $composer($skel, $skel_nom, 'html', $file);
+
+	$composer = charger_fonction('composer', 'public');
+	list($skel_nom, $skel_code) = $composer($skel, 'html', 'html', $file);
+	spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
 	$contexte = valider_contexte($skel_code, $file);
 	$page = $skel_nom(array('cache'=>''), array($contexte));
 	list($texte, $err) = $transformer_xml($page['texte']);
