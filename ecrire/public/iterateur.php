@@ -153,13 +153,14 @@ class IterDecorator extends FilterIterator {
 	// enleve les elements inutiles du select()
 	// 
 	private function calculer_select() {
-		$select = &$this->command['select'];
-		foreach($select as $s) {
-			// /!\ $s = '.nom'
-			if ($s[0] == '.') {
-				$s = substr($s, 1);
+		if ($select = &$this->command['select']) {
+			foreach($select as $s) {
+				// /!\ $s = '.nom'
+				if ($s[0] == '.') {
+					$s = substr($s, 1);
+				}
+				$this->select[] = $s;
 			}
-			$this->select[] = $s;
 		}
 	}
 
@@ -203,34 +204,35 @@ class IterDecorator extends FilterIterator {
 		// {X ?} avec X absent de l'URL
 		// {par #ENV{X}} avec X absent de l'URL
 		// IN sur collection vide (ce dernier devrait pouvoir etre fait a la compil)
-		$where = &$this->command['where'];
-		$menage = false;
-		foreach($where as $k => $v) { 
-			if (is_array($v)){
-				if ((count($v)>=2) && ($v[0]=='REGEXP') && ($v[2]=="'.*'")) $op= false;
-				elseif ((count($v)>=2) && ($v[0]=='LIKE') && ($v[2]=="'%'")) $op= false;
-				else $op = $v[0] ? $v[0] : $v;
-			} else $op = $v;
-			if ((!$op) OR ($op==1) OR ($op=='0=0')) {
-				unset($where[$k]);
-				$menage = true;
+		if ($where = &$this->command['where']) {
+			$menage = false;
+			foreach($where as $k => $v) { 
+				if (is_array($v)){
+					if ((count($v)>=2) && ($v[0]=='REGEXP') && ($v[2]=="'.*'")) $op= false;
+					elseif ((count($v)>=2) && ($v[0]=='LIKE') && ($v[2]=="'%'")) $op= false;
+					else $op = $v[0] ? $v[0] : $v;
+				} else $op = $v;
+				if ((!$op) OR ($op==1) OR ($op=='0=0')) {
+					unset($where[$k]);
+					$menage = true;
+				}
 			}
-		}
-		foreach($where as $k => $v) {
-			// 3 possibilites : count($v) =
-			// * 1 : {x y} ; on recoit $v[0] = y
-			// * 2 : {x !op y} ; on recoit $v[0] = 'NOT', $v[1] = array() // array du type {x op y}
-			// * 3 : {x op y} ; on recoit $v[0] = 'op', $v[1] = x, $v[2] = y
+			foreach($where as $k => $v) {
+				// 3 possibilites : count($v) =
+				// * 1 : {x y} ; on recoit $v[0] = y
+				// * 2 : {x !op y} ; on recoit $v[0] = 'NOT', $v[1] = array() // array du type {x op y}
+				// * 3 : {x op y} ; on recoit $v[0] = 'op', $v[1] = x, $v[2] = y
 
-			// 1 : forcement traite par un critere, on passe
-			if (count($v) == 1) {
-				continue;
-			}
-			if (count($v) == 2) {
-				$this->ajouter_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
-			}
-			if (count($v) == 3) {
-				$this->ajouter_filtre($v[1], $v[0], $v[2]);
+				// 1 : forcement traite par un critere, on passe
+				if (count($v) == 1) {
+					continue;
+				}
+				if (count($v) == 2) {
+					$this->ajouter_filtre($v[1][1], $v[1][0], $v[1][2], 'NOT');
+				}
+				if (count($v) == 3) {
+					$this->ajouter_filtre($v[1], $v[0], $v[2]);
+				}
 			}
 		}
 
