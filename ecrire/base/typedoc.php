@@ -115,21 +115,43 @@ $tables_documents = array(
 			  'xml' => 'XML',
 			  'zip' => 'Zip',
 
-			// open document format
-			'odt' => 'opendocument text',
-			'ods' => 'opendocument spreadsheet',
-			'odp' => 'opendocument presentation',
-			'odg' => 'opendocument graphics',
-			'odc' => 'opendocument chart',
-			'odf' => 'opendocument formula',
-			'odb' => 'opendocument database',
-			'odi' => 'opendocument image',
-			'odm' => 'opendocument text-master',
-			'ott' => 'opendocument text-template',
-			'ots' => 'opendocument spreadsheet-template',
-			'otp' => 'opendocument presentation-template',
-			'otg' => 'opendocument graphics-template',
-		
+				// open document format
+				'odt' => 'opendocument text',
+				'ods' => 'opendocument spreadsheet',
+				'odp' => 'opendocument presentation',
+				'odg' => 'opendocument graphics',
+				'odc' => 'opendocument chart',
+				'odf' => 'opendocument formula',
+				'odb' => 'opendocument database',
+				'odi' => 'opendocument image',
+				'odm' => 'opendocument text-master',
+				'ott' => 'opendocument text-template',
+				'ots' => 'opendocument spreadsheet-template',
+				'otp' => 'opendocument presentation-template',
+				'otg' => 'opendocument graphics-template',
+
+				// Open XML File Formats
+				'docm' => 'Word',
+				'docx' => 'Word',
+				'dotm' => 'Word template',
+				'dotx' => 'Word template',
+
+				'potm' => 'Powerpoint template',
+				'potx' => 'Powerpoint template',
+				'ppam' => 'Powerpoint addin',
+				'ppsm' => 'Powerpoint slideshow',
+				'ppsx' => 'Powerpoint slideshow',
+				'pptm' => 'Powerpoint',
+				'pptx' => 'Powerpoint',
+
+				'xlam' => 'Excel',
+				'xlsb' => 'Excel binary',
+				'xlsm' => 'Excel',
+				'xlsx' => 'Excel',
+				'xltm' => 'Excel template',
+				'xltx' => 'Excel template',
+
+
 			  );
 
 $tables_mime = array(
@@ -224,7 +246,7 @@ $tables_mime = array(
 		'xml'=>'application/xml',
 		'zip'=>'application/zip',
 
-		// open document format
+		// Open Document format
 		'odt' => 'application/vnd.oasis.opendocument.text',
 		'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
 		'odp' => 'application/vnd.oasis.opendocument.presentation',
@@ -238,8 +260,32 @@ $tables_mime = array(
 		'ots' => 'application/vnd.oasis.opendocument.spreadsheet-template',
 		'otp' => 'application/vnd.oasis.opendocument.presentation-template',
 		'otg' => 'application/vnd.oasis.opendocument.graphics-template',
+
+
 		'cls'=>'text/x-tex',
 		'sty'=>'text/x-tex',
+
+		// Open XML File Formats
+		'docm' => 'application/vnd.ms-word.document.macroEnabled.12',
+		'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+		'dotm' => 'application/vnd.ms-word.template.macroEnabled.12',
+		'dotx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.template',
+
+		'potm' => 'application/vnd.ms-powerpoint.template.macroEnabled.12',
+		'potx' => 'application/vnd.openxmlformats-officedocument.presentationml.template',
+		'ppam' => 'application/vnd.ms-powerpoint.addin.macroEnabled.12',
+		'ppsm' => 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12',
+		'ppsx' => 'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
+		'pptm' => 'application/vnd.ms-powerpoint.presentation.macroEnabled.12',
+		'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+
+		'xlam' => 'application/vnd.ms-excel.addin.macroEnabled.12',
+		'xlsb' => 'application/vnd.ms-excel.sheet.binary.macroEnabled.12',
+		'xlsm' => 'application/vnd.ms-excel.sheet.macroEnabled.12',
+		'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+		'xltm' => 'application/vnd.ms-excel.template.macroEnabled.12',
+		'xltx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
+
 	);
 
 

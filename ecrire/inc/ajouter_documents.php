@@ -432,10 +432,6 @@ function traite_svg($file)
 function corriger_extension($ext) {
 	$ext = preg_replace(',[^a-z0-9],i', '', $ext);
 	switch ($ext) {
-	case 'docx':
-		return 'doc';
-	case 'xlsx':
-		return 'xls';
 	case 'htm':
 		return 'html';
 	case 'jpeg':
