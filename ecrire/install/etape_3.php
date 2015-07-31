@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
 function install_bases(){
-	global $spip_lang_right, $spip_version;
 
 	$adresse_db = defined('_INSTALL_HOST_DB')
 		? _INSTALL_HOST_DB
@@ -58,9 +57,6 @@ function install_bases(){
 
 	$link = mysql_connect($adresse_db, $login_db, $pass_db);
 
-	echo "<"."!-- $link ";
-	echo "(".$GLOBALS['table_prefix'].")";
-
 	if ($choix_db == "new_spip") {
 		$sel_db = _request('table_new');
 		if (preg_match(',^[a-z_0-9-]+$,i', $sel_db))
@@ -69,8 +65,6 @@ function install_bases(){
 	else {
 		$sel_db = $choix_db;
 	}
-	echo "$sel_db ";
-
 	mysql_select_db($sel_db);
 	spip_query("SELECT COUNT(*) FROM spip_meta");
 	$nouvelle = spip_sql_errno();
@@ -87,17 +81,18 @@ function install_bases(){
 	creer_base();
 	include_spip('base/upgrade');
 	maj_base();
-	
+
 	// Tester $mysql_rappel_nom_base
 	$GLOBALS['mysql_rappel_nom_base'] = true;
 	$GLOBALS['spip_mysql_db'] = $sel_db;
 	$ok_rappel_nom = spip_query("INSERT INTO spip_meta (nom,valeur) VALUES ('mysql_rappel_nom_base', 'test')");
 	if ($ok_rappel_nom) {
-		echo " (ok rappel nom base `$sel_db`.spip_meta) ";
+		$res ='';
 		$ligne_rappel = '';
 		spip_query("DELETE FROM spip_meta WHERE nom='mysql_rappel_nom_base'");
 	} else {
-		echo " (erreur rappel nom base `$sel_db`.spip_meta $nouvelle) ";
+		$res = " $link (". $GLOBALS['table_prefix']
+		  . ") $sel_db (erreur rappel nom base `$sel_db`.spip_meta $nouvelle) ";
 		$GLOBALS['mysql_rappel_nom_base'] = false;
 		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
@@ -116,25 +111,25 @@ function install_bases(){
 			spip_query("INSERT INTO spip_meta (nom, valeur, impt) VALUES ('charset_sql_connexion', '".$GLOBALS['meta']['charset_sql_connexion']."', 'non')");
 		
 		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', '1')");
-		$result_ok = !spip_sql_errno();
+		$result_ko = spip_sql_errno();
 	} else {
 	  // en cas de reinstall sur mise a jour mal passee
-	  spip_query("DELETE FROM spip_meta WHERE nom='import_all'");
+		spip_query("DELETE FROM spip_meta WHERE nom='import_all'");
 		$result = spip_query("SELECT COUNT(*) FROM spip_articles");
-		$result_ok = (spip_num_rows($result) > 0);
+		$result_ko = (spip_num_rows($result) == 0);
 	}
-	echo "($result_ok) -->";
 
-	if($chmod) {
-		$conn = "<"."?php\n";
-		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
-		$conn .= "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n";
-		$conn .= "?".">";
-		if (!ecrire_fichier(_FILE_CHMOD_INS . _FILE_TMP . '.php',
+	if (!$result_ko) {
+		if($chmod) {
+			$conn = "<"."?php\n";
+			$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
+			$conn .= "@define('_SPIP_CHMOD', ". sprintf('0%3o',$chmod).");\n";
+			$conn .= "?".">";
+			if (!ecrire_fichier(_FILE_CHMOD_INS . _FILE_TMP . '.php',
 		$conn))
-			redirige_par_entete(generer_url_ecrire('install'));
-	}
-	if ($result_ok) {
+			  redirige_par_entete(generer_url_ecrire('install'));
+		}
+
 		if (preg_match(',(.*):(.*),', $adresse_db, $r))
 			list(,$adresse_db, $port) = $r;
 		else
@@ -152,75 +147,12 @@ function install_bases(){
 		$conn))
 			redirige_par_entete(generer_url_ecrire('install'));
 	}
-	return $result_ok;
+	return $result_ko ? "<!--\n$res\n-->" : '';
 }
 
-
-function install_etape_3_dist()
+function install_propose_ldap()
 {
-	global $email, $ldap_present, $login, $nom, $pass, $spip_lang_right;
-
-	echo install_debut_html();
-	$result_ok = install_bases();
-	if ($result_ok) {
-		echo "<p class='resultat'><b>"._T('info_base_installee')."</b></p>";
-
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
-		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
-	else
-		redirige_par_entete(generer_url_ecrire('install'));
-
-	if (@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
-		include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
-	else
-		redirige_par_entete(generer_url_ecrire('install'));
-
-	echo info_etape(_T('info_informations_personnelles'),
-		"<b>"._T('texte_informations_personnelles_1')."</b>" .
-		aide ("install5") .
-		"</p><p>" .
-		_T('texte_informations_personnelles_2') . " " .
-		_T('info_laisser_champs_vides')
-	);
-
-	echo generer_form_ecrire('install', (
-
-	  "\n<input type='hidden' name='etape' value='4' />"
-
-	. fieldset(_T('info_identification_publique'),
-		array(
-			'nom' => array(
-				'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
-				'valeur' => $nom
-			),
-			'email' => array(
-				'label' => "<b>"._T('entree_adresse_email')."</b>\n",
-				'valeur' => $email
-			)
-		)
-	)
-
-	. fieldset(_T('entree_identifiants_connexion'),
-		array(
-			'login' => array(
-				'label' => "<b>"._T('entree_login')."</b><br />\n"._T('info_plus_trois_car')."\n",
-				'valeur' => $login
-			),
-			'pass' => array(
-				'label' => "<b>"._T('entree_mot_passe')."</b><br />\n"._T('info_plus_cinq_car_2')."\n",
-				'valeur' => $pass
-			),
-			'pass_verif' => array(
-				'label' => "<b>"._T('info_confirmer_passe')."</b><br />\n",
-				'valeur' => $pass
-			)
-		)
-	)
-
-	. bouton_suivant()));
-
-	if (function_exists('ldap_connect') AND !$ldap_present) {
-		echo generer_form_ecrire('install', (
+	return generer_form_ecrire('install', (
 			fieldset(_T('info_authentification_externe'),
 				array(
 				'etape' => array(
@@ -230,17 +162,84 @@ function install_etape_3_dist()
 					)),
 				 bouton_suivant(_T('bouton_acces_ldap'))
 				 )));
-	}
-	}
-	else if ($result_ok) {
-		echo _T('alerte_maj_impossible', array('version' => $spip_version));
-	}
-	else {
-		echo "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
-	}
+}
 
+
+function install_premier_auteur($email, $login, $nom, $pass)
+{
+	if (file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+	  include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+	else
+	  redirige_par_entete(generer_url_ecrire('install', 'connect=1'));
+	
+	if (file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
+	  include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+	else
+	  redirige_par_entete(generer_url_ecrire('install', 'chmod=1'));
+
+	return "<p class='resultat'><b>"
+	. _T('info_base_installee')
+	. "</b></p>"
+	. info_etape(_T('info_informations_personnelles'),
+		     "<b>"._T('texte_informations_personnelles_1')."</b>" .
+			     aide ("install5") .
+			     "</p><p>" .
+			     _T('texte_informations_personnelles_2') . " " .
+			     _T('info_laisser_champs_vides')
+			     )
+	. generer_form_ecrire('install', (
+			  "\n<input type='hidden' name='etape' value='4' />"
+			 . fieldset(_T('info_identification_publique'),
+				    array(
+					  'nom' => array(
+							 'label' => "<b>"._T('entree_signature')."</b><br />\n"._T('entree_nom_pseudo_1')."\n",
+							 'valeur' => $nom
+							 ),
+					  'email' => array(
+							   'label' => "<b>"._T('entree_adresse_email')."</b>\n",
+							   'valeur' => $email
+							   )
+					  )
+				    )
+
+			  . fieldset(_T('entree_identifiants_connexion'),
+				   array(
+					 'login' => array(
+							  'label' => "<b>"._T('entree_login')."</b><br />\n"._T('info_plus_trois_car')."\n",
+							  'valeur' => $login
+							  ),
+					 'pass' => array(
+							 'label' => "<b>"._T('entree_mot_passe')."</b><br />\n"._T('info_plus_cinq_car_2')."\n",
+							 'valeur' => $pass
+							 ),
+					 'pass_verif' => array(
+							       'label' => "<b>"._T('info_confirmer_passe')."</b><br />\n",
+							       'valeur' => $pass
+							       )
+					 )
+				     )
+			  . bouton_suivant()));
+}
+
+function install_etape_3_dist()
+{
+	$ldap_present = _request('ldap_present');
+	$res = $ldap_present ? '' : install_bases();
+
+	if (!function_exists('ldap_connect')) $ldap_present = true;
+
+	if ($res)
+		$res .= "<p class='resultat'><b>"._T('avis_operation_echec')."</b></p>"._T('texte_operation_echec');
+	
+	else $res = install_premier_auteur(_request('email'),
+					   _request('login'),
+					   _request('nom'),
+					   _request('pass'))
+	  . ($ldap_present ?  '' : install_propose_ldap());
+
+	echo install_debut_html();
+	echo $res;
 	echo info_progression_etape(3,'etape_','install/');
 	echo install_fin_html();
 }
-
 ?>

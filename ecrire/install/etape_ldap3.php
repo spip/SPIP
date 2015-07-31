@@ -14,7 +14,12 @@
 // http://doc.spip.org/@inc_install_ldap3
 function install_etape_ldap3_dist()
 {
-	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $spip_lang_right;
+	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap;
+
+
+	$base_ldap_text = defined('_INSTALL_BASE_LDAP')
+		? _INSTALL_BASE_LDAP
+		: "ou=users, dc=mon-domaine, dc=com";
 
 	echo install_debut_html();
 
@@ -68,7 +73,7 @@ function install_etape_ldap3_dist()
 	. "\n<input type='hidden' name='tls_ldap' value=\"$tls_ldap\" />"
 
 	. "\n<fieldset>"
-	. "<input type='text' name='base_ldap_text' class='formo' value=\"ou=users, dc=mon-domaine, dc=com\" size='40' />"
+	. "<input type='text' name='base_ldap_text' class='formo' value=\"$base_ldap_text\" size='40' />"
 	. "\n</fieldset>"
 	. bouton_suivant()));
 

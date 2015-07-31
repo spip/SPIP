@@ -14,9 +14,19 @@
 // http://doc.spip.org/@inc_install_ldap2
 function install_etape_ldap2_dist()
 {
-	global $adresse_ldap, $login_ldap, $pass_ldap, $port_ldap, $tls_ldap, $protocole_ldap, $spip_lang_right;
-
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
+
+	$adresse_ldap =  _request('adresse_ldap');
+
+	$port_ldap = _request('port_ldap');
+
+	$tls_ldap =  _request('tls_ldap');
+
+	$protocole_ldap =  _request('protocole_ldap');
+
+	$login_ldap =  _request('login_ldap');
+
+	$pass_ldap =  _request('pass_ldap');
 
 	$port_ldap = intval($port_ldap);
 	$ldap_link = @ldap_connect($adresse_ldap, $port_ldap);
