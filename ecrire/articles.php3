@@ -797,7 +797,7 @@ if (!$flag_editable AND $statut_article == 'publie') {
 // Liste des auteurs de l'article
 //
 
-debut_cadre_relief("redacteur-24.png");
+debut_cadre_relief("redacteurs-24.png");
 
 echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 if ($flag_editable AND $options == 'avancees') {
