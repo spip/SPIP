@@ -50,7 +50,7 @@ function admin_plug_args($quoi, $erreur, $format)
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 
 	echo debut_gauche('plugin',true);
-	echo recuperer_fond('prive/squelettes/navigation/configurer',array());
+	echo recuperer_fond('prive/squelettes/navigation/configurer',array('exec'=>'admin_plugin'));
 
 	echo pipeline('affiche_gauche',
 		array(
