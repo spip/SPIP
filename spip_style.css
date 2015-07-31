@@ -101,7 +101,14 @@ div.spip_poesie div {
 
 .spip_bouton { background-color: #FFCC00;}
 
-.formrecherche { width: 100% ; background-color: #FFDDAA;}
+form.formrecherche { 
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+input.formrecherche {
+	width: 95% ; 
+	background-color: #FFDDAA;
+}
 
 .reponse_formulaire {
 	font-family: Verdana,Arial,Helvetica,sans-serif;

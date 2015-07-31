@@ -89,11 +89,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 function calcul_form_rech($lien)
 {
   return 
-    "<form action='$lien' method='get'><p>
-	<input  type='text' id='formulaire_recherche' 
-	size='20' class='formrecherche'	name='recherche'
-	value='" . _T('info_rechercher') . "' />
-	</p></form>";
+    "<form action='$lien' method='get' class='formrecherche'><input type='text' id='formulaire_recherche' size='20' class='formrecherche' name='recherche' value='" . _T('info_rechercher') . "' /></form>";
 }
 
 # fonctions pour la balise FORMULAIRE_FORUM
