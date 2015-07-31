@@ -896,11 +896,12 @@ function generer_url_ecrire($script='', $args="", $no_entities=false, $rel=false
 		$rel = _DIR_RESTREINT ? _DIR_RESTREINT :
 			('./'  . _SPIP_ECRIRE_SCRIPT);
 
+	list($script, $ancre) = split('#', $script);
 	if ($script AND $script<>'accueil') 
 		$args = "?exec=$script" . (!$args ? '' : "&$args");
 	elseif ($args)
 		$args ="?$args";
-
+	if ($ancre) $args .= "#$ancre";
 	return $rel . ($no_entities ? $args : str_replace('&', '&amp;', $args));
 }
 
