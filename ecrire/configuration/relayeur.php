@@ -86,7 +86,7 @@ function configuration_relayeur_post ($http_proxy, $http_noproxy, $test_proxy, $
 		} else {
 			include_spip('inc/texte'); // pour aide, couper, lang
 			if (!need_proxy($t['host']))
-				$page = "<p>"._L('Cette page ne doit pas passer par le proxy')."</p>\n";
+			  $page = "<p>"._T('page_pas_proxy')."</p>\n";
 			$page = recuperer_page($test_proxy, true);
 			if ($page)
 				$retour = "<p>"._T('info_proxy_ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";

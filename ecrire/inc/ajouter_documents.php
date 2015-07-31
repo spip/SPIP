@@ -402,7 +402,7 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 		"<label for='sousaction4_4'>" . _T('les_deux') . "</label>" .
 		"<div style='border: 1px solid; padding: 5px; margin: 20px'>" .
 		"<label for='titrer'>" . 
-	  _L('Dans les deux derniers cas, cocher cette case pour que SPIP nomme chaque &eacute;l&eacute;ment d\'apr&egrave;s le nom du fichier.') .
+	  _T('upload_zip_titrer') .
 	  "</label><input style='float: right' type='checkbox' name='titrer' id='titrer' />".
 		"</div></div>".
 		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".

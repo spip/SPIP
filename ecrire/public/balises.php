@@ -784,7 +784,7 @@ function balise_SELF_dist($p) {
 function balise_CHEMIN_dist($p) {
 	$arg = interprete_argument_balise(1,$p);
 	if (!$arg) {
-		erreur_squelette(_L('Argument manquant dans la balise @balise@', 
+		erreur_squelette(_T('zbug_balise_sans_argument', 
 					array('balise' => ' CHEMIN')),
 			$p->bid_boucle);
 		$p->code = "''";
@@ -1092,7 +1092,7 @@ function balise_INCLURE_dist($p) {
 	} else {
 		$n = interprete_argument_balise(1,$p);
 		if (!$n) {
-			erreur_squelette(_L('Argument manquant dans la balise @balise@', 
+			erreur_squelette(_T('zbug_balise_sans_argument', 
 					array('balise' => ' INCLURE')),
 			$p->bid_boucle);
 			$p->code = "''";
@@ -1279,7 +1279,7 @@ function balise_FOREACH_dist($p) {
 	//On a pas trouve la balise correspondant au tableau a traiter
 	else {
 		erreur_squelette(
-			_L(/*zbug*/'erreur #FOREACH: la balise #'.$_tableau.' n\'existe pas'),
+						 _T('zbug_balise_inexistante',array('from'=>'#FOREACH','balise'=>$_tableau)),
 			$p->id_boucle
 		);
 		$p->code = "''";

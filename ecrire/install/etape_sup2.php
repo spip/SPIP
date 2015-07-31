@@ -36,9 +36,9 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 	}
 	
 	if (!$tables)
-	  $res = _L('Base actuellement sans tables');
+	  $res = _T('install_pas_table');
 	else {
-	  $res = _L('Tables de la base')
+	  $res = _T('install_tables_base')
 	    . "<ol style='text-align: left'>" . $tables . "</ol>\n";
 	}
 
@@ -97,7 +97,7 @@ function install_etape_sup2_dist()
 
 		else {
 			$res =  "<p class='resultat'><b>"
-			  . _L('base @base@ reconnue', 
+			  . _T('base_reconnue', 
 			       array('base' => $choix_db))
 			  . "</b></p>"
 			  . $res;
@@ -112,7 +112,7 @@ function install_etape_sup2_dist()
 			. predef_ou_cache($adresse_db,$login_db,$pass_db, $server_db)
 			. bouton_suivant());
 
-	echo install_debut_html(_L("D&eacute;claration d'une base suppl&eacute;mentaire"));
+	echo install_debut_html(_T('config_titre_base_sup'));
 	echo $res;
 	echo install_fin_html();
 }

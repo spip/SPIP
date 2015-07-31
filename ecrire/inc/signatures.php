@@ -91,7 +91,7 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 				"right",
 				false);
 		if ($statut<>"publie") {
-			$res .= icone_inline (_L('relancer le signataire'),
+			$res .= icone_inline (_T('icone_relancer_signataire'),
 				$retour_s,
 				"forum-interne-24.gif", 
 				"creer.gif",
