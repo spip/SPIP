@@ -207,6 +207,17 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	  } else {
 	      $par = array_shift($tri);
 	      $par = $par->texte;
+    // par multi champ
+	      if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
+		  $texte = $boucle->id_table . '.' . trim($m[1]);
+		  $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
+		  $order = "multi";
+	      } else {
+	      $fct = "";
+	      if (!ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) 
+		erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
+	      else {
+		if ($match[2]) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
 		if ($par == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()
@@ -219,7 +230,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $boucle->select[]= $par . " AS alea";
 		  $order = "'alea'";
 		}
-
 	// par date_thread
 		else if ($par == 'date_thread') {
 			//date_thread est la date la plus recente d'un message dans un fil de discussion
@@ -230,17 +240,10 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 			$order = "'date_thread'";
 			$boucle->plat = true;
 		}
-	
 	// par titre_mot ou type_mot voire d'autres
 		else if ($m = ($exceptions_des_jointures[$par])) {
 		  $order = critere_par_jointure($boucle, $m);
 			 }
-    // par multi champ
-		else if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
-		  $texte = $boucle->id_table . '.' . trim($m[1]);
-		  $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
-		  $order = "multi";
-		}
 	// par num champ(, suite)
 		else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
 		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
@@ -257,9 +260,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 			$order = "'".$boucle->id_table ."." . $m . "'";
 		}
 		// par champ. Verifier qu'ils sont presents.
-		else if (ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) {
-		  if ($match[2]) $par = $match[2];
-		  global $table_des_tables, $tables_des_serveurs_sql;
+		else {
+  global $table_des_tables, $tables_des_serveurs_sql;
 		  $r = $boucle->type_requete;
 		  $s = $boucles[$idb]->sql_serveur;
 		  if (!$s) $s = 'localhost';
@@ -269,22 +271,23 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $desc = $tables_des_serveurs_sql[$s][$t];
 		  if ($desc['field'][$par])
 		    $par = $boucle->id_table.".".$par;
-		  // sinon, tri sur les champs synthetises (cf points)
-		  $order = (!$match[2]) ? $par : ($match[1] . "($par)");
-		  $order = "'$order'";
+		  // sinon tant pis, ca doit etre un champ synthetise (cf points)
+		  $order = "'$par'";
 		}
-		else
-		  erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
+	      }
+	      }
 	  }
 	  if ($order)
-	      $boucle->order[] = $order . (($order[0]=="'") ? $sens : "");
+	    $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order) .
+	      (($order[0]=="'") ? $sens : "");
 	}
 }
 
-function critere_par_jointure(&$boucle, $champ)
+function critere_par_jointure(&$boucle, $join)
 {
   global $table_des_tables;
-  $t = array_search('spip_mots', $boucle->from);
+  list($table, $champ) = $join;
+  $t = array_search($table, $boucle->from);
   if (!$t) {
     $type = $boucle->type_requete;
     $nom = $table_des_tables[$type];
@@ -293,7 +296,9 @@ function critere_par_jointure(&$boucle, $champ)
     $cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
     if ($cle) 
       $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
-    if ($cle) $t = "L$cle"; // sinon erreur
+    if ($cle) $t = "L$cle"; 
+    else  erreur_squelette(_T('zbug_info_erreur_squelette'),  "{par ?} BOUCLE$idb");
+
   }
   return "'" . $t . '.' . $champ . "'";
 }
@@ -617,7 +622,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   }
 
   // pas besoin de group by 
-  // si une seule jointure et sur une table primary key formee
+  // si une seule jointure et sur une table avec primary key formee
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // cf http://article.gmane.org/gmane.comp.web.spip.devel/30555
 
