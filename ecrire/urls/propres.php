@@ -239,6 +239,9 @@ function recuperer_parametres_url(&$fond, $url) {
 			// recuperer les arguments supplementaires (&debut_xxx=...)
 			$reste = preg_replace('/^&/','?',
 				preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
+			$reste .= preg_replace('/&/','?',
+				preg_replace('/[?&]'.$type.'[=]?'.$id_objet.'/','',
+				substr($url, strpos($url,'?'))));
 			redirige_par_entete("$url_propre$reste");
 		}
 	}
