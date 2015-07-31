@@ -185,7 +185,8 @@ else if (ereg('pro\.proxad\.net$', $HTTP_HOST) || ereg('pro\.proxad\.net$', $SER
 }
 // NexenServices
 else if ($SERVER_ADMIN == 'www@nexenservices.com') {
-	include ('mail.inc');
+	if (!function_exists('email'))
+		include ('mail.inc');
 	$hebergeur = 'nexenservices';
 }
 
