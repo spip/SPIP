@@ -24,7 +24,7 @@ define(BALISE_DE_BOUCLE,
 	')*)[[:space:]]*>');
 define(BALISE_INCLURE,"<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)([^>]*)>");
 
-define(DEBUT_DE_BOUCLE,'/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
+define(DEBUT_DE_BOUCLE,'/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
 
 function parser_texte($texte) {
