@@ -315,6 +315,16 @@ function lister_configurer($exclure = array()){
 			$matches = array_map('strtolower',$matches);
 			$forms = array_merge($forms,$matches);
 		}
+
+		// evaluer le fond en lui passant un exec coherent pour que les pipelines le reconnaissent
+		// et reperer les formulaires CVT configurer_xx insereres par les plugins via pipeline
+		$config = basename(substr($file,0,-strlen("."._EXTENSION_SQUELETTES)));
+		$fond = recuperer_fond("prive/squelettes/contenu/$config",array("exec"=>preg_replace(",^page-,i","",$config)));
+		if (is_array($inputs = extraire_balises($fond,"input")))
+			foreach($inputs as $i)
+				if (extraire_attribut($i,'name')=='formulaire_action') {
+					$forms[] = ($c=extraire_attribut($i,'value'));
+				}
 	}
 	$forms = array_flip($forms);
 
