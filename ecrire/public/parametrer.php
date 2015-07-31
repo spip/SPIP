@@ -298,8 +298,9 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $connect);
 
 	// calcul du nom du squelette
-	$fonc = $mime_type . ($connect ?  "_$connect" : '') . '_'
-		. md5($GLOBALS['spip_version_code'].' * '.$skel);
+	$fonc = $mime_type
+	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
+	. md5($GLOBALS['spip_version_code'].' * '.$skel);
 
 	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
 	// sauver le nom de l'eventuel squelette en cours d'execution
