@@ -19,6 +19,10 @@ else
 if (strstr($fond, '/'))
 	die (_L("Faut pas se gener"));
 
+// Particularites de certains squelettes
+if ($fond == 'spip_login')
+	$forcer_lang = true;
+
 if (!find_in_path($fond.'.html')) {
 	spip_log("page: find_in_path ne trouve pas le squelette $fond");
 	echo _T('info_erreur_squelette2',

@@ -59,7 +59,7 @@ function calcule_header_et_page ($fond) {
 		else {
 			$link = new Link();
 			$link->addvar('var_mode', 'debug');
-			redirige_par_entete(generer_url_public('spip_login'), '?url='.urlencode($link->getUrl()));
+			redirige_par_entete(generer_url_public('login'), 'url='.urlencode($link->getUrl()));
 			exit;
 		}
 	}
