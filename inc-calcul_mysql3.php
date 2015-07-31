@@ -206,7 +206,7 @@ WHERE	lien.id_article=$id_article
 	$nom_auteur = typo($row_auteur["nom"]);
 	$email_auteur = $row_auteur["email"];
 	if ($email_auteur) {
-	  $auteurs[] = "<A HREF=\"mailto:$email_auteur\">$nom_auteur</A>";
+	  $auteurs[] = "<a href=\"mailto:$email_auteur\">$nom_auteur</a>";
 	}
 	else {
 	  $auteurs[] = "$nom_auteur";
@@ -216,13 +216,13 @@ WHERE	lien.id_article=$id_article
   return (!$auteurs) ? "" : join($auteurs, ", ");
 }
 
-function sql_petitions($id_article)
-{
-  return spip_fetch_array(spip_query("
-SELECT	id_article
-FROM	spip_petitions
-WHERE	id_article='$id_article'"));
-    }
+function sql_petitions($id_article) {
+	$q = spip_query("SELECT
+	id_article, email_unique, site_obli, site_unique, message, texte
+	FROM spip_petitions
+	WHERE id_article=".intval($id_article));
+	return spip_fetch_array($q);
+}
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 

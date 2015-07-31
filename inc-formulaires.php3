@@ -50,6 +50,7 @@ function erreur($zetexte){
 function reponse_confirmation($id_article) {
 	global $val_confirm;
 
+	spip_log("validation petition $id_article ($val_confirm)");
 	include_ecrire("inc_connect.php3");
 	
 	if ($GLOBALS['db_ok']) {
@@ -115,7 +116,11 @@ function reponse_confirmation($id_article) {
 				else {
 					$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
 					$result = spip_query($query);
-	
+
+					// invalider les pages de l'article
+					include_ecrire('inc_invalideur.php3');
+					suivre_invalideur("id='id_article/$id_article'");
+
 					$texte .= erreur(_T('form_pet_signature_validee'));
 				}
 			}
@@ -128,7 +133,11 @@ function reponse_confirmation($id_article) {
 	else {
 		$texte = _T('form_pet_probleme_technique');
 	}
-	echo "<div class='reponse_formulaire'>$texte</div>";
+
+	$texte = "<div class='reponse_formulaire'><a name='sp$id_article'></a>$texte</div>";
+
+	// message pour formulaire_signature()
+	define('_REPONSE_CONFIRMATION_SIGNATURE', $texte);
 }
 
 //
@@ -138,6 +147,7 @@ function reponse_confirmation($id_article) {
 function reponse_signature($id_article) {
 	global $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
 
+	spip_log("signature petition $id_article ($adresse_email)");
 	include_ecrire("inc_connect.php3");
 	
 	if ($GLOBALS['db_ok']) {
@@ -226,7 +236,7 @@ function reponse_signature($id_article) {
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 	
-				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
+				echo $messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
 
 				if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
 					$reponse_signature .= "<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
@@ -258,13 +268,9 @@ function reponse_signature($id_article) {
 // Formulaire de signature d'une petition
 //
 
-function formulaire_signature_normal($id_article) {
+function formulaire_signature_normal($id_article, $row_petition) {
 	include_ecrire("inc_texte.php3");
 
-	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
-	$result_petition = spip_query($query_petition);
-
-	if ($row_petition = spip_fetch_array($result_petition)) {
 		$id_article = $row_petition['id_article'];
 		$email_unique = $row_petition['email_unique'];
 		$site_obli = $row_petition['site_obli'];
@@ -279,7 +285,7 @@ function formulaire_signature_normal($id_article) {
 
 		$retour .= propre($texte_petition);
 
-		$retour .= "<div><fieldset><p><b>"._T('form_pet_votre_nom')."</b><br />";
+		$retour .= "<div><a name='sp$id_article'></a><fieldset><p><b>"._T('form_pet_votre_nom')."</b><br />";
 		$retour .= "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\" /></p>";
 
 		$retour .= "<p><b>"._T('form_pet_votre_email')."</b><br />";
@@ -309,19 +315,18 @@ function formulaire_signature_normal($id_article) {
 
 		$retour .= "<br /><div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" />";
 		$retour .= "</div></form>\n";
-	}
+
 	return $retour;
 }
 
 
-function formulaire_signature ($id_article) {
-spip_log("petition $id_article");
+function formulaire_signature ($id_article, $petition) {
 	if ($GLOBALS['val_confirm'])
-		return reponse_confirmation($id_article);
+		return _REPONSE_CONFIRMATION_SIGNATURE;	// geree par inc-public.php3
 	else if ($GLOBALS['nom_email'] AND $GLOBALS['adresse_email'])
 		return reponse_signature($id_article);
 	else
-		return formulaire_signature_normal($id_article);
+		return formulaire_signature_normal($id_article,unserialize($petition));
 }
 
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
