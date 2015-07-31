@@ -90,6 +90,7 @@ function applique_invalideur($depart) {
 		$tous = "'".join("', '", $depart)."'";
 		spip_log("applique $tous");
 
+		include_spip('base/abstract_sql'); # pour calcul_mysql_in
 		spip_query("UPDATE spip_caches SET type='x' WHERE " . calcul_mysql_in('fichier', $tous));
 
 		// Demander a inc-public de retirer les caches
@@ -158,24 +159,23 @@ function cron_invalideur($t) {
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
 
 	// A revoir: il semble y avoir une desynchro ici.
-	
-		$t = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')"));
-		$total_cache = $t['n'];
-		spip_log("Taille du CACHE: $total_cache octets");
+	$t = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')"));
+	$total_cache = $t['n'];
+	spip_log("Taille du CACHE: $total_cache octets");
 
-		global $quota_cache;
-		$total_cache -= $quota_cache*1024*1024;
-		if ($quota_cache > 0 AND $total_cache > 0) {
-			$q = spip_query("SELECT id, taille FROM spip_caches WHERE type IN ('t', 'x') ORDER BY id");
-			while ($r = spip_fetch_array($q)
-			AND ($total_cache > $taille_supprimee)) {
-				$date_limite = $r['id'];
-				$taille_supprimee += $r['taille'];
-			}
-			spip_log ("Quota cache: efface $taille_supprimee octets");
-			include_spip('inc/invalideur');
-			suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
+	global $quota_cache;
+	$total_cache -= $quota_cache*1024*1024;
+	if ($quota_cache > 0 AND $total_cache > 0) {
+		$taille_supprimee = 0;
+		$q = spip_query("SELECT id, taille FROM spip_caches WHERE type IN ('t', 'x') ORDER BY id");
+		while ($r = spip_fetch_array($q)
+		AND ($total_cache > $taille_supprimee)) {
+			$date_limite = $r['id'];
+			$taille_supprimee += $r['taille'];
 		}
+		spip_log ("Quota cache: efface $taille_supprimee octets");
+		suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
+	}
 	return 1;
 }
 

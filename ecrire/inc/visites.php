@@ -52,6 +52,7 @@ function compte_fichier_visite($fichier,
 
 
 function calculer_visites($t) {
+	include_spip('base/abstract_sql');
 
 	// Initialisations
 	$visites = ''; # visites du site
