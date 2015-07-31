@@ -98,7 +98,7 @@ debut_boite_info();
 <P align="center"><FONT COLOR='red'><B>ATTENTION !</B></FONT>
 
 <P align="justify">
-<img src="img_pack/warning.png" alt="warning.png" width="48" height="48" align="right">
+<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">
 Les modifications effectu&eacute;es ci-dessous influent notablement sur le
 fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n'&ecirc;tes pas parfaitement
 familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus g&eacute;n&eacute;ralement, il est <I>fortement conseill&eacute;</I>
@@ -112,7 +112,7 @@ echo "<P>";
 
 
 
-debut_cadre_enfonce("article-24.png");
+debut_cadre_enfonce("article-24.gif");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>LES ARTICLES</FONT></B></TD></TR>";
@@ -325,7 +325,7 @@ fin_cadre_relief();
 
 if (function_exists("imagejpeg")){
 //// Activer/desactiver creation automatique de vignettes
-	debut_cadre_relief("image-24.png");
+	debut_cadre_relief("image-24.gif");
 
 	$gd_formats=lire_meta("gd_formats");
 
@@ -390,7 +390,7 @@ fin_cadre_enfonce();
 
 
 //// Actives/desactiver systeme de breves
-debut_cadre_relief("breve-24.png");
+debut_cadre_relief("breve-24.gif");
 
 	$activer_breves=lire_meta("activer_breves");
 
@@ -433,7 +433,7 @@ fin_cadre_relief();
 
 
 //// Gestion des mots-cles
-debut_cadre_relief("mot-cle-24.png");
+debut_cadre_relief("mot-cle-24.gif");
 
 	$config_precise_groupes=lire_meta("config_precise_groupes");
 	$mots_cles_forums=lire_meta("mots_cles_forums");
@@ -534,7 +534,7 @@ fin_cadre_relief();
 
 
 //// Actives/desactiver systeme de syndication
-debut_cadre_relief("site-24.png");
+debut_cadre_relief("site-24.gif");
 
 	$activer_syndic=lire_meta("activer_syndic");
 	$proposer_sites=lire_meta("proposer_sites");

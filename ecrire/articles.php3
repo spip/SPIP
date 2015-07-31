@@ -252,7 +252,7 @@ debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -550,16 +550,16 @@ echo "<b>RACCOURCIS :</b><p>";
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
-icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.png");
+icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
 
 if ($connect_statut == '0minirezo') {
 	echo "<p>";
 	$retour = urlencode("articles.php3?id_article=$id_article");
-	icone_horizontale("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.png", "creer.gif");
+	icone_horizontale("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.gif", "creer.gif");
 	
 	$articles_mots = lire_meta('articles_mots');
 	if ($articles_mots != "non") {
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mots-cle-24.png", "creer.gif");
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mots-cle-24.gif", "creer.gif");
 	}
 }
 
@@ -637,7 +637,7 @@ function afficher_jour($jour){
 
 
 
-debut_cadre_relief("article-24.png");
+debut_cadre_relief("article-24.gif");
 echo "<CENTER>";
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 echo "<TR>";
@@ -703,7 +703,7 @@ echo "</td>";
 if ($voir_en_ligne) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.png", "rien.gif");
+	icone("Voir en ligne", "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.gif", "rien.gif");
 	echo "</td>";
 }
 
@@ -713,7 +713,7 @@ if ($voir_en_ligne) {
 if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.png", "edit.gif");
+	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -825,7 +825,7 @@ if (!$flag_editable AND $statut_article == 'publie') {
 // Liste des auteurs de l'article
 //
 
-debut_cadre_enfonce("redacteurs-24.png");
+debut_cadre_enfonce("redacteurs-24.gif");
 
 echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 if ($flag_editable AND $options == 'avancees') {
@@ -1156,7 +1156,7 @@ function change_bouton(selObj){
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo "<FORM ACTION='articles.php3' METHOD='get'>";
-	debut_cadre_relief("racine-site-24.png");
+	debut_cadre_relief("racine-site-24.gif");
 	echo "<CENTER>";
 	
 	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
@@ -1243,7 +1243,7 @@ if ($les_notes) {
 
 if ($flag_editable) {
 echo "\n\n<div align=right>";
-	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.png", "edit.gif");
+	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
 echo "</div>";
 }
 
@@ -1279,7 +1279,7 @@ $forum_retour = urlencode("articles.php3?id_article=$id_article");
 
 
 echo "\n<div align='center'>";
-	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_article=$id_article&titre_message=".urlencode($titre), "forum-interne-24.png", "creer.gif");
+	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_article=$id_article&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 echo "<P align='left'>";

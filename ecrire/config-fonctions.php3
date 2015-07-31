@@ -102,7 +102,7 @@ debut_boite_info();
 <P align="center"><FONT COLOR='red'><B>ATTENTION !</B></FONT>
 
 <P align="justify">
-<img src="img_pack/warning.png" alt="warning.png" width="48" height="48" align="right">
+<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">
 Les modifications effectu&eacute;es ci-dessous influent notablement sur le
 fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n'&ecirc;tes pas parfaitement
 familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus g&eacute;n&eacute;ralement, il est <I>fortement conseill&eacute;</I>
@@ -116,7 +116,7 @@ echo "<P>";
 
 
 //// Fonctionnement de la messagerie interne
-debut_cadre_relief("messagerie-24.png");
+debut_cadre_relief("messagerie-24.gif");
 
 	$activer_messagerie=lire_meta("activer_messagerie");
 	$activer_imessage=lire_meta("activer_imessage");
@@ -199,7 +199,7 @@ fin_cadre_relief();
 
 
 //// Actives/desactiver les statistiques
-debut_cadre_relief("statistiques-24.png");
+debut_cadre_relief("statistiques-24.gif");
 
 	$activer_statistiques=lire_meta("activer_statistiques");
 

@@ -14,12 +14,12 @@ $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
 if (mysql_num_rows($result) > 0) {
-	icone_horizontale ("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.png", "creer.gif");
+	icone_horizontale ("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.gif", "creer.gif");
 }
 else {
 	if ($connect_statut == '0minirezo') {
 		echo "Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er une rubrique.";
-		icone_horizontale ("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav", "rubrique-24.png", "creer.gif");
+		icone_horizontale ("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav", "rubrique-24.gif", "creer.gif");
 	}
 }
 

@@ -26,8 +26,8 @@ function enfant($collection){
 		$les_sous_enfants = sous_enfant($id_rubrique);
 
 		$les_enfants.= "<P>";
-		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.png", true);
-		else  $les_enfants .= debut_cadre_relief("rubrique-24.png", true);
+		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
+		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
 		$les_enfants.= "<FONT FACE=\"verdana,arial,helvetica,sans-serif\">";
 
 		if (strlen($les_sous_enfants) > 0){
@@ -55,7 +55,7 @@ function sous_enfant($collection2){
 	$result3 = mysql_query($query3);
 
 	if (mysql_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
+		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
 		while($row=mysql_fetch_array($result3)){
 			$id_rubrique2=$row[0];
 			$id_parent2=$row[1];
@@ -136,7 +136,7 @@ debut_page($titre_page, "documents", "rubriques");
 debut_grand_cadre();
 
 afficher_parents($id_parent);
-$parents="~ <IMG SRC='img_pack/racine-site-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -190,17 +190,17 @@ echo "<b>RACCOURCIS :</b><p>";
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
-icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.png");
+icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
 echo "<p>";
 
 
 if (mysql_num_rows($result) > 0) {
 	if ($coll > 0)
-		icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.png","creer.gif");
+		icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
 
 	$activer_breves = lire_meta("activer_breves");
 	if ($activer_breves != "non" AND $id_parent == "0") {
-		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.png","creer.gif");
+		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
 	}
 }
 else {
@@ -209,7 +209,7 @@ else {
 	}
 }
 if ($connect_statut == '0minirezo') {
-	icone_horizontale("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.png","creer.gif");
+	icone_horizontale("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif","creer.gif");
 }
 
 
@@ -228,9 +228,9 @@ $flag_editable = ($connect_statut == '0minirezo' AND acces_rubrique($coll));
 
 if ($coll == 0) $titre = "Racine du site";
 
-if ($coll ==  0) $ze_logo = "racine-24.png";
-else if ($id_parent == 0) $ze_logo = "secteur-24.png";
-else $ze_logo = "rubrique-24.png";
+if ($coll ==  0) $ze_logo = "racine-site-24.gif";
+else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
+else $ze_logo = "rubrique-24.gif";
 
 
 debut_cadre_relief($ze_logo);
@@ -257,7 +257,7 @@ echo "</td>";
 if ($coll >0 AND $statut == 'publie') {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_rubrique=$coll&recalcul=oui", "racine-24.png", "rien.gif");
+	icone("Voir en ligne", "../spip_redirect.php3?id_rubrique=$coll&recalcul=oui", "racine-24.gif", "rien.gif");
 	echo "</td>";
 }
 
@@ -319,8 +319,8 @@ if (strpos($les_enfants2,"<P>")){
 	
 	echo "<tr><td align='right' valign='bottom'>";
 	if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
-	if ($coll == "0") icone("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "secteur-24.png", "creer.gif");
-	else  icone("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.png", "creer.gif");
+	if ($coll == "0") icone("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "secteur-24.gif", "creer.gif");
+	else  icone("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.gif", "creer.gif");
 	echo "<p>";
 	}
 	echo "</td></tr>";
@@ -362,7 +362,7 @@ afficher_articles("Tous les articles publi&eacute;s dans cette rubrique",
 
 if ($coll > 0){
 	echo "<div align='right'>";
-	icone("&Eacute;crire un nouvel article", "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.png", "creer.gif");
+	icone("&Eacute;crire un nouvel article", "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif", "creer.gif");
 	echo "</div><p>";
 }
 
@@ -374,7 +374,7 @@ $activer_breves=lire_meta("activer_breves");
 
 if ($id_parent == "0" AND $activer_breves!="non"){
 	echo "<div align='right'>";
-	icone("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.png", "creer.gif");
+	icone("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif", "creer.gif");
 	echo "</div><p>";
 }
 
@@ -393,7 +393,7 @@ if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 	$link->addVar('redirect', $this_link->getUrl());
 
 	echo "<div align='right'>";
-	icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.png", "creer.gif");
+	icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.gif", "creer.gif");
 	echo "</div><p>";
 
 

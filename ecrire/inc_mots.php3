@@ -106,7 +106,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	if ($nombre_mots > 0 OR ($nombre_groupes > 0 AND $flag_editable)) {
 
-		debut_cadre_enfonce("mot-cle-24.png");
+		debut_cadre_enfonce("mot-cle-24.gif");
 	
 		echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 		if ($flag_editable){

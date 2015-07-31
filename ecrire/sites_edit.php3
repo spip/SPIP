@@ -88,7 +88,7 @@ debut_page("Site r&eacute;f&eacute;r&eacute;nc&eacute;", "documents", "sites");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -108,7 +108,7 @@ echo "<tr width='100%'>";
 
 if ($new != 'oui') {
 	echo "<td>";
-	icone("Retour", "sites.php3?id_syndic=$id_syndic", 'site-24.png', "rien.gif");
+	icone("Retour", "sites.php3?id_syndic=$id_syndic", 'site-24.gif', "rien.gif");
 	echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
 }
@@ -124,7 +124,7 @@ if ($new == 'oui'){
 
 	$proposer_sites = lire_meta("proposer_sites");
 	if ($connect_statut == '0minirezo' OR $proposer_sites > 0) {
-		debut_cadre_relief("site-24.png");
+		debut_cadre_relief("site-24.gif");
 		
 		$link = new Link('sites.php3');
 		$link->addVar('id_rubrique', $id_rubrique);
@@ -142,7 +142,7 @@ if ($new == 'oui'){
 		
 		echo "<p><b>Vous pouvez pr&eacute;f&eacute;rer ne pas utiliser cette fonction automatique, et indiquer vous-m&ecirc;me les &eacute;l&eacute;ments concernant ce site...</b>";
 		$cadre_ouvert = true;
-		debut_cadre_enfonce("site-24.png");
+		debut_cadre_enfonce("site-24.gif");
 		
 	}
 
@@ -167,15 +167,15 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 
 
 
-	if ($id_rubrique == 0) $logo_parent = "racine-site-24.png";
+	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
 		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 		$result=spip_query($query);
 		while($row=mysql_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}
-		if ($parent_parent == 0) $logo_parent = "secteur-24.png";
-		else $logo_parent = "rubrique-24.png";
+		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
+		else $logo_parent = "rubrique-24.gif";
 	}
 
 	debut_cadre_relief("$logo_parent");

@@ -16,8 +16,8 @@ if ($connect_statut == '0minirezo') {
 	echo "<b>RACCOURCIS :</b><p>";
 	
 	
-	//icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png", "rien.gif");
-	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png", "rien.gif");
+	//icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
 		
 
 	$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
@@ -27,7 +27,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
-		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.png", "rien.gif");
+		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 
 
@@ -39,7 +39,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
-		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.png", "rien.gif");
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 	
 	
@@ -81,7 +81,7 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 
 
 	echo "<p><div align='center'>";
-	icone ("Poster un message", "forum_envoi.php3?statut=privrac&adresse_retour=forum.php3&titre_message=Nouveau+message", "forum-interne-24.png", "creer.gif");
+	icone ("Poster un message", "forum_envoi.php3?statut=privrac&adresse_retour=forum.php3&titre_message=Nouveau+message", "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 
 

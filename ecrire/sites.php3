@@ -229,7 +229,7 @@ debut_page("$titre_page","documents","sites");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <IMG SRC='img_pack/racine-site-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -251,7 +251,7 @@ fin_boite_info();
 
 
 echo "<p><center>";
-	icone ("Voir les sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.png","rien.gif");
+	icone ("Voir les sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif","rien.gif");
 echo "</center>";
 
 $rubon = "siteon$id_syndic";
@@ -275,7 +275,7 @@ debut_droite();
 
 
 
-debut_cadre_relief("site-24.png");
+debut_cadre_relief("site-24.gif");
 echo "<center>";
 
 if ($syndication == 'off') {
@@ -317,7 +317,7 @@ if ($flag_editable) {
 	$link->addVar('target', $this_link->getUrl());
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Modifier ce site", $link->getUrl(), "site-24.png", "edit.gif");
+	icone("Modifier ce site", $link->getUrl(), "site-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -377,7 +377,7 @@ if ($flag_administrable) {
 	$link = new Link();
 	$link->delVar('new');
 	echo $link->getForm('GET');
-	debut_cadre_relief("racine-site-24.png");
+	debut_cadre_relief("racine-site-24.gif");
 	echo "\n<center>";
 
 	echo "<b>Ce site est&nbsp;:</b> &nbsp;&nbsp; \n";
@@ -435,7 +435,7 @@ $link->addVar('titre_message', $nom_site);
 
 
 echo "<div align='center'>";
-icone ("Poster un message", $link->getUrl(), "forum-interne-24.png", "creer.gif");
+icone ("Poster un message", $link->getUrl(), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 echo "<p align='left'>\n";

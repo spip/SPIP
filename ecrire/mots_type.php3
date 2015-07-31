@@ -37,7 +37,7 @@ debut_gauche();
 
 debut_droite();
 
-debut_cadre_relief("groupe-mot-24.png");
+debut_cadre_relief("groupe-mot-24.gif");
 
 
 
@@ -45,7 +45,7 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 
 	echo "<td  align='right' valign='top'>";
-	icone("Retour", "mots_tous.php3", "mot-cle-24.png", "rien.gif");
+	icone("Retour", "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 	echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 

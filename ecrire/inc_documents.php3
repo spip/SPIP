@@ -279,7 +279,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 
 	// Si pas image, lien vers le document
 	if ($type_inclus != "image") {
-		icone ("Voir le document", "../$fichier", "racine-24.png");
+		icone ("Voir le document", "../$fichier", "racine-24.gif");
 	}
 
 	if ($descriptif) {
@@ -419,7 +419,7 @@ function afficher_documents_non_inclus($id_article) {
 		$documents_lies = fetch_document($query);
 
 		echo "<p>";	
-		debut_cadre_enfonce("doc-24.png");
+		debut_cadre_enfonce("doc-24.gif");
 		if ($documents_lies) {
 
 			echo "<font size=2 face='verdana,arial,helvetica,sans-serif'>Les documents suivants sont associ&eacute;s &agrave; votre article. Vous ne les avez pas ins&eacute;r&eacute;s directement dans le texte de votre article, ils appara&icirc;tront sur le site public sous forme de &laquo;documents attach&eacute;s&raquo;.</font>";
@@ -453,7 +453,7 @@ function afficher_documents_non_inclus($id_article) {
 	
 		/// Ajouter nouveau document/image
 		
-		echo debut_cadre_enfonce("doc-24.png",false,"creer.gif");
+		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
 		echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");	
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
@@ -615,7 +615,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				echo debut_block_invisible($block);
 				echo "<b>Vignette par d&eacute;faut</b>";
 	
-				debut_cadre_relief("image-24.png", false, "creer.gif");	
+				debut_cadre_relief("image-24.gif", false, "creer.gif");	
 				echo "<font size=1>";
 				afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
 				echo "</font>";
@@ -672,7 +672,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('doc_supp', $id_document);
 		
 			echo "<div align='center'>";
-			icone("Supprimer ce document", $link->getUrl(), "doc-24.png", "supprimer.gif");
+			icone("Supprimer ce document", $link->getUrl(), "doc-24.gif", "supprimer.gif");
 			echo "</div>";
 		
 			echo "</font></center>\n";
@@ -742,7 +742,7 @@ function afficher_documents_colonne($id_article) {
 		
 		/// Ajouter nouvelle image
 		echo "\n<p>";
-		debut_cadre_relief("image-24.png");
+		debut_cadre_relief("image-24.gif");
 		if ($images_liees) {
 			reset($images_liees);
 		
@@ -753,7 +753,7 @@ function afficher_documents_colonne($id_article) {
 		}
 	
 
-		debut_cadre_relief("image-24.png", false, "creer.gif");
+		debut_cadre_relief("image-24.gif", false, "creer.gif");
 		
 		echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: center; color: black;'>";	
 		echo bouton_block_invisible("ajouter_image");
@@ -782,7 +782,7 @@ function afficher_documents_colonne($id_article) {
 
 
 		echo "\n<p>";
-		debut_cadre_enfonce("doc-24.png");
+		debut_cadre_enfonce("doc-24.gif");
 		if ($documents_lies) {
 		
 			reset($documents_lies);
@@ -797,7 +797,7 @@ function afficher_documents_colonne($id_article) {
 		/// Ajouter nouveau document
 		
 		
-		debut_cadre_enfonce("doc-24.png", false, "creer.gif");
+		debut_cadre_enfonce("doc-24.gif", false, "creer.gif");
 		echo "<div style='padding: 2px;background-color: #aaaaaa; text-align: center; color: black;'>";	
 		echo bouton_block_invisible("ajouter_document");
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
@@ -932,7 +932,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 				echo debut_block_invisible($block);
 				echo "<b>Vignette par d&eacute;faut</b>";
 	
-				debut_cadre_relief("image-24.png", false, "creer.gif");	
+				debut_cadre_relief("image-24.gif", false, "creer.gif");	
 				echo "<font size=1>";
 				afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
 				echo "</font>";
@@ -992,7 +992,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('doc_supp', $id_document);
 		
 			echo "<div align='center'>";
-			icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.png", "supprimer.gif");
+			icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.gif", "supprimer.gif");
 			echo "</div>";
 		
 			echo "</font></center>\n";
@@ -1075,14 +1075,14 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_document);
-			icone_horizontale ("Supprimer cette image", $link->getUrl(), "image-24.png", "supprimer.gif");
+			icone_horizontale ("Supprimer cette image", $link->getUrl(), "image-24.gif", "supprimer.gif");
 			echo "</center>\n";
 
 
 			echo "<font size='1'>";
 
 			if ($options == 'avancees'){
-				debut_cadre_enfonce("doc-24.png", false, "creer.gif");
+				debut_cadre_enfonce("doc-24.gif", false, "creer.gif");
 				echo "<div style='padding: 5px; background-color: #999999; text-align: center; color: white;'>";	
 				echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>";
 				echo "</div>\n";

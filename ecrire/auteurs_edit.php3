@@ -123,9 +123,9 @@ function mySel($varaut,$variable) {
 	return $retour;
 }
 
-if ($statut == "0minirezo") $logo = "redacteurs-admin-24.png";
-else if ($statut == "5poubelle") $logo = "redacteurs-poubelle-24.png";
-else $logo = "redacteurs-24.png";
+if ($statut == "0minirezo") $logo = "redacteurs-admin-24.gif";
+else if ($statut == "5poubelle") $logo = "redacteurs-poubelle-24.gif";
+else $logo = "redacteurs-24.gif";
 
 
 	if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0) {

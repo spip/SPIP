@@ -167,7 +167,7 @@ while($row = mysql_fetch_array($result)) {
 
 if ($total_vis<1) $total_vis=1;
 
-debut_cadre_relief("statistiques-24.png");
+debut_cadre_relief("statistiques-24.gif");
 echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0>";
 enfants_aff(0,100);
 echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0></TD>";

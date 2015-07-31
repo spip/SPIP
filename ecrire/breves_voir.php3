@@ -105,7 +105,7 @@ debut_page("&laquo; $titre_breve &raquo;", "documents", "breves");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -129,7 +129,7 @@ fin_boite_info();
 
 
 echo "<p><center>";
-	icone ("Voir toutes les br&egrave;ves", "breves.php3", "breve-24.png","rien.gif");
+	icone ("Voir toutes les br&egrave;ves", "breves.php3", "breve-24.gif","rien.gif");
 echo "</center>";
 
 
@@ -161,7 +161,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique) AND ($option
 
 debut_droite();
 
-debut_cadre_relief("breve-24.png");
+debut_cadre_relief("breve-24.gif");
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 echo "<TR><td>";
 
@@ -197,13 +197,13 @@ echo "</td>";
 if ($statut == 'publie') {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.png", "rien.gif");
+	icone("Voir en ligne", "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
 	echo "</td>";
 }
 if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Modifier cette breve", "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.png", "edit.gif");
+	icone("Modifier cette breve", "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -276,12 +276,12 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	
 	echo "<table>";
 	echo "<td  align='right'>";
-	icone("Publier cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=publie", "breve-24.png", "racine-24.png");
+	icone("Publier cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=publie", "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Refuser cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.png", "supprimer.gif");
+	icone("Refuser cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.gif", "supprimer.gif");
 	echo "</td>";
 	
 
@@ -305,7 +305,7 @@ $forum_retour = urlencode("breves_voir.php3?id_breve=$id_breve");
 
 
 echo "\n<div align='center'>";
-	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_breve=$id_breve&titre_message=".urlencode($titre), "forum-interne-24.png", "creer.gif");
+	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_breve=$id_breve&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 

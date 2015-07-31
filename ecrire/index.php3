@@ -32,8 +32,8 @@ function enfant($collection){
 		$les_sous_enfants = sous_enfant($id_rubrique);
 
 		$les_enfants.= "<P>";
-		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.png", true);
-		else  $les_enfants .= debut_cadre_relief("rubrique-24.png", true);
+		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
+		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
 		$les_enfants.= "<FONT FACE=\"verdana,arial,helvetica,sans-serif\">";
 
 		if (strlen($les_sous_enfants) > 0){
@@ -61,7 +61,7 @@ function sous_enfant($collection2){
 	$result3 = mysql_query($query3);
 
 	if (mysql_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
+		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
 		while($row=mysql_fetch_array($result3)){
 			$id_rubrique2=$row[0];
 			$id_parent2=$row[1];
@@ -86,7 +86,7 @@ function sous_enfant($collection2){
 
 echo "<p align='left'>";
 
-debut_cadre_relief("fiche-perso-24.png");
+debut_cadre_relief("fiche-perso-24.gif");
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 echo bouton_block_invisible("info_perso");
 echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
@@ -108,7 +108,7 @@ else {
 	echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
 }
 
-icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.png","rien.gif");
+icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
 
 //
 // Supprimer le cookie, se deconnecter...
@@ -143,7 +143,7 @@ $query = "SELECT * FROM spip_messages WHERE type = 'affich' AND statut = 'publie
 $result = spip_query($query);
 
 if (mysql_num_rows($result) > 0){
-	debut_cadre_enfonce("messagerie-24.png");
+	debut_cadre_enfonce("messagerie-24.gif");
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
 	echo "<div style='background-color: yellow; padding: 3px;'>";
 	echo "<b>Annonces g&eacute;n&eacute;rales :</b>";
@@ -177,11 +177,11 @@ $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
 if (mysql_num_rows($result) > 0) {
-	icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.png","creer.gif");
+	icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
 
 	$activer_breves = lire_meta("activer_breves");
 	if ($activer_breves != "non") {
-		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.png","creer.gif");
+		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
 	}
 }
 else {
@@ -190,7 +190,7 @@ else {
 	}
 }
 if ($connect_statut == '0minirezo') {
-	icone_horizontale("Cr&eacute;er une nouvelle rubrique", "rubriques_edit.php3?new=oui", "rubrique-24.png","creer.gif");
+	icone_horizontale("Cr&eacute;er une nouvelle rubrique", "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 }
 
 
@@ -198,19 +198,19 @@ if ($connect_statut == '0minirezo') {
 echo "<p>";
 $activer_messagerie = lire_meta("activer_messagerie");
 
-icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png","rien.gif");
+icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif","rien.gif");
 
 if ($connect_statut == "0minirezo")	{
-	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png","rien.gif");
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
 }
 if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
-	icone_horizontale("Messagerie interne", "messagerie.php3", "messagerie-24.png","rien.gif");
+	icone_horizontale("Messagerie interne", "messagerie.php3", "messagerie-24.gif","rien.gif");
 }
 
 if ($connect_statut == "0minirezo")	{
 	echo "<p>";
-	icone_horizontale("Statistiques du site", "statistiques.php3", "statistiques-24.png","rien.gif");
-	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.png","rien.gif");
+	icone_horizontale("Statistiques du site", "statistiques.php3", "statistiques-24.gif","rien.gif");
+	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif","rien.gif");
 }
 
 echo "</font>";
