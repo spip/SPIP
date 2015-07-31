@@ -164,7 +164,7 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 	'entree_url_2' => 'Indirizzo del sito',
 	'erreur_connect_deja_existant' => 'Esista già un server con quel nome',
 	'erreur_nom_connect_incorrect' => 'Nome del server non consentito',
-	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.', # MODIF
+	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.',
 	'erreur_plugin_fichier_absent' => 'File non presente',
 	'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
 	'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
@@ -311,7 +311,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_conflit_edition_votre_version' => 'La tua versione:',
 	'info_connexion_base' => 'Prova di connessione al database',
 	'info_connexion_base_donnee' => 'Connessione al proprio database',
-	'info_connexion_ldap_ok' => 'La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>', # MODIF
+	'info_connexion_ldap_ok' => '<b>La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>',
 	'info_connexion_mysql' => 'La connessione a SQL',
 	'info_connexion_ok' => 'La connessione è riuscita.',
 	'info_contact' => 'Contatti',
@@ -787,7 +787,7 @@ Le traduzioni sono associate all\'originale,
 
 	// Q
 	'queue_executer_maintenant' => 'Esegui adesso',
-	'queue_info_purger' => 'È possibile eliminare tutti i lavori in sospeso e reinizializzare lista con delle elaborazioni periodiche', # MODIF
+	'queue_info_purger' => 'È possibile eliminare tutti i lavori in sospeso e reinizializzare lista con delle elaborazioni periodiche',
 	'queue_nb_jobs_in_queue' => '@nb@ processi in coda',
 	'queue_next_job_in_nb_sec' => 'Prossimo processo in @nb@ s',
 	'queue_no_job_in_queue' => 'Nessun processo appeso',
@@ -803,8 +803,8 @@ Le traduzioni sono associate all\'originale,
 	'statut_admin_restreint' => '(ammin. parziale)',
 
 	// T
-	'tache_cron_asap' => 'Task CRON @function@ (ASAP)', # MODIF
-	'tache_cron_secondes' => 'Task CRON @function@ (ogni @nb@ s)', # MODIF
+	'tache_cron_asap' => 'Task CRON @function@ (ASAP)',
+	'tache_cron_secondes' => 'Task CRON @function@ (ogni @nb@ s)',
 	'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 	'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
 	'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',
