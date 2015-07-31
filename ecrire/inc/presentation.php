@@ -1159,11 +1159,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 }
 
 // http://doc.spip.org/@bouton_spip_rss
-function bouton_spip_rss($op, $args=array(), $lang='') {
+function bouton_spip_rss($op, $args=array(), $lang='', $title='RSS') {
 
 	global $spip_lang_right;
 	include_spip('inc/acces');
-	$clic = http_img_pack('feed.png', 'RSS', '', 'RSS');
+	$clic = http_img_pack('feed.png', 'RSS', '', $title);
 	$args = param_low_sec($op, $args, $lang, 'rss');
 	$url = generer_url_public('rss', $args);
 	return "<a style='float: $spip_lang_right;' href='$url'>$clic</a>";
