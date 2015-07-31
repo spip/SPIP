@@ -36,16 +36,14 @@ function exec_admin_tech_dist()
 		debut_boite_info();
 		echo _T('info_gauche_admin_tech');
 		fin_boite_info();
-		$file = joli_repertoire(_DIR_SESSIONS . _SPIP_DUMP);
-		$zfile = joli_repertoire(_DIR_SESSIONS . _SPIP_DUMP . '.gz');
-		$dir = joli_repertoire(_DIR_SESSIONS);
+		$dir_dump = _DIR_DUMP;
 	} else {
 		debut_gauche();
-		$dir = _DIR_TRANSFERT . $connect_login . '/';
-		$file = joli_repertoire($dir . _SPIP_DUMP);
-		$zfile = joli_repertoire($dir . _SPIP_DUMP . '.gz');
-		$dir = joli_repertoire($dir);
+		$dir_dump = _DIR_TRANSFERT . $connect_login . '/';
 	}
+	$file = joli_repertoire($dir_dump . _SPIP_DUMP);
+	$zfile = joli_repertoire($dir_dump . _SPIP_DUMP . '.gz');
+	$dir_dump = joli_repertoire($dir_dump);
 
  debut_droite();
 
@@ -70,7 +68,7 @@ function exec_admin_tech_dist()
    "\n<p align='justify'>",
    http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
    _T('texte_admin_tech_01',
-     array('dossier' => '<i>'.$dir.'</i>', 'img'=>'<i>'.$dir_img.'</i>')),
+     array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')),
    "<p>",
    _T('texte_admin_tech_02');
 
@@ -112,7 +110,7 @@ echo "</TABLE>";
 	"<TR><td class='serif'>\n",
 	generer_url_post_ecrire("import_all"),
 	"\n<p align='justify'> ",
-	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.joli_repertoire(_DIR_SESSIONS).'</i>')),
+	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')),
 	"\n<p>",
 	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
 	"\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>",

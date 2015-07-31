@@ -63,7 +63,7 @@ function exec_export_all_dist()
   global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive, $connect_login, $connect_toutes_rubriques;
 
 	if ($connect_toutes_rubriques) {
-		$dir = _DIR_SESSIONS;
+		$dir = _DIR_DUMP;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}
@@ -111,7 +111,7 @@ function exec_export_all_dist()
 		$status_dump = explode("::",$status_dump);
 		ecrire_metas();
 		// un ramassage preventif au cas ou le dernier dump n'aurait pas ete acheve correctement
-		#ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
+		#ramasse_parties(_DIR_DUMP . $archive, $gz, _DIR_DUMP . $partfile);
 		// et au cas ou (le rammase_parties s'arrete si un fichier de la serie est absent)
 		// on ratisse large avec un preg_files
 		$liste = preg_files($file .  ".part\.[0-9]*");

@@ -338,7 +338,7 @@ function import_table_choix()
 
 function import_all_continue()
 {
-  global $meta, $flag_gz, $buf, $abs_pos, $my_pos;
+  global $meta, $flag_gz, $buf, $abs_pos, $my_pos, $connect_toutes_rubriques;
 	global $affiche_progression_pourcent;
 	ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
@@ -348,7 +348,12 @@ function import_all_continue()
 	@ignore_user_abort(1);
 
 	$request = unserialize($meta['request_restauration']);
-	$archive = _DIR_SESSIONS . $request['archive'];
+	if ($connect_toutes_rubriques) {
+		$dir = _DIR_DUMP;
+	} else {
+		$dir = _DIR_TRANSFERT . $connect_login . '/';
+	}
+	$archive = $dir . $request['archive'];
 
 	debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
