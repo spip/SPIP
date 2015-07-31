@@ -1,0 +1,21 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<?xml version="1.0" encoding="#CHARSET" ?>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="[(#ENV{lang}|texte_backend)]">
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93;] RSS (<:icone_suivi_revisions|texte_backend:>)</title>
+	<link>[(#URL_ECRIRE{suivi_revisions, [id_secteur=(#ENV{id_secteur})&][id_auteur=(#ENV{id_auteur})&][langue_choisie=(#ENV{lang})&]}|url_absolue|texte_backend)]</link>
+	<description></description>
+	<language>[(#ENV{lang}|texte_backend)]</language>
+<BOUCLE_RSS(versions articles){id_version >1}{statut IN #ENV{statut}}{!par date}{0,10}{lang ?}{id_secteur ?}{id_auteur ?}>
+	<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		<link>[(#URL_ECRIRE{articles_versions, id_article=#ID_ARTICLE&id_version=#ID_VERSION}|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{articles_versions, id_article=#ID_ARTICLE&id_version=#ID_VERSION}|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#_RSS:DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		<dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator>
+		<description>[(#ID_ARTICLE|revisions_diff{#ID_VERSION})]</description>
+	</item></BOUCLE_RSS>
+</channel>
+</rss>

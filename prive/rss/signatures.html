@@ -1,0 +1,22 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<?xml version="1.0" encoding="#CHARSET" ?>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="[(#ENV{lang}|texte_backend)]">
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93;] RSS (<:titre_suivi_petition|texte_backend:>)</title>
+	<link>[(#URL_ECRIRE{controle_petition}|url_absolue|texte_backend)]</link>
+	<description></description>
+	<language>[(#ENV{lang}|texte_backend)]</language>
+<BOUCLE_RSS(SIGNATURES){!par date}{0,50}
+ ><BOUCLE0(ARTICLES){id_article}>
+	<item>
+		<title>[(#TITRE|texte_backend)]</title>
+		<link>[(#URL_ARTICLE|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ARTICLE|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#_RSS:DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		<dc:creator>[(#NOM_EMAIL|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator>
+		<description>[(#_RSS:URL_SITE|propre|liens_absolus)][ (#MESSAGE|couper{300}|liens_absolus|texte_backend)]</description>
+	</item></BOUCLE0></BOUCLE_RSS>
+</channel>
+</rss>

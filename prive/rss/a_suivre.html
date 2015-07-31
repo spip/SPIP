@@ -1,0 +1,51 @@
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}<?xml version="1.0" encoding="#CHARSET" ?>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
+<channel xml:lang="#LANG">
+	<title>[&#91;(#NOM_SITE_SPIP|texte_backend)&#93;] RSS (<:icone_a_suivre|texte_backend:>)</title>
+	<link>[(#URL_ECRIRE|url_absolue|texte_backend)]</link>
+	<description></description>
+	<language>#LANG</language>
+<?php $rss = array();
+<BOUCLE_A(ARTICLES){!par date}{statut=prop}{0,10}>
+$rss['[(#DATE|date_ical)]'] .= '
+	<item>
+		<title><:info_article_propose:> : [(#TITRE|texte_backend)]</title>
+		<link>[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+	<BOUCLE_AA(AUTEURS){id_article}{0,1}><dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator></BOUCLE_AA>
+		<description>[(#INTRODUCTION|texte_backend)]</description>
+	</item>';
+</BOUCLE_A>
+<BOUCLE_B(BREVES){!par date}{statut=prop}{0,10}>
+$rss['[(#DATE|date_ical)]'] .= '
+	<item>
+		<title><:titre_breve_proposee:> : [(#TITRE|texte_backend)]</title>
+		<link>[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		<description>[(#TEXTE|texte_backend)]</description>
+	</item>';
+</BOUCLE_B>
+<BOUCLE_S(SYNDIC){!par date}{statut=prop}{0,10}>
+$rss['[(#DATE|date_ical)]'] .= '
+	<item>
+		<title><:info_site_attente:> : [(#TITRE|texte_backend)]</title>
+		<link>[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{sites, id_syndic=#ID_SYNDIC}|url_absolue|texte_backend)]</guid>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+		<description>[(#TEXTE|couper|texte_backend)]</description>
+	</item>';
+</BOUCLE_S>
+rsort($rss);
+echo join('',$rss);
+?>
+</channel>
+</rss>
