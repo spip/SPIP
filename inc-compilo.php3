@@ -169,7 +169,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$debut .= $invalide;
 
 	if ($boucle->doublons)
-		$debut .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
+		$debut .= "\n			\$doublons[".$boucle->doublons."] .= ','. " .
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons";
 
