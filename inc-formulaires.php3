@@ -278,6 +278,18 @@ function formulaire_signature($id_article) {
 }
 
 
+// y a t il des forums sur abonnement ?
+function forums_sur_abo() {
+	if (lire_meta("forums_publics") == "abo")
+		return true;
+	else {
+		$res = spip_query ("SELECT * FROM spip_articles WHERE accepter_forum='abo'");
+		if (mysql_num_rows($res)>0)
+			return true;
+	}
+}
+
+// inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
 function formulaire_inscription() {
 	$request_uri = $GLOBALS["REQUEST_URI"];
 	global $mail_inscription;
@@ -285,49 +297,45 @@ function formulaire_inscription() {
 
 	include_ecrire("inc_meta.php3");
 	$inscriptions_ecrire = (lire_meta("autoriser_inscriptions") == "oui");
+	if ($inscriptions_ecrire) {
+		$ecrire = "ecrire/";
+		$statut = "nouveau";
+	}
+	else if (forums_sur_abo() ) {
+		$ecrire = "";
+		$statut = "6forum";
+	}
+	else {
+		return; // tentative de hack...?
+	}
 
 	if ($mail_inscription) {
 		include_ecrire("inc_connect.php3");
 		$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
 		$result = spip_query($query);
-		$ok = true;
 
 		echo "<div class='reponse_formulaire'>";
 		
+		// l'abonne existe deja.
 	 	if ($row = mysql_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
 			$statut = $row['statut'];
 
 			echo "<b>";
-			if ($statut == '5poubelle') {
+			if ($statut == '5poubelle')
 				echo "Vous n'avez plus acc&egrave;s &agrave; ce site.";
-				$ok = false;
-			}
-			else if ($statut == 'nouveau'){
-				spip_query("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
-				echo "Vous vous &ecirc;tes d&eacute;j&agrave; inscrit avec cette adresse, mais vous ne vous &ecirc;tes jamais connect&eacute;. Vous allez recevoir un nouveau code d'acc&egrave;s. ATTENTION&nbsp;: les codes d'acc&egrave;s qui vous sont parvenus auparavant ne sont plus actifs, vous devez utiliser uniquement ceux qui vous sont envoy&eacute;s &agrave; l'instant.";
-				$ok = true;
-			}
-			else if ($statut == '0minirezo' OR $statut == '1comite') {
-				echo "Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e en tant que r&eacute;dacteur ou
-				administrateur du site, vous pouvez donc utiliser votre mot de passe habituel.";
-				$ok = false;
-			}
-			else if ($statut == '6forum') {	// envoyer les identifiants pour ecrire
-				spip_query("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
-				$ok = true;
-			}
-			echo "</b>\n";
+			else 
+				echo "Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e, vous pouvez donc utiliser votre mot de passe habituel.";
+			echo "</b>";
 		}
-
-		if ($ok) {
+		else {	// envoyer identifiants par mail
 			include_local("inc-forum.php3");
 			$pass = generer_pass_forum($mail_inscription);
 			$login = test_login($mail_inscription);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
 			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass) ".
-				"VALUES ('".addslashes($nom_inscription)."', '".addslashes($mail_inscription)."', '$login', '$mdpass', 'nouveau', '$htpass')";
+				"VALUES ('".addslashes($nom_inscription)."', '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')";
 			$result = spip_query($query);
 			ecrire_acces();
 
@@ -337,7 +345,7 @@ function formulaire_inscription() {
 			$message = "(ceci est un message automatique)\n\n";	
 			$message .= "Bonjour\n\n";
 			$message .= "Voici vos identifiants pour pouvoir participer aux forums\n";
-			$message .= "du site \"$nom_site_spip\" ($adresse_site/ecrire) :\n\n";
+			$message .= "du site \"$nom_site_spip\" ($adresse_site/$ecrire) :\n\n";
 			$message .= "- login : $login\n";
 			$message .= "- mot de passe : $pass\n\n";
 

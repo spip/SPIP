@@ -15,21 +15,10 @@ include_local("inc-formulaires.php3");
 
 $inscriptions_ecrire = (lire_meta("autoriser_inscriptions") == "oui") ;
 
-// y a t il des forums sur abonnement ?
-function forums_sur_abo() {
-	if (lire_meta("forums_publics") == "abo")
-		return true;
-	else {
-		$res = spip_query ("SELECT * FROM spip_articles WHERE accepter_forum='abo'");
-		if (mysql_num_rows($res)>0)
-			return true;
-	}
-}
-
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
-	$res = spip_query ("SELECT * FROM spip_auteurs WHERE cookie_oubli='$p' AND statut<>'5poubelle' AND pass<>'' AND login<>''");
-	if (!$res OR $row = mysql_fetch_array($res)) {
+	$res = spip_query ("SELECT * FROM spip_auteurs WHERE cookie_oubli='$p' AND statut<>'5poubelle' AND pass<>''");
+	if ($row = mysql_fetch_array($res)) {
 		if ($pass) {
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
