@@ -141,10 +141,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 			. (($syndication == "off" OR $syndication=="sus") ?
 			  "<div class='site_syndique_probleme'>" . _T('avis_site_syndique_probleme', array('url_syndic' => quote_amp($url_syndic)))
-			  . redirige_action_auteur('editer_site',
-					$id_syndic,
-			    'sites',
-			    '',
+			  . redirige_action_auteur('editer_site', $id_syndic, 'sites', '',
 			    "<input type='hidden' name='reload' value='oui' />
 			    <input type='submit' value=\""
 				  . attribut_html(_T('lien_nouvelle_recuperation'))
@@ -156,13 +153,11 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 			. ($date_syndic ? "<div class='date_syndic'>" . _T('info_derniere_syndication').' '.affdate_heure($date_syndic) .".</div>" : "")
 			. "<div class='mise_a_jour_syndic'>"
-			. generer_action_auteur('editer_site',
-				$id_syndic,
-				generer_url_ecrire('sites'),
+			. redirige_action_post('editer_site', $id_syndic, 'sites', "id_syndic=$id_syndic",
 				"<input type='hidden' name='reload' value='oui' />
 				<input type='submit' value=\""
 				. attribut_html(_T('lien_mise_a_jour_syndication'))
-				. "\" class='fondo spip_xx-small' />", " method='post'")
+				. "\" class='fondo spip_xx-small' />")
 			. "</div>"
 
 			: choix_feed($id_syndic, $id_rubrique, $nom_site, $row))
@@ -269,19 +264,20 @@ function options_moderation($row) {
 
 	return
 	  debut_cadre_relief('feed.png', true, "", _T('syndic_options').aide('artsyn'))
-	  . redirige_action_auteur('editer_site',
-					 "options/$id_syndic",
-					 'sites',
-					 '',
-					 $res,
-					 " method='post'")
+	  . redirige_action_post('editer_site', "options/$id_syndic", 'sites', '', $res)
 	 .  fin_cadre_relief(true);
 }
 
+// Site pour lesquels feedfinder a un ou plusieurs flux,
+// et l'on propose de choisir
+
 // http://doc.spip.org/@choix_feed
 function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
+
+	if (!preg_match(',^\s*select: (.*),', $row['url_syndic'], $regs))
+		return '';
+
 	$url_site = $row["url_site"];
-	$url_syndic = $row["url_syndic"];
 	$descriptif = $row["descriptif"];
 	$statut = $row["statut"];
 
@@ -291,39 +287,28 @@ function choix_feed($id_syndic, $id_rubrique, $nom_site, $row) {
 	$extra=$row["extra"];
 
 	$res = "";
-	// Cas d'un site pour lesquels feedfinder a un ou plusieurs flux,
-	// et l'on propose de choisir
-	if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
-			foreach (
-				array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')	as $var) {
+
+	foreach (array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')	as $var) {
 			$res .= "<input type='hidden' name='$var' value=\"".entites_html($$var)."\" />\n";
-		}
-		$res .= "<div style='text-align: $spip_lang_left'>\n";
-		$res .= "<div><input type='radio' name='syndication' value='non' id='syndication_non' checked='checked' />";
-		$res .= " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b></div>\n";
-		$res .= "<div><input type='radio' name='syndication' value='oui' id='syndication_oui' />";
-		$res .= " <label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></div>\n";
-
-		$res .= "<select name='url_syndic' id='url_syndic'>\n";
-		foreach (explode(' ',$regs[1]) as $feed) {
-			$res .= '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
-		}
-		$res .= "</select>\n";
-		$res .= aide("rubsyn");
-		$res .= "<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
-		$res .= "</div>\n";
-
-		$res =
-		  debut_cadre_relief('', true)
-		  . redirige_action_auteur('editer_site',
-			$id_syndic,
-			'sites',
-			'',
-			$res,
-			" method='post'")
-			. fin_cadre_relief(true);
 	}
-	return $res;
+	$res .= "<div style='text-align: $spip_lang_left'>\n";
+	$res .= "<div><input type='radio' name='syndication' value='non' id='syndication_non' checked='checked' />";
+	$res .= " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b></div>\n";
+	$res .= "<div><input type='radio' name='syndication' value='oui' id='syndication_oui' />";
+	$res .= " <label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></div>\n";
+
+	$res .= "<select name='url_syndic' id='url_syndic'>\n";
+	foreach (explode(' ',$regs[1]) as $feed) {
+			$res .= '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
+	}
+	$res .= "</select>\n";
+	$res .= aide("rubsyn");
+	$res .= "<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
+	$res .= "</div>\n";
+
+	$res = redirige_action_post('editer_site', $id_syndic, 'sites','', $res);
+		
+	return debut_cadre_relief('', true) . $res . fin_cadre_relief(true);
 }
 
 // http://doc.spip.org/@afficher_site_rubrique
@@ -343,7 +328,7 @@ function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 	$msg = _T('titre_cadre_interieur_rubrique');
 
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" . $form;
-	$form = generer_action_auteur("editer_site", $id_syndic, generer_url_ecrire('sites'), $form, " method='post' class='submit_plongeur'");
+	$form = redirige_action_post("editer_site", $id_syndic, 'sites', $form, " class='submit_plongeur'");
 
 	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";

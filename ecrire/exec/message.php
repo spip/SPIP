@@ -130,7 +130,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 		.  "</select>"
 		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
 	}
-	return redirige_action_auteur('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>\n$res</div>\n", " method='post'");
+	return redirige_action_post('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>\n$res</div>\n");
 }
 
 // http://doc.spip.org/@http_message_avec_participants

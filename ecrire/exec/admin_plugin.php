@@ -133,7 +133,7 @@ function exec_admin_plugin_dist($retour='') {
 
 		$corps .= "\n<br />" . $sub;
 
-		echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps, " method='post'");
+		echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
 
 		echo fin_cadre_trait_couleur(true);
 
