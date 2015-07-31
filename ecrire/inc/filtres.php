@@ -923,36 +923,38 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 // http://doc.spip.org/@agenda_affiche
 function agenda_affiche($i)
 {
-  include_spip('inc/agenda');
-  include_spip('inc/minipres');
-  $args = func_get_args();
-  $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
-  $sinon = array_shift($args);
-  $type = array_shift($args);
-  if (!$nb) 
-    return http_calendrier_init('', $type, '', '', str_replace('&amp;', '&', self()), $sinon);
-  $agenda = agenda_memo(0);
-  $evt = array();
-  foreach (($args ? $args : array_keys($agenda)) as $k) {  
-      if (is_array($agenda[$k]))
-	foreach($agenda[$k] as $d => $v) { 
-	  $evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
+	include_spip('inc/agenda');
+	include_spip('inc/minipres');
+	$args = func_get_args();
+	$nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
+	$sinon = array_shift($args);
+	$type = array_shift($args);
+	if (!$nb) 
+		return http_calendrier_init('', $type, '', '', str_replace('&amp;', '&', self()), $sinon);
+	$agenda = agenda_memo(0);
+	$evt = array();
+	foreach (($args ? $args : array_keys($agenda)) as $k) {  
+		if (is_array($agenda[$k]))
+		foreach($agenda[$k] as $d => $v) { 
+			$evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
+		}
 	}
-    }
-  $d = array_keys($evt);
-  $mindate = min($d);
-  $start = strtotime($mindate);
-  if ($type != 'periode')
-      $evt = array('', $evt);
-  else
-      {
-	$min = substr($mindate,6,2);
-	$max = $min + ((strtotime(max($d)) - $start) / (3600 * 24));
-	if ($max < 31) $max = 0;
-	$evt = array('', $evt, $min, $max);
-	$type = 'mois';
-      }
-  return http_calendrier_init($start, $type, '', '', str_replace('&amp;', '&', self()), $evt);
+	$d = array_keys($evt);
+	$mindate = date_ical(_request('jour')."/"._request('mois')."/"._request('annee'));
+	if (count($d))
+		$mindate = min($d);
+	$start = strtotime($mindate);
+	if ($type != 'periode')
+		$evt = array('', $evt);
+	else
+	{
+		$min = substr($mindate,6,2);
+		$max = $min + ((strtotime(max($d)) - $start) / (3600 * 24));
+		if ($max < 31) $max = 0;
+		$evt = array('', $evt, $min, $max);
+		$type = 'mois';
+	}
+	return http_calendrier_init($start, $type, '', '', str_replace('&amp;', '&', self()), $evt);
 }
 
 //
