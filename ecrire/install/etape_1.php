@@ -39,7 +39,7 @@ function install_etape_1_dist()
 	$login = array($login_db, _T('entree_login_connexion_2'));
 	$pass = array($pass_db, _T('entree_mot_passe_2'));
 
-	$predef = array(defined('_INSTALL_SERVER_DB'), 
+	$predef = array(defined('_INSTALL_SERVER_DB') ? _INSTALL_SERVER_DB:'',
 			defined('_INSTALL_HOST_DB'),
 			defined('_INSTALL_USER_DB'),
 			defined('_INSTALL_PASS_DB'));
