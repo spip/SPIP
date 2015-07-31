@@ -26,15 +26,10 @@ function exec_message_args($id_message, $forcer_dest, $cherche_auteur)
 {
 	global  $connect_id_auteur;
 
-	$res = sql_fetsel("type,id_auteur", "spip_messages", "id_message=$id_message");
+	$res = sql_getfetsel("type", "spip_messages", "id_message=$id_message");
 
-	if ($res AND $res['type'] != "affich"){
-		$r2 = sql_fetsel("vu", "spip_auteurs_messages", "id_auteur=$connect_id_auteur AND id_message=$id_message");
-		if (!$r2 AND $res['id_auteur']==$connect_id_auteur){
-			// reparer la base si c'est un message a soi
-			sql_insertq('spip_a')
-		}
-	}
+	if ($res AND $res != "affich")
+		$res = sql_fetsel("vu", "spip_auteurs_messages", "id_auteur=$connect_id_auteur AND id_message=$id_message");
 
 	if (!$res) {
 		include_spip('inc/minipres');
