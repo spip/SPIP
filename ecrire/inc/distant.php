@@ -313,6 +313,7 @@ function recuperer_lapage($url, $trans = false, $get = 'GET', $taille_max = 1048
 function recuperer_body($f, $taille_max = 1048576, $fichier = ''){
 	$taille = 0;
 	$result = '';
+	$fp = false;
 	if ($fichier){
 		$fp = spip_fopen_lock($fichier, 'w', LOCK_EX);
 		if (!$fp)
