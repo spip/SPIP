@@ -572,7 +572,6 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
 		      
 		phraser_args($milieu,"/>","",$all_res,$result);
-		spip_log("boucle $id_boucle " . count($all_res));
 
 		$params = substr($milieu,0,@strpos($milieu,$result->apres));
 		$milieu = $result->apres;
