@@ -30,7 +30,7 @@ else
 	$f = ($gz) ? gzopen("data/$archive", "ab") : fopen("data/$archive", "ab");
 
 if (!$f) {
-	echo _T('avis_erreur_sauvegarde');
+	echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 	exit;
 }
 
