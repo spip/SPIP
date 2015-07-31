@@ -103,7 +103,7 @@ if (@get_magic_quotes_gpc()) {
 	magic_unquote('_POST');
 	magic_unquote('_COOKIE');
 
-	if (@ini_get('register_globals'))
+#	if (@ini_get('register_globals')) // pas fiable
 		magic_unquote('GLOBALS');
 }
 
