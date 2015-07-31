@@ -7,23 +7,20 @@
 ---------------------------------------------- */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 div#page { width: 48em; margin: 0 auto; text-align: left; }
-div#top { height: 5em; line-height: 5em; margin: 0; }
+div#top { margin: 0; border-bottom: 2px solid #666699; line-height: 5em; }
+div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
+div#top .formulaire_recherche { float: right; width: 30%; background: 0; margin: 0; padding: 0; }
+div#top #nom_site_spip, div#top .formulaire_recherche {}
 div#conteneur { width: 100%; }
-div#contenu { float: left; width: 65%; }
+div#contenu { float: left; width: 65%; padding-top: .3em; }
 div#navigation { float: right; width: 30%; }
 div#extra { float: right; clear: right; width: 30%; }
-div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 1px solid #CCC; text-align: center; }
+div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 1px solid #666699; text-align: center; }
 div#pied img { vertical-align: bottom; }
 
 /* Couleurs temporaires */
 /*#navigation { background: #B9CAFF; }
 #extra { background: #FF8539; }*/
-
-/* top */
-#top { border-bottom: 2px solid #333; }
-#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
-#top a { /*text-decoration: none;*/ }
-#top .formulaire_recherche { float: right; width: 30%; background: 0; margin: 0; padding: 0; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
@@ -45,15 +42,14 @@ body { font-size: 100%; font-family: "Trebuchet MS", Helvetica, sans-serif; colo
 /* * */
 #top, #contenu, #navigation, #extra, #pied { font-size: .9em; }
 
-.formulaire_spip, small, #hierarchie, .menu, .texte, .ps, .notes, .forum-repondre, .forum { font-family: Verdana, Tahoma, Geneva, sans-serif; font-size: .9em; }
+#hierarchie, .formulaire_spip, .menu, .texte, .ps, .notes, .forum-repondre, .forum, small, #pied { font-family: Verdana, Tahoma, Geneva, sans-serif; font-size: .9em; }
 
 
 /* Blocs du contenu
 ---------------------------------------------- */
 
 /* Fil d'Ariane */
-#hierarchie { clear: both; margin-bottom: 2em; padding-top: .5em; font-size: 0.77em; color: #666; }
-#hierarchie a { /*text-decoration: none;*/ }
+#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
 
 .surtitre, .soustitre { /*font-size: 0.82em;*/ text-transform: uppercase; color: #666; color: #CCCC66; }
 
@@ -79,7 +75,7 @@ body { font-size: 100%; font-family: "Trebuchet MS", Helvetica, sans-serif; colo
 /* Titraille */
 h1 { margin-top: 0; font-size: 1.3em; font-weight: bold; color: #000; }
 h2 { margin: 0; padding: .2em; background: #666699; font-size: .9em; font-weight: normal; text-transform: uppercase; letter-spacing: .1em; }
-h2, h2 a, h2 a:hover { color: #EEE; /*text-decoration: none;*/ }
+h2, h2 a, h2 a:hover { color: #EEE; }
 h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #CCCC66; color: #CCCC66; font-size: 1.1em; font-weight: bold; font-family: Georgia, Times, serif; }
 h3.spip {}
 
@@ -135,7 +131,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .menu { clear: both; margin-bottom: 2em; text-align: left; }
 #contenu .menu { /*font-size: 0.82em;*/ }
 #navigation .menu { min-width: 10em; /*font-size: 0.77em;*/ }
-#navigation .menu a { /*text-decoration: none;*/ }
+#navigation .menu a { }
 
 .menu p { margin: .2em 0; padding: .2em .1em; }
 .menu ul { margin: 0; padding: 0; list-style: none; }
@@ -144,13 +140,13 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .menu ul li li { border: 0; }
 
 .pagination { clear: both; text-align: right; font-size: 0.90em; color: #666; }
-.pagination a { /*text-decoration: none;*/ }
+.pagination a { }
 .pagination .on { font-weight: bold; color: #000; }
 
 /* Rubriques */
 .rubriques ul li { background: #EEE; border: 0; text-transform: uppercase; }
 .rubriques ul li ul li { text-transform: none; }
-.rubriques a, .rubriques a:hover { /*text-decoration: none;*/ }
+.rubriques a, .rubriques a:hover { }
 
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; }
@@ -166,7 +162,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-.formulaire_spip { background: #CCCC99; margin-bottom: 2em; padding: 1em; text-align: left; /*font-size: 0.77em;*/ }
+.formulaire_spip { background: #CCCC99; margin-bottom: 2em; padding: 1em; text-align: left; }
 .formulaire_spip fieldset { border: 0; }
 .formulaire_spip legend { font-weight: bold; color: #FFF; }
 .formulaire_spip label {}
@@ -208,15 +204,15 @@ table.spip_barre input.barre { width: 100%; background: #EEE; }
 
 /* Habillage des forums
 ---------------------------------------------- */
-.forum-repondre { clear: both; margin-top: 2.5em; padding-right: 1em; text-align: right; /*font-size: 0.88em;*/ font-weight: bold; }
+.forum-repondre { clear: both; margin-top: 2.5em; padding-right: 1em; text-align: right; font-weight: bold; }
 
 /* * Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 ul.forum, ul.forum ul { list-style: none; }
 .forum-fil { margin-top: 1.5em; }
 .forum-fil ul { display: block; margin: 0; padding: 0; margin-left: 1em; }
-.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; /*text-decoration: none;*/ color: #333; }
-.forum-texte { margin: 0; padding: 0.5em 1em; color: #333; /*font-size: 0.82em;*/ }
+.forum-chapo .forum-titre, .forum-chapo .forum-titre a { display: block; margin: 0; padding: 0; font-weight: bold; color: #333; }
+.forum-texte { margin: 0; padding: 0.5em 1em; color: #333; }
 .forum-texte .forum-lien {}
 .forum-texte .forum-repondre-message { margin: 0; padding: 1px 0; text-align: right; }
 
