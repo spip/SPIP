@@ -423,7 +423,10 @@ function _image_tag_changer_taille($tag,$width,$height,$style=false){
 	// quand on a desactive l'affichage des images.
 	$tag = inserer_attribut($tag,'width',$width);
 	$tag = inserer_attribut($tag,'height',$height);
-	$style = "height:".$height."px;width:".$width."px;".$style;
+	
+	// Ancien style inline pour IE6 mais qui casse la possibilité de surcharger en CSS
+	//$style = "height:".$height."px;width:".$width."px;".$style;
+	
 	// attributs deprecies. Transformer en CSS
 	if ($espace = extraire_attribut($tag, 'hspace')){
 		$style = "margin:${espace}px;".$style;
