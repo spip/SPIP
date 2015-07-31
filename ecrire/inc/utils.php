@@ -678,6 +678,7 @@ function creer_chemin() {
 }
 
 // Cette fonction est appelee une seule fois par hit et par dir du chemin
+// http://doc.spip.org/@memoriser_fichiers
 function memoriser_fichiers($dir) {
 	$fichiers = array();
 	if (@is_dir($dir)

@@ -716,6 +716,7 @@ function affiche_bloc_plugin($plug_file, $info) {
 	return $s;
 }
 
+// http://doc.spip.org/@plugin_propre
 function plugin_propre($texte) {
 	$mem = $GLOBALS['toujours_paragrapher'];
 	$GLOBALS['toujours_paragrapher'] = false;
