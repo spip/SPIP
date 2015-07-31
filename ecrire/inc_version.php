@@ -294,6 +294,7 @@ $spip_pipeline = array(
 	'rechercher_liste_des_champs' => '',
 	'rechercher_liste_des_jointures' => '',
 	'recuperer_fond' => '',
+	'styliser' => '',
 	'trig_propager_les_secteurs' => '',
 );
 
