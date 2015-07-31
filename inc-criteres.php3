@@ -606,14 +606,14 @@ function calculer_param_date($date_compare, $date_orig) {
 function calculer_param_dynamique($val, &$boucles, $idb) {
 #	if (ereg('^ *\((.*)) *$', $val, $m)) $val = $m[1]; # si on veut (#...)
 	if (ereg(NOM_DE_CHAMP . "(\{[^}]*\})?", $val, $regs)) {
-	  	$champ = new Champ;
+		$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
 		$champ->etoile = $regs[4];
 		$champ->fonctions = $regs[5] ? array($regs[5]) : '';
-		$champ->id_boucle = $boucles[$idb]->id_parent;
+		$champ->id_boucle = $idb;
+		$champ->id_mere = $boucles[$idb]->id_parent;
 		$champ->boucles = &$boucles;
-		$champ->id_mere = $idb;
 		$champ = calculer_champ($champ);
 		return '" . addslashes(' . $champ . ') . "';
 
