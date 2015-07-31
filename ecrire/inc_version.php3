@@ -18,7 +18,7 @@ $table_prefix = "spip";
 $debug = false;
 
 // faut-il passer les connexions MySQL en mode debug ?
-$mysql_debug = false;
+$mysql_debug = true;
 
 // faut-il chronometrer les requetes MySQL ?
 $mysql_profile = false;
@@ -274,8 +274,8 @@ function spip_query($query) {
 			@Header("Location: upgrade.php3?reinstall=oui");
 			exit;
 		}
+		return spip_query_db($query);
 	}
-	return spip_query_db($query);
 }
 
 

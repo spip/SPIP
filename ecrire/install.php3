@@ -27,10 +27,11 @@ if ($etape == 6) {
 	echo "<P>Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;...";
 
 	include_ecrire ("inc_connect_install.php3");
+
 	include_ecrire ("inc_meta.php3");
-	include_ecrire ("inc_acces.php3");
 
 	if ($login) {
+
 		$nom = addslashes($nom);
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
 		$result = spip_query_db($query);
@@ -46,10 +47,9 @@ if ($etape == 6) {
 		else {
 			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(\"$nom\",\"$email\",\"$login\",\"$mdpass\",\"$htpass\",FLOOR(32000*RAND()),\"0minirezo\")";
 		}
-		spip_query($query);
+		spip_query_db($query);
 
 		// inserer email comme email webmaster principal
-		include_ecrire('inc_meta.php3');
 		ecrire_meta('email_webmaster', $email);
 		ecrire_metas();
 	}
@@ -64,6 +64,7 @@ if ($etape == 6) {
 		echo "<p>Veuillez cr&eacute;er manuellement la protection pour ce r&eacute;pertoire (un couple login/mot de passe est n&eacute;cessaire).";
 	}
 	else {
+		include_ecrire ("inc_acces.php3");
 		ecrire_acces();
 		$protec = "deny from all\n";
 		$myFile = fopen("data/.htaccess", "w");
