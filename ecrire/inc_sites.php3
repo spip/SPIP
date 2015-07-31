@@ -258,6 +258,8 @@ function afficher_sites($titre_table, $requete) {
 			$statut=$row["statut"];
 			$date=$row["date"];
 			$moderation=$row['moderation'];
+			
+			$tous_id[] = $id_syndic;
 
 			echo "<tr bgcolor='$couleur'>";
 
@@ -322,6 +324,7 @@ function afficher_sites($titre_table, $requete) {
 		//echo "</TD></TR></TABLE>";
 		fin_cadre_relief();
 	}
+	return $tous_id;
 }
 
 
