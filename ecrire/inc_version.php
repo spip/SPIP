@@ -204,6 +204,7 @@ $table_des_tables = array();
 $tables_auxiliaires = array();
 $table_primary = array();
 $table_date = array();
+$tables_jointures = array();
 $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 
 
