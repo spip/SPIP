@@ -1779,9 +1779,12 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		if ($page === '') {
 			$c = isset($options['compil']) ? $options['compil'] :'';
 			$a = array('fichier'=>$fond.'.'._EXTENSION_SQUELETTES);
-			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
+			$erreur = _T('info_erreur_squelette2', $a); // squelette introuvable
+			erreur_squelette($erreur, $c);
+			// eviter des erreurs strictes ensuite sur $page['cle'] en PHP >= 5.4
+			$page = array('texte' => '', 'erreur' => $erreur);
 		}
-					 
+
 		if (isset($options['ajax'])AND $options['ajax']){
 			include_spip('inc/filtres');
 			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
