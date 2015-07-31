@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/abstract_sql');
-
 // http://doc.spip.org/@exec_delete_all_dist
 function exec_delete_all_dist()
 {
@@ -21,28 +19,28 @@ function exec_delete_all_dist()
 	if (!autoriser('detruire')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
-	$q = sql_showbase();
-	$res = '';
-	while ($r = sql_fetch($q)) {
-		$t = array_shift($r);
-		$res .= "<li>"
-		.  "<input type='checkbox' checked='checked' name='delete[]' id='delete_$t' value='$t'/>\n"
-		. $t
-		. "\n</li>";
-	}
+	} else {
+		$q = sql_showbase();
+		$res = '';
+		while ($r = sql_fetch($q)) {
+			$t = array_shift($r);
+			$res .= "<li>"
+			.  "<input type='checkbox' checked='checked' name='delete[]' id='delete_$t' value='$t'/>\n"
+			. $t
+			. "\n</li>";
+		}
 	  
-	if (!$res) {
-	  	include_spip('inc/minipres');
-		spip_log("Erreur base de donnees");
-		echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
-		exit;
+		if (!$res) {
+		  	include_spip('inc/minipres');
+			spip_log("Erreur base de donnees");
+			echo minipres(_T('info_travaux_titre'), _T('titre_probleme_technique'). "<p><tt>".sql_errno()." ".sql_error()."</tt></p>");
+		} else {
+			include_spip('inc/headers');
+			$res = "<ol style='text-align:left'>$res</ol>";
+			$admin = charger_fonction('admin', 'inc');
+			$res = $admin('delete_all', _T('titre_page_delete_all'), $res);
+			if ($res) echo $res; else redirige_par_entete(generer_url_ecrire('install','',true));
+		}
 	}
-
-	$res = "<ol style='text-align:left'>$res</ol>";
-	$r = generer_url_ecrire('install','',true);
-	$admin = charger_fonction('admin', 'inc');
-	$admin('delete_all', _T('titre_page_delete_all'), $res, $r);
 }
 ?>

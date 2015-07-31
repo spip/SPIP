@@ -57,7 +57,7 @@ function exec_convert_utf8_dist() {
 		$commentaire .= "<hr />\n";
 
 		$admin = charger_fonction('admin', 'inc');
-		$admin('convert_utf8', $action, $commentaire);
+		echo $admin('convert_utf8', $action, $commentaire);
 		}
 	}
 }

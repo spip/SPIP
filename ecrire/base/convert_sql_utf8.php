@@ -56,8 +56,7 @@ function convert_sql_utf8(){
 		if ($utf8_supporte)
 			echo _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
 		echo install_fin_html();
-		exit;
-	}
+	} else {
 	echo _L("Charset Actuel du site SPIP : $charset_spip<br/>");
 	echo _L("Conversion des champs des tables spip de type latin1 vers <b>$sql_charset</b> (collation $sql_collation) <br/>");
 	// lister les collations et leur charset correspondant
@@ -124,5 +123,6 @@ function convert_sql_utf8(){
 	}
 	ecrire_meta('charset_sql_base',$sql_charset,'non');
 	ecrire_meta('charset_sql_connexion',$sql_charset,'non');
+	}
 }
 ?>

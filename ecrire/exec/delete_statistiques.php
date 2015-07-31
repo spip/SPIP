@@ -19,11 +19,12 @@ function exec_delete_statistiques_dist()
 	if (!autoriser('detruire','statistiques')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+		include_spip('inc/headers');
+		$admin = charger_fonction('admin', 'inc');
+		$res = $admin('delete_statistiques', _L('Effacer les statistiques')/*_T('titre_page_delete_statistiques')*/, '');
+		if ($res) echo $res; else redirige_par_entete(generer_url_ecrire('statistiques_visites','',true));
+		
 	}
-
-	$r = generer_url_ecrire('statistiques_visites','',true);
-	$admin = charger_fonction('admin', 'inc');
-	$admin('delete_statistiques', _L('Effacer les statistiques')/*_T('titre_page_delete_statistiques')*/, '', $r);
 }
 ?>

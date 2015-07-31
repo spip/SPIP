@@ -45,8 +45,7 @@ function exec_convert_sql_utf8_dist() {
 			if ($utf8_supporte)
 				$res .= _L("Votre serveur supporte utf-8, vous devriez convertir votre site en utf-8 avant de recommencer cette operation");
 			echo minipres($action, $res);
-			exit;
-		}
+		} else {
 
 		$commentaire = "";
 		//$commentaire = _T('utf8_convert_avertissement',
@@ -59,7 +58,8 @@ function exec_convert_sql_utf8_dist() {
 		$commentaire .= "<hr />\n";
 
 		$admin = charger_fonction('admin', 'inc');
-		$admin('convert_sql_utf8', $action, $commentaire);
+		echo $admin('convert_sql_utf8', $action, $commentaire);
+		}
 	}
 }
 ?>
