@@ -36,8 +36,9 @@ function exec_breves_edit_args($id_breve, $id_rubrique, $new)
 		$id_rubrique = sql_getfetsel('id_secteur', 'spip_rubriques', "id_rubrique=$id_rubrique");
 
 	if (!$id_rubrique) {
-		$in = count($connect_id_rubrique)
-		? sql_in('id_rubrique', $connect_id_rubrique)   : '';
+		$in = !count($connect_id_rubrique)
+		  ? '' 
+		  : (" AND " . sql_in('id_rubrique', $connect_id_rubrique));
 
 		$id_rubrique = sql_getfetsel('id_rubrique','spip_rubriques', "id_parent=0$in",'',  "id_rubrique DESC", 1);
 
