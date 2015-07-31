@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_rubrique' => '&Ugrave;n ci h&egrave; r&ugrave;bbrica &agrave; st\'indirizzu',
 'autres' => 'Altri',
 'autres_breves' => 'Altri dispacci',
-'autres_groupes_mots_clefs' => 'Altri gruppi di parulle chjave',
+'autres_groupes_mots_clefs' => 'Altri gruppi di segni',
 'autres_sites' => 'Alri siti',
 
 // B
@@ -67,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messagiu',
 'messages_forum' => 'Messagi di foru',
 'messages_recents' => 'Messagi di fori i pi&ugrave; recenti',
-'mots_clefs' => 'Parulle chjave',
-'mots_clefs_meme_groupe' => 'Parulle chjave in u listessu gruppu',
+'mots_clefs' => 'Segni',
+'mots_clefs_meme_groupe' => 'Segni in u listessu gruppu',
 
 // N
 'navigation' => 'Navigazione',
