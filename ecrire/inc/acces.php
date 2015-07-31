@@ -97,24 +97,27 @@ function low_sec($id_auteur) {
 }
 
 // Inclure les arguments significatifs pour le hachage
-// cas particulier du statut pour compatibilite ancien suivi_revisions
-// http://doc.spip.org/@generer_url_low_sec
+// cas particulier du statut pour compatibilite ancien rss/suivi_revisions
 
-// http://doc.spip.org/@generer_url_low_sec
-function generer_url_low_sec($action, $args, $id_auteur=0, $lang='')
+function param_low_sec($op, $args=array(), $lang='', $mime='rss')
 {
-	$a = '';
-	$b = "op=$action&id=$id_auteur" . (!$lang ? '' : "&lang=$lang");
-	if (is_array($args)) {
-		foreach ($args as $val => $var)
-			if ($var) {
-				if ($val<>'statut') $a .= ':' . $val.'-'.$var;
-				$b .= '&' . $val.'='.$var;
-			}
-		$a = substr($a,1);
-	}
-	$cle = afficher_low_sec($id_auteur, "rss $action $a");
-	return generer_url_public("rss", "$b&cle=$cle&args=$a");
+	$a = $b = '';
+	foreach ($args as $val => $var)
+		if ($var) {
+			if ($val<>'statut') $a .= ':' . $val.'-'.$var;
+			$b .= $val.'='.$var . '&';
+		}
+	$a = substr($a,1);
+	$id = intval(@$GLOBALS['connect_id_auteur']);
+	return $b
+	  . "op="
+	  . $op
+	  . "&id="
+	  . $id
+	  . "&cle="
+	  . afficher_low_sec($id, "$mime $op $a")
+	  . (!$a ? '' : "&args=$a")
+	  . (!$lang ? '' : "&lang=$lang");
 }
 
 // http://doc.spip.org/@afficher_low_sec

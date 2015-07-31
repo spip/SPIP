@@ -37,31 +37,9 @@ function exec_statistiques_visites_dist()
 	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else {
-		if (_request('format') != 'csv')
-			exec_statistiques_visites_args($id_article, $duree, $interval, $type, $limit);
-		else {
-			$t = str_replace('spip_', '', _request('table'));
-			$fond = 'prive/transmettre/'
-			  .  (strstr($t, 'visites') ? 'statistiques' : $t);
-			$contexte = array();
-			if (!$id_article) {
-				$fond .= "_article"; 
-				$contexte['id_article'] = $id_article;
-			}
-			$parametrer = charger_fonction('parametrer', 'public');
-			$page = $parametrer($fond, $contexte);
-			if (!is_array($page['entetes'])) {
-			  include_spip('inc/headers');
-			  redirige_par_entete(generer_url_public('404'));
-			} else {
-				foreach ($page['entetes'] as $k => $v)
-				  header("$k: $v");
-				echo $page['texte'];
-			}
-		} 
-	}
+	} else exec_statistiques_visites_args($id_article, $duree, $interval, $type, $limit);
 }
+
 
 // http://doc.spip.org/@exec_statistiques_visites_args
 function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $limit,$serveur='')
@@ -147,7 +125,7 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	$log = statistiques_collecte_date('visites', "(CEIL(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 
 	if ($log)
-	  echo cadre_stat(statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement, $liste), $table);
+	  echo cadre_stat(statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement, $liste), $table, $id_article);
 
 	$mois = statistiques_collecte_date("SUM(visites)",
 		"FROM_UNIXTIME(UNIX_TIMESTAMP($order),'%Y-%m')", 

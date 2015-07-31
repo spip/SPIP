@@ -796,6 +796,7 @@ prive/style_prive_ie.html -text
 prive/style_prive_plugins.html -text
 prive/style_prive_plugins_fonctions.php -text
 prive/style_vieilles_def.html -text
+prive/transmettre.html -text
 prive/transmettre/forum_article.html -text
 prive/transmettre/signatures_article.html -text
 prive/transmettre/statistiques.html -text

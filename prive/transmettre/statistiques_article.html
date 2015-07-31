@@ -1,7 +1,9 @@
-#HTTP_HEADER{Content-Type: text/csv; charset=#CHARSET}
-#HTTP_HEADER{Content-Disposition: attachment; filename=stats-#NOM_SITE_SPIP-#ID_ARTICLE.csv}
-<BOUCLE1(VISITES_ARTICLES){id_article ?}{par date}>#DATE;#VISITES
+<BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
+if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
+?><BOUCLE1(VISITES_ARTICLES){id_article ?}{par date}>#DATE;#VISITES
 </BOUCLE1>
-
-
-
+<?php
+} else {
+include_spip('inc/minipres'); 
+echo minipres();
+}?></BOUCLE0>
