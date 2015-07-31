@@ -297,18 +297,34 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	list($skel,$mime_type, $gram, $sourcefile) =
 		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $connect);
 
-	// Charger le squelette en specifiant les langages cibles et source
+	// calcul du nom du squelette
+	$fonc = $mime_type . ($connect ?  "_$connect" : '') . '_'
+		. md5($GLOBALS['spip_version_code'].' * '.$skel);
+
+	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
+	// sauver le nom de l'eventuel squelette en cours d'execution
+	// (recursion possible a cause des modeles)
+	$courant = $debug ? @$GLOBALS['debug_objets']['courant'] : '';
+
+	//  si pas deja en memoire (INCLURE  a repetition),
+	// charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
-	// et appliquer sa fonction principale sur le contexte.
+
+	if (!function_exists($fonc)) {
+
+		$composer = charger_fonction('composer', 'public');
+
+		if ($debug) {
+			$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
+			$GLOBALS['debug_objets']['courant'] = $fonc;
+		}
+		$fonc = $composer($skel, $fonc, $gram, $sourcefile, $connect);
+	}
+
+	// Appliquer le squelette compile' sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
-	$composer = charger_fonction('composer', 'public');
-
-	// Le debugueur veut afficher le contexte
-	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
-		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
-
-	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect)){
+	if ($fonc) {
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$notes = calculer_notes(); // conserver les notes...
 
@@ -329,7 +345,7 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 			. join(', ',$info)
 			.' ('.strlen($page['texte']).' octets)'
 		);
-		if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'))
+		if ($debug)
 			$GLOBALS['debug_objets']['profile'][$sourcefile] = $profile;
 
 		// Si #CACHE{} n'etait pas la, le mettre a $delais
@@ -339,9 +355,10 @@ function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	} else
 		$page = array();
 
-	if (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug')) {
+	if ($debug) {
 		include_spip('public/debug');
 		debug_dumpfile (strlen($page['texte'])?$page['texte']:" ", $fonc, 'resultat');
+		$GLOBALS['debug_objets']['courant'] = $courant;
 	}
 	$page['contexte'] = $local;
 

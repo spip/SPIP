@@ -229,7 +229,7 @@ function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 // http://doc.spip.org/@boucle_debug
 function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $apres, $altern) {
 	global $debug_objets;
-	$debug_objets['courant'] = $nom;
+
 	$debug_objets['parent'][$nom.$id] = $id_parent;
 	$debug_objets['pretty'][$nom.$id] = 
 		"BOUCLE$id($type)" . htmlspecialchars(

@@ -30,14 +30,7 @@ include_spip('public/interfaces');
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 // http://doc.spip.org/@public_composer_dist
-function public_composer_dist($squelette, $mime_type, $gram, $source, $connect) {
-
-	$nom = $mime_type . ($connect ?  "_$connect" : '') . '_'
-		. md5($GLOBALS['spip_version_code'].' * '.$squelette);
-
-	// si squelette est deja en memoire (INCLURE  a repetition)
-	if (function_exists($nom))
-		return $nom;
+function public_composer_dist($squelette, $nom, $gram, $source, $connect) {
 
 	$phpfile = sous_repertoire(_DIR_SKELS,'',false,true) . $nom . '.php';
 
