@@ -706,12 +706,7 @@ Tente se',
 'trad_reference' => '(mat&eacute;ria de refer&ecirc;ncia)',
 
 // U
-'upload_fichier_zip' => 'Arquivo ZIP',
-'upload_fichier_zip_texte' => 'O arquivo que voc&ecirc; prop&ocirc;s instalar &eacute; um arquivo Zip.',
-'upload_fichier_zip_texte2' => 'Este arquivo pode ser:',
 'upload_limit' => 'Este arquivo &eacute; grande demais para o servidor; o tamanho m&aacute;ximo autorizado para <i>upload</i> &eacute; de @max@.',
-'upload_zip_decompacter' => 'expandido e cada elemento que ele cont&eacute;m gravados no site. Os arquivos que ser&atilde;o ent&atilde;o gravados s&atilde;o:',
-'upload_zip_telquel' => 'instalado; como arquivo compactado Zip;',
 
 // Z
 'zbug_balise_b_aval' => ': tag B colocada ap&oacute;s BOUCLE',

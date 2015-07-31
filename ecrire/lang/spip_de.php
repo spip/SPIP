@@ -702,12 +702,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'trad_reference' => '(Referenzartikel)',
 
 // U
-'upload_fichier_zip' => 'ZIP-Datei',
-'upload_fichier_zip_texte' => 'Sie m&ouml;chsten eine ZIP-Datei installieren.',
-'upload_fichier_zip_texte2' => 'SPIP kann:',
 'upload_limit' => 'Datei zu gross zum Hochladen. Maximale <i>upload</i>-Gr&ouml;sse: @max@.',
-'upload_zip_decompacter' => 'Das ZIP-Archiv auspacken. Diese Dateien werden dann auf dem Server installiert:',
-'upload_zip_telquel' => 'Das ZIP-Archiv als eine Archivdatei installieren.',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: Tag B muss vor der Schleife stehen',

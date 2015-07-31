@@ -725,12 +725,7 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 'trad_reference' => '(articolo di riferimento)',
 
 // U
-'upload_fichier_zip' => 'File ZIP',
-'upload_fichier_zip_texte' => 'Il file proposto &egrave; un file ZIP.',
-'upload_fichier_zip_texte2' => 'Questo file pu&ograve; essere:',
 'upload_limit' => 'Questo file &egrave; troppo grande per il server; la dimensione massima consentita per gli <i>upload</i> &egrave; di @max@.',
-'upload_zip_decompacter' => 'decompresso e ogni elemento installato nel sito. I file che saranno installati nel sito sono:',
-'upload_zip_telquel' => 'installato cos&igrave; com\'&egrave; in quanto archivio compresso Zip;',
 
 // Z
 'zbug_balise_b_aval' => ': ciclo B deve precedere ciclo BOUCLE',

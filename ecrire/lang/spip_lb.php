@@ -704,12 +704,7 @@ Versicht',
 'trad_reference' => '(Referenz-Artikel)',
 
 // U
-'upload_fichier_zip' => 'ZIP-Fichier',
-'upload_fichier_zip_texte' => 'De Fichier deen d&euml;r install&eacute;ieren w&euml;llt ass en Zip-Fichier.',
-'upload_fichier_zip_texte2' => 'D&euml;se Fichier ka sinn:',
 'upload_limit' => 'D&euml;se Fichier ass ze grouss fir de Server; d&eacute;i maximal Gr&eacute;isst fir <i>eropzelueden</i> ass @max@.',
-'upload_zip_decompacter' => 'de-komprim&eacute;iert an all Element um Site install&eacute;iert. D\'Fichier\'en d&eacute;i dann um Site install&eacute;iert ginn sinn:',
-'upload_zip_telquel' => 'esou w&eacute;i en ass, als komprim&eacute;ierten Zip-Archiv install&eacute;iert;',
 
 // Z
 'zbug_balise_b_aval' => ': B-Tag dr&euml;nner',

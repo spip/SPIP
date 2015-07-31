@@ -728,12 +728,7 @@ dan mengakses situs kembali.
 'trad_reference' => '(rujuk artikel)',
 
 // U
-'upload_fichier_zip' => 'berkas ZIP',
-'upload_fichier_zip_texte' => 'Berkas yang hendak anda instal adalah berkas ZIP.',
-'upload_fichier_zip_texte2' => 'Berkas ini bisa jadu:',
 'upload_limit' => 'Berkas ini terlalu besar untuk server; ukuran maksimum yang diperbolehkan untuk <i>unggah</i> adalah @max@.',
-'upload_zip_decompacter' => 'diekstrak dan setiap berkas yang terdapat di dalamnya akan diinstal di situs. Berkas-berkas yang akan diinstal adalah:',
-'upload_zip_telquel' => 'diinstal seperti apa adanya, sebagai berkas ZIP;',
 
 // Z
 'zbug_balise_b_aval' => ': tag B terlambat dalam loop',

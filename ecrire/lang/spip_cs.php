@@ -716,12 +716,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'trad_reference' => '(referen&#269;n&iacute; &#269;l&aacute;nek)',
 
 // U
-'upload_fichier_zip' => 'Komprimovan&yacute; soubor ZIP',
-'upload_fichier_zip_texte' => 'Chcete nainstalovat komprimovan&yacute; soubor ZIP.',
-'upload_fichier_zip_texte2' => 'Tento soubor m&#367;&#382;e b&yacute;t:',
 'upload_limit' => 'Soubor je pro server p&#345;&iacute;li&#353; velk&yacute;. Maxim&aacute;ln&iacute; povolen&aacute; velikost pro <i>odesl&aacute;n&iacute;</i> je @max@.',
-'upload_zip_decompacter' => 'rozbalen&yacute; a ka&#382;d&yacute; ze soubor&#367; v n&#283;m obsa&#382;en&yacute; bude na web nainstalov&aacute;n. Budou nainstalov&aacute;ny tyto soubory:',
-'upload_zip_telquel' => 'nainstalovat tak, jak je, tedy ve form&aacute;tu ZIP;',
 
 // Z
 'zbug_balise_b_aval' => ': tag B je p&#345;&iacute;li&#353; pozd&#283; ve smy&#269;ce',
