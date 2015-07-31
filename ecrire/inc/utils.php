@@ -556,6 +556,7 @@ function id_table_objet($type) {
 }
 
 // Recuperer le nom de la table de jointure xxxx sur l'objet yyyy
+// http://doc.spip.org/@table_jointure
 function table_jointure($x, $y) {
 	include_spip('public/interfaces');
 	if ($table = $GLOBALS['tables_jointures']['spip_' . table_objet($y)][id_table_objet($x)]
