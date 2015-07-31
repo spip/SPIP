@@ -406,6 +406,7 @@ function extraire_lien ($regs) {
 					if (!$lien_texte)
 						$lien_texte = ereg_replace("^.*/","",$row['fichier']);
 				}
+				break;
 			case 'si':
 				$row = @spip_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
 				if ($row) {
