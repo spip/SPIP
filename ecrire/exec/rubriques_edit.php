@@ -99,7 +99,7 @@ function exec_rubriques_edit_dist()
 	debut_cadre_formulaire();
 
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr width='100%'>";
+	echo "<tr>";
 	echo "<td>";
 
 	if ($id_rubrique) icone(_T('icone_retour'), generer_url_ecrire("naviguer","id_rubrique=$id_rubrique"), $ze_logo, "rien.gif");
@@ -111,13 +111,12 @@ function exec_rubriques_edit_dist()
 	echo _T('info_modifier_rubrique');
 	gros_titre($titre);
 	echo "</td></tr></table>";
-	echo "<p>";
 
 	$titre = entites_html($titre);
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
 	$form = _T('entree_titre_obligatoire')
-	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus><p>"
+	.  "<input type='text' class='formo' name='titre' value=\"$titre\" size='40' $onfocus />"
 	. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
 	. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
 
@@ -130,7 +129,7 @@ function exec_rubriques_edit_dist()
 	if ($contient_breves > 0) {
 		$scb = ($contient_breves>1? 's':'');
 
-		$form .= "<div><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;"
+		$form .= "<div><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;"
 		. _T('avis_deplacement_rubrique',
 			array('contient_breves' => $contient_breves,
 				'scb' => $scb))
@@ -139,19 +138,19 @@ function exec_rubriques_edit_dist()
 		$form .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 
 	$form .= fin_cadre_couleur(true)
-	. "<p>";
+	. "<br />";
 
 	if ($options == "avancees" OR $descriptif) {
 		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
 		. _T('entree_contenu_rubrique')."<br />"
-		. "<textarea name='descriptif' class='forml' rows='4' cols='40' wrap='soft'>"
+		. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
 		. entites_html($descriptif)
-		. "</textarea><p>\n";
+		. "</textarea>\n";
 	}
 
 	$form .= "<b>"._T('info_texte_explicatif')."</b>"
 	. aide ("raccourcis")
-	. "<br /><textarea name='texte' rows='15' class='formo' cols='40' wrap='soft'>"
+	. "<br /><textarea name='texte' rows='15' class='formo' cols='40'>"
 	. entites_html($texte)
 	. "</textarea>\n";
 

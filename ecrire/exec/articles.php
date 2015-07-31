@@ -39,7 +39,9 @@ function exec_articles_dist()
 		. "<br /><br />\n<div align='center'>"
 		  . icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", '', false)
 		. "</div><br />"
-		. $discuter($id_article, false,  _request('debut'));
+		. $discuter($id_article, false,  _request('debut'))
+		. fin_gauche()
+;
 	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -49,7 +51,6 @@ function exec_articles_dist()
 		afficher_hierarchie($row['id_rubrique']),
 		fin_grand_cadre(true),
 		$res,
-		fin_gauche(),
 		fin_page();
 }
 
@@ -334,10 +335,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 		$texte_case .=  ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 
-		$res .= "<br />\n<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>"
-		. "<font size='2' face='Verdana,Arial,Sans,sans-serif'>"
+		$res .= "<br />\n<div align='$spip_lang_left' $dir_lang style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; font-size: 11px;  font-face: Verdana,Arial,Sans,sans-serif'>"
 		. propre($texte_case)
-		. "</font>"
 		. "</div>";
 	}
 	

@@ -81,7 +81,7 @@ echo avertissement_config();
 //
 
 echo generer_url_post_ecrire('configuration');
-echo "<input type='hidden' name='changer_config' value='oui'>";
+echo "<input type='hidden' name='changer_config' value='oui' />";
 debut_cadre_couleur("racine-site-24.gif");
 
 	// initialiser adresse_site au besoin
@@ -147,7 +147,7 @@ if ($options == 'avancees') {
 
 	echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
-	echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' colspan='2' class='verdana2'>";
+	echo "<tr><td colspan='2' class='verdana2'>";
 	echo _T('texte_contenu_articles');
 	echo "</td></tr>";
 
@@ -252,7 +252,7 @@ if ($options == 'avancees') {
 
 
 
-echo "<p>";
+echo "<p />";
 
 
 //
@@ -282,7 +282,7 @@ echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
-echo "<p>";
+echo "<p />";
 
 
 //
@@ -348,7 +348,7 @@ if ($options == "avancees") {
 			echo "</td></tr>";
 
 			echo "<tr>";
-			echo "<td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
+			echo "<td align='$spip_lang_left' class='verdana2'>";
 			echo afficher_choix('mots_cles_forums', $mots_cles_forums,
 				array('oui' => _T('item_ajout_mots_cles'),
 					'non' => _T('item_non_ajout_mots_cles')));
@@ -367,7 +367,7 @@ if ($options == "avancees") {
 
 	fin_cadre_trait_couleur();
 
-	echo "<p>";
+	echo "<p />";
 }
 
 
@@ -385,7 +385,7 @@ $moderation_sites = $GLOBALS['meta']["moderation_sites"];
 
 echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
-echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
+echo "<tr><td align='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("activer_sites", "oui", _T('item_gerer_annuaire_site_web'), $activer_sites == "oui", "changeVisible(this.checked, 'config-site', 'block', 'none');");
 		echo " &nbsp;";
@@ -405,16 +405,14 @@ else $style = "display: none;";
 		echo "<p />";
 		debut_cadre_relief();
 		echo "\n<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
-		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif'>";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='#000000'>";
+		echo "\n<tr><td style='font-face: Verdana,Arial,Sans,sans-serif; font-size: 11px; color: #000000'>";
 		echo _T('info_question_proposer_site');
-			echo "<center><select name='proposer_sites' class='fondo' size='1'>\n";
+			echo "\n<center><select name='proposer_sites' class='fondo' size='1'>\n";
 				echo "<option".mySel('0',$proposer_sites).">"._T('item_choix_administrateurs')."</option>\n";
 				echo "<option".mySel('1',$proposer_sites).">"._T('item_choix_redacteurs')."</option>\n";
 				echo "<option".mySel('2',$proposer_sites).">"._T('item_choix_visiteurs')."</option>\n";
-			echo "</select></center><br />\n";
-		echo "</font>";
-		echo "</td></tr></table>";
+			echo "</select></center>\n";
+		echo "</td></tr></table>\n";
 		fin_cadre_relief();
 
 
@@ -425,11 +423,11 @@ else $style = "display: none;";
 		//
 		// Reglage de la syndication
 		//
-		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
+		echo "<tr><td class='verdana2'>";
 		echo _T('texte_syndication');
 		echo "</td></tr>";
 	
-		echo "<tr><td background='" . _DIR_IMG_PACK . "rien.gif' align='$spip_lang_left' class='verdana2'>";
+		echo "<tr><td align='$spip_lang_left' class='verdana2'>";
 
 			echo bouton_radio("activer_syndic", "oui", _T('item_utiliser_syndication'), $activer_syndic == "oui", "changeVisible(this.checked, 'config-syndic', 'block', 'none');");
 			echo "<br />";
@@ -444,8 +442,8 @@ else $style = "display: none;";
 			echo "<div id='config-syndic' style='$style'>";
 		
 			// Moderation par defaut des sites syndiques
-			echo "<p><hr><p align='$spip_lang_left'>";
-			echo _T('texte_liens_sites_syndiques')."<p>";
+			echo "<hr /><p align='$spip_lang_left'>";
+			echo _T('texte_liens_sites_syndiques')."</p>";
 	
 			echo afficher_choix('moderation_sites', $moderation_sites,
 				array('oui' => _T('item_bloquer_liens_syndiques'),
@@ -455,9 +453,9 @@ else $style = "display: none;";
 	
 			$activer_moteur = $GLOBALS['meta']["activer_moteur"];
 			if ($activer_moteur == "oui") {
-				echo "<p><hr><p align='$spip_lang_left'>";
+				echo "<hr /><p align='$spip_lang_left'>";
 				echo _T('texte_utilisation_moteur_syndiques')." ";
-				echo "<blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote><br />";
+				echo "</p><blockquote><i>"._T('texte_utilisation_moteur_syndiques_2')."</i></blockquote>";
 	
 				echo afficher_choix('visiter_sites', $visiter_sites,
 					array('non' => _T('item_limiter_recherche'),
@@ -488,7 +486,8 @@ echo _T('info_syndication_integrale_1',
 		'titre' => _T("icone_suivi_activite"))
 	),
 	'<p>',
-	_T('info_syndication_integrale_2');
+  _T('info_syndication_integrale_2'),
+  '</p>';
 echo "</td></tr>";
 
 echo "<tr>";
@@ -501,9 +500,6 @@ echo "</table>\n";
 
 fin_cadre_relief();
 
-echo "<p>";
-
-
 
 echo "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 echo "<tr><td style='text-align:$spip_lang_right;'>";
@@ -513,7 +509,7 @@ echo "</table>\n";
 
 fin_cadre_trait_couleur();
 
-echo "<p>";
+echo "<p />";
 
 
 //
@@ -541,7 +537,6 @@ echo "<br /><br />\n";
 echo afficher_choix('documents_rubrique', $documents_rubrique,
 	array('oui' => _T('item_autoriser_documents_joints_rubriques'),
 		'non' => _T('item_non_autoriser_documents_joints_rubriques')), "<br />");
-echo "</font>";
 echo "</td></tr>";
 
 echo "<tr><td style='text-align:$spip_lang_right;'>";
@@ -550,8 +545,6 @@ echo "</td></tr>";
 echo "</table>\n";
 
 fin_cadre_trait_couleur();
-
-echo "<p>";
 
 
 echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));

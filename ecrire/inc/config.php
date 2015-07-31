@@ -108,7 +108,7 @@ function avertissement_config() {
 	$texte .= _T('texte_inc_config');
 	$texte .= "</div>";
 	$texte .= fin_boite_info(true);
-	$texte .= "<p>&nbsp;<p>";
+	$texte .= "<p>&nbsp;</p>";
 	
 	return $texte;
 }
@@ -118,7 +118,7 @@ function avertissement_config() {
 function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
 	
-	if (strlen($onClick) > 0) $onClick = " onClick=\"$onClick\"";
+	if (strlen($onClick) > 0) $onClick = " onclick=\"$onClick\"";
 	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'$onClick";
 	if ($actif) {
 		$texte .= ' checked="checked"';
