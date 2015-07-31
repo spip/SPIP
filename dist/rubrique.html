@@ -27,7 +27,7 @@
 			<div class="cartouche">
 				[(#LOGO_RUBRIQUE||image_reduire{200,200})]
 				<h1 class="#EDIT{titre} titre">#TITRE</h1>
-				<small><:dernier_ajout:> &ndash; [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
+				[<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
 			</div>
 
 			[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
@@ -45,7 +45,7 @@
 						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination}>
 						<li>
 							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
-							<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
 						</li>
 						</BOUCLE_articles>
 					</ul>
