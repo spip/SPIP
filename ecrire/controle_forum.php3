@@ -6,15 +6,18 @@ include ("inc.php3");
 debut_page("Suivi des forums", "messagerie", "forum-controle");
 
 echo "<br><br><br>";
-gros_titre("Suivi des forums");
-
-
+if ($controle_sans == 'oui') {
+	$controle_sans = '&controle_sans=oui';
+	gros_titre("Messages sans texte");
+	barre_onglets("suivi_forum", "sans");
+} else {
+	$controle_sans = '';
+	gros_titre("Suivi des forums");
 	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
- 	$result_forum = spip_query($query_forum);
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
-
+	$result_forum = spip_query($query_forum);
+	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
 	if ($total > 0) barre_onglets("suivi_forum", "tous");
-
+}
 
 
 debut_gauche();
@@ -308,10 +311,14 @@ if ($connect_statut == "0minirezo") {
 
 	if (!$debut) $debut = 0;
 
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
- 	$result_forum = spip_query($query_forum);
- 	$total = 0;
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
+	if ($controle_sans)
+		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	else
+		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+
+	$result_forum = spip_query($query_forum);
+	$total = 0;
+	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
 
 	if ($total > 10) {
 		echo "<p>";
@@ -320,12 +327,16 @@ if ($connect_statut == "0minirezo") {
 			if ($i == $debut)
 				echo "<FONT SIZE=3><B>$i</B></FONT>";
 			else
-				echo "<A HREF='controle_forum.php3?debut=$i'>$i</A>";
+				echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>$i</A>";
 		}
 	}
 
-	$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' ORDER BY date_heure DESC LIMIT $debut,10";
- 	$result_forum = spip_query($query_forum);
+	if ($controle_sans)
+		$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte='' ORDER BY date_heure DESC LIMIT $debut,10";
+	else
+		$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' ORDER BY date_heure DESC LIMIT $debut,10";
+
+	$result_forum = spip_query($query_forum);
 	controle_forum($result_forum, "forum.php3");
 
 //	afficher_forum($result_forum, $forum_retour,'oui','non');

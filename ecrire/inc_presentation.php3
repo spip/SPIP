@@ -952,7 +952,7 @@ function barre_onglets($rubrique, $onglet){
 	
 	if ($rubrique == "suivi_forum"){
 		onglet("Tous les messages", "controle_forum.php3", "tous", $onglet);
-		onglet("Messages sans texte", "controle_forum_sans.php3", "sans", $onglet);
+		onglet("Messages sans texte", "controle_forum.php3?controle_sans=oui", "sans", $onglet);
 	}
 
 	fin_onglet();
