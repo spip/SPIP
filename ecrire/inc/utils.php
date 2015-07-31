@@ -737,7 +737,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if (!$public) {
 		include_spip('inc/urls');
 		$f = 'generer_url_ecrire_' . $entite;
-		return !function_exists($f) ? '' : $f($id, $args, $ancre);
+	        $res = !function_exists($f) ? '' : $f($id, $args, $ancre);
 	} else {
 		if (is_string($public)) {
 			$id_type = ($entite !== 'site') ? "id_$entite" : 'id_syndic';
@@ -757,14 +757,17 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 			if (!$entite) return $f; 
 		// sinon on veut effectuer le passage id ==> URL
 			$res = !$f ? '' : $f($id, $entite, $args, $ancre);
-			if ($res) return $res;
-		// Sinon c'est un raccourci ou compat SPIP < 2
-			if (function_exists($f = 'generer_url_' . $entite)
-			OR function_exists($f .= '_dist'))
-				return $f($id, $args, $ancre);
 		}
 	}
-	spip_log("generer_url_entite: entite $entite inconnue dans $type");
+	if ($res) return $res;
+	// Sinon c'est un raccourci ou compat SPIP < 2
+	include_spip('inc/lien');
+	if (!function_exists($f = 'generer_url_' . $entite)) {
+		if (!function_exists($f .= '_dist')) $f = '';
+	    }
+	if ($f) return $f($id, $args, $ancre);
+	// On a ete gentil mais la ....
+	spip_log("generer_url_entite: entite $entite ($f) inconnue $type");
 	return '';
 }
 
