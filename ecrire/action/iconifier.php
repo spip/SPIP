@@ -98,7 +98,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source) {
 			OR $size[1] > _LOGO_MAX_HEIGHT)) {
 				spip_unlink ($f);
 				check_upload_error(6, 
-				_T('info_logo_max_taille',
+				_T('info_logo_max_poids',
 					array(
 					'maxi' =>
 						_T('info_largeur_vignette',
