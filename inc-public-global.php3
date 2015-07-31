@@ -388,6 +388,12 @@ if (lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta('jours_neuf')
 	if ($db_ok) {
 		// lock && indication du prochain envoi
 		include_ecrire('inc_meta.php3');
+		lire_metas();	// on force la relecture dans la base pour eviter des acces concurrence
+		if ($majnouv != lire_meta('majnouv')) {
+			spip_log("envoi mail nouveautes: acces concurrent");
+			exit;
+		}
+
 		ecrire_meta('majnouv', time());
 		ecrire_metas();
 
