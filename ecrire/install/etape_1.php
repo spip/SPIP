@@ -82,6 +82,8 @@ function install_etape_1_dist()
 	)
 
 	. bouton_suivant()));
+	
+	echo info_progression_etape(1,'etape_','install/');
 
 	echo install_fin_html();
 }

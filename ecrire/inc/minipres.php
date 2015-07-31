@@ -43,90 +43,9 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 		"<head>\n".
 		"<title>".
 		textebrut($titre).
-		"</title>".<<<styles
-<style type='text/css'><!--
-/*<![CDATA[*/
-body { 
-	background: #FFF; 
-	color: #000; 
-	font-family: Verdana,Arial,Sans,sans-serif;
-	font-size:0.9em;
-}
-h1 { 
-	color: #970038; 
-	margin:1em 0 1em 0;
-	font-family: Verdana; 
-	font-weigth: bold; 
-	font-size: 1.3em;
-}
-h2 { 
-	font-weigth: normal; 
-	font-size: 1.2em;
-	margin:0.8em 0 0.8em 0;
-}
-a { color: #E86519; text-decoration: none; }
-a:visited { color: #6E003A; }
-a:active { color: #FF9900; }
-img { border: 0; }
-p { text-align: justify; }
-ul { text-align: justify; list-style-type: none; }
-fieldset, .fieldset {
-	text-align:$spip_lang_left;
-	border: none; 
-	padding: 0px; 
-	margin-top: 1em; 
-	font-size:0.9em;
-}
-legend { font-weight: bold; font-size:1.1em;color:#0033cc;}
-label {}
-#minipres {
-	border:2px solid #888888;
-	width: 30em; 
-	text-align: center; 
-	margin: 1em auto 1em auto;
-	padding:1em;
-	background:#ffffcc;
-}
-.petit-centre { font-family: Verdana,Arial,Sans,sans-serif; font-size: 1em; }
-.petit-centre p { text-align: center; }
-.suivant { text-align: $spip_lang_right; display: block; margin-top: 1em; }
-.toile_foncee { background: #777; }
-.fondl { 
-	padding: 3px; background-color: #eee; border: 1px solid #333; 
-	background-position: center bottom; 
-	font-size: 0.9em;
-	font-family: Verdana,Arial,Sans,sans-serif; 
-}
-.formo { 
-	width: 100%; display: block; padding: 3px;
-	margin-bottom: 1em;
-	background-color: #FFF; 
-	border: 1px solid #333; 
-	background-position: center bottom; 
-	behavior: url(../dist/win_width.htc);
-	font-size: 1em;
-	font-family: Verdana,Arial,Sans,sans-serif; 
-}
-#etapes { display:block;}
-#etapes span { 
-	display:block;
-	float:$spip_lang_left;
-	width:48px;
-	height:42px;
-	margin-right:5px;
-	font-size:26px;
-	font-weight:bold;
-	padding-top:6px;
-}
-#etapes span.ok {background:url($dir_img_pack/etape-ok.gif)}
-#etapes span.encours {background:url($dir_img_pack/etape-encours.gif)}
-#etapes span.todo {background:url($dir_img_pack/etape-todo.gif)}
-.nettoyeur {clear:both;height:0px;line-height:0px;font-size:0px;padding:0;margin:0;}
-
-]]>
---></style>
-styles
-	. "<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
+		"</title>
+		<link rel='stylesheet' href='".find_in_path('minipres.css')."' type='text/css' media='all' />
+		<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>\n". // cet appel permet d'assurer un copier-coller du nom du repertoire a creer dans tmp (esj)
 #	"<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "jquery.js'></script>".
 "</head>
 <body".$onLoad.">
@@ -345,5 +264,25 @@ function http_style_background($img, $att='')
 {
   return " style='background: url(\"".http_wrapper($img)."\")" .
 	    ($att ? (' ' . $att) : '') . ";'";
+}
+function info_progression_etape($en_cours,$phase,$dir){
+	//$en_cours = _request('etape')?_request('etape'):"";
+	$liste = find_all_in_path($dir,$phase.'(([0-9])+|fin)[.]php');
+	$debut = 1; $etat = "ok";
+	$last = count($liste);
+	
+	$aff_etapes = "<span id='etapes'>";
+	foreach($liste as $etape=>$fichier){
+		if ($etape=="$phase$en_cours.php"){
+			$etat = "encours";
+		}
+		$aff_etapes .= "<span class='$etat'><em>".(($debut<$last)?$debut:"go")."</em><span>"
+		 .(($debut<$last)?", ":" !")."</span></span>";
+		if ($etat == "encours")
+			$etat = 'todo';
+		$debut++;
+	}
+	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
+	return $aff_etapes;
 }
 ?>

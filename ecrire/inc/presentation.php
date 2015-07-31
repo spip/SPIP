@@ -1244,7 +1244,7 @@ function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 
 
 // http://doc.spip.org/@envoi_link
-function envoi_link($nom_site_spip) {
+function envoi_link($nom_site_spip, $minipres=false) {
 	global $auteur_session, $connect_toutes_rubriques, $spip_display, $spip_lang;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
@@ -1281,6 +1281,10 @@ function envoi_link($nom_site_spip) {
 		. (_SPIP_AJAX ? 'invisible' : 'visible')
 		. '.css')
 	.'" />' . "\n"
+	
+	// CSS optionelle minipres
+	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('minipres.css').'" />' . "\n":"")
 
 	// favicon.ico
 	. '<link rel="shortcut icon" href="'

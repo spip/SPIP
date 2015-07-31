@@ -72,6 +72,7 @@ function install_etape_ldap3_dist()
 	. "\n</fieldset>"
 	. bouton_suivant()));
 
+	echo info_progression_etape(3,'etape_ldap','install/');
 	echo install_fin_html();
 }
 

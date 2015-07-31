@@ -37,6 +37,7 @@ function install_etape_ldap5_dist()
 		"<input type='hidden' name='etape' value='5' />"
 		. bouton_suivant()));
 
+	echo info_progression_etape(5,'etape_ldap','install/');
 	echo install_fin_html();
 }
 

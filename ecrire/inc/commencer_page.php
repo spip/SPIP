@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@inc_commencer_page_dist
-function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true) {
+function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubrique = "accueil", $id_rubrique = "",$menu=true,$minipres=false) {
 	global $spip_ecran;
   
 	include_spip('inc/headers');
@@ -26,7 +26,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
   
 	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
   
-	return init_entete($titre, $id_rubrique)
+	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page'>"
 	. avertissement_messagerie()
@@ -35,7 +35,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 
 // envoi du doctype et du <head><title>...</head> 
 // http://doc.spip.org/@init_entete
-function init_entete($titre='', $id_rubrique=0) {
+function init_entete($titre='', $id_rubrique=0, $minipres=false) {
 	include_spip('inc/gadgets');
 
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
@@ -48,7 +48,7 @@ function init_entete($titre='', $id_rubrique=0) {
 		. (($c = $GLOBALS['meta']['charset']) ?
 			"; charset=$c" : '')
 		. "' />\n"
-		. envoi_link($nom_site_spip);
+		. envoi_link($nom_site_spip,$minipres);
 
 	// anciennement verifForm
 	$head .= '
@@ -87,12 +87,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 	$res = pipeline('body_prive',"<body class='$rubrique $sous_rubrique'"
 			. ($GLOBALS['spip_lang_rtl'] ? " dir='rtl'" : "")
-			.'>')
-	. "\n<div><map name='map_layout' id='map_layout'>"
-	. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
-	. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
-	. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
-	. "\n</map></div>";
+			.'>');
+	if ($menu)
+		$res .= "\n<div><map name='map_layout' id='map_layout'>"
+		. lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+		. lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+		. lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onmouseover=\"changestyle('bandeauvide');\" onfocus=\"changestyle('bandeauvide');\" onblur=\"changestyle('bandeauvide');\"")
+		. "\n</map></div>";
 
 	if ($spip_display == "4") {
 		$res .= "<ul>"
@@ -175,15 +176,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		$res .= "</div></li>"
 		. "</ul></div>";
 
+		// <div> pour la barre des gadgets
+		// (elements invisibles qui s'ouvrent sous la barre precedente)
+	
+		$res .= bandeau_gadgets($largeur, true, $id_rubrique);
 	} // fin bandeau colore
-
-	// <div> pour la barre des gadgets
-	// (elements invisibles qui s'ouvrent sous la barre precedente)
-
-	$res .= bandeau_gadgets($largeur, true, $id_rubrique)
-	. "</div>"
-	. "</div>\n";
-
+	$res .= "</div>" 
+	  . "</div>\n";
 	return $res;
 }
 

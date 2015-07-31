@@ -28,7 +28,7 @@ function install_etape_3_dist()
 
 	if (($db_connect=="0") && $link){
 
-	echo "<p><b>"._T('info_connexion_ok')."</b></p>";
+	echo "<p class='resultat'><b>"._T('info_connexion_ok')."</b></p>";
 	echo info_etape(_T('info_choix_base')." "._T('menu_aide_installation_choix_base').aide ("install2"));
 
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
@@ -94,16 +94,17 @@ function install_etape_3_dist()
 	. "<fieldset><legend>"._T('texte_choix_table_prefix')."</legend>\n"
 	. "<p><label for='table_prefix'>"._T('info_table_prefix')."</label></p><p>"
 	. "\n<input type='text' id='table_prefix' name='table_prefix' class='fondl' value='" .
-		$table_prefix . "' size='10' /></p></fieldset>"
+		$table_prefix . "' size='20' /></p></fieldset>"
 	. bouton_suivant()));
 	}
 	else {
 		echo info_etape(_T('info_connexion_base'));
-		echo "<p><b>"._T('avis_connexion_echec_1')."</b></p>";
+		echo "<p class='resultat'><b>"._T('avis_connexion_echec_1')."</b></p>";
 		echo "<p>"._T('avis_connexion_echec_2')."</p>";
 		echo "<p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>";
 	}
-
+	
+	echo info_progression_etape(3,'etape_','install/');
 	echo install_fin_html();
 }
 
