@@ -196,7 +196,7 @@ function calculer_contexte() {
 	return $contexte;
 }
 
-function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
+function calculer_page_globale($cache, $contexte_local, $fond) {
 	global $spip_lang;
 
 	// Gestion des URLs personnalises - sale mais historique
@@ -229,12 +229,6 @@ function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
 	// Go to work !
 	$page = cherche_page($cache, $contexte_local, $fond, $id_rubrique_fond, $spip_lang);
 
-	// Surligne
-	if ($var_recherche) {
-		include_ecrire("inc_surligne.php3");
-		$page['texte'] = surligner_mots($page['texte'], $var_recherche);
-	} 
-
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
@@ -242,14 +236,11 @@ function calculer_page_globale($cache, $contexte_local, $fond, $var_recherche) {
 		if ($contexte_local[$val])
 			$signal['contexte'][$val] = intval($contexte_local[$val]);
 	}
-	$signal['process_ins'] = $page['process_ins'];
 
 # ne marchera qu'avec les inclusions 'html' (versus 'php')
 #	$signal['fraicheur'] = $page['fraicheur'];
 
-	$signal = "<!-- ".str_replace("\n", " ", serialize($signal))." -->\n";
-
-	$page['texte'] = $signal.$page['texte'];
+	$page['signal'] = $signal;
 
 	return $page;
 }
@@ -264,7 +255,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 		$contexte_inclus = $elements['contexte'];
 		$page = cherche_page($chemin_cache,
 			$contexte_inclus,
-			$elements['fond'], 
+			$elements['fond'],
 			$contexte_inclus['id_rubrique']
 		);
 	}
@@ -291,13 +282,16 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 		}
 		$page = calculer_page_globale($chemin_cache,
 			$elements['contexte'],
-			$elements['fond'],
-			$elements['var_recherche']);
+			$elements['fond']);
 	}
+
+	$page['signal']['process_ins'] = $page['process_ins'];
+	$signal = "<!-- ".str_replace("\n", " ",
+	serialize($page['signal']))." -->\n";
 
 	// Enregistrer le fichier cache
 	if ($delais>0)
-		ecrire_fichier($chemin_cache, $page['texte']);
+		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;
 }
