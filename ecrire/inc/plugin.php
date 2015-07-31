@@ -355,6 +355,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 						$action = $pipe['action'];
 					else
 						$action = $nom;
+					$nomlower = strtolower($nom);
+					if ($nomlower!=$nom 
+					  AND isset($GLOBALS['spip_pipeline'][$nom]) 
+					  AND !isset($GLOBALS['spip_pipeline'][$nomlower])){
+						$GLOBALS['spip_pipeline'][$nomlower] = $GLOBALS['spip_pipeline'][$nom];
+						unset($GLOBALS['spip_pipeline'][$nom]);
+					}
+					$nom = $nomlower;
 					if (!isset($GLOBALS['spip_pipeline'][$nom])) // creer le pipeline eventuel
 						$GLOBALS['spip_pipeline'][$nom]="";
 					if (strpos($GLOBALS['spip_pipeline'][$nom],"|$prefix$action")===FALSE)
