@@ -1817,10 +1817,10 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 			$a = array('fichier'=>$fond);
 			erreur_squelette(_T('info_erreur_squelette2', $a), $c);
 		}
-					 
-		if (isset($options['ajax'])AND $options['ajax']){
+
+		if (isset($options['ajax']) AND $options['ajax']){
 			include_spip('inc/filtres');
-			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte']);
+			$page['texte'] = encoder_contexte_ajax(array_merge($contexte,array('fond'=>$f)),'',$page['texte'], $options['ajax']);
 		}
 
 		$page = pipeline('recuperer_fond',array(

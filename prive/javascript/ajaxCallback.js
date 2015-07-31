@@ -82,9 +82,9 @@ jQuery.fn.positionner = function(force) {
 	var h = jQuery(window).height();
 	var scroll=0;
 
-	if (force || offset['top'] - 5 <= scrolltop)
+	if (force || (offset && offset['top'] - 5 <= scrolltop))
 		scroll = offset['top'] - 5;
-	else if (offset['top'] + hauteur - h + 5 > scrolltop)
+	else if (offset && offset['top'] + hauteur - h + 5 > scrolltop)
 		scroll = Math.min(offset['top'] - 5, offset['top'] + hauteur - h + 15);
 	if (scroll)
 		jQuery('html,body')
@@ -224,10 +224,12 @@ jQuery.fn.ajaxbloc = function() {
 	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 		var blocfrag = jQuery(this);
 
-		var on_pagination = function(c) {
+		var on_pagination = function(c,u) {
 			jQuery(blocfrag)
 			.html(c)
 			.removeClass('loading');
+			if (typeof u != undefined)
+				jQuery(blocfrag).attr('data-url',u);
 			var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
 			if (a.length
 			  && a.is('a[name=ajax_ancre]')
@@ -257,13 +259,44 @@ jQuery.fn.ajaxbloc = function() {
 		if (ajaxbloc_selecteur==undefined)
 			ajaxbloc_selecteur = '.pagination a,a.ajax';
 
-		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
-			var url = this.href.split('#');
+	  var makeAjaxUrl = function(href){
+		  var url = href.split('#');
 			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
 			if (url[1])
 				url[0] += "&var_ajax_ancre="+url[1];
-			if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
-				jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
+		  return url[0];
+	  }
+
+	  var loadAjax = function(url, href, force){
+		  jQuery(blocfrag)
+		  .animeajax()
+		  .addClass('loading').positionner(false);
+		  if (preloaded_urls[url] && !force) {
+			  on_pagination(preloaded_urls[url],href);
+			  triggerAjaxLoad(document);
+		  } else {
+			  jQuery.ajax({
+				  url: url,
+				  success: function(c){
+					  on_pagination(c,href);
+					  preloaded_urls[url] = c;
+				  }
+			  });
+		  }
+	  }
+	  jQuery(this).not('.reloaded').bind('reload',function(){
+			var href = $(this).attr('data-url');
+		  if (href && typeof href != undefined){
+			  var url = makeAjaxUrl(href);
+			  loadAjax(url, href, true);
+		  }
+	  }).addClass('reloaded');
+
+		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
+			var href = this.href;
+			var url = makeAjaxUrl(href);
+			if (jQuery(this).is('.preload') && !preloaded_urls[url]) {
+				jQuery.ajax({"url":url,"success":function(r){preloaded_urls[url]=r;}});
 			}
 			jQuery(this).click(function(){
 				if (!ajax_confirm) {
@@ -274,21 +307,7 @@ jQuery.fn.ajaxbloc = function() {
 					if ((d.getTime()-ajax_confirm_date)<=2)
 						return false;
 				}
-				jQuery(blocfrag)
-				.animeajax()
-				.addClass('loading').positionner(false);
-				if (preloaded_urls[url[0]]) {
-					on_pagination(preloaded_urls[url[0]]);
-					triggerAjaxLoad(document);
-				} else {
-					jQuery.ajax({
-						url: url[0],
-						success: function(c){
-							on_pagination(c);
-							preloaded_urls[url[0]] = c;
-						}
-					});
-				}
+				loadAjax(url, href, jQuery(this).is('.nocache'));
 				return false;
 			});
 		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
@@ -317,6 +336,15 @@ jQuery.fn.ajaxbloc = function() {
 		});
   });
 };
+
+/**
+ * Recharger un bloc ajax pour le mettre a jour
+ * ajaxid est l'id passe en argument de INCLURE{ajax=ajaxid}
+ * @param string ajaxid
+ */
+function ajaxRefreshBloc(ajaxid){
+	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).trigger('reload');
+}
 
 // Ajaxer les formulaires qui le demandent, au demarrage
 

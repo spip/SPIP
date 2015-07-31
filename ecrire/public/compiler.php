@@ -156,8 +156,10 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			$_contexte['doublons'] = "\\'doublons\\' => '.var_export(\$doublons,true).'";
 		}
 
-		if ($ajax = isset($_contexte['ajax']))
+		if ($ajax = isset($_contexte['ajax'])){
+			$ajax = preg_replace(",=>(.*)$,ims",'=> ($v=(\\1))?$v:true',$_contexte['ajax']);
 			unset($_contexte['ajax']);
+		}
 
 		$_contexte = join(",\n\t", $_contexte);
 	}
@@ -181,7 +183,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 	} else 	{
 		$_options[] = "\"compil\"=>array($compil)";
 		if ($ajax)
-			$_options[] = "\"ajax\"=>true";
+			$_options[] = $ajax;
 		$code = " ' . argumenter_squelette($code) . '"; 
 		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, $contexte, implode(',',$_options), "_request(\"connect\")") . ';';
 	}
