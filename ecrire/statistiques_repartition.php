@@ -1,5 +1,6 @@
 <?php
 
+
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -10,14 +11,23 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-  // ce script n'est la que pour compatibilite avec d'anciens liens
-  // Il redirige pour pouvoir utiliser le chargement automatique 
-  // du fichier homonyme avec inc_ comme prefixe.
-  // Le nom "statistiques" rentre en conflit avec le chargement automatique
-  // pour inc_cron: ca pourrait cohabiter, mais ca ralentirait le chargement
+include ("inc.php3");
 
-header("Location: " . str_replace('statistiques.php3', 'statistiques_repartition.php',  $_SERVER['REQUEST_URI']));
+// prendre $var_* comme variables pour eviter les conflits avec les http_vars
 
-exit;
+$var_nom = "statistiques_repartition";
+$var_f = find_in_path('inc_' . $var_nom . '.php');
+
+if ($var_f) 
+  include($var_f);
+elseif (file_exists($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
+  include($var_f);
+
+if (function_exists($var_nom))
+  $var_nom($critere);
+elseif (function_exists($var_f = $var_nom . "_dist"))
+  $var_f($critere);
+else
+   spip_log("fonction $var_nom indisponible");
 ?>
 
