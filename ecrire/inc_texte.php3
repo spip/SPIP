@@ -161,6 +161,9 @@ function echappe_html($letexte,$source) {
 			// Echapper les <code>...</ code>
 			$lecode = entites_html($regs[5]);
 
+			// supprimer les sauts de ligne debut/fin (mais pas les espaces => ascii art).
+			$lecode = ereg_replace("^\n+|\n+$", "", $lecode);
+
 			// ne pas mettre le <div...> s'il n'y a qu'une ligne
 			if (is_int(strpos($lecode,"\n")))
 				$lecode = nl2br("<div align='left' class='spip_code'>".$lecode."</div>");
