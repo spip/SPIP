@@ -5,7 +5,7 @@
 if (defined("_ECRIRE_INC_MYSQL")) return;
 define("_ECRIRE_INC_MYSQL", "1");
 
-function query($query) {
+function spip_query_db($query) {
 	// return spip_query_profile($query);	// a decommenter pour chronometrer les requetes
 	// return spip_query_debug($query);		// a decommenter pour afficher toutes les erreurs
 	$suite = "";

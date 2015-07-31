@@ -37,7 +37,7 @@ function spip_query($query) {
 	include_ecrire("inc_connect.php3");
 	if (!$GLOBALS['db_ok'])
 		return;
-	return query($query);
+	return spip_query_db($query);
 }
 
 //

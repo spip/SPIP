@@ -162,7 +162,7 @@ else if ($etape == 4) {
 		$conn .= "\$GLOBALS['db_ok'] = true;\n";
 		$conn .= "@mysql_connect('$adresse_db','$login_db','$pass_db');\n";
 		$conn .= "@mysql_select_db('$sel_db');\n";
-		$conn .= "\$GLOBALS['db_ok'] &= !!@spip_num_rows(@query('SELECT COUNT(*) FROM spip_meta'));\n";
+		$conn .= "\$GLOBALS['db_ok'] &= !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
 		$myFile = fopen("inc_connect_install.php3", "wb");
 		fputs($myFile, $conn);
