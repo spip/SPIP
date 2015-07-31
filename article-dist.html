@@ -180,6 +180,15 @@
 
 
 	[(#TEXTE|justifier)]
+
+
+<BOUCLE_portfolio(DOCUMENTS){id_article}{mode=document}{inclus=non}>
+<BOUCLE_les_types(TYPES_DOCUMENTS){id_type}{extension==jpg|png|gif}>
+[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+<BOUCLE_doublons(DOCUMENTS){id_document}{id_article}{doublons}></BOUCLE_doublons>
+</BOUCLE_les_types>
+</BOUCLE_portfolio>
+
 	[<FONT SIZE=2><P>(#PS|justifier)</P></FONT>]
 	[<HR><FONT SIZE=2><P>(#NOTES)</P></FONT>]
 
@@ -198,7 +207,7 @@
 
 <center>Documents li&eacute;s</center>
 <TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{inclus=non}>
+<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{inclus=non}{doublons}>
 	<tr>
 	<td align='center'>
 	[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
@@ -207,7 +216,7 @@
 	<td>
 	<font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
 	[: (#DESCRIPTIF)]<br>
-		(<BOUCLE_type_doc(TYPES_DOCUMENTS){id_type}>[(#TITRE) - ].#EXTENSION -</BOUCLE_type_doc>
+	[(#TYPE_DOCUMENT) -] [(#EXTENSION_DOCUMENT|majuscules)] -
 	[(#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]).
 	</td></tr>
 </BOUCLE_documents>
