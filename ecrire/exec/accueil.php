@@ -312,9 +312,9 @@ if ($spip_display != 4) {
 	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
 
 	if ($spip_display != 1) {
-		include_spip('inc/logos');
-		$res = decrire_logo("id_syndic", 'on', 0, 170, 170);
-		if ($res)
+		$logo_f = charger_fonction('chercher_logo', 'inc');
+		if ($res = $logo_f(0, 'id_syndic', 'on'))
+		  if ($res = decrire_logo("id_syndic", 'on', 0, 170, 170; $res))
 			echo  "<div style='text-align:center; margin-bottom: 5px;'>$res</div>";
 	}
 	echo "<div class='verdana1'>";

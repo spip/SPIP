@@ -141,35 +141,25 @@ function affiche_logos($logos, $lien, $align) {
 //
 
 function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
-	include_spip('inc/logos');
-
-	$table_logos = array (
-	'ARTICLE' => 'art',
-	'AUTEUR' =>  'aut',
-	'BREVE' =>  'breve',
-	'MOT' => 'mot',
-	'RUBRIQUE' => 'rub',
-	'SITE' => 'site'
-	);
-	$type = $table_logos[$type];
+	$logo_f = charger_fonction('chercher_logo', 'inc');
 	$nom = strtolower($onoff);
 
 	while (1) {
-		$on = cherche_logo($id, $type, $nom);
+		$on = $logo_f($id, $type, $nom);
 		if ($on) {
 			if ($ff)
 			  return  (array('', "$on[2].$on[3]"));
 			else {
 				$off = ($onoff != 'ON') ? '' :
-				  cherche_logo($id, $type, 'off');
+				  $logo_f($id, $type, 'off');
 				return array ($on[0], ($off ? $off[0] : ''));
 			}
 		}
 		else if ($id_rubrique) {
-			$type = 'rub';
+			$type = 'id_rubrique';
 			$id = $id_rubrique;
 			$id_rubrique = 0;
-		} else if ($id AND $type == 'rub')
+		} else if ($id AND $type == 'id_rubrique')
 			$id = sql_parent($id);
 		else return array('','');
 	}

@@ -18,7 +18,6 @@ function exec_configuration_dist()
 
 include_spip('inc/presentation');
 include_spip('inc/config');
-include_spip('inc/logos');
 
  if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
@@ -60,9 +59,10 @@ debut_gauche();
 //
 // Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
 //
-if ($spip_display != 4)
-	afficher_boite_logo('id_syndic', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
-
+ if ($spip_display != 4) {
+	include_spip('inc/chercher_logo');
+	echo afficher_boite_logo('id_syndic', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
+ }
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
 creer_colonne_droite();
