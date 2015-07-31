@@ -53,7 +53,7 @@ function filtre_text_csv_dist($t)
 
 	$t = str_replace('""','&#34;',
 			 preg_replace('/\r?\n/', "\n",
-				      preg_replace('/\r/', "\n", $t)));
+				      preg_replace('/[\r\n]+/', "\n", $t)));
 	preg_match_all('/"[^"]*"/', $t, $r);
 	foreach($r[0] as $cell) 
 		$t = str_replace($cell, 
