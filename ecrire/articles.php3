@@ -255,6 +255,7 @@ if (strval($titre)!=='' AND !$ajout_forum AND $flag_editable) {
 
 	$query = "UPDATE spip_articles SET surtitre='$surtitre', titre='$titre', soustitre='$soustitre', $change_rubrique descriptif='$descriptif', chapo='$chapo', texte='$texte', ps='$ps', url_site='$url_site', nom_site='$nom_site' $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
+	if ($change_rubrique) propager_les_secteurs();
 	calculer_rubriques();
 
 	// Stockage des versions

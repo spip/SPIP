@@ -107,12 +107,13 @@ function calculer_rubriques() {
 
 	// "Commit" des modifs
 	spip_query("UPDATE spip_rubriques SET date=date_tmp, statut=statut_tmp");
+	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
+	ecrire_meta("date_calcul_rubriques", date("U"));
+	ecrire_metas();
+}
 
-
-	//
-	// Propager les secteurs
-	//
-
+function propager_les_secteurs()
+{
 	// fixer les id_secteur des rubriques racines
 	spip_query("UPDATE spip_rubriques SET id_secteur=id_rubrique
 	WHERE id_parent=0");
@@ -150,10 +151,6 @@ function calculer_rubriques() {
 		spip_query("UPDATE spip_syndic SET id_secteur=".$row['secteur']."
 		WHERE id_syndic=".$row['id']);
 	
-	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
-	ecrire_meta("date_calcul_rubriques", date("U"));
-	ecrire_metas();
-
 }
 
 //
