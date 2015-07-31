@@ -81,8 +81,8 @@ function ecrire_stats() {
 	// popularite modele logarithmique (essai)
 	//
 if ($GLOBALS['populogarithme'] == 'oui') {
-	$a = 0.000160438; 	// EXP(LN(0.5)/3*24*60)-1
-	$b = 13.7964;		// (60 * 24) * (1 - POW((1-$a),60));
+	$a = 0.00016043786470976; 	// 1-exp(log(0.5)/(3*24*60)) : 3 signifie demi-vie = 3 jours
+	$b = $a * 60 * 24;
 
 	// 1. mise a jour a chaque hit
 	if ($id_article) {
@@ -98,7 +98,7 @@ if ($GLOBALS['populogarithme'] == 'oui') {
 
 	// 2. toutes les heures, update general pour faire decroitre les articles sans aucune visite
 	$date_popularite = lire_meta('date_stats_popularite');
-	if ((time() - $date_popularite) > 600) {
+	if ((time() - $date_popularite) > 3600) {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			$query = "UPDATE spip_articles
