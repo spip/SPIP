@@ -582,7 +582,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
 	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
 	$params = array();
-	if ($p->param[0]) {
+	if (isset($p->param[0]) AND $p->param[0]) {
 		while (count($p->param[0])>2){
 			array_unshift($params,array(0=>NULL,1=>array_pop($p->param[0])));
 		}
@@ -593,11 +593,10 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	while(count($params))
 		array_unshift($p->param,array_pop($params));
 	
-	$champ = phraser_arguments_inclure($p, true);
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	$code_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
@@ -609,7 +608,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
 	), $type,
-		\$Pile[0][$modif],"
+		isset(\$Pile[0][$modif])?\$Pile[0][$modif]:0,"
 	. $p->boucles[$b]->total_parties
 	  . ", $liste$__modele," . _q($connect) 
 	  . ", array(" . implode(',',$code_contexte) . ")" 
@@ -1050,9 +1049,8 @@ function balise_INCLUDE_dist($p) {
 }
 // http://doc.spip.org/@balise_INCLURE_dist
 function balise_INCLURE_dist($p) {
-	$champ = phraser_arguments_inclure($p, true);
 	$id_boucle = $p->id_boucle;
-	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $id_boucle, false, false);
+	$_contexte = argumenter_inclure($p->param, 'all', $p->descr, $p->boucles, $id_boucle, false, false);
 
 	if (isset($_contexte['fond'])) {
 
@@ -1123,12 +1121,10 @@ function balise_MODELE_dist($p) {
 	if (!$nom)
 		die("erreur de compilation #MODELE{nom du modele}");
 
-	$champ = phraser_arguments_inclure($p, true); 
-
 	// a priori true
 	// si false, le compilo va bloquer sur des syntaxes avec un filtre sans argument qui suit la balise
 	// si true, les arguments simples (sans truc=chose) vont degager
-	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
+	$_contexte = argumenter_inclure($p->param, true, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	// Si le champ existe dans la pile, on le met dans le contexte
 	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
@@ -1144,13 +1140,15 @@ function balise_MODELE_dist($p) {
 		}
 	}
 
-	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$connect = '';
+	if (isset($p->boucles[$p->id_boucle]))
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
 	$page = "\$p = recuperer_fond('modeles/$nom', \$l = array(".join(',', $_contexte).",'recurs='.(++\$recurs), \$GLOBALS['spip_lang']), array('trim'=>true, 'modele'=>true"
 	. (isset($_contexte['ajax'])?", 'ajax'=>true":'')
 	. "), " . _q($connect) . ")";
 
-	$p->code = "(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' : $page)";
+	$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
 	$p->interdire_scripts = false; // securite assuree par le squelette
 
