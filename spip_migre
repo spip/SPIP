@@ -75,7 +75,7 @@ mv exec_config-lang.php exec_config_lang.php
 
 # et renommer les qq fonction config-F en config_F
 
-for i in inc_config* inc_presentation.php
+for i in exec_config* inc_presentation.php
 do
 	sed 's/\(_ecrire(.[a-z]*\)\-/\1_/' $i > x
 	mv x $i
