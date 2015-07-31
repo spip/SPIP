@@ -1318,8 +1318,9 @@ function http_calendrier_rv($messages, $type) {
 		$date = $row['date_heure'];
 		$date_fin = $row['date_fin'];
 
+
 		if ($row['type']=="pb") $bouton = "pense-bete";
-		else if ($row['type']=="annonces") $bouton = "annonce";
+		else if ($row['type']=="affich") $bouton = "annonce";
 		else $bouton = "message";
 
 		if ($rv) {
