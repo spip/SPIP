@@ -30,9 +30,6 @@ function exec_charger_plugin_dist($retour='') {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 
-		echo gros_titre(_T('icone_admin_plugin'),'',false);
-		echo barre_onglets("plugins", "charger_plugin");
-
 		echo debut_gauche('plugin',true);
 		echo debut_boite_info(true);
 		$s = "";
@@ -48,6 +45,8 @@ function exec_charger_plugin_dist($retour='') {
 		);
 
 		echo debut_droite('plugin', true);
+		echo gros_titre(_T('icone_admin_plugin'),'',false);
+		echo barre_onglets("plugins", "charger_plugin");
 		// voire si on peut creer le repertoure auto/ sans rien demander
 		sous_repertoire(_DIR_PLUGINS_AUTO, '', true, true);
 		
