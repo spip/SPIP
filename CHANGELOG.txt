@@ -1,5 +1,5 @@
 
-SPIP-Core spip-3.0.11 -> spip-3.0.12  04 novembre 2013
+SPIP-Core spip-3.0.11 -> spip-3.0.12  09 novembre 2013
 -------------------------------------------------------------
 
 r20758 | suske     |  (ven. 09 août 2013) | on repasse en dev pour la suite (3.0.12-dev)
@@ -21,7 +21,7 @@ r20816 | suske     |  (sam. 21 sept. 2013)| Report des langues du trunk. Que se 
 r20820 | suske     |  (dim. 22 sept. 2013)| Report des langues du trunk - Manoeuvres pré-release - Salvatore is back
 r20822 | denisb    |  (lun. 23 sept. 2013)| ecrire/inc/actions.php : les URL de retour dans les query-string doivent toujours être relatives, quel que soit leur lieu de fabrication. report de r20786 (esj)
 r20824 | denisb    |  (lun. 23 sept. 2013)| ecrire/balise/url_.php : suite de r20765 et r20767. traiter tous les cas tordus et fournir un message d'erreur au cas où. report de r20769 (esj)
-r20825 | denisb    |  (lun. 23 sept. 2013)| ecrire/balise/url_.php : retour sur r20824. la redirection peut être passée depuis un squelette sous la forme '' (cerdic).
+r20825 | denisb    |  (lun. 23 sept. 2013)  ecrire/balise/url_.php : retour sur r20824. la redirection peut être passée depuis un squelette sous la forme '' (cerdic).
 r20829 | denisb    |  (lun. 23 sept. 2013)| ecrire/balise/url_.php : revert de r20825 et r20824 pour cause de plein de cassages dans l'espace privé.
 r20837 | cedric    |  (ven. 27 sept. 2013)| Eviter des notice de type PHP Strict Standards:  Non-static method phpthumb_functions::GetPixelColor() should not be called statically...+ PHPDoc
 r20858 | marcimat  |  (ven. 04 oct. 2013) | Report de r20857 : Le bouton «Choisir» en haut de liste obtenue par le sélecteur générique ne retournait pas le type d'objet comme les autres boutons. Il ajoutait «rubriques|3» au lieu de «rubrique|3» par exemple. ( Troon – http://contrib.spip.net/Motus#forum470824 )
@@ -34,12 +34,24 @@ r20899 | denisb    |  (mar. 29 oct. 2013) | prive/ical_prive.html, ecrire/balise
 r20900 | denisb    |  (mar. 29 oct. 2013) | ecrire/public/compiler.php, ecrire/public/decompiler.php, ecrire/public/phraser_html.php : 1) Le phrasé des arguments d'une chaîne de langue dans un squelette était à l'ouest lorsque la valeur d'un argument était une balise à plusieurs arguments. 2) Introduction de la possibilité d'écrire <pre><:module:{=#ENV{titre},x=2}:></pre>. 3) Il est désormais possible de définir dynamiquement, depuis un squelette, le nom du module de langue (report de r19989, r20035, r20415 - esj).
 r20902 | denisb    |  (mer. 30 oct. 2013) | ecrire/inc/filtres.php, prive/formulaires/editer_auteur.php : éviter un xss sur le nom (signature) d'un auteur (report de r20532).
 r20903 | denisb    |  (mer. 30 oct. 2013) | ecrire/install/etape_3.php, prive/formulaires/editer_auteur.html : prendre en compte les surcharges possibles de _LOGIN_TROP_COURT et _PASS_LONGUEUR_MINI lors de l'écran d'install et dans le formulaire auteur du privé (report de r20839).
+r20912 | ben       |  (lun. 04 nov. 2013) | SPIP 3.0.12
+r20913 | ben       |  (lun. 04 nov. 2013) | up langues
+r20927 | guytarr   |  (jeu. 07 nov. 2013) | report de r20910 : ecrire/inc/rechercher.php : modification de la recherche. sur les recherches à plusieurs mots, on ne prend en compte que les mots de 4 lettres minimum (pour éviter les 'le', 'la', 'les', 'un', 'une, 'des'...) ; mais on cherche aussi l'expression complète.
+r20931 | denisb    |  (ven. 08 nov. 2013) | ecrire/inc/rechercher.php : une constante (par défaut 4) pour définir le nombre de caractères minimum d'un mot pour qu'il soit inclu dans un recherche multi mots (suite de r20910).
+r20932 | denisb    |  (ven. 08 nov. 2013) | ecrire/inc/rechercher.php : oupss... faciliter l'intelligence d'utilisation de la constante : définie à n pour inclure les mots d'au moins n caractères.
+r20935 | b_b       |  (ven. 08 nov. 2013) | report de r20934 / ferme #3086 : compat PHP 5.5 invalider le cache opcache dans ecrire_fichier
+r20937 | denisb    |  (sam. 09 nov. 2013) | ecrire/inc/filtres.php, ecrire/inc/lien.php, ecrire/inc/utils.php, ecrire/typographie/fr.php : Introduction de la constante _PROTOCOLES_STD, prédéfinissable dans "mes_options.php", afin d'indiquer quels extraits de texte comportant un ":" doivent être identifiés comme étant des protocoles ("schéma d'URI") (report de r20901).
+r20938 | denisb    |  (sam. 09 nov. 2013) | ecrire/inc/aider.php : Ne pas mettre en dur mais seulement en valeur par défaut la zone clicable de l'ancre de l'aide en ligne. Permet la surcharge occasionnelle du picto d'aide (report de r20896).
+r20939 | denisb    |  (sam. 09 nov. 2013) | ecrire/req/pg.php : éviter des nombres dans le Group-By en PG (report de r20897).
+r20942 | denisb    |  (sam. 09 nov. 2013) | ecrire/inc/flock.php : amélioration de r20935. une constante _OPCACHE_BUG à définir dans mes_options.php le jour où PHP sera réparé...
+r20947 | suske     |  (sam. 09 nov. 2013) | Report des langues du trunk - Manoeuvres pré-release - 6 weeks later ^^
+r20948 | ben       |  (sam. 09 nov. 2013) | report langues
 
-SPIP-plugins-dist spip-3.0.11 -> spip-3.0.12  04 novembre 2013
+SPIP-plugins-dist spip-3.0.11 -> spip-3.0.12  09 novembre 2013
 -------------------------------------------------------------
 
-r74725 | maieul    |  (lun. 12 août 2013) | report de r74303 charger media après mots, sinon le critère {mots} sur une boucle DOCUMENTS ne fonctionne pas tout seul (on doit mettre un joint manuel)
-r74728 | maieul    |  (lun. 12 août 2013) | mettre le utilise sur la bonne version de MOTS
+r74725 | maieul@maieul.net |  (lun. 12 août 2013) | report de r74303 charger media après mots, sinon le critère {mots} sur une boucle DOCUMENTS ne fonctionne pas tout seul (on doit mettre un joint manuel)
+r74728 | maieul@maieul.net |  (lun. 12 août 2013) | mettre le utilise sur la bonne version de MOTS
 r74749 | b_b       |  (mer. 14 août 2013) | report de r74748 : un crawl-delay à 1s pour éviter de se faire plomber par les bots crawlers (cf http://core.spip.org/issues/3012)
 r74791 | b_b       |  (ven. 16 août 2013) | report de r74790 : marge apdatée pour les listes spip sur les petits écrans
 r74797 | kent1     |  (sam. 17 août 2013) | Mauvaise requête sql
@@ -70,7 +82,16 @@ r77850 | eric      |  (sam. 02 nov. 2013) | Ne pas oublier l'incrément de versi
 r77858 | eric      |  (dim. 03 nov. 2013) | Eviter une notice en définissant la constante d'existence de pages publiques pour le voir en ligne
 r77906 | eric      |  (lun. 04 nov. 2013) | On insère l'ancre générale du forum dans l'inclure.Ferme le ticket #3082
 r77908 | eric      |  (lun. 04 nov. 2013) | Oubli d'incrément pour le commit précédent
-
+r77923 | ben       |  (lun. 04 nov. 2013) | langues
+r77948 | b_b       |  (mar. 05 nov. 2013) | report de r77947 : html valide, pas de p dans un p
+r77950 | cedric    |  (mar. 05 nov. 2013) | - bugfix : la detection de flux echouait si la balise dans la balise <link on avait un retour ligne au lieu d'un espace (compression HTML) : on utilise la fonction standard extraire_balises- bugfix : la detection de flux prenait les liens oembed pour un flux RSS- amelioration : si on a pas detecté de flux mais que le site ressemble à un SPIP (spip dans l'url ou dans la page), on regarde si spip.php?page=backend est un flux
+r78014 | real3t    |  (mer. 06 nov. 2013) | Et voici Qwant dans les moteurs de recherche
+r78015 | real3t    |  (mer. 06 nov. 2013) | Incrémentation du z
+r78024 | b_b       |  (mer. 06 nov. 2013) | report de r78023 : html valide
+r78132 | denisb    |  (sam. 09 nov. 2013) | plugins/dist/rubrique.html : report de r77854. #TEXTE|image_reduire pour les rubriques aussi.
+r78135 | denisb    |  (sam. 09 nov. 2013) | _core/branches/spip-3.0/plugins/textwheel/typographie/fr.php : utilisation de la constante _PROTOCOLES_STD, prédéfinissable dans "mes_options.php", afin d'indiquer quels extraits de texte comportant un ":" doivent être identifiés comme étant des protocoles ("schéma d'URI"). report de r77769
+r78141 | denisb    |  (sam. 09 nov. 2013) | _core/branches/spip-3.0/plugins/forum/forum_pipelines.php : report de r75992. éviter un warning sur une variable non définie.
+r78152 | ben       |  (sam. 09 nov. 2013) | maj langues
 
 
 SPIP-Core spip-3.0.10 -> spip-3.0.11  09 août 2013
