@@ -196,7 +196,8 @@ function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $ap
 	$debug_objets['courant'] = $nom;
 	$debug_objets['parent'][$nom.$id] = $id_parent;
 	$debug_objets['pretty'][$nom.$id] = 
-	  "BOUCLE$id($type)" . ereg_replace("[\r\n]", " ", $crit) ;
+		"BOUCLE$id($type)" . htmlspecialchars(
+			preg_replace(",[\r\n],", "\\n", $crit));
 	// on synthetise avec la syntaxe standard, mais "<//" pose pb 
 	$debug_objets['boucle'][$nom.$id] = 
 	  (!$avant ? "" : "<B$id>$avant") . 
