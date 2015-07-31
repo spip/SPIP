@@ -264,7 +264,7 @@ $table_des_traitements['DATE_REDAC'][]= 'vider_date(%s)';
 $table_des_traitements['DESCRIPTIF'][]= 'traiter_raccourcis(%s)';
 $table_des_traitements['LIEN_TITRE'][]= 'typo(%s)';
 $table_des_traitements['LIEN_URL'][]= 'htmlspecialchars(vider_url(%s))';
-$table_des_traitements['MESSAGE'][]= 'safehtml(traiter_raccourcis(%s))';
+$table_des_traitements['MESSAGE'][]= 'traiter_raccourcis(%s)';
 $table_des_traitements['NOM_SITE_SPIP'][]= 'typo(%s)';
 $table_des_traitements['NOM_SITE'][]= 'typo(%s)';
 $table_des_traitements['NOM'][]= 'typo(%s)';
@@ -297,9 +297,12 @@ foreach(array('TITRE','DESCRIPTIF','SOURCE') as $balise)
 	if (!isset($table_des_traitements[$balise]['syndic_articles']))
 		$table_des_traitements[$balise]['syndic_articles'] = 'safehtml(%s)';
 
-// Forums : ajouter safehtml aux filtres existants
+// Forums & petitions : ajouter safehtml aux filtres existants
 foreach(array('TITRE','TEXTE','AUTEUR','EMAIL_AUTEUR','NOM_SITE') as $balise)
 	if (!isset($table_des_traitements[$balise]['forum']))
 		$table_des_traitements[$balise]['forum'] = 'safehtml(%s)';
+foreach(array('NOM','NOM_SITE','MESSAGE','AD_EMAIL') as $balise)
+	if (!isset($table_des_traitements[$balise]['forum']))
+		$table_des_traitements[$balise]['signatures'] = 'safehtml(%s)';
 
 ?>
