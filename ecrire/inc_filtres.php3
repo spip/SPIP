@@ -98,7 +98,7 @@ function chainephp ($texte) {
 
 // rend une chaine utilisable sans dommage comme attribut HTML
 function attribut_html ($texte) {
-	$texte = ereg_replace('"', '&quot;', $texte);
+	$texte = ereg_replace('"', '&quot;', supprimer_tags($texte));
 	return $texte;
 }
 
