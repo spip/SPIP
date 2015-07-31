@@ -29,21 +29,16 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@exec_sites_dist
 function exec_sites_dist()
 {
-  global   $connect_statut,   $options,   $spip_lang_left,  $spip_lang_right;
+  global   $connect_statut,   $options,   $spip_lang_left,  $spip_lang_right, $spip_display;
 
   global
-  $annee,
-  $mois,
-  $jour,
   $cherche_mot,
   $select_groupe, 
   $id_syndic,
   $miroir,
   $moderation,
-  $nouveau_statut,
   $oubli,
   $resume,
-  $spip_display,
   $syndication,
   $syndication_old,
   $url,
@@ -86,18 +81,6 @@ if ($new == 'oui') {
     $flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
   }
  }
-
-if ($nouveau_statut AND $flag_administrable) {
-	spip_query("UPDATE spip_syndic SET statut="._q($nouveau_statut)." WHERE id_syndic="._q($id_syndic));
-}
-
-if ($jour AND $flag_administrable) {
-	if ($annee == "0000") $mois = "00";
-	if ($mois == "00") $jour = "00";
-	spip_query("UPDATE spip_syndic SET date=" . _q("$annee-$mois-$jour") . " WHERE id_syndic=$id_syndic");
-	calculer_rubriques();
-}
-
 
 //
 // Afficher la page
@@ -202,12 +185,10 @@ if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."..
 echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
-	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4; margin-top: 5px; font-size: 13px; font-face: Verdana,Arial,Sans,sans-serif;'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
-	echo "</font>";
 	echo "</div>";
 }
 echo "</td>";
@@ -241,24 +222,27 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 
-	echo generer_url_post_ecrire('sites', "id_syndic=$id_syndic&id_parent=$id_rubrique"),
-	  "\n<center><b>",
-	  _T('info_statut_site_1'),
-	  "</b> &nbsp;&nbsp; \n",
-	  "<select name='nouveau_statut' size='1' class='fondl'>\n",
-	  my_sel("prop",_T('info_statut_site_3'),$statut),
-	  my_sel("publie",_T('info_statut_site_2'),$statut),
-	  my_sel("refuse",_T('info_statut_site_4'),$statut),
-	  "</select>\n",
-	  " &nbsp;&nbsp;&nbsp; ",
-	  "<input type='submit' value='",
-	  _T('bouton_valider'),
-	  "' class='fondo' />\n",
-	  "</center>\n",
-	  "</form>\n";
-	fin_cadre_relief();
-}
+	$corps = "\n<center><b>"
+	. _T('info_statut_site_1')
+	. "</b> &nbsp;&nbsp; \n"
+	.  "<select name='nouveau_statut' size='1' class='fondl'>\n"
+	.  my_sel("prop",_T('info_statut_site_3'),$statut)
+	.  my_sel("publie",_T('info_statut_site_2'),$statut)
+	.  my_sel("refuse",_T('info_statut_site_4'),$statut)
+	. "</select>\n"
+	. " &nbsp;&nbsp;&nbsp; "
+	. "<input type='submit' value='"
+	. _T('bouton_valider')
+	.  "' class='fondo' />\n"
+	.  "</center>\n";
 
+	echo redirige_action_auteur('editer_site',
+		$id_syndic,
+		'sites',
+		"id_syndic=$id_syndic&id_parent=$id_rubrique",
+		$corps);
+	fin_cadre_relief();
+ }
 
 
 # appliquer les choix concernant le resume (a passer dans editer_site)
@@ -273,29 +257,29 @@ if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p><font size=3 face='Verdana,Arial,Sans,sans-serif'>",
+	echo "<p><font size='3' face='Verdana,Arial,Sans,sans-serif'>",
 	"<a href='".htmlspecialchars($url_syndic)."'>",
 	http_img_pack('feed.png', 'RSS', ''),
 	'</a> ',
 	'<b>'._T('info_site_syndique').'</b>',
-	'</font>';
+	'</font></p>';
 
 	if ($erreur_syndic)
-		echo "<p><font color=red><b>$erreur_syndic</b></font>";
+		echo "<p><font color='red'><b>$erreur_syndic</b></font></p>";
 
 	if ($syndication == "off" OR $syndication=="sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => quote_amp($url_syndic)));
 
 		echo "<center>";
-		echo generer_action_auteur('editer_site',
+		echo redirige_action_auteur('editer_site',
 			$id_syndic,
-			generer_url_ecrire('sites'),
+			'sites',
+			'',
 			"<input type='hidden' name='reload' value='oui' />
-		<input type='submit' value=\""
+			<input type='submit' value=\""
 			. attribut_html(_T('lien_nouvelle_recuperation'))
-			. "\" class='fondo' style='font-size:9px;' />",
-		" method='post'"
+			. "\" class='fondo' style='font-size:9px;' />"
 		);
 		echo "</center>\n";
 		fin_boite_info();
@@ -304,10 +288,12 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 
 	// afficher la date de dernier acces a la syndication
-	echo "<font face='verdana,arial,helvetica' size=2>";
+
 	if ($date_syndic)
-		echo "<p><div align='left'>"._T('info_derniere_syndication').' '.affdate_heure($date_syndic)
-		.".</div>\n";
+		echo "<div align='left'>".
+		  "<font face='verdana,arial,helvetica' size='2'>",
+		  _T('info_derniere_syndication').' '.affdate_heure($date_syndic)
+		.".</font></div>\n";
 
 
 	echo "<div align='right'>\n";
@@ -355,22 +341,22 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		if ($oubli == 'oui' OR $oubli == 'non')
 			spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
 
-		echo "<div>&nbsp;</div>";
-		echo "<div align='".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'), '</div>';
+		echo "\n<div>&nbsp;</div>";
+		echo "\n<div align='".$GLOBALS['spip_lang_left']."'>"._T('syndic_choix_oublier'), '</div>';
 
-		echo "<ul align='".$GLOBALS['spip_lang_left']."'>\n";
+		echo "\n<ul align='".$GLOBALS['spip_lang_left']."'>\n";
 
 		# miroir
 		if (!$miroir AND !$miroir = $row['miroir']) $miroir = 'non';
-		echo "<li>"._T('syndic_option_miroir').' ';
+		echo "\n<li>"._T('syndic_option_miroir').' ';
 		echo afficher_choix('miroir', $miroir,
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
-			" &nbsp; ");
+			" &nbsp;\n");
 		echo "</li>\n";
 
 		# oubli
 		if (!$oubli AND !$oubli = $row['oubli']) $oubli = 'non';
-		echo "<li>"._T('syndic_option_oubli', array('mois' => 2)).' ';
+		echo "\n<li>"._T('syndic_option_oubli', array('mois' => 2)).' ';
 		echo afficher_choix('oubli', $oubli,
 			array('oui' => _T('item_oui'), 'non' => _T('item_non')),
 			" &nbsp; ");
@@ -381,9 +367,9 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 		// Prendre les resumes ou le texte integral ?
 		# choix appliques plus haut (a passer dans editer_site)
-		echo "<div align='$spip_lang_left'>"
+		echo "\n<div align='$spip_lang_left'>"
 			. _T('syndic_choix_resume') ;
-		echo "<div style='padding-$spip_lang_left: 40px;'>";		
+		echo "\n<div style='padding-$spip_lang_left: 40px;'>";		
 		echo afficher_choix('resume', $resume,
 			array(
 				'oui' => _T('syndic_option_resume_oui'),
@@ -393,15 +379,13 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 
 		// Bouton "Valider"
-		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div></p></form></div>";
-
+		echo "\n<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>\n</form>\n";
 
 		fin_cadre_relief();
 	}
-	echo "</font>";
 }
 // Cas d'un site ayant un feedfinder detecte
-else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
+else if (preg_match(',^\s*select: (.*),', $url_syndic, $regs)) {
 	echo "<br /><br />\n";
 	echo   generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
 
@@ -424,7 +408,7 @@ else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 	}
 	echo "</select>\n";
 	echo aide("rubsyn");
-	echo "<div align='$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+	echo "<div align='$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 	echo fin_cadre_relief();
 	echo "</div></form>\n";
 }
@@ -435,6 +419,7 @@ if ($GLOBALS['champs_extra'] AND $extra) {
 		echo extra_affichage($extra, "sites");
 	}
 
+ echo '</center>';
 fin_cadre_relief();
 
 
@@ -447,7 +432,7 @@ fin_cadre_relief();
 
  icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi', "id_syndic=$id&statut=prive&script=sites") . '#formulaire', "forum-interne-24.gif", "creer.gif");
 
- echo "</div><p align='left'>\n";
+ echo "</div>\n";
 
  $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
 
