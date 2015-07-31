@@ -83,7 +83,7 @@ function auth_ldap_retrouver($dn, $desc='')
 				  'email' => "mail", 
 				  'bio' => "description");
 
-	// Lire les infos sur l'utilisateur à partir de son DN depuis LDAP
+	// Lire les infos sur l'utilisateur a partir de son DN depuis LDAP
 
 	$ldap_link = spip_connect_ldap();
 	$ldap_link = $ldap_link['link'];
@@ -106,7 +106,7 @@ function auth_ldap_retrouver($dn, $desc='')
 
 
 // http://doc.spip.org/@auth_ldap_inserer
-// Ajout du paramètre $login
+// Ajout du parametre $login
 function auth_ldap_inserer($dn, $statut, $login='', $desc='')
 {
 	// refuser d'importer n'importe qui 
