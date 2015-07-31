@@ -227,7 +227,7 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='', $domain='', $
 	else
 		@setcookie ($name, $value);
 }
-if ($cookie_prefix <> 'spip') {
+if ($cookie_prefix != 'spip') {
 	reset ($HTTP_COOKIE_VARS);
 	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
 		if (ereg('^spip', $name)) {
@@ -272,15 +272,15 @@ else if (ereg('^/([^/]*)\.free.fr/', $REQUEST_URI, $regs)) {
 	$hebergeur = 'free';
 	$login_hebergeur = $regs[1];
 }
-// Online
-else if (ereg('pro\.proxad\.net$', $HTTP_HOST) || ereg('pro\.proxad\.net$', $SERVER_NAME)) {
-	$hebergeur = 'online';
-}
 // NexenServices
 else if ($SERVER_ADMIN == 'www@nexenservices.com') {
 	if (!function_exists('email'))
 		include ('mail.inc');
 	$hebergeur = 'nexenservices';
+}
+// Online
+else if (function_exists('email')) {
+	$hebergeur = 'online';
 }
 
 if (eregi('\(Win', $HTTP_SERVER_VARS['SERVER_SOFTWARE']))
