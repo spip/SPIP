@@ -851,7 +851,7 @@ if ($flag_editable AND $options == 'avancees') {
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Sans,sans-serif'><b>"._T('texte_date_creation_article');
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Sans,sans-serif'><b>"._T('texte_date_creation_article').' ';
 		echo majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
 	}
@@ -1075,7 +1075,7 @@ if (spip_num_rows($result)) {
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2'>";
-		echo "<A HREF=\"$url_auteur\"$bio_auteur>$nom_auteur</A>";
+		echo "<A HREF=\"$url_auteur\"$bio_auteur>".typo($nom_auteur)."</A>";
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2'>";
@@ -1508,7 +1508,7 @@ if ($flag_editable) {
 		$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
 		$result_auteur = spip_query($query_auteur);
 		while ($row_auteur = spip_fetch_array($result_auteur)) {
-			$nom_auteur_modif = $row_auteur["nom"];
+			$nom_auteur_modif = typo($row_auteur["nom"]);
 		}
 		icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_travail_article', array('nom_auteur_modif' => $nom_auteur_modif, 'date_diff' => $date_diff))."</font>";
