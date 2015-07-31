@@ -17,8 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // elle-meme ne fait que traiter les cas particuliers, puis passe la main.
 // http://doc.spip.org/@public_assembler_dist
 function public_assembler_dist($fond) {
-	  global $auteur_session, $forcer_lang, $ignore_auth_http,
-	  $var_confirm, $var_mode;
+	  global $auteur_session, $forcer_lang, $ignore_auth_http, $var_mode;
 
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
@@ -42,7 +41,7 @@ function public_assembler_dist($fond) {
 	// afin que celle-ci contienne la signature
 	if (isset($_GET['var_confirm'])) {
 		include_spip('balise/formulaire_signature');
-		reponse_confirmation($var_confirm);
+		reponse_confirmation($_GET['var_confirm']);
 	}
 
 	//  refus du debug si l'admin n'est pas connecte

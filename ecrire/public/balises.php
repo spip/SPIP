@@ -524,6 +524,7 @@ function balise_INTRODUCTION_dist ($p) {
 	}
 	$p->code = "calcul_introduction('$type', $_texte, $_chapo, $_descriptif)";
 
+	#$p->interdire_scripts = true;
 	return $p;
 }
 

@@ -90,10 +90,13 @@ function import_collecte($desc)
 	  $b[$p]= $fields[$p];
 	if (isset($fields[$p='id_rubrique']))
 	  $b[$p]= $fields[$p];
-	if (isset($fields[$p='fichier'])) {
+	if (isset($fields[$p='fichier']))
 	  $b[$p]= $fields[$p];
-	  $b['taille']= $fields['taille'];
-	}
+	if (isset($fields[$p='taille']))
+	  $b[$p]= $fields[$p];
+	if (isset($fields[$p='extension']))
+	  $b[$p]= $fields[$p];
+
 	$p = $desc['key']["PRIMARY KEY"];
 	$b[$p] = $fields[$p];
 	return $b;

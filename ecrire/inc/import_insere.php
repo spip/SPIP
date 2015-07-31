@@ -38,10 +38,7 @@ function insere_1bis_init($request) {
 
 	// l'insertion porte sur les tables principales ...
 	$t = array_keys($GLOBALS['tables_principales']);
-	// ... mais pas cette table car elle n'est pas extensible ..
-	// (si on essaye ==> duplication sur la cle secondaire)
-	unset($t[array_search('spip_types_documents', $t)]);
-	// .. ni celle-ci a cause de la duplication des login 
+	// ... mais pas cette table a cause de la duplication des login 
 	unset($t[array_search('spip_auteurs', $t)]);
 	return $t;
 }
@@ -52,6 +49,9 @@ function insere_1bis_init($request) {
 // http://doc.spip.org/@insere_2_init
 function insere_2_init($request) {
 	$t = insere_1bis_init($request);
+
+	// ne pas importer cette table, son homologue est prioritaire
+	unset($t[array_search('spip_types_documents', $t)]);
 
 	$t[]= 'spip_mots_articles';
 	$t[]= 'spip_mots_breves';
@@ -91,7 +91,9 @@ function import_insere($values, $table, $desc, $request, $atts) {
 	// reserver une place dans les tables principales si nouveau
 	$ajout = 0;
 	if ((!function_exists($f = 'import_identifie_' . $type_id))
-	OR (!$n = $f($values, $table, $desc, $request))) {
+	OR (!($n = $f($values, $table, $desc, $request)))) {
+	  // pas d'importation de types_doc (a revoir)
+		if ($table == 'spip_types_documents') return;
 		$n = spip_abstract_insert($table, '', '()');
 		if (!$n) {
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
@@ -209,7 +211,6 @@ function importe_translate_maj($k, $v)
 {
 	global $trans;
 	if (!(isset($trans[$k]) AND isset($trans[$k][$v]))) return $v;
-
 	list($g, $titre, $ajout) = $trans[$k][$v];
 	if ($g <= 0) {
 		$f = 'import_identifie_parent_' . $k;
@@ -272,6 +273,16 @@ function import_identifie_id_document($values, $table, $desc, $request) {
 // s'ils ont meme extension et meme titre
 // Sinon il ne sera PAS importe
 // http://doc.spip.org/@import_identifie_id_type
+function import_identifie_id_type($values, $table, $desc, $request) {
+	$e = $values['extension'];
+	$t = $values['titre'];
+	$r = spip_fetch_array(spip_query($q="SELECT id_type, titre FROM spip_types_documents WHERE extension=" . _q($e) . " AND titre=" . _q($t)), SPIP_NUM);
+	return $r;
+}
+
+// un type de document importe est considere comme identique a un type present
+// s'ils ont meme extension et meme titre
+// Sinon il ne sera PAS importe
 function import_identifie_id_type($values, $table, $desc, $request) {
 	$e = $values['extension'];
 	$t = $values['titre'];
