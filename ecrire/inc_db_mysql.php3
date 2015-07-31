@@ -22,7 +22,7 @@ function spip_query_db($query) {
 	if ($my_profile)
 		$m1 = microtime();
 
-	if ($spip_mysql_link) $result = mysql_query($query, $spip_mysql_link);
+	if ($GLOBALS['mysql_rappel_connexion'] AND $spip_mysql_link) $result = mysql_query($query, $spip_mysql_link);
 	else $result = mysql_query($query);
 
 	if ($my_profile) {
@@ -49,7 +49,7 @@ function spip_query_db($query) {
 // Passage d'une requete standardisee
 //
 function traite_query($query) {
-	if ($db = $GLOBALS['spip_mysql_db'])
+	if ($GLOBALS['mysql_rappel_connexion'] AND $db = $GLOBALS['spip_mysql_db'])
 		$db = '`'.$db.'`.';
 
 	// changer les noms des tables ($table_prefix)
