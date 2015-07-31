@@ -830,8 +830,12 @@ function http_calendrier_avec_heure($evenement, $amj)
 	$sum = $evenement['SUMMARY'];
 	if (!$sum) $sum = $desc;
 	$sum = ereg_replace(' +','&nbsp;', typo($sum));
+	if ($lieu = $evenement['LOCATION'])
+	  $sum .= '<br />' . $lieu;
+	if ($perso = $evenement['ATTENDEE'])
+	  $sum .=  '<br />' . $perso;
 	if ($evenement['URL'])
-	  $sum = http_href($evenement['URL'], $sum, $desc);
+	  $sum = http_href($evenement['URL'], $sum, $desc, 'border: 0px');
 	$opacity = "";
 	$deb_h = substr($evenement['DTSTART'],-6,2);
 	$deb_m = substr($evenement['DTSTART'],-4,2);

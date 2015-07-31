@@ -828,16 +828,14 @@ function lire_meta($nom) {
 }
 
 // Lire les meta cachees
-if (!defined('_ECRIRE_INC_META')) {
-	unset($meta); # parano
-	if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
+
+if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
 		$meta = @unserialize($meta);
 	// en cas d'echec refaire le fichier
-	if (!is_array($meta) AND _FILE_CONNECT) {
+if (!is_array($meta) AND _FILE_CONNECT) {
 		include_ecrire('inc_meta.php3');
 		ecrire_metas();
 	}
-}
 
 //
 // Traduction des textes de SPIP

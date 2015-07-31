@@ -2342,13 +2342,11 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	$activer_messagerie = "oui";
 
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	if (!$adresse_site) {
-		$adresse_site = $GLOBALS['meta']["adresse_site"];
-		if (!$adresse_site) {
 			$adresse_site = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strpos($REQUEST_URI, "/" . _DIR_RESTREINT_ABS));
 			ecrire_meta("adresse_site", $adresse_site);
 			ecrire_metas();
-		}
 	}
 
 	if ($spip_ecran == "large") $largeur = 974;
