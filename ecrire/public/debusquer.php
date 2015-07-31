@@ -128,7 +128,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='', $style='') {
 		. $skel
 		. "</td><td style='text-align: left'>"
 		. $boucle
-		. "</td><td style='text-align: left'>"
+		. "</td><td style='text-align: right'>"
 		. $ligne
 		.  "</td></tr>\n";
 

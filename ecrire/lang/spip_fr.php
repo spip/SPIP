@@ -761,7 +761,7 @@ et vous reconnecter au site.
 'zbug_erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
 'zbug_erreur_compilation' => 'Erreur de compilation',
 'zbug_erreur_execution_page' => 'erreur d\'ex&eacute;cution de la page',
-'zbug_erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'zbug_erreur_filtre' => 'Filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 'zbug_erreur_meme_parent' => '{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Erreur(s) dans le squelette',
 'zbug_hors_compilation' => 'Hors Compilation',
