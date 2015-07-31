@@ -1298,12 +1298,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
 		echo "<img src='img_pack/choix-layout.gif' alt='o' vspace=3 border=0 usemap='#map_layout'>";
-		//echo "<br><a href='$lien&set_disp=1'>Texte</a> | <a href='$lien&set_disp=2'>Icones+texte</a> | <a href='$lien&set_disp=3'>Icones</a>";
 	echo "</font></td>";
-	//bandeau_barre_verticale();
 	echo "<td background=''>";
-		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);", "aide-48.gif");
-		//echo "<table cellpadding=0 cellspacing=0 border=0 class='fondgris' onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\"><tr><td background=''><img src='img_pack/rien.gif' width=52 height=1></td></tr><tr><td background='' align='center' width='52' height='50'><a href=\"javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\"><img src='img_pack/aide-48.gif' alt='Aide en ligne'  title =\"Aide en ligne\"  border='0'></a><br></td></tr></table>";
+		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700,height=1000'); void(0);", "aide-48.gif");
 
 
 	echo "</td>";
