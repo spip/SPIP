@@ -667,15 +667,16 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			break;
 
 		case 'idiome':
-			$args=array();
+			$l = array();
 			foreach ($p->arg as $k => $v) {
-			  if ($k) $args[]=$k.' => '.calculer_liste($v,$p->descr,$boucles,$id_boucle);
+				if ($k) $l[]=$k.' => '.calculer_liste($v,$p->descr,$boucles,$id_boucle);
 			}
-			$code = "_T('" . $p->module . ":" .$p->nom_champ . "',array(".implode(', ',$args)."))";
+			$l = !$l ? '' : (",array(".implode(', ',$l).")");
+			$code = "_T('" . $p->module . ":" .$p->nom_champ . "'$l)";
 			if ($p->param) {
-			  $p->id_boucle = $id_boucle;
-			  $p->boucles = &$boucles;
-			  $code = compose_filtres($p, $code);
+				$p->id_boucle = $id_boucle;
+				$p->boucles = &$boucles;
+				$code = compose_filtres($p, $code);
 			}
 			$commentaire = ":";
 			$avant='';
