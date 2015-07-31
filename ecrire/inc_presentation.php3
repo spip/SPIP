@@ -1695,7 +1695,7 @@ function debut_gauche($rubrique = "asuivre") {
 				$nb_connectes = mysql_num_rows($result_auteurs);
 			}
 	
-			$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
+			$flag_cadre = (($nb_connectes > 0 AND $options == "avancees") OR $rubrique == "messagerie");
 			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
 			if ($rubrique == "messagerie") {
 				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='' width='14' height='7' border='0'>";
