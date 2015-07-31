@@ -151,8 +151,9 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 
 	if ($nouveau) {
 		if (!$mode) $mode = $type_image ? 'vignette' : 'document';
-		$update = "mode='$mode', ";
-		if ($largeur && $hauteur) $update .= "titre='image $largeur x $hauteur', ";
+		$titre = ereg_replace("\..*$", "", $orig);
+		$titre = strtr($titre, "_", " ");
+		$update = "mode='$mode', titre='".addslashes($titre)."', ";
 	}
 
 	$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
@@ -166,6 +167,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	return true; // on veut bien effacer le fichier s'il est dans ftp/upload/
 }
 
+
+
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 // par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
 $effacer_si_ok = false;
@@ -174,15 +177,17 @@ if (!$image_name AND ereg("^ecrire/upload/...", $image)) {
 	$effacer_si_ok = true;
 }
 
+
 if ($ajout_doc == 'oui') {
 	$ok = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
-	if ($ok AND $effacer_si_ok)
-		@unlink($image);
+	if ($ok AND $effacer_si_ok) @unlink($image);
 }
+
 
 if ($ajout_logo == "oui") {
 	ajout_image($image, $logo);
 }
+
 
 if ($image_supp) {
 	// Securite
@@ -194,6 +199,7 @@ if ($image_supp) {
 	}
 	@unlink("IMG/$image_supp");
 }
+
 
 if ($doc_supp) {
 	// Securite
