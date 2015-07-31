@@ -97,7 +97,7 @@ function encours_accueil()
 function colonne_droite_eq4($id_rubrique, $activer_breves, $activer_sites, $articles_mots) {
 	global  $connect_statut, $connect_toutes_rubriques;
 
-	$res = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$res = sql_countsel('spip_rubriques');
 	if ($res) {
 		$res = icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.gif","creer.gif", false);
 
@@ -136,7 +136,7 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 			. icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false)
 			. "</td>";
 		}
-	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		$gadget .= "<td>"
 			. icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false)

@@ -19,7 +19,7 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 
 	$tmp_var = 't_' . substr(md5($where.$from), 0, 4);
 
-	$requete = array('FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
+	$requete = array('SELECT' => 'messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.type, messages.rv', 'FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
 
 	if ($afficher_auteurs) {
 			$largeurs = array('', 130, 20, 120);
@@ -109,7 +109,7 @@ function afficher_message_boucles($row, &$messages_vus, $voir_logo, $afficher_au
 			//
 			// Messages de forums
 			
-	$total_forum = spip_num_rows(spip_query("SELECT id_message FROM spip_forum WHERE id_message = $id_message"));
+	$total_forum = sql_countsel('spip_forum', "id_message=$id_message");
 			
 	if ($total_forum > 0) $vals[] = "($total_forum)";
 	else $vals[] = "";

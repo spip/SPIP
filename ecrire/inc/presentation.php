@@ -735,7 +735,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 // http://doc.spip.org/@afficher_forum_mots
 function afficher_forum_mots($id_forum)
 {
-	$result = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+	$result = spip_query("SELECT titre, type FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 	$res = "";
 	while ($row = sql_fetch($result)) {
@@ -1611,7 +1611,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 			break;
 		case 'mot':
 		case 'auteur':
-			$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'"));
+			$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
 			if ($n) $en_ligne = 'calcul';
 			else $en_ligne = 'preview';
 			break;

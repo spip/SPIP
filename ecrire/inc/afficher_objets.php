@@ -552,8 +552,8 @@ function afficher_auteurs_boucle($row, &$tous_id,  $voir_logo, $own){
 	$vals = array();
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');
 	if ($row['statut'] == '0minirezo')
-		$row['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".intval($row['id_auteur'])));
-	
+		$row['restreint'] = sql_countsel('spip_auteurs_rubriques', "id_auteur=".intval($row['id_auteur']));
+
 	list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur'],$row);
 	if ($w) {
 	  if (preg_match(',^([^>]*>)[^<]*(.*)$,', $w,$r)) {

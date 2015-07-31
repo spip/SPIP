@@ -377,7 +377,7 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 		$res .= fin_cadre_couleur(true);
 	}
 
-	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$n = sql_countsel('spip_rubriques');
 	$bouton_article = $bouton_breves = $bouton_sites = "";
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
