@@ -100,7 +100,7 @@ function admin_objet()
 	as $id => $obj) {
 		if (is_int($id)) $id = $obj;
 		$_id_type = id_table_objet($id);
-		if ($id_type = $GLOBALS['contexte'][$_id_type]) {
+		if (isset($GLOBALS['contexte'][$_id_type]) AND $id_type = $GLOBALS['contexte'][$_id_type]) {
 			$id_type = sql_getfetsel($_id_type, table_objet_sql($id), "$_id_type=".intval($id_type));
 			if ($id_type) {
 				$env[$_id_type] = $id_type;
@@ -176,10 +176,12 @@ function admin_valider()
 // http://doc.spip.org/@admin_debug
 function admin_debug()
 {
-	return (($GLOBALS['forcer_debug']
-			OR $GLOBALS['bouton_admin_debug']
+	return ((
+			(isset($GLOBALS['forcer_debug']) AND $GLOBALS['forcer_debug'])
+			OR (isset($GLOBALS['bouton_admin_debug']) AND $GLOBALS['bouton_admin_debug'])
 			OR (
-				$GLOBALS['var_mode'] == 'debug'
+				isset($GLOBALS['var_mode'])
+				AND $GLOBALS['var_mode'] == 'debug'
 				AND $_COOKIE['spip_debug']
 			)
 		) AND autoriser('debug')
