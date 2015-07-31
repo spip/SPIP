@@ -17,6 +17,8 @@ include_spip('inc/boutons');
 include_spip('inc/actions');
 
 
+define('_ACTIVER_PUCE_RAPIDE', true);
+
 // Faux HR, avec controle de couleur
 
 // http://doc.spip.org/@hr
@@ -535,7 +537,8 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 
 	$inser_puce = http_img_pack($puce, $title, " style='margin: 1px;'$ajax_node");
 
-	if (!autoriser('publierdans', 'rubrique', $id_rubrique))
+	if (!autoriser('publierdans', 'rubrique', $id_rubrique)
+	OR !_ACTIVER_PUCE_RAPIDE)
 		return $inser_puce;
 
 	$titles = array(
@@ -610,8 +613,10 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 	$type1 = "statut$type$id"; 
 	$inser_puce = http_img_pack($puce, $title, "id='img$type1' style='margin: 1px;'");
 
-	if (!is_numeric($id_rubrique)) return $inser_puce;
-	
+	if (!autoriser('publierdans','rubrique',$id_rubrique)
+	OR !_ACTIVER_PUCE_RAPIDE)
+		return $inser_puce;
+
 	$type2 = "statutdecal$type$id";
 	$action = "\nonmouseover=\"montrer('$type2');\"";
 
@@ -876,7 +881,6 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
 	global $connect_statut, $spip_lang_right;
-	$droit = ($connect_statut == '0minirezo');
 	list($afficher_langue, $affrub, $langue_defaut) = $own;
 
 	$vals = '';
@@ -892,11 +896,8 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 		else $lang = $langue_defaut;
 		$lang_dir = lang_dir($lang);
 		$id_rubrique = $row['id_rubrique'];
-		$t= ($droit AND autoriser('publierdans','rubrique',$id_rubrique))
-		  ? $id_rubrique
-		  : false;
 		
-		$vals[] = puce_statut_breve($id_breve, $statut, $t, 'breve');
+		$vals[] = puce_statut_breve($id_breve, $statut, $id_rubrique, 'breve');
 	
 		$s = "\n<div>";
 		$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
