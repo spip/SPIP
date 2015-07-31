@@ -12,11 +12,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function fragments_discuter_dist()
+# Les informations d'une rubrique selectionnee dans le mini navigateur
+
+function exec_informer_dist()
 {
-	$debut = _request('debut');
-	$id_article = _request('id_article');
-	$f = charger_fonction('discuter', 'inc');
-	return $f($id_article, 'ajax', $debut);
+
+	$id = intval(_request('id'));
+	$col = intval(_request('col'));
+	$exclus = intval(_request('exclus'));
+
+	$f = charger_fonction('informer', 'inc');
+	return $f($id, $col, $exclus, _request('rac'), _request('type'));
 }
+
 ?>

@@ -12,19 +12,21 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# afficher un mini-navigateur de rubriques
-
-// http://doc.spip.org/@fragments_selectionner_dist
-function fragments_selectionner_dist()
+function exec_legender_dist()
 {
-	global $id, $exclus, $rac;
+	global $id_document, $id, $type, $ancre, $script;
 	$id = intval($id);
-	$exclus = intval($exclus);
-	$type = _request('type');
+	$id_document = intval($id_document);
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj_forcer('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve');
+	if (!($type == 'article' 
+		? acces_article($id)
+		: acces_rubrique($id))) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 
+	$f = charger_fonction('legender', 'inc');
+	return $f($id_document, array(), $script, $type, $id, $ancre);
 }
 ?>

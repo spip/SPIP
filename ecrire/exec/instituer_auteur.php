@@ -12,20 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-# afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
-
-// http://doc.spip.org/@fragments_plonger_dist
-function fragments_plonger_dist()
+function exec_instituer_auteur_dist()
 {
-	global $id, $exclus, $col, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$col = intval($col);
+	$script = _request('script');
+	$id_auteur = intval(_request('id_auteur'));
+	if (!preg_match('/^\w+$/', $script)) die("$script !!");
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_afficher_rubrique ($id, htmlentities($rac), array(), $col, $exclus);
+	$r = spip_fetch_array(spip_query("SELECT statut FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+
+	$f = charger_fonction('instituer_auteur', 'inc');
+	return $f($id_auteur, $r['statut'] , $script);
 }
-
 ?>

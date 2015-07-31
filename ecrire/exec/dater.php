@@ -12,18 +12,24 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# Les informations d'une rubrique selectionnee dans le mini navigateur
-
-// http://doc.spip.org/@fragments_informer_dist
-function fragments_informer_dist()
+function exec_dater_dist()
 {
+	global $id_article;
+	$id_article = intval($id_article);
 
-	$id = intval(_request('id'));
-	$col = intval(_request('col'));
-	$exclus = intval(_request('exclus'));
+	if (!acces_article($id_article)) {
+		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
+		include_spip('inc/minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 
-	$f = charger_fonction('informer', 'inc');
-	return $f($id, $col, $exclus, _request('rac'), _request('type'));
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
+
+	$statut_article = $row['statut'];
+	$date = $row["date"];
+	$date_redac = $row["date_redac"];
+
+	$f = charger_fonction('dater', 'inc');
+	return $f($id_article, 'ajax', $statut_article, $date, $date_redac);
 }
-
 ?>

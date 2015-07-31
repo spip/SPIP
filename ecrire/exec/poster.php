@@ -12,36 +12,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/presentation');
-include_spip('inc/texte');
-
-function fragments_documenter_dist()
+function exec_poster_dist()
 {
-	$type = _request("type");
-	$s = _request("s");
-	$id = intval(_request(($type == 'article') ? 'id_article' : 'id_rubrique'));
+	global $id_article, $script;
+	$id_article = intval($id_article);
 
-	if (!$s)
-	  $album = 'documents';
-	else  $album = 'portfolio'; 
-
-	if ($type == 'rubrique')
-		$flag_editable = acces_rubrique($id);
-	else {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id"));
-		if (!$flag_editable = acces_rubrique($row['id_rubrique'])) {
-			if ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')
-			  $flag_editable = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
-		}
-	}
-
-	if (!$flag_editable) {
+	if (!acces_article($id_article)) {
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 
-	$f = charger_fonction('documenter', 'inc');
-	return $f($id, $type, $album, 'ajax');
+	$f = charger_fonction('poster', 'inc');
+	return $f($id_article, $script, "&id_article=$id_article", true);
 }
 ?>

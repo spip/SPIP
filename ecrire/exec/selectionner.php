@@ -12,12 +12,18 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function fragments_grouper_mots_dist()
+# afficher un mini-navigateur de rubriques
+
+function exec_selectionner_dist()
 {
-	$id_groupe = intval(_request('id_groupe'));
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));
-	if (! ($cpt = $cpt['n'])) return '' ;
-	$f = charger_fonction('grouper_mots', 'inc');
-	return $f($id_groupe, $cpt);
+	global $id, $exclus, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
+	$type = _request('type');
+
+	include_spip('inc/texte');
+	include_spip('inc/mini_nav');
+	return mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj_forcer('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve');
+
 }
 ?>
