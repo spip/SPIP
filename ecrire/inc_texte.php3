@@ -57,20 +57,6 @@ setlocale(LC_CTYPE, $GLOBALS['spip_lang'].'_'.$lang2);
 // Diverses fonctions essentielles
 //
 
-// ereg_ ou preg_ ?
-function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
-	global $flag_pcre;
-
-	if ($flag_pcre) return preg_replace($cherche_tableau, $remplace_tableau, $texte);
-
-	$n = count($cherche_tableau);
-
-	for ($i = 0; $i < $n; $i++) {
-		$texte = ereg_replace(substr($cherche_tableau[$i], 1, -1), $remplace_tableau[$i], $texte);
-	}
-	return $texte;
-}
-
 // Ne pas afficher le chapo si article virtuel
 function nettoyer_chapo($chapo){
 	if (substr($chapo,0,1) == "="){
@@ -129,9 +115,9 @@ function spip_apres_typo ($letexte) {
 define ('__regexp_echappe',
 		"/(" . "<html>((.*?))<\/html>" . ")|("	#html
 		. "<code>((.*?))<\/code>" . ")|("	#code
-		. "[\n\r]*<(cadre|frame)>((.*?))<\/(cadre|frame)>[\n\r]*" #cadre
+		. "<(cadre|frame)>((.*?))<\/(cadre|frame)>" #cadre
 		. ")|("
-		. "[\n\r]*<(poesie|poetry)>((.*?))<\/(poesie|poetry)>[\n\r]*" #poesie
+		. "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>" #poesie
 		. ")/si");
 
 function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
@@ -139,6 +125,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	$suite = $letexte;
 	while (preg_match(__regexp_echappe, $suite, $regs)) {
 		$num_echap++;
+		$marqueur_echap = "@@SPIP_$source$num_echap@@";
 
 		if ($no_transform) {	// echappements bruts
 			$les_echap[$num_echap] = $regs[0];
@@ -172,7 +159,9 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 			$lecode = trim(entites_html($regs[9]));
 			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "</p><form action=\"/\" method=\"get\"><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form><p class=\"spip\">";
+			$les_echap[$num_echap] = "<form action=\"/\" method=\"get\"><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
+			// Les marques ci-dessous indiquent qu'on ne veut pas paragrapher
+			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
 		}
 		else
 		if ($regs[12]) {
@@ -180,13 +169,13 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
 			$lecode = ereg_replace("\r", "\n", $lecode);
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
+			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
 			$les_echap[$num_echap] = propre($lecode);
 		} 
 
 		$pos = strpos($suite, $regs[0]);
-		$debut .= substr($suite,0,$pos)."@@SPIP_$source$num_echap@@";
+		$debut .= substr($suite,0,$pos).$marqueur_echap;
 		$suite = substr($suite, $pos+strlen($regs[0]));
-		spip_log($suite);
 	}
 	$letexte = $debut . $suite;
 	// Gestion du TeX
@@ -404,7 +393,7 @@ function typo_fr($letexte) {
 		/* 4 */		'\1~\2',
 		/* 5 */		'\0~'
 	);
-	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
+	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
 	$cherche2 = array(
@@ -417,7 +406,7 @@ function typo_fr($letexte) {
 		'\1:',
 		'&nbsp;'
 	);
-	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
+	$letexte = preg_replace($cherche2, $remplace2, $letexte);
 
 	return $letexte;
 }
@@ -431,7 +420,7 @@ function typo_en($letexte) {
 	$remplace1 = array(
 		'~\0'
 	);
-	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
+	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 
 	$letexte = str_replace("&nbsp;", "~", $letexte);
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
@@ -445,7 +434,7 @@ function typo_en($letexte) {
 		'&nbsp;'
 	);
 
-	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
+	$letexte = preg_replace($cherche2, $remplace2, $letexte);
 
 	return $letexte;
 }
@@ -860,9 +849,6 @@ function traiter_raccourcis_generale($letexte) {
 	// Ensemble de remplacements implementant le systeme de mise
 	// en forme (paragraphes, raccourcis...)
 	//
-	// ATTENTION : si vous modifiez cette partie, modifiez les DEUX
-	// branches de l'alternative (if (!flag_pcre).../else).
-	//
 
 	$letexte = "\n".trim($letexte);
 
@@ -871,75 +857,53 @@ function traiter_raccourcis_generale($letexte) {
 		$letexte = traiter_listes($letexte);
 
 	// autres raccourcis
-	if (!$flag_pcre) {
-		/* note : on pourrait se passer de cette branche, car ereg_remplace() fonctionne
-		   sans pcre ; toutefois les elements ci-dessous sont un peu optimises (str_replace
-		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
-		   permet de gagner un peu de temps chez les hergeurs nazes */
-		$letexte = ereg_replace("\n(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
-		$letexte = ereg_replace("\n-- *", "\n<br />&mdash;&nbsp;",$letexte);
-		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
-		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
-		$letexte = ereg_replace("(( *)\n){2,}(<br[[:space:]]*\/?".">)?", "<p>", $letexte);
-		$letexte = str_replace("{{{", "@@SPIP_debut_intertitre@@", $letexte);
-		$letexte = str_replace("}}}", "@@SPIP_fin_intertitre@@", $letexte);
-		$letexte = str_replace("{{", "<b class=\"spip\">", $letexte);
-		$letexte = str_replace("}}", "</b>", $letexte);
-		$letexte = str_replace("{", "<i class=\"spip\">", $letexte);
-		$letexte = str_replace("}", "</i>", $letexte);
-		$letexte = eregi_replace("(<br[[:space:]]*/?".">)+(<p>|<br[[:space:]]*/?".">)", "<p class=\"spip\">", $letexte);
-		$letexte = str_replace("<p>", "<p class=\"spip\">", $letexte);
-		$letexte = str_replace("\n", " ", $letexte);
-		$letexte = str_replace("<quote>", "<div class=\"spip_quote\">", $letexte);
-		$letexte = str_replace("<\/quote>", "</div>", $letexte);
-		$letexte = ereg_replace("^ <br />", "", $letexte);
-	}
-	else {
-		$cherche1 = array(
-			/* 0 */ 	"/\n(----+|____+)/",
-			/* 1 */ 	"/\n-- */",
-			/* 2 */ 	"/\n- */",
-			/* 3 */ 	"/\n_ +/",
-			/* 4 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/",
-			/* 5 */ 	"/\{\{\{/",
-			/* 6 */ 	"/\}\}\}/",
-			/* 7 */ 	"/\{\{/",
-			/* 8 */ 	"/\}\}/",
-			/* 9 */ 	"/\{/",
-			/* 10 */	"/\}/",
-			/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
-			/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
-			/* 13 */	"/<p>/",
-			/* 14 		"/\n/", */
-			/* 15 */	"/<quote>/",
-			/* 16 */	"/<\/quote>/"
-		);
-		$remplace1 = array(
-			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
-			/* 1 */ 	"\n<br />&mdash;&nbsp;",
-			/* 2 */ 	"\n<br />$puce&nbsp;",
-			/* 3 */ 	"\n<br />",
-			/* 4 */ 	"<p>",
-			/* 5 */ 	"@@SPIP_debut_intertitre@@",
-			/* 6 */ 	"@@SPIP_fin_intertitre@@",
-			/* 7 */ 	"<b class=\"spip\">",
-			/* 8 */ 	"</b>",
-			/* 9 */ 	"<i class=\"spip\">",
-			/* 10 */	"</i>",
-			/* 11 */	"<p class=\"spip\">",
-			/* 12 */	"<p class=\"spip\">",
-			/* 13 */	"<p class=\"spip\">",
-			/* 14 		" ", */
-			/* 15 */	"\n\n<blockquote class=\"spip\"><p class=\"spip\">",
-			/* 16 */	"</p></blockquote>\n\n"
-		);
-		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
-		$letexte = preg_replace("@^ <br />@", "", $letexte);
-	}
+	$cherche1 = array(
+		/* 0 */ 	"/\n(----+|____+)/",
+		/* 1 */ 	"/\n-- */",
+		/* 2 */ 	"/\n- */",
+		/* 3 */ 	"/\n_ +/",
+		/* 4 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/",
+		/* 5 */ 	"/\{\{\{/",
+		/* 6 */ 	"/\}\}\}/",
+		/* 7 */ 	"/\{\{/",
+		/* 8 */ 	"/\}\}/",
+		/* 9 */ 	"/\{/",
+		/* 10 */	"/\}/",
+		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
+		/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
+		/* 13 */	"/<p>/",
+		/* 14 		"/\n/", */
+		/* 15 */	"/<quote>/",
+		/* 16 */	"/<\/quote>/"
+	);
+	$remplace1 = array(
+		/* 0 */ 	"@@SPIP_ligne_horizontale@@",
+		/* 1 */ 	"\n<br />&mdash;&nbsp;",
+		/* 2 */ 	"\n<br />$puce&nbsp;",
+		/* 3 */ 	"\n<br />",
+		/* 4 */ 	"<p>",
+		/* 5 */ 	"@@SPIP_debut_intertitre@@",
+		/* 6 */ 	"@@SPIP_fin_intertitre@@",
+		/* 7 */ 	"<b class=\"spip\">",
+		/* 8 */ 	"</b>",
+		/* 9 */ 	"<i class=\"spip\">",
+		/* 10 */	"</i>",
+		/* 11 */	"<p class=\"spip\">",
+		/* 12 */	"<p class=\"spip\">",
+		/* 13 */	"<p class=\"spip\">",
+		/* 14 		" ", */
+		/* 15 */	"\n\n<blockquote class=\"spip\"><p class=\"spip\">",
+		/* 16 */	"</p></blockquote>\n\n"
+	);
+	$letexte = preg_replace($cherche1, $remplace1, $letexte);
+	$letexte = preg_replace("@^ <br />@", "", $letexte);
 
 	// paragrapher
-	if (strpos(' '.$letexte, '<p class="spip">'))
+	if (strpos(' '.$letexte, '<p class="spip">')) {
 		$letexte = '<p class="spip">'.str_replace('<p class="spip">', "</p>\n".'<p class="spip">', $letexte).'</p>';
+		$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*</no p>', '', $letexte);
+		$letexte = ereg_replace('<no p>[[:space:]]*(</p>)?', '', $letexte);
+	}
 
 	// intertitres / hr / blockquote / table / ul compliants
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
