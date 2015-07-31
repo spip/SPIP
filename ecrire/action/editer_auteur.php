@@ -238,6 +238,42 @@ function action_legender_auteur_post($statut, $nom, $email, $bio, $nom_site_aute
 }
 
 
+
+function insert_auteur($source='spip') {
+
+	// Ce qu'on va demander comme modifications
+	$champs = array();
+	$champs['source'] = $source;
+
+	$champs['login'] = '';
+	$champs['statut'] = '5poubelle';  // inutilisable tant qu'il n'a pas ete renseigne et institue
+	$champs['webmestre'] = 'non';
+
+	// Envoyer aux plugins
+	$champs = pipeline('pre_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+			),
+			'data' => $champs
+		)
+	);
+	$id_auteur = sql_insertq("spip_auteurs", $c);
+
+	// recuperer l'eventuel logo charge avant la creation
+	if ($id_auteur) {
+		$id_hack = 0 - $GLOBALS['visiteur_session']['id_auteur'];
+		$chercher_logo = charger_fonction('chercher_logo', 'inc');
+		if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
+			rename($logo, str_replace($id_hack, $id_auteur, $logo));
+		if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
+			rename($logo, str_replace($id_hack, $id_auteur, $logo));
+	}
+
+	return $id_auteur;
+}
+
+
 // Appelle toutes les fonctions de modification d'un auteur
 function auteur_set($id_auteur) {
 	$err = '';
