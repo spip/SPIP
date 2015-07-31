@@ -3431,7 +3431,7 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb',$vars=a
 
 /**
  * Fonction de base pour une icone dans un squelette
- * structure html : <span><a><img><b>texte</b></span>
+ * structure html : `<span><a><img><b>texte</b></span>`
  *
  * @param string $type
  *  'lien' ou 'bouton'
@@ -3502,22 +3502,166 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction="", $class=""
 		return bouton_action("$icone<b>$texte</b>",$lien,"icone s$size $class",$javascript,$alt);
 }
 
+/**
+ * Crée un lien ayant une icone
+ *
+ * @use prepare_icone_base()
+ * 
+ * @param string $texte
+ *     Texte du lien
+ * @param string $lien
+ *     URL du lien
+ * @param string $fond
+ *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
+ * @param string $fonction
+ *     Fonction du lien (`edit`, `new`, `del`)
+ * @param string $class
+ *     Classe CSS, tel que `left`, `right` pour définir un alignement
+ * @param string $javascript
+ *     Javascript ajouté sur le lien
+ * @return string
+ *     Code HTML du lien
+**/
 function icone_base($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
 	return prepare_icone_base('lien', $lien, $texte, $fond, $fonction, $class, $javascript);
 }
+
+/**
+ * Crée un lien précédé d'une icone au dessus du texte
+ *
+ * @uses icone_base()
+ * @see icone_verticale() Pour un usage dans un code PHP.
+ *
+ * @filtre icone_verticale
+ * @example
+ *     ```
+ *     [(#AUTORISER{voir,groupemots,#ID_GROUPE})
+ *         [(#URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE}
+ *            |icone_verticale{<:mots:icone_voir_groupe_mots:>,groupe_mots-24.png,'',left})]
+ *    ]
+ *     ```
+ *
+ * @param string $lien
+ *     URL du lien
+ * @param string $texte
+ *     Texte du lien
+ * @param string $fond
+ *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
+ * @param string $fonction
+ *     Fonction du lien (`edit`, `new`, `del`)
+ * @param string $class
+ *     Classe CSS à ajouter, tel que `left`, `right`, `center` pour définir un alignement.
+ *     Il peut y en avoir plusieurs : `left ajax`
+ * @param string $javascript
+ *     Javascript ajouté sur le lien
+ * @return string
+ *     Code HTML du lien
+**/
 function filtre_icone_verticale_dist($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
 	return icone_base($lien,$texte,$fond,$fonction,"verticale $class",$javascript);
 }
+
+/**
+ * Crée un lien précédé d'une icone horizontale
+ *
+ * @uses icone_base()
+ * @see icone_horizontale() Pour un usage dans un code PHP.
+ * 
+ * @filtre icone_horizontale
+ * @example
+ *     En tant que filtre dans un squelettes :
+ *     ```
+ *     [(#URL_ECRIRE{sites}|icone_horizontale{<:sites:icone_voir_sites_references:>,site-24.png})]
+ *
+ *     [(#AUTORISER{supprimer,groupemots,#ID_GROUPE}|oui)
+ *         [(#URL_ACTION_AUTEUR{supprimer_groupe_mots,#ID_GROUPE,#URL_ECRIRE{mots}}
+ *             |icone_horizontale{<:mots:icone_supprimer_groupe_mots:>,groupe_mots,del})]
+ *     ]
+ *     ```
+ *
+ *     En tant que filtre dans un code php :
+ *     ```
+ *     $icone_horizontale=chercher_filtre('icone_horizontale');
+ *     $icone = $icone_horizontale(generer_url_ecrire("stats_visites","id_article=$id_article"),
+ *         _T('statistiques:icone_evolution_visites', array('visites' => $visites)),
+ *         "statistique-24.png");
+ *     ```
+ * 
+ * @param string $lien
+ *     URL du lien
+ * @param string $texte
+ *     Texte du lien
+ * @param string $fond
+ *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
+ * @param string $fonction
+ *     Fonction du lien (`edit`, `new`, `del`)
+ * @param string $class
+ *     Classe CSS à ajouter
+ * @param string $javascript
+ *     Javascript ajouté sur le lien
+ * @return string
+ *     Code HTML du lien
+**/
 function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction="", $class="",$javascript=""){
 	return icone_base($lien,$texte,$fond,$fonction,"horizontale $class",$javascript);
 }
 
+/**
+ * Crée un bouton d'action intégrant une icone horizontale
+ *
+ * @uses prepare_icone_base()
+ * 
+ * @filtre bouton_action_horizontal
+ * @example
+ *     ```
+ *     [(#URL_ACTION_AUTEUR{supprimer_mot, #ID_MOT, #URL_ECRIRE{groupe_mots,id_groupe=#ID_GROUPE}}
+ *         |bouton_action_horizontal{<:mots:info_supprimer_mot:>,mot-24.png,del})]
+ *     ```
+ * 
+ * @param string $lien
+ *     URL de l'action
+ * @param string $texte
+ *     Texte du bouton
+ * @param string $fond
+ *     Objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
+ * @param string $fonction
+ *     Fonction du bouton (`edit`, `new`, `del`)
+ * @param string $class
+ *     Classe CSS à ajouter
+ * @param string $confirm
+ *     Message de confirmation à ajouter en javascript sur le bouton
+ * @return string
+ *     Code HTML du lien
+**/
 function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction="", $class="",$confirm=""){
 	return prepare_icone_base('bouton', $lien, $texte, $fond, $fonction, "horizontale $class", $confirm);
 }
-/*
- * Filtre icone pour compatibilite
- * mappe sur icone_base
+
+/**
+ * Filtre `icone` pour compatibilité mappé sur `icone_base`
+ *
+ * @uses icone_base()
+ * @see filtre_icone_verticale_dist()
+ * 
+ * @filtre icone
+ * @deprecated Utiliser le filtre `icone_verticale`
+ *
+ * @param string $lien
+ *     URL du lien
+ * @param string $texte
+ *     Texte du lien
+ * @param string $fond
+ *     Nom de l'image utilisée
+ * @param string $class
+ *     Classe CSS d'alignement (`left`, `right`, `center`)
+ * @param string $fonction
+ *     Fonction du lien (`edit`, `new`, `del`)
+ * @param string $class
+ *     Classe CSS à ajouter
+ * @param string $javascript
+ *     Javascript ajouté sur le lien
+ * @return string
+ *     Code HTML du lien
  */
 function filtre_icone_dist($lien, $texte, $fond, $align="", $fonction="", $class="",$javascript=""){
 	return icone_base($lien,$texte,$fond,$fonction,"verticale $align $class",$javascript);
