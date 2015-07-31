@@ -188,6 +188,6 @@ if (function_exists('affiche_auteur_info'))
  else
   $var_nom = 'affiche_auteur_info_dist';
 
-$var_nom($id_auteur, $auteur,  $echec);
+$var_nom($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article);
 
 ?>
