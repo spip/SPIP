@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Afficher le formulaire de choix de rubrique restreinte
  * pour insertion dans le formulaire

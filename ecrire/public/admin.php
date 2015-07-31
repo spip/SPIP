@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Inserer la feuille de style selon les normes, dans le <head>
 // puis les boutons
 // Feuilles de style admin : d'abord la CSS officielle, puis la perso
