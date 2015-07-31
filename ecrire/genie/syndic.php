@@ -83,7 +83,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	sql_updateq('spip_syndic', array('syndication'=>sql_quote($statut), 'date_syndic'=>date('Y-m-d H:i:s')), "id_syndic=$now_id_syndic");
+	sql_updateq('spip_syndic', array('syndication'=>$statut, 'date_syndic'=>date('Y-m-d H:i:s')), "id_syndic=$now_id_syndic");
 
 	// Aller chercher les donnees du RSS et les analyser
 	include_spip('inc/distant');

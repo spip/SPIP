@@ -212,4 +212,10 @@ array('sql_alter',"TABLE spip_auteurs ADD webmestre varchar(3)  DEFAULT 'non' NO
 array('sql_update','spip_auteurs',array('webmestre'=>"'oui'"),sql_in("id_auteur",defined('_ID_WEBMESTRES')?explode(':',_ID_WEBMESTRES):(autoriser('configurer')?array($GLOBALS['visiteur_session']['id_auteur']):array(0)))) // le webmestre est celui qui fait l'upgrade si rien de defini
 )
 ;
+
+// sites plantes en mode "'su" au lieu de "sus"
+$GLOBALS['maj'][13929] = array(
+	array('sql_update',"spip_syndic",array('syndication'=>"'sus'"),"syndication LIKE '\\'%'")
+);
+
 ?>
