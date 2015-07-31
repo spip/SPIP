@@ -41,12 +41,10 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
 	if (!$lang) $lang = $spip_lang;
-
-
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
-	$ret = ($num_barre > 0)  ? '' :
+	$ret = ($num_barre > 1)  ? '' :
 	  '<script type="text/javascript" src="' . _DIR_IMG_PACK. 'spip_barre.js"></script>';
 	$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	$ret .= "\n<tr width='100%' class='spip_barre'>";
@@ -120,6 +118,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";
+	$num_barre++;
 	return $ret;
 }
 
