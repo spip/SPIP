@@ -56,7 +56,7 @@ function affiche_rss_rss($rss, $intro = '') {
 		usort($rss, 'trier_par_date');
 		foreach ($rss as $article) {
 			if ($article['email'])
-				$article['author'].=' &lt;'.$article['email'].'&gt;';
+				$article['author'].=' <'.$article['email'].'>';
 			$u .= '
 	<item>
 		<title>'.texte_backend($article['title']).'</title>
