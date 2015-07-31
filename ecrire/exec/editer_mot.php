@@ -36,12 +36,12 @@ function exec_editer_mot_dist()
 	if (!$droit) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
-	$ch = _request('cherche_mot');
-	$id_groupe = _request('select_groupe');
-	$editer_mot = charger_fonction('editer_mot', 'inc');
-	ajax_retour($editer_mot($objet, $id_objet, $ch, $id_groupe, 'ajax')); 
+		$ch = _request('cherche_mot');
+		$id_groupe = _request('select_groupe');
+		$editer_mot = charger_fonction('editer_mot', 'inc');
+		ajax_retour($editer_mot($objet, $id_objet, $ch, $id_groupe, 'ajax')); 
+	}
 }
 ?>

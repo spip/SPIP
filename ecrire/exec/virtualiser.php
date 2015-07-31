@@ -20,18 +20,18 @@ function exec_virtualiser_dist()
 	if (!autoriser('modifier', 'article', $id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
+	} else {
+		include_spip('inc/actions');
+		$r = sql_fetsel("chapo", "spip_articles", "id_article=$id_article");
+
+		$virtuel = $r['chapo'];
+
+		if (substr($virtuel, 0, 1) == '=') {
+			$virtuel = substr($virtuel, 1);
+		}
+
+		$virtualiser = charger_fonction('virtualiser', 'inc');
+		ajax_retour($virtualiser($id_article, $virtuel, "articles", "id_article=$id_article"));
 	}
-	include_spip('inc/actions');
-	$r = sql_fetsel("chapo", "spip_articles", "id_article=$id_article");
-
-	$virtuel = $r['chapo'];
-
-	if (substr($virtuel, 0, 1) == '=') {
-		$virtuel = substr($virtuel, 1);
-	}
-
-	$virtualiser = charger_fonction('virtualiser', 'inc');
-	ajax_retour($virtualiser($id_article, $virtuel, "articles", "id_article=$id_article"));
 }
 ?>

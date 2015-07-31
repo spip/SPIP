@@ -20,11 +20,10 @@ function exec_documenter_dist()
 	$album = !_request("s") ? 'documents' :  'portfolio';
 	$id = intval(_request(id_table_objet($type)));
 
-	if (!autoriser('modifier', $type, $id)) {
+	if (!$id OR !autoriser('modifier', $type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	include_spip('inc/actions');
 	$documenter = charger_fonction('documenter', 'inc');
@@ -34,5 +33,6 @@ function exec_documenter_dist()
 	 ajax_retour("<div class='upload_answer upload_document_added'>".$res."</div>",false);
 	}	else 
 	 ajax_retour($documenter($id, $type, $album, 'ajax', '', $script));
+	}
 }
 ?>

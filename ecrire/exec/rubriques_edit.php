@@ -21,6 +21,7 @@ function exec_rubriques_edit_dist()
 	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $spip_lang_right;
 
 	$new = _request('new');
+	$titre = false;
 
 	if ($new == "oui") {
 		$id_rubrique = 0;
@@ -38,7 +39,7 @@ function exec_rubriques_edit_dist()
 
 		$row = sql_fetsel("*", "spip_rubriques", "id_rubrique=$id_rubrique");
 	
-		if (!$row) exit;
+		if ($row) {
 	
 		$id_parent = $row['id_parent'];
 		$titre = $row['titre'];
@@ -47,17 +48,17 @@ function exec_rubriques_edit_dist()
 		$id_secteur = $row['id_secteur'];
 		$extra = $row["extra"];
 		$onfocus = '';
+		}
 	}
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
-	if ($connect_statut !='0minirezo'
+	if ($titre === false
+        OR $connect_statut !='0minirezo'
 	OR ($new=='oui' AND !autoriser('creerrubriquedans','rubrique',$id_parent))
 	OR ($new!='oui' AND !autoriser('modifier','rubrique',$id_rubrique)))  {
-		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
-	}
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 
 	pipeline('exec_init',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));
 	echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
@@ -162,5 +163,6 @@ function exec_rubriques_edit_dist()
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 
 	echo fin_gauche(), fin_page();
+	}
 }
 ?>

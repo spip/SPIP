@@ -25,11 +25,11 @@ function exec_install_dist()
   // L'etape chmod peut etre reexecutee n'importe quand apres l'install,
   // pour verification des chmod. Sinon, install deja faite => refus.
 		echo minipres();
-		exit;
+	} else {
+		include_spip('base/create');
+		$fonc = charger_fonction("etape_$etape", 'install');
+		$fonc();
 	}
-	include_spip('base/create');
-	$fonc = charger_fonction("etape_$etape", 'install');
-	$fonc();
 }
 
 //  Pour ecrire les fichiers memorisant les parametres de connexion

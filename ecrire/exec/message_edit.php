@@ -43,8 +43,7 @@ function exec_message_edit_dist()
 	if (!($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo'))) {
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else {
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_message_edit'), "accueil", "messagerie");
@@ -116,6 +115,7 @@ function exec_message_edit_dist()
 	echo redirige_action_auteur('editer_message', $id_message, 'message',"id_message=$id_message", $res, " method='post'");
 
 	echo fin_gauche(), fin_page();
+	}
 }
 
 // http://doc.spip.org/@afficher_si_rdv

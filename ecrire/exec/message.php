@@ -25,23 +25,23 @@ function exec_message_dist()
 	$forcer_dest = _request('forcer_dest');
 	$cherche_auteur = _request('cherche_auteur');
 
-	$row = sql_fetsel("type", "spip_messages", "id_message=$id_message");
+	$res = sql_getfetsel("type", "spip_messages", "id_message=$id_message");
 
-	if ($row['type'] != "affich"){
+	if ($res AND $res != "affich")
 		$res = sql_fetsel("vu", "spip_auteurs_messages", "id_auteur=$connect_id_auteur AND id_message=$id_message");
-		if (!$res) {
-			include_spip('inc/minipres');
-			echo minipres();
-			exit;
-		}
+
+	if (!$res) {
+		include_spip('inc/minipres');
+		echo minipres();
+	} else {
 	// Marquer le message vu pour le visiteur
-		if ($res['vu'] != 'oui') {
+		if (is_array($res) AND $res['vu'] != 'oui') {
 			include_spip('inc/headers');
 			redirige_par_entete(redirige_action_auteur("editer_message","$id_message/:$connect_id_auteur", 'message', "id_message=$id_message", true));
 		}
+		charger_generer_url();
+		exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest);
 	}
-	charger_generer_url();
-	exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest);
 }
 
 // http://doc.spip.org/@http_afficher_rendez_vous

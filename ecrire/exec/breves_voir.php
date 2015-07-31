@@ -14,40 +14,36 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions');
-include_spip('base/abstract_sql');
 include_spip("inc/indexation");
 
-// http://doc.spip.org/@afficher_breves_voir
-function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
+// http://doc.spip.org/@exec_breves_voir_dist
+function exec_breves_voir_dist()
 {
-	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
-	$result = sql_select("*", "spip_breves", "id_breve=$id_breve");
-
-	if ($row = sql_fetch($result)) {
-		$id_breve=$row['id_breve'];
-		$date_heure=$row['date_heure'];
-		$titre_breve=$row['titre'];
-		$titre=$row['titre'];
-		$texte=$row['texte'];
-		$extra=$row['extra'];
-		$lien_titre=$row['lien_titre'];
-		$lien_url=$row['lien_url'];
-		$statut=$row['statut'];
-		$id_rubrique=$row['id_rubrique'];
-	}
-	else {
+	$id_breve = intval(_request('id_breve'));
+	$row = sql_fetsel("*", "spip_breves", "id_breve=$id_breve");
+	if (!$row OR !autoriser('voir','breve',$id_breve)){
 		include_spip('inc/minipres');
 		echo minipres();
-		exit;
-	}
+	} else afficher_breves_voir($row, $id_breve, _request('cherche_mot'), _request('select_groupe'));
+}
+
+// http://doc.spip.org/@afficher_breves_voir
+function afficher_breves_voir($row, $id_breve, $cherche_mot, $select_groupe)
+{
+	global $champs_extra, $les_notes, $spip_display, $spip_lang_left, $spip_lang_right;
+
+	$id_breve=$row['id_breve'];
+	$date_heure=$row['date_heure'];
+	$titre_breve=$row['titre'];
+	$titre=$row['titre'];
+	$texte=$row['texte'];
+	$extra=$row['extra'];
+	$lien_titre=$row['lien_titre'];
+	$lien_url=$row['lien_url'];
+	$statut=$row['statut'];
+	$id_rubrique=$row['id_rubrique'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	if (!autoriser('voir','breve',$id_breve)){
-		echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
-	}
 
 	$flag_editable = autoriser('modifier','breve',$id_breve);
 
@@ -112,10 +108,6 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	/* raccourcis ont disparu */
 	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", 0));
 
-
-
-
-
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	$actions = $flag_editable
@@ -129,7 +121,6 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			$GLOBALS['spip_lang_right']
 			)
 		: "";
-
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>"
@@ -156,14 +147,12 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	$onglet_documents = "";
 	
-	$onglet_interactivite = ""
-		;
+	$onglet_interactivite = "";
 		
 	$onglet_discuter = 
 	  icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire', "forum-interne-24.gif", "creer.gif", 'center')
 		. afficher_forum(sql_select("*", 'spip_forum', "statut='prive' AND id_breve=$id_breve AND id_parent=0",'', "date_heure DESC",  "20"), "breves_voir", "id_breve=$id_breve")
 	  ;
-
 
 	echo 
 		debut_droite('', true)
@@ -222,12 +211,6 @@ function langue_breve($id_breve, $row){
 	
 	$res .= fin_cadre_enfonce(true);
 	return $res;
-}
-
-// http://doc.spip.org/@exec_breves_voir_dist
-function exec_breves_voir_dist()
-{
-	afficher_breves_voir(intval(_request('id_breve')), _request('cherche_mot'), _request('select_groupe'));
 }
 
 

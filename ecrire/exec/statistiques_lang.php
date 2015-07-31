@@ -17,13 +17,15 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_statistiques_lang_dist
 function exec_statistiques_lang_dist()
 {
-	global $spip_ecran, $spip_lang_right;
-
         if (!autoriser('voirstats')) {
           include_spip('inc/minipres');
           echo minipres();
-          exit;
-	}
+	} else statistiques_lang_ok();
+}
+
+function statistiques_lang_ok()
+{
+	global $spip_ecran, $spip_lang_right;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('onglet_repartition_lang'), "statistiques_visites", "repartition-langues");

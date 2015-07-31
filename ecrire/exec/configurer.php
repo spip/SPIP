@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@exec_configurer_dist
 function exec_configurer_dist()
 {
-	$configuration = charger_fonction(_request('configuration'), 'configuration');
-	ajax_retour($configuration());
+	$configuration = charger_fonction(_request('configuration'), 'configuration', true);
+	ajax_retour($configuration ? $configuration() : 'configure quoi?');
 }
 ?>
