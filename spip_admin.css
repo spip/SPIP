@@ -2,7 +2,7 @@
 .spip-admin-float {
 	top: 0px;
 	right: 20px;
-	position: fixed;
+	position: absolute;
 	z-index: 100;
 }
 
