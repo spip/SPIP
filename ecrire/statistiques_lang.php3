@@ -145,9 +145,10 @@ debut_cadre_enfonce("langues-24.gif");
 		$query = "SELECT SUM(".$critere.") AS total_visites FROM spip_articles";
 		$result = spip_query($query);
 		$visites = 1;
-		if ($row = spip_fetch_array($result)) {
+		if ($row = spip_fetch_array($result))
 			$total_visites = $row['total_visites'];
-		}
+		else
+			$total_visites = 1;
 		echo "<p>";
 
 
