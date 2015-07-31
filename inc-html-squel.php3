@@ -335,7 +335,7 @@ function phraser_criteres($params, &$result) {
 
 	$args = array();
 	$type = $result->type_requete;
-	$doublons = "";
+	$doublons = array();
 	foreach($params as $v) {
 		$var = $v[1][0];
 		$param = ($var->type != 'texte') ? "" : $var->texte;
@@ -440,11 +440,8 @@ function phraser_criteres($params, &$result) {
 			  }
 			  if ((!ereg('^!?doublons *', $param)) || $crit->not)
 			    $args[] = $crit;
-			  elseif (!$doublons)
-			    $doublons = $crit;
 			  else 
-			    erreur_squelette(_T('zbug_critere_inconnu',
-						array('critere' => '2 doublons')));
+			    $doublons[] = $crit;
 			}
 		  }
 		}
@@ -452,7 +449,7 @@ function phraser_criteres($params, &$result) {
 	// les doublons non nies doivent etre le dernier critere
 	// pour que la variable $doublon_index ait la bonne valeur
 	// cf critere_doublon
-	if ($doublons) $args[] = $doublons;
+	if ($doublons) $args= array_merge($args, $doublons);
 	$result->criteres = $args;
 }
 
