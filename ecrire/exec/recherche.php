@@ -157,9 +157,9 @@ function afficher_auteurs ($titre_table, $requete) {
 
 	if ($titre_table) {
 			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
-			echo "<tr><td width='100%'>";
+			echo "<tr><td style='width: 100%'>";
 			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>";
+			echo "<tr bgcolor='#333333'><td style='width: 100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>";
 			echo "<b>$titre_table</b></font></td></tr>";
 		}
 	else {

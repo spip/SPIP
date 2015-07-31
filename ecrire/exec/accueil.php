@@ -200,14 +200,14 @@ if (/* $connect_statut == "0minirezo" AND */ $spip_display != 4) {
 		$cookie = rawurlencode("@$connect_login");
 		$gadget .= "<div>&nbsp;</div>".
 			"<table width='95%'><tr>".
-			"<td width='100%'>".
+			"<td style='width: 100%'>".
 			_T('info_activer_cookie').
 			aide ("cookie").
 			"</td>".
-			"<td width='10'>".
+			"<td style='width: 10px'>".
 			http_img_pack("rien.gif", ' ', "width='10'") .
 			"</td>".
-			"<td width='250'>".
+			"<td style='width: 250px'>".
 			icone_horizontale(_T('icone_activer_cookie'), generer_url_public('spip_cookie', "cookie_admin=$cookie&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "", false).
 			"</td></tr></table>";
 	}

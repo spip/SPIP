@@ -184,8 +184,8 @@ function help_body($aide, $html, $lang_aide='') {
 
 	if ($aide == 'spip') {
 		echo '<table border="0" width="100%" height="60%">
-<tr width="100%" height="60%">
-<td width="100%" height="60%" align="center" valign="middle">
+<tr style="width: 100%" height="60%">
+<td style="width: 100%" height="60%" align="center" valign="middle">
 <center>
 <img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif", false, true),
 		  '" alt="SPIP" width="300" height="170" border="0" />

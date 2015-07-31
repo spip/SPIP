@@ -183,7 +183,7 @@ function forum_envoi_formulaire($id, $objet, $script, $statut, $texte, $titre_pa
 	  ."</td>"
 	  ."\n<td><img src='"
 	  . _DIR_IMG_PACK
-	  . "rien.gif' width='10' border='0' alt=''/></td><td width=\"100%\">"
+	  . "rien.gif' width='10' border='0' alt=''/></td><td style='width: 100%'>"
 	  ."<b><label for='titre_message'>"
 	  . _T('info_titre')
 	  ."</label></b><br />\n"
@@ -231,7 +231,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
 		. "\n<tr>"
 		. (!$parent ? "<td colsan='2'"
-			: (" <td width='10' height='13' valign='top' background='"
+			: (" <td style='width: 10px' height='13' valign='top' background='"
 			   . _DIR_IMG_PACK
 			   . "forum-vert.gif'" 
 			   . ">"
@@ -248,7 +248,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 		. "</td>"
 		. "</tr>\n"
 		. (!$parent ? ''
-			: ("<tr><td width='10' valign='top' background='"
+			: ("<tr><td style='width: 10px' valign='top' background='"
 			  . _DIR_IMG_PACK
 			  . "rien.gif'>"
 			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, "width='10' height='13' border='0'")

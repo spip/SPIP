@@ -95,12 +95,12 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				
 				
 				echo "</span>";
-				echo "</td>\n<td align='right' width='".($taille+5)."' style='border-bottom: 1px solid #aaaaaa;'>";
+				echo "</td>\n<td align='right' style='border-bottom: 1px solid #aaaaaa; width:" . ($taille+5) ."px'>";
 				
 				
 				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='".($decalage+1+$gauche)."'>";
 				echo "\n<tr>";
-				if ($gauche > 0) echo "<td width='".$gauche."'></td>";
+				if ($gauche > 0) echo "<td style='width: " .$gauche."px'></td>";
 				echo "\n<td style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='".$visites_abs."' height='8' border='0' alt= ' '/>";
 				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' width='$largeur_rouge' height='8' border='0' alt=' ' />";
@@ -145,7 +145,7 @@ function exec_statistiques_repartition_dist()
 		$taille = 400;
 	}
 
-	echo "\n<br /><br /><center><table width='$largeur_table'><tr><td width='$largeur_table' class='verdana2' style='text-align: center'>";
+	echo "\n<br /><br /><center><table width='$largeur_table'><tr><td class='verdana2' style='text-align: center;  width: $largeur_table" . "px;'>";
 	gros_titre(_T('titre_page_statistiques'));
 
 	if ($critere == "debut") {

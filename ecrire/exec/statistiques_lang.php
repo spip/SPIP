@@ -28,7 +28,7 @@ function exec_statistiques_lang_dist()
 		$largeur_table = 750;
 	}
 	$taille = $largeur_table - 200;	
-	echo "<center><table width='$largeur_table'><tr><td width='$largeur_table' class='verdana2'>";
+	echo "<center><table width='$largeur_table'><tr><td style='width: $largeur_table" . "px;' class='verdana2'>";
 	echo "<br /><br />";
 	echo "<center>";
 	gros_titre(_T('onglet_repartition_lang'));
@@ -90,7 +90,7 @@ function exec_statistiques_lang_dist()
 	
 				echo "\n<tr bgcolor='$couleur'>";
 				$dir=lang_dir($lang,'',' dir=rtl');
-				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><span style='float: $spip_lang_right;'>$pourcent%</span>".traduire_nom_langue($lang)."</span></td>";
+				echo "<td style='width: 100%; border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><span style='float: $spip_lang_right;'>$pourcent%</span>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
 				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='".($taille+5)."'>";

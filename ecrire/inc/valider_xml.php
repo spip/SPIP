@@ -61,6 +61,8 @@ function charger_dtd($data)
 function analyser_dtd($grammaire, $avail, &$dtc)
 {
 
+	static $trace = array(); // pour debug
+
 	$dtd = '';
 	if ($avail == 'SYSTEM')
 	  $file = $grammaire;
@@ -89,10 +91,12 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	if (preg_match_all('/<!ENTITY\s+(%?)\s*([.\w]+)\s+(PUBLIC|SYSTEM)?\s*"([^"]*)"\s*("([^"]*)")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
 		foreach($r as $m) {
 		  list($t, $term, $nom, $type, $val, $q, $alt) = $m;
-		  if ($type) {
-		    $dir = preg_replace(',/[^/]+$,', '/', $grammaire);
+		  if ($type AND $alt) {
+		    // valeur par defaut de $alt obscure. A etudier.
+			$dir = preg_replace(',/[^/]+$,', '/', $grammaire)
+			. ($alt ? $alt : "loose.dtd")  ;
 		    // en cas d'inclusion, l'espace de nom est le meme
-		    analyser_dtd($dir . $alt, $type, $dtc);
+		    analyser_dtd($dir, $type, $dtc);
 		  }
 		  elseif (!$term) {
 		    $dtc->entites[$nom] = $val;
@@ -123,7 +127,6 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	  } 
 	}
 
-	$res2 = array();
 
 	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
@@ -134,7 +137,7 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 		foreach($r2 as $m2) {
 			$v = preg_match('/^\w+$/', $m2[2]) ? $m2[2]
 			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
-			$res2[$v] = 1;
+			$trace[$v] = 1;
 			$att[$m2[1]] = array($v, $m2[5]);
 		}
 	    }
@@ -143,9 +146,9 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	}
 
 	// pour voir la liste des regep d'attributs:
-#	echo join('<br />', array_keys($res2));exit;
+#	echo join('<br />', array_keys($trace));exit;
 
-	spip_log("DTD $avail $grammaire ". strlen($dtd) . ' octets ' . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($res2) . " types différents d'attributs " . count($dtc->entites) . " entites");
+	spip_log("DTD $avail $grammaire ". strlen($dtd) . ' octets ' . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($trace) . " types différents d'attributs " . count($dtc->entites) . " entites");
 }
 
 // http://doc.spip.org/@expanserEntite

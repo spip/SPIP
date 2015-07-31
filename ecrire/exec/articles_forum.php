@@ -80,11 +80,10 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 
 	debut_boite_info();
 
-	echo "<p align='left'>",
-	  "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE='2'>",
+	echo "<p style='text-align: left: font-family: Verdana,Arial,Sans,sans-serif; font-size: 11px'>",
 	  _T('info_gauche_suivi_forum'),
 	  aide ("suiviforum"),
-	  "</font></p>";
+	  "</p>";
 
 	echo "<div style='text-align: "
 	  . $GLOBALS['spip_lang_right']
@@ -100,17 +99,16 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	debut_droite();
 
 	echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
-	echo "<tr width='100%'>";
+	echo "<tr>";
 	echo "<td>";
 	icone(_T('icone_retour'),
 		generer_url_ecrire($script, $args),
 		"article-24.gif", "rien.gif");
 	echo "</td>";
 	echo "<td>" . http_img_pack('rien.gif', " ", "width='10'") ."</td>\n";
-	echo "<td width='100%'>";
+	echo "<td style='width: 100%'>";
 	echo _T('texte_messages_publics');
 	gros_titre($titre);
 	echo "</td></tr></table>";
-	echo "<p>";
 }
 ?>

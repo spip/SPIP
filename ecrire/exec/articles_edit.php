@@ -122,7 +122,7 @@ function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article,
 		"<img src='" .
 	  	_DIR_IMG_PACK .	"rien.gif' width='10' alt='' />" .
 		"</td>\n" .
-		"<td width='100%'>" .
+		"<td style='width: 100%'>" .
 	 	_T('texte_modifier_article') .
 		gros_titre($titre,'',false) . 
 		"</td></tr></table><hr />\n";

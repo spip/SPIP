@@ -89,7 +89,7 @@ if ($new != "oui") {
 	
 	echo "</td>";
 	echo "\n<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";
-	echo "<td width='100%'>";
+	echo "<td style='width: 100%'>";
 	echo _T('info_modifier_breve');
 	gros_titre($titre);
 	echo "</td></tr></table><br />";
