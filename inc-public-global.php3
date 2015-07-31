@@ -205,13 +205,8 @@ function terminer_public_global() {
 		ecrire_stats();
 	}
 
-	// S'il n'y a pas eu de compilation de squelette
-	// il reste du temps pour une tache de fond, 
-	// ... Les serveurs etant devenus ce qu'il sont, precaution inutile
-	#	if (empty($GLOBALS['included_files']['inc-compilo.php3'])) {
-		include_ecrire('inc_cron.php3');
-		spip_cron();
-	# }
+	// Effectuer une tache de fond ?
+	cron();
 }
 
 // Cette fonction sert au dernier ob_start() de inc-public : elle

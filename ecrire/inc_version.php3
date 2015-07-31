@@ -966,6 +966,27 @@ function spip_timer($t='rien') {
 
 
 //
+// cron : verifie qu'il s'est ecoule $delai sec au moins et lance le cron
+// Note : ici on met 2 secondes par defaut entre les hits, mais
+// spip_background.php3 est plus gourmand (1 sec)... chiffres a optimiser
+// si on utilise spip_background.php3 de maniere plus complete
+//
+function cron($delai = 2) {
+	if (!$_REQUEST['forcer']) {
+		$touch = _DIR_SESSIONS.'.background';
+		if (!($exists = @file_exists($touch))
+		OR (@filemtime($touch) < time() - $delai)) {
+			touch($touch);
+			if (!$exists) chmod($touch, 0666);
+
+		include_ecrire('inc_cron.php3');
+		spip_cron();
+	}
+}
+
+}
+
+//
 // qq  fonctions service pour les 2 niveaux
 //
 function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
@@ -1018,7 +1039,7 @@ function creer_repertoire($base, $subdir) {
 //
 function redirige_par_entete($url) {
 	header("Location: $url");
-	include_ecrire('inc_cron.php3');
+#	include_ecrire('inc_cron.php3');
 #	spip_cron();
 	spip_log("redirige $url");
 	exit;

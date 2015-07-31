@@ -1,12 +1,14 @@
 <?php
+
 	include("inc_version.php3");
 
 	// En-tetes
 	$lastmodified = @filemtime("spip_style.php3");
 	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
-	@Header ("Content-Type: text/css");
+	if ($headers_only) exit;
 
-if (!$headers_only) {
+
+	@Header ("Content-Type: text/css");
 
 	// parano XSS
 	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left-$right", $regs);
@@ -32,8 +34,8 @@ if (!$headers_only) {
 body { 
 	font-family: Verdana,Arial,Sans,sans-serif; 
 	border: 0px;
-	scrollbar-face-color: white; 				
-	scrollbar-shadow-color: white; 				
+	scrollbar-face-color: white;
+	scrollbar-shadow-color: white;
 	scrollbar-highlight-color: white;
 	scrollbar-3dlight-color: <?php echo $couleur_claire; ?>;
 	scrollbar-darkshadow-color: white; 		
@@ -1375,11 +1377,4 @@ table.spip td {
 	padding: 1px;
 	text-align: left;
 	vertical-align: center;
- }
-<?php }
-if (_FILE_CONNECT) 
-  {	
-	include_ecrire('inc_cron.php3');
-	spip_cron();
-  }
-?>
+}

@@ -4,9 +4,9 @@ include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
 
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
-#$lastmodified = filemtime("aide_index.php3");
-#$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
-#if ($headers_only) exit;
+$lastmodified = filemtime("aide_index.php3");
+$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+if ($headers_only) exit;
 
 include_ecrire ("inc_layer.php3");
 include_ecrire ("inc_texte.php3");
