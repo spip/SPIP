@@ -72,11 +72,11 @@ if (strlen($recherche) > 0) {
 	if ($activer_moteur) {	// texte integral
 		include_ecrire ('inc_index');
 		list($hash_recherche,) = requete_hash ($recherche);
-		$query_articles_int = requete_txt_integral('article', $hash_recherche);
-		$query_breves_int = requete_txt_integral('breve', $hash_recherche);
-		$query_rubriques_int = requete_txt_integral('rubrique', $hash_recherche);
-		$query_sites_int = requete_txt_integral('syndic', $hash_recherche);
-		$query_auteurs_int = requete_txt_integral('auteur', $hash_recherche);
+		$query_articles_int = requete_txt_integral('spip_articles', $hash_recherche);
+		$query_breves_int = requete_txt_integral('spip_breves', $hash_recherche);
+		$query_rubriques_int = requete_txt_integral('spip_rubriques', $hash_recherche);
+		$query_sites_int = requete_txt_integral('spip_syndic', $hash_recherche);
+		$query_auteurs_int = requete_txt_integral('spip_auteurs', $hash_recherche);
 	}
 	
 	if ($query_articles)

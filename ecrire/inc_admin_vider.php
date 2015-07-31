@@ -160,7 +160,7 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 		echo _T('texte_moteur_recherche_active');
 	else {
 		echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";
-		$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index_articles"));
+		$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index"));
 		if ($row['cnt'])
 			echo _T('texte_commande_vider_tables_indexation');
 		else

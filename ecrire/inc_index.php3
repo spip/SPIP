@@ -13,6 +13,89 @@
 
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_ecrire('inc_base');
+
+// Quels formats sait-on extraire ?
+$GLOBALS['extracteur'] = array (
+	'txt'   => 'extracteur_txt',
+	'pas'   => 'extracteur_txt',
+	'c'     => 'extracteur_txt',
+	'css'   => 'extracteur_txt',
+	'html'  => 'extracteur_html'
+);
+
+// Indexation des elements de l'objet principal
+// 'champ'=>poids, ou 'champ'=>array(poids,min_long)
+global $INDEX_elements_objet;
+$INDEX_elements_objet['spip_articles'] = array('titre'=>8,'soustitre'=>5,'surtitre'=>5,'descriptif'=>4,'chapo'=>3,'texte'=>1,'ps'=>1,'nom_site'=>1,'extra|unserialize_join'=>1);
+$INDEX_elements_objet['spip_breves'] = array('titre'=>8,'texte'=>2,'extra|unserialize_join'=>1);
+$INDEX_elements_objet['spip_rubriques'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
+$INDEX_elements_objet['spip_auteurs'] = array('nom'=>array(5,2),'bio'=>1,'extra|unserialize_join'=>1);
+$INDEX_elements_objet['spip_mots'] = array('titre'=>8,'descriptif'=>5,'texte'=>1,'extra|unserialize_join'=>1);
+$INDEX_elements_objet['spip_signatures'] = array('nom_email'=>array(2,2),'ad_email'=>2,'nom_site'=>2,'url_site'=>1,'message'=>1);
+$INDEX_elements_objet['spip_syndic'] = array('nom_site'=>50,'descriptif'=>30,'url_site|contenu_page_accueil'=>1);
+$INDEX_elements_objet['spip_syndic_articles'] = array('titre'=>5);
+$INDEX_elements_objet['spip_forum'] = array('titre'=>3,'texte'=>2,'auteur'=>array(2,2),'email_auteur'=>2,'nom_site'=>2,'url_site'=>1);
+$INDEX_elements_objet['spip_documents'] = array('titre'=>20,'descriptif'=>10,'fichier|nettoie_nom_fichier'=>1);
+
+
+// Indexation des objets associes
+// 'objet'=>poids
+global $INDEX_objet_associes;
+$INDEX_objet_associes['spip_articles'] = array('spip_documents'=>1,'spip_auteurs'=>10,'mot'=>3);
+$INDEX_objet_associes['spip_breves'] = array('spip_documents'=>1,'spip_mots'=>3);
+$INDEX_objet_associes['spip_rubriques'] = array('spip_documents'=>1,'spip_mots'=>3);
+$INDEX_objet_associes['spip_syndic'] = array('spip_documents'=>1,'spip_mots'=>3);
+$INDEX_objet_associes['spip_documents'] = array('spip_mots'=>3);
+
+// Indexation des elements des objets associes
+// 'champ'=>poids, ou 'champ'=>array(poids,min_long)
+global $INDEX_elements_associes;
+$INDEX_elements_associes['spip_documents'] = array('titre'=>2,'descriptif'=>1);
+$INDEX_elements_associes['spip_auteurs'] = array('nom'=>1);
+$INDEX_elements_associes['spip_mots'] = array('titre'=>4,'descriptif'=>1);
+
+// Criteres d'indexation
+global $INDEX_critere_indexation;
+$INDEX_critere_indexation['spip_articles']="statut='publie'";
+$INDEX_critere_indexation['spip_breves']="statut='publie'";
+$INDEX_critere_indexation['spip_rubriques']="statut='publie'";
+$INDEX_critere_indexation['spip_syndic']="statut='publie'";
+$INDEX_critere_indexation['spip_forum']="statut='publie'";
+$INDEX_critere_indexation['spip_signatures']="statut='publie'";
+
+// Criteres de des-indexation (optimisation dans inc_optimiser)
+global $INDEX_critere_optimisation;
+$INDEX_critere_optimisation['spip_articles']="statut<>'publie'";
+$INDEX_critere_optimisation['spip_breves']="statut<>'publie'";
+$INDEX_critere_optimisation['spip_rubriques']="statut<>'publie'";
+$INDEX_critere_optimisation['spip_syndic']="statut<>'publie'";
+$INDEX_critere_optimisation['spip_forum']="statut<>'publie'";
+$INDEX_critere_optimisation['spip_signatures']="statut<>'publie'";
+
+// Nombre d'elements maxi a indexer a chaque iteration
+global $INDEX_iteration_nb_maxi;
+$INDEX_iteration_nb_maxi['spip_documents']=10;
+$INDEX_iteration_nb_maxi['spip_syndic']=1;
+
+
+// Filtres d'indexation
+function unserialize_join($extra){
+	return @join(' ', unserialize($extra));
+}
+function contenu_page_accueil($url){
+	$texte = '';
+	if ($GLOBALS['meta']["visiter_sites"] == "oui") {
+		include_ecrire('inc_distant');
+		spip_log ("indexation contenu syndic $url");
+		$texte = supprimer_tags(recuperer_page($url, true, false, 50000));
+	}
+	return $texte;
+}
+function nettoie_nom_fichier($fichier){
+	return preg_replace(',^(IMG/|.*://),', '', $fichier);
+}
+
 
 function separateurs_indexation($requete = false) {
 	// Merci a Herve Lefebvre pour son apport sur cette fonction
@@ -77,14 +160,65 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	}
 }
 
-function deja_indexe($type, $id_objet) {
-	$table_index = 'spip_index_'.table_objet($type);
-	$col_id = 'id_'.$type;
-	$query = "SELECT $col_id FROM $table_index WHERE $col_id=$id_objet LIMIT 1";
+
+function update_index_tables(){
+	global $tables_principales;
+	$liste_tables = liste_index_tables();
+	foreach(array_keys($tables_principales) as $new_table){
+		if (!in_array($new_table,$liste_tables)){
+			$new_id = 1;
+			while (isset($liste_tables[$new_id])) $new_id++;
+			$liste_tables[$new_id] = $new_table;
+		}
+	}
+	ecrire_meta('index_table',serialize($liste_tables));
+	ecrire_metas();
+}
+function liste_index_tables(){
+  if (!isset($GLOBALS['meta']['index_table']))
+  	lire_metas();
+	$liste_tables = unserialize($GLOBALS['meta']['index_table']);
+	return $liste_tables;
+}
+
+function id_index_table($table){
+	/*global $table_des_tables;
+	$t = $table_des_tables[$table];
+	// pour les tables non Spip
+	if (!$t) $t = $table; else $t = "spip_$t";*/
+	$t = $table;
+	$id_table = 0;
+	$l = liste_index_tables();
+	$l = @array_flip($l);
+	if (isset($l[$t]))
+		$id_table=$l[$t];
+	return $id_table;
+}
+
+function primary_index_table($table){
+	global $tables_principales;
+	/*global $table_des_tables;
+  $t = $table_des_tables[$table];
+  // pour les tables non Spip
+  if (!$t) $t = $table; else $t = "spip_$t";*/
+  $t = $table;
+	$p = $tables_principales["$t"]['key']["PRIMARY KEY"];
+	if (!$p){
+		$p = preg_replace("{^spip_}","",$table);
+		$p = "id_" . $p;
+		if (substr($p,-1,1)=='s')
+		  $p = substr($p,0,strlen($p)-1);
+ 	}
+ 	return $p;
+}
+
+function deja_indexe($table, $id_objet) {
+	$table_index = 'spip_index';
+	$id_table = id_index_table($table);
+	$query = "SELECT id_objet FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table LIMIT 1";
 	$n = @spip_num_rows(@spip_query($query));
 	return ($n > 0);
 }
-
 
 // Extracteur des documents 'txt'
 function extracteur_txt($fichier, &$charset) {
@@ -110,14 +244,7 @@ function extracteur_html($fichier, &$charset) {
 	return $contenu;
 }
 
-// Quels formats sait-on extraire ?
-$GLOBALS['extracteur'] = array (
-	'txt'   => 'extracteur_txt',
-	'pas'   => 'extracteur_txt',
-	'c'     => 'extracteur_txt',
-	'css'   => 'extracteur_txt',
-	'html'  => 'extracteur_html'
-);
+
 
 // Indexer le contenu d'un document
 function indexer_contenu_document ($row) {
@@ -162,57 +289,79 @@ function indexer_contenu_document ($row) {
 }
 
 
-// Indexer les documents, auteurs, mots-cles associes a l'objet
-function indexer_elements_associes($objet, $id_objet, $associe, $valeur) {
-	switch ($associe) {
-		case 'document':
-			$r = spip_query("SELECT doc.titre, doc.descriptif
-				FROM spip_documents AS doc,
-				spip_documents_".table_objet($objet)." AS lien
-				WHERE lien.".id_table_objet($objet)."=$id_objet
-				AND doc.id_document=lien.id_document");
-			while ($row = spip_fetch_array($r)) {
-				indexer_chaine($row['titre'],2 * $valeur);
-				indexer_chaine($row['descriptif'],1 * $valeur);
-			}
-			break;
 
-		case 'auteur':
-			$r = spip_query("SELECT auteurs.nom
-				FROM spip_auteurs AS auteurs,
-				spip_auteurs_".table_objet($objet)." AS lien
-				WHERE lien.".id_table_objet($objet)."=$id_objet
-				AND auteurs.id_auteur=lien.id_auteur");
-			while ($row = spip_fetch_array($r)) {
-				indexer_chaine($row['nom'], 1 * $valeur, 2);
+function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
+	//echo "Indexation :";var_dump($row);var_dump($index_desc);echo"<br/>";
+	reset($index_desc);
+	while (list($quoi,$poids) = each($index_desc)){
+		$pipe=array();
+		if (strpos($quoi,"|")){
+			$pipe = explode("|",$quoi);
+			$quoi = array_shift($pipe);
+		}
+		if (isset($row[$quoi])){
+			$texte = $row[$quoi];
+			if (count($pipe)){
+				foreach ($pipe as $func){
+					$func = trim($func);
+					if (!function_exists($func)) {
+						spip_log("Erreur - $func n'est pas definie (indexation)");
+					}
+					// appliquer le filtre
+					$texte = $func($texte);
+				}
 			}
-			break;
-
-		case 'mot':
-			$r = spip_query("SELECT mots.titre, mots.descriptif
-				FROM spip_mots AS mots,
-				spip_mots_".table_objet($objet)." AS lien
-				WHERE lien.".id_table_objet($objet)."=$id_objet
-				AND mots.id_mot = lien.id_mot");
-			while ($row = spip_fetch_array($r)) {
-				indexer_chaine($row['titre'],4 * $valeur);
-				indexer_chaine($row['descriptif'],1 * $valeur);
-			}
-			break;
+			//echo ":$quoi:$poids:$texte<br/>";
+			if (is_array($poids))
+				indexer_chaine($texte,array_shift($poids) * $ponderation,array_shift($poids));
+			else
+				indexer_chaine($texte,$poids * $ponderation);
+		}
 	}
 }
 
+// Indexer les documents, auteurs, mots-cles associes a l'objet
+function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
+	global $tables_relations;
+	global $INDEX_elements_associes;
 
-function indexer_objet($type, $id_objet, $forcer_reset = true) {
+	if (isset($INDEX_elements_associes[$table_associe])){
+		$table_abreg = preg_replace("{^spip_}","",$table);
+		$col_id = primary_index_table($table);
+		$col_id_as = primary_index_table($table_associe);
+		$relation = $tables_relations[$table];
+		if (!$relation) $relation = $tables_relations[$table_abreg];
+		if ( ($relation)
+				&&(isset($relation[$col_id_as])) )
+			$table_rel = $relation[$col_id_as];
+
+	  $select="assoc.$col_id_as";
+	  foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
+			$select.=',assoc.' . $quoi;
+		$q = "SELECT $select FROM $table_associe AS assoc,
+			spip_$table_rel AS lien
+			WHERE lien.$col_id=$id_objet
+			AND assoc.$col_id_as=lien.$col_id_as";
+
+		$r = spip_query($q);
+		while ($row = spip_fetch_array($r)) {
+      indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
+		}
+ 	}
+}
+
+function indexer_objet($table, $id_objet, $forcer_reset = true) {
 	global $index, $mots, $translitteration_complexe;
+	global $INDEX_elements_objet;
+	global $INDEX_objet_associes;
 
-	$table = 'spip_'.table_objet($type);
-	$table_index = 'spip_index_'.table_objet($type);
-	$col_id = id_table_objet($type);
+	$table_index = 'spip_index';
+	$col_id = primary_index_table($table);
+	$id_table = id_index_table($table);
 
 	if (!$id_objet) return;
-	if (!$forcer_reset AND deja_indexe($type, $id_objet)) {
-		spip_log ("$type $id_objet deja indexe");
+	if (!$forcer_reset AND deja_indexe($table, $id_objet)) {
+		spip_log ("$table $id_objet deja indexe");
 		spip_query("UPDATE $table SET idx='oui' WHERE $col_id=$id_objet");
 		return;
 	}
@@ -221,7 +370,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 
 	include_ecrire("inc_texte");
 
-	spip_log("indexation $type $id_objet");
+	spip_log("indexation $table $id_objet");
 	$index = '';
 	$mots = '';
 
@@ -238,152 +387,81 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		spip_log ('-> translitteration complexe');
 	} else $translitteration_complexe = 0;
 
-	switch($type) {
-	case 'article':
-		indexer_chaine($row['titre'], 8);
-		indexer_chaine($row['soustitre'], 5);
-		indexer_chaine($row['surtitre'], 5);
-		indexer_chaine($row['descriptif'], 4);
-		indexer_chaine($row['chapo'], 3);
-		indexer_chaine($row['texte'], 1);
-		indexer_chaine($row['ps'], 1);
-		indexer_chaine($row['nom_site'], 1);
-		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		indexer_elements_associes('article', $id_objet, 'document', 1);
-		indexer_elements_associes('article', $id_objet, 'auteur', 10);
-		indexer_elements_associes('article', $id_objet, 'mot', 3);
-		break;
+	if (isset($INDEX_elements_objet[$table])){
 
-	case 'breve':
-		indexer_chaine($row['titre'], 8);
-		indexer_chaine($row['texte'], 2);
-		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		indexer_elements_associes('breve', $id_objet, 'document', 1);
-		indexer_elements_associes('breve', $id_objet, 'mot', 3);
-		break;
+		// Cas tres particulier du forum :
+		// on indexe le thread comme un tout
+		if ($table=='spip_forum') {
 
-	case 'rubrique':
-		indexer_chaine($row['titre'], 8);
-		indexer_chaine($row['descriptif'], 5);
-		indexer_chaine($row['texte'], 1);
-		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		indexer_elements_associes('rubrique', $id_objet, 'document', 1);
-		indexer_elements_associes('rubrique', $id_objet, 'mot', 3);
-		break;
-
-	case 'auteur':
-		indexer_chaine($row['nom'], 5, 2);
-		indexer_chaine($row['bio'], 1);
-		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		break;
-
-	case 'mot':
-		indexer_chaine($row['titre'], 8);
-		indexer_chaine($row['descriptif'], 5);
-		indexer_chaine($row['texte'], 1);
-		indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-		break;
-
-	case 'signature':
-		indexer_chaine($row['nom_email'], 2, 2);
-		indexer_chaine($row['ad_email'], 2);
-		indexer_chaine($row['nom_site'], 2);
-		indexer_chaine($row['url_site'], 1);
-		indexer_chaine($row['message'], 1);
-		break;
-
-	case 'syndic':
-		indexer_chaine($row['nom_site'], 50);
-		indexer_chaine($row['descriptif'], 30);
-		indexer_elements_associes('syndic', $id_objet, 'document', 1);
-		indexer_elements_associes('syndic', $id_objet, 'mot', 3);
-
-		// Ajouter les titres des articles syndiques de ce site, le cas echeant
-		if ($row['syndication'] = "oui") {
-			$query_syndic = "SELECT titre FROM spip_syndic_articles
-			WHERE id_syndic=$id_objet AND statut='publie'
-			ORDER BY date DESC LIMIT 100";
-			$result_syndic = spip_query($query_syndic);
-			while ($row_syndic = spip_fetch_array($result_syndic)) {
-				indexer_chaine($row_syndic['titre'], 5);
+			// 1. chercher la racine du thread
+			$id_forum = $id_objet;
+			while ($row['id_parent']) {
+				$id_forum = $row['id_parent'];
+				$s = spip_query("SELECT id_forum,id_parent FROM spip_forum WHERE id_forum=$id_forum");
+				$row = spip_fetch_array($s);
 			}
-		}
-		// Aller chercher la page d'accueil
-		if ($GLOBALS['meta']["visiter_sites"] == "oui") {
-			include_ecrire('inc_distant');
-			spip_log ("indexation contenu syndic ".$row['url_site']);
-			indexer_chaine(supprimer_tags(
-				recuperer_page($row['url_site'], true, false, 50000)
-				), 1);
-		}
-		break;
 
-	//
-	// Cas tres particulier du forum :
-	// on indexe le thread comme un tout
-	case 'forum':
-		// 1. chercher la racine du thread
-		$id_forum = $id_objet;
-		while ($row['id_parent']) {
-			$id_forum = $row['id_parent'];
-			$s = spip_query("SELECT id_forum,id_parent FROM spip_forum WHERE id_forum=$id_forum");
-			$row = spip_fetch_array($s);
-		}
+			// 2. chercher tous les forums du thread
+			// (attention le forum de depart $id_objet n'appartient pas forcement
+			// a son propre thread car il peut etre le fils d'un forum non 'publie')
+			$thread="$id_forum";
+			$fini = false;
+			while (!$fini) {
+				$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($thread) AND id_forum NOT IN ($thread) AND statut='publie'");
+				if (spip_num_rows($s) == 0) $fini = true;
+				while ($t = spip_fetch_array($s))
+					$thread.=','.$t['id_forum'];
+			}
 
-		// 2. chercher tous les forums du thread
-		// (attention le forum de depart $id_objet n'appartient pas forcement
-		// a son propre thread car il peut etre le fils d'un forum non 'publie')
-		$thread="$id_forum";
-		$fini = false;
-		while (!$fini) {
-			$s = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($thread) AND id_forum NOT IN ($thread) AND statut='publie'");
-			if (spip_num_rows($s) == 0) $fini = true;
-			while ($t = spip_fetch_array($s))
-				$thread.=','.$t['id_forum'];
-		}
-		
-		// 3. marquer le thread comme "en cours d'indexation"
-		spip_log("-> indexation thread $thread");
-		spip_query("UPDATE spip_forum SET idx='idx'
-			WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+			// 3. marquer le thread comme "en cours d'indexation"
+			spip_log("-> indexation thread $thread");
+			spip_query("UPDATE spip_forum SET idx='idx'
+				WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
 
-		// 4. Indexer le thread
-		$s = spip_query("SELECT * FROM spip_forum
-			WHERE id_forum IN ($thread) AND idx!='non'");
-		while ($row = spip_fetch_array($s)) {
-			indexer_chaine($row['titre'], 3);
-			indexer_chaine($row['texte'], 1);
-			indexer_chaine($row['auteur'], 2, 2);
-			indexer_chaine($row['email_auteur'], 2);
-			indexer_chaine($row['nom_site'], 2);
-			indexer_chaine($row['url_site'], 1);
-		}
+			// 4. Indexer le thread
+			$s = spip_query("SELECT * FROM spip_forum
+				WHERE id_forum IN ($thread) AND idx!='non'");
+			while ($row = spip_fetch_array($s)) {
+		    indexer_les_champs($row,$INDEX_elements_objet[$table]);
+		    if (isset($INDEX_objet_associes[$table]))
+		      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
+						indexer_elements_associes($table, $id_objet, $quoi, $poids);
+				break;
+			}
 
-		// 5. marquer le thread comme "indexe"
-		spip_query("UPDATE spip_forum SET idx='oui'
-			WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+			// 5. marquer le thread comme "indexe"
+			spip_query("UPDATE spip_forum SET idx='oui'
+				WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
 
-		// 6. Changer l'id_objet en id_forum de la racine du thread
-		$id_objet = $id_forum;
+			// 6. Changer l'id_objet en id_forum de la racine du thread
+			$id_objet = $id_forum;
+		} else {
 
-		break;
+	    indexer_les_champs($row,$INDEX_elements_objet[$table]);
+	    if (isset($INDEX_objet_associes[$table]))
+	      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
+					indexer_elements_associes($table, $id_objet, $quoi, $poids);
 
+			if ($table=='spip_syndic'){
+				// 2. Indexer les articles syndiques
+				if (($row['syndication'] = "oui")&&(isset($INDEX_elements_objet['syndic_articles']))) {
+					$query_syndic = "SELECT titre FROM spip_syndic_articles
+					WHERE id_syndic=$id_objet AND statut='publie'
+					ORDER BY date DESC LIMIT 100";
+					$result_syndic = spip_query($query_syndic);
+					while ($row_syndic = spip_fetch_array($result_syndic)) {
+		    		indexer_les_champs($row,$INDEX_elements_objet['syndic_articles']);
+					}
+				}
+			}
+			if ($table=='spip_documents'){
+				// 2. Indexer le contenu si on sait le lire
+				indexer_contenu_document($row);
+			}
+	 	}
+ 	}
 
-	case 'document':
-		// 1. Indexer le descriptif
-		indexer_chaine($row['titre'], 20);
-		indexer_chaine($row['descriptif'], 10);
-		indexer_chaine(preg_replace(',^(IMG/|.*://),', '', $row['fichier']), 1);
-		indexer_elements_associes('document', $id_objet, 'mot', 3);
-
-		// 2. Indexer le contenu si on sait le lire
-		indexer_contenu_document($row);
-		break;
-
-
-	} // switch
-
-	$query = "DELETE FROM $table_index WHERE $col_id=$id_objet";
+	$query = "DELETE FROM $table_index WHERE id_objet=$id_objet AND id_table=$id_table";
 	$result = spip_query($query);
 
 	if ($index) {
@@ -393,7 +471,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		}
 		reset($index);
 		while (list($hash, $points) = each($index)) {
-		  spip_query("INSERT INTO $table_index (hash, points, $col_id) VALUES (0x$hash,".ceil($points).",$id_objet)");
+		  spip_query("INSERT INTO $table_index (hash, points, id_objet, id_table) VALUES (0x$hash,".ceil($points).",$id_objet,$id_table)");
 		}
 	}
 
@@ -424,51 +502,46 @@ function indexer_article($id_article) {
 }
 
 // n'indexer que les objets publies
-function critere_indexation($type) {
-	switch ($type) {
-		case 'article':
-		case 'breve':
-		case 'rubrique':
-		case 'syndic':
-		case 'forum':
-		case 'signature':
-			$critere = "statut='publie'";
-			break;
-		case 'auteur':
-			$critere = "statut IN ('0minirezo', '1comite')";
-			break;
-		case 'mot':
-		case 'document':
-		default:
-			$critere = '1=1';
-			break;
-	}
-	return $critere;
+function critere_indexation($table) {
+	global $INDEX_critere_indexation;
+	if (isset($INDEX_critere_indexation[$table]))
+	  return $INDEX_critere_indexation[$table];
+	else
+	  return '1=1'; // indexation par defaut
 }
 
-function effectuer_une_indexation($nombre_indexations = 1) {
+// ne desindexer que les objets non-publies
+function critere_optimisation($table) {
+	global $INDEX_critere_optimisation;
+	if (isset($INDEX_critere_optimisation[$table]))
+	  return $INDEX_critere_optimisation[$table];
+	else
+	  return '1=0';  // pas de indexation par defaut
+}
 
+
+function effectuer_une_indexation($nombre_indexations = 1) {
+	global $INDEX_iteration_nb_maxi;
 	// chercher un objet a indexer dans chacune des tables d'objets
 	$vu = array();
-	$types = array('article','auteur','breve','mot','rubrique','signature','syndic','forum','document');
+	$tables = liste_index_tables();
 
-	while (list(,$type) = each($types)) {
-		$table_objet = 'spip_'.table_objet($type);
-		$table_index = 'spip_index_'.table_objet($type);
+	while (list(,$table) = each($tables)) {
+		$table_index = 'spip_index';
+		$table_primary = primary_index_table($table);
 
-		$critere = critere_indexation($type);
+		$critere = critere_indexation($table);
 
-		if ($type == 'syndic' OR $type == 'document')
-			$limit = 1;
-		else
-			$limit = $nombre_indexations;
+		$limit = $nombre_indexations;
+		if (isset($INDEX_iteration_nb_maxi[$table]))
+		  $limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
 
 		foreach (array('1', '', 'idx') as $mode) {
-			$s = spip_query("SELECT id_$type, idx FROM $table_objet
+			$s = spip_query("SELECT $table_primary, idx FROM $table
 			WHERE idx='$mode' AND $critere LIMIT $limit");
 			while ($t = spip_fetch_array($s)) {
-				$vu[$type] .= $t[0].", ";
-				indexer_objet($type, $t[0], $t[1]);
+				$vu[$table] .= $t[0].", ";
+				indexer_objet($table, $t[0], $t[1]);
 			}
 			if ($vu) break;
 		}
@@ -487,35 +560,27 @@ function executer_une_indexation_syndic() {
 }
 
 function creer_liste_indexation() {
-	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature','document');
-	while (list(,$type) = each($types)) {
-		$table = 'spip_'.table_objet($type);
+	$tables = liste_index_tables();
+	while (list(,$table) = each($tables)) {
 		spip_query("UPDATE $table SET idx='1' WHERE idx!='non'");
 	}
 }
 
 function purger_index() {
-		spip_query("DELETE FROM spip_index_articles");
-		spip_query("DELETE FROM spip_index_auteurs");
-		spip_query("DELETE FROM spip_index_breves");
-		spip_query("DELETE FROM spip_index_mots");
-		spip_query("DELETE FROM spip_index_rubriques");
-		spip_query("DELETE FROM spip_index_syndic");
-		spip_query("DELETE FROM spip_index_forum");
-		spip_query("DELETE FROM spip_index_signatures");
-		spip_query("DELETE FROM spip_index_documents");
+		spip_query("DELETE FROM spip_index");
 		spip_query("DELETE FROM spip_index_dico");
 }
 
 // cree la requete pour une recherche en txt integral
-function requete_txt_integral($objet, $hash_recherche) {
-	$table = "spip_".table_objet($objet);
-	$index_table = "spip_index_".table_objet($objet);
-	$id_objet = "id_".$objet;
+function requete_txt_integral($table, $hash_recherche) {
+	$index_table = "spip_index";
+	$id_objet = primary_index_table($table);
+	$id_table = id_index_table($table);
 	return "SELECT objet.*, SUM(rec.points) AS points
 		FROM $table AS objet, $index_table AS rec
-		WHERE objet.$id_objet = rec.$id_objet
+		WHERE objet.$id_objet = rec.id_objet
 		AND rec.hash IN ($hash_recherche)
+		AND rec.id_table = $id_table
 		GROUP BY objet.$id_objet
 		ORDER BY points DESC
 		LIMIT 10";
@@ -599,10 +664,9 @@ function requete_hash ($rech) {
 // Note : si le critere est optionnel {recherche?}, ne pas s'activer
 // si la recherche est vide
 //
-function prepare_recherche($recherche, $type = 'id_article', $table='articles', $cond=false) {
+function prepare_recherche($recherche, $primary = 'id_article', $id_table='articles',$nom_table='spip_articles', $cond=false) {
 	static $cache = array();
 	static $fcache = array();
-
 	// traiter le cas {recherche?}
 	if ($cond AND !strlen($recherche))
 		return array("''" /* as points */, /* where */ '1');
@@ -617,8 +681,7 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 	}
 
 	// si on n'a pas encore traite les donnees dans une boucle precedente
-	if (!$cache[$recherche][$type]) {
-
+	if (!$cache[$recherche][$primary]) {
 		if (!$cache[$recherche]['hash'])
 			$cache[$recherche]['hash'] = requete_hash($recherche);
 		list($hash_recherche, $hash_recherche_strict)
@@ -629,21 +692,21 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 			foreach (split(',',$hash_recherche_strict) as $h)
 				$strict[$h] = 99;
 
+		$index_id_table = id_index_table($nom_table);
 		$points = array();
-		$s = spip_query ("SELECT hash,points,$type as id
-			FROM spip_index_$table
-			WHERE hash IN ($hash_recherche)");
-
+		$s = spip_query ("SELECT hash,points,id_objet as id
+			FROM spip_index
+			WHERE hash IN ($hash_recherche) AND id_table='$index_id_table'");
+			
 		while ($r = spip_fetch_array($s))
 			$points[$r['id']]
 			+= (1 + $strict[$r['hash']]) * $r['points'];
 		spip_free_result($s);
-
 		arsort($points, SORT_NUMERIC);
 
 		# calculer le {id_article IN()} et le {... as points}
 		if (!count($points)) {
-			$cache[$recherche][$type] = array("''", 0);
+			$cache[$recherche][$primary] = array("''", 0);
 		} else {
 			$ids = array();
 			$select = '0';
@@ -651,11 +714,11 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 				$listes_ids[$p] .= ','.$id;
 			foreach ($listes_ids as $p => $liste_ids)
 				$select .= "+$p*(".
-					calcul_mysql_in("$table.$type", substr($liste_ids, 1))
+					calcul_mysql_in("$id_table.$primary", substr($liste_ids, 1))
 					.") ";
 
-			$cache[$recherche][$type] = array($select,
-				'('.calcul_mysql_in("$table.$type",
+			$cache[$recherche][$primary] = array($select,
+				'('.calcul_mysql_in("$id_table.$primary",
 					join(',',array_keys($points))).')'
 				);
 		}
@@ -665,8 +728,7 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 		// purger le petit cache
 		nettoyer_petit_cache('rech', 300);
 	}
-
-	return $cache[$recherche][$type];
+	return $cache[$recherche][$primary];
 }
 
 ?>

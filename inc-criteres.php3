@@ -93,13 +93,16 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 // {recherche}
 // http://www.spip.net/@recherche
 function critere_recherche_dist($idb, &$boucles, $crit) {
-
+	global $table_des_tables;
 	$boucle = &$boucles[$idb];
+	$t = $boucle->id_table;
+	if (in_array($t,$table_des_tables))
+		$t = "spip_$t";
 
 	// Ne pas executer la requete en cas de hash vide
 	$boucle->hash = '
 	// RECHERCHE
-	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$crit->cond.'");
+	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$t.'", "'.$crit->cond.'");
 	';
 
 	// Sauf si le critere est conditionnel {recherche ?}

@@ -12,6 +12,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_ecrire('inc_index');
 
 function optimiser_base() {
 	spip_log ("optimisation de la base");
@@ -219,41 +220,26 @@ function optimiser_base() {
 	//
 
 	// les objets inutiles
-	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
-	while (list(,$type) = each($types)) {
-		$table_objet = 'spip_'.table_objet($type);
-		$table_index = 'spip_index_'.table_objet($type);
-		
-		// limiter aux objets publies
-		switch ($type) {
-			case 'article':
-			case 'breve':
-			case 'rubrique':
-			case 'syndic':
-			case 'forum':
-			case 'signature':
-				$critere = "AND statut<>'publie'";
-				break;
-			case 'auteur':
-				$critere = "AND statut NOT IN ('0minirezo', '1comite')";
-				break;
-			case 'mot':
-			default:
-				$critere = 'AND 1=0';	// ne jamais desindexer un mot
-				break;
-		}
+	$liste_tables = liste_index_tables();
+	//$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
+	while (list($id_table,$table_objet) = each($liste_tables)) {
+		$table_index = 'spip_index';
+		$col_id = primary_index_table($table_objet);
+		$critere = critere_optimisation($table_objet);
+		if (strlen($critere)>0)
+		  $critere = "AND $critere";
 
 		spip_query("UPDATE $table_objet SET idx='' WHERE idx<>'non' $critere");
 
 		$suppr = '';
-		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx='' $critere");
+		$s = spip_query("SELECT $col_id FROM $table_objet WHERE idx='' $critere");
 		while ($t = spip_fetch_array($s))
 			$suppr .= ','.$t[0];
-		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx='non'");
+		$s = spip_query("SELECT $col_id FROM $table_objet WHERE idx='non'");
 		while ($t = spip_fetch_array($s))
 			$suppr .= ','.$t[0];
 		if ($suppr)
-			spip_query("DELETE FROM $table_index WHERE id_$type IN (0$suppr)");
+			spip_query("DELETE FROM $table_index WHERE id_objet IN (0$suppr) AND id_table=$id_table");
 	}
 
 	//

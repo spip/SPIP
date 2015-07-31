@@ -298,6 +298,7 @@ ecrire/inc_forum_admin.php -text
 ecrire/inc_forum_envoi.php -text
 ecrire/inc_headers.php -text
 ecrire/inc_import_all.php -text
+ecrire/inc_index_tous.php -text
 ecrire/inc_install.php -text
 ecrire/inc_js_menu_rubriques.php -text
 ecrire/inc_lang_liste.php -text
@@ -338,6 +339,7 @@ ecrire/inc_statistiques_visites.php -text
 ecrire/inc_synchro.php -text
 ecrire/inc_upgrade.php -text
 ecrire/inc_utils.php -text
+ecrire/index_tous.php -text
 ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_br.php3 -text

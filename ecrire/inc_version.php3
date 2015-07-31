@@ -270,7 +270,7 @@ include(_DIR_INCLUDE . 'inc_utils.php');
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.904;
+$spip_version = 1.905;
 
 // version de spip
 $spip_version_affichee = "1.9 alpha";
