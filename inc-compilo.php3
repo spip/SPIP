@@ -77,20 +77,30 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
  }
 
 //
-// calculer_boucle() produit le corps PHP d'une boucle Spip 
-// Sauf pour les recursives, ce corps est un Select SQL + While PHP
-// remplissant une variable $t0 retournee en valeur
-//
+// calculer_boucle() produit le corps PHP d'une boucle Spip. 
+// ce corps remplit une variable $t0 retournee en valeur.
+// Ici on distingue boucles recursives et boucle a requete SQL
+// et on insere le code d'envoi au debusqueur du resultat de la fonction.
+
 function calculer_boucle($id_boucle, &$boucles) {
+ 
+  return
+	(($boucles[$id_boucle]->type_requete == 'boucle') ?
+	 ( "\n	\$t0 = " . $boucles[$id_boucle]->return . ";") :
+	 ( calculer_requete_sql($boucles[$id_boucle]) .
+	   calculer_boucle_nonrec($id_boucle, $boucles)))
+	. (($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
+		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);")
+	.  "\n	return \$t0;";
+}
 
-  $boucle = &$boucles[$id_boucle];
-  $return = $boucle->return;
-  $type_boucle = $boucle->type_requete;
+// compil d'un boucle non recursive; son corps est un Select SQL + While PHP
 
-  if ($type_boucle == 'boucle') {
-	    $corps = "\n	\$t0 = " . $return . ";";
-	    $init = "";
-  } else {
+function calculer_boucle_nonrec($id_boucle, &$boucles) {
+
+	$boucle = &$boucles[$id_boucle];
+	$return = $boucle->return;
+	$type_boucle = $boucle->type_requete;
 	$primary = $boucle->primary;
 	$constant = ereg(CODE_MONOTONE,$return);
 
@@ -101,9 +111,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	// Creer le debut du corps de la boucle :
 	//
-	$corps = '';
-	if ($flag_cpt)
-		$corps = "\n		\$Numrows['$id_boucle']['compteur_boucle']++;";
+	$corps = !$flag_cpt ? '' : "\n		\$Numrows['$id_boucle']['compteur_boucle']++;";
 
 	if ($boucle->mode_partie)
 		$corps .= "
@@ -136,9 +144,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if (count($boucle->separateur))
 	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
 
-	$init = '';
-	$fin = '';
-
 	// La boucle doit-elle selectionner la langue ?
 	// -. par defaut, les boucles suivantes le font
 	// "peut-etre", c'est-a-dire si forcer_lang == false.
@@ -159,10 +164,14 @@ function calculer_boucle($id_boucle, &$boucles) {
 		  . index_pile($id_boucle, 'lang', $boucles)
 		  . ') ? $x : $old_lang;';
 		// Memoriser la langue avant la boucle pour la restituer apres
-	      $init .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
-	      $fin .= "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
+	      $init.= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
+	      $fin = "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
 
 	  }
+	else {
+		$init = '';
+		$fin = '';
+	}
 
 	// gestion optimale des separateurs et des boucles constantes
 	$corps .= 
@@ -177,12 +186,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 		  '$t0 .= (($t1 && $t0) ? ' . $code_sep . " : '') . \$t1;"));
      
 	// Fin de parties
-	if ($boucle->mode_partie)
-		$corps .= "\n		}\n";
+	if ($boucle->mode_partie) $corps .= "\n		}\n";
 
-	// Gestion de la hierarchie (voir inc-boucles)
-	if ($boucle->hierarchie)
-		$init .= "\n	".$boucle->hierarchie;
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 	if (ereg(CODE_MONOTONE,$corps, $r)) {
@@ -198,7 +203,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		}
 	} else {
 
-		$corps = '
+		$corps = $init . '
 
 	// RESULTATS
 	while ($Pile[$SP] = @spip_abstract_fetch($result,"' .
@@ -208,15 +213,33 @@ function calculer_boucle($id_boucle, &$boucles) {
 		  $fin ;
 	}
 
-	//
-	// Requete
-	//
+	return '
+	$t0 = "";
+	$SP++;'
+		. (!$flag_cpt  ? "" :
+			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
+		. ($boucle->mode_partie ? 
+		   calculer_parties($boucles, $id_boucle) :
+		   (!$boucle->numrows ? '' :
+		    ( "\n	\$Numrows['" .
+			$id_boucle .
+			"']['total'] = @spip_abstract_count(\$result,'" .
+			$boucle->sql_serveur .
+		      "');"))) .
+		$corps .
+		"\n	@spip_abstract_free(\$result,'" .
+		$boucle->sql_serveur . "');";
+}
 
+
+function calculer_requete_sql($boucle)
+{
 	if (!$order = $boucle->order
 	AND !$order = $boucle->default_order)
 		$order = array();
 
-	$init .= $boucle->hash . 
+	return   ($boucle->hierarchie ? "\n\t$boucle->hierarchie" : '')
+		. $boucle->hash . 
 		"\n\n	// REQUETE
 	\$result = spip_abstract_select(\n\t\tarray(\"" . 
 		# En absence de champ c'est un decompte : 
@@ -242,35 +265,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 		'".$boucle->id_table."', # table
 		'".$boucle->id_boucle."', # boucle
 		'".$boucle->sql_serveur."'); # serveur";
-
-	$init .= "\n	".'$t0 = "";
-	$SP++;';
-	if ($flag_cpt)
-		$init .= "\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;";
-
-	if ($boucle->mode_partie)
-		$init .= calculer_parties($boucles, $id_boucle);
-	else if ($boucle->numrows)
-		$init .= "\n	\$Numrows['" .
-			$id_boucle .
-			"']['total'] = @spip_abstract_count(\$result,'" .
-			$boucle->sql_serveur .
-			"');";
-
-	//
-	// Conclusion et retour
-	//
-	$corps .= "\n	@spip_abstract_free(\$result,'" .
-		   $boucle->sql_serveur . "');";
-
-  }
-
-  return $init . $corps . 
-	## inserer le code d'envoi au debusqueur du resultat de la fonction
-	(($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
-		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);") .
-    "\n	return \$t0;";
 }
+
 
 function calculer_from(&$boucle)
 {
