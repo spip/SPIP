@@ -61,7 +61,7 @@ function login($cible, $prive = 'prive') {
 		echo "<a href='$cible'>"._T('login_par_ici')."</a>\n";
 		return;
 	}
-	echo login_pour_tous($cible, $prive, '', $action, 'redac');
+	echo login_pour_tous($cible, $prive, '', $action, $prive?'redac':'forum');
 }
 
 
@@ -223,7 +223,10 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	$res .= "\n<div align='center' style='font-size: 12px;' >"; // debut du pied de login
 
 	if ((lire_meta("accepter_inscriptions") == "oui") OR
-	    (!$prive AND (lire_meta('forums_publics') == 'abo')))
+		(!$prive AND (
+			lire_meta("accepter_visiteurs") == "oui"
+			OR lire_meta('forums_publics') == 'abo'
+			)))
 		$res .= " [<a $pass_popup>" . _T('login_sinscrire').'</a>]';
 
 	// bouton oubli de mot de passe
