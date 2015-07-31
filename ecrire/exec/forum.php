@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-charger_generer_url();
 
 // http://doc.spip.org/@exec_forum_dist
 function exec_forum_dist()

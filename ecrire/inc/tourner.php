@@ -37,8 +37,7 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 	if (isset($document['url']))
 		$url = $document['url'];
 	else {
-		charger_generer_url();
-		$url = generer_url_document($id_document);
+		$url = generer_url_entite($id_document, 'document');
 	}
 
 	$res = '';

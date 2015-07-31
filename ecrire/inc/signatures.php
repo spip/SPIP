@@ -15,12 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@message_de_signature
 function message_de_signature($row)
 {
-  return propre(echapper_tags($row['message']));
+	return propre(echapper_tags($row['message']));
 }
 
 // http://doc.spip.org/@inc_signatures_dist
 function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $type='') {
-	charger_generer_url();
 
 	if ($id) { 
 		$args = "id_article=$id&";
@@ -110,16 +109,14 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 	$res .= message_de_signature($row);
 		
 	if (!$id) {
-		if ($r = sql_fetsel("titre, id_rubrique, statut", "spip_articles", "id_article=$id_article")) {
+		if ($r = sql_fetsel("titre, id_rubrique", "spip_articles", "id_article=$id_article")) {
 			$id_rubrique = $r['id_rubrique'];
-			$publie = ($r['statut'] == 'publie');
 			$titre_a = $r['titre'];
 			$titre_r = supprimer_numero(sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique"));
 		        $href = generer_url_ecrire('naviguer', "id_rubrique=" . $id_rubrique);
+			$h2 = generer_url_entite($id_article, 'article','','',true);
 			$res .= "<br class='nettoyeur' /><a title='$id_article' href='"
-			  .  ($publie ? 
-			      generer_url_action('redirect', "id_article=$id_article") :
-			      generer_url_ecrire('articles', "id_article=$id_article"))
+			  . $h2
 			  . "'>"
 			  . typo($titre_a)
 			  . "</a><a style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"

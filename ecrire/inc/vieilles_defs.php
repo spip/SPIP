@@ -883,6 +883,27 @@ onkeyup=\'storeCaret(this);\'
 ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 }',
 
+ 'generer_url_article' => '($id, $args="", $ancre="")
+	{ return generer_url_entite($id, "article", $args, $ancre);}',
+
+ 'generer_url_rubrique' => '($id, $args="", $ancre="")
+	{ return generer_url_entite($id, "rubrique", $args, $ancre);}',
+
+ 'generer_url_breve' => '($id, $args="", $ancre="")
+	{ return generer_url_entite($id, "breve", $args, $ancre);}',
+
+ 'generer_url_mot' => '($id, $args="", $ancre="")
+	{ return generer_url_entite($id, "mot", $args, $ancre);}',
+
+ 'generer_url_site' => '($id, $args="", $ancre="")
+	{ return generer_url_entite($id, "site", $args, $ancre);}',
+
+ 'generer_url_auteur' => '($id, $args="", $ancre="")
+	{ return generer_url_entite($id,"auteur", $args, $ancre);}',
+
+ 'charger_generer_url' => '($prive=NULL) {
+	generer_url_entite("", "", "", "", $prive);}'
+
 ) as $f => $def) {
 	if (!function_exists($f)) {
 		eval("function $f$def");
@@ -901,5 +922,6 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 	$article_select = charger_fonction('article_select','inc');
 	return $article_select($id_article,$id_rubrique,$lier_trad,$id_version);
 }
+
 
 ?>

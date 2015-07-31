@@ -13,9 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-charger_generer_url();
 include_spip('inc/forum');
-
 
 // http://doc.spip.org/@forum_parent
 function forum_parent($id_forum) {
@@ -43,7 +41,7 @@ function forum_parent($id_forum) {
 	  } else {
 	    $ancre = "forum$id_forum" ;
 	    return array('pref' =>  _T('lien_reponse_article'),
-			 'url' => generer_url_article($id_article,'',$ancre),
+			 'url' => generer_url_entite($id_article,'article', '',$ancre),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
@@ -55,7 +53,7 @@ function forum_parent($id_forum) {
 	  $id_rubrique = $row['id_rubrique'];
 	  $titre = $row['titre'];
 	  return array('pref' => _T('lien_reponse_rubrique'),
-		       'url' => generer_url_rubrique($id_rubrique),
+		       'url' => generer_url_entite($id_rubrique,'rubrique'),
 		       'type' => 'id_rubrique',
 		       'valeur' => $id_rubrique,
 		       'titre' => $titre);
@@ -84,7 +82,7 @@ function forum_parent($id_forum) {
 			 'titre' => $titre);
 	  } else {
 	    return array('pref' => _T('lien_reponse_breve_2'),
-			 'url' => generer_url_breve($id_breve),
+			 'url' => generer_url_entite($id_breve, 'breve'),
 			 'type' => 'id_breve',
 			 'valeur' => $id_breve,
 			 'titre' => $titre);

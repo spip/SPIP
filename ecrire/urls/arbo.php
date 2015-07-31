@@ -11,14 +11,11 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
-if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante
 define('CONFIRMER_MODIFIER_URL', false);
-
-include_spip('base/abstract_sql');
 
 /**
  * - Comment utiliser ce jeu d'URLs ?
@@ -28,8 +25,8 @@ include_spip('base/abstract_sql');
  * "sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
  * Les URLs definies seront alors redirigees vers les fichiers de SPIP.
  * 
- * Definissez ensuite dans ecrire/mes_options.php :
- * 	< ?php $type_urls = 'arbo'; ? >
+ * Choisissez "arbo" dans les pages de configuration d'URL
+ *
  * SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
  * Variantes :
  * pour avoir des url terminant par html
@@ -76,19 +73,6 @@ define ('_url_arbo_minuscules',1);
 #define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
 define('_MARQUEUR_URL', false);
 
-// Retire les marqueurs de type dans une URL propre ancienne maniere
-
-// http://doc.spip.org/@retirer_marqueurs_url_propre
-function retirer_marqueurs_url_propre($url_propre) {
-	if (preg_match(',^[+][-](.*?)[-][+]$,', $url_propre, $regs)) {
-		return $regs[1];
-	}
-	else if (preg_match(',^([-+_@])(.*?)\1?$,', $url_propre, $regs)) {
-		return $regs[2];
-	}
-	// les articles n'ont pas de marqueur
-	return $url_propre;
-}
 
 // Pipeline pour creation d'une adresse : il recoit l'url propose par le
 // precedent, un tableau indiquant le titre de l'objet, son type, son id,
@@ -154,32 +138,33 @@ function creer_chaine_url($x) {
 }
 
 // http://doc.spip.org/@_generer_url_arbo
-function _generer_url_arbo($url,$type,$parent,$type_parent){
+function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	if (is_null($parent)){
 		return $url;
 	}
 	elseif($type!='rubrique') {
-		$url_parent = _generer_url_propre($type_parent?$type_parent:'rubrique',$parent);
+		$url_parent = declarer_url_arbo($type_parent?$type_parent:'rubrique',$parent);
 		return $url_parent . (substr($url_parent,-1)=='/'?'':'/') .$url;
 	}
 	else{
 		if($parent==0)
 			return $url.'/';
 		else
-			return _generer_url_propre($type_parent?$type_parent:'rubrique',$parent). $url.'/';
+			return declarer_url_arbo($type_parent?$type_parent:'rubrique',$parent). $url.'/';
 	}
 }
 
-// http://doc.spip.org/@_generer_url_propre
-function _generer_url_propre($type, $id_objet) {
+function declarer_url_arbo($type, $id_objet) {
 	static $urls=array();
 	
 	// Se contenter de cette URL si elle existe ;
-	// sauf si on invoque action=redirect avec droit de modifier l'url
-	$modifier_url = (
-		_request('action') == 'redirect'
-		AND autoriser('modifierurl', $type, $id_objet)
-	);
+	// sauf si on invoque par "voir en ligne" avec droit de modifier l'url
+
+	$modifier_url = (_request('var_mode') == 'calcul');
+	if ($modifier_url) {
+		include_spip('inc/autoriser');
+		$modifier_url = autoriser('modifierurl', $type, $id_objet);
+	}
 	
 	if (!isset($urls[$type][$id_objet]) OR $modifier_url) {
 		$table = table_objet_sql($type);
@@ -217,7 +202,7 @@ function _generer_url_propre($type, $id_objet) {
 	$url_propre = $urls[$type][$id_objet]['url'];
 
 	if (!is_null($url_propre) AND !$modifier_url)
-		return _generer_url_arbo($url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+		return declarer_url_arbo_rec($url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 
 	// Sinon, creer une URL
 	$url = pipeline('creer_chaine_url',
@@ -237,7 +222,7 @@ function _generer_url_propre($type, $id_objet) {
 
 	// Pas de changement d'url
 	if ($url == $url_propre)
-		return _generer_url_arbo($url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+		return declarer_url_arbo_rec($url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 
 	// Verifier si l'utilisateur veut effectivement changer l'URL
 	if ($modifier_url
@@ -288,16 +273,16 @@ function _generer_url_propre($type, $id_objet) {
 			if (sql_countsel('spip_urls AS U', $where  .sql_quote($set['url']))) {
 				sql_update('spip_urls AS U', array('date' => 'NOW()'), $where  .sql_quote($set['url']));
 				spip_log("reordonne $type $id_objet");
-				return _generer_url_arbo($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+				return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 			}
 			else {
 				$set['url'] .= _url_arbo_sep_id.$id_objet;
 				if (strlen($set['url']) > 200)
 					//serveur out ? retourner au mieux
-					return  _generer_url_arbo($urls[$type][$id_objet]['url']=$url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+					return  declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 				elseif (sql_countsel('spip_urls AS U', $where . sql_quote($set['url']))) {
 					sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
-					return _generer_url_arbo($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+					return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 				}
 			}
 		} while (@sql_insertq('spip_urls', $set) <= 0);
@@ -307,22 +292,34 @@ function _generer_url_propre($type, $id_objet) {
 	spip_log("Creation de l'url propre '" . $set['url'] . "' pour $col_id=$id_objet");
 	
 	$urls[$type][$id_objet]['url'] = $set['url'];
-	return _generer_url_arbo($urls[$type][$id_objet]['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
+	return declarer_url_arbo_rec($urls[$type][$id_objet]['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 }
 
 // http://doc.spip.org/@_generer_url_complete
-function _generer_url_complete($type, $id, $args='', $ancre='') {
+function _generer_url_arbo($type, $id, $args='', $ancre='') {
+
+	if ($type == 'forum') {
+		include_spip('inc/forum');
+		return generer_url_forum_dist($id, $args, $ancre);
+	}
+
+	if ($type == 'document') {
+		include_spip('inc/documents');
+		return generer_url_document_dist($id, $args, $ancre);
+	}
 
 	// Mode propre
-	if ($propre = _generer_url_propre($type, $id)) {
+	$propre = declarer_url_arbo($type, $id);
+
+	if ($propre === false) return ''; // objet inconnu. raccourci ? 
+
+	if ($propre) {
 		$url = _debut_urls_arbo
 			. $propre
 			. (substr($propre,-1)=='/'?'':_terminaison_urls_arbo);
+	} else {
 
-	}
-
-	// propre ne veut pas !
-	else {
+	// objet connu mais sans possibilite d'URL lisible, revenir au defaut
 		if ($type == 'site')
 			$id_type = 'id_syndic';
 		else
@@ -341,52 +338,16 @@ function _generer_url_complete($type, $id, $args='', $ancre='') {
 	return $url;
 }
 
-// http://doc.spip.org/@generer_url_article
-function generer_url_article($id_article, $args='', $ancre='') {
-	return _generer_url_complete('article', $id_article, $args, $ancre);
-}
 
-// http://doc.spip.org/@generer_url_rubrique
-function generer_url_rubrique($id_rubrique, $args='', $ancre='') {
-	return _generer_url_complete('rubrique', $id_rubrique, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_breve
-function generer_url_breve($id_breve, $args='', $ancre='') {
-	return _generer_url_complete('breve', $id_breve, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_forum
-function generer_url_forum($id_forum, $args='', $ancre='') {
-	include_spip('inc/forum');
-	return generer_url_forum_dist($id_forum, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_mot
-function generer_url_mot($id_mot, $args='', $ancre='') {
-	return _generer_url_complete('mot', $id_mot, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_auteur
-function generer_url_auteur($id_auteur, $args='', $ancre='') {
-	return _generer_url_complete('auteur', $id_auteur, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_site
-function generer_url_site($id_syndic, $args='', $ancre='') {
-	return _generer_url_complete('site', $id_syndic, $args, $ancre);
-}
-
-// http://doc.spip.org/@generer_url_document
-function generer_url_document($id_document, $args='', $ancre='') {
-	include_spip('inc/documents');
-	return generer_url_document_dist($id_document, $args, $ancre);
-}
-
-// retrouve le fond et les parametres d'une URL propre
 // http://doc.spip.org/@urls_arbo_dist
-function urls_arbo_dist(&$fond, $url) {
+function urls_arbo_dist(&$entite, $i, $args='', $ancre='') {
 	global $contexte;
+
+	if (is_numeric($i))
+		return _generer_url_arbo($entite, $i, $args, $ancre);
+
+	$url = $i;
+  
 	$id_objet = $type = 0;
 
 	// Migration depuis anciennes URLs ?
@@ -478,22 +439,22 @@ function urls_arbo_dist(&$fond, $url) {
 	
 			$col_id = id_table_objet($type);
 			$contexte[$col_id] = $row['id_objet'];
-			if ($type!='rubrique' OR !in_array($fond,array('article','breve','site')))
-				$fond = $row['type'];
+			if ($type!='rubrique' OR !in_array($entite,array('article','breve','site')))
+				$entite = $row['type'];
 			if ($type=='rubrique')
 				$url_arbo = array();
 		}
 	}
 
-	if ($fond=='type_urls') {
+	if ($entite=='type_urls') {
 		if ($type)
-			$fond =  ($type == 'syndic') ?  'site' : $type;
+			$entite =  ($type == 'syndic') ?  'site' : $type;
 		else {
-			$fond = '404';
+			$entite = '404';
 			$contexte['erreur'] = ''; // qu'afficher ici ?  l'url n'existe pas... on ne sait plus dire de quel type d'objet il s'agit
 		}
 	}
 	define('_SET_HTML_BASE',1);
 }
-} // function_exists
+
 ?>

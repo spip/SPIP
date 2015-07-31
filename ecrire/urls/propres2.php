@@ -23,12 +23,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '.html');
 
-include_once dirname(__FILE__).'/propres.php';
-
 // http://doc.spip.org/@urls_propres2_dist
-function urls_propres2_dist(&$fond, $url) {
-	$f = charger_fonction('propres', 'urls', true);
-	if ($f) $f($fond, $url);
+function urls_propres2_dist(&$entite, $i, $args='', $ancre='') {
+	$f = charger_fonction('propres', 'urls');
+	return $f($entite, $i, $args, $ancre);
 }
 
 ?>

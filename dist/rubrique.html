@@ -120,7 +120,7 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLMOT(MOTS){id_rubrique}>&amp;id_mot[]=#ID_
             <h2><:sur_web:></h2>
             <ul>
                 <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-                <li><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a>
+                <li><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a>
                     <B_syndic>
                     <ul>
                         <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>

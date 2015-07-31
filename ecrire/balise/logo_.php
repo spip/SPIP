@@ -92,7 +92,7 @@ function balise_LOGO__dist ($p) {
 	// 1. filtre |lien
 
 	if ($flag_lien_auto AND !$lien)
-		$code_lien = '($lien = generer_url_'.$type_objet.'('.$_id_objet.')) ? $lien : ""';
+		$code_lien = '($lien = generer_url_entite('.$_id_objet . ',"' . $type_objet .'")) ? $lien : ""';
 	// 2. lien indique en clair (avec des balises : imprimer#ID_ARTICLE.html)
 	else if ($lien) {
 		$code_lien = "'".texte_script(trim($lien))."'";

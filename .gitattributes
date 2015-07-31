@@ -91,7 +91,6 @@ ecrire/action/logout.php -text
 ecrire/action/petitionner.php -text
 ecrire/action/poster_forum_prive.php -text
 ecrire/action/purger.php -text
-ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
 ecrire/action/regler_moderation.php -text
 ecrire/action/reorganiser.php -text

@@ -92,9 +92,7 @@ function notifier_publication_article($id_article) {
 
 			$l = lang_select($row['lang']);
 
-			// URL de l'article
-			charger_generer_url(false);
-			$url = url_absolue(_DIR_RACINE.generer_url_article($id_article, '','', 'publie'));
+			$url = url_absolue(_DIR_RACINE.generer_url_entite($id_article, 'article'));
 
 			$titre = nettoyer_titre_email($row['titre']);
 
@@ -156,47 +154,47 @@ function email_notification_forum ($t, $email) {
 	if (NULL !== ($l = sql_getfetsel('lang', 'spip_auteurs', "email=" . sql_quote($email))))
 		$l = lang_select($l);
 
-
-	charger_generer_url();
+	$url = '';
+	$id_forum = $t['id_forum'];
 
 	if ($t['statut'] == 'prop') # forum modere
 	{
-		$url = generer_url_ecrire('controle_forum', "debut_id_forum=".$t['id_forum']);
+		$url = generer_url_ecrire('controle_forum', "debut_id_forum=".$id_forum);
 	}
 	else if ($t['statut'] == 'prive') # forum prive
 	{
 		if ($t['id_article'])
-			$url = generer_url_ecrire('articles', 'id_article='.$t['id_article']).'#id'.$t['id_forum'];
+			$url = generer_url_ecrire('articles', 'id_article='.$t['id_article']).'#id'.$id_forum;
 		else if ($t['id_breve'])
-			$url = generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']).'#id'.$t['id_forum'];
+			$url = generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']).'#id'.$id_forum;
 		else if ($t['id_syndic'])
-			$url = generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']).'#id'.$t['id_forum'];
+			$url = generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']).'#id'.$id_forum;
 	}
 	else if ($t['statut'] == 'privrac') # forum general
 	{
-		$url = generer_url_ecrire('forum').'#id'.$t['id_forum'];
+		$url = generer_url_ecrire('forum').'#id'.$id_forum;
 	}
 	else if ($t['statut'] == 'privadm') # forum des admins
 	{
-		$url = generer_url_ecrire('forum_admin').'#id'.$t['id_forum'];
-	}
-	else if (function_exists('generer_url_forum')) {
-		$url = generer_url_forum($t['id_forum']);
+		$url = generer_url_ecrire('forum_admin').'#id'.$id_forum;
 	} else {
-		spip_log('inc-urls personnalise : ajoutez generer_url_forum() !');
 		if ($t['id_article'])
-			$url = generer_url_article($t['id_article']).'#'.$t['id_forum'];
-		else
-			$url = './';
-	}
+			$url = generer_url_entite($t['id_article'], 'article','', 'id'.$id_forum);
+		else if ($t['id_breve'])
+			$url = generer_url_entite($t['id_breve'], 'breve', '', 'id'.$id_forum);
+		else if ($t['id_syndic'])
+			$url = generer_url_entite($t['id_syndic'], 'site', '', '#id'.$id_forum);
 
+	}
+	if (!$url) {
+		spip_log("forum $id_forum sans referent");
+		$url = './';
+	}
 	if ($t['id_article']) {
-		$article = sql_fetsel("titre", "spip_articles", "id_article=".sql_quote($t['id_article']));
-		$titre = textebrut(typo($article['titre']));
+		$titre = textebrut(typo(sql_getfetsel("titre", "spip_articles", "id_article=".sql_quote($t['id_article']))));
 	}
 	if ($t['id_message']) {
-		$message = sql_fetsel("titre", "spip_messages", "id_message=".sql_quote($t['id_message']));
-		$titre = textebrut(typo($message['titre']));
+		$titre = textebrut(typo(sql_getfetsel("titre", "spip_messages", "id_message=".sql_quote($t['id_message']))));
 	}
 
 	$sujet = "[" .

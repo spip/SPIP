@@ -12,17 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Les balises URL_$type sont generiques, sauf qq cas particuliers:
-// elles produisent un appel a generer_url_$type(id-courant)
-// grace a la fonction ci-dessous
+// Les balises URL_$type sont generiques, sauf qq cas particuliers.
 // Si ces balises sont utilisees pour la base locale,
-// producttion des appels aux fonctions generer_url parametrees par $type_urls
+// production des appels  a generer_url_entite(id-courant, type_urls)
 // Si la base est externe et non geree par SPIP
 // on retourne NULL pour provoquer leur interpretation comme champ SQL normal.
 // Si la base est externe et sous SPIP,
 // on produit l'URL de l'objet si c'est une piece jointe
 // ou sinon l'URL du site local applique sur l'objet externe
 // ce qui permet de le voir a travers les squelettes du site local
+// Pour bien faire, il faudrait recuperer le choix du type-url distant
 
 // http://doc.spip.org/@generer_generer_url
 function generer_generer_url($type, $p)
@@ -33,8 +32,8 @@ function generer_generer_url($type, $p)
 
 	if ($s = $p->id_boucle) $s = $p->boucles[$s]->sql_serveur;
 
-	if (!$s AND function_exists("generer_url_$type"))
-		return "generer_url_$type($_id)";
+	if (!$s)
+		return "generer_url_entite($_id, '$type')";
 	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
 		return NULL;
 	} else {

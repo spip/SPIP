@@ -110,10 +110,9 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 	echo bouton_spip_rss('signatures');
 
 	if ($id_article) {
+		$h = generer_url_entite($id_article,'article');
 		echo  "<a href='",
-			(($statut == 'publie') ? 
-			generer_url_action('redirect', "id_article=$id_article") :
-			generer_url_ecrire('articles', "id_article=$id_article")),
+			$h,
 			"'>",
 			typo($titre),
 			"</a>",

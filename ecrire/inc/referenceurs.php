@@ -239,18 +239,19 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 //
 // http://doc.spip.org/@referes
 function referes($referermd5, $serveur='') {
-	$refarts = sql_select('J2.id_article, J2.titre', 'spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article', "(referer_md5='$referermd5' AND J1.maj>=DATE_SUB(NOW(), INTERVAL 2 DAY))", '', "titre",'','',$serveur);
+	$retarts = sql_allfetsel('J2.id_article, J2.titre', 'spip_referers_articles AS J1 LEFT JOIN spip_articles AS J2 ON J1.id_article = J2.id_article', "(referer_md5='$referermd5' AND J1.maj>=DATE_SUB(NOW(), INTERVAL 2 DAY))", '', "titre",'','',$serveur);
 
-	$retarts = array();
-	while ($rowart = sql_fetch($refarts,$serveur)) {
-		$id_article = $rowart['id_article'];
-		$titre_article = $rowart['titre'];
-		$retarts[] = "<a href='".generer_url_article($id_article)."'><i>".typo($titre_article)."</i></a>";
+	foreach ($retarts as $k => $rowart) {
+		$titre = typo($rowart['titre']);
+		$url = generer_url_entite($rowart['id_article'], 'article');
+		$retarts[$k] = "<a href='$url'><i>$titre</i></a>";
 	}
-	$r = "";
-	if (count($retarts) > 1) $r = '<br />&rarr; '.join(',<br />&rarr; ',$retarts);
-	if (count($retarts) == 1) $r = '<br />&rarr; '.$retarts[0];
-	return $r;
+
+	if (count($retarts) > 1)
+		return '<br />&rarr; '.join(',<br />&rarr; ',$retarts);
+	if (count($retarts) == 1)
+		return '<br />&rarr; '. array_shift($retarts);
+	return '';
 }
 
 

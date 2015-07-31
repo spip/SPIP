@@ -15,10 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/acces');
 include_spip('inc/texte');
 include_spip('inc/forum');
-include_spip('base/abstract_sql');
-spip_connect();
-
-charger_generer_url();
 
 /*******************************/
 /* GESTION DU FORMULAIRE FORUM */

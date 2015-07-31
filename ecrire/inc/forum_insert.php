@@ -13,15 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/forum');
 include_spip('inc/filtres');
-include_spip('base/abstract_sql');
 include_spip('inc/actions');
-
-spip_connect();
 
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public
 // avec une variable d'URL nommee confirmer_forum
 // Voir commentaires dans balise/formulaire_forum
-
 
 // http://doc.spip.org/@controler_forum_abo
 function controler_forum_abo($retour)
@@ -107,17 +103,16 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	# retour a calculer (cf. inc-formulaire_forum)
 	if ($retour_forum == '!') {
 		// on calcule a priori l'adresse de retour {en cas d'echec du POST}
-		charger_generer_url(_DIR_RACINE !== '');
 		if ($id_forum>0)
-			$retour_forum = generer_url_forum($id_forum);
+			$retour_forum = generer_url_entite($id_forum, 'forum');
 		elseif ($id_article)
-			$retour_forum = generer_url_article($id_article);
+			$retour_forum = generer_url_entite($id_article, 'article');
 		elseif ($id_breve)
-			$retour_forum = generer_url_breve($id_breve);
+			$retour_forum = generer_url_entite($id_breve, 'breve');
 		elseif ($id_syndic)
-			$retour_forum = generer_url_site($id_syndic);
+			$retour_forum = generer_url_entite($id_syndic, 'site');
 		elseif ($id_rubrique) # toujours en dernier
-			$retour_forum = generer_url_rubrique($id_rubrique);
+			$retour_forum = generer_url_entite($id_rubrique, 'rubrique');
 		$retour_forum = str_replace('&amp;','&',$retour_forum);
 
 		// mais la veritable adresse de retour sera calculee apres insertion
@@ -237,7 +232,6 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	// dans le cas des forums moderes a posteriori, ce qui n'est
 	// pas plus mal.
 
-	charger_generer_url();
-	return generer_url_forum($id_message);
+	return generer_url_entite($id_message, 'forum');
 }
 ?>
