@@ -45,7 +45,7 @@ define ('_terminaison_urls_propres', '');
 define ('_debut_urls_propres', '');
 
 // option pour tout passer en minuscules
-define ('_url_arbo_minuscules',0);
+define ('_url_minuscules',0);
 
 // Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
 // indiquer la table ou les chercher (articles, auteurs etc),
@@ -86,7 +86,7 @@ function creer_chaine_url($x) {
 	@define('_URLS_PROPRES_MIN', 3);
 	$titre = supprimer_tags(supprimer_numero(extraire_multi($objet['titre'])));
 	$url = translitteration(corriger_caracteres($titre));
-	if (_url_arbo_minuscules)
+	if (_url_minuscules)
 		$url = strtolower($url);
 
 	// on va convertir tous les caracteres de ponctuation et espaces
