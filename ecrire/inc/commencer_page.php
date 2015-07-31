@@ -55,7 +55,7 @@ function init_entete($titre='', $id_rubrique=0) {
 		verifForm();
 		$("#page")
 		.mouseover(function(){
-			changestyle("garder-recherche");
+			if (window.changestyle) changestyle("garder-recherche");
 		});
 	'
 	.
