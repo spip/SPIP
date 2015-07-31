@@ -679,7 +679,7 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 'texte_inc_auth_3' => ', goude beza&ntilde; kuitaet hag adloc\'het ho merdeer.',
 'texte_inc_config' => '>Ul levezon bras o deus kemmo&ugrave; ar bajenn-ma&ntilde; war mont-en-dro hollek al lec\'hienn.
 Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
- <p align="justify"><b>Aliet oc\'h da lezel webmestr penna&ntilde; al lec\'hienn ober war-dro ar pajenno&ugrave;-ma&ntilde;.</b>',
+ <br /><br /><b>Aliet oc\'h da lezel webmestr penna&ntilde; al lec\'hienn ober war-dro ar pajenno&ugrave;-ma&ntilde;.</b>',
 'texte_inc_meta_1' => 'Ur fazi a zo bet o skriva&ntilde; war ar restr <code>@fichier@</code>. o veza&ntilde; ma\'z oc\'h merour al lec\'hienn e rankit ',
 'texte_inc_meta_2' => 'Gwiria&ntilde; ar gwirio&ugrave; da skriva&ntilde; ',
 'texte_inc_meta_3' => 'war an teul <code>@repertoire@</code>.',

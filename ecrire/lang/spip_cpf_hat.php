@@ -660,7 +660,7 @@ ak tounyen d&eacute;y&eacute; konekte sou sit-la.
  r&egrave;t ek d&eacute;mar yon lot fwa navigat&egrave; ou.',
 'texte_inc_config' => 'Tout chanjman nan paj sa-yo genyen gran enflians si manyen sit-la ka mache.
  L&egrave;s azot bagay-la sou kote kounyen-a, si w genyen p&ograve;k&ograve; gran abitid ak manyen kouman SPIP mache.
-<p align="justify"><b> Ann
+<br /><br /><b> Ann
 l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou sit-la.</b>',
 'texte_inc_meta_1' => 'Sist&egrave;m la ki genyen yon er&egrave; ak l&eacute;kriti fichye <code>@fichier@</code>. M&egrave;si, w ki komand&egrave; sit-la,',
 'texte_inc_meta_2' => 'gade tout drwa l&eacute;kriti se korek',

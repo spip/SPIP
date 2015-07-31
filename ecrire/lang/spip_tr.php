@@ -719,7 +719,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'texte_inc_auth_1' => '<b>@auth_login@</b> kullan&#305;c&#305; ismini girdiniz ancak veritaban&#305;nda (art&#305;k) bu kullan&#305;c&#305; ismi yok.  &#350;unu deneyiniz :',
 'texte_inc_auth_2' => 'gezgininizi kapat&#305;p tekrar &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z ve ',
 'texte_inc_auth_3' => 'tekrar ba&#287;lan&#305;n&#305;z.',
-'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;ini b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkiler. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi tavsiye ederiz. <p align="justify"><b>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalar&#305;n y&uuml;k&uuml;n&uuml; sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle tavsiye ederiz.</b>',
+'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;ini b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkiler. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi tavsiye ederiz. <br /><br /><b>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalar&#305;n y&uuml;k&uuml;n&uuml; sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle tavsiye ederiz.</b>',
 'texte_inc_meta_1' => 'Sistem <code>@fichier@</code> dosyas&#305;n&#305;n yaz&#305;lmas&#305; s&#305;ras&#305;nda bir hata ile kar&#351;&#305;la&#351;t&#305;. L&uuml;tfen, site y&ouml;neticisi olarak ',
 'texte_inc_meta_2' => '(<code>ecrire/data/</code> dizinindeki) ',
 'texte_inc_meta_3' => '<code>@repertoire@</code> dizinindeki yazma haklar&#305;n&#305; kontrol ediniz. ',

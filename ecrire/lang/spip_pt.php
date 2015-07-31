@@ -663,7 +663,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'texte_inc_auth_3' => ', depois de eventualmente ter fechado e
  voltado a abrir o seu navegador.',
 'texte_inc_config' => 'As modifica&ccedil;&otilde;es efectuadas nestas p&aacute;ginas influenciam muito o
- funcionamento do seu s&iacute;tio. Recomendamos que n&atilde;o intervenha enquanto n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP. <p align="justify"><b>Em
+ funcionamento do seu s&iacute;tio. Recomendamos que n&atilde;o intervenha enquanto n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP. <br /><br /><b>Em
  geral, &eacute; fortemente recomendado
  deixar a responsabilidade dessas p&aacute;ginas ao webmestre principal do seu s&iacute;tio. <b>',
 'texte_inc_meta_1' => '<MODIF>O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',

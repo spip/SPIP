@@ -672,7 +672,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
   i w&#322;&#261;czaj&#261;c j&#261; na powr&oacute;t.',
 'texte_inc_config' => 'Zmiany dokonane na tych stronach znacz&#261;co wp&#322;yn&#261; na
  funkcjonowanie Twojego serwisu. Radzimy nie zatwierdza&#263; tych zmian do momentu, w kt&oacute;rym nie b&#281;dziecie
- dobrze obeznani z funkcjonowaniem systemu SPIP. <p align="justify"><b>Najbardziej
+ dobrze obeznani z funkcjonowaniem systemu SPIP. <br /><br /><b>Najbardziej
  zalecamy, poproszenie o dokonanie zmian g&#322;&oacute;wnego adminsitratora serwisu.</b>',
 'texte_inc_meta_1' => 'System nie mo&#380;e zapisa&#263; plik&oacute;w <code>@fichier@</code>. Jako administrator strony,',
 'texte_inc_meta_2' => 'sprawd&#378; pozwolenia zapisu',

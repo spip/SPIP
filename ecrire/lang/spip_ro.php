@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Eroare de programare. Aceast&#259; func&#355;ie nu trebuie chemat&#259; &icirc;n acest context.',
 'avis_erreur_mysql' => 'Eroare MySQL',
 'avis_erreur_sauvegarde' => 'Eroare &icirc;n timpul salv&#259;rii (@type@ @id_objet@) !',
-'avis_erreur_visiteur' => '<NEW>Problema de acces la spatiul privat',
+'avis_erreur_visiteur' => 'Problem&#259; de acces &icirc;n sec&#355;iunea privat&#259;',
 
 
 // B
@@ -430,10 +430,9 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_erreur_requete' => 'Eroare &icirc;n cererea :',
 'info_erreur_squelette2' => 'Nici un schelet <b>@fichier@</b> nu este disponibil...',
 'info_erreur_systeme' => 'Eroare sistem (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>Discul este probabil plin sau baza de date este corupt&#259;.
+'info_erreur_systeme2' => 'Discul este probabil plin sau baza de date este corupt&#259;.
  <font color=\'red\'>&Icirc;ncerca&#355;i s&#259; <a href=\'@script@\'>repara&#355;i baza de date</a>,
- sau contacta&#355;i-l pe furnizorul dumneavoastr&#259; de internet.</font>
-',
+ sau contacta&#355;i-l pe furnizorul dumneavoastr&#259; de internet.</font>',
 'info_fini' => 'Este gata !',
 'info_format_image' => 'Formatele de imagini care pot fi folosite la crearea vini&eacute;telor&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'format nedefinit',
@@ -733,7 +732,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
   &Icirc;ncerca&#355;i s&#259;',
 'texte_inc_auth_2' => 'v&#259; reconecta&#355;i',
 'texte_inc_auth_3' => ', dup&#259; ce, eventual, a&#355;i p&#259;r&#259;sit &#351;i redemarat navigatorul de web.',
-'texte_inc_config' => '<MODIF>Modific&#259;rile efectuate &icirc;n aceste pagini au influen&#355;&#259; direct&#259; asupra func&#355;ion&#259;rii site-ului. V&#259; recomand&#259;m s&#259; nu interveni&#355;i at&acirc;t timp c&acirc;t nu sunte&#355;i familiarizat cu func&#355;ionarea sistemului SPIP. <p align="justify"><b>&Icirc;n
+'texte_inc_config' => '<MODIF>Modific&#259;rile efectuate &icirc;n aceste pagini au influen&#355;&#259; direct&#259; asupra func&#355;ion&#259;rii site-ului. V&#259; recomand&#259;m s&#259; nu interveni&#355;i at&acirc;t timp c&acirc;t nu sunte&#355;i familiarizat cu func&#355;ionarea sistemului SPIP. <br /><br /><b>&Icirc;n
  general, este recomandat s&#259; l&#259;sa&#355;i aceste pagini &icirc;n sarcina webmaster-ului principal al acestui site.</b></p>',
 'texte_inc_meta_1' => 'Sistemul a &icirc;nt&acirc;lnit o eroare la scrierea fi&#351;ierului <code>@fichier@</code>. V&#259; rugam ca, &icirc;n calitate de administrator al acestui site,',
 'texte_inc_meta_2' => 's&#259; verifica&#355;i drepturile de scriere',

@@ -703,7 +703,7 @@ and connect again to the site.
   &#1087;&#1077;&#1088;&#1077;&#1075;&#1088;&#1091;&#1079;&#1080;&#1090;&#1077; &#1074;&#1072;&#1096; &#1073;&#1088;&#1072;&#1091;&#1079;&#1077;&#1088; &#1074; &#1089;&#1083;&#1091;&#1095;&#1072;&#1077; &#1085;&#1077;&#1086;&#1073;&#1093;&#1086;&#1076;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080;.',
 'texte_inc_config' => '<MODIF>The modifications entered below influence notably
   the functioning of the site. You are advised not to deal with them unless you are
- familiar with the functioning of the SPIP system. <p align="justify"><b>More
+ familiar with the functioning of the SPIP system. <br /><br /><b>More
  generally, you are strongly advised
  to let the main webmaster of your site deal with this page.</b>',
 'texte_inc_meta_1' => '<MODIF>&#1057;&#1080;&#1089;&#1090;&#1077;&#1084;&#1072; &#1074;&#1099;&#1079;&#1074;&#1072;&#1083;&#1072;  &#1086;&#1096;&#1080;&#1073;&#1082;&#1091;,&#1087;&#1088;&#1080; &#1087;&#1086;&#1087;&#1099;&#1090;&#1082;&#1080; &#1079;&#1072;&#1087;&#1080;&#1089;&#1080; &#1074; &#1092;&#1072;&#1081;&#1083; <code>@fichier@</code>. &#1054;&#1073;&#1088;&#1072;&#1090;&#1080;&#1090;&#1077;&#1089;&#1100; &#1082; &#1072;&#1076;&#1084;&#1080;&#1085;&#1080;&#1089;&#1090;&#1088;&#1072;&#1090;&#1086;&#1088;&#1091; &#1089;&#1072;&#1081;&#1090;&#1072;',

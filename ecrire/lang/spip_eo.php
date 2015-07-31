@@ -691,7 +691,7 @@ kaj ensaluti.
   restartiginta via retumilon.',
 'texte_inc_config' => '<MODIF>La &#349;an&#285;oj faritaj en tiuj &#265;i pa&#285;oj influas grave la
  funkcionadon de via retejo. Ni konsilas vin ne plu interveni anta&#365; ol esti pli
- kutimi&#285;inta pri la funkcionado de la sistemo SPIP. <p align="justify"><b>Pli
+ kutimi&#285;inta pri la funkcionado de la sistemo SPIP. <br /><br /><b>Pli
  &#285;enerale, estas tre konsilinde lasi la mastrumadon de tiuj &#265;i pa&#285;oj
  al la &#265;efa retejestro .</b>',
 'texte_inc_meta_1' => 'La sistemo detektis eraron dum skribado de la dosiero <code>@fichier@</code>. Bonvolu, kiel mastrumanto de la retejo,',

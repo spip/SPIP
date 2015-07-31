@@ -624,7 +624,7 @@ Obratite paznu na ovu referencu, ponovo pokusajte nadogradnju i na kraju provjer
 'texte_inc_auth_1' => 'Identifikovani ste pod loginom <b>@auth_login@</b>, ali on vise ne postoji u bazi. Pokusajte se ponovo',
 'texte_inc_auth_2' => 'prijaviti',
 'texte_inc_auth_3' => ', nakon sto ste iskljucili, a zatim ponovo ukljucili vas navigator.',
-'texte_inc_config' => 'Dole unesene modifikacije znatno uticu na funkcionisanje vase stranice. Preporucuje se da ne intervenisete ako niste upoznati sa SPIP sistemom. <p align="justify"><b>Generalno se preporucuje intervencija webmastera ove stranice.</b>',
+'texte_inc_config' => 'Dole unesene modifikacije znatno uticu na funkcionisanje vase stranice. Preporucuje se da ne intervenisete ako niste upoznati sa SPIP sistemom. <br /><br /><b>Generalno se preporucuje intervencija webmastera ove stranice.</b>',
 'texte_inc_meta_1' => 'Sistem je naisao na gresku pri pokusaju da pise dokument <code>ecrire/data/meta_cache.php3</code>. Kao administrator stranice,',
 'texte_inc_meta_2' => 'mozete provjeriti dozvolu pisanja',
 'texte_inc_meta_3' => 'u direktorij <code>ecrire/data/</code>.',
