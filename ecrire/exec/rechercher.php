@@ -27,6 +27,7 @@ include_spip('inc/texte');
  * Prépare la fonction de recherche ajax du mini navigateur de rubriques
  * 
  * @uses exec_rechercher_args() Formate le rendu de la recherche.
+ * @uses ajax_retour()
 **/
 function exec_rechercher_dist()
 {

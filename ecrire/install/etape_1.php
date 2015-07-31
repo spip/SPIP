@@ -10,9 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Affichage de l'écran d'installation (étape 1 : tests des répertoires
+ * et hébergement, et demande d'identifiants de connexion à la BDD)
+ * 
+ * @package SPIP\Core\Installation
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@install_etape_1_dist
+/**
+ * Affichage de l'étape 1 d'installation : tests des répertoires
+ * et hébergement ; demande d'identifiants de connexion à la BDD
+ *
+ * Teste que l'hébergement est compatible, que les répertoires qui doivent
+ * être accessibles en écriture le sont effectivement, auquel cas demande les identifiants
+ * de connexion à une base de données
+ *
+ * @uses tester_compatibilite_hebergement()
+ * @uses analyse_fichier_connection()
+ * @uses login_hebergeur()
+ * 
+ */
 function install_etape_1_dist()
 {
 	echo install_debut_html();

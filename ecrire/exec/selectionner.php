@@ -23,6 +23,7 @@ include_spip('inc/actions');
  * Affichage en ajax du sélecteur (mini-navigateur) de rubrique AJAX
  *
  * @uses inc_selectionner_dist()
+ * @uses ajax_retour()
 **/
 function exec_selectionner_dist()
 {

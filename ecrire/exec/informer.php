@@ -20,9 +20,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 
 /**
- * Affiche en ajax les informations d'une rubrique selectionnée dans le mini navigateur
+ * Affiche en ajax des informations d'une rubrique selectionnée dans le mini navigateur
  *
  * @uses inc_informer_dist()
+ * @uses ajax_retour()
 **/
 function exec_informer_dist()
 {

@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Affichage des étapes d'installation de SPIP
+ * 
+ * @package SPIP\Core\Exec
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/minipres');
@@ -19,7 +25,20 @@ include_spip('inc/autoriser');
 define('_ECRIRE_INSTALL', "1");
 define('_FILE_TMP', '_install');
 
-// http://doc.spip.org/@exec_install_dist
+/**
+ * Affiche un des écrans d'installation de SPIP
+ *
+ * Affiche l'étape d'installation en cours, en fonction du paramètre
+ * d'url `etape`
+ * 
+ * @uses inc_auth_dist()
+ * @uses verifier_visiteur()
+ *
+ * @uses install_etape__dist()
+ *   Affiche l'écran d'accueil de l'installation,
+ *   si aucune étape n'est encore définie.
+ * 
+**/
 function exec_install_dist()
 {
 	$etape = _request('etape');

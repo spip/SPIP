@@ -10,9 +10,20 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
+/**
+ * Affichage de l'écran d'installation (étape 0 : écran d'accueil)
+ * 
+ * @package SPIP\Core\Installation
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@install_etape__dist
+/**
+ * Affiche l'étape 0 d'installation : écran d'accueil.
+ *
+ * @uses info_copyright()
+**/
 function install_etape__dist()
 {
 	utiliser_langue_visiteur();
