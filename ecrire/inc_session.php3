@@ -34,29 +34,9 @@ function fichier_session($id_session, $alea) {
 }
 
 //
-// Effacer toutes les sessions crees il y a plus de 48 heures
-// (de toute facon invalides car l'alea est expire)
-//
-function nettoyer_sessions() {
-	$dir = 'data';
-	if (!$GLOBALS['flag_ecrire']) $dir = 'ecrire/'.$dir;
-	$handle = opendir($dir);
-	$t = time();
-	while (($fichier = readdir($handle)) != '') {
-		if (!eregi("^session_[0-9a-f]+\.php3?$", $fichier)) continue;
-		$chemin = "$dir/$fichier";
-		if (($t - filemtime($chemin)) > 48 * 3600) {
-			@unlink($chemin);
-		}
-	}
-	closedir($handle);
-}
-
-//
 // Ajouter une session pour l'auteur specifie
 //
 function ajouter_session($auteur, $id_session) {
-	nettoyer_sessions();
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
 	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut');
 
@@ -150,8 +130,14 @@ function creer_uniqid() {
 
 //
 // sessions a zapper (login, zapper oui/non)
-// Un peu crado car lecture obligatoire de toutes les sessions...
+//
+// Cette fonction regarde toutes les sessions appartenant a l'auteur,
+// et les efface (si demande, et a l'exception de la session courante)
+//
 // Noter que le login est lu directement sur la ligne 3 du fichier de session
+//
+// On en profite pour effacer toutes les sessions creees il y a plus de 48 h
+//
 function zap_sessions ($login, $zap) {
 	if ($GLOBALS['flag_ecrire']) {
 		$dirname = "data/";
@@ -164,13 +150,20 @@ function zap_sessions ($login, $zap) {
 		$fichier_session = fichier_session($s, lire_meta('alea_ephemere'));
 
 	$dir = opendir($dirname);
+	$t = time();
 	while(($item = readdir($dir)) != ''){
 		if (ereg("^session_([a-z0-9]+)\.php3$", $item, $regs) AND ($fichier_session != $dirname.$item)) {
-			$session = file("$dirname$item");
-			if (ereg("GLOBALS\['auteur_session'\]\['login'\] = '$login'", $session[3])) {
-				$zap_num ++;
-				if ($zap) {
-					@unlink("$dirname$item");
+			$chemin = "$dirname$item";
+			// Si c'est une vieille session, on jette
+			if (($t - filemtime($chemin)) > 48 * 3600)
+				@unlink($chemin);
+			else
+			{	// voir si c'est une session du meme auteur
+				$session = file($chemin);
+				if (ereg("GLOBALS\['auteur_session'\]\['login'\] = '$login'", $session[3])) {
+					$zap_num ++;
+					if ($zap)
+						@unlink($chemin);
 				}
 			}
 		}
