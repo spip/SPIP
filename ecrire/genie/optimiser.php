@@ -96,11 +96,15 @@ function optimiser_base_disparus($attente = 86400) {
 	//
 
 	# les articles qui sont dans une id_rubrique inexistante
+	# attention on controle id_rubrique>0 pour ne pas tuer les articles
+	# specialement affectes a une rubrique non-existante (plugin,
+	# cf. http://trac.rezo.net/trac/spip/ticket/1549 )
 	$res = sql_select("articles.id_article AS id",
 		        "spip_articles AS articles
 		        LEFT JOIN spip_rubriques AS rubriques
 		          ON articles.id_rubrique=rubriques.id_rubrique",
-			"rubriques.id_rubrique IS NULL
+			 "articles.id_rubrique > 0
+			 AND rubriques.id_rubrique IS NULL
 		         AND articles.maj < $mydate");
 
 	$n+= optimiser_sansref('spip_articles', 'id_article', $res);
