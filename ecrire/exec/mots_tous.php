@@ -37,15 +37,19 @@ function exec_mots_tous_dist()
 		while ($row_groupes = sql_fetch($result)) {
 			$id_groupe = $row_groupes['id_groupe'];
 			$titre_groupe = typo($row_groupes['titre']);		
-			$out .= "<li><a href='#mots_tous-$id_groupe' onclick='$(\"div.mots_tous\").hide().filter(\"#mots_tous-$id_groupe\").show();return false;'>$titre_groupe</a></li>";
+			$out .= "<li class='item'><a href='#mots_tous-$id_groupe' onclick='$(\"div.mots_tous\").hide().filter(\"#mots_tous-$id_groupe\").show();return false;'>$titre_groupe</a></li>";
 		}
 		if (strlen($out))
-			$out = "
-			<ul class='raccourcis_rapides'>".$out."</ul>
-			<a href='#' onclick='$(\"div.mots_tous\").show();return false;'>"._T('icone_voir_tous_mots_cles')."</a>";
+			$out =
+			"<a class='verdana1' href='#' onclick='$(\"div.mots_tous\").show();return false;'>"._T('icone_voir_tous_mots_cles')."</a>"
+			."<ul class='liste-items raccourcis_rapides'>"
+			.$out
+			."</ul>"
+			;
 
+		echo debut_boite_info(true) . $out . fin_boite_info(true);
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
-		echo bloc_des_raccourcis($res . $out);
+		echo bloc_des_raccourcis($res);
 	}
 
 
