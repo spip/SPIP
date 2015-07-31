@@ -87,8 +87,10 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			if ((($kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
-				))
-				$keywords = unicode2charset(utf_8_to_unicode($keywords));
+				)) {
+				include_ecrire('inc_charsets.php3');
+				$keywords = unicode2charset(charset2unicode($keywords,'utf-8'));
+			}
 		}
 	}
 
