@@ -196,7 +196,8 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$titre = addslashes(corriger_caracteres($titre));
 	$soustitre = addslashes(corriger_caracteres($soustitre));
 	$descriptif = addslashes(corriger_caracteres($descriptif));
-	$url_ref = addslashes(corriger_caracteres($url_ref));
+	$nom_site = addslashes(corriger_caracteres($nom_site));
+	$url_site = addslashes(corriger_caracteres($url_site));
 	$chapo = addslashes(corriger_caracteres($chapo));
 	$texte = addslashes(corriger_caracteres($texte));
 	$ps = addslashes(corriger_caracteres($ps));
@@ -216,7 +217,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_ref=\"$url_ref\" $add_extra WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_site=\"$url_site\", nom_site=\"$nom_site\" $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') $reindexer = true;
@@ -277,7 +278,8 @@ if ($row = spip_fetch_array($result)) {
 	$soustitre = $row["soustitre"];
 	$id_rubrique = $row["id_rubrique"];
 	$descriptif = $row["descriptif"];
-	$url_ref = $row["url_ref"];
+	$nom_site = $row["nom_site"];
+	$url_site = $row["url_site"];
 	$chapo = $row["chapo"];
 	$texte = $row["texte"];
 	$ps = $row["ps"];
@@ -723,11 +725,11 @@ if ($soustitre) {
 }
 
 
-if ($descriptif<>'' OR $url_ref<>'') {
+if ($descriptif OR $url_site OR $nom_site) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-	$texte_case .= ($url_ref) ? "{{"._T('info_urlref')."}} [->$url_ref]" : '';
+	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
 	echo propre($texte_case);
 	echo "</font>";
 	echo "</div>";

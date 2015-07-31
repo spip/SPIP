@@ -38,7 +38,8 @@ if ($id_article) {
 		$id_rubrique = $row["id_rubrique"];
 		$id_secteur = $row['id_secteur'];
 		$descriptif = $row["descriptif"];
-		$url_ref = $row["url_ref"];
+		$nom_site = $row["nom_site"];
+		$url_site = $row["url_site"];
 		$chapo = $row["chapo"];
 		$texte = $row["texte"];
 		$ps = $row["ps"];
@@ -284,7 +285,8 @@ echo "<P><HR><P>";
 	$surtitre = entites_html($surtitre);
 
 	$descriptif = entites_html($descriptif);
-	$url_ref = entites_html($url_ref);
+	$nom_site = entites_html($nom_site);
+	$url_site = entites_html($url_site);
 	$chapo = entites_html($chapo);
 	$texte = entites_html($texte);
 	$ps = entites_html($ps);
@@ -357,9 +359,12 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
 	}
 
-	if (($options == "avancees" AND $articles_urlref != "non") OR $url_ref) {
-		echo "<P><b>"._T('info_urlref')."</b> ";
-		echo "<input type='text' name='url_ref' class='forml' width='40' value=\"$url_ref\"/>";
+	if (($options == "avancees" AND $articles_urlref != "non") OR $nom_site OR $url_site) {
+		echo _T('entree_liens_sites')."<br />\n";
+		echo _T('info_titre')." ";
+		echo "<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n";
+		echo _T('info_url')." ";
+		echo "<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>";
 	}
 
 	if (substr($chapo, 0, 1) == '=') {

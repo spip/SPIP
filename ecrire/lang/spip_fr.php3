@@ -527,7 +527,7 @@ Merci de votre participation
 'info_changer_nom_groupe' => 'Changer le nom de ce groupe :',
 'info_chapeau' => 'Chapeau',
 'info_chapeau_2' => 'Chapeau&nbsp;:',
-'info_urlref' => 'Adresse (URL) de r&eacute;f&eacute;rence&nbsp;:',
+'info_urlref' => 'Lien hypertexte&nbsp;:',
 'info_chemin_acces_1' => 'Options : <B>Chemin d\'acc&egrave;s dans l\'annuaire</B>',
 'info_chemin_acces_2' => 'Vous devez d&eacute;sormais configurer le chemin d\'acc&egrave;s aux informations dans l\'annuaire. Cette information est indispensable pour lire les profils utilisateurs stock&eacute;s dans l\'annuaire.',
 'info_chemin_acces_annuaire' => 'Options : <B>Chemin d\'acc&egrave;s dans l\'annuaire',

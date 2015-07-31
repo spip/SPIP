@@ -85,7 +85,7 @@ function init_champs_squel() {
 		'LOGO_BREVE_RUBRIQUE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE',
 		'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL',
 		'LOGO_ARTICLE_SURVOL', 'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE',
-		'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 'URL_REF',
+		'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT',
 		'EMBED_DOCUMENT', 'IP', 'VISITES', 'POPULARITE',
 		'POPULARITE_ABSOLUE', 'POPULARITE_MAX', 'POPULARITE_SITE', 'POINTS',
 		'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION', 'LARGEUR', 'HAUTEUR',
@@ -110,7 +110,7 @@ function init_champs_squel() {
 	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER', 'CHARSET',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS',
 		'NOTES', 'INTRODUCTION', 'MESSAGE', 'LESAUTEURS', 'EMAIL', 'NOM_SITE',
-		'LIEN_TITRE', 'URL_SITE', 'URL_REF', 'LIEN_URL', 'NOM', 'IP', 'BIO',
+		'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'IP', 'BIO',
 		'TYPE', 'PGP', 'RECHERCHE'
 	);
 	reset($c);
@@ -148,7 +148,7 @@ function init_champs_squel() {
 	}
 
 	// URL_SITE : vider les url == 'http://'
-	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'URL_REF');
+	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'vider_url';
@@ -157,7 +157,7 @@ function init_champs_squel() {
 	// URLs : remplacer les & par &amp;
 	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'PARAMETRES_FORUM',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC',
-		'URL_MOT', 'URL_DOCUMENT', 'URL_REF');
+		'URL_MOT', 'URL_DOCUMENT');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'htmlspecialchars';
@@ -182,7 +182,8 @@ function init_champs_squel() {
 		'LANG' => 'lang',
 		'DATE' => 'date',
 		'DATE_REDAC' => 'date_redac',
-		'URL_REF' => 'url_ref',
+		'NOM_SITE' => 'nom_site',
+		'URL_SITE' => 'url_site',
 		'DATE_MODIF' => 'date_modif',
 		'VISITES' => 'visites',
 		'POINTS' => 'points'
