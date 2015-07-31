@@ -53,7 +53,15 @@ function install_bases($adresse_db, $login_db, $pass_db,  $server_db, $choix_db,
 		}
 	}
 
-	sql_selectdb($sel_db, $server_db);
+	// on rejoue la connexion apres avoir teste si il faut lui indiquer
+	// un sql_mode
+	test_sql_mode_mysql($server_db);
+	$GLOBALS['connexions'][$server_db]
+	= spip_connect_db($adresse_db, $sel_db, $login_db, $pass_db, $sel_db, $server_db);
+
+	$GLOBALS['connexions'][$server_db][$GLOBALS['spip_sql_version']]
+	= $GLOBALS['spip_' . $server_db .'_functions_' . $GLOBALS['spip_sql_version']];
+
 	// Completer le tableau decrivant la connexion
 
 	$GLOBALS['connexions'][$server_db]['prefixe'] = $table_prefix;
@@ -318,8 +326,10 @@ function test_rappel_nom_base_mysql($server_db)
 function test_sql_mode_mysql($server_db){
 	$res = sql_select("version() as v",'','','','','','',$server_db);
 	$row = sql_fetch($res,$server_db);
-	if (version_compare($row['v'],'5.0','>='))
+	if (version_compare($row['v'],'5.0.0','>=')){
+		define('_MYSQL_SET_SQL_MODE',true);
 		return "define('_MYSQL_SET_SQL_MODE',true);\n";
+	}
 	return '';
 }
 ?>
