@@ -141,7 +141,7 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 		<titre>onglet_fonctions_avances</titre>		
 	</bouton>
 	
-	<bouton id='admin_plugin' parent="menu_configuration" position="0">
+	<bouton id='admin_plugin' parent="menu_configuration" position="-1">
 		<icone>images/plugin-16.png</icone>
 		<titre>icone_admin_plugin</titre>		
 	</bouton>
