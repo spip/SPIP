@@ -82,18 +82,16 @@ function gen_liste_rubriques() {
 
 // http://doc.spip.org/@gadget_rubriques
 function gadget_rubriques() {
-	global $max_lignes;
 
 	gen_liste_rubriques(); 
 	$arr_low = extraire_article(0);
 
 	$total_lignes = $i = sizeof($arr_low);
-	$nb_col = min(10,max(4,ceil($total_lignes / 10)));
+	$nb_col = min(10,max(1,ceil($total_lignes / 10)));
 	$max_lignes = ceil($total_lignes / $nb_col);
-	$largeur = (800 / $nb_col) . 'px';;
 
 	$count_lignes = 0;
-	$style = " style='width: $largeur; z-index: 1; vertical-align: top;'";
+	$style = " style='z-index: 1; vertical-align: top;'";
 	$ret = '';
 
 	if ($i > 0) {
@@ -122,12 +120,10 @@ function gadget_rubriques() {
 // http://doc.spip.org/@bandeau_rubrique
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	global $zdecal;
-	global $max_lignes;
 	global $spip_ecran, $spip_display;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$titre_rubrique = preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique);
-	$count_ligne = 0;
 	$zdecal = $zdecal + 1;
 	// Limiter volontairement le nombre de sous-menus 
 	$zmax = 6;
@@ -151,13 +147,15 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		$ret .= '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
 		$ret .= "<div>\n";
 		
-		if ($nb_rub = count($arr_rub))
-			$ret_ligne =  ceil($nb_rub / ceil($nb_rub / $max_lignes)) + 1;
-				
+		if ($nb_rub = count($arr_rub)) {
+		  $nb_col = min(10,max(1,ceil($nb_rub / 10)));
+		  $ret_ligne = max(4,ceil($nb_rub / $nb_col));
+		}
+		$count_ligne = 0;
 		foreach( $arr_rub as $id_rub => $titre_rub) {
 			$count_ligne ++;
 			
-			if ($count_ligne == $ret_ligne) {
+			if ($count_ligne > $ret_ligne) {
 				$count_ligne = 0;
 				$ret .= "</div>";
 				$ret .= "</td>";
