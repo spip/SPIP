@@ -66,7 +66,7 @@ function exec_mots_edit_args($id_mot, $id_groupe, $new, $table='', $table_id='',
 			//($table ? "$table='oui'" : '')
 				    );
 
-		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe)) OR (!$row AND $table)) {
+		if (!$new OR !autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe)) OR (!$row AND !$table)) {
 			include_spip('inc/minipres');
 			echo minipres(_T('info_mot_sans_groupe'));
 		} else {
