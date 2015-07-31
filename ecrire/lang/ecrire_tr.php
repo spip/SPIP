@@ -71,6 +71,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_effacer_tout' => 'HEPS&#304;N&#304; sil',
 'bouton_envoi_message_02' => '&#304;LET&#304; YOLLA',
 'bouton_envoyer_message' => '&#304;letinin son hali : yolla',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM &amp; &#304;MZA KAMPANYASI',
 'bouton_modifier' => 'De&#287;i&#351;tir',
 'bouton_pense_bete' => 'Ki&#350;iSEL NOT DEFTERi',
@@ -314,6 +315,15 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_articles_trouves' => 'Bulunan makaleler',
 'info_articles_trouves_dans_texte' => '(metin i&ccedil;erisinde) bulunan makeleler ',
 'info_attente_validation' => 'Onay bekleyen makaleleriniz',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Bug&uuml;n :',
 'info_auteur_message' => '&#304;LET&#304;N&#304;N YAZARI :',
 'info_auteurs' => 'Yazarlar',
@@ -603,6 +613,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_referencer_doc_distant' => 'Internet &uuml;zerinde bir dok&uuml;mana at&#305;fta bulunmak&nbsp;:',
 'info_refuses' => 'Reddedilen makaleleriniz',
 'info_reglage_ldap' => 'Se&ccedil;enekler : <b>LDAP ithalinin ayarlanmas&#305;.</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Y&ouml;nlendirme.</b> Bu makalenin bizi &#351;u sayfaya y&ouml;nlendirir:',
 'info_reserve_admin' => 'Bu adresi sadece y&ouml;neticiler de&#287;i&#351;tirebilir.',
 'info_restauration_sauvegarde' => '@archive@ yede&#287;inin geri y&uuml;klenmesi',
@@ -826,6 +837,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Bu al&#305;c&#305;y&#305; ekle',
 'lien_ajouter_auteur' => 'Bu yazar&#305;n ekle',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Bir kat&#305;l&#305;mc&#305;y&#305; ekle',
 'lien_email' => 'e-posta ',
 'lien_forum_public' => 'Bu makalenin kamu forumunu y&ouml;net',
@@ -838,6 +850,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'lien_reponse_rubrique' => 'Bu b&ouml;l&uuml;me yan&#305;t ',
 'lien_reponse_site_reference' => 'At&#305;fta bulunan siteye yan&#305;t : ',
 'lien_retirer_auteur' => 'Yazar&#305; sil',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'bu kat&#305;l&#305;mc&#305;y&#305; sil',
 'lien_site' => 'site',
 'lien_supprimer_rubrique' => 'bu b&ouml;l&uuml;m&uuml; sil',
@@ -1130,6 +1143,8 @@ SQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; onarma yetene&#287;i var
 'titre_admin_effacer' => 'Teknik bak&#305;m ',
 'titre_admin_tech' => 'Teknik bak&#305;m ',
 'titre_admin_vider' => 'Teknik bak&#305;m ',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Bu siteden al&#305;nan payla&#351;&#305;ml&#305; makaleler',
 'titre_breves' => 'K&#305;sa haberler  ',
 'titre_cadre_afficher_article' => 'Makaleleri g&ouml;ster',

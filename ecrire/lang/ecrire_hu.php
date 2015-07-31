@@ -73,6 +73,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'bouton_effacer_tout' => 'MINDENT t&ouml;r&ouml;lni',
 'bouton_envoi_message_02' => '&Uuml;ZENET K&Uuml;LD&Eacute;S',
 'bouton_envoyer_message' => 'V&eacute;gleges &uuml;zenet: k&uuml;ld&eacute;s',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'F&Oacute;RUM &Eacute;S AL&Aacute;&Iacute;R&Aacute;SGY&#368;JT&Eacute;S (Petici&oacute;)',
 'bouton_modifier' => 'M&oacute;dos&iacute;t&aacute;s',
 'bouton_pense_bete' => 'EML&Eacute;KEZTET&#336; SZEM&Eacute;LYES HASZN&Aacute;LATHOZ',
@@ -318,6 +319,15 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_articles_trouves' => 'Tal&aacute;lt cikkek',
 'info_articles_trouves_dans_texte' => 'Tal&aacute;lt cikkek (a sz&ouml;vegben)',
 'info_attente_validation' => 'J&oacute;v&aacute;hagy&aacute;s alatti cikkei',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'A mai napon&nbsp;:',
 'info_auteur_message' => 'AZ &Uuml;ZENET SZERZ&#336;JE :',
 'info_auteurs' => 'A szerz&#337;k',
@@ -596,6 +606,7 @@ a felhaszn&aacute;l&oacute;k automatikus emailt kapnak,
 'info_referencer_doc_distant' => 'Felvenni egy dokumentumot a Neten&nbsp;:',
 'info_refuses' => 'Az &Ouml;n elutas&iacute;tott cikkei',
 'info_reglage_ldap' => 'Opci&oacute;k: <b>LDAP import&aacute;l&aacute;s be&aacute;ll&iacute;t&aacute;sa</b>', # MODIF
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>&Aacute;tir&aacute;ny&iacute;t&aacute;s.</b> Ez a cikk erre az oldalra hivatkozik:', # MODIF
 'info_reserve_admin' => 'Csak az adminisztr&aacute;tork m&oacute;dos&iacute;thatj&aacute;k ezt a c&iacute;met.',
 'info_restauration_sauvegarde' => 'A @archive@ nev&#369; ment&eacute;s resztaur&aacute;l&aacute;sa', # MODIF
@@ -819,6 +830,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'A c&iacute;mzett hozz&aacute;ad&aacute;sa',
 'lien_ajouter_auteur' => 'A szerz&#337; hozz&aacute;ad&aacute;sa',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Egy r&eacute;sztvev&#337; hozz&aacute;ad&aacute;sa',
 'lien_email' => 'email',
 'lien_forum_public' => 'A cikk nyilv&aacute;nos f&oacute;rum&aacute;nak kezel&eacute;se',
@@ -831,6 +843,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'lien_reponse_rubrique' => 'Hozz&aacute;sz&oacute;l&aacute;s a rubrik&aacute;hoz',
 'lien_reponse_site_reference' => 'Hozz&aacute;sz&oacute;l&aacute;s a felvett honlaphoz :',
 'lien_retirer_auteur' => 'A szerz&#337; elt&aacute;vol&iacute;t&aacute;sa',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'a r&eacute;sztvev&#337; elt&aacute;vol&iacute;t&aacute;sa',
 'lien_site' => 'honlap',
 'lien_supprimer_rubrique' => 'a rovat t&ouml;rl&eacute;se',
@@ -1160,6 +1173,8 @@ dans le cache SPIP. Ez p&eacute;ld&aacute;ul er&ouml;ltethet az &ouml;sszes olda
 'titre_admin_effacer' => 'M&#369;szaki karbantart&aacute;s',
 'titre_admin_tech' => 'M&#369;szaki karbantart&aacute;s',
 'titre_admin_vider' => 'M&#369;szaki karbantart&aacute;s',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Szindik&aacute;lt cikkek err&#337;l a honlapr&oacute;l',
 'titre_breves' => 'A h&iacute;rek',
 'titre_cadre_afficher_article' => 'Cikkek megjelen&iacute;t&eacute;se',

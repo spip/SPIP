@@ -68,6 +68,7 @@ risco de destrui&ccedil;&atilde;o da sua base de dados, mal funcionamento genera
 'bouton_effacer_tout' => 'Apagar TUDO',
 'bouton_envoi_message_02' => 'ENVIAR UMA MENSAGEM',
 'bouton_envoyer_message' => 'Mensagem definitiva: enviar',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'F&Oacute;RUM E PETI&Ccedil;&Atilde;O',
 'bouton_modifier' => 'Alterar',
 'bouton_pense_bete' => 'LEMBRETE DE USO PESSOAL',
@@ -307,6 +308,15 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_articles_trouves' => 'Mat&eacute;rias encontradas',
 'info_articles_trouves_dans_texte' => 'Mat&eacute;rias encontradas (no texto)',
 'info_attente_validation' => 'Suas mat&eacute;rias aguardando valida&ccedil;&atilde;o',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Hoje:',
 'info_auteur_message' => 'AUTOR DA MENSAGEM:',
 'info_auteurs' => 'Os autores',
@@ -574,6 +584,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_referencer_doc_distant' => 'Referenciar um documento na internet:',
 'info_refuses' => 'Suas mat&eacute;rias recusadas',
 'info_reglage_ldap' => 'Op&ccedil;&otilde;es: <b>Configura&ccedil;&atilde;o da importa&ccedil;&atilde;o LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redirecionamento.</b> Esta mat&eacute;ria redireciona para a p&aacute;gina:',
 'info_reserve_admin' => 'Apenas os administradores podem alterar este endere&ccedil;o.',
 'info_restauration_sauvegarde' => 'Restaura&ccedil;&atilde;o da c&oacute;pia de seguran&ccedil;a @archive@',
@@ -796,6 +807,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Incluir este destinat&aacute;rio',
 'lien_ajouter_auteur' => 'Incluir este autor',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Incluir um participante',
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Gerenciar o f&oacute;rum p&uacute;blico desta mat&eacute;ria',
@@ -808,6 +820,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'lien_reponse_rubrique' => 'Resposta &agrave; se&ccedil;&atilde;o',
 'lien_reponse_site_reference' => 'resposta ao site referenciado:',
 'lien_retirer_auteur' => 'Retirar o autor',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'excluir este participante',
 'lien_site' => 'site',
 'lien_supprimer_rubrique' => 'excluir esta se&ccedil;&atilde;o',
@@ -1085,6 +1098,8 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'titre_admin_effacer' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
 'titre_admin_tech' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
 'titre_admin_vider' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Mat&eacute;rias sindicadas extra&iacute;das deste site',
 'titre_breves' => 'As notas',
 'titre_cadre_afficher_article' => 'Exibir as mat&eacute;rias',

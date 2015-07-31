@@ -71,6 +71,7 @@ Ez balidatu inportazio galdera hau.
 'bouton_effacer_tout' => 'Ezabatu DENA!',
 'bouton_envoi_message_02' => 'MEZUBAT IGORRI',
 'bouton_envoyer_message' => 'Behin-betiko mezua: igorri',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'Foroa eta eskaera',
 'bouton_modifier' => 'Aldatu',
 'bouton_pense_bete' => 'OROIGARRI PERTSONALA',
@@ -308,6 +309,15 @@ Ez balidatu inportazio galdera hau.
 'info_articles_trouves' => 'Aurkitutako artikuluak',
 'info_articles_trouves_dans_texte' => '(Testuan)aurkitutako artikuluak',
 'info_attente_validation' => 'Egiaztapenaren zain dauden zureartikuluak',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'Gaur :',
 'info_auteur_message' => 'MEZUARENIDAZLEA:',
 'info_auteurs' => 'Egileak',
@@ -581,6 +591,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_referencer_doc_distant' => 'Dokumentu bat interneten erreferentziatu&nbsp;:',
 'info_refuses' => 'Zure artikulu ezetsiak',
 'info_reglage_ldap' => 'Aukerak : LDAP inportazioaren konfigurazioa',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => 'Birbidirekzioa. Artikulu hau orrialdera itzultzen da:',
 'info_reserve_admin' => 'Helbide hauAdministrazio taldeak bakarrik aldatu ahal du',
 'info_restauration_sauvegarde' => '@archive@ babeskopiaren leheneratzea',
@@ -803,6 +814,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
 'lien_ajouter_auteur' => 'Egile hau erantsi',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Parte-hartzaile bat erantsi',
 'lien_email' => 'posta elektronikoa',
 'lien_forum_public' => 'Artikulu honen foroa kudeatu',
@@ -815,6 +827,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'lien_reponse_rubrique' => 'Atalari erantzuna',
 'lien_reponse_site_reference' => 'Aipatutako lekuari erantzuna',
 'lien_retirer_auteur' => 'Egile hau baztertu',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',
 'lien_site' => 'lekua',
 'lien_supprimer_rubrique' => 'Atal hau kendu',
@@ -1097,6 +1110,8 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_admin_effacer' => 'Mantenimendu teknikoa',
 'titre_admin_tech' => 'Mantentze-lan teknikoa',
 'titre_admin_vider' => 'Mantentze-lan teknikoa',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Toki honetako elkartutako artikuluak',
 'titre_breves' => 'Laburrak',
 'titre_cadre_afficher_article' => 'Artikuluak erakutsi',

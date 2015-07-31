@@ -68,6 +68,7 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_effacer_tout' => 'O escafar tot',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUM E PETICION',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'MEMENTO (D\'USATGE PERSONAU)',
@@ -313,6 +314,15 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (dins lo t&egrave;xt)',
 'info_attente_validation' => 'V&ograve;streis articles en esp&egrave;ra de validacion',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'uei:',
 'info_auteur_message' => 'AUTOR DAU MESSATGE:',
 'info_auteurs' => 'Leis autors',
@@ -596,6 +606,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_referencer_doc_distant' => 'Referenciar un document dins l\'Internet:',
 'info_refuses' => 'V&ograve;streis articles refusats',
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article remanda a la pagina:',
 'info_reserve_admin' => 'Ren que leis administrators p&ograve;don modificar aquela adrei&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@', # MODIF
@@ -819,6 +830,7 @@ una color indica lor estat:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Apondre aqueu destinatari',
 'lien_ajouter_auteur' => 'Apondre aquel autor',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Apondre un participant',
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Gerir lo forum public d\'aquel article',
@@ -831,6 +843,7 @@ una color indica lor estat:',
 'lien_reponse_rubrique' => 'Resp&ograve;nsa a la rubrica',
 'lien_reponse_site_reference' => 'Resp&ograve;nsa au sit referenciat:',
 'lien_retirer_auteur' => 'Levar l\'autor',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Levar aqueu participant',
 'lien_site' => 'sit',
 'lien_supprimer_rubrique' => 'suprimir aquela rubrica',
@@ -1197,6 +1210,8 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_admin_effacer' => 'Mantenen&ccedil;a tecnica',
 'titre_admin_tech' => 'Mantenen&ccedil;a tecnica',
 'titre_admin_vider' => 'Mantenen&ccedil;a tecnica',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Articles sindicats tirats d\'aqueu sit',
 'titre_breves' => 'Lei br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar leis articles',

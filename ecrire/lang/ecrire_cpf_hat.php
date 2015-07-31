@@ -73,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Kraze TOUT',
 'bouton_envoi_message_02' => 'VOYE YON MESAJ',
 'bouton_envoyer_message' => 'Mesaj se bon : voye',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FOWOM &amp; PETISYON',
 'bouton_modifier' => 'Chanje',
 'bouton_pense_bete' => 'RAPLE-W POU W MEM',
@@ -324,6 +325,15 @@ Tout informasyon-nan,  komand&egrave;r-sist&egrave;m ou komand&egrave;r-r&eacute
 'info_articles_trouves' => 'Atik yo ki te rannkont',
 'info_articles_trouves_dans_texte' => 'Atik yo ki te rannkont (nan t&egrave;ks)',
 'info_attente_validation' => 'Atik w-a ki tann komand&egrave; konfime',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'jodiya,&nbsp;:',
 'info_auteur_message' => 'LOTE MESAJ LA:',
 'info_auteurs' => 'Lot&egrave; yo',
@@ -617,6 +627,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_referencer_doc_distant' => 'R&eacute;f&eacute;wanse yon dokiman-d&eacute;o sou ent&egrave;n&egrave;t&nbsp;:',
 'info_refuses' => 'Atik w-a ki te finn refize',
 'info_reglage_ldap' => 'Opsyon : <b>Reglaj lempotasyon LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Tounyen d&egrave;y&egrave; sou yon l&ograve;t adr&egrave;s.</b> Atik-la ap s&ograve;ti sou lapaj-la:',
 'info_reserve_admin' => 'Komand&egrave; ys&egrave;lman yokapab chanje ladr&egrave;s-la',
 'info_restauration_sauvegarde' => 'Rest&ograve;wasyon las&ograve;vgad @archive@', # MODIF
@@ -840,6 +851,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Ajoute destinat&egrave;-a',
 'lien_ajouter_auteur' => 'Ajoute lot&egrave;-a',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Ajoute yon patisipan',
 'lien_email' => 'lim&egrave;l',
 'lien_forum_public' => 'Z&egrave;r fowom piblik atik la',
@@ -852,6 +864,7 @@ nan yon koul&egrave; ki bay lestati ali&nbsp;:',
 'lien_reponse_rubrique' => 'R&eacute;ponn ribrik-la',
 'lien_reponse_site_reference' => 'Reponn sit referanse-a :',
 'lien_retirer_auteur' => 'Kraze lot&egrave;-a',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'kraze patisipan-nan',
 'lien_site' => 'sit',
 'lien_supprimer_rubrique' => 'kraze ribrik-la',
@@ -1208,6 +1221,8 @@ ou nan d&eacute;kripsyon atik sa-yo
 'titre_admin_effacer' => 'Swen teknik',
 'titre_admin_tech' => 'Swen teknik',
 'titre_admin_vider' => 'Swen teknik',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Atik sendike ki rale yo sit la',
 'titre_breves' => 'Tinouv&egrave;l yo',
 'titre_cadre_afficher_article' => 'F&egrave; par&egrave;t atik yo',

@@ -70,6 +70,7 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'bouton_effacer_tout' => 'Diverka&ntilde; PEP TRA',
 'bouton_envoi_message_02' => 'KAS UR GEMENNADENN',
 'bouton_envoyer_message' => 'Kemennadenn ziwezha&ntilde; : kas',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FOROM HA SINADEG',
 'bouton_modifier' => 'Kemma&ntilde;',
 'bouton_pense_bete' => 'NOTENNIG E&Ntilde;VORI&Ntilde; PERSONEL',
@@ -311,6 +312,15 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_articles_trouves' => 'Pennado&ugrave; kavet',
 'info_articles_trouves_dans_texte' => 'Pennado&ugrave; kavet (en destenn)',
 'info_attente_validation' => 'Ho pennado&ugrave; a chom da veza&ntilde; aprouet',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hiziv&nbsp;:',
 'info_auteur_message' => 'SKRIDAOZER AR GEMENNADENN :',
 'info_auteurs' => 'Ar skridaozerien',
@@ -594,6 +604,7 @@ Risklo&ugrave; zo e vefe distrujet ho tiaz titouro&ugrave; pe ne\'z afe ket en-d
 'info_referencer_doc_distant' => 'Menegeri&ntilde; un teul war ar Genrouedad&nbsp;:',
 'info_refuses' => 'Ho pennado&ugrave; bet nac\'het',
 'info_reglage_ldap' => 'Dibarzhio&ugrave; : <b>Reizha&ntilde; an enporzhia&ntilde; LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Adhe&ntilde;cha&ntilde;.</b> Adkas a ra ar pennad-ma&ntilde; d\'ar bajenn :',
 'info_reserve_admin' => 'N\'eus nemet ar verourien a c\'hall kemma&ntilde; ar chomlec\'h-ma&ntilde;.',
 'info_restauration_sauvegarde' => 'Assevel ar restr savete @archive@',
@@ -817,6 +828,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'ldap_correspondance_2' => 'Merka&ntilde; anv ar vaezienn LDAP evit pep hini eus ar maezienno&ugrave; SPIP da-heul. Lezel goullo kuit na vefe leuniet pa dispartia&ntilde; dre skejo&ugrave; evit esaea&ntilde; meur a vaezienn LDAP.',
 'lien_ajout_destinataire' => 'Ouzhpenna&ntilde; an degemerer-ma&ntilde;',
 'lien_ajouter_auteur' => 'Ouzhpenna&ntilde; ar skridaozer-ma&ntilde;',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Ouzhpenna&ntilde; ur perzhiad',
 'lien_email' => 'postel',
 'lien_forum_public' => 'Mera&ntilde; forom foran ar pennad-ma&ntilde;',
@@ -829,6 +841,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'lien_reponse_rubrique' => 'Respont d\'ar rubrikenn',
 'lien_reponse_site_reference' => 'Respont d\'al lec\'hienn menegeret :',
 'lien_retirer_auteur' => 'Lemel ar skridaozer',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'lemel ar perzhiad-ma&ntilde;',
 'lien_site' => 'lec\'hienn',
 'lien_supprimer_rubrique' => 'diverka&ntilde; ar rubrikenn-ma&ntilde;',
@@ -1141,6 +1154,8 @@ Gallout a ra restro&ugrave;-se beza&ntilde; menegeret er pennad, pe diskwelet a-
 'titre_admin_effacer' => 'Trezalc\'h teknikel',
 'titre_admin_tech' => 'Trezalc\'h teknikel',
 'titre_admin_vider' => 'Trezalc\'h teknikel',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Pennado&ugrave; sindikadet tennet eus al lec\'hienn-ma&ntilde;',
 'titre_breves' => 'Ar berrskrido&ugrave;',
 'titre_cadre_afficher_article' => 'Diskouez ar pennado&ugrave;',

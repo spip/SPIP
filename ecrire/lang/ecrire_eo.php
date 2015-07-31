@@ -73,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Forvi&#349;i &#264;ION',
 'bouton_envoi_message_02' => 'SENDI MESA&#284;ON',
 'bouton_envoyer_message' => 'Definitiva mesa&#285;o: sendi',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'FORUMO &amp; PETSKRIBO',
 'bouton_modifier' => 'Modifi',
 'bouton_pense_bete' => 'PROPRA MEMORIGILO',
@@ -315,6 +316,15 @@ forvi&#349;i ilin poste).',
 'info_articles_trouves' => 'Trovitaj artikoloj',
 'info_articles_trouves_dans_texte' => 'Trovitaj artikoloj (en la teksto)',
 'info_attente_validation' => 'Viaj artikoloj atendantaj validigon',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'hodia&#365;&nbsp;: ',
 'info_auteur_message' => 'A&#364;TORO DE LA MESA&#284;O:',
 'info_auteurs' => 'La a&#365;toroj',
@@ -600,6 +610,7 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_referencer_doc_distant' => 'Referencigi dokumenton &#265;e la reto&nbsp;:',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
 'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-el&#349;uto</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun &#265;i adreson.',
 'info_restauration_sauvegarde' => 'Resta&#365;ro de la savkopio @archive@',
@@ -822,6 +833,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Aldoni tiun adresaton',
 'lien_ajouter_auteur' => 'Aldoni tiun a&#365;toron',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Aldoni partoprenanton',
 'lien_email' => 'retpo&#349;tadreso',
 'lien_forum_public' => 'Mastrumi la publikan forumon de tiu &#265;i artikolo',
@@ -834,6 +846,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'lien_reponse_rubrique' => 'Respondo al la rubriko',
 'lien_reponse_site_reference' => 'Respondo al la referencigita retejo:',
 'lien_retirer_auteur' => 'Forvi&#349;i la a&#365;toron',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'Forvi&#349;i tiun &#265;i partoprenanton',
 'lien_site' => 'retejo',
 'lien_supprimer_rubrique' => 'forvi&#349;i tiun &#265;i rubrikon',
@@ -1195,6 +1208,8 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_admin_effacer' => 'Teknika bontenado',
 'titre_admin_tech' => 'Teknika bontenado',
 'titre_admin_vider' => 'Teknika bontenado',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Artikoloj abon&#349;utitaj el tiu retejo',
 'titre_breves' => 'La fulm-informoj',
 'titre_cadre_afficher_article' => 'Afi&#349;i la artikolojn',

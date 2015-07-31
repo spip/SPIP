@@ -68,6 +68,7 @@ la documentacion de SPIP</a>.</p>', # MODIF
 'bouton_effacer_tout' => 'Esca&ccedil;ar TOT',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
+'bouton_fermer' => 'Fermer', # NEW
 'bouton_forum_petition' => 'F&Ograve;RO &amp; PETICION',
 'bouton_modifier' => 'Modificar',
 'bouton_pense_bete' => 'N&Ograve;TA DE RENEMBRAN&Ccedil;A (D\'USATGE PERSONAU)',
@@ -307,6 +308,15 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_articles_trouves' => 'Articles trobats',
 'info_articles_trouves_dans_texte' => 'Articles trobats (dins lo t&egrave;xt)',
 'info_attente_validation' => 'Lu voastres articles en asp&egrave;ra de validacion',
+'info_aucun_article' => 'Aucun article', # NEW
+'info_aucun_article_syndique' => 'Aucun article syndiqu&eacute;', # NEW
+'info_aucun_auteur' => 'Aucun auteur', # NEW
+'info_aucun_breve' => 'Aucune br&egrave;ve', # NEW
+'info_aucun_message' => 'Aucun message', # NEW
+'info_aucun_mot_cle' => 'Aucun mot-cl&eacute;', # NEW
+'info_aucun_rubrique' => 'Aucun rubrique', # NEW
+'info_aucun_site' => 'Aucun site', # NEW
+'info_aucun_visiteur' => 'Aucun visiteur', # NEW
 'info_aujourdhui' => 'encu&egrave;i&nbsp;:',
 'info_auteur_message' => 'AUTOR DAU MESSATGE:',
 'info_auteurs' => 'Lu autors',
@@ -586,6 +596,7 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_referencer_doc_distant' => 'Referen&ccedil;ar un document sus l\'internet&nbsp;:',
 'info_refuses' => 'Lu voastres articles refudats',
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
+'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
 'info_renvoi_article' => '<b>Redireccion.</b> Aquel article torna mandar &agrave; la p&agrave;gina:',
 'info_reserve_admin' => 'Solets lu administrators poadon modificar aquela adre&ccedil;a.',
 'info_restauration_sauvegarde' => 'Restauracion de la sauvagarda @archive@',
@@ -809,6 +820,7 @@ una color indica lo sieu estat&nbsp;:',
 'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, s&eacute;parer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 'lien_ajout_destinataire' => 'Ajustar aqueu destinatari',
 'lien_ajouter_auteur' => 'Ajustar aquel autor',
+'lien_ajouter_mot' => 'Ajouter ce mot-cl&eacute;', # NEW
 'lien_ajouter_participant' => 'Ajustar un participant',
 'lien_email' => 'e-mail',
 'lien_forum_public' => 'Gerar lo f&ograve;ro public d\'aquel article',
@@ -821,6 +833,7 @@ una color indica lo sieu estat&nbsp;:',
 'lien_reponse_rubrique' => 'Respoasta &agrave; la rubrica',
 'lien_reponse_site_reference' => 'Respoasta au sit referen&ccedil;at&nbsp;:',
 'lien_retirer_auteur' => 'Retirar l\'autor',
+'lien_retirer_tous_auteurs' => 'Retirer tous les auteurs', # NEW
 'lien_retrait_particpant' => 'retirar aqueu participant',
 'lien_site' => 'sit',
 'lien_supprimer_rubrique' => 'suprimir aquela rubrica',
@@ -1177,6 +1190,8 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_admin_effacer' => 'Mantenen&ccedil;a tecnica',
 'titre_admin_tech' => 'Mantenen&ccedil;a tecnica',
 'titre_admin_vider' => 'Mantenen&ccedil;a tecnica',
+'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
+'titre_ajouter_un_mot' => 'Ajouter un mot-cl&eacute;', # NEW
 'titre_articles_syndiques' => 'Articles sindicats tirats d\'aqueu sit',
 'titre_breves' => 'Li br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar lu articles',
