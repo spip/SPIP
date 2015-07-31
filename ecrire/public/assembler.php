@@ -183,7 +183,7 @@ function calculer_contexte_implicite(){
 	$contexte_implicite = array(
 		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => $_SERVER['HTTP_HOST'],
-		'https' => $_SERVER['HTTPS'],
+		'https' => (isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : ''),
 		'espace' => test_espace_prive(),
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
 		'marqueur_skel' => (isset($GLOBALS['marqueur_skel']) ?  $GLOBALS['marqueur_skel'] : ''),
@@ -349,7 +349,7 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 		}
 	}
 
-	if (_VAR_MODE == 'debug') {
+	if (defined('_VAR_MODE') AND _VAR_MODE == 'debug') {
 		// compatibilite : avant on donnait le numero de ligne ou rien.
 		$ligne =  intval(isset($contexte_compil[3]) ? $contexte_compil[3] : $contexte_compil);
 		$GLOBALS['debug_objets']['resultat'][$ligne] = $texte;
