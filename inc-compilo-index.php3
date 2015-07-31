@@ -130,7 +130,7 @@ function calculer_champ($p) {
 // Cette fonction sert d'API pour demander une balise SPIP sans filtres.
 // Pour une balise nommmee NOM, elle essaye successivement d'appeler
 // des fonctions balise_NOM ou balise_NOM_dist, de faire le calcul via
-// un fichier inc-nom.php3, de traiter le cas d'une balise LOGO ou de voir
+// un fichier inc-nom, de traiter le cas d'une balise LOGO ou de voir
 // si c'est une reference a une colonne de table connue
 // Pour chacune des premieres etapes, si la fonction existe mais qu'elle
 // retourne NULL, c'est qu'elle n'a pas traite la balise => on passe a la suite
@@ -261,7 +261,7 @@ function applique_filtres($p) {
 			break;
 	}
 
-//  processeurs standards (cf inc-balises.php3)
+//  processeurs standards (cf inc-balises)
 	$code = ($p->etoile ? $p->code : champs_traitements($p));
 	// Appliquer les filtres perso
 	if ($p->param) $code = compose_filtres($p, $code);

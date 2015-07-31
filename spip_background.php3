@@ -25,9 +25,9 @@ echo $image;
 
 flush();
 
-include('ecrire/inc_version.php3');
+include("ecrire/inc_version.php3");
 
 $GLOBALS['flag_preserver'] = true; // pas d'espaces pour le flush()
-cron(1); // acces gourmand (on veut bosser, nous, pas comme inc-public.php3 !)
+cron(1); // acces gourmand (on veut bosser, nous, pas comme inc-public !)
 
 ?>

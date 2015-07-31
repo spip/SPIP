@@ -19,7 +19,7 @@ include_ecrire ("inc_session");
 verifier_visiteur();
 
 // Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3"))
+if (@file_exists("inc-urls" . _EXTENSION_PHP))
 	include_local("inc-urls");
 else
 	include_local("inc-urls-".$GLOBALS['type_urls']);
@@ -57,7 +57,7 @@ else {
 if ($var_mode) $url .= $super."var_mode=$var_mode";
 
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
-// dans inc-urls.php3 ou mes_fonctions/mes_options)
+// dans inc-urls ou mes_fonctions/mes_options)
 header("Location: $url");
 
 ?>

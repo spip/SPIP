@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 include ("ecrire/inc_version.php3");
-include_local(find_in_path("inc-formulaire_inscription.php3"));
+include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
 include_local("inc-public-global"); 
 include_ecrire("inc_lang");
 include_ecrire('inc_headers');
