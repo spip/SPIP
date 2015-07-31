@@ -808,6 +808,11 @@ function envoi_link($nom_site_spip, $minipres=false) {
   
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
+	. find_in_path('spip_style.css')
+	. '" media="all" />' . "\n"
+  
+	// CSS imprimante (masque des trucs, a completer)
+	. '<link rel="stylesheet" type="text/css" href="'
 	. find_in_path('spip_style_print.css')
 	. '" media="print" />' . "\n"
 
