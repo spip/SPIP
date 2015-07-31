@@ -413,18 +413,18 @@ function creer_objet_multi ($objet, $lang) {
 		"     CONCAT( ".
 		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
 		"          IF( ".
-		"               INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
+		"               INSTR(TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
 		"               IF( ".
-		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
+		"                     TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
 		"                     INSERT( ".
-		"                          TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
+		"                          TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
 		"                          1, ".
-		"                          INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
+		"                          INSTR(TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
 		"                          '' ".
 		"                     ), ".
-		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
+		"                     TRIM(RIGHT(".$objet.", CHAR_LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
 		"                ), ".
-		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
+		"               TRIM(RIGHT(".$objet.", ( CHAR_LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ CHAR_LENGTH('[".$lang."]')-1) ) )) ".
 		"          ) ".
 		"     ) ".
 		"))) AS multi ";
