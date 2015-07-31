@@ -16,160 +16,123 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/serial');
 include_spip('inc/meta');
 
-// http://doc.spip.org/@supprime_invalideurs
-function supprime_invalideurs() {
-	spip_query("DELETE FROM spip_caches");
+# estime la taille moyenne d'un fichier cache, pour ne pas les regarder (10ko)
+define('_TAILLE_MOYENNE_FICHIER_CACHE', 1024 * 10);
+# si un fichier n'a pas servi (fileatime) depuis plus d'une heure, on se sent
+# en droit de l'eliminer
+define('_AGE_CACHE_ATIME', 3600);
+
+// Donne le nombre de fichiers dans un repertoire (plat, pour aller vite)
+// false si erreur
+function nombre_de_fichiers_repertoire($dir) {
+	if (!$h = @opendir($dir)) return false;
+	$total = 0;
+	while (($fichier = @readdir($h)) !== false)
+		$total++;
+	closedir($handle);
+	return $total;
 }
 
-//
-// Calcul des pages : noter dans la base les liens d'invalidation
-//
-// http://doc.spip.org/@maj_invalideurs
-function maj_invalideurs ($fichier, &$page) {
-	// ne pas noter les POST et les delais=0
-	if ($fichier == '') return;
-
-	// Supprimer les anciens invalideurs
-	$f = str_replace('.gz', '', $fichier);
-	spip_query("DELETE FROM spip_caches WHERE fichier='$f' OR fichier='$f.gz'");
-
-	// Creer un invalideur 't' nous informant de la date d'expiration
-	// et de la taille du fichier cache
-	# Note : on ajoute 3600s pour eviter toute concurrence
-	# entre un invalideur et un appel public de page
-	$bedtime = time() + $page['entetes']['X-Spip-Cache'] + 3600;
-	$taille = @filesize(_DIR_CACHE . $fichier);
-	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES (" . _q($fichier) . ",'$bedtime','t','$taille')");
-
-	// invalidations
-	insere_invalideur($page['invalideurs'], $fichier);
-}
-
-// pour les forums l'invalideur est : 'id_forum/a23'
-// pour les petitions et autres, l'invalideur est par exemple :
-// 'varia/pet60'
-// http://doc.spip.org/@insere_invalideur
-function insere_invalideur($inval, $fichier) {
-	if ($inval)
-	foreach ($inval as $type => $a) {
-		if (is_array($a)) {
-			$values = array();
-			foreach($a as $k => $v)
-				$values[] = "('$fichier', '$type/$k')";
-			spip_query("INSERT IGNORE INTO spip_caches (fichier, id) VALUES " . join(", ", $values));
-		}
+// Indique la taille du repertoire cache ; pour de gros volumes,
+// impossible d'ouvrir chaque fichier, on y va donc a l'estime
+// http://doc.spip.org/@taille_du_cache
+function taille_du_cache() {
+	$total = 0;
+	for ($i=0;$i<16;$i++) {
+		$l = dechex($i);
+		$dir = sous_repertoire(_DIR_CACHE, $l);
+		$total += nombre_de_fichiers_repertoire($dir);
 	}
+	return $total * _TAILLE_MOYENNE_FICHIER_CACHE;
 }
 
 
-//
 // Invalider les caches lies a telle condition
-// on en profite pour noter la date de mise a jour dans les metas
-//
+// ici on se contente de noter la date de mise a jour dans les metas
 // http://doc.spip.org/@suivre_invalideur
 function suivre_invalideur($cond, $modif=true) {
 	if ($modif) {
 		ecrire_meta('derniere_modif', time());
 		ecrire_metas();
 	}
-	$result = spip_query("SELECT DISTINCT fichier FROM spip_caches WHERE $cond");
-	$tous = array();
-	while ($row = spip_fetch_array($result))
-		$tous[] = $row['fichier'];
-
-	spip_log("suivre $cond dans " . count($tous) . " caches");
-	applique_invalideur($tous);
 }
 
-
-//
-// Supprimer les vieux caches
-//
-// http://doc.spip.org/@retire_vieux_caches
-function retire_vieux_caches() {
-	$condition = "type='t' AND id<".time();
-	suivre_invalideur($condition);
-}
-
-
-//
-// Marquer les fichiers caches invalides comme etant a supprimer
-//
-// http://doc.spip.org/@applique_invalideur
-function applique_invalideur($depart) {
-
-	if ($depart) {
-		$tous = "'".join("', '", $depart)."'";
-		spip_log("applique $tous");
-
-		include_spip('base/abstract_sql'); # pour calcul_mysql_in
-		spip_query("UPDATE spip_caches SET type='x' WHERE " . calcul_mysql_in('fichier', $tous));
-
-		// Demander a inc-public de retirer les caches
-		// invalides ;
-		// - le signal (meta='invalider') indique
-		// qu'il faut faire attention ;
-		// - le signal (meta='invalider_caches') indique qu'on
-		// peut effacer 100 caches invalides
-		// (Signaux differents pour eviter de la concurrence entre
-		// les processus d'invalidation)
-		ecrire_meta('invalider', 'oui'); // se verifier soi-meme
-		ecrire_meta('invalider_caches', 'oui'); // supprimer les autres
-		ecrire_metas();
-	}
-}
 
 
 // Utilisee pour vider le cache depuis l'espace prive
 // (ou juste les squelettes si un changement de config le necessite)
+// si $date est passee en argument, ne pas supprimer ce qui a servi
+// plus recemment que cette date (via fileatime)
+// retourne le nombre de fichiers supprimes
 // http://doc.spip.org/@purger_repertoire
-function purger_repertoire($dir) {
+function purger_repertoire($dir, $options=array()) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
 
+	$total = 0;
+
 	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
+		// Eviter ".", "..", ".htaccess", ".svn" etc.
 		if ($fichier[0] == '.') continue;
 		$chemin = "$dir/$fichier";
-		if (is_file($chemin))
-			@unlink($chemin);
+		if (is_file($chemin)) {
+			if (!isset($options['date'])
+			OR (@fileatime($chemin) < $options['date'])) {
+				@unlink($chemin);
+				$total ++;
+			}
+		}
 		else if (is_dir($chemin))
 			if ($fichier != 'CVS')
-				purger_repertoire($chemin);
+				$total += purger_repertoire($chemin, $options);
+
+		if (isset($options['limit']) AND $total>=$options['limit'])
+			break;
 	}
 	closedir($handle);
+
+	return $total;
 }
 
+
+//
+// Methode : on prend un des sous-repertoires de CACHE/
+// on considere qu'il fait 1/16e de la taille du cache
+// et on le ratiboise
+//
+function appliquer_quota_cache() {
+	global $quota_cache;
+
+	$l = dechex(rand(0,15));
+	$dir = sous_repertoire(_DIR_CACHE, $l);
+	$nombre = nombre_de_fichiers_repertoire($dir);
+	$total_cache = _TAILLE_MOYENNE_FICHIER_CACHE * $nombre;
+	spip_log("Taille du CACHE estimee: "
+		.(intval(16*$total_cache/102400)/10)." Mo");
+
+	if ($quota_cache > 0) {
+		$trop = $total_cache - ($quota_cache/16)*1024*1024;
+		if ($trop > 0) {
+			$n = purger_repertoire($dir,
+				array(
+					'atime' => time()-_AGE_CACHE_ATIME,
+					'limit' => intval($trop / _TAILLE_MOYENNE_FICHIER_CACHE)
+				)
+			);
+			spip_log("$dir : $n caches supprimes");
+		}
+	}
+
+}
+
+
+// Cette fonction fait le menage dans le cache :
+// - elle peut retirer les fichiers perimes
+// - elle fait appliquer le quota
 // http://doc.spip.org/@cron_invalideur
 function cron_invalideur($t) {
-	//
-	// menage des vieux fichiers du cache
-	// marques par l'invalideur 't' = date de fin de fichier
-	//
-
-	retire_vieux_caches();
-
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-
-	// A revoir: il semble y avoir une desynchro ici.
-	$s = spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')");
-	$t = spip_fetch_array($s);
-	$total_cache = $t['n'];
-	spip_log("Taille du CACHE: $total_cache octets");
-
-	global $quota_cache;
-	$total_cache -= $quota_cache*1024*1024;
-	if ($quota_cache > 0 AND $total_cache > 0) {
-		$taille_supprimee = 0;
-		$q = spip_query("SELECT id, taille FROM spip_caches WHERE type IN ('t', 'x') ORDER BY id");
-		while ($r = spip_fetch_array($q)
-		AND ($total_cache > $taille_supprimee)) {
-			$date_limite = $r['id'];
-			$taille_supprimee += $r['taille'];
-		}
-		spip_log ("Quota cache: efface $taille_supprimee octets");
-		suivre_invalideur("id <= $date_limite AND type in ('t', 'x')", false);
-	}
+	appliquer_quota_cache();
 	return 1;
 }
 
@@ -190,60 +153,20 @@ function retire_cache($cache) {
 		spip_log("Impossible de retirer $cache");
 }
 
+#######################################################################
+##
+## Ci-dessous les fonctions qui restent appellees dans le core
+## pour pouvoir brancher le plugin invalideur ;
+## mais ici elles ne font plus rien
+##
+
 // Supprimer les caches marques "x"
+// A priori dans cette version la fonction ne sera pas appelee, car
+// la meta est toujours false ; mais evitons un bug si elle est appellee
 // http://doc.spip.org/@retire_caches
 function retire_caches($chemin = '') {
-	include_spip('base/abstract_sql');
-	lire_metas();
-	// recuperer la liste des caches voues a la suppression
-	$suppr = array();
-
-	// En priorite le cache qu'on appelle maintenant
-	if ($chemin) {
-		$f = spip_abstract_fetsel(array("fichier"),
-			array("spip_caches"),
-			array("fichier = " . _q($chemin) . " ",
-				"type='x'"),
-			"",
-			array(),
-			1);
-		if ($f['fichier']) $suppr[$f['fichier']] = true;
-	}
-
-	// Et puis une centaine d'autres
-	$compte = 0;
-	if (isset($GLOBALS['meta']['invalider_caches'])) {
-		$compte = 1;
-		effacer_meta('invalider_caches'); # concurrence
-		ecrire_metas();
-
-		$q = spip_abstract_select(array("fichier"),
-				array("spip_caches"),
-				array("type='x'"),
-				"",
-				array(),
-				100);
-		while ($r = spip_abstract_fetch($q)) {
-			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
-			$suppr[$r['fichier']] = true;
-		}
-	}
-
-	if ($n = count($suppr)) {
-		spip_log ("Retire $n caches");
-		foreach ($suppr as $cache => $ignore)
-			retire_cache($cache);
-		spip_query("DELETE FROM spip_caches WHERE " . calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
-	}
-
-	// Si on a regarde (compte > 0), signaler s'il reste des caches invalides
-	if ($compte > 0) {
-		if ($compte > 100) # s'il y en a 101 c'est qu'on n'a pas fini
-			ecrire_meta('invalider_caches', 'oui');
-		else
-			effacer_meta('invalider');
-		ecrire_metas();
-	}
+	effacer_meta('invalider_caches'); # concurrence
+	ecrire_metas();
 }
 
 
@@ -252,38 +175,39 @@ function retire_caches($chemin = '') {
 // en cas de premier post sur le forum
 // http://doc.spip.org/@code_invalideur_forums
 function code_invalideur_forums($p, $code) {
-	$type = 'id_forum';
-	$valeur = "\n\t\tcalcul_index_forum("
-		// Retournera 4 [$SP] mais force la demande du champ SQL
-		. champ_sql('id_article', $p) . ','
-		. champ_sql('id_breve', $p) .  ','
-		. champ_sql('id_rubrique', $p) .','
-		. champ_sql('id_syndic', $p) .  ")\n\t";
-
-	return '
-	// invalideur '.$type.'
-	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
+	return "''"; // code compile ne faisant rien
 }
 
 
 // Fonction permettant au compilo de calculer les invalideurs d'une page
 // http://doc.spip.org/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
-	if ($primary == 'id_forum'
-	OR in_array($primary, explode(',', $GLOBALS['invalider_caches']))) {
-		$corps .= "\n\t\t\$Cache['$primary'][intval(" .
-		  (($primary != 'id_forum')  ? 
-		   index_pile($id_boucle, $primary, $boucles) :
-		   ("calcul_index_forum(" . 
-		// Retournera 4 [$SP] mais force la demande du champ a MySQL
-		    index_pile($id_boucle, 'id_article', $boucles) . ',' .
-		    index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
-		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
-		    index_pile($id_boucle, 'id_syndic', $boucles) .
-		    ")")) .
-		  ")] = 1; // invalideurs\n";
-	}
 	return $corps;
 }
+
+// Cette fonction permet de supprimer tous les invalideurs
+// Elle ne touche pas aux fichiers cache eux memes ; elle est
+// invoquee quand on vide tout le cache en bloc (action/purger)
+//
+// http://doc.spip.org/@supprime_invalideurs
+function supprime_invalideurs() { }
+
+
+// Calcul des pages : noter dans la base les liens d'invalidation
+// http://doc.spip.org/@maj_invalideurs
+function maj_invalideurs ($fichier, &$page) { }
+
+// pour les forums l'invalideur est : 'id_forum/a23'
+// pour les petitions et autres, l'invalideur est par exemple :
+// 'varia/pet60'
+// http://doc.spip.org/@insere_invalideur
+function insere_invalideur($inval, $fichier) { }
+
+
+//
+// Marquer les fichiers caches invalides comme etant a supprimer
+//
+// http://doc.spip.org/@applique_invalideur
+function applique_invalideur($depart) { }
 
 ?>

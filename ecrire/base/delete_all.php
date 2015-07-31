@@ -52,20 +52,20 @@ function base_delete_all_dist($titre)
 	spip_query("DROP TABLE spip_types_documents");
 	spip_query("DROP TABLE spip_visites");
 	spip_query("DROP TABLE spip_visites_articles");
-	spip_query("DROP TABLE spip_caches");
 	spip_query("DROP TABLE spip_mots_documents");
 	spip_query("DROP TABLE spip_ortho_cache");
 	spip_query("DROP TABLE spip_ortho_dico");
 	spip_query("DROP TABLE spip_versions");
 	spip_query("DROP TABLE spip_versions_fragments");
 
-	// Trois tables pas necessairement la: pas de faux messages d'erreur
+	// Tables pas necessairement la: pas de faux messages d'erreur
 	spip_log("tes index_table et forum_cache");
 	@spip_query("DROP TABLE spip_test");
 	@spip_query("DROP TABLE spip_index_table");
 	@spip_query("DROP TABLE spip_forum_cache");
+	@spip_query("DROP TABLE spip_caches");
 
-// un pipeline pour detruire les tables installees par les plugins
+	// un pipeline pour detruire les tables installees par les plugins
 	pipeline('delete_tables', '');
 
 	@unlink(_ACCESS_FILE_NAME);
