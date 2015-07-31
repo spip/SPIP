@@ -74,12 +74,12 @@ function spip_mysql_select($select, $from, $where,
 			   $sousrequete, $having,
 			   $table, $id, $serveur) {
 
-	$q = "\nFROM " . join(",\n\t", $from)
-	  . ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
-	  . ($groupby ? "\nGROUP BY $groupby" : '')
-	  . ($having  ? "\nHAVING $having" : '')
-	  . ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
-	  . ($limit ? "\nLIMIT $limit" : '');
+	$q = ($from  ?("\nFROM " . join(",\n\t", $from)) : '')
+	  .  ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
+	  .  ($groupby ? "\nGROUP BY $groupby" : '')
+	  .  ($having  ? "\nHAVING $having" : '')
+	  .  ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
+	  .  ($limit ? "\nLIMIT $limit" : '');
 
 	if (!$sousrequete)
 		$q = " SELECT ". join(", ", $select) . $q;
@@ -97,7 +97,9 @@ function spip_mysql_select($select, $from, $where,
 
 	if (!($res = @spip_query($q))) {
 		include_ecrire('inc_debug_sql.php3');
-		echo erreur_requete_boucle($q, $id, $table);
+		erreur_requete_boucle($q, $id, $table,
+				      spip_sql_errno(),
+				      spip_sql_error());
 	}
 #	 spip_log($serveur . spip_num_rows($res) . $q);
 	return $res;

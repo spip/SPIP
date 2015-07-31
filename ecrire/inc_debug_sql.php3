@@ -67,13 +67,10 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // Si une boucle cree des soucis, on peut afficher la requete fautive
 // avec son code d'erreur
 //
-function erreur_requete_boucle($query, $id_boucle, $type) {
+function erreur_requete_boucle($query, $id_boucle, $type, $erreur, $errno) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
 
-	// Recuperer le numero d'erreur
-	$errno = spip_sql_errno();
-	$erreur = spip_sql_error();
 	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
 		$errno = $regs[2];
 	else if (($errno == 1030 OR $errno <= 1026)
