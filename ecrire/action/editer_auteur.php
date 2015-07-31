@@ -98,7 +98,6 @@ function auteur_inserer($source=null) {
  * @return string
  */
 function auteur_modifier($id_auteur, $set = null, $force_update=false) {
-	$err = '';
 
 	include_spip('inc/modifier');
 	include_spip('inc/filtres');
@@ -111,13 +110,15 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 		$set
 	);
 
-	modifier_contenu('auteur', $id_auteur,
+	if ($err = objet_modifier_champs('auteur', $id_auteur,
 		array(
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
-		$c);
+		$c))
+		return $err;
 	$session = $c;
 
+	$err = '';
 	if (!$force_update){
 		// Modification de statut, changement de rubrique ?
 		$c = collecter_requests(
@@ -134,7 +135,7 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 			$c['login'] = $c['new_login'];
 		if (isset($c['new_pass']) AND !isset($c['pass']))
 			$c['pass'] = $c['new_pass'];
-		$err .= auteur_instituer($id_auteur, $c);
+		$err = auteur_instituer($id_auteur, $c);
 		$session = array_merge($session,$c);
 	}
 

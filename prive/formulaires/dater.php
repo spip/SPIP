@@ -200,7 +200,7 @@ function formulaires_dater_traiter_dist($objet, $id_objet, $retour=''){
 			$f($id_objet,$set);
 		}
 		else {
-			modifier_contenu($objet, $id_objet, array(), $set);
+			objet_modifier_champs($objet, $id_objet, array(), $set);
 		}
 	}
 

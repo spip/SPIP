@@ -52,7 +52,6 @@ function action_editer_article_dist($arg=null) {
  * @return string
  */
 function article_modifier($id_article, $set=null) {
-	$err = '';
 
 	// unifier $texte en cas de texte trop long
 	trop_longs_articles();
@@ -76,19 +75,19 @@ function article_modifier($id_article, $set=null) {
 		$indexation = true;
 	}
 
-	modifier_contenu('article', $id_article,
+	if ($err = objet_modifier_champs('article', $id_article,
 		array(
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
 			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
 		),
-		$c);
-
+		$c))
+		return $err;
 
 	// Modification de statut, changement de rubrique ?
 	$c = collecter_requests(array('date', 'statut', 'id_parent'),array(),$set);
-	$err .= article_instituer($id_article, $c);
+	$err = article_instituer($id_article, $c);
 
 	return $err;
 }
