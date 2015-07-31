@@ -453,9 +453,9 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			  ereg_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire='';
-			$avant = calculer_liste($p->cond_avant, $newdescr, $boucles, $nom, $niv+2);
-			$apres = calculer_liste($p->cond_apres, $newdescr, $boucles, $nom, $niv+2);
-			$altern = calculer_liste($p->cond_altern, $newdescr, $boucles, $nom, $niv+1);
+			$avant = calculer_liste($p->cond_avant, $newdescr, $boucles, $id_boucle, $niv+2);
+			$apres = calculer_liste($p->cond_apres, $newdescr, $boucles, $id_boucle, $niv+2);
+			$altern = calculer_liste($p->cond_altern, $newdescr, $boucles, $id_boucle, $niv+1);
 			break;
 
 		// balise SPIP
