@@ -1819,11 +1819,15 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$texte .= '	$query = $instance->requete;
 	$result = @spip_query($query);
 	if (!$result) {
+		include_ecrire("inc_presentation.php3");
 		$retour .= "<tt><br><br><blink>&lt;BOUCLE'.$id_boucle.'&gt;</blink><br>\n".
 		"<b>Erreur dans la requ&ecirc;te envoy&eacute;e &agrave; MySQL :</b><br>\n".
 		"$query<br>\n<font color=\'red\'><b>&gt; ".
 		mysql_error()."</b></font><br>\n".
-		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt><br><br>\n"; // debugger les squelettes
+		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt>\n";
+		if ($GLOBALS[\'spip_admin\'])
+			$retour .= aide("erreur_mysql");
+		$retour .= "<br><br>\n"; // debugger les squelettes
 	}
 	$total_boucle = @mysql_num_rows($result);
 	$pile_boucles[$id_instance]->num_rows = $total_boucle;

@@ -1,15 +1,10 @@
 <?php
 
 include ("inc_version.php3");
+include_ecrire ("inc_session.php3");
 
-if ($flag_ecrire AND file_exists("inc_connect.php3")) {
-	include_ecrire ("inc_connect.php3");
-	include_ecrire ("inc_auth.php3");
-	include_ecrire ("inc_admin.php3");
-	include_ecrire ("inc_acces.php3");
-	$aide_statut = ($connect_statut == "0minirezo") ? "admin" : "redac";
-}
-else $aide_statut = "admin";
+verifier_visiteur();
+$aide_statut = ($auteur_session['statut'] == '1comite') ? 'redac' : 'admin';
 
 ?>
 <HTML>
@@ -103,6 +98,7 @@ article("Votre connexion MySQL", "install1", "admin");
 article("Choix de votre base", "install2", "admin");
 article("Informations personnelles", "install5", "admin");
 article("V&eacute;rification par FTP", "ftp_auth", "admin");
+article("Un probl&egrave;me de squelette ?", "erreur_mysql", "admin");
 
 rubrique("Les articles");
 article("Les raccourcis typographiques","raccourcis");
