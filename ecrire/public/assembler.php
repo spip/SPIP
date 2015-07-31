@@ -141,12 +141,23 @@ function traiter_formulaires_dynamiques(){
 			include_spip('inc/filtres');
 			if ($args = decoder_contexte_ajax($args)
 			AND $args['form'] == $form) {
-				if (
-				 (!($verifier = charger_fonction("verifier","formulaires/$form/",true))
-				   || (count($_POST["erreurs_$form"] = call_user_func_array($verifier,$args))==0))
-				 && ($traiter = charger_fonction("traiter","formulaires/$form/",true))
-				 ) {
-					$rev = call_user_func_array($traiter,$args);
+				$verifier = charger_fonction("verifier","formulaires/$form/",true);
+				$_POST["erreurs_$form"] = pipeline(
+				  'formulaire_verifier',
+					array(
+						'args'=>array('form'=>$form,'args'=>$args),
+						'data'=>$verifier?call_user_func_array($verifier,$args):array())
+					);
+				if ((count($_POST["erreurs_$form"])==0)){
+					$rev = "";
+					if ($traiter = charger_fonction("traiter","formulaires/$form/",true))
+						$rev = call_user_func_array($traiter,$args);
+					$rev = pipeline(
+				  'formulaire_traiter',
+					array(
+						'args'=>array('form'=>$form,'args'=>$args),
+						'data'=>$rev)
+					);
 					// traiter peut retourner soit un message, soit un array(editable,message)
 					if (is_array($rev)) {
 						$_POST["editable_$form"] = $rev[0];
