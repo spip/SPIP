@@ -20,33 +20,37 @@ function inc_iconifier_dist($id_objet, $id,  $script) {
 
 	$logo_f = charger_fonction('chercher_logo', 'inc');
 	
-	$res = 
-		debut_cadre_relief("image-24.gif", true) .
-		"<div class='verdana1' style='text-align: center;'>" .
-		bouton_block_invisible('on') . "<b>" .  $texteon . "</b>";
-
-	if ($logo = $logo_f($id, $id_objet, 'on'))
-		$logo = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
-
-	if (!$logo) {
-		$res .= indiquer_logo($texteon, $id_objet, 'on', $id, $script);
-		
+	if (!$logo = $logo_f($id, $id_objet, 'on')) {
+		$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script);
+		$res .= block_parfois_visible('on', "<b>$texteon</b>", $masque);
 	} else {
-		$texteoff = _T('logo_survol');
-		$res .= $logo
-		.  "<br /><br />"
-		. bouton_block_invisible('off') . "<b>" .  $texteoff . "</b>";
+		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script);
 
-		if ($logo = $logo_f($id, $id_objet, 'off'))
-			  $logo = decrire_logo($id_objet,'off',$id, 170, 170, $logo, $texteoff, $script);
-		if ($logo) 
-			$res .= $logo;
-		else $res .= indiquer_logo(_T('logo_survol'), $id_objet, 'off', $id, $script);
+		$masque = block_parfois_visible('on', "<b>$texteon</b><p>$img</p>", $clic, 'margin-bottom: -2px');
+
+		$res .= "<center>$masque</center><br /><br />";;
+		$texteoff = _T('logo_survol');
+
+		if ($logo = $logo_f($id, $id_objet, 'off')) {
+
+			list($img, $clic) = decrire_logo($id_objet, 'off', $id, 170, 170, $logo, $texteoff, $script);
+
+			$masque = block_parfois_visible('off', "<b>$texteoff</b><p>$img</p>", $clic, 'margin-bottom: -2px');
+
+			$res .= "<center>$masque</center>";
+		} else {
+		  $masque = indiquer_logo($texteoff, $id_objet, 'off', $id, $script);
+		  $res .= block_parfois_visible('off', "<b>$texteoff</b>", $masque);
+		}
 	}
 
-	$res .= "</div>" .  fin_cadre_relief(true);
+	$res = debut_cadre_relief("image-24.gif", true)
+	. "<div class='verdana1' style='text-align: center;'>"
+	. $res
+	. "</div>"
+	. fin_cadre_relief(true);
 
-	return  (_request('var_ajaxcharset')) 
+	return (_request('var_ajaxcharset')) 
 	?  $res
 	: "<div id='iconifier-$id'>$res</div>";
 }
@@ -104,13 +108,11 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 			$afficher;
 
 		$type = $GLOBALS['table_logos'][$id_objet];
-		return debut_block_invisible($mode) .
-		  generer_action_auteur('iconifier',
+		return generer_action_auteur('iconifier',
 			"$id+$type$mode$id",
 			generer_url_ecrire($script, "$id_objet=$id"), 
 			$afficher,
-			" method='POST' ENCTYPE='multipart/form-data'") .
-		  fin_block();
+			" method='post' enctype='multipart/form-data'");
 }
 
 // http://doc.spip.org/@decrire_logo
@@ -125,14 +127,12 @@ function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $
 	    $res = "<img src='$fid' width='$width' height='$height' alt=\"" . htmlentities($titre) . '" />';
 	if ($taille = @getimagesize($fid))
 		$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
-	return "<p><center>$res" .
-		debut_block_invisible($mode) .
-		"<font size='1'>" .
-		$taille .
-		"\n<br />[" .
-		ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer'))) .
-		"]</font>" .
-		fin_block() .
-		"</center></p>";
+
+	return array($res,
+			"<font size='1'>" .
+		     $taille .
+		     "\n<br />[" .
+		     ajax_action_auteur("iconifier", "$id-$nom.$format", $script, "$id_objet=$id&type=$id_objet", array(_T('lien_supprimer'))) .
+		     "]</font>");
 }
 ?>
