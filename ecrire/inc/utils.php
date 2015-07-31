@@ -612,7 +612,7 @@ function find_in_path ($file, $dirname='', $include=false) {
 	}
 	foreach(creer_chemin() as $dir) {
 		if (!isset($dirs[$a = $dir . $dirname]))
-			$dirs[$a] = is_dir($a);
+			$dirs[$a] = (is_dir($a) || !$a) ;
 		if ($dirs[$a]) {
 			if (is_readable($a .= $file)) {
 				if ($include) include_once $a;
