@@ -126,15 +126,15 @@ function phraser_idiomes($texte,$ligne,$result) {
 		$texte = substr($texte,$p+strlen($match[0]));
 		// Stocker les arguments de la balise de traduction
 		$args=array();
-		$vals=explode(',',$match[5]);
+		$vals=preg_split('/,\s*/',$match[5]);
 		foreach ($vals as $val) {
-			$arg=explode('=',$val);
+			$arg=preg_split('/\s*=/',$val);
 			if ($arg[0])
-				$args[$arg[0]]=phraser_champs($arg[1], 0, $_arg);	
+			  $args[$arg[0]]=phraser_champs($arg[1], 0, array());	
 		}
 		$champ->arg=$args;
 		$champ->nom_champ = strtolower($match[3]);
-		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
+		$champ->module = $match[2] ? $match[2] : MODULES_IDIOMES;
 		// pas d'imbrication pour les filtres sur langue
 		phraser_args(@$match[7], ":", '', array(), $champ);
 		$result[] = $champ;
