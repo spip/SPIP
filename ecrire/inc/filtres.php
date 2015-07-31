@@ -2009,7 +2009,7 @@ function http_img_pack($img, $alt, $atts='', $title='') {
 	if (strpos($atts, 'width')===FALSE){
 		// utiliser directement l'info de taille presente dans le nom
 		if (preg_match(',-([0-9]+)[.](png|gif)$,',$img,$regs)){
-				$size = array(intval($regs[1]),intval($regs[1]));
+			$size = array(intval($regs[1]),intval($regs[1]));
 		}
 		else
 			$size = @getimagesize($img);
@@ -2092,11 +2092,11 @@ function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=f
  * [(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] affiche une puce avec changement rapide
  *
  * utilisable sur tout objet qui a declare
- * @param  $statut
- * @param  $objet
+ * @param string $statut
+ * @param string $objet
  * @param int $id_objet
  * @param int $id_parent
- * @return
+ * @return string
  */
 function filtre_puce_statut_dist($statut,$objet,$id_objet=0,$id_parent=0){
 	static $puce_statut = null;
@@ -2272,6 +2272,9 @@ function filtre_balise_img_dist($img,$alt="",$class=""){
  * Afficher un message "un truc"/"N trucs"
  *
  * @param int $nb
+ * @param string $chaine_un
+ * @param string $chaine_plusieurs
+ * @param string $var
  * @return string
  */
 function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
@@ -2285,17 +2288,19 @@ function singulier_ou_pluriel($nb,$chaine_un,$chaine_plusieurs,$var='nb'){
  * Fonction de base pour une icone dans un squelette
  * structure html : <span><a><img><b>texte</b></span>
  *
- * @param <type> $lien
+ * @param string $type
+ *  'lien' ou 'bouton'
+ * @param string $lien
  *  url
- * @param <type> $texte
+ * @param string $texte
  *  texte du lien / alt de l'image
- * @param <type> $fond
+ * @param string $fond
  *  objet avec ou sans son extension et sa taille (article, article-24, article-24.png)
  * @param string $fonction
  *  new/del/edit
- * @param <type> $class
+ * @param string $class
  *  classe supplementaire (horizontale, verticale, ajax ...)
- * @param <type> $javascript
+ * @param string $javascript
  *  "onclick='...'" par exemple
  * @return string 
  */
@@ -2365,9 +2370,7 @@ function filtre_icone_horizontale_dist($lien, $texte, $fond, $fonction="", $clas
 function filtre_bouton_action_horizontal_dist($lien, $texte, $fond, $fonction="", $class="",$confirm=""){
 	return prepare_icone_base('bouton', $lien, $texte, $fond, $fonction, "horizontale $class", $confirm);
 }
-
-
-/**
+/*
  * Filtre icone pour compatibilite
  * mappe sur icone_base
  */
@@ -2512,6 +2515,7 @@ function tri_champ_select($t){
  * @param int $id_objet
  * @param string $type_objet
  * @param string $info
+ * @param string $etoile
  * @return string
  */
 function generer_info_entite($id_objet, $type_objet, $info, $etoile=""){
