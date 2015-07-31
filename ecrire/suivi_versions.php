@@ -24,8 +24,8 @@ if (!$uniq_auteur) $uniq_auteur = false ;
 else $uniq_auteur = true;
 
 
-if ($connect_statut == "0minirezo") $req_where = " AND spip_articles.statut IN ('prepa','prop','publie')"; 
-else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
+if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
+else $req_where = " AND articles.statut IN ('prop','publie')"; 
 
 echo "<p>";
 
@@ -51,7 +51,10 @@ while ($row = mysql_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
 	$titre = propre($row['titre']);
 	
-	$query_rub = "SELECT spip_versions.*, spip_articles.statut, spip_articles.titre FROM spip_versions, spip_articles WHERE spip_versions.id_article = spip_articles.id_article AND spip_versions.id_version > 1 AND spip_articles.id_secteur=$id_rubrique$req_where LIMIT 0,1";
+	$query_rub = "
+SELECT versions.*, articles.statut, articles.titre
+FROM spip_versions AS versions, spip_articles AS articles 
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique$req_where LIMIT 0,1";
 	$result_rub = spip_query($query_rub);
 	
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
@@ -65,7 +68,10 @@ if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == '
 	foreach ($langues as $lang) {
 		$titre = traduire_nom_langue($lang);
 	
-		$query_lang = "SELECT spip_versions.* FROM spip_versions, spip_articles WHERE spip_versions.id_article = spip_articles.id_article AND spip_versions.id_version > 1 AND spip_articles.lang='$lang'$req_where LIMIT 0,1";
+		$query_lang = "
+SELECT versions.*
+FROM spip_versions AS versions, spip_articles AS articles 
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.lang='$lang' $req_where LIMIT 0,1";
 		$result_lang = spip_query($query_lang);
 		
 		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
