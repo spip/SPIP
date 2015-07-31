@@ -191,7 +191,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 				for ($i = 0; $i < $nb_tranches; $i++) {
 					if ($i > 0) echo " | ";
 					if ($i*$nb_aff == $debut) echo "<b>";
-					else echo "<a href='suivi_revisions.php3?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang'>";
+					else echo "<a href=",
+					  http_php_script('suivi_revisions', "debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang"),">";
 					echo (($i * $nb_aff) + 1);
 					if ($i*$nb_aff == $debut) echo "</b>";
 					else echo "</a>";
@@ -234,7 +235,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 			} else {
 				$item = array(
 					'title' => $titre,
-					'url' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS."articles_versions.php3?id_article=$id_article&id_version=$id_version",
+					'url' => http_php_scriptnq($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS."articles_versions","id_article=$id_article&id_version=$id_version"),
 					'date' => $date,
 					'author' => $nom,
 					'email' => $email
