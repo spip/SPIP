@@ -2057,7 +2057,7 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 
 	echo pipeline('body_prive',"<body ". _ATTRIBUTES_BODY
 		. ' onLoad="'
-		. "forms_manager();setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
+		. "setActiveStyleSheet('invisible');$browser_verifForm$onLoad"
 		. '">');
 
 	if ($spip_ecran == "large") $largeur = 974;
