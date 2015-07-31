@@ -175,7 +175,11 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 			$logo = 'image-24.gif';
 		}
 
-		$action = redirige_action_auteur('changer_mode_document', "$id_document/$mode", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+		$action = redirige_action_auteur('changer_mode_document', "$id_document/$mode", $script,
+			(($id>0)
+				? "id_$type=$id"
+				: "new=oui"
+			) . "&type=$type&s=$s#$ancre");
 
 		$corps .= icone_horizontale($texte, $action, $logo, '', false);
 		
