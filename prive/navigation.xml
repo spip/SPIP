@@ -69,6 +69,12 @@
 		<args>statut=!1comite,0minirezo,nouveau</args>
 	</bouton>
 	
+	<bouton id="bando_squelette">
+		<icone>images/squelette-48.png</icone>
+		<titre>icone_squelette</titre>
+		<url>navigation</url>
+		<args>menu=bando_squelette</args>
+	</bouton>
 	
 	<bouton id="bando_administration">
 		<icone>images/administration-48.png</icone>

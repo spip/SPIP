@@ -63,7 +63,7 @@ function boutons_core($type='bouton'){
  * @return array
  */
 function definir_barre_boutons($contexte=array(),$icones = true, $autorise = true) {
-	include_spip('inc/autoriser');
+    include_spip('inc/autoriser');
 	$boutons_admin=array();
 
 	// les boutons du core, issus de prive/navigation.xml
@@ -80,7 +80,7 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 			if ($parent AND isset($boutons_admin[$parent])){
 				if (!is_array($boutons_admin[$parent]->sousmenu))
 					$boutons_admin[$parent]->sousmenu = array();
-				$position = $infos['position']?$infos['position']:count($boutons_admin[$parent]->sousmenu);
+				$position = (strlen($infos['position'])?intval($infos['position']):count($boutons_admin[$parent]->sousmenu));
 				$boutons_admin[$parent]->sousmenu = array_slice($boutons_admin[$parent]->sousmenu,0,$position)
 				+ array($id=> new Bouton(
 					($icones AND $infos['icone'])?find_in_theme($infos['icone']):'',  // icone
@@ -151,7 +151,7 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 			$url = bandeau_creer_url($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg, $contexte);
 			if (!$image){
 					$sous .= "<li$class>"
-			 . "<a href='$url' id='bando2_$souspage'>"
+			 . "<a href='$url' class='bando2_$souspage'>"
 			 . _T($sousdetail->libelle)
 			 . "</a>"
 			 . "</li>";
@@ -159,7 +159,7 @@ function bando_lister_sous_menu($sousmenu,$contexte=null,$class="",$image=false)
 			else {
 					//$image = "<img src='".$sousdetail->icone."' width='".largeur($sousdetail->icone)."' height='".hauteur($sousdetail->icone)."' alt='".attribut_html(_T($sousdetail->libelle))."' />";
 					$sous .= "<li$class>"
-			 . "<a href='$url' id='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
+			 . "<a href='$url' class='bando2_$souspage' title='".attribut_html(_T($sousdetail->libelle))."'>"
 			 . "<span>"._T($sousdetail->libelle)."</span>"
 			 . "</a>"
 			 . "</li>";
@@ -216,7 +216,7 @@ function bando_navigation($boutons, $contexte = array())
 function bando_identite(){
 
 	$nom_site = typo($GLOBALS['meta']['nom_site']);
-	$img_info = find_in_theme('images/information-16.png');
+	$img_info = find_in_theme('images/information-24.png');
 	$url_config_identite = generer_url_ecrire('config_identite');
 
 	$res = "";
@@ -232,8 +232,9 @@ function bando_identite(){
 	  generer_url_ecrire("infos_perso")
 	  ."'>"
 	  . "<strong class='nom'>$moi</strong>"
-	  . " <img alt='"._T('icone_informations_personnelles')."' src='$img_info'/></a>"
-	  . "| "
+	  //. " <img alt='"._T('icone_informations_personnelles')."' src='$img_info'/>"
+	  . "</a>"
+	  . " | "
 	  . "<a class='menu_lang' href='$url_lang' title='"._T('titre_config_langage')."'><img alt='"._T('titre_config_langage')."' src='$img_langue'/>".traduire_nom_langue($GLOBALS['spip_lang'])."</a>"
 	  . " | "
 	  . "<a class='aide' onclick=\"window.open('$url_aide', 'spip_aide', 'scrollbars=yes,resizable=yes,width=740,height=580');return false;\" href='$url_aide'>"._T('icone_aide_ligne')."</a>"
@@ -244,9 +245,10 @@ function bando_identite(){
 
 	// informations sur le site
 	$res .= "<p class='nom_site_spip'>"
-	  . "<a class='info' title='Informations sur $nom_site' href='$url_config_identite'>"
+	  . "<a class='info' title='Informations sur ".attribut_html($nom_site)."' href='$url_config_identite'>"
 	  . "<strong class='nom'> $nom_site </strong>"
-	  . "<img alt='Informations sur $nom_site' src='$img_info' /></a>"
+	  //. "<img alt='Informations sur ".textebrut($nom_site)."' src='$img_info' />"
+	  ."</a>"
 	  . "| "
 	  . "<a class='voir' href='"._DIR_RACINE."'>"._T('icone_visiter_site')."</a>"
 	  . "</p>";
@@ -268,7 +270,7 @@ function bando_outils_rapides($boutons, $contexte = array()){
 
 	// le navigateur de rubriques
 	$img = find_in_theme('images/boussole-24.png');
-	$url = generer_url_ecrire("brouteur");
+	$url = generer_url_ecrire("articles_tous");
 	$res .= "<ul class='bandeau_rubriques deroulant'><li class='boussole'>";
 	$res .= "<a href='$url' id='boutonbandeautoutsite'><img src='$img' width='24' height='24' alt='' /></a>";
 	include_spip('exec/menu_rubriques');
@@ -284,11 +286,13 @@ function bando_outils_rapides($boutons, $contexte = array()){
 	$res .= "<div id='rapides'>";
 
 	// la barre de raccourcis collaboratifs
-	if (isset($boutons['outils_collaboratifs']))
+	if (isset($boutons['outils_collaboratifs'])) {
+		$sous_menu = bando_lister_sous_menu($boutons['outils_collaboratifs']->sousmenu,$contexte,'bouton',true);
+		if ($sous_menu)
 			$res .= "<ul class='rapides collaborer'>"
-				. bando_lister_sous_menu($boutons['outils_collaboratifs']->sousmenu,$contexte,'bouton',true)
+				. $sous_menu
 				. "</ul>";
-
+	}
 	$res .= formulaire_recherche("recherche")."</div>";
 
 	return "<div id='bando_outils'><div class='largeur'>\n$res<div class='nettoyeur'></div></div></div>";
@@ -324,7 +328,8 @@ function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 		;
 
 }
-// Pour memoire
+
+// Pour memoire, a eleminier definitivement
 define('_LARGEUR_ICONES_BANDEAU',
 	((@$GLOBALS['spip_display'] == 3) ? 60 : 80)
 	+ ((@$GLOBALS['spip_ecran'] == 'large') ? 30 : 0)
