@@ -201,7 +201,7 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 	// de la rubrique actuelle
 	if ($id_parent = _request('id_parent', $c)
 	AND $id_parent != $id_rubrique
-	AND (sql_countsel("spip_rubriques", "id_rubrique=$id_parent"))) {
+	AND (sql_fetsel('1', "spip_rubriques", "id_rubrique=$id_parent"))) {
 		$champs['id_rubrique'] = $id_parent;
 
 		// si l'article etait publie
@@ -276,9 +276,9 @@ function editer_article_heritage($id_article, $id_rubrique, $statut, $champs, $c
 
 		$langue = $row_rub['lang'];
 		$champs['id_secteur'] = $row_rub['id_secteur'];
-
-		if (sql_countsel('spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue)))
+		if (sql_fetsel('1', 'spip_articles', "id_article=$id_article AND langue_choisie<>'oui' AND lang<>" . sql_quote($langue))) {
 			$champs['lang'] = $langue;
+		}
 	}
 
 	if (!$champs) return;
