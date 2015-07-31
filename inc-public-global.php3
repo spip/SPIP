@@ -263,12 +263,10 @@ function inclure_formulaire($r) {
 	}
 }
 
-// Pour Fil
 
-function perso_admin($texte) {
 // Inserer la feuille de style selon les normes, dans le <head>
 // Feuilles de style admin : d'abord la CSS officielle, puis la perso,
-
+function perso_admin($texte) {
 	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />";
 	if (@file_exists('spip_admin_perso.css'))
 		$css2 = "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
