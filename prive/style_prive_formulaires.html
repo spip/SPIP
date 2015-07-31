@@ -192,6 +192,7 @@ c'est le par defaut des formulaires de Spip */
 /* Formulaires avec label en haut */
 /* les cas particuliers des edition pleines largeur */
 .formulaire_spip li.editer_parent,
+.formulaire_spip li.editer_groupe_mot,
 .formulaire_spip li.editer_descriptif,
 .formulaire_spip li.editer_chapo,
 .formulaire_spip li.editer_texte,
@@ -202,6 +203,7 @@ padding-top:10px;
 }
 
 .formulaire_spip li.editer_parent label,
+.formulaire_spip li.editer_groupe_mot label,
 .formulaire_spip li.editer_descriptif label,
 .formulaire_spip li.editer_chapo label,
 .formulaire_spip li.editer_texte label,
@@ -224,9 +226,12 @@ padding-top:10px;
 }
 
 .formulaire_spip li.editer_parent textarea,
+.formulaire_spip li.editer_parent select,
+.formulaire_spip li.editer_groupe_mot select,
 .formulaire_spip li.editer_descriptif textarea,
 .formulaire_spip li.editer_chapo textarea,
 .formulaire_spip li.editer_texte textarea,
+.formulaire_spip li.editer_texte .spip_barre,
 .formulaire_spip li.editer_ps textarea,
 .formulaire_spip li.haut textarea,
 .formulaire_spip li.haut select,
@@ -235,11 +240,10 @@ padding-top:10px;
 .formulaire_spip li.editer_chapo .erreur_message,
 .formulaire_spip li.editer_texte .erreur_message,
 .formulaire_spip li.editer_ps .erreur_message,
-.formulaire_spip li.haut .erreur_message {clear:#GET{left};}
+.formulaire_spip li.haut .erreur_message {
+	clear:#GET{left};
+}
  
-
-{clear:#GET{left};}
-
 
 
 /* Formulaires obligatoires */
@@ -273,7 +277,7 @@ padding-top:10px;
 	display: block;
 	float: [(#GET{left})];
 	margin: 0px;
-	margin-left: 10px;
+	margin-#GET{left}: 10px;
 	padding-top: 5px;
 	padding-bottom: 10px;
 	padding-#GET{left}: 5px;
@@ -320,6 +324,18 @@ padding-top:10px;
 	background-color: [#(#GET{claire}|couleur_eclaircir)];
 }
 
+.formulaire_spip li.editer_identification em.attention {
+	clear: #GET{left};
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 1px solid red;
+	color: red;
+	background-color: white;
+	font-style: normal;
+	padding: 5px;
+}
+
+
 .formulaire_spip li.editer_parent, 
 .formulaire_spip li.editer_groupe_mot {
 	margin-top: 10px;
@@ -327,6 +343,14 @@ padding-top:10px;
 	background-color: [#(#GET{claire}|couleur_eclaircir)];
 }
 .formulaire_spip li.editer_parent .rubrique_actuelle {clear:#GET{left};}
+
+
+
+.formulaire_spip li.editer_groupe_mots_associer,
+.formulaire_spip li.editer_groupe_mots_reglage_avance,
+.formulaire_spip li.editer_groupe_mots_editeur {
+	padding-#GET{left}: 10px;
+}
 
 
 /* Inscription du flux RSS */
@@ -339,12 +363,17 @@ padding-top:10px;
 	padding: 0px;
 	border-bottom: 1px solid #GET{foncee};
 }
+.formulaire_spip li.editer_referencement_automatise fieldset li {
+	padding-#GET{left}: 10px;
+}
 .formulaire_spip li.editer_referencement_automatise p.explication {
 	width: auto;
 	border: 0px;
 }
 
-
+.formulaire_spip li.editer_syndication {
+	padding-#GET{left}: 10px;	
+}
 
 
 .formulaire_spip li.editer_parent label, 
