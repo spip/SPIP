@@ -51,6 +51,8 @@ function exec_upgrade_dist() {
 	// Commentaire standard upgrade
 	else $commentaire = _T('texte_mise_a_niveau_base_1');
 
+	$commentaire .= "<br />[".$GLOBALS['meta']['version_installee']."/".$spip_version_base."]";
+
 	$_POST['reinstall'] = 'non'; // pour copy_request dans admin
 	include_spip('inc/headers');
 	$admin = charger_fonction('admin', 'inc');
