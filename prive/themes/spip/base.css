@@ -39,7 +39,7 @@ hr.clear { visibility: hidden; }
 
 /* ajax */
 div.ajaxbloc, div.ajax {position:relative;}
-div.ajaxbloc>.image_loading,div.ajax>.image_loading {position:absolute;right:0;}
+div.ajaxbloc>.image_loading,div.ajax>.image_loading,.formulaire_spip>.image_loading {position:absolute;right:0;}
 
 
 /* style par defaut sur les tables. selecteur generique pour avoir une faible priorite */
