@@ -30,8 +30,8 @@ function vieilles_log($quoi) {
 	$c = crc32($quoi);
 	if (!isset($vus[$c])) {
 		spip_log($quoi.' '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
-		$vus[$c] = true;
-	}
+		$vus[$c] = 1;
+	} else if (++$vus[$c] > 100) spip_log("$quoi doit imperativement etre remplacee");
 }
 
 foreach (
@@ -886,25 +886,25 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 }',
 
  'generer_url_article' => '($id, $args="", $ancre="")
-	{ return generer_url_entite($id, "article", $args, $ancre);}',
+	{ vieilles_log(\'generer_url_article\'); return generer_url_entite($id, "article", $args, $ancre);}',
 
- 'generer_url_rubrique' => '($id, $args="", $ancre="")
-	{ return generer_url_entite($id, "rubrique", $args, $ancre);}',
+ 'generer_url_rubrique' => '($id, $args="", $ancre="") {
+	vieilles_log(\'generer_url_rubrique\'); return generer_url_entite($id, "rubrique", $args, $ancre);}',
 
- 'generer_url_breve' => '($id, $args="", $ancre="")
-	{ return generer_url_entite($id, "breve", $args, $ancre);}',
+ 'generer_url_breve' => '($id, $args="", $ancre="") {
+	vieilles_log(\'generer_url_breve\');  return generer_url_entite($id, "breve", $args, $ancre);}',
 
- 'generer_url_mot' => '($id, $args="", $ancre="")
-	{ return generer_url_entite($id, "mot", $args, $ancre);}',
+ 'generer_url_mot' => '($id, $args="", $ancre="") {
+	vieilles_log(\'generer_url_mot\');  return generer_url_entite($id, "mot", $args, $ancre);}',
 
- 'generer_url_site' => '($id, $args="", $ancre="")
-	{ return generer_url_entite($id, "site", $args, $ancre);}',
+ 'generer_url_site' => '($id, $args="", $ancre="") {
+	vieilles_log(\'generer_url_site\');  return generer_url_entite($id, "site", $args, $ancre);}',
 
- 'generer_url_auteur' => '($id, $args="", $ancre="")
-	{ return generer_url_entite($id,"auteur", $args, $ancre);}',
+ 'generer_url_auteur' => '($id, $args="", $ancre="") {
+	vieilles_log(\'generer_url_auteur\');  return generer_url_entite($id,"auteur", $args, $ancre);}',
 
  'charger_generer_url' => '($prive=NULL) {
-	generer_url_entite("", "", "", "", !$prive);}',
+	vieilles_log(\'charger_generer_url\'); enerer_url_entite("", "", "", "", !$prive);}',
 
  'tester_variable' => '($n, $v) {
 	if (!isset($GLOBALS[$n])) $GLOBALS[$n] = $v;
