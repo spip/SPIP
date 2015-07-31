@@ -2165,7 +2165,7 @@ function spip_initialisation_suite(){
 	# au dela de 5500000 on considere que php n'est pas limite en memoire pour cette operation
 	# les configurations limitees en memoire ont un seuil plutot vers 1MPixel
 	if (!defined('_IMG_GD_MAX_PIXELS')) define('_IMG_GD_MAX_PIXELS',
-	  (isset($GLOBALS['meta']['max_taille_vignettes']) && $GLOBALS['meta']['max_taille_vignettes']<5500000)
+	  (isset($GLOBALS['meta']['max_taille_vignettes']) AND $GLOBALS['meta']['max_taille_vignettes'])
 		? $GLOBALS['meta']['max_taille_vignettes']
 		: 0);
 
