@@ -405,69 +405,66 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	$str_auteur = intval($id_auteur) ? intval($id_auteur) : $GLOBALS['ip'];
 	$permanent = empty($titre_version) ? 'non' : 'oui';
+	$id_version = 0;
 
 	// Eviter les validations entremelees
 	$lock = "ajout_version $id_article";
 	spip_get_lock($lock, 10);
 
+	// Determiner le numero du prochain fragment
+	$next = sql_fetch(spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1"));
+
 	// Examiner la derniere version
-	$result = sql_select("id_version, champs, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); 	// le champ id_auteur est un varchar dans cette table
+	$result = sql_select("id_version, champs, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); // le champ id_auteur est un varchar dans cette table
 
 	if ($row = sql_fetch($result)) {
-		$nouveau = !$row['flag'];
 		$id_version = $row['id_version'];
 		$paras_old = recuperer_fragments($id_article, $id_version);
-		if ($nouveau) {
-			$id_version++;
-		} else {
-			// On reprend une version existante ; pour qu'elle soit complete
-			// il faut merger ses champs avec ceux qu'on met a jour
-			$champs = reconstuire_version(unserialize($row['champs']), $pars_old, $champs);
-		}
+		$champs_old = $row['champs'];
+		$row = $row['flag'];
+	}
+	if (!$row) {
+		$id_version++;
+		sql_insert('spip_versions', '(id_article, id_version, id_auteur)', "($id_article, $id_version, '$str_auteur')"); // le champ id_auteur est un varchar dans cette table
+	}
+	  // version precedente recente, on va la mettre a jour 
+	  // avec les nouveaux arrivants si presents
+	else $champs = reconstuire_version(unserialize($champs_old), $paras_old, $champs);
 
-	} else { $id_version = $nouveau = 1;}
-
-	// Preparer la place
-	if ($nouveau)
-		sql_insert('spip_versions', '(id_article, id_version)', "($id_article, $id_version)");
-
-	$row = sql_fetch(spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1"));
-
-	$id_fragment_next = !$row  ? 1 : ($row['id_fragment'] + 1);
+	$next = !$next ? 1 : ($next['id_fragment'] + 1);
 
 	// Generer les nouveaux fragments
 	$codes = array();
-	foreach ($champs as $nom_champ => $texte) {
-		$codes[$nom_champ] = array();
+	foreach ($champs as $nom => $texte) {
+		$codes[$nom] = array();
 		$paras = separer_paras($texte, $paras);
-		$paras_champ[$nom_champ] = count($paras);
+		$paras_champ[$nom] = count($paras);
 	}
 
 	// Apparier les fragments de maniere optimale
 	$n = count($paras);
 	if ($n) {
 		// Tables d'appariement dans les deux sens
-		list($trans, $trans_rev) = apparier_paras($paras_old, $paras);
+		list(,$trans) = apparier_paras($paras_old, $paras);
 		reset($champs);
-		$nom_champ = '';
+		$nom = '';
 		for ($i = 0; $i < $n; $i++) {
-			while ($i >= $paras_champ[$nom_champ]) list($nom_champ, ) = each($champs);
+			while ($i >= $paras_champ[$nom]) list($nom, ) = each($champs);
 			// Lier au fragment existant si possible, sinon creer un nouveau fragment
-			if (isset($trans_rev[$i])) $id_fragment = $trans_rev[$i];
-			else $id_fragment = $id_fragment_next++;
-			$codes[$nom_champ][] = $id_fragment;
+			$id_fragment = isset($trans[$i]) ? $trans[$i] : $next++;
+			$codes[$nom][] = $id_fragment;
 			$fragments[$id_fragment] = $paras[$i];
 		}
 	}
-	foreach ($champs as $nom_champ => $t) {
-		$codes[$nom_champ] = join(' ', $codes[$nom_champ]);
-		if (!strlen($codes[$nom_champ])) unset($codes[$nom_champ]);
+	foreach ($champs as $nom => $t) {
+		$codes[$nom] = join(' ', $codes[$nom]);
+		if (!strlen($codes[$nom])) unset($codes[$nom]);
 	}
 
 	// Enregistrer les modifications
 	ajouter_fragments($id_article, $id_version, $fragments);
 
-	spip_query("UPDATE spip_versions SET date=NOW(), id_auteur='$str_auteur', champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
+	spip_query("UPDATE spip_versions SET date=NOW(), champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
 	spip_query("UPDATE spip_articles SET id_version=$id_version WHERE id_article=$id_article");
 
