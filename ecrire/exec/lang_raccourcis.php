@@ -84,7 +84,7 @@ function afficher_raccourcis($module = "public") {
 	echo "<div>&nbsp;</div>";
 
 	foreach (preg_files(repertoire_lang().$module.'_[a-z_]+\.php[3]?$') as $f)
-		if (ereg("^".$module."\_([a-z_]+)\.php[3]?$", $f, $regs))
+		if (preg_match(",^".$module."\_([a-z_]+)\.php[3]?$,", $f, $regs))
 				$langue_module[$regs[1]] = traduire_nom_langue($regs[1]);
 
 	if (isset($langue_module) && ($langue_module)) {

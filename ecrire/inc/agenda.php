@@ -47,7 +47,7 @@ function calendrier_retire_args_ancre($script)
 {
 	$script = str_replace('&amp;', '&', $script);
   $script = str_replace('?bonjour=oui&?','?',$script);
-  if (ereg('^(.*)#([^=&]*)$',$script, $m)) {
+  if (preg_match(',^(.*)#([^=&]*)$,',$script, $m)) {
 	  $script = $m[1];
 	  $ancre = $m[2];
   } else { $ancre = ''; }
@@ -56,7 +56,7 @@ function calendrier_retire_args_ancre($script)
 		$script = preg_replace("/([?&])$arg=[^&]*&/",'\1', $script);
 		$script = preg_replace("/([?&])$arg=[^&]*$/",'\1', $script);
 	}
-  if (ereg('[?&]$', $script)) $script =   substr($script,0,-1);
+  if (in_array(substr($script,-1),array('&','?'))) $script =   substr($script,0,-1);
   return array(quote_amp($script), $ancre);
 }
 
@@ -1442,7 +1442,7 @@ function sql_calendrier_interval_rv($avant, $apres) {
 		$amj = date_anneemoisjour("$annee_avant-$mois_avant-".sprintf("%02d", $j+($jour_avant)));
 
 		while ($amj <= $ical_apres) {
-		if (!($amj == date_anneemoisjour($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
+		if (!($amj == date_anneemoisjour($date_fin) AND preg_match(",00:00:00,", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
 			$evenements[$amj][$id_message]=
 			  array(
 				'URL' => generer_url_ecrire("message","id_message=$id_message"),

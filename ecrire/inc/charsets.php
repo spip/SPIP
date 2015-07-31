@@ -523,14 +523,14 @@ function unicode_to_javascript($texte) {
 // convertit les %uxxxx (envoyes par javascript)
 // http://doc.spip.org/@javascript_to_unicode
 function javascript_to_unicode ($texte) {
-	while (ereg("%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F])", $texte, $regs))
+	while (preg_match(",%u([0-9A-F][0-9A-F][0-9A-F][0-9A-F]),", $texte, $regs))
 		$texte = str_replace($regs[0],"&#".hexdec($regs[1]).";", $texte);
 	return $texte;
 }
 // convertit les %E9 (envoyes par le browser) en chaine du charset du site (binaire)
 // http://doc.spip.org/@javascript_to_binary
 function javascript_to_binary ($texte) {
-	while (ereg("%([0-9A-F][0-9A-F])", $texte, $regs))
+	while (preg_match(",%([0-9A-F][0-9A-F]),", $texte, $regs))
 		$texte = str_replace($regs[0],chr(hexdec($regs[1])), $texte);
 	return $texte;
 }

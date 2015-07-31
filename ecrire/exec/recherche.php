@@ -49,7 +49,7 @@ function exec_recherche_dist()
 	$query_breves['FROM'] = 'spip_breves';
 	$query_rubriques['FROM'] = 'spip_rubriques';
 	$query_sites['FROM'] = 'spip_syndic';
-	$testnum = ereg("^[0-9]+$", $recherche);
+	$testnum = preg_match(",^[0-9]+$,", $recherche);
 
 	// Eviter les symboles '%', caracteres SQL speciaux
 

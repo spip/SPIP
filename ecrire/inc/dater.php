@@ -22,7 +22,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 {
 	global $spip_lang_left, $spip_lang_right, $options;
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date_redac, $regs)) {
+	if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date_redac, $regs)) {
 		$annee_redac = $regs[1];
 		$mois_redac = $regs[2];
 		$jour_redac = $regs[3];
@@ -33,7 +33,7 @@ function inc_dater_dist($id, $flag, $statut, $type, $script, $date, $date_redac=
 
 	$possedeDateRedac= ($annee_redac + $mois_redac + $jour_redac);
 
-	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
+	if (preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?/", $date, $regs)) {
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour = $regs[3];

@@ -39,7 +39,7 @@ if ($f = include_spip('mes_fonctions', false)) {
 function verifier_sauvegarde ($archive, $dir) {
 	global $spip_version;
 
-	$g = ereg("\.gz$", $archive);
+	$g = preg_match(",\.gz$,", $archive);
 	$_fopen = ($g) ? gzopen : fopen;
 	$_fread = ($g) ? gzread : fread;
 	$buf_len = 1024; // la version doit etre dans le premier ko
