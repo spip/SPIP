@@ -196,21 +196,25 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type, $ajax='') {
 // http://doc.spip.org/@puce_statut_site
 function puce_statut_site($id_site, $statut, $id_rubrique, $type, $ajax=''){
 
-	$droit = autoriser('publierdans','rubrique',$id_rubrique)
-		? 'anim'
-		: 'breve';
+	$s = spip_query("SELECT syndication FROM spip_syndic WHERE id_syndic="._q($id_site));
+	$t = spip_fetch_array($s);
+	if ($t['syndication'] == 'off' OR $t['syndication'] == 'sus')
+		$anim = 'anim';
+	else
+		$anim = 'breve';
+		
 	switch ($statut) {
 		case 'publie': 
-			$puce = 'puce-verte-' . $droit .'.gif';
+			$puce = 'puce-verte-' . $anim .'.gif';
 			$title = _T('info_site_reference');
 			break;
 		case 'prop':
-			$puce = 'puce-orange-' . $droit .'.gif';
+			$puce = 'puce-orange-' . $anim .'.gif';
 			$title = _T('info_site_attente');
 			break;
 		case 'refuse':
 		default:
-			$puce = 'puce-poubelle-' . $droit .'.gif';
+			$puce = 'puce-poubelle-' . $anim .'.gif';
 			$title = _T('info_site_refuse');
 			break;
 	}
