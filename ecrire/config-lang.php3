@@ -173,6 +173,35 @@ debut_cadre_enfonce();
 		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
+	if  (lire_meta('multi_rubriques') == 'oui') {
+		echo "<TR>";
+		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		echo _T('info_multi_secteurs');
+		echo "</TD>";
+		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		afficher_choix('multi_secteurs', lire_meta('multi_secteurs'),
+			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
+		echo "</TD></TR>\n";
+	} else
+		echo "<input type='hidden' name='multi_secteurs' value='".lire_meta('multi_secteurs')."'>";
+
+	if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == 'oui')) {
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'><hr>";
+		echo _T('texte_multilinguisme_trad');
+		echo "</TD></TR>";
+
+		echo "<TR>";
+		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		echo _T('info_gerer_trad');
+		echo "</TD>";
+		echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+		afficher_choix('gerer_trad', lire_meta('gerer_trad'),
+			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
+		echo "</TD></TR>\n";
+	} else
+		echo "<input type='hidden' name='gerer_trad' value='".lire_meta('gerer_trad')."'>";
+
+
 	echo "<TR><TD ALIGN='$spip_lang_right' COLSPAN=2>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
