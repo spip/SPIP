@@ -444,7 +444,7 @@ function aff_referers ($query, $limit=10, $plus = true) {
 			} else {
 				$aff .= $ret;
 				$lien = $lesreferers[$numero][0];
-				if (eregi("^(<a [^>]+>)(.*)( \([0-9]+\))?", $lien, $regs))
+				if (eregi("^(<a [^>]+>)([^ ]*)( \([0-9]+\))?", $lien, $regs))
 					$lien = $regs[1].$lesdomaines[$numero].$regs[2];
 				else
 					$lien = "<a href='http://".$lesdomaines[$numero]."'>".$lesdomaines[$numero]."</a>";
