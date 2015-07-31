@@ -120,9 +120,10 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// Deplacement d'une rubrique publiee ==> chgt general de leur statut
 	if ($statut_ancien == 'publie')
 		calculer_rubriques_if($old_parent, array('id_rubrique' => $id_parent), $statut_ancien);
- 	// Creation ou deplacement d'une rubrique
+ 	// Creation ou deplacement d'une rubrique non publiee
+	// invalider le cache de leur menu
 	elseif (!$statut_ancien || $old_parent!=$id_parent)
-		calculer_rubriques();
+		effacer_meta("date_calcul_rubriques");
 
 	calculer_langues_rubriques();
 
@@ -154,8 +155,8 @@ function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
 	if (!$t) return true;
 	$t = (_request('confirme_deplace', $c) <> 'oui');
 	if ($t) return false;
-	$id_secteur = sql_fetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_parent");
-	if ($id_secteur= $id_secteur['id_secteur'])
+	$id_secteur = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_parent");
+	if ($id_secteur)
 		sql_updateq("spip_breves", array("id_rubrique" => $id_secteur), "id_rubrique=$id_rubrique");
 	return true;
 }
