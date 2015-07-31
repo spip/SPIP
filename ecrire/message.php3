@@ -254,19 +254,14 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 	if ($type != "affich")
 		spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
 
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
-    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
-<html>
-<head><title>[Mon site SPIP] 2004</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-</head><body>';
-
 	debut_page($titre, "redacteurs", "messagerie");
 
 	debut_gauche();
 	
 	if ($rv != 'non')
 	  echo http_calendrier_agenda ($lemois, $lannee, $lejour, $lemois, $lannee);
+	
+	echo "<br />";
 	
 	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
 	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
