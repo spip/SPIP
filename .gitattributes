@@ -18,7 +18,7 @@ dist/formulaires/mot_de_passe.php -text
 dist/formulaires/oubli/charger.php -text
 dist/formulaires/oubli/traiter.php -text
 dist/formulaires/oubli/verifier.php -text
-dist/formulaires/recherche/charger.php -text
+dist/formulaires/recherche.php -text
 dist/identifiants.html -text
 dist/inc-documents.html -text
 dist/inc-entete.html -text
