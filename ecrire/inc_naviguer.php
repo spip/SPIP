@@ -513,10 +513,6 @@ function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $de
 		"(titre, id_parent)",
 		"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 
-	// Modifier le lien de base pour qu'il prenne en compte le nouvel id
-	unset($_POST['id_parent']);
-	$_POST['id_rubrique'] = $id_rubrique;
-	$GLOBALS['clean_link'] = new Link();
 	return enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, 'oui');
 }
 

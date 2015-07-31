@@ -361,7 +361,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	$message=$petition["message"];
 	$texte_petition=$petition["texte"];
 
-	echo "\n<form action='".$GLOBALS['clean_link']->getUrl()."' method='POST'>";
+	echo "\n<form action='".generer_url_ecrire("articles","id_article=$id_article")."' method='POST'>";
 	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
 
 	echo "<select name='change_petition'
@@ -926,11 +926,8 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 		if ($flag_editable AND $options == "avancees" AND !$ret) {
 			// Formulaire pour lier a un article
 			echo "<td class='arial2' width='60%'>";
-			$lien = $GLOBALS['clean_link'];
-			$lien->delVar($nom_select);
-			$lien = $lien->getUrl();
 
-			echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
+			echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article") . "' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
 			echo "<div align='$spip_lang_right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondl'></div>";
 			echo "</form>";
@@ -1043,7 +1040,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 
 	if ($GLOBALS['connect_statut'] == '0minirezo') {
 		echo "<div style='width: 200px;'>";
-		$retour = urlencode($GLOBALS['clean_link']->getUrl());
+		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
 		$titre = urlencode($cherche_auteur);
 		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
@@ -1187,7 +1184,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 	    AND $options == "avancees"
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
-	$retour = urlencode($GLOBALS['clean_link']->getUrl());
+	$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
 	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
