@@ -16,45 +16,14 @@ include_spip('inc/filtres');
 include_spip('inc/lang');
 include_spip('inc/lien');
 
-//
-// Gerer les variables de personnalisation, qui peuvent provenir
-// des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
-// par le visiteur (sinon, pas de cache)
-//
-// http://doc.spip.org/@tester_variable
-function tester_variable($var, $val){
-	if (!isset($GLOBALS[$var]))
-		return $GLOBALS[$var] = $val;
+// init du tableau principal des raccourcis
 
-	if (
-		isset($_REQUEST[$var])
-		AND $GLOBALS[$var] == $_REQUEST[$var]
-	)
-		die ("tester_variable: $var interdite");
-	return $GLOBALS[$var];
-}
+global $spip_raccourcis_typo, $class_spip_plus, $debut_intertitre, $fin_intertitre, $debut_gras, $fin_gras, $debut_italique, $fin_italique;
 
-// Init des globales reglant la typo de propre 
-// voir aussi traiter_raccourci_glossaire et traiter_raccourci_notes
-// Retourne aussi un double tableau raccourci / texte-clair les utilisant.
-
-// http://doc.spip.org/@traiter_variables_sales
-function traiter_variables_sales() {
-	global $class_spip, $class_spip_plus;
-// class_spip : savoir si on veut class="spip" sur p i strong & li
-// class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
-// la difference c'est que des css specifiques existent pour les seconds
-	tester_variable('class_spip', '');  /*' class="spip"'*/
-	tester_variable('class_spip_plus', ' class="spip"');
-	tester_variable('toujours_paragrapher', true);
-
-	return array(array(
-		/* 0 */ 	"/\n(----+|____+)/S",
-		/* 1 */ 	"/\n-- */S",
-		/* 2 */ 	"/\n- */S",  /* DOIT rester a cette position */
-		/* 3 */ 	"/\n_ +/S",
-		/* 4 */   "/(^|[^{])[{][{][{]/S",
-		/* 5 */   "/[}][}][}]($|[^}])/S",
+$spip_raccourcis_typo = array(
+			      array(
+		/* 4 */		"/(^|[^{])[{][{][{]/S",
+		/* 5 */		"/[}][}][}]($|[^}])/S",
 		/* 6 */ 	"/(( *)\n){2,}(<br\s*\/?".">)?/S",
 		/* 7 */ 	"/[{][{]/S",
 		/* 8 */ 	"/[}][}]/S",
@@ -66,25 +35,47 @@ function traiter_variables_sales() {
 		/* 14 */	"/<\/quote>/S",
 		/* 15 */	"/<\/?intro>/S"
 				),
-		     array(
-		/* 0 */ 	"\n\n" . tester_variable('ligne_horizontale', "\n<hr$class_spip_plus />\n") . "\n\n",
-		/* 1 */ 	"\n<br />&mdash;&nbsp;",
-		/* 2 */ 	"\n<br />".definir_puce()."&nbsp;",
-		/* 3 */ 	"\n<br />",
-		/* 4 */ 	"\$1\n\n" . tester_variable('debut_intertitre', "\n<h3$class_spip_plus>"),
-		/* 5 */ 	tester_variable('fin_intertitre', "</h3>\n") ."\n\n\$1",
+			      array(
+		/* 4 */ 	"\$1\n\n" . $debut_intertitre,
+		/* 5 */ 	$fin_intertitre ."\n\n\$1",
 		/* 6 */ 	"<p>",
-		/* 7 */ 	tester_variable('debut_gras', "<strong$class_spip>"),
-		/* 8 */ 	tester_variable('fin_gras', '</strong>'),
-		/* 9 */ 	tester_variable('debut_italique', "<i$class_spip>"),
-		/* 10 */	tester_variable('fin_italique', '</i>'),
+		/* 7 */ 	$debut_gras,
+		/* 8 */ 	$fin_gras,
+		/* 9 */ 	$debut_italique,
+		/* 10 */	$fin_italique,
 		/* 11 */	"<p>",
 		/* 12 */	"<p>",
 		/* 13 */	"<blockquote$class_spip_plus><p>",
 		/* 14 */	"</blockquote><p>",
 		/* 15 */	""
 				)
-		     );
+);
+
+// Raccourcis dependant du sens de la langue
+
+function definir_raccourcis_alineas()
+{
+	global $ligne_horizontale;
+	static $alineas = array();
+	$x = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
+	if (!isset($alineas[$x])) {
+        
+		$alineas[$x] = array(
+		array(
+		/* 0 */ 	"/\n(----+|____+)/S",
+		/* 1 */ 	"/\n-- */S",
+		/* 2 */ 	"/\n- */S", /* DOIT rester a cette position */
+		/* 3 */ 	"/\n_ +/S"
+				),
+		array(
+		/* 0 */ 	"\n\n" . $ligne_horizontale . "\n\n",
+		/* 1 */ 	"\n<br />&mdash;&nbsp;",
+		/* 2 */ 	"\n<br />".definir_puce()."&nbsp;",
+		/* 3 */ 	"\n<br />"
+				)
+		);
+	}
+	return $alineas[$x];
 }
 
 // On initialise la puce pour eviter find_in_path() a chaque rencontre de \n-
@@ -101,20 +92,13 @@ function definir_puce() {
 	$p = 'puce' . (test_espace_prive() ? '_prive' : '');
 	if ($dir == 'rtl') $p .= '_rtl';
 
-	tester_variable($p, 'AUTO');
-	if ($GLOBALS[$p] == 'AUTO') {
+	if (!isset($GLOBALS[$p])) {
 		$img = find_in_path($p.'.gif');
 		list(,,,$size) = @getimagesize($img);
-		$GLOBALS[$p] = '<img src="'.$img.'" '
-			.$size.' alt="-" />';
+		$GLOBALS[$p] = '<img src="'.$img.'" '.$size.' alt="-" />';
 	}
 	return $GLOBALS[$p];
 }
-
-//
-// Diverses fonctions essentielles
-//
-
 
 // XHTML - Preserver les balises-bloc : on liste ici tous les elements
 // dont on souhaite qu'ils provoquent un saut de paragraphe
@@ -123,8 +107,6 @@ define('_BALISES_BLOCS',
 	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
 	.'d[ltd]|script|noscript|map|button|fieldset');
-
-
 
 //
 // Echapper les les elements perilleux en les passant en base64
@@ -861,10 +843,10 @@ function traiter_poesie($letexte)
 {
 	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,UimsS",
 	$letexte, $regs, PREG_SET_ORDER)) {
-		$u = $GLOBALS['meta']['pcre_u'];
+		$u = "/\n[\s]*\n/S" . $GLOBALS['meta']['pcre_u'];
 		foreach ($regs as $reg) {
 			$lecode = preg_replace(",\r\n?,S", "\n", $reg[2]);
-			$lecode = preg_replace("/\n[\s]*\n/S".$u, "\n&nbsp;\n",$lecode);
+			$lecode = preg_replace($u, "\n&nbsp;\n",$lecode);
 			$lecode = "<blockquote class=\"spip_poesie\">\n<div>"
 				.preg_replace("/\n+/", "</div>\n<div>", trim($lecode))
 				."</div>\n</blockquote>\n\n";
@@ -893,10 +875,6 @@ function traiter_raccourcis($letexte) {
 
 	// Gerer les notes (ne passe pas dans le pipeline)
 	list($letexte, $mes_notes) = traite_raccourci_notes($letexte);
-
-	// A present on introduit des attributs class_spip*
-	// Init de leur valeur et connexes au premier appel
-	$remplace = traiter_variables_sales();
 
 	//
 	// Tableaux
@@ -933,8 +911,12 @@ function traiter_raccourcis($letexte) {
 		}
 	}
 
-	// autres raccourcis
-	$letexte = preg_replace($remplace[0], $remplace[1], $letexte);
+	// Traitement des alineas
+	list($a,$b) = definir_raccourcis_alineas();
+	$letexte = preg_replace($a, $b,	$letexte);
+	//  Introduction des attributs class_spip* et autres raccourcis
+	list($a,$b) = $GLOBALS['spip_raccourcis_typo'];
+	$letexte = preg_replace($a, $b,	$letexte);
 	$letexte = preg_replace('@^\n<br />@S', '', $letexte);
 
 	// Retablir les caracteres proteges
@@ -960,17 +942,6 @@ function traite_raccourci_notes($letexte)
 {
 	global $compt_note,  $marqueur_notes, $les_notes, $notes_vues;
 	global $ouvre_ref, $ferme_ref, $ouvre_note, $ferme_note; #static ok
-	static $init = 0;
-
-	if (!$init++) {
-		$ouvre_ref = tester_variable('ouvre_ref', '&nbsp;[');
-		$ferme_ref = tester_variable('ferme_ref', ']');
-		$ouvre_note = tester_variable('ouvre_note', '[');
-		$ferme_note = tester_variable('ferme_note', '] ');
-		$les_notes = tester_variable('les_notes', '');
-		$compt_note = tester_variable('compt_note', 0);
-		$notes_vues === array();
-	}
 
 	$mes_notes = '';
 	if (preg_match_all(', *\[\[(.*?)\]\],msS', $letexte, $matches, PREG_SET_ORDER))
@@ -992,7 +963,7 @@ function traite_raccourci_notes($letexte)
 		// preparer la note
 		if ($num_note) {
 			if ($marqueur_notes) // quand il y a plusieurs series
-								 // de notes sur une meme page
+					 // de notes sur une meme page
 				$mn = $marqueur_notes.'-';
 			// pas de '%' dans les attributs name
 			$ancre = $mn.str_replace('%','_',rawurlencode($num_note));
