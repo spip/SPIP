@@ -17,7 +17,7 @@ blockquote.spip { margin: 2em 0; padding-left: 1em; border-left: 0.30em solid; }
 blockquote.spip_poesie { margin: 2em 0; padding-left: 1em; border-left: 1px solid; font-family: Garamond, Georgia, Times, serif; }
 blockquote.spip_poesie div { text-indent: -3em; margin-left: 3em; }
 
-.spip_code, .spip_cadre { font-family: "Courier New", Courier, mono; color: #009; }
+.spip_code, .spip_cadre { font-family: Courier, "Courier New", monospace; color: #009; }
 .spip_cadre { width: 99%; background-color: #F4F8F8; border: 1px inset; }
 div.spip_code, .spip_cadre { margin-bottom: 1em;  }
 
