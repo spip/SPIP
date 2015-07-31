@@ -355,6 +355,7 @@ if ($options == "avancees") {
 
 }
 
+echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 
 echo "</form>";
 

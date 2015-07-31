@@ -98,6 +98,7 @@ function exec_config_fonctions_dist()
 
 /* if ($options == "avancees" AND !$REMOTE_USER ) htaccess_config();*/
 
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
 	echo "</form>";
 
 	echo fin_page();

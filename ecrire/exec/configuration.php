@@ -552,6 +552,7 @@ fin_cadre_trait_couleur();
 echo "<p>";
 
 
+echo pipeline('affiche_milieu',array('args'=>array('exec'=>'configuration'),'data'=>''));
 
 echo "</form>";
 
