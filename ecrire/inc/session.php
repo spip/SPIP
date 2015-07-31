@@ -293,12 +293,18 @@ function actualiser_sessions($auteur) {
 	$sauve = $GLOBALS['visiteur_session'];
 
 	// .. mettre a jour les sessions de l'auteur cible
-	foreach(preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php') as $session) {
+	// attention au $ final pour ne pas risquer d'embarquer un .php.jeton temporaire
+	// cree par une ecriture concurente d'une session (fichier atomique temporaire)
+	$sessions = preg_files(_DIR_SESSIONS, '/'.$id_auteur.'_.*\.php$');
+	foreach($sessions as $session) {
 		$GLOBALS['visiteur_session'] = array();
-		include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
+		// a pu etre supprime entre le preg initial et le moment ou l'on arrive la (concurrence)
+		if (@file_exists($session)){
+			include $session; # $GLOBALS['visiteur_session'] est alors l'auteur cible
 
-		$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
-		ecrire_fichier_session($session, $auteur);
+			$auteur = array_merge($GLOBALS['visiteur_session'], $auteur);
+			ecrire_fichier_session($session, $auteur);
+		}
 	}
 
 	// restaurer l'auteur courant
