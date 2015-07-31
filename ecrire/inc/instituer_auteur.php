@@ -71,7 +71,7 @@ function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 	}
 
 	// si pas admin au chargement, rien a montrer. 
-	$vis = ($statut == '0minirezo') ? '' : " style='visibility: hidden'";
+	$vis = ($statut == '0minirezo') ? '' : " style='display: none'";
 
 		// Ajouter une rubrique a un administrateur restreint
 	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
@@ -127,7 +127,7 @@ function choix_statut_auteur($statut, $ancre) {
 	global $connect_toutes_rubriques;
 
 	$menu = "<select name='statut' size='1' class='fondl'
-		onchange=\"findObj_forcer('$ancre').style.visibility = (this.selectedIndex ? 'hidden' : 'visible');\">";
+		onchange=\"(this.selectedIndex==0)?jQuery('#$ancre').slideDown():jQuery('#$ancre:visible').slideUp();\">";
 
 	// Si on est admin restreint, on n'a pas le droit de modifier un admin
 	if ($connect_toutes_rubriques)
