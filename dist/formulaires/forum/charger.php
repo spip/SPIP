@@ -18,11 +18,12 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	// exiger l'authentification des posteurs pour les forums sur abo
 	if ($type == "abo") {
 		if (!$GLOBALS["visiteur_session"]['statut']) {
-			return array(false,array(
+			return array(
+				'editable'=>false,
 				'login_forum_abo'=>' ',
 				'inscription' => generer_url_public('identifiants', 'lang='.$GLOBALS['spip_lang']),
 				'oubli' => generer_url_public('spip_pass','lang='.$GLOBALS['spip_lang'],true),
-				));
+				);
 		}
 	}
 

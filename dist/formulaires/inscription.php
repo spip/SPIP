@@ -22,7 +22,7 @@ function formulaires_inscription_charger_dist($mode, $focus, $id=0) {
 		$valeurs['_commentaire'] = _T('pass_forum_bla');
 
 	if (!tester_config($id, $mode))
-		return array(false,$valeurs);
+		$valeurs['editable'] = false;
 
 	return $valeurs;
 }
