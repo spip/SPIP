@@ -21,6 +21,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 # ne concerne que le fichier mes_options.php3
 define('_EXTENSION_PHP', '.php3');
 #define('_EXTENSION_PHP', '');
+#mettre a true pour compatibilite PHP3 
+define('_FEED_GLOBALS', false);
 
 # le nom du repertoire ecrire/
 define('_DIR_RESTREINT_ABS', 'ecrire/');
@@ -200,6 +202,30 @@ $formats_logos =  array ('gif', 'jpg', 'png');
 
 // Controler les dates des item dans les flux RSS ?
 $controler_dates_rss = true;
+
+// bardee de variables de personnalisation pour la typo (cf inc/texte)
+// class_spip : savoir si on veut class="spip" sur p i strong & li
+// class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
+// la difference c'est que des css specifiques existent pour les seconds
+// 
+$class_spip =  '';  /*' class="spip"'*/
+$class_spip_plus =  ' class="spip"';
+$toujours_paragrapher =  true;
+$ligne_horizontale =  "\n<hr$class_spip_plus />\n";
+$debut_intertitre =  "\n<h3$class_spip_plus>";
+$fin_intertitre =  "</h3>\n";
+$debut_gras =  "<strong$class_spip>";
+$fin_gras =  '</strong>';
+$debut_italique =  "<i$class_spip>";
+$fin_italique =  '</i>';
+$ouvre_ref =  '&nbsp;[';
+$ferme_ref =  ']';
+$ouvre_note =  '[';
+$ferme_note =  '] ';
+$les_notes =  '';
+$compt_note =  0;
+$notes_vues =  array();
+
 
 //
 // Pipelines & plugins
