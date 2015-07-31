@@ -22,7 +22,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .fondl { background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000; }
 .fondo { background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF; }
 .fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; }
-
+.maj-debut:first-letter { text-transform: uppercase; }
 
 /*
  * Icones et bandeaux
@@ -327,6 +327,7 @@ a.cellule-h-texte:hover {
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif);}
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
+.arial0 { font-family: Arial, Helvetica, sans-serif; font-size: 9px; }
 .arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
 .arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
 .verdana1 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; }

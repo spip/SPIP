@@ -108,6 +108,7 @@ function creer_base() {
 		texte longblob NOT NULL,
 		type varchar(6) NOT NULL,
 		date_heure datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		date_fin datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		rv varchar(3) NOT NULL,
 		statut varchar(6) NOT NULL,
 		id_auteur bigint(21) NOT NULL,
@@ -1373,6 +1374,12 @@ function maj_base() {
 		}
 		maj_version (1.723);
 	}
+
+	if ($version_installee < 1.724) {
+		spip_query("ALTER TABLE spip_messages ADD date_fin datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+		maj_version (1.724);
+	}
+
 
 	return true;
 }

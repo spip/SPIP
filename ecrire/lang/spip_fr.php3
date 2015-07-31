@@ -374,6 +374,7 @@ Merci de votre participation
 'icone_auteurs' => 'Auteurs',
 'icone_breves' => 'Br&egrave;ves',
 'icone_calendrier' => 'Calendrier',
+'icone_calendrier_messagerie' => 'Agenda',
 'icone_configuration_site' => 'Configuration du site',
 'icone_configurer_site' => 'Configurer votre site',
 'icone_creation_groupe_mots' => 'Cr&eacute;er un nouveau groupe de mots',
@@ -582,7 +583,6 @@ Merci de votre participation
 'info_dimension' => 'Dimensions&nbsp;:',
 'info_discussion_cours' => 'Discussions en cours',
 'info_document' => 'Document',
-'info_donner_rendez_vous' => 'Ce bouton vous permet de donner un rendez-vous &agrave; un autre participant.',
 'info_echange_message' => 'SPIP permet l\'&eacute;change de messages et la constitution de forums de discussion
 		priv&eacute;s entre les participants du site. Vous pouvez activer ou
 		d&eacute;sactiver cette fonctionnalit&eacute;.',
@@ -757,7 +757,6 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_notes' => 'Notes',
 'info_nouveau' => '(Nouveau)',
 'info_nouveau_message' => 'VOUS AVEZ UN NOUVEAU MESSAGE',
-'info_nouveau_pense_bete' => 'Ce bouton vous permet de cr&eacute;er un nouveau pense-b&ecirc;te personnel.',
 'info_nouveaux_message' => 'Nouveaux messages',
 'info_nouveaux_messages' => 'VOUS AVEZ @total_messages@ NOUVEAUX MESSAGES',
 'info_nouvel_article' => 'Nouvel article',

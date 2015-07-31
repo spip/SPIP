@@ -4,6 +4,7 @@ include ("inc.php3");
 
 
 function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
+	global $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
 	global $connect_id_auteur, $connect_statut;
 	global $les_articles;
 	global $les_breves;
@@ -43,39 +44,33 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		
 		if ($mois != $mois_today OR $annee != $annee_today) {
 			icone(_T("info_aujourdhui")."<br>".nom_mois("$annee-$mois-1")." $annee", "calendrier.php3", "calendrier-24.gif", "", "center");
+			echo "<p />";
 		}
 		$annee_avant = $annee_today - 1;
 		$annee_apres = $annee_today + 1;
 		
-		if ($mois_today <=6) {
-			debut_boite_info();
-			echo "<div><b>$annee_avant</b></div>";
-			for ($i=9; $i < 13; $i++) {
-				echo "<div><a href='calendrier.php3?mois=$i&annee=$annee_avant'>".nom_mois("$annee_avant-$i-1")."</a></div>";
-			}
-			fin_boite_info();
-		}
 		
-		debut_boite_info();
+		echo "<div class='verdana1'>";
+			echo "<div><b>$annee_avant</b></div>";
+			for ($i=$mois_today; $i < 13; $i++) {
+				echo "<div style='margin-$spip_lang_left: 10px; padding: 2px; -moz-border-radius: 5px; margin-top: 2px; border: 1px solid #cccccc; background-color: #cccccc;'><a href='calendrier.php3?mois=$i&annee=$annee_avant'>".nom_mois("$annee_avant-$i-1")."</a></div>";
+			}
+		
 		echo "<div><b>$annee_today</b></div>";
 		for ($i=1; $i < 13; $i++) {
 			if ($i == $mois_today) {
-				echo "<div><b>".nom_mois("$annee_today-$i-1")."</b></div>";
+				echo "<div style='margin-$spip_lang_left: 10px; padding: 2px; -moz-border-radius: 5px; margin-top: 2px; border: 1px solid #666666; background-color: white;'><b>".nom_mois("$annee_today-$i-1")."</b></div>";
 			}
 			else {
-				echo "<div><a href='calendrier.php3?mois=$i&annee=$annee_today'>".nom_mois("$annee_today-$i-1")."</a></div>";
+				echo "<div style='margin-$spip_lang_left: 10px; padding: 2px; -moz-border-radius: 5px; margin-top: 2px; border: 1px solid #cccccc; background-color: #cccccc;'><a href='calendrier.php3?mois=$i&annee=$annee_today'>".nom_mois("$annee_today-$i-1")."</a></div>";
 			}
 		}
-		fin_boite_info();
 
-		if ($mois_today >=7) {
-			debut_boite_info();
 			echo "<div><b>$annee_apres</b></div>";
-			for ($i=1; $i < 7; $i++) {
-				echo "<div><a href='calendrier.php3?mois=$i&annee=$annee_apres'>".nom_mois("$annee_apres-$i-1")."</a></div>";
-			}
-			fin_boite_info();
+			for ($i=1; $i < $mois_today+1; $i++) {
+				echo "<div style='margin-$spip_lang_left: 10px; padding: 2px; -moz-border-radius: 5px; margin-top: 2px; border: 1px solid #cccccc; background-color: #cccccc;'><a href='calendrier.php3?mois=$i&annee=$annee_apres'>".nom_mois("$annee_apres-$i-1")."</a></div>";
 		}
+		echo "</div>";
 	
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
@@ -121,25 +116,9 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 			$les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
 	}
 
-	// annonces
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages WHERE messages.type='affich' AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
-	while($row=spip_fetch_array($result_messages)){
-		$id_message=$row['id_message'];
-		$date_heure=$row["date_heure"];
-		$titre=typo($row["titre"]);
-		$type=$row["type"];
-		$lejour=journum($row['date_heure']);
-
-		if ($type=="normal") $la_couleur="red";
-		elseif ($type=="pb") $la_couleur="blue";
-		elseif ($type=="affich") $la_couleur="#ff6600";
-		else $la_couleur="black";
-
-		$les_rv["$lejour"].="<br><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message'>$titre</a>";
-	}
 
 	// rendez-vous personnels
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE (lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -147,27 +126,38 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$type=$row["type"];
 		$lejour=journum($row['date_heure']);
 
-		if ($type=="normal") $la_couleur="red";
-		elseif ($type=="pb") $la_couleur="blue";
-		elseif ($type=="affich") $la_couleur="#ff6600";
-		else $la_couleur="black";
-
-		$les_rv["$lejour"].="<br><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message'>$titre</a>";
+		if ($type=="normal") {
+			$la_couleur = "#0A9C60";
+			$couleur_fond = "#BDF0DB";
+		}
+		elseif ($type=="pb") {
+			$la_couleur = "#0000ff";
+			$couleur_fond = "#ccccff";
+		}
+		elseif ($type=="affich") {
+			$la_couleur = "#ccaa00";
+			$couleur_fond = "#ffffee";
+		}
+		else {
+			$la_couleur="black";
+			$couleur_fond="#aaaaaa";
+		}
+		$les_rv["$lejour"][]="<div style='padding: 2px; margin-top: 2px; background-color: $couleur_fond; border: 1px solid $la_couleur; -moz-border-radius: 3px;' class='arial0'><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message' style='color: black;'>$titre</a></div>";
 	}
 
 
-	echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-avant.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
+	echo "<TR><TD align='$spip_lang_left'><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
 	echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$nom_mois $annee_today ".aide ("messcalen")."</B></FONT></TD>";
-	echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-apres.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
+	echo "<TD align='$spip_lang_right'><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
 
 	echo "<TR>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_3')."</B></TD>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_4')."</B></TD>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_5')."</B></TD>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_6')."</B></TD>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_7')."</B></TD>";
-	echo "<TD ALIGN='center' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_1')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_3')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_4')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_5')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_6')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_7')."</B></TD>";
+	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_1')."</B></TD>";
 
 	echo "</TR><TR>";
 	
@@ -184,25 +174,33 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$jour_semaine = date("w",$nom);
 
 		if (checkdate($mois_today,$jour,$annee_today)){
-			if ("$annee_today-$mois_today-$jour"==$ce_jour){
-				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#FFFFFF' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='red'><B>$jour</B></FONT>";
-			}else{		
-				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#E4E4E4' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$jour</B></FONT>";
+			if ("$annee_today-$mois_today-$jour"==$ce_jour) {
+				$couleur_lien = "red";
+				$couleur_fond = "white";
+			}
+			else {
+				$couleur_lien = "black";
+				$couleur_fond = "#e4e4e4";
+			}
+		
+			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
+				echo "<td width='$largeur_col' HEIGHT=80 BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois_today&annee=$annee_today'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></a></font>";
+			} else {
+				echo "<td width='$largeur_col' HEIGHT=80 BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></font>";
 			}
 
 			$activer_messagerie = lire_meta("activer_messagerie");
 			$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb' title='"._T("lien_nouvea_pense_bete")."'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal' title='"._T("lien_nouveau_message")."'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>";
 			}
 			if ($connect_statut == "0minirezo")
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich' title='"._T("lien_nouvelle_annonce")."'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
 			
-			if (strlen($les_rv[$j])>0){
-				echo $les_rv[$j];
-				echo "<hr noshade size=1>";
+			if (count($les_rv[$j])>0){
+				echo join($les_rv[$j],"\n");
 			}
 
 			echo $les_articles[$j];
@@ -235,9 +233,14 @@ if (!$mois){
 $nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 
 debut_page(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "asuivre", "calendrier");
+$activer_messagerie = lire_meta("activer_messagerie");
+$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 
-echo "<BR><BR><BR>";
-
+//echo "<BR><BR><BR>";
+if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
+	barre_onglets("calendrier", "calendrier");
+	echo "<br /><br />";
+}
 
 // marges et pied de page supprimes pour prendre toute la largeur
 // debut_gauche();
@@ -253,14 +256,12 @@ if (strlen($les_breves["0"]) > 0 OR $les_articles["0"] > 0){
 	echo "</font></td></tr></table>";
 }
 	
-$activer_messagerie = lire_meta("activer_messagerie");
-$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
 	echo "<br><br><br><table width='700' background=''><tr width='700'><td><FONT FACE='arial,helvetica,sans-serif' SIZE=2>";
 	echo "<b>"._T('info_aide')."</b>";
-
-	echo "<br><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_nouveau_pense_bete')."\n";
-	echo "<br><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_donner_rendez_vous')."\n";
+	echo "<br><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_bleu')."\n";
+	echo "<br><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_vert')."\n";
+	echo "<br><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_jaune')."\n";
 	echo "</font></td></tr></table>";
 }
 

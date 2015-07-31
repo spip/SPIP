@@ -13,7 +13,11 @@ if ($detruire_message) {
 }
 
 
-debut_page(_T('titre_page_messagerie'), "messagerie", "messagerie");
+debut_page(_T('titre_page_messagerie'), "asuivre", "calendrier");
+
+barre_onglets("calendrier", "messagerie");
+
+
 debut_gauche("messagerie");
 
 
@@ -48,8 +52,11 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 		$query_message .= ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')';
 	}
 
+
+	if ($afficher_auteurs) $cols = 3;
+	else $cols = 2;
 	$query_message .= ' ORDER BY date_heure DESC';
-	$tranches = afficher_tranches_requete($query_message, 3);
+	$tranches = afficher_tranches_requete($query_message, $cols);
 
 	if ($tranches OR $obligatoire) {
 		if ($important) debut_cadre_relief();
@@ -126,8 +133,18 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			//
 			// Date
 			//
-
+			
 			$s = affdate($date);
+			if ($rv == 'oui') {
+				$jour=journum($date);
+				$mois=mois($date);
+				$annee=annee($date);
+
+				$s = "<a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee'>$s</a>";
+			} else {
+				$s = "<font color='#999999'>$s</font>";
+			}
+			
 			$vals[] = $s;
 
 			$table[] = $vals;
@@ -154,10 +171,14 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 $messages_vus = '';
 
-$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-	"WHERE lien.id_auteur=$connect_id_auteur AND rv='oui' AND date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) ".
-	"AND statut='publie' AND lien.id_message=messages.id_message";
+$query_message = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+	"WHERE ((lien.id_auteur=$connect_id_auteur AND lien.id_message=messages.id_message)) AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) ".
+	"AND messages.statut='publie'";
 afficher_messages(_T('info_vos_rendez_vous'), $query_message, true, true);
+
+$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND rv='oui' AND type='affich'";
+afficher_messages(_T('info_tous_redacteurs'), $query_message, false, true, false, true);
+
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
 afficher_messages(_T('infos_vos_pense_bete'), $query_message, false, true);
@@ -177,14 +198,8 @@ afficher_messages(_T('info_message_en_redaction'), $query_message, true, false, 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb'";
 afficher_messages(_T('info_pense_bete_ancien'), $query_message, false, false, false);
 
-if ($connect_statut == '0minirezo') {
-	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
-	afficher_messages(_T('info_tous_redacteur')." <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' width='14' height='7' border='0'> "._T('bouton_ajouter')."</a></font>", $query_message, false, false, false, true);
-}
-else {
-	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
-	afficher_messages(_T('info_tous_redacteurs'), $query_message, false, false, false, true);
-}
+$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
+afficher_messages(_T('info_tous_redacteurs'), $query_message, false, false, false, true);
 
 fin_page();
 

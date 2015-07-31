@@ -72,6 +72,7 @@ NAVPICS/rien.gif -text
 ecrire/img_pack/admin-12.gif -text
 ecrire/img_pack/administration-24.gif -text
 ecrire/img_pack/administration-48.gif -text
+ecrire/img_pack/agenda-24.gif -text
 ecrire/img_pack/aide-48.gif -text
 ecrire/img_pack/aide-48_rtl.gif -text
 ecrire/img_pack/aide.gif -text
@@ -116,8 +117,9 @@ ecrire/img_pack/edit.gif -text
 ecrire/img_pack/effacer-cache-24.gif -text
 ecrire/img_pack/fiche-perso-24.gif -text
 ecrire/img_pack/fiche-perso-48.gif -text
-ecrire/img_pack/fleche-apres.png -text
-ecrire/img_pack/fleche-avant.png -text
+ecrire/img_pack/fleche-left.png -text
+ecrire/img_pack/fleche-right.png -text
+ecrire/img_pack/fond-calendrier.gif -text
 ecrire/img_pack/fond-stats.gif -text
 ecrire/img_pack/forum-admin-24.gif -text
 ecrire/img_pack/forum-droite.gif -text
