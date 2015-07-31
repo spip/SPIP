@@ -30,12 +30,14 @@ function naviguer_dist($action)
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
 
 	$id_rubrique = intval($id_rubrique);
+	$id_parent = intval($id_parent);
+	if ($id_parent == $id_rubrique && $id_parent) exit;
 	if ($flag_editable AND $action) {
 		$fonc = 'enregistre_' . $action . '_naviguer';
 		if (function_exists($fonc)) {
 			$res = $fonc(
-				intval($id_rubrique),
-				intval($id_parent),
+				$id_rubrique,
+				$id_parent,
 				$titre,
 				$texte,
 				$descriptif,
