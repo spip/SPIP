@@ -75,7 +75,7 @@ function configuration_contenu_forums_dist(){
 	. _T('info_question_visiteur_ajout_document_forum')
 	. "<div class='spip_xx-small'>"
 	. _T('info_question_visiteur_ajout_document_forum_format')
-	. "</div>"
+	. "</div><br />"
 	. "<input type='text' name='formats_documents_forum' id='formats_documents_forum' size='40' class='forml' value=\""
 		.entites_html($GLOBALS['meta']['formats_documents_forum'])
 		."\" />"
