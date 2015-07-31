@@ -294,31 +294,33 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= "</div>";
 
 		// Affichage du raccourci <doc...> correspondant
-		if (!$doublon) {
-			$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>";
-			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				$ret .= "<b>"._T('info_inclusion_vignette')."</b><br />";
-			}
-			$ret .= "<div style='color: 333333'>"
-			. affiche_raccourci_doc('doc', $id_document, 'left')
-			. affiche_raccourci_doc('doc', $id_document, 'center')
-			. affiche_raccourci_doc('doc', $id_document, 'right')
-			. "</div>\n";
-			$ret .= "</div>";
-
-			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				$ret .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
-				$ret .= "<b>"._T('info_inclusion_directe')."</b><br />";
-				$ret .= "<div style='color: 333333'>"
-				. affiche_raccourci_doc('emb', $id_document, 'left')
-				. affiche_raccourci_doc('emb', $id_document, 'center')
-				. affiche_raccourci_doc('emb', $id_document, 'right')
-				. "</div>\n";
-				$ret .= "</div>";
-			}
-		} else {
-			$ret .= "<div style='padding:2px; ' class='arial1 spip_x-small'>". affiche_raccourci_doc('doc', $id_document, ''). "</div>";
+		$raccourci = '';
+		if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+			$raccourci .= "<b>"._T('info_inclusion_vignette')."</b><br />";
 		}
+		$raccourci .= "<div style='color: 333333'>"
+		. affiche_raccourci_doc('doc', $id_document, 'left')
+		. affiche_raccourci_doc('doc', $id_document, 'center')
+		. affiche_raccourci_doc('doc', $id_document, 'right')
+		. "</div>\n";
+
+		if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+			$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
+			$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
+			$raccourci .= "<div style='color: 333333'>"
+			. affiche_raccourci_doc('emb', $id_document, 'left')
+			. affiche_raccourci_doc('emb', $id_document, 'center')
+			. affiche_raccourci_doc('emb', $id_document, 'right')
+			. "</div>\n";
+			$raccourci .= "</div>";
+		}
+
+		$raccourci = $doublon
+			? affiche_raccourci_doc('doc', $id_document, '')
+			: $raccourci;
+
+		$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
+			. $raccourci."</div>\n";
 
 		$legender = charger_fonction('legender', 'inc');
 		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
@@ -335,36 +337,35 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),30));
 
 		//
-		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
-		//
-		$raccourci_doc = "";
-		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
-			$doc = 'doc';
-		else
-			$doc = 'img';
-		if (!$doublon) {
-			$raccourci_doc .=
-				affiche_raccourci_doc($doc, $id_document, 'left')
-				. affiche_raccourci_doc($doc, $id_document, 'center')
-				. affiche_raccourci_doc($doc, $id_document, 'right');
-		} else {
-			$raccourci_doc .= affiche_raccourci_doc($doc, $id_document, '');
-		}
-		$raccourci_doc = "<div style='padding:2px; ' class='arial1 spip_x-small'>$raccourci_doc</div>\n";
-
-		//
 		// Afficher un apercu (pour les images)
 		//
 		if ($type_inclus == 'image') {
 			$ret .= "<div style='text-align: center; padding: 2px;'>\n";
 			$ret .= document_et_vignette($document, $url, true);
 			$ret .= "</div>\n";
-			if (!$doublon)
-				$ret .= $raccourci_doc;
 		}
 
-		if ($doublon)
-			$ret .= $raccourci_doc;
+		//
+		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
+		//
+		$raccourci = "";
+		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
+			$doc = 'doc';
+		else
+			$doc = 'img';
+
+		$raccourci .=
+			affiche_raccourci_doc($doc, $id_document, 'left')
+			. affiche_raccourci_doc($doc, $id_document, 'center')
+			. affiche_raccourci_doc($doc, $id_document, 'right');
+
+		$raccourci = $doublon
+			? affiche_raccourci_doc($doc, $id_document, '')
+			: $raccourci;
+
+		$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
+			. $raccourci."</div>\n";
+
 
 		$legender = charger_fonction('legender', 'inc');
 		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
