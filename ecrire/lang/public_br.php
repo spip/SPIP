@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Ober evezhiadenno&ugrave; diwar-benn al lec\'hienn-ma&ntilde;',
+'copie_document_impossible' => 'N\'eo ket posupl eila&ntilde; an teuliad',
 
 // D
 'date' => 'Deiziad',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => 'Pennado&ugrave; diwezha&ntilde;',
 'derniers_commentaires' => 'Evezhiadenno&ugrave; diwezha&ntilde;',
 'derniers_messages_forum' => 'Kemennadenno&ugrave; diwezha&ntilde; embannet er foromo&ugrave;',
+'documents_interdits_forum' => 'Diaotre eo an teuliado&ugrave; er forom',
 
 // E
 'edition_mode_texte' => 'Embann er stumm-testenn',
@@ -46,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Lodenn brevez',
 
 // F
+'formats_acceptes' => 'Stummo&ugrave; aotreet : @formats@.',
 'forum' => 'Forom',
 
 // H
