@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_editer formulaire_editer_site formulaire_editer_site-#ENV{id_site,nouveau}">
 <!-- <br class='spacer' /> -->
-	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
-	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
