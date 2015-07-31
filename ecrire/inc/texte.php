@@ -181,11 +181,6 @@ $preg='') {
 	$preg,
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-		// mode d'echappement :
-		//    <span class='base64'> . base64_encode(contenu) . </span>
-		// ou 'div' selon les cas, pour refermer correctement les paragraphes
-		$mode = 'span';
-
 		// echappements tels quels ?
 		if ($no_transform) {
 			$echap = $regs[0];
