@@ -106,20 +106,18 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		}
 
 		// La *vraie* base a la priorite
-		if (true /*  !$bdesc OR !$bdesc['field']  */) {
-			$desc = sql_showtable($nom_sql, $table_spip, $serveur);
-			if (!$desc OR !$desc['field']) {
-				if (!$fdesc) {
-					spip_log("trouver_table: table inconnue '$serveur' '$nom'",_LOG_INFO_IMPORTANTE);
-					return null;
-				}
-				// on ne sait pas lire la structure de la table :
-				// on retombe sur la description donnee dans les fichiers spip
-				$desc = $fdesc;
+		$desc = sql_showtable($nom_sql, $table_spip, $serveur);
+		if (!$desc OR !$desc['field']) {
+			if (!$fdesc) {
+				spip_log("trouver_table: table inconnue '$serveur' '$nom'",_LOG_INFO_IMPORTANTE);
+				return null;
 			}
-			else
-				$desc['exist'] = true;
+			// on ne sait pas lire la structure de la table :
+			// on retombe sur la description donnee dans les fichiers spip
+			$desc = $fdesc;
 		}
+		else
+			$desc['exist'] = true;
 
 		$desc['table'] = $desc['table_sql'] = $nom_sql;
 		$desc['connexion']= $serveur;
@@ -128,15 +126,24 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		// en lui passant les infos connues
 		// $desc est prioritaire pour la description de la table
 		$desc = array_merge(lister_tables_objets_sql($nom_sql,$desc),$desc);
-		
-		$connexion['tables'][$nom] = $desc;
-		// une nouvelle table a ete decrite
-		// mettons donc a jour le cache des descriptions de ce serveur
-		if (is_writeable(_DIR_CACHE))
-			ecrire_fichier($nom_cache_desc_sql[$serveur],serialize($connexion['tables']));
-	}
 
-	$connexion['tables'][$nom]['id_table']=$nom;
-	return $connexion['tables'][$nom];
+		// si tables_objets_sql est bien fini d'init, on peut cacher
+		if (defined('_init_tables_objets_sql')){
+			$connexion['tables'][$nom] = $desc;
+			$res = &$connexion['tables'][$nom];
+			// une nouvelle table a ete decrite
+			// mettons donc a jour le cache des descriptions de ce serveur
+			if (is_writeable(_DIR_CACHE))
+				ecrire_fichier($nom_cache_desc_sql[$serveur],serialize($connexion['tables']));
+		}
+		// sinon on renvoit ce qu'on a deja, et on ne cache rien
+		else
+			$res = $desc;
+	}
+	else
+		$res = &$connexion['tables'][$nom];
+
+	$res['id_table']=$nom;
+	return $res;
 }
 ?>
