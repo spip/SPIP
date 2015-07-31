@@ -74,13 +74,14 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	# chercher le fichier, eventuellement en changeant.php3 => .php
 	# et en gardant la compatibilite <INCLURE(page.php3)>
 	if ($fichier = $struct->texte) {
-		if (preg_match(',^(.*[.]php)3$,', $fichier, $r)) {
+		if (preg_match(',^(.*[.]php)3?$,', $fichier, $r)) {
 			$fichier = $r[1];
 		}
 		if ($fichier == 'page.php') {
 			$fichier = '';
 		} else {
-			$path = find_in_path($fichier);
+			if (!$path = find_in_path($fichier))
+				$path = find_in_path($fichier.'3');
 			if (!$path) {
 			spip_log("ERREUR: <INCLURE($fichier)> impossible");
 			erreur_squelette(_T('zbug_info_erreur_squelette'),
