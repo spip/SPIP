@@ -426,33 +426,32 @@ padding-top:10px;
 
 
 /* Formulaire compact */
-
+.formulaire_spip_compact{
+	font-size: 100%;
+}
 .formulaire_spip_compact ul li {
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-top: 5px;
+	padding: 2px 5px !important;
 }
 
-.formulaire_spip_compact label {
+.formulaire_spip_compact li label,
+.formulaire_spip_compact li.editer_descriptif label
+ {
 	text-transform: none;
-	font-size: 90%;
 	color: #444444;
 	
 	-moz-display: inline-box;
 	display: inline-block;
 	
-	padding-top: 3px;
-	padding-bottom: 3px;
-	padding-#GET{left}: 0px;
-	padding-#GET{right}: 0px;
+	padding: 3px 0;
+	margin-#GET{left}:0;
 
 	background: url([(#EVAL{_DIR_IMG_PACK}|concat{label-fond-compact-,#ENV{ltr},.gif})]) bottom [(#GET{left})] no-repeat;
 }
+
+.formulaire_spip_compact select { width:auto;}
 .formulaire_spip_compact input, 
 .formulaire_spip_compact textarea {
-	font-size: 90%;
 	padding: 3px;
-	width: 100%;
 }
 
 /* Bouton de validation */
