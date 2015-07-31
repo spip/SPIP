@@ -281,6 +281,8 @@ function exec_articles_edit_dist()
 	$lier_trad = _request('lier_trad');
 	$new = _request('new');
 
+	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
+	
 	$row = article_select($id_article, $id_rubrique, $lier_trad, $new);
 	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
 
@@ -309,8 +311,11 @@ function exec_articles_edit_dist()
 		afficher_documents_colonne($id_article, 'article', true);
 	}
 	$GLOBALS['id_article_bloque'] = $id_article;	// globale dans debut_droite
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	debut_droite();
-
+	
 	debut_cadre_formulaire();
 	formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
 	fin_cadre_formulaire();

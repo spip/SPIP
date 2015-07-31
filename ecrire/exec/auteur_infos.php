@@ -38,9 +38,9 @@ global $ajouter_id_article,
   $statut,
   $url_site;
 
-
  $id_auteur = intval($id_auteur);
  $ajouter_id_article = intval($ajouter_id_article);
+ pipeline('exec_init',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
 
 //
 // Recuperer id_auteur ou se preparer a l'inventer
@@ -213,7 +213,11 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
 
   cadre_auteur_infos($id_auteur, $auteur);
 
-  debut_droite();
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
+
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
+	debut_droite();
 
 //
 // Formulaire d'edition de l'auteur
@@ -231,6 +235,7 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
   formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajouter_id_article);
   fin_cadre_formulaire();
   echo "&nbsp;<p />";
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
 
   fin_page();
 }

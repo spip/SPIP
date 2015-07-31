@@ -283,9 +283,12 @@ echo "</center>";
 if ($id_syndic AND $flag_administrable)
   afficher_boite_logo('site', 'id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'sites');
 
+echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
+
+creer_colonne_droite();
+echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 debut_droite();
-
 
 
 debut_cadre_relief("site-24.gif");
@@ -356,6 +359,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 if ($flag_editable AND $options == 'avancees') {
   formulaire_mots('syndic', $id_syndic, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable,generer_url_ecrire('sites',"id_syndic=$id_syndic"));
 }
+echo pipeline('affiche_milieu',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
