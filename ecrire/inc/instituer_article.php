@@ -35,7 +35,7 @@ function inc_instituer_article_dist($id_article, $statut=-1)
 	"<option"  . mySel("refuse", $statut)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
 	"</select>" .
 	" &nbsp; " .
-	http_img_pack("puce-".puce_statut($statut).'.gif', "", "border='0'") .
+	http_img_pack("puce-".puce_statut($statut).'.gif', "", " class='puce'") .
 	"  &nbsp;\n" .
 	"<span class='visible_au_chargement' id='valider_statut'>" .
 	"<input type='submit' value='"._T('bouton_valider')."' class='fondo' />" .

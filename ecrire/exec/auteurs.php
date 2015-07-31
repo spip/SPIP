@@ -141,10 +141,10 @@ function auteurs_tranches($auteurs, $debut, $lettre, $tri, $statut, $max_par_pag
 	. "\n<td style='width: 20px'>";
 
 	if ($tri=='statut')
-  		$res .= http_img_pack('admin-12.gif','', "border='0'");
+  		$res .= http_img_pack('admin-12.gif','', " class='lang'");
 	else {
 	  $t =  _T('lien_trier_statut');
-	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "border='0'"),'tri=statut', " title=\"$t\"");
+	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "class='lang'"),'tri=statut', " title=\"$t\"");
 	}
 
 	$res .= "</td><td style='width: 20px'></td><td colspan='2'>";
