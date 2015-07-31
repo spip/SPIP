@@ -13,8 +13,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function urls_liste_objets(){
+function urls_liste_objets($preg = true){
 	$url_objets = pipeline('declarer_url_objets',array('article','breve','rubrique','auteur'));
+	if (!$preg) return $url_objets;
 	$url_objets = implode('|',array_map('preg_quote',$url_objets));
 	return $url_objets;
 }
