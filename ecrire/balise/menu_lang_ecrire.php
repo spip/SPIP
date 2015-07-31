@@ -41,7 +41,7 @@ function menu_lang_pour_tous($nom, $default) {
 		lang_select($default);	# et remplace
 		if ($GLOBALS['spip_lang'] <> $default) {
 			unset ($default);	# annule tout choix par defaut
-			lang_dselect();	#annule la selection
+			lang_dselect();		#annule la selection
 		}
 	}
 
