@@ -97,16 +97,22 @@ if ($mode == 'oubli_pass') {
 }
 else {
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
+
+	if ($inscriptions_ecrire AND ! $mode)
+		$mode = 'redac';
+
 	if ($inscriptions_ecrire OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
+
+		if (!$mode)
+			$mode = 'forum';
 
 		install_debut_html(_T('pass_vousinscrire'));
 		echo "<p>";
 
-		if ($mode != 'forum') {
-			$mode = 'redac';
+		if ($mode != 'forum')
 			echo _T('pass_espace_prive_bla');
-		} else
+		else
 			echo _T('pass_forum_bla');
 		echo "\n</p>";
 
