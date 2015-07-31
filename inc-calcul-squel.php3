@@ -1726,7 +1726,8 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		if ($retour) $retour .= \''.$boucle->separateur."';";
 	if ($lang_select)
 		$texte_debut .= '
-		$GLOBALS["spip_lang"] = $row["lang"];';
+		if ($row["lang"])
+			$GLOBALS["spip_lang"] = $row["lang"];';
 
 	// Traitement different selon le type de boucle
 	$texte_debut .= $tables_code_contexte[$type_boucle];

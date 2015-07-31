@@ -519,8 +519,7 @@ function calculer_page_globale($fond) {
 	$fond = chercher_squelette($fond, $id_rubrique_fond);
 
 	// selectionner la langue & affiner le squelette
-	$GLOBALS['spip_lang'] = $lang;
-	$lang = ereg_replace('^\.', '', $lang);
+	lang_select($lang);
 	if (@file_exists("$fond.$lang.html"))
 		$fond = "$fond.$lang";
 
