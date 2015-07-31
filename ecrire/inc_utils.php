@@ -793,7 +793,7 @@ function spip_register_globals() {
 	else {
 		foreach (array('_SERVER', '_COOKIE', '_POST', '_GET') as $_table) {
 			foreach ($GLOBALS[$_table] as $var => $val) {
-				if (!isset($GLOBALS[$var])
+				if (!isset($GLOBALS[$var]) # indispensable securite
 				AND isset($GLOBALS[$_table][$var])
 				AND ($_table == '_SERVER' OR !in_array($var, $refuse_gpc))
 				AND ($_table <> '_COOKIE' OR !in_array($var, $refuse_c)))
@@ -804,34 +804,27 @@ function spip_register_globals() {
 }
 
 
-// Magic quotes : on n'en veut pas
-function magic_unquote(&$t) {
+// Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
+// supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
+// la commande file_exists('chemin/vers/fichier/interdit%00truc_normal')
+function spip_desinfecte(&$t) {
+	static $magic_quotes;
+	if (!isset($magic_quotes))
+		$magic_quotes = @get_magic_quotes_gpc();
+
 	if (is_array($t)) {
 		foreach ($t as $key => $val) {
 			if (!is_array($val)
-			OR !($t['spip_recursions']++)) # interdire les recursions
-				magic_unquote($t[$key], $key);
+			OR !isset($t['spip_recursions'])) { # interdire les recursions
+				$t['spip_recursions'] = true;
+				spip_desinfecte($t[$key]);
+			}
 		}
-	} else
-		$t = stripslashes($t);
-}
-
-
-// Annuler les magic quotes Sur GET/POST/COOKIE et GLOBALS, s'il y en a
-function spip_magic_unquote() {
-	global $_GET, $_POST, $_COOKIE;
-	magic_unquote($_GET);
-	magic_unquote($_POST);
-	magic_unquote($_COOKIE);
-	#	if (@ini_get('register_globals')) // pas fiable
-	magic_unquote($GLOBALS);
-
-	# et a la fin supprimer la variable anti-recursion devenue inutile
-	# (et memenuisible, notamment si on teste $_POST)
-	unset($_GET['spip_recursions']);
-	unset($_POST['spip_recursions']);
-	unset($_COOKIE['spip_recursions']);
-	unset($GLOBALS['spip_recursions']);
+	} else {
+		$t = str_replace(chr(0), '', $t);
+		if ($magic_quotes)
+			$t = stripslashes($t);
+	}
 }
 
 ?>

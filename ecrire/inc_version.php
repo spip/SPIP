@@ -288,14 +288,20 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
 }
 
+// Securite : nettoyer les magic quotes \' et les caracteres nuls %00
+spip_desinfecte($_GET);
+spip_desinfecte($_POST);
+spip_desinfecte($_COOKIE);
+#	if (@ini_get('register_globals')) // pas fiable
+spip_desinfecte($GLOBALS);
+# a la fin supprimer la variable anti-recursion devenue inutile
+# (et meme nuisible, notamment si on teste $_POST)
+unset($_GET['spip_recursions']);
+unset($_POST['spip_recursions']);
+unset($_COOKIE['spip_recursions']);
+unset($GLOBALS['spip_recursions']);
+// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 @set_magic_quotes_runtime(0);
-if (@get_magic_quotes_gpc()
-AND strstr(
-	serialize($_GET).serialize($_POST).serialize($_COOKIE),
-	'\\')
-) {
-	spip_magic_unquote();
-}
 
 // Remplir $GLOBALS avec $_GET et $_POST (methode a revoir pour fonctionner
 // completement en respectant register_globals = off)
