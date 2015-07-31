@@ -259,6 +259,11 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$page = inclure_page($fond, $contexte_inclus);
 		$GLOBALS['delais'] = $d;
 
+		if (is_array($page['entetes']))
+			foreach($page['entetes'] as $k => $v) {
+				$GLOBALS['page']['entetes'][$k] = $v;
+			}
+
 		if ($page['process_ins'] == 'html') {
 				$texte = $page['texte'];
 		} else {

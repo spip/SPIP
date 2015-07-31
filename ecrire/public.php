@@ -16,8 +16,8 @@ if (defined('_INC_PUBLIC')) {
 	// $fond passe par INCLURE(){fond=...}
 	if (isset($contexte_inclus['fond']))
 		$fond = $contexte_inclus['fond'];
-
 	$page = inclure_page($fond, $contexte_inclus);
+
 	if ($page['process_ins'] == 'html')
 		echo $page['texte'];
 	else
@@ -83,9 +83,6 @@ if (defined('_INC_PUBLIC')) {
 		http_status($page['status']);
 	}
 
-	foreach($page['entetes'] as $k => $v)
-		@header("$k: $v");
-
 	$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 
 	if ($var_preview AND $html) {
@@ -104,7 +101,8 @@ if (defined('_INC_PUBLIC')) {
 
 	// 1. Cas d'une page contenant uniquement du HTML :
 	if ($page['process_ins'] == 'html') {
-		$page = $page['texte'];
+		foreach($page['entetes'] as $k => $v) @header("$k: $v");
+		$texte = $page['texte'];
 	}
 
 	// 2. Cas d'une page contenant du PHP :
@@ -112,23 +110,22 @@ if (defined('_INC_PUBLIC')) {
 	// etre declenchee dans l'espace des globales (donc pas
 	// dans une fonction).
 	else {
-		// Une page "normale" va s'afficher ici
-		if (! ($flag_ob 
-			AND (($var_mode == 'debug')
-				OR $var_recherche
-				OR $affiche_boutons_admin
-				OR $xhtml		))) {
+		// Si la retention du flux de sortie est impossible
+	  	// envoi des entetes
+		if (!$flag_ob) {
+			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			eval('?' . '>' . $page['texte']);
-			$page = '';
+			$texte = '';
 		}
 
-		// Certains cas demandent un ob_start() de plus
+		// sinon, inclure_balise_dynamique nous enverra peut-etre
+		// quelques en-tetes de plus (voire qq envoyes directement)
 		else {
 			ob_start(); 
 			$res = eval('?' . '>' . $page['texte']);
-			$page = ob_get_contents(); 
+			$texte = ob_get_contents(); 
 			ob_end_clean();
-
+			foreach($page['entetes'] as $k => $v) @header("$k: $v");
 			// en cas d'erreur lors du eval,
 			// la memoriser dans le tableau des erreurs
 			// On ne revient pas ici si le nb d'erreurs > 4
@@ -143,37 +140,37 @@ if (defined('_INC_PUBLIC')) {
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
 		include_spip('inc/debug');
-		debug_dumpfile($var_mode_affiche== 'validation' ? $page :"",
+		debug_dumpfile($var_mode_affiche== 'validation' ? $texte :"",
 			       $var_mode_objet,$var_mode_affiche);
 	} 
 
 	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
-		$page = affiche_erreurs_page($tableau_des_erreurs) . $page;
+		$texte = affiche_erreurs_page($tableau_des_erreurs) . $texte;
 
 	// Traiter var_recherche pour surligner les mots
 	if ($var_recherche) {
 		include_spip('inc/surligne');
-		$page = surligner_mots($page, $var_recherche);
+		$texte = surligner_mots($texte, $var_recherche);
 	}
 
 	// Valider/indenter a la demande.
-	if (trim($page) AND $xhtml AND $html AND !headers_sent()) {
+	if (trim($texte) AND $xhtml AND $html AND !headers_sent()) {
 		# Compatibilite ascendante
 		if ($xhtml === true) $xhtml ='tidy';
 		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
 
 		if ($f = include_fonction($xhtml, 'inc'))
-			$page = $f($page);
+			$texte = $f($texte);
 	}
 
 	// Inserer au besoin les boutons admins
 	if ($affiche_boutons_admin) {
 		include_spip('public/admin');
-		$page = affiche_boutons_admin($page);
+		$texte = affiche_boutons_admin($texte);
 	}
 
 	// Affichage final s'il en reste
-	echo $page;
+	echo $texte;
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
