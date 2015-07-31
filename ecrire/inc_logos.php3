@@ -175,7 +175,26 @@ function afficher_logo($racine, $titre) {
 // Creation automatique d'une vignette
 //
 
-function creer_vignette($image, $newWidth, $newHeight, $format, $destination, $process='AUTO', $force=false) {
+// Calculer le ratio
+function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
+	$ratioWidth = $srcWidth/$maxWidth;
+	$ratioHeight = $srcHeight/$maxHeight;
+
+	if ($ratioWidth <=1 AND $ratioHeight <=1) {
+		$destWidth = $srcWidth;
+		$destHeight = $srcHeight;
+	} else if ($ratioWidth < $ratioHeight) {
+		$destWidth = $srcWidth/$ratioHeight;
+		$destHeight = $maxHeight;
+	}
+	else {
+		$destWidth = $maxWidth;
+		$destHeight = $srcHeight/$ratioWidth;
+	}
+	return array ($destWidth, $destHeight);
+}
+
+function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
 	global $convert_command;
 
 	if ($process == 'AUTO')
@@ -199,27 +218,14 @@ function creer_vignette($image, $newWidth, $newHeight, $format, $destination, $p
 	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
 
 		$creation = true;
-
-		// Calculer le ratio
 		if (!$srcsize = @getimagesize($image)) return;
-		$srcWidth = $srcsize[0];
-		$srcHeight = $srcsize[1];
-		$ratioWidth = $srcWidth/$newWidth;
-		$ratioHeight = $srcHeight/$newHeight;
-
-		if ($ratioWidth < $ratioHeight) {
-			$destWidth = $srcWidth/$ratioHeight;
-			$destHeight = $newHeight;
-		}
-		else {
-			$destWidth = $newWidth;
-			$destHeight = $srcHeight/$ratioWidth;
-		}
+		list ($destWidth,$destHeight) = image_ratio($srcsize[0], $srcsize[1], $maxWidth, $maxHeight);
 
 		// imagemagick en ligne de commande
 		if ($process == 'convert') {
 			$vignette = $destination.".jpg";
-			$commande = "$convert_command -size ${newWidth}x${newHeight} $image -geometry ${newWidth}x${newHeight} +profile \"*\" $vignette";
+			$commande = "$convert_command -size ${destWidth}x${destHeight} $image -geometry ${destWidth}x${destHeight} +profile \"*\" $vignette";
+spip_log($commande);
 			shell_exec($commande);
 		}
 		else
@@ -227,17 +233,11 @@ function creer_vignette($image, $newWidth, $newHeight, $format, $destination, $p
 		 if ($process == 'imagick') {
 			$vignette = "$destination.jpg";
 
-			$handle = imagick_create();
-			$handle AND imagick_read($handle, $srcImage)
-			AND imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_UNKNOWN, 0)
-			AND $ok = imagick_write($handle, $vignette);
-
-			if (!$ok) {
-				echo imagick_failedreason( $handle ) ;
-				echo imagick_faileddescription( $handle ) ;
-				return;
-			}
-		} else
+			$handle = imagick_readimage($image);
+			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_UNKNOWN, 0);
+			imagick_write($handle, $vignette);
+		}
+		else
 		// gd ou gd2
 		if ($process == 'gd1' OR $process == 'gd2') {
 

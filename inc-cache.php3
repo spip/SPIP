@@ -123,13 +123,13 @@ function ecrire_fichier_cache($fichier, $contenu) {
 
 
 //
-// Retourne true si le sous-repertoire peut etre cree, false sinon
+// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
 //
 
 function creer_repertoire($base, $subdir) {
-	if (@file_exists("$base/.plat")) return false;
+	if (@file_exists("$base/.plat")) return '';
 	$path = $base.'/'.$subdir;
-	if (@file_exists($path)) return true;
+	if (@file_exists($path)) return "$subdir/";
 
 	@mkdir($path, 0777);
 	@chmod($path, 0777);
@@ -148,7 +148,7 @@ function creer_repertoire($base, $subdir) {
 			exit;
 		}
 	}
-	return $ok;
+	return ($ok? "$subdir/" : '');
 }
 
 

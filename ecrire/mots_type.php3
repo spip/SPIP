@@ -6,7 +6,7 @@ include ("inc.php3");
 if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$id_groupe = '';
 	$type = filtrer_entites(_T('titre_nouveau_groupe'));
-	$onfocus = " onfocus=\"this.value='';\"";
+	$onfocus = " onfocus=\"if(!done){this.value='';done=true;}\"";
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';
