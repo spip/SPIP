@@ -1738,7 +1738,23 @@ function generer_form_action($script, $corps, $atts='', $public=false) {
 	  "</div></form>";
 }
 
-// http://doc.spip.org/@generer_url_action
+/**
+ * Créer une URL
+ *
+ * @param  string  $script
+ *     Nom du script à exécuter
+ * @param  string|array  $args
+ *     Arguments à transmettre a l'URL, soit sous la forme d'un string 
+ *     tel que `arg1=yy&arg2=zz` soit sous la forme d'un array tel que 
+ *    `array( arg1 => yy, arg2 => zz )`
+ * @param  boolean $no_entities
+ *     Si false : transforme les & en &amp;
+ * @param  boolean $public
+ *     URL relative ? false : l’URL sera complète et contiendra l’URL du site. 
+ *     true : l’URL sera relative.
+ * @return string
+ *     URL
+ */
 function generer_url_action($script, $args="", $no_entities=false , $public = false) {
 	// si l'on est dans l'espace prive, on garde dans l'url
 	// l'exec a l'origine de l'action, qui permet de savoir si il est necessaire

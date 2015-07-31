@@ -127,7 +127,18 @@ function low_sec($id_auteur) {
 
 // Inclure les arguments significatifs pour le hachage
 // cas particulier du statut pour compatibilite ancien rss/suivi_revisions
-
+/**
+ * Inclure les arguments significatifs pour le hachage
+ *
+ * Cas particulier du statut pour compatibilité ancien rss/suivi_revisions
+ * 
+ * @param string $op
+ * @param array  $args
+ * @param string $lang
+ * @param string $mime
+ *     Par défaut 'rss'. 
+ * @return string
+ */
 function param_low_sec($op, $args=array(), $lang='', $mime='rss')
 {
 	$a = $b = '';
@@ -194,7 +205,11 @@ function effacer_low_sec($id_auteur) {
 	sql_updateq("spip_auteurs", array("low_sec" => ''), "id_auteur = $id_auteur");
 }
 
-// http://doc.spip.org/@initialiser_sel
+/**
+ * Initialiser la globale htsalt si cela n'a pas déjà été fait.
+ * 
+ * @return void|bool
+ */
 function initialiser_sel() {
 	global $htsalt;
 	if (CRYPT_MD5) $htsalt = '$1$'.creer_pass_aleatoire();
