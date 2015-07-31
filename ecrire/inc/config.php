@@ -50,6 +50,9 @@ function liste_metas()
 		'taille_preview' => 150,
 		'articles_modif' => 'non',
 
+		'rubriques_descriptif' => 'non',
+		'rubriques_texte' => 'oui',
+
 		'activer_sites' => 'non',
 		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',
@@ -226,6 +229,9 @@ function appliquer_modifs_config() {
 		'creer_preview',
 		'taille_preview',
 		'articles_modif',
+
+		'rubriques_descriptif',
+		'rubriques_texte',
 
 		'activer_sites',
 		'proposer_sites',
