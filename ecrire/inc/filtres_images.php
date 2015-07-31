@@ -1524,7 +1524,7 @@ function image_rotation($im, $angle, $crop=false)
 		if (function_exists(imagick_rotate)) {
 			$mask = imagick_getcanvas( "#ff0000", $x, $y );
 			$handle = imagick_readimage ($im);
-			if (imagick_isopaqueimage( $handle )) {
+			if ($handle && imagick_isopaqueimage( $handle )) {
 				imagick_rotate( $handle, $angle);
 				imagick_writeimage( $handle, $dest);
 				$effectuer_gd = false;
