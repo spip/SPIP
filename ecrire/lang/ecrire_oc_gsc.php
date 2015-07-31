@@ -536,7 +536,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'info_sites_trouves_dans_texte' => 'Sits trobats (dens lo t&egrave;xt)',
 'info_sous_titre' => 'Sost&iacute;tol:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => 'Estatut d\'aqueth autor:',
+'info_statut_auteur' => '<MODIF>Estatut d\'aqueth autor:',
 'info_statut_efface' => 'Esfa&ccedil;at',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Aqueth sit qu\'ei:',

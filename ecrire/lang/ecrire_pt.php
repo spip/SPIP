@@ -582,7 +582,7 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_sites_trouves_dans_texte' => 'S&iacute;tios encontrados (no texto)',
 'info_sous_titre' => 'Sub-t&iacute;tulo :',
 'info_statut_administrateur' => 'Administrador',
-'info_statut_auteur' => 'Estatuto deste autor :',
+'info_statut_auteur' => '<MODIF>Estatuto deste autor :',
 'info_statut_auteur_a_confirmer' => '<NEW>Inscription &agrave; confirmer',
 'info_statut_auteur_autre' => '<NEW>Autre statut&nbsp;:',
 'info_statut_efface' => 'Apagado',

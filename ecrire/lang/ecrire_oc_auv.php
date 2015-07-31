@@ -536,7 +536,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempu&egrave;i lors s
 'info_sites_trouves_dans_texte' => 'Sits trobats (dins lo t&egrave;xt)',
 'info_sous_titre' => 'Sost&iacute;tol:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => 'Estatut d\'aquel autor:',
+'info_statut_auteur' => '<MODIF>Estatut d\'aquel autor:',
 'info_statut_efface' => 'Esfa&ccedil;at',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Aquel sit es:',

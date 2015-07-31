@@ -572,7 +572,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_sites_trouves_dans_texte' => 'Nalezen&eacute; weby (v textu)',
 'info_sous_titre' => 'D&iacute;l&#269;&iacute; nadpis:',
 'info_statut_administrateur' => 'Spr&aacute;vce',
-'info_statut_auteur' => 'Statut autora:',
+'info_statut_auteur' => '<MODIF>Statut autora:',
 'info_statut_auteur_a_confirmer' => 'Registrace k potvrzen&iacute;',
 'info_statut_auteur_autre' => 'Dal&#353;&iacute; status:',
 'info_statut_efface' => 'Odstran&#283;no',

@@ -573,7 +573,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_sites_trouves_dans_texte' => 'Sits trobats (dins lo t&egrave;xt)',
 'info_sous_titre' => 'Sost&iacute;tol:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => 'Estatut d\'aquel autor:',
+'info_statut_auteur' => '<MODIF>Estatut d\'aquel autor:',
 'info_statut_auteur_a_confirmer' => 'Inscripcion de confirmar',
 'info_statut_auteur_autre' => 'Autre estatut&nbsp;:',
 'info_statut_efface' => 'Escafat',

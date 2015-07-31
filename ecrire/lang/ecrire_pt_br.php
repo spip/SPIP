@@ -592,7 +592,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_sites_trouves_dans_texte' => 'Sites encontrados (no texto)',
 'info_sous_titre' => 'Subt&iacute;tulo:',
 'info_statut_administrateur' => 'Administrador',
-'info_statut_auteur' => 'Status deste autor:',
+'info_statut_auteur' => '<MODIF>Status deste autor:',
 'info_statut_auteur_a_confirmer' => 'Inscri&ccedil;&atilde;o a confirmar',
 'info_statut_auteur_autre' => 'Outro status:',
 'info_statut_efface' => 'Exclu&iacute;do',

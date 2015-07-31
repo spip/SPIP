@@ -628,7 +628,7 @@ requiring an FTP access to the Web site.',
 'info_sites_trouves_dans_texte' => 'Sites found (in the text)',
 'info_sous_titre' => 'Subtitle:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => 'This author\'s status:',
+'info_statut_auteur' => '<MODIF>This author\'s status:',
 'info_statut_auteur_a_confirmer' => 'Registration to be confirmed',
 'info_statut_auteur_autre' => 'Other status:',
 'info_statut_efface' => 'Deleted',
@@ -1083,7 +1083,7 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_restaurer_sauvegarde' => 'This option allows you to restore a previous
 backup of the database. To achieve this, the file containing the backup should have been
 stored in the directory @dossier@.
-Be catious with this feature: <b>Any potential modifications or losses are
+Be cautious with this feature: <b>Any potential modifications or losses are
 irreversible.</b>',
 'texte_sauvegarde' => 'Backup the content of the database',
 'texte_sauvegarde_base' => 'Backup the database',

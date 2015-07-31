@@ -615,7 +615,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_sites_trouves_dans_texte' => 'Bulunan siteler (metnin i&ccedil;inde)',
 'info_sous_titre' => 'Alt-ba&#351;l&#305;k :',
 'info_statut_administrateur' => 'Y&ouml;netici',
-'info_statut_auteur' => 'Bu yazar&#305;n stat&uuml;s&uuml; :',
+'info_statut_auteur' => '<MODIF>Bu yazar&#305;n stat&uuml;s&uuml; :',
 'info_statut_auteur_a_confirmer' => 'Onaylanacak kay&#305;t',
 'info_statut_auteur_autre' => 'Di&#287;er stat&uuml;&nbsp;:',
 'info_statut_efface' => 'Silindi',

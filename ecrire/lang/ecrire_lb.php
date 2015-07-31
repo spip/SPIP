@@ -570,7 +570,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_sites_trouves_dans_texte' => 'Siten fonnt (am Text)',
 'info_sous_titre' => '&Euml;nnertitel:',
 'info_statut_administrateur' => 'Administrateur',
-'info_statut_auteur' => 'Status vun d&euml;sem Auteur:',
+'info_statut_auteur' => '<MODIF>Status vun d&euml;sem Auteur:',
 'info_statut_auteur_a_confirmer' => 'Umeldung ze konfirm&eacute;ieren',
 'info_statut_auteur_autre' => 'Aneren Status:',
 'info_statut_efface' => 'Gel&auml;scht',

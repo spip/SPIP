@@ -583,7 +583,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'info_sites_trouves_dans_texte' => 'Bann sitw&egrave;b trouv&eacute; (dann lo t&egrave;ks)',
 'info_sous_titre' => 'Soutitr :',
 'info_statut_administrateur' => 'Komand&egrave;r',
-'info_statut_auteur' => 'Lo statu lot&egrave;r-la :',
+'info_statut_auteur' => '<MODIF>Lo statu lot&egrave;r-la :',
 'info_statut_auteur_a_confirmer' => 'Ou i dwa konfime out linkrisyon ',
 'info_statut_auteur_autre' => 'In ot stati&nbsp;:',
 'info_statut_efface' => 'D&eacute;gr&eacute;n&eacute;',

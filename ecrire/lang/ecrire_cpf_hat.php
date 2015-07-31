@@ -629,7 +629,7 @@ Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
 'info_sites_trouves_dans_texte' => 'Sit sa-yo ki te finn rannkont (nan t&egrave;ks)',
 'info_sous_titre' => 'Soutit :',
 'info_statut_administrateur' => 'Komand&egrave;',
-'info_statut_auteur' => 'Lestati lot&egrave;-a :',
+'info_statut_auteur' => '<MODIF>Lestati lot&egrave;-a :',
 'info_statut_auteur_a_confirmer' => '<NEW>Inscription &agrave; confirmer',
 'info_statut_auteur_autre' => '<NEW>Autre statut&nbsp;:',
 'info_statut_efface' => 'Ki te finn kraze',
