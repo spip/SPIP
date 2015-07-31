@@ -30,22 +30,13 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 
 	$erreurs = array();
 	include_spip('inc/filtres');	
-	if (!tester_config($id, $mode))
+	if (!tester_config($id, $mode) OR (strlen(_request('nobot'))>0))
 		$erreurs['message_erreur'] = _T('rien_a_faire_ici');
 
 	if (!$nom = _request('nom_inscription'))
 		$erreurs['nom_inscription'] = _T("info_obligatoire");
-	else {
-		$nom = trim(corriger_caracteres($nom));
-		if((strlen ($nom) < _LOGIN_TROP_COURT) OR (strlen($nom) > 64) OR (strlen(_request('nobot'))>0))
-			$erreurs['nom_inscription'] = _T('info_login_trop_court');
-	}
-	
 	if (!$mail = _request('mail_inscription'))
 		$erreurs['mail_inscription'] = _T("info_obligatoire");
-	elseif(!email_valide($mail)){
-		$erreurs['mail_inscription'] = _T("form_prop_indiquer_email");
-	}
 	
 	// compatibilite avec anciennes fonction surchargeables
 	// plus de definition par defaut
@@ -55,9 +46,11 @@ function formulaires_inscription_verifier_dist($mode, $focus, $id=0) {
 		else 
 			$f = 'test_inscription_dist';
 		$declaration = $f($mode, $mail, $nom, $id);
-		if (is_string($declaration))
-			$erreurs['mail_inscription'] = $declaration;
-		else {
+		if (is_string($declaration)) {
+			$k = (strpos($declaration, 'mail')  !== false) ?
+			  'mail_inscription' : 'nom_inscription';
+			$erreurs[$k] = _T($declaration);
+		} else {
 			include_spip('base/abstract_sql');
 			
 			if ($row = sql_fetsel("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($declaration['email']))){
@@ -90,7 +83,7 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 		$row = sql_fetsel("statut, id_auteur, login, email", "spip_auteurs", "email=" . sql_quote($mail));
 		// s'il n'existe pas deja, creer les identifiants  
 		$desc = $row ? $row : inscription_nouveau($desc);
-	}
+	} else $desc = _T($desc);
 	if (is_array($desc)) {
 	// generer le mot de passe (ou le refaire si compte inutilise)
 		$desc['pass'] = creer_pass_pour_auteur($desc['id_auteur']);
@@ -110,24 +103,25 @@ function formulaires_inscription_traiter_dist($mode, $focus, $id=0) {
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
 // et donner des infos supplementaires
 // Std: controler que le nom (qui sert a calculer le login) est plausible
-// et que l'adresse est valide (et on la normalise)
-// Retour: une chaine message d'erreur 
-// ou un tableau avec au minimum email, nom, mode (redac / forum)
+// et que l'adresse est valide. On les normalise au passage (trim etc).
+// Retour: 
+// - si ok un tableau avec au minimum email, nom, mode (redac / forum)
+// - si ko une chaine de langue servant d'argument a  _T expliquant le refus
 
 // http://doc.spip.org/@test_inscription_dist
 function test_inscription_dist($mode, $mail, $nom, $id=0) {
 
 	include_spip('inc/filtres');
 	$nom = trim(corriger_caracteres($nom));
-	if (!$nom || strlen($nom) > 64)
-	    return _T('ecrire:info_login_trop_court');
-	if (!$r = email_valide($mail)) return _T('info_email_invalide');
+	if((strlen ($nom) < _LOGIN_TROP_COURT) OR (strlen($nom) > 64))
+	    return 'ecrire:info_login_trop_court';
+	if (!$r = email_valide($mail)) return 'info_email_invalide';
 	return array('email' => $r, 'nom' => $nom, 'bio' => $mode);
 }
 
 // On enregistre le demandeur comme 'nouveau', en memorisant le statut final
 // provisoirement dans le champ Bio, afin de ne pas visualiser les inactifs
-// A sa premiere connexion il obtiendra son statut final (auth->activer())
+// A sa premiere connexion il obtiendra son statut final.
 
 // http://doc.spip.org/@inscription_nouveau
 function inscription_nouveau($desc)
@@ -155,20 +149,23 @@ function envoyer_inscription_dist($desc, $nom, $mode, $id) {
 
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	
-	$message = _T('form_forum_message_auto')."\n\n"
-	  . _T('form_forum_bonjour', array('nom'=>$nom))."\n\n"
-	  . _T((($mode == 'forum')  ?
-		'form_forum_voici1' :
-		'form_forum_voici2'),
-	       array('nom_site_spip' => $nom_site_spip,
-		     'adresse_site' => $adresse_site . '/',
-		     'adresse_login' => $adresse_site .'/'. _DIR_RESTREINT_ABS))
-	  . "\n\n- "._T('form_forum_login')." " . $desc['login']
-	  . "\n- ".  _T('form_forum_pass'). " " . $desc['pass'] . "\n\n";
+	if ($mode == '6forum') {
+		$adresse_login = generer_url_public('login'); 
+		$msg = 'form_forum_voici1';
+	} else {
+		$adresse_login = $adresse_site .'/'. _DIR_RESTREINT_ABS;
+		$msg = 'form_forum_voici2';
+	}
 
-	return array("[$nom_site_spip] "._T('form_forum_identifiants'),
-		     $message);
+	$msg = _T('form_forum_message_auto')."\n\n"
+		. _T('form_forum_bonjour', array('nom'=>$nom))."\n\n"
+		. _T($msg, array('nom_site_spip' => $nom_site_spip,
+			'adresse_site' => $adresse_site . '/',
+			'adresse_login' => $adresse_login)) . "\n\n- "
+		. _T('form_forum_login')." " . $desc['login'] . "\n- "
+		. _T('form_forum_pass'). " " . $desc['pass'] . "\n\n";
+
+	return array("[$nom_site_spip] "._T('form_forum_identifiants'), $msg);
 }
 
 // http://doc.spip.org/@test_login
