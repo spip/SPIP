@@ -368,14 +368,16 @@ else if ($etape == 'ldap4') {
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
 	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
 
+	// Essayer de verifier le chemin fourni
 	$r = @ldap_compare($ldap_link, $base_ldap, "objectClass", "");
+	$fail = (ldap_errno($ldap_link) == 32);
 
-	if ($r < 0) {
+	if ($fail) {
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Options : <B>Chemin d'acc&egrave;s dans l'annuaire</B></FONT>";
 		echo "<P>";
 
 		echo "<B>L'op&eacute;ration a &eacute;chou&eacute;.</B> Le chemin que vous avez choisi (<tt>".htmlspecialchars($base_ldap);
-		echo "</tt>) ne semble pas valide, ou ne vous est pas autoris&eacute;. Veuillez retourner &agrave; la page pr&eacute;c&eacute;dente ";
+		echo "</tt>) ne semble pas valide. Veuillez retourner &agrave; la page pr&eacute;c&eacute;dente ";
 		echo "et v&eacute;rifier les informations fournies.";
 	}
 	else {
@@ -446,7 +448,7 @@ else if ($etape == 'ldap3') {
 
 	$checked = false;
 
-	if (is_array($info)) {
+	if (is_array($info) AND $info["count"] > 0) {
 		echo "<P><b>S&eacute;lectionnez</b> ci-apr&egrave;s le chemin d'acc&egrave;s dans l'annuaire&nbsp;:";
 		echo "<UL>";
 		$n = 0;
@@ -475,7 +477,7 @@ else if ($etape == 'ldap3') {
 	}
 	echo ">";
 	echo "<label for='manuel'><B>Entrer</B> le chemin d'acc&egrave;s&nbsp;:</label> ";
-	echo "<INPUT TYPE='text' NAME='base_ldap_text' CLASS='fondo' VALUE=\"dc=mon-domaine, dc=com\" SIZE='40'></fieldset><P>";
+	echo "<INPUT TYPE='text' NAME='base_ldap_text' CLASS='formo' VALUE=\"ou=users, dc=mon-domaine, dc=com\" SIZE='40'></fieldset><P>";
 
 	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 	echo "</FORM>";
@@ -494,7 +496,7 @@ else if ($etape == 'ldap2') {
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
 	$r = @ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
 
-	if ($ldap_link && $r) {
+	if ($ldap_link && ($r || !$login_ldap)) {
 		echo "<B>La connexion LDAP a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l'&eacute;tape suivante.";
 
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
@@ -551,7 +553,7 @@ else if ($etape == 'ldap1') {
 
 	echo "<p><fieldset>";
 	echo "Certains serveurs LDAP n'acceptent aucun acc&egrave;s anonyme. Dans ce cas ";
-	echo "il faut sp&eacute;cifier un identifiant d'acc&eacute;s initial afin de pouvoir ";
+	echo "il faut sp&eacute;cifier un identifiant d'acc&egrave;s initial afin de pouvoir ";
 	echo "ensuite rechercher des informations dans l'annuaire. Dans la plupart des cas ";
 	echo "n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.<p>";
 	echo "<label><B>Login LDAP initial</B><BR></label>";
