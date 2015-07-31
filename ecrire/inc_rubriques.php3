@@ -51,7 +51,7 @@ function calculer_rubriques() {
 	// on tourne tant que les donnees remontent vers la racine.
 	do {
 		$continuer = false;
-		$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h from spip_rubriques AS rub, spip_rubriques AS fille WHERE rub.id_rubrique = fille.id_parent AND rub.date_tmp < fille.date_tmp AND fille.statut='publie' GROUP BY fille.id_parent");
+		$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date_tmp) AS date_h from spip_rubriques AS rub, spip_rubriques AS fille WHERE rub.id_rubrique = fille.id_parent AND rub.date_tmp < fille.date_tmp AND fille.statut='publie' GROUP BY fille.id_parent");
 		while ($row = spip_fetch_array($r)) {
 			spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".$row['date_h']."' WHERE id_rubrique=".$row['id']);
 			$continuer = true;
