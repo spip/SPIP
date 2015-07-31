@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aide_non_disponible' => '这部分在线帮助尚无中文版本.',
-	'auteur' => 'Auteur :', # 作者 MODIF
 	'avis_acces_interdit' => '限制访问.',
 	'avis_article_modifie' => '警告, @nom_auteur_modif@在@date_diff@分钟前修改过此文',
 	'avis_aucun_resultat' => '没有结果.',
@@ -367,7 +366,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   不生效.', # MODIF
 	'info_question_utilisation_moteur_recherche' => '你希望SPIP集成搜索引擎吗?
  (使它不可用能加速系统的性能.)',
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
 	'info_racine_site' => '站点根',
 	'info_recharger_page' => '请重新载入该页.',
 	'info_recherche_auteur_a_affiner' => '太多结果"@cherche_auteur@"; 请重定义搜索.',
