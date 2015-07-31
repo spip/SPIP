@@ -27,26 +27,26 @@ function barre_raccourci(debut,fin,champ) {
 	donotinsert = false;
 	theSelection = false;
 	bblast = 0;
-	
+
 	if ((clientVer >= 4) && is_ie && is_win)
 	{
 		theSelection = document.selection.createRange().text; // Get text selection
 		if (theSelection) {
-		
-			if (theSelection.substring(theSelection.length-1, theSelection.length) == ' ') 
-			{	
+
+			while (theSelection.substring(theSelection.length-1, theSelection.length) == ' ')
+			{
 				theSelection = theSelection.substring(0, theSelection.length-1);
 				fin = fin + " ";
 			}
-			if (theSelection.substring(0,1) == '{' && debut.substring(0,1) == '{') 
-			{	
+			if (theSelection.substring(0,1) == '{' && debut.substring(0,1) == '{')
+			{
 				debut = debut + " ";
 			}
-			if (theSelection.substring(theSelection.length-1, theSelection.length) == '}' && fin.substring(0,1) == '}') 
-			{	
+			if (theSelection.substring(theSelection.length-1, theSelection.length) == '}' && fin.substring(0,1) == '}')
+			{
 				fin = " " + fin;
 			}
-			
+
 			// Add tags around selection
 			document.selection.createRange().text = debut + theSelection + fin;
 			txtarea.focus();
@@ -63,7 +63,7 @@ function barre_raccourci(debut,fin,champ) {
 
 function barre_demande(debut,milieu,fin,affich,champ) {
 	var inserer = prompt(affich);
-	
+
 	if (inserer != null) {
 		if (inserer == "") {inserer = "xxx"; }
 
