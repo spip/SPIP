@@ -835,13 +835,14 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			$s = affdate_jourcourt($date);
 			
+			/* # ca fait mal a la tete ce truc
 			if ($afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_visites', array('visites' => $visites))."</a></font>";
 				if ($popularite > 0) $s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_popularite', array('popularite' => $popularite))."</a></font>";
 
 				$s = "<div class='liste_clip' style='width: 100px;'>$s</div>";
 			}
-			
+			*/
 			
 			$vals[] = $s;
 			
