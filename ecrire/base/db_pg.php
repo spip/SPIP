@@ -96,7 +96,7 @@ function spip_pg_select($select, $from, $where,
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . ($groupby ? "\nGROUP BY $groupby" : '')
 	  . (!$having ? '' : "\nHAVING " . (!is_array($having) ? $having : (join("\n\tAND ", array_map('calculer_where', $having)))))
-	  . ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
+	  . ($orderby ? ("\nORDER BY " . spip_pg_order($orderby)) :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 		$q = " SELECT ". $q;
 
@@ -118,8 +118,17 @@ function spip_pg_select($select, $from, $where,
 	return $res;
 }
 
+// 0+x avec un champ x commencant par des chiffres est converti par MySQL
+// en le nombre qui commence x. PG ne sait pas faire, on elimine.
+// Comme SPIP utilise systematiquement 0+t,t on ne garde que le 2e.
 
-// http://doc.spip.org/@calculer_pg_where
+function spip_pg_order($orderby)
+{
+	if (is_array($orderby)) $orderby = join(", ", $orderby);
+	return preg_replace('/0[+]([^, ]+)\s*,\s*\1\b/', '\1', $orderby);
+}
+
+
 function calculer_pg_where($v)
 {
 	if (!is_array($v))

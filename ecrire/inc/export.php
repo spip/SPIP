@@ -220,7 +220,7 @@ function build_while($debut, $table, $prim, $les_rubriques) {
 			$string .= "</$table>\n\n";
 		}
 	}
-	spip_free_result($result);
+	spip_abstract_free($result);
 	return $string;
 }
 

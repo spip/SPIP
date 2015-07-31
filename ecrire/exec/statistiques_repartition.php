@@ -53,7 +53,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	global $abs_total;
 	global $taille;
 
-	$result=spip_query("SELECT id_rubrique, titre, descriptif FROM spip_rubriques WHERE id_parent='$id_parent' ORDER BY 0+titre, titre");
+	$result = spip_abstract_select("id_rubrique, titre, descriptif", "spip_rubriques", "id_parent=$id_parent",'', '0+titre,titre');
 
 	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];

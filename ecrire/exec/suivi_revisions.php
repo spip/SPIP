@@ -52,12 +52,12 @@ function exec_suivi_revisions_dist()
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	else $langues = array();
 
-	$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre");
+	$result = spip_abstract_select("id_rubrique, titre", "spip_rubriques", 'id_parent=0','', '0+titre,titre');
 
 	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
-	
+
 		if ($id_rubrique == $id_secteur)  echo "\n<li><b>$titre</b>";
 		else {
 			$result_rub = spip_query("SELECT articles.titre FROM spip_versions AS versions, spip_articles AS articles  WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND articles.id_secteur=$id_rubrique AND articles.statut IN $req_where LIMIT 1");

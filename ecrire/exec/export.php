@@ -46,7 +46,7 @@ function liste_objets($result, $type, $maj) {
 			if ($type == "article") $res[]=$t_id;
 		}
 	}
-	spip_free_result($result);
+	spip_abstract_free($result);
 	return $res;
 }
 
@@ -74,7 +74,7 @@ function liste_rubriques($id_rubrique) {
 		$t_rubriques[] = $id_rubrique;
 		$rubriques[] = $id_rubrique;
 	}
-	spip_free_result($result);
+	spip_abstract_free($result);
  	if ($t_rubriques) {
  		$t_rubriques = join(",", $t_rubriques);
 		liste_rubriques(spip_query("SELECT * FROM spip_rubriques WHERE id_parent IN ($t_rubriques)"));

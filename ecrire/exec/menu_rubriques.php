@@ -161,7 +161,7 @@ function gen_liste_rubriques() {
 	while ($t = spip_fetch_array($s))
 		$liste .=",".$t['id_rubrique']; 
 	 
-	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_rubrique IN ($liste) ORDER BY id_parent,0+titre,titre");
+	$res = spip_abstract_select("id_rubrique, titre, id_parent", "spip_rubriques", "id_rubrique IN ($liste)",'', 'id_parent,0+titre,titre');
 
 	// il ne faut pas filtrer le autoriser voir ici car on met le resultat en cache, commun a tout le monde
 	$GLOBALS['db_art_cache'] = array();

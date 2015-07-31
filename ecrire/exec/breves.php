@@ -30,7 +30,7 @@ function exec_breves_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves'),'data'=>''));
 	debut_droite();
 
- 	$result=spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY 0+titre, titre");
+ 	$result = spip_abstract_select('*', "spip_rubriques", "id_parent=0",'', '0+titre,titre');
 
  	while($row=spip_fetch_array($result)){
 		$id_rubrique=$row['id_rubrique'];

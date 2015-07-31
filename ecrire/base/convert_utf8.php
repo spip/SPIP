@@ -150,7 +150,7 @@ function convert_table_utf8($f, $table, $champ)
 			echo '.           '; flush();
 			}
 	}
-	spip_free_result($s);
+	spip_abstract_free($s);
 }
 
 // stocker le nouvel extra
