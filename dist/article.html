@@ -191,6 +191,7 @@
 
 
 <BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
+<hr>
 [<h3 class="spip">(#TITRE)</h3>]
 [<div>(#DESCRIPTIF)</div>]
 
@@ -201,9 +202,8 @@
 <div><hr>
 <BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
 	<div style="float: left;">
-
-	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{'?'}|?{'&amp;','?'})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{500,60})</a>]
-[<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{500,60})</a>]
+[<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_portfolio>
 </div>
@@ -212,9 +212,9 @@
 
 <B_documents_joints>
 <div><hr>
-<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons} {"<br />"}>
+<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
 	<div style="float: left;">
-	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_joints>
 </div>

@@ -43,17 +43,21 @@ function affiche_logos($logos, $lien, $align, $alt='logo') {
 
 	if (!$arton) return $artoff;
 
+	if ($taille = @getimagesize($arton)) {
+		$taille = " ".$taille[3];
+	}
+
+	if ($artoff)
+		$mouseover = " onmouseover=\"this.src='$artoff'\" "
+			."onmouseout=\"this.src='$arton'\"";
+
 	$milieu = "<img src='$arton'\nalt='$alt'"
 		. ($align ? " align='$align'" : '') 
+		. $taille
+		. $mouseover
 		. " style='border-width: 0px;' class='spip_logos' />";
 
-	if (!$artoff) return ($lien ? http_href($lien, $milieu) : $milieu);
-
-	$att =	"onmouseover=\"this.firstChild.src='$artoff'\" 
-		onmouseout=\"this.firstChild.src='$arton'\"";
-
-	return ($lien ? "<a href='$lien' $att>$milieu</a>" : "<div $att>$milieu</div>");
-
+	return ($lien ? http_href($lien, $milieu) : $milieu);
 }
 
 //
@@ -260,7 +264,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
 
 	// Lien par defaut = l'adresse du document
-	if (!$lien) $lien = $fichier;
+	## if (!$lien) $lien = $fichier;
 
 	// Y a t il une vignette personnalisee ?
 	if ($id_vignette) {

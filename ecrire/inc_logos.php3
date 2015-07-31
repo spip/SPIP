@@ -445,32 +445,54 @@ function taille_image($img) {
 // [(#LOGO_ARTICLE||reduire_image{100,60})]
 //
 
+// Cette fonction accepte en entree un nom de fichier ou un tag <img ...>
+
 function reduire_image_logo($img, $taille = 0, $taille_y=0) {
-	if (!$taille) $taille = lire_meta('taille_preview');
-	if (!$taille) $taille = 150;
-	if (!$taille_y) $taille_y = $taille;
+
+	// Determiner la taille x,y maxi
+	if (!$taille) {
+		if ($taille_y>0)
+			$taille = 100000; # {0,300} -> c'est 300 qui compte
+		else {
+			$taille = lire_meta('taille_preview');
+			if (!$taille)
+				$taille = 150;
+		}
+	}
+	if (!$taille_y)
+		$taille_y = $taille;
 
 	// recuperer le nom du fichier
-	if (eregi("img src=['\"]([^'\"]+)['\"]", $img, $regs)) $logo = $regs[1];
-	if (!$logo) $logo = $img;
+	if ($src = extraire_attribut($img, 'src'))
+		$logo = $src;
+	else
+		$logo = $img;
+	if (!$logo) return '';
+
+	// Si c'est une image distante, la recuperer (si possible)
+	if (!$local = copie_locale($logo)) {
+		spip_log("pas de version locale de $logo");
+		return $img;
+	}
+	$logo = $local;
+
 
 	$attributs = '';
 
-	// encore utilise ?
-	if (eregi("name='([^']+)'", $img, $regs)) $name = $regs[1];
-	if ($name) $attributs .= " name='$name'"; 
+	// preserver le name='...' et le mettre en alt le cas echant
+	if ($name = extraire_attribut($img, 'name'))
+		$attributs .= " name='$name'"; 
+	$attributs .= " alt='$name'";
 
 	// attributs deprecies. Transformer en CSS
-	if (eregi("hspace='([^']+)'", $img, $regs)) $espace = $regs[1];
-	if ($espace) 
-	  $attributs .= " style='margin: $espace" . "px; border-width: 0px;'";
+	if ($espace = extraire_attribut($img, 'hspace'))
+		$attributs .= " style='margin: $espace" . "px; border-width: 0px;'";
 	else 
-	  $attributs .=  " style='border-width: 0px;' class='spip_logos'";
+		$attributs .=  " style='border-width: 0px;' class='spip_logos'";
 	// attribut deprecie mais equivalent CSS pas clair
-	if (eregi("align='([^']+)'", $img, $regs)) $align = $regs[1];
-	if ($align)  $attributs .= " align='$align'";
+	if ($align = extraire_attribut($img, 'align'))
+		$attributs .= " align='$align'";
 
-	$attributs .= " alt='$name'";
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
@@ -485,9 +507,10 @@ function reduire_image_logo($img, $taille = 0, $taille_y=0) {
 				return "<img src='$vignette$date' width='$width' height='$height'$attributs />";
 			}
 			else if ($taille_origine = @getimagesize($logo)) {
-				$date = filemtime($logo);
 				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-				return "<img src='$logo?date=$date' width='$destWidth' height='$destHeight'$attributs />";
+				if (!_DIR_ECRIRE)
+					$date = '?date='.filemtime($logo);
+				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
 			}
 		}
 	}
