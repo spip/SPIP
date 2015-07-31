@@ -251,12 +251,12 @@ function sql_showtable($table, $table_spip = false, $serveur='', $option=true)
 	if ($table_spip){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 		$prefixe = $connexion['prefixe'];
-		$table = preg_replace('/^spip/', $prefixe, $table);
-	}
+		$vraie_table = preg_replace('/^spip/', $prefixe, $table);
+	} else $vraie_table = $table;
 	
 	$f = sql_serveur('showtable', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	$f = $f($table, $serveur, $option!==false);
+	$f = $f($vraie_table, $serveur, $option!==false);
 	if (!$f) return array();
 	if (isset($GLOBALS['tables_principales'][$table]['join']))
 		$f['join'] = $GLOBALS['tables_principales'][$table]['join'];
