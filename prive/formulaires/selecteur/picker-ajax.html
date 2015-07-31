@@ -20,6 +20,7 @@ style='display:none;'>#GET{bouton_modif}</a>&#93;</div>
 		<input type="text" value="" id="picker_id" size="10" />
 		<a href="#"
 			 onclick="jQuery.ajax({'url':'[(#URL_PAGE{ajax_item_pick,rubriques=[(#ENV{rubriques})]&articles=[(#ENV{articles})]&ref=})]'+jQuery('#picker_id').attr('value'),
+			 'dataType':'text',
 			 'success':function(r){
 					eval('r = '+r); // JSON envoye par ajax_item_pick.html
 					if (r){
