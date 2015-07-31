@@ -316,7 +316,7 @@ function http_img_pack($img, $alt, $att, $title='') {
 	  . ("'\nalt=\"" .
 	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
 	     . '" ')
-	  . ($title ? " title=\"$title\"" : '')
+	  . ($title ? "title=\"$title\" " : '')
 	  . $att
 	  . " />";
 }

@@ -60,11 +60,12 @@ var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 	$out = "";
 	$action = generer_action_auteur("reorganiser","",generer_url_ecrire('articles_tous'));
 	$out .= "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>";
-	$out .= "<a href='javascript:annuler_deplacement();'>"._L("Annuler")."</a></div>";
+	$out .= "<a href='javascript:annuler_deplacement();'>"._L("Annuler")."</a>";
+	$out .= "</div>";
 	$out .= "<form action='$action' method='post'>";
 	$out .= form_hidden($action);
-	$out .= "<textarea id='deplacements' style='display:none;' name='deplacements'></textarea>";
-	$out .= "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
+	$out .= "<textarea id='deplacements' style='display:none;' name='deplacements' rows='1' cols='1'></textarea>";
+	$out .= "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 	$out .= "</form>";
 	echo $out;
 
@@ -174,17 +175,19 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
 
 // http://doc.spip.org/@http_label_img
 function http_label_img($statut, $etat, $var, $img, $texte) {
-	return "<label for='$statut'>". 
+	return  
+		"<label for='$statut'>" .
 		boutonne('checkbox',
 			$var . '[]',
 			$statut,
-			(($etat !== false) ? ' checked="checked"' : '') .
+			(($etat !== false) ? ' checked="checked" ' : '') .
 			"id='$statut'") .
-		"&nbsp;" .
+		"&nbsp;" . 
 		http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
 		" " .
 		$texte .
-		"</label><br />";
+		"</label>" .
+		"<br />";
 }
 
 // http://doc.spip.org/@formulaire_affiche_tous
@@ -195,7 +198,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 	$out = "";
 	global $spip_lang_right;
 	$out .= generer_url_post_ecrire("articles_tous"). 
-		"<input type='hidden' name='aff_art[]' value='x'>";
+		"<div><input type='hidden' name='aff_art[]' value='x' />";
 	
 	$out .= debut_boite_info(true);
 	
@@ -236,7 +239,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 				    'puce-poubelle-breve.gif',
 				    _T('texte_statut_poubelle'));
 	
-	$out .= "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."'></div>";
+	$out .= "\n<div align='$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
 	
 	
 	// GERER LE MULTILINGUISME
@@ -267,13 +270,13 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 			}
 			$out .= "</select></div>\n";
 	
-			$out .= "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."'></div>";
+			$out .= "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' /></div>";
 		}
 	
 	}
 
 	$out .= fin_boite_info(true);
-	$out .= "</form>";
+	$out .= "</div></form>";
 	
 	return $out;
 }
@@ -321,7 +324,7 @@ function afficher_contenu_rubrique(&$article, &$enfant, &$text_article, $id_rubr
 					foreach($sel_lang as $sel)
 						$ajax_args.="&sel_lang[]=$sel";
 			}
-			$out = "<a href='".generer_url_ecrire('articles_tous',"id_rubrique=$id_rubrique&$ajax_args")."' class='ajax' rel='ul$id_rubrique'>"._T('info_tout_site')."</a>";
+			$out = "<li><a href='".generer_url_ecrire('articles_tous',"id_rubrique=$id_rubrique&$ajax_args")."' class='ajax' rel='ul$id_rubrique'>"._T('info_tout_site')."</a></li>";
 		}
 	}
 	return $out;
@@ -371,7 +374,7 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 			}
 			$res .= "\n"
 				. "<span class='icone'> </span>"
-			  . "<span class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</span>"
+			  . "<div class='puce_statut'>".puce_statut_article($zarticle, $attarticle["statut"], $id_rubrique)."</div>"
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span><a"
 			  . ($auteurs ? (' title="' . htmlspecialchars($auteurs). '"') :'')
@@ -381,7 +384,7 @@ function afficher_article_tous_rubrique(&$text_article, $tous, $id_rubrique, $fl
 			  . ($flag_trad ? "<span class='lang_base'>$zelang</span> " : '')
 			  . "<span>"
 			  . $attarticle["titre"]
-			  . "</span></a>"
+			  . "</span></a></span>"
 			  . "</li>";
 		}
 	}
