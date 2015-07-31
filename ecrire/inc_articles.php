@@ -488,8 +488,6 @@ function changer_statut_articles($id_article, $statut)
 	if ($statut != $statut_ancien) {
 		spip_query("UPDATE spip_articles SET statut='$statut', date=NOW() WHERE id_article=$id_article");			
 		include_ecrire("inc_rubriques.php3");
-		include_ecrire('inc_lang.php3');
-		include_ecrire('inc_filtres.php3');
 		include_ecrire('inc_texte.php3');
 		calculer_rubriques();
 

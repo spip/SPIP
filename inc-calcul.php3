@@ -23,7 +23,6 @@ define("_INC_CALCUL", "1");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
 include_ecrire("inc_abstract_sql.php3");
