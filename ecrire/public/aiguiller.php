@@ -44,7 +44,8 @@ function traiter_appels_actions(){
 				$url = parametre_url($url,'var_ajax',$v,'&');   
 				$url = parametre_url($url,'var_ajax_env',$args,'&');   
 			}
-			redirige_par_entete($GLOBALS['redirect']);
+			$url = str_replace('&amp;','&',$url); // les redirections se font en &, pas en en &amp;
+			redirige_par_entete($url);
 		}
 		if (!headers_sent()
 			AND !ob_get_length())
