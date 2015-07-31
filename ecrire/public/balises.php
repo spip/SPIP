@@ -603,13 +603,16 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$p->boucles[$b]->numrows = true;
 	$connect = $p->boucles[$b]->sql_serveur;
 	$f_pagination = chercher_filtre('pagination');
+	$type = $p->boucles[$b]->modificateur['debut_nom'];
+	$modif = ($type[0]!=="'") ? "'debut'.$type" 
+	  : ("'debut" .substr($type,1));
 	$p->code = $f_pagination."(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
-	), ".$p->boucles[$b]->modificateur['debut_nom'].",
-		\$Pile[0]['debut'.".$p->boucles[$b]->modificateur['debut_nom']."],"
+	), $type,
+		\$Pile[0][$modif],"
 	. $p->boucles[$b]->total_parties
-	  . ", $liste$__modele," . sql_quote($connect) 
+	  . ", $liste$__modele," . _q($connect) 
 	  . ", array(" . implode(',',$code_contexte) . ")" 
 	  . ")";
 
