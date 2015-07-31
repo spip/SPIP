@@ -11,14 +11,17 @@ define("_ECRIRE_INC_CRON", "1");
 
 
 //
-// Demarrer les referers
+// Calcul des referers
 //
+
+// demarrer le calcul
 function cron_referers($t) {
 	ecrire_meta("date_stats_referers", $t);
 	ecrire_meta('calculer_referers_now', 'oui');
 	ecrire_metas();
 }
 
+// poursuivre le calcul
 function cron_referers_suite() {
 	if (timeout('archiver_stats')) {
 		include_ecrire("inc_statistiques.php3");
@@ -34,6 +37,7 @@ function cron_referers_suite() {
 //
 function cron_archiver_stats($last_date) {
 	if (timeout('archiver_stats')) {
+		spip_log("Archivage des statistiques de $last_date");
 		include_ecrire("inc_meta.php3");
 		include_ecrire("inc_statistiques.php3");
 		ecrire_meta("date_statistiques", date("Y-m-d"));
@@ -96,12 +100,13 @@ function spip_cron() {
 	}
 
 
-	// statistiques
+	//
+	// Statistiques
+	//
 	if (lire_meta("activer_statistiques") != "non") {
 		if ($t - lire_meta('date_stats_referers') > 3600)
 			cron_referers($t);
-	
-		if (lire_meta('calculer_referers_now') == 'oui')
+		else if (lire_meta('calculer_referers_now') == 'oui')
 			cron_referers_suite();
 	
 		if (date("Y-m-d") <> ($last_date = lire_meta("date_statistiques")))
@@ -111,17 +116,6 @@ function spip_cron() {
 			if (timeout('archiver_stats')) {
 				include_ecrire("inc_statistiques.php3");
 				calculer_popularites();
-			}
-		}
-
-		if (timeout(false, false))	// no lock, no action
-		{
-			// Conditions declenchant un eventuel calcul des stats
-			if ((lire_meta('calculer_referers_now') == 'oui')
-			OR (date("Y-m-d") <> lire_meta("date_statistiques"))
-			OR (time() - lire_meta('date_stats_popularite') > 1800)) {
-				include_local ("inc-stats.php3");
-				archiver_stats();
 			}
 		}
 	}
