@@ -59,9 +59,9 @@ function articles_set($id_article, $set=null) {
 		foreach (array(
 			'surtitre', 'titre', 'soustitre', 'descriptif',
 			'nom_site', 'url_site', 'chapo', 'texte', 'ps',
-			'changer_lang'
 		) as $champ)
 			$c[$champ] = _request($champ,$set);
+		$c['lang'] = _request('changer_lang',$set);
 
 		if (_request('changer_virtuel',$set) == 'oui') {
 			$r = _request('virtuel',$set);
@@ -77,12 +77,6 @@ function articles_set($id_article, $set=null) {
 
 	include_spip('inc/modifier');
 	revision_article($id_article, $c);
-
-	if ($changer_lang = _request('changer_lang',$c)){
-		$id_rubrique = sql_fetsel("id_rubrique", "spip_articles", "id_article=".intval($id_article));
-		$instituer_langue_objet = charger_fonction('instituer_langue_objet','action');
-		$instituer_langue_objet('article',$id_article, $id_rubrique, $changer_lang);
-	}
 
 	// Modification de statut, changement de rubrique ?
 	$c = array();

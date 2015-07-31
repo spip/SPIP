@@ -102,6 +102,22 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	$conflits = controler_md5($champs, $_POST, $type, $id, $serveur);
 
 	if ($champs) {
+		// cas particulier de la langue : passer par instituer_langue_objet
+		if (isset($champs['lang'])){
+			if ($changer_lang=$champs['lang']){
+				$id_rubrique = 0;
+				if ($desc['field']['id_rubrique']){
+					$parent = ($type=='rubrique')?'id_parent':'id_rubrique';
+					$id_rubrique = sql_fetsel($parent, $spip_table_objet, "$id_table_objet=".intval($id));
+				}
+				$instituer_langue_objet = charger_fonction('instituer_langue_objet','action');
+				$champs['lang'] = $instituer_langue_objet($type,$id, $id_rubrique, $changer_lang);
+			}
+			// on laisse 'lang' dans $champs,
+			// ca permet de passer dans le pipeline post_edition et de journaliser
+			// et ca ne gene pas qu'on refasse un sql_updateq dessus apres l'avoir
+			// deja pris en compte
+		}
 
 		// la modif peut avoir lieu
 
