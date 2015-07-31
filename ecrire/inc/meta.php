@@ -103,15 +103,18 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 
 	static $touch = true;
 	if (!$nom) return;
-	$GLOBALS['meta'][$nom] = $valeur;
 	include_spip('base/abstract_sql');
 	$res = sql_select("*","spip_meta","nom=" . sql_quote($nom),'','','','','','continue');
 	// table pas encore installee, travailler en php seulement
-	if (!$res) return; 
+	if (!$res) {
+		$GLOBALS['meta'][$nom] = $valeur;
+		return;
+	}
 	$res = sql_fetch($res);
 	// ne pas invalider le cache si affectation a l'identique
 	// (tant pis si impt aurait du changer)
-	if ($res AND $valeur == $res['valeur']) return;
+	if ($res AND $valeur == $res['valeur'] AND $GLOBALS['meta'][$nom] == $valeur) return;
+	$GLOBALS['meta'][$nom] = $valeur;
 	// cf effacer pour comprendre le double touch
 	$antidate = time() - (_META_CACHE_TIME<<1);
 	if ($touch) {touch_meta($antidate);}

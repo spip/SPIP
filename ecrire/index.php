@@ -152,9 +152,15 @@ elseif (find_in_path("prive/exec/$exec." . _EXTENSION_SQUELETTES)) {
 }
 
 // Trouver la fonction eventuellement surchargee
-$var_f = charger_fonction($exec);
-
-// Z'y va
-$var_f();
+// si absente, rerouter vers exec=404 au lieu d'echouer
+// ce qui permet de laisser la main a un plugin
+if (!$var_f = charger_fonction($exec,'exec',true)){
+	$var_f = charger_fonction('404');
+	$var_f($exec);
+}
+else {
+	// Z'y va
+	$var_f();
+}
 
 ?>

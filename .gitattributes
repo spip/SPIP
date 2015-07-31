@@ -104,6 +104,7 @@ ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
 ecrire/configuration/visiteurs.php -text
+ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
 ecrire/exec/admin_backup.php -text
 ecrire/exec/admin_declarer.php -text
