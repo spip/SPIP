@@ -67,6 +67,11 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 		return false;
 	}
 
+	// chargement des constantes
+	// il ne faut pas definir les constantes avant d'avoir charge les modules sqlite
+	$define = "spip_sqlite".$sqlite_version."_constantes";
+	$define();
+
 	$ok = false;
 	if (!$db){
 		// si pas de db ->
