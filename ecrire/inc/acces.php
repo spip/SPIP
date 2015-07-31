@@ -152,9 +152,11 @@ function ecrire_acces() {
 	$p1 = ''; // login:htpass pour tous
 	$p2 = ''; // login:htpass pour les admins
 	while ($t = sql_fetch($s)) {
-		$p1 .= $t['login'].':'.$t['htpass']."\n";
-		if ($t['statut'] == '0minirezo')
-			$p2 .= $t['login'].':'.$t['htpass']."\n";
+		if (strlen($t['login']) AND strlen($t['htpass'])) {
+			$p1 .= $t['login'].':'.$t['htpass']."\n";
+			if ($t['statut'] == '0minirezo')
+				$p2 .= $t['login'].':'.$t['htpass']."\n";
+		}
 	}
 
 	ecrire_fichier($htpasswd, $p1);
