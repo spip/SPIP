@@ -148,7 +148,7 @@ $form .= "\n<input type='hidden' name='syndication_old' value=\"$syndication\">"
 if ($activer_syndic != "non") {
 	$form .= debut_cadre_enfonce('feed.png', true);
 	if ($syndication == "non") {
-		$form .= "\n<input type='radio' name='syndication' value='non' id='syndication_non' CHECKED>";
+		$form .= "\n<input type='radio' name='syndication' value='non' id='syndication_non' checked='checked'>";
 	}
 	else {
 		$form .= "\n<input type='radio' name='syndication' value='non' id='syndication_non'>";
@@ -161,7 +161,7 @@ if ($activer_syndic != "non") {
 		$form .= "<input type='radio' name='syndication' value='oui' id='syndication_oui'>";
 	}
 	else {
-		$form .= "<input type='radio' name='syndication' value='oui' id='syndication_oui' CHECKED>";
+		$form .= "<input type='radio' name='syndication' value='oui' id='syndication_oui' checked='checked'>";
 	}
 	$form .= " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b>";
 	$form .= aide("rubsyn");

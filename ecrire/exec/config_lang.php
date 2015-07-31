@@ -70,7 +70,7 @@ echo _T('texte_selection_langue_principale');
 // langue du site
 echo _T('info_langue_principale')." : ";
 echo "\n<select name='changer_langue_site' class='fondl' align='middle'>\n";
-echo "<option value='$langue_site' selected>".traduire_nom_langue($langue_site)."</option>\n";
+echo "<option value='$langue_site' selected='selected'>".traduire_nom_langue($langue_site)."</option>\n";
 reset ($langues_prop);
 while (list(,$l) = each ($langues_prop)) {
 	if ($l <> $langue_site)
