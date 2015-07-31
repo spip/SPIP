@@ -110,10 +110,20 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 }
 
 // http://doc.spip.org/@sql_update
-function sql_update($table, $exp, $where, $serveur='')
+function sql_update($table, $exp, $where='', $desc=array(), $serveur='')
 {
 	$f = sql_serveur('update', $serveur);
-	return $f($table, $exp, $where);
+	return $f($table, $exp, $where, $desc);
+}
+
+// Update est presque toujours appelee sur des constantes ou des dates
+// Cette fonction est donc plus utile que la precedente,d'autant qu'elle
+// permet de gerer les differences de representation des constantes.
+// http://doc.spip.org/@sql_update
+function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='')
+{
+	$f = sql_serveur('updateq', $serveur);
+	return $f($table, $exp, $where, $desc);
 }
 
 // http://doc.spip.org/@sql_delete
@@ -124,10 +134,10 @@ function sql_delete($table, $where, $serveur='')
 }
 
 // http://doc.spip.org/@sql_replace
-function sql_replace($table, $values, $keys, $serveur='')
+function sql_replace($table, $values, $desc=array(), $serveur='')
 {
 	$f = sql_serveur('replace', $serveur);
-	return $f($table, $values, $keys);
+	return $f($table, $values, $desc);
 }
 
 // http://doc.spip.org/@sql_showtable

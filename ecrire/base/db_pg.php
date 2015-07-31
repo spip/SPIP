@@ -228,7 +228,6 @@ function spip_pg_fromfield($arg)
 		$index = $m[2];
 		foreach($r[1] as $v) {
 			$n++;
-			spip_log($v);
 			$res .= "\nwhen $index=$v then $n";
 		}
 		$arg = $m[1] . "case $res else 0 end "
@@ -296,6 +295,16 @@ function spip_pg_free($res, $serveur='') {
   // rien à faire en postgres
 }
 
+// http://doc.spip.org/@spip_pg_delete
+function spip_pg_delete($table, $where='') {
+	global $spip_pg_link, $table_prefix;
+	if ($GLOBALS['table_prefix'])
+		$table = preg_replace('/^spip/',
+				    $GLOBALS['table_prefix'],
+				    $table);
+	spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+}
+
 // http://doc.spip.org/@spip_pg_insert
 function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
 
@@ -317,7 +326,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	$r = pg_query($q="INSERT INTO $table $champs VALUES $valeurs $ret");
+	$r = pg_query($spip_pg_link, $q="INSERT INTO $table $champs VALUES $valeurs $ret");
 	if ($r) {
 		if (!$ret) return 0;
 		if ($r = pg_fetch_array($r, NULL, PGSQL_NUM))
@@ -329,23 +338,55 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
 }
 
 // http://doc.spip.org/@spip_pg_update
-function spip_pg_update($table, $exp, $where='') {
+function spip_pg_update($table, $champs, $where='', $desc=array()) {
 	global $spip_pg_link, $table_prefix;
-	if ($GLOBALS['table_prefix'])
-		$table = preg_replace('/^spip/',
+	$r = '';
+	foreach ($champs as $champ => $val) {
+		$r .= ',' . $champ . '=' . 
+		  spip_pg_cite($val,  $desc['field'][$champ]);
+	}
+
+	if ($r = substr($r, 1)) {
+		if ($GLOBALS['table_prefix'])
+			$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	spip_pg_trace_query("UPDATE $table SET " . spip_pg_frommysql($exp) .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+
+		spip_pg_trace_query("UPDATE $table SET $r" .($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+	}
 }
 
-// http://doc.spip.org/@spip_pg_delete
-function spip_pg_delete($table, $where='') {
-	global $spip_pg_link, $table_prefix;
+// idem, mais les valeurs sont des constantes a mettre entre apostrophes
+// sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
+// http://doc.spip.org/@spip_mysql_update
+function spip_pg_updateq($table, $champs, $where='', $desc=array()) {
+
+	if (!$champs) return;
+	if (!$desc) {
+		global $tables_principales;
+		include_spip('base/serial');
+		$desc = $tables_principales[$table];
+	}
 	if ($GLOBALS['table_prefix'])
 		$table = preg_replace('/^spip/',
 				    $GLOBALS['table_prefix'],
 				    $table);
-	spip_pg_trace_query("DELETE FROM $table " . ($where ? (" WHERE " . spip_pg_frommysql($where)) : ''));
+	$fields = $desc['field'];
+	$r = '';
+	foreach ($champs as $champ => $val) {
+		$t = $fields[$champ];
+		if (!test_sql_int($t)) {
+			if ((strpos($t, 'datetime')!==0)
+			    AND (strpos($t, 'TIMESTAMP')!==0))
+			  $val = _q($val);
+			elseif (strpos("012345678", $val[0]) !==false)
+			  $val = "date '$val'";
+			else $val = spip_pg_frommysql($val);
+		}
+		$r .= ',' . $champ . '=' . $val;
+	}
+	$r = "UPDATE $table SET " . substr($r, 1) . ($where ? " WHERE $where" : '');
+	pg_query($r);
 }
 
 
@@ -362,13 +403,7 @@ function spip_pg_replace($table, $values, $desc) {
 	$noprims = $prims = array();
 
 	foreach($values as $k=>$v) {
-		$t = $desc['field'][$k];
-		if ((strpos($t, 'datetime') === 0)
-		AND strpos($v, "-00-00") === 4)
-			  { $values[$k] = $v = _q(substr($v,0,4)."-01-01".substr($v,10));}
-		elseif  (test_sql_int($t))
-		  $values[$k] = $v = intval($v);
-		else $values[$k] = $v = _q($v);
+		$values[$k] = $v = spip_pg_cite($v, $desc['field'][$k]);
 
 		if (!in_array($k, $ids))
 			$noprims[$k]= "$k=$v";
@@ -399,6 +434,21 @@ function spip_pg_replace($table, $values, $desc) {
 	    }
 	}
 	return $r;
+}
+
+// Explicite les conversions de Mysql d'une valeur $v de type $t
+// Dans le cas d'un champ date, pas d'apostrophe, c'est une syntaxe ad hoc
+
+function spip_pg_cite($v, $t)
+{
+	if ((strpos($t, 'datetime')===0) OR (strpos($t, 'TIMESTAMP')===0)) {
+		if  (strpos($v, "-00-00") === 4)
+			return _q(substr($v,0,4)."-01-01".substr($v,10));
+		else return spip_pg_frommysql($v);
+	}
+	elseif  (test_sql_int($t))
+		  return intval($v);
+	else return   ("'" . addslashes($v) . "'");
 }
 
 // http://doc.spip.org/@spip_pg_error

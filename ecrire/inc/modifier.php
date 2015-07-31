@@ -62,14 +62,9 @@ function modifier_contenu($type, $id, $options, $c=false) {
 		)
 	);
 
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
+	if (!$champs) return false;
 
-	if (!count($update))
-		return false;
-
-	spip_query("UPDATE spip_$table_objet SET ".join(', ',$update)." WHERE $id_table_objet=$id");
+	sql_updateq("spip_$table_objet", $champs, "$id_table_objet=$id");
 
 	// marquer le fait que l'objet est travaille par toto a telle date
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
