@@ -11,6 +11,7 @@ function getBiDiOffset(el) {
 function decaleSousMenu() {
   var sousMenu = $("div.bandeau_sec",this).css({visibility:'hidden',display:'block'});
   if(!sousMenu.length) return;
+  sousMenu.bgIframe();
   var left;
   if($.browser.msie) {
     left = getBiDiOffset(sousMenu[0].parentNode) + getBiDiOffset($("#bandeau-principal div")[0]);
@@ -22,7 +23,7 @@ function decaleSousMenu() {
 		if (gauche < 0) gauche = 0;
     sousMenu.css(dir_page=="rtl"?"right":"left",gauche+"px");
 	}
-	sousMenu.css({display:'',visibility:''});
+  sousMenu.css({display:'',visibility:''});
 }
 
 function changestyle(id_couche, element, style) {

@@ -231,6 +231,7 @@ dist/inc-rubriques.html -text
 dist/javascript/ajaxCallback.js -text
 dist/javascript/articles_tous_edite.js -text
 dist/javascript/async_upload.js -text
+dist/javascript/bgiframe.js -text
 dist/javascript/dragdrop_interface.js -text
 dist/javascript/form.js -text
 dist/javascript/jquery.js -text
