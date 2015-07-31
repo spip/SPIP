@@ -1093,10 +1093,20 @@ function image_masque($im, $masque, $pos="") {
 	// $pos est une variable libre, qui permet de passer left=..., right=..., bottom=..., top=...
 	// dans ce cas, le pasque est place a ces positions sur l'image d'origine,
 	// et evidemment cette image d'origine n'est pas redimensionnee
+	// 
+	// Positionnement horizontal: text-align=left, right, center
+	// Positionnement vertical : vertical-align: top, bottom, middle
+	// (les positionnements left, right, top, left sont relativement inutiles, mais coherence avec CSS)
+	//
+	// Choix du mode de fusion: mode=masque, normal, eclaircir, obscurcir, produit, difference
+	// masque: mode par defaut
+	// normal: place la nouvelle image par dessus l'ancienne
+	// eclaircir: place uniquement les points plus clairs
+	// obscurcir: place uniquement les points plus fonc'es
+	// produit: multiplie par le masque (points noirs rendent l'image noire, points blancs ne changent rien)
+	// difference: remplit avec l'ecart entre les couleurs d'origine et du masque
 
-	
-	$nom = ereg_replace("\.(png|jpg|gif)$", "", $masque);
-	$nom = ereg_replace("/","-",$nom);
+	$mode = "masque";
 
 
 	$numargs = func_num_args();
@@ -1110,8 +1120,11 @@ function image_masque($im, $masque, $pos="") {
 			$defini["$nom_variable"] = 1;
 		}
 	}
+	if ($defini["mode"]) $mode = $variable["mode"];
 
-	$image = valeurs_image_trans($im, "$nom$pos", "png");
+	$pos = md5(serialize($variable));
+
+	$image = valeurs_image_trans($im, "$masque$pos", "png");
 	if (!$image) return("");
 
 	$x_i = $image["largeur"];
@@ -1123,7 +1136,7 @@ function image_masque($im, $masque, $pos="") {
 	$creer = $image["creer"];
 
 
-	if (strlen($pos) > 0) {
+	if ($defini["right"] OR $defini["left"] OR $defini["bottom"] OR $defini["top"] OR $defini["text-align"] OR $defini["vertical-align"]) {
 		$placer = true;
 	}
 	else $placer = false;
@@ -1164,12 +1177,37 @@ function image_masque($im, $masque, $pos="") {
 				$left = $variable["left"];
 				$dx = $left;
 			}
+			if ($defini["text-align"]) {
+				$align = $variable["text-align"];
+				if ($align == "right") {
+					$right = 0;
+					$dx = ($x_i - $x_m);
+				} else if ($align == "left") {
+					$left = 0;
+					$dx = 0;
+				} else if ($align = "center") {
+					$dx = round( ($x_i - $x_m) / 2 ) ;
+				}
+			}
+			if ($defini["vertical-align"]) {
+				$valign = $variable["vertical-align"];
+				if ($valign == "bottom") {
+					$bottom = 0;
+					$dy = ($y_i - $y_m);
+				} else if ($valign == "top") {
+					$top = 0;
+					$dy = 0;
+				} else if ($valign = "middle") {
+					$dy = round( ($y_i - $y_m) / 2 ) ;
+				}
+			}
 			
 			
 			$im3 = imagecreatetruecolor($x_i, $y_i);
 			@imagealphablending($im3, false);
 			@imagesavealpha($im3,true);
-			$color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 0 );
+			if ($mode == "masque") $color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 0 );
+			else $color_t = ImageColorAllocateAlpha( $im3, 128, 128, 128 , 127 );
 			imagefill ($im3, 0, 0, $color_t);
 
 			
@@ -1239,19 +1277,104 @@ function image_masque($im, $masque, $pos="") {
 				$g2 = ($rgb2 >> 8) & 0xFF;
 				$b2 = $rgb2 & 0xFF;
 				
-				$r2 = $r2 + 1 * ($r - 127);
-				if ($r2 > 254) $r2 = 254;
-				if ($r2 < 0) $r2 = 0;
-				$g2 = $g2 + 1 * ($g - 127);
-				if ($g2 > 254) $g2 = 254;
-				if ($g2 < 0) $g2 = 0;
-				$b2 = $b2 + 1 * ($b - 127);
-				if ($b2 > 254) $b2 = 254;
-				if ($b2 < 0) $b2 = 0;
 				
-				$a_ = $a + $a2 - round($a*$a2/127);
+				
+				if ($mode == "normal") {
+					$v = (127 - $a) / 127;
+					if ($v == 1) {
+						$r_ = $r;
+						$g_ = $g;
+						$b_ = $b;
+					} else {
+						$v2 = (127 - $a2) / 127;
+						if ($v+$v2 == 0) {
+							$r_ = $r2;
+							$g_ = $g2;
+							$b_ = $b2;
+						} else {
+							$r_ = $r + (($r2 - $r) * $v2 * (1 - $v));
+							$g_ = $g + (($g2 - $g) * $v2 * (1 - $v));
+							$b_ = $b + (($b2 - $b) * $v2 * (1 - $v));
+						}
+					}
+					$a_ = min($a,$a2);
+				} elseif ($mode == "produit" OR $mode == "difference") {					
 
-				$color = ImageColorAllocateAlpha( $im_, $r2, $g2, $b2 , $a_ );
+					if ($mode == "produit") {
+						$r = ($r/255) * $r2;
+						$g = ($g/255) * $g2;
+						$b = ($b/255) * $b2;
+					} else if ($mode == "difference") {
+						$r = abs($r-$r2);
+						$g = abs($g-$g2);
+						$b = abs($b-$b2);				
+					}
+
+					$r = max(0, min($r, 255));
+					$g = max(0, min($g, 255));
+					$b = max(0, min($b, 255));
+
+					$v = (127 - $a) / 127;
+					if ($v == 1) {
+						$r_ = $r;
+						$g_ = $g;
+						$b_ = $b;
+					} else {
+						$v2 = (127 - $a2) / 127;
+						if ($v+$v2 == 0) {
+							$r_ = $r2;
+							$g_ = $g2;
+							$b_ = $b2;
+						} else {
+							$r_ = $r + (($r2 - $r) * $v2 * (1 - $v));
+							$g_ = $g + (($g2 - $g) * $v2 * (1 - $v));
+							$b_ = $b + (($b2 - $b) * $v2 * (1 - $v));
+						}
+					}
+
+
+					$a_ = $a2;
+				} elseif ($mode == "eclaircir" OR $mode == "obscurcir") {
+					$v = (127 - $a) / 127;
+					if ($v == 1) {
+						$r_ = $r;
+						$g_ = $g;
+						$b_ = $b;
+					} else {
+						$v2 = (127 - $a2) / 127;
+						if ($v+$v2 == 0) {
+							$r_ = $r2;
+							$g_ = $g2;
+							$b_ = $b2;
+						} else {
+							$r_ = $r + (($r2 - $r) * $v2 * (1 - $v));
+							$g_ = $g + (($g2 - $g) * $v2 * (1 - $v));
+							$b_ = $b + (($b2 - $b) * $v2 * (1 - $v));
+						}
+					}
+					if ($mode == "eclaircir") {
+						$r_ = max ($r_, $r2);
+						$g_ = max ($g_, $g2);
+						$b_ = max ($b_, $b2);
+					} else {
+						$r_ = min ($r_, $r2);
+						$g_ = min ($g_, $g2);
+						$b_ = min ($b_, $b2);					
+					}
+					
+					$a_ = min($a,$a2);
+				} else {
+					$r_ = $r2 + 1 * ($r - 127);
+					$r_ = max(0, min($r_, 255));
+					$g_ = $g2 + 1 * ($g - 127);
+					$g_ = max(0, min($g_, 255));
+					$b_ = $b2 + 1 * ($b - 127);
+					$b_ = max(0, min($b_, 255));
+					
+					$a_ = $a + $a2 - round($a*$a2/127);
+				}
+
+				$color = ImageColorAllocateAlpha( $im_, $r_, $g_, $b_ , $a_ );
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
 		}
