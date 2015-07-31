@@ -4,7 +4,8 @@
 
 <div class="statut">
 [<p><:info_statut_auteur:> <strong>(#STATUT|traduire_statut_auteur)</strong></p>]
-[(#AUTORISER{webmestre}|oui)
+[(#REM) Cette autorisation porte sur l'auteur parcouru dans la boucle ! ]
+[(#AUTORISER{webmestre,'',0,#ID_AUTEUR}|oui)
 	[<p>(#SESSION{id_auteur}|=={#ID_AUTEUR}|?{<:info_admin_je_suis_webmestre:>,<:info_admin_webmestre:>})</p>]
 ]
 [(#AUTORISER{webmestre}|non|et{#SESSION{id_auteur}|=={#ID_AUTEUR}})
