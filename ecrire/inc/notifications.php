@@ -75,10 +75,6 @@ function extrait_article($row) {
 	if ($les_auteurs) $extrait .= _T('info_les_auteurs_1', array('les_auteurs' => $les_auteurs));
 	if ($statut == 'publie') $extrait .= " "._T('date_fmt_nomjour_date', array('nomjour'=>nom_jour($date), 'date'=>affdate($date)));
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
-	if ($statut == 'publie') 
-		$extrait .= "-> "
-			. generer_url_action("redirect", "id_article=$id_article", true)
-			. "\n\n";
 	return $extrait;
 }
 
@@ -110,10 +106,10 @@ function envoyer_mail_publication($id_article) {
 			$nom = $GLOBALS['auteur_session']['nom'];
 			$nom = trim(supprimer_tags(typo($nom)));
 			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))
-				."\n\n" 
-				. $url
-				."\n\n";
-			$courr = $courr . extrait_article($row);
+				. "\n\n"
+				. extrait_article($row)
+				. "-> " . $url
+				. "\n";
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
 			// reinstalle la langue utilisateur (au cas ou)
