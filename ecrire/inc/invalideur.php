@@ -108,7 +108,7 @@ function appliquer_quota_cache() {
 	$dir = sous_repertoire(_DIR_CACHE, $l);
 	$nombre = nombre_de_fichiers_repertoire($dir);
 	$total_cache = _TAILLE_MOYENNE_FICHIER_CACHE * $nombre;
-	spip_log("Taille du CACHE estimee: "
+	spip_log("Taille du CACHE estimee ($l): "
 		.(intval(16*$total_cache/102400)/10)." Mo");
 
 	if ($quota_cache > 0) {
