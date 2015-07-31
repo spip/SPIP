@@ -194,13 +194,11 @@ function colonne_droite_neq4($id_rubrique, $activer_breves, $activer_sites, $art
 	$gadget = pipeline('accueil_gadgets',$gadget);
 
 	if (strlen($gadget) > 0) {
-	  $gadget = "<div>&nbsp;</div>"
-	    . debut_cadre_trait_couleur('', true)
+	  $gadget = debut_cadre_trait_couleur('', true)
 	    . $gadget
 	    . fin_cadre_trait_couleur(true);
 	}
 
-	$gadget .= "<div>&nbsp;</div>";
 	return $gadget;
 }
 
