@@ -344,12 +344,12 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $forcer_dest)
 	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, generer_url_ecrire('calendrier'));
 	
 	echo "<br />";
-	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
-	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+	echo  http_calendrier_rv(quete_calendrier_taches_annonces(),"annonces");
+	echo  http_calendrier_rv(quete_calendrier_taches_pb(),"pb");
+	echo  http_calendrier_rv(quete_calendrier_taches_rv(), "rv");
 
 	if ($rv != "non") {
-		list ($sh, $ah) = sql_calendrier_interval(sql_calendrier_jour($lannee,$lemois, $lejour));
+		list ($sh, $ah) = quete_calendrier_interval(quete_calendrier_jour($lannee,$lemois, $lejour));
 		foreach ($ah as $k => $v)
 		  {
 		    foreach ($v as $l => $e)
