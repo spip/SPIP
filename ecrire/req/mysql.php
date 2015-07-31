@@ -154,7 +154,7 @@ function spip_mysql_select($select, $from, $where='',
 			   $serveur='') {
 
 
-	$from = (!is_array($from) ? $from : spip_select_as($from));
+	$from = (!is_array($from) ? $from : spip_mysql_select_as($from));
 	$query = 'SELECT ' .
 		(!is_array($select) ? $select : join(", ", $select)) .
 		(!$from ? '' :"\nFROM $from")
@@ -214,8 +214,8 @@ function calculer_mysql_where($v)
 	}
 }
 
-// http://doc.spip.org/@spip_select_as
-function spip_select_as($args)
+// http://doc.spip.org/@spip_mysql_select_as
+function spip_mysql_select_as($args)
 {
 	if (isset($args[-1])) {
 		$join = ' ' . $args[-1];
