@@ -431,7 +431,7 @@ function _image_imagegif($img,$fichier) {
  *     Une ressource de type Image GD.
  * @param string $fichier
  *     Le path vers l'image (ex : local/cache-vignettes/L180xH51/image.jpg).
- * @param string $qualite
+ * @param int $qualite
  *     Le niveau de qualité du fichier résultant : de 0 (pire qualité, petit
  *     fichier) à 100 (meilleure qualité, gros fichier). Par défaut, prend la
  *     valeur (85) de la constante _IMG_GD_QUALITE (modifiable depuis
@@ -462,6 +462,8 @@ function _image_imagejpg($img,$fichier,$qualite=_IMG_GD_QUALITE) {
  * 
  * Utilise les fonctions de la classe phpthumb_functions.
  *
+ * @uses phpthumb_functions::GD2ICOstring()
+ *
  * @param ressource $img
  *     Une ressource de type Image GD.
  * @param string $fichier
@@ -486,7 +488,7 @@ function _image_imageico($img, $fichier) {
  * @param array $valeurs
  *     Un tableau des informations (tailles, traitement, path...) accompagnant
  *    l'image.
- * @param string $qualite
+ * @param int $qualite
  *     N'est utilisé que pour les images jpg.
  *     Le niveau de qualité du fichier résultant : de 0 (pire qualité, petit
  *     fichier) à 100 (meilleure qualité, gros fichier). Par défaut, prend la
@@ -1075,15 +1077,28 @@ function process_image_reduire($fonction,$img,$taille,$taille_y,$force,$cherche_
  * @link http://phpthumb.sourceforge.net
  */
 class phpthumb_functions {
-// http://doc.spip.org/@GetPixelColor
-	function GetPixelColor(&$img, $x, $y) {
+
+	/**
+	 * Retourne la couleur d'un pixel dans une image
+	 * 
+	 * @param ressource $img
+	 * @param int $x
+	 * @param int $y
+	 * @return array|bool
+	 */
+	public static function GetPixelColor(&$img, $x, $y) {
 		if (!is_resource($img)) {
 			return false;
 		}
 		return @ImageColorsForIndex($img, @ImageColorAt($img, $x, $y));
 	}
-// http://doc.spip.org/@LittleEndian2String
-	function LittleEndian2String($number, $minbytes=1) {
+
+	/**
+	 * @param int $number
+	 * @param int $minbytes
+	 * @return string
+	 */
+	public static function LittleEndian2String($number, $minbytes=1) {
 		$intstring = '';
 		while ($number > 0) {
 			$intstring = $intstring.chr($number & 255);
@@ -1091,8 +1106,12 @@ class phpthumb_functions {
 		}
 		return str_pad($intstring, $minbytes, "\x00", STR_PAD_RIGHT);
 	}
-// http://doc.spip.org/@GD2ICOstring
-	function GD2ICOstring(&$gd_image_array) {
+
+	/**
+	 * @param array $gd_image_array
+	 * @return string
+	 */
+	public static function GD2ICOstring(&$gd_image_array) {
 		foreach ($gd_image_array as $key => $gd_image) {
 
 			$ImageWidths[$key]  = ImageSX($gd_image);
