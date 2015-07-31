@@ -209,6 +209,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 		}
 	}
 	else {
+		// Post-install = ici pas de rubrique, veuillez en creer une
 		if ($connect_statut == '0minirezo') {
 			$res .= "<br />"._T('info_creation_rubrique');
 		}
