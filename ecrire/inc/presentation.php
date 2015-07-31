@@ -1736,7 +1736,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	// CSS espace prive
 	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $args) .'" />
+	. generer_url_public('style_prive', $args."&rand=".rand(0,1000)) .'" />
 '
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="'

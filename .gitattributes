@@ -6,7 +6,6 @@ dist/choix_mots.html -text
 dist/favicon.ico -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
-dist/rien.gif -text
 dist/style_prive.html -text
 ecrire/action/autoriser.php -text
 ecrire/action/ical.php -text
@@ -285,7 +284,6 @@ ecrire/img_pack/redacteurs-48.png -text
 ecrire/img_pack/redacteurs-admin-24.gif -text
 ecrire/img_pack/redacteurs-poubelle-24.gif -text
 ecrire/img_pack/referers-24.gif -text
-ecrire/img_pack/rien.gif -text
 ecrire/img_pack/rond-b.gif -text
 ecrire/img_pack/rond-bd.gif -text
 ecrire/img_pack/rond-bg.gif -text
@@ -377,4 +375,5 @@ ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
 /inc-public.php3 -text
 /index.php -text
+/rien.gif -text
 /spip.php -text
