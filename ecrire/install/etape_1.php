@@ -45,12 +45,18 @@ function install_etape_1_dist()
 
 	$req = array($adresse_db,$login_db,$pass_db);
 
-	$predef = array(defined('_INSTALL_HOST_DB'), defined('_INSTALL_USER_DB'), defined('_INSTALL_PASS_DB'));
+	$predef = array(defined('_INSTALL_SERVER_DB'), defined('_INSTALL_HOST_DB'), defined('_INSTALL_USER_DB'), defined('_INSTALL_PASS_DB'));
 
 	// ces deux chaines de langues doivent etre reecrites
 #	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
 	echo info_etape(_L('Connexion &agrave; votre base de donn&eacute;es'),
-			_L("Consultez les informations fournies par votre h&eacute;bergeur : vous devez y trouver le serveur de base de donn&eacute;es qu'il propose et vos identifiants personnels pour vous y connecter. SPIP sait utiliser MySQL (le plus r&eacute;pandu) et PostGres (encore exp&eacute;rimental)."));
+			'<p>'
+			. _L("Consultez les informations fournies par votre h&eacute;bergeur : vous devez y trouver le serveur de base de donn&eacute;es qu'il propose et vos identifiants personnels pour vous y connecter.")
+			.'</p>'
+			.'<p>'
+			. _L("SPIP sait utiliser MySQL (le plus r&eacute;pandu) et PostGreSQL (support encore exp&eacute;rimental).")
+			.'</p>'
+			);
 	echo install_etape_1_form($req, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
 	echo info_progression_etape(1,'etape_','install/');
 	echo install_fin_html();
@@ -58,6 +64,18 @@ function install_etape_1_dist()
 
 function install_etape_1_form($req, $predef, $hidden, $etape)
 {
+
+	if ($predef[0])
+		$server_db = _INSTALL_SERVER_DB;
+	else if (
+	abs(function_exists('pg_connect'))
+	+ abs(function_exists('mysql_connect'))
+	<= 1)
+		$server_db = function_exists('mysql_connect')
+			? 'mysql'
+			: 'pg';
+	else
+		$server_db ='';
 
   return generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='$etape' />" 
@@ -67,9 +85,21 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
 			:"")
 
-	. '<fieldset><legend>'._L('Indiquer le serveur de base de donn&eacute;es')
-	. "\n<select name='server_db'><option>mysql</option><option>pg</option></select></legend></fieldset>"
-	. ($predef[0]
+	. ($server_db
+		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
+		: 
+		'<fieldset><legend>'._L('Indiquer le type de base de donn&eacute;es :')
+		. "\n<select name='server_db'>"
+		. (function_exists('mysql_connect')
+			? "<option value='mysql'>"._L('MySQL')."</option>"
+			: '')
+		. (function_exists('pg_connect')
+			? "<option value='pg'>"._L('PostGreSQL')."</option>"
+			: '')
+		. "</select></legend></fieldset>"
+	)
+
+	. ($predef[1]
 	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_base_donnee_1'),
 		array(
@@ -81,8 +111,8 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 	)
 	)
 
-	. ($predef[1]
-	? '<h3>'._T('install_login_base_hebergeur ').'</h3>'
+	. ($predef[2]
+	? '<h3>'._T('install_login_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(
@@ -93,7 +123,7 @@ function install_etape_1_form($req, $predef, $hidden, $etape)
 	)
 	)
 
-	. ($predef[2]
+	. ($predef[3]
 	? '<h3>'._T('install_pass_base_hebergeur').'</h3>'
 	: fieldset(_T('entree_mot_passe_1'),
 		array(

@@ -141,7 +141,6 @@ function plage_punct_unicode() {
 
 // corriger caracteres non-conformes : 128-159
 // cf. charsets/iso-8859-1.php (qu'on recopie ici pour aller plus vite)
-// http://doc.spip.org/@corriger_caracteres_windows
 // on peut passer un charset cible en parametre pour accelerer le passage iso-8859-1 -> autre charset
 // http://doc.spip.org/@corriger_caracteres_windows
 function corriger_caracteres_windows($texte, $charset='AUTO', $charset_cible='unicode') {

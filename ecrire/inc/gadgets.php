@@ -72,7 +72,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 	// GADGET Messagerie
 	$gadget = '';
-	$gadget .= "<div id='bandeaumessagerie' class='bandeau bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
+	$gadget .= "<div id='bandeaumessagerie' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 130px;'>";
 	$gadget .= "<a href='" . generer_url_ecrire("messagerie") . "' class='lien_sous'>";
 	$gadget .= _T('icone_messagerie_personnelle');
 	$gadget .= "</a>";
