@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
   qui sopra; se non &egrave; cos&igrave;, rinominare le cartelle utilizzando il software FTP.</p>
   <p>Una volta effettuata questa correzione, si potr&agrave;',
-'dirs_repertoires_suivants' => '<MODIF><p><b>Le seguenti cartelle non sono accessibili in scrittura:</b></p> <ul>@bad_dirs@.</ul>
+'dirs_repertoires_suivants' => '<p><b>Le seguenti cartelle non sono accessibili in scrittura:</b></p> <ul>@bad_dirs@</ul>
 <p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
 di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.</p>
 <p>Una volta attribuiti i permessi, si potr&agrave; ',
@@ -602,7 +602,7 @@ devi attivare Javascript nel tuo browser e',
 
 
 // O
-'occurence' => '<MODIF>Occorrenza',
+'occurence' => 'Occorrenza',
 'onglet_affacer_base' => 'Svuota il database',
 'onglet_auteur' => 'L\'autore',
 'onglet_contenu_site' => 'Contenuto del sito',

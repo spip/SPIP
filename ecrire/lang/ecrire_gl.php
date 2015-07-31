@@ -594,6 +594,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_surtitre' => 'Sobret&iacute;tulo:',
 'info_syndication_integrale_1' => 'O seu web prop&oacute;n ficheiros de sindicaci&oacute;n (ver &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Quere transmitir os seus artigos &iacute;ntegros, ou non difundir m&aacute;is ca un resumo dalg&uacute;ns centos de car&aacute;cteres&nbsp;?',
+'info_table_prefix' => 'Os datos deste web quedan rexistrados nas t&aacute;boas chamadas <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, etc. Se instala varios webs na mesma base de datos, pode modificar este prefixo (ollo, unicamente con letras min&uacute;sculas e sen acentos).',
 'info_taille_maximale_vignette' => 'Tama&ntilde;o m&aacute;ximo das vi&ntilde;etas xeradas polo sistema:',
 'info_terminer_installation' => 'Agora podes rematar o proceso de instalaci&oacute;n est&aacute;ndar.',
 'info_texte' => 'Texto',
@@ -831,6 +832,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_choix_base_1' => 'Elixe a t&uacute;a base:',
 'texte_choix_base_2' => 'O servidor MySQL cont&eacute;n varias bases de datos.',
 'texte_choix_base_3' => '<b>Seleccione</b> aqu&amp;iacute; a que lle dese o seu provedor:',
+'texte_choix_table_prefix' => 'Prefixo das t&aacute;boas&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'empregue este comando para baleirar as t&aacute;boas
   de indexado empregadas polo motor de procura integrado no Spip.
   Isto permite ga&ntilde;ar espazo en disco.',

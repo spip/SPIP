@@ -576,6 +576,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_surtitre' => 'Sobret&iacute;tol:',
 'info_syndication_integrale_1' => 'El vostre lloc Web proposa fitxers de sindicaci&oacute; (veure &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Desitgeu transmetre els articles en la seva totalitat, o difondre\'n nom&eacute;s alguns centenars de car&agrave;cters?',
+'info_table_prefix' => 'Les dades d\'aquest lloc Web estan registrades en unes taules anomenades <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, etc. Si instal&middot;leu diversos llocs a dins de la mateixa base de dades, podeu modificar aquest prefix (atenci&oacute;, nom&eacute;s amb lletres min&uacute;scules i sense accents).',
 'info_taille_maximale_vignette' => 'Mida m&agrave;xima de les vinyetes generades pel sistema:',
 'info_terminer_installation' => 'Ara podeu finalitzar el proc&eacute;s d\'instal&middot;laci&oacute; est&agrave;ndard. ',
 'info_texte' => 'Text',
@@ -804,6 +805,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_choix_base_1' => 'Trie la seua base:',
 'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses bases de dades.',
 'texte_choix_base_3' => '<b>Seleccioneu</b> d\'aqu&iacute; sota quina us ha estat atribu&iuml;da pel vostre prove&iuml;dor d\'hostatge:',
+'texte_choix_table_prefix' => 'Prefix de les taules:',
 'texte_commande_vider_tables_indexation' => 'Utiliceu aquesta comanda per buidar les taules d\'indexaci&oacute; emprades
  pel motor de recerca integrat en SPIP. Aix&ograve; vos permetr&agrave;
   guanyar espai a disc.',

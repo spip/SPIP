@@ -584,6 +584,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_surtitre' => '&Uuml;st ba&#351;l&#305;k :',
 'info_syndication_integrale_1' => 'Siteniz payla&#351;&#305;m dosyalar&#305; &ouml;neriyor  (bkz &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Makaleleri olduklar&#305; gibi mi iletmek isterseniz yoksa bir ka&ccedil; y&uuml;z s&ouml;zc&uuml;kl&uuml;k &ouml;zetlerini mi ?',
+'info_table_prefix' => 'Bu sitedeki veriler <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, vs. isimli tablolara kaydedilmektedir. Ayn&#305; veritaban&#305;na bir &ccedil;ok site kuracaksan&#305;z bu &ouml;n-eki de&#287;i&#351;tirebilirsiniz (dikkat, sadece aksans&#305;z k&uuml;&ccedil;&uuml;k harf kullanmal&#305;s&#305;n&#305;z).',
 'info_taille_maximale_vignette' => 'Sistem taraf&#305;ndan &uuml;retilen en b&uuml;y&uuml;k ikon boyutu&nbsp;:',
 'info_terminer_installation' => 'Art&#305;k standart kurulum i&#351;lemini bitirebilirsiniz.',
 'info_texte' => 'Metin',
@@ -818,6 +819,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_choix_base_1' => 'Veritaban&#305;n&#305;z&#305; se&ccedil;iniz :',
 'texte_choix_base_2' => 'MySQL sunucusu bir &ccedil;ok veritaban&#305; i&ccedil;erir.',
 'texte_choix_base_3' => 'A&#351;a&#287;&#305;da servis sa&#287;lay&#305;c&#305;n&#305;z taraf&#305;ndan size ayr&#305;lm&#305;&#351; olan&#305; <b>se&ccedil;iniz</b>.',
+'texte_choix_table_prefix' => 'Tablo &ouml;n-ekleri&nbsp;:',
 'texte_commande_vider_tables_indexation' => 'Bu komutu SPIP\'teki arama motoru taraf&#305;ndan
     kullan&#305;lan endeksleme &ccedil;izelgelerini bo&#351;altmak i&ccedil;in kullan&#305;n&#305;z.
     Diskteki alan&#305; bo&#351;a harcamam&#305;&#351; olursunuz.',
