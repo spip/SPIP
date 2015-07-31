@@ -26,10 +26,18 @@ function install_etape_4_dist()
 		? _INSTALL_SERVER_DB
 		: _request('server_db');
 
-	if($login!='' AND ($pass!=$pass_verif OR strlen($pass)<5 OR strlen($login)<3)) {
+	if($login) {
+		$echec = ($pass!=$pass_verif) ?
+		  _T('info_passes_identiques')
+		  : ((strlen($pass)<5) ?
+		     _T('info_passe_trop_court')
+		     : ((strlen($login)<3) ?
+			_T('info_login_trop_court')
+			: ''));
+		if ($echec)
 		echo minipres(
 			'AUTO',
-			"<h2>"._T('info_passes_identiques')."</h2>\n".
+			"<h2>$echec</h2>\n".
 			"<p class='resultat'>"._T('avis_connexion_echec_2')."</p>"
 		);
 		exit;
