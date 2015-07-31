@@ -239,7 +239,7 @@ function quete_meta($nom, $serveur) {
 // Si ces balises sont rencontrees dans une boucle de base distante
 // on produit le generer_url std faute de connaitre le $type_urls distant
 // et sous reserve que cette base distante est geree par SPIP.
-// Autrement cette balise est vu comme un champ normal dans cette base.
+// Autrement cette balise est vue comme un champ normal dans cette base.
 
 // http://doc.spip.org/@generer_generer_url
 function generer_generer_url($type, $p)
@@ -284,28 +284,28 @@ function generer_generer_url($type, $p)
 function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	// verifier que la fonction assembler est bien chargee (cf. #608)
 	$assembler = charger_fonction('assembler', 'public');
-
+	// et toujours charger les fonctions de generation d'URL.
+	$renommer_urls= charger_fonction($GLOBALS['type_urls'], 'urls', true);
 	// distinguer le premier appel des appels par inclusion
 	if (!is_array($local)) {
 		include_spip('inc/filtres'); // pour normaliser_date
 
 		// ATTENTION, gestion des URLs transformee par le htaccess
-		// en appelant la fonction nommee urls_$type_urls
+		// en appelant la fonction $renommee_urls
 		// 1. $contexte est global car cette fonction le modifie.
 		// 2. $fond est passe par reference, pour la meme raison
 		// Bref,  les URL dites propres ont une implementation sale.
 		// Interdit de nettoyer, faut assumer l'histoire.
 		global $contexte;
 		$contexte = calculer_contexte();
-		$f = charger_fonction($GLOBALS['type_urls'], 'urls', true);
-		if (!$f) {
+		if (!$renommer_urls) {
 			// compatibilite < 1.9.3
 			charger_generer_url();
 			if (function_exists('recuperer_parametres_url'))
-				$f = 'recuperer_parametres_url';
+				$renommer_urls = 'recuperer_parametres_url';
 		}
-		if ($f) {
-			$f($fond, nettoyer_uri());
+		if ($renommer_urls) {
+			$renommer_urls($fond, nettoyer_uri());
 			// remettre les globales (bouton "Modifier cet article" etc)
 			foreach ($contexte as $var=>$val) {
 				if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
