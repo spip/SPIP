@@ -380,6 +380,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				$liste_onglets = array_merge($liste_onglets,$info['onglet']);
 			}
 		}
+
+		// ajouter les boutons automatiques de configuration
+		include_spip('inc/bandeau');
+		include_spip('inc/config');
+		// on passe la liste des boutons existants pour eviter double entree
+		$liste_boutons = $liste_boutons+lister_configurer(boutons_core('bouton')+boutons_core('onglet')+$liste_boutons);
 	}
 
 	// generer les fichier
@@ -450,7 +456,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		// construire tableaux de pipelines et matrices et boutons
 		// $GLOBALS['spip_pipeline']
 		// $GLOBALS['spip_matrice']
-		$liste_boutons = array();
 		foreach($ordre as $p){
 			$dir_type = $plugin_valides[$p]['dir_type'];
 			$root_dir_type = str_replace('_DIR_','_ROOT_',$dir_type);
