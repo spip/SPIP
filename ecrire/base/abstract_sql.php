@@ -76,8 +76,7 @@ function sql_set_charset($charset,$serveur='', $option=true){
 // afin de disposer du texte brut.
 
 // http://doc.spip.org/@sql_select
-function sql_select (
-	$select = array(), $from = array(), $where = array(),
+function sql_select ($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='', $option=true) {
 	$f = sql_serveur('select', $serveur,  $option==='continue' OR $option===false);
@@ -109,8 +108,7 @@ function sql_select (
 // Recupere la syntaxe de la requete select sans l'executer
 // simplement $option = false au lieu de true
 // http://doc.spip.org/@sql_get_select
-function sql_get_select	(
-	$select = array(), $from = array(), $where = array(),
+function sql_get_select($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='') {
 	return sql_select ($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
@@ -174,11 +172,11 @@ function sql_listdbs($serveur='', $option=true) {
 }
 
 // http://doc.spip.org/@sql_selectdb
-function sql_selectdb($res, $serveur='', $option=true)
+function sql_selectdb($nom, $serveur='', $option=true)
 {
 	$f = sql_serveur('selectdb', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
-	$r = $f($res, $serveur, $option!==false);
+	$r = $f($nom, $serveur, $option!==false);
 	if ($r===false) spip_sql_erreur($serveur);
 	return $r;
 }
@@ -445,12 +443,10 @@ function sql_query($ins, $serveur='', $option=true) {
 
 # une composition tellement frequente...
 // http://doc.spip.org/@sql_fetsel
-function sql_fetsel(
-	$select = array(), $from = array(), $where = array(),
+function sql_fetsel($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
-	spip_log("fetsel $select $from $where '$option' $q");
 	if ($option===false) return $q;
 	if (!$q) return array();
 	$r = sql_fetch($q, $serveur, $option);
@@ -460,8 +456,7 @@ function sql_fetsel(
 
 // Retourne le tableau de toutes les lignes d'une requete Select
 // http://doc.spip.org/@sql_allfetsel
-function sql_allfetsel(
-	$select = array(), $from = array(), $where = array(),
+function sql_allfetsel($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '',
 	$having = array(), $serveur='', $option=true) {
 	$q = sql_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur, $option);
@@ -471,8 +466,7 @@ function sql_allfetsel(
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
 // http://doc.spip.org/@sql_getfetsel
-function sql_getfetsel(
-		       $select, $from = array(), $where = array(), $groupby = array(), 
+function sql_getfetsel($select, $from = array(), $where = array(), $groupby = array(), 
 	$orderby = array(), $limit = '', $having = array(), $serveur='', $option=true) {
 	if (preg_match('/\s+as\s+(\w+)$/i', $select, $c)) $id = $c[1];
 	elseif (!preg_match('/\W/', $select)) $id = $select;
