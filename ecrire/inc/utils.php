@@ -387,8 +387,10 @@ function _T($texte, $args=array()) {
 
 	static $traduire=false ;
 
- 	if (!$traduire)
+ 	if (!$traduire) {
 		$traduire = charger_fonction('traduire', 'inc');
+		include_spip('inc/lang');
+	}
 	$text = $traduire($texte,$GLOBALS['spip_lang']);
 
 	if (!strlen($text))
