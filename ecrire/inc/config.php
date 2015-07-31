@@ -24,6 +24,253 @@ function inc_config_dist() {
 	actualise_metas(liste_metas());
 }
 
+/**
+ * Expliquer une configuration :
+ * analyser le cfg pour determiner la table, le casier et le sous-casier eventuel
+ *
+ * @param string $cfg
+ * @return array
+ */
+function explique_config($cfg){
+	// par defaut, sur la table des meta
+	$table = 'meta';
+	$casier = null;
+	$sous_casier = array();
+	$cfg = explode('/',$cfg);
+	// si le premier argument est vide, c'est une syntaxe /table/ ou un appel vide ''
+	if (!reset($cfg) AND count($cfg)>1) {
+		array_shift($cfg);
+		$table = array_shift($cfg);
+		if (!isset($GLOBALS[$table]))
+			lire_metas($table);
+	}
+	// si on a demande #CONFIG{/meta,'',0}
+	if (count($cfg))
+		$casier = array_shift($cfg);
+
+	if (count($cfg))
+		$sous_casier = $cfg;
+
+	return array($table,$casier,$sous_casier);
+}
+
+/**
+ * Lecture de la configuration
+ *
+ * lire_config() permet de recuperer une config depuis le php<br>
+ * memes arguments que la balise (forcement)<br>
+ * $cfg: la config, lire_config('montruc') est un tableau<br>
+ * lire_config('/table/champ') lit le valeur de champ dans la table des meta 'spip_table'<br>
+ * lire_config('montruc/sub') est l'element "sub" de cette config equivalent a lire_config('/meta/montruc/sub')<br>
+ *
+ * lire_config('methode::montruc/sub') delegue la lecture a methode_lire_config_dist via un charger_fonction
+ * permet de brancher CFG ou autre outil externe qui etend les methodes de stockage de config
+ *
+ * $unserialize est mis par l'histoire
+ *
+ * @param  string  $cfg          la config
+ * @param  mixed   $def          un défaut optionnel
+ * @param  boolean $unserialize  n'affecte que le dépôt 'meta'
+ * @return string
+ */
+function lire_config($cfg='', $def=null, $unserialize=true) {
+	// lire le stockage sous la forme /table/valeur
+	// ou valeur qui est en fait implicitement /meta/valeur
+	// ou casier/valeur qui est en fait implicitement /meta/casier/valeur
+
+	// traiter en priorite le cas simple et frequent
+	// de lecture direct $GLOBALS['meta']['truc'], si $cfg ne contient ni / ni :
+	if ($cfg AND strpbrk($cfg,'/:')===false){
+		$r = isset($GLOBALS['meta'][$cfg])?
+		  ((!$unserialize
+			// ne pas essayer de deserialiser autre chose qu'une chaine
+			OR !is_string($GLOBALS['meta'][$cfg])
+			// ne pas essayer de deserialiser si ce n'est visiblement pas une chaine serializee
+			OR strpos($GLOBALS['meta'][$cfg],':')===false
+			OR ($t=unserialize($GLOBALS['meta'][$cfg]))===false)?$GLOBALS['meta'][$cfg]:$t)
+		  :$def;
+		return $r;
+	}
+
+	// Brancher sur methodes externes si besoin
+	if ($cfg AND $p=strpos($cfg,'::')){
+		$methode = substr($cfg,0,$p);
+		$lire_config = charger_fonction('lire_config',$methode);
+		return $lire_config(substr($cfg,$p+2),$def,$unserialize);
+	}
+
+	list($table,$casier,$sous_casier) = explique_config($cfg);
+
+	if (!isset($GLOBALS[$table]))
+			return $def;
+
+	$r = $GLOBALS[$table];
+
+	// si on a demande #CONFIG{/meta,'',0}
+	if (!$casier)
+		return $unserialize ? $r : serialize($r);
+
+	// casier principal :
+	// le deserializer si demande
+	// ou si on a besoin
+	// d'un sous casier
+	$r = isset($r[$casier])?$r[$casier]:null;
+	if (($unserialize OR count($sous_casier)) AND $r AND is_string($r))
+		$r = (($t=unserialize($r))===false?$r:$t);
+
+	// aller chercher le sous_casier
+	while(!is_null($r) AND $casier = array_shift($sous_casier))
+		$r = isset($r[$casier])?$r[$casier]:null;
+
+	if (is_null($r)) return $def;
+	return $r;
+}
+
+/**
+ * metapack est inclue dans lire_config, mais on traite le cas ou il est explicite
+ * metapack:: dans le $cfg de lire_config.
+ * On renvoie simplement sur lire_config
+ * 
+ * @param string $cfg
+ * @param mixed $def
+ * @param bool $unserialize
+ * @return mixed
+ */
+function metapack_lire_config_dist($cfg='', $def=null, $unserialize=true) {
+	return lire_config($cfg, $def, $unserialize);
+}
+
+
+/**
+ * Ecrire une configuration
+ *
+ * @param string $cfg
+ * @param mixed $store
+ * @return bool
+ */
+function ecrire_config($cfg,$store) {
+	// Brancher sur methodes externes si besoin
+	if ($cfg AND $p=strpos($cfg,'::')){
+		$methode = substr($cfg,0,$p);
+		$ecrire_config = charger_fonction('ecrire_config',$methode);
+		return $ecrire_config(substr($cfg,$p+2),$store);
+	}
+	
+	list($table,$casier,$sous_casier) = explique_config($cfg);
+	// il faut au moins un casier pour ecrire
+	if (!$casier) return false;
+
+	// trouvons ou creons le pointeur sur le casier
+	$st = isset($GLOBALS[$table][$casier])?$GLOBALS[$table][$casier]:null;
+	if (!is_array($st) AND ($sous_casier OR is_array($store))) {
+		$st = unserialize($st);
+		if ($st===false) {
+			// ne rien creer si c'est une demande d'effacement
+			if (is_null($store))
+				return false;
+			$st=array();
+		}
+	}
+
+	// si on a affaire a un sous caiser
+	// il faut ecrire au bon endroit sans perdre les autres sous casier freres
+	if ($c = $sous_casier) {
+		$sc = &$st;
+		$pointeurs = array();
+		while (count($c) AND $cc=array_shift($c)) {
+			// creer l'entree si elle n'existe pas
+			if (!isset($sc[$cc])) {
+				// si on essaye d'effacer une config qui n'existe pas
+				// ne rien creer mais sortir
+				if (is_null($store))
+					return false;
+				$sc[$cc] = array();
+			}
+			$pointeurs[$cc] = &$sc;
+			$sc = &$sc[$cc];
+		}
+
+		// si c'est une demande d'effacement
+		if (is_null($store)){
+			$c = $sous_casier;
+			$sous = array_pop($c);
+			// effacer, et remonter pour effacer les parents vides
+			do {
+				unset($pointeurs[$sous][$sous]);
+			} while ($sous = array_pop($c) AND !count($pointeurs[$sous][$sous]));
+			
+			// si on a vide tous les sous casiers,
+			// et que le casier est vide
+			// vider aussi la meta
+			if (!$sous AND !count($st))
+				$st = null;
+		}
+		// si ce casier est un tableau et qu'on veut stocker un tableau,
+		// faire un merge
+		elseif (is_array($store) AND is_array($sc) AND count($sc))
+			$sc = array_merge($sc,$store);
+		// dans tous les autres cas, on ecrase
+		else
+			$sc = $store;
+
+		// Maintenant que $st est modifiee
+		// reprenons la comme valeur a stocker dans le casier principal
+		$store = $st;
+	}
+
+	if (is_null($store)) {
+		if (is_null($st) AND !$sous_casier)
+			return false; // la config n'existait deja pas !
+		effacer_meta ($casier, $table);
+		if (!count($GLOBALS[$table])
+			OR count($GLOBALS[$table])==1 AND isset($GLOBALS[$table]['charset'])) {
+			effacer_meta('charset', $table); // enlevons cette meta
+			supprimer_table_meta($table); // supprimons la table (si elle est bien vide)
+		}
+	}
+	// les meta ne peuvent etre que des chaines : il faut serializer le reste
+	else {
+		if (!isset($GLOBALS[$table]))
+			installer_table_meta($table);
+		// si ce n'est pas une chaine
+		// il faut serializer
+		if (!is_string($store))
+			$store=serialize($store);
+		ecrire_meta($casier, $store, null, $table);
+	}
+	// verifier que lire_config($cfg)==$store ?
+	return true;
+}
+
+
+/**
+ * metapack est inclue dans ecrire_config, mais on traite le cas ou il est explicite
+ * metapack:: dans le $cfg de ecrire_config.
+ * On renvoie simplement sur ecrire_config
+ *
+ * @param string $cfg
+ * @param mixed $store
+ * @return bool
+ */
+function metapack_ecrire_config($cfg,$store) {
+	// cas particulier en metapack::
+	// si on ecrit une chaine deja serializee, il faut la reserializer pour la rendre
+	// intacte en sortie ...
+	if (is_string($store) AND strpos($store,':') AND unserialize($store))
+		$store = serialize($store);
+	return ecrire_config($cfg, $store);
+}
+
+/**
+ * Effacer une configuration : revient a ecrire une valeur null
+ * @param string $cfg
+ * @return bool
+ */
+function effacer_config($cfg){
+	ecrire_config($cfg, null);
+	return true;
+}
+
 // http://doc.spip.org/@liste_metas
 function liste_metas()
 {
