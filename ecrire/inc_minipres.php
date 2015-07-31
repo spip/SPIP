@@ -93,10 +93,27 @@ function aide($aide='') {
 }
 
 function info_copyright() {
-  global $spip_version_affichee, $spip_lang;
+	global $spip_version_affichee, $spip_lang;
+
+	$version = $spip_version_affichee;
+
+	//
+	// Mention, le cas echeant, de la revision SVN courante
+	//
+	if (lire_fichier(_DIR_RACINE.'.svn/entries', $c1)
+	AND lire_fichier(_DIR_RESTREINT.'.svn/entries', $c2)
+	# repertoires relativement accessoires
+	AND (lire_fichier(_DIR_RACINE.'formulaires/.svn/entries', $c3) or true)
+	AND (lire_fichier(_DIR_RACINE.'plugins/.svn/entries', $c4) or true)
+	AND (lire_fichier(_DIR_RACINE.'IMG/.svn/entries', $c5) or true)
+	AND preg_match_all(',committed-rev="([0-9]+)",', "$c1$c2$c3$c4$c5",
+	$r, PREG_PATTERN_ORDER)) {
+		$svn_revision = max($r[1]);
+		$version .= " SVN [<a href='http://trac.rezo.net/trac/spip/changeset/$svn_revision' target='_blank'>$svn_revision</a>]";
+	}
 
 	echo _T('info_copyright', 
-		   array('spip' => "<b>SPIP $spip_version_affichee</b> ",
+		   array('spip' => "<b>SPIP $version</b> ",
 			 'lien_gpl' => 
 			 "<a href='". generer_url_ecrire("aide_index", "aide=licence&var_lang=$spip_lang") . "' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
