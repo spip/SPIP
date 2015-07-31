@@ -64,7 +64,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) .
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
-	  " ') . \"";
+	  "') . \"";
 	if ($crit->not) $boucle->doublons = "";
 }
 

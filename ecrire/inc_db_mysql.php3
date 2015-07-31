@@ -242,7 +242,7 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	$n = $i = 0;
 	$in_sql ="";
 	while ($n = strpos($valeurs, ',', $n+1)) {
-		if ((++$i) >= 255) {
+	  if ((++$i) >= 255) {
 			$in_sql .= "($val $not IN (" .
 			  substr($valeurs, 0, $n) .
 			  "))\n" .
