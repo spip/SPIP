@@ -15,27 +15,23 @@ include_local("inc-compilo-index.php3");  # index ? structure ? pile ?
 #include_local("inc-bcl-squel.php3");	# (anciens noms des fichiers)
 #include_local("inc-index-squel.php3");
 
+// definition des boucles
+include_local("inc-boucles.php3");
+#include_local("inc-reqsql-squel.php3");
+
 // definition des balises
 include_local("inc-balises.php3");
 #include_local("inc-logo-squel.php3");
 #include_local("inc-vrac-squel.php3");
 #include_local("inc-form-squel.php3");
+#include_local("inc-champ-squel.php3");
 
 // definition des criteres
 include_local("inc-criteres.php3");
 #include_local("inc-arg-squel.php3");
 
-
 // gestion des balises de forums
 include_local("inc-forum.php3");
-
-
-// a traiter (essentiellement, ce sont des definitions standard de spip:
-// inc-compilo-standard/spip/redac ?
-include_local("inc-reqsql-squel.php3");
-include_local("inc-champ-squel.php3");
-
-
 
 // outils pour debugguer le compilateur
 #include_local("inc-compilo-debug.php3"); # desactive
@@ -294,7 +290,46 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->hash)
 		$init .= "if (\$hash_recherche) ";
 
-	$init .= "\$result = " . calculer_requete($boucle);
+	$init .= "\$result = ";
+
+
+	// Appeler la fonction de definition de la boucle
+	$f = 'boucle_'.strtoupper($boucle->type_requete);	// definition perso
+	if (!function_exists($f)) $f = $f.'_dist';			// definition spip
+	if (!function_exists($f)) $f = 'boucle_DEFAUT';		// definition par defaut
+
+	$type = $boucle->type_requete;
+	$id_table = $table_des_tables[$type];
+	$id_field = $id_table . "." . $table_primary[$type];
+
+	$f($boucle, $boucles, $type, $id_table, $id_field);
+
+
+	// En absence de champ c'est un decompte : on prend la primary pour
+	// avoir qqch (le marteau-pilon * est trop couteux, et le COUNT
+	// incompatible avec le cas general)	$init .= 
+	$init .= "spip_abstract_select(\n\t\tarray(\"". 
+		((!$boucle->select) ? $id_field :
+		join("\",\n\t\t\"", array_unique($boucle->select))) .
+		'"), # SELECT
+		array("' .
+		join('","', array_unique($boucle->from)) .
+		'"), # FROM
+		array(' .
+		(!$boucle->where ? '' : ( '"' . join('",
+		"', $boucle->where) . '"')) .
+		"), # WHERE
+		'".addslashes($boucle->group)."', # GROUP
+		" . ($boucle->order ? $boucle->order : "''") .", # ORDER
+		" . (strpos($boucle->limit, 'intval') === false ?
+			"'$boucle->limit'" :
+			$boucle->limit). ", # LIMIT
+		'".$boucle->sous_requete."', # sous
+		".$boucle->compte_requete.", # compte
+		'".$id_table."', # table
+		'".$boucle->id_boucle."'); # boucle";
+
+
 	$init .= "\n	".'$t0 = "";
 	$SP++;';
 	if ($flag_cpt)

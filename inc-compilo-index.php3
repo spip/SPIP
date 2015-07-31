@@ -228,7 +228,7 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 	
 	}}}}
 	
-	// Aller chercher les processeurs standards definis dans inc-champ-squel
+	// Aller chercher les processeurs standards definis dans inc-balises.php3
 	if (!$etoile)
 		$p->process = champs_traitements($nom_champ);
 

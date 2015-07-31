@@ -17,6 +17,48 @@ if (defined("_INC_BALISES")) return;
 define("_INC_BALISES", "1");
 
 
+
+//
+// Pre-traitements standard de divers champs
+//
+function champs_traitements ($nom_champ) {
+	static $traitements = array (
+		'BIO' => 'traiter_raccourcis(%s)',
+		'CHAPO' => 'traiter_raccourcis(nettoyer_chapo(%s))',
+		'DATE' => 'vider_date(%s)',
+		'DATE_MODIF' => 'vider_date(%s)',
+		'DATE_NOUVEAUTES' => 'vider_date(%s)',
+		'DATE_REDAC' => 'vider_date(%s)',
+		'DESCRIPTIF' => 'traiter_raccourcis(%s)',
+		'LIEN_TITRE' => 'typo(%s)',
+		'LIEN_URL' => 'htmlspecialchars(vider_url(%s))',
+		'MESSAGE' => 'traiter_raccourcis(%s)',
+		'NOM_SITE_SPIP' => 'typo(%s)',
+		'NOM' => 'typo(%s)',
+		'PARAMETRES_FORUM' => 'htmlspecialchars(%s)',
+		'PS' => 'traiter_raccourcis(%s)',
+		'SOUSTITRE' => 'typo(%s)',
+		'SURTITRE' => 'typo(%s)',
+		'TEXTE' => 'traiter_raccourcis(%s)',
+		'TITRE' => 'typo(%s)',
+		'TYPE' => 'typo(%s)',
+		'URL_ARTICLE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_BREVE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_DOCUMENT' => 'htmlspecialchars(vider_url(%s))',
+		'URL_FORUM' => 'htmlspecialchars(vider_url(%s))',
+		'URL_MOT' => 'htmlspecialchars(vider_url(%s))',
+		'URL_RUBRIQUE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_SITE_SPIP' => 'htmlspecialchars(vider_url(%s))',
+		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
+		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))'
+	);
+
+	return $traitements[$nom_champ];
+}
+
+//
+// Definition des balises
+//
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "lire_meta('nom_site')";
 	$p->type = 'php';
@@ -618,7 +660,7 @@ function balise_FORMULAIRE_RECHERCHE_dist($p) {
 function balise_FORMULAIRE_INSCRIPTION_dist($p) {
 
 	$p->code = '(lire_meta("accepter_inscriptions") != "oui") ? "" :
-		("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">")';
+		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">")';
 
 	$p->type = 'php';
 	return $p;
@@ -632,7 +674,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 	$_mail_auteur = champ_sql('email', $p);
 
 	$p->code = '!email_valide('.$_mail_auteur.') ? "" :
-		("<'.'?php include(\'inc-formulaires.php3\');
+		("<'.'?php include_local(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\');
 		formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\');
 		lang_dselect(); ?'.'>")';
@@ -648,7 +690,7 @@ function balise_FORMULAIRE_SIGNATURE_dist($p) {
 	$_id_article = champ_sql('id_article', $p);
 
 	$p->code = '!($petition = sql_petitions('.$_id_article.')) ? "" :
-		("<"."?php include(\'inc-formulaires.php3\');
+		("<"."?php include_local(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\');
 		echo formulaire_signature(".'.$_id_article.'.",
 			\'".texte_script(serialize($petition))."\');
@@ -663,7 +705,7 @@ function balise_FORMULAIRE_SITE_dist($p) {
 	$_id_rubrique = champ_sql('id_rubrique', $p);
 
 	$p->code = '(lire_meta("proposer_sites") != 2) ? "":
-		"<"."?php include(\'inc-formulaires.php3\');
+		"<"."?php include_local(\'inc-formulaires.php3\');
 		lang_select(\'".$GLOBALS[\'spip_lang\']."\');
 		formulaire_site(".'.$_id_rubrique.'.");
 		lang_dselect(); ?".">"';
