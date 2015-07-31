@@ -1189,30 +1189,28 @@ function extraire_tag($texte, $tag) {
 // ($complet demande de retourner $r)
 // http://doc.spip.org/@extraire_attribut
 function extraire_attribut($balise, $attribut, $complet = false) {
-	$value = NULL;
-	$attribut = strtolower($attribut);
-	// on ne prend que la premiere balise qui se presente
-	if (!preg_match("{<([a-z]*)([^>]*?)>}is",$balise,$regs))
-		return $value;
-	$tagname = $regs[1];
-	$balise = $regs[2];
-
-	// 3 types d'attributs : valeur sans guillemets, entre guillemets ou quote, ou autodefinis (sans valeur)
-	preg_match_all(',(([a-z]+)((\s*=\s*([^\s\'"]+))|(\s*=\s*([\'"]?)([^\\7]*?)\\7)|\s)),isS',$balise,$regs,PREG_SET_ORDER);
-	
-	foreach($regs as $reg){
-		if ($attribut==strtolower($reg[2])){
-			$value = $reg[2];
-			$att_complet = $reg[0];
-			if (count($reg)>4) // ca n'est pas une entite auto definie
-				$value = filtrer_entites(str_replace("&#39;", "'", end($reg)));
-			break;
+	if (preg_match(
+//	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\\3]*?)\\3)([^>]*>.*),isS',
+	',(.*?<(?:\s*+\w++(?:=(?:"[^"]*"|\'[^\']*\'|[^\'"]\S*))?)*?)(\s+'.$attribut.'(?:=\s*("[^"]*"|\'[^\']*\'|[^\'"]\S*))?)()([^>]*>.*),isS',
+	$balise, $r)) {
+		if ($r[3][0] == '"' || $r[3][0] == "'") {
+			$r[4] = substr($r[3], 1, -1);
+			$r[3] = $r[3][0];
+		} elseif ($r[3]) {
+			$r[4] = $r[3]; 
+			$r[3] = '';
+		} else {
+			$r[4] = trim($r[2]); 
 		}
+		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
 	}
-	if ($complet)
-		return array($value, $att_complet);
 	else
-		return $value;
+		$att = NULL;
+
+	if ($complet)
+		return array($att, $r);
+	else
+		return $att;
 }
 
 // modifier (ou inserer) un attribut html dans une balise
@@ -1228,11 +1226,11 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=
 	else
 		$insert = " $attribut='$val' ";
 
-	list($old, $att_complet) = extraire_attribut($balise, $attribut, true);
+	list($old, $r) = extraire_attribut($balise, $attribut, true);
 
 	if ($old !== NULL) {
 		// Remplacer l'ancien attribut du meme nom
-		$balise = str_replace($att_complet,$insert,$balise);
+		$balise = $r[1].$insert.$r[5];
 	}
 	else {
 		// preferer une balise " />" (comme <img />)
