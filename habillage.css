@@ -183,12 +183,10 @@
 	margin-bottom: 0em;
 }
 
-.cartouche .spip_logos {
-	margin-left: 0px;
-	padding-left: 0px;
-	margin-right: 0.8em;
+.spip_logos {
+	margin: 3px;
+	border-width: 0px;
 }
-
 
 /*
  * Habillage du plan du site

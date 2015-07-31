@@ -36,9 +36,6 @@ function calcule_fichier_logo($on) {
 }
 
 // Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
-// utilise la globale ci-dessous pour les attributs hspace & vspace
-
-tester_variable('espace_logos',3);
 
 function affiche_logos($logos, $lien, $align) {
 	static $num_survol=0;
@@ -48,11 +45,9 @@ function affiche_logos($logos, $lien, $align) {
 	if (!$arton) return $artoff;
 
 	$num_survol++;
-	$milieu = "<img src='$arton'"
+	$milieu = "<img src='$arton'\nname='image$num_survol' alt='image$num_survol'"
 		. ($align ? " align='$align' " : '') 
-		. " name='image$num_survol' border='0' "
-		. "alt='image$num_survol'"
-		. " hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
+		. " class='spip_logos' />";
 
 	if (!$artoff) return ($lien ? http_href($lien, $milieu) : $milieu);
 

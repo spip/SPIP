@@ -60,7 +60,7 @@ function decrire_logo($racine) {
 			     calculer_action_auteur ("reduire $w $h") .
 			     "&hash_id_auteur=$connect_id_auteur" .
 			     (!$contre ? '' : ("&".md5($contre))) .
-			     "'$taille border='0' alt='' />",
+			     "'$taille style='border-width: 0px' alt='$racine' />",
 			     $x, $y);
 	}
 	return '';
@@ -448,16 +448,25 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 
 	// recuperer le nom du fichier
 	if (eregi("src='([^']+)'", $img, $regs)) $logo = $regs[1];
-	if (eregi("align='([^']+)'", $img, $regs)) $align = $regs[1];
-	if (eregi("name='([^']+)'", $img, $regs)) $name = $regs[1];
-	if (eregi("hspace='([^']+)'", $img, $regs)) $espace = $regs[1];
 	if (!$logo) $logo = $img;
-	
-	// Ne pas creer de valeurs vides
-	if ($align) $align = " align='$align'";
-	if ($name) $name = " name='$name'";
-	if ($espace) $espace = " hspace='$espace' vspace='$espace'";
 
+	$attributs = '';
+
+	// encore utilise ?
+	if (eregi("name='([^']+)'", $img, $regs)) $name = $regs[1];
+	if ($name) $attributs .= " name='$name'"; 
+
+	// attributs deprecies. Transformer en CSS
+	if (eregi("hspace='([^']+)'", $img, $regs)) $espace = $regs[1];
+	if ($espace) 
+	  $attributs .= " style='margin: $espace" . "px; border-width: 0px'";
+	else 
+	  $attributs .=  " class='spip_logos'";
+	// attribut deprecie mais equivalent CSS pas clair
+	if (eregi("align='([^']+)'", $img, $regs)) $align = $regs[1];
+	if ($align)  $attributs .= " align='$align'";
+
+	$attributs .= " alt='$name'";
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
@@ -467,11 +476,11 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 				$vignette = $preview['fichier'];
 				$width = $preview['width'];
 				$height = $preview['height'];
-				return "<img src='$vignette'$name border='0'$name alt=''$espace width='$width' height='$height' class='spip_logos' />";
+				return "<img src='$vignette' width='$width' height='$height'$attributs />";
 			}
 			else if ($taille_origine = @getimagesize($logo)) {
 				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-				return "<img src='$logo'$name width='$destWidth' height='$destHeight' border='0'$align alt=''$espace class='spip_logos' />";
+				return "<img src='$logo' width='$destWidth' height='$destHeight'$attributs />";
 			}
 		}
 	}
