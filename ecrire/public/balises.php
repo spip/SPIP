@@ -569,16 +569,9 @@ function balise_LESAUTEURS_dist ($p) {
 	return $p;
 }
 
-/*function balise_TRADUCTIONS_dist($p){
-	$p->code = "recuperer_fond(
-	 'modeles/traductions',
-   array('id_article' => ".champ_sql('id_article', $p).")
- )";
-
-	#$p->interdire_scripts = true;
-	return $p;
-}*/
-
+// #MODELE
+// fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
+// http://doc.spip.org/@balise_MODELE_dist
 function balise_MODELE_dist($p){
 
  $nom = strtolower($p->nom_champ);
