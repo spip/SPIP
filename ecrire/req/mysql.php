@@ -404,7 +404,7 @@ function spip_mysql_drop_view($view, $exist='', $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_mysql_showbase
 function spip_mysql_showbase($match, $serveur='',$requeter=true)
 {
-	return spip_mysql_query("SHOW TABLES LIKE '$match'", $serveur, $requeter);
+	return spip_mysql_query("SHOW TABLES LIKE " . _q($match), $serveur, $requeter);
 }
 
 // http://doc.spip.org/@spip_mysql_repair
