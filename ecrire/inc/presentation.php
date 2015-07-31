@@ -410,7 +410,7 @@ function icone_inline($texte, $lien, $fond, $fonction="", $align="", $ajax=false
 	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
 		list($fond,$fonction) = $icone_renommer($fond,$fonction);
 
-	if ($fonction == "supprimer.gif") {
+	if ($fonction == "del") {
 		$style = 'icone36 danger';
 	} else {
 		$style = 'icone36';
@@ -507,7 +507,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 		else {
 			$retour .= "\n<div><a class='cellule-h-texte' $javascript$lien>$texte</a></div>\n";
 		}
-		if ($fonction == "supprimer.gif")
+		if ($fonction == "del")
 			$retour = "\n<div class='danger'>$retour</div>";
 	} else {
 		$retour = "\n<li><a$lien>$texte</a></li>";

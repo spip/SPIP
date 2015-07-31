@@ -123,7 +123,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	changer_typo($row['lang']);
 
 	$actions =
-	  ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.png", "edit.gif",$spip_lang_right) : "");
+	  ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.png", "edit",$spip_lang_right) : "");
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>".
@@ -183,7 +183,7 @@ function articles_documents($type, $id)
 		$res = $joindre(array(
 			'cadre' => 'relief',
 			'icone' => 'image-24.gif',
-			'fonction' => 'creer.gif',
+			'fonction' => 'new',
 			'titre' => _T('titre_joindre_document'),
 			'script' => 'articles',
 			'args' => "id_article=$id",
@@ -237,7 +237,7 @@ function boites_de_config_articles($id_article)
 	. "</b>";
 
 	return
-		cadre_depliable("forum-interne-24.gif",
+		cadre_depliable("forum-interne-24.png",
 		  $invite,
 		  true,//$visible = strstr($masque, '<!-- visible -->')
 		  $masque,
@@ -273,7 +273,7 @@ function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode,
 		. "<span class='arial1 spip_small'>$mode</span>"
 		. aide("artmodif");
 	}
-	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.png", "edit.gif", $align);
+	else return icone_inline(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.png", "edit", $align);
 }
 
 // http://doc.spip.org/@afficher_corps_articles

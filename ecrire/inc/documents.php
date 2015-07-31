@@ -287,7 +287,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		. $joindre(array(
 			'cadre' => 'relief',
 			'icone' => 'image-24.gif',
-			'fonction' => 'creer.gif',
+			'fonction' => 'new',
 			'titre' => majuscules(_T('bouton_ajouter_image')).aide("ins_img"),
 			'script' => $script,
 			'args' => "id_$type=$id",
@@ -327,7 +327,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		$ret .= $joindre(array(
 			'cadre' => _INTERFACE_DOCUMENTS ? 'relief' : 'enfonce',
 			'icone' => 'doc-24.gif',
-			'fonction' => 'creer.gif',
+			'fonction' => 'new',
 			'titre' => $bouton,
 			'script' => $script,
 			'args' => "id_$type=$id",

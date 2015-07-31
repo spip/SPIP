@@ -105,7 +105,7 @@ function legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $ty
 		}
 	}
 
-	return icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
+	return icone_horizontale($texte, $action, $supp, "del", false);
 }
 
 
@@ -225,7 +225,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 
 	$joindre = charger_fonction('joindre', 'inc');
 
-	$supprimer = icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false);
+	$supprimer = icone_horizontale($texte, $action, "vignette-24.png", "del", false);
 	if ($id<0) $supprimer = ''; // cf. ci-dessus, article pas encore cree
 
 	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"

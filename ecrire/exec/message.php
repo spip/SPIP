@@ -263,7 +263,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	    echo "<p style='color: #666666; text-align: right;' class='verdana1 spip_small'><b>"._T('avis_destinataire_obligatoire')."</b></p>";
 	  } else {
 	    echo "\n<div class='centered'>";
-	    echo icone_inline(_T('icone_envoyer_message'), redirige_action_auteur('editer_message', "$id_message/publie", "message","id_message=$id_message"), "messagerie-24.png", "creer.gif");
+	    echo icone_inline(_T('icone_envoyer_message'), redirige_action_auteur('editer_message', "$id_message/publie", "message","id_message=$id_message"), "messagerie-24.png", "new");
 	    echo "</div>";
 	  }
 	}
@@ -282,19 +282,19 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	// bouton de suppression
 
 	if ($aut AND ($statut == 'redac' OR $type == 'pb') OR $aff) {
-	  echo icone_inline(_T('icone_supprimer_message'), redirige_action_auteur("editer_message","-$id_message", 'messagerie'), "messagerie-24.png", "supprimer.gif", 'left');
+	  echo icone_inline(_T('icone_supprimer_message'), redirige_action_auteur("editer_message","-$id_message", 'messagerie'), "messagerie-24.png", "del", 'left');
 	}
 
 	// bouton retrait de la discussion
 
 	if ($statut == 'publie' AND $type == 'normal') {
-	  echo icone_inline(_T('icone_arret_discussion'), redirige_action_auteur("editer_message","$id_message/-$connect_id_auteur", 'messagerie', "id_message=$id_message"), "messagerie-24.png", "supprimer.gif", 'left');
+	  echo icone_inline(_T('icone_arret_discussion'), redirige_action_auteur("editer_message","$id_message/-$connect_id_auteur", 'messagerie', "id_message=$id_message"), "messagerie-24.png", "del", 'left');
 	}
 
 	// bouton modifier ce message
 
 	if ($aut OR $aff) {
-	  echo icone_inline(_T('icone_modifier_message'), (generer_url_ecrire("message_edit","id_message=$id_message")), "messagerie-24.png", "edit.gif", 'right');
+	  echo icone_inline(_T('icone_modifier_message'), (generer_url_ecrire("message_edit","id_message=$id_message")), "messagerie-24.png", "edit", 'right');
 	}
 	echo "</td></tr></table>";
 }

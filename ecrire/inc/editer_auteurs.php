@@ -67,7 +67,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$reponse .="<div style='width: 200px;'>"
-			. icone_horizontale($clic, $legende, "auteur-24.png", "creer.gif", false)
+			. icone_horizontale($clic, $legende, "auteur-24.png", "new", false)
 			. "</div> ";
 
 			$bouton_creer_auteur = false;
@@ -95,7 +95,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 				generer_url_ecrire('articles', "id_article=$id", '&'));
 
 			$clic = "<span class='verdana1'><b>$clic</b></span>";
-			$res = icone_horizontale_display($clic, $legende, "auteur-24.png", "creer.gif", false);
+			$res = icone_horizontale_display($clic, $legende, "auteur-24.png", "new", false);
 		}
 
 		$res = "<div style='float:$spip_lang_right; width:280px;position:relative;display:inline;'>"

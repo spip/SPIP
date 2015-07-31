@@ -32,11 +32,11 @@ function exec_articles_page_dist()
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 
 	if (sql_countsel('spip_rubriques')) {
-		echo bloc_des_raccourcis(icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.png", "creer.gif", false));
+		echo bloc_des_raccourcis(icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","new=oui"), "article-24.png", "new", false));
 	} else {
 		if (autoriser('creerrubriquedans', 'rubrique')) {
 			echo _T('texte_creer_rubrique');
-			echo	bloc_des_raccourcis(icone_horizontale (_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "rubrique-24.png", "creer.gif",false));
+			echo	bloc_des_raccourcis(icone_horizontale (_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "rubrique-24.png", "new",false));
 		}
 	}
 

@@ -111,7 +111,7 @@ $spip_lang_right;
 	if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."...";
 
 	$actions =
-	 ($flag_editable ? icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.png", "edit.gif",$spip_lang_right) : "");
+	 ($flag_editable ? icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.png", "edit",$spip_lang_right) : "");
 
 	$haut =
 		"<div class='bandeau_actions'>$actions</div>".
@@ -339,7 +339,7 @@ function afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" . $form;
 	$form = redirige_action_post("editer_site", $id_syndic, 'sites', $form, " class='submit_plongeur'");
 
-	if ($id_rubrique == 0) $logo = "racine-24.gif";
+	if ($id_rubrique == 0) $logo = "racine-24.png";
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.png";
 	else $logo = "rubrique-24.png";
 

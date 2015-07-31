@@ -96,7 +96,7 @@ function joindre_formulaire(&$v) {
 	// Lien document distant, jamais en mode image
 	if ($distant) {
 		$distant = "<br />\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
-			"\n\t<img src='". chemin_image('attachment.gif') .
+			"\n\t<img src='". chemin_image('attachment-16.png') .
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
 			"<label for='url'>" .
 			_T('info_referencer_doc_distant') .

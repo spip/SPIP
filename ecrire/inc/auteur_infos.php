@@ -159,7 +159,7 @@ function legender_auteur_voir($auteur) {
 
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui");
 		$h = "<a\nhref='$h'>$clic</a>";
-		$res .= icone_inline($clic, $h, "auteur-24.gif", "edit.gif", $spip_lang_right);
+		$res .= icone_inline($clic, $h, "auteur-24.png", "edit", $spip_lang_right);
 
 		$res .= http_script("
 		var intitule_bouton = "._q($retour).";

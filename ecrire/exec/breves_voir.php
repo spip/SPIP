@@ -101,7 +101,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	echo $meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
 	/* raccourcis ont disparu */
-	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.png","creer.gif", 0));
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.png","new", 0));
 
 	$actions = $flag_editable
 		? icone_inline(
@@ -110,7 +110,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 				: _T('texte_travail_article', $modif),
 			generer_url_ecrire("breves_edit","id_breve=$id_breve&retour=nav"),
 			!$modif ? "breve-24.png" : "warning-24.png",
-			!$modif ? "edit.gif" : '',
+			!$modif ? "edit" : '',
 			$GLOBALS['spip_lang_right']
 			)
 		: "";

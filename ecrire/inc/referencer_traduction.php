@@ -93,7 +93,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	}
 
 	$form .= "<td>"
-	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
+	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "new", false)
 	. "</td>";
 
 	if ($flag AND $liste) {
@@ -103,7 +103,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 		. "<td style='width: 10px'> &nbsp; </td>"
 		. "<td>"
 		  // la 1ere occurrence de clic ne sert pas en Ajax
-		. icone_horizontale($clic, ajax_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles', "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif", false)
+		. icone_horizontale($clic, ajax_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles', "id_article=$id_article",array($clic)), "traductions-24.gif", "del", false)
 		. "</td>\n";
 	}
 
