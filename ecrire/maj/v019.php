@@ -84,6 +84,12 @@ $GLOBALS['maj'][1935] = array(
 
 // http://doc.spip.org/@convertir_un_champ_blob_en_text
 function convertir_un_champ_blob_en_text($table,$champ,$type){
+	// precaution : definir le charset par defaut de la table, car c'est lui qui prevaut
+	// et il faut qu'il corresponde au charset de la connexion qui est celui
+	// dans lequel on a ecrit le champ en blob
+	if ($charset = sql_getfetsel('@@character_set_connection')){
+		sql_alter("TABLE $table DEFAULT CHARACTER SET ".$charset);
+	}
 	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
 	if ($row = sql_fetch($res)){
 		if (strtolower($row['Type'])!=strtolower($type)) {
