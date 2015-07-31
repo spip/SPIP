@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP non ten acceso &aacute; lista de bases de datos accesibles',
 'config_info_base_sup' => 'Se ten outras bases de datos para consultas a trav&eacute;s de SPIP, co seu servidor SQL ou con outro, o formulario seguinte permitiralle declaralas. Se deixa certos campos baleiros, os identificadores de conexi&oacute;n &aacute; base de datos principal ser&aacute;n os utilizados.',
 'config_info_base_sup_disponibles' => 'Bases suplementarias xa consultables-interrogables:',
+'config_info_enregistree' => 'A nova configuraci&oacute;n foi gardada',
 'config_info_logos' => 'Cada elemento do web pode ter un logo, as&iacute; como un &laquo;&nbsp;logo de substitucion&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utilizar os logos',
 'config_info_logos_utiliser_non' => 'Non utilizar os logos',

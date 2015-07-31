@@ -27,11 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_deplacement_rubrique' => 'Attenzione! Questa rubrica contiene @contient_breves@ breve/i: se vuoi spostarla, spunta questa casella per confermare.',
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
 'avis_erreur_connexion_mysql' => 'Errore di connessione SQL',
-'avis_erreur_version_archive' => '<MODIF><b>Attenzione! Il file @archive@ corrisponde a
-una versione di SPIP diversa da quella installata.</b> Potranno sorgere dei problemi:
+'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
+una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
-Non confermare questa richiesta d\'importazione!
-<p />Per ulteriori informazioni, vedere <a href="@spipnet@">
+Non confermare questa richiesta d\'importazione.<p />Per ulteriori
+ informazioni, vedere <a href="@spipnet@">
 la documentazione di SPIP</a>.',
 'avis_espace_interdit' => '<b>Area vietata</b><div>SPIP &egrave; gi&agrave; installato.</div>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
@@ -126,6 +126,7 @@ cancellarli successivamente).',
 'config_erreur_base_sup' => 'SPIP non ha accesso all\'elenco dei database accessibili ',
 'config_info_base_sup' => 'Se si hanno altri database da interrogare attraverso SPIP, con il proprio server SQL o altro, il form sottostante permette di dichiararli. Se si lasciano alcuni campi vuoti verranno utilizzati i dati della connessione al database principale.',
 'config_info_base_sup_disponibles' => 'Database supplementari gi&agrave; dichiarati:',
+'config_info_enregistree' => 'La nuova configurazione &egrave; stata registrata',
 'config_info_logos' => 'Ogni elemento del sito pu&ograve; avere un logo, come pure un &laquo;&nbsp;logo per il roll-over&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utilizza i logo',
 'config_info_logos_utiliser_non' => 'Non utilizzare i logo',
@@ -200,7 +201,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 
 // I
 'ical_info1' => 'Questa pagina elenca diversi metodi per rimanere in contatto con le varie attivit&agrave; del sito.',
-'ical_info2' => '<MODIF>Per ulteriori informazioni su queste tecniche, consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
+'ical_info2' => 'Per ulteriori informazioni su tutte queste tecniche, non esitate a consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
 'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo &egrave; una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: &egrave; un\'area riservata, mediante identificativo personale, che &egrave; possibile modificare in qualsiasi momento rinnovando la password personale.',
 'ical_lien_rss_breves' => 'Syndication delle brevi del sito',
 'ical_methode_http' => 'Download',
@@ -805,6 +806,7 @@ Le traduzioni sono associate all\'originale,
 'logo_article' => 'LOGO DELL\'ARTICOLO',
 'logo_auteur' => 'LOGO DELL\'AUTORE',
 'logo_breve' => 'LOGO DELLA BREVE',
+'logo_groupe' => 'LOGO DI QUESTO GRUPPO',
 'logo_mot_cle' => 'LOGO DELLA PAROLA CHIAVE',
 'logo_rubrique' => 'LOGO DELLA RUBRICA',
 'logo_site' => 'LOGO DI QUESTO SITO ',
@@ -825,10 +827,10 @@ Le traduzioni sono associate all\'originale,
 'onglet_declarer_une_autre_base' => 'Dichiarare un altro database',
 'onglet_discuter' => 'Discuti',
 'onglet_documents' => 'Documenti',
-'onglet_interactivite' => '<NEW>Interattivit&agrave;',
-'onglet_proprietes' => '<NEW>Propriet&agrave;',
+'onglet_interactivite' => 'Interattivit&agrave;',
+'onglet_proprietes' => 'Propriet&agrave;',
 'onglet_repartition_actuelle' => 'attualmente',
-'onglet_sous_rubriques' => '<NEW>Sotto-rubriche',
+'onglet_sous_rubriques' => 'Sotto-rubriche',
 'ortho_ajouter_ce_mot' => 'Aggiungere questa parola al dizionario',
 'ortho_aucune_suggestion' => 'Nessun suggerimento per questa parola.',
 'ortho_avis_privacy' => 'SPIP ha un controllo ortografico integrato. Prima di attivare questa funzionalit&agrave;, leggere attentamente quanto segue:',
@@ -897,6 +899,7 @@ Le traduzioni sono associate all\'originale,
 'repertoire_plugins' => 'Cartella:',
 
 // S
+'sans_heure' => 'ora mancante',
 'sauvegarde_fusionner' => 'Unire il database attuale con la copia di backup',
 'sauvegarde_fusionner_depublier' => 'Depubblicare gli oggetti fusi',
 'sauvegarde_url_origine' => 'Eventualmente, URL del sito di origine:',
@@ -918,16 +921,15 @@ Le traduzioni sono associate all\'originale,
 'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.',
 'taille_cache_vide' => 'La cache &egrave; vuota.',
 'taille_repertoire_cache' => 'Dimensioni della cartella di cache',
-'text_article_propose_publication' => '<MODIF>Articolo proposto per la pubblicazione. Non esitare ad esprimere il tuo punto di vista nel forum che trovi a fondo pagina.',
-'text_article_propose_publication_forum' => '<NEW>Non esitare ad esprimere il tuo punto di vista nel forum di questo articolo (a fondo pagina).',
+'text_article_propose_publication' => 'Articolo proposto per la pubblicazione. ',
+'text_article_propose_publication_forum' => 'Non esitare ad esprimere il tuo punto di vista nel forum di questo articolo (a fondo pagina).',
 'texte_acces_ldap_anonyme_1' => 'Alcuni server LDAP non consentono accessi anonimi. In questo caso si deve specificare un identificatore d\'accesso iniziale al fine di poter poi ricercare delle informazioni nell\'elenco. Nella maggior parte dei casi tuttavia, i campi seguenti potranno essere lasciati vuoti.',
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login delle redattrici e delle amministratrici. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
 'texte_admin_effacer_stats' => 'Questo comando cancella tutti i dati collegati alle statistiche delle visite al sito, comprese la popolarit&agrave; degli articoli.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
 Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documenti utilizzati negli articoli e nelle rubriche.',
-'texte_admin_tech_02' => '<MODIF>Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
-In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
+'texte_admin_tech_02' => 'Attenzione: questo backup potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.Soprattutto, &egrave; sbagliato &laquo;&nbsp;svuotare il database&nbsp;&raquo; pensando di ripristinare questo backup dopo aver aggiornato la versione di SPIP...
 Per maggiori informazioni consulta <a href="@spipnet@">la documentazione di SPIP</a>.',
 'texte_admin_tech_03' => 'Puoi scegliere di salvare il file in forma compressa, al fine di ridurre
 i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
@@ -959,10 +961,10 @@ numero di visite quotidiane che ricever&agrave; rimanendo costante il ritmo attu
 consultazione) e il numero di visite ricevute dall\'inizio,
 sono visualizzati nel commento che appare
 quando si passa con il mouse sopra al titolo.',
-'texte_compacter_avertissement' => '<NEW>Fare attenzione a non attivare queste opzioni durante la fase di sviluppo del sito: gli elementi compressi sono completamente illeggibili.',
-'texte_compacter_script_css' => '<NEW>SPIP pu&ograve; comprimere gli script javascript e i fogli di stile CSS, per registrarli nei file statici; ci&ograve; accelera la visualizzazione del sito.',
+'texte_compacter_avertissement' => 'Fare attenzione a non attivare queste opzioni durante la fase di sviluppo del sito: gli elementi compressi sono completamente illeggibili.',
+'texte_compacter_script_css' => 'SPIP pu&ograve; comprimere gli script javascript e i fogli di stile CSS, per registrarli nei file statici; ci&ograve; accelera la visualizzazione del sito.',
 'texte_compresse_ou_non' => '(pu&ograve; essere compresso o meno)',
-'texte_compresseur_page' => '<NEW>SPIP pu&ograve; comprimere automaticamente tutte le pagine che invia ai
+'texte_compresseur_page' => 'SPIP pu&ograve; comprimere automaticamente tutte le pagine che invia ai
 visitatori del sito. Questa impostazione permette di ottimizzare la banda passante (il
 sito &egrave; pi&ugrave; rapido in una connessione a bassa velocit&agrave;), ma
 richiede una maggiore potenza del server.',
@@ -970,7 +972,7 @@ richiede una maggiore potenza del server.',
 'texte_compte_elements' => '@count@ elementi',
 'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave,
 indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo o che un gruppo &egrave; importante, ecc.?',
-'texte_conflit_edition_correction' => '<NEW>Controllare qui sotto le differenze tra le due versioni del testo; &egrave; possibile anche copiare le modifiche e poi ricominciare.',
+'texte_conflit_edition_correction' => 'Controllare qui sotto le differenze tra le due versioni del testo; &egrave; possibile anche copiare le modifiche e poi ricominciare.',
 'texte_connexion_mysql' => 'Consulta le informazioni fornite dal tuo hoster: devi poterci trovare, i codici di collegamento alla base di dati.',
 'texte_contenu_article' => 'Contenuto dell\'articolo in poche parole (<em>abstract</em>)',
 'texte_contenu_articles' => 'A seconda del modello di presentazione adottato per il sito, puoi decidere
@@ -989,11 +991,11 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_effacer_base' => 'Cancella il database SPIP',
 'texte_effacer_donnees_indexation' => 'Cancella i dati d\'indicizzazione',
 'texte_effacer_statistiques' => 'Cancellare le statistiche',
-'texte_en_cours_validation' => '<MODIF>Gli articoli e le brevi elencati in questo riquadro sono proposti per la pubblicazione. Non esitare ad esprimere il tuo punto di vista utilizzando i forum che seguono ogni articolo o breve.',
-'texte_en_cours_validation_forum' => '<NEW>Non esitare ad esprimere il tuo punto di vista utilizzando i forum ad essi dedicati.',
+'texte_en_cours_validation' => 'Gli articoli e le brevi elencati qui sotto sono proposti per la pubblicazione. ',
+'texte_en_cours_validation_forum' => 'Non esitare ad esprimere il tuo punto di vista utilizzando i forum ad essi dedicati.',
 'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le &laquo;scorciatoie tipografiche&raquo;',
-'texte_fichier_authent' => '<MODIF><b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
-e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
+'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
+e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p />
  Questi file possono servire a limitare l\'accesso alle autrici
 e alle amministratrici in particolari aree del sito
 (per esempio, per un programma esterno di statistiche).<p />
@@ -1018,7 +1020,7 @@ o scegliere di bloccare i link di ogni singolo sito.',
 'texte_login_precaution' => 'Attenzione! Questo &egrave; l\'ID con il quale sei attualmente collegato.
 Utilizza questo modulo con cognizione di causa...',
 'texte_message_edit' => 'Attenzione: questo messaggio pu&ograve; essere modificato da tutte le amministratrici del sito, ed &egrave; visibile da tutte le redattrici. Utilizza gli annunci solo per esporre degli eventi importanti per la vita del sito.',
-'texte_messagerie_agenda' => '<NEW>La messageria permette ai redattori del sito di comunicare tra loro in maniera diretta nell\'area riservata. Essa &egrave; associata a una agenda.',
+'texte_messagerie_agenda' => 'La messageria permette alle redattrici del sito di comunicare tra loro in maniera diretta nell\'area riservata. Essa &egrave; associata a una agenda.',
 'texte_messages_publics' => 'Messaggi pubblici dell\'articolo:',
 'texte_mise_a_niveau_base_1' => 'Hai aggiornato i file SPIP.
 Adesso &egrave; necessario aggiornare il database.',
@@ -1057,7 +1059,7 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_recuperer_base' => 'Ripara il database',
 'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
 'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br />&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
-'texte_referencement_automatique_verifier' => '<NEW>Controllare le informazioni fornite da <tt>@url@</tt> prima di registrare.',
+'texte_referencement_automatique_verifier' => 'Controllare le informazioni fornite da <tt>@url@</tt> prima di registrare.',
 'texte_requetes_echouent' => '<b>Quando alcune query SQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
 che sia per colpa del database stesso.</b><p />
@@ -1087,11 +1089,11 @@ Attenzione: <b>le modifiche o la perdita eventuale di dati sono irreversibili.</
 'texte_suppression_fichiers' => 'Utilizza questo commando per cancellare tutti i file presenti nella
 cache di SPIP. Ci&ograve; permette ad esempio di forzare la rigenerazione di tutte le pagine se hai fatto delle importanti modifiche di grafica o di struttura del sito.',
 'texte_sur_titre' => 'Occhiello',
-'texte_syndication' => '<MODIF>Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
+'texte_syndication' => 'Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
 la lista delle novit&agrave;. A tal fine &egrave; necessario attivare la syndication.
 
-<blockquote><i>Alcuni webmaster disattivano questa funzionalit&agrave;; 
-in questo caso, non potrai utilizzare la content syndication
+<blockquote><i>Alcuni provider disattivano questa funzionalit&agrave;; 
+in questo caso, non potrai utilizzare la syndication del contenuto
 a partire dal tuo sito.</i></blockquote>',
 'texte_table_ok' => ': questa tabella &egrave; OK.',
 'texte_tables_indexation_vides' => 'Le tabelle d\'indicizzazione del motore sono vuote.',
@@ -1108,16 +1110,16 @@ di recente al fine di evitare modifiche simultanee.
 Questa opzione &egrave; disattivata di default
 per evitare di generare messaggi d\'avvertimento intempestivi.',
 'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
-'texte_type_urls' => '<NEW>&Egrave; possibile scegliere qui sotto il modo di elaborazione dell\'indirizzo delle pagine.',
-'texte_type_urls_attention' => '<NEW>Attenzione: questa impostazione funziona solamente se il file @htaccess@ &egrave; installato correttamente alla radice del sito.',
+'texte_type_urls' => '&Egrave; possibile scegliere qui sotto il modo di elaborazione dell\'indirizzo delle pagine.',
+'texte_type_urls_attention' => 'Attenzione: questa impostazione funziona solamente se il file @htaccess@ &egrave; installato correttamente alla radice del sito.',
 'texte_unpack' => 'scarica l\'ultima versione',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Quando utilizzi il motore di ricerca integrato di SPIP,
+'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
 puoi effettuare le ricerche sui siti e
 gli articoli in syndication
 in due modalit&agrave; diverse. <br />- La pi&ugrave; semplice
 consiste nel ricercare solo nei titoli e nelle descrizioni degli articoli.<br />-
 Un altro metodo, molto pi&ugrave; potente, consente
-a SPIP di ricercare anche nel testo degli articoli in syndication.
+a SPIP di cercare anche nel testo degli articoli in syndication.
 Se inserisci un sito nel repertorio, SPIP effettuer&agrave; la ricerca anche nel testo del sito stesso.',
 'texte_utilisation_moteur_syndiques_2' => 'Questo metodo obbliga SPIP a visitare
 regolarmente i siti in repertorio;
@@ -1137,16 +1139,16 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_cadre_interieur_rubrique' => 'All\'interno della rubrica',
 'titre_cadre_numero_auteur' => 'AUTRICE NUMERO',
 'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
-'titre_compacter_script_css' => '<NEW>Compressione degli script e dei CSS',
-'titre_compresser_flux_http' => '<NEW>Compressione del flusso HTTP',
-'titre_config_contenu_notifications' => '<NEW>Notifiche',
-'titre_config_contenu_prive' => '<NEW>Nell\'area riservata',
-'titre_config_contenu_public' => '<NEW>Sul sito pubblico',
+'titre_compacter_script_css' => 'Compressione degli script e dei CSS',
+'titre_compresser_flux_http' => 'Compressione del flusso HTTP',
+'titre_config_contenu_notifications' => 'Notifiche',
+'titre_config_contenu_prive' => 'Nell\'area riservata',
+'titre_config_contenu_public' => 'Sul sito pubblico',
 'titre_config_fonctions' => 'Configurazione del sito',
-'titre_config_forums_prive' => '<NEW>Forum dell\'area riservata',
+'titre_config_forums_prive' => 'Forum dell\'area riservata',
 'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
 'titre_configuration' => 'Configurazione del sito',
-'titre_conflit_edition' => '<NEW>Conflitto all\'atto dell\'edizione',
+'titre_conflit_edition' => 'Conflitto all\'atto dell\'edizione',
 'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimi articoli in syndication',
 'titre_documents_joints' => 'Documenti allegati',
@@ -1159,7 +1161,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_langue_rubrique' => 'LINGUA DELLA RUBRICA',
 'titre_langue_trad_article' => 'LINGUA E TRADUZIONI DELL\'ARTICOLO',
 'titre_les_articles' => 'GLI ARTICOLI',
-'titre_messagerie_agenda' => '<NEW>Messagistica e agenda',
+'titre_messagerie_agenda' => 'Messagistica e agenda',
 'titre_mots_cles_dans_forum' => 'Parole chiave nel forum del sito pubblico',
 'titre_mots_tous' => 'Le parole chiave',
 'titre_naviguer_dans_le_site' => 'Navigare nel sito...',
@@ -1191,7 +1193,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_page_recherche' => 'Risultati della ricerca @recherche@',
 'titre_page_sites_tous' => 'I siti repertoriati',
 'titre_page_statistiques' => 'Statistiche per rubrica',
-'titre_page_statistiques_messages_forum' => '<NEW>Messaggi dei forum',
+'titre_page_statistiques_messages_forum' => 'Messaggi dei forum',
 'titre_page_statistiques_referers' => 'Statistiche (link al tuo sito)',
 'titre_page_statistiques_signatures_jour' => 'Numero di firme al giorno',
 'titre_page_statistiques_signatures_mois' => 'Numero di firme al mese',
@@ -1209,7 +1211,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_sites_tous' => 'I siti repertoriati',
 'titre_suivi_petition' => 'Monitoraggio delle petizioni',
 'titre_syndication' => 'Syndication di siti',
-'titre_type_urls' => '<NEW>Tipo di indirizzi URL',
+'titre_type_urls' => 'Tipo di indirizzi URL',
 'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Tutta la cartella @upload@',
 'trad_article_inexistant' => 'Non esiste un articolo con questo numero.',
@@ -1223,8 +1225,8 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'upload_fichier_zip' => 'File ZIP',
 'upload_fichier_zip_texte' => 'Il file proposto &egrave; un file ZIP.',
 'upload_fichier_zip_texte2' => 'Questo file pu&ograve; essere:',
-'upload_info_mode_document' => '<NEW>Mettere questa immagine nel portfolio',
-'upload_info_mode_image' => '<NEW>Eliminare questa immagine dal portfolio',
+'upload_info_mode_document' => 'Mettere questa immagine nel portfolio',
+'upload_info_mode_image' => 'Eliminare questa immagine dal portfolio',
 'upload_limit' => 'Questo file &egrave; troppo grande per il server; la dimensione massima consentita per gli <i>upload</i> &egrave; di @max@.',
 'upload_zip_conserver' => 'Conserva l\'archivio al termine dell\'estrazione',
 'upload_zip_decompacter' => 'decompresso e ogni elemento installato nel sito. I file che saranno installati nel sito sono:',

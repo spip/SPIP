@@ -114,6 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP no tiene acceso a la lista de bases accesibles',
 'config_info_base_sup' => 'Si dispones de otras bases de datos a consultar mediante SPIP, con su servidor SQL o con otro, el formulario siguiente permite declararlas. Si dejas vac&iacute;os ciertos campos, se usar&aacute;n los identificadores de la conexi&oacute;n a la base principal.',
 'config_info_base_sup_disponibles' => 'Bases de datos suplementarias consultables:',
+'config_info_enregistree' => 'La nueva configuraci&oacute;n fue guardada',
 'config_info_logos' => 'Cada elemento del sitio puede tener un logo, as&iacute; como un &laquo;&nbsp;logo de paso del rat&oacute;n&nbsp;&raquo;',
 'config_info_logos_utiliser' => 'Utilizar los logos',
 'config_info_logos_utiliser_non' => 'No utilizar los logos',
@@ -250,7 +251,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrateur_1' => 'Administrador',
 'info_administrateur_2' => 'del sitio (<i>a utilizar con precauci&oacute;n</i>)',
 'info_administrateur_site_01' => 'Si tienes derechos de administraci&oacute;n, se ruega',
-'info_administrateur_site_02' => 'Cliquea en este enlace',
+'info_administrateur_site_02' => 'presiona y visita este enlace',
 'info_administrateurs' => 'Administradores',
 'info_administrer_rubrique' => 'Puedes administrar esta secci&oacute;n',
 'info_adresse' => 'a la direcci&oacute;n:',
@@ -496,8 +497,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_preview_texte' => 'Es posible previsualizar el sitio como si todos los art&iacute;culos y las breves (que tengan al menos el estado &laquo;&nbsp;propuesto&nbsp;&raquo;) estuviesen publicados. Esta posibilidad debe estar disponible para &iquest;&nbsp;los administradores solamente, todos los redactores, o nadie&nbsp;?',
 'info_principaux_correspondants' => 'Tus principales corresponsales',
 'info_procedez_par_etape' => 'proceder etapa por etapa',
-'info_procedure_maj_version' => 'debe ser realizada una actulizaci&amp;oacute;n para adaptar
- la base de datos a esta nueva versi&oacute;n de SPIP.',
+'info_procedure_maj_version' => 'Se debe ejecutar el proceso de actualizaci&oacute;n de la base de datos a esta nueva versi&oacute;n de SPIP.',
 'info_proxy_ok' => 'Test del proxy logrado.',
 'info_ps' => 'P.-S.',
 'info_publier' => 'publicar',
@@ -896,7 +896,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'texte_article_virtuel_reference' => '<b>Art&iacute;culo virtual</b> O sea un art&iacute;culo referenciado en tu sitio pero redirigido hacia otra URL. Para suprimir la redirecci&oacute;n, borra la URL .',
 'texte_aucun_resultat_auteur' => 'Ning&uacute;n resultado por "@cherche_auteur@"',
 'texte_auteur_messagerie' => 'Este sitio puede indicarte permanentemente la lista de personas conectadas, lo que permite intercambiar mensajes en directo. Adem&aacute;s, puedes decidir de no aparecer en la lista (est&aacute;s &laquo;invisible&raquo; para las dem&aacute;s personas).',
-'texte_auteur_messagerie_1' => 'En este sitio, SPIP permite intercambiar mensajes y realizar foros privados entre los participantes . Puedes participar o no en estos intercambios.',
+'texte_auteur_messagerie_1' => 'En este sitio, SPIP permite intercambiar mensajes y realizar foros privados entre los participantes. Puedes participar o no en estos intercambios.',
 'texte_auteurs' => 'LOS AUTORES Y AUTORAS',
 'texte_breves' => 'Las breves son notas cortas y simples que permiten poner r&aacute;pidamente en l&iacute;nea informaciones concisas, por ejemplo para manejar rese&ntilde;as de prensa, un calendario de eventos...',
 'texte_choix_base_1' => 'Elegir la base',
@@ -1003,7 +1003,7 @@ Si el problema persiste, contacta a tu hospedaje.<p />',
 Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventuales son irreversibles.</b>',
 'texte_sauvegarde' => 'Crear una copia de respaldo de la base',
 'texte_sauvegarde_base' => 'Crear una copia de respaldo de la base',
-'texte_sauvegarde_compressee' => 'La copia de respaldo ser&aacute; realizada en un archivo no comprimido @fichier@.',
+'texte_sauvegarde_compressee' => 'La copia de respaldo ser&aacute; guardada en un archivo no comprimido @fichier@.',
 'texte_selection_langue_principale' => 'A continuaci&oacute;n puedes seleccionar el &laquo;idioma principal&raquo; del sitio. Esta selecci&oacute;n no obliga - &iexcl;afortunadamente! - a escribir los art&iacute;culos en el idioma elegido, pero permite determinar:
 <ul><li> el formato predeterminado de las fechas en el sitio p&uacute;blico;</li>
 <li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
@@ -1157,7 +1157,7 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br />- Un segundo m
 'utf8_convert_erreur_orig' => 'Error: el juego de caracteres no est&aacute; soportado.',
 'utf8_convert_termine' => '&iexcl;Se termin&oacute;!',
 'utf8_convert_timeout' => '<b>Importante:</b> en caso de <i>timeout</i> del servidor, vuelve a cargar la p&aacute;gina hasta que indique &laquo;terminado&raquo;.',
-'utf8_convert_verifier' => 'Ahora debes ir a vaciar la cache y verificar que todo funciona bien en las p&aacute;ginas p&uacute;blicas del sitio. En caso de grabes problemas, un respaldo de los datos fue realizada (al formato SQL) en la carpeta @rep@.',
+'utf8_convert_verifier' => 'Ahora debes ir a vaciar la cache y verificar que todo funciona bien en las p&aacute;ginas p&uacute;blicas del sitio. En caso de graves problemas, un respaldo de los datos fue realizado (al formato SQL) en la carpeta @rep@.',
 'utf8_convertir_votre_site' => 'Convertir tu sitio en utf-8',
 
 // V

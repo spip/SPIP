@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_erreur_base_sup' => 'SPIP does not have access to the available databases',
 'config_info_base_sup' => 'If you need to query other databases using SPIP, whether on the same SQL server or elsewhere, use the form below to declare them. If you leave some fields empty, then the connection details to the main database will be used.',
 'config_info_base_sup_disponibles' => 'Additional databases to which queries may be sent:',
+'config_info_enregistree' => 'The new configuration has been saved',
 'config_info_logos' => 'Each element of the site can have its logo and also a "mouseover" logo',
 'config_info_logos_utiliser' => 'Use logos',
 'config_info_logos_utiliser_non' => 'Do not use logos',
