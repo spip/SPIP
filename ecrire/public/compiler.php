@@ -277,6 +277,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	// Fin de parties
 	if ($boucle->mode_partie) $corps .= "\n		}\n";
 
+	$sql_args = '$result, ' . _q($boucle->sql_serveur);
+
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
 		if (!isset($r[2]) OR (!$r[2])) {
@@ -295,10 +297,9 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	$SP++;
 
 	// RESULTATS
-	while ($Pile[$SP] = @sql_fetch($result,"' .
-		  $boucle->sql_serveur .
-		  '")) {' . 
-		  "\n$corps\n	}\n" .
+	while ($Pile[$SP] = @sql_fetch(' .
+		  $sql_args .
+		  ")) {\n$corps\n	}\n" .
 		  $fin ;
 	}
 
@@ -309,23 +310,23 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		else $count = 'count(*)';
 		$boucles[$id_boucle]->select[]= $count; 
 	}
-	$sql_args = '$result, ' . _q($boucle->sql_serveur);
 
-	if ($boucle->numrows) {
+	if ($boucle->numrows OR $boucle_mode_partie) {
 		if ($count == 'count(*)')
 			$count = "array_shift(sql_fetch($sql_args))";
 		else $count = "sql_count($sql_args)";
-		$count = "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);";
+		$count = !$boucle->mode_partie
+		  ? "\n\t\$Numrows['$id_boucle']['total'] = @intval($count);"
+		  : calculer_parties($boucles, $id_boucle, $count);
 	} else $count = '';
 	
-	return (!$boucle->mode_partie ? $count : calculer_parties($boucles, $id_boucle)) .
+	return  $count .
 		(!$flag_cpt  ? "" :
-			"\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
+			"\n\t\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
 		. '
-	$t0 = "";'
-		.
+	$t0 = "";' .
 		$corps .
-		"\n	@sql_free($sql_args);";
+		"\n\t@sql_free($sql_args);";
 }
 
 
@@ -422,11 +423,10 @@ function calculer_order(&$boucle)
 }
 
 //
-// fonction traitant les criteres {1,n} (analyses dans inc-criteres)
+// Code specifique aux criteres {1,n} {n/m} etc
 //
-## a deplacer dans inc-criteres ??
 // http://doc.spip.org/@calculer_parties
-function calculer_parties($boucles, $id_boucle) {
+function calculer_parties($boucles, $id_boucle, $count) {
 
 	$boucle = &$boucles[$id_boucle];
 	$partie = $boucle->partie;
@@ -439,10 +439,7 @@ function calculer_parties($boucles, $id_boucle) {
 	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
 
 	// nombre total avant partition
-	$retour = "\n\n	// Partition\n	" .
-		'$nombre_boucle = @sql_count($result,"' .
-		$boucle->sql_serveur .
-		'");';
+	$retour = "\n\n	// PARTITION\n\t" . '$nombre_boucle = @' . $count .';';
 
 	preg_match(",([+-/p])([+-/])?,", $mode_partie, $regs);
 	list(,$op1,$op2) = $regs;
