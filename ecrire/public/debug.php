@@ -770,7 +770,7 @@ function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 	$tt += $dt;
 	$nb++;
 
-	$q = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',$query);
+	$q = preg_replace('/([a-z)`])\s+([A-Z])/', '$1<br />$2',htmlentities($query));
 	$e =  sql_explain($query, $serveur);
 	$r = str_replace('Resource id ','',(is_object($result)?get_class($result):$result));
 	$tableau_des_temps[] = array($dt, $nb, $boucle, $q, $e, $r);
