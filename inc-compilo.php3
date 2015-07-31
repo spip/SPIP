@@ -129,9 +129,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 		  "] = 1; // invalideurs\n";
 
 	if ($boucle->doublons)
-		$corps .= "\n			\$doublons[".$boucle->doublons."] .= ','. " .
+		$corps .= "		\$doublons[".$boucle->doublons."] .= ','. " .
 		index_pile($id_boucle, $primary, $boucles)
-		. "; // doublons";
+		. "; // doublons\n";
 
 
 	if (count($boucle->separateur))
