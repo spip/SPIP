@@ -1,64 +1,59 @@
-<HTML lang="#LANG">
-<HEAD>
-<TITLE><BOUCLE0(AUTEURS){id_auteur}>#NOM</BOUCLE0>Pas d'auteur<//B0></TITLE>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="#LANG">
+<head>
+<title><BOUCLE0(AUTEURS){id_auteur}>#NOM</BOUCLE0>Pas d'auteur<//B0></title>
 <link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY BGCOLOR="#FFFFDD" dir="#LANG_DIR">
+</head>
+<body bgcolor="#FFFFDD" dir="#LANG_DIR">
 
 
-<CENTER>
+<center>
 <BOUCLE1(AUTEURS){id_auteur}{unique}>
 
+<table width="750">
+<tr><td width="750" colspan="3">
+<font face="Arial,Helvetica" size="4">
 
 
+[<br><font size="6"><B>(#NOM)</B></font>]
 
-<TABLE WIDTH=750>
-<TR><TD WIDTH=750 COLSPAN=3>
-<font face=Arial,Helvetica SIZE=4>
+[<br>((#BIO))]
 
+<br><br>
+</font>
+</td></tr>
+<tr><td width="250" valign="top">
 
-
-
-[<BR><FONT SIZE=6><B>(#NOM)</B></FONT>]
-
-[<BR>((#BIO))]
-
-
-
-<BR><BR>
-</FONT>
-</TD></TR>
-<TR><TD WIDTH=250 VALIGN="top">
-
-</TD><TD WIDTH=10>&nbsp;</TD>
-<TD WIDTH=490 VALIGN="top">
+</td><td width="10">&nbsp;</td>
+<td widt="490" valign="top">
 
 
-<font face=Arial,Helvetica SIZE=3>
-[<B>(#PGP)</B>]
+<font face="Arial,Helvetica" size="3">
+[<b>(#PGP)</b>]
 
 
 <BOUCLE4(ARTICLES){id_auteur}{par date}{inverse}>
 
-<P>
-<B><A HREF="#URL_ARTICLE">[(#SURTITRE)<BR>][(#TITRE|majuscules)][<BR>(#SOUSTITRE)]</A></B>
-<FONT SIZE=2><B>[<BR>(#DATE_REDAC|affdate)][, par (#LESAUTEURS)]</B>
-[<BR>(#DESCRIPTIF)]</FONT>
+<p>
+<b><a href="#URL_ARTICLE">[(#SURTITRE)<br>][(#TITRE|majuscules)][<br>(#SOUSTITRE)]</a></b>
+<font size="2"><b>[<br>(#DATE_REDAC|affdate)][, par (#LESAUTEURS)]</b>
+[<br>(#DESCRIPTIF)]</font>
 </BOUCLE4>
 
 
-[<P><b>Envoyer un message</b><br>(#FORMULAIRE_ECRIRE_AUTEUR)</P>]
+[<p><b>Envoyer un message</b><br>(#FORMULAIRE_ECRIRE_AUTEUR)</p>]
 
 
-</FONT>
+</font>
 
-</TD></TR>
-</TABLE>
+</td></tr>
+</table>
 
 
 
 </BOUCLE1>
-<H2>Il n'y a pas d'auteur &agrave; cette adresse</H2><//B1>
-</CENTER>
-</BODY>
-</HTML>
+<h2>Il n'y a pas d'auteur &agrave; cette adresse</h2>
+<//B1>
+</center>
+</body>
+</html>
