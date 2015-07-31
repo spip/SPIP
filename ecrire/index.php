@@ -129,11 +129,11 @@ AND ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_
 	$exec = 'demande_mise_a_jour';
 
 // Si interruption d'une longue restauration
-// detourner le script demande pour qu'il reprenne le boulot
-// mais virer les Ajax pour eviter plusieurs restaurations en parallele
-elseif (isset($_COOKIE['spip_admin'])
-AND isset($GLOBALS['meta']["import_all"])) {
-	if (isset($var_ajaxcharset)) exit;
+// detourner le script demande pour qu'il reprenne le boulot, et
+// refuser Ajax et non-admin pour eviter des restaurations paralleles
+elseif (isset($GLOBALS['meta']["import_all"])) {
+	if (isset($var_ajaxcharset) OR !isset($_COOKIE['spip_admin']))
+		die('Importation en cours, revenez plus tard.');
 	$exec = 'import_all';
 }
 // si nom pas plausible, prendre le script par defaut

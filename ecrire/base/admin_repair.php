@@ -45,6 +45,9 @@ function base_admin_repair_dist() {
 	  }
 	}
 
+	include_spip('inc/rubriques');
+	calculer_rubriques();
+
 	if (!$res) {
 		$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</tt></span><br /><br /><br />\n";
 	}
