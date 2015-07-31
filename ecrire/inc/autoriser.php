@@ -171,6 +171,11 @@ function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
+function autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt){
+	return
+		(!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non')
+		AND autoriser('modifier',$type, $id, $qui, $opt);
+}
 // Autoriser a modifier la breve $id
 // = admins & redac si la breve n'est pas publiee
 // = admins de rubrique parente si publiee
