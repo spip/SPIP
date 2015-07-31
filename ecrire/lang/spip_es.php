@@ -331,7 +331,6 @@ Gracias por tu participación
 'icone_aide_ligne' => 'Ayuda en línea',
 'icone_articles' => 'Artículos',
 'icone_auteurs' => 'Autoras y autores',
-'icone_breves' => 'Breves',
 'icone_brouteur' => 'Navegación rápida',
 'icone_configuration_site' => 'Configuración del sitio',
 'icone_configurer_site' => 'Configurar el sitio',

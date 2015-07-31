@@ -324,7 +324,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'ជំនួយ',
 'icone_articles' => 'អត្ថបទ',
 'icone_auteurs' => 'អ្នកនិពន្ធ',
-'icone_breves' => 'ពត៌មានសង្ខេប',
 'icone_brouteur' => 'ការត្រាច់រក រហ័ស',
 'icone_configuration_site' => 'ការកំណត់ទំរង់',
 'icone_configurer_site' => 'ការកំណត់ទំរង់ វ៉ែបសៃថ៍ របស់​អ្នក',

@@ -326,7 +326,6 @@ sera ignorée) :
 'icone_aide_ligne' => '<MODIF>帮助',
 'icone_articles' => '文章',
 'icone_auteurs' => '作者',
-'icone_breves' => '简要',
 'icone_brouteur' => '快速浏览',
 'icone_configuration_site' => '<MODIF>配置',
 'icone_configurer_site' => '配置站点',

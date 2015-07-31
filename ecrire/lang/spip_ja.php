@@ -330,7 +330,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'ヘルプ',
 'icone_articles' => '記事',
 'icone_auteurs' => '著者たち',
-'icone_breves' => 'ニュース',
 'icone_brouteur' => '素早いブラウジング',
 'icone_configuration_site' => '設定',
 'icone_configurer_site' => 'あなたのサイトの設定',

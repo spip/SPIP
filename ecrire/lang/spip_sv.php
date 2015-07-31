@@ -319,7 +319,6 @@ Tack för ditt deltagande
 'icone_aide_ligne' => 'Hjälp',
 'icone_articles' => 'Artiklar',
 'icone_auteurs' => 'Författare',
-'icone_breves' => 'Nyheter',
 'icone_brouteur' => 'Snabb-surfning',
 'icone_configuration_site' => 'Konfiguration',
 'icone_configurer_site' => 'Konfigurera din sajt',

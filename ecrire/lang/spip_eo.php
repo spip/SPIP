@@ -330,7 +330,6 @@ Dankon pro via partopreno
 'icone_aide_ligne' => 'Helpilo',
 'icone_articles' => 'Artikoloj',
 'icone_auteurs' => 'Aŭtoroj',
-'icone_breves' => 'Fulm-informoj',
 'icone_brouteur' => 'Rapida retumado',
 'icone_configuration_site' => 'Konfiguro',
 'icone_configurer_site' => 'Konfiguri vian retejon',

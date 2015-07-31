@@ -327,7 +327,6 @@ Mèsi  w soutni petisyon-nan
 'icone_aide_ligne' => 'Bourad',
 'icone_articles' => 'Atik yo',
 'icone_auteurs' => 'Lotè yo',
-'icone_breves' => 'Tinouvèl yo',
 'icone_brouteur' => 'Gad tout sit vitman',
 'icone_configuration_site' => 'Konfigire sit',
 'icone_configurer_site' => 'Konfigir sit ou',

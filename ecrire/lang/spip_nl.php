@@ -329,7 +329,6 @@ Bedankt voor je deelname
 'icone_aide_ligne' => 'Help',
 'icone_articles' => 'Artikels',
 'icone_auteurs' => 'Auteurs',
-'icone_breves' => 'Berichten',
 'icone_brouteur' => 'Snelle navigatie',
 'icone_configuration_site' => 'Configuratie',
 'icone_configurer_site' => 'Je website configureren',

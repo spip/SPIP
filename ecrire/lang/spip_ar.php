@@ -331,7 +331,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_aide_ligne' => 'التعليمات الفورية',
 'icone_articles' => 'المقالات',
 'icone_auteurs' => 'المؤلفون',
-'icone_breves' => 'الأخبار',
 'icone_brouteur' => 'تصفح سريع',
 'icone_configuration_site' => 'إعداد',
 'icone_configurer_site' => 'إعداد موقعك',

@@ -328,7 +328,6 @@ Merci fir är Participatioun
 'icone_aide_ligne' => 'Hëllef',
 'icone_articles' => 'Artikelen',
 'icone_auteurs' => 'Auteuren',
-'icone_breves' => 'Kuerzmeldungen',
 'icone_brouteur' => 'Schnell-Navigatioun',
 'icone_configuration_site' => 'Konfiguratioun',
 'icone_configurer_site' => 'Äre Site konfiguréieren',

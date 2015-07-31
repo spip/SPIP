@@ -329,7 +329,6 @@ Merci de votre participation
 'icone_aide_ligne' => 'Aide',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Auteurs',
-'icone_breves' => 'Brèves',
 'icone_brouteur' => 'Navigation rapide',
 'icone_configuration_site' => 'Configuration',
 'icone_configurer_site' => 'Configurer votre site',

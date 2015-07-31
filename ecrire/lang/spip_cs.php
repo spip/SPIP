@@ -330,7 +330,6 @@ Děkujeme vám za účast
 'icone_aide_ligne' => 'Nápověda',
 'icone_articles' => 'Články',
 'icone_auteurs' => 'Autoři',
-'icone_breves' => 'Novinky',
 'icone_brouteur' => 'Rychlé procházení',
 'icone_configuration_site' => 'Nastavení',
 'icone_configurer_site' => 'Nastavte svůj web',

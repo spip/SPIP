@@ -303,7 +303,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'àlɔdó',
 'icone_articles' => 'wěkpá',
 'icone_auteurs' => 'nyɔwlántɔ',
-'icone_breves' => 'xó kléwún ',
 'icone_brouteur' => 'numɛkéjé càcà',
 'icone_configuration_site' => 'Tìtòmɛ',
 'icone_configurer_site' => 'Mi tò gblogblojí ɔ',

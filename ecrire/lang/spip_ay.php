@@ -335,7 +335,6 @@ Arsusiwitamatxa yuspagara
 'icone_aide_ligne' => 'Naktata yanapaña',
 'icone_articles' => 'Qillqatanaka',
 'icone_auteurs' => 'Qillqirinaka',
-'icone_breves' => 'Jisk\'aptatanaka',
 'icone_brouteur' => 'Jank\'aki tuyuwi',
 'icone_configuration_site' => 'Qamaw uñtayawi',
 'icone_configurer_site' => 'Qamaw uñtayaña',

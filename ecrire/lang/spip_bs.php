@@ -308,7 +308,6 @@ sera ignorée) :
 'icone_aide_ligne' => 'Pomoc',
 'icone_articles' => 'Clanci',
 'icone_auteurs' => 'Autori',
-'icone_breves' => 'Obavjestenja',
 'icone_brouteur' => 'Brza navigacija',
 'icone_configuration_site' => 'Podesavanje',
 'icone_configurer_site' => 'Podesavanje vase stranice',

@@ -331,7 +331,6 @@ Grazas pola súa participación
 'icone_aide_ligne' => 'Axuda en liña',
 'icone_articles' => 'Artigos',
 'icone_auteurs' => 'Equipo de redacción',
-'icone_breves' => 'Breves',
 'icone_brouteur' => 'Navegación rápida',
 'icone_configuration_site' => 'Configuración',
 'icone_configurer_site' => 'Configurar o teu web',

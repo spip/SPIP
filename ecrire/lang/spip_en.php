@@ -328,7 +328,6 @@ Thank you for participating!
 'icone_aide_ligne' => 'Help',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Authors',
-'icone_breves' => 'News',
 'icone_brouteur' => 'Quick browsing',
 'icone_configuration_site' => 'Configuration',
 'icone_configurer_site' => 'Configure your site',

@@ -331,7 +331,6 @@ Mercé de la voastra participacion
 'icone_aide_ligne' => 'Ajuda',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Autors',
-'icone_breves' => 'Brèvas',
 'icone_brouteur' => 'Navigacion rapida',
 'icone_configuration_site' => 'Configuracion',
 'icone_configurer_site' => 'Configurar lo voastre sit',

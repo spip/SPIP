@@ -335,7 +335,6 @@ Mersi aou mèt ansanm isi
 'icone_aide_ligne' => 'Koudmin-wèb',
 'icone_articles' => 'Bann zartik',
 'icone_auteurs' => 'Bann lotèr',
-'icone_breves' => 'Bann tit-nouvèl',
 'icone_brouteur' => 'Bat-karé dégazé',
 'icone_configuration_site' => 'Konfigir lo sit',
 'icone_configurer_site' => 'Konfigir out sitwèb',
