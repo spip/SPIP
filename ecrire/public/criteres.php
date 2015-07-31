@@ -660,28 +660,37 @@ function trouver_cles_table($keys)
 
 function trouver_def_table($nom, &$boucle)
 {
-  global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
 
-  if ($desc = $tables_principales['spip_' . $nom])
-    return array('spip_' . $nom, $desc);
+	spip_log("tdt $nom");
+	$nom_table = $nom;
+	$s = $boucle->sql_serveur;
+	if (!$s) {
+		 $s = 'localhost';
+    // indirection (pour les rares cas ou le nom de la table!=type)
+		 if (in_array($nom, $table_des_tables))
+		   $nom_table = (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom);
 
-  if ($boucle->sql_serveur && 
-      $desc = $tables_des_serveurs_sql[$boucle->sql_serveur][$nom])
-    return array($nom, $desc);
-  include_spip('base/auxiliaires');
-  if ($desc = $tables_auxiliaires['spip_' . $nom])
-    return array('spip_' . $nom, $desc);
+	}
 
-  $desc = $table_des_tables[$nom] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom) : $nom;
-  if ($desc = spip_abstract_showtable($desc, $boucle->sql_serveur))
-    if (isset($desc['field'])) {
+	$desc = $tables_des_serveurs_sql[$s][$nom_table];
+	if ($desc)
+		return array($nom_table, $desc);
+
+	include_spip('base/auxiliaires');
+	$nom_table = (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom);
+	if ($desc = $tables_auxiliaires[$nom_table])
+		return array($nom_table, $desc);
+
+	if ($desc = spip_abstract_showtable($nom, $boucle->sql_serveur))
+	  if (isset($desc['field'])) {
       // faudrait aussi prevoir le cas du serveur externe
-      $tables_principales[$nom] = $desc;
-      return array($nom, $desc);
-    }
-  erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom)),
-		   $boucle->id_boucle);
-}
+	    $tables_principales[$nom] = $desc;
+	    return array($nom, $desc);
+	  }
+	erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom)),
+			 $boucle->id_boucle);
+	}
 
 function trouver_champ_exterieur($cle, $joints, &$boucle)
 {
