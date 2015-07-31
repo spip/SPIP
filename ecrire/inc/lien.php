@@ -109,7 +109,7 @@ function calculer_url_site_dist($id, $texte='', $lien='', $connect='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
-	$row =sql_fetsel('nom_site,url_site', 'spip_syndic', "id_syndic=$id",'','','','','','','',$connect);
+	$row =sql_fetsel('nom_site,url_site', 'spip_syndic', "id_syndic=$id",'','','','',$connect);
 	if ($row) {
 		$lien = $row['url_site'];
 		if (!trim($texte))

@@ -37,8 +37,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 // http://doc.spip.org/@balise_FORMULAIRE_ADMIN_dyn
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
-	global $var_preview, $use_cache, $forcer_debug, $xhtml;
-	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic;
+	global $var_preview, $use_cache;
 	static $dejafait = false;
 
 	if (!@$_COOKIE['spip_admin'])
@@ -57,135 +56,151 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			return '';
 		}
 	}
+
 	$dejafait = true;
-	include_spip('inc/urls');
-	$objet_affiche = '';
-
-	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
-	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
-		$_id_type = id_table_objet($type);
-		if (isset($$_id_type)) {
-			$$_id_type = intval($$_id_type);
-			if (sql_countsel(table_objet_sql($type),
-					 "$_id_type=".$$_id_type)) {
-				$objet_affiche = $type;
-				break;
-			}
-		}
-	}
-
-	// Bouton statistiques
-	$visites = $popularite = $statistiques = '';
-	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
-	AND $id_article
-	AND !$var_preview
-	AND autoriser('voirstats')
-	) {
-		$result = sql_select("visites, popularite", "spip_articles", "id_article=$id_article AND statut='publie'");
-
-		if ($row = @sql_fetch($result)) {
-			$visites = intval($row['visites']);
-			$popularite = ceil($row['popularite']);
-			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));
-		}
-	}
-
-	// Bouton de debug
-	$debug =
-	(
-		(	$forcer_debug
-			OR $GLOBALS['bouton_admin_debug']
-			OR (
-				$GLOBALS['var_mode'] == 'debug'
-				AND $_COOKIE['spip_debug']
-			)
-		) AND (
-		       autoriser('debug')
-		) AND (
-			!$var_preview
-		)
-	) ? parametre_url(self(),'var_mode', 'debug', '&'): '';
-
-	$analyser = !$debug ? '' : ((@$xhtml !== 'true') ?
-		(parametre_url(self(), 'var_mode', 'debug', '&')
-			.'&var_mode_affiche=validation') :
-		('http://validator.w3.org/check?uri='
-		 . rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
-	
-	// hack - ne pas avoir la rubrique si un autre bouton est deja present
-	if ($id_article OR $id_breve) unset ($id_rubrique);
-
-	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
-	if (!($id_article || $id_rubrique || $id_auteur || $id_breve || $id_mot || $id_syndic))
-		$ecrire = _DIR_RESTREINT_ABS;
-	else $ecrire = '';
-	// Bouton "preview" si l'objet demande existe et est previsualisable
-	$preview = false;
-
-	if (!$GLOBALS['var_preview']) {
-		include_spip('inc/autoriser');
-		if (autoriser('previsualiser')) {
-			$p = ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui');
-
-			if ($objet_affiche == 'article'
-			OR $objet_affiche == 'breve'
-			OR $objet_affiche == 'rubrique'
-			OR $objet_affiche == 'syndic')
-			  $preview = sql_countsel(table_objet_sql($objet_affiche), id_table_objet($objet_affiche)."=".$$_id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")");
-		}
-	}
-
-	//
-	// Regler les boutons dans la langue de l'admin (sinon tant pis)
-	//
-
-	include_spip('base/abstract_sql');
-	$login = preg_replace(',^@,','',@$_COOKIE['spip_admin']);
-	$alang = sql_fetsel('lang', 'spip_auteurs', ("login=" . sql_quote($login)));
-	if ($alang['lang']) {
-		$l = lang_select($alang['lang']);
-		$lang = $GLOBALS['spip_lang'];
-		if ($l) lang_select();
-	} else
-		$lang = '';
 
 	// Preparer le #ENV des boutons
-	$env = array(
-		'ecrire' => $ecrire,
-		'action' => self('&'),
-		'divclass' => $float,
-		'lang' => $lang,
-		'calcul' => (_request('var_mode') ? 'recalcul' : 'calcul'),
-	);
 
-	if ($preview)
-		$env['preview']=parametre_url(self(),'var_mode','preview','&');
-	if ($debug)
+	$env = admin_objet();
+
+	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
+	if (!$env)
+		$env['ecrire'] = DIR_RESTREINT_ABS;
+
+	$env['action'] = self('&');
+	$env['divclass'] = $float;
+	$env['lang'] = admin_lang();
+	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
+
+	if (!$var_preview AND admin_debug())
 		$env['debug'] = $debug;
-	if ($statistiques) {
-		$env['popularite'] = $popularite;
-		$env['statistiques'] = $statistiques;
-		$env['visites'] = $visites;
-	}
+
 	if (!$use_cache)
 		$env['use_cache'] = ' *';
-	if ($analyser)
+	if ($analyser = (!$env['debug'] ? '' : admin_valider()))
 		$env['analyser'] = $analyser;
 	if (isset($GLOBALS['xhtml_error']) AND $GLOBALS['xhtml_error']) {
 		$env['xhtml_error'] = count($GLOBALS['xhtml_error']);
-	}
-	foreach (array('article','rubrique','auteur','breve','mot','syndic'=>'site')
-	as $id => $obj) {
-		if (is_int($id)) $id = $obj;
-		if (${'id_'.$id}) {
-			$env['id_'.$id] = ${'id_'.$id};
-			$g = 'generer_url_ecrire_'.$obj;
-			$env['voir_'.$obj] = str_replace('&amp;', '&',
-				$g(${'id_'.$id}, '','', 'prop'));
-		}
 	}
 
 	return array('formulaires/administration', 0, $env);
 }
 
+// Afficher le bouton 'Modifier ce...' 
+// s'il y a un $id_XXX defini globalement par spip_register_globals
+// Attention a l'ordre dans la boucle:
+//	on ne veut pas la rubrique si un autre bouton est possible
+
+function admin_objet()
+{
+	include_spip('inc/urls');
+	$env = array();
+
+	foreach (array('mot','auteur','rubrique','breve','article','syndic'=>'site')
+	as $id => $obj) {
+		if (is_int($id)) $id = $obj;
+		$_id_type = id_table_objet($id);
+		if (isset($GLOBALS[$_id_type])) {
+			$id_type = sql_getfetsel($_id_type, table_objet_sql($id), "$_id_type=".intval($GLOBALS[$_id_type]));
+			if ($id_type) {
+				$env[$_id_type] = $id_type;
+				$g = 'generer_url_ecrire_'.$obj;
+				$env['voir_'.$obj] = 
+				  str_replace('&amp;', '&', $g($id_type, '','', 'prop'));
+				if ($id == 'article' OR $id == 'breve') {
+					unset($env['id_rubrique']);
+					unset($env['voir_rubrique']);
+					if ($l = admin_stats($id, $id_type, $var_preview)) {
+						$env['visites'] = $l[0];
+						$env['popularite'] = $l[1];
+						$env['statistiques'] = $l[2];
+					}
+					if (admin_preview($id, $id_type))
+						$env['preview']=parametre_url(self(),'var_mode','preview','&');
+				}
+			}
+		}
+	}
+	return $env;
+}
+
+
+function admin_preview($id, $id_type)
+{
+	if ($GLOBALS['var_preview']) return '';
+
+	if (!($id == 'article'
+	OR $id == 'breve'
+	OR $id == 'rubrique'
+	OR $id == 'syndic'))
+
+		return '';
+
+	include_spip('inc/autoriser');
+	if (!autoriser('previsualiser')) return '';
+
+	$notpub = "(statut IN ('prop', 'prive'))";
+
+	if  ($id == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
+		$notpub = "($notpub OR (statut='publie' AND date>NOW()))";
+
+	return sql_fetsel('1', table_objet_sql($id), id_table_objet($id)."=".$id_type." AND $notpub");
+}
+
+//
+// Regler les boutons dans la langue de l'admin (sinon tant pis)
+//
+
+function admin_lang()
+{
+	$alang = sql_getfetsel('lang', 'spip_auteurs', "login=" . sql_quote(preg_replace(',^@,','',@$_COOKIE['spip_admin'])));
+	if (!$alang) return '';
+
+	$l = lang_select($alang);
+	$alang = $GLOBALS['spip_lang'];
+	if ($l) lang_select();
+	return $alang;
+}
+
+function admin_valider()
+{
+	global $xhtml;
+
+	return ((@$xhtml !== 'true') ?
+		(parametre_url(self(), 'var_mode', 'debug', '&')
+			.'&var_mode_affiche=validation') :
+		('http://validator.w3.org/check?uri='
+		 . rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
+}
+
+function admin_debug()
+{
+	return (($GLOBALS['forcer_debug']
+			OR $GLOBALS['bouton_admin_debug']
+			OR (
+				$GLOBALS['var_mode'] == 'debug'
+				AND $_COOKIE['spip_debug']
+			)
+		) AND autoriser('debug')
+	  )
+	  ? parametre_url(self(),'var_mode', 'debug', '&'): '';
+}
+
+function admin_stats($id, $id_type, $var_preview)
+{
+	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
+	AND $id = 'article'
+	AND !$var_preview
+	AND autoriser('voirstats')
+	) {
+		$row = sql_fetsel("visites, popularite", "spip_articles", "id_article=$id_type AND statut='publie'");
+
+		if ($row) {
+			return array(intval($row['visites']),
+			       ceil($row['popularite']),
+			       str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_type)));
+		}
+	}
+	return false;
+}
 ?>
