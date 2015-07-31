@@ -118,9 +118,43 @@ echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif' class='ve
 echo _T('ical_titre_rss')."</B></TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='serif'>";
-echo _T('ical_texte_rss').'<p>';
+echo _T('ical_texte_rss');
 
-echo propre('<cadre>'.$adresse_site.'/backend.php3</cadre>');
+echo "<p>"._T("ical_texte_rss_articles")."</p>";
+
+echo propre('<ul><cadre>'.$adresse_site.'/backend.php3</cadre></ul>');
+
+echo "<p>"._T("ical_texte_rss_articles2")."</p>";
+
+
+	$query = "SELECT * FROM spip_rubriques WHERE id_parent=\"0\" ORDER BY titre";
+	$result = spip_query($query);
+
+	if (spip_num_rows($result) > 0) {
+		echo "<ul>";
+
+		while($row=spip_fetch_array($result)){
+			$id_rubrique=$row['id_rubrique'];
+			$titre_rubrique = $row['titre'];
+			
+			echo "<li><a href='$adresse_site/backend.php3?id_rubrique=$id_rubrique'><img src='img_pack/xml.gif' border='0' align='middle'> &nbsp; $titre_rubrique</a>\n";
+		}
+		echo "</ul>";
+	}
+	
+
+	$activer_breves = lire_meta('activer_breves');
+	
+	if ($activer_breves == "oui") {
+		
+		echo "<p>"._T("ical_texte_rss_breves")."</p>";
+		echo propre('<ul><cadre>'.$adresse_site.'/backend-breves.php3</cadre></ul>');
+		
+	}
+
+
+
+
 
 echo "</TD></TR>";
 echo "</TABLE>";
