@@ -307,9 +307,6 @@ function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=arr
 		}
 		closedir($d);
 	}
-	else {
-		spip_log("repertoire $dir absent ou illisible");
-	}
 	sort($fichiers);
 	return $fichiers;
 }
