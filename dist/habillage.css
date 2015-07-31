@@ -1,6 +1,6 @@
-/*  ----------------------------------------------------------- */
-/*  Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
-/*  ----------------------------------------------------------- */
+/* ----------------------------------------------------------- */
+/* Feuilles de styles des squelettes par defaut pour SPIP 1.9  */
+/* ----------------------------------------------------------- */
 
 /* taille typo
  * Base				100%
@@ -20,82 +20,39 @@
  * Attention : en dessous de 0.71em le texte devient illisible en text smallest sur MSIE
  */
 
-/*  ------------------------------------------
-/*  Correction des styles HTML par defaut
-/*  ------------------------------------------ */
-body {
-	background: #FFF;
-	margin: 1.5em;
-	text-align: center;
-	font-size: 1em;
-	color: #333;
-}
+/* Correction des styles HTML par defaut
+---------------------------------------------- */
+body { background: #FFF; margin: 1.5em; text-align: center; font-size: 1em; color: #333; }
 
 img, table { margin: 0; padding: 0; border: none; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
-/*  ------------------------------------------
-/*  Disposition a l'ecran des blocs principaux
-/*  ------------------------------------------ */
-#page {
-	width: 48em;
-	text-align: left;
-	margin-left: auto;
-	margin-right: auto;
-}
+/* Disposition a l'ecran des blocs principaux
+---------------------------------------------- */
+#page { width: 48em; text-align: left; margin-left: auto; margin-right: auto; }
 
 #conteneur { width: 100%; }
 
-#conteneur #contenu {
-	float: left;
-	width: 33em;
-}
+#conteneur #contenu { float: left; width: 33em; }
 
-#conteneur #navigation {
-	float: right;
-	width: 12em;
-	text-align: center;
-}
+#conteneur #navigation { float: right; width: 12em; text-align: center; }
 
 /* Blocs du contenu (c-a-d. la colonne principale) */
-#contenu .contre-encart {
-	float: left;
-	width: 21em;
-}
+#contenu .contre-encart { float: left; width: 21em; }
 
-#contenu .encart {
-	float: right;
-	width: 11em;
-	margin: 0;
-	margin-bottom: 1em;
-}
+#contenu .encart { float: right; width: 11em; margin: 0; margin-bottom: 1em; }
 
 /* Entete */
-#entete {
-	width: 100%;
-	border-bottom: 2px solid #333; }
-#entete #nom_site_spip, #entete a .spip_logos {
-	display: block;
-	float: left;
-	font-weight: bold;
-	font-size: 1.5em; }
+#entete { width: 100%; border-bottom: 2px solid #333; }
+#entete #nom_site_spip, #entete a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.5em; }
 #entete a { text-decoration: none; }
 #entete .formulaire_recherche { float: right; }
 
 /* Fil d'Ariane */
-#hierarchie {
-	clear: both;
-	margin-bottom: 2em;
-	font-size: 0.77em; }
+#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; }
 
 /* Pied de page */
-#pied {
-	clear: both;
-	width: 100%;
-	margin-top: 4em;
-	border-top: 1px dotted #CCC;
-	padding: 2px;
-	text-align: center; }
+#pied { clear: both; width: 100%; margin-top: 4em; border-top: 1px dotted #CCC; padding: 2px; text-align: center; }
 #pied small { font-size: 0.77em; }
 #pied img { vertical-align: bottom; }
 
@@ -106,50 +63,33 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .invisible { position: absolute; top: -3000em; height: 1%; }
 
 
-/*  ------------------------------------------
-/*  Typographie generale du site
-/*  ------------------------------------------ */
+/* Typographie generale du site
+---------------------------------------------- */
 
 /* Typo pour les menus et la navigation */
-body, #navigation, .encart, .formulaire_spip {
-	font-family: Verdana, Tahoma, Geneva, sans-serif; }
+body, #navigation, .encart, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans-serif; }
 
 /* Typo pour le contenu */
-#contenu {
-	font-family: "Trebuchet MS", Helvetica, sans-serif; }
+#contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
 
 /* Typo pour les citations et extraits introductifs */
-q, blockquote, .introduction, h3.spip, .voirskel {
-	font-family: Georgia, Times, serif; }
+q, blockquote, .introduction, h3.spip, .voirskel { font-family: Georgia, Times, serif; }
 
 
-/*  ------------------------------------------
-/*  Habillage des menus et de la navigation
-/*  ------------------------------------------ */
-
-/*  Habillage general des menus de navigation
+/* Habillage des menus et de la navigation
 ---------------------------------------------- */
-.rubriques, .breves, .syndic, .forums, .divers {
-	min-width: 10em;
-	border: 1px solid #CCC;
-	margin-bottom: 1em;
-	font-size: 0.77em;
-}
 
-.menu-titre {
-	padding: 0.2em 0.4em;
-	border-bottom: 1px dotted #CCC;
-	text-align: center;
-	font-weight: bold;
-}
+/* Habillage general des menus de navigation */
+.rubriques, .breves, .syndic, .forums, .divers { min-width: 10em; border: 1px solid #CCC; margin-bottom: 1em; font-size: 0.77em; }
 
-#navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
+.menu-titre { padding: 0.2em 0.4em; border-bottom: 1px dotted #CCC; text-align: center; font-weight: bold; }
+
+#navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left; }
 #navigation ul, .encart ul { margin: 0; padding: 0.2em 0; text-align: left; list-style: none; }
 #navigation li, .encart li { margin: 0; padding: 0 0.7em; }
 
-/*  Des couleurs specifiques selon les types de menus
----------------------------------------------- */
-.rubriques { background: #EAFFEA;}
+/* Des couleurs specifiques selon les types de menus */
+.rubriques { background: #EAFFEA; }
 .rubriques .menu-titre { background: #F2FFF2; }
 
 .breves { background: #FFEAEA; }
@@ -164,76 +104,41 @@ q, blockquote, .introduction, h3.spip, .voirskel {
 .divers { background: #F8F8E8; }
 .divers .menu-titre { background: #FCFCF0; }
 
-/*  ------------------------------------------
-/*  Habillage du contenu
-/*  ------------------------------------------ */
-
-/*  Cartouche et titraille
+/* Habillage du contenu
 ---------------------------------------------- */
+
+/* Cartouche et titraille */
 .cartouche { margin-bottom: 2em; }
-
-.cartouche .titre {
-	font-size: 1.27em;
-	font-weight: bold;
-	color: #000; }
+.cartouche .titre { font-size: 1.27em; font-weight: bold; color: #000; }
 #contenu .surtitre, #contenu .soustitre { font-size: 0.82em; }
-
-.cartouche .spip_logos {
-	float: right;
-	margin-left: 16px;
-	margin-bottom: 16px; }
-
+.cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
 .cartouche small { font-size: 0.71em; }
-
 .cartouche .traductions { font-size: 0.71em; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
 
-/*  Mise en forme des textes du contenu
----------------------------------------------- */
-.chapo {
-	margin-bottom: 1.5em;
-	font-weight: bold;
-	line-height: 1.4em; }
+/* Mise en forme des textes du contenu */
+.chapo { margin-bottom: 1.5em; font-weight: bold; line-height: 1.4em; }
 
-.lien {
-	background: #EEE;
-	margin: 1em;
-	margin-bottom: 1.5em;
-	padding: 0.82em;
-	border: 1px solid #CCC;
-	font-size: 0.82em;
-	font-weight: bold; }
+.lien { background: #EEE; margin: 1em; margin-bottom: 1.5em; padding: 0.82em; border: 1px solid #CCC; font-size: 0.82em; font-weight: bold; }
 
 .texte { color: #000; font-size: 0.96em; }
 
-.ps, .notes {
-	margin-top: 1.4em;
-	padding-top: 2px;
-	border-top: 2px solid #CCC; }
+.ps, .notes { margin-top: 1.4em; padding-top: 2px; border-top: 2px solid #CCC; }
 .ps { font-size: 0.82em; }
 .notes { clear: both; font-size: 0.77em; }
 .ps h2, .notes h2 { font-size: 1.19em; font-weight: bold; }
 
-/*  Portfolio
----------------------------------------------- */
-#documents_portfolio {
-	clear: both;
-	margin-top: 1.4em;
-	padding-top: 2px;
-	border-top: 2px solid #CCC; }
+/* Portfolio */
+#documents_portfolio { clear: both; margin-top: 1.4em; padding-top: 2px; border-top: 2px solid #CCC; }
 #documents_portfolio h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
 
 #document_actif { margin-top: 1em; }
 
-/*  Listes de documents joints (a un article ou une rubrique)
----------------------------------------------- */
-#documents_joints {
-	margin-top: 1.4em;
-	padding-top: 2px;
-	border-top: 2px solid #CCC; }
+/* Listes de documents joints (a un article ou une rubrique) */
+#documents_joints { margin-top: 1.4em; padding-top: 2px; border-top: 2px solid #CCC; }
 #documents_joints h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
 #documents_joints ul { margin: 0; padding: 0; list-style: none; }
 #documents_joints li { margin-bottom: 0.4em; }
@@ -245,72 +150,30 @@ q, blockquote, .introduction, h3.spip, .voirskel {
 ----------------------------------------------- */
 .liste-articles ul { margin: 0; padding: 0; list-style: none; }
 .liste-articles li { margin-bottom: 1em; clear: both; }
-
-.liste-articles li .titre {
-	font-size: 1.03em;
-	font-weight: bold; }
-
-.liste-articles li .spip_logos {
-	float: right;
-	margin-left: 16px;
-	margin-bottom: 16px;
-	clear: right; }
-
+.liste-articles li .titre { font-size: 1.03em; font-weight: bold; }
+.liste-articles li .spip_logos { float: right; margin-left: 16px; margin-bottom: 16px; clear: right; }
 .liste-articles li p { margin: 0; padding: 0; }
-
-.liste-articles li .enclosures {
-	float: right;
-	text-align: right;
-	max-width: 60%;
-	margin: 0; }
-
-.liste-articles li small {
-	display: block;
-	font-size: 0.71em; }
-
-.liste-articles li .introduction {
-	margin-top: 5px;
-	margin-bottom: 2em;
-	border: 1px solid #CCC;
-	padding: 0.9em;
-	font-size: 0.82em;
-	line-height: 1.4em; }
+.liste-articles li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
+.liste-articles li small { display: block; font-size: 0.71em; }
+.liste-articles li .introduction { margin-top: 5px; margin-bottom: 2em; border: 1px solid #CCC; padding: 0.9em; font-size: 0.82em; line-height: 1.4em; }
 
 .pagination { font-size: 0.90em; }
 
-/*  ------------------------------------------
-/*  Habillage specifique du plan du site
-/*  ------------------------------------------ */
+/* Habillage specifique du plan du site
+---------------------------------------------- */
 
 .page_plan .cartouche { display: none; }
-
-.page_plan #contenu h2 {
-	clear: both;
-	background: #EEE;
-	border: 1px solid #CCC;
-	padding: 0.5em;
-	margin-bottom: 1em;
-	font-weight: bold;
-	text-align: center; }
-
-.page_plan #contenu .contre-encart ul {
-	display: block;
-	clear: left;
-	margin-top: 0;
-	margin-bottom: 1em;
-	padding-top: 0; }
+.page_plan #contenu h2 { clear: both; background: #EEE; border: 1px solid #CCC; padding: 0.5em; margin-bottom: 1em; font-weight: bold; text-align: center; }
+.page_plan #contenu .contre-encart ul { display: block; clear: left; margin-top: 0; margin-bottom: 1em; padding-top: 0; }
 .page_plan #contenu .contre-encart li {}
 
-/*  ------------------------------------------
-/*  Habillage des formulaires
-/*  ------------------------------------------ */
+/* Habillage des formulaires
+---------------------------------------------- */
 
 .formulaire_spip { text-align: left; font-size: 0.77em; }
 .formulaire_spip p { margin: 0.5em 0; padding: 0; }
-
 .formulaire_spip fieldset {}
 .formulaire_spip legend {}
-
 .formulaire_spip label {}
 .formulaire_spip .forml { width: 99%; font-family: inherit; font-size: inherit; }
 
@@ -337,17 +200,10 @@ ul.choix_mots label { display: inline; }
 .formulaire_recherche { width: 12em; text-align: left; }
 .formulaire_recherche label { display: none; }
 
-/*  ------------------------------------------
-/*  Habillage des forums
-/*  ------------------------------------------ */
+/* Habillage des forums
+---------------------------------------------- */
 
-.forum-repondre, .forum-decompte {
-	clear: both;
-	margin-top: 2.5em;
-	padding-top: 2px;
-	border-top: 2px solid #CCC;
-	font-size: 0.88em;
-	font-weight: bold; }
+.forum-repondre, .forum-decompte { clear: both; margin-top: 2.5em; padding-top: 2px; border-top: 2px solid #CCC; font-size: 0.88em; font-weight: bold; }
 
 /* * Habillage des forums */
 ul.forum { display: block; clear: both; margin: 0; padding: 0; }
@@ -375,47 +231,21 @@ ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; border-bottom: 1px dotted #E0E0E0; }
 ul ul ul ul ul .forum-chapo { background: #FFF; }
 
-/*  ------------------------------------------
-/*  Habillage des petitions
-/*  ------------------------------------------ */
+/* Habillage des petitions
+---------------------------------------------- */
 
 #signatures { clear: both; font-size: 0.77em; }
-
-#signatures h2 {
-	padding: 0.5em;
-	text-align: center;
-	font-size: 1.2em;
-	font-weight: bold; }
-
+#signatures h2 { padding: 0.5em; text-align: center; font-size: 1.2em; font-weight: bold; }
 #signatures table { width: 100%; margin: 1em 0; }
 #signatures thead { display: none; } /* On n'affiche pas les titres du tableau */
+#signatures td.signature-date { background: #E4F0F0; padding: 0.5em; white-space: nowrap; }
+#signatures td.signature-nom { background: #ECF4F4; padding: 0.2em; text-align: center; font-weight: bold; }
+#signatures td.signature-message { background: #F4F8F8; padding: 0.4em; font-size: 0.96em; }
 
-#signatures td.signature-date {
-	background: #E4F0F0;
-	padding: 0.5em;
-	white-space: nowrap; }
-
-#signatures td.signature-nom {
-	background: #ECF4F4;
-	padding: 0.2em;
-	text-align: center;
-	font-weight: bold; }
-
-#signatures td.signature-message {
-	background: #F4F8F8;
-	padding: 0.4em;
-	font-size: 0.96em; }
-
-/*  ------------------------------------------
-/*  Couleurs des liens
-/*  ------------------------------------------ */
+/* Couleurs des liens
+---------------------------------------------- */
 a { text-decoration: none; color: #333; }
-a:hover { text-decoration: underline;}
+a:hover { text-decoration: underline; }
 
 /* menu langues */
-#menu_langues {
-	vertical-align: top;
-	max-height: 24px; 
-	margin-bottom: 5px; 
-	width: 120px;
-}
+#menu_langues { vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px; }

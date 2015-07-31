@@ -7,27 +7,14 @@
 /* Raccourcis typographiques de SPIP */
 .spip_puce { list-style-position: outside; }
 
-h3.spip {
-	text-align: center; 
-	margin-top: 2em; 
-	margin-bottom: 1.4em; 
-	font-size: 1.15em; 
-	font-weight: bold; }
+h3.spip { text-align: center; margin-top: 2em; margin-bottom: 1.4em; font-size: 1.15em; font-weight: bold; }
 
 /* Paragraphes, citations, code et poesie */
 blockquote.spip, .spip_serif { font-family: Georgia, Times, serif; }
 
-blockquote.spip {
-	margin: 1em; 
-	padding-left: 1em;
-	padding-right: 1em;
-	border: 1px dotted; }
+blockquote.spip { margin: 1em; padding-left: 1em; padding-right: 1em; border: 1px dotted; }
 
-.spip_poesie { 
-	margin: 1em; 
-	padding-left: 1em; 
-	border-left: 1px solid;
-	font-family: Garamond, Georgia, Times, serif; }
+.spip_poesie { margin: 1em; padding-left: 1em; border-left: 1px solid; font-family: Garamond, Georgia, Times, serif; }
 .spip_poesie div { text-indent: -60px; margin-left: 60px; }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.2em; }
@@ -36,17 +23,8 @@ blockquote.spip {
 .spip_surligne { background: #FF6; }
 
 /* Tableaux */
-table.spip {
-	margin: auto;
-	margin-bottom: 1em;
-	border: 1px solid;
-	border-collapse: collapse; }
-table.spip caption {
-	caption-side: top; /* bottom pas pris en compte par IE */
-	text-align: center;
-	margin: auto;
-	padding: 3px;
-	font-weight: bold; }
+table.spip { margin: auto; margin-bottom: 1em; border: 1px solid; border-collapse: collapse; }
+table.spip caption { caption-side: top; /* bottom pas pris en compte par IE */ text-align: center; margin: auto; padding: 3px; font-weight: bold; }
 table.spip tr.row_first { background: #FFC; }
 table.spip tr.row_odd { background: #DDD; }
 table.spip tr.row_even { background: #EEE; }
@@ -73,17 +51,12 @@ span.spip_documents_center { display: block; margin-top:1em; }
 /* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
 
-table.spip_barre a img {
-	background: #FDA;
-	padding: 3px;
-	border: 1px outset #999; }
-table.spip_barre a:hover img {
-	background: #FFF;
-	border: 1px solid #999; }
+table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #999; }
+table.spip_barre a:hover img { background: #FFF; border: 1px solid #999; }
 
 table.spip_barre input.barre { width: 100%; background: #EEE; }
 
-/* * Couleurs des liens de Spip */
+/* * Couleurs des liens de SPIP */
 a.spip_note {} /* liens vers notes de bas de page */
 a.spip_in { color: #900; } /* liens internes */
 a.spip_out { color: #009; } /* liens sortants */
