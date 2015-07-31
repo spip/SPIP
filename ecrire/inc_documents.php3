@@ -684,7 +684,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					echo "<b>"._T('titre_titre_document')."</b><br />\n";
 					echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 			
-					if ($GLOBALS['coll'] > 0 AND $options == "avancees") {
+					if ($GLOBALS['id_rubrique'] > 0 AND $options == "avancees") {
 						if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
 							$mois = $regs[2];
 							$jour = $regs[3];
@@ -889,7 +889,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					echo "<b>"._T('titre_titre_document')."</b><br />\n";
 					echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 			
-					if ($GLOBALS['coll'] > 0 AND $options == "avancees") {
+					if ($GLOBALS['id_rubrique'] > 0 AND $options == "avancees") {
 						if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
 							$mois = $regs[2];
 							$jour = $regs[3];
@@ -1153,7 +1153,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<b>"._T('titre_titre_document')."</b><br />\n";
 		echo "<input type='text' name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 
-		if ($GLOBALS['coll'] > 0 AND $options == "avancees") {
+		if ($GLOBALS['id_rubrique'] > 0 AND $options == "avancees") {
 			if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
 				$mois = $regs[2];
 				$jour = $regs[3];

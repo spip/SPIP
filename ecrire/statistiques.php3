@@ -129,7 +129,7 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
 				
 				echo "<span class='verdana1'>";	
-				echo "<A HREF='naviguer.php3?coll=$id_rubrique' style='color: black;'>$titre</A>";
+				echo "<A HREF='naviguer.php3?id_rubrique=$id_rubrique' style='color: black;'>$titre</A>";
 				
 				
 				echo "</span>";

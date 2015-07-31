@@ -108,7 +108,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	$i = sizeof($arr_rub);
 	if ($i > 0 AND $zdecal < $zmax) {
 		$ret .= '<div class=\"pos_r\" style=\"z-index: '.$z.';\" onMouseOver=\"montrer(\'b_'.$id_rubrique.'\');\" onMouseOut=\"cacher(\'b_'.$id_rubrique.'\');\">';
-		$ret .= '<div class=\"brt\"><a href=\"naviguer.php3?coll='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
+		$ret .= '<div class=\"brt\"><a href=\"naviguer.php3?id_rubrique='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
 		$ret .= '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
 		foreach( $arr_rub as $id_rub => $titre_rub) {
 			$titre_rub = supprimer_numero(typo($titre_rub));
@@ -117,7 +117,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		}
 		$ret .= "</div></div>";
 	} else {
-		$ret .= '<div><a href=\"naviguer.php3?coll='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
+		$ret .= '<div><a href=\"naviguer.php3?id_rubrique='.$id_rubrique.'\" class=\"bandeau_rub\"'.$image.'>'.addslashes(supprimer_tags($titre_rubrique)).'</a></div>';
 	}
 	$zdecal = $zdecal - 1;
 	return $ret;

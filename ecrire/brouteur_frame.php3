@@ -77,7 +77,7 @@ debut_html();
 			else $icone = "rubrique-24.gif";
 			
 			echo "<div style='background-color: #cccccc; border: 1px solid #444444;'>";
-			icone_horizontale("$titre", "javascript:window.parent.location=\"naviguer.php3?coll=$id_rubrique\"", "$icone","");
+			icone_horizontale("$titre", "javascript:window.parent.location=\"naviguer.php3?id_rubrique=$id_rubrique\"", "$icone","");
 			echo "</div>";
 		}  else if ($frame == 0) {
 			echo "<div style='background-color: #cccccc; border: 1px solid #444444;'>";
