@@ -2498,7 +2498,7 @@ function produire_image_typo() {
 		
 		
 		// Utiliser imagepng() donnera un texte plus claire,
-		// compar� � l'utilisation de la fonction imagejpeg()
+		// compare a l'utilisation de la fonction imagejpeg()
 		imagepng($im, $fichier);
 		imagedestroy($im);
 		
