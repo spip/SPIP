@@ -172,10 +172,16 @@ function inc_auth_dist() {
 		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 	}
 
-	// Le tableau global auteur_session contient toutes les infos.
+	// Le tableau global auteur_session contient toutes les infos pertinentes
+	// et a jour (tandis que $auteur_session peut avoir des valeurs un peu datees
+	// s'il est pris dans le fichier de session)
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
-
-	$GLOBALS['auteur_session'] = $row;
+	$GLOBALS['auteur_session'] = array_merge($GLOBALS['auteur_session'], $row);
+	// au cas ou : ne pas memoriser les champs sensibles
+	unset($GLOBALS['auteur_session']['pass']);
+	unset($GLOBALS['auteur_session']['htpass']);
+	unset($GLOBALS['auteur_session']['alea_actuel']);
+	unset($GLOBALS['auteur_session']['alea_futur']);
 
 	if (is_string($droits)) {
 	  // ordres mineurs: redac, visiteur ou indefini
