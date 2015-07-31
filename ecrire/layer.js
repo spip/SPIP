@@ -76,3 +76,16 @@ function manipuler_couches(action,rtl,first,last, dir) {
 		}
 	}
 }
+
+function acceder_couche(couches, n, dir, icone, texte, sens) {
+	  javasc = ''
+	  for (j=0; j<couches.length; j+=1)
+	  	javasc += 'swap_couche(' + couches[j][0] + ", '" + sens + "','" + dir + "', " + couches[j][1] + ");";
+	  
+	document.write('<a class="triangle_block" href="javascript:' +
+	    javasc +
+	    '"><img name="triangle' + n + '" src="' +
+	    dir + icone + '" alt="" title="' +
+	    texte +
+	    '" width="10" height="10" border="0"></a>');
+}
