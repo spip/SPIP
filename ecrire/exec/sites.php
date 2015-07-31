@@ -129,7 +129,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 				'contexte'=>$contexte),
 			'data'=> $fond));
 	
-	$fond.= "<div id='wysiwyg'>$fond</div>";
+	$fond = "<div id='wysiwyg'>$fond</div>";
 
 	$onglet_contenu =
 		(_INTERFACE_ONGLETS?
@@ -214,6 +214,8 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 // http://doc.spip.org/@options_moderation
 function options_moderation($row) {
+	if ($row['syndication'] == 'non') return '';
+
 	$id_syndic = $row['id_syndic'];
 	$moderation = $row['moderation'];
 	if ($moderation != 'oui') $moderation='non';
