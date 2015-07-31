@@ -395,8 +395,8 @@ function unicode2charset($texte, $charset='AUTO') {
 
 // Importer un texte depuis un charset externe vers le charset du site
 // (les caracteres non resolus sont transformes en &#123;)
-function importer_charset($texte, $charset = 'AUTO', $forcer = false) {
-	return unicode2charset(charset2unicode($texte, $charset, $forcer));
+function importer_charset($texte, $charset = 'AUTO') {
+	return unicode2charset(charset2unicode($texte, $charset, true));
 }
 
 // UTF-8

@@ -95,9 +95,8 @@ function transcoder_page($texte) {
 		$charset_page = strtolower($regs[2]);
 		$texte = importer_charset($texte, $charset_page);
 	}
-	// Si le backend ne precise pas, on considere qu'il est iso-8859-1 : il faut
-	// alors forcer la conversion
-	else $texte = importer_charset($texte, 'iso-8859-1', true);
+	// Si le backend ne precise pas, on considere qu'il est iso-8859-1
+	else $texte = importer_charset($texte, 'iso-8859-1');
 
 	return $texte;
 }
