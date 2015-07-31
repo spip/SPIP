@@ -87,6 +87,8 @@ function admin_plug_args($quoi, $erreur, $format)
 
 	// Les affichages se basent sur le repertoire, pas sur le nom
 	$actifs = liste_chemin_plugin($actifs, '');
+	if (defined('_DIR_PLUGINS_SUPPL'))
+		$lcpas = liste_chemin_plugin($lcpa,_DIR_PLUGINS_SUPPL);
 	$lcpa = liste_chemin_plugin($lcpa);
 	
 	// on installe les plugins maintenant,
@@ -106,15 +108,23 @@ function admin_plug_args($quoi, $erreur, $format)
 							. " &mdash; "._T('plugin_info_automatique_creer')."</p>";
 		}
 		$lcpaffiche = $lpf;
+		if (defined('_DIR_PLUGINS_SUPPL'))
+			$lcpaffichesup = liste_plugin_files(_DIR_PLUGINS_SUPPL);
 	}
 	else {
 		// la liste
 		// $quoi=='actifs'
 		$lcpaffiche = $lcpa;
+		if (defined('_DIR_PLUGINS_SUPPL'))
+			$lcpaffichesup = $lcpas;
 	}
 
-	if ($quoi=='actifs' OR $lpf)
-		echo "<h3>".sinon(singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'), _T('plugins_actif_aucun'))."</h3>";
+	if ($quoi=='actifs' OR $lpf){
+		$nb = count($lcpa);
+		if (defined('_DIR_PLUGINS_SUPPL'))
+			$nb += count($lcpas);
+		echo "<h3>".sinon(singulier_ou_pluriel($nb, 'plugins_actif_un', 'plugins_actifs', 'count'), _T('plugins_actif_aucun'))."</h3>";
+	}
 
 	if (empty($format))
 	  $format = 'liste';
@@ -123,6 +133,9 @@ function admin_plug_args($quoi, $erreur, $format)
 
 	$afficher = charger_fonction("afficher_$format",'plugins');
 	$corps = $afficher(self(),$lcpaffiche, $lcpa, $actifs);
+	if (defined('_DIR_PLUGINS_SUPPL'))
+		$corps .= $afficher(self(),$lcpaffichesup, $lcpas, $actifs, _DIR_PLUGINS_SUPPL);
+
 	if ($corps)
 	  $corps .= "\n<div class='boutons' style='display:none;'>"
 	    .  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
