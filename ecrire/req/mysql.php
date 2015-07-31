@@ -147,6 +147,10 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 
 // http://doc.spip.org/@spip_mysql_alter
 function spip_mysql_alter($query, $serveur='',$requeter=true){
+	// ici on supprime les ` entourant le nom de table pour permettre
+	// la transposition du prefixe, compte tenu que les plugins ont la mauvaise habitude
+	// d'utiliser ceux-ci, copie-colle de phpmyadmin
+	$query = preg_replace(",^TABLE\s*`([^`]*)`,i","TABLE \\1",$query);
 	return spip_mysql_query("ALTER ".$query, $serveur, $requeter); # i.e. que PG se debrouille
 }
 
