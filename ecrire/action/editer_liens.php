@@ -34,7 +34,7 @@ function objet_associable($objet){
 		AND !preg_match(',[^\w],',$table_lien))
 		return array($primary,$l);
 	
-	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l");
+	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l",_LOG_ERREUR);
 	return false;
 }
 
@@ -196,7 +196,7 @@ function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = nu
 			foreach($ids as $id) {
 				$res = $operation($objet,$primary,$l,$id,$objets_lies,$set);
 				if ($res===false) {
-					spip_log("objet_traiter_laisons [Echec] : $operation sur $objet/$primary/$l/$id");
+					spip_log("objet_traiter_laisons [Echec] : $operation sur $objet/$primary/$l/$id",_LOG_ERREUR);
 					$echec = true;
 				}
 				else
@@ -407,6 +407,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
  */
 function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	$echec = null;
+	$ok = 0;
 	if (!$qualif)
 		return false;
 	// nettoyer qualif qui peut venir directement d'un objet_trouver_lien :
@@ -423,9 +424,11 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 			$e = sql_updateq($table_lien,$qualif,$where);
 			if ($e===false)
 				$echec = true;
+		  else
+			  $ok++;
 		}
 	}
-	return ($echec?false:true);
+	return ($echec?false:$ok);
 }
 
 /**
