@@ -752,6 +752,7 @@ prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
 prive/squelettes/contenu/article.html -text
 prive/squelettes/contenu/article_edit.html -text
+prive/squelettes/contenu/articles.html -text
 prive/squelettes/contenu/auteur.html -text
 prive/squelettes/contenu/auteur_edit.html -text
 prive/squelettes/contenu/auteurs.html -text
@@ -765,7 +766,6 @@ prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
 prive/squelettes/contenu/infos_perso.html -text
-prive/squelettes/contenu/mes_articles.html -text
 prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/recherche.html -text
 prive/squelettes/contenu/recherche_fonctions.php -text
