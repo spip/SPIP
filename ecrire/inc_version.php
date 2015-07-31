@@ -397,9 +397,12 @@ else
 	@header("Vary: Cookie");
 
 // Vanter notre art de la composition typographique
-
+// La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
 if (!headers_sent())
-	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net" . ((isset($GLOBALS['meta']['plugin_header'])&&!isset($GLOBALS['plugin_header_silencieux']))?(" + ".$GLOBALS['meta']['plugin_header']):""));
+	if (!isset($GLOBALS['spip_header_silencieux']) OR !$GLOBALS['spip_header_silencieux'])
+		@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net" . (isset($GLOBALS['meta']['plugin_header'])?(" + ".$GLOBALS['meta']['plugin_header']):""));
+	else // header minimal
+		@header("Composed-By: SPIP @ www.spip.net");
 
 # spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 
