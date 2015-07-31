@@ -987,6 +987,9 @@ prive/themes/spip/vieilles_def.css.html -text
 prive/transmettre.html -text
 prive/transmettre/forum_article.html -text
 prive/transmettre/signatures_article.html -text
+prive/xhtml-lat1.ent -text
+prive/xhtml-special.ent -text
+prive/xhtml-symbol.ent -text
 /rien.gif -text
 /spip.php -text
 squelettes-dist/favicon.ico.html -text
