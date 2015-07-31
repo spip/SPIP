@@ -1067,7 +1067,14 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	$f = charger_fonction('phraser_' . $gram, 'public');
 
 	$squelette = $f($squelette, '', $boucles, $descr);
+
+if (_request('var_test') == 'echo') {
+	echo "\n<pre>"; print_r($squelette); echo "</pre>";
+	echo "<hr />";
+	echo "\n<pre>"; print_r($boucles); echo "</pre>";
+}
 	$boucles = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
+#echo "\n<pre>"; print_r($boucles); echo "</pre>";
 
 	// restituer les echappements
 	if ($esc)
