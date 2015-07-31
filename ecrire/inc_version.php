@@ -36,21 +36,12 @@ define ('_PHP_MIN', '5.1.0');
 /** le nom du repertoire ecrire/ */
 if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', 'ecrire/');
 
-/**
- * Chemin relatif pour aller dans ecrire
- *
- * - vide si on est dans ecrire
- * - 'ecrire/' sinon
- */
+/** Chemin relatif pour aller dans ecrire
+ *  vide si on est dans ecrire, 'ecrire/' sinon */
 define('_DIR_RESTREINT',
  (!is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 
-/**
- * Chemin relatif pour aller à la racine
- *
- * - vide si on est dans le public
- * - '../' sinon
- */
+/** Chemin relatif pour aller à la racine */
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
 /** chemin absolu vers la racine */
