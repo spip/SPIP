@@ -296,7 +296,7 @@ function filtres_arglist($args, $p, $sep) {
 		else
 		  ereg(' *([^,]+) *,?(.*)$', $args, $regs);
 		$arg = $regs[1];
-		spip_log("$args $arg");
+#		spip_log("$args $arg");
 		if ($arg !== '') {
 			if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
