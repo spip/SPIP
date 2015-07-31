@@ -531,7 +531,7 @@ while($row = mysql_fetch_array($result_message)) {
 			}
 			else {
 				afficher_icone_texte(newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"),
-					"Envoyer ce message", 'IMG2/message-efface.gif', 32, 32, 'right');
+					"Envoyer ce message", 'IMG2/message-valide.gif', 32, 32, 'right');
 			}
 		}
 		
