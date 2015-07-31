@@ -111,11 +111,12 @@ function calcul_mysql_in($val, $valeurs, $tobeornotobe)
 {
   $s = split(',', $valeurs, 255);
   if (count($s) < 255)
-    return ("$val $tobeornotobe IN ($valeurs)");
+    return ("($val $tobeornotobe IN ($valeurs))");
   else 
     {
       $valeurs = array_pop($s);
-      return ("$val $tobeornotobe IN (" . join(',',$s) . ') AND ' .
+      return ("($val $tobeornotobe IN (" . join(',',$s) . "))\n" .
+	      ($tobeornotobe ? "AND\t" : "OR\t") .
 	      calcul_mysql_in($val, $valeurs, $tobeornotobe));
     }
 }
