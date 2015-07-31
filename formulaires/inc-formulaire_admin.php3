@@ -148,7 +148,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'id_breve' => $id_breve,
 			'id_mot' => $id_mot,
 			'id_syndic' => $id_syndic,
-			'voir_article' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'articles', "id_article=$id_articles"),
+			'voir_article' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'articles', "id_article=$id_article"),
 			'voir_breve' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'breves_voir', "id_breve=$id_breve"),
 			'voir_rubrique' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'naviguer', "id_rubrique=$id_rubrique"),
 			'voir_mot' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'mots_edit', "id_mot=$id_mot"),
