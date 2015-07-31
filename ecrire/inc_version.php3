@@ -216,11 +216,12 @@ if (eregi('\(Win', $HTTP_SERVER_VARS['SERVER_SOFTWARE']))
 // Infos sur le fichier courant
 //
 
-// Compatibilite avec serveurs ne fournissant pas, ou mal $REQUEST_URI
-if (!$REQUEST_URI)
+// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
+if (!$REQUEST_URI) {
 	$REQUEST_URI = $PHP_SELF;
-if (!strpos($REQUEST_URI, '?') && $QUERY_STRING)
-	$REQUEST_URI .= '?'.$QUERY_STRING;
+	if (!strpos($REQUEST_URI, '?') && $QUERY_STRING)
+		$REQUEST_URI .= '?'.$QUERY_STRING;
+}
 
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
