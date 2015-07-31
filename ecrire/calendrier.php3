@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
   // ce script peut etre recopie a la racine pour obtenir le calendrier
   // a partir de l'espace public. 
   // Evidemment les messages internes a la redaction seront absents.
@@ -26,22 +25,15 @@ if (!_DIR_RESTREINT)
 	include_ecrire("inc_layer.php3");
  }
 
-$today=getdate(time());
-$jour_today = $today["mday"];
-$mois_today = $today["mon"];
-$annee_today = $today["year"];
-
 // sans arguments => mois courant
 if (!$mois){
-  $jour=$jour_today;
-  $mois=$mois_today;
-  $annee=$annee_today;
- } else {if (!isset($jour)) $jour = 1;}
+  $today=getdate(time());
+  $jour = $today["mday"];
+  $mois = $today["mon"];
+  $annee = $today["year"];
+ } else {if (!isset($jour)) {$jour = 1; $type= 'mois';}}
 
 $date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
-$jour = journum($date);
-$mois = mois($date);
-$annee = annee($date);
 
 if (!isset($type)) $type = 'mois';
 
@@ -51,21 +43,15 @@ if ($type == 'semaine') {
 	$afficher_bandeau_calendrier_semaine = true;
 
 	$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => $annee));
+		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	  }
 elseif ($type == 'jour') {
-	$titre = nom_jour("$annee-$mois-$jour")." ".
-	  affdate_jourcourt("$annee-$mois-$jour");
-	$jour = $jour_today;
-	$mois = $mois_today;
-	$annee = $annee_today;
+	$titre = nom_jour($date)." ". affdate_jourcourt($date);
  }
  else {
 	$type = 'mois';
-	$jour = '01';
 	$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($annee . '-' . sprintf("%02d", $mois) . '-01'), 
-			  'annee' => $annee));
+		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	  }
 
 if (!_DIR_RESTREINT) 
@@ -73,8 +59,14 @@ if (!_DIR_RESTREINT)
  else debut_html($titre);
 
 $f = 'http_calendrier_init_' . $type;
-echo $f($jour,$mois,$annee, $date, $GLOBALS['PHP_SELF']);
+echo $f($date, $echelle, $partie_cal, $GLOBALS['PHP_SELF']);
 
 if (!_DIR_RESTREINT) fin_page(); else 	echo "</body></html>\n";
 
+// partie_cal est utilisee dans:
+// calendrier_navication navi_jour navi_sem 
+// calendrier_mois   calendrier_jour
+
+
+// calendrier_suite_heures
 ?>
