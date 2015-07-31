@@ -403,7 +403,7 @@ Thank you for your participation!
 'info_contenance' => 'This site contains:',
 'info_contribution' => 'forum contributions',
 'info_copyright' => '@spip@ is free software distributed @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>For further information, see <a href="@spipnet@">http://www.spip.net/en</a>.',
+'info_copyright_doc' => 'For more information, see <a href="@spipnet@">http://www.spip.net/en</a>.',
 'info_copyright_gpl' => 'under the GPL license',
 'info_cours_edition' => 'Your articles in progress',
 'info_creer_repertoire' => 'Please create a file or a directory called:',

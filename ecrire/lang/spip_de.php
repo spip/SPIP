@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces' => 'Keine Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_recharger_page' => 'Seite neu laden',
-'bouton_telecharger' => 'Herunterladen',
+'bouton_telecharger' => 'Hochladen',
 'bouton_valider' => 'Best&auml;tigen',
 
 // C
@@ -398,7 +398,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'info_contenance' => 'Diese Website enth&auml;lt:',
 'info_contribution' => 'Forumsbeitr&auml;ge',
 'info_copyright' => '@spip@ ist freie Software im Sinne der @lien_gpl@.',
-'info_copyright_doc' => '<MODIF>Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.',
+'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href="@spipnet@">http://www.spip.net/de</a>.',
 'info_copyright_gpl' => 'GNU Public License',
 'info_cours_edition' => 'Ihre Artikel in Bearbeitung',
 'info_creer_repertoire' => 'Bitte legen Sie eine Datei oder ein Verzeichnis mit diesem Namen an: ',
