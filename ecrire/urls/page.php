@@ -49,8 +49,6 @@ function _generer_url_page($type,$id, $args='', $ancre='') {
 // http://doc.spip.org/@urls_page_dist
 function urls_page_dist($i, &$entite, $args='', $ancre='')
 {
-	$contexte = $GLOBALS['contexte']; // recuperer aussi les &debut_xx
-
 	if (is_numeric($i))
 		return _generer_url_page($entite, $i, $args, $ancre);
 
@@ -58,24 +56,9 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	if ($GLOBALS['profondeur_url']>0 AND $entite=='sommaire'){
 		return array(array(),'404');
 	}
-	$url = $i;
-
-	// Decoder l'url html, page ou standard
-	$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
-	if (preg_match(
-	',^(?:[^?]*/)?('.$objets.')([0-9]+)(?:\.html)?([?&].*)?$,', $url, $regs)
-	OR preg_match(
-	',^(?:[^?]*/)?('.$objets.')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,', $url, $regs)
-	OR preg_match(
-	',^(?:[^?]*/)?(?:spip[.]php)?[?]('.$objets.')([0-9]+)(&.*)?$,', $url, $regs)) {
-		$type = preg_replace(',s$,', '', table_objet($regs[1]));
-		$_id = id_table_objet($regs[1]);
-		$id_objet = $regs[2];
-		$suite = $regs[3];
-		$contexte[$_id] = $id_objet;
-		if ($type == 'syndic') $type = 'site';
-		return array($contexte, $type, null, $type);
-	}
+	// voir s'il faut recuperer le id_* implicite et les &debut_xx;
+	$r = nettoyer_url_page($i, $GLOBALS['contexte']);
+	if ($r) return $r;
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
@@ -85,6 +68,7 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	 */
 	// Si on est revenu en mode html, mais c'est une ancienne url_propre
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
+	$url = $i;
 	$url_propre = isset($url)
 		? $url
 		: (isset($_SERVER['REDIRECT_url_propre'])
@@ -101,6 +85,30 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 		return $urls_anciennes($url_propre, $entite);
 	}
 	/* Fin du bloc compatibilite url-propres */
+}
+
+	// Decoder l'url html, page ou standard
+
+define('_URL_OBJETS', 'article|breve|rubrique|mot|auteur|site|syndic');
+define('_RACCOURCI_URL_PAGE_HTML',
+	 ',^(?:[^?]*/)?('. _URL_OBJETS . ')([0-9]+)(?:\.html)?([?&].*)?$,');
+define('_RACCOURCI_URL_PAGE_ID',
+	',^(?:[^?]*/)?('. _URL_OBJETS .')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,');
+define('_RACCOURCI_URL_PAGE_SPIP',
+	',^(?:[^?]*/)?(?:spip[.]php)?[?]('. _URL_OBJETS .')([0-9]+)(&.*)?$,');
+ 
+function nettoyer_url_page($url, $contexte=array())
+{
+	if (preg_match(_RACCOURCI_URL_PAGE_HTML, $url, $regs)
+	OR preg_match(_RACCOURCI_URL_PAGE_ID, $url, $regs)
+	OR preg_match(_RACCOURCI_URL_PAGE_SPIP, $url, $regs)) {
+		$type = preg_replace(',s$,', '', table_objet($regs[1]));
+		if ($type == 'syndic') $type = 'site';
+		$_id = id_table_objet($regs[1]);
+		$contexte[$_id] = $regs[2];
+		return array($contexte, $type, null, $type);
+	}
+	return array();
 }
 
 ?>
