@@ -235,7 +235,7 @@ function controle_forum($request,$adresse_retour) {
 			echo "<img src='img_pack/cadenas-24.gif' border=0 align='left'>";
 			echo "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[dans l'espace priv&eacute;]</FONT> ";
 		}
-		echo "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure)." ˆ ".heures($forum_date_heure)." heures ".minutes($forum_date_heure)."</FONT>";
+		echo "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure).", ".heures($forum_date_heure)."h".minutes($forum_date_heure)."</FONT>";
 		if (strlen($forum_auteur) > 2) {
 			if (strlen($forum_email_auteur) > 3) {
 				$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
