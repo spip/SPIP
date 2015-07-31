@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'accueil_site' => 'Úvodná stránka',
 	'article' => 'Článok',
 	'articles' => 'Články',
-	'articles_auteur' => 'Články tohoto autora',
+	'articles_auteur' => 'Články tohto autora',
 	'articles_populaires' => 'Najčítanejšie články',
 	'articles_rubrique' => 'Články v tejto rubrike',
 	'aucun_article' => 'Na tejto adrese nie je žiadny článok',
@@ -29,8 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bonjour' => 'Dobrý deň',
 
 	// C
-	'commenter_site' => 'Komentár k tomuto odkazu',
-	'contact' => 'Kontakt',
+	'commenter_site' => 'Komentár k tejto stránke',
+	'contact' => 'Napíšte nám',
 	'copie_document_impossible' => 'Tento dokument sa nedá kopírovať',
 
 	// D
