@@ -121,8 +121,9 @@
 	<langue code="ne" url="http://trad.spip.net/tradlang_module/spip?lang_cible=ne" total="631" traduits="543" relire="0" modifs="27" nouveaux="61" pourcent="86.05">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl" total="631" traduits="629" relire="0" modifs="0" nouveaux="2" pourcent="99.68">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/spip?lang_cible=nl" total="631" traduits="631" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="gerbrand" lien="http://trad.spip.net/auteur/gerbrand" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
