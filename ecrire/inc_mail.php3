@@ -111,7 +111,7 @@ function extrait_article($row) {
 	$result_auteurs = spip_query($query);
 
 	while ($row = spip_fetch_array($result_auteurs)) {
-		$nom_auteur = $row['nom'];
+		$nom_auteur = typo($row['nom']);
 
 		if ($les_auteurs) $les_auteurs .= ', ';
 		$les_auteurs .= $nom_auteur;
