@@ -1,9 +1,11 @@
 <h1 class="none"><:icone_accueil:></h1>
 #SET{recentwhere,''}
 <BOUCLE_haspostdate(ARTICLES){statut=publie}{0,1}>
+[(#CONFIG{post_dates}|=={non}|et{#SESSION{statut}|=={0minirezo}|oui})
 	[(#SET{recentwhere,[NOT ((#VAL{date}|quete_condition_postdates))]})]
 	<INCLURE{fond=prive/objets/liste/articles,titre=<:info_article_a_paraitre:>,statut=publie,par=date,date_sens=1,nb=5,where=#GET{recentwhere},env,ajax} />
 	[(#SET{recentwhere,[(#VAL{date}|quete_condition_postdates)]})]
+]
 </BOUCLE_haspostdate>
 
 [(#REM)
