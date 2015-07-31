@@ -52,7 +52,6 @@ function base_db_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
 		'errno' => 'spip_pg_errno',
 		'error' => 'spip_pg_error',
 		'fetch' => 'spip_pg_fetch',
-		'fetsel' => 'spip_pg_fetsel',
 		'free' => 'spip_pg_free',
 		'insert' => 'spip_pg_insert',
 		'insertq' => 'spip_pg_insertq',

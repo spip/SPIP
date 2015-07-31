@@ -18,7 +18,7 @@ include_spip('inc/actions');
 include_spip('inc/export');
 include_spip('base/abstract_sql');
 include_spip('inc/meta');
-	include_spip('inc/acces');
+include_spip('inc/acces');
 
 // http://doc.spip.org/@exec_export_all_dist
 function exec_export_all_dist()
@@ -158,7 +158,7 @@ function complete_secteurs($les_rubriques)
 
 // http://doc.spip.org/@export_verifie_session
 function export_verifie_session() {
-	$row = sql_fetsel(array('valeur'),array('spip_meta'),array("nom='export_session_id'"));
+	$row = sql_fetsel('valeur','spip_meta',("nom='export_session_id'"));
 	if ($row['valeur']!=_EXPORT_SESSION_ID)
 		die('la place est prise');
 }

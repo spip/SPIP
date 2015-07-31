@@ -141,8 +141,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	include_spip('base/abstract_sql');
 	$login = preg_replace(',^@,','',@$_COOKIE['spip_admin']);
-	$alang = sql_fetsel(array('lang'), array('spip_auteurs'),
-		array("login=" . _q($login)));
+	$alang = sql_fetsel('lang', 'spip_auteurs', ("login=" . _q($login)));
 	if ($alang['lang']) {
 		$l = lang_select($alang['lang']);
 		$lang = $GLOBALS['spip_lang'];
