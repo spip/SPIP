@@ -111,8 +111,10 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= '<'.'?php { ?'.'>';
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
-	$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
-
+	if (!$id_message) {
+		$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
+	}
+	
 	if ($forums_publics == "pri") {
 		$ret.= _T('forum_info_modere')."<p>";
 	}
@@ -177,13 +179,14 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 			}
 
-			if (strlen($texte) < 10 AND !$presence_mots)
+			if (strlen($texte) < 10 AND !$presence_mots) {
 				$ret .= "<p align='right'><font color=red>"._T('forum_attention_dix_caracteres')."</font></p>\n";
-			else if (strlen($titre) < 3 AND $afficher_texte <> "non")
+			} else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
 				$ret .= "<p align='right'><font color=red>"._T('forum_attention_trois_caracteres')."</font></p>\n";
-			else
+			} else {
+				$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
 				$ret .= "\n<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
-
+			}
 			$ret .= "</div>\n<br />";
 		}
 	}
