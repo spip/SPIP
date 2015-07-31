@@ -36,7 +36,7 @@ function objet_associable($objet){
 		AND !preg_match(',[^\w],',$l))
 		return array($primary,$l);
 
-	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l",_LOG_ERREUR);
+	spip_log("Objet $objet non associable : ne dispose pas d'une cle primaire $primary OU d'une table liens $l");
 	return false;
 }
 
