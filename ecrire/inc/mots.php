@@ -157,7 +157,7 @@ function formulaire_mots($objet, $id_objet, $cherche_mot, $select_groupe, $flag_
 		}
 		if ($reindexer AND ($GLOBALS['meta']['activer_moteur'] == 'oui')) {
 			include_spip("inc/indexation");
-			marquer_indexer($objet, $id_objet);
+			marquer_indexer("spip_$table", $id_objet);
 		}
 	}
 
