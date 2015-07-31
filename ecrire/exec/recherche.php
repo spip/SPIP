@@ -95,33 +95,36 @@ function exec_recherche_dist()
 	}
 	
 	$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves, true);
-
+	echo $nbb;
 	if ($activer_moteur) {
 		if ($nbb) {
 			$doublons = join($nbb, ",");
-			$query_breves_int["WHERE"].= " AND objet.id_breve NOT IN ($doublons)";
+			$query_breves_int["WHERE"].= " AND NOT (" . $query_breves['WHERE'] . ")";
 		}
 		$nbb1 = afficher_breves (_T('info_breves_touvees_dans_texte'), $query_breves_int, true);
+		echo $nbb1;
 	}
 
 	$nbr = afficher_rubriques (_T('info_rubriques_trouvees'), $query_rubriques);
+	echo $nbr;
 	if ($activer_moteur) {
 		if ($nbr) {
-			$doublons = join($nbr, ",");
-			$query_rubriques_int["WHERE"].= " AND objet.id_rubrique NOT IN ($doublons)";
+			$query_rubriques_int["WHERE"].= " AND NOT (" . $query_rubriques['WHERE'] . ")";
 		}
 		$nbr1 = afficher_rubriques (_T('info_rubriques_trouvees_dans_texte'), $query_rubriques_int);
+		echo $nbr1;
 	}
 	
 	$nbt = afficher_auteurs (_T('info_auteurs_trouves'), $query_auteurs_int);
 	
 	$nbs = afficher_sites (_T('info_sites_trouves'), $query_sites);
+	echo $nbs;
 	if ($activer_moteur) {
 		if ($nbs) {
-			$doublons = join($nbs, ",");
-			$query_sites_int["WHERE"].= " AND objet.id_syndic NOT IN ($doublons)";
+			$query_sites_int["WHERE"].=  " AND NOT (" . $query_sites['WHERE'] . ")";
 		}
 		$nbs1 = afficher_sites (_T('info_sites_trouves_dans_texte'), $query_sites_int);
+		echo $nbs1;
 	}
 	
 	if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {

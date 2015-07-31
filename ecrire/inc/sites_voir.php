@@ -17,7 +17,7 @@ include_spip('inc/actions');
 // http://doc.spip.org/@afficher_sites
 function afficher_sites($titre_table, $requete)
 {
-	global $couleur_claire, $connect_id_auteur, $spip_display ;
+	global $couleur_claire;
 
 	$tmp_var = 't_' . substr(md5(join(' ',$requete)), 0, 4);
 
@@ -27,7 +27,7 @@ function afficher_sites($titre_table, $requete)
 // http://doc.spip.org/@afficher_sites_boucle
 function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 {
-  global $spip_lang_right;
+	global $spip_lang_right;
 	$vals = '';
 	$id_syndic=$row["id_syndic"];
 	$id_rubrique=$row["id_rubrique"];
@@ -36,8 +36,6 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 	$url_syndic=$row["url_syndic"];
 	$syndication=$row["syndication"];
 	$statut=$row["statut"];
-	$date=$row["date"];
-	$moderation=$row['moderation'];
 			
 	$tous_id[] = $id_syndic;
 

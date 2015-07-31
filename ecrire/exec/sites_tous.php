@@ -29,11 +29,11 @@ creer_colonne_droite();
 echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_tous'),'data'=>''));	  
 debut_droite();
 
- afficher_sites(_T('titre_sites_tous'), array("FROM" => 'spip_syndic', 'WHERE' => "syndication='non' AND statut='publie'", 'ORDER BY'=> "nom_site"));
+ echo afficher_sites(_T('titre_sites_tous'), array("FROM" => 'spip_syndic', 'WHERE' => "syndication='non' AND statut='publie'", 'ORDER BY'=> "nom_site"));
 
- afficher_sites(_T('titre_sites_syndiques'), array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='oui' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
+ echo afficher_sites(_T('titre_sites_syndiques'), array('FROM' => 'spip_syndic', 'WHERE' => "(syndication='oui' OR syndication='sus') AND statut='publie'", 'ORDER BY' => "nom_site"));
 
- afficher_sites(_T('titre_sites_proposes'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY' => "nom_site"));
+ echo afficher_sites(_T('titre_sites_proposes'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='prop'", 'ORDER BY' => "nom_site"));
 
 if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 	echo "<div align='right'>";
@@ -41,13 +41,13 @@ if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 	echo "</div>";
 }
 
- afficher_sites(_T('avis_sites_probleme_syndication'), array("FROM" => 'spip_syndic', 'WHERE' => "syndication='off' AND statut='publie'", 'ORDER BY' => "nom_site"));
+ echo afficher_sites(_T('avis_sites_probleme_syndication'), array("FROM" => 'spip_syndic', 'WHERE' => "syndication='off' AND statut='publie'", 'ORDER BY' => "nom_site"));
 
 if ($options == 'avancees' AND $connect_statut == '0minirezo') {
-  afficher_sites(_T('info_sites_refuses'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='refuse'", 'ORDER BY' => "nom_site"));
+  echo afficher_sites(_T('info_sites_refuses'), array("FROM" => 'spip_syndic', 'WHERE' => "statut='refuse'", 'ORDER BY' => "nom_site"));
 }
 
- afficher_syndic_articles(_T('titre_dernier_article_syndique'), array('FROM' => 'spip_syndic_articles', 'ORDER BY' => "date DESC",  'LIMIT' => "50"));
+ echo afficher_syndic_articles(_T('titre_dernier_article_syndique'), array('FROM' => 'spip_syndic_articles', 'ORDER BY' => "date DESC",  'LIMIT' => "50"));
 
 echo fin_page();
 }
