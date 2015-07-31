@@ -177,28 +177,48 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 	return false;
 }
 
-function lancer_recherche(champ, cible) {} // obsolete
 
-//
-// Cette fonction charge du contenu - dynamiquement - dans un 
-// Ajax
-
+// Recupere tous les formulaires de la page
+// (ou du fragment qu'on vient de recharger en ajax)
+// et leur applique les comportements js souhaites
+// ici :
+// * retailler les input
+// * utiliser ctrl-s, F8 etc comme touches de sauvegarde
 function verifForm(racine) {
 	if(!jQuery.browser.mozilla) return;
-  racine = racine || document;
-  jQuery("input.forml,input.formo,textarea.forml,textarea.formo",racine)
-  .each(function(){
-  	var jField = jQuery(this);
-    var w = jField.css('width');
-    if(!w || w == '100%') {
-      jField.css('width','95%');
-    } else {
-			w = parseInt(w)-
-      (parseInt(jField.css("borderLeftWidth"))+parseInt(jField.css("borderRightWidth"))+
-        parseInt(jField.css("paddingLeft"))+parseInt(jField.css("paddingRight")));
+	jQuery("input.forml,input.formo,textarea.forml,textarea.formo", racine||document)
+	.each(function() {
+		var jField = jQuery(this);
+		var w = jField.css('width');
+		if (!w || w == '100%') {
+			jField.css('width','95%');
+		} else {
+			w = parseInt(w) -
+			(parseInt(jField.css("borderLeftWidth")) +
+				parseInt(jField.css("borderRightWidth")) +
+				parseInt(jField.css("paddingLeft")) +
+				parseInt(jField.css("paddingRight")
+			));
 			jField.width(w+'px');
-    }
-  });
+		}
+	});
+
+	// Clavier pour sauver (cf. crayons)
+	jQuery('form', racine||document)
+	.keypress(function(e){
+		if (
+		(e.ctrlKey && (
+			/* ctrl-s ou ctrl-maj-S, firefox */
+			((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
+			/* ctrl-s, safari */
+			|| (e.charCode==19 && e.keyCode==19)
+		) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
+		) {
+			jQuery(this)
+			.submit();
+			return false;
+		}
+	});
 }
 
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.

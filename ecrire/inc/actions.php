@@ -133,16 +133,15 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic, $atts_bou
 	  . $atts_span
 	  . "><input type='submit' value='"
 	  . $clic
-	  . "' onclick=" 
-	  . ajax_action_declencheur('this.form', $ancre)
-	  . " $atts_bouton/></span></div>";
+	  . "' $atts_bouton/></span></div>";
 
 	return redirige_action_auteur($action,
 				      $arg,
 				      $action,
 				"var_ajaxcharset=utf-8&script=$retour$args_ajax",
 				      $corps ,
-				      " method='post'");
+				      " method='post' onsubmit="
+				      . ajax_action_declencheur('this', $ancre));
 	}
 
 }
