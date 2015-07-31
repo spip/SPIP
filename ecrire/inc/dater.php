@@ -118,15 +118,15 @@ function dater_redac($id, $type, $script, $possedeDateRedac, $date_redac)
 
 	$js = "\"findObj_forcer('valider_date_redac-$id').style.visibility='visible';\"";
 	$label =
-		'<input type="radio" name="avec_redac" value="non" id="avec_redac_on"' .
+		'<input type="radio" name="avec_redac" value="non" id="avec_redac_on$id"' .
 		($possedeDateRedac ? '' : ' checked="checked"') .
 		" onclick=$js" .
-		' /> <label for="avec_redac_on">'.
+		' /> <label for="avec_redac_on$id">'.
 		_T('texte_date_publication_anterieure_nonaffichee').
 		'</label>' .
-		'<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"' .
+		'<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off$id"' .
 		(!$possedeDateRedac ? '' : ' checked="checked"') .
-		" onclick=$js /> <label for='avec_redac_off'>" .
+		" onclick=$js /> <label for='avec_redac_off$id'>" .
 		_T('bouton_radio_afficher').
 	  ' :</label> ';
 
@@ -151,14 +151,14 @@ function dater_ajax($id, $type, $script, $date, $start=0, $suffixe='', $label=''
 	$js = " onchange=\"findObj_forcer('$idom').style.visibility='visible';\"";
 
 	$res = $label 
-	. afficher_jour($jour, "name='jour$suffixe' id='jour$suffixe' $js", false)
-	. afficher_mois($mois, "name='mois$suffixe' id='mois$suffixe' $js", false)
-	. afficher_annee($annee, "name='annee$suffixe' id='annee$suffixe' $js", $start)
+	. afficher_jour($jour, "name='jour$suffixe' $js", false)
+	. afficher_mois($mois, "name='mois$suffixe' $js", false)
+	. afficher_annee($annee, "name='annee$suffixe' $js", $start)
 	. (($type != 'article')
 		 ? ''
 		 : (' - '
-		    . afficher_heure($heure, "name='heure$suffixe' id='heure$suffixe' $js")
-		    . afficher_minute($minute, "name='minute$suffixe' id='minute$suffixe' $js")))
+		    . afficher_heure($heure, "name='heure$suffixe' $js")
+		    . afficher_minute($minute, "name='minute$suffixe' $js")))
 	  . "<div class='nettoyeur'></div>";
 	
 	$res = "<div style='margin-bottom: 5px; margin-$spip_lang_left: 20px;'>$res</div>";
