@@ -10,8 +10,5 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-define('_ECRIRE_AIDE', 1);
-include ("inc_version.php3");
-$var_f = include_fonction($SCRIPT_NAME);
-$var_f();
+include ("inc.php3");
 ?>
