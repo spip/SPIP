@@ -38,6 +38,12 @@ function balise_EMAIL_WEBMASTER_dist($p) {
 	return $p;
 }
 
+function balise_DESCRIPTIF_SITE_SPIP_dist($p) {
+	$p->code = "\$GLOBALS['meta']['descriptif_site']";
+	#$p->interdire_scripts = true;
+	return $p;
+}
+
 function balise_CHARSET_dist($p) {
 	$p->code = "\$GLOBALS['meta']['charset']";
 	#$p->interdire_scripts = true;

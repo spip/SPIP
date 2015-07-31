@@ -280,6 +280,7 @@ $table_des_traitements['URL_FORUM'][]= 'htmlspecialchars(vider_url(%s))';
 $table_des_traitements['URL_MOT'][]= 'htmlspecialchars(vider_url(%s))';
 $table_des_traitements['URL_RUBRIQUE'][]= 'htmlspecialchars(vider_url(%s))';
 $table_des_traitements['URL_SITE_SPIP'][]= 'htmlspecialchars(vider_url(%s))';
+$table_des_traitements['DESCRIPTIF_SITE_SPIP'][]= 'propre(%s)';
 $table_des_traitements['URL_SITE'][]= 'calculer_url(%s)';
 $table_des_traitements['URL_SOURCE'][]= 'htmlspecialchars(vider_url(%s))';
 $table_des_traitements['URL_SYNDIC'][]= 'htmlspecialchars(vider_url(%s))';

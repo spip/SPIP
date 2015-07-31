@@ -313,6 +313,9 @@ if ($spip_display != 4) {
 	}
 	echo "<div class='verdana1'>";
 
+	if(strlen(propre($GLOBALS['meta']["descriptif_site"])))
+	echo "<div>".propre($GLOBALS['meta']["descriptif_site"])."</div><br />";
+
     $res = spip_query("SELECT count(*) AS cnt, statut FROM spip_articles GROUP BY statut");
   
   while($row = spip_fetch_array($res)) {

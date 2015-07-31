@@ -24,6 +24,7 @@ function init_config() {
 
 	$liste_meta = array(
 		'nom_site' => _T('info_mon_site_spip'),
+		'descriptif_site' => '',
 		'activer_breves' => 'oui',
 		'config_precise_groupes' => 'non',
 		'mots_cles_forums' =>  'non',
@@ -137,7 +138,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 //
 
 function appliquer_modifs_config() {
-	global $adresse_site, $email_webmaster, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
+	global $adresse_site, $email_webmaster, $descriptif_site, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
 
@@ -202,6 +203,7 @@ function appliquer_modifs_config() {
 	$liste_meta = array(
 		'nom_site',
 		'adresse_site',
+		'descriptif_site',
 
 		'activer_breves',
 		'config_precise_groupes',
