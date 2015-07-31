@@ -51,18 +51,22 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 // attention: boucle->doublons designe une variable qu'on affecte
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
+	if (!$boucle->primary)
+		erreur_squelette(_L('doublons sur une table sans index'), $param);
+	$nom = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	spip_log("doublons $nom");
 	$boucle->where[] = '" .' .
-	  "calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
+	  "\ncalcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .
 	  '"0".$doublons[' . 
 	  ($crit->not ? '' : ($boucle->doublons . "[]= ")) .
 	  "('" .
 	  $boucle->type_requete . 
-	  "' . " .
-	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) .
+	  "'" .
+	  ($nom == "''" ? '' : " . $nom") .
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
-	  "') . \"";
+	  "') . \n\"";
 # la ligne suivante avait l'intention d'éviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
 # {!doublons A}{doublons B}
