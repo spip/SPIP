@@ -698,80 +698,26 @@ function afficher_portfolio(
 	$case = 0;
 
 	foreach ($documents as $document) {
-		$id_article = $document["id_$type"]; 		# numero de l'article ou de la rubrique
 		$id_document = $document['id_document'];
-		$id_vignette = $document['id_vignette'];
-		$titre = $document['titre'];
-		$descriptif = $document['descriptif'];
-		if (!isset($document['url']))
-			$url = generer_url_document($id_document);
-		else
-			$url = $document['url'];
-		$fichier = $document['fichier'];
-		$largeur = $document['largeur'];
-		$hauteur = $document['hauteur'];
-		$taille = $document['taille'];
-		$date = $document['date'];
-		$mode = $document['mode'];
 
 		# script pour l'action des formulaires
 		if (isset($document['script']))
 			$script = $document['script']; 
-		else if ($type == "rubrique") {
-		  $script = 'naviguer';
-		  $script = 'articles';
-		}
+		elseif ($type == "rubrique")
+			$script = 'naviguer';
+		else	$script = $GLOBALS['exec'];
 
-
-
-		if ($case == 0) {
+		$style = "";
+		if (!$case)
 			echo "<tr style='border-top: 1px solid black;'>";
-		}
-		
-		$style = "border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
-		if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
-		echo "\n<td  style='width:33%; text-align: $spip_lang_left; $style' valign='top'>";
+		else if ($case == $bord_droit)
+			$style .= " border-$spip_lang_right: 1px solid $couleur;";
+		echo "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>";
 
-		$res = '';
-		// Signaler les documents distants par une icone de trombone
-		if ($document['distant'] == 'oui') {
-			$res .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"".entites_html($document['fichier'])."\"\n\ttitle=\"" .
-entites_html($document['fichier'])."\" />\n";
-		}
-
-		// bloc vignette + rotation
-		$res .= "<div style='text-align:center;'><b>" . 
-		  typo($titre ? $titre : _T('info_sans_titre_2')) .
-		  '</b><br />';
-
-		if ($flag_modif)
-			$res .= afficher_rotateurs($album, $document, $type, $id_article, $id_document, $id_vignette);
-
-		//
-		// Recuperer la vignette et afficher le doc
-		//
-
-		// Indiquer les documents manquants avec un panneau de warning
-
-		if ($document['distant'] != 'oui'
-		AND !@file_exists(_DIR_RACINE.$document['fichier'])) {
-			$c = _T('fichier_introuvable',
-					array('fichier'=>basename($document['fichier'])));
-			$res .= "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
-				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
-		}
-
-		$res .= document_et_vignette($document, $url, true);
-
-		$res .= "<div class='verdana1' style='text-align: center;'>";
-		$res .= " <font size='1' face='arial,helvetica,sans-serif' color='333333'>&lt;doc$id_document&gt;</font>";
-		$res .= "</div>";
-		$res .= "</div>"; // fin du bloc vignette + rotation
-
-		echo $res;
+		echo formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
 		if ($flag_modif) 
-		      echo formulaire_document($id_document, $document, $script, $type, $id_article, $album);
+			echo formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
 
 		if (isset($document['info']))
 			echo "<div class='verdana1'>".$document['info']."</div>";
@@ -786,14 +732,72 @@ entites_html($document['fichier'])."\" />\n";
 		document_vu($id_document);
 	}
 	// fermer la derniere ligne
-	if ($case > 0) {
-			echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
-			echo "</tr>";
+	if ($case) {
+		echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
+		echo "</tr>";
 	}
 }
 
 
-function  afficher_rotateurs($album, $document, $type, $id_article, $id_document, $id_vignette) {
+function formulaire_tourner($id_document, $document, $script, $flag_modif, $type)
+{
+	global $spip_lang_right;
+
+	if (!$document) {
+	  	// retour d'Ajax
+		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+	}
+
+	$id = $document["id_$type"];
+	$titre = $document['titre'];
+	$id_vignette = $document['id_vignette'];
+	$fichier = entites_html($document['fichier']);
+
+	if (isset($document['url']))
+		$url = $document['url'];
+	else {
+		charger_generer_url();
+		$url = generer_url_document($id_document);
+	}
+
+	if ($flag_modif)
+		$res .= boutons_rotateurs($document, $type, $id, $id_document,$script,  $id_vignette);
+	else $res = '';
+	// Indiquer les documents manquants avec un panneau de warning
+
+	if ($document['distant'] != 'oui'
+	AND !@file_exists(_DIR_RACINE.$document['fichier'])) {
+			$c = _T('fichier_introuvable',
+					array('fichier'=>basename($document['fichier'])));
+			$res .= "<img src='" . _DIR_IMG_PACK . "warning-24.gif'"
+				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
+	}
+
+	$res .= document_et_vignette($document, $url, true);
+
+	$res .= "<div class='verdana1' style='text-align: center;'>";
+	$res .= " <font size='1' face='arial,helvetica,sans-serif' color='333333'>&lt;doc$id_document&gt;</font>";
+	$res .= "</div>";
+
+	if ($flag_modif === 'ajax') return $res;
+
+	$boite = '';
+
+	// Signaler les documents distants par une icone de trombone
+	if ($document['distant'] == 'oui')
+		$boite .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
+	$boite .= "<div style='text-align:center;'><b>" . 
+		  typo($titre ? $titre : _T('info_sans_titre_2')) .
+		  "</b><div id='tourner-$id_document'>" .
+		$res .
+		'</div></div>';
+
+	return $boite;
+
+
+}
+
+function boutons_rotateurs($document, $type, $id, $id_document, $script, $id_vignette) {
 	global $spip_lang_right;
 	static $ftype = array(1 => 'jpg', 2 => 'png', 3 => 'gif');
 
@@ -814,30 +818,26 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 
 	  return "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>" .
 
-		  // tourner a gauche
-		http_href_img(bouton_tourner_document($id_article, $id_document, $album, -90, $type), 'tourner-gauche.gif', "", _T('image_tourner_gauche'), '', 'bouton_rotation') . "<br />" .
+		bouton_tourner_document($id, $id_document, $script, -90, $type, 'tourner-gauche.gif', _T('image_tourner_gauche')) .
 
-		// tourner a droite
-	 	http_href_img(bouton_tourner_document($id_article, $id_document, $album, 90, $type), 'tourner-droite.gif', "",  _T('image_tourner_droite'), '', 'bouton_rotation') . "<br />" .
+		bouton_tourner_document($id, $id_document, $script,  90, $type, 'tourner-droite.gif', _T('image_tourner_droite')) .
 
-		// tourner 180
-		http_href_img(bouton_tourner_document($id_article, $id_document, $album, 180, $type), 'tourner-180.gif', "", _T('image_tourner_180'), '', 'bouton_rotation') . "</div>\n";
+		bouton_tourner_document($id, $id_document, $script, 180, $type, 'tourner-180.gif', _T('image_tourner_180')) .
+		"</div>\n";
 	}
 	return '';
 }
 
-
-function bouton_tourner_document($id_article, $id, $album, $rot, $type)
+function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, $title)
 {
-	return redirige_action_auteur('tourner', $id, $GLOBALS['exec'], "id_$type=$id_article&show_docs=$id#$album") .
-		"&amp;var_rot=$rot";
-}
-
-function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album, $id_document=0)
-{
-	return redirige_action_auteur('supprimer', "document-$id_v", $GLOBALS['exec'], "id_$type=$id_article#$album");
-
-
+  return ajax_action_auteur("tourner",
+			    "$id_document-$rot",
+			    array(http_img_pack($img, $title, ''),
+				  'bouton_rotation'),
+			    $sript,
+"&id_document=$id_document&id=$id&type=$type",
+"&show_docs=$id_document&id_$type=$id#tourner-$id_document") .
+    "<br />";
 }
 
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
@@ -1089,7 +1089,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 			  "</font></div>";
 		}
 
-		echo formulaire_document($id_document, $document, '', $type, $id, "document$id_document");
+		echo formulaire_documenter($id_document, $document, '', $type, $id, "document$id_document");
 
 		fin_cadre_enfonce();
 		}
@@ -1136,7 +1136,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		if (ereg(",$id_document,", $doublons))
 			echo $raccourci_doc;
 
-		echo formulaire_document($id_document, $document,'', $type, $id, "document$id_document");
+		echo formulaire_documenter($id_document, $document,'', $type, $id, "document$id_document");
 		
 		fin_cadre_relief();
 	}
@@ -1153,7 +1153,7 @@ function teste_doc_deplie($id_document) {
 }
 
 
-function date_formulaire_document($date, $id_document) {
+function date_formulaire_documenter($date, $id_document) {
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
 		$mois = $regs[2];
@@ -1172,7 +1172,7 @@ function date_formulaire_document($date, $id_document) {
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
- function formulaire_document($id_document, $document, $script='', $type, $id, $ancre)
+ function formulaire_documenter($id_document, $document, $script, $type, $id, $ancre)
 {
 	if ($document) {
 		// premier appel
@@ -1229,7 +1229,7 @@ function date_formulaire_document($date, $id_document) {
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
 	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"><br />\n" .
 	  '<br />' . 
-	  date_formulaire_document($date, $id_document) .
+	  date_formulaire_documenter($date, $id_document) .
 	  "<br /><b>".
 	  _T('info_description_2').
 	  "</b><br />\n" .
@@ -1246,22 +1246,10 @@ function date_formulaire_document($date, $id_document) {
 	  "' type='submit' />" .
 	  "</div>\n";
 
-	$bloc = "document_$id_document";
+	$bloc = "documenter-$id_document";
 
-	if ($_COOKIE['spip_accepte_ajax'] == 1 )
-		$corps = redirige_action_auteur("documenter", 
-				$id_document,
-				'ajax_page',
-				"fonction=document&col=$id_document&id=$id&type=$type&id_ajax_fonc=$script&rac=$ancre",
-				$corps,
-				"\nmethod='post' onsubmit='return AjaxSqueeze(this, \"$bloc\")'");
-	else
-		$corps = redirige_action_auteur("documenter", 
-				$id_document,
-				$script,
-				"show_docs=$id_document&id_$type=$id#$ancre",
-				$corps,
-				"\nmethod='post'");
+	$corps = ajax_action_auteur("documenter", $id_document, $corps, $script, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre","show_docs=$id_document&id_$type=$id#$ancre");
+
 	$corps .= 
 	  $vignette .
 	  icone_horizontale(_T('icone_supprimer_document'), redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre"), $supp,  "supprimer.gif", false);
@@ -1274,5 +1262,38 @@ function date_formulaire_document($date, $id_document) {
 	   $corps .
 	  '</div>' .
 	   fin_block());
+}
+
+// Retourne un formulaire d'execution de $action sur $id,
+// revenant a l'envoyeur $script d'arguments $args.
+// Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
+// d'attribut  id = $action-$id (AjaxSqueeze dans layer.js)
+
+function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
+{
+	if ($_COOKIE['spip_accepte_ajax'] != 1 ) 
+		return redirige_action_auteur($action, 
+				$id,
+				$script,
+				$args,
+				$corps,
+				"\nmethod='post'");
+
+	$pere = '"' . "$action-" . intval($id) . '"';
+
+	if (is_string($corps))
+		return redirige_action_auteur($action,
+				$id,
+				'ajax_page',
+				"fonction=$action&script=$script$args_ajax",
+				$corps,
+				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $pere)'");
+	list($clic, $class) = $corps;
+	$href = redirige_action_auteur($action,
+				$id,
+				'ajax_page',
+				"fonction=$action&script=$script$args_ajax");
+	return "<div class='$class' onclick='AjaxSqueeze(\"$href\",$pere)'>$clic</div>";
+			
 }
 ?>

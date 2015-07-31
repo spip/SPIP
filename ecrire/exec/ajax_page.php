@@ -16,10 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_ajax_page_dist()
 {
-	global $flag_ob, $fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$col = intval($col);
+	global $flag_ob, $fonction;
 
 	$var_nom = 'ajax_page_' . $fonction;
 	if (!function_exists($var_nom))
@@ -32,7 +29,7 @@ function exec_ajax_page_dist()
 // Curieux: le content-type bloque MSIE!
 //		@header('Content-type: text/html; charset=$charset');
 		echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
-		$var_nom($id, $exclus, $col, $id_ajax_fonc, $type, $rac);
+		$var_nom();
 
 		if ($flag_ob) {
 			$a = ob_get_contents();
@@ -45,9 +42,14 @@ function exec_ajax_page_dist()
 
 # Une fonction stockee en base de donnees ?
 
-function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_sql()
 {
 	global $connect_id_auteur;
+	global $id, $exclus, $col, $id_ajax_fonc, $type, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
+	$col = intval($col);
+
 	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur");
 	if ($row = spip_fetch_array($res)) {
 		
@@ -72,11 +74,10 @@ function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 			include_spip('inc/mots');
 			afficher_groupe_mots ($id_groupe);
 		}
-		
 	}
 }
 
-function ajax_page_test($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_test()
 {
 	# tester si ca fonctionne pour ce brouteur
 	// (si on arrive la c'est que c'est bon, donc poser le cookie)
@@ -85,8 +86,11 @@ function ajax_page_test($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 }
 
 # Un moteur de recherche ?
-function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_recherche()
 {
+	global $id, $exclus, $type, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
 
 		include_spip('inc/texte');
 		$where = split("[[:space:]]+", $type);
@@ -171,31 +175,43 @@ function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 }
 
-	# afficher un mini-navigateur de rubriques
+# afficher un mini-navigateur de rubriques
 
-function ajax_page_aff_rubrique($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_aff_rubrique()
 {
-		include_spip('inc/texte');
-		include_spip('inc/mini_nav');
-		echo mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac);
+	global $id, $exclus, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
+
+	include_spip('inc/texte');
+	include_spip('inc/mini_nav');
+	echo mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac);
 
 }
 
 # afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
 
-function ajax_page_aff_rub($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_aff_rub()
 {
-		include_spip('inc/texte');
-		include_spip('inc/mini_nav');
-		echo mini_afficher_rubrique ($id, 
+	global $id, $exclus, $col, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
+	$col = intval($col);
+
+	include_spip('inc/texte');
+	include_spip('inc/mini_nav');
+	echo mini_afficher_rubrique ($id, 
 					     htmlentities($rac),
 					     "", $col, $exclus);
 }
 
-	# petit moteur de recherche sur les rubriques
+# petit moteur de recherche sur les rubriques
 
-function ajax_page_aff_nav_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_aff_nav_recherche()
 {
+	global $id;
+	$id = intval($id);
+
 	include_spip('inc/texte');
 	include_spip('inc/mini_nav');
 	echo mini_nav ($id, "aff_nav_recherche", 
@@ -205,9 +221,14 @@ function ajax_page_aff_nav_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $
 
 # Affiche les infos d'une rubrique selectionnee dans le mini navigateur
 
-function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_aff_info()
 {
-  global $couleur_foncee,$spip_display,$spip_lang_right ;
+	global $couleur_foncee,$spip_display,$spip_lang_right ;
+	global $id, $exclus, $col, $type, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
+	$col = intval($col);
+
 		include_spip('inc/texte');
 		if ($type == "rubrique") {
 			$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
@@ -257,14 +278,29 @@ function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 
 		echo "</div>";
-
 }
 
-function ajax_page_document($id, $bof, $id_document, $script, $type, $ancre)
+function ajax_page_documenter()
 {
+	global $id_document, $script, $id, $type, $ancre;
+	$id = intval($id);
+	$id_document = intval($id_document);
+
 	include_spip('inc/documents');
 	include_spip('inc/presentation');
 
-	echo formulaire_document($id_document, array(), $script, $type, $id, $ancre);
+	echo formulaire_documenter($id_document, array(), $script, $type, $id, $ancre);
+}
+
+function ajax_page_tourner()
+{
+	global $id_document, $script, $id, $type, $ancre;
+	$id = intval($id);
+	$id_document = intval($id_document);
+
+	include_spip('inc/documents');
+	include_spip('inc/presentation');
+
+	echo formulaire_tourner($id_document, array(), $script, 'ajax', $type);
 }
 ?>

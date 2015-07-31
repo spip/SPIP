@@ -17,16 +17,26 @@ include_spip('base/abstract_sql');
 
 function action_tourner_dist() {
 	
-	global $var_rot, $convert_command, $redirect;
-	global $action, $arg, $hash, $id_auteur;
+	global $convert_command;
+
 	include_spip('inc/actions');
+
+	$arg = $_REQUEST['arg'];
+	$hash = $_REQUEST['hash'];
+	$action = $_REQUEST['action'];
+	$redirect = $_REQUEST['redirect'];
+	$id_auteur = $_REQUEST['id_auteur'];
+
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
-	$var_rot = intval($var_rot);
-	$arg = intval($arg);
 
+	if (!preg_match(",^\W*(\d+)\\W+(\d+)$,", $arg, $r)) {
+		 spip_log("action_tourner_dist $arg pas compris");
+	} else {
+	$var_rot = $r[2];
+	$arg = $r[1];
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
 
 	if ($row = spip_fetch_array($result)) {
@@ -61,7 +71,7 @@ function action_tourner_dist() {
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
 
-/*
+ /*
 	A DESACTIVER PEUT-ETRE ? QUE SE PASSE--IL SI JE TOURNE UNE IMAGE AYANT UNE VGNETTE "MANUELLE" -> NE PAS CREER DE VIGNETTE TOURNEE -- EN VERITE IL NE FAUT PAS PERMETTRE DE TOURNER UNE IMAGE AYANT UNE VIGNETTE MANUELLE
 		if ($id_vignette > 0) {
 			creer_fichier_vignette($image);
@@ -69,10 +79,8 @@ function action_tourner_dist() {
 */
 
 		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$arg");
-
+	  }
 	}
-	redirige_par_entete(rawurldecode($redirect));
-
 }
 
 
@@ -81,27 +89,34 @@ function action_tourner_dist() {
 // Faire tourner une image
 //
 function gdRotate ($imagePath,$rtt){
+	$src_img = '';
 	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $imagePath, $regs)) {
 		switch($regs[1]) {
 			case 'png':
+			  if (function_exists('ImageCreateFromPNG')) {
 				$src_img=ImageCreateFromPNG($imagePath);
 				$save = 'imagepng';
-				break;
+			  }
+			  break;
 			case 'gif':
+			  if (function_exists('ImageCreateFromGIF')) {
 				$src_img=ImageCreateFromGIF($imagePath);
 				$save = 'imagegif';
-				break;
+			  }
+			  break;
 			case 'jpeg':
 			case 'jpg':
+			  if (function_exists('ImageCreateFromJPEG')) {
 				$src_img=ImageCreateFromJPEG($imagePath);
 				$save = 'Imagejpeg';
-				break;
+			  }
+			  break;
 			case 'bmp':
-				$src_img=ImageCreateFromWBMP($imagePath);
+			  if (function_exists('ImageCreateFromWBMP')) {
+				$src_img=@ImageCreateFromWBMP($imagePath);
 				$save = 'imagewbmp';
-				break;
-			default:
-				return false;
+			  }
+			  break;
 		}
 	}
 
