@@ -130,7 +130,7 @@ function forum_parent($id_forum) {
 			$retour = forum_parent($forum_id_parent);
 
 			if (strlen($retour)>0) return $retour;
-			else return "<B>"._T('info_message')."<A HREF='forum.php3'>._T('info_forum_interne')."</A></B>";
+			else return "<B>"._T('info_message')."<A HREF='forum.php3'>"._T('info_forum_interne')."</A></B>";
 		}
 	}
 
