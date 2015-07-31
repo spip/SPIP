@@ -41,6 +41,7 @@ class Boucle {
 function parser_boucle($texte, $id_parent) {
 	global $rubriques_publiques;
 	global $recherche;
+	global $tables_relations;
 
 	//
 	// Detecter et parser la boucle
@@ -304,22 +305,27 @@ function parser_boucle($texte, $id_parent) {
 							$val = $match[5];
 						else {
 							$val = $match[1];
+							// Si id_parent, comparer l'id_parent avec l'id_objet de la boucle superieure
 							if ($val == 'id_parent')
 								$val = $id_objet;
-							else if (($type == 'rubriques' OR $type == 'forums') AND $val == 'id_enfant')
+							// Si id_enfant, comparer l'id_objet avec l'id_parent de la boucle superieure
+							else if ($val == 'id_enfant')
 								$val = 'id_parent';
 							$val = '$'.$val;
 						}
 
-						// Liens entre articles, rubriques et auteurs/mots
-						if (($type == 'articles' OR $type == 'rubriques' OR $type == 'breves') AND ($col == 'id_auteur' OR $col == 'id_mot')) {
-							$col_table = 'spip_'.substr($col, 3)."s_$type";
+
+						// Traitement general des relations externes
+						if ($s = $tables_relations[$type][$col]) {
+							$col_table = $s;
 							$req_from[] = $col_table;
 							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
-						else if (($type == 'articles' OR $type == 'rubriques' OR $type == 'breves') AND ($col == 'type_mot' OR $col == 'titre_mot')) {
+						// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
+						else if (($type == 'articles' OR $type == 'rubriques' OR $type == 'breves')
+							AND ($col == 'type_mot' OR $col == 'titre_mot')) {
 							$col_lien = 'spip_mots_'."$type";
 							$req_from[] = $col_lien;
 							$col_table = 'spip_mots';
@@ -327,13 +333,6 @@ function parser_boucle($texte, $id_parent) {
 							$col = substr($col, 0, strlen($col)-4);
 							$req_where[] = "$table.$id_objet=$col_lien.$id_objet";
 							$req_where[] = "$col_lien.id_mot=$col_table.id_mot";
-							$req_group = " GROUP BY $table.$id_objet";
-							$flag_lien = true;
-						}
-						else if (($type == 'syndication') AND ($col == 'id_mot')) {
-							$col_table = 'spip_'.substr($col, 3)."s_syndic";
-							$req_from[] = $col_table;
-							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
@@ -348,47 +347,17 @@ function parser_boucle($texte, $id_parent) {
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
-						else if (($type == 'forums') AND ($col == 'id_mot')) {
-							$col_table = 'spip_'.substr($col, 3)."s_forum";
-							$req_from[] = $col_table;
-							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
-							$req_group = " GROUP BY $table.$id_objet";
-							$flag_lien = true;
-						}
-						else if ($type == 'forum' AND ($col == 'type_mot' OR $col == 'titre_mot')) {
-							$col_lien = 'spip_mots_forum';
-							$req_from[] = $col_lien;
-							$col_table = 'spip_mots';
-							$req_from[] = $col_table;
-							$col = substr($col, 0, strlen($col)-4);
-							$req_where[] = "$table.$id_objet=$col_lien.$id_objet";
-							$req_where[] = "$col_lien.id_mot=$col_table.id_mot";
-							$req_group = " GROUP BY $table.$id_objet";
-							$flag_lien = true;
-						}
-						else if	(($type == 'auteurs' OR $type == 'mots') AND ($col == 'id_article' OR $col == 'id_rubrique' OR $col == 'id_breve')) {
-							$col_table = 'spip_'.$type.'_'.substr($col, 3).'s';
-							$req_from[] = $col_table;
-							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
-							$req_group = " GROUP BY $table.$id_objet";
-							$flag_lien = true;
-						}
-						else if	($type == 'mots' AND ($col == 'id_syndic' OR $col == 'id_forum')) {
-							$col_table = 'spip_'.$type.'_'.substr($col, 3);
-							$req_from[] = $col_table;
-							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
-							$req_group = " GROUP BY $table.$id_objet";
-							$flag_lien = true;
-						}
+
+						// Cas particulier : lier les articles syndiques au site correspondant
 						else if ($type == 'syndic_articles')
 							$col_table = 'source';
-						else if ($type == 'rubriques' AND $col == 'id_enfant')
-							$col = 'id_rubrique';
-						else if ($type == 'forums' AND $col == 'id_enfant')
-							$col = 'id_forum';
+						// Cas particulier : id_enfant => utiliser la colonne id_objet
+						else if ($col == 'id_enfant')
+							$col = $id_objet;
+						// Cas particulier : id_secteur = id_rubrique pour certaines tables
 						else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
 							$col = 'id_rubrique';
-						// Variables particulieres pour la date
+						// Cas particulier : expressions de date
 						else if ($col == 'date')
 							$col = $col_date;
 						else if ($col == 'mois') {
@@ -481,20 +450,19 @@ function parser_boucle($texte, $id_parent) {
 				$req_where[] = "$table.statut='publie'";
 				break;
 
-			/*
 			case 'mots':
 				// Si aucun lien avec un article, et si pas de demande de "tout" les mots-cles
 				// alors selectionner uniquement les mots-cles attaches a un article publie
-				if (!$tout AND !$flag_lien) {
+/*				if (!$tout AND !$flag_lien) {
 					$req_from[] = 'spip_mots_articles AS lien';
 					$req_from[] = 'spip_articles AS articles';
 					$req_where[] = "lien.id_mot=$table.id_mot";
 					$req_where[] = "lien.id_article=articles.id_article";
 					$req_where[] = "articles.statut='publie'";
 					$req_group = " GROUP BY $table.$id_objet";
-				}
+				}*/
 				break;
-			*/
+
 			case 'breves':
 				$req_where[] = "$table.statut='publie'";
 				break;
@@ -531,7 +499,7 @@ function parser_boucle($texte, $id_parent) {
 				break;
 
 			case 'documents':
-				$req_where[] = "$table.taille_fichier_doc > 0";
+				$req_where[] = "$table.taille > 0";
 				break;
 
 			case 'auteurs':
@@ -778,7 +746,35 @@ function parser($texte) {
 	global $rows_hierarchie;
 	global $rows_mots;
 
+	global $tables_relations;
+
 	global $racine;
+
+	//
+	// Construire un tableau des tables de relations
+	//
+
+	$tables_relations = '';
+
+	$tables_relations['articles']['id_mot'] = 'spip_mots_articles';
+	$tables_relations['articles']['id_auteur'] = 'spip_auteurs_articles';
+	$tables_relations['articles']['id_document'] = 'spip_documents_articles';
+
+	$tables_relations['auteurs']['id_article'] = 'spip_auteurs_articles';
+
+	$tables_relations['breves']['id_mot'] = 'spip_mots_breves';
+
+	$tables_relations['documents']['id_article'] = 'spip_documents_articles';
+
+	$tables_relations['mots']['id_article'] = 'spip_mots_articles';
+	$tables_relations['mots']['id_breve'] = 'spip_mots_breves';
+	$tables_relations['mots']['id_rubrique'] = 'spip_mots_rubriques';
+	$tables_relations['mots']['id_syndic'] = 'spip_mots_syndic';
+
+	$tables_relations['rubriques']['id_mot'] = 'spip_mots_rubriques';
+
+	$tables_relations['syndication']['id_mot'] = 'spip_mots_syndic';
+
 
 	//
 	// Construire un tableau associatif des codes de champ utilisables

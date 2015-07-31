@@ -229,7 +229,8 @@
 <ul>
 <p align="left">
 <BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{id_vignette=0}>
-<li><font size=1>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<a href="IMG/#FICHIER_DOCUMENT">DOCUMENT [(#TYPE|majuscules)]</a></font> <b>#TITRE,</b> [(#TAILLE_DOCUMENT|taille_en_octets)]
+<li>#TITRE </li>
+<!--<li><font size=1>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<a href="IMG/#FICHIER_DOCUMENT">DOCUMENT [(#TYPE|majuscules)]</a></font> <b>#TITRE,</b> [(#TAILLE_DOCUMENT|taille_en_octets)]-->
 [<br>(#DESCRIPTIF)]
 </BOUCLE_documents>
 </ul>
@@ -344,12 +345,6 @@
 		</font>
 		<HR NOSHADE SIZE=1>
 		#TEXTE
-		<B_mots_message><ul>
-		<BOUCLE_mots_message(MOTS){id_forum}{par type, titre}>
-			<li><b>#TYPE :</b> #TITRE
-		</BOUCLE_mots_message>
-		</ul>
-		</B_mots_message>
 		<P align="right">[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]
 			
 
