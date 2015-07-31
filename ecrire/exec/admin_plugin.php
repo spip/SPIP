@@ -35,7 +35,7 @@ function exec_admin_plugin_dist($retour='') {
 		redirige_par_entete(self());
 	}
 
-	if (isset($GLOBALS['meta']['plugin_erreur_activation'])){
+	if ($erreur_activation = isset($GLOBALS['meta']['plugin_erreur_activation'])){
 		$erreur_activation = $GLOBALS['meta']['plugin_erreur_activation'];
 		// l'effacement reel de la meta se fera au moment de l'affichage
 		// mais on la vide pour ne pas l'afficher dans le bandeau haut
@@ -122,17 +122,16 @@ function exec_admin_plugin_dist($retour='') {
 	."' />"
 	. "</div>";
 
-
 	$no_button = false;
 
 	// la liste
 	if ($quoi=='actifs'){
 		$aff = affiche_les_plugins($lcpa, $lcpa, $format);
 		$no_button = !strlen($aff);
-		$corps .= $aff;
+		$corps = $aff;
 	}
 	elseif ($quoi=='tous')
-		$corps .= affiche_les_plugins($lpf, $lcpa, $format);
+		$corps = affiche_les_plugins($lpf, $lcpa, $format);
 	else {
 		$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
 		$lcpaffiche = array();
@@ -143,8 +142,7 @@ function exec_admin_plugin_dist($retour='') {
 			OR in_array($f, $plugins_interessants))
 				$lcpaffiche[] = $f;
 
-		$corps .= affiche_les_plugins($lcpaffiche, $lcpa, $format);
-
+		$corps = affiche_les_plugins($lcpaffiche, $lcpa, $format);
 	}
 
 	if (!$no_button)
