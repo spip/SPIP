@@ -8,9 +8,7 @@ dist/fond/ajax.html -text
 dist/fond/ajax_stat.html -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/editer_article.html -text
-dist/formulaires/editer_article/charger.php -text
-dist/formulaires/editer_article/traiter.php -text
-dist/formulaires/editer_article/verifier.php -text
+dist/formulaires/editer_article.php -text
 dist/formulaires/editer_breve.html -text
 dist/formulaires/editer_breve/charger.php -text
 dist/formulaires/editer_breve/traiter.php -text
