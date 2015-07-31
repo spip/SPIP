@@ -20,9 +20,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  */
 
-
-// http://doc.spip.org/@exec_admin_repair_dist
-function exec_admin_repair_dist()
+/**
+ * Reparer la base de donnees
+ */
+function exec_base_repair_dist()
 {
 	$ok = false;
 	if (!spip_connect())
@@ -46,7 +47,7 @@ function exec_admin_repair_dist()
 	}
 	if ($ok) {
 		$admin = charger_fonction('admin', 'inc');
-		echo $admin('admin_repair', $action, $message, true);
+		echo $admin('repair', $action, $message, true);
 	} else {
 		include_spip('inc/minipres');
 		echo minipres(_T('titre_reparation'), "<p>$message</p>");

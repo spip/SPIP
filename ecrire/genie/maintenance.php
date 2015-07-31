@@ -64,7 +64,7 @@ function message_crash_tables() {
 		return 
 		'<strong>' . _T('texte_recuperer_base') . '</strong><br />'
 		. ' <tt>'.join(', ', $crash).'</tt><br />'
-		. generer_form_ecrire('admin_repair',
+		. generer_form_ecrire('base_repair',
 			_T('texte_crash_base'), '',
 			_T('bouton_tenter_recuperation'))
 		;
