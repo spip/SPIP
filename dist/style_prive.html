@@ -60,13 +60,109 @@ h3 { color: #666; font-size: medium; font-family: Arial, Sans, sans-serif; margi
 td { text-align: #GET{left}; }
 
 /* * Formulaires */
-.forml { width: 100%; display: block; padding: 3px; background-color: #e4e4e4; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url(../dist/win_width.htc); font-size: 12px; }
-.formo { width: 100%; display: block; padding: 3px; background-color: #FFF; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url(../dist/win_width.htc); font-size: 12px; }
-.fondl { padding: 3px; background-color: #e4e4e4; border: 1px solid #GET{claire}; background-position: center bottom; float: none; font-size: 11px; }
-.fondo { background-color: #GET{foncee}; background-position: center bottom; float: none; color: #FFF; font-size: 11px;font-weight: bold; }
-.fondf { background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }
+.forml { margin-top: 0px; width: 100%; display: block; padding: 3px; background-color: #f0f0f0; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url(../dist/win_width.htc); font-size: 12px; }
+.formo { margin-top: 0px; width: 100%; display: block; padding: 3px; background-color: #FFF; border: 1px solid #GET{claire}; background-position: center bottom; float: none; behavior: url(../dist/win_width.htc); font-size: 12px; }
+.fondl { margin-top: 0px; padding: 3px; background-color: #e4e4e4; border: 1px solid #GET{claire}; background-position: center bottom; float: none; font-size: 11px; }
+.fondo { margin-top: 0px; background-color: #GET{foncee}; background-position: center bottom; float: none; color: #FFF; font-size: 11px;font-weight: bold; }
+.fondf { margin-top: 0px; background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }
 
 
+ol.formfx {
+	line-height: auto;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+ol.formfx .commentaire {
+	margin-top: 0px;
+	border: 1px solid #GET{claire};
+	border-bottom: 0px;
+	padding: 5px;
+	background-color: #eeeeee;
+	color: #GET{foncee};
+}
+
+
+ol.formfx li.gauche {
+		clear: left;
+		list-style: none;
+		margin-#GET{left}: 100px;
+		margin-top: 2px;
+		padding: 0px;
+}
+ol.formfx li.gauche label {
+		clear: #GET{left};
+		float: #GET{left};
+		margin-#GET{left}: -100px;
+		display: block;
+		width: 90px;
+		
+		
+		background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]label-fond-gauche-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+
+		font-size: 9px;
+		color: white;
+		line-height: 11px;
+		text-transform: uppercase;
+		font-family: verdana, arial, helvetica, sans;
+		text-shadow: #GET{foncee} -1px -1px 1px;
+
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+ol.formfx li.gauche_obligatoire label {
+		background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]label-fond-gauche-[(#ENV{ltr})].gif}|image_sepia{#444444}|extraire_attribut{src})]) center [(#GET{right})] no-repeat;
+		text-shadow: #444444 -1px -1px 1px;
+		font-weight: bold;
+}
+ol.formfx li.gauche input, ol.formfx textarea {
+//	border-color: #GET{foncee};	
+}
+ol.formfx li.gauche_obligatoire input, ol.formfx li.haut_obligatoire input {
+	font-weight: bold;
+	border-color: #GET{foncee};
+}
+
+ol.formfx li.haut {
+	margin-#GET{left}: 0px;
+	clear: #GET{left};
+	padding: 0px;
+	padding-top: 7px;
+}
+
+ol.formfx li.haut label {
+		font-size: 9px;
+		display: inline-block;
+		color: white;
+		line-height: 11px;
+		text-transform: uppercase;
+		font-family: verdana, arial, helvetica, sans;
+		text-shadow: #GET{foncee} -1px -1px 1px;
+
+		width: auto;
+
+		padding-top: 6px;
+		padding-bottom: 9px;
+		padding-left: 5px;
+		padding-right: 5px;
+		margin-bottom: 0px;
+		background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]label-fond-haut-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) bottom [(#GET{left})] no-repeat;
+
+}	
+table.spip_barre {
+	background-color: #GET{claire};
+	padding: 3px;
+	padding-bottom: 0px;
+}
+
+table.spip_barre a img { background: #GET{claire}; padding: 3px; border: 1px outset #GET{claire}; }
+table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+
+	
 select.fondl { padding: 0; }
 .maj-debut:first-letter { text-transform: uppercase; }
 
@@ -184,7 +280,7 @@ a.icone36.suivi-forum-24 { width: 100px; }
 .cellule36 a:hover span, .cellule48 a:hover span { color: #000; display: block; margin: 1px; width: 100%; }
 .cellule36 a.selection span, .cellule48 a.selection span { color: #000; display: block; margin: 1px; width: 100%; }
 
-img.aide { width: 12px; height: 12px; margin-top: 5px; vertical-align: middle; }
+img.aide { width: 12px; height: 12px; vertical-align: top; }
 
 .cellule36 a.aide, .cellule36 a.aide:hover { display: inline; background: none; margin: 0; padding: 0; }
 .cellule36 a.aide img { margin: 0; padding: 0; }
@@ -545,7 +641,7 @@ td.message, a.message { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=m_
 .couleur_langue { background: #GET{foncee}; }
 
 .statistiques_visites ul.referers { margin-left: 0px; padding-left: 0px; list-style-type: none; font-family: arial, helvetica, sans; }
-.statistiques_visites ul.referers li {clear:both; margin-bottom: 1em; }
+.statistiques_visites ul.referers li {margin-bottom: 1em; }
 .statistiques_visites ul.referers li ul { font-size:x-small; list-style-type: disc;}
 .statistiques_visites ul.referers li li {clear: none; margin-bottom:0; }
 

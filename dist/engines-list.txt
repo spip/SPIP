@@ -21,6 +21,7 @@ rien=
 www\.cegetel\.net
 search\.conduit\.com
 search\.sweetim\.com
+chello\.fr
 
 [Voila]
 (kw|rdata)=

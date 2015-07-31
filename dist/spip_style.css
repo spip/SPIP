@@ -55,6 +55,14 @@ table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9
 table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
 table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
 
+/* Barre de raccourcis typographiques */
+table.spip_barre { width: 100%; }
+table.spip_barre a img { background: #FDA; padding: 3px; border: 1px outset #CC9; }
+table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
+table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+
+
+
 /* * Couleurs des liens de SPIP */
 a.spip_note {} /* liens vers notes de bas de page */
 a.spip_in { color: #900; } /* liens internes */

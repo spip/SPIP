@@ -793,14 +793,6 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. '<link rel="stylesheet" type="text/css" href="'
 	  . url_absolue(find_in_path('agenda.css')) .'" />' . "\n"
 	
-	// CSS espace prive : la vraie
-	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive', $paramcss) .'" id="cssprivee" />' . "\n"
-  . "<!--[if lt IE 8]>\n"
-  . '<link rel="stylesheet" type="text/css" href="'
-  . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
-  . "<![endif]-->\n"
-  
 	// CSS imprimante (masque des trucs, a completer)
 	. '<link rel="stylesheet" type="text/css" href="'
 	  . url_absolue(find_in_path('spip_style.css'))
@@ -819,6 +811,14 @@ function envoi_link($nom_site_spip, $minipres=false) {
 				     . '.css'))
 	.'" />' . "\n"
 	
+	// CSS espace prive : la vraie
+	. '<link rel="stylesheet" type="text/css" href="'
+	. generer_url_public('style_prive', $paramcss) .'" id="cssprivee" />' . "\n"
+  . "<!--[if lt IE 8]>\n"
+  . '<link rel="stylesheet" type="text/css" href="'
+  . generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
+  . "<![endif]-->\n"
+  
 	// CSS optionelle minipres
 	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
 	   . url_absolue(find_in_path('minipres.css')).'" />' . "\n":"")

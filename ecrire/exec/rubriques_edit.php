@@ -110,12 +110,15 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 
 	$titre = entites_html($titre);
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
+	
+	$form = "<ol class='formfx'>";
 
-	$form = "<label for='titre'>" . _T('entree_titre_obligatoire') ."</label>"
-	.  "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus />"
-	. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
-	. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
-
+	$form .= "<li class='gauche gauche_obligatoire'><label for='titre'>" . _T('info_titre') ."</label>"
+		.  "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus /></li>";
+	
+	$form .= "<li>"
+		. debut_cadre_couleur("$logo_parent", true, '', _T('entree_interieur_rubrique').aide ("rubrub"))
+		. $chercher_rubrique($id_parent, 'rubrique', !$connect_toutes_rubriques, $id_rubrique);
 // si c'est une rubrique-secteur contenant des breves, demander la
 // confirmation du deplacement
 	$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',2);
@@ -130,28 +133,28 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 		$form .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 
 	$form .= fin_cadre_couleur(true)
-	. "<br />\n";
+	. "</li>\n";
 
 	if (($GLOBALS['meta']['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
-		$form .= "<b>"
+		$form .= "<li class='gauche'><label>"
 			. _T('texte_descriptif_rapide')
-			."</b><br />\n"
-			. "<label for='descriptif'>" 
+			."</label>\n"
+			. "<div class='commentaire'>" 
 			. _T('entree_contenu_rubrique')
-			. "</label><br />"
+			. "</div>"
 			. "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>"
 			. entites_html($descriptif)
-			. "</textarea>\n";
+			. "</textarea></li>\n";
 	}
 
 	if (($GLOBALS['meta']['rubriques_texte'] == "oui") OR strlen($texte)) {
-		$form .= "<label for='texte'><b>"
+		$form .= "<li class='haut'><label for='texte'>"
 		. _T('info_texte_explicatif')
-		. "</b></label>"
 		. aide ("raccourcis")
-		. "\n<br /><textarea name='texte' id='texte' rows='15' class='formo barre_inserer' cols='40'>"
+		. "</label>"
+		. "\n<textarea name='texte' id='texte' rows='15' class='formo barre_inserer' cols='40'>"
 		. entites_html($texte)
-		. "</textarea>\n";
+		. "</textarea></li>\n";
 	}
 
 	// Ajouter le controles md5
@@ -169,6 +172,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	$form .= "\n<div style='text-align: right'><input type='submit' value='"
 	. _T('bouton_enregistrer')
 	. "' class='fondo' /></div>";
+	$form .= "</ol>";
 
 	echo redirige_action_auteur("editer_rubrique", $id_rubrique ? $id_rubrique : 'oui', 'naviguer', '', $form, " method='post'");
 
