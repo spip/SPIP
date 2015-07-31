@@ -1,4 +1,5 @@
 2.0.2 -> 2.0.3
+- pouvoir tenir compte du hreflang lors de la construction de l'URL par calculer_url via inc_lien_dist (13595)
 - les entitee &gt; et &lt; etaint changee en < > apres une surligne (13593)
 - Accepter les - dans le nom des bases SQL (13591)
 - Bug sur changement d'auteur si le nom de l'auteur était trop court  (13590)
