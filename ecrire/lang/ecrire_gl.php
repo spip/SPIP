@@ -345,7 +345,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norma HTML que se segue',
 'info_compresseur_gzip' => '<b>N. B. :</b> Recoméndaselle comprobar antes de nada se o aloxador comprime xa sistematicamente os  scripts php ; para iso, pode utilizar por exemplo o servizo seguinte : @testgzip@',
 'info_compresseur_texte' => 'No caso de que o seu servidor non comprima automaticamente as páxinas html para enviarllas aos internautas, pode probar a forzar esta compresión para diminuír o peso das páxinas para descarga. <b>Alerta</b> : isto pode ralentizar considerablemente certos servidores.',
-'info_compresseur_titre' => 'Optimización e compresión',
 'info_config_forums_prive' => 'No espazo privado do web, pode activar varios tipos de foros :',
 'info_config_forums_prive_admin' => 'Un foro reservado aos administradores do web :',
 'info_config_forums_prive_global' => 'Un foro global, aberto a todos os redactores :',
@@ -573,9 +572,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publicar',
 'info_publies' => 'Os teus artigos publicados en liña',
 'info_question_accepter_visiteurs' => 'Se os esqueletos do seu web prevén o rexistro de visitantes sen acceso á parte web privada, active a opción aquí abaixo :',
-'info_question_activer_compactage_css' => 'Quere activar a compactación das follas de estilo(CSS) ?',
-'info_question_activer_compactage_js' => 'Quere activar a compactación de scripts (javascript) ?',
-'info_question_activer_compresseur' => 'Quere activar a compactación do fluxo  HTTP ?',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estatísticas das visitas?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aceptará as inscricións de novos redactores
   desde o web público? De aceptalos, os visitantes poderanse rexistrar cun
@@ -740,7 +736,6 @@ cunha cor que indica o seu estado :',
 'item_choix_non_generation_miniature' => 'Non crear miniaturas das imaxes.',
 'item_choix_redacteurs' => 'o equipo de redacción',
 'item_choix_visiteurs' => 'as visitas do web público',
-'item_compresseur' => 'Activar a compactación',
 'item_config_forums_prive_global' => 'Activar o foro dos redactores',
 'item_config_forums_prive_objets' => 'Activar estes foros',
 'item_creer_fichiers_authent' => 'Crear os ficheiros «.htpasswd»',
@@ -987,15 +982,9 @@ cunha cor que indica o seu estado :',
 		consulta se mantén) e o número de visitas recibidas
 		dende o principio son amosadas no bolo que
 		aparece cando pasas co rato por riba do título.',
-'texte_compacter_avertissement' => 'Atención para non activar estas opcións durante o desenvolvemento do seu web: os elementos compactados perden toda a súa lexibilidade.',
-'texte_compacter_script_css' => 'SPIP pode compactar os scripts javascript e as follas de estilo CSS, para rexistralos nas fichas estáticas ; iso acelera a presentación do web.',
 'texte_compatibilite_html' => 'Pode pedir que SPIP produza, no sitio público, código compatible coa norma <i>HTML4</i>, ou permitirlle utilizar as posibilidades máis modernas do <i>HTML5</i>.',
 'texte_compatibilite_html_attention' => 'Non hai ningún risco ao activar a opción <i>HTML5</i>, pero se o fai, as páxinas do seu sitio deberán comezar pola seguinte mención para seren correctas : <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(comprimido ou non)',
-'texte_compresseur_page' => 'SPIP pode comprimir automaticamente cada páxina que envía ao
-visitante do web. Esta regraxe permite optimizar o ancho de banda (o 
-web é máis rápido ao seguirse unha ligazón de baixa velocidade), mais
-demanda máis potencia do servidor.',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
 'texte_config_groupe_mots_cles' => 'Quere activar a configuraci&amp;oacute;n avanzada das palabras clave,
@@ -1169,8 +1158,6 @@ e será visible para todo o equipo de redacción. Use os anuncios só para avisa
 'titre_cadre_numero_auteur' => 'AUTOR/A NÚMERO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :',
 'titre_cadre_signature_obligatoire' => '<b>Sinatura</b> [Obrigado]<br />',
-'titre_compacter_script_css' => 'Compactación de scripts e CSS',
-'titre_compresser_flux_http' => 'Compactación do fluxo HTTP',
 'titre_config_contenu_notifications' => 'Notificacións',
 'titre_config_contenu_prive' => 'No espazo privado',
 'titre_config_contenu_public' => 'No web público',

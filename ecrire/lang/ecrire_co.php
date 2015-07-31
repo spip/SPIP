@@ -354,7 +354,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		pudete aduprà per esempiu stu serviziu : @testgzip@',
 'info_compresseur_texte' => 'Sì u vostru servore ùn cumpressa micca in autumàticu e pàgine HTML da mandà le à i visitori, pruvate puru à furzà a cumpressione da 
 		sminuì u pesu di e pàgine da scaricà. <b>Attenti</b> : Quessa pò ralentisce assai certi servori.',
-'info_compresseur_titre' => 'Uttimizazione è cumpressione',
 'info_config_forums_prive' => 'In u spaziu riservatu di u situ, pudete puru attivà diversi tippi di fori :',
 'info_config_forums_prive_admin' => 'Un foru riservatu à l\'amministratori di u situ :',
 'info_config_forums_prive_global' => 'Un foru generale, apertu à tutti i scrittori :',
@@ -591,9 +590,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_publies' => 'I vostri artìculi pubblicati',
 'info_question_accepter_visiteurs' => 'Sè i mudelli di pàgina di u vostru situ privedenu l\'arregistramentu d\'utilizatori senza accessu à u spaziu privatu, 
 		attivate puru a funziunalità quì sottu :',
-'info_question_activer_compactage_css' => 'Vulete attivà a cumpressione di e foglie di stile (CSS)?',
-'info_question_activer_compactage_js' => 'Vulete attivà a cumpressione di i scripts (javascript)?',
-'info_question_activer_compresseur' => 'Vulete attivà a cumpressione di u flussu HTTP?',
 'info_question_gerer_statistiques' => 'Deve gestisce u vostru situ e statìstiche di vìsite ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accettate l\'iscrizzioni di nuvelli scrittori
 	da u situ pùbblicu ? In stu casu, i visitori si puderanu iscrive usendu un furmulariu autumàticu
@@ -761,7 +757,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'item_choix_non_generation_miniature' => 'Ùn creà micca e figurette di l\'imàgini.',
 'item_choix_redacteurs' => 'i scrittori',
 'item_choix_visiteurs' => 'i visitori di u situ pùbblicu',
-'item_compresseur' => 'Attivà a cumpressione',
 'item_config_forums_prive_global' => 'Attivà i fori di i scrittori',
 'item_config_forums_prive_objets' => 'Attivà sti fori',
 'item_creer_fichiers_authent' => 'Creà i schedari .htpasswd',
@@ -1009,14 +1004,9 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'texte_comment_lire_tableau' => 'U rangu di l\'artìculu in a classìfica pè pupularità hè indettatu quì sopra. A pupularità di l\'artìculu (stimata da 
 	u nùmeru di vìsite cutidianu ch\'ellu riceverà l\'artìculu s\'ellu ferma uguale u rìtimu attuale di cunsultazione) è u nùmeru di vìsite ricevute 
 	dipoi u principiu sò da vede in a scatuletta chì s\'apre quandu omu passa u topu sopr\'à u tìtulu.',
-'texte_compacter_avertissement' => 'Attenti à ùn attivà st\'opzioni durante u sviluppu di u situ : L\'elementi cumpressi ùn diventenu propriu più leghjitoghji.',
-'texte_compacter_script_css' => 'SPIP pò cumpressà i scripts javascript è e foglie di stile CSS, da arregitrà li in i schedari stàtichi; 
-	cusì u situ diventa più veloce.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(pò esse cumpressu o micca)',
-'texte_compresseur_page' => 'SPIP pò cumpressà in autumàticu ogni pàgina ch\'ellu manda à i visitori di u situ. Cusì vene uttimizata a banda passante 
-	(u situ diventa più veloce cù una cunnessione à dèbbitu bassu), ma richere putenza più maiò à u servore.',
 'texte_compte_element' => '@count@ elementu',
 'texte_compte_elements' => '@count@ elementi',
 'texte_config_groupe_mots_cles' => 'Vulete attivà a cunfigurazione avanzata di i segni,
@@ -1175,8 +1165,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_cadre_numero_auteur' => 'AUTORE NÙMERU',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Zifra</b> [Ubbligatoria]<br />',
-'titre_compacter_script_css' => 'Cumpressione di i scripts è CSS',
-'titre_compresser_flux_http' => 'Cumpressione di i flussi HTTP',
 'titre_config_contenu_notifications' => 'Nutìfiche',
 'titre_config_contenu_prive' => 'In u spaziu privatu',
 'titre_config_contenu_public' => 'Nant\'à u situ pùbblicu',

@@ -344,7 +344,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_compresseur_titre' => 'Optimisations et compression', # NEW
 'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
 'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
 'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
@@ -574,9 +573,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publier', # NEW
 'info_publies' => '你的文章在线出版',
 'info_question_accepter_visiteurs' => '如果您的网站骨架设定访问者可以从公共网站注册，而不用到私人空间，请激活如下功能:',
-'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
-'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
-'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => '你的站点管理访问者统计吗?',
 'info_question_inscription_nouveaux_redacteurs' => '你允许新编辑从公共站点注册吗?
   如果你愿意, 访问将通过自动表单注册
@@ -742,7 +738,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_non_generation_miniature' => '不产生像片册.',
 'item_choix_redacteurs' => '编辑者',
 'item_choix_visiteurs' => '公共站点的访问者',
-'item_compresseur' => 'Activer la compression', # NEW
 'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
 'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => '创建 .htpasswd 文件',
@@ -985,15 +980,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   ) 并且访问者数量记录
   自从鼠标开始移过标题显示在气球上
   .',
-'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(这个被压缩或没有)',
-'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ 元素',
 'texte_compte_elements' => '@count@ 元素',
 'texte_config_groupe_mots_cles' => '你愿意激活关键词组的高级配置,
@@ -1179,8 +1168,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_cadre_numero_auteur' => '作者号',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>签名</b> [必需]<br />', # MODIF
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW

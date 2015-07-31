@@ -374,7 +374,6 @@ inn liv-zimaz (sédir inn galri).',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_compresseur_titre' => 'Optimisations et compression', # NEW
 'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
 'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
 'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
@@ -595,9 +594,6 @@ versyon SPIP.',
 'info_publier' => 'pibliyé',
 'info_publies' => 'Out bann zartik an liyn',
 'info_question_accepter_visiteurs' => 'Si out bann lékèlet i permé out bann vizitèr inskri azot si lo sitwèb,     anon fé zwé lopsyon anba-terla :',
-'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
-'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
-'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'Di anou tèrla, si ou vé out sit i zèr bann sifklé pou bann vizit :',
 'info_question_inscription_nouveaux_redacteurs' => 'Indik si ou laksèp linskrisyon bann nouvo lotèr dopwi lo sit piblik ? Si
  ou vé, bann lotèr i poura inskri azot èk lo formulèr otomatik. Zot i poura akosté
@@ -759,7 +755,6 @@ sanm in koulèr i présiz son léta :',
 'item_choix_non_generation_miniature' => 'Pou anpès kré otomatikman bann zimaz-minyatir (bann vinyèt).',
 'item_choix_redacteurs' => 'bann lotèr',
 'item_choix_visiteurs' => 'bann vizitèr sir figirwèb',
-'item_compresseur' => 'Activer la compression', # NEW
 'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
 'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Pou kré bann fisyé .htpasswd',
@@ -997,15 +992,9 @@ anserv astèr. Kom sa ou sava giny inn pé plid léspas-diks.',
 'texte_comment_lire_tableau' => 'Dann lamarz-la, ou va trouv lo rand lartik pou vwar kouk sa lé populèr ; pou sa minm, kank
 ou bat-karé si lo non inn lartik, néna inn bil sak i aparé : dann bil-la, i va trouv la popularité lartik èk lo nonb vizit dopwi lorizin.La popularité lé kom inn prévizyon
 lo nonb vizit posib sir lo sit porézon lo ritm aktyèl lé stab.',
-'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(i pé konpèrs ali si ou vé)',
-'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ zéléman',
 'texte_compte_elements' => '@count@ bann zéléman',
 'texte_config_groupe_mots_cles' => 'Ou vé fé zwé astèr lakonfigirasyon présiz pou bann molaklé ? 
@@ -1153,8 +1142,6 @@ sak i pé rand out sit inn pé pli lan.',
 'titre_cadre_numero_auteur' => 'LOTÈR NIMÉRO',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Sinyatir</b> [Obligatwar]<br />',
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW

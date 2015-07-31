@@ -343,7 +343,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_compresseur_titre' => 'Optimisations et compression', # NEW
 'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
 'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
 'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
@@ -554,9 +553,6 @@ De vil være lukkede i forhold til afsnit, meddelelser osv..',
 'info_publier' => 'publier', # NEW
 'info_publies' => 'Dine offentliggjorte artikler',
 'info_question_accepter_visiteurs' => 'If your site\'s templates allow visitors to register without entering the private area, please activate the following option:', # NEW
-'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
-'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
-'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'Skal dit websted danne besøgsstatistik?',
 'info_question_inscription_nouveaux_redacteurs' => 'Vil du tillade, at nye redaktører tilmelder sig
 		på det offentligt tilgængelige websted? Ja betyder, at besøgende kan tilmelde sig på en automatisk dannet formular,
@@ -719,7 +715,6 @@ i en farve, der angiver deres status:',
 'item_choix_non_generation_miniature' => 'Dan ikke miniaturebilleder.',
 'item_choix_redacteurs' => 'redaktører',
 'item_choix_visiteurs' => 'besøgende på den offentlige websted',
-'item_compresseur' => 'Activer la compression', # NEW
 'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
 'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Dan .htpasswd filer',
@@ -958,15 +953,9 @@ i en farve, der angiver deres status:',
 		(et overslag over hvor mange daglige besøg den vil opnå, hvis det aktuelle trafikomfang opretholdes) 
 		og antallet af besøg, der er registreret siden begyndelsen, vises i den ballon, der kommer til syne når musen 
 		holdes over titlen.',
-'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(denne kan være komprimeret eller ikke)',
-'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elementer',
 'texte_config_groupe_mots_cles' => 'Ønsker du at aktivere den avancerede konfiguration af nøgleordsgrupper, ved f.eks. at specificere
@@ -1128,8 +1117,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_cadre_numero_auteur' => 'FORFATTER NUMMER',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Underskrift</b> [Obligatorisk]<br />',
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW

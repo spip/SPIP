@@ -345,7 +345,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'HTML norm to follow', # NEW
 'info_compresseur_gzip' => 'Для начала рекомендуется проверить сжимает ли поставщик услуг PHP скрипты систематически. Для этого Вы можете, например, использовать следующую услугу: @testgzip@',
 'info_compresseur_texte' => 'Если Ваш сервер автоматически не сжимает HTML страницы при их отправке, Вы можете попробывать вынужденное сжатие для уменьшения размера передаваемых страниц. <b>Внимание</b>: это может иметь заметный негативный эффект на производительность некоторых серверов, ',
-'info_compresseur_titre' => 'Оптимизация и сжатие',
 'info_config_forums_prive' => 'В области редактирования сайта может быть включено несколько видов форума:',
 'info_config_forums_prive_admin' => 'Форум для администраторов сайта:',
 'info_config_forums_prive_global' => 'Общий форум, открыт для всех авторов:',
@@ -574,9 +573,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'опубликовать',
 'info_publies' => 'Ваши статьи, опубликованные на сайте:',
 'info_question_accepter_visiteurs' => 'Если шаблоны Вашего сайта позволяют посетителям регистрироваться, не входя в административную часть, пожалуйста включите следующую опцию:',
-'info_question_activer_compactage_css' => 'Хотите ли Вы включить сжатие таблиц стиля CSS?',
-'info_question_activer_compactage_js' => 'Хотите ли Вы включить сжатие файлов Javascript?',
-'info_question_activer_compresseur' => 'Хотите ли Вы включить сжатие данных HTTP?',
 'info_question_gerer_statistiques' => 'Должен ли Ваш сайт включить историю посещений?',
 'info_question_inscription_nouveaux_redacteurs' => 'Хотели бы Вы разрешить регистрацию новых редакторов 
  с основного сайта? Если Вы согласны с этим, посетители могут зарегистрироваться 
@@ -742,7 +738,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_non_generation_miniature' => 'Не создавать уменьшенные копии.',
 'item_choix_redacteurs' => 'редакторы',
 'item_choix_visiteurs' => 'посетители основного сайта',
-'item_compresseur' => 'Включить сжатие',
 'item_config_forums_prive_global' => 'Включить форум авторов',
 'item_config_forums_prive_objets' => 'Включить эти форумы',
 'item_creer_fichiers_authent' => 'Создать .htpasswd файлы',
@@ -985,12 +980,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   текущая динамика), и зеленым цветом - количество посещений за день. 
  Для более подробной информации 
  наведите мышку на интересующую Вас дату. ',
-'texte_compacter_avertissement' => 'Будьте осторожны, не включайте эти опции во время усовершенствования Вашего сайта: сжатые элементы станут трудными для чтения и исправления.',
-'texte_compacter_script_css' => 'SPIP может сжать Javascript файлы и CSS таблицы стилей и сохранить их как статические файлы. Это ускорит показ сайта.',
 'texte_compatibilite_html' => 'You can ask SPIP to produce code compatible with the norm <i>HTML4</i> for the public site, or else allow it use more modern <i>HTML5</i> compatible code.', # NEW
 'texte_compatibilite_html_attention' => 'There is no risk involved in activating the <i>HTML5</i> option. But if you do, the pages of your site must begin with the following code in order to be valid:  <code><!DOCTYPE html></code>.', # NEW
 'texte_compresse_ou_non' => '(файл может быть архивом)',
-'texte_compresseur_page' => 'SPIP может автоматически сжимать каждую страницу, которая отправляется. Эта опция уменьшает использованную пропускную способность, делая сайт быстрее при более низкой скорости соединения), но это требует больше ресурсов сервера.',
 'texte_compte_element' => '@count@ элемент',
 'texte_compte_elements' => '@count@ элементы',
 'texte_config_groupe_mots_cles' => 'Вы желаете включить дополнительные настройки групп ключевых слов, 
@@ -1169,8 +1161,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_cadre_numero_auteur' => 'Номер АВТОРА',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Подпись</b> [Обязательно]<br />',
-'titre_compacter_script_css' => 'Сжатие скриптов и CSS',
-'titre_compresser_flux_http' => 'Сжатие данных HTTP ',
 'titre_config_contenu_notifications' => 'Уведомления',
 'titre_config_contenu_prive' => 'В редакторской части',
 'titre_config_contenu_public' => 'В основном сайте',

@@ -334,7 +334,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N.B.:</b> Kontrolléiert op ären Hebergeur PHP-Skripter kompriméiert; dir kënnt dofir dësen Service benotzen: @testgzip@',
 'info_compresseur_texte' => 'Wann äre Server d\'HTML-Säiten nët automatësch kompriméiert, kënnt dir probéieren eng Kompressioun ze forcéieren. <b>Opgepasst</b>: dat kann verschidde Serveren méi lues maachen.',
-'info_compresseur_titre' => 'Optimisatioun a Compressioun',
 'info_config_forums_prive' => 'Am privaten Deel kënnt dir e puer Forumen aktivéieren:',
 'info_config_forums_prive_admin' => 'E reservéierte Forum fir d\'Administrateuren vum Site:',
 'info_config_forums_prive_global' => 'E globale Forum fir all Redakteren:',
@@ -541,9 +540,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_publier' => 'fräischalten',
 'info_publies' => 'Är publizéiert Artikelen',
 'info_question_accepter_visiteurs' => 'Wann är Skeletter d\'Aschreiwung vu Visiteuren ouni Zougang op de privaten Deel virgesinn, da schalt d\'Optioun hei drënner an:',
-'info_question_activer_compactage_css' => 'Wëll dir d\'Kompressioun vun de Style-Sheets (CSS) aschalten?',
-'info_question_activer_compactage_js' => 'Wëllt dir d\'Kompressioun vun de Skripter (Javascript) aschalten?',
-'info_question_activer_compresseur' => 'Wëllt dir d\'Kompressioun vum HTTP-Flow aschalten?',
 'info_question_gerer_statistiques' => 'Soll äre Site d\'Statistik vun de Visiten géréieren?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptéiert dier d\'Aschreiwe vu neie Redakteren direkt vum öffentlëche Site? Wa jo, da kënnen d\'Visiteuren sëch iwert een automatësche Formulaire aschreiwen an esou Zougang op de privaten Deel kréien fir hir Artikelen ze proposéieren. <blockquote><i>Während der Aschreiwungs-Phase kréien d\'Benotzer automatësch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Schécken vun Email vun hieren Serveren aus: an deem Fall ass d\'automatëscht Aschreiwen onméiglech.', # MODIF
 'info_question_mots_cles' => 'Wëllt dir Schlësselwierder op ärem Site benotzen?',
@@ -699,7 +695,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_choix_non_generation_miniature' => 'Keng Miniaturen vun de Biller maachen.',
 'item_choix_redacteurs' => 'd\'Redakteren',
 'item_choix_visiteurs' => 'd\'Visiteuren vum öffentlëche Site',
-'item_compresseur' => 'Kompressioun aschalten',
 'item_config_forums_prive_global' => 'De Redaktor-Forum aschalten',
 'item_config_forums_prive_objets' => 'Forumen aschalten',
 'item_creer_fichiers_authent' => 'D\'Fichier\'en .htpasswd maachen',
@@ -932,12 +927,9 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'texte_choix_table_prefix' => 'Préfixe vun den Tabellen:',
 'texte_commande_vider_tables_indexation' => 'Benotzt dës Prozedur fir d\'Index-Tabellen vum SPIP Sich-Motor eidel ze maachen. Domat gewant dir Disk-Plaz.',
 'texte_comment_lire_tableau' => 'D\'Plaz vum Artikel am Klassement no Popularitéit steet am Rand; d\'Popularitéit vum Artikel (eng Estimatioun vun der Zuel vun de Visiten pro Dag wann ët esou weidergeet) an Zuel vun de Visiten zënter Ufank stinn an der Erklärung déi erschéngt wann dier mat der Maus iwwer den Titel fuert.',
-'texte_compacter_avertissement' => 'Schalt dës Optiounen nët wärend der Entwëcklung vum Site an: déi kompriméiert Elementer sinn nët einfach liesbar.',
-'texte_compacter_script_css' => 'SPIP kann Javascript oder CSS Style-Sheets kompriméieren fir als statësch Dokumenter ze späicheren; da ginn d\'Säite vum Site méi séier gewisen.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(dee kann kompriméiert sinn oder nët)',
-'texte_compresseur_page' => 'SPIP kann automatësch all Säit kompriméieren déi ugewise gëtt. Dës Astellung erlaabt d\'Bandbreed ze spueren (de Site ass op enger lueser Leitung méi séier), mais dat verlaangt méi Leeschtung vum Server.',
 'texte_compte_element' => '@count@ Element',
 'texte_compte_elements' => '@count@ Elementer',
 'texte_config_groupe_mots_cles' => 'Wëll dir déi erweidert Astellung vun de Schlësselwierder, fir z.B. unzeginn dat een een eenzegt Wuert pro Grupp kann auswielen, dat e Grupp wichteg ass...?',
@@ -1060,8 +1052,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_cadre_numero_auteur' => 'AUTEUR NUMMER',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Ënnerschrëft</b> [Obligatoresch]<br />',
-'titre_compacter_script_css' => 'Skripter an CSS kompriméieren',
-'titre_compresser_flux_http' => 'HTTP-Flow kompriméiren',
 'titre_config_contenu_notifications' => 'Meldungen',
 'titre_config_contenu_prive' => 'Am privaten Deel',
 'titre_config_contenu_public' => 'Um öffentlëche Site',

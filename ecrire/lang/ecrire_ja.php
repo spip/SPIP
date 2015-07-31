@@ -345,7 +345,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_compresseur_titre' => 'Optimisations et compression', # NEW
 'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
 'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
 'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
@@ -558,9 +557,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_publier' => '発表',
 'info_publies' => 'オンラインに公開されたあなたの記事',
 'info_question_accepter_visiteurs' => 'もしあなたのサイトのテンプレートが、プライベートエリアに入らないで登録する訪問者たちを許すなら、次のオプションを有効にしてください:',
-'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
-'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
-'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'あなたのサイトの訪問者の統計を管理すべきですか？',
 'info_question_inscription_nouveaux_redacteurs' => '公開されているサイトで新しいエディターの登録を募りますか？　許可した場合、訪問者たちはフォームから自動で登録でき、プライベートエリアにアクセスし自分の記事を提出できます。 <blockquote><i>登録作業中に、ユーザーは自動的に送信されるプライベートエリアへのIDとパスワードを記したe-mailを受け取ります。若干のホストでは、それらサーバー上からメールが送れない場合があります：そういう場合、自動登録を実施できません。', # MODIF
 'info_question_mots_cles' => 'あなたのサイトでキーワードを使いたいですか？',
@@ -718,7 +714,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_choix_non_generation_miniature' => '画像のサムネイルを作らない。',
 'item_choix_redacteurs' => 'エディターズ',
 'item_choix_visiteurs' => 'パブリックなサイトの訪問者',
-'item_compresseur' => 'Activer la compression', # NEW
 'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
 'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => '.htpasswdファイルを作る',
@@ -951,15 +946,9 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_choix_table_prefix' => 'Préfixe des tables :', # NEW
 'texte_commande_vider_tables_indexation' => 'この手順を使うとSPIPに結合された検索エンジンが使っているインデックステーブルが空になります。いくらかのディスクが空くことでしょう。',
 'texte_comment_lire_tableau' => '記事のランク、分類の人気はマージンで示されます; 記事の人気度（１日の訪問者の概算数。トラフィックの実際のペースを表しています）と、初めからの訪問者数は、記事の題名上にマウスのカーソルを置いておくと表示されます。',
-'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(これが圧縮できなかったか、違う)',
-'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ 要素',
 'texte_compte_elements' => '@count@ 要素',
 'texte_config_groupe_mots_cles' => 'キーワードグループの拡張設定を使用したいですか？、指定することによって、例えばグループ毎に１つユニークな単語をを選択することが出来ました、そのグループは重要...?',
@@ -1083,8 +1072,6 @@ demande plus de puissance au serveur.', # NEW
 'titre_cadre_numero_auteur' => '著者番号',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>署名</b> [必須]<br />',
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW

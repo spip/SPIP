@@ -335,7 +335,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Este recomandabil să verificaţi în prealabil dacă server-ul comprimă în mod sistematic scripturile php ; pentru a face acest test, puteţi să folosiţi de exemplu serviciul următor : @testgzip@',
 'info_compresseur_texte' => 'Dacă server-ul dumneavoastră nu comprimă în mod automat paginile html când acestea sunt trimise pe internet, puteţi încerca să forţaţi această compresie  pentru a diminua mărimea paginilor încărcate. <b>Atenţie</b> : această operaţie poate încetini considerabil anumite servere.',
-'info_compresseur_titre' => 'Optimizări şi compresie',
 'info_config_forums_prive' => 'În cadrul spaţiului privat al site-ului, puteţi activa mai multe tipuri de forumuri :',
 'info_config_forums_prive_admin' => 'Un forum rezervat administratorilor site-ului :',
 'info_config_forums_prive_global' => 'Un forum global, deschis la toţi redactorii :',
@@ -555,9 +554,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publicaţi',
 'info_publies' => 'Articolele dumneavoatră publicate în direct',
 'info_question_accepter_visiteurs' => 'Dacă scheletele site-ului dumneavoastră prevăd înregistrarea vizitatorilor fără acces la spaţiul privat, vă rugăm să activaţi opţiunea de mai jos :',
-'info_question_activer_compactage_css' => 'Doriţi să activaţi compactarea foilor de stil (CSS) ?',
-'info_question_activer_compactage_js' => 'Doriţi să activaţi compactarea scripturilor (javascript) ?',
-'info_question_activer_compresseur' => 'Doriţi să activaţi compresia fluxului HTTP ?',
 'info_question_gerer_statistiques' => 'Site-ul dumneavoastră trebuie să gestioneze statisticile vizitelor ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptaţi înscrierea de noi redactori
   în partea publică a site-ului ? Dacă acceptaţi, vizitatorii vor putea să se înscrie
@@ -724,7 +720,6 @@ cu o culoare care le indică starea :',
 'item_choix_non_generation_miniature' => 'Nu generaţi miniaturile imaginilor.',
 'item_choix_redacteurs' => 'redactorii',
 'item_choix_visiteurs' => 'vizitatorii site-ului public',
-'item_compresseur' => 'Activaţi compresia',
 'item_config_forums_prive_global' => 'Activaţi forum-ul redactorilor',
 'item_config_forums_prive_objets' => 'Activaţi aceste forum-uri',
 'item_creer_fichiers_authent' => 'Creaţi fişierele .htpasswd',
@@ -964,12 +959,9 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
   în clasamentul de popularitate este indicat cu o marjă ;
   popularitatea articolului (care este o estimare a numărului de vizite zilnice pe care articolul le va primi dacă ritmul actual de consultare se menţine) şi numărul de vizite primite
   de la început sunt afişate în mica fereastră care apare la un survol al mouse-ului deasupra titlului.',
-'texte_compacter_avertissement' => 'Atenţie: nu activaţi aceste opţiuni în timpul dezvoltării site-ului dumneavoastră, pentru că elementele compactate îşi pierd lizibilitatea.',
-'texte_compacter_script_css' => 'SPIP poate compacta script-urile javascript şi foile de stil CSS pentru a le înregistra în fişiere statice; aceasta operaţiune accelerează afişarea site-ului.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(acesta poate fi comprimat sau nu)',
-'texte_compresseur_page' => 'SPIP poate comprima în mod automatic fiecare pagină pe care o trimite vizitatorilor site-ului. Aceast reglaj permite să optimizaţi banda pasantă (site-ul este mai rapid chiar şi cu o conexiune internet cu debit scăzut) dar cere mai multe resurse server.',
 'texte_compte_element' => '@count@ element(e)',
 'texte_compte_elements' => '@count@ element(e)',
 'texte_config_groupe_mots_cles' => 'Doriţi să activaţi configurarea avansată a cuvintelor-cheie,
@@ -1131,8 +1123,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Semnătura</b> [Obligatorie]
 ',
-'titre_compacter_script_css' => 'Compactarea script-urilor şi a CSS-urlor',
-'titre_compresser_flux_http' => 'Comprimarea fluxului HTTP',
 'titre_config_contenu_notifications' => 'Notificări',
 'titre_config_contenu_prive' => 'În spaţiul privat',
 'titre_config_contenu_public' => 'Pe site-ul public',

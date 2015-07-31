@@ -335,7 +335,6 @@ Ez balidatu inportazio galdera hau.
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Aterbetazileak ez dituenez jadanik php script-ak konprimitzen baieztatzea gomendatua da ; horretarako serbitsu hau erabiltzen ahal dezakezu : @testgzip@',
 'info_compresseur_texte' => 'Zure sareburuak ez baditu automatikoki html orrialdeak konprimitzen erabiltzaileari igortzeko, konpresioa bortxatzen entsegatzen ahal zira deskargatutako orrien pisua ttipitzeko.<b>Kontuz</b> : teknika hunek zoinbeit sareburu zinez moteltzen ahal ditu.',
-'info_compresseur_titre' => 'Optimizatu eta konprimatu',
 'info_config_forums_prive' => 'Eremu pribatuan foro mota desberdinak aktibatzen ahal dituzu',
 'info_config_forums_prive_admin' => 'gunearen administratzaileei erreserbatutako foroa :',
 'info_config_forums_prive_global' => 'Foro orokor bat, idazle guziei irekia :',
@@ -543,9 +542,6 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_publier' => 'Argitaratu',
 'info_publies' => 'Zure artikuluargitaratuak',
 'info_question_accepter_visiteurs' => 'Zure tokiaren egituretan gunepribaturako baimenik gabeko bisitanteen errejistroa aurreikusia baldin badago, aukerahau aktibatu egin beharko duzu:',
-'info_question_activer_compactage_css' => 'CSS Estilo-orrien trinkotzea aktibatu al nahi duzu ?',
-'info_question_activer_compactage_js' => 'Javascript script-en trinkotzea aktibatu al nahi duzu ?',
-'info_question_activer_compresseur' => 'HTTP korrontearen konprimitzea aktibatu al nahi duzu ?',
 'info_question_gerer_statistiques' => 'Zure tokiakbisiten estatistikak kudeatzea nahi duzu?',
 'info_question_inscription_nouveaux_redacteurs' => 'Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
 Onartzen badituzu, bisitariak inprimaki automatizatu batetik harpidetu ahal izango dira eta orduan eremu pribatuan sartuko dira beren artikuluak proposatzeko.
@@ -707,7 +703,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'item_choix_non_generation_miniature' => 'Ez sortu miniaturarik',
 'item_choix_redacteurs' => 'erredaktoreak',
 'item_choix_visiteurs' => 'lekuarenbisitariak',
-'item_compresseur' => 'Konpresioa aktibatu',
 'item_config_forums_prive_global' => 'Idazleen foroa aktibatu',
 'item_config_forums_prive_objets' => 'Foro hauek aktibatu',
 'item_creer_fichiers_authent' => '".htpasswd" fitxategiak sortu',
@@ -941,12 +936,9 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'texte_commande_vider_tables_indexation' => 'Komando hau erabili SPIP-en integratuta dagoen bilaketa-tresnak erabilitako indexazio-taulak husteko. Honek disko-lekua irabazten utziko dizu.',
 'texte_comment_lire_tableau' => 'Artikuluaren heina, onarpenaren araberako sailkapenean, marjinean dago adierazita ;
 Artikuluaren onarpena (berak jasoko duen eguneroko bisiten kopuruaren estimazio bat oraingokontsulta-erritmoa mantentzen bada) eta hasieratik jasotako bisiten kopurua saguak izenburuaren gainetik pasatzen denean agertzen den argibidean erakusten dira.',
-'texte_compacter_avertissement' => 'Kontuz, aaukera horiek ez aktibatu zure gunearen garapenaren denboran : konprimitutako elementuek irakurgarritasuna galtzen dute.',
-'texte_compacter_script_css' => 'SPIPek javascript script-ak edo CSS estilo-orriak konprimitzen ahal ditu, fitxategi estatiko batzuetan grabatzeko ; horrek gunearen bistaratzea azeleratzen du.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(hau konprimitua izan ahal da edo ez)',
-'texte_compresseur_page' => 'SPIPek gunearen bisitariei bidaltzen duen orri bakotxa automatikoki konprimitzen ahal du. konfigurazio hunek banda-zabaleraren optimizatzea baimentzen du (abiadura ttipiko konexio baten gibelean gunea zaluago da), baina zerbitzariari indar gehiago eskatzen du.',
 'texte_compte_element' => '@count@ osagai',
 'texte_compte_elements' => '@count@osagai',
 'texte_config_groupe_mots_cles' => 'Gako-hitzen konfigurazio aurreratua aktibatu nahi duzu, adibidez talde bakoitzean hitz bakar bat hautatu ahal dela,talde bat garrantzitsua dela,... adieraziz?',
@@ -1074,8 +1066,6 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_cadre_numero_auteur' => 'IDAZLEA',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => 'Izenpetzea [Derrigorrezkoa]',
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW

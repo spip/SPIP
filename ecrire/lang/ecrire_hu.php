@@ -345,7 +345,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
-'info_compresseur_titre' => 'Optimisations et compression', # NEW
 'info_config_forums_prive' => 'Dans l’espace privé du site, vous pouvez activer plusieurs types de forums :', # NEW
 'info_config_forums_prive_admin' => 'Un forum réservé aux administrateurs du site :', # NEW
 'info_config_forums_prive_global' => 'Un forum global, ouvert à tous les rédacteurs :', # NEW
@@ -559,9 +558,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_publier' => 'publikál',
 'info_publies' => 'Az Ön publikált cikkei',
 'info_question_accepter_visiteurs' => 'Amennyiben a honlapja vázaiban a látógatók beíratkozhatnak privát részre való hozzáférés nélkül, akkor a lenti opciót kell kijelölni :',
-'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
-'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
-'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'A honlap kezeljen-e státisztikákat a látógatásokról ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Elfogadja-e az új szerzők beíratkozását a nyilvanos honlapról ? Amennyiben elfogadja, akkor a látogatók beíratkozhatnak
   egy automatizált űrlapon és majd hozzáférnek a privát részre, saját cikkei javaslattételére. <blockquote><i>A beíratkozási fázis során,
@@ -723,7 +719,6 @@ ami állapotát jelzi :',
 'item_choix_non_generation_miniature' => 'A bélyegképeket nem kell létrehozni.',
 'item_choix_redacteurs' => 'a szerzők',
 'item_choix_visiteurs' => 'a nyilvános honlap látógatói',
-'item_compresseur' => 'Activer la compression', # NEW
 'item_config_forums_prive_global' => 'Activer le forum des rédacteurs', # NEW
 'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'A .htpasswd tipusú fájlok létrehozása',
@@ -962,15 +957,9 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
   ; a cikk népszerűsége (olyan becslés a leendő napi látógatásokról, ha az eddigi látógatási ütem megmarad) és a kezdet óta történt látógatások száma
  szerepel abban a buborékban,
   ami megjelenik, ha az egér lebeg a cím felett.',
-'texte_compacter_avertissement' => 'Attention à ne pas activer ces options durant le développement de votre site : les éléments compactés perdent toute lisibilité.', # NEW
-'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela accélère l\'affichage du site.', # NEW
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(ez tömörítve lehet, vagy nem)',
-'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
-visiteurs du site. Ce réglage permet d\'optimiser la bande passante (le
-site est plus rapide derrière une liaison à faible débit), mais
-demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ darab',
 'texte_compte_elements' => '@count@ darab',
 'texte_config_groupe_mots_cles' => 'Kivánja-e aktiválni a kulcsszavak bővített konfigurálását,
@@ -1135,8 +1124,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_cadre_numero_auteur' => 'SZERZŐ SZÁMA',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Aláírás</b> [Kötelező]<br />', # MODIF
-'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
-'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
 'titre_config_contenu_notifications' => 'Notifications', # NEW
 'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 'titre_config_contenu_public' => 'Sur le site public', # NEW

@@ -351,7 +351,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'مقاييس HTML التي يجب اتباعها',
 'info_compresseur_gzip' => '<b>ملاحظة</b>: ننصح بالتأكد أولاً ما اذا كان المضيف يضغط بشكل منتظم ملفات php. للتأكد، يمكنك مثلاًاستخدام الخدمة التالية: @testgzip@',
 'info_compresseur_texte' => 'اذا كان خادم موقعك لا يضغت صفحات html آلياً قبل ارسالها الى الزوار، يمكنك محاولة فرض هذا الضغط لتخفيض وزن الصفحات المرسلة. <b>تحذير</b>: هذا الامر قد يؤدي الى ابطاء بعض اجهزة الخدمة بشكل ملحوظ.',
-'info_compresseur_titre' => 'التحسين والضغط',
 'info_config_forums_prive' => 'في المجال الخاص، يمكنك تفعيل عدة انواع من المنتديات:',
 'info_config_forums_prive_admin' => 'منتدى مخصص لمدراء الموقع:',
 'info_config_forums_prive_global' => 'منتدى شامل، مفتوح لجميع المحررين:',
@@ -580,9 +579,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'نشر',
 'info_publies' => 'مقالاتك المنشورة',
 'info_question_accepter_visiteurs' => 'اذا كانت صفحات موقعك النموذجية تفسح المجال للزوار الذين لا يتمتعون بحق الدخول الى المجال الخاص لتسجيل انفسهم، قم بتفعيل الخيار التالي:',
-'info_question_activer_compactage_css' => 'هل ترغب في تفعيل ضغط اوراق الانماط (CSS)؟',
-'info_question_activer_compactage_js' => 'هل ترغب في ضغط ملفات جافاسكريبت؟',
-'info_question_activer_compresseur' => 'هل تريد تفعيل ضغط تدفق HTTP؟',
 'info_question_gerer_statistiques' => 'هل تريد أن يدير الموقع إحصاءات الزيارات؟',
 'info_question_inscription_nouveaux_redacteurs' => 'هل تسمح بتسجيل محررين جدد من
 الموقع العام؟ إذا وافقت، سيتمكن الزوار من التسجيل
@@ -748,7 +744,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_non_generation_miniature' => 'عدم إنشاء مصغرات عن الصور.',
 'item_choix_redacteurs' => 'المحررون',
 'item_choix_visiteurs' => 'زوار الموقع العمومي',
-'item_compresseur' => 'تفعيل الضغط',
 'item_config_forums_prive_global' => 'تفعيل منتدى المحررين',
 'item_config_forums_prive_objets' => 'تفعيل هذه المنتديات',
 'item_creer_fichiers_authent' => 'إنشاء ملفات .htpasswd',
@@ -991,15 +986,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 تصفح الموقع على وتيرته الحالية) وعدد الزيارات
 المسجلة منذ البداية، في المربع الذي
 يظهر لدى حوم مؤشر الفأرة فوق العنوان.',
-'texte_compacter_avertissement' => 'حذار من تفعيل هذه الخيارات خلال تطوير الموقع: فالعناصر المضغوطة سوف تفقد مقروئيتها.',
-'texte_compacter_script_css' => 'يستطيع SPIP ضغط رموز جافاسكريبت واوراق الأنماط ليخزنها في ملفات ثابتة، مما يسرّع عرض الموقع.',
 'texte_compatibilite_html' => 'يمكنك الطلب من SPIP إنتاج علامات متوافقة مع مقياس <i>HTML4</i> في الموقع العمومي او السماح له باستخدام إمكانات مقياس <i>HTML5</i> الأحدث.',
 'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة، ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(يمكن ضغط هذا أم لا)',
-'texte_compresseur_page' => 'يستطيع SPIP، وبشكل آلي، ضغط كل صفحة يعرضها على
-زوار الموقع. ويتيح هذا الخيار تحسين تدفق البيانات (فيصبح
-الموقع اسرع حتى اذا كان الاتصال عبر تدفق ضعيف)، لكن
- يتطلب قوة اكبر من خادم الموقع.',
 'texte_compte_element' => 'عنصر@count@',
 'texte_compte_elements' => 'عنصر@count@',
 'texte_config_groupe_mots_cles' => 'هل تريد تفعيل إعداد مجموعات المفاتيح المتطور
@@ -1187,8 +1176,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_cadre_numero_auteur' => 'مؤلف رقم',
 'titre_cadre_numero_objet' => '@objet@ رقم:',
 'titre_cadre_signature_obligatoire' => '<b>التوقيع<b> [إجباري]<br />',
-'titre_compacter_script_css' => 'ضغط الرموز البرمجية وأوراق الأنماط',
-'titre_compresser_flux_http' => 'ضغط تدفق HTTP',
 'titre_config_contenu_notifications' => 'تبليغات',
 'titre_config_contenu_prive' => 'في المجال الخاص',
 'titre_config_contenu_public' => 'في الموقع العمومي',

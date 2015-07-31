@@ -351,7 +351,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_compatibilite_html' => 'Norma HTML a siguir',
 'info_compresseur_gzip' => '<b>Nota:</b> Recomiéndase verificar de mano si l\'agospiador ya comprime automáticamente los scripts php ; pa esto, puedes utilizar por exemplu el serviciu siguiente: @testgzip@',
 'info_compresseur_texte' => 'Si el to sirvidor nun comprime automáticamente les páxines html par unviales a los internautes, puedes tentar de forzar esta compresión pa amenorgar el pesu de les páxines descargáes. <b>Atención</b>: esto puede ralentizar enforma dellos sirvidores.',
-'info_compresseur_titre' => 'Igües y compresión',
 'info_config_forums_prive' => 'Nel espaciu priváu del sitiu, puedes activar dellos tipos de foros:',
 'info_config_forums_prive_admin' => 'Un foru acutáu pa los alministradores del sitiu:',
 'info_config_forums_prive_global' => 'Un foru global, abiertu pa tolos redactores:',
@@ -580,9 +579,6 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_publier' => 'espublizar',
 'info_publies' => 'Los tos artículos espublizáos en llinia',
 'info_question_accepter_visiteurs' => 'Si les cadarmes d\'esti sitiu prevén el rexistru de visitantes ensin accesu a l\'espaciu priváu, has d\'activar la opción d\'embaxo:',
-'info_question_activer_compactage_css' => '¿Quies activar la compautación de les fueyes d\'estilu (CSS)?',
-'info_question_activer_compactage_js' => '¿Quies activar la compautación de los scripts (JavaScript)?',
-'info_question_activer_compresseur' => '¿Quies activar la compresión del tráficu HTTP?',
 'info_question_gerer_statistiques' => '¿El sitiu tien que xestionar les estadístiques de les visites?',
 'info_question_inscription_nouveaux_redacteurs' => '¿Aceutes les inscripciones de nuevos redactores dende\'l
   sitiu públicu? Si aceutes, los visitantes podrán inscribise
@@ -748,7 +744,6 @@ con una color que indica el estáu:',
 'item_choix_non_generation_miniature' => 'Nun xenerar imáxenes amenorgáes.',
 'item_choix_redacteurs' => 'los redactores',
 'item_choix_visiteurs' => 'los visitantes del sitiu públicu',
-'item_compresseur' => 'Activar la compresión',
 'item_config_forums_prive_global' => 'Activar el foru de los redactores',
 'item_config_forums_prive_objets' => 'Activar estos foros',
 'item_creer_fichiers_authent' => 'Crear los archivos .htpasswd',
@@ -991,15 +986,9 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
   consultes se mantuviere) y el númberu de visites recibíes
   dende\'l so espublizamientu amuésense na burbuya
   que apaez al pasar el mur pol títulu.',
-'texte_compacter_avertissement' => 'Cuida de nun activar estes opciones durante el desarrollo del sitiu: los elementos compactaos dexen dafechu de ser lleibles.',
-'texte_compacter_script_css' => 'SPIP pue compautar los scripts JavaScript y les fueyes d\'estilu CSS, pa guardalos como archivos estáticos; esto acelera l\'amosamientu del sitiu.',
 'texte_compatibilite_html' => 'Puedes pidi-y a SPIP que produza, nel sitiu públicu, códigu compatible cola norma <i>HTML4</i>, o permiti-y utilizar les posibilidaes más modernes del <i>HTML5</i>.',
 'texte_compatibilite_html_attention' => 'Nun hai dengún peligru por activar la opción <i>HTML5</i>, pero si lo faes, les páxines del to sitiu tendrán d\'entamar cola cita darréu pa ser válidos: <code>&lt;!DOCTYPE html&gt;</code>.',
 'texte_compresse_ou_non' => '(esti pue tar comprimíu o non)',
-'texte_compresseur_page' => 'SPIP pue comprimir automáticamente toles páxines qu\'unvía a los
-visitantes del sitiu. Esti axuste permite optimizar l\'anchu de banda (el
-sitiu ye más rápidu tando tres d\'un enllaz de baxa capacidá), pero
-requier más potencia del sirvidor.',
 'texte_compte_element' => '@count@ elementu',
 'texte_compte_elements' => '@count@ elementos',
 'texte_config_groupe_mots_cles' => '¿Quies activar la configuración avanzada de les pallabres-clave,
@@ -1187,8 +1176,6 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_cadre_numero_auteur' => 'AUTOR NÚMBERU',
 'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
 'titre_cadre_signature_obligatoire' => '<b>Robla</b> [Obligatoria]<br />',
-'titre_compacter_script_css' => 'Compautación de los scripts y CSS',
-'titre_compresser_flux_http' => 'Compresión del fluxu HTTP',
 'titre_config_contenu_notifications' => 'Notificaciones',
 'titre_config_contenu_prive' => 'Nel espaciu priváu',
 'titre_config_contenu_public' => 'Nel sitiu públicu',
