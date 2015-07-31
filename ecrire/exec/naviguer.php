@@ -80,11 +80,11 @@ function exec_naviguer_args($id_rubrique, $cherche_mot, $select_groupe)
 	$iconifier = charger_fonction('iconifier', 'inc');
 	echo $iconifier('id_rubrique', $id_rubrique, 'naviguer', false, $flag_editable);
 
-	echo raccourcis_naviguer($id_rubrique, $id_parent);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	echo creer_colonne_droite('', true);
+	echo raccourcis_naviguer($id_rubrique, $id_parent);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
 
