@@ -79,11 +79,60 @@ function image_document($id_document){
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = mysql_query($query);
 	if ($row = mysql_fetch_array($result)) {
-		$nom_fichier_preview = $row['nom_fichier_preview'];
-		$largeur = $row['largeur_preview'];
-		$hauteur = $row['hauteur_preview'];
+		$id_document = $row['id_document'];
+		$id_type = $row['id_type'];
+		$titre = propre($row ['titre']);
+		$descriptif = propre($row['descriptif']);
+		$fichier = $row['fichier'];
+		$largeur = $row['largeur'];
+		$hauteur = $row['hauteur'];
+		$taille = $row['taille'];
+		$mode = $row['mode'];
+		$id_vignette = $row['id_vignette'];
 
-		$image[0] = $nom_fichier_preview;
+
+
+	/*
+		// Gerer les inclusions des documents
+		mysql_query("UPDATE spip_documents SET inclus = 'oui' WHERE id_document=$id_document");
+		if ($id_vignette > 0)
+			mysql_query("UPDATE spip_documents SET inclus = 'oui' WHERE id_document=$id_vignette");
+	*/
+
+		// recuperer la vignette pour affichage inline
+		if ($id_vignette) {
+			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
+			$result_vignette = mysql_query($query_vignette);
+			if ($row_vignette = @mysql_fetch_array($result_vignette)) {
+				$fichier_vignette = $row_vignette['fichier'];
+				$largeur_vignette = $row_vignette['largeur'];
+				$hauteur_vignette = $row_vignette['hauteur'];
+			}
+		}
+		else if ($mode == 'vignette') {
+			$fichier_vignette = $fichier;
+			$largeur_vignette = $largeur;
+			$hauteur_vignette = $hauteur;
+		}
+		// si pas de vignette, utiliser la vignette par defaut du type du document
+		if (!$fichier_vignette) {
+			// on construira le lien en fonction du type de doc
+			$result_type = mysql_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
+			if ($type = @mysql_fetch_object($result_type)) {
+				$extension = $type->extension;
+			}
+			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
+		}
+		
+		// ajuster chemin d'acces au fichier
+		if ($GLOBALS['flag_ecrire']) {
+			if ($fichier) $fichier = "../$fichier";
+			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
+		}
+
+		$fichier_vignette = ereg_replace("^IMG", "", $fichier_vignette);
+		
+		$image[0] = $fichier_vignette;
 		return $image;
 	}
 
