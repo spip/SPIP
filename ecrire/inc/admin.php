@@ -172,7 +172,7 @@ function copy_request($script, $suite, $submit='')
         include_spip('inc/filtres');
 	foreach($_POST as $n => $c) {
 	  if (($n != 'fichier') AND !is_array($c))
-		$suite .= "\n<input type='hidden' name='$n' value='" .
+		$suite .= "\n<input type='hidden' name='".htmlspecialchars($n)."' value='" .
 		  entites_html($c) .
 		  "'  />";
 	}
