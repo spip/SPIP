@@ -238,9 +238,7 @@ function calculer_referers() {
 		ecrire_metas();
 	} else {
 		// Supprimer les referers trop vieux
-		spip_debug("supprimer referers site");
 		supprimer_referers();
-		spip_debug("supprimer referers articles");
 		supprimer_referers("article");
 	}
 }

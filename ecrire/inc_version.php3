@@ -109,16 +109,13 @@ $cookie_path = "";
 $dossier_squelettes = "";
 
 // faut-il autoriser SPIP a compresser les pages a la volee quand le
-// navigateur l'accepte (valable pour apache 1.3 seulement) ?
+// navigateur l'accepte (valable pour apache >= 1.3 seulement) ?
 $auto_compress = true;
 
 // creation des vignettes avec image magick en ligne de commande : mettre
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
 $convert_command = 'convert';
-
-// faut-il loger les infos de debug dans data/spip.log ?  (peu utilise)
-$debug = false;
 
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
@@ -913,10 +910,8 @@ function timeout($lock=false, $action=true, $connect_mysql=true) {
 	// Fichier lock hebergeur ?  (age maxi, 10 minutes)
 	$timeoutfile = $dir_ecrire.'data/lock';
 	if (@file_exists($timeoutfile)
-	AND ((time() - @filemtime($timeoutfile)) < 600)) {
-		spip_debug ("lock hebergeur $timeoutfile");
+	AND ((time() - @filemtime($timeoutfile)) < 600))
 		return $ok = false;
-	}
 
 	// Ne rien faire ?
 	if (!$action || !$ok)
@@ -931,13 +926,8 @@ function timeout($lock=false, $action=true, $connect_mysql=true) {
 			return false;
 
 		// Verrou demande ?
-		if ($lock) {
-			spip_debug("test lock mysql $lock");
-			if (!spip_get_lock($lock)) {
-				spip_debug ("lock mysql $lock");
-				return false;
-			}
-		}
+		if ($lock AND !spip_get_lock($lock))
+			return false;
 	}
 
 	// C'est bon
@@ -977,16 +967,5 @@ function verif_butineur() {
 
 	if (!$browser_name) $browser_name = "Mozilla";
 }
-
-function spip_debug($message, $logname='spip') {
-	if ($GLOBALS['debug'])
-		spip_log($message, $logname);
-}
-
-
-// En mode debug, logger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
-if ($debug)
-	spip_debug("$REQUEST_METHOD: ".$GLOBALS['REQUEST_URI']);
-
 
 ?>
