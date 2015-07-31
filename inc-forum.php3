@@ -49,14 +49,14 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$url_site = $GLOBALS[HTTP_POST_VARS][url_site];
 
 		if ($afficher_texte != 'non') {
-			$bouton = 
+			$previsu = 
 			"<div style='font-size: 120%; font-weigth: bold;'>"
 			. typo($titre)
-			. "</div><p /><b><a href='mailto:"
-			. entites_html($email_auteur) . "'>"
+			. "</div><p /><b><a href=\"mailto:"
+			. entites_html($email_auteur) . "\">"
 			. typo($auteur) . "</a></b><p />"
-			. propre($texte) . "<p /><a href='"
-			. entites_html($url_site) . "'>"
+			. propre($texte) . "<p /><a href=\""
+			. entites_html($url_site) . "\">"
 			. typo($nom_site_forum) . "</a>";
 
 			// Verifier mots associes au message
@@ -65,26 +65,29 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot
 			GROUP BY mots.id_mot");
 			if (spip_num_rows($result_mots)>0) {
-				$bouton .= "<p>"._T('forum_avez_selectionne')."</p><ul>";
+				$previsu .= "<p>"._T('forum_avez_selectionne')."</p><ul>";
 				while ($row = spip_fetch_array($result_mots)) {
 					$les_mots[$row['id_mot']] = "checked='checked'";
 					$presence_mots = true;
-					$bouton .= "<li class='font-size=80%'> "
+					$previsu .= "<li class='font-size=80%'> "
 					. $row['type'] . "&nbsp;: <b>" . $row['titre'] ."</b></li>";
 				}
-				$bouton .= '</ul>';
+				$previsu .= '</ul>';
 			}
 
 			if (strlen($texte) < 10 AND !$presence_mots) {
-				$bouton .= "<p align='right' style='color: red;'>"._T('forum_attention_dix_caracteres')."</p>\n";
+				$previsu .= "<p align='right' style='color: red;'>"._T('forum_attention_dix_caracteres')."</p>\n";
 			}
 			else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
-				$bouton .= "<p align='right' style='color: red;'>"._T('forum_attention_trois_caracteres')."</p>";
+				$previsu .= "<p align='right' style='color: red;'>"._T('forum_attention_trois_caracteres')."</p>";
 			}
 			else {
-				$bouton .= "<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
+				$previsu .= "<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
 			}
-			$bouton = "<div class='spip_encadrer'>$bouton</div>\n<br />";
+			$previsu = "<div class='spip_encadrer'>$previsu</div>\n<br />";
+			// supprimer les <form> de la previsualisation
+			// (sinon on ne peut pas faire <cadre>...</cadre> dans les forums)
+			$previsu = preg_replace("@<(/?)f(orm[>[:space:]])@ism", "<\\1no-f\\2", $previsu);
 		}
 	} else {
 		// Si premiere edition, initialiser l'auteur
@@ -136,7 +139,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		  boutonne("type='submit' class='spip_bouton'",
 			   'Valider',
 			   _T('forum_valider'). "</div>")) :
-		 ($bouton . "<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />".
+		 ($previsu . "<div class='spip_encadrer'><b>"._T('forum_titre')."</b>\n<br />".
 		  boutonne("type='text' class='forml' size='40'", 'titre', $titre) . "</div>\n<br />"
 		  ."<div class='spip_encadrer'><b>" .
 		  _T('forum_texte') .
