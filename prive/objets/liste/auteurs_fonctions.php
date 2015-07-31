@@ -127,8 +127,10 @@ function auteur_lien_messagerie($id_auteur,$en_ligne,$statut,$imessage,$email=''
 		$time = time();
 	$parti = (($time-strtotime($en_ligne))>15*60);
 
-	if ($imessage != 'non' AND !$parti AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
-		return generer_action_auteur("editer_message","normal/$id_auteur");
+	if (
+		$imessage != 'non' AND !$parti // historique : est-ce que ca a encore un sens de limiter vu qu'on a la notification par email ?
+		AND $GLOBALS['meta']['messagerie_agenda'] != 'non')
+		return parametre_url(parametre_url(generer_url_ecrire("message_edit","new=oui"),'to',$id_auteur),'redirect',self());
 
 	elseif (strlen($email) AND autoriser('voir', 'auteur', $id_auteur))
 		return 'mailto:' . $email;
