@@ -7,7 +7,7 @@ if(!jQuery.load_handlers) {
 	function onAjaxLoad(f) {
 		jQuery.load_handlers.push(f);
 	};
-	
+
 	//
 	// Call the functions that have been added to onAjaxLoad
 	//
@@ -18,11 +18,11 @@ if(!jQuery.load_handlers) {
 
 	// jQuery uses _load, we use _ACBload
 	jQuery.fn._ACBload = jQuery.fn.load;
-	
+
 	jQuery.fn.load = function( url, params, callback ) {
-	
+
 		callback = callback || function(){};
-	
+
 		// If the second parameter was provided
 		if ( params ) {
 			// If it's a function
@@ -30,15 +30,15 @@ if(!jQuery.load_handlers) {
 				// We assume that it's the callback
 				callback = params;
 				params = null;
-			} 
+			}
 		}
 		var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status);};
-		
+
 		return this._ACBload( url, params, callback2 );
 	};
 
 	jQuery._ACBajax = jQuery.ajax;
-	
+
 	jQuery.ajax = function(type) {
 		//If called by _load exit now because the callback has already been set
 		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ACBajax( type);
@@ -101,7 +101,7 @@ function initReaderBuffer(){
 function updateReaderBuffer(){
 	var i = jQuery('#'+virtualbuffer_id);
 	if (!i.length) return;
-	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du 
+	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du
 	// buffer du lecteur d'ecran (au moins dans Jaws)
 	i.attr('value',parseInt(i.attr('value'))+1);
 }
@@ -112,7 +112,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		initReaderBuffer();
   return this.each(function() {
 		var cible = target || this;
-		jQuery('form:not(.noajax)', this).each(function(){
+		jQuery('form:not(.noajax,.bouton_action_post)', this).each(function(){
 		var leform = this;
 		var leclk,leclk_x,leclk_y;
 		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
@@ -159,7 +159,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					.html(c)
 					.positionner(false)
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					.formulaire_dyn_ajax();
+					.formulaire_dyn_ajax()
+					.find('div.ajaxbloc').ajaxbloc();
 					updateReaderBuffer();
 				}
 			},
@@ -192,11 +193,11 @@ var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
 		initReaderBuffer();
-		
+
   return this.each(function() {
 	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 		var blocfrag = jQuery(this);
-		
+
 		var on_pagination = function(c) {
 			jQuery(blocfrag)
 			.html(c)
@@ -212,17 +213,17 @@ jQuery.fn.ajaxbloc = function() {
 				},10);
 			}
 			else {
-				jQuery(blocfrag).positionner(false);				
+				jQuery(blocfrag).positionner(false);
 			}
 			updateReaderBuffer();
 		}
-	
+
 		var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
 		if (!ajax_env || ajax_env==undefined) return;
 		ajax_env = ajax_env[1];
 		if (ajaxbloc_selecteur==undefined)
 			ajaxbloc_selecteur = '.pagination a,a.ajax';
-	
+
 		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
 			var url = this.href.split('#');
 			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
@@ -285,15 +286,15 @@ jQuery.fn.ajaxbloc = function() {
 // Ajaxer les formulaires qui le demandent, au demarrage
 
 jQuery(function() {
-	jQuery('form').parents('div.ajax')
+	jQuery('form:not(.bouton_action_post)').parents('div.ajax')
 	.formulaire_dyn_ajax();
 	jQuery('div.ajaxbloc').ajaxbloc();
 });
 
 // ... et a chaque fois que le DOM change
 onAjaxLoad(function() {
-	if (jQuery){ 
-		jQuery('form', this).parents('div.ajax')
+	if (jQuery){
+		jQuery('form:not(.bouton_action_post)', this).parents('div.ajax')
 		.formulaire_dyn_ajax();
 		jQuery('div.ajaxbloc', this)
 		.ajaxbloc();
