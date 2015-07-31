@@ -150,7 +150,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 		 // tester si le numero de page demande est de la forme '@yyy'
 		 'isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.");\n"
 		."\tif(substr(\$debut_boucle,0,1)=='@'){\n"
-		."\t\t".'$debut_boucle = $Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.intval($pas).',$result,'._q($boucle->sql_serveur).');'."\n"
+		."\t\t".'$debut_boucle = $Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.$pas.',$result,'._q($boucle->sql_serveur).');'."\n"
 		."\t\t".'if ($nombre_boucle AND !sql_seek($result,0,'._q($boucle->sql_serveur).")){\n"
 		."\t\t\t".'@sql_free($result,'._q($boucle->sql_serveur).");\n"
 		."\t\t\t".'$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);'."\n"
