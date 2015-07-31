@@ -21,9 +21,10 @@ preg_match(',^[0-9a-z_]*$,i', $_GET['exec']))
 	$exec = $_GET['exec'];
  else $exec = $SCRIPT_NAME;
 
-if (autoriser_sans_cookie($exec))
+if (autoriser_sans_cookie($exec)) {
 	unset($GLOBALS['_COOKIE']);
-else {
+	if (!isset($reinstall)) $reinstall = 'non';
+ } else {
 	include_ecrire ("inc_session");
 	include_ecrire('inc_cookie');
 	$var_f = include_fonction('auth');

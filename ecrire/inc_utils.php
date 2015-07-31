@@ -614,17 +614,23 @@ function charger_generer_url() {
 // Bravo au W3C qui n'a pas ete capable de nous eviter ca
 // faute de separer proprement langage et meta-langage
 
+// Ecriture tres tarabiscotee pour assurer la transition php3 & mutualisation
+
 function generer_url_ecrire($script, $args="", $no_entities=false) {
 	$site = $GLOBALS['meta']["adresse_site"];
 	if ($site)
 	  $site .= ((substr($site,-1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
 	else $site =  _DIR_RESTREINT;
 
-	if (substr($site,-1) == '/') $site = substr($site, 0, -1);
-	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
-	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+	if (substr($site,-1) == '/') {
+		$site = substr($site, 0, -1);
+		$script = '/' . $script;
+	}
 
-	return "$site/$script$ext$args";
+	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
+
+	return "$site$script$ext$args";
 }
 
 // scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
