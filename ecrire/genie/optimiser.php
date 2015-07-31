@@ -73,7 +73,7 @@ function optimiser_sansref($table, $id, $sel)
 
 	if ($in) {
 		$in = join(',', array_keys($in));
-		sql_delete($table,  calcul_mysql_in($id,$in));
+		sql_delete($table,  sql_in($id,$in));
 		spip_log("Numeros des entrees $id supprimees dans la table $table: $in");
 	}
 	return count($in);

@@ -47,6 +47,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		'fetch' => 'spip_mysql_fetch',
 		'free' => 'spip_mysql_free',
 		'hex' => 'spip_mysql_hex',
+		'in' => 'spip_mysql_in', 
 		'insert' => 'spip_mysql_insert',
 		'insertq' => 'spip_mysql_insertq',
 		'listdbs' => 'spip_mysql_listdbs',
@@ -524,10 +525,41 @@ function spip_mysql_hex($v)
 	return "0x" . $v;
 }
 
+// pour compatibilite
+function spip_mysql_in($val, $valeurs, $not='', $serveur='') {
+	return calcul_mysql_in($val, $valeurs, $not);
+}
+
+//
+// IN (...) est limite a 255 elements, d'ou cette fonction assistante
+//
+// http://doc.spip.org/@calcul_mysql_in
+function calcul_mysql_in($val, $valeurs, $not='') {
+	if (is_array($valeurs))
+		$valeurs = join(',', array_map('_q', $valeurs));
+	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
+
+	$n = $i = 0;
+	$in_sql ="";
+	while ($n = strpos($valeurs, ',', $n+1)) {
+	  if ((++$i) >= 255) {
+			$in_sql .= "($val $not IN (" .
+			  substr($valeurs, 0, $n) .
+			  "))\n" .
+			  ($not ? "AND\t" : "OR\t");
+			$valeurs = substr($valeurs, $n+1);
+			$i = $n = 0;
+		}
+	}
+	$in_sql .= "($val $not IN ($valeurs))";
+
+	return "($in_sql)";
+}
+
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($v, $type) {
-	if (test_sql_date($type) AND preg_match('/^\w+\(/', $v)
-	OR (test_sql_int($type)
+	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
+	OR (sql_test_int($type)
 		 AND (is_numeric($v)
 		      OR (ctype_xdigit(substr($v,2))
 			  AND $v[0]=='0' AND $v[1]=='x'))))

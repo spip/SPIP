@@ -57,6 +57,7 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 		'fetch' => 'spip_pg_fetch',
 		'free' => 'spip_pg_free',
 		'hex' => 'spip_pg_hex',
+		'in' => 'spip_pg_in',
 		'insert' => 'spip_pg_insert',
 		'insertq' => 'spip_pg_insertq',
 		'listdbs' => 'spip_pg_listdbs',
@@ -642,7 +643,7 @@ function spip_pg_sequence($table)
 // http://doc.spip.org/@spip_pg_cite
 function spip_pg_cite($v, $t)
 {
-	if (test_sql_date($t)) {
+	if (sql_test_date($t)) {
 		if (strpos("0123456789", $v[0]) === false)
 			return spip_pg_frommysql($v);
 		else {
@@ -651,7 +652,7 @@ function spip_pg_cite($v, $t)
 			return "date '$v'";
 		}
 	}
-	elseif  (test_sql_int($t)
+	elseif  (sql_test_int($t)
 		 AND (is_numeric($v)
 		      OR (strpos($v, 'CAST(') === 0)
 		      OR ($v[0]== 'x' ? 
@@ -665,6 +666,33 @@ function spip_pg_cite($v, $t)
 function spip_pg_hex($v)
 {
 	return "CAST(x'" . $v . "' as bigint)";
+}
+
+// http://doc.spip.org/@calcul_pg_in
+function spip_pg_in($val, $valeurs, $not='', $serveur) {
+//
+// IN (...) souvent limite a 255  elements, d'ou cette fonction assistante
+//
+	if (is_array($valeurs))
+		$valeurs = join(',', array_map('_q', $valeurs));
+	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
+	if (strpos($valeurs, "CAST(x'") !== false)
+		return "($val=" . join("OR $val=", explode(',',$valeurs)).')';
+	$n = $i = 0;
+	$in_sql ="";
+	while ($n = strpos($valeurs, ',', $n+1)) {
+	  if ((++$i) >= 255) {
+			$in_sql .= "($val $not IN (" .
+			  substr($valeurs, 0, $n) .
+			  "))\n" .
+			  ($not ? "AND\t" : "OR\t");
+			$valeurs = substr($valeurs, $n+1);
+			$i = $n = 0;
+		}
+	}
+	$in_sql .= "($val $not IN ($valeurs))";
+
+	return "($in_sql)";
 }
 
 // http://doc.spip.org/@spip_pg_error
@@ -723,23 +751,6 @@ function spip_pg_showtable($nom_table, $serveur='')
 		}
 	}
 	return array('field' => $fields, 'key' => $keys);
-}
-
-// http://doc.spip.org/@calcul_pg_in
-function calcul_pg_in($val, $valeurs, $not='') {
-//
-// IN (...) souvent limite a 255  elements, d'ou cette fonction assistante
-//
-	if (!$valeurs) return '0=0';
-	$s = split(',', $valeurs, 255);
-	if (count($s) < 255) {
-		return ("($val $not IN ($valeurs))");
-	} else {
-		$valeurs = array_pop($s);
-		return ("($val $not IN (" . join(',',$s) . "))\n" .
-			($not ? "AND\t" : "OR\t") .
-			calcul_pgsql_in($val, $valeurs, $not));
-    }
 }
 
 // Fonction de creation d'une table SQL nommee $nom

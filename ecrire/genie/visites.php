@@ -111,7 +111,7 @@ function calculer_visites($t) {
 			} else $ar[$n][] = $id_article;
 		}
 		foreach ($ar as $n => $liste) {
-			$tous = calcul_mysql_in('id_article', $liste);
+			$tous = sql_in('id_article', $liste);
 			sql_update('spip_visites_articles',
 				array('visites' => "visites+$n"),
 				   "date='$date' AND $tous");
@@ -127,14 +127,14 @@ function calculer_visites($t) {
 					array('visites' => "visites+$n",
 					 'popularite' => "popularite+$n",
 					 'maj' => 'maj'),
-					calcul_mysql_in('id_article',$noref));
+					sql_in('id_article',$noref));
 					   
 			if ($ref)
 				sql_update('spip_articles',
 					   array('visites' => "visites+".($n+1),
 					 'popularite' => "popularite+$n",
 					 'maj' => 'maj'),
-					calcul_mysql_in('id_article',$ref));
+					sql_in('id_article',$ref));
 					   
 			## Ajouter un JOIN sur le statut de l'article ?
 		}
@@ -162,10 +162,10 @@ function calculer_visites($t) {
 		}
 
 	// appliquer les increments sur les anciens
-	// attention on appelle calcul_mysql_in en mode texte et pas array
+	// attention on appelle sql_in en mode texte et pas array
 	// pour ne pas passer _q() sur les '0x1234' de referer_md5, cf #849
 		foreach ($ar as $num => $liste) {
-			sql_update('spip_referers', array('visites' => "visites+$num", 'visites_jour' => "visites_jour+$num"), calcul_mysql_in('referer_md5',join(', ', $liste)));
+			sql_update('spip_referers', array('visites' => "visites+$num", 'visites_jour' => "visites_jour+$num"), sql_in('referer_md5',join(', ', $liste)));
 		}
 	}
 	

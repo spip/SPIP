@@ -246,7 +246,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 			foreach ($joints as $jtable => $jj) {
 				$it = id_table_objet($table);
 				$ij =  id_table_objet($jtable);
-				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", calcul_mysql_in('id_'.${jtable}, array_keys($jj)));
+				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)));
 				while ($t = sql_fetch($s)) {
 					$id = $t[$it];
 					$joint = $jj[$t[$ij]];

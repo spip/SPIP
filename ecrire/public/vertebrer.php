@@ -32,7 +32,7 @@ function vertebrer_sort($fields, $direction)
 	$res = '';
 	foreach($fields as $n => $t) {
 		$tri = $direction
-		. ((test_sql_int($t) OR test_sql_date($r)) ? 'tri_n' : 'tri');
+		. ((sql_test_int($t) OR sql_test_date($r)) ? 'tri_n' : 'tri');
 
 		$url = vertebrer_sanstri($tri)
 		.  "|parametre_url{" . $tri . ",'" . $n . "'}";
@@ -59,7 +59,7 @@ function vertebrer_form($fields)
 	$url = join('|', array_keys($fields));
 	$url = "#SELF|\n\t\t\tparametre_url{'$url',''}";
 	foreach($fields as $n => $t) {
-		$s = test_sql_int($t) ? 11
+		$s = sql_test_int($t) ? 11
 		  :  (preg_match('/char\s*\((\d)\)/i', $t, $r) ? $r[1] : '');
 
 		$res .= "\n\t\t<td><form action='./' method='get'>"
@@ -98,7 +98,7 @@ function vertebrer_cell($fields)
 	$url = "[(#SELF|parametre_url{page,'" . $r[1] . "'})]";
 	$texte = "<a href='$url'>" . $texte . "</a>";
       }
-      $s = test_sql_int($t) ? " style='text-align: right;'" : '';
+      $s = sql_test_int($t) ? " style='text-align: right;'" : '';
       $res .= "\n\t\t<td$s>$texte</td>";
     }
   }
