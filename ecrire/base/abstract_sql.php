@@ -193,4 +193,73 @@ function description_table($nom){
 
 	return array($nom,array());
 }
+
+// http://doc.spip.org/@spip_num_rows
+function spip_num_rows($r) {
+	return spip_abstract_count($r);
+}
+
+//
+// Poser un verrou local a un SPIP donne
+//
+// http://doc.spip.org/@spip_get_lock
+function spip_get_lock($nom, $timeout = 0) {
+	global $spip_mysql_db, $table_prefix;
+	if ($table_prefix) $nom = "$table_prefix:$nom";
+	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
+
+	// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
+	define('_LOCK_TIME', intval(time()/3600-316982));
+	$nom .= _LOCK_TIME;
+
+	$q = spip_query("SELECT GET_LOCK(" . _q($nom) . ", $timeout)");
+	list($lock_ok) = spip_fetch_array($q,SPIP_NUM);
+
+	if (!$lock_ok) spip_log("pas de lock sql pour $nom");
+	return $lock_ok;
+}
+
+// http://doc.spip.org/@spip_release_lock
+function spip_release_lock($nom) {
+	global $spip_mysql_db, $table_prefix;
+	if ($table_prefix) $nom = "$table_prefix:$nom";
+	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
+
+	$nom .= _LOCK_TIME;
+
+	spip_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
+}
+
+function spip_sql_version($nom) {
+	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
+	return ($row['n']);
+}
+
+
+// http://doc.spip.org/@creer_objet_multi
+function creer_objet_multi ($objet, $lang) {
+	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
+		"     TRIM(".$objet."), ".
+		"     CONCAT( ".
+		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
+		"          IF( ".
+		"               INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))),'[".$lang."]') = 0, ".
+		"               IF( ".
+		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) REGEXP '^\\[[a-z\_]{2,}\\]', ".
+		"                     INSERT( ".
+		"                          TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ".
+		"                          1, ".
+		"                          INSTR(TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))), ']'), ".
+		"                          '' ".
+		"                     ), ".
+		"                     TRIM(RIGHT(".$objet.", LENGTH(".$objet.") -(6+INSTR(".$objet.", '<multi>')))) ".
+		"                ), ".
+		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
+		"          ) ".
+		"     ) ".
+		"))) AS multi ";
+
+	return $retour;
+}
+
 ?>
