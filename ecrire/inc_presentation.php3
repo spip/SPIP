@@ -1364,7 +1364,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_principal ("Administration du site", "configuration.php3", "administration-48.gif", "administration", $rubrique);
 		echo "</td>";
 	}
-	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques){
+	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques and lire_meta("activer_statistiques")=='oui'){
 	bandeau_barre_verticale();
 		echo "<td background=''>";
 			icone_bandeau_principal ("Statistiques du site", "statistiques_visites.php3", "administration-48.gif", "administration", $rubrique);
@@ -1454,7 +1454,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		if ($connect_toutes_rubriques) {
 			icone_bandeau_secondaire ("Configuration du site", "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
 		}
-		icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
+		if (lire_meta("activer_statistiques")=='oui')
+			icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
 		if ($connect_toutes_rubriques && $options == "avancees") {
 			icone_bandeau_secondaire ("Maintenance du site", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 		}
