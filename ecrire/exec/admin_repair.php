@@ -33,7 +33,7 @@ function verifier_base() {
 	if (!$res1) return false;
 
 	$res = "";
-	while ($tab = spip_fetch_array($res1)) {
+	while ($tab = spip_fetch_array($res1,SPIP_NUM)) {
 		$res .= "<p><b>".$tab[0]."</b> ";
 
 		$result_repair = spip_query("REPAIR TABLE ".$tab[0]);
@@ -50,7 +50,7 @@ function verifier_base() {
 		else
 			$res .= "("._T('texte_vide').")\n";
 
-		$row = spip_fetch_array($result_repair);
+		$row = spip_fetch_array($result_repair,SPIP_NUM);
 		$ok = ($row[3] == 'OK');
 
 		if (!$ok)
