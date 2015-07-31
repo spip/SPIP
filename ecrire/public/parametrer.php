@@ -186,22 +186,20 @@ function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 # retourne le champ 'accepter_forum' d'un article
 // http://doc.spip.org/@quete_accepter_forum
 function quete_accepter_forum($id_article) {
-	static $cache = array();
+	static $cache = array(0 => 'non');
 
-	if (!$id_article) return;
+	$id_article = intval($id_article);
 
-	if (!isset($cache[$id_article])) {
-		$row = sql_fetsel('accepter_forum','spip_articles',("id_article=".intval($id_article)));
-		$cache[$id_article] = $row['accepter_forum'];
-	}
+	if (isset($cache[$id_article]))	return $cache[$id_article];
 
-	return $cache[$id_article];
+	return $cache[$id_article] = sql_getfetsel('accepter_forum','spip_articles',"id_article=$id_article");
 }
 
 // recuperer une meta sur un site distant (en local il y a plus simple)
 // http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {
-	return sql_getfetsel("valeur", "spip_meta", "nom=" . sql_quote($nom), '','','','','','','',$serveur);
+	return sql_getfetsel("valeur", "spip_meta", "nom=" . sql_quote($nom),
+			     '','','','',$serveur);
 }
 
 
