@@ -64,8 +64,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 			array('focus' => $focus,
 				'message' => $message,
 				'mode' => $mode,
-				'self' => $GLOBALS["clean_link"]->getUrl()
-				));
+				'self' => str_replace('&amp;','&',(self()))));
 }
 
 // fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
