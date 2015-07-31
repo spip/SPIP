@@ -7,85 +7,6 @@ if (!file_exists("inc_connect.php3")) {
 
 include ("inc_version.php3");
 
-//
-// integre images espace prive (a definir avant inc_texte.php3)
-//
-function integre_image($id_document, $align, $affichage_detaille = false) {
-	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
-	$result = mysql_query($query);
-	if ($row = mysql_fetch_array($result)) {
-		$id_document = $row['id_document'];
-		$id_type = $row['id_type'];
-		$titre = propre($row ['titre']);
-		$descriptif = propre($row['descriptif']);
-		$fichier = $row['fichier'];
-		$largeur = $row['largeur'];
-		$hauteur = $row['hauteur'];
-		$taille = $row['taille'];
-		$mode = $row['mode'];
-		$id_vignette = $row['id_vignette'];
-
-		if ($id_vignette) {
-			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
-			$result_vignette = mysql_query($query_vignette);
-			if ($row_vignette = @mysql_fetch_array($result_vignette)) {
-				$fichier_vignette = $row_vignette['fichier'];
-				$largeur_vignette = $row_vignette['largeur'];
-				$hauteur_vignette = $row_vignette['hauteur'];
-			}
-		}
-		else if ($mode == 'vignette') {
-			$fichier_vignette = $fichier;
-			$largeur_vignette = $largeur;
-			$hauteur_vignette = $hauteur;
-		}
-
-		if ($fichier_vignette) {
-			$vignette = "<img src='../$fichier_vignette' border=0";
-			if ($largeur_vignette && $hauteur_vignette) {
-				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-			}
-			if ($titre) {
-				$vignette .= " alt=\"$titre\" title=\"$titre\"";
-			}
-			if ($affichage_detaille)
-				$vignette .= ">";
-			else
-				$vignette .= " hspace='5' vspace='3'>";
-		}
-		else {
-			$vignette = "pas de pr&eacute;visualisation";
-		}
-
-		if ($mode == 'document' OR $affichage_detaille) {
-			$vignette = "<a href='../$fichier'>$vignette</a>";
-		}
-		if ($affichage_detaille) {
-			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
-			$result_type = mysql_query($query_type);
-			if ($row_type = @mysql_fetch_array($result_type)) {
-				$type = $row_type['titre'];
-			}
-			else $type = 'fichier';
-
-			$taille_ko = floor($taille / 1024);
-
-			$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
-			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
-			$retour .= $vignette;
-
-			if ($titre) $retour .= "<br><b>$titre</b>";
-			if ($descriptif) $retour .= "<br>$descriptif";
-			if ($fichier) $retour .= "<br>$type - $taille_ko&nbsp;ko";
-			if ($largeur && $hauteur) $retour .= "<br>$largeur x $hauteur pixels";
-			
-			$retour .= "</div>\n</td></tr>\n</table>\n";
-		}
-		else $retour = $vignette;
-	}
-	return $retour;
-}
-
 include_local ("inc_connect.php3");
 include_local ("inc_meta.php3");
 include_local ("inc_auth.php3");
@@ -104,6 +25,22 @@ if (!file_exists("inc_meta_cache.php3")) ecrire_metas();
 
 
 //
+// Gestion de version
+//
+
+$version_installee = (double) lire_meta("version_installee");
+if ($version_installee < $spip_version) {
+	debut_page();
+	if (!$version_installee) $version_installee = "ant&eacute;rieure";
+	echo "<h4>Message technique : la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d'adapter
+	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.</h4>
+	Si vous &ecirc;tes administrateur du site, veuillez <a href='upgrade.php3'>cliquer sur ce lien</a>.<p>";
+	fin_page();
+	exit;
+}
+
+
+//
 // Cookies de presentation
 //
 
@@ -113,7 +50,6 @@ $graphisme = $HTTP_COOKIE_VARS['spip_graphisme'];
 if (!$graphisme) $graphisme="0";
 
 $fond = substr($graphisme,0,1);
-
 
 if ($set_fond) {
 	$fond = floor($set_fond);
@@ -199,71 +135,45 @@ $cookie_admin = $HTTP_COOKIE_VARS["spip_admin"];
 
 
 //
-// Gestion de version
-//
-
-$version_installee = (double) lire_meta("version_installee");
-if ($version_installee < $spip_version) {
-	debut_page();
-	if (!$version_installee) $version_installee = "ant&eacute;rieure";
-	echo "<h4>Message technique : la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d'adapter
-	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.</h4>
-	Si vous &ecirc;tes administrateur du site, veuillez <a href='upgrade.php3'>cliquer sur ce lien</a>.<p>";
-	fin_page();
-	exit;
-}
-
-
-//
 // Ajouter un message de forum
 //
 
-if ($ajout_forum AND strlen($texte)>10 AND strlen($titre)>2) {
+if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
 	$titre = addslashes($titre);
 	$texte = addslashes($texte);
 	$nom_site = addslashes($nom_site);
 	$auteur = addslashes($auteur);
 	$query_forum = "INSERT INTO spip_forum (id_parent, id_rubrique, id_article, id_breve, id_message, id_syndic, date_heure, titre, texte, nom_site, url_site, auteur, email_auteur, statut, id_auteur) VALUES ('$forum_id_parent','$forum_id_rubrique','$forum_id_article','$forum_id_breve','$forum_id_message', '$forum_id_syndic', NOW(),\"$titre\",\"$texte\",\"$nom_site\",\"$url_site\",\"$auteur\",\"$email_auteur\",\"$forum_statut\",\"$connect_id_auteur\")";
 	$result_forum = mysql_query($query_forum);
-		
 }
 
 
 //
-// Supprimer forum
+// Supprimer / valider forum
 //
 
-if ($supp_forum AND $connect_statut == "0minirezo") {
+function changer_statut_forum($id_forum, $statut) {
+	global $connect_statut, $connect_toutes_rubriques;
 
-	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=\"$supp_forum\"";
- 	$result_forum = mysql_query($query_forum);
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) return;
 
- 	while($row=mysql_fetch_array($result_forum)){
-		$id_forum=$row[0];
-		$forum_id_parent=$row[1];
-		$forum_id_rubrique=$row[2];
-		$forum_id_article=$row[3];
-		$forum_id_breve=$row[4];
-		$forum_id_syndic=$row["id_syndic"];
-		$forum_date_heure=$row[5];
-		$forum_titre=$row[6];
-		$forum_texte=$row[7];
-		$forum_auteur=$row[8];
-		$forum_email_auteur=$row[9];
-		$forum_nom_site=$row[10];
-		$forum_url_site=$row[11];
-		$forum_stat=$row[12];
-		$forum_ip=$row[13];
+	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_forum";
+	$result = mysql_query($query);
+ 	if ($row = mysql_fetch_array($result)) {
+		$id_parent = $row['id_parent'];
+		$id_rubrique = $row['id_rubrique'];
+		$id_article = $row['id_article'];
+		$id_breve = $row['id_breve'];
+		$id_syndic = $row['id_syndic'];
 	}
-	$query_forum = "UPDATE spip_forum SET id_parent='$forum_id_parent', id_rubrique='$forum_id_rubrique', id_article='$forum_id_article', id_breve='$forum_id_breve', id_syndic='$forum_id_syndic' WHERE id_parent=$supp_forum AND statut!='off'";
-	$result_forum = mysql_query($query_forum);
+	else return;
 
 	unset($where);
-	if ($forum_id_article) $where[] = "id_article=$forum_id_article";
-	if ($forum_id_rubrique) $where[] = "id_rubrique=$forum_id_rubrique";
-	if ($forum_id_breve) $where[] = "id_breve=$forum_id_breve";
-	if ($forum_id_syndic) $where[] = "id_syndic=$forum_id_syndic";
-	if ($forum_id_parent) $where[] = "id_forum=$forum_id_parent";
+	if ($id_article) $where[] = "id_article=$id_article";
+	if ($id_rubrique) $where[] = "id_rubrique=$id_rubrique";
+	if ($id_breve) $where[] = "id_breve=$id_breve";
+	if ($id_syndic) $where[] = "id_syndic=$id_syndic";
+	if ($id_parent) $where[] = "id_forum=$id_parent";
 	if ($where) {
 		$query = "SELECT fichier FROM spip_forum_cache WHERE ".join(' OR ', $where);
 		$result = mysql_query($query);
@@ -279,62 +189,12 @@ if ($supp_forum AND $connect_statut == "0minirezo") {
 			mysql_query($query);
 		}
 	}
-	$query_forum = "UPDATE spip_forum SET statut='off' WHERE id_forum=$supp_forum";
+	$query_forum = "UPDATE spip_forum SET statut='$statut' WHERE id_forum=$id_forum";
 	$result_forum = mysql_query($query_forum);
 }
 
-
-//
-// Valider un forum
-//
-
-if ($valid_forum AND $connect_statut == "0minirezo") {
-
-	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=\"$valid_forum\"";
- 	$result_forum = mysql_query($query_forum);
-
- 	while($row=mysql_fetch_array($result_forum)){
-		$id_forum=$row[0];
-		$forum_id_parent=$row[1];
-		$forum_id_rubrique=$row[2];
-		$forum_id_article=$row[3];
-		$forum_id_breve=$row[4];
-		$forum_id_syndic=$row["id_syndic"];
-		$forum_date_heure=$row[5];
-		$forum_titre=$row[6];
-		$forum_texte=$row[7];
-		$forum_auteur=$row[8];
-		$forum_email_auteur=$row[9];
-		$forum_nom_site=$row[10];
-		$forum_url_site=$row[11];
-		$forum_stat=$row[12];
-		$forum_ip=$row[13];
-	}
-
-	unset($where);
-	if ($forum_id_article) $where[] = "id_article=$forum_id_article";
-	if ($forum_id_rubrique) $where[] = "id_rubrique=$forum_id_rubrique";
-	if ($forum_id_breve) $where[] = "id_breve=$forum_id_breve";
-	if ($forum_id_syndic) $where[] = "id_syndic=$forum_id_syndic";
-	if ($forum_id_parent) $where[] = "id_forum=$forum_id_parent";
-	if ($where) {
-		$query = "SELECT fichier FROM spip_forum_cache WHERE ".join(' OR ', $where);
-		$result = mysql_query($query);
-		unset($fichiers);
-		if ($result) while ($row = mysql_fetch_array($result)) {
-			$fichier = $row[0];
-			@unlink("../CACHE/$fichier");
-			$fichiers[] = $fichier;
-		}
-		if ($fichiers) {
-			$fichiers = join(',', $fichiers);
-			$query = "DELETE FROM spip_forum_cache WHERE fichier IN ($fichiers)";
-			mysql_query($query);
-		}
-	}
-	$query_forum = "UPDATE spip_forum SET statut='publie' WHERE id_forum=$valid_forum";
-	$result_forum = mysql_query($query_forum);
-}
+if ($supp_forum) changer_statut_forum($supp_forum, 'off');
+if ($valid_forum) changer_statut_forum($valid_forum, 'publie');
 
 
 //
@@ -374,9 +234,7 @@ function calculer_secteurs() {
 }
 
 
-function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00"){
-
-	
+function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00") {
 	$query = "SELECT MAX(date_heure) FROM spip_breves WHERE id_rubrique = '$id_parent' GROUP BY id_rubrique";
 	$result = mysql_query($query);
 	while ($row = mysql_fetch_array($result)) {
@@ -418,7 +276,6 @@ function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00"){
 
 }
 
-//calculer_dates_rubriques();
 
 function calculer_rubriques_publiques()
 {
@@ -460,9 +317,6 @@ function calculer_rubriques_publiques()
 	mysql_query($query);
 	$query = "UPDATE spip_rubriques SET statut='publie' WHERE id_rubrique IN ($rubriques_publiques)";
 	mysql_query($query);
-
-	calculer_dates_rubriques();
-
 }
 
 
@@ -475,7 +329,9 @@ function calculer_rubriques()
 {
 	calculer_secteurs();
 	calculer_rubriques_publiques();
+	calculer_dates_rubriques();
 }
+
 
 // Supprimer rubrique
 if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' AND acces_rubrique($supp_rubrique)) {
@@ -484,5 +340,6 @@ if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' A
 
 	calculer_rubriques();
 }
+
 
 ?>

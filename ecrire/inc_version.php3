@@ -6,15 +6,6 @@ if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
 
-$included_files = '';
-
-function include_local($file) {
-	if ($GLOBALS['included_files'][$file]) return;
-	include($file);
-	$GLOBALS['included_files'][$file] = 1;
-}
-
-
 //
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -59,7 +50,6 @@ else {
 	$flag_apc = false;
 	$flag_sapi_name = false;
 }
-
 
 
 //
@@ -129,7 +119,6 @@ function feed_post_files($table) {
 feed_post_files('HTTP_POST_FILES');
 
 
-
 //
 // Infos sur l'hebergeur
 //
@@ -188,6 +177,27 @@ if (!$PATH_TRANSLATED) {
 	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
 }
 
+
+//
+// Gestion des inclusions et infos repertoires
+//
+
+$included_files = '';
+$flag_ecrire = ereg('/ecrire/[^/]*', $REQUEST_URI)
+	|| ereg('/ecrire/[^/]*', $SCRIPT_URL);
+
+function include_local($file) {
+	if ($GLOBALS['included_files'][$file]) return;
+	include($file);
+	$GLOBALS['included_files'][$file] = 1;
+}
+
+function include_ecrire($file) {
+	if (!$GLOBALS['flag_ecrire']) $file = "ecrire/$file";
+	if ($GLOBALS['included_files'][$file]) return;
+	include($file);
+	$GLOBALS['included_files'][$file] = 1;
+}
 
 //
 // Infos de config PHP

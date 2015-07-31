@@ -47,7 +47,7 @@ setlocale('LC_CTYPE', $GLOBALS['lang'].'_'.$lang2);
 
 
 //
-// diverses fonctions essentielles
+// Diverses fonctions essentielles
 //
 
 // ereg_ ou preg_ ?
@@ -183,7 +183,7 @@ function couper_intro($texte, $long) {
 
 
 //
-// les elements de propre()
+// Les elements de propre()
 //
 
 // Securite : empecher l'execution de code PHP
@@ -192,7 +192,88 @@ function interdire_scripts($source) {
 	return $source;
 }
 
-// correction typographique francaise
+// Integration des images et documents
+function integre_image($id_document, $align, $affichage_detaille = false) {
+	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
+	$result = mysql_query($query);
+	if ($row = mysql_fetch_array($result)) {
+		$id_document = $row['id_document'];
+		$id_type = $row['id_type'];
+		$titre = propre($row ['titre']);
+		$descriptif = propre($row['descriptif']);
+		$fichier = $row['fichier'];
+		$largeur = $row['largeur'];
+		$hauteur = $row['hauteur'];
+		$taille = $row['taille'];
+		$mode = $row['mode'];
+		$id_vignette = $row['id_vignette'];
+
+		if ($id_vignette) {
+			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
+			$result_vignette = mysql_query($query_vignette);
+			if ($row_vignette = @mysql_fetch_array($result_vignette)) {
+				$fichier_vignette = $row_vignette['fichier'];
+				$largeur_vignette = $row_vignette['largeur'];
+				$hauteur_vignette = $row_vignette['hauteur'];
+			}
+		}
+		else if ($mode == 'vignette') {
+			$fichier_vignette = $fichier;
+			$largeur_vignette = $largeur;
+			$hauteur_vignette = $hauteur;
+		}
+		if ($GLOBALS['flag_ecrire']) {
+			if ($fichier) $fichier = "../$fichier";
+			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
+		}
+
+		if ($fichier_vignette) {
+			$vignette = "<img src='$fichier_vignette' border=0";
+			if ($largeur_vignette && $hauteur_vignette) {
+				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
+			}
+			if ($titre) {
+				$vignette .= " alt=\"$titre\" title=\"$titre\"";
+			}
+			if ($affichage_detaille)
+				$vignette .= ">";
+			else
+				$vignette .= " hspace='5' vspace='3'>";
+		}
+		else {
+			$vignette = "pas de pr&eacute;visualisation";
+		}
+
+		if ($mode == 'document' OR $affichage_detaille) {
+			$vignette = "<a href='$fichier'>$vignette</a>";
+		}
+		if ($affichage_detaille) {
+			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
+			$result_type = mysql_query($query_type);
+			if ($row_type = @mysql_fetch_array($result_type)) {
+				$type = $row_type['titre'];
+			}
+			else $type = 'fichier';
+
+			$taille_ko = floor($taille / 1024);
+
+			$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
+			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
+			$retour .= $vignette;
+
+			if ($titre) $retour .= "<br><b>$titre</b>";
+			if ($descriptif) $retour .= "<br>$descriptif";
+			if ($fichier) $retour .= "<br>$type - $taille_ko&nbsp;ko";
+			if ($largeur && $hauteur) $retour .= "<br>$largeur x $hauteur pixels";
+			
+			$retour .= "</div>\n</td></tr>\n</table>\n";
+		}
+		else $retour = $vignette;
+	}
+	return $retour;
+}
+
+// Correction typographique francaise
 function typo_fr($letexte) {
 	global $flag_preg_replace;
 	global $flag_str_replace;
@@ -204,7 +285,8 @@ function typo_fr($letexte) {
 		$letexte = str_replace("&#187;", chr(187),$letexte);
 		$letexte = str_replace("&laquo;",chr(171),$letexte);
 		$letexte = str_replace("&#171;", chr(171),$letexte);
-	} else {
+	}
+	else {
 		$letexte = ereg_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
 		$letexte = ereg_replace("&(raquo|#187);",chr(187), $letexte);
 		$letexte = ereg_replace("&(laquo|#171);",chr(171), $letexte);
@@ -240,7 +322,7 @@ function typo_fr($letexte) {
 	return ($letexte);
 }
 
-// typo : francaise sinon rien (pour l'instant)
+// Typographie generale : francaise sinon rien (pour l'instant)
 function typo($letexte) {
 	global $lang;
 
@@ -404,15 +486,6 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 		$letexte = ereg_replace($letout, $rempl, $letexte);
 	}
 
-/*	while(eregi("<DOC([0-9]+)\|([^\>]*)>", $letexte,$match)) {
-		$letout = quotemeta($match[0]);
-		$letout = ereg_replace("\|","\|",$letout);
-		$lenum = $match[1];
-		$lalign = $match[2];
-		$rempl = integre_image($my_id_article_img, $lenum, $lalign, true);
-		$letexte = ereg_replace($letout, $rempl, $letexte);
-	}*/
-
 	//
 	// Tableaux
 	//
@@ -518,7 +591,8 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 	return $letexte;
 }
 
-// filtre a appliquer aux champs du type #TEXTE*
+
+// Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte) {
 	return interdire_scripts(traiter_raccourcis(trim($letexte)));
 }
