@@ -380,9 +380,15 @@ function calculer_criteres ($idb, &$boucles) {
 		}
 
 		// Restriction de valeurs (implicite ou explicite)
-		else if (eregi('^([a-z_]+) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
+		else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
 			// Variable comparee
 			$col = $match[1];
+			$fct = '';
+			if (ereg("([a-z_]+)\(([a-z_]+)\)", $col,$match3))
+			  {
+				$col = $match3[2];
+				$fct = $match3[1];
+			  }
 			$col_table = $id_table;
 			// Valeur de comparaison
 			if ($match[3]) {
@@ -559,6 +565,7 @@ function calculer_criteres ($idb, &$boucles) {
 				$col = "$col_table.$col";
 
 			if ($op) {
+				if ($fct) $col = "$fct($col)";
 				if ($match[4] == '!')
 					$where = "NOT ($col $op '$val')";
 				else
