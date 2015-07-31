@@ -124,6 +124,10 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 		$nom .= "." . calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	}
 
+	// code qui déclarera l'index du stockage de nos doublons (pour éviter une notice PHP)
+	$init_comment = "\n\n\t// Initialise le(s) critère(s) doublons\n";
+	$init_code = "\tif (!isset(\$doublons[\$d = $nom])) { \$doublons[\$d] = ''; }\n";
+
 	// on crée un sql_in avec la clé primaire de la table
 	// et la collection des doublons déjà emmagasinés dans le tableau
 	// $doublons et son index, ici $nom
@@ -144,13 +148,22 @@ function critere_doublons_dist($idb, &$boucles, $crit){
 	// on fusionne pour avoir un seul IN, et on s'en va !
 	foreach ($boucle->where as $k => $w) {
 		if (strpos($w[0], $debut_doub)===0) {
+			// fusionner le sql_in (du where)
 			$boucle->where[$k][0] = $debut_doub . $fin_doub.' . '.substr($w[0], strlen($debut_in));
+			// fusionner l'initialisation (du hash) pour faire plus joli
+			$x = strpos($boucle->hash, $init_comment);
+			$len = strlen($init_comment);
+			$boucle->hash =
+				substr($boucle->hash, 0, $x + $len) . $init_code . substr($boucle->hash, $x + $len);
 			return;
 		}
 	}
 
 	// mettre l'ensemble dans un tableau pour que ce ne soit pas vu comme une constante
 	$boucle->where[] = array($debut_doub . $fin_doub.", '".$not."')");
+
+	// déclarer le doublon s'il n'existe pas encore
+	$boucle->hash .= $init_comment . $init_code;
 
 
 	# la ligne suivante avait l'intention d'eviter une collecte deja faite
