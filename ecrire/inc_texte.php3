@@ -646,9 +646,11 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 		}
 		if ($num_note){
 			$insert = "$ouvre_ref<a href='#nb$num_note' name='nh$num_note' class='spip_note'>$num_note</a>$ferme_ref";
-			if ($note_texte)
-				if ($les_notes) $les_notes .= "\n<p class='spip_note'>";
+			if ($note_texte) {
+				if ($les_notes)
+					$les_notes .= "\n<p class='spip_note'>";
 				$les_notes .= "$ouvre_note<a href='#nh$num_note' name='nb$num_note' class='spip_note'>$num_note</a>$ferme_note".traiter_raccourcis(trim($note_texte), $les_echap);
+			}
 		} else {
 			$insert = '';
 			if ($note_texte)
