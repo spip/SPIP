@@ -54,10 +54,10 @@ if ($purger == 'oui') {
 	creer_liste_indexation();
 }
 
-echo "<a href=" . http_php_script("admin_index","mise_a_jour=oui") . ">"._L('Cliquez ici pour mettre &agrave; jour les infos d\'indexation du site').'</a><br />';
-echo "<a href=" . http_php_script("admin_index","forcer_indexation=20") . ">"._L('Cliquez ici pour forcer l\'indexation du site').'</a><br />';
-echo "<a href=" . http_php_script("admin_index","forcer_reindexation=oui") . ">"._L('Cliquez ici pour relancer l\'indexation du site sans purger les donn&eacute;es.').'</a><br />';
-echo "<a href=" . http_php_script("admin_index","purger=oui") . ">"._L('Cliquez ici pour purger les tables d\'indexation.').'</a><br />';
+echo "<a href='" . http_php_scriptnq("admin_index","mise_a_jour=oui") . "'>"._L('Cliquez ici pour mettre &agrave; jour les infos d\'indexation du site').'</a><br />';
+echo "<a href='" . http_php_scriptnq("admin_index","forcer_indexation=20") . "'>"._L('Cliquez ici pour forcer l\'indexation du site').'</a><br />';
+echo "<a href='" . http_php_scriptnq("admin_index","forcer_reindexation=oui") . "'>"._L('Cliquez ici pour relancer l\'indexation du site sans purger les donn&eacute;es.').'</a><br />';
+echo "<a href='" . http_php_scriptnq("admin_index","purger=oui") . "'>"._L('Cliquez ici pour purger les tables d\'indexation.').'</a><br />';
 
 
 

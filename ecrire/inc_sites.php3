@@ -419,7 +419,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => $url_syndic));
 		echo "<center><b>";
-		echo "<a href=" . http_php_script("sites","id_syndic=$id_syndic&reload=oui") . ">";
+		echo "<a href='" . http_php_scriptnq("sites","id_syndic=$id_syndic&reload=oui") . "'>";
 		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
 		fin_boite_info();
 	}

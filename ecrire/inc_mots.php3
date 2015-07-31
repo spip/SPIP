@@ -364,7 +364,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			if ($flag_editable){
 				if ($flag_groupe)
-				  $s = "<A href=" . http_php_script($url_base, "$id_table=$id_objet&supp_mot=$id_mot#mots") . ">"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
+				  $s = "<A href='" . http_php_scriptnq($url_base, "$id_table=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
 				else $s = "&nbsp;";
 				$vals[] = $s;
 			} else $vals[]= "";
@@ -693,7 +693,7 @@ function afficher_groupe_mots($id_groupe) {
 
 
 				if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
-					$vals[] = "<div style='text-align:right;'><a href=" . http_php_script("mots_tous","conf_mot=$id_mot") . ">"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
+					$vals[] = "<div style='text-align:right;'><a href='" . http_php_scriptnq("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
 				} 
 
 				$table[] = $vals;			

@@ -91,7 +91,7 @@ $result_forum = spip_query($query_forum);
 
 $i = $limitdeb;
 if ($i>0)
-	echo "<A href=" . http_php_script("articles_forum","id_article=$id_article") . ">0</A> ... | ";
+	echo "<A href='" . http_php_scriptnq("articles_forum","id_article=$id_article") . "'>0</A> ... | ";
 while ($row = spip_fetch_array($result_forum)) {
 
 	// barre de navigation
@@ -99,7 +99,7 @@ while ($row = spip_fetch_array($result_forum)) {
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
-			echo "<A href=" . http_php_script("articles_forum","id_article=$id_article&debut=$i") . ">$i</A>";
+			echo "<A href='" . http_php_scriptnq("articles_forum","id_article=$id_article&debut=$i") . "'>$i</A>";
 		echo " | ";
 	}
 
@@ -107,7 +107,7 @@ while ($row = spip_fetch_array($result_forum)) {
 
 	$i ++;
 }
-echo "<A href=" . http_php_script("articles_forum","id_article=$id_article&debut=$i") . ">...</A>";
+echo "<A href='" . http_php_scriptnq("articles_forum","id_article=$id_article&debut=$i") . "'>...</A>";
 
 echo "</div>";
 
