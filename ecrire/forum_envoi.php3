@@ -51,12 +51,12 @@ if ($id_parent) {
 }
 
 
-echo "<FORM ACTION='forum_envoi.php3' name='formulaire' METHOD='post'>";
 
 if ($titre_parent) {
 	debut_cadre_relief("forum-interne-24.gif");
 	echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre_parent)."</b></font></td></tr>";
 	echo "<tr><td bgcolor='#EEEEEE'>";
+	echo "<div style='padding:5px;'>";
 	echo "<font size='2' face='Georgia,Garamond,Times,serif'>";
 	echo "<font face='arial,helvetica'>$date_heure_parent</font>";
 	echo " $auteur_parent";
@@ -73,6 +73,7 @@ if ($titre_parent) {
 	}
 
 	echo "</font>";
+	echo "</div>";
 	echo "</td></tr></table>";
 	fin_cadre_relief();
 
@@ -94,6 +95,7 @@ if ($modif_forum == "oui") {
 		echo "<p><a href='$url_site'>$nom_site</a>";
 	}
 
+	echo "<form action='forum_envoi.php3' name='formulaire' method='post'>";
 	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='"._T('bouton_envoyer_message')."'></div>";
 
 	fin_cadre_relief();
@@ -102,6 +104,9 @@ if ($modif_forum == "oui") {
 		echo "<td width=10 valign='top' background='img_pack/rien.gif'><img src='img_pack/forum-droite$spip_lang_rtl.gif' alt='' width=10 height=13 border=0></td>\n";
 		echo "</tr></table>";
 	}
+}
+else {
+	echo "<FORM ACTION='forum_envoi.php3' name='formulaire' METHOD='post'>";
 }
 
 echo "<p></p>";
