@@ -52,7 +52,12 @@ function inc_meme_rubrique_dist($id_rubrique, $id, $type, $order='date', $limit=
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $prim, $type);
 		$statut = $row['statut'];
-		$statut = $puce_statut($id, $statut, $id_rubrique, $type);
+		
+		// Exception pour les meme-rubrique de sites
+		if ($type == "syndic") $type_statut = "site";
+		else $type_statut = $type;
+		
+		$statut = $puce_statut($id, $statut, $id_rubrique, $type_statut);
 		$href = "<a class='verdana1' href='"
 		. generer_url_ecrire($exec[$type],"$prim=$id")
 		. "'>"
