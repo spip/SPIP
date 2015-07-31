@@ -200,7 +200,7 @@ $flag_editable = (acces_rubrique($id_rubrique)
 	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 if ($flag_editable)
-	icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
+	icone(_T('icone_modifier_article').'<br />('._T('version')." $id_version)", generer_url_ecrire("articles_edit","id_article=$id_article&id_version=$id_version"), "article-24.gif", "edit.gif");
 
 echo "</td>";
 
