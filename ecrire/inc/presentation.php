@@ -1426,7 +1426,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 
 // http://doc.spip.org/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $echo=false){
-	$retour = "<table style='padding-top: 20px; width: 100%'><tr><td class='icone36'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</td></tr></table>";
+	$retour = "<div style='padding-top: 20px;width:100px' class='icone36'>" . icone_inline($texte, $lien, $fond, $fonction, $align) . "</div>";
 	if ($echo) echo $retour; else return $retour;
 }
 
