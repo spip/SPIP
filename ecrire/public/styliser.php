@@ -175,7 +175,7 @@ function styliser_par_z_dist($flux){
 		}
 		// chercher le fond correspondant a la composition
 		elseif (isset($flux['args']['contexte']['composition'])
-			AND ((!$squelette AND basename($fond)=='page') OR ($squelette AND substr($squelette,-strlen($fond))==$fond))
+			AND (basename($fond)=='page' OR ($squelette AND substr($squelette,-strlen($fond))==$fond))
 			AND $dir = explode('/',$fond)
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs)
