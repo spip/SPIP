@@ -148,7 +148,7 @@ if (isset($ecran_securite_raison)) {
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Pragma: no-cache");
 	header("Content-Type: text/html");
-	die("<html><title>Error 403: Forbidden</title><body><h1>Error 503</h1><p>You are not authorized to view this page ($ecran_securite_raison)</p></body></html>");
+	die("<html><title>Error 403: Forbidden</title><body><h1>Error 403</h1><p>You are not authorized to view this page ($ecran_securite_raison)</p></body></html>");
 }
 /*
  * Fin securite
@@ -181,7 +181,7 @@ if (
 	header("Cache-Control: no-cache, must-revalidate");
 	header("Pragma: no-cache");
 	header("Content-Type: text/html");
-	die("<html><title>Error 503: Site temporarily unavailable</title><body><h1>Error 503</h1><p>Site temporarily unavailable (load average $load)</p></body></html>");
+	die("<html><title>Status 503: Site temporarily unavailable</title><body><h1>Status 503</h1><p>Site temporarily unavailable (load average $load)</p></body></html>");
 }
 
 
