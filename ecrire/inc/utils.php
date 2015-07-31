@@ -1211,20 +1211,23 @@ function verifier_visiteur() {
 	// dans un formulaire sans login (ex: #FORMULAIRE_FORUM)
 	// Attention on separe bien session_nom et nom, pour eviter
 	// les melanges entre donnees SQL et variables plus aleatoires
-	if (
-		_request('session_nom') !== null
-		OR _request('session_email') !== null
-	) {
+	$variables_session = array('nom', 'email');
+	while (list(,$var) = each($variables_session)) {
+		if (_request('session_'.$var) !== null) {
+			$init = true;
+			break;
+		}
+	}
+	if (isset($init)) {
 		@spip_initialisation();
 		$session = charger_fonction('session', 'inc');
+		$session();
 		include_spip('inc/texte');
-		$GLOBALS['auteur_session'] = array (
-			'session_nom' => safehtml(_request('session_nom')),
-			'session_email' => safehtml(_request('session_email')),
-			'id_auteur' => 0,
-			'statut' => '',
-			'auth' => ''
-		);
+		foreach($variables_session as $var)
+			if (($a = _request('session_'.$var)) !== null)
+				$GLOBALS['auteur_session']['session_'.$var] = safehtml($a);
+		if (!isset($GLOBALS['auteur_session']['id_auteur']))
+			$GLOBALS['auteur_session']['id_auteur'] = 0;
 		ajouter_session($GLOBALS['auteur_session']);
 		return 0;
 	}
@@ -1284,7 +1287,7 @@ function spip_session($force = false) {
 	if ($force OR !isset($session)) {
 		$s = pipeline('definir_session',
 			$GLOBALS['auteur_session']
-			? $GLOBALS['auteur_session']['id_auteur']
+			? serialize($GLOBALS['auteur_session'])
 				. '_' . @$_COOKIE['spip_session']
 			: ''
 		);
