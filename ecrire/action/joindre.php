@@ -12,14 +12,29 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/charsets');	# pour le nom de fichier
+include_spip('inc/charsets'); # pour le nom de fichier
 include_spip('base/abstract_sql');
 include_spip('inc/actions');
 
-// http://doc.spip.org/@action_joindre_dist
 function action_joindre_dist()
 {
-	global $hash, $url, $chemin, $ancre,
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
+	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',$arg,$r)) {
+		spip_log("action_joindre_dist incompris: " . $arg);
+		$redirect = urldecode(_request('redirect'));
+		return;
+	}
+
+	list(, $id, $id_document, $mode, $type) = $r;
+	$actifs = array();
+	action_joindre_sous_action($id, $id_document, $mode, $type, $actifs);
+}
+
+function action_joindre_sous_action($id, $id_document, $mode, $type, &$documents_actifs)
+{
+	global $redirect, $hash, $url, $chemin, $ancre,
 	  $sousaction1,
 	  $sousaction2,
 	  $sousaction3,
@@ -27,20 +42,12 @@ function action_joindre_dist()
 	  $sousaction5,
 	  $_FILES,  $HTTP_POST_FILES;
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
-
 	$redirect = _request('redirect');
 	$iframe_redirect = _request('iframe_redirect');
-	if (!preg_match(',^(-?\d+)\D(\d+)\D(\w+)/(\w+)$,',$arg,$r)) {
-	  spip_log("action_joindre_dist incompris: " . $arg);
-	  redirige_par_entete(urldecode($redirect));
-	}
-	list($arg, $id, $id_document, $mode, $type) = $r;
 
-     // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
-     // et son transcodage est couteux et perilleux
-     $sousaction = 'spip_action_joindre' .
+// pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
+// et son transcodage est couteux et perilleux
+	$sousaction = 
        ($sousaction1 ? 1 :
 	($sousaction2 ? 2 :
 	 ($sousaction3 ? 3 : 
@@ -50,13 +57,9 @@ function action_joindre_dist()
      $path = ($sousaction1 ? ($_FILES ? $_FILES : $HTTP_POST_FILES) :
 	     ($sousaction2 ? $url : $chemin));
 
-     $documents_actifs = array();
-
-     if (function_exists($sousaction))
-       $type_image = $sousaction($path, $mode, $type, $id, $id_document, 
-				 $hash, $redirect, $documents_actifs, $iframe_redirect);
-
-     else spip_log("spip_action: sousaction inconnue $sousaction");
+     $sousaction = charger_fonction('joindre' . $sousaction, 'inc');
+     $type_image = $sousaction($path, $mode, $type, $id, $id_document, 
+		 $hash, $redirect, $documents_actifs, $iframe_redirect);
 
      $redirect = urldecode($redirect);
      if ($documents_actifs) {
@@ -82,16 +85,11 @@ function action_joindre_dist()
 	if(_request("iframe") == 'iframe') {
 		$redirect = parametre_url(urldecode($iframe_redirect),"show_docs",join(',',$documents_actifs),'&')."&iframe=iframe";
 	}
-
-	redirige_par_entete($redirect);
-     ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
 }
-
 
 // Cas d'un document distant reference sur internet
 
-// http://doc.spip.org/@spip_action_joindre2
-function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
+function inc_joindre2_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	return joindre_documents(array(
 				   array('name' => basename($path),
@@ -102,13 +100,13 @@ function spip_action_joindre2($path, $mode, $type, $id, $id_document,$hash, $red
 
 // Cas d'un fichier transmis
 
-// http://doc.spip.org/@spip_action_joindre1
-function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
+function inc_joindre1_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$files = array();
 	if (is_array($path))
 	  foreach ($path as $file) {
-		if (!($file['error'] == 4) /* UPLOAD_ERR_NO_FILE */)
+	  //UPLOAD_ERR_NO_FILE
+		if (!($file['error'] == 4) )
 			$files[]=$file;
 	}
 
@@ -118,8 +116,7 @@ function spip_action_joindre1($path, $mode, $type, $id, $id_document,$hash, $red
 
 // copie de tout ou partie du repertoire upload
 
-// http://doc.spip.org/@spip_action_joindre3
-function spip_action_joindre3($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
+function inc_joindre3_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (!$path || strstr($path, '..')) return;
 	    
@@ -156,34 +153,33 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 
 	if (function_exists('gzopen') 
 	AND !($mode == 'distant')
-	AND (count($files) == 1)) {
-
-		$desc = $files[0];
-		if (preg_match('/\.zip$/i', $desc['name'])
-		    OR ($desc['type'] == 'application/zip')) {
+	AND (count($files) == 1)
+	AND (preg_match('/\.zip$/i', $files[0]['name'])
+	     OR ($files[0]['type'] == 'application/zip'))) {
 	
 	  // on pose le fichier dans le repertoire zip 
 	  // (nota : copier_document n'ecrase pas un fichier avec lui-meme
 	  // ca autorise a boucler)
-			$zip = copier_document("zip",
+		$desc = $files[0];
+		$zip = copier_document("zip",
 					$desc['name'],
 					$desc['tmp_name']
 				);
-			if (!$zip)
-			  {include_spip('inc/minipres'); echo minipres('Erreur upload zip'); exit;} # pathologique
+		if (!$zip)
+			{include_spip('inc/minipres'); echo minipres('Erreur upload zip'); exit;} # pathologique
 			// Est-ce qu'on sait le lire ?
-			include_spip('inc/pclzip');
-			$archive = new PclZip($zip);
-			if ($archive) {
-			  $valables = verifier_compactes($archive);
-			  if ($valables) {
-			    echo liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect);
+		include_spip('inc/pclzip');
+		$archive = new PclZip($zip);
+		if ($archive) {
+			$valables = verifier_compactes($archive);
+			if ($valables) {
+			  echo $ajouter_documents($valables, $zip, $type, $id, $mode, $id_document, $actifs, $hash, $redirect, $iframe_redirect);
 	// a tout de suite en joindre4, joindre5, ou joindre6
 			    exit;
-			  }
 			}
 		}
 	}
+
 	foreach ($files as $arg) {
 		check_upload_error($arg['error']);
 		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
@@ -203,8 +199,7 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 
 //  Zip avec confirmation "tel quel"
 
-// http://doc.spip.org/@spip_action_joindre5
-function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
+function inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs)
 {
 	$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 	$pos = strpos($path, '/zip/');
@@ -216,8 +211,7 @@ function spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $red
 
 // Zip a deballer. 
 
-// http://doc.spip.org/@spip_action_joindre6
-function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
+function inc_joindre6_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	$x = joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 	//  suppression de l'archive en zip
@@ -227,11 +221,10 @@ function spip_action_joindre6($path, $mode, $type, $id, $id_document,$hash, $red
 
 // Zip avec les 2 options a la fois
 
-// http://doc.spip.org/@spip_action_joindre4
-function spip_action_joindre4($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
+function inc_joindre4_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, &$actifs, $iframe_redirect)
 {
 	joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
-	return spip_action_joindre5($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
+	return inc_joindre5_dist($path, $mode, $type, $id, $id_document,$hash, $redirect, $actifs);
 }
 
 // http://doc.spip.org/@joindre_deballes
@@ -261,6 +254,4 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirec
 	    effacer_repertoire_temporaire(_tmp_dir);
 	    return $x;
 }
-
-
 ?>

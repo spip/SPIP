@@ -15,6 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/getdocument');
 include_spip('inc/documents');
 
+// Joindre un document ou un Zip a deballer (fonction pour action/joindre)
+// Distinguer les deux cas pour commencer
+
+function inc_ajouter_documents_dist ($sources, $file, $type, $id, $mode, $id_document, &$actifs, $hash='', $redirect='', $iframe_redirect='')
+{
+	if (is_array($sources))
+	  return liste_archive_jointe($sources, $file, $type, $id, $mode, $id_document, $hash, $redirect, $iframe_redirect);
+	else
+	  return ajouter_un_document($sources, $file, $type, $id, $mode, $id_document, $actifs);
+}
+
 //
 // Ajouter un document (au format $_FILES)
 //
@@ -29,8 +40,7 @@ include_spip('inc/documents');
 # $id_document,	# pour une vignette, l'id_document de maman
 # $actifs	# les documents dont il faudra ouvrir la boite de dialogue
 
-// http://doc.spip.org/@inc_ajouter_documents_dist
-function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
+function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
 // Documents distants : pas trop de verifications bloquantes, mais un test
 // via une requete HEAD pour savoir si la ressource existe (non 404), si le
@@ -223,7 +233,7 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 		}
 		// par defaut (upload ZIP ou ftp) integrer
 		// les images en mode 'vignette' et le reste en mode document
-		if (!$mode)
+		if (!in_array($mode, array('vignette', 'distant', 'document')))
 			if ($type_image AND $type_inclus_image)
 				$mode = 'vignette';
 			else
@@ -237,10 +247,10 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 	if ($id_document_lie) {
 		spip_query("UPDATE spip_documents SET id_vignette=$id_document	WHERE id_document=$id_document_lie");
 		// hack pour que le retour vers ecrire/ active le bon doc.
-		$documents_actifs[] = $id_document_lie; 
+		$documents_actifs[$fichier] = $id_document_lie; 
 	}
 	else
-		$documents_actifs[] = $id_document; 
+		$documents_actifs[$fichier] = $id_document; 
 
 	// Demander l'indexation du document
 	include_spip('inc/indexation');
@@ -364,32 +374,30 @@ function corriger_extension($ext) {
 // Passer ca en squelette un de ces jours.
 
 // http://doc.spip.org/@liste_archive_jointe
-function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect)
+function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, $hash, $redirect, $iframe_redirect)
 {
 	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
 
-	$texte = "
-<input name='redirect' value='$redirect' />
+	$texte = "<div style='text-align: left'>
+<input type='hidden' name='redirect' value='$redirect' />
 <input type='hidden' name='iframe_redirect' value='$iframe_redirect' />
 <input type='hidden' name='hash' value='$hash' />
 <input type='hidden' name='chemin' value='$zip' />
 <input type='hidden' name='arg' value='$arg' />
-<input type='radio' checked='checked' name='sousaction5' value='5'>" .
+<input type='radio' checked='checked' name='sousaction5' value='5' />" .
 	  	_T('upload_zip_telquel').
-		"</div>".
-		"<div><input type='radio' name='sousaction5' value='6'>".
+		"<br />".
+		"<input type='radio' name='sousaction5' value='6' />".
 		_T('upload_zip_decompacter').
-		"</div>".
 		"<ol><li><tt>" .
 		join("</tt></li>\n<li><tt>", $valables) .
 		"</tt></li></ol>".
-		"<div>&nbsp;</div>" .
-		"<div><input type='checkbox' name='sousaction4' value='4'>".
+		"<br /><input type='checkbox' name='sousaction4' value='4' />".
 		_T('les_deux').
 		"</div>".
 		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
 		_T('bouton_valider').
-		  "'>";
+		  "' />";
 
 	$texte = "<p>" .
 		_T('upload_fichier_zip_texte') .
