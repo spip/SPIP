@@ -152,7 +152,7 @@ function phraser_champs($texte,$ligne,$result) {
 		if ($suite[0] == '{') {
 		  phraser_arg($suite, '', array(), $champ);
 		}
-		$texte = $suite;
+		$texte = ltrim($suite);
 		$result[] = $champ;
 	  } else {
 	    // faux champ
