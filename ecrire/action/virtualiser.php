@@ -31,6 +31,6 @@ function action_virtualiser_post($r, $url)
 {
 	$url = preg_replace(",^ *https?://$,i", "", rtrim($url));
 	if ($url) $url = corriger_caracteres("=$url");
-	sql_update('spip_articles', array('chapo'=> sql_quote($url), 'date_modif' => 'NOW()'), "id_article=" . $r[1]);
+	sql_updateq('spip_articles', array('chapo'=> $url, 'date_modif' => date('Y-m-d H:i:s')), "id_article=" . $r[1]);
 }
 ?>

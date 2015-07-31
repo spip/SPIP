@@ -411,7 +411,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	// Detruire les tentatives d'archivages non abouties en 1 heure
 
-	sql_delete('spip_versions', "id_article=$id_article AND id_version <= 0 AND date < DATE_SUB(NOW(), INTERVAL 1 HOUR)");
+	sql_delete('spip_versions', "id_article=$id_article AND id_version <= 0 AND date < DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 HOUR)");
 
         // Signaler qu'on opere en mettant un numero de version négatif
         // distinctif (pour eviter la violation d'unicite)
@@ -423,7 +423,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	$valeurs = array('id_article' => $id_article,
 			 'id_version' => (0 - $datediff),
-			 'date' => 'NOW()',
+			 'date' => date('Y-m-d H:i:s'),
 			 'id_auteur' => $str_auteur, //  varchar ici!
 			 'titre_version' => $date);
 			 
@@ -512,9 +512,9 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// sinon la mise a jour efface en fait le verrou.
 
 	if (!$onlylock) {
-		sql_updateq('spip_versions', array('id_version'=>$id_version, 'date'=>'NOW()', 'champs'=> serialize($codes), 'permanent'=>$permanent, 'titre_version'=> $titre_version), "id_article=$id_article AND id_version < 0 AND titre_version='$date'");
+		sql_updateq('spip_versions', array('id_version'=>$id_version, 'date'=>date('Y-m-d H:i:s'), 'champs'=> serialize($codes), 'permanent'=>$permanent, 'titre_version'=> $titre_version), "id_article=$id_article AND id_version < 0 AND titre_version='$date'");
 	} else {
-		sql_updateq('spip_versions', array('date'=>'NOW()', 'champs'=>serialize($codes), 'permanent'=>$permanent, 'titre_version'=> $titre_version), "id_article=$id_article AND id_version=$id_version");
+		sql_updateq('spip_versions', array('date'=>date('Y-m-d H:i:s'), 'champs'=>serialize($codes), 'permanent'=>$permanent, 'titre_version'=> $titre_version), "id_article=$id_article AND id_version=$id_version");
 
 		sql_delete("spip_versions", "id_article=$id_article AND id_version < 0 AND titre_version ='$date'");
 	}

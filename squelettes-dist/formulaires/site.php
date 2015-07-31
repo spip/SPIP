@@ -52,8 +52,8 @@ function formulaires_site_traiter_dist($id_rubrique){
 		'id_rubrique' => $id_rubrique,
 		'id_secteur' => sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.sql_quote($id_rubrique)),
 		'descriptif' => $desc,
-		'date' => 'NOW()',
-		'date_syndic' => 'NOW()',
+		'date' => date('Y-m-d H:i:s'),
+		'date_syndic' => date('Y-m-d H:i:s'),
 		'statut' => 'prop',
 		'syndication' => 'non')))
 			  $res = array('message_ok' => _T('form_prop_enregistre'), 'id_syndic'=>$id_syndic);

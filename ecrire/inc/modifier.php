@@ -104,21 +104,20 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	if ($champs) {
 
 		// la modif peut avoir lieu
-		$champsq = array_map('sql_quote', $champs);
 
 		// faut-il ajouter date_modif ?
 		if ($options['date_modif']
 		AND !isset($champs[$options['date_modif']]))
-			$champsq[$options['date_modif']] = $champs[$options['date_modif']] = 'NOW()';
+			$champs[$options['date_modif']] = date('Y-m-d H:i:s');
 
 		// allez on commit la modif
-		sql_update($spip_table_objet, $champsq, "$id_table_objet=$id", $serveur);
+		sql_updateq($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
 
 		// Cas particulier des groupes de mots dont le titre est repris
 		// dans la table spip_mots
 		if ($spip_table_objet == 'spip_groupes_mots'
-		AND isset($champsq['titre']))
-			sql_update('spip_mots', array('type' => $champsq['titre']),
+		AND isset($champs['titre']))
+			sql_updateq('spip_mots', array('type' => $champs['titre']),
 			'id_groupe='.$id);
 
 		// Invalider les caches
@@ -214,7 +213,7 @@ function revision_article ($id_article, $c=false) {
 			'nonvide' => array('titre' => _T('info_sans_titre')),
 			'invalideur' => $invalideur,
 			'indexation' => $indexation,
-			'date_modif' => 'date_modif' // champ a mettre a NOW() s'il y a modif
+			'date_modif' => 'date_modif' // champ a mettre a date('Y-m-d H:i:s') s'il y a modif
 		),
 		$c);
 

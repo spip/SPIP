@@ -325,7 +325,7 @@ function declarer_url_arbo($type, $id_objet) {
 
 			// si oui on le chipe
 			sql_updateq('spip_urls', $set, 'url='.sql_quote($set['url']));
-			sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
+			sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), 'url='.sql_quote($set['url']));
 		}
 
 		// Sinon
@@ -337,7 +337,7 @@ function declarer_url_arbo($type, $id_objet) {
 		do {
 			$where = "U.type='$type' AND U.id_objet=$id_objet AND url=";
 			if (sql_countsel('spip_urls AS U', $where  .sql_quote($set['url']))) {
-				sql_update('spip_urls AS U', array('date' => 'NOW()'), $where  .sql_quote($set['url']));
+				sql_updateq('spip_urls AS U', array('date' => date('Y-m-d H:i:s')), $where  .sql_quote($set['url']));
 				spip_log("reordonne $type $id_objet");
 				return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 			}
@@ -347,14 +347,14 @@ function declarer_url_arbo($type, $id_objet) {
 					//serveur out ? retourner au mieux
 					return  declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$url_propre,$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 				elseif (sql_countsel('spip_urls AS U', $where . sql_quote($set['url']))) {
-					sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
+					sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), 'url='.sql_quote($set['url']));
 					return declarer_url_arbo_rec($urls[$type][$id_objet]['url']=$set['url'],$type,$urls[$type][$id_objet]['parent'],$urls[$type][$id_objet]['type_parent']);
 				}
 			}
 		} while (@sql_insertq('spip_urls', $set) <= 0);
 	}
 
-	sql_update('spip_urls', array('date' => 'NOW()'), 'url='.sql_quote($set['url']));
+	sql_updateq('spip_urls', array('date' => date('Y-m-d H:i:s')), 'url='.sql_quote($set['url']));
 	spip_log("Creation de l'url propre '" . $set['url'] . "' pour $col_id=$id_objet");
 	
 	$urls[$type][$id_objet]['url'] = $set['url'];

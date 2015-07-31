@@ -110,7 +110,7 @@ function action_editer_message_post_choisir($id_message) {
 function action_editer_message_post_envoyer($id_message, $statut) {
 
 	sql_updateq("spip_messages", array("statut" => $statut), "id_message=$id_message");
-	sql_update("spip_messages", array("date_heure" => "NOW()"), "id_message=$id_message AND rv<>'oui'");
+	sql_updateq("spip_messages", array("date_heure" => date('Y-m-d H:i:s')), "id_message=$id_message AND rv<>'oui'");
 }
 
 // http://doc.spip.org/@action_editer_message_post_nouveau
@@ -133,7 +133,7 @@ function action_editer_message_post_nouveau($type, $dest='', $rv='')
 		      'id_auteur' => $id_auteur);
 
 	if (!$rv)
-		$vals['date_heure'] = 'NOW()';
+		$vals['date_heure'] = date('Y-m-d H:i:s');
 	else {
 		$vals['date_heure'] = "$rv 12:00:00";
 		$vals['date_fin'] = "$rv 13:00:00";
