@@ -24,7 +24,7 @@ utiliser_langue_visiteur();
 </style>
 </HEAD>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"<?php
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"<?php
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 echo ">";

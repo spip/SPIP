@@ -111,7 +111,11 @@ $html .= $suite;
 // hack pour que la langue de typo() soit celle de l'aide en ligne
 $langue_site = $lang_aide;
 
-echo justifier(propre($html)."<p>");
+$html = justifier(propre($html)."<p>");
+// Remplacer les liens externes par des liens ouvrants (a cause des frames)
+$html = ereg_replace('<a href="(http://[^"]+)"([^>]*)>', '<a href="\\1"\\2 target="_blank">', $html);
+
+echo $html;
 echo "<font size=2>$les_notes</font><p>";
 
 ?>
