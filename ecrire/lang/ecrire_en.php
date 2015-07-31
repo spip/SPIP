@@ -537,6 +537,9 @@ requiring an FTP access to the Web site.',
 'info_publier' => 'publish',
 'info_publies' => 'Your articles published online',
 'info_question_accepter_visiteurs' => 'If your site\'s templates allow visitors to register without entering the private area, please activate the following option:',
+'info_question_activer_compactage_css' => 'Do you wish to activate compression for CSS stylesheets?',
+'info_question_activer_compactage_js' => 'Do you wish to activate compression for Javascript files?',
+'info_question_activer_compresseur' => 'Do you wish to activate compression for the HTTP data?',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
 'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow the new editors to register
  from the public site? If you agree to this, visitors will be able to  register
@@ -554,6 +557,8 @@ requiring an FTP access to the Web site.',
 'info_question_vignettes_referer' => 'When you consult the statistics, you can see a preview of the originating sites of the visits. ',
 'info_question_vignettes_referer_non' => 'Do not show the screenshots of the originating sites',
 'info_question_vignettes_referer_oui' => 'Show the screenshots of the originating sites',
+'info_question_visiteur_ajout_document_forum' => 'Do you wish to authorise visitors to attach documenst (images, sound files, ...) to their forum messages?',
+'info_question_visiteur_ajout_document_forum_format' => 'If so, give below the list of extensions for the file types which are to be authorised (e.g. gif, jpg, png, mp3).',
 'info_qui_attribue_mot_cle' => 'Keywords in this group can be assigned by:',
 'info_racine_site' => 'Site root',
 'info_recharger_page' => 'Please reload this page in a few moments.',
@@ -710,6 +715,7 @@ in a colour indicating their status:',
 'item_ajout_mots_cles' => 'Authorise the addition of keywords to forums',
 'item_autoriser_documents_joints' => 'Authorise documents attached to articles',
 'item_autoriser_documents_joints_rubriques' => 'Authorise documents in the sections',
+'item_autoriser_selectionner_date_en_ligne' => 'To be able to choose the publishing date of each document',
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files',
 'item_bloquer_liens_syndiques' => 'Block syndicated links for validation',
 'item_breve_refusee' => 'NO - News item rejected',
@@ -719,12 +725,16 @@ in a colour indicating their status:',
 'item_choix_non_generation_miniature' => 'Do not generate thumbnails.',
 'item_choix_redacteurs' => 'editors',
 'item_choix_visiteurs' => 'visitors of the public site',
+'item_compresseur' => 'Activate compression',
+'item_config_forums_prive_global' => 'Activate the authors\' forum',
+'item_config_forums_prive_objets' => 'Activate these forums',
 'item_creer_fichiers_authent' => 'Create .htpasswd files',
 'item_desactiver_forum_administrateur' => 'Disable administrators forum',
 'item_gerer_annuaire_site_web' => 'Manage Web sites directory',
 'item_gerer_statistiques' => 'Manage statistics',
 'item_limiter_recherche' => 'Limit the search to information contained in your site',
 'item_login' => 'Login',
+'item_messagerie_agenda' => 'Activate the messaging sytem and the calendar',
 'item_mots_cles_association_articles' => 'articles',
 'item_mots_cles_association_breves' => 'news items',
 'item_mots_cles_association_rubriques' => 'sections',
@@ -736,12 +746,17 @@ in a colour indicating their status:',
 'item_non_ajout_mots_cles' => 'Do not authorise the addition of keywords to forums',
 'item_non_autoriser_documents_joints' => 'Do not authorise documents in articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Do not authorise documents in the sections',
+'item_non_autoriser_selectionner_date_en_ligne' => 'To not be able to change the date of documents manually',
 'item_non_autoriser_syndication_integrale' => 'Only send a summary',
 'item_non_bloquer_liens_syndiques' => 'Do not block the links emanating from syndication',
+'item_non_compresseur' => 'Deactivate compression',
+'item_non_config_forums_prive_global' => 'Deactivate the authors\' forum',
+'item_non_config_forums_prive_objets' => 'Deactivate these forums',
 'item_non_creer_fichiers_authent' => 'Do not create these files',
 'item_non_gerer_annuaire_site_web' => 'Disable Web sites directory',
 'item_non_gerer_statistiques' => 'Do not manage statistics',
 'item_non_limiter_recherche' => 'Extend the search to the content of referenced sites',
+'item_non_messagerie_agenda' => 'Deactivate the messaging system and the calendar',
 'item_non_publier_articles' => 'Do not publish the articles before their publication dates.',
 'item_non_utiliser_breves' => 'Do not use the news',
 'item_non_utiliser_config_groupe_mots_cles' => 'Do not use the advanced configuration of keyword groups',
@@ -808,8 +823,14 @@ in a colour indicating their status:',
 'mois_non_connu' => 'unknown',
 
 // O
+'onglet_contenu' => 'Contents',
 'onglet_declarer_une_autre_base' => 'Declare another database',
+'onglet_discuter' => 'Discuss',
+'onglet_documents' => 'Documents',
+'onglet_interactivite' => 'Interactivity',
+'onglet_proprietes' => 'Properties',
 'onglet_repartition_actuelle' => 'now',
+'onglet_sous_rubriques' => 'Sub-sections',
 'ortho_ajouter_ce_mot' => 'Add this word to the dictionary',
 'ortho_aucune_suggestion' => 'No suggestion was found for this word.',
 'ortho_avis_privacy' => 'Spip contains a spell checker. However, before enabling it, please read the following paragraph carefully:',
@@ -937,12 +958,16 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 		traffic is maintained) and the number of visits recorded
 		since the beginning are displayed in the balloon that
 		appears as the mouse hovers over the title.',
+'texte_compacter_avertissement' => 'Be careful not to activate these options during the development of your site: compressed elements become difficult to read and debug.',
+'texte_compacter_script_css' => 'SPIP can compact Javascript files and CSS stylesheets and save them as static files. This accelerates the display of the site.',
 'texte_compresse_ou_non' => '(this one could be compressed or not)',
+'texte_compresseur_page' => 'SPIP can automatically compress each page that it sends. This option reduces the bandwidth used, making the site faster for lower speed connections), but it does require more resources from the server.',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
 'texte_config_groupe_mots_cles' => 'Do you wish to activate the advanced configuration of keyword groups,
    by specifying, for instance that a unique word
  per group could be selected, that a group is important...?',
+'texte_conflit_edition_correction' => 'Please check check below the differences between the two versions. You can thus copy your changes and re-begin.',
 'texte_connexion_mysql' => 'Consult the information provided by your service provider. It should contain the connection codes for the SQL server.',
 'texte_contenu_article' => '(Content of the article in a few words.)',
 'texte_contenu_articles' => 'Based on the layout chosen for your site, you can decide
@@ -968,7 +993,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_effacer_statistiques' => 'Delete the statistics',
 'texte_en_cours_validation' => 'The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
 'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
-'texte_fichier_authent' => '<MODIF><b>Should SPIP create the <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
   and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
   These files can be used to restrict access to authors
   and administrators in other parts of your site
@@ -997,6 +1022,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_login_precaution' => 'Warning! This is the login with which you are connected now.
 	Use this form with caution...',
 'texte_message_edit' => 'Warning: this message can be modified by all the site administrators, and it appears to all editors. Use the announcements only to stress important events in the site\'s life.',
+'texte_messagerie_agenda' => 'A messaging system allows the authors of the site to communicate directly in the editing area of the site. It is linked to a calendar.',
 'texte_messages_publics' => 'Public Messages of the article:',
 'texte_mise_a_niveau_base_1' => 'You have just updated SPIP files.
 	Now you must upgrade the site\'s
@@ -1074,11 +1100,11 @@ irreversible.</b>',
 in the SPIP cache. This allows you, amongst other things, to force the refreshing of all the pages in case you
 entered important modifications on the graphics or the structure of the site.',
 'texte_sur_titre' => 'Top title',
-'texte_syndication' => '<MODIF>If a site allows it, it is possible to retrieve automatically
-		the list of its latest material. To achieve this, you must activate the syndication. 
-		<blockquote><i>Some hosts disable this function; 
-		in this case, you cannot use the content syndication
-		from your site.</i></blockquote>',
+'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
+  the list of its latest material. To achieve this, you must activate the syndication. 
+  <blockquote><i>Some hosts disable this function; 
+  in this case, you cannot use the content syndication
+  from your site.</i></blockquote>',
 'texte_table_ok' => ': this table is OK.',
 'texte_tables_indexation_vides' => 'Indexing tables of the engine are empty.',
 'texte_tentative_recuperation' => 'Repairing attempt',
@@ -1093,7 +1119,7 @@ entered important modifications on the graphics or the structure of the site.',
   messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
 'texte_unpack' => 'downloading the latest version',
-'texte_utilisation_moteur_syndiques' => '<MODIF>When you use SPIP\'s integrated search engine, 
+'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, 
 you can perform searches on sites and
  articles syndicated in two different ways. <br />- The simplest
  way is to search only in the
@@ -1119,9 +1145,16 @@ you can perform searches on sites and
 'titre_cadre_interieur_rubrique' => 'In section',
 'titre_cadre_numero_auteur' => 'AUTHOR NUMBER',
 'titre_cadre_signature_obligatoire' => '<b>Signature</b> [Required]<br />',
+'titre_compacter_script_css' => 'Compression of scripts and CSS',
+'titre_compresser_flux_http' => 'Compression of HTTP data',
+'titre_config_contenu_notifications' => 'Notifications',
+'titre_config_contenu_prive' => 'In the editing area',
+'titre_config_contenu_public' => 'On the public site',
 'titre_config_fonctions' => 'Site configuration',
+'titre_config_forums_prive' => 'Forums in the editing area',
 'titre_config_groupe_mots_cles' => 'Configuration of the keyword groups',
 'titre_configuration' => 'Site configuration',
+'titre_conflit_edition' => 'Conflict while editing',
 'titre_connexion_ldap' => 'Options: <b>Your LDAP connection</b>',
 'titre_dernier_article_syndique' => 'Latest syndicated articles',
 'titre_documents_joints' => 'Attached documents',
@@ -1134,6 +1167,7 @@ you can perform searches on sites and
 'titre_langue_rubrique' => 'SECTION LANGUAGE',
 'titre_langue_trad_article' => 'ARTICLE LANGUAGE AND TRANSLATIONS',
 'titre_les_articles' => 'ARTICLES',
+'titre_messagerie_agenda' => 'Messaging system and calendar',
 'titre_mots_cles_dans_forum' => 'Keywords in the public site forums',
 'titre_mots_tous' => 'Keywords',
 'titre_naviguer_dans_le_site' => 'Browse the site...',
@@ -1165,6 +1199,7 @@ you can perform searches on sites and
 'titre_page_recherche' => 'Search results @recherche@',
 'titre_page_sites_tous' => 'Referenced sites',
 'titre_page_statistiques' => 'Statistics by section',
+'titre_page_statistiques_messages_forum' => 'Forum messages',
 'titre_page_statistiques_referers' => 'Statistics (incoming links)',
 'titre_page_statistiques_signatures_jour' => 'Signatures count by day',
 'titre_page_statistiques_signatures_mois' => 'Signatures count by month',
