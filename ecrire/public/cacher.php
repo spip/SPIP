@@ -134,6 +134,15 @@ function cache_valide(&$page, $date) {
 }
 
 
+function cache_sessionne($chemin_cache, $creer=false) {
+	$fs = substr(md5($chemin_cache),0,8);
+	$a = substr($fs,0,1);
+	$b = sous_repertoire(_DIR_CACHE, $a);
+	if ($creer)
+		sous_repertoire($b, $fs);
+	return $a.'/'.$fs.'/_';
+}
+
 // Creer le fichier cache
 # Passage par reference de $page par souci d'economie
 // http://doc.spip.org/@creer_cache
@@ -225,8 +234,8 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
 
 	$lastmodified = 0;
-	if (!lire_fichier(_DIR_CACHE . ($f = $g = $chemin_cache), $page))
-		lire_fichier(_DIR_CACHE . ($f = $chemin_cache.'-'.spip_session()), $page);
+	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
+		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f).spip_session()), $page);
 
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
@@ -253,8 +262,11 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	) {
 		$page = array(); // ignorer le cache deja lu
 		supprimer_fichier(_DIR_CACHE . $f); // pas necessaire ?
-		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul')))
-			array_map('supprimer_fichier', preg_files(_DIR_CACHE . $g));
+		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul'))
+		AND $fs) {
+			include_spip('inc/invalideur');
+			purger_repertoire(dirname(_DIR_CACHE.$f));
+		}
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
