@@ -34,25 +34,26 @@ function auteurs_edit_config($row)
 
 function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
-	// login trop court ou existant
-	if ($p = _request('new_login')) {
-		if ((strlen($p) < _LOGIN_TROP_COURT)
-		AND $p !== sql_getfetsel("login", "spip_auteurs", "id_auteur=" . sql_quote($id_auteur))) {
-			$erreurs['login'] = _T('info_login_trop_court');
-			$erreurs['message_erreur'] .= _T('info_login_trop_court');
-		} elseif (sql_countsel('spip_auteurs', "login=" . sql_quote($p) . " AND id_auteur!=" . sql_quote($id_auteur) . " AND statut!='5poubelle'")) {
-			$erreurs['new_login']= _T('info_login_existant');
-			$erreurs['message_erreur'] .= _T('info_login_existant');
-		}
+
+	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
+	$auth_methode = ($auth_methode ? $auth_methode : 'spip');
+	include_spip('inc/auth');
+
+	if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)){
+		$erreurs['new_login'] = $err;
+		$erreurs['message_erreur'] .= $err;
 	}
-	// pass trop court ou confirmation non identique
-	if ($p = _request('new_pass')) {
-		if (strlen($p) < 6) {
-			$erreurs['new_pass'] = _T('info_passe_trop_court');
-			$erreurs['message_erreur'] .= _T('info_passe_trop_court');
-		} elseif ($p != _request('new_pass2')) {
-			$erreurs['new_pass'] = _T('info_passes_identiques');
-			$erreurs['message_erreur'] .= _T('info_passes_identiques');
+	else {
+		// pass trop court ou confirmation non identique
+		if ($p = _request('new_pass')) {
+			if ($p != _request('new_pass2')) {
+				$erreurs['new_pass'] = _T('info_passes_identiques');
+				$erreurs['message_erreur'] .= _T('info_passes_identiques');
+			}
+			elseif ($err = auth_verifier_pass($auth_methode, _request('new_login'),$p, $id_auteur)){
+				$erreurs['new_pass'] = $err;
+				$erreurs['message_erreur'] .= $err;
+			}
 		}
 	}
 	return $erreurs;
@@ -60,6 +61,9 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+	if (_request('saisie_webmestre') OR _request('webmestre'))
+		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
+
 	return formulaires_editer_objet_traiter('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
 	//return $message;
 }
