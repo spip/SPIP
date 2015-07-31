@@ -152,13 +152,19 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 // recuperer le critere SQL qui selectionne nos forums
 // http://doc.spip.org/@critere_statut_controle_forum
 function critere_statut_controle_forum($page, $id_rubrique=0) {
+
+	if (is_array($id_rubrique))   $id_rubrique = join(',',$id_rubrique);
 	if (!$id_rubrique) {
 		$from = 'spip_forum AS F';
 		$where = "";
 		$and = "";
 	} else {
+		if (strpos($id_rubrique,','))
+		  $eq = " IN ($id_rubrique)";
+		else $eq = "=$id_rubrique";
+	      
 		$from = 'spip_forum AS F, spip_articles AS A';
-		$where = "A.id_secteur=$id_rubrique AND F.id_article=A.id_article";
+		$where = "A.id_secteur$eq AND F.id_article=A.id_article";
 		$and = ' AND ';
 	}
    
