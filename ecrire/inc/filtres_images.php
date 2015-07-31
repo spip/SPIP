@@ -14,6 +14,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/filtres'); // par precaution
 
+function statut_effacer_images_temporaires($stat){
+	static $statut = false; // par defaut on grave toute les images
+	if ($stat==='get') return $statut;
+	$statut = $stat?true:false;
+}
+
 // http://doc.spip.org/@cherche_image_nommee
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
@@ -222,7 +228,9 @@ function image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 	$fonction = "image_image".$valeurs['format_dest'];
 	$ret = false;
 	#un flag pour reperer les images gravees
-	$lock = file_exists($valeurs['fichier_dest']) AND !file_exists($valeurs['fichier_dest'].'.src');
+	$lock = 
+		!statut_effacer_images_temporaires('get') // si la fonction n'a pas ete activee, on grave tout
+	  OR (file_exists($valeurs['fichier_dest']) AND !file_exists($valeurs['fichier_dest'].'.src'));
 	if (
 	     function_exists($fonction) 
 			  && ($ret = $fonction($img,$valeurs['fichier_dest'],$qualite)) # on a reussi a creer l'image
