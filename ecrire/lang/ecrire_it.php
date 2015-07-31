@@ -135,7 +135,7 @@ Se non conosci queste informazioni, richiedile all’amministratore del sistema 
 	'erreur_connect_deja_existant' => 'Esista già un server con quel nome',
 	'erreur_email_deja_existant' => 'Questo indirizzo email risulta già registrato.',
 	'erreur_nom_connect_incorrect' => 'Nome del server non consentito',
-	'erreur_plugin_attribut_balise_manquant' => 'Attributo @attribut@ mancante nel tag @balise@.', # RELIRE
+	'erreur_plugin_attribut_balise_manquant' => 'Attributo @attribut@ mancante nel tag @balise@.',
 	'erreur_plugin_desinstalation_echouee' => 'La disinstallazione del plugin è fallita. In ogni caso potete disattivarlo.',
 	'erreur_plugin_fichier_absent' => 'File non presente',
 	'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
