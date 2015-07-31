@@ -75,8 +75,7 @@ function formulaire_charger_plugin($retour='') {
 	);
 
 
-	$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin ; SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code></p>
-	<p>Si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
+	$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
 
 	if ($liste) {
 		$menu = '';
@@ -126,21 +125,13 @@ function chargeur_charger_zip($quoi = array())
 					'plugin' => null,
 					'cache_cache' => null,
 					'rename' => array(),
-					'keep' => false, # keep a copy
 					'edit' => array())
 				as $opt=>$def) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
 	}
 
-	include_spip('inc/distant');
-	$contenu = recuperer_page($quoi['zip'], false, false,
-		8000000 /* taille max */);
-
-	$fichier = $quoi['dest'].basename($quoi['zip']);
-	if (!$contenu || !ecrire_fichier($fichier, $contenu)) {
-		spip_log('charger_decompresser impossible de charger ' . $quoi['zip']);
+	if (!@file_exists($fichier = $quoi['fichier']))
 		return 0;
-	}
 
 	include_spip('inc/pclzip');
 	$zip = new PclZip($fichier);
@@ -158,6 +149,7 @@ function chargeur_charger_zip($quoi = array())
 			unset($path[$j]);
 		}
 	}
+
 	$aremove = explode('/', $quoi['remove']);
 	$jmax = count($path);
 	for ($j = 0; $j < $jmax; ++$j) {
@@ -166,6 +158,7 @@ function chargeur_charger_zip($quoi = array())
 		}
 		unset($path[$j]);
 	}
+
 	$adest = explode('/', $quoi['dest']);
 	$kmax = count($adest);
 	for ($k = 0 ; $k < $kmax && $j < $jmax; ++$j, ++$k) {
@@ -176,50 +169,60 @@ function chargeur_charger_zip($quoi = array())
 	}
 	$quoi['dest'] = implode('/', $adest);
 
-	$ok = $zip->extract(
-		PCLZIP_OPT_PATH, $quoi['dest'],
-		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
-		PCLZIP_OPT_REPLACE_NEWER,
-		PCLZIP_OPT_REMOVE_PATH, $quoi['remove'] . "/");
-	if ($zip->error_code < 0) {
-		spip_log('charger_decompresser erreur zip ' . $zip->error_code .
-					' pour paquet: ' . $quoi['zip']);
-		return $zip->error_code;
+	// si le zip veut se poser a la racine, on le colle dans un sous-repertoire
+	// a son nom
+	if (!$path) {
+		$dirname = $quoi['dest'] = preg_replace(',\.zip$,', '/', $fichier);
+		$removex = ',^'.preg_quote($quoi['remove'] . '/', ',').',';
+		spip_log("zip racine, $dirname, $remove");
+	} else {
+		$dirname = $quoi['dest'] . implode('/', $path).'/';
+		$removex =  ',^('.preg_quote($quoi['remove'] . '/', ',').')?'
+			. preg_quote(implode('/', $path).'/',',').',';
+		spip_log("zip bien forme, $dirname, $remove");
 	}
 
-	# supprimer le fichier zip source ?
-	if (!$quoi['keep'])
-		@unlink($fichier);
+	if ($quoi['extract']) {
+		$ok = $zip->extract(
+			PCLZIP_OPT_PATH, $quoi['dest'],
+			PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
+			PCLZIP_OPT_REPLACE_NEWER,
+			PCLZIP_OPT_REMOVE_PATH, $quoi['remove'] . "/");
+		if ($zip->error_code < 0) {
+			spip_log('charger_decompresser erreur zip ' . $zip->error_code .
+				' pour paquet: ' . $quoi['zip']);
+			return $zip->error_code;
+		}
 
-	if (!$quoi['cache_cache']) {
-		chargeur_montre_tout($quoi);
-	}
-	if ($quoi['rename']) {
-		chargeur_rename($quoi);
-	}
-	if ($quoi['edit']) {
-		chargeur_edit($quoi['dest'], $quoi['edit']);
+		if (!$quoi['cache_cache']) {
+			chargeur_montre_tout($quoi);
+		}
+		if ($quoi['rename']) {
+			chargeur_rename($quoi);
+		}
+		if ($quoi['edit']) {
+			chargeur_edit($quoi['dest'], $quoi['edit']);
+		}
+
+		if ($quoi['plugin']) {
+			chargeur_activer_plugin($quoi['plugin']);
+		}
+
+		spip_log('charger_decompresser OK pour paquet: ' . $quoi['zip']);
 	}
 
-	if ($quoi['plugin']) {
-		chargeur_activer_plugin($quoi['plugin']);
-	}
-
-	spip_log('charger_decompresser OK pour paquet: ' . $quoi['zip']);
-
-	$sub = ',^'.preg_quote($quoi['remove'], ',') . '/,';
 	$size = $compressed_size = 0;
 	foreach ($list as $a => $f) {
 		$size += $f['size'];
 		$compressed_size += $f['compressed_size'];
-		$list[$a] = preg_replace($sub,'',$f['filename']);
+		$list[$a] = preg_replace($removex,'',$f['filename']);
 	}
 
 	return array(
 		'files' => $list,
 		'size' => $size,
 		'compressed_size' => $compressed_size,
-		'dirname' => preg_replace(',/.*,', '', $list[0])
+		'dirname' => $dirname #.preg_replace(',/.*,', '', $list[0])
 	);
 }
 
@@ -287,15 +290,14 @@ function chargeur_activer_plugin($plugin)
 
 function liste_fichiers_pclzip($status) {
 	$list = $status['files'];
-	$ret = '<b>'._L((count($list)-1)." fichiers ("
-		.taille_en_octets($status['size']).') install&#233;s dans '._DIR_PLUGINS_AUTO.$list[0]).'</b>';
+	$ret = '<b>'._L('Il contient les fichiers suivants ('
+		.taille_en_octets($status['size']).'),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>'.$status['dirname']).'</code></b>';
 
 	$l .= "<ul style='font-size:x-small;'>\n";
 	foreach ($list as $f) {
 		if (basename($f) == 'svn.revision')
-			lire_fichier(_DIR_PLUGINS_AUTO.$f,$svn);
-		if ($joli = preg_replace(',^(.*/)([^/]+/?)$,', '<span style="visibility:hidden">\1</span>\2',
-			substr($f, strlen($list[0]))))
+			lire_fichier($status['dirname'].'/'.$f,$svn);
+		if ($joli = preg_replace(',^(.*/)([^/]+/?)$,', '<span style="visibility:hidden">\1</span>\2', $f))
 			$l .= "<li>".$joli."</li>\n";
 	}
 	$l .= "</ul>\n";
