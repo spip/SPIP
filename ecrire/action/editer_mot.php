@@ -29,6 +29,7 @@ function action_editer_mot_dist() {
 		spip_log("action editer_mot: $arg pas compris");
 	else {
 		list($x, $id_objet, $id_mot, $table, $table_id, $objet, $nouv_mot) = $r;
+		spip_log("$x, $id_objet, $id_mot, $table, $table_id, $objet, $nouv_mot") ;
 		if ($id_mot) {
 			if ($objet)
 			  // desassocier un/des mot d'un objet precis
@@ -58,6 +59,11 @@ function action_editer_mot_dist() {
 
 	$redirect = rawurldecode($redirect);
 
+	// hack du retour croiser editer/grouper (
+
+	if (($p =(strpos($redirect, '=editer_mot&script=grouper_mots&'))) !== false)
+	    $redirect = substr($redirect,0,$p) . substr($redirect,$p+18);
+	    
 	if ($cherche_mot) {
 		if ($p = strpos($redirect, '#')) {
 			$a = substr($redirect,$p);

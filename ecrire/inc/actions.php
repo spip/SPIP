@@ -112,7 +112,7 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
 
 // http://doc.spip.org/@ajax_action_auteur
-function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_ajax='')
+function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='')
 {
 	$ancre = "$action-" . intval($id);
 
