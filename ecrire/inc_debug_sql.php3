@@ -254,7 +254,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	}
 
 	if ($texte) {
-	  $err = "";
+	  $ouvrant = $fermant = $err = "";
 	  $titre = $GLOBALS['var_mode_affiche'];
 	  if ($titre != 'validation')
 	    $titre = 'zbug_' . $titre;
@@ -265,14 +265,16 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	      $res = $phraseur_xml->xml_parsestring($xml_parser, $texte);
 	      if (!$res)
 		$err = _L("impossible");
-	      elseif (ereg("(^erreur.*[^0-9])([0-9]*)$", $res, $r))
-		$err = $r[1] ."<a href='#L" . $r[2] . "'>$r[2]</a>";
-	      else
-		{
+	      elseif (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $res, $r)) {
+		$fermant = $r[2];
+		$ouvrant = $r[4];
+		$err = ": " . $r[1] ."<a href='#L" . $r[2] . "'>$r[2]</a>" .
+		$r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>";
+	      } else {
 		  $err = _L("correcte");
 		  $texte = $res;
-		}
-	    }
+	      }
+	  }
 	  echo "<div id=\"debug_boucle\"><fieldset><legend>",
 	    _T($titre),	       
 	    ' ',
@@ -284,16 +286,20 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  ob_end_clean();
 	  if (substr($s,0,6) == '<code>') { $s=substr($s,6); echo '<code>';}
 	  $tableau = explode("<br />", $s);
-	  $format = "<br />\n<span style='color: black'>%0".
+	  $format = "<span style='color: black'>%0".
 	    strlen(count($tableau)).
 	    "d </span>";
 	  $format10=str_replace('black','pink',$format);
+	  $formaterr="<span style='background-color: pink'>%s</span>";
 	  $i=1;
 
-	  foreach ($tableau as $ligne)
-	    echo sprintf(($i%10) ? $format :$format10, $i++),
-	    "<a id='L$i'></a>",
-	    $ligne ;
+	  foreach ($tableau as $ligne) {
+	    echo "<br />\n<a id='L$i' />",
+	    sprintf((($i%10) ? $format :$format10), $i),
+	    sprintf((($i == $fermant)||($i == $ouvrant)) ? $formaterr : '%s',
+		    $ligne) ;
+	    $i++;
+	  }
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
