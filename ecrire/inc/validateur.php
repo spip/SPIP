@@ -14,29 +14,52 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_REGEXP_DOCTYPE',
-	'/^\s*<!DOCTYPE\s+(\w+)\s+(\w+)\s+(.)([^\3>]*)\3\s+(.)([^\5>]*)\5[^>]*>/');
+	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
+
 
 // http://doc.spip.org/@inc_validateur_dist
 function inc_validateur_dist($data)
 {
 	global $phraseur_xml;
 
+
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
+	list(,,$topelement, $avail,$suite) = $r;
 
-	list(,$ns, $type, $s, $nom, $s2, $grammaire) = $r;
+	if (!preg_match('/^"([^"]*)"\s*(.*)$/', $suite, $r))
+		if (!preg_match("/^'([^']*)'\s*(.*)$/", $suite, $r))
+			return array();
+	list(,$rotlvl, $suite) = $r;
+
+	if (!$suite) {
+		$grammaire = $rotlvl;
+		$rotlvl = '';
+	} else {
+		if (!preg_match('/^"([^"]*)"\s*$/', $suite, $r))
+			if (!preg_match("/^'([^']*)'\s*$/", $suite, $r))
+				return array();
+		$grammaire = $r[1];
+	}
 
 	$dtd = '';
-	$file = _DIR_CACHE . preg_replace('/[\W.]/','_', $grammaire);
+	if ($avail == 'SYSTEM')
+	  $file = $grammaire;
+	else
+	  $file = _DIR_CACHE . preg_replace('/[^\w.]/','_', $grammaire);
 
 	if (@is_readable($file)) {
 		lire_fichier($file, $dtd);
 	} else {
-		include_spip('inc/distant');
-		// il faudrait verifier que $type=PUBLIC, et sinon agir
-		if ($dtd = recuperer_page($grammaire))
-			ecrire_fichier($file, $dtd); 
-		else	spip_log("DTD $grammaire inaccessible");
+		if ($avail == 'PUBLIC') {
+			include_spip('inc/distant');
+			if ($dtd = recuperer_page($grammaire))
+				ecrire_fichier($file, $dtd); 
+		}
+	}
+	if (!$dtd) {
+		spip_log("DTD $grammaire inaccessible");
+		return array();
 	}
 
 	$res = array();
@@ -86,7 +109,7 @@ function inc_validateur_dist($data)
 	  }
 	}
 	$phraseur_xml->attributs = $res;
-	spip_log("DTD: " . count($phraseur_xml->entites)  . ' entites, ' . count($phraseur_xml->elements)  . ' elements');
+	spip_log("DTD $topelement ($avail) $rotlvl $grammaire ". strlen($dtd) . ' octets ' . count($phraseur_xml->entites)  . ' entites, ' . count($phraseur_xml->elements)  . ' elements');
 }
 
 // http://doc.spip.org/@expanserEntite
@@ -133,14 +156,16 @@ function validerElement($parser, $name, $attrs)
 		}
 	    }
 	  }
-	  foreach ($phraseur_xml->attributs[$name] as $n => $v)
-	    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
-		$phraseur_xml->err[]= " <b>$n</b>"
-		. '&nbsp;:&nbsp;'
-                . _L(" attribut obligatoire mais absent dans ")
-                . "<b>$name</b>"
-		.  coordonnees_erreur($parser);
-	    }
+	  if (isset($phraseur_xml->attributs[$name])) {
+		  foreach ($phraseur_xml->attributs[$name] as $n => $v)
+		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
+			$phraseur_xml->err[]= " <b>$n</b>"
+			  . '&nbsp;:&nbsp;'
+			  . _L(" attribut obligatoire mais absent dans ")
+			  . "<b>$name</b>"
+			  .  coordonnees_erreur($parser);
+		    }
+	  }
 	}
 }
 
