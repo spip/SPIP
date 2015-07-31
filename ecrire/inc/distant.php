@@ -23,6 +23,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // http://doc.spip.org/@copie_locale
 function copie_locale($source, $mode='auto') {
+
+	// si c'est la protection de soi-meme 
+	$reg = ',' . $GLOBALS['meta']['adresse_site']
+	  . "/?spip.php[?]action=acceder_document.*file=(.*)$,";
+
+	if (preg_match($reg, $source, $local)) return _DIR_IMG . urldecode($local[1]);
+
 	$local = fichier_copie_locale($source);
 
 	// test d'existence du fichier
@@ -295,7 +302,9 @@ function fichier_copie_locale($source) {
 
 	// Si c'est deja dans la table des documents,
 	// ramener le nom de sa copie potentielle
+
 	$ext = sql_getfetsel("extension", "spip_documents", "fichier=" . sql_quote($source) . " AND distant='oui' AND extension <> ''");
+
 
 	if ($ext) return nom_fichier_copie_locale($source, $ext);
 

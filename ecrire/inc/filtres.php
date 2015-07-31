@@ -44,11 +44,15 @@ function filtre_text_csv_dist($t)
 {
 	$virg = substr_count($t, ',');
 	$pvirg = substr_count($t, ';');
+	$tab = substr_count($t, "\t");
 	if ($virg > $pvirg)
 		{ $sep = ','; $hs = '&#44;';}
-	else	{ $sep = ';'; $hs = '&#59;';}
+	else	{ $sep = ';'; $hs = '&#59;'; $virg = $pvirg;}
+	if ($tab > $virg) {$sep = "\t"; $hs = "\t";}
 
-	$t = str_replace('""','&#34;', preg_replace('/\r?\n/', "\n", $t));
+	$t = str_replace('""','&#34;',
+			 preg_replace('/\r?\n/', "\n",
+				      preg_replace('/\r/', "\n", $t)));
 	preg_match_all('/"[^"]*"/', $t, $r);
 	foreach($r[0] as $cell) 
 		$t = str_replace($cell, 
