@@ -110,6 +110,18 @@ if ($jour_redac && $flag_editable) {
 }
 
 
+// Passer les images/docs en "inclus=non"
+$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
+$result = mysql_query($query);
+
+while($row=mysql_fetch_array($result)){
+	$ze_doc[]=$row['id_document'];
+}
+$ze_docs = join($ze_doc,",");
+
+mysql_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
+
+
 //
 // Reunit les textes decoupes parce que trop longs
 //
@@ -244,17 +256,17 @@ $arton_ok = get_image($arton);
 if ($arton_ok) $artoff_ok = get_image($artoff);
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND ($options == 'avancees' OR $arton_ok)) {
-
-	if (!$boite_ouverte) {
-		debut_boite_info();
-		$boite_ouverte = true;
-	}
+		echo "<p>";
+		debut_cadre_relief();
 
 	afficher_boite_logo($arton, "LOGO DE L'ARTICLE".aide ("logoart"));
 	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
 		echo "<p>";
 		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
 	}
+	
+	fin_cadre_relief();
+	
 }
 
 
@@ -464,7 +476,7 @@ if ($boite_ouverte) {
 // Pave "documents associes a l'article"
 //
 
-boite_documents_article($id_article);
+//boite_documents_article($id_article);
 
 
 
@@ -1203,9 +1215,9 @@ if ($les_notes) {
 }
 
 
+
+
 echo "<DIV align=right>";
-
-
 
 //
 // Bouton "modifier cet article"
@@ -1214,7 +1226,9 @@ echo "<DIV align=right>";
 if ($flag_editable) {
 	echo "<A HREF='articles_edit.php3?id_article=$id_article' onMouseOver=\"modifier_article2.src='IMG2/modifier-article-on.gif'\" onMouseOut=\"modifier_article2.src='IMG2/modifier-article-off.gif'\"><img src='IMG2/modifier-article-off.gif' alt='Modifier cet article' width='51' height='53' border='0' name='modifier_article2'></A>";
 }
+echo "</div>";
 
+afficher_documents_non_inclus($id_article);
 
 //
 // "Demander la publication"
