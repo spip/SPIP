@@ -344,7 +344,11 @@ function maj_base($version_cible = 0) {
 		$result = spip_query("SELECT * FROM spip_mots GROUP BY type");
 		while($row = spip_fetch_array($result)) {
 				$type = addslashes($row['type']);
+				// Old style, doit echouer
+				spip_log('ne pas tenir compte de l erreur spip_groupes_mots ci-dessous:', 'mysql');
 				spip_query("INSERT INTO spip_groupes_mots 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
+				// New style, devrait marcher
+				spip_query("INSERT INTO spip_groupes_mots 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 		}
 		spip_query("DELETE FROM spip_mots WHERE titre='kawax'");
 		maj_version (1.404);
@@ -375,7 +379,7 @@ function maj_base($version_cible = 0) {
 			$images = explode(",", $images);
 			reset($images);
 			$replace = '_orig_';
-			while (list (, $val) = each($images)) {
+			foreach ($images as $val) {
 				$image = explode("|", $val);
 				$fichier = $image[0];
 				$largeur = $image[1];
@@ -385,10 +389,9 @@ function maj_base($version_cible = 0) {
 				$num_img = $match[1];
 				$fichier = _DIR_IMG . $fichier;
 				$taille = @filesize($fichier);
-				$id_document = spip_abstract_insert("spip_documents", 
-							   "(titre, id_type, fichier, mode, largeur, hauteur, taille)",
-							   "('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
-
+				// ici on n'a pas les fonctions absctract !
+				$s = spip_query("INSERT INTO spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
+				$id_document = mysql_insert_id($s);
 				if ($id_document > 0) {
 					spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
 					$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
@@ -398,10 +401,10 @@ function maj_base($version_cible = 0) {
 				}
 			}
 			$replace = "REPLACE($replace, '<IM_', '<IMG')";
-			$replace_chapo = ereg_replace('_orig_', 'chapo', $replace);
-			$replace_descriptif = ereg_replace('_orig_', 'descriptif', $replace);
-			$replace_texte = ereg_replace('_orig_', 'texte', $replace);
-			$replace_ps = ereg_replace('_orig_', 'ps', $replace);
+			$replace_chapo = str_replace('_orig_', 'chapo', $replace);
+			$replace_descriptif = str_replace('_orig_', 'descriptif', $replace);
+			$replace_texte = str_replace('_orig_', 'texte', $replace);
+			$replace_ps = str_replace('_orig_', 'ps', $replace);
 			spip_query("UPDATE spip_articles SET chapo=$replace_chapo, descriptif=$replace_descriptif, texte=$replace_texte, ps=$replace_ps WHERE id_article=$id_article");
 
 		}
@@ -541,10 +544,8 @@ function maj_base($version_cible = 0) {
 			$type = addslashes($row['type']);
 			$res = spip_query("SELECT * FROM spip_groupes_mots WHERE titre='$type'");
 			if (spip_num_rows($res) == 0) {
-			  if ($id_groupe = spip_abstract_insert("spip_groupes_mots", 
-						       "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)",
-						       "('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')"))
-
+				$s = spip_query("INSERT INTO spip_groupes_mots (titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum) VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
+			  if ($id_groupe = mysql_insert_id($s))
 					spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
 			}
 		}
