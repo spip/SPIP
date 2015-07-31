@@ -78,7 +78,6 @@ la documentacion d\'SPIP</a>.',
 'barre_gras' => 'Metre en {{gras}}',
 'barre_guillemets' => 'Enrodar amb de &laquo; verguetas francesas &raquo;',
 'barre_guillemets_de' => 'Enrodar amb de &#8222;verguetas&#8220;',
-'barre_guillemets_simples' => '<NEW> Rodar amb de &#8220;vergetas&#8221;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
@@ -805,7 +804,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_rechercher_02' => 'Recercar:',
 'info_recommencer' => 'Volgatz tornar comen&ccedil;ar.',
 'info_redacteur_1' => 'Redactor',
-'info_redacteur_2' => 'qu\'acced&iacute;s a l\'espaci privat (&lt;i&gt;recomandat&lt;/i&gt;)',
+'info_redacteur_2' => 'qu\'acced&iacute;s a l\'espaci privat (<i>recomandat</i>)',
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
@@ -927,6 +926,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DEL SIT:',
+'info_urlref' => 'Adrei&ccedil;a (URL) de refer&eacute;ncia:',
 'info_utilisation_messagerie_interne' => 'Utilizatz la messatjari&aacute; int&egrave;rna d\'aquel sit.',
 'info_utilisation_spip' => 'Ara pod&egrave;tz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_valider_lien' => 'validar aquel ligam',
@@ -1430,9 +1430,9 @@ tornar calcular sonque una pagina, passatz pusl&egrave;u per l\'espaci public e 
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una salvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una salvagarda 
  de la basa que l\'aviatz facha abans. Per aqu&ograve; faire, cal aver botat lo fichi&egrave;r que conten la salvagarda 
-dins lo repert&ograve;ri &lt;i&gt;ecrire/data/&lt;/i&gt;.
-  &Ccedil;a que la, siatz prudent(a) amb aquela foncionalitat: &lt;b&gt;las modificacions e p&egrave;rdas eventualas son
-  irreversiblas.&lt;/b&gt;',
+dins lo repert&ograve;ri <i>ecrire/data/</i>.
+  &Ccedil;a que la, siatz prudent(a) amb aquela foncionalitat: <b>las modificacions e p&egrave;rdas eventualas son
+  irreversiblas.</b>',
 'texte_sauvegarde' => 'Salvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Salvagardar la basa',
 'texte_sauvegarde_compressee' => 'La salvagarda se far&agrave; dins lo fichi&egrave;r non comprimit <b>ecrire/data/dump.xml</b>.',

@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'S&#7917;a &#273;&#7893;i &#273;&#7873; m&#7909;c n&agrave;y',
 'admin_recalculer' => 'N&#7841;p l&#7841;i trang n&agrave;y',
 'aide_non_disponible' => 'Ph&#7853;n gi&uacute;p &#273;&#7905; n&agrave;y ch&#432;a &#273;&#432;&#7907;c d&#7883;ch sang ti&#7871;ng n&agrave;y.',
-'alerte_maj_impossible' => '&lt;b&gt;B&aacute;o &#272;&#7897;ng!&lt;/b&gt; Kh&ocirc;ng c&#7853;p nh&#7853;t database MySQL l&ecirc;n &#7845;n b&#7843;n @version@ &#273;&#432;&#7907;c, c&oacute; th&#7875; l&agrave;  v&igrave; kh&ocirc;ng &#273;&#7911; quy&#7873;n h&#7841;n. Xin li&ecirc;n l&#7841;c v&#7899;i ISP.',
+'alerte_maj_impossible' => '<b>B&aacute;o &#272;&#7897;ng!</b> Kh&ocirc;ng c&#7853;p nh&#7853;t database MySQL l&ecirc;n &#7845;n b&#7843;n @version@ &#273;&#432;&#7907;c, c&oacute; th&#7875; l&agrave;  v&igrave; kh&ocirc;ng &#273;&#7911; quy&#7873;n h&#7841;n. Xin li&ecirc;n l&#7841;c v&#7899;i ISP.',
 'avis_acces_interdit' => 'Qu&yacute; v&#7883; kh&ocirc;ng c&oacute; quy&#7873;n v&agrave;o &#273;&acirc;y.',
 'avis_archive_incorrect' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng ph&#7843;i l&agrave; m&#7897;t h&#7891; s&#417; SPIP',
 'avis_archive_invalide' => 'H&#7891; s&#417; n&agrave;y kh&ocirc;ng c&oacute; h&#7907;p l&yacute;',
@@ -82,7 +82,7 @@ H&#7891; s&#417; SPIP</a>.',
 'barre_lien' => '&#272;&#7893;i qua [hyperlink-&gt;http://...]',
 'barre_lien_input' => 'Xin cho v&agrave;o &#273;&#7883;a ch&#7881; hyperlink (b&#7841;n c&oacute; th&#7875; d&ugrave;ng Internet URL trong d&#7841;ng http://www.mysite.com/ ho&#7863;c l&agrave; s&#7889; b&agrave;i c&#7911;a trang web n&agrave;y).',
 'barre_note' => '&#272;&#7893;i th&agrave;nh [[Ghi ch&uacute;]]',
-'barre_quote' => '&lt;quote&gt;Tr&iacute;ch d&#7851;n m&#7897;t &#273;o&#7841;n v&#259;n&lt;/quote&gt;',
+'barre_quote' => '<quote>Tr&iacute;ch d&#7851;n m&#7897;t &#273;o&#7841;n v&#259;n</quote>',
 'bouton_acces_ldap' => 'Th&ecirc;m h&#7891; s&#417; v&agrave;o LDAP >>',
 'bouton_ajouter' => 'Th&ecirc;m',
 'bouton_ajouter_document' => 'TH&Ecirc;M T&Agrave;I LI&#7878;U',
@@ -190,11 +190,11 @@ H&#7891; s&#417; SPIP</a>.',
 'dirs_commencer' => ' &#273;&#7875; th&#7921;c s&#7921; b&#7855;t &#273;&#7847;u vi&#7879;c thi&#7871;t tr&iacute;',
 'dirs_preliminaire' => 'Ti&ecirc;n kh&#7903;i: <B>Thi&#7871;t k&#7871; quy&#7873;n h&#7841;n ra/v&ocirc;</B>',
 'dirs_probleme_droits' => '<b>C&oacute; v&#7845;n &#273;&#7873; v&#7899;i quy&#7873;n h&#7841;n ra/v&ocirc;</b>',
-'dirs_repertoires_absents' => '&lt;B&gt;Kh&ocirc;ng t&igrave;m th&#7845;y c&aacute;c ng&#259;n ch&#7913;a sau &#273;&acirc;y: &lt;ul&gt;@bad_dirs@.&lt;/ul&gt; &lt;/b&gt;
-  &lt;P&gt;C&oacute; th&#7875; l&agrave; v&igrave; kh&aacute;c bi&#7879;t ch&#7919; th&#432;&#7901;ng, ch&#7919; HOA.
+'dirs_repertoires_absents' => '<B>Kh&ocirc;ng t&igrave;m th&#7845;y c&aacute;c ng&#259;n ch&#7913;a sau &#273;&acirc;y: <ul>@bad_dirs@.</ul> </b>
+  <P>C&oacute; th&#7875; l&agrave; v&igrave; kh&aacute;c bi&#7879;t ch&#7919; th&#432;&#7901;ng, ch&#7919; HOA.
   Xin xem l&#7841;i c&aacute;ch &#273;&aacute;nh v&#7847;n t&ecirc;n c&aacute;c ng&#259;n ch&#7913;a n&agrave;y cho &#273;&uacute;ng.
   N&#7871;u c&#7847;n ph&#7843;i s&#7917;a, d&ugrave;ng FTP &#273;&#7875; s&#7917;a.
-  &lt;P&gt;Sau &#273;&oacute;, b&#7841;n c&oacute; th&#7875;',
+  <P>Sau &#273;&oacute;, b&#7841;n c&oacute; th&#7875;',
 'dirs_repertoires_suivants' => '<B>Nh&#7919;ng ng&#259;n sau &#273;&acirc;y kh&ocirc;ng &#273;&#432;&#7907;c ph&eacute;p Vi&#7871;t: <ul>@bad_dirs@.</ul> </b>
 <P>&#272;&#7875; thay &#273;&#7893;i, d&ugrave;ng FTP v&agrave;o thay &#273;&#7893;i quy&#7873;n h&#7841;n ra/v&ocirc; c&#7911;a t&#7915;ng ng&#259;n. Th&#7875; th&#7913;c n&agrave;y c&oacute; ghi trong c&#7849;m nang s&#7917; d&#7909;ng.
 <P>Khi n&agrave;o th&#7921;c hi&#7879;n xong, b&#7841;n c&oacute; th&#7875;',
@@ -889,6 +889,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_une_rubrique_02' => '1 &#273;&#7873; m&#7909;c',
 'info_url' => 'URL:',
 'info_url_site' => 'URL C&#7910;A WEBSITE:',
+'info_urlref' => '<NEW> Adresse (URL) de r&eacute;f&eacute;rence&nbsp;:',
 'info_utilisation_messagerie_interne' => 'B&#7841;n &#273;ang d&ugrave;ng ph&#432;&#417;ng ti&#7879;n th&#432; t&iacute;n n&#7897;i b&#7897; c&#7911;a website. ',
 'info_utilisation_spip' => 'SPIP s&#7861;n s&#224;ng &#273;&#7875; s&#7917; d&#7909;ng...',
 'info_valider_lien' => 'ch&#7845;p thu&#7853;n &#273;i&#7875;m n&#7889;i k&#7871;t n&#224;y',

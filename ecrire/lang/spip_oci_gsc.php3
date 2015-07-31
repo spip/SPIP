@@ -518,8 +518,8 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_chemin_acces_2' => 'Ara que devetz configurar lo camin d\'acc&egrave;s a las informacions dens l\'annuari.',
 'info_chemin_acces_annuaire' => 'Opcions:<B>camin d\'acc&egrave;s dens l\'annuari',
 'info_choix_base' => 'Tresau estapa:',
-'info_classement_1' => '&lt;sup&gt;&egrave;r&lt;/sup&gt; de @liste@',
-'info_classement_2' => '&lt;sup&gt;au&lt;/sup&gt; de @liste@',
+'info_classement_1' => '<sup>&egrave;r</sup> de @liste@',
+'info_classement_2' => '<sup>au</sup> de @liste@',
 'info_code_acces' => 'N\'oblidetz pas los v&ograve;stes c&ograve;des d\'acc&egrave;s pr&ograve;pis!',
 'info_comment_lire_tableau' => 'Quin legir aqueth tabl&egrave;u',
 'info_confirmer_passe' => 'Confirmar aqueth mot de santa Clara nav&egrave;th:',
@@ -803,7 +803,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'info_rechercher_02' => 'Recercar:',
 'info_recommencer' => 'Volhatz tornar comen&ccedil;ar.',
 'info_redacteur_1' => 'Redactor',
-'info_redacteur_2' => 'qui accedeish a l\'espaci privat (&lt;i&gt;recomandat&lt;/i&gt;)',
+'info_redacteur_2' => 'qui accedeish a l\'espaci privat (<i>recomandat</i>)',
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
@@ -925,6 +925,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DEU SIT:',
+'info_urlref' => 'Adre&ccedil;a (URL) de refer&eacute;ncia:',
 'info_utilisation_messagerie_interne' => 'Qu\'utilizatz la messatgeria int&egrave;rna d\'aqueth sit.',
 'info_utilisation_spip' => 'Ara que podetz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_valider_lien' => 'validar aqueth ligam',
@@ -1428,9 +1429,9 @@ tornar calcular sonque ua pagina, passatz meil&egrave;u per l\'espaci public e u
 'texte_restaurer_base' => 'Restaurar lo contengut d\'ua sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquera opcion que\'vs permet de restaurar ua sauvagarda 
  de la basa que l\'av&egrave;vatz h&egrave;ita abans. T&agrave; har aqu&ograve;, que cau aver botat lo fichi&egrave;r qui contien la sauvagarda 
-dens lo repert&ograve;ri &lt;i&gt;ecrire/data/&lt;/i&gt;.
-  Totun, siatz prudent(a) dab aquera foncionalitat: &lt;b&gt;las modificacions e p&egrave;rdas eventuaus que son
-  irreversiblas.&lt;/b&gt;',
+dens lo repert&ograve;ri <i>ecrire/data/</i>.
+  Totun, siatz prudent(a) dab aquera foncionalitat: <b>las modificacions e p&egrave;rdas eventuaus que son
+  irreversiblas.</b>',
 'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Sauvagardar la basa',
 'texte_sauvegarde_compressee' => 'La sauvagarda que\'s har&agrave; dens lo fichi&egrave;r non comprimit <b>ecrire/data/dump.xml</b>.',

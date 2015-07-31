@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_de'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -20,7 +20,7 @@ $GLOBALS['i18n_spip_de'] = array(
 'admin_modifier_rubrique' => 'Rubrik bearbeiten',
 'admin_recalculer' => 'Seite aus Cache l&ouml;schen',
 'aide_non_disponible' => 'Teil der Online-Hilfe in dieser Sprache noch nicht verf&uuml;gbar.',
-'alerte_maj_impossible' => '<NEW> <b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
+'alerte_maj_impossible' => '<NEW> <b>Achtung&nbsp;!</b> Ihre MySQL-Datenbank kann nicht in die Version @version@ konvertiert werden. Das hat unter Umst&auml;nden mit nicht ausreichenden Zugriffsrechten zu tun. Bitte setzen Sie sich mit Ihrem Webhoster in Verbindung.',
 'avis_acces_interdit' => 'Zugang verweigert.',
 'avis_archive_incorrect' => 'Die archivierte Datei ist keine SPIP-Datei',
 'avis_archive_invalide' => 'Die archivierte Datei ist keine SPIP-Datei',
@@ -658,7 +658,6 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_moyenne' => 'Durchschnitt: ',
 'info_multi_articles' => 'Sprachauswahl f&uuml;r Artikel aktivieren?',
 'info_multi_cet_article' => '<MODIF> Dieser Artikel ist auf:',
-'info_multi_cette_rubrique' => '<MODIF> Diese Rubrik ist auf:',
 'info_multi_herit' => 'Standardsprache',
 'info_multi_langues_choisies' => 'Bitte w&auml;hlen Sie hier die Sprachen aus, die den Redakteuren Ihrer Website zur Verf&uuml;gung stehen sollen.
   Die Sprachen, welche bereits in Ihrer Website verwendet werden (oben auf der Liste), k&ouml;nnen nicht abgeschaltet werden.',
@@ -882,6 +881,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_une_rubrique_02' => '1 Rubrik',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DER WEBSITE:',
+'info_urlref' => '<NEW> Adresse (URL) de r&eacute;f&eacute;rence&nbsp;:',
 'info_utilisation_messagerie_interne' => 'Sie verwenden das interne Nachrichtensystem der Website. ',
 'info_utilisation_spip' => 'Sie k&ouml;nnen jetzt das CMS verwenden ...',
 'info_valider_lien' => 'Link freigeben',

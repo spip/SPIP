@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_it'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -20,6 +20,7 @@ $GLOBALS['i18n_spip_it'] = array(
 'admin_modifier_rubrique' => 'Modifica la rubrica',
 'admin_recalculer' => 'Rigenera la pagina',
 'aide_non_disponible' => 'Questa parte della guida in linea non &egrave; ancora disponibile in italiano.',
+'alerte_maj_impossible' => '<NEW> <b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
 'avis_acces_interdit' => 'Accesso vietato.',
 'avis_archive_incorrect' => 'il file archivio non &egrave; un file SPIP',
 'avis_archive_invalide' => 'il file archivio non &egrave; valido',
@@ -74,6 +75,21 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 
 
 // B
+'barre_a_accent_grave' => '<NEW> Ins&eacute;rer un A accent grave majuscule',
+'barre_aide' => '<NEW> Utilisez les raccourcis typographiques pour enrichir votre mise en page',
+'barre_aide_rac' => '<NEW> En savoir plus sur les raccourcis typographiques',
+'barre_e_accent_aigu' => '<NEW> Ins&eacute;rer un E accent aigu majuscule',
+'barre_eo' => '<NEW> Ins&eacute;rer un E dans l\'O',
+'barre_eo_maj' => '<NEW> Ins&eacute;rer un Edans l\'O majuscule',
+'barre_gras' => '<NEW> Mettre en {{gras}}',
+'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_de' => '<NEW> Entourer de &bdquo;guillemets&ldquo;',
+'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
+'barre_italic' => '<NEW> Mettre en {italique}',
+'barre_lien' => '<NEW> Transformer en [lien hypertexte->http://...]',
+'barre_lien_input' => '<NEW> Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
+'barre_note' => '<NEW> Transformer en [[Note de bas de page]]',
+'barre_quote' => '<NEW> <quote>Citer un message</quote>',
 'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP >>',
 'bouton_ajouter' => 'Aggiungi',
 'bouton_ajouter_document' => 'AGGIUNGI UN DOCUMENTO',
@@ -561,6 +577,8 @@ sui singoli articoli; saranno invece proibiti nelle rubriche, nelle brevi, ecc',
 privati tra i membri del sito. Puoi attivare o disattivare questa funzionalit&agrave;.',
 'info_ecire_message_prive' => 'Scrivi un messaggio privato',
 'info_ecrire_article' => 'Prima di poter scrivere degli articoli, devi creare almeno una rubrica.',
+'info_email_envoi' => '<NEW> Adresse email d\'envoi (optionnel)',
+'info_email_envoi_txt' => '<NEW> Indiquez ici l\'adresse &agrave; utiliser pour envoyer les emails (&agrave; d&eacute;faut, l\'adresse destinataire sera utilis&eacute;e comme adresse d\'envoi)&nbsp;:',
 'info_email_invalide' => 'Indirizzo email non valido.',
 'info_email_webmestre' => 'Indirizzo email del webmaster (opzionale)',
 'info_en_cours_validation' => 'I tuoi articoli in corso di redazione',
@@ -927,6 +945,7 @@ siti esterni che puntano con un link al tuo (<i>referrer</i>)?',
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DEL SITO:',
+'info_urlref' => '<NEW> Adresse (URL) de r&eacute;f&eacute;rence&nbsp;:',
 'info_utilisation_messagerie_interne' => 'Stai utilizzando il sistema di messaggistica interna al sito.',
 'info_utilisation_spip' => 'Puoi ora cominciare ad utilizzare il sistema di pubblicazione assistita...',
 'info_valider_lien' => 'convalidare questo link',
@@ -1025,6 +1044,7 @@ siti esterni che puntano con un link al tuo (<i>referrer</i>)?',
 'lien_forum_public' => 'Gestisci il forum pubblico di quest\'articolo',
 'lien_icones_interface' => 'Le icone dell\'interfaccia sono di <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'libera',
+'lien_liberer_tous' => '<NEW> lib&eacute;rer ces articles',
 'lien_mise_a_jour_syndication' => 'Aggiorna adesso',
 'lien_modifer_date' => 'Modifica la data',
 'lien_nom_site' => 'NOME DEL SITO:',
