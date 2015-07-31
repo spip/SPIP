@@ -12,29 +12,23 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@insere_1_init
+function insere_1_init($request) {
+
 //  table des translations
 
-$spip_translate = array(
+	$field = array(
 		"type"		=> "VARCHAR(16) NOT NULL",
-		"ajout"		=> "ENUM('0', '1')",
+		"ajout"		=> "integer NOT NULL", // en fait booleen
 		"titre"		=> "text NOT NULL",
-                "id_old"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-                "id_new"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+                "id_old"	=> "bigint (21) DEFAULT '0' NOT NULL",
+                "id_new"	=> "bigint (21) DEFAULT '0' NOT NULL");
 
-$spip_translate_key = array(
+	$key = array(
                 "PRIMARY KEY"	=> "id_old, id_new, type",
                 "KEY id_old"	=> "id_old");
 
-// La rajouter ici car sql_insert en a besoin
-global $tables_principales;;
-$tables_principales['spip_translate'] =
-	array('field' => &$spip_translate, 'key' => &$spip_translate_key);
-
-// http://doc.spip.org/@insere_1_init
-function insere_1_init($request) {
-	global $tables_principales;
-	$v = $tables_principales['spip_translate'];
-	$v = sql_create('spip_translate',  $v['field'], $v['key'], true);
+	$v = sql_create('spip_translate',  $field, $key, true);
 	if (!$v) {
 		spip_log("echec de la creation de la table de fusion");
 		return  false; 
@@ -95,7 +89,7 @@ function translate_init($request) {
 	$q = spip_query("SELECT * FROM spip_translate");
 	$trans = array();
 	while ($r = sql_fetch($q)) {
-		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], intval($r['ajout']));
+		$trans[$r['type']][$r['id_old']] = array($r['id_new'], $r['titre'], $r['ajout']);
 	}
 	return $trans;
 }
@@ -151,9 +145,8 @@ function import_inserer_translate($values, $table, $desc, $request, $atts) {
 	global $trans;
 	$p = $desc['key']["PRIMARY KEY"];
 	$v = $values[$p];
-
 	if (!isset($trans[$p]) OR !isset($trans[$p][$v]) OR $trans[$p][$v][2]){
-		sql_replace($table, $values, $desc);
+		sql_replace($table, $values);
 		$on = isset($atts['on']) ? ($atts['on']) : '';
 		$off = isset($atts['off']) ? ($atts['off']) : '';
 		if ($on OR $off) {
@@ -197,15 +190,15 @@ function import_translate_spip_documents($values, $table, $desc, $request, $atts
 	$url = $request['url_site'];
 	if (!$url) $url = $atts['adresse_site'];
 	if (substr($url,-1) !='/') $url .='/';
-#	$url .= $atts['dir_img']; // deja dans la BD importee
-	$values['distant']= 'oui';
-
+	if (!$atts['version_base'] < '1.934') // deja dans la BD a l'epoque
+		$url .= $atts['dir_img']; 
 	foreach ($values as $k => $v) {
 	  if ($k=='fichier')
 	    $v = $url .$v;
 	  else $v = importe_raccourci(importe_translate_maj($k, $v));
-	  $values[]= $v;
+	  $values[$k]= $v;
 	}
+	$values['distant']= 'oui';
 	import_inserer_translate($values, $table, $desc, $request, $atts);
 }
 
@@ -271,15 +264,19 @@ function importe_raccourci($v)
 	return $v;
 }
 
-// un document importe est considere comme identique a un document present
-// s'ils ont meme taille et meme nom
+// un document importe est considere comme identique a un document local
+// s'ils ont meme taille et meme nom et que le present n'est pas detruit
 // http://doc.spip.org/@import_identifie_id_document
 function import_identifie_id_document($values, $table, $desc, $request) {
 	$t = $values['taille'];
 	$f = $values['fichier'];
 	$h = $request['url_site'] . $f;
-	$r = sql_fetch(spip_query("SELECT id_document AS id, fichier AS titre FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
-	return $r ? array($r['id'], $r['titre']) : false;
+	$r = sql_fetch(spip_query("SELECT id_document AS id, fichier AS titre, distant FROM spip_documents WHERE taille=" . _q($t) . " AND (fichier=" . _q($f) . " OR fichier= " . _q($h) . ')'));
+	if (!$r) return false;
+	if (($r['distant'] != 'oui')
+	AND !file_exists(_DIR_IMG . $r['titre']))
+		return false; 
+	return array($r['id'], $r['titre']);
 }
 
 // un type de document importe est considere comme identique a un type present
