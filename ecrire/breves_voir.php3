@@ -124,6 +124,9 @@ echo "<CENTER>";
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>BR&Egrave;VE NUM&Eacute;RO&nbsp;:</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
 echo "</CENTER>";
+if ($statut == 'publie') {
+	icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
+}
 
 fin_boite_info();
 
@@ -194,12 +197,6 @@ echo "<tr width='100%'><td width='100%' valign='top'>";
 gros_titre($titre);
 echo "</td>";
 
-if ($statut == 'publie') {
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='right'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
-	echo "</td>";
-}
 if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";

@@ -299,6 +299,14 @@ if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubri
 }
 
 
+
+
+if ($voir_en_ligne) {
+	icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.gif", "rien.gif");
+}
+
+
+
 echo "</div>\n";
 
 fin_boite_info();
@@ -698,14 +706,6 @@ if ($statut_article == 'prop') {
 echo "</td>";
 
 
-
-
-if ($voir_en_ligne) {
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='right'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.gif", "rien.gif");
-	echo "</td>";
-}
 
 
 
