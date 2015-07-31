@@ -17,10 +17,7 @@ include_spip('inc/headers');
 // http://doc.spip.org/@inc_install_4
 function install_etape_4_dist()
 {
-	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod, $table_prefix;
-	if (isset($_REQUEST['table_prefix'])) {
-		$table_prefix = trim($_REQUEST['table_prefix']);
-	}
+	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
 
 	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
 
@@ -60,8 +57,14 @@ function install_etape_4_dist()
 		$ligne_rappel = "\$GLOBALS['mysql_rappel_nom_base'] = false; ".
 		"/* echec du test sur `$sel_db`.spip_meta lors de l'installation. */\n";
 	}
-	
-	if ($table_prefix != 'spip') {
+
+	// Prefix des tables :
+	// contrairement a ce qui est dit dans le message (trop strict mais c'est
+	// pour notre bien), on va tolerer les chiffres en plus des minuscules
+	$table_prefix = trim(preg_match(',[^a-z0-9],', '',
+		strtolower(_request('table_prefix'))));
+	if ($table_prefix
+	AND $table_prefix != 'spip') {
 		$ligne_rappel .= "\$GLOBALS['table_prefix'] = '" . $table_prefix . "';\n";
 	}
 
