@@ -18,12 +18,12 @@ include_spip('inc/presentation');
 function exec_articles_tous_dist()
 {
 	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
-	global $spip_dir_lang, $spip_lang, $browser_layer,$spip_lang_right,$spip_lang_left;
+	global $spip_lang, $browser_layer,$spip_lang_right,$spip_lang_left;
 	
 	$aff_art = _request('aff_art');
 	$sel_lang = _request('sel_lang');
 
-	changer_typo(); // pour definir $dir_lang
+	changer_typo(); // pour definir la direction de la langue
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
 	list($enfant, $first_couche, $last_couche) = arbo_articles_tous();
 
@@ -109,8 +109,7 @@ function arbo_articles_tous()
 
 // http://doc.spip.org/@texte_articles_tous
 function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
-	global $connect_toutes_rubriques,$connect_id_auteur, $connect_statut;
-	global $spip_dir_lang, $spip_lang, $browser_layer;
+	global $connect_id_auteur, $connect_statut, $spip_lang_dir;
 
 	if ($flag_trad)
 		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
@@ -148,7 +147,7 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
 			}
 			
 			if ($id_trad == $id_article OR $id_trad == 0) {
-				$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base'$spip_dir_lang>$lang</span>";
+				$text_article[$id_article]["trad"]["$lang"] = "<span class='lang_base' dir='$spip_lang_dir'>$lang</span>";
 			}
 			
 			if (in_array($statut, $aff_art))
@@ -286,23 +285,19 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 // http://doc.spip.org/@couche_formulaire_tous
 function couche_formulaire_tous($first_couche, $last_couche)
 {
-	global $spip_lang_rtl;
-	$out = "";
-	
-	$out .= "<div>&nbsp;</div>";
-	$out .= "<b class='verdana3'>";
-	$out .= "<a href=\"javascript:deplie_arbre()\">";
-	$out .= _T('lien_tout_deplier');
-	$out .= "</a>";
-	$out .= "</b>";
-	$out .= " | ";
-	$out .= "<b class='verdana3'>";
-	$out .= "<a href=\"javascript:plie_arbre()\">";
-	$out .= _T('lien_tout_replier');
-	$out .= "</a>";
-	$out .= "</b>";
-	$out .= "<div>&nbsp;</div>";
-	return $out;
+	return "<div>&nbsp;</div>"
+	. "<b class='verdana3'>"
+	. "<a href=\"javascript:deplie_arbre()\">"
+	. _T('lien_tout_deplier')
+	. "</a>"
+	. "</b>"
+	. " | "
+	. "<b class='verdana3'>"
+	. "<a href=\"javascript:plie_arbre()\">"
+	. _T('lien_tout_replier')
+	. "</a>"
+	. "</b>"
+	. "<div>&nbsp;</div>";
 }
 
 // http://doc.spip.org/@afficher_contenu_rubrique

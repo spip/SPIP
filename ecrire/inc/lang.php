@@ -19,7 +19,7 @@ include_spip('inc/actions');
 //
 // http://doc.spip.org/@changer_langue
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
+	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir;
 
 	$liste_langues = ',' . $all_langs.','.@$GLOBALS['meta']['langues_multilingue'] . ',';
 
@@ -38,7 +38,6 @@ function changer_langue($lang) {
 		$spip_lang_left =  lang_dir($lang, 'left', 'right');
 		$spip_lang_right = lang_dir($lang, 'right', 'left');
 		$spip_lang_dir =   lang_dir($lang);
-		$spip_dir_lang = " dir='$spip_lang_dir'";
 
 		return true;
 	} else
