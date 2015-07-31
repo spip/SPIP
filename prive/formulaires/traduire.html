@@ -18,7 +18,11 @@
 				</span>
 				[(#ENV{_langue}|ou{#ENV{_traduire}}|oui)
 					<span class="toggle_box_link"[(#ENV{_saisie_en_cours}|oui)style="display:none;"]>&#91;<a href="#"
-						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons,.new_trad,.editer_id_trad').show('fast');f.find('#changer_lang').eq(0).focus();return false;"
+						onclick="var f=jQuery(this).parents('form').eq(0);
+							f.find('li .input').show('fast');
+							f.find('span.toggle_box_link[(#ENV{_langue}|oui),span.affiche]').hide('fast');
+							f.find('.boutons,.new_trad,.editer_id_trad').show('fast');
+							f.find('#changer_lang').eq(0).focus();return false;"
 						><:bouton_changer:></a>&#93;</span>
 					[(#ENV{_langue}|oui)
 					[<span class="input[(#ENV{_saisie_en_cours}|non)none-js]">
