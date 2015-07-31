@@ -82,7 +82,7 @@ function spip_mysql_trace($query, $start, $result)
 			echo _T('info_erreur_requete'),
 			  " ",
 			  htmlentities($query),
-			  "<br>&laquo; ",
+			  "<br />&laquo; ",
 			  htmlentities($result = $s),
 			  " &raquo;<p>";
 		}

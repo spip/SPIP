@@ -20,7 +20,7 @@ function exec_demande_mise_a_jour_dist() {
 	echo $commencer_page();
 	echo "<blockquote><blockquote><h4><font color='red'>",
 	_T('info_message_technique'),
-	"</font><br> ",
+	"</font><br /> ",
 	_T('info_procedure_maj_version'),
 	"</h4>",
 	_T('info_administrateur_site_01'),

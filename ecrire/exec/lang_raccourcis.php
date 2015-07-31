@@ -37,7 +37,7 @@ function exec_lang_raccourcis_dist() {
 	echo $commencer_page(_T('module_fichier_langue').": $module",
 		"configuration", "langues");
 
-	echo "<br><br><br>";
+	echo "<br /><br /><br />";
 	gros_titre(_T('module_fichier_langue').": $module");
 
 	echo barre_onglets("config_lang", "fichiers");
@@ -47,7 +47,7 @@ function exec_lang_raccourcis_dist() {
 
 	if (count($modules) > 1) {
 		echo debut_cadre_relief();
-		echo "<div class='verdana3' style='background-color: $couleur_foncee; color: white; padding: 3px;'><b>"._T('module_fichiers_langues').":</b></div><br>\n";
+		echo "<div class='verdana3' style='background-color: $couleur_foncee; color: white; padding: 3px;'><b>"._T('module_fichiers_langues').":</b></div><br />\n";
 
 		foreach ($modules as $nom_module) {
 			if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><b>$nom_module</b></div>";

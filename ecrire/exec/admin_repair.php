@@ -56,7 +56,7 @@ function verifier_base() {
 		if (!$ok)
 			$res .= "<pre><font color='red'><b>".htmlentities(join("\n", $row))."</b></font></pre>\n";
 		else
-			$res .= " "._T('texte_table_ok')."<br>\n";
+			$res .= " "._T('texte_table_ok')."<br />\n";
 
 	}
 

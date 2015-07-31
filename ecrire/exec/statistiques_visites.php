@@ -209,7 +209,7 @@ else {
 			
 		echo "</ol>";
 
-		echo "<b>"._T('info_comment_lire_tableau')."</b><br>"._T('texte_comment_lire_tableau');
+		echo "<b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau');
 
 		echo "</div>";
 		echo "</div>";
@@ -618,12 +618,12 @@ if ($GLOBALS['accepte_svg']) {
 		echo "<br /><table cellpadding='0' cellspacing='0' border='0' width='100%'><tr style='width:100%;'>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo _T('info_maximum')." ".$max;
-		echo "<br>"._T('info_moyenne')." ".round($moyenne);
+		echo "<br />"._T('info_moyenne')." ".round($moyenne);
 		echo "</font></td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
-		if ($val_prec > 0) echo '<br><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
-		if ($id_article) echo "<br>"._T('info_popularite_5').' '.$val_popularite;
+		if ($val_prec > 0) echo '<br /><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
+		if ($id_article) echo "<br />"._T('info_popularite_5').' '.$val_popularite;
 
 		echo "</font></td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
@@ -635,11 +635,11 @@ if ($GLOBALS['accepte_svg']) {
 				      $ch = _T('info_classement_1', array('liste' => $liste));
 				else
 				      $ch = _T('info_classement_2', array('liste' => $liste));
-				echo "<br>".$classement[$id_article].$ch;
+				echo "<br />".$classement[$id_article].$ch;
 			}
 		} else {
 			echo "<font size='1'>";
-			echo "<br>"._T('info_popularite_2')." ";
+			echo "<br />"._T('info_popularite_2')." ";
 			echo ceil($GLOBALS['meta']['popularite_total']);
 			echo "</font>";
 		}

@@ -39,7 +39,7 @@ global   $connect_id_auteur;
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T("icone_suivi_activite"),  "accueil", "synchro");
 
-echo "<br><br><br>";
+echo "<br /><br /><br />";
 gros_titre(_T("icone_suivi_activite"));
 
 

@@ -82,11 +82,11 @@ function is_feed($url){
 }
 
 /*****************test is_feed******************************
-echo is_feed("http://spip-contrib.net/backend" _EXTENSIO_PHP") . "<br>"; //retourne rss
-echo is_feed("http://liberation.fr/rss.php") . "<br>"; //retourne rss
-echo is_feed("http://liberation.fr/rss.php") . "<br>"; //retourne rss
+echo is_feed("http://spip-contrib.net/backend" _EXTENSIO_PHP") . "<br />"; //retourne rss
+echo is_feed("http://liberation.fr/rss.php") . "<br />"; //retourne rss
+echo is_feed("http://liberation.fr/rss.php") . "<br />"; //retourne rss
 echo is_feed("http://willy.boerland.com/myblog/atom/feed") //retourne atom
-echo is_feed("http://spip.net/") . "<br>"; //retoune 0
+echo is_feed("http://spip.net/") . "<br />"; //retoune 0
 //pas trouver d'exmples avec rdf j'ai encore du mal à saisir ce que rdf apporte de plus que rss
 //mais bon j'ai pas aprofondi
 ************************************************************/
@@ -200,10 +200,10 @@ function concat_url($url1, $path){
 }
 
 /****************************test concat**********************
-echo concat_url("http://spip.net" , "ecrire")."<br>";
-echo concat_url("http://spip.net/" , "ecrire")."<br>";
-echo concat_url("http://spip.net" , "/ecrire")."<br>";
-echo concat_url("http://spip.net/" , "/ecrire")."<br>";
+echo concat_url("http://spip.net" , "ecrire")."<br />";
+echo concat_url("http://spip.net/" , "ecrire")."<br />";
+echo concat_url("http://spip.net" , "/ecrire")."<br />";
+echo concat_url("http://spip.net/" , "/ecrire")."<br />";
 *************************************************************/
 
 

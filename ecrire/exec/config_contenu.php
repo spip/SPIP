@@ -39,7 +39,7 @@ pipeline('exec_init',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "configuration");
 
-echo "<br><br><br>";
+echo "<br /><br /><br />";
 gros_titre(_T('titre_page_config_contenu'));
 echo barre_onglets("configuration", "interactivite");
 
@@ -106,14 +106,14 @@ if ($options == 'avancees') {
 	
 	echo "<table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
 	echo "<tr><td class='verdana2'>";
-	echo _T('info_appliquer_choix_moderation')."<br>";
+	echo _T('info_appliquer_choix_moderation')."<br />";
 
 	echo "<input type='radio' CHECKED name='forums_publics_appliquer' value='futur' id='forums_appliquer_futur'>";
-	echo " <b><label for='forums_appliquer_futur'>"._T('bouton_radio_articles_futurs')."</label></b><br>";
+	echo " <b><label for='forums_appliquer_futur'>"._T('bouton_radio_articles_futurs')."</label></b><br />";
 	echo "<input type='radio' name='forums_publics_appliquer' value='saufnon' id='forums_appliquer_saufnon'>";
-	echo " <label for='forums_appliquer_saufnon'>"._T('bouton_radio_articles_tous_sauf_forum_desactive')."</label><br>";
+	echo " <label for='forums_appliquer_saufnon'>"._T('bouton_radio_articles_tous_sauf_forum_desactive')."</label><br />";
 	echo "<input type='radio' name='forums_publics_appliquer' value='tous' id='forums_appliquer_tous'>";
-	echo " <label for='forums_appliquer_tous'>"._T('bouton_radio_articles_tous')."</label><br>";
+	echo " <label for='forums_appliquer_tous'>"._T('bouton_radio_articles_tous')."</label><br />";
 	echo "</td></tr></table>";
 	fin_cadre_relief();
 	echo "</ul>\n";
@@ -253,7 +253,7 @@ if ($options == "avancees") {
 			echo "<blockquote class='spip'>";
 			if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
 			echo _T('info_config_suivi', array('adresse_suivi' => $adresse_suivi));
-			echo "<br><input type='text' name='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' class='fondl'>";
+			echo "<br /><input type='text' name='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' class='fondl'>";
 			echo "</blockquote>";
 			echo "</div>";
 
@@ -300,7 +300,7 @@ if ($options == "avancees") {
 
 		echo "<br />";
 		echo bouton_radio("quoi_de_neuf", "non", _T('info_non_envoi_liste_nouveautes'), $quoi_de_neuf == "non", "changeVisible(this.checked, 'config-neuf', 'none', 'block');");
-		//echo "<br><input type='radio' name='quoi_de_neuf' value='non' id='quoi_de_neuf_off'>";
+		//echo "<br /><input type='radio' name='quoi_de_neuf' value='non' id='quoi_de_neuf_off'>";
 		//echo " <label for='quoi_de_neuf_off'>"._T('info_non_envoi_liste_nouveautes')."</label> ";
 	
 	
