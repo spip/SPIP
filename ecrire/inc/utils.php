@@ -238,11 +238,12 @@ function spip_connect($serveur='') {
 	if (isset($_GET['var_profile'])) include_spip('public/debug');
 	$install = (_request('exec') == 'install');
 
-	$f = ($serveur AND !$install)
-	? (_FILE_CONNECT_INS . $serveur . '.php')
+	$f = (!preg_match('/^\w*$/', $serveur))	? ''
+	  : (($serveur AND !$install) ?
+	  (_FILE_CONNECT_INS . $serveur . '.php')
 	  : (_FILE_CONNECT ?  _FILE_CONNECT 
 	    : ($install ? (_FILE_CONNECT_INS .  '.php')
-	       : ''));
+	       : '')));
 
 	unset($GLOBALS['db_ok']);
 	unset($GLOBALS['spip_connect_version']);
