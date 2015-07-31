@@ -50,11 +50,10 @@ define ('_debut_urls_propres', '');
 // Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
 // indiquer la table ou les chercher (articles, auteurs etc),
 // et elles etaient retirees par les preg_match dans la fonction ci-dessous.
-// Elles sont a present definies a "" pour avoir des URL plus jolies
-// mais les preg_match restent necessaires pour gerer les anciens signets.
+// Elles peuvent a present etre definies a "" pour avoir des URL plus jolies.
+// Les preg_match restent necessaires pour gerer les anciens signets.
 
-#define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
-define('_MARQUEUR_URL', false);
+define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
 
 // Retire les marqueurs de type dans une URL propre ancienne maniere
 
