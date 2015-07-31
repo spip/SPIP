@@ -84,7 +84,13 @@ function exec_import_all_dist()
 		include_spip('inc/import');
 		detruit_restaurateur();
 		effacer_meta('admin');
-		redirige_url_ecrire();
+		// et verifier la session
+		include_spip('inc/auth');
+		if (!$auteur = auth_retrouver_login($GLOBALS['visiteur_session']['login'])
+			OR $auteur['id_auteur']!=$GLOBALS['visiteur_session']['id_auteur'])
+			auth_deloger();
+		else
+			redirige_url_ecrire();
 	}
 }
 
@@ -134,7 +140,7 @@ function verifier_sauvegarde ($archive) {
 	$buf = $_fread($f, $buf_len);
 
 	if (preg_match('/<SPIP\s+[^>]*version_base="([0-9.]+)"[^>]*version_archive="([^"]+)"/', $buf, $regs)
-	AND $regs[1] == $spip_version_base
+	AND version_compare($regs[1], "1.813", ">=")
 	AND import_charge_version($regs[2]) )
 		return ''; // c'est bon
 
