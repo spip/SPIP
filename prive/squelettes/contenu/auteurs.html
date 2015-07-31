@@ -12,6 +12,9 @@
 </div>
 </B_st>
 
+[(#ENV{id_auteur}|oui)
+<a href="[(#SELF|parametre_url{id_auteur,''})]"><:icone_tous_auteur:></a>
+]
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class='nettoyeur'></div>
 

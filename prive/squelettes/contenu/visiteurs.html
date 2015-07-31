@@ -12,5 +12,11 @@
 </div>
 </B_st>
 
+[(#ENV{id_auteur}|oui)
+<a href="[(#SELF|parametre_url{id_auteur,''})]"><:icone_tous_visiteur:></a>
+]
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class='nettoyeur'></div>
+
 #SET{filtre,#SESSION{statut}|=={0minirezo}|?{poubelle,'prepa|poubelle|refuse'}|explode{|}}
 <INCLURE{fond=prive/objets/liste/auteurs,nb=30,filtre_statut_articles=#GET{filtre},statut=#ENV{statut}|in_any{#GET{statuts}}|?{#ENV{statut},#GET{statuts}},env,ajax}>
