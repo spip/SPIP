@@ -2135,34 +2135,14 @@ function charge_scripts($scripts) {
 
 // http://doc.spip.org/@http_wrapper
 function http_wrapper($img){
-	static $wrapper_state=NULL;
-	static $wrapper_table = array();
-	
 	if (strpos($img,'/')===FALSE) // on ne prefixe par _NOM_IMG_PACK que si c'est un nom de fichier sans chemin
 		$f = chemin_image($img);
 	else { // sinon, le path a ete fourni
 		$f = $img;
-		// gerer quand meme le cas des hacks pre 1.9.2 ou l'on faisait un path relatif depuis img_pack
-		if (substr($f,0,strlen("../"._DIR_PLUGINS))=="../"._DIR_PLUGINS)
-			$f = substr($img,3); // on enleve le ../ qui ne faisait que ramener au rep courant
-	}
-	
-	if ($wrapper_state==NULL){
-		global $browser_name;
-		if (!strlen($browser_name)){include_spip('inc/layer');}
-		$wrapper_state = ($browser_name=="MSIE");
-	}
-	if ($wrapper_state){
-		if (!isset($wrapper_table[$d=dirname($f)])) {
-			$wrapper_table[$d] = false;
-			if (file_exists("$d/wrapper.php"))
-				$wrapper_table[$d] = "$d/wrapper.php?file=";
-		}
-		if ($wrapper_table[$d])
-			$f = $wrapper_table[$d] . urlencode(basename($img));
 	}
 	return $f;
 }
+
 // http://doc.spip.org/@http_img_pack
 function http_img_pack($img, $alt, $atts='', $title='') {
 
@@ -2510,7 +2490,7 @@ function filtre_explode_dist($a,$b){return explode($b,$a);}
  * @param string $b
  * @return string
  */
-function filtre_implode_dist($a,$b){return implode($b,$a);}
+function filtre_implode_dist($a,$b){return is_array($a)?implode($b,$a):$a;}
 
 /**
  * Produire les styles prives qui associent item de menu avec icone en background
