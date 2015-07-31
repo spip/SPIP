@@ -167,10 +167,10 @@ function debug_dumpfile ($texte, $fonc, $type) {
 // - ca fait 2 headers !
 	ob_end_clean();
 
-	echo debut_entete(_T('info_debug')), 
+	echo debut_entete('Spip ' . _T('admin_debug')), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
 	  "</head>\n<body>",
-	  "<div id='spip-debug' style='position: absolute; top: 20; z-index: 1000;'><ul>\n"; 
+	  "<div id='spip-debug' style='position: absolute; top: 20px; z-index: 1000;'><ul>\n"; 
 
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>",$sourcefile,"</b>";

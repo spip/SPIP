@@ -17,7 +17,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
 function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $float='', $debug='') {
-	global $var_preview, $use_cache;
+	global $var_preview, $use_cache, $forcer_debug;
 	static $dejafait = false;
 
 	if ($GLOBALS['flag_preserver'] || !$GLOBALS['spip_admin'])
