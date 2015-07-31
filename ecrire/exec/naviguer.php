@@ -488,10 +488,11 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 		$id_parent = 0;
 
 	if ($GLOBALS['champs_extra']) {
-			  include_spip('inc/extra');
-			  $GLOBALS['champs_extra'] = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
+			include_spip('inc/extra');
+			$extra = ", extra = '"
+				.addslashes(extra_recup_saisie("rubriques"))."'";
 		}
-	spip_query("UPDATE spip_rubriques SET " .  (acces_rubrique($id_parent) ? "id_parent=$id_parent," : "") . "titre='" . addslashes($titre) ."', descriptif='" . addslashes($descriptif) . "', texte='" . addslashes($texte) . "' $champs_extra WHERE id_rubrique=$id_rubrique");
+	spip_query("UPDATE spip_rubriques SET " .  (acces_rubrique($id_parent) ? "id_parent=$id_parent," : "") . "titre='" . addslashes($titre) ."', descriptif='" . addslashes($descriptif) . "', texte='" . addslashes($texte) . "' $extra WHERE id_rubrique=$id_rubrique");
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
 			marquer_indexer('rubrique', $id_rubrique);
