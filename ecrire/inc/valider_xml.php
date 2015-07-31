@@ -147,6 +147,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	spip_log("DTD $avail $loc " . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($dtc->attributs) . " listes d'attributs, " . count($dtc->entites) . " entites");
 }
 
+// http://doc.spip.org/@analyser_dtd_comment
 function analyser_dtd_comment($dtd, &$dtc, $grammaire){
 	// ejecter les commentaires, surtout quand ils contiennent du code.
 	// Option /s car sur plusieurs lignes parfois
@@ -156,12 +157,14 @@ function analyser_dtd_comment($dtd, &$dtc, $grammaire){
 	return $m[1];
 }
 
+// http://doc.spip.org/@analyser_dtd_pi
 function analyser_dtd_pi($dtd, &$dtc, $grammaire){
 	if (!preg_match('/^<\?.*?>\s*(.*)$/s', $dtd, $m))
 		return -10;
 	return $m[1];
 }
 
+// http://doc.spip.org/@analyser_dtd_lexeme
 function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 	if (!preg_match('/^%([\w;.-]+);\s*(.*)$/s', $dtd, $m))
 		return -9;
@@ -178,6 +181,7 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 // il faudrait prevoir plusieurs niveaux d'inclusion.
 // (Ruby en utilise mais l'erreur est transparente. Scandaleux coup de pot)
 
+// http://doc.spip.org/@analyser_dtd_data
 function analyser_dtd_data($dtd, &$dtc, $grammaire){
 	if (!preg_match('/^<!\[%([^;]*);\s*\[\s*(.*?)\]\]>\s*(.*)$/s',$dtd, $m))
 		return -6;
@@ -187,6 +191,7 @@ function analyser_dtd_data($dtd, &$dtc, $grammaire){
 	return $retour;
 }
 
+// http://doc.spip.org/@analyser_dtd_notation
 function analyser_dtd_notation($dtd, &$dtc, $grammaire){
 	if (!preg_match('/^<!NOTATION.*?>\s*(.*)$/s',$dtd, $m))
 		return -8;
@@ -194,6 +199,7 @@ function analyser_dtd_notation($dtd, &$dtc, $grammaire){
 	return $m[1];
 }
 
+// http://doc.spip.org/@analyser_dtd_entity
 function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 {
 	if (!preg_match('/^<!ENTITY\s+(%?)\s*([\w;.-]+)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE)?\s*"([^"]*)"\s*("([^"]*)")?\s*>\s*(.*)$/s', $dtd, $m))
@@ -225,6 +231,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 // aura fait l'essentiel du controle sans memorisation des balises.
 // Fin du controle en finElement
 
+// http://doc.spip.org/@analyser_dtd_element
 function analyser_dtd_element($dtd, &$dtc, $grammaire)
 {
 	if (!preg_match('/^<!ELEMENT\s+(\S+)\s+([^>]*)>\s*(.*)$/s', $dtd, $m))
@@ -263,6 +270,7 @@ function analyser_dtd_element($dtd, &$dtc, $grammaire)
 }
 
 
+// http://doc.spip.org/@analyser_dtd_attlist
 function analyser_dtd_attlist($dtd, &$dtc, $grammaire)
 {
 	if (!preg_match('/^<!ATTLIST\s+(\S+)\s+([^>]*)>\s*(.*)/s', $dtd, $m))
