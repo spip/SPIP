@@ -77,7 +77,7 @@ function sql_serveur($ins_sql='', $serveur='', $continue=false) {
  * 		Le nom du connecteur
  * @param bool $option
  * 		Inutilise
- * @return string|false
+ * @return string|bool
  * 		Retourne le nom du charset si effectivement trouve, sinon false.
 **/
 function sql_get_charset($charset, $serveur='', $option=true){
@@ -260,7 +260,7 @@ function sql_get_select($select = array(), $from = array(), $where = array(),
  * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
  * 		- true -> executer la requete.
  *
- * @return int|false
+ * @return int|bool
  * 		Nombre de lignes de resultat
  * 		ou false en cas d'erreur
  *
@@ -664,11 +664,21 @@ function sql_multi($sel, $lang, $serveur='', $option=true)
 	return $f($sel, $lang);
 }
 
-// http://doc.spip.org/@sql_error
+
+/**
+ * Retourne la derniere erreur connue
+ *
+ * @api
+ * @param string $serveur
+ *      Nom du connecteur
+ * @return bool|string
+ *      Description de l'erreur
+ *      False si le serveur est indisponible
+ */
 function sql_error($serveur='') {
 	$f = sql_serveur('error', $serveur, 'continue');
 	if (!is_string($f) OR !$f) return false;
-	return $f('query inconnue', $serveur, $option!==false);
+	return $f('query inconnue', $serveur);
 }
 
 // http://doc.spip.org/@sql_errno
@@ -949,7 +959,9 @@ function sql_preferer_transaction($serveur='', $option=true) {
  * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
  * 		- false pour obtenir le code de la requete
  * 
- * @return true
+ * @return bool
+ *      true si la transaction est demarree
+ *      false en cas d'erreur
 **/
 function sql_demarrer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('demarrer_transaction', $serveur,  'continue');
@@ -973,7 +985,9 @@ function sql_demarrer_transaction($serveur='', $option=true) {
  * 		- continue pour ne pas echouer en cas de serveur sql indisponible.
  * 		- false pour obtenir le code de la requete
  * 
- * @return true
+ * @return bool
+ *      true si la transaction est demarree
+ *      false en cas d'erreur
 **/
 function sql_terminer_transaction($serveur='', $option=true) {
 	$f = sql_serveur('terminer_transaction', $serveur,  'continue');
@@ -1174,7 +1188,7 @@ function sql_format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur=
  * 		Nom de la table dont on souhait la description
  * @param string $serveur
  * 		Nom du connecteur
- * @return array|false
+ * @return array|bool
  * 		Description de la table ou false si elle n'est pas trouvee ou declaree.
 **/
 function description_table($nom, $serveur=''){
