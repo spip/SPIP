@@ -8,13 +8,14 @@
 		#FORMULAIRE_CONFIGURER_REDACTEURS
 	</div>
 
+	<div class="ajax">
+		#FORMULAIRE_CONFIGURER_VISITEURS
+	</div>
+
 </div>
 
 <?php
 	include_spip('inc/presentation');
-
-	$redacteurs = charger_fonction('redacteurs', 'configuration');
-	$visiteurs = charger_fonction('visiteurs', 'configuration');
 
 	$messagerie_agenda = charger_fonction('messagerie_agenda', 'configuration');
 
@@ -28,7 +29,6 @@
 	 * Inscriptions de redacteurs et visiteurs depuis le site public
 	 * (la balise FORMULAIRE_INSCRIPTION sert au deux)
 	 */
-	$res.=  $visiteurs() . "<br />";
 
 	$res.= "<div class='contenu_prive'>";
 

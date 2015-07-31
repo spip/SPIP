@@ -82,7 +82,6 @@ ecrire/configuration/moderniseur_html.php -text
 ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/reducteur.php -text
 ecrire/configuration/relayeur.php -text
-ecrire/configuration/visiteurs.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
@@ -394,6 +393,8 @@ prive/formulaires/configurer_sites.html -text
 prive/formulaires/configurer_sites.php -text
 prive/formulaires/configurer_transcodeur.html -text
 prive/formulaires/configurer_transcodeur.php -text
+prive/formulaires/configurer_visiteurs.html -text
+prive/formulaires/configurer_visiteurs.php -text
 prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
