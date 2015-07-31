@@ -141,12 +141,10 @@ global
 
 
 	if ($descriptif) {
-		echo "<div style='border: 1px dashed #aaaaaa;'>";
-		echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
+		echo "<div style='border: 1px dashed #aaaaaa; font-size: 14px; font-family: Verdana,Arial,Sans,sans-serif;'>";
 		echo "<b>",_T('info_descriptif'),"</b> ";
 		echo propre($descriptif);
 		echo "&nbsp; ";
-		echo "</font>";
 		echo "</div>";
 	}
 
@@ -155,9 +153,9 @@ global
 
 
 	if (strlen($texte)>0){
-		echo "<p><font FACE='Verdana,Arial,Sans,sans-serif'>";
+		echo "<p style='font-family: Verdana,Arial,Sans,sans-serif'>";
 		echo propre($texte);
-		echo "</font></p>";
+		echo "</p>";
 	}
 
 	if ($les_notes) {
@@ -186,8 +184,6 @@ global
 	}
 
 	fin_cadre_relief();
-
-
 
 	if (acces_mots()){
 
@@ -219,7 +215,7 @@ global
 			$res .= "</textarea><br />\n";
 		}
 		else
-			$res .= "<input type='hidden' NAME='descriptif' VALUE=\"$descriptif\" />";
+			$res .= "<input type='hidden' name='descriptif' value=\"$descriptif\" />";
 
 		if ($options == 'avancees' OR $texte) {
 			$res .= "<b>"._T('info_texte_explicatif')."</b><br />";
