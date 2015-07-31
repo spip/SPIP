@@ -2983,6 +2983,9 @@ function objet_icone($objet,$taille=24){
 function insert_head_css_conditionnel($flux){
 	if (strpos($flux,'<!-- insert_head_css -->')===false
 		AND $p=strpos($flux,'<!-- insert_head -->')){
+		// plutot avant le premier js externe (jquery) pour etre non bloquant
+		if ($p1 = stripos($flux,'<script src=') AND $p1<$p)
+			$p = $p1;
 		$flux = substr_replace($flux,pipeline('insert_head_css','<!-- insert_head_css -->'),$p,0);
 	}
 	return $flux;
