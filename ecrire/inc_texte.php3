@@ -262,10 +262,26 @@ function interdire_scripts($source) {
 
 // Integration (embed) multimedia
 
-function embed_document($id_document, $align) {
+function embed_document($id_document, $parametres="") {
 	global $id_doublons;
-	
+
 	$id_doublons['documents'] .= ",$id_document";
+
+
+	if ($parametres) {
+		$parametres = explode("|",$parametres);
+		
+		for ($i = 0; $i < count($parametres); $i++) {
+			$parametre = $parametres[$i];
+			
+			if (eregi("^left|right|center$", $parametre)) {
+				$align = $parametre;
+			}
+			else {
+				$params[] = $parametre;
+			}
+		}
+	}
 
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
@@ -299,8 +315,18 @@ function embed_document($id_document, $align) {
 			$vignette = "<object width='$largeur' height='$hauteur'>";
 			$vignette .= "<param name='movie' value='$fichier'>";
 			$vignette .= "<param name='src' value='$fichier'>";
-			$vignette .= "<param name='quality' value='high'>";
-			$vignette .= "<embed src='$fichier' quality='high'  width='$largeur' height='$hauteur'></embed></object>";
+	
+			for ($i = 0; $i < count($params); $i++) {
+				if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
+					$nom = $vals[1];
+					$valeur = $vals[2];
+					$vignette .= "<param name='$nom' value='$valeur'>";
+					$param_emb .= " $nom='$valeur'";
+				}
+			}
+			
+			//$vignette .= "<param name='quality' value='high'>";
+			$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>";
 		}
 		else if ($inclus == "image") {
 			$fichier_vignette = $fichier;
