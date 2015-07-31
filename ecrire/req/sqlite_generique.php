@@ -69,20 +69,15 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 
 	$ok = false;
 	if (!$db){
-		// si installation -> base temporaire tant qu'on ne connait pas son vrai nom
-		if (defined('_ECRIRE_INSTALL') && _ECRIRE_INSTALL){
-			// creation d'une base temporaire pour le debut d'install
-			$db = "_sqlite".$sqlite_version."_install";
-			$tmp = _DIR_DB.$db.".sqlite";
-			if ($sqlite_version==3){
-				$ok = $link = new PDO("sqlite:$tmp");
-			} else {
-				$ok = $link = sqlite_open($tmp, _SQLITE_CHMOD, $err);
-			}
-			// sinon, on arrete finalement
+		// si pas de db ->
+		// base temporaire tant qu'on ne connait pas son vrai nom
+		// pour tester la connexion
+		$db = "_sqlite".$sqlite_version."_install";
+		$tmp = _DIR_DB.$db.".sqlite";
+		if ($sqlite_version==3){
+			$ok = $link = new PDO("sqlite:$tmp");
 		} else {
-			spip_log("Base SQlite non definie dans req/sqlite", 'sqlite.'._LOG_HS);
-			return false;
+			$ok = $link = sqlite_open($tmp, _SQLITE_CHMOD, $err);
 		}
 	} else {
 		// Ouvrir (eventuellement creer la base)
