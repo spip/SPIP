@@ -611,37 +611,9 @@ function kwote($lisp)
 // http://doc.spip.org/@critere_IN_dist
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
-
-	list($arg, $op, $val, $col, $where_complement)= calculer_critere_infixe($idb, $boucles, $crit);
-	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
-//	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
-	$where = $in;
-	if ($crit->cond) {
-		$pred = calculer_argument_precedent($idb, $col, $boucles);
-		$where = array("'?'",$pred,	$where,"''");
-		if ($where_complement) // condition annexe du type "AND (objet='article')"
-			$where_complement = array("'?'",$pred,	$where_complement,"''");
-	}
-	if ($crit->exclus)
-		if (!preg_match(",^L[0-9]+[.],",$arg))
-			$where = array("'NOT'", $where);
-		else
-			// un not sur un critere de jointure se traduit comme un NOT IN avec une sous requete
-			$where = array("'NOT'",array("'IN'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'" ,array("'SELF'","'".$boucles[$idb]->id_table.".".$boucles[$idb]->primary."'",$where)));
-
-	$boucles[$idb]->where[] = $where;
-	if ($where_complement) // condition annexe du type "AND (objet='article')"
-		$boucles[$idb]->where[]= $where_complement;
-}
-
-function sql_quote192($val, $serveur='') {
-	return is_array($val) ? join(',', array_map("_q", $val)) : _q($val);
-}
-
-// http://doc.spip.org/@critere_IN_cas
-function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
-{
 	static $cpt = 0;
+	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
+
 	$var = '$in' . $cpt++;
 	$x= "\n\t$var = array();";
 	foreach ($val as $k => $v) {
@@ -650,27 +622,36 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 			if (is_numeric($r[2]))
 				$x .= "\n\t$var" . "[]= $r[2];";
 			else
-				$x .= "\n\t$var" . "[]= " . sql_quote192($r[2]) . ";";
+				$x .= "\n\t$var" . "[]= " . _q($r[2]) . ";";
 		} else {
 		  // Pour permettre de passer des tableaux de valeurs
 		  // on repere l'utilisation brute de #ENV**{X}, 
 		  // c'est-a-dire sa  traduction en ($PILE[0][X]).
 		  // et on deballe mais en rajoutant l'anti XSS
-		  $x .= "\n\tif (!(is_array(\$a = ($v))))\n\t\t$var" ."[]= \$a;\n\telse $var = array_merge($var, \$a);";
+		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= $v;\n\telse $var = array_merge($var, $v);";
 		}
 	}
-	
+
 	$boucles[$idb]->in .= $x;
-	
-	// inserer le tri par defaut selon les ordres du IN ... 
-	// avec une ecriture de type FIELD qui degrade les performances (du meme ordre qu'un rexgexp)
-	// et que l'on limite donc strictement aux cas necessaires :
-	// si ce n'est pas un !IN, et si il n'y a pas d'autre order dans la boucle
-	if (!$crit2){
-		$boucles[$idb]->default_order[] = "((!sql_quote192($var) OR sql_quote192($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote192($var) . ')'))";
-	}
-	
-	return "calcul_mysql_in('$arg',sql_quote192($var)".($crit2=='NOT'?",'NOT'":"").")";
+
+	// inserer la negation (cf !...)
+	if (!$crit->not) {
+			$boucles[$idb]->default_order[] = "'cpt$cpt'";
+			$op = '<>';
+	} else $op = '=';
+
+	$arg = "FIELD($arg,\" . join(',',array_map('_q', $var)) . \")";
+	if ($boucles[$idb]->group) $arg = "SUM($arg)";
+	$boucles[$idb]->select[]=  "$arg AS cpt$cpt";
+	$op = array("'$op'", "'cpt$cpt'", 0);
+
+//	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
+
+	$boucles[$idb]->having[]= (!$crit->cond ? $op :
+	  array("'?'",
+		calculer_argument_precedent($idb, $col, $boucles),
+		$op,
+		"''"));
 }
 
 
