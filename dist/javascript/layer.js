@@ -1,6 +1,6 @@
 var memo_obj = new Array();
 var url_chargee = new Array();
-var xhr_actifs = new Array();
+var xhr_actifs = {};
 
 function findObj_test_forcer(n, forcer) { 
 	var p,i,x;
@@ -40,7 +40,7 @@ function findObj_forcer(n) {
 function hide_obj(obj) {
 	var element;
 	if (element = findObj(obj)){
-		if (element.style.visibility != "hidden") element.style.visibility = "hidden";
+		$(element).css("visibility","hidden");
 	}
 }
 
@@ -182,13 +182,6 @@ function lancer_recherche(champ, cible) {} // obsolete
 // Cette fonction charge du contenu - dynamiquement - dans un 
 // Ajax
 
-function createXmlHttp() {
-	if(window.XMLHttpRequest)
-		return new XMLHttpRequest(); 
-	else if(window.ActiveXObject)
-		return new ActiveXObject("Microsoft.XMLHTTP");
-}
-
 function verifForm(racine) {
 	if(!jQuery.browser.mozilla) return;
   racine = racine || document;
@@ -206,44 +199,6 @@ function verifForm(racine) {
   });
 }
 
-// Alloue un gestionnaire Ajax, et le lance sur les parametres donnes
-// Retourne False si l'allocation est impossible,
-// le gestionnaire lui-meme autrement (utile pour memoriser ceux alloues).
-
-function ajah(method, url, flux, rappel)
-{
-	var xhr = createXmlHttp();
-	if (!xhr) return false;
-	if (rappel) {
-		xhr.onreadystatechange = function () {ajahReady(xhr, rappel);}
-	}
-        xhr.open(method, url, true);
-	// Necessaire au mode POST
-	// Il manque la specification du charset
-	// mais le mode_security d'Apache n'admet rien de plus
-	if (flux) {
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	}
-	xhr.send(flux);
-	return xhr;
-}
-
-// Avancees de la requete HTTP.
-// Attention:
-// 1. Opera dit toujours 0, pas 200 ou 404 etc
-// 2. si la methode abort a ete invoquee, acceder au status provoque
-// 	NS_ERROR_NOT_AVAILABLE 
-// il faut try/catch pour rester discret (l'avortement decidement ...)
-
-function ajahReady(xhr, f) {
-	if (xhr.readyState == 4) {
-	  try { s = xhr.status > 200} catch (e) {s = 0; }
-	  if (s) // 
-	    {f('Erreur HTTP :  ' +  xhr.status);}
-	  else  { f(xhr.responseText); }
-        }
-}
-
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
 // Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
@@ -255,19 +210,19 @@ function ajahReady(xhr, f) {
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
 // eviter de se loger avec redirection vers un telle page
 
-function AjaxSqueeze(trig, id, f)
+function AjaxSqueeze(trig, id, callback)
 {
+  var target = $('#'+id);
+  
 	// position du demandeur dans le DOM (le donner direct serait mieux)
-	id = document.getElementById(id);
-	if (!id) {return true;}
+	if (!target.size()) {return true;}
 
 	// animation immediate pour faire patienter (vivement jquery !)
 	if (typeof ajax_image_searching != 'undefined') {
-		g = document.createElement('div');
-		g.innerHTML = ajax_image_searching;
-		id.insertBefore(g, id.firstChild);
+		target.prepend(ajax_image_searching);
 	}
-	return  !AjaxSqueezeNode(trig, id, f);
+	AjaxSqueezeNode(trig, target, callback);
+	return false;
 }
 
 // La fonction qui fait vraiment le travail decrit ci-dessus.
@@ -275,39 +230,49 @@ function AjaxSqueeze(trig, id, f)
 // et son resultat booleen est inverse ce qui lui permet de retourner 
 // le gestionnaire Ajax comme valeur non fausse
 
-function AjaxSqueezeNode(trig, noeud, f)
+function AjaxSqueezeNode(trig, target, f)
 {
-	var i, s, g, callback;
-	var u = '';
+	var i, callback;
 	
 	// retour std si pas precise: affecter ce noeud avec ce retour
-	if (!f) callback = function(r) { noeud.innerHTML = r; verifForm(noeud); triggerAjaxLoad(noeud);}
-	else callback = function(r) { f(r,noeud); verifForm(noeud); triggerAjaxLoad(noeud);}
+	if (!f) {
+    callback = function() { verifForm(this);}
+  }
+	else {
+    callback = function(res,status) { f(res,status); verifForm(this);}
+  }
 	
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
-		return ajah('GET', trig, null, callback);
-	}
-
-	for (i=0;i < trig.elements.length;i++) {
-		n = trig.elements[i];
-		s = ((n.type != 'checkbox')&&(n.type != 'radio')) ? n.name : n.checked;
-		if (s) {
-			u += n.name+"="+ encodeURIComponent(n.value) + '&';
-		}
-	}
-	u += 'var_ajaxcharset=utf-8'; // encodeURIComponent
-
-	s = trig.getAttribute('action');
-	if (typeof(s)!='string') // pour IE qui a foire la ligne precedente
-		s = trig.attributes.action.value;
-	return ajah('POST', // ou 'GET'
-		     s ,     // s + '?'+ u,
-		     u,      // null,
-		     callback);
+    return $.ajax({"url":trig,"complete":function(res,status){
+			if(res.aborted) return;
+			if(status=='error') {
+				return $(target).html('Erreur HTTP');
+			}
+			// Inject the HTML into all the matched elements
+			$(target).html(res.responseText)
+		  // Execute all the scripts inside of the newly-injected HTML
+		  .evalScripts()
+		  // Execute callback
+		  .each( callback, [res.responseText, status] );
+			//callback(res,status);
+		}});
+  }
+ 
+ $(trig).ajaxSubmit({"target":target,
+ "after":function(res,status){
+		if(status=='error') return this.html('Erreur HTTP');
+		callback(res,status);
+	},
+	"before":add_var_ajaxcharset});
+  return false; 
 }
 
+function add_var_ajaxcharset(vars) {
+    vars.push({"name":"var_ajaxcharset","value":"utf-8"});
+    return true;  
+};
 
 // Comme AjaxSqueeze, 
 // mais avec un cache sur le noeud et un cache sur la reponse
@@ -321,10 +286,11 @@ function charger_id_url(myUrl, myField, jjscript)
 	if (!Field) return true;
 
 	if (!myUrl) {
-		retour_id_url('', Field, jjscript);
+		$(Field).empty();
+		retour_id_url(Field, jjscript);
 		return true; // url vide, c'est un self complet
 	} else {
-		return charger_node_url(myUrl, Field, jjscript, findObj_forcer('img_' + myField));
+		return charger_node_url(myUrl, myField, jjscript, findObj_forcer('img_' + myField));
 	}
 }
 
@@ -334,38 +300,29 @@ function charger_node_url(myUrl, Field, jjscript, img)
 {
 	// disponible en cache ?
 	if (url_chargee[myUrl]) {
-			retour_id_url(url_chargee[myUrl], Field, jjscript);
-			triggerAjaxLoad(Field);
+			var el = $("#"+Field).html(url_chargee[myUrl])[0];
+			retour_id_url(el, jjscript);
+			triggerAjaxLoad(el);
 			return false; 
 	  } else {
 		if (img) img.style.visibility = "visible";
-		if (xhr_actifs[Field]) { xhr_actifs[Field].abort(); }
+		if (xhr_actifs[Field]) { xhr_actifs[Field].aborted = true;xhr_actifs[Field].abort(); }
 		xhr_actifs[Field] = AjaxSqueezeNode(myUrl,
-				'',
+				"#"+Field,
 				function (r) {
 					xhr_actifs[Field] = undefined;
 					if (img) img.style.visibility = "hidden";
 					url_chargee[myUrl] = r;
-					retour_id_url(r, Field, jjscript);
+					retour_id_url("#"+Field, jjscript);
 								   });
-		return !xhr_actifs[Field];
+		return false;
 	}
 }
 
-function retour_id_url(r, Field, jjscript)
+function retour_id_url(Field, jjscript)
 {
-	Field.innerHTML = r;
-	Field.style.visibility = "visible";
-	Field.style.display = "block";
+	$(Field).css({'visibility':'visible','display':'block'});
 	if (jjscript) jjscript();
-}
-
-function ajax_double(id, id2, r)
-{
-	noeud = document.getElementById(id);  
-	noeud.innerHTML = r;
-	noeud = document.getElementById(id2);
-	noeud.style.visibility = "visible";
 }
 
 function charger_node_url_si_vide(url, noeud, gifanime, jjscript) {
