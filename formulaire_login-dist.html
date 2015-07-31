@@ -37,13 +37,12 @@ document.write("<:login_login:>&nbsp;<b>[(#HTTP_VARS{login})]<" + "/b><br />&#91
 		<:login_non_securise:>
 		<a href="[(#HTTP_VARS{action})]"><:login_recharger:></a>
 	</font>
-	<br /><br />
 	<label><b><:login_login2:></b><br /></label>
 	<input type='text' name='session_login' class='forml' [value="(#HTTP_VARS{login})" ]size='40' />
 </noscript>
 [<img src="(#HTTP_VARS{id_auteur}|silogoauteur)" width="75" align="right" alt="[(#HTTP_VARS{login})]">]
 </div>
-<p><br /><br />
+<p>
 		<label><b><:login_pass2:></b></label>&nbsp;<input type="password" name="session_password"[ id="var_login_(#HTTP_VARS{login})]" class="forml" value="" size="40" />
 		<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
 			 name="session_remember"
