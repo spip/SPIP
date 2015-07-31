@@ -220,6 +220,10 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
 
+		// les balises dynamiques passent toujours leur $fond
+		// si un 'fond' est present dans le contexte il vient d'autre part (de la bdd par exemple:p)
+		// et c'est le crash assure
+		$contexte_inclus['fond'] = $fond;
 		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true));
 
 		$texte = $page['texte'];
