@@ -183,7 +183,7 @@ if (acces_rubrique($id_parent)) {
 echo "</SELECT>\n";
 
 // si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
-$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
+$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique'";
 $row = spip_fetch_array(spip_query($query));
 $contient_breves = $row['cnt'];
 if ($contient_breves > 0) {

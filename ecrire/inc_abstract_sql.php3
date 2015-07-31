@@ -85,11 +85,11 @@ function spip_abstract_free($res, $serveur='')
   return $f($res);
 }
 
-function spip_abstract_insert($res, $serveur='')
+function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 {
-  if (!$serveur) return spip_insert($res);
-  $f = spip_abstract_serveur('spip_' . $serveur . '_insert', $serveur);
-  return $f($res);
+  $f = (!$serveur ? 'spip_insert' :
+	spip_abstract_serveur('spip_' . $serveur . '_insert', $serveur));
+  return $f($table, $noms, $valeurs);
 }
 
 # une composition tellement frequente...

@@ -66,7 +66,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	if (!$langue_new) $langue_new = lire_meta('langue_site');
 	$langue_choisie_new = 'non';
 
-	$id_breve=spip_insert("spip_breves", "(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
+	$id_breve = spip_abstract_insert("spip_breves", "(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
 			      "('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')");
 }
 

@@ -113,7 +113,7 @@ function reponse_confirmation($id_article, $val_confirm) {
 					$texte .= erreur(_T('form_deja_inscrit'));
 				}
 				else {
-					$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
+					$query = "UPDATE spip_signatures SET statut='publie' WHERE id_signature='$id_signature'";
 					$result = spip_query($query);
 					// invalider les pages de l'article
 					include_ecrire('inc_invalideur.php3');
