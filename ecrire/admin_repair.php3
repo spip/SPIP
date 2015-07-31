@@ -26,21 +26,30 @@ function verifier_base() {
 		return false;
 
 	while ($tab = mysql_fetch_row($res1)) {
-		echo "<p><b>".$tab[0]."</b> - ";
-		if (! $res = mysql_query("SELECT * FROM ".$tab[0]))
-			return false;
-		echo mysql_num_rows($res)." &eacute;l&eacute;ment(s)\n";
+		echo "<p><b>".$tab[0]."</b> ";
 
-		if (! $res = mysql_query("REPAIR TABLE ".$tab[0]))
+		if (!($result_repair = mysql_query("REPAIR TABLE ".$tab[0])))
 			return false;
 
-		$row = mysql_fetch_row($res);
-		if ($row[3] != 'OK')
-			echo "<pre><font color='red'><b>"
-			.htmlentities(join("\n", $row))
-			."</b></font></pre>\n";
+		if (!($result = mysql_query("SELECT COUNT(*) FROM ".$tab[0])))
+			return false;
+
+		list($count) = mysql_fetch_row($result);
+		echo "($count &eacute;l&eacute;ment(s))\n";
+
+		$ok = true;
+		$repare = false;
+		while ($row = mysql_fetch_row($result_repair)) {
+			if ($row[2] == 'error') $ok = false;
+			else if ($row[2] != 'status') $repare = true;
+		}
+
+		if (!$ok)
+			echo "<pre><font color='red'><b>".htmlentities(join("\n", $row))."</b></font></pre>\n";
+		else if ($repare)
+			echo " : <font color='green'><b>la table a &eacute;t&eacute; r&eacute;par&eacute;e</b></font>.<br>\n";
 		else
-			echo " : cette table est OK<br>\n";
+			echo " : cette table est OK.<br>\n";
 
 	}
 
@@ -59,14 +68,13 @@ else {
 		$message = "{{Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
 		syst&eacute;matiquement et sans raison apparente, il est possible
 		que ce soit &agrave; cause de la base de donn&eacute;es
-		elle-m&ecirc;me.}}\n\n Or MySQL (votre version: $version_mysql)
-		dispose d'une facult&eacute; d'auto-r&eacute;paration de ses tables
-		lorsque les index ont &eacute;t&eacute; perturb&eacute;s par
-		accident (suite &agrave; des erreurs disque, red&eacute;marrage
-		violent, etc.) Vous pouvez ici tenter cette auto-r&eacute;paration;
+		elle-m&ecirc;me.}}\n\n MySQL 
+		dispose d'une facult&eacute; de r&eacute;paration de ses tables
+		lorsqu'elles ont &eacute;t&eacute; endommag&eacute;es par
+		accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;;
 		en cas d'&eacute;chec, conservez une copie de l'affichage, qui
 		contient peut-&ecirc;tre des indices de ce qui ne va pas...\n\nSi le
-		problème persiste, prenez contact avec votre h&eacute;bergeur.";
+		problème persiste, prenez contact avec votre h&eacute;bergeur.\n";
 		$ok = true;
 	}
 }
