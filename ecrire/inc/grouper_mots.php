@@ -75,7 +75,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 	$titre = typo($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
 			
-	if (autoriser('modifier', 'groupemots', $id_groupe)
+	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))
 	OR $occurrences['articles'][$id_mot] > 0) {
 		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mot-$id_groupe");
 		if ($descriptif)  $descriptif = " title=\"$descriptif\"";
@@ -113,7 +113,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 
 	$vals[] = $texte_lie;
 
-	if (autoriser('modifier','groupemots',$id_groupe)) {
+	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))) {
 		$clic =  '<small>'
 		._T('info_supprimer_mot')
 		. "&nbsp;<img src='"

@@ -305,6 +305,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 			."</div>\n" ;
 	} else $message ='';
 
+	// Creer un nouveau mot ?
 	if (autoriser('modifier','groupemots')) {
 		$titre = _request('cherche_mot')
 			? "&titre=".rawurlencode(_request('cherche_mot')) : '';

@@ -245,6 +245,22 @@ function autoriser_groupemots_modifier_dist($faire, $type, $id, $qui, $opt) {
 		AND !$qui['restreint'];
 }
 
+// Autoriser a modifier un mot $id ; note : si on passe l'id_groupe
+// dans les options, on gagne du CPU (c'est ce que fait l'espace prive)
+// http://doc.spip.org/@autoriser_mot_modifier_dist
+function autoriser_mot_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return
+	isset($opt['id_groupe']))
+		? autoriser('modifier', 'groupemots', $opt['id_groupe'], $qui, $opt);
+		: (
+			$s = spip_query(
+				"SELECT id_groupe FROM spip_mots WHERE id_mot="._q($id)
+			)
+			AND $t = spip_fetch_array($s)
+			AND autoriser('modifier', 'groupemots', $t['id_groupe'], $qui, $opt)
+		);
+}
+
 // Lire les stats ?
 // = tous les admins
 // http://doc.spip.org/@autoriser_voirstats_dist
