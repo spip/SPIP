@@ -370,7 +370,7 @@ Merci de votre participation
 'info_contact_developpeur' => 'Veuillez contacter un developpeur.',
 'info_contenance' => 'Ce site contient&nbsp;:',
 'info_contribution' => 'contributions de forum',
-'info_copyright' => '<b>@spip@</b> est un logiciel libre distribu&eacute; @lien_gpl@.',
+'info_copyright' => '@spip@ est un logiciel libre distribu&eacute; @lien_gpl@.',
 'info_copyright_doc' => 'Pour plus d\'informations, voir le site <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
 'info_copyright_gpl' => 'sous licence GPL',
 'info_cours_edition' => 'Vos articles en cours de r&eacute;daction',
