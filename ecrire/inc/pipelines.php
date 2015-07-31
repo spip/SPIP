@@ -161,6 +161,18 @@ function f_insert_head($texte) {
  * @return string         Contenu de la page envoyée au navigateur
 **/
 function f_admin ($texte) {
+	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND $GLOBALS['html']) {
+		include_spip('inc/filtres'); // pour http_img_pack
+		$x = "<div class='spip-previsu' "
+		     . http_style_background('preview-32.png')
+		     . ">"
+		     . _T('previsualisation')
+		     . "</div>";
+		if (!$pos = stripos($texte, '</body>'))
+			$pos = strlen($texte);
+		$texte = substr_replace($texte, $x, $pos, 0);
+	}
+
 	if (isset($GLOBALS['affiche_boutons_admin']) AND $GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
 		$texte = affiche_boutons_admin($texte);
