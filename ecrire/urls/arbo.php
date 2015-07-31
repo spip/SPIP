@@ -422,12 +422,14 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 	if ($GLOBALS['profondeur_url']<=0
 	AND $_SERVER['REQUEST_METHOD'] != 'POST') {
 		// Decoder l'url html, page ou standard
+		$objets = 'article|breve|rubrique|mot|auteur|site|syndic';
 		if (preg_match(
-		',(^|id_|[?])(article|breve|rubrique|mot|auteur|site|syndic)=?(\d+),iS',
-		$url, $regs)) {
-			$type = preg_replace(',s$,', '', table_objet($regs[2]));
-			$_id = id_table_objet($regs[2]);
-			$id_objet = $regs[3];
+		',(?:^|/|[?&]page=)('.$objets
+		.')(?:\.php3?|(?:[?&]id_(?:\1)=)?([0-9]+)(?:\.html)?)'
+		.'(?:[?&].*)?$,', $url, $regs)) {
+			$type = preg_replace(',s$,', '', table_objet($regs[1]));
+			$_id = id_table_objet($regs[1]);
+			$id_objet = $regs[2];
 		}
 	}
 	if ($id_objet) {
@@ -499,7 +501,6 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 				$type = $row['type'];
 				$col_id = id_table_objet($type);
 				$contexte[$col_id] = $row['id_objet'];
-				$entite = $row['type'];
 
 				if (!isset($contexte[$col_id])) // n'affecter que la premiere fois un parent de type id_rubrique
 					$contexte[$col_id] = $row['id_objet'];
