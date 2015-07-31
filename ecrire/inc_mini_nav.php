@@ -95,13 +95,8 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 
 
 function mini_hierarchie_rub ($id_rubrique) {
-	$res = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique = $id_rubrique");
-	while ($row = spip_fetch_array($res)) {
-		$id_parent = $row["id_parent"];
-		return $id_parent;
-		
-	}
-	
+	$row = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique = " . intval($id_rubrique)));
+	return $row["id_parent"];
 }
 
 
