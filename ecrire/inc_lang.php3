@@ -46,15 +46,14 @@ function charger_langue($lang, $module = 'spip') {
 		}
 	}
 
-	// surcharge perso
-	if ($f = (find_in_path('lang_perso.php3')))
+	// surcharge perso -- on cherche le fichier local(_xx).php3 dans le chemin
+	if ($f = (find_in_path('local.php3')))
 		surcharger_langue($f);
-	if ($f = (find_in_path('lang_perso_'.$lang.'.php3')))
+	if ($f = (find_in_path('local_'.$lang.'.php3')))
 		surcharger_langue($f);
-
-	#	// Overkill ?  Surcharger uniquement le module demande
-	#	if ($f = (find_in_path('lang_perso_'.$module.'_'.$lang.'.php3')))
-	#		surcharger_langue($f);
+	// compatibilite ascendante : chercher aussi local_xx.php3 dans ecrire/lang/
+	else if (@is_readable($f = _DIR_LANG . 'local_'.$lang.'.php3'))
+		surcharger_langue($f);
 }
 
 //
