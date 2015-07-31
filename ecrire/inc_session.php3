@@ -208,16 +208,16 @@ function verifier_php_auth() {
 }
 
 //
-// entete php_auth
+// entete php_auth (est-encore utilise ?)
 //
 function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
 	echo "<b>$pb</b><p>$raison</p>[<a href='./'>$retour</a>] ";
 	if ($url) {
-		$url = quote_amp($url);
-		echo "[<a href='spip_cookie.php3?essai_auth_http=oui"
-			. "&amp;$url'>$re</a>]";
+		echo "[<a href=",
+		  http_php_script('spip_cookie',"essai_auth_http=oui&$url"),
+		  "'>$re</a>]";
 	}
 	
 	if ($lien)
