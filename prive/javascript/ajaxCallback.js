@@ -831,13 +831,14 @@ function parametre_url(url,c,v,sep){
 
 
 // Ajaxer les formulaires qui le demandent, au demarrage
-
+if (!window.var_zajax_content)
+	window.var_zajax_content = 'contenu';
 jQuery(function() {
 	jQuery('form:not(.bouton_action_post)').parents('div.ajax')
 	.formulaire_dyn_ajax();
 	jQuery('div.ajaxbloc').ajaxbloc();
 	jQuery("input[placeholder]:text").placeholderLabel();
-	jQuery('a.popin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax","contenu"));return false;});
+	jQuery('a.popin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax",var_zajax_content));return false;});
 });
 
 // ... et a chaque fois que le DOM change
@@ -850,7 +851,7 @@ onAjaxLoad(function() {
 		jQuery('div.ajaxbloc', this)
 			.ajaxbloc();
 		jQuery("input[placeholder]:text",this).placeholderLabel();
-		jQuery('a.popin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax","contenu"));return false;});
+		jQuery('a.popin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,"var_zajax",var_zajax_content));return false;});
 	}
 });
 
