@@ -19,11 +19,6 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_mots.php3");
 
-// secure
-if (!($connect_statut == '0minirezo'  AND $connect_toutes_rubriques))
-  $conf_mot = "";
-
-// suppression d'un mot ?
 if ($conf_mot = intval($conf_mot)) {
 	$query = "SELECT * FROM spip_mots WHERE id_mot='$conf_mot'";
 	$result = spip_query($query);
@@ -57,7 +52,7 @@ if ($conf_mot = intval($conf_mot)) {
 			WHERE lien.id_mot=$conf_mot AND forum.id_forum=lien.id_forum
 			AND forum.statut='publie'"));
 
-		// si le mot n'est pas lie, on le supprime sans etats d'ames
+		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
 			redirige_par_entete("mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3");
 		} // else traite plus loin (confirmation de suppression)
@@ -143,54 +138,6 @@ if ($conf_mot>0) {
 }
 
 
-//
-// Calculer les nombres d'elements (articles, etc.) lies a chaque mot
-//
-
-if ($connect_statut=="0minirezo") $aff_articles = "'prepa','prop','publie'";
-else $aff_articles = "'prop','publie'";
-
-$result_articles = spip_query(
-	"SELECT COUNT(*) as cnt, lien.id_mot FROM spip_mots_articles AS lien, spip_articles AS article
-	WHERE article.id_article=lien.id_article AND article.statut IN ($aff_articles) GROUP BY lien.id_mot"
-);
-while ($row_articles =  spip_fetch_array($result_articles)){
-	$id_mot = $row_articles['id_mot'];
-	$total_articles = $row_articles['cnt'];
-	$nb_articles[$id_mot] = $total_articles;
-}
-
-
-$result_rubriques = spip_query(
-	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
-	WHERE rubrique.id_rubrique=lien.id_rubrique GROUP BY lien.id_mot"
-	);
-while ($row_rubriques = spip_fetch_array($result_rubriques)){
-	$id_mot = $row_rubriques['id_mot'];
-	$total_rubriques = $row_rubriques['cnt'];
-	$nb_rubriques[$id_mot] = $total_rubriques;
-}
-
-$result_breves = spip_query(
-	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve
-	WHERE breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot"
-	);
-while ($row_breves = spip_fetch_array($result_breves)){
-	$id_mot = $row_breves['id_mot'];
-	$total_breves = $row_breves['cnt'];
-	$nb_breves[$id_mot] = $total_breves;
-}
-
-$result_syndic = spip_query(
-	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic
-	WHERE syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot"
-	);
-while ($row_syndic = spip_fetch_array($result_syndic)){
-	$id_mot = $row_syndic['id_mot'];
-	$total_sites = $row_syndic['cnt'];
-	$nb_sites[$id_mot] = $total_sites;
-}
-
 
 //
 // On boucle d'abord sur les groupes de mots
@@ -274,6 +221,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	}	
 
 	fin_cadre_enfonce();
+
 }
 
 if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot){
