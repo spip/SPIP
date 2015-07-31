@@ -1913,6 +1913,7 @@ function concat(){
 }
 
 
+// http://doc.spip.org/@charge_scripts
 function charge_scripts($scripts) {
   $flux = "";
   $args = is_array($scripts)?$scripts:explode("|",$scripts);
