@@ -1169,7 +1169,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$statut = $row['statut'];
 	if (isset($row['lang']))
 	  changer_typo($lang = $row['lang']);
-	else $lang = '';
+	else $lang = $langue_defaut;
 	$id_rubrique = $row['id_rubrique'];
 			
 	$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
