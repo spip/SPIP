@@ -595,8 +595,8 @@ ecrire/inc/xml.php -text
 ecrire/install/etape_.php -text
 ecrire/install/etape_1.php -text
 ecrire/install/etape_2.php -text
-ecrire/install/etape_5.php -text
-ecrire/install/etape_6.php -text
+ecrire/install/etape_3.php -text
+ecrire/install/etape_4.php -text
 ecrire/install/etape_ldap1.php -text
 ecrire/install/etape_ldap2.php -text
 ecrire/install/etape_ldap3.php -text

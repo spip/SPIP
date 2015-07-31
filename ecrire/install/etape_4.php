@@ -14,8 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
 
-// http://doc.spip.org/@inc_install_6
-function install_etape_6_dist()
+function install_etape_4_dist()
 {
 	global $email,$login,$nom,$pass, $pass_verif,$spip_lang_right;
 
@@ -107,7 +106,7 @@ function install_etape_6_dist()
 	echo bouton_suivant();
 	echo "</div></form>";
 
-	echo info_progression_etape(6,'etape_','install/');
+	echo info_progression_etape(4,'etape_','install/');
 	echo install_fin_html();
 }
 
