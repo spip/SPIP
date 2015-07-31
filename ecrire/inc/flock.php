@@ -269,6 +269,7 @@ function supprimer_fichier($fichier, $lock=true) {
 	// supprimer
 	return @unlink($fichier);
 }
+
 // Supprimer brutalement, si le fichier existe
 // http://doc.spip.org/@spip_unlink
 function spip_unlink($f) {
@@ -280,6 +281,30 @@ function spip_unlink($f) {
 	}
 }
 
+/*
+ * Suppression complete d'un repertoire.
+ *
+ * http://www.php.net/manual/en/function.rmdir.php#92050
+ *
+ * @param string $dir Chemin du repertoire
+ * @return bool Suppression reussie.
+ */
+function supprimer_repertoire($dir) {
+	if (!file_exists($dir)) return true;
+	if (!is_dir($dir) || is_link($dir)) return unlink($dir);
+	
+	foreach (scandir($dir) as $item) {
+		if ($item == '.' || $item == '..') continue;
+		if (!supprimer_repertoire($dir . "/" . $item)) {
+			chmod($dir . "/" . $item, 0777);
+			if (!supprimer_repertoire($dir . "/" . $item)) return false;
+		};
+	}
+	
+	return rmdir($dir);
+}
+
+	
 //
 // Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
 // $base/${subdir}_ sinon ; $nobase signale qu'on ne veut pas de $base/
