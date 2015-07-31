@@ -138,11 +138,12 @@ $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] 
 
 //  si la langue est specifiee par cookie et ne correspond pas
 // (elle a ete changee dans une autre session, et on retombe sur un vieux cookie)
-// il faut traiter ce cas apres les appels d'action, car il appelle une action, sinon cela provoque une boucle infinie
+// on appelle directement la fonction, car un appel d'action peut conduire a une boucle infinie
+// si le cookie n'est pas pose correctement dans l'action
 if (!$var_auth AND isset($_COOKIE['spip_lang_ecrire'])
   AND $_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang']) {
-  	include_spip('inc/headers');
-  	redirige_par_entete(parametre_url(generer_action_auteur('converser','base',self()),'var_lang_ecrire',$GLOBALS['visiteur_session']['lang'],'&'));
+  	include_spip('action/converser');
+  	action_converser_post($GLOBALS['visiteur_session']['lang'],true);
 }
 
 
