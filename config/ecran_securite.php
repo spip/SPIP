@@ -81,7 +81,7 @@ AND $_REQUEST['echelle'] !== htmlentities((string)$_REQUEST['echelle']))
  *     - espace prive
  */
 if (isset($_REQUEST['exec'])
-AND !preg_match(',^\w+$,', (string)$_REQUEST['exec']))
+AND !preg_match(',^[\w-]+$,', (string)$_REQUEST['exec']))
 	$ecran_securite_raison = "exec";
 if (isset($_REQUEST['cherche_auteur'])
 AND preg_match(',[<],', (string)$_REQUEST['cherche_auteur']))
