@@ -87,6 +87,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$id = ($new OR $lier_trad)
 		? 'oui'
 		: $row[$id_table_objet];
+	$row[$id_table_objet] = $id;
 
 	$contexte = $row;
 	if ($id_parent && (!isset($contexte['id_parent']) OR $new))

@@ -91,8 +91,10 @@ function refuser_traiter_formulaire_ajax(){
 	}
 }
 // http://doc.spip.org/@traiter_formulaires_dynamiques
-function traiter_formulaires_dynamiques(){
+function traiter_formulaires_dynamiques($get=false){
+	static $post = array();
 	static $done = false;
+	if ($get) return $post; // retourner a la demande les messages et erreurs stockes en debut de hit
 	if (!$done) {
 		$done = true;
 		if ($action = _request('action')) {
@@ -153,13 +155,13 @@ function traiter_formulaires_dynamiques(){
 			include_spip('inc/filtres');
 			if (($args = decoder_contexte_ajax($args,$form))!==false) {
 				$verifier = charger_fonction("verifier","formulaires/$form/",true);
-				$_POST["erreurs_$form"] = pipeline(
+				$post["erreurs_$form"] = pipeline(
 				  'formulaire_verifier',
 					array(
 						'args'=>array('form'=>$form,'args'=>$args),
 						'data'=>$verifier?call_user_func_array($verifier,$args):array())
 					);
-				if ((count($_POST["erreurs_$form"])==0)){
+				if ((count($post["erreurs_$form"])==0)){
 					$rev = "";
 					if ($traiter = charger_fonction("traiter","formulaires/$form/",true))
 						$rev = call_user_func_array($traiter,$args);
@@ -171,10 +173,10 @@ function traiter_formulaires_dynamiques(){
 					);
 					// traiter peut retourner soit un message, soit un array(editable,message)
 					if (is_array($rev)) {
-						$_POST["editable_$form"] = $rev[0];
-						$_POST["message_ok_$form"] = $rev[1];
+						$post["editable_$form"] = reset($rev);
+						$post["message_ok_$form"] = end($rev[1]);
 					} else
-						$_POST["message_ok_$form"] = $rev;
+						$post["message_ok_$form"] = $rev;
 				}
 				// si le formulaire a ete soumis en ajax, on le renvoie direct !
 				if (_request('var_ajax')){

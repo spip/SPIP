@@ -67,8 +67,7 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 // http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
 	if (!_AJAX
-	&& !headers_sent() 
-	&& !$_GET['var_mode']
+	&& !headers_sent()
 	&& !_request('var_ajax')) {
 		redirige_par_entete(str_replace('&amp;','&',$url), $equiv);
 	} else {
@@ -82,7 +81,9 @@ function redirige_formulaire($url, $equiv = '') {
 		include_spip('inc/filtres');
 		return
 		"<script type='text/javascript'>window.location='$url';</script>"
-		. http_img_pack('searching.gif','');
+		. http_img_pack('searching.gif','')
+		. '<br />'
+		. '<a href="'.quote_amp($url).'">'._T('navigateur_pas_redirige').'</a>';
 	}
 }
 
@@ -133,20 +134,5 @@ function http_no_cache() {
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	header("Pragma: no-cache");
 }
-
-/* Code mort: le statut 204 c'est fait pour.
-
-// http://doc.spip.org/@envoie_image_vide
-function envoie_image_vide() {
-	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
-	header("Content-Type: image/gif");
-	header("Content-Length: ".strlen($image));
-	header("Cache-Control: no-cache,no-store");
-	header("Pragma: no-cache");
-	header("Connection: close");
-	echo $image;
-	flush();
-}
-*/
 
 ?>
