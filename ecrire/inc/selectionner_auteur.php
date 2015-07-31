@@ -48,7 +48,7 @@ function selectionner_auteur_boucle($where, $idom)
 	foreach ($all as $row) {
 
 		$id = $row["id_auteur"];
-		$nom = typo(extraire_multi($row["nom"]));
+		$nom = typo($row["nom"]);
 
 		// attention, les <a></a> doivent etre au premier niveau
 		// et se suivrent pour que changerhighligth fonctionne
