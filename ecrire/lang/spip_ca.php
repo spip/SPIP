@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Recarregar aquesta p&agrave;gina',
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> L\'actualitzaci&oacute;  de la base de dades MySQL cap a  la versi&oacute; @version@ &eacute;s impossible, pot ser degut a un problema amb els drets de modificaci&oacute; de la base de dades. Si us plau contacteu amb el vostre prove&iuml;dor d\'hostatge.',
 'analyse_xml' => 'An&agrave;lisi XML',
+'antispam_champ_vide' => 'Si us plau, deixeu aquest camp buit:',
 'avis_archive_incorrect' => 'el fitxer no &eacute;s pas un fitxer SPIP',
 'avis_archive_invalide' => 'el fitxer no &eacute;s pas v&agrave;lid',
 'avis_attention' => ' ATENCI&Oacute;&nbsp;!',

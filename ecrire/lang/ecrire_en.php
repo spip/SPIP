@@ -1076,7 +1076,7 @@ entered important modifications on the graphics or the structure of the site.',
 // U
 'utf8_convert_attendez' => 'Wait a few seconds and then reload this page.',
 'utf8_convert_avertissement' => 'You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.',
-'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@. If revision tracking is enabled it will in any case be damaged.',
+'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@.',
 'utf8_convert_erreur_deja' => 'Your site is already in @charset@, there is no point in converting.',
 'utf8_convert_erreur_orig' => 'Error: the character set @charset@ is not supported.',
 'utf8_convert_termine' => 'Finished!',

@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Hizivaat ar bajenn',
 'alerte_maj_impossible' => '<b>Diwallit&nbsp;!</b> N\'eus ket tu da hizivaat an diaz MySQL etrezek ar stumm @version@, marteze abalamour d\'ur gudenn aotre evit kemm an diaz titouro&ugrave;. Mar plij kit en darempred gant ho poder.',
 'analyse_xml' => 'Dielfenna&ntilde; XML',
+'antispam_champ_vide' => 'Na lakait netra ama&ntilde;&nbsp;:',
 'avis_archive_incorrect' => 'N\'eo ket ar restr-diell ur restr SPIP',
 'avis_archive_invalide' => 'N\'eo ket reizh ar restr diell',
 'avis_attention' => 'DIWALLIT&nbsp;!',

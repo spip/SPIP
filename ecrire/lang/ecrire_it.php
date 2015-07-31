@@ -1063,7 +1063,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 // U
 'utf8_convert_attendez' => 'Attendi qualche secondo e aggiorna la pagina.',
 'utf8_convert_avertissement' => 'Stai per convertire il contenuto del proprio database (articoli, brevi, ecc.) dal set di caratteri <b>@orig@</b> al set di caratteri <b>@charset@</b>.',
-'utf8_convert_backup' => 'Non dimenticare di fare prima un backup completo del sito. Inoltre si deve verificare che i modelli e i file lingua sono compatibili @charset@. In caso contrario il monitoraggio delle revisioini, se attivo, verr&agrave; danneggiato.',
+'utf8_convert_backup' => 'Non dimenticare di fare prima un backup completo del sito. Inoltre si deve verificare che i modelli e i file lingua sono compatibili @charset@.',
 'utf8_convert_erreur_deja' => 'Il tuo sito &egrave; gi&agrave; in @charset@, &egrave; inutile convertirlo...',
 'utf8_convert_erreur_orig' => 'Errore: il set di caratteri @charset@ non &egrave; supportato.',
 'utf8_convert_termine' => 'Finito!',
