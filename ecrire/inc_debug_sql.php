@@ -338,7 +338,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	   _T('admin_debug') . ' ' .
 	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
 	  "</title>\n",
-	  "<link rel='stylesheet' href='spip_admin.css' type='text/css'>",
+	  "<link rel='stylesheet' href='"._DIR_IMG_PACK."spip_admin.css' type='text/css'>",
 	  "</head>\n<body style='margin:0 10px;'>",
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 

@@ -31,6 +31,10 @@ function include_local($file, $silence=false) {
 		include($f);
 		return true;
 	}
+/*	else if (is_readable($f = _DIR_INCLUDE. preg_replace(',^inc-,', 'public-', $nom) . '.php')) {
+		include($f);
+		return true;
+	}*/
 	else {
 		if (!$silence)
 			spip_log($file . " illisible");
@@ -649,16 +653,9 @@ function charger_generer_url() {
 	// espace public
 	else {
 		// fichier inc-urls ? (old style)
-		include_local(_DIR_RACINE."inc-urls")
+		include_local(_DIR_RACINE."inc-urls", true)
 		// sinon fichier inc-urls-xxx
-		OR include_local(_DIR_RACINE."inc-urls-".$GLOBALS['type_urls']);
-	}
-
-	if (!function_exists('generer_url_special')) {
-		function generer_url_special($special, $args='') {
-			return _DIR_RACINE . "page.php3?fond=$special".
-				($args ? '&'.$args : '');
-		}
+		OR include_local(find_in_path('urls/'.$GLOBALS['type_urls'].'.php', _DIR_RESTREINT));
 	}
 }
 
@@ -718,14 +715,27 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	return "$ecrire$args";
 }
 
-// scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
+//
+// Adresse des scripts publics (a passer dans inc-urls...)
+//
 function generer_url_public($script, $args="", $no_entities=false) {
-	
-	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 
-	$ext = (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+	// transition : s'agit-il d'un fichier existant ?
+	$fichier = $script . (ereg('[.]php[3]?$', $script) ? '' : _EXTENSION_PHP);
+	if (@file_exists(_DIR_RACINE . $fichier))
+		$action = $fichier;
+	// sinon utiliser _DIR_RACINE?page=script
+	else
+		$action = '?page=' . $script;
 
-	return url_de_base() . $script . $ext . $args;
+	if ($args)
+		$action .=
+			(strpos($action, '?') !== false ? '&' : '?') . $args;
+
+	if (!$no_entities)
+		$action = quote_amp($action);
+
+	return url_de_base() . $action;
 }
 
 function generer_url_action($script, $args="", $no_entities=false) {
@@ -788,11 +798,8 @@ function spip_register_globals() {
 						# interdire la mise en cache de la page produite
 						switch ($var) {
 							case 'REMOTE_USER':
-								die ("$var interdite");
-								break;
 							case 'fond':
-								if (!defined('_SPIP_PAGE'))
-									die ("$var interdite");
+								die ("$var interdite");
 								break;
 							default:
 								define ('spip_interdire_cache', true);

@@ -86,7 +86,7 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
     spip_log("Acces refuse ($refus) au document " . $arg . ': ' . $file);
     global $fond;
     $fond = 404;
-    include_local("inc-public");
+    include_ecrire('public');
   }
   else
     {

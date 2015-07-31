@@ -31,7 +31,7 @@ define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 
-define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
+define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
 
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)\(?([A-Za-z_.]*)\)?`?');
 
@@ -45,7 +45,7 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ = new Inclure;
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
-		$champ->texte = $match[1];
+		$champ->texte = $match[2];
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,">","",$result,$champ);

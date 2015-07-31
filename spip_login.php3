@@ -22,6 +22,6 @@ AND strpos($_SERVER['REQUEST_URI'], 'var_url'))
 
 // Fin compatibilite
 
-include ("inc-public.php3");
+include ("ecrire/public.php");
 
 ?>

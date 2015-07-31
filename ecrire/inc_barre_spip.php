@@ -42,7 +42,7 @@ function afficher_barre_spip($champ, $forum=false) {
 	global $spip_lang, $spip_lang_right, $spip_lang_left;
 
 	$ret = ($num_barre > 0)  ? '' :
-	  '<script type="text/javascript" src="' . _DIR_RACINE. 'spip_barre.js"></script>';
+	  '<script type="text/javascript" src="' . _DIR_IMG_PACK. 'spip_barre.js"></script>';
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
 

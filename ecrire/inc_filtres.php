@@ -307,7 +307,7 @@ function url_var_recherche($url) {
 
 		$x = "var_recherche=".urlencode(_request('recherche'));
 
-		if (!strpos($url, '?'))
+		if (strpos($url, '?') === false)
 			return "$url?$x$ancre";
 		else
 			return "$url&$x$ancre";
@@ -1632,7 +1632,7 @@ function couleur_extraire($img, $x=10, $y=6) {
 			$GLOBALS["couleur_extraite"]["$fichier-$x-$y"] = $couleur;
 
 			$handle = fopen($dest, 'w');
-			fwrite($handle, "<"."?php \$GLOBALS[\"couleur_extraite\"][\"".$fichier."-".$x."-".$y."\"] = \"".$couleur."\"; ?>");
+			fwrite($handle, "<"."?php \$GLOBALS[\"couleur_extraite\"][\"".$fichier."-".$x."-".$y."\"] = \"".$couleur."\"; ?".">");
 			fclose($handle);
 		
 		}
@@ -1954,6 +1954,15 @@ function url_rss_forum($param) {
 		$cle = afficher_low_sec(0, "rss forum $arg");
 		return generer_url_action('rss', "op=forum&args=$arg&cle=$cle");
 	}
+}
+
+//
+// Un filtre applique a #PARAMETRES_FORUM, qui donne l'adresse de la page
+// de reponse
+//
+function url_reponse_forum($parametres) {
+	if (!$parametres) return '';
+	return generer_url_public('forum', $parametres);
 }
 
 //
@@ -2351,6 +2360,20 @@ function valeur_numerique($expr) {
 	if (preg_match(',^[0-9]+(\s*[+*-]\s*[0-9]+)*$,', trim($expr)))
 		eval("\$a = $expr;");
 	return intval($a);
+}
+
+// Si on fait un formulaire qui GET ou POST des donnees sur un lien
+// comprenant des arguments, il faut remettre ces valeurs dans des champs
+// hidden ; cette fonction calcule les hidden en question
+function form_hidden($action) {
+	$hidden = '';
+	if (false !== ($p = strpos($action, '?')))
+		foreach(preg_split('/&(amp;)?/',substr($action,$p+1)) as $c) {
+			$hidden .= "\n<input name='" . 
+				str_replace('=', "' value='", $c) .
+				"' type='hidden' />";
+	}
+	return $hidden;
 }
 
 ?>

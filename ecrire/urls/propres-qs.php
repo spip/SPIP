@@ -31,6 +31,6 @@ if (!defined('_terminaison_urls_propres'))
 
 define ('_debut_urls_propres', './?');
 
-include('inc-urls-propres.php3');
+include_ecrire('urls/propres');
 
 ?>
