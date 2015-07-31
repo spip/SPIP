@@ -65,10 +65,7 @@ function enfant($collection){
 				$fid = $logo[2];
 				$hash = calculer_action_auteur ("reduire $w $h");
 
-				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' style='margin-right: -6px; margin-top: -6px;' />";
-//				$les_enfants.= "<div style='position: absolute; $spip_lang_right: 0px; top: 0px; width: ".$w."px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' /></div>";
-//				$les_enfants.= "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$w' height='$h' align='$spip_lang_right' />";
-				
+				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='$spip_lang_right' style='margin-$spip_lang_right: -6px; margin-top: -6px;' />";
 			}
 		}
 
@@ -379,7 +376,7 @@ echo "</td>";
 
 if ($id_rubrique > 0 AND $flag_editable) {
 	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=5></td>\n";
-	echo "<td  align='right' valign='top'>";
+	echo "<td  align='$spip_lang_right' valign='top'>";
 	icone(_T('icone_modifier_rubrique'), "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
 	echo "</td>";
 }
@@ -474,7 +471,7 @@ echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
 if (strlen($les_enfants2) > 0) echo "<p>";
 echo "</td></tr>";
 
-echo "<tr><td style='text-align: right;' valign='bottom'><div align='right'>";
+echo "<tr><td style='text-align: $spip_lang_right;' valign='bottom'><div align='$spip_lang_right'>";
 if ($flag_editable) {
 	if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
 	else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.gif", "creer.gif");
@@ -587,7 +584,7 @@ afficher_articles(_T('info_tous_articles_presents'),
 	"WHERE statut=\"publie\" AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
 
 if ($id_rubrique > 0){
-	echo "<div align='right'>";
+	echo "<div align='$spip_lang_right'>";
 	icone(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif", "creer.gif");
 	echo "</div><p>";
 }
@@ -599,7 +596,7 @@ afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WH
 $activer_breves=lire_meta("activer_breves");
 
 if ($id_parent == "0" AND $id_rubrique != "0" AND $activer_breves!="non"){
-	echo "<div align='right'>";
+	echo "<div align='$spip_lang_right'>";
 	icone(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$id_rubrique&new=oui", "breve-24.gif", "creer.gif");
 	echo "</div><p>";
 }
@@ -619,7 +616,7 @@ if (lire_meta("activer_sites") == 'oui') {
 		$link->addVar('target', 'sites.php3');
 		$link->addVar('redirect', $clean_link->getUrl());
 	
-		echo "<div align='right'>";
+		echo "<div align='$spip_lang_right'>";
 		icone(_T('info_sites_referencer'), $link->getUrl(), "site-24.gif", "creer.gif");
 		echo "</div><p>";
 	}
