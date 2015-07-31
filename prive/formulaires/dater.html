@@ -19,8 +19,8 @@
 						onclick="var f=jQuery(this).parents('form').eq(0);f.find('li .input').show('fast').siblings('span').hide('fast');f.find('.boutons').show('fast');f.find('input.date').eq(0).focus();return false;"
 						><:bouton_changer:></a>&#93;</span>
 				<span class="input"[(#ENV{_saisie_en_cours}|non)style="display:none;"]>
-					<input type="text" class="date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
-					<input type="text" class="heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
+					<input type="text" class="text date" name="#GET{name}_jour" id="#GET{name}_jour" value="#ENV{#GET{name}_jour}" size="10"/>
+					<input type="text" class="text heure time" name="#GET{name}_heure" id="#GET{name}_heure" value="#ENV{#GET{name}_heure}" size="5"/>
 				</span>
 	]
 			</li>
