@@ -1011,7 +1011,7 @@ function traiter_listes ($texte) {
 // http://doc.spip.org/@supprime_img
 function supprime_img($letexte) {
 	$message = _T('img_indisponible');
-	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,iS',
+	return preg_replace(',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i',
 		"($message)", $letexte);
 }
 
@@ -1022,6 +1022,17 @@ function supprime_img($letexte) {
 // Si $doublons==true, on repere les documents sans calculer les modeles
 // mais on renvoie les params (pour l'indexation par le moteur de recherche)
 // http://doc.spip.org/@traiter_modeles
+
+define('_RACCOURCI_MODELE', 
+	 '(<([a-z_-]{3,})' # <modele
+	.'\s*([0-9]*)\s*' # id
+	.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
+	.'>)' # fin du modele >
+	.'\s*(<\/a>)?' # eventuel </a>
+       );
+
+define('_RACCOURCI_MODELE_DEBUT', '/^' . _RACCOURCI_MODELE .'/is');
+
 function traiter_modeles($texte, $doublons=false, $echap='') {
 	// detecter les modeles (rapide)
 	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
@@ -1031,15 +1042,7 @@ function traiter_modeles($texte, $doublons=false, $echap='') {
 			// Recuperer l'appel complet (y compris un eventuel lien)
 			// $regs : 1 => modele, 2 => type, 3 => id, 4 => params, 5 => a
 			$a = strpos($texte,$match[0]);
-			preg_match(
-			'/^' #debut
-			.'(<([a-z_-]{3,})' # <modele
-			.'\s*([0-9]*)\s*' # id
-			.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
-			.'>)' # fin du modele >
-			.'\s*(<\/a>)?' # eventuel </a>
-			.'/isS',
-			substr($texte, $a), $regs);
+			preg_match(_RACCOURCI_MODELE_DEBUT, substr($texte, $a), $regs);
 
 			if ($regs[5] AND preg_match(
 			',<a\s[^<>]*>\s*$,i', substr($texte, 0, $a), $r)) {
