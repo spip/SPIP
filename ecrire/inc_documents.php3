@@ -393,9 +393,8 @@ function inserer_documents($letexte) {
 	static $pile = 0;
 	if (++$pile > 5) return '';
 
-	foreach (
-	preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)
-	as $match) {
+	preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER);
+	foreach ($matches as $match) {
 		$type = strtoupper($match[1]);
 		if ($type == 'EMB')
 			$rempl = embed_document($match[2], $match[4]);

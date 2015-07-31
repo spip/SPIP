@@ -96,7 +96,7 @@ function traiter_math($letexte, $source='') {
 			$echap = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[1])."</p>\n";
 			$pos = strpos($texte_milieu, $regs[0]);
 			$texte_milieu = substr($texte_milieu,0,$pos)
-				. code_echappement($echap, 'div', $source)
+				. code_echappement($echap, $source)
 				. substr($texte_milieu,$pos+strlen($regs[0]));
 		}
 
@@ -105,7 +105,7 @@ function traiter_math($letexte, $source='') {
 			$echap = image_math($regs[1]);
 			$pos = strpos($texte_milieu, $regs[0]);
 			$texte_milieu = substr($texte_milieu,0,$pos)
-				. code_echappement($echap, 'span', $source)
+				. code_echappement($echap, $source)
 				. substr($texte_milieu,$pos+strlen($regs[0]));
 		}
 
