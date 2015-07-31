@@ -28,6 +28,9 @@ define("_ECRIRE_INC_VERSION", "1");
 # ou inversement ?
 @define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
+// nombre de repertoires depuis la racine
+
+$profondeur_url = _DIR_RESTREINT ? 0 : 1;
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -235,7 +238,6 @@ $auteur_session = '';
 $connect_statut = '';
 $hash_recherche = '';
 $hash_recherche_strict = '';
-$profondeur_url = 0;
 
 // Fonction definissant les repertoires et fichiers non mutualisables. 
 // Elle indique dans $test_dirs ceux devant etre accessibles en ecriture
@@ -346,7 +348,6 @@ OR _request('action') == 'test_dirs')) {
 
 	// Si on peut installer, on lance illico
 	if (!_DIR_RESTREINT) {
-		$profondeur_url = 1;
 		redirige_par_entete(generer_url_ecrire("install"));
 	} else {
 	// Si on est dans le site public, dire que qq s'en occupe

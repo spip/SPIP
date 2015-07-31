@@ -63,7 +63,6 @@ $GLOBALS['couleurs_spip'] = array(
 if (!defined('_ECRIRE_INC_VERSION')) {
 	include 'inc_version.php';
 }
-$GLOBALS['profondeur_url']=1;
 
 include_spip('inc/cookie');
 
