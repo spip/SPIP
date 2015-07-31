@@ -5,6 +5,7 @@ include ("ecrire/inc_version.php3");
 include_ecrire("inc_connect.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
+include_local("inc-cache.php3");
 
 if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 else $vars = $HTTP_GET_VARS;
@@ -102,8 +103,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		$type_upload = $row['upload'];
 	}
 
-	echo "$orig<p>$source<p>";
-
 	// Ne pas accepter les types non autorises
 	if ($type_upload != 'oui') return;
 	if ($type_inclus == 'non' AND $mode == 'vignette') return;
@@ -132,22 +131,26 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		else
 			$dest = "doc-$id_document";
 	}
-	$dest = ereg_replace("\.([^.]+)$", "", $dest).".$ext";
-	$loc = "IMG/$dest";
+	$dest = ereg_replace("\.([^.]+)$", "", $dest) . ".$ext";
 
-	if (!deplacer_fichier_upload($source, $loc)) return;
+	if (creer_repertoire("IMG", $ext))
+		$dest_path = "IMG/$ext/$dest";
+	else
+		$dest_path = "IMG/$dest";
+
+	if (!deplacer_fichier_upload($source, $dest_path)) return;
 
 	//
 	// Recopier le fichier
 	//
 
-	$size_image = getimagesize($loc);
+	$size_image = getimagesize($dest_path);
 	$type_image = $size_image[2];
 	if ($type_image) {
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
 	}
-	$taille = filesize($loc);
+	$taille = filesize($dest_path);
 
 	if ($nouveau) {
 		if (!$mode) $mode = $type_image ? 'vignette' : 'document';
@@ -155,7 +158,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		if ($largeur && $hauteur) $update .= "titre='image $largeur x $hauteur', ";
 	}
 
-	$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$loc' ".
+	$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
 		"WHERE id_document=$id_document";
 	mysql_query($query);
 	if ($id_document_lie) {

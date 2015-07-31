@@ -6,6 +6,31 @@ if (defined("_INC_CACHE")) return;
 define("_INC_CACHE", "1");
 
 
+//
+// Retourne true si le sous-repertoire peut etre cree, false sinon
+//
+
+function creer_repertoire($base, $subdir) {
+	if (file_exists("$base/.plat")) return false;
+	$path = $base.'/'.$subdir;
+	if (file_exists($path)) return true;
+
+	@mkdir($path, 0777);
+	@chmod($path, 0777);
+	$ok = false;
+	if ($f = @fopen("$path/.test", "w")) {
+		@fputs($f, '<?php $ok = true; ?'.'>');
+		@fclose($f);
+		include("$path/.test");
+	}
+	if (!$ok) {
+		$f = fopen("$base/.plat", "w");
+		fclose($f);
+	}
+	return $ok;
+}
+
+
 function purger_repertoire($dir, $age, $regexp = '') {
 	$handle = opendir($dir);
 	$t = time();

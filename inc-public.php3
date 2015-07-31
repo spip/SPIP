@@ -2,6 +2,7 @@
 
 $dir_ecrire = 'ecrire/';
 include ("ecrire/inc_version.php3");
+include_local ("inc-cache.php3");
 
 //
 // Ajouter un forum
@@ -24,7 +25,10 @@ $fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*'
 $fichier_cache = substr(rawurlencode($fichier_requete), 0, 128);
 $sousrep_cache = substr(md5($fichier_cache), 0, 1);
 
-if (!file_exists("CACHE/.plat") AND !file_exists("CACHE/$sousrep_cache")) {
+if (creer_repertoire("CACHE", $sousrep_cache))
+	$fichier_cache = "$sousrep_cache/$fichier_cache";
+
+/*if (!file_exists("CACHE/.plat") AND !file_exists("CACHE/$sousrep_cache")) {
 	@mkdir("CACHE/$sousrep_cache", 0777);
 	@chmod("CACHE/$sousrep_cache", 0777);
 	$ok = false;
@@ -42,7 +46,7 @@ if (!file_exists("CACHE/.plat") AND !file_exists("CACHE/$sousrep_cache")) {
 if (!file_exists("CACHE/.plat")) {
 	$fichier_cache = "$sousrep_cache/$fichier_cache";
 }
-
+*/
 $chemin_cache = "CACHE/$fichier_cache";
 
 
