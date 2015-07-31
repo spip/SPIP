@@ -96,9 +96,19 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	if ($pk = ((count($boucle->from) == 2) && !$cond)) {
 		$pk = nogroupby_if($desc, $a[1], $id_primary, $col);
 	}
+	
+	// pas de group by 
+	// si une seule jointure
+	// et si l'index de jointure est une primary key a l'arrivee !
+	if (!$pk
+	  AND (count($boucle->from) == 2)
+	  AND ($j == $a[1]['key']['PRIMARY KEY'])
+	  )
+	  $pk = true;
 
   // la clause Group by est en conflit avec ORDER BY, a completer
-	if (!$pk) foreach(liste_champs_jointures($nom,$desc,true) as $id_prim){
+	$groups = liste_champs_jointures($nom,$desc,true);
+	if (!$pk) foreach($groups as $id_prim){
 		$id_field = $nom . '.' . $id_prim;
 		if (!in_array($id_field, $boucle->group)) {
 			$boucle->group[] = $id_field;
