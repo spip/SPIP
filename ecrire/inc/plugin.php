@@ -433,7 +433,7 @@ function pipeline_precompile(){
 			}
 		}
 		$content .= "// Pipeline $action \n";
-		$content .= "function execute_pipeline_$action(\$val){\n";
+		$content .= "function execute_pipeline_$action(&\$val){\n";
 		$content .= $s_inc?"error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n":"";
 		$content .= $s_inc;
 		$content .= $s_inc?"error_reporting(SPIP_ERREUR_REPORT);\n":"";

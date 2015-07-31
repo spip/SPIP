@@ -56,7 +56,7 @@ function message_oubli($email, $param)
 function formulaires_oubli_traiter_dist(){
 
 	$message = message_oubli(_request('oubli'),'p');
-	return $message;
+	return array('message_ok'=>$message);
 }
 
 
