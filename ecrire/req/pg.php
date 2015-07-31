@@ -656,15 +656,16 @@ function spip_pg_cite($v, $t)
 			return "date '$v'";
 		}
 	}
-	elseif  (sql_test_int($t)
-		 AND (is_numeric($v)
-		      OR (strpos($v, 'CAST(') === 0)
-		      OR ($v[0]== 'x' ? 
-			  ctype_xdigit(substr($v,1)) :
-			  (ctype_xdigit(substr($v,2))
-			   AND $v[0]=='0' AND $v[1]=='x'))))
-		return $v[1]!=='x' ? $v : substr($v,1);
-	else return   ("'" . addslashes($v) . "'");
+	elseif (!sql_test_int($t))
+		return   ("'" . addslashes($v) . "'");
+	elseif (is_numeric($v) OR (strpos($v, 'CAST(') === 0))
+		return $v;
+	elseif ($v[0]== '0' AND $v[1]!=='x' AND  ctype_xdigit(substr($v,1)))
+		return  substr($v,1);
+	else {
+		spip_log("Warning: '$v'  n'est pas de type $t", 'pg');
+		return intval($v);
+	}
 }
 
 function spip_pg_hex($v)

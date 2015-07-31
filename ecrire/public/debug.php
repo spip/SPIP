@@ -166,20 +166,14 @@ function erreur_squelette($message='', $lieu='') {
 	}
 }
 
-//
-// Le debusqueur version 3
-//
-
-// appelee a chaque sortie de boucle (cf compiler.php) et a chaque requete
-// dans ce derniers cas on n'a pas le nom du squelette
-
+// appelee a chaque sortie de boucle
 // http://doc.spip.org/@boucle_debug_resultat
 function boucle_debug_resultat ($id, $type, $resultat) {
 	global $debug_objets;
 
 	$nom = $debug_objets['courant'];
 	  // ne pas memoriser plus de 3 tours d'une meme boucle
-	  if (count($debug_objets['resultat']["$nom$id"]) < 3)
+	if (count($debug_objets['resultat']["$nom$id"]) < 3)
 	    $debug_objets['resultat']["$nom$id"][] = $resultat;
 }
 
