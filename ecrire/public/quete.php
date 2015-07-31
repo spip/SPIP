@@ -73,13 +73,14 @@ function quete_profondeur($id, $connect='') {
 
 
 # retourne la date a laquelle comparer lorsqu'il y a des post-dates
+# cette date doit etre stable, de maniere a beneficier du query cache
+# du serveur SQL
 // http://doc.spip.org/@quete_date_postdates
 function quete_date_postdates() {
-	return
-	  date('Y-m-d H:i:s',
-	       ($GLOBALS['meta']['date_prochain_postdate'] > time())
-			? $GLOBALS['meta']['date_prochain_postdate']
-	       : (time()+(3600*24*365*2))) ;
+	if ($GLOBALS['meta']['date_prochain_postdate'] > time())
+		return date('Y-m-d H:i:s', $GLOBALS['meta']['date_prochain_postdate']);
+	else
+		return '2138-01-01 00:00:00';
 }
 
 
