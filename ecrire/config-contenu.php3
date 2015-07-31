@@ -34,20 +34,8 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 if ($changer_config == 'oui') {
 
 	// purger les squelettes si un changement de meta les affecte
-	if (($post_dates AND ($post_dates != lire_meta("post_dates")))
-		OR ($forums_publics AND ($forums_publics != lire_meta("forums_publics"))))
+	if ($post_dates AND ($post_dates != lire_meta("post_dates")))
 		$purger_skel = true;
-
-	// appliquer les changements de moderation forum
-	// forums_publics_appliquer : futur, saufnon, tous
-	$requete_appliquer = '';
-	$accepter_forum = substr($forums_publics,0,3);
-	if ($forums_publics_appliquer == 'saufnon') {
-		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE NOT (accepter_forum='non')";
-	} else if ($forums_publics_appliquer == 'tous') {
-		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum'";
-	}
-	if ($requete_appliquer) spip_query($requete_appliquer);
 
 	$liste_meta = array(
 		'activer_breves',
@@ -75,13 +63,6 @@ if ($changer_config == 'oui') {
 	if ($purger_skel) {
 		$hash = calculer_action_auteur("purger_squelettes");
 		@header ("Location: ../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=config-contenu.php3");
-	}
-}
-else {
-	$forums_publics = lire_meta("forums_publics");
-	if (!$forums_publics) {
-		ecrire_meta("forums_publics", "posteriori");
-		ecrire_metas();
 	}
 }
 
