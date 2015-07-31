@@ -60,7 +60,7 @@ while($row=mysql_fetch_array($result)){
 
 
 
-debut_page("Modifier la br&egrave;ve : &laquo; $titre_breve &raquo;", "documents", "breves");
+debut_page("Modifier la br&egrave;ve : &laquo; $titre &raquo;", "documents", "breves");
 
 
 debut_grand_cadre();
