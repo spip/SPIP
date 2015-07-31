@@ -456,7 +456,7 @@ function boites_de_config_articles($id_article, $flag_editable,
 	else
 		echo debut_block_invisible("redirection");
 
-	echo "<form action=" . http_php_script("articles","id_article=$id_article") . " method='post'>";
+	echo "<form action='" . http_php_scriptnq("articles","id_article=$id_article") . "' method='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 	$virtuelhttp = ($virtuel ? "" : "http://");
@@ -679,7 +679,7 @@ function dates_articles($id_article, $flag_editable, $statut_article, $date, $an
   if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_couleur();
 
-	echo "<FORM action=" . http_php_script("articles","") . " METHOD='GET' style='margin: 0px; padding: 0px;'>";
+	echo "<form action='" . http_php_scriptnq("articles","") . "' method='GET' style='margin: 0px; padding: 0px;'>";
 	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
 	if ($statut_article == 'publie') {
@@ -1222,7 +1222,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 
 
 	if (spip_num_rows($result) > 0) {
-		echo "<FORM action=" . http_php_script("articles","id_article=$id_article#auteurs") . " METHOD='post'>";
+		echo "<form action='" . http_php_scriptnq("articles","id_article=$id_article#auteurs") . "' method='post'>";
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
@@ -1394,7 +1394,7 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
   global $connect_statut;
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
-	echo "<FORM action=" . http_php_script("articles","") . " METHOD='get'>";
+	echo "<form action='" . http_php_scriptnq("articles","") . "' method='get'>";
 	debut_cadre_relief("racine-site-24.gif");
 	echo "<CENTER>";
 	

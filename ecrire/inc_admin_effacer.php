@@ -68,7 +68,7 @@ debut_boite_alerte();
 echo "\n<div class='serif'>";
 echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
 
-echo "\n<FORM action=" . http_php_script("delete_all","") . " METHOD='get'>";
+echo "\n<form action='" . http_php_scriptnq("delete_all","") . "' method='get'>";
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_effacer_tout')."'></div></FORM>";
 
 echo "\n</div>";

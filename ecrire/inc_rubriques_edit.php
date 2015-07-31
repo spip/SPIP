@@ -102,9 +102,9 @@ echo "</td></tr></table>";
 echo "<p>";
 
 if ($id_rubrique > 0)
-	echo "<FORM action=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . " METHOD='post'>";
+	echo "<form action='" . http_php_scriptnq("naviguer","id_rubrique=$id_rubrique") . "' method='post'>";
 else
-	echo "<FORM action=" . http_php_script("naviguer","") . " METHOD='post'>";
+	echo "<form action='" . http_php_scriptnq("naviguer","") . "' method='post'>";
 
 $titre = entites_html($titre);
 

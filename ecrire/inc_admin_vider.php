@@ -100,7 +100,7 @@ if ($quota_cache) {
 	echo _T('taille_cache_infinie');
 }
 echo ' ('._T('cache_modifiable_webmestre').')</p>', 
-  "\n<FORM action=" . http_php_script("../spip_cache","") . " METHOD='post'>", 
+  "\n<form action='" . http_php_scriptnq("../spip_cache","") . "' method='post'>", 
   "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur' />", 
   "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "' />", 
   "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui' />",
@@ -118,7 +118,7 @@ echo ' ('._T('cache_modifiable_webmestre').')</p>',
    '></iframe>',
    "</div>";
 
-echo "\n<FORM action=" . http_php_script("../spip_cache","") . " METHOD='post'>", "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>",
+echo "\n<form action='" . http_php_scriptnq("../spip_cache","") . "' method='post'>", "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>",
    "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache_images") . "'>",
   "\n<INPUT TYPE='hidden' NAME='purger_cache_images' VALUE='oui'>",
   "\n<INPUT TYPE='hidden' NAME='redirect' VALUE=",
@@ -147,7 +147,7 @@ debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_don
 	
 	}
 	
-	echo "\n<FORM action=" . http_php_script("admin_vider","") . " METHOD='post'>";
+	echo "\n<form action='" . http_php_scriptnq("admin_vider","") . "' method='post'>";
 	
 	$hash = calculer_action_auteur("purger_index");
 	
