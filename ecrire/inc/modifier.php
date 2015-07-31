@@ -255,7 +255,7 @@ function revision_forum($id_forum, $c=false) {
 	if ($r) {
 		spip_query("UPDATE spip_forum SET ip="._q($GLOBALS['ip']).", id_auteur="._q($GLOBALS['auteur_session']['id_auteur'])." WHERE id_forum="._q($id_forum));
 
-		spip_query("UPDATE spip_forum SET date_thread=NOW() WHERE id_thread=".$t['id_thread']);
+		sql_update("spip_forum", array("date_thread" => "NOW()"), "id_thread=".$t['id_thread']);
 	}
 }
 

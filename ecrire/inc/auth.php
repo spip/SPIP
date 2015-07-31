@@ -193,7 +193,7 @@ function inc_auth_dist() {
 		$connect_quand = strtotime($connect_quand);
 
 	if ((time() - $connect_quand)  >= 60) {
-		spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur=$connect_id_auteur");
+		sql_update("spip_auteurs", array("en_ligne" => "NOW()"), "id_auteur=$connect_id_auteur");
 	}
 
 	return ''; // i.e. pas de pb.

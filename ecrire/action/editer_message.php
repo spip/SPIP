@@ -108,7 +108,7 @@ function action_editer_message_post_choisir($id_message) {
 function action_editer_message_post_envoyer($id_message, $statut) {
 
 	sql_updateq("spip_messages", array("statut" => $statut), "id_message=$id_message");
-	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message=$id_message AND rv<>'oui'");
+	sql_update("spip_messages", array("date_heure" => "NOW()"), "id_message=$id_message AND rv<>'oui'");
 }
 
 // http://doc.spip.org/@action_editer_message_post_nouveau
