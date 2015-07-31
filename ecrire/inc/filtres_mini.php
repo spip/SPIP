@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 //
 // http://doc.spip.org/@resolve_path
 function resolve_path($url) {
-	list($url, $query) = explode('?', $url,2);
+	list($url, $query) = array_pad(explode('?', $url, 2), 2, null);
 	while (preg_match(',/\.?/,', $url, $regs)		# supprime // et /./
 	OR preg_match(',/[^/]*/\.\./,S', $url, $regs)	# supprime /toto/../
 	OR preg_match(',^/\.\./,S', $url, $regs))		# supprime les /../ du haut

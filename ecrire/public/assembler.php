@@ -49,7 +49,7 @@ function assembler($fond, $connect='') {
 	// une perennite valide a meme reponse qu'une requete HEAD (par defaut les
 	// pages sont dynamiques)
 	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-	AND !_VAR_MODE
+	AND (!defined('_VAR_MODE') OR !_VAR_MODE)
 	AND $chemin_cache
 	AND isset($page['entetes'])
 	AND isset($page['entetes']['Cache-Control'])
