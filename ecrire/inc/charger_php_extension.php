@@ -6,7 +6,7 @@
 // retourne true en cas de succes
 //
 // 3 etapes :
-// - 1) si le module est deja charge, on sort vaincoeur
+// - 1) si le module est deja charge, on sort vainqueur
 // - 2) on teste si l'on a la possibilite de charger un module
 // via la meta 'dl_allowed'. Si elle n'est pas renseignee, 
 // elle sera cree en fonction des parametres de php
