@@ -276,8 +276,11 @@ function maj_liens($pivot,$l='') {
 
 	@define('_LOG_FILTRE_GRAVITE',8);
 
+	$exceptions_pluriel = array('forum'=>'forum','syndic'=>'syndic');
+
 	$pivot = preg_replace(',[^\w],','',$pivot); // securite
-	$liens = "spip_".$pivot."s_liens";
+	$pivots = (isset($exceptions_pluriel[$pivot])?$exceptions_pluriel[$pivot]:$pivot."s");
+	$liens = "spip_".$pivots."_liens";
 	$id_pivot = "id_".$pivot;
 	// Creer spip_auteurs_liens
 	global $tables_auxiliaires;
@@ -290,7 +293,8 @@ function maj_liens($pivot,$l='') {
 		// Preparer
 		$l = preg_replace(',[^\w],','',$l); // securite
 		$primary = "id_$l";
-		$ancienne_table = 'spip_'.$pivot.'s_'.$l.'s';
+		$ls = (isset($exceptions_pluriel[$l])?$exceptions_pluriel[$l]:$l."s");
+		$ancienne_table = 'spip_'.$pivots.'_'.$ls;
 		$pool = 400;
 
 		$trouver_table = charger_fonction('trouver_table','base');
