@@ -204,14 +204,26 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 			$zone = substr($zone, $deb + 7);
 		$intro .= $zone;
 	}
-	$texte = $intro ? $intro : $texte;
-	
-	// On ne *PEUT* pas couper simplement ici car c'est du texte brut, qui inclus raccourcis et modeles
+
+	// [12025] On ne *PEUT* pas couper simplement ici car c'est du texte brut,
+	// qui inclus raccourcis et modeles
 	// un simple <articlexx> peut etre ensuite transforme en 1000 lignes ...
-	// par ailleurs le nettoyage des raccourcis ne tient pas compte des surcharges
-	// et enrichissement de propre
+	// par ailleurs le nettoyage des raccourcis ne tient pas compte
+	// des surcharges et enrichissement de propre
 	// couper doit se faire apres propre
-	//$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);	
+	//$texte = nettoyer_raccourcis_typo($intro ? $intro : $texte, $connect);
+
+	// Cependant pour des questions de perfs on coupe quand meme, en prenant
+	// large et en se mefiant des tableaux #1323
+
+	if (strlen($intro))
+		$texte = $intro;
+
+	else
+	if (strpos("\n".$texte, "\n|")===false
+	AND strlen($texte) > 2.5*$longueur)
+		$texte = couper($texte, 2*$longueur);
+
 
 	// ne pas tenir compte des notes ;
 	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
