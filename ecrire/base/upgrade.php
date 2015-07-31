@@ -25,6 +25,12 @@ function base_upgrade_dist($titre='', $reprise='')
 		maj_base();
 	}
 	spip_log("Fin de mise a jour SQL. Debut m-a-j acces et config");
+	
+	// supprimer quelques fichiers temporaires qui peuvent se retrouver invalides
+	spip_unlink(_DIR_TMP.'menu-rubriques-cache.txt');
+	spip_unlink(_DIR_TMP.'plugin_xml.cache');
+	spip_unlink(_DIR_SESSIONS.'ajax_fonctions.txt');
+	
 	include_spip('inc/acces');
 	ecrire_acces();
 	$config = charger_fonction('config', 'inc');
