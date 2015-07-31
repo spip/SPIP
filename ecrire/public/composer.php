@@ -44,8 +44,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 	// si squelette est deja compile et perenne, le charger
 	if (!squelette_obsolete($phpfile, $sourcefile)
 	AND lire_fichier ($phpfile, $contenu,
-	array('critique' => 'oui', 'phpcheck' => 'oui'))
-	AND $contenu = @unserialize($contenu)) 
+	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
 
 	if (@file_exists($fonc = $squelette . '_fonctions'.'.php')
@@ -72,7 +71,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 		}
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
-			ecrire_fichier ($phpfile, serialize($skel_code));
+			ecrire_fichier ($phpfile, $skel_code);
 			return $nom;
 		} else {
 			erreur_squelette(_T('zbug_erreur_compilation'), $sourcefile);
