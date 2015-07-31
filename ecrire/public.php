@@ -150,10 +150,11 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	
 	// Execution de la page calculee
+	define('_PIPELINE_SUFFIX',  test_espace_prive()?'_prive':'');
 
 	// traitements sur les entetes avant envoi
 	// peut servir pour le plugin de stats
-	$page['entetes'] = pipeline('affichage_entetes_final', $page['entetes']);
+	$page['entetes'] = pipeline('affichage_entetes_final'._PIPELINE_SUFFIX, $page['entetes']);
 
 
 	// 1. Cas d'une page contenant uniquement du HTML :
@@ -198,7 +199,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// (c'est ici qu'on fait var_recherche, validation, boutons d'admin,
 	// cf. public/assembler.php)
-	echo pipeline('affichage_final', $page['texte']);
+	echo pipeline('affichage_final'._PIPELINE_SUFFIX, $page['texte']);
 	// l'affichage de la page a pu lever des erreurs (inclusion manquante)
 	// il faut tester a nouveau
 	$debug = ((_request('var_mode') == 'debug') OR $tableau_des_temps) ? array(1) : array();
