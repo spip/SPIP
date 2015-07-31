@@ -444,7 +444,7 @@ if (@is_readable(_CACHE_PLUGINS_OPT)){
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
-	if (verif_plugin()) {
+	if (actualise_plugins_actifs()!==false) {
 		if (@is_readable(_CACHE_PLUGINS_OPT))
 			include_once(_CACHE_PLUGINS_OPT);
 		else spip_log("pipelines desactives: impossible de produire " . _CACHE_PLUGINS_OPT); 

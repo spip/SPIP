@@ -14,12 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');
 
 // http://doc.spip.org/@affiche_liste_plugins
-function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS){
+function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_actifs, $dir_plugins=_DIR_PLUGINS,$afficher_un = 'afficher_plugin'){
 	$get_infos = charger_fonction('get_infos','plugins');
-	$ligne_plug = charger_fonction('afficher_plugin','plugins');
+	$ligne_plug = charger_fonction($afficher_un,'plugins');
 	$liste_plugins = array_flip($liste_plugins);
 	foreach(array_keys($liste_plugins) as $chemin) {
-		$info = $get_infos($chemin);
+		$info = $get_infos($chemin, false, $dir_plugins);
 		$liste_plugins[$chemin] = strtoupper(trim(typo(translitteration(unicode2charset(html2unicode($info['nom']))))));
 	}
 	asort($liste_plugins);
@@ -40,12 +40,12 @@ function plugins_afficher_liste_dist($url_page,$liste_plugins, $liste_plugins_ac
 		// le rep suivant
 		$actif = @isset($fast_liste_plugins_actifs[$plug]);
 		$block_actif = $block_actif | $actif;
-		$expose = (urldecode(_request('plugin'))==$plug OR urldecode(_request('plugin'))==substr(_DIR_PLUGINS,strlen(_DIR_RACINE)) . $plug);
+		$expose = (urldecode(_request('plugin'))==$plug OR urldecode(_request('plugin'))==substr($dir_plugins,strlen(_DIR_RACINE)) . $plug);
 		$block .= $ligne_plug($url_page, $plug, $actif, $expose, "item", $dir_plugins)."\n";
 	}
 	$res .= $block_par_lettre ? affiche_block_initiale($initiale,$block,$block_actif): $block;
-
-	return $res ? "<ul class='liste-items plugins'>$res</ul>" : "";
+	$class = basename($dir_plugins);
+	return $res ? "<ul class='liste-items plugins $class'>$res</ul>" : "";
 }
 
 

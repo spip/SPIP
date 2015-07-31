@@ -105,7 +105,7 @@ function pipeline($action, $val=null) {
 			include_spip('inc/plugin');
 			// generer les fichiers php precompiles
 			// de chargement des plugins et des pipelines
-			verif_plugin();
+			actualise_plugins_actifs();
 			if (!($ok = @is_readable($charger)))
 				spip_log("fichier $charger pas cree");
 		}
@@ -124,7 +124,7 @@ function pipeline($action, $val=null) {
 		include_spip('inc/plugin');
 		// on passe $action en arg pour creer la fonction meme si le pipe
 		// n'est defini nul part ; vu qu'on est la c'est qu'il existe !
-		verif_plugin(strtolower($action));
+		actualise_plugins_actifs(strtolower($action));
 		spip_log("fonction $fonc absente : pipeline desactive");
 	}
 
@@ -701,6 +701,10 @@ function find_in_path ($file, $dirname='', $include=false) {
 	return $GLOBALS['path_files'][$GLOBALS['path_sig']][$dirname][$file] = $GLOBALS['path_files'][$GLOBALS['path_sig']][''][$dirname . $file] = false;
 }
 
+function clear_path_cache(){
+	$GLOBALS['path_files'] = array();
+	spip_unlink(_CACHE_CHEMIN);
+}
 function load_path_cache(){
 	$GLOBALS['path_files'] = array();
 	// si le visiteur est admin,

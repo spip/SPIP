@@ -310,6 +310,7 @@ ecrire/install/etape_.php -text
 ecrire/install/etape_1.php -text
 ecrire/install/etape_2.php -text
 ecrire/install/etape_3.php -text
+ecrire/install/etape_3b.php -text
 ecrire/install/etape_4.php -text
 ecrire/install/etape_chmod.php -text
 ecrire/install/etape_fin.php -text
@@ -407,6 +408,7 @@ ecrire/maj/vieille_base/1927/typedoc.php -text
 ecrire/maj/vieille_base/charger.php -text
 ecrire/maj/vieille_base/create.php -text
 ecrire/plugins/afficher_liste.php -text
+ecrire/plugins/afficher_nom_plugin.php -text
 ecrire/plugins/afficher_plugin.php -text
 ecrire/plugins/afficher_plugin_distant.php -text
 ecrire/plugins/afficher_repertoires.php -text

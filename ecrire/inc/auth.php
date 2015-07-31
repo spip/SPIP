@@ -449,7 +449,7 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
   *
   * @param array $auteur
   */
- function auth_loger($auteur){
+ function auth_loger($auteur, $refuse_cookie_admin=false){
 	if (!is_array($auteur) OR !count($auteur))
 		return false;
 
@@ -466,7 +466,7 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 
 	// Si on est admin, poser le cookie de correspondance
 	include_spip('inc/cookie');
-	if ($auteur['statut'] == '0minirezo') {
+	if (!$refuse_cookie_admin AND $auteur['statut'] == '0minirezo') {
 		spip_setcookie('spip_admin', '@'.$auteur['login'],
 		time() + 7 * 24 * 3600);
 	}
