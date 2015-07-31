@@ -95,7 +95,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo "<span class='arial2'>";
 			echo bouton_block_invisible("$id_version-$id_article-$id_auteur");
 			echo "<img src='img_pack/$logo_statut' border='0'>&nbsp;";
-			echo "<a class='$statut' style='font-weight: bold;' href='articles.php3?id_article=$id_article'>$titre</a>";
+			echo "<a class='$statut' style='font-weight: bold;' href='articles_versions.php3?id_article=$id_article'>$titre</a>";
 			echo "</span>";
 			echo "<span class='arial1'>";
 			echo " $date $nom";
