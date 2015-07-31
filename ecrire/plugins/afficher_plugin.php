@@ -89,9 +89,8 @@ function plugin_checkbox($id_input, $file, $actif)
 
 function plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 {
-	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file";
-	$desc = plugin_propre($info['description'], "$dir/lang/$prefix");
+	$desc = plugin_propre($info['description']);
+	$dir = $dir_plugins.$plug_file;
 	if (($p=strpos($desc, "<br />"))!==FALSE)
 		$desc = substr($desc, 0,$p);
 	$url = parametre_url($url_page, "plugin", $dir);
@@ -137,12 +136,14 @@ function plugin_etat_en_clair($etat){
 }
 
 // http://doc.spip.org/@plugin_propre
-function plugin_propre($texte, $module='') {
+function plugin_propre($texte) {
 	$mem = $GLOBALS['toujours_paragrapher'];
 	$GLOBALS['toujours_paragrapher'] = false;
-	if (preg_match("|^\w+_[\w_]+$|", $texte)) {
-		$texte = _T(($module ? "$module:" : '') . $texte);
-	}
+	$regexp = "|\[:([^>]*):\]|";
+	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs)
+		$texte = str_replace($regs[0],
+		_T('spip/ecrire/public:'.$regs[1]), $texte);
 	$texte = propre($texte);
 	$GLOBALS['toujours_paragrapher'] = $mem;
 	return $texte;
@@ -155,19 +156,16 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 	if (!$dir_plugins)
 		$dir_plugins = _DIR_PLUGINS;
 
-	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file/lang/$prefix";
-
 	$s = "";
 	// TODO: le traiter_multi ici n'est pas beau
 	// cf. description du plugin/_stable_/ortho/plugin.xml
 	if (isset($info['description']))
-	  $s .= "<div class='desc'>".plugin_propre($info['description'], $dir) . "</div>\n";
+		$s .= "<div class='desc'>".plugin_propre($info['description']) . "</div>\n";
 
 	if (isset($info['auteur']) AND trim($info['auteur']))
-	  $s .= "<div class='auteurs'>" . _T('public:par_auteur') .' '. plugin_propre($info['auteur'], $dir) . "</div>\n";
+		$s .= "<div class='auteurs'>" . _T('public:par_auteur') .' '. plugin_propre($info['auteur']) . "</div>\n";
 	if (isset($info['licence']))
-	  $s .= "<div class='licence'> - " . _T('intitule_licence') .' '. plugin_propre($info['licence'], $dir) . "</div>\n";
+		$s .= "<div class='licence'> - " . _T('intitule_licence') .' '. plugin_propre($info['licence']) . "</div>\n";
 
 	if (trim($info['lien'])) {
 		$lien = $info['lien'];

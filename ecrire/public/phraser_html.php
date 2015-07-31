@@ -134,7 +134,7 @@ function phraser_idiomes($texte,$ligne,$result) {
 		}
 		$champ->arg=$args;
 		$champ->nom_champ = strtolower($match[3]);
-		$champ->module = $match[2] ? $match[2] : MODULES_IDIOMES;
+		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
 		phraser_args(@$match[7], ":", '', array(), $champ);
 		$result[] = $champ;

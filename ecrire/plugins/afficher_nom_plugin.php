@@ -41,9 +41,7 @@ function plugins_afficher_nom_plugin_dist($url_page, $plug_file, $actif, $expose
 	// Cartouche Resume
 	$s .= "<div class='resume'>";
 
-	$prefix = $info['prefix'];
-	$dir = "$dir_plugins$plug_file/lang/$prefix";
-	$desc = plugin_propre($info['description'], $dir);
+	$desc = plugin_propre($info['description']);
 	$url_stat = parametre_url($url_page, "plugin",$dir_plugins.$plug_file);
 
 	$s .= "<strong class='nom'>".typo($info['nom'])."</strong>";
