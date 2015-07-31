@@ -391,11 +391,14 @@ function traite_svg($file)
 // (a passer dans ecrire/base/typedoc)
 // A noter : une extension 'pdf ' passe dans la requete de controle
 // mysql> SELECT * FROM spip_types_documents WHERE extension="pdf ";
-// fonction plus ou moins obsolete depuis [->@fixer_extension_document]
 // http://doc.spip.org/@corriger_extension
 function corriger_extension($ext) {
 	$ext = preg_replace(',[^a-z0-9],', '', $ext);
 	switch ($ext) {
+	case 'docx':
+		return 'doc';
+	case 'xlsx':
+		return 'xls';
 	case 'htm':
 		return 'html';
 	case 'jpeg':
@@ -414,14 +417,14 @@ function corriger_extension($ext) {
 function fixer_extension_document($doc) {
 	$extension = '';
 	$name = $doc['name'];
-	if ($t = sql_fetsel("extension", "spip_types_documents",
-	"mime_type=" . sql_quote($doc['type']))) {
+	if (preg_match(',[.]([^.]+)$,', $name, $r)
+	AND $t = sql_fetsel("extension", "spip_types_documents",
+	"extension=" . sql_quote(corriger_extension($r[1])))) {
 		$extension = $t['extension'];
 		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
 	}
-	else if (preg_match(',[.]([^.]+)$,', $name, $r)
-	AND $t = sql_fetsel("extension", "spip_types_documents",
-	"extension=" . sql_quote(strtolower($r[1])))) {
+	else if ($t = sql_fetsel("extension", "spip_types_documents",
+	"mime_type=" . sql_quote($doc['type']))) {
 		$extension = $t['extension'];
 		$name = preg_replace(',[.][^.]*$,', '', $doc['name']).'.'.$extension;
 	}

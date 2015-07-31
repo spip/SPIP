@@ -145,7 +145,8 @@ function texte_upload_manuel($dir, $mode = 'document') {
 		if (preg_match(",\.([^.]+)$,", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if (!isset($exts[$ext])) {
-				if ($ext == 'jpeg') $ext = 'jpg'; # cf. corriger_extension dans inc/getdocument
+				include_spip('inc/ajouter_documents');
+				$ext = corriger_extension($ext);
 				if (sql_fetsel('extension', 'spip_types_documents', $a = "extension='$ext'" . $inclus))
 					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
