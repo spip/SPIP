@@ -70,7 +70,6 @@ ecrire/charsets/translitcomplexe.php -text
 ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
-ecrire/exec/admin_plugin.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/base_delete_all.php -text
 ecrire/exec/base_repair.php -text
