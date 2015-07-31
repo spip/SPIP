@@ -31,7 +31,7 @@
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
 [<input type="hidden" name="titre" value="(#ENV{titre})" />]
-<input type="submit" class="spip_bouton" value="<:forum_valider:>" />]
+<div class="spip_bouton_div"><input type="submit" class="spip_bouton" value="<:forum_valider:>" /></div>]
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
@@ -62,7 +62,7 @@
 	<input type="text" class="forml" name="email_auteur" id="email_auteur" value="#ENV{email_auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>
 	</fieldset>
 
-	<input type="submit" class="spip_bouton" value="<:forum_voir_avant:>" />
+	<div class="spip_bouton_div"><input type="submit" class="spip_bouton" value="<:forum_voir_avant:>" /></div>
 ]
 
 </form>
