@@ -63,6 +63,17 @@ function action_copier_local_post($id_document) {
 		spip_log("convertit doc $id_document en local: $source => $fichier");
 		sql_updateq('spip_documents', array('fichier' =>$fichier, 'distant'=>'non', 'taille'=>$taille, 'descriptif'=> $row['descriptif']),"id_document=".$id_document);
 		
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'operation' => 'copier_local_post',
+					'table' => 'spip_documents',
+					'id_objet' => $id_document
+				),
+				'data' => null
+			)
+		);
+		
 	} else {
 		spip_log("echec copie locale $source");
 	}
