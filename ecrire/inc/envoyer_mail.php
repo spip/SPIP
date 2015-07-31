@@ -12,6 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/charsets');
+include_spip('inc/texte');
+
 // http://doc.spip.org/@nettoyer_titre_email
 function nettoyer_titre_email($titre) {
 	return str_replace("\n", ' ', textebrut(corriger_typo($titre)));
@@ -39,8 +42,6 @@ function nettoyer_caracteres_mail($t) {
 
 // http://doc.spip.org/@inc_envoyer_mail_dist
 function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = "") {
-	include_spip('inc/charsets');
-	include_spip('inc/filtres');
 
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
