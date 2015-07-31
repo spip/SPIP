@@ -119,7 +119,7 @@ if ($flag_function_exists) {
 		&& !ereg("ob_", ini_get('disable_functions'))
 		&& function_exists("ob_start"));
 	$flag_obgz = ($flag_ob && function_exists("ob_gzhandler"));
-	$flag_preg_replace = function_exists("preg_replace");
+	$flag_pcre = function_exists("preg_replace");
 	$flag_crypt = function_exists("crypt");
 	$flag_wordwrap = function_exists("wordwrap");
 	$flag_apc = function_exists("apc_rm");
@@ -133,7 +133,7 @@ else {
 	$flag_gz = false;
 	$flag_obgz = false;
 	$flag_ob = false;
-	$flag_preg_replace = false;
+	$flag_pcre = false;
 	$flag_crypt = true; // la non-existence de crypt est une exception
 	$flag_wordwrap = false;
 	$flag_apc = false;

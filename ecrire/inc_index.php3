@@ -35,8 +35,8 @@ function separateurs_indexation() {
 }
 
 function spip_split($reg, $texte) {
-	global $flag_preg_replace;
-	if ($flag_preg_replace)
+	global $flag_pcre;
+	if ($flag_pcre)
 		return preg_split("/$reg/", $texte);
 	else
 		return split($reg, $texte);
