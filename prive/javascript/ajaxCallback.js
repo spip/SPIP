@@ -7,7 +7,7 @@ if(!jQuery.load_handlers) {
 	function onAjaxLoad(f) {
 		jQuery.load_handlers.push(f);
 	};
-	
+
 	//
 	// Call the functions that have been added to onAjaxLoad
 	//
@@ -18,11 +18,11 @@ if(!jQuery.load_handlers) {
 
 	// jQuery uses _load, we use _ACBload
 	jQuery.fn._ACBload = jQuery.fn.load;
-	
+
 	jQuery.fn.load = function( url, params, callback ) {
-	
+
 		callback = callback || function(){};
-	
+
 		// If the second parameter was provided
 		if ( params ) {
 			// If it's a function
@@ -30,15 +30,15 @@ if(!jQuery.load_handlers) {
 				// We assume that it's the callback
 				callback = params;
 				params = null;
-			} 
+			}
 		}
 		var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status);};
-		
+
 		return this._ACBload( url, params, callback2 );
 	};
 
 	jQuery._ACBajax = jQuery.ajax;
-	
+
 	jQuery.ajax = function(type) {
 		//If called by _load exit now because the callback has already been set
 		if (jQuery.ajax.caller==jQuery.fn._load) return jQuery._ACBajax( type);
@@ -70,7 +70,7 @@ jQuery.fn.animeajax = function(end) {
 
 // s'il n'est pas totalement visible, scroller pour positionner
 // le bloc cible en haut de l'ecran
-jQuery.fn.positionner = function() {
+jQuery.fn.positionner = function(force) {
 	var offset = jQuery(this).offset({'scroll':false});
 	var hauteur = parseInt(jQuery(this).css('height'));
 	var scrolltop = self['pageYOffset'] ||
@@ -79,7 +79,7 @@ jQuery.fn.positionner = function() {
 	var h = jQuery(window).height();
 	var scroll=0;
 
-	if (offset['top'] - 5 <= scrolltop)
+	if (force || offset['top'] - 5 <= scrolltop)
 		scroll = offset['top'] - 5;
 	else if (offset['top'] + hauteur - h + 5 > scrolltop)
 		scroll = Math.min(offset['top'] - 5, offset['top'] + hauteur - h + 15);
@@ -101,7 +101,7 @@ function initReaderBuffer(){
 function updateReaderBuffer(){
 	var i = jQuery('#'+virtualbuffer_id);
 	if (!i.length) return;
-	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du 
+	// incrementons l'input hidden, ce qui a pour effet de forcer le rafraichissement du
 	// buffer du lecteur d'ecran (au moins dans Jaws)
 	i.attr('value',parseInt(i.attr('value'))+1);
 }
@@ -111,8 +111,8 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 	if (this.length)
 		initReaderBuffer();
   return this.each(function() {
-	var cible = target || this;
-		jQuery('form:not(.noajax)', this).each(function(){
+		var cible = target || this;
+		jQuery('form:not(.noajax,.bouton_action_post)', this).each(function(){
 		var leform = this;
 		var leclk,leclk_x,leclk_y;
 		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
@@ -157,9 +157,10 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					jQuery(cible)
 					.removeClass('loading')
 					.html(c)
-					.positionner()
+					.positionner(false)
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
-					.formulaire_dyn_ajax();
+					.formulaire_dyn_ajax()
+					.find('div.ajaxbloc').ajaxbloc();
 					updateReaderBuffer();
 				}
 			},
@@ -192,71 +193,108 @@ var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
 		initReaderBuffer();
-  return this.each(function() {
-  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
-	var blocfrag = jQuery(this);
-	
-	var on_pagination = function(c) {
-		jQuery(blocfrag)
-		.html(c)
-		.removeClass('loading')
-		.positionner();
-		updateReaderBuffer();
-	}
 
-	var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
-	if (!ajax_env || ajax_env==undefined) return;
-	ajax_env = ajax_env[1];
-	if (ajaxbloc_selecteur==undefined)
-		ajaxbloc_selecteur = '.pagination a,a.ajax';
-	jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
-		var url = this.href.split('#');
-		url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
-		if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
-			jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
-		}
-		jQuery(this).click(function(){
-			if (!ajax_confirm) {
-				// on rearme pour le prochain clic
-				ajax_confirm=true;
-				var d = new Date();
-				// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
-				if ((d.getTime()-ajax_confirm_date)<=2)
-					return false;
-			}
+  return this.each(function() {
+	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
+		var blocfrag = jQuery(this);
+
+		var on_pagination = function(c) {
 			jQuery(blocfrag)
-			.animeajax()
-			.addClass('loading');
-			if (preloaded_urls[url[0]]) {
-				on_pagination(preloaded_urls[url[0]]);
-				triggerAjaxLoad(document);
-			} else {
-				jQuery.ajax({
-					url: url[0],
-					success: function(c){
-						on_pagination(c);
-						preloaded_urls[url[0]] = c;
-					}
-				});
+			.html(c)
+			.removeClass('loading');
+			var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
+			if (a.length && a.is('a[name=ajax_ancre]')
+			){
+				a = a.attr('href');
+				setTimeout(function(){
+					jQuery(a,blocfrag).positionner(true);
+					//a = a.split('#');
+					//window.location.hash = a[1];
+				},10);
 			}
-			return false;
+			else {
+				jQuery(blocfrag).positionner(false);
+			}
+			updateReaderBuffer();
+		}
+
+		var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
+		if (!ajax_env || ajax_env==undefined) return;
+		ajax_env = ajax_env[1];
+		if (ajaxbloc_selecteur==undefined)
+			ajaxbloc_selecteur = '.pagination a,a.ajax';
+
+		jQuery(ajaxbloc_selecteur,this).not('.noajax').each(function(){
+			var url = this.href.split('#');
+			url[0] += (url[0].indexOf("?")>0 ? '&':'?')+'var_ajax=1&var_ajax_env='+encodeURIComponent(ajax_env);
+			if (url[1])
+				url[0] += "&var_ajax_ancre="+url[1];
+			if (jQuery(this).is('.preload') && !preloaded_urls[url[0]]) {
+				jQuery.ajax({"url":url[0],"success":function(r){preloaded_urls[url[0]]=r;}});
+			}
+			jQuery(this).click(function(){
+				if (!ajax_confirm) {
+					// on rearme pour le prochain clic
+					ajax_confirm=true;
+					var d = new Date();
+					// seule une annulation par confirm() dans les 2 secondes precedentes est prise en compte
+					if ((d.getTime()-ajax_confirm_date)<=2)
+						return false;
+				}
+				jQuery(blocfrag)
+				.animeajax()
+				.addClass('loading');
+				if (preloaded_urls[url[0]]) {
+					on_pagination(preloaded_urls[url[0]]);
+					triggerAjaxLoad(document);
+				} else {
+					jQuery.ajax({
+						url: url[0],
+						success: function(c){
+							on_pagination(c);
+							preloaded_urls[url[0]] = c;
+						}
+					});
+				}
+				return false;
+			});
+		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
+		jQuery('form.bouton_action_post.ajax:not(.noajax)', this).each(function(){
+			var leform = this;
+			var url = jQuery(this).attr('action').split('#');
+			jQuery(this)
+			.prepend("<input type='hidden' name='var_ajax' value='1' /><input type='hidden' name='var_ajax_env' value='"+(ajax_env)+"' />"+(url[1]?"<input type='hidden' name='var_ajax_ancre' value='"+url[1]+"' />":""))
+			.ajaxForm({
+				beforeSubmit: function(){
+					jQuery(blocfrag).addClass('loading').animeajax();
+				},
+				success: function(c){
+					on_pagination(c);
+					preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
+					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
+					jQuery(blocfrag)
+					.ajaxbloc();
+				},
+				iframe: jQuery.browser.msie
+			})
+			.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+			;
 		});
-	}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
   });
 };
 
 // Ajaxer les formulaires qui le demandent, au demarrage
 
 jQuery(function() {
-	jQuery('form').parents('div.ajax')
+	jQuery('form:not(.bouton_action_post)').parents('div.ajax')
 	.formulaire_dyn_ajax();
 	jQuery('div.ajaxbloc').ajaxbloc();
 });
 
 // ... et a chaque fois que le DOM change
 onAjaxLoad(function() {
-	if (jQuery){ 
-		jQuery('form', this).parents('div.ajax') 
+	if (jQuery){
+		jQuery('form:not(.bouton_action_post)', this).parents('div.ajax')
 		.formulaire_dyn_ajax();
 		jQuery('div.ajaxbloc', this)
 		.ajaxbloc();
