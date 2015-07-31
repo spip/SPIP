@@ -852,18 +852,23 @@ function get_spip_script($default='') {
 }
 
 // http://doc.spip.org/@generer_url_public
-function generer_url_public($script='', $args="", $no_entities=false, $rel=false) {
+function generer_url_public($script='', $args="", $no_entities=false, $rel=false, $action='') {
 	// si le script est une action (spip_pass, spip_inscription),
 	// standardiser vers la nouvelle API
 
-	$action = get_spip_script();
+	if (!$action) $action = get_spip_script();
 	if ($script)
 		$action = parametre_url($action, _SPIP_PAGE, $script, '&');
 
-	if ($args)
+	if ($args) {
+		if (is_array($args)) {
+			$r = '';
+			foreach($args as $k => $v) $r .= '&' . $k . '=' . $v;
+			$args = substr($r,1);
+		}
 		$action .=
 			(strpos($action, '?') !== false ? '&' : '?') . $args;
-
+	}
 	if (!$no_entities)
 		$action = quote_amp($action);
 
@@ -873,18 +878,7 @@ function generer_url_public($script='', $args="", $no_entities=false, $rel=false
 // http://doc.spip.org/@generer_url_prive
 function generer_url_prive($script, $args="", $no_entities=false) {
 
-	$action = 'prive.php';
-	if ($script)
-		$action = parametre_url($action, _SPIP_PAGE, $script, '&');
-
-	if ($args)
-		$action .=
-			(strpos($action, '?') !== false ? '&' : '?') . $args;
-
-	if (!$no_entities)
-		$action = quote_amp($action);
-
-	return url_de_base() . _DIR_RESTREINT_ABS . $action;
+	return generer_url_public($script, $args, $no_entities, false, _DIR_RESTREINT_ABS .  'prive.php');
 }
 
 // Pour les formulaires en methode POST,
