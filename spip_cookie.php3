@@ -133,7 +133,7 @@ if ($essai_login == "oui") {
 		if ($auth->login AND $auth->statut == '0minirezo') // force le cookie pour les admins
 			$cookie_admin = "@".$auth->login;
 
-		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."'";
+		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($auth->login)."'";
 		$result = spip_query($query);
 		if ($row_auteur = spip_fetch_array($result))
 			$cookie_session = creer_cookie_session($row_auteur);
