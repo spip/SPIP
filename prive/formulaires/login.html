@@ -2,10 +2,9 @@
 #HTTP_HEADER{"Pragma: no-cache"}
 
 <div class='formulaire_spip formulaire_login'>
-	[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{_deja_loge})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
-	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV**{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{_deja_loge})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
 
 	[(#ENV{echec_cookie})
 	<fieldset class='reponse_formulaire reponse_formulaire_erreur'>
@@ -21,12 +20,12 @@
 		<legend><:form_forum_identifiants:></legend>
 		<span id="spip_logo_auteur">#ENV*{_logo,''}</span>
 		<ul>
-			<li class="editer_login obligatoire">
+			<li class="editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur]">
 				<label for="var_login"><:login_login2:></label>
 				<input type='text' class='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{var_login})</span>]
 			</li>
-			<li class="editer_password obligatoire">
+			<li class="editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur]">
 				<label for="password"><:login_pass2:></label>
 				<input type='password' class='password' name='password' id='password' value="" size='40' />
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{password})</span>]
