@@ -75,10 +75,6 @@ function filtrer($filtre) {
 
 function image_filtrer($args){
 	static $inclure = true;
-	if ($inclure){
-		include_spip('inc/filtres_images');
-		$inclure = false;
-	}
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
 	if (!$texte) return;
@@ -88,6 +84,10 @@ function image_filtrer($args){
 			spip_log("Image absente : $texte");
 			return '';
 		} else {
+			if ($inclure){
+				include_spip('inc/filtres_images');
+				$inclure = false;
+			}
 			array_unshift($args,"<img src='$texte' />");
 			return call_user_func_array($filtre, $args);
 		}
@@ -97,6 +97,10 @@ function image_filtrer($args){
 	if (preg_match_all(
 	',(<(span|div) [^<>]*spip_documents[^<>]*>)?(<img\s.*>),Uims',
 	$texte, $tags, PREG_SET_ORDER)) {
+		if ($inclure){
+			include_spip('inc/filtres_images');
+			$inclure = false;
+		}
 		foreach ($tags as $tag) {
 			array_unshift($args,$tag[3]);
 			if ($reduit = call_user_func_array($filtre, $args)) {
