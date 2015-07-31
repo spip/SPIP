@@ -327,7 +327,7 @@ function ical_forums($id_utilisateur, $nom_site)
 			filtrer_ical ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
 			filtrer_ical ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure)))), "\n",
 			filtrer_ical ("CATEGORIES:"._T('icone_forum_suivi')), "\n",
-			filtrer_ical ("URL:" . generer_url_ecrire("controle_forum")), "\n",
+			filtrer_ical ("URL:" . generer_url_ecrire("controle_forum", "debut_id_forum=$id_forum")), "\n",
 			filtrer_ical ("END:VEVENT"), "\n";
 	}
 
