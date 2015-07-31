@@ -512,6 +512,24 @@ function date_ical ($date_heure, $minutes = 0) {
 	return date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+$minutes,0,mois($date_heure),jour($date_heure),annee($date_heure)));
 }
 
+// [(#ID_ARTICLE|exposer)] affiche 'on' si on est sur l'objet (article,
+// breve, rubrique, mot, auteur) correspondant a la page visualisee ;
+// Utiliser |exposer{on,off} pour modifier les valeurs de retour
+function exposer ($id, $identique='on', $different='') {
+	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
+
+	// pour l'ordre des variables respecter celui des boutons de inc-admin.php3
+	$objet = id_article
+	OR $objet = $id_breve
+	OR $objet = $id_rubrique
+	OR $objet = $id_mot
+	OR $objet = $id_auteur;
+
+	if ($id == $objet)
+		return $identique;
+	else
+		return $different;
+}
 
 
 //
