@@ -51,7 +51,7 @@ a mis a jour la valeur avec la page reelle]
 	<tbody>
 	<BOUCLE_liste_aut(AUTEURS){doublons 2}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} auta}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='statut'>[(#ID_AUTEUR|puce_changement_statut{#STATUT,0,auteur})]</td>
+			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
 			<td class='email'>[<a href='mailto:(#EMAIL)'>[(#EMAIL|couper{30})]</a>]</td>
 			<td class='action'><button class="button" name="ajouter_lien[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET]" value="+"><:lien_ajouter_auteur:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>

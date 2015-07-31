@@ -6,7 +6,7 @@
 	<ul class="menu breves">
 		<BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse}{statut==.?}{pagination #GET{nb} #GET{nomp}}>
 			<li><a href="[(#ID_BREVE|generer_url_entite{breve})]"
-						title="[(#VAL{breve}|objet_info{texte_objet}|_T) #ID_BREVE]">[(#ID_BREVE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,breve}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
+						title="[(#VAL{breve}|objet_info{texte_objet}|_T) #ID_BREVE]">[(#STATUT|puce_statut{breve,#ID_BREVE,#ID_RUBRIQUE}) ][(#TITRE|couper{80}|sinon{<:info_sans_titre:>})]</a></li>
 		</BOUCLE_breves>
 	</ul>
 	[<p class="pagination">[<em>(#VAL{breve}|objet_info{texte_objets}|_T)</em>](#PAGINATION{prive})</p>]

@@ -8,7 +8,7 @@
 				<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
 				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]"
 				onclick="jQuery('#reloadmain').attr('href',this.href).followLink();return false;"
-				><strong>[(#ID_RUBRIQUE|puce_changement_statut{#STATUT,#ID_PARENT,rubrique}) ][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong></a>
+				><strong>[(#STATUT|puce_statut{rubrique}) ][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong></a>
 
 				<INCLURE{fond=prive/squelettes/inclure/plan-articles,id_rubrique,env,ajax}>
 				<INCLURE{fond=prive/squelettes/inclure/plan-sites,id_rubrique,env,ajax}>

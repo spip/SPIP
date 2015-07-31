@@ -45,7 +45,7 @@ function selec_statut(id, type, decal, puce, script) {
 	if (!accepter_change_statut || !node) return;
 
 	$('#statutdecal'+type+id)
-	.css('marginLeft', decal+'px')
+	.css('margin-left', decal+'px')
 	.removeClass('on');
 
 	$.get(script, function(c) {

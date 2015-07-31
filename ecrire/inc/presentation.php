@@ -22,8 +22,6 @@ include_spip('inc/puce_statut');
 include_spip('inc/filtres_ecrire');
 include_spip('inc/filtres_boites');
 
-define('_ACTIVER_PUCE_RAPIDE', true);
-
 // http://doc.spip.org/@debut_cadre
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "", $id="", $class="", $padding=true) {
 	$style_mapping=array('r'=>'simple','e'=>'raccourcis','couleur'=>'basic highlight','couleur-foncee'=>'basic highlight','trait-couleur'=>'important','alerte'=>'notice','info'=>'info','sous_rub'=>'simple sous-rub');
