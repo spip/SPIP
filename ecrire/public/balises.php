@@ -1348,7 +1348,7 @@ function balise_SET_dist($p){
 
 	$p->code = "vide(\$Pile['vars'][$_nom] = $_valeur)";
 
-	#$p->interdire_scripts = true;
+	$p->interdire_scripts = false; // la balise ne renvoie rien
 	return $p;
 }
 
