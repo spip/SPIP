@@ -337,9 +337,9 @@ function puce_statut_changement_rapide($id, $statut, $id_rubrique, $type='articl
 	else {
 
 		$nom = "puce_statut_";
-	  $action = generer_url_ecrire('puce_statut',"",true);
-	  $action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut(this, '$nom', '$type', '$id', '$action'); }";
-	  $over = " onmouseover=\"$action\"";
+		$action = generer_url_ecrire('puce_statut',"",true);
+		$action = "if (!this.puce_loaded) { this.puce_loaded = true; prepare_selec_statut(this, '$nom', '$type', '$id', '$action'); }";
+		$over = " onmouseover=\"$action\"";
 
 		$lang_dir = lang_dir(isset($GLOBALS['lang_objet']) ? $GLOBALS['lang_objet'] : "");
 		return 	"<span class='puce_objet $type' id='$nom$type$id' dir='$lang_dir'$over>"
