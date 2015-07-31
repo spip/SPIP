@@ -31,7 +31,6 @@ if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 
 global $IMPORT_tables_noerase;
 $IMPORT_tables_noerase[]='spip_meta';
-$GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
 // Retourne la premiere balise XML figurant dans le buffet de la sauvegarde 
 // et avance dans ce buffet jusqu'au '>' de cette balise.
@@ -257,7 +256,7 @@ function import_tables($request, $dir) {
 
 	import_affiche_javascript($taille);
 
-	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	if (function_exists('ob_flush')) @ob_flush();
 	flush();
 	$oldtable ='';
 	$cpt = 0;
@@ -352,7 +351,7 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 		echo "document.progression.taille.value='$taille';\n";
 	}
 	echo "\n--></script>\n";
-	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	if (function_exists('ob_flush')) @ob_flush();
 	flush();
 }
 
