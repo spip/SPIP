@@ -413,6 +413,8 @@ ecrire/action/tester_taille.php -text
 ecrire/action/tourner.php -text
 ecrire/action/virtualiser.php -text
 ecrire/balise/index.php -text
+ecrire/balise/logo_.php -text
+ecrire/balise/url_.php -text
 ecrire/base/admin_repair.php -text
 ecrire/base/convert_sql_utf8.php -text
 ecrire/base/convert_utf8.php -text

@@ -163,14 +163,14 @@ function calculer_balise($nom, $p) {
 			return $res;
 	}
 
-	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (strncmp('LOGO_', $nom,5)==0) {
-		if (!function_exists($f = 'calculer_balise_logo')) $f .= '_dist';
+	// Certaines des balises comportant un _ sont generiques
+	if ($f = strpos($nom, '_')
+	AND $f = charger_fonction(substr($nom,0,$f), 'balise', true)) {
 		$res = $f($p);
 		if ($res !== NULL)
 			return $res;
 	}
-
+	spip_log("bal $nom");
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 
