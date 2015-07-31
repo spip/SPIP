@@ -50,9 +50,9 @@ function acces_statut($id_auteur, $statut, $bio)
 	include_spip('inc/filtres');
 	if (!($s = tester_config('', $bio))) return $statut;
 	include_spip('action/editer_auteur');
-	instituer_auteur($id_auteur,array('statut'=> $s));
-	include_spip('inc/modifier');
-	revision_auteur($id_auteur, array('bio'=>''));
+	// en deux fois pour changer d'abord le statut, puis la bio
+	auteur_modifier($id_auteur,array('statut'=> $s));
+	auteur_modifier($id_auteur, array('bio'=>''));
 	include_spip('inc/session');
 	session_set('statut',$s);
 
