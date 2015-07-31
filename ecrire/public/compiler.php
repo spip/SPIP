@@ -910,12 +910,13 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 
 	$boucles = compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $connect);
 	// restituer les echappements
-	if ($esc) foreach($boucles as $i=>$boucle) {
-		$boucles[$i]->return = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return chr($a[1]);'),
-			$boucle->return);
-		$boucles[$i]->descr['squelette'] = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return "\\\\".chr($a[1]);'),
-			$boucle->descr['squelette']);
-	}
+	if ($esc)
+		foreach($boucles as $i=>$boucle) {
+			$boucles[$i]->return = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return chr($a[1]);'),
+				$boucle->return);
+			$boucles[$i]->descr['squelette'] = preg_replace_callback(",$inerte-(\d+)-,", create_function('$a', 'return "\\\\".chr($a[1]);'),
+				$boucle->descr['squelette']);
+		}
 	
 	$debug = ($boucles AND defined('_VAR_MODE') AND _VAR_MODE == 'debug');
 	if ($debug) {
