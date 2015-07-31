@@ -408,7 +408,11 @@ if ($relief) {
 /// Documents associes a la rubrique
 	if ($id_rubrique > 0) {
 
-	  afficher_documents_et_portfolio($id_rubrique, "rubrique", $flag_editable);
+	echo afficher_portfolio($id_rubrique, 'rubrique', 'portfolio', $flag_editable), afficher_portfolio($id_rubrique, 'rubrique', 'documents', $flag_editable);
+
+	if ($GLOBALS['meta']["documents_rubrique"] != 'non' AND $flag_editable)
+		echo afficher_formulaire_upload($id_rubrique, "rubrique", $flag_editable);
+
 	}
 
 ////// Supprimer cette rubrique (si vide)

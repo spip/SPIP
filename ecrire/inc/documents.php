@@ -319,23 +319,38 @@ function afficher_transferer_upload($texte_upload)
 }
 
 //
-// Afficher les documents non inclus
-// 
+// Affiche le portfolio et les documents lies a l'article (ou a la rubrique)
+// => Nouveau : au lieu de les ignorer, on affiche desormais avec un fond gris
+// les documents et images inclus dans le texte.
 
 // http://doc.spip.org/@afficher_portfolio
 function afficher_portfolio(
-	$documents = array(),	# liste des documents, avec toutes les donnees
+	$doc,		# tableau des documents ou numero de l'objet attachant
 	$type = "article",	# article ou rubrique ?
 	$album = 'portfolio',	# album d'images ou de documents ?
 	$flag_modif = false,	# a-t-on le droit de modifier ?
-	$couleur,		# couleur des cases du tableau
-	$appelant =''		# pour le rappel
+	$couleur='',		# couleur des cases du tableau
+	$appelant =''		# pour le rappel (cf plugin)
 ) {
-	charger_generer_url();
-	global $connect_id_auteur, $connect_statut;
-	global $options,  $couleur_foncee;
-	global $spip_lang_left, $spip_lang_right;
+	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 
+	if (is_int($doc)) {
+		if ($album == 'portfolio') {
+			$lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+			$couleur = $couleur_claire;
+		} else {
+			$lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l,spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension NOT IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+			$couleur = '#aaaaaa';
+		}
+
+		$documents = array();
+		while ($document = spip_fetch_array($lies))
+			$documents[] = $document;
+	} else $documents = $doc;
+
+	if (!$documents) return '';
+
+	charger_generer_url();
 	// la derniere case d'une rangee
 	$bord_droit = ($album == 'portfolio' ? 2 : 1);
 	$case = 0;
@@ -374,12 +389,30 @@ function afficher_portfolio(
 		}
 
 	}
+
 	// fermer la derniere ligne
 	if ($case) {
 		$res .= "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
 		$res .= "</tr>";
 	}
-	return $res;
+
+	if (is_int($doc)) {
+		$head = "\n<div id='$album'>&nbsp;</div>"
+		. "\n<div style='background-color: $couleur; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>\n<b>".majuscules(_T("info_$album"))."</b></div>";
+
+		if (count($documents) > 3) {
+			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'><a href='"
+			. redirige_action_auteur('supprimer', "$album/$doc/$type", $GLOBALS['exec'], "id_$type=$doc")
+			. "'>" 
+			. _L('Supprimer_tout')
+			. "</a></div>\n";
+		}
+	} else $head = '';
+
+	return $head
+	. "\n<table width='100%' cellspacing='0' cellpadding='4'>"
+	. $res
+	. "</table>";	  
 }
 
 
@@ -486,107 +519,42 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 			    "&id_document=$id_document&id=$id&type=$type");
 }
 
-//
-// Affiche le portfolio et les documents lies a l'article (ou a la rubrique)
-// => Nouveau : au lieu de les ignorer, on affiche desormais avec un fond gris
-// les documents et images inclus dans le texte.
-//
 // http://doc.spip.org/@afficher_documents_et_portfolio
-function afficher_documents_et_portfolio($id, $type = "article", $flag_modif) {
-	global $couleur_claire, $spip_lang_left, $spip_lang_right;
+function afficher_formulaire_upload($id, $type = "article", $flag_modif) {
+	global $spip_lang_left, $spip_lang_right;
+
+	/// Ajouter nouveau document/image
 
 	if ($type == "rubrique")
 			$script = 'naviguer'; // exception
 	else
 			$script = $type.'s'; // 'exec=articles', seul cas actuellement
+	// eviter le formulaire upload qui se promene sur la page
+	// a cause des position:relative incompris de MSIE
 
-	// Afficher portfolio
-	/////////
+	$div = $GLOBALS['browser_name']=="MSIE";
 
-	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
+	$res = "<p>&nbsp;</p>";
 
-	//
-	// recuperer tout le tableau des images du portfolio
-	//
-
-	$images = array();
-	while ($image = spip_fetch_array($images_liees)) {
-		$images[$image['id_document']] = $image;
-	}
-
-	$n = count($images);
-	if ($n) {
-		echo "<a name='portfolio'></a>";
-		echo "\n<div>&nbsp;</div>";
-		echo "\n<div style='background-color: $couleur_claire; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>\n<b>".majuscules(_T('info_portfolio'))."</b></div>";
-
-		if ($n > 3) {
-		$res = "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'><a href='"
-		  . redirige_action_auteur('supprimer', "portfolio/$id/$type", $GLOBALS['exec'], "id_$type=$id")
-		. "'>" 
-		  . _L('Supprimer_le_portfolio')
-		  . "</a></div>\n";
-		echo $res;
+	if ($div) 
+			$res .= "<div>";
+	else 	 {
+			$res .= "\n<div align='right'>";
+			$res .= "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n";
 		}
-
-		echo "\n<table width='100%' cellspacing='0' cellpadding='3'>";
-
-		echo afficher_portfolio ($images, $type, 'portfolio', $flag_modif, $couleur_claire);
-
-		echo "\n</table>\n";
-	}
-
-	//// Documents associes
-	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id AND l.id_document=docs.id_document AND docs.mode='document'" . (!$images ? '' : " AND docs.id_document NOT IN (".join(',', array_keys($images)).") ") . " ORDER BY 0+docs.titre, docs.date");
-
-	$documents = array();
-	while ($document = spip_fetch_array($documents_lies))
-		$documents[] = $document;
-
-	$n = count($documents);
-	if ($n) {
-		echo "<a id='documents'></a>";
-		echo "\n<div>&nbsp;</div>";
-		echo "\n<div style='background-color: #aaaaaa; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>". majuscules(_T('info_documents')) ."</b></div>";
-	
-		if ($n > 3) {
-		$res = "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'><a href='"
-		. redirige_action_auteur('supprimer', "fonds/$id/$type", $GLOBALS['exec'], "id_$type=$id")
-		. "'>"
-		. _L('Supprimer_tous_ces_documents')
-		. "</a></div>\n";
-		echo $res;
-		}
-
-		echo "\n<table width='100%' cellspacing='0' cellpadding='5'>";
-
-		echo afficher_portfolio ($documents, $type, 'documents', $flag_modif, '#aaaaaa');
-		echo "\n</table>";
-	}
-
-	if ($GLOBALS['meta']["documents_$type"] != 'non' AND $flag_modif) {
-		/// Ajouter nouveau document/image
-
-		global $browser_name;
-		echo "<p>&nbsp;</p>";
-		if ($browser_name=="MSIE") // eviter le formulaire upload qui se promene sur la page a cause des position:relative
-			echo "<div>";
-		else 	 {
-			echo "\n<div align='right'>";
-			echo "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n";
-		}
-		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
-		echo formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),
+	$res .= debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'));
+	$res .= formulaire_upload(generer_url_ecrire($script, "id_$type=$id"),
 				       $id,
 				       _T('info_telecharger_ordinateur'),
 				       '',
 				       'document',
 				       $type);
-		echo fin_cadre_relief();
-		if ($browser_name!=="MSIE") // eviter le formulaire upload qui se promene sur la page a cause des position:relative
-			echo "</td></tr></table>";
-		echo "</div>";
-	}
+	$res .= fin_cadre_relief(true);
+	if (!$div)
+			$res .= "</td></tr></table>";
+	$res .= "</div>";
+
+	return $res;
 }
 
 
