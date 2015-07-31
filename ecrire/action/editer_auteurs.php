@@ -47,7 +47,7 @@ function action_editer_auteurs_dist() {
 
 			if ($n == 1)
 			# Bingo. Signaler le choix fait.
-				ajouter_auteur_et_rediriger($r[2], $r[1], $res[0], "$redirect&ids=" . $res[0] . "&cherche_auteur=" . $res[0] . $ancre);
+				ajouter_auteur_et_rediriger($r[2], $r[1], $res[0], "$redirect&ids=" . $res[0] . "&cherche_auteur=" . rawurlencode($cherche) . $ancre);
 			# Trop vague. Le signaler.
 			elseif ($n > 16)
 				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=-1" . $ancre);
