@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************************\
+/* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2012                                                *
@@ -10,24 +10,48 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Definition de l'API SQL
+ * 
+ * Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
+ * Cette version 1 est un ensemble de fonctions ecrites rapidement
+ * pour generaliser le code strictement MySQL de SPIP <= 1.9.2
+ * Des retouches sont a prevoir apres l'experience des premiers portages.
+ * Les symboles sql_* (constantes et nom de fonctions) sont reserves
+ * a cette interface, sans quoi le gestionnaire de version dysfonctionnera.
+ *
+ * @package SQL\API
+ * @version 1
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/** Version de l'API SQL */
 define('sql_ABSTRACT_VERSION', 1);
 include_spip('base/connect_sql');
 
-// Ce fichier definit la couche d'abstraction entre SPIP et ses serveurs SQL.
-// Cette version 1 est un ensemble de fonctions ecrites rapidement
-// pour generaliser le code strictement MySQL de SPIP <= 1.9.2
-// Des retouches sont a prevoir apres l'experience des premiers portages.
-// Les symboles sql_* (constantes et nom de fonctions) sont reserves
-// a cette interface, sans quoi le gestionnaire de version dysfonctionnera.
 
-// Fonction principale. Elle charge l'interface au serveur de base de donnees
-// via la fonction spip_connect_version qui etablira la connexion au besoin.
-// Elle retourne la fonction produisant la requete SQL demandee
-// Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
 
-// http://doc.spip.org/@sql_serveur
+/**
+ * Charge le serveur de base de donnees
+ * 
+ * Fonction principale. Elle charge l'interface au serveur de base de donnees
+ * via la fonction spip_connect_version qui etablira la connexion au besoin.
+ * Elle retourne la fonction produisant la requete SQL demandee
+ * Erreur fatale si la fonctionnalite est absente sauf si le 3e arg <> false
+ *
+ * @internal Cette fonction de base est appelee par les autres fonctions sql_*
+ * @param string $ins_sql
+ * 		Instruction de l'API SQL demandee (insertq, update, select...)
+ * @param string $serveur
+ * 		Nom du connecteur ('' pour celui par defaut a l'installation de SPIP)
+ * @param bool $continue
+ * 		true pour ne pas generer d'erreur si le serveur SQL ne dispose pas de la fonction demandee
+ * @return string|array
+ * 		Nom de la fonction a appeler pour l'instruction demandee pour le type de serveur SQL correspondant au fichier de connexion.
+ * 		Si l'instruction demandee n'existe pas, retourne la liste de toutes les instructions du serveur SQL avec $continue a true.
+ * 
+**/
 function sql_serveur($ins_sql='', $serveur='', $continue=false) {
 	static $sql_serveur = array();
 	if (!isset($sql_serveur[$serveur][$ins_sql])){
@@ -38,8 +62,24 @@ function sql_serveur($ins_sql='', $serveur='', $continue=false) {
 	return $sql_serveur[$serveur][$ins_sql];
 }
 
-// Demande si un charset est disponible. 
-// http://doc.spip.org/@sql_get_charset
+/**
+ * Demande si un charset est disponible
+ *
+ * Demande si un charset (tel que utf-8) est disponible
+ * sur le gestionnaire de base de donnees de la connexion utilisee
+ *
+ * @api
+ * @see sql_set_charset() pour utiliser un charset
+ * 
+ * @param string $charset
+ * 		Le charset souhaite
+ * @param string $serveur
+ * 		Le nom du connecteur
+ * @param bool $option
+ * 		Inutilise
+ * @return string|false
+ * 		Retourne le nom du charset si effectivement trouve, sinon false.
+**/
 function sql_get_charset($charset, $serveur='', $option=true){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
 	$desc = sql_serveur('', $serveur, true,true);
@@ -53,36 +93,77 @@ function sql_get_charset($charset, $serveur='', $option=true){
 	return false;
 }
 
-// Regler le codage de connexion
 
-// http://doc.spip.org/@sql_set_charset
+/**
+ * Regler le codage de connexion
+ *
+ * Affecte un charset (tel que utf-8) sur la connexion utilisee
+ * avec le gestionnaire de base de donnees
+ *
+ * @api
+ * @see sql_get_charset() pour tester l'utilisation d'un charset
+ * 
+ * @param string $charset
+ * 		Le charset souhaite
+ * @param string $serveur
+ * 		Le nom du connecteur
+ * @param bool $option
+ * 		Inutilise
+ * @return bool
+ * 		Retourne true si elle reussie.
+**/
 function sql_set_charset($charset,$serveur='', $option=true){
 	$f = sql_serveur('set_charset', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
 	return $f($charset, $serveur, $option!==false);
 }
 
-// Fonction pour SELECT, retournant la ressource interrogeable par sql_fetch.
-// Recoit en argument:
-// - le tableau (ou chaine) des champs a ramener (Select)
-// - le tableau (ou chaine) des tables a consulter (From)
-// - le tableau (ou chaine) des conditions a remplir (Where)
-// - le critere de regroupement (Group by)
-// - le tableau de classement (Order By)
-// - le critere de limite (Limit)
-// - le tableau des des post-conditions a remplir (Having)
-// - le serveur sollicite (pour retrouver la connexion)
-// - option peut avoir 3 valeurs : 
-//	false -> ne pas l'executer mais la retourner, 
-//	continue -> ne pas echouer en cas de serveur sql indisponible,
-//	true|array -> executer la requete.
-// Le cas array est, pour une requete produite par le compilateur,
-// un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
-// Retourne false en cas d'erreur, apres l'avoir denoncee.
-// Les portages doivent retourner la requete elle-meme en cas d'erreur,
-// afin de disposer du texte brut.
 
-// http://doc.spip.org/@sql_select
+
+/**
+ * Effectue une requete de selection
+ * 
+ * Fonction de selection (SELECT), retournant la ressource interrogeable par sql_fetch.
+ *
+ * @api
+ * @see sql_fetch()      Pour boucler sur les resultats de cette fonction
+ * 
+ * @param array|string $select
+ * 		Liste des champs a recuperer (Select)
+ * @param array|string $from
+ * 		Tables a consulter (From)
+ * @param array|string $where
+ * 		Conditions a remplir (Where)
+ * @param array|string $groupby
+ * 		Critere de regroupement (Group by)
+ * @param array|string $orderby
+ * 		Tableau de classement (Order By)
+ * @param string $limit
+ * 		Critere de limite (Limit)
+ * @param array $having
+ * 		Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * @param bool $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- false -> ne pas l'executer mais la retourner, 
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
+ * 		- true|array -> executer la requete.
+ * 		Le cas array est, pour une requete produite par le compilateur,
+ * 		un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
+ *
+ * 
+ * @return mixed
+ * 		Ressource SQL
+ * 		- Ressource SQL pour sql_fetch, si la requete est correcte
+ * 		- false en cas d'erreur
+ * 		- Chaine contenant la requete avec $option=false
+ * 
+ * Retourne false en cas d'erreur, apres l'avoir denoncee.
+ * Les portages doivent retourner la requete elle-meme en cas d'erreur,
+ * afin de disposer du texte brut.
+ *
+**/
 function sql_select ($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='', $option=true) {
@@ -112,18 +193,75 @@ function sql_select ($select = array(), $from = array(), $where = array(),
 	return false;
 }
 
-// Recupere la syntaxe de la requete select sans l'executer
-// simplement $option = false au lieu de true
-// http://doc.spip.org/@sql_get_select
+
+/**
+ * Recupere la syntaxe de la requete select sans l'executer
+ *
+ * Passe simplement $option a false au lieu de true
+ * sans obliger a renseigner tous les arguments de sql_select.
+ * Les autres parametres sont identiques.
+ *
+ * @api
+ * @uses sql_select()
+ *
+ * @param array|string $select
+ * 		Liste des champs a recuperer (Select)
+ * @param array|string $from
+ * 		Tables a consulter (From)
+ * @param array|string $where
+ * 		Conditions a remplir (Where)
+ * @param array|string $groupby
+ * 		Critere de regroupement (Group by)
+ * @param array|string $orderby
+ * 		Tableau de classement (Order By)
+ * @param string $limit
+ * 		Critere de limite (Limit)
+ * @param array $having
+ * 		Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * 
+ * @return mixed
+ * 		Chaine contenant la requete
+ * 		ou false en cas d'erreur
+ *  
+**/
 function sql_get_select($select = array(), $from = array(), $where = array(),
 	$groupby = array(), $orderby = array(), $limit = '', $having = array(),
 	$serveur='') {
 	return sql_select ($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
 }
 
-// Comme ci-dessus, mais ramene seulement et tout de suite le nombre de lignes
-// Pas de colonne ni de tri a donner donc, et l'argument LIMIT est trompeur
-// http://doc.spip.org/@sql_countsel
+
+/**
+ * Retourne le nombre de lignes d'une selection
+ *
+ * Ramene seulement et tout de suite le nombre de lignes
+ * Pas de colonne ni de tri a donner donc.
+ *
+ * @api
+ * 
+ * @param array|string $from
+ * 		Tables a consulter (From)
+ * @param array|string $where
+ * 		Conditions a remplir (Where)
+ * @param array|string $groupby
+ * 		Critere de regroupement (Group by)
+ * @param array $having
+ * 		Tableau des des post-conditions a remplir (Having)
+ * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
+ * @param bool $option
+ * 		Peut avoir 3 valeurs : 
+ * 		- false -> ne pas l'executer mais la retourner, 
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
+ * 		- true -> executer la requete.
+ *
+ * @return int|false
+ * 		Nombre de lignes de resultat
+ * 		ou false en cas d'erreur
+ *
+**/
 function sql_countsel($from = array(), $where = array(),
 		      $groupby = array(), $having = array(),
 	$serveur='', $option=true) {
@@ -143,7 +281,24 @@ function sql_alter($q, $serveur='', $option=true) {
 	return $r;
 }
 
-// http://doc.spip.org/@sql_fetch
+/**
+ * Retourne un enregistrement d'une selection
+ *
+ * Retourne un resultat d'une ressource obtenue avec sql_select()
+ *
+ * @param mixed
+ * 		Ressource retournee par sql_select()
+ * @param string $serveur
+ * 		Le nom du connecteur
+ * @param bool $option
+ * 		Peut avoir 2 valeurs : 
+ * 		- continue -> ne pas echouer en cas de serveur sql indisponible,
+ * 		- true -> executer la requete.
+ * 
+ * @ return array
+ * 		Tableau de cles (colonnes SQL ou alias) / valeurs (valeurs dans la colonne de la table ou calculee)
+ * 		presentant une ligne de resultat d'une selection 
+ */
 function sql_fetch($res, $serveur='', $option=true) {
 	$f = sql_serveur('fetch', $serveur,  $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
@@ -595,8 +750,8 @@ function sql_in_select($in, $select, $from = array(), $where = array(),
  * @param int $count
  *   position maximale
  *   (nombre de resultat de la requete OU position qu'on ne veut pas depasser)
- * @param <type> $serveur
- * @param <type> $option
+ * @param string $serveur
+ * @param bool|string $option
  * @return int
  */
 function sql_skip($res, $pos, $saut, $count, $serveur='', $option=true){
@@ -629,19 +784,23 @@ function sql_test_date($type, $serveur='', $option=true)
 }
 
 /**
- * formater une date Y-m-d H:i:s sans passer par mktime
+ * Formate une date
+ * 
+ * Formater une date Y-m-d H:i:s sans passer par mktime
  * qui ne sait pas gerer les dates < 1970
  *
  * http://doc.spip.org/@format_mysql_date
  *
- * @param int $annee
- * @param int $mois
- * @param int $jour
- * @param int $h
- * @param int $m
- * @param int $s
+ * @param int $annee Annee
+ * @param int $mois  Numero du mois
+ * @param int $jour  Numero du jour dans le mois
+ * @param int $h     Heures
+ * @param int $m     Minutes
+ * @param int $s     Secondes
  * @param string $serveur
+ * 		Le serveur sollicite (pour retrouver la connexion)
  * @return string
+ * 		La date formatee
  */
 function sql_format_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0, $serveur=''){
 	$annee = sprintf("%04s",$annee);
@@ -685,11 +844,5 @@ function description_table($nom, $serveur=''){
 	return false;
 }
 
-
-if(!function_exists("ctype_xdigit")){
-    function ctype_xdigit($string = ""){
-        return !strlen(  trim( $string,  "1234567890abcdefABCDEF" )  );
-    }/* endfunction ctype_xdigit */
-}/* endif not function_exists ctype_xdigit */
 
 ?>
