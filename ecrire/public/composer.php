@@ -690,6 +690,9 @@ function remplacer_jointnul($cle, $exp, $equiv='')
 // http://doc.spip.org/@calculer_nom_fonction_squel
 function calculer_nom_fonction_squel($skel, $mime_type='html', $connect='')
 {
+	// ne pas doublonner les squelette selon qu'ils sont calcules depuis ecrire/ ou depuis la racine
+	if (strlen(_DIR_RACINE) AND substr($skel,0,strlen(_DIR_RACINE))==_DIR_RACINE)
+		$skel = substr($skel,strlen(_DIR_RACINE));
 	return $mime_type
 	. (!$connect ?  '' : preg_replace('/\W/',"_", $connect)) . '_'
 	. md5($GLOBALS['spip_version_code'] . ' * ' . $skel);
