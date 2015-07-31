@@ -334,12 +334,4 @@ function _request($var) {
 	if (isset($_POST[$var])) return $_POST[$var];
 	return NULL;
 }
-
-function charger_analyseur_xhtml($nom)
-{
-	if ($nom === true) $nom = 'tidy';
-	$file = 'inc_' . $nom. ".php";
-	if (is_readable(_DIR_RESTREINT . $file)) { include_ecrire($file); }
-}
-
 ?>
