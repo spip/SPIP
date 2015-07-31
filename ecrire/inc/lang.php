@@ -79,9 +79,17 @@ function changer_langue($lang) {
 
 	$liste_langues = $all_langs.','.$GLOBALS['meta']['langues_multilingue'];
 
-	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
-		$GLOBALS['spip_lang'] = $lang;
+	// Si la langue demandee n'existe pas, on essaie d'autres variantes
+	// Exemple : 'pt-br' => 'pt_br' => 'pt'
+	$lang = str_replace('-', '_', trim($lang));
+	if (!$lang)
+		return false;
 
+	if (ereg(",$lang,", ",$liste_langues,")
+	OR ($lang = preg_replace(',_.*,', '', $lang)
+	AND ereg(",$lang,", ",$liste_langues,")) {
+
+		$GLOBALS['spip_lang'] = $lang;
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
 		$spip_lang_left =  lang_dir($lang, 'left', 'right');
 		$spip_lang_right = lang_dir($lang, 'right', 'left');
@@ -89,9 +97,9 @@ function changer_langue($lang) {
 		$spip_dir_lang = " dir='$spip_lang_dir'";
 
 		return true;
-	}
-	else
+	} else
 		return false;
+
 }
 
 //
