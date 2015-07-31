@@ -90,6 +90,14 @@ function balise_FORMULAIRE__dyn($form)
 		include_spip('inc/acces');
 		$ajaxid = substr(md5(creer_uniqid()),0,8);
 	}
+	if (isset($valeurs['_action'])){
+		$securiser_action = charger_fonction('securiser_action','inc');
+		$args = inc_securiser_action_dist(reset($valeurs['_action']),end($valeurs['_action']),'',true);
+		$valeurs['_hidden'] = (isset($valeurs['_hidden'])?$valeurs['_hidden']:'') .
+		"<input type='hidden' name='arg' value='".$args['arg']."' />"
+		. "<input type='hidden' name='hash' value='".$args['hash']."' />"
+		. "<input type='hidden' name='action' value='".$args['action']."' />";
+	}
 
 	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 
 		array_merge(
