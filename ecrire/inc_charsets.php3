@@ -406,16 +406,24 @@ function utf_32_to_unicode($source) {
 }
 
 
+// Ce bloc provient de php.net, auteur Ronen
+function caractere_utf_8($num) {
+	if($num<128)
+		return chr($num);
+	if($num<2048)
+		return chr(($num>>6)+192).chr(($num&63)+128);
+	if($num<32768)
+		return chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
+	if($num<2097152)
+		return chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
+	return '';
+}
 
 function unicode_to_utf_8($texte) {
 	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$regs[1]]) {
 		$num = $regs[1];
 		$vu[$num] = true;
-		if($num<128) $s = chr($num);	// Ce bloc provient de php.net, auteur Ronen
-		else if($num<2048) $s = chr(($num>>6)+192).chr(($num&63)+128);
-		else if($num<32768) $s = chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
-		else if($num<2097152) $s = chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
-		else $s = '';
+		$s = caractere_utf_8($num);
 		$texte = str_replace($regs[0], $s, $texte);
 	}
 	return $texte;
@@ -424,14 +432,15 @@ function unicode_to_utf_8($texte) {
 
 //
 // Translitteration charset => ascii (pour l'indexation)
+// Attention les caracteres non reconnus sont renvoyes en utf-8
 //
 function translitteration($texte, $charset='AUTO') {
 	static $trans;
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
-	// 1. Passer le charset et les &eacute en entites unicode
-	$texte = html2unicode(charset2unicode($texte, $charset, true));
+	// 1. Passer le charset et les &eacute en utf-8
+	$texte = unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 
 	// 2. Translitterer grace a la table predefinie
 	if (!$trans) {
@@ -439,7 +448,7 @@ function translitteration($texte, $charset='AUTO') {
 		load_charset('translit');
 		reset($CHARSET['translit']);
 		while (list($key, $val) = each($CHARSET['translit'])) {
-			$trans["&#$key;"] = $val;
+			$trans[caractere_utf_8($key)] = $val;
 		}
 	}
 	if ($GLOBALS['flag_strtr2'])
@@ -453,8 +462,9 @@ function translitteration($texte, $charset='AUTO') {
 
 	// 3. Translitterer grace a iconv
 	if ($GLOBALS['flag_iconv'] && ereg('&#0*([0-9]+);', $texte)) {
-		$texte = iconv('utf-8', 'ascii//translit', unicode_to_utf_8($texte));
+		$texte = iconv('utf-8', 'ascii//translit', $texte);
 	}
+
 	return $texte;
 }
 

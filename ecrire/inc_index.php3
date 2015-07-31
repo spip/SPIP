@@ -32,6 +32,7 @@ function spip_split($reg, $texte) {
 
 function nettoyer_chaine_indexation($texte) {
 	include_ecrire("inc_charsets.php3");
+
 	$texte = translitteration($texte);
 
 	if (lire_meta('langue_site') == 'vi')
