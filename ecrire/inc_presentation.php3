@@ -1208,18 +1208,34 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 ?>
 <script type='text/javascript'><!--
 	var init_gauche = true;
+	var memo_obj = new Array();
 
-	function findObj(n, d) { //v4.0
+	function findObj(n) { //v4.0
 		var p,i,x;
-		if(!d) d = document; 
+
+		// Voir si on n'a pas deja memoriser cet element		
+		if (memo_obj[n]) {
+			return memo_obj[n];
+		}
+		
+		d = document; 
 		if((p = n.indexOf("?"))>0 && parent.frames.length) {
 			d = parent.frames[n.substring(p+1)].document; 
 			n = n.substring(0,p);
 		}
-		if(!(x = d[n]) && d.all) x = d.all[n]; 
-		for (i = 0; !x && i<d.forms.length; i++) x = d.forms[i][n];
+		if(!(x = d[n]) && d.all) {
+			x = d.all[n]; 
+		}
+		for (i = 0; !x && i<d.forms.length; i++) {
+			x = d.forms[i][n];
+		}
 		for(i=0; !x && d.layers && i<d.layers.length; i++) x = findObj(n,d.layers[i].document);
-		if(!x && document.getElementById) x = document.getElementById(n); return x;
+		if(!x && document.getElementById) x = document.getElementById(n); 
+		
+		// Memoriser l'element
+		memo_obj[n] = x;
+		
+		return x;
 	}
 	
 	function hide_obj(obj) {
