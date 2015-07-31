@@ -1,6 +1,5 @@
 [<(#ENV{floatdiv}) class="spip-admin-float">]
 <div class="spip-admin-bloc" dir='#LANG_DIR'>
-<div class="spip-admin">
 	<ul>[
 	<li><a href='ecrire/articles.php3?id_article=(#ENV{id_article})' class='spip-admin-boutons'><:admin_modifier_article:> ([(#ENV{id_article})])</a></li>][
 	<li><a href='ecrire/breves_voir.php3?id_breve=(#ENV{id_breve})' class='spip-admin-boutons'><:admin_modifier_breve:> ([(#ENV{id_breve})])</a></li>][
@@ -11,6 +10,5 @@
 	<li><a href='ecrire/(#ENV{statistiques})[id_article=(#ENV{id_article})]' class='spip-admin-boutons'>[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a></li>][
 	<li><a href='[(#ENV{action})]var_mode=(#ENV{debug})' class='spip-admin-boutons'><:admin_debug:></a></li>]
 	</ul>
-</div>
 </div>
 [</(#ENV{floatdiv})>]
