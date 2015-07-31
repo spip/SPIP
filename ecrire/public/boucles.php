@@ -14,7 +14,7 @@
 /**
  * Ce fichier definit les boucles standard de SPIP
  *
- * @package SPIP\Compilateur\Boucles
+ * @package SPIP\Core\Compilateur\Boucles
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

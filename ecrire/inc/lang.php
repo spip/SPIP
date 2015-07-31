@@ -13,7 +13,7 @@
 /**
  * Gestion des langues et choix de langue 
  *
- * @package SPIP\Langue
+ * @package SPIP\Core\Langue
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

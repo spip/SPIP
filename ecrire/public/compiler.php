@@ -14,7 +14,7 @@
 /**
  * Fichier principal du compilateur de squelettes
  *
- * @package SPIP\Compilateur\Compilation
+ * @package SPIP\Core\Compilateur\Compilation
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

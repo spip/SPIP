@@ -13,7 +13,7 @@
 /**
  * Fonctions d'aides pour les fonctions d'objets de modification de contenus
  *
- * @package SPIP\Objets\Modifications
+ * @package SPIP\Core\Objets\Modifications
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

@@ -13,7 +13,7 @@
 /**
  * Gestion de l'API autoriser et fonctions d'autorisations de SPIP
  *
- * @package SPIP\Autorisations
+ * @package SPIP\Core\Autorisations
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

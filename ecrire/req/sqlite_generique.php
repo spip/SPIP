@@ -14,7 +14,7 @@
  * Ce fichier contient les fonctions gerant
  * les instructions SQL pour Sqlite
  *
- * @package SPIP\SQL\SQLite
+ * @package SPIP\Core\SQL\SQLite
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;

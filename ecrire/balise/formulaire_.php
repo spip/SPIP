@@ -12,7 +12,7 @@
 /**
  * Fonctions génériques pour les balises formulaires
  *
- * @package SPIP\Formulaires
+ * @package SPIP\Core\Formulaires
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

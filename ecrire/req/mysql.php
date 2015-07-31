@@ -14,7 +14,7 @@
  * Ce fichier contient les fonctions gerant
  * les instructions SQL pour MySQL
  *
- * @package SPIP\SQL\MySQL
+ * @package SPIP\Core\SQL\MySQL
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;

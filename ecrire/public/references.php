@@ -13,7 +13,7 @@
 /**
  * Fonctions de recherche et de reservation dans l'arborescence des boucles
  *
- * @package SPIP\Compilateur\References
+ * @package SPIP\Core\Compilateur\References
 **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

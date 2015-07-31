@@ -13,7 +13,7 @@
 /**
  * Fonctions relatives aux objets éditoriaux et SQL
  *
- * @package SPIP\SQL\Tables
+ * @package SPIP\Core\SQL\Tables
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

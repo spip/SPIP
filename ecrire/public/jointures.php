@@ -13,7 +13,7 @@
 /**
  * Déduction automatique d'une chaîne de jointures
  *
- * @package SPIP\Compilateur\Jointures
+ * @package SPIP\Core\Compilateur\Jointures
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

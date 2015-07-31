@@ -13,7 +13,7 @@
 /**
  * Fonctions utilisées au calcul des squelette du privé.
  *
- * @package SPIP\Filtres
+ * @package SPIP\Core\Filtres
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

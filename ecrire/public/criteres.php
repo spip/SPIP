@@ -13,7 +13,7 @@
 /**
  * Définition des {criteres} d'une boucle
  *
- * @package SPIP\Compilateur\Criteres
+ * @package SPIP\Core\Compilateur\Criteres
 **/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

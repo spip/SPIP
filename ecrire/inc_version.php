@@ -13,7 +13,7 @@
 /**
  * Initialisation de SPIP 
  *
- * @package SPIP\Chargement
+ * @package SPIP\Core\Chargement
 **/
 
 if (defined('_ECRIRE_INC_VERSION')) return;
