@@ -667,7 +667,7 @@ function debusquer_source($objet, $affiche)
 		$legend = _T('zbug_boucle') . ' ' .  $nom;
 		// Le compilateur prefixe le nom des boucles par l'extension du fichier source.
 		$gram = preg_match('/^([^_]+)_/', $objet, $r) ? $r[1] : '';
-		$res = ancre_texte(public_decompiler($quoi, '', 0, 'boucle'));
+		$res = ancre_texte(public_decompiler($quoi, $gram, 0, 'boucle'));
 	} else if ($affiche == 'squelette') {
 		$legend = $GLOBALS['debug_objets']['sourcefile'][$objet];
 		$res = ancre_texte($GLOBALS['debug_objets']['squelette'][$objet]);
