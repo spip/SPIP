@@ -35,18 +35,18 @@
 
 			<div id="contenu" class="plan">
 
-				<h2 class="invisible"><:plan_site:></h2>
+				<h1 class="invisible"><:plan_site:></h1>
 
 				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 
-				<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
+				<h2><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></h2>
 
 				[(#REM) Articles et sous-rubriques ]
 
 				<div class="contre-encart">
 
 					<B_articles_racine>
-					<h4 class="invisible"><:articles:></h4>
+					<h3 class="invisible"><:articles:></h3>
 					<ul>
 						<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
 						<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
@@ -82,7 +82,7 @@
 				[(#REM) Breves ]
 				<B_breves>
 				<div class="breves">
-					<h4 class="titre"><:breves:></h4>
+					<h3 class="titre"><:breves:></h3>
 					<ul>
 						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse}>
 						<li><a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
@@ -94,7 +94,7 @@
 				[(#REM) Sur le Web ]
 				<B_sites>
 				<div class="syndic">
-					<h4 class="titre"><:sites_web:></h4>
+					<h3 class="titre"><:sites_web:></h3>
 					<ul>
 						<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
@@ -111,7 +111,7 @@
 
 			[(#REM) Menu de navigation laterale ]
 			<div id="navigation">
-				<h2 class="invisible"><:navigation:></h2>
+				<h1 class="invisible"><:navigation:></h1>
 
 				[(#REM) Menu de navigation par rubriques ]
 				<INCLURE{fond=inc-rubriques}{lang}>

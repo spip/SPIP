@@ -2,7 +2,7 @@
 
 [(#REM) Nombre total de messages ]
 <BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}>
-</BOUCLE_decompte>[<p class="forum-decompte">(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|=={1}|?{<:commentaire:>,<:commentaires:>})]</p>]</B_decompte>
+</BOUCLE_decompte>[<h2 class="forum-decompte">(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]</h2>]</B_decompte>
 
 [(#REM) Messages du forum ]
 <B_forums>
@@ -14,7 +14,7 @@
 
 		<div class="message">
 			<div class="forum-chapo">
-				<h4 class="forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></h4>
+				<h3 class="forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></h3>
 				<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM|couper{80})]</small>
 			</div>
 			<div class="forum-texte">

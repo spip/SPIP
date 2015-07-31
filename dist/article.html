@@ -42,7 +42,7 @@
             <div class="cartouche">
                 [(#LOGO_ARTICLE||reduire_image{200,200})]
                 [<p class="surtitre">#DEBUT_SURLIGNE(#SURTITRE)#FIN_SURLIGNE</p>]
-                <h2 class="titre">#DEBUT_SURLIGNE[(#TITRE|supprimer_numero)]#FIN_SURLIGNE</h2>
+                <h1 class="titre">#DEBUT_SURLIGNE[(#TITRE|supprimer_numero)]#FIN_SURLIGNE</h1>
                 [<p class="soustitre">#DEBUT_SURLIGNE(#SOUSTITRE)#FIN_SURLIGNE</p>]
 
                 <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|supprimer_numero)]</a></BOUCLE_auteurs></small></p>
@@ -70,7 +70,7 @@
             [(#REM) Portfolio : album d'images ]
             <BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
             <div id="document_actif">
-                [<h3 class="spip">(#TITRE)</h3>]
+                [<h3 class="spip">(#TITRE)</h2>]
                 [(#EMBED_DOCUMENT||inserer_attribut{alt,[(#TITRE|supprimer_numero|couper{80}|texte_backend)]})]
                 [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
             </div>
@@ -84,12 +84,12 @@
             </div>
             </B_documents_portfolio>
 
-            [<div class="ps"><h3><:info_ps:></h3>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+            [<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
 
             [(#REM) Autres documents joints a l'article ]
             <B_documents_joints>
             <div id="documents_joints">
-                <h3><:titre_documents_joints:></h3>
+                <h2><:titre_documents_joints:></h2>
                 <ul>
                     <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par date} {doublons}>
                     <li>
@@ -105,11 +105,10 @@
             [ #REM Conserver cet invalideur : (#PETITION|?{'',''}) ]
             <INCLURE{fond=inc-petition}{id_article} {debut_signatures}>
 
-            [<div class="notes"><h3><:info_notes:></h3>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+            [<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
             [(#REM) Forum de l'article ]
-            [<h3 class="invisible"><:Forum:></h3>
-            <p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
+            [<h2 class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></h2>]
             <INCLURE{fond=inc-forum}{id_article}>
 
 
@@ -118,7 +117,7 @@
 
         [(#REM) Menu de navigation laterale ]
         <div id="navigation">
-            <h2 class="invisible"><:navigation:></h2>
+            <h1 class="invisible"><:navigation:></h1>
 
             [(#REM) Menu de navigation par rubriques ]
             <INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
@@ -126,7 +125,7 @@
             [(#REM) Articles dans la meme rubrique ]
             <B_articles_rubrique>
             <div class="breves">
-                <h3 class="titre"><a href="[(#URL_RUBRIQUE|supprimer_numero)]"><:meme_rubrique:></a></h3>
+                <h2 class="titre"><a href="[(#URL_RUBRIQUE|supprimer_numero)]"><:meme_rubrique:></a></h2>
                 <ul>
                     <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse}>
                     <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>
@@ -138,7 +137,7 @@
             [(#REM) Menu de navigation mots-cles ]
             <B_mots>
             <div class="divers">
-            <h3 class="titre"><:mots_clefs:></h3>
+            <h2 class="titre"><:mots_clefs:></h2>
             <ul>
                 <BOUCLE_mots(MOTS) {id_article} {par titre}>
                 <li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>

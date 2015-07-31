@@ -39,18 +39,18 @@
 
 				<div class="cartouche">
 					<a href="#URL_SITE">[(#LOGO_SITE||reduire_image{150,100}|inserer_attribut{alt,[(#NOM_SITE|supprimer_numero|couper{80})]})]</a>
-					<h2 class="titre">[(#NOM_SITE|supprimer_numero)]</h2>
+					<h1 class="titre">[(#NOM_SITE|supprimer_numero)]</h1>
 					[<div class="soustitre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></div>]
 				</div>
 
 				[<div class="chapo">(#DESCRIPTIF)</div>]
 
 				[(#REM) Articles issus de la syndication ]
-				<h3 class="invisible"><:articles:></h3>
+				<h2 class="invisible"><:articles:></h2>
 
 				<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,10}>
 				<div class="extrait">
-					<h4 class="titre"><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></h4>
+					<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
 					[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
 					<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					[<small>&mdash; <em>(#TAGS|afficher_tags{'directory'})</em></small>]
@@ -59,19 +59,18 @@
 				</div>
 				</BOUCLE_articles>
 
-				[<div class="notes"><h3><:info_notes:></h3>(#NOTES)</div>]
+				[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
 			[(#REM) Forum du site
 			NB : pour desactiver les forums de site, supprimez simplement les lignes ci-dessous ]
-			[<h3 class="invisible"><:Forum:></h3>
-			<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:form_pet_message_commentaire:></a></p>]
+			[<h2 class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:form_pet_message_commentaire:></a></h2>]
 			<INCLURE{fond=inc-forum}{id_syndic}>
 
 			</div><!-- fin contenu -->
 
 			[(#REM) Menu de navigation laterale ]
 			<div id="navigation">
-				<h2 class="invisible"><:navigation:></h2>
+				<h1 class="invisible"><:navigation:></h1>
 
 				[(#REM) Menu de navigation par rubriques ]
 				<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
@@ -79,7 +78,7 @@
 				[(#REM) Autres sites web ]
 				<B_sites>
 				<div class="syndic">
-					<h3 class="titre"><:sites_web:></h3>
+					<h2 class="titre"><:sites_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {par nom_site} {doublons}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
@@ -91,7 +90,7 @@
 				[(#REM) Menu de navigation mots-cles ]
 				<B_mots>
 				<div class="divers">
-					<h3 class="titre"><:mots_clefs:></h3>
+					<h2 class="titre"><:mots_clefs:></h2>
 					<ul>
 						<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
 						<li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>

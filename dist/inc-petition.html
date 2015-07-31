@@ -6,13 +6,13 @@
             <div id="signatures">
                 <B_signatures_decompte>
                 [(#REM) S'affiche s'il y a pagination]
-                <h3>#TOTAL_BOUCLE <:signatures_petition:></h3>
+                <h2>#TOTAL_BOUCLE <:signatures_petition:></h2>
                 [(#ENV{debut_signatures,0}|=={0}|?{'<strong>',<a href="[(#SELF|parametre_url{debut_signatures,''})]#signatures"[ title="(#DATE|affdate)"]>})] [(#TOTAL_BOUCLE|>={30}|?{'0',''})] [(#ENV{debut_signatures,0}|=={0}|?{'</strong>',</a>})]
 				<BOUCLE_signatures_decompte(SIGNATURES){id_article}{par date} {inverse}>
                 [|(#COMPTEUR_BOUCLE|modulo{30}|?{'',[(#COMPTEUR_BOUCLE|=={#ENV{debut_signatures,0}}|?{'<strong>',<a href="[(#SELF|parametre_url{debut_signatures,#COMPTEUR_BOUCLE})]#signatures"[ title="(#DATE|affdate)"]>})] #COMPTEUR_BOUCLE [(#COMPTEUR_BOUCLE|=={#ENV{debut_signatures,0}}|?{'</strong>',</a>})]})]
                 </BOUCLE_signatures_decompte>
 				[(#REM) S'affiche s'il n'y a pas de signature]
-                <h3>0 <:signatures_petition:></h3>
+                <h2>0 <:signatures_petition:></h2>
                 <//B_signatures_decompte>
 
                 <table summary="<:signatures_petition:>">
