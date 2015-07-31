@@ -19,7 +19,7 @@ include_spip('inc/layer');
 include_spip('inc/actions');
 include_spip('inc/securiser_action');
 
-// http://doc.spip.org/@exec_admin_plugin
+// http://doc.spip.org/@exec_admin_plugin_dist
 function exec_admin_plugin_dist() {
 	global $spip_lang_right;
 
