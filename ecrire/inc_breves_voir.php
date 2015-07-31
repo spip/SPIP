@@ -72,8 +72,8 @@ fin_boite_info();
 if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
 	afficher_boite_logo('breve', 'id_breve', $id_breve,
 			    _T('logo_breve').aide ("breveslogo"),
-			    _T('logo_survol'), 
-			    generer_url_ecrire("breves_voir", "id_breve=$id_breve"));
+			    _T('logo_survol'), 'breves_voir'); 
+
 
 debut_raccourcis();
 icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui"), "breve-24.gif","creer.gif");

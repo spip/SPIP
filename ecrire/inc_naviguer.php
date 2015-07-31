@@ -200,11 +200,11 @@ function logo_naviguer($id_rubrique)
 {
 		if ($id_rubrique)
 			afficher_boite_logo('rub', 'id_rubrique', $id_rubrique,
-			_T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
+					    _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
 		else
 			afficher_boite_logo('rub', 'id_rubrique', 0,
 			_T('logo_standard_rubrique')." ".aide ("rublogo"),
-			_T('logo_survol'));
+					    _T('logo_survol'), 'naviguer');
 }
 
 function raccourcis_naviguer($id_rubrique, $id_parent)

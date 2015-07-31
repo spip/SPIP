@@ -150,8 +150,7 @@ if ($id_mot) {
 //
 
 if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
-	afficher_boite_logo('mot', 'id_mot', $id_mot,
-	_T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'));
+  afficher_boite_logo('mot', 'id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
 
 
 //

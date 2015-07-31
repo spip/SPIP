@@ -38,7 +38,7 @@ function auteurs_edit_dist()
 
 	if (statut_modifiable_auteur($id_auteur, $auteur)) {
 		afficher_boite_logo('aut', 'id_auteur', $id_auteur,
-				    _T('logo_auteur').aide ("logoart"), _T('logo_survol'));
+				    _T('logo_auteur').aide ("logoart"), _T('logo_survol'), 'auteurs_edit');
 	}
 
 	table_auteurs_edit($auteur);

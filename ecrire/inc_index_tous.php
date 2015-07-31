@@ -18,7 +18,6 @@ include_ecrire ("inc_presentation");
 
 function index_tous_dist()
 {
-	global $clean_link;
 	global $connect_statut;
 	global $INDEX_elements_objet;
 
