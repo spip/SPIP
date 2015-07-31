@@ -177,8 +177,6 @@ $php_version_maj = intval($php_version[0]);
 $php_version_med = intval($php_version[1]);
 if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = intval($match[1]);
 
-$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
-
 $flag_levenshtein = ($php_version_maj >= 4);
 $flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
@@ -302,6 +300,7 @@ if (!$REQUEST_URI) {
 	if (!strpos($REQUEST_URI, '?') && $QUERY_STRING)
 		$REQUEST_URI .= '?'.$QUERY_STRING;
 }
+$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
