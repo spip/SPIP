@@ -376,11 +376,7 @@ function ajouter_tags($matches, $item) {
 			// cas atom1, a faire apres flickr
 			$term = extraire_attribut($match[0], 'term')
 		) {
-<<<<<<< .working
-				$scheme = extraire_attribut($match[0], 'scheme');
-=======
 			if ($scheme = extraire_attribut($match[0], 'scheme'))
->>>>>>> .merge-right.r15241
 				$url = suivre_lien($scheme,$term);
 			else
 				$url = $term;
