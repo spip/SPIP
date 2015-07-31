@@ -18,6 +18,39 @@ define_once('_FILE_CONNECT',
 		(_FILE_CONNECT_INS . _EXTENSION_PHP)
 	 : false));
 
+//
+// Gestion des inclusions et infos repertoires
+//
+
+$included_files = array();
+
+function include_local($file) {
+	if (!empty($GLOBALS['included_files'][$file])) return;
+	$GLOBALS['included_files'][$file] = 1;
+	include($file);
+}
+
+function include_ecrire($file) {
+	$file = _DIR_INCLUDE . $file;
+	if (!empty($GLOBALS['included_files'][$file])) return;
+	$GLOBALS['included_files'][$file] = 1;
+	include($file);
+}
+
+function include_lang($file) {
+	$file = _DIR_LANG . $file;
+	if (!empty($GLOBALS['included_files'][$file])) return;
+	$GLOBALS['included_files'][$file] = 1;
+	include($file);
+}
+
+function include_plug($file) {
+	$file = _DIR_RESTREINT . $file;
+	if (!empty($GLOBALS['included_files'][$file])) return;
+	if (file_exists($file)) include($file);
+	$GLOBALS['included_files'][$file] = 1;
+}
+
 # Refus si Spip n'est pas installe... sauf si justement on l'installe!
 
 if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
@@ -33,7 +66,7 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
 		$db_ok = 0;
 		include_ecrire ("inc_presentation.php3");
 		install_debut_html(_T('info_travaux_titre'));
-		echo "<P>"._T('info_travaux_texte')."</P>";
+		echo "<p>"._T('info_travaux_texte')."</p>";
 		install_fin_html();
 		exit;
 	}
@@ -547,39 +580,6 @@ if (!$PATH_TRANSLATED) {
 
 
 
-//
-// Gestion des inclusions et infos repertoires
-//
-
-$included_files = array();
-
-function include_local($file) {
-	if ($GLOBALS['included_files'][$file]) return;
-	$GLOBALS['included_files'][$file] = 1;
-	include($file);
-}
-
-function include_ecrire($file) {
-	$file = _DIR_INCLUDE . $file;
-	if ($GLOBALS['included_files'][$file]) return;
-	$GLOBALS['included_files'][$file] = 1;
-	include($file);
-}
-
-function include_lang($file) {
-	$file = _DIR_LANG . $file;
-	if ($GLOBALS['included_files'][$file]) return;
-	$GLOBALS['included_files'][$file] = 1;
-	include($file);
-}
-
-function include_plug($file) {
-	$file = _DIR_RESTREINT . $file;
-	if ($GLOBALS['included_files'][$file]) return;
-	if (file_exists($file)) include($file);
-	$GLOBALS['included_files'][$file] = 1;
-}
-
 function spip_query($query) {
 	if (_FILE_CONNECT) {
 		include_local(_FILE_CONNECT);
@@ -862,8 +862,9 @@ class Link {
 		foreach ($table as $value)
 			$query .= '&'.$name.'[]='.urlencode($value);
 
+		if ($query) $query = '?'. substr($query, 1);
 		if ($anchor) $anchor = '#'.$anchor;
-		return $url.'?'.substr($query, 1).$anchor;
+		return "$url$query$anchor";
 	}
 
 	//
@@ -960,7 +961,7 @@ function _T($text, $args = '') {
 	include_ecrire('inc_lang.php3');
 	$text = traduire_chaine($text, $args);
 
-	if ($GLOBALS['xhtml']) {
+	if (!empty($GLOBALS['xhtml'])) {
 		include_ecrire("inc_charsets.php3");
 		$text = html2unicode($text);
 	}
@@ -1201,7 +1202,7 @@ function redirige_par_entete($url)
 
 function debut_entete($title)
 {
-// '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
+  /* '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
 
 //if (eregi("msie", $browser_name)) {
 // '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
@@ -1212,6 +1213,7 @@ function debut_entete($title)
 		$base = dirname($GLOBALS['HTTP_SERVERS_VARS']['SCRIPT_NAME']);
 	else
 	  $base .= '/' . (_DIR_RESTREINT ? '' : _DIR_RESTREINT_ABS);
+*/
 	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 	@Header("Content-Type: text/html; charset=$charset");
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .

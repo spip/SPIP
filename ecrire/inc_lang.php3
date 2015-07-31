@@ -47,7 +47,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	$fichier_lang = $module.'_'.$lang.'.php3';
 	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
 
-	if (_DIR_RESTREINT AND $fichier_lang_exists) {
+	if (_DIR_RESTREINT AND _FILE_CONNECT AND $fichier_lang_exists) {
 	  $ficher_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
 	  $fichier_cache_time = @is_readable($fichier_cache) ? @filemtime($ficher_cache) : false;
 
@@ -143,10 +143,11 @@ function traduire_chaine($code, $args) {
 		}
 	}
 
+	$text = '';
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	while (!$text AND (list(,$module) = each ($modules))) {
 		$var = "i18n_".$module."_".$spip_lang;
-		if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
+		if (empty($GLOBALS[$var])) charger_langue($spip_lang, $module);
 		if (_DIR_RESTREINT) {
 			if (!isset($GLOBALS[$var][$code]))
 				charger_langue($spip_lang, $module, $code);
@@ -533,12 +534,13 @@ function utiliser_langue_visiteur() {
 	if (!regler_langue_navigateur())
 		utiliser_langue_site();
 
-	if ($GLOBALS['auteur_session']['lang'])
+	if (!empty($GLOBALS['auteur_session']['lang']))
 		changer_langue($GLOBALS['auteur_session']['lang']);
 
-	if ($cookie_lang = $HTTP_COOKIE_VARS[(_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire')])
+	$cookie_lang = (_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire');
+	if (!empty($HTTP_COOKIE_VARS[$cookie_lang]))
 
-		changer_langue($cookie_lang);
+		changer_langue($HTTP_COOKIE_VARS[$cookie_lang]);
 }
 
 //
