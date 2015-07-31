@@ -16,6 +16,10 @@ include_spip('inc/headers');
 include_spip('inc/texte');
 include_spip('inc/layer');
 
+// Pour relocaliser img_pack au bon endroit ...
+define('_REPLACE_IMG_PACK', "@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims");
+
+
 /////////////////////////////
 // La frame de base
 //
@@ -167,9 +171,10 @@ function help_body($aide, $suite, $lang_aide='') {
 		  generer_url_ecrire('aide_index', "img=$img", false, true);
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
+	$html .= $suite;
 
 	// relocaliser img_pack au bon endroit ...
-	$html = preg_replace("@(<img([^<>]* +)?\s*src=['\"])img_pack\/@ims","\\1"._DIR_IMG_PACK,$html . $suite);
+	$html = preg_replace(_REPLACE_IMG_PACK,"\\1"._DIR_IMG_PACK, $html);
 	
 	echo _STYLE_AIDE_BODY, "</head>\n";
 
@@ -199,7 +204,8 @@ function help_body($aide, $suite, $lang_aide='') {
 
 
 /////////////////////////////////////
-// Recuperer une image dans le cache
+// filtre les chemins des images referencant le repertoire de www.spip.net
+// et les remplacer par les copies locales, qu'on cree si ce n'est fait
 //
 // http://doc.spip.org/@help_img
 function help_img($regs) {
@@ -207,29 +213,36 @@ function help_img($regs) {
 
 	list ($cache, $rep, $lang, $file, $ext) = $regs;
 
-	header("Content-Type: image/$ext");
-	header("Expires: ".gmdate("D, d M Y H:i:s", time()+24*3600) .' GMT');
-
 	if ($rep=="IMG" AND $lang=="cache"
-	AND @file_exists($img_tex = _DIR_VAR.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
-          readfile($img_tex);
+	AND @file_exists($img = _DIR_VAR.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
+          help_img_cache($img, $ext);
 	} else if (@file_exists($img = _DIR_AIDE . $cache)) {
-		readfile($img);
+		help_img_cache($img, $ext);
 	} else if (@file_exists($img = _DIR_RACINE . 'AIDE/aide-'.$cache)) {
-		readfile($img);
+		help_img_cache($img, $ext);
 	} else if ($help_server) {
 		include_spip('inc/distant');
 		sous_repertoire(_DIR_AIDE,'','',true);
 		if (ecrire_fichier(_DIR_AIDE . "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {
+			ecrire_fichier ($img = _DIR_AIDE . $cache, $contenu);
+			// Bug de certains OS: 
+			// le contenu n'est pas compris au premier envoi
+			// Donc ne pas mettre en 
+			header("Content-Type: image/$ext");
 			echo $contenu;
-			ecrire_fichier (_DIR_AIDE . $cache, $contenu);
 		} else
 			redirige_par_entete("$help_server/$rep/$lang/$file");
 	}
 }
 
+function help_img_cache($img, $ext)
+{
+	header("Content-Type: image/$ext");
+	header("Expires: ".gmdate("D, d M Y H:i:s", time()+24*3600) .' GMT');
+	readfile($img);
+}
 
 define('AIDE_STYLE_MENU', '<style type="text/css">
 <!--
@@ -304,112 +317,64 @@ function activer_article(id) {
 		echo " dir='rtl'";
 	echo " lang='$lang_aide'>";
 
-	// Recuperation et analyse de la structure de l'aide demandee
-	$sections = analyse_aide($html);
-	$rubrique_vue = false;
-	foreach ($sections as $section) {
-		if ($section[1] == '1') {
-			if ($rubrique_vue)
-				fin_rubrique();
-			rubrique($section[3].$section[5]);
-			$rubrique_vue = true;
-		} else
-			article($section[5], $section[3]);
-	}
-	fin_rubrique();
+	help_menu_rubrique($html);
 }
 
+// Analyse de la structure de l'aide demandee
 
-// http://doc.spip.org/@rubrique
-function rubrique($titre, $statut = "redac") {
-	global $ligne_rubrique;
-	global $block_rubrique;
-	global $titre_rubrique;
-	global $afficher_rubrique, $ouvrir_rubrique;
-	global $larubrique;
-
-	global $aide_statut;
-
-	$afficher_rubrique = 0;
-
-	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
-		$larubrique++;
-		$titre_rubrique = $titre;
-		$ligne_rubrique = array();
-		$block_rubrique = "block$larubrique";
-		$afficher_rubrique = 1;
-		$ouvrir_rubrique = 0;
-	}
-}
-
-// http://doc.spip.org/@fin_rubrique
-function fin_rubrique() {
-	global $ligne_rubrique;
-	global $block_rubrique;
-	global $titre_rubrique;
-	global $afficher_rubrique, $ouvrir_rubrique;
-	global $texte;
-
-	if ($afficher_rubrique && count($ligne_rubrique)) {
-		echo "<div class='rubrique'>";
-		echo bouton_block_depliable($titre_rubrique,$ouvrir_rubrique,$block_rubrique);
-		echo "</div>\n";
-		echo debut_block_depliable($ouvrir_rubrique,$block_rubrique);
-		echo "\n";
-		reset($ligne_rubrique);
-		while (list(, $ligne) = each($ligne_rubrique)) {
-			echo $texte[$ligne];
-		}
-		echo fin_block();
-		echo "\n\n";
-	}
-}
-
-// http://doc.spip.org/@article
-function article($titre, $lien, $statut = "redac") {
-	global $ligne;
-	global $ligne_rubrique;
-	global $rubrique;
-	global $texte;
-	global $afficher_rubrique, $ouvrir_rubrique;
-	global $aide_statut;
+function help_menu_rubrique($html)
+{
 	global $spip_lang;
 
-	if ($afficher_rubrique AND (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac"))) {
-		$ligne_rubrique[] = ++$ligne;
-		
-		$texte[$ligne] = '';
-		$id = "ligne$ligne";
+	preg_match_all(',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism', $html, $sections, PREG_SET_ORDER);
 
-		if (_request('aide') == $lien) {
-			$ouvrir_rubrique = 1;
-			$class = "article-actif";
-			$texte[$ligne] .= http_script("curr_article = '$id';");
+	$afficher_rubrique = false;
+	$ligne = 0;
+	foreach ($sections as $section) {
+		if ($section[1] == '1') {
+			if ($afficher_rubrique && $texte)
+				echo fin_rubrique($titre, $texte, $numrub, $ouvrir);
+			$afficher_rubrique = $section[5] ? ($section[5] == 'redac') : true;
+			$texte = '';
+			if ($afficher_rubrique) {
+				$numrub++;
+				$ouvrir = 0;
+				$titre = preg_replace(_REPLACE_IMG_PACK,"\\1"._DIR_IMG_PACK, $section[3]);
+			}
+		} else {
+			++$ligne;
+			$sujet = $section[3];
+			$id = "ligne$ligne";
+
+			if (_request('aide') == $sujet) {
+				$ouvrir = 1;
+				$class = "article-actif";
+				$texte .= http_script("curr_article = '$id';");
+			} else $class = "article-inactif";
+
+			$h = generer_url_ecrire("aide_index", "aide=$sujet&frame=body&var_lang=$spip_lang", false, true);
+			$texte .= "<a class='$class' target='droite' id='$id' href='$h' onclick=\"activer_article('$id');return true;\">"
+			  . preg_replace(_REPLACE_IMG_PACK,"\\1"._DIR_IMG_PACK, $section[5])
+			  . "</a><br style='clear:both;' />\n";
 		}
-		else {
-			$class = "article-inactif";
-		}
-		$texte[$ligne] .= "<a class='$class' target='droite' id='$id'
- href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang", false, true) .
-		  "' onclick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;' />\n";
 	}
+	if ($afficher_rubrique && $texte)
+		echo fin_rubrique($titre, $texte, $numrub, $ouvrir);
 }
 
 
-// http://doc.spip.org/@analyse_aide
-function analyse_aide($html, $aide=false) {
+// http://doc.spip.org/@fin_rubrique
+function fin_rubrique($titre, $texte, $numrub, $ouvrir) {
 
-	// pas de sujet precis: retourner le tableau des sujets
-	if (!$aide) {
-		preg_match_all(',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism',
-	$html, $regs, PREG_SET_ORDER);
-		return $regs;
-	}
+	$block_rubrique = "block$numrub";
+	return  "<div class='rubrique'>"
+		. bouton_block_depliable($titre, $ouvrir, $block_rubrique)
+		. "</div>\n"
+		. debut_block_depliable($ouvrir, $block_rubrique)
+		. "\n"
+		.  $texte
+		. fin_block(). "\n\n";
 
-	// sinon retourner le chapitre demande
-	$preg = ',<h2( class="spip")?'	. ">$aide/(.+?)</h2>(.*)$,ism";
-	preg_match($preg, $html, $regs);
-	return preg_replace(',<h[12].*,ism', '', $regs[3]);
 }
 
 //
@@ -446,10 +411,10 @@ function exec_aide_index_dist()
 		else if (_request('frame') == 'body') {
 			$aide = _request('aide');
 			if ($aide) {
-				$html = analyse_aide($html, $aide);
-				if (!$html) {
-					echo erreur_aide_indisponible();
-				}
+				$preg = ',<h2( class="spip")?'. ">$aide/(.+?)</h2>(.*)$,ism";
+				preg_match($preg, $html, $r);
+				$html = preg_replace(',<h[12].*,ism', '', $r[3]);
+				if (!$html) echo erreur_aide_indisponible();
 			} else 	$html = help_panneau();
 			help_body($aide, $html, $lang);
 		} else {
