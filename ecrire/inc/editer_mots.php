@@ -21,11 +21,10 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 
 	$visible = ($visible OR $cherche_mot OR ($flag === 'ajax'));
 
-	$trouver_table = charger_fonction('trouver_table', 'base');
 	$nom = table_objet($objet);
-	$desc = $trouver_table($nom);
-        $table = $desc['table'];
-        $table_id =  @$desc['key']["PRIMARY KEY"];
+	$table = table_objet_sql($objet);
+    $table_id = id_table_objet($objet);
+	
 	if ($objet == 'article') {
 		$url_base = "articles";
 	}
@@ -63,7 +62,7 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 		list($reponse, $nouveaux_mots) = recherche_mot_cle($cherche_mot, $select_groupe, $objet, $id_objet, $nom, $table_id, $url_base);
 		foreach($nouveaux_mots as $nouv_mot) {
 			if ($nouv_mot!='x') {
-				$modifier |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
+				$modifier |= inserer_mot("spip_mots_$nom", $table_id, $id_objet, $nouv_mot);
 			}
 		}
 		if ($modifier) {
