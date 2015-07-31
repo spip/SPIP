@@ -371,7 +371,7 @@ prive/formulaires/selecteur/inc-nav-articles.html -text
 prive/formulaires/selecteur/inc-nav-rubriques.html -text
 prive/formulaires/selecteur/inc-sel-articles.html -text
 prive/formulaires/selecteur/inc-sel-rubriques.html -text
-prive/formulaires/selecteur/jquery-ui-1.6.custom.js -text
+prive/formulaires/selecteur/jquery-ui-1.8.custom.js -text
 prive/formulaires/selecteur/jquery.picker.js -text
 prive/formulaires/selecteur/lister-racine-articles.html -text
 prive/formulaires/selecteur/lister-racine-rubriques.html -text
