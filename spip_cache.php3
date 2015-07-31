@@ -15,6 +15,6 @@ if ($purger_squelettes == "oui") {
 	if (verifier_action_auteur("purger_squelettes", $hash, $id_auteur))
 	  purger_squelettes();
 }
-redirige_par_entete("./ecrire/" . $redirect);
+redirige_par_entete($redirect);
 
 ?>
