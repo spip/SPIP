@@ -1561,7 +1561,7 @@ function extraire_balises($texte, $tag='a') {
 	}
 
 	if (preg_match_all(
-	",<$tag\s[^>]*(/>|>.*</$tag>|>),UimsS",
+	",<${tag}\b[^>]*(/>|>.*</${tag}>|>),UimsS",
 	$texte, $regs, PREG_PATTERN_ORDER))
 		return $regs[0];
 	else
