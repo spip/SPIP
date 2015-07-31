@@ -96,6 +96,13 @@ RewriteRule ^[^\.]+(\.html)?$		spip.php [QSA,E=url_propre:$0,L]
 # bloquer les acces aux repertoires .svn/ (SPIP, plugins, squelettes...)
 RewriteRule ^(.*/)?\.svn/ - [F]
 
+###
+# Fichiers "standards" (si absents de la racine)
+#
+RewriteRule ^robots[.]txt$      spip.php?page=robots.txt [QSA,L]
+RewriteRule ^favicon[.]ico$      spip.php?page=favicon.ico [QSA,L]
+##
+
 # expirer les images (pour contourner gros bug MSIE sur le cache)
 # note : a decommenter si vous voulez tester
 #<IfModule mod_expires.c>
