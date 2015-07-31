@@ -1,0 +1,121 @@
+<BOUCLE0(AUTEURS){tout}{id_auteur}{lang_select}><?php
+include_spip('inc/acces');
+if ('#ENV{arg}' === '[(#ID_AUTEUR|afficher_low_sec{ical})]') {
+?>#HTTP_HEADER{Content-Type: text/calendar}
+#CACHE{0}
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID: SPIP http://www.spip.net
+VERSION:2.0
+X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]<BOUCLE_article(ARTICLES){lang_select=non}{par date}{inverse}{statut="prop"}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:info_a_valider:>
+UID:article#ID_ARTICLE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART;VALUE=DATE:[(#DATE|affdate{"Ymd"})]
+CATEGORIES:<:info_a_valider:>
+URL:[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE})]
+END:VEVENT</BOUCLE_article>
+BEGIN:VTODO
+SUMMARY:<:info_articles_a_valider|filtrer_ical:>: #TOTAL_BOUCLE [[(#NOM_SITE_SPIP|filtrer_ical)]]
+UID:<:info_articles_a_valider|filtrer_ical:> #DATE [(#URL_SITE_SPIP|filtrer_ical)]
+DESCRIPTION:<BOUCLE_article2(ARTICLES){lang_select=non}{par date}{inverse}{statut="prop"}>#TITRE / </BOUCLE_article2>
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+CATEGORIES:<:icone_a_suivre|filtrer_ical:>
+URL:[(#URL_ECRIRE{accueil})]
+END:VTODO</B_article><BOUCLE_breve(BREVES){lang_select=non}{par date}{inverse}{statut="prop"}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:item_breve_proposee:>
+UID:breve#ID_BREVE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+CATEGORIES:<:item_breve_proposee:>
+URL:URL_ECRIRE{breves_voir, id_breve=#ID_BREVE}
+END:VEVENT</BOUCLE_breve>
+BEGIN:VTODO
+SUMMARY:<:info_breves_valider|filtrer_ical:>: #TOTAL_BOUCLE [[(#NOM_SITE_SPIP|filtrer_ical)]]
+UID:<:info_breves_valider|filtrer_ical:> #DATE [(#URL_SITE_SPIP|filtrer_ical)]
+DESCRIPTION:<BOUCLE_breve2(BREVES){lang_select=non}{par date}{inverse}{statut="prop"}>#TITRE / </BOUCLE_breve2>
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+CATEGORIES:<:icone_a_suivre|filtrer_ical:>
+URL:[(#URL_ECRIRE{accueil})]
+END:VTODO</B_breve>
+<BOUCLE_message_rv(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv=oui}{destinataire=#ID_AUTEUR}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)]
+DESCRIPTION:[(#TEXTE|filtrer_ical)]
+UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE_HEURE|date_ical)]
+DTSTART:[(#DATE_HEURE|date_ical)]
+DTEND:[(#DATE_FIN|date_ical)]
+CATEGORIES:<:info_pense_bete|filtrer_ical:>
+URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+END:VEVENT</BOUCLE_message_rv>
+<BOUCLE_message_rv_tous(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv=oui}{type=affich}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)]
+DESCRIPTION:[(#TEXTE|filtrer_ical)]
+UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE_HEURE|date_ical)]
+DTSTART:[(#DATE_HEURE|date_ical)]
+DTEND:[(#DATE_FIN|date_ical)]
+CATEGORIES:<:info_annonce|filtrer_ical:>
+URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+END:VEVENT</BOUCLE_message_rv_tous>
+<BOUCLE_message_pb(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{type=pb}{id_auteur=#ID_AUTEUR}>
+BEGIN:VTODO
+SUMMARY:[(#TITRE|filtrer_ical)]
+DESCRIPTION:[(#TEXTE|filtrer_ical)]
+UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE_HEURE|date_ical)]
+DTSTART:[(#DATE_HEURE|date_ical)]
+CATEGORIES:<:info_pense_bete|filtrer_ical:>
+URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+END:VTODO</BOUCLE_message_pb>
+<BOUCLE_message_n(messages auteurs_messages){lang_select=non}{par date_heure}{inverse}{statut="publie"}{rv!=oui}{vu=non}{type=normal}{destinataire=#ID_AUTEUR}>
+BEGIN:VTODO
+SUMMARY:<BOUCLE_message_n_f(FORUMS){lang_select=non}
+	{id_message}{statut=perso}{plat}{!par date}{0,1}
+	><BOUCLE_message_n_f_a(AUTEURS){id_auteur}
+	 >[(#NOM|filtrer_ical)] -  [(#TITRE|filtrer_ical)]</BOUCLE_message_n_f_a></BOUCLE_message_n_f>[(#TITRE|filtrer_ical)]<//B_message_n_f>
+DESCRIPTION:<BOUCLE_message2_n_f(FORUMS){lang_select=non}
+	{id_message}{statut=perso}{plat}{!par date}{0,1}
+	>[(#TEXTE|filtrer_ical)]</BOUCLE_message2_n_f>[(#TEXTE|filtrer_ical)]<//B_message2_n_f>
+UID:message#ID_MESSAGE @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE_HEURE|date_ical)]
+DTSTART:[(#DATE_HEURE|date_ical)]
+CATEGORIES:<:info_message_2|filtrer_ical:>
+URL:[(#URL_ECRIRE{message, id_message=#ID_MESSAGE})]
+<BOUCLE_message_n_a(AUTEURS auteurs_messages){lang_select=non}{id_message}>[(#ID_AUTEUR
+|=={#ENV{id_auteur}}|?{ORGANIZER,ATTENDEE})]:[(#NOM|filtrer_ical)][ <(#EMAIL|filtrer_ical)>]
+</BOUCLE_message_n_a>END:VTODO</BOUCLE_message_n>
+<?php
+	if ('#0:STATUT' == '0minirezo') {
+?><BOUCLE_forum(FORUMS){par date}{inverse}{tout}{statut="prop"}>
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]] <:icone_forum_suivi|filtrer_ical:>
+DESCRIPTION:[(#TEXTE|filtrer_ical)] #AUTEUR [<(#EMAIL_AUTEUR)>]
+UID:forum#ID_FORUM @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+DTEND:[(#DATE|date_ical{60})]
+CATEGORIES:<:icone_forum_suivi|filtrer_ical:>
+URL:[(#URL_ECRIRE{controle_forum, debut_id_forum=#ID_FORUM})]
+END:VEVENT</BOUCLE_forum>
+BEGIN:TODO
+SUMMARY:[(#NOM_SITE_SPIP|filtrer_ical)]] <:icone_forum_suivi|filtrer_ical:>
+UID:forum#ID_FORUM @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE|date_ical)]
+DTSTART:[(#DATE|date_ical)]
+CATEGORIES:<:icone_forum_suivi|filtrer_ical:>
+URL:[(#URL_ECRIRE{controle_forum})]
+END:TODO
+</B_forum><?php } ?>
+END:VCALENDAR
+<?php } else {
+include_spip('inc/minipres'); 
+echo minipres();
+}</BOUCLE0>

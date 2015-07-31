@@ -92,7 +92,7 @@ function exec_synchro_dist()
 
 	afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
 
-	afficher_liens_calendrier(generer_url_action("ical", "id_auteur=$id_auteur&arg=".afficher_low_sec($id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));
+	afficher_liens_calendrier(generer_url_public("ical_prive", "id_auteur=$id_auteur&arg=".afficher_low_sec($id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));
 
 	echo fin_cadre_relief(true);
 
