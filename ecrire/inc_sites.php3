@@ -114,7 +114,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$nom_site = addslashes($v['nom_site']);
 		$url_site = addslashes($v['url_site']);
 		if (!$nom_site) $nom_site = $url_site;
-		$url_syndic = addslashes($v['url_syndic']);
+		$url_syndic = trim(addslashes($v['url_syndic']));
 		$descriptif = addslashes($v['descriptif']);
 		$syndication = $v[syndic] ? 'oui' : 'non';
 		$result = spip_query("UPDATE spip_syndic ".
@@ -158,7 +158,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	$url_site = addslashes($url_site);
 	$descriptif = addslashes($descriptif);
 	if (strlen($url_syndic) < 8) $syndication = "non";
-	$url_syndic = addslashes($url_syndic);
+	$url_syndic = trim(addslashes($url_syndic));
 	
 	// recoller les champs du extra
 	if ($champs_extra) {
@@ -519,7 +519,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "</font>";
 }
 // Cas d'un site ayant un feedfinder detecte
-else if (preg_match(',^select: (.*),', $url_syndic, $regs)) {
+else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 	echo "<br /><br />\n";
 	echo "<form method='post' action=" . http_php_script("sites","id_syndic=$id_syndic") . ">";
 	foreach (
