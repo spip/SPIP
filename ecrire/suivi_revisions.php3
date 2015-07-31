@@ -17,8 +17,33 @@ include_ecrire("inc_suivi_revisions.php");
 include_spip("ecrire.php");
 include_spip("revisions.php");
 include_spip("diff.php");
+include_ecrire("inc_acces.php3");
 
 
+$debut = intval($debut);
+$uniq_auteur = ($uniq_auteur != false);
+
+
+if ($rss) {
+	// verifier la securite du lien (rss = md5(arguments + low_sec(id_auteur))
+	if (!verifier_low_sec ($id_auteur, $rss,
+	"rss suivi $debut $id_secteur $uniq_auteur $lang_choisie"
+	))
+		$rss = array(array('title' => 'Erreur'));
+	else
+		$rss = afficher_suivi_versions ($debut, $id_secteur, $uniq_auteur, $lang_choisie, true, true);
+
+	include_ecrire('inc_sites.php3');
+	@header('Content-Type: text/xml; charset='.lire_meta('charset'));
+
+	$intro = array(
+		'title' => _T("icone_suivi_revisions"),
+		'url' => lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS.'suivi_revisions.php3'
+	);
+
+	echo affiche_rss($rss, $intro);
+	exit;
+}
 
 
 debut_page(_T("icone_suivi_revisions"));
@@ -29,10 +54,6 @@ debut_page(_T("icone_suivi_revisions"));
 //
 
 debut_gauche();
-if (!$debut) $debut = 0;
-
-if (!$uniq_auteur) $uniq_auteur = false ;
-else $uniq_auteur = true;
 
 
 if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
@@ -95,6 +116,19 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 
 
 echo "</ul></div>\n";
+
+// lien vers le rss
+$link = new Link();
+$link->addVar('id_auteur', $connect_id_auteur);
+$link->addVar('rss', afficher_low_sec($connect_id_auteur,
+	"rss suivi $debut $id_secteur $uniq_auteur $lang_choisie"));
+
+echo "<div style='text-align: "
+	. $GLOBALS['spip_lang_right']
+	. ";'><a href='".$link->getUrl()."'>"
+	. http_img_pack("xml.gif", 'XML', "border='0' align='middle' valign='top'")
+	. "</a></div>";
+
 
 fin_cadre_relief();
 

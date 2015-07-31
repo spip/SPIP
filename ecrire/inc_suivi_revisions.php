@@ -32,7 +32,7 @@ function afficher_para_modifies ($texte, $court = false) {
 	return $texte;
 }
 
-function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false) {
+function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
 	global $connect_id_auteur, $connect_statut, $dir_lang;
 	
 	$nb_aff = 10;
@@ -53,35 +53,43 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 		WHERE versions.id_article = articles.id_article AND versions.id_version > 1 $req_where ";
 	
 	$result = spip_query($query . " ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
-	if (spip_num_rows($result) > 0) {	
-		$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
-		if ($court) $titre_table = afficher_plus("suivi_revisions.php3").$titre_table;
-		echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
-		bandeau_titre_boite2($titre_table, "historique-24.gif");
+	if (spip_num_rows($result) > 0) {
+
+		// Afficher l'entete de la boite
+		if (!$rss) {
+			$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
+			if ($court)
+				$titre_table = afficher_plus("suivi_revisions.php3")
+				. $titre_table;
+
+			echo "<div style='height: 12px;'></div>";
+			echo "<div class='liste'>";
+			bandeau_titre_boite2($titre_table, "historique-24.gif");
 	
-		$total = spip_num_rows(spip_query($query . "LIMIT 0, 149"));
+			$total = spip_num_rows(spip_query($query . "LIMIT 0, 149"));
 		
-		if ($total > $nb_aff) {
-			$nb_tranches = ceil($total / $nb_aff);
+			if ($total > $nb_aff) {
+				$nb_tranches = ceil($total / $nb_aff);
 			
-			echo "<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
+				echo "<div class='arial2' style='background-color: #dddddd; padding: 5px;'>";
 		
-			for ($i = 0; $i < $nb_tranches; $i++) {
-				if ($i > 0) echo " | ";
-				if ($i*$nb_aff == $debut) echo "<b>";
-				else echo "<a href='suivi_revisions.php3?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang'>";
-				echo (($i * $nb_aff) + 1);
-				if ($i*$nb_aff == $debut) echo "</b>";
-				else echo "</a>";
+				for ($i = 0; $i < $nb_tranches; $i++) {
+					if ($i > 0) echo " | ";
+					if ($i*$nb_aff == $debut) echo "<b>";
+					else echo "<a href='suivi_revisions.php3?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang'>";
+					echo (($i * $nb_aff) + 1);
+					if ($i*$nb_aff == $debut) echo "</b>";
+					else echo "</a>";
+				}
+				echo "</div>";
 			}
-			echo "</div>";
 		}
-	
+
+		// Afficher les 10 elements
 		while ($row = spip_fetch_array($result)) {
 			$id_version = $row['id_version'];
 			$id_auteur = $row['id_auteur'];
-			$date = date_relative($row['date']);
+			$date = $row['date'];
 			$id_article = $row['id_article'];
 			$statut = $row['statut'];
 			$titre = propre($row['titre']);	
@@ -93,23 +101,32 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			$result_auteur = spip_query($query_auteur);
 			if ($row_auteur = spip_fetch_array($result_auteur)) {
 				$nom = typo($row_auteur["nom"]);
-				if (strlen($nom) > 0) $nom = "($nom)";
 			}
 	
 	
 			$logo_statut = "puce-".puce_statut($statut).".gif";
-			
-			echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
+
+			if (!$rss) {
+				echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 	
-			echo "<span class='arial2'>";
-			if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
-			echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' border='0'>&nbsp;";
-			echo "<a class='$statut' style='font-weight: bold;' href='articles_versions.php3?id_article=$id_article'>$titre</a>";
-			echo "</span>";
-			echo "<span class='arial1'$dir_lang>";
-			echo " $date $nom";
-			echo "</span>";
-		
+				echo "<span class='arial2'>";
+				if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
+				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' border='0'>&nbsp;";
+				echo "<a class='$statut' style='font-weight: bold;' href='articles_versions.php3?id_article=$id_article'>$titre</a>";
+				echo "</span>";
+				echo "<span class='arial1'$dir_lang>";
+				echo " ".date_relative($date)." ";
+				if (strlen($nom)>0) echo "($nom)";
+				echo "</span>";
+			} else {
+				$item = array(
+					'title' => $titre,
+					'url' => lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS."articles_versions.php3?id_article=$id_article&id_version=$id_version",
+					'date' => $date,
+					'author' => $nom
+				);
+			}
+
 			if (!$court) { 
 				$query_diff = "
 					SELECT id_version
@@ -163,27 +180,38 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 					}
 				}
 				
-				echo debut_block_visible("$id_version-$id_article-$id_auteur");
+				if (!$rss)
+					echo debut_block_visible("$id_version-$id_article-$id_auteur");
+
 				if (is_array($textes))
 				foreach ($textes as $var => $t) {
 					if (strlen($t) > 0) {
-						echo "<blockquote class='serif1'>";
-						echo propre_diff($t);
+						if (!$rss) echo "<blockquote class='serif1'>";
+						$aff = propre_diff($t);
 						if ($GLOBALS['les_notes']) {
-							echo '<p>'.$GLOBALS['les_notes'];
+							$aff .= '<p>'.$GLOBALS['les_notes'];
 							$GLOBALS['les_notes'] = '';
 						}
-						echo "</blockquote>";
-					}		
-				}		
-				echo fin_block();
-			
+						if (!$rss) {
+							echo $aff;
+							echo "</blockquote>";
+						} else
+							$item['description'] = $aff;
+					}
+				}
+				if (!$rss) echo fin_block();
 			}
 			
-			echo "</div>";
+			if (!$rss) echo "</div>";
+
+			if ($rss)
+				$items[] = $item;
 		}		
-		echo "</div>";
+		if (!$rss) echo "</div>";
 	}
+
+	if ($rss)
+		return $items;
 }
 
 ?>
