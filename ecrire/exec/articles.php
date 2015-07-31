@@ -66,8 +66,11 @@ function exec_articles_dist()
 	$flag_editable = ($flag_modifiable OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 	if ($flag_editable) {
+		if (isset($_POST['titre'])) {
    // id_article_bloque,  globale dans inc/presentation 
-		$id_article_bloque =  articles_set($id_article, $id_rubrique, $flag_modifiable);
+			$id_article_bloque =     $id_article;  
+			articles_set($id_article, $id_rubrique, $flag_modifiable);
+		}
 
 	// renvoyer vers la page de l'article
 		if ($new == 'oui'
@@ -1316,14 +1319,10 @@ function insert_article($id_parent)
 function articles_set($id_article, $id_rubrique, $statut)
 {
 
-   if (!isset($_POST['titre'])) return 0;
-
    if (!strlen($titre_article=corriger_caracteres($_POST['titre'])))
 		$titre_article = _T('info_sans_titre');
 
    revisions_articles ($id_article, $id_rubrique, $statut, $titre_article);
-
-   return $id_article;  
 }
 
 ?>

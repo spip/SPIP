@@ -210,7 +210,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	<a	href=\"#\"
 		onClick=\"if(findObj('selection_rubrique').style.display=='none')
 			{charger_id_url_si_vide('" .
-	  generer_url_ecrire('ajax_page', "fonction=aff_rubrique&id=$id_rubrique$exclus", true) ."',
+	  generer_url_ecrire('ajax_page', "fonction=selectionner&id=$id_rubrique$exclus", true) ."',
 				'selection_rubrique');}
 			else {findObj('selection_rubrique').style.display='none';}\"
 	><img src='". _DIR_IMG_PACK . "loupe.png' style='vertical-align: middle;'
