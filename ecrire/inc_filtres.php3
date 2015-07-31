@@ -21,11 +21,11 @@ define("_ECRIRE_INC_FILTRES", "1");
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
 // pas au charset de la page [iso-8859-1 par defaut])
 function corriger_entites_html($texte) {
-	return ereg_replace('&amp;(#[0-9]+;)', '&\1', $texte);
+	return preg_replace(',&amp;(#[0-9]+;),i', '&\1', $texte);
 }
-// idem mais corriger aussi les &amp;eacute; en &eacute; (etait pour backends, mais n'est plus utilisee)
+// idem mais corriger aussi les &amp;eacute; en &eacute;
 function corriger_toutes_entites_html($texte) {
-	return eregi_replace('&amp;(#?[a-z0-9]+;)', '&\1', $texte);
+	return preg_replace(',&amp;(#?[a-z0-9]+;),', '&\1', $texte);
 }
 
 function entites_html($texte) {
@@ -220,6 +220,7 @@ function PtoBR($texte){
 function lignes_longues($texte, $l = 70) {
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
+	include_ecrire('inc_charsets.php3');
 	$texte = unicode_to_utf_8(filtrer_entites($texte));
 
 	// echapper les tags (on ne veut pas casser les a href=...)
