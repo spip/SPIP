@@ -58,6 +58,7 @@ function spip_cron() {
 
 	include_ecrire("inc_connect.php3");
 	if (!$db_ok) {
+		@touch($dir_ecrire.'data/mysql_out');
 		spip_log('pas de connexion DB pour taches de fond (cron)');
 		return;
 	}
