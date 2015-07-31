@@ -260,6 +260,8 @@ function image_gd_output($img,$valeurs, $qualite=_IMG_GD_QUALITE){
 			  && !$lock
 	  )
 		if (@file_exists($valeurs['fichier_dest'])){
+			// dans tous les cas mettre a jour la taille de l'image finale
+			list ($valeurs["hauteur_dest"],$valeurs["largeur_dest"]) = taille_image($valeurs['fichier_dest']);
 			$valeurs['date'] = @filemtime($valeurs['fichier_dest']); // pour la retrouver apres disparition
 			ecrire_fichier($valeurs['fichier_dest'].'.src',serialize($valeurs),true);
 		}
