@@ -31,6 +31,7 @@ function exec_brouteur_dist()
 		$nb_col = 3;
 	}
 	$largeur_col = floor($largeur_table/$nb_col);
+	$profile = ($GLOBALS['var_profile']) ? "&var_profile=1" : '';
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_articles_tous'), "accueil", "tout-site", " hauteurFrame($nb_col);");
@@ -77,7 +78,7 @@ function exec_brouteur_dist()
 					if (!$la_rubrique=$row['id_parent'])
 					  $class = "brouteur_icone_secteur";
 					else $class = "brouteur_icone_rubrique";
-					$ret = "\n<div class='$class'><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien") . "'>$titre</a></div>\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+					$ret = "\n<div class='$class'><a href='" . generer_url_ecrire("brouteur","id_rubrique=$lien$profile") . "'>$titre</a></div>\n<div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 				}
 			}
 			$lien = $dest[$nb_col-$compteur-2];
@@ -87,7 +88,7 @@ function exec_brouteur_dist()
 			
 			echo "<div id='brouteur_hierarchie'>"; // pour calculer hauteur de iframe
 			echo "<div class='brouteur_icone_racine'><a href='",
-				generer_url_ecrire("brouteur","id_rubrique=$lien"),
+				generer_url_ecrire("brouteur","id_rubrique=$lien$profile"),
 				"'>",
 				_T('info_racine_site'),
 				"</a></div>",
@@ -101,8 +102,8 @@ function exec_brouteur_dist()
 
 	for ($i=0; $i < $nb_col; $i++) {		
 		echo "<iframe width='{$largeur_col}px' style='float:$spip_lang_left' id='iframe$i' name='iframe$i'",
-			(" src='" . generer_url_ecrire('brouteur_frame',"rubrique=".$dest[$i]."&frame=$i'")),
-		  " class='iframe-brouteur' height='",
+		  (" src='" . generer_url_ecrire('brouteur_frame',"frame=$i$profile&rubrique=".$dest[$i])),
+		  "' class='iframe-brouteur' height='",
 		  $hauteur_table,
 		  "'></iframe>";
 	}
