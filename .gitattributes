@@ -257,7 +257,6 @@ dist/modeles/pagination_page.html -text
 dist/modeles/pagination_page_precedent_suivant.html -text
 dist/modeles/pagination_precedent_suivant.html -text
 dist/modeles/paginationitem.html -text
-dist/out.gif -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
@@ -271,6 +270,7 @@ dist/prive/site_infos_fonctions.php -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/spip.png -text
+dist/spip_out.gif -text
 dist/style_prive.html -text
 dist/style_prive_defaut.css -text
 dist/style_prive_ie.html -text
