@@ -52,6 +52,7 @@ if (!isset($EXPORT_tables_noexport)){
 		$EXPORT_tables_noexport[]='spip_auteurs_messages';
 	}
 }
+$GLOBALS['flag_ob_flush'] = function_exists('ob_flush');
 
 function exec_export_all_dist()
 {
@@ -190,7 +191,8 @@ function exec_export_all_dist()
 			array_unshift($tables_for_dump,$link_table);
 	}
 
-	ob_flush();flush();
+	if ($GLOBALS['flag_ob_flush']) ob_flush();
+	flush();
 
 	$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
 	$etape = $status_dump[2];
@@ -201,7 +203,8 @@ function exec_export_all_dist()
 			export_objets($table, primary_index_table($table), $tables_for_link[$table], 0, false, $i, _T("info_sauvegarde").", $table");
 		}
 
-		ob_flush();flush();
+		if ($GLOBALS['flag_ob_flush']) ob_flush();
+		flush();
 		ramasse_parties($file, $gz, $partfile);
 
 		$f = ($gz) ? gzopen($file, "ab") : fopen($file, "ab");
@@ -291,7 +294,8 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 		}
 		if ($pos_in_table!=0)
 			echo "| ", $pos_in_table;
-		ob_flush();flush();
+		if ($GLOBALS['flag_ob_flush']) ob_flush();
+		flush();
 
 		if ($limit == 0) $limit=$total;
 		$result = spip_query("SELECT * FROM $table LIMIT $debut,$limit");
@@ -326,11 +330,13 @@ function export_objets($table, $primary, $liens, $file = 0, $gz = false, $etape_
 	else if ($etape_actuelle < $etape_en_cours) {
 		if (!isset($etape_affichee[$etape_actuelle]))
 			echo "<li>", $etape_actuelle,'-',$nom_etape,"</li>";
-		ob_flush();flush();
+		if ($GLOBALS['flag_ob_flush']) ob_flush();
+		flush();
 	} else {
 		if (!isset($etape_affichee[$etape_actuelle]))
 			echo "<li> <font color='#999999'>",$etape_actuelle,'-',$nom_etape,'</font></li>';
-		ob_flush();flush();
+		if ($GLOBALS['flag_ob_flush']) ob_flush();
+		flush();
 	}
 	return array($string,$status_dump);
 }
