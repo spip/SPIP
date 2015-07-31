@@ -243,6 +243,10 @@ function my_strtotime($la_date) {
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3"); # pour filtrer_entites()
 
+	// Accepter les URLs au format feed:// ou qui ont oublie le http://
+	$url = preg_replace(',^feed://,i', 'http://', $url);
+	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
+
 	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 
@@ -261,6 +265,7 @@ function analyser_site($url) {
 			$result['url_site'] = filtrer_entites($regs[1]);
 		else if (preg_match(',<link[^>]*>,Uims', $header, $regs))
 			$result['url_site'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
+		$result['url_site'] = url_absolue($result['url_site'], $url);
 
 		if (preg_match('<(description|tagline)([[:space:]][^>]*)?'
 		.'>(.*)</\1>,Uims', $header, $r))
@@ -290,71 +295,6 @@ function analyser_site($url) {
 	return $result;
 }
 
-// Inserer les references aux fichiers joints
-// presentes sous la forme microformat <a rel="enclosure">
-function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
-	if (!preg_match_all(
-	',<a([[:space:]][^>]*)?[[:space:]]rel=[\'"]enclosure[^>]*>,',
-	$enclosures, $regs, PREG_PATTERN_ORDER))
-		return false;
-	$enclosures = $regs[0];
-
-	include_ecrire('inc_filtres.php3'); # pour extraire_attribut
-
-	list($id_syndic_article) = spip_fetch_array(spip_query(
-	"SELECT id_syndic_article FROM spip_syndic_articles
-	WHERE id_syndic=$id_syndic AND url='".addslashes($le_lien)."'"));
-
-	// Attention si cet article est deja vu, ne pas doubler les references
-	spip_query("DELETE FROM spip_documents_syndic
-	WHERE id_syndic_article=$id_syndic_article");
-
-	// Integrer les enclosures
-	foreach ($enclosures as $enclosure) {
-		// href et type sont obligatoires
-		if ($enc_regs_url = extraire_attribut($enclosure,'href')
-		AND $enc_regs_type = extraire_attribut($enclosure,'type')) {
-
-			$url = substr(urldecode($enc_regs_url), 0,255);
-			$url = addslashes(abs_url($url, $le_lien));
-			$type = $enc_regs_type;
-
-			// Verifier que le content-type nous convient
-			list($id_type) = spip_fetch_array(spip_query("SELECT id_type
-			FROM spip_types_documents WHERE mime_type='$type'"));
-			if (!$id_type) {
-				spip_log("enclosure de type inconnu ($type) $url");
-				list($id_type) = spip_fetch_array(spip_query("SELECT id_type
-				FROM spip_types_documents WHERE extension='bin'"));
-				// si les .bin ne sont pas autorises, on ignore ce document
-				if (!$id_type) continue;
-			}
-
-			// length : optionnel (non bloquant)
-			$taille = intval(extraire_attribut($enclosure, 'length'));
-
-			// Inserer l'enclosure dans la table spip_documents
-			if ($t = spip_fetch_array(spip_query("SELECT id_document FROM
-			spip_documents WHERE fichier='$url' AND distant='oui'")))
-				$id_document = $t['id_document'];
-			else {
-				spip_query("INSERT INTO spip_documents
-				(id_type, titre, fichier, date, distant, taille, mode)
-				VALUES ($id_type,'','$url',NOW(),'oui',$taille, 'document')");
-				$id_document = spip_insert_id();
-			}
-
-			// lier avec l'article syndique
-			spip_query("INSERT INTO spip_documents_syndic
-			(id_document, id_syndic, id_syndic_article)
-			VALUES ($id_document, $id_syndic, $id_syndic_article)");
-
-			$n++;
-		}
-	}
-
-	return $n; #nombre d'enclosures integrees
-}
 
 // A partir d'un <dc:subject> ou autre essayer de recuperer
 // le mot et son url ; on cree <a href="url" rel="tag">mot</a>
@@ -404,7 +344,7 @@ function ajouter_tags($matches, $item) {
 
 // prend un fichier backend et retourne un tableau des items lus,
 // et une chaine en cas d'erreur
-function analyser_backend($rss) {
+function analyser_backend($rss, $url_syndic='') {
 	include_ecrire("inc_texte.php3"); # pour couper()
 	include_ecrire("inc_filtres.php3"); # pour filtrer_entites()
 
@@ -419,6 +359,9 @@ function analyser_backend($rss) {
 			$rss = str_replace($reg[0], "@@@SPIP_CDATA$n@@@", $rss);
 		}
 	}
+
+	// supprimer les commentaires
+	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
 
 	// chercher auteur/lang dans le fil au cas ou les items n'en auraient pas
 	list($header) = preg_split(',<(item|entry)[[:space:]>],', $rss, 2);
@@ -455,6 +398,8 @@ function analyser_backend($rss) {
 			$data['url'] = filtrer_entites($match[1]);
 		else
 			$data['url'] = false;
+
+		$data['url'] = url_absolue($data['url'], $url_syndic);
 
 		// Titre (semi-obligatoire)
 		# note http://static.userland.com/gems/backend/gratefulDead.xml
@@ -650,12 +595,14 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	tags='".addslashes($tags)."'
 	WHERE id_syndic='$now_id_syndic' AND url='".addslashes($le_lien)."'");
 
-	// Inserer les enclosures
-	if ($GLOBALS['integrer_enclosures']
-	AND $data['enclosures']) {
-		traiter_les_enclosures_rss($data['enclosures'],
-			$now_id_syndic, $le_lien);
-	}
+	// Point d'entree post_syndication
+	pipeline('post_syndication',
+		array(
+			$le_lien,
+			$now_id_syndic,
+			$data
+		)
+	);
 
 	return $ajout;
 }
@@ -694,7 +641,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	if (!$rss)
 		$articles = _T('avis_echec_syndication_02');
 	else
-		$articles = analyser_backend($rss);
+		$articles = analyser_backend($rss, $url_syndic);
 
 	// Les enregistrer dans la base
 	if (is_array($articles)) {
@@ -962,19 +909,6 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			if (strlen($lesauteurs) > 0) $date = $lesauteurs.', '.$date;
 			$s.= " ($date)";
 
-			// S'il y a des fichiers joints (enclosures), on les affiche ici
-/*			if (spip_num_rows($q = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_syndic AS lien WHERE lien.id_syndic_article = $id_syndic_article AND lien.id_document = docs.id_document"))) {
-				include_ecrire('inc_documents.php3');
-				while ($t = spip_fetch_array($q)) {
-					$t = $t['fichier'];
-					$s .= '&nbsp;' .
-						http_href_img($t,
-							'attachment.gif',
-							'height="15" width="15" border="0"',
-							entites_html($t));
-				}
-			}
-*/
 			// Tags : d'un cote les enclosures, de l'autre les liens
 			if($e = afficher_enclosures($row['tags']))
 				$s .= ' '.$e;
