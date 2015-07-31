@@ -73,12 +73,13 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 // Ecrire un fichier de maniere un peu sure
 //
 // zippe les fichiers .gz
-function ecrire_fichier ($fichier, $contenu) {
+function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
-	if ($GLOBALS['var_preview'] OR ($GLOBALS['var_mode'] == 'debug')
+	if (($GLOBALS['var_preview'] OR ($GLOBALS['var_mode'] == 'debug')
 	OR defined('spip_interdire_cache'))
+	AND !$ecrire_quand_meme)
 		return;
 
 	$gzip = (substr($fichier, -3) == '.gz');

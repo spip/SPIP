@@ -125,7 +125,7 @@ function traite_xhtml ($buffer) {
 		if (!file_exists($nomfich)) {
 			define ('_calcul_tidy', 1);
 			$tmp = "$nomfich.".@getmypid().".tmp";
-			ecrire_fichier($tmp, $buffer);
+			ecrire_fichier($tmp, $buffer, true); # ecrire meme en mode preview
 
 			$c = _TIDY_COMMAND
 				." --tidy-mark false"
