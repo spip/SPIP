@@ -229,9 +229,13 @@ class IterateurDATA implements Iterator {
 			$sortfunc = '';
 			foreach($this->command['orderby'] as $tri) {
 				if (preg_match(',^\.?(\w+)( DESC)?$,S', $tri, $r)) {
+					if ($r[1] == 'valeur')
+						$tv = '%s';
+					else
+						$tv = 'table_valeur(%s, '.$r[1].')';
 					$sortfunc .= '
-					$a = table_valeur($aa, "'.$r[1].'");
-					$b = table_valeur($bb, "'.$r[1].'");
+					$a = '.sprintf($tv,'$aa').';
+					$b = '.sprintf($tv,'$bb').';
 					if ($a <> $b)
 						return ($a ' . ($r[2] ? '>' : '<').' $b) ? -1 : 1;';
 				}
