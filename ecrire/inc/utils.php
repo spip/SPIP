@@ -776,7 +776,10 @@ function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $co
 {
 	if (!$connect) $connect = true;
 	$h = generer_url_entite($id, $entite, $args, $ancre, $connect);
-	if (!preg_match(',^\w+:,', $h)) $h = url_absolue(_DIR_RACINE . $h);
+	if (!preg_match(',^\w+:,', $h)) {
+		include_spip('inc/filtres_mini');
+		$h = url_absolue(_DIR_RACINE . $h);
+	}
 	return  $h;
 }
 
