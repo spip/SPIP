@@ -582,7 +582,7 @@ if (!$PATH_TRANSLATED) {
 }
 
 function spip_query($query) {
-	if (_FILE_CONNECT)  {$GLOBALS['db_ok'] = false; return;}
+	if (!_FILE_CONNECT)  {$GLOBALS['db_ok'] = false; return;}
 	include_local(_FILE_CONNECT);
 	if (!$GLOBALS['db_ok'])	return;
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
