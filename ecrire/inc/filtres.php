@@ -14,9 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');
-// on definit la matrice pour les filtres images : le compilateur fera passer l'appel par filtrer
-// on ne definit pas de fichier a inclure : l'inclusion sera faite dans image_filtrer
-// par un include_spip unique en cas d'appel multiple
+// signaler les filtres ayant besoin d'inclue inc/filtres_images
 
 $GLOBALS['spip_matrice']['image_valeurs_trans'] = '';
 $GLOBALS['spip_matrice']['image_reduire'] = '';
@@ -43,18 +41,17 @@ $GLOBALS['spip_matrice']['image_imagick'] = '';
 $GLOBALS['spip_matrice']['image_ramasse_miettes'] = '';
 $GLOBALS['spip_matrice']['image_passe_partout'] = '';
 
-$inc_filtres_images = _DIR_RESTREINT."inc/filtres_images.php"; # find_in_path('inc/filtres_images');
-$GLOBALS['spip_matrice']['couleur_dec_to_hex'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_hex_to_dec'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_extreme'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_inverser'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_eclaircir'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_foncer'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_foncer_si_claire'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_web'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_4096'] = $inc_filtres_images;
-$GLOBALS['spip_matrice']['couleur_saturation'] = $inc_filtres_images;
+$GLOBALS['spip_matrice']['couleur_dec_to_hex'] ='';
+$GLOBALS['spip_matrice']['couleur_hex_to_dec'] ='';
+$GLOBALS['spip_matrice']['couleur_extreme'] ='';
+$GLOBALS['spip_matrice']['couleur_inverser'] ='';
+$GLOBALS['spip_matrice']['couleur_eclaircir'] ='';
+$GLOBALS['spip_matrice']['couleur_foncer'] ='';
+$GLOBALS['spip_matrice']['couleur_foncer_si_claire'] ='';
+$GLOBALS['spip_matrice']['couleur_eclaircir_si_foncee'] ='';
+$GLOBALS['spip_matrice']['couleur_web'] ='';
+$GLOBALS['spip_matrice']['couleur_4096'] ='';
+$GLOBALS['spip_matrice']['couleur_saturation'] ='';
 
 // http://doc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
@@ -78,9 +75,8 @@ function appliquer_filtre($arg, $filtre) {
 // et arguments
 // http://doc.spip.org/@filtrer
 function filtrer($filtre) {
-	if (isset($GLOBALS['spip_matrice'][$filtre])
-	AND $f = $GLOBALS['spip_matrice'][$filtre])
-		include_once($f);
+	if (isset($GLOBALS['spip_matrice'][$filtre]))
+		include_spip('inc/filtres_images');
 
 	$tous = func_get_args();
 	if (substr($filtre,0,6)=='image_')
@@ -153,16 +149,11 @@ function version_svn_courante($dir) {
 
 // http://doc.spip.org/@image_filtrer
 function image_filtrer($args){
-	static $inclure = true;
 	$filtre = array_shift($args); # enlever $filtre
 	$texte = array_shift($args);
 	if (!$texte) return;
 	// Cas du nom de fichier local
 	if (preg_match(',^('._DIR_IMG .'|'. _DIR_IMG_PACK .'|'. _DIR_VAR .'),', $texte)) {
-		if ($inclure){
-			include_spip('inc/filtres_images');
-			$inclure = false;
-		}
 		array_unshift($args,"<img src='$texte' />");
 		return call_user_func_array($filtre, $args);
 	}
@@ -171,10 +162,6 @@ function image_filtrer($args){
 	if (preg_match_all(
 		',(<([a-z]+) [^<>]*spip_documents[^<>]*>)?\s*(<img\s.*>),UimsS',
 		$texte, $tags, PREG_SET_ORDER)) {
-		if ($inclure){
-			include_spip('inc/filtres_images');
-			$inclure = false;
-		}
 		foreach ($tags as $tag) {
 			$class = extraire_attribut($tag[3],'class');
 			if (!$class || (strpos($class,'no_image_filtrer')===FALSE)){

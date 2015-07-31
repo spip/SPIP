@@ -625,23 +625,22 @@ function memoriser_fichiers($dir) {
 
 // http://doc.spip.org/@find_in_path
 function find_in_path ($file, $dirname='') {
-	static $ram;
+	static $files=array(), $dirs=array();
 
 	$a = strrpos($file,'/');
 	if ($a !== false) {
-		$dirname .= substr($file, 0, $a+1);
-		$file = substr($file, $a+1);
+		$dirname .= substr($file, 0, ++$a);
+		$file = substr($file, $a);
 	}
 
+	if (isset($files[$dirname][$file])) return $files[$dirname][$file];
+
 	foreach(creer_chemin() as $dir) {
-		if (!isset($ram[$s = $dir . $dirname]))
-			$ram[$s] = is_dir($s) ? array() : false;
-		if (isset($ram[$s][$file])) {
-			if ($a = $ram[$s][$file]) return $a;
-		} elseif (is_array($ram[$s])) {
-			$a = $s . $file;
-			if ($ram[$s][$file]=(is_readable($a)?$a:''))
-				return $a;
+		if (!isset($dirs[$a = $dir . $dirname]))
+			$dirs[$a] = is_dir($a);
+		if ($dirs[$a]) {
+			if (is_readable($a .= $file))
+				return $files[$dirname][$file] = $a;
 		}
 	}
 }
