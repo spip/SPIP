@@ -48,7 +48,7 @@ function formulaire_signature($id_article) {
 	include_ecrire("inc_texte.php3");
 	include_ecrire("inc_filtres.php3");
 
-	echo "<a name='sp$id_article'>";
+	echo "<a name='sp$id_article'></a>\n";
 
 	if ($val_confirm) {
 		$query_sign = "SELECT * FROM spip_signatures WHERE statut='$val_confirm'";
