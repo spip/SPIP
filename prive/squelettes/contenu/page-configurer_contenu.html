@@ -4,11 +4,12 @@
 	#FORMULAIRE_CONFIGURER_ARTICLES
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_RUBRIQUES
+</div>
+
 <?php
 include_spip('inc/presentation');
-
-	$rubriques = charger_fonction('rubriques', 'configuration');
-	echo $rubriques();
 
 	$breves = charger_fonction('breves', 'configuration');
 	echo $breves();
