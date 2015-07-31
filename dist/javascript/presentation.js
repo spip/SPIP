@@ -13,7 +13,7 @@ function decaleSousMenu() {
   if(!sousMenu.length) return;
   var left;
   if($.browser.msie) {
-    sousMenu.bgIframe();
+    if(sousMenu.bgIframe) sousMenu.bgIframe();
     left = getBiDiOffset(sousMenu[0].parentNode) + getBiDiOffset($("#bandeau-principal div")[0]);
   } else left = getBiDiOffset(sousMenu[0]);
   if (left > 0) {
