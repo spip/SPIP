@@ -377,6 +377,7 @@ function display_conflit_champ($x) {
 function signaler_conflits_edition($conflits, $redirect='') {
 	include_spip('inc/minipres');
 	include_spip('inc/revisions');
+	include_spip('afficher_diff/champ');
 	include_spip('inc/suivi_versions');
 	include_spip('inc/diff');
 	foreach ($conflits as $champ=>$a) {

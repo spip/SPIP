@@ -35,7 +35,7 @@ function action_editer_objet_dist($id=null, $objet=null, $set=null) {
 	if (!$id = intval($id)) {
 		// on ne sait pas si un parent existe mais on essaye
 		$id_parent = _request('id_parent');
-	  $id = objet_inserer($objet, $id_parent);
+		$id = objet_inserer($objet, $id_parent);
 	}
 
 	if (!($id = intval($id))>0)
@@ -75,8 +75,13 @@ function objet_modifier($objet, $id, $set=null) {
 		$champ_date = 'date';
 
 	$white = array_keys($desc['field']);
-	if (isset($desc['champs_editables']) AND is_array($desc['champs_editables']))
+	// on ne traite pas la cle primaire par defaut, notamment car
+	// sur une creation, id_x vaut 'oui', et serait enregistre en id_x=0 dans la base
+	$white = array_diff($white, array($desc['key']['PRIMARY KEY']));
+
+	if (isset($desc['champs_editables']) AND is_array($desc['champs_editables'])) {
 		$white = $desc['champs_editables'];
+	}
 	$c = collecter_requests(
 		// white list
 		$white,
