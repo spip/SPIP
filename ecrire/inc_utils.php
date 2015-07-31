@@ -620,7 +620,7 @@ function charger_plugins($plugins) {
 
 function autoriser_sans_cookie($nom)
 {
-  static $autsanscookie = array('aide_index', 'install', 'admin_repair', 'spip_cookie', 'spip_style');
+  static $autsanscookie = array('aide_index', 'install', 'admin_repair', 'spip_cookie');
   $nom = preg_replace('/.php[3]?$/', '', basename($nom));
   return in_array($nom, $autsanscookie);
 }

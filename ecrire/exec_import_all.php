@@ -58,7 +58,7 @@ function import_all_check() {
 	ecrire_meta("status_restauration", "0");
 	ecrire_metas();
 	// se rappeler pour montrer illico ce qu'on fait 
-	header('Location: ./');
+	exit;
 }
 
 function import_all_dist()
@@ -67,7 +67,7 @@ function import_all_dist()
 	if (!$GLOBALS['meta']["debut_restauration"])
 		import_all_check();
 
-	// puis commencer ou continuer
+	// sinon commencer ou continuer
 	include_ecrire('inc_import');
 	import_all_continue(array(
 'spip_auteurs',

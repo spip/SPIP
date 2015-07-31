@@ -28,6 +28,7 @@ function install_dist()
 		exit;
 	}
 	@unlink(_FILE_META);
+	unset($GLOBALS['meta']);
 	$fonc = 'install_' . $etape;
 	if (function_exists($fonc))
 		$fonc();

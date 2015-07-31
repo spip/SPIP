@@ -25,7 +25,7 @@ function install_debut_html($titre = 'AUTO') {
 		$titre=_T('info_installation_systeme_publication');
 
 	include_ecrire('inc_headers');
-	include_ecrire('inc_style');
+
 	http_no_cache();
 	$args =  "couleur_claire=FFCC66&couleur_foncee=000000&left=" . 
 		$GLOBALS['spip_lang_left']
