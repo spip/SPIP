@@ -41,7 +41,7 @@ function action_spip_image_effacer_dist() {
 // $source = $_FILES[0]
 // $dest = arton12.xxx
 function action_spip_image_ajouter_dist() {
-	global $sousaction2, $source, $arg;
+	global $sousaction2, $source, $arg, $formats_logos;
 
 	include_spip('inc/getdocument');
 	if (!$sousaction2) {
@@ -104,10 +104,7 @@ function action_spip_image_ajouter_dist() {
 		}
 		else {
 			@unlink ($f);
-			check_upload_error(6,
-				_T('info_logo_format_interdit',
-				array ('formats' => 'GIF, JPG, PNG'))
-			);
+			check_upload_error(6,_T('info_logo_format_interdit', $formats_logos));
 		}
 	
 	}

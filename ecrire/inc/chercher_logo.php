@@ -101,17 +101,20 @@ function afficher_boite_logo($id_objet, $id, $texteon, $texteoff, $script) {
 
 function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 
-		include_spip('inc/actions');
-		$dir_ftp = determine_upload();
-		$afficher = "";
-		if ($dir_ftp
-		AND $fichiers = preg_files($dir_ftp, '[.](gif|jpg|png)$')) {
-			foreach ($fichiers as $f) {
-				$f = substr($f, strlen($dir_ftp));
-				$afficher .= "\n<option value='$f'>$f</option>";
-			}
+	global $formats_logos;
+	include_spip('inc/actions');
+	$dir_ftp = determine_upload();
+	$afficher = "";
+	$reg = '[.](' . join('|', $formats_logos) . ')$';
+
+	if ($dir_ftp
+	AND $fichiers = preg_files($dir_ftp, $reg)) {
+		foreach ($fichiers as $f) {
+			$f = substr($f, strlen($dir_ftp));
+			$afficher .= "\n<option value='$f'>$f</option>";
 		}
-		if (!$afficher) {
+	}
+	if (!$afficher) {
 		  if ($dir_ftp) 
 			$afficher = _T('info_installer_images_dossier',
 				array('upload' => '<b>' . $dir_ftp . '</b>'));
