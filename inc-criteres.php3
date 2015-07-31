@@ -450,7 +450,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		// jointure pour lier la table principale et la nouvelle
 		$boucle->from[] = "spip_mots AS l_mots$num_lien";
 		$boucle->where[] = "$lien$num_lien.id_mot=l_mots$num_lien.id_mot";
-		$col_table = "mots$num_lien";
+		$col_table = "l_mots$num_lien";
 
 		if ($col == 'type_mot')
 		  $col = 'type';
