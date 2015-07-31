@@ -30,10 +30,6 @@ function mysql_timestamp_to_time($maj)
 	return mktime ($t_h, $t_min, $t_sec, $t_mois, $t_jour, $t_an, 0);
 }
 
-// Conversion texte -> xml (ajout d'entites)
-function text_to_xml($string) {
-	return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
-}
 
 
 // Liste un sommaire d'objets de n'importe quel type
