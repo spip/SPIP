@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_e_accent_aigu' => 'Insert a capital E with acute accent',
 'barre_eo' => 'Insert an oe-ligature',
 'barre_eo_maj' => 'Insert a capital EO-ligature',
+'barre_euro' => '<NEW> Ins&eacute;rer le symbole &euro;',
 'barre_gras' => 'Put in {{bold type}}',
 'barre_guillemets' => 'Place between &ldquo;commas&rdquo;',
 'barre_guillemets_simples' => 'Place between &lsquo;commas&rsquo;',

@@ -81,7 +81,7 @@ desactivada per raons de seguretat (cosa normal en molts servidors d\'allotjamen
 'barre_e_accent_aigu' => 'Inserir una E maj&uacute;scula amb accent agut',
 'barre_eo' => 'Inserir una E dins la O',
 'barre_eo_maj' => 'Inserir una E dins la O maj&uacute;scula',
-'barre_euro' => 'Introduir el simblo €',
+'barre_euro' => 'Introduir el simblo &euro;€',
 'barre_gras' => 'Posar en {{negreta}}',
 'barre_guillemets' => 'Posar entre &laquo; cometes franceses &raquo; ',
 'barre_guillemets_simples' => 'Posar entre „cometes“',
@@ -1131,7 +1131,7 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'menu_aide_articles_redirection' => 'Redirecci&oacute; d\'un article',
 'menu_aide_articles_statut' => 'Estat de l\'article',
 'menu_aide_articles_texte' => 'Text',
-'menu_aide_articles_titres' => 'T&iacute;tol, avantt&iacute;tol, subt&iacute;tol',
+'menu_aide_articles_titres' => 'T&iacute;tol, avant&iacute;tol, subt&iacute;tol',
 'menu_aide_breves' => 'Les breus',
 'menu_aide_breves_breves' => 'Breus',
 'menu_aide_breves_choix' => 'Escollir la secci&oacute;',
@@ -1250,9 +1250,9 @@ i tornar-vos a connectar al lloc.
 
 
 // T
-'taille_ko' => '@taille@&nbsp;ko',
+'taille_ko' => '@taille@&nbsp;kB',
 'taille_mo' => '@taille@&nbsp;MB',
-'taille_octets' => '@taille@&nbsp;octets',
+'taille_octets' => '@taille@&nbsp;bytes',
 'text_article_propose_publication' => 'Article proposat a la seva publicaci&oacute;. No dubteu a donar la vostra opini&oacute; gr&agrave;cies al f&ograve;rum adjunt a aquest article (al capdavall de la p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidors LDAP no accepten accessos an&ograve;nims. En aquest cas &eacute;s necessari especificar un identificador d\'acc&eacute;s inicial per tal de poder buscar informacions en el directori. En la majoria de casos tanmateix, els camps seg&uuml;ents es podr&aacute;n deixar buits.',
 'texte_actualite_site_1' => 'Aquesta p&agrave;gina cont&eacute; l\'actualitat del lloc i us permet seguir les vostres contribucions. Hi trobareu els vostres articles en proc&eacute;s de redacci&oacute;, els articles i els breus sobre els que esteu convidats a opinar i tamb&eacute; un recordatori de les vostres contribucions anteriors. <p><hr><p>Quan estigueu familiaritzats amb la interf&iacute;cie, podeu clicar a &laquo;',
