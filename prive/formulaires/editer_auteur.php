@@ -53,6 +53,13 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	$auth_methode = ($auth_methode ? $auth_methode : 'spip');
 	include_spip('inc/auth');
 
+	if ($email = _request('email')){
+		include_spip('inc/filtres');
+		if (!email_valide($email)){
+			$erreurs['email'] = _T('form_email_non_valide');
+		}
+	}
+
 	if ($err = auth_verifier_login($auth_methode, _request('new_login'), $id_auteur)){
 		$erreurs['new_login'] = $err;
 		$erreurs['message_erreur'] .= $err;
@@ -77,9 +84,31 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
 	if (_request('saisie_webmestre') OR _request('webmestre'))
 		set_request('webmestre',_request('webmestre')?_request('webmestre'):'non');
+	$retour = parametre_url($retour, 'email_confirm','');
 
-	return formulaires_editer_objet_traiter('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
-	//return $message;
+	if (!autoriser('modifier','auteur',$id_auteur,null,array('statut'=>'?'))){
+		$email_nouveau = _request('email');
+		set_request('email'); // vider la saisie car l'auteur n'a pas le droit de modifier cet email
+		// mais si c'est son propre profil on lui envoie un email à l'adresse qu'il a indique
+		// pour qu'il confirme qu'il possede bien cette adresse
+		// son clic sur l'url du message permettre de confirmer le changement
+		// et de revenir sur son profil
+		if ($GLOBALS['visiteur_session']['id_auteur']==$id_auteur
+			AND $email_nouveau!=sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur))){
+			$envoyer_mail = charger_fonction('envoyer_mail','inc');
+			$envoyer_mail(
+							$email_nouveau,
+							_T('form_auteur_confirmation'),
+							_T('form_auteur_mail_confirmation',
+											array('url'=>generer_action_auteur('confirmer_email', $email_nouveau,parametre_url($retour, 'email_modif','ok'))))
+			);
+			set_request('email_confirm',$email_nouveau);
+			$retour = parametre_url($retour, 'email_confirm',$email_nouveau);
+		}
+	}
+
+	$res = formulaires_editer_objet_traiter('auteur',$id_auteur,0,0,$retour,$config_fonc,$row,$hidden);
+	return $res;
 }
 
 ?>
