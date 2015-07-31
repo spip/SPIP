@@ -24,7 +24,7 @@ function exec_meme_rubrique_dist()
         if (($GLOBALS['auteur_session']['statut'] != '0minirezo')
         OR (!acces_rubrique($id))
 	OR (!preg_match('/^[\w_-]+$/',$date))
-        OR (!preg_match('/^[\w_-]+$/',$type))) {
+	OR (!preg_match('/^[\w_-]+$/',$type))) {
                 include_spip('inc/minipres');
                 echo minipres();
                 exit;

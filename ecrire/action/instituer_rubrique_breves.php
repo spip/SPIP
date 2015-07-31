@@ -29,7 +29,7 @@ function action_instituer_rubrique_breves_dist() {
 	$voss = spip_query("SELECT $key AS id FROM spip_$table WHERE id_rubrique=$id AND (statut = 'publie' OR statut = 'prop')");
 
 	while($row = spip_fetch_array($voss)) {
-                set_request('statut', $statut);
+		set_request('statut', $statut);
 		revisions_breves($row['id']);
 	}
 
