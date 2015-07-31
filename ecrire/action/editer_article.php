@@ -62,15 +62,23 @@ function articles_set($id_article, $set=null) {
 	trop_longs_articles();
 
 	$c = array();
-	foreach (array(
-		'surtitre', 'titre', 'soustitre', 'descriptif',
-		'nom_site', 'url_site', 'chapo', 'texte', 'ps'
-	) as $champ)
-		$c[$champ] = _request($champ,$set);
+	if (!$set){
+		foreach (array(
+			'surtitre', 'titre', 'soustitre', 'descriptif',
+			'nom_site', 'url_site', 'chapo', 'texte', 'ps'
+		) as $champ)
+			$c[$champ] = _request($champ,$set);
 
-	if (_request('changer_virtuel',$set) == 'oui') {
-		$r = _request('virtuel',$set);
-		$c['chapo'] = (strlen($r) ? '='.$r : '');
+		if (_request('changer_virtuel',$set) == 'oui') {
+			$r = _request('virtuel',$set);
+			$c['chapo'] = (strlen($r) ? '='.$r : '');
+		}
+	}
+	else {
+		$c = $set;
+		unset($c['date']);
+		unset($c['statut']);
+		unset($c['id_parent']);
 	}
 
 	include_spip('inc/modifier');
