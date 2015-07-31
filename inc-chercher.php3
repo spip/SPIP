@@ -4,44 +4,59 @@
 if (defined("_INC_CHERCHE")) return;
 define("_INC_CHERCHE", "1");
 
-// Ce fichier doit IMPERATIVEMENT contenir la fonction chercher-squelette
+// Ce fichier doit imperativement contenir la fonction chercher-squelette
 // (cf commentaires dans inc-calcul)
 
 function chercher_squelette($fond, $id_rubrique, $dossier, $lang) {
 	$ext = $GLOBALS['extension_squelette'];
-	if ($lang) {
-		lang_select($lang);
-		$f = "$fond.$lang";
-		if (@file_exists("$f.$ext"))
-			$fond = $f;
-	}
+
 	$d ="$dossier$fond";
+
 	// On selectionne, dans l'ordre :
-	// fond=10, fond-10 fond-<rubriques parentes> fond fond-dist
+	// fond=10
+	
 	$f = "$d=$id_rubrique";
 	if (($id_rubrique > 0) AND (@file_exists("$f.$ext")))
-		return $f;
+		$squelette = $f;
 
-	while ($id_rubrique) {
-		if (@file_exists("$d-$id_rubrique.$ext"))
-			return "$d-$id_rubrique";
-		else
-			$id_rubrique = sql_parent($id_rubrique);
-	}
+	// fond-10 fond-<rubriques parentes>
+	if (!$squelette)
+		while ($id_rubrique > 0) {
+			if (@file_exists("$d-$id_rubrique.$ext")) {
+				$squelette = "$d-$id_rubrique";
+				break;
+			}
+			else
+				$id_rubrique = sql_parent($id_rubrique);
+		}
 
-	if (@file_exists("$d.$ext")) {
-		return $d;
-	} else if (@file_exists("$fond.$ext")) {
-		return $fond;
-	} else if (@file_exists("$fond-dist.$ext")) {
-		return "$fond-dist";
-	} else {
-		// erreur webmaster : $fond ne correspond a rien
-		erreur_squelette(_T('info_erreur_squelette2',
-				    array('fichier'=>$fond)),
+	if (!$squelette) {
+		// fond
+		if (@file_exists("$d.$ext"))
+			$squelette = $d;
+		// fond, a la racine
+		else if (@file_exists("$fond.$ext"))
+			$squelette = $fond;
+		else if (@file_exists("$fond-dist.$ext"))
+			$squelette = "$fond-dist";
+		else {
+			// erreur webmaster : $fond ne correspond a rien
+			erreur_squelette(_T('info_erreur_squelette2',
+				 array('fichier'=>$fond)),
 				 $dossier);
-		return '';
+			return '';
+		}
 	}
+
+	// Affiner par lang
+	if ($lang) {
+		lang_select($lang);
+		$f = "$squelette.$lang";
+		if (@file_exists("$f.$ext"))
+			$squelette = $f;
+	}
+
+	return $squelette;
 }
 
 ?>

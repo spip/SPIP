@@ -119,17 +119,28 @@ function charger_squelette ($squelette) {
 # definie dans inc-chercher, fichier non charge si elle est deja definie
 # (typiquement dans mes_fonctions.php3)
 
-function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
+function cherche_page ($cache, $contexte, $fond)  {
 	global $dossier_squelettes, $delais;
 
 	if (!function_exists('chercher_squelette'))
 		include_local("inc-chercher.php3"); # a renommer ?
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
+	$id_rubrique_fond = 0;
+	// Si inc-urls veut fixer la langue, on la recupere ici
+	$lang = $contexte['lang'];
+	// Chercher le fond qui va servir de squelette
+	if ($r = sql_rubrique_fond($contexte,
+	$lang ? $lang : lire_meta('langue_site')))
+		list($id_rubrique_fond, $lang) = $r;
+
+	if (!$GLOBALS['forcer_lang'])
+		lang_select($lang);
+
 	$skel = chercher_squelette($fond,
-			$id_rubrique,
+			$id_rubrique_fond,
 			$dossier_squelettes ? "$dossier_squelettes/" :'',
-			$lang);
+			$GLOBALS['spip_lang']);
 
 	// Charger le squelette et recuperer sa fonction principale
 	// (compilation automatique au besoin) et calculer
@@ -181,7 +192,6 @@ function calculer_contexte() {
 }
 
 function calculer_page_globale($cache, $contexte_local, $fond) {
-	global $spip_lang;
 
 	// Gestion des URLs personnalises - sale mais historique
 	if (function_exists("recuperer_parametres_url")) {
@@ -197,21 +207,8 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 		$contexte_local = $contexte;
 	}
 
-	$id_rubrique_fond = 0;
-
-	// Si inc-urls veut fixer la langue, se baser ici
-	$lang = $contexte_local['lang'];
-
-	// Chercher le fond qui va servir de squelette
-	if ($r = sql_rubrique_fond($contexte_local,
-	$lang ? $lang : lire_meta('langue_site')))
-		list($id_rubrique_fond, $lang) = $r;
-
-	if (!$GLOBALS['forcer_lang'])
-		lang_select($lang);
-
 	// Go to work !
-	$page = cherche_page($cache, $contexte_local, $fond, $id_rubrique_fond, $spip_lang);
+	$page = cherche_page($cache, $contexte_local, $fond);
 
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
@@ -234,10 +231,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	if ($inclusion) {
 		$contexte_inclus = $elements['contexte'];
 		$page = cherche_page($chemin_cache,
-			$contexte_inclus,
-			$elements['fond'],
-			$contexte_inclus['id_rubrique']
-		);
+			$contexte_inclus, $elements['fond']);
 	}
 	else {
 
