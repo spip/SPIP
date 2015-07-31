@@ -191,4 +191,8 @@ array('sql_alter',"TABLE spip_groupes_mots DROP rubriques"),
 array('sql_alter',"TABLE spip_groupes_mots DROP syndic"),
 );
 
+// Type flac: http://flac.sourceforge.net
+unset($GLOBALS['maj'][11042]);
+$GLOBALS['maj'][12011] = array(array('upgrade_types_documents'));
+
 ?>
