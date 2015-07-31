@@ -44,14 +44,36 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 		'recherche'=>'',
 		'visible'=>0,
 		'editable'=>autoriser('modifier',$objet,$id_objet),
+		'ajouter_lien'=>'',
+		'supprimer_lien'=>'',
 		'_oups' => _request('_oups'),
 	);
 
 	return $valeurs;
 }
 
+/**
+ * Traiter le post des informations d'edition de liens
+ * Les formulaires postent dans deux variables ajouter_lien et supprimer_lien
+ *
+ * Elles peuvent etre chacune de trois formes differentes :
+ * ajouter_lien[]="objet1-id1-objet2-id2"
+ * ajouter_lien[objet1-id1-objet2-id2]="nimportequoi"
+ * ajouter_lien['clenonnumerique']="objet1-id1-objet2-id2"
+ * Dans ce dernier cas, la valeur ne sera prise en compte
+ * que si _request('clenonnumerique') est vrai (submit associe a l'input)
+ *
+ * @param string $table_source
+ *		table des objets associes, doit correspondre a une table xxx_liens
+ * @param string $objet
+ *    objet auquel associer
+ * @param int $id_objet
+ *		id_objet auquel associer
+ * @return array
+ */
 function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
-
+	$res = array('editable'=>true);
+	
 	if (_request('tout_voir'))
 		set_request('recherche','');
 
@@ -72,27 +94,61 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 		
 		if ($ajouter = _request('ajouter_lien')){
 			$ajouter_lien = charger_fonction('ajouter_lien','action');
-			foreach($ajouter as $lien=>$dummy)
-				$ajouter_lien($lien);
+			foreach($ajouter as $k=>$v){
+				if ($lien = lien_verifier_action($k,$v)){
+					$ajouter_lien($lien);
+				}
+			}
 			# oups ne persiste que pour la derniere action, si suppression
+			# une suppression suivie d'un ajout dans le meme hit est un remplacement
+			# non annulable !
 			set_request('_oups');
 		}
 
 		if ($supprimer = _request('supprimer_lien')){
 			include_spip('action/editer_liens');
 			$oups = array();
-			foreach($supprimer as $lien=>$dummy) {
-				$lien = explode("-",$lien);
-				list($objet_source,$ids,$objet_lie,$idl) = $lien;
-				$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
-				objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
+
+			foreach($supprimer as $k=>$v) {
+				if ($lien = lien_verifier_action($k,$v)){
+					$lien = explode("-",$lien);
+					list($objet_source,$ids,$objet_lie,$idl) = $lien;
+					$oups = array_merge($oups,  objet_trouver_liens(array($objet_source=>$ids), array($objet_lie=>$idl)));
+					objet_dissocier(array($objet_source=>$ids), array($objet_lie=>$idl));
+				}
 			}
 			set_request('_oups',$oups?serialize($oups):null);
 		}
 	}
 
-	$res = array('editable'=>true);
+	
 	return $res;
 }
 
+
+/**
+ * Les formulaires envoient une action dans un tableau ajouter_lien
+ * ou supprimer_lien
+ * L'action est de la forme
+ * objet1-id1-objet2-id2
+ *
+ * L'action peut etre indiquee dans la cle, ou dans la valeur
+ * Si elle est indiquee dans la valeur, et que la cle est non numerique,
+ * on ne la prend en compte que si un submit avec la cle a ete envoye
+ *
+ * @param <type> $k
+ * @param <type> $v
+ * @return <type>
+ */
+function lien_verifier_action($k,$v){
+	if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+,",$k))
+		return $k;
+	if (preg_match(",^\w+-[\w*]+-[\w*]+-[\w*]+,",$v)){
+		if (is_numeric($k))
+			return $v;
+		if (_request($k))
+			return $v;
+	}
+	return '';
+}
 ?>
