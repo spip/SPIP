@@ -113,8 +113,9 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle->partie = 'intval($Pile[0][\'debut\'.'.$debut.'])';
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
-	if (!isset($boucle->modificateur['fragment']))
+/*	if (!isset($boucle->modificateur['fragment']))
 		$boucle->modificateur['fragment'] = 'fragment_'.$boucle->descr['nom'].$idb;
+*/
 }
 
 // {fragment}
