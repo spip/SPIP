@@ -540,13 +540,10 @@ function calculer_select ($select = array(), $from = array(),
 	$k = count($join);
 	foreach(array_reverse($join,true) as $cledef=>$j) {
 		$cle = $cledef;
-		if (count($join[$cle])<3){
-			list($t,$c) = $join[$cle];
-			$carr = $c;
-		}
-		else
-			// le nom de la cle d'arrivee est different de celui du depart, et est specifie
-			list($t,$c,$carr) = $join[$cle];
+		// le format de join est :
+		// array(table depart, cle depart [,cle arrivee[,condition optionnelle and ...]])
+		list($t,$c,$carr,$and) = $join[$cle];
+		if (!$carr) $carr = $c;
 		// si le nom de la jointure n'a pas ete specifiee, on prend Lx avec x sont rang dans la liste
 		// pour compat avec ancienne convention
 		if (is_numeric($cle))
@@ -554,10 +551,12 @@ function calculer_select ($select = array(), $from = array(),
 		if (!$menage
 		OR isset($afrom[$cle])
 		OR calculer_jointnul($cle, $select)
-		OR calculer_jointnul($cle, $join)
+		OR calculer_jointnul($cle, array_diff($join,array($cle=>$join[$cle])))
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where_simples)) {
 			// on garde une ecriture decomposee pour permettre une simplification ulterieure si besoin
+			// sans recours a preg_match
+			// un implode(' ',..) est fait dans reinjecte_joint un peu plus bas
 			$afrom[$t][$cle] = array("\n" .
 				(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN",
 				$from[$cle],
@@ -566,6 +565,7 @@ function calculer_select ($select = array(), $from = array(),
 				"$cle.$c",
 				"=",
 				"$t.$carr",
+				($and ? "AND ". $and:"") .
 				")");
 			if (isset($afrom[$cle])){
 				$afrom[$t] = $afrom[$t] + $afrom[$cle];
