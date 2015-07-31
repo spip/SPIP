@@ -139,6 +139,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'texte_changer_statut' => 'texte_article_statut',
 				'aide_changer_statut' => 'artstatut',
 				'tables_jointures' => array(
+					'profondeur' => 'rubriques',
 					#'id_auteur' => 'auteurs_liens' // declaration generique plus bas
 				),
 			),

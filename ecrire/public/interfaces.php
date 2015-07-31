@@ -207,6 +207,7 @@ function declarer_interfaces(){
 
 	global  $exceptions_des_jointures;
 	#$exceptions_des_jointures['titre_mot'] = array('spip_mots', 'titre'); // pour exemple
+	$exceptions_des_jointures['profondeur'] = array('spip_rubriques', 'profondeur');
 
 	global  $table_des_traitements;
 
