@@ -446,7 +446,7 @@ function compose_filtres(&$p, $code) {
 				// cas particulier : le filtre |set doit acceder a la $Pile
 				// proto: filtre_set($val, &$Pile, $args...)
 				if (in_array($fonc, array('set'))) {
-					$code = "$f($code,\$Pile$arglist)";
+					$code = "$f(\$Pile,$code$arglist)";
 				}
 				else {
 					$code = "$f($code$arglist)";
