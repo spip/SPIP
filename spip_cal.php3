@@ -46,49 +46,6 @@ if (verifier_low_sec($id_auteur, $cle, 'ical')) {
 @header ("content-type:text/calendar");
 
 
-if ($type == "public") {
-	ligne ("BEGIN:VCALENDAR");
-	ligne ("CALSCALE:GREGORIAN");
-	ligne ("X-WR-CALNAME;VALUE=TEXT:$nom_site");
-	ligne ("X-WR-RELCALID:$adresse_site");
-
-	// Articles et breves publies
-	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'publie'");
-	while($row=spip_fetch_array($result_articles)){
-		$id_article=$row['id_article'];
-		$titre = filtrer_ical($row['titre']." ("._T('info_article_publie').")");
-		$date_heure = $row['date'];
-		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:$titre [$nom_site]");
-		ligne ("UID:article$id_article @ $adresse_site");
-				ligne ("DTSTAMP:".date_ical($date_heure));
-				ligne ("DTSTART:".date_ical($date_heure));
-				ligne ("DTEND:".date_ical($date_heure, 60));
-		ligne ("CATEGORIES:".filtrer_ical(_T('titre_breve_publiee')));
-		ligne("URL:$adresse_site/spip_redirect.php3?id_article=$id_article");
-		ligne("STATUS:CONFIRMED");
-		ligne ("END:VEVENT");
-	}
-	$result_articles = spip_query("SELECT id_breve, titre, date_heure FROM spip_breves WHERE statut = 'publie'");
-	while($row=spip_fetch_array($result_articles)){
-		$id_breve=$row['id_breve'];
-		$titre = filtrer_ical($row['titre']." ("._T('titre_breve_publiee').")");
-		$date_heure = $row['date_heure'];
-		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:$titre [$nom_site]");
-		ligne ("UID:breve$id_breve @ $adresse_site");
-				ligne ("DTSTAMP:".date_ical($date_heure));
-				ligne ("DTSTART:".date_ical($date_heure));
-				ligne ("DTEND:".date_ical($date_heure, 60));
-		ligne ("CATEGORIES:".filtrer_ical(_T('titre_breve_publiee')));
-		ligne("URL:$adresse_site/spip_redirect.php3?id_breve=$id_breve");
-		ligne("STATUS:CONFIRMED");
-		ligne ("END:VEVENT");
-	}
-	ligne ("END:VCALENDAR");
-}
-
-
 
 
 if ($id_utilisateur) {
