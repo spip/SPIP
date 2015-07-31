@@ -391,33 +391,20 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    // comparaison explicite
 	    // le phraseur impose que le premier param soit du texte
 	    $params = $crit->param;
-	    $col = array_shift($params);
-	    $col = $col[0]->texte;
 	    $op = $crit->op;
 
+	    $col = array_shift($params);
+	    $col = $col[0]->texte;
 	    // fonction SQL ?
 	    if (ereg("([A-Za-z_]+)\(([a-z_]+)\)", $col,$match3)) {
 	      $col = $match3[2];
 	      $fct = $match3[1];
 	    }
-	    // compatibilite ancienne version
-	    if ($op == 'IN'){
-	      $deb = $params[0][0];
-	      $k = count($params)-1;
-	      $last = $params[$k];
-	      $j = count($last)-1;
-	      $last = $last[$j];
-	      $n = strlen($last->texte);
-	      if (($deb->texte[0] == '(') && ($last->texte[$n-1] == ')'))
-		{
-		  $params[0][0]->texte = substr($deb->texte,1);
-		  $params[$k][$j]->texte = substr($last->texte,0,$n-1);
-		}
-	    }
+
 	    $val = array();
-	    foreach ($params as $param) {
+	    foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
 	      $val[] = "addslashes(" .
-		calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) .
+		calculer_liste($p, array(), $boucles, $boucles[$idb]->id_parent) .
 		")";
 	    }
 	  }
@@ -580,6 +567,40 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    }
 
 	$boucle->where[] = $where;
+}
+
+// compatibilite ancienne version
+
+function calculer_vieux_in($params)
+{
+	      $deb = $params[0][0];
+	      $k = count($params)-1;
+	      $last = $params[$k];
+	      $j = count($last)-1;
+	      $last = $last[$j];
+	      $n = strlen($last->texte);
+	      // compatibilité ancienne version
+
+	      if (!(($deb->texte[0] == '(') && ($last->texte[$n-1] == ')')))
+		return $params;
+	      $params[0][0]->texte = substr($deb->texte,1);
+	      // attention, on peut avoir k=0,j=0 ==> recalculer
+	      $last = $params[$k][$j];
+	      $n = strlen($last->texte);
+	      $params[$k][$j]->texte = substr($last->texte,0,$n-1);
+	      $newp = array();
+	      foreach($params as $v) {
+		    if ($v[0]->type != 'texte')
+		      $newp[] = $v;
+		    else {
+		      foreach(split(',', $v[0]->texte) as $x) {
+			$t = new Texte;
+			$t->texte = $x;
+			$newp[] = array($t);
+		      }
+		    }
+	      }
+	      return  $newp;
 }
 
 // fonction provisoirement inutilisee
