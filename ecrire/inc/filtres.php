@@ -772,7 +772,8 @@ function recup_date($numdate){
 	if ($annee > 4000) $annee -= 9000;
 	if (substr($jour, 0, 1) == '0') $jour = substr($jour, 1);
 
-	return array($annee, $mois, $jour, $heures, $minutes, $secondes);
+	if ($annee OR $mois OR $jour OR $heures OR $minutes OR $secondes)
+		return array($annee, $mois, $jour, $heures, $minutes, $secondes);
 }
 
 // une date pour l'interface : utilise date_relative si le decalage
