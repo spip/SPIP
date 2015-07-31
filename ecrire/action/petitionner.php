@@ -22,7 +22,7 @@ function action_petitionner_dist() {
 
 	$id_article = intval($arg);
 
-	if (!autoriser('modifier', 'article', $id_article))
+	if (!autoriser('modererpetition', 'article', $id_article))
 		return;
 
 	$message = _request('message');

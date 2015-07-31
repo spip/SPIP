@@ -27,7 +27,7 @@ function action_regler_moderation_dist()
 	}
 
 	$id_article = $r[1];
-	if (!autoriser('modifier', 'article', $id_article))
+	if (!autoriser('modererforum', 'article', $id_article))
 		return;
 
 	$statut = _request('change_accepter_forum');

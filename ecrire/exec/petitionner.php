@@ -18,8 +18,7 @@ function exec_petitionner_dist()
 	global $id_article, $script;
 	$id_article = intval($id_article);
 
-	if (!autoriser('modifier','article',$id_article)) {
-
+	if (!autoriser('modererpetition','article',$id_article)) {
 		echo minipres();
 		exit;
 	}
