@@ -22,8 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Ret n&oslash;gleord',
 'admin_modifier_rubrique' => 'Rediger afsnit',
 'admin_recalculer' => 'Opdater side',
+'afficher_trad' => '<NEW>afficher les traductions',
 'alerte_maj_impossible' => '<b>Advarsel!</b> Opdatering af MySQL databasen til version @version@&#381;mislykkedes, m&aring;ske p&aring; grund af et problem med rettigheder i forhold til databasen. Kontakt venligst din webhotel.',
 'analyse_xml' => '<NEW>Analyse XML',
+'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
 'avis_archive_incorrect' => 'arkivfilen er ikke en gyldig SPIP fil',
 'avis_archive_invalide' => 'arkivfilen er ikke gyldig',
 'avis_attention' => 'Advarsel!',
@@ -37,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programfejl. Denne funktion burde ikke kaldes i denne sammenh&aelig;ng.',
 'avis_erreur_mysql' => 'MySQL fejl',
 'avis_erreur_sauvegarde' => 'Fejl i sikkerhedskopi (@type@ @id_objet@)!',
+'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
 
 
 // B
@@ -78,6 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => '<NEW>calendrier par jour',
 'cal_par_mois' => '<NEW>calendrier par mois',
 'cal_par_semaine' => '<NEW>calendrier par semaine',
+'choix_couleur_interface' => '<NEW>couleur ',
+'choix_interface' => '<NEW>choix  de l\'interface',
+'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 'correcte' => '<NEW>correcte',
 
@@ -140,12 +146,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_jnum8' => '8.',
 'date_jnum9' => '9.',
 'date_jour_1' => 's&oslash;ndag',
+'date_jour_1_abbr' => '<NEW>dim.',
+'date_jour_1_initiale' => '<NEW>d.',
 'date_jour_2' => 'mandag',
+'date_jour_2_abbr' => '<NEW>lun.',
+'date_jour_2_initiale' => '<NEW>l.',
 'date_jour_3' => 'tirsdag',
+'date_jour_3_abbr' => '<NEW>mar.',
+'date_jour_3_initiale' => '<NEW>m.',
 'date_jour_4' => 'onsdag',
+'date_jour_4_abbr' => '<NEW>mer.',
+'date_jour_4_initiale' => '<NEW>m.',
 'date_jour_5' => 'torsdag',
+'date_jour_5_abbr' => '<NEW>jeu.',
+'date_jour_5_initiale' => '<NEW>j.',
 'date_jour_6' => 'fredag',
+'date_jour_6_abbr' => '<NEW>ven.',
+'date_jour_6_initiale' => '<NEW>v.',
 'date_jour_7' => 'l&oslash;rdag',
+'date_jour_7_abbr' => '<NEW>sam.',
+'date_jour_7_initiale' => '<NEW>s.',
 'date_jours' => '<NEW>jours',
 'date_minutes' => '<NEW>minutes',
 'date_mois' => '<NEW>mois',
@@ -169,17 +189,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' for at kunne begynde installationen',
 'dirs_preliminaire' => 'Forberedelser: <b>Ops&aelig;tning af adgangsrettigheder</b>',
 'dirs_probleme_droits' => '<MODIF>Problem med adgangsrettigheder',
-'dirs_repertoires_absents' => '<b>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<MODIF><b>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
   <p>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
   Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist ovenfor.
   Hvis ikke, sm&aring; brug et FTP-program til at omd&oslash;be dem, for at rette fejlen.
   <p>Derefter kan du',
-'dirs_repertoires_suivants' => '<b>F&oslash;lgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_suivants' => '<MODIF><b>F&oslash;lgende kataloger mangler skriveadgang: <ul>@bad_dirs@.</ul> </b>
 
   <p>For at &aelig;ndre dette skal du benytte din FTP-klient til at s&aelig;tte adgangsrettigheder
   for hvert katalog. Fremgangsm&aring;den er vist i brugerh&aring;ndbogen.
 
   <p>N&aring;r du har fuldf&oslash;rt dette, kan du ',
+'double_occurrence' => '<NEW>Double occurrence',
 
 
 // E
@@ -187,6 +208,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Dokumentoverskrift:',
 'entree_titre_image' => 'Billedoverskrift:',
 'envoi_via_le_site' => '<NEW>Envoi via le site',
+'erreur' => '<NEW>Erreur',
+'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_texte' => '<NEW>erreur(s)',
 
 
 // F
@@ -255,6 +279,7 @@ Tak for din deltagelse
 'forum_acces_refuse' => 'Du har ikke mere adgang til disse forummer',
 'forum_attention_dix_caracteres' => '<MODIF><b>Advarsel!</b> dit indl&aelig;g er mindre end ti tegn langt.',
 'forum_attention_trois_caracteres' => '<MODIF><b>Advarsel!</b> dit emne er mindre end tre tegn langt.',
+'forum_attention_trop_caracteres' => '<NEW><b>Attention&nbsp;!</b> votre message est trop long (@compte@ caract&egrave;res)&nbsp;: pour pouvoir &ecirc;tre enregistr&eacute;, il ne doit pas d&eacute;passer @max@ caract&egrave;res.',
 'forum_avez_selectionne' => 'Du har valgt:',
 'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>her</a> for at forts&aelig;tte.',
 'forum_forum' => 'forum',
@@ -266,7 +291,7 @@ Tak for din deltagelse
 'forum_non_inscrit' => 'Enten er du ikke tilmeldt, eller adresse eller adgangskode er forkert.',
 'forum_page_url' => '(Hvis dit indl&aelig;g henviser til en artikel, der er offentliggjort p&aring; Internettet, eller til en side der indeholder yderligere oplysninger, s&aring; angiv venligst sidens titel og dens adresse eller URL nedenfor).',
 'forum_par_auteur' => 'af @auteur@',
-'forum_poste_par' => 'Indl&aelig;g @parauteur@ som svar p&aring; din artikel.',
+'forum_poste_par' => '<MODIF>Indl&aelig;g @parauteur@ som svar p&aring; din artikel.',
 'forum_probleme_database' => 'Databaseproblem, dit indl&aelig;g er ikke modtaget.',
 'forum_qui_etes_vous' => '<b>Hvem er du?</b> (valgfrit)',
 'forum_texte' => 'Indl&aelig;ggets tekst:',
@@ -413,7 +438,7 @@ eller kontakt din internetudbyder.</font>',
 'info_grand_ecran' => 'Stort sk&aelig;rmbillede',
 'info_image_aide' => 'HJ&AElig;LP',
 'info_image_process_titre' => '<NEW>M&eacute;thode de fabrication des vignettes',
-'info_impossible_lire_page' => '<b>Fejl!</b> Siden kan ikke l&aelig;ses <tt><html>@test_proxy@</html></tt> gennem proxy&yen;en <tt>',
+'info_impossible_lire_page' => '<MODIF><b>Fejl!</b> Siden kan ikke l&aelig;ses <tt><html>@test_proxy@</html></tt> gennem proxy&yen;en <tt>',
 'info_inclusion_directe' => 'Direkte indlejring:',
 'info_inclusion_vignette' => 'Medtag piktogram:',
 'info_installation_systeme_publication' => 'Installation af publiceringssystemet ...',
@@ -497,9 +522,9 @@ eller kontakt din internetudbyder.</font>',
 'info_sites_referencer' => 'Link til websted',
 'info_supprimer_vignette' => 'slet piktogram',
 'info_sur_site_public' => '[p&aring; det offentligt tilg&aelig;ngelige websted]',
-'info_symbole_bleu' => '<b>Bl&aring;t</b> symbol henviser til et <b>memo</b>: dvs. en meddelelse til privat brug.',
-'info_symbole_jaune' => '<b>Gult</b> symbol henviser til en <b>annoncering til alle redakt&oslash;rer</b>: den kan redigeres af alle redakt&oslash;rer og er synlig for alle redakt&oslash;rer.',
-'info_symbole_vert' => '<b>Gr&oslash;nt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> p&aring; webstedet.',
+'info_symbole_bleu' => '<MODIF><b>Bl&aring;t</b> symbol henviser til et <b>memo</b>: dvs. en meddelelse til privat brug.',
+'info_symbole_jaune' => '<MODIF><b>Gult</b> symbol henviser til en <b>annoncering til alle redakt&oslash;rer</b>: den kan redigeres af alle redakt&oslash;rer og er synlig for alle redakt&oslash;rer.',
+'info_symbole_vert' => '<MODIF><b>Gr&oslash;nt</b> symbol henviser til <b>meddelelser udvekslet med andre brugere</b> p&aring; webstedet.',
 'info_syndication' => 'syndikering:',
 'info_syndication_articles' => 'bidrag',
 'info_telecharger' => 'Hent fra din computer:',
@@ -553,6 +578,7 @@ eller kontakt din internetudbyder.</font>',
 'lien_visite_site' => 'bes&oslash;g dette websted',
 'lien_visites' => '@visites@ bes&oslash;gende',
 'lien_voir_auteur' => 'Oplysninger om forfatter',
+'ligne' => '<NEW>Ligne',
 'lnfo_liens' => 'links:',
 'login_acces_prive' => 'adgang til det private omr&aring;de',
 'login_autre_identifiant' => 'login med en anden brugeridentifikation',
@@ -589,14 +615,17 @@ eller kontakt din internetudbyder.</font>',
 
 
 // M
+'masquer_trad' => '<NEW>masquer les traductions',
 'module_fichiers_langues' => 'Sprogfiler',
 
 
 // N
 'navigateur_pas_redirige' => 'Hvis din browser ikke er viderestilt, klik her for at forts&aelig;tte. ',
+'numero' => '<NEW>Num&eacute;ro',
 
 
 // O
+'occurence' => '<NEW>Occurence',
 'onglet_affacer_base' => 'Slet databasen',
 'onglet_agenda' => 'Dagbog',
 'onglet_auteur' => 'Forfatteren',
@@ -662,6 +691,7 @@ og igen f&aring; adgang til webstedet.',
 
 
 // S
+'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => '<NEW>squelette',
 'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
 'squelette_ligne' => '<NEW>squelette, ligne',
@@ -680,15 +710,16 @@ og igen f&aring; adgang til webstedet.',
 'texte_choix_langue_defaut' => 'V&aelig;r venlig at v&aelig;lge standardsprog nedenfor, samt de sprog som skal v&aelig;re til r&aring;dighed for redakt&oslash;rerne.',
 'texte_creation_automatique_vignette' => 'Dette websted tillader automatisk dannelse af miniaturepiktogrammer. Hvis du via denne formular indl&aelig;ser billeder i formatet @gd_formats@, vil de blive knyttet sammen med miniaturepiktogrammer med en maksimal st&oslash;rrelse p&aring; @taille_preview@ pixels.',
 'texte_documents_associes' => 'F&oslash;lgende dokumenter er knyttet til artiklen  men inds&aelig;ttes ikke direkte. Afh&aelig;ngig af det offentlige websteds layout kan de optr&aelig;de som vedh&aelig;ftede dokumenter.',
-'texte_erreur_mise_niveau_base' => 'Databasefejl under opgradering.
+'texte_erreur_mise_niveau_base' => '<MODIF>Databasefejl under opgradering.
 			Billedet <b>@fichier@</b> kunne ikke overf&oslash;res (artiklen @id_article@).<p>
 			Noter omhyggeligt denne henvisning, gentag opgraderingsproceduren,
 			og kontrolller sluttelig, at billederne stadig figurerer i dokumentet.',
-'texte_inc_auth_1' => 'Du har identificeret dig selv med login <b>@auth_login@</b>, men det findes ikke (mere) i databasen. 
+'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
+'texte_inc_auth_1' => '<MODIF>Du har identificeret dig selv med login <b>@auth_login@</b>, men det findes ikke (mere) i databasen. 
 		Pr&oslash;v at ',
 'texte_inc_auth_2' => 'genetablere forbindelsen',
 'texte_inc_auth_3' => 'efter om n&oslash;dvendigt at have lukket din browser ned og genstartet den igen.',
-'texte_inc_config' => '&AElig;ndringer nedenfor vil markant p&aring;virke webstedets funktion. 
+'texte_inc_config' => '<MODIF>&AElig;ndringer nedenfor vil markant p&aring;virke webstedets funktion. 
 	 Du r&aring;des til ikke at &aelig;ndre dem, med mindre du er fortrolig med SPIP-systemets funktion.
 	<br /><br /><b>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>',
 'texte_inc_meta_1' => '<MODIF>Kontroller venligst som administrator',
@@ -756,19 +787,38 @@ er blevet &aelig;ndret. I dette tilf&aelig;lde tilr&aring;des det at ajourf&osla
 'zbug_code' => '<NEW>code',
 'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
 'zbug_distant_interdit' => '<NEW>externe interdit',
+'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: flertydig definition',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: mangler slutkoden der lukker',
 'zbug_erreur_boucle_syntaxe' => 'forkert loop (BOUCLE) syntax ',
+'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
 'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'Fejl - udefineret filter: <b>"@filter@"</b>',
 'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
 'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
 'zbug_info_erreur_squelette' => 'Fejl p&aring; sitet',
 'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
 'zbug_resultat' => '<NEW>r&eacute;sultat',
 'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
-'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue',
+'zxml_connus_attributs' => '<NEW>attributs connus',
+'zxml_de' => '<NEW>de',
+'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
+'zxml_inconnu_balise' => '<NEW>balise inconnue',
+'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
+'zxml_inconnu_id' => '<NEW>ID inconnu',
+'zxml_mais_de' => '<NEW>mais de',
+'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
+'zxml_non_fils' => '<NEW>n\'est pas un fils de',
+'zxml_nonvide_balise' => '<NEW>balise non vide',
+'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
+'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
+'zxml_survoler' => '<NEW>survoler pour voir les corrects',
+'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
+'zxml_vide_balise' => '<NEW>balise vide',
+'zxml_vu' => '<NEW>vu auparavant'
 
 );
 
