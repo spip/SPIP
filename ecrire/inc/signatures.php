@@ -26,9 +26,9 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 
 	# filtre de duree (a remplacer par une vraie pagination)
 	#$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
-	if ($id_article) { 
-		$args = "id_article=$id_article&";
-		$where .= " AND id_article=$id_article";
+	if ($id) { 
+		$args = "id_article=$id&";
+		$where .= " AND id_article=$id";
 	}
 	else $args = "";
 
