@@ -42,7 +42,7 @@ function exec_articles_forum_dist()
 	$ancre = 'navigation-forum';
 	$result = spip_abstract_select("id_forum", "spip_forum",  "id_article=$id_article AND id_parent=0 AND statut IN ('publie', 'off', 'prop')", '', '', "$limitdeb, $limitnb");
 
-	$res = spip_abstract_select("pied.*, max(thread.date_heure) AS date", "spip_forum AS pied, spip_forum AS thread", "pied.id_article=$id_article AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop') AND thread.id_thread=pied.id_forum", "id_thread",  "date DESC",  "$debut, $pack");
+	$res = spip_abstract_select("pied.id_forum,pied.id_parent,pied.id_rubrique,pied.id_article,pied.id_breve,pied.id_message,pied.id_syndic,pied.date_heure,pied.titre,pied.texte,pied.auteur,pied.email_auteur,pied.nom_site,pied.url_site,pied.statut,pied.ip,pied.id_auteur, max(thread.date_heure) AS date", "spip_forum AS pied, spip_forum AS thread", "pied.id_article=$id_article AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop') AND thread.id_thread=pied.id_forum", "thread.id_thread",  "date DESC",  "$debut, $pack");
 
 	$mess = affiche_navigation_forum("articles_forum", "id_article=$id_article", $debut, $limitdeb, $pack, $ancre, $result)
 	. '<br />'

@@ -93,7 +93,7 @@ function spip_pg_select($select, $from, $where,
 	  (!$from ? '' :
 			("\nFROM " .
 			(!is_array($from) ? $from : spip_pg_select_as($from))))
-	  . (!$where ? '' : ("\nWHERE " . spip_pg_nocast(calculer_pg_where($where))))
+	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING $having")
 	  . ($orderby ? ("\nORDER BY " . spip_pg_nocast($orderby)) :'')
@@ -130,8 +130,9 @@ function spip_pg_groupby($groupby, $from, $select)
 	$join = is_array($from) ? (count($from) > 1) : strpos($from, ",");
 	if ($join) $join = !is_array($select) ? $select : join(", ", $select);
 	if ($join) {
-	  $join = preg_replace('/(SUM|COUNT)\([^)]+\)\s*,?/','', $join);
-	  $join = preg_replace('/,?\s*(SUM|COUNT)\([^)]+\)/','', $join);
+	  $join = preg_replace('/FIELD[(]([^,]*)[^)]*[)]/','1',$join);
+	  $join = preg_replace('/(SUM|COUNT|MAX|MIN)\([^)]+\)\s*,/i','', $join);
+	  $join = preg_replace('/,?\s*(SUM|COUNT|MAX|MIN)\([^)]+\)/i','', $join);
 	}
 	if ($join) $groupby = $groupby ? "$groupby, $join" : $join;
 	if (!$groupby) return '';
@@ -173,7 +174,7 @@ function spip_pg_nocast($arg)
 function calculer_pg_where($v)
 {
 	if (!is_array($v))
-	  return $v;
+	  return spip_pg_nocast($v);
 
 	$op = str_replace('REGEXP', '~', array_shift($v));
 	if (!($n=count($v)))
