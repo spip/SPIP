@@ -202,6 +202,8 @@ if ($connect_statut != '0minirezo') {
 
 //////
 
+if (!$aff_jours) $aff_jours = 105;
+
 if (!$origine) {
 
 	if ($id_article) {
@@ -213,9 +215,16 @@ if (!$origine) {
 		$table_ref = "spip_referers";
 		$where = "1";
 	}
+	
+	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
+		"WHERE $where ORDER BY date LIMIT 0,1";
+	$result = spip_query($query);
+	while ($row = spip_fetch_array($result)) {
+		$date_premier = $row['date_unix'];
+	}
 
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
-		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 89 DAY) ORDER BY date";
+		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date";
 	$result=spip_query($query);
 
 	while ($row = spip_fetch_array($result)) {
@@ -244,7 +253,7 @@ if (!$origine) {
 		$max = max(max($log),$visites_today);
 		$date_today = time();
 		$nb_jours = floor(($date_today-$date_debut)/(3600*24));
-
+		
 		$maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
 	
 		if ($maxgraph < 10) $maxgraph = 10;
@@ -253,10 +262,25 @@ if (!$origine) {
 		$rapport = 200 / $maxgraph;
 
 		if (count($log) < 420) $largeur = floor(450 / ($nb_jours+1));
-		if ($largeur < 1) $largeur = 1;
+		if ($largeur < 1) {
+			$largeur = 1;
+			$agreg = ceil(count($log) / 420);	
+		} else {
+			$agreg = 1;
+		}
 		if ($largeur > 50) $largeur = 50;
 
 		debut_cadre_relief("statistiques-24.gif");
+		
+		
+		$aff_jours_plus = round($aff_jours * 1.5);
+		$aff_jours_moins = round($aff_jours / 1.5);
+		if ($id_article) $pour_article="&id_article=$id_article";
+		
+		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
+		if ($aff_jours > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
+		
+		
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 
@@ -264,6 +288,12 @@ if (!$origine) {
 
 		// Presentation graphique
 		while (list($key, $value) = each($log)) {
+			
+			$test_agreg ++;
+	
+			if ($test_agreg == $agreg) {	
+			
+			$test_agreg = 0;
 			$n++;
 		
 			if ($decal == 30) $decal = 0;
@@ -272,7 +302,7 @@ if (!$origine) {
 		
 			// Inserer des jours vides si pas d'entrees	
 			if ($jour_prec > 0) {
-				$ecart = floor(($key-$jour_prec)/(3600*24)-1);
+				$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
 	
 				for ($i=0; $i < $ecart; $i++){
 					if ($decal == 30) $decal = 0;
@@ -358,6 +388,7 @@ if (!$origine) {
 			$jour_prec = $key;
 			$val_prec = $value;
 		}
+		}
 
 		// Dernier jour
 		$hauteur = round($visites_today * $rapport)	- 1;
@@ -419,6 +450,28 @@ if (!$origine) {
 		echo "</table>";
 		echo "</font></td>";
 		echo "</td></tr></table>";
+		
+		echo "<div style='position: relative; height: 15px;'>";
+		$gauche_prec = -50;
+		for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
+			$ce_jour = date("d", $jour);
+			
+			if ($ce_jour == "1") {
+				$afficher = nom_mois(date("Y-m-d", $jour));
+				if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
+				
+			
+				$gauche = ($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
+				
+				if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
+					echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
+					$gauche_prec = $gauche;
+				}
+			}
+		}
+		echo "</div>";
+				
+		
 
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
@@ -452,7 +505,7 @@ if (!$origine) {
 		echo "</td></tr></table>";	
 	}		
 		
-	if (count($log) > 80) {
+	if (count($log) > 60) {
 		echo "<p>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
 
