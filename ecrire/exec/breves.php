@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_breves_dist
 function exec_breves_dist()
 {
-	global $spip_lang_left, $spip_lang_right;
+	global  $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
  	pipeline('exec_init',array('args'=>array('exec'=>'breves'),'data'=>''));
@@ -43,9 +43,12 @@ function exec_breves_dist()
 
 		$statuts = "'prop', 'publie'" . ($editable ? ", 'refuse'": "");
 
-		echo afficher_breves($titre.aide ("breves"), array("SELECT" => 'id_rubrique, id_breve, date_heure, titre, statut', "FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut IN ($statuts)", 'ORDER BY' => "date_heure DESC"));
+		$res = afficher_breves($titre.aide ("breves"), array("SELECT" => 'id_rubrique, id_breve, date_heure, titre, statut', "FROM" => 'spip_breves', 'WHERE' => "id_rubrique='$id_rubrique' AND statut IN ($statuts)", 'ORDER BY' => "date_heure DESC"));
+
+		echo $res ;
 
 		if ($editable) {
+		  if (!$res) echo bandeau_titre_boite2($titre, "breve-24.gif", $couleur_foncee, "white", false);
 		  echo "<div align='$spip_lang_right'>";
 		  icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif");
 		  echo "</div>";

@@ -34,7 +34,8 @@ function exec_articles_dist()
 		$discuter = charger_fonction('discuter', 'inc');
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
-		$res = articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
+		$res = debut_gauche('accueil',true)
+		.  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
 		. "<br /><br />\n<div align='center'>"
 		  . icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif", '', false)
 		. "</div><br />"
@@ -104,9 +105,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');
 
-	$res = debut_gauche('accueil',true)
-
-	.	boite_info_articles($id_article, $statut_article, $visites, $id_version)
+	$res =  boite_info_articles($id_article, $statut_article, $visites, $id_version)
 
 	.	$icone
 

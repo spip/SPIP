@@ -75,7 +75,7 @@ if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
 	# note : traiter_modeles($texte, true) repere les doublons
 	# aussi efficacement que propre(), mais beaucoup plus rapidement
 	traiter_modeles("$titre$texte", true);
-	afficher_documents_colonne($id_breve, "breve", true);
+	afficher_documents_colonne($id_breve, "breve");
 }
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''));
 creer_colonne_droite();

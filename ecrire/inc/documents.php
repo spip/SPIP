@@ -115,9 +115,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 //
 
 // http://doc.spip.org/@afficher_documents_colonne
-function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
-	global $connect_id_auteur, $connect_statut, $options;
-
+function afficher_documents_colonne($id, $type="article") {
 	// seuls cas connus : article, breve ou rubrique
 	$script = $type.'s_edit';
 
@@ -171,7 +169,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	$ret .= "<p></p><div id='liste_documents'>\n";
 
 	foreach($documents_lies as $doc) {
-			$ret .= afficher_case_document($doc, $id, $script, $type, $id_doc_actif == $doc);
+		$ret .= afficher_case_document($doc, $id, $script, $type, false);
 	}
 	$ret .= "</div>";
   
@@ -217,7 +215,6 @@ function est_inclus($id_document) {
 
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
-	global $connect_id_auteur, $connect_statut;
 	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
