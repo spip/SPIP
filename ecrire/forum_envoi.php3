@@ -135,8 +135,8 @@ echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 
 echo "<p><B>"._T('info_texte_message')."</B><BR>";
 echo _T('info_creation_paragraphe')."<BR>";
-echo afficher_barre('formulaire', 'texte', true);
-echo "<TEXTAREA NAME='texte' ".afficher_claret()." ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
+echo afficher_barre('document.formulaire.texte', true);
+echo "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
 echo entites_html($texte);
 echo "</TEXTAREA><P>\n";
 

@@ -4,138 +4,120 @@
 if (defined("_INC_BARRE")) return;
 define("_INC_BARRE", "1");
 
-function test_barre() {
-	global $browser_name, $browser_version, $browser_rev;
+// construit un bouton (ancre) de raccourci avec icone et aide
 
-	include_ecrire ("inc_layer.php3");	# verif butineur
+function bouton_barre_racc($action, $img, $help, $champhelp) {
 
-	if (
-	(eregi("msie", $browser_name) AND $browser_version >= 5.5)
-	|| (eregi("mozilla", $browser_name) AND $browser_version >= 5 AND $browser_rev >= 1.3)
-	)
-		return true;
+	return "<a\nhref=\"javascript:"
+		.$action
+		."\" class='spip_barre' tabindex='1000'\ntitle=\""
+		.attribut_html($help)
+		."\"" 
+		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
+		  .addslashes(attribut_html($help))
+		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
+		  .attribut_html(_T('barre_aide'))
+		  ."', $champhelp)\"")
+		."><img\nsrc='"
+		._DIR_IMG_ICONES_BARRE
+		.$img
+		."' border='0' height='16' width='16' align='middle' /></a>";
 }
 
+// construit un tableau de raccourcis pour un noeud de DOM 
 
-function test_claret() {
-	global $browser_name;
-	if ( test_barre() && (eregi("msie", $browser_name)) ) return true;
-}
+function afficher_barre($champ, $forum=false) {
+	static $num_barre = 0;
+	include_ecrire ("inc_layer.php3");
+	if (!$GLOBALS['browser_barre']) return '';
 
+	global $spip_lang, $spip_lang_right, $spip_lang_left;
 
-function afficher_script_barre(){
-	global $flag_script_deja_affiche;
+	$ret = ($num_barre > 0)  ? '' :
+	  '<script type="text/javascript" src="' . _DIR_PREFIX1. 'spip_barre.js"></script>';
+	$num_barre++;
+	$champhelp = "document.getElementById('barre_$num_barre')";
 
-	if ($flag_script_deja_affiche != 1) {
-		$flag_script_deja_affiche = 1;
-		$ret = '<script type="text/javascript" src="' . _DIR_PREFIX1. 'spip_barre.js">';
-		$ret .= "</script>\n";
-		return $ret;
+	$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
+	$ret .= "\n<tr width='100%' class='spip_barre'>";
+	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
+	$col = 1;
+
+	// Italique, gras, intertitres
+	$ret .= bouton_barre_racc ("barre_raccourci('{','}',$champ)", "italique.png", _T('barre_italic'), $champhelp);
+	$ret .= bouton_barre_racc ("barre_raccourci('{{','}}',$champ)", "gras.png", _T('barre_gras'), $champhelp);
+	if (!$forum) {
+		$ret .= bouton_barre_racc ("barre_raccourci('\n\n{{{','}}}\n\n',$champ)", "intertitre.png", _T('barre_intertitre'), $champhelp);
 	}
-}
+	$ret .= "&nbsp;&nbsp;&nbsp;</td>\n<td>";
+	$col ++;
 
-function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
-
-	$champ = "document.$formulaire.$texte";
-	$champhelp = "document.$formulaire.helpbox$texte";
-	$retour = "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\"";
-	if (_DIR_RESTREINT) $retour .= " onMouseOver=\"helpline('".addslashes(attribut_html($help))."',$champhelp)\" onMouseOut=\"helpline('".attribut_html(_T('barre_aide'))."', $champhelp)\"";
-	$retour .= "><img src='".
-	  _DIR_IMG_ICONES_BARRE .
-	  $img."' border='0' height='16' width='16' align='middle' /></a>";
-	return $retour;
-}
-
-function afficher_barre($formulaire='',$texte='', $forum=false) {
-	global $spip_lang, $options, $spip_lang_right, $spip_lang_left;
-
-	if (test_barre()) {
-		$ret = afficher_script_barre();
-		$champ = "document.$formulaire.$texte";
-		$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
-		$ret .= "<tr width='100%' class='spip_barre'>";
-		$ret .= "<td style='text-align: $spip_lang_left;' valign='middle'>";
-		$col++;
-
-		// Italique, gras, intertitres
-		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{','}',$champ)", "italique.png", _T('barre_italic'), $formulaire, $texte);
-		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{{','}}',$champ)", "gras.png", _T('barre_gras'), $formulaire, $texte);
-		if (!$forum) {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n{{{','}}}\n\n',$champ)", "intertitre.png", _T('barre_intertitre'), $formulaire, $texte);
-		}
-		$ret .= "&nbsp;&nbsp;&nbsp;</td><td>";
+	// Lien hypertexte, notes de bas de page, citations
+	$ret .= bouton_barre_racc ("barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)",
+		"lien.png", _T('barre_lien'), $champhelp);
+	if (!$forum) {
+		$ret .= bouton_barre_racc ("barre_raccourci('[[',']]',$champ)", "notes.png", _T('barre_note'), $champhelp);
+	}
+	if ($forum) {
+		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>\n<td>";
 		$col ++;
-
-		// Lien hypertexte, notes de bas de page, citations
-		$ret .= bouton_barre_racc ("javascript:barre_demande('[','->',']', '".addslashes(_T('barre_lien_input'))."', $champ)",
-			"lien.png", _T('barre_lien'), $formulaire, $texte);
-		if (!$forum) {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('[[',']]',$champ)", "notes.png", _T('barre_note'), $formulaire, $texte);
-		}
-		if ($forum) {
-			$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td><td>";
-			$col ++;
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", "quote.png", _T('barre_quote'), $formulaire, $texte);
-		}
-
-		if ($options == "avancees") {
-			/*$ret .= "&nbsp;&nbsp;&nbsp;";
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('[?',']',$champ)", "barre-wiki.png", "Entr&eacute;e du [?glossaire] (Wikipedia)", $formulaire, $texte);
-			$ret .= "&nbsp;&nbsp;&nbsp;";
-			$ret .= bouton_barre_racc ("javascript:barre_tableau($champ)", "barre-tableau.png", "Ins&eacute;rer un tableau", $formulaire, $texte);*/
-		}
-		
-		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
-		$col++;
-
-		// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
-		$ret .= "<td style='text-align:$spip_lang_left;' valign='middle'>";
-		$col++;
-		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $formulaire, $texte);
-		}
-		else if ($spip_lang == "bg" OR $spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&bdquo;','&ldquo;',$champ)", "guillemets-de.png", _T('barre_guillemets'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&sbquo;','&lsquo;',$champ)", "guillemets-uniques-de.png", _T('barre_guillemets_simples'), $formulaire, $texte);
-		}
-		else {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&lsquo;','&rsquo;',$champ)", "guillemets-uniques.png", _T('barre_guillemets_simples'), $formulaire, $texte);
-		}
-		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", _T('barre_a_accent_grave'), $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", _T('barre_e_accent_aigu'), $formulaire, $texte);
-			if ($spip_lang == "fr") {
-				$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "oelig.png", _T('barre_eo'), $formulaire, $texte);
-				$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "oelig-maj.png", _T('barre_eo_maj'), $formulaire, $texte);
-			}
-		}
-		$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $formulaire, $texte);
-
-		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
-		$col++;
-
-		if (!_DIR_RESTREINT) {
-			$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
-			$col++;
-		//	$ret .= "&nbsp;&nbsp;&nbsp;";
-			$ret .= aide("raccourcis");
-			$ret .= "&nbsp;";
-			$ret .= "</td>";
-		}
-		$ret .= "</tr>";
-
-		// Sur les forums publics, petite barre d'aide en survol des icones
-		if (_DIR_RESTREINT)
-			$ret .= "<tr><td colspan='$col'><input disabled='disabled' type='text' name='helpbox".$texte."' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;' value=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
-
-		$ret .= "</table>";
+		$ret .= bouton_barre_racc ("barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", "quote.png", _T('barre_quote'), $champhelp);
 	}
+
+	$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+	$col++;
+
+	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
+	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
+	$col++;
+	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
+		$ret .= bouton_barre_racc ("barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $champhelp);
+	}
+	else if ($spip_lang == "bg" OR $spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
+		$ret .= bouton_barre_racc ("barre_raccourci('&bdquo;','&ldquo;',$champ)", "guillemets-de.png", _T('barre_guillemets'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('&sbquo;','&lsquo;',$champ)", "guillemets-uniques-de.png", _T('barre_guillemets_simples'), $champhelp);
+	}
+	else {
+		$ret .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_raccourci('&lsquo;','&rsquo;',$champ)", "guillemets-uniques.png", _T('barre_guillemets_simples'), $champhelp);
+	}
+	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
+		$ret .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", "agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
+		$ret .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", "eacute-maj.png", _T('barre_e_accent_aigu'), $champhelp);
+		if ($spip_lang == "fr") {
+			$ret .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", "oelig.png", _T('barre_eo'), $champhelp);
+			$ret .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", "oelig-maj.png", _T('barre_eo_maj'), $champhelp);
+		}
+	}
+	$ret .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $champhelp);
+
+	$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+	$col++;
+
+	if (!_DIR_RESTREINT) {
+		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
+		$col++;
+	//	$ret .= "&nbsp;&nbsp;&nbsp;";
+		$ret .= aide("raccourcis");
+		$ret .= "&nbsp;";
+		$ret .= "</td>";
+	}
+	$ret .= "</tr>";
+
+	// Sur les forums publics, petite barre d'aide en survol des icones
+	if (_DIR_RESTREINT)
+		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
+
+	$ret .= "</table>";
 	return $ret;
 }
 
+// pour compatibilite arriere. utiliser directement le corps a present.
+
 function afficher_claret() {
-	if (test_barre()) return "onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);' ondbclick='storeCaret(this);'";
+	include_ecrire ("inc_layer.php3");
+	return $GLOBALS['browser_caret'];
 }
+
 ?>

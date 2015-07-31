@@ -502,9 +502,9 @@ echo "<P><HR><P>";
 			list($texte1,$texte) = coupe_trop_long($texte);
 
 			$textes_supplement .= "<BR>";
-			$textes_supplement .= afficher_barre('formulaire', 'texte'.$nombre_textes);
+			$textes_supplement .= afficher_barre('document.formulaire.texte'.$nombre_textes);
 			$textes_supplement .= "<TEXTAREA NAME='texte$nombre_textes'".
-				" CLASS='formo' ".afficher_claret()." ROWS='$rows' COLS='40' wrap=soft>" .
+				" CLASS='formo' ".$GLOBALS['browser_caret']." ROWS='$rows' COLS='40' wrap=soft>" .
 				$texte1 . "</TEXTAREA><P>\n";
 		}
 	}
@@ -516,8 +516,8 @@ echo "<P><HR><P>";
 	echo $textes_supplement;
 
 	//echo "<BR>";
-	echo afficher_barre('formulaire', 'texte');
-	echo "<TEXTAREA id='text_area' NAME='texte' ".afficher_claret()." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
+	echo afficher_barre('document.formulaire.texte');
+	echo "<TEXTAREA id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA>\n";
 
