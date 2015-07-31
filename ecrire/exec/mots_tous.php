@@ -87,7 +87,8 @@ function exec_mots_tous_dist()
 		
 		$libelles = array('articles'=>'info_articles_2','breves'=>'info_breves_02','rubriques'=>'info_rubriques','syndic'=>'icone_sites_references');
 		foreach($tables_liees as $table)
-			$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"info_$table") . " &nbsp;&nbsp;";
+			if (strlen($table))
+				$res .= "> " . _T(isset($libelles[$table])?$libelles[$table]:"info_$table") . " &nbsp;&nbsp;";
 
 		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
 		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";
