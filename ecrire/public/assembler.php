@@ -429,8 +429,10 @@ function inclure_modele($type, $id, $params, $lien, $connect='', $env=array()) {
 	}
 
 	// Si ca marche pas en precisant le sous-type, prendre le type
-	if (!$fond AND !trouve_modele($fond = $type))
+	if (!$fond AND !trouve_modele($fond = $type)){
+		spip_log("Modele $type introuvable",_LOG_INFO_IMPORTANTE);
 		return false;
+	}
 	$fond = 'modeles/'.$fond;
 	// Creer le contexte
 	$contexte = $env;
