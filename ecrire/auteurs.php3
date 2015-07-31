@@ -22,13 +22,12 @@ if ($supp && ($connect_statut == '0minirezo'))
 	spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$supp");
 
 $retour = "auteurs.php3?";
-if ($tri) {
-	$retour .= "tri=$tri";
-	if ($tri=='nom' OR $tri=='statut')
-		$partri = " "._T('info_par_tri', array('tri' => $tri));
-	else if ($tri=='nombre')
-		$partri = " "._T('info_par_nombre_article');
-}
+if (!$tri) $tri='nom';
+$retour .= "tri=$tri";
+if ($tri=='nom' OR $tri=='statut')
+	$partri = " "._T('info_par_tri', array('tri' => $tri));
+else if ($tri=='nombre')
+	$partri = " "._T('info_par_nombre_article');
 
 if ($visiteurs == "oui") {
 	debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
@@ -53,7 +52,7 @@ fin_boite_info();
 
 
 if ($connect_statut == '0minirezo') {
-	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 0,1";
+	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1";
 	$result = spip_query($query);
 	$flag_visiteurs = spip_num_rows($result) > 0;
 
@@ -75,18 +74,24 @@ debut_droite();
 // Construire la requete
 //
 
+// si on n'est pas minirezo, supprimer les auteurs sans article publie
+// sauf les admins, toujours visibles.
 // limiter les statuts affiches
-if (($visiteurs == "oui") AND ($connect_statut == '0minirezo')) {
-	$sql_statut_auteurs = " AND auteurs.statut IN ('6forum', '5poubelle')";
-	$sql_statut_articles = '';
-	$tri = 'nom';
-} else if ($connect_statut != '0minirezo') {
-	$sql_statut_auteurs = " AND auteurs.statut IN ('0minirezo', '1comite')";
-	$sql_statut_articles = " AND articles.statut IN ('prop', 'publie')";
+if ($connect_statut == '0minirezo') {
+	if ($visiteurs == "oui") {
+		$sql_visible = "aut.statut IN ('6forum','5poubelle')";
+		$tri = 'nom';
+	} else {
+		$sql_visible = "aut.statut IN ('0minirezo','1comite','5poubelle')";
+	}
 } else {
-	$sql_statut_auteurs = " AND auteurs.statut IN ('0minirezo', '1comite', '5poubelle')";
-	$sql_statut_articles = "";
+	$sql_visible = "(
+		aut.statut = '0minirezo'
+		OR art.statut IN ('prop', 'publie')
+	)";
 }
+
+$sql_sel = '';
 
 // tri
 switch ($tri) {
@@ -96,111 +101,80 @@ case 'nombre':
 	break;
 
 case 'statut':
-	$sql_order = ' ORDER BY auteurs.statut, login = "", unom';
+	$sql_order = ' ORDER BY statut, login = "", unom';
 	$type_requete = 'auteur';
 	break;
 
 case 'nom':
 default:
-//	$sql_order = ' ORDER BY unom';
 	$type_requete = 'auteur';
-	$sql_sel = ", ".creer_objet_multi ("nom", "$spip_lang");
+	$sql_sel = ", ".creer_objet_multi ("nom", $spip_lang);
 	$sql_order = " ORDER BY multi";
 }
 
 
-// si on doit afficher les auteurs par statut ou par nom,
-// la requete principale est simple, et une autre requete
-// vient calculer les nombres d'articles publies ;
-// si en revanche on doit classer par nombre, la bonne requete
-// est la concatenation de $query_nombres et de $query_auteurs
 
-unset($nombre_auteurs);
-$auteurs = Array();
+//
+// La requete de base est tres sympa
+//
 
-if ($type_requete == 'auteur') {
-	$result_auteurs = spip_query("SELECT id_auteur, statut, login, nom, email, url_site, messagerie, UPPER(nom) AS unom$sql_sel
-		FROM spip_auteurs AS auteurs
-		WHERE 1 $sql_statut_auteurs
-		$sql_order");
-	while ($row = spip_fetch_array($result_auteurs)) {
-		$auteurs[$row['id_auteur']] = $row;
-		$nombre_auteurs ++;
+$query = "SELECT
+	aut.id_auteur AS id_auteur,
+	aut.statut AS statut,
+	aut.login AS login,
+	aut.nom AS nom,
+	aut.email AS email,
+	aut.url_site AS url_site,
+	aut.messagerie AS messagerie,
+	UPPER(aut.nom) AS unom,
+	count(lien.id_article) as compteur
+	$sql_sel
+FROM spip_auteurs as aut
+LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur
+LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)
+WHERE
+	$sql_visible
+GROUP BY aut.id_auteur
+$sql_order";
+
+
+$t = spip_query($query);
+$nombre_auteurs = spip_num_rows($t);
+
+//
+// Lire les auteurs qui nous interessent
+// et memoriser la liste des lettres initiales
+//
+
+$max_par_page = 30;
+if ($debut > $nombre_auteurs - $max_par_page)
+	$debut = max(0,$nombre_auteurs - $max_par_page);
+$debut = intval($debut);
+
+$i = 0;
+$auteurs=array();
+while ($auteur = spip_fetch_array($t)) {
+	if ($i>=$debut AND $i<$debut+$max_par_page) {
+		if ($auteur['statut'] == '0minirezo')
+			$auteur['restreint'] = spip_num_rows(
+				spip_query("SELECT * FROM spip_auteurs_rubriques
+				WHERE id_auteur=".$auteur['id_auteur']));
+			$auteurs[] = $auteur;
 	}
+	$i++;
 
-	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur, ".creer_objet_multi ("UPPER(auteurs.nom)", "$spip_lang")." 
-		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
-		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
-		$sql_statut_auteurs $sql_statut_articles
-		GROUP BY auteurs.id_auteur
-		$sql_order");
-	while ($row = spip_fetch_array($result_nombres))
-		$auteurs[$row['id_auteur']]['compteur'] = $row['compteur'];
-
-	// si on n'est pas minirezo, supprimer les auteurs sans article publie
-	// sauf les admins, toujours visibles.
-	if ($connect_statut != '0minirezo') {
-		reset($auteurs);
-		while (list(,$auteur) = each ($auteurs)) {
-			if (! $auteur['compteur'] AND ($auteur['statut'] != '0minirezo')) {
-				unset($auteurs[$auteur['id_auteur']]);
-				$nombre_auteurs --;
-			}
-		}
-	}
-
-	// apres avoir supprime les auteurs sans article publie
-	// generer les paires lettre/indice pour l'acces direct
-	// sur la premiere lettre
-	$lettres_nombre_auteurs = 0;
-	foreach ($auteurs as $auteur) {
+	if ($tri == 'nom') {
 		$lettres_nombre_auteurs ++;
-		$premiere_lettre = addslashes(strtoupper(spip_substr($auteur['multi'],0,1)));
+		$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
 		if ($premiere_lettre != $lettre_prec) {
+#			echo " - $auteur[nom] -";
 			$lettre[$premiere_lettre] = $lettres_nombre_auteurs-1;
 		}
 		$lettre_prec = $premiere_lettre;
 	}
-
- } else { // tri par nombre
-	$result_nombres = spip_query("SELECT auteurs.id_auteur, auteurs.statut,  auteurs.login, auteurs.nom, auteurs.email, auteurs.url_site, auteurs.messagerie, UPPER(nom) AS unom, COUNT(articles.id_article) AS compteur
-		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
-		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
-		$sql_statut_auteurs $sql_statut_articles
-		GROUP BY auteurs.id_auteur
-		$sql_order");
-	unset($vus);
-	while ($row = spip_fetch_array($result_nombres)) {
-		$auteurs[$row['id_auteur']] = $row;
-		$vus .= ','.$row['id_auteur'];
-		$nombre_auteurs ++;
-	}
-
-	// si on est admin, ajouter tous les auteurs sans articles
-	// sinon ajouter seulement les admins sans articles
-	if ($connect_statut == '0minirezo')
-		$sql_statut_auteurs_ajout = $sql_statut_auteurs;
-	else
-		$sql_statut_auteurs_ajout = " AND auteurs.statut = '0minirezo'";
-
-	$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.statut, auteurs.login, auteurs.nom, auteurs.email, auteurs.url_site, auteurs.messagerie, UPPER(nom) AS unom, 0 as compteur
-		FROM spip_auteurs AS auteurs
-		WHERE id_auteur NOT IN (0$vus)
-		$sql_statut_auteurs_ajout
-		$sql_order");
-	while ($row = spip_fetch_array($result_auteurs)) {
-		$auteurs[$row['id_auteur']] = $row;
-		$nombre_auteurs ++;
-	}
 }
 
 
-unset ($rub_restreinte);
-if ($connect_statut == '0minirezo') { // recuperer les admins restreints
-	$restreint = spip_query("SELECT * FROM spip_auteurs_rubriques");
-	while ($row = spip_fetch_array($restreint))
-		$rub_restreinte[$row['id_auteur']] .= ','.$row['id_rubrique'];
-}
 
 //
 // Affichage
@@ -213,18 +187,7 @@ else
 	gros_titre(_T('info_auteurs'));
 echo "<p>";
 
-// reglage du debut
-$max_par_page = 30;
-if ($debut > $nombre_auteurs - $max_par_page)
-	$debut = max(0,$nombre_auteurs - $max_par_page);
-$fin = min($nombre_auteurs, $debut + $max_par_page);
 
-// ignorer les $debut premiers
-unset ($i);
-reset ($auteurs);
-while ($i++ < $debut AND each($auteurs));
-
-// ici commence la vraie boucle
 debut_cadre_relief('auteur-24.gif');
 echo "<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0 WIDTH='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 echo "<tr bgcolor='#DBE1C5'>";
@@ -271,25 +234,22 @@ if ($nombre_auteurs > $max_par_page) {
 	//echo "</font>";
 	echo "</td></tr>\n";
 
-	if (($tri == 'nom' OR !$tri) AND $options == 'avancees') {
+	if ($tri == 'nom' AND $options == 'avancees') {
 		// affichage des lettres
 		echo "<tr bgcolor='white'><td class='arial11' colspan='5'>";
-//		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
-		while (list($key,$val) = each($lettre)) {
+		foreach ($lettre as $key => $val) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
 			else
 				echo "<a href=$retour&debut=$val>$key</a> ";
 		}
-//		echo "</font>";
 		echo "</td></tr>\n";
 	}
 	echo "<tr height='5'></tr>";
 }
 
 
-
-while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
+foreach ($auteurs as $row) {
 	// couleur de ligne
 	$couleur = ($i % 2) ? '#FFFFFF' : $couleur_claire;
 	echo "<tr style='background-color: #eeeeee;'>";
@@ -302,7 +262,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
 	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
 
-	if ($connect_statut == '0minirezo' AND $row['statut']=='0minirezo' AND $rub_restreinte[$row['id_auteur']])
+	if ($connect_statut == '0minirezo' AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
 
 
