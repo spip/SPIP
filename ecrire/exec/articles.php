@@ -18,8 +18,8 @@ include_spip('inc/rubriques');
 include_spip('inc/actions');
 include_spip('inc/mots');
 include_spip('inc/date');
-include_spip('inc/documents');
 include_spip('inc/petition');
+include_spip('inc/documents');
 include_spip('exec/editer_auteurs');
 include_spip('exec/referencer_traduction');
 include_spip('exec/virtualiser');
@@ -196,11 +196,13 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  if ($spip_display != 4) {
 
-	echo	afficher_portfolio($id_article, 'article', 'portfolio', $flag_editable),
-		afficher_portfolio($id_article, 'article', 'documents', $flag_editable);
+	include_spip('exec/documenter');
+	echo	formulaire_documenter($id_article, 'article', 'portfolio', $flag_editable),
+		formulaire_documenter($id_article, 'article', 'documents', $flag_editable);
 
-	if ($GLOBALS['meta']["documents_article"] != 'non' AND $flag_editable)
-		echo afficher_formulaire_upload($id_article, "article", $flag_editable);
+	if ($GLOBALS['meta']["documents_article"] != 'non' AND $flag_editable) {
+	  echo afficher_formulaire_upload($id_article, "article", $flag_editable);
+	}
  }
 
  if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)

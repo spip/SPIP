@@ -31,6 +31,7 @@ dist/style_prive.html -text
 dist/win_width.htc -text
 ecrire/action/autoriser.php -text
 ecrire/action/dater.php -text
+ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteurs.php -text
 ecrire/action/editer_mot.php -text
@@ -100,6 +101,7 @@ ecrire/exec/convert_utf8.php -text
 ecrire/exec/dater.php -text
 ecrire/exec/delete_all.php -text
 ecrire/exec/discuter.php -text
+ecrire/exec/documenter.php -text
 ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mot.php -text
