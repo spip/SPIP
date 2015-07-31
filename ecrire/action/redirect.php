@@ -28,7 +28,8 @@ function action_redirect_dist()
 		$GLOBALS['type_urls'] = 'propres';
 	}
 
-	charger_generer_url();
+	#charger les url du public
+	charger_generer_url(false);
 
 	if ($id_article = intval(_request('id_article'))) {
 		$r = generer_url_article($id_article,$suite,_request('ancre'));
@@ -54,7 +55,7 @@ function action_redirect_dist()
 	
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls ou mes_fonctions/mes_options)
-	else $redirect = _DIR_RESTREINT_ABS;
+	else $redirect = _DIR_RESTREINT;
 	
 	// si c'est un url calcule, on l'encode car spip va ensuite le decoder
 	// avant de faire le header(location)
