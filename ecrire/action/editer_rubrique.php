@@ -80,31 +80,29 @@ function insert_rubrique($id_parent) {
 // Enregistrer certaines modifications d'une rubrique
 // $c est un tableau qu'on peut proposer en lieu et place de _request()
 // http://doc.spip.org/@revisions_rubriques
-function revisions_rubriques($id_rubrique, $c=false) {
+function revisions_rubriques($id_rubrique, $set=false) {
 	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
-	// champs normaux
-	if ($c === false) {
-		$c = array();
-		foreach (array(
-			'titre', 'texte', 'descriptif', 'extra',
-			'id_parent', 'confirme_deplace'
-		) as $champ)
-			if (($a = _request($champ)) !== null)
-				$c[$champ] = $a;
-	}
-
 	include_spip('inc/modifier');
+	$c = collecter_requests(
+		// white list
+		array('titre', 'texte', 'descriptif', 'extra'),
+		// black list
+		array('id_parent', 'confirme_deplace'),
+		// donnees eventuellement fournies
+		$set
+	);
+
 	modifier_contenu('rubrique', $id_rubrique,
 		array(
 			'nonvide' => array('titre' => _T('info_sans_titre'))
 		),
 		$c);
 
+	$c = collecter_requests(array('id_parent', 'confirme_deplace'),array(),$set);
 	// Deplacer la rubrique
 	if (isset($c['id_parent'])) {
-		$c['confirme_deplace'] = _request('confirme_deplace', $c);
 		instituer_rubrique($id_rubrique, $c);
 	}
 

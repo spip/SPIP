@@ -12,17 +12,51 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Une fonction generique pour la collecte des posts
+ * dans action/editer_xxx
+ *
+ * @param array $white_list
+ * @param array $black_list
+ * @param array|null $set
+ * @return array
+ */
+function collecter_requests($white_list, $black_list, $set=null){
+	$c = $set;
+	if (!$c){
+		$c = array();
+		foreach($white_list as $champ)
+			$c[$champ] = _request($champ);
+		// on ajoute toujours la lang en saisie possible
+		// meme si pas prevu au depart pour l'objet concerne
+		if ($l = _request('changer_lang')){
+			$c['lang'] = $l;
+		}
+	}
+	foreach($black_list as $champ)
+		unset($c[$champ]);
 
-// Une fonction generique pour l'API de modification de contenu
-// $options est un array() avec toutes les options
-//
-// renvoie false si rien n'a ete modifie, true sinon
-//
-// Attention, pour eviter des hacks on interdit les champs
-// (statut, id_secteur, id_rubrique, id_parent),
-// mais la securite doit etre assuree en amont
-//
-// http://doc.spip.org/@modifier_contenu
+	return $c;
+}
+
+/**
+ * Une fonction generique pour l'API de modification de contenu
+ * $options est un array() avec toutes les options
+ * renvoie false si rien n'a ete modifie, true sinon
+ *
+ * Attention, pour eviter des hacks on interdit les champs
+ * (statut, id_secteur, id_rubrique, id_parent),
+ * mais la securite doit etre assuree en amont
+ *
+ * http://doc.spip.org/@modifier_contenu
+ *
+ * @param string $type
+ * @param int $id
+ * @param array $options
+ * @param array $c
+ * @param string $serveur
+ * @return bool
+ */
 function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	if (!$id = intval($id)) {
 		spip_log('Erreur $id non defini', 'warn');

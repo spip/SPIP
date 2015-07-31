@@ -101,33 +101,37 @@ function insert_auteur($source=null) {
 function auteurs_set($id_auteur, $set = null) {
 	$err = '';
 
-	if (is_null($set)){
-		$c = array();
-		foreach (array(
-			'nom','email','bio',
-			'nom_site','url_site',
-			'imessage','pgp',
-		) as $champ)
-			$c[$champ] = _request($champ,$set);
-	}
-	else{
-		$c = $set;
-		unset($c['webmestre']);
-		unset($c['pass']);
-		unset($c['login']);
-	}
-
 	include_spip('inc/modifier');
+	$c = collecter_requests(
+		// white list
+		array(
+		 'nom','email','bio',
+		 'nom_site','url_site',
+		 'imessage','pgp',
+		),
+		// black list
+		array('webmestre','pass','login'),
+		// donnees eventuellement fournies
+		$set
+	);
+
 	revision_auteur($id_auteur, $c);
 
 	// Modification de statut, changement de rubrique ?
-	$c = array();
-	foreach (array(
-		'statut', 'new_login','new_pass','login','pass','webmestre','restreintes','id_parent'
-	) as $champ)
-		if (_request($champ,$set))
-			$c[preg_replace(',^new_,','',$champ)] = _request($champ,$set);
-
+	$c = collecter_requests(
+		// white list
+		array(
+		 'statut', 'new_login','new_pass','login','pass','webmestre','restreintes','id_parent'
+		),
+		// black list
+		array(),
+		// donnees eventuellement fournies
+		$set
+	);
+	if (isset($c['new_login']) AND !isset($c['login']))
+		$c['login'] = $c['new_login'];
+	if (isset($c['new_pass']) AND !isset($c['pass']))
+		$c['pass'] = $c['new_pass'];
 	$err .= instituer_auteur($id_auteur, $c);
 
 	return $err;
