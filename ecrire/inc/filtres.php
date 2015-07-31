@@ -357,7 +357,7 @@ function echapper_tags($texte, $rempl = "") {
 // Convertit un texte HTML en texte brut
 // http://doc.spip.org/@textebrut
 function textebrut($texte) {
-	$u = ($GLOBALS['meta']['charset']=='utf-8') ? 'u':'';
+	$u = ($GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'';
 	$texte = preg_replace('/\s+/'.$u.'S', " ", $texte);
 	$texte = preg_replace("/<(p|br)( [^>]*)?".">/iS", "\n\n", $texte);
 	$texte = preg_replace("/^\n+/", "", $texte);
