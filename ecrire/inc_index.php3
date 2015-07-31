@@ -7,7 +7,7 @@ define("_ECRIRE_INC_INDEX", "1");
 
 function nettoyer_chaine_indexation($texte) {
 	include_ecrire("inc_charsets.php3");
-	return strtolower(translitteration($texte));
+	return strtr(strtolower(translitteration($texte)), '\'"','  ');
 }
 
 // Merci a Herve Lefebvre pour son apport sur cette fonction
