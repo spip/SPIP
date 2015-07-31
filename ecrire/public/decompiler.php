@@ -144,7 +144,7 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 		    foreach($v as $k => $p) {
 		      if (!isset($p->type)) continue; #??????
 		      $d = 'decompiler_' . $p->type;
-		      $r = $d($p, $fmt='', (0-$prof), @$v[$k+1]);
+		      $r = $d($p, $fmt, (0-$prof), @$v[$k+1]);
 		      $res2[]= array($p->type, $r);
 		    }
 		    $args[]= $res2;
