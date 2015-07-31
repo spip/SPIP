@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Comentar este sitio',
+'copie_document_impossible' => 'Imposible copiar el documento',
 
 // D
 'date' => 'Fecha',
@@ -37,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => '&Uacute;ltimos art&iacute;culos',
 'derniers_commentaires' => '&Uacute;ltimos comentarios',
 'derniers_messages_forum' => '&Uacute;ltimos mensajes publicados en los foros',
+'documents_interdits_forum' => 'Documentos prohibidos en el foro',
 
 // E
 'edition_mode_texte' => 'Edici&oacute;n en modo texto de',
@@ -46,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'espace_prive' => 'Espacio privado',
 
 // F
+'formats_acceptes' => 'Formatos aceptados: @formats@.',
 'forum' => 'Foro',
 
 // H
