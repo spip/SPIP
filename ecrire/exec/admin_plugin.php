@@ -22,7 +22,7 @@ include_spip('inc/securiser_action');
 // http://doc.spip.org/@exec_admin_plugin_dist
 function exec_admin_plugin_dist($retour='') {
 
-	if (!autoriser('configurer', 'plugins')) {
+	if (!autoriser('configurer', '_plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

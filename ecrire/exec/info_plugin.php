@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 // http://doc.spip.org/@exec_info_plugin_dist
 function exec_info_plugin_dist() {
-	if (!autoriser('configurer', 'plugins')) {
+	if (!autoriser('configurer', '_plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
