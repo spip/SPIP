@@ -102,9 +102,8 @@ define('_STYLE_AIDE_BODY', '
 	padding: 5px;
 }
 
-a {text-decoration: none;}
-a:hover {color:#FF9900; text-decoration: underline;
-}
+a { text-decoration: none; }
+a:focus,a:hover { color: #FF9900; text-decoration: underline; }
 
 body {
 	font-family: Georgia, Garamond, Times New Roman, serif;
