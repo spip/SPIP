@@ -2545,6 +2545,392 @@ function couleur_hsl2rgb ($H,$S,$L) {
 
 // Image typographique
 
+// Fonctions pour l'arabe
+
+
+function rtl_mb_ord($char){
+
+	if (($c = ord($char)) < 216) return $c;
+	else return 256 * rtl_mb_ord(substr($char, 0, -1)) + ord(substr($char, -1));
+
+/*	return (strlen($char) < 2) ?
+		ord($char) : 256 * mb_ord(substr($char, 0, -1))
+			+ ord(substr($char, -1));
+			
+*/			
+  }
+
+
+
+function rtl_reverse($mot, $rtl_global) {
+
+	$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!", " ");
+	foreach($ponctuations as $ponct) {
+		$ponctuation[$ponct] = true;
+	}
+
+		
+
+	for ($i = 0; $i < mb_strlen($mot); $i++) {
+		$lettre = mb_substr($mot, $i, 1);
+		
+		
+		$code = rtl_mb_ord($lettre);
+//		echo "<li>$lettre - $code";
+
+		
+//			echo "<li>$code";
+		if (($code >= 54928 && $code <= 56767) ||  ($code >= 15707294 && $code <= 15711164)) {
+			$rtl = true;
+		}
+		else $rtl = false;
+		
+		if ($lettre == "٠" || $lettre == "١" || $lettre == "٢" || $lettre == "٣" || $lettre == "٤" || $lettre == "٥"
+				 || $lettre == "٦" || $lettre == "٧" || $lettre == "٨" || $lettre == "٩") $rtl = false;
+		
+		if ($ponctuation[$lettre]) {
+			$rtl = $rtl_global;
+			
+			if ($rtl) {
+				switch ($lettre) {
+					case "(": $lettre = ")"; break;
+					case ")": $lettre = "("; break;
+					case "«": $lettre = "»"; break;
+					case "»": $lettre = "«"; break;
+					case "“": $lettre = "”"; break;
+					case "”": $lettre = "“"; break;
+				}
+			}
+		}
+		
+		
+		if ($rtl) $res = $lettre.$res;
+		else $res = $res.$lettre;
+		
+	}
+	return $res;
+}
+
+
+
+function rtl_visuel($texte, $rtl_global) {
+	// hebreu + arabe: 54928 => 56767
+	// hebreu + presentation A: 15707294 => 15710140
+	// arabe presentation: 15708336 => 15711164
+	
+//	echo hexdec("efb7bc");
+
+	// premiere passe pour determiner s'il y a du rtl
+	// de facon a placer ponctuation et mettre les mots dans l'ordre
+	
+
+
+
+	$arabic_letters = array(
+		array("ي", // lettre 0
+			"ﻱ",  // isolee 1
+			"ﻳ", // debut 2
+			"ﻴ", // milieu 3
+			"ﻲ"),
+		array("ب", // lettre 0
+			"ﺏ",  // isolee 1
+			"ﺑ", // debut 2
+			"ﺒ", // milieu 3
+			"ﺐ"),
+		array("ا", // lettre 0
+			"ا",  // isolee 1
+			"ﺍ", // debut 2
+			"ﺍ", // milieu 3
+			"ﺎ"),
+		array("إ", // lettre 0
+			"إ",  // isolee 1
+			"إ", // debut 2
+			"ﺈ", // milieu 3
+			"ﺈ"),
+		array("ل", // lettre 0
+			"ﻝ",  // isolee 1
+			"ﻟ", // debut 2
+			"ﻠ", // milieu 3
+			"ﻞ"),
+		array("خ", // lettre 0
+			"ﺥ",  // isolee 1
+			"ﺧ", // debut 2
+			"ﺨ", // milieu 3
+			"ﺦ"),
+		array("ج", // lettre 0
+			"ﺝ",  // isolee 1
+			"ﺟ", // debut 2
+			"ﺠ", // milieu 3
+			"ﺞ"),
+		array("س", // lettre 0
+			"ﺱ",  // isolee 1
+			"ﺳ", // debut 2
+			"ﺴ", // milieu 3
+			"ﺲ"),
+		array("ن", // lettre 0
+			"ﻥ",  // isolee 1
+			"ﻧ", // debut 2
+			"ﻨ", // milieu 3
+			"ﻦ"),
+		array("ش", // lettre 0
+			"ﺵ",  // isolee 1
+			"ﺷ", // debut 2
+			"ﺸ", // milieu 3
+			"ﺶ"),
+		array("ق", // lettre 0
+			"ﻕ",  // isolee 1
+			"ﻗ", // debut 2
+			"ﻘ", // milieu 3
+			"ﻖ"),
+		array("ح", // lettre 0
+			"ﺡ",  // isolee 1
+			"ﺣ", // debut 2
+			"ﺤ", // milieu 3
+			"ﺢ"),
+		array("م", // lettre 0
+			"ﻡ",  // isolee 1
+			"ﻣ", // debut 2
+			"ﻤ", // milieu 3
+			"ﻢ"),
+		array("ر", // lettre 0
+			"ر",  // isolee 1
+			"ﺭ", // debut 2
+			"ﺮ", // milieu 3
+			"ﺮ"),
+		array("ع", // lettre 0
+			"ع",  // isolee 1
+			"ﻋ", // debut 2
+			"ﻌ", // milieu 3
+			"ﻊ"),
+		array("و", // lettre 0
+			"و",  // isolee 1
+			"ﻭ", // debut 2
+			"ﻮ", // milieu 3
+			"ﻮ"),
+		array("ة", // lettre 0
+			"ة",  // isolee 1
+			"ة", // debut 2
+			"ﺔ", // milieu 3
+			"ﺔ"),
+		array("ف", // lettre 0
+			"ﻑ",  // isolee 1
+			"ﻓ", // debut 2
+			"ﻔ", // milieu 3
+			"ﻒ"),
+		array("ﻻ", // lettre 0
+			"ﻻ",  // isolee 1
+			"ﻻ", // debut 2
+			"ﻼ", // milieu 3
+			"ﻼ"),
+		array("ح", // lettre 0
+			"ﺡ",  // isolee 1
+			"ﺣ", // debut 2
+			"ﺤ", // milieu 3
+			"ﺢ"),
+		array("ت", // lettre 0
+			"ﺕ",  // isolee 1
+			"ﺗ", // debut 2
+			"ﺘ", // milieu 3
+			"ﺖ"),
+		array("ض", // lettre 0
+			"ﺽ",  // isolee 1
+			"ﺿ", // debut 2
+			"ﻀ", // milieu 3
+			"ﺾ"),
+		array("ك", // lettre 0
+			"ك",  // isolee 1
+			"ﻛ", // debut 2
+			"ﻜ", // milieu 3
+			"ﻚ"),
+		array("ه", // lettre 0
+			"ﻩ",  // isolee 1
+			"ﻫ", // debut 2
+			"ﻬ", // milieu 3
+			"ﻪ"),
+		array("ي", // lettre 0
+			"ي",  // isolee 1
+			"ﻳ", // debut 2
+			"ﻴ", // milieu 3
+			"ﻲ"),
+		array("ئ", // lettre 0
+			"ﺉ",  // isolee 1
+			"ﺋ", // debut 2
+			"ﺌ", // milieu 3
+			"ﺊ"),
+		array("ص", // lettre 0
+			"ﺹ",  // isolee 1
+			"ﺻ", // debut 2
+			"ﺼ", // milieu 3
+			"ﺺ"),
+		array("ث", // lettre 0
+			"ﺙ",  // isolee 1
+			"ﺛ", // debut 2
+			"ﺜ", // milieu 3
+			"ﺚ"),
+		array("ﻷ", // lettre 0
+			"ﻷ",  // isolee 1
+			"ﻷ", // debut 2
+			"ﻸ", // milieu 3
+			"ﻸ"),
+		array("د", // lettre 0
+			"ﺩ",  // isolee 1
+			"ﺩ", // debut 2
+			"ﺪ", // milieu 3
+			"ﺪ"),
+		array("ذ", // lettre 0
+			"ﺫ",  // isolee 1
+			"ﺫ", // debut 2
+			"ﺬ", // milieu 3
+			"ﺬ"),
+		array("ط", // lettre 0
+			"ﻁ",  // isolee 1
+			"ﻃ", // debut 2
+			"ﻄ", // milieu 3
+			"ﻂ"),
+		array("آ", // lettre 0
+			"آ",  // isolee 1
+			"آ", // debut 2
+			"ﺂ", // milieu 3
+			"ﺂ"),
+		array("أ", // lettre 0
+			"أ",  // isolee 1
+			"أ", // debut 2
+			"ﺄ", // milieu 3
+			"ﺄ"),
+		array("ؤ", // lettre 0
+			"ؤ",  // isolee 1
+			"ؤ", // debut 2
+			"ﺆ", // milieu 3
+			"ﺆ"),
+		array("ز", // lettre 0
+			"ز",  // isolee 1
+			"ز", // debut 2
+			"ﺰ", // milieu 3
+			"ﺰ"),
+		array("ظ", // lettre 0
+			"ظ",  // isolee 1
+			"ﻇ", // debut 2
+			"ﻈ", // milieu 3
+			"ﻆ"),
+		array("غ", // lettre 0
+			"غ",  // isolee 1
+			"ﻏ", // debut 2
+			"ﻐ", // milieu 3
+			"ﻎ"),
+		array("ى", // lettre 0
+			"ى",  // isolee 1
+			"ﯨ", // debut 2
+			"ﯩ", // milieu 3
+			"ﻰ"),
+		array("پ", // lettre 0
+			"پ",  // isolee 1
+			"ﭘ", // debut 2
+			"ﭙ", // milieu 3
+			"ﭗ"),
+		array("چ", // lettre 0
+			"چ",  // isolee 1
+			"ﭼ", // debut 2
+			"ﭽ", // milieu 3
+			"ﭻ")
+	);
+	
+	if(mb_regex_encoding() !== "UTF-8") echo "Attention: dans php.ini, il faut indiquer:<br /><strong>mbstring.internal_encoding = UTF-8</strong>";
+	
+	
+	$texte = explode(" ", $texte);
+	
+	foreach ($texte as $mot) {
+		$res = "";
+
+
+
+		// Inserer des indicateurs de debut/fin
+		$mot = "^".$mot."^";
+
+		$mot = mb_ereg_replace("&nbsp;", " ", $mot);
+		$mot = mb_ereg_replace("&#171;", "«", $mot);
+		$mot = mb_ereg_replace("&#187;", "»", $mot);
+
+
+
+
+		// ponctuations
+		$ponctuations = array("«","»", "“", "”", ",", ".", " ", ":", ";", "(", ")", "،", "؟", "?", "!"," ");
+		foreach($ponctuations as $ponct) {
+			$mot = str_replace("$ponct", "^$ponct^", $mot);
+		}
+
+		// lettres forcant coupure
+		$mot = mb_ereg_replace("ا", "ا^", $mot);
+		$mot = mb_ereg_replace("د", "د^", $mot);
+		$mot = mb_ereg_replace("أ", "أ^", $mot);
+		$mot = mb_ereg_replace("إ", "إ^", $mot);
+		$mot = mb_ereg_replace("أ", "أ^", $mot);
+		$mot = mb_ereg_replace("ر", "ر^", $mot);
+		$mot = mb_ereg_replace("ذ", "ذ^", $mot);
+		$mot = mb_ereg_replace("ز", "ز^", $mot);
+		$mot = mb_ereg_replace("و", "و^", $mot);
+		$mot = mb_ereg_replace("و", "و^", $mot);
+		$mot = mb_ereg_replace("ؤ", "ؤ^", $mot);
+		$mot = mb_ereg_replace("ة", "ة^", $mot);
+//		$mot = mb_ereg_replace("ل", "^ل", $mot);
+//		$mot = mb_ereg_replace("", "^", $mot);
+
+
+		$mot = mb_ereg_replace("٠", "^٠^", $mot);
+		$mot = mb_ereg_replace("١", "^١^", $mot);
+		$mot = mb_ereg_replace("٢", "^٢^", $mot);
+		$mot = mb_ereg_replace("٣", "^٣^", $mot);
+		$mot = mb_ereg_replace("٤", "^٤^", $mot);
+		$mot = mb_ereg_replace("٥", "^٥^", $mot);
+		$mot = mb_ereg_replace("٦", "^٦^", $mot);
+		$mot = mb_ereg_replace("٧", "^٧^", $mot);
+		$mot = mb_ereg_replace("٨", "^٨^", $mot);
+		$mot = mb_ereg_replace("٩", "^٩^", $mot);
+
+
+		// Ligatures
+		$mot = mb_ereg_replace("لا", "ﻻ", $mot);
+		$mot = mb_ereg_replace("لأ", "ﻷ", $mot);
+		
+		
+		foreach ($arabic_letters as $a_l) {
+			$mot = mb_ereg_replace("([^\^])".$a_l[0]."([^\^])", "\\1".$a_l[3]."\\2", $mot);
+			$mot = mb_ereg_replace("\^".$a_l[0]."([^\^])", "^".$a_l[2]."\\1", $mot);
+			$mot = mb_ereg_replace("([^\^])".$a_l[0]."\^", "\\1".$a_l[4]."^", $mot);
+			// il semble qu'il ne soit pas necessaire de remplacer
+			// la lettre isolee
+//			$mot = mb_ereg_replace("\^".$a_l[0]."\^", "^".$a_l[1]."^", $mot);
+		}
+		
+		
+
+		$mot = mb_ereg_replace("\^", "", $mot);
+		
+		$res = $mot;
+		$res = rtl_reverse($mot, $rtl_global);
+
+		/*
+		$rtl = false;		
+		for ($i = 0; $i < mb_strlen($mot); $i++) {
+			$lettre = mb_substr($mot, $i, 1);
+			$code = rtl_mb_ord($lettre);
+			if (($code >= 54928 && $code <= 56767) ||  ($code >= 15708336 && $code <= 15711164)) $rtl = true;
+		}
+		*/
+		
+		
+		if ($rtl_global) $retour = $res . " " . $retour;
+		else $retour = $retour. " ".$res;
+	}
+	
+	
+	return $retour;
+}
+
+
+
+
 // http://doc.spip.org/@printWordWrapped
 function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text, $textSize, $align="left", $hauteur_ligne = 0) {
 	static $memps = array();
@@ -2574,6 +2960,16 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 		}
 	}
 
+	$rtl_global = false;
+	for ($i = 0; $i < mb_strlen($text); $i++) {
+		$lettre = mb_substr($text, $i, 1);
+		$code = rtl_mb_ord($lettre);
+		if (($code >= 54928 && $code <= 56767) ||  ($code >= 15707294 && $code <= 15711164)) {
+			$rtl_global = true;
+		}
+	}
+
+
 	// split the text into an array of single words
 	$words = explode(' ', $text);
 
@@ -2582,7 +2978,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 		$words[$k] = str_replace(array('~'), array(' '), $v);
 
 
-	if ($hauteur_ligne == 0) 	$lineHeight = floor($textSize * 1.3);
+	if ($hauteur_ligne == 0) $lineHeight = floor($textSize * 1.3);
 	else $lineHeight = $hauteur_ligne;
 
 	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', array());
@@ -2592,7 +2988,12 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 
 	$line = '';
 	while (count($words) > 0) {
-		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0], array());
+		
+		$mot = $words[0];
+		
+		if ($rtl_global) $mot = rtl_visuel($mot,$rtl_global);
+	
+		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$mot, array());
 		$lineWidth = $dimensions[2] - $dimensions[0]; // get the length of this line, if the word is to be included
 		if ($lineWidth > $maxWidth) { // if this makes the text wider that anticipated
 			$lines[] = $line; // add the line to the others
@@ -2609,12 +3010,16 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// Deux passes pour recuperer, d'abord, largeur_ligne
 	// necessaire pour alignement right et center
 	foreach ($lines as $line) {
+		if ($rtl_global) $line = rtl_visuel($line, $rtl_global);
+		
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
 	}
 
 	foreach ($lines as $i => $line) {
+		if ($rtl_global) $line = rtl_visuel($line, $rtl_global);
+
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($align == "right") $left_pos = $largeur_max - $largeur_ligne;
