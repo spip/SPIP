@@ -116,10 +116,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$retour_forum = "!";
 			
 			// sauf si on a passe un parametre en argument (exemple : {#SELF})
-			if($url_param_retour)
+			if($url_param_retour) {
 				$retour_forum = urlencode($url_param_retour);
+				$url = $retour_forum;
+				}
 		}
-
 		if (isset($_COOKIE['spip_forum_user'])
 		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
 			$auteur = $cookie_user['nom'];
@@ -139,11 +140,13 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$nom_site_forum = _request('nom_site_forum');
 		$url_site = _request('url_site');
 
-
+		if ($retour_forum != "!") $url = $retour_forum;
+		
 		if ($afficher_texte != 'non') 
 			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot);
 
 		$alea = forum_fichier_tmp();
+
 		$hash = calculer_action_auteur("ajout_forum " .
 					       $ids['id_rubrique'] ." " .
 					       $ids['id_forum'] ." " .
@@ -155,6 +158,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 	return array('formulaire_forum', 0,
 	array(
+		'id_rubrique' => $ids['id_rubrique'],
+		'id_forum' => $ids['id_forum'],
+		'id_article' => $ids['id_article'],
+		'id_breve' => $ids['id_breve'],
+		'id_syndic' => $ids['id_syndic'],
 		'auteur' => $auteur,
 		'disabled' => ($type == "abo")? "disabled" : '',
 		'email_auteur' => $email_auteur,

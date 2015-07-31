@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 include_ecrire('inc_meta');
 include_ecrire('inc_forum');
 include_ecrire('inc_filtres');
@@ -20,7 +19,6 @@ include_local(_FILE_CONNECT);
 
 // Ce fichier inclus par inc-public a un comportement special
 // Voir commentaires dans celui-ci et dans inc-formulaire_forum
-
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
 	include_ecrire('inc_texte');
@@ -133,7 +131,6 @@ function enregistre_forum() {
 		$retour_forum = $retour_forum->getUrl(); # en cas d'echec du post
 		$calculer_retour = true;
 	}
-
 	// initialisation de l'eventuel visiteur connecte
 	if (!($id_auteur = intval($id_auteur)))
 	$id_auteur = intval($auteur_session['id_auteur']);
@@ -214,6 +211,7 @@ function enregistre_forum() {
 	statut = '$statut'
 	WHERE id_forum = $id_message
 	");
+
 
 	// Le cas echeant, calculer le retour
 	if ($calculer_retour) {
