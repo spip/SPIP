@@ -133,12 +133,14 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 				$where .= " AND $key="._q($values[$key]);
 			}
 			if ($where) {
-				$where = "impt='oui' $where";
-				if (sql_countsel($table, $where)) {
-					if (!sql_updateq($table, $values, $where)) {
+				$where = substr($where,4);
+				$impt = sql_getfetsel('impt', $table, $where);
+				if ($impt === NULL)
+					sql_insertq($table, $values);
+				elseif ($impt == 'oui') {
+					if (!sql_updateq($table, $values, $where))
 						$GLOBALS['erreur_restauration'] = sql_error();
-					}
-				} else sql_insertq($table, $values);
+				}
 			}
 		}
 	}
