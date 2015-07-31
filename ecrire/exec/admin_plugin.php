@@ -72,9 +72,7 @@ function exec_admin_plugin_dist($retour='') {
 
 	// on fait l'installation ici,
 	// cela permet aux scripts d'install de faire des affichages (moches...)
-	echo "<div class='install-plugins'>";
 	installe_plugins();
-	echo "</div>";
 
 	$lpf = liste_plugin_files();
 	$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
