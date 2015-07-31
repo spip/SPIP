@@ -19,7 +19,7 @@ function xml_atom_dist($rss, $intro = '') {
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset']
 	.'"?'.">\n";
-	$u .= '<feed xmlns="http://www.w3.org/2005/Atom"';
+	$u .= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0"';
 	if ($intro['language'])
 		$u .= ' xml:lang="'.$intro['language'].'"';
 	$u .= '>
@@ -43,6 +43,9 @@ function xml_atom_dist($rss, $intro = '') {
 		<link rel="alternate" type="text/html" href="'.texte_backend(url_absolue($article['url'])).'"/>
 		<published>'.date_iso($article['date']).'</published>
 		<updated>'.date_iso($article['date']).'</updated>';
+			if ($article['in_reply_to_url']) $u .= ' 
+		<thr:in-reply-to ref="'.texte_backend(url_absolue($article['in_reply_to_url'])).
+				'" href="'.texte_backend(url_absolue($article['in_reply_to_url'])).'" type="text/html" />';
 			if ($article['author']) {
 				$u .= '
 		<author><name>'.texte_backend($article['author']).'</name>';

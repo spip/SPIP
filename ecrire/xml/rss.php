@@ -20,7 +20,7 @@ function xml_rss_dist($rss, $intro = '') {
 	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
 
 	$u .= '
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:thr="http://purl.org/syndication/thread/1.0">
 <channel>
 	<title>'.texte_backend($intro['title']).'</title>
 	<link>'.texte_backend(url_absolue($intro['url'])).'</link>
@@ -41,6 +41,9 @@ function xml_rss_dist($rss, $intro = '') {
 		<dc:format>text/html</dc:format>';
 			if ($article['lang']) $u .= '
 		<dc:language>'.texte_backend($article['lang']).'</dc:language>';
+			if ($article['in_reply_to_url']) $u .= ' 
+		<thr:in-reply-to ref="'.texte_backend(url_absolue($article['in_reply_to_url'])).
+				'" href="'.texte_backend(url_absolue($article['in_reply_to_url'])).'" type="text/html" />';
 			if ($article['author']) {
 				if ($article['email'])
 					$article['author'].=' <'.$article['email'].'>';
