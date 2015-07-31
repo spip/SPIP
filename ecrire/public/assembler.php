@@ -30,7 +30,6 @@ function public_assembler_dist($fond) {
 	}
 
 	// Si envoi pour un forum, enregistrer puis rediriger
-
 	if (isset($_POST['confirmer_forum'])
 	OR (isset($_POST['ajouter_mot']) AND $GLOBALS['afficher_texte']=='non')) {
 		$f = charger_fonction('forum_insert', 'inc');

@@ -850,7 +850,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 
 	// Attention un eventuel &retour=xxx dans l'URL est prioritaire
 	$c .= '.
-	(($lien = (_request("retour") ? _request("retour") : '.$retour.')) ? "&retour=".rawurlencode($lien) : "")';
+	(($lien = (_request("retour") ? _request("retour") : str_replace("&amp;", "&", '.$retour.'))) ? "&retour=".rawurlencode($lien) : "")';
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 
