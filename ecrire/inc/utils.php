@@ -132,7 +132,7 @@ function minipipe($fonc,$val){
 function pipeline($action,$val){
 	$ok = @is_readable($f = _DIR_SESSIONS."charger_pipelines.php");
 	if (!$ok){
-		include_ecrire('inc_plugin');
+		include_spip('inc/plugin');
 		// generer les fichiers php precompiles
 		// de chargement des plugins et des pipelines
 		verif_plugin();
@@ -152,7 +152,7 @@ function pipeline($action,$val){
 				$val = $val['data'];
 		}
 		else{
-			include_ecrire('inc_plugin');
+			include_spip('inc/plugin');
 			//on passe $action en arg pour creer la fonction meme si le pipe n'est defini nul part
 			// vu qu'on est la c'est qu'il existe !
 			verif_plugin($action);
@@ -553,7 +553,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 			$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 		if ($if_modified_since == $gmoddate) {
-			include_ecrire('inc_headers');
+			include_spip('inc/headers');
 			http_status(304);
 			$headers_only = true;
 		}

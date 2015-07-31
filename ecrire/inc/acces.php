@@ -52,7 +52,7 @@ function low_sec($id_auteur) {
 	// Pas d'id_auteur : low_sec
 	if (!$id_auteur = intval($id_auteur)) {
 		if (!$low_sec = $GLOBALS['meta']['low_sec']) {
-			include_ecrire('inc_meta');
+			include_spip('inc/meta');
 			ecrire_meta('low_sec', $low_sec = creer_pass_aleatoire());
 			ecrire_metas();
 		}

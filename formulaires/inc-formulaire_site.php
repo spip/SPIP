@@ -42,7 +42,7 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 	}
 
 	// Tester l'URL du site
-	include_ecrire("inc_sites");
+	include_spip('inc/sites');
 	if (!recuperer_page(_request('url_site')))
 		return _T('form_pet_url_invalide');
 

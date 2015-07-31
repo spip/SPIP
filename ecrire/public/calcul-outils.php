@@ -243,7 +243,7 @@ array("$element=$id_element"));
 
 function table_from_primary($id) {
 	global $tables_principales;
-	include_ecrire('inc_serialbase');
+	include_spip('base/serial');
 	foreach ($tables_principales as $k => $v) {
 		if ($v['key']['PRIMARY KEY'] == $id)
 			return array($k, array_key_exists('id_rubrique', $v['field']));

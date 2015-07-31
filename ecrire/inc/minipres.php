@@ -24,7 +24,7 @@ function install_debut_html($titre = 'AUTO') {
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
-	include_ecrire('inc_headers');
+	include_spip('inc/headers');
 
 	http_no_cache();
 

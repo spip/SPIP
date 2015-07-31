@@ -223,7 +223,7 @@ function recuperer_parametres_url(&$fond, $url) {
 		$url_propre = $func($id_objet);
 		if ($url_propre
 		AND ($url_propre<>$regs[2])) {
-			include_ecrire('inc_headers');
+			include_spip('inc/headers');
 			http_status(301);
 			// recuperer les arguments supplementaires (&debut_xxx=...)
 			$reste = preg_replace('/^&/','?',

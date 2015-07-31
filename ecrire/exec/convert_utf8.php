@@ -71,7 +71,7 @@ function demander_conversion($tables_a_convertir, $action) {
 }
 
 function exec_convert_utf8_dist() {
-	include_ecrire('inc_meta');
+	include_spip('inc/meta');
 	include_spip('inc/charsets');
 	lire_metas();
 

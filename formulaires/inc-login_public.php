@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_ecrire("inc_meta");
+include_spip('inc/meta');
 include_spip('inc/session');
 include_spip('inc/filtres');
 include_spip('inc/logos');
@@ -87,7 +87,7 @@ function login_pour_tous($login, $cible, $action) {
 	$pose_cookie = generer_url_public('spip_cookie');
 	
 	if ($echec_cookie AND !$ignore_auth_http) {
-		include_ecrire('inc_headers');
+		include_spip('inc/headers');
 		if (php_module()) $auth_http = $pose_cookie;
 	}
 	// Attention dans le cas 'intranet' la proposition de se loger

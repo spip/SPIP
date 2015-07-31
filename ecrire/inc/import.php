@@ -347,7 +347,7 @@ function import_tables($f, $tables, $gz=false) {
 	$_fseek = ($gz) ? gzseek : fseek;
 
 	// utiliser une version fraiche des metas (ie pas le cache)
-	include_ecrire('inc_meta');
+	include_spip('inc/meta');
 	lire_metas();
 
 	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d

@@ -144,7 +144,7 @@ if ($essai_login == "oui") {
 	if ($ldap_present) $auths[] = 'ldap';
 	$ok = false;
 	foreach ($auths as $nom_auth) {
-		include_ecrire("inc_auth_".$nom_auth);
+		include_spip('inc/auth_'.$nom_auth);
 		$classe_auth = "Auth_".$nom_auth;
 		$auth = new $classe_auth;
 		if ($auth->init()) {
@@ -265,7 +265,7 @@ if (ereg("^Apache", $GLOBALS['SERVER_SOFTWARE'])) {
 	redirige_par_entete($redirect);
 }
 else {
-	include_ecrire('inc_headers');
+	include_spip('inc/headers');
 	spip_header("Refresh: 0; url=" . $redirect);
 	echo "<html><head>";
 	echo "<meta http-equiv='Refresh' content='0; url=".$redirect."'>";

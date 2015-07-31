@@ -15,7 +15,7 @@ function action_inscription_dist() {
 	include_spip('inc-formulaire_inscription');
 	include_spip('public/global'); 
 	include_spip('inc/lang');
-	include_ecrire('inc_headers');
+	include_spip('inc/headers');
 
 	utiliser_langue_site();
 	utiliser_langue_visiteur();

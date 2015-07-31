@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function maj_version ($version, $test = true) {
 	if ($test) {
-		include_ecrire('inc_meta');
+		include_spip('inc/meta');
 		ecrire_meta('version_installee', $version);
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
@@ -397,7 +397,7 @@ function maj_base() {
 	if ($version_installee < 1.414) {
 		// Forum par defaut "en dur" dans les spip_articles
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
-		include_ecrire ("inc_meta");
+		include_spip('inc/meta');
 		$accepter_forum = substr($GLOBALS['meta']["forums_publics"],0,3) ;
 		$query = "ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL";
 		$result = spip_query($query);
@@ -422,7 +422,7 @@ function maj_base() {
 		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1";
 		$result = spip_query($query);
 		if ($webmaster = spip_fetch_array($result)) {
-			include_ecrire("inc_meta");
+			include_spip('inc/meta');
 			ecrire_meta('email_webmaster', $webmaster['email']);
 			ecrire_metas();
 		}
@@ -1135,7 +1135,7 @@ function maj_base() {
 
 		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_syndic as id_objet,'9' as id_table FROM spip_index_syndic");
 		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
-		include_ecrire('inc_meta');
+		include_spip('inc/meta');
 		lire_metas();
 		ecrire_metas();
 

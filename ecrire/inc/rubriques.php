@@ -35,7 +35,7 @@ function calculer_rubriques() {
 	//
 
 	// Afficher les articles post-dates ?
-	include_ecrire('inc_meta');
+	include_spip('inc/meta');
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 		"AND fille.date <= NOW()" : '';
 
@@ -209,7 +209,7 @@ function calculer_langues_rubriques() {
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 		// Ecrire meta liste langues utilisees dans rubriques
-		include_ecrire('inc_meta');
+		include_spip('inc/meta');
 		$s = spip_query ("SELECT lang FROM spip_rubriques
 		WHERE lang != '' GROUP BY lang");
 		while ($row = spip_fetch_array($s)) {
