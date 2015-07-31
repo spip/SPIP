@@ -39,7 +39,7 @@ function exec_documents_colonne_dist()
   
   ajax_retour("<div class='upload_answer upload_document_added'>".
 	$res.
-	"</div>");
+	"</div>",false);
 }
 
 ?>

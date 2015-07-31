@@ -175,7 +175,7 @@ function ajax_action_greffe($idom, $corps)
 }
 
 // http://doc.spip.org/@ajax_retour
-function ajax_retour($corps)
+function ajax_retour($corps,$xml = true)
 {
 	if (isset($GLOBALS['transformer_xml'])) {
 	 	echo _DOCTYPE_ECRIRE
@@ -189,7 +189,7 @@ function ajax_retour($corps)
 
 	$c = $GLOBALS['meta']["charset"];
 	header('Content-Type: text/html; charset='. $c);
-	$c = '<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n";
+	$c = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
 	echo $c, $corps;
 	exit;
 }
