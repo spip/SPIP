@@ -4,7 +4,7 @@
 if (defined("_ECRIRE_INC_SUIVI_REVISIONS")) return;
 define("_ECRIRE_INC_SUIVI_REVISIONS", "1");
 
-include_ecrire("inc.php");
+include_ecrire("inc_lab.php");
 include_spip("ecrire.php");
 include_spip("revisions.php");
 include_spip("diff.php");

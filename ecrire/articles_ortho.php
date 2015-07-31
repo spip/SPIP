@@ -1,6 +1,6 @@
 <?php
 
-include("inc.php");
+include("inc_lab.php");
 
 include_spip("ecrire.php");
 include_spip("ortho.php");

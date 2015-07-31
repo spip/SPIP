@@ -1,6 +1,6 @@
 <?php
 
-include("inc.php");
+include("inc_lab.php");
 
 include_ecrire("inc_suivi_revisions.php");
 include_spip("ecrire.php");
