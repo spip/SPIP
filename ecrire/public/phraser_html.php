@@ -737,7 +737,7 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		}
 		
 		if ($table_optionnelle){
-			$result->table_optionnelle = true;	
+			$result->table_optionnelle = $type;
 		}
 		
 		phraser_args($milieu,"/>","",$all_res,$result);
