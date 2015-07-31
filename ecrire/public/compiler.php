@@ -272,29 +272,28 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	// La boucle doit-elle selectionner la langue ?
 	// -. par defaut, les boucles suivantes le font
-	// "peut-etre", c'est-a-dire si forcer_lang == false.
-	// - . a moins d'une demande explicite
+	//    (sauf si forcer_lang==true ou si le titre contient <multi>).
+	// - . a moins d'une demande explicite via {!lang_select}
 	if (!$constant && $boucle->lang_select != 'non' &&
 	    (($boucle->lang_select == 'oui')  ||
-		    (
-			$type_boucle == 'articles'
-			OR $type_boucle == 'rubriques'
-			OR $type_boucle == 'hierarchie'
-			OR $type_boucle == 'breves'
+		    in_array($type_boucle, array(
+		    	'articles', 'rubriques', 'hierarchie', 'breves'
 			)))
-	  {
+	) {
 		// Memoriser la langue avant la boucle et la restituer apres
-	        // afin que le corps de boucle affecte la globale directement
+		// afin que le corps de boucle affecte la globale directement
 		$init_lang = "lang_select(\$GLOBALS['spip_lang']);\n\t";
 		$fin_lang = "lang_select();\n\t";
 
 		$corps .= 
-		  (($boucle->lang_select != 'oui') ? 
-			"\n\t\tif (!(isset(\$GLOBALS['forcer_lang']) AND \$GLOBALS['forcer_lang']))" : '')
-		  . "\n\t\tif (\$x = "
-		  . index_pile($id_boucle, 'lang', $boucles)
-		  . ') $GLOBALS["spip_lang"] = $x;';
-	  }
+			"\n\t\tlang_select_public("
+			. index_pile($id_boucle, 'lang', $boucles)
+			. ", '".$boucle->lang_select."'"
+			. (in_array($type_boucle, array(
+				'articles', 'rubriques', 'hierarchie', 'breves'
+				)) ? ', '.index_pile($id_boucle, 'titre', $boucles) : '')
+			. ');';
+	}
 	else {
 		$init_lang = '';
 		$fin_lang = '';

@@ -397,6 +397,30 @@ function calculer_notes() {
 	return $r;
 }
 
+// Selectionner la langue de l'objet dans la boucle, sauf dans les
+// cas ou il ne le faut pas :-)
+function lang_select_public($lang, $lang_select, $titre=null) {
+	// Cas 1. forcer_lang = true et pas de critere {lang_select}
+	if (isset($GLOBALS['forcer_lang']) AND $GLOBALS['forcer_lang']
+	AND $lang_select !== 'oui')
+		return;
+
+	// Cas 2. l'objet n'a pas de langue definie (ou definie a '')
+	if (!strlen($lang))
+		return;
+
+	// Cas 3. l'objet est multilingue !
+	if ($lang_select !== 'oui'
+	AND strlen($titre) > 10
+	AND strpos($titre, '<multi>') !== false
+	AND strpos(echappe_html($titre), '<multi>') !== false)
+		return;
+
+	// Tous les cas ayant ete elimines, faire le job
+	$GLOBALS['spip_lang'] = $lang;
+	return;
+}
+
 
 // Si un tableau &doublons[articles] est passe en parametre,
 // il faut le nettoyer car il pourrait etre injecte en SQL
