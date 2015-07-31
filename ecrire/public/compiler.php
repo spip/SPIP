@@ -39,7 +39,7 @@ include_spip('public/balises');
 // Gestion des jointures
 include_spip('public/jointures');
 
-// Les 2 ecritures INCLURE(a,b,c} et INCLURE(a){b}{c} sont admises
+// Les 2 ecritures INCLURE{a,b,c} et INCLURE(a){b}{c} sont admises
 // Preferer la premiere.
 
 // http://doc.spip.org/@argumenter_inclure
