@@ -19,7 +19,7 @@
 
 <div id="navigation">
 
-<h1 class="structure"><:public:navigation:></h1>
+<h1 class="structure"><:navigation:></h1>
 
 <!-- Menu de navigation general -->
 
@@ -55,14 +55,9 @@
 	</div>
 	<ul>
 <BOUCLE_forums_liens(FORUMS){plat}{par date}{inverse}{0,15}>
-	<li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
-	<BOUCLE_ArticleForum(ARTICLES){id_article}><a href="#URL_ARTICLE#forum#ID_FORUM"></BOUCLE_ArticleForum>
-	<BOUCLE_BreveForum(BREVES){id_breve}><a href="#URL_BREVE#forum#ID_FORUM"></BOUCLE_BreveForum>
-	<BOUCLE_RubriqueForum(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE#forum#ID_FORUM"></BOUCLE_RubriqueForum>
-	<//B_RubriqueForum><//B_BreveForum><//B_ArticleForum>
-
-	#TITRE</a>
-	</li>
+        <li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
+        <a href="#URL_FORUM">#TITRE</a>
+        </li>
 </BOUCLE_forums_liens>
 	</ul>
 	</div>
