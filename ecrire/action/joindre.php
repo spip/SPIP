@@ -254,7 +254,7 @@ function joindre_deballes($path, $mode, $type, $id, $id_document,$hash, $redirec
 			      );
 	    $contenu = verifier_compactes($archive);
 
-	    foreach ($contenu as $fichier) {
+	    foreach ($contenu as $fichier => $size) {
 		$f = basename($fichier);
 		$x = $ajouter_documents(_tmp_dir. $f, $f,
 				    $type, $id, $mode, $id_document, $actifs);
