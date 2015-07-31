@@ -227,102 +227,87 @@ function http_calendrier_aide_mess()
 
 function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle, $nom, $script, $args_pred, $args_suiv, $type, $ancre)
 {
-  global $spip_lang_right, $spip_lang_left, $couleur_foncee;
+	global $spip_lang_right, $spip_lang_left, $couleur_foncee;
 
-  if (!isset($couleur_foncee)) $couleur_foncee = '#aaaaaa';
+	if (!isset($couleur_foncee)) $couleur_foncee = '#aaaaaa';
 	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
 	$script = http_calendrier_retire_args($script);
-	if (!ereg('[?&]$', $script))
-		$script .= (strpos($script,'?') ? '&' : '?');
+	if (!ereg('[?&]$', $script)) $script .= (strpos($script,'?') ? '&' : '?');
 	$args = "jour=$jour&mois=$mois&annee=$annee$ancre";
 	  
-  	$retour = "";
-
-
-   	if ($type != "mois") {
-   		$retour .= "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>";
-		if ($partie_cal == "tout") $img_att = " class='calendrier-opacity'";
-		else $img_att = "";
-		$retour .= "<span$img_att>"
-		  .http_href_img(($script . "type=$type&set_partie_cal=tout&$args"),
-				 "heures-tout.png", "class='calendrier-png'",  _T('cal_jour_entier')) . "</span>";
-
-		if ($partie_cal == "matin") $img_att = " class='calendrier-opacity'";
-		else $img_att = "";
-		$retour .= "<span$img_att>"
-		  .http_href_img(($script . "type=$type&set_partie_cal=matin&$args"),
-				 "heures-am.png",
-				 "class='calendrier-png'",
-				 _T('cal_matin'))
-		  . "</span>";
-
-		if ($partie_cal == "soir") $img_att = " class='calendrier-opacity'";
-		else $img_att = "";
-		$retour .= "<span$img_att>"
-		  .http_href_img(($script . "type=$type&set_partie_cal=soir&$args"),
-				 "heures-pm.png", 
-				 "class='calendrier-png'",
-				 _T('cal_apresmidi'))
-		  . "</span>";
-		$retour .= "&nbsp;";
-		$retour .= http_href_img(($script . "type=$type&set_echelle=" .
-					  floor($echelle * 1.5) . "&$args"),
-					 "loupe-moins.gif",
-					 '',
-					 _T('info_zoom'). '-');
-		$retour .= http_href_img(($script . "type=$type&set_echelle=" .
-					  floor($echelle / 1.5) . "&$args"), 
-					 "loupe-plus.gif",
-					 '', 
-					 _T('info_zoom'). '+');
- 		$retour .= "</div>";
- 	}
- 	
- 	$retour .= "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>";
-    $img_att = ($type == 'jour') ? " class='calendrier-opacity'" : '';
-	$retour .= http_href_img(($script . "type=jour&echelle=$echelle&$args"),"cal-jour.gif", $img_att, _T('cal_par_jour')) . "";
-	$img_att = ($type == 'semaine') ?  " class='calendrier-opacity'" : "" ;
-	$retour .= http_href_img($script . "type=semaine&echelle=$echelle&$args", "cal-semaine.gif", $img_att, _T('cal_par_semaine'))  . "";;
-	$img_att = ($type == 'mois') ? " class='calendrier-opacity'" : "" ;
-	$retour .= http_href_img($script . "type=mois&echelle=$echelle&$args","cal-mois.gif", $img_att, _T('cal_par_mois'));
-	$retour .= "</div>";
-
 	$today=getdate(time());
 	$jour_today = $today["mday"];
 	$mois_today = $today["mon"];
 	$annee_today = $today["year"];
 
-	if ($type == 'mois') $condition = ($annee == $annee_today && $mois == $mois_today);
-	else $condition = ($annee == $annee_today && $mois == $mois_today && $jour == $jour_today);
-	
-	if ($args_pred)
-		$args_pred = http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
-				     http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='calendrier-png'"),
-				     _T('precedent'));
-	if ($args_suiv)
-		$args_suiv = http_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
-				     http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='calendrier-png'"),
-				     _T('suivant'));
-
 	$id = 'nav-agenda' .ereg_replace('[^A-Za-z0-9]', '', $ancre);
-	$arguments = "jour=$jour_today&mois=$mois_today&annee=$annee_today$ancre" ;
+
 	return 
-	  "<div class='navigation-calendrier calendrier-moztop8'\nstyle='background-color: $couleur_foncee;'>" .
-	  $retour .
-	  "&nbsp;&nbsp;" .
-	  http_href_img($script . "type=$type&echelle=$echelle&$arguments",
-			"cal-today.gif",
-			(" onmouseover=\"montrer('$id');\"" .
-			 ($condition ? " class='calendrier-opacity'" : "")),
-			_T("info_aujourdhui")) .
-	  "&nbsp;" .
-	  $args_pred .
-	  $args_suiv .
-	  "&nbsp;&nbsp;" .
-	  $nom .
-	  (_DIR_RESTREINT ? '' :  aide("messcalen")) .
-	  "</div>".
-	  http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre);
+	  "<div class='navigation-calendrier calendrier-moztop8'\nstyle='background-color: $couleur_foncee;'>"
+	  . "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
+	  . (($type == "mois") ? '' :
+	     (
+		  http_href_img(("$script$args&type=$type&set_partie_cal=tout"),
+				 "heures-tout.png",
+				 "class='calendrier-png" .
+				 (($partie_cal == "tout") ? " calendrier-opacity'" : "'"),
+				 _T('cal_jour_entier'))
+		  .http_href_img(("$script$args&type=$type&set_partie_cal=matin"),
+				 "heures-am.png",
+				 "class='calendrier-png" .
+				 (($partie_cal == "matin") ? " calendrier-opacity'" : "'"),
+				 _T('cal_matin'))
+
+		  .http_href_img(("$script$args&type=$type&set_partie_cal=soir"),
+				 "heures-pm.png", 
+				 "class='calendrier-png" .
+				 (($partie_cal == "soir") ? " calendrier-opacity'" : "'"),
+				 _T('cal_apresmidi'))
+		  . "&nbsp;"
+		  . http_href_img(("$script$args&type=$type&set_echelle=" .
+					  floor($echelle * 1.5)),
+					 "loupe-moins.gif",
+					 '',
+					 _T('info_zoom'). '-')
+		  . http_href_img(("$script$args&type=$type&set_echelle=" .
+					  floor($echelle / 1.5)), 
+					 "loupe-plus.gif",
+					 '', 
+					 _T('info_zoom'). '+')
+		  ))
+	  . http_href_img(("$script$args&type=jour&echelle=$echelle"),"cal-jour.gif",
+			  (($type == 'jour') ? " class='calendrier-opacity'" : ''),
+			  _T('cal_par_jour'))
+
+	  . http_href_img("$script$args&type=semaine&echelle=$echelle", "cal-semaine.gif", 
+			  (($type == 'semaine') ?  " class='calendrier-opacity'" : "" ),
+			  _T('cal_par_semaine'))
+
+	  . http_href_img("$script$args&type=mois&echelle=$echelle","cal-mois.gif",
+			  (($type == 'mois') ? " class='calendrier-opacity'" : "" ),
+			  _T('cal_par_mois'))
+	  . "</div>"
+	  . "&nbsp;&nbsp;"
+	  . http_href_img($script . "type=$type&echelle=$echelle&jour=$jour_today&mois=$mois_today&annee=$annee_today$ancre",
+			  "cal-today.gif",
+			  (" onmouseover=\"montrer('$id');\"" .
+			   (($annee == $annee_today && $mois == $mois_today && (($type == 'mois')  || ($jour == $jour_today)))
+			    ? " class='calendrier-opacity'" : "")),
+			  _T("info_aujourdhui"))
+	  . "&nbsp;"
+	  . (!$args_pred ? '' :
+	     http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
+		       http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='calendrier-png'"),
+		       _T('precedent')))
+	  . (!$args_suiv ? '' :
+	     http_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
+		       http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='calendrier-png'"),
+		       _T('suivant')))
+	  . "&nbsp;&nbsp;"
+	  . $nom
+	  . (_DIR_RESTREINT ? '' :  aide("messcalen"))
+	  . "</div>"
+	  . http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre);
 }
 
 
@@ -371,48 +356,6 @@ function http_agenda_invisible($id, $annee, $jour, $mois, $script, $ancre)
 	return $gadget . "</td></tr></table></div>";
 }
 
-
- 
-# affichage du bandeau d'un calendrier d'une journee
-
-function http_calendrier_navigation_jour($jour,$mois,$annee, $partie_cal, $echelle, $script, $nav)
-{
-   return
-     http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
-				(nom_jour("$annee-$mois-$jour") . " " .
-				 affdate_jourcourt("$annee-$mois-$jour")),
-				$script,
-				"jour=".($jour-1)."&mois=$mois&annee=$annee",
-				"jour=".($jour+1)."&mois=$mois&annee=$annee",
-				'jour',
-				$nav);
-}
-
-# affichage du bandeau d'un calendrier d'une semaine
-
-function http_calendrier_navigation_semaine($jour_today,$mois_today,$annee_today, $partie_cal, $echelle, $jour_semaine, $script, $nav)
-{
-   $debut = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+1, $annee_today));
-  $fin = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+7, $annee_today));
-
-  return     "\n<tr><td colspan='7'>" .
-    http_calendrier_navigation($jour_today,
-			       $mois_today,
-			       $annee_today,
-			       $partie_cal, 
-			       $echelle,
-		     ((annee($debut) != annee($fin)) ?
-		      (affdate($debut)." -<br />".affdate($fin)) :
-		      ((mois($debut) == mois($fin)) ?
-		       (journum($debut)." - ".affdate_jourcourt($fin)) :
-		       (affdate_jourcourt($debut)." - ".affdate_jourcourt($fin)))),
-			    $script,
-		     "mois=$mois_today&annee=$annee_today&jour=".($jour_today-7),
-		     "mois=$mois_today&annee=$annee_today&jour=".($jour_today+7),
-		     'semaine',
-		     $nav) .
-    "</td></tr>\n" ;
-}
 
 # affichage du bandeau d'un calendrier de plusieurs semaines
 # si la periode est inferieure a 31 jours, on considere que c'est un mois
@@ -506,7 +449,7 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 	for ($i=1;$i<$jour_semaine;$i++){$ligne .= "\n\t<td style=\"border-bottom: 1px solid $couleur_claire;\">&nbsp;</td>";}
 
 	$ce_jour=date("Ymd");
-	$premier = true;
+	$border_left = " border-$spip_lang_left: 1px solid $couleur_claire;";
 	for ($j=$premier_jour; $j<=$dernier_jour; $j++){
 		$nom = mktime(1,1,1,$mois_today,$j,$annee_today);
 		$jour = date("d",$nom);
@@ -529,16 +472,6 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 			$couleur_fond = "white";
 		}
 
-		$jour_mois = 
-			("<span class='calendrier-helvetica16'>" .
-			(($dernier_jour <= 31) ? $jour : "$jour/$mois_en_cours") .
-			"</span>");
-
-		if ($premier) {
-			$border_left = " border-$spip_lang_left: 1px solid $couleur_claire;";
-			$premier = false;
-		}
-		else $border_left = "";
 		$ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond;$border_left'>" .
 		  http_calendrier_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre) .
 		  http_calendrier_ics($evenements[$amj], $amj).
@@ -547,8 +480,8 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 		{ 
 			$total .= "\n<tr>$ligne\n</tr>";
 			$ligne = '';
-			$premier = true;
-		}
+			$border_left = " border-$spip_lang_left: 1px solid $couleur_claire;";
+		} else	$border_left = "";
 	}
 	return  $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
 }
@@ -585,11 +518,15 @@ function http_calendrier_clics($annee, $mois, $jour, $script, $ancre)
 
 # dispose les evenements d'une semaine
 
-function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
-				      $articles, $evenements, $partie_cal, $echelle,
-	$script, $nav)
+function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $evt)
 {
-  global $couleur_claire, $couleur_foncee, $spip_ecran, $spip_lang_left;
+	global $couleur_claire, $couleur_foncee, $spip_ecran, $spip_lang_left;
+	$jour_today = journum($date);
+	$mois_today = mois($date);
+	$annee_today = annee($date);
+
+	list($articles, $evenements) = $evt;
+	list($script, $nav) = http_calendrier_script($script);
 
 	if ($partie_cal == "soir") {
 		$debut = 12;
@@ -659,21 +596,40 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 						$v['annee'] == $annee_t) ? 
 					       "white" :
 					       "#eeeeee")) .
-"; position: relative; height: ${dimjour}px; font-size: ${fontsize}px;\n" .
-" border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;'>" . 
-http_calendrier_jour_ics($debut,$fin,$largeur, $echelle, $evenements[$d], $d).
-"</div>" .
+		  "; position: relative; height: ${dimjour}px; font-size: ${fontsize}px;\n" .
+		  " border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;'>" . 
+		  http_calendrier_jour_ics($debut,$fin,$largeur, $echelle, $evenements[$d], $d).
+		  "</div>" .
 		  http_calendrier_jour_trois($articles[$d], 0, $dimjour, $fontsize, $couleur_claire) . 
-			"\n</td>";
+		  "\n</td>";
 	}
+	$debut = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+1, $annee_today));
+	$fin = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+7, $annee_today));
+
 	return 
-	  http_calendrier_navigation_semaine($jour_today,$mois_today,$annee_today,  $partie_cal,
-		$echelle,
-		$jour_semaine,
-		$script,
-		$nav) .
+	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0' border='0'>" .
+	  "\n<tr><td colspan='7'>" .
+	  http_calendrier_navigation($jour_today,
+				     $mois_today,
+				     $annee_today,
+				     $partie_cal, 
+				     $echelle,
+				     ((annee($debut) != annee($fin)) ?
+				      (affdate($debut)." -<br />".affdate($fin)) :
+				      ((mois($debut) == mois($fin)) ?
+				       (journum($debut)." - ".affdate_jourcourt($fin)) :
+				       (affdate_jourcourt($debut)." - ".affdate_jourcourt($fin)))),
+				     $script,
+				     "mois=$mois_today&annee=$annee_today&jour=".($jour_today-7),
+				     "mois=$mois_today&annee=$annee_today&jour=".($jour_today+7),
+				     'semaine',
+				     $nav) .
+	  "</td></tr>\n" .
 	  http_calendrier_les_jours($liens, $couleur_claire, $couleur_foncee) .
-	  "\n<tr>$total</tr>" ; 
+	  "\n<tr>$total</tr>" .
+	  "</table>" .
+	  http_calendrier_sans_date($articles["0"]) .
+	  http_calendrier_aide_mess();
 }
 
 // agenda mensuel 
@@ -1091,7 +1047,14 @@ function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script, $evt)
 	  "\n<table class='calendrier-table-$spip_ecran'>" .
 	  "\n<tr><td class='calendrier-td-gauche'> " .
 	  "</td><td colspan='5' class='calendrier-td-centre'>" .
-	   http_calendrier_navigation_jour($jour,$mois,$annee, $partie_cal, $echelle, $script, $ancre) .
+	  http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
+				     (nom_jour("$annee-$mois-$jour") . " " .
+				      affdate_jourcourt("$annee-$mois-$jour")),
+				     $script,
+				     "jour=".($jour-1)."&mois=$mois&annee=$annee",
+				     "jour=".($jour+1)."&mois=$mois&annee=$annee",
+				     'jour',
+				     $nav) .
 	  "</td><td class='calendrier-td-droit calendrier-arial10'> " .
 	  "</td></tr>" .
 	  "\n<tr><td class='calendrier-td-gauche'>" .
@@ -1121,24 +1084,6 @@ function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script, $evt)
 	  "\n</tr></table>";
 }
 
-function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $evt)
-{
-	global $spip_ecran;	
-
-	$jour_today = journum($date);
-	$mois_today = mois($date);
-	$annee_today = annee($date);
-
-	list($articles, $messages) = $evt;
-	list($script, $ancre) = http_calendrier_script($script);
-
-	return 
-	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0' border='0'>" .
-	  http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, $articles, $messages, $partie_cal, $echelle, $script, $ancre) .
-	  "</table>" .
-	  http_calendrier_sans_date($articles["0"]) .
-	  http_calendrier_aide_mess();
-}
 
 function http_calendrier_entetecol($script, $jour,$mois,$annee)
 {
