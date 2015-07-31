@@ -235,7 +235,9 @@ function _q($a) {
 	return (is_int($a)) ? strval($a) : ("'" . addslashes($a) . "'");
 }
 
+// http://doc.spip.org/@set_spip_doc
 function set_spip_doc($fichier) {return $fichier;}
+// http://doc.spip.org/@get_spip_doc
 function get_spip_doc($fichier) {return _DIR_RACINE . $fichier;}
 // pour bientot:
 //function set_spip_doc($fichier) {return substr($fichier, strlen(_DIR_IMG));}
