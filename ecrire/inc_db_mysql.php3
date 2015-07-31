@@ -96,18 +96,8 @@ function spip_mysql_select($select, $from, $where,
 	}
 
 	if (!($res = @spip_query($q))) {
-	  // Calmer le jeu avec MySQL (si jamais on est en saturation)
-	  spip_touch(_FILE_MYSQL_OUT); // pour spip_cron
-	  spip_log('Erreur MySQL: on limite les acces quelques minutes');
-	  $errno = spip_sql_errno();
-	  $erreur = spip_sql_error();
-	  if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
-	    $errno = $regs[2];
-	  else if (($errno == 1030 OR $errno <= 1026)
-		   AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
-	    $errno = $regs[1];
-	  include_ecrire('inc_debug_sql.php3');
-	  echo erreur_requete_boucle($q, $id, $table, $erreur, $errno);
+		include_ecrire('inc_debug_sql.php3');
+		echo erreur_requete_boucle($q, $id, $table);
 	}
 #	 spip_log($serveur . spip_num_rows($res) . $q);
 	return $res;

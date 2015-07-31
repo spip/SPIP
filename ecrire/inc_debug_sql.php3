@@ -67,17 +67,26 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // Si une boucle cree des soucis, on peut afficher la requete fautive
 // avec son code d'erreur
 //
-function erreur_requete_boucle($query, $id_boucle, $type, $erreur, $errsys) {
+function erreur_requete_boucle($query, $id_boucle, $type) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
 
+	// Recuperer le numero d'erreur
+	$errno = spip_sql_errno();
+	$erreur = spip_sql_error();
+	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
+		$errno = $regs[2];
+	else if (($errno == 1030 OR $errno <= 1026)
+		AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
+	$errno = $regs[1];
+
 	// Erreur systeme
-	if ($errsys > 0 AND $errsys < 200) {
+	if ($errno > 0 AND $errno < 200) {
 		$retour .= "<tt><br /><br /><blink>"
-		. _T('info_erreur_systeme', array('errsys'=>$errsys))
+		. _T('info_erreur_systeme', array('errsys'=>$errno))
 		. "</blink><br />\n"
 		. _T('info_erreur_systeme2');
-		spip_log("Erreur systeme $errsys");
+		spip_log("Erreur systeme $errno");
 	}
 	// Requete erronee
 	else {
