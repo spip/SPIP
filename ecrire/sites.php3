@@ -295,8 +295,10 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 	gros_titre($nom_site, $logo_statut);
 
-if (strlen($url_site) > 40) $url_site = substr($url_site, 0, 30)."...";
-echo "<a href='$url_site'><b>$url_site</b></a>";
+$url_affichee = $url_site;
+
+if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."...";
+echo "<a href='$url_site'><b>$url_affichee</b></a>";
 
 if (strlen($descriptif) > 1) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
