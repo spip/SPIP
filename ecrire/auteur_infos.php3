@@ -59,16 +59,6 @@ function afficher_auteur_rubriques($leparent){
 	$i=$i-1;
 }
 
-// modif auteur restreint
-if ($connect_toutes_rubriques AND $add_rub=floor($add_rub)){
-	$query = "INSERT INTO spip_auteurs_rubriques (id_auteur,id_rubrique) VALUES($id_auteur,$add_rub)";
-	$result = spip_query($query);
-}
-if ($connect_toutes_rubriques AND $supp_rub=floor($supp_rub)){
-	$query = "DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique=$supp_rub";
-	$result = spip_query($query);
-}
-
 // securite
 if ($connect_statut != "0minirezo" AND $connect_id_auteur != $id_auteur) {
 	gros_titre(_T('info_acces_interdit'));
@@ -96,12 +86,8 @@ if ($id_auteur) {
 //
 // Modification (et creation si besoin)
 //
-if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
-	if ($connect_statut == '0minirezo' AND ereg("^(0minirezo|1comite|5poubelle|6forum)$",$statut))	// changer le statut
-		$auteur['statut'] = $statut;
-
-	if ($nom)	// pas de nom vide
-		$auteur['nom'] = corriger_caracteres($nom);
+if ($nom) { // si on poste un nom, c'est qu'on modifie une fiche auteur
+	$auteur['nom'] = corriger_caracteres($nom);
 
 	// login et mot de passe
 	unset ($modif_login);
@@ -164,8 +150,6 @@ if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
 		}
 	}
 
-
-
 	// variables sans probleme
 	$auteur['bio'] = corriger_caracteres($bio);
 	$auteur['pgp'] = corriger_caracteres($pgp);
@@ -198,7 +182,7 @@ if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
 
 			$id_auteur = $auteur['id_auteur'];
 
-			if (settype($ajouter_id_article,'integer') AND ($ajouter_id_article>0))
+			if ($ajouter_id_article = intval($ajouter_id_article))
 				spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur, $ajouter_id_article)");
 		}
 
@@ -209,18 +193,23 @@ if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
 			email='".addslashes($auteur['email'])."',
 			nom_site='".addslashes($auteur['nom_site'])."',
 			url_site='".addslashes($auteur['url_site'])."',
-			pgp='".addslashes($auteur['pgp'])."',
-			statut='".addslashes($auteur['statut'])."'
+			pgp='".addslashes($auteur['pgp'])."'
 			$add_extra
 			WHERE id_auteur=".$auteur['id_auteur'];
 		spip_query($query) OR die($query);
 	}
+}
 
+// Appliquer des modifications de statut
+modifier_statut_auteur($auteur);
+
+
+// Si on modifie la fiche auteur, reindexer et modifier htpasswd
+if ($nom OR $statut) {
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
 		indexer_auteur($id_auteur);
 	}
-
 
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
@@ -390,7 +379,7 @@ if ($edit_pass) {
 	echo "<INPUT TYPE='password' NAME='new_pass2' CLASS='formo' VALUE=\"\" SIZE='40'><P>\n";
 }
 fin_cadre_relief();
-echo "<p>";
+echo "<p />";
 
 
 //
@@ -423,79 +412,9 @@ if ($connect_id_auteur == $id_auteur) {
 }
 
 
+// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
+afficher_formulaire_statut_auteur ($id_auteur);
 
-//
-// Seuls les admins voient le menu 'statut', mais les admins restreints ne
-// pourront l'utiliser que pour mettre un auteur a la poubelle
-//
-
-$statut = $auteur['statut']; // pour aller plus vite
-
-if ($connect_statut == "0minirezo"
-	AND ($connect_toutes_rubriques OR $statut != "0minirezo")
-	AND $connect_id_auteur != $id_auteur) {
-	debut_cadre_relief();
-	echo "<center><B>"._T('info_statut_auteur')." </B> ";
-	echo " <SELECT NAME='statut' SIZE=1 CLASS='fondl'>";
-
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques)
-		echo "<OPTION".mySel("0minirezo",$statut).">"._T('item_administrateur_2');
-
-	echo "<OPTION".mySel("1comite",$statut).">"._T('intem_redacteur');
-
-	if (($statut == '6forum') OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
-		echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
-	echo "<OPTION".mySel("5poubelle",$statut).
-	  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
-
-	echo "</SELECT></center>\n";
-	fin_cadre_relief();
-}
-else {
-	echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">";
-}
-
-//
-// Gestion restreinte des rubriques
-//
-if ($statut == '0minirezo') {
-	debut_cadre_enfonce("secteur-24.gif");
-
-	$query_admin = "SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique";
-	$result_admin = spip_query($query_admin);
-
-	if (spip_num_rows($result_admin) == 0) {
-		echo _T('info_admin_gere_toutes_rubriques');
-	} else {
-		echo _T('info_admin_gere_rubriques')."\n";
-		echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
-		while ($row_admin = spip_fetch_array($result_admin)) {
-			$id_rubrique = $row_admin["id_rubrique"];
-			$titre = typo($row_admin["titre"]);
-			echo "<li>$titre";
-			if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-				echo " <font size=1>[<a href='auteur_infos.php3?id_auteur=$id_auteur&supp_rub=$id_rubrique'>"._T('lien_supprimer_rubrique')."</a>]</font>";
-			}
-			$toutes_rubriques .= "$id_rubrique,";
-		}
-		echo "</ul>";
-		$toutes_rubriques = ",$toutes_rubriques";
-	}
-
-	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-		if (spip_num_rows($result_admin) == 0) {
-			echo "<p><B>"._T('info_restreindre_rubrique')."</b><BR>";
-		} else {
-			echo "<p><B>"._T('info_ajouter_rubrique')."</b><BR>";
-		}
-		echo "<INPUT NAME='id_auteur' VALUE='$id_auteur' TYPE='hidden'>";
-		echo "<SELECT NAME='add_rub' SIZE=1 CLASS='formo'>";
-		echo "<OPTION VALUE='0'>   \n";
-		afficher_auteur_rubriques("0");
-		echo "</SELECT>";
-	}
-	fin_cadre_enfonce();
-}
 
 echo "<INPUT NAME='ajouter_id_article' VALUE='$ajouter_id_article' TYPE='hidden'>\n";
 echo "<INPUT NAME='redirect' VALUE='$redirect' TYPE='hidden'>\n";

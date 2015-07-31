@@ -79,6 +79,144 @@ function effacer_low_sec($id_auteur) {
 }
 
 
+// Une fonction service qui affiche le statut de l'auteur dans l'espace prive
+function afficher_formulaire_statut_auteur ($id_auteur, $post='') {
+	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
+	global $spip_lang_right;
+
+	$s = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur");
+	$auteur = spip_fetch_array($s);
+	$statut = $auteur['statut'];
+
+	if ($post) {
+		$url_self = $post;
+		echo "<p />";
+		echo "<form action='$post' method='post'>\n";
+	} else
+		$url_self = "auteur_infos.php3?id_auteur=$id_auteur";
+
+
+	// S'agit-il d'un admin restreint ?
+	if ($statut == '0minirezo') {
+		$query_admin = "SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique";
+		$result_admin = spip_query($query_admin);
+		$admin_restreint = (spip_num_rows($result_admin) > 0);
+	}
+
+	// Seuls les admins voient le menu 'statut' ; les admins restreints
+	// ne peuvent l'utiliser que pour mettre un auteur a la poubelle
+	if ($connect_statut == "0minirezo"
+	AND ($connect_toutes_rubriques OR $statut != "0minirezo")
+	AND $connect_id_auteur != $id_auteur) {
+		debut_cadre_relief();
+
+		if ($statut == '0minirezo') {
+			if ($admin_restreint)
+				echo bouton_block_visible("statut$id_auteur");
+			else
+				echo bouton_block_invisible("statut$id_auteur");
+		}
+
+		echo "<b>"._T('info_statut_auteur')." </b> ";
+		echo "<select name='statut' size=1 class='fondl'>";
+
+		if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques)
+			echo "<OPTION".mySel("0minirezo",$statut).">"._T('item_administrateur_2');
+
+		echo "<OPTION".mySel("1comite",$statut).">"._T('intem_redacteur');
+
+		if (($statut == '6forum') OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
+			echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
+		echo "<OPTION".mySel("5poubelle",$statut).
+		  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
+
+		echo "</select>\n";
+
+		//
+		// Gestion restreinte des rubriques
+		//
+		if ($statut == '0minirezo') {
+			if (!$admin_restreint) {
+				echo debut_block_invisible("statut$id_auteur");
+				echo "<p /><div style='arial2'>\n";
+				echo _T('info_admin_gere_toutes_rubriques');
+			} else {
+				echo debut_block_visible("statut$id_auteur");
+				echo "<p /><div style='arial2'>\n";
+				echo _T('info_admin_gere_rubriques')."\n";
+				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
+				while ($row_admin = spip_fetch_array($result_admin)) {
+					$id_rubrique = $row_admin["id_rubrique"];
+					$titre = typo($row_admin["titre"]);
+					echo "<li>$titre";
+					if ($connect_toutes_rubriques
+					AND $connect_id_auteur != $id_auteur) {
+						echo " <font size=1>"
+						. "[<a href='$url_self&supp_rub=$id_rubrique'>"
+						._T('lien_supprimer_rubrique')
+						."</a>]</font>";
+					}
+					$toutes_rubriques .= "$id_rubrique,";
+				}
+				echo "</ul>";
+				$toutes_rubriques = ",$toutes_rubriques";
+			}
+	
+			if ($connect_toutes_rubriques
+			AND $connect_id_auteur != $id_auteur) {
+				echo "</div><br /><div class='arial1'>";
+				if (spip_num_rows($result_admin) == 0) {
+					echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
+				} else {
+					echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
+				}
+				echo "<INPUT NAME='id_auteur' VALUE='$id_auteur' TYPE='hidden'>";
+				echo "<SELECT NAME='add_rub' SIZE=1 CLASS='formo'>";
+				echo "<OPTION VALUE='0'>\n";
+				afficher_auteur_rubriques("0");
+				echo "</SELECT>";
+			}
+
+			echo "</div>\n";
+			echo fin_block();
+		}
+
+
+		if ($post) {
+			echo "<div align='$spip_lang_right'><input type='submit'
+			class='fondo' name='Valider'
+			value=\""._T('bouton_valider')."\" /></div>"; 
+			echo "</form>\n";
+		}
+
+		fin_cadre_relief();
+	}
+}
+
+function modifier_statut_auteur (&$auteur) {
+	global $connect_statut, $connect_toutes_rubriques, $_GET, $_POST;
+	// changer le statut ?
+	if ($connect_statut == '0minirezo' AND $_POST['statut']) {
+		if (ereg("^(0minirezo|1comite|5poubelle|6forum)$",$_POST['statut'])) {
+			$auteur['statut'] = $_POST['statut'];
+			spip_query("UPDATE spip_auteurs SET statut='".$_POST['statut']."'
+			WHERE id_auteur=".$auteur['id_auteur']);
+		}
+	}
+	// modif auteur restreint, seulement pour les admins
+	if ($connect_toutes_rubriques) {
+		if ($add_rub=intval($_POST['add_rub']))
+			spip_query("INSERT INTO spip_auteurs_rubriques
+			(id_auteur,id_rubrique)
+			VALUES(".$auteur['id_auteur'].", $add_rub)");
+
+		if ($supp_rub=intval($_GET['supp_rub']))
+			spip_query("DELETE FROM spip_auteurs_rubriques
+			WHERE id_auteur=".$auteur['id_auteur']."
+			AND id_rubrique=$supp_rub");
+	}
+}
+
 
 function initialiser_sel() {
 	global $htsalt;
@@ -109,6 +247,8 @@ function ecrire_acces() {
 		return;
 	}
 
+	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
+	# de devenir "1comite" le cas echeant (auth http)... a nettoyer
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
 	$result = spip_query_db($query);	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install.php3)
 	$logins = array();

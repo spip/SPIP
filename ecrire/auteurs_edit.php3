@@ -51,7 +51,11 @@ function afficher_auteur_rubriques($leparent){
 }
 
 
-$query = "SELECT * FROM spip_auteurs WHERE id_auteur='$id_auteur'";
+if (!$id_auteur = intval($id_auteur)) {
+	die ('erreur');
+}
+
+$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
 $result = spip_query($query);
 
 
@@ -70,6 +74,10 @@ if ($row = spip_fetch_array($result)) {
 	$imessage=$row["imessage"];
 	$extra = $row["extra"];
 	$low_sec = $row["low_sec"];
+
+
+// Appliquer des modifications de statut
+modifier_statut_auteur($row);
 
 
 if ($connect_id_auteur == $id_auteur) debut_page($nom, "auteurs", "perso");
@@ -151,6 +159,10 @@ function mySel($varaut,$variable) {
 		extra_affichage($extra, "auteurs");
 	}
 
+	// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
+	if ($options == 'avancees')
+		afficher_formulaire_statut_auteur ($id_auteur,
+			"auteurs_edit.php3?id_auteur=$id_auteur");
 
 	fin_cadre_relief();
 
@@ -167,7 +179,9 @@ afficher_articles(_T('info_articles_auteur'),
 }
 
 
-if ($id_auteur != $connect_id_auteur) {
+if ($id_auteur != $connect_id_auteur
+AND ($statut == '0minirezo' OR $statut == '1comite')
+) {
 	echo "<div>&nbsp;</div>";
 	debut_cadre_couleur();
 	
@@ -179,7 +193,8 @@ if ($id_auteur != $connect_id_auteur) {
 		"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
 	afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
 	
-	icone_horizontale(_T('info_envoyer_message_prive'),"message_edit.php3?new=oui&type=normal&dest=$id_auteur", "message.gif");
+	icone_horizontale(_T('info_envoyer_message_prive'),
+		"message_edit.php3?new=oui&type=normal&dest=$id_auteur", "message.gif");
 	fin_cadre_couleur();
 }
 
