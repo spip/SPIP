@@ -88,7 +88,9 @@ function calculer_boucle($id_boucle, &$boucles) {
       $corps = calculer_boucle_nonrec($id_boucle, $boucles);
       // attention, ne calculer la requete que maintenant
       // car la fonction precedente appelle index_pile qui influe dessus
-      $req = calculer_requete_sql($boucles[$id_boucle]);
+      $req =	(($init = $boucles[$id_boucle]->doublons) ?
+			("\n\t$init = array();") : '') .
+		calculer_requete_sql($boucles[$id_boucle]);
     }
   return $req . $corps 
 	. (($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
@@ -168,7 +170,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		  . index_pile($id_boucle, 'lang', $boucles)
 		  . ') ? $x : $old_lang;';
 		// Memoriser la langue avant la boucle pour la restituer apres
-	      $init.= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
+	      $init = "\n	\$old_lang = \$GLOBALS['spip_lang'];";
 	      $fin = "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
 
 	  }
