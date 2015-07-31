@@ -20,6 +20,7 @@ function exec_puce_statut_dist()
 	exec_puce_statut_args(_request('id'),  _request('type'));
 }
 
+// http://doc.spip.org/@exec_puce_statut_args
 function exec_puce_statut_args($id, $type)
 {
 	if (in_array($type,array('article','breve','site'))) {
