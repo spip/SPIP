@@ -75,7 +75,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	}
 
 	$ret .= "</td>";
-	$col++;
 
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
@@ -103,7 +102,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$ret .= bouton_barre_racc ("barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $champhelp);
 
 	$ret .= "</td>";
-	$col++;
 
 	if (!_DIR_RESTREINT) {
 		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
