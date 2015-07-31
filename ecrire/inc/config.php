@@ -289,7 +289,19 @@ function effacer_config($cfg){
 	return true;
 }
 
-
+/**
+ * Lister toutes les pages de configuration du site.
+ *
+ * Y compris celles fournies par des plugins.
+ * 
+ * @uses _EXTENSION_SQUELETTES
+ * @uses find_all_in_path()
+ * @uses find_in_theme()
+ * @uses lister_formulaires_configurer()
+ * 
+ * @param array $exclure
+ * @return array
+ */
 function lister_configurer($exclure = array()){
 	return array();
 	
@@ -359,10 +371,12 @@ function lister_configurer($exclure = array()){
 
 /**
  * Retourne la liste des formulaires de configuration
- * presents dans le fichier dont l'adresse est donnee 
+ * présents dans le fichier dont l'adresse est donnée 
  *
- * @param string $file adresse du fichier
- * @return array liste des formulaires trouves
+ * @param string $file 
+ *    Adresse du fichier
+ * @return array  
+ *    Liste des formulaires trouvés
 **/
 function lister_formulaires_configurer($file) {
 	$forms = array();
@@ -396,7 +410,19 @@ function lister_formulaires_configurer($file) {
 }
 
 
-// http://doc.spip.org/@liste_metas
+/**
+ * Définir les `meta` de configuration
+ * 
+ * @pipeline_appel configurer_liste_metas
+ * 
+ * @uses url_de_base()
+ * @uses _DEFAULT_CHARSET
+ * @uses _DIR_IMG
+ * @uses _DIR_RACINE
+ * 
+ * @return array
+ *    Couples nom de la `meta` => valeur par défaut
+ */
 function liste_metas()
 {
 	return pipeline('configurer_liste_metas', array(
@@ -453,10 +479,13 @@ function liste_metas()
 	));
 }
 
-// mets les meta a des valeurs conventionnelles quand elles sont vides
-// et recalcule les langues
-
-// http://doc.spip.org/@actualise_metas
+/**
+ * Mets les `meta` à des valeurs conventionnelles quand elles sont vides
+ * et recalcule les langues
+ * 
+ * @param array $liste_meta
+ * @return void
+ */
 function actualise_metas($liste_meta)
 {
 	$meta_serveur =
@@ -482,7 +511,18 @@ function actualise_metas($liste_meta)
 // Gestion des modifs
 //
 
-// http://doc.spip.org/@appliquer_modifs_config
+/**
+ * Appliquer les modifications apportées aux `metas`
+ *
+ * Si `$purger_skel` est à `true`, on purge le répertoire de cache des squelettes
+ * 
+ * @uses liste_metas()
+ * @uses ecrire_meta()
+ * @uses purger_repertoire()
+ * 
+ * @param bool $purger_skel
+ * @return void
+ */
 function appliquer_modifs_config($purger_skel=false) {
 
 	foreach(liste_metas() as $i => $v) {
@@ -499,10 +539,10 @@ function appliquer_modifs_config($purger_skel=false) {
 }
 
 /**
- * Mettre a jour l'adresse du site a partir d'une valeur saisie
- * (ou auto detection si vide)
+ * Mettre à jour l'adresse du site à partir d'une valeur saisie
+ * (ou auto détection si vide)
  * 
- * @param  $adresse_site
+ * @param string $adresse_site
  * @return void
  */
 function appliquer_adresse_site($adresse_site){

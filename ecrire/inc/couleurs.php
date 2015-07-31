@@ -10,16 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Couleurs de l'interface de l’espace privé de SPIP.
+ * 
+ * @package SPIP\Core\Couleurs
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Appelee sans argument, cette fonction retourne un menu de couleurs
-// Avec un argument numerique, elle retourne les parametres d'URL 
-// pour les feuilles de style calculees (cf commencer_page et svg)
-// Avec un argument de type tableau, soit elle remplace le tableau par defaut
-// par celui donne en argument, soit, avec le second parametre
-// a true, elle complete le tableau par celui donne en premier argument.
-
-// http://doc.spip.org/@inc_couleurs_dist
+/**
+ * Obtenir ou définir les différents jeux de couleurs de l'espace privé
+ *
+ * - Appelée _sans argument_, cette fonction retourne un menu de couleurs.
+ * - Avec un _argument numérique_, elle retourne les paramètres d'URL 
+ * pour les feuilles de style calculées (cf `commencer_page` et `svg`)
+ * - Avec un _argument de type tableau_, soit elle remplace le tableau par défaut
+ * par celui donné en argument, _soit_, avec le second paramètre
+ * à `true`, elle complète le tableau par celui donné en premier argument.
+ * 
+ * @see commencer_page()
+ * 
+ * @staticvar array $couleurs_spip
+ * @param null|int|array $choix
+ * @param bool $ajouter
+ * @return array
+ */
 function inc_couleurs_dist($choix=NULL, $ajouter=false)
 {
 	static $couleurs_spip = array(
