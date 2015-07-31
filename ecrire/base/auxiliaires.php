@@ -94,7 +94,8 @@ $spip_auteurs_messages_key = array(
 
 $spip_documents_articles = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_articles_key = array(
 		"PRIMARY KEY"		=> "id_article, id_document",
@@ -102,7 +103,8 @@ $spip_documents_articles_key = array(
 
 $spip_documents_rubriques = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_rubriques_key = array(
 		"PRIMARY KEY"		=> "id_rubrique, id_document",
@@ -110,7 +112,8 @@ $spip_documents_rubriques_key = array(
 
 $spip_documents_breves = array(
 		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_breve"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
+		"id_breve"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
+		"vu"	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL");
 
 $spip_documents_breves_key = array(
 		"PRIMARY KEY"		=> "id_breve, id_document",

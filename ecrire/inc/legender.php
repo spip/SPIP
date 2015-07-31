@@ -28,14 +28,18 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	if (!preg_match('/^\w+$/',$type, $r)) {
 	  return;
 	}
-
 	// premier appel
 	if ($document) {
 		$flag = $deplier;
 	} else
 	// retour d'Ajax
 	if ($id_document) {
-		$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
+		$res = spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document));
+		$document = spip_fetch_array($res);
+		$document['vu'] = 'non';
+		$res = spip_query("SELECT vu FROM spip_documents_".$type."s WHERE id_$type=$id AND id_document=".intval($id_document));
+		if ($row = spip_fetch_array($res))
+			$document['vu'] = $row['vu'];
 		$flag = 'ajax';
 	}
 	else
@@ -120,10 +124,14 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	$corps .=  $vignette . "\n\n";
 
 	$texte = _T('icone_supprimer_document');
-	if (preg_match('/_edit$/', $script))
-		$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
+	$s = ($ancre =='documents' ? '': '-');
+	if (preg_match('/_edit$/', $script)){
+		if ($id==0)
+			$action = redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre");
+		else
+			$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
+	}
 	else {
-		$s = ($ancre =='documents' ? '': '-');
 		if (!_DIR_RESTREINT)
 			$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
 		else{
@@ -135,7 +143,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
 	// et ca buggue si on propose de supprimer => on ne propose pas
-	if ($id > 0)
+	if (!($id < 0) && $document['vu']=='non')
 		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
 
 	$corps = "<div class='verdana1' style='color: "
