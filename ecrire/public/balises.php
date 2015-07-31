@@ -422,6 +422,7 @@ function balise_LANG_dist ($p) {
 	return $p;
 }
 
+// http://doc.spip.org/@balise_CHAPO_dist
 function balise_CHAPO_dist ($p) {
 	$_chapo = champ_sql('chapo', $p);
 	if ((!$p->etoile) OR (strpos($_chapo, '$Pile[$SP') === false))

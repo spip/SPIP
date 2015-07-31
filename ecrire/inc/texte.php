@@ -291,6 +291,7 @@ function echappe_retour($letexte, $source='', $filtre = "") {
 
 // Reinserer le javascript de confiance (venant des modeles)
 
+// http://doc.spip.org/@echappe_retour_modeles
 function echappe_retour_modeles($letexte)
 {
 	$letexte = echappe_retour($letexte);
@@ -1187,6 +1188,7 @@ function traiter_raccourci_glossaire($letexte)
 // Regexp des raccouris, aussi utilisee pour la fusion de sauvegarde Spip
 define('_RACCOURCI_LIEN', ",\[([^][]*)->(>?)([^]]*)\],msS");
 
+// http://doc.spip.org/@expanser_liens
 function expanser_liens($letexte, $connect='')
 {
 	$inserts = array();
