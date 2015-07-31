@@ -55,7 +55,7 @@ function affiche_logos($logos, $lien, $align) {
 		. ($align ? " align=\"$align\"" : '') 
 		. $taille
 		. $mouseover
-		. " style='border-width: 0px;' class='spip_logos' />";
+		. ' style="border-width: 0px;" class="spip_logos" />';
 
 	return (!$lien ? $milieu :
 		('<a href="' .
@@ -155,22 +155,17 @@ include_local("'
 inclure_balise_dynamique(balise_'
 		. $nom
 		. '_dyn('
-		. argumenter_balise_dynamique($args)
+		. join(", ", array_map('argumenter_squelette', $args))
 		. "),1, $ligne);
 lang_dselect();
 ?"
 		.">");
 }
-function argumenter_balise_dynamique($args) {
+function argumenter_squelette($v) {
 
-	$res = array();
-	foreach ($args as $v) {
-		if (!is_array($v))
-			$res[]= "'" . texte_script($v) . "'";
-		else
-			$res[]= 'array(' . argumenter_balise_dynamique($v) . ')';
-	}
-	return join(", ", $res);
+	if (!is_array($v))
+		return "'" . texte_script($v) . "'";
+	else  return 'array(' . join(", ", array_map('argumenter_squelette', $v)) . ')';
 }
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
