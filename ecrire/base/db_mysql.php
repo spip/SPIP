@@ -248,10 +248,11 @@ function spip_mysql_selectdb($db) {
 
 
 // Retourne les bases accessibles
+// Attention on n'a pas toujours les droits
 
 // http://doc.spip.org/@spip_mysql_listdbs
 function spip_mysql_listdbs($serveur='') {
-	return mysql_list_dbs();
+	return @mysql_list_dbs();
 }
 
 // Fonction de creation d'une table SQL nommee $nom
