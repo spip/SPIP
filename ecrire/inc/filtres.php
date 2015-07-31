@@ -1350,29 +1350,36 @@ function post_autobr($texte, $delim="\n_ ") {
 //
 // Selection dans un tableau dont les index sont des noms de langues
 // de la valeur associee a la langue en cours
-//
+// si absente, retourne le premier
+// remarque : on pourrait aussi appeler un service de traduction externe
+// ou permettre de choisir une langue "plus proche",
+// par exemple le francais pour l'espagnol, l'anglais pour l'allemand, etc.
 
-// http://doc.spip.org/@multi_trad
-function multi_trad ($trads) {
-	global  $spip_lang; 
 
-	if (isset($trads[$spip_lang])) {
-		return $trads[$spip_lang];
-
-	}	// cas des langues xx_yy
-	else if (preg_match(',^([a-z]+)_,', $spip_lang, $regs) AND isset($trads[$regs[1]])) {
-		return $trads[$regs[1]];
-	}	
-	// sinon, renvoyer la premiere du tableau
-	// remarque : on pourrait aussi appeler un service de traduction externe
-	// ou permettre de choisir une langue "plus proche",
-	// par exemple le francais pour l'espagnol, l'anglais pour l'allemand, etc.
-	else  return array_shift($trads);
+function multi_trad ($trads, $lang='') {
+	$k = multi_trads($trads, $lang);
+	return $k ? $trads[$k] : array_shift($trads);
 }
 
-// analyse un bloc multi
+// idem, mais retourne l'index
+
+function multi_trads ($trads, $lang='') {
+
+	if (!$lang) $lang = $GLOBALS['spip_lang']; 
+
+	if (isset($trads[$lang])) {
+		return $lang;
+
+	}	// cas des langues xx_yy
+	else if (preg_match(',^([a-z]+)_,', $lang, $regs) AND isset($trads[$regs[1]])) {
+		return $regs[1];
+	}	
+	else  return '';
+}
+
+// convertit le contenu d'une balise multi en un tableau
 // http://doc.spip.org/@extraire_trad
-function extraire_trad ($bloc) {
+function extraire_trads($bloc) {
 	$lang = '';
 // ce reg fait planter l'analyse multi s'il y a de l'{italique} dans le champ
 //	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/siS", $bloc, $regs)) {
@@ -1385,20 +1392,24 @@ function extraire_trad ($bloc) {
 	}
 	$trads[$lang] = $bloc;
 
-	// faire la traduction avec ces donnees
-	return multi_trad($trads);
+	return $trads;
 }
 
 // repere les blocs multi dans un texte et extrait le bon
+
+define('_EXTRAIRE_MULTI', "@<multi>(.*?)</multi>@sS");
+
 // http://doc.spip.org/@extraire_multi
 function extraire_multi ($letexte) {
 	if (strpos($letexte, '<multi>') === false) return $letexte; // perf
-	if (preg_match_all("@<multi>(.*?)</multi>@sS", $letexte, $regs, PREG_SET_ORDER))
-		foreach ($regs as $reg)
-			$letexte = str_replace($reg[0], extraire_trad($reg[1]), $letexte);
+	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER))
+		foreach ($regs as $reg) {
+			$trads = extraire_trads($reg[1]);
+			$trad = multi_trad($trads);
+			$letexte = str_replace($reg[0], $trad , $letexte);
+		}
 	return $letexte;
 }
-
 
 //
 // Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
