@@ -1367,10 +1367,12 @@ function aide($aide='') {
 }
 
 // normalement il faudrait creer exec/info.php, mais pour mettre juste ca:
-
 // http://doc.spip.org/@exec_info_dist
 function exec_info_dist() {
 	global $connect_statut;
-	if ($connect_statut == '0minirezo') phpinfo();
+	if ($connect_statut == '0minirezo')
+		phpinfo();
+	else
+		echo "pas admin";
 }
 ?>
