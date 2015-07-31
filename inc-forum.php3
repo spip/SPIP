@@ -123,8 +123,8 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 	$forum_id_breve = intval($id_breve);
 	$forum_id_syndic = intval($id_syndic);
 	$hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea");
-	$titre = entites_html($titre);
 
+	$titre = entites_html($titre);
 	// Faut-il ajouter des propositions de mots-cles
 	if ((lire_meta("mots_cles_forums") == "oui") && ($table != 'forum'))
 		$table = table_des_mots($table, $les_mots);
@@ -357,7 +357,7 @@ function forum_dyn($titre, $table, $accepter_forum, $idr, $idf, $ida, $idb, $ids
 	    $retour_forum = $url;
 	}
 	 return retour_forum($idr,$idf,$ida,$idb,$ids,
-			     texte_script('> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre))),
+			     ('> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre))),
 			     $table,
 			     $accepter_forum,
 			     $url,
