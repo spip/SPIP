@@ -133,6 +133,7 @@ $GLOBALS['i18n_en'] = array(
 'bouton_radio_universel' => 'Universal alphabet (<tt>utf-8</tt>): displays all the languages but not supported
 		by all browsers at the time being.',
 'bouton_recharger_page' => 'reload this page',
+'bouton_redirection' => 'REDIRECT',
 'bouton_relancer_installation' => 'Re-launch installation',
 'bouton_restaurer_base' => 'Restore the database',
 'bouton_suivant' => 'Next',
