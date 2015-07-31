@@ -50,6 +50,7 @@ function phraserTout($phraseur, $data)
  var $ouvrant = array();
  var $reperes = array();
 
+ var $dtc = NULL;
 }
 
 // http://doc.spip.org/@inc_indenter_xml_dist

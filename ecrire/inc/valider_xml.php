@@ -202,12 +202,7 @@ function finElement($phraseur, $name)
 
 	$depth = &$phraseur_xml->depth;
 	$contenu = &$phraseur_xml->contenu;
-	$ouvrant = &$phraseur_xml->ouvrant;
 
-	$ouv = $ouvrant[$depth];
-	if ($ouv[0] != ' ')
-	  $ouvrant[$depth] = ' ' . $ouv;
-	else $ouv= "";
 	$n = strlen($phraseur_xml->res);
 	$c = strlen(trim($contenu[$depth]));
 	$k = $phraseur_xml->debuts[$depth];

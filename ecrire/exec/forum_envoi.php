@@ -228,15 +228,15 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 
 	return "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>"
 		. (!$parent ? '' : "<tr><td colspan='2'>$parent</td></tr>")
-		. "\n<tr>"
+		. "<tr>"
 		. (!$parent ? "<td colsan='2'"
-			: (" <td style='width: 10px' height='13' valign='top' background='"
+			: (" <td style='width: 10px; background-image: url("
 			   . _DIR_IMG_PACK
-			   . "forum-vert.gif'" 
-			   . ">"
-			   . http_img_pack('rien.gif', ' ', "style='width: 10px; height: 13px border: 0px'")
+			   . "forum-vert.gif" 
+			   . ");'>"
+			   . http_img_pack('rien.gif', ' ', " style='width: 0px; height: 0px; border: 0px;'")
 			   . "</td>\n<td "))
-		.  " width='100%' valign='top' rowspan='2'>"
+		.  " style='width: 100%' valign='top' rowspan='2'>"
 		.  debut_cadre_thread_forum("", true, "", typo($titre_texte))
 		. propre($texte)
 		. (!$nom_site ? '' : "<p><a href='$url_site'>$nom_site</a></p>")
@@ -247,10 +247,10 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre_texte, $nom_s
 		. "</td>"
 		. "</tr>\n"
 		. (!$parent ? ''
-			: ("<tr><td style='width: 10px' valign='top' background='"
+			: ("<tr><td valign='top' style='width: 10px; background-image: url("
 			  . _DIR_IMG_PACK
-			  . "rien.gif'>"
-			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, " style='width: 10px; height: 13px border: 0px'")
+			  . "rien.gif);'>"
+			  .  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, " style='width: 10px; height: 13px'")
 		      . "</td>\n</tr>"))
 		. "</table>"
 		. "\n<div>&nbsp;</div>";

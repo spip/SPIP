@@ -61,6 +61,7 @@ function xml_finElement($parser, $name, $fusion_bal=false)
 	$ouvrant = &$phraseur_xml->ouvrant;
 
 	$ouv = $ouvrant[$depth];
+
 	if ($ouv[0] != ' ')
 	  $ouvrant[$depth] = ' ' . $ouv;
 	else $ouv= "";
@@ -191,6 +192,7 @@ function inc_sax_dist($page, $apply=false)
 		ob_end_clean();
 	}
 
+	// charger la DTD et transcoder les entites
 	$res = $phraseur_xml->phraserTout($xml_parser, sax_bug($page));
 
 	xml_parser_free($xml_parser);
@@ -211,6 +213,8 @@ function inc_sax_dist($page, $apply=false)
 // http://doc.spip.org/@sax_bug
 function sax_bug($data)
 {
+	global  $phraseur_xml;
+
 	$r = analyser_doctype($data);
 	if (!$r)
 		$data = html2unicode($data, true);
@@ -218,15 +222,15 @@ function sax_bug($data)
 		list ($topelement, $avail, $grammaire, $rotlvl) = $r;
 		$file = _DIR_DTD . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 		if (lire_fichier($file, $r))
-		  $this->dtc = unserialize($r);
+			$phraseur_xml->dtc = unserialize($r);
 		else {
-		  include_spip('xml/analyser_dtd');
-		  $this->dtc = charger_dtd($grammaire, $avail);
-		  ecrire_fichier($file, serialize($this->dtc));
+			include_spip('xml/analyser_dtd');
+		    	$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
+			ecrire_fichier($file, serialize($phraseur_xml->dtc));
 		}
 		$trans = array();
 		
-		foreach($this->dtc->entites as $k => $v)
+		foreach($phraseur_xml->dtc->entites as $k => $v)
 		  if (!strpos(" amp lt gt quot ", $k))
 		    $trans["&$k;"] = $v;
 		$data = strtr($data, $trans);
