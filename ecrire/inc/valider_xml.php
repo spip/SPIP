@@ -65,13 +65,32 @@ function charger_dtd($data)
 	spip_log("Racine $topelement dans $grammaire ($rotlvl)");
 	$dtc = new DTC;
 	analyser_dtd($grammaire, $avail, $dtc);
+$r = $dtc->regles; ksort($r);foreach($r as $l => $v) echo "$l '$v'<br />\n";
 	return $dtc;
 }
+
+// Compiler une regle de production en une Regexp qu'on appliquera sur la
+// suite des noms de balises separes par des espaces. Du coup:
+// supprimer #PCDATA etc, ca ne sert pas pour le controle des balises;
+// supprimer les virgules (les sequences sont implicites dans une Regexp)
+// conserver | + * ? ( ) qui ont la meme signification en DTD et en Regexp;
+// faire suivre chaque nom d'un espace (et supprimer les autres) ...
+// et parentheser le tout pour que  | + * ? s'applique dessus.
+
+function compilerRegle($val)
+{
+	$x = str_replace('()','',
+		preg_replace('/\s*,\s*/','',
+		preg_replace('/(\w+)\s*/','(\1 )',
+		preg_replace('/\s*\|\s*/','|',
+		preg_replace('/#\w+\s*[,|]?\s*/','', $val)))));
+	return $x;
+}
+
 
 // http://doc.spip.org/@analyser_dtd
 function analyser_dtd($grammaire, $avail, &$dtc)
 {
-
 	static $trace = array(); // pour debug
 
 	$dtd = '';
@@ -120,23 +139,44 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 		}
 	}
 
-	// memoriser la regle de production de l'element
-	// et dresser le tableau de ses fils potentiels
-	// pour traquer tres vite les balises filles illegitimes
-
+	// Dresser le tableau des filles potentielles de l'element
+	// pour traquer tres vite les illegitimes.
+	// Si la regle a au moins une sequence (i.e. une virgule)
+	// ou n'est pas une itération (i.e. se termine par * ou +)
+	// en faire une RegExp qu'on appliquera aux balises rencontrees.
+	// Sinon, conserver seulement le type de l'iteration car la traque
+	// aura fait l'essentiel du controle sans memorisation des balises.
+	// Fin du controle en finElement
 	if (preg_match_all('/<!ELEMENT\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 		foreach($r as $m) {
 			list(,$nom, $val) = $m;
 			$nom = expanserEntite($nom, $dtc->macros);
-			$val = expanserEntite($val, $dtc->macros);
-			$dtc->regles[$nom]= $val;
-			$val = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
-			$dtc->elements[$nom]= $val;
-
-			foreach ($val as $k) {
-				if (($k != 'EMPTY') AND ($k != 'ANY') AND ($k[0] != '#') AND ((!isset($dtc->peres[$k])) OR !in_array($nom, $dtc->peres[$k])))
-				$dtc->peres[$k][]= $nom;
+			$val = compilerRegle(expanserEntite($val, $dtc->macros));
+			if (isset($dtc->elements[$nom])) {
+			  spip_log("double definition de $nom dans la DTD");
+			  return;
 			}
+			$filles = array();
+			if ($val == '(EMPTY )')
+				$dtc->regles[$nom] = 'EMPTY';
+			elseif  ($val == '(ANY )') 
+				$dtc->regles[$nom] = 'ANY';
+			else {
+				$last = substr($val,-1);
+				if (preg_match('/ \w/', $val)
+				OR strpos('*+', $last) === false)
+					$dtc->regles[$nom] = "/^$val$/";
+				else
+					$dtc->regles[$nom] = $last;
+				$filles = array_values(preg_split('/\W+/', $val,-1, PREG_SPLIT_NO_EMPTY));
+
+				foreach ($filles as $k) {
+					if ((!isset($dtc->peres[$k]))
+					OR !in_array($nom, $dtc->peres[$k]))
+						$dtc->peres[$k][]= $nom;
+				}
+			}
+			$dtc->elements[$nom]= $filles;
 		}
 		// tri pour presenter les suggestions de corrections
 		foreach ($dtc->peres as $k => $v) {
@@ -169,37 +209,34 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	spip_log("DTD $avail $grammaire ". strlen($dtd) . ' octets ' . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($trace) . " types différents d'attributs " . count($dtc->entites) . " entites");
 }
 
+
 // http://doc.spip.org/@expanserEntite
 function expanserEntite($val, $macros)
 {
 	if (preg_match_all('/%([.\w]+);/', $val, $r, PREG_SET_ORDER)) {
-		foreach($r as $m)
+	  foreach($r as $m) {
+		  $ent = $m[1];
 		  // il peut valoir ""
-			if (isset($macros[$m[1]]))
-				$val = str_replace($m[0], $macros[$m[1]], $val);
+			if (isset($macros[$ent]))
+				$val = str_replace($m[0], $macros[$ent], $val);
+	  }
 	}
 	return trim(preg_replace('/\s+/', ' ', $val));
 }
+
 
 // http://doc.spip.org/@validerElement
 function validerElement($phraseur, $name, $attrs)
 {
 	global $phraseur_xml;
 
-	if (!$phraseur_xml->dtc->elements) return;
-
 	if (!isset($phraseur_xml->dtc->elements[$name]))
 
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' balise inconnue ')
 		.  coordonnees_erreur($phraseur);
-	// controler les filles illegitimes, mais pas le droit d'ainesse
-	// (i.e. l'ordre de succession indique par une virgule dans la regle:
-	// le cas est rare, du coup interet/temps-de-calcul tend vers 0)
-	// Pour XHTML 1.0 il n'y a que <html>, <head> et <table>.
-	// Mais a-t-on jamais mis  head apres body et caption apres tr ?
-	// Quant a Head, c'est juste pour avoir 1 seul title et 1 seul base.
 	else {
+	// controler les filles illegitimes, ca suffut 
 	  $depth = $phraseur_xml->depth;
 	  $ouvrant = $phraseur_xml->ouvrant;
 	  if (isset($ouvrant[$depth])) {
@@ -216,9 +253,14 @@ function validerElement($phraseur, $name, $attrs)
 	            . (!$bons_peres ? ''
 	               : (_L( '<p style="font-size: 80%"> mais de <b>') . $bons_peres . '</b></p>'))
 		    .  coordonnees_erreur($phraseur);
-		    }
+		} else if ($phraseur_xml->dtc->regles[$pere][0]=='/') {
+		  $phraseur_xml->fratrie[substr($depth,2)].= "$name ";
+		}
 	    }
 	  }
+	  // Init de la suite des balises a memoriser si regle difficile
+	  if ($phraseur_xml->dtc->regles[$name][0]=='/')
+	    $phraseur_xml->fratrie[$depth]='';
 	  if (isset($phraseur_xml->dtc->attributs[$name])) {
 		  foreach ($phraseur_xml->dtc->attributs[$name] as $n => $v)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
@@ -352,7 +394,9 @@ function debutElement($phraseur, $name, $attrs)
 { 
 	global $phraseur_xml;
 
-	validerElement($phraseur, $name, $attrs);
+	if ($phraseur_xml->dtc->elements)
+		validerElement($phraseur, $name, $attrs);
+
 	xml_debutElement($phraseur, $name, $attrs);
 	$depth = &$phraseur_xml->depth;
 	$phraseur_xml->debuts[$depth] =  strlen($phraseur_xml->res);
@@ -374,33 +418,37 @@ function finElement($phraseur, $name)
 	if ($ouv[0] != ' ')
 	  $ouvrant[$depth] = ' ' . $ouv;
 	else $ouv= "";
-	$n = strlen($phraseur_xml->res) + strlen(trim($contenu[$depth]));
+	$n = strlen($phraseur_xml->res);
+	$c = strlen(trim($contenu[$depth]));
 	$k = $phraseur_xml->debuts[$depth];
 
 	$regle = $phraseur_xml->dtc->regles[$name];
 	$vide = ($regle  == 'EMPTY');
-	// controler que les balises devant etre vides le sont (ok),
-	// idem pour les nons vides (approximatif, car on ignore "|")
-	// Pour Xhtml 1.0, cette approximation suffit
+	// controler que les balises devant etre vides le sont 
 	if ($vide) {
-		if ($n <> $k)
+	  if ($n <> ($k + $c))
 			$phraseur_xml->err[]= " <p><b>$name</b>"
 			.  _L(' balise non vide')
 			.  coordonnees_erreur($phraseur);
-	} elseif ($n == $k) {
-		if (strpos($regle, '+')) $ok = false;
-		else {
-		  if (!preg_match('/^\(.*(.)$/', $regle,$r))
-			$ok = true; // DATA: ok.
-		  elseif ($r[1] != ')') $ok = true; // i.e. ? ou *: ok
-		  elseif (preg_match('/[^?*)][)]*,/', $regle)) $ok= false;
-		  else $ok= true;
+	// pour les regles PCDATA ou iteration de disjonction, tout est fait
+	} elseif ($regle AND ($regle != '*')) {
+		if ($regle == '+') {
+		    // iteration de disjonction non vide: 1 balise au -
+			if ($n == $k) {
+				$phraseur_xml->err[]= " <p>\n<b>$name</b>"
+				  .  _L(' balise vide')
+				  .  coordonnees_erreur($phraseur);
+			}
+		} else {
+			$f = $phraseur_xml->fratrie[substr($depth,2)];
+			if (!preg_match($regle, $f))
+				$phraseur_xml->err[]= " <p>\n<b>$name</b>"
+				  .  _L(' succession des fils incorrecte : <b>')
+				  . $f
+				  . '</b>'
+				  .  coordonnees_erreur($phraseur);
 		}
-		if( !$ok) {
-			$phraseur_xml->err[]= " <p>\n<b>$name</b>"
-			.  _L(' balise vide')
-			.  coordonnees_erreur($phraseur);
-		}
+
 	}
 	xml_finElement($phraseur, $name, $vide);
 }
@@ -460,6 +508,7 @@ function phraserTout($phraseur, $data)
  var $idrefs = array();
  var $idrefss = array();
  var $debuts = array();
+ var $fratrie = array();
 }
 
 // http://doc.spip.org/@inc_valider_xml_dist
