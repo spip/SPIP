@@ -39,8 +39,7 @@ function install_debut_html($titre = 'AUTO') {
 	  "<title>",
 	  $titre,
 	  "</title>\n" ,
-	  '<link rel="stylesheet" type="text/css" href=\'' ,
-	  generer_url_ecrire('spip_style', $args_color),
+	  '<link rel="stylesheet" type="text/css" href=\'', generer_url_ecrire('spip_style', $args_color),
 	  "'>
 <style type='text/css'>
 <!--
@@ -75,8 +74,7 @@ function aide($aide='') {
 
 	if (!$aide OR $spip_display == 4) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href='" 
-		. generer_url_ecrire("aide_index", "aide=$aide&var_lang=$spip_lang")
+	return "&nbsp;&nbsp;<a class='aide' href='" . generer_url_ecrire("aide_index", "aide=$aide&var_lang=$spip_lang")
 		. "' target=\"spip_aide\" "
 		. "onclick=\"javascript:window.open(this.href,"
 		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "
@@ -191,7 +189,7 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='') {
 	$hidden = "";
-	$action = generer_url_ecrire($script, $args) ;
+	$action = generer_url_ecrire($script, $args, false, true) ;
 	if ($p = strpos($action, '?'))
 	  foreach(preg_split('/&(amp;)?/',substr($action,$p+1)) as $c) {
 		$hidden .= "\n<input name='" . 

@@ -48,15 +48,12 @@ function include_fonction($nom) {
 	if ($f && is_readable($f)) {
 		if (!$GLOBALS['included_files'][$inc]++) include($f);
 	} else {
-		$f = _DIR_INCLUDE . $inc  . '.php';
+		$f = _DIR_INCLUDE . $inc . '.php';
 		if (is_readable($f)) {
 			if (!$GLOBALS['included_files'][$inc]++) include($f);
 		} else {
-		  // provisoire avant renommage 
-			$f = _DIR_INCLUDE . ('inc_' . $nom . _EXTENSION_PHP);
-			if (is_readable($f)) {
-				if (!$GLOBALS['included_files'][$inc]++) include($f);
-			} else  $inc = "";
+		  if (!$f = include_rustine($inc)) # provisoire php/php3
+		    $inc = "";
 		}
 	}
 	$f = str_replace('-','_',$nom); // pour config-fonc etc. A renommer
@@ -69,6 +66,18 @@ function include_fonction($nom) {
 		   ($inc ? "" : "(aucun fichier inc_$f disponible)"));
 	  exit;
 	}
+}
+
+// a supprimer apres renommage php / php3
+
+function include_rustine($inc)
+ {
+	$f = _DIR_INCLUDE . ($inc . _EXTENSION_PHP);
+	if (is_readable($f)) {
+	  if (!$GLOBALS['included_files'][$inc]++)
+	    {include($f); return true;}
+	}
+	return;
 }
 
 
@@ -637,8 +646,8 @@ function charger_generer_url() {
 
 // Ecriture tres tarabiscotee pour assurer la transition php3 & mutualisation
 
-function generer_url_ecrire($script, $args="", $no_entities=false) {
-	$site = $GLOBALS['meta']["adresse_site"];
+function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
+	$site = $rel ? "" : $GLOBALS['meta']["adresse_site"];
 	if ($site)
 	  $site .= ((substr($site,-1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
 	else $site =  _DIR_RESTREINT;

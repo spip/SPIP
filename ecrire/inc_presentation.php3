@@ -42,8 +42,6 @@ function bouton_imessage($destinataire, $row = '') {
 	global $couche_invisible;
 	$couche_invisible ++;
 
-	$url = new Link(generer_url_ecrire("message_edit",""));
-
 	// verifier que ce n'est pas un auto-message
 	if ($destinataire == $connect_id_auteur)
 		return;
@@ -56,22 +54,13 @@ function bouton_imessage($destinataire, $row = '') {
 			return;
 		}
 	}
-	$url->addVar('dest',$destinataire);
-	$url->addVar('new','oui');
-	$url->addVar('type','normal');
 
 	if ($destinataire) $title = _T('info_envoyer_message_prive');
 	else $title = _T('info_ecire_message_prive');
 
 	$texte_bouton = http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7' border='0'", $title);
 		
-	
-	$ret .= "<a href='". $url->getUrl() ."' title=\"$title\">";
-	$ret .= "$texte_bouton</a>";
-
-	return $ret;
-	
-
+	return "<a href='". generer_url_ecrire("message_edit","new=oui&dest=$destinataire&type=normal"). "' title=\"$title\">$texte_bouton</a>";
 }
 
 // Faux HR, avec controle de couleur
@@ -1705,8 +1694,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			if (!$controle_id_article) {
 				echo "<div align='right' class='verdana1'>";
-				echo "<b><a href='",
-				  generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)."&titre_message=".rawurlencode($titre)), 
+				echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)."&titre_message=".rawurlencode($titre)), 
 				  "'>",
 				  _T('lien_repondre_message'),
 				  "</a></b></div>";
@@ -1802,8 +1790,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 	}
 
 	return $res .
-	  '<link rel="stylesheet" type="text/css" href=\'' .
-	  generer_url_ecrire('spip_style', $args_color) .
+	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_ecrire('spip_style', $args_color) .
 	  "'>\n" .
 	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 
@@ -1834,8 +1821,7 @@ function debut_javascript($admin, $stat)
 	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
 		spip_setcookie('spip_accepte_ajax', -1);
 		$ajax = "if (a = createXmlHttp()) {
-	a.open('GET', '" .
-		  generer_url_ecrire("ajax_page.php","fonction=test") .
+	a.open('GET', '" . generer_url_ecrire("ajax_page.php","fonction=test") .
 		  "', true) ;
 	a.send(null);
 }";
@@ -2364,8 +2350,7 @@ else {
 
 	echo "<td> &nbsp; </td>";
 
-	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('" .
-				 generer_url_ecrire("aide_index","var_lang=$spip_lang") .
+	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('" . generer_url_ecrire("aide_index","var_lang=$spip_lang") .
 				 "', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
 		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
 		"vide", "", generer_url_ecrire("aide_index","var_lang=$spip_lang"),

@@ -186,8 +186,7 @@ function infos_naviguer($id_rubrique, $statut)
 			  echo 
 				http_img_pack('admin-12.gif','',''),
 				$logo,
-			    " <a href='",
-			    generer_url_ecrire('auteurs_edit', "id_auteur=$id"),
+			    " <a href='", generer_url_ecrire('auteurs_edit', "id_auteur=$id"),
 				"'>",
 				extraire_multi($row['nom']),
 				'</a><br />';
@@ -259,8 +258,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
-	$link = new Link(generer_url_ecrire("naviguer","action=coloniser&id_rubrique=$id_rubrique"));
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, $link);
+	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, generer_url_ecrire("naviguer","action=coloniser&id_rubrique=$id_rubrique", true, true  ));
 	echo "</div>\n";
 	echo fin_block();
 

@@ -101,7 +101,7 @@ function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
 function afficher_formulaire_date($script, $args, $texte, $jour, $mois, $annee)
 {
   global $couleur_foncee;
-  return generer_url_post_ecrire($script, $args); 
+  return generer_url_post_ecrire($script, $args)
 	. "<table cellpadding='5' cellspacing='0' border='0' width='100%' background='"
 	.  _DIR_IMG_PACK
 	. "rien.gif'>"

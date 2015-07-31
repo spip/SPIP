@@ -31,11 +31,11 @@ do
 done
 
 # Ajouter inc_ a qq fichiers derogatoires 
-
-mv lab_diff.php inc_diff.php
-mv lab_ortho.php inc_ortho.php
-mv lab_revisions.php inc_revisions.php
-mv pclzip.lib.php inc_pclzip.php
+# (+tard: a completer par leur renommage dans le source)
+#mv lab_diff.php inc_diff.php
+#mv lab_ortho.php inc_ortho.php
+#mv lab_revisions.php inc_revisions.php
+#mv pclzip.lib.php inc_pclzip.php
 
 # 2 appels de la fonction pivot qui n'ont pas de php3
 sed  's/\(generer_url_ecrire("[^.]*\).php/\1/' inc_articles.php > a
@@ -43,7 +43,7 @@ mv a inc_articles.php
 sed  's/\(generer_url_ecrire("[^.]*\).php/\1/' inc_presentation.php > b
 mv b inc_presentation.php
 
-# traitement specifique plus tard
+# traitement specifique ci-dessous
 mv inc_version.php3 inc_version
 
 # pour tous les autres, c'est deja bon sauf le .php3 ---> .php
@@ -57,6 +57,7 @@ done
 # et eliminer les sequelles de - en _
 
 grep -v "script = '/'"  inc_utils.php |
+grep -v "= include_rustine" |
 sed 's/$ext=.*"\?/$args = "?exec=$script" . ($args ? "\&$args/; s,$script$ext,,; s/f = str_replace.*$/f = $nom;/' > x
 mv x inc_utils.php
 

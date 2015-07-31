@@ -206,8 +206,7 @@ table.spip td {
 <TR WIDTH=100% HEIGHT=60%>
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
 <CENTER>
-<img src="',
-		  generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif"),
+<img src="', generer_url_ecrire("aide_index", "img=AIDE--logo-spip.gif"),
 		  '" alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';

@@ -149,11 +149,10 @@ WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND log
       $bio_auteur = $row['bio'];
       $res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b><FONT SIZE=3>$nom_auteur</FONT></b>" .
 	($email_auteur ? " ($email_auteur)" : '') .
-	" | <A href='" .
-	generer_url_ecrire('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
+	" | <a href='" . generer_url_ecrire('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
 	"'>" .
 	_T('lien_ajout_destinataire').
-	"</A>" .
+	"</a>" .
 	(!trim($bio_auteur) ? '' :
 	 ("<br /><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n")) .
 	"</FONT></LI>\n";

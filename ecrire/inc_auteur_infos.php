@@ -199,8 +199,7 @@ if ($nom OR $statut) {
 
 // Redirection
 if (!$echec AND $redirect_ok == "oui") {
-	redirige_par_entete($redirect ? rawurldecode($redirect) :
-			    generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur"));
+	redirige_par_entete($redirect ? rawurldecode($redirect) : generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur"));
 }
 affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus);
 
