@@ -39,6 +39,7 @@ if ($row = spip_fetch_array($result)) {
 	$lang_article = $row["lang"];
 }
 if (!$lang_article) $lang_article = lire_meta('langue_site');
+changer_typo($lang_article);
 
 // pour l'affichage du virtuel
 unset($virtuel);
@@ -82,9 +83,8 @@ $code_ie = "<!--[if IE]>
 </script>
 <![endif]-->";
 
-debut_html(_T('ortho_orthographe'), $code_ie);
+debut_html(_T('ortho_orthographe').' &laquo;'.$titre.'&raquo;', $code_ie);
 
-changer_typo($lang_article);
 
 // Ajouts et suppressions de mots par l'utilisateur
 gerer_dico_ortho($lang_article);
