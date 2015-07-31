@@ -1768,7 +1768,7 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 // passer les url relatives a la css d'origine en url absolues
 // http://doc.spip.org/@urls_absolues_css
 function urls_absolues_css($contenu, $source) {
-	$path = dirname(url_absolue($source)).'/';
+	$path = suivre_lien(url_absolue($source),'./');
 
 	return preg_replace_callback(
 		",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
