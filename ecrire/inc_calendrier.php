@@ -199,6 +199,7 @@ elseif ($type == 'jour') {
 function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
 {
 	global $spip_ecran;
+	if (!isset($spip_ecran)) $spip_ecran = 'large';
 
 	list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
 
@@ -266,6 +267,7 @@ function http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_
 
 function http_calendrier_mois_noms($annee, $mois, $jour, $script, $ancre){
 	global $couleur_claire;
+
 	$bandeau ="";
 	for ($j=1; $j<8;$j++){
 		$bandeau .= 
@@ -273,7 +275,9 @@ function http_calendrier_mois_noms($annee, $mois, $jour, $script, $ancre){
 		  _T('date_jour_' . (($j%7)+1)) .
 		  "</th>";
 	}
-	return "\n<tr style='background-color: $couleur_claire'>$bandeau\n</tr>";
+	return "\n<tr" .
+	  (!isset($couleur_claire) ? "" : " style='background-color: $couleur_claire'") . 
+	  ">$bandeau\n</tr>";
 }
 
 # dispose les lignes d'un calendrier de 7 colonnes (les jours)
@@ -304,7 +308,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$couleur_fond = "";
 
 		if ($jour_semaine == 0) {
-			$couleur_fond = " background-color: $couleur_claire;";
+			$couleur_fond = $couleur_claire;
 		} else {
 			if ($jour_semaine==1) 
 			  { 
@@ -316,7 +320,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		
 		if ($amj == date("Ymd")) {
 			$couleur_lien = "red";
-			$couleur_fond = " background-color: white;";
+			$couleur_fond = "white";
 		}
 		$evts = $evenements[$amj];
 		if ($evts) {
@@ -333,7 +337,9 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		}
 
 		$ligne .= "\n\t\t<td\tclass='calendrier-td'
-			style='height: 100px;$couleur_fond border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;$border_left'>" .
+			style='height: 100px; border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;" .
+		  ($couleur_fond ? " background-color: $couleur_fond;" : "") .
+		  "$border_left'>" .
 		  http_calendrier_mois_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre, $couleur_lien) .
 		  $evts .
 		  "\n\t</td>";
@@ -375,6 +381,7 @@ function http_calendrier_mois_clics($annee, $mois, $jour, $script, $ancre, $colo
 function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
 {
 	global $spip_ecran;
+	if (!isset($spip_ecran)) $spip_ecran = 'large';
 
 	$init = date("w",mktime(1,1,1,$mois,$jour,$annee));
 	$init = $jour+1-($init ? $init : 7);
@@ -424,7 +431,7 @@ calendrier_args_date($fannee, $fmois, ($fjour+1)),
 }
 
 function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
-	global $couleur_claire, $spip_ecran;
+	global $couleur_claire;
 	$href = $script .
 	  (ereg('[?&]$', $script) ? '' : (strpos($script,'?') ? '&' : '?')) .
 	  "type=jour&";
@@ -450,7 +457,9 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 			    'color:black;') .
 		  "</th>";
 	}
-	return "\n<tr style='background-color: $couleur_claire'>$bandeau\n</tr>" ;
+	return "\n<tr" .
+	  (!isset($couleur_claire) ? "" : " style='background-color: $couleur_claire'") . 
+	  ">$bandeau\n</tr>";
 }
 
 function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_cal, $evt)
@@ -461,16 +470,13 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 
 	$today=date("Ymd");
 	$total = '';
+	$style = "border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;";
 	for ($j=$jour; $j<$jour+7;$j++){
 		$v = mktime(0,0,0,$mois, $j, $annee);
 		$total .= "\n<td class='calendrier-td'>" .
-		  http_calendrier_ics($annee,$mois,$j, $echelle, $partie_cal, $largeur, $evt, 
-		 (" background-color: " .
-		  ((!date("w",$v)) ? 
-		   $couleur_claire :
-		   ((date("Ymd", $v) == $today) ? "white" :
-		    "#eeeeee")) .
-		  "; border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;")) . 
+		  http_calendrier_ics($annee,$mois,$j, $echelle, $partie_cal, $largeur, $evt, ($style . ( (date("w",$v)==0 && isset($couleur_claire)) ? 
+			  " background-color: $couleur_claire;" :
+													  ((date("Ymd", $v) == $today) ? " background-color: white;" : "")))) .
 		  "\n</td>";
 	}
 	return "\n<tr class='calendrier-verdana10'>$total</tr>";
@@ -479,10 +485,10 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 
 function http_calendrier_jour($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt){
 	global $spip_ecran;
-
+	if (!isset($spip_ecran)) $spip_ecran = 'large';
 	return 	
 	  "\n<table class='calendrier-table-$spip_ecran'>" .
-	  "\n<tr>" . "<td class='calendrier-td-gauche'></td>" .
+	  "\n<tr><td class='calendrier-td-gauche'></td>" .
 	  "<td colspan='5' class='calendrier-td-centre'>" .
 	  http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 				     (nom_jour("$annee-$mois-$jour") . " " .
@@ -994,13 +1000,12 @@ calendrier_args_date($annee_today, $mois_today, $jour_today) .
 function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 {
 	global $spip_lang_right, $spip_lang_left, $couleur_claire;
-	if (!isset($couleur_claire)) $couleur_claire = 'white';
 	$gadget = "<div style='position: relative;z-index: 1000;'
 			onmouseover=\"montrer('$id');\"
-			onmouseout=\"cacher('$id');\">";
-
-	$gadget .= "<table id='$id' class='calendrier-cadreagenda' style='position: absolute; background-color: $couleur_claire'>";
-	$gadget .= "\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+			onmouseout=\"cacher('$id');\">"
+	  . "<table id='$id' class='calendrier-cadreagenda'"
+	  . (!isset($couleur_claire) ? "" : " style='background-color: $couleur_claire'")
+	  . ">\n<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 
 	$annee_avant = $annee - 1;
 	$annee_apres = $annee + 1;
@@ -1084,8 +1089,7 @@ function http_calendrier_clic($annee, $mois, $jour, $type, $couleur, $perso)
 function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 				    $jour_ved='', $mois_ved='', $annee_ved='',
 				    $semaine='') {
-	global $couleur_foncee;
-	global $spip_lang_left, $spip_lang_right;
+	global $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	// Former une date correcte (par exemple: $mois=13; $annee=2003)
 	$date_test = date("Y-m-d", mktime(0,0,0,$mois, 1, $annee));
