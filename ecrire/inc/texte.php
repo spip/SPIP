@@ -157,6 +157,12 @@ function traiter_echap_frame_dist($regs) {
 
 // http://doc.spip.org/@traiter_echap_script_dist
 function traiter_echap_script_dist($regs) {
+	// rendre joli (et inactif) si c'est un script language=php
+	if (preg_match(',<script\b[^>]+php,ims',
+	$regs[0]))
+		return highlight_string($regs[0],true);
+
+	// Cas normal : le script passe tel quel
 	return $regs[0];
 }
 
@@ -402,11 +408,14 @@ function interdire_scripts($t) {
 	// rien ?
 	if (!$t OR !strstr($t, '<')) return $t;
 
-	// echapper les tags asp
+	// echapper les tags asp/php
 	$t = str_replace('<'.'%', '&lt;%', $t);
 
 	// echapper le php
 	$t = str_replace('<'.'?', '&lt;?', $t);
+
+	// echapper le < script language=php >
+	$t = preg_replace(',<(script\b[^>]+\bphp\b),UimsS', '&lt;\1', $t);
 
 	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
 	switch($GLOBALS['filtrer_javascript']) {
@@ -434,7 +443,7 @@ function safehtml($t) {
 	if (strpos($t,'<')===false)
 		return str_replace("\x00", '', $t);
 
-	$t = interdire_scripts($t);
+	$t = interdire_scripts($t); // jolifier le php
 	$t = echappe_js($t);
 
 	if (!isset($safehtml))
@@ -442,7 +451,7 @@ function safehtml($t) {
 	if ($safehtml)
 		$t = $safehtml($t);
 
-	return interdire_scripts($t); # gere le < ?php > en plus
+	return interdire_scripts($t); // interdire le php (2 precautions)
 }
 
 // Correction typographique francaise
