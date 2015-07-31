@@ -79,11 +79,15 @@ function reduce_strlen($n, $c)
 // http://doc.spip.org/@tracer_erreur_forum
 function tracer_erreur_forum($type='') {
 	spip_log("erreur forum ($type): ".print_r($_POST, true));
-	include_spip('inc/mail');
-	envoyer_mail($GLOBALS['meta']['email_webmaster'], "erreur forum ($type)",
-		"erreur sur le forum ($type) :\n\n".
-		'$_POST = '.print_r($_POST, true)."\n\n".
-		'$_SERVER = '.print_r($_SERVER, true));
+
+	define('_TRACER_ERREUR_FORUM', false);
+	if (_TRACER_ERREUR_FORUM) {
+		include_spip('inc/mail');
+		envoyer_mail($GLOBALS['meta']['email_webmaster'], "erreur forum ($type)",
+			"erreur sur le forum ($type) :\n\n".
+			'$_POST = '.print_r($_POST, true)."\n\n".
+			'$_SERVER = '.print_r($_SERVER, true));
+	}
 }
 
 // http://doc.spip.org/@inc_forum_insert_dist
