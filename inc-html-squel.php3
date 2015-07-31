@@ -440,7 +440,11 @@ function phraser_criteres($params, &$result) {
 			  }
 			  if ((!ereg('^!?doublons *', $param)) || $crit->not)
 			    $args[] = $crit;
-			  else $doublons = $crit;
+			  elseif (!$doublons)
+			    $doublons = $crit;
+			  else 
+			    erreur_squelette(_T('zbug_critere_inconnu',
+						array('critere' => '2 doublons')));
 			}
 		  }
 		}
