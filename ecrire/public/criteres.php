@@ -156,11 +156,8 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 		 // tester si le numero de page demande est de la forme '@yyy'
 		 'isset($Pile[0]['.$debut.']) ? $Pile[0]['.$debut.'] : _request('.$debut.");\n"
 		."\tif(substr(\$debut_boucle,0,1)=='@'){\n"
-		."\t\t".'$debut_boucle = $Pile[0]['. $debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.$pas.',$result,'._q($boucle->sql_serveur).');'."\n"
-		."\t\t".'if (!sql_seek($result,0,'._q($boucle->sql_serveur).")){\n"
-		."\t\t\t".'@sql_free($result,'._q($boucle->sql_serveur).");\n"
-		."\t\t\t".'$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);'."\n"
-		."\t\t}\n"
+		."\t\t".'$debut_boucle = $Pile[0]['. $debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.$pas.',$iter);'."\n"
+		."\t\t".'$iter->seek(0);'."\n"
 		."\t}\n"
 		."\t".'$debut_boucle = intval($debut_boucle)';
 
@@ -665,7 +662,7 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode) {
 	. '$fin_boucle = min(' . $fin . ", \$Numrows['$id_boucle']['total'] - 1);\n	"
 	. '$Numrows[\''.$id_boucle. "']['grand_total'] = \$Numrows['$id_boucle']['total'];\n	"
 	. '$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);'
-	. "\n\tif (\$debut_boucle>0 AND \$debut_boucle < \$Numrows['$id_boucle']['grand_total'] AND sql_seek(\$result,\$debut_boucle,"._q($boucles[$id_boucle]->sql_serveur).",'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
+	. "\n\tif (\$debut_boucle>0 AND \$debut_boucle < \$Numrows['$id_boucle']['grand_total'] AND \$iter->seek(\$debut_boucle,'continue'))\n\t\t\$Numrows['$id_boucle']['compteur_boucle'] = \$debut_boucle;\n\t";
 
 	$boucles[$id_boucle]->partie = "
 		if (\$Numrows['$id_boucle']['compteur_boucle'] <= \$debut_boucle) continue;

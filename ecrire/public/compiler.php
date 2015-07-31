@@ -242,13 +242,28 @@ function calculer_boucle_rec($id_boucle, &$boucles, $trace) {
 define('CODE_CORPS_BOUCLE', '%s
 	$t0 = "";
 	// REQUETE
-	$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect,
-		 array(%s));
-	if ($result) {
+	$iter = new Iter("SQL");
+	$iter->init( array(
+		"select"=>$select,
+		"from"=>$from,
+		"type"=>$type,
+		"where"=>$where,
+		"join"=>$join,
+		"groupby"=>$groupby,
+		"orderby"=>$orderby,
+		"limit"=>$limit,
+		"having"=>$having,
+		"table"=>$table,
+		"id"=>$id,
+		"connect"=>$connect
+		),
+		array(%s)
+	);
+	if ($iter->ok) {
 	%s%s$SP++;
 	// RESULTATS
 	%s
-	%s@sql_free($result%s);
+	%s$iter->free();
 	}%s
 	return $t0;'
 );
@@ -342,9 +357,6 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 		. $boucle->partie 
 		. $corps;
 
-	$serveur = !$boucle->sql_serveur ? ''
-		: (', ' . _q($boucle->sql_serveur));
-
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 
 	if (preg_match(CODE_MONOTONE,str_replace("\\'",'',$corps), $r)) {
@@ -357,7 +369,7 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 			$boucle->numrows = true;
 			$corps = "\n\t\$t0 = str_repeat($corps, \$Numrows['$id_boucle']['total']);";
 		}
-	} else $corps = "while (\$Pile[\$SP] = @sql_fetch(\$result$serveur)) {\n$corps\n	}"; 
+	} else $corps = "while (\$Pile[\$SP] = \$iter->next()) {\n$corps\n	}"; 
 
 	$count = '';
 	if (!$boucle->select) {
@@ -374,8 +386,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 
 	if ($boucle->numrows OR $boucle->mode_partie) {
 		if ($count == 'count(*)')
-			$count = "array_shift(sql_fetch(\$result$serveur))";
-		else $count = "sql_count(\$result$serveur)";
+			$count = "array_shift(\$iter->next())";
+		else $count = "\$iter->count()";
 		$nums .= "\$Numrows['$id_boucle']['total'] = @intval($count);"
 		. $boucle->mode_partie
 		. "\n\t";
@@ -389,8 +401,10 @@ function calculer_boucle_nonrec($id_boucle, &$boucles, $trace) {
 	. calculer_requete_sql($boucles[$id_boucle]);
 
 	$contexte = memoriser_contexte_compil($boucle);
+	$a = sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $nums, $init_lang, $corps, $fin_lang, $trace);
 
-	return sprintf(CODE_CORPS_BOUCLE, $init, $contexte, $nums, $init_lang, $corps, $fin_lang, $serveur, $trace);
+#	var_dump($a);exit;
+	return $a;
 }
 
 

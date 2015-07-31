@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('public/iterateur');
 include_spip('inc/texte');
 include_spip('inc/documents');
 include_spip('inc/distant');
