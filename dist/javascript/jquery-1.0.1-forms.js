@@ -2026,4 +2026,3 @@ $.fn.serialize = function() {
 	this.vars = a;
 	return this;
 };
-
