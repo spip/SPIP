@@ -748,7 +748,8 @@ function agenda_affiche($i)
 {
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
-  if (!$nb) return "";
+  $sinon = array_shift($args);
+  if (!$nb) return $sinon;
   $type = array_shift($args);
   $agenda = agenda_memo(0);
   $evt = array();
