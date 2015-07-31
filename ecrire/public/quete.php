@@ -160,7 +160,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				$exposer[$m][$type][$principal] = true;
 				if ($type == 'id_mot'){
 					if (!$parent) {
-						$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . $principal, '','','','',$connect);
+						$parent = sql_fetsel('id_groupe','spip_mots',"id_mot=" . intval($principal), '','','','',$connect);
 						$parent = $parent['id_groupe'];
 					}
 					if ($parent)
@@ -171,7 +171,7 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 				  	if ($type == 'id_rubrique')
 				  		$parent = $principal;
 				  	if ($type == 'id_article') {
-							$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . $principal, '','','','',$connect);
+							$parent = sql_fetsel('id_rubrique','spip_articles',"id_article=" . intval($principal), '','','','',$connect);
 							$parent = $parent['id_rubrique'];
 				  	}
 				  }
