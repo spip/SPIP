@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Fonctions déclarés dans des pipelines (espace public)
+ * Fonctions déclarées dans des pipelines (espace public)
  *
  * @package SPIP\Pipelines
 **/
@@ -32,14 +32,14 @@ if (test_espace_prive())
  * 
  * @internal
  *     Ne pas vérifier ici qu'on ne doublonne pas #INSERT_HEAD
- *     car cela empeche un double appel (multi calcul en cache cool,
+ *     car cela empêche un double appel (multi calcul en cache cool,
  *     ou erreur de l'espace privé)
  *
  * @see f_jQuery_prive()
  * @link http://doc.spip.org/@f_jQuery
  * 
  * @param string $texte    Contenu qui sera inséré dans le head HTML
- * @return string          Contenu complété des scripts javascripts, dont jQuery
+ * @return string          Contenu qui sera inséré dans le head HTML
 **/
 function f_jQuery ($texte) {
 	$x = '';
@@ -60,8 +60,19 @@ function f_jQuery ($texte) {
 	return $texte;
 }
 
-// Traiter var_recherche ou le referrer pour surligner les mots
-// http://doc.spip.org/@f_surligne
+
+/**
+ * Traiter var_recherche ou le referrer pour surligner les mots
+ *
+ * Surligne les mots de la recherche (si var_recherche est présent)
+ * ou des réferers (si la constante _SURLIGNE_RECHERCHE_REFERERS est
+ * définie à true) dans un texte HTML
+ *
+ * Cette fonction est appelée par le pipeline affichage_final
+ * 
+ * @param string $texte   Contenu de la page envoyée au navigateur
+ * @return string         Contenu de la page envoyée au navigateur
+**/
 function f_surligne ($texte) {
 	if (!$GLOBALS['html']) return $texte;
 	$rech = _request('var_recherche');
@@ -74,9 +85,24 @@ function f_surligne ($texte) {
 	return surligner_mots($texte, $rech);
 }
 
-// Valider/indenter a la demande.
-// http://doc.spip.org/@f_tidy
+/**
+ * Indente un code HTML
+ *
+ * Indente et valide un code HTML si la globale 'xhtml' est
+ * définie à true.
+ *
+ * Cette fonction est appelée par le pipeline affichage_final
+ * 
+ * @param string $texte   Contenu de la page envoyée au navigateur
+ * @return string         Contenu de la page envoyée au navigateur
+ **/
 function f_tidy ($texte) {
+	/**
+	 * Indentation à faire ?
+	 *
+	 * - true : actif.
+	 * - false par défaut.
+	 */
 	global $xhtml;
 
 	if ($xhtml # tidy demande
@@ -96,10 +122,19 @@ function f_tidy ($texte) {
 	return $texte;
 }
 
-// Offre #INSERT_HEAD sur tous les squelettes (bourrin)
-// a activer dans mes_options via :
-// $spip_pipeline['affichage_final'] .= '|f_insert_head';
-// http://doc.spip.org/@f_insert_head
+
+/**
+ * Offre #INSERT_HEAD sur tous les squelettes (bourrin)
+ *
+ * À activer dans mes_options via :
+ * $GLOBALS['spip_pipeline']['affichage_final'] .= '|f_insert_head';
+ *
+ * Ajoute le contenu du pipeline insert head dans la page HTML
+ * si cela n'a pas été fait.
+ *
+ * @param string $texte   Contenu de la page envoyée au navigateur
+ * @return string         Contenu de la page envoyée au navigateur
+**/
 function f_insert_head($texte) {
 	if (!$GLOBALS['html']) return $texte;
 	include_spip('public/admin'); // pour strripos
@@ -116,8 +151,15 @@ function f_insert_head($texte) {
 	return $texte;
 }
 
-// Inserer au besoin les boutons admins
-// http://doc.spip.org/@f_admin
+
+/**
+ * Insérer au besoin les boutons admins
+ * 
+ * Cette fonction est appelée par le pipeline affichage_final
+ *
+ * @param string $texte   Contenu de la page envoyée au navigateur
+ * @return string         Contenu de la page envoyée au navigateur
+**/
 function f_admin ($texte) {
 	if (isset($GLOBALS['affiche_boutons_admin']) AND $GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
@@ -129,13 +171,32 @@ function f_admin ($texte) {
 	return $texte;
 }
 
+/**
+ * Actions sur chaque inclusion
+ *
+ * Appelle f_afficher_blocs_ecrire() sur les inclusions dans l'espace privé.
+ * Ne change rien dans l'espace public.
+ * 
+ * Cette fonction est appelée par le pipeline recuperer_fond 
+ *
+ * @see f_afficher_blocs_ecrire()
+ * 
+ * @param  array $flux  Description et contenu de l'inclusion
+ * @return array $flux  Description et contenu de l'inclusion
+**/
 function f_recuperer_fond($flux) {
 	if (!test_espace_prive()) return $flux;
 	return f_afficher_blocs_ecrire($flux);
 }
 
-// gerer le lancement du cron
-// si des taches sont en attentes
+/**
+ * Gérer le lancement du cron si des tâches sont en attente
+ * 
+ * Cette fonction est appelée par le pipeline affichage_final
+ *
+ * @param string $texte   Contenu de la page envoyée au navigateur
+ * @return string         Contenu de la page envoyée au navigateur
+ */
 function f_queue(&$texte){
 
 	// eviter une inclusion si rien a faire

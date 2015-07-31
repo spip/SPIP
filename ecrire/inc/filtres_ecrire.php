@@ -10,29 +10,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions utilisées au calcul des squelette du privé.
+ *
+ * @package SPIP\Filtres
+ */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres_boites');
 include_spip('inc/boutons');
 include_spip('inc/pipelines_ecrire');
 
-/**
- * Fonctions utilises au calcul des squelette du prive.
- */
-
 
 /**
- * Retourne les parametres de personnalisation css de l'espace prive
- * (ltr et couleurs) ce qui permet une ecriture comme :
- * generer_url_public('style_prive', parametres_css_prive())
- * qu'il est alors possible de recuperer dans le squelette style_prive.html avec
+ * Retourne les paramètres de personnalisation css de l'espace privé
  * 
+ * Ces paramètres sont (ltr et couleurs) ce qui permet une écriture comme :
+ * generer_url_public('style_prive', parametres_css_prive())
+ * qu'il est alors possible de récuperer dans le squelette style_prive.html avec
+ *
  * #SET{claire,##ENV{couleur_claire,edf3fe}}
  * #SET{foncee,##ENV{couleur_foncee,3874b0}}
  * #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
  * #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
- *
- * http://doc.spip.org/@parametres_css_prive
  *
  * @return string
  */
@@ -63,10 +63,9 @@ function parametres_css_prive(){
 
 
 /**
- * Afficher le selecteur de rubrique
- * qui permet de placer un objet dans la hierarchie des rubriques de SPIP
- *
- * http://doc.spip.org/@chercher_rubrique
+ * Afficher le sélecteur de rubrique
+ * 
+ * Il permet de placer un objet dans la hiérarchie des rubriques de SPIP
  *
  * @param $titre
  * @param $id_objet
@@ -134,8 +133,6 @@ function chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $r
 /**
  * Tester si le site peut avoir des visiteurs
  *
- * http://doc.spip.org/@avoir_visiteurs
- *
  * @param bool $past
  *   si true, prendre en compte le fait que le site a *deja* des visiteurs
  *   comme le droit d'en avoir de nouveaux
@@ -153,12 +150,13 @@ function avoir_visiteurs($past=false, $accepter=true) {
 }
 
 /**
- * lister les status d'article visibles dans l'espace prive
+ * Lister les status d'article visibles dans l'espace prive
  * en fonction du statut de l'auteur
- * pour l'extensibilie de SPIP, on se repose sur autoriser('voir','article')
- * en testant un a un les status presents en base
  *
- * on memorise en static pour eviter de refaire plusieurs fois
+ * Pour l'extensibilie de SPIP, on se repose sur autoriser('voir','article')
+ * en testant un à un les status présents en base
+ *
+ * On mémorise en static pour éviter de refaire plusieurs fois.
  * 
  * @param string $statut_auteur
  * @return array
@@ -178,12 +176,11 @@ function statuts_articles_visibles($statut_auteur){
 }
 
 /**
- * Traduire le statut technique de l'auteur en langage comprehensible
- * si $statut=='nouveau' et que le statut en attente est fourni,
+ * Traduire le statut technique de l'auteur en langage compréhensible
+ * 
+ * Si $statut=='nouveau' et que le statut en attente est fourni,
  * le prendre en compte en affichant que l'auteur est en attente
  *
- * http://doc.spip.org/@traduire_statut_auteur
- * 
  * @param string $statut
  * @param string $attente
  * @return string
@@ -219,7 +216,7 @@ function traduire_statut_auteur($statut,$attente=""){
 }
 
 /**
- * Afficher la mention des autres auteurs ayant modifie un objet
+ * Afficher la mention des autres auteurs ayant modifié un objet
  *
  * @param int $id_objet
  * @param string $objet
@@ -301,14 +298,15 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 }
 
 /**
- * Determiner la rubrique pour la creation d'un objet
- * heuristique : rubrique courante si possible,
- * sinon rubrique administree pour les admin restreint
- * sinon premiere rubrique de premier niveau autorisee que l'on trouve
+ * Déterminer la rubrique pour la création d'un objet heuristique
+ * 
+ * Rubrique courante si possible,
+ * - sinon rubrique administrée pour les admin restreint
+ * - sinon première rubrique de premier niveau autorisée que l'on trouve
  *
- * @param int $id_rubrique
- * @param string $objet
- * @return int
+ * @param int $id_rubrique Identifiant de rubrique (si connu)
+ * @param string $objet    Objet en cours de création
+ * @return int             Identifiant de la rubrique dans laquelle créer l'objet
  */
 function trouver_rubrique_creer_objet($id_rubrique,$objet){
 	global $connect_id_rubrique;

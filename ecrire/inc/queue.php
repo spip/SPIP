@@ -10,6 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des queues de travaux
+ *
+ * @package SPIP\Queue
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_JQ_SCHEDULED',1);
@@ -19,8 +24,9 @@ define('_JQ_PENDING',0);
 #define('_JQ_NB_JOBS_OVERFLOW',10000); // nombre de jobs a partir duquel on force le traitement en fin de hit pour purger
 
 /**
- * Ajouter une tache a la file
- * Les taches sont ensuites executees par date programmee croissant/priorite decroissante
+ * Ajouter une tâche à la file
+ * 
+ * Les tâches sont ensuites exécutées par date programmée croissant/priorité décroissante
  *
  * @param $function
  *   The function name to call.
@@ -124,8 +130,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 }
 
 /**
- * Purger la file de tache
- * et reprgrammer les taches periodiques
+ * Purger la file de tâche et reprgrammer les tâches périodiques
  * 
  * @return void
  */
@@ -486,8 +491,11 @@ function queue_set_next_job_time($next) {
 }
 
 /**
- * html a ajouter a la page pour declencher le cron
- * ou rien si on a reussi a le lancer en asynchrone
+ * Déclenche le cron en asynchrone ou retourne le code HTML pour le déclencher
+ * 
+ * Retourne le HTML à ajouter à la page pour declencher le cron
+ * ou rien si on a réussi à le lancer en asynchrone.
+ * 
  * @return string
  */
 function queue_affichage_cron(){

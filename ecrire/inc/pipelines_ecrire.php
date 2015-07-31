@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Fonctions déclarés dans des pipelines (espace privé)
+ * Fonctions déclarées dans des pipelines (espace privé)
  *
  * @package SPIP\Pipelines
 **/
@@ -26,11 +26,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * des js chargée peut être complété par le pipeline 'jquery_plugins'
  *
  * Cette fonction est appelée par le pipeline header_prive
- * 
- * @internal
- *     Ne pas vérifier ici qu'on ne doublonne pas #INSERT_HEAD
- *     car cela empeche un double appel (multi calcul en cache cool,
- *     ou erreur de l'espace privé)
  *
  * @see f_jQuery()
  * @link http://doc.spip.org/@f_jQuery
