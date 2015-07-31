@@ -698,7 +698,7 @@ if (strlen($descriptif) > 1) {
 }
 
 if ($statut_article == 'prop') {
-	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='red'><B>Article propos&eacute; pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; ce article (en bas de page).</B></FONT></P>";
+	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='red'><B>Article propos&eacute; pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).</B></FONT></P>";
 }
 
 
