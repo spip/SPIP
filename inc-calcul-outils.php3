@@ -38,7 +38,6 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
 	'SITE' => 'site'
 );
   $type = $table_logos[$type];
-#  spip_log("$type, $onoff, $id, $id_rubrique, $lien, $align");
   while ($id) {
     $on = cherche_image_nommee($type . $onoff . $id);
     if ($on) 
@@ -202,7 +201,25 @@ function calcul_branche ($generation) {
 
 function calcule_document($id_document, $doubdoc, &$doublons){
   if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
-  return integre_image($id_document, '', 'fichier_vignette');
+  $row = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_document"));
+  if (!$row) return '';
+  if ($id_vignette = $row['id_vignette']) {
+		if ($row_vignette = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_vignette"))) {
+			if (@file_exists($row_vignette['fichier']))
+				return generer_url_document($id_vignette);
+			}
+  } else if ($row['mode'] == 'vignette') {
+	return generer_url_document($id_document);
+  }
+// si pas de vignette, utiliser la vignette par defaut
+// ou essayer de creer une preview (images)
+  list($extension) = @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = " .$row['id_type']));
+  if (!ereg(",$extension,", ','.lire_meta('formats_graphiques').',')) {
+	list($url, $w, $h) = vignette_par_defaut($extension);
+	return $url;
+  } else {
+	return 'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $row['fichier']));
+  }
 }
 
 
