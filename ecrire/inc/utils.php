@@ -1040,8 +1040,8 @@ function verifier_visiteur() {
 
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {
-		include_spip('inc/session');
-		verifier_session_visiteur();
+		$var_f = charger_fonction('session', 'inc');
+		if (!$var_f()) verifier_php_auth();
 	}
 }
 

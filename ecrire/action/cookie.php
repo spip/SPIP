@@ -67,24 +67,12 @@ function action_spip_cookie_dist()
     $var_lang_ecrire;
 
 // rejoue le cookie pour renouveler spip_session
-if ($change_session == 'oui') {
-	if (verifier_session($spip_session)) {
-		// Attention : seul celui qui a le bon IP a le droit de rejouer,
-		// ainsi un eventuel voleur de cookie ne pourrait pas deconnecter
-		// sa victime, mais se ferait deconnecter par elle.
-		if ($auteur_session['hash_env'] == hash_env()) {
-			spip_log("rejoue session");
-			$auteur_session['ip_change'] = false;
-			$cookie = creer_cookie_session($auteur_session);
-			supprimer_session($spip_session);
-			spip_setcookie('spip_session', $cookie);
-		}
-		else
-			spip_log("session non rejouee, changement d'IP ?");
-	}
+  if ($change_session == 'oui') {
+	$var_f = charger_fonction('session', 'inc');
+	$var_f(true);
 	envoie_image_vide();
 	exit;
-}
+  }
 
 // tentative de connexion en auth_http
 if ($essai_auth_http AND !$ignore_auth_http) {
@@ -102,7 +90,8 @@ if ($logout) {
 	if ($auteur_session['login'] == $logout) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
-			zap_sessions($auteur_session['id_auteur'], true);
+			$var_f = charger_fonction('session', 'inc');
+			$var_f($auteur_session['id_auteur']);
 			spip_setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
 		
@@ -160,14 +149,16 @@ if ($essai_login == "oui") {
 	} else {
 		spip_log("login de $session_login vers $redirect");
 		// Si on se connecte dans l'espace prive, 
-		// ajouter "bonjour" (inutilise)
+		// ajouter "bonjour" (repere a peu pres les cookies desactives)
 		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
 			$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
 				. 'bonjour=oui';
 		}
 		if ($row_auteur['statut'] == '0minirezo')
 			$cookie_admin = "@".$session_login;
-		$cookie_session = creer_cookie_session($row_auteur);
+	        
+		$var_f = charger_fonction('session', 'inc');
+		$cookie_session = $var_f($row_auteur);
 	}
 }
 
@@ -196,7 +187,8 @@ if ($cookie_session) {
 
 	$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
 	$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
-	update_prefs_session($prefs, $row_auteur['id_auteur']);
+
+	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
  }
 
 // changement de langue espace public
@@ -217,11 +209,12 @@ if ($var_lang_ecrire) {
 	spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 	spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-	// ce ajouter_session me semble deja fait si on arrive jusqu'ici
-	// avec id_auteur defini
 	if (_FILE_CONNECT AND $id_auteur) {
 		if (verifier_action_auteur("cookie-var_lang_ecrire", $hash, $id_auteur)) {
-			ajouter_session($auteur_session, $spip_session, $var_lang_ecrire);
+			spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($var_lang_ecrire) . " WHERE id_auteur = " . intval($id_auteur));
+			$auteur_session['lang'] = $var_lang_ecrire;
+			$var_f = charger_fonction('session', 'inc');
+			$var_f($auteur_session);
 		}
 	}
 

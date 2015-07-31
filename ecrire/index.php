@@ -106,7 +106,7 @@ if (isset($set_options) AND ($set_options == 'avancees' OR $set_options == 'basi
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth)
-	update_prefs_session($prefs, $connect_id_auteur);
+	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote(serialize($prefs)) . " WHERE id_auteur = $connect_id_auteur");
 
 if (isset($set_ecran)) {
 	// Poser un cookie, car ce reglage depend plus du navigateur que de l'utilisateur
@@ -149,7 +149,10 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 	// si authentifie, changer definitivement si ce n'est fait
 	else {	if (($spip_lang_ecrire <> $auteur_session['lang'])
 		AND changer_langue($spip_lang_ecrire)) {
-		ajouter_session($auteur_session, $spip_session, $spip_lang_ecrire);
+			spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($spip_lang_ecrire) . " WHERE id_auteur = " . intval($auteur_session['id_auteur']));
+			$auteur_session['lang'] = $var_lang_ecrire;
+			$var_f = charger_fonction('session', 'inc');
+			$var_f($auteur_session);
 	       }
 	}
  }

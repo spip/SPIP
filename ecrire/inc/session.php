@@ -22,38 +22,38 @@ include_spip('inc/meta');
  */
 
 $GLOBALS['auteur_session'] = '';
+$GLOBALS['rejoue_session'] = '';
 
 //
-// On verifie l'IP et le nom du navigateur
+// 3 actions sur les sessions, selon le type de l'argument:
 //
-function hash_env() {
-	return md5($GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']);
+// - numérique: efface toutes les sessions de l'id_auteur (retour quelconque)
+// - tableau: cree une session pour l'auteur decrit et retourne l'identifiant
+// - autre: predicat de validite de la session indiquee par le cookie
+
+function inc_session_dist($auteur=false)
+{
+	if (is_numeric($auteur))
+		return supprimer_sessions($auteur);
+	else if (is_array($auteur))
+		return ajouter_session($auteur);
+	else return verifier_session($auteur);
 }
 
-
 //
-// Calcule le nom du fichier session
+// Ajoute une session pour l'auteur decrit par un tableau issu d'un SELECT-SQL
 //
-function fichier_session($id_session, $alea) {
-	if (ereg("^([0-9]+_)", $id_session, $regs))
-		$id_auteur = $regs[1];
-	return _DIR_SESSIONS . 'session_'.$id_auteur.md5($id_session.' '.$alea). '.php';
 
-}
+function ajouter_session($auteur) {
 
-//
-// Ajouter une session pour l'auteur specifie
-//
-function ajouter_session($auteur, $id_session, $lang='') {
-
-	global $auteur_session;
-	if ($lang) {
-		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($lang) . " WHERE id_auteur = " . intval($auteur['id_auteur']));
-		$auteur_session['lang'] = $lang;
-	}
-
+	global $spip_session;
 	renouvelle_alea();
-	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
+	if (!$spip_session) 
+		$spip_session = $auteur['id_auteur'].'_'.md5(creer_uniqid());
+
+	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
+
+	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
 
 	$texte = "<"."?php\n";
 	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env') AS $var) {
@@ -64,73 +64,106 @@ function ajouter_session($auteur, $id_session, $lang='') {
 
 	if (!ecrire_fichier($fichier_session, $texte))
 		redirige_par_entete(generer_url_action('test_dirs','',true));
-}
-
-function update_prefs_session($prefs, $id_auteur)
-{
-	$prefs = serialize($prefs);
-	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote($prefs) . " WHERE id_auteur = $id_auteur");
+	else return $spip_session;
 }
 
 //
-// Verifier et inclure une session
+// Cette fonction efface toutes les sessions appartenant a l'auteur
+// On en profite pour effacer toutes les sessions creees il y a plus de 48 h
 //
-function verifier_session($id_session) {
+
+function supprimer_sessions($id_auteur) {
+
+	$dir = opendir(_DIR_SESSIONS);
+	$t = time()  - (48 * 3600);
+	while(($f = readdir($dir)) !== false) {
+
+		if (ereg("^session_([0-9]+)_[a-z0-9]+\.php[3]?$", $f, $regs)){
+			$f = _DIR_SESSIONS . $f;
+			if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
+				@unlink($f);
+		}
+	}
+}
+
+//
+// Verifie et inclut une session. 
+// La rejoue si IP change puis accepte le changement si $change=true
+//
+
+function verifier_session($change=false) {
+
+	global $spip_session; // issu du cookie
 
 	// Tester avec alea courant
-	$ok = false;
-	if ($id_session) {
-		$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
-		if (@file_exists($fichier_session)) {
-			include($fichier_session);
-			$ok = true;
-		}
-		else {
-			// Sinon, tester avec alea precedent
-			$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere_ancien']);
-			if (@file_exists($fichier_session)) {
-				// Renouveler la session (avec l'alea courant)
-				include($fichier_session);
-				supprimer_session($id_session);
-				ajouter_session($GLOBALS['auteur_session'], $id_session);
-				$ok = true;
-			}
-		}
+	if (!$spip_session) return false;
+
+	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
+	if (@file_exists($fichier_session)) {
+		include($fichier_session);
+	} else {
+		// Sinon, tester avec alea precedent
+		$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere_ancien']);
+		if (!@file_exists($fichier_session)) return false;
+
+		// Renouveler la session avec l'alea courant
+		include($fichier_session);
+		@unlink($fichier_session);
+		ajouter_session($GLOBALS['auteur_session']);
 	}
 
-	// marquer la session comme "ip-change" si le cas se presente
-	if ($ok AND (hash_env() != $GLOBALS['auteur_session']['hash_env']) AND !$GLOBALS['auteur_session']['ip_change']) {
+	// Si l'adresse IP change, inc/presentation mettra une balise image
+	// avec un URL de rappel demandant a changer le nom de la session.
+	// Seul celui qui a l'IP d'origine est rejoue
+	// ainsi un eventuel voleur de cookie ne pourrait pas deconnecter
+	// sa victime, mais se ferait deconnecter par elle.
+
+	if (hash_env() != $GLOBALS['auteur_session']['hash_env']) {
+	    if (!$GLOBALS['auteur_session']['ip_change']) {
+		$GLOBALS['rejoue_session'] = rejouer_session();
 		$GLOBALS['auteur_session']['ip_change'] = true;
-		ajouter_session($GLOBALS['auteur_session'], $id_session);
+		ajouter_session($GLOBALS['auteur_session']);
+	    } else if ($change)
+	      spip_log("session non rejouee, vol de cookie ?");
+	} else { if ($change) {
+		spip_log("rejoue session $fichier_session $spip_session");
+		@unlink($fichier_session);
+		$auteur_session['ip_change'] = false;
+		unset($spip_session);
+		$cookie= ajouter_session($auteur_session);
+		spip_setcookie('spip_session', $cookie);
+	  }
 	}
+	return 	true;
+}
 
-	return $ok;
+// Code a inserer par inc/presentation pour rejouer la session
+// Voir action/cookie qui sera appele.
+
+function rejouer_session()
+{
+	include_spip('inc/minipres');
+	return	  http_img_pack('rien.gif', " ", "id='img_session' width='0' height='0'") .
+		  http_script("\ndocument.img_session.src='" . generer_url_action('cookie','change_session=oui', true) .  "'");
 }
 
 //
-// Supprimer une session
+// Calcule le nom du fichier session
 //
-function supprimer_session($id_session) {
-	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
-	if (@file_exists($fichier_session)) {
-		@unlink($fichier_session);
-	}
-	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere_ancien']);
-	if (@file_exists($fichier_session)) {
-		@unlink($fichier_session);
-	}
+function fichier_session($id_session, $alea) {
+	if (ereg("^([0-9]+_)", $id_session, $regs))
+		$id_auteur = $regs[1];
+	return _DIR_SESSIONS . 'session_'.$id_auteur.md5($id_session.' '.$alea). '.php';
 }
 
 //
-// Creer une session et retourne le cookie correspondant (a poser)
+// On verifie l'IP et le nom du navigateur
 //
-function creer_cookie_session($auteur) {
-	if ($id_auteur = $auteur['id_auteur']) {
-		$id_session = $id_auteur.'_'.md5(creer_uniqid());
-		$auteur['hash_env'] = hash_env();
-		ajouter_session($auteur, $id_session);
-		return $id_session;
-	}
+
+function hash_env() {
+  static $res ='';
+  if ($res) return $res;
+  return $res = md5($GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']);
 }
 
 //
@@ -152,38 +185,6 @@ function creer_uniqid() {
 }
 
 
-//
-// Cette fonction efface toutes les sessions appartenant a l'auteur
-// On en profite pour effacer toutes les sessions creees il y a plus de 48 h
-//
-function zap_sessions ($id_auteur, $zap) {
-
-	// ne pas se zapper soi-meme
-	if ($s = $GLOBALS['spip_session'])
-		$fichier_session = fichier_session($s, $GLOBALS['meta']['alea_ephemere']);
-
-	$dir = opendir(_DIR_SESSIONS);
-	$t = time();
-	while(($item = readdir($dir)) !== false) {
-		$chemin = _DIR_SESSIONS . $item;
-		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php[3]?$", $item, $regs)) {
-
-			// Si c'est une vieille session, on jette
-			if (($t - filemtime($chemin)) > 48 * 3600)
-				@unlink($chemin);
-
-			// sinon voir si c'est une session du meme auteur
-			else if ($regs[1] == $id_auteur.'_') {
-				$zap_num ++;
-				if ($zap)
-					@unlink($chemin);
-			}
-
-		}
-	}
-
-	return $zap_num;
-}
 
 //
 // reconnaitre un utilisateur authentifie en php_auth
@@ -220,14 +221,6 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	if ($lien)
 		echo " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
 	exit;
-}
-
-//
-// verifie si on a un cookie de session ou un auth_php correct
-// et charge ses valeurs dans $GLOBALS['auteur_session']
-//
-function verifier_session_visiteur() {
-	return verifier_session($_COOKIE['spip_session']) ? true : verifier_php_auth();
 }
 
 //

@@ -91,7 +91,8 @@ function inc_auth_dist() {
 
 	// Authentification session
 	if ($cookie_session = $_COOKIE['spip_session']) {
-		if (verifier_session($cookie_session)) {
+		$var_f = charger_fonction('session', 'inc');
+		if ($var_f()) {
 			if ($auteur_session['statut'] == '0minirezo'
 			OR $auteur_session['statut'] == '1comite') {
 				$connect_login = $auteur_session['login'];
