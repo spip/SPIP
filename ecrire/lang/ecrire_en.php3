@@ -364,7 +364,7 @@ requiring an FTP access to the Web site.',
 'info_gauche_visiteurs_enregistres' => 'You will find here the visitors registered
 	in the public area of the site (forums by subscription).',
 'info_generation_miniatures_images' => 'Generating images thumbnails',
-'info_gerer_trad' => 'Managing translation links?',
+'info_gerer_trad' => 'Enable translation links?',
 'info_groupe_important' => 'Important group',
 'info_hebergeur_desactiver_envoi_email' => 'Some hosts disable automated mail sending
 		on their servers. In this case the following features
