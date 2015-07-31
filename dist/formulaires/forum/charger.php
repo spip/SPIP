@@ -75,8 +75,10 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 
 	// l'ajout de documents est-il autorise ?
 	// cf. verifier.php
-	if ($formats_documents_forum = array_filter(array_map('trim', explode(',',$GLOBALS['meta']['formats_documents_forum']))))
+	if ($formats_documents_forum = array_filter(array_map('trim', explode(',',$GLOBALS['meta']['formats_documents_forum'])))){
+		include_spip('inc/securiser_action');
 		$cle_ajouter_document = calculer_cle_action($a = 'ajouter-document-'.join('-',array_map('intval',$ids)));
+	}
 
 	return array(
 		'modere' => (($type != 'pri') ? '' : ' '),
