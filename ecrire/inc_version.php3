@@ -168,18 +168,22 @@ $invalider_caches = true;
 // Si la variable vaut 0 aucun quota ne s'applique
 $quota_cache = 5;
 
-// code a fournir pour obtenir le debuggueur (par defaut : &debug=oui)
-// on peut mettre $code_activation_debug='' pour l'interdire carrement,
-// ou $code_activation_debug='x5g8jk9' pour mettre un mot de passe.
-$code_activation_debug = 'oui';
+// code a fournir pour obtenir le debuggueur (urls &var_debug=xxxx)
+// par defaut seuls les admins : $code_activation_debug='';
+// pour mettre un mot de passe : $code_activation_debug='x5g8jk9';
+$code_activation_debug = '';
 
+//
 // Serveurs externes
-$spip_server = array (
-	'tex' => 'http://math.spip.org/tex.php',
-	'mathml' => 'http://arno.rezo.net/tex2mathml/latex.php',
-	'ortho' => 'http://ortho.spip.net/ortho_serveur.php',	# pas utilise par les scripts d'ortho pour l'instant
-	'aide' => 'http://www.spip.net/aide'
-);
+//
+# aide en ligne
+$help_server = 'http://www.spip.net/aide';
+# TeX
+$tex_server = 'http://math.spip.org/tex.php';
+# MathML
+$mathml_server = 'http://arno.rezo.net/tex2mathml/latex.php';
+# Orthographe (serveurs multiples) [pas utilise pour l'instant]
+$ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';

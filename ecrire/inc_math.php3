@@ -15,11 +15,11 @@ function image_math($tex) {
 	switch ($traiter_math) {
 		case 'mathml':
 			$ext = '.xhtml';
-			$server = $GLOBALS['spip_server']['mathml'];
+			$server = $GLOBALS['mathml_server'];
 			break;
 		default:
 			$ext = '.png';
-			$server = $GLOBALS['spip_server']['tex'];
+			$server = $GLOBALS['tex_server'];
 			break;
 	}
 

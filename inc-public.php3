@@ -70,24 +70,20 @@ else {
 
 
 	// demande de debug ?
-	if ($var_debug == $code_activation_debug AND $code_activation_debug <> '') {
-		// verifier que ce n'est pas un robot, en posant un cookie,
-		// car ces calculs coutent trop cher pour pouvoir etre "aspires".
-		// (pour la securite, cf. $code_activation_debug dans inc_version)
-		// ce cookie ne dure qu'une heure, car il sert aussi a afficher
-		// le bouton 'debug' sur toutes les pages
+	if ($var_debug AND ($code_activation_debug == $var_debug
+	OR ($code_activation_debug == ''
+	AND $auteur_session['statut'] == '0minirezo')
+	)) {
 		include_local('inc-admin.php3');
-		if ($var_debug = verifie_cookie_debug()) {
-			$recalcul = 'oui';
-			$var_debug = true;
-			spip_log('debug !');
-		}
+		$recalcul = 'oui';
+		$var_debug = true;
+		spip_log('debug !');
 	} else
 		$var_debug = false;
 
 	// Faut-il preparer les boutons d'admin ?
 	if ($affiche_boutons_admin = (!$flag_preserver
-	AND $HTTP_COOKIE_VARS['spip_admin'])) {
+	AND ($HTTP_COOKIE_VARS['spip_admin'] OR $HTTP_COOKIE_VARS['spip_debug']))) {
 		include_local('inc-admin.php3');
 	}
 

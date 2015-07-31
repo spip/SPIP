@@ -78,15 +78,19 @@ function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval(
 		}
 
 		// Bouton de debug
-		if (($forcer_debug
-			OR $GLOBALS['bouton_admin_debug']
-			OR (!$GLOBALS['var_debug']
-				AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug'] ==
-				$GLOBALS['code_activation_debug'])
-		) AND $GLOBALS['code_activation_debug'] <> '') {
+		if ($forcer_debug
+		OR $GLOBALS['bouton_admin_debug']
+		OR (!$GLOBALS['var_debug']
+		AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug'])) {
 			$link = $GLOBALS['clean_link'];
-			$link->addvar('var_debug', $GLOBALS['code_activation_debug']);
-			$ret .= bouton_admin(_L('Debug'), $link->getUrl());
+			if ($GLOBALS['code_activation_debug'])
+				$code_activation = $GLOBALS['code_activation_debug'];
+			else if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
+				$code_activation = 'oui';
+			if ($code_activation) {
+				$link->addvar('var_debug', $code_activation);
+				$ret .= bouton_admin(_L('Debug'), $link->getUrl());
+			}
 		}
 
 		// Messages de debug
@@ -321,6 +325,7 @@ function debug_page($no_exit = false) {
 
 	@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	if (!$GLOBALS['debug_objets']['sourcefile']) return;
+	spip_setcookie('spip_debug', 'oui', time()+12*3600);
 
 	$page = "<html><head><title>Debug</title></head>\n";
 	$page .= "<body>\n<div id='spip-debug'>";
@@ -401,6 +406,7 @@ function debug_dumpfile ($texte) {
 }
 
 
+/*
 function verifie_cookie_debug() {
 	global $code_activation_debug;
 
@@ -424,5 +430,6 @@ function verifie_cookie_debug() {
 	} else
 		return true;
 }
+*/
 
 ?>
