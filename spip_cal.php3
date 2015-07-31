@@ -104,7 +104,7 @@ ligne ("VERSION:2.0");
 	}
 
 	// todo
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb') OR messages.type='affich') AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
