@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Acuèlh dau sit',
-'article' => 'Articles',
+'article' => 'Article',
 'articles' => 'Articles',
 'articles_auteur' => 'Articles d\'aquel autor',
 'articles_populaires' => 'Lu articles mai populars',
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'Comentar aqueu sit',
-'contact' => 'Contact', # NEW
+'contact' => 'Contacte',
 'copie_document_impossible' => 'Impossible de copiar lo document',
 
 // D
