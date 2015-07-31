@@ -96,14 +96,6 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 			}
 		}
 	}
-	// si pas de connect explicite, on transmet celui de la boucle courante
-	//
-	if (!isset($l['connect'])
-		AND $connect = (!$id_boucle ? '' : $boucles[$id_boucle]->sql_serveur)
-	  AND !in_array($connect,$GLOBALS['exception_des_connect'])){
-		$l['connect'] = ($echap?"\'connect\' => ' . argumenter_squelette(":"'connect' => ")
-			. "'$connect'" . ($echap? ") . '":" ");
-	}
 
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
