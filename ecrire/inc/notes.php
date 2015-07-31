@@ -44,7 +44,7 @@ function traiter_raccourci_notes($letexte)
 
 		// note nommee ou pas ?
 		if (isset($nom) AND strpos($note_texte, '</' . $nom .'>') === false) {
-			$note_texte = preg_replace(",^\s*$ref,ms",'',$note_texte);
+			$note_texte = preg_replace(",^\s*".preg_quote($ref,",").",ms",'',$note_texte);
 		} 
 		else
 			$nom = ++$compt_note;
