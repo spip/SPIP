@@ -19,15 +19,69 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
+/**
+ * Description d'un contexte de compilation
+ *
+ * Objet simple pour stocker le nom du fichier, la ligne, la boucle
+ * permettant entre autre de localiser le lieu d'une erreur de compilation.
+ * Cette structure est nécessaire au traitement d'erreur à l'exécution.
+ * 
+ * Le champ code est inutilisé dans cette classe seule, mais harmonise
+ * le traitement d'erreurs. Par contre, un noeud étendant cette classe
+ * stocke dedans le code issu de la compilation du noeud.
+ */
+class Contexte {
+	/**
+	 * Description du squelette
+	 *
+	 * Peut contenir les index :
+	 * - nom : Nom du fichier de cache
+	 * - gram : Nom de la grammaire du squelette (détermine le phraseur à utiliser)
+	 * - sourcefile : Chemin du squelette
+	 * - squelette : Code du squelette
+	 * - id_mere : Identifiant de la boucle parente
+	 * - niv : Niveau de tabulation
+	 *
+	 * @var array 
+	**/
+	var $descr = array();
+	/** @var string Identifiant de la boucle */
+	var $id_boucle = '';
+	/** @var int Numéro de ligne dans le code source du squelette */
+	var $ligne = 0;
+	/** @var string Langue d'exécution */
+	var $lang = '';
+	/** @var string Résultat de la compilation: toujours une expression PHP */
+	var $code = '';
+}
+
 
 /**
  *  Description d'un texte
 **/
 class Texte {
-	var $type = 'texte';
-	var $texte;
-	var $avant, $apres = ""; // s'il y avait des guillemets autour
-	var $ligne = 0;
+	/** @var string Type de noeud */
+	public $type = 'texte';
+
+	/** @var string Le texte */
+	public $texte;
+
+	/**
+	 * @var string
+	 *    Contenu avant le texte. Vide ou apostrophe simple ou double
+	 *    si le texte en était entouré
+	 */
+	public $avant = "";
+
+	/**
+	 * @var string
+	 *    Contenu après le texte. Vide ou apostrophe simple ou double
+	 *    si le texte en était entouré
+	 */
+	public $apres = "";
+
+	/** @var int Numéro de ligne dans le code source du squelette */
+	public $ligne = 0;
 }
 
 /**
@@ -175,22 +229,6 @@ class Polyglotte {
 	var $ligne = 0;
 }
 
-/**
- * Description d'un contexte de compilation
- *
- * Objet simple pour stocker le nom du fichier, la ligne, la boucle
- * permettant entre autre de localiser le lieu d'une erreur de compilation
- * 
- * Cette structure est nécessaire au traitement d'erreur à l'exécution
- * Le champ code est inutilise, mais harmonise le traitement d'erreurs.
- */
-class Contexte {
-	var $descr = array();
-	var $id_boucle = '';
-	var $ligne = 0;
-	var $lang = '';
-	var $code = '';
-}
 
 
 global $table_criteres_infixes;
