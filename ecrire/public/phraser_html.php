@@ -13,9 +13,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# Ce fichier doit IMPERATIVEMENT definir la fonction "public_phraser_html"
-# qui transforme un squelette en un tableau d'objets de classe Boucle
-# il est charge par un include calcule dans inc-calcul-squel
+# Ce fichier transforme un squelette en un tableau d'objets de classe Boucle
+# il est charge par un include calcule
 # pour permettre differentes syntaxes en entree
 
 define('BALISE_BOUCLE', '<BOUCLE');
@@ -502,8 +501,7 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 	return $crit;
 }
 
-// http://doc.spip.org/@public_phraser_html
-function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
+function public_phraser_html_dist($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 	$all_res = array();
 
@@ -646,10 +644,10 @@ function public_phraser_html($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 				$result->altern);
 		}
 
-		$result->avant = public_phraser_html($result->avant, $id_parent,$boucles, $nom, $result->ligne);
-		$result->apres = public_phraser_html($result->apres, $id_parent,$boucles, $nom, $result->ligne+$b+$m);
-		$result->altern = public_phraser_html($result->altern,$id_parent,$boucles, $nom, $result->ligne+$a+$m+$b);
-		$result->milieu = public_phraser_html($milieu, $id_boucle,$boucles, $nom, $result->ligne+$b);
+		$result->avant = public_phraser_html_dist($result->avant, $id_parent,$boucles, $nom, $result->ligne);
+		$result->apres = public_phraser_html_dist($result->apres, $id_parent,$boucles, $nom, $result->ligne+$b+$m);
+		$result->altern = public_phraser_html_dist($result->altern,$id_parent,$boucles, $nom, $result->ligne+$a+$m+$b);
+		$result->milieu = public_phraser_html_dist($milieu, $id_boucle,$boucles, $nom, $result->ligne+$b);
 
 		if (isset($boucles[$id_boucle])) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
