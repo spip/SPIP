@@ -1,7 +1,10 @@
 <?php
 
-// mathml
-
+/**
+ * Déclaration des entités MathML et leur correspondances en écriture unicode
+ * 
+ * @package SPIP\Core\Charsets
+**/
 $GLOBALS['CHARSET']['mathml'] = array (
 
 'ac' => '&#xE207;',

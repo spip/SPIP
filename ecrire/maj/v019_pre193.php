@@ -10,8 +10,19 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des mises à jour de SPIP, versions 1.9*
+ * 
+ * @package SPIP\Core\SQL\Upgrade
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Mises à jour de SPIP n°019
+ * 
+ * @param float $version_installee Version actuelle
+ * @param float $version_cible     Version de destination
+**/
 function v019_pre193($version_installee, $version_cible)
 {
 	// Syndication : ajout de l'option resume=oui/non et de la langue

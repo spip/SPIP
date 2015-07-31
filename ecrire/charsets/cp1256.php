@@ -1,7 +1,13 @@
 <?php
 
-// arabic - george kandalaft
-// http://www.microsoft.com/typography/unicode/1256.htm
+/**
+ * Déclaration des correspondances entre charsets cp1256 (arabic) et unicode
+ *
+ * @author george kandalaft
+ * @link http://www.microsoft.com/typography/unicode/1256.htm
+ *
+ * @package SPIP\Core\Charsets
+**/
 
 $GLOBALS['CHARSET']['cp1256'] = array (
 0x80=>0x20AC, 0x81=>0x067E, 0x82=>0x201A, 0x83=>0x0192, 0x84=>0x201E,

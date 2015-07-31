@@ -1,6 +1,11 @@
 <?php
 
-// entites html (a completer eventuellement)
+/**
+ * Déclaration des entités HTML (à completer éventuellement) et leur correspondances
+ * en écriture unicode
+ * 
+ * @package SPIP\Core\Charsets
+**/
 
 $GLOBALS['CHARSET']['html'] = array (
 'ldquo'=>'&#8220;', 'rdquo'=>'&#8221;', 'bdquo'=>'&#8222;', 'cent'=>'&#162;', 'pound'=>'&#163;',

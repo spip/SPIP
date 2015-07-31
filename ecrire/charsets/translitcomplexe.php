@@ -10,9 +10,16 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+/**
+ * Déclaration pour la translitteration complexe des correspondances entre
+ * caractères unicodes spécifiques et caractères simples la plage ASCII
+ *
+ * Ajoute des caractères supplémentaires à la déclaration de translitteration simple
+ * 
+ * @package SPIP\Core\Charsets
+**/
 
-// translitteration complexe
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 load_charset('translit');
 $trans = $GLOBALS['CHARSET']['translit'];

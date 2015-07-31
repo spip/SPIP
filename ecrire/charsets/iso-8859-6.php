@@ -10,10 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Déclaration des correspondances entre charsets iso-8859-6 (arabic) et unicode
+ *
+ * @link http://czyborra.com/charsets/iso8859.html#ISO-8859-6
+ * 
+ * @package SPIP\Core\Charsets
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
-// arabic iso-8859-6 - http://czyborra.com/charsets/iso8859.html#ISO-8859-6
 
 load_charset('iso-8859-1');
 

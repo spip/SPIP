@@ -1,6 +1,11 @@
 <?php
 
-// translitteration simple
+/**
+ * Déclaration pour la translitteration simple des correspondances entre
+ * caractères unicodes spécifiques et caractères simples la plage ASCII
+ * 
+ * @package SPIP\Core\Charsets
+**/
 
 $GLOBALS['CHARSET']['translit'] = array (
 // latin [fausse plage]
