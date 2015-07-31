@@ -11,6 +11,7 @@ if ($new=='oui') {
 			break;
 		case 'pb':
 		case 'rv':
+		case 'normal':
 			$ok = true;
 			break;
 		default:
