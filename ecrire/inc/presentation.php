@@ -1538,7 +1538,7 @@ function gros_titre($titre, $ze_logo='', $aff=true){
 	}
 	else {
 		$res = "\n<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>" .
-		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "align='middle'") . " &nbsp; ")) .
+		  (strlen($ze_logo) <= 3 ? '':  (http_img_pack($ze_logo, "", "style='vertical-align: bottom'") . " &nbsp; ")) .
 		  typo($titre) .
 		  "</div>\n";
 	}

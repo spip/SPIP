@@ -37,12 +37,11 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 			$corps .= '<p>' . _T($e) . "</p>\n";
 		
 		$corps = debut_cadre_relief('', true)
-		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'")
-		.  "<div style='color: red; left-margin: 5px'>"
+		.  "<span style='color: red; left-margin: 5px'>"
+		.  http_img_pack("warning.gif", _T('info_avertissement'), "style='width: 48px; height: 48px; float: left; margin: 5px;'")
 		. $corps
-		. "<p>"
 		.  _T('info_recommencer')
-		.  "</p></div>\n"
+		.  "</span>\n"
 		. fin_cadre_relief(true);
 	}
 
@@ -138,7 +137,8 @@ else {
 // Avertissement en cas de modifs de ses propres donnees
 	if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
 		$corps .= debut_cadre_enfonce('', true)
-		.  http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'")
+		.  http_img_pack("warning.gif", _T('info_avertissement'), 
+				 "style='width: 48px; height: 48px; float: right;margin: 5px;'")
 		. "<b>"._T('texte_login_precaution')."</b>\n"
 		. fin_cadre_enfonce(true)
 		. "\n<br />";
