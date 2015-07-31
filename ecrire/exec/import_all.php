@@ -47,7 +47,15 @@ function exec_import_all_dist()
 			     array('archive' => $archive));
 		$admin = charger_fonction('admin', 'inc');
 		echo $admin('import_all', $action, $commentaire, !$insert);
-	} else redirige_url_ecrire();
+	} else {
+		// on ne sait pas quoi importer, il faut sortir de la !
+		include_spip('base/import_all');
+		import_all_fin(array());
+		include_spip('inc/import');
+		detruit_restaurateur();
+		effacer_meta('admin');
+		redirige_url_ecrire();
+	}
 }
 
 // http://doc.spip.org/@import_queldir

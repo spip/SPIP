@@ -78,7 +78,9 @@ function inc_auth_dist() {
 	// Session valide en cours ?
 	if (isset($_COOKIE['spip_session'])) {
 		$session = charger_fonction('session', 'inc');
-		if ($connect_id_auteur = $session()) {
+		if ($connect_id_auteur = $session() 
+		OR $connect_id_auteur===0 // reprise sur restauration
+		) {
 			$auth_can_disconnect = true;
 		} else unset($_COOKIE['spip_session']);
 	}
@@ -114,7 +116,8 @@ function inc_auth_dist() {
 	}
 
 	$where = (is_numeric($connect_id_auteur)
-	AND $connect_id_auteur>0) ?
+	/*AND $connect_id_auteur>0*/ // reprise lors des restaurations
+	) ?
 	  "id_auteur=$connect_id_auteur" :
 	  (!$connect_login ? '' : "login=" . sql_quote($connect_login));
 

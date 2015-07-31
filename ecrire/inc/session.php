@@ -46,6 +46,7 @@ function inc_session_dist($auteur=false)
 
 // http://doc.spip.org/@ajouter_session
 function ajouter_session($auteur) {
+	if (!is_numeric($auteur['id_auteur'])) return false;
 	// Si le client a deja une session valide pour son id_auteur
 	// on conserve le meme fichier
 	$auteur['id_auteur'] = intval($auteur['id_auteur']);
@@ -93,7 +94,7 @@ function session_get($nom) {
 // (auteurs identifies seulement)
 // http://doc.spip.org/@actualiser_sessions
 function actualiser_sessions($auteur){
-	if (!intval($id_auteur = $auteur['id_auteur']))
+	if (!is_numeric($auteur['id_auteur']))
 		return;
 
 	// memoriser l'auteur courant (celui qui modifie la fiche)
@@ -215,7 +216,7 @@ function verifier_session($change=false) {
 		ajouter_session($GLOBALS['visiteur_session']);
 	}
 
-	return $GLOBALS['visiteur_session']['id_auteur'];
+	return is_numeric($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:null;
 }
 
 // Code a inserer par inc/presentation pour rejouer la session
