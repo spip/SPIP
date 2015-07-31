@@ -46,7 +46,7 @@ if (!defined('_DELAI_CACHE_resultats')) define('_DELAI_CACHE_resultats', 600);
  */
 function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, $serveur='', $modificateurs = array(), $primary='') {
 	static $cache = array();
-	$delai_fraicheur = min(_DELAI_CACHE_resultats,time()-$GLOBALS['meta']['derniere_modif']);
+	$delai_fraicheur = min(_DELAI_CACHE_resultats,time()-(isset($GLOBALS['meta']['derniere_modif']) ? $GLOBALS['meta']['derniere_modif'] : 0 ));
 
 	// si recherche n'est pas dans le contexte, on va prendre en globals
 	// ca permet de faire des inclure simple.
