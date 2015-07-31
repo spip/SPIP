@@ -365,6 +365,24 @@ function test_previsualiser_objet_champ($type=null, $opt=array()) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_changerlangue_dist($faire, $type, $id, $qui, $opt) {
+	$multi_objets = explode(',', lire_config('multi_objets'));
+	$gerer_trad_objets = explode(',', lire_config('gerer_trad_objets'));
+	$table = table_objet_sql($type);
+	if (in_array($table, $multi_objets) or in_array($table, $gerer_trad_objets)) { // affichage du formulaire ssi la configuration l'accepte
+		$multi_secteurs = lire_config('multi_secteurs');
+		$champs = objet_info($type, 'field');
+		if ($multi_secteurs == 'oui' and array_key_exists('id_rubrique', $champs)) { // multilinguisme par secteur et objet rattaché à une rubrique
+			if ($table != 'spip_rubriques') { // le choix de la langue se fait seulement sur les rubriques
+				return false;
+			} else {
+				$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id));
+				if ($id_parent != 0) // sous-rubriques : pas de choix de langue
+					return false;
+			}
+		}
+	} else {
+		return false;
+	}
 	return autoriser('modifier',$type,$id,$qui,$opt);
 }
 
