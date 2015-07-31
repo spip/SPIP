@@ -268,7 +268,7 @@ function interdire_scripts($source) {
 // Correction typographique francaise
 function typo_fr($letexte) {
 	global $flag_strtr2;
-	static $trans = '';
+	static $trans;
 
 	// Nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg
 	if (!$trans) {
