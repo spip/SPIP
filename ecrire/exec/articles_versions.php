@@ -103,7 +103,7 @@ function exec_articles_versions_dist()
 	if ($surtitre) {
 		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
 }
-	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: bottom'") . " &nbsp; ", true);
+	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: center'") . " &nbsp; ", true);
 
 	if ($soustitre) {
 		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($soustitre), "</b></span></span>\n";

@@ -1665,9 +1665,20 @@ div.titrem{
 .ajax-action {padding-top:1px;clear:both;position:relative;}
 
 .dater {position:relative;}
-.dater,.dater .titrem {background-color:#GET{claire};}
-.dater .titrem {}
-.dater .hover {background-color:#GET{foncee};}
+.dater,
+	.dater .titrem,
+	.editer_mot .titrem,
+	.editer_auteurs .titrem
+	{
+		background-color:#GET{claire};
+	}
+
+.dater .hover,
+	.editer_mot .hover,
+	.editer_auteurs .hover
+	{
+		background-color:#GET{foncee};
+	}
 
 .mots_tous #contenu .titrem.impliable {background-color:#GET{claire};}
 .configuration #contenu .cadre .titrem {background-color:#eee;}
@@ -1683,8 +1694,8 @@ div.titrem{
 
 .cadre-couleur .titrem {background-color:#GET{claire};}
 
-#navigation .titrem {text-align:center;}
-#extra .titrem {text-align:center;}
+#navigation .titrem, #extra .titrem {text-align:center; background-color: white;}
+#navigation .hover, #extra .hover {background-color:#GET{claire};}
 
 
 /* Deplier / Replier */
