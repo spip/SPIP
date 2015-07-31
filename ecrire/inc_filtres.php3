@@ -1082,4 +1082,148 @@ function abs_url($texte) {
 		return liens_absolus($texte);
 }
 
+
+// Image typographique
+
+function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, $textSize, $align="left") {
+	$words = explode(' ', strip_tags($text)); // split the text into an array of single words
+	$line = '';
+	while (count($words) > 0) {
+		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0]);
+		$lineWidth = $dimensions[2] - $dimensions[0]; // get the length of this line, if the word is to be included
+		if ($lineWidth > $maxWidth) { // if this makes the text wider that anticipated
+			$lines[] = $line; // add the line to the others
+			$line = ''; // empty it (the word will be added outside the loop)
+		}
+		$line .= ' '.$words[0]; // add the word to the current sentence
+		$words = array_slice($words, 1); // remove the word from the array
+	}
+	if ($line != '') { $lines[] = $line; } // add the last line to the others, if it isn't empty
+	$lineHeight = floor($textSize * 1.3);
+	$height = count($lines) * $lineHeight; // the height of all the lines total
+	// do the actual printing
+	$i = 0;
+	foreach ($lines as $line) {
+		$line = ereg_replace("~", " ", $line);
+		$dimensions = imageftbbox($textSize, 0, $font, $line);
+		$largeur_ligne = $dimensions[2] - $dimensions[0];
+		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
+		if ($align == "right") $left_pos = $maxWidth - $largeur_ligne;
+		else if ($align == "center") $left_pos = floor(($maxWidth - $largeur_ligne)/2);
+		else $left_pos = 0;
+		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line));
+		$i++;
+	}
+	$retour["height"] = $height;
+	$retour["width"] = $largeur_max;
+                 
+	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ');
+	$largeur_espace = $dimensions_espace[2] - $dimensions_espace[0];
+	$retour["espace"] = $largeur_espace;
+	return $retour;
+}
+
+
+
+function image_typo() {
+
+	// Recuperer les differents arguments
+	$numargs = func_num_args();
+	$arg_list = func_get_args();
+	$text = $arg_list[0];
+	for ($i = 1; $i < $numargs; $i++) {
+		if (ereg("\=", $arg_list[$i])) {
+			$nom_variable = substr($arg_list[$i], 0, strpos($arg_list[$i], "="));
+			$val_variable = substr($arg_list[$i], strpos($arg_list[$i], "=")+1, strlen($arg_list[$i]));
+		
+			$variable["$nom_variable"] = $val_variable;
+		}
+		
+	}
+
+	// Construire requete et nom fichier
+	$text = ereg_replace("\&nbsp;", "~", $text);	
+
+	$taille = $variable["taille"];
+	if ($taille < 1) $taille = 16;
+
+	$couleur = $variable["couleur"];
+	if (strlen($couleur) < 6) $couleur = "000000";
+
+	$fond = $variable["fond"];
+	if (strlen($fond) < 6) $fond = "ffffff";
+	
+	$ombre = $variable["ombre"];
+	$ombrex = $variable["ombrex"];
+	$ombrey = $variable["ombrey"];
+	if (!$variable["ombrex"]) $ombrex = 1;
+	if (!$variable["ombrey"]) $ombrey = $ombrex;
+	
+	$align = $variable["align"];
+	if (!$variable["align"]) $align="left";
+	
+	
+	$police = $variable["police"];
+	if (strlen($police) < 2) $police = "dustismo.ttf";
+
+	$largeur = $variable["largeur"];
+	if ($largeur < 5) $largeur = 600;
+
+
+	$string = "$text-$taille-$couleur-$fond-$ombre-$ombrex-$ombrey-$align-$police-$largeur";
+	$query = md5($string);
+	$dossier = _DIR_IMG. creer_repertoire(_DIR_IMG, 'cache-texte');
+	$fichier = "$dossier/$query.png";
+	
+	if (!file_exists($fichier)) {
+		// Il faut completer avec un vrai _SPIP_PATH, de facon a pouvoir livrer des /polices dans les dossiers de squelettes
+		$font = find_in_path("polices/$police", "ecrire");
+	
+		$imgbidon = imageCreateTrueColor($largeur, 45);
+		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille);
+		$hauteur = $retour["height"];
+		$largeur = $retour["width"];
+		$espace = $retour["espace"];
+		imagedestroy($imgbidon);
+		
+		$im = imageCreateTrueColor($largeur+$ombrex-$espace, $hauteur+5+$ombrey);
+		imagealphablending ($im, FALSE );
+		imagesavealpha ( $im, TRUE );
+		
+		// CrŽation de quelques couleurs
+		if (strlen($ombre) == 6) $grey = imagecolorallocatealpha($im, hexdec("0x{".substr($ombre, 0,2)."}"), hexdec("0x{".substr($ombre, 2,2)."}"), hexdec("0x{".substr($ombre, 4,2)."}"), 50);
+		$black = imagecolorallocatealpha($im, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 0);
+		$grey2 = imagecolorallocatealpha($im, hexdec("0x{".substr($fond, 0,2)."}"), hexdec("0x{".substr($fond, 2,2)."}"), hexdec("0x{".substr($fond, 4,2)."}"), 127);
+		
+		ImageFilledRectangle ($im,0,0,$largeur+$ombrex,$hauteur+5+$ombrey,$grey2);
+		
+		// Le texte ˆ dessiner
+		// Remplacez le chemin par votre propre chemin de police
+		//global $text;
+		
+		
+		if (strlen($ombre) == 6) printWordWrapped($im, $taille+$ombrey+5, $ombrex, $largeur, $font, $grey, $text, $taille, $align);
+		printWordWrapped($im, $taille+5, 0, $largeur, $font, $black, $text, $taille, $align);
+		
+		
+		// Utiliser imagepng() donnera un texte plus claire,
+		// comparŽ ˆ l'utilisation de la fonction imagejpeg()
+		imagepng($im, $fichier);
+		imagedestroy($im);
+		
+		$image = $fichier;
+		
+	} else {
+		$image = $fichier;
+	}
+
+	if ($image) {
+		return "<img src='$image' style='border: 0px;'>";
+	} else {
+		return $texte;
+	}
+
+}
+
+
 ?>
