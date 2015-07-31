@@ -777,7 +777,14 @@ li .puce_article_popup, li.puce_breve_popup,li.puce_site_popup, { padding: 0; }
 #contenu #wysiwyg div.contenu_ps { background:#dddddd; border:1px solid #666; padding:5px;margin:1em 0;}
 #contenu #wysiwyg div.contenu_ps.vide {display: none;}
 #contenu #wysiwyg div.contenu_ps div.label {display:inline;font-weight:bold;font-size:1.3em;background:none;color:#000;}
-#contenu #wysiwyg div.contenu_notes { background:#fff; border:1px solid #666; padding:5px;margin:1em 0;font-size:0.8em;}
+#contenu #wysiwyg div.contenu_notes { background:#fff; border-top:1px solid #666; padding-top:5px; margin:1em 0; font-size: 0.83em; line-height: 1.3em;}
+#contenu #wysiwyg div.contenu_notes p {
+	margin: 0; padding: 0; 
+	margin-top: 0.5em;
+	margin-left: 2em;
+	text-indent: -2em;
+	
+}
 #contenu #wysiwyg div.contenu_notes.vide {display: none;}
 #contenu #wysiwyg div.contenu_notes div.label {display:inline;font-weight:bold;font-size:0.9em;background:none;color:#000;}
 #contenu #wysiwyg div.texte {font-size:1em;}
@@ -812,8 +819,12 @@ ul.instituer li.refuse.selected,ul.instituer li.refuse a:hover { background: #ff
 .no_onglets #contenu #wysiwyg div.vide {display: none;}
 .no_onglets #contenu h1 {color:#GET{foncee};}
 .no_onglets #contenu #wysiwyg div.contenu_descriptif,
-.no_onglets #contenu #wysiwyg div.contenu_nom_site
- { background:#e4e4e4; border:1px dashed #ccc; padding:5px;margin:1em 0;}
+.no_onglets #contenu #wysiwyg div.contenu_nom_site,
+.no_onglets #contenu #wysiwyg div.contenu_ps
+	{ background:#eeeeee; border: 1px solid #ccc; padding: 1em 1em 0em 1em; margin: 1em 0 ;}
+ .no_onglets #contenu #wysiwyg div.contenu_nom_site {
+ 	padding: 1em;
+ }
 .no_onglets #contenu #wysiwyg div.contenu_descriptif span.label {color:#000;background:none;display:inline;font-size:1.1em;font-weight:bold;}
 body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
 .no_onglets .boite_onglets {margin-top:0px; }
