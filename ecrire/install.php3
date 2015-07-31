@@ -562,7 +562,7 @@ else if ($etape == 'ldap1') {
 	echo "<INPUT TYPE='text' NAME='login_ldap' CLASS='formo' VALUE=\"\" SIZE='40'><P>";
 
 	echo "<label><B>Mot de passe</B><BR></label>";
-	echo "<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
+	echo "<INPUT TYPE='password' NAME='pass_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
 
 	echo "<p><DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 
