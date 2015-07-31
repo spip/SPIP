@@ -72,7 +72,7 @@ function afficher_petits_logos_mots($id_mot) {
 		$taille = getimagesize($image);
 		$largeur = $taille[0];
 		$hauteur = $taille[1];
-		if ($largeur < 50 AND $hauteur < 30)
+		if ($largeur < 100 AND $hauteur < 100)
 			return "<IMG SRC='$image' align='middle' WIDTH='$largeur' HEIGHT='$hauteur' HSPACE='1' VSPACE='1' ALT=' ' BORDER=0 class='spip_image'> ";
 		else return "";
 	} else {
