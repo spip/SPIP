@@ -1489,7 +1489,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$date_heure=$row['date_heure'];
 	$titre=$row['titre'];
 	$texte=$row['texte'];
-	$auteur=$row['auteur'];
+	$auteur= extraire_multi($row['auteur']);
 	$email_auteur=$row['email_auteur'];
 	$nom_site=$row['nom_site'];
 	$url_site=$row['url_site'];
