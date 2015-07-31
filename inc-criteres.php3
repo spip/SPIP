@@ -250,14 +250,8 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 		}
 	}
 	// tris specifies par l'URL
-	// (formule composee, virgules, etc).
-	//  hack {par $GLOBALS["tri"]} obsolete; utiliser #HTTP_VARS{tri}
-	elseif ($tri[0] == '$') 
-		$boucle->order = $tri;
 	else {
-		$a = calculer_param_dynamique($tri, $boucles, $idb);
-		if (ereg('" \. *addslashes(.*)\. "', $a, $m)) $a = $m[1];
-		$boucle->order = $a;
+		$boucle->order = simplifie_param_dynamique($tri, $boucles, $idb);
 	}
 }
 
@@ -285,8 +279,7 @@ function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	if ($m[1] == 'n') 
 	  $a = 'n';
 	else {
-	  $a = calculer_param_dynamique($m[1], $boucles, $idb);
-	  if (ereg('" \. *addslashes(.*)\. "', $a, $m2)) $a = $m2[1];
+	  $a = simplifie_param_dynamique($m[1], $boucles, $idb);
 	}
 	return array($a, ($m[5] ? $m[5] : 0));
 }
@@ -625,4 +618,11 @@ function calculer_params_dynamiques($liste, &$boucles, $idb) {
 	}
 	return join(',', $res);
 }
+
+function simplifie_param_dynamique($val, &$boucles, $idb)
+{
+	$a = calculer_param_dynamique($val, $boucles, $idb);
+	if (!ereg('" \. *(.*)\. "', $a, $m)) return $a;
+	return $m[1];
+}	
 ?>
