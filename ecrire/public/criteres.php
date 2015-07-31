@@ -992,8 +992,12 @@ function calculer_parties(&$boucles, $id_boucle, $debut, $mode){
 function calculer_critere_parties_aux($idb, &$boucles, $param){
 	if ($param[0]->type!='texte'){
 		$a1 = calculer_liste(array($param[0]), array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
-		preg_match(',^ *(-([0-9]+))? *$,', $param[1]->texte, $m);
-		return array("intval($a1)", ($m[2] ? $m[2] : 0));
+		if (isset($param[1]->texte)) {
+			preg_match(',^ *(-([0-9]+))? *$,', $param[1]->texte, $m);
+			return array("intval($a1)", ((isset($m[2]) and $m[2]) ? $m[2] : 0));
+		} else {
+			return array("intval($a1)", 0);
+		}
 	} else {
 		preg_match(',^ *(([0-9]+)|n) *(- *([0-9]+)? *)?$,', $param[0]->texte, $m);
 		$a1 = $m[1];
