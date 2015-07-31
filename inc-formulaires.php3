@@ -320,13 +320,14 @@ function formulaire_signature_normal($id_article, $row_petition) {
 }
 
 
-function formulaire_signature ($id_article, $petition) {
+function formulaire_signature ($id_article, $petition_s) {
 	if ($GLOBALS['val_confirm'])
 		return _REPONSE_CONFIRMATION_SIGNATURE;	// geree par inc-public.php3
 	else if ($GLOBALS['nom_email'] AND $GLOBALS['adresse_email'])
 		return reponse_signature($id_article);
 	else
-		return formulaire_signature_normal($id_article,unserialize($petition));
+		if ($petition = unserialize($petition_s))
+			return formulaire_signature_normal($id_article,$petition);
 }
 
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
