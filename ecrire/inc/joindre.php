@@ -47,8 +47,12 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 
 	if ($dir_ftp OR $distant OR $vignette_de_doc) {
 		$bloc = "ftp_$mode" .'_'. intval($id_document);
-		$debut = "\n\t<div style='float:".$GLOBALS['spip_lang_left'].";position:relative'>"
-			. bouton_block_depliable($libelle,false,$bloc) ."</div>\n";
+		$debut = 
+		//"\n\t<div style='float:".$GLOBALS['spip_lang_left'].";position:relative'>"
+		//	. 
+			bouton_block_depliable($intitule,false,$bloc) 
+			//."</div>\n"
+			;
 		$milieu = debut_block_depliable(false,$bloc);
 		$fin = "\n\t" . fin_block();
 
