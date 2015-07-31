@@ -70,7 +70,7 @@ while (list($trad_lang, $coef_traduits) = each($traduits)) {
 	$dir = lang_dir($trad_lang, '', ' dir=rtl');
 	echo "<td width='100%'><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 	echo "<a$dir href='plan_trad.php3?trad_lang=$trad_lang'>".traduire_nom_langue($trad_lang)."</a>";
-	echo " : ".intval($coef_traduits * 100)."%";
+	echo " : ".intval(($coef_traduits + $coef_conflits) * 100)."%";
 	echo "</font></td>";
 	echo "<td>";
 	
