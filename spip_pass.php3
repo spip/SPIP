@@ -55,7 +55,7 @@ if ($email_oubli) {
 		$email = addslashes($email_oubli);
 		$res = spip_query("SELECT * FROM spip_auteurs WHERE email ='$email'");
 		if ($row = spip_fetch_array($res)) {
-			if ($row['statut'] == '5poubelle')
+			if ($row['statut'] == '5poubelle' OR $row['pass'] == '')
 				$erreur = _T('pass_erreur_acces_refuse');
 			else {
 				$cookie = creer_uniqid();

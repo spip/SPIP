@@ -92,20 +92,6 @@ if ($essai_login == "oui") {
 	$login = $session_login;
 	$pass = $session_password;
 
-	// Recuperer le mot de passe en champ hidden
-	if ($session_password_md5) { // mot passe en md5
-		$md5pass = $session_password_md5;
-		$md5next = $next_session_password_md5;
-	}
-	else if ($session_password) { // mot passe en clair
-		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='".addslashes($login)."' AND statut!='5poubelle'";
-		$result = spip_query($query);
-		if ($row = spip_fetch_array($result)) {
-			$md5pass = md5($row['alea_actuel'] . $session_password);
-			$md5next = md5($row['alea_futur'] . $session_password);
-		}
-	}
-
 	// Essayer differentes methodes d'authentification
 	$auths = array('spip');
 	if ($ldap_present) $auths[] = 'ldap';
@@ -117,7 +103,9 @@ if ($essai_login == "oui") {
 		$classe_auth = "Auth_".$nom_auth;
 		$auth = new $classe_auth;
 		if ($auth->init()) {
-			$ok = $auth->verifier_challenge_md5($login, $md5pass, $md5next);
+			// Essayer les mots de passe md5
+			$ok = $auth->verifier_challenge_md5($login, $session_password_md5, $next_session_password_md5);
+			// Sinon essayer avec le mot de passe en clair
 			if (!$ok && $session_password) $ok = $auth->verifier($login, $session_password);
 		}
 		if ($ok) break;
