@@ -284,7 +284,7 @@ jQuery.spip.preloaded_urls = {};
  */
 jQuery.spip.on_ajax_loaded = function(blocfrag,c,href,history) {
 	history = history || (history==null);
-	if (typeof href == undefined)
+	if (typeof href == undefined || href==null)
 		history = false;
 	if (history)
 		jQuery.spip.setHistoryState(blocfrag);
