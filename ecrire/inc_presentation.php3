@@ -1768,7 +1768,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			if ($controle_id_article)
 				echo boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$controle_id_article", $ip);
 
-			echo justifier(propre($texte));
+			echo safehtml(justifier(propre($texte)));
 
 			if (strlen($url_site) > 10 AND $nom_site) {
 				echo "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";

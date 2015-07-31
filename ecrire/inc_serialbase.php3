@@ -274,7 +274,10 @@ $spip_syndic_articles = array(
 		"maj"	=> "TIMESTAMP",
 		"statut"	=> "VARCHAR(10) NOT NULL",
 		"descriptif"	=> "blob NOT NULL",
-		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL");
+		"lang"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
+		"url_source" => "TINYTEXT DEFAULT '' NOT NULL",
+		"source" => "TINYTEXT DEFAULT '' NOT NULL",
+		"tags" => "TEXT DEFAULT '' NOT NULL");
 
 $spip_syndic_articles_key = array(
 		"PRIMARY KEY"	=> "id_syndic_article",
