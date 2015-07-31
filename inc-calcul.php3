@@ -442,6 +442,7 @@ function calculer_page_globale($fond) {
 	global $contexte, $contexte_inclus;
 	global $fichier_requete;
 	global $id_rubrique_fond;
+	global $spip_lang;
 
 	// Generer le contexte
 	$contexte = '';
