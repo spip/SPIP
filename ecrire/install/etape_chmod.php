@@ -136,7 +136,8 @@ function install_etape_chmod_dist()
 	echo minipres($titre, $res . generer_form_ecrire('install',  $t));
 
 	} else {
-		if (!_FILE_CONNECT)
+		$deja = (_FILE_CONNECT AND analyse_fichier_connection(_FILE_CONNECT));
+		if (!$deja)
 			redirige_url_ecrire("install", "etape=1&chmod=".$chmod);
 		else	redirige_url_ecrire();
 	}
