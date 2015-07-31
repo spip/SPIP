@@ -482,11 +482,22 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	$n = count($codes);
 	if (!$n) return "''";
 	$tab = str_repeat("\t", $descr['niv']);
-	if (_request('var_mode_affiche') != 'validation')
-	  return
-		(($n==1) ? $codes[0] : 
-			 "(" . join (" .\n$tab", $codes) . ")");
-	else return "@debug_sequence('$id_boucle', '" .
+	if (_request('var_mode_affiche') != 'validation') {
+		if ($n==1) 
+			return $codes[0];
+		else {
+			$res = '';
+			foreach($codes as $code) {
+				if (!preg_match("/^'[^']*'$/", $code)
+				OR substr($res,-1,1)!=="'")
+				  $res .=  " .\n$tab$code";
+				else {
+				  $res = substr($res,0,-1) . substr($code,1);
+				}
+			}
+			return '(' . substr($res,2+$descr['niv']) . ')';
+		}
+	} else return "@debug_sequence('$id_boucle', '" .
 	  ($descr['nom']) .
 	  "', " .
 	  $descr['niv'] .
@@ -563,6 +574,14 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['niv']--;
 			$altern = calculer_liste($p->altern,
 				$newdescr, $boucles, $id_boucle);
+			if (!$boucles[$nom]->milieu
+			AND $boucles[$nom]->type_requete <> 'boucle') {
+				if ($altern != "''") $code .= "\n. $altern";
+				if ($avant<>"''" OR $apres<>"''")
+					spip_log("boucle $nom toujours vide, code superflu dans $id");
+				$avant = $apres = $altern = "''";
+			} else if ($altern != "''") $altern = "($altern)";
+
 			break;
 
 		case 'idiome':
@@ -593,6 +612,8 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$descr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
 				$descr, $boucles, $id_boucle);
+			if (($avant != "''" OR $apres != "''") AND $code[0]!= "'")
+				$code = "strval($code)";
 			$altern = "''";
 			break;
 
@@ -610,8 +631,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$res = (!$avant ? "" : "$avant . ") . 
 					$t .
 					(!$apres ? "" : " . $apres");
-				$code = "((strval($t = $code)!='')"
-					." ?\n\t$tab($res) :\n\t$tab($altern))";
+				$code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab$altern)";
 			}
 
 			// gestion d'une boucle-fragment (ahah)
