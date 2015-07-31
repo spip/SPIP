@@ -148,9 +148,9 @@ function revision_auteur($id_auteur, $c=false) {
 function revision_mot($id_mot, $c=false) {
 
 	// regler le groupe
-	if (NULL != ($id_groupe = _request('id_groupe',$c))
-	OR NULL != ($type = _request('type',$c))) {
-		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe="._q('id_groupe'));
+	if (NULL !== ($id_groupe = _request('id_groupe',$c))
+	OR NULL !== ($type = _request('type',$c))) {
+		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe="._q($id_groupe));
 		if ($row = spip_fetch_array($result))
 			$type = $row['titre'];
 		else
