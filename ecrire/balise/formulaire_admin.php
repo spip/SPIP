@@ -107,7 +107,9 @@ function admin_objet()
 		if ($type==objet_type($type,false)
 			AND $_id_type = id_table_objet($type)
 			AND isset($GLOBALS['contexte'][$_id_type])
-			AND $id = $GLOBALS['contexte'][$_id_type]) {
+			AND $id = $GLOBALS['contexte'][$_id_type]
+			AND !is_array($id)
+			AND $id=intval($id)) {
 			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=".intval($id));
 			if ($id) {
 				$env[$_id_type] = $id;
