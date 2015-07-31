@@ -24,12 +24,6 @@ function action_purger_dist()
 
 	switch ($arg) {
 
-	case 'index': 
-		include_spip('inc/indexation');
-		purger_index();
-		creer_liste_indexation();
-		break;
-
 	case 'cache': 
 		supprime_invalideurs();
 		spip_unlink(_CACHE_RUBRIQUES);
