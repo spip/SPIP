@@ -132,14 +132,16 @@ function http_calendrier_ics($evenements, $amj = "")
 
 				$desc = propre($evenement['DESCRIPTION']);
 				$sum = $evenement['SUMMARY'];
-				if ($sum && ($sum[0] != '<'))
+				spip_log("_ics $sum");
+				if ($sum[0] != '<')
 				{
-					$sum = "<span style='color: black'>" .
+				  if ($sum)
+				    $sum = "<span style='color: black'>" .
 						ereg_replace(' +','&nbsp;', typo($sum)) .
 						"</span>";
-
-				} else {
-				  if ($desc) $sum .= " <span class='verdana1'>$desc</span>"; 
+				  else {
+				    if ($desc) $sum .= " <span class='verdana1'>$desc</span>"; 
+				  }
 				}
 				if ($deb_h >0 OR $deb_m > 0) {
 					if ((($deb_h > 0) OR ($deb_m > 0)) AND $amj == $jour_debut)
@@ -744,6 +746,7 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 		$d = $v['date'];
 		$jarticles = $articles[$d];
 		$jbreves = $breves[$d];
+		$jevenements = $evenements[$d];
 		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
 			<div style='background-color: " . 
 			(($v['index'] == 0) ? $couleur_claire :
@@ -757,7 +760,7 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 			"border-bottom: 1px solid $couleur_claire; " .
 			"height: ${dimjour}px; " .
 			"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;'>" .
-			http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $evenements[$d], $d) . 
+			http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $jevenements, $d) . 
 			'</div></div>' .
 			(!($jarticles OR $jbreves) ? '' :
 				http_calendrier_articles_et_breves($jarticles, $jbreves,'padding: 5px;')) .
@@ -904,12 +907,12 @@ function http_calendrier_image_et_typo($evenements)
       {
 	if (!(is_int($v['CATEGORIES'])))
 	  {
+	    $v['DESCRIPTION'] = typo($v['DESCRIPTION']);
 	    if ($v['CATEGORIES'] == 'a')
 	      $i = 'puce-verte-breve.gif';
 	    else
 	      $i = 'puce-blanche-breve.gif';
-	    $v['SUMMARY'] = http_img_pack($i, ".", "width='8' height='9' border='0'");
-	    $v['DESCRIPTION'] = typo($v['DESCRIPTION']);
+	    $v['SUMMARY'] = http_img_pack($i, ".", "width='8' height='9' border='0'") . '&nbsp;' . ($v['SUMMARY'] ? $v['SUMMARY'] : $v['DESCRIPTION']);
 	  }
 	$res[$k] = $v;
       }
@@ -1475,22 +1478,30 @@ function sql_calendrier_interval_mois($annee,$mois,$jour) {
 function sql_calendrier_interval_articles($avant, $apres) {
 	$evenements= array();
 	$result=spip_query("
-SELECT	id_article, titre, date
+SELECT	id_article, titre, date, descriptif
 FROM	spip_articles
 WHERE	statut='publie'
  AND	date >= $avant
  AND	date < $apres
 ORDER BY date
 ");
-	$script = (_DIR_RESTREINT ? 'article' : 'articles');
+	if (!_DIR_RESTREINT)
+	  $script = 'articles' . _EXTENSION_PHP . "?id_article=";
+	else
+	  {
+	    $now = date("Ymd");
+	    $script = 'article' . _EXTENSION_PHP . "?id_article=";
+	  }
 	while($row=spip_fetch_array($result)){
 		$amj = sql_calendrier_jour_ical($row['date']);
 		$evenements[$amj][]=
-		array(
-			'URL' => $script . _EXTENSION_PHP . "?id_article=" .
- $row['id_article'],
+		    array(
 			'CATEGORIES' => 'a',
-			'DESCRIPTION' => $row['titre']);
+			'DESCRIPTION' => $row['descriptif'],
+			'SUMMARY' => $row['titre'],
+			'URL' => 
+			(((!_DIR_RESTREINT) || ($now >= $amj)) ?
+			 ($script . $row['id_article']) : ' '));
 	}
 	return $evenements;
 }
@@ -1512,7 +1523,7 @@ ORDER BY date_heure
 		array(
 			'URL' => $script . _EXTENSION_PHP . "?id_breve=" . $row['id_breve'],
 			'CATEGORIES' => 'b',
-			'DESCRIPTION' => $row['titre']);
+			'SUMMARY' => $row['titre']);
 	}
 	return $evenements;
 }
