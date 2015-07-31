@@ -458,6 +458,7 @@ if (abs($t_jour - date('d')) > 2) {
 if (!$bonjour) {
 	if ($optimiser == 'oui' || (time() - lire_meta('date_optimisation')) > 24 * 3600) {
 		if (timeout('optimisation')) {
+			@flush();
 			ecrire_meta("date_optimisation", time());
 			ecrire_metas();
 			include ("optimiser.php3");
