@@ -1,4 +1,14 @@
 
+SPIP-Core spip-2.1.22 -> spip-2.1.23  27 mai 2013
+-------------------------------------------------------------
+
+r20560 | cedric    |  (ven. 24 mai 2013) | suite à r20552 #FORMULAIRE_INSCRIPTION sans argument utilisé dans la page sommaire de squelettes-dist n'était plus fonctionnel.On rétablit le meilleur choix possible (1comite ou 6forum) au niveau de la fonction de la balise dans ce cas particulier (et on enleve la valeur par defaut sur la page identifiants car elle n'est pas equivalente)
+r20564 | ben       |  (ven. 24 mai 2013) | changelog spip 2.1.22
+r20591 | cedric    |  (sam. 25 mai 2013) | Report de r20576 : amelioration de r20562 : si le mode n'est pas fourni, on teste 1comite puis 6forum et on renvoit celui qui est autorise.Evite la duplication de code (Emmanuel)
+r20594 | esj       |  (dim. 26 mai 2013) | Retour sur r19989, correction des arguments des chaînes de langue lorsqu'il s'agit de balise: non seulement on admet des arguments à cette balise, mais à présent aussi des filtres. Ainsi on permet ici ce qu'on permet dans les arguments d'Inclure. Il suffisait de ne pas refuser le caractère "|" entre les signes "=" et "," (ce qui ne servait à rien), puis d'appliquer un code éprouvé.
+r20598 | ben       |  (lun. 27 mai 2013) | 2.1.23
+
+
 SPIP-Core spip-2.1.21 -> spip-2.1.22  24 mai 2013
 -------------------------------------------------------------
 r20438 | esj       |  (mar. 23 avril 2013) | La saleté annoncée par 14467 quant au passage en minuscule du nom du fichier de connexion avait été nettoyée par r16365, mais il restait 2 cas non vus: sql_showbase et sql_showtable. On applique les mêmes corrections ce qui fait disparaitre les messagess d'erreurs SQL dans les logs. Mais ces 2 blocs de code identiques ne sont peut-être plus nécessaires, car trouver_table s'est beaucoup amélioré depuis leur introduction en r10113 et r10371. Dans le doute, je les laisse maintenant qu'ils sont corrigés.
