@@ -1541,6 +1541,10 @@ if (isset($_POST['titre'])) {
 
  }
 
+	if ($new == 'oui')
+		redirige_par_entete(
+			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
+
 exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
 }
