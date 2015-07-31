@@ -94,19 +94,20 @@ function editer_choix_webmestre($auteur){
 
 // http://doc.spip.org/@traduire_statut_auteur
 function traduire_statut_auteur($statut){
-	$recom = pipeline('traduire_statut_auteur',array("info_administrateurs" => _T('item_administrateur_2'),
-		       "info_redacteurs" =>  _T('intem_redacteur'),
-		       "info_visiteurs" => _T('item_visiteur'),
-		       '5poubelle' => _T('texte_statut_poubelle'), // bouh
-		       ));
+	$recom = array(
+				"info_administrateurs" => 'item_administrateur_2',
+				"info_redacteurs" =>  'intem_redacteur',
+				"info_visiteurs" => 'item_visiteur',
+				"5poubelle" => 'texte_statut_poubelle', // bouh
+			);
 	if (isset($recom[$statut]))
-		return $recom[$statut];
+		return _T($recom[$statut]);
 	
 	// retrouver directement par le statut sinon
 	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])){
 	  if (isset($recom[$t]))
-			return $recom[$t];
-		return $t;
+			return _T($recom[$t]);
+		return _T($t);
 	}
 	
 	return '';
@@ -135,7 +136,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 
 	$menu = '';
 	foreach($droits as $k => $v) {
-		if ($k = traduire_statut_auteur($k))
+		if (($v != '5poubelle') && ($k = traduire_statut_auteur($v)))
 			$menu .=  mySel($v, $statut, $k);
 	}
 
