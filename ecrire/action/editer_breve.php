@@ -39,14 +39,15 @@ function action_editer_breve_dist() {
 	} 
 	// Erreur
 	else{
+		include_spip('inc/headers');
 		redirige_url_ecrire();
 	}
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(urldecode(_request('redirect')),
 			'id_breve', $id_breve, '&');
+			
 		include_spip('inc/headers');
-	
 		redirige_par_entete($redirect);
 	}
 	else 

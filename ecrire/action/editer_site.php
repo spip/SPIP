@@ -59,6 +59,7 @@ function action_editer_site_dist() {
 	}
 	// Erreur
 	else {
+		include_spip('inc/headers');
 		redirige_url_ecrire();
 	}
 

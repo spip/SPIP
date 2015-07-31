@@ -21,8 +21,10 @@ function action_editer_rubrique_dist() {
 	$arg = $securiser_action();
 
 	if (!$id_rubrique = intval($arg)) {
-		if ($arg != 'oui') 
+		if ($arg != 'oui') {
+			include_spip('inc/headers');
 			redirige_url_ecrire();
+		}
 		$id_rubrique = insert_rubrique(_request('id_parent'));
 	}
 

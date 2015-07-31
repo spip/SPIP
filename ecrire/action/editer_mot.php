@@ -36,10 +36,11 @@ function action_editer_mot_dist()
 		$c[$champ] = _request($champ);
 
 	revision_mot($id_mot, $c);
-	if ($redirect = _request('redirect'))
+	if ($redirect = _request('redirect')) {
+		include_spip('inc/headers');
 		redirige_par_entete(parametre_url(urldecode($redirect),
 			'id_mot', $id_mot, '&'));
-	else
+	} else
 		return array($id_mot,'');
 }
 
