@@ -277,17 +277,23 @@ jQuery.fn.ajaxbloc = function() {
 				  success: function(c){
 					  on_pagination(c,href);
 					  preloaded_urls[url] = c;
-					  if (typeof callback == "function")
-					    callback();
+					  if (callback && typeof callback == "function")
+					    callback.apply(blocfrag);
 				  }
 			  });
 		  }
 	  }
-	  jQuery(this).not('.reloaded').bind('reload',function(event, callback){
-			var href = $(this).attr('data-url');
+	  jQuery(this).not('.reloaded').bind('ajaxReload',function(event, options){
+		  var href = $(this).attr('data-url') || $(this).attr('data-origin');
 		  if (href && typeof href != undefined){
+			  options == options || {};
+			  var callback=options.callback || null;
+			  var args = options.args || {};
+			  for (var key in args)
+	        href = parametre_url(href,key,args[key]);
 			  var url = makeAjaxUrl(href);
 			  loadAjax(url, href, true, callback);
+			  event.stopPropagation();
 		  }
 	  }).addClass('reloaded');
 
@@ -339,12 +345,34 @@ jQuery.fn.ajaxbloc = function() {
 /**
  * Recharger un bloc ajax pour le mettre a jour
  * ajaxid est l'id passe en argument de INCLURE{ajax=ajaxid}
- * la fonction callback optionnelle est executee apres rechargement du bloc
+ * options permet de definir une callbackk ou de passer des arguments a l'url
+ * au rechargement
+ * ajaxReload peut s'utiliser en passant un id :
+ * ajaxReload('xx');
+ * ou sur un objet jQuery
+ * jQuery(this).ajaxReload();
+ * Dans ce dernier cas, le plus petit conteneur ajax est recharge
+ *
  * @param string ajaxid
- * @param function callback
+ * @param object options
+ *  callback : callback after reloading
+ *  args : {arg:value,...} to pass tu the url
  */
-function ajaxReload(ajaxid, callback){
-	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).trigger('reload', [callback]);
+function ajaxReload(ajaxid, options){
+	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).ajaxReload(options);
+}
+
+/**
+ * Variante jQuery de ajaxReload pour la syntaxe
+ * jQuery(..).ajaxReload();
+ * cf doc ci-dessus
+ * @param options
+ */
+jQuery.fn.ajaxReload = function(options){
+	options = options||{};
+	// just trigg the event, as it will bubble up the DOM
+	jQuery(this).trigger('ajaxReload', [options]);
+	return this; // don't break the chain
 }
 
 /**

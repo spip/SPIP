@@ -2157,10 +2157,11 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	
 	if ($emboite === NULL) return $c;
 	if (!trim($emboite)) return "";
-	$r = "";
+	// toujours encoder l'url source dans le bloc ajax
+	$r = self();
+	$r = ' data-origin="'.$r.'"';
 	if ($ajaxid AND is_string($ajaxid)){
 		$c .= ' ajax-id-'.$ajaxid;
-	  $r = ' data-url="'.self().'"';
 	}
 	return "<div class='ajaxbloc env-$c'$r>\n$emboite</div><!-- ajaxbloc -->\n";
 }
