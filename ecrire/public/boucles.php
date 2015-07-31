@@ -44,8 +44,9 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table . ".id_rubrique";
 
-// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
-// sauf en presence du critere {tout} (vu par phraser_html)
+	// Si la boucle mere est une boucle RUBRIQUES il faut ignorer la feuille
+	// sauf en presence du critere {tout} (vu par phraser_html)
+	// ou {id_article} qui positionne aussi le {tout}
 
 	$boucle->hierarchie = 'if (!($id_rubrique = intval('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
