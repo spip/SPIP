@@ -262,7 +262,7 @@ $spip_pipeline = array(
 	'accueil_informations' => '',
 	 # cf. public/assembler
 	'affichage_final' => '|f_surligne|f_tidy|f_admin',
-	'affichage_final_prive' => '',
+	'affichage_final_prive' => '|f_title_auto',
 	'affichage_entetes_final' => '',
 	'affichage_entetes_final_prive' => '',
 	'afficher_fiche_objet'=>'',
