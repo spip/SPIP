@@ -1141,9 +1141,13 @@ function balise_MODELE_dist($p) {
 	// {truc=chose}{machin=chouette}... histoire de simplifier l'ecriture pour
 	// le webmestre : #MODELE{emb}{autostart=true,truc=1,chose=chouette}
 	if ($p->param[0]) {
-		while (count($p->param[0])>2){
-			$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
+		$params = $p->param[0];
+		unset($p->param[0]);
+		while (count($params)>2){
+			array_unshift($p->param,array(0=>NULL,1=>array_pop($params)));
+			//$p->param[]=array(0=>NULL,1=>array_pop($p->param[0]));
 		}
+		array_unshift($p->param,$params);
 	}
 	$modele = array_shift($p->param);
 	$nom = strtolower($modele[1][0]->texte);
