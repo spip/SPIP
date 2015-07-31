@@ -16,20 +16,6 @@ include_spip('inc/agenda'); // inclut inc/layer, inc/texte, inc/filtre
 include_spip('inc/boutons');
 include_spip('inc/actions');
 
-// Choix dynamique de la couleur
-
-// http://doc.spip.org/@choix_couleur
-function choix_couleur() {
-	global $couleurs_spip;
-	$res = '';
-	if ($couleurs_spip) {
-		foreach ($couleurs_spip as $key => $val) {
-			$res .= "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
-				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\""). "</a>";
-		}
-	}
-	return $res;
-}
 
 // Faux HR, avec controle de couleur
 
@@ -183,20 +169,6 @@ function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $tit
 // http://doc.spip.org/@fin_cadre_thread_forum
 function fin_cadre_thread_forum($return = false){
 	$retour_aff = fin_cadre('thread-forum');
-
-	if ($return) return $retour_aff; else echo $retour_aff;
-}
-
-// http://doc.spip.org/@debut_cadre_gris_clair
-function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre = ''){
-	$retour_aff = debut_cadre('gris-clair', $icone, $fonction, $titre);
-
-	if ($return) return $retour_aff; else echo $retour_aff;
-}
-
-// http://doc.spip.org/@fin_cadre_gris_clair
-function fin_cadre_gris_clair($return = false){
-	$retour_aff = fin_cadre('gris-clair');
 
 	if ($return) return $retour_aff; else echo $retour_aff;
 }
@@ -1373,39 +1345,31 @@ function debut_javascript($admin, $stat)
 
 // Fonctions onglets
 
-// http://doc.spip.org/@onglet_relief_inter
-function onglet_relief_inter(){
-	
-	echo "<td>&nbsp;</td>";
-	
-}
 
 // http://doc.spip.org/@debut_onglet
 function debut_onglet(){
 
-	echo "\n\n";
-	echo "<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'>";
-	echo "<tr>";
+	return "
+<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'><tr>
+";
 }
 
 // http://doc.spip.org/@fin_onglet
 function fin_onglet(){
-	echo "</tr>";
-	echo "</table></div>\n\n";
+	return "</tr></table></div>\n";
 }
 
 // http://doc.spip.org/@onglet
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	global $spip_display, $spip_lang_left ;
 
-
-	echo "<td>";
+	$res = "<td>";
 	
 	if ($onglet != $onglet_ref) {
-		echo "<div style='position: relative;'>";
+		$res .= "<div style='position: relative;'>";
 		if ($spip_display != 1) {
 			if (strlen($icone) > 0) {
-				echo "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
+				$res .= "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
 				  http_img_pack("$icone", "", "") . "</div>";
 				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
 			} else {
@@ -1413,15 +1377,15 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			}
 		}
 		
-		echo "<div onmouseover=\"changeclass(this, 'onglet_on');\" onmouseout=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
+		$res .= "<div onmouseover=\"changeclass(this, 'onglet_on');\" onmouseout=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
 		
 		
-		echo "</div>";
+		$res .= "</div>";
 	} else {
-		echo "<div style='position: relative;'>";
+		$res .= "<div style='position: relative;'>";
 		if ($spip_display != 1) {
 			if (strlen($icone) > 0) {
-				echo "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
+				$res .= "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'>" .
 				  http_img_pack("$icone", "", "") . "</div>";
 				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
 			} else {
@@ -1429,27 +1393,13 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			}
 		}
 		
-		echo "<div class='onglet_off' style='position: relative;$style'>$texte</div>";
+		$res .= "<div class='onglet_off' style='position: relative;$style'>$texte</div>";
 		
 		
-		echo "</div>";
+		$res .= "</div>";
 	}
-	echo "</td>";
-}
-
-// http://doc.spip.org/@barre_onglets
-function barre_onglets($rubrique, $ongletCourant){
-	$onglets= definir_barre_onglets($rubrique);
-	if(count($onglets)==0) return;
-
-	debut_onglet();
-
-	foreach($onglets as $exec => $onglet) {
-		$url= $onglet->url ? $onglet->url : generer_url_ecrire($exec);
-		onglet(_T($onglet->libelle), $url,
- 			$exec, $ongletCourant, $onglet->icone);
-	}
-	fin_onglet();
+	$res .= "</td>";
+	return $res;
 }
 
 
@@ -1554,12 +1504,6 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 	}
 
 	if ($af) echo $retour; else return $retour;
-}
-
-
-// http://doc.spip.org/@bandeau_barre_verticale
-function bandeau_barre_verticale(){
-	echo "<td class='separateur'></td>\n";
 }
 
 

@@ -261,13 +261,12 @@ function definir_barre_onglets($rubrique) {
 			generer_url_ecrire("admin_effacer",""));
 	break;
 
-	//??????
 	case 'auteur':
 		$onglets['auteur']=
 		  new Bouton('auteur-24.gif', 'onglet_auteur',
 			generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur"));
 		$onglets['infos']=
-		  new Bouton('fiche-perso-24.gif', 'onglet_informations_personnelles',
+		  new Bouton('fiche-perso-24.gif', 'icone_informations_personnelles',
 			generer_url_ecrire("auteurs_infos","id_auteur=$id_auteur"));
 	break;
 
@@ -304,6 +303,20 @@ function definir_barre_onglets($rubrique) {
 	$onglets = pipeline('ajouter_onglets', array('data'=>$onglets,'args'=>$rubrique));
 
 	return $onglets;
+}
+
+// http://doc.spip.org/@barre_onglets
+function barre_onglets($rubrique, $ongletCourant){
+	$onglets= definir_barre_onglets($rubrique);
+	if(count($onglets)==0) return;
+
+	echo debut_onglet();
+
+	foreach($onglets as $exec => $onglet) {
+		$url= $onglet->url ? $onglet->url : generer_url_ecrire($exec);
+		echo onglet(_T($onglet->libelle), $url,	$exec, $ongletCourant, $onglet->icone);
+	}
+	echo fin_onglet();
 }
 
 // http://doc.spip.org/@definir_barre_gadgets
@@ -418,6 +431,7 @@ function bandeau_principal2($rubrique, $sous_rubrique, $largeur) {
 		if($sousmenu) {
 			$offset = (int)round($decal-$coeff_decalage*max(0,($decal+count($sousmenu)*$largitem_moy-$largeur_maxi_menu)));
 			if ($offset<0){	$offset = 0; }
+
 			$res .= "<div class='$class bandeau' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$offset."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 			$width=0;
 			foreach($sousmenu as $souspage => $sousdetail) {

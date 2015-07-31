@@ -237,12 +237,12 @@ function exec_controle_forum_dist()
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_forum_suivi'), "forum", "forum-controle");
 
-		echo "<br><br><br>";
-		gros_titre(_T('titre_forum_suivi'));
+		echo "<br /><br /><br />";
+		echo gros_titre(_T('titre_forum_suivi'),'',false);
 
-		debut_onglet();
-		onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", '', "forum-public-24.gif");
-		onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", '', "forum-interne-24.gif");
+		echo debut_onglet();
+		echo onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", '', "forum-public-24.gif");
+		echo onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", '', "forum-interne-24.gif");
 
 		$n = spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1"));
 		if ($n) onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", '');
@@ -250,9 +250,9 @@ function exec_controle_forum_dist()
 		list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
 		$f = spip_fetch_array(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
 		if ($f)
-		  onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", '');
+			echo onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", '');
 
-		fin_onglet();
+		echo fin_onglet();
 
 		if ($droit) {
 		  echo "<B>"._T('avis_non_acces_page')."</B>";

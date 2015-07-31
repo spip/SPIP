@@ -150,10 +150,13 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	if ($spip_ecran == "large") $largeur_nom=300; else $largeur_nom= 110;
 
 	$res .= "<div style='width: ".$largeur_nom."px; height: 14px; overflow: hidden;'>"
-	. "<a href='" . generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") 
-	. "' class='icone26'>"
+	. "<a href='"
+	. generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur&initial=-1") 
+	. "' class='icone26' title=\""
+	. entites_html(_T('icone_informations_personnelles'))
+	. '">'
 	. typo($GLOBALS['auteur_session']['nom'])
-	.  "</a></div>";
+	. "</a></div>";
 	
 	$res .= "</td>"
 	. "<td> &nbsp; </td>"
@@ -225,6 +228,20 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	return $res;
 }
 
+// Choix dynamique de la couleur
+
+// http://doc.spip.org/@choix_couleur
+function choix_couleur() {
+	global $couleurs_spip;
+	$res = '';
+	if ($couleurs_spip) {
+		foreach ($couleurs_spip as $key => $val) {
+			$res .= "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
+				http_img_pack("rien.gif", " ", "width='8' height='8' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onmouseover=\"changestyle('bandeauinterface');\""). "</a>";
+		}
+	}
+	return $res;
+}
 
 // http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie() {
