@@ -56,8 +56,8 @@ function champs_traitements ($p) {
 	if (!$ps) return $p->code;
 
 	if ($p->documents)
-	  {$ps = str_replace('traite_raccourcis(', 
-			     'traite_raccourcis_doublon($doublons,',
+	  {$ps = str_replace('traiter_raccourcis(', 
+			     'traiter_raccourcis_doublon($doublons,',
 			     str_replace('typo(', 
 					 'typo_doublon($doublons,',
 					 $ps));
