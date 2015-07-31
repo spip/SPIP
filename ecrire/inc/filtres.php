@@ -1895,7 +1895,7 @@ function vide($texte){
 // http://doc.spip.org/@env_to_params
 function env_to_params ($texte, $ignore_params=array()) {
 	$ignore_params = array_merge (
-		array('id_document', 'date', 'date_redac', 'align', 'fond', '', 'recurs', 'emb', 'dir_racine'),
+		array('id', 'lang', 'id_document', 'date', 'date_redac', 'align', 'fond', '', 'recurs', 'emb', 'dir_racine'),
 	$ignore_params);
 	$tableau = unserialize($texte);
 	$texte = "";
@@ -1908,7 +1908,7 @@ function env_to_params ($texte, $ignore_params=array()) {
 // http://doc.spip.org/@env_to_attributs
 function env_to_attributs ($texte, $ignore_params=array()) {
 	$ignore_params = array_merge (
-		array('id_document', 'date', 'date_redac', 'align', 'fond', '', 'recurs', 'emb', 'dir_racine'),
+		array('id', 'lang', 'id_document', 'date', 'date_redac', 'align', 'fond', '', 'recurs', 'emb', 'dir_racine'),
 	$ignore_params);
 	$tableau = unserialize($texte);
 	$texte = "";
