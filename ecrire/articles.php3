@@ -76,45 +76,30 @@ if ($modif_document == 'oui' AND $flag_editable) {
 //
 
 $suivi_edito = lire_meta("suivi_edito");
+$reindexer = false;
 
+$ok_nouveau_statut = false;
 if ($statut_nouv) {
-	$ok = false;
-	if (acces_rubrique($rubrique_article)) $ok = true;
+	if (acces_rubrique($rubrique_article)) $ok_nouveau_statut = true;
 	else if ($flag_auteur) {
 		if ($statut_nouv == 'prop' AND $statut_article == 'prepa')
-			$ok = true;
+			$ok_nouveau_statut = true;
 		else if ($statut_nouv == 'prepa' AND $statut_article == 'poubelle')
-			$ok = true;
+			$ok_nouveau_statut = true;
 	}
-	if ($ok) {
+	if ($ok_nouveau_statut) {
 		$query = "UPDATE spip_articles SET statut='$statut_nouv' WHERE id_article=$id_article";
 		$result = spip_query($query);
 
-		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_article) {
-			$query = "UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article";
-			$result = spip_query($query);
-			if (lire_meta('activer_moteur') == 'oui') {
-				include_ecrire ("inc_index.php3");
-				indexer_article($id_article);
-			}
-		}
-		calculer_rubriques();
+		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_article)
+			spip_query("UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article");
 
-		if ($statut_nouv == 'publie' AND $statut_article != $statut_nouv) {
-			include_ecrire("inc_mail.php3");
-			envoyer_mail_publication($id_article);
-		}
-
-		if ($statut_nouv == "prop" AND $statut_article != $statut_nouv AND $statut_article != 'publie') {
-			include_ecrire("inc_mail.php3");
-			envoyer_mail_proposition($id_article);
-		}
+		$statut_ancien = $statut_article;	// message pour les traitements de fond (indexation ; envoi mail)
 		$statut_article = $statut_nouv;
 		$flag_editable = (acces_rubrique($rubrique_article)
 			OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop')));
 	}
 }
-
 
 if ($jour && $flag_editable) {
 	if ($annee == "0000") $mois = "00";
@@ -204,12 +189,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
-	if ($statut_article == 'publie') {
-		if (lire_meta('activer_moteur') == 'oui') {
-			include_ecrire ("inc_index.php3");
-			indexer_article($id_article);
-		}
-	}
+	if ($statut_article == 'publie') $reindexer = true;
 
 	// afficher le nouveau titre dans la barre de fenetre
 	$titre_article = stripslashes($titre);
@@ -1363,8 +1343,29 @@ if ($total > $total_afficher) {
 }
 
 
-
 fin_page();
+
+
+// choses lentes reportees en fin de page
+@flush();
+
+if ($ok_nouveau_statut) {
+	calculer_rubriques();
+	if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
+		include_ecrire("inc_mail.php3");
+		envoyer_mail_publication($id_article);
+	}
+	if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
+		include_ecrire("inc_mail.php3");
+		envoyer_mail_proposition($id_article);
+	}
+	if ($statut_nouv == 'publie' AND $statut_nouv != $statut_ancien) $reindexer = true;
+}
+
+if ($reindexer AND (lire_meta('activer_moteur') == 'oui')) {
+	include_ecrire ("inc_index.php3");
+	indexer_article($id_article);
+}
 
 ?>
 
