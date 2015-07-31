@@ -606,11 +606,13 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 	list($arg, $op, $val, $col, $where_complement)= calculer_critere_infixe($idb, $boucles, $crit);
 	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
-	$where = !$crit->cond ? $in :
-	  array("'?'",
-		calculer_argument_precedent($idb, $col, $boucles),
-		$in,
-		"''");
+	$where = $in;
+	if ($crit->cond) {
+		$pred = calculer_argument_precedent($idb, $col, $boucles);
+		$where = array("'?'",$pred,	$where,"''");
+		if ($where_complement) // condition annexe du type "AND (objet='article')"
+			$where_complement = array("'?'",$pred,	$where_complement,"''");
+	}
 	if ($crit->exclus)
 		if (!preg_match(",^L[0-9]+[.],",$arg))
 			$where = array("'NOT'", $where);
@@ -692,6 +694,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 				 critere_IN_cas ($idb, $boucles, 'COND', $arg, $op, array($pred), $col), 
 				 $where);
 		$where = array("'?'", "!$pred","''", $where);
+		if ($where_complement) // condition annexe du type "AND (objet='article')"
+			$where_complement = array("'?'", "!$pred","''", $where_complement);
 	}
 
 	$boucles[$idb]->where[]= $where;
