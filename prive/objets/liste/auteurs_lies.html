@@ -16,7 +16,7 @@ a mis a jour la valeur avec la page reelle]
 #ANCRE_PAGINATION
 <div class="liste-objets liste-objets-lies auteurs">
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}}) #AIDER{artauteur}</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_auteur,info_nb_auteurs}}) #AIDER{artauteurs}</strong></caption>]
 	<thead>
 		#SET{p,''}
 		<BOUCLE_lettre(AUTEURS){tout}{id_auteur IN #GET{selection}}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
@@ -61,6 +61,6 @@ a mis a jour la valeur avec la page reelle]
 </div>
 </B_liste_aut>
 <div class="liste-objets liste-objets-lies auteurs caption-wrap">
-<strong class="caption">[(#ENV*{titre,<:info_aucun_auteur:>}) ]#AIDER{artauteur}</strong>
+<strong class="caption">[(#ENV*{titre,<:info_aucun_auteur:>}) ]#AIDER{artauteurs}</strong>
 </div>
 <//B_liste_aut>
