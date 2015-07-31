@@ -83,7 +83,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 		$ext = corriger_extension(strtolower($match[1]));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
-		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'");
+		$q = spip_query($p = "SELECT * FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'");
 		if (!$row = sql_fetch($q)) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
@@ -363,10 +363,11 @@ function traite_svg($file)
 //
 // Corrige l'extension du fichier dans quelques cas particuliers
 // (a passer dans ecrire/base/typedoc)
-//
-
+// A noter : une extension 'pdf ' passe dans la requete de controle
+// mysql> SELECT * FROM spip_types_documents WHERE extension="pdf ";
 // http://doc.spip.org/@corriger_extension
 function corriger_extension($ext) {
+	$ext = preg_replace(',[^a-z0-9],', '', $ext);
 	switch ($ext) {
 	case 'htm':
 		return 'html';
