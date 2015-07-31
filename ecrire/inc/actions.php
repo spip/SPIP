@@ -88,7 +88,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			false);
 
 		if ($args AND !$args_ajax) $args_ajax = "&$args";
-		if ($GLOBALS['var_profile'])
+		if (isset($GLOBALS['var_profile']))
 			$args_ajax .= '&var_profile=1';
 
 		$ajax = redirige_action_auteur($action,

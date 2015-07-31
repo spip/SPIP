@@ -638,7 +638,8 @@ function recup_date($numdate){
 	elseif (preg_match('#([0-9]{4})-([0-9]{2})#', $numdate, $regs)){
 		$annee = $regs[1];
 		$mois = $regs[2];
-	}
+		$jour ='';
+	} else $annee = $mois =  $jour =''; 
 	if ($annee > 4000) $annee -= 9000;
 	if (substr($jour, 0, 1) == '0') $jour = substr($jour, 1);
 

@@ -164,9 +164,9 @@ function flag_svg() {
 		spip_setcookie('spip_svg', 'non', time() + 365 * 24 * 3600);
 		return false;
 	}
-	if ($_COOKIE['spip_svg'] == 'oui')
+	if (@$_COOKIE['spip_svg'] == 'oui')
 		return true;
-	if ($_COOKIE['spip_svg'] == 'non')
+	if (@$_COOKIE['spip_svg'] == 'non')
 		return false;
 
 	// Sinon, proceder a l'autodetection

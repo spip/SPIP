@@ -47,10 +47,11 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		$url_site = preg_replace(",^((https?|ftp)://)?(www\.)?,", "", strtolower($url_site));
 	}
 
-	$url   = @parse_url( $kw_referer );
-	$query = $url['query'];
-	$host  = strtolower($url['host']);
-	$path  = $url['path'];
+	if ($url = @parse_url( $kw_referer )) {
+		$query = $url['query'];
+		$host  = strtolower($url['host']);
+		$path  = $url['path'];
+	} else $query = $host = $path ='';
 
 	// Cette fonction affecte directement les variables selon la query-string !
 	parse_str($query);
@@ -191,18 +192,20 @@ function aff_referers ($result, $limit, $plus) {
 			if ($dom == "(email)") {
 				$aff .= $ret . "<b>".$dom."</b>";
 			}
-			else if ((count($lesreferers[$numero]) > 1) || ((substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/') && (count($lesreferers[$numero]) > 0))) {
-				$rac = $lesliensracine[$numero];
+			else {
+			  $n = isset($lesreferers[$numero]) ? count($lesreferers[$numero]) : 0;
+			  if (($n > 1) || ($n > 0 && substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/')) {
+				$rac = isset($lesliensracine[$numero]);
 				$aff .= $ret
 				. "<a href='http://".quote_amp($lesurls[$numero])."' style='font-weight: bold;'>".$dom."</a>"
-				. (!$rac ? '':" <span class='spip_x-small'>($rac)</span>")
+				. (!$rac ? '': (" <span class='spip_x-small'>(" . $lesliensracine[$numero] .")</span>"))
 				. "\n<ul style='font-size:x-small;'><li>"
 				. join ("</li><li>",$lesreferers[$numero])
 				. "</li></ul>\n"
 				. "</li></ul>\n<ul style='font-size:small;'>\n";
 			} else {
 				$aff .= $ret;
-				$lien = $lesreferers[$numero][0];
+				$lien = $n ? $lesreferers[$numero][0] : '';
 				if (preg_match(",^(<a [^>]+>)([^ ]*)( \([0-9]+\))?,i", $lien, $regs)) {
 					$lien = quote_amp($regs[1]).$dom.$regs[2];
 					if (!strpos($lien, '</a>')) $lien .= '</a>';
@@ -210,6 +213,7 @@ function aff_referers ($result, $limit, $plus) {
 					$lien = "<a href='http://".$dom."'>".$dom."</a>";
 				$aff .= "<b>".quote_amp($lien)."</b>";
 				$aff .= "</li>\n";
+			  }
 			}
 		}
 
