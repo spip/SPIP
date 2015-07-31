@@ -329,6 +329,12 @@ function inc_atom_to_array_dist($u) {
 	$g = charger_fonction('rss_to_array', 'inc');
 	return $g($u);
 }
+// glob : lister des fichiers selon un masque, pour la syntaxe cf php.net/glob
+function inc_glob_to_array_dist($u) {
+	return glob($u,
+		GLOB_MARK | GLOB_NOSORT | GLOB_BRACE
+	);
+}
 
 function XmlToArray($xml_file){
   $object = new SimpleXmlIterator($xml_file, null, true);
