@@ -197,43 +197,49 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 	if ($not)
 		erreur_squelette(_T('info_erreur_squelette'), $param);
 
-	preg_match('/par[[:space:]]*(.*)/ims', $param, $regs);
-	$tri = trim($regs[1]);
+	$param = substr($param,3);
+
+	while ($param) {
+
+		preg_match('/[[:space:]]*([^, ]*)[[:space:]]*,?(.*)/ims',
+			   $param, $regs);
+		$param = $regs[2];
+		$tri = trim($regs[1]);
 
 	// par hasard
-	if ($tri == 'hasard') {
+		if ($tri == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()
 		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
-		if (spip_query("SELECT RAND()"))
+		  if (spip_query("SELECT RAND()"))
 			$boucle->select[] = "RAND() AS alea";
-		else
+		  else
 			$boucle->select[] = "MOD(".$boucle->id_table.'.'.$boucle->primary
 			." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP() AS alea";
 
-		$boucle->order = "'alea'";
-	}
+		$order = "'alea'";
+		}
 
 	// par titre_mot
-	else if ($tri == 'titre_mot') {
-		$boucle->order= "'mots.titre'";
-	}
+		else if ($tri == 'titre_mot') {
+		  $order= "'mots.titre'";
+		}
 
 	// par type_mot
-	else if ($tri == 'type_mot'){
-		$boucle->order= "'mots.type'";
-	}
+		else if ($tri == 'type_mot'){
+		  $order= "'mots.type'";
+		}
 	// par num champ(, suite)
-	else if (ereg("^num[[:space:]]+([^,]*)(,.*)?",$tri, $match2)) {
-		$boucle->select[] = "0+".$boucle->id_table.".".$match2[1]." AS num";
-		$boucle->order = "'num".texte_script($match2[2])."'";
+		else if (ereg("^num[[:space:]]+([^,]*)(,.*)?",$tri, $match2)) {
+		  $boucle->select[] = "0+".$boucle->id_table.".".$match2[1]." AS num";
+		  $order = "'num".texte_script($match2[2])."'";
 	}
 	// par champ. Verifier qu'ils sont presents.
-	else if (ereg("^[a-z][a-z0-9]*$", $tri)) {
-		if ($tri == 'date')
-			$boucle->order = "'".$boucle->id_table.".".
-			  $GLOBALS['table_date'][$boucle->type_requete]
-			  ."'";
-		else {
+		else if (ereg("^[a-z][a-z0-9]*$", $tri)) {
+		  if ($tri == 'date')
+		    $order = "'".$boucle->id_table.".".
+		      $GLOBALS['table_date'][$boucle->type_requete]
+		      ."'";
+		  else {
 			global $table_des_tables, $tables_des_serveurs_sql;
 			$r = $boucle->type_requete;
 			$s = $boucles[$idb]->sql_serveur;
@@ -242,16 +248,24 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 			if (!$t) $t = $r; // pour les tables non Spip
 			$desc = $tables_des_serveurs_sql[$s][$t];
 			if ($desc['field'][$tri])
-				$boucle->order = "'".$boucle->id_table.".".$tri."'";
+				$order = "'".$boucle->id_table.".".$tri."'";
 			else {
 			  // tri sur les champs synthetises (cf points)
-				$boucle->order = "'".$tri."'";
+				$order = "'".$tri."'";
 			}
+		  }
 		}
-	}
-	// tris specifies par l'URL
-	else {
-		$boucle->order = simplifie_param_dynamique($tri, $boucles, $idb);
+	// tris specifies par l'URL ?
+		else {
+		  $order = simplifie_param_dynamique($tri, $boucles, $idb);
+		  if ($order == $tri) $order = "'" . $order . "'";
+		}
+	// au final, gestion des tris multiples
+		if ($order) {
+		  if ($boucle->order) $boucle->order .= '.",".';
+		  $boucle->order .= $order;
+
+		}
 	}
 }
 
