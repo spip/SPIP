@@ -1,125 +1,79 @@
 /*  ------------------------------------------
 /*  Habillage des formulaires
 /*  ------------------------------------------ */
-input, textarea, select { font-size: 100%; font-style: inherit; }
+input, textarea, select { font-size: 100%; font-family: inherit; }
 
-/* Style des formulaires SPIP
+
+/* Structure generale des formulaires
 ----------------------------------------------- */
-.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; background: #EEC; border: none; text-align: left; font-size: 1em; color: #330; }
+.formulaire_spip { clear: both; margin-bottom: 2em; padding: 1em; background-color: #EEC; border: 0; text-align: left; font-size: 1em; color: #330; }
 
-/* ul li */
+/* Fieldset */
+.formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
+.formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.2em; font-weight: bold; color: #999933; } /* Bien preciser la couleur des legend pour IE/Win */
+.formulaire_spip fieldset fieldset { margin-top: 1em; }
+.formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
+
+/* Lignes */
 .formulaire_spip ul { margin: 0; padding: 0; list-style: none; }
-.formulaire_spip ul li { clear: both; margin: 0; padding: 10px 10px 10px 10px; padding-left: 130px; /*overflow: auto; */ }
-.formulaire_spip ul li fieldset li { float: none; display: block; margin-left: 0; padding: 5px 10px; border: 0; }
+.formulaire_spip ul li { clear: both; margin: 0; padding: .5em 0; }
+/*.formulaire_spip p { margin: 0 0 1em 0; }*/
 
-/* elements du formulaire */
-.formulaire_spip input.text,
-.formulaire_spip input.password,
-.formulaire_spip textarea,
-.formulaire_spip select { width: 96%; margin: 0; }
-.formulaire_spip input.submit, 
-.formulaire_spip input.reset, 
-.formulaire_spip input.button { width: auto; }
+/* Explications */
+.formulaire_spip .explication { margin: .5em 0; color: #444; }
 
-/* intitules (label) */
-.formulaire_spip label { width: 120px; float: left; margin-left: -125px; text-align: left; vertical-align: top; color: #555; font-weight: bold; /* for IE */ position: relative; display: inline; }
+/* Labels */
+.formulaire_spip label { text-align: left; color: #444; font-weight: bold; /* for IE */ position: relative; display: block; }
 .formulaire_spip li p { margin-top: 0; margin-bottom: 0; }
 
-/* fieldset */
-.formulaire_spip fieldset { margin: 0; padding: 0 0 5px 0; border: 0; }
-.formulaire_spip li fieldset { border: 1px #aaa dashed; background: transparent; margin-left:-125px; /* redecalage vers la gauche... IE <= 7 ne le prend pas en compte */ }
-.formulaire_spip fieldset legend { padding: 0.5em 5px; font-weight: bold; font-style: italic; font-size: 1.2em; color: #330; /* preciser la couleur des legend pour IE/Win */ }
-.formulaire_spip fieldset .legend { display: block; font-size: 1.2em; color: #330; /* preciser la couleur des legend pour IE/Win */ margin: 0; padding: 2px 5px; }
-.formulaire_spip li fieldset legend { font-style: normal; font-size: 1em; margin-left: 0; line-height:0.6em; }
-.formulaire_spip li fieldset .legend { display: block; font-size: 1.1em; margin-top: 0; padding: 2px 5px; }
-
-/* champ des radio/checkbox
-*  on annule les decalages de label/champs
-*  lorsqu'ils sont inclus dans une class .champ
-*
-*  La liste par defaut est verticale
-*  pour l'avoir horizontale, il faut specifier :
-*  .formulaire_spip .formulaire_editer .editer_qqc .champ{display:inline; }
-*/
-.formulaire_spip .choix label{ float: none; display: inline; margin-left: 5px; font-weight: normal; }
-.formulaire_spip .choix input.radio,
-.formulaire_spip .choix input.checkbox { width: auto; }
-
-/* icone d'aide */
-.formulaire_spip li em.aide { float: right; margin-right: -10px; }
-
-/* boutons */
-.formulaire_spip .boutons { clear: both; margin: 0; margin: 7px 1em; text-align: right; font-size: 1.2em; }
-.formulaire_spip .boutons input.submit { margin-right: 1em; padding: 0 1em; font-weight: normal; }
-
-/* obligatoire */
-.formulaire_spip li.obligatoire { background-color: #CDDF3F; }
-.formulaire_spip li.obligatoire label { font-weight: bold; color: #000; }
-
-/* Reponse du formulaire */
-.reponse_formulaire { font-weight: bold; }
-.reponse_formulaire, .reponse_formulaire legend { color: #F57900; } /* preciser la couleur des legend pour IE/Win */
-fieldset.reponse_formulaire { border-color: #F57900; font-weight: normal; }
-.spip_surligne { } /*Cf.: spip_style.css*/
-
-/* erreur */
-.formulaire_spip li.erreur input.text,
-.formulaire_spip li.erreur textarea { background-color: #FFCCCC; border-style: solid; border-color: #C30; }
-.formulaire_spip li.erreur .erreur,
-.formulaire_spip em.attention,
-.formulaire_spip .formulaire_erreur { color: #C30; font-weight: bold; display: block; margin-bottom: 0.5em; }
-.formulaire_spip .formulaire_erreur { display: block; margin-left: 0.5em; }
-
-/* message reussite ? */
-.formulaire_spip .formulaire_message { color: #53AD20; font-weight: bold; }
-
-/* commentaires */
-.formulaire_spip .explication { font-size: 0.95em; padding: 0 5px; margin: 0.5em 0 0.5em; }
-.formulaire_spip li .explication { font-size: 0.9em; padding: 0; }
-
-/* remarques importantes */
-.formulaire_spip em.attention { display: block; margin: 0.5em; font-weight: normal; }
-
-/* barre d'outil */
-.formulaire_spip table.spip_barre { width: 96%; /* pour mettre a la meme taille que les champs de formulaire */
-background: #aaa; border: 1px solid #666; background: none; border: 0; margin: 0; padding: 0; }
-.formulaire_spip table.spip_barre a img { background-color: #ccc; padding: 2px; border: 1px solid #666; margin-right: 1px; }
-.formulaire_spip table.spip_barre a:hover img { background: #fff; }
-
-/* barre typo */
-table.spip_barre { background-color: #eee; border-left: 1px solid #eee; border-right: 1px solid #eee; padding: 3px; padding-bottom: 0px; }
-table.spip_barre a img {padding: 3px; border: 1px outset #eee; }
-table.spip_barre a:hover img { background: #FFF; border: 1px solid #CC9; }
-table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #F57900; }
+/* Boutons */
+.formulaire_spip .boutons { clear: both; margin: 0; text-align: right; }
+.formulaire_spip .boutons input { margin-left: 1em; }
+.formulaire_spip .boutons input, input.submit { background-color: #330; border-color: #330; padding: 0 1em; font-weight: normal; color: #FFF; }
 
 
-/* Cas particuliers
+/* Reponses previsu et erreurs
 ----------------------------------------------- */
-/* forum */
-.formulaire_forum li.saisie_mot .choix {float:left;width:30%; }
+
+/* Champs obligatoires */
+.formulaire_spip li.obligatoire {}
+.formulaire_spip li.obligatoire label { /*font-weight: bold; color: #000;*/ }
 
 /* Previsualisation du message */
-fieldset.previsu li { padding: 3px;border:none; }
+fieldset.previsu { margin-bottom: 2em; padding: 1em; border: 2px dashed #F57900; }
 fieldset.previsu legend { padding: 0 5px; color: #F57900; font-weight: bold; }
-fieldset.previsu .boutons input { background: #F57900; border-color: #F57900; color: #FFF; }
+fieldset.previsu li { padding: 3px; border: none; }
+fieldset.previsu .boutons input { background-color: #F57900; border-color: #F57900; color: #FFF; }
+
+/* Reponse du formulaire */
+.reponse_formulaire { font-weight: bold; color: #e86519; font-size: 1.2em; }
+fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
+fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* preciser la couleur des legend pour IE/Win */
+
+/* * Erreurs */
+.formulaire_spip li.erreur .erreur { display: block; color: #C30; font-weight: bold; }
+.formulaire_spip li.erreur input.text, .formulaire_spip li.erreur textarea { background-color: #FFCCCC; border-style: solid; border-color: #C30; }
+.reponse_formulaire_erreur { margin: 0; color: #C30; font-weight: bold; }
+
+/* * OK */
+.reponse_formulaire_ok { margin: 0; color: #53AD20; font-weight: bold; }
+
+
+/* Variantes et cas particuliers
+----------------------------------------------- */
 
 /* Formulaire de recherche */
 #formulaire_recherche { float: right; margin: 0; padding: 0; background: none; }
-#formulaire_recherche label { float: none; display: none; font-size: 1em; vertical-align: middle; }
-#formulaire_recherche input.text { width: 10em; padding-left: 30px; background: #fff url(rechercher.png) no-repeat left center; }
-#formulaire_recherche input.bouton { vertical-align: top; background: none; border: 1px solid #999; height: 1.7em; }
+#formulaire_recherche * { display: inline; vertical-align: middle; }
+#formulaire_recherche label { display: none; }
+#formulaire_recherche input.text { width: 12em; text-align: left; /*padding-left: 25px; background: #fff url(rechercher.png) no-repeat left center;*/ }
+#formulaire_recherche input.submit {}
 
-/* formulaire site */
-.formulaire_site li.saisie_description_site { padding-left: 5px; }
-.formulaire_site li.saisie_description_site label { float: none; display: block; width: auto; margin: 0.5em 0; }
+.spip_surligne {} /*Cf.: spip_style.css*/
 
-/* formulaire inscription */
-.formulaire_inscription li { padding-left: 5px; padding-top: 0; }
-.formulaire_inscription li label { float: none; display: block; width: auto; margin: 0 0 0.5em 0; }
+/* Choix des mots-clefs */
+ul.choix_mots { width: 100%; margin: 0; padding: 0; list-style: none; }
+ul.choix_mots li { clear: none; float: left; display: block; width: 30%; padding: 1%; }
+ul.choix_mots li label { display: inline; font-weight: normal; }
 
-/* Formulaire de login au forum */
-.formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
-
-/* Menu langues */
-.menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
-.formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
+.spacer { display: none; }
