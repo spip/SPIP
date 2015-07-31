@@ -116,14 +116,17 @@ class IterateurDATA implements Iterator {
 	 * @param  $ttl
 	 * @return
 	 */
-	protected function cache_set($cle, $ttl) {
+	protected function cache_set($cle, $ttl, $valeur = null) {
 		if (!$cle) return;
+		if (is_null($valeur)) {
+			$valeur = $this->tableau;
+		}
 		# utiliser memoization si dispo
 		include_spip('inc/memoization');
 		if (!function_exists('cache_set')) return;
 		return cache_set($cle,
 			array(
-				'data' => $this->tableau,
+				'data' => $valeur,
 				'time' => time(),
 				'ttl' => $ttl
 			),
