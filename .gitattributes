@@ -451,6 +451,7 @@ ecrire/inc/install_ldap3.php -text
 ecrire/inc/install_ldap4.php -text
 ecrire/inc/install_ldap5.php -text
 ecrire/inc/install_unpack.php -text
+ecrire/inc/joindre.php -text
 ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
 ecrire/inc/maintenance.php -text

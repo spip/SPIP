@@ -409,13 +409,40 @@ if ($relief) {
 /// Documents associes a la rubrique
 	if ($id_rubrique > 0) {
 
-	echo formulaire_joindre($id_rubrique, "rubrique", 'naviguer', $flag_editable);
+	echo naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable);
 	}
 
 
 ////// Supprimer cette rubrique (si vide)
 
 	bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
+}
+
+function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
+	global $spip_lang_left;
+
+	if ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
+
+	  $f = charger_fonction('joindre', 'inc');
+	  $res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
+	  . $f($script, "id_$type=$id", $id, _T('info_telecharger_ordinateur'), 'document', $type)
+	  . fin_cadre_relief(true);
+
+	// eviter le formulaire upload qui se promene sur la page
+	// a cause des position:relative incompris de MSIE
+
+	  if (!($align = $GLOBALS['browser_name']=="MSIE")) {
+		$res = "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+		$align = " align='right'";
+	  }
+	  $res = "<div$align>$res</div>";
+	} else $res ='';
+
+	$f = charger_fonction('documenter', 'inc');
+
+	return $f($id, $type, 'portfolio', $flag_editable)
+	. $f($id, $type, 'documents', $flag_editable)
+	. $res;
 }
 
 // http://doc.spip.org/@montre_naviguer

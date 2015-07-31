@@ -14,12 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/texte');
-include_spip('inc/rubriques');
 include_spip('inc/actions');
-include_spip('inc/mots');
-include_spip('inc/forum');
-include_spip('inc/documents');
-include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@exec_articles_dist
 function exec_articles_dist()
@@ -135,35 +130,32 @@ debut_cadre_relief();
 		$modif = array();
  }
 
-//
-// Titre, surtitre, sous-titre
-//
+ $dater = charger_fonction('dater', 'inc');
+ $auteurs = charger_fonction('editer_auteurs', 'inc');
+
+ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non')
+   $mots = charger_fonction('editer_mot', 'inc');
+ else $mots = '';
+
+ if (($GLOBALS['meta']['multi_articles'] == 'oui')
+	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) 
+	$traduction = charger_fonction('referencer_traduction', 'inc');
+ else $traduction ='';
 
  echo titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique, $modif),
-   "<div class='serif' align='$spip_lang_left'>";
 
- $f = charger_fonction('dater', 'inc');
- echo $f($id_article, $flag_editable, $statut_article, $date, $date_redac);
+   "<div>&nbsp;</div>",
+   "<div class='serif' align='$spip_lang_left'>",
 
- $f = charger_fonction('editer_auteurs', 'inc');
- echo $f($id_article, $flag_editable, $cherche_auteur, $ids);
+   $dater($id_article, $flag_editable, $statut_article, $date, $date_redac),
 
+   $auteurs($id_article, $flag_editable, $cherche_auteur, $ids),
 
-if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  $f = charger_fonction('editer_mot', 'inc');
-  echo $f('article', $id_article, $cherche_mot, $select_groupe, $flag_editable);
-}
+   (!$mots ? '' : $mots('article', $id_article, $cherche_mot, $select_groupe, $flag_editable)),
 
-// Les langues
+   (!$traduction ? '' : $traduction($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err)),
 
-  if (($GLOBALS['meta']['multi_articles'] == 'oui')
-	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
-
-	$f = charger_fonction('referencer_traduction', 'inc');
-	echo $f($id_article, $flag_editable, $id_rubrique, $id_trad, $trad_err);
-  }
-
- echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
+   pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
  if ($statut_rubrique)
    echo debut_cadre_relief('', true),
@@ -181,8 +173,31 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 	  "</div>";
 }
 
- if ($spip_display != 4)
-	echo formulaire_joindre($id_article, "article", 'articles', $flag_editable);
+ if ($spip_display != 4) {
+
+   if  ($GLOBALS['meta']["documents_$type"]!='non' AND $flag_editable) {
+
+	  $f = charger_fonction('joindre', 'inc');
+	  $res = debut_cadre_relief("image-24.gif", true, "", _T('titre_joindre_document'))
+	  . $f('articles', "id_article=$id_article", $id_article, _T('info_telecharger_ordinateur'), 'document', 'article')
+	  . fin_cadre_relief(true);
+
+	// eviter le formulaire upload qui se promene sur la page
+	// a cause des position:relative incompris de MSIE
+
+	  if (!($align = $GLOBALS['browser_name']=="MSIE")) {
+		$res = "\n<table width='50%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+		$align = " align='right'";
+	  }
+	  $res = "<div$align>$res</div>";
+   } else $res ='';
+
+   $f = charger_fonction('documenter', 'inc');
+
+   echo $f($id_article, 'article', 'portfolio', $flag_editable)
+     . $f($id_article, 'article', 'documents', $flag_editable)
+     . $res;
+ }
 
  if ($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique)
 	echo demande_publication($id_article);
@@ -416,7 +431,6 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 
 
 	$res .= "</tr></table>\n";
-	$res .= "<div>&nbsp;</div>";
 	return $res;
 }
 

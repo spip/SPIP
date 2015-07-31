@@ -143,9 +143,11 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte));
 	}
 
+	$joindre = charger_fonction('joindre', 'inc');
+
 	return "<hr style='margin-left: -5px; margin-right: -5px; height: 1px; border: 0px; color: #eeeeee; background-color: white;' />"
 	. (!$id_vignette
-	? formulaire_upload($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document)
+	   ? $joindre($script, "id_$type=$id",$id, _T('info_vignette_personnalisee'), 'vignette', $type, $ancre, $id_document)
 	   : icone_horizontale($texte, $action, "vignette-24.png", "supprimer.gif", false));
 }
 

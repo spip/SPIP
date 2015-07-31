@@ -468,16 +468,6 @@ function traite_svg($file)
 }
 
 
-// http://doc.spip.org/@afficher_compactes
-function afficher_compactes($action) {
-	minipres(_T('upload_fichier_zip'),
-	  "<p>" .
-		_T('upload_fichier_zip_texte') .
-	  "</p><p>" .
-		_T('upload_fichier_zip_texte2') .
-	  "</p>" .
-	  $action);
-}
 
 //
 // Traiter la liste des fichiers (action joindre3)
@@ -506,7 +496,6 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 			include_spip('inc/pclzip');
 			$archive = new PclZip($zip);
 			if ($archive) {
-			  include_spip('inc/documents');
 			  $valables = verifier_compactes($archive);
 			  if ($valables) {
 			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip);
@@ -546,12 +535,41 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
 		_T('bouton_valider').
 		  "'></div>";
-	afficher_compactes(construire_upload($texte, array(
+	$action = (construire_upload($texte, array(
 					 'redirect' => $redirect,
 					 'hash' => $hash,
 					 'chemin' => $zip,
 					 'arg' => $arg)));
+	minipres(_T('upload_fichier_zip'),
+	  "<p>" .
+		_T('upload_fichier_zip_texte') .
+	  "</p><p>" .
+		_T('upload_fichier_zip_texte2') .
+	  "</p>" .
+	  $action);
 	// a tout de suite en joindre4, joindre5, ou joindre6
+}
+
+
+// Reconstruit un generer_action_auteur 
+
+// http://doc.spip.org/@construire_upload
+function construire_upload($corps, $args, $enctype='')
+{
+	$res = "";
+	foreach($args as $k => $v)
+	  if ($v)
+	    $res .= "\n<input type='hidden' name='$k' value='$v' />";
+
+# ici enlever $action pour uploader directemet dans l'espace prive (UPLOAD_DIRECT)
+	return "\n<form method='post' action='" . generer_url_action('joindre') .
+	  "'" .
+	  (!$enctype ? '' : " enctype='$enctype'") .
+	  " 
+	  >\n" .
+	  "<div>" .
+  	  "\n<input type='hidden' name='action' value='joindre' />" .
+	  $res . $corps . "</div></form>";
 }
 
 //
