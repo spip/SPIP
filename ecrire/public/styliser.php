@@ -82,13 +82,13 @@ function styliser_par_objets($flux){
 	if (test_espace_prive()
 		AND !$squelette = $flux['data']
 	  AND strncmp($flux['args']['fond'],'prive/objets/',13)==0
-	  AND $echaffauder = charger_fonction('echaffauder','prive',true)) {
+	  AND $echafauder = charger_fonction('echafauder','prive',true)) {
 		if (strncmp($flux['args']['fond'],'prive/objets/liste/',19)==0){
 			$table = table_objet(substr($flux['args']['fond'],19));
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql]))
-				$flux['data'] = $echaffauder($table,$table,$table_sql,"prive/objets/liste/objets",$flux['args']['ext']);
+				$flux['data'] = $echafauder($table,$table,$table_sql,"prive/objets/liste/objets",$flux['args']['ext']);
 		}
 		if (strncmp($flux['args']['fond'],'prive/objets/contenu/',21)==0){
 			$type = substr($flux['args']['fond'],21);
@@ -96,7 +96,7 @@ function styliser_par_objets($flux){
 			$table_sql = table_objet_sql($table);
 			$objets = lister_tables_objets_sql();
 			if (isset($objets[$table_sql]))
-				$flux['data'] = $echaffauder($type,$table,$table_sql,"prive/objets/contenu/objet",$flux['args']['ext']);
+				$flux['data'] = $echafauder($type,$table,$table_sql,"prive/objets/contenu/objet",$flux['args']['ext']);
 		}
 	}
 	return $flux;
