@@ -22,7 +22,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@assembler
 function assembler($fond, $connect='') {
 
-	global $flag_preserver,$lastmodified, $use_cache, $contexte;
+	// flag_preserver est modifie ici, et utilise en globale
+	// contexte est utilise en globale dans le formulaire d'admin
+	global $flag_preserver, $contexte;
 
 	$contexte = calculer_contexte();
 	$page = array('contexte_implicite'=>calculer_contexte_implicite());
@@ -31,7 +33,7 @@ function assembler($fond, $connect='') {
 	$cacher = charger_fonction('cacher', 'public');
 	// Les quatre derniers parametres sont modifies par la fonction:
 	// emplacement, validite, et, s'il est valide, contenu & age
-	$res = $cacher($GLOBALS['contexte'], $use_cache, $chemin_cache, $page, $lastmodified);
+	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastmodified);
 	// Si un resultat est retourne, c'est un message d'impossibilite
 	if ($res) {return array('texte' => $res);}
 
@@ -67,57 +69,23 @@ function assembler($fond, $connect='') {
 	} else {
 		// si la page est prise dans le cache
 		if (!$use_cache)  {
-		// Informer les boutons d'admin du contexte
-		// (fourni par $renommer ci-dessous lors de la mise en cache)
+			// Informer les boutons d'admin du contexte
+			// (fourni par urls_decoder_url ci-dessous lors de la mise en cache)
 			$contexte = $page['contexte'];
 
 			// vider les globales url propres qui ne doivent plus etre utilisees en cas
 			// d'inversion url => objet
-			unset($_SERVER['REDIRECT_url_propre']);
-			unset($_ENV['url_propre']);
+			// plus necessaire si on utilise bien la fonction urls_decoder_url
+			#unset($_SERVER['REDIRECT_url_propre']);
+			#unset($_ENV['url_propre']);
 		}
-		// ATTENTION, gestion des URLs transformee par le htaccess
-		// $renommer = 'urls_propres_dist';
-		// renvoie array($contexte, $type, $url_redirect, $nfond)
-		// $nfond n'est retourne que si l'url est definie apres le ?
-		// et risque d'etre effacee par un form en get
-		// elle est utilisee par form_hidden exclusivement
-		// Compat ascendante si le retour est null:
-		// 1. $contexte est global car cette fonction le modifie.
-		// 2. $fond est passe par reference, pour la meme raison
-		// et calculer la page
 		else {
-			$renommer = generer_url_entite();
-			if ($renommer) {
-				$url = nettoyer_uri();
-				$a = $renommer($url, $fond, $contexte);
-				if (is_array($a)) {
-					list($ncontexte, $type, $url_redirect, $nfond) = $a;
-					if (strlen($url_redirect)
-					AND $url !== $url_redirect) {
-						spip_log("Redirige $url vers $url_redirect");
-						include_spip('inc/headers');
-						http_status(301);
-						redirige_par_entete($url_redirect);
-					}
-					if (isset($nfond))
-						$fond = $nfond;
-					else if ($fond == ''
-					OR $fond == 'type_urls' /* compat avec htaccess 2.0.0 */
-					)
-						$fond = $type;
-					if (isset($ncontexte))
-						$contexte = $ncontexte;
-				}
-			}
-			// compatibilite <= 1.9.2
-			elseif (function_exists('recuperer_parametres_url'))
-				recuperer_parametres_url($fond, nettoyer_uri());
-
-			// vider les globales url propres qui ne doivent plus etre utilisees en cas
-			// d'inversion url => objet
-			unset($_SERVER['REDIRECT_url_propre']);
-			unset($_ENV['url_propre']);
+			// Compat ascendante :
+			// 1. $contexte est global
+			// (a evacuer car urls_decoder_url gere ce probleme ?)
+			// et calculer la page
+			include_spip('inc/urls');
+			list($fond,$contexte,$url_redirect) = urls_decoder_url(nettoyer_uri(),$fond,$contexte,true);
 
 			// squelette par defaut
 			if (!strlen($fond))
@@ -125,7 +93,7 @@ function assembler($fond, $connect='') {
 
 			// produire la page : peut mettre a jour $lastmodified
 			$produire_page = charger_fonction('produire_page','public');
-			$page = $produire_page($fond, $GLOBALS['contexte'], $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
+			$page = $produire_page($fond, $contexte, $use_cache, $chemin_cache, NULL, $page, $lastmodified, $connect);
 		}
 
 		if ($page AND $chemin_cache) $page['cache'] = $chemin_cache;
