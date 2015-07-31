@@ -94,8 +94,8 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles)
 		// entite SPIP alias d'un champ SQL
 		if (is_array($excep)) {
 			// et meme d'un champ dans une jointure
-			list($e, $x) = $excep;
-			$excep = $x;
+			list($e, $x) = $excep;#PHP4 affecte de gauche a droite
+			$excep = $x;		#PHP5 de droite a gauche !
 			// qu'il faut provoquer si ce n'est fait
 			if (!$t = array_search($e, $boucles[$idb]->from)) {
 				$t = 'J' . count($boucles[$idb]->from);
@@ -420,12 +420,16 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 		index_pile($prec, $nom_champ, $boucles));
 }
 
-// a documenter svp !!
 //
-// en gros : ca ne sert que pour la balise #POINTS ; l'idee est que,
-// si on trouve le motif "recherche" dans les parametres de la boucle,
-// alors on prend $Pile[$SP]['points'] (qui vient du "SELECT XXXX AS points"
-// de la requete qu'on est en train de composer)
+// Rechercher dans la pile des boucles actives celle ayant un critere
+// comportant un certain $motif, et construire alors une reference
+// a l'environnement de cette boucle, qu'on indexe avec $champ.
+// Sert a referencer une cellule non declaree dans la table et pourtant la.
+// Par exemple pour la balise #POINTS on produit $Pile[$SP-n]['points']
+// si la n-ieme boucle a un critere "recherche", car on sait qu'il a produit
+// "SELECT XXXX AS points"
+//
+
 function rindex_pile($p, $champ, $motif) 
 {
 	$n = 0;
