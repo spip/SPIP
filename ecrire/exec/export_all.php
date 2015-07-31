@@ -81,7 +81,7 @@ function exec_export_all_args($rub, $gz)
 	if ($nom === '') $nom = 'dump';
 	$archive = $nom . '.xml' . $gz;
 	list($tables,) = export_all_list_tables();
-	$res = controle_tables_en_base('export', $tables);
+	$res = controle_tables_en_base('export', $tables, $rub);
 	$clic =  _T('bouton_valider');
 	$res = "\n<ol style='text-align:left'><li>\n" .
 			join("</li>\n<li>", $res) .
@@ -162,7 +162,7 @@ function export_all_list_tables()
 
 // Fabrique la liste a cocher des tables presentes
 
-function controle_tables_en_base($name, $check)
+function controle_tables_en_base($name, $check, $rub)
 {
 	$p = '/^' . $GLOBALS['table_prefix'] . '/';
 	$res = $check;
@@ -171,6 +171,7 @@ function controle_tables_en_base($name, $check)
 		if (!in_array($t, $check)) $res[]= $t;
 	}
 
+	$rub = $rub ? " <= "  : '';
 	foreach ($res as $k => $t) {
 
 		$c = "type='checkbox'"
@@ -180,7 +181,7 @@ function controle_tables_en_base($name, $check)
 		$res[$k] = "<input $c value='$t' id='$name_$t' name='$name"
 			. "[]' />\n"
 			. $t
-			. " ("
+			. " ($rub"
 			.  sql_countsel($t)
 	  		. ")";
 	}

@@ -21,6 +21,7 @@ function inc_export_dist($meta)
 	$start = false;
 	list($gz, $archive, $rub, $tables_for_dump, $etape_actuelle, $sous_etape) = 
 		unserialize($GLOBALS['meta'][$meta]);
+
 	// determine upload va aussi initialiser l'index "restreint"
 	$maindir = determine_upload();
 	if (!$GLOBALS['visiteur_session']['restreint'])
@@ -28,19 +29,18 @@ function inc_export_dist($meta)
 	$dir = sous_repertoire($maindir, $meta);
 	$file = $dir . $archive;
 	$metatable = $meta . '_tables';
-	$redirect = generer_url_ecrire("export_all");
 
+	// Reperer une situation anormale (echec reprise sur interruption)
 	if (!$etape_actuelle AND !$sous_etape) {
 		$l = preg_files($file .  ".part_[0-9]+_[0-9]+");
 		if ($l) {
 			spip_log("menage d'une sauvegarde inachevee: " . join(',', $l));
-			foreach($l as $dummy)spip_unlink($dummy);
+			foreach($l as $dummy) spip_unlink($dummy);
 		}
 		$start = true; //  utilise pour faire un premier hit moitie moins long
 		$tables_sauvegardees = array();
 	} else 	$tables_sauvegardees = isset($GLOBALS['meta'][$metatable])?unserialize($GLOBALS['meta'][$metatable]):array();
 
-	  
 	// concatenation des fichiers crees a l'appel precedent
 	ramasse_parties($dir, $archive);
 	$all = count($tables_for_dump);
@@ -60,7 +60,6 @@ function inc_export_dist($meta)
 	// sans ramassage
 	// sinon grosse ecriture au 1er hit, puis gros rammassage au deuxieme avec petite ecriture,... ca oscille
 	if ($start) $timeout = round($timeout/2);
-	$etape = 1;
 
 	// Les sauvegardes partielles prennent le temps d'indiquer les logos
 	// Instancier une fois pour toutes, car on va boucler un max.
@@ -75,28 +74,33 @@ function inc_export_dist($meta)
 	}
 
 	// script de rechargement auto sur timeout
+	$redirect = generer_url_ecrire("export_all");
 	echo http_script("window.setTimeout('location.href=\"".$redirect."\";',$timeout)");
 
 	echo "<div style='text-align: left'>\n";
-
+	$etape = 1;
 	foreach($tables_for_dump as $table){
-		if ($etape_actuelle <= $etape) {
+		if ($etape_actuelle <= $etape) { // sauter les deja faits
 		  $r = sql_countsel($table);
 		  echo ( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
 		  flush();
 		  if (!$r) $r = ( _T('texte_vide'));
-		  else
-		    export_objets($table, $etape, $sous_etape,$dir, $archive, $gz, $r, $les_rubriques, $les_meres, $rub, $meta);
+		  else {
+		    $f = $dir . $archive . '.part_' . sprintf('%03d',$etape);
+		    $r = export_objets($table, $sous_etape, $r, $f, $les_rubriques, $les_meres, $meta);
+		    $r += $sous_etape*_EXPORT_TRANCHES_LIMITE;
+		    // info pas fiable si interruption+partiel
+		    if ($rub AND $etape_actuelle > 1) $r = ">= $r";
+		  }
 		  echo $r; 
 		  flush();
-
 		  $sous_etape = 0;
 		  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
 		  $tables_sauvegardees[$table] = "$table ($r)";
 		  ecrire_meta($metatable, serialize($tables_sauvegardees),'non');
 		}
 		$etape++;
-		$v = serialize(array($gz, $archive, $rub, $tables_for_dump, $etape, 0));
+		$v = serialize(array($gz, $archive, $rub, $tables_for_dump, $etape,$sous_etape));
 		ecrire_meta($meta, $v,'non');
 	}
 	echo ( "</div>\n");
@@ -171,41 +175,48 @@ function ramasse_parties($dir, $archive)
 // chaque tranche etant copiee immediatement dans un fichier 
 // et son numero memorisee dans le serveur SQL.
 // En cas d'abandon sur Time-out, le travail pourra ainsi avancer.
-// Au final, on regroupe les tranches en un seul fichier
+// Au final, on regroupera les tranches en un seul fichier
 // et on memorise dans le serveur qu'on va passer a la table suivante.
+// on prefere ne pas faire le ramassage ici de peur d'etre interrompu 
+// par le timeout au mauvais moment
+// le ramassage aura lieu en debut de hit suivant, 
+// et ne sera normalement pas interrompu car le temps pour ramasser
+// est plus court que le temps pour creer les parties
 
 // http://doc.spip.org/@export_objets
-function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_rubriques, $les_meres, $rub, $meta) {
+function export_objets($table, $cpt, $total, $filetable, $les_rubriques, $les_meres, $meta) {
 	global $tables_principales;
 
-	$filetable = $dir . $archive . '.part_' . sprintf('%03d',$etape);
 	$temp = $filetable . '.temp' . _EXTENSION_PARTIES;
 	$prim = isset($tables_principales[$table])
 	  ? $tables_principales[$table]['key']["PRIMARY KEY"]
 	  : '';
 	$debut = $cpt * _EXPORT_TRANCHES_LIMITE;
+	$effectifs = 0;
 
 	while (1){ // on ne connait pas le nb de paquets d'avance
 
 		$cpt++;
-		$string = build_while($debut, $table, $prim, $les_rubriques, $les_meres);
-		// attention $string vide ne suffit pas a sortir
+		$tranche = build_while($debut, $table, $prim, $les_rubriques, $les_meres);
+		// attention: vide ne suffit pas a sortir
 		// car les sauvegardes partielles peuvent parcourir
 		// une table dont la portion qui les concerne sera vide..
-		if ($string) { 
+		if ($tranche) { 
 		// on ecrit dans un fichier generique
 		// puis on le renomme pour avoir une operation atomique 
-			ecrire_fichier ($temp, $string);
+			ecrire_fichier ($temp, join('', $tranche));
 			$f = $filetable . sprintf('_%04d',$cpt) . _EXTENSION_PARTIES;
 	// le fichier destination peut deja exister
 	// si on sort d'un timeout entre le rename et le ecrire_meta
 			if (file_exists($f)) spip_unlink($f);
 			rename($temp, $f);
+			$effectifs += count($tranche);
 		}
-		// on se contente d'une ecriture en base pour aller plus vite
-		// a la relecture on en profitera pour mettre le cache a jour
-
-		ecrire_meta($meta, $s = "$gz::$archive::$rub::$etape::$cpt",'non');
+		// incrementer le numero de sous-etape 
+		// au cas ou une interruption interviendrait
+		$v = unserialize($GLOBALS['meta'][$meta]);
+		$v[5]++;
+		ecrire_meta($meta, serialize($v));
 		$debut +=  _EXPORT_TRANCHES_LIMITE;
 		if ($debut >= $total) {break;}
 		/* pour tester la robustesse de la reprise sur interruption
@@ -219,10 +230,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 		flush();
 	}
 
-	# on prefere ne pas faire le ramassage ici de peur d'etre interrompu par le timeout au mauvais moment
-	# le ramassage aura lieu en debut de hit suivant, et ne sera normalement pas interrompu car le temps pour ramasser
-	# est plus court que le temps pour creer les parties
-	// ramasse_parties($dir.$archive, $dir.$archive);
+	return $effectifs;
 }
 
 
@@ -237,7 +245,7 @@ function build_while($debut, $table, $prim, $les_rubriques, $les_meres) {
 	// (a ameliorer)
 	$result = sql_select('*', $table, '', '', $prim, "$debut," . _EXPORT_TRANCHES_LIMITE);
 
-	$string = '';
+	$res = array();
 	while ($row = sql_fetch($result)) {
 		if (export_select($row, $les_rubriques, $les_meres)) {
 			$attributs = "";
@@ -248,15 +256,16 @@ function build_while($debut, $table, $prim, $les_rubriques, $les_meres) {
 					$attributs .= ' off="' . $logo[3] . '"';
 			}
 
-			$string .= "<$table$attributs>\n";
+			$string = "<$table$attributs>\n";
 			foreach ($row as $k => $v) {
 				$string .= "<$k>" . text_to_xml($v) . "</$k>\n";
 			}
 			$string .= "</$table>\n\n";
+			$res[]= $string;
 		}
 	}
 	sql_free($result);
-	return $string;
+	return $res;
 }
 
 // dit si Row est exportable, 
