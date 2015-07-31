@@ -254,10 +254,11 @@ function auth_spip_autoriser_modifier_pass($serveur=''){
  * c'est ici que se font eventuellement les verifications de longueur mini/maxi
  * ou de force
  *
- * @param string $new_pass
  * @param string $login
- *	le login de l'auteur : permet de verifier que pass et login sont differents
+ *	Le login de l'auteur : permet de verifier que pass et login sont differents
  *  meme a la creation lorsque l'auteur n'existe pas encore
+ * @param string $new_pass
+ * 	Nouveau mot de passe
  * @param int $id_auteur
  *	si auteur existant deja
  * @param string $serveur
