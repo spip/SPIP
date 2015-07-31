@@ -106,7 +106,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 // http://doc.spip.org/@spip_pg_trace_query
 function spip_pg_trace_query($query, $serveur='')
 {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -116,6 +116,7 @@ function spip_pg_trace_query($query, $serveur='')
 		$t = trace_query_start();
 	} else $t = 0 ;
  
+	$connexion['last'] = $query;
 	$r = spip_pg_query_simple($link, $query);
 
 	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
@@ -377,8 +378,8 @@ function spip_pg_create_index($nom, $table, $champs, $serveur='', $requeter=true
 		 $champs = array($champs);
 	}
 	$query = "CREATE INDEX $nom ON $table (" . join(',',$champs) . ")";
-	$res = spip_pg_query($query, $serveur, $requeter);
 	if (!$requeter) return $query;
+	$res = spip_pg_query($query, $serveur, $requeter);
 	return $res;
 }
 
@@ -395,8 +396,8 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 	} else $suite ='';
 	$query = 'EXPLAIN ' . preg_replace('/([,\s])spip_/', '\1'.$prefixe.'_', $query) . $suite;
 
+	if (!$requeter) return $query;
 	$r = spip_pg_query_simple($link,$query);
-	if (!$requeter) return $r;
 	return spip_pg_fetch($r, NULL, $serveur);
 }
 
@@ -419,7 +420,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 function spip_pg_listdbs($serveur) {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
-	return spip_pg_query_simple($link, "select * from pg_database");
+	return spip_pg_query($link, "select * from pg_database");
 }
 
 // http://doc.spip.org/@spip_pg_select
@@ -741,14 +742,14 @@ function spip_pg_delete($table, $where='', $serveur='',$requeter=true) {
 	
 	$res = spip_pg_trace_query($query, $serveur);
 	if ($res)
-		pg_affected_rows($res);
+		return pg_affected_rows($res);
 	else
 		return false;
 }
 
 // http://doc.spip.org/@spip_pg_insert
 function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$requeter=true) {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -764,17 +765,15 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$r
 	$ins = (strlen($champs)<3)
 	  ? " DEFAULT VALUES"
 	  : "$champs VALUES $valeurs";
-	$r = spip_pg_query_simple($link, $q="INSERT INTO $table $ins $ret");
+	$connexion['last'] = $q ="INSERT INTO $table $ins $ret";
+	$r = spip_pg_query_simple($link, $q);
 #	spip_log($q);
 	if ($r) {
 		if (!$ret) return 0;
 		if ($r2 = pg_fetch_array($r, NULL, PGSQL_NUM))
 			return $r2[0];
 	}
-	$n = spip_pg_errno($serveur);
-	$m = spip_pg_error($q, $serveur);
-	spip_log("$n $m $q '$r' '$r2'", 'pg'); // trace a minima
-	return -1;
+	return false;
 }
 
 // http://doc.spip.org/@spip_pg_insertq
@@ -870,7 +869,7 @@ function spip_pg_updateq($table, $couples, $where='', $desc=array(), $serveur=''
 // http://doc.spip.org/@spip_pg_replace
 function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 	if (!$values) {spip_log("replace vide $table"); return 0;}
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$prefixe = $connexion['prefixe'];
 	$link = $connexion['link'];
 	$db = $connexion['db'];
@@ -903,28 +902,24 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 		$seq = preg_replace('/^spip/', $prefixe, $seq);
 	}
 
+	$connexion['last'] = $q = "UPDATE $table SET $couples WHERE $where";
 	if ($couples) {
-	  $couples = spip_pg_query_simple($link, $q = "UPDATE $table SET $couples WHERE $where");
+	  $couples = spip_pg_query_simple($link, $q);
 #	  spip_log($q);
-	  if (!$couples) {
-	    $n = spip_pg_errno($serveur);
-	    $m = spip_pg_error($q, $serveur);
-	  } else {
-	    $couples = pg_affected_rows($couples);
-	  }
+	  if (!$couples) return false;
+	  $couples = pg_affected_rows($couples);
 	}
 	if (!$couples) {
 		$ret = !$seq ? '' :
 		  (" RETURNING nextval('$seq') < $prim");
-
-		$couples = spip_pg_query_simple($link, $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret");
+		$connexion['last'] = $q = "INSERT INTO $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',', $values) . ")$ret";
+		$couples = spip_pg_query_simple($link, $q);
 	    if (!$couples) {
-	      $n = spip_pg_errno($serveur);
-	      $m = spip_pg_error($q, $serveur);
+		return false;
 	    } elseif ($ret) {
 	      $r = pg_fetch_array($couples, NULL, PGSQL_NUM);
 	      if ($r[0]) {
-		$q = "SELECT setval('$seq', $prim) from $table";
+		$connexion['last'] = $q = "SELECT setval('$seq', $prim) from $table";
 		// Le code de SPIP met parfois la sequence a 0 (dans l'import)
 		// MySQL n'en dit rien, on fait pareil pour PG
 		$r = @pg_query($link, $q);
@@ -1028,23 +1023,18 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 }
 
 // http://doc.spip.org/@spip_pg_error
-function spip_pg_error($query, $serveur='',$requeter=true) {
+function spip_pg_error($serveur) {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 	$s = $link ? pg_last_error($link) : pg_last_error();
-	$s = str_replace('ERROR', 'errcode: 1000 ', $s);
-	if ($s) spip_log("$s - $query", 'pg');
-	return $s;
+	return str_replace('ERROR', 'errcode: 1000 ', $s);
 }
 
 // http://doc.spip.org/@spip_pg_errno
-function spip_pg_errno($serveur='',$requeter=true) {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-	$link = $connexion['link'];
-	$s = $link ? pg_last_error($link) : pg_last_error();
-	$s = str_replace('ERROR', 'errcode: 1000 ', $s);
-	if ($s) spip_log("Erreur PG $s");
-	return $s ? 1 : 0;
+function spip_pg_errno($serveur='') {
+  // il faudrait avoir la derniere ressource retournee et utiliser
+  // http://fr2.php.net/manual/fr/function.pg-result-error.php
+	return 0;
 }
 
 // http://doc.spip.org/@spip_pg_drop_table
@@ -1066,19 +1056,20 @@ function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
 // http://doc.spip.org/@spip_pg_showbase
 function spip_pg_showbase($match, $serveur='',$requeter=true)
 {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
-	  
-	return spip_pg_query_simple($link, "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'");
+	$connexion['last'] = $q = "SELECT tablename FROM pg_tables WHERE tablename ILIKE '$match'";
+	return spip_pg_query_simple($link, $q);
 }
 
 // http://doc.spip.org/@spip_pg_showtable
 function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 {
-	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
+	$connexion['last'] = "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table);
 
-	$res = spip_pg_query_simple($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table));
+	$res = spip_pg_query_simple($link, $q);
 	if (!$res) return false;
 	
 	// etrangement, $res peut ne rien contenir, mais arriver ici...
@@ -1087,8 +1078,8 @@ function spip_pg_showtable($nom_table, $serveur='',$requeter=true)
 	while($field = pg_fetch_array($res, NULL, PGSQL_NUM)) {
 		$fields[$field[0]] = $field[2] . (!$field[1] ? '' : (" DEFAULT " . $field[1]));
 	}
-
-	$res = spip_pg_query_simple($link, "SELECT indexdef FROM pg_indexes WHERE tablename ILIKE " . _q($nom_table));
+	$connexion['last'] = $q = "SELECT indexdef FROM pg_indexes WHERE tablename ILIKE " . _q($nom_table);
+	$res = spip_pg_query_simple($link, $q);
 	$keys = array();
 	while($index = pg_fetch_array($res, NULL, PGSQL_NUM)) {
 		if (preg_match('/CREATE\s+(UNIQUE\s+)?INDEX\s([^\s]+).*\((.*)\)$/', $index[0],$r)) {
@@ -1166,6 +1157,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	."\n";
 
 	if (!$requeter) return $q;
+	$connexion['last'] = $q;
 	$r = @pg_query($link, $q);
 
 	if (!$r)
