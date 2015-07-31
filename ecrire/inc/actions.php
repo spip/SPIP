@@ -177,7 +177,7 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			$action,
 			"var_ajaxcharset=utf-8&script=$script$args_ajax");
 
-		if ($att) $clic = "\n<div$att>$clic</div>";
+		if ($att) $clic = "\n<span$att>$clic</span>";
 		return "<a href='$href'\nonclick="
 		.  ajax_action_declencheur($ajax, $ancre, $fct_ajax)
 		. ">$clic</a>";

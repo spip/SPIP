@@ -133,9 +133,9 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	foreach (split(" *[,;] *", $cherche_mots) as $cherche_mot) {
 	  if  ($cherche_mot) {
 		$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
-		$res .= "<P>" . debut_boite_info(true);
+		$res .= "<p>" . debut_boite_info(true);
 		if (!$resultat) {
-			$res .= "<B>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</B><BR>";
+			$res .= "<b>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</b><br /></p>";
 		}
 		else if (count($resultat) == 1) {
 			$nouveaux_mots[] = $resultat[0];
@@ -224,7 +224,7 @@ function afficher_mots_cles($flag_editable, $objet, $id_objet, $table, $table_id
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
 
 		$res = "\n<div class='liste'>"
-		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>"
+		. "\n<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 		. afficher_liste($largeurs, $tableau, $styles)
 		. "</table></div>";
 	} else $res ='';

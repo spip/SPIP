@@ -152,7 +152,7 @@ else {
 		. "<font color='red'>("._T('texte_plus_trois_car').")</font> :<br />\n"
 		. "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><p>\n";
 	} else {
-		$corps .= "<fieldset style='padding:5'><legend><B>"._T('item_login')."</B><br />\n</legend><br><b>".$auteur['login']."</b> "
+		$corps .= "<fieldset style='padding:5'><legend><b>"._T('item_login')."</b><br />\n</legend><br /><b>".$auteur['login']."</b> "
 		. "<i> ("._T('info_non_modifiable').")</i>\n<p>";
 	}
 
