@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'Der er ingen nyhed p&aring; denne adresse',
 'aucune_rubrique' => 'Der er ikke noget afsnit p&aring; denne adresse',
 'autres_breves' => 'Andre nyheder',
-'autres_groupes_de_mots_clefs' => 'Andre n&oslash;gleordsgrupper',
 'autres_groupes_mots_clefs' => 'Andre grupper af n&oslash;gleord',
 'autres_sites' => 'Andre websteder',
 
@@ -33,13 +32,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'I samme afsnit',
 'date' => 'Dato',
 'dernier_ajout' => 'Seneste tilf&oslash;jelse',
 'dernieres_breves' => 'Seneste nyhed',
 'derniers_articles' => 'Seneste artikler',
 'derniers_commentaires' => 'Seneste kommentarer',
-'derniers_messages_des_forums' => 'Senneste indl&aelig;g i forummer',
 'derniers_messages_forum' => 'Seneste indl&aelig;g offentliggjort i forummer',
 
 
@@ -48,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_reponse' => 'Svaradresse:',
 'en_resume' => 'Opsummering',
 'envoyer_message' => 'Lav indl&aelig;g',
-'envoyer_un_message' => 'Lav indl&aelig;g',
 'espace_prive' => 'Privat omr&aring;de',
 
 
@@ -85,18 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'foreg&aring;ende side',
+'page_suivante' => 'n&aelig;ste side',
 'par_auteur' => 'af',
 'participer_site' => 'Du kan deltage aktivt p&aring; dette websted og skrive dine egne artikler ved at tilmelde dig nedenfor. Du vil da straks modtage en email med en adgangskode til webstedets private omr&aring;de.',
-'pas_d_article' => 'Ingen artikler p&aring; denne adresse',
-'pas_d_auteur' => 'Ingen forfatter p&aring; denne adresse',
-'pas_de_breve' => 'Ingen nyhed p&aring; denne adresse',
-'pas_de_rubrique' => 'Intet afsnit p&aring; denne adresse',
-'pas_de_site' => 'Intet websted p&aring; denne adresse',
-'plan_du_site' => 'Indholdsoversigt',
 'plan_site' => 'Indholdsoversigt',
 'popularite' => 'Popularitet',
 'poster_message' => 'Indl&aelig;g',
-'poster_un_message' => 'Lav et indl&aelig;g',
 
 
 // R

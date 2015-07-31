@@ -117,21 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Vejatz en linha',
-
-
-// PLUS_UTILISE
-'autres_groupes_de_mots_clefs' => '-vide-',
-'dans_meme_rubrique' => 'Dins la meteissa rubrica',
-'derniers_messages_des_forums' => 'Darriers messatges publicats dins lei forums',
-'envoyer_un_message' => 'Mandar un messatge',
-'pas_d_article' => 'I a ges d\'article a aquela adrei&ccedil;a',
-'pas_d_auteur' => 'I a ges d\'autor a aquela adrei&ccedil;a',
-'pas_de_breve' => 'I a ges de br&egrave;va a aquela adrei&ccedil;a',
-'pas_de_rubrique' => 'I a ges de rubrica a aquela adrei&ccedil;a',
-'pas_de_site' => 'I a ges de sit a aquela adrei&ccedil;a',
-'plan_du_site' => 'Plan dau sit',
-'poster_un_message' => 'Postar un messatge'
+'voir_en_ligne' => 'Vejatz en linha'
 
 );
 
