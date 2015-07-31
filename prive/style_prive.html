@@ -277,10 +277,12 @@ div.en_lignes { font-size: 10px;}
 
 /* icone horizontale */
 .icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #GET{left};padding-#GET{left}:32px;}
-.icone.horizontale a {display:inline;width:auto;}
+.icone.horizontale a {display:inline;width:auto;padding:0;}
+/* pour les navigateurs modernes */
+.icone.horizontale a {display:table-cell;vertical-align:middle;height:28px;}
 .icone.horizontale.right {text-align: #GET{right};padding-#GET{right}:32px;padding-#GET{left}:2px;}
 .icone.horizontale a img {padding:0;border:0;background:none;position:absolute;#GET{left}:4px;top:50%;margin-top:-12px;}
-.icone.horizontale a b {color:#666;}
+.icone.horizontale a b {color:#666;display:inline;}
 .icone.horizontale a:hover b { color: #000;}
 
 /* variantes sans texte ou sans image */
