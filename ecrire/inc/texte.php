@@ -578,7 +578,7 @@ function corriger_typo($letexte, $lang='') {
 // Tableaux
 //
 
-define('_RACCOURCI_TH_SPAN', '\s*(:?{{[^{}]+}}\s*)?|<');
+define('_RACCOURCI_TH_SPAN', '\s*(?:{{[^{}]+}}\s*)?|<');
 
 // http://doc.spip.org/@traiter_tableau
 function traiter_tableau($bloc) {
@@ -608,7 +608,7 @@ function traiter_tableau($bloc) {
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
-			else if (preg_match($reg_line1,	$ligne, $thead)) {
+			else if (preg_match($reg_line1,	$ligne)) {
 			  	preg_match_all('/\|([^|]*)/S', $ligne, $cols);
 				$ligne='';$cols= $cols[1];
 				$colspan=1;
