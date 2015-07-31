@@ -127,7 +127,7 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		include('login.php3');
+		@header("Location: ./login.php3");
 		exit;
 	}
 
