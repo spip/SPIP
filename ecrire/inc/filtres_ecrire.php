@@ -325,4 +325,74 @@ function bouton_spip_rss($op, $args=array(), $lang='') {
 	return "<a style='float: $spip_lang_right;' href='$url'>$clic</a>";
 }
 
+
+// http://doc.spip.org/@alertes_auteur
+function alertes_auteur($id_auteur) {
+
+	$alertes = array();
+
+	// si on n'est plus compatible avec php4 : le dire a tous ceux qui passent
+	// dans l'espace prive
+	if (version_compare(phpversion(), _PHP_MIN) == -1)
+		$alertes[] = _L('SPIP n&#233;cessite PHP&nbsp;@min@, votre version est @version@.', array('min'=> _PHP_MIN, 'version' => phpversion()));
+
+	if (isset($GLOBALS['meta']['message_crash_tables'])
+	AND autoriser('detruire', null, null, $id_auteur)) {
+		include_spip('genie/maintenance');
+		if ($msg = message_crash_tables())
+			$alertes[] = $msg;
+	}
+
+	if (isset($GLOBALS['meta']['message_crash_plugins'])
+	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
+		include_spip('inc/plugin');
+		if ($msg = message_crash_plugins())
+			$alertes[] = $msg;
+	}
+
+
+	if (isset($GLOBALS['meta']['plugin_erreur_activation'])
+	AND autoriser('configurer', 'plugins', null, $id_auteur)) {
+		$alertes[] = $GLOBALS['meta']['plugin_erreur_activation'];
+		effacer_meta('plugin_erreur_activation'); // pas normal que ce soit ici
+	}
+
+	$alertes = pipeline(
+		'alertes_auteur',
+			array(
+			'args' => array(
+				'id_auteur' => $id_auteur,
+				'exec' => _request('exec'),
+				),
+			'data' => $alertes
+			)
+		);
+
+	if ($alertes = array_filter($alertes))
+		return "<div class='wrap-messages'><div class='messages'>".
+			join('<hr />', $alertes)
+			."</div></div>";
+}
+
+// http://doc.spip.org/@auteurs_recemment_connectes
+function auteurs_recemment_connectes($id_auteur)
+{
+	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND " . sql_date_proche('en_ligne', -15, 'MINUTE') . " AND " . sql_in('statut', array('1comite', '0minirezo')));
+
+	if (!$result) return '';
+	$formater_auteur = charger_fonction('formater_auteur', 'inc');
+	$res = '';
+	foreach ($result as $row) {
+		$id = $row['id_auteur'];
+		$mail = formater_auteur_mail($row, $id);
+		$auteurs = "<a href='" . generer_url_ecrire("auteur", "id_auteur=$id") . "'>" . typo($row['nom']) . "</a>";
+		$res .= "$mail&nbsp;$auteurs" . ", ";
+	}
+
+	return "<div class='en_lignes' style='color:#666;'>" .
+	  "<b>"._T('info_en_ligne'). "&nbsp;</b>" .
+	  substr($res,0,-2) .
+	  "</div>";
+}
+
 ?>
