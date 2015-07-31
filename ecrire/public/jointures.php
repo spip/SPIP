@@ -65,6 +65,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   if (!$res) return "";
 
   list($nom,$desc) = $depart;
+
   return fabrique_jointures($boucle, $res, $cond, $desc, $nom, $col);
 }
 
@@ -228,11 +229,10 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 	if (!count($vu))
 		$vu[] = $dnom; // ne pas oublier la table de depart
 
-	$akeys = $adesc['key'];
-	if ($v = $akeys['PRIMARY KEY']) {
-		unset($akeys['PRIMARY KEY']);
-		$akeys = array_merge(preg_split('/,\s*/', $v), $akeys);
-	}
+	$akeys = array();
+	foreach($adesc['key'] as $k)
+		$akeys = array_merge(preg_split('/,\s*/', $k), $akeys);
+
 	// enlever les cles d'arrivee exclues par l'appel
 	$akeys = array_diff($akeys,$milieu_exclus);
 
@@ -267,10 +267,11 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		// si oui on la prend
 		foreach($keys as $key){
 			if (count($v = trouver_champs_decomposes($key,$adesc))>1){
-				if (count($v)==count(array_intersect($v, $akeys)))
+				if (count($v)==count(array_intersect($v, $akeys))){
 					$v = decompose_champ_id_objet($key); // id_objet,objet,'article'
 					array_unshift($v,$key); // id_article,id_objet,objet,'article'
 					return array(array($dnom, array($adesc['table'],$adesc), $v));
+				}
 			}
 		}
 	}
