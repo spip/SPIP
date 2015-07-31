@@ -224,17 +224,16 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 		// imagemagick en ligne de commande
 		if ($process == 'convert') {
 			$vignette = $destination.".jpg";
-			$commande = "$convert_command -size ${destWidth}x${destHeight} $image -geometry ${destWidth}x${destHeight} +profile \"*\" $vignette";
-spip_log($commande);
-			shell_exec($commande);
+			$commande = "$convert_command -size ${destWidth}x${destHeight} $image -geometry ${destWidth}x${destHeight} +profile \"*\" ".escapeshellcmd($vignette);
+			spip_log($commande);
+			exec($commande);
 		}
 		else
 		 // imagick (php4-imagemagick)
 		 if ($process == 'imagick') {
 			$vignette = "$destination.jpg";
-
 			$handle = imagick_readimage($image);
-			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_QUADRATIC, 0.5);
+			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
 			imagick_write($handle, $vignette);
 		}
 		else
