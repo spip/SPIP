@@ -12,7 +12,17 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@cadre_depliable
+/**
+ * Affiche un cadre complet muni d’un bouton pour le déplier.
+ *
+ * @param string $icone Chemin vers l’icone que prendra le cadre
+ * @param string $titre Titre du cadre
+ * @param bool $deplie true ou false, défini si le cadre est déplié au chargement de la page (true) ou pas (false)
+ * @param string $contenu Contenu du cadre
+ * @param string $ids id que prendra la partie pliée ou dépliée
+ * @param string $style_cadre classe CSS que prendra le cadre
+ * @return string Code HTML du cadre dépliable
+**/
 function cadre_depliable($icone,$titre,$deplie,$contenu,$ids='',$style_cadre='r'){
 	$bouton = bouton_block_depliable($titre,$deplie,$ids);
 	return 

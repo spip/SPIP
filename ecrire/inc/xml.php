@@ -203,7 +203,25 @@ function spip_xml_decompose_tag($tag){
 	return array($tagname,$liste);
 }
 
-// http://doc.spip.org/@spip_xml_match_nodes
+/**
+ * Recherche dans un arbre XML généré par `spip_xml_parse()` (ou une branche de cet arbre)
+ * les clés de l'arbre qui valident la regexp donnée.
+ *
+ * Les branches qui valident la regexp sont retournées dans le tableau `$matches`.
+ *
+ * @see spip_xml_parse()
+ * @see spip_xml_decompose_tag()
+ * 
+ * @param string $regexp
+ *     Expression régulière
+ * @param array $arbre
+ *     Arbre XML
+ * @param array $matches
+ *     Branches de l'arbre validant la rexgep
+ * @param bool $init ?
+ * @return bool
+ *     false si aucun élément ne valide l'expression régulière, true sinon.
+**/
 function spip_xml_match_nodes($regexp,&$arbre,&$matches,$init=true){
 	if ($init)
 		$matches = array();

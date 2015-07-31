@@ -27,6 +27,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * - sans argument : vérifie la sécurité et retourne `_request('arg')`, ou exit.
  *
  * @uses securiser_action_auteur() Pour produire l'URL ou le formulaire
+ * @example
+ *     Tester une action reçue et obtenir son argument :
+ *     ```
+ *     $securiser_action = charger_fonction('securiser_action');
+ *     $arg = $securiser_action();
+ *     ```
  *
  * @param string $action
  * @param string $arg
@@ -72,14 +78,17 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
  * @param string $arg
  * @param string $redirect
  * @param bool|int|string $mode
- *   -1 : renvoyer action, arg et hash sous forme de array()
- *   true ou false : renvoyer une url, avec &amp; (false) ou & (true)
- *   string : renvoyer un formulaire
+ *   - -1 : renvoyer action, arg et hash sous forme de array()
+ *   - true ou false : renvoyer une url, avec &amp; (false) ou & (true)
+ *   - string : renvoyer un formulaire
  * @param string|int $att
- *   id_auteur pour lequel generer l'action en mode url ou array()
- *   atributs du formulaire en mode formulaire
+ *   - id_auteur pour lequel générer l'action en mode URL ou array()
+ *   - atributs du formulaire en mode formulaire
  * @param bool $public
  * @return array|string
+ *    - string URL, si $mode = true ou false,
+ *    - string code HTML du formulaire, si $mode texte,
+ *    - array Tableau (action=>x, arg=>x, hash=>x) si $mode=-1.
  */
 function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att='', $public=false) {
 

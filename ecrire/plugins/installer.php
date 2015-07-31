@@ -22,8 +22,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Installe ou retire un plugin
  * 
- * Fonction surchargeable permettant d'installer ou retirer un plugin
- * en incluant les fichiers associés et en lançant les fonctions spécifiques
+ * Permet d'installer ou retirer un plugin en incluant les fichiers
+ * associés et en lançant les fonctions spécifiques.
  * 
  * 1. d'abord sur l'argument `test`,
  * 2. ensuite sur l'action demandée si le test repond `false`
@@ -34,6 +34,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *  - du résultat 3 
  *  - des echo de l'étape 2
  *
+ * @note
+ *     La fonction quitte (retourne false) si le plugin
+ *     n'a pas de version d'installation définie
+ *     (information `version_base` dans le paquet.xml)
+ *
  * @param string $plug
  *     Nom du plugin
  * @param string $action
@@ -41,8 +46,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $dir_type
  *     Répertoire du plugin
  * @return array|bool
- *     True si déjà installé, le tableau de get_infos sinon
- *
+ *     - False si le plugin n'a pas d'installation,
+ *     - true si déjà installé,
+ *     - le tableau de get_infos sinon
  */
 function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
 {

@@ -438,9 +438,8 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
 
 
 /**
- * Compile le critère {branche}
- * 
- * Sélectionne dans une boucle les éléments appartenant à une branche d'une rubrique.
+ * Compile le critère `branche` qui sélectionne dans une boucle les
+ * éléments appartenant à une branche d'une rubrique.
  * 
  * Cherche l'identifiant de la rubrique en premier paramètre du critère {branche XX}
  * s'il est renseigné, sinon, sans paramètre ({branche} tout court) dans les
@@ -493,9 +492,7 @@ function critere_branche_dist($idb, &$boucles, $crit){
 }
 
 /**
- * Compile le critère {logo} 
- *
- * Liste les objets qui ont un logo
+ * Compile le critère `logo` qui liste les objets qui ont un logo
  *
  * @uses lister_objets_avec_logos()
  *     Pour obtenir les éléments qui ont un logo
@@ -522,9 +519,24 @@ function critere_logo_dist($idb, &$boucles, $crit){
 		$boucle->where[] = $c;
 }
 
-// c'est la commande SQL "GROUP BY"
-// par exemple <boucle(articles){fusion lang}>
-// http://doc.spip.org/@critere_fusion_dist
+
+/**
+ * Compile le critère `fusion` qui regroupe les éléments selon une colonne.
+ *
+ * C'est la commande SQL «GROUP BY»
+ *
+ * @critere fusion
+ * @link http://www.spip.net/5166
+ * @example
+ *     ```
+ *      <BOUCLE_a(articles){fusion lang}>
+ *     ```
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void
+**/
 function critere_fusion_dist($idb, &$boucles, $crit){
 	if ($t = isset($crit->param[0])){
 		$t = $crit->param[0];
