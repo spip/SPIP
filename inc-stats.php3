@@ -38,44 +38,21 @@ function ecrire_stats() {
 
 
 function afficher_raccourci_stats($id_article) {
-	$query = "SELECT visites FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
-	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
-		$visites = $row['visites'];
-		echo "[$visites visites]";
-		bouton_public("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
-	}
-}
-
-	/*
-	global $HTTP_REFERER;
-	global $id_article;
-	global $admin_ok;
-
-	$my_ref = $HTTP_REFERER;
-	$my_ref = "\n".substr(md5($my_ref), 0, 15);
-
 	$query = "SELECT visites, referers FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
 	$result = spip_query($query);
-
 	if ($row = mysql_fetch_array($result)) {
 		$visites = $row['visites'];
 		$referers = $row['referers'];
+		
+		if ($visites > 0) bouton_public("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 
-		$visites++;
-
-		if (!ereg($my_ref, $referers)) {
-			$referers .= $my_ref;
-			spip_query("UPDATE spip_articles SET visites=$visites, referers='$referers' WHERE id_article=$id_article");
-		}
-		else {
-			spip_query("UPDATE spip_articles SET visites=$visites WHERE id_article=$id_article");
-		}
-
-		$num_ref = strlen($referers) / 16;
-		if ($admin_ok) echo "<small>[$visites visites - $num_ref referers]</small>";
+		$query = "SELECT * FROM spip_visites_temp WHERE type = 'article$id_article' GROUP BY ip";
+		$result = spip_query($query);
+		$visites = $visites + mysql_num_rows($result);
+		echo "[$visites visites / $referers entr&eacute;es directes]";
 	}
-	*/
+}
+
 
 
 ?>
