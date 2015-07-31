@@ -94,6 +94,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 		? generer_url_ecrire("naviguer","id_rubrique=".$row['id_rubrique'])
 		: generer_url_ecrire("articles","id_article=".$row['id_article'])
 		));
+
 	$contexte = array(
 	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("articles"),
@@ -101,10 +102,11 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	'new'=>$new?$new:$row['id_article'],
 	'id_rubrique'=>$row['id_rubrique'],
 	'lier_trad'=>$lier_trad,
-#	'id_article'=>$id_article,
 	'config_fonc'=>$config_fonc,
-	'id_verson'=>$id_version,
-	'row'=>$row, // passer row ici car il tient compte de la version anterieure si besoin
+	// passer row si c'est le retablissement d'une version anterieure
+	'row'=> $id_version
+		? $row
+		: null
 	);
 	$page = evaluer_fond("prive/editer/article", $contexte, $connect);
 	echo $page['texte'];
