@@ -545,24 +545,27 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if ($style)
 		$attributs .= " style='$style'";
 
-	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
+	if (preg_match(",(.*)\.(jpg|gif|png)$,", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
 			return ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs);
 		}
 	}
+	else
+		# SVG par exemple ?
+		return "<img src='$logo$date'$attributs />";
 }
 
 function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
 {
 	if ($taille_origine = @getimagesize($logo)) {
 		list ($destWidth,$destHeight, $ratio) = image_ratio(
-					$taille_origine[0], $taille_origine[1], $taille, $taille_y);
+			$taille_origine[0], $taille_origine[1], $taille, $taille_y);
 
-				// Creer effectivement la vignette reduite
+		// Creer effectivement la vignette reduite
 		$suffixe = '-'.$destWidth.'x'.$destHeight;
 		$preview = creer_vignette($logo, $taille, $taille_y,
-					  $format, ('cache'.$suffixe), $nom.$suffixe);
+			 $format, ('cache'.$suffixe), $nom.$suffixe);
 		if ($preview) {
 			$logo = $preview['fichier'];
 			$destWidth = $preview['width'];
