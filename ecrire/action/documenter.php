@@ -67,7 +67,7 @@ function action_documenter_post($r)
 		$obj = "id_objet=".intval($id)." AND objet=".sql_quote($type);
 		$typdoc = sql_in('extension', array('gif', 'jpg', 'png'), $sign  ? '' : 'NOT');
 
-		sql_delete("spip_documents_liens", "$obj AND (vu='non' OR vu IS NULL) AND " . sql_in('id_document', array_map('array_shift', sql_allfetsel("docs.id_document", "spip_documents AS docs LEFT JOIN spip_documents_liens AS l ON l.id_document=docs.id_document", "$obj AND docs.mode='document' AND $typdoc")))) ;
+		sql_delete("spip_documents_liens", "$obj AND (vu='non' OR vu IS NULL) AND " . sql_in_select('id_document', "docs.id_document", "spip_documents AS docs LEFT JOIN spip_documents_liens AS l ON l.id_document=docs.id_document", "$obj AND docs.mode='document' AND $typdoc")) ;
 	}
 	if ($type == 'rubrique') {
 		include_spip('inc/rubriques');

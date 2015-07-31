@@ -169,7 +169,7 @@ function gen_liste_rubriques() {
 	}
 	// se restreindre aux rubriques utilisees recemment +secteurs
 
-	$where = gen_sql_in("id_rubrique", "spip_rubriques", "", "", "id_parent=0 DESC, date DESC", _CACHE_RUBRIQUES_MAX);
+	$where = sql_in_select("id_rubrique", "id_rubrique", "spip_rubriques", "", "", "id_parent=0 DESC, date DESC", _CACHE_RUBRIQUES_MAX);
 
 	// puis refaire la requete pour avoir l'ordre alphabetique
 
@@ -186,18 +186,5 @@ function gen_liste_rubriques() {
 	$t = array($last ? $last : time(), $GLOBALS['db_art_cache']);
 	ecrire_fichier(_CACHE_RUBRIQUES, serialize($t));
 	return true;
-}
-
-// Cette fonction devrait s'integrer dans base/abstract, 
-// car en fait elle palie l'absence de  requete imbriquee dans certains SQL
-
-// http://doc.spip.org/@gen_sql_in
-function gen_sql_in($select, $from = array(), $where = array(),
-		    $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='')
-{
-	$liste = array(); 
-	$res = sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur); 
-	while ($r = sql_fetch($res)) $liste[] = $r[$select];
-	return !$liste ?  '' : sql_in($select, $liste);
 }
 ?>

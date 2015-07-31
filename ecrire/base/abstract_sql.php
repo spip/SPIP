@@ -416,6 +416,19 @@ function sql_in($val, $valeurs, $not='', $serveur='', $option=true) {
 	return $f($val, $valeurs, $not, $serveur, $option!==false);
 }
 
+// Penser a dire dans la description du serveur 
+// s'il accepte les requetes imbriquees afin d'optimiser ca
+
+function sql_in_select($in, $select, $from = array(), $where = array(),
+		    $groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur='')
+{
+	$liste = array(); 
+	$res = sql_select($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur); 
+	while ($r = sql_fetch($res)) {$liste[] = array_shift($r);}
+	sql_free($res);
+	return !$liste ?  '' : sql_in($in, $liste);
+}
+
 
 // http://doc.spip.org/@sql_test_int
 function sql_test_int($type, $serveur='', $option=true)
