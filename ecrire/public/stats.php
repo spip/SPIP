@@ -57,7 +57,7 @@ function public_stats_dist() {
 
 	// 1. Chercher s'il existe deja une session pour ce numero IP.
 	$content = array();
-	$session = sous_repertoire(_DIR_SESSIONS, 'visites') . $client_id;
+	$session = sous_repertoire(_DIR_TMP, 'visites') . $client_id;
 	if (lire_fichier($session, $content))
 		$content = @unserialize($content);
 

@@ -234,7 +234,7 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 // Une securite qui nous protege contre :
 // - les doubles validations de forums (derapages humains ou des brouteurs)
 // - les abus visant a mettre des forums malgre nous sur un article (??)
-// On installe un fichier temporaire dans _DIR_SESSIONS (et pas _DIR_CACHE
+// On installe un fichier temporaire dans _DIR_TMP (et pas _DIR_CACHE
 // afin de ne pas bugguer quand on vide le cache)
 // Le lock est leve au moment de l'insertion en base (inc-messforum)
 // Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
@@ -244,17 +244,17 @@ function forum_fichier_tmp()
 {
 # astuce : mt_rand pour autoriser les hits simultanes
 	while (($alea = time() + @mt_rand())
-	       AND @file_exists($f = _DIR_SESSIONS."forum_$alea.lck"))
+	       AND @file_exists($f = _DIR_TMP."forum_$alea.lck"))
 	  {};
 	spip_touch ($f);
 
 # et maintenant on purge les locks de forums ouverts depuis > 4 h
 
-	if ($dh = @opendir(_DIR_SESSIONS))
+	if ($dh = @opendir(_DIR_TMP))
 		while (($file = @readdir($dh)) !== false)
 			if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
-			AND (time()-@filemtime(_DIR_SESSIONS.$file) > 4*3600))
-				@unlink(_DIR_SESSIONS.$file);
+			AND (time()-@filemtime(_DIR_TMP.$file) > 4*3600))
+				@unlink(_DIR_TMP.$file);
 	return $alea;
 }
 

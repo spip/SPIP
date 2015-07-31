@@ -25,7 +25,7 @@ function debut_admin($form, $action, $commentaire='') {
 		minipres(_T('info_acces_refuse'));
 	}
 	if ($connect_toutes_rubriques) {
-		$dir = _DIR_SESSIONS;
+		$dir = _DIR_TMP;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 
@@ -62,7 +62,7 @@ function debut_admin($form, $action, $commentaire='') {
 function fin_admin($action) {
 	global $connect_login, $connect_toutes_rubriques;
 	if ($connect_toutes_rubriques) {
-		$dir = _DIR_SESSIONS;
+		$dir = _DIR_TMP;
 	} else {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}

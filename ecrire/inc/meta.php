@@ -61,7 +61,7 @@ function ecrire_metas() {
 			. _T('texte_inc_meta_2')
 			. "</a> "
 			. _T('texte_inc_meta_3',
-				array('repertoire' => joli_repertoire(_DIR_SESSIONS)))
+				array('repertoire' => joli_repertoire(_DIR_TMP)))
 			. "</h4>\n");
 		}
 	}

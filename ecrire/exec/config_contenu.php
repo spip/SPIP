@@ -278,7 +278,7 @@ if (tester_mail()) {
 
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if ($envoi_now)
-		@unlink(_DIR_SESSIONS . 'mail.lock');
+		@unlink(_DIR_TMP . 'mail.lock');
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_annonce_nouveautes'));

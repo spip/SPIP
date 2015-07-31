@@ -54,7 +54,7 @@ function calculer_popularites() {
 	// donc ceux de la veille ; au passage on stocke une date_statistiques
 	// dans spip_meta - cela permet au code d'etre "reentrant", ie ce cron
 	// peut etre appele par deux bases SPIP ne partageant pas le meme
-	// _DIR_SESSIONS, sans tout casser...
+	// _DIR_TMP, sans tout casser...
 	$aujourdhui = date("Y-m-d");
 	if ($date = $GLOBALS['meta']['date_statistiques']
 	AND $date != $aujourdhui)

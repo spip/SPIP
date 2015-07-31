@@ -25,9 +25,9 @@ if ($f = include_spip('mes_fonctions', false)) {
 	global $dossier_squelettes;
 	@include ($f); 
 }
-if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
+if (@is_readable(_DIR_TMP."charger_plugins_fonctions.php")){
 	// chargement optimise precompile
-	include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
+	include_once(_DIR_TMP."charger_plugins_fonctions.php");
 }
 
 charger_generer_url(); # pour recuperer_parametres_url

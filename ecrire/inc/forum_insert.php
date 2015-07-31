@@ -128,7 +128,7 @@ function forum_insert_secure($alea, $hash)
 		die (_T('forum_titre_erreur')); 	# echec du POST
 	}
 
-	$file = _DIR_SESSIONS ."forum_" . preg_replace('/[^0-9]/', '', $alea) .".lck";
+	$file = _DIR_TMP ."forum_" . preg_replace('/[^0-9]/', '', $alea) .".lck";
 	return  file_exists($file) ? $file : '';
 }
 

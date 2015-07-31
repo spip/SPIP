@@ -52,7 +52,7 @@ function inc_tidy_dist($buffer) {
 	## NB: seul tidy en ligne de commande sait gerer ses erreurs,
 
 	// Conserver une liste des URLs en erreur tidy
-	lire_fichier($f = _DIR_SESSIONS.'w3c-go-home.txt', $liste);
+	lire_fichier($f = _DIR_TMP.'w3c-go-home.txt', $liste);
 	$url = "http://".$_SERVER['HTTP_HOST'].nettoyer_uri();
 
 	if (defined('_erreur_tidy')) {
