@@ -216,6 +216,9 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 // http://doc.spip.org/@public_cacher_dist
 function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmodified) {
 
+	# fonction de cache minimale : dire "non on ne met rien en cache"
+	# $use_cache = -1; return;
+
 	// Second appel, destine a l'enregistrement du cache sur le disque
 	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache);
 
