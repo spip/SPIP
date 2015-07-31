@@ -68,6 +68,7 @@ $tables_sequences = array(
 			'svg' => 'Scalable Vector Graphics',
 			'swf' => 'Flash',
 			'wav' => 'WAV',
+			'webm' => 'WebM',
 			'wmv' => 'Windows Media',
 			'3gp' => '3rd Generation Partnership Project'
 		);
@@ -207,6 +208,7 @@ $tables_mime = array(
 		'svg' => 'image/svg+xml',
 		'swf' => 'application/x-shockwave-flash',
 		'wav' => 'audio/x-wav',
+		'webm' => 'video/webm',
 		'wmv' => 'video/x-ms-wmv',
 		'3gp' => 'video/3gpp',
 
@@ -297,6 +299,7 @@ $tables_mime = array(
 
 	$mime_alias = array (
 		'audio/x-mpeg' => 'audio/mpeg',
+		'audio/webm' => 'video/webm',
 		'audio/x-musepack' => 'audio/musepack',
 		'application/x-ogg' => 'application/ogg',
 		'video/mp4' => 'application/mp4',
