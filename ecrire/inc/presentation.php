@@ -613,7 +613,7 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 	if (!is_numeric($id_rubrique)) return $inser_puce;
 	
 	$type2 = "statutdecal$type$id";
-	$action = "onmouseover=\"montrer('$type2');\"";
+	$action = "\nonmouseover=\"montrer('$type2');\"";
 
 	return	"<span class='puce_breve' id='$type1' dir='$lang_dir'>"
 		. "<span class='puce_breve_fixe' $action>"
@@ -627,12 +627,13 @@ function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 }
 
 // http://doc.spip.org/@afficher_script_statut
-function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
+function afficher_script_statut($id, $type, $n, $img, $statut, $titre, $act)
 {
   $i = http_wrapper($img);
   $h = generer_action_auteur("instituer_$type","$id-$statut");
-  return http_href("javascript:selec_statut('$id', '$type', $n, '$i', '$h');",
-		   "<img src='$i' alt=' ' />", $title,'','', $act);
+  $h = "javascript:selec_statut('$id', '$type', $n, '$i', '$h');";
+  $t = supprimer_tags($titre);
+  return "<a href=\"$h\"\ntitle=\"$t\"$act><img src='$i' alt=' '/></a>";
 }
 
 //

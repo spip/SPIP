@@ -41,7 +41,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 	while ($row = spip_fetch_array($q)) {
 		if($c++%$limit==0) {	
 			if ($c > 1) $res .= " | ";
-			$date = (affdate_court($row['date_time']));
+			$date = affdate_court($row['date_time']);
 			if ($c == ($debut+1))
 				$res .= "<span class='spip_medium'><b>$c</b></span>";
 			else {
@@ -49,7 +49,7 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='') {
 				if ($evt)
 					$evt = "\nonclick="
 					. ajax_action_declencheur($h,$a);
-				$res .= http_href("$h$a", $c, $date, '', '', $evt);
+				$res .= "<a href='$h$a' title='$date'$evt>$c</a>";
 			}
 		}
 	}

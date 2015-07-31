@@ -43,7 +43,7 @@ function exec_menu_rubriques_dist() {
 		$largeur = min(200, ceil($largeur_t / $nb_col)); 
 		$count_lignes = 0;
 		$style = " style='z-index: 0; vertical-align: top;'";
-		$image = " background-image: url(" . http_wrapper("secteur-12.gif") .");";
+		$image = " petit-secteur";
 		foreach( $arr_low as $id_rubrique => $titre_rubrique) {
 			if ($count_lignes == $max_lignes) {
 				$count_lignes = 0;
@@ -74,11 +74,9 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $zdecal, $largeur, $ima
 
 	$nav = "<a href='"
 	. generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
-	. "'\nclass='bandeau_rub' style='width: "
+	. "'\nclass='bandeau_rub$image' style='width: "
 	. $largeur
-	. "px;"
-	. $image
-	. "'>\n&nbsp;"
+	. "px;'>\n&nbsp;"
 	. supprimer_tags(preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique))
 	. "</a>\n";
 

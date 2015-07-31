@@ -106,51 +106,50 @@ fin_cadre_relief();
 /// Suivi par RSS
 ///
 
-debut_cadre_relief("site-24.gif", false, "", _T('ical_titre_rss'));
+	debut_cadre_relief("site-24.gif", false, "", _T('ical_titre_rss'));
 
-echo _T('ical_texte_rss');
+	echo _T('ical_texte_rss');
 
-echo "<p>"._T("ical_texte_rss_articles")."</p>";
+	echo "<p>"._T("ical_texte_rss_articles")."</p>";
 
-echo propre("<cadre>" . generer_url_public('backend') . "</cadre>");
+	echo propre("<cadre>" . generer_url_public('backend') . "</cadre>");
 
-echo "<p>"._T("ical_texte_rss_articles2")."</p>";
+	echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
-$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY 0+titre, titre");
+	$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY 0+titre, titre");
 
-if (spip_num_rows($result) > 0) {
+	$h = http_img_pack( 'feed.png', 'RSS', '');
+	if (spip_num_rows($result) > 0) {
 		echo "<ul>";
+
 
 		while($row=spip_fetch_array($result)){
 			$id_rubrique=$row['id_rubrique'];
 			$titre_rubrique = typo($row['titre']);
 			$titre = htmlspecialchars($titre_rubrique);
 			
-			echo "<li>", http_href( generer_url_public('backend', "id_rubrique=$id_rubrique"), 
-			http_img_pack( 'feed.png', 'RSS', '') .'&nbsp; '.
-			$titre_rubrique, $titre),
-			"</li>\n";
+			echo "<li><a href='" . generer_url_public('backend', "id_rubrique=$id_rubrique") . "' title=\"$titre\">$h&nbsp; $titre_rubrique</li>\n";
 		}
 		echo "</ul>";
 	}
 	
-
 	$activer_breves = $GLOBALS['meta']['activer_breves'];
 	
 	if ($activer_breves == "oui") {
 		
 		echo "<p>"._T("ical_texte_rss_breves")."</p>";
-		echo '<ul><li>' .
-		http_href( generer_url_public('backend-breves', ""), 
-			http_img_pack( 'feed.png', 'RSS', '') .'&nbsp; '.
-			_T('ical_lien_rss_breves'), _T('ical_lien_rss_breves')) .
-		"</li></ul>";
+		echo "<ul><li><a href='",
+		  generer_url_public('backend-breves', ""),
+		  "' title=\"",
+		  _T('ical_lien_rss_breves'),
+		  "\">",
+		  $h,
+		  '&nbsp; ' . _T('ical_lien_rss_breves'), 
+		  "</a></li></ul>";
 		
 	}
 
-fin_cadre_relief();
-
-
+	fin_cadre_relief();
 
 ///
 /// Suivi par Javascript

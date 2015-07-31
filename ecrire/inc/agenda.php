@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/minipres'); 
 include_spip('inc/layer');
 include_spip('inc/texte'); // inclut inc_filtre
-
 charger_generer_url();
 
 //  Typographie generale des calendriers de 3 type: jour/semaine/mois(ou plus)
@@ -94,6 +93,24 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 		$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
 		return "<a$c$s\nhref='$h$a'$evt>$clic</a>";
 	}
+}
+
+// Fabrique une balise A, avec tous les attributs possibles
+// attention au cas ou la href est du Javascript avec des "'"
+// pour un href conforme au validateur W3C, faire & --> &amp; avant
+
+// http://doc.spip.org/@http_href
+function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
+	return '<a href="' .
+		$href .
+		'"' .
+		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
+		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
+		(!$class ? '' : ("\nclass=\"" . $class . "\"")) .
+		($evt ? "\n$evt" : '') .
+		'>' .
+		$clic .
+		'</a>';
 }
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
