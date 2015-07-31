@@ -39,6 +39,30 @@ include_spip('public/interfaces');
 # definition des tables
 include_spip('base/serial');
 
+function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true){
+	$l = array();
+	$lang = '';
+	foreach($struct->param as $val) {
+		$var = array_shift($val);
+		if ($var == 'lang')
+			$lang = $val;
+		else
+			$l[$var] = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")  .
+			($val
+				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
+				: index_pile($id_boucle, $var, $boucles)
+			) . ($echap?") . '":" ");
+	}
+	// Cas particulier de la langue : si {lang=xx} est definie, on
+	// la passe, sinon on passe la langue courante au moment du calcul
+	$l['lang'] = ($echap?"\'lang\' => ' .":"'lang' => ") ." argumenter_squelette(" .
+		($lang
+			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
+			: '$GLOBALS["spip_lang"]'
+			) . ")" . ($echap?" . '":" ");
+	return $l;
+}
+
 //
 // Calculer un <INCLURE()>
 //
@@ -67,26 +91,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 		return "'<!-- Erreur INCLURE(".texte_script($fichier).") -->'";
 	}
 
-	$l = array();
-	$lang = '';
-	foreach($struct->param as $val) {
-		$var = array_shift($val);
-		if ($var == 'lang')
-			$lang = $val;
-		else
-			$l[$var] = "\'$var\' => ' .  argumenter_squelette(" .
-			($val
-				? calculer_liste($val[0], $descr, $boucles, $id_boucle)
-				: index_pile($id_boucle, $var, $boucles)
-			) . ") . '";
-	}
-	// Cas particulier de la langue : si {lang=xx} est definie, on
-	// la passe, sinon on passe la langue courante au moment du calcul
-	$l['lang'] = "\'lang\' => ' . argumenter_squelette(" .
-		($lang
-			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)
-			: '$GLOBALS["spip_lang"]'
-		) . ") . '";
+	$l = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .

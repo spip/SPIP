@@ -36,6 +36,38 @@ define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
 define('SQL_ARGS', '(\([^)]*\))');
 define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)' . SQL_ARGS . '?`?');
 
+function phraser_arguments_inclure($p,$rejet_filtres = false){
+	$champ = new Inclure;
+	// on assimile {var=val} a une liste de un argument sans fonction
+	foreach ($p->param as $k => $v) {
+		$var = $v[1][0];
+		if ($var==NULL){
+			if ($rejet_filtres)
+				break; // on est arrive sur un filtre sans argument qui suit la balise
+			else
+				$champ->param[$k] = $v;
+		}
+		else {
+			if ($var->type != 'texte')
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
+					 $match[0]);
+			else {
+				$champ->param[$k] = $v;
+				ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
+				if ($m[2]) {
+					$champ->param[$k][0] = $m[1];
+					$val = $m[3];
+					if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
+					$champ->param[$k][1][0]->texte = $val;
+				}
+				else
+					$champ->param[$k] = array($m[1]);
+			}
+		}
+	}
+	return $champ;
+}
+
 // http://doc.spip.org/@phraser_inclure
 function phraser_inclure($texte, $ligne, $result) {
 
@@ -51,23 +83,8 @@ function phraser_inclure($texte, $ligne, $result) {
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
 		phraser_args($texte,">","",$result,$champ);
-		foreach ($champ->param as $k => $v) {
-		  $var = $v[1][0];
-		  if ($var->type != 'texte')
-			erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
-					 $match[0]);
-		  else {
-		    ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
-		    if ($m[2]) {
-		      $champ->param[$k][0] = $m[1];
-		      $val = $m[3];
-		      if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
-		      $champ->param[$k][1][0]->texte = $val;
-		    }
-		    else
-		      $champ->param[$k] = array($m[1]);
-		  }
-		}
+		$champ = phraser_arguments_inclure($champ);
+		
 		$texte = substr($champ->apres,1);
 		$champ->apres = "";
 		$result[] = $champ;
