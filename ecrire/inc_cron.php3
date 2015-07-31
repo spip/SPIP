@@ -206,8 +206,6 @@ function cron_statistiques($t) {
 }
 
 function cron_popularites($t) {
-	// Si c'est le premier appel (fichier .lock absent), ne pas calculer
-	if ($t == 0) return 0;
 	calculer_popularites();
 	return 1;
 }
