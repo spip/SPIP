@@ -45,29 +45,19 @@ function charger_langue($lang, $module = 'spip') {
 			#spip_log("module de langue : ${module}_$l.php3");
 		}
 	}
-
-	// surcharge perso -- on cherche le fichier local(_xx).php3 dans le chemin
-	if ($f = (find_in_path('local.php3')))
-		surcharger_langue($f);
-	if ($f = (find_in_path('local_'.$lang.'.php3')))
-		surcharger_langue($f);
-	// compatibilite ascendante : chercher aussi local_xx.php3 dans ecrire/lang/
-	else if (@is_readable($f = _DIR_LANG . 'local_'.$lang.'.php3'))
-		surcharger_langue($f);
 }
 
 //
 // Surcharger le fichier de langue courant avec un autre (tordu, hein...)
 //
 function surcharger_langue($f) {
+
 	$idx_lang_normal = $GLOBALS['idx_lang'];
 	$GLOBALS['idx_lang'] .= '_temporaire';
 	include($f);
-
 	if (is_array($GLOBALS[$GLOBALS['idx_lang']]))
 		foreach ($GLOBALS[$GLOBALS['idx_lang']] as $var => $val)
 			$GLOBALS[$idx_lang_normal][$var] = $val;
-
 	unset ($GLOBALS[$GLOBALS['idx_lang']]);
 	$GLOBALS['idx_lang'] = $idx_lang_normal;
 }
@@ -138,13 +128,28 @@ function traduire_chaine($code, $args) {
 	}
 
 	// parcourir tous les modules jusqu'a ce qu'on trouve
-	$text = '';
-	while (!$text AND (list(,$module) = each ($modules))) {
+	$new = "";
+	while (list(,$module) = each ($modules)) {
 		$var = "i18n_".$module."_".$spip_lang;
 		if (empty($GLOBALS[$var]))
+		  {
 			charger_langue($spip_lang, $module);
-		$text = $GLOBALS[$var][$code];
+			$new = $var;
+		  }
+		if (isset($GLOBALS[$var][$code])) break;
 	}
+
+	if ($new) {
+	// surcharge perso -- on cherche le fichier local(_xx).php3 dans le chemin
+	  if ($f = (find_in_path('local.php3')))
+		surcharger_langue($f);
+	  if ($f = (find_in_path('local_'.$lang.'.php3')))
+		surcharger_langue($f);
+	// compatibilite ascendante : chercher aussi local_xx.php3 dans ecrire/lang/
+	  else if (@is_readable($f = _DIR_LANG . 'local_'.$lang.'.php3'))
+		surcharger_langue($f);
+	}
+	$text = $GLOBALS[$var][$code];
 
 	// fallback langues pas finies ou en retard (eh oui, c'est moche...)
 	if ($spip_lang<>'fr') {
