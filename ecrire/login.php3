@@ -8,10 +8,12 @@ include_local ("inc_session.php3");
 include_local ("inc_filtres.php3");
 include_local ("inc_texte.php3");
 
+global $login, $erreur;
+
 // si la session existe, sauter dans ecrire/index.php3
 if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 	if (verifier_session($cookie_session)) {
-		@header("Location: ./index.php3");
+		@header("Location: ./index.php3?bonjour=oui");
 		exit;
 	}
 }
@@ -20,7 +22,7 @@ if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 $nom_site = lire_meta('nom_site');
 if (!$nom_site) $nom_site = 'Mon site SPIP';
 $url_site = lire_meta('adresse_site');
-if (!$url_site) $url_site = '../index.php3';
+if (!$url_site) $url_site = '../';
 if ($erreur=='pass') $erreur = "Erreur de mot de passe.";
 
 // Le login est memorise dans le cookie d'admin eventuel
@@ -76,10 +78,10 @@ while (list(,$img) = each ($images)) {
 
 echo "<p>&nbsp;<p>";
 
+$redirect = ereg_replace ("/login\.php3", "/index.php3", $GLOBALS['REQUEST_URI']);
+
 if ($login) {
 	// affiche formulaire de login en incluant le javascript MD5
-	$redirect = './ecrire/index.php3?essai_cookie=oui&zap=oui';
-	$redirect_echec = './ecrire/login.php3';
 	$dir = "../";
 	echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
 	echo "<form action='$dir"."spip_cookie.php3' method='post'";
@@ -119,7 +121,6 @@ if ($login) {
 	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
 	echo "<input type='hidden' name='essai_login' value='oui'>\n";
 	echo "<input type='hidden' name='redirect' value='$redirect'>\n";
-	echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
 	echo "<input type='hidden' name='session_password_md5' value=''>\n";
 	echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
 	echo "</td>";
@@ -156,7 +157,7 @@ if ($echec_cookie == "oui" AND $php_module) {
 	echo "<fieldset>\n";
 	echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
 	echo "non s&eacute;curis&eacute;e est &agrave; votre disposition&nbsp;: \n";
-	echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?zap=oui'>";
+	echo "<input type='hidden' name='redirect' value='$redirect'>";
 	echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 	echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
 	echo "</fieldset></form>\n";

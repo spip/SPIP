@@ -120,14 +120,13 @@ function auth() {
 			}
 		}
 	}
-	else if ($GLOBALS['essai_cookie'] == 'oui') {
+	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
 		@header("Location: ./login.php3?echec_cookie=oui");
 		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-//		@header("Location: ./login.php3");
 		include('login.php3');
 		exit;
 	}

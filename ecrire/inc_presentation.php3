@@ -1692,7 +1692,7 @@ function debut_droite() {
 	<?php
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && $GLOBALS['zap']=='oui' && $zapnum = zap_sessions($GLOBALS['auteur_session']['login'], false)) {
+	if ($GLOBALS['spip_session'] && $GLOBALS['bonjour']=='oui' && $zapnum = zap_sessions($GLOBALS['auteur_session']['login'], false)) {
 		debut_cadre_enfonce();
 		if ($zapnum == 1) {
 			$uneautre="une autre connexion";
@@ -1709,7 +1709,7 @@ function debut_droite() {
 			Si tel est le cas, cela ne pr&ecirc;te pas &agrave; cons&eacute;quence.
 
 			En cas de doute, toutefois, [cliquez sur ce texte pour supprimer
-			'.$lautre.'->../spip_cookie.php3?zap_session=oui&redirect=./ecrire/].');
+			'.$lautre.'->../spip_cookie.php3?zap_session=oui&redirect='.$GLOBALS['REQUEST_URI'].'].');
 		fin_cadre_enfonce();
 	}
 }
