@@ -819,7 +819,7 @@ function generer_url_public($script, $args="", $no_entities=false, $rel=false) {
 	if (!$no_entities)
 		$action = quote_amp($action);
 
-	return ($rel ? '' : url_de_base()) . $action;
+	return ($rel ? _DIR_RACINE : url_de_base()) . $action;
 }
 
 // http://doc.spip.org/@generer_url_prive
