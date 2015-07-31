@@ -66,7 +66,7 @@ function textebrut($texte) {
 
 // Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
 function liens_ouvrants ($texte) {
-	return ereg_replace("<a ([^>]*http://[^>]*class=\"spip_(out|url)\")>",
+	return ereg_replace("<a ([^>]*https?://[^>]*class=\"spip_(out|url)\")>",
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
