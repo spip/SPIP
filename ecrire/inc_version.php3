@@ -30,7 +30,6 @@ if ($unquote_gpc) {
 	magic_unquote('HTTP_COOKIE_VARS');
 }
 
-
 //
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
 // A remplacer par une gestion propre des variables admissibles ;-)
@@ -82,8 +81,6 @@ function feed_post_files($table) {
 }
 
 feed_post_files('HTTP_POST_FILES');
-
-
 
 //
 // 	*** Parametrage par defaut de SPIP ***
@@ -173,7 +170,6 @@ if ($flag_ecrire) {
 		include('ecrire/mes_options.php3');
 	}
 }
-
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -435,12 +431,12 @@ function tester_accesdistant() {
 	return $test_acces;
 }
 
-
 //
 // Reglage de l'output buffering : si possible, generer une sortie
 // compressee pour economiser de la bande passante
 //
 
+$auto_compress = false;
 if ($auto_compress && $flag_obgz) {
 	$use_gz = true;
 
@@ -465,14 +461,15 @@ if ($auto_compress && $flag_obgz) {
 		$use_gz = false;
 	else if ($flag_sapi_name && ereg("^apache2", @php_sapi_name()))
 		$use_gz = false;
-	
+		
 	if ($use_gz) {
 		@ob_start("ob_gzhandler");
 	}
 	@header("Vary: Cookie, Accept-Encoding");
 }
-else @header("Vary: Cookie");
-
+else {
+	@header("Vary: Cookie");
+}
 
 class Link {
 	var $file;
@@ -786,6 +783,7 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 }
 
 
+
 //
 // Lire les meta cachees
 //
@@ -822,7 +820,6 @@ function email_valide($adresse) {
 	}
 	return false;
 }
-
 
 //
 // Traduction des textes de SPIP
@@ -961,7 +958,6 @@ function verif_butineur() {
 	if (!$browser_name) $browser_name = "Mozilla";
 }
 
-
 function spip_debug($message) {
 	if ($GLOBALS['debug'])
 		spip_log($message);
@@ -971,5 +967,6 @@ function spip_debug($message) {
 // En mode debug, logger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
 if ($debug)
 	spip_debug("$REQUEST_METHOD: ".$GLOBALS['REQUEST_URI']);
+
 
 ?>
