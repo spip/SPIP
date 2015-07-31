@@ -867,7 +867,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // et operateur d'egalite (http://trac.rezo.net/trac/spip/ticket/477)
 
-  if ($pk = (count($boucle->from) == 1) && !$cond) {
+  if ($pk = (count($boucle->from) == 2) && !$cond) {
   	if ($pk = $a[1]['key']['PRIMARY KEY']) {
 		$id_primary = $ddesc['key']['PRIMARY KEY'];
 		$pk = preg_match("/^$id_primary, *$col$/", $pk) OR
