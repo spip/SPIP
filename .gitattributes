@@ -909,7 +909,9 @@ prive/themes/spip/images/document-new-24.png -text
 prive/themes/spip/images/edit-16.png -text
 prive/themes/spip/images/edit-24.png -text
 prive/themes/spip/images/edition-48.png -text
+prive/themes/spip/images/erreur-16.png -text
 prive/themes/spip/images/erreur-24.png -text
+prive/themes/spip/images/erreur-32.png -text
 prive/themes/spip/images/fermer-16.png -text
 prive/themes/spip/images/fleche-droite-16.png -text
 prive/themes/spip/images/identite-16.png -text
@@ -939,7 +941,9 @@ prive/themes/spip/images/mes_preferences-16.png -text
 prive/themes/spip/images/mes_preferences-24.png -text
 prive/themes/spip/images/new-16.png -text
 prive/themes/spip/images/new-24.png -text
+prive/themes/spip/images/ok-16.png -text
 prive/themes/spip/images/ok-24.png -text
+prive/themes/spip/images/ok-32.png -text
 prive/themes/spip/images/ouvrir-16.png -text
 prive/themes/spip/images/pense-bete-16.png -text
 prive/themes/spip/images/pense-bete-24.png -text
@@ -1002,6 +1006,12 @@ prive/themes/spip/images/traduction-edit-16.png -text
 prive/themes/spip/images/traduction-edit-24.png -text
 prive/themes/spip/images/traduction-new-16.png -text
 prive/themes/spip/images/traduction-new-24.png -text
+prive/themes/spip/images/tri-asc-16.png -text
+prive/themes/spip/images/tri-asc-24.png -text
+prive/themes/spip/images/tri-asc-32.png -text
+prive/themes/spip/images/tri-desc-16.png -text
+prive/themes/spip/images/tri-desc-24.png -text
+prive/themes/spip/images/tri-desc-32.png -text
 prive/themes/spip/images/ui-bg_flat_0_aaaaaa_40x100.png -text
 prive/themes/spip/images/ui-bg_flat_75_ffffff_40x100.png -text
 prive/themes/spip/images/ui-bg_glass_55_fbf9ee_1x400.png -text
@@ -1017,6 +1027,7 @@ prive/themes/spip/images/ui-icons_888888_256x240.png -text
 prive/themes/spip/images/ui-icons_cd0a0a_256x240.png -text
 prive/themes/spip/images/warning-16.png -text
 prive/themes/spip/images/warning-24.png -text
+prive/themes/spip/images/warning-32.png -text
 prive/themes/spip/images/warning-48.png -text
 prive/themes/spip/images/xml-16.png -text
 prive/themes/spip/images/xml-24.png -text
