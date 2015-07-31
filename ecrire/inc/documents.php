@@ -419,29 +419,29 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 		// Affichage du raccourci <doc...> correspondant
 		$raccourci = '';
-		if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-			$raccourci .= "<b>"._T('info_inclusion_vignette')."</b><br />";
-		}
-		$raccourci .= "<div style='color: 333333'>"
-		. affiche_raccourci_doc('doc', $id_document, 'left')
-		. affiche_raccourci_doc('doc', $id_document, 'center')
-		. affiche_raccourci_doc('doc', $id_document, 'right')
-		. "</div>\n";
-
-		if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-			$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
-			$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
+		if ($doublon)
+			$raccourci .= affiche_raccourci_doc('doc', $id_document, '');
+		else {
+			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+				$raccourci .= "<b>"._T('info_inclusion_vignette')."</b><br />";
+			}
 			$raccourci .= "<div style='color: 333333'>"
-			. affiche_raccourci_doc('emb', $id_document, 'left')
-			. affiche_raccourci_doc('emb', $id_document, 'center')
-			. affiche_raccourci_doc('emb', $id_document, 'right')
+			. affiche_raccourci_doc('doc', $id_document, 'left')
+			. affiche_raccourci_doc('doc', $id_document, 'center')
+			. affiche_raccourci_doc('doc', $id_document, 'right')
 			. "</div>\n";
-			$raccourci .= "</div>";
+	
+			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+				$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
+				$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
+				$raccourci .= "<div style='color: 333333'>"
+				. affiche_raccourci_doc('emb', $id_document, 'left')
+				. affiche_raccourci_doc('emb', $id_document, 'center')
+				. affiche_raccourci_doc('emb', $id_document, 'right')
+				. "</div>\n";
+				$raccourci .= "</div>";
+			}
 		}
-
-		$raccourci = $doublon
-			? affiche_raccourci_doc('doc', $id_document, '')
-			: $raccourci;
 
 		$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
 			. $raccourci."</div>\n";
@@ -477,14 +477,14 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		else
 			$doc = 'img';
 
-		$raccourci .=
-			affiche_raccourci_doc($doc, $id_document, 'left')
-			. affiche_raccourci_doc($doc, $id_document, 'center')
-			. affiche_raccourci_doc($doc, $id_document, 'right');
-
-		$raccourci = $doublon
-			? affiche_raccourci_doc($doc, $id_document, '')
-			: $raccourci;
+		if ($doublon)
+			$raccourci .= affiche_raccourci_doc($doc, $id_document, '');
+		else {
+			$raccourci .=
+				affiche_raccourci_doc($doc, $id_document, 'left')
+				. affiche_raccourci_doc($doc, $id_document, 'center')
+				. affiche_raccourci_doc($doc, $id_document, 'right');
+		}
 
 		$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
 			. $raccourci."</div>\n";
