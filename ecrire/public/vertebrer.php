@@ -148,7 +148,7 @@ function public_vertebrer_dist($desc)
 <div id='contenu'>
 <h1 style='text-align:center'>$titre</h1><br />
 <B1>
-<p class='pagination'>#ANCRE_PAGINATION#PAGINATION</p>
+[<p class='pagination'>(#PAGINATION)</p>]
 <table class='spip' border='1' width='90%'>
 	<tr>
 		<th><:info_numero_abbreviation:></th>$sort
@@ -169,6 +169,8 @@ function public_vertebrer_dist($desc)
 </B1>\n<h2 style='text-align:center'><:texte_vide:></h2>
 <//B1></div>
 <INCLURE{fond=inc-pied}{skel='$skel'}>
-</div></body></html>";
+</div>
+</body>
+</html>";
 }
 ?>

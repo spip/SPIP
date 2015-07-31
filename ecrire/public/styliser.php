@@ -25,31 +25,28 @@ function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='
 	if (!$base = find_in_path("$fond.$ext")) {
 		// Si pas de squelette regarder si c'est une table
 		$trouver_table = charger_fonction('trouver_table', 'base');
-		include_spip('inc/autoriser');
-		if (autoriser('sauvegarder')
-		AND preg_match('/^table:(.*)$/', $fond, $r)
-		AND $table = $trouver_table($r[1], $connect)) {
+		if (preg_match('/^table:(.*)$/', $fond, $r)
+		AND $table = $trouver_table($r[1], $connect)
+		AND include_spip('inc/autoriser')
+		AND autoriser('webmestre')
+		) {
 				$fond = $r[1];
-				$base = _DIR_TMP . $fond . ".$ext";
+				$base = _DIR_TMP . 'table_'.$fond . ".$ext";
 				if (!file_exists($base)
 				OR  $GLOBALS['var_mode']) {
 					$vertebrer = charger_fonction('vertebrer', 'public');
-					$f = fopen($base, 'w');
-					fwrite($f, $vertebrer($table));
-					fclose($f);
+					ecrire_fichier($base, $vertebrer($table));
 				}
 		} else { // on est gentil, mais la ...
-		include_spip('public/debug');
-		erreur_squelette(_T('info_erreur_squelette2',
-				    array('fichier'=>"'$fond'")),
-				 $GLOBALS['dossier_squelettes']);
-		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
-		return array(substr($f, 0, -strlen(".$ext")),
-			     $ext,
-			     $ext,
-			     $f);
+			include_spip('public/debug');
+			erreur_squelette(_T('info_erreur_squelette2',
+				array('fichier'=>"'$fond'")),
+				$GLOBALS['dossier_squelettes']);
+			$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
+			return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
 		}
 	}
+
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
