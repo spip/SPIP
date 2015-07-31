@@ -47,8 +47,17 @@ function action_inscrire_auteur_dist($statut, $mail_complet, $nom, $options = ar
 
 	$row = sql_fetch($res);
 	sql_free($res);
-	// s'il n'existe pas deja, creer les identifiants
-	$desc = $row ? $row : inscription_nouveau($desc);
+	if ($row){
+		if (isset($options['force_nouveau']) AND $options['force_nouveau']==true){
+			$desc['id_auteur'] = $row['id_auteur'];
+			$desc = inscription_nouveau($desc);
+		}
+		else
+			$desc = $row;
+	}
+	else
+		// s'il n'existe pas deja, creer les identifiants
+		$desc = inscription_nouveau($desc);
 
 	// erreur ?
 	if (!is_array($desc))
@@ -127,14 +136,14 @@ function inscription_nouveau($desc)
 
 	$desc['statut'] = 'nouveau';
 	include_spip('action/editer_auteur');
-	$id_auteur = insert_auteur();
+	if (isset($desc['id_auteur']))
+		$id_auteur = $desc['id_auteur'];
+	else
+		$id_auteur = insert_auteur();
 
 	if (!$id_auteur) return _T('titre_probleme_technique');
 
-	include_spip('action/editer_auteur');
-	auteurs_set($id_auteur, $desc);
-
-	instituer_auteur($id_auteur, $desc);
+	auteur_modifier($id_auteur, $desc);
 
 	$desc['id_auteur'] = $id_auteur;
 
@@ -218,7 +227,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(8, $id_auteur);
 	include_spip('action/editer_auteur');
-	instituer_auteur($id_auteur, array('pass'=>$pass));
+	auteur_instituer($id_auteur, array('pass'=>$pass));
 	return $pass;
 }
 
