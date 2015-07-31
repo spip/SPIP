@@ -11,12 +11,21 @@ gros_titre("&Eacute;volution des visites");
 barre_onglets("statistiques", "evolution");
 
 if ($id_article){
-	$query = "SELECT titre FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
+	$query = "SELECT titre, visites FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
 	$result = spip_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
 		$titre = propre($row['titre']);
+		$total_absolu = propre($row['visites']);
 		gros_titre($titre);
+	}
+} 
+else {
+	$query = "SELECT SUM(visites) AS total_absolu FROM spip_visites WHERE type='tout'";
+	$result = spip_query($query);
+
+	if ($row = mysql_fetch_array($result)) {
+		$total_absolu = $row['total_absolu'];
 	}
 }
 
@@ -25,9 +34,10 @@ debut_gauche();
 
 
 	echo "<p>";
+	echo "<div class='iconeoff' style='padding: 5px;'>";
 	echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 	echo propre("Afficher les visites pour:");
-
+	echo "<ul>";
 	if ($id_article>0) {
 		echo "<li><b><a href='statistiques_visites.php3'>Tout le site</a></b>";
 	}
@@ -42,7 +52,9 @@ debut_gauche();
 		echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a>";
 	}
 	echo "</font>";
+	echo "</ul>";
 	echo "</font>";
+	echo "</div>";
 
 debut_droite();
 
@@ -118,7 +130,6 @@ if (count($log)>0){
 			}
 
 		}
-			
 		$hauteur = round($value * $rapport)	- 1;
 		echo "<td valign='bottom' width=$largeur>";
 		if ($hauteur > 0){
@@ -132,6 +143,7 @@ if (count($log)>0){
 	}
 		// Dernier jour
 		$hauteur = round($visites_today * $rapport)	- 1;
+		$total_absolu = $total_absolu + $visites_today;
 		echo "<td valign='bottom' width=$largeur>";
 		if ($hauteur > 0){
 			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
@@ -146,6 +158,7 @@ if (count($log)>0){
 	echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
 		echo "max&nbsp;: $max";
 		echo "<br>aujourd'hui&nbsp;: $visites_today";
+		echo "<br>total : $total_absolu";
 	echo "</font></td>";
 	echo "</tr></table>";
 	
