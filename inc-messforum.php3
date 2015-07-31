@@ -21,6 +21,7 @@ include_local(_FILE_CONNECT);
 // Voir commentaires dans celui-ci et dans inc-formulaire_forum
 
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
+	global $nom_site_forum, $url_site;
 	include_ecrire('inc_texte.php3');
 	include_ecrire('inc_filtres.php3');
 	include_ecrire('inc_mail.php3');
@@ -45,8 +46,7 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 	$corps = "\n"
 		. $url
 		. "\n\n\n".$titre."\n\n".textebrut(propre($texte))
-		. "\n\n$nom_site_spip\n$adresse_site\n";
-
+		. "\n\n$nom_site_forum\n$url_site\n";
 	if ($email_auteur) 
 		$email_auteur = ' <' . $email_auteur . '>';
 	$result = spip_query("SELECT auteurs.email, auteurs.lang FROM spip_auteurs AS auteurs,
@@ -123,7 +123,7 @@ function enregistre_forum() {
 	  $afficher_texte, $ajouter_mot, $alea, $hash,
 	  $auteur, $confirmer_forum, $email_auteur, $id_auteur,
 	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;
-
+	spip_log("	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;");
 	$retour_forum = rawurldecode($retour_forum);
 
 	// Recuperer les donnees postees du formulaire ou stocker '0'
