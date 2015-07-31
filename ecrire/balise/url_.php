@@ -22,9 +22,12 @@ function balise_URL__dist($p) {
 	if ($f = charger_fonction($p->nom_champ, 'balise', true))
 		return $f($p);
 	else {
-		$nom = strtolower(substr($p->nom_champ,4));
-		$code = generer_generer_url($nom, $p);
-		if ($code === NULL) return NULL;
+		$code = champ_sql($p->nom_champ, $p);
+		if (strpos($code, '@$Pile[0]') !== false) {
+			$nom = strtolower(substr($p->nom_champ,4));
+			$code = generer_generer_url($nom, $p);
+			if ($code === NULL) return NULL;
+		}
 		$p->code = $code;
 		$p->interdire_scripts = false;
 		return $p;
