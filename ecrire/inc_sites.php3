@@ -668,10 +668,38 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	// Les enregistrer dans la base
 	if (is_array($articles)) {
+		$urls = array();
 		foreach ($articles as $data) {
-			if ($data['url'])
+			if ($data['url']) {
 				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site);
+				$urls[] = $data['url'];
+			}
 		}
+
+		// moderation automatique des liens qui sont sortis du feed
+		if (count($urls) > 0
+		AND $row['miroir'] == 'oui') {
+			spip_query("UPDATE spip_syndic_articles
+				SET statut='off', maj=maj
+				WHERE id_syndic=$now_id_syndic
+				AND NOT (url IN ('"
+				. join("','", array_map('addslashes',$urls))
+				. "'))");
+		}
+
+		// suppression apres 2 mois des liens qui sont sortis du feed
+		if (count($urls) > 0
+		AND $row['oubli'] == 'oui') {
+			$time = date('U') - 61*24*3600; # deux mois
+			spip_query("DELETE FROM spip_syndic_articles
+				WHERE id_syndic=$now_id_syndic
+				AND UNIX_TIMESTAMP(maj) < $time
+				AND UNIX_TIMESTAMP(date) < $time
+				AND NOT (url IN ('"
+				. join("','", array_map('addslashes',$urls))
+				. "'))");
+		}
+
 
 		// Noter que la syndication est OK
 		spip_query("UPDATE spip_syndic SET syndication='oui'
@@ -891,7 +919,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 					$puce = 'puce-rouge.gif';
 			}
 
-			else if ($statut == "off") { // vieillerie
+			else if ($statut == "off") { // feed d'un site en mode "miroir"
 					$puce = 'puce-rouge-anim.gif';
 			}
 
@@ -899,7 +927,10 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$vals[] = $s;
 
 			$s = "<a href='$url'>$titre</a>";
-			if (strlen($lesauteurs) > 0) $s .= " ($lesauteurs)";
+
+			$date = affdate_court($date);
+			if (strlen($lesauteurs) > 0) $date = $lesauteurs.', '.$date;
+			$s.= " ($date)";
 
 			// S'il y a des fichiers joints (enclosures), on les affiche ici
 			if (spip_num_rows($q = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_syndic AS lien WHERE lien.id_syndic_article = $id_syndic_article AND lien.id_document = docs.id_document"))) {
@@ -918,11 +949,11 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$vals[] = $s;
 
 			// $my_sites cache les resultats des requetes sur les sites
-			if ($afficher_site) {
-				if (!$my_sites[$id_syndic])
-					$my_sites[$id_syndic] = spip_fetch_array(spip_query(
-						"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
+			if (!$my_sites[$id_syndic])
+				$my_sites[$id_syndic] = spip_fetch_array(spip_query(
+					"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
 
+			if ($afficher_site) {
 				$aff = $my_sites[$id_syndic]['nom_site'];
 				if ($my_sites[$id_syndic]['moderation'] == 'oui')
 					$s = "<i>$aff</i>";
@@ -943,7 +974,12 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 				else if ($statut == "refuse"){
 					$s =  "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_retablir_lien')."</a>]";
 				}
-				else /* if ($statut == "dispo") */ {
+				else if ($statut == "off"
+				AND $my_sites[$id_syndic]['miroir'] == 'oui') {
+					$s = '('._T('syndic_lien_obsolete').')';
+				}
+				else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
+				{
 					$s = "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_valider_lien')."</a>]";
 				}
 				$vals[] = $s;

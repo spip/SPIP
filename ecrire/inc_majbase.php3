@@ -994,6 +994,8 @@ function maj_base() {
 	if ($version_installee < 1.816) {
 		maj_version(1.816);
 	}
+
+	// Texte et descriptif des groupes de mots-cles
 	if ($version_installee < 1.817) {
 		spip_query("ALTER TABLE spip_groupes_mots
 		ADD descriptif text NOT NULL AFTER titre");
@@ -1001,11 +1003,22 @@ function maj_base() {
 		ADD COLUMN texte longblob NOT NULL AFTER descriptif");
 		maj_version(1.817);
 	}
+
+	// Conformite des noms de certains champs (0minirezo => minirezo)
 	if ($version_installee < 1.818) {
 		spip_query("ALTER TABLE spip_groupes_mots CHANGE COLUMN 0minirezo minirezo char(3) NOT NULL");
 		spip_query("ALTER TABLE spip_groupes_mots CHANGE COLUMN 1comite comite char(3) NOT NULL");
 		spip_query("ALTER TABLE spip_groupes_mots CHANGE COLUMN 6forum forum char(3) NOT NULL");
 		maj_version(1.818);
+	}
+
+	// Options de syndication : miroir + oubli
+	if ($version_installee < 1.819) {
+		spip_query("ALTER TABLE spip_syndic
+			ADD miroir VARCHAR(3) DEFAULT 'non'");
+		spip_query("ALTER TABLE spip_syndic
+			ADD oubli VARCHAR(3) DEFAULT 'non'");
+		maj_version(1.819);
 	}
 
 
