@@ -1399,8 +1399,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</tr></table>\n";
 	echo "<table class='droite'><tr>\n";
 
-		icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
-		icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.gif");
+	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
+	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48.gif");
 
 	echo "</tr></table>\n";
 

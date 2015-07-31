@@ -78,7 +78,7 @@ function init_config() {
 
 	// Cas particulier : charset regle a utf-8 uniquement si nouvelle installation
 	if (lire_meta('nouvelle_install') == 'oui') {
-		ecrire_meta('charset', 'utf-8');
+		//ecrire_meta('charset', 'utf-8');
 		effacer_meta('nouvelle_install');
 		$modifs = true;
 	}
