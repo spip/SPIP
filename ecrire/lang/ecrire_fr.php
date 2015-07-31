@@ -591,6 +591,7 @@ exige d\'avoir un accès FTP au site Web.</p>',
 'info_preview_comite' => 'Tous les rédacteurs peuvent prévisualiser le site',
 'info_preview_desactive' => 'La prévisualisation est totalement désactivée',
 'info_preview_texte' => 'Il est possible de prévisualiser le site comme si tous les articles et les brèves (ayant au moins le statut « proposé ») étaient publiés. Cette possibilité doit-elle être ouverte aux administrateurs seulement, à tous les rédacteurs, ou à personne ?',
+'info_previsions' => 'prévisions :',
 'info_principaux_correspondants' => 'Vos principaux correspondants',
 'info_procedez_par_etape' => 'procédez étape par étape',
 'info_procedure_maj_version' => 'la procédure de mise à jour doit être lancée afin d\'adapter
