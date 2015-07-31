@@ -102,14 +102,15 @@ function plugins_liste_librairies() {
 	return $libs;
 }
 
-// Prend comme argument le tableau des <necessite> et retourne false si
-// tout est bon, et un message d'erreur sinon
+// Prend comme argument le tableau des <necessite> et retourne un tableau vide
+// si tout est bon, et un tableau avec une entree par erreur sinon
 // http://doc.spip.org/@erreur_necessite
 function erreur_necessite($n, $liste) {
-	if (!is_array($n) OR !count($n))
-		return false;
+	if (!is_array($n) OR !count($n)) {
+		return array();
+	}
 
-	$msg = "";
+	$msg = array();
 	foreach($n as $need){
 		$id = strtoupper($need['id']);
 
@@ -117,10 +118,9 @@ function erreur_necessite($n, $liste) {
 		if ($id=='SPIP') {
 			if (!plugin_version_compatible($need['version'],
 			$GLOBALS['spip_version_branche'])) {
-				$msg .= "<li>"
-				._T('plugin_necessite_spip',
-				array('version' => $need['version'])
-				)."</li>";
+				$msg[] = _T('plugin_necessite_spip', array(
+					'version' => $need['version']
+				));
 			}
 		}
 
@@ -135,10 +135,7 @@ function erreur_necessite($n, $liste) {
 					$lien_download = '<br />'
 						.bouton_telechargement_plugin($url, strtolower($r[1]));
 				}
-				$msg .= "<li>"
-				  ._T('plugin_necessite_lib',array('lib'=>$lib))
-				. $lien_download
-				."</li>";
+				$msg[] = _T('plugin_necessite_lib', array('lib'=>$lib)) . $lien_download;
 			}
 		}
 
@@ -146,15 +143,12 @@ function erreur_necessite($n, $liste) {
 		else if (!isset($liste[$id])
 		OR !plugin_version_compatible($need['version'],$liste[$id]['version'])
 		) {
-			$msg .= "<li>"
-			._T('plugin_necessite_plugin',
-			array('plugin' => $id,
-				'version' => $need['version'])
-			)."</li>";
+			$msg[] =  _T('plugin_necessite_plugin', array(
+				'plugin' => $id,
+				'version' => $need['version']));
 		}
 	}
-	if (strlen($msg))
-		$msg="<ul>$msg</ul>";
+
 	return $msg;
 }
 
@@ -207,6 +201,11 @@ function liste_plugin_valides($liste_plug, $force = false){
 
 	// il y a des plugins a trier
 	if (is_array($liste_non_classee)){
+		// pour tester utilise, il faut connaitre tous les plugins 
+		// qui seront forcement pas la a la fin,
+		// car absent de la liste des plugins actifs
+		$toute_la_liste = $liste_non_classee;
+		
 		// construire une liste ordonnee des plugins
 		$count = 0;
 		while ($c=count($liste_non_classee) AND $c!=$count){ // tant qu'il reste des plugins a classer, et qu'on ne stagne pas
@@ -220,8 +219,14 @@ function liste_plugin_valides($liste_plug, $force = false){
 				// si des plugins sont utiles, on ne peut inserer qu'apres eux, 
 				// sauf si ils sont de toute facon absents de la liste
 				$utilise_ok = true;
-				if (!erreur_necessite($infos[$dir_type][$plug]['utilise'], $liste_non_classee))
-					$utilise_ok = !erreur_necessite($infos[$dir_type][$plug]['utilise'], $liste);
+				// tous les plugins "utilise" absents
+				$nb_utilise_absents_toleres = count(erreur_necessite($infos[$dir_type][$plug]['utilise'], $toute_la_liste));
+				// tous les plugins "utilise" absents de la liste deja trie
+				$nb_utilise_absents_tries = count(erreur_necessite($infos[$dir_type][$plug]['utilise'], $liste));
+				if (abs($nb_utilise_absents_tries - $nb_utilise_absents_toleres) > 0) {
+					$utilise_ok = false;
+				} 				
+
 				if ($necessite_ok AND $utilise_ok){
 					$liste[$p] = $liste_non_classee[$p];
 					$ordre[] = $p;
@@ -239,7 +244,7 @@ function liste_plugin_valides($liste_plug, $force = false){
 				if ($n = erreur_necessite($infos[$dir_type][$plug]['necessite'], $liste)){
 					$erreurs .= "<li>" . _T('plugin_impossible_activer',
 						array('plugin' => constant($dir_type). $plug)
-					)."$n</li>";
+					) . "<ul><li>" . implode("</li><li>", $n) . "</li></ul></li>";
 				}
 				else {
 					// dependance circulaire, ou utilise qu'on peut ignorer ?
@@ -248,13 +253,14 @@ function liste_plugin_valides($liste_plug, $force = false){
 					$necessite = erreur_necessite($infos[$plug]['utilise'], $liste);
 					$erreurs .= "<li>" . _T('plugin_impossible_activer',
 						array('plugin' => constant($dir_type). $plug)
-					)."$necessite</li>";
+					) . "<ul><li>" . implode("</li><li>", $necessite) . "</li></ul></li>";
 				}
 			}
 			ecrire_meta('plugin_erreur_activation',
 				"<ul>$erreurs</ul>");
 		}
 	}
+
 	return array($liste,$ordre,$infos);
 }
 
