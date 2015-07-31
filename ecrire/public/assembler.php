@@ -135,8 +135,7 @@ function traiter_formulaires_dynamiques(){
 		if ($form = _request('formulaire_action')
 		AND $args = _request('formulaire_action_args')) {
 			include_spip('inc/filtres');
-			if ($args = decoder_contexte_ajax($args)
-			AND $args['form'] == $form) {
+			if ($args = decoder_contexte_ajax($args,$form)) {
 				$verifier = charger_fonction("verifier","formulaires/$form/",true);
 				$_POST["erreurs_$form"] = pipeline(
 				  'formulaire_verifier',
