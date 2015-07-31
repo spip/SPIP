@@ -89,6 +89,12 @@ function quete_fichier($id_document, $serveur) {
 	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
+# Toute les infos sur un document
+
+function quete_document($id_document, $serveur) {
+	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
+}
+
 // http://doc.spip.org/@quete_petitions
 function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = sql_getfetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','', $serveur);
@@ -182,100 +188,46 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 // fonction appelee par la balise #LOGO_DOCUMENT
 // http://doc.spip.org/@calcule_logo_document
 function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params='', $connect='') {
-	include_spip('inc/documents');
-
-	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
-
-	if (!($row = sql_fetsel('titre, taille, extension, id_vignette, fichier, mode', 'spip_documents', ("id_document = $id_document"),'','','','',$connect))) {
+	if (!$row = quete_document($id_document, $connect)) {
 		// pas de document. Ne devrait pas arriver
 		spip_log("Erreur du compilateur doc $id_document inconnu");
 		return ''; 
 	}
 
-	$extension = $row['extension'];
-	$id_vignette = $row['id_vignette'];
-	$fichier = $row['fichier'];
-	$mode = $row['mode'];
-
+	include_spip('inc/documents');
+	$logo = vignette_logo_document($row['id_vignette'], $connect);
+	if (!$logo AND $row['mode'] == 'vignette') {
+		$logo = generer_url_entite($id_document, 'document');
+	}
+	// flag_fichier : seul le fichier est demande
+	if ($flag_fichier) {
+		return set_spip_doc($logo ? $logo : image_du_document($row));
+	}
 	// taille maximum [(#LOGO_DOCUMENT{300,52})]
 	if (preg_match('/{\s*(\d+),\s*(\d+)\s*}/', $params, $r)) {
 		$x = intval($r[1]);
 		$y = intval($r[2]);
 	} else $x = $y = 0;
 
-	$logo = img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $connect);
-
-	// flag_fichier : seul le fichier est demande
-	if ($flag_fichier)
-		return set_spip_doc(extraire_attribut($logo, 'src'));
-
-	// Calculer le code html complet (cf. calcule_logo)
-	$logo = inserer_attribut($logo, 'alt', '');
-	$logo = inserer_attribut($logo, 'class', 'spip_logos');
-	if ($align) $logo = inserer_attribut($logo, 'align', $align);
-	if (!$lien) return $logo;
-	$titre = supprimer_tags(typo($row['titre']));
-	$taille = taille_en_octets($row['taille']);
-
-	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($extension));
-
-	$mime = $type['mime_type'];
-	$titre = $type['titre'] . " - $taille" . ($titre ? " - $titre" : "");
-	$titre = attribut_html(couper($titre, 80));
-	return "<a href='$lien' type='$mime' title='$titre'>$logo</a>";
+	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
 }
 
-function img_logo_document($fichier, $extension, $id_vignette, $mode, $x, $y, $connect='')
+// Retourne la vignette explicitement attachee a un document
+// le resutat est un fichier local existant, ou une URL
+function vignette_logo_document($id_vignette, $connect='')
 {
-	if ($id_vignette) {
-		$vignette = quete_fichier($id_vignette, $connect);
-		if ($connect) {
-			$site = quete_meta('adresse_site', $connect);
-			$dir = quete_meta('dir_img', $connect);
-			$logo = "$site/$dir$vignette";
-		}
-		elseif (@file_exists(get_spip_doc($vignette)))
-			$logo = generer_url_entite($id_vignette, 'document');
-	} else if ($mode == 'vignette') {
-		$logo = generer_url_entite($id_vignette, 'document');
-		if (!@file_exists($logo)) $logo = '';
-	} else $logo = '';
-
-
-	if ($logo AND @file_exists($logo)) {
-		if (!$x AND !$y) {
-			$size = @getimagesize($logo);
-			$logo = "<img src='$logo' ".$size[3]." />";
-		}
+	if (!$id_vignette) return '';
+	$fichier = quete_fichier($id_vignette, $connect);
+	if ($connect) {
+		$site = quete_meta('adresse_site', $connect);
+		$dir = quete_meta('dir_img', $connect);
+		return "$site/$dir$fichier";
 	}
-	else {
-		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strpos($GLOBALS['meta']['formats_graphiques'], $extension)!==false) {
-		  if ($img = _DIR_RACINE.copie_locale(get_spip_doc($fichier))
-			AND @file_exists($img)) {
-				if (!$x AND !$y) {
-					$logo = reduire_image($img);
-				} else {
-					# eviter une double reduction
-					$size = @getimagesize($img);
-					$logo = "<img src='$img' ".$size[3]." />";
-				}
-		  }
-		  // cas de la vignette derriere un htaccess
-		} elseif ($logo) $logo = "<img src='$logo'>";
-
-		// Document sans vignette ni image : vignette par defaut
-		if (!$logo) {
-			$img = vignette_par_defaut($extension, false);
-			$size = @getimagesize($img);
-			$logo = "<img src='$img' ".$size[3]." />";
-		}
-	}
-
-	// Reduire si une taille precise est demandee
-	return ($x OR $y) ? reduire_image($logo, $x, $y) : $logo;
+	$f = get_spip_doc($fichier);
+	return ($f AND @file_exists($f)) ? $f : '';
 }
+
 // Ajouter "&lang=..." si la langue du forum n'est pas celle du site.
 // Si le 2e parametre n'est pas une chaine, c'est qu'on n'a pas pu
 // determiner la table a la compil, on le fait maintenant.

@@ -102,7 +102,6 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 	if (!$ext)
 		$ext = 'txt';
 
-
 	// Chercher la vignette correspondant a ce type de document
 	// dans les vignettes persos, ou dans les vignettes standard
 	if (
@@ -132,16 +131,7 @@ function vignette_par_defaut($ext, $size=true, $loop = true) {
 	return array($v, $largeur, $hauteur);
 }
 
-//
-// Affiche le document avec sa vignette par defaut
-//
-// Attention : en mode 'doc', si c'est un fichier graphique on prefere
-// afficher une vue reduite, quand c'est possible (presque toujours, donc)
-// En mode 'image', l'image conserve sa taille
-//
-// A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
-// de la vignette -> c'est a ca que sert la variable $portfolio
-// http://doc.spip.org/@image_pattern
+// Fonction obsolete
 function image_pattern($vignette) {
 	return "<img src='"
 			. get_spip_doc($vignette['fichier'])."'
@@ -152,60 +142,93 @@ function image_pattern($vignette) {
 
 // http://doc.spip.org/@document_et_vignette
 function document_et_vignette($document, $url, $portfolio=false) {
-	$extension = $document['extension'];
-	$vignette = $document['id_vignette'];
+	$image = $document['id_vignette'];
 
-	if ($vignette) 
-		$vignette = sql_fetsel("*", "spip_documents", "id_document = ".$vignette);
-	if ($vignette) {
-			if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
-				$image = image_pattern($vignette);
-			} else {
-				include_spip('inc/filtres');
-				$loc = get_spip_doc($vignette['fichier']);
-				$image = filtrer('image_reduire', $loc, 120, 110, false, true);
-				if ($loc == $image)
-					$image = image_pattern($vignette);
-			}
-	}
-	else if (in_array($extension,
-		explode(',', $GLOBALS['meta']['formats_graphiques']))
-	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
-		include_spip('inc/distant');
-		include_spip('inc/filtres');
-
-		// Si le document distant a une copie locale, on peut l'exploiter
-		if ($document['distant'] == 'oui') {
-			$image = _DIR_RACINE.copie_locale($document['fichier'], 'test');
+	if ($image) 
+		$image = sql_fetsel("*", "spip_documents", "id_document = ".$image);
+	if ($image) {
+		if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
+			$x = $image['largeur'];
+			$y = $image['hauteur'];
 		} else {
-			$image = get_spip_doc($document['fichier']);
+			$x = 120;
+			$y = 110;
 		}
-
-		if ($image) {
-			if ($portfolio) {
-				$image = filtrer('image_reduire',	$image,	110, 120, false, true);
-			} else {
-				$image = filtrer('image_reduire',	$image,	-1,-1,false, true);
-			}
-			$image = inserer_attribut($image, "class", "miniature_document");
-		}
+		$image = get_spip_doc($image['fichier']);
 	} else {
-		$image = '';
+		if ($portfolio) {
+			$x = 110;
+			$y = 120;
+		} else 	$x = $y =-1; 
 	}
-
-	if (!$image) {
-		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
-		$image = "<img src='$fichier'\n\theight='$hauteur' style='' width='$largeur' alt=' ' />";
-	} else $image = inserer_attribut($image, 'alt', ' ');
-
-	if (!$url)
-		return $image;
-	else {
-		$t = sql_fetsel("mime_type", "spip_types_documents", "extension=".sql_quote($document['extension']));
-		return "<a href='$url'\n\ttype='".$t['mime_type']."'>$image</a>";
-	}
+	return vignette_automatique($image, $document, $url, $x, $y, '', "miniature_document");
 }
 
+//
+// Affiche le document avec sa vignette par defaut
+//
+// Attention : en mode 'doc', si c'est un fichier graphique on prefere
+// afficher une vue reduite, quand c'est possible (presque toujours, donc)
+// En mode 'image', l'image conserve sa taille
+//
+// A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
+// de la vignette -> c'est a ca que sert la variable $portfolio
+// http://doc.spip.org/@image_pattern
+
+function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
+{
+	include_spip('inc/distant');
+	include_spip('inc/filtres');
+	include_spip('inc/filtres_images_mini');
+	if (!$img) {
+		$img = image_du_document($doc);
+	}
+	if ($GLOBALS['meta']['creer_preview'] === 'oui') {
+		if ($x OR $y) {
+			$img = image_reduire($img, $x, $y);
+		} else 	$img = image_reduire($img);
+		$img = inserer_attribut($img, 'width', $x);
+		$img = inserer_attribut($img, 'height', $y);
+		$img = inserer_attribut($img, 'alt', '');
+		$img = inserer_attribut($img, 'class', $class);
+		if ($align) $img = inserer_attribut($img, 'align', $align);
+	} else {
+		if ($x AND $y)
+		  $size = " width='$x' $height='$y'";
+		else list($size) = @getimagesize($img);
+		$img = "<img src='$img' ".$size. " alt='' class='$class'" . ($align ? " align='$align'" : '') . " />";
+	}
+	if (!$lien) return $img;
+
+	$titre = supprimer_tags(typo($doc['titre']));
+	$titre = " - " .taille_en_octets($doc['taille'])
+	  . ($titre ? " - $titre" : "");
+
+	$type = sql_fetsel('titre, mime_type','spip_types_documents', "extension = " . sql_quote($doc['extension']));
+
+	$mime = $type['mime_type'];
+	$titre = attribut_html(couper($type['titre'] . $titre, 80));
+	return "<a href='$lien' type='$mime' title='$titre'>$img</a>";
+}
+
+// Trouve une image caracteristique d'un document.
+// Si celui-ci est une image et que les outils graphiques sont dispos, 
+// retourner le document (en exploitant sa copie locale s'il est distant).
+// Autrement retourner la vignette fournie par SPIP pour ce type MIME 
+// Resultat: un fichier local existant
+
+function image_du_document($document)
+{
+	$e = $document['extension'];
+	if ((strpos($GLOBALS['meta']['formats_graphiques'], $e) !== false)
+	AND  $GLOBALS['meta']['creer_preview'] == 'oui') {
+		if ($document['distant'] == 'oui') {
+			$image = _DIR_RACINE.copie_locale($document['fichier']);
+		} else 	$image = get_spip_doc($document['fichier']);
+		if (@file_exists($image)) return $image;
+	}
+	return vignette_par_defaut($e, false);
+}
 
 //
 // Afficher un document dans la colonne de gauche
