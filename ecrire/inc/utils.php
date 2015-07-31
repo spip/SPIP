@@ -499,6 +499,9 @@ function cron ($gourmand=false, $taches= array()) {
 
 	if (spip_touch(_DIR_TMP.'cron.lock',
 			(is_int($gourmand) ? $gourmand : 2))) {
+			// Si base inaccessible, laisser tomber.
+			if (!spip_connect()) return false;
+
 			$genie = charger_fonction('genie', 'inc', true);
 			if ($genie) {
 				$genie($taches);
