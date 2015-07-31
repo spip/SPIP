@@ -342,6 +342,9 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'icone_valider_message' => 'Validar aquest missatge',
 'icone_visiter_site' => 'Visitar',
 'icone_voir_en_ligne' => 'Visualitzar en l&iacute;nia',
+'image_tourner_180' => 'Girar 180&deg;',
+'image_tourner_droite' => 'Girar 90&deg; cap a la dreta',
+'image_tourner_gauche' => 'Girar 90&deg; cap a l\'esquerre',
 'img_indisponible' => 'imatge no disponible',
 'info_a_suivre' => 'NOVETATS&raquo;',
 'info_a_valider' => '[per validar]',
@@ -385,6 +388,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_description_2' => 'Descripci&oacute;:',
 'info_dimension' => 'Mida:',
 'info_document' => 'Document',
+'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet l\'intercanvi de missatges i la creaci&oacute; de f&ograve;rums de discussi&oacute;
   privats entre els participants d\'un lloc. Podeu habilitar o
   inhabilitar aquesta funcionalitat.',
@@ -459,6 +463,8 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_petit_ecran' => 'Pantalla petita',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'S\'ha trobat diverses paraules clau per "@cherche_mot@":',
+'info_popularite_5' => 'popularitat:',
+'info_portfolio' => 'Carpeta',
 'info_portfolio_automatique' => 'Carpeta autom&agrave;tica:',
 'info_premier_resultat' => '[@debut_limit@ primers resultats sobre @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primers resultats sobre @total@]',

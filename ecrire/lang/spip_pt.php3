@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => '<NEW>Retour &agrave; l\'interface graphique compl&egrave;te',
 'access_mode_texte' => '<NEW>Afficher l\'interface textuelle simplifi&eacute;e',
+'admin_debug' => '<NEW>debug',
 'admin_modifier_article' => 'Modificar este artigo',
 'admin_modifier_auteur' => 'Modificar este autor',
 'admin_modifier_breve' => 'Modificar esta not&iacute;cia',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_jour_entier' => '<NEW>jour entier',
+'cal_matin' => '<NEW>matin',
+'cal_par_jour' => '<NEW>calendrier par jour',
+'cal_par_mois' => '<NEW>calendrier par mois',
+'cal_par_semaine' => '<NEW>calendrier par semaine',
 'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
@@ -329,6 +336,10 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_valider_message' => 'Validar esta mensagem',
 'icone_visiter_site' => '<MODIF>Visitar o s&iacute;tio',
 'icone_voir_en_ligne' => 'Ver em linha',
+'image_tourner_180' => '<NEW>Rotation 180&deg;',
+'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
+'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
+'img_indisponible' => '<NEW>image indisponible',
 'info_a_suivre' => 'A SEGUIR&nbsp;&raquo;',
 'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acesso proibido',
@@ -363,12 +374,14 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_cours_edition' => 'Os seus artigos em curso de reda&ccedil;&atilde;o',
 'info_creer_repertoire' => 'Favor criar um ficheiro ou um repert&oacute;rio nomeado&nbsp;:',
 'info_creer_repertoire_2' => 'dentro do sub-repert&oacute;rio <b>ecrire/data/</b>, depois&nbsp;:',
+'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_deplier' => 'Desenvolver',
 'info_descriptif_nombre' => 'descritivo(s)&nbsp;:',
 'info_description' => 'Descri&ccedil;&atilde;o&nbsp;:',
 'info_description_2' => 'Descri&ccedil;&atilde;o&nbsp;:',
 'info_dimension' => 'Dimens&otilde;es&nbsp;:',
 'info_document' => 'Documento',
+'info_documents' => '<NEW>Documents',
 'info_echange_message' => 'SPIP permite a troca de mensagens e a constitui&ccedil;&atilde;o de f&oacute;runs privados de discuss&atilde;o
 entre os participantes do s&iacute;tio. Pode activar ou
  desactivar esta funcionalidade.',
@@ -409,6 +422,9 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_langue_principale' => 'L&iacute;ngua principal do s&iacute;tio',
 'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'pelos  @les_auteurs@',
+'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
+'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
 'info_mail_fournisseur' => 'voc&ecirc;@fournisseur.com',
 'info_message_2' => 'MESSAGE',
 'info_message_supprime' => 'MENSAGEM SUPRIMIDA',
@@ -432,6 +448,8 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_petit_ecran' => 'Pequeno ecr&atilde;',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Muitas palavras-chave encontradas para "@cherche_mot@":',
+'info_popularite_5' => 'popularidade&nbsp;:',
+'info_portfolio' => '<NEW>Portfolio',
 'info_portfolio_automatique' => 'Portfolio autom&aacute;tico&nbsp;:',
 'info_premier_resultat' => '[@debut_limit@primeiros resultados em @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeiros resultados em @total@]',
@@ -481,6 +499,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_visite' => 'visita :',
 'info_visites' => 'visitas :',
 'info_vos_rendez_vous' => 'Os seus futuros encontros',
+'info_zoom' => '<NEW>zoom',
 'infos_vos_pense_bete' => 'Os seus mementos',
 'item_breve_proposee' => 'Not&iacute;cia proposta',
 
@@ -605,12 +624,14 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'pass_retour_public' => 'Regresso ao s&iacute;tio p&uacute;blico',
 'pass_rien_a_faire_ici' => 'Nada a fazer aqui.',
 'pass_vousinscrire' => 'Inscrever-se neste s&iacute;tio',
+'precedent' => '<NEW>pr&eacute;c&eacute;dent',
 'previsualisation' => '<NEW>Pr&eacute;visualisation',
 'previsualiser' => '<NEW>Pr&eacute;visualiser',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ visitas&nbsp;; popularidade&nbsp;: @popularite@',
+'suivant' => '<NEW>suivant',
 
 
 // T
@@ -682,11 +703,27 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 
 
 // Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle' => '<NEW>boucle',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => '<NEW>code',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>externe interdit',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: Dupla Defini&ccedil;&atilde;o ',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag final em falta   ',
 'zbug_erreur_boucle_syntaxe' => 'Loop com sintaxe incorrecto',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'Erro : filtro <b>&laquo; @filtre@ &raquo;</b> indefinido',
-'zbug_info_erreur_squelette' => 'Erro no s&iacute;tio'
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => 'Erro no s&iacute;tio',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => '<NEW>r&eacute;sultat',
+'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 

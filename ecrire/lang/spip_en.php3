@@ -337,6 +337,9 @@ Thank you for your participation
 'icone_valider_message' => 'Validate this message',
 'icone_visiter_site' => 'Visit the site',
 'icone_voir_en_ligne' => 'View online',
+'image_tourner_180' => 'Rotate 180&deg;',
+'image_tourner_droite' => 'Rotate 90&deg; right',
+'image_tourner_gauche' => 'Rotate 90&deg; left',
 'img_indisponible' => 'image unavailable',
 'info_a_suivre' => 'LAUNCH PAD&raquo;',
 'info_a_valider' => '[to be validated]',
@@ -379,6 +382,7 @@ Thank you for your participation
 'info_description_2' => 'Description:',
 'info_dimension' => 'Size:',
 'info_document' => 'Document',
+'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP allows the exchange of messages and the creation of private
 		discussion forums between participants to the site. You can enable or
 		disable this feature.',
@@ -445,6 +449,8 @@ Thank you for your participation
 'info_petit_ecran' => 'Small display',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Several keywords were found for "@cherche_mot@":',
+'info_popularite_5' => 'popularity:',
+'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automated portfolio:',
 'info_premier_resultat' => '[@debut_limit@ first results out of @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ first results out of @total@]',
