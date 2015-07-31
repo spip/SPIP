@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/boutons');
-include_spip('base/connect_sql');
+include_spip('base/objets');
 
 function inc_icone_renommer_dist($fond,$fonction){
 	$size = 24;
@@ -38,7 +38,7 @@ function inc_icone_renommer_dist($fond,$fonction){
 
 	// objet_type garde invariant tout ce qui ne commence par par id_, spip_
 	// et ne finit pas par un s, sauf si c'est une exception declaree
-	$type = objet_type($type);
+	$type = objet_type($type, false);
 
 	$dir = "images/";
 	$f = "$type-$size.png";
