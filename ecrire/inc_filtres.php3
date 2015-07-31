@@ -1077,19 +1077,28 @@ function suivre_lien($url, $lien) {
 
 // un filtre pour transformer les URLs relatives en URLs absolues ;
 // ne s'applique qu'aux #URL_XXXX
-function url_absolue($url) {
+function url_absolue($url, $base='') {
 	if (strlen($url = trim($url)) == 0)
 		return '';
-	return suivre_lien(lire_meta('adresse_site').'/', $url);
+	if (!$base) $base=lire_meta('adresse_site').'/';
+	return suivre_lien($base, $url);
 }
 
 // un filtre pour transformer les URLs relatives en URLs absolues ;
 // ne s'applique qu'aux textes contenant des liens
-function liens_absolus($texte) {
+function liens_absolus($texte, $base='') {
 	if (preg_match_all(',(<a[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
 	$texte, $liens, PREG_SET_ORDER)) {
 		foreach ($liens as $lien) {
-			$abs = url_absolue($lien[2]);
+			$abs = url_absolue($lien[2], $base);
+			if ($abs <> $lien[2])
+				$texte = str_replace($lien[0], $lien[1].$abs.$lien[3], $texte);
+		}
+	}
+	if (preg_match_all(',(<img[[:space:]]+[^<>]*src=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
+	$texte, $liens, PREG_SET_ORDER)) {
+		foreach ($liens as $lien) {
+			$abs = url_absolue($lien[2], $base);
 			if ($abs <> $lien[2])
 				$texte = str_replace($lien[0], $lien[1].$abs.$lien[3], $texte);
 		}
@@ -1100,11 +1109,11 @@ function liens_absolus($texte) {
 //
 // Ce filtre public va traiter les URL ou les <a href>
 //
-function abs_url($texte) {
+function abs_url($texte, $base='') {
 	if ($GLOBALS['mode_abs_url'] == 'url')
-		return url_absolue($url);
+		return url_absolue($texte, $base);
 	else
-		return liens_absolus($texte);
+		return liens_absolus($texte, $base);
 }
 
 
