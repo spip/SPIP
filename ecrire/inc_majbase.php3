@@ -811,21 +811,21 @@ function maj_base() {
 
 	if ($version_installee < 1.730) {
 		spip_query("ALTER TABLE spip_articles ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_articles INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_articles ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_auteurs ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_auteurs INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_breves ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_breves INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_breves ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_mots ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_mots INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_mots ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_rubriques ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_rubriques INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_rubriques ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_syndic ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_syndic INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_syndic ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_forum ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_forum ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_forum ADD ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_signatures ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_signatures INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_signatures ADD INDEX idx (idx)");
 		maj_version (1.730);
 	}
 
@@ -1019,6 +1019,19 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_syndic
 			ADD oubli VARCHAR(3) DEFAULT 'non'");
 		maj_version(1.819);
+	}
+
+	// Un bug dans les 1.730 (il manquait le "ADD")
+	if ($version_installee < 1.820) {
+		spip_query("ALTER TABLE spip_articles ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_breves ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_mots ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_rubriques ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_syndic ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_forum ADD ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_signatures ADD INDEX idx (idx)");
+		maj_version(1.820);
 	}
 
 
