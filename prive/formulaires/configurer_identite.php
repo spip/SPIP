@@ -41,6 +41,10 @@ function formulaires_configurer_identite_verifier_dist(){
 function formulaires_configurer_identite_traiter_dist(){
 	include_spip('inc/config');
 	appliquer_modifs_config();
+	if (($i = _request('adresse_site'))!==NULL){
+		if (!strlen($i)) {$GLOBALS['profondeur_url']=_DIR_RESTREINT?0:1;$i = url_de_base();}
+		$_POST['adresse_site'] = preg_replace(",/?\s*$,", "", $i);
+	}
 	
 	include_spip('inc/meta');
 	foreach(array('nom_site','adresse_site','slogan_site','descriptif_site') as $k)
