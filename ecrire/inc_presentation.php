@@ -1781,7 +1781,7 @@ function debut_html($titre = "", $rubrique="") {
 
 function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
-	global $spip_lang;
+	global $spip_lang, $couleur_claire, $couleur_foncee;
 
 	$res = "";
 	if ($spip_display != 4) {
@@ -1799,7 +1799,19 @@ function envoi_link($nom_site_spip, $rubrique="") {
 				")' href='" . generer_url_public('backend-breves') . "' />\n";
 	}
 
-	return $res
+	$args =	"fond=style&couleur_claire=" .
+		substr($couleur_claire,1) .
+		'&couleur_foncee=' .
+		substr($couleur_foncee,1) .
+		'&ltr=' . 
+		$GLOBALS['spip_lang_left'] .
+	  	'&dir='
+		. _DIR_IMG_PACK;
+	
+	return $res . '
+<link	rel="stylesheet" 
+	type="text/css"
+	href="' . generer_url_public('page', $args) .'">'
 		. debut_javascript($connect_statut == "0minirezo"
 			AND $connect_toutes_rubriques,
 			($GLOBALS['meta']["activer_statistiques"] != 'non'))
@@ -2216,23 +2228,12 @@ function init_entete($titre, $rubrique, $onLoad="", $css="") {
 	http_no_cache();
 	echo _DOCTYPE_ECRIRE .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
-	  "<head>\n" .
-	"<title>" .
-	"[$nom_site_spip] " .
-	textebrut(typo($titre)) .
-	"</title>\n" ;
-
-	// appeler spip_style.css de l'espace public
-	echo '<link rel="stylesheet" href="../spip_style.css" type="text/css" />'. "\n";
-
-	// mettre inline les styles de l'espace prive (sinon ca clignote)
-	echo "<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n";
-	include_ecrire('inc_style');
-	echo styles_ecrire();
-	echo "\n\n]]>\n--></style>\n\n";
-
-	// ajouter les autres CSS
-	echo envoi_link($nom_site_spip, $rubrique),
+	  "<head>\n",
+	  "<title>",
+	  "[$nom_site_spip] ",
+	  textebrut(typo($titre)),
+	  "</title>\n" ,
+	  envoi_link($nom_site_spip, $rubrique),
 	  (!$css ? "" :
 	   ('<link rel="stylesheet" href="' . entites_html($css) . '" type="text/css" />'. "\n")),
 	  "\n</head>\n",

@@ -1,45 +1,4 @@
-<?php
-
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2006                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-// definit les styles qui sont specifiques a ecrire/
-function styles_ecrire() {
-
-	global $couleur_claire,$couleur_foncee;
-
-	// Sommes-nous en rtl ou ltr ?
-	$ltr = ($GLOBALS['spip_lang_left'] == 'left');
-	if ($ltr) {
-		$left = 'left';
-		$right = 'right';
-		$_rtl = '';
-		$pcent = '1%';
-	} else {
-		$left = 'right';
-		$right = 'left';
-		$_rtl = '_rtl';
-		$pcent = '99%';
-	}
-
-	// Couleurs par defaut (normalement, non)
-	if (!isset($couleur_claire))
-		$couleur_claire = "#EDF3FE";
-	if (!isset($couleur_foncee))
-		$couleur_foncee = "#3874B0";
-
-
-$a= <<<FIN_CSS
-
+#HTTP{"Content-type: text/css", 360000}
 /*
  * Police par defaut (bof...)
  */
@@ -49,13 +8,13 @@ body {
 	scrollbar-face-color: white;
 	scrollbar-shadow-color: white;
 	scrollbar-highlight-color: white;
-	scrollbar-3dlight-color: #COULEURCLAIRE;
+	scrollbar-3dlight-color: ##ENV{couleur_claire,edf3fe};
 	scrollbar-darkshadow-color: white;
-	scrollbar-track-color: #COULEURFONCEE;
-	scrollbar-arrow-color: #COULEURFONCEE;
+	scrollbar-track-color: ##ENV{couleur_foncee,3874b0};
+	scrollbar-arrow-color: ##ENV{couleur_foncee,3874b0};
 }
 td {
-	text-align: #LEFT;
+	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 }
 /*
  * Formulaires
@@ -65,7 +24,7 @@ td {
 	display: block;
 	padding: 3px; 
 	background-color: #e4e4e4; 
-	border: 1px solid #COULEURCLAIRE; 
+	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
 	behavior: url("win_width.htc");
@@ -77,7 +36,7 @@ td {
 	display: block;
 	padding: 3px; 
 	background-color: white; 
-	border: 1px solid #COULEURCLAIRE; 
+	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; float: none; 
 	behavior: url("win_width.htc");
  	font-size: 12px;
@@ -86,13 +45,13 @@ td {
 .fondl { 
 	padding: 3px; 
 	background-color: #e4e4e4; 
-	border: 1px solid #COULEURCLAIRE; 
+	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
-.fondo { background-color: #COULEURFONCEE; 
+.fondo { background-color: ##ENV{couleur_foncee,3874b0}; 
 	background-position: center bottom; float: none; color: #FFFFFF;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
@@ -146,7 +105,7 @@ select.fondl {
 	width: 11px;
 	padding: 0px;
 	margin: 0px;
-	background: url(#IMG_PACK/tirets-separation.gif);
+	background: url(#ENV{dir}tirets-separation.gif);
 	background-position: 5px 0px;
 }
 .bandeau_couleur {
@@ -164,7 +123,7 @@ select.fondl {
 	position: absolute; 
 	visibility: hidden;
 	top: 0px; 
-	background-color: #COULEURCLAIRE; 
+	background-color: ##ENV{couleur_claire,edf3fe}; 
 	color: black;
 	padding: 5px;
 	padding-top: 2px;
@@ -192,26 +151,26 @@ a.bandeau_rub {
 	display: block;
 	font-size: 10px;
 	padding: 2px;
-	padding-#RIGHT: 13px;
-	padding-#LEFT: 16px;
+	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 13px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 	color: #666666;
 	text-decoration: none;
 	border-bottom: 1px solid #cccccc;
 	background-repeat: no-repeat;
-	background-position: #PCENT center;
-	background-image: url(#IMG_PACK/rubrique-12.gif);
+	background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center;
+	background-image: url(#ENV{dir}rubrique-12.gif);
 }
 a.bandeau_rub:hover {
 	background-color: white;
 	text-decoration: none;
 	color: #333333;
 	background-repeat: no-repeat;
-	background-position: #PCENT center;
+	background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center;
 }
 div.bandeau_rub {
 	position: absolute;
 	top: 4px;
-	#LEFT: 120px;
+	[(#ENV{ltr}|choixsiegal{left,left,right})]: 120px;
 	background-color: #eeeeee;
 	padding: 0px;
 	border: 1px solid #555555;
@@ -220,23 +179,23 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(#IMG_PACK/triangle-droite#RTL.gif) #RIGHT center no-repeat;
+	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 }
 div.pos_r {
 	position: relative;
 }
 
 option.selec_rub {
-	background-position: #LEFT center;
-	background-image: url(#IMG_PACK/rubrique-12.gif);
+	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] center;
+	background-image: url(#ENV{dir}rubrique-12.gif);
 	background-repeat: no-repeat;
-	padding-#LEFT: 16px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 }
 
 
 div.messages {
 	padding: 5px;
-	border-bottom: 1px solid #COULEURFONCEE;
+	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
 	font-size: 10px;
 	font-weight: bold;
 }
@@ -251,7 +210,7 @@ a.icone26 {
 	color: black;
 	text-decoration: none;
 	padding: 1px; 
-	margin-#RIGHT: 2px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 2px;
 }
 a.icone26:hover {
 	text-decoration: none;
@@ -259,10 +218,10 @@ a.icone26:hover {
 a.icone26 img {
 	vertical-align: middle;
 	behavior: url("../win_png.htc");
-	background-color: #COULEURFONCEE;
+	background-color: ##ENV{couleur_foncee,3874b0};
 }
 a.icone26:hover img {
-	background: url(#IMG_PACK/fond-gris-anim.gif);
+	background: url(#ENV{dir}fond-gris-anim.gif);
 }
 
 
@@ -283,7 +242,7 @@ a.icone26:hover img {
 	display: inline;
 	padding: 4px;
 	background-color: #eeeeee;
-	border: 2px solid #COULEURFONCEE;
+	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
 }
 .icone36 a:hover img {
@@ -321,7 +280,7 @@ a.icone26:hover img {
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	color: #COULEURFONCEE; 
+	color: ##ENV{couleur_foncee,3874b0}; 
 	display: block; 
 	margin: 2px;
 	width: 100%
@@ -369,7 +328,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0px;
 	border: 0px;
-	background-color: #COULEURCLAIRE;
+	background-color: ##ENV{couleur_claire,edf3fe};
 }
 
 .cellule48 a.selection img {
@@ -384,7 +343,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0px;
 	border: 0px;
-	background: url(#IMG_PACK/fond-gris-anim.gif);
+	background: url(#ENV{dir}fond-gris-anim.gif);
 }
 
 
@@ -409,8 +368,8 @@ a.icone26:hover img {
 	display: inline;
 	padding: 3px;
 	background-color: #e4e4e4;
-	background: url(#IMG_PACK/fond-gris-anim.gif);
-	border: 1px solid #COULEURFONCEE;
+	background: url(#ENV{dir}fond-gris-anim.gif);
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
 }
 .cellule36 a span, .cellule48 a span {
@@ -461,14 +420,14 @@ a.icone26:hover img {
 }
 .cellule-texte a.selection {
 	padding: 3px; margin: 1px; 
-	border: 1px solid #COULEURFONCEE; 
-	background-color: #COULEURCLAIRE;
+	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
+	background-color: ##ENV{couleur_claire,edf3fe};
 	-moz-border-radius: 5px;
 	color: #000000;
 }
 .cellule-texte a:hover {
 	padding: 3px; margin: 1px; 
-	border: 1px solid #COULEURFONCEE; 
+	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
 	background-color: white;
 	-moz-border-radius: 5px;
 	color: #333333;
@@ -494,7 +453,7 @@ a.cellule-h {
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	text-align: #LEFT;
+	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 	text-decoration: none; 
 	color: #666666;
 }
@@ -502,7 +461,7 @@ a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover 
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	text-align: #LEFT;
+	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 	text-decoration: none; 
 	color: #000000;
 }
@@ -511,15 +470,15 @@ a.cellule-h div.cell-i {
 	border: 1px solid white;
 	-moz-border-radius: 5px;
 	margin: 0px;
-	margin-#RIGHT: 3px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 }
 a.cellule-h:hover div.cell-i {
 	padding: 0px;
-	border: 1px solid #COULEURFONCEE;
-	background: url(#IMG_PACK/fond-gris-anim.gif);
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
+	background: url(#ENV{dir}fond-gris-anim.gif);
 	-moz-border-radius: 5px;
 	margin: 0px;
-	margin-#RIGHT: 3px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 }
 
 a.cellule-h table {
@@ -545,7 +504,7 @@ a.cellule-h a.aide img {
 a.cellule-h-texte {
 	display: block;
 	clear: both;
-	text-align: #LEFT;
+	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 	font-family: Trebuchet Sans MS, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 11px;
@@ -559,7 +518,7 @@ a.cellule-h-texte {
 }
 .danger a.cellule-h-texte {
 	border: 1px dashed black;
-	background: url(#IMG_PACK/rayures-sup.gif);
+	background: url(#ENV{dir}rayures-sup.gif);
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
@@ -616,26 +575,26 @@ div.onglet {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid #COULEURFONCEE;
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
 	background-color: white;
 }
 div.onglet a {
-	color: #COULEURFONCEE;
+	color: ##ENV{couleur_foncee,3874b0};
 }
 
 div.onglet_on {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid #COULEURFONCEE;
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
-	background-color: #COULEURCLAIRE;
+	background-color: ##ENV{couleur_claire,edf3fe};
 }
 div.onglet_on a, div.onglet_on a:hover {
-	color: #COULEURFONCEE;
+	color: ##ENV{couleur_foncee,3874b0};
 	text-decoration: none;
 }
 
@@ -643,20 +602,20 @@ div.onglet_off {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid #COULEURFONCEE;
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
-	background-color: #COULEURFONCEE;
+	background-color: ##ENV{couleur_foncee,3874b0};
 	color: white;
 }
 
 
 
 .reliefblanc {
-	 background-image: url(#IMG_PACK/barre-blanc.gif);
+	 background-image: url(#ENV{dir}barre-blanc.gif);
 }
 .reliefgris { 
-	 background-image: url(#IMG_PACK/barre-noir.gif);
+	 background-image: url(#ENV{dir}barre-noir.gif);
 }
 .iconeoff {
 	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
@@ -665,7 +624,7 @@ div.onglet_off {
 	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
 }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black;
-	background: url(#IMG_PACK/rayures-sup.gif);
+	background: url(#ENV{dir}rayures-sup.gif);
 }
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
@@ -720,7 +679,7 @@ a.ortho-dico:hover {
 }
 
 #ortho-fixed {
-	position: fixed; top: 0px; #RIGHT: 0px; width: 25%; padding: 15px; margin: 0px;
+	position: fixed; top: 0px; [(#ENV{ltr}|choixsiegal{left,right,left})]: 0px; width: 25%; padding: 15px; margin: 0px;
 }
 .ortho-content {
 	position: absolute; top: 0px; width: 70%; padding: 15px; margin: 0px;
@@ -744,7 +703,7 @@ a.ortho-dico:hover {
 	z-index: 0;
 }
 .suggest-actif .detail ul, .suggest-inactif .detail ul {
-	 list-style-image: url(#IMG_PACK/puce.gif);
+	 list-style-image: url(#ENV{dir}puce.gif);
 	background: #f3f2f3;
 	margin: 0px;
 	padding: 0px;
@@ -806,20 +765,20 @@ a.ortho-dico:hover {
  */
 
 table.spip_barre {
-	border-#RIGHT: 1px solid #COULEURCLAIRE;
+	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 
 table.spip_barre td {
-	text-align: #LEFT;
-	border-top: 1px solid #COULEURCLAIRE;
-	border-#LEFT: 1px solid #COULEURCLAIRE;
+	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
+	border-top: 1px solid ##ENV{couleur_claire,edf3fe};
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 
 a.spip_barre img {
 	padding: 3px;
 	margin: 0px;
 	background-color: #eeeeee;
-	border-#RIGHT: 1px solid #COULEURCLAIRE;
+	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 a.spip_barre:hover img {
 	background-color: white;
@@ -845,11 +804,11 @@ a.bouton_rotation img, div.bouton_rotation img {
 	padding: 1px;
 	margin-bottom: 1px;
 	background-color: #eeeeee;
-	border: 1px solid #COULEURCLAIRE;
+	border: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 
 a.bouton_rotation:hover img {
-	border: 1px solid #COULEURFONCEE;
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 
 
@@ -872,7 +831,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-fonce {
-	background-color: #COULEURFONCEE;
+	background-color: ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 
@@ -888,19 +847,19 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-couleur {
-	background-color: #COULEURCLAIRE;
+	background-color: ##ENV{couleur_claire,edf3fe};
 	-moz-border-radius: 8px;
 }
 .cadre-couleur div.cadre-titre {
 	-moz-border-radius-topleft: 8px;
 	-moz-border-radius-topright: 8px;
-	background: #COULEURFONCEE;
-	border-bottom: 2px solid #COULEURFONCEE;
+	background: ##ENV{couleur_foncee,3874b0};
+	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
 	color: white;	
 }
 
 .cadre-couleur-foncee {
-	background-color: #COULEURFONCEE;
+	background-color: ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 .cadre-couleur-foncee div.cadre-titre {
@@ -911,12 +870,12 @@ a.bouton_rotation:hover img {
 
 .cadre-trait-couleur {
 	background-color: white;
-	border: 2px solid #COULEURFONCEE;
+	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 .cadre-trait-couleur div.cadre-titre {
-	background: #COULEURFONCEE;
-	border-bottom: 2px solid #COULEURFONCEE;
+	background: ##ENV{couleur_foncee,3874b0};
+	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
 	color: white;	
 }
 
@@ -943,7 +902,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-e div.cadre-titre {
-	background: #COULEURCLAIRE;
+	background: ##ENV{couleur_claire,edf3fe};
 	border-bottom: 1px solid #666666;
 	color: black;	
 }
@@ -956,10 +915,10 @@ a.bouton_rotation:hover img {
 .cadre-forum {
 	background-color: white;
 	border: 1px solid #aaaaaa;
-	-moz-border-radius-top#LEFT: 8px;
+	-moz-border-radius-top[(#ENV{ltr}|choixsiegal{left,left,right})]: 8px;
 }
 .cadre-forum div.cadre-titre {
-	background: #COULEURCLAIRE;
+	background: ##ENV{couleur_claire,edf3fe};
 	border-bottom: 1px solid #aaaaaa;
 	color: black;	
 }
@@ -969,7 +928,7 @@ a.bouton_rotation:hover img {
 	border: 1px solid #666666;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-top#LEFT: 8px;
+	-moz-border-radius-top[(#ENV{ltr}|choixsiegal{left,left,right})]: 8px;
 }
 
 
@@ -985,14 +944,14 @@ a.bouton_rotation:hover img {
 
 .cadre-info{
 	background-color: white;
-	border: 2px solid #COULEURFONCEE;
+	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	padding: 5px;
 	-moz-border-radius: 8px;
 }
 
 
 .cadre-formulaire {
-/*	border: 1px solid #COULEURFONCEE;
+/*	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	background-color: #dddddd;*/
 	color: #444444;
 	font-family: verdana, arial, helvetica, sans;
@@ -1006,14 +965,14 @@ a.bouton_rotation:hover img {
  */
 
 .plan-rubrique {
-	margin-#LEFT: 12px;
-	padding-#LEFT: 10px;
-	border-#LEFT: 1px dotted #888888;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 12px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #888888;
 }
 .plan-secteur {
-	margin-#LEFT: 12px;
-	padding-#LEFT: 10px;
-	border-#LEFT: 1px dotted #404040;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 12px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px dotted #404040;
 }
  
 .plan-articles {
@@ -1024,9 +983,9 @@ a.bouton_rotation:hover img {
 .plan-articles a {
 	display: block;
 	padding: 2px;
-	padding-#LEFT: 18px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 18px;
 	border-bottom: 1px solid #cccccc;
-	 background: #PCENT no-repeat;
+	 background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-color: #e0e0e0;
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-size: 11px;
@@ -1037,19 +996,19 @@ a.bouton_rotation:hover img {
 	text-decoration: none;
 }
 .plan-articles .publie {
-	 background-image: url(#IMG_PACK/puce-verte.gif);
+	 background-image: url(#ENV{dir}puce-verte.gif);
 }
 .plan-articles .prepa {
-	 background-image: url(#IMG_PACK/puce-blanche.gif);
+	 background-image: url(#ENV{dir}puce-blanche.gif);
 }
 .plan-articles .prop {
-	 background-image: url(#IMG_PACK/puce-orange.gif);
+	 background-image: url(#ENV{dir}puce-orange.gif);
 }
 .plan-articles .refuse {
-	 background-image: url(#IMG_PACK/puce-rouge.gif);
+	 background-image: url(#ENV{dir}puce-rouge.gif);
 }
 .plan-articles .poubelle {
-	 background-image: url(#IMG_PACK/puce-poubelle.gif);
+	 background-image: url(#ENV{dir}puce-poubelle.gif);
 }
 
 a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
@@ -1067,14 +1026,14 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 
 }
 a.foncee, a.foncee:hover {
-	background-color: #COULEURFONCEE;
+	background-color: ##ENV{couleur_foncee,3874b0};
 	color: white;
-	border: 1px solid #COULEURFONCEE;
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 a.claire, a.claire:hover {
-	background-color: #COULEURCLAIRE;
-	color: #COULEURFONCEE;
-	border: 1px solid #COULEURFONCEE;
+	background-color: ##ENV{couleur_claire,edf3fe};
+	color: ##ENV{couleur_foncee,3874b0};
+	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 span.lang_base {
 	color: #666666;
@@ -1087,7 +1046,7 @@ span.creer {
 	background-color: white;
 }
 .trad_float {
-	float: #RIGHT;
+	float: [(#ENV{ltr}|choixsiegal{left,right,left})];
 	z-index: 20;
 	margin-top: 4px;
 }
@@ -1099,8 +1058,8 @@ div.liste {
 }
 
 a.liste-mot {
-	background: url(#IMG_PACK/petite-cle.gif) #LEFT center no-repeat; 
-	padding-#LEFT: 30px;
+	background: url(#ENV{dir}petite-cle.gif) [(#ENV{ltr}|choixsiegal{left,left,right})] center no-repeat; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 30px;
 }
 
 .tr_liste {
@@ -1165,24 +1124,24 @@ div.puce_breve_popup {
 div.brouteur_rubrique {
 	display: block;
 	padding: 3px;
-	padding-#RIGHT: 10px;
-	border-top: 0px solid #COULEURFONCEE;
-	border-bottom: 1px solid #COULEURFONCEE;
-	border-left: 1px solid #COULEURFONCEE;
-	border-right: 1px solid #COULEURFONCEE;
-	background: url(#IMG_PACK/triangle-droite#RTL.gif)#RIGHT center no-repeat;
+	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
+	border-top: 0px solid ##ENV{couleur_foncee,3874b0};
+	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
+	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
+	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
+	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	background-color: white;
 }
 
 div.brouteur_rubrique_on {
 	display: block;
 	padding: 3px;
-	padding-#RIGHT: 10px;
-	border-top: 0px solid #COULEURFONCEE;
-	border-bottom: 1px solid #COULEURFONCEE;
-	border-left: 1px solid #COULEURFONCEE;
-	border-right: 1px solid #COULEURFONCEE;
-	background: url(#IMG_PACK/triangle-droite#RTL.gif) #RIGHT center no-repeat;
+	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
+	border-top: 0px solid ##ENV{couleur_foncee,3874b0};
+	border-bottom: 1px solid ##ENV{couleur_foncee,3874b0};
+	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
+	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
+	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1193,16 +1152,16 @@ xdiv.brouteur_rubrique:hover {
 div.brouteur_rubrique div, div.brouteur_rubrique_on div  {
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-#LEFT: 28px; 
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 28px; 
 	background-repeat: no-repeat;
-	background-position: center #LEFT;
+	background-position: center [(#ENV{ltr}|choixsiegal{left,left,right})];
 	font-weight: bold;
 	font-family: Arial,Sans,sans-serif;
 	font-size: 12px;
 }
 
 div.brouteur_rubrique div a {
-	color: #COULEURFONCEE;
+	color: ##ENV{couleur_foncee,3874b0};
 }
 
 div.brouteur_rubrique_on div a {
@@ -1226,7 +1185,7 @@ p.spip {
 p.spip_note {
 	margin-bottom: 3px;
 	margin-top: 3px;
-	margin-#LEFT: 17px;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 17px;
 	text-indent: -17px;
 }
 
@@ -1235,8 +1194,8 @@ a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(#IMG_PACK/spip_out.gif)#RIGHT center no-repeat;
-	padding-#RIGHT: 10px;
+	background: url(#ENV{dir}spip_out.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
 	border-bottom: 1px solid;
 }
 
@@ -1252,7 +1211,7 @@ a.spip_glossaire:hover {
 	width : 100%; 
 	font-size: 10px;
 	border: 1px solid white;
-	background-color: #COULEURFONCEE;
+	background-color: ##ENV{couleur_foncee,3874b0};
 	color: white;
 }
 .spip_cadre {
@@ -1264,8 +1223,8 @@ a.spip_glossaire:hover {
 	behavior: url("win_width.htc");
 }
 blockquote.spip {
-	margin-#LEFT: 40px;
-	margin-#RIGHT: 0px;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 40px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 0px;
 	margin-top : 10px;
 	margin-bottom : 10px;
 	border : solid 1px #aaaaaa;
@@ -1275,13 +1234,13 @@ blockquote.spip {
 }
 
 div.spip_poesie {
-	margin-#LEFT: 10px;
-	padding-#LEFT: 10px;
-	border-#LEFT: 1px solid #999999;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 10px;
+	border-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px solid #999999;
 }
 div.spip_poesie div {
 	text-indent: -60px;
-	margin-#LEFT: 60px;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 60px;
 }
 
 /* pour le plugin "revision_nbsp" */
@@ -1308,11 +1267,11 @@ a.boutonlien {
 a.triangle_block {
 	margin-top: -3px;
 	margin-bottom: -3px;
-	margin-#RIGHT: -3px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: -3px;
 }
 a.triangle_block:hover {
-	margin-#LEFT: 1px;
-	margin-#RIGHT: -4px;
+	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 1px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: -4px;
 }
 
 .rss-button {
@@ -1327,17 +1286,17 @@ a.triangle_block:hover {
 }
 
 .fond-agenda {
-	background: url (#IMG_PACK/fond-agenda.gif)#RIGHT center no-repeat;
-	float: #LEFT; 
-	margin-#RIGHT: 3px;
-	padding-#RIGHT: 4px;
+	background: url (#ENV{dir}fond-agenda.gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
+	float: [(#ENV{ltr}|choixsiegal{left,left,right})]; 
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
+	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 4px;
 	line-height: 12px;
 	color: #666666; 
  }
 
  div.highlight {
   	color: black;
- 	background-color: #COULEURCLAIRE;
+ 	background-color: ##ENV{couleur_claire,edf3fe};
  }
   div.highlight, div.pashighlight {
   	color: #666666;
@@ -1349,25 +1308,11 @@ a.triangle_block:hover {
   }
 
 div.petite-rubrique {
-	background: #PCENT no-repeat;
-	background-image : url(#IMG_PACKrubrique-12.gif'.');
-	padding-#LEFT: 15px;
+	background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
+	background-image : url(#ENV{dir}rubrique-12.gif'.');
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 15px;
 }
 div.rub-ouverte {
-	padding-#RIGHT: 10px;
-	background: url(#IMG_PACK/triangle-droite#RTL.gif) #RIGHT center no-repeat;
+	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 10px;
+	background: url(#ENV{dir}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
 }
-FIN_CSS;
-
-return str_replace('#RIGHT', $right,
-	str_replace('#LEFT', $left,
-	str_replace('#RTL', $_rtl,
-	str_replace('#COULEURCLAIRE', $couleur_claire,
-	str_replace('#COULEURFONCEE', $couleur_foncee,
-	str_replace('#PCENT', $pcent,
-	str_replace('#IMG_PACK/', _DIR_IMG_PACK,
-	$a)))))));
-
-}
-
-?>
