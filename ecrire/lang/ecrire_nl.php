@@ -550,7 +550,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_question_activer_compactage_js' => 'Wilt u de verdichting van de scripts activeren (javascript) ?',
 'info_question_activer_compresseur' => 'Wilt u de samendrukking van de stroom activeren HTTP ?',
 'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Aanvaard je inschrijvingen van nieuwe redacteuren vanop
+'info_question_inscription_nouveaux_redacteurs' => 'Aanvaard je inschrijvingen van nieuwe redacteuren vanop
  de publieke site? Indien wel, dan kunnen bezoekers
  zich via een geautomatiseerd formulier inschrijven en
  toegang krijgen tot de priv&eacute;-ruimte om zelf artikels
@@ -559,7 +559,7 @@ De publieke forums kunnen per artikel toegestaan worden
  de toeganscode voor de site. Sommige hostingproviders
  blokkeren echter het versturen van e-mail vanaf hun
  servers : in dat geval is een automatische inschrijving
- niet mogelijk.',
+ niet mogelijk.</i></blockquote>',
 'info_question_mots_cles' => 'Wil je gebruik maken van trefwoorden op je site?',
 'info_question_proposer_site' => 'Wie kan referentiesites voorstellen?',
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
@@ -796,6 +796,9 @@ een kleur geeft hun status aan&nbsp;:',
 'label_taille_ecran' => 'Breedte van het scherm',
 'label_texte_et_icones_navigation' => 'Menu van scheepvaart',
 'label_texte_et_icones_page' => 'Display in de bladzijde',
+'ldap_correspondance' => 'erfenis van het veld @champ@',
+'ldap_correspondance_1' => 'Erfenis van de velden LDAP',
+'ldap_correspondance_2' => 'Voor elk volgend SPIP veld, de naam van het overeenkomstige veld LDAP aangeven. Leegte laten om niet het te vullen, door ruimtes of komma\'s te scheiden om verschillende LDAP velden te proberen.',
 'lien_ajout_destinataire' => 'Voeg deze bestemmeling toe',
 'lien_ajouter_auteur' => 'Voeg deze auteur toe',
 'lien_ajouter_participant' => 'Voeg nieuwe deelnemer toe',
