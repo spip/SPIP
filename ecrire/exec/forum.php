@@ -30,11 +30,13 @@ function forum_affiche($debut, $admin=false)
 		echo $commencer_page(_T('titre_page_forum'), "forum", "privadm");
 		$statutforum = 'privadm';
 		$script = 'forum_admin';
+		$meta = 'forum_prive_admin';
 		$titre = gros_titre(_T('titre_cadre_forum_administrateur'),'', false);
 	} else {
 		echo $commencer_page(_T('titre_forum'), "forum", "forum-interne");
 		$statutforum = 'privrac';
 		$script = 'forum';
+		$meta = 'forum_prive';
 		$titre = gros_titre(_T('titre_cadre_forum_interne'),'', false);
 	}
 
@@ -47,8 +49,10 @@ function forum_affiche($debut, $admin=false)
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'forum'),'data'=>''));
 
-	$discuter = charger_fonction('discuter', 'inc');
-	echo $discuter(0, $script, '', $statutforum, $debut);
+	if ($GLOBALS['meta'][$meta] != 'non') {
+		$discuter = charger_fonction('discuter', 'inc');
+		echo $discuter(0, $script, '', $statutforum, $debut);
+	}
 	echo fin_gauche(), fin_page();
 }
 ?>
