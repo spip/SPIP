@@ -150,7 +150,7 @@ function info_plugin_normalise_slogan($description) {
 			$_lang = 'fr';
 		$nbr_matches = preg_match(',^(.+)[.!?\r\n\f],Um', $_descr, $matches);
 		$slogan .= (($multi) ? '[' . $_lang . ']' : '') . 
-					(($nbr_matches > 0) ? trim($matches[1]) : couper($_descr, 150, ''));
+					(($nbr_matches > 0) ? trim($matches[1]) : couper($_descr, 80, ''));
 	}
 
 	if ($slogan)

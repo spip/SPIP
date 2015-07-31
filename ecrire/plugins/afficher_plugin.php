@@ -105,7 +105,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	if (($p=strpos($slogan, "<br />"))!==FALSE)
 		$slogan = substr($slogan, 0,$p);
 	// couper par securite
-	$slogan = couper($slogan, 70);
+	$slogan = couper($slogan, 80);
 
 	$url = parametre_url($url_page, "plugin", $dir);
 
