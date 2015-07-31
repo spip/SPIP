@@ -2,6 +2,8 @@
 
 include ("inc.php3");
 
+if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
+
 debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
 debut_gauche();
@@ -69,7 +71,6 @@ function sous_enfant($collection2){
 // Infos personnelles : nom, utilisation de la messagerie
 //
 
-if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
 
 echo "<p align='left'>";
 debut_cadre_relief("fiche-perso-24.gif");
@@ -133,20 +134,6 @@ if (spip_num_rows($result) > 0){
 	echo "</div>";
 }
 
-if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non") {
-	$today=getdate(time());
-	$jour_today = $today["mday"];
-	$mois_today = $today["mon"];
-	$annee_today = $today["year"];
-	echo "<p />";
-	agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
-
-
-}
-
-
-
-
 
 debut_raccourcis();
 
@@ -204,9 +191,30 @@ else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 
 fin_raccourcis();
 
-if ($options == "avancees" AND lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non") {
-	creer_colonne_droite();	
-	calendrier_jour($jour_today,$mois_today,$annee_today, false);
+
+//
+// Afficher le calendrier du mois s'il y a des rendez-vous
+//
+
+if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != "non" AND $options == "avancees") {
+	$today = getdate(time());
+	$jour_today = $today["mday"];
+	$mois_today = $today["mon"];
+	$annee_today = $today["year"];
+	$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
+	$mois = mois($date);
+	$annee = annee($date);
+
+	// rendez-vous personnels dans le mois
+	$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+			"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+			"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
+			"AND messages.statut='publie' LIMIT 0,1");
+	if (spip_num_rows($result_messages)) {
+		echo "<p />";
+		include_ecrire("inc_agenda.php3");
+		agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+	}
 }
 
 debut_droite();

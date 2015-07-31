@@ -2,8 +2,8 @@
 
 //
 // Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_CONFIG")) return;
-define("_ECRIRE_INC_CONFIG", "1");
+if (defined("_ECRIRE_INC_AGENDA")) return;
+define("_ECRIRE_INC_AGENDA", "1");
 
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_admin.php3");
