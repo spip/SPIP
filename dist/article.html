@@ -190,7 +190,7 @@
 ]#FIN_SURLIGNE
 
 
-<BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
+<BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
 [<h3 class="spip">(#TITRE)</h3>]
 [<div>(#DESCRIPTIF)</div>]
 
@@ -199,9 +199,11 @@
 
 <B_documents_portfolio>
 <div><hr>
-<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
+<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
 	<div style="float: left;">
-	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{'?'}|?{'&amp;','?'})]id_document=#ID_DOCUMENT">(#FICHIER|reduire_image{1000,52})</a>][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+
+	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{'?'}|?{'&amp;','?'})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{500,60})</a>]
+[<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_portfolio>
 </div>

@@ -52,20 +52,30 @@ function vignette_par_defaut($type_extension, $size=true) {
 }
 
 
-function document_et_vignette($url, $id_type) {
-	if ($id_type) {
-		list($extension) = spip_fetch_array(spip_query("SELECT extension FROM
-		spip_types_documents WHERE id_type=$id_type"));
+//
+// Affiche le document avec sa vignette par defaut, dans le portfolio
+// Attention : si c'est un fichier graphique on prefere afficher une vue
+// reduite, quand c'est possible (presque toujours, donc)
+//
+function document_et_vignette($document, $url) {
+	// a supprimer avec spip_types_documents
+	list($extension) = spip_fetch_array(spip_query("SELECT extension FROM
+		spip_types_documents WHERE id_type=".$document['id_type']));
+
+	if (strstr(lire_meta('formats_graphiques'), $extension)
+	AND lire_meta('creer_preview') == 'oui') {
+		$image = prive_lien_image_reduite ($document['largeur'], $document['hauteur'], $document['fichier']);
 	}
 
-	list($fichier, $largeur, $hauteur) =
-		vignette_par_defaut($extension);
+	if (!$image) {
+		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
+		$image = "<a href='$url'><img src='$fichier' style='border-width: 0px'  height='$hauteur' width='$largeur' /></a>";
+	}
 
-	if (!$taille)
-		return "<a href='$url'><img src='$fichier' style='border-width: 0px' /></a>";
+	if (!$url)
+		return $image;
 	else
-		return "<a href='$url'><img src='$fichier' style='border-width: 0px'  height='$taille' width='$taille' /></a>";
-
+		return "<a href='$url'>$image</a>";
 }
 
 //
@@ -358,17 +368,24 @@ function texte_upload_manuel($dir, $inclus = '') {
 }
 
 
-function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
+//
+// Retourne le lien HTML vers l'image reduite (pour l'espace prive)
+//
+function prive_lien_image_reduite ($largeur_vignette, $hauteur_vignette, $fichier_vignette) {
 	global $connect_id_auteur;
 	include_ecrire("inc_logos.php3");
 
-	$taille = image_ratio($largeur_vignette, $hauteur_vignette, 120, 110);
-	$w = $taille[0];
-	$h = $taille[1];
+	list($w,$h) = image_ratio($largeur_vignette, $hauteur_vignette, 120, 110);
 	$hash = calculer_action_auteur ("reduire $w $h");
 	
 	$image = "<img src='../spip_image_reduite.php3?img=$fichier_vignette&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' style='border-width: 0px' />";
 	
+	return $image;
+}
+
+function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
+
+	$image = prive_lien_image_reduite ($largeur_vignette, $hauteur_vignette, $fichier_vignette);
 
 # Ca ne marche pas toujours car fichier_vignette peut etre n'importe quoi
 #	$fid = "?date=".@filemtime($fichier_vignette);
@@ -538,7 +555,7 @@ function afficher_portfolio (
 		if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
 		echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
 
-			// Signaler les documents distants par une icone de site
+			// Signaler les documents distants par une icone de trombone
 			if ($document['distant'] == 'oui') {
 				echo "<img src='"._DIR_IMG_PACK.'attachment.gif'."' style='float: $spip_lang_right;' alt=\"".entites_html($document['fichier'])."\" title=\"" .
 entites_html($document['fichier'])."\" />\n";
@@ -562,9 +579,12 @@ entites_html($document['fichier'])."\" />\n";
 			}
 
 			// bloc rotation de l'image
+			// si c'est une image, qu'on sait la faire tourner, qu'elle
+			// n'est pas distante, et qu'elle n'a pas de vignette perso !
 			if ($flag_modif
 			AND strstr(lire_meta('formats_graphiques'), $document['extension'])
-			AND $document['distant']!='oui') {
+			AND $document['distant']!='oui'
+			AND !$id_vignette) {
 				echo "<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 				$process = lire_meta('image_process');
 				if ($process == 'imagick' OR $process == 'gd2'
@@ -614,27 +634,13 @@ entites_html($document['fichier'])."\" />\n";
 			//
 			// Recuperer la vignette et afficher le doc
 			//
-			
-			if ($album == 'portfolio') {
-				// En mode portfolio, on ne travaille pas avec les vignettes
-				// (sinon, pas de squelette possible)
-				echo reduire_image_logo(_DIR_PREFIX1."$fichier", 120);
-			} else {
-				if ($id_vignette AND
-					$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"))) {
-					$fichier_vignette = generer_url_document($id_vignette);
-					$largeur_vignette = $vignette['largeur'];
-					$hauteur_vignette = $vignette['hauteur'];
-					$taille_vignette = $vignette['taille'];
-				
-					echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
-				}
-				else {
-					echo document_et_vignette($url, $document['id_type']); 
-				}
+			if ($id_vignette
+			AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"))) {
+				echo document_et_vignette($vignette, $url);
 			}
-			
-			
+			else {
+				echo document_et_vignette($document, $url); 
+			}
 
 			echo "</div>"; // fin du bloc vignette + rotation
 
@@ -730,13 +736,10 @@ entites_html($document['fichier'])."\" />\n";
 				echo "</form>";
 
 
-				if ($album != 'portfolio') {
-					// bloc mettre a jour la vignette
-					// (pas de vignette en portfolio)
-					echo "<hr />";
-					bloc_gerer_vignette($document, $image_url, $redirect_url, $album);
-				}
-				
+				// bloc mettre a jour la vignette
+				echo "<hr />";
+				bloc_gerer_vignette($document, $image_url, $redirect_url, $album);
+
 				echo "</div>";
 				
 				// bouton "supprimer le doc"
@@ -801,6 +804,8 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 		$link->getUrl(), "vignette-24.png", "supprimer.gif");
 	}
 	else {
+/****
+	OBSOLETE
 		// lien "creation automatique"
 		if (strstr(lire_meta('formats_graphiques'), $document['extension'])
 		AND lire_meta('creer_preview') == 'oui'
@@ -818,6 +823,7 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 			icone_horizontale(_T('info_creer_vignette'),
 			$link->getUrl(), "vignette-24.png", "creer.gif");
 		}
+*****/
 
 		// lien "upload vignette"
 		$link = new Link ($image_url);
@@ -829,7 +835,7 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 		$link->addVar('ancre', $album);
 		afficher_upload($link,
 			$redirect_url.'&show_docs='.$id_document,
-			_T('info_remplacer_vignette'), 'portfolio', false);
+			/* _T('info_remplacer_vignette') */'', 'portfolio', false);
 	}
 	echo fin_block();
 }

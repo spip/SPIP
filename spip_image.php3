@@ -49,6 +49,9 @@ if ($forcer_document) $mode = 'document';
 if ($test_vignette)
 	$retour_image = tester_vignette($test_vignette);
 
+/**
+	OBSOLETE
+
 // Creation de vignette depuis le portfolio (ou autre)
 else if ($vignette) {
 	if ($creer_vignette == 'oui' AND
@@ -58,6 +61,8 @@ else if ($vignette) {
 	else
 		$retour_image = creer_fichier_vignette($vignette, true); # obsolete
 }
+
+**/
 
 
 //

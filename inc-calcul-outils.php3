@@ -249,37 +249,67 @@ function calcul_branche ($generation) {
 }
 
 // fonction appelee par la balise #LOGO_DOCUMENT
-function calcule_document($id_document, $doubdoc, &$doublons) {
+function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $params, $lien, $align, $alt) {
 	if (!$id_document) return '';
-	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
+	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
 	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('spip_documents AS documents'), array("id_document = $id_document"))))
-// pas de document. Ne devrait pas arriver
+		// pas de document. Ne devrait pas arriver
 		return ''; 
 
 	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
+
+	// Lien par defaut = l'adresse du document
+	if (!$lien) $lien = $fichier;
+
+	// Y a t il une vignette personnalisee ?
 	if ($id_vignette) {
-		if ($res = spip_abstract_select(array('fichier'), array('spip_documents AS documents'), array("id_document = $id_vignette"))) {
+		if ($res = spip_abstract_select(array('fichier'),
+		array('spip_documents AS documents'),
+		array("id_document = $id_vignette"))) {
 			list($vignette) = spip_abstract_fetch($res);
 			if (@file_exists($vignette))
-				return generer_url_document($id_vignette);
-				# return ($fichier); # en std g_u_d fait ca
+				$logo = generer_url_document($id_vignette);
 		}
-	} else if ($mode == 'vignette') 
-		return generer_url_document($id_document);
-		# return $fichier; # en std g_u_d fait ca
-
-	// calcul de l'extension par tous les moyens
-	if ($id_type) {
-		list($ext) = spip_abstract_fetch(spip_abstract_select(array('extension'), array('spip_types_documents AS documents'), array("id_type = " . intval($id_type))));
-	} else {
-		eregi('\.([a-z0-9]+)$', $fichier, $regs);
-		$ext = $regs[1];
+	} else if ($mode == 'vignette') {
+		$logo = generer_url_document($id_document);
 	}
 
-	// Pas de vignette mais une extension :
-	// envoyer une vignette par defaut
-	return vignette_par_defaut($ext ? $ext : 'txt', false);
+	if (!$logo) {
+		// Retrouver l'extension
+		list($extension) =
+			spip_abstract_fetch(spip_abstract_select(array('extension'),
+			array('spip_types_documents AS documents'),
+			array("id_type = " . intval($id_type))));
+		if (!$extension) $extension = 'txt';
+
+		// Pas de vignette, mais un fichier image -- creer la vignette
+		if (strstr(lire_meta('formats_graphiques'), $extension)
+		AND lire_meta('creer_preview') == 'oui') {
+			if ($img = copie_locale($fichier)) {
+				// taille maximum [(#LOGO_DOCUMENT{300,52})]
+				list($x,$y) = split(',', ereg_replace("[\{\}]", "", $params)); 
+				$lien_logo = reduire_image($img, $x, $y);
+				$logo = extraire_attribut($lien_logo, 'src');
+				if ($lien)
+					$lien_logo = "<a href=\"$lien\">$lien_logo</a>";
+			}
+		}
+
+		// Document sans vignette ni image : vignette par defaut
+		if (!$logo)
+			$logo = vignette_par_defaut($extension, false);
+	}
+
+	// flag_fichier : seul le fichier est demande
+	if ($flag_fichier)
+		return calcule_fichier_logo($logo); # supprimer le IMG/
+
+	// sinon calculer le code html de l'image, sauf si reduire_image le donne
+	if (!$lien_logo)
+		$lien_logo = affiche_logos(array($logo), $lien, $align, $alt);
+
+	return $lien_logo;
 }
 
 
