@@ -48,7 +48,8 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	
 	if (!$langue_parent)
 		$langue_parent = $GLOBALS['meta']['langue_site'];
-	if ($valeurs['editable']){
+	if ($valeurs['editable']
+		AND in_array(table_objet_sql($objet),explode(',',$GLOBALS['meta']['multi_objets']))){
 		$valeurs['_langue'] = $valeurs['langue'];
 	}
 	$valeurs['langue_parent'] = $langue_parent;

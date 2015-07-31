@@ -35,6 +35,7 @@
 								[(#ENV{#GET{name}}|=={oui}|oui)checked="checked"] /><label for="#GET{name}_oui"><:info_multi_secteurs:></label>
 							</div>
 						</li>
+						]
 						[(#VAL{spip_rubriques}|table_supporte_trad|oui)
 						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
@@ -44,7 +45,6 @@
 								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:info_gerer_trad_objets{objets=#GET{objets}}:></label>
 							</div>
 						</li>
-						]
 						]
 					</ul>
 				</fieldset>
@@ -65,7 +65,7 @@
 								[(#GET{val}|in_any{#ENV{#GET{name}}}|oui)checked="checked"] /><label for="#GET{val}#GET{name}_oui"><:info_multi_objets{objets=#GET{objets}}:></label>
 							</div>
 						</li>
-						[(#GET{val}|in_any{#ENV{#GET{name}}}|et{#CLE|table_supporte_trad})
+						[(#CLE|table_supporte_trad|oui)
 						#SET{name,gerer_trad_objets}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
 							<span class='erreur_message'>(#GET{erreurs})</span>
