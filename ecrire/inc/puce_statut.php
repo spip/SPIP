@@ -236,6 +236,7 @@ function puce_statut_site($id, $statut, $id_rubrique, $type, $ajax=''){
 			      'prop' => 0,
 			      'refuse' => 2,
 			      'poubelle' => 3);
+	if ($type=='syndic') $type='site';
 
 	$lang_dir = lang_dir($lang_objet);
 	$puces = array(
