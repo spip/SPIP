@@ -63,31 +63,24 @@ function decompiler_texte($struct, $fmt, $prof=0, $next='')
 
 function decompiler_polyglotte($struct, $fmt, $prof=0, $next='')
 {
-	$contenu = array(); 
-	foreach($struct->traductions as $l=>$t)
-		$contenu[]= ($l ? "[$l]" : '') . $t;
 	$f = 'format_polyglotte_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-	return $f($contenu, $prof);
+	return $f($struct->traductions, $prof);
 }
 
 function decompiler_idiome($struct, $fmt, $prof=0, $next='')
 {
 	$module = ($struct->module == 'public/spip/ecrire')? ''
 	  : $struct->module;
-	$l = array();
-	foreach ($struct->arg as $k => $v) {
-	  if ($k) $l[]= "$k=" . public_decompiler($v, $fmt, $prof);
-	}
-	$args = (!$l ? '' : ('{' . join(',', $l) . '}'))
-	.  decompiler_liste($struct->param, $fmt, $prof);
 
-	$s = (!$args
-		AND  $next
-		AND ($next->type == 'texte')
-		AND preg_match(',^[\w\d|{*],', $next->texte));
+	$args = array();
+	foreach ($struct->arg as $k => $v) {
+		if ($k) $args[$k]= public_decompiler($v, $fmt, $prof);
+	}
+
+	$filtres =  decompiler_liste($struct->param, $fmt, $prof);
 
 	$f = 'format_idiome_' . ($fmt ? $fmt : _EXTENSION_SQUELETTES);
-	return $f($struct->nom_champ, $module, $args, $s, $prof);
+	return $f($struct->nom_champ, $module, $args, $filtres, $next, $prof);
 }
 
 function decompiler_champ($struct, $fmt, $prof=0, $next='')
