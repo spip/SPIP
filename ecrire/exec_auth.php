@@ -102,7 +102,7 @@ function auth_dist() {
 			$erreurcookie = '&var_echec_cookie=true';
 		}
 
-		redirige_par_entete(generer_url_public('spip_login',
+		redirige_par_entete(generer_url_public('login',
 			"url=".urlencode(str_replace('/./', '/',
 			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
 			. $clean_link->getUrl())),true).$erreurcookie);
@@ -200,7 +200,7 @@ function auth_dist() {
 
 	if (!$auth_pass_ok)
 		redirige_par_entete(
-			generer_url_public('spip_login', 'var_erreur=pass', true));
+			generer_url_public('login', 'var_erreur=pass', true));
 
 	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'
 	// (code presque mort, utilise peut-etre encore sous .htpasswd ?)

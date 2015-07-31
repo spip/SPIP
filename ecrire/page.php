@@ -20,7 +20,7 @@ if (strstr($fond, '/'))
 	die (_L("Faut pas se gener"));
 
 // Particularites de certains squelettes
-if ($fond == 'spip_login')
+if ($fond == 'login')
 	$forcer_lang = true;
 
 if (!find_in_path($fond.'.html')) {

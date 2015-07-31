@@ -114,7 +114,7 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 	spip_log("logout: $logout");
-	redirige_par_entete($url ? $url : generer_url_public('spip_login'));
+	redirige_par_entete($url ? $url : generer_url_public('login'));
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
@@ -122,7 +122,7 @@ if ($logout) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete(generer_url_public('spip_login'),
+	redirige_par_entete(generer_url_public('login'),
 			    "var_echec_cookie=oui&url="
 			    . ($url ? urlencode($url) : _DIR_RESTREINT_ABS), true);
 }
@@ -184,7 +184,7 @@ if ($essai_login == "oui") {
 
 	if (!$ok) {
 		if (ereg(_DIR_RESTREINT_ABS, $redirect))
-			$redirect = generer_url_public('spip_login',
+			$redirect = generer_url_public('login',
 				"var_login=$login", true);
 		if ($session_password || $session_password_md5)
 			$redirect .= '&var_erreur=pass';
@@ -198,7 +198,7 @@ if ($essai_login == "oui") {
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	if (!$retour)
-		$retour = generer_url_public('spip_login',
+		$retour = generer_url_public('login',
 			'url='.urlencode($url), true);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);

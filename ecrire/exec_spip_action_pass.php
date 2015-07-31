@@ -42,7 +42,7 @@ function spip_pass_passcookie($email, $param)
 			  _T('pass_mail_passcookie',
 			     array('nom_site_spip' => $nom,
 				   'adresse_site' => $url, 
-				   'sendcookie' => generer_url_public('spip_pass', "$param=$cookie")))) )
+				   'sendcookie' => generer_url_action('pass', "$param=$cookie")))) )
 	  return _T('pass_recevoir_mail');
 	else
 	  return  _T('pass_erreur_probleme_technique');
@@ -80,10 +80,10 @@ $message = '';
  return array('formulaire_oubli', 0, 
 	      array('p' => $p,
 		    'message' => $message,
-		    'action' => generer_url_public('spip_pass')));
+		    'action' => generer_url_action('pass')));
 }
 
-function spip_pass_dist()
+function spip_action_pass_dist()
 {
 	global $p, $oubli;
 	install_debut_html( _T('pass_mot_oublie'));
@@ -91,6 +91,6 @@ function spip_pass_dist()
 	install_fin_html();
 }
 
-spip_pass_dist();
+#spip_pass_dist();
 
 ?>
