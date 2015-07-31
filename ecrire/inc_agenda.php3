@@ -14,6 +14,7 @@ define("_ECRIRE_INC_AGENDA", "1");
 function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false) {
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur;
+	global $spip_lang_left, $spip_lang_right;
 
 	$today=getdate(time());
 	$jour_today = $today["mday"];
@@ -42,6 +43,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 	if ($semaine) {
 		$jour_valide = mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved);
 		$jour_semaine_valide = date("w",$jour_valide);
+		if ($jour_semaine_valide==0) $jour_semaine_valide=7;
 		$debut = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+1,$annee_ved);
 		$fin = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+7,$annee_ved);
 	}
@@ -69,7 +71,16 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 				echo "<a href='$lien?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
 				echo "</td>";
 			} else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
-				echo "<td class='arial2' style='margin: 0px; padding: 3px; background-color: white; text-align: center;'>";
+				if ($jour_semaine==1) {
+					$style = "-moz-border-radius-top$spip_lang_left: 5px; -moz-border-radius-bottom$spip_lang_left: 5px;";
+				}
+				else if ($jour_semaine==7) {
+					$style = "-moz-border-radius-top$spip_lang_right: 5px; -moz-border-radius-bottom$spip_lang_right: 5px;";
+				}
+				else {
+					$style = "";
+				}
+				echo "<td class='arial2' style='margin: 0px; padding: 3px; background-color: white; text-align: center; $style'>";
 				echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
 				echo "</td>";
 			} else {
