@@ -25,7 +25,7 @@ function enfant_rub($collection){
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	}
 
-	$res = "";
+	$res = array();
 	$result = sql_select("id_rubrique, id_parent, titre, descriptif, lang ", "spip_rubriques", "id_parent=$collection",'', '0+titre,titre');
 	while($row=sql_fetch($result)){
 		$id_rubrique=$row['id_rubrique'];
@@ -58,8 +58,8 @@ function enfant_rub($collection){
 			  typo($titre) .
 			  "</a>";
 
-			  $titre = (is_string($logo) ? $logo : '') .
-				  bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique");
+			$titre = (is_string($logo) ? $logo : '') .
+				bouton_block_depliable($lib_bouton,$les_sous_enfants ?false:-1,"enfants$id_rubrique");
 
 			$res[] =
 			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.png" : "secteur-24.png"), true, "", $titre) .
@@ -75,10 +75,10 @@ function enfant_rub($collection){
 
 // http://doc.spip.org/@sous_enfant_rub
 function sous_enfant_rub($collection2){
-	$result3 =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
+	$result =  sql_select("id_rubrique, id_parent, titre, lang", "spip_rubriques", "id_parent=$collection2",'', '0+titre,titre');
 
 	$retour = '';
-	while($row=sql_fetch($result3)){
+	while($row=sql_fetch($result)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];
 		$titre2=$row['titre'];
@@ -99,9 +99,8 @@ function sous_enfant_rub($collection2){
 // http://doc.spip.org/@afficher_enfant_rub
 function afficher_enfant_rub($id_rubrique=0) {
 	$les_enfants = enfant_rub($id_rubrique);
-	$n = count($les_enfants);
 
-	if (!$n) return "";
+	if (!$n = count($les_enfants)) return "";
 
 	if ($n==1) {
 		$les_enfants=reset($les_enfants);
