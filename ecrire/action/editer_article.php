@@ -174,7 +174,11 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
-		if ($champs['statut'] == 'publie') {
+		// En cas de proposition d'un article (mais pas depublication), idem
+		if ($champs['statut'] == 'publie'
+		OR ($champs['statut'] == 'prop'
+			AND !in_array($statut_ancien, array('publie', 'prop'))
+		)) {
 			if ($d = _request('date', $c))
 				$champs['date'] = $d;
 			else
