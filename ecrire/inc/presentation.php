@@ -489,7 +489,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 				image_recadre(
 					image_passe_partout($fid, 32,32),
 				32,32,center),
-			'ico'),
+			'ico', 'cccccc'),
 		'src');
 	}
 	$favicon = $fid ? $fid : find_in_path('spip.ico');
