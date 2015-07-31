@@ -126,6 +126,16 @@ function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
  * un * pour $objet,$id_objet permet de traiter par lot
  * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
  *
+ * renvoie une liste de tableaux decrivant chaque lien
+ * dans lequel objet_source et objet_lie sont aussi affectes avec l'id de chaque
+ * par facilite
+ * ex :
+ * array(
+ *   array('id_document'=>23,'objet'=>'article','id_objet'=>12,'vu'=>'oui',
+ *         'document'=>23,'article'=>12)
+ * )
+ * 
+ *
  * @param array $objets_source
  * @param array|string $objets_lies
  * @return array
