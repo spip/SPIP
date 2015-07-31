@@ -64,6 +64,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$flag_administrable = autoriser('modifier','site',$id_syndic);
 	$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
 
+	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
 	$iconifier = charger_fonction('iconifier', 'inc');
 	if ($flag_editable AND ($statut == 'publie'))
 		$dater = charger_fonction('dater', 'inc');
@@ -93,7 +94,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo creer_colonne_droite('', true);
-	echo meme_rubrique($id_rubrique, $id_syndic, 'syndic');
+	echo $meme_rubrique($id_rubrique, $id_syndic, 'syndic');
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
 	echo bloc_des_raccourcis(

@@ -640,6 +640,7 @@ ecrire/inc/lang_liste.php -text
 ecrire/inc/legender.php -text
 ecrire/inc/lien.php -text
 ecrire/inc/mail.php -text
+ecrire/inc/meme_rubrique.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/minipres.php -text
 ecrire/inc/modifier.php -text
