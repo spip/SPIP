@@ -170,11 +170,10 @@ function debug_sequence($id, $nom, $niv, $sequence) {
 }
 
 // appelee a chaque compilation de boucle (inc-compilo)
-function boucle_debug_compile ($id, $nom, $pretty, $sourcefile, $code) {
+function boucle_debug_compile ($id, $nom, $code) {
 	global $debug_objets;
 
 	$debug_objets['code'][$nom.$id] = $code;
-	$debug_objets['pretty'][$nom.$id] = $pretty;
 }
 
 // appelee a chaque compilation de squelette (inc-compilo)
@@ -193,21 +192,21 @@ function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 	}
 }
 
-// appelee a chaque analyse syntaxique de squelette (inc-parser)
+// appelee a chaque analyse syntaxique de squelette
 function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $apres, $altern) {
 	global $debug_objets;
-
 	$debug_objets['courant'] = $nom;
 	$debug_objets['parent'][$nom.$id] = $id_parent;
+	$debug_objets['pretty'][$nom.$id] = 
+	  "BOUCLE$id($type)" . ereg_replace("[\r\n]", " ", $crit) ;
 	// on synthetise avec la syntaxe standard, mais "<//" pose pb 
 	$debug_objets['boucle'][$nom.$id] = 
-	  "<B$id>" .
-	  $avant . "<BOUCLE$id($type)" . $crit .
-	  '>' .
+	  (!$avant ? "" : "<B$id>$avant") . 
+	  "<BOUCLE$id($type)$crit>" .
 	  $milieu .
 	  "</BOUCLE$id>" .
-	  $apres . "</B$id>" .
-	  $altern . '<//B' . $id . ">";
+	  (!$apres ? "" : "$apres</B$id>") . 
+	  (!$altern ? "" : "$altern<//B$id>");
 }
 
 function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
