@@ -615,6 +615,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = str_replace("}", "</i>", $letexte);
 		$letexte = eregi_replace("(<br>)+(<p>|<br>)", "\n<p class=\"spip\">", $letexte);
 		$letexte = str_replace("<p>", "<p class=\"spip\">", $letexte);
+		$letexte = str_replace("\n", " ", $letexte);
 	}
 	else {
 		$cherche1 = array(
@@ -630,7 +631,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 10 */	"/\}/",
 			/* 11 */	"/(<br>){2,}/",
 			/* 12 */	"/<p>([\n]*)(<br>)+/",
-			/* 13 */	"/<p>/"
+			/* 13 */	"/<p>/",
+			/* 14 */	"\n"
 		);
 		$remplace1 = array(
 			/* 1 */ 	"\n<hr class=\"spip\">\n",
@@ -645,7 +647,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 10 */	"</i>",
 			/* 11 */	"\n<p class=\"spip\">",
 			/* 12 */	"\n<p class=\"spip\">",
-			/* 13 */	"<p class=\"spip\">"
+			/* 13 */	"<p class=\"spip\">",
+			/* 14 */	" "
 		);
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}
