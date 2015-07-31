@@ -68,6 +68,12 @@ td {
 .fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; }
 .maj-debut:first-letter { text-transform: uppercase; }
 
+
+.format_png {
+	behavior: url("win_png.htc");
+}
+
+
 /*
  * Icones et bandeaux
  */
