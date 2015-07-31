@@ -187,8 +187,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 //
 // A noter : dans le portfolio prive on pousse le vice jusqu'a reduire la taille
 // de la vignette -> c'est a ca que sert la variable $portfolio
-// http://doc.spip.org/@image_pattern
-
+// http://doc.spip.org/@vignette_automatique
 function vignette_automatique($img, $doc, $lien, $x=0, $y=0, $align='', $class='spip_logos')
 {
 	include_spip('inc/distant');
