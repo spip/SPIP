@@ -537,10 +537,10 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poer fornir
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que de redactors nov&egrave;ls s\'inscrivan
  a partir dau sit public? Se o acceptatz, los vesitaires se poir&agrave;n inscriure
  gr&agrave;cias a un formulari automatizat e doncas accedir&agrave;n a l\'espaci privat per
- prepausar d\'articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires recebon un e-mail automatic
+ prepausar d\'articles.<blockquote><div><i> Durant la fasa d\'inscripcion, los utilizaires recebon un e-mail automatic
  que lor baila un c&ograve;de d\'acc&egrave;s v&egrave;rs lo sit privat.
 Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors: en aqueu cas, l\'inscripcion automatica es
- impossibla.</i></blockquote>', # MODIF
+ impossibla.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilizar los mots clau sobre v&ograve;stre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;t prepausar de sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cerchaor integrat a SPIP? (lo desactivar abriva lo foncionament dau sist&egrave;ma.)',
@@ -1110,9 +1110,9 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_sur_titre' => 'Sobret&iacute;tol',
 'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
   la tiera de sas novetats. Per aqu&ograve; far, vos chau activar la sindicacion. 
-  <blockquote><i>Quauques auberjaors activan pas aquela foncionalitat; 
+  <blockquote><div><i>Quauques auberjaors activan pas aquela foncionalitat; 
   en aqueu cas, poiretz pas utilizar la sindicacion de contengut
-  dempuei v&ograve;stre sit.</i></blockquote>', # MODIF
+  dempuei v&ograve;stre sit.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': aquesta taula es condrecha.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion dau motor son voidas.',
 'texte_tentative_recuperation' => 'Assai de reparacion',

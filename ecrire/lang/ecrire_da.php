@@ -533,9 +533,9 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_question_inscription_nouveaux_redacteurs' => 'Vil du tillade, at nye redakt&oslash;rer tilmelder sig
 		p&aring; det offentligt tilg&aelig;ngelige websted? Ja betyder, at bes&oslash;gende kan tilmelde sig p&aring; en automatisk dannet formular,
 		og derefter f&aring; adgang til det private omr&aring;de, hvor de kan vedligeholde deres egne artikler.
-		<blockquote><i>Under tilmeldingen modtager brugerne en automatisk dannet e-mail med deres adgangskode til det
+		<blockquote><div><i>Under tilmeldingen modtager brugerne en automatisk dannet e-mail med deres adgangskode til det
 		private websted. Nogle webhoteller tillader ikke at der sendes e-mails fra deres servere. I s&aring; fald kan automatisk
-		tilmelding ikke finde sted.</i></blockquote>', # MODIF
+		tilmelding ikke finde sted.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => '&Oslash;nsker du at bruge n&oslash;gleord p&aring; webstedet?',
 'info_question_proposer_site' => 'Hvem kan foresl&aring; henvisninger til websteder?',
 'info_question_utilisation_moteur_recherche' => '&Oslash;nsker du at anvende den s&oslash;gefunktion, der findes i SPIP?
@@ -1084,8 +1084,8 @@ demande plus de puissance au serveur.', # NEW
 'texte_sur_titre' => 'Hovedoverskrift',
 'texte_syndication' => 'Hvis webstedet tillader det, er det muligt automatisk at hente en oversigt over det
 		seneste materiale. For at g&oslash;re dette, skal du igangs&aelig;tte syndikering.
-		<blockquote><i>Nogle webhoteller tillader ikke denne funktion.
-		I s&aring; fald kan du ikke foretage indholdssyndikering fra dit websted.</i></blockquote>', # MODIF
+		<blockquote><div><i>Nogle webhoteller tillader ikke denne funktion.
+		I s&aring; fald kan du ikke foretage indholdssyndikering fra dit websted.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': denne tabel er OK.',
 'texte_tables_indexation_vides' => 'S&oslash;gefunktionens indekstabeller er tomme.',
 'texte_tentative_recuperation' => 'Reparationsfors&oslash;g',

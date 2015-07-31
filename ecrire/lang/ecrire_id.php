@@ -552,12 +552,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_inscription_nouveaux_redacteurs' => 'Apakah anda mengizinkan registrasi editor baru dari
   situs yang dipublikasi? Jika anda setuju, pengunjung dapat mendaftar
   melalui formulir terotomasi, dan akan mengakses area pribadi untuk
-  melihat artikel-artikel mereka. <blockquote><i>Selama proses registrasi,
+  melihat artikel-artikel mereka. <blockquote><div><i>Selama proses registrasi,
   pengguna menerima sebuah e-mail terotomasi
   yang memberikan kode akses ke situs pribadi. Sejumlah
   hosting menonaktifkan pengiriman e-mail di server mereka:
   dalam hal ini ini registrasi terotomasi tidak dapat
-  diimplementasikan.</i></blockquote>', # MODIF
+  diimplementasikan.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Apakah anda ingin menggunakan kata-kata kunci di situs anda?',
 'info_question_proposer_site' => 'Siapa yang dapat menyarankan situs-situs referensi?',
 'info_question_utilisation_moteur_recherche' => 'Apakah anda ingin mengunakan mesin pencari yang terintegrasi dengan SPIP?
@@ -1125,9 +1125,9 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'texte_sur_titre' => 'Judul atas',
 'texte_syndication' => 'Jika sebuah situs mengizinkannya, daftar isi terbaru dari situs tersebut
   dapat diambil secara otomatis. Untuk melakukannya, anda harus mengaktifkan sindikasi.
-  <blockquote><i>Sejumlah hosting menonaktifkan fungsi ini; 
+  <blockquote><div><i>Sejumlah hosting menonaktifkan fungsi ini; 
   dalam hal ini, anda tidak dapat menggunakan sindikasi isi
-  dari situs anda.</i></blockquote>', # MODIF
+  dari situs anda.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': tabel ini OK.',
 'texte_tables_indexation_vides' => 'Tabel terindeksasi mesin kosong.',
 'texte_tentative_recuperation' => 'Usaha perbaikan',

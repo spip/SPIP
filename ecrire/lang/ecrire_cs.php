@@ -556,12 +556,12 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_question_inscription_nouveaux_redacteurs' => 'Mohou se nov&iacute; redakto&#345;i p&#345;ihla&#353;ovat z ve&#345;ejn&eacute; &#269;&aacute;sti webu?
   Pokud ano, n&aacute;v&#353;t&#283;vn&iacute;ci se mohou p&#345;ihla&#353;ovat pomoc&iacute; automatick&eacute;ho formul&aacute;&#345;e
   a z&iacute;skaj&iacute; p&#345;&iacute;stup do priv&aacute;tn&iacute; &#269;&aacute;sti. Budou tak moci navrhovat sv&eacute; vlastn&iacute;
-  &#269;l&aacute;nky. <blockquote><i>P&#345;i p&#345;ihl&aacute;&#353;en&iacute;
+  &#269;l&aacute;nky. <blockquote><div><i>P&#345;i p&#345;ihl&aacute;&#353;en&iacute;
   obdr&#382;&iacute; u&#382;ivatel&eacute; automatick&yacute; email
   s uveden&iacute;m p&#345;&iacute;stupov&yacute;ch &uacute;daj&#367; k priv&aacute;tn&iacute; &#269;&aacute;sti.
   N&#283;kte&#345;&iacute; poskytovatel&eacute; prostoru pro web odes&iacute;l&aacute;n&iacute; email&#367; ze sv&yacute;ch server&#367;
   vyp&iacute;naj&iacute;. Automatick&eacute; p&#345;ihl&aacute;&#353;en&iacute; je v takov&eacute;m p&#345;&iacute;pad&#283;
-  nemo&#382;n&eacute;.</i></blockquote>', # MODIF
+  nemo&#382;n&eacute;.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Chcete na va&#353;em webu pou&#382;&iacute;vat kl&iacute;&#269;ov&aacute; slova?',
 'info_question_proposer_site' => 'Kdo m&#367;&#382;e navrhovat odkazy na weby?',
 'info_question_utilisation_moteur_recherche' => 'Chcete pou&#382;&iacute;vat vyhled&aacute;va&#269;, kter&yacute; je sou&#269;&aacute;st&iacute; syst&eacute;mu SPIP?
@@ -1114,8 +1114,8 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'texte_sur_titre' => 'Podtitul',
 'texte_syndication' => 'Pokud to web umo&#382;&#328;uje, m&#367;&#382;ete automaticky z&iacute;skat seznam na n&#283;m zve&#345;ejn&#283;n&yacute;ch
   novinek. K tomu je nutno zapnout syndikaci.
-  <blockquote><i>N&#283;kte&#345;&iacute; poskytovatel&eacute; webov&eacute;ho prostoru tuto funkcni vyp&iacute;naj&iacute;.
-  V takov&eacute;m p&#345;&iacute;pad&#283; nem&#367;&#382;ete syndikaci ze sv&eacute;ho webu pou&#382;&iacute;t.</i></blockquote>', # MODIF
+  <blockquote><div><i>N&#283;kte&#345;&iacute; poskytovatel&eacute; webov&eacute;ho prostoru tuto funkcni vyp&iacute;naj&iacute;.
+  V takov&eacute;m p&#345;&iacute;pad&#283; nem&#367;&#382;ete syndikaci ze sv&eacute;ho webu pou&#382;&iacute;t.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': tato tabulka je v po&#345;&aacute;dku.',
 'texte_tables_indexation_vides' => 'Tabulky index&#367; vyhled&aacute;va&#269;e jsou pr&aacute;zdn&eacute;.',
 'texte_tentative_recuperation' => 'Pokus o opravu',

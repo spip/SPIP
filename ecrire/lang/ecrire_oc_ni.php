@@ -525,12 +525,12 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz li inscripcions de nov&egrave;us redactors &agrave;
  partir dau sit public&nbsp;? Se l\'acceptatz, lu visitaires si podr&agrave;n inscriure
  desp&iacute; un formulari automatisat e accedir&agrave;n alora &agrave; l\'espaci privat per
- prepauar lu sieus articles pr&ograve;pis.<blockquote><i>Durant la fasa d\'inscripcion,
+ prepauar lu sieus articles pr&ograve;pis.<blockquote><div><i>Durant la fasa d\'inscripcion,
  lu utilisaires recebon un corrier electronic automatic
  que li fornisse lu sieus c&ograve;des d\'acc&egrave;s au sit privat. D\'unu
  aubergadors desactivon lo mandad&iacute;s d\'e-mails desp&iacute; lu sieus
  servidors: en aqueu cas, l\'inscripcion automatica es
- impossibla.</i></blockquote>', # MODIF
+ impossibla.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilisar lu m&ograve;ts claus sus lo voastre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;u prepauar de sits referen&ccedil;ats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilisar lo motor de recerca integrat &agrave; SPIP? (s\'es desactivat, accel&egrave;ra lo foncionament dau sistema.)',
@@ -1089,9 +1089,9 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'texte_sur_titre' => 'Sobretitre',
 'texte_syndication' => 'Si p&ograve;u recuperar automaticament, quora un sit web lo permet, 
   la ti&egrave;ra dei sieus noveutats. Per far aqu&ograve;, vos cau activar la sindicacion. 
-  <blockquote><i>D\'unu aubergadors activon pas aquela foncionalitat; 
+  <blockquote><div><i>D\'unu aubergadors activon pas aquela foncionalitat; 
   dins aqueu cas, podretz pas utilisar la sindicacion de contengut
-  desp&iacute; lo voastre sit.</i></blockquote>', # MODIF
+  desp&iacute; lo voastre sit.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': aquesta taula es condrecha.',
 'texte_tables_indexation_vides' => 'Li taulas d\'indexacion dau motor son vu&egrave;ii.',
 'texte_tentative_recuperation' => 'Temptativa de reparacion',

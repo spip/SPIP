@@ -553,11 +553,11 @@ il database alla nuova versione di SPIP.',
 'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuovi redattori
 direttamente  dal sito pubblico? In caso affermativo, i visitatori potranno iscriversi
 grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
-i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
+i propri articoli. <blockquote><div><i>Durante la fase d\'iscrizione,
 gli utenti ricevono automaticamente un email
 che fornisce loro i codici d\'accesso al sito privato. Alcuni
 servizi di hostiong disattivano l\'invio di email dai propri server: in questo caso l\'iscrizione automatica &egrave;
-impossibile.</i></blockquote>',
+impossibile.</i></div></blockquote>',
 'info_question_mots_cles' => 'Vuoi utilizzare le parole chiave nel sito?',
 'info_question_proposer_site' => 'Chi pu&ograve; proporre i siti da citare?',
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
@@ -1106,9 +1106,9 @@ cache di SPIP. Ci&ograve; permette ad esempio di forzare la rigenerazione di tut
 'texte_syndication' => 'Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
 la lista delle novit&agrave;. A tal fine &egrave; necessario attivare la syndication.
 
-<blockquote><i>Alcuni provider disattivano questa funzionalit&agrave;; 
+<blockquote><div><i>Alcuni provider disattivano questa funzionalit&agrave;; 
 in questo caso, non potrai utilizzare la syndication del contenuto
-a partire dal tuo sito.</i></blockquote>',
+a partire dal tuo sito.</i></div></blockquote>',
 'texte_table_ok' => ': questa tabella &egrave; OK.',
 'texte_tables_indexation_vides' => 'Le tabelle d\'indicizzazione del motore sono vuote.',
 'texte_tentative_recuperation' => 'Tentativo di ripristino',

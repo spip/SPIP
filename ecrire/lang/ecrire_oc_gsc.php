@@ -537,10 +537,10 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que redactors nav&egrave;ths e s\'inscr&iacute;vian
  a partir deu sit public? S\'ac acceptatz, los vesitaires que\'s poir&agrave;n inscr&iacute;ver
  merc&eacute;s a un formulari automatizat e alavetz qu\'accedir&agrave;n a l\'espaci privat ent&agrave;
- perpausar articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires que receben un e-mail automatic
+ perpausar articles.<blockquote><div><i> Durant la fasa d\'inscripcion, los utilizaires que receben un e-mail automatic
  qui\'us balha un c&ograve;de d\'acc&egrave;s au sit privat.
 Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los lors serviders: en aqueth cas, l\'inscripcion automatica qu\'ei
- impossibla.</i></blockquote>', # MODIF
+ impossibla.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'E desiratz d\'utilizar los mots clau suu v&ograve;ste sit?',
 'info_question_proposer_site' => 'Qui p&ograve;t perpausar sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'E desiratz d\'utilizar lo cercader integrat a SPIP? (lo desactivar qu\'accel&egrave;ra lo foncionament deu sist&egrave;ma.)',
@@ -1109,9 +1109,9 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'texte_sur_titre' => 'Subert&iacute;tol',
 'texte_syndication' => 'Que\'s p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la t&egrave;ra de las soas nautats. T&agrave; har aqu&ograve;, que\'vs cau activar la sindicacion. 
-  <blockquote><i>Daubuns aubergaders n\'activan pas aquera foncionalitat; 
+  <blockquote><div><i>Daubuns aubergaders n\'activan pas aquera foncionalitat; 
   en aqueth cas, non poiratz pas utilizar la sindicacion de contengut
-  dempuish lo v&ograve;ste sit.</i></blockquote>', # MODIF
+  dempuish lo v&ograve;ste sit.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': aquesta taula qu\'ei condreta.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion deu motor que son vueidas.',
 'texte_tentative_recuperation' => 'Ensai de reparacion',

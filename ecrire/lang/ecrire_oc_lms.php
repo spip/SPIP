@@ -537,10 +537,10 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que daus redactors noveus s\'inscrivan
  a partir dau sit public? Se o acceptatz, los vesitaires se poir&aacute;n inscriure
  gr&agrave;cias a un formulari automatizat e donc accedir&aacute;n a l\'espaci privat per
- prepausar daus articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires receben un e-mail automatic
+ prepausar daus articles.<blockquote><div><i> Durant la fasa d\'inscripcion, los utilizaires receben un e-mail automatic
  que lor baila un c&ograve;de d\'acc&egrave;s au sit privat.
 Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidors: en queu cas, l\'inscripcion automatica es
- impossibla.</i></blockquote>', # MODIF
+ impossibla.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilizar los mots clau subre v&ograve;stre sit?',
 'info_question_proposer_site' => 'Quau p&ograve;t prepausar daus sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cerchador integrat a SPIP? (lo desactivar abriva lo foncionament dau sistema.)',
@@ -1110,9 +1110,9 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_sur_titre' => 'Subret&iacute;tol',
 'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
   la tiera de sas novetats. Per qu&ograve; far, vos chau activar la sindicacion. 
-  <blockquote><i>Quauques auberjadors activan pas quela foncionalitat; 
+  <blockquote><div><i>Quauques auberjadors activan pas quela foncionalitat; 
   en queu cas, poiretz pas utilizar la sindicacion de contengut
-  dempuei v&ograve;stre sit.</i></blockquote>', # MODIF
+  dempuei v&ograve;stre sit.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': questa taula es condrecha.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion dau motor son voidas.',
 'texte_tentative_recuperation' => 'Assai de reparacion',

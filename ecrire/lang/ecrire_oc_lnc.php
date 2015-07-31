@@ -537,10 +537,10 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que de redactors nov&egrave;ls s\'inscrigan
  a partir del sit public? Se o acceptatz, los vesitaires se poir&agrave;n inscriure
  merc&eacute;s a un formulari automatizat e alara accedir&agrave;n a l\'espaci privat per
- prepausar d\'articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires recebon un e-mail automatic
+ prepausar d\'articles.<blockquote><div><i> Durant la fasa d\'inscripcion, los utilizaires recebon un e-mail automatic
  que lor baila un c&ograve;de d\'acc&egrave;s al sit privat.
 D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i lors servidors: en aquel cas, l\'inscripcion automatica es
- impossibla.</i></blockquote>', # MODIF
+ impossibla.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilizar los mots clau sul v&ograve;stre sit?',
 'info_question_proposer_site' => 'Qual p&ograve;t prepausar de sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cercador integrat a SPIP? (lo desactivar abriva lo foncionament del sist&egrave;ma.)',
@@ -1099,9 +1099,9 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'texte_sur_titre' => 'Subret&iacute;tol',
 'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quora un sit web o permet, 
   la ti&egrave;ra de sas novetats. Per aqu&ograve; far, vos cal activar la sindicacion. 
-  <blockquote><i>D\'unes albergadors activan pas aquela foncionalitat; 
+  <blockquote><div><i>D\'unes albergadors activan pas aquela foncionalitat; 
   en aquel cas, poiretz pas utilizar la sindicacion de contengut
-  dempu&egrave;i v&ograve;stre sit.</i></blockquote>', # MODIF
+  dempu&egrave;i v&ograve;stre sit.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': aquesta taula es condrecha.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion del motor son vu&egrave;jas.',
 'texte_tentative_recuperation' => 'Ensag de reparacion',

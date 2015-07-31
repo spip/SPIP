@@ -520,7 +520,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_question_activer_compactage_js' => '&iquest;Desea activar la compresi&oacute;n de los scripts (javascript) ?',
 'info_question_activer_compresseur' => '&iquest;Desea activar la compresi&oacute;n del flujo HTTP ?',
 'info_question_gerer_statistiques' => '&iquest;Deseas que tu sitio gestione las estad&iacute;sticas de las visitas?',
-'info_question_inscription_nouveaux_redacteurs' => '&iquest;Se aceptan inscripciones de nuevas redactoras y redactores a partir del sitio p&uacute;blico? Si se acepta, las personas que visitan el sitio podr&aacute;n inscribirse desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para proponer sus propios art&iacute;culos. <blockquote><i>Durante la fase de inscripci&oacute;n, reciben un correo electr&oacute;nico autom&aacute;tico que les indica sus c&oacute;digos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus servidores: en tal caso, se hace imposible la inscripci&oacute;n autom&aacute;tica.</i></blockquote>',
+'info_question_inscription_nouveaux_redacteurs' => '&iquest;Se aceptan inscripciones de nuevas redactoras y redactores a partir del sitio p&uacute;blico? Si se acepta, las personas que visitan el sitio podr&aacute;n inscribirse desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para proponer sus propios art&iacute;culos. <blockquote><div><i>Durante la fase de inscripci&oacute;n, reciben un correo electr&oacute;nico autom&aacute;tico que les indica sus c&oacute;digos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus servidores: en tal caso, se hace imposible la inscripci&oacute;n autom&aacute;tica.</i></div></blockquote>',
 'info_question_mots_cles' => '&iquest;Deseas utilizar las palabras clave en tu sitio?',
 'info_question_proposer_site' => '&iquest;Qui&eacute;n puede proponer los sitios referenciados?',
 'info_question_utilisation_moteur_recherche' => '&iquest;Deseas utilizar el motor de b&uacute;squeda integrado de SPIP? (desactivarlo agiliza el sitio)',
@@ -1036,8 +1036,8 @@ Prudencia con esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eventu
 'texte_sur_titre' => 'Antet&iacute;tulo',
 'texte_syndication' => 'Es posible recuperar autom&aacute;ticamente, cuando un sitio Web lo permite,
  la lista de novedades. Para ello, debes activar la sindicaci&oacute;n.
-<blockquote><i>Algunos proveedores de hospedaje desactivan esta funcionalidad&nbsp;;
- en ese caso, no podr&aacute;s utilizar la sindicaci&oacute;n de contenido desde tu sitio.</i></blockquote>',
+<blockquote><div><i>Algunos proveedores de hospedaje desactivan esta funcionalidad&nbsp;;
+ en ese caso, no podr&aacute;s utilizar la sindicaci&oacute;n de contenido desde tu sitio.</i></div></blockquote>',
 'texte_table_ok' => ': esta tabla est&aacute; bien.',
 'texte_tables_indexation_vides' => 'Las tablas del motor de indexaci&oacute;n est&aacute;n vac&iacute;as.',
 'texte_tentative_recuperation' => 'Tentativa de reparaci&oacute;n.',

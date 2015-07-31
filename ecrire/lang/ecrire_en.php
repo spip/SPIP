@@ -554,12 +554,12 @@ through an FTP access to the Web site.</p>',
 'info_question_inscription_nouveaux_redacteurs' => 'Do you wish to allow the new editors to register
  from the public site? If you agree to this, visitors will be able to  register
   using an automatic form, and then access the private area to
-  tender their own articles. <blockquote><i>During the registration process,
+  tender their own articles. <blockquote><div><i>During the registration process,
   users receive an automatic email
   giving them their access code to the private area. Some
   service providers disallow the sending of email from their
   servers: in that case, automated registration cannot be
-  implemented.</i></blockquote>',
+  implemented.</i></div></blockquote>',
 'info_question_mots_cles' => 'Do you wish to use keywords in your site?',
 'info_question_proposer_site' => 'Who can propose referenced sites?',
 'info_question_utilisation_moteur_recherche' => 'Do you wish to use the search engine integrated to SPIP?
@@ -1122,9 +1122,9 @@ entered important modifications on the graphics or the structure of the site.',
 'texte_sur_titre' => 'Top title',
 'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
   the list of its latest material. To achieve this, you must activate the syndication. 
-  <blockquote><i>Some hosts disable this function; 
+  <blockquote><div><i>Some hosts disable this function; 
   in this case, you cannot use the content syndication
-  from your site.</i></blockquote>',
+  from your site.</i></div></blockquote>',
 'texte_table_ok' => ': this table is OK.',
 'texte_tables_indexation_vides' => 'Indexing tables of the engine are empty.',
 'texte_tentative_recuperation' => 'Repairing attempt',

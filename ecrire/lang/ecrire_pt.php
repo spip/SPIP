@@ -557,12 +557,12 @@ a base de dados &agrave; nova vers&atilde;o de SPIP.',
 'info_question_inscription_nouveaux_redacteurs' => 'Aceita as inscri&ccedil;&otilde;es de novos redactores a
  partir do s&iacute;tio p&uacute;blico&nbsp;? Se aceitar, os visitantes poder&atilde;o inscrever-se
  a partir de um formul&aacute;rio automatizado e aceder&atilde;o ent&atilde;o ao espa&ccedil;o privado para
-propor os seus pr&oacute;prios artigos. <blockquote><i>Durante a fase de inscri&ccedil;&atilde;o,
+propor os seus pr&oacute;prios artigos. <blockquote><div><i>Durante a fase de inscri&ccedil;&atilde;o,
  os utilizadores recebem um correio electr&oacute;nico autom&aacute;tico
 fornecendo-lhes os seus c&oacute;digos de acesso ao s&iacute;tio privado.Alguns
 servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
  servidores&nbsp;: nesse caso, a inscri&ccedil;&atilde;o autom&aacute;tica &eacute;
- imposs&iacute;vel.</i></blockquote>', # MODIF
+ imposs&iacute;vel.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Deseja utilizar as palavras-chave no seu s&iacute;tio&nbsp;?',
 'info_question_proposer_site' => 'Quem pode propor s&iacute;tios referenciados&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Deseja utilizar o motor integrado de pesquisa a SPIP&nbsp;?
@@ -1127,9 +1127,9 @@ na cache SPIP. Isso permite, por exemplo, obrigar uma recomposi&ccedil;&atilde;o
 'texte_sur_titre' => 'Supra-t&iacute;tulo',
 'texte_syndication' => '&Eacute; poss&iacute;vel recuperar automaticamente, quando um s&iacute;tio Web o permitir, 
  a lista das suas novidades. Para tal, deve activar a vincula&ccedil;&atilde;o. 
-  <blockquote><i>Alguns servi&ccedil;os de hospedagem desactivam esta funcionalidade&nbsp;; 
+  <blockquote><div><i>Alguns servi&ccedil;os de hospedagem desactivam esta funcionalidade&nbsp;; 
  neste caso, n&atilde;o poder&aacute; utilizar a vincula&ccedil;&atilde;o de conte&uacute;do
-a partir do seu s&iacute;tio.</i></blockquote>', # MODIF
+a partir do seu s&iacute;tio.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': esta tabela est&aacute; OK.',
 'texte_tables_indexation_vides' => 'As tabelas de indexa&ccedil;&atilde;o do motor est&atilde;o vazias.',
 'texte_tentative_recuperation' => 'Tentativa de repara&ccedil;&atilde;o',

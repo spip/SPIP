@@ -555,12 +555,12 @@ ak yon lim&egrave;l. W vle itilize opsyon nan&nbsp;?', # MODIF
 'info_question_inscription_nouveaux_redacteurs' => 'Aksepte ounon pa aksepte w tout enskripsyon nouvo redakt&egrave; sou lespas piblik sit-la&nbsp;?
 Si wi ka aksepte, vizit&eacute; yo ke enskri azot depi
    yon f&ograve;mil&egrave;,  pou zot ke sere laks&eacute; nan espas priv&eacute; pou zot kapab pwopoze
-  zot pwop atik yo a y m&egrave;m. <blockquote><i>Kann moun-la zot ap enskri azot,
+  zot pwop atik yo a y m&egrave;m. <blockquote><div><i>Kann moun-la zot ap enskri azot,
  y reswa yon lim&egrave;l otomatik
   ki bay azottout kod laks&eacute; sou sit priv&eacute;. K&egrave;k
   l&eacute;b&egrave;j&egrave; ka enpeche lanvwa tout lim&egrave;l  depi zot s&egrave;v&egrave;&nbsp;:
   al&ograve;, lenskrisyon otomatik ke
-  inposib.</i></blockquote>', # MODIF
+  inposib.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Eske w vle itilize mokle yo nan sitw&egrave;b w&nbsp;?',
 'info_question_proposer_site' => 'Kimoun kapab pwopoze k&egrave;k sit referans&eacute;&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize mot&egrave; pou ch&egrave;che de SPIP&nbsp;?
@@ -1121,9 +1121,9 @@ Bagay-la p&eacute;m&egrave;, pa egsanp, f&ograve;se rekalkil tout paj sa-yo, apr
 'texte_sur_titre' => 'Sir-tit',
 'texte_syndication' => 'Kank sitweb-la li p&egrave;m&egrave; bagay-sa-a, se posib pran otomatikman lis tout nouv&egrave;lt&eacute; ali. 
 F&ograve;k w aktive sendikasyon an. 
-  <blockquote><i>Tansyon k&egrave;k z&eacute;b&egrave;rj&egrave;, zot ka d&eacute;zaktiv fonksyonalit&eacute;-a&nbsp;; 
+  <blockquote><div><i>Tansyon k&egrave;k z&eacute;b&egrave;rj&egrave;, zot ka d&eacute;zaktiv fonksyonalit&eacute;-a&nbsp;; 
   akoz bagay-la, inposib pran sendikasyon-an depi sit aou
-.</i></blockquote>', # MODIF
+.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': tab-la se bon.',
 'texte_tables_indexation_vides' => 'Tab pou indeksayon mot&egrave; se vid.',
 'texte_tentative_recuperation' => 'Esey aranj&eacute;',

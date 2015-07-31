@@ -574,8 +574,8 @@ versyon SPIP.',
 'info_question_inscription_nouveaux_redacteurs' => 'Indik si ou laks&egrave;p linskrisyon bann nouvo lot&egrave;r dopwi lo sit piblik&nbsp;? Si
  ou v&eacute;, bann lot&egrave;r i poura inskri azot &egrave;k lo formul&egrave;r otomatik. Zot i poura akost&eacute;
 sir figirw&egrave;b priv&eacute; &eacute; propoz zot prop zartik minm.
-<blockquote><i>Dan moman linskrisyon, bann zitilizat&egrave;r i giny inn lim&egrave;l otomatikman. Lim&egrave;l-la i donn azot bann kod lakostaz sir figirw&egrave;b priv&eacute;. Nana d&eacute;sertin z&eacute;berz&egrave;r
-sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&nbsp;: dann kala, linskrisyon otomatik li l&eacute; pa posib</i></blockquote>', # MODIF
+<blockquote><div><i>Dan moman linskrisyon, bann zitilizat&egrave;r i giny inn lim&egrave;l otomatikman. Lim&egrave;l-la i donn azot bann kod lakostaz sir figirw&egrave;b priv&eacute;. Nana d&eacute;sertin z&eacute;berz&egrave;r
+sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&nbsp;: dann kala, linskrisyon otomatik li l&eacute; pa posib</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Anserv bann molakl&eacute; sir out sitw&egrave;b&nbsp;?',
 'info_question_proposer_site' => 'Kisa i p&eacute; propoz bann sit r&eacute;f&eacute;rans&eacute;&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Indik si ou v&eacute; ans&egrave;rv lo rod&egrave;r-dodan SPIP
@@ -1108,9 +1108,9 @@ Inn ti p&eacute;d pr&eacute;kosyon l&eacute; n&eacute;s&eacute;s&egrave;r &egrav
 'texte_suppression_fichiers' => 'Anserv lakomand-la pou d&eacute;gr&egrave;n tout bann fisy&eacute; sir lo kas SPIP. Sa l&eacute; itil, pa &eacute;gsanp, pou fors larkalkil do tout bann pazw&egrave;b si lo sit, kank ou la f&eacute; bann sanzman inportan dann grafism ou dann lastriktir lo sit.',
 'texte_sur_titre' => 'Sirtitr',
 'texte_syndication' => 'L&eacute; posib r&eacute;kup&egrave;r la list bann nouvelt&eacute; otomatikman, sir d&eacute;sertin sit : ifo pou sa-la f&eacute; zw&eacute; lasindikasyon 
-<blockquote><i>N&eacute;na d&eacute;sertin z&eacute;berz&egrave;r sak i d&eacute;gr&egrave;n lafonksyon-la&nbsp;; 
+<blockquote><div><i>N&eacute;na d&eacute;sertin z&eacute;berz&egrave;r sak i d&eacute;gr&egrave;n lafonksyon-la&nbsp;; 
 dann ka-la ou sra pa pou itiliz lasindikasyon d-kontnu
-dopwi out pro sit sa-minm.</i></blockquote>', # MODIF
+dopwi out pro sit sa-minm.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ': tab-la l&eacute; OK.',
 'texte_tables_indexation_vides' => 'Bann tab l&eacute; vid (pou lind&egrave;ksasyon lo rod&egrave;r).',
 'texte_tentative_recuperation' => 'Es&egrave;y inn aranzman',

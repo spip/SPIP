@@ -559,12 +559,12 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>', # MODIF
 'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceutes les inscripciones de nuevos redactores dende\'l
   sitiu p&uacute;blicu? Si aceutes, los visitantes podr&aacute;n inscribise
   dende un formulariu automatiz&aacute;u y tendr&aacute;n accesu a l\'espaciu priv&aacute;u pa
-  proponer art&iacute;culos propios. <blockquote><i>Tres de la fase d\'inscripci&oacute;n,
+  proponer art&iacute;culos propios. <blockquote><div><i>Tres de la fase d\'inscripci&oacute;n,
   los usuarios reciben un corr&eacute;u electr&oacute;nicu autom&aacute;ticu
   que-yos da los c&oacute;digos d\'accesu al sitiu priv&aacute;u. Dellos
   agospiadores desactiven l\'unv&iacute;u d\'e-mails dende los sos
   sirvidores: nesti casu, la inscripci&oacute;n autom&aacute;tica ye
-  imposible.</i></blockquote>',
+  imposible.</i></div></blockquote>',
 'info_question_mots_cles' => '&iquest;Quies utilizar les pallabres-clave nesti sitiu?',
 'info_question_proposer_site' => '&iquest;Qui&eacute;n pue proponer sitios referenciaos?',
 'info_question_utilisation_moteur_recherche' => '&iquest;Quies utilizar el motor de restolar integr&aacute;u con SPIP?
@@ -1129,9 +1129,9 @@ vienes de facer camb&eacute;os importantes nel grafismu o na estructura del siti
 'texte_sur_titre' => 'Antet&iacute;tulu',
 'texte_syndication' => 'Ye posible recuperar automaticamente, cuando un sitiu web lo permite,
   la llista de les noved&aacute;es. Para esto, hai que activar la sindicaci&oacute;n.
-  <blockquote><i>Dellos agospiadores web desactiven esta funci&oacute;n;
+  <blockquote><div><i>Dellos agospiadores web desactiven esta funci&oacute;n;
   si ye\'l casu, nun vas poder usar la sindicaci&oacute;n de conten&iacute;os
-  dende\'l to sitiu web.</i></blockquote>',
+  dende\'l to sitiu web.</i></div></blockquote>',
 'texte_table_ok' => ': esta tabla ta bi&eacute;n.',
 'texte_tables_indexation_vides' => 'Les tables d\'indexaci&oacute;n del motor tan vac&iacute;es.',
 'texte_tentative_recuperation' => 'Intentu d\'igua',

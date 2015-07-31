@@ -531,8 +531,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_question_activer_compresseur' => 'Voleu activar la compressi&oacute; del flux HTTP?',
 'info_question_gerer_statistiques' => 'El vostre lloc ha de gestionar les estad&iacute;stiques de les visites?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accepteu les inscripcions de nous redactors a partir del lloc p&uacute;blic? Si ho accepteu, els visitants es podran inscriure
- mitjan&ccedil;ant un formulari  automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
- cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.</i></blockquote>',
+ mitjan&ccedil;ant un formulari  automatitzat i llavors accediran a l\'espai privat per proposar els seus propis articles.<blockquote><div><i>Durant el proc&eacute;s d\'inscripci&oacute;, els usuaris reben un correu electr&ograve;nic autom&agrave;tic en el que se\'ls d&oacute;na els seus codis d\'acc&eacute;s al lloc privat. Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament de correus electr&ograve;nics des dels seus servidors: en aquest
+ cas, la inscripci&oacute; autom&agrave;tica &eacute;s impossible.</i></div></blockquote>',
 'info_question_mots_cles' => 'Voleu utilitzar les paraules clau en la vostra web&nbsp;?',
 'info_question_proposer_site' => 'Qui pot proposar llocs referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Voleu fer servir el motor de cerca integrat a l\'SPIP?
@@ -1056,7 +1056,7 @@ a la cach&eacute; d\'SPIP. Aix&ograve; permet per exemple for&ccedil;ar un rec&a
 fet modificacions importants gr&agrave;ficament o estructurals del lloc web.',
 'texte_sur_titre' => 'Sobret&iacute;tol',
 'texte_syndication' => '&Eacute;s possible recuperar autom&agrave;ticament, quan el lloc Web ho permet, la llista de novetats. Per aix&ograve;, heu d\'activar la sindicaci&oacute;.
-<blockquote><i>Alguns prove&iuml;dors d\'hostatge desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></blockquote>',
+<blockquote><div><i>Alguns prove&iuml;dors d\'hostatge desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></div></blockquote>',
 'texte_table_ok' => ': aquesta taula est&agrave; OK.',
 'texte_tables_indexation_vides' => 'Les taules d\'indexaci&oacute; del motor estan buides.',
 'texte_tentative_recuperation' => 'Intent de reparaci&oacute;',

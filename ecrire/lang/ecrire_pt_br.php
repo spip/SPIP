@@ -518,7 +518,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_question_activer_compactage_js' => 'Voc&ecirc; deseja ativar a compacta&ccedil;&atilde;o dos scripts (javascript)?',
 'info_question_activer_compresseur' => 'Voc&ecirc; deseja ativar a compress&atilde;o do fluxo HTTP?',
 'info_question_gerer_statistiques' => 'O seu site deve gerenciar as estat&iacute;sticas de visitas?',
-'info_question_inscription_nouveaux_redacteurs' => 'Voc&ecirc; quer aceitar inscri&ccedil;&otilde;es de novos redatores a partir do site p&uacute;blico? Se voc&ecirc; aceitar, os visitantes poder&atilde;o se cadastrar atrav&eacute;s de um formul&aacute;rio automatizado, tendo acesso &agrave; &aacute;rea privada para prop&ocirc;r as suas pr&oacute;prias mat&eacute;rias.<blockquote><i>Durante a fase de inscri&ccedil;&atilde;o, os usu&aacute;rios recebem um e-mail autom&aacute;tico. fornecendo-lhes os seus c&oacute;digos de acesso &agrave; &aacute;rea privada. Alguns servi&ccedil;os de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscri&ccedil;&atilde;o autom&aacute;tica &eacute; imposs&iacute;vel.</i></blockquote>',
+'info_question_inscription_nouveaux_redacteurs' => 'Voc&ecirc; quer aceitar inscri&ccedil;&otilde;es de novos redatores a partir do site p&uacute;blico? Se voc&ecirc; aceitar, os visitantes poder&atilde;o se cadastrar atrav&eacute;s de um formul&aacute;rio automatizado, tendo acesso &agrave; &aacute;rea privada para prop&ocirc;r as suas pr&oacute;prias mat&eacute;rias.<blockquote><div><i>Durante a fase de inscri&ccedil;&atilde;o, os usu&aacute;rios recebem um e-mail autom&aacute;tico. fornecendo-lhes os seus c&oacute;digos de acesso &agrave; &aacute;rea privada. Alguns servi&ccedil;os de hospedagem desativam o envio de e-mails a partir dos seus servidores: nesse caso, a inscri&ccedil;&atilde;o autom&aacute;tica &eacute; imposs&iacute;vel.</i></div></blockquote>',
 'info_question_mots_cles' => 'Deseja utilizar palavras-chave no seu site?',
 'info_question_proposer_site' => 'Quem pode prop&ocirc;r os sites referenciados?',
 'info_question_utilisation_moteur_recherche' => 'Voc&ecirc; deseja usar o motor de busca integrado ao SPIP? (desativ&aacute;-lo acelera o funcionamento do sistema.)',
@@ -1018,8 +1018,8 @@ Seja cuidadoso com esta funcionalidade: <b>as perdas eventuais causadas pela mod
 'texte_suppression_fichiers' => 'Use este comando para excluir todos os arquivos que constam do cache do SPIP. Isto permite, por exemplo, for&ccedil;ar a reconstru&ccedil;&atilde;o de todas as p&aacute;ginas, caso voc&ecirc; tenha feito altera&ccedil;&otilde;es importantes no layout ou na estrutura do site.',
 'texte_sur_titre' => 'Sobret&iacute;tulo',
 'texte_syndication' => '&Eacute; poss&iacute;vel recuperar automaticamente, desde que o site o permita, a lista das suas novidades. Para isso, voc&ecirc; dever&aacute; ativar a sindica&ccedil;&atilde;o.
-  <blockquote><i>Alguns servi&ccedil;os de hospedagem desativam esta funcionalidade;
-neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o de conte&uacute;do no seu site.</i></blockquote>',
+  <blockquote><div><i>Alguns servi&ccedil;os de hospedagem desativam esta funcionalidade;
+neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o de conte&uacute;do no seu site.</i></div></blockquote>',
 'texte_table_ok' => ': esta tabela est&aacute; OK.',
 'texte_tables_indexation_vides' => 'As tabelas de indexa&ccedil;&atilde;o do motor de busca est&atilde;o vazias.',
 'texte_tentative_recuperation' => 'Tentativa de repara&ccedil;&atilde;o',

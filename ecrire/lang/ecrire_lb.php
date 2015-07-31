@@ -517,7 +517,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_question_activer_compactage_js' => 'W&euml;llt dir d\'Kompressioun vun de Skripter (Javascript) aschalten?',
 'info_question_activer_compresseur' => 'W&euml;llt dir d\'Kompressioun vum HTTP-Flow aschalten?',
 'info_question_gerer_statistiques' => 'Soll &auml;re Site d\'Statistik vun de Visiten g&eacute;r&eacute;ieren?',
-'info_question_inscription_nouveaux_redacteurs' => 'Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.</i></blockquote>', # MODIF
+'info_question_inscription_nouveaux_redacteurs' => 'Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><div><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'W&euml;llt dir Schl&euml;sselwierder op &auml;rem Site benotzen?',
 'info_question_proposer_site' => 'Wie kann e Site propos&eacute;ieren?',
 'info_question_utilisation_moteur_recherche' => 'W&euml;llt dir de Sich-Motor vu SPIP benotzen?
@@ -1017,7 +1017,7 @@ Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&e
 'texte_suppression_fichiers' => 'Benotzt d&euml;s Prozedur fir all d\'Fichier\'en aus dem Cache ze l&auml;schen. Sou k&euml;nnt dir z.B. all d\'S&auml;iten nei berechnen, wann dir  grouss &Auml;nnerungen um Layout oder der Struktur vum Site gemaach hutt.',
 'texte_sur_titre' => 'Iwwertitel',
 'texte_syndication' => 'Et ass m&eacute;iglech, wann de Site &euml;t erlaabt, automatesch d\'L&euml;scht vun senge Neiegkeeten ze kr&eacute;ien. Schalt duerfir d\'Syndicatioun an.
-<blockquote><i>Verschidde Provideren verh&euml;nneren d&euml;s Prozedur; an deem Fall k&euml;nnt dir d\'Syndicatioun n&euml;t op &auml;rem Site benotzen.</i></blockquote>',
+<blockquote><div><i>Verschidde Provideren verh&euml;nneren d&euml;s Prozedur; an deem Fall k&euml;nnt dir d\'Syndicatioun n&euml;t op &auml;rem Site benotzen.</i></div></blockquote>',
 'texte_table_ok' => ': des Tafel ass OK.',
 'texte_tables_indexation_vides' => 'Den Index vum Sich-Motor ass eidel.',
 'texte_tentative_recuperation' => 'Reparatur-Versuch',

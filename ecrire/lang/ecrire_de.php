@@ -515,10 +515,10 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_question_inscription_nouveaux_redacteurs' => 'M&ouml;chten Sie, dass sich neue Redakteure vom &ouml;ffentlichen Bereich
  aus anmelden k&ouml;nnen?&nbsp; Wenn Sie es wollen, k&ouml;nnen sich Besucher &uuml;ber ein automatisch
  erstelltes Formular anmelden und Artikel vorschlagen.
- <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
+ <blockquote><div><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
  von ihren Webservern aus.
- In diesem Fall funktioniert die automatische Anmeldung nicht.</i></blockquote>',
+ In diesem Fall funktioniert die automatische Anmeldung nicht.</i></div></blockquote>',
 'info_question_mots_cles' => 'M&ouml;chten Sie Schlagworte f&uuml;r Ihre Website verwenden?',
 'info_question_proposer_site' => 'Wer darf Websites zur Verlinkung vorschlagen?',
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
@@ -1025,7 +1025,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'texte_suppression_fichiers' => 'Benutzen Sie diesen Befehl, um alle Dateien aus dem Zwischenspeicher von SPIP zu l&ouml;schen. Damit k&ouml;nnen Sie eine erneute Berechnung aller Seiten erzwingen, wenn Sie z.B. wesentliche &Auml;nderungen am Inhalt und Layout Ihrer Site gemacht haben. ',
 'texte_sur_titre' => 'Einleitender Titel',
 'texte_syndication' => 'Manche Websites erm&ouml;glichen den automatischen Abruf einer Liste von neuen Artikeln. Um diese Daten nutzen zu k&ouml;nnen, m&uuml;ssen Sie die Syndikation aktivieren.
-                <blockquote><i>Manche Provider unterbinden die Nutzung dieser Funktion. Dann k&ouml;nnen Sie keine syndizierten Inhalte nutzen.</i></blockquote>',
+                <blockquote><div><i>Manche Provider unterbinden die Nutzung dieser Funktion. Dann k&ouml;nnen Sie keine syndizierten Inhalte nutzen.</i></div></blockquote>',
 'texte_table_ok' => ': Tabelle OK.',
 'texte_tables_indexation_vides' => 'Indextabellen der Suchmaschine sind leer.',
 'texte_tentative_recuperation' => 'Reparaturversuch',

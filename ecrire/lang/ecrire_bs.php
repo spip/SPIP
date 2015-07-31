@@ -510,7 +510,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
 'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'Treba li vasa stranica uredjivati statistike posjeta?',
-'info_question_inscription_nouveaux_redacteurs' => 'Da li prihvatate upisivanje novih urednika u javnom prostoru  stranice? Ako prihvatate, posjetioci ce se moci registrovati putem automatskog formulara, a zatim ce moci pristupiti privatnom prostoru i predlagati svoje clanke. <blockquote><i>Tokom faze upisivanja, korisnici ce primiti  automatski e-mail sa kodom za pristup u privatnu stranicu. Neki kompjuteri sprecavaju slanje mailova putem njihovih servera: u tom slucaju ce automatsko upisivanje biti nemoguce.</i></blockquote>', # MODIF
+'info_question_inscription_nouveaux_redacteurs' => 'Da li prihvatate upisivanje novih urednika u javnom prostoru  stranice? Ako prihvatate, posjetioci ce se moci registrovati putem automatskog formulara, a zatim ce moci pristupiti privatnom prostoru i predlagati svoje clanke. <blockquote><div><i>Tokom faze upisivanja, korisnici ce primiti  automatski e-mail sa kodom za pristup u privatnu stranicu. Neki kompjuteri sprecavaju slanje mailova putem njihovih servera: u tom slucaju ce automatsko upisivanje biti nemoguce.</i></div></blockquote>', # MODIF
 'info_question_mots_cles' => 'Zelite li koristiti kljucne rijeci na vasoj stranici?',
 'info_question_proposer_site' => 'Ko moze predloziti preporucene stranice?',
 'info_question_utilisation_moteur_recherche' => 'Zelite li koristiti motor pretrage koji je integrisan u SPIP? (dezaktiviranje ove opcije ubrzava funkcionisanje sistema.)',
@@ -1006,7 +1006,7 @@ demande plus de puissance au serveur.', # NEW
 'texte_statut_refuses' => 'odbijeni',
 'texte_suppression_fichiers' => 'Koristite se ovom komandom da biste sve prisutne dokumente u SPIP kes. To omogucuje npr. izazivanje preracunavanja svih strana, u slucaju da ste izveli vazne izmjene grafizma ili strukture stranice.',
 'texte_sur_titre' => 'Nadnaslov',
-'texte_syndication' => 'Moguce je automatsko otkrivanje spiska novosti, ako web stranica to dozvoljava. Zato trebate aktivirati sindikaciju\\tab <blockquote><i>Odredjeni hosting servisi dezaktiviraju tu funkciju; u tom slucaju ne mozete koristiti sindikaciju sadrzaja na vasoj stranici.</i></blockquote>', # MODIF
+'texte_syndication' => 'Moguce je automatsko otkrivanje spiska novosti, ako web stranica to dozvoljava. Zato trebate aktivirati sindikaciju\\tab <blockquote><div><i>Odredjeni hosting servisi dezaktiviraju tu funkciju; u tom slucaju ne mozete koristiti sindikaciju sadrzaja na vasoj stranici.</i></div></blockquote>', # MODIF
 'texte_table_ok' => ':ova tabela je OK.',
 'texte_tables_indexation_vides' => 'Tabele indeksacije motora su prazne.',
 'texte_tentative_recuperation' => 'Pokusaj popravke',
