@@ -70,8 +70,11 @@ function inc_validateur_dist($data)
 	    $val = expanserEntite($val, $phraseur_xml->entites);
 	    $att = array();
 	    if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
-	      foreach($r2 as $m2)
-		$att[$m2[1]] = $m2[5];
+		foreach($r2 as $m2) {
+			$v = preg_match('/^\w+$/', $m2[2]) ? ''
+			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
+			$att[$m2[1]] = array($v, $m2[5]);
+		}
 	    }
 	    $res[$nom] = $att;
 	  }
@@ -120,7 +123,7 @@ function validerElement($parser, $name, $attrs)
 	    }
 	  }
 	  foreach ($phraseur_xml->attributs[$name] as $n => $v)
-	    { if (($v == '#REQUIRED') AND (!isset($attrs[$n])))
+	    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
 		$phraseur_xml->err[]= " <b>$n</b>"
 		. '&nbsp;:&nbsp;'
                 . _L(" attribut obligatoire mais absent dans ")
@@ -134,16 +137,26 @@ function validerElement($parser, $name, $attrs)
 // http://doc.spip.org/@validerAttribut
 function validerAttribut($parser, $name, $val, $bal)
 {
-  global $phraseur_xml;
+	global $phraseur_xml;
 
-	if ($a = $phraseur_xml->attributs[$bal] 
-	    AND !isset($a[$name]))
+	$a = @$phraseur_xml->attributs[$bal]; // vide ou absent, pareil.
+	if (!isset($a[$name]))
 
 		$phraseur_xml->err[]= " <b>$name</b>"
 		. _L(' attribut inconnu de ')
 		. "<b>$bal</b>"
 		.  coordonnees_erreur($parser);
+	elseif ($a[$name][0][0]=='/') {
+	  if (!preg_match($a[$name][0], $val)) {
+		$phraseur_xml->err[]= " <p><b>$val</b>"
+		. _L(" valeur de l'attribut ")
+		. "<b>$name</b>"
+		  . _L(' de ')
+		. "<b>$bal</b>"
+		. _L(" n'est pas conforme au motif</p><p>")
+		. "<b>" . $a[$name][0] . "</b></p>"
+		.  coordonnees_erreur($parser);
+	  }
+	}
 }
-
-
 ?>
