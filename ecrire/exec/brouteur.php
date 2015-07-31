@@ -123,7 +123,7 @@ function exec_brouteur_dist()
 	// nota: code tire du plugin dimensions.js
 	echo "<script type='text/javascript'><!--
 		jQuery('iframe.iframe-brouteur').height(
-			Math.max(jQuery(window.innerHeight || jQuery.boxModel && document.documentElement.clientHeight || document.body.clientHeight || 0)-190,300)
+			Math.max((window.innerHeight || jQuery.boxModel && document.documentElement.clientHeight || document.body.clientHeight || 0)-195,300)
 		);
 	//--></script>\n";
 	echo fin_page();
