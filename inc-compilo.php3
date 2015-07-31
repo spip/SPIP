@@ -257,9 +257,10 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->hash) {
 		$texte .=  '
 	// RECHERCHE
-	list($hash_recherche, $hash_recherche_strict) = requete_hash($GLOBALS["recherche"]);';
+	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");';
 	}
-		$corps = '
+
+	$corps = '
 
 	// RESULTATS
 	while ($Pile[$SP] = @spip_abstract_fetch($result,"' .
@@ -281,7 +282,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	// hack critere recherche : ignorer la requete en cas de hash vide
 	if ($boucle->hash)
-		$init .= "if (\$hash_recherche) ";
+		$init .= "if (\$rech_select) ";
 
 	$init .= "\$result = ";
 
