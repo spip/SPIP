@@ -81,6 +81,7 @@ class IterDecorator implements Iterator {
 		if (is_array($this->command['where'])) {
 			foreach ($this->command['where'] as $k => $com) {
 				switch($com[1]) {
+					case 'cle':
 					case 'valeur':
 						unset($op);
 						if ($com[0] == 'REGEXP')
