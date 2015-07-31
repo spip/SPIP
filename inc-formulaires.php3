@@ -426,7 +426,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 			$erreur .= erreur("Veuillez indiquer votre email");
 		else if ($GLOBALS[valide_message_auteur]) {  // verifier hash ?
 			include_local("ecrire/inc_mail.php3");
-			$GLOBALS[texte_message_auteur] .= "\n\n-- Envoi via le site --\n";  // ameliorer ?
+			$GLOBALS[texte_message_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site').") --\n";
 			envoyer_mail($email_auteur,
 				$GLOBALS[sujet_message_auteur],
 				$GLOBALS[texte_message_auteur], $GLOBALS[email_message_auteur],
