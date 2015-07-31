@@ -57,18 +57,18 @@ function autoriser($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if (
 	// 1. Sous la forme "autoriser_type_faire"
 	// si $type est vide, charge directement autoriser_faire
-	   ($f = charger_fonction($faire,"autoriser/$type"))
+	   ($f = charger_fonction($faire,"autoriser/$type",true))
 
 	// 2. Sous la forme "autoriser_type"
 	// ne pas tester si $type est vide
-	OR ($type AND $f = charger_fonction($type,"autoriser"))
+	OR ($type AND $f = charger_fonction($type,"autoriser",true))
 
 	// 3. Sous la forme "autoriser_faire"
 	// ne pas tester si $type est vide, deja teste en 1.
-	OR ($type AND $f = charger_fonction($faire,'autoriser'))
+	OR ($type AND $f = charger_fonction($faire,'autoriser',true))
 
 	// 4. Sinon autorisation generique
-	OR ($f = charger_fonction('defaut','autoriser'))
+	OR ($f = charger_fonction('defaut','autoriser',false))
 	)
 		$a = $f($faire,$type,intval($id),$qui,$opt);
 
