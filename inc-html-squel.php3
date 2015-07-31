@@ -70,7 +70,7 @@ function phraser_inclure($texte, $result) {
 		$result[] = $champ;
 	}
 
-	return (!$texte ? $result : phraser_idiomes($texte, $result));
+	return (($texte==="") ? $result : phraser_idiomes($texte, $result));
 }
 
 function phraser_polyglotte($texte,$result) {
@@ -96,7 +96,7 @@ function phraser_polyglotte($texte,$result) {
 		$champ->traductions[$lang] = $bloc;
 		$result[] = $champ;
 	}
-	if ($texte) {
+	if ($texte!=="") {
 			$champ = new Texte;
 			$champ->texte = $texte;
 			$result[] = $champ;
@@ -118,7 +118,7 @@ function phraser_idiomes($texte,$result) {
 		phraser_filtres($match[5], ":", '', array(), $champ);
 		$result[] = $champ;
 	}
-	if ($texte)  $result = phraser_champs($texte,$result);
+	if ($texte!=="")  $result = phraser_champs($texte,$result);
 	return $result;
 }
 
@@ -141,7 +141,7 @@ function phraser_champs($texte,$result) {
 	    $texte = (substr($texte, $p+1));
 	  }
 	}
-	if ($texte) $result = phraser_polyglotte($texte, $result);
+	if ($texte!=="") $result = phraser_polyglotte($texte, $result);
 	return $result;
 }
 
@@ -151,7 +151,7 @@ function phraser_champs($texte,$result) {
 // on recommence tant qu'il y a des [...] en substituant a l'appel suivant
 
 function phraser_champs_etendus($texte, $result) {
-	if (!$texte) return $result;
+	if ($texte==="") return $result;
 	$sep = '##';
 	while (strpos($texte,$sep)!== false)
 		$sep .= '#';
@@ -164,7 +164,7 @@ function phraser_champs_etendus($texte, $result) {
 
 function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
-  while ($texte && $texte[0] != $fin) {
+  while (($texte!=="") && $texte[0] != $fin) {
       ereg("^(\|?[^{)|]*)(.*)$", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = $match[1];
@@ -184,14 +184,14 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
+
 		if ($regs[1]) { // valeur = ", ', ou vide
 			$champ = new Texte;
 			$champ->texte = $arg;
 			$result[] = $champ;
 			$collecte[] = $champ;
 		} else {
-
-		  $arg = phraser_champs_exterieurs(trim($arg), $sep, $result);
+		  $arg = phraser_champs_exterieurs(ltrim($arg), $sep, $result);
 		  $collecte = array_merge($collecte, $arg);
 		  $result = array_merge($result, $arg);
 		}
@@ -224,7 +224,7 @@ function phraser_champs_exterieurs($debut, $sep, $nested) {
 	    $res[]= $nested[$m[1]];
 	    $debut = $m[2];
 	}
-	return (!$debut ?  $res : phraser_inclure($debut, $res));
+	return (($debut==="") ?  $res : phraser_inclure($debut, $res));
 }
 
 function phraser_champs_interieurs($texte, $sep, $result) {
@@ -247,7 +247,7 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		$i++;
 		$texte = $regs[7];
 	  }
-	  if ($texte) {$result[$i] = $texte; $i++;}
+	  if ($texte!=="") {$result[$i] = $texte; $i++;}
 	  $x ='';
 
 	  while($j < $i) 
