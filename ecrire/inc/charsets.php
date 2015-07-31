@@ -654,6 +654,7 @@ function utf_32_to_unicode($source) {
  *    Caractère utf8 si trouvé, '' sinon
 **/
 function caractere_utf_8($num) {
+	$num = intval($num);
 	if($num<128)
 		return chr($num);
 	if($num<2048)
@@ -661,7 +662,7 @@ function caractere_utf_8($num) {
 	if($num<65536)
 		return chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
 	if($num<1114112)
-		return chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
+		return chr(($num>>18)+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
 	return '';
 }
 
@@ -1105,5 +1106,33 @@ if (!isset($GLOBALS['meta']['pcre_u'])
 			? 'u' :''
 	);
 }
+
+
+/**
+ * Transforme une chaîne utf-8 en utf-8 sans "planes"
+ * ce qui permet de la donner à MySQL "utf8", qui n'est pas un utf-8 complet
+ * L'alternative serait d'utiliser utf8mb4
+ * 
+ * @param string $x
+ *     La chaîne à transformer
+ * @return string
+ *     La chaîne avec les caractères utf8 des hauts "planes" échappée
+ *     en unicode : &#128169;
+ */
+function utf8_noplanes($x) {
+	$regexp_utf8_4bytes = '/(
+      \xF0[\x90-\xBF][\x80-\xBF]{2}     # planes 1-3
+   | [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
+   |  \xF4[\x80-\x8F][\x80-\xBF]{2}     # plane 16
+)/xS';
+	if (preg_match_all($regexp_utf8_4bytes, $x, $z, PREG_PATTERN_ORDER)) {
+		foreach($z[0] as $k) {
+			$ku = utf_8_to_unicode($k);
+			$x = str_replace($k, $ku, $x);
+		}
+	}
+	return $x;
+}
+
 
 ?>

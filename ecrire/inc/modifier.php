@@ -207,15 +207,25 @@ function objet_modifier_champs($objet, $id_objet, $options, $c=null, $serveur=''
 		// si difference entre les champs, reperer les champs mal enregistres
 		if ($moof != $champs) {
 			$liste = array();
-			foreach($moof as $k=>$v)
+			foreach($moof as $k=>$v) {
 				if ($v !== $champs[$k]
-					// ne pas alerter si le champ est numerique est que les valeurs sont equivalentes
-					AND (!is_numeric($v) OR intval($v)!=intval($champs[$k]))
-					) {
+				// ne pas alerter si le champ est numerique est que les valeurs sont equivalentes
+				AND (!is_numeric($v) OR intval($v)!=intval($champs[$k]))
+				) {
 					$liste[] = $k;
 					$conflits[$k]['post'] = $champs[$k];
 					$conflits[$k]['save'] = $v;
+
+					// cas specifique MySQL+emoji : si l'un est la
+					// conversion utf8_noplanes de l'autre alors c'est OK
+					if (defined('_MYSQL_NOPLANES') && _MYSQL_NOPLANES) {
+						include_spip('inc/charsets');
+						if ($v == utf8_noplanes($champs[$k])) {
+							array_pop($liste);
+						}
+					}
 				}
+			}
 			// si un champ n'a pas ete correctement enregistre, loger et retourner une erreur
 			// c'est un cas exceptionnel
 			if (count($liste)){
