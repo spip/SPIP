@@ -152,7 +152,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 				this.session_password.value = \"\";
 			}'";
 		echo ">\n";
-		echo "<div class='spip_encadrer'>";
+		echo "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
 		if ($erreur) echo "<div class='reponse_formulaire'><b>$erreur</b></div><p>";
 
 		if ($flag_challenge_md5) {
