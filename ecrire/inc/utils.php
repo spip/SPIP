@@ -649,14 +649,13 @@ function autoriser_sans_cookie($nom)
 function charger_generer_url() {
 	static $ok;
 
-	if ($ok++) return; # fichier deja charge
-
 	// espace prive
 	if (!_DIR_RESTREINT)
 		include_spip('inc/urls');
 
 	// espace public
 	else {
+		if ($ok++) return; # fichier deja charge
 		// fichier inc-urls ? (old style)
 		if (@is_readable($f = _DIR_RACINE.'inc-urls.php3')
 		OR @is_readable($f = _DIR_RACINE.'inc-urls.php')

@@ -31,8 +31,8 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
-  global $var_preview, $use_cache, $forcer_debug, $xhtml;
 
+	global $var_preview, $use_cache, $forcer_debug, $xhtml;
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic;
 	static $dejafait = false;
 
@@ -53,14 +53,13 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		}
 	}
 	$dejafait = true;
+	include_spip('inc/urls');
 
 	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
 	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
 		$id_type = id_table_objet($type);
 		if (!($$id_type = intval($$id_type)
-		AND $s = spip_query(
-		"SELECT $id_type FROM spip_".table_objet($type)."
-		WHERE $id_type=".$$id_type)
+		AND $s = spip_query("SELECT $id_type FROM spip_".table_objet($type)."	WHERE $id_type=".$$id_type)
 		AND spip_num_rows($s)))
 			$$id_type='';
 		else {
@@ -72,17 +71,13 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	// Bouton statistiques
 	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
 	AND $id_article
-	AND !$var_preview
-	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
-		if ($s = spip_query("SELECT id_article
-		FROM spip_articles WHERE statut='publie'
-		AND id_article = $id_article")
-		AND spip_fetch_array($s)) {
-			include_spip ('public/stats');
-			$r = afficher_raccourci_stats($id_article);
-			$visites = $r['visites'];
-			$popularite = $r['popularite'];
-			$statistiques = generer_url_ecrire('statistiques_visites', "id_article=$id_article", true);
+	AND !$var_preview) {
+		$result = spip_query("SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'");
+
+		if ($row = @spip_fetch_array($result)) {
+			$visites = intval($row['visites']);
+			$popularite = ceil($row['popularite']);
+			$statistiques = str_replace('&amp;', '&', generer_url_ecrire_statistiques($id_article));
 		}
 	}
 
@@ -129,8 +124,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		OR $objet_affiche == 'breve'
 		OR $objet_affiche == 'rubrique'
 		OR $objet_affiche == 'syndic')
-			if (spip_num_rows(spip_query(
-			"SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)."
+			if (spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)."
 			WHERE ".id_table_objet($objet_affiche)."=".$$id_type."
 			AND (
 				(statut IN ('prop', 'prive'))
@@ -147,19 +141,19 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'id_breve' => $id_breve,
 			'id_mot' => $id_mot,
 			'id_syndic' => $id_syndic,
-			'voir_article' => generer_url_ecrire('articles', "id_article=$id_article", true),
-			'voir_breve' => generer_url_ecrire('breves_voir', "id_breve=$id_breve", true),
-			'voir_rubrique' => generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique", true),
-			'voir_mot' => generer_url_ecrire('mots_edit', "id_mot=$id_mot", true),
-			'voir_site' => generer_url_ecrire('sites', "id_syndic=$id_syndic", true),
-			'voir_auteur' => generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur", true),
+			'voir_article' => str_replace('&amp;', '&', generer_url_ecrire_article($id_article, 'prop')),
+			'voir_breve' => str_replace('&amp;', '&', generer_url_ecrire_breve($id_breve, 'prop')),
+			'voir_rubrique' => str_replace('&amp;', '&', generer_url_ecrire_rubrique($id_rubrique, 'prop')),
+			'voir_mot' => str_replace('&amp;', '&', generer_url_ecrire_mot($id_mot, 'prop')),
+			'voir_site' => str_replace('&amp;', '&', generer_url_ecrire_site($id_syndic, 'prop')),
+			'voir_auteur' => str_replace('&amp;', '&', generer_url_ecrire_auteur($id_auteur, 'prop')),
 			'ecrire' => $ecrire,
 			'action' => self(),
 			'preview' => $preview?parametre_url(self(),'var_mode','preview','&'):'',
 			'debug' => $debug,
 			'popularite' => ceil($popularite),
 			'statistiques' => $statistiques,
-			'visites' => intval($visites),
+			'visites' => $visites,
 			'use_cache' => ($use_cache ? '' : ' *'),
 			'divclass' => $float,
 			'analyser' => $analyser,
@@ -167,18 +161,4 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			)
 		     );
 }
-
-// Un outil pour le bouton d'amin "statistiques"
-function afficher_raccourci_stats($id_article) {
-	$query = "SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
-	$result = spip_query($query);
-	if ($row = @spip_fetch_array($result)) {
-		$visites = intval($row['visites']);
-		$popularite = ceil($row['popularite']);
-
-		return array('visites' => $visites, 'popularite' => $popularite);
-	}
-}
-
-
 ?>
