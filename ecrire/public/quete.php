@@ -276,9 +276,9 @@ function quete_logo_file($row, $connect=NULL) {
 		$logo = $f($row['extension'], false);
 	}
 	// si c'est une vignette type doc, la renvoyer direct
-	if (strncmp($logo,_DIR_PLUGINS, strlen(_DIR_PLUGINS))==0
-		OR strncmp($logo,_DIR_EXTENSIONS, strlen(_DIR_EXTENSIONS))==0
-		OR strncmp($logo,_DIR_RACINE.'prive/', strlen(_DIR_RACINE.'prive/'))==0)
+	if (strcmp($logo,_DIR_PLUGINS)==0
+		OR strcmp($logo,_DIR_PLUGINS_DIST)==0
+		OR strcmp($logo,_DIR_RACINE.'prive/')==0)
 		return $logo;
 	return get_spip_doc($logo);
 }

@@ -14,8 +14,8 @@ function exec_info_plugin_dist() {
 		$dir = "";
 		if (strncmp($plug,_DIR_PLUGINS,strlen(_DIR_PLUGINS))==0)
 			$dir = _DIR_PLUGINS;
-		elseif (strncmp($plug,_DIR_EXTENSIONS,strlen(_DIR_EXTENSIONS))==0)
-			$dir = _DIR_EXTENSIONS;
+		elseif (strncmp($plug,_DIR_PLUGINS_DIST,strlen(_DIR_PLUGINS_DIST))==0)
+			$dir = _DIR_PLUGINS_DIST;
 		if ($dir)
 			$plug = substr($plug,strlen($dir));
 		$info = $get_infos($plug,false,$dir);
