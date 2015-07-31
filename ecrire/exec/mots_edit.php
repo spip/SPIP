@@ -59,19 +59,6 @@ global
 	 $commencer_page = charger_fonction('commencer_page', 'inc');
 	 $out .= $commencer_page("&laquo; $titre_mot &raquo;", "naviguer", "mots");
 	 
-	 $multi_js = "";
-	 if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui" || $GLOBALS['meta']['multi_secteurs']=="oui") {
-		$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
-		$multi_js = "<script type='text/javascript' src='"._DIR_JAVASCRIPT."multilang.js'></script>\n".
-		"<script type='text/javascript'>\n".
-		"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
-		"$(function(){\n".
-		"multilang_init_lang({'root':'.cadre-formulaire','fields':'input[@name=\'titre\'],textarea'});\n".
-		"});\n".
-		"</script>\n";
-	 }
-	 $out .= $multi_js; 
-
 	 $out .= debut_gauche('',true);
 
 

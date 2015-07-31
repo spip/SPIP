@@ -60,20 +60,6 @@ function exec_mots_type_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
-	$multi_js = "";
-	if($GLOBALS['meta']['multi_rubriques']=="oui" || $GLOBALS['meta']['multi_articles']=="oui" || $GLOBALS['meta']['multi_secteurs']=="oui") {
-	$active_langs = "'".str_replace(",","','",$GLOBALS['meta']['langues_multilingue'])."'";
-	$multi_js = "<script type='text/javascript' src='"._DIR_JAVASCRIPT."multilang.js'></script>\n".
-	"<script type='text/javascript'>\n".
-	"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
-	"$(function(){\n".
-	"multilang_init_lang({'root':'#page','form_menu':'div.cadre-formulaire:eq(0)','fields':'input[@name=\'change_type\'],textarea'});\n".
-	"});\n".
-	"</script>\n";
-	}
-	echo $multi_js; 
-
-	
 	debut_gauche();
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_types','id_groupe'=>$id_groupe),'data'=>''));
