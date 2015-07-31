@@ -199,8 +199,9 @@ if (defined('_INC_PUBLIC')) {
 		}
 	}
 	
-	$page = analyse_js_ajoutee($page);
-
+  if($html) 
+    $page = analyse_js_ajoutee($page);
+  
 	// Passer la main au debuggueur le cas echeant
 	if ($var_mode == 'debug') {
 		include_spip('public/debug');
