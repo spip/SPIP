@@ -1070,13 +1070,16 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 }
 
 // modifier (ou inserer) un attribut html dans une balise
-function inserer_attribut($balise, $attribut, $val, $texte_backend=true) {
+function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=false) {
 	// preparer l'attribut
 	if ($texte_backend) $val = texte_backend($val); # supprimer les &nbsp; etc
 
 	// echapper les ' pour eviter tout bug
 	$val = str_replace("'", "&#39;", $val);
-	$insert = " $attribut='$val' ";
+	if ($vider AND strlen($val)==0)
+		$insert = '';
+	else
+		$insert = " $attribut='$val' ";
 
 	list($old,$r) = extraire_attribut($balise, $attribut, true);
 
@@ -1096,6 +1099,9 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true) {
 	return $balise;
 }
 
+function vider_attribut ($balise, $attribut) {
+	return inserer_attribut($balise, $attribut, '', false, true);
+}
 
 // fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
 # a placer ailleurs que dans inc_filtres
@@ -1458,4 +1464,34 @@ function afficher_tags($tags, $rels='tag,category') {
 	}
 	return join(', ', $s);
 }
+
+// Passe un <enclosure url="fichier" length="5588242" type="audio/mpeg"/>
+// au format microformat <a rel="enclosure" href="fichier" ...>fichier</a>
+function enclosure2microformat($e) {
+	$url = extraire_attribut($e, 'url');
+	$fichier = basename($url) OR $fichier;
+	$e = preg_replace(',<enclosure[[:space:]],i','<a rel="enclosure" ', $e)
+		. $fichier.'</a>';
+	$e = vider_attribut($e, 'url');
+	$e = inserer_attribut($e, 'href', filtrer_entites($url));
+	$e = str_replace('/>', '>', $e);
+	return $e;
+}
+// La fonction inverse
+function microformat2enclosure($tags) {
+	$enclosures = array();
+	foreach (extraire_tags($tags) as $e)
+	if (extraire_attribut($e, rel) == 'enclosure') {
+		$url = extraire_attribut($e, 'href');
+		$fichier = basename($url) OR $fichier;
+		$e = preg_replace(',<a[[:space:]],i','<enclosure ', $e);
+		$e = preg_replace(',( ?/?)>.*,',' />', $e);
+		$e = vider_attribut($e, 'href');
+		$e = vider_attribut($e, 'rel');
+		$e = inserer_attribut($e, 'url', filtrer_entites($url));
+		$enclosures[] = $e;
+	}
+	return join("\n", $enclosures);
+}
+
 ?>
