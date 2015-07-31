@@ -151,6 +151,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	  . fin_cadre();
 }
 
+// http://doc.spip.org/@revisions_bouton
 function revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom)
 {
 	$titre_bouton = "<span class='arial2'>";
@@ -164,6 +165,7 @@ function revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut,
 	return $titre_bouton;
 }
 
+// http://doc.spip.org/@revisions_entete_boite
 function revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $req_from, $req_where, $uniq_auteur)
 {
 
