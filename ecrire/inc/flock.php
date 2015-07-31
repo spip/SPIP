@@ -202,7 +202,8 @@ function ecrire_fichier ($fichier, $contenu, $ignorer_echec = false, $truncate=t
 				spip_fclose_unlock($fp2);
 				spip_fclose_unlock($fp);
 				// unlink direct et pas spip_unlink car on avait deja le verrou
-				@unlink($fichier);
+				// a priori pas besoin car rename ecrase la cible
+				// @unlink($fichier);
 				// le rename aussitot, atomique quand on est pas sous windows
 				// au pire on arrive en second en cas de concourance, et le rename echoue
 				// --> on a la version de l'autre process qui doit etre identique
