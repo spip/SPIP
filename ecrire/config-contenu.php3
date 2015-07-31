@@ -288,7 +288,7 @@ if (tester_mail()) {
 			echo "<blockquote class='spip'>";
 			if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
 			echo _T('info_config_suivi', array('adresse_suivi' => $adresse_suivi));
-			echo "<br><input type='text' name='adresse_suivi_insscription' value='$adresse_suivi_inscription' size='50' CLASS='fondl'>";
+			echo "<br><input type='text' name='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' CLASS='fondl'>";
 			echo "</blockquote>";
 
 		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' id='suivi_edito_off'>";
