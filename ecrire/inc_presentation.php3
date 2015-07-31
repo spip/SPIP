@@ -1607,7 +1607,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 function debut_javascript($admin, $stat)
 {
 	global $spip_lang_left;
-	global $browser_name, $browser_version, $browser_rev;
+	global $browser_name, $browser_version;
 
 	// envoi le fichier JS de config si browser ok.
 	echo $GLOBALS['browser_layer'];
@@ -1624,8 +1624,8 @@ function debut_javascript($admin, $stat)
 
 	var confirm_changer_statut = '<?php include_ecrire("inc_charsets.php3"); echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>';
 //--></script>
-<script type='text/javascript' src='presentation.js'></script>
 <?php
+	echo http_script('',_DIR_RESTREINT . 'presentation.js');
 }
 
 // Fonctions onglets
