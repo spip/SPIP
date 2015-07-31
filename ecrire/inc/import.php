@@ -131,6 +131,30 @@ function import_debut($f, $gz='fread') {
 $tables_trans = array(
 );
 
+// http://doc.spip.org/@description_table
+function description_table($nom){
+	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+
+	$nom_table = $nom;
+	if (in_array($nom, $table_des_tables))
+	   $nom_table = 'spip_' . $nom;
+
+	include_spip('base/serial');
+	if (isset($tables_principales[$nom_table]))
+		return array($nom_table, $tables_principales[$nom_table]);
+
+	include_spip('base/auxiliaires');
+	$nom_table = 'spip_' . $nom;
+	if (isset($tables_auxiliaires[$nom_table]))
+		return array($nom_table, $tables_auxiliaires[$nom_table]);
+
+	if ($desc = spip_abstract_showtable($nom, '', true))
+	  if (isset($desc['field'])) {
+	    return array($nom, $desc);
+	  }
+	return array($nom,array());
+}
+
 // http://doc.spip.org/@import_init_tables
 function import_init_tables($request)
 {
@@ -141,8 +165,8 @@ function import_init_tables($request)
 	foreach($tables as $table){
 		// regarder si il y a au moins un champ impt='non'
 		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase))){
-			$res = spip_query("SELECT impt FROM $table WHERE impt='non' LIMIT 0,1");
-			if (spip_num_rows($res))
+			$desc = description_table($table);
+			if (isset($desc['field']['impt']))
 				spip_query("DELETE FROM $table WHERE impt='oui'");
 			else
 				spip_query("DELETE FROM $table");
@@ -216,11 +240,11 @@ function import_tables($request, $dir) {
 // tag ouvrant du Dump:
 // 'SPIP' si fait par spip, nom de la base source si fait par  phpmyadmin
 		$version_archive = $r['version_archive'];
-		ecrire_meta('version_archive_restauration', $version_archive);
-		ecrire_meta('tag_archive_restauration', $tag);
+		ecrire_meta('version_archive_restauration', $version_archive,'non');
+		ecrire_meta('tag_archive_restauration', $tag,'non');
 		if ( $i = $request['insertion'])
-			ecrire_meta('charset_insertion', $charset);
-		else	ecrire_meta('charset_restauration', $charset);
+			ecrire_meta('charset_insertion', $charset,'non');
+		else	ecrire_meta('charset_restauration', $charset,'non');
 		ecrire_metas();
 		spip_log("Debut de l'importation de $archive (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
 	} else {
@@ -243,7 +267,7 @@ function import_tables($request, $dir) {
 	while ($table = $fimport($file, $request, $gz)) {
 	  // memoriser pour pouvoir reprendre en cas d'interrupt,
 	  // mais pas d'ecriture sur fichier, ca ralentit trop
-		ecrire_meta("status_restauration", "$abs_pos");
+		ecrire_meta("status_restauration", "$abs_pos",'non');
 		if ($oldtable != $table) {
 			if ($oldtable) spip_log("$cpt entrees");
 			spip_log("Analyse de $table (commence en $pos)");

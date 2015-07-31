@@ -1230,6 +1230,16 @@ function maj_base($version_cible = 0) {
 			spip_query("UPDATE spip_meta SET impt='non' WHERE nom="._q($nom));
 		maj_version('1.922');
 	}
+	if (upgrade_vers(1.923, $version_installee, $version_cible)) {
+		if (isset($GLOBALS['meta']['IMPORT_tables_noimport'])){
+			$IMPORT_tables_noimport = unserialize($GLOBALS['meta']['IMPORT_tables_noimport']);
+			foreach ($IMPORT_tables_noimport as $key=>$table)
+				if ($table=='spip_meta') unset($IMPORT_tables_noimport[$key]);
+			include_spip('inc/meta');
+			ecrire_meta('IMPORT_tables_noimport',serialize($IMPORT_tables_noimport),'non');
+		}
+		maj_version('1.923');
+	}
 }
 
 ?>

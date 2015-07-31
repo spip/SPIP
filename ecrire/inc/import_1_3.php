@@ -12,30 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@description_table
-function description_table($nom){
-	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
-
-	$nom_table = $nom;
-	if (in_array($nom, $table_des_tables))
-	   $nom_table = 'spip_' . $nom;
-
-	include_spip('base/serial');
-	if (isset($tables_principales[$nom_table]))
-		return array($nom_table, $tables_principales[$nom_table]);
-
-	include_spip('base/auxiliaires');
-	$nom_table = 'spip_' . $nom;
-	if (isset($tables_auxiliaires[$nom_table]))
-		return array($nom_table, $tables_auxiliaires[$nom_table]);
-
-	if ($desc = spip_abstract_showtable($nom, '', true))
-	  if (isset($desc['field'])) {
-	    return array($nom, $desc);
-	  }
-	return array($nom,array());
-}
-
 // http://doc.spip.org/@inc_import_1_3_dist
 function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
   global $import_ok, $tables_trans,  $trans;
@@ -114,44 +90,46 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread') {
 
 // http://doc.spip.org/@import_replace
 function import_replace($values, $table, $desc, $request) {
-	static $where=array();
-	if (!isset($desc['field']['impt'])) // pas de champ de gestion d'import
+	if (!isset($desc['field']['impt'])) {// pas de champ de gestion d'import
 		if (!spip_query("REPLACE $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
 			$GLOBALS['erreur_restauration'] = spip_sql_error();
 	  }
-	else { 
+	}
+	else {
 		// la table contient un champ 'impt' qui permet de gerer des interdiction d'overwrite par import
 		// impt=oui : la ligne est surchargeable par import
 		// impt=non : la ligne ne doit pas etre ecrasee par un import
-		// on essaye un insert si jamais la primary existe pas
-		if (!spip_query("INSERT $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')')) {
-			// il faut gerer l'existence de la primary, et l'autorisation ou non de mettre a jour
-			if (!isset($where[$table])){
-				if (!isset($desc["PRIMARY KEY"]))
-					$GLOBALS['erreur_restauration'] = "champ 'impt' sans cle primaire sur la table $table";
-				else {
-					$keys = $desc["PRIMARY KEY"];
-					$keys = explode(",",$keys);
-					if (!is_array($keys)) $keys = array($keys);
-					$w = "";
-					foreach($keys as $key){
-						if (!isset($values[$key])){
-							$GLOBALS['erreur_restauration'] = "champ $key manquant a l'import sur la table $table";
-							$w .= " AND 0=1";
-							continue;
-						}
-						$w .= " AND $key="._q($values[$key]);
-					}
-					$where[$table] = strlen($w)?substr($w,6):"0=1";
+		// il faut gerer l'existence de la primary, et l'autorisation ou non de mettre a jour
+		$where = "";
+		if (!isset($desc['key']["PRIMARY KEY"]))
+			$GLOBALS['erreur_restauration'] = "champ impt sans cle primaire sur la table $table";
+		else {
+			$keys = $desc['key']["PRIMARY KEY"];
+			$keys = explode(",",$keys);
+			if (!is_array($keys)) $keys = array($keys);
+			$w = "";
+			foreach($keys as $key){
+				if (!isset($values[$key])){
+					$GLOBALS['erreur_restauration'] = "champ $key manquant a l'import sur la table $table";
+					$w .= " AND 0=1";
+					continue;
 				}
+				$w .= " AND $key="._q($values[$key]);
 			}
-			if (isset($where[$table])) {
+			$where = strlen($w)?substr($w,5):"0=1";
+		}
+		if ($where!="") {
+			$res = spip_query("SELECT * FROM $table WHERE ".$where." AND impt='oui'");
+			if (spip_num_rows($res)){
 				$set = "";
 				foreach($values as $key=>$value) $set .= ",$key="._q($value);
 				$set = substr($set,1);
-				if (!spip_query("UPDATE $table SET $set WHERE ".$where[$table]." AND impt='oui'")) {
+				if (!spip_query("UPDATE $table SET $set WHERE ".$where." AND impt='oui'")) {
 					$GLOBALS['erreur_restauration'] = spip_sql_error();
 				}
+			}
+			else{
+				spip_query("INSERT $table (" . join(',',array_keys($values)) . ') VALUES (' .join(',',array_map('_q', $values)) . ')');
 			}
 		}
 	}
