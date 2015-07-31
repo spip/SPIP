@@ -14,7 +14,7 @@
 	class="pages">[<a
 	href='[(#ENV{url}|parametre_url{#ENV{debut},''})]##ENV{ancre}'
 	class='lien_pagination'
-	rel='nofollow'>(#GET{premiere}|>{1}|?{1})</a><span
+	rel='nofollow'>(#GET{premiere}|>{1}|?{0})</a><span
 	class="tbc">[<span
 	class='sep'>(#GET*{sep})</span>]...[<span
 	class='sep'>(#GET*{sep})</span>]</span
@@ -33,7 +33,7 @@
 	class='sep'>(#GET*{sep})</span>]</span><a
 	href='[(#ENV{url}|parametre_url{#ENV{debut},#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})]##ENV{ancre}'
 	class='lien_pagination'
-	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}})</a>]</span>[
+	rel='nofollow'>(#GET{derniere}|<{#ENV{nombre_pages}}|?{#ENV{nombre_pages}|moins{1}|mult{#ENV{pas}}})</a>]</span>[
 	(#SET{item, #ENV{page_courante}|mult{#ENV{pas}} })
 	][<span
 	class="all[(#ENV{page_courante}|=={0}|oui)disabled]">[<span
