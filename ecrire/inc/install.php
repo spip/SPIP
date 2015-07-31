@@ -201,7 +201,7 @@ function info_progression_etape($en_cours,$phase,$dir, $erreur = false){
 		$debut++;
 	}
 	$aff_etapes .= "</ul>";
-	$aff_etapes .= "<br class='nettoyeur' /\n";
+	$aff_etapes .= "<br class='nettoyeur' />\n";
 	return $aff_etapes;
 }
 
