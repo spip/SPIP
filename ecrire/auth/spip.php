@@ -98,7 +98,14 @@ function auth_spip_formulaire_login($flux){
 	// faut il encore envoyer md5 ?
 	// on regarde si il reste des pass md5 en base pour des auteurs en statut pas poubelle
 	// les hash md5 ont une longueur 32, les sha 64
-	$compat_md5 = sql_countsel("spip_auteurs", "length(pass)=32 AND statut<>'poubelle'");
+	// en evitant une requete sql a chaque affichage du formulaire login sans session
+	// (perf issue pour les sites qui mettent le formulaire de login sur la home)
+	$compat_md5 = false;
+	if (!isset($GLOBALS['meta']['sha_256_only']) OR _request('var_mode')){
+		$compat_md5 = sql_countsel("spip_auteurs", "length(pass)=32 AND statut<>'poubelle'");
+		if ($compat_md5 AND isset($GLOBALS['meta']['sha_256_only'])) effacer_meta('sha_256_only');
+		if (!$compat_md5) ecrire_meta('sha_256_only','oui');
+	}
 
 	// javascript qui gere la securite du login en evitant de faire circuler le pass en clair
 	$flux['data'].=
