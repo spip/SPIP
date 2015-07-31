@@ -101,10 +101,8 @@ class IterateurDATA implements Iterator {
 				array('table', 'array', 'tableau'))
 			) {
 				if (is_array($a = $this->command['source'])
-				OR is_array($a = unserialize($this->command['source']))) {
+				OR is_array($a = unserialize($this->command['source'])))
 					$this->tableau = $a;
-					$this->ok = true;
-				}
 			}
 			else if (preg_match(',^https?://,', $this->command['source'])) {
 				include_spip('inc/distant');
@@ -114,15 +112,7 @@ class IterateurDATA implements Iterator {
 			else
 				$u = $this->command['source'];
 
-			if (!$u) {
-				$this->err = true;
-				spip_log("erreur datasource ".$this->command['source']);
-			}
-
-			// tout ce bloc devrait marcher par charger_fonction('xxx_to_array')
-			// si c'est du RSS
-			if (!$this->err
-			AND isset($this->command['sourcemode'])) {
+			if (isset($this->command['sourcemode'])) {
 				if ($g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
 					if (is_array($a = $g($u))) {
 						$this->tableau = $a;
@@ -130,45 +120,6 @@ class IterateurDATA implements Iterator {
 						$this->err = true;
 						spip_log("erreur sur $g(): $u");
 					}
-				}
-				else
-				switch ($this->command['sourcemode']) {
-					case 'rss':
-					case 'atom':
-						include_spip('inc/syndic');
-						if (is_array($rss = analyser_backend($u))) {
-							$this->tableau = $rss;
-						} else {
-							$this->err = true;
-							spip_log("rss mal forme : $u");
-						}
-						break;
-					case 'json':
-						if (is_array($json = json_decode($u))
-						OR is_object($json)) {
-							$this->tableau = (array) $json;
-						} else {
-							$this->err = true;
-							spip_log("json mal forme : $u");
-						}
-						break;
-					case 'yaml':
-						include_spip('inc/yaml');
-						if (is_array($yaml = yaml_decode($u))) {
-							$this->tableau = $yaml;
-						} else {
-							$this->err = true;
-							spip_log("yaml vide ou mal forme : $u");
-						}
-						break;
-					case 'csv':
-						# decodage csv a passer en inc/csv
-						# cf. http://www.php.net/manual/en/function.str-getcsv.php#100579 et suiv.
-						if (function_exists('str_getcsv')) # PHP 5.3.0
-							$this->tableau = str_getcsv($u);
-						else
-						foreach(preg_split('/\r?\n/',$u) as $ligne)
-							$this->tableau[] = explode(',', $ligne);
 				}
 			}
 		}
@@ -194,6 +145,12 @@ class IterateurDATA implements Iterator {
 		// Critere {liste X1, X2, X3}
 		if (isset($this->command['liste'])) {
 			$this->tableau = $this->command['liste'];
+		}
+
+		// Si a ce stade on n'a pas de table, il y a un bug
+		if (!is_array($this->tableau)) {
+			$this->err = true;
+			spip_log("erreur datasource ".$this->command['source']);
 		}
 
 
@@ -250,6 +207,7 @@ class IterateurDATA implements Iterator {
 		}
 
 		// critere {2,7}
+		// TODO : ce critere devrait passer *apres* les filtres
 		if ($this->command['limit']) {
 			$limit = explode(',',$this->command['limit']);
 			$this->tableau = array_slice($this->tableau,
@@ -334,6 +292,42 @@ function inc_sql_to_array_dist($u) {
 		return $r;
 	}
 	return false;
+}
+function inc_json_to_array_dist($u) {
+	if (is_array($json = json_decode($u))
+	OR is_object($json))
+		return (array) $json;
+}
+function inc_csv_to_array_dist($u) {
+	# decodage csv a passer en inc/csv
+	# cf. http://www.php.net/manual/en/function.str-getcsv.php#100579 et suiv.
+	if (function_exists('str_getcsv')) # PHP 5.3.0
+		$tableau = str_getcsv($u);
+	else
+	foreach(array_filter(preg_split('/\r?\n/',$u)) as $ligne)
+		$tableau[] = explode(',', $ligne);
+
+	return $tableau;
+}
+function inc_yaml_to_array_dist($u) {
+	include_spip('inc/yaml');
+	if (is_array($yaml = yaml_decode($u)))
+		$tableau = $yaml;
+	else if (is_object($yaml))
+		$tableau = (array) $yaml;
+
+	return $tableau;
+}
+function inc_rss_to_array_dist($u) {
+	include_spip('inc/syndic');
+	if (is_array($rss = analyser_backend($u)))
+		$tableau = $rss;
+	return $tableau;
+}
+// atom, alias de rss
+function inc_atom_to_array_dist($u) {
+	$g = charger_fonction('rss_to_array', 'inc');
+	return $g($u);
 }
 
 function XmlToArray($xml_file){
