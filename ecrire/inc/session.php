@@ -57,14 +57,7 @@ function ajouter_session($auteur) {
 	if (!isset($auteur['hash_env'])) $auteur['hash_env'] = hash_env();
 	if (!isset($auteur['ip_change'])) $auteur['ip_change'] = false;
 
-	$texte = "<"."?php\n";
-	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env') AS $var) {
-		$code = addslashes($auteur[$var]);
-		$texte .= "\$GLOBALS['auteur_session']['$var'] = '$code';\n";
-	}
-	$texte .= "?".">\n";
-
-	if (!ecrire_fichier($fichier_session, $texte)) {
+	if (!ecrire_fichier_session($fichier_session, $auteur)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;
@@ -78,6 +71,19 @@ function ajouter_session($auteur) {
 		spip_log("ajoute session $fichier_session");
 		return $_COOKIE['spip_session'];
 	}
+}
+
+
+// http://doc.spip.org/@ecrire_fichier_session
+function ecrire_fichier_session($fichier, $auteur) {
+	$texte = "<"."?php\n";
+	foreach (array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env', 'bio', 'pgp', 'nom_site', 'url_site', 'en_ligne') AS $var) {
+		$texte .= '$GLOBALS[\'auteur_session\'][\''.$var.'\'] = '
+			. var_export($auteur[$var], true).";\n";
+	}
+	$texte .= "?".">\n";
+
+	return ecrire_fichier($fichier, $texte);
 }
 
 //
