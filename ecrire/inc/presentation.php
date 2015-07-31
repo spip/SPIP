@@ -53,7 +53,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	if ($accesskey <= 122) // z
 	{
 		$accesskey_c = chr($accesskey++);
-		$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
+		$ret = "<a id='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
 	} else $ret ='';
 
 	if ($style == "e") {
@@ -1673,7 +1673,7 @@ function debut_droite($rubrique="", $return= false) {
 	// touche d'acces rapide au debut du contenu : z
 	// Attention avant c'etait 's' mais c'est incompatible avec
 	// le ctrl-s qui fait "enregistrer"
-	$res .= "\n<a name='saut' href='#saut' accesskey='z'></a>\n";
+	$res .= "\n<a id='saut' href='#saut' accesskey='z'></a>\n";
 
 	if ($return) return $res; else echo $res;
 }

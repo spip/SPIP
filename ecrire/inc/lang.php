@@ -77,8 +77,7 @@ function lang_dir($lang='', $droitier='ltr', $gaucher='rtl') {
 // http://doc.spip.org/@lang_typo
 function lang_typo($lang='') {
 	if (!$lang) {
-		if (!$lang = $GLOBALS['lang_objet'])
-			$lang = $GLOBALS['spip_lang'];
+		$lang = isset($GLOBALS['lang_objet']) ? $GLOBALS['lang_objet'] : $GLOBALS['spip_lang'];
 	}
 	if ($lang == 'eo' OR $lang == 'fr' OR substr($lang, 0, 3) == 'fr_' OR $lang == 'cpf')
 		return 'fr';

@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_LARGEUR_ICONES_BANDEAU', 
        (($GLOBALS['spip_display'] == 3) ? 60 : 80)
@@ -367,8 +368,7 @@ function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 function icone_bandeau_principal($detail, $lien, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = "",$largeur,$decal){
 	global $spip_display, $menu_accesskey, $compteur_survol;
 
-	$alt = '';
-	$title = '';
+	$alt = $accesskey = $title = '';
 	$texte = _T($detail->libelle);
 	if ($spip_display == 3){
 		$title = " title=\"$texte\"";
@@ -421,7 +421,8 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
 	$largeur_maxi_menu = $largeur-100;
 	$largitem_moy = 85;
 
-    if (($rubrique == $page) AND (!_SPIP_AJAX)) {
+	//    if (($rubrique == $page) AND (!_SPIP_AJAX)) {  $page ??????
+	if ((!_SPIP_AJAX)) {
 			$class = "visible_au_chargement";
 		} else {
 			$class = "invisible_au_chargement";
@@ -441,10 +442,10 @@ function bandeau_principal2($sousmenu,$rubrique, $sous_rubrique, $largeur, $deca
           if($width>$max_width) $max_width=$width;
           $width=0;
         }
+				$largitem = 0;
 				if($souspage=='espacement') {
 					if ($width>0){
 						$res .= "<li class='separateur'></li>\n";
-						$largitem = 0;
 					}
 				} else {
 				  list($html,$largitem) = icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);

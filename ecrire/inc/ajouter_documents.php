@@ -60,7 +60,7 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 			return;
 		}
 	} else  {$distant = 'non';
-
+		$type_image = $titre = ''; // au pire
 		// tester le type de document :
 		// - interdit a l'upload ?
 		// - quel numero dans spip_types_documents ?  =-(
@@ -199,8 +199,8 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 	}
 
 	// Preparation vignette du document $id_document
-	$id_document=intval($id_document);
-	if ($mode == 'vignette' AND $id_document_lie = $id_document) {
+	$id_document_lie = $id_document=intval($id_document);
+	if ($mode == 'vignette' AND  $id_document) {
 		# on force le statut "document" de ce fichier (inutile ?)
 		spip_query("UPDATE spip_documents SET mode='document' WHERE id_document=$id_document");
 		$id_document = 0;

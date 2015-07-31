@@ -68,9 +68,9 @@ if ($prefs_mod AND !$var_auth) {
  }
 
 // compatibilite ascendante
-if (isset($GLOBALS['auteur_session']['prefs']['display'])) {
-	$GLOBALS['spip_display'] = $GLOBALS['auteur_session']['prefs']['display'];
-}
+$GLOBALS['spip_display'] = isset($GLOBALS['auteur_session']['prefs']['display'])
+	? $GLOBALS['auteur_session']['prefs']['display']
+	: 0;
 
 if (isset($_GET['set_ecran'])) {
 	// Poser un cookie,

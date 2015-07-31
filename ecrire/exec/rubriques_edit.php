@@ -18,7 +18,7 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
-	global $champs_extra, $connect_statut, $id_parent, $id_rubrique, $new;
+	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $id_parent, $id_rubrique, $new;
 
 	if ($new == "oui") {
 		$id_rubrique = 0;
@@ -44,6 +44,7 @@ function exec_rubriques_edit_dist()
 		$texte = $row['texte'];
 		$id_secteur = $row['id_secteur'];
 		$extra = $row["extra"];
+		$onfocus = '';
 	}
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 

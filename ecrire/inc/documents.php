@@ -181,14 +181,16 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	$id_document_actif = _request('show_docs');
 
 	/// Ajouter nouvelle image
-	$ret .= "<a name='images'></a>\n";
+
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 
 	$joindre = charger_fonction('joindre', 'inc');
-	$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre);
-	$ret .= $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true));
 
-	$ret .= fin_cadre_relief(true);
+	$ret = "<div id='images'>\n" 
+	  . debut_cadre_relief("image-24.gif", true, "creer.gif", $titre_cadre)
+	. $joindre($script, "id_$type=$id", $id, _T('info_telecharger'),'vignette',$type,'',0,generer_url_ecrire("documents_colonne","id=$id&type=$type",true))
+	. fin_cadre_relief(true)
+	. '</div><br />';
 
 	//// Documents associes
 	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document' ORDER BY docs.id_document");
@@ -209,7 +211,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	//// Images sans documents
 	$images_liees = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l "."WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".$docs_exclus."AND docs.mode='vignette' ORDER BY docs.id_document");
 
-	$ret .= "\n<p></p><div id='liste_images'>";
+	$ret .= "\n<div id='liste_images'>";
 	while ($doc = spip_fetch_array($images_liees)) {
 		$id_document = $doc['id_document'];
 		$deplier = $id_document_actif==$id_document;
@@ -217,7 +219,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 
 	/// Ajouter nouveau document
-	$ret .= "</div><p>&nbsp;</p>\n<a name='documents'></a>\n<a name='portfolio'></a>\n";
+	$ret .= "</div><div id='documents'></div>\n<div id='portfolio'></div>\n";
 	if (!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non') {
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 		$ret .= debut_cadre_enfonce("doc-24.gif", true, "creer.gif", $titre_cadre);
@@ -226,7 +228,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 
 	// Afficher les documents lies
-	$ret .= "<p></p><div id='liste_documents'>\n";
+	$ret .= "<div id='liste_documents'>\n";
 
 	foreach($documents_lies as $doc) {
 		$id_document = $doc['id_document'];
