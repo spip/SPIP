@@ -1,4 +1,11 @@
-[(#ENV**{exec}|=={#OBJET|objet_info{url_voir}}|oui)
+[
+
+(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|et{#OBJET|objet_info{editable}}|oui)
+
+#INCLURE{fond=prive/squelettes/contenu/#ENV**{exec},redirect='',env,retourajax=oui}
+#SET{ok,' '}
+
+][(#GET{ok}|non|et{#ENV**{exec}|=={#OBJET|objet_info{url_voir}}}|oui)
 	[(#ID_OBJET|generer_info_entite{#OBJET,[(#OBJET|id_table_objet)],'**'}|intval|=={#ID_OBJET}|et{#ID_OBJET}|sinon_interdire_acces)]
 
 	[(#BOITE_OUVRIR{[
@@ -47,13 +54,6 @@
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#OBJET|objet_info{url_voir})]','#navigation,#chemin');/*\]\]>*/</script>
 	]
 	#SET{ok,' '}
-][
-
-(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|et{#OBJET|objet_info{editable}}|oui)
-
-#INCLURE{fond=prive/squelettes/contenu/#ENV**{exec},redirect='',env,retourajax=oui}
-#SET{ok,' '}
-
 ][
 
 (#GET{ok}|sinon_interdire_acces)

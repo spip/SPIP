@@ -1,4 +1,13 @@
-[(#ENV**{exec}|=={#OBJET|objet_info{url_voir}}|oui)
+[
+
+	(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|et{#OBJET|objet_info{editable}}|oui)
+
+	[(#ENV**{exec}|trouver_fond{prive/squelettes/navigation}|oui)
+		[(#INCLURE{fond=prive/squelettes/navigation/#ENV**{exec},redirect='',env,retourajax=oui})]
+	]
+	#SET{ok,' '}
+
+][(#GET{ok}|non|et{#ENV**{exec}|=={#OBJET|objet_info{url_voir}}}|oui)
 	[(#ID_OBJET|generer_info_entite{#OBJET,[(#OBJET|id_table_objet)],'**'}|intval|=={#ID_OBJET}|sinon_interdire_acces)]
 
 	#BOITE_OUVRIR{'','info'}
@@ -13,13 +22,6 @@
 
 	
 	#SET{ok,' '}
-][
-
-	(#ENV**{exec}|=={#OBJET|objet_info{url_edit}}|et{#OBJET|objet_info{editable}}|oui)
-
-	[(#INCLURE{fond=prive/squelettes/navigation/#ENV**{exec},redirect='',env,retourajax=oui})]
-	#SET{ok,' '}
-
 ][
 
 (#GET{ok}|sinon_interdire_acces)
