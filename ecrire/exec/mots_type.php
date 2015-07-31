@@ -178,12 +178,17 @@ function exec_mots_type_dist()
 	.  fin_cadre_formulaire(true)
 	. "</div>";
 
-	$res .= pipeline('affiche_milieu',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
-
-
 	echo redirige_action_auteur('instituer_groupe_mots', $id_groupe, "mots_tous", "id_groupe=$id_groupe", $res),
-		fin_gauche(),
-		fin_page();
+	pipeline('affiche_milieu',
+		array('args' => array(
+			'exec' => 'mots_type',
+			'id_groupe' => $id_groupe
+		),
+		'data'=>'')
+	),
+	fin_gauche(),
+	fin_page();
+
 }
 
 ?>
