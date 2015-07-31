@@ -37,14 +37,20 @@ function generer_generer_url($type, $p)
 	elseif (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
 		return NULL;
 	} else {
-		$s = addslashes($s);
-		if ($type != 'document')
-			return "'./?"._SPIP_PAGE."=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
+		// si une fonction de generation des url a ete definie pour ce connect l'utiliser
+		if (function_exists($f = 'generer_generer_url_'.$s)){
+			return $f($type,$_id,$s);
+		}
 		else {
-			$u = "quete_meta('adresse_site', '$s')";
-			$d = "quete_meta('dir_img', '$s')";
-			$f = "quete_fichier($_id,'$s')";
-			return "$u . '/' .\n\t$d . $f";
+			$s = addslashes($s);
+			if ($type != 'document')
+				return "'./?"._SPIP_PAGE."=$type&amp;id_$type=' . $_id . '&amp;connect=$s'";
+			else {
+				$u = "quete_meta('adresse_site', '$s')";
+				$d = "quete_meta('dir_img', '$s')";
+				$f = "quete_fichier($_id,'$s')";
+				return "$u . '/' .\n\t$d . $f";
+			}
 		}
 	}
 }
@@ -113,6 +119,12 @@ function balise_URL_PAGE_dist($p) {
 		if (!$GLOBALS['connexions'][$s]['spip_connect_version']) {
 			$p->code = "404";
 		} else {
+			// si une fonction de generation des url a ete definie pour ce connect l'utiliser
+			// elle devra aussi traiter le cas derogatoire type=page
+			if (function_exists($f = 'generer_generer_url_'.$s)){
+				$p->code = $f('page', $p->code, $s);
+				return $p;
+			}
 			$p->code .=  ", 'connect=" .  addslashes($s) . "'";
 		}
 	}
