@@ -64,10 +64,19 @@ function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
 }
 
 function xhtml ($buffer) {
-	global $tidy_command;
 
+	// Seuls les charsets iso-latin et utf-8 sont concernes
+	$charset = lire_meta('charset');
+	if ($charset == "iso-8859-1")
+		$enc_char = "latin1";
+	else if ($charset == "utf-8")
+		$enc_char = "utf8";
+	else {
+		spip_log("erreur inc_tidy : charset=$charset");
+		return $buffer;
+	}
 
-	if (strlen($tidy_command) > 0) {
+	if (defined('_TIDY_COMMAND')) {
 		// Si l'on a defini un chemin pour tidyHTML 
 		// en ligne de commande 
 		// (pour les sites qui n'ont pas tidyPHP)
@@ -77,10 +86,6 @@ function xhtml ($buffer) {
 		$retour_echap = echappe_xhtml ($buffer);
 		$buffer = $retour_echap[0];
 		$les_echap = $retour_echap[1];
-		$charset = lire_meta('charset');
-		if ($charset == "iso-8859-1") $enc_char = "latin1";
-		else if ($charset == "utf-8") $enc_char = "utf8";
-		else return echappe_retour($buffer, $les_echap, "xhtml");
 
 		$cache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'tidy');
 		$nomfich = $cache.'tidy'.md5($buffer);
@@ -88,16 +93,27 @@ function xhtml ($buffer) {
 			$tmp = "$nomfich.".@getmypid().".tmp";
 			ecrire_fichier($tmp, $buffer);
 
-			$c = "$tidy_command --tidy-mark false --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $tmp"; #." 2>$nomfich.err";
+			$c = _TIDY_COMMAND
+				." --tidy-mark false"
+				." --char-encoding $enc_char"
+				." --quote-nbsp false"
+				." --show-body-only false"
+				." --indent true"
+				." --wrap false"
+				." --output-xhtml true"
+				." --add-xml-decl false"
+				." -m $tmp"
+				." 2>&1";
 			spip_log ($c);
-
-			exec("$tidy_command --tidy-mark false --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $tmp");
+			exec($c, $verbose, $exit_code);
+			if ($exit_code == 2)
+				spip_log("Erreur tidy :\n".join("\n", $verbose));
 			rename($tmp,$nomfich);
 		}
 
 		if (lire_fichier($nomfich, $tidy)
 		AND strlen(trim($tidy)) > 0) {
-			// purger le petit cache toutes les 5 minutes
+			// purger le petit cache toutes les 5 minutes (300s)
 			spip_touch($nomfich); # rester vivant
 			if (spip_touch($cache.'purger_tidy', 300, true)) {
 				if ($h = @opendir($cache)) {
@@ -113,8 +129,10 @@ function xhtml ($buffer) {
 			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 			$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
 			return $tidy;
-		} else
-			return $buffer; # echec de tidy
+		} else {
+			define ('_erreur_tidy', 1);
+			return $buffer;
+		}
 	}
 	else if (version_tidy() == "1") {
 		include_ecrire("inc_texte.php3");
@@ -122,12 +140,6 @@ function xhtml ($buffer) {
 		$retour_echap = echappe_xhtml ($buffer);
 		$buffer = $retour_echap[0];
 		$les_echap = $retour_echap[1];
-
-		// Options selon: http://tidy.sourceforge.net/docs/quickref.html
-		$charset = lire_meta('charset');
-		if ($charset == "iso-8859-1") $enc_char = "latin1";
-		else if ($charset == "utf-8") $enc_char = "utf8";
-		else return echappe_retour($buffer, $les_echap, "xhtml");
 
 		tidy_set_encoding ($enc_char);
 		tidy_setopt('wrap', 0);
@@ -155,12 +167,6 @@ function xhtml ($buffer) {
 		$buffer = $retour_echap[0];
 		$les_echap = $retour_echap[1];
 
-		// Options selon: http://tidy.sourceforge.net/docs/quickref.html
-		$charset = lire_meta('charset');
-		if ($charset == "iso-8859-1") $enc_char = "latin1";
-		else if ($charset == "utf-8") $enc_char = "utf8";
-		else return echappe_retour($buffer, $les_echap, "xhtml");
-
 		$config = array(
 			'wrap' => 0,
 			'indent-spaces' => 4,
@@ -175,8 +181,27 @@ function xhtml ($buffer) {
 		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
 		return $tidy;
 	}
-	else
+	else {
+		define ('_erreur_tidy', 1);
 		return $buffer;
+	}
+}
+
+function entetes_xhtml() {
+	// Si Mozilla et tidy actif, passer en "application/xhtml+xml"
+	// extremement risque: Mozilla passe en mode debugueur strict
+	// mais permet d'afficher du MathML directement dans le texte
+	// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
+	if (defined('_TIDY_COMMAND') OR (version_tidy() > 0)) {
+		if (strpos($_SERVER['HTTP_ACCEPT'], "application/xhtml+xml")) {
+			@header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+		} else {
+			@header("Content-Type: text/html; charset=".lire_meta('charset'));
+			echo '<'.'?xml version="1.0" encoding="'. lire_meta('charset').'"?'.">\n";
+		}
+	} else {
+		@header("Content-Type: text/html; charset=".lire_meta('charset'));
+	}
 }
 
 ?>

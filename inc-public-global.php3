@@ -96,7 +96,6 @@ function calcule_header_et_page ($fond, $delais) {
 		if (trim($page['texte']) === ''
 		AND $var_mode != 'debug') {
 			header("HTTP/1.0 404");
-			header("Content-Type: text/html; charset=".lire_meta('charset'));
 			$contexte_inclus = array(
 				'erreur_aucun' => message_erreur_404()
 			);
@@ -113,9 +112,15 @@ function calcule_header_et_page ($fond, $delais) {
 		// Pour les autres donner l'heure de modif
 		else if ($lastmodified) {
 			header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
-			header("Content-Type: text/html; charset=".lire_meta('charset'));
 		}
 	}
+
+	// Content-type: xml ou html ; charset
+	if ($GLOBALS['xhtml'] AND !defined('_erreur_tidy') AND !$flag_preserver) {
+		include_ecrire("inc_tidy.php");
+		entetes_xhtml(); # attention, elle peut demarrer le contenu
+	} else
+		@header("Content-Type: text/html; charset=".lire_meta('charset'));
 
 	return $page;
 }
@@ -257,28 +262,6 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		// Obtenir la page
 		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
 		$fond, false);
-
-		if (!$flag_preserver) {
-		// Entete content-type: xml ou html ; charset
-			if ($xhtml) {
-			// Si Mozilla et tidy actif, passer en "application/xhtml+xml"
-			// extremement risque: Mozilla passe en mode debugueur strict
-			// mais permet d'afficher du MathML directement dans le texte
-			// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
-				include_ecrire("inc_tidy.php");
-				if (version_tidy() > 0) {
-					if (ereg("application/xhtml\+xml", $GLOBALS['HTTP_ACCEPT'])) 
-						@header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
-					else 
-						@header("Content-Type: text/html; charset=".lire_meta('charset'));
-					echo '<'.'?xml version="1.0" encoding="'. lire_meta('charset').'"?'.">\n";
-				} else {
-					@header("Content-Type: text/html; charset=".lire_meta('charset'));
-				}
-			} else {
-				@header("Content-Type: text/html; charset=".lire_meta('charset'));
-			}
-		}
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;

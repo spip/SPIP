@@ -251,11 +251,6 @@ $convert_command = 'convert';
 // voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2#43
 $pnmscale_command = 'pnmscale';
 
-// tidy en ligne de commande (si on ne l'a pas en module php,
-// ou si le module php ne marche pas)
-// $tidy_command = '/bin/tidy' ou '/usr/local/bin/tidy', ou simplement 'tidy'
-$tidy_command = '';
-
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
 
@@ -333,7 +328,7 @@ $extension_squelette = 'html';
 //
 
 if (@file_exists(_FILE_OPTIONS)) {
-  include(_FILE_OPTIONS);
+	include(_FILE_OPTIONS);
 }
 
 // la taille maxi des logos (0 : pas de limite)
@@ -394,6 +389,11 @@ define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 define_once('_ACCESS_FILE_NAME', '.htaccess');
 define_once('_AUTH_USER_FILE', '.htpasswd');
 
+
+// tidy en ligne de commande (si on ne l'a pas en module php,
+// ou si le module php ne marche pas)
+// '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
+#define_once('_TIDY_COMMAND', 'tidy');
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -487,6 +487,13 @@ if ($cookie_prefix != 'spip') {
 //
 if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
 	define ('os_serveur', 'windows');
+
+
+//
+// Non ! Car le GNU veille... (Entete HTTP de frimeur)
+//
+if (!headers_sent())
+	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net");
 
 
 //

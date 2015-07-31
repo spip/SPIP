@@ -167,12 +167,6 @@ function cherche_page ($cache, $contexte, $fond)  {
 		  }
 	}
 
-	// Nettoyer le resultat si on est fou de XML
-	if ($GLOBALS['xhtml']) {
-		include_ecrire("inc_tidy.php");
-		$page['texte'] = xhtml($page['texte']);
-	}
-
 	// Entrer les invalideurs dans la base
 	if ($delais>0) {
 		include_ecrire('inc_invalideur.php3');
