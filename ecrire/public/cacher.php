@@ -18,33 +18,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // la fonction retire_cache() de inc/invalideur
 //
 // http://doc.spip.org/@generer_nom_fichier_cache
-function generer_nom_fichier_cache($contexte) {
-
-	$uri = preg_replace('/[?].*$/', '', 
-		preg_replace(',\.[a-zA-Z0-9]*,', '',
-			     str_replace('/', '_', $GLOBALS['REQUEST_URI'])));
+function generer_nom_fichier_cache($contexte, $page) {
 
 	$cache = '';
 	foreach ($contexte as $val)
 		$cache .= '-' . str_replace('-', '_', 
 		     (is_array($val) ? var_export($val,true) : strval($val)));
 
-	$cache = rawurlencode($cache);
-
 	// Pour la page d'accueil et les url reduites a page=type_url
 
-	if (strlen($cache) <= 10) $cache .= '-' . $uri;
+	if (strlen($cache) <= 10) $cache .= '-' . $page;
 
-	if (strlen($cache) > 24)
+	$cache = rawurlencode($cache);
+
+	if (strlen($cache) > 24) {
 		$cache = preg_replace('/([a-zA-Z]{1,3})[^-_]*[-_]/', '\1-', $cache);
-	$cache = substr($cache, 0, 24);
+		$cache = substr($cache, 0, 24);
+	}
 
 	// Morceau de md5 selon HOST, $dossier_squelettes, $fond et $marqueur
 	// permet de changer de chemin_cache si l'on change l'un de ces elements
 	// donc, par exemple, de gerer differents dossiers de squelettes
 	// en parallele, ou de la "personnalisation" via un marqueur (dont la
 	// composition est totalement libre...)
-	$md_cache = md5($uri . ' '
+	$md_cache = md5($page . ' '
 		. $_SERVER['HTTP_HOST'] . ' '
 		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
@@ -61,7 +58,6 @@ function generer_nom_fichier_cache($contexte) {
 		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
 	}
 	$subdir = sous_repertoire($rep, substr($md_cache, 0, 1), true,true);
-
 	return $subdir.$cache;
 }
 
@@ -212,7 +208,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Controler l'existence d'un cache nous correspondant, dans les
 	// quatre versions possibles : gzip ou non, session ou non
-	$chemin_cache = generer_nom_fichier_cache($contexte);
+	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
 
 	if (@file_exists(_DIR_CACHE . ($f = $chemin_cache))
 	OR (@file_exists(_DIR_CACHE . ($f = $chemin_cache.'-'.spip_session())))
@@ -265,8 +261,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 			gunzip_page($page);
 			return;
 		}
-	} else
+	} else {
 		$use_cache = 1; // fichier cache absent : provoque le calcul
+		$page = array();
+	}
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
