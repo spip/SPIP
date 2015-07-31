@@ -158,10 +158,15 @@ function assembler_page ($fond, $connect='') {
 			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, '', $chemin_cache, $connect);
 
-			//ajouter les scripts poue le mettre en cache
+			// Si un modele contenait #SESSION, on note l'info dans $page
+			if (isset($GLOBALS['cache_utilise_session']))
+				$page['invalideurs']['session'] = $GLOBALS['cache_utilise_session'];
+
+			// Ajouter les scripts avant de mettre en cache
 			$page['insert_js_fichier'] = pipeline("insert_js",array("type" => "fichier","data" => array()));
 			$page['insert_js_inline'] = pipeline("insert_js",array("type" => "inline","data" => array()));
 
+			// Stocker le cache sur le disque
 			if ($chemin_cache)
 				$cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 		}
