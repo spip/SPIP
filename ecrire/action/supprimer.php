@@ -61,6 +61,8 @@ function action_supprimer_rubrique($r)
 		if (!$n)
 			sql_updateq("spip_auteurs", array("statut" => '1comite'), "id_auteur=$id_auteur");
 	}
+	// menu_rubriques devra recalculer
+	effacer_meta("date_calcul_rubriques");
 
 	// Une rubrique supprimable n'avait pas le statut "publie"
 	// donc rien de neuf pour la rubrique parente

@@ -18,7 +18,7 @@ include_spip('inc/texte');
 function exec_menu_rubriques_dist() {
 	global $spip_ecran;
         
-	header("Cache-Control: max-age=3600");
+	header("Cache-Control: no-cache, must-revalidate");
 
 	if ($date = intval(_request('date')))
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s", $date)." GMT");
@@ -183,7 +183,7 @@ function gen_liste_rubriques() {
 		$GLOBALS['db_art_cache'][$r['id_parent']][$r['id_rubrique']] = supprimer_numero(typo($t));
 	}
 
-	$t = array($last, $GLOBALS['db_art_cache']);
+	$t = array($last ? $last : time(), $GLOBALS['db_art_cache']);
 	ecrire_fichier(_CACHE_RUBRIQUES, serialize($t));
 	return true;
 }
