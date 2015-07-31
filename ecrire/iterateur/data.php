@@ -152,7 +152,9 @@ class IterateurDATA implements Iterator {
 					array('table', 'array', 'tableau'))
 				) {
 					if (is_array($a = $this->command['source'])
-					OR (is_string($a) AND is_array($a = @unserialize($a)))
+					OR (is_string($a)
+					AND $a = str_replace('&quot;', '"', $a) # fragile!
+					AND is_array($a = @unserialize($a)))
 					)
 						$this->tableau = $a;
 				}
