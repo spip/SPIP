@@ -627,7 +627,8 @@ if ($activer_statistiques_ref != "non"){
 
 		if (strlen($buff["keywords"]) > 0) {
 			$criteres = substr(md5($buff["keywords"]),0,8);
-			if (!$lescriteres[$numero][$criteres]) $tmp = "<a href='$referer'>critères</a> : ".$buff["keywords"];
+			if (!$lescriteres[$numero][$criteres])
+				$tmp = "<a href='$referer'>&laquo;&nbsp;".$buff["keywords"]."&nbsp;&raquo;</a>";
 			$lescriteres[$numero][$criteres] = true;
 		} else {
 			$aff = $buff["path"];
