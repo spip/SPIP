@@ -29,9 +29,10 @@ function login_explicite($login, $cible, $mode) {
 	$clean_link->delVar('var_login');
 	$action = $clean_link->getUrl();
 
-	if ($cible)
+	if ($cible) {
 	  $cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
-	else {
+	  $cible = ereg_replace("[?&]var_login=[^&]*", '', $cible);
+	} else {
 	  if (ereg("[?&]url=([^&]*)", $action, $m))
 	    $cible = urldecode($m[1]);
 	  else
@@ -76,25 +77,16 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 	  $login = '';
 
 	$row = array();
-
+	$erreur = '';
 	if ($login) {
-		$login = addslashes($login);
-		$row = spip_query("SELECT * FROM spip_auteurs WHERE login='$login'");
+		$row = spip_query("SELECT * FROM spip_auteurs WHERE login='" .addslashes($login) ."'");
 		$row =  spip_fetch_array($row);
-		if (!$row) {
-			$row['statut'] = $GLOBALS['ldap_present'];
-		} else {
-			$row['source'] = ($row['source'] == 'spip') ? ' ' : '' ;
-			if ($row['statut'] == '5poubelle' OR ((!$row['source']) AND $row['pass'] == '')) {
-				$row['statut'] = false;
-			}
-		}
-
-		if ($row['statut'])
-			$row['statut'] = '';
-		else {
-			$row['statut'] =  _T('login_identifiant_inconnu', array('login' => htmlspecialchars($login)));
- 			$row['login'] = '';
+		if ((!$row AND !$GLOBALS['ldap_present']) OR
+		    ($row['statut'] == '5poubelle') OR 
+		    (($row['source'] == 'spip') AND $row['pass'] == '')) {
+			$erreur =  _T('login_identifiant_inconnu', array('login' => $login));
+ 			$row = array();
+			$login = '';
 			@spip_setcookie("spip_admin", "", time() - 3600);
 		}
 	}
@@ -105,6 +97,7 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 		     array_merge(array_map('addslashes', $row),
 				 array(
 				       'action2' => ($login ? 'spip_cookie.php3' : $action),
+				       'erreur' => $erreur,
 				       'action' => $action,
 				       'url' => $cible,
 				       'auth' => $auth,
@@ -136,5 +129,7 @@ function retoursite($mode)
 function vide($a) {return $a ? '' : ' ';}
 
 function choisir($t,$v,$f) {return $t ? $v : $f;}
+
+function egal($a1,$a2) {return ($a1 == $a2) ? ' ' : '';}
 
 ?>
