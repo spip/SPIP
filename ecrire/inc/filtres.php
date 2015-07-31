@@ -1987,7 +1987,7 @@ function charge_scripts($scripts) {
 function compacte_js($flux) {
 	if (!strlen($flux))
 		return $flux;
-	include_spip('inc/class.JavaScriptPacker');
+	include_spip('lib/class.JavaScriptPacker');
 	$packer = new JavaScriptPacker($flux, 0, true, false);
 
 	// en cas d'echec (?) renvoyer l'original
@@ -1996,20 +1996,6 @@ function compacte_js($flux) {
 
 	// erreur
 	spip_log('erreur de compacte_js');
-	return $flux;
-}
-// Compacte du php grace a javascriptcompressor
-// http://doc.spip.org/@compacte_php
-function compacte_php($flux) {
-	if (strpos($flux,'<<<')!==false) return $flux; // le compacteur ne sait pas traiter le heredoc
-	include_spip('inc/compacte_js');
-	$k = new JavaScriptCompressor('php');
-	// en cas d'echec (?) renvoyer l'original
-	if (strlen($t = $k->getClean($flux)))
-		return $t;
-
-	// erreur
-	spip_log('erreur de compacte_php');
 	return $flux;
 }
 

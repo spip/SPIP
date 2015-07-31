@@ -548,9 +548,7 @@ ecrire/inc/boutons.php -text
 ecrire/inc/charger_plugin.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
-ecrire/inc/class.JavaScriptPacker.php -text
 ecrire/inc/commencer_page.php -text
-ecrire/inc/compacte_js.php -text
 ecrire/inc/cookie.php -text
 ecrire/inc/couleurs.php -text
 ecrire/inc/dater.php -text
@@ -641,6 +639,7 @@ ecrire/lang/spip_cs.php -text
 ecrire/lang/spip_id.php -text
 ecrire/lang/spip_it_fem.php -text
 ecrire/lang/spip_ru.php -text
+ecrire/lib/class.JavaScriptPacker.php -text
 ecrire/lib/safehtml/classes/HTMLSax3.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/Decorators.php -text
 ecrire/lib/safehtml/classes/HTMLSax3/States.php -text
