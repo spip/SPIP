@@ -331,10 +331,6 @@ function afficher_liste($largeurs, $table, $styles = '') {
 			echo "<td";
 			if ($largeur) echo " width=\"$largeur\"";
 			if ($style) echo " class=\"$style\"";
-			if (eregi("<a href=[\"\']([^\"\']*)[\"\']", $texte, $regs)) {
-				$lien = $regs[1];
-				echo " style=\"cursor: pointer;\" onClick=\"document.location='$lien';\"";
-			}
 			echo ">$texte</td>";
 		}
 		echo "</tr>\n";
@@ -467,7 +463,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$petition = $row['petition'];
 				
 				echo "<li>";
-				echo "<a href=\"articles.php3?id_article=$id_article\">".propre($titre)."</a>";
+				echo "<a href=\"articles.php3?id_article=$id_article\" style=\"display:block;\">".propre($titre)."</a>";
 				echo "</li>";
 			}
 			echo "</ul>";
@@ -524,7 +520,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 						$id_auteur = $row['id_auteur'];
 						$nom_auteur = typo($row['nom']);
 						$auteur_messagerie = $row['messagerie'];
-	
+						
 						$les_auteurs .= ", <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom_auteur</a>";
 						if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non" AND $activer_messagerie != "non") {
 							$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
@@ -562,15 +558,13 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				
 				$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 14px;'>";
 	
-				//$s. = "<a href=\"articles.php3?id_article=$id_article\" title=\"$title\">";
-	
-				//$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
 				if (acces_restreint_rubrique($id_rubrique))
 					$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
-				$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang>".typo($titre)."</a>";
+				$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">".typo($titre);
 				if ($afficher_langue AND $lang != $langue_defaut)
 					$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
-				if ($petition) $s .= " <Font size=1 color='red'>"._T('lien_petitions')."</font>";
+				if ($petition) $s .= " <font size=1 color='red'>"._T('lien_petitions')."</font>";
+				$s .= "</a>";
 				$s .= "</div>";
 				
 				$vals[] = $s;
@@ -691,11 +685,11 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			}
 
 			$s = "<div style='background: url(img_pack/$puce.gif) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 12px;'>";
-			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang>";
+			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
 			$s .= typo($titre);
-			$s .= "</a>";
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
+			$s .= "</a>";
 
 			$s .= "</div>";
 			$vals[] = $s;
@@ -704,7 +698,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($affrub) {
 				$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$id_rubrique = $rub['id_rubrique'];
-				$s .= "<a href='naviguer.php3?coll=$id_rubrique'>".typo($rub['titre'])."</a>";
+				$s .= "<a href='naviguer.php3?coll=$id_rubrique' style=\"display:block;\">".typo($rub['titre'])."</a>";
 			} else if ($statut != "prop")
 				$s = affdate_jourcourt($date_heure);
 			else
