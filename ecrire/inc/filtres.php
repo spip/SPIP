@@ -1259,7 +1259,7 @@ define('_EXTRAIRE_MULTI', "@<multi>(.*?)</multi>@sS");
 // Extraire et transformer les blocs multi ; on indique la langue courante
 // pour ne pas mettre de span@lang=fr si on est deja en fr
 // http://doc.spip.org/@extraire_multi
-function extraire_multi($letexte, $lang=null) {
+function extraire_multi($letexte, $lang=null, $echappe_span=false) {
 	if (preg_match_all(_EXTRAIRE_MULTI, $letexte, $regs, PREG_SET_ORDER)) {
 		if (!$lang) $lang = $GLOBALS['spip_lang'];
 
@@ -1269,6 +1269,7 @@ function extraire_multi($letexte, $lang=null) {
 			if ($l = approcher_langue($trads, $lang)) {
 				$trad = $trads[$l];
 			} else {
+				include_spip('inc/texte');
 				// langue absente, prendre la premiere dispo
 				// mais typographier le texte selon les regles de celle-ci
 				// Attention aux blocs multi sur plusieurs lignes
@@ -1279,6 +1280,7 @@ function extraire_multi($letexte, $lang=null) {
 				$trad = explode("\n", $trad);
 				foreach($trad as $i => $ligne) {
 					if (strlen($ligne)) {
+						$e = true;
 						$ligne = code_echappement($ligne, 'multi');
 						$ligne = str_replace("'", '"', inserer_attribut($ligne, 'lang', $l));
 						if (lang_dir($l) !== lang_dir($lang))
@@ -1287,10 +1289,13 @@ function extraire_multi($letexte, $lang=null) {
 					}
 				}
 				$trad = join("\n", $trad);
+				if (!$echappe_span)
+					$trad = echappe_retour($trad, 'multi');
 			}
 			$letexte = str_replace($reg[0], $trad, $letexte);
 		}
 	}
+
 	return $letexte;
 }
 
