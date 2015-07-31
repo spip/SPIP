@@ -763,11 +763,12 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// Q
 	'queue_executer_maintenant' => 'Executar agora',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ trabalhos em espera',
 	'queue_next_job_in_nb_sec' => 'Próximo trabalho em @nb@ s',
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 	'queue_one_job_in_queue' => '1 trabalho em espera',
-	'queue_purger_queue' => 'Limpar a lista de trabalhos',
+	'queue_purger_queue' => 'Limpar a lista de trabalhos', # MODIF
 	'queue_titre' => 'Listagem de trabalhos', # MODIF
 
 	// R
@@ -783,7 +784,8 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (ícones de documentos, títulos apresentados sob a forma gráfica, funções matemáticas em formato TeX...) ocupam, no diretório @dir@, um total de @taille@.',
 	'taille_cache_infinie' => 'Este site não prevê limitação de tamanho do diretório do cache.',
 	'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diretório do cache deste site em cerca de <b>@octets@</b>.',
-	'taille_cache_octets' => 'O tamanho do cache é atualmente de  @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'O tamanho do cache é atualmente de  @octets@.', # MODIF
 	'taille_cache_vide' => 'O cache está vazio.',
 	'taille_repertoire_cache' => 'Tamanho do diretório cache',
 	'text_article_propose_publication' => 'Matéria proposta para publicação.',

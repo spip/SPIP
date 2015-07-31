@@ -757,6 +757,7 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -777,7 +778,8 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 	'taille_cache_image' => 'Slike koje SPIP automatski izracunava (vinjete dokumenata, naslove predstavljene u grafickoj formi, matematicke funkcije u TeX formatu ...) zauzimaju u @dir@  repertoaru total od @taille@.',
 	'taille_cache_infinie' => 'Ova stranica ne ukljucuje ogranicenje velicine u repertoaru <code>CACHE/</code>.', # MODIF
 	'taille_cache_maxi' => 'SPIP pokusava ograniciti velicinu repertoara <code>CACHE/</code> ove stranice za oko <b>@octets@</b> podataka.', # MODIF
-	'taille_cache_octets' => 'Aktuelna velicina kesa je @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Aktuelna velicina kesa je @octets@.', # MODIF
 	'taille_cache_vide' => 'Kes je prazan.',
 	'taille_repertoire_cache' => 'Aktuelna velicina kesa',
 	'text_article_propose_publication' => 'Clanak predlozen za objavljivanje. Ne oklijevajte da date vase misljenje u forumu dodanom ovom clanku (na dnu ove strane).', # MODIF

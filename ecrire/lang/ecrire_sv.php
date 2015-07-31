@@ -794,6 +794,7 @@ med en färg som visar deras status:',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -814,6 +815,7 @@ med en färg som visar deras status:',
 	'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
 	'taille_cache_infinie' => 'Ce site ne prévoit pas de limitation de taille du répertoire du cache.', # NEW
 	'taille_cache_maxi' => 'SPIP essaie de limiter la taille du répertoire du cache de ce site à environ <b>@octets@</b> de données.', # NEW
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
 	'taille_cache_octets' => 'La taille du cache est actuellement de @octets@.', # NEW
 	'taille_cache_vide' => 'Cachen är tom.',
 	'taille_repertoire_cache' => 'Taille du répertoire cache', # NEW

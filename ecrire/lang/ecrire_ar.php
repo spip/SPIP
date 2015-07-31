@@ -800,11 +800,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'تنفيذ الآن',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ عمل بالانتظار',
 	'queue_next_job_in_nb_sec' => 'العمل القادم خلال @nb@ ثانية',
 	'queue_no_job_in_queue' => 'لا توجد أعمال بالانتظار',
 	'queue_one_job_in_queue' => 'عمل واحد بالانتظار',
-	'queue_purger_queue' => 'تفريغ لائحة الأعمال',
+	'queue_purger_queue' => 'تفريغ لائحة الأعمال', # MODIF
 	'queue_titre' => 'لائحة الأعمال',
 
 	// R
@@ -820,7 +821,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'تحتل الصور التي حسبها SPIP آلياً (مصغرات مستندات، عناوين معروضة كصور، دالات رياضية بتنسيق TeX...) مساحة اجمالية تبلغ @taille@ في الدليل @dir@.',
 	'taille_cache_infinie' => 'لا يضع هذا الموقع اي حدود لحجم دليل الذاكرة المخبأة.',
 	'taille_cache_maxi' => 'يحاول SPIP الحد من حجم دليل الذاكرة المخبأة في هذا الموقع لكي لا يتعدى <b>@octets@</b> من البيانات.',
-	'taille_cache_octets' => 'يبلغ حجم الذاكرة المخبأة حالياً @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'يبلغ حجم الذاكرة المخبأة حالياً @octets@.', # MODIF
 	'taille_cache_vide' => 'الذاكرة المخبأة فارغة.',
 	'taille_repertoire_cache' => 'حجم دليل الذاكرة المخبأة',
 	'text_article_propose_publication' => 'مقال معروض للنشر.',

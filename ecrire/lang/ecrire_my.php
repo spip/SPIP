@@ -756,6 +756,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -776,7 +777,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'ရုပ်ပုံများကို  SPIP ဖြင့်တိုက်ရိုက်တွက်ချက်၍မရပါ (နမူနာပုံများ, ဂရပ်ဖစ်သို့ ပြောင်းခြင်းများ, စာသားပုံစံထဲတွင် သင်္ချာဖော်မြူလာများ စသည်) @dir@ ထဲရှိ @taille@  ၏ပေါင်းခြင်းကို အညွှန်းတွင်ပြပါ',
 	'taille_cache_infinie' => 'ဤဆိုက်တွင် အမြန်သုံးမှတ်ဉာဏ်နေရာ အညွှန်းအရွယ်အစားကို ပုံသေသတ်မှတ်ထားခြင်းမရှိပါ',
 	'taille_cache_maxi' => 'SPIP သည်  အမြန်သုံးမှတ်ဉာဏ်နေရာ အညွှန်းအရွယ်စားကို ဒေတာ၏ <b>@octets@</b> ခန့်အထိ ကန့်သတ်နိုင် ရန်ကြိုးစားနေဆဲဖြစ်သည်',
-	'taille_cache_octets' => 'မှတ်ဉာဏ်၏ လက်ရှိအရွယ်အစားမှာ @octets@ ဖြစ်သည်',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'မှတ်ဉာဏ်၏ လက်ရှိအရွယ်အစားမှာ @octets@ ဖြစ်သည်', # MODIF
 	'taille_cache_vide' => 'မှတ်ထားချက်မရှိပါ',
 	'taille_repertoire_cache' => 'မှတ်ဉာဏ်၏ လက်ရှိအရွယ်စား',
 	'text_article_propose_publication' => 'ဆောင်းပါးကို ထုတ်ဝေရန် ထည့်သွင်းပြီးဖြစ်သည်၊ ဤဆောင်းပါးတွင် ဖိုရမ်မှသင့်အမြင်ကို တင်ပြနိုင်ပါသည်၊ (စာမျက်နှာအောက်တွင်)', # MODIF

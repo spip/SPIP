@@ -773,6 +773,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -793,7 +794,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'taille_cache_image' => 'SPIPek automatikoki kalkulatzen dituen irudiek (dokumentuen binetak, grafikoki aurkeztutako tituluak, TeX formatuan diren matematika funtzioak...) @dir@ direktorioko @taille@-eko espazioa okupatzen dute.',
 	'taille_cache_infinie' => 'Gune honek ez du ezartzen CACHE direktorioaren tamaina-mugaketarik.',
 	'taille_cache_maxi' => 'SPIP-ek gune honen CACHE direktorioaren tamaina mugatzen saiatzen da @octets@ datura gutxi gora-behera.',
-	'taille_cache_octets' => 'Cachearen tamaina orain @octets@-koa da.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Cachearen tamaina orain @octets@-koa da.', # MODIF
 	'taille_cache_vide' => 'Cachea hutsik dago.',
 	'taille_repertoire_cache' => 'Cache direktorioaren tamaina',
 	'text_article_propose_publication' => 'Argitarapenerako proposatutako artikulua.',

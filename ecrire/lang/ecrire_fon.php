@@ -757,6 +757,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -777,7 +778,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
 	'taille_cache_infinie' => 'tìto kléwún.',
 	'taille_cache_maxi' => 'tìto kléwún',
-	'taille_cache_octets' => 'tìto kléwún de @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'tìto kléwún de @octets@.', # MODIF
 	'taille_cache_vide' => 'gbàví ɔ jɛ vɔ.',
 	'taille_repertoire_cache' => 'gbàví ɔ jɛ vɔ',
 	'text_article_propose_publication' => 'mi kɛnklɛ̂n bó ná lìnlìn mi tɔn ɖé wúɖò kplékplé yé sɔ ɖó dò wɔ mɛ.', # MODIF

@@ -797,6 +797,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -817,7 +818,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'Изображенията, изчислени автоматично от СПИП (умалени изображения, заглавия, преобразени в графики, математически формули в TeX формат и др.) заемат общо @taille@ в директорията @dir@.',
 	'taille_cache_infinie' => 'Този сайт няма фиксиран лимит за размера на <code>CACHE/</code> директорията.',
 	'taille_cache_maxi' => 'СПИП се опитва да намали размера на данните в  <code>CACHE/</code> директорията до около  <b>@octets@</b>.',
-	'taille_cache_octets' => 'Размерът на кеш-паметта в момента е @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Размерът на кеш-паметта в момента е @octets@.', # MODIF
 	'taille_cache_vide' => 'Кеш-паметта е празна.',
 	'taille_repertoire_cache' => 'Размер на кеш-паметта в момента',
 	'text_article_propose_publication' => 'Изпратена е статия със заявка за публикуване. Не се колебайте да дадете мнението си за нея във форума, който е прикрепен към нея (най-долу на страницата).', # MODIF

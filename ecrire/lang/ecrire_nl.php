@@ -778,11 +778,12 @@ een kleur geeft hun status aan :',
 
 	// Q
 	'queue_executer_maintenant' => 'Nu uitvoeren',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ wachtrij',
 	'queue_next_job_in_nb_sec' => 'Volgende opdracht in @nb@ s',
 	'queue_no_job_in_queue' => 'Geen werk in de wacht',
 	'queue_one_job_in_queue' => '1 achterstand',
-	'queue_purger_queue' => 'Zuiveren van de lijst van werken',
+	'queue_purger_queue' => 'Zuiveren van de lijst van werken', # MODIF
 	'queue_titre' => 'Lijst van werken',
 
 	// R
@@ -798,7 +799,8 @@ een kleur geeft hun status aan :',
 	'taille_cache_image' => 'De beelden door SPIP automatisch aangemaakt (icoontjes van documenten, grafisch weergegeven titels, wiskundige functies in TeX formaat...) nemen in de map @dir@ een totale plaats in van  @taille@.',
 	'taille_cache_infinie' => 'De site voorziet geen beperking in de grootte van de buffermap.',
 	'taille_cache_maxi' => 'SPIP probeert de omvang van de buffermap van de site te beperken tot ongeveer <b>@octets@</b> gegevens.',
-	'taille_cache_octets' => 'De grootte van de buffer bedraagt momenteel @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'De grootte van de buffer bedraagt momenteel @octets@.', # MODIF
 	'taille_cache_vide' => 'De buffer is leeg.',
 	'taille_repertoire_cache' => 'Grootte van het bufferbestand',
 	'text_article_propose_publication' => 'Artikel voorgesteld voor de publicatie.',

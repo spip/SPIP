@@ -792,6 +792,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -812,7 +813,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'Кеш изображений ( автоматически пережатые картинки, изображения формул и текста, трасформированного в графику) занимает @taille@ в каталоге @dir@.',
 	'taille_cache_infinie' => 'Этот сайт не имеет ограничения для размера каталога кэша .',
 	'taille_cache_maxi' => 'SPIP  пробует ограничить размер <code> кэш/ </code> каталога приблизительно <b> @octets@ </b>.',
-	'taille_cache_octets' => 'Размер кэша -  @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Размер кэша -  @octets@.', # MODIF
 	'taille_cache_vide' => 'Кэш пуст.',
 	'taille_repertoire_cache' => 'Текущий размер кэша',
 	'text_article_propose_publication' => 'Статья отправлена для публикации. Не стесняйтесь выражать своё мнение через форум, прикрепленный к этой статье (у основания страницы).',

@@ -793,6 +793,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -813,7 +814,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'taille_cache_image' => 'Les images calculées automatiquement par SPIP (vignettes des documents, titres présentés sous forme graphique, fonctions mathématiques au format TeX...) occupent dans le répertoire @dir@ un total de @taille@.', # NEW
 	'taille_cache_infinie' => '本网站对 <code>CACHE/</code>目录的大小没有限制。', # MODIF
 	'taille_cache_maxi' => '网络文章发布系统将尝试限制 <code>CACHE/</code> 目录的大小至大约 <b>@octets@</b> 数据.', # MODIF
-	'taille_cache_octets' => '缓存目录当前的大小是 @octets@。',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => '缓存目录当前的大小是 @octets@。', # MODIF
 	'taille_cache_vide' => '缓存当前状态为空。',
 	'taille_repertoire_cache' => '缓存目录的大小',
 	'text_article_propose_publication' => '文章已提交发表. 不要犹豫通过论坛发表你的观点附在文章后 (在页底).', # MODIF

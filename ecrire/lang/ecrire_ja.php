@@ -775,6 +775,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -795,7 +796,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 	'taille_cache_image' => 'SPIPによる画像自動管理（ビネット（半身像、画像で作られている題名、TeXフォーマットの数式など...) @dir@ ディレクトリ内を合計 @taille@ に調整します。',
 	'taille_cache_infinie' => 'このサイトは<code>CACHE/</code>ディレクトリのどんな大きさの制限も設定していない。',
 	'taille_cache_maxi' => 'SPIPは<code>CACHE/</code>ディレクトリのデータの大きさを大体<b>@octets@</b>までに制限できます。',
-	'taille_cache_octets' => 'キャッシュの大きさは現在 @octets@ です。',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'キャッシュの大きさは現在 @octets@ です。', # MODIF
 	'taille_cache_vide' => 'キャッシュは空です。',
 	'taille_repertoire_cache' => '現在のキャッシュの大きさ',
 	'text_article_propose_publication' => 'この記事は公開の為に提出されました。この記事の掲示板で、どうぞためらわずに意見してください(ページの一番下)。', # MODIF

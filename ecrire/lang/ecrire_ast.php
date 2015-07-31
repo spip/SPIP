@@ -800,6 +800,7 @@ con una color que indica el estáu:',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -820,7 +821,8 @@ con una color que indica el estáu:',
 	'taille_cache_image' => 'Les imaxes calculáes automáticamente por SPIP (miniatures de documentos, títulos en formatu gráficu, funciones matemátiques en formatu TeX...) ocupen nel direutoriu @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Esti sitiu nun conseña llendes de tamañu pal direutoriu de caché.',
 	'taille_cache_maxi' => 'SPIP tenta llendar el tamañu del direutoriu de caché d\'esti sitiu a unos <b>@octets@</b> de datos.',
-	'taille_cache_octets' => 'El tamañu de caché actualmente ye de @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'El tamañu de caché actualmente ye de @octets@.', # MODIF
 	'taille_cache_vide' => 'La caché ta vacía.',
 	'taille_repertoire_cache' => 'Tamañu del direutoriu de caché',
 	'text_article_propose_publication' => 'Artículu propuestu pa espublizase.',

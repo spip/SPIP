@@ -778,6 +778,7 @@ un color indica lo sieu estat:',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -798,7 +799,8 @@ un color indica lo sieu estat:',
 	'taille_cache_image' => 'Lu imatges qu\'SPIP a calculat automaticament (vinhetas dei documents, títols presentats en forma grafica, foncions matematiqui en format TeX...) ocupan dins lo repertòri @dir@ un totau de @taille@.',
 	'taille_cache_infinie' => 'Aqueu sit prevé minga de limitacion de talha dau repertòri <code>CACHE/</code>.',
 	'taille_cache_maxi' => 'SPIP assaia de limitar la talha dau repertòri <code>CACHE/</code> d\'aqueu sit a <b>@octets@</b> de donadas aperaquí.',
-	'taille_cache_octets' => 'Aüra la talha de l\'escondedor compassa @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Aüra la talha de l\'escondedor compassa @octets@.', # MODIF
 	'taille_cache_vide' => 'L\'escondedor es vuei.',
 	'taille_repertoire_cache' => 'Talha dau repertòri escondedor',
 	'text_article_propose_publication' => 'Article prepauat per la publicacion. Non esitetz de donar lo vòstre vejaire gaug au forum estacat a aquel article (en bas de pàgina).', # MODIF

@@ -769,11 +769,12 @@ amb un color que indica el seu estat:',
 
 	// Q
 	'queue_executer_maintenant' => 'Executar ara',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ treballs en espera',
 	'queue_next_job_in_nb_sec' => 'Proper treball en @nb@ s',
 	'queue_no_job_in_queue' => 'Cap treball en espera',
 	'queue_one_job_in_queue' => '1 treball en espera',
-	'queue_purger_queue' => 'Purgar la llista de treballs',
+	'queue_purger_queue' => 'Purgar la llista de treballs', # MODIF
 	'queue_titre' => 'Llista de treballs',
 
 	// R
@@ -789,7 +790,8 @@ amb un color que indica el seu estat:',
 	'taille_cache_image' => 'Les imatges calculades automàticament per SPIP (miniatures dels documents, títols presentats en forma gràfica, función matemàtiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Aquest lloc Web no preveu limitar la mida del directori de la memòria cau (cache).',
 	'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori de la memòria cau (cache) d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
-	'taille_cache_octets' => 'La mida de la memòria cau és actualment de @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'La mida de la memòria cau és actualment de @octets@.', # MODIF
 	'taille_cache_vide' => 'La memòria cau està buida.',
 	'taille_repertoire_cache' => 'Mida del directori de la memòria cau',
 	'text_article_propose_publication' => 'Article proposat per ser publicat.',

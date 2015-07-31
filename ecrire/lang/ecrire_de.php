@@ -772,11 +772,12 @@ in einer Farbe, die den Status anzeigt :',
 
 	// Q
 	'queue_executer_maintenant' => 'Jetzt ausführen',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
 	'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
 	'queue_no_job_in_queue' => 'Keine Aufgaben in der Warteschlange',
 	'queue_one_job_in_queue' => '1 Job in der Warteschlange',
-	'queue_purger_queue' => 'Jobliste löschen',
+	'queue_purger_queue' => 'Jobliste löschen', # MODIF
 	'queue_titre' => 'Jobliste',
 
 	// R
@@ -792,7 +793,8 @@ in einer Farbe, die den Status anzeigt :',
 	'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons für Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdrücke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 	'taille_cache_infinie' => 'Die Grösse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 	'taille_cache_maxi' => 'SPIP versucht die Grösse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',
-	'taille_cache_octets' => 'Aktuelle Grösse des Cache: @octets@ Byte',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'Aktuelle Grösse des Cache: @octets@ Byte', # MODIF
 	'taille_cache_vide' => 'Der Cache ist leer.',
 	'taille_repertoire_cache' => 'Grösse des Cache-Verzeichnis',
 	'text_article_propose_publication' => 'Dieser Artikel ist zur Veröffentlichung vorgeschlagen.',

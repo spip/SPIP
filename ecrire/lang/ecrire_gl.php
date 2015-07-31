@@ -792,11 +792,12 @@ cunha cor que indica o seu estado :',
 
 	// Q
 	'queue_executer_maintenant' => 'Executar as tarefas de mantemento',
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ traballos en agarda',
 	'queue_next_job_in_nb_sec' => 'Próximo traballo en @nb@ s',
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
 	'queue_one_job_in_queue' => '1 traballo en agarda',
-	'queue_purger_queue' => 'Purgar a lista de traballos',
+	'queue_purger_queue' => 'Purgar a lista de traballos', # MODIF
 	'queue_titre' => 'Lista de traballos', # MODIF
 
 	// R
@@ -812,7 +813,8 @@ cunha cor que indica o seu estado :',
 	'taille_cache_image' => 'As imaxes calculadas automaticamente por SPIP (viñetas dos documentos, títulos presentados so a forma gráfica, funcións matemáticas en formato TeX...) ocupan no directorio @dir@ un total de @taille@.',
 	'taille_cache_infinie' => 'Neste web non se preveu limitación de tamaño do directorio da memoria caché.',
 	'taille_cache_maxi' => 'SPIP está a tentar limitar o tamaño do directorio da caché deste web en volta de <b>@octets@</b> de datos.',
-	'taille_cache_octets' => 'O tamaño da caché é actualmente de  @octets@.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => 'O tamaño da caché é actualmente de  @octets@.', # MODIF
 	'taille_cache_vide' => 'A caché está baleira',
 	'taille_repertoire_cache' => 'Tamaño do directorio de memoria caché',
 	'text_article_propose_publication' => 'Artigo proposto para publicación.',

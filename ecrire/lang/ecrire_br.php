@@ -781,6 +781,7 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 
 	// Q
 	'queue_executer_maintenant' => 'Exécuter maintenant', # NEW
+	'queue_info_purger' => 'Vous pouvez supprimer tous les travaux en attente et ré-inialiser la liste avec les travaux périodiques', # NEW
 	'queue_nb_jobs_in_queue' => '@nb@ travaux en attente', # NEW
 	'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s', # NEW
 	'queue_no_job_in_queue' => 'Aucun travail en attente', # NEW
@@ -801,7 +802,8 @@ diskouezet en ul liv disheñvel, diouzh o stad :',
 	'taille_cache_image' => '@taille@ eo hollad ar skeudennoù jedet gant ent emgefre gant SPIP (skeudennigoù an teulioù, an titloù kinniget dindan ur stumm grafek, ar fonksionoù jedoniezh er stumm TeX...) hag a zo er c\'havlec\'h @dir@.',
 	'taille_cache_infinie' => 'N\'eo ket bevennet ment kavlec\'h ar grubuilh war al lec\'hienn-mañ.',
 	'taille_cache_maxi' => 'Klask a ra SPIP bevenniñ ment kavlec\'h krubuilh al lec\'hienn-mañ e-tro <b>@octets@</b> a roadennoù.',
-	'taille_cache_octets' => '@octets@ eo ment ar grubuilh evit ar mare.',
+	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
+	'taille_cache_octets' => '@octets@ eo ment ar grubuilh evit ar mare.', # MODIF
 	'taille_cache_vide' => 'Goullo eo ar grubuilh',
 	'taille_repertoire_cache' => 'Ment kavlec\'h ar grubuilh',
 	'text_article_propose_publication' => 'Pennad kinniget evit an embann.',
