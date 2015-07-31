@@ -567,7 +567,7 @@ if ($connect_statut == '0minirezo') {
 	
 	$articles_mots = lire_meta('articles_mots');
 	if ($articles_mots != "non") {
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mots-cle-24.gif", "creer.gif");
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mot-cle-24.gif", "creer.gif");
 	}
 }
 
