@@ -142,6 +142,8 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 	// .. mettre a jour les sessions de cet auteur
 	include_spip('inc/session');
 	$session['id_auteur'] = $id_auteur;
+	unset($session['new_login']);
+	unset($session['new_pass']);
 	actualiser_sessions($session);
 
 	return $err;
