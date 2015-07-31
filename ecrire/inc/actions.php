@@ -107,17 +107,17 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 // et non pas onsubmit='return AjaxSqueeze(x,"truc",...)'
 //
 // http://doc.spip.org/@ajax_action_declencheur
-function ajax_action_declencheur($request, $noeud, $fct_ajax='') {
+function ajax_action_declencheur($request, $noeud, $fct_ajax="''") {
 	if ($request != 'this')
 		$request = "'".$request."'";
 
-	return '"return AjaxSqueeze('
+	return '" return AjaxSqueeze('
 	. $request
 	. ",'"
 	. $noeud
-	. "'"
-	. (!$fct_ajax ? '' : ",$fct_ajax")
-	. ')"';
+	. "',"
+	. $fct_ajax
+	. ',event)"';
 }
 
 // http://doc.spip.org/@ajax_action_greffe

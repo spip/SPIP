@@ -40,7 +40,7 @@ function selectionner_auteur_boucle($query, $idom)
 	global  $spip_lang_left;
 
 	$info = generer_url_ecrire('informer_auteur', "id=");
-	$args = "'$idom" . "_selection', '$info'";
+	$args = "'$idom" . "_selection', '$info', event";
 	$res = '';
 
 	while ($row = spip_fetch_array($query)) {

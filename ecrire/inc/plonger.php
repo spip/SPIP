@@ -40,7 +40,7 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 		asort($ordre);
 		$rec = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclu&col=".($col+1));
 		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
-		$args = "'$idom',this,$col,'$spip_lang_left','$info'";
+		$args = "'$idom',this,$col,'$spip_lang_left','$info',event";
 		while (list($id, $titrebrut) = each($ordre)) {
 
 			$titre = supprimer_numero($titrebrut);

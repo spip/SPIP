@@ -25,7 +25,7 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 		$info = generer_url_ecrire('informer', "type=rubrique&rac=$idom&id=");
 		$idom3 = $idom . "_selection";
 
-		$onClick = " aff_selection(0, '$idom3', '$info');";
+		$onClick = " aff_selection(0, '$idom3', '$info', event);";
 
 		$ondbClick = strtr(str_replace("'", "&#8217;",
 				str_replace('"', "&#34;",
@@ -45,9 +45,6 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	} else $onClick = '';
 
 	$url_init = generer_url_ecrire('plonger',"rac=$idom&exclus=$exclus&id=0&col=1", true);
-	if ($recur) {
-		$onClick .= "charger_id_url('$url_init', '$idom" . "_col_1');";
-	} 
 
 	$plonger = charger_fonction('plonger', 'inc');
 	$plonger_r = $plonger($sel, $idom, $recur, 1, $exclus);
