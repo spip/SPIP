@@ -34,14 +34,16 @@ function inc_controler_action_auteur_dist()
 // http://doc.spip.org/@caracteriser_auteur
 function caracteriser_auteur($id_auteur=0) {
 	global $auteur_session;
-	if (!($id_auteur = intval($id_auteur))
-	AND $auteur_session['pass']) {
-		return array($auteur_session['id_auteur'], $auteur_session['pass']); 
-	}
+	if (!$id_auteur = intval($id_auteur))
+		$id_auteur = $auteur_session['id_auteur'];
+
+	// Eviter l'acces SQL si le pass est connu de PHP
+	if ($auteur_session['pass'])
+		return array($id_auteur, $auteur_session['pass']); 
 	else {
-		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		if ($t = spip_fetch_array($result))
-			return array($t['id_auteur'], $t['pass']);
+		$t = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
+		if (!$t = spip_fetch_array($t)) die(_L("Faut pas se gener"));
+		return array($t['id_auteur'], $t['pass']);
 	}
 }
 
@@ -110,9 +112,13 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 // revenant a l'envoyeur $script d'arguments $args.
 // Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
+// Precise le charset de l'envoyeur avec la variable d'url var_ajaxcharset
+// qui sert aussi a index.php de savoir que la requete est en Ajax.
+// Attention, la redirection doit propager cette variable, 
+// i.e. la mettre dans la 2e URL, et avant l'ancre de celle ci.
 
 // http://doc.spip.org/@ajax_action_auteur
-function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='')
+function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args_ajax='', $fct_ajax='')
 {
 	$ancre = "$action-" . intval($id);
 
@@ -133,12 +139,14 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 		// Methode Ajax
 		else {
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
-				return redirige_action_auteur($action,
+			return redirige_action_auteur($action,
 				$id,
 				$action,
-				"script=$script$args_ajax&var_ajaxcharset=utf-8",
+				"var_ajaxcharset=utf-8&script=$script$args_ajax",
 				$corps,
-				" method='post'\nonsubmit='return AjaxSqueeze(this, \"$ancre\")'");
+				(" method='post'\nonsubmit="
+				 . declencheur_ajax('this', $ancre, $fct_ajax)));
+				 
 		}
 	}
 
@@ -153,14 +161,28 @@ function ajax_action_auteur($action, $id, $script, $args='', $corps=false, $args
 			false);
 
 		if ($args AND !$args_ajax) $args_ajax = "&$args";
+
 		$ajax = redirige_action_auteur($action,
 			$id,
 			$action,
-			"script=$script$args_ajax&var_ajaxcharset=utf-8");
+			"var_ajaxcharset=utf-8&script=$script$args_ajax");
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
-		return "<a href='$href'\nonclick='return AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";
+		return "<a href='$href'\nonclick="
+		.  declencheur_ajax("\"$ajax\"", $ancre, $fct_ajax)
+		. ">$clic</a>";
 	}
+}
+
+function declencheur_ajax($request, $noeud, $fct_ajax)
+{
+	return "'return AjaxSqueeze("
+	. $request
+	. ',"'
+	. $noeud
+	. '"'
+	. (!$fct_ajax ? '' : ",$fct_ajax")
+	. ")'";
 }
 
 // http://doc.spip.org/@determine_upload
