@@ -16,6 +16,33 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Retrouver l'index de la boucle dans le cas ou une reference explicite est demandee
+ * #MABALISE : l'index est celui de la premiere boucle englobante
+ * #_autreboucle:MABALISE : l'index est celui de la boucle _autreboucle si elle est bien englobante
+ * renvoi '' si une reference explicite incorrecte est envoyee
+ *
+ * Dans une balise dynamique :
+ * $idb = index_boucle($p);
+ *
+ * @param Object $p
+ * @return string
+ */
+function index_boucle($p){
+
+	$idb = $p->id_boucle;
+	$explicite = $p->nom_boucle;
+
+	if (strlen($explicite)) {
+		// Recherche d'un champ dans un etage superieur
+	  while (($idb !== $explicite) && ($idb !=='')) {
+			$idb = $p->boucles[$idb]->id_parent;
+		}
+	}
+
+	return $idb;
+}
+
+/**
  * index_pile retourne la position dans la pile du champ SQL $nom_champ
  * en prenant la boucle la plus proche du sommet de pile (indique par $idb).
  * Si on ne trouve rien, on considere que ca doit provenir du contexte
@@ -31,8 +58,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param Object $boucles
  * @param string $explicite
  *   indique que le nom de la boucle explicite dans la balise #_nomboucletruc:CHAMP
- * @param bool $joker
- *   indique que l'on accepte ou refuse le Champ joker * des iterateurs DATA
+ * @param string $defaut
+ *   code par defaut si champ pas trouve dans l'index. @$Pile[0][$nom_champ] si non fourni
  * @return string
  */
 function index_pile($idb, $nom_champ, &$boucles, $explicite='', $defaut=null) {
@@ -397,14 +424,9 @@ function champs_traitements ($p) {
 
 	if (is_array($ps)) {
 	  // Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
-		if ($p->nom_boucle){
-			$type_requete = $p->boucles[$p->nom_boucle]->type_requete;
-			$table_sql = isset($p->boucles[$p->nom_boucle]->show['table_sql'])?$p->boucles[$p->nom_boucle]->show['table_sql']:false;
-		}
-		else{
-			$type_requete = $p->type_requete;
-			$table_sql = isset($p->boucles[$p->id_boucle]->show['table_sql'])?$p->boucles[$p->id_boucle]->show['table_sql']:false;
-		}
+		$idb = index_boucle($p);
+		$type_requete = $p->boucles[$idb]->type_requete;
+		$table_sql = isset($p->boucles[$idb]->show['table_sql'])?$p->boucles[$idb]->show['table_sql']:false;
 
 		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
 		if ($table_sql AND isset($ps[$table_sql]))
