@@ -307,7 +307,7 @@ function plugin_trier($infos, $liste_non_classee)
 			      $info1 = false;
 			      break;
 			  }
-			}		    
+			}
 			if (!$info1) continue;
 			// idem si des plugins sont utiles,
 			// sauf si ils sont de toute facon absents de la liste
@@ -315,7 +315,7 @@ function plugin_trier($infos, $liste_non_classee)
 			  $nom = strtoupper($need['nom']);
 			  if (isset($toute_la_liste[$nom])) {
 			    if (!isset($liste[$nom]) OR 
-				!plugin_version_compatible($need['version'],$liste[$nom]['version'])) {
+				!plugin_version_compatible($need['version'], $liste[$nom]['version'])) {
 			      $info1 = false;
 			      break;
 			    }
@@ -330,7 +330,7 @@ function plugin_trier($infos, $liste_non_classee)
 	}
 	return array($liste, $ordre, $liste_non_classee);
 }
-		
+
 // Collecte les erreurs dans la meta 
 
 function plugins_erreurs($liste_non_classee, $liste, $infos, $msg=array())
@@ -496,7 +496,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	if (isset($GLOBALS['meta']['message_crash_plugins']))
 		effacer_meta('message_crash_plugins');
 	ecrire_meta('plugin',serialize($plugin_valides));
-	$liste = array_diff_assoc($liste,$plugin_valides);
+	$liste = array_diff_key($liste,$plugin_valides);
 	ecrire_meta('plugin_attente',serialize($liste));
 	ecrire_meta('plugin_header',substr(strtolower(implode(",",$header)),0,900));
 	// generer charger_plugins_chemin.php
@@ -520,9 +520,11 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 function plugins_precompile_chemin($plugin_valides, $ordre)
 {
-	if (defined('_DIR_PLUGINS_SUPPL'))
+	$dir_plugins_suppl = "";
+	if (defined('_DIR_PLUGINS_SUPPL')) {
 		$dir_plugins_suppl = ":" . implode(array_filter(explode(':',_DIR_PLUGINS_SUPPL)),'|') . ":";
-	
+	}
+
 	$chemins = array();
 	$contenu = "";
 	foreach($ordre as $p => $info){
@@ -533,9 +535,9 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 			// definir le plugin, donc le path avant l'include du fichier options
 			// permet de faire des include_spip pour attraper un inc_ du plugin
 
-			if($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
+			if ($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
 				$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
-			}else{
+			} else {
 				$dir = $dir_type.".'" . $plug ."/'";
 			}
 			$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));

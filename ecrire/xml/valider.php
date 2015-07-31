@@ -59,7 +59,11 @@ function validerElement($phraseur, $name, $attrs)
 	            . (!$bons_peres ? ''
 	               : ('<p style="font-size: 80%"> '._T('zxml_mais_de').' <b>'. $bons_peres . '</b></p>')));
 		} else if ($this->dtc->regles[$pere][0]=='/') {
-		  $this->fratrie[substr($depth,2)].= "$name ";
+			$frat = substr($depth,2);
+			if (!isset($this->fratrie[$frat])) {
+				$this->fratrie[$frat] = '';
+			}
+			$this->fratrie[$frat] .= "$name ";
 		}
 	      }
 	    }
@@ -273,7 +277,7 @@ function piElement($phraseur, $target, $data)
 
 // http://doc.spip.org/@defautElement
 function defaultElement($phraseur, $data)
-{	
+{
 	if (!preg_match('/^<!--/', $data)
 	AND (preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER)))
 		foreach ($r as $m) {
@@ -284,7 +288,9 @@ function defaultElement($phraseur, $data)
 				  . ' '
 				  );
 		}
-	if ($f = $this->process['default']) $f($this, $data);
+	if (isset($this->process['default']) AND ($f = $this->process['default'])) {
+		$f($this, $data);
+	}
 }
 
 // http://doc.spip.org/@phraserTout
