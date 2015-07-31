@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
-'avis_erreur_visiteur' => 'Probl&amp;egrave;me d\'acc&amp;egrave; &amp;agrave; l\'espace priv&amp;eacute;',
+'avis_erreur_visiteur' => 'Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
 
 
 // B
@@ -685,7 +685,7 @@ et vous reconnecter au site.
 		Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
 		niveau, et enfin v&eacute;rifiez que les images apparaissent
 		toujours dans les articles.',
-'texte_erreur_visiteur' => 'Vous avez tent&amp;eacute; de d\'acc&amp;eacute;der &amp;agrave; l\'espace priv&amp;eacute; avec un login qui ne le permet pas.',
+'texte_erreur_visiteur' => 'Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
 		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base. 
 		Essayez de vous',
