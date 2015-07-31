@@ -1,0 +1,32 @@
+body { margin-bottom:1em; background-color: #f8f7f3; margin: 0; border: 0; color: #000;}
+
+/* Espaceur de blocs */
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
+
+/* Non visible a l'ecran */
+.none,.js .none-js,.no-js .none-nojs { display: none; }
+.hidden,.js .hidden-js,.no-js .hidden-nojs  {visibility:hidden;}
+.invisible, /* compat */
+.over,.js .over-js,.no-js .over-nojs { position: absolute; left: -3000em; height: 1%; }
+
+/* oldies */
+.js .invisible_au_chargement { visibility: hidden; }
+.js .visible_au_chargement { visibility: hidden; }
+.js .display_au_chargement { display: none; }
+.no-js .invisible_au_chargement { visibility: hidden; }
+.no-js .visible_au_chargement { visibility: visible; }
+.no-js .display_au_chargement { display: block; }
+
+/* ajax */
+.image_loading {float:right;}
+
+
+/* style par defaut sur les tables. selecteur generique pour avoir une faible priorite */
+table {
+	border-collapse: collapse; /* equivalent a cellspacing=0 */
+}
+td {
+	padding: 0; /* equivalent a cellpadding=0 */
+}
+
+td { text-align: left; }

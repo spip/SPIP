@@ -581,6 +581,11 @@ input[type="submit"] {
 }
 
 /* Cas particuliers */
+/* dans les formulaires de configuration */
+h3.titrem {position:relative;}
+.formulaire_spip h3.titrem,#navigation .formulaire_spip h3.titrem,#extra .formulaire_spip h3.titrem {background-color: [#(#GET{foncee}|couleur_eclaircir)];color: #4A4A4A;}
+
+
 .formulaire_spip .toggle_box_link {position:absolute;top:5px;right:5px;}
 .formulaire_editer_logo {}
 .formulaire_editer_logo .titrem {font-size: 1.1em;}
@@ -623,3 +628,20 @@ input[type="submit"] {
 /* retour visuel a la suppression et a l'ajout */
 .remove {background-color:#FFD0BF;}
 .append {background-color:#E0FFCF;}
+
+/* formulaire de recherche : */
+/* version old style */
+.spip_recherche { float: [(#GET{right})]; border:0;background:none;}
+.spip_recherche .recherche { float:[(#GET{left})];padding:3px;padding-#GET{right}:30px;width: 186px;font-size: 10px; border: 1px solid #fff; background-color: #GET{foncee}; color: #fff; margin: 0 0 6px; }
+.spip_recherche .submit {float: [(#GET{left})];margin-#GET{left}:-24px;margin-top:1px;}
+/* version moderne */
+.formulaire_spip.formulaire_recherche { float: [(#GET{right})]; border:0;background:none;border: 1px solid #fff; background-color: [#(#GET{foncee}|couleur_foncer)]; margin: 0 0 6px;position:relative;}
+.formulaire_spip.formulaire_recherche .text{ float:[(#GET{left})];padding:3px;width: 200px;background-color:#GET{foncee};border:none;border-right:1px solid #fff;font-size: 10px; color: #fff;  margin:0;min-height:20px;}
+.formulaire_spip.formulaire_recherche .text.cancelable {padding-#GET{left}:20px}
+.formulaire_spip.formulaire_recherche .text::-webkit-input-placeholder { color:#eee; }
+.formulaire_spip.formulaire_recherche .text:-moz-placeholder { color:#eee; }
+.formulaire_spip.formulaire_recherche .text.placeholder { color:#eee; }
+
+.formulaire_spip.formulaire_recherche .cancel {float: [(#GET{left})];line-height:1px;position:absolute;top:2px;left:2px;}
+.formulaire_spip.formulaire_recherche label {display:none;}
+.formulaire_spip.formulaire_recherche .submit,.formulaire_spip.formulaire_recherche .image {float: [(#GET{left})];margin-top:0px;padding:0 2px;}

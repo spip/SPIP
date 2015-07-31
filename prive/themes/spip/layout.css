@@ -1,0 +1,45 @@
+/* Layout */
+#page { font-size:11px;}
+/* ecran etroit*/
+#haut {text-align:center;margin-top:10px;}
+.largeur { width: 780px; margin: auto; text-align:left; }
+#conteneur,.table_page,div.messages { clear: both; margin-right: auto; margin-left: auto; text-align: left; width: 780px; margin-top:0.5em;}
+#navigation { float: left; width: 200px; min-height: 100px; }
+#extra { float: left; clear:left; width: 200px; }
+#contenu { float: right ; margin-left: 30px; width: 550px; }
+
+/* ecran large*/
+.large .largeur {width:974px;}
+.large #conteneur,.large .table_page,.large div.messages { width: 974px; }
+.large #navigation {  }
+.large #extra { float: right; clear:none; width: 200px; }
+.large #contenu { float: left; margin-left: 17px; width: 540px; }
+
+/* une seule colonne centrale */
+.pleine_largeur #navigation,.pleine_largeur #extra {display:none;}
+.pleine_largeur #contenu {margin-left:0;width:100%;}
+
+/* les formulaires sont en 600px en config large */
+body.edition .large #contenu,
+.articles_edit .large #contenu,
+.mots_edit .large #contenu,
+.breves_edit .large #contenu,
+.rubriques_edit .large #contenu {width:600px; margin-top: 20px;}
+body.edition .large #extra,
+.articles_edit .large #extra,
+.mots_edit .large #extra,
+.breves_edit .large #extra,
+.rubriques_edit .large #extra {width:140px;}
+
+/*fix all layout problems of IE6 and IE7*/
+.lte7 .cadre,
+.lte7 .fiche_objet, /*title not visible*/
+.lte7 .ajax-action, /*containers of expandible boxes go mad*/
+.lte7 .tabs-container, /*containers of expandible boxes go mad*/
+.lte7 #portfolio,
+.lte7 #documents {zoom:1}
+
+div.table_page { margin-top: 1em; }
+.centered { margin: 0 auto; text-align: center; }
+#page { margin: auto; text-align: center; }
+.table_page{ margin: auto; text-align: left; }

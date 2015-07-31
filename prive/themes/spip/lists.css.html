@@ -1,0 +1,90 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/* Listes d'objet */
+.liste-objets{
+	margin:20px 0 0;
+	font-size:.95em;
+	border: 1px solid #dfdfdf;
+	position:relative;
+}
+.liste-objets-lies,.liste-objets-associer {margin:0 0 20px;}
+
+.cadre .liste-objets{font-size:1em;}
+.liste-objets > .image_loading {position:absolute;top:0;right:0;}
+.liste-objets .pagination,.liste-objets p.pagination {
+	margin:0; padding:1px 5px;
+	background:#eee; border:none;
+}
+.liste-objets .pagination .separateur {color:#aaa;}
+
+.liste-objets table.spip {width:100%; /* surcharger le 99% de spip ? */ max-width:none; background:white; border:none; margin-bottom:0;}
+.liste-objets table.spip caption {margin:0;text-align:left;}
+.liste-objets .caption {display:block;color:#333;font-size:1.1em;padding:7px 6px;background:none no-repeat scroll 2px 2px #FFFFFF}
+.liste-objets table.spip tr {background:white;}
+.liste-objets table.spip tr.row_odd {background:white;}
+.liste-objets table.spip tr.row_even {background:white;}
+.liste-objets table.spip thead tr {background:#eee;}
+.liste-objets table.spip tbody tr:hover {background-color: #f8f8f8;}
+.liste-objets table.spip tr th {border-color:#dfdfdf; border-left:0; border-right:0;}
+.liste-objets table.spip tr td {border-color:#dfdfdf; border-left:0; border-right:0;}
+
+.liste-objets tr > .statut,.liste-objets tr > .picto {width: 16px; padding-left:2px;padding-right:2px;text-align:center;}
+.liste-objets tr > .auteur {width: 80px;}
+.liste-objets tr > .date {width: 90px;}
+.liste-objets tr > .id {width: 40px; text-align:#GET{right};}
+.liste-objets tr > .action {width: 90px; text-align:#GET{right};}
+.liste-objets tr td .spip_logos {float:#GET{right};}
+.liste-objets tr td.syndication .etat {display:block;color:red;}
+.liste-objets tr > .utilisations {width:120px;}
+.liste-objets tr.confirmation {display:none;}
+
+.liste-objets tr td {font-size:0.9em;}
+.liste-objets tr td.secondaire {font-size:0.85em;}
+.liste-objets tr td.principale {font-size:1.025em;}
+.liste-objets tr td > span {font-size:0.85em;}
+.liste-objets .bouton_action_post .submit,.liste-objets .button {font-size:1em;}
+.liste-objets .action a {color:inherit;}
+
+.liste-objets.syndic_articles tr > .action {width: 50px;}
+.liste-objets.syndic_articles td .tags,
+.liste-objets.syndic_articles td .source {display:block;text-align:#GET{right};}
+.liste-objets.syndic_articles td .tags a {color:#666;}
+
+.liste-objets.mots .caption {background-image:url(#CHEMIN_IMAGE{mot-cle-24.gif});padding-#GET{left}:30px;}
+.liste-objets.rubriques .caption {background-image:url(#CHEMIN_IMAGE{rubrique-24.gif});padding-#GET{left}:30px;}
+.liste-objets.articles .caption {background-image:url(#CHEMIN_IMAGE{article-24.gif});padding-#GET{left}:30px;}
+.liste-objets.breves .caption {background-image:url(#CHEMIN_IMAGE{breve-24.gif});padding-#GET{left}:30px;}
+.liste-objets.sites .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});padding-#GET{left}:30px;}
+.liste-objets.syndic_articles .caption {background-image:url(#CHEMIN_IMAGE{site-24.gif});padding-#GET{left}:30px;}
+.liste-objets.auteurs .caption {background-image:url(#CHEMIN_IMAGE{auteur-24.gif});padding-#GET{left}:30px;}
+
+
+/* dans une colonne laterale, ne visualiser que l'info principale, le statut et l'id */
+#navigation .liste-objets tr > .secondaire,
+#navigation .liste-objets tr > .auteur,
+#navigation .liste-objets tr > .date,
+#navigation .liste-objets tr > .action,
+#navigation .liste-objets tr > .syndication,
+#navigation .liste-objets tr .spip_logos {display:none;}
+#navigation .liste-objets tr td.principale {font-size:0.9em;max-width:120px;}
