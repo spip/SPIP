@@ -16,12 +16,12 @@
 		<ul>
 			<li class='saisie_nom_email[ (#ENV*{erreurs}|table_valeur{session_nom}|oui)erreur] obligatoire'>
 				<label for="session_nom"><:form_pet_votre_nom:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{session_nom})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_nom})</span>]
 				<input type="text" class="text" name="session_nom" id="session_nom" value="#ENV{session_nom}" size="30" />
 			</li>
 			<li class='saisie_adresse_email[ (#ENV*{erreurs}|table_valeur{session_email}|oui)erreur] obligatoire'>
 				<label for="session_email"><:form_pet_votre_email:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{session_email})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{session_email})</span>]
 				<input type="text" class="text" name="session_email" id="session_email" value="#ENV{session_email}" size="30" />
 			</li>
 		</ul>
@@ -32,12 +32,12 @@
 		<ul>
 			<li class='saisie_signature_nom_site[ (#ENV*{erreurs}|table_valeur{signature_nom_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
 				<label for="signature_nom_site"><:form_pet_nom_site2:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{signature_nom_site})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{signature_nom_site})</span>]
 				<input type="text" class="text" name="signature_nom_site" id="signature_nom_site" value="#ENV{signature_nom_site}" size="30" />
 			</li>
 				<li class='saisie_signature_url_site[ (#ENV*{erreurs}|table_valeur{signature_url_site}|oui)erreur][(#ENV{site_obli})obligatoire]'>
 				<label for="signature_url_site"><:form_pet_adresse_site:></label>
-				[<span class="erreur">(#ENV*{erreurs}|table_valeur{signature_url_site})</span>]
+				[<span class="erreur_message">(#ENV*{erreurs}|table_valeur{signature_url_site})</span>]
 				<input type="text" class="text" name="signature_url_site" id="signature_url_site" value="#ENV{signature_url_site}" size="30" />
 			</li>
 		</ul>

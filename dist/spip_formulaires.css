@@ -51,7 +51,7 @@ fieldset.reponse_formulaire { border-color: #e86519; font-weight: normal; }
 fieldset.reponse_formulaire.reponse_formulaire legend { color: #F57900; } /* preciser la couleur des legend pour IE/Win */
 
 /* * Erreurs */
-.formulaire_spip li.erreur .erreur { display: block; color: #C30; font-weight: bold; }
+.formulaire_spip li.erreur .erreur_message { display: block; color: #C30; font-weight: bold; }
 .formulaire_spip li.erreur input.text, .formulaire_spip li.erreur textarea { background-color: #FFCCCC; border-style: solid; border-color: #C30; }
 .reponse_formulaire_erreur { margin: 0; color: #C30; font-weight: bold; }
 
