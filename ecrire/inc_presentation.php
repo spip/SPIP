@@ -1800,7 +1800,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 	}
 
 	return $res .
-	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_action('style', $args_color) . "'>\n" .
+#	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_action('style', $args_color) . "'>\n" .
 	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 
 	// CSS calendrier
@@ -2214,10 +2214,21 @@ function init_entete($titre, $rubrique, $onLoad="", $css="") {
 	"<title>" .
 	"[$nom_site_spip] " .
 	textebrut(typo($titre)) .
-	"</title>\n" .
-	  envoi_link($nom_site_spip, $rubrique),
+	"</title>\n" ;
+
+	// appeler spip_style.css de l'espace public
+	echo '<link rel="stylesheet" href="../spip_style.css" type="text/css" />'. "\n";
+
+	// mettre inline les styles de l'espace prive (sinon ca clignote)
+	echo "<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n";
+	include_ecrire('inc_style');
+	echo styles_ecrire();
+	echo "\n\n]]>\n--></style>";
+
+	// ajouter les autres CSS
+	echo envoi_link($nom_site_spip, $rubrique),
 	  (!$css ? "" :
-	   ('<link rel="stylesheet" href="' . addslashes($css) . '" type="text/css" />'. "\n")),
+	   ('<link rel="stylesheet" href="' . entites_html($css) . '" type="text/css" />'. "\n")),
 	  "\n</head>\n",
 	  "<body ", _ATTRIBUTES_BODY, "
 	onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
