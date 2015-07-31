@@ -99,19 +99,7 @@ jQuery.fn.depliant = function(cible) {
 		);
 
 		me
-/*
-		// programmer les futurs clics
-		.click(function(e){
-			if (t) { clearTimeout(t); t = null; }
-			// ne pas agir si on clic sur un lien (ou un enfant de...)
-			// sinon agir tout de suite
-			if (!jQuery(e.target).parent('a').length)
-				me
-				.toggleother(cible)
-				.removeClass('hoverwait');
-		})
-*/
-		// et les futurs hover
+		// programmer les futurs hover
 		.hover(function(e){
 			me.addClass('hover')
 			.addClass('hoverwait');
@@ -271,10 +259,24 @@ function verifForm(racine) {
 	});
 }
 
+
+// animation de la cible pour faire patienter
+// 0 = demarre ; 1 = fin
+jQuery.fn.animeajax = function(end) {
+	if (end) {
+		this.css('opacity', 1.0);
+	} else {
+		this.css('opacity', 0.5);
+		if (typeof ajax_image_searching != 'undefined') {
+			this.prepend(ajax_image_searching);
+		}
+	}
+}
+
 // Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
 // Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
-// Le troisieme, optionnel, est la fonction traitant la réponse.
+// Le troisieme, optionnel, est la fonction traitant la reponse.
 // La fonction par defaut affecte le noeud ci-dessus avec la reponse Ajax.
 // En cas de formulaire, AjaxSqueeze retourne False pour empecher son envoi
 // Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
@@ -289,10 +291,6 @@ function AjaxSqueeze(trig, id, callback, event)
 	// position du demandeur dans le DOM (le donner direct serait mieux)
 	if (!target.size()) {return true;}
 
-	// animation immediate pour faire patienter
-	if (typeof ajax_image_searching != 'undefined') {
-		target.prepend(ajax_image_searching);
-	}
 	return !AjaxSqueezeNode(trig, target, callback, event);
 }
 
@@ -307,11 +305,14 @@ function AjaxSqueezeNode(trig, target, f, event)
 
 	// retour std si pas precise: affecter ce noeud avec ce retour
 	if (!f) {
-    callback = function() { verifForm(this);}
-  }
+		callback = function() { verifForm(this);}
+	}
 	else {
-    callback = function(res,status) { f.apply(this,[res,status]); verifForm(this);}
-  }
+		callback = function(res,status) {
+			f.apply(this,[res,status]);
+			verifForm(this);
+		}
+	}
 
 	valid = false;
 	if (typeof(window['_OUTILS_DEVELOPPEURS']) != 'undefined'){
@@ -327,11 +328,12 @@ function AjaxSqueezeNode(trig, target, f, event)
 		if  (valid) {
 		   window.open(trig+'&transformer_xml=valider_xml');
 		}
+		target.animeajax(0);
 		res = jQuery.ajax({
 			"url":trig,
 			"complete": function(r,s) {
+				target.animeajax(1);
 				AjaxRet(r,s,target, callback);
-//				jQuery(target).Pulsate();
 			}
 		});
 		return res;
@@ -344,19 +346,17 @@ function AjaxSqueezeNode(trig, target, f, event)
 		//create a document to enable receiving the result of the ajax post
 		doc.open();
 		doc.close();
-		//store the searching image to be able to remove it after the post completes 
-		var searching_img = $(">:first",target);
 		//set the element receiving the ajax post
 		target = doc.body;
 	}
-	
+
+	target.animeajax(0);
 	jQuery(trig).ajaxSubmit({
 		"target": target,
 		"success": function(res,status) {
-			if(valid) searching_img.remove();
+			target.animeajax(1);
 			if(status=='error') return this.html('Erreur HTTP');
 			callback.apply(this,[res,status]);
-//			jQuery(this).Pulsate();
 		},
 		"beforeSubmit":function (vars) {
 			vars.push({"name":"var_ajaxcharset","value":"utf-8"});
