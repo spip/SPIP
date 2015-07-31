@@ -114,7 +114,7 @@ function exec_naviguer_dist()
 		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_left))
 		    :"");
 
-	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $actions .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_left);
@@ -244,7 +244,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 {
 	$res = icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '',false);
 	
-	$n = spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"));
+	$n = sql_countsel('spip_rubriques');
 	if ($n) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $res .= icone_horizontale(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", false);
@@ -309,21 +309,20 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	// Verifier les boucles a mettre en relief
 	//
 
-	$relief = spip_num_rows(spip_query("SELECT id_article FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique AND statut='prop' LIMIT 1"));
+	$relief = sql_countsel('spip_articles', "id_rubrique=$id_rubrique AND statut='prop' LIMIT 1");
 
 	if (!$relief) {
-		$relief = spip_num_rows(spip_query("SELECT id_breve FROM spip_breves WHERE id_rubrique=$id_rubrique AND (statut='prepa' OR statut='prop') LIMIT 1"));
+		$relief = sql_countsel('spip_breves', "id_rubrique=$id_rubrique AND (statut='prepa' OR statut='prop')");
 	}
 
 	if (!$relief AND $GLOBALS['meta']['activer_sites'] != 'non') {
-		$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut='prop' LIMIT 1"));
+		$relief = sql_countsel('spip_syndic', "id_rubrique=$id_rubrique AND statut='prop'");
 	}
 
 	if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non'
-	  AND autoriser('publierdans','rubrique',$id_rubrique)) {
-		$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique=$id_rubrique AND (syndication='off' OR syndication='sus') AND statut='publie' LIMIT 1"));
+	AND autoriser('publierdans','rubrique',$id_rubrique)) {
+		$relief = sql_countsel('spip_syndic', "id_rubrique=$id_rubrique AND (syndication='off' OR syndication='sus') AND statut='publie'");
 	}
-
 
 	$res = '';
 

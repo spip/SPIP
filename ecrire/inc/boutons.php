@@ -100,7 +100,7 @@ function definir_barre_boutons() {
 
 	$sousmenu=array();
 
-	$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur =".$GLOBALS['connect_id_auteur']." AND art.id_article = lien.id_article LIMIT 1"));
+	$nombre_articles = sql_countsel('spip_articles AS art, spip_auteurs_articles AS lien', "lien.id_auteur =".$GLOBALS['connect_id_auteur']." AND art.id_article = lien.id_article");
 	if ($nombre_articles > 0) {
 		$sousmenu['articles_page']=
 		  new Bouton('article-24.gif', 'icone_tous_articles');
@@ -122,7 +122,7 @@ function definir_barre_boutons() {
 			$sousmenu['sites_tous']=
 			  new Bouton('site-24.gif', 'icone_sites_references');
 
-	$n = spip_num_rows(spip_query("SELECT id_document FROM spip_documents_rubriques LIMIT 1"));
+	$n = sql_countsel('spip_documents_rubriques');
 	if ($n) {
 			$sousmenu['documents_liste']=
 			  new Bouton('doc-24.gif', 'icone_doc_rubrique');
@@ -137,10 +137,10 @@ function definir_barre_boutons() {
 		$sousmenu['forum_admin']=
 		  new Bouton('forum-admin-24.gif', 'icone_forum_administrateur');
 
-	if (spip_num_rows(spip_query("SELECT id_forum FROM spip_forum LIMIT 1")))
+	if (sql_countsel('spip_forum'))
 		$sousmenu['controle_forum']=
 			new Bouton("suivi-forum-24.gif", "icone_suivi_forums");
-	if (spip_num_rows(spip_query("SELECT id_signature FROM spip_signatures LIMIT 1")))
+	if (sql_countsel('spip_signatures'))
 		$sousmenu['controle_petition']=
 			new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
 

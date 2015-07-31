@@ -445,7 +445,7 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo'
 		AND !$qui['restreint']) return true;
 	// "Voir en ligne" si l'auteur a un article publie
-	$n = spip_num_rows(spip_query("SELECT lien.id_article FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'"));
+	$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur="._q($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
 	if ($n) return true;
 	return false;		
 }
@@ -528,12 +528,9 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	if (in_array($qui['statut'], array('0minirezo', '1comite')))
 		return true;
 
-	return
-		spip_num_rows(spip_query("SELECT articles.id_article FROM spip_documents_articles AS rel_articles, spip_articles AS articles WHERE rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $id  LIMIT 1")) > 0
-	OR
-		spip_num_rows(spip_query("SELECT rubriques.id_rubrique FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document = $id LIMIT 1")) > 0
-	OR
-		spip_num_rows(spip_query("SELECT breves.id_breve FROM spip_documents_breves AS rel_breves, spip_breves AS breves WHERE rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id_document  LIMIT 1")) > 0
+	return sql_countsel('spip_documents_articles AS rel_articles, spip_articles AS articles', "rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $id") > 0
+	OR sql_countsel('spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques', "rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document = $id") > 0
+	OR sql_countsel('spip_documents_breves AS rel_breves, spip_breves AS breves', "rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document = $id_document") > 0
 	;
 }
 
