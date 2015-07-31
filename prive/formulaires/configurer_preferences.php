@@ -38,7 +38,7 @@ function formulaires_configurer_preferences_charger_dist(){
 	$valeurs['display_outils'] = isset($GLOBALS['visiteur_session']['prefs']['display_outils'])?$GLOBALS['visiteur_session']['prefs']['display_outils']:'oui';
 	$valeurs['display'] = (isset($GLOBALS['visiteur_session']['prefs']['display']) AND $GLOBALS['visiteur_session']['prefs']['display']>0)?$GLOBALS['visiteur_session']['prefs']['display']:2;
 	$valeurs['couleur'] = (isset($GLOBALS['visiteur_session']['prefs']['couleur']) AND $GLOBALS['visiteur_session']['prefs']['couleur']>0)?$GLOBALS['visiteur_session']['prefs']['couleur']:1;
-	$valeurs['activer_menudev'] = isset($GLOBALS['visiteur_session']['prefs']['activer_menudev'])?$GLOBALS['visiteur_session']['prefs']['activer_menudev']:'';
+	$valeurs['activer_menudev'] = isset($GLOBALS['visiteur_session']['prefs']['activer_menudev'])?$GLOBALS['visiteur_session']['prefs']['activer_menudev']:'non';
 	$valeurs['spip_ecran'] = $GLOBALS['spip_ecran'];
 
 	$couleurs = charger_fonction('couleurs','inc');

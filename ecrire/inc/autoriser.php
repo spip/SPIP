@@ -1222,7 +1222,7 @@ function autoriser_configurerpreferences_dist($faire,$type,$id,$qui,$opt) {
 **/
 function autoriser_menudeveloppement_menugrandeentree_dist($faire, $type, $id, $qui, $opt){
 	return (isset($GLOBALS['visiteur_session']['prefs']['activer_menudev'])
-		AND $GLOBALS['visiteur_session']['prefs']['activer_menudev']);
+		AND $GLOBALS['visiteur_session']['prefs']['activer_menudev'] == 'oui');
 }
 
 /**
