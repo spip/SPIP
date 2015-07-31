@@ -439,6 +439,7 @@ function balise_INTRODUCTION_dist($p) {
 	$p->code = "$f($_descriptif, $_texte, $longueur, \$connect)";
 
 	#$p->interdire_scripts = true;
+	$p->etoile = '*'; // propre est deja fait dans le calcul de l'intro
 	return $p;
 }
 
