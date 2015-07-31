@@ -123,7 +123,7 @@ function menu_langues($nom_select) {
 	$change = ' onchange="this.parentNode.parentNode.submit()"';
 	return generer_action_auteur('converser',$base, $cible,
 		(select_langues($nom_select, $change, $ret)
-		 . "<noscript><div><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>"),
+		 . "<noscript><div style='display:inline'><input type='submit' class='fondo' value='". _T('bouton_changer')."' /></div></noscript>"),
 				     " method='post'");
 }
 
