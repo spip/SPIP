@@ -22,7 +22,7 @@ include_spip('inc/presentation');
 function exec_admin_effacer_dist()
 {
 
-	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	pipeline('exec_init',array('args'=>array('exec'=>'admin_effacer'),'data'=>''));
 
@@ -58,7 +58,7 @@ function exec_admin_effacer_dist()
 	debut_cadre_relief();
 
 	echo "<table border='0' cellspacing='1' cellpadding='8' width='100%'>",
-		"<tr><td style='background-color: $couleur_foncee; font-weight: bold; color: #FFFFFF;' class='verdana1 spip_medium'>",
+		"<tr><td style='font-weight: bold; color: #FFFFFF;' class='toile_foncee verdana1 spip_medium'>",
 		_T('texte_effacer_base'),
 		"</td></tr>",
 		"<tr><td class='serif'>\n",

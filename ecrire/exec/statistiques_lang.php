@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_statistiques_lang_dist
 function exec_statistiques_lang_dist()
 {
-	global $connect_statut, $couleur_foncee, $critere, $spip_ecran, $spip_lang_right;
+	global $connect_statut, $critere, $spip_ecran, $spip_lang_right;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('onglet_repartition_lang'), "statistiques_visites", "repartition-langues");
@@ -96,7 +96,7 @@ function exec_statistiques_lang_dist()
 				echo "\n<table cellpadding='0' cellspacing='0' border='0' width='".($taille+5)."'>";
 				echo "\n<tr><td style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$visites_abs' height='8' alt=' ' />";
-				if ($visites>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee; border: 0px;' width='$visites' height='8' alt=' ' />";
+				if ($visites>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='toile_foncee' style='border: 0px;' width='$visites' height='8' alt=' ' />";
 				echo "</td></tr></table>\n";
 	
 				echo "</td>";

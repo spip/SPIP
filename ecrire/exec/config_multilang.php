@@ -19,7 +19,7 @@ include_spip('inc/config');
 // http://doc.spip.org/@exec_config_multilang_dist
 function exec_config_multilang_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $spip_lang_right, $changer_config;
+  global $connect_statut, $connect_toutes_rubriques, $spip_lang_right, $changer_config;
 
 lire_metas();
 
@@ -140,13 +140,13 @@ fin_cadre_couleur();
 
 		while (list($code_langue) = each($langues_bloquees)) {
 			$i++;
-			echo "\n<div>";
 			$nom_langue = $langues[$code_langue];
 			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
-			$nom_langue = "<span style='color: $couleur_foncee; font-weight: bold'>$nom_langue</span>";
-			echo "<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
-			echo "<input type='checkbox' checked='checked' disabled='disabled' />";
-			echo  "\n$nom_langue\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
+
+			echo "\n<div class='ligne_foncee' style='font-weight: bold'>";
+			echo "\n<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
+			echo "\n<input type='checkbox' checked='checked' disabled='disabled' />";
+			echo  $nom_langue,"\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
 			echo "</div>";
 
 			if ($i == $cesure) echo "\n</td><td style='width: 50%' class='verdana1'>";

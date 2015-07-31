@@ -18,7 +18,7 @@ include_spip('inc/sites_voir');
 // http://doc.spip.org/@exec_recherche_dist
 function exec_recherche_dist()
 {
-	global $couleur_foncee, $recherche;
+	$recherche = _request('recherche');
 
 	$recherche_aff = entites_html($recherche);
 
@@ -43,7 +43,7 @@ function exec_recherche_dist()
 	if (strlen($recherche) > 0) {
 
 	echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
-	echo "<span style='color: $couleur_foncee' class='verdana1 spip_large'><b>$recherche_aff</b></span>";
+	echo "<span class='ligne_foncee verdana1 spip_large'><b>$recherche_aff</b></span>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';
