@@ -218,7 +218,7 @@ function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 
 		#$res .= debut_block_depliable(false,'languesrubrique');
 		$res .= "<div class='langue'>";
-		if ($menu = liste_options_langues('changer_lang', $langue_rubrique, $langue_parent)) {
+		if ($menu = recuperer_fond('formulaires/inc-options-langues',array('name'=>'changer_lang','default'=>$langue_rubrique,'herit'=>$langue_parent))){
 			$lien = redirige_action_auteur('instituer_langue_rubrique', "$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique");
 			$lien = ("\nonchange=\"document.location.href='$lien" .
 				 "&amp;changer_lang='+this.options[this.selectedIndex].value\"");

@@ -136,12 +136,19 @@ function changer_typo($lang = '') {
 // pour 'changer_lang' (langue de l'article, espace prive), c'est en Ajax
 // 
 // http://doc.spip.org/@menu_langues
-function menu_langues($nom_select) {
+function menu_langues($nom_select, $default='') {
 	include_spip('inc/actions');
 
-	$ret = liste_options_langues($nom_select);
+	$langues = liste_options_langues($nom_select);
+	$ret = "";
+	if (!count($langues))
+		return '';
 
-	if (!$ret) return '';
+	if (!$default) $default = $GLOBALS['spip_lang'];
+	foreach ($langues as $l) {
+		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
+		$ret .= "<option value='$l'$selected>[".$l."] ".traduire_nom_langue($l)."</option>\n";
+	}
 
 	if (!test_espace_prive()) {
 		$cible = self();
@@ -177,10 +184,25 @@ function select_langues($nom_select, $change, $options, $label="")
 	  . "</select>";
 }
 
-// http://doc.spip.org/@liste_options_langues
-function liste_options_langues($nom_select, $default='', $herit='') {
+/**
+ * Lister les langues disponibles
+ * en fonction du premier argument $nom_select,
+ * on renvoie des listes differentes :
+ * var_lang ou changer_lang :
+ *   liste des langues selectionnees dans la config multilinguisme
+ * var_lang_ecrire :
+ *   toutes les langues presentes en fichier de langue
+ *
+ * renvoie dans un tableau la liste triee des langues
+ * 
+ * http://doc.spip.org/@liste_options_langues
+ *
+ * @param string $nom_select
+ *   name du select
+ * @return array
+ */
+function liste_options_langues($nom_select) {
 
-	if ($default == '') $default = $GLOBALS['spip_lang'];
 	switch($nom_select) {
 		# #MENU_LANG
 		case 'var_lang':
@@ -203,21 +225,9 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 # + langues_multilingues ; mais, ne sert pas
 #			$langues = explode(',', $GLOBALS['all_langs']);
 	}
-	if (count($langues) <= 1) return '';
-	$ret = '';
+	if (count($langues) <= 1) return array();
 	sort($langues);
-	foreach ($langues as $l) {
-		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
-		if ($l == $herit) {
-			$ret .= "<option class='maj-debut on' value='herit'$selected>"
-				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
-		}
-		## ici ce serait bien de pouvoir choisir entre "langue par defaut"
-		## et "langue heritee"
-		else
-			$ret .= "<option value='$l'$selected>[".$l."] ".traduire_nom_langue($l)."</option>\n";
-	}
-	return $ret;
+	return $langues;
 }
 
 

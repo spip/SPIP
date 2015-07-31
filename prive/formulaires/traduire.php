@@ -36,7 +36,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 		return false;
 
 	$valeurs['editable'] = autoriser('changerlangue',$objet,$id_objet);
-	$valeurs['_langues'] = '';
+	$valeurs['_langue'] = '';
 	$langue_parent = '';
 	if (isset($valeurs['id_rubrique'])){
 		$id_parent = $valeurs['id_rubrique'];
@@ -47,7 +47,7 @@ function formulaires_traduire_charger_dist($objet, $id_objet, $retour='', $tradu
 	if (!$langue_parent)
 		$langue_parent = $GLOBALS['meta']['langue_site'];
 	if ($valeurs['editable']){
-		$valeurs['_langues'] = liste_options_langues('changer_lang', $valeurs['langue'], $langue_parent);
+		$valeurs['_langue'] = $valeurs['langue'];
 	}
 	$valeurs['langue_parent'] = $langue_parent;
 
