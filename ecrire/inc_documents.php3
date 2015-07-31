@@ -546,7 +546,7 @@ $mode,
 $type="", 
 $ancre='', 
 $document=0) {
-  global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
+  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
 	static $num_form = 0; $num_form ++;
 
 	$res = "\n<div>" . bouton_block_invisible("ftp$num_form") .
@@ -590,8 +590,9 @@ $document=0) {
 
 	$res .= "</div>\n" . fin_block();
 
-	$redirect = $clean_link->getUrl();
-	spip_log("afficher_upload new  $redirect");
+	$redirect = new Link;
+	$redirect = $redirect->getUrl();
+
 	if ($type == "rubrique")
 		$redirect .='&amp;action=calculer_rubriques';
 		
@@ -822,7 +823,7 @@ entites_html($document['fichier'])."\" />\n";
 				echo "</div>";
 				
 				// bouton "supprimer le doc"
-				icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id_article, $redirect_url, $id_document, $album), "image-24.gif",  "supprimer.gif");
+				icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id_article, $type, $id_document, $album), "image-24.gif",  "supprimer.gif");
 			} // fin block modifs
 
 
@@ -886,19 +887,26 @@ function  afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_do
 
 function bouton_tourner_document($id_article, $id, $album, $rot)
 {
-	$redirect_url = new Link();
-	$redirect_url = $redirect_url->getUrl();
+	$redirect = new Link();
+	$redirect = $redirect->getUrl();
 	
-  return generer_action_auteur('tourner', $id, $redirect_url) .
-    ($id_article ? ('&amp;id_article=' .$id_article) : "") .
-    ("&amp;var_rot=$rot&amp;ancre=$album");
+	return generer_action_auteur('tourner', $id, $redirect) .
+		($id_article ? ('&amp;id_article=' .$id_article) : "") .
+		("&amp;var_rot=$rot&amp;ancre=$album");
 }
 
-function bouton_supprime_document_et_vignette($id_article, $redirect, $id, $album)
+function bouton_supprime_document_et_vignette($id_article, $type, $id, $album, $id_document=0)
 {
-  return generer_action_auteur('supprimer', $id, $redirect) .
-    ($id_article ? ('&amp;id_article=' .$id_article) : "") .
-    ("&amp;ancre=$album");
+	$redirect = new Link();
+	$redirect = $redirect->getUrl();
+	if ($id_document) 
+		$redirect .= "&show_docs='.$id_document";
+	if ($type == "rubrique")
+		$redirect.= '&action=calculer_rubriques';
+
+	return generer_action_auteur('supprimer', $id, $redirect) .
+	  ($id_article ? ('&amp;id_article=' .$id_article) : "") .
+	  ("&amp;ancre=$album");
 }
 
 function bloc_gerer_vignette($document, $id_article, $type, $album) {
@@ -911,7 +919,7 @@ function bloc_gerer_vignette($document, $id_article, $type, $album) {
 	echo "<b>"._T('info_vignette_personnalisee')."</b>\n";
 	echo debut_block_invisible("gerer_vignette$id_document");
 	if ($id_vignette) {
-	  icone_horizontale (_T('info_supprimer_vignette'), bouton_supprime_document_et_vignette($id_article, 	$redirect_url .'&show_docs='.$id_document, $id_vignette, $album), "vignette-24.png", "supprimer.gif");
+	  icone_horizontale (_T('info_supprimer_vignette'), bouton_supprime_document_et_vignette($id_article,	$type, $id_vignette, $album, $id_document), "vignette-24.png", "supprimer.gif");
 	} else {
 
 	  echo afficher_upload($id_article,'portfolio', false, 'vignette', $type, $album, $id_document);
@@ -1001,7 +1009,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut, $options;
-	global $clean_link;
 	global $id_doc_actif;
 
 	# HACK!!! simule une mise en page pour affecter les document_vu()
@@ -1090,9 +1097,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 
 function afficher_case_document($id_document, $id, $type, $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
-	global $clean_link;
-	global $options;
-	global $couleur_foncee, $spip_lang_left, $spip_lang_right;
+	global $options, $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
 	$flag_deplie = teste_doc_deplie($id_document);
@@ -1238,7 +1243,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		// Fin edition des champs
 
 		echo "<p /><div align='center'>";
-		icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id, $clean_link->getUrl(), $id_document, 'documents'), "doc-24.gif", "supprimer.gif");
+		icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id, $type, $id_document, 'documents'), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
 
 
@@ -1324,7 +1329,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur)),
 		  "</div>\n";
 
-		$link = new Link($clean_link->getUrl());
+		$link = new Link();
 		$link->addVar('modif_document', 'oui');
 		$link->addVar('id_document', $id_document);
 		$link->addVar('show_docs', $id_document);
@@ -1349,7 +1354,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 
 		echo "<center>";
 
-		icone_horizontale (_T('icone_supprimer_image'), bouton_supprime_document_et_vignette($id, $clean_link->getUrl(), $id_document, 'images'), "image-24.gif", "supprimer.gif");
+		icone_horizontale (_T('icone_supprimer_image'), bouton_supprime_document_et_vignette($id, $type, $id_document, 'images'), "image-24.gif", "supprimer.gif");
 		echo "</center>\n";
 
 

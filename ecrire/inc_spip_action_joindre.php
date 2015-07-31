@@ -55,7 +55,8 @@ function spip_action_joindre_dist()
 	$redirect .= '#' . $ancre;
      }
 
-     $redirect .= _DIR_RESTREINT . $redirect;
+     $redirect = _DIR_RESTREINT . $redirect;
+     spip_log($redirect);
      # spip_action fera la redirection.
      ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
 }
