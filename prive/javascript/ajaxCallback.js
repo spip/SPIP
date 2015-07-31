@@ -58,6 +58,7 @@ if(!jQuery.spip.load_handlers) {
 	jQuery.fn.ajaxSubmit = function(options){
 		// find the first parent that will not be removed by formulaire_dyn_ajax
 		// or take the whole document
+		options = options || {};
 		if (typeof options.onAjaxLoad=="undefined" || options.onAjaxLoad!=false) {
 			var me=jQuery(this).parents('div.ajax');
 			if (me.length)
