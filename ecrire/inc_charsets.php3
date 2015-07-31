@@ -202,7 +202,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		'nbsp' => " ", 'copy' => "(c)", 'reg' => "(r)", 'frac14' => "1/4",
 		'frac12' => "1/2", 'frac34' => "3/4", 'amp' => '&', 'quot' => '"',
 		'apos' => "'", 'lt' => '<', 'gt' => '>',
-		'mdash' => '&#x2014;', 'ndash' => '&#x2013;'
+		'mdash' => '&#8212;', 'ndash' => '&#8211;'
 		);
 		return $charset;
 		
