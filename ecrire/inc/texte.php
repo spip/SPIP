@@ -639,12 +639,12 @@ function calculer_url ($ref, $texte='', $pour='url', $connect=NULL) {
 		@list($type,,$id,,$args,,$ancre) = $match;
 		$r = generer_url_entite($id,$type,$args,$ancre,$connect);
 		if ($r) {
-			if ($pour === 'url') return array($r);
+			if ($pour === 'url') return $r;
 			include_spip('inc/lien');
 			$g = 'calculer_url_' . $type;
 			if (!(function_exists($g) OR function_exists($g .= '_dist')))
-			  return array($r);
-			$r = $g($id, $texte, $r, $connect);
+				$r = array($r, '', $texte);
+			else $r = $g($id, $texte, $r, $connect);
 			return ($pour=='tout') ? $r : $r[2];
 		}
 		spip_log("raccourci indefini $type");
