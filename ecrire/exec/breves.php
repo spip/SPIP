@@ -34,7 +34,7 @@ function enfant_breves($leparent){
 
 		$statuts = "'prop', 'publie'" . ($editatble ? ", 'refuse'": "");
 
-		$query = "SELECT id_breve, date_heure, titre, statut FROM spip_breves ".
+		$query = "SELECT id_rubrique, id_breve, date_heure, titre, statut FROM spip_breves ".
 			"WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC";
 		
 		debut_cadre_enfonce("secteur-24.gif", false, '', $titre.aide ("breves"));
