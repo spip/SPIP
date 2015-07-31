@@ -170,10 +170,8 @@ function tree_open_close_dir(&$current,$target,$deplie=array()){
 		$visible = @isset($deplie[$chemin.$open]);
 		$chemin .= $open . "/";
 		$output .= "<li>";
-		$output .= $visible? bouton_block_visible($chemin):bouton_block_invisible($chemin);
-		$output .= "<span onclick=\"jQuery(this).prev().click();\">$chemin</span>\n";
-
-		$output .= $visible? debut_block_visible($chemin):debut_block_invisible($chemin);
+		$output .= bouton_block_depliable($chemin,$visible);
+		$output .= debut_block_depliable($visible);
 
 		$output .= "<ul>\n";
 	}
@@ -305,7 +303,6 @@ function ligne_plug($plug_file, $actif, $id){
 	}
 	$id_input++;
 
-	//$s .= bouton_block_invisible("$plug_file");
 	$url_stat = generer_url_ecrire(_request('exec'),"plug=".urlencode($plug_file));
 	$s .= "<a href='$url_stat' rel='info'>$nom</a>";
 

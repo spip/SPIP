@@ -1675,17 +1675,17 @@ function enfant_rub($collection){
 				}
 			}
 	
-			$les_enfants = "\n<div class='enfants'>" .
-			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
-			  (is_string($logo) ? $logo : '') .
-			  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
-			  (!acces_restreint_rubrique($id_rubrique) ? "" :
+			$lib_bouton = (!acces_restreint_rubrique($id_rubrique) ? "" :
 			   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
-			  " <span dir='$lang_dir'><b><a href='" . 
+			  " <span dir='$lang_dir'><a href='" . 
 			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
 			  "'>".
 			  typo($titre) .
-			  "</a></b></span>" .
+			  "</a></span>";
+			$les_enfants = "\n<div class='enfants'>" .
+			  debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
+			  (is_string($logo) ? $logo : '') .
+			  (!$les_sous_enfants ? $lib_bouton : bouton_block_depliable($lib_bouton,false,"enfants$id_rubrique")) .
 			  (!$descriptif ? '' : "\n<div class='verdana1'>$descriptif</div>") .
 			  (($spip_display == 4) ? '' : $les_sous_enfants) .
 			  "\n<div style='clear:both;'></div>"  .
@@ -1710,7 +1710,7 @@ function sous_enfant_rub($collection2){
 	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 
 	if (!spip_num_rows($result3)) return '';
-	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+	$retour = debut_block_depliable(false,"enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
 	while($row=spip_fetch_array($result3)){
 		$id_rubrique2=$row['id_rubrique'];
 		$id_parent2=$row['id_parent'];

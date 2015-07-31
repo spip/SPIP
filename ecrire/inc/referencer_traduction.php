@@ -129,29 +129,16 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	if ($langue_article)
 		$bouton .= "&nbsp; (".traduire_nom_langue($langue_article).")";
 
-	if ($flag === 'ajax')
-		$res = debut_cadre_enfonce('langues-24.gif', true, "", 
-				bouton_block_visible('languearticle,lier_traductions')
-				. $bouton)
-			. debut_block_visible('languearticle')
-			. $reponse
-			. fin_block()
-			. $liste
-			. debut_block_visible('lier_traductions')
-			. $form
-			. fin_block()
-			. fin_cadre_enfonce(true);
-	else $res =  debut_cadre_enfonce('langues-24.gif', true, "",
-				bouton_block_invisible('languearticle,lier_traductions')
-				. $bouton)
-			. debut_block_invisible('languearticle')
-			. $reponse
-			. fin_block()
-			. $liste
-			. debut_block_invisible('lier_traductions')
-			. $form
-			. fin_block()
-			. fin_cadre_enfonce(true);
+	$res = debut_cadre_enfonce('langues-24.gif', true, "", 
+			bouton_block_depliable($bouton,$flag === 'ajax','languearticle,lier_traductions'))
+		. debut_block_depliable($flag === 'ajax','languearticle')
+		. $reponse
+		. fin_block()
+		. $liste
+		. debut_block_depliable($flag === 'ajax','lier_traductions')
+		. $form
+		. fin_block()
+		. fin_cadre_enfonce(true);
 	return ajax_action_greffe("referencer_traduction-$id_article", $res);
 }
 

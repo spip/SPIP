@@ -84,13 +84,13 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 					echo "\n<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
 				}
 
-				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
 				
-				echo "<span class='verdana1'>";	
-				echo "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>";
-				
-				
-				echo "</span>";
+				if ( $largeur_rouge > 2) 
+					echo bouton_block_depliable("<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>","stats$id_rubrique");
+				else
+					echo 	"<span class='verdana1'>",
+					  "<a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "' style='color: black;' title=\"$descriptif\">$titre</a>",
+					  "</span>";
 				echo "</td>\n<td align='right' style='border-bottom: 1px solid #aaaaaa; width:" . ($taille+5) ."px'>";
 				
 				
@@ -109,7 +109,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 		
 		if ($largeur_rouge > 0) {
 			$niveau++;
-			echo debut_block_invisible("stats$id_rubrique");
+			echo debut_block_depliable(false,"stats$id_rubrique");
 			enfants_aff($id_rubrique,$largeur_rouge, $critere, $visites_abs+$gauche);
 			echo fin_block();
 			$niveau--;

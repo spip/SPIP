@@ -80,15 +80,9 @@ function inc_editer_mot_dist($objet, $id_objet, $cherche_mot, $select_groupe, $f
 	$form = afficher_mots_cles($flag, $objet, $id_objet, $table, $table_id, $url_base, $visible);
 
 	// Envoyer titre + div-id + formulaire + fin
-	if ($flag){
-		if ($visible)
-			$bouton = bouton_block_visible("lesmots");
-		else
-			$bouton =  bouton_block_invisible("lesmots");
-	} else $bouton = '';
-
-	$bouton .= _T('titre_mots_cles').aide ("artmots");
-
+	$bouton = _T('titre_mots_cles').aide ("artmots");
+	if ($flag)
+		$bouton = bouton_block_depliable($bouton,$visible,"lesmots");
 	$res = debut_cadre_enfonce("mot-cle-24.gif", true, "", $bouton)
 	  . $reponse
 	  . $form
@@ -278,18 +272,7 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 	
 	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($cond_id_groupes_vus)"));
 
-	if ($visible)
-		$res = debut_block_visible("lesmots");
-	else if ($nb_groupes > 0) {
-		$res = debut_block_visible("lesmots");
-			// vilain hack pour redresser un triangle
-		$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
-		if ($GLOBALS['browser_layer'])
-			$res .= http_script("
-				triangle = findObj('triangle' + $couche_a_redresser);
-				if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
-	} else $res = debut_block_invisible("lesmots");
-
+	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
 	if ($nombre_mots_associes > 3) {
 		$res .= "<div style='text-align: right' class='arial1'>"
 		  . ajax_action_auteur('editer_mot', "$id_objet,-1,$table,$table_id,$objet", $url_base, "$table_id=$id_objet", array(_T('info_retirer_mots'),''),"&id_objet=$id_objet&objet=$objet")

@@ -179,7 +179,7 @@ function choix_rubriques_admin_restreint($auteur) {
 
 		$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-		$res .= debut_block_visible("statut$id_auteur")
+		$res .= debut_block_depliable(true,"statut$id_auteur")
 		. "\n<div id='ajax_rubrique' class='arial1'><br />\n"
 		. "<b>"
 		. $label 

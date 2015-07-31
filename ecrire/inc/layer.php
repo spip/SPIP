@@ -24,139 +24,51 @@ $compteur_block = rand(1,2500)*500;	// astuce idiote pour que les blocs ahah n'a
 function block_parfois_visible($nom, $invite, $masque, $style='', $visible=false){
 	if (!$GLOBALS['browser_layer']) return '';
 
-	$bouton = $visible
-	? bouton_block_visible($nom)
-	: bouton_block_invisible($nom);
-
-	$nom = 'Layer' . renomme_block($nom);
-
+	$bouton = bouton_block_depliable($invite,$visible,$nom);
 	// initialement invisible, seulement si on sait rendre visible
 	if (!$visible AND _SPIP_AJAX)
 		$visible = 'display:none;';
 	else 	$visible = 'display:block;';
 
 	return "\n"
-	. "<div style='$style'>"
-	. $bouton
-	. $invite
-	. '</div>'
-	. "<div id='$nom' style='$visible'>"
+	. bouton_block_depliable($invite,$visible,$nom)
+	. debut_block_depliable($visible,$nom)
 	. $masque
-	. '<div style="clear: both;"></div></div>';
+	. fin_block();
 }
 
-
-// http://doc.spip.org/@renomme_block
-function renomme_block($nom_block)
-{
-	global $numero_block, $compteur_block;
-	if (!isset($numero_block[$nom_block])){
-		$compteur_block++;
-		$numero_block[$nom_block] = $compteur_block;
-	}
-	return $numero_block["$nom_block"];
-}
-
-// http://doc.spip.org/@debut_block_visible
-function debut_block_visible($nom_block){
-	global $browser_layer;
-	if (!$browser_layer) return '';
-	return "<div id='Layer".renomme_block($nom_block)."' style='display: block;'>";
-
-}
-
-// http://doc.spip.org/@debut_block_invisible
-function debut_block_invisible($nom_block){
-	global $browser_layer;
-	if (!$browser_layer) return '';
-
+function debut_block_depliable($deplie,$id=""){
+	$class=' deplie';
 	// si on n'accepte pas js, ne pas fermer
-	if (!_SPIP_AJAX)
-		return debut_block_visible($nom_block);
-
-	return "<div id='Layer".renomme_block($nom_block)."' style='display: none;'>";
+	if (_SPIP_AJAX AND !$deplie)
+		$class="";
+	return "<div ".($id?"id='$id' ":"")."class='bloc_depliable$class'>";	
 }
-
 // http://doc.spip.org/@fin_block
 function fin_block() {
-	if ($GLOBALS['browser_layer'])
-		return "<div style='clear: both;'></div></div>";
+	return "<br class='nettoyeur' /></div>";
 }
-
-// http://doc.spip.org/@bouton_block_invisible
-function bouton_block_invisible($nom_block, $icone='') {
-	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
-	if (!$browser_layer) return '';
-	$blocks = explode(",", $nom_block);
-	$couches = array();
-	for ($index=0; $index < count($blocks); $index ++){
-		$nom_block = $blocks[$index];
-
-		if (!isset($numero_block[$nom_block])){
-			$compteur_block++;
-			$numero_block[$nom_block] = $compteur_block;
-		}
-
-		if (!$icone) {
-			$icone = "deplierhaut$spip_lang_rtl.gif";
-			$couches[] = array($numero_block[$nom_block],0);
-		}
-		else
-			$couches[] = array($numero_block[$nom_block],1);
+// $texte : texte du bouton
+// $deplie : true ou false
+// $ids : id des div lies au bouton (facultatif, par defaut c'est le div.bloc_depliable qui suit)
+function bouton_block_depliable($texte,$deplie,$ids=""){
+	$bouton_id = substr(md5($texte.microtime()),8);
+	$class= $deplie?" deplie":"";
+	if (strlen($ids)){
+		$cible = explode(',',$ids);
+		$cible = 'div#'.implode(",div#",$cible);
+		$bouton_id = "";
 	}
-	return produire_acceder_couche($couches, $numero_block[$nom_block], $icone);
-}
-
-
-// http://doc.spip.org/@bouton_block_visible
-function bouton_block_visible($nom_block){
-	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
-	if (!$browser_layer) return '';
-	$blocks = explode(",", $nom_block);
-	$couches = array();
-	for ($index=0; $index < count($blocks); $index ++){
-		$nom_block = $blocks[$index];
-
-		if (!isset($numero_block[$nom_block])){
-			$compteur_block++;
-			$numero_block[$nom_block] = $compteur_block;
-		}
-
-		$couches[] = array($numero_block[$nom_block],0);
-
+	else{
+		$cible = "#$bouton_id + div.bloc_depliable";
 	}
-
-	return produire_acceder_couche($couches, $numero_block[$nom_block], "deplierbas.gif");
-}
-
-// http://doc.spip.org/@produire_acceder_couche
-function produire_acceder_couche($couches, $nom, $icone) {
-
-	global $spip_lang_rtl;
-	// ne rien afficher si js desactive
-	if (!_SPIP_AJAX)
-		return '';
-
-	$onclick = array();
-	foreach($couches as $i=>$couche)
-		$onclick[] = 'swap_couche(' . $couche[0]
-			. ",'$spip_lang_rtl','"
-			. _DIR_IMG_PACK."',"
-			. $couche[1].');';
-
-	$t = _T('info_deplier');
-
-	return 
-	'<img id="triangle'.$nom.'" src="'
-	  . _DIR_IMG_PACK . $icone
-	  . '" alt="'
-	  . $t
-	  . '" title="'
-	  . $t
-	  . '" class="swap-couche"
-	onclick="'
-	  . join(' ',$onclick).'" />';
-
+	return "<div "
+	  .($bouton_id?"id='$bouton_id' ":"")
+	  ."class='bouton_depliable$class'"
+	  ." onclick=\"jQuery('$cible').toggleClass('deplie');jQuery(this).toggleClass('deplie');\""
+	  ." onmouseover=\"jQuery(this).addClass('hover');\""
+	  ." onmouseout=\"jQuery(this).removeClass('hover');\""
+	  .">$texte</div>";
 }
 
 //

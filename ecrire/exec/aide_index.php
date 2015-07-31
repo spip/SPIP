@@ -375,16 +375,9 @@ function fin_rubrique() {
 
 	if ($afficher_rubrique && count($ligne_rubrique)) {
 		echo "<div class='rubrique'>";
-		if ($ouvrir_rubrique)
-			echo bouton_block_visible($block_rubrique);
-		else 
-			echo bouton_block_invisible($block_rubrique);
-		echo $titre_rubrique;
+		echo bouton_block_depliable($titre_rubrique,$ouvrir_rubrique,$block_rubrique);
 		echo "</div>\n";
-		if ($ouvrir_rubrique)
-			echo debut_block_visible($block_rubrique);
-		else
-			echo debut_block_invisible($block_rubrique);
+		echo debut_block_depliable($ouvrir_rubrique,$block_rubrique);
 		echo "\n";
 		reset($ligne_rubrique);
 		while (list(, $ligne) = each($ligne_rubrique)) {
