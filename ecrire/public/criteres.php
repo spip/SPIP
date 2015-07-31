@@ -152,7 +152,7 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 		// dans ce cas, on retrouve la page par un appel a quete_debut_pagination,
 		// et on place dans Pile[0]['debut_xxx'] le vrai numero de page pour la balise #PAGINATION
 		// et dans Pile[0][@primary] = yyy pour permettre a la balise #EXPOSER d'exposer l'objet
-		.'($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($partie,1),'.intval($pas).',calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect)))'
+		.'($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($partie,1),'.intval($pas).',$result))'
 		// sinon on fait un intval sur la valeur demandee, et c'est tout
 		.':intval($partie)';
 

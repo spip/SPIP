@@ -325,7 +325,9 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 	
 	return  $count .
 		(!$flag_cpt  ? "" :
-			"\n\t\$Numrows['$id_boucle']['compteur_boucle'] = 0;")
+			"\n\t\$Numrows['$id_boucle']['compteur_boucle'] = 0;"
+		 .(($boucle->mode_partie)?"\n\tif (isset(\$debut_boucle) AND \$debut_boucle) sql_seek(\$result,\$Numrows['$id_boucle']['compteur_boucle']=\$debut_boucle);":"")
+			)
 		. '
 	$t0 = "";' .
 		$corps .
