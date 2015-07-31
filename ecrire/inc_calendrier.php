@@ -211,22 +211,22 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	$jour = date("d",$time);
 	$mois = date("m",$time);
 	$annee = date("Y",$time);
-	if (!$type) $type = $ltype ? $ltype : 'mois';
-	if (!isset($echelle)) $echelle = $lechelle;
-	if (!isset($lpartie_cal)) $partie_cal = $lpartie_cal;
+	if (!$ltype) $ltype = $type ? $type : 'mois';
+	if (!$lechelle) $lechelle = $echelle;
+	if (!$lpartie_cal) $lpartie_cal = $partie_cal;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script ? $script :
 						  $GLOBALS['REQUEST_URI']); 
-	if (!_DIR_RESTREINT) http_calendrier_titre($time, $type);
+	if (!_DIR_RESTREINT) http_calendrier_titre($time, $ltype);
 	if (!$evt) {
-	  $g = 'sql_calendrier_' . $type;
+	  $g = 'sql_calendrier_' . $ltype;
 	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));
 	  sql_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
 	  // si on veut les forums, decommenter
 #	  sql_calendrier_interval_forums($g($annee,$mois,$jour), $evt[0]);
 	}
-	$f = 'http_calendrier_' . $type;
-	return $f($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt);
+	$f = 'http_calendrier_' . $ltype;
+	return $f($annee, $mois, $jour, $lechelle, $lpartie_cal, $script, $ancre, $evt);
 
 }
 
