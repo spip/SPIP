@@ -50,7 +50,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 		if ($r = sql_fetsel("texte, site_obli, message", 'spip_petitions', "id_article = ".intval($args[0]))) {
 			$args[2] = $r['texte'];
 			// le signataire doit-il donner un site ?
-			$args[3] = ($r['site_obli'] == 'oui') ? '':' ';
+			$args[3] = ($r['site_obli'] == 'oui') ? ' ':'';
 			// le signataire peut-il proposer un commentaire
 			$args[4] = ($r['message'] == 'oui') ? ' ':'';
 		}
