@@ -880,15 +880,29 @@ function image_recadre($im,$width,$height,$position='center', $background_color=
 	$offset_width = $x_i-$width;
 	$offset_height = $y_i-$height;
 	$position=strtolower($position);
-	if (strpos($position,'left')!==FALSE)
-		$offset_width=0;
+	if (strpos($position,'left')!==FALSE){
+		if (preg_match(';left=(\d{1}\d+);', $position, $left)){
+			$offset_width=$left[1];	
+			spip_log($offset_width,"photospip");
+		}
+		else{
+			$offset_width=0;
+		}
+	}
 	elseif (strpos($position,'right')!==FALSE)
 		$offset_width=$offset_width;
 	else
 		$offset_width=intval(ceil($offset_width/2));
 
-	if (strpos($position,'top')!==FALSE)
-		$offset_height=0;
+	if (strpos($position,'top')!==FALSE){
+		if (preg_match(';top=(\d{1}\d+);', $position, $top)){
+			$offset_height=$top[1];
+			spip_log($offset_height,"photospip");
+		}
+		else{
+			$offset_height=0;
+		}
+	}
 	elseif (strpos($position,'bottom')!==FALSE)
 		$offset_height=$offset_height;
 	else
