@@ -1650,9 +1650,9 @@ function exec_info_dist() {
 		echo "pas admin";
 }
 
-function erreur_squelette($message='', $lieu='', $quoi='') {
+function erreur_squelette($message='', $lieu='') {
 	$debusquer = charger_fonction('debusquer', 'public');
-	$debusquer($message, $lieu, $quoi);
+	$debusquer($message, $lieu);
 }
 
 /**

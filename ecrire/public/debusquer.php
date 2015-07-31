@@ -60,19 +60,18 @@ function public_debusquer_dist($message='', $lieu='') {
 		}
 
 		$tableau_des_erreurs[] = array($message, $lieu);
-		spip_log("Debug: " . $quoi[0] . " (" . $GLOBALS['fond'] .")" );
+		spip_log("Debug: " . $message . " (" . $GLOBALS['fond'] .")" );
 		$GLOBALS['bouton_admin_debug'] = true;
 		// Permettre a la compil de continuer
 		if (is_object($lieu) AND property_exists($lieu, 'code') AND !$lieu->code)
 			$lieu->code = "''";
 		// Eviter les boucles infernales
 		if (!_DEBUG_MAX_SQUELETTE_ERREURS OR count($tableau_des_erreurs) <= _DEBUG_MAX_SQUELETTE_ERREURS) return ;
-		$lieu = $quoi = '';
+		$lieu = '';
 	}
 	include_spip('inc/autoriser');
 	if (autoriser('debug')) {
-		if ($tableau_des_erreurs) $lieu = $quoi = '';
-		debusquer_squelette($lieu, $quoi);
+		debusquer_squelette($tableau_des_erreurs ? '' : $lieu);
 		exit;
 	}
 }
@@ -352,13 +351,14 @@ function ancre_texte($texte, $fautifs=array(), $nocpt=false)
 // l'environnement graphique du debuggueur 
 // fin de course pour unhappy-few.
 
-function debusquer_squelette ($texte, $fonc) {
+function debusquer_squelette ($texte) {
 	global $debug_objets ;
 
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
 	// - ca fait 2 headers !
 	if (ob_get_length()) ob_end_clean();
+	$fonc = _request('var_mode_objet');
 	echo debusquer_entete($fonc ? $fonc : $debug_objets['principal']);
 	echo "<body style='margin:0 10px;'>\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'>";
 	echo affiche_erreurs_page($GLOBALS['tableau_des_erreurs'], '', 'text-align: center;');

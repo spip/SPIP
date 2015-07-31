@@ -71,7 +71,7 @@ function public_composer_dist($squelette, $mime_type, $gram, $source, $connect='
 			AND (_request('var_mode_objet') == $nom)
 			AND (_request('var_mode_affiche') == 'code')
 )
-				erreur_squelette('', $skel_code, $nom);
+				erreur_squelette('', $skel_code);
 		}
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
