@@ -71,7 +71,7 @@ jQuery.fn.positionner = function() {
 	var offset = jQuery(this).offset({'scroll':false});
 	var hauteur = parseInt(jQuery(this).css('height'));
 	var scrolltop = self['pageYOffset'] ||
-		$.boxModel && document.documentElement[ 'scrollTop' ] ||
+		jQuery.boxModel && document.documentElement[ 'scrollTop' ] ||
 		document.body[ 'scrollTop' ];
 	var h = jQuery(window).height();
 	var scroll=0;
