@@ -9,12 +9,13 @@
 // [(#EXTRA|extra{"nom_du_champ"})]
 
 
+/*
 
 //
 // Definition de tous les extras possibles
 //
 
-/*$GLOBALS['champs_extra'] = Array (
+$GLOBALS['champs_extra'] = Array (
 	'auteur' => Array (
 			"sexe" => "ligne|brut",
 			"age" => "ligne|propre|&Acirc;ge du capitaine",
@@ -80,7 +81,7 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 	if ($ensemble && isset($GLOBALS['champs_extra_proposes'][$type][$ensemble]))
 		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type][$ensemble]);
 	// ... sinon, les champs proposes par defaut
-	else if (isset($GLOBALS['champs_extra_proposes'][$type][0])) {
+	else if (isset($GLOBALS['champs_extra_proposes'][$type]['tous'])) {
 		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type]['tous']);
 	}
 	// sinon tous les champs extra du type
