@@ -119,48 +119,54 @@ function gadget_rubriques() {
 
 // http://doc.spip.org/@bandeau_rubrique
 function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
-	global $zdecal;
+	static  $zdecal = 0;
 	global $spip_ecran, $spip_display;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$titre_rubrique = preg_replace(',[\x00-\x1f]+,', ' ', $titre_rubrique);
-	$zdecal = $zdecal + 1;
 	// Limiter volontairement le nombre de sous-menus 
-	$zmax = 6;
+	$zmax = 5;
 
-	if ($zdecal == 1) $image = "secteur-12.gif";
+	if ($zdecal == 0) $image = "secteur-12.gif";
 	//else $image = "rubrique-12.gif";
 	else $image = '';
 	
 	if (strlen($image) > 1)
 		$image = " style='background-image:url(" . http_wrapper($image) .");'";
 
-	$arr_rub = extraire_article($id_rubrique);
+	$nav = '<a href="'
+	. generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
+	. '" class="bandeau_rub"'
+	. $image
+	. '>'
+	. supprimer_tags($titre_rubrique)
+	. "</a>\n";
 
+	if ($zdecal >= $zmax) return "<div>$nav</div>";
+
+	$arr_rub = extraire_article($id_rubrique);
 	$i = sizeof($arr_rub);
-	if ($i > 0 AND $zdecal < $zmax) {
-		$ret = "<div class='pos_r' style='z-index: $z;' onMouseOver=\"montrer('b_$id_rubrique');\" onMouseOut=\"cacher('b_$id_rubrique');\">";
-		$ret .= '<div class="brt"><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
-		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n"
-		  . '<div class="bandeau_rub" style="top: 15px; left: 15px; z-index: '.($z+1).';" id="b_'.$id_rubrique.'">';
-		
-		$ret .= '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
-		$ret .= "<div>\n";
-		
-		if ($nb_rub = count($arr_rub)) {
+	if (!$i) return "<div>$nav</div>";
+
+	$zdecal++;
+
+	$ret = "<div class='pos_r' \nonMouseOver=\"montrer('b_$id_rubrique');\"\nonMouseOut=\"cacher('b_$id_rubrique');\">"
+	  . '<div class="brt">'
+		. $nav
+		. "</div>\n<div class='bandeau_rub' style='top: 14px; left: 15px; z-index: " . 1 . ";' id='b_$id_rubrique'>"
+		. '<table cellspacing="0" cellpadding="0"><tr><td valign="top">';
+	if ($nb_rub = count($arr_rub)) {
 		  $nb_col = min(10,max(1,ceil($nb_rub / 10)));
 		  $ret_ligne = max(4,ceil($nb_rub / $nb_col));
-		}
-		$count_ligne = 0;
-		foreach( $arr_rub as $id_rub => $titre_rub) {
+	}
+	$count_ligne = 0;
+	foreach( $arr_rub as $id_rub => $titre_rub) {
 			$count_ligne ++;
 			
 			if ($count_ligne > $ret_ligne) {
 				$count_ligne = 0;
-				$ret .= "</div>";
 				$ret .= "</td>";
 				$ret .= '<td valign="top" style="border-left: 1px solid #cccccc;">';
-				$ret .= "<div style='width: 200px;'>";
 
 			}
 			if (autoriser('voir','rubrique',$id_rub)){
@@ -169,15 +175,9 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 				$i = $i - 1;
 			}
 		}
-		
-		$ret .= "</div></td></tr></table>\n";
-		
-		$ret .= "</div></div>\n";
-	} else {
-		$ret = '<div><a href="' . generer_url_ecrire('naviguer', 'id_rubrique='.$id_rubrique)
-		  . '" class="bandeau_rub"'.$image.'>'.supprimer_tags($titre_rubrique)."</a></div>\n";
-	}
-	$zdecal = $zdecal - 1;
+	$zdecal--;
+	$ret .= "</td></tr></table>\n";
+	$ret .= "</div></div>\n";
 	return $ret;
 }
 
