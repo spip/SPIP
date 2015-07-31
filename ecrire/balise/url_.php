@@ -168,14 +168,19 @@ function balise_URL_PAGE_dist($p) {
 function balise_URL_ECRIRE_dist($p) {
 
 	$code = interprete_argument_balise(1,$p);
-	if (preg_match("/^'[^']*'$/", $code))
-		$fonc = $code;
-	else {$code = "(\$f = $code)"; $fonc = '$f';}
-	$args = interprete_argument_balise(2,$p);
-	if ($args != "''" && $args!==NULL)
-		$fonc .= ',' . $args;
-
-	$p->code = '(tester_url_ecrire(' . $code . ') ? generer_url_ecrire(' . $fonc .') : "")';
+	if (!$code)
+		$fonc = "''";
+	else{
+		if (preg_match("/^'[^']*'$/", $code))
+			$fonc = $code;
+		else {$code = "(\$f = $code)"; $fonc = '$f';}
+		$args = interprete_argument_balise(2,$p);
+		if ($args != "''" && $args!==NULL)
+			$fonc .= ',' . $args;
+	}
+	$p->code = 'generer_url_ecrire(' . $fonc .')';
+	if ($code) 
+		$p->code = "(tester_url_ecrire($code) ?" . $p->code .'  : "")';
 	#$p->interdire_scripts = true;
 	return $p;
 }
