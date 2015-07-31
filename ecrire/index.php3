@@ -52,7 +52,7 @@ if ($spip_display != 4) {
 		if ($taille) {
 			$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
 		}
-		echo "<img src='../IMG/$fichier$fid' $taille_html alt='' />";
+		echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'><img src='../IMG/$fichier$fid' $taille_html border='0' alt='' /></a></div>";
 	}
 	
 	echo "<div class='verdana1'>";
@@ -121,8 +121,8 @@ if ($spip_display != 4) {
 		echo afficher_plus("auteurs.php3")."<b>"._T('icone_auteurs')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if ($nb_admin) echo "<li>"._T("info_administrateurs").": ".$nb_admin;
-		if ($nb_redac) echo "<li><b>"._T("info_redacteurs").": ".$nb_redac."</b>";
-		if ($nb_abonn) echo "<li><b>"._T("info_visiteurs").": ".$nb_abonn."</b>";
+		if ($nb_redac) echo "<li>"._T("info_redacteurs").": ".$nb_redac;
+		if ($nb_abonn) echo "<li>"._T("info_visiteurs").": ".$nb_abonn;
 		echo "</ul>";
 	}
 
