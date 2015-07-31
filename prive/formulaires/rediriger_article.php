@@ -42,7 +42,7 @@ function formulaires_rediriger_article_verifier_dist($id_article,$retour=''){
 	$erreurs = array();
 
 	if(($redirection = _request('redirection')) == $id_article || $redirection == 'art'.$id_article)
-		$erreurs['redirection'] = 'Vous essayez de rediriger l\'article sur lui-même.';
+		$erreurs['redirection'] = _T('info_redirection_boucle');
 
 	return $erreurs;
 }
