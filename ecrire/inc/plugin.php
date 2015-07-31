@@ -615,7 +615,7 @@ function plugin_get_infos($plug, $force_reload=false){
 				if (isset($arbre['options']))
 					$ret['options'] = $arbre['options'];
 				if (isset($arbre['licence']))
-					$ret['licence'] = $arbre['licence'];
+					$ret['licence'] = spip_xml_aplatit($arbre['licence']);
 				if (isset($arbre['install']))
 					$ret['install'] = $arbre['install'];
 				if (isset($arbre['fonctions']))
@@ -759,9 +759,6 @@ function plugin_verifie_conformite($plug,&$arbre){
 			}
 		}
 		
-		if (spip_xml_match_nodes(',^licence,',$arbre,$licence)){
-			$arbre['licence'] = $licence['licence'][0];
-		}		
 		$arbre['utilise'] = $utilise;
 		$path = array();
 		if (spip_xml_match_nodes(',^chemin,',$arbre,$paths)){
