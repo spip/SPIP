@@ -1354,7 +1354,9 @@ table.spip {
 }
 
 table.spip caption{
-	caption-side: top;
+	caption-side: top; /* bottom */
+	text-align:center;
+	background-color: #FCF4D0;
 }
 
 table.spip tr.row_first {
