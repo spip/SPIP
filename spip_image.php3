@@ -51,7 +51,6 @@ function ajout_image($source, $dest) {
 
 	// Securite
 	if (!verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)) {
-		@unlink($source);
 		exit;
 	}
 
@@ -103,8 +102,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	$result = mysql_query($query);
 	if ($row = @mysql_fetch_array($result)) {
 		$id_type = $row['id_type'];
-	} else
-		return;
+	}
+	else return;
 
 	//
 	// Preparation
