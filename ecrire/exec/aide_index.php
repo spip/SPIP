@@ -290,7 +290,7 @@ function help_frame_body($titre, $aide, $html, $lang_aide='')
 		$dir .
 		" lang='$lang'>".
 		help_body($aide) .
-	  	$html .
+		($aide ? $html : '').
 		'</body>';
 }
 
