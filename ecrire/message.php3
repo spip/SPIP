@@ -148,7 +148,7 @@ while($row = spip_fetch_array($result_message)) {
 	debut_droite();
 
 	if ($type == 'normal') {
-		$le_type = "MESSAGE".aide ("messut");
+		$le_type = _T('info_message_2').aide ("messut");
 		$la_couleur = "#0A9C60";
 		$couleur_fond = "#BDF0DB";
 	}

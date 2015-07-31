@@ -61,18 +61,39 @@ debut_droite();
 
 		echo _T("calendrier_synchro");
 
+	
+		echo debut_cadre_enfonce();
+		echo _T("calendrier_synchro_prive");
+
 		echo "<div>&nbsp;</div>";
 		
 		echo "<div style='float: left; width: 200px;'>";
-		icone_horizontale (_T("calendrier_synchro_lien"), "$adresse_site/spip_cal.php3?id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'), "calendrier-24.gif");
+			icone_horizontale (_T("calendrier_synchro_lien"), "$adresse_site/spip_cal.php3?id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'), "calendrier-24.gif");
 		echo "</div>";
 	
 		echo "<div style='float: right; width: 200px;'>";
-		
-		$webcal = ereg_replace("http.?://", "webcal://", $adresse_site);
-		
-		icone_horizontale (_T("calendrier_synchro_sync"), "$webcal/spip_cal.php3?id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'), "calendrier-24.gif");
+			$webcal = ereg_replace("http.?://", "webcal://", $adresse_site);
+			icone_horizontale (_T("calendrier_synchro_sync"), "$webcal/spip_cal.php3?id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'), "calendrier-24.gif");
 		echo "</div>";
+		echo fin_cadre_enfonce();
+
+
+
+		echo debut_cadre_enfonce();
+		echo _T("calendrier_synchro_public");
+
+		echo "<div>&nbsp;</div>";
+		
+		echo "<div style='float: left; width: 200px;'>";
+			icone_horizontale (_T("calendrier_synchro_lien"), "$adresse_site/spip_cal.php3?type=public", "calendrier-24.gif");
+		echo "</div>";
+	
+		echo "<div style='float: right; width: 200px;'>";
+			$webcal = ereg_replace("http.?://", "webcal://", $adresse_site);
+			icone_horizontale (_T("calendrier_synchro_sync"), "$webcal/spip_cal.php3?type=public", "calendrier-24.gif");
+		echo "</div>";
+		echo fin_cadre_enfonce();
+
 
 
 	echo fin_cadre_relief();
