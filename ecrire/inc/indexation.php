@@ -744,11 +744,19 @@ function requete_dico($val, $min_long = 3) {
 	//set logical operator between the various where parts
 	$val = $mod[2];
 	// cas normal
-	if ((strlen($val) > $min_long)
-	OR !preg_match("/^([A-Z][0-9A-Z]{1,".($min_long - 1)."})$/",$val)) {
+	if (strlen($val) > $min_long)
 	  return array("dico LIKE "._q($val. "%"), "dico = " . _q($val),$mode);
-	} else
-	  return array("dico = "._q($val."___"), "dico = "._q($val."___"),$mode);
+	else {
+		if (preg_match("/^([A-Z][0-9A-Z]{1,".($min_long - 1)."})$/",$val))
+			return array("dico = "._q($val."___"), "dico = "._q($val."___"),$mode);
+		else if (strlen($val)==$min_long)
+			return array("dico LIKE "._q($val."_%"), "dico = "._q($val),$mode);
+		else if (strlen($val))
+			return array("dico LIKE "._q($val.substr("______",0,$min_long+1-strlen($val))), "dico = " . _q($val),$mode);
+		else
+			return array("0=1","0=1");
+	}
+
 }
 
 
