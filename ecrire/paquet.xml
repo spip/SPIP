@@ -94,6 +94,7 @@
 	<pipeline nom="libeller_logo" action="" />
 	<pipeline nom="nettoyer_raccourcis_typo" action="" />
 	<pipeline nom="notifications" action="" />
+	<pipeline nom="notifications_envoyer_mails" action="" />
 	<pipeline nom="objet_compte_enfants" action="" />
 	<pipeline nom="optimiser_base_disparus" action="" />
 	<pipeline nom="prepare_recherche" action="" />
