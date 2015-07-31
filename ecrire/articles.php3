@@ -236,6 +236,7 @@ if ($row = mysql_fetch_array($result)) {
 	$maj = $row["maj"];
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
+	$referers = $row["referers"];
 }
 
 
@@ -319,6 +320,15 @@ if ($voir_en_ligne) {
 echo "</div>\n";
 
 fin_boite_info();
+
+$activer_statistiques = lire_meta("activer_statistiques");
+$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+
+if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non"){
+	echo "<p>";
+	if ($activer_statistiques_ref == "oui" AND $referers > 0) $aff_ref = "<br>$referers entr&eacute;es directes";
+	icone_horizontale("&Eacute;volution des visites<br>$visites visites$aff_ref", "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
+}
 
 
 //

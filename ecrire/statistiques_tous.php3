@@ -12,21 +12,6 @@ barre_onglets("statistiques", "tous");
 
 debut_gauche();
 
-
-debut_boite_info();
-
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo "<P align=left>".propre("Le syst&egrave;me de statistiques int&eacute;gr&eacute; &agrave; SPIP est volontairement rudimentaire (afin de ne pas alourdir la base de donn&eacute;es et de ne pas tracer les visiteurs du site). De ce fait, les nombres de visites indiqu&eacute;s ici doivent &ecirc;tre pond&eacute;r&eacute;s: ils servent uniquement d'{indication} sur la popularit&eacute; {relative} des articles et des rubriques. ");
-
-
-echo "</FONT>";
-
-fin_boite_info();
-
-
-
-
-
 debut_droite();
 
 if ($connect_statut != '0minirezo') {
@@ -48,29 +33,34 @@ if ($row = mysql_fetch_array($result)) {
 
 
 
+$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+if ($activer_statistiques_ref == "oui"){
+	echo "<font size=2 face='verdana,arial,helvetica'>";
+	if ($critere == "visites" OR !$critere) echo "[<b>par nombre de visites</b>] " ;
+		else  echo "[<a href='statistiques_tous.php3'>par nombre de visites</a>] ";
+	if ($critere == "referers") echo "[<b>par arriv&eacute;es directes sur la page</b>] ";
+		else echo "[<a href='statistiques_tous.php3?critere=referers'>par arriv&eacute;es directes sur la page</a>] ";
+	if ($critere == "popularite") echo "[<b>par popularit&eacute;</b>] ";
+		else echo "[<a href='statistiques_tous.php3?critere=popularite'>par popularit&eacute;</a>] ";
+	echo "</font><p>";
+}
 
-
-echo "<font size=2 face='verdana,arial,helvetica'><b>";
-echo "[<a href='statistiques_tous.php3'>par nombre de visites</a>] ";
-echo "[<a href='statistiques_tous.php3?critere=referers'>par arriv&eacute;es directes sur la page</a>] ";
-echo "[<a href='statistiques_tous.php3?critere=popularite'>par popularit&eacute;</a>] ";
-echo "</b></font><p>";
 
 if ($critere == "referers"){
-	afficher_articles("Les articles les plus visit&eacute;s depuis le d&eacute;but",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	echo propre("Les &laquo;acc&egrave;s directs sur la page&raquo; sont le nombre de visiteurs arriv&eacute;s directement {&agrave; l'int&eacute;rieur} du site depuis un lien ext&eacute;rieur, sans passer par la page d'accueil. Plus une page de votre site est r&eacute;f&eacute;renc&eacute;e sur des sites &agrave; fort traffic, plus le nombre d'arriv&eacute;es directes sur cette page sera important.")."<p>";
+	afficher_articles("Les articles les plus r&eacute;f&eacute;renc&eacute;s depuis le d&eacute;but",
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 ORDER BY referers DESC LIMIT 0,100", true);
 }
 else if ($critere == "popularite"){
-
 	echo propre("La Çpopularit&eacute;È est calcul&eacute;e d'apr&egrave;s le nombre d'arriv&eacute;es directes sur un article, multipli&eacute; par le nombre de visites. Un article devient donc &laquo;populaire&raquo; lorsqu'il fait l'objet d'un r&eacute;f&eacute;rencement sur d'autres sites et lorsqu'il est tr&egrave;s visit&eacute;.")."<p>";
-	afficher_articles("Les articles les plus visit&eacute;s depuis le d&eacute;but",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	afficher_articles("Les articles les plus populaires depuis le d&eacute;but",
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 ORDER BY popularite DESC LIMIT 0,100", true);
 }
 else{
 	afficher_articles("Les articles les plus visit&eacute;s depuis le d&eacute;but",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 ORDER BY visites DESC LIMIT 0,100", true);
 }
 

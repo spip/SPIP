@@ -12,20 +12,6 @@ barre_onglets("statistiques", "repartition");
 debut_gauche();
 
 
-debut_boite_info();
-
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo "<P align=left>".propre("Le syst&egrave;me de statistiques int&eacute;gr&eacute; &agrave; SPIP est volontairement rudimentaire (afin de ne pas alourdir la base de donn&eacute;es et de ne pas tracer les visiteurs du site). De ce fait, les nombres de visites indiqu&eacute;s ici doivent &ecirc;tre pond&eacute;r&eacute;s: ils servent uniquement d'{indication} sur la popularit&eacute; {relative} des articles et des rubriques. ");
-
-
-echo "</FONT>";
-
-fin_boite_info();
-
-
-
-
-
 debut_droite();
 
 if ($connect_statut != '0minirezo') {
@@ -33,10 +19,6 @@ if ($connect_statut != '0minirezo') {
 	fin_page();
 	exit;
 }
-
-
-
-
 
 //
 // Statistiques sur le site
