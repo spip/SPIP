@@ -51,66 +51,69 @@ function inc_signatures_dist($script, $id, $debut, $where, $order, $limit='', $t
 // http://doc.spip.org/@signatures_edit
 function signatures_edit($script, $id, $debut, $row, $type) {
 
-		$id_signature = $row['id_signature'];
-		$id_article = $row['id_article'];
-		$date_time = $row['date_time'];
-		$nom_email= typo(echapper_tags($row['nom_email']));
-		$ad_email = echapper_tags($row['ad_email']);
-		$nom_site = typo(echapper_tags($row['nom_site']));
-		$url_site = echapper_tags($row['url_site']);
-		$statut = $row['statut'];
+	global $spip_lang_right, $spip_lang_left;
+	$id_signature = $row['id_signature'];
+	$id_article = $row['id_article'];
+	$date_time = $row['date_time'];
+	$nom_email= typo(echapper_tags($row['nom_email']));
+	$ad_email = echapper_tags($row['ad_email']);
+	$nom_site = typo(echapper_tags($row['nom_site']));
+	$url_site = echapper_tags($row['url_site']);
+	$statut = $row['statut'];
 		
-		$arg = ($statut=="publie") ? "-$id_signature" : $id_signature;
+	$arg = ($statut=="publie") ? "-$id_signature" : $id_signature;
 
-		$retour = redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
-		$res = "";
+	$retour = redirige_action_auteur('editer_signatures', $arg, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
+	$res = "";
 		
-		if ($statut=="poubelle"){
+	if ($statut=="poubelle"){
 			$res .= "<table width='100%' cellpadding='2' cellspacing='0' border='0'><tr><td style='background-color: #ff0000'>";
 		}
 		
-		$res .= "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
+	$res .= "<table id='signature$id_signature' width='100%' cellpadding='3' cellspacing='0'><tr><td class='verdana2 toile_foncee' style='color: white;'><b>"
  		.  ($nom_site ? "$nom_site / " : "")
 		.  $nom_email
 		.  "</b></td></tr>"
 		.  "<tr><td style='background-color: #ffffff' class='serif'>";
 				
-		if ($statut=="publie"){
-			$res .= icone_inline (_T('icone_supprimer_signature'),
-				$retour,
-				"forum-interne-24.gif", 
-				"supprimer.gif",
-				"right",
-				false);
-		} elseif ($statut=="poubelle"){
+	if  ($statut=="poubelle"){
 			$res .= icone_inline (_T('icone_valider_signature'),
 				$retour,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
 				false);
-		} else $res .= icone_inline (_L('relancer le signataire'),
+	} else {
+		$res .= icone_inline (_T('icone_supprimer_signature'),
+				$retour,
+				"forum-interne-24.gif", 
+				"supprimer.gif",
+				"right",
+				false);
+		if ($statut<>"publie") {
+			$res .= icone_inline (_L('relancer le signataire'),
 				$retour,
 				"forum-interne-24.gif", 
 				"creer.gif",
 				"right",
 				false);
-		
-		$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />";
-		if ($statut=="poubelle"){
-			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />";
 		}
-		if (strlen($url_site)>6) {
+	}
+	$res .= "<span class='spip_small'>".date_interface($date_time)."</span><br />";
+	if ($statut=="poubelle"){
+			$res .= "<span class='spip_x-small' style='color: red;'>"._T('info_message_efface')."</span><br />";
+	}
+	if (strlen($url_site)>6) {
 			if (!$nom_site) $nom_site = _T('info_site');
 			$res .= "<span class='spip_x-small'>"._T('info_site_web')."</span> <a href='$url_site'>$nom_site</a><br />";
 		}
-		if (strlen($ad_email)>0){
+	if (strlen($ad_email)>0){
 			$res .= "<span class='spip_x-small'>"._T('info_adresse_email')."</span> <a href='mailto:$ad_email'>$ad_email</a><br />";
-		}
+	}
 
-		$res .= '<br />' . message_de_signature($row);
+	$res .= '<br />' . message_de_signature($row);
 		
-		if (!$id) {
+	if (!$id) {
 			$r = sql_fetsel("titre, statut", "spip_articles", "id_article=$id_article");
 
 			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
@@ -123,13 +126,13 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 			  . "'>"
 			  . typo($r['titre'])
 			  . "</a>";
-		}
-		$res .= "</td></tr></table>";
+	}
+	$res .= "</td></tr></table>";
 		
-		if ($statut=="poubelle"){
+	if ($statut=="poubelle"){
 			$res .= "</td></tr></table>";
-		}
+	}
 
-		return $res;
+	return $res;
 }
 ?>

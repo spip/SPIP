@@ -24,7 +24,7 @@ function exec_petitionner_dist()
 	} else {
 		include_spip('inc/actions');
 		$petitionner = charger_fonction('petitionner', 'inc');
-		ajax_retour($petitionner($id_article, $script, "&id_article=$id_article", 'ajax'));
+		ajax_retour($petitionner($id_article, $script, "id_article=$id_article", 'ajax'));
 	}
 }
 ?>

@@ -1179,7 +1179,7 @@ function chapo_redirige($chapo, $url=false)
 }
 
 // http://doc.spip.org/@chapo_redirigetil
-function chapo_redirigetil($chapo) { return $chapo[0] == '=';}
+function chapo_redirigetil($chapo) { return $chapo && $chapo[0] == '=';}
 
 // http://doc.spip.org/@traiter_poesie
 function traiter_poesie($letexte)

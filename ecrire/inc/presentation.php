@@ -402,7 +402,7 @@ function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 }
 
 // http://doc.spip.org/@navigation_pagination
-function navigation_pagination($num_rows, $nb_aff=10, $href=null, $onclick=false, $tmp_var=null) {
+function navigation_pagination($num_rows, $nb_aff=10, $href=null, $on='', $tmp_var=null) {
 
 	$texte = '';
 	$self = self();
@@ -436,7 +436,7 @@ function navigation_pagination($num_rows, $nb_aff=10, $href=null, $onclick=false
 			}
 			else {
 				$script = parametre_url($self, $tmp_var, $deb-1);
-				if ($onclick) {
+				if ($on) {
 					$on = "\nonclick=\"return charger_id_url('"
 					. parametre_url($href, $tmp_var, $deb-1)
 					. "','"

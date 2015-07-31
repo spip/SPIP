@@ -24,7 +24,7 @@ function balise_FORMULAIRE_RECHERCHE ($p)
 // http://doc.spip.org/@balise_FORMULAIRE_RECHERCHE_stat
 function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 	// filtres[0] doit etre un script (a revoir)
-	return array($filtres[0], $args[0]);
+	return array($filtres[0], $args ? $args[0] : '');
 }
  
 // http://doc.spip.org/@balise_FORMULAIRE_RECHERCHE_dyn

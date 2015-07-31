@@ -26,6 +26,7 @@ function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 	include_spip('inc/presentation');
 
 	$titre =' ';
+	if (!preg_match('/^\w+$/',$type)) $type = 'public';
 	$statut='new';
 	$where = '';
 	if ($id_signature) {
@@ -59,7 +60,7 @@ function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 			$debut, 
 			$where . "(statut='publie' OR statut='poubelle')",
 			"date_time DESC",
-			 10,
+			 15,
 			 $type);
 
 		if (_request('var_ajaxcharset'))
@@ -70,9 +71,15 @@ function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 
 function controle_petition_page($id_article, $debut, $type, $titre, $statut, $r)
 {
-	$args = ($id_article ? "id_article=$id_article" :'')
-		. ($debut ? "debut=$debut" : '')
-		. '&type=';
+	$arg = ($id_article ? "id_article=$id_article&" :'');
+	$arg2 = ($debut ? "debut=$debut&" : '');
+	if ($type=='public') {
+	  $argp = $arg2;
+	  $argi = '';
+	} else {
+	  $argi = $arg2;
+	  $argp = '';
+	}
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
@@ -83,8 +90,8 @@ function controle_petition_page($id_article, $debut, $type, $titre, $statut, $r)
 	echo gros_titre(_T('titre_suivi_petition'),'', false);
 
 	echo debut_onglet();
-	echo onglet(_L('Signatures confirm&eacute;es'), generer_url_ecrire('controle_petition', $args . "public"), "public", $type=='public', "forum-public-24.gif");
-	echo onglet(_L('Signatures en attente de validation'), generer_url_ecrire('controle_petition', $args . "interne"), "interne", $type=='interne', "forum-interne-24.gif");
+	echo onglet(_L('Signatures confirm&eacute;es'), generer_url_ecrire('controle_petition', $argp . $arg . "type=public"), "public", $type=='public', "forum-public-24.gif");
+	echo onglet(_L('Signatures en attente de validation'), generer_url_ecrire('controle_petition', $argi . $arg .  "type=interne"), "interne", $type=='interne', "forum-interne-24.gif");
 	echo fin_onglet(), '<br /><br />';
 
 	if (!$titre)
