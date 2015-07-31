@@ -58,12 +58,10 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 //
 // Destruction des fichiers caches invalides
 //
-// NE PAS appeler ces fonctions depuis l'espace prive 
-// car openbase_dir peut leur interdire l'acces au repertoire de cache
 
 // Securite : est sur que c'est un cache
 function retire_cache($cache) {
-	if (!_DIR_RESTREINT) return;
+
 	if (preg_match('|^' . _DIR_CACHE .
 		"([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
 		       $cache)) {
@@ -75,7 +73,6 @@ function retire_cache($cache) {
 
 // Supprimer les caches marques "x"
 function retire_caches($chemin = '') {
-	if (!_DIR_RESTREINT) return;
 
 	// recuperer la liste des caches voues a la suppression
 	$suppr = array();
