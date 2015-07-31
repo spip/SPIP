@@ -455,18 +455,6 @@ function applique_filtres($p) {
 	return $code;
 }
 
-// http://doc.spip.org/@chercher_filtre
-function chercher_filtre($fonc) {
-		foreach (
-		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
-			if (function_exists($f)
-			OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
-				AND is_callable(array($regs[1], $regs[2]))
-			)) {
-				return $f;
-			}
-		return NULL;
-}
 // Cf. function pipeline dans ecrire/inc_utils.php
 // http://doc.spip.org/@compose_filtres
 function compose_filtres(&$p, $code) {
