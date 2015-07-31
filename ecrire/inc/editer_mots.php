@@ -18,7 +18,7 @@ include_spip('inc/mots');
 // http://doc.spip.org/@inc_editer_mots_dist
 function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $flag, $visible = false, $url_base='') {
 	if ($GLOBALS['meta']["articles_mots"] == 'non')	return '';
-
+	if (!preg_match('/^[0-9, ]*$/', $select_groupe)) return '';
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$nom = table_objet($objet);
 	$desc = $trouver_table($nom);
@@ -104,9 +104,7 @@ function recherche_mot_cle($cherche_mots, $id_groupe, $objet, $id_objet, $table,
 	else if ($table == 'breves') $ou .= _T('info_la_breve');
 	else if ($table == 'rubriques') $ou .= _T('info_la_rubrique');
 
-	$result = sql_select("id_mot, titre", "spip_mots", "id_groupe IN ("
-		. join(',', array_map('sql_quote', explode(',', $id_groupe)))
-		. ")");
+	$result = sql_select("id_mot, titre", "spip_mots", (!$id_groupe ? '' : sql_in('id_groupe', $id_groupe)));
 
 	$table_mots = array();
 	$table_ids = array();
