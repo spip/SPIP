@@ -388,9 +388,10 @@ function exec_aide_index_dist()
 {
 	global $help_server, $spip_lang;
 
-	if (_request('var_lang')) changer_langue($lang = _request('var_lang'));
+	if (_request('var_lang'))
+		changer_langue($lang = preg_replace(',[^\w-]+,', '', _request('var_lang')));
 	if (_request('lang'))
-	  changer_langue($lang = _request('lang')); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
+		changer_langue($lang = preg_replace(',[^\w-]+,', '', _request('lang'))); # pour le cas ou on a fait appel au menu de changement de langue (aide absente dans la langue x)
 	else $lang = $spip_lang;
 
 	if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', _request('img'), $regs))
