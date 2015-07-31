@@ -6,6 +6,7 @@
 		<BOUCLE_rubriques(RUBRIQUES) {id_parent}{id_rubrique?} {par num titre,titre}{statut==.*}{pagination #GET{nb} #GET{nomp}}>
 			<li class="item">
 				<a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE})]"
+				[hreflang="(#ENV{lang}|=={#LANG}|non|?{#LANG})"]
 				title="[(#VAL{rubrique}|objet_info{texte_objet}|_T) #ID_RUBRIQUE]"
 				onclick="jQuery('#reloadmain').attr('href',this.href).followLink();return false;"
 				><strong>[(#STATUT|puce_statut{rubrique}) ][(#TITRE|couper{100}|sinon{<:info_sans_titre:>})]</strong></a>

@@ -136,7 +136,7 @@ p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: #GET{m
 /* Liens */
 a {}
 a:hover {}
-a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+a[hreflang]:after { content: "\0000a0[" attr(hreflang) "]"; }
 .on { font-weight: bold; }
 
 /* end */
@@ -193,5 +193,5 @@ a.spip_out,a[rel=external] { color: #009; } /* liens sortants */
 a.spip_url { color: #009; } /* liens url sortants */
 a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
 a.spip_glossaire:hover { text-decoration: underline overline; }
-a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+a[hreflang]:after { content: "\0000a0[" attr(hreflang) "]";color:#888; }
 .on { font-weight: bold; } /* liens exposes */
