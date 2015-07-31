@@ -146,8 +146,17 @@ function calculer_balise($nom, $p) {
 	if (ereg('^LOGO_', $nom))
 		return calculer_balise_logo($p);
 
-	// ca doit etre un champ SQL homonyme,
+	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
+
+	// Compatibilite ascendante avec les couleurs html (#FEFEFE) :
+	// si le champ SQL n'est pas trouve ET que la balise a une forme de
+	// couleur, retourner la couleur.
+	if (ereg("^[\$]Pile[[]0[]][[]'([A-F]{1,6})'[]]$", $p->code, $match)) {
+		$p->code = "'#". $match[1]."'";
+		$p->statut = 'php';
+	}
+
 	return $p;
 }
 
