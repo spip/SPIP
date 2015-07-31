@@ -70,19 +70,19 @@ ul.etapes li.etape{
 	height:2em;
 	padding-top:0.7em;
 	text-align:center;
-	border:2px solid $couleur_foncee;
+	border:2px solid #3874b0; /* couleur foncee a remettre */
 	margin:0 0.5em 0 0;
 }
 ul.etapes li.etape.on{
-	background-color:$couleur_claire;
+	background-color:#edf3fe; /*  couleur claire a remettre */
 }
 ul.etapes li.etape.off{
 	color:#aaa;
 	border:2px solid #888;
 }
 ul.etapes li.etape.encours{
-	background-color:$couleur_foncee;
-	border:2px solid $couleur_claire;
+	background-color:#3874b0; /* couleur foncee a remettre */
+	border:2px solid #edf3fe; /*  couleur claire a remettre  */
 	color:#fff;
 }
 EOF;

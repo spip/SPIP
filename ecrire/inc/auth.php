@@ -187,6 +187,7 @@ function inc_auth_dist() {
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
 
 	$GLOBALS['auteur_session'] = $row;
+	$GLOBALS['auteur_session']['prefs'] = @unserialize($GLOBALS['auteur_session']['prefs']);
 
 	if (is_string($droits)) {
 	  // ordres mineurs: redac, visiteur ou indefini

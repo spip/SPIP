@@ -38,10 +38,8 @@ function exec_admin_plugin() {
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 
-	global $couleur_claire;
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
-	$dir_img_pack = _DIR_IMG_PACK;
 	echo "<style type='text/css'>\n";
 	echo <<<EOF
 div.cadre-padding ul li {
@@ -69,7 +67,7 @@ div.cadre-padding ul li li div.nomplugin a {
 	-moz-outline:0 !important;
 }
 div.cadre-padding ul li li div.nomplugin_on {
-	background:$couleur_claire;
+	background: #edf3fe /* couleur claire a remettre avec une CSS */
 }
 div.cadre-padding ul li li div.nomplugin_on>a {
 	font-weight:bold;
@@ -276,7 +274,7 @@ function ligne_plug($plug_file, $actif, $id){
 	$info = plugin_get_infos($plug_file);
 	$s = "<div class='nomplugin ".($actif?'nomplugin_on':'')."'>";
 	if (isset($info['erreur'])){
-		$s .=  "<div style='background:".$GLOBALS['couleur_claire']."'>";
+		$s .=  "<div class='toile_claire'>";
 		$erreur = true;
 		foreach($info['erreur'] as $err)
 			$s .= "/!\ $err <br/>";

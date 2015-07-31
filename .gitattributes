@@ -251,6 +251,7 @@ dist/spip.png -text
 dist/style_prive.html -text
 dist/style_prive_defaut.css -text
 dist/style_prive_ie.html -text
+dist/style_svg.html -text
 dist/vignettes/abw.png -text
 dist/vignettes/ai.png -text
 dist/vignettes/aiff.png -text

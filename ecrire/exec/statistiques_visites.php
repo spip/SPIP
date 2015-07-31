@@ -365,12 +365,12 @@ if ($connect_statut != '0minirezo') {
 		if ($date_premier < $date_debut)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
 				     'loupe-moins.gif',
-				     "style='border: 0px; vertical-align:center;'",
+				     "style='border: 0px; vertical-align: middle;'",
 				     _T('info_zoom'). '-'), "&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
 				     'loupe-plus.gif',
-				     "style='border: 0px; vertical-align:center;'",
+				     "style='border: 0px; vertical-align: middle;'",
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
 	
@@ -591,8 +591,6 @@ if ($GLOBALS['accepte_svg']) {
 			echo "<tr><td height='10' valign='bottom'>";		
 			echo "<span class='arial1 spip_x-small'><b>0</b></span>";
 			echo "</td>";
-			
-			
 			echo "</tr></table>";
 			echo "</div></td>";
 			echo "</tr></table>";
@@ -607,7 +605,7 @@ if ($GLOBALS['accepte_svg']) {
 					if (date("m", $jour) == 1) $afficher = "<b>".annee(date("Y-m-d", $jour))."</b>";
 					
 				
-					$gauche = ($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
+					$gauche = floor($jour - $date_debut) * $largeur / ((24*3600)*$agreg);
 					
 					if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
 						echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
