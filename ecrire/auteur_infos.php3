@@ -181,7 +181,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 			url_site='".addslashes($auteur['url_site'])."',
 			pgp='".addslashes($auteur['pgp'])."',
 			statut='".addslashes($auteur['statut'])."'
-			$addextra
+			$add_extra
 			WHERE id_auteur=".$auteur['id_auteur'];
 		spip_query($query) OR die($query);
 	}
@@ -282,7 +282,7 @@ echo "</TEXTAREA>\n";
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, 'auteur', $auteur['statut']);
+		extra_saisie($auteur['extra'], 'auteur', $auteur['statut']);
 	}
 
 fin_cadre_relief();
