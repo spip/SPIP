@@ -15,6 +15,14 @@ if (!$mois){
   $annee=$annee_today;
 }
 
+$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
+$jour = journum($date);
+$mois = mois($date);
+$annee = annee($date);
+
+
+$afficher_bandeau_calendrier = true;
+
 debut_page(nom_jour("$annee-$mois-$jour")." ". affdate_jourcourt("$annee-$mois-$jour"),  
 	   "redacteurs",
 	   "calendrier");

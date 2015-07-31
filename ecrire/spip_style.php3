@@ -1069,6 +1069,21 @@ div.navigation-calendrier img.navigation-bouton-desactive {
 	filter: alpha(opacity=30);
 }
 
+a.calendrier-annee {
+	background-color: #aaaaaa;
+	padding: 3px;
+	margin: 1px;
+	font-family: verdana, arial, sans,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: white;
+	-moz-border-radius: 5px;
+}
+a.calendrier-annee:hover {
+	color: black;
+	background-color: white;
+}
+
 
 /*
  * Styles generes par les raccourcis de mis en page

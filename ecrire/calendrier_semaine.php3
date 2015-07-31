@@ -16,6 +16,9 @@ $jour = journum($date);
 $mois = mois($date);
 $annee = annee($date);
 
+$afficher_bandeau_calendrier = true;
+$afficher_bandeau_calendrier_semaine = true;
+
 debut_page(_T('titre_page_calendrier',
 	      array('nom_mois' => nom_mois($date), 'annee' => $annee)),
 	   "redacteurs", 

@@ -139,6 +139,7 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		$largeur_gauche = 100;
 		$largeur_table = 730;
 	}
+
 	$fclic = ((lire_meta("activer_messagerie") == "oui") AND 
 		($GLOBALS["connect_activer_messagerie"] != "non"))?
 		'http_calendrier_clics' : 
@@ -148,60 +149,6 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 	$m=$today["mon"];
 	$a=$today["year"];
 
-	$annee_avant = $annee - 1;
-	$annee_apres = $annee + 1;
-
-	$class_avant = '
-		margin-$spip_lang_left: 10px;
-		padding: 2px;
-		-moz-border-radius: 5px;
-		margin-top: 2px;
-		border: 1px solid #cccccc;
-		background-color: #cccccc;';
-	$class_cemois = '
-		margin-$spip_lang_left: 10px;
-		padding: 2px;
-		margin-top: 2px;
-		-moz-border-radius: 5px;
-		border: 1px solid #666666;
-	background-color: white;';
-
-	$total = "<tr>" .
-		"<td width='$largeur_gauche' class='verdana1' valign='top'>" .
-		http_calendrier_aujourdhui_et_aide((($mois == $m) AND ($annee == $a)),
-			affdate_mois_annee("$a-$m-1"),
-			'calendrier.php3?type=mois') .
-		"<div>&nbsp;</div>" .
-		"<div><b>$annee_avant</b></div>";
-	for ($i=$mois; $i < 13; $i++) {
-		$total .= "<div style='$class_avant'>" .
-			http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
-			nom_mois("$annee_avant-$i-1"),'','') .
-			"</div>";
-	}
-  
-	$total .= "<div><b>$annee</b></div>";
-	for ($i=1; $i < 13; $i++) {
-		if ($i == $mois) {
-			$total .=  "<div style='$class_cemois'><b>".nom_mois("$annee-$i-1")."</b></div>";
-		}
-		else {
-			$total .=
-				"<div  style='$class_avant'>" .
-				http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
-				nom_mois("$annee-$i-1"),'','') .
-			"</div>";
-		}
-	}
-
-	$total .=  "<div><b>$annee_apres</b></div>";
-	for ($i=1; $i < $mois+1; $i++) {
-		$total .=
-			"<div style='$class_avant'>" .
-			http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
-			nom_mois("$annee_apres-$i-1"),'','') .
-			"</div>";
-	}
 	list($articles, $breves, $messages) = 
 		sql_calendrier_interval_mois($annee,$mois, $premier_jour);
 	if ($articles)
@@ -211,17 +158,11 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		foreach($breves as $d => $v) 
 			{ $messages[$d] = array_merge($messages[$d], http_calendrier_image_et_typo($v));}
 
-	$total .=  "</td>" .
-		"<td width='20' valign='top'>&nbsp;</td>" .
-		"<td width='" . ($largeur_table) . "' valign='top'>" .
+	$total = "<div>&nbsp;</div>" .
+		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'>" .
+		"<tr><td width='$largeur_table' valign='top'>" .
 		http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, 
 			$GLOBALS['HTTP_GET_VARS']['echelle'], $messages, $fclic);
-
-	$total = "<div>&nbsp;</div>" .
-		"<table cellpadding=0 cellspacing=0 border=0 width='".
-		($largeur_table).
-		"'>" .
-		$total .
 		"</td></tr></table>";
 
 	# messages sans date ?
@@ -330,6 +271,9 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 					"<img src='$img_dir/loupe.gif'  alt='zoom-' />");
  	}
  
+ 
+ 	$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+ 	$retour .=  aide("messcalen");
  
 	$retour .= "</div>";    
     return $retour;
@@ -560,8 +504,8 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 {
   global $couleur_claire, $couleur_foncee, $spip_ecran;
 
-	if ($spip_ecran == "large") $largeur = 70;
-	else $largeur = 50;
+	if ($spip_ecran == "large") $largeur = 90;
+	else $largeur = 60;
 
   $jour_semaine = date("w",mktime(1,1,1,$mois_today,$jour_today,$annee_today));
   if ($jour_semaine==0) $jour_semaine=7;
@@ -648,22 +592,28 @@ function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved
 // Afficher un mois sous forme de petit tableau
 
 function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine, $les_rv, $liens='') {
-  global $couleur_foncee;
+	global $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
+
+	// Former une date correcte (par exemple: $mois=13; $annee=2003)
+	$date_test = date("Y-m-d", mktime(0,0,0,$mois, 1, $annee));
+	$mois = mois($date_test);
+	$annee = annee($date_test);
+
 	
 	if (!$liens)
-	  $liens = array('semaine' => "calendrier_semaine.php3?", 
-			 'jour' => "calendrier_jour.php3?",
-			 'mois' => "calendrier.php3?");
+		$liens = array('semaine' => "calendrier_semaine.php3?", 
+			'jour' => "calendrier_jour.php3?",
+			'mois' => "calendrier.php3?");
 
-       	if ($semaine) 
-	  {
-	    $jour_valide = mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved);
-	    $jour_semaine_valide = date("w",$jour_valide);
-	    if ($jour_semaine_valide==0) $jour_semaine_valide=7;
-	    $debut = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+1,$annee_ved);
-	    $fin = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+7,$annee_ved);
-	  }
+	if ($semaine) 
+	{
+		$jour_valide = mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved);
+		$jour_semaine_valide = date("w",$jour_valide);
+		if ($jour_semaine_valide==0) $jour_semaine_valide=7;
+		$debut = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+1,$annee_ved);
+		$fin = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+7,$annee_ved);
+	}
 	
 	$today=getdate(time());
 	$jour_today = $today["mday"];
@@ -995,38 +945,38 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
 		$largeur_gauche = 200;
+		$largeur_centre = $largeur_table - 2 * ($largeur_gauche + 20);
 	} else {
 		$largeur_table = 750;
 		$largeur_gauche = 100;
+		$largeur_centre = $largeur_table - ($largeur_gauche + 20);
 	}
-	return
-		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'>" .
-		"<tr><td width='$largeur_gauche' class='verdana1' valign='top'>" .
-		http_calendrier_aujourdhui_et_aide(($jour == $jour_today AND $mois == $mois_today AND $annee == $annee_today),
-			affdate_jourcourt("$annee_today-$mois_today-$jour_today"),
-			'calendrier.php3?type=jour') .
-		http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee) .
-		http_calendrier_agenda($mois, $annee, $jour, $mois, $annee) .
-		http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee) .
-		http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces") .
-		http_calendrier_rv(sql_calendrier_taches_pb(),"pb") .
-		http_calendrier_rv(sql_calendrier_taches_rv(), "rv") .
-		http_calendrier_ical($GLOBALS['connect_id_auteur']) .
-		"</td>\n<td width='20'>&nbsp;</td>" .
-		"\n<td width='" . ($largeur_table - (2*$largeur_gauche)) . "' valign='top'>"  .
-		"<div style='width: ". ($largeur_table - (2*$largeur_gauche)) . "px'>" .
+		
+	$retour = "<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>";
+	
+	if ($spip_ecran == "large") {
+		$retour .= "<td width='$largeur_gauche' class='verdana1' valign='top'>" .
+			"<div style='height: 29px;'>&nbsp;</div>".
+			http_calendrier_jour($jour-1,$mois,$annee, "col") .
+			"</td>\n<td width='20'>&nbsp;</td>\n";
+	}
+	$retour .= "\n<td width='$largeur_centre' valign='top'>"  .
+		"<div>" .
 		http_calendrier_navigation_jour($jour,$mois,$annee, $GLOBALS['HTTP_GET_VARS']['echelle'], 'calendrier.php3', '') .
-		"</div>" .
+		"</div>".
 		http_calendrier_jour($jour,$mois,$annee, "large") .
-		'</td>' .
+		'</td>';
+		
 		# afficher en reduction le tableau du jour suivant
-		(($spip_ecran != "large") ? '' :
-			("\n<td width='20'>&nbsp;</td>" .
+	$retour .= "\n<td width='20'>&nbsp;</td>" .
 			"\n<td width='$largeur_gauche' class='verdana1' valign='top'>" .
 			"<div style='height: 29px;'>&nbsp;</div>".
 			http_calendrier_jour($jour+1,$mois,$annee, "col") .
-			'</td>')) .
-			'</tr></table>';
+			'</td>';
+			
+	$retour .= '</tr></table>';
+		
+	return $retour;
 }
 
 function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
@@ -1039,7 +989,7 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 		$largeur_table = 750;
 		$largeur_gauche = 100;
 	}
-	$largeur_table = $largeur_table - ($largeur_gauche+20);
+//	$largeur_table = $largeur_table - ($largeur_gauche+20);
   
 	$nom = mktime(1,1,1,$mois_today,$jour_today,$annee_today);
 	$jour_semaine = date("w",$nom);
@@ -1051,25 +1001,12 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 	$mois=$today["mon"];
 	$annee=$today["year"];
 	$now = date("w",mktime(1,1,1,$mois,$jour,$annee));
+
 	list($articles, $breves, $messages) = 
 		sql_calendrier_interval_semaine($annee_today,$mois_today,$jour_today);
 	return 
 		"<div>&nbsp;</div>" .
-		"<table cellpadding=0 cellspacing=0 border=0 width='".
-		($largeur_table+10+$largeur_gauche).
-		"'><tr>" .
-		"<td width='$largeur_gauche' class='verdana1' valign='top'>" .
-		http_calendrier_aujourdhui_et_aide(($debut == mktime (1,1,1,$mois, $jour-$now+1, $annee)),
-			affdate_jourcourt("$annee-$mois-$jour"),
-			'calendrier.php3?type=semaine') .
-		http_calendrier_agenda($mois_today-1, $annee_today, $jour_today, $mois_today, $annee_today, true) .
-		http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, true) .
-		http_calendrier_agenda($mois_today+1, $annee_today, $jour_today, $mois_today, $annee_today, true) .
-		http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces") .
-		http_calendrier_rv(sql_calendrier_taches_pb(),"pb") .
-		http_calendrier_rv(sql_calendrier_taches_rv(), "rv") .
-		"</td>" .
-		"<td width='20'>&nbsp;</td>" .
+		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>" .
 		"<td width='$largeur_table' valign='top'>" .
 		http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, 7,20,
 			$GLOBALS['HTTP_GET_VARS']['echelle'],
@@ -1078,7 +1015,7 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 			'') .
 		"</td></tr></table>" .
 		(!(strlen($breves["0"]) > 0 OR $articles["0"] > 0) ? '' :
-			("<table width=200 background=''><tr width=200><td><FONT FACE='arial,helvetica,sans-serif' SIZE=1>" .
+			("<table width=400 background=''><tr width=400><td><FONT FACE='arial,helvetica,sans-serif' SIZE=1>" .
 			"<b>"._T('info_mois_courant')."</b>" .
 			$breves["0"] .
 			$articles["0"] .
@@ -1290,13 +1227,14 @@ function http_calendrier_rv($messages, $type) {
 # et une classe uniquement destinee a retirer l'URL lors d'une impression
 # attention au cas ou la href est du Javascript avec des "'"
 
-function http_calendrier_href($href, $clic, $title='', $style='')
+function http_calendrier_href($href, $clic, $title='', $style='', $class='')
 {
   return '<a href="' .
     str_replace('&', '&amp;', $href) .
     '"' . # class="forum-repondre-message"' .
     (!$style ? '' : (" style=\"" . $style . "\"")) .
     (!$title ? '' : (" title=\"" . $title . "\"")) .
+    (!$class ? '' : (" class=\"" . $class . "\"")) .
     '>' .
     $clic .
     '</a>';

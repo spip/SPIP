@@ -14,6 +14,8 @@ $today=getdate(time());
 if (!$mois){$annee=$today["year"];$mois=$today["mon"]; }
 $periode = $annee . '-' . sprintf("%02d", $mois) . '-01';
 
+$afficher_bandeau_calendrier = true;
+
 debut_page(_T('titre_page_calendrier',
 	      array('nom_mois' => nom_mois($periode), 'annee' => $annee)), 
 	   "redacteurs", 
