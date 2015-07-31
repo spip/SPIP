@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_quote' => '<quote>Bir iletiden al&#305;nt&#305; yap</quote>',
 'bouton_ajouter_document' => 'Belge Ekle',
 'bouton_ajouter_image' => 'Resim Ekle',
+'bouton_ajouter_image_document' => 'Bir resim veya &nbsp;belge&nbsp; eklemek',
 'bouton_changer' => 'De&#287;i&#351;tir',
 'bouton_chercher' => 'Ara',
 'bouton_choisir' => 'Se&ccedil;',
