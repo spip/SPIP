@@ -982,7 +982,7 @@ function spip_pg_sequence($table)
 function spip_pg_cite($v, $t)
 {
 	if (sql_test_date($t)) {
-		if (strpos("0123456789", $v[0]) === false)
+		if ($v AND (strpos("0123456789", $v[0]) === false))
 			return spip_pg_frommysql($v);
 		else {
 			if (strpos($v, "-00-00") <= 4) {
