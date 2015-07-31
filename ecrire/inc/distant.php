@@ -765,6 +765,9 @@ function fichier_copie_locale($source){
 	// a deja ete copie en local avec cette extension
 	// dans ce cas elle est fiable, pas la peine de requeter en base
 	$path_parts = pathinfo($source);
+	if (!isset($path_parts['extension'])) {
+		$path_parts['extension'] = '';
+	}
 	$ext = $path_parts ? $path_parts['extension'] : '';
 	if ($ext
 		AND preg_match(',^\w+$,', $ext) // pas de php?truc=1&...
