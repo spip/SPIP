@@ -310,7 +310,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 	if (tester_upload()) {
 		echo "<br><b>$intitule</b>";
 		echo "<br><small><input name='image' type='File' class='fondl' style='width: 60px;'>\n";
-		echo "<div align='right'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div></small>\n";
+		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div></small>\n";
 	}
 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $options == "avancees") {
@@ -322,13 +322,13 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 			echo "\n<select name='image2' size='1' class='fondl'>";
 			echo $texte_upload;
 			echo "\n</select>";
-			echo "\n  <div align='right'><input name='ok' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
+			echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
 
 			if ($afficher_texte_ftp){
 				if ($dossier_complet){
 					echo "\n<p><b>"._T('info_portfolio_automatique')."</b>";
 					echo "\n<br>"._T('info_installer_documents');
-					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo'></div>";
+					echo "\n<div align='".$GLOBALS['spip_lang_right']."'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo'></div>";
 				}
 			}
 			echo "</div>\n";
@@ -410,13 +410,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if (lire_meta("documents_$type") != 'non' AND $flag_modif) {
 		/// Ajouter nouveau document/image
 
-		if ($GLOBALS['spip_lang_rtl'])
-			$texalign = 'right';
-		else
-			$texalign = 'left';
-	
 		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
-		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: $texalign; color: black;'>";
+		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: ".$GLOBALS['spip_lang_right']."; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");
 		if ($type == "rubrique") echo "<b><font size=1>"._T('titre_publier_document')."</font></b>".aide("ins_doc");
 		else echo "<b><font size=1>"._T('titre_joindre_document')."</font></b>".aide("ins_doc");
@@ -653,7 +648,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 			}
 
-			echo "<div align='right'>";
+			echo "<div align='".$GLOBALS['spip_lang_right']."'>";
 			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 			echo "</div>";
 			echo "</form>";
@@ -952,13 +947,13 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<b>"._T('info_inclusion_vignette')."</b></br>";
 			}
-			echo "<font color='333333'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align=right>&lt;doc$id_document|right&gt;</div></font>\n";
+			echo "<font color='333333'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align='right'>&lt;doc$id_document|right&gt;</div></font>\n";
 			echo "</font></div>";
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
 				echo "<b>"._T('info_inclusion_directe')."</b></br>";
-				echo "<font color='333333'><div align=left>&lt;emb$id_document|left&gt;</div><div align=center>&lt;emb$id_document|center&gt;</div><div align=right>&lt;emb$id_document|right&gt;</div></font>\n";
+				echo "<font color='333333'><div align=left>&lt;emb$id_document|left&gt;</div><div align=center>&lt;emb$id_document|center&gt;</div><div align='right'>&lt;emb$id_document|right&gt;</div></font>\n";
 				echo "</font></div>";
 			}
 		}
@@ -1011,7 +1006,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 		}
 
-		echo "<div align='right'>";
+		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
 		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 		echo "</div>";
 		echo "</form>";
@@ -1107,7 +1102,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "</textarea>\n";
 		}
 
-		echo "<div align='right'>";
+		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
 		echo "<input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 		echo "</div>";
 		echo "</div>";
