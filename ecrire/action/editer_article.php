@@ -175,11 +175,8 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		)) {
 			if (!is_null($date))
 				$champs['date'] = $date;
-			else {
-				# on prend la date de MySQL pour eviter un decalage cf. #975
-				$d = sql_fetsel('NOW() AS d');
-				$champs['date'] = $d['d'];
-			}
+			else
+				$champs['date'] = date('Y-m-d H:i:s');
 		}
 	}
 
