@@ -68,6 +68,7 @@ function formulaire_charger_plugin($retour='') {
 
 
 function interface_plugins_auto($retour) {
+
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
 
 	if ($retour) {
@@ -83,12 +84,19 @@ function interface_plugins_auto($retour) {
 	if ($liste) {
 		$res .= _L('<p>S&#233;lectionnez ci-dessous un plugin : SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>'.joli_repertoire(_DIR_PLUGINS_AUTO).'</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.</p>');
 
-		$menu = '';
-		foreach ($liste as $url => $titre)
-		$menu .= '<option value="'.entites_html($url).'">'.couper(typo($titre),50)."</option>\n";
-		$res .= "<p><select name='url_zip_plugin'>\n"
-			."<option>"._L('choisir...')."</option>"
-			.$menu."\n</select></p>\n";
+		$menu = array();
+		foreach ($liste as $url => $titre) {
+			$titre = typo('<multi>'.$titre.'</multi>'); // recuperer les blocs multi du flux de la zone (temporaire?)
+			$nick = strtolower(basename($url, '.zip'));
+			$menu[$nick] = '<div style="height:1.9em;overflow:hidden;border-bottom:1px dotted grey;"><label><input type="radio" name="url_zip_plugin" value="'.entites_html($url).'" />'."<b title='$url'>$nick</b> | ".$titre."</label></div>\n";
+		}
+		ksort($menu);
+		$res .= "<div style='border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto;' class='cadre-trait-couleur'>\n";
+# <select name='url_zip_plugin'>
+#			."<option>"._L('choisir...')."</option>"
+			$res .= join("\n",$menu);
+#			."\n</select></p>\n";
+		$res .= "</div>\n";
 
 		$res .= _L("ou...");
 	}
@@ -160,15 +168,19 @@ function chargeur_charger_zip($quoi = array())
 	foreach($list as $n) {
 		$p = array();
 		foreach(explode('/', $n['filename']) as $n => $x) {
-			$paths[$n][join('/',$p)]++;
+			$sofar = join('/',$p);
+			$paths[$n][$sofar]++;
 			$p[] = $x;
 		}
 	}
 
+	$total = $paths[0][''];
 	$i = 0;
-	while (count($paths[$i])<=1
-	AND $i < count($paths))
+	while (isset($paths[$i])
+	AND count($paths[$i]) <= 1
+	AND array_values($paths[$i]) == array($total))
 		$i++;
+
 	$racine = $i
 		? array_pop(array_keys($paths[$i-1])).'/'
 		: '';
