@@ -91,14 +91,16 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  "</textarea>\n" .
 	  $taille;
 
-	$att = " class='fondo spip_xx-small"
-	.  ($flag == 'ajax' ? '' : " display_au_chargement")
-	.  "' id='valider_doc$id_document' style='float: "
+	$att_bouton = " class='fondo spip_xx-small'";
+	$att_span = " id='valider_doc$id_document' "
+	. ($flag == 'ajax' ? '' : "class='display_au_chargement'")
+	.  "style='text-align:"
 	.  $GLOBALS['spip_lang_right']
+	. ($flag == 'ajax' ? ';display:block' : "")
 	. "'";
 
 	if (!_DIR_RESTREINT)
-		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
+		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 		  . "<br class='nettoyeur' />";
 	else {
 		$corps = "<div>"

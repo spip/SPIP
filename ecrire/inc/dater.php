@@ -73,7 +73,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 					"id_$type=$id",
 					$masque,
 					_T('bouton_changer'),
-				       " class='fondo visible_au_chargement' id='valider_date'",
+				       " class='fondo visible_au_chargement' id='valider_date'", "",
 					"&id=$id&type=$type")
 		.  "</div>";
 
@@ -136,7 +136,7 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 				   "id_$type=$id",
 				   $masque,
 				   _T('bouton_changer'),
-				   " style='float: $spip_lang_right; margin-top: 20px;' class='fondo visible_au_chargement' id='valider_date_redac'",
+				   " style='float: $spip_lang_right; margin-top: 20px;' class='fondo visible_au_chargement' id='valider_date_redac'", "",
 				   "&id=$id&type=$type")
 				   ."<br class='nettoyeur' />"
 		. '</div>';
