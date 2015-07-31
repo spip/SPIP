@@ -1127,8 +1127,10 @@ function paragrapher($letexte, $forcer=true) {
 		$letexte = str_replace('<STOP P>', '', $letexte);
 
 		// Reduire les blancs dans les <p>
+		// Do not delete multibyte utf character just before </p> having last byte equal to whitespace  
+		$u = ($GLOBALS['meta']['charset']=='utf-8' && test_pcre_unicode()) ? 'u':'S';
 		$letexte = preg_replace(
-		',(<p(>|\s[^>]*)>)\s*|\s*(</p[>[:space:]]),iS', '\1\3',
+		',(<p(>|\s[^>]*)>)\s*|\s*(</p[>[:space:]]),'.$u.'i', '\1\3',
 			$letexte);
 
 		// Supprimer les <p xx></p> vides
