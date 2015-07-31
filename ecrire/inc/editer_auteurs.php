@@ -62,7 +62,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 		if ($type=='article' && $bouton_creer_auteur) { // pas generique pour le moment
 
-			$legende = generer_url_ecrire("bolino", "new=oui&lier_id_article=$id");
+			$legende = generer_url_ecrire("auteur_infos", "new=oui&lier_id_article=$id");
 			$legende = parametre_url($legende, 'nom', $cherche_auteur);
 			$legende = parametre_url($legende, 'redirect',
 				generer_url_ecrire('articles', "id_article=$id", '&'));
@@ -89,7 +89,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 
 		if ($type=='article' && $bouton_creer_auteur) { // pas generique pour le moment
 
-			$legende = generer_url_ecrire("bolino", "new=oui&lier_id_article=$id");
+			$legende = generer_url_ecrire("auteur_infos", "new=oui&lier_id_article=$id");
 			$legende = parametre_url($legende, 'nom', $cherche_auteur);
 			$legende = parametre_url($legende, 'redirect',
 				generer_url_ecrire('articles', "id_article=$id", '&'));
