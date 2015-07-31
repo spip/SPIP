@@ -260,6 +260,9 @@ function liste_chemin_plugin_actifs(){
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();
 
+	// creer le repertoire cache/ si necessaire ! (installation notamment)
+	sous_repertoire(_DIR_CACHE, '', false,true);
+
 	$liste_fichier_verif = array();
 	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
 		$liste_pipe_manquants[]=$pipe_recherche;
