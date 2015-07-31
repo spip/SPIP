@@ -61,9 +61,9 @@ if ($row = spip_fetch_array($result)) {
 	$low_sec = $row["low_sec"];
 
 
-if ($connect_id_auteur == $id_auteur) debut_page($nom, "redacteurs", "perso");
-else if (ereg("5poubelle",$statut)) debut_page($nom,"redacteurs","redac-poubelle");
-else if (ereg("0minirezo",$statut)) debut_page($nom,"redacteurs","administrateurs");
+if ($connect_id_auteur == $id_auteur) debut_page($nom, "asuivre", "perso");
+else if (ereg("5poubelle",$statut)) debut_page($nom, "redacteurs", "redac-poubelle");
+else if (ereg("0minirezo",$statut)) debut_page($nom, "redacteurs", "administrateurs");
 else debut_page($nom,"redacteurs","redacteurs");
 
 

@@ -27,7 +27,7 @@ else {
 if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 
-debut_page(_T('titre_page_statistiques_referers'), "administration", "statistiques");
+debut_page(_T('titre_page_statistiques_referers'), "suivi", "statistiques");
 echo "<br><br><br>";
 
 	//gros_titre(_T('titre_liens_entrants'));

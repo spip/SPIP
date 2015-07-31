@@ -27,10 +27,12 @@ else {
 if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 if ($origine) {
-	debut_page(_T('titre_page_statistiques_referers'), "administration", "statistiques");
-	echo "<br><br><br>";
+	debut_page(_T('titre_page_statistiques_referers'), "suivi", "statistiques");
+	echo "<br><br>";
 	gros_titre(_T('titre_liens_entrants'));
-	barre_onglets("statistiques", "referers");
+	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+	if ($activer_statistiques_ref != "non")
+		barre_onglets("statistiques", "referers");
 
 	debut_gauche();
 	debut_boite_info();
@@ -40,11 +42,14 @@ if ($origine) {
 	
 	debut_droite();
 
-} else {
-	debut_page(_T('titre_page_statistiques_visites').$pourarticle, "administration", "statistiques");
-	echo "<br><br><br>";
+}
+else {
+	debut_page(_T('titre_page_statistiques_visites').$pourarticle, "suivi", "statistiques");
+	echo "<br><br>";
 	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
-	barre_onglets("statistiques", "evolution");
+	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+	if ($activer_statistiques_ref != "non")
+		barre_onglets("statistiques", "evolution");
 	if ($titre) gros_titre($titre);
 
 	debut_gauche();

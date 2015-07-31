@@ -14,9 +14,9 @@ if ($detruire_message) {
 }
 
 
-debut_page(_T('titre_page_messagerie'), "asuivre", "calendrier");
+debut_page(_T('titre_page_messagerie'), "redacteurs", "messagerie");
 
-barre_onglets("calendrier", "messagerie");
+//barre_onglets("calendrier", "messagerie");
 
 
 debut_gauche("messagerie");

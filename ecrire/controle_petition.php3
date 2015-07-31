@@ -4,7 +4,7 @@ include ("inc.php3");
 
 
 
-debut_page(_T('titre_page_controle_petition'), "messagerie", "suivi-petition");
+debut_page(_T('titre_page_controle_petition'), "suivi", "suivi-petition");
 debut_gauche();
 
 

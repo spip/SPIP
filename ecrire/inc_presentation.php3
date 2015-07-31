@@ -1059,14 +1059,16 @@ function barre_onglets($rubrique, $onglet){
 
 	debut_onglet();
 
-	if ($rubrique == "statistiques"){
+	if ($rubrique == "statistiques") {
 		onglet(_T('onglet_evolution_visite_mod'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
-		onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
-		
-		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "replang", $onglet, "langues-24.gif");
-		
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref != "non")	onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
+		if ($activer_statistiques_ref != "non")
+			onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
+	}
+	if ($rubrique == "repartition") {
+		onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "rubriques", $onglet, "rubrique-24.gif");
+		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
+			onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues", $onglet, "langues-24.gif");
 	}
 
 	if ($rubrique == "traductions") {
@@ -1094,7 +1096,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet(_T('onglet_interactivite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
-		onglet(_T('onglet_langues'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
+		//onglet(_T('onglet_langues'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){
@@ -1111,7 +1113,7 @@ function barre_onglets($rubrique, $onglet){
 	if ($rubrique == "calendrier") {
 		onglet(_T('onglet_agenda'), "calendrier_jour.php3", "jour", $onglet, "agenda-24.gif");
 		onglet(_T('onglet_calendrier'), "calendrier.php3", "calendrier", $onglet, "calendrier-24.gif");
-		onglet(_T('onglet_messagerie_personnelle'), "messagerie.php3", "messagerie", $onglet, "messagerie-24.gif");
+		//onglet(_T('onglet_messagerie_personnelle'), "messagerie.php3", "messagerie", $onglet, "messagerie-24.gif");
 	}
 
 	fin_onglet();
@@ -1135,7 +1137,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	else {
 		//$hauteur = 80;
 		if (count(explode(" ", $texte)) > 1) $largeur = 84;
-		else $largeur = 74;
+		else $largeur = 80;
 		$alt = " alt=\" \"";
 	}
 
@@ -1375,24 +1377,16 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.gif", "documents", $rubrique);
-	if ($options == "avancees") {
-		icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
-	} else {
-		icone_bandeau_principal (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
-	}
-	if ($options == "avancees") {
-		if ($connect_statut == "0minirezo")
-			icone_bandeau_principal (_T('icone_forums_petitions'), "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
-		else
-			icone_bandeau_principal (_T('icone_forum_interne'), "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
-	}
-	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques){
+	icone_bandeau_principal (_T('icone_discussions'), "forum.php3", "messagerie-48.gif", "redacteurs", $rubrique);
+	if ($connect_statut == "0minirezo") {
 		bandeau_barre_verticale();
+		if ($connect_toutes_rubriques) 
+			icone_bandeau_principal (_T('icone_suivi_actualite'), "controle_forum.php3", "statistiques-48.gif", "suivi", $rubrique);
+		else if (lire_meta("activer_statistiques") != 'non') 
+			icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-48.gif", "suivi", $rubrique);
+	}
+	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 		icone_bandeau_principal (_T('icone_admin_site'), "configuration.php3", "administration-48.gif", "administration", $rubrique);
-	}
-	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques and lire_meta("activer_statistiques") != 'non'){
-		bandeau_barre_verticale();
-		icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-48.gif", "administration", $rubrique);
 	}
 
 	echo "</tr></table>\n";
@@ -1427,10 +1421,13 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if ($rubrique == "asuivre"){
 		icone_bandeau_secondaire (_T('icone_a_suivre'), "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
+		if ($options != 'avancees') icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_site_entier'), "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
-		if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
+		if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui' AND $options == 'avancees') {
 			icone_bandeau_secondaire (_T('icone_etat_traductions'), "plan_trad.php3", "langues-24.gif", "plan-trad", $sous_rubrique);
 		}
+		if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non")
+			icone_bandeau_secondaire (_T('icone_agenda'), "calendrier_jour.php3", "agenda-24.gif", "calendrier", $sous_rubrique);
 	}
 	else if ($rubrique == "documents"){
 		icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
@@ -1460,36 +1457,34 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			}
 		}
 	}
-	else if ($rubrique == "redacteurs"){
-		if ($options == "avancees" OR $connect_statut == "0minirezo")
-			icone_bandeau_secondaire (_T('icone_tous_auteur'), "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
-
-		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
-	}
-	else if ($rubrique == "messagerie"){
+	else if ($rubrique == "redacteurs") {
 		icone_bandeau_secondaire (_T('titre_forum'), "forum.php3", "forum-interne-24.gif", "forum-interne", $sous_rubrique);
-
-		if ($connect_statut == "0minirezo"){
-			if (lire_meta('forum_prive_admin') == 'oui')
-				icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
-			bandeau_barre_verticale();
+		if ($connect_statut == "0minirezo" AND lire_meta('forum_prive_admin') == 'oui')
+			icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
+		bandeau_barre_verticale();
+		icone_bandeau_secondaire (_T('icone_tous_auteur'), "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+	}
+	else if ($rubrique == "suivi") {
+		if ($connect_toutes_rubriques) {
 			icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 			icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
 		}
-	}
-	else if ($rubrique == "administration"){
-		if ($connect_toutes_rubriques) {
-			icone_bandeau_secondaire (_T('icone_configuration_site'), "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
-		}
-		if (lire_meta("activer_statistiques") != 'non')
+		if (lire_meta("activer_statistiques") != 'non') {
+			if ($connect_toutes_rubriques) bandeau_barre_verticale();
 			icone_bandeau_secondaire (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
-		if ($connect_toutes_rubriques) {
-			if ($options == "avancees") {
-				icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
-			}
-			else {
-				icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
-			}
+			icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques.php3", "rubrique-24.gif", "repartition", $sous_rubrique);
+		}
+	}
+	else if ($rubrique == "administration") {
+		icone_bandeau_secondaire (_T('icone_configuration_site'), "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_gestion_langues'), "config-lang.php3", "langues-24.gif", "langues", $sous_rubrique);
+		bandeau_barre_verticale();
+		if ($options == "avancees") {
+			icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+		}
+		else {
+			icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 		}
 	}
 
@@ -1504,14 +1499,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2")
 			echo "<font face='Verdana,Arial,Sans,sans-serif' size=1 color='#505050'><b>"._T('info_rechercher_02')."</b></font><br>";
-		echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r">';
+		echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" style="width: 70px" accesskey="r">';
 		echo "</form>";
 		echo "</td>";
-	}
-
-	if ($rubrique == "asuivre" AND $activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-		bandeau_barre_verticale();
-		icone_bandeau_secondaire (_T('icone_agenda'), "calendrier_jour.php3", "agenda-24.gif", "calendrier", $sous_rubrique);
 	}
 
 	echo "</tr></table>\n";
