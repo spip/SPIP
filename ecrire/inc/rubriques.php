@@ -247,7 +247,7 @@ function calcul_branche ($generation) {
 	if (!$generation) 
 		return '0';
 	else {
-		$branche[] = $generation;
+		$branche[] = join(',',array_map('intval',explode(',',$generation)));
 		while ($generation = calcul_generation ($generation))
 			$branche[] = $generation;
 		return join(",",$branche);
