@@ -249,7 +249,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_administrateurs' => 'מנהלים',
 'info_administrer_rubrique' => 'הינך יכול לנהל מדור זה',
 'info_adresse' => ':אל הכתובת',
-'info_adresse_email' => ':כתובת דוא"ל',
 'info_adresse_url' => 'הכתובת הכללית של האתר הציבורי שלך',
 'info_afficher_visites' => ':הצג ביקורים ל',
 'info_affichier_visites_articles_plus_visites' => 'הצג ביקורים ל <b>the most visited articles since the beginning:</b>',
@@ -542,7 +541,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_site_reference_2' => 'Site référencé', # NEW
 'info_site_syndique' => 'Ce site est syndiqué...', # NEW
 'info_site_valider' => 'אתרים כדי לאמת',
-'info_site_web' => 'אתר אינטרנט :',
 'info_sites' => 'אתרים',
 'info_sites_lies_mot' => 'Les sites référencés liés à ce mot-clé', # NEW
 'info_sites_proxy' => 'Utiliser un proxy', # NEW
@@ -573,7 +571,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_texte' => 'טקסט',
 'info_texte_explicatif' => 'Texte explicatif', # NEW
 'info_texte_long' => '(le texte est long : il apparaît donc en plusieurs parties qui seront recollées après validation.)', # NEW
-'info_texte_message' => 'הטקסט של ההודעה שלך :',
 'info_texte_message_02' => 'Texte du message', # NEW
 'info_titre' => 'כותר :',
 'info_total' => 'הכל :',
