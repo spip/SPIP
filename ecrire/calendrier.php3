@@ -8,7 +8,6 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	global $connect_id_auteur, $connect_statut;
 	global $les_articles;
 	global $les_breves;
-	global $spip_lang_rtl;
 	global $spip_ecran;
 	global $couleur_claire, $couleur_foncee;
 
