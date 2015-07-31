@@ -109,11 +109,13 @@ if (window.jQuery)
     splitKeywords: function(query) {
       if(query) {
         //do not split keywords enclosed by "
-        var m = query.match(/"([^"]*)"/g); 
+        var m = query.match(/"([^"]*)"/g);
         if(m)
           for(var i=0, ml=m.length;i<ml;i++) {
-            var regex = new RegExp(m[i]);
-            query = query.replace(regex,'@@@'+i+'@@@');
+	          var i = query.indexOf(m[i]);
+	          query = query.substring(0,i)+'@@@'+i+'@@@'+query.substring(i+m[i].length)
+	          m[i] = decodeURI(m[i]);
+	          m[i] = m[i].split("+").join(' ');
           }
         query = query.split(/[\s,\+]+/);
         if(m)
