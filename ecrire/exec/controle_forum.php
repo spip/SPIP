@@ -204,10 +204,19 @@ function exec_controle_forum_dist()
 		exit;
 	} 
 
-	$debut= intval(_request('debut'));
-	if (!preg_match('/^\w+$/', $type=_request('type'))) $type = "public";
+	$type = _request('type');
+	$debut = intval(_request('debut'));
+	$recherche = _request('recherche');
 
-	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique);
+	if (!preg_match('/^\w+$/', $type)) $type = 'public';
+	$recherche_aff = entites_html($recherche);
+	if (!strlen($recherche)) {
+			$recherche_aff = _T('info_rechercher');
+			$onfocus = " onfocus=\"this.value='';\"";
+	} else $onfocus = '';
+	$onfocus = '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . " /><input type='hidden' name='type' value='$type' />";
+
+	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique, $recherche);
 
 	// Si un id_controle_forum est demande, on adapte le debut
 	if ($debut_id_forum = intval(_request('debut_id_forum'))
@@ -278,6 +287,9 @@ function exec_controle_forum_dist()
 			
 		debut_droite();
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
+
+		echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("controle_forum", $onfocus, " method='get'")."</div>"
+		 . "<br class='nettoyeur' />";
 
 		echo "<div id='$ancre' class='serif2'>$mess</div>";
 		echo fin_gauche(), fin_page();
