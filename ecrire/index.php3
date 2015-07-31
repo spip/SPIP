@@ -56,8 +56,7 @@ if ($spip_display != 4) {
 	}
 	echo "<div class='verdana1'>";
 
-  $query = "SELECT count(*) AS cnt, statut FROM spip_articles GROUP BY statut";
-  $res = spip_query($query);
+    $res = spip_query("SELECT count(*) AS cnt, statut FROM spip_articles GROUP BY statut");
   
   while($row = spip_fetch_array($res)) {
     $var  = 'nb_art_'.$row['statut'];
@@ -75,8 +74,8 @@ if ($spip_display != 4) {
 
 	}
 
-	$query = "SELECT count(*) AS cnt, statut FROM spip_breves GROUP BY statut";
-	$res = spip_query($query);
+	$res = spip_query("SELECT count(*) AS cnt, statut FROM spip_breves GROUP BY statut");
+
 
 	while($row = spip_fetch_array($res)) {
 		$var  = 'nb_bre_'.$row['statut'];
@@ -91,8 +90,8 @@ if ($spip_display != 4) {
 		echo "</ul>";
 	}
 
-	$query = "SELECT count(*) AS cnt FROM spip_forum where statut='publie'";
-	$result = spip_fetch_array(spip_query($query));
+	$result = spip_fetch_array(spip_query("SELECT count(*) AS cnt FROM spip_forum where statut='publie'"));
+
 	$nb_forum = $result['cnt'];
 
 	if ($nb_forum) {
@@ -103,8 +102,8 @@ if ($spip_display != 4) {
 		echo "</ul>";
 	}
 
-	$query = "SELECT count(*) AS cnt, statut FROM spip_auteurs GROUP BY statut";
-	$res = spip_query($query);
+	$res = spip_query("SELECT count(*) AS cnt, statut FROM spip_auteurs GROUP BY statut");
+
 
 	while($row = spip_fetch_array($res)) {
 		$var  = 'nb_aut_'.$row['statut'];
@@ -157,22 +156,16 @@ if ($spip_display != 4) {
 		$jour = jour($date);
 	
 		// rendez-vous personnels dans le mois
-		$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
-				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-				"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
-				"AND messages.statut='publie' LIMIT 0,1");
-		if (spip_num_rows($result_messages)) {
+		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie' LIMIT 0,1"))) {
 			echo "<p />";
 			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
 		}
 		// rendez-vous personnels dans le mois
-		$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
 				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
-				"AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) ".
-				"AND messages.statut='publie' LIMIT 0,1");
-		if (spip_num_rows($result_messages)) {
+					     "AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) AND messages.statut='publie' LIMIT 0,1"))) {
 			echo "<p />";
-		echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col");
+			echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col");
 		}
 }
 
@@ -240,8 +233,7 @@ $post_dates = lire_meta("post_dates");
 
 if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
 	echo "<p>";
-	afficher_articles(_T('info_article_a_paraitre'),
-		"WHERE statut='publie' AND date>NOW() ORDER BY date");
+	afficher_articles(_T('info_article_a_paraitre'), "WHERE statut='publie' AND date>NOW() ORDER BY date");
 }
 
 
@@ -251,16 +243,9 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 //
 
 echo "<p>";
-$vos_articles = afficher_articles(afficher_plus('articles_page.php3')._T('info_en_cours_validation'),
-	", spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
-	"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
+$vos_articles = afficher_articles(afficher_plus('articles_page.php3')._T('info_en_cours_validation'),	", spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
 
 if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos_articles,',').')';
-
-
-	$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-	$result = spip_query($query);
-	$exist_rub = spip_num_rows($result);
 
 
 //
@@ -268,10 +253,7 @@ if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos
 //
 if ($spip_display == 4) {
 	debut_raccourcis();
-	$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-	$result = spip_query($query);
-	
-	if (spip_num_rows($result) > 0) {
+	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 0,1"))) {
 		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
 	
 		$activer_breves = lire_meta("activer_breves");
@@ -288,24 +270,22 @@ if ($spip_display == 4) {
 		icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 	}
 	fin_raccourcis();
-} else {
+ } else {
 
-		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-		$result = spip_query($query);
-		$gadget = "";
+	$gadget = "";
 		
-		$gadget = "<center><table><tr>";
-			$id_rubrique = $GLOBALS['id_rubrique'];
-			if ($id_rubrique > 0) {
+	$gadget = "<center><table><tr>";
+	$id_rubrique = $GLOBALS['id_rubrique'];
+	if ($id_rubrique > 0) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
 			}
-			if ($connect_statut == "0minirezo") {
-				$gadget .= "<td>";
-				$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
-				$gadget .= "</td>";
-			}
-		if (spip_num_rows($result) > 0) {
+	if ($connect_statut == "0minirezo") {
+			$gadget .= "<td>";
+			$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
+			$gadget .= "</td>";
+		}
+	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 0,1"))) {
 			$gadget .= "<td>";
 			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
 			$gadget .= "</td>";
@@ -327,8 +307,6 @@ if ($spip_display == 4) {
 			
 		}
 		$gadget .= "</tr></table></center>\n";
-
-
 
 
 	if ($connect_statut != "0minirezo") {
@@ -407,26 +385,26 @@ echo "<div>&nbsp;</div>";
 $relief = false;
 
 if (!$relief) {
-	$query = "SELECT id_article FROM spip_articles AS articles WHERE statut='prop'$vos_articles LIMIT 0,1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_article FROM spip_articles AS articles WHERE statut='prop'$vos_articles LIMIT 0,1");
+
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief) {
-	$query = "SELECT id_breve FROM spip_breves WHERE statut='prop' LIMIT 0,1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_breve FROM spip_breves WHERE statut='prop' LIMIT 0,1");
+
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non') {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE statut='prop' LIMIT 0,1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='prop' LIMIT 0,1");
+	
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE syndication='off' LIMIT 0,1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE syndication='off' LIMIT 0,1");
+
 	$relief = (spip_num_rows($result) > 0);
 }
 
@@ -439,14 +417,12 @@ if ($relief) {
 	//
 	// Les articles a valider
 	//
-	afficher_articles(_T('info_articles_proposes'),
-		"WHERE statut='prop'$vos_articles ORDER BY date DESC");
+	afficher_articles(_T('info_articles_proposes'),	"WHERE statut='prop'$vos_articles ORDER BY date DESC");
 
 	//
 	// Les breves a valider
 	//
-	$query = "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC";
-	afficher_breves(afficher_plus('breves.php3')._T('info_breves_valider'), $query, true);
+	afficher_breves(afficher_plus('breves.php3')._T('info_breves_valider'), "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC", true);
 
 	//
 	// Les sites references a valider
@@ -461,8 +437,7 @@ if ($relief) {
 	//
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
-		afficher_sites(afficher_plus('sites_tous.php3')._T('avis_sites_syndiques_probleme'),
-			"SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
+		afficher_sites(afficher_plus('sites_tous.php3')._T('avis_sites_syndiques_probleme'), "SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
 	}
 
 	// Les articles syndiques en attente de validation
@@ -494,8 +469,7 @@ if ($options == 'avancees') {
 	/* Ne plus afficher: il y a la page "Tous vos articles" pour cela
 	// Vos articles publies
 	echo "<p>";
-	afficher_articles(afficher_plus('articles_page.php3')._T('info_derniers_articles_publies'),
-		", spip_auteurs_articles AS lien ".
+	afficher_articles(afficher_plus('articles_page.php3')._T('info_derniers_articles_publies'), ", spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
 	*/
 
