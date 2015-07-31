@@ -317,6 +317,7 @@ ecrire/inc_sites_edit.php -text
 ecrire/inc_sites_tous.php -text
 ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_image.php -text
+ecrire/inc_spip_style.php -text
 ecrire/inc_statistiques_lang.php -text
 ecrire/inc_statistiques_referers.php -text
 ecrire/inc_statistiques_repartition.php -text
