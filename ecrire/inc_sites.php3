@@ -230,6 +230,54 @@ function my_strtotime($la_date) {
 	return $la_date;
 }
 
+//
+// Prend un tableau et l'affiche au format rss
+// (fonction inverse de analyser_backend)
+// A completer (il manque des tests, des valeurs par defaut, les enclosures, differents formats de sortie, etc.)
+//
+function affiche_rss($rss, $intro = '') {
+	if (!is_array($rss)) return;
+
+	// entetes
+	$u = '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
+
+	$u .= '
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+	<title>'.texte_backend($intro['title']).'</title>
+	<link>'.texte_backend($intro['url']).'</link>
+	<description>'.texte_backend($intro['description']).'</description>
+	<language>'.texte_backend($intro['language']).'</language>
+	';
+
+	// elements
+	foreach ($rss as $article) {
+		$u .= '
+	<item>
+		<title>'.texte_backend($article['title']).'</title>
+		<link>'.texte_backend(liens_absolus($article['url'])).'</link>
+		<date>'.texte_backend($article['date']).'</date>
+		<description>'.
+			texte_backend(liens_absolus($article['description']))
+		.'</description>
+		<author>'.texte_backend($article['author']).'</author>
+		<dc:date>'.date_iso($article['date']).'</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>'.texte_backend($article['lang']).'</dc:language>
+		<dc:creator>'.texte_backend($article['author']).'</dc:creator>
+	</item>
+';
+	}
+
+	// pied
+	$u .= '
+	</channel>
+</rss>
+';
+
+	return $u;
+}
+
 function trouver_format($texte) {
 	$syndic_version = '';
 	
