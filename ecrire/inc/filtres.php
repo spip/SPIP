@@ -15,6 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');
 include_spip('inc/filtres_mini');
 
+/**
+ * Charger un filtre depuis le php :
+ * - on inclue tous les fichiers fonctions des plugins et du skel
+ * - on appelle chercher_filtre
+ */
+function charger_filtre($fonc, $default=NULL) {
+	include_spip('public/parametrer'); // inclure les fichiers fonctions
+	return chercher_filtre($fonc, $default);
+}
+
 // http://adoc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
 	// Cas MIME = type/subtype
