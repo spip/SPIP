@@ -2159,8 +2159,8 @@ function http_img_pack($img, $alt, $atts='', $title='', $options = array()) {
 		$atts.=" width='".$largeur."' height='".$hauteur."'";
 	}
 	return  "<img src='$img' alt='" . attribut_html($alt ? $alt : $title) . "'"
-	  . ($title ? 'title="'.attribut_html($title).'"' : '')
-	  . $atts
+	  . ($title ? ' title="'.attribut_html($title).'"' : '')
+	  . " $atts"
 	  . " />";
 }
 
