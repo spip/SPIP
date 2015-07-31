@@ -1531,8 +1531,13 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	// Bandeau
 	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%'>";
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'><td>";
+
+		global $id_rubrique;
+		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique'><img src='img_pack/naviguer-site.gif' alt='nav' width='26' height='20' border='0'></a>";
+		else echo "<a href='brouteur.php3'><img src='img_pack/naviguer-site.gif' alt='nav' width='26' height='20' border='0'></a>";
+		
 		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
-			echo "<font face='arial,helvetica,sans-serif' size=1><b>";
+			echo " &nbsp; <font face='arial,helvetica,sans-serif' size=1><b>";
 			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
 			if ($total_messages == 1) {
@@ -1545,7 +1550,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "</b></font> &nbsp; ";
 		}
 
-	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") echo "<a href='calendrier_jour.php3' title='"._T('icone_agenda')."'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") echo "<a href='calendrier_jour.php3' title='"._T('icone_agenda')."'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0'></a>";
 	echo "</td>";
 	echo "<td>   </td>";
 	echo "<td>";
