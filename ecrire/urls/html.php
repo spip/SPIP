@@ -46,7 +46,7 @@ function _generer_url_html($type, $id, $args='', $ancre='') {
 		return generer_url_document_dist($id, $args, $ancre);
 	}
 
-	return $type . $id . '.html' . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
+	return _DIR_RACINE . $type . $id . '.html' . ($args ? "?$args" : '') .($ancre ? "#$ancre" : '');
 }
 
 // retrouver les parametres d'une URL dite "html"
