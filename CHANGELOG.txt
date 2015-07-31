@@ -1,3 +1,144 @@
+Core 2.1.2 -> 2.1.3 ( mi dec 2010 ) 
+r16030 | fil       | une date fixe dans le futur pour beneficier du query cache sql + commentaire
+r16032 | cedric    | Le refactoring de [15970] avait rendu impossible le telechargement de lib qui etaient confondues avec des plugins...En effet plugins_get_infos() renvoyait toujours un tableau, meme si le fichier plugin.xml n'existe pas.Du coup on modifie ce cas qui n'est pas utilise autre part en renvoyant false.
+r16035 | fil       | rtrim() pour faire le job
+r16039 | fil       | bug dans la modification de date d'un document, generant de faux messages d'erreur lors de l'edition du titre lorsque l'option 'modifier la date des documents' est active (Robert caron, denisb) http://permalink.gmane.org/gmane.comp.web.spip.user/160536 http://permalink.gmane.org/gmane.comp.web.spip.user/160592
+r16043 | bb        | on insère jquery.cookie dans toutes les pages (par défaut dans jquery_plugins)
+r16048 | fil       | affichage des stats : suite et consequences de [15986] (realet)
+r16079 | fil       | {{{ _SERVER['REQUEST_TIME'] }}} n'est pas dispo avant PHP 5.1
+r16110 | denisb    | depuis [15987] test_sql_mode_mysql() s'est déplacée dans ecrire/req/mysql.php ce qui bloquait toute install non mysql (http://permalink.gmane.org/gmane.comp.web.spip.devel/58749).
+r16112 | cedric    | suite a [15925] un post '' sur un champ intval stocke 0 provoque une alerte (incomprehensible) de conflit d'edition.Deseveriser le test en n'alertant pas lorsque la valeur en base est is_numeric et que la comparaison des intval est identique, mais c'est un pis-allerJe pense qu'il faudrait enlever ca de cette branche et le reprendre plus proprement, en tenant compte du type du champ pour faire la comparaison.Sinon, on oblige tous les formulaires a caster le post pour qu'il soit identique au format en base, ce qui est contraignant.
+r16117 | esj       | Depuis le [14633], l'identification par LDAP d'un nouvel utilisateur ne fonctionnait plus! Ce serait bien d'éviter les logs trompeurs.
+r16118 | esj       | La protection des documents par Htacces a été bousillée par [13957]. Retour au code précédent.
+r16119 | esj       | Deux bugs :     * lorsque l'argument d'un INCLURE ne comportait pas de "=" mais était suivi d'espace ou de Return, ceux-ci n'étaient pas retirés et se retrouvaient dans les index du tableau {{{$contexte}}}     * le remplacement de {{{#LOGO_X|fichier}}} par {{{#LOGO_X**}}} etc ne marchait pas en PHP5.
+r16120 | esj       | Les noms des paramètres d'une chaîne de langue étendue n'étaient pas entourés d'apostrophes dans le tableau argument de la fonction _T produit par le compilateur. Et eux non plus n'étaient pas expurgés de leurs espaces, ce bug étant neutralisé par le premier. Tant qu'à intervenir sur la fonction traitant les chaînes de langues, je réintroduis la constante MODULES_IDIOMES aveuglément viré par [16006].
+r16121 | esj       | Les modes d'appels SQL ne concernent que MySQL, retour sur [15987] (Désolé pour [16110] Denis, j'avais préparé ça avant ton envoi, et cette manière prépare le portage éventuel pour les autres serveurs SQL). En prime, découper en 2 l'étape 5 d'installation de LDAP pour pouvoir insérer facilement une étape supplémentaire (multi-serveurs LDAP etc).
+r16131 | cedric    | un oeuf de paque malvenu dans [16119]. Gardons le au chaud pour quand ce sera la bonne saison, mais en attendant, point de var_dump dans la branche stable.
+r16132 | cedric    | il semble qu'on arrive pas a charger certaines lib, la faute au Content-Type ?On se rabat sur l'extension quand elle est explicite.
+r16138 | esj       | L'interdiction de déclarer une base externe à qui n'est pas admin introduite à raison par [14347] a été faite trop à l'arrachée: comme {{{exec=install}}} dispense d'authentifier, l'utilisation de {{{autoriser('configurer')}}} ici ne repose plus que sur le cookie, qui n'est pas forcément présent, d'où un refus excessif. Il faut authentifier, même tardivement, afin que les autorisations soient calculables.Par ailleurs, en cas de fichier de connexion corrompu, SPIP refuse de se réinstaller tout en disant qu'il ne peut pas marcher. Il faut donc d'une part vérifier que ce fichier contient ce qu'il faut avant de prétendre que SPIP est installé, et corriger l'option {{{tantpis}}} dans la création du fichier de session, option qui ne marchait pas en cas de serveur SQL inaccessible.
+r16140 | bb        | ceci *est* un var_dump :p
+r16141 | esj       | Comme pour la réécriture [14175] des balises LOGO revue en [16119], la réécriture de la balise EMBED_DOCUMENT dès l'analyse syntaxique (cf [14177]) ne marchait pas en PHP5.
+r16159 | esj       | Fichier d'installation corrompu, complément à [16138]: traitement du cas aux étapes ultérieures.
+r16165 | esj       | Option {{{tantpis}} du fichier de session sans cookie en retard (retour sur [16139].
+r16168 | esj       | Oups, confusion dans les comportements fetsel/getfetsel dans [16166].
+r16171 | esj       | Mais non, là on est revenu à la case départ. La confusion c'était entre {{{true}}} et {{{continue}}} de l'argument {{{option}}} de {{{sql_getfetsel}}}. Ce coup-ci on a bien à la fois le logout correct, le login automatique à l'install, et l'install forcée en cas de fichier corrompu.
+r16202 | marcimat  | Un trim en plus sur le nom des champs car certains outils pour SQLite utilisent des guillemets doubles lorsqu'ils modifient la structure des tables... (sqlite manager, par exemple).
+r16205 | marcimat  | Même chose que [16202] sur la primary key...
+r16206 | marcimat  | sql_showbase avait une coquille sous SQLite dans la requête d'extraction de la liste des tables de la base de donnée.
+r16212 | fil       | un lien pour aller du forum admin au forum interne et vice-versa, cf http://www.spip-contrib.net/Le-plugin-Autorite#forum434569
+r16217 | esj       | L'implémentation de la fonction {{{sql_showbase}}} ne correspond pas à la spécification [10371] qui l'a introduite: si dans une base on utilise deux préfixes de tables dont l'un est une apocope de l'autre, cette fonction va renvoyer les deux jeux de tables quand on demande le premier jeu. Ca fait particulièrement mal dans l'action de destruction des tables d'un site sur un installation mutualisée.
+r16219 | esj       | Ca, par exemple: la fonction d'analyse de fichier de connexion ne reconnaisait pas un fichier en version 0.4
+r16329 | fil       | retour sur http://core.spip.org/trac/spip/changeset/15905 ligne 531 qui bug l'affichage dans l'espace prive fr d'un article en, en ne lui donnant pas la bonne typo (le bug etait aussi dans textwheel, mais pas dans spip trunk)
+r16348 | esj       | Warning indiquant en fait une écriture inutile dans l'aide en ligne (Hoizey). Et éliminer un log qui n'est pas forcément alarmant.
+r16350 | esj       | Uniformiser les cas d'erreur dans le validateur pour éviter un warning.
+r16353 | cedric    | traiter les insertions vide au mieux en indiquant un champ qui a un default dans la requete d'insertion pour que sqlite ne couine pas.Necessite au moins un champ avec default dans la table
+r16354 | cedric    | traiter les insertions vide avec une clause DEFAULT VALUES, c'est encore mieux.
+r16355 | cedric    | CEIL et FLOOR sont absente de sqlite2 mais utilisee par le calcul du rendu des statistiques
+r16356 | esj       | Ne pas écrire en dur l'extension des squelettes, elle pourra changer un jour.
+r16365 | esj       | Passage en minuscule des noms de serveurs: [14467] était effectivement sale et brutal, puisque URL_PAGE ne fonctionnait plus du tout sur un connect avec une majuscule, et il doit y avoir d'autres problèmes car l'oubli était chronique dans le code, on répercute. Ce dépôt corrige également l'autre bug sur URL_PAGE signalé dans [16360] et avant.
+r16369 | esj       | Scorie dans [16365] (Cédric).
+r16373 | davux     | Correction de generer_url_public() en relatif dans le priveReport de [16362]: Utiliser _DIR_RACINE pour redescendre d'un niveau quandon appelle generer_url_public() depuis l'espace privé avec $rel=true.
+r16376 | cedric    | des lignes en trop a la fin de ce php qui provoque une sortie indesiree
+r16379 | cedric    | dans sqlite, certaines erreurs SQL produisent des erreurs/warnings PHP qu'il faut catcher pour pouvoir loger. On utilise error_get_last() de PHP
+r16380 | cedric    | 1sDeux bugs de la couche sqlite autour des md5 des referers :- la notation 0xF1 n'est pas connue de sqlite- la notation x'F1' est connue de sqlite3 mais ne semble pas utilisable pour caster une representation hexa d'un INT en INTOn est donc force de traiter les representation 0xF1 dans PHP par un appel a hexdec dans les fonctions quote et citePar ailleurs, a la creation de table tous les bigint sont converti en int pour beneficier de l'autoincrement, mais cela n'a d'interer qu'enpresence d'un autoincrement. On passe donc le flag a la fonction concernee lors de la creation de table, ce qui permet de preserverun type bigint sur les referer_md5 et d'accepter les entiers obtenus par hexdec() sur les md5 des referers.Je crois que ce patch laisserait passer un alter en bigint via sql_alter sur un champ autoincrement, ce qui n'est pas parfait. A completer peut etre, bien que ce cas soit tres hypothetique.
+r16395 | cedric    | _sqlite_func_unix_timestamp ne fonctionnait que si heure:minute:seconde etaient bien present dans la date.On debug la regexp, mais, encore plus simple, on la remplace par strtotime qui fait le job aussi bien.
+r16408 | cedric    | ne pas auto-associer les documents aux forums et aux signatures de petition
+r16418 | cedric    | ne pas provoquer des inclusions lorsque la balise #URL_ECRIRE est dans un squelette, report adapte de [16413]
+r16424 | cedric    | il n'est evidemment pas necessaire de decoder le contexte ajax et de faire plein de verification si le form poste n'a pas le meme nom que le form que l'on affiche, pour savoir si celui-ci vient d'etre poste...
+r16454 | cedric    | peut etre que mysql ressortait par chance les stats dans le bon ordre, mais pour sqlite il faut explicitement un order by sur la date pour que ca soit trie...
+r16466 | fil       | url_absolue doit nettoyer les // dans les urls, mais PAS dans la query apres le '?' (toutati)
+r16473 | cedric    | traiter les array() en premier, car la fonction strncmp utilisee pour traiter les int provoque un warning sinon
+r16474 | cedric    | SQLite fait une division entiere sur le timestamp, il en resulte une date arrondie au jour precedent, malgre le ceil qui suit.On reformule avec un floor qui devrait marcher dans tous les SQL
+r16475 | fil       | report oublie de [14484] (bug dans l'API sql_* : le mysql_error() est en effet lie a la derniere connexion ouverte, il faut donc passer systematiquement la variable serveur si on veut pouvoir parler a deux connexions en meme temps (sinon, seule la derniere connexion ouverte parle) ; cf.  http://php.net/mysql_error j'imagine qu'il va falloir etendre aux autres portages)
+r16476 | fil       | suite de [16475]
+r16478 | bb        | coquille (mieux qu'une virugle BoOz :p)
+r16480 | cedric    | lorsque la balise <head> contient des attributs, il faut quand meme etre capable de poser un <base...> en urls arbos
+r16485 | cedric    | #1967 ne pas mentionner explicitement 0minirezo mais s'en refereer aux autorisation pour editer une rubrique(reliquat de [8438] modifie par [8466])
+r16486 | fil       | ne pas mourir lorsqu'on demande juste l'errno et l'error suite a une erreur sql (retour donc sur [16476] , denoncee par kent1 comme cassant la mutu)
+r16488 | cedric    | Report de [16075] pour resoudre #1916
+r16499 | davux     | Permettre à urls_generer_url_xxx() de passer la mainReport de [16492] et [16497], appliqué à tous les schémas d'URL.
+r16510 | cedric    | lorsqu'aucun login n'est saisi, renvoyer un message 'L'identifiant "" est inconnu' est un peu incomprehensible.Preferer un 'Cette information est obligatoire' sur le champ login !
+r16513 | cedric    | ne pas confondre le filtre |balise_img qui produit une balise HTML <img> a partir d'un nom de fichier, et la fonction qui definirait la balise SPIP #IMG (denisb)Du coup la fonction balise_img() devient moins pratique a utiliser dans le PHP. Faut-il proposer un nommage alternatif |tag_img pour cela, voire |img_tag ou tout simplement |img ?
+r16516 | esj       | Lors de la mise en squelettes ([12385]) des flux RSS des forums, auparavant assurés par l'action {{{rss}}}, la clause LIMIT ajoutée par celle-ci aux différentes requêtes SQL n'avait pas été reporté dans chacun des squelettes. Du coup, lorsqu'on s'abonne à un vieux site, le flux peut contenir des milliers d'entrées que SPIP n'a pas le temps de produire. Le problème avait été vu et corrigé par [14646] pour les flux publics, mais pas pour les flux privés.
+r16518 | denisb    | le parseur xml doit pouvoir repérer tous les 'white space character' dans les tag (voir : http://www.w3.org/TR/REC-xml/#AVNormalize) et ne pas se limiter au seul 'espace'.on peut donc écrire dans son fichier xml : {{{  <mon_tag	type="truc"	chose="bla"  > }}}
+r16521 | esj       | Le calcul du nom de login à partir du mail n'avait jamais marché. Six ans après [3824] on s'en aperçoit.
+r16523 | denisb    | suite de [16518].suppression de l'espace malvenu en fin de contenu d'un tag. causait (par exemple) l'impossibilité d'un appel du type :{{{ #CHEMIN{#PLUGIN{cfg, icon}}}}}
+r16526 | denisb    | reprenons [16523] et corrigeons en amont plus proprement.plus petit commentaire.
+r16529 | kent1     | Créer les bon chemins pour les plugins dans un _DIR_PLUGINS_SUPPL
+r16530 | denisb    | finalement, on revert [16523] et [16526].on ne touche pas au parseur xml, mais on nettoie le superflu retourné dans la fonction get_infos() (cerdic)
+r16538 | kent1     | Un pipeline pour pouvoir avoir de nouveaux statuts d'auteurs visibles ...
+r16539 | cedric    | permettre d'augmenter la duree des sessions via define('_RENOUVELLE_ALEA',..) n'avait aucun effet puisque les sessions de plus de 48h etaient supprimees au moindre login, ce delai etant lui en dur.On le modifie au profit de 4*_RENOUVELLE_ALEA.
+r16541 | kent1     | Un pipeline non déclaré ...
+r16542 | esj       | Lors de la refonte du débusqueur pour qu'il donne plus d'informations, et cela dans la langue de l'utilisateur, celle-ci est devenue à tort la valeur par défaut de la langue des traductions de chaînes de langue lors de l'exécution d'une balise dynamique. Ce changement a été opéré par [14322] en bas, où {{{\$GLOBALS['spip_lang']}}} est remplacé par {{{_q($GLOBALS['spip_lang])}}} c'est-à-dire par un calcul immédiat (à la compilation) au lieu d'un calcul différé (à l'exécution). Comme l'appel de {{{recuperer_fond}}} a toujours été prevu pour founir la bonne valeur par défaut, on n'aurait en fait jamais dû trimbaler cette valeur jusqu'à {{{synthetiser_balise_dynamique}}}, qui donc ne s'en soucie plus.
+r16544 | kent1     | Qui ne dit rien consent ...Si le champ est null on retourne null et non pas une valeur vide '' dans les CVT
+r16550 | cedric    | Lorsqu'un nouvel inscrit se connecte pour la premiere fois, sa session est corrompue au moment ou on lui fixe son statut definitif (en remplacement de 'nouveau) car la globale visiteur_session n'a pas encore ete chargee mais est utilisee par session_set.Charger la session au prealable du changement de statut, donc, dans ce scenario.
+r16553 | kent1     | Des accents oubliés sur une chaine de langue
+r16556 | esj       | Le find_in_path pour la DTD locale introduit par r15963 n'était pas assez général car contraint en amont par le préfixe 'prive'
+r16558 | esj       | Accpeter dans une DTD un élément à contenu totalement vide (même pas EMPTY explicite).
+r16560 | esj       | Créer le repertoire de cache des DTD (source et compilée) en début d'analyse, dans le cas d'une DTD locale qu'on ne recopie pas, l'écriture du cache échoue s'il n'est pas là (Eric).
+r16562 | kent1     | Comme cela n'a pas l'air de déchainer les passions ... Je commites déjà cela pour éviter d'avoir des urls menant vers des fichiers ou répertoires existants
+r16563 | kent1     | On revert ... et on garde ce bug ... (réglable dans un htaccess à priori)
+r16567 | cedric    | un mutualisation avec repertoire, se fier au chemin de spip.php via $_SERVER['SCRIPT_NAME'] ne marche pas.On detecte ce cas par le fait que le repertoire temporaire est different de _NOM_TEMPORAIRES_INACCESSIBLES, et on s'en remet alors a adresse_site comme auparavant.Mais les sites normaux garde la possibilite d'etre accessible par plusieurs urls avec des profondeurs differentes.
+r16569 | denisb    | ne plus masquer les warning. 
+r16575 | bb        | report de r16574 (deux customs events pour se brancher en début et fin de l'action des blocs depliables)
+r16577 | bb        | jQuery 1.4.4 avec 5 jours de retard...
+r16580 | esj       | Include manquant pour la fonction Typo lorsque l'on rappatrie un document distant.
+r16587 | kent1     | Un hack assez moche qui doit être très ancien de moins
+r16588 | kent1     | Un grep me donne cet autre hack moins grave apparemment mais là quand même 
+r16589 | romy      | Des boutons d'admin fixes, pour ne plus les perdre de vue, et translucides, pour voir en dessous.
+r16590 | kent1     | Si l'id_auteur == 0, il n'est pas créé donc il n'est pas intervenu dans le site, donc on n'essaie pas d'afficher ses articles et autres...
+r16591 | cedric    | Dans les flux RSS, certains editeurs croient bon de forcer un retrait avec des &nbsp; en debut de texte.On trim donc le contenu des flux en prenant en compte ces &nbsp; en debut ou fin de texte, comme des espaces.
+r16592 | cedric    | Revert de [16591] qui est doublement mauvais. Je me cache.
+r16593 | cedric    | Dans le cas ou on ne garde qu'un resume des contenus syndiques, nettoyer les espaces insecables eventuels utilises par l'esiteur du flux pour faire du retrait avec une fonction trim_more
+r16594 | cedric    | utiliser la syntaxe abregee jQuery(function(){...}) ou $(function(){...})au lieu de jQuery('document').ready(function(){...}) (ou $..)permet un chargement asynchrone de jQuery avec une fonction temporaire factice jQuery qui collecte les function pour les executer lorsque jQuery est reelement disponibleOn veillera donc a utiliser systematiquement cette ecriture
+r16595 | esj       | Depuis que l'espace privé utilise aussi des squelettes, il faut mettre la profondeur d'URL dans le contexte implicite des pages cachées, sinon les pages cachées utilisant les balises URL_* produites dans un des espaces seront exploitées à tort quand elles seront demandées à partir de l'autre espace. Cela est en particulier le cas du squelette 404 et ceux qu'il incluent, exploité par les 2 espaces.
+r16597 | bb        | permettre d'utiliser l'autorisation editermots sans avoir à passer $opts['groupe_champs'] à celle-ci (pratique lors de son utilisation dans un squelette).report de http://zone.spip.org/trac/spip-zone/changeset/42435
+r16599 | cedric    | Attention, par defaut sql_showtable ne traduit pas les prefixes spip_, il faut lui passer le second argument a true pour cela.Bloquait la recopie des tables en fin d'import depuis une version ancienne si le prefixe de la table principale n'etait pas spip_ (emmanuel)
+r16601 | kent1     | on revient sur [16538]- On supprime le pipeline ajouté qui ne sert à rien- On teste juste les mêmes valeurs à chaque fois que l'on utilise traduire_statut_auteur() plutot qu'une fois la clé et une fois la valeur de $GLOBALS['liste_des_statuts']
+r16602 | esj       | La correction des URL_* par r16595 ne marchait pas pour les URL-arbos (Cédric), en voici une autre.
+r16607 | davux     | Report de r16605 (mise à jour de l'URL des changesets)
+r16613 | booz      | Une boucle forum avec le critere {recherche} et le critere {plat} ou {tout} ne doit pas agréger les résultats par thread
+r16614 | booz      | oups
+r16618 | davux     | Report de r16616: ajout de langue Nasa Yuwe (pbb)
+r16621 | davux     | Dans les flux RSS, encoder en entités XML, pas HTMLReport de http://zone.spip.org/trac/spip-zone/changeset/42644
+r16623 | cedric    | L'optimisation de la maj des popularites par un sql_alter est un non sensen sqlite qui ne sait pas faire d'alter et est oblige de faire des contorsionspour y arriver. Avec consequence que ca peut casser au milieu et rendre lesreferers non fonctionnels. On fait donc ici un test sur le type de base utilisepour faire un sql_update simple dans le cas sqlite
+r16624 | cedric    | ecrire_meta ni liberait pas la ressource sql. Cela pose probleme en sqlite, en particulier si on essaye de faire un sql_alter apres un ecrire_meta.On corrige aussi la fonction lire_metas qui ne liberait pas non plus la ressource sql.
+r16625 | cedric    | Google&co indexe les urls courtes microbloguees. Il convient donc de les rediriger parun status 301 afin d'indiquer que cette adresse courte est definitivement renvoyeevers l'url complete
+r16629 | bb        | report de r16628 ( alt au sketch : depuis r15394 on échappait plus l'attribut alt de l'image (patv) ) 
+r16635 | bb        | report de r16631 et r16333 pour régler #1957 ( Ce script ne fonctionne pas en 2.3 et provoque un bug bloquant en 2.1 (cf ticket #1957 ), On gère le cas ie7 bien plus simplement depuis la feuille de styles. / evacuons cette exception de traitement qui n'a plus lieu d'etre. Toutes les protections de champs sensibles sont assurees a la declaration de la table des traitements, par les extensions )
+r16636 | cedric    | oups, double ligne inutile introduite par [16625]
+r16643 | davux     | Report de r16639 : Permettre de surcharger _BALISES_BLOCS dans mes_options Ne pas râler si _BALISES_BLOCS a été surchargé dans le fichier d'options (par exemple parce qu'on a beau comprendre la théorie, on trouve ça naze que ins et del provoquent des coupures de paragraphe). 
+r16667 | cedric    | report de r16459 :dans une pagination, lorsque la page demandee etait superieure au nombre de resultats, cela provoquait une boucle vide et des messages saugrenus du genre "Il n'y a aucun ...".On borne donc, et dans tous les cas, la boucle affiche ce qui correspond a la derniere page de la pagination.Ainsi, si en ajax on retire des elements de la liste paginee, celle-ci revient automatiquement a la page precedente lorsqu'on a vide la deniere page.+ saturation de la page courante affichee a la valeur de la derniere page
+r16675 | fil       | retour de l'etoile sur le bouton d'admin quand la page est prise dans le cache
+r16677 | fil       | revert [16675] commite par erreur
+r16682 | cedric    | ne pas introduire de styles en dur dans les tableaux, mais preferer injecter une classe "numeric" sur les colonnes numeriques. Elle est completee par une classe "virgule" ou "point" selon le separateur, meme si non utilisable pour le moment faute d'implementation dans les navigateurs
+r16725 | cedric    | report de r16582 : depiler la langue lorsqu'on l'a changee
+r16731 | fil       | mieux loger le genie
+
+Extensions 2.1.2 -> 2.1.3 ( mi dec 2010 ) 
+r40009 | cedric    | pas de division par zero
+r40085 | real3t    | 2 bugs : * le charset défini dans spip_meta n'était pas correctement récupéré* le header n'était jamais envoyéLe bug n'était visible que sur un site où apache avait sont charset par défaut à autre chose que utf-8
+r41348 | marcimat  | Mise à jour de Markitup en version 1.1.8 + Corrections pour les sélections automatiques de mots sous Opéra.
+r41349 | marcimat  | Commentaires en moins.
+r41384 | cedric    | mettre en define le code d'insertion des js compresse pour permettre d'y ajouter un attribut defer pour ceux qui le veulent
+r41390 | cedric    | plutot qu'un define, on utilise deux callback surchargeables compacte_ecrire_balise_link() et compacte_ecrire_balise_script() pour produire les balises des css et js compresses
+r41452 | kent1     | Des broutilles
+r41613 | marcimat  | Report partiel de [41612] (strlen doit être une chaine)
+r41959 | kent1     | La version en anglais du plugin.xml + on utilise le plugin bando en 2.1 pour être sûr de passer derrière pour les autorisations de voir les boutons au moins (peut être à revoir)
+r41960 | kent1     | On est passé en objet/id_objet
+r41987 | kent1     | Changement du nom de la fonction email_notification_forum pour ne pas avoir de problèmes avec le plugin notifications ni la fonction du core de SPIP (en 2.1)
+r41988 | kent1     | On surcharge inc/regler_moderation de la 2.1 pour éviter une erreur sql et voir le nombre de messages de forums de l'article
+r41989 | kent1     | $mydate s'était paumé quelque part
+r42194 | kent1     | Déclarer la fonction du pipeline même si elle ne fait rien :- elle permet de charger ce fichier pour utiliser l'autre fonction - cela évite de recalculer les pipelines parce que SPIP ne la trouve pasÉviter les espaces disgracieux en début de ligne dûs au filtre |oui
+r42215 | fil       | un media css non precise est equivalent a all ; on groupe
+r42254 | arno*     | Bug des filtres MSIE quand on transforme les codes couleur.
+r42398 | cedric    | Racourcir les couleurs sans casser filter(...) et accelerer la regexp sur les declarations vides en l'accrochant sur \s
+r42593 | cedric    | spritons ces 29 icones pour eviter de multiples hit. C'est surtout genant sur les pages publiques qui contiennent un forum (meme si cela ne concerne alors que 6 icones) (avec le sprite, donc)
+r42674 | kent1     | charger_filtre pour trouver le filtre generer_info_entite permettant en 2.1 d'aller le chercher dans spip_bonux plutot que le coreOn nécessite spip-bonux pour la version 2.1
+r42787 | cedric    | ne pas perdre la transparence avec le filtre |image_renforcement
+
+
+
 2.1.0  -> 2.1.1
 
 r15605 | romy      | Ces parentheses residuelles dans les boutons d'admin etaient vraiment trop bizarres.
