@@ -155,7 +155,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'voir_auteur' => generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur", true),
 			'ecrire' => $ecrire,
 			'action' => self(),
-			'preview' => $preview?parametre_url(self(),'var_mode','preview'):'',
+			'preview' => $preview?parametre_url(self(),'var_mode','preview','&'):'',
 			'debug' => $debug,
 			'popularite' => ceil($popularite),
 			'statistiques' => $statistiques,
