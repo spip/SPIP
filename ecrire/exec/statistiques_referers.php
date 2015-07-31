@@ -18,55 +18,57 @@ include_spip('inc/statistiques');
 // http://doc.spip.org/@exec_statistiques_referers_dist
 function exec_statistiques_referers_dist()
 {
-	$id_article = intval(_request('id_article'));
 	$jour = _request('jour');
 	$limit  = _request('limit');
-
-	if (!autoriser('voirstats', $id_article ? 'article':'', $id_article)) {
+// nombre de referers a afficher
+	$limit = intval($limit);	//secu
+	if (!autoriser('voirstats','article')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 
+	if ($limit == 0) $limit = 100;
+	if ($jour<>'veille') $jour='jour';
+
+	$result = sql_select("referer_md5, referer, SUM(visites_$jour) AS vis", "spip_referers", "visites_$jour>0 ", "referer", "vis DESC", $limit);
+
+	$res = "<br /><div style='font-size:small;' class='verdana1'>"
+	. aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200))))
+	. "</div><br />";
+
 	$commencer_page = charger_fonction('commencer_page', 'inc');
+
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
 	echo "<br /><br /><br />";
 
 	echo gros_titre(_T('titre_liens_entrants'),'', false);
-
-//barre_onglets("statistiques", "referers");
-
 	echo debut_gauche('', true);
 	echo debut_boite_info(true);
+
 	echo "<p style='font-size:small; text-align:left;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
+
 	echo fin_boite_info(true);
 
 	echo debut_droite('', true);
 
-
-//
-// Affichage des referers
-//
-
-// nombre de referers a afficher
-	$limit = intval($limit);	//secu
-	if ($limit == 0) $limit = 100;
-
-	if ($jour<>'veille')
-		$jour='jour';
-
 	echo barre_onglets("stat_referers", $jour);
 
-
-// afficher quels referers ?
-
-	$result = sql_select("referer_md5, referer, SUM(visites_$jour) AS vis", "spip_referers", "visites_$jour>0 ", "referer", "vis DESC", $limit);
-
-	echo "<br /><div style='font-size:small;' class='verdana1'>";
-	echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_referers', ("jour=$jour&limit=" . strval($limit+200))));
-
-	echo "</div><br />";
+	echo $res;
 
 	echo fin_gauche(), fin_page();
 	}
 }
+
+function barre_onglets_stat_referers() {
+
+	$onglets = array();
+	$onglets['jour']=
+		  new Bouton(null, 'date_aujourdhui',
+			generer_url_ecrire("statistiques_referers",""));
+	$onglets['veille']=
+		  new Bouton(null, 'date_hier',
+			generer_url_ecrire("statistiques_referers","jour=veille"));
+	return $onglets;
+}
+
 ?>
