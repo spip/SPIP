@@ -104,11 +104,6 @@ function ajouter_session($auteur) {
 	// Attention un visiteur peut avoir une session et un id=0,
 	// => ne pas melanger les sessions des differents visiteurs
 	$id_auteur = isset($auteur['id_auteur']) ? intval($auteur['id_auteur']) : 0;
-	if (!isset($_COOKIE['spip_session'])
-	OR !preg_match(',^'.$id_auteur.'_,', $_COOKIE['spip_session']))
-		$_COOKIE['spip_session'] = $id_auteur.'_'.md5(uniqid(rand(),true));
-
-	$fichier_session = "";
 
 	// Si ce n'est pas un inscrit (les inscrits ont toujours des choses en session)
 	// on va vérifier s'il y a vraiment des choses à écrire
@@ -129,10 +124,17 @@ function ajouter_session($auteur) {
 
 		// Si après ça la session est vide alors on supprime l'éventuel fichier et on arrête là
 		if (!$auteur_verif){
-			if (isset($_SESSION[$_COOKIE['spip_session']]))
+			if (isset($_COOKIE['spip_session']) AND isset($_SESSION[$_COOKIE['spip_session']]))
 				unset($_SESSION[$_COOKIE['spip_session']]);
+			if (isset($_COOKIE['spip_session']))
+				unset($_COOKIE['spip_session']);
 			return false;
 		}
+	}
+
+	if (!isset($_COOKIE['spip_session'])
+	  OR !preg_match(',^'.$id_auteur.'_,', $_COOKIE['spip_session'])){
+		$_COOKIE['spip_session'] = $id_auteur.'_'.md5(uniqid(rand(),true));
 	}
 
 	// Maintenant on sait qu'on a des choses à écrire
@@ -288,8 +290,16 @@ function session_get($nom) {
  * @return void
  */
 function session_set($nom, $val=null) {
-	// On ajoute la valeur dans la globale
-	$GLOBALS['visiteur_session'][$nom] = $val;
+
+	if (is_null($val)){
+		// rien a faire
+		if (!isset($GLOBALS['visiteur_session'][$nom])) return;
+		unset($GLOBALS['visiteur_session'][$nom]);
+	}
+	else {
+		// On ajoute la valeur dans la globale
+		$GLOBALS['visiteur_session'][$nom] = $val;
+	}
 
 	ajouter_session($GLOBALS['visiteur_session']);
 	actualiser_sessions($GLOBALS['visiteur_session']);
