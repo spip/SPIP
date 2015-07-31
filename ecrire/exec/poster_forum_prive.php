@@ -54,14 +54,14 @@ function forum_envoi(
 		if (_AJAX) {
 			ajax_retour($forum_envoi);
 		} else {
-		$titre = $script == 'message' ? _T('onglet_messagerie') : _T('titre_cadre_forum_interne');
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('texte_nouveau_message'), "accueil", "accueil");
-		echo debut_gauche('', true);
-		echo debut_droite('', true);
-		echo gros_titre($titre,'', false);
-		echo $forum_envoi, fin_gauche(), fin_page();
-	}
+			$titre = $script == 'message' ? _T('onglet_messagerie') : _T('titre_cadre_forum_interne');
+			$commencer_page = charger_fonction('commencer_page', 'inc');
+			echo $commencer_page(_T('texte_nouveau_message'), "accueil", "accueil");
+			echo debut_gauche('', true);
+			echo debut_droite('', true);
+			echo gros_titre($titre,'', false);
+			echo $forum_envoi, fin_gauche(), fin_page();
+		}
 	}
 }
 ?>

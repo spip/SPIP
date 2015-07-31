@@ -191,39 +191,45 @@ function forum_envoi_forum_admin($id, $row, $retour) {
 // http://doc.spip.org/@forum_envoi_formulaire
 function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre, $nom_site, $url_site)
 {
-	return "\n<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr><td>"
-	  . (!$retour ? '' : icone(_T('icone_retour'), $retour, forum_logo($statut), '','', false))
-	  ."</td><td style='width: 100%'>"
-	  ."<b><label for='titre_message'>"
-	  . _T('info_titre')
-	  ."</label></b><br />\n"
-	  . "<input id='titre_message' name='titre_message' type='text' value=\""
-	  . entites_html($titre)
-	  . "\" size='40'  class='formo' />\n"
-	  . "</td></tr></table><br />"
-	  .
-	  "<b><label for='texte'>" .
-	  _T('info_texte_message') .
-	  "</label></b><br />\n" .
-	  _T('info_creation_paragraphe') .
-	  "<br />\n" .
-	  afficher_textarea_barre($texte, true) .
-	  "<input type='hidden' name='modif_forum' value='oui' />\n" .
-	  (!($statut != 'perso')
-	   ? ''
-	   : ("<b>"._T('info_lien_hypertexte')."</b><br />\n"
-		. _T('texte_lien_hypertexte')."<br />\n"
-		. "<label for='nom_site'>"
-		. _T('form_prop_nom_site')
-		. "</label><br />\n"
-		. "<input type='text' id='nom_site' name='nom_site' value=\""
-	        . entites_html($nom_site)
-	        . "\" size='40' class='forml' />"
-		. "<label for='url_site'>"
-		. _T('info_url')
-		."</label><br /><br />\n"
-		. "<input type='text' class='forml' id='url_site' name='url_site' value=\"".entites_html($url_site)
-		. "\" size='40' />"	      ));
+
+	return (!$retour ? '' : "<div class='entete-formulaire'>".icone(_T('icone_retour'), $retour, forum_logo($statut), '','', false)."</div>")
+		. "<div class='formulaire_spip formulaire_editer formulaire_editer_message_forum'>"
+		."<ul>"
+		."<li class='obligatoire'><label for='titre_message'>"
+	  	. _T('info_titre')
+	  	."</label>"
+	  	. "<input id='titre_message' name='titre_message' type='text' value=\""
+	  	. entites_html($titre)
+	  	. "\"   class='text' />\n"
+		."</li>"
+		."<li class='haut'><label for='texte' >"
+	  	. _T('info_texte_message')
+	  	."</label>"
+	  	.  afficher_textarea_barre($texte, true)
+		."<input type='hidden' name='modif_forum' value='oui' />\n"
+	  	."</li>"		
+	  . (!($statut != 'perso')
+		   ? ''
+		   : (
+				"<li class='fieldset'><fieldset>"
+				."<h3 class='legend'>"._T('info_lien_hypertexte')."</h3>"
+				."<p class='explication'>". _T('texte_lien_hypertexte')."</p>\n"
+				."<ul>"
+				. "<li><label for='nom_site'>"
+				. _T('form_prop_nom_site')
+				. "</label>"
+				. "<input type='text' id='nom_site' name='nom_site' value=\""
+					. entites_html($nom_site)
+					. "\" class='text' /></li>"
+				. "<li><label for='url_site'>"
+				. _T('info_url')
+				."</label>"
+				. "<input type='text' id='url_site' name='url_site' value=\"".entites_html($url_site)
+				. "\" class='text' /></li>"
+				."</ul></fieldset></li>"
+				))
+		."</ul></div>";
+	  
 }
 
 // http://doc.spip.org/@forum_envoi_entete
