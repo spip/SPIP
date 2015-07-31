@@ -139,7 +139,7 @@ elseif (isset($GLOBALS['meta']["admin"])) {
 		die(_T('info_travaux_texte'));
 	$l = $GLOBALS['meta']["admin"];
 	spip_log("Le script $l, en cours, se substitue a $exec");
-	$exec = substr($l, 0, strpos($l, ' '));
+	$exec = substr($l, 0, strpos($l, '_'));
 }
 // si nom pas plausible, prendre le script par defaut
 elseif (!preg_match(',^[a-z_][0-9a-z_]*$,i', $exec)) $exec = "accueil";
