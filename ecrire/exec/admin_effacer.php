@@ -65,7 +65,7 @@ echo _T('texte_admin_effacer_01');
 
 echo "<CENTER>";
 
-debut_boite_alerte();
+echo debut_boite_alerte();
 
 echo "\n<div class='serif'>";
 echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
@@ -77,7 +77,7 @@ echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
    "' /></div></form>",
    "\n</div>";
 
-fin_boite_alerte();
+echo fin_boite_alerte();
 
 echo "</CENTER>";
 

@@ -37,8 +37,7 @@ function choix_couleur() {
 function hr($color, $retour = false) {
 	$ret = "<div style='height: 1px; margin-top: 5px; padding-top: 5px; border-top: 1px solid $color;'></div>";
 	
-	if ($retour) return $ret;
-	else echo $ret;
+	if ($retour) return $ret; else echo $ret;
 }
 
 
@@ -119,16 +118,14 @@ function fin_cadre($style) {
 function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('r', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_relief
 function fin_cadre_relief($return = false){
 	$retour_aff = fin_cadre('r');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 
@@ -136,8 +133,7 @@ function fin_cadre_relief($return = false){
 function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('e', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_enfonce
@@ -145,23 +141,20 @@ function fin_cadre_enfonce($return = false){
 
 	$retour_aff = fin_cadre('e');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 
 // http://doc.spip.org/@debut_cadre_sous_rub
 function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre);
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_sous_rub
 function fin_cadre_sous_rub($return = false){
 	$retour_aff = fin_cadre('sous_rub');
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 
@@ -170,48 +163,42 @@ function fin_cadre_sous_rub($return = false){
 function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_forum
 function fin_cadre_forum($return = false){
 	$retour_aff = fin_cadre('forum');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@debut_cadre_thread_forum
 function debut_cadre_thread_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('thread-forum', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_thread_forum
 function fin_cadre_thread_forum($return = false){
 	$retour_aff = fin_cadre('thread-forum');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@debut_cadre_gris_clair
 function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('gris-clair', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_gris_clair
 function fin_cadre_gris_clair($return = false){
 	$retour_aff = fin_cadre('gris-clair');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 
@@ -219,16 +206,14 @@ function fin_cadre_gris_clair($return = false){
 function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_couleur
 function fin_cadre_couleur($return = false){
 	$retour_aff = fin_cadre('couleur');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 
@@ -236,34 +221,28 @@ function fin_cadre_couleur($return = false){
 function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre);
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_couleur_foncee
 function fin_cadre_couleur_foncee($return = false){
 	$retour_aff = fin_cadre('couleur-foncee');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@debut_cadre_trait_couleur
 function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre);
-
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
 
 // http://doc.spip.org/@fin_cadre_trait_couleur
 function fin_cadre_trait_couleur($return = false){
 	$retour_aff = fin_cadre('trait-couleur');
 
-	if ($return) return $retour_aff;
-	else echo $retour_aff;
+	if ($return) return $retour_aff; else echo $retour_aff;
 }
-
 
 
 //
@@ -271,14 +250,12 @@ function fin_cadre_trait_couleur($return = false){
 //
 // http://doc.spip.org/@debut_boite_alerte
 function debut_boite_alerte() {
-	echo "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'>";
-	echo "<table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
+	return "<p><table cellpadding='6' border='0'><tr><td width='100%' bgcolor='red'><table width='100%' cellpadding='12' border='0'><tr><td width='100%' bgcolor='white'>";
 }
 
 // http://doc.spip.org/@fin_boite_alerte
 function fin_boite_alerte() {
-	echo "</td></tr></table>";
-	echo "</td></tr></table>";
+	return "</td></tr></table></td></tr></table>";
 }
 
 
@@ -293,7 +270,6 @@ function debut_boite_info($return=false) {
 
 // http://doc.spip.org/@fin_boite_info
 function fin_boite_info($return=false) {
-	//echo "</font></td></tr></table></div>\n\n";
 	$r = "</div>";
 	if ($return) return $r; else echo $r;
 }
@@ -302,7 +278,7 @@ function fin_boite_info($return=false) {
 // une autre boite
 //
 // http://doc.spip.org/@bandeau_titre_boite2
-function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
+function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $af = true) {
 	global $spip_lang_left, $spip_display, $browser_name;
 	
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
@@ -318,7 +294,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 		$retour = "<h3 style='background-color: $fond; color: $texte; padding: 3px; border-bottom: 1px solid #444444; margin: 0px;' class='verdana2'>$titre</h3>";
 	}
 
-	if ($echo) echo $retour; return $retour;
+	if ($af) echo $retour; return $retour;
 }
 
 //
@@ -1051,60 +1027,6 @@ function puce_statut($statut, $type='article') {
 }
 
 
-// http://doc.spip.org/@afficher_auteurs
-function afficher_auteurs ($titre_table, $requete) {
-
-	if (!$requete['SELECT']) $requete['SELECT'] = '*' ;
-
-	$tous_id = array();
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($cpt = $cpt['n'])) return $tous_id ;
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
-
-	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
-	$nb_aff = floor(1.5 * _TRANCHES);
-	$deb_aff = intval(_request($tmp_var));
-	$tranches = '';
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, '', $nb_aff);
-	}
-
-	debut_cadre_relief("auteur-24.gif");
-
-	if ($titre_table) {
-			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'>";
-			echo "<tr><td width='100%'>";
-			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-			echo "<tr bgcolor='#333333'><td width='100%' colspan='5'><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
-			echo "<b>$titre_table</b></font></td></tr>";
-		}
-	else {
-			echo "<p><table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-		}
-
-	echo $tranches;
-
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-
-	$table = array();
-	while ($row = spip_fetch_array($result)) {
-		$tous_id[] = $row['id_auteur'];
-		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$table[]= $formater_auteur($row['id_auteur']);
-	}
-	spip_free_result($result);
-	$largeurs = array(20, 20, 200, 20, 50);
-	$styles = array('','','arial2','arial1','arial1');
-	echo afficher_liste($largeurs, $table, $styles);
-
-	if ($titre_table) echo "</table></td></tr>";
-	echo "</table>";
-	fin_cadre_relief();
-
-	return $tous_id;
-}
-
 //
 // Afficher les forums
 //
@@ -1740,7 +1662,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 }
 
 // http://doc.spip.org/@icone_horizontale
-function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true, $javascript='') {
+function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true, $javascript='') {
 	global $spip_display;
 
 	$retour = '';
@@ -1778,7 +1700,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		$retour = "<li><a$lien>$texte</a></li>";
 	}
 
-	if ($echo) echo $retour; else return $retour;
+	if ($af) echo $retour; else return $retour;
 }
 
 
@@ -2140,7 +2062,7 @@ function mySel($varaut,$variable, $option = NULL) {
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
 // http://doc.spip.org/@voir_en_ligne
-function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo = true) {
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af = true) {
 	global $connect_statut;
 
 	$en_ligne = $message = '';
@@ -2187,7 +2109,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $echo
 	}
 
 	if ($message)
-	  return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $echo);
+	  return icone_horizontale($message, generer_url_action('redirect', "id_$type=$id&var_mode=$en_ligne"), $image, "rien.gif", $af);
 
 }
 

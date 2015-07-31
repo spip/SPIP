@@ -145,9 +145,9 @@ function import_all_continue()
 	// le test is_readable n'est donc pas suffisant
 	if (!@is_readable($archive)||is_dir($archive) || !$affiche_progression_pourcent) {
 		$texte_boite = _T('info_erreur_restauration');
-		debut_boite_alerte();
+		echo debut_boite_alerte();
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>$texte_boite</b></font>";
-		fin_boite_alerte();
+		echo fin_boite_alerte();
 
 		// faut faire quelque chose, sinon le site est mort :-)
 		// a priori on reset les meta de restauration car rien n'a encore commence
@@ -176,9 +176,9 @@ function import_all_continue()
 		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
 		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
 
-	debut_boite_alerte();
+	echo debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
-	fin_boite_alerte();
+	echo fin_boite_alerte();
 	$max_time = ini_get('max_execution_time')*1000;
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',$max_time);</script>\n");
 
