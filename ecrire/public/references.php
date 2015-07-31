@@ -484,17 +484,24 @@ function compose_filtres(&$p, $code) {
 				$code = "filtrer('$fonc',$code$arglist)";
 				if ($is_filtre_image) $p->ramasser_miettes = true;
 			}
-			// le filtre est defini sous forme de fonction ou de methode
-			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
-			else if (function_exists($fonc)
-				OR (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
-					AND is_callable(array($regs[1], $regs[2]))
-			))
-				$code = "$fonc($code$arglist)";
 			// est-ce un test ?
 			else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
 				$code = "($code $fonc " . substr($arglist,1) . ')';
-			else
+			// le filtre est defini sous forme de fonction ou de methode
+			// par ex. dans inc_texte, inc_filtres ou mes_fonctions
+			else {
+				foreach (
+				array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
+					if (function_exists($f)
+					OR (preg_match("/^(\w*)::(\w*)$/", $f, $regs)                            
+						AND is_callable(array($regs[1], $regs[2]))
+					)) {
+						$code = "$f($code$arglist)";
+						break;
+					}
+			}
+
+			if (!isset($code))
 				$code = "erreur_squelette('"
 				.texte_script(_T('zbug_erreur_filtre', array('filtre'=>$fonc)))
 				."','" . $p->id_boucle . "')";

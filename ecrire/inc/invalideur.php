@@ -187,10 +187,13 @@ function code_invalideur_forums($p, $code) {
 
 
 // Fonction permettant au compilo de calculer les invalideurs d'une page
+// (note: si absente, n'est pas appellee)
+/*
 // http://doc.spip.org/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 	return $corps;
 }
+*/
 
 // Cette fonction permet de supprimer tous les invalideurs
 // Elle ne touche pas aux fichiers cache eux memes ; elle est
