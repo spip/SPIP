@@ -50,6 +50,13 @@ if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }
 
+if ($set_ecran) {
+	setcookie('spip_ecran', $set_ecran);
+	$spip_ecran = $set_ecran;
+}
+if (!$spip_ecran) $spip_ecran = "etroit";
+
+
 // Debloquer articles
 if ($debloquer_article) {
 	$query = "UPDATE spip_articles SET auteur_modif='0' WHERE id_article='$debloquer_article'";
