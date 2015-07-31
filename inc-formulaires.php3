@@ -291,24 +291,27 @@ function formulaire_inscription() {
 
 		echo "<div class='reponse_formulaire'>";
 		
-		if (mysql_num_rows($result) > 0) {
-		 	while($row = mysql_fetch_array($result)) {
-				$id_auteur = $row['id_auteur'];
-				$statut = $row['statut'];
-			}
+	 	if ($row = mysql_fetch_array($result)) {
+			$id_auteur = $row['id_auteur'];
+			$statut = $row['statut'];
+
 			if ($statut == '5poubelle') {
 				echo "Vous n'avez plus acc&egrave;s &agrave; ce site.";
 				$ok = false;
 			}
 			else if ($statut == 'nouveau'){
-				spip_query("DELETE FROM spip_auteurs WHERE id_auteur='$id_auteur'");
+				spip_query("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
 				echo "Vous vous &ecirc;tes d&eacute;j&agrave; inscrit avec cette adresse, mais vous ne vous &ecirc;tes jamais connect&eacute;. Vous allez recevoir un nouveau code d'acc&egrave;s. ATTENTION&nbsp;: les codes d'acc&egrave;s qui vous sont parvenus auparavant ne sont plus actifs, vous devez utiliser uniquement ceux qui vous sont envoy&eacute;s &agrave; l'instant.";
 				$ok = true;
 			}
-			else if ($statut != '6forum') {
+			else if ($statut == '0minirezo' OR $statut == '1comite') {
 				echo "Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e en tant que r&eacute;dacteur ou
 				administrateur du site, vous pouvez donc utiliser votre mot de passe habituel.";
 				$ok = false;
+			}
+			else if ($statut == '6forum') {	// envoyer les identifiants pour ecrire
+				spip_query("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
+				$ok = true;
 			}
 		}
 
@@ -334,14 +337,10 @@ function formulaire_inscription() {
 			$message .= "- mot de passe : $pass\n\n";
 
 			if (envoyer_mail($mail_inscription, "[$nom_site_spip] Identifiants personnels", $message)) {
-				//echo "<FONT FACE='verdana,arial,helvetica,sans-serif'>";
 				echo "Votre nouvel identifiant vient de vous &ecirc;tre envoy&eacute; par email.";
-				//echo "</FONT>";
 			}
 			else {
-				//echo "<FONT FACE='verdana,arial,helvetica,sans-serif'>";
 				echo "Probl&egrave;me de mail&nbsp;: l'identifiant ne peut pas &ecirc;tre envoy&eacute;.";
-				//echo "</FONT>";
 			}
 		}
 		echo "</div>";

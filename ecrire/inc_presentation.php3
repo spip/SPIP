@@ -1481,7 +1481,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if ($auth_can_disconnect) {
 		echo "<td width='5'>&nbsp;</td>";
-		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
+		icone_bandeau_secondaire ("Se d&eacute;connecter", "../login.php3?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
 	}
 
 	echo "</tr></table>";
@@ -1688,39 +1688,54 @@ function debut_gauche($rubrique = "asuivre") {
 //
 
 function debut_droite() {
-	?>
-	<br></font>
-	&nbsp;
-	</td>
-	<td width=50 rowspan=1>&nbsp;</td>
-	<td width=500 valign="top" rowspan=2>
-	<font face="Georgia,Garamond,Times,serif" size=3>
-	<?php
+	echo '<br></font>&nbsp;</td>
+		<td width=50 rowspan=1>&nbsp;</td>
+		<td width=500 valign="top" rowspan=2>
+		<font face="Georgia,Garamond,Times,serif" size=3>';
 
-	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && ($GLOBALS['bonjour'] == 'oui' || $GLOBALS['secu'] == 'oui')) {
-		if (zap_sessions($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['zap_session'] == 'oui')) {
+	// zap sessions si bonjour
+	if($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
+		$zap = ($GLOBALS['prefs']['zap'] == 'oui');
+		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $zap);
+
+		if ($zappees || $GLOBALS['secu'] == 'oui') {
 			debut_cadre_enfonce();
-			gros_titre("Informations de s&eacute;curit&eacute;");
-			echo "<p>";
-				echo "<form action='index.php3' method='get'>";
-				echo '<img src="img_pack/warning.gif" align="right" hspace="5" vspace="5"> ';
-				echo propre("{{Le syst&egrave;me de ce site a rep&eacute;r&eacute; une autre autorisation de connexion &agrave; votre nom.}}\n\n- Si vous utilisez actuellement un autre butineur (client Web, navigateur, {browser}) pour acc&eacute;der &agrave; ce site, cela est normal. Le syst&egrave;me a simplement remarqu&eacute; que vous utilisiez deux logiciels diff&eacute;rents pour naviguer sur le site.\n\n- Sinon, cela signifie que vous n'avez pas quitt&eacute; le syst&egrave;me en utilisant le bouton {{Se d&eacute;connecter}} lors de votre derni&egrave;re visite. Si vous &ecirc;tes la seule personne &agrave; acc&eacute;der &agrave; votre ordinateur, cela n'est pas grave; en revanche, si vous utilisez une machine accessible &agrave; d'autres utilisateurs, cela peut poser des probl&egrave;mes de s&eacute;curit&eacute;; dans ce cas, prenez l'habitude de  quitter le site en utilisant le bouton {{Se d&eacute;connecter}} ci-dessus, afin que personne ne puisse utiliser votre ordinateur pour se connecter en votre nom.\n\nSi vous n'utilisez pas actuellement un autre butineur pour acc&eacute;der &agrave; ce site, vous pouvez supprimer les anciennes connexions &agrave; votre nom en utilisant le bouton ci-dessous; cela permettra de &laquo;faire le m&eacute;nage&raquo; et d'assurer une meilleure s&eacute;curit&eacute; du syst&egrave;me.");
-				echo "<input type='hidden' name='zap_session' value='oui'>";
-				echo "<input type='hidden' name='secu' value='oui'>";
-				echo "<div align='right'>";
-				echo "<input type='submit' class='fondo' name='submit' value='Supprimer les autres connexions'>";
-				echo "</form>\n";
-			fin_cadre_enfonce();
-		}
-		else if ($GLOBALS['secu'] == 'oui') {
-			debut_cadre_enfonce();
-			gros_titre("Informations de s&eacute;curit&eacute;");
+			gros_titre("Connexions parall&egrave;les");
 			echo "<p>";
 
-			echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><p>";
-			echo propre("Lorsque vous aurez termin&eacute; de travailler dans l'espace priv&eacute;, vous pourrez vous &laquo;d&eacute;connecter&raquo; gr&acirc;ce au bouton pr&eacute;vu &agrave; cet effet dans le bandeau de navigation ci-dessus, afin d'augmenter la s&eacute;curit&eacute; du site. Pour plus d'informations sur cette proc&eacute;dure, n'h&eacute;sitez pas &agrave; consulter l'aide en ligne: ");
-			echo aide("deconnect");
+			if ($zappees) $message = "Lorsque vous aurez termin&eacute; de travailler
+				dans l'espace priv&eacute;, pensez &agrave; vous d&eacute;connecter,
+				soit en quittant votre navigateur, soit en cliquant sur le
+				bouton ci-dessus <img valign='bottom' src='img_pack/deconnecter-24.gif'>.\n\n";
+
+			if ($zap) {
+				$link = new Link();
+				$link->addVar('zap','non');
+				$link = $link->getUrl();
+				$message .= "Actuellement, vous ne pouvez pas vous connecter
+					de plusieurs endroits (ordinateurs ou navigateurs)
+					diff&eacute;rents en m&ecirc;me temps. Si vous souhaitez
+					pouvoir le faire, au prix d'un l&eacute;ger
+					rel&acirc;chement de la s&eacute;curit&eacute; de votre
+					site, <a href='$link'>cliquez ici</a>.";
+			} else {
+				$link = new Link();
+				$link->addVar('zap','oui');
+				$link = $link->getUrl();
+
+				$message .= "Vous pouvez actuellement vous connecter de
+					plusieurs endroits (ordinateurs ou navigateurs)
+					diff&eacute;rents en m&ecirc;me temps. Si vous souhaitez
+					renforcer la s&eacute;curit&eacute; de votre site, ou si
+					vous avez tout simplement oubli&eacute; de vous
+					d&eacute;connecter depuis un ordinateur auquel vous
+					n'avez plus acc&egrave;s, <a href='$link'>cliquez
+					ici</a>.";
+			}
+
+
+			echo propre ($message) .
+				"<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
 
 			fin_cadre_enfonce();
 		}

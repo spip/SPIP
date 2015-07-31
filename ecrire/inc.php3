@@ -40,6 +40,11 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
+if ($zap == 'oui' || $zap == 'non') {
+	$prefs['zap'] = $zap;
+	$prefs_mod = true;
+}
+
 if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }

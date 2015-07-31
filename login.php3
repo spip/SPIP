@@ -3,6 +3,31 @@
 include ("ecrire/inc_version.php3");
 include_local ("inc-login.php3");
 
-login();
+if (! $url)
+	$cible = new Link('ecrire/');
+else
+	$cible = new Link(urldecode($url));
+
+// tentative de connexion en auth_http
+if ($essai_auth_http) {
+	auth_http($cible, 'login.php3', $essai_auth_http);
+	exit;
+}
+
+// tentative de logout
+if ($logout) {
+	include_ecrire("inc_session.php3");
+	verifier_visiteur();
+	if ($auteur_session['login'] == $logout) {
+		if ($spip_session) {
+			supprimer_session($spip_session);
+		    setcookie('spip_session', $spip_session, time() - 3600 * 24);
+		} else if ($PHP_AUTH_USER)
+			auth_http($cible, 'login.php3', 'logout');
+	}
+}
+
+// login standard vers l'espace prive
+login($cible, "login.php3");
 
 ?>

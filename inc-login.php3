@@ -1,6 +1,5 @@
 <?php
 
-
 //
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_LOGIN")) return;
@@ -13,7 +12,28 @@ include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_texte.php3");
 
-function login() {
+
+// gerer l'auth http
+function auth_http($cible, $redirect_echec, $essai_auth_http) {
+	if ($essai_auth_http == 'oui') {
+		include_ecrire('inc_session.php3');
+		if (! verifier_php_auth()) {
+			ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='login.php3?essai_auth_http=oui'>Nouvelle tentative</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
+		} else {
+			$cible->addVar('bonjour','oui');
+			@header("Location: " . $cible->getUrl() );
+		}
+		exit;
+	}
+	// si demande logout auth_http
+	else if ($essai_auth_http == 'logout') {
+		include_ecrire('inc_session.php3');
+		ask_php_auth("<b>D&eacute;connexion effectu&eacute;e.</b><p>(V&eacute;rifiez toutefois que votre navigateur n'a pas m&eacute;moris&eacute; votre mot de passe...)<p>[<a href='./'>Retour au site public</a>] [<a href='$redirect_echec?essai_auth_http=oui&redirect=ecrire'>test navigateur/reconnexion</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
+		exit;
+	}
+}
+
+function login($cible, $redirect_echec) {
 	global $login ;
 	global $spip_admin ;
 	global $erreur, $echec_cookie ;
@@ -70,6 +90,7 @@ function login() {
 	// fond d'ecran de login
 	$images = array ('login.gif', 'login.jpg', 'login.png', 'login-dist.png');
 	while (list(,$img) = each ($images)) {
+		$img = 'IMG/icones/'.$img;
 		if (file_exists($img)) {
 			echo "<style type=\"text/css\"><!--\n" .
 				"body {background-image: url(\"$img\"); background-repeat: no-repeat; background-position: top left;}\n" .
@@ -79,9 +100,6 @@ function login() {
 	}
 
 	echo "<p>&nbsp;<p>";
-
-//	$redirect = ereg_replace ("/login\.php3", "/ecrire/index.php3", $GLOBALS['REQUEST_URI']);
-	$redirect = "./ecrire/index.php3";
 
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
@@ -112,7 +130,7 @@ function login() {
 		echo "<td width=100%>";
 		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 		echo "<script type=\"text/javascript\"><!--\n" .
-			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&redirect=login.php3\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
+			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=login.php3\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
 			"//--></script>\n";
 		echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
@@ -122,7 +140,9 @@ function login() {
 		echo "<p>\n<label><b>Mot de passe :</b><br></label>";
 		echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
-		echo "<input type='hidden' name='redirect' value='$redirect'>\n";
+
+		$url = $cible->getUrl();
+		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<input type='hidden' name='session_password_md5' value=''>\n";
 		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
 		echo "</td>";
@@ -141,22 +161,24 @@ function login() {
 
 	else {
 		// demander seulement le login
-		echo "<form action='login.php3' method='get'>\n";
+		echo "<form action='$redirect_echec' method='get'>\n";
 		debut_cadre_enfonce("redacteurs-24.gif");
 		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 		echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
 		echo "<input type='text' name='login' class='formo' value=\"\" size='40'><p>\n";
+
+		$url = $cible->getUrl();
+		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
 		fin_cadre_enfonce();
 		echo "</form>";
 	}
 
 	if ($echec_cookie == "oui" AND $php_module) {
-		echo "<form action='spip_cookie.php3' method='get'>";
+		echo "<form action='$redirect_echec' method='get'>";
 		echo "<fieldset>\n";
 		echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
-		echo "non s&eacute;curis&eacute;e est &agrave; votre disposition&nbsp;: \n";
-		echo "<input type='hidden' name='redirect' value='$redirect'>";
+		echo "de connexion (moins s&eacute;curis&eacute;e) est &agrave; votre disposition&nbsp;: \n";
 		echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 		echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
 		echo "</fieldset></form>\n";
