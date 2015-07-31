@@ -98,7 +98,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$titre=typo($row['titre']);
 		$lejour=journum($row['date']);
 		$lemois = mois($row['date']);		
-		if ($lemois == $mois_today) $les_articles["$lejour"].="<BR><A HREF='articles.php3?id_article=$id_article'><img src='img_pack/puce-verte.gif' width='7' height='7' border='0'> $titre</A>";
+		if ($lemois == $mois_today) $les_articles["$lejour"].="<BR><A HREF='articles.php3?id_article=$id_article'><img src='img_pack/puce-verte-breve.gif' width='8' height='9' border='0'> $titre</A>";
 	}
 
 	// breves du jour
@@ -110,7 +110,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$lejour=journum($row['date_heure']);
 		$lemois = mois($row['date_heure']);		
 		if ($lemois == $mois_today)
-			$les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
+			$les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche-breve.gif' width='8' height='9' border='0'> <i>$titre</i></A>";
 	}
 
 
