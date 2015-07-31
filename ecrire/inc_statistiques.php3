@@ -60,7 +60,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		$url_site = strtolower(eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site));
 	}
 
-	$url   = parse_url( $kw_referer );
+	$url   = @parse_url( $kw_referer );
 	$query = $url['query'];
 	$host  = strtolower($url['host']);
 	$path  = $url['path'];
