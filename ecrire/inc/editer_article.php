@@ -313,10 +313,6 @@ function articles_edit_config($row)
 	$config['lignes'] = ($spip_ecran == "large")? 8 : 5;
 	$config['afficher_barre'] = $spip_display != 4;
 	$config['langue'] = $spip_lang;
-	$config['articles_surtitre'] = 'non';
-	$config['articles_descriptif'] = "non";
-	$config['articles_urlref'] = "non";
-	$config['articles_ps'] = "non";
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
