@@ -165,7 +165,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 			debug_dumpfile ($page['texte'], $fonc, 'resultat');
 		  }
 	}
-
+	spip_log("page " . strlen($page['texte']) . " $skel .  $fonc");
 	// Retourner la structure de la page
 
 	return $page;
@@ -202,21 +202,21 @@ function calculer_contexte() {
 
 function calculer_page_globale($cache, $fond) {
 
-	global $lastmodified, $_SERVER;
+	global $lastmodified, $_SERVER, $contexte;
 
-	$contexte_local = calculer_contexte();
+	$contexte = calculer_contexte();
 
-	// Gestion des URLs personnalises - sale mais historique
+	// Gestion des URLs personnalises (propre etc)
+	// ATTENTION: $contexte est global car cette fonction le modifie.
+	// $fond est passe par reference aussi pour modification
+	// (tout ca parce que ces URL masque ces donnees qu'on restaure ici)
+	// Bref,  les URL dites propres ont une implementation sale.
+	// Interdit de nettoyer, faut assumer l'histoire.
 	if (function_exists("recuperer_parametres_url")) {
-		global $contexte;
-		$contexte = $contexte_local;
 		recuperer_parametres_url($fond, nettoyer_uri());
-
 		// remettre les globales pour le bouton "Modifier cet article"
-		if (is_array($contexte))
-			foreach ($contexte as $var=>$val)
-				if (substr($var,0,3) == 'id_')
-					$GLOBALS[$var] = $val;
+		foreach ($contexte as $var=>$val)
+			if (substr($var,0,3) == 'id_') $GLOBALS[$var] = $val;
 	}
 
 	// si le champ chapo commence par '=' c'est une redirection.
@@ -239,13 +239,13 @@ function calculer_page_globale($cache, $fond) {
 
 	// Go to work !
 	spip_timer('calculer_page');
-	$page = cherche_page($cache, $contexte_local, $fond);
+	$page = cherche_page($cache, $contexte, $fond);
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
 	'id_mot', 'id_groupe', 'id_document') as $val) {
-		if ($contexte_local[$val])
-			$signal['contexte'][$val] = intval($contexte_local[$val]);
+		if ($contexte[$val])
+			$signal['contexte'][$val] = intval($contexte[$val]);
 	}
 
 	$page['signal'] = $signal;
@@ -253,7 +253,10 @@ function calculer_page_globale($cache, $fond) {
 	$lastmodified = time();
 	spip_log ("calculer_page ("
 		  . spip_timer('calculer_page')."): "
-		  . $_SERVER['REQUEST_METHOD']. " $fond");
+		  . $_SERVER['REQUEST_METHOD'].
+		  " $fond "
+		  . strlen($page['texte'])
+		  . " octets");
 	return $page;
 }
 ?>
