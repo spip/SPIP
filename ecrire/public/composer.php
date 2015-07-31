@@ -500,12 +500,12 @@ function calculer_select ($select = array(), $from = array(),
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
 		if (!$menage
-		OR strpos($sfrom, " $cle ")
+		OR strpos($sfrom, " $cle.")
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
 		OR calculer_jointnul($cle, $where)) {
-			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($t.$c=$cle.$c)" . $sfrom;
+			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$c)" . $sfrom;
 			$equiv[]= $c;
 		} else { unset($join[$k]);}
 		unset($from[$cle]);
@@ -525,7 +525,7 @@ function calculer_select ($select = array(), $from = array(),
 		 calculer_jointnul($t, $having, $e))) {
 	    unset($from[$t]);
 	    // bien garder les espaces pour le strpos ci-dessus
-	    preg_match('/^\s*\w*\s*JOIN\s+(.*AS\s+(\w+)\s+)USING [(]([^)]*)[)](.*)$/', $sfrom, $r);
+	    preg_match('/^\s*\w*\s*JOIN\s+(.*?AS\s+(\w+)\s+)ON\s*[(][^.]*[.](\w+)[^)]*[)](.*)$/', $sfrom, $r);
 	    $sfrom = $r[1].  $r[4];
 	    $e = '/\b' . $t . '\.' . $r[3] .'\b/';
 	    $t = $r[2] . '.' . $r[3];
