@@ -87,24 +87,27 @@ function charger_langue($lang, $module = 'spip') {
 //
 // http://doc.spip.org/@surcharger_langue
 function surcharger_langue($fichiers) {
+	static $surcharges = array();
 	if (!isset($GLOBALS['idx_lang'])) return;
+
 	if (!is_array($fichiers)) $fichiers = array($fichiers);
 	if (!count($fichiers)) return;
-	
-	$idx_lang_normal = $GLOBALS['idx_lang'];
-	$idx_lang_surcharge = $GLOBALS['idx_lang'].'_temporaire';
-	$GLOBALS['idx_lang'] = $idx_lang_surcharge;
 	foreach($fichiers as $fichier){
-		include($fichier);
-		if (is_array($GLOBALS[$idx_lang_surcharge])) {
-			$GLOBALS[$idx_lang_normal] = array_merge(
-				$GLOBALS[$idx_lang_normal],
-				$GLOBALS[$idx_lang_surcharge]
+		if (!isset($surcharges[$fichier])) {
+			$idx_lang_normal = $GLOBALS['idx_lang'];
+			$GLOBALS['idx_lang'] = $GLOBALS['idx_lang'].'@temporaire';
+			include($fichier);
+			$surcharges[$fichier] = $GLOBALS[$GLOBALS['idx_lang']];
+			unset ($GLOBALS[$GLOBALS['idx_lang']]);
+			$GLOBALS['idx_lang'] = $idx_lang_normal;
+		}
+		if (is_array($surcharges[$fichier])) {
+			$GLOBALS[$GLOBALS['idx_lang']] = array_merge(
+				$GLOBALS[$GLOBALS['idx_lang']],
+				$surcharges[$fichier]
 			);
 		}
-		unset ($GLOBALS[$idx_lang_surcharge]);
 	}
-	$GLOBALS['idx_lang'] = $idx_lang_normal;
 }
 
 //
