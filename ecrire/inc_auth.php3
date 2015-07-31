@@ -5,6 +5,8 @@
 if (defined("_ECRIRE_INC_AUTH")) return;
 define("_ECRIRE_INC_AUTH", "1");
 
+include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_session.php3");
 
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
@@ -73,6 +75,7 @@ function auth() {
 	// Recuperer les donnees d'identification
 	//
 
+
 	// Authentification .htaccess
 	if ($REMOTE_USER &&
 		!($HTTP_GET_VARS["REMOTE_USER"] || $HTTP_POST_VARS["REMOTE_USER"] || $HTTP_COOKIE_VARS["REMOTE_USER"])) {
@@ -83,7 +86,6 @@ function auth() {
 
 	// Peut-etre sommes-nous en auth http?
 	else if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
-		include_ecrire ("inc_session.php3");
 		if (verifier_php_auth()) {
 			$auth_login = $PHP_AUTH_USER;
 			$auth_pass_ok = true;
@@ -102,8 +104,6 @@ function auth() {
 
 	// Authentification session
 	else if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
-		include_ecrire ("inc_meta.php3");
-		include_ecrire ("inc_session.php3");
 		if (verifier_session($cookie_session)) {
 			if ($auteur_session['statut'] == '0minirezo' OR $auteur_session['statut'] == '1comite') {
 				$auth_login = $auteur_session['login'];
