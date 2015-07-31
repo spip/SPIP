@@ -48,25 +48,11 @@ function action_editer_site_dist() {
 			set_request('reload', 'oui');
 			$id_syndic = insert_syndic(_request('id_parent'));
 			revisions_sites($id_syndic);
+			if ($logo = _request('logo')
+			 AND $format_logo = _request('format_logo'))
+				@rename($logo,
+				_DIR_IMG . 'siteon'.$id_syndic.'.'.$format_logo);
 		} else {
-			include_spip('inc/headers');
-			return array(0,redirige_formulaire(generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')));
-		}
-	}
-	// Envoi depuis le formulaire d'analyse automatique d'un site
-	else if (strlen(vider_url($u = _request('url_auto')))) {
-		if ($auto = analyser_site($u)) {
-			$id_syndic = insert_syndic(_request('id_parent'));
-			revisions_sites($id_syndic, $auto);
-			if ($auto['syndication'] == 'oui')
-				set_request('reload', 'oui');
-
-			// Enregistrer le logo s'il existe
-			if ($auto['logo'] AND $auto['format_logo'])
-				@rename($auto['logo'],
-				_DIR_IMG . 'siteon'.$id_syndic.'.'.$auto['format_logo']);
-		}
-		else{
 			include_spip('inc/headers');
 			return array(0,redirige_formulaire(generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')));
 		}
@@ -248,106 +234,6 @@ function revisions_sites ($id_syndic, $c=false) {
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 }
 
-
-// http://doc.spip.org/@analyser_site
-function analyser_site($url) {
-	include_spip('inc/filtres');
-	include_spip('inc/distant');
-
-	// Accepter les URLs au format feed:// ou qui ont oublie le http://
-	$url = preg_replace(',^feed://,i', 'http://', $url);
-	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
-
-	$texte = recuperer_page($url, true);
-	if (!$texte) return false;
-
-	if (preg_match(',<(channel|feed)([:[:space:]][^>]*)?'
-	.'>(.*)</\1>,ims', $texte, $regs)) {
-		$result['syndication'] = 'oui';
-		$result['url_syndic'] = $url;
-		$channel = $regs[3];
-
-		// Pour recuperer l'entete, on supprime tous les items
-		$b = array_merge(
-			extraire_balises($channel, 'item'),
-			extraire_balises($channel, 'entry')
-		);
-		$header = str_replace($b,array(),$channel);
-
-		if ($t = extraire_balise($header, 'title'))
-			$result['nom_site'] = supprimer_tags($t);
-		if ($t = extraire_balises($header, 'link')) {
-			foreach ($t as $link) {
-				$u = supprimer_tags(filtrer_entites($link));
-				if (!strlen($u))
-					$u = extraire_attribut($link, 'href');
-				if (strlen($u)) {
-					// on installe l'url comme url du site
-					// si c'est non vide, en donnant la priorite a rel=alternate
-					if (preg_match(',\balternate\b,', extraire_attribut($link, 'rel'))
-					OR !isset($result['url_site']))
-						$result['url_site'] = filtrer_entites($u);
-				}
-			}
-		}
-		$result['url_site'] = url_absolue($result['url_site'], $url);
-
-		if ($a = extraire_balise($header, 'description')
-		OR $a = extraire_balise($header, 'tagline')) {
-			$result['descriptif'] = supprimer_tags($a);
-		}
-
-		if (preg_match(',<image.*<url.*>(.*)</url>.*</image>,Uims',
-		$header, $r)
-		AND preg_match(',(https?://.*/.*(gif|png|jpg)),ims', $r[1], $r)
-		AND $image = recuperer_infos_distantes($r[1])) {
-			if (in_array($image['extension'], array('gif', 'jpg', 'png'))) {
-				$result['format_logo'] = $image['extension'];
-				$result['logo'] = $image['fichier'];
-			}
-			else if ($image['fichier']) {
-				spip_unlink($image['fichier']);
-			}
-		}
-	}
-	else {
-		$result['syndication'] = 'non';
-		$result['url_site'] = $url;
-		if (preg_match(',<head>(.*(description|title).*)</head>,Uims', $texte, $regs)) {
-			$head = filtrer_entites($regs[1]);
-		} else
-			$head = $texte;
-		if (preg_match(',<title[^>]*>(.*),i', $head, $regs))
-			$result['nom_site'] = filtrer_entites(supprimer_tags(preg_replace(',</title>.*,i', '', $regs[1])));
-		if ($a = array_merge(
-			extraire_balises($head, 'meta'),
-			extraire_balises($head, 'http-equiv')
-		)) {
-			foreach($a as $meta) {
-				if (extraire_attribut($meta, 'name') == 'description') {
-					$desc = trim(extraire_attribut($meta, 'content'));
-					if (!strlen($desc))
-						$desc = trim(extraire_attribut($meta, 'value'));
-					$result['descriptif'] = $desc;
-				}
-			}
-		}
-
-		// Cherchons quand meme un backend
-		include_spip('inc/distant');
-		include_spip('inc/feedfinder');
-		$feeds = get_feed_from_url($url, $texte);
-		// si on a a trouve un (ou plusieurs) on le note avec select:
-		// ce qui constitue un signal pour exec=sites qui proposera de choisir
-		// si on syndique, et quelle url.
-		if (count($feeds)>=1) {
-			spip_log("feedfinder.php :\n".join("\n", $feeds));
-			$result['url_syndic'] = "select: ".join(' ',$feeds);
-		}
-	}
-
-	return $result;
-}
 
 // Enregistrre les options et retourne True s'il faut syndiquer.
 

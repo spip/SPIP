@@ -9,6 +9,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_syndic' value='#ENV{id_syndic}' />
 		<input type='hidden' name='syndication_old' value="#ENV**{syndication}" />
+		[<input type='hidden' name='logo' value='(#ENV**{logo,''})' />]
+		[<input type='hidden' name='format_logo' value='(#ENV**{format_logo,''})' />]
 	  <fieldset>
 	  <ol class="formfx">
 	  	[(#ENV{id_syndic}||?{'',' '})
@@ -16,6 +18,7 @@
 		  <li><fieldset><legend><img src='#EVAL{_DIR_IMG_PACK}site-24.gif' /></legend><ol><li>
 			<label for='url_auto'><:texte_referencement_automatique:></label>
 			<input type="text" name="url_auto" id="url_auto" class='fondl' size='40' value="http://" />
+			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
 			</li></ol>
 		  <div style='text-align: right'><input class='fondo' type='submit' value='<:bouton_ajouter:>' /></div>
 			</fieldset>
