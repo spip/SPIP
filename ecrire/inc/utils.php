@@ -969,9 +969,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!isset($GLOBALS['test_dirs']))
 		$GLOBALS['test_dirs'] =  array($pa, $ti, $ta);
 
-	// Definition des droits d'acces en ecriture
-	define('_SPIP_CHMOD', 0777);
-
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS', _DIR_ETC . 'connect');
 	define('_FILE_CONNECT',
@@ -985,6 +982,12 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_FILE_CHMOD',
 		(@is_readable($f = _FILE_CHMOD_INS . '.php') ? $f
 	:	false));
+
+	// Definition des droits d'acces en ecriture
+	if(!_FILE_CHMOD)
+		define('_SPIP_CHMOD', 0777);
+	else
+		include_once _FILE_CHMOD;
 
 	// la taille maxi des logos (0 : pas de limite)
 	define('_LOGO_MAX_SIZE', 0); # poids en ko
