@@ -946,6 +946,12 @@ function barre_onglets($rubrique, $onglet){
 		onglet("Fonctionnalit&eacute;s de SPIP", "config-fonctions.php3", "fonctions", $onglet, "statistiques-24.gif");
 	}
 	
+	if ($rubrique == "suivi_forum"){
+		onglet("Tous les messages", "controle_forum.php3", "tous", $onglet);
+		onglet("Messages du site public", "controle_forum_public.php3", "public", $onglet, "racine-site-24.gif");
+		onglet("Messages du site priv&eacute;", "controle_forum_prive.php3", "prive", $onglet, "cadenas-24.gif");
+	}
+	
 	
 	
 	fin_onglet();
