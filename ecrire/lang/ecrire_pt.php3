@@ -85,9 +85,9 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_moderation_priori' => 'Modera&ccedil;&atilde;o a  priori (as
  contribui&ccedil;&otilde;es aparecem publicamente s&oacute; depois da valida&ccedil;&atilde;o pelos
  administradores). ',
-'bouton_radio_modere_abonnement' => '<MODIF>moderado com assinatura',
-'bouton_radio_modere_posteriori' => '<MODIF>moderado a posteriori',
-'bouton_radio_modere_priori' => '<MODIF>moderado a priori',
+'bouton_radio_modere_abonnement' => 'moderado com assinatura',
+'bouton_radio_modere_posteriori' => 'moderado a posteriori',
+'bouton_radio_modere_priori' => 'moderado a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'N&atilde;o aparecer na lista dos redactores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar an&uacute;ncios editoriais',
 'bouton_radio_non_syndication' => 'N&atilde;o h&aacute; vincula&ccedil;&atilde;o',

@@ -185,7 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_dimensions' => 'Size:',
 'entree_titre_document' => 'Document title:',
 'entree_titre_image' => 'Image title:',
-'envoi_via_le_site' => 'Send via the site',
+'envoi_via_le_site' => 'Sent via the site',
 
 
 // F

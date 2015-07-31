@@ -724,9 +724,12 @@ amb un color que indica el seu estat:',
 'statut_admin_restreint' => '(admin restringida)',
 'syndic_choix_moderation' => 'Qu&egrave; fer dels seg&uuml;ents enlla&ccedil;os que procedeixin d\'aquest lloc Web?',
 'syndic_choix_oublier' => 'Qu&egrave; fer dels enlla&ccedil;os que ja no figuren en el fitxer de sindicaci&oacute;?',
+'syndic_choix_resume' => 'Alguns llocs Web presenten el text complet dels articles. Quan el text sencer es troba disponible desitgeu sindicar:',
 'syndic_lien_obsolete' => 'enlla&ccedil; obsolet',
 'syndic_option_miroir' => 'blocar-los autom&agrave;ticament',
 'syndic_option_oubli' => 'esborrar-los (despr&eacute;s @mois@&nbsp;mois)',
+'syndic_option_resume_non' => 'el contingut complet dels articles (en format HTML)',
+'syndic_option_resume_oui' => 'un simple resum (en format text)',
 'syndic_options' => 'Opcions de sindicaci&oacute;:',
 
 
