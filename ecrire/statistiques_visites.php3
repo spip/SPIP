@@ -273,8 +273,29 @@ if (!$origine) {
 		debut_cadre_relief("statistiques-24.gif");
 		
 		
-		$aff_jours_plus = round($aff_jours * 1.5);
-		$aff_jours_moins = round($aff_jours / 1.5);
+		$largeur_abs = 420 / $aff_jours;
+		
+		if ($largeur_abs > 1) {
+			$inc = ceil($largeur_abs / 5);
+			$aff_jours_plus = 420 / ($largeur_abs - $inc);
+			$aff_jours_moins = 420 / ($largeur_abs + $inc);
+		}
+		
+		if ($largeur_abs == 1) {
+			$aff_jours_plus = 840;
+			$aff_jour_moins = 210;
+		}
+		
+		if ($largeur_abs < 1) {
+			$aff_jours_plus = 420 * ((1/$largeur_abs) + 1);
+			$aff_jours_moins = 420 * ((1/$largeur_abs) - 1);
+		}
+		
+//		$aff_jours_plus = round($aff_jours * 1.5);		
+//		$aff_jours_moins = round($aff_jours / 1.5);
+		
+		
+		
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
 		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
