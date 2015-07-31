@@ -382,7 +382,6 @@ function reconstuire_version($champs, $fragments, $res=array()) {
 			}
 			$res[$nom] = $t;
 		}
-		spip_log("recon $nom $t");
 	}
 	return $res;
 }
@@ -412,7 +411,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	spip_get_lock($lock, 10);
 
 	// Examiner la derniere version
-	$result = sql_select("id_version, champs, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 MINUTE) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); 	// le champ id_auteur est un varchar dans cette table
+	$result = sql_select("id_version, champs, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); 	// le champ id_auteur est un varchar dans cette table
 
 	if ($row = sql_fetch($result)) {
 		$nouveau = !$row['flag'];
@@ -474,9 +473,9 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 
 	spip_release_lock($lock);
 
-	spip_log("memoise la version $id_version de l'article $id_article $titre_version");
+	spip_log("memorise la version $id_version de l'article $id_article $titre_version");
 
-	return $id_version_new;
+	return $id_version;
 }
 
 // les textes "diff" ne peuvent pas passer dans propre directement,
