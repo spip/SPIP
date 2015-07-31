@@ -95,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resultats_recherche' => 'Resultados da busca',
 	'retour_debut_forums' => 'Voltar ao início dos fóruns',
 	'rubrique' => 'Seção',
-	'rubriques' => 'Seções',
+	'rubriques' => '@nb@ seções',
 
 	// S
 	'signatures_petition' => 'Assinaturas',
