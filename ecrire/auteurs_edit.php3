@@ -116,14 +116,6 @@ OR ($connect_id_auteur == $id_auteur)))
 
 debut_droite();
 
-function mySel($varaut,$variable) {
-	$retour = " VALUE=\"$varaut\"";
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-	return $retour;
-}
-
 	debut_cadre_relief("redacteurs-24.gif");
 	
 	

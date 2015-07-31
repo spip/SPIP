@@ -103,15 +103,6 @@ fin_boite_info();
 
 debut_droite();
 
-function mySel($varaut,$variable) {
-	$retour = " VALUE=\"$varaut\"";
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-	return $retour;
-}
-
-
 	//
 	// Editer les donnees de l'auteur
 	//

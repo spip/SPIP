@@ -16,15 +16,6 @@ include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_sites.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
-function mySel($varaut, $variable) {
-	$retour = " VALUE=\"$varaut\"";
-
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-	return $retour;
-}
-
 
 //
 // modifications mot

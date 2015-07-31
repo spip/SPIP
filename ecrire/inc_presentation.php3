@@ -3044,6 +3044,17 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 	}
 }
 
+// Pour construire des menu avec SELECTED
+function mySel($varaut,$variable, $option = NULL) {
+	if (!isset($option))
+		return ' value="'.$varaut.'"'
+			. (($variable==$varaut) ? ' selected' : '');
+
+	return "<option value='$varaut'"
+		. (($variable==$varaut) ? ' selected' : '')
+		. ">$option\n";
+}
+
 
 //
 // Presentation des pages d'installation et d'erreurs

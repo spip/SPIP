@@ -28,17 +28,6 @@ if ($changer_config == 'oui') {
 
 lire_metas();
 
-function mySel($varaut,$variable){
-		$retour= " VALUE=\"$varaut\"";
-
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-
-	return $retour;
-}
-
-
 debut_page(_T('titre_page_config_contenu'), "administration", "configuration");
 
 echo "<br><br><br>";
