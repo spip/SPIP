@@ -202,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'double_occurrence' => 'Kavet div wech',
 
 // E
+'en_cours' => 'war ober',
 'entree_dimensions' => 'Ment&nbsp;:',
 'entree_titre_document' => 'Titl an teuliad&nbsp;:',
 'entree_titre_image' => 'Titl ar skeudenn&nbsp;:',
@@ -209,6 +210,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur' => 'Fazi',
 'erreur_balise_non_fermee' => 'Balizenn ziwezha&ntilde; chomet digor :',
 'erreur_texte' => 'fazi',
+'etape' => 'Pazenn',
 
 // F
 'fichier_introuvable' => 'Restr @fichier@ dibosupl da gavout',
@@ -234,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_confirmation' => 'Kadarnait ho sinadur mar-plij :',
 'form_pet_deja_enregistre' => 'Enrollet eo al lec\'hienn-ma&ntilde; c\'hoazh',
 'form_pet_deja_signe' => 'Sinet ho peus an destenn-se c\'hoazh.',
-'form_pet_envoi_mail_confirmation' => '<MODIF>Ema&ntilde; ur postel-gwiria&ntilde; o paouez beza&ntilde; kaset deoc\'h. Ret e vo deoc\'h gweladenni&ntilde; ar chomlec\'h menneget er postel-se a-benn kadarnaat ho sinadur.',
+'form_pet_envoi_mail_confirmation' => 'Ema&ntilde; ur postel-gwiria&ntilde; o paouez beza&ntilde; kaset da @email@. Ret e vo deoc\'h gweladenni&ntilde; ar chomlec\'h meneget er postel-se a-benn kadarnaat ho sinadur.',
 'form_pet_mail_confirmation' => 'Demat, 
 
 Goulennet ho peus sina&ntilde; ar sinadeg :
@@ -682,8 +684,8 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
   Notennit an dave-se, klaksit en-dro nevesaaat, 
   ha gwiriit e vez diskouezet ar skeudenno&ugrave; er pennado&ugrave;.',
 'texte_erreur_visiteur' => 'Klasket ho peus tizhout al lodenn brevez gant un anv-implijer direizh.',
-'texte_inc_auth_1' => '<MODIF>Enrollet oc\'h dindan al login
- <b>@auth_login@</b>, met n\'eus ket ouzh hennezh (ken) en diaz-titouro&ugrave;.
+'texte_inc_auth_1' => 'Enrollet oc\'h dindan al login
+ <b>@auth_login@</b>, met n\'eus ket outa&ntilde; (ken) en diaz-titouro&ugrave;.
   Klaskit ',
 'texte_inc_auth_2' => 'adkennaska&ntilde;',
 'texte_inc_auth_3' => ', goude beza&ntilde; kuitaet hag adloc\'het ho merdeer.',
@@ -721,6 +723,7 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'titre_signatures_confirmees' => 'Sinadurio&ugrave; bet gwiriekaet',
 'titre_statistiques' => 'Stadego&ugrave; al lec\'hienn', # Stadego&ugrave;, termen skoueriekaet gant TermBret evit Statistiques.
 'titre_titre_document' => 'Titl an teuliad&nbsp;:',
+'todo' => 'da zont',
 'trad_reference' => '(pennad-orin)',
 
 // Z
