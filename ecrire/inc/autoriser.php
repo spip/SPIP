@@ -457,9 +457,8 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo'
 		AND !$qui['restreint']) return true;
 	// "Voir en ligne" si l'auteur a un article publie
-	$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur=".sql_quote($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
-	if ($n) return true;
-	return false;		
+	$n = sql_fetsel('A.id_article', 'spip_auteurs_articles AS L LEFT JOIN spip_articles AS A ON L.id_article=A.id_article', "A.statut='publie' AND L.id_auteur=".sql_quote($id));
+	return $n ? true : false;		
 }
 
 // Modifier un auteur ?
