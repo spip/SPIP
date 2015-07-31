@@ -560,12 +560,13 @@ $tables_auxiliaires['spip_jobs_liens'] = array(
  * 
  * champs_versionnes
  *
- * statut
- * statut_images
- * statut_titres
- * statut_textes_instituer
- * texte_changer_statut
- * aide_changer_statut
+ * L'objet doit définir de lui même ces champs pour gérer des statuts :
+ *     - statut
+ *     - statut_images
+ *     - statut_titres
+ *     - statut_textes_instituer
+ *     - texte_changer_statut
+ *     - aide_changer_statut
  *
  * modeles : permet de declarer les modeles associes a cet objet
  * 
