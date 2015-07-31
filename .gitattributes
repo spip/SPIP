@@ -1,8 +1,8 @@
 * text=auto !eol
 IMG/document-vierge.gif -text
-IMG/type_defaut-dist.png -text
-IMG/type_ram.png -text
-IMG/type_rm.png -text
+IMG/icones/type_defaut-dist.png -text
+IMG/icones/type_ram-dist.png -text
+IMG/icones/type_rm-dist.png -text
 NAVPICS/big-logo-spip.gif -text
 NAVPICS/logo-spip.gif -text
 NAVPICS/medium-logo-spip.gif -text
