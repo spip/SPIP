@@ -133,6 +133,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 function image_imagepng($img,$fichier) {
 	$tmp = $fichier."tmp";
 	$ret = imagepng($img,$tmp);
+	@unlink($fichier);
 	rename($tmp, $fichier);
 	return $ret;
 }
@@ -141,6 +142,7 @@ function image_imagepng($img,$fichier) {
 function image_imagegif($img,$fichier) {
 	$tmp = $fichier."tmp";
 	$ret = imagegif($img,$tmp);
+	@unlink($fichier);
 	rename($tmp, $fichier);
 	return $ret;
 }
@@ -148,6 +150,7 @@ function image_imagegif($img,$fichier) {
 function image_imagejpeg($img,$fichier) {
 	$tmp = $fichier."tmp";
 	$ret = imagejpeg($img,$tmp);
+	@unlink($fichier);
 	rename($tmp, $fichier);
 	return $ret;
 }
@@ -1572,6 +1575,7 @@ function image_imagick () {
 			// de facon a eviter time_out pendant creation de l'image definitive
 			$tmp = ereg_replace("\.png$", "-tmp.png", $dest);
 			imagick_writeimage( $handle, $tmp);
+			@unlink($dest);
 			rename($tmp, $dest);
 		} 
 	}
