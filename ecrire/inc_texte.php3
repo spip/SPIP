@@ -569,7 +569,7 @@ function traiter_listes ($texte) {
 		// chaque item a sa profondeur = nb d'etoiles
 		unset ($type);
 		while (list(,$item) = each($lignes)) {
-			ereg("^(\**|\#*)[[:space:]]*(.*)", $item, $regs);
+			ereg("^([*]*|[#]*)([^*#].*)", $item, $regs);
 			$profond = strlen($regs[1]);
 
 			if ($profond > 0) {
