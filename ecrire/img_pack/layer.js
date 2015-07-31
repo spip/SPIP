@@ -179,10 +179,12 @@ function ajahReady(xhr, f) {
         }
 }
 
-// Si Ajax est disponible, cette fonction envoie la requete en Ajax.
+// Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
 // Si le premier argument n'est pas une url, ce doit etre un formulaire.
-// Le deuxieme argument doit etre l'ID du noeud a affecter avec la reponse.
-// En cas de formulaire, la fonction retourne False pour empecher son envoi
+// Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
+// Le troisieme, optionnel, est la fonction traitant la réponse.
+// La fonction par defaut affecte le noeud ci-dessus avec la reponse Ajax.
+// En cas de formulaire, AjaxSqueeze retourne False pour empecher son envoi
 // Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
 // a du anticiper la situation.
 // Toutefois il y toujours un coup de retard dans la pose d'un cookie:
@@ -193,19 +195,19 @@ function AjaxSqueeze(trig, id, f)
 	var i, s, g;
 	var u = '';
 	
-	// pere du demandeur dans le DOM (le donner direct serait mieux)
+	// position du demandeur dans le DOM (le donner direct serait mieux)
 	var noeud = document.getElementById(id);
 	if (!noeud) return true;
 
-	// retour std si pas precise: affecte ce noeud avec ce retour
-	if (!f) f = function(r) { noeud.innerHTML = r;}
-
-	// vivement jquery !
+	// animation immédiate pour faire patienter (vivement jquery !)
 	if (typeof ajax_image_searching != 'undefined') {
 		g = document.createElement('div');
 		g.innerHTML = ajax_image_searching;
 		noeud.insertBefore(g, noeud.firstChild);
 	}
+
+	// retour std si pas precise: affecter ce noeud avec ce retour
+	if (!f) f = function(r) { noeud.innerHTML = r;}
 
 	if (typeof(trig) == 'string') {
 		return ajah('GET', trig, null, f);

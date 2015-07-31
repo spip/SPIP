@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 
 // http://doc.spip.org/@action_ajouter_dist
-function action_ajouter_dist() {
+function action_editer_auteurs_dist() {
 	
 	include_spip('inc/actions');
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
@@ -23,11 +23,14 @@ function action_ajouter_dist() {
 
 	$arg = _request('arg');
 	$redirect = _request('redirect');
-
-	if (preg_match(",^\W*(\d+)\W+(\d+)$,", $arg, $r)) {
+spip_log("action_editer_auteur: $arg compris");
+	if (preg_match(",^\W*(\d+)\W-(\d+)$,", $arg, $r)) {
+		supprimer_auteur_et_rediriger($r[1], $r[2], $redirect);
+	}
+	elseif (preg_match(",^\W*(\d+)\W(\d+)$,", $arg, $r)) {
 		ajouter_auteur_et_rediriger($r[1], $r[2], $redirect);
 	}
-	if (preg_match(",^\W*(\d+)$,", $arg, $r)) {
+	elseif (preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		if  ($nouv_auteur = intval($_POST['nouv_auteur'])) {
 		  ajouter_auteur_et_rediriger($r[1], $nouv_auteur, $redirect);
 		} else if ($cherche = $_POST['cherche_auteur']) {
@@ -47,7 +50,17 @@ function action_ajouter_dist() {
 				redirige_par_entete("$redirect&cherche_auteur=$cherche&ids=" . join(',',$res));
 
 		}
-	} else spip_log("ajouter $arg pas compris");
+	} else spip_log("action_editer_auteur: $arg pas compris");
+}
+
+function supprimer_auteur_et_rediriger($id_article, $id_auteur, $redirect)
+{
+	spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur=$id_auteur AND id_article=$id_article");
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
+			include_spip("inc/indexation");
+			marquer_indexer('spip_articles', $r[2]);
+	}
+	if ($redirect) redirige_par_entete($redirect);
 }
 
 // http://doc.spip.org/@ajouter_auteur_et_rediriger
@@ -63,7 +76,6 @@ function ajouter_auteur_et_rediriger($id_article, $id_auteur, $redirect)
 	}
 
 	if ($redirect) redirige_par_entete($redirect);
-	exit;
 }
 
 // http://doc.spip.org/@rechercher_auteurs
