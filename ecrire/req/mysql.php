@@ -308,8 +308,9 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 	if (!is_array($champs) || !is_array($cles)) 
 		return;
 
-	$res = spip_mysql_query("SELECT @@session.sql_mode");
-	if ($row = mysql_fetch_array($res))
+	$res = spip_mysql_query("SELECT version() as v");
+	if ($row = mysql_fetch_array($res)
+	 && (version_compare($row['v'],'5.0','>=')))
 		spip_mysql_query("SET sql_mode=''");
 
 	foreach($cles as $k => $v) {
