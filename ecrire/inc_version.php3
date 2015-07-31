@@ -740,6 +740,9 @@ function email_valide($adresse) {
 	$adresses = explode(',', $adresse);
 	if (is_array($adresses)) {
 		while (list(, $adresse) = each($adresses)) {
+			// nettoyer certains formats
+			// "Marie Toto <Marie@toto.com>"
+			$adresse = eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $adresse);
 			// RFC 822
 			if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)?$', trim($adresse)))
 				return false;
