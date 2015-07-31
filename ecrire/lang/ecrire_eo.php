@@ -81,10 +81,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_enregistrement_obligatoire' => 'Deviga memregistri&#285;o (la uzantoj devas aboni&#285;i, entajpante sian retpo&#349;tadreson anta&#365; ol sendi kontribua&#309;ojn).',
 'bouton_radio_envoi_annonces_adresse' => 'Sendi la anoncojn al jena adreso:',
 'bouton_radio_envoi_liste_nouveautes' => 'Sendi la nova&#309;oj-liston',
-'bouton_radio_moderation_priori' => 'Apriora moderigado (kontribua&#309;oj estas publikigataj nur post validigo de mastrumantoj).',
+'bouton_radio_moderation_priori' => 'Apriora moderigado (kontribua&#309;oj estas publikigataj nur post validigo far de mastrumantoj).',
 'bouton_radio_modere_abonnement' => 'per abono',
-'bouton_radio_modere_posteriori' => 'aposteriore moderigita',
-'bouton_radio_modere_priori' => 'apriore moderigita',
+'bouton_radio_modere_posteriori' => 'aposteriore moderigata',
+'bouton_radio_modere_priori' => 'apriore moderigata',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne aperi en la listo de redaktantoj',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne sendi anoncojn pri &#265;efartikoloj',
 'bouton_radio_non_syndication' => 'Neniu abonrilato',
@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'savkopio nekompaktita en @fichier@',
 'bouton_radio_supprimer_petition' => 'Forigi la petskribon',
 'bouton_radio_syndication' => 'Abonrilato:',
-'bouton_redirection' => 'ALIDIREKTO',
+'bouton_redirection' => 'ALIDIREKTIGO',
 'bouton_relancer_installation' => 'Relan&#265;i la instaladon',
 'bouton_restaurer_base' => 'Resta&#365;ri la datenbazon',
 'bouton_suivant' => 'Sekvanta',
@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_adresse_fichier_syndication' => 'Retadreso de la abonrilatiga dosiero&nbsp;:',
 'entree_adresse_site' => '<b>Adreso de la retejo</b> [Deviga]',
 'entree_base_donnee_1' => 'Adreso de la datenbazo',
-'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpejo restas malplena.)',
+'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpujo restas malplena.)',
 'entree_biographie' => 'Mallonga kelkvorta biografio.',
 'entree_breve_publiee' => '&#264;u tiun fulm-informon oni publikigu?',
 'entree_chemin_acces' => '<B>Entajpi</b> aliran vojon&nbsp;:',
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // I
-'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re havi informojn pri la vivo de tiu retejo.',
+'ical_info1' => 'Tiu pa&#285;o prezentas plurajn metodojn por da&#365;re ricevi informojn pri la vivo de tiu retejo.',
 'ical_info2' => 'Por pli da informoj pri &#265;i &#265;iuj teknikoj, senhezite konsultu <a href="http://www.spip.net/fr_suivi">la dokumentaron de SPIP</a>.',
 'ical_info_calendrier' => 'Du kalendaroj disponeblas. La unua estas retejo-mapo anoncanta &#265;iujn publikigitajn artikolojn. La dua enhavas la eldon-anoncojn, kaj viajn lastajn privatajn mesa&#285;ojn&nbsp;: &#285;i estas rezervita al vi, pere de persona &#349;losilo, kiun vi &#265;iumomente povas modifi &#349;an&#285;ante vian pasvorton.',
 'ical_methode_http' => 'Al&#349;uto',
@@ -209,7 +209,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_refuser_breve' => 'Rifuzi tiun fulm-informon',
 'icone_retour' => 'Reen',
 'icone_retour_article' => 'Reen al la artikolo',
-'icone_suivi_forum' => 'Supervido de la publika forumo&nbsp;: @nb_forums@ kontribuo(j)',
+'icone_suivi_forum' => 'Superrigardo de la publika forumo&nbsp;: @nb_forums@ kontribuo(j)',
 'icone_supprimer_cookie' => 'Forigi la por-korespondan kuketon ',
 'icone_supprimer_groupe_mots' => 'Forigi tiun grupon',
 'icone_supprimer_rubrique' => 'Forigi tiun rubrikon',
@@ -239,7 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_afficher_visites' => 'Afi&#349;i la vizitojn de&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'Afi&#349;i la vizitojn por la <b>plej vizititaj artikoloj ekde la komenco&nbsp;:</b>',
 'info_aide_en_ligne' => 'Reta SPIP-helpilo',
-'info_ajout_image' => 'Kiam vi aldonas bildojn kiel alkro&#265;itajn dokumentojn al artikolo,
+'info_ajout_image' => 'Kiam vi ligas bildojn kiel alkro&#265;itajn dokumentojn al artikolo,
  SPIP povas a&#365;tomate krei por vi etajn vinjetojn de la
  enmetitaj bildoj. Tio ebligas ekzemple, a&#365;tomate krei bildaron, &#265;u en sukcesiva, &#265;u samtempa ordo.',
 'info_ajout_participant' => 'La jena partoprenanto estas aldonita&nbsp;:',
@@ -265,7 +265,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_authentification_externe' => 'Ekstera a&#365;tentigo',
 'info_avertissement' => 'Averto',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
-'info_base_restauration' => 'La datenbazo resta&#365;ri&#285;as.',
+'info_base_restauration' => 'La datenbazo estas resta&#365;ri&#285;anta.',
 'info_bloquer' => 'bloki',
 'info_breves' => '&#264;u via retejo uzas la fulm-informilon&nbsp;?',
 'info_breves_03' => 'fulm-informoj',
@@ -308,25 +308,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_derniere_syndication' => 'La lasta abonrilato-&#285;isdatigo de tiu retejo estis farita la ',
 'info_derniers_articles_publies' => 'Viaj artikoloj laste rete publikigitaj',
 'info_desactiver_forum_public' => 'Malaktivigi la uzon de la publikaj forumoj.
-La publikaj forumoj estos unu post la alia permesitaj
- la&#365; la artikolojn; ili estos malpermesataj koncerne rubrikojn, fulm-informojn, ktp.',
+La publikaj forumoj estos la&#365;kaze unu post la alia permesitaj
+ la&#365; la artikoloj; ili estos malpermesataj koncerne rubrikojn, fulm-informojn, ktp.',
 'info_desactiver_messagerie_personnelle' => 'Vi povas aktivigi a&#365; malaktivigi vian personan mesa&#285;ilon &#265;e tiu retejo.',
 'info_descriptif' => 'Priskribo:',
 'info_discussion_cours' => 'Nunaj diskutoj',
-'info_ecrire_article' => 'Anta&#365; ol havi la eblon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
-'info_email_envoi' => 'Senda retpo&#349;tadreso (nedeviga)',
+'info_ecrire_article' => 'Anta&#365; ol ekhavi la eblon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
+'info_email_envoi' => 'retpo&#349;tadreso por sendo (nedeviga)',
 'info_email_envoi_txt' => 'Indiku &#265;i tie la adreson uzotan por sendi po&#349;tmesa&#285;ojn (defa&#365;lte, la ricev-adreso estos uzata)&nbsp;:',
 'info_email_webmestre' => 'Retpo&#349;tadreso de la retejestro (eventuale)',
 'info_entrer_code_alphabet' => 'Entajpu la kodon de la uzenda alfabeto&nbsp;:',
-'info_envoi_email_automatique' => 'A&#365;tomata retleteroj-sendado',
+'info_envoi_email_automatique' => 'A&#365;tomata retleteroj-dissendado',
 'info_envoi_forum' => 'Sendo de la forumoj al a&#365;toroj de la artikoloj',
-'info_envoyer_maintenant' => 'Sendi nun',
+'info_envoyer_maintenant' => 'Sendu nun',
 'info_erreur_restauration' => 'Resta&#365;ro-eraro: neekzistanta dosiero.',
 'info_etape_suivante' => 'Ek al sekvanta etapo',
 'info_etape_suivante_1' => 'Vi povas transpasi al sekvanta etapo.',
 'info_etape_suivante_2' => 'Vi povas transpasi al sekvanta etapo.',
 'info_exportation_base' => 'Eksporto de la datenbazo al @archive@',
-'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja &#265;efartikola aktiveco, SPIP povas transdoni per retmesa&#285;oj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validigoj de artikoloj.',
+'info_facilite_suivi_activite' => 'Por faciligi la kontrolon de la reteja &#265;efartikola aktiveco, SPIP povas transdoni per retmesa&#285;oj - ekzemple al dissendlisto de redaktantoj - la anoncon pri publikig-petoj kaj validig-petoj de artikoloj.',
 'info_fichiers_authent' => 'A&#365;tentokontrolaj dosieroj &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
 'info_fonctionnement_forum' => 'Funkciado de la forumo&nbsp;:',
 'info_forum_administrateur' => 'forumo de la mastrumantoj',
@@ -336,20 +336,20 @@ La publikaj forumoj estos unu post la alia permesitaj
   plian forumon, rezervitan nur al mastrumantoj.',
 'info_forum_statistiques' => 'Statistikoj pri vizitoj',
 'info_forums_abo_invites' => 'Via retejo enhavas forumojn alireblajn nur per abono&nbsp;; vizitantoj estas invititaj al registri&#285;o &#265;e la publika retejo.',
-'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj de teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.',
-'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj de teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
- postulas disponi je FTP-alirrajto al la retejo.',
-'info_gauche_admin_vider' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj de teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
- postulas disponi je FTP-alirrajto al la retejo.',
+'info_gauche_admin_effacer' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu postulas disponi je FTP-alirrajto al la retejo.',
+'info_gauche_admin_tech' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
+postulas disponi je FTP-alirrajto al la retejo.',
+'info_gauche_admin_vider' => '<b>Nur respondeculoj de la retejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika bontenado. Iuj el ili okazigas specifan a&#365;tentigan procezon, kiu
+postulas disponi je FTP-alirrajto al la retejo.',
 'info_gauche_auteurs' => 'Vi trovos &#265;i tie &#265;iujn a&#365;torojn de la retejo. Ilia statuso estas indikita per koloro de sia piktogramo (mastrumanto = verda, redaktanto = flava).',
 'info_gauche_auteurs_exterieurs' => 'La eksteraj a&#365;toroj, sen alireblo al la retejo, estas indikitaj per blua piktogramo&nbsp;;
  la a&#365;toroj forigitaj per bildo de rubujo.',
-'info_gauche_messagerie' => 'La mesa&#285;ilo ebligas al vi inter&#349;an&#285;i mesa&#285;ojn inter a&#365;toroj, konservi memorigilojn (por via propra uzado) a&#365; afi&#349;i anoncojn sur la hejmpa&#285;o de la privata spaco (se vi estas mastrumanto).',
+'info_gauche_messagerie' => 'La mesa&#285;ilo ebligas al vi inter&#349;an&#285;i mesa&#285;ojn inter a&#365;toroj, konservi memorigilojn (por via propra uzado) a&#365; afi&#349;i anoncojn &#265;e la hejmpa&#285;o de la privata spaco (se vi estas mastrumanto).',
 'info_gauche_numero_auteur' => 'A&#364;TORA NUMERO',
 'info_gauche_numero_breve' => 'FULM-INFORMA NUMERO',
 'info_gauche_statistiques_referers' => 'Tiu pa&#285;o prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hiera&#365; kaj hodia&#365;&nbsp;: tiu listo estas prastatigita &#265;iujn 24 horojn.',
-'info_gauche_suivi_forum' => 'La pa&#285;o pri <i>supervidado de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
-'info_gauche_suivi_forum_2' => 'La pa&#285;o pri <i>kontrolo de la forumoj</i> estas mastrumilo por via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la forumoj (de la publika spaco same kiel de la privata), kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
+'info_gauche_suivi_forum' => 'La pa&#285;o pri <i>superkontrolo de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
+'info_gauche_suivi_forum_2' => 'La pa&#285;o pri <i>superkontrolo de la forumoj</i> estas mastrumilo por via retejo (kaj ne diskutejo a&#365; redaktejo). &#284;i afi&#349;as &#265;iujn kontribua&#309;ojn de la forumoj (de la publika spaco same kiel de la privata), kaj ebligas al vi mastrumi tiujn kontribua&#309;ojn.',
 'info_gauche_visiteurs_enregistres' => 'Vi trovos &#265;i tie la vizitantojn registritajn
  en la publika spaco de la retejo (forumoj la&#365; abono).',
 'info_generation_miniatures_images' => 'Bildoj-miniaturigo',
@@ -358,22 +358,22 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_hebergeur_desactiver_envoi_email' => 'Iuj retgastigantoj malaktivigas la a&#365;tomatan retleteroj-sendadon ekde ties serviloj. Tiukaze, la jenaj SPIP-funkcioj ne fonkcios.',
 'info_hier' => 'hiera&#365;&nbsp;:',
 'info_historique' => 'Revizioj&nbsp;:',
-'info_historique_activer' => 'Aktivigi la supervidon de la revizioj',
+'info_historique_activer' => 'Aktivigi la superrigardo de la revizioj',
 'info_historique_affiche' => 'Afi&#349;i tiun version',
 'info_historique_comparaison' => 'kompari',
-'info_historique_desactiver' => 'Malaktivigi la supervidon de la revizioj',
+'info_historique_desactiver' => 'Malaktivigi la superrigardon de la revizioj',
 'info_historique_lien' => 'Afi&#349;i historion pri modifoj',
-'info_historique_texte' => 'La supervido de revizioj ebligas konservi historion de &#265;iuj modifoj al la enhavo de artikolo, kaj afi&#349;i la diferencojn inter la sinsekvaj versioj.',
-'info_historique_titre' => 'Supervido de revizioj',
+'info_historique_texte' => 'La superrigardo de revizioj ebligas konservi historion de &#265;iuj modifoj al la enhavo de artikolo, kaj afi&#349;i la diferencojn inter la sinsekvaj versioj.',
+'info_historique_titre' => 'Superrigardo de revizioj',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante la&#365;cele bildon.',
-'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, tio signifas ke la servilo kiu gastas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika repondeculo.</i>',
-'info_images_auto' => 'Bildoj a&#365;tomate kalkulitaj',
+'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika repondeculo.</i>',
+'info_images_auto' => 'Bildoj a&#365;tomate komputitaj',
 'info_informations_personnelles' => 'Kvina etapo: <B>Personaj datenoj</b>',
 'info_inscription_automatique' => 'A&#365;tomata registri&#285;ado de novaj redaktantoj',
 'info_jeu_caractere' => 'Litertiparo de la retejo',
 'info_jours' => 'tagoj',
-'info_laisser_champs_vides' => 'lasi tiujn tajpejojn malplenaj)',
+'info_laisser_champs_vides' => 'lasi tiujn tajpujojn malplenaj)',
 'info_langues' => 'Lingvoj de la retejo',
 'info_ldap_ok' => 'La LDAP-a&#365;tentokontrolilo estas instalita.',
 'info_lien_hypertexte' => 'Hiperligilo:',
@@ -394,8 +394,8 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_message_en_redaction' => 'Viaj redaktataj mesa&#285;oj',
 'info_message_technique' => 'Teknika mesa&#285;o:',
 'info_messagerie_interne' => 'Interna mesa&#285;ilo',
-'info_mise_a_niveau_base' => 'niveligo de via MySQL-datenbazo',
-'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj via retejo ne plu funkcios.<br>{{Reinstalu la
+'info_mise_a_niveau_base' => 'alniveligo de via MySQL-datenbazo',
+'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj ke via retejo ne plu funkcios.<br>{{Reinstalu la
  SPIP-dosierojn.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Defa&#365;lta funkcimodo de la publikaj forumoj',
 'info_modifier_breve' => 'Modifi la fulm-informon:',
@@ -405,7 +405,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_mot_sans_groupe' => '(Vortoj sen grupo...)',
 'info_moteur_recherche' => 'Integrita ser&#265;ilo',
 'info_mots_cles' => 'La &#349;losilvortoj',
-'info_mots_cles_association' => 'Eblas kunligi &#349;losilvortojn de tiu grupo&nbsp;:',
+'info_mots_cles_association' => 'Eblas kunligi &#349;losilvortojn el tiu grupo&nbsp;:',
 'info_moyenne' => 'meznombro&nbsp;:',
 'info_multi_articles' => '&#264;u aktivigi la lingvomenuon en la artikoloj&nbsp;?',
 'info_multi_cet_article' => 'Lingvo de tiu artikolo&nbsp;:',
@@ -439,23 +439,23 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_option_faire_suivre' => 'Plusendi la mesa&#285;ojn de la forumoj al la a&#365;toroj de la artikoloj',
 'info_option_ne_pas_accepter_visiteurs' => 'Rifuzi registri&#285;on de vizitantoj',
 'info_option_ne_pas_faire_suivre' => 'Ne plusendi la mesa&#285;ojn de la forumoj',
-'info_options_avancees' => 'FAJNAJ OPCIOJ',
+'info_options_avancees' => 'FAJNAJ AGORDOJ',
 'info_ortho_activer' => 'Aktivigi la ortografian kontrolilon',
 'info_ortho_desactiver' => 'Malaktivigi la ortografian kontrolilon',
 'info_ou' => 'a&#365;...',
 'info_oui_suppression_mot_cle' => 'mi volas definitive forigi tiun &#349;losilvorton.',
 'info_page_interdite' => 'Malpermesata pa&#285;o',
-'info_par_nom' => '<NEW>par nom',
-'info_par_nombre_article' => '<MODIF>(la&#365; nombro de artikoloj)',
-'info_par_statut' => '<NEW>par statut',
-'info_par_tri' => '<NEW>\'(par @tri@)\'',
+'info_par_nom' => 'la&#365; nomo',
+'info_par_nombre_article' => 'la&#365; nombro de artikoloj',
+'info_par_statut' => 'la&#365; statuso',
+'info_par_tri' => '\'(la&#365; @tri@)\'',
 'info_pas_de_forum' => 'neniu forumo',
 'info_passe_trop_court' => 'Pasvorto tro mallonga.',
 'info_passes_identiques' => 'Amba&#365; pasvortoj ne samas.',
 'info_pense_bete_ancien' => 'Viaj malnovaj memorigiloj',
 'info_plus_cinq_car' => 'pli ol 5 signoj',
-'info_plus_cinq_car_2' => '(Pli ol 5 literoj)',
-'info_plus_trois_car' => '(Pli ol 3 literoj)',
+'info_plus_cinq_car_2' => '(Pli ol 5 signoj)',
+'info_plus_trois_car' => '(Pli ol 3 signoj)',
 'info_popularite' => 'populareco&nbsp;:&nbsp;@popularite@&nbsp;; vizitoj&nbsp;:&nbsp;@visites@',
 'info_popularite_2' => 'populareco de la retejo&nbsp;:',
 'info_popularite_3' => 'populareco&nbsp;:&nbsp;@popularite@&nbsp;; vizitoj&nbsp;:&nbsp;@visites@',
@@ -499,11 +499,11 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_redacteur_2' => 'kun aliro al la privata spaco (<i>Estas konsilinde</i>)',
 'info_redacteurs' => 'Redaktantoj',
 'info_redaction_en_cours' => 'REDAKTATA',
-'info_redirection' => 'Alidirekto',
+'info_redirection' => 'Alidirektigo',
 'info_referencer_doc_distant' => 'Referencigi dokumenton &#265;e la reto&nbsp;:',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
-'info_reglage_ldap' => 'Opcioj: <B>&#284;ustigo de la LDAP &#349;argo</b>',
-'info_renvoi_article' => '<B>Alidirekto.</b> Tiu artikolo alidirektas al la pa&#285;o:',
+'info_reglage_ldap' => 'Opcioj: <B>Agordo de la LDAP-&#349;argo</b>',
+'info_renvoi_article' => '<B>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun adreson.',
 'info_restauration_sauvegarde' => 'Resta&#365;ro de la savkopio @archive@',
 'info_restreindre_rubrique' => 'Limigi la mastrumadon al la rubriko:',
@@ -532,7 +532,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_sauvegarde_reussi_03' => 'reen al pa&#285;o pri mastrumado',
 'info_sauvegarde_reussi_04' => 'de via retejo.',
 'info_sauvegarde_rubriques' => 'Konservi la rubrikojn',
-'info_sauvegarde_signatures' => 'Konservi la subskribojn de la petskriboj',
+'info_sauvegarde_signatures' => 'Konservi la subskribojn de petskriboj',
 'info_sauvegarde_sites_references' => 'Konservi la referencigitajn retejojn',
 'info_sauvegarde_type_documents' => 'Konservi la dokumentotipojn',
 'info_sauvegarde_visites' => 'Konservi la vizitojn',
@@ -556,7 +556,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_sous_titre' => 'Subtitolo:',
 'info_statut_administrateur' => 'Mastrumanto',
 'info_statut_auteur' => 'Statuso de tiu &#265;i a&#365;toro :',
-'info_statut_auteur_a_confirmer' => 'Konfirmenda registri&#285;into',
+'info_statut_auteur_a_confirmer' => 'Konfirmenda registropeto',
 'info_statut_auteur_autre' => 'Alia statuso&nbsp;:',
 'info_statut_efface' => 'Forigita',
 'info_statut_redacteur' => 'Redaktanto',
@@ -565,14 +565,14 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_statut_site_3' => 'Proponita',
 'info_statut_site_4' => 'En rubujo',
 'info_statut_utilisateurs_1' => 'Defa&#365;lta statuso de la importitaj uzantoj',
-'info_statut_utilisateurs_2' => 'Elektu la statuton atribuotan al la personoj &#265;eestantaj en LDAP-dosierujilo, kiam ili unuafoje konekti&#285;as. Poste vi povos modifi tiun valoron per &#265;iu a&#365;toro la&#365;kaze.',
+'info_statut_utilisateurs_2' => 'Elektu la statuson atribuotan al la personoj &#265;eestantaj en LDAP-dosierujilo, kiam ili unuafoje konekti&#285;as. Poste vi povos modifi tiun valoron por &#265;iu a&#365;toro la&#365;kaze.',
 'info_suivi_activite' => 'Superrigardo de la redakta agado',
 'info_supprimer_mot' => 'forigi&nbsp;tiun&nbsp;vorton',
 'info_surtitre' => 'Surtitolo:',
 'info_syndication_integrale_1' => 'Via retejo proponas abonrilatigajn dosierojn (vidu &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => '&#264;u vi deziras transdoni tutajn artikolojn, a&#365; nur afi&#349;i kelkcent-literan resumon&nbsp;?',
 'info_taille_maximale_vignette' => 'Maksimuma grandeco de la vinjetoj generataj de la sistemo&nbsp;:',
-'info_terminer_installation' => 'Vi povas nun fini la&#365;norman proceduron de  instalado.',
+'info_terminer_installation' => 'Vi povas nun fini la&#365;norman instalproceduron.',
 'info_texte' => 'Teksto',
 'info_texte_explicatif' => 'Klariga teksto',
 'info_texte_long' => '(la teksto estas longa&nbsp;: &#285;i aperas do en pluraj partoj kiuj estos rekunigitaj post validigo.)',
@@ -581,7 +581,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 'info_titre' => 'Titolo :',
 'info_titre_mot_cle' => 'Nomo a&#365; titolo de la &#349;losilvorto',
 'info_total' => 'totalo :',
-'info_tous_articles_en_redaction' => '&#264;iuj artikolo redaktataj',
+'info_tous_articles_en_redaction' => '&#264;iuj artikoloj redaktataj',
 'info_tous_articles_presents' => '&#264;iuj artikoloj publikigitaj en tiu &#265;i rubriko',
 'info_tous_les' => '&#265;iuj :',
 'info_tous_redacteurs' => 'Anoncoj al &#265;iuj redaktantoj',
@@ -594,7 +594,7 @@ La publikaj forumoj estos unu post la alia permesitaj
 La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton&nbsp;:',
 'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 'info_un_article' => 'unu artikolo,',
-'info_un_mot' => 'Po nur unu vorto',
+'info_un_mot' => 'Po nur unu vorto samtempe',
 'info_un_site' => 'retejo,',
 'info_une_breve' => 'fulm-informo,',
 'info_une_rubrique' => 'unu rubriko,',
@@ -612,9 +612,9 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'install_echec_annonce' => 'Certe la instalado estas malsukcesonta, a&#365; naskos ne funkciivan retejon...',
 'install_extension_mbstring' => 'SPIP ne funkcias per&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP postulas la php-kromprogramon&nbsp;:',
-'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon &laquo;&nbsp;sekva&nbsp;&raquo; por lan&#265;i la instal-proceduron.',
+'install_select_langue' => 'Elektu lingvon kaj poste musklaku la butonon &laquo;&nbsp;sekvanta&nbsp;&raquo; por lan&#265;i la instal-proceduron.',
 'intem_redacteur' => 'redaktanto',
-'item_accepter_inscriptions' => 'Akcepti la registri&#285;opetojn',
+'item_accepter_inscriptions' => 'Akcepti la registropetojn',
 'item_activer_forum_administrateur' => 'Aktivigi la forumon de la mastrumantoj',
 'item_activer_messages_avertissement' => 'Aktivigi la averto-mesa&#285;ojn',
 'item_administrateur_2' => 'mastrumanto',
@@ -633,25 +633,25 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_choix_visiteurs' => 'la vizitantoj de la publika spaco',
 'item_creer_fichiers_authent' => 'Krei la dosierojn .htpasswd',
 'item_desactiver_forum_administrateur' => 'Malaktivigi la forumon de la mastrumantoj',
-'item_gerer_annuaire_site_web' => 'Mastrumi retejadresaron',
+'item_gerer_annuaire_site_web' => 'Mastrumi retej-adresaron',
 'item_gerer_statistiques' => 'Mastrumi statistikojn',
-'item_limiter_recherche' => 'Limigi la ser&#265;adon al informoj entenataj &#265;e via retejo',
+'item_limiter_recherche' => 'Limigi la ser&#265;procezon al informoj entenataj &#265;e via retejo',
 'item_login' => 'Salutnomo',
 'item_mots_cles_association_articles' => 'al artikoloj',
 'item_mots_cles_association_breves' => 'al fulm-informoj',
 'item_mots_cles_association_rubriques' => 'al rubrikoj',
 'item_mots_cles_association_sites' => 'al referencigitaj a&#365; abonrilatigitaj retejoj.',
 'item_non' => 'Ne',
-'item_non_accepter_inscriptions' => 'Ne akcepti la registri&#285;ojn',
+'item_non_accepter_inscriptions' => 'Ne akcepti la registropetojn',
 'item_non_activer_messages_avertissement' => 'Neniuj averto-mesa&#285;oj',
 'item_non_afficher_calendrier' => 'Ne afi&#349;i en la kalendaro',
 'item_non_ajout_mots_cles' => 'Malpermesi la uzadon de &#349;losilvortoj en la forumoj',
 'item_non_autoriser_documents_joints' => 'Ne permesi dokumentojn en la artikoloj',
 'item_non_autoriser_documents_joints_rubriques' => 'Ne permesi dokumentojn en la rubrikoj',
-'item_non_autoriser_syndication_integrale' => 'Nur disponigi unu resumon',
+'item_non_autoriser_syndication_integrale' => 'Nur disponigi po unu resumo',
 'item_non_bloquer_liens_syndiques' => 'Ne bloki la ligilojn naskitajn de abonrilato',
 'item_non_creer_fichiers_authent' => 'Ne krei tiujn &#265;i dosierojn',
-'item_non_gerer_annuaire_site_web' => 'Malaktivigi la retejadresaron',
+'item_non_gerer_annuaire_site_web' => 'Malaktivigi la retej-adresaron',
 'item_non_gerer_statistiques' => 'Ne mastrumi statistikojn',
 'item_non_limiter_recherche' => 'Etendi la ser&#265;adon al la enhavo de la referencigitaj retejoj',
 'item_non_publier_articles' => 'Ne publikigi la artikolojn anta&#365; la fiksita publikig-dato.',
@@ -664,7 +664,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_nouvelle_breve' => 'Nova fulm-informo',
 'item_nouvelle_rubrique' => 'Nova rubriko',
 'item_oui' => 'Jes',
-'item_publier_articles' => 'Publikigi la artikolojn, kiu ajn estas sia publikig-dato.',
+'item_publier_articles' => 'Publikigi la artikolojn, kiu ajn estas ties publikig-dato.',
 'item_reponse_article' => 'Respondo al la artikolo',
 'item_utiliser_breves' => 'Uzi la fulm-informojn',
 'item_utiliser_config_groupe_mots_cles' => 'Uzi la fajnan konfiguron de la &#349;losilvortoj-grupoj',
@@ -708,16 +708,16 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'logo_mot_cle' => 'VINJETO DE LA &#348;LOSILVORTO',
 'logo_rubrique' => 'VINJETO DE LA RUBRIKO',
 'logo_site' => 'VINJETO DE LA RETEJO',
-'logo_standard_rubrique' => 'NORMA VINJETO DE RUBRIKOJ',
-'logo_survol' => 'VINJETO POR FLUGVIDO',
+'logo_standard_rubrique' => 'LA&#364;NORMA VINJETO DE RUBRIKOJ',
+'logo_survol' => 'VINJETO POR FLUGRIGARDO',
 
 
 // M
-'menu_aide_installation_choix_base' => 'Elekto de via bazo',
+'menu_aide_installation_choix_base' => 'Elekto de via datenbazo',
 'module_fichier_langue' => 'Lingva dosiero',
-'module_raccourci' => 'Rapidligilo',
+'module_raccourci' => 'Rapid-alirilo',
 'module_texte_affiche' => 'Afi&#349;ita teksto',
-'module_texte_explicatif' => 'Vi povas inkludi la jenajn rapidligilojn en la skeletojn de via publika retejo. Ili estos a&#365;tomate tradukitaj en la diversajn lingvojn, kiuj havas specifan lingvan dosieron.',
+'module_texte_explicatif' => 'Vi povas inkludi la jenajn rapid-alirilojn en la skeletojn de via publika retejo. Ili estos a&#365;tomate tradukitaj en la diversajn lingvojn, kiuj havas specifan lingvan dosieron.',
 'module_texte_traduction' => 'La lingva dosiero &laquo;&nbsp;@module@&nbsp;&raquo; disponeblas en&nbsp;:',
 'mois_non_connu' => 'nekonata',
 
@@ -744,7 +744,7 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'plugin_etat_experimental' => 'eksperimenta',
 'plugin_etat_stable' => 'stabila',
 'plugin_etat_test' => 'testata',
-'plugins_liste' => 'Kromprogramoj-listo',
+'plugins_liste' => 'Listo de kromprogramoj',
 
 
 // R
@@ -756,37 +756,37 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'syndic_choix_moderation' => 'Kion fari el la ligiloj venontaj el tiu retejo&nbsp;?',
 'syndic_choix_oublier' => 'Kion fari el la ligiloj, kiuj ne plu aperas en la abonrilatiga dosiero&nbsp;?',
 'syndic_choix_resume' => 'Iuj retejoj disponigas la tutan tekston de la artikoloj. Kiam tiu &#265;i disponeblas, &#265;u vi deziras abonrilatigi&nbsp;:',
-'syndic_lien_obsolete' => 'eksuzita ligilo',
+'syndic_lien_obsolete' => 'eks-uzita ligilo',
 'syndic_option_miroir' => 'a&#365;tomate bloki ilin',
 'syndic_option_oubli' => 'forvi&#349;i ilin (post @mois@&nbsp;monatoj)',
 'syndic_option_resume_non' => 'la kompleta enhavo de la artikoloj (HTML-formate)',
 'syndic_option_resume_oui' => 'simpla resumo (tekt-formate)',
-'syndic_options' => 'Abonrilato-opcio&nbsp;:',
+'syndic_options' => 'Abonrilato-agordoj&nbsp;:',
 
 
 // T
-'taille_cache_image' => 'La bildoj a&#365;tomate kalkulitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj la&#365; grafika formo, matematikaj funkcioj la&#365; TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
-'taille_cache_infinie' => 'Tiu retejo ne ebligas limigi memorspacon de stapl-dosierujo.',
-'taille_cache_maxi' => 'SPIP provas limigi memorspacon de stapl-dosierujo po cirka&#365; <b>@octets@</b> da datenoj.',
+'taille_cache_image' => 'La bildoj a&#365;tomate komputitaj de SPIP (vijnetoj de dokumentoj, titoloj prezentitaj la&#365; grafika formo, matematikaj funkcioj la&#365; TeX-formato...) okupas en dosierujo @dir@ spacon je @taille@.',
+'taille_cache_infinie' => 'Tiu retejo ne ebligas limigi memorspacon de stapla dosierujo.',
+'taille_cache_maxi' => 'SPIP provas limigi memorspacon de stapla dosierujo po cirka&#365; <b>@octets@</b> da datenoj.',
 'taille_cache_octets' => 'Memorspaco de la staplo estas nun @octets@.',
 'taille_cache_vide' => 'La staplo estas malplena.',
 'taille_repertoire_cache' => 'Memorspaco de stapla dosierujo',
 'text_article_propose_publication' => 'Artikolo proponita por publikigo. Ne hezitu doni vian opinion pere de la forumo ligita al tiu artikolo (malsupre de la pa&#285;o).',
-'texte_acces_ldap_anonyme_1' => 'Iuj LDAP-serviloj ne akceptas sennoman aliron. Tiukaze, necesas difini identecnomon por ser&#265;i informojn en dosierujilo. Plejofte tamen, la sekvaj &#265;eloj povas resti malplenaj.',
+'texte_acces_ldap_anonyme_1' => 'Iuj LDAP-serviloj ne akceptas sennoman aliron. Tiukaze, necesas difini identecnomon por ser&#265;i informojn en dosierujilo. Plejofte tamen, la sekvantaj tajpujoj povas resti malplenaj.',
 'texte_admin_effacer_01' => 'Tiu komando forvi&#349;as <i>la tutan</i> enhavon de la datenbazo,
 inkluzive de <i>&#265;iuj</i> alirrajtoj de redaktantoj kaj mastrumantoj. Post ties efektivigo, vi devos lan&#265;i la
-SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumantan alirrajton.',
+SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_admin_tech_01' => 'Tiu opcio ebligas al vi konservi enhavon de bazo en dosiero stokota en dosierujo @dossier@. Ne forgesu anka&#365; reakiri la tuton de la dosierujo @img@, kiu enhavas bildojn kaj dokumentojn uzatajn en artikoloj kaj rubrikoj.',
 'texte_admin_tech_02' => 'Atentu: tiu savkopio povos esti resta&#365;rita
 NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu la datenbazon&nbsp;" esperante poste reinstali savkopion post &#285;isdatigo... Konsultu <a href="http://www.spip.net/fr_article1489.html">la dokumentaron de SPIP</a>.',
-'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron en densigita formo, por
+'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron la&#365; densigita formo, por
  rapidigi ties &#349;uton hejmen a&#365; al konservo-servilo, kaj por &#349;pari diskospacon.',
 'texte_adresse_annuaire_1' => '(Se via adresaro estas instalita &#265;e la sama ma&#349;ino kiel la retejo, temas ver&#349;ajne pri &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'La jena a&#365;toro estis aldonita al la artikolo:',
 'texte_annuaire_ldap_1' => 'Se vi havas aliron al dosierujilo (LDAP), vi povas uzi &#285;in por a&#365;tomate importi uzantojn sub SPIP.',
 'texte_article_statut' => 'Tiu artikolo estas:',
 'texte_article_virtuel' => 'Virtuala artikolo',
-'texte_article_virtuel_reference' => '<b>Virtuala artikolo&nbsp;:</b> artikolo referencigita en via SPIP-retejo, sed alidirektita al alia URL. Por forigi la alidirekton, forvi&#349;u la &#265;i supran URL-n.',
+'texte_article_virtuel_reference' => '<b>Virtuala artikolo&nbsp;:</b> artikolo referencigita &#265;e via SPIP-retejo, sed alidirektita al alia URL. Por forigi la alidirekton, forvi&#349;u la &#265;i supran URL-n.',
 'texte_aucun_resultat_auteur' => 'Neniu rezulto por "@cherche_auteur@"',
 'texte_auteur_messagerie' => 'Tiu retejo povas konstante indiki la liston de la konektitaj redaktantoj. Tio ebligas al vi rekte inter&#349;an&#285;i mesa&#285;ojn. Vi povas decidi ne aperi en tia listo (vi estas &laquo;&nbsp;nevidebla&nbsp;&raquo; al la aliaj uzantoj).',
 'texte_auteur_messagerie_1' => 'Tiu retejo ebligas la inter&#349;an&#285;on de mesa&#285;oj kaj la estigon de privataj forumoj inter la partoprenantoj de la retejo. Vi povas decidi ne partopreni en tiaj inter&#349;an&#285;oj.',
@@ -801,7 +801,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
    de la SPIP-integrita ser&#265;ilo. Tio ebligos al vi
    gajni diskospacon.',
 'texte_comment_lire_tableau' => 'La rango de la artikolo,
-  en la klasigo la&#365; populareco, estas indikita en la
+  en la klasifiko la&#365; populareco, estas indikita en la
   mar&#285;eno&nbsp;; la populareco de la artikolo (taksado de la
   nombro de &#265;iutagaj vizitoj, kiun &#285;i atingos se la nuna vizit-ritmo
   tiel da&#365;ros) kaj la nombro de vizitoj ricevitaj
@@ -811,9 +811,9 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementoj',
 'texte_config_groupe_mots_cles' => '&#264;u vi deziras aktivigi la fajnan konfiguron de la &#349;losilvortoj,
-   indikante ekzemple ke oni povas elekti po unu vorton en grupo,
-   ke iu grupo estu ampleksa... ?',
-'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via gastiganto&nbsp;: de tiuj informoj vi ekscios, &#265;u via gastiganto eltenas MySQL-on, la kodojn por konekti&#285;i al la MySQL-servilo.',
+   indikante ekzemple ke oni povas elekti po unu vorto en grupo,
+   ke iu grupo estu grava... ?',
+'texte_connexion_mysql' => 'Konsultu la informojn donitajn de via retgastiganto&nbsp;: de tiuj informoj vi ekscios, &#265;u via gastiganto eltenas MySQL-on, la kodojn por konekti&#285;i al la MySQL-servilo.',
 'texte_contenu_article' => '(Kelkvorta enhavo-priskribo de la artikolo.)',
 'texte_contenu_articles' => 'La&#365; la modelo adoptita por via retejo, vi povas decidi
   ke certaj elementoj de la artikoloj ne estu uzataj.
@@ -842,92 +842,92 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
   kaj administrantoj en aliaj lokoj de via retejo
   (ekzemple, ekstera statistik-programo).<p>
   Se tio ne utilas al vi, vi povas lasi tiun opcion
-  je &#285;ia defa&#365;lta valoro (neniu dosier-kreo
-).',
+  je &#285;ia defa&#365;lta valoro (neniu dosier-kreo).
+',
 'texte_informations_personnelles_1' => 'La sistemo kreos por vi nun personan alireblon al la retejo.',
 'texte_informations_personnelles_2' => '(Noto: se temas pri reinstalo kaj se via aliro da&#365;re funkcias, vi povas',
 'texte_introductif_article' => '(Enkonduka teksto al la artikolo.)',
-'texte_jeu_caractere' => 'Ni konsilas al vi uzi, en via retejo, universalan alfabeton (<tt>utf-8</tt>)&nbsp;: tio ebligas afi&#349;adon de textoj en &#265;iuj lingvoj kaj solvas problemojn de kongrueco se vi uzas modernajn krozilojn.',
-'texte_jeu_caractere_2' => 'Atentu : tiu aran&#285;o ne konvertas tekstojn jam registrintaj en datenbazo.',
-'texte_jeu_caractere_3' => 'Via retejo estas nune instalita la&#365; la litertiparo&nbsp;:',
+'texte_jeu_caractere' => 'Ni konsilas al vi uzi, en via retejo, universalan alfabeton (<tt>utf-8</tt>)&nbsp;: tio ebligas afi&#349;adon de tekstoj en &#265;iuj lingvoj kaj solvas problemojn de kongrueco se vi uzas modernajn retumilojn.',
+'texte_jeu_caractere_2' => 'Atentu : tiu agordo ne konvertas tekstojn jam registritajn en la datenbazo.',
+'texte_jeu_caractere_3' => 'Via retejo estas nun instalita la&#365; la litertiparo&nbsp;:',
 'texte_jeu_caractere_4' => 'Se tio ne kongruas kun la realo de viaj datenoj (ekzemple, sekve de datenbazo-resta&#365;ro), a&#365; se <em>vi &#309;us ekkreis tiun retejon</em> kaj deziras ekuzi novan litertiparon, bonvolu indiki &#285;in &#265;i tie&nbsp;:',
 'texte_jeu_caractere_conversion' => 'Noto&nbsp;: vi povas decidi konverti definitive &#265;iujn tekstojn de via retejo (artikoloj, fulm-informoj, forumoj, ktp...) en alfabeton <tt>utf-8</tt>, irante &#265;e <a href="@url@"> la al-utf-8-konvertan pa&#285;on</a>.',
 'texte_lien_hypertexte' => 'Se via mesa&#285;o rilatas al artikolo publikigita &#265;e la reto, a&#365; al pa&#285;o donanta pli da informoj, bonvolu indiki &#265;i-poste la titolon de la pa&#285;o kaj ties URL-adreson.)',
-'texte_liens_sites_syndiques' => 'Ligoj el kunligitaj retejoj povas
-   esti blokataj apriore; la &#265;i-suba &#285;ustigo
-   indikas la defa&#365;ltan &#285;ustigon de la
+'texte_liens_sites_syndiques' => 'Ligoj el abonrilatigitaj retejoj povas
+   esti blokataj apriore; la &#265;i-suba agordo
+   indikas la defa&#365;ltan agordon de la
    abonrilatigitaj retejoj je ties kreo. Poste
    eblas &#265;iukaze malbloki &#265;iun
-   ligon unuope, a&#365; elekti, retejon post retejo, bloki estigotajn
+   ligilon unuope, a&#365; elekti, retejon post retejo, bloki estigotajn
 ligilojn al jena a&#365; alia retejo.',
 'texte_login_ldap_1' => 'Lasu malplena por sennoma aliro, a&#365; entajpu la kompletan vojon, ekzemple &laquo;&nbsp;<tt>uid=nomo, ou=uzanto, dc=mia-domajno, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Atentu&nbsp;! Tio &#265;i estas la salutnomo la&#365; kiu vi ensalutis.
  Uzu tiun &#265;i formularon prudente...',
-'texte_message_edit' => 'Atentu&nbsp;: tiu &#265;i mesa&#285;o povas esti modifita de &#265;iuj administrantoj de la retejo, kaj estas videbla por &#265;iuj redaktantoj. Uzu la anoncojn nur por sciigi eventojn gravajn al la vivo de la retejo.',
+'texte_message_edit' => 'Atentu&nbsp;: tiu &#265;i mesa&#285;o povas esti modifita de &#265;iuj mastrumantoj de la retejo, kaj estas videbla de &#265;iuj redaktantoj. Uzu la anoncojn nur por sciigi eventojn gravajn pri la vivo de la retejo.',
 'texte_messages_publics' => 'Publikaj mesa&#285;oj de la artikolo:',
 'texte_mise_a_niveau_base_1' => 'Vi &#309;us &#285;isdatigis la SPIP-dosierojn.
- Necesas nun niveligi la datenbazon
+ Necesas nun alniveligi la datenbazon
  de la retejo.',
 'texte_modifier_article' => 'Modifi la artikolon:',
-'texte_moteur_recherche_active' => '<b>La ser&#265;ilo estas aktiva.</b> Uzu tiun ordonon
-  se vi volas reindeksigi (ekzemple post resta&#365;ro
+'texte_moteur_recherche_active' => '<b>La ser&#265;ilo estas aktiva.</b> Uzu tiun komandon
+  se vi volas fari rapidan reindeksigon (ekzemple post resta&#365;ro
   de savkopio). Notu ke la dokumentoj normale modifitaj
-  (ekde la SPIP-interfaco) estas a&#365;tomate reindicataj:
-  tiu &#265;i komando estas do nur esceptokaze utila.',
+  (ekde la SPIP-interfaco) estas a&#365;tomate reindeksitaj:
+  tiu &#265;i komando estas do nur escepte utila.',
 'texte_moteur_recherche_non_active' => 'La ser&#265;ilo ne estas aktivgita.',
 'texte_mots_cles' => 'La &#349;losilvortoj ebligas krei temajn ligilojn inter viaj artikoloj
   sendepende de ties situo en la rubrikoj. Vi povas tiel
   pliri&#265;igi la retumadon &#265;e via retejo, e&#265; uzi tiujn trajtojn
-  por fasoni la aspekton de la artikoloj en viaj skeletoj.',
+  por la&#365;vole aspektigi artikolojn en viaj skeletoj.',
 'texte_mots_cles_dans_forum' => '&#264;u vi deziras permesi uzadon de &#349;losilvortoj selekteblaj de la vizitantoj, en la forumoj de la publika spaco&nbsp;? (Atentu&nbsp;: tiu opcio estas relative kompleksa por &#285;uste uzi &#285;in.)',
-'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon de lingvoelekto en la artikoloj kaj/a&#365; en la rubrikoj, konforme al la organizado de via retejo.',
-'texte_multilinguisme_trad' => 'Vi povas anka&#365; aktivigi ilon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
+'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa retumado, vi povas aldoni menuon pri lingvoelekto en la artikoloj kaj/a&#365; en la rubrikoj, konforme al la organizo de via retejo.',
+'texte_multilinguisme_trad' => 'Vi povas anka&#365; aktivigi sistemon por mastrumi la ligilojn inter la diversaj tradukoj de artikolo.',
 'texte_non_compresse' => '<i>ne densigita</i> (&#265;ar via servilo ne eltenas tiun funkcion)',
 'texte_non_fonction_referencement' => 'Vi povas preferi ne uzi tiun a&#365;tomatan funkcion kaj indiki mem la elementojn koncernantajn tiun &#265;i retejon...',
 'texte_nouveau_message' => 'Nova mesa&#285;o',
 'texte_nouveau_mot' => 'Nova vorto',
 'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas administranto de la teksejo, bonvolu forigi la dosieron @connect@ kaj restarigi la instaladon por &#285;isdatigi viajn parametrojn de konektado al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron @connect@ anta&#365; ol forigi &#285;in...)',
-'texte_operation_echec' => 'Reiru al anta&#365;a pa&#285;o, elektu alian bazon a&#365; kreu novan. Kontrolu la informojn donitajn de via gastiganto.',
+'texte_nouvelle_version_spip_2' => 'Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas mastrumanto de la retejo, bonvolu forigi la dosieron @connect@ kaj restarigi la instalprocezon por &#285;isdatigi viajn konekt-parametrojn al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron @connect@ anta&#365; ol forigi &#285;in...)',
+'texte_operation_echec' => 'Reiru al anta&#365;a pa&#285;o, selektu alian datenbazon a&#365; kreu novan. Kontrolu la informojn donitajn de via retgastiganto.',
 'texte_plus_trois_car' => 'pli ol 3 literoj',
 'texte_plusieurs_articles' => 'Pluraj a&#365;toroj trovitaj por"@cherche_auteur@":',
 'texte_port_annuaire' => 'La defa&#365;lte indikita valoro &#285;enerale ta&#365;gas.)',
 'texte_presente_plugin' => 'Tiu pa&#285;o listigas kromprogramojn disponeblajn &#265;e tiu retejo. Vi povas aktivigi la necesajn kromprogramojn no&#265;ante la kongruan no&#265;ujon.',
 'texte_proposer_publication' => 'Kiam via artikolo estas finita,<br> vi povas proponi &#285;ian publikigon.',
 'texte_proxy' => 'En iuj okazoj (intrareto, protektitaj retoj...),
-  povas necesigi uzon de <I>proxy HTTP</I> por atingi la abonrilatajn retejojn.
-  Eventuale, indiku &#265;i-sube ties retadreson, en la formo
+  povas esti necese uzi na <I>proxy HTTP</I> por atingi la abonrilatajn retejojn.
+  Eventuale, indiku &#265;i-sube ties retadreson, la&#365; la formo
   <tt><html>http://proxy:8080</html></tt>. &#284;enerale,
-  lasu tiun &#265;elon malplena.',
-'texte_publication_articles_post_dates' => 'Kian konduton SPIP adoptu rilate la artikolojn
+  lasu tiun tajpujon malplena.',
+'texte_publication_articles_post_dates' => 'Kiel kondutu SPIP rilate la artikolojn
   kies publikig-dato estis fiksita
   por estonta templimo&nbsp;?',
-'texte_rappel_selection_champs' => '[Ne forgesu &#285;uste elekti tiun kampon.]',
+'texte_rappel_selection_champs' => '[Ne forgesu &#285;uste selekti tiun kampon.]',
 'texte_recalcul_page' => 'Se vi volas
 rekalkuli ununuran pa&#285;on, pasu prefere tra la publika spaco kaj tie uzu la butonon &laquo; rekalkuli &raquo;.',
-'texte_recapitiule_liste_documents' => 'Tiu &#265;i pa&#285;o montras la liston de dokumentoj kiujn vi metis en la rubrikojn. Por modifi la informojn de &#265;iu dokumento, sekvu la ligon al la pa&#285;o de ties rubriko.',
+'texte_recapitiule_liste_documents' => 'Tiu &#265;i pa&#285;o montras la liston de dokumentoj, kiujn vi metis en la rubrikojn. Por modifi la informojn pri &#265;iu dokumento, sekvu la ligilon al la pa&#285;o de ties rubriko.',
 'texte_recuperer_base' => 'Ripari la datenbazon',
-'texte_reference_mais_redirige' => 'artikolo referencita en via SPIP-retejo, sed redirektita al alia URL.',
-'texte_referencement_automatique' => '<b>A&#365;tomata referencado de teksejo</b><br>Vi povas rapide referenci teksejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de &#285;ia backend-dosiero. SPIP a&#365;tomate prenos la informojn kiuj koncernas tiun teksejon (titolon, priskribon...).',
+'texte_reference_mais_redirige' => 'artikolo referencigita &#265;e via SPIP-retejo, sed redirektita al alia URL.',
+'texte_referencement_automatique' => '<b>A&#365;tomata referenciga procezo de retejo</b><br>Vi povas rapide referencigi retejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de ties abonrilatiga dosiero. SPIP a&#365;tomate elprenos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
 'texte_requetes_echouent' => '<b>Kiam iuj MySQL-ser&#265;petoj sisteme
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
 mem.</b><p>
 MySQL disponas je ripar-kapablo pri siaj
 tabeloj kiam ili estas akcidente difektitaj.
-Vi povas &#265;i tie provi ripari
-en kazo de malsukceso, konservi kopion de la afi&#349;ado, kiu
-entenas eble indicojn pri la misfunkcio...<p>
+Vi povas &#265;i tie provi riparon;
+en kazo de malsukceso, faru ekrankopion.
+&#284;i eble entenas indicojn pri la misfunkcio...<p>
 Se la problemo da&#365;ras, kontaktu
-vian gastiganton.<p>',
+vian retgastiganton.<p>',
 'texte_restaurer_base' => 'Resta&#365;ri la enhavon de datenbaza savkopio',
 'texte_restaurer_sauvegarde' => 'Tiu opcio ebligas al vi restarigi anta&#365;e faritan savkopion de la bazo.
   Por tio, la dosiero entenanta la savkopion devas esti lokita
-  en la dosierujo @dossier@.
-  Estu zorgema pri tiu funkcio&nbsp;: <b>la modifoj, eventualaj perdoj, estas
+  en la dosierujon @dossier@.
+  Estu singardema pri tiu funkcio&nbsp;: <b>la modifoj, eventualaj perdoj, estas
   neinversigeblaj.</b>',
-'texte_sauvegarde' => 'Konservi la enhavon de la bazo',
-'texte_sauvegarde_base' => 'Konservi la bazon',
+'texte_sauvegarde' => 'Konservi la enhavon de la datenbazo',
+'texte_sauvegarde_base' => 'Konservi la datenbazon',
 'texte_sauvegarde_compressee' => 'La savkopio estos farita en la nedensigita dosiero @fichier@.',
 'texte_selection_langue_principale' => 'Vi povas &#265;i-sube elekti la &laquo;&nbsp;&#265;efan lingvon&nbsp;&raquo; de la retejo. Tiu elekto ne devigas vin - bon&#349;ance&nbsp;! - verki viajn artikolojn en la elektita lingvo, sed ebligas determini&nbsp;:
  <ul><li> la defa&#365;ltan formaton de la datenoj en la publika spaco&nbsp;;</li>
@@ -940,20 +940,20 @@ vian gastiganton.<p>',
 'texte_statut_attente_validation' => 'Atendanta validigon',
 'texte_statut_publies' => 'Rete publikigitaj',
 'texte_statut_refuses' => 'rifuzitaj',
-'texte_suppression_fichiers' => 'Uzu tiun ordenon por forigi &#265;iujn dosierojn trovi&#285;antajn
+'texte_suppression_fichiers' => 'Uzu tiun komandon por forigi &#265;iujn dosierojn trovi&#285;antajn
 en la SPIP-staplo. Tio ebligas ekzemple devigi la sistemon rekalkuli &#265;iujn pa&#285;ojn, se vi
 faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_sur_titre' => 'Surtitolo',
 'texte_syndication' => 'Eblas elpreni a&#365;tomate la liston de nova&#309;oj de iu retejo,
   se tiu retejo tion permesas. Por tio, vi devas aktivigi la abonrilaton.
-  <blockquote><i>Iuj gastigantoj malaktivigas tiun funkcion&nbsp;;
+  <blockquote><i>Iuj retgastigantoj malaktivigas tiun funkcion&nbsp;;
   tiukaze vi ne povas uzi la enhavo-abonrilatigon
   ekde via retejo.</i></blockquote>',
-'texte_table_ok' => ' : tiu tabelo estas en ordo.',
+'texte_table_ok' => ': tiu tabelo estas en ordo.',
 'texte_tables_indexation_vides' => 'La indeksaj tabeloj de la ser&#265;ilo estas malplenaj.',
 'texte_tentative_recuperation' => 'Ripar-provo',
 'texte_tenter_reparation' => 'Provi riparon de la datenbazo',
-'texte_test_proxy' => 'Por testi tiun prokuran servilon, indiku tie la adreson de teksejo kiun vi volas testi.',
+'texte_test_proxy' => 'Por testi tiun prokuran servilon, indiku &#265;i tie la adreson de retejo, kiun vi deziras testi.',
 'texte_titre_02' => 'Titolo:',
 'texte_titre_obligatoire' => '<B>Titolo</B> [Deviga]',
 'texte_travail_article' => '@nom_auteur_modif@ prilaboris tiun artikolon anta&#365; @date_diff@ minutoj',
@@ -967,19 +967,18 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_trop_resultats_auteurs' => 'Tro da rezultoj por "@cherche_auteur@" ; bonvolu fajnigi la ser&#265;okriteriojn.',
 'texte_unpack' => 'El&#349;uto de la lasta versio',
 'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan ser&#265;ilon,
-    vi povas fari ser&#265;adojn en la kunligitaj teksejoj kaj artikoloj
-    per du diversaj manieroj.
+    vi povas fari ser&#265;procezojn &#265;e retejoj abonrilatigitaj la&#365; du malsamaj manieroj.
     <br><img src=\'puce.gif\'> La plej simpla
     estas ser&#265;i nur en la titoloj
-    kaj la priskriboj de la artikoloj. <br><img src=\'puce.gif\'>
-    Dua metodo, multe pli potenca, ebligas
+    kaj en la priskriboj de la artikoloj. <br><img src=\'puce.gif\'>
+    La dua metodo, multe pli potenca, ebligas
     al SPIP ser&#265;i anka&#365; en la teksto de la
-    referencitaj teksejoj&nbsp;. Se vi referencas
-    teksejon, SPIP tiam faros la
-    ser&#265;adon en la teksto de la teksejo mem.',
-'texte_utilisation_moteur_syndiques_2' => 'Tiu metodo devigas SPIP-on regule viziti
-    la referencitajn retejojn.
-    Tio povas sekvigi iometan malrapidi&#285;on de
+    referencigitaj retejoj&nbsp;. Se vi referencigas
+    retejon, SPIP tiam ser&#265;os
+     en la teksto de la retejo mem.',
+'texte_utilisation_moteur_syndiques_2' => 'Tiu metodo devigas SPIP-n regule viziti
+    la referencigitajn retejojn.
+    Tio povas okazigi iometan malrapidi&#285;on de
     via propra retejo.',
 'texte_vide' => 'malplena',
 'texte_vider_cache' => 'Malplenigi la staplon',
@@ -989,16 +988,16 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_articles_syndiques' => 'Abonrilataj artikoloj prenitaj el tiu &#265;i retejo',
 'titre_breves' => 'La fulm-informoj',
 'titre_cadre_afficher_article' => 'Afi&#349;i la artikolojn',
-'titre_cadre_afficher_traductions' => 'Afi&#349;i la traduk-staton de tiuj lingvoj :',
+'titre_cadre_afficher_traductions' => 'Afi&#349;i la traduk-staton por tiuj lingvoj&nbsp;:',
 'titre_cadre_ajouter_auteur' => 'ALDONI A&#364;TORON:',
-'titre_cadre_forum_administrateur' => 'Privata forumo de la administrantoj',
+'titre_cadre_forum_administrateur' => 'Privata forumo de la mastrumantoj',
 'titre_cadre_forum_interne' => 'Interna forumo',
-'titre_cadre_interieur_rubrique' => 'Interne de la rubriko',
+'titre_cadre_interieur_rubrique' => 'Ene de la rubriko',
 'titre_cadre_numero_auteur' => 'A&#364;TORO NUMERO',
 'titre_cadre_signature_obligatoire' => '<B>Subskribo</B> [deviga]<BR>',
-'titre_config_fonctions' => 'Konfiguro de la retejo',
-'titre_config_groupe_mots_cles' => 'Konfiguro de la &#349;losilvortaj grupoj',
-'titre_configuration' => 'Konfiguro de la retejo',
+'titre_config_fonctions' => 'Agordo de la retejo',
+'titre_config_groupe_mots_cles' => 'Agordo de la &#349;losilvortaj grupoj',
+'titre_configuration' => 'Agordo de la retejo',
 'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 'titre_dernier_article_syndique' => 'Lastaj abonrilatigitaj artikoloj',
 'titre_documents_joints' => 'Alkro&#265;itaj dokumentoj',
@@ -1018,7 +1017,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_nouvelle_breve' => 'Nova fulm-informo',
 'titre_nouvelle_rubrique' => 'Nova rubriko',
 'titre_numero_rubrique' => 'RUBRIKO NUMERO:',
-'titre_page_admin_effacer' => 'Teknika bontenado: forigi la bazon',
+'titre_page_admin_effacer' => 'Teknika bontenado: forigi la datenbazon',
 'titre_page_articles_edit' => 'Modifi: @titre@',
 'titre_page_articles_page' => 'La artikoloj',
 'titre_page_articles_tous' => 'La tuta retejo',
@@ -1026,11 +1025,11 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_page_breves' => 'Fulm-informoj',
 'titre_page_breves_edit' => 'Modifi la fulm-informon: &laquo; @titre@ &raquo;',
 'titre_page_calendrier' => 'Kalendaro @nom_mois@ @annee@',
-'titre_page_config_contenu' => 'Konfiguro de la retejo',
-'titre_page_config_fonctions' => 'Konfiguro de la retejo',
-'titre_page_configuration' => 'Konfiguro de la retejo',
+'titre_page_config_contenu' => 'Agordo de la retejo',
+'titre_page_config_fonctions' => 'Agordo de la retejo',
+'titre_page_configuration' => 'Agordo de la retejo',
 'titre_page_controle_petition' => 'Kontrolo de petskriboj',
-'titre_page_delete_all' => 'Totala kaj neriparebla forigo',
+'titre_page_delete_all' => 'Tuta kaj neinversigebla forigo',
 'titre_page_documents_liste' => 'La dokumentoj de la rubrikoj',
 'titre_page_forum' => 'Forumo de la mastrumantoj',
 'titre_page_forum_envoi' => 'Sendi mesa&#285;on',
@@ -1040,41 +1039,41 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_page_messagerie' => 'Via mesa&#285;ilo',
 'titre_page_mots_tous' => '&#348;losilvortoj',
 'titre_page_recherche' => 'Ser&#265;rezulto @recherche@',
-'titre_page_sites_tous' => 'La referencitaj retejoj',
+'titre_page_sites_tous' => 'La referencigitaj retejoj',
 'titre_page_statistiques' => 'Statistikoj la&#365; rubrikoj',
 'titre_page_statistiques_referers' => 'Statistikoj (eniraj ligoj)',
 'titre_page_statistiques_visites' => 'Statistikoj de la vizitoj',
-'titre_page_upgrade' => 'Alniveligo de SPIP',
+'titre_page_upgrade' => 'SPIP-alniveligo',
 'titre_publication_articles_post_dates' => 'Publikigo de la postdatitaj artikoloj',
-'titre_referencement_sites' => 'Referencado de retejoj kaj abonrilato',
+'titre_referencement_sites' => 'Referencigado de retejoj kaj abonrilato',
 'titre_referencer_site' => 'Referencigi la retejon:',
 'titre_rendez_vous' => 'RENDEVUO:',
 'titre_reparation' => 'Riparo',
 'titre_site_numero' => 'RETEJO NUMERO&nbsp;:',
 'titre_sites_proposes' => 'La proponitaj retejoj',
-'titre_sites_references_rubrique' => 'La retejoj referencitaj en tiu &#265;i rubriko',
+'titre_sites_references_rubrique' => 'La retejoj referencigitaj en tiu &#265;i rubriko',
 'titre_sites_syndiques' => 'La abonrilatigitaj retejoj',
-'titre_sites_tous' => 'La referencitaj retejoj',
+'titre_sites_tous' => 'La referencigitaj retejoj',
 'titre_suivi_petition' => 'Kontrolo de la petskriboj',
 'titre_syndication' => 'Reteja abonrilatigo',
 'tout_dossier_upload' => 'La tuta dosierujo @upload@',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 'trad_article_traduction' => '&#264;iuj versioj de tiu artikolo&nbsp;:',
-'trad_deja_traduit' => 'Tiu artikolo jam estas traduko de la kuranta artikolo.',
-'trad_delier' => 'Ne plu ligi tiun artikolon al &#285;iaj tradukoj',
+'trad_deja_traduit' => 'Eraro: ne eblas ligi tiun artikolon al la petita numero.',
+'trad_delier' => 'Ne plu ligi tiun artikolon al ties tradukoj',
 'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numero&nbsp;:',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo',
 
 
 // U
 'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refre&#349;igu tiun pa&#285;on.',
-'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) de la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
+'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) kun la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
 'utf8_convert_backup' => 'Anta&#365;e, ne forgesu fari kompletan savkopion de via retejo. Vi devos anka&#365; kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@.',
 'utf8_convert_erreur_deja' => 'Via retejo jam estas je @charset@, estas senutile konverti &#285;in...',
 'utf8_convert_erreur_orig' => 'Eraro&nbsp;: la litertiparo @charset@ ne estas eltenata.',
-'utf8_convert_termine' => 'Farite&nbsp;!',
-'utf8_convert_timeout' => '<b>Grava&nbsp;:</b> kaze de servila <i>eltempi&#285;o</i> bonvolu fre&#349;igi la pa&#285;on &#285;is kiam &#285;i indikos &laquo;&nbsp;farite&nbsp;&raquo;.',
-'utf8_convert_verifier' => 'Vi devas nun malplenigi la staplon, kaj kontroli ke &#265;io bonas &#265;e la publikaj pa&#285;oj de la retejo. Kaze de grava problemo, savkopio de viaj datenoj estas farita (je la SQL-formato) en la dosierujon @rep@.',
+'utf8_convert_termine' => 'Finite&nbsp;!',
+'utf8_convert_timeout' => '<b>Grava&nbsp;:</b> kaze de servila <i>eltempi&#285;o</i> bonvolu fre&#349;igi la pa&#285;on &#285;is kiam &#285;i indikos &laquo;&nbsp;finite&nbsp;&raquo;.',
+'utf8_convert_verifier' => 'Vi devas nun malplenigi la staplon, kaj kontroli ke &#265;io bonas &#265;e la publikaj pa&#285;oj de la retejo. Kaze de grava problemo, savkopio de viaj datenoj estas farita (je la SQL-formato) en la dosierujo @rep@.',
 'utf8_convertir_votre_site' => 'Konverti vian retejon en utf-8',
 
 
