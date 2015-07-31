@@ -167,11 +167,6 @@ function balise_URL_PAGE_dist($p) {
 // http://doc.spip.org/@balise_URL_ECRIRE_dist
 function balise_URL_ECRIRE_dist($p) {
 
-	if ($p->boucles[$p->id_boucle]->sql_serveur) {
-		$p->code = 'generer_url_public("404")';
-		return $p;
-	}
-
 	$code = interprete_argument_balise(1,$p);
 	if (preg_match("/^'[^']*'$/", $code))
 		$fonc = $code;
