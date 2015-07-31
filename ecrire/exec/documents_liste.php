@@ -46,7 +46,7 @@ echo debut_droite('', true);
 	while ($row = sql_fetch($res))
 		$types[$row['extension']] = $row;
 
-	$result = sql_select("docs.id_document AS id_doc, docs.extension AS extension, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub", "spip_documents AS docs, spip_documents_liens AS lien, spip_rubriques AS rubrique", "docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_objet AND lien.objet='rubrique' AND docs.mode = 'document'", "", "docs.date DESC");
+	$result = sql_select("docs.id_document AS id_doc, docs.extension AS extension, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, R.id_rubrique AS id_rub, R.titre AS titre_rub", "spip_documents AS docs, spip_documents_liens AS lien, spip_rubriques AS R", "docs.id_document = lien.id_document AND R.id_rubrique = lien.id_objet AND lien.objet='rubrique' AND docs.mode = 'document'", "", "docs.date DESC");
 
 	while ($row=sql_fetch($result)){
 		$titre=$row['titre'];
