@@ -120,7 +120,7 @@ debut_droite();
 
  afficher_suivi_versions ($debut, $id_secteur, $id_auteur, $lang_choisie);
 
-fin_page();
+echo fin_page();
 }
 
 ?>

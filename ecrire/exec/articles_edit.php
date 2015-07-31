@@ -322,6 +322,6 @@ function exec_articles_edit_dist()
 	echo formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
 	fin_cadre_formulaire();
 
-	fin_page();
+	echo fin_page();
 }
 ?>

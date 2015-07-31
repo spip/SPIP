@@ -48,7 +48,7 @@ function exec_calendrier_dist()
 
   debut_page($titre, "accueil", "calendrier","",$css);
   echo "\n<div>&nbsp;</div>\n<div id='", $ancre, "'>",$r,'</div>';
-  fin_page();
+  echo fin_page();
 }
 
 // http://doc.spip.org/@http_calendrier_ics_message

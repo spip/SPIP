@@ -54,7 +54,7 @@ function exec_breves_dist()
 		fin_cadre_enfonce();
 	}
 
-	fin_page();
+	echo fin_page();
 }
 
 ?>

@@ -39,7 +39,7 @@ debut_droite();
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
 }
 
@@ -90,7 +90,7 @@ echo "<BR>";
 
 
 
-fin_page();
+echo fin_page();
 
 }
 ?>

@@ -119,25 +119,6 @@ $tables_trans = array(
 
 // http://doc.spip.org/@import_fin
 function import_fin() {
-	// Effacer l'ancien acces admin
-	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
-
-	if ($charset = $GLOBALS['meta']['charset_restauration'])
-		ecrire_meta('charset', $charset);
-	effacer_meta("charset_restauration");
-	effacer_meta("status_restauration");
-	effacer_meta("debut_restauration");
-	effacer_meta("date_optimisation");
-	effacer_meta('request_restauration');
-	effacer_meta('fichier_restauration');
-	effacer_meta('version_archive_restauration');
-	effacer_meta('tag_archive_restauration');
-	ecrire_metas();
-}
-
-// http://doc.spip.org/@import_abandon
-function import_abandon() {
-	// Probleme pour restaurer l'ancien acces admin : il conserve un id_auteur = 0
 
 	effacer_meta("charset_restauration");
 	effacer_meta("status_restauration");
@@ -234,8 +215,6 @@ function import_tables($f, $gz=false) {
 
 	detruit_restaurateur();
 
-	import_fin();
-
 	affiche_progression_javascript('100 %');
 
 	return false;
@@ -256,7 +235,7 @@ function affiche_progression_javascript($abs_pos,$table="") {
 	include_spip('inc/charsets');
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
-	echo " -->\n<script type='text/javascript'><!--\n";
+	echo "\n<script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
 		$taille = $abs_pos;
@@ -379,7 +358,7 @@ function import_all_continue()
 		debut_boite_alerte();
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size='4' color='black'><b>$texte_boite</b></font>";
 		fin_boite_alerte();
-		fin_html();
+
 		// faut faire quelque chose, sinon le site est mort :-)
 		// a priori on reset les meta de restauration car rien n'a encore commence
 		effacer_meta('request_restauration');
@@ -413,11 +392,8 @@ function import_all_continue()
 	$max_time = ini_get('max_execution_time')*1000;
 	echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',$max_time);</script>\n");
 
-	fin_page();
 	if ($GLOBALS['flag_ob_flush']) ob_flush();
 	flush();
-
-	echo "<font color='white'>\n<!--";
 
 	$_fopen = ($gz) ? 'gzopen' : 'fopen';
 	$f = $_fopen($archive, "rb");
@@ -425,9 +401,14 @@ function import_all_continue()
 	$r = import_tables($f, $gz);
 	if ($r) {
 		spip_log("Erreur: $r");
-		import_abandon();
 	}
-	else import_fin();
+	else {
+		if ($charset = $GLOBALS['meta']['charset_restauration'])
+			ecrire_meta('charset', $charset);
+	}
+
+	import_fin();
+	echo "</body></html>\n";
 }
 
 ?>

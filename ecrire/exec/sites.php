@@ -528,7 +528,7 @@ fin_cadre_relief();
 
  echo afficher_forum($result_forum, "sites","id_syndic=$id_syndic");
 
- fin_page();
+ echo fin_page();
 }
 
 // http://doc.spip.org/@analyser_site

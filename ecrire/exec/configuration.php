@@ -22,7 +22,7 @@ include_spip('inc/config');
 
  if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
 }
 
@@ -556,7 +556,7 @@ echo "<p>";
 echo "</form>";
 
 
-fin_page();
+echo fin_page();
 
 }
 ?>

@@ -192,7 +192,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 else echo "<H2>"._T('info_page_interdite')."</H2>";
 
 fin_cadre_formulaire();
-fin_page();
+echo fin_page();
 }
 
 ?>

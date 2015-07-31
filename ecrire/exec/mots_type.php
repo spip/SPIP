@@ -223,7 +223,7 @@ if ($connect_statut =="0minirezo"){
 }
 
 
-fin_page();
+echo fin_page();
 }
 
 ?>

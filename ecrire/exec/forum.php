@@ -86,6 +86,6 @@ function exec_forum_dist()
  
   echo "</div>";
 
-  fin_page();
+  echo fin_page();
 }
 ?>

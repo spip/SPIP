@@ -169,6 +169,6 @@ echo propre('<code>
 fin_cadre_relief();
 
 
-fin_page();
+echo fin_page();
 }
 ?>

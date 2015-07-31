@@ -89,7 +89,7 @@ else {
 
 echo "</div>";
 
-fin_page();
+echo fin_page();
 
 }
 ?>

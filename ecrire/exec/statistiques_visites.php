@@ -240,7 +240,7 @@ else {
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
-	fin_page();
+	echo fin_page();
 	exit;
 }
 
@@ -808,6 +808,6 @@ echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;ove
 echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
 echo "<br /></div>";	
 
-fin_page();
+echo fin_page();
      }
 ?>

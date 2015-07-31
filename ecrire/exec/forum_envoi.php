@@ -201,7 +201,7 @@ if ($statut != 'perso' AND $options == "avancees") {
 echo "<div align='right'><input class='fondo' type='submit' value='"._T('bouton_voir_message')."'></div>",
 	 "</form>";
 
-fin_page();
+echo fin_page();
 fin_cadre_formulaire();
 }
 

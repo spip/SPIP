@@ -293,9 +293,7 @@ echo "</div>";
 fin_cadre_relief();
 
 // html_background();
-echo "</div>";
-echo "</div>";
+echo "</div></div></body></html>\n";
 
-fin_html();
 }
 ?>

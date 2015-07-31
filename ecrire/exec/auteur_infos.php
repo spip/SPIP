@@ -246,7 +246,7 @@ function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, 
   fin_cadre_formulaire();
   echo "&nbsp;<p />";
 
-  fin_page();
+  echo fin_page();
 }
 
 

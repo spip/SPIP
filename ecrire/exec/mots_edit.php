@@ -272,7 +272,7 @@ if (acces_mots()){
 	fin_cadre_formulaire();
  }
 
-fin_page();
+echo fin_page();
 }
 
 

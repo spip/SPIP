@@ -58,7 +58,7 @@ if ($row['type'] != "affich"){
 		debut_gauche();
 		debut_droite();
 		echo "<b>"._T('avis_non_acces_message')."</b><p>";
-		fin_page();
+		echo fin_page();
 		exit;
 	}
 }
@@ -544,7 +544,7 @@ function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $
 	http_afficher_forum_perso($id_message, $titre);
  }
 
- fin_page();
+ echo fin_page();
 }
 
 ?>

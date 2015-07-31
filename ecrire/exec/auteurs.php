@@ -66,7 +66,7 @@ while ($auteur = spip_fetch_array($result)) {
 
   echo "<div id='auteurs'>$res</div>";
 
-  fin_page();
+  echo fin_page();
 }
 
 // http://doc.spip.org/@affiche_auteurs
