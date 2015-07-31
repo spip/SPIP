@@ -243,8 +243,10 @@ function traiter_lien_explicite ($ref, $texte='', $pour='url', $connect='')
 	// petites corrections d'URL
 	if (preg_match('/^www\.[^@]+$/S',$lien))
 		$lien = "http://".$lien;
-	else if (strpos($lien, "@") && email_valide($lien))
+	else if (strpos($lien, "@") && email_valide($lien)) {
+		if (!$texte) $texte = $lien;
 		$lien = "mailto:".$lien;
+	}
 	
 	if ($pour == 'url') return $lien;
 
