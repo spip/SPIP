@@ -63,7 +63,7 @@ function exec_admin_vider_dist()
 
 
 echo "<br /><br /><br />";
-gros_titre(_T('titre_admin_vider'));
+echo gros_titre(_T('titre_admin_vider'),'', false);
 // barre_onglets("administration", "vider");
 
 

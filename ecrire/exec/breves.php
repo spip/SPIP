@@ -24,11 +24,11 @@ function exec_breves_dist()
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_breves'), "naviguer", "breves");
-	debut_gauche();
+	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'breves'),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'breves'),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
  	$result = sql_select('*', "spip_rubriques", "id_parent=0",'', '0+titre,titre');
 

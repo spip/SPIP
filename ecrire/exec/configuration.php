@@ -35,10 +35,10 @@ function exec_configuration_dist(){
 	echo $commencer_page(_T('titre_page_configuration'), "configuration", "configuration");
 	
 	echo "<br /><br /><br />\n";
-	gros_titre(_T('titre_configuration'));
+	echo gros_titre(_T('titre_configuration'),'', false);
 	echo barre_onglets("configuration", "contenu");
 	
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	//
 	// Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
@@ -49,9 +49,9 @@ function exec_configuration_dist(){
 	}
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configuration'),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'configuration'),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
 	echo avertissement_config();
 

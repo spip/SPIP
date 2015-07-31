@@ -62,9 +62,9 @@ function exec_admin_plugin_dist($retour='') {
 
 	// Si on a CFG, ajoute un lien (oui c'est mal)
 	if (defined('_DIR_PLUGIN_CFG')) {
-		debut_cadre_enfonce();
-		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), _DIR_PLUGIN_CFG.'cfg-22.png', '', true);
-		fin_cadre_enfonce();
+		echo debut_cadre_enfonce('',true);
+		echo icone_horizontale('CFG &ndash; '._T('configuration'), generer_url_ecrire('cfg'), _DIR_PLUGIN_CFG.'cfg-22.png', '', false);
+		echo fin_cadre_enfonce(true);
 	}
 
 	// Lister les librairies disponibles
@@ -73,7 +73,7 @@ function exec_admin_plugin_dist($retour='') {
 		ksort($libs);
 		foreach ($libs as $lib => $rep)
 		echo "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 	}
 
 	echo debut_droite('plugin', true);

@@ -49,11 +49,11 @@ function exec_controle_petition_dist()
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_page_controle_petition'), "forum", "suivi-petition");
-		debut_gauche();
+		echo debut_gauche('', true);
 
-		debut_droite();
+		echo debut_droite('', true);
   
-		gros_titre(_T('titre_suivi_petition'));
+		echo gros_titre(_T('titre_suivi_petition'),'', false);
 
 		if (!$titre)
 		  echo _T('trad_article_inexistant');

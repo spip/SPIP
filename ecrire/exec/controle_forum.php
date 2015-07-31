@@ -268,8 +268,8 @@ function exec_controle_forum_dist()
 
 		echo fin_onglet();
 
-		debut_gauche();
-		debut_boite_info();
+		echo debut_gauche('', true);
+		echo debut_boite_info(true);
 		echo "<span class='verdana1 spip_small'>", _T('info_gauche_suivi_forum_2'), aide("suiviforum"), "</span>";
 
 		// Afficher le lien RSS
@@ -280,14 +280,14 @@ function exec_controle_forum_dist()
 			. bouton_spip_rss('forums', array('page' => $type))
 			. "</div>";
 
-		fin_boite_info();
+		echo fin_boite_info(true);
 			
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
-		creer_colonne_droite();
+		echo creer_colonne_droite(true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 			
 			
-		debut_droite();
+		echo debut_droite('', true);
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
 		echo "<div style='width:200px;float:$spip_lang_right;'>".generer_form_ecrire("controle_forum", $onfocus, " method='get'")."</div>"

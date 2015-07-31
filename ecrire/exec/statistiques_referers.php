@@ -47,16 +47,16 @@ function exec_statistiques_referers_dist()
 	echo $commencer_page(_T('titre_page_statistiques_referers'), "statistiques_visites", "referers");
 	echo "<br /><br /><br />";
 
-	gros_titre(_T('titre_liens_entrants'));
+	echo gros_titre(_T('titre_liens_entrants'),'', false);
 
 //barre_onglets("statistiques", "referers");
 
-debut_gauche();
-debut_boite_info();
+echo debut_gauche('', true);
+echo debut_boite_info(true);
 echo "<p style='font-size:small; text-align:left;' class='verdana1'>"._T('info_gauche_statistiques_referers')."</p>";
-fin_boite_info();
+echo fin_boite_info(true);
 
-debut_droite();
+echo debut_droite('', true);
 
 
 //

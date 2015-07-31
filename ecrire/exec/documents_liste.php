@@ -24,22 +24,22 @@ function exec_documents_liste_dist()
 
 $commencer_page = charger_fonction('commencer_page', 'inc');
 echo $commencer_page(_T('titre_page_documents_liste'), "naviguer", "documents");
-debut_gauche();
+echo debut_gauche('', true);
 
 
 //////////////////////////////////////////////////////
 // Boite "voir en ligne"
 //
 
-debut_boite_info();
+echo debut_boite_info(true);
 
 echo propre(_T('texte_recapitiule_liste_documents'));
 
-fin_boite_info();
+echo fin_boite_info(true);
 
 
 
-debut_droite();
+echo debut_droite('', true);
 
 	// recupere les titres des types
 	$res = spip_query("SELECT * FROM spip_types_documents");
@@ -67,7 +67,7 @@ debut_droite();
 			echo "<p><tt>$fichier</tt>" . '</p>';
 
 		echo "<p>"._T('info_dans_rubrique')." <a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>$titre_rub</a></p>";
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 	}
 
 	echo fin_gauche(), fin_page();

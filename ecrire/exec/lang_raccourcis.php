@@ -38,12 +38,12 @@ function exec_lang_raccourcis_dist() {
 		"configuration", "langues");
 
 	echo "<br /><br /><br />";
-	gros_titre(_T('module_fichier_langue').": $module");
+	echo gros_titre(_T('module_fichier_langue').": $module",'', false);
 
 	echo barre_onglets("config_lang", "fichiers");
 
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	if (count($modules) > 1) {
 		echo debut_cadre_relief('',true,'',_T('module_fichiers_langues'));
@@ -52,11 +52,11 @@ function exec_lang_raccourcis_dist() {
 			if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><b>$nom_module</b></div>";
 			else echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><a href='" . generer_url_ecrire("lang_raccourcis","module=$nom_module") . "'>$nom_module</a></div>";
 		}
-		echo fin_cadre_relief();
+		echo fin_cadre_relief(true);
 	}
 
 
-	debut_droite();
+	echo debut_droite('', true);
 
 	afficher_raccourcis($module);
 

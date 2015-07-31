@@ -52,7 +52,7 @@ function exec_admin_tech_dist()
 	echo debut_droite('',true);
 
 	echo "<div style='text-align: center'>",
-	  gros_titre(_T('titre_admin_tech'),'',true),
+	  gros_titre(_T('titre_admin_tech'),'',false),
 	  '</div>',
 	  $onglet;
 
@@ -189,7 +189,7 @@ function exec_admin_tech_dist()
 		}
 	}
 
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 
 	echo "<br />";
 

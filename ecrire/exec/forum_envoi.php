@@ -121,9 +121,9 @@ function forum_envoi_affiche($id, $id_parent, $script, $statut, $titre, $corps, 
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('texte_nouveau_message'), "accueil", $id_message ? "messagerie" : "accueil");
-	debut_gauche();
-	debut_droite();
-	gros_titre(($num ? "$num $id<br />" :'') . $titre);
+	echo debut_gauche('', true);
+	echo debut_droite('', true);
+	echo gros_titre(($num ? "$num $id<br />" :'') . $titre,'', false);
 
 	$corps .= "\n<div>&nbsp;</div>"
 	.  debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true)

@@ -28,7 +28,7 @@ echo $commencer_page(_T('titre_page_messagerie'), "accueil", "messagerie");
 debut_gauche("messagerie");
 
 
-debut_boite_info();
+echo debut_boite_info(true);
 
 echo _T('info_gauche_messagerie');
 
@@ -42,18 +42,18 @@ echo aide ("messpense");
 
 echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "style='width: 14px; height: 7px; border: 0px'") .' ' . _T('info_symbole_jaune'), '</p>';
 
-fin_boite_info();
+echo fin_boite_info(true);
 
-creer_colonne_droite();
+echo creer_colonne_droite(true);
 
-debut_cadre_relief("messagerie-24.gif");
- icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete.gif");
- icone_horizontale(_T('lien_nouveau_message'),generer_action_auteur("editer_message","normal"), "message.gif");
+echo debut_cadre_relief("messagerie-24.gif", true);
+echo icone_horizontale(_T('lien_nouvea_pense_bete'),generer_action_auteur("editer_message","pb"), "pense-bete.gif", "", false);
+echo icone_horizontale(_T('lien_nouveau_message'),generer_action_auteur("editer_message","normal"), "message.gif", "", false);
 		
 		if ($connect_statut == "0minirezo") {
-			icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce.gif");
+			echo icone_horizontale(_T('lien_nouvelle_annonce'),generer_action_auteur("editer_message","affich"), "annonce.gif", "", false);
 		}
-fin_cadre_relief();
+echo fin_cadre_relief(true);
 
 
 # Affiche l'encadre "lien iCal"

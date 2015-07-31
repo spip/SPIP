@@ -129,11 +129,11 @@ jQuery(function(){
 			else $icone = "rubrique-24.gif";
 			
 			echo "\n<div style='background-color: #cccccc; border: 1px solid #444444;'>";
-			icone_horizontale($titre, "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer',"id_rubrique=$id_rubrique") .'"', $icone);
+			echo icone_horizontale($titre, "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer',"id_rubrique=$id_rubrique") .'"', $icone, "", false);
 			echo "</div>";
 		}  else if ($frame == 0) {
 			echo "\n<div style='background-color: #cccccc; border: 1px solid #444444;'>";
-			icone_horizontale(_T('info_racine_site'), "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer') . '"', "racine-site-24.gif","");
+			echo icone_horizontale(_T('info_racine_site'), "javascript:window.parent.location=\"" . generer_url_ecrire('naviguer') . '"', "racine-site-24.gif","", false);
 			echo "</div>";
 		}
 

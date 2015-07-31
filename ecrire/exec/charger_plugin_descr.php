@@ -31,7 +31,7 @@ function exec_charger_plugin_descr_dist() {
 		$liste = liste_plugins_distants($url_plugin);
 		$item = $liste[$url_plugin][2];
 		include_spip('inc/presentation');
-		debut_cadre_relief();
+		echo debut_cadre_relief('', true);
 		echo propre('<h3><multi>'
 			.sinon($item['titre'], $liste[$url_plugin][0]).'</multi></h3>'
 			.'<multi>'.$item['descriptif'].'</multi>'
@@ -41,7 +41,7 @@ function exec_charger_plugin_descr_dist() {
 				:'')
 			. propre('[->'.$liste[$url_plugin][1].']')
 			);
-		fin_cadre_relief();
+		echo fin_cadre_relief(true);
 	}
 
 }

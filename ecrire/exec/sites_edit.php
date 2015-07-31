@@ -63,18 +63,18 @@ function exec_sites_edit_dist()
 
 	echo $commencer_page(_T('info_site_reference_2'), "naviguer", "sites", $id_rubrique);
 
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 
 	echo afficher_hierarchie($id_rubrique);
 
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 
-	debut_gauche();
+	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites_edit','id_syndic'=>$id_syndic),'data'=>''));	  
-	debut_droite();
-	debut_cadre_formulaire();
+	echo debut_droite('', true);
+	echo debut_cadre_formulaire("", true);
 
 	if ($new != 'oui') {
 		echo icone_inline(_T('icone_retour'), generer_url_ecrire("sites","id_syndic=$id_syndic"), 'site-24.gif', "rien.gif", $spip_lang_right);
@@ -109,7 +109,7 @@ function exec_sites_edit_dist()
 		. "</b>";
 
 		$cadre_ouvert = true;
-		$form = debut_cadre_enfonce("site-24.gif");
+		$form = debut_cadre_enfonce("site-24.gif", true);
 	} else $cadre_ouvert = $form = '';
 
 	$url_syndic = entites_html($url_syndic);

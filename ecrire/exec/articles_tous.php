@@ -48,13 +48,13 @@ var img_deplierbas = "'._DIR_IMG_PACK.'noeud_moins.gif";
 		$flux .= '<script src="'._DIR_JAVASCRIPT .'pause.js" type="text/javascript"></script>';
 		echo $flux;
 	
-		debut_gauche();
+		echo debut_gauche('', true);
 		echo formulaire_affiche_tous($aff_art, $aff_statut, $sel_lang);
 
 		echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-		creer_colonne_droite();
+		echo creer_colonne_droite(true);
 		echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
-		debut_droite();
+		echo debut_droite('', true);
 
 		if ($enfant AND $browser_layer)
 		  echo couche_formulaire_tous($first_couche, $last_couche);

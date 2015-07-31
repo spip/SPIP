@@ -68,12 +68,12 @@ function exec_mots_type_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page("&laquo; $titre &raquo;", "naviguer", "mots");
 	
-	debut_gauche();
+	echo debut_gauche('', true);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_type','id_groupe'=>$id_groupe),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 
 	$type = entites_html(rawurldecode($type));
 

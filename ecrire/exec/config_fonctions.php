@@ -32,14 +32,14 @@ function exec_config_fonctions_dist()
 	echo $commencer_page(_T('titre_page_config_fonctions'), "configuration", "configuration");
 
 	echo "<br /><br /><br />";
-	gros_titre(_T('titre_config_fonctions'));
+	echo gros_titre(_T('titre_config_fonctions'),'', false);
 	echo barre_onglets("configuration", "fonctions");
 
-	debut_gauche();
+	echo debut_gauche('', true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_fonctions'),'data'=>''));
-	debut_droite();
+	echo debut_droite('', true);
 	lire_metas();
 
 	$reducteur = charger_fonction('reducteur', 'configuration');

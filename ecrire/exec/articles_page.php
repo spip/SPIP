@@ -24,7 +24,7 @@ function exec_articles_page_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('titre_page_articles_page'), "naviguer", "articles");
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
 //
 // Afficher le bouton de creation d'article
@@ -42,9 +42,9 @@ function exec_articles_page_dist()
 	}
 }
 
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_page'),'data'=>''));
-debut_droite();
+echo debut_droite('', true);
 
 //
 // Vos articles en cours de redaction

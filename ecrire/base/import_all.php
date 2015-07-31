@@ -51,9 +51,9 @@ function base_import_all_dist($titre, $reprise=false)
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre, "accueil", "accueil");
 
-	debut_gauche();
+	echo debut_gauche('', true);
 
-	debut_droite();
+	echo debut_droite('', true);
 	
 	import_all_milieu($request);
 

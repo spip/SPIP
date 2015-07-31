@@ -69,15 +69,15 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	echo $commencer_page("&laquo; $titre_breve &raquo;", "naviguer", "breves", $id_rubrique);
 	
-	debut_grand_cadre();
+	echo debut_grand_cadre(true);
 	
 	echo afficher_hierarchie($id_rubrique);
 	
-	fin_grand_cadre();
+	echo fin_grand_cadre(true);
 	if (!$row) {echo _T('public:aucune_breve'); exit;}
-	debut_gauche();
+	echo debut_gauche('', true);
 	
-	debut_boite_info();
+	echo debut_boite_info(true);
 	
 	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
 	. _T('info_gauche_numero_breve')
@@ -86,9 +86,9 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	. '</span></div>';
 
 	echo $res;
-	voir_en_ligne ('breve', $id_breve, $statut);
+	echo voir_en_ligne ('breve', $id_breve, $statut,'', false);
 	
-	fin_boite_info();
+	echo fin_boite_info(true);
 
 
 	//////////////////////////////////////////////////////
@@ -111,7 +111,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	
 
-	creer_colonne_droite();
+	echo creer_colonne_droite(true);
 
 	echo pipeline('affiche_droite',
 		array(
@@ -122,9 +122,9 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	echo meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
-	debut_droite();
+	echo debut_droite('', true);
 	
-	debut_cadre_relief("breve-24.gif");
+	echo debut_cadre_relief("breve-24.gif", true);
 	//echo "</td>";
 
 	if ($flag_editable) {
@@ -138,7 +138,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			$GLOBALS['spip_lang_right']
 		);
 	}
-	echo gros_titre($titre). "<br class='nettoyeur' />";
+	echo gros_titre($titre,'', false). "<br class='nettoyeur' />";
 
 	if ($flag_editable AND ($statut == 'publie')) {
 	
@@ -180,7 +180,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		echo "</div>\n";
 		echo fin_block();
 	
-		fin_cadre_enfonce();
+		echo fin_cadre_enfonce(true);
 	}
 	echo pipeline('affiche_milieu',
 		array(
@@ -216,7 +216,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	}	
 
 
-	fin_cadre_relief();
+	echo fin_cadre_relief(true);
 	
 	//////////////////////////////////////////////////////
 	// Forums
