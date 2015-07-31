@@ -52,7 +52,10 @@ function xml_fetch_tag($f, &$before, $_fread='fread', $skip='!') {
 		if (!($x = $_fread($f, 1024))) return '';
 		if ($before)
 			$buf .= $x;
-		else $buf = $x;
+		else {
+			$abs_pos += strlen($buf);
+			$buf = $x;
+		}
 	}
 	if ($before) $before = str_replace($ent,$brut,substr($buf,0,$b));
 #	else { spip_log("position: $abs_pos" . substr($buf,0,12));flush();}
