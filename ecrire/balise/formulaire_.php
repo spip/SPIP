@@ -12,6 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
+include_spip('base/abstract_sql');
 
 function protege_champ($texte){
 	if (is_array($texte))
