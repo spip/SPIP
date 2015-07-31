@@ -101,6 +101,10 @@ function corriger_caracteres ($texte) {
 	return $texte;
 }
 
+function translitterer_caracteres ($texte, $charset='AUTO', $complex='') {
+	include_spip('inc/charsets');
+	return translitteration(corriger_caracteres($texte), $charset, $complexe);
+}
 
 // Encode du HTML pour transmission XML
 function texte_backend($texte) {
