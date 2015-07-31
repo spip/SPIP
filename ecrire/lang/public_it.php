@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Home page',
 'articles' => 'Articoli',
 'articles_auteur' => 'Articoli di questo autore',
 'articles_populaires' => 'Articoli pi&ugrave; letti',
-'articles_recents' => 'Articoli pi&ugrave; recenti',
 'articles_rubrique' => 'Articoli di questa rubrica',
 'aucun_article' => 'Non ci sono articoli a questo indirizzo',
 'aucun_auteur' => 'Non ci sono autori a questo indirizzo',
@@ -22,15 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Altri gruppi di parole chiave',
 'autres_sites' => 'Altri siti',
 
-
 // B
 'bonjour' => 'Salve',
 'breves' => 'Brevi',
 
-
 // C
 'commenter_site' => 'Commenta questo sito',
-
 
 // D
 'date' => 'Data',
@@ -40,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Ultimi commenti',
 'derniers_messages_forum' => 'Ultimi messaggi pubblicati nei forum',
 
-
 // E
 'edition_mode_texte' => 'Versione solo testo di',
 'en_reponse' => 'In risposta a:',
@@ -48,18 +45,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Invia un messaggio',
 'espace_prive' => 'Area riservata',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'Mappa del sito',
 
-
 // J
 'jours' => 'giorni',
-
 
 // M
 'meme_auteur' => 'Dello stesso autore',
@@ -71,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Parole chiave',
 'mots_clefs_meme_groupe' => 'Parole chiave nello stesso gruppo',
 
-
 // N
 'navigation' => 'Navigazione',
 'nom' => 'Cognome',
@@ -79,7 +71,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Novit&agrave; sul Web',
 'nouveaux_articles' => 'Nuovi articoli',
 'nouvelles_breves' => 'Nuove brevi',
-
 
 // P
 'page_precedente' => 'pagina precedente',
@@ -91,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Inviare un messaggio',
 'proposer_site' => '&Egrave; possibile proporre un sito da aggiungere a questa rubrica:',
 
-
 // R
 'repondre_article' => 'Rispondere all\'articolo',
 'repondre_breve' => 'Rispondere a questa breve',
@@ -100,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Tornare all\'inizio dei forum',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubriche',
-
 
 // S
 'signatures_petition' => 'Firme',
@@ -113,18 +102,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Mettere in syndication questa rubrica',
 'syndiquer_site' => 'Mettere in syndication tutto il sito',
 
-
 // T
 'texte_lettre_information' => 'Newsletter del sito',
 'texte_lettre_information_2' => 'Questa lettera recensisce gli articoli e le brevi pubblicati a partire dal',
-
 
 // V
 'ver_imprimer' => 'Versione per la stampa',
 'voir_en_ligne' => 'Vedi on line',
 'voir_squelette' => 'visualizza il modello di questa pagina'
-
 );
-
 
 ?>

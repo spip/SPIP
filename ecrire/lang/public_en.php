@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Home page',
 'articles' => 'Articles',
 'articles_auteur' => 'This author\'s articles',
 'articles_populaires' => 'The most read articles',
-'articles_recents' => 'The most recent articles',
 'articles_rubrique' => 'This section\'s articles',
 'aucun_article' => 'There is no article at this address',
 'aucun_auteur' => 'There is no author at this address',
@@ -22,15 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Other groups of key words',
 'autres_sites' => 'Other sites',
 
-
 // B
 'bonjour' => 'Hello',
 'breves' => 'News items',
 
-
 // C
 'commenter_site' => 'Comment on this site',
-
 
 // D
 'date' => 'Date',
@@ -40,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Latest comments',
 'derniers_messages_forum' => 'Lastest messages published in the forums',
 
-
 // E
 'edition_mode_texte' => 'Text mode only',
 'en_reponse' => 'Replying to:',
@@ -48,18 +45,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'To send a message',
 'espace_prive' => 'Private area',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'The site\'s hierarchy',
 
-
 // J
 'jours' => 'days',
 
+// L
+'lien_connecter' => 'Sign In',
 
 // M
 'meme_auteur' => 'By the same author',
@@ -71,7 +67,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Keywords',
 'mots_clefs_meme_groupe' => 'Keywords in the same group',
 
-
 // N
 'navigation' => 'Navigation',
 'nom' => 'Name',
@@ -79,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'What\'s new on the Web',
 'nouveaux_articles' => 'New articles',
 'nouvelles_breves' => 'New news items',
-
 
 // P
 'page_precedente' => 'previous page',
@@ -91,7 +85,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Post a message',
 'proposer_site' => 'You can suggest a site to be added to this section:',
 
-
 // R
 'repondre_article' => 'Reply to this article',
 'repondre_breve' => 'Reply to this news item',
@@ -100,7 +93,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Back to the start of the forums',
 'rubrique' => 'Section',
 'rubriques' => 'Sections',
-
 
 // S
 'signatures_petition' => 'Signatures',
@@ -113,18 +105,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Syndicate this section',
 'syndiquer_site' => 'Syndicate the whole site',
 
-
 // T
 'texte_lettre_information' => 'Here is the site\'s newsletter',
 'texte_lettre_information_2' => 'This letter summarizes the articles and news items published since',
-
 
 // V
 'ver_imprimer' => 'Printable version',
 'voir_en_ligne' => 'See online',
 'voir_squelette' => '&#1613;Show the template of this page'
-
 );
-
 
 ?>

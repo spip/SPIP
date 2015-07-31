@@ -1,35 +1,34 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Homepage vum Site',
 'articles' => 'Artikelen',
 'articles_auteur' => 'Artikelen vun d&euml;sem Auteur',
 'articles_populaires' => 'D&eacute;i bel&eacute;iwsten Artikelen',
-'articles_recents' => 'D&eacute;i rezent Artikelen',
 'articles_rubrique' => 'Artikelen aus d&euml;ser Rubrik',
 'aucun_article' => 'Et g&euml;tt keen Artikel op d&euml;ser Adress',
 'aucun_auteur' => 'Et g&euml;tt keen Auteur op d&euml;ser Adress',
 'aucun_site' => 'Et g&euml;tt keen Site op d&euml;ser Adress',
 'aucune_breve' => 'Et g&euml;tt keng Kuerzmeldung op d&euml;ser Adress',
 'aucune_rubrique' => 'Et g&euml;tt keng Rubrik op d&euml;ser Adress',
+'autres' => 'Anerer',
 'autres_breves' => 'Aner Kuerzmeldungen',
 'autres_groupes_mots_clefs' => 'Aner Schl&euml;sselwierder-Gruppen',
 'autres_sites' => 'Aner Siten',
-
 
 // B
 'bonjour' => 'Bonjour',
 'breves' => 'Kuerzmeldungen',
 
-
 // C
 'commenter_site' => 'D&euml;sen Site komment&eacute;ieren',
-
 
 // D
 'date' => 'Datum',
@@ -39,7 +38,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'L&auml;scht Commentairen',
 'derniers_messages_forum' => 'L&auml;scht Messagen aus de Forum\'en',
 
-
 // E
 'edition_mode_texte' => 'Editioun am Text-Modus vun',
 'en_reponse' => 'Als &Auml;ntwert un:',
@@ -47,18 +45,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'E Message sch&eacute;cken',
 'espace_prive' => 'Privaten Deel',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'Struktur vum Site',
 
-
 // J
 'jours' => 'Deg',
-
 
 // M
 'meme_auteur' => 'Vum selwechten Auteur',
@@ -70,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Schl&euml;sselwierder',
 'mots_clefs_meme_groupe' => 'Schl&euml;sselwierder vum selwechten Grupp',
 
-
 // N
 'navigation' => 'Navigatioun',
 'nom' => 'Numm',
@@ -78,7 +71,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Internet-Neiegkeeten',
 'nouveaux_articles' => 'Nei Artikelen',
 'nouvelles_breves' => 'Nei Kuerzmeldungen',
-
 
 // P
 'page_precedente' => 'l&auml;scht S&auml;it',
@@ -90,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'E Message sch&eacute;cken',
 'proposer_site' => 'Dir k&euml;nnt e Site fir d&euml;s Rubrik uginn:',
 
-
 // R
 'repondre_article' => 'Op d&euml;sen Artikel &auml;ntweren',
 'repondre_breve' => 'Op d&euml;s Kuerzmeldung &auml;ntweren',
@@ -100,29 +91,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rubrique' => 'Rubrik',
 'rubriques' => 'Rubriken',
 
-
 // S
 'signatures_petition' => '&Euml;nnerschr&euml;ften',
 'site_realise_avec_spip' => 'D&euml;se Site ass mat SPIP realis&eacute;iert',
 'sites_web' => 'Internet-Siten',
 'sous_rubriques' => '&Euml;nner-Rubriken',
+'spam' => 'Spam',
 'suite' => 'weider',
 'sur_web' => 'Um Internet',
 'syndiquer_rubrique' => 'D&euml;s Rubrik syndiqu&eacute;ieren',
 'syndiquer_site' => 'De ganzen Site syndiqu&eacute;ieren',
 
-
 // T
 'texte_lettre_information' => 'Hei ass d\'Newsletter vum Site',
 'texte_lettre_information_2' => 'D&euml;s Newsletter ass eng L&euml;scht vun den Artikelen a Kuerzmeldungen z&euml;nter',
-
 
 // V
 'ver_imprimer' => 'Drock-Versioun',
 'voir_en_ligne' => 'Online gesinn',
 'voir_squelette' => 'd\'Skelett vun d&euml;ser S&auml;it weisen'
-
 );
-
 
 ?>

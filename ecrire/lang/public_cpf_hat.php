@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Akey sit la',
 'articles' => 'Atik yo',
 'articles_auteur' => 'Tout atik lot&egrave; a',
 'articles_populaires' => 'Atik yo ki plis popil&egrave;',
-'articles_recents' => 'Atik yo ki plis resan',
 'articles_rubrique' => 'Atik yo nan ribrik sa-a',
 'aucun_article' => 'Gen pa oken atik sou ladr&egrave;s la',
 'aucun_auteur' => 'Gen pa oken lot&egrave; sou ladr&egrave;s la',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'L&ograve;t gwoup mokle yo',
 'autres_sites' => 'L&ograve;t sit yo',
 
-
 // B
 'bonjour' => 'Bonjou',
 'breves' => 'Tinouv&egrave;l yo',
 
-
 // C
 'commenter_site' => 'L&egrave;s yon komant&egrave; sou sit la',
-
 
 // D
 'date' => 'Dat',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'D&egrave;nye komant&egrave; yo',
 'derniers_messages_forum' => 'D&egrave;nye mesaj yo ki te piblye nan fowom yo',
 
-
 // E
 'edition_mode_texte' => 'Ledisyon modt&egrave;ks pou',
 'en_reponse' => 'Pou r&eacute;ponn a&nbsp;:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Voye yon mesaj',
 'espace_prive' => 'Espas priv&eacute;',
 
-
 // F
 'forum' => 'Fowom',
-
 
 // H
 'hierarchie_site' => 'Estrikti sit sa-a',
 
-
 // J
 'jours' => 'jou yo',
-
 
 // M
 'meme_auteur' => 'M&egrave;m lot&egrave; ki ekri ank&ograve;',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Mokle yo',
 'mots_clefs_meme_groupe' => 'Mokle yo nan m&egrave;m gwoup',
 
-
 // N
 'navigation' => 'Toune-vire',
 'nom' => 'Kouman rele',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Kisa nouvo sou w&egrave;b la',
 'nouveaux_articles' => 'Nouvo atik yo',
 'nouvelles_breves' => 'Nouvo tinouv&egrave;l yo',
-
 
 // P
 'page_precedente' => 'paj d&egrave;y&egrave;',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Voye yon mesaj',
 'proposer_site' => 'Ou se kapab pwopoze yon sit pou ajoute nan ribrik la&nbsp;:',
 
-
 // R
 'repondre_article' => 'Reponn sou atik la',
 'repondre_breve' => 'Reponn sou tinouv&egrave;l la',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Tounyen nan koumansman fowom sa-yo',
 'rubrique' => 'Ribrik',
 'rubriques' => 'Ribrik yo',
-
 
 // S
 'signatures_petition' => 'Siyati yo',
@@ -111,18 +100,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Sindike ribrik la',
 'syndiquer_site' => 'Sindike tout sit la m&egrave;m',
 
-
 // T
 'texte_lettre_information' => 'Tala l&egrave;t-enf&ograve;masyon sit la ',
 'texte_lettre_information_2' => 'L&egrave;t la ka ramase tout atik ek tinouv&egrave;l yo  te pibliye depi',
-
 
 // V
 'ver_imprimer' => 'V&egrave;syon pou enprime',
 'voir_en_ligne' => 'Gad an liy',
 'voir_squelette' => 'kou je sou l&eacute;skel&egrave;t paj-la'
-
 );
-
 
 ?>

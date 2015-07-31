@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Acuelh dau sit',
 'articles' => 'Articles',
 'articles_auteur' => 'Articles de quel autor',
 'articles_populaires' => 'Los articles mai populars',
-'articles_recents' => 'Los articles mai recents',
 'articles_rubrique' => 'Articles de quela rubrica',
 'aucun_article' => 'I a brisa d\'article a quela adre&ccedil;a ',
 'aucun_auteur' => 'I a brisa d\'autor a quela adre&ccedil;a ',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Autres grops de mots clau',
 'autres_sites' => 'Autres sits',
 
-
 // B
 'bonjour' => 'Bonjorn',
 'breves' => 'Brevas',
 
-
 // C
 'commenter_site' => 'Comentar queu sit',
-
 
 // D
 'date' => 'Data',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Darriers comentaris',
 'derniers_messages_forum' => 'Darriers messatges publicats dins los forums',
 
-
 // E
 'edition_mode_texte' => 'Edicion en m&ograve;de text de',
 'en_reponse' => 'En responsa a:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Mandar un messatge',
 'espace_prive' => 'Espaci privat',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'Ierarquia dau sit',
 
-
 // J
 'jours' => 'jorns',
-
 
 // M
 'meme_auteur' => 'Dau mesme autor',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Mots clau',
 'mots_clefs_meme_groupe' => 'Mots clau dins lo mesme grop',
 
-
 // N
 'navigation' => 'Navigacion',
 'nom' => 'Nom',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Novetats subre lo web',
 'nouveaux_articles' => 'Articles nu&ograve;us',
 'nouvelles_breves' => 'Brevas nu&ograve;vas',
-
 
 // P
 'page_precedente' => 'pagina precedenta',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Postar un messatge',
 'proposer_site' => 'Podetz prepausar un sit d\'apondre a questa rubrica:',
 
-
 // R
 'repondre_article' => 'Respondre a quel article',
 'repondre_breve' => 'Respondre a quela breva',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Retorn au comen&ccedil;ament daus forums',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubricas',
-
 
 // S
 'signatures_petition' => 'Signaturas',
@@ -111,17 +100,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Sindicar quela rubrica',
 'syndiquer_site' => 'Sindicar tot lo sit',
 
-
 // T
 'texte_lettre_information' => 'Vaic&iacute; la letra d\'informacion dau sit',
 'texte_lettre_information_2' => 'Quela letra recensa los articles e brevas publicats dempuei',
 
-
 // V
 'ver_imprimer' => 'Version d\'estampar',
 'voir_en_ligne' => 'Vesetz en linha'
-
 );
-
 
 ?>

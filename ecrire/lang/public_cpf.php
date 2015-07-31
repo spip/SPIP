@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Lakey lo sit',
 'articles' => 'Bann zartik',
 'articles_auteur' => 'Bann zartik lot&egrave;r-la',
 'articles_populaires' => 'Bann zartik sak l&eacute; pli popil&egrave;r',
-'articles_recents' => 'Bann zartik li l&eacute; nouvo',
 'articles_rubrique' => 'Bann zartik andann ribrik-la',
 'aucun_article' => 'N&eacute;na pa okinn lartik si ladr&egrave;s-la',
 'aucun_auteur' => 'N&eacute;na pa okinn lot&egrave;r si ladr&egrave;s-la',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Bann zot bann molakl&eacute;',
 'autres_sites' => 'Bann zot sitw&egrave;b',
 
-
 // B
 'bonjour' => 'Ot&eacute;',
 'breves' => 'Bann tite-nouv&egrave;l',
 
-
 // C
 'commenter_site' => 'Donn out lavi si lo sit-la',
-
 
 // D
 'date' => 'Ladat',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Bann d&egrave;rny&eacute; lavi',
 'derniers_messages_forum' => 'Bann d&egrave;rny&eacute; mod&eacute;kri andann bann forom',
 
-
 // E
 'edition_mode_texte' => 'Po &eacute;dit&eacute; andann mod t&egrave;ks',
 'en_reponse' => 'Po r&eacute;ponn a&nbsp;:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Po anvway&eacute; inn mod&eacute;kri',
 'espace_prive' => 'L&eacute;spas priv&eacute;',
 
-
 // F
 'forum' => 'Forom kozman',
-
 
 // H
 'hierarchie_site' => 'Bardrin lo sitw&egrave;b',
 
-
 // J
 'jours' => 'bann zour',
-
 
 // M
 'meme_auteur' => 'Pa lot&egrave;r minm sa-minm',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Bann molakl&eacute;',
 'mots_clefs_meme_groupe' => 'Bann molakl&eacute; andann lo minm bann sa-minm',
 
-
 // N
 'navigation' => 'Bat-kar&eacute; si lo sit',
 'nom' => 'Non',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Bann nouv&egrave;lt&eacute; si lo sitw&egrave;b',
 'nouveaux_articles' => 'Bann nouvo lartik',
 'nouvelles_breves' => 'Bann nouv&egrave;l tite-nouv&egrave;l',
-
 
 // P
 'page_precedente' => 'lapaz dovan',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Anvwa in mod&eacute;kri',
 'proposer_site' => 'Ou p&eacute; propoz azout inn sit dann ribrik-la&nbsp;:',
 
-
 // R
 'repondre_article' => 'Po r&eacute;ponn si lartik-la',
 'repondre_breve' => 'Po r&eacute;ponn la tite-nouv&egrave;l-la',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Artourn bann d&eacute;bi bann forom',
 'rubrique' => 'Ribrik',
 'rubriques' => 'Bann ribrik',
-
 
 // S
 'signatures_petition' => 'Bann sinyatir',
@@ -111,18 +100,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Po sindik&eacute; ribrik-la',
 'syndiquer_site' => 'Po sindik&eacute; si lo sit',
 
-
 // T
 'texte_lettre_information' => 'Ala lal&egrave;t zinformasyon lo sit',
 'texte_lettre_information_2' => 'L&egrave;t-la i ramas tout bann zartik &egrave;k bann tite-nouv&egrave;l dopwi',
-
 
 // V
 'ver_imprimer' => 'V&egrave;rsyon pou inprim&eacute;',
 'voir_en_ligne' => 'Anon vwar an liyn',
 'voir_squelette' => 'Apiy po t&eacute;l&eacute;sarz l&eacute;sk&eacute;let lapaz-la'
-
 );
-
 
 ?>

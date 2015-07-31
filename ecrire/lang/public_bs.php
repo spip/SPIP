@@ -1,16 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
 
 // A
 'accueil_site' => 'Pocetna stranica',
 'articles' => 'Clanci',
 'articles_auteur' => 'Clanci ovog autora',
 'articles_populaires' => 'Najpopularniji clanci',
-'articles_recents' => 'Recentni clanci',
 'articles_rubrique' => 'Clanci iz ove rubrike',
 'aucun_article' => 'Ne postoje clanci na ovoj adresi',
 'aucun_auteur' => 'Ne postoje autori na ovoj adresi',
@@ -21,15 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'autres_groupes_mots_clefs' => 'Ostale grupe kljucnih rijeci',
 'autres_sites' => 'Ostale stranice',
 
-
 // B
 'bonjour' => 'Dobar dan',
 'breves' => 'Kratke poruke',
 
-
 // C
 'commenter_site' => 'Dodaj komentar',
-
 
 // D
 'date' => 'Datum',
@@ -39,7 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_commentaires' => 'Posljednji komentari',
 'derniers_messages_forum' => 'Posljednje poruke u forumu',
 
-
 // E
 'edition_mode_texte' => 'Obradjivanje u text modu',
 'en_reponse' => 'Odgovor za:',
@@ -47,18 +44,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'envoyer_message' => 'Posalji poruku',
 'espace_prive' => 'Privatni prostor',
 
-
 // F
 'forum' => 'Forum',
-
 
 // H
 'hierarchie_site' => 'Hierarhija stranice',
 
-
 // J
 'jours' => 'Dani',
-
 
 // M
 'meme_auteur' => 'Isti autor',
@@ -70,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'mots_clefs' => 'Kljucne rijeci',
 'mots_clefs_meme_groupe' => 'Kljucne rijeci u istoj grupi',
 
-
 // N
 'navigation' => 'Navigacija',
 'nom' => 'Ime',
@@ -78,7 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes_web' => 'Novosti na webu',
 'nouveaux_articles' => 'Novi clanci',
 'nouvelles_breves' => 'Nove kratke poruke',
-
 
 // P
 'page_precedente' => 'prethodna stranica',
@@ -90,7 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'poster_message' => 'Posalji poruku',
 'proposer_site' => 'Mozete predloziti dodavanje stranice u ovu rubriku',
 
-
 // R
 'repondre_article' => 'Odgovori na ovaj clanak',
 'repondre_breve' => 'Odgovori na ovu kratku poruku',
@@ -99,7 +89,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_debut_forums' => 'Nazad na pocetak foruma',
 'rubrique' => 'Rubrika',
 'rubriques' => 'Rubrike',
-
 
 // S
 'signatures_petition' => 'Potpisi',
@@ -111,17 +100,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'syndiquer_rubrique' => 'Sindikuj ovu rubriku',
 'syndiquer_site' => 'Sindikuj cijelu stranicu',
 
-
 // T
 'texte_lettre_information' => 'Ovo je newsletter stranice',
 'texte_lettre_information_2' => 'Ovo pismo koje rezimira clanke i kratke poruke objavljene od',
 
-
 // V
 'ver_imprimer' => 'Verzija za printanje',
 'voir_en_ligne' => 'Pogledati online'
-
 );
-
 
 ?>
