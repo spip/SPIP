@@ -3,10 +3,10 @@
 ][
 (#ENV*{message}|?{'',' '})
 
-<form id="oubli_form" action='[(#ENV{action})]' method='POST'>
+<form id="oubli_form" action='[(#ENV{action})]' method="post">
 	<fieldset class='spip_sanscadre'>
 	<legend><:pass_nouveau_pass:></legend>[
-	<input type='hidden' name="p" value="(#ENV{p})" />
+	<input type="hidden" name="p" value="(#ENV{p})" />
 	<label><:pass_choix_pass:></label>
 	    <input type="password" name="oubli" />
 	][

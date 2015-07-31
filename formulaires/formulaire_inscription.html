@@ -1,5 +1,6 @@
 <div class="formulaire_spip formulaire_inscription">
 <a name="formulaire_inscription" id="formulaire_inscription"></a>
+
 [<fieldset class="reponse_formulaire">
 <legend><:pass_erreur:></legend>
 <p>(#ENV*{message})</p>
@@ -9,7 +10,7 @@
 <p><:participer_site:></p>
 <p>(#ENV*{commentaire})</p>
 </fieldset>]
-<form id="inscription" method='post' action="#ENV{self}#formulaire_inscription">
+<form id="inscription" method="post" action="#ENV{self}#formulaire_inscription">
 	<fieldset class="spip_encadrer">
 		<legend><:form_forum_identifiants:></legend>
 		<p><:form_forum_indiquer_nom_email:></p>
@@ -23,9 +24,7 @@
 [<script type="text/javascript"><!--
 document.inscription.(#ENV{focus}).focus()
 --></script>]
-[<br />
-<div align="right">
-(#ENV{focus}|?{' ',''})
+[(#ENV{focus}|?{' ',''})
 <script type="text/javascript"><!--
 document.write("<a href='")
 document.write((window.opener) ? "javascript:close()" : "./")
@@ -33,7 +32,6 @@ document.write("'><:pass_quitter_fenetre:><" + "/a>");
 //--></script>
 <noscript>
 	&#91;<a href='./'><:pass_retour_public:></a>&#93;
-</noscript>
-</div>
-]
+</noscript>]
+
 </div>

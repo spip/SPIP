@@ -1,3 +1,6 @@
+<div class="formulaire_spip formulaire_site">
+<a name="formulaire_site" id="formulaire_site"></a>
+
 <form action="[(#ENV{self})]" method="post">
 	<fieldset class="spip_encadrer">
 	<legend><:info_site:></legend>
@@ -5,9 +8,11 @@
 	<p><label><:form_prop_nom_site:></label>
 	  <input type="text" class="forml" name="nom_site" value="" size="30" /></p>
 	<p><label><:form_prop_url_site:></label>
-	  <input type="text" class="forml" name="url_site" value="http://" size="30" style="text-align: left;" /></p>
+	  <input type="text" class="forml" name="url_site" style="text-align: left;" value="http://" size="30" /></p>
 	<p><label><:form_prop_description:></label>
-	  <textarea name="description_site" rows="5" class="forml" cols="40"></textarea></p>
+	  <textarea class="forml" name="description_site" rows="5" cols="40"></textarea></p>
 	<input type="submit" class="spip_bouton" value="<:bouton_valider:>" />
 	</fieldset>
 </form>
+
+</div>

@@ -3,7 +3,7 @@
 [(#ENV{echec_cookie})
 	<h3 class="spip"><:avis_erreur_cookie:></h3>
 		<strong><:login_cookie_oblige:></strong>
-		  <:login_cookie_accepte:><p />
+		  <:login_cookie_accepte:>
 ]
 
 <div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">
@@ -17,17 +17,17 @@
 			this.session_password.value = "";
 			}']>
 		<div class="spip_encadrer" style="[(#URL_SITE_SPIP|style_align)]">[
-			<div class="reponse_formulaire">(#ENV*{erreur})<br /><br /></div>
+			<div class="reponse_formulaire">(#ENV*{erreur})</div>
 ][
-			<label for='var_login'><strong><:login_login2:></strong></label><br />(#ENV{login}|?{'',' '})
-			<input type="text" id='var_login' name="var_login" class="forml" value="" size="40" />
+			<label for="var_login"><strong><:login_login2:></strong></label>(#ENV{login}|?{'',' '})
+			<input type="text" class="forml" id="var_login" name="var_login" value="" size="40" />
 			
 ][
 <div>
 [<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;">(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})</div>]
 	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
-document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a style='color: #e86519' href='[(#ENV{action2}
+document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong>&#91;<a style='color: #e86519' href='[(#ENV{action2}
 	|parametre_url{cookie_admin,non}
 	|parametre_url{url,#ENV*{url}}
 	|parametre_url{retour,#ENV*{self}})]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
@@ -37,15 +37,15 @@ document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><b
 		<:login_non_securise:>
 		<a href="[(#ENV{action})]"><:login_recharger:></a>.
 	</p>
-	<label><strong><:login_login2:></strong></label><br />
-	<input type='text' name='session_login' class='forml' [value="(#ENV{login})" ]size='40' />
+	<label><strong><:login_login2:></strong></label>
+	<input type='text' name='session_login' class="forml" [value="(#ENV{login})" ]size='40' />
 </noscript>
 
 </div>
 <p>
 		<label><strong><:login_pass2:></strong></label>&nbsp;
 		<input type="password" name="session_password"[ id="var_login_(#ENV{login})"] class="forml" style="width: 140px;" value="" size="20" />
-		<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+		&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
 			 name="session_remember"
 			 id="session[_(#ENV{login})]"
 			 value="oui"[(#ENV*{prefs}|filtre_rester_connecte)checked="checked"]/>

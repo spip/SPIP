@@ -1,28 +1,30 @@
-[(#ENV*{sujetko})
-	<br />#PUCE<:form_prop_indiquer_sujet:><br />&nbsp;]
-[(#ENV*{mailko})
-	<br />#PUCE<:form_prop_indiquer_email:><br /><br />]
+<div class="formulaire_spip">
 
-<form action="#SELF" method='post'>
+[<p class="reponse_formulaire">(#ENV*{sujetko})<:form_prop_indiquer_sujet:></p>]
+[<p class="reponse_formulaire">(#ENV*{mailko})<:form_prop_indiquer_email:></p>]
 
-[(#REM) Previsualisation ... ]
+<form action="#SELF" method="post">
+
+[(#REM) Previsualisation... ]
 [<input type="hidden" name="num_formulaire_ecrire_auteur" value="(#ENV{valide})" />]
-[<div class='spip_encadrer'>
-<em>#ENV{mail}</em> - <strong>#ENV{sujet}</strong>
-<div>
+[<fieldset class="previsu">
+<legend><:previsualisation:></legend>
+<p><strong class="titre">#ENV{sujet}</strong> - <em>#ENV{mail}</em></p>
 [(#ENV{texte}|nl2br)]
-</div>
 <input type="submit" class="spip_bouton" name="confirmer#ENV{id}" value="(#ENV{boutonconfirmation})" />
-</div>
-]
+</fieldset>]
 
-[(#REM) Formulaire normal   ]
+[(#REM) Formulaire normal ]
+<fieldset class="spip_encadrer">
+<legend><:envoyer_message:></legend>
 <p><label><:form_pet_votre_email:></label>
 <input type="text" class="forml" name="email_message_auteur#ENV{id}" value="#ENV{mail}" size="30" /></p>
 <p><label><:form_prop_sujet:></label>
 <input type="text" class="forml" name="sujet_message_auteur#ENV{id}" value="#ENV{sujet}" size="30" /></p>
-<p>
-<textarea name="texte_message_auteur#ENV{id}" rows='10' class='forml' cols='40'>#ENV{texte}</textarea>
-</p>
+<p><textarea class="forml" name="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte}</textarea></p>
 <input type="submit" class="spip_bouton" name="valide" value="#ENV{bouton}" />
+</fieldset>
+
 </form>
+
+</div>

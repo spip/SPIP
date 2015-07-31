@@ -1,25 +1,17 @@
-<div class='spip_encadrer'>
+<fieldset class="previsu">
+<legend><:previsualisation:></legend>
 
-<div style='font-size: 120%; font-weight: bold;'>[(#ENV*{titre})]</div>
+<p>[<strong class="titre">(#ENV*{titre})</strong>][<em> - <a[ href="mailto:(#ENV{email_auteur})"]>(#ENV*{auteur})</a></em>]</p>
+[(#ENV*{texte})]
+[<p><a[ href="(#ENV{url_site}|attribut_html)"] class="spip_out">(#ENV*{nom_site_forum})</a></p>]
 
-<p />
+<B_mots>
+<p class="reponse_formulaire"><:forum_avez_selectionne:>
+<BOUCLE_mots(MOTS){id_mot IN #ENV**{ajouter_mot}}{par num type}{par type}{par num titre}{par titre}{', '}>#TITRE</BOUCLE_mots></p>
+</B_mots>
 
-[<strong><a[ href="mailto:(#ENV{email_auteur})"]>(#ENV*{auteur})</a></strong>]
-
-[<p />(#ENV*{texte})]
-
-[<p /><a [href="(#ENV{url_site}|attribut_html)"]>(#ENV*{nom_site_forum})</a>]
-
-<B_M>
- <p><:forum_avez_selectionne:></p><ul>
-<BOUCLE_M(MOTS){id_mot IN #ENV**{ajouter_mot}}{par num type}{par type}{par num titre}{par titre}>
-<li style='font-size: 80%;'>#TYPE&nbsp;: <strong>#TITRE</strong></li>
-</BOUCLE_M>
-</ul>
-</B_M>
-
-[<p align="right" class="reponse_formulaire">(#ENV*{erreur})</p>]
+[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
 
 [<input type="submit" name="confirmer_forum" class="spip_bouton" value="(#ENV*{bouton})" />]
 
-</div>
+</fieldset>
