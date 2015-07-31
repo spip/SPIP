@@ -1,0 +1,48 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* * */
+.toile_claire {
+	background-color: #GET{claire};
+}
+
+.toile_foncee {	background-color: #GET{foncee};}
+.toile_blanche {	background-color: white;}
+.toile_noire {	background-color: black;}
+.toile_gris_sombre {	background-color: #333333;}
+.toile_gris_fort {	background-color: #999999;}
+.toile_gris_moyen {	background-color: #cccccc;}
+.toile_gris_leger {	background-color: #eeeeee;}
+
+.bordure_claire {	border: 1px solid #GET{claire};}
+.bordure_foncee {	border: 1px solid #GET{foncee};}
+.bordure_claire_basse {	border-bottom: 1px solid #GET{claire};}
+.bordure_claire_left {	border-#GET{left}: 1px solid #GET{claire};}
+.bordure_claire_right {	border-#GET{right}: 1px solid #GET{claire};}
+.bordure_grise_basse {	border-bottom: 1px solid #999999;}
+.bordure_grise_left {	border-#GET{left}: 1px solid #999999;}
+.bordure_grise_right {	border-#GET{right}: 1px solid #999999;}
+.bordure_foncee_pointillee {	border: 2px;	border-style: dotted;	border-color: #GET{foncee};}
+
+.ligne_claire {	color: #GET{claire};}
+.ligne_blanche {	color: white;}
+.ligne_foncee {	color: #GET{foncee};}
+.ligne_noire {	color: black;}

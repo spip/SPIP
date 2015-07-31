@@ -19,6 +19,9 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
+[(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
+[(#INCLURE{fond=style_vieilles_def}{couleur_claire}{couleur_foncee}{ltr})]
+
 body {
 	color: #000000;
 	background-color: #f8f7f3; 
@@ -53,33 +56,24 @@ body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 .large #contenu {float:left;overflow:hidden;margin-left:17px;width:570px;}
 .large #extra {float:right;width:140px;overflow:hidden;}
 
-/* * */
-.toile_claire {
-	background-color: #GET{claire};
+h1 { 
+	color: #GET{foncee};
+	font-size:large;
+	font-family: Arial, Sans, sans-serif;
+	margin:0.5em 0 0.25em 0;
 }
-
-.toile_foncee {	background-color: #GET{foncee};}
-.toile_blanche {	background-color: white;}
-.toile_noire {	background-color: black;}
-.toile_gris_sombre {	background-color: #333333;}
-.toile_gris_fort {	background-color: #999999;}
-.toile_gris_moyen {	background-color: #cccccc;}
-.toile_gris_leger {	background-color: #eeeeee;}
-
-.bordure_claire {	border: 1px solid #GET{claire};}
-.bordure_foncee {	border: 1px solid #GET{foncee};}
-.bordure_claire_basse {	border-bottom: 1px solid #GET{claire};}
-.bordure_claire_left {	border-#GET{left}: 1px solid #GET{claire};}
-.bordure_claire_right {	border-#GET{right}: 1px solid #GET{claire};}
-.bordure_grise_basse {	border-bottom: 1px solid #999999;}
-.bordure_grise_left {	border-#GET{left}: 1px solid #999999;}
-.bordure_grise_right {	border-#GET{right}: 1px solid #999999;}
-.bordure_foncee_pointillee {	border: 2px;	border-style: dotted;	border-color: #GET{foncee};}
-
-.ligne_claire {	color: #GET{claire};}
-.ligne_foncee {	color: #GET{foncee};}
-.ligne_noire {	color: black;}
-.ligne_blanche {	color: white;}
+h2 { 
+	color: black;
+	font-size:medium;
+	font-family: Arial, Sans, sans-serif;
+	margin:0.5em 0 0.25em 0;
+}
+h3 { 
+	color: #999;
+	font-size:medium;
+	font-family: Arial, Sans, sans-serif;
+	margin:0.5em 0 0.25em 0;
+}
 
 td {	text-align: #GET{left};}
 
@@ -1680,6 +1674,7 @@ div.titrem{
 .configuration #contenu .titrem.hover {background-color:#GET{claire};}
 .configuration #contenu .cadre-trait-couleur .titrem {background-color:#GET{foncee};color:#fff;}
 .configuration #contenu .cadre-trait-couleur .cadre_padding .titrem {background-color: #eee;color:#000;}
+.configuration #contenu .cadre-couleur .titrem {background-color:#GET{claire};}
 .configuration #contenu .cadre-couleur .cadre_padding .titrem {background-color:#eee;}
 
 .cadre-liste .titrem {background-color:#fff;}
@@ -1871,3 +1866,21 @@ div.navigation-calendrier { background-color:#GET{foncee}; }
 #contenu .cadre-documents table td.document .titrem {background-color:#eee;}
 .cadre-documents table td.vu {background:#cccccc;}
 
+/* config/reducteur */
+.vignette_reducteur {
+	text-align: center;
+	vertical-align:center;
+	float:left;
+	padding:3px;
+	border:2px solid #fff;
+	min-width:100px;
+}
+.vignette_reducteur.selected {
+	font-weight:bold;
+	border:2px dotted #GET{claire}; 
+}
+.vignette_reducteur span {
+	display:block;
+}
+/* config/locuteur */
+.langues_bloquees {color:#GET{foncee};font-weight:bold;}

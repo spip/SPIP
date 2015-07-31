@@ -45,7 +45,7 @@ function configuration_relayeur_dist($retour_proxy)
 		// Masquer un eventuel password authentifiant
 		$http_proxy=entites_html(no_password_proxy_url($http_proxy));
 		if ($http_proxy) {
-			$res = "\n<p style='text-align: $spip_lang_left;' class='ligne_noire verdana1 spip_small'>"
+			$res = "\n<p style='text-align: $spip_lang_left;' class='verdana1 spip_small'>"
 			. _T('texte_test_proxy')
 			. "</p>"
 			. "\n<p>"

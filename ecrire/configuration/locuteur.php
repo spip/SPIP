@@ -49,7 +49,7 @@ function configuration_locuteur_dist()
 		$nom_langue = $langues[$code_langue];
 		if ($langues_trad[$code_langue]) $nom_langue = "<span style='text-decoration: underline'>$nom_langue</span>";
 
-		$res .= "\n<div class='ligne_foncee' style='font-weight: bold'>";
+		$res .= "\n<div class='langues_bloquees'>";
 		$res .= "\n<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
 		$res .= "\n<input type='checkbox' checked='checked' disabled='disabled' />";
 		$res .=  $nom_langue ."\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";

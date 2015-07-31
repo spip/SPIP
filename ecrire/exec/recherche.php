@@ -73,7 +73,7 @@ function exec_recherche_dist() {
 
 	if ($results) {
 		echo "<span class='verdana1'><b>"._T('info_resultat_recherche')."</b></span><br />";
-		echo "<span class='ligne_foncee verdana1 spip_large'><b>$recherche_aff</b></span>";
+		echo "<h1>$recherche_aff</h1>";
 		include_spip('inc/afficher_objets');
 
 		foreach($results as $table => $r) {
