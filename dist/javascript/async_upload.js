@@ -56,12 +56,6 @@ function async_upload_before_submit(data,form) {
    form
    .find("input[@name='redirect']")
    .val("");
-    //add the submit button as hidden input, because it is not passed with form.submit()
-   form.find("input.async_upload_submit'").remove();
-   if(form[0].clk) {
-    var click = jQuery(form[0].clk);
-    form.append("<input type='hidden' class='async_upload_submit' name='"+click.attr("name")+"' value='"+click.val()+"'>");
-   }    
 };
 
 function async_upload_article_edit(res,s,jForm){
