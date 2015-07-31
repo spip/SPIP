@@ -33,7 +33,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // - le serveur sollicite
 
 function spip_abstract_select (
-	$select = array(), $from = array(), $where = '',
+	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
@@ -107,7 +107,7 @@ function spip_abstract_showtable($table, $serveur='')
 
 # une composition tellement frequente...
 function spip_abstract_fetsel(
-	$select = array(), $from = array(), $where = '',
+	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
