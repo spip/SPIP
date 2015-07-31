@@ -228,6 +228,9 @@ function inclure_page($fond, $contexte_inclus) {
 		$contexte_inclus['date'] = date('Y-m-d H:i:s');
 	if (!isset($contexte_inclus['date_redac']))
 		$contexte_inclus['date_redac'] = $contexte_inclus['date'];
+	// il faut enlever le fond de contexte inclus car sinon il prend la main
+	// dans les sous inclusions -> boucle infinie d'inclusion identique
+	unset($contexte_inclus['fond']);
 
 	// Si use_cache vaut 0, la page a ete tiree du cache et se trouve dans $page
 	if (!$use_cache) {
