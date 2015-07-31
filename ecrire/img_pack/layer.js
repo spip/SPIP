@@ -152,15 +152,20 @@ function createXmlHttp() {
 		return new ActiveXObject("Microsoft.XMLHTTP");
 }
 
-
 function ajah(method, url, flux, rappel)
 {
 	var xhr = createXmlHttp();
-
 	if (!xhr) return false;
         xhr.onreadystatechange = function () {ajahReady(xhr, rappel);}
         xhr.open(method, url, true);
-        xhr.send(flux);
+	// Necessaire au mode POST
+	// Il manque la specification du charset
+	if (flux) {
+		xhr.setRequestHeader("Content-Type",
+		       "application/x-www-form-urlencoded; ");
+	}
+	xhr.send(flux);
+	return true;
 }
 
 function ajahReady(xhr, f) {
@@ -171,27 +176,31 @@ function ajahReady(xhr, f) {
         }
 }
 
+// Si Ajax est disponible, cette fonction envoie le formulaire avec lui.
+// Elle renvoie False pour empecher l'envoi du formulaire en mode normal.
+// Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
+// a du anticiper la situation.
+// Toutefois il y toujours un coup de retard dans la pose d'un cookie:
+// eviter de se loger avec redirection vers un telle page
+
 function AjaxSqueeze(form, div)
 {
 	var i;
 	var u = '';
-	var noeud = document.getElementById(div); // pere du formulaire
-	if (!noeud) return true; // forcer l'envoi en mode non Ajax
+	var s = form.getAttribute('action');
+	// pere du formulaire (le donner direct serait mieux)
+	var noeud = document.getElementById(div);
+	if (!noeud) return true;
 
 	for (i=0;i < form.elements.length;i++) {
-	  n = form.elements[i].name;
-	  if (n)  u += n+"="+escape(form.elements[i].value) + '&'  ;
+		n = form.elements[i].name;
+		if (n)  u += n+"="+escape(form.elements[i].value) + '&';
 	}
 
-	u = form.getAttribute('action') +'?' + u;
-
-	// ce serait plus propre d'envoyer en Post mais FireFox coince
-	ajah('GET',
-	     u,
-	     null,
-	     function(r) { noeud.innerHTML = r;});
- 
-	return false; // empecher l'envoi en mode non Ajax
+	return !ajah('POST', // ou 'GET'
+		     s ,     // s + '?'+ u,
+		     u,      // null,
+		     function(r) { noeud.innerHTML = r;} );
 }
 
 
