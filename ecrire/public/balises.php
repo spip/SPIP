@@ -1373,13 +1373,11 @@ function balise_SAUTER_dist($p){
 		erreur_squelette($msg, $p);
 	}
 	else {
-		$_connect = sql_quote($boucle->sql_serveur);
-
 		$_saut = interprete_argument_balise(1,$p);
 		$_compteur = "\$Numrows['$id_boucle']['compteur_boucle']";
 		$_total = "\$Numrows['$id_boucle']['total']";
 
-		$p->code = "vide($_compteur=sql_skip(\$result,$_compteur,$_saut,$_total,$_connect))";
+		$p->code = "vide($_compteur=\$iter->skip($_saut,$_total))";
 	}
 	$p->interdire_scripts = false;
 	return $p;

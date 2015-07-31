@@ -93,8 +93,8 @@ class Iter implements Iterator {
 	protected $total=null;
 
 	/**
-	 * avancer en position n,
-	 * comptee en absolu depuis le debut
+	 * aller a la position absolue n,
+	 * comptee depuis le debut
 	 *
 	 * @param int $n
 	 *   absolute pos
@@ -110,6 +110,31 @@ class Iter implements Iterator {
 		while($this->pos<$n AND $this->valid())
 			$this->next();
 		return true;
+	}
+
+	/**
+	 * Avancer de $saut pas
+	 * @param  $saut
+	 * @param  $max
+	 * @return int
+	 */
+	public function skip($saut, $max=null){
+		// pas de saut en arriere autorise pour cette fonction
+		if (($saut=intval($saut))<=0) return $this->pos;
+		$seek = $this->pos + $saut;
+		// si le saut fait depasser le maxi, on libere la resource
+		// et on sort
+		if (is_null($max))
+			$max = $this->total();
+
+		if ($seek>=$max OR $seek>=$this->total()) {
+			// sortie plus rapide que de faire next() jusqu'a la fin !
+			$this->free();
+		  return $max;
+		}
+
+	  $this->seek($seek);
+	  return $this->pos;
 	}
 
 	/**
@@ -225,8 +250,12 @@ class IterSQL extends Iter {
 	public function seek($n=0, $continue=null) {
 		if (!sql_seek($this->sqlresult, $n, $this->command['connect'], $continue)) {
 			// SQLite ne sait pas seek(), il faut relancer la query
-			$this->free();
-			$this->select();
+			// si la position courante est apres la position visee
+			// il faut relancer la requete
+			if ($this->pos>$n){
+				$this->free();
+				$this->select();
+			}
 			// et utiliser la methode par defaut pour se deplacer au bon endroit
 			parent::seek($n);
 			return true;
@@ -264,7 +293,10 @@ class IterSQL extends Iter {
 	 */
 	public function free(){
 		parent::free();
-		return sql_free($this->sqlresult, $this->command['connect']);
+		if (!$this->sqlresult) return true;
+		$a = sql_free($this->sqlresult, $this->command['connect']);
+	  $this->sqlresult = null;
+	  return $a;
 	}
 	
 	/**
@@ -329,24 +361,26 @@ class IterENUM extends Iter {
 		$this->command = $command;
 		$this->info = $info;
 
-		if (is_array($this->command['where']))
-		foreach ($this->command['where'] as $k => $com) {
-			switch($com[1]) {
-				case 'valeur':
-					unset($op);
-					if ($com[0] == 'REGEXP')
-						$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
-					else if ($com[0] == '=')
-						$op = '==';
-					else if (in_array($com[0], array('<','<=', '>', '>=')))
-						$op = $com[0];
+		$op = '';
+		if (is_array($this->command['where'])) {
+			foreach ($this->command['where'] as $k => $com) {
+				switch($com[1]) {
+					case 'valeur':
+						unset($op);
+						if ($com[0] == 'REGEXP')
+							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
+						else if ($com[0] == '=')
+							$op = '==';
+						else if (in_array($com[0], array('<','<=', '>', '>=')))
+							$op = $com[0];
 
-					if ($op)
-						$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
+						if ($op)
+							$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
 
-					break;
+						break;
+				}
+
 			}
-
 		}
 
 		$this->pos = 0;
@@ -560,43 +594,45 @@ class IterDATA extends Iter {
 			}
 		}
 
-		if (is_array($this->command['where']))
-		foreach ($this->command['where'] as $k => $com) {
-			switch($com[1]) {
-				case 'tableau':
-					if ($com[0] !== '=') {
-						// erreur
-					}
-					# sql_quote a l'envers : pas propre...
-					# c'est pour la compat ascendante avec le critere
-					# {tableau=#ENV...} de la boucle POUR de SPIP-Bonux-2
-					$x = null;
-					eval ('$x = '.str_replace('\"', '"', $com[2]).';');
-					if (is_array($x) OR is_array($x = @unserialize($x))) {
-						$this->tableau = $x;
-						$this->ok = true;
-					}
-					else
-						{
+		if (is_array($this->command['where'])) {
+			$op = '';
+			foreach ($this->command['where'] as $k => $com) {
+				switch($com[1]) {
+					case 'tableau':
+						if ($com[0] !== '=') {
 							// erreur
 						}
-					break;
-				case 'cle':
-				case 'valeur':
-					unset($op);
-					if ($com[0] == 'REGEXP')
-						$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
-					else if ($com[0] == '=')
-						$op = '==';
-					else if (in_array($com[0], array('<','<=', '>', '>=')))
-						$op = $com[0];
+						# sql_quote a l'envers : pas propre...
+						# c'est pour la compat ascendante avec le critere
+						# {tableau=#ENV...} de la boucle POUR de SPIP-Bonux-2
+						$x = null;
+						eval ('$x = '.str_replace('\"', '"', $com[2]).';');
+						if (is_array($x) OR is_array($x = @unserialize($x))) {
+							$this->tableau = $x;
+							$this->ok = true;
+						}
+						else
+							{
+								// erreur
+							}
+						break;
+					case 'cle':
+					case 'valeur':
+						unset($op);
+						if ($com[0] == 'REGEXP')
+							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
+						else if ($com[0] == '=')
+							$op = '==';
+						else if (in_array($com[0], array('<','<=', '>', '>=')))
+							$op = $com[0];
 
-					if ($op)
-						$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
+						if ($op)
+							$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
 
-					break;
+						break;
+				}
+
 			}
-
 		}
 
 		// Appliquer les filtres sur (cle,valeur)
