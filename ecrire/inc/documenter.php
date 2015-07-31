@@ -39,12 +39,16 @@ function inc_documenter_dist(
 		$where = "L.$prim=$doc AND D.mode='document' AND D.extension $img IN ('gif', 'jpg', 'png')";
 		$order = "0+D.titre, D.date";
 		$docs = rows_as_array($select, $from, $where, '', $order);
-	} else $docs = $doc;
+		$opt = array('objet'=>$type, 'id_objet' => $doc);
+	} else {
+		$docs = $doc;
+		$opt = array();
+	}
 
 	if (!$docs) return '';
 
 	$tous = (count($docs) > 3);
-	$res = documenter_boucle($docs, $type, $ancre, $tous, $appelant);
+	$res = documenter_boucle($docs, $type, $ancre, $tous, $appelant, $opt);
 	$s = ($ancre =='documents' ? '': '-');
 
 	if (is_int($doc))
@@ -64,6 +68,9 @@ function rows_as_array($select, $from, $where='', $groupby='', $orderby='')
 // http://doc.spip.org/@documenter_bloc
 function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 {
+	// seulement s'il y a au moins un document dedans
+	if (!$res) return "";
+	
 	if ($tous) {
 		$tous = "<div class='lien_tout_supprimer'>"
 			. ajax_action_auteur('documenter', "$s$id/$type", $script, "id_$type=$id&s=$s&type=$type",array(_T('lien_tout_supprimer')))
@@ -81,7 +88,7 @@ function documenter_bloc($id, $res, $s, $script, $ancre, $tous, $type)
 }
 
 // http://doc.spip.org/@documenter_boucle
-function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelant)
+function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelant, $opt=array())
 {
 	charger_generer_url();
 	// la derniere case d'une rangee
@@ -105,6 +112,10 @@ function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelan
 	foreach ($documents as $document) {
 		$id_document = $document['id_document'];
 
+		// $opt : options pour l'autorisation (type d'objet parent, et id de l'objet parent)
+		if (!autoriser('voir', 'document', $id_document, null, $opt))
+			continue;
+			
 		if (isset($document['script']))
 			$script = $document['script']; # pour plugin Cedric
 		else
@@ -139,6 +150,9 @@ function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelan
 		$res .= "</tr>";
 	}
 
+	// pas de contenu, pas de tableau
+	if (!$res) return "";
+	
 	return "\n<table width='100%' cellspacing='0' cellpadding='4'>"
 	. $res
 	. "</table>";
