@@ -250,6 +250,10 @@ function trouver_format($texte) {
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3"); # pour filtrer_entites()
 
+	// Accepter les URLs au format feed:// ou qui ont oublie le http://
+	$url = preg_replace(',^feed://,i', 'http://', $url);
+	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
+
 	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 	$result = '';
