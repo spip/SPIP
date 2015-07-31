@@ -450,8 +450,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 				un blocage a priori</a></div>\n";
 		else if ($moderation == 'oui')
 			echo "<p><div align='left'>Les prochains liens en
-				provenance de ce site seront bloqu&eacute;s a priori.</div>". aide('artsyn') .
-				"<div align='right'> <a
+				provenance de ce site seront bloqu&eacute;s a priori.". aide('artsyn') .
+				"</div><div align='right'> <a
 				href='sites.php3?id_syndic=$id_syndic&moderation=non'>Annuler
 				ce blocage a priori</a></div>\n";
 	}
