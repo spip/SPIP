@@ -660,7 +660,7 @@ function traiter_tableau($bloc) {
 	    if (!is_array($lignes[$j])) continue; // cas du th
 	    $cell = trim($lignes[$j][$i]);
 	    if (preg_match($reg_line_all, $cell)) {
-		if (!preg_match('/^\d*([.,]?)\d*$/', $cell, $r))
+		if (!preg_match('/^[+-]?(?:\s|\d)*([.,]?)\d*$/', $cell, $r))
 		  { $align = ''; break;}
 		else if ($r[1]) $align = $r[1];
 	      }
