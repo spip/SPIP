@@ -35,7 +35,9 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="en_hx" />
-	<langue code="eo" />
+	<langue code="eo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=eo">
+		<traducteur nom="Matthieu Marcillaud" lien="http://trad.spip.net/auteur/matthieu-marcillaud" />
+	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/spip?lang_cible=es">
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
