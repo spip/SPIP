@@ -1414,6 +1414,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	// le nom du repertoire des extensions/ permanentes du core, toujours actives
 	if (!defined('_DIR_EXTENSIONS')) define('_DIR_EXTENSIONS', _DIR_RACINE . "extensions/");
 
+	// le nom du repertoire des librairies
+	if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . "lib/");
+	
 	if (!defined('_DIR_IMG')) define('_DIR_IMG', $pa);
 	if (!defined('_DIR_LOGOS')) define('_DIR_LOGOS', $pa);
 	if (!defined('_DIR_IMG_ICONES')) define('_DIR_IMG_ICONES', _DIR_LOGOS . "icones/");
