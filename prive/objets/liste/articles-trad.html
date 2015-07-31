@@ -24,7 +24,14 @@
 			<td class='statut'>[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]</td>
 			<td class="trad">[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)[(#CHEMIN_IMAGE{langue-16.png}|balise_img)]]
 				[(#ENV{editable}|oui)
-				[(#ENV{id_trad}|=={#ID_ARTICLE}|non)<button type='submit' name='changer_reference_trad&#91;#ID_ARTICLE&#93;' value='#ID_ARTICLE'>[(#CHEMIN_IMAGE{langues-off-12.gif}|balise_img)]</button>]
+				[(#ENV{id_trad}|=={#ID_ARTICLE}|non)
+				[(#SET{titre,[<:info_numero_abbreviation:>#ID_ARTICLE (#TITRE) - [(#LANG|traduire_nom_langue)]]})]
+				[(#SET{titre,#VAL{trad_definir_reference}|_T{#ARRAY{titre,#GET{titre}}}})]
+				<button type='submit'
+								name='changer_reference_trad&#91;#ID_ARTICLE&#93;'
+								title="[(#GET{titre}|attribut_html)]"
+								value='#ID_ARTICLE'>[(#CHEMIN_IMAGE{langues-off-12.gif}
+					|balise_img{#GET{titre}})]</button>]
 				]
 			</td>
 			<td class='titre principale'><span
