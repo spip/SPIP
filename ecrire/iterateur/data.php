@@ -187,8 +187,13 @@ class IterateurDATA implements Iterator {
 		// extraire le chemin "query.results" du tableau de donnees
 		if (is_array($this->command['datapath'])) {
 			list(,$base) = each($this->command['datapath']);
-			if (strlen($base = trim($base)))
+			if (strlen($base = trim($base))) {
 				$this->tableau = table_valeur($this->tableau, $base);
+				if (!is_array($this->tableau)) {
+					$this->tableau = array();
+					# $this->fail = true; # comment signaler proprement qu'on a echoue ?
+				}
+			}
 		}
 
 
