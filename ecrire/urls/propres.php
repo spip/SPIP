@@ -85,7 +85,13 @@ function creer_chaine_url($x) {
 	@define('_URLS_PROPRES_MIN', 3);
 	$titre = supprimer_tags(supprimer_numero(extraire_multi($objet['titre'])));
 	$url = translitteration(corriger_caracteres($titre));
-	$url = @preg_replace(',([^[:cntrl:][:alnum:]_]|[[:space:]])+,u', ' ', $url);
+
+	// on va convertir tous les caracteres de ponctuation et espaces
+	// a l'exception de l'underscore (_), car on veut le conserver dans l'url
+	$url = str_replace('_', chr(7), $url);
+	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
+	$url = str_replace(chr(7), '_', $url);
+
 	// S'il reste trop de caracteres non latins, les gerer comme wikipedia
 	// avec rawurlencode :
 	if (preg_match_all(",[^a-zA-Z0-9 _]+,", $url, $r, PREG_SET_ORDER)) {
