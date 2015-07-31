@@ -185,13 +185,20 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 
 	if ($cible) {
 		$cible = parametre_url($cible, 'var_login', '', '&');
-	} 
-	
-	// transformer la cible absolue en cible relative
-	// pour pas echouer quand la meta adresse_site est foireuse
-	if (strncmp($cible,$u = url_de_base(),strlen($u))==0){
-		$cible = "./".substr($cible,strlen($u));
+
+		// transformer la cible absolue en cible relative
+		// pour pas echouer quand la meta adresse_site est foireuse
+		if (strncmp($cible,$u = url_de_base(),strlen($u))==0){
+			$cible = "./".substr($cible,strlen($u));
+		}
+
+		// si c'est une url absolue, refuser la redirection
+		// sauf si cette securite est levee volontairement par le webmestre
+		elseif (preg_match(";^([a-z]+:)?//;Uims",$cible) AND !defined('_AUTORISER_LOGIN_ABS_REDIRECT')) {
+			$cible = "";
+		}
 	}
+
 
 	// Si on est admin, poser le cookie de correspondance
 	if ($GLOBALS['auteur_session']['statut'] == '0minirezo') {
