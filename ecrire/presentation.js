@@ -3,11 +3,11 @@ var init_gauche = true;
 function changestyle(id_couche, element, style) {
 
   if (admin) {
-		hide_obj("bandeaudocuments");
-		hide_obj("bandeauredacteurs");
+		hide_obj("bandeaunaviguer");
+		hide_obj("bandeauforum_admin");
 		hide_obj("bandeauauteurs");
-		if (stat) {  hide_obj("bandeausuivi"); } 
-		hide_obj("bandeauadministration"); 
+		if (stat) {  hide_obj("bandeaustatistiques_visites"); } 
+		hide_obj("bandeauconfiguration"); 
   }
 	hide_obj("bandeaudeconnecter");
 	hide_obj("bandeautoutsite");
@@ -25,11 +25,11 @@ function changestyle(id_couche, element, style) {
 	
 	if (init_gauche) {
 	   if (admin) {
-		decalerCouche('bandeaudocuments');
-		decalerCouche('bandeauredacteurs');
+		decalerCouche('bandeaunaviguer');
+		decalerCouche('bandeauforum_admin');
 		decalerCouche('bandeauauteurs');
-		if (stat) decalerCouche('bandeausuivi');
-		decalerCouche('bandeauadministration');
+		if (stat) decalerCouche('bandeaustatistiques_visites');
+		decalerCouche('bandeauconfiguration');
 		} 
 		init_gauche = false;
 	}

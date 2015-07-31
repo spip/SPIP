@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_layer");
 include_ecrire("inc_agenda");
+include_ecrire("inc_boutons");
 
 // Choix dynamique de la couleur
 
@@ -1921,83 +1922,19 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	echo "</td>";
 }
 
-
-function barre_onglets($rubrique, $onglet){
-	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
+function barre_onglets($rubrique, $ongletCourant){
+	$onglets= definir_barre_onglets($rubrique);
+	if(count($onglets)==0) return;
 
 	debut_onglet();
 
-	if ($rubrique == "statistiques") {
-	//	onglet(_T('onglet_evolution_visite_mod'), generer_url_ecrire("statistiques_visites",""), "evolution", $onglet, "statistiques-24.gif");
-	//	onglet(_T('titre_liens_entrants'), generer_url_ecrire("statistiques_referers",""), "referers", $onglet, "referers-24.gif");
+	foreach($onglets as $exec => $onglet) {
+		$url= $onglet->url ? $onglet->url : generer_url_ecrire($exec);
+		onglet(_T($onglet->libelle), $url,
+ 			$exec, $ongletCourant, $onglet->icone);
 	}
-	if ($rubrique == "repartition") {
-		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
-		  onglet(_T('onglet_repartition_rubrique'), generer_url_ecrire("statistiques_repartition"), "rubriques", $onglet, "rubrique-24.gif");
-			onglet(_T('onglet_repartition_lang'), generer_url_ecrire("statistiques_lang",""), "langues", $onglet, "langues-24.gif");
-		}
-	}
-
-	if ($rubrique == "rep_depuis") {
-		onglet(_T('icone_repartition_actuelle'), generer_url_ecrire("statistiques_lang",""), "popularite", $onglet);
-		onglet(_T('onglet_repartition_debut'), generer_url_ecrire("statistiques_lang","critere=debut"), "debut", $onglet);
-
-	}
-
-	if ($rubrique == "stat_depuis") {
-	  onglet(_T('icone_repartition_actuelle'), generer_url_ecrire("statistiques_repartition"), "popularite", $onglet);
-	  onglet(_T('onglet_repartition_debut'), generer_url_ecrire("statistiques_repartition", "critere=debut"), "debut", $onglet);
-
-	}
-
-	if ($rubrique == "stat_referers") {
-		onglet(ucfirst(_T('date_aujourdhui')), generer_url_ecrire("statistiques_referers",""), "jour", $onglet);
-		onglet(ucfirst(_T('date_hier')), generer_url_ecrire("statistiques_referers","jour=veille"), "veille", $onglet);
-	}
-
-	if ($rubrique == "administration"){
-		onglet(_T('onglet_save_restaur_base'), generer_url_ecrire("admin_tech"), "sauver", $onglet, "base-24.gif");
-		onglet(_T('onglet_affacer_base'), generer_url_ecrire("admin_effacer"), "effacer", $onglet, "supprimer.gif");
-	}
-
-	if ($rubrique == "auteur"){
-		onglet(_T('onglet_auteur'), generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur"), "auteur", $onglet, "auteur-24.gif");
-		onglet(_T('onglet_informations_personnelles'), generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "infos", $onglet, "fiche-perso-24.gif");
-	}
-
-	if ($rubrique == "configuration"){
-		onglet(_T('onglet_contenu_site'), generer_url_ecrire("configuration"), "contenu", $onglet, "racine-site-24.gif");
-		onglet(_T('onglet_interactivite'), generer_url_ecrire("config_contenu"), "interactivite", $onglet, "forum-interne-24.gif");
-		onglet(_T('onglet_fonctions_avances'), generer_url_ecrire("config_fonctions"), "fonctions", $onglet, "image-24.gif");
-	}
-
-	if ($rubrique == "config_lang") {
-		onglet(_T('info_langue_principale'), generer_url_ecrire("config_lang"), "langues", $onglet, "langues-24.gif");
-		onglet(_T('info_multilinguisme'), generer_url_ecrire("config_multilang"), "multi", $onglet, "traductions-24.gif");
-		if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
-			onglet(_T('module_fichiers_langues'), generer_url_ecrire("lang_raccourcis"), "fichiers", $onglet, "traductions-24.gif");
-		}
-	}
-
-	if ($rubrique == "suivi_forum"){
-		onglet(_T('onglet_messages_publics'), generer_url_ecrire("controle_forum","page=public"), "public", $onglet, "forum-public-24.gif");
-		onglet(_T('onglet_messages_internes'), generer_url_ecrire("controle_forum","page=interne"), "interne", $onglet, "forum-interne-24.gif");
-
-		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1";
-		$result_forum = spip_query($query_forum);
-		if ($row = spip_fetch_array($result_forum))
-			onglet(_T('onglet_messages_vide'), generer_url_ecrire("controle_forum","page=vide"), "vide", $onglet);
-
-		$query_forum = "SELECT * FROM spip_forum WHERE statut='prop' LIMIT 1";
-		$result_forum = spip_query($query_forum);
-		if ($row = spip_fetch_array($result_forum))
-			onglet(_T('texte_statut_attente_validation'), generer_url_ecrire("controle_forum","page=prop"), "prop", $onglet);
-
-	}
-
 	fin_onglet();
 }
-
 
 function largeur_icone_bandeau_principal($texte) {
 	global $spip_display, $spip_ecran ;
@@ -2258,7 +2195,9 @@ document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="") {
 
 	init_entete($titre, $rubrique, $onLoad, $css);
+	definir_barre_boutons();
 	init_body($rubrique, $sous_rubrique);
+	debut_corps_page();
 }
  
 function init_entete($titre, $rubrique, $onLoad="", $css="") {
@@ -2285,11 +2224,8 @@ function init_entete($titre, $rubrique, $onLoad="", $css="") {
 }
 
 // fonction envoyant la double serie d'icones de redac
-
 function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
-	global $couleur_foncee;
-	global $couleur_claire;
-	global $REQUEST_URI, $HTTP_HOST;
+	global $couleur_foncee, $couleur_claire, $adresse_site;
 	global $connect_id_auteur;
 	global $connect_statut;
 	global $connect_activer_messagerie;
@@ -2299,16 +2235,8 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	$activer_messagerie = "oui";
 
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
-	if (!$adresse_site) {
-			$adresse_site = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strpos($REQUEST_URI, "/" . _DIR_RESTREINT_ABS));
-			ecrire_meta("adresse_site", $adresse_site);
-			ecrire_metas();
-	}
-
-	if (strlen($adresse_site)<10) $adresse_site = _DIR_RACINE;
-
-	if ($spip_ecran == "large") $largeur = 974; else $largeur = 750;
+	if ($spip_ecran == "large") $largeur = 974;
+	else $largeur = 750;
 
 	$link = new Link;
 	echo "\n<map name='map_layout'>";
@@ -2319,17 +2247,18 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 
 
 
-if ($spip_display == "4") {
-	// Icones principales
-	echo "<ul>";
-	echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
-	echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
-	echo "<li><a href='" . generer_url_ecrire("forum_admin"). "'>"._T('titre_forum')."</a>";
-	echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
-	echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
-	echo "</ul>";
-}
-else {
+	if ($spip_display == "4") {
+		// Icones principales
+		echo "<ul>";
+		echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
+		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
+		echo "<li><a href='" . generer_url_ecrire("forum_admin"). "'>"._T('titre_forum')."</a>";
+		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
+		echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
+		echo "</ul>";
+
+		return;
+	}
 
 	// iframe permettant de passer les changements de statut rapides
 	echo "<iframe id='iframe_action' name='iframe_action' width='1' height='1' style='position: absolute; visibility: hidden;'></iframe>";
@@ -2344,183 +2273,52 @@ else {
 	echo "<div class='bandeau-icones'>\n";
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
 
-	icone_bandeau_principal (_T('icone_a_suivre'), './', "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
-	icone_bandeau_principal (_T('icone_edition_site'), generer_url_ecrire("naviguer"), "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
-	icone_bandeau_principal (_T('titre_forum'), generer_url_ecrire("forum_admin"), "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
-	icone_bandeau_principal (_T('icone_auteurs'), generer_url_ecrire("auteurs"), "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
-	if ($connect_statut == "0minirezo"  AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
-		//bandeau_barre_verticale();
-		icone_bandeau_principal (_T('icone_statistiques_visites'), generer_url_ecrire("statistiques_visites"), "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
+	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+		if($page=='espacement') {
+			echo "<td> &nbsp; </td>";
+		} else {
+			icone_bandeau_principal(
+				_T($detail->libelle),
+				$detail->url?$detail->url:generer_url_ecrire($page),
+				$detail->icone, $page, $rubrique, $detail->url2,
+				$page, $sous_rubrique);
+		}
 	}
-	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		icone_bandeau_principal (_T('icone_configuration_site'), generer_url_ecrire("configuration"), "administration-48.png", "administration", $rubrique, "", "configuration", $sous_rubrique);
-	}
-
-	echo "<td> &nbsp; </td>";
-
-	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('" . generer_url_ecrire("aide_index","var_lang=$spip_lang") .
-				 "', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
-		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
-		"vide", "", generer_url_ecrire("aide_index","var_lang=$spip_lang"),
-		"aide-en-ligne", $sous_rubrique);
-
-	icone_bandeau_principal (_T('icone_visiter_site'), $adresse_site, "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
-
 	echo "</tr></table>\n";
 
-
-
-
 	echo "</div>\n";
-	
+
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
 	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
-	
+
 	// Icones secondaires
+
+	$decal=0;
 	$activer_messagerie = "oui";
 	$connect_activer_messagerie = "oui";
-	
-	if ($rubrique == "asuivre"){
-		$class = "visible_au_chargement";
-	} else {
-		$class = "invisible_au_chargement";
-	}
-	$decal = largeur_icone_bandeau_principal(_T('icone_a_suivre'));
 
-
-	if ($rubrique == "documents"){
-		$class = "visible_au_chargement";
-	} else {
-		$class = "invisible_au_chargement";
-	}
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
-		echo "<div class='$class' id='bandeaudocuments' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-		//icone_bandeau_secondaire (_T('icone_rubriques'), generer_url_ecrire("naviguer",""), "rubrique-24.gif", "rubriques", $sous_rubrique);
-
-		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
-		if ($nombre_articles > 0) {
-			icone_bandeau_secondaire (_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", "articles", $sous_rubrique);
-		}
-
-		/*if ($options == "avancees") {
-			if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
-			else $req_where = " AND articles.statut IN ('prop','publie')"; 
-			$nombre_versions = spip_num_rows(spip_query("
-				SELECT versions.*, articles.statut, articles.titre
-				FROM spip_versions AS versions, spip_articles AS articles 
-				WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 1"));
-			if ($nombre_versions > 0 OR 1==1) {
-				icone_bandeau_secondaire (_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "historique-24.gif", "revisions", $sous_rubrique);
-			}
-		}*/
-
-		$activer_breves=$GLOBALS['meta']["activer_breves"];
-		if ($activer_breves != "non"){
-			icone_bandeau_secondaire (_T('icone_breves'), generer_url_ecrire("breves"), "breve-24.gif", "breves", $sous_rubrique);
-		}
-
-		if ($options == "avancees"){
-			$articles_mots = $GLOBALS['meta']['articles_mots'];
-			if ($articles_mots != "non") {
-				icone_bandeau_secondaire (_T('icone_mots_cles'), generer_url_ecrire("mots_tous"), "mot-cle-24.gif", "mots", $sous_rubrique);
-			}
-
-			$activer_sites = $GLOBALS['meta']['activer_sites'];
-			if ($activer_sites<>'non')
-				icone_bandeau_secondaire (_T('icone_sites_references'), generer_url_ecrire("sites_tous"), "site-24.gif", "sites", $sous_rubrique);
-
-			if (@spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1")) > 0) {
-				icone_bandeau_secondaire (_T('icone_doc_rubrique'), generer_url_ecrire("documents_liste"), "doc-24.gif", "documents", $sous_rubrique);
-			}
-		}
-		echo "</tr></table></div></div>";
-	}
-
-	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_edition_site'));
-
-
-	
-	
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
-		if ($rubrique == "redacteurs") {
+	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
+		if ($rubrique == $page) {
 			$class = "visible_au_chargement";
 		} else {
 			$class = "invisible_au_chargement";
 		}
 
-			echo "<div class='$class' id='bandeauredacteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-				if ($GLOBALS['meta']['forum_prive_admin'] == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), generer_url_ecrire("forum_admin","admin=admin"), "forum-admin-24.gif", "privadm", $sous_rubrique);
-
-				icone_bandeau_secondaire (_T('icone_suivi_forums'), generer_url_ecrire("controle_forum"), "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-				icone_bandeau_secondaire (_T('icone_suivi_pettions'), generer_url_ecrire("controle_petition"), "suivi-petition-24.gif", "suivi-petition", $sous_rubrique);
-
-			echo "</tr></table></div></div>";
-	
-	}
-	
-	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_discussions'));
-	
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
-		if ($rubrique == "auteurs") {
-			$class = "visible_au_chargement";
-		} else {
-			$class = "invisible_au_chargement";
-		}
-		echo "<div class='$class' id='bandeauauteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-		icone_bandeau_secondaire (_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif", "perso", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos","new=oui"), "auteur-24.gif", "xxx", $sous_rubrique);
-	
-		echo "</tr></table></div></div>";
-	}	
-
-	
-	
-	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_auteurs'));
-
-	// decalage pour barre verticale
-	// $decal = $decal + 11;
-
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
-		if ($rubrique == "suivi") {
-			$class = "visible_au_chargement";
-		} else {
-			$class = "invisible_au_chargement";
-		}
-		echo "<div class='$class' id='bandeausuivi' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-		if ($connect_toutes_rubriques) bandeau_barre_verticale();
-
-		icone_bandeau_secondaire (_T('icone_repartition_visites'), generer_url_ecrire("statistiques_repartition"), "rubrique-24.gif", "repartition", $sous_rubrique);
-		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui')
-			icone_bandeau_secondaire (_T('onglet_repartition_lang'), generer_url_ecrire("statistiques_lang"), "langues-24.gif", "repartition-langues", $sous_rubrique);
-		icone_bandeau_secondaire (_T('titre_liens_entrants'), generer_url_ecrire("statistiques_referers"), "referers-24.gif", "referers", $sous_rubrique);
-
-		echo "</tr></table></div></div>";
-
-		$decal = $decal + largeur_icone_bandeau_principal(_T('icone_suivi_actualite'));
-	
-	}
-
-
-	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		if ($rubrique == "administration") {
-			$class = "visible_au_chargement";
-		} else {
-			$class = "invisible_au_chargement";
-		}
-			echo "<div class='$class' id='bandeauadministration' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			icone_bandeau_secondaire (_T('icone_gestion_langues'), generer_url_ecrire("config_lang"), "langues-24.gif", "langues", $sous_rubrique);
-	
-			bandeau_barre_verticale();
-			if ($options == "avancees") {
-				icone_bandeau_secondaire (_T('icone_maintenance_site'), generer_url_ecrire("admin_tech"), "base-24.gif", "base", $sous_rubrique);
-				icone_bandeau_secondaire (_T('onglet_vider_cache'), generer_url_ecrire("admin_vider"), "cache-24.gif", "cache", $sous_rubrique);
-			}
-			else {
-				icone_bandeau_secondaire (_T('icone_sauver_site'), generer_url_ecrire("admin_tech"), "base-24.gif", "base", $sous_rubrique);
+		$sousmenu= $detail->sousmenu;
+		if($sousmenu) {
+			echo "<div class='$class' id='bandeau$page' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+		
+			foreach($sousmenu as $souspage => $sousdetail) {
+				if($souspage=='espacement') {
+					echo "<td class='separateur'></td>\n";
+				} else {
+					icone_bandeau_secondaire (_T($sousdetail->libelle), generer_url_ecrire($sousdetail->url?$sousdetail->url:$souspage, $sousdetail->urlArg), $sousdetail->icone, $souspage, $sous_rubrique);
+				}
 			}
 			echo "</tr></table></div></div>";
-
-
+		}
+		
+		$decal += largeur_icone_bandeau_principal(_T($detail->libelle));
 	}
 
 	// Refermer tout de suite le bandeau deroule par defaut
@@ -2954,6 +2752,10 @@ if (true /*$gadgets*/) {
 	
 }
 
+function debut_corps_page() {
+	global $couleur_foncee;
+	global $connect_id_auteur;
+  
 	// Ouverture de la partie "principale" de la page
 	// Petite verif pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
 	echo "<center onMouseOver=\"if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
