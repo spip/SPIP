@@ -1095,7 +1095,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 
 	$en_ligne = $message = '';
 	switch ($type) {
-		case 'article':
+	case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
 				$n = sql_fetsel("id_article", "spip_articles", "id_article=$id AND date<=NOW()");
 				if (!$n) $statut = 'prop';
@@ -1105,28 +1105,29 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 			else if ($statut == 'prop')
 				$en_ligne = 'preview';
 			break;
-		case 'rubrique':
+	case 'rubrique':
 			if ($id > 0)
 				if ($statut == 'publie')
 					$en_ligne = 'calcul';
 				else
 					$en_ligne = 'preview';
 			break;
-		case 'breve':
-		case 'site':
+	case 'breve':
+	case 'site':
 			if ($statut == 'publie')
 				$en_ligne = 'calcul';
 			else if ($statut == 'prop')
 				$en_ligne = 'preview';
 			break;
-		case 'mot':
+	case 'mot':
 			$en_ligne = 'calcul';
 			break;
-		case 'auteur':
+	case 'auteur':
 			$n = sql_countsel('spip_auteurs_articles AS lien, spip_articles AS articles', "lien.id_auteur=".sql_quote($id)." AND lien.id_article=articles.id_article AND articles.statut='publie'");
 			if ($n) $en_ligne = 'calcul';
 			else $en_ligne = 'preview';
 			break;
+	default: return '';
 	}
 
 	if ($en_ligne == 'calcul')
@@ -1137,9 +1138,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	else
 		return '';
 
-	$h = generer_url_entite_absolue($id, $type, "var_mode=$en_ligne", '', true);
-
-	$h = str_replace('&', '&amp;', $h);
+	$h = generer_url_action('redirect', "type=$type&id=$id&var_mode=$en_ligne");
 
 	return $inline  
 	  ? icone_inline($message, $h, $image, "rien.gif", $GLOBALS['spip_lang_left'])
