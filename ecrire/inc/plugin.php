@@ -224,6 +224,8 @@ function enregistre_modif_plugin(){
 				$plugin[]=$test[$choix];
 		}
 	}
+	global $connect_id_auteur, $connect_login;
+	spip_log("Changement des plugins actifs par auteur id=$connect_id_auteur :".implode(',',$plugin));
 	ecrire_plugin_actifs($plugin);
 	ecrire_metas();
 	//echo "mise à jour ok";
