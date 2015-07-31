@@ -114,9 +114,19 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 		var cible = target || this;
 		jQuery('form:not(.noajax)', this).each(function(){
 		var leform = this;
+		var leclk,leclk_x,leclk_y;
 		jQuery(this).prepend("<input type='hidden' name='var_ajax' value='form' />")
 		.ajaxForm({
 			beforeSubmit: function(){
+				// memoriser le bouton clique, en cas de repost non ajax
+				leclk = leform.clk;
+        if (leclk) {
+            var n = leclk.name;
+            if (n && !leclk.disabled && leclk.type == "image") {
+							leclk_x = leform.clk_x;
+							leclk_y = leform.clk_y;
+            }
+        }
 				jQuery(cible).addClass('loading').animeajax();
 			},
 			success: function(c){
@@ -124,6 +134,19 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 					// le serveur ne veut pas traiter ce formulaire en ajax
 					// on resubmit sans ajax
 					jQuery("input[name=var_ajax]",leform).remove();
+					// si on a memorise le nom et la valeur du bouton clique
+					// les reinjecter dans le dom sous forme de input hidden
+					// pour que le serveur les recoive
+					if (leclk){
+            var n = leclk.name;
+            if (n && !leclk.disabled) {
+							jQuery(leform).prepend("<input type='hidden' name='"+n+"' value='"+leclk.value+"' />");
+							if (leclk.type == "image") {
+								jQuery(leform).prepend("<input type='hidden' name='"+n+".x' value='"+leform.clk_x+"' />");
+								jQuery(leform).prepend("<input type='hidden' name='"+n+".y' value='"+leform.clk_y+"' />");
+							}
+						}
+					}
 					jQuery(leform).ajaxFormUnbind().submit();
 				}
 				else {

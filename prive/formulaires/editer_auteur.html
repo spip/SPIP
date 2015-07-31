@@ -1,6 +1,6 @@
 <div class="formulaire_spip formulaire_editer formulaire_editer_auteur formulaire_editer_auteur-#ENV{id_auteur,nouveau}">
 	<!-- <br class='bugajaxie' /> -->
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}) <:info_recommencer:></p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
