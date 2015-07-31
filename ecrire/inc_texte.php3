@@ -788,7 +788,7 @@ function traiter_raccourcis_generale($letexte) {
 			else
 				$url = $url_glossaire_externe.$terme_underscore;
 			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
-			$code = "[$terme->?$url]";
+			$code = '['.$terme.'->?'.$url.']';
 			$letexte = str_replace($regs[0], $code, $letexte);
 		}
 	}
