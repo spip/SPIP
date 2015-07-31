@@ -81,9 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista de novidades',
 'bouton_radio_moderation_priori' => 'Moderado a priori (as
   contribuci&oacute;ns ser&aacute;n publicadas trala aprobaci&oacute;n do grupo xestor).',
-'bouton_radio_modere_abonnement' => 'moderado baixo rexistro',
-'bouton_radio_modere_posteriori' => 'moderado a posteriori',
-'bouton_radio_modere_priori' => 'moderado a priori',
+'bouton_radio_modere_abonnement' => 'con subscrici&oacute;n',
+'bouton_radio_modere_posteriori' => 'moderaci&oacute;n a posteriori',
+'bouton_radio_modere_priori' => 'moderaci&oacute;n a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non aparecer na lista de redactores que publica',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non enviar as novidades editoriais',
 'bouton_radio_non_syndication' => 'Sen afiliaci&oacute;n',
@@ -245,7 +245,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => '@ O/A participante foi engadido:',
 'info_ajouter_rubrique' => 'Engadir outro tema &aacute; administrar:',
 'info_annonce_nouveautes' => 'Anuncio de novidades',
-'info_annuler_blocage_priori' => 'Anular o bloqueo a priori',
 'info_anterieur' => 'Anterior',
 'info_appliquer_choix_moderation' => 'Aplicar esta opci&oacute;n de moderaci&oacute;n:',
 'info_article' => 'Artigo',
@@ -267,6 +266,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Aviso',
 'info_base_installee' => 'A estrutura da base de datos foi instalada.',
 'info_base_restauration' => 'A base est&aacute; en proceso de restauraci&oacute;n.',
+'info_bloquer' => 'bloquear',
 'info_breves' => 'O seu web empregar&aacute; o sistema de breves?',
 'info_breves_03' => 'breves',
 'info_breves_liees_mot' => 'As breves ligadas a esta palabra chave',
@@ -304,7 +304,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Solicitaches eliminar a palabra chave
 <B>@titre_mot@</B> (@type_mot@). Esta palabra chave est&aacute; ligada a
 <b>@texte_lie@</b>, tes que confirmar a t&uacute;a decisi&oacute;n:',
-'info_demander_blocage_priori' => 'Pedir un bloqueo a priori',
 'info_derniere_etape' => 'Derradeira etapa: <B>Remataches!',
 'info_derniere_syndication' => 'A &uacute;ltima afiliaci&oacute;n deste web f&iacute;xose o',
 'info_derniers_articles_publies' => 'Os teus &uacute;ltimos artigos publicados en li&ntilde;a',
@@ -481,6 +480,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_procedure_maj_version' => 'o procedemento da posta &oacute; d&iacute;a ten que ser lanzado a fin
 		de adaptar a base de datos &aacute; nova versi&oacute;n de SPIP.',
 'info_ps' => 'P.S',
+'info_publier' => 'publicar',
 'info_publies' => 'Os teus artigos publicados en li&ntilde;a',
 'info_question_accepter_visiteurs' => 'Se os esqueletos do seu web prev&eacute;n o rexistro de visitantes sen acceso &aacute; parte web privada, active a opci&oacute;n aqu&iacute; abaixo&nbsp;:',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estat&iacute;sticas das visitas?',
@@ -744,6 +744,12 @@ cunha cor que indica o seu estado&nbsp;:',
 
 // S
 'statut_admin_restreint' => '(admin restrinxido)',
+'syndic_choix_moderation' => 'Que facer das vindeiras ligaz&oacute;ns que prove&ntilde;an deste web&nbsp;?',
+'syndic_choix_oublier' => 'Que facer das ligaz&oacute;ns que xa non figuran no ficheiro de sindicaci&oacute;n&nbsp;?',
+'syndic_lien_obsolete' => 'ligaz&oacute;n obsoleta',
+'syndic_option_miroir' => 'bloquealas automaticamente',
+'syndic_option_oubli' => 'borralas (tras @mois@&nbsp;mois)',
+'syndic_options' => 'Opci&oacute;ns da sindicaci&oacute;n&nbsp;:',
 
 
 // T
@@ -812,7 +818,6 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_date_publication_anterieure' => 'Data de redacci&oacute;n anterior&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Non amosar a data de redacci&oacute;n anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICACI&Oacute;N EN LI&Ntilde;A&nbsp;:',
-'texte_demander_blocage_priori' => 'As pr&oacute;ximas ligaz&oacute;ns deste web ser&aacute;n bloqueadas a priori.',
 'texte_descriptif_petition' => 'Descrici&oacute;n da petici&oacute;n',
 'texte_descriptif_rapide' => 'Descrici&oacute;n r&aacute;pida',
 'texte_documents_joints' => 'Pode autorizar o engadido de documentos (textos, imaxes,
@@ -848,8 +853,6 @@ cunha cor que indica o seu estado&nbsp;:',
   por defecto dos lugares afiliados logo da s&uacute;a creaci&oacute;n.
   De todos os xeitos despois &eacute; posible desbloquear cada ligaz&oacute;n individualmente,
   ou escoller, web por webr, o bloqueo das ligaz&oacute;ns futuras de tal ou cal web.',
-'texte_liens_syndication' => 'As seguintes ligaz&oacute;ns que ve&ntilde;an deste web
-  ser&aacute;n amosadas inmediatamente no web p&uacute;blico.',
 'texte_login_ldap_1' => '(Deixar baleiro para un acceso an&oacute;nimo, ou po&ntilde;er a v&iacute;a completa,
   por exemplo &laquo;<tt>uid=maricarmen, ou=users, dc=meu-dominio, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Atenci&oacute;n! Este &eacute; o login baixo o que te conectaches.
