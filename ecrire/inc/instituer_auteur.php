@@ -17,9 +17,10 @@ include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
 include_spip('inc/message_select');
+include_spip('inc/autoriser');
 
 
-// Deux constantes surchargeables :
+// Deux constantes surchargeables, cf. plugin autorite :
 	// statut par defaut a la creation
 	define('_STATUT_AUTEUR_CREATION', '1comite');
 	// statuts associables a des rubriques (separes par des virgules)
@@ -93,7 +94,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	// Calculer le menu
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
 	return "<select name='statut' size='1' class='fondl'
-		onchange=\"(this.options[this.selectedIndex].value.match(/$statut_rubrique/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
+		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
 	. liste_statuts_instituer($statut, $id_auteur) 
 	. $autres
 	. "\n<option" .

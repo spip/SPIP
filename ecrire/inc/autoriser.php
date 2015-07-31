@@ -16,11 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define ('_DEBUG_AUTORISER', false);
 
 // surcharge possible de autoriser(), sinon autoriser_dist()
-// http://doc.spip.org/@autoriser
 if (!function_exists('autoriser')) {
 // http://doc.spip.org/@autoriser
 	function autoriser() {
-		$args = func_get_args(); 
+		$args = func_get_args();
 		return call_user_func_array('autoriser_dist', $args);
 	}
 }
@@ -60,37 +59,33 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	if ($type == 'groupes_mot') $type = 'groupemots';
 	#if ($type == 'syndic_article') $type = 'syndicarticle';
 
-	// Chercher une fonction d'autorisation explicite
-	if (
-	// 1. Sous la forme "autoriser_type_faire"
-		(
-		$type
-		AND $f = 'autoriser_'.$type.'_'.$faire
-		AND (function_exists($f) OR function_exists($f.='_dist'))
+	// Chercher une fonction d'autorisation
+	// Dans l'ordre on va chercher autoriser_type_faire, autoriser_type,
+	// autoriser_faire, autoriser_defaut ; puis les memes avec _dist
+	$fonctions = $type
+		? array (
+			'autoriser_'.$type.'_'.$faire,
+			'autoriser_'.$type,
+			'autoriser_'.$faire,
+			'autoriser_defaut',
+			'autoriser_'.$type.'_'.$faire.'_dist',
+			'autoriser_'.$type.'_dist',
+			'autoriser_'.$faire.'_dist',
+			'autoriser_defaut_dist'
 		)
-
-	// 2. Sous la forme "autoriser_type"
-	// ne pas tester si $type est vide
-	OR (
-		$type
-		AND $f = 'autoriser_'.$type
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-	)
-
-	// 3. Sous la forme "autoriser_faire"
-	OR (
-		$f = 'autoriser_'.$faire
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-	)
-
-	// 4. Sinon autorisation generique
-	OR (
-		$f = 'autoriser_defaut'
-		AND (function_exists($f) OR function_exists($f.='_dist'))
-	)
-
-	)
-		$a = $f($faire,$type,intval($id),$qui,$opt);
+		: array (
+			'autoriser_'.$faire,
+			'autoriser_defaut',
+			'autoriser_'.$faire.'_dist',
+			'autoriser_defaut_dist'
+		);
+	
+	foreach ($fonctions as $f) {
+		if (function_exists($f)) {
+			$a = $f($faire,$type,intval($id),$qui,$opt);
+			break;
+		}
+	}
 
 	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id,$qui[nom]): ".($a?'OK':'niet'));
 
@@ -475,7 +470,7 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // Qui peut activer le debugueur ?
-// A noter : pour le moment ne fonctionne que pour ?var_profile (timer SQL)
+// http://doc.spip.org/@autoriser_debug_dist
 function autoriser_debug_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo';
 }
