@@ -68,10 +68,16 @@ function selec_statut(id, type, decal, puce, script) {
 
 function prepare_selec_statut(nom, type, id, action)
 {
-	$('#' + nom + type + id).hover(function(){},function(){cacher('statutdecal'+type+id);}).load(action + '&type='+type+'&id='+id,
+	var hide=false;
+	$('#' + nom + type + id)
+	.hover(function(){hide=false;},function(){hide=true;})
+	.load(action + '&type='+type+'&id='+id,
 		function(){ 
-			//findObj_forcer('statutdecal'+type+id).style.visibility = 'visible';
-					  });
+			$('#' + nom + type + id)
+			.hover(function(){},function(){cacher('statutdecal'+type+id);});
+			if (hide) cacher('statutdecal'+type+id);;
+		}
+	);
 }
 
 function changeclass(objet, myClass) {
