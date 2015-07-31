@@ -249,6 +249,8 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 		echo "<div class='liste'>";
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 
+		echo $tranches;
+
 		$result = spip_query($query);
 		while ($row = spip_fetch_array($result)) {
 		
@@ -256,7 +258,6 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 			
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-			$multi = $row['multi'];
 			
 			if ($connect_statut == "0minirezo")
 				$aff_articles="prepa,prop,publie,refuse";
