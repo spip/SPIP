@@ -227,6 +227,7 @@ function nom_fichier_copie_locale($source, $extension) {
 //
 function fichier_copie_locale($source) {
 	// Si c'est une image de IMG/ pas de souci
+	$source = preg_replace(',^\.\./,', '', $source); # images appelees depuis l'espace prive
 	if (preg_match(',^'._DIR_IMG.',', $source))
 		return $source;
 
