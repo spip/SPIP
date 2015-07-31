@@ -10,12 +10,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action activer_plugins
+ *
+ * @package SPIP\Core\Plugins
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * mise a jour des donnees si envoi via formulaire
+ * Mise à jour des données si envoi via formulaire
  * 
- * @link http://doc.spip.org/@enregistre_modif_plugin 
  * @global array $GLOBALS['visiteur_session']
  * @global array $GLOBALS['meta']
  * @return void
@@ -53,9 +58,10 @@ function enregistre_modif_plugin(){
 }
 
 /**
- * Fonction d'initialisation : vérifie les droits et met à jour les méta avant de lancer l'activation des plugins
+ * Fonction d'initialisation avant l'activation des plugins
+ *
+ * Vérifie les droits et met à jour les méta avant de lancer l'activation des plugins
  * 
- * @link http://doc.spip.org/@action_activer_plugins_dist
  * @return void
  */
 function action_activer_plugins_dist() {

@@ -10,16 +10,31 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'itérateur DATA
+ *
+ * @package SPIP\Core\Iterateur\DATA
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 
 /**
- * creer une boucle sur un iterateur DATA
- * annonce au compilo les "champs" disponibles
+ * Créer une boucle sur un itérateur DATA
+ * 
+ * Annonce au compilateur les "champs" disponibles, c'est à dire
+ * 'cle', 'valeur' et '*' (tout nom possible).
  *
- * @param  $b
- * @return
+ * On ne peut effectivement pas connaître à la compilation la structure
+ * des données qui seront obtenues. On indique donc au compilateur que
+ * toute balise utilisée dans la boucle est possiblement un champ
+ * des données reçues.
+ *
+ * @param Boucle $b
+ *     Description de la boucle
+ * @return Boucle
+ *     Description de la boucle complétée des champs
  */
 function iterateur_DATA_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
@@ -36,7 +51,9 @@ function iterateur_DATA_dist($b) {
 
 
 /**
- * IterateurDATA pour iterer sur des donnees
+ * Itérateur DATA
+ *
+ * Pour itérer sur des données quelconques (transformables en tableau)
  */
 class IterateurDATA implements Iterator {
 	/**
@@ -103,7 +120,7 @@ class IterateurDATA implements Iterator {
 	}
 
 	/**
-	 * Declarer les criteres exceptions
+	 * Déclarer les critères exceptions
 	 * @return array
 	 */
 	public function exception_des_criteres() {
@@ -111,9 +128,9 @@ class IterateurDATA implements Iterator {
 	}
 
 	/**
-	 * Recuperer depuis le cache si possible
-	 * @param  $cle
-	 * @return
+	 * Récupérer depuis le cache si possible
+	 * @param string $cle
+	 * @return mixed
 	 */
 	protected function cache_get($cle) {
 		if (!$cle) return;
@@ -124,10 +141,11 @@ class IterateurDATA implements Iterator {
 	}
 
 	/**
-	 * Srtocker en cache si possible
-	 * @param  $cle
-	 * @param  $ttl
-	 * @return
+	 * Stocker en cache si possible
+	 * @param string $cle
+	 * @param int $ttl
+	 * @param null|mixed $valeur
+	 * @return bool
 	 */
 	protected function cache_set($cle, $ttl, $valeur = null) {
 		if (!$cle) return;
@@ -149,10 +167,10 @@ class IterateurDATA implements Iterator {
 	}
 
 	/**
-	 * Aller chercher les donnees de la boucle DATA
+	 * Aller chercher les données de la boucle DATA
 	 *
 	 * @throws Exception
-	 * @param  $command
+	 * @param array $command
 	 * @return void
 	 */
 	protected function select($command) {
@@ -317,8 +335,11 @@ class IterateurDATA implements Iterator {
 
 
 	/**
-	 * Retourne un tableau donne depuis un critere liste
-	 * Critere {liste X1, X2, X3}
+	 * Retourne un tableau donne depuis un critère liste
+	 * 
+	 * Critère `{liste X1, X2, X3}`
+	 *
+	 * @see critere_liste_dist()
 	 * 
 	**/
 	protected function select_liste() {

@@ -10,19 +10,21 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fonctions d'appel aux serveurs SQL presentes dans le code compile
+ *
+ * NB : à l'exception des fonctions pour les balises dynamiques
+ * 
+ * @package SPIP\Core\Compilateur\Quetes
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Fonctions d'appel aux serveurs SQL presentes dans le code compile
-//
-
-# NB : a l'exception des fonctions pour les balises dynamiques
 
 include_spip('base/abstract_sql');
 
 /**
- * retourne l'url de redirection d'un article virtuel, seulement si il est publié
- * http://doc.spip.org/@quete_chapo
+ * Retourne l'URL de redirection d'un article virtuel, seulement si il est publié
  *
  * @param $id_article
  * @param $connect
@@ -33,9 +35,10 @@ function quete_virtuel($id_article, $connect) {
 }
 
 /**
- * Retourne le couple parent,lang pour toute table
- * en pratique id_rubrique si present (ou id_parent pour table rubriques)
- * et champ lang si present
+ * Retourne le couple `parent,lang` pour toute table
+ * 
+ * En pratique `id_rubrique` si présent (ou `id_parent` pour table rubriques)
+ * et champ `lang` si présent
  *
  * @param string $table
  * @param int $id
@@ -66,11 +69,12 @@ function quete_parent_lang($table,$id,$connect=''){
 
 
 /**
- * retourne le parent d'une rubrique
- * repose sur la fonction quete_parent_lang pour la mutualisation
- * +mise en cache sql des requetes
+ * Retourne le parent d'une rubrique
+ * 
+ * Repose sur la fonction quete_parent_lang pour la mutualisation
+ * +mise en cache SQL des requêtes
  *
- * http://doc.spip.org/@quete_parent
+ * @uses quete_parent_lang()
  *
  * @param int $id_rubrique
  * @param string $connect
@@ -84,15 +88,16 @@ function quete_parent($id_rubrique, $connect='') {
 }
 
 /**
- * retourne la rubrique d'un article
- * repose sur la fonction quete_parent_lang pour la mutualisation
- * +mise en cache sql des requetes
+ * Retourne la rubrique d'un article
+ * 
+ * Repose sur la fonction quete_parent_lang pour la mutualisation
+ * +mise en cache SQL des requêtes
  *
- * http://doc.spip.org/@quete_rubrique
+ * @uses quete_parent_lang()
  *
  * @param int $id_article
  * @param $serveur
- * @return
+ * @return int
  */
 function quete_rubrique($id_article, $serveur) {
 	$id_parent = quete_parent_lang('spip_articles',$id_article,$serveur);
@@ -101,10 +106,10 @@ function quete_rubrique($id_article, $serveur) {
 
 
 /**
- * retourne la profondeur d'une rubrique
+ * Retourne la profondeur d'une rubrique
  *
- * http://doc.spip.org/@quete_profondeur
- *
+ * @uses quete_parent()
+ * 
  * @param int $id
  * @param string $connect
  * @return int
@@ -120,10 +125,15 @@ function quete_profondeur($id, $connect='') {
 
 
 /**
- * retourne la condition sur la date lorsqu'il y a des post-dates
+ * Retourne la condition sur la date lorsqu'il y a des post-dates
+ * 
  * @param string $champ_date
+ *     Nom de la colonne de date dans la table SQL
  * @param string $serveur
+ * @param bool $ignore_previsu
+ *     true pour forcer le test même en prévisu
  * @return string
+ *     Morceau de la requête SQL testant la date
  */
 function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=false) {
 	if (defined('_VAR_PREVIEW') AND _VAR_PREVIEW AND !$ignore_previsu)
@@ -140,13 +150,15 @@ function quete_condition_postdates($champ_date, $serveur='', $ignore_previsu=fal
  * Calculer la condition pour filtrer les status,
  *
  * @param string $mstatut
- *  le champ de la table sur lequel porte la condition
+ *   Le champ de la table sur lequel porte la condition
  * @param string $previsu
- *  mode previsu : statut ou liste des statuts separes par une virgule
+ *   Mode previsu : statut ou liste des statuts séparés par une virgule
  * @param string $publie
- *  mode publie : statut ou liste des statuts separes par une virgule
+ *   Mode publie : statut ou liste des statuts séparés par une virgule
  * @param string $serveur
- *  serveur de BDD
+ *   Serveur de BDD
+ * @param bool $ignore_previsu
+ *   true pour forcer le test même en prévisu
  * @return array
  */
 function quete_condition_statut($mstatut,$previsu,$publie, $serveur='', $ignore_previsu=false){

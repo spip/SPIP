@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Transparent SHA-256 Implementation for PHP 4 and PHP 5
  *
  * Author: Perry McGee (pmcgee@nanolink.ca)
@@ -65,9 +65,14 @@
  *       If the mhash module is present, and $ignore_php5_hash = false the
  *       script will attempt to use the output from mhash prior to running
  *       the PHP code.
+ *
+ * @package SPIP\Core\Authentification\Sha256
  */
 if (!class_exists('nanoSha2'))
 {
+	/**
+	 * Classe de calcul d'un SHA
+	 */
     class nanoSha2
     {
         // php 4 - 5 compatable class properties
@@ -75,7 +80,11 @@ if (!class_exists('nanoSha2'))
         var     $platform;
 				var		  $bytesString = 16;
 
-        // Php 4 - 6 compatable constructor
+        /**
+         * Php 4 - 6 compatable constructor
+         *
+         * @param bool $toUpper
+         */
         function nanoSha2($toUpper = false) {
             // Determine if the caller wants upper case or not.
             $this->toUpper = is_bool($toUpper)
@@ -87,7 +96,14 @@ if (!class_exists('nanoSha2'))
             $this->platform = ($tmpInt > 0) ? 64 : 32;
         }
 
-        // Here are the bitwise and functions as defined in FIPS180-2 Standard
+        /**
+         * Here are the bitwise and functions as defined in FIPS180-2 Standard
+         *
+         * @param unknown $x
+         * @param unknown $y
+         * @param int $n
+         * @return int
+         */
         function addmod2n($x, $y, $n = 4294967296)      // Z = (X + Y) mod 2^32
         {
             $mask = 0x80000000;
@@ -113,7 +129,11 @@ if (!class_exists('nanoSha2'))
             return (int)$r;
         }
 
-        // Logical bitwise right shift (PHP default is arithmetic shift)
+        /**
+         * Logical bitwise right shift (PHP default is arithmetic shift)
+         * @param unknown $x
+         * @param unknown $n
+         */
         function SHR($x, $n)        // x >> n
         {
             if ($n >= 32) {      // impose some limits to keep it 32-bit
@@ -379,6 +399,10 @@ if (!function_exists('str_split'))
     /**
      * Splits a string into an array of strings with specified length.
      * Compatability with older verions of PHP
+     *
+     * @param string $string Chaîne
+     * @param int $split_length Longueur de coupe
+     * @return array
      */
     function str_split($string, $split_length = 1)
     {
@@ -418,9 +442,13 @@ if (!function_exists('str_split'))
  *   require_once('sha256.inc.php');
  *   $hashstr = sha256('abc');
  *
- * Note:
+ * @Note
  * PHP Strings are limitd to (2^31)-1, so it is not worth it to
  * check for input strings > 2^64 as the FIPS180-2 defines.
+ *
+ * @param string $str Chaîne dont on veut calculer le SHA
+ * @param bool $ig_func
+ * @return string Le SHA de la chaîne
  */
 function _nano_sha256($str, $ig_func = true) {
     $obj = new nanoSha2((defined('_NANO_SHA2_UPPER')) ? true : false);
@@ -428,6 +456,12 @@ function _nano_sha256($str, $ig_func = true) {
 }
 // 2009-07-23: Added check for function as the Suhosin plugin adds this routine.
 if (!function_exists('sha256')) {
+	/**
+	 * Calcul du SHA256
+	 * @param string $str Chaîne dont on veut calculer le SHA
+	 * @param bool $ig_func
+	 * @return string Le SHA de la chaîne
+	 */
     function sha256($str, $ig_func = true) { return _nano_sha256($str, $ig_func); }
 }
 
@@ -435,6 +469,15 @@ if (!function_exists('sha256')) {
 if (!function_exists('hash'))
 {
     define('_NO_HASH_DEFINED',true);
+    /**
+     * Retourne le calcul d'un hachage d'une chaîne (pour PHP4)
+     * 
+     * @param string $algo Nom de l'algorythme de hachage
+     * @param string $data Chaîne à hacher
+     * @return string|bool
+     *     Hash de la chaîne
+     *     False si pas d'algo trouvé
+     */
     function hash($algo, $data)
     {
         if (empty($algo) || !is_string($algo) || !is_string($data)) {

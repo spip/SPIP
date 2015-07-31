@@ -11,12 +11,29 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'itérateur PHP
+ *
+ * @package SPIP\Core\Iterateur\PHP
+**/
+
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// creer une boucle sur un iterateur
-// annonce au compilo les "champs" disponibles
-//
+
+/**
+ * Créer une boucle sur un itérateur PHP
+ * 
+ * Annonce au compilateur les "champs" disponibles, c'est à dire
+ * 'cle', 'valeur' et toutes les méthodes de l'itérateur désigné.
+ *
+ * @param Boucle $b
+ *     Description de la boucle
+ * @param string $iteratorName
+ *     Nom de l'itérateur à utiliser
+ * @return Boucle
+ *     Description de la boucle complétée des champs
+ */
 function iterateur_php_dist($b, $iteratorName) {
 	$b->iterateur = $iteratorName; # designe la classe d'iterateur
 	$b->show = array(

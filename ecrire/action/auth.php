@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action auth
+ *
+ * @package SPIP\Core\Authentification
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 /**
- * Ce fichier contient les fonctions gerant
+ * Ce fichier contient les fonctions gérant
  * les instructions SQL pour Sqlite
  *
  * @package SPIP\Core\SQL\SQLite
@@ -480,15 +480,22 @@ function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter =
 }
 
 /**
- * Fonction de creation d'un INDEX
+ * Fonction de création d'un INDEX
  *
- * @param string $nom : nom de l'index
- * @param string $table : table sql de l'index
- * @param string/array $champs : liste de champs sur lesquels s'applique l'index
- * @param string $serveur : nom de la connexion sql utilisee
- * @param bool $requeter : true pour executer la requete ou false pour retourner le texte de la requete
- *
- * @return bool ou requete
+ * @param string $nom
+ *     Nom de l'index
+ * @param string $table
+ *     Table SQL de l'index
+ * @param string|array $champs
+ *     Liste de champs sur lesquels s'applique l'index
+ * @param string|bool $unique
+ *     Créer un index UNIQUE ?
+ * @param string $serveur
+ *     Nom de la connexion sql utilisee
+ * @param bool $requeter
+ *     true pour executer la requête ou false pour retourner le texte de la requête
+ * @return bool|string
+ *    string : requête, false si erreur, true sinon.
  */
 function spip_sqlite_create_index($nom, $table, $champs, $unique='', $serveur = '', $requeter = true){
 	if (!($nom OR $table OR $champs)){
@@ -652,7 +659,7 @@ function spip_sqlite_drop_view($view, $exist = '', $serveur = '', $requeter = tr
  * @param string $nom : nom de l'index
  * @param string $table : table sql de l'index
  * @param string $serveur : nom de la connexion sql utilisee
- * @param bool $requeter : true pour executer la requete ou false pour retourner le texte de la requete
+ * @param bool $requeter : true pour executer la requête ou false pour retourner le texte de la requête
  *
  * @return bool ou requete
  */
@@ -681,10 +688,12 @@ function spip_sqlite_drop_index($nom, $table, $serveur = '', $requeter = true){
 /**
  * Retourne la dernière erreur generée
  *
- * @param $serveur
- * 		nom de la connexion
+ * @param string $query
+ *     Requête qui était exécutée
+ * @param string $serveur
+ *     Nom de la connexion
  * @return string
- * 		erreur eventuelle
+ *     Erreur eventuelle
  **/
 function spip_sqlite_error($query = '', $serveur = ''){
 	$link = _sqlite_link($serveur);
@@ -948,20 +957,31 @@ function spip_sqlite_insertq_multi($table, $tab_couples = array(), $desc = array
 
 
 /**
- * Retourne si le moteur SQL prefere utiliser des transactions.
+ * Retourne si le moteur SQL préfère utiliser des transactions.
  *
- * @param 
- * @return bool true / false
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Inutilisé
+ * @return bool
+ *     Toujours true.
 **/
 function spip_sqlite_preferer_transaction($serveur = '', $requeter = true) {
 	return true;
 }
 
 /**
- * Demarre une transaction.
+ * Démarre une transaction
+ * 
  * Pratique pour des sql_updateq() dans un foreach,
  * parfois 100* plus rapide s'ils sont nombreux en sqlite ! 
  *
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     true pour exécuter la requête ou false pour retourner le texte de la requête
+ * @return bool|string
+ *     string si texte de la requête demandé, true sinon
 **/
 function spip_sqlite_demarrer_transaction($serveur = '', $requeter = true) {
 	if (!$requeter) return "BEGIN TRANSACTION";
@@ -970,8 +990,14 @@ function spip_sqlite_demarrer_transaction($serveur = '', $requeter = true) {
 }
 
 /**
- * Cloture une transaction.
- *
+ * Clôture une transaction
+ * 
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     true pour exécuter la requête ou false pour retourner le texte de la requête
+ * @return bool|string
+ *     string si texte de la requête demandé, true sinon
 **/
 function spip_sqlite_terminer_transaction($serveur = '', $requeter = true) {
 	if (!$requeter) return "COMMIT";
@@ -980,7 +1006,16 @@ function spip_sqlite_terminer_transaction($serveur = '', $requeter = true) {
 }
 
 
-// http://doc.spip.org/@spip_sqlite_listdbs
+/**
+ * Liste les bases de données disponibles
+ *
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Inutilisé
+ * @return array
+ *     Liste des noms de bases
+**/
 function spip_sqlite_listdbs($serveur = '', $requeter = true){
 	_sqlite_init();
 
@@ -1013,15 +1048,16 @@ function spip_sqlite_multi($objet, $lang){
 
 /**
  * Optimise une table SQL
- * Note: Sqlite optimise TOUTE un fichier sinon rien.
- * On evite donc 2 traitements sur la meme base dans un hit.
+ * 
+ * @note
+ *   Sqlite optimise TOUT un fichier sinon rien.
+ *   On évite donc 2 traitements sur la même base dans un hit.
  *
  * @param $table nom de la table a optimiser
  * @param $serveur nom de la connexion
  * @param $requeter effectuer la requete ? sinon retourner son code
  * @return bool|string true / false / requete
  **/
-// http://doc.spip.org/@spip_sqlite_optimize
 function spip_sqlite_optimize($table, $serveur = '', $requeter = true){
 	static $do = false;
 	if ($requeter and $do){

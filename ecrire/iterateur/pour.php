@@ -10,16 +10,28 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'itérateur POUR
+ *
+ * @package SPIP\Core\Iterateur\POUR
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('iterateur/data');
 
 
-//
-// creer une boucle sur un iterateur POUR
-// annonce au compilo les "champs" disponibles
-//
+/**
+ * Créer une boucle sur un itérateur POUR
+ * 
+ * Annonce au compilateur les "champs" disponibles,
+ * c'est à dire 'cle' et 'valeur'.
+ *
+ * @param Boucle $b
+ *     Description de la boucle
+ * @return Boucle
+ *     Description de la boucle complétée des champs
+ */
 function iterateur_POUR_dist($b) {
 	$b->iterateur = 'DATA'; # designe la classe d'iterateur
 	$b->show = array(
