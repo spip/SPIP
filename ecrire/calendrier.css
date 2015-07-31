@@ -5,6 +5,7 @@
 div.navigation-calendrier {
 	color: white;
 	font-family: verdana, arial, sans,sans-serif;
+	font-weight: bold;
 	font-size: 14px;
 	padding: 2px;
 	-moz-border-radius-topleft: 8px;
@@ -64,19 +65,30 @@ a.calendrier-annee:hover {
  }
 
 .calendrier-jour { 
-	margin: 1px;
-	padding: 2px;
-	background-color: white;
-	text-align: center; 
-	-moz-border-radius: 5px;
- }
-
-.calendrier-demijour { 
 	margin-left: 1px;
 	margin-top: 1px;
 	padding: 2px;
 	text-align: center; 
+	background-color: white;
 	-moz-border-radius: 5px;
+ }
+
+.calendrier-demijour { 
+	margin: 0px;
+	padding: 3px;
+	text-align: center; 
+	background-color: white;
+	-moz-border-radius: 5px;
+ }
+
+.calendrier-left { 
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-bottomleft: 10px;
+ }
+
+.calendrier-right { 
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;";
  }
 
 .calendrier-opacity { 
