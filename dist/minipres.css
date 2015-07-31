@@ -1,5 +1,4 @@
-body { font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436;
-	background: #babdb6 url(images/minipres-gris.png) repeat;
+body { font-family: Trebuchet Ms,Verdana, Geneva, Sans, sans-serif; font-size: 0.9em; color: #2e3436; background: #babdb6 url(images/minipres-gris.png) no-repeat scroll 97% 100px;
 }
 
 h1 { margin: 1em 0 1em 0; font-size: 1.3em; font-weigth: bold; color: #5c3566; }
