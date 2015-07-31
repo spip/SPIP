@@ -95,12 +95,12 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	$charset = lire_meta('charset');
 
 	if (strpos($headers, "Content-Type: ") === false)
-	  $headers .=
+		$headers .=
 		"MIME-Version: 1.0\n".
 		"Content-Type: text/plain; charset=$charset\n".
 		"Content-Transfer-Encoding: 8bit\n";
 
-	$headers .= "From: $from\n".
+	$headers .= "From: $from\n";
 	$texte = filtrer_entites($texte);
 	$sujet = filtrer_entites($sujet);
 

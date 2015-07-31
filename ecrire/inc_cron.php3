@@ -238,16 +238,21 @@ function cron_mail($t) {
 # 1ere ligne = sujet
 # lignes suivantes jusqu'a la premiere blanche: headers SMTP
 
-				$page = stripslashes($page);
+				$page = stripslashes(trim($page));
 				$p = strpos($page,"\n\n");
 				$s = strpos($page,"\n");
-				$headers = substr($page,$s+1,$p-$s);
-				$sujet_nouveautes = substr($page,0,$s);
-				$mail_nouveautes = substr($page,$p+2);
+				if ($p AND $s) {
+					if ($p>$s)
+						$headers = substr($page,$s+1,$p-$s);
+					$sujet_nouveautes = substr($page,0,$s);
+					$mail_nouveautes = trim(substr($page,$p+2));
+				}
 	}
 
 	if (strlen($mail_nouveautes) > 10)
 		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
+	else
+		spip_log("mail nouveautes : rien de neuf depuis $jours_neuf jours");
 	return 1;
 }
 
