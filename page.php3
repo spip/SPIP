@@ -20,7 +20,7 @@ if (strstr($fond, '..')) {
 if (!function_exists('find_in_path')) {
 	include ('ecrire/inc_version.php3');
 }
-if (preg_match(',^(squelettes/|dist/404,', $a = find_in_path("$fond.html"))) {
+if (preg_match(',^(squelettes/|dist/404),', $a = find_in_path("$fond.html"))) {
 	include ("inc-public.php3");
 } else {
 	spip_log("page.php3: le squelette $fond.html ($a) *doit* se trouver dans squelettes/");
