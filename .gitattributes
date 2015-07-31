@@ -262,6 +262,7 @@ ecrire/inc_ajax.php3 -text
 ecrire/inc_ajax_page.php -text
 ecrire/inc_articles.php -text
 ecrire/inc_articles_edit.php -text
+ecrire/inc_articles_forum.php -text
 ecrire/inc_articles_page.php -text
 ecrire/inc_articles_tous.php -text
 ecrire/inc_auteur_infos.php -text
