@@ -130,9 +130,7 @@ function charger_squelette ($squelette) {
 # definie dans inc-chercher, fichier non charge si elle est deja definie
 # (typiquement dans mes_fonctions.php3)
 
-function cherche_page ($cache, $contexte, $fond)  {
-	global $delais;
-
+function cherche_page ($cache, $contexte, $fond, $delais)  {
 	if (!function_exists('chercher_squelette'))
 		include_local("inc-chercher-squelette.php3");
 
@@ -209,7 +207,7 @@ function calculer_contexte() {
 	return $contexte;
 }
 
-function calculer_page_globale($cache, $contexte_local, $fond) {
+function calculer_page_globale($cache, $contexte_local, $fond, $delais) {
 
 	// Gestion des URLs personnalises - sale mais historique
 	if (function_exists("recuperer_parametres_url")) {
@@ -245,7 +243,7 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 
 	// Go to work !
 	if (!$page)
-		$page = cherche_page($cache, $contexte_local, $fond);
+		$page = cherche_page($cache, $contexte_local, $fond, $delais);
 
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
@@ -269,12 +267,12 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	if ($inclusion) {
 		$contexte_inclus = $elements['contexte'];
 		$page = cherche_page($chemin_cache,
-			$contexte_inclus, $elements['fond']);
+			$contexte_inclus, $elements['fond'], $delais);
 	}
 	else {
 		$page = calculer_page_globale($chemin_cache,
 			$elements['contexte'],
-			$elements['fond']);
+			$elements['fond'], $delais);
 	}
 
 	$page['signal']['process_ins'] = $page['process_ins'];
