@@ -76,7 +76,6 @@ function inc_genie_dist($taches = array()) {
 		else if ($date_lock > $t + 3600)
 			spip_log("Erreur de date du fichier $lock : $date_lock > $t !");
 	}
-
 	if ($tache) {
 		spip_timer('tache');
 		touch($lock);
@@ -100,8 +99,7 @@ function inc_genie_dist($taches = array()) {
 // a leur sous-processus
 //
 // http://doc.spip.org/@taches_generales
-function taches_generales() {
-	$taches_generales = array();
+function taches_generales($taches_generales = array()) {
 
 	// MAJ des rubriques publiques (cas de la publication post-datee)
 	// est fait au coup par coup a present
