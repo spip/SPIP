@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-	<title>[(#NOM|supprimer_numero|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
+	<title>[(#NOM|textebrut)][ - (#NOM_SITE_SPIP|textebrut)]</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	[<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
 	<meta name="generator" content="SPIP" />
@@ -24,7 +24,7 @@
 	<INCLURE{fond=inc-entete}{lang}>
 
 	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|supprimer_numero|couper{80})]</div>
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; (#NOM|couper{80})]</div>
 
 	<div id="conteneur">
 
@@ -34,7 +34,7 @@
 
 			<div class="cartouche">
 				[(#LOGO_AUTEUR||reduire_image{200,200})]
-				<h1 class="titre">[(#NOM|supprimer_numero)]</h1>
+				<h1 class="titre">#NOM</h1>
 				[<div class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]
 			</div>
 
@@ -52,7 +52,7 @@
 				<h2 class="invisible"><:articles_auteur:></h2>
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse}>
-					<li class="extrait"><h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
+					<li class="extrait"><h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 					<small>[(#DATE|affdate)]</small></li>
 					</BOUCLE_articles>
 				</ul>
@@ -73,12 +73,14 @@
 		[(#REM) Autres auteurs ]
 		<B_auteurs>
 		<div class="forums">
+			#ANCRE_PAGINATION
 			<h2 class="titre"><:info_auteurs:></h2>
 			<ul>
-				<BOUCLE_auteurs(AUTEURS)>
+				<BOUCLE_auteurs(AUTEURS) {par nom} {pagination 20}>
 				<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|supprimer_numero|couper{80})]</a></li>
 				</BOUCLE_auteurs>
 			</ul>
+			[<p class="pagination">(#PAGINATION)</p>]
 		</div>
 		</B_auteurs>
 

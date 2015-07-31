@@ -1,8 +1,8 @@
 [(#PARAMETRES_FORUM|?{'',''}) Cette balise (invisible) provoque le recalcul du forum la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 
 [(#REM) Nombre total de messages ]
-<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}>
-</BOUCLE_decompte>[<h2 class="forum-decompte">(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]</h2>]</B_decompte>
+<BOUCLE_decompte(FORUMS) {id_rubrique ?}{id_article ?}{id_breve ?}{id_syndic ?} {plat}></BOUCLE_decompte>[<h2 class="forum-decompte">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+[(#TOTAL_BOUCLE|=={1}|?{<:message:>,<:messages_forum:>})]</h2>]<//B_decompte>
 
 [(#REM) Messages du forum ]
 <B_forums>

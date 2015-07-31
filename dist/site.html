@@ -26,7 +26,7 @@
 		<INCLURE{fond=inc-entete}{lang}>
 
 		[(#REM) Fil d'Ariane ]
-		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|supprimer_numero|couper{80})]</div>
+		<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_syndic}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#NOM_SITE|couper{80})]</div>
 
 		<div id="conteneur">
 
@@ -35,8 +35,8 @@
 			<div id="contenu">
 
 				<div class="cartouche">
-					<a href="#URL_SITE">[(#LOGO_SITE||reduire_image{150,100}|inserer_attribut{alt,[(#NOM_SITE|supprimer_numero|couper{80})]})]</a>
-					<h1 class="titre">[(#NOM_SITE|supprimer_numero)]</h1>
+					<a href="#URL_SITE">[(#LOGO_SITE||reduire_image{150,100}|inserer_attribut{alt,[(#NOM_SITE|couper{80})]})]</a>
+					<h1 class="titre">#NOM_SITE</h1>
 					[<div class="soustitre"><a href="#URL_SITE" class="spip_out">(#URL_SITE|couper{80})</a></div>]
 				</div>
 
@@ -47,7 +47,7 @@
 
 				<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,10}>
 				<div class="extrait">
-					<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
+					<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
 					[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
 					<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)]</small>
 					[<small>&mdash; <em>(#TAGS|afficher_tags{'directory'})</em></small>]
@@ -73,7 +73,7 @@
 					<h2 class="titre"><:sites_web:></h2>
 					<ul>
 						<BOUCLE_sites(SITES) {par nom_site} {doublons}>
-						<li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]"[ class="(#EXPOSE)"]>#NOM_SITE</a></li>
 						</BOUCLE_sites>
 					</ul>
 				</div>
@@ -85,7 +85,7 @@
 					<h2 class="titre"><:mots_clefs:></h2>
 					<ul>
 						<BOUCLE_mots(MOTS) {id_syndic} {par titre}>
-						<li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						<li><a href="#URL_MOT" rel="tag">#TITRE</a></li>
 						</BOUCLE_mots>
 					</ul>
 				</div>
