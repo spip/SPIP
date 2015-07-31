@@ -48,8 +48,6 @@ function inc_formater_article_dist($row)
 		}
 	} else $logo ='';
 
-	$vals = array();
-
 	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 	$id_rubrique = $row['id_rubrique'];
 	$date = $row['date'];
@@ -57,9 +55,7 @@ function inc_formater_article_dist($row)
 	$descriptif = $row['descriptif'];
 	$lang_dir = lang_dir(($lang = $row['lang']) ? changer_typo($lang):'');
 
-	$vals[]= $puce_statut($id_article, $statut, $id_rubrique,'article');
-
-	$vals[]= "<div>"
+	$lien  = "<div>"
 	. "<a href='"
 	. generer_url_ecrire("articles","id_article=$id_article")
 	. "'"
@@ -78,26 +74,29 @@ function inc_formater_article_dist($row)
 	. "</a>"
 	. "</div>";
 	
+	if ($spip_display == 4) return "\n<li>$lien</li>\n";
+
+	$puce = $puce_statut($id_article, $statut, $id_rubrique,'article');
+
 	$result = auteurs_article($id_article);
-	$les_auteurs = array();
+	$auteurs = array();
 	while ($r = sql_fetch($result)) {
 		list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
-		$les_auteurs[]= "$mail&nbsp;$nom";
+		$auteurs[]= "$mail&nbsp;$nom";
 	}
-	$vals[] = join('<br />', $les_auteurs);
+	$auteurs = join('<br />', $auteurs);
 
-	$s = affdate_jourcourt($date);
-	$vals[] = $s ? $s : '&nbsp;';
+	$date = affdate_jourcourt($date);
+	if (!$date) $date = '&nbsp;';
 
-	$vals[]= afficher_numero_edit($id_article, 'id_article', 'article');
+	$num = afficher_numero_edit($id_article, 'id_article', 'article');
 
 	// Afficher le numero (JMB)
-	  $largeurs = array(11, '', 80, 100, 50);
-	  $styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
+	$largeurs = array(11, '', 80, 100, 50);
+	$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
+	$vals = array($puce, $lien, $auteurs, $date, $num);
 
-	return ($spip_display != 4)
-	? afficher_liste_display_neq4($largeurs, $vals, $styles)
-	: afficher_liste_display_eq4($largeurs, $vals, $styles);
+	return afficher_liste_display_neq4($largeurs, $vals, $styles);
 }
 
 ?>

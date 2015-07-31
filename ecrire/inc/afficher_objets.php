@@ -454,102 +454,87 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 // http://doc.spip.org/@afficher_articles_trad_boucle
 function afficher_articles_trad_boucle($row)
 {
-  	global $lang_objet,  $spip_lang_right, $spip_display;
+  	global $spip_lang_right, $spip_display;
 
-	$lang_dir = lang_dir($lang_objet);
-	$vals = '';
+	$lang_dir = lang_dir($GLOBALS['lang_objet']);
 	$id_article = $row['id_article'];
-	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
+	$titre = $row['titre'];
 	$id_rubrique = $row['id_rubrique'];
-	$date = $row['date'];
 	$statut = $row['statut'];
 	$id_trad = $row['id_trad'];
 	$lang = $row['lang'];
 
-	// La petite puce de changement de statut
-	$puce_statut = charger_fonction('puce_statut', 'inc');
-	$vals[] = $puce_statut($id_article, $statut, $id_rubrique,'article');
-
-	// Le titre (et la langue)
-
-	$langues_art = "";
-	$dates_art = "";
-	$l = "";
+	$dates_art = $langues_art = array();
+	$ligne = "";
 
 	$res_trad = sql_select("id_article, lang, date_modif", "spip_articles", "id_trad = $id_trad AND id_trad > 0");
 
 	while ($row_trad = sql_fetch($res_trad)) {
-
 		$id_article_trad = $row_trad["id_article"];
 		$lang_trad = $row_trad["lang"];
-		$date_trad = $row_trad["date_modif"];
-		$dates_art[$lang_trad] = $date_trad;
+		$date = $row_trad['date_modif'];
+		$dates_art[$lang_trad] = $date;
 		$langues_art[$lang_trad] = $id_article_trad;
 		if ($id_article_trad == $id_trad) $date_ref = $date;
 	}
 
-
 	// faudrait sortir ces invariants de boucle
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
-			$afficher_langue = true;
 			$langue_defaut = isset($GLOBALS['langue_rubrique'])
 			  ? $GLOBALS['meta']['langue_site']
 			  : $GLOBALS['langue_rubrique'];
-	}
-
-	$span_lang = false;
+			if ($lang != $langue_defaut)
+				$afficher_langue = " <span class='spip_xx-small' style='color: #666666'  dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
+	} else $afficher_langue = '';
 
 	foreach(explode(',', $GLOBALS['meta']['langues_multilingue']) as $k){
-		if ($langues_art[$k]) {
-			if ($langues_art[$k] == $id_trad) {
-				$span_lang = "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "'><span class='lang_base'>$k</span></a>";
-				$l .= $span_lang;
-			} else {
-				$date = $dates_art[$k];
-				if ($date < $date_ref)
-					$l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "' class='claire'>$k</a>";
-				else $l .= "<a href='" . generer_url_ecrire("articles","id_article=".$langues_art[$k]) . "' class='foncee'>$k</a>";
-			}
+		if (isset($langues_art[$k]) AND $langues_art[$k]<> $id_trad){
+			$h = generer_url_ecrire("articles", "id_article=".$langues_art[$k]);
+			$style = strtotime($dates_art[$k]) < strtotime($date_ref);
+			$style = $style ? 'claire' : 'foncee';
+			$ligne .= "<a href='$h' class='$style'>$k</a>";
 		}
-#				else $l.= "<span class='creer'>$k</span>";
 	}
 
-	if (!$span_lang)
-		$span_lang = "<a href='" . generer_url_ecrire("articles","id_article=$id_article") . "'><span class='lang_base'>$lang</span></a>";
-
-	$vals[] = "\n<div style='text-align: center;'>$span_lang</div>";
-
-
-	$s.= "\n<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
-
 	if (acces_restreint_rubrique($id_rubrique))
-		$s .= http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
+		$img = http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
+	else $img = '';
 
+	if (!$titre) $titre =  _T('ecrire:info_sans_titre');
 	if ($id_article == $id_trad) $titre = "<b>$titre</b>";
 
-	$titre = typo(supprime_img($titre,''));
+	$h = generer_url_ecrire("articles", "id_article=$id_article");
 
-	if ($afficher_langue AND $lang != $langue_defaut)
-		$titre .= " <span class='spip_xx-small' style='color: #666666'  dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>";
+	$ligne = "\n<div>"
+	  . "<div style='float: $spip_lang_right; margin-right: -10px;'>"
+	  . $ligne
+	  . "</div>"
+	  . $img
+	  . "<a href='$h' title='"
+	  . _T('info_numero_abbreviation')
+	  . $id_article
+	  . "' dir='$lang_dir' style=\"display:block;\">"
+	  . typo(supprime_img($titre,''))
+	  . $afficher_langue
+	  . "</a></div>";
 
-	$s .= "<a href='"
-	  . generer_url_ecrire("articles","id_article=$id_article")
-	  . "' title='" . _T('info_numero_abbreviation'). "$id_article'"
-	  . " dir='$lang_dir' style=\"display:block;\">"
-	  . $titre
-	  . "</a>";
+	if ($spip_display == 4) return "<li>$ligne</li>";
 
-	$vals[] = "\n<div>$s</div>";
+	$span_lang = "<a href='$h'><span class='lang_base'>$lang</span></a>";
 
-	$vals[] = "";
+	// La petite puce de changement de statut
+	$puce_statut = charger_fonction('puce_statut', 'inc');
+	$puce = $puce_statut($id_article, $statut, $id_rubrique,'article');
+	$vals = array($puce,
+		      "\n<div style='text-align: center;'>$span_lang</div>",
+		      $ligne,
+		      "");
 
-	$largeurs = array(11, 24, '', '1');
+	$l6argeurs = array(11, 24, '', '1');
 	$styles = array('', 'arial1', 'arial1', '');
 
-	return ($spip_display != 4)
-	? afficher_liste_display_neq4($largeurs, $vals, $styles)
-	: afficher_liste_display_eq4($largeurs, $vals, $styles);
+	return afficher_liste_display_neq4($largeurs, $vals, $styles);
 }
 
 // http://doc.spip.org/@afficher_auteurs_boucle
