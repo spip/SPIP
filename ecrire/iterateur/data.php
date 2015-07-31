@@ -185,11 +185,11 @@ class IterateurDATA implements Iterator {
 		if ($this->command['orderby']) {
 			$sortfunc = '';
 			foreach($this->command['orderby'] as $tri) {
-				if (preg_match(',^\.?(\w+)( DESC)?$,S', $tri, $r)) {
+				if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', $tri, $r)) {
 					if ($r[1] == 'valeur')
 						$tv = '%s';
 					else
-						$tv = 'table_valeur(%s, '.$r[1].')';
+						$tv = 'table_valeur(%s, '.var_export($r[1],true).')';
 					$sortfunc .= '
 					$a = '.sprintf($tv,'$aa').';
 					$b = '.sprintf($tv,'$bb').';
