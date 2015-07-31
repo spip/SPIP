@@ -37,7 +37,7 @@ function exec_documenter_dist()
 		$editable = (is_array($droits) AND $droits[$row['id_rubrique']]);
 		if (!$editable) {
 			if ($row['statut'] == 'prepa' OR $row['statut'] == 'prop')
-				$editable = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id AND id_auteur=$id_auteur"));
+				$editable = spip_num_rows(auteurs_article($id_article, " AND id_auteur=$id_auteur"));
 		}
 	}
 	if (!$editable) {
