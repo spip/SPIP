@@ -109,8 +109,9 @@ function pipeline($action, $val=null) {
 				spip_log("fichier $charger pas cree");
 		}
 
-		if ($ok)
+		if ($ok) {
 			include_once $charger;
+		}
 	}
 
 	// appliquer notre fonction si elle existe

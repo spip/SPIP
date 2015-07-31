@@ -314,7 +314,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// charger_plugins_fonctions.php
 	foreach(array('options','fonctions') as $charge){
 		$s = "";
-		//$s .= "error_reporting(SPIP_ERREUR_REPORT_INCLUDE_PLUGINS);\n";
 		$splugs = "";
 		if (is_array($infos)){
 			foreach($ordre as $p){
@@ -345,7 +344,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				}
 			}
 		}
-		//$s .= "error_reporting(SPIP_ERREUR_REPORT);\n";
 		if ($charge=='options'){
 			$s .= "function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}\n";
 			$s .= "function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}\n";
@@ -501,7 +499,9 @@ function desinstalle_un_plugin($plug,$infos){
 	// faire les include qui vont bien
 	foreach($infos['install'] as $file){
 		$file = trim($file);
-		@include_once(_DIR_PLUGINS."$plug/$file");
+		if (file_exists(_DIR_PLUGINS."$plug/$file")){
+			include_once(_DIR_PLUGINS."$plug/$file");
+		}
 	}
 	$prefix_install = $infos['prefix']."_install";
 	if (function_exists($prefix_install)){
