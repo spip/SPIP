@@ -73,17 +73,23 @@ function barre_demande(debut,milieu,fin,affich,champ) {
 
 function barre_inserer(text,champ) {
 	var txtarea = champ;
-	
-	if (txtarea.createTextRange && txtarea.caretPos) {
-		var caretPos = txtarea.caretPos;
-		caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? caretPos.text + text + ' ' : caretPos.text + text;
+	if( document.selection ){
 		txtarea.focus();
-	} else {
-		//txtarea.value  += text;
-		//txtarea.focus();
-		mozWrap(txtarea, '', text);
-		return;
-	}
+		var r = document.selection.createRange();
+		if (r == null) {
+			txtarea.selectionStart = txtarea.value.length;
+			txtarea.selectionEnd = txtarea.selectionStart;
+		}
+		else {
+			var re = txtarea.createTextRange();
+			var rc = re.duplicate();
+			re.moveToBookmark(r.getBookmark());
+			rc.setEndPoint('EndToStart', re);
+			txtarea.selectionStart = rc.text.length;
+			txtarea.selectionEnd = rc.text.length + r.text.length;
+		}
+	} 
+	mozWrap(txtarea, '', text);
 }
 
 
