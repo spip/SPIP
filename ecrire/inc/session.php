@@ -255,19 +255,16 @@ function fichier_session($alea, $tantpis=false) {
 		$GLOBALS['meta'][$alea]  = sql_getfetsel('valeur', 'spip_meta', "nom=" . sql_quote($alea), '','', '', '', '', 'continue');
 	}
 
-	if (!$GLOBALS['meta'][$alea] AND !$tantpis) {
-		spip_log("fichier session ($tantpis): $alea indisponible");
-		include_spip('inc/minipres');
-		echo minipres();
-	} else {
-
-		$repertoire = _DIR_SESSIONS;
-		if(!@file_exists($repertoire)) {
-			if ($tantpis) return '';
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-			include_spip('inc/flock');
-			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
+	if (!$GLOBALS['meta'][$alea]) {
+		if (!$tantpis) {
+			spip_log("fichier session ($tantpis): $alea indisponible");
+			include_spip('inc/minipres');
+			echo minipres();
 		}
+		return ''; // echec mais $tanpis
+	}
+	else {
+		$repertoire = sous_repertoire(_DIR_SESSIONS,'',false,$tantpis);
 		$c = $_COOKIE['spip_session'];
 		return $repertoire . intval($c) .'_' . md5($c.' '.$GLOBALS['meta'][$alea]). '.php';
 	}
