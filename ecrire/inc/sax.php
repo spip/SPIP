@@ -176,8 +176,7 @@ xml_set_processing_instruction_handler($xml_parser, array($phraseur_xml, 'PiElem
 xml_set_default_handler($xml_parser, array($phraseur_xml, "defautElement"));
 xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, false);
 
-function spip_sax($page)
-{
+function inc_sax_dist($page) {
 	global $phraseur_xml, $xml_parser, $xhtml_error;
 	$res = $phraseur_xml->xml_parsestring($xml_parser, $page);
 	if ($res[0] != '<')

@@ -25,7 +25,7 @@ if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
 } else {
 	include_ecrire ("inc_session");
-	$var_auth = include_fonction('auth');
+	$var_auth = include_fonction('auth', 'inc');
 	if (!$var_auth()) exit;
 }
 

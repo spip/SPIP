@@ -32,7 +32,7 @@ function acces_restreint_rubrique($id_rubrique) {
 }
 
 
-function exec_auth_dist() {
+function inc_auth_dist() {
 	global $_POST, $_GET, $_COOKIE, $_SERVER;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 
