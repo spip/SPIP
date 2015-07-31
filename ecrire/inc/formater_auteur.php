@@ -24,7 +24,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@inc_formater_auteur_dist
-function inc_formater_auteur_dist($id_auteur, $script_edition = 'auteurs_infos') {
+function inc_formater_auteur_dist($id_auteur, $script_edition = 'auteur_infos') {
 
   global $connect_id_auteur, $spip_lang_rtl, $connect_statut;
 
