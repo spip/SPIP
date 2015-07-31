@@ -165,7 +165,7 @@ function exec_admin_plugin_dist($retour='') {
 			var prefix = li.find('input.checkbox').attr('name');
 			if (!jQuery('div.details',li).html()) {
 				jQuery('div.details',li).prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), {}, function(){
+					jQuery(this).attr('href').replace(/admin_plugin|plugins/, 'info_plugin'), function(){
 						li.addClass('on');
 					}
 				);
