@@ -60,7 +60,7 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$s .= " <span class='version'>".$info['version']."</span>";
 	$s .= " <span class='etat'> - ".plugin_etat_en_clair($info['etat'])."</span>";
 	$s .= "<div class='short'>".couper($desc,60)."</div>";
-	if (isset($info['icon'])) {
+	if (isset($info['icon']) and $info['icon']) {
 		include_spip("inc/filtres_images_mini");
 		$s.= "<div class='icon'><a href='$url_stat' rel='info'>".image_reduire($dir_plugins.$plug_file.'/'.trim($info['icon']), 32)."</a></div>";
 	}
