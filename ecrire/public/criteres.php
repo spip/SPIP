@@ -1388,8 +1388,6 @@ function critere_datasource($idb, &$boucles, $crit) {
 	$boucle->hash .= '
 	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
 	$command[\'sourcemode\'] = '.calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent).';';
-	$boucle->where['sourcemode'] = '$command[\'sourcemode\']';
-	$boucle->where['source'] = '$command[\'source\']';
 }
 
 
@@ -1403,7 +1401,6 @@ function critere_args_dist($idb, &$boucles, $crit) {
 		$boucle->hash .= '
 			$command[\'args\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
 	}
-	$boucle->where['args'] = '$command[\'args\']';
 }
 
 /*
@@ -1416,7 +1413,6 @@ function critere_liste_dist($idb, &$boucles, $crit) {
 		$boucle->hash .= '
 			$command[\'liste\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
 	}
-	$boucle->where['liste'] = '$command[\'liste\']';
 }
 
 /*
@@ -1429,7 +1425,6 @@ function critere_datapath_dist($idb, &$boucles, $crit) {
 		$boucle->hash .= '
 			$command[\'datapath\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
 	}
-	$boucle->where['datapath'] = '$command[\'datapath\']';
 }
 
 ?>
