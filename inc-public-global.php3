@@ -3,7 +3,8 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
-
+global $flag_ecrire;
+define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
 
 //
 // Aller chercher la page dans le cache ou pas
@@ -37,8 +38,8 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		// qu'il faut changer d'invalideur a la prochaine lecture et donner
 		// un invalideur 't' dans 1 heure
 		// NB: cet invalideur connait aussi la taille du fichier
-		#spip_log("cache" . $page['process_ins']);
 		if (@file_exists($chemin_cache)) {
+
 			$bedtime = time() + 3600;
 			$taille = @filesize($chemin_cache);
 			$fichier = addslashes($chemin_cache);
@@ -284,11 +285,21 @@ function admin_page($cached, $texte) {
 	return false; // pas de boutons admin
 }
 
+// Pour les documents comme pour les logos, le filtre |fichier donne
+// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+// remarquable, mais a conserver pour compatibilite ascendante.
+// -> http://www.spip.net/fr_article901.html
+
+function calcule_fichier_logo($on) {
+  $r= ereg_replace("^" . _DIR_IMG, "", $on);
+  spip_log("calculer_fihchier_logo $on $r");
+  return $r;
+}
+
 function cherche_image_nommee($nom) {
-	$dossier = 'IMG';
 	$formats = array ('gif', 'jpg', 'png');
 	while (list(, $format) = each($formats)) {
-		$d = "$dossier/$nom.$format";
+		$d = _DIR_IMG . "$nom.$format";
 		if (@file_exists($d))
 			return ($d);
 	}

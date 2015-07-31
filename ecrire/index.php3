@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_calendrier.php");
-
+define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
 if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
 
@@ -60,7 +60,7 @@ if ($spip_display != 4) {
 			if ($taille) {
 				$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
 			}
-			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'><img src='../IMG/$fichier$fid' $taille_html border='0' alt='' /></a></div>";
+			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'><img src='" . _DIR_IMG . "$fichier$fid' $taille_html border='0' alt='' /></a></div>";
 		}
 	}
 	echo "<div class='verdana1'>";

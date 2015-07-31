@@ -8,7 +8,33 @@ include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
+global $flag_ecrire;
+define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
 
+function creer_repertoire_documents($nom) {
+# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
+	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
+}
+
+function effacer_repertoire_documents($nom) {
+	$d = opendir(_DIR_IMG . $nom);
+	while ($f = readdir($d)) {
+		if (is_file($f = _DIR_IMG . "$nom/$f")) @unlink($f);
+		}
+}
+
+function scinder_repertoire_documents($nom) {
+  eregi('^' . _DIR_IMG . '(.*/)?([^\./]+)\.([a-z0-9]+)$', $nom, $regs);
+  return $regs;
+}
+
+function effacer_document($nom) {
+	// Securite
+	if (strstr($nom, "..")) {
+		exit;
+	}
+	@unlink(_DIR_IMG . $nom);
+}
 
 $taille_preview = lire_meta("taille_preview");
 if ($taille_preview < 10) $taille_preview = 120;
@@ -19,21 +45,21 @@ if ($test_vignette) {
 	if ($test_vignette == "gd1") {
 		$gd_formats = Array();
 		if (function_exists('ImageCreateFromJPEG')) {
-			$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
+			$srcImage = @ImageCreateFromJPEG(_DIR_IMG . "test.jpg");
 			if ($srcImage) {
 				$gd_formats[] = "jpg";
 				ImageDestroy( $srcImage );
 			}
 		}
 		if (function_exists('ImageCreateFromGIF')) {
-			$srcImage = @ImageCreateFromGIF("IMG/test.gif");
+			$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
 			if ($srcImage) {
 				$gd_formats[] = "gif";
 				ImageDestroy( $srcImage );
 			}
 		}
 		if (function_exists('ImageCreateFromPNG')) {
-			$srcImage = @ImageCreateFromPNG("IMG/test.png");
+			$srcImage = @ImageCreateFromPNG(_DIR_IMG . "test.png");
 			if ($srcImage) {
 				$gd_formats[] = "png";
 				ImageDestroy( $srcImage );
@@ -48,8 +74,10 @@ if ($test_vignette) {
 	// et maintenant envoyer la vignette de tests
 	if (ereg("^(gd1|gd2|imagick|convert)$", $test_vignette)) {
 		include_ecrire('inc_logos.php3');
-		if ($preview = creer_vignette('IMG/test_image.jpg', $taille_preview, $taille_preview, 'jpg', "IMG/test_$test_vignette", $test_vignette, true))
-			@header('Location: IMG/test_'.$test_vignette.'.'.$preview['format']);
+		$loc =_DIR_IMG . "test_$test_vignette";
+		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg',
+					      $taille_preview, $taille_preview, 'jpg', $loc, $test_vignette, true))
+			@header("Location: $m." . $preview['format']);
 	}
 	exit;
 }
@@ -154,7 +182,7 @@ function ajout_image($source, $dest) {
 		exit;
 	}
 
-	$loc = "IMG/$dest";
+	$loc = _DIR_IMG . $dest;
 	if (!deplacer_fichier_upload($source, $loc)) return;
 
 	// analyse le type de l'image (on ne fait pas confiance au nom de
@@ -210,9 +238,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	//
 	// Recopier le fichier
 	//
-	$dest = 'IMG/';
-	if (creer_repertoire('IMG', $ext))
-		$dest .= $ext.'/';
+	$dest = creer_repertoire_documents($ext);
 	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
 	$n = 0;
 	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
@@ -282,9 +308,16 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if ($mode == 'document' AND lire_meta('creer_preview') == 'oui'
 	AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
 		include_ecrire('inc_logos.php3');
-		if (eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $dest_path, $regs)) {
-			$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';
-			creer_vignette($dest_path, lire_meta('taille_preview'), lire_meta('taille_preview'), 'jpg', $destination, 'AUTO', true);
+		$regs = scinder_repertoire_documents($dest_path);
+		if ($regs) {
+			$d = lire_meta('taille_preview');
+			creer_vignette($dest_path, 
+				       $d,
+				       $d,
+				       'jpg', 
+				       creer_repertoire_documents('vignettes').$regs[2].'-s',
+				       'AUTO',
+				       true);
 		}
 	}
 	return $id_document;
@@ -310,10 +343,9 @@ if ($ajout_doc == 'oui') {
 	if (eregi("\.zip$",$image_name) AND !$action_zip){
 		// Pretraitement des fichiers ZIP
 		// Recopier le fichier
-		creer_repertoire('IMG', "tmp");
-		creer_repertoire('IMG', "tmp_zip");
+		creer_repertoire_documents("tmp");
+		$dest = creer_repertoire_documents("tmp_zip");
 		
-		$dest = 'IMG/tmp_zip/';
 		$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($image_name)))));
 		$dest .= ".zip";
 		$n = 0;
@@ -321,7 +353,7 @@ if ($ajout_doc == 'oui') {
 			exit;
 
 
-		$image_name = "$dest";
+		$image_name = $dest;
 
 		require_once('ecrire/pclzip.lib.php');
 		$zip = new PclZip($image_name);
@@ -404,8 +436,9 @@ if ($ajout_doc == 'oui') {
 		
 			require_once('ecrire/pclzip.lib.php');
   			$archive = new PclZip($image_name);
-			$list = $archive->extract(PCLZIP_OPT_PATH, "IMG/tmp", PCLZIP_OPT_REMOVE_ALL_PATH);
-			$image_name = "IMG/tmp";
+			$image_name = _DIR_IMG . "tmp";
+			$list = $archive->extract(PCLZIP_OPT_PATH, $image_name, PCLZIP_OPT_REMOVE_ALL_PATH);
+
 			$effacer_tmp = true;
 		}
 	}
@@ -435,16 +468,11 @@ if ($ajout_doc == 'oui') {
 	
 	
 	if ($effacer_tmp) {
-		$d = opendir("IMG/tmp");
-		while ($f = readdir($d)) {
-			if (is_file("IMG/tmp/$f")) @unlink("IMG/tmp/$f");
-		}
-		$d = opendir("IMG/tmp_zip");
-		while ($f = readdir($d)) {
-			if (is_file("IMG/tmp_zip/$f")) @unlink("IMG/tmp_zip/$f");
-		}
+	  effacer_repertoire_documents('tmp');
+	  effacer_repertoire_documents('tmp_zip');
+
 	}
-}
+ }
 
 
 // joindre un document
@@ -464,14 +492,10 @@ if ($ajout_logo == "oui") {
 // supprimer un logo
 //
 if ($image_supp) {
-	// Securite
-	if (strstr($image_supp, "..")) {
-		exit;
-	}
 	if (!verifier_action_auteur("supp_image $image_supp", $hash, $hash_id_auteur)) {
 		exit;
 	}
-	@unlink("IMG/$image_supp");
+	effacer_document($image_supp);
 }
 
 
@@ -637,11 +661,12 @@ if ($doc_supp) {
 if ($vignette) {
 	// securite
 	$fichier_vignette = '';
-	if (eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $vignette, $regs)) {
+	$regs = scinder_repertoire_documents($vignette);
+	if ($regs) {
 		$source = $regs[0];
 		$format = $regs[3];
 		include_local('inc-cache.php3');
-		$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';	// adresse new style
+		$destination = creer_repertoire_documents('vignettes').$regs[2].'-s';	// adresse new style
 
 		if (lire_meta("creer_preview") == 'oui') {
 			$taille_preview = lire_meta("taille_preview");

@@ -5,6 +5,9 @@
 if (defined("_ECRIRE_INC_DOCUMENTS")) return;
 define("_ECRIRE_INC_DOCUMENTS", "1");
 
+global $flag_ecrire;
+define('_DIR_IMG_ICONES', ($flag_ecrire ? "../" : "")."IMG/icones/");
+define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
 include_ecrire ("inc_objet.php3");
 include_ecrire ("inc_admin.php3");
 
@@ -14,46 +17,27 @@ include_ecrire ("inc_admin.php3");
 //
 
 function vignette_par_defaut($type_extension) {
-#	$img = dir_img() . "icones";
-	if ($GLOBALS['flag_ecrire'])
-		$img = "../IMG/icones";
-	else
-		$img = "IMG/icones";
 
-	$filename = "$img/$type_extension";
+	$filename = _DIR_IMG_ICONES . "$type_extension";
 
 	// Glurps !
-	if (@file_exists($filename.'.png')) {
-		$vig = "$filename.png";
-	}
-	else if (@file_exists($filename.'.gif')) {
-		$vig = "$filename.gif";
-	}
-	else if (@file_exists($filename.'-dist.png')) {
-		$vig = "$filename-dist.png";
-	}
-	else if (@file_exists($filename.'-dist.gif')) {
-		$vig = "$filename-dist.gif";
-	}
-	else if (@file_exists("$img/defaut.png")) {
-		$vig = "$img/defaut.png";
-	}
-	else if (@file_exists("$img/defaut.gif")) {
-		$vig = "$img/defaut.gif";
-	}
-	else if (@file_exists("$img/defaut-dist.png")) {
-		$vig = "$img/defaut-dist.png";
-	}
-	else if (@file_exists("$img/defaut-dist.gif")) {
-		$vig = "$img/defaut-dist.gif";
-	}
+	// je dirais meme plus: Glurps ! (esj)
+	if (!@file_exists($v = $filename.'.png'))
+	if (!@file_exists($v = $filename.'.gif'))
+	if (!@file_exists($v = $filename.'-dist.png'))
+	if (!@file_exists($v = $filename.'-dist.gif'))
+	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut.png")) 
+	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut.gif")) 
+	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut-dist.png")) 
+	if (!@file_exists($v = _DIR_IMG_ICONES . "/defaut-dist.gif")) 
+	$v = _DIR_IMG_ICONES . "/defaut-dist.gif";
 
-	if ($size = @getimagesize($vig)) {
+	if ($size = @getimagesize($v)) {
 		$largeur = $size[0];
 		$hauteur = $size[1];
 	}
 
-	return array($vig, $largeur, $hauteur);
+	return array($v, $largeur, $hauteur);
 }
 
 
@@ -236,7 +220,7 @@ function integre_image($id_document, $align, $type_aff) {
 				// verifier l'existence du fichier correspondant
 				$path = ($flag_ecrire?'../':'').$fichier_vignette;
 				if (!@file_exists($path) AND
-				(!$flag_ecrire OR !@file_exists('../IMG/test.jpg')))
+				(!$flag_ecrire OR !@file_exists(_DIR_IMG . 'test.jpg')))
 					$url_fichier_vignette = '';
 			}
 		}
@@ -245,7 +229,6 @@ function integre_image($id_document, $align, $type_aff) {
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
 		}
-
 
 		// si pas de vignette, utiliser la vignette par defaut
 		// ou essayer de creer une preview (images)
@@ -321,6 +304,7 @@ function integre_image($id_document, $align, $type_aff) {
 		}
 		else $retour = $vignette;
 	}
+#	spip_log("$path $url_fichier_vignette $type_aff $retour");
 	return $retour;
 }
 

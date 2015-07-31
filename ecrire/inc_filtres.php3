@@ -527,50 +527,12 @@ function date_iso($date_heure) {
 	return gmdate("Y-m-d\TH:i:s\Z", $time);
 }
 
-//
-// Reduire la taille d'un logo
-// [(#LOGO_ARTICLE||reduire_image{100,60})]
-//
-
 function reduire_image($img, $taille = 120, $taille_y=0) {
-	include_ecrire('inc_logos.php3');
-	include_local('inc-cache.php3');
-
-	if (!$taille_y)
-		$taille_y = $taille;
-
+  spip_log("reduire: $img, $taille");
 	if (!$img) return;
-
-	// recuperer le nom du fichier
-	if (eregi("src=\'([^']+)\'", $img, $regs)) $logo = $regs[1];
-	if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
-	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
-	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
-
-	if (!$logo)
-		$logo = $img; // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
-
-	$logo = 'IMG/'.ereg_replace('(../|IMG/)', '', $logo);
-
-	if (@file_exists($logo) AND eregi("IMG/(.*)\.(jpg|gif|png)$", $logo, $regs)) {
-		$nom = $regs[1];
-		$format = $regs[2];
-		$cache_folder= 'IMG/'.creer_repertoire('IMG', 'cache-'.$taille.'x'.$taille_y);
-		$destination = $cache_folder.$nom.'-'.$taille.'x'.$taille_y;
-
-		if ($preview = creer_vignette($logo, $taille, $taille_y, $format, $destination)) {
-			$vignette = $preview['fichier'];
-			$width = $preview['width'];
-			$height = $preview['height'];
-			return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
-		}
-		else if ($taille_origine = @getimagesize("IMG/$logo")) {
-			list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-			return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
-		}
-	}
+	include_ecrire('inc_logos.php3');
+	reduire_image_logo($img, $taille, $taille_y);
 }
-
 
 //
 // Recuperation de donnees dans le champ extra

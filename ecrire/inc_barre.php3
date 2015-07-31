@@ -3,6 +3,8 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_BARRE")) return;
 define("_INC_BARRE", "1");
+global $flag_ecrire;
+define('_DIR_IMG_ICONES_BARRE', ($flag_ecrire ? "../" : "")."IMG/icones_barre/");
 
 //include_ecrire ("inc_layers.php3"); // (pour memoire)
 
@@ -42,7 +44,9 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	$champhelp = "document.$formulaire.helpbox$texte";
 	$retour = "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\"";
 	if (!$flag_ecrire) $retour .= " onMouseOver=\"helpline('".addslashes(attribut_html($help))."',$champhelp)\" onMouseOut=\"helpline('".attribut_html(_T('barre_aide'))."', $champhelp)\"";
-	$retour .= "><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16' align='middle' /></a>";
+	$retour .= "><img src='".
+	  _DIR_IMG_ICONES_BARRE .
+	  $img."' border='0' height='16' width='16' align='middle' /></a>";
 	return $retour;
 }
 

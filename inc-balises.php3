@@ -543,7 +543,7 @@ function calcul_balise_logo ($p) {
 		$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
 
 	// analyser les filtres
-	$flag_fichier = 'false';
+	$flag_fichier = false;
 	$filtres = '';
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $nom) {
@@ -594,40 +594,35 @@ function calcul_balise_logo ($p) {
 		// supprimer les '' disgracieux
 		$code_lien = ereg_replace("^''\.|\.''$", "", $code_lien);
 	}
-	if (!$code_lien)
-		$code_lien = "''";
 
-	switch ($suite_logo) {
-		case '_NORMAL':
-			$onoff = 'true, false';
-			break;
-		case '_SURVOL':
-			$onoff = 'false, true';
-			break;
-		case '':
-		default:
-			$onoff = 'true, true';
-			break;
+	if ($flag_fichier)
+	  $code_lien = "'',''" ; 
+	else {
+		if (!$code_lien)
+			$code_lien = "''";
+		$code_lien .= ", '". addslashes($align) . "'";
 	}
 
 	// cas des documents
-	if ($type_objet == 'DOCUMENT')
+	if ($type_objet == 'DOCUMENT') {
 		$code_logo = "calcule_document($_id_objet, '" .
 			$p->documents .
-			'\', $doublons)';
-	else
-		$code_logo = "cherche_logo_objet('$type_objet',
-			$_id_objet, $onoff)";
-
-	// cas des logo #BREVE_RUBRIQUE et #ARTICLE_RUBRIQUE
-	if ($suite_logo == '_RUBRIQUE') {
-		$_id_rubrique = champ_sql("id_rubrique", $p);
-		$code_logo = "(\$logo = $code_logo) ? \$logo : ".
-		"cherche_logo_objet('RUBRIQUE', $_id_rubrique, $onoff)";
+		  '\', $doublons)';
+		if ($flag_fichier)
+		  $p->code = "calcule_fichier_logo($code_logo)";
+		else
+		  $p->code = "affiche_logos($code_logo, '', $code_lien)";
 	}
-
-	$p->code = "affiche_logos($code_logo, $code_lien, '$align', $flag_fichier)";
-
+	else {
+	  $p->code = "calcule_logo('$type_objet', '" .
+	    (($suite_logo == '_SURVOL') ? 'off' : 'on') .
+	    "', $_id_objet," .
+	    (($suite_logo == 'RUBRIQUE') ? 
+	     champ_sql("id_rubrique", $p) :
+	     "''") .
+	    ", $code_lien, '$flag_fichier')";
+	}
+	  spip_log($p->nom_champ . $type_objet . "'$flag_fichier'" . $p->code);
 	$p->statut = 'php';
 	return $p;
 }

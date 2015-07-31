@@ -28,75 +28,37 @@ tester_variable('espace_images',3);
 // Retrouver le logo d'un objet (et son survol)
 //
 
-
-function cherche_image($id_objet, $type_objet) {
-	// cherche l'image liee a l'objet
-	$on = cherche_image_nommee($type_objet.'on'.$id_objet);
-
-	// cherche un survol
-	$off =(!$on ? '' :
-	cherche_image_nommee($type_objet.'off'.$id_objet));
-
-	if (!$on)
-		return false;
-
-	return array($on, $off);
-}
-
-function cherche_logo_objet ($type, $id_objet, $on = false, $off = false, $flag_fichier=false) {
-
-	# spip_log("cherche logo $type $id_objet $on $off $flag_fichier");
-	switch($type) {
-		case 'ARTICLE':
-			$logo = cherche_image($id_objet, 'art');
-			break;
-		case 'AUTEUR':
-			$logo = cherche_image($id_objet, 'aut');
-			break;
-		case 'BREVE':
-			$logo = cherche_image($id_objet, 'breve');
-			break;
-		case 'SITE':
-			$logo = cherche_image($id_objet, 'site');
-			break;
-		case 'MOT':
-			$logo = cherche_image($id_objet, 'mot');
-			break;
-		// recursivite
-		case 'RUBRIQUE':
-			if (!($logo = cherche_image ($id_objet, 'rub'))
-			AND $id_objet > 0)
-				$logo = cherche_logo_objet('RUBRIQUE',
-				sql_parent($id_objet), true, true);
-			break;
-		default:
-			spip_log("cherche_logo_objet: type '$type' inconnu");
-	}
-
-	// Quelles images sont demandees ?
-	if (!$on) unset($logo[0]);
-	if (!$off) unset($logo[1]);
-
-	if ($logo[0] OR $logo[1])
-		return $logo;
+function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
+  $table_logos = array (
+	'ARTICLE' => 'art',
+	'AUTEUR' =>  'aut',
+	'BREVE' =>  'breve',
+	'MOT' => 'mot',
+	'RUBRIQUE' => 'rub',
+	'SITE' => 'site'
+);
+  $type = $table_logos[$type];
+#  spip_log("$type, $onoff, $id, $id_rubrique, $lien, $align");
+  while ($id) {
+    $on = cherche_image_nommee($type . $onoff . $id);
+    if ($on) 
+      return ($ff ? calcule_fichier_logo($on) :
+	      affiche_logos($on, 
+			    (($onoff == 'off') ? '' : 
+			     cherche_image_nommee($type . 'off' . $id)),
+			    $lien,
+			    $align));
+    else if ($id_rubrique)
+      {$type = 'rub'; $id = $id_rubrique; $id_rubrique = 0;}
+    else if ($type = 'rub') $id = sql_parent($id);
+  }
+  return '';
 }
 
 // Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
-function affiche_logos($logo, $lien, $align, $flag_fichier) {
+function affiche_logos($arton, $artoff, $lien, $align) {
 	global $num_survol;
 	global $espace_logos;
-
-	list($arton,$artoff) = $logo;
-
-	// Pour les documents comme pour les logos, le filtre |fichier donne
-	// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
-	// remarquable, mais a conserver pour compatibilite ascendante.
-	// -> http://www.spip.net/fr_article901.html
-	if ($flag_fichier) {
-		$on = ereg_replace("^IMG/","",$arton);
-		$off = ereg_replace("^IMG/","",$artoff);
-		return $on ? $on : $off;
-	}
 
 	$num_survol++;
 	if ($arton) {
@@ -240,7 +202,7 @@ function calcul_branche ($generation) {
 
 function calcule_document($id_document, $doubdoc, &$doublons){
   if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
-  return (array(integre_image($id_document, '', 'fichier_vignette'), ''));
+  return integre_image($id_document, '', 'fichier_vignette');
 }
 
 
@@ -343,8 +305,8 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
 		$row = spip_abstract_fetsel(array('lang'),
-					array('rubriques'),
-					array("id_rubrique='$id'"));
+			array('rubriques'),
+			array("id_rubrique='$id'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array ($id, $lang);
@@ -352,8 +314,8 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id  = intval($contexte['id_breve'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-					array('breves'), 
-					array("id_breve='$id'"));
+			array('breves'), 
+			array("id_breve='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -362,12 +324,12 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_syndic'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique'),
-					array('syndic'),
-					array("id_syndic='$id'"));
+			array('syndic'),
+			array("id_syndic='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		$row = spip_abstract_fetsel(array('lang'),
-						array('rubriques'),
-						array("id_rubrique='$id_rubrique_fond'"));
+			array('rubriques'),
+			array("id_rubrique='$id_rubrique_fond'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array($id_rubrique_fond, $lang);
@@ -375,8 +337,8 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_article'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-					array('articles'),
-					array("id_article='$id'"));
+			array('articles'),
+			array("id_article='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
