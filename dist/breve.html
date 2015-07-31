@@ -58,7 +58,7 @@
             <h2><:autres_breves:></h2>
             <ul>
                 <BOUCLE_breves(BREVES) {id_rubrique} {par date}{inverse} {0,10}>
-                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+                <li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_BREVE"[ class="(#EXPOSE)"]>#TITRE</a></li>
                 </BOUCLE_breves>
             </ul>
         </div>

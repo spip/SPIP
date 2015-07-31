@@ -75,7 +75,7 @@
             <h2><:messages_forum:></h2>
             <ul>
                 <BOUCLE_forums_liens(FORUMS) {id_mot} {plat} {par date}{inverse}>
-                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
+                <li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
                 </BOUCLE_forums_liens>
             </ul>
         </div>
