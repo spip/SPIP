@@ -77,8 +77,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 			foreach($infos as $plug=>$info){
 				// definir le plugin, donc le path avant l'include du fichier options
 				// permet de faire des include_ecrire pour attraper un inc_ du plugin
-				if ($charge=='options')
-					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';'."\n";
+				if ($charge=='options'){
+					$prefix = strtoupper(trim(array_pop($info['prefix'])));
+					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';';
+					$splugs .= "define(_DIR_PLUGINS_$prefix,_DIR_PLUGINS.'$plug/');";
+					$splugs .= "\n";
+				}
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
 						$s .= "@include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
