@@ -1,8 +1,8 @@
 <BOUCLE_jour(ARTICLES)
     {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}>[
-(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'jour'})
+(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 1})
 ]</BOUCLE_jour>
-[(#DATE|agenda_memo{'', '', '', 'jour', 'jour'})]
+[(#DATE|agenda_memo{'', '', '', 1, 'jour'})]
 </B_jour>
 <:aucun_article:>
 <//B_jour>
