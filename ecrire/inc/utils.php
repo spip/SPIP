@@ -894,7 +894,9 @@ function spip_initialisation() {
 	define('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
 	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 	define('_DIR_LOGOS', _DIR_RACINE ."IMG/");
-	define('_DIR_POLICES', _DIR_RESTREINT ."polices/");
+
+//	define('_DIR_POLICES', _DIR_RESTREINT ."polices/");
+	define('_DIR_POLICES', "polices/");
 
 	// les fichiers qu'on y met, entre autres
 	define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
