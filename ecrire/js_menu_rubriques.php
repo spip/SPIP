@@ -15,8 +15,7 @@ include_once("inc.php3");
 
 if (http_last_modified(@filemtime("js_menu_rubriques.php"), time() + 24 * 3600)) 
 	exit;
-$charset = lire_meta("charset");
-@header('Content-type: text/javascript; charset=$charset');
+@header('Content-type: text/javascript; charset='.lire_meta('charset'));
 
 function extraire_article($id_p) {
 	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
