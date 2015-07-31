@@ -33,18 +33,19 @@ function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $type='
 
 	$limit = (!$pas AND !$debut) ? '' : (($debut ? "$debut," : "") . $pas);
 
-	$request = sql_select('*', 'spip_signatures', $where, '', $order, $limit);
+	$arg = "debut=$debut&type=$type";
 
 	$res .= "<br />\n";
 	include_spip('inc/urls');
- 	while($row=sql_fetch($request)){
-	  $res .= "<br />\n" . signatures_edit($script, $id, $debut, $row, $type);
-	}
-	return $res;
+	$r = sql_allfetsel('*', 'spip_signatures', $where, '', $order, $limit);
+	foreach($r as $k => $row)
+		$r[$k] = signatures_edit($script, $id, $arg, $row);
+
+	return "<br />\n" . join("<br />\n", $r);
 }
 
 // http://doc.spip.org/@signatures_edit
-function signatures_edit($script, $id, $debut, $row, $type) {
+function signatures_edit($script, $id, $arg, $row) {
 
 	global $spip_lang_right, $spip_lang_left;
 	$id_signature = $row['id_signature'];
@@ -59,8 +60,10 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 	$res = !autoriser('modererpetition', 'article', $id_article) ? '' : true;
 
 	if ($res) {
-		$retour_s = redirige_action_auteur('editer_signatures', $id_signature, $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
-		$retour_a = redirige_action_auteur('editer_signatures', "-$id_signature", $script, "id_article=$id_article&debut=$debut&type=$type#signature$id_signature");
+		if ($id) $arg .= "&id_article=$id_article";
+		$arg .= "#signature$id_signature";
+		$retour_s = redirige_action_auteur('editer_signatures', $id_signature, $script, $arg);
+		$retour_a = redirige_action_auteur('editer_signatures', "-$id_signature", $script, $arg);
 
 		$res = '';
 		if  ($statut=="poubelle"){
