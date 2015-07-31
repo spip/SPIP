@@ -357,6 +357,14 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 		return autoriser_document_voir_dist($faire, $type, $id, $qui, $opt);
 	if ($qui['statut'] == '0minirezo') return true;
 	if ($type == 'auteur') return false;
+	if ($type == 'groupemots') {
+		$acces = sql_fetsel("comite,forum", "spip_groupes_mots", "id_groupe=".intval($id));
+		if ($qui['statut']=='1comite' AND ($acces['comite'] == 'oui' OR $acces['forum'] == 'oui'))
+			return true;
+		if ($qui['statut']=='6forum' AND $acces['forum'] == 'oui')
+			return true;
+		return false;
+	}
 	if ($type != 'article') return true;
 	if (!$id) return false;
 
