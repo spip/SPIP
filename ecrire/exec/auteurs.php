@@ -39,7 +39,9 @@ function exec_auteurs_dist()
 		$recherche = recherche_en_base($cherche, $tables,array('toutvoir'=>true));
 		if ($recherche['auteur'])
 			$recherche = array_keys($recherche['auteur']);
-		else {$recherche = NULL; $cherche = '';}
+		else {
+			$recherche = "aut.id_auteur=0"; // rien trouve !
+		}
 	}
 	$form = formulaire_recherche("auteurs",(($s=_request('statut'))?"<input type='hidden' name='statut' value='$s' />":""));
 	exec_auteurs_args($statut, $tri, $debut, $recherche,$form, $cherche);
@@ -55,6 +57,14 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 
 
 		$recherche = auteurs_tranches(afficher_n_auteurs($auteurs), $debut, $lettre, $tri, $statut, MAX_AUTEURS_PAR_PAGE, $nombre_auteurs,$cherche);
+
+		if ($cherche){
+			if (count($auteurs))
+				$recherche = "<h3>". _T('info_resultat_recherche')." &laquo;$cherche&raquo;</h3>" . $recherche;
+			else
+				$recherche = "<h3>". _T('info_recherche_auteur_zero',array('cherche_auteur'=>$cherche))."</h3>" . $recherche;
+		}
+
 	}
 
 	if (_AJAX) {
@@ -70,7 +80,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 				     "auteurs","redacteurs");
 
 		echo bandeau_auteurs($tri, $visiteurs);
-
+		
 		echo  $trouve, "<br class='nettoyeur' />";
 
 		echo "<div id='auteurs'>", $recherche, "</div>";
