@@ -196,7 +196,7 @@ function surcharger_langue($fichiers) {
 function inc_traduire_dist($ori, $lang) {
 	static $deja_vu = array();
 	static $local = array();
-  
+
 	if (isset($deja_vu[$lang][$ori]))
 		return $deja_vu[$lang][$ori];
 
@@ -213,12 +213,17 @@ function inc_traduire_dist($ori, $lang) {
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	foreach ($modules as $module) {
 		$var = "i18n_".$module."_".$lang;
+
 		if (empty($GLOBALS[$var])) {
 			charger_langue($lang, $module);
-
-			// surcharge perso -- on cherche (lang/)local_xx.php ...
-			if (!isset($local['local_'.$lang]))
-				$local['local_'.$lang] = chercher_module_lang('local', $lang);
+		}
+		// surcharges persos -- on cherche 
+		// (lang/)local_xx.php et/ou (lang/)local.php ...
+		if (!isset($local['local_'.$lang])) {
+			// redéfinir la langue en cours pour les surcharges (chercher_langue a pu le changer)
+			$GLOBALS['idx_lang']= $var;
+			// ... (lang/)local_xx.php
+			$local['local_'.$lang] = chercher_module_lang('local', $lang);
 			if ($local['local_'.$lang])
 				surcharger_langue($local['local_'.$lang]);
 			// ... puis (lang/)local.php
@@ -227,6 +232,7 @@ function inc_traduire_dist($ori, $lang) {
 			if ($local['local'])
 				surcharger_langue($local['local']);
 		}
+
 		if (isset($GLOBALS[$var][$code])) {
 			$text = $GLOBALS[$var][$code];
 			break;
