@@ -721,13 +721,13 @@ function mysql2pg_type($v)
 		str_replace("mediumtext", 'text',
 		preg_replace("/tinytext/i", 'text',
 	  	str_replace("longblob", 'text',
-	  	str_replace("datetime", 'timestamp',
 		str_replace("0000-00-00",'0000-01-01',
-		   preg_replace("/unsigned/i", '', 	
-		   preg_replace("/double/i", 'double precision', 	
-		   preg_replace("/tinyint/i", 'int', 	
-		     preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'bytea', 
-				 preg_replace("/ENUM *[(][^)]*[)]/", "varchar(255)",
+		preg_replace("/datetime/i", 'timestamp',
+		preg_replace("/unsigned/i", '', 	
+		preg_replace("/double/i", 'double precision', 	
+		preg_replace("/tinyint/i", 'int', 	
+		preg_replace("/VARCHAR\(\d+\)\s+BINARY/i", 'bytea', 
+		preg_replace("/ENUM *[(][^)]*[)]/i", "varchar(255)",
 					      $v 
 				 ))))))))))));
 }
