@@ -1446,7 +1446,7 @@ function init_var_mode(){
 							$GLOBALS['var_images'] = true;
 							break;
 						case 'debug':
-							$GLOBALS['var_mode'] = 'calcul';
+							$GLOBALS['var_mode'] = 'debug';
 							// et ne pas enregistrer de cache
 							$GLOBALS['var_nocache'] = true;
 							break;
