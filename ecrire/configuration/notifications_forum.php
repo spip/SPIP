@@ -13,22 +13,31 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/mail');
 include_spip('inc/config');
 
-function configuration_administrateurs_dist()
+function configuration_notifications_forum_dist()
 {
+	global $spip_lang_left;
+
 	$res = "<div class='verdana2'>"
-	. _T('info_forum_ouvert')
-	. "<br />\n"
-	. afficher_choix('forum_prive_admin', $GLOBALS['meta']['forum_prive_admin'],
-		array('oui' => _T('item_activer_forum_administrateur'),
-			'non' => _T('item_desactiver_forum_administrateur')))
-	. "</div>";
+		. _T('info_option_email')
+		. "<br />\n";
 
-	$res = debut_cadre_trait_couleur("forum-admin-24.gif", true, "", _T('titre_cadre_forum_administrateur'))
-	. ajax_action_post('configurer', 'administrateurs', 'config_contenu','',$res)
-	 . fin_cadre_trait_couleur(true);
+	$res .= afficher_choix(
+		'prevenir_auteurs',
+		$GLOBALS['meta']["prevenir_auteurs"],
+		array('oui' => _T('info_option_faire_suivre'),
+			'non' => _T('info_option_ne_pas_faire_suivre')
+		)
+	);
 
-	return ajax_action_greffe('configurer-administrateurs', '', $res);
+	$res .= "</div>\n";
+
+	$res = debut_cadre_trait_couleur("", true, "", _T('info_envoi_forum'))
+	. ajax_action_post('configurer', 'notifications_forum', 'config_contenu','',$res) 
+	. fin_cadre_trait_couleur(true);
+
+	return ajax_action_greffe('configurer-notifications_forum', '', $res);
 }
 ?>

@@ -47,6 +47,7 @@ function exec_config_contenu_dist()
 	$redacteurs = charger_fonction('redacteurs', 'configuration');
 	$visiteurs = charger_fonction('visiteurs', 'configuration');
 	$annonces = charger_fonction('annonces', 'configuration');
+	$notifications_forum = charger_fonction('notifications_forum', 'configuration');
 	$administrateurs = charger_fonction('administrateurs', 'configuration');
 
 // Mode de participation aux forums
@@ -63,6 +64,8 @@ function exec_config_contenu_dist()
 // Activer/desactiver mails automatiques
 //
 	echo  $annonces(), "<br />\n";
+
+	echo  $notifications_forum(), "<br />\n";
 
 // Activer forum admins
 
