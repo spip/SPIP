@@ -84,7 +84,8 @@ function definir_puce() {
 //
 
 
-// XHTML - Preserver les balises-bloc
+// XHTML - Preserver les balises-bloc : on liste ici tous les elements
+// dont on souhaite qu'ils provoquent un saut de paragraphe
 define('_BALISES_BLOCS',
 	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
 	.'t(able|[rdh]|body|foot|extarea)|'
