@@ -1386,6 +1386,15 @@ function maj_base() {
 		maj_version (1.726);
 	}
 
+	if ($version_installee < 1.727) {
+		// occitans : oci_xx -> oc_xx
+		spip_query("UPDATE spip_auteurs SET lang=REPLACE(lang,'oci_', 'oc_') WHERE lang LIKE 'oci_%'");
+		spip_query("UPDATE spip_rubriques SET lang=REPLACE(lang,'oci_', 'oc_') WHERE lang LIKE 'oci_%'");
+		spip_query("UPDATE spip_articles SET lang=REPLACE(lang,'oci_', 'oc_') WHERE lang LIKE 'oci_%'");
+		spip_query("UPDATE spip_breves SET lang=REPLACE(lang,'oci_', 'oc_') WHERE lang LIKE 'oci_%'");
+		maj_version (1.727);
+	}
+
 
 	return true;
 }
