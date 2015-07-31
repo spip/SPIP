@@ -525,6 +525,10 @@ function spip_pg_groupby($groupby, $from, $select)
 	if (!$groupby) return '';
 
 	$groupby = spip_pg_frommysql($groupby);
+	// Ne pas mettre dans le Group-By des valeurs numeriques
+	// issue de prepare_recherche
+	$groupby = preg_replace('/^\s*\d+\s+AS\s+\w+\s*,?\s*/i','', $groupby);
+	$groupby = preg_replace('/,\s*\d+\s+AS\s+\w+\s*/i','', $groupby);
 	$groupby = preg_replace('/\s+AS\s+\w+\s*/i','', $groupby);
 
 	return "\nGROUP BY $groupby"; 
