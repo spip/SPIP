@@ -585,7 +585,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_sites_trouves_dans_texte' => 'Sitios encontrados (en el texto)',
 'info_sous_titre' => 'Subt&iacute;tulo',
 'info_statut_administrateur' => 'Administrador/a',
-'info_statut_auteur' => '<MODIF>Papel de este autor o autora:',
+'info_statut_auteur' => 'Papel de este autor o autora:',
 'info_statut_auteur_a_confirmer' => 'Inscripci&oacute;n por confirmar',
 'info_statut_auteur_autre' => 'Otro papel:',
 'info_statut_efface' => 'Borrado',
