@@ -23,7 +23,10 @@ if (defined("_INC_PUBLIC")) {
 		}
 	}
 
-	include_cache($chemin_cache);
+	include ($chemin_cache);
+	if ($GLOBALS['flag_apc']) {
+		apc_rm($chemin_cache);
+	}
 
 	// ATTENTION : ne marchera pas sous PHP3
 	return;
@@ -35,6 +38,16 @@ define("_INC_PUBLIC", "1");
 $dir_ecrire = 'ecrire/';
 include ("ecrire/inc_version.php3");
 include_local ("inc-cache.php3");
+
+
+//
+// Presence du cookie de visiteur : valider ce cookie et extraire les donnees
+//
+if ($cookie = $HTTP_COOKIE_VARS[spip_session]) {
+	include_ecrire ("inc_session.php3");
+	$visiteur_authentifie = verifie_cookie_session ($cookie);
+} else
+	$visiteur_authentifie = false;
 
 //
 // Ajouter un forum
@@ -132,7 +145,10 @@ if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND 
 
 if (file_exists($chemin_cache)) {
 	if ($lastmodified) @Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
-	include_cache($chemin_cache);
+	include ($chemin_cache);
+	if ($GLOBALS['flag_apc']) {
+		apc_rm($chemin_cache);
+	}
 }
 
 

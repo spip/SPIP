@@ -7,11 +7,17 @@
 	 *
 	 */
 
+	//
+	// Ce fichier ne sera execute qu'une fois
+	if (defined("_ECRIRE_INC_SESSION")) return;
+	define("_ECRIRE_INC_SESSION", "1");
+
 	// cree le cookie correspondant a l'auteur
 	// attention aux trous de securite ;)
 	function cree_cookie_session ($id_auteur) {
 		if ($id_auteur > 0) {
 			$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
+			include_ecrire ("inc_connect.php3");
 			$result = spip_query ($query);
 			if ($auteur = mysql_fetch_object ($result)) {
 				$session = md5($id_auteur . $auteur->pass); // ici creer le numero de session
@@ -30,11 +36,15 @@
 	function verifie_cookie_session ($cookie) {
 		if (list(,$id_auteur,$email,$nom,$session) = decode_cookie_session ($cookie)) {
 			if ($id_auteur > 0) {
+				include_ecrire ("inc_connect.php3");
 				$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
 				$result = spip_query ($query);
 				if ($auteur = mysql_fetch_object ($result)) {
-					if ($session == md5($id_auteur . $auteur->pass))  // ici verifier le num de session dans la base
-						return $auteur->login;
+					if ($session == md5($id_auteur . $auteur->pass)) { // ici verifier le num de session dans la base
+						$auteur->pass = '';		// securite
+						$auteur->htpass = '';
+						return $auteur;
+					}
 				}
 			}
 		}
