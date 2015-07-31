@@ -393,7 +393,7 @@ function extra_update($type, $id, $c = false) {
 		$extra = array_merge($orig, $extra);
 	}
 
-	return serialize($extra);
+	return array_filter($extra) ? serialize($extra) : '';
 }
 
 ?>

@@ -20,7 +20,6 @@ function controles_md5($data, $prefixe='ctr_', $format='html'){
 		return false;
 
 	$ctr = array();
-
 	foreach ($data as $key => $val) {
 		$m = md5($val);
 		$k = $prefixe.$key;
@@ -87,7 +86,8 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 		$ctrq = sql_fetsel($ctrq, $spip_table_objet, "$id_table_objet=$id", $serveur);
 		foreach ($ctr as $key => $m) {
 			if ($m != $ctrq['ctrq_'.$key]
-			AND $champs[$key] !== $ctrq[$key]) {
+			AND $champs[$key] !== $ctrq[$key]
+			AND $ctrq['ctrq_'.$key] !== null) {
 				$conflits[$key] = array(
 					'base' => $ctrq[$key],
 					'post' => $champs[$key]
@@ -96,7 +96,6 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 			}
 		}
 	}
-
 
 	return $conflits;
 }
