@@ -66,6 +66,11 @@ function include_spip($f, $include = true) {
 	return find_in_path($f . '.php', '', $include);
 }
 
+
+function require_spip($f) {
+	return find_in_path($f . '.php', '', 'required');
+}
+
 // un pipeline est lie a une action et une valeur
 // chaque element du pipeline est autorise a modifier la valeur
 //
@@ -717,6 +722,18 @@ function find_in_path ($file, $dirname='', $include=false) {
 				if ($include) include_once $a;
 				return $files[$dirname][$file] = $files[''][$dirname . $file] = $a;
 			}
+		}
+	}
+
+	if ($include){
+		spip_log("include_spip $dirname$file non trouve");
+		if ($include==='required'){
+			echo '<pre>',
+			"<strong>Erreur Fatale</strong><br />";
+			if (function_exists('debug_print_backtrace'))
+				echo debug_print_backtrace();
+			echo '</pre>';
+			die("Erreur interne: ne peut inclure $dirname$file");
 		}
 	}
 }
