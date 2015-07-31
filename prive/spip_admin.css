@@ -45,7 +45,7 @@ a:active.spip-admin-boutons,.spip-admin-boutons a:active { background-color: #cc
 
 
 #debug-profile {font-size:0.8em;position:absolute;top:20px;width:100%;border:1px; background:#eee; padding:20px; filter:alpha(opacity=90); -moz-opacity:0.9; opacity: 0.90; z-index: 1000; text-align: left; }
-#debug-profile > caption {background:#ccc;color:#000;font-size:1.3em;font-weight:bold;padding:7px;}
+#debug-profile > caption {background:#ccf;color:#000;font-size:1.3em;font-weight:bold;padding:7px;}
 #debug-profile > caption table {font-size:0.7em;background:#fff;color:#333;padding:10px;margin-top:10px;}
 #debug-profile > caption table td {border-bottom:1px solid #999;}
 #debug-profile > caption table td.time {padding:0 5px;}
