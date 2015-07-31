@@ -15,12 +15,11 @@ include_ecrire('inc_mail.php3');
 include_ecrire('inc_barre.php3');
 include_ecrire('inc_forum.php3');
 
-if (@file_exists("inc-urls.php3")) {
-	include_local ("inc-urls.php3");
-}
-else {
-	include_local ("inc-urls-dist.php3");
-}
+// Gestionnaire d'URLs
+if (@file_exists("inc-urls.php3"))
+	include_local("inc-urls.php3");
+else
+	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
 
 /*******************************/

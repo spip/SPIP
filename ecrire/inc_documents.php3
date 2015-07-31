@@ -147,15 +147,17 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
 			if ($fichier_vignette) {
-				$vignette = "<img src='$fichier_vignette' border=0";
+				$vignette = "<img src='$fichier_vignette' border='0'";
 				if ($largeur_vignette && $hauteur_vignette)
 					$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 				if ($titre) {
 					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
 					$titre_ko = supprimer_tags(propre($titre_ko));
 					$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
+				}else{
+					$vignette .= " alt=\"\" title=\"\"";
 				}
-				$vignette .= ">";
+				$vignette .= " />";
 			}
 		}
 		
@@ -163,7 +165,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			if ($largeur_vignette < 120) $largeur_vignette = 120;
 			$forcer_largeur = " width = '$largeur_vignette'";
 
-			$retour = "<table cellpadding=0 cellspacing=0 border=0 align='$align'>\n";
+			$retour = "<table cellpadding='0' cellspacing='0' border='0' align='$align'>\n";
 			$retour .= "<tr>";
 			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
 			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
@@ -184,7 +186,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			$retour = $vignette;
 		}
 
-		return $retour;		
+		return $retour;
 
 	}
 }
@@ -232,9 +234,9 @@ function integre_image($id_document, $align, $type_aff) {
 				$hauteur_vignette = $row_vignette['hauteur'];
 
 				// verifier l'existence du fichier correspondant
-				$path = ($flag_ecrire?'../':'') . 
-				  $fichier_vignette;
-				if (!@file_exists($path))
+				$path = ($flag_ecrire?'../':'').$fichier_vignette;
+				if (!@file_exists($path) AND
+				(!$flag_ecrire OR !@file_exists('../IMG/test.jpg')))
 					$url_fichier_vignette = '';
 			}
 		}
@@ -243,6 +245,9 @@ function integre_image($id_document, $align, $type_aff) {
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
 		}
+
+		if ($type_aff=='fichier_vignette')
+			return $url_fichier_vignette;
 
 		// si pas de vignette, utiliser la vignette par defaut
 		// ou essayer de creer une preview (images)
@@ -254,25 +259,28 @@ function integre_image($id_document, $align, $type_aff) {
 			}
 		}
 
-		if ($type_aff=='fichier_vignette')
-			return $url_fichier_vignette;
-
 		if ($url_fichier_vignette) {
-			$vignette = "<img src='$url_fichier_vignette' border=0";
+			$vignette = "<img src='$url_fichier_vignette' border='0'";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre) {
-				$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+				if ($mode == 'document')
+					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+				else
+					$titre_ko = $titre;
 				$titre_ko = supprimer_tags(propre($titre_ko));
 				$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
 			}
-			if  ($type_aff == 'DOC')
-				$vignette .= ">";
+			else
+				$vignette .= ' alt=""';
+
+			if ($type_aff == 'DOC')
+				$vignette .= " />";
 			else {
-				if ($align)
-					$vignette .= " align='$align' hspace='5' vspace='3'>";
+				if ($align && $align != 'center')
+					$vignette .= " align='$align' hspace='5' vspace='3' />";
 				else
-					$vignette .= " align='middle'>";
+					$vignette .= " align='middle' />";
 				if ($align == 'center') $vignette = "<p align='center'>$vignette</p>";
 			}
 		}
@@ -289,30 +297,22 @@ function integre_image($id_document, $align, $type_aff) {
 			}
 			else $type = 'fichier';
 			
-			if ($largeur_vignette < 120) $largeur_vignette = 120;
-			$forcer_largeur = " width = '$largeur_vignette'";
+			if ($align == 'center') 
+				$retour = "<div class='spip_documents' style='margin: auto; text-align: center;'>\n";
+			else 
+				$retour = "<div class='spip_documents' style='float: $align; text-align: center;'>\n";
 
-			$retour = "<table cellpadding='0' cellspacing='0' border='0' align='$align'>\n";
-			$retour .= "<tr>";
-			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
-			
-			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
+			//$retour .= "<tr><td align='center' style='text-align: center;'>";
 			$retour .= $vignette;
 
-			if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
-
-			if ($descriptif) {
-				$alignement = (strlen($descriptif)>200)? 'left':'center';
-				$retour .= "<div style='text-align: $alignement;'>$descriptif</div>"; 
-			}
+			if ($titre) $retour .= "<div class='spip_doc_titre'><strong>$titre</strong></div>";
+			if ($descriptif) $retour .= "<div class='spip_doc_descriptif'>$descriptif</div>";
 
 			if ($mode == 'document')
 				$retour .= "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
 
-			$retour .= "</div>\n</td>";
-			if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
-
-			$retour .= "</tr>\n</table>\n";
+			//$retour .= "</td></tr></table>\n";
+			$retour .= "</div>\n";
 		}
 		else $retour = $vignette;
 	}
@@ -396,9 +396,9 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 	}
 
 	if ($fichier_document)
-		return "<a href='$fichier_document'><img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'></a>\n";
+		return "<a href='$fichier_document'><img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' /></a>\n";
 	else
-		return "<img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'>\n";
+		return "<img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' />\n";
 }
 
 
@@ -1034,7 +1034,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$taille = $document->get('taille');
 	$date = $document->get('date');
 	$mode = $document->get('mode');
-	
+
 	if ($mode != 'document') return;
 
 	if (!$titre) {
@@ -1104,7 +1104,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		$block = "doc_vignette $id_document";
 		list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 		if ($icone) {
-			echo "<a href='$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
+			echo "<a href='$fichier'><img src='$icone' border='0' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
 		}
 		echo "</div>\n";
 		echo "<font size='2'>\n";
@@ -1129,7 +1129,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				echo "<b>"._T('info_vignette_defaut')."</b>";
 
 				echo debut_block_invisible("doc_vignette_gerer $id_document");
-				echo "<font size=1>";
+				echo "<font size='1'>";
 				afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
 				echo "</font>";
 				echo fin_block();
@@ -1175,13 +1175,13 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				$annee = $regs[1];
 			}
 			echo "<b>"._T('info_mise_en_ligne')."</b><br />\n";
-			echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:px;'>";
+			echo "<SELECT NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:px;'>";
 			afficher_jour($jour);
 			echo "</SELECT> ";
-			echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+			echo "<SELECT NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'>";
 			afficher_mois($mois);
 			echo "</SELECT> ";
-			echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+			echo "<SELECT NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'>";
 			afficher_annee($annee);
 			echo "</SELECT><br />";
 		}
@@ -1468,7 +1468,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$block = "doc_vignette $id_document";
 			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
+				echo "<a href='$fichier'><img src='$icone' border='0' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
 			}
 			echo "</div>\n";
 			echo "<font size='2'>\n";
@@ -1492,7 +1492,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 				echo "<b>"._T('info_vignette_defaut')."</b>";
 					
 				echo debut_block_invisible("doc_vignette_gerer $id_document");
-				echo "<font size=1>";
+				echo "<font size='1'>";
 				afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
 				echo "</font>";
 				echo fin_block();
@@ -1505,17 +1505,17 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "</div>";
 
 		if (!ereg(",$id_document,", $doublons)) {
-			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
+			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<b>"._T('info_inclusion_vignette')."</b></br>";
 			}
-			echo "<font color='333333'><div align=left>&lt;doc$id_document|left&gt;</div><div align=center>&lt;doc$id_document|center&gt;</div><div align='right'>&lt;doc$id_document|right&gt;</div></font>\n";
+			echo "<font color='333333'><div align='left'>&lt;doc$id_document|left&gt;</div><div align='center'>&lt;doc$id_document|center&gt;</div><div align='right'>&lt;doc$id_document|right&gt;</div></font>\n";
 			echo "</font></div>";
 
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
+				echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
 				echo "<b>"._T('info_inclusion_directe')."</b></br>";
-				echo "<font color='333333'><div align=left>&lt;emb$id_document|left&gt;</div><div align=center>&lt;emb$id_document|center&gt;</div><div align='right'>&lt;emb$id_document|right&gt;</div></font>\n";
+				echo "<font color='333333'><div align='left'>&lt;emb$id_document|left&gt;</div><div align='center'>&lt;emb$id_document|center&gt;</div><div align='right'>&lt;emb$id_document|right&gt;</div></font>\n";
 				echo "</font></div>";
 			}
 		}
@@ -1525,8 +1525,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		if ($flag_deplie) echo debut_block_visible($block);
 		else  echo debut_block_invisible($block);
 		if (ereg(",$id_document,", $doublons)) {
-			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
-			echo "<div align=center>&lt;doc$id_document&gt;</div>\n";
+			echo "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>";
+			echo "<div align='center'>&lt;doc$id_document&gt;</div>\n";
 			echo "</font></div>";
 		}
 

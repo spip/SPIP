@@ -1,0 +1,17 @@
+###########################################################
+# Fichier .htaccess pour les URLs 'html' ; a installer    #
+# si vous reglez $type_urls='html'                        #
+# dans ecrire/mes_options.php3 ou dans mes_fonctions.php3 #
+# (fichier associe : inc-urls-html.php3)                  #
+###########################################################
+
+RewriteEngine On
+
+### si votre site est en sous-domaine, preciser ci-dessous
+# RewriteBase /sous/domaine/
+
+RewriteRule ^rubrique([0-9]+)\.html$	rubrique.php3?id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]

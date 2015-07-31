@@ -894,6 +894,17 @@ function maj_base() {
 	if ($version_installee < 1.806)
 		maj_version(1.806);
 
+	// URLs propres (lab_version = 0.12)
+	if ($version_installee < 1.807) {
+		foreach (array('articles', 'breves', 'rubriques', 'mots') as $objets) {
+			spip_query("ALTER TABLE spip_$objets
+				ADD url_propre VARCHAR(255) NOT NULL");
+			spip_query("ALTER TABLE spip_$objets
+				ADD INDEX url_propre (url_propre)");
+		}
+		maj_version(1.807);
+	}
+
 
 	#	A remettre pour la 1.8 finale (cf. ci-dessus)
 	#	spip_query("DROP TABLE spip_forum_cache");
