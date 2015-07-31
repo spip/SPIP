@@ -33,6 +33,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function public_styliser_dist($fond, $contexte, $lang='', $connect='') {
 
+	// s'assurer que le fond est licite
+	// car il peut etre construit a partir d'une variable d'environnement
+	if (strpos($fond,"../")!==false OR strncmp($fond,'/',1)==0)
+		$fond = "404";
+  
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique = 0;
 	// Chercher le fond qui va servir de squelette
