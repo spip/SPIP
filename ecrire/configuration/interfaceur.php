@@ -28,8 +28,8 @@ function configuration_interfaceur_dist()
 	. "</div>"
 	. "<div class='verdana2'>"
 	. afficher_choix('interface_mode',$GLOBALS['meta']["interface_mode"] ,
-		array('192' => _L('Utiliser la pr&eacute;sentation traditionelle de SPIP'),
-			'193' => _L('Utiliser les onglets pour pr&eacute;senter les articles')
+		array('' => _L('Utiliser la pr&eacute;sentation traditionnelle de SPIP'),
+			'onglets' => _L('Utiliser les onglets pour pr&eacute;senter les articles')
 			))
 	  . "</div>";
 

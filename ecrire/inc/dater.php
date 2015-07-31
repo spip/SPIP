@@ -80,10 +80,14 @@ onchange=\"findObj_forcer('valider_date').style.visibility='visible';\"";
 		$res = block_parfois_visible('datepub', $invite, $res, 'text-align: left');
 
 	} else {
-		$res = "\n<div style='padding-$spip_lang_left:7px;'><b> <span class='verdana1'>"
-		. _T('texte_date_creation_article')
-		. "</span>\n"
-		. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+		if ($type == 'article')
+			$res = "\n<div style='padding-$spip_lang_left:7px;'><b> <span class='verdana1'>"
+			. _T('texte_date_creation_article')
+			. "</span>\n"
+			. majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+		else
+			$res = "\n<div style='text-align:center;'><b>"
+			. majuscules(affdate($date))."</b></div>";
 	}
 
 	if (($type == 'article')

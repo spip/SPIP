@@ -103,6 +103,11 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	echo meme_rubrique($id_rubrique, $id_syndic, 'syndic');
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
+	echo bloc_des_raccourcis(
+		icone_horizontale(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif", false)
+	);
+
+
 	echo debut_droite('', true);
 
 	if ($syndication == 'off' OR $syndication == 'sus') 
@@ -113,15 +118,12 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	if (strlen($url_affichee) > 40) $url_affichee = substr($url_affichee, 0, 30)."...";
 
 	$actions = 
-		voir_en_ligne('site', $id_syndic, $statut, 'racine-24.gif', false)
-	 . ($flag_editable ? icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif",$spip_lang_right) : "")
-	 . icone_inline(_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif", $spip_lang_left)
-	 . "<div class='nettoyeur'></div>";
+	 ($flag_editable ? icone_inline(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif",$spip_lang_right) : "");
 
 	$haut =
+		"<div class='bandeau_actions'>$actions</div>".
 		gros_titre($nom_site, '' , false)
-	  . "<a href='$url_site' class='url_site'>$url_affichee</a>"
-		. "<div class='bandeau_actions'>$actions</div>";
+	  . "<a href='$url_site' class='url_site'>$url_affichee</a>";
 
 	$onglet_contenu = 
 		(_INTERFACE_ONGLETS?

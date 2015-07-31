@@ -90,7 +90,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 		.  "<br /><span class='spip_xx-large'>"
 		.  $id_mot
 		.  '</span></div>';
-		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false);
+		$out .= voir_en_ligne ('mot', $id_mot, false, 'racine-24.gif', false, false);
 		$out .= fin_boite_info(true);
 
 		// Logos du mot-clef

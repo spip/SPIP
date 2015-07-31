@@ -19,7 +19,7 @@ include_spip('inc/puce_statut');
 
 define('_ACTIVER_PUCE_RAPIDE', true);
 define('_SIGNALER_ECHOS', true);
-define('_INTERFACE_ONGLETS',$GLOBALS['meta']['interface_mode']=='192'?false:true);
+define('_INTERFACE_ONGLETS', $GLOBALS['meta']['interface_mode']==='onglets');
 
 // http://doc.spip.org/@echo_log
 function echo_log($f, $ret) {
@@ -1064,10 +1064,6 @@ function f_boite_infos($flux) {
 	include_spip('public/assembler');
 	$boite .= recuperer_fond("prive/{$type}_infos",$args);
 
-	if (!in_array($type,array('article','rubrique','site','breve'))
-	 && autoriser('previsualiser', $type, $id))
-		$boite .= voir_en_ligne($type, $id, $row['statut'], 'racine-24.gif', false, false);
-
 	$flux['data'] = $boite;
 	return $flux;
 }
@@ -1329,6 +1325,7 @@ function debloquer_article($arg, $texte) {
 // http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $ajax=false)
 {
+	global $spip_lang_right, $spip_lang_left;
 	include_spip('inc/afficher_objets');
 
 	if (!$limit) $limit = 10;
@@ -1365,23 +1362,29 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 		. "'>"
 		. sinon(typo($row['titre']), _T('info_sans_titre'))
 		. "</a>";
-		$retour .= "<tr class='tr_liste' style='background-color: #e0e0e0;'><td>$statut</td><td>$href</td><td style='width: 25%;'>$num</td></tr>";
+
+		// Todo: refaire en css plus sains
+		$retour .= "\n<div>"
+				. "\n<div style='float:$spip_lang_right;width: 32%'>"
+				. $num . "</div>"
+				. "<div style='float:$spip_lang_left; padding-top:1px; width:18px;'>".$statut ."</div>"
+				. "<div style='padding-$spip_lang_left:18px;'>".$href."</div>"
+				. "<div style='clear:both; height: 3px;'></div>"
+				. "</div>";
 	}
 
 	$icone =  '<b>' . _T('info_meme_rubrique')  . '</b>';
-	$bouton = bouton_block_depliable(_T('info_meme_rubrique'),true,'memerub');	
+	$bouton = bouton_block_depliable(_T('info_meme_rubrique'),true,'memerub');
 
 	$retour = 
 		debut_cadre('meme-rubriques',"article-24.gif",'',$bouton)
 		. debut_block_depliable(true,'memerub')
-		. "\n<table style='background-color: #e0e0e0;border: 0px; padding-left:4px; width: 100%;'>"
 		. $retour;
 	
 
 	//	$retour .= (($limit <= 0) ? '' : "<tr><td colspan='3' style='text-align: center'>+ $limit</td></tr>");
 
-	$retour .= "</table>"
-		. fin_block()
+	$retour .= fin_block()
 		. fin_cadre('meme-rubriques');
 
 	if ($ajax) return $retour;
@@ -1434,10 +1437,10 @@ function afficher_hierarchie($id_rubrique) {
 	  //. http_style_background("racine-site-12.gif", $style1)
 	  . "><li><span><$tag class='racine$on'" 
 		. ($tag=='a'?" href='". generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")."'":"")
-	  . ">"._T('lien_racine_site')."</$tag>"
- 	  . aide ("rubhier")
+	  . ">"._T('info_racine_site')."</$tag>"
  	  . "</span>"
 	  . $parents
+ 	  . aide ("rubhier")
  	  . "</li></ul>";
 }
 

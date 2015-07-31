@@ -68,8 +68,9 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	);
 	if (($spip_display != 4) AND $id_breve>0 AND autoriser('publierdans','rubrique',$id_rubrique))
 		$iconifier = charger_fonction('iconifier', 'inc');
-	if ($flag_editable AND ($statut == 'publie'))
-		$dater = charger_fonction('dater', 'inc');
+
+	$dater = charger_fonction('dater', 'inc');
+
 	$editer_mot = charger_fonction('editer_mot', 'inc');
 	if ($champs_extra AND $extra)
 		include_spip('inc/extra');
@@ -98,6 +99,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 		)
 	);
 	echo ($iconifier ? $iconifier('id_breve', $id_breve, 'breves_voir', false) : "");
+
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',
 		array(
@@ -107,11 +109,17 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	);
 	echo meme_rubrique($id_rubrique, $id_breve, 'breve', 'date_heure');
 
+	/* raccourcis ont disparu */
+	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", 0));
+
+
+
+
+
 	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
-	$actions = 
-		voir_en_ligne('breve', $id_breve, $statut, 'racine-24.gif', false)
-	  . ($flag_editable ? icone_inline(
+	$actions = $flag_editable
+		? icone_inline(
 			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
 			!$modif ? _T('icone_modifier_breve')
 				: _T('texte_travail_article', $modif),
@@ -119,34 +127,26 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			!$modif ? "breve-24.gif" : "warning-24.gif",
 			!$modif ? "edit.gif" : '',
 			$GLOBALS['spip_lang_right']
-		) : "")
-	 . icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", $spip_lang_left)
-	 ;
-	/*
-	if (autoriser('publierdans','rubrique',$id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
-		$actions .= icone_inline(_T('icone_refuser_breve'), 
-		      redirige_action_auteur('editer_breve', "$id_breve-statut-refuse", "breves_voir","id_breve=$id_breve"), "breve-24.gif", "supprimer.gif", $spip_lang_right);
-		$actions .= icone_inline(_T('icone_publier_breve'), 
-		      redirige_action_auteur('editer_breve',"$id_breve-statut-publie","breves_voir","id_breve=$id_breve"), "breve-24.gif", "racine-24.gif", $spip_lang_right);
-		echo "</div>";
-	}	*/
-	 
-	$actions .= "<div class='nettoyeur'></div>";
+			)
+		: "";
+
 
 	$haut =
-	   gros_titre($titre,'', false)
-		. "<div class='bandeau_actions'>$actions</div>";
+		"<div class='bandeau_actions'>$actions</div>"
+		. gros_titre($titre,'', false);
 
-	$onglet_contenu = 
-		(($flag_editable AND ($statut !== 'publie')) ? "<p class='breve_prop'>".affdate($date_heure)."</p>" : "")
-		. $afficher_contenu_objet('breve', $id_breve,$row)
-	;
+
+	$onglet_contenu = $afficher_contenu_objet('breve', $id_breve,$row);
 
 	
 
 	$onglet_proprietes = 
 		afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
-		. ($dater ? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure) : "")
+		. ($dater
+			? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure)
+			: ''
+		)
+
 	  . $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
 	  . ((($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) ? langue_breve($id_breve,$row):"")
 	  . pipeline('affiche_milieu',array(

@@ -102,8 +102,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		$icone = $iconifier('id_article', $id_article,'articles', false);
 	} else $icone = '';
 
-	$instituer_article = charger_fonction('instituer_article', 'inc');
-
 	$boite = pipeline ('boite_infos', array('data' => '',
 		'args' => array(
 			'type'=>'article',
@@ -128,22 +126,13 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	changer_typo($row['lang']);
 	
 	$actions = 
-		voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false)
-	 . ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "");
-	 
-	// revisions d'articles
-	if (($GLOBALS['meta']["articles_versions"]=='oui')
-		AND $row['id_version']>1
-		AND autoriser('voirrevisions', 'article', $id_article))
-			$actions .= icone_inline(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", $spip_lang_left);
+	  ($flag_editable ? bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif",$spip_lang_right) : "");
 
-	$actions .= "<div class='nettoyeur'></div>";
-	
 	$haut =
+		"<div class='bandeau_actions'>$actions</div>".
 		(_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($surtitre) . "</b></span>\n")
 		. gros_titre($titre, '' , false)
-		. (_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n")
-		. "<div class='bandeau_actions'>$actions</div>";
+		. (_INTERFACE_ONGLETS?"":"<span $dir_lang class='arial1 spip_medium'><b>" . typo($soustitre) . "</b></span>\n");
 
 	$onglet_contenu =
 	  afficher_corps_articles($id_article,$virtuel,$row);
@@ -162,14 +151,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  ;
 	
 	$onglet_interactivite =
-		// statistiques
-		(($row['statut'] == 'publie'
-		AND $row['visites'] > 0
-		AND $GLOBALS['meta']["activer_statistiques"] != "non"
-		AND autoriser('voirstats', $type, $id)) ?
-		  icone_horizontale(_T('icone_evolution_visites', array('visites' => $row['visites'])), generer_url_ecrire("statistiques_visites","id_article=$id"), "statistiques-24.gif","rien.gif", false)
-		  : "")
-	  . (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"")
+	  (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"")
 		;
 		
 	$onglet_discuter = 
