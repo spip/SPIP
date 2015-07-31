@@ -16,7 +16,6 @@ include_spip('inc/actions');
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
-include_spip('inc/message_select');
 include_spip('inc/autoriser');
 
 
