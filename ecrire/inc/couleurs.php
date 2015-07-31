@@ -26,47 +26,53 @@ function inc_couleurs_dist($choix=NULL)
 1 => array (
 		"couleur_foncee" => "#9DBA00",
 		"couleur_claire" => "#C5E41C",
-#		"couleur_lien" => "#657701",
-#		"couleur_lien_off" => "#A6C113"
+		"couleur_lien" => "#657701",
+		"couleur_lien_off" => "#A6C113"
 		),
 // Violet clair
 2 => array (
 		"couleur_foncee" => "#eb68b3",
 		"couleur_claire" => "#ffa9e6",
-#		"couleur_lien" => "#8F004D",
-#		"couleur_lien_off" => "#BE6B97"
+		"couleur_lien" => "#8F004D",
+		"couleur_lien_off" => "#BE6B97"
 		),
 // Orange
 3 => array (
 		"couleur_foncee" => "#fa9a00",
 		"couleur_claire" => "#ffc000",
-#		"couleur_lien" => "#FF5B00",
-#		"couleur_lien_off" => "#B49280"
+		"couleur_lien" => "#FF5B00",
+		"couleur_lien_off" => "#B49280"
 		),
 // Saumon
 4 => array (
 		"couleur_foncee" => "#CDA261",
 		"couleur_claire" => "#FFDDAA",
-#		"couleur_lien" => "#AA6A09",
-#		"couleur_lien_off" => "#B79562"
+		"couleur_lien" => "#AA6A09",
+		"couleur_lien_off" => "#B79562"
 		),
 //  Bleu pastel
 5 => array (
 		"couleur_foncee" => "#5da7c5",
 		"couleur_claire" => "#97d2e1",
-#		"couleur_lien" => "#116587",
-#		"couleur_lien_off" => "#81B7CD"
+		"couleur_lien" => "#116587",
+		"couleur_lien_off" => "#81B7CD"
 		),
 //  Gris
 6 => array (
 		"couleur_foncee" => "#85909A",
 		"couleur_claire" => "#C0CAD4",
-#		"couleur_lien" => "#3B5063",
-#		"couleur_lien_off" => "#6D8499"
+		"couleur_lien" => "#3B5063",
+		"couleur_lien_off" => "#6D8499"
 		),
 );
 
 	if (is_numeric($choix)) {
+		// Compatibilite ascendente (plug-ins notamment)
+		$GLOBALS["couleur_claire"] = $couleurs_spip[$choix]['couleur_claire'];
+		$GLOBALS["couleur_foncee"] = $couleurs_spip[$choix]['couleur_foncee'];
+		$GLOBALS["couleur_lien"] = $couleurs_spip[$choix]['couleur_lien'];
+		$GLOBALS["couleur_lien_off"] = $couleurs_spip[$choix]['couleur_lien_off'];
+		
 	  return
 	    "couleur_claire=" .
 	    substr($couleurs_spip[$choix]['couleur_claire'],1).

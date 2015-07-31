@@ -94,6 +94,11 @@ if (isset($_GET['set_ecran'])) {
  } else $GLOBALS['spip_ecran'] = isset($_COOKIE['spip_ecran']) ? $_COOKIE['spip_ecran'] : "etroit";
 
 
+// Compatibilie ascendante (notamment plug-ins) : 
+// $couleur_claire et $couleur_foncee passees en variables gloables
+include_spip("inc/couleurs");
+$var = inc_couleurs_dist($GLOBALS['auteur_session']['prefs']['couleur']);
+
 // initialiser a la langue par defaut
 include_spip('inc/lang');
 
