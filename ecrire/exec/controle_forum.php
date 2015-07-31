@@ -41,7 +41,7 @@ function forum_parent($id_forum) {
 	  } else {
 	    $ancre = "forum$id_forum" ;
 	    return array('pref' =>  _T('lien_reponse_article'),
-			 'url' => generer_url_entite($id_article,'article', '',$ancre),
+			 'url' => _DIR_RACINE . generer_url_entite($id_article,'article', '',$ancre, true),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
@@ -53,7 +53,7 @@ function forum_parent($id_forum) {
 	  $id_rubrique = $row['id_rubrique'];
 	  $titre = $row['titre'];
 	  return array('pref' => _T('lien_reponse_rubrique'),
-		       'url' => generer_url_entite($id_rubrique,'rubrique'),
+		       'url' =>  _DIR_RACINE . generer_url_entite($id_rubrique,'rubrique'),
 		       'type' => 'id_rubrique',
 		       'valeur' => $id_rubrique,
 		       'titre' => $titre);
@@ -64,7 +64,7 @@ function forum_parent($id_forum) {
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
 	  return array('pref' => _T('lien_reponse_site_reference'),
-		       'url' => generer_url_ecrire("sites","id_syndic=$id_syndic"),
+		       'url' =>  _DIR_RACINE . generer_url_ecrire("sites","id_syndic=$id_syndic"),
 		       'type' => 'id_syndic',
 		       'valeur' => $id_syndic,
 		       'titre' => $titre);
@@ -82,7 +82,7 @@ function forum_parent($id_forum) {
 			 'titre' => $titre);
 	  } else {
 	    return array('pref' => _T('lien_reponse_breve_2'),
-			 'url' => generer_url_entite($id_breve, 'breve'),
+			 'url' =>  _DIR_RACINE . generer_url_entite($id_breve, 'breve'),
 			 'type' => 'id_breve',
 			 'valeur' => $id_breve,
 			 'titre' => $titre);
@@ -131,41 +131,29 @@ function controle_forum_boucle($row, $args) {
 	$valeur = $r['valeur'];
 	$pref = $r['pref'];
 
-
-	$documents = array();
-	if ($s = sql_select('doc.fichier AS fichier', 'spip_documents AS doc, spip_documents_liens AS lien', 'doc.id_document=lien.id_document AND lien.id_objet='.intval($id_forum)." AND objet='forum'"))
-	while ($t = sql_fetch($s)) {
+	if ($documents = sql_allfetsel('doc.fichier AS fichier', 'spip_documents AS doc, spip_documents_liens AS lien', 'doc.id_document=lien.id_document AND lien.id_objet='.intval($id_forum)." AND objet='forum'")) {
 		include_spip('inc/documents');
-		$documents[] = "<a href='".get_spip_doc($t['fichier'])."'>".basename($t['fichier'])."</a>";
+		foreach ($documents as $k => $t) {
+			$documents[$k] = "<a href='".get_spip_doc($t['fichier'])."'>".basename($t['fichier'])."</a>";
+		}
 	}
-	$documents = join(', ', $documents);
-
-
-	$cadre = "";
-	
-	$controle = "\n<br /><br /><a id='id$id_forum'></a>";
-	
-	$controle .= debut_cadre_thread_forum("", true, "", typo($forum_titre));
 
 	switch($forum_stat) {
 		case 'off':
 		case 'privoff':
-			$controle .= "<div style='border: 2px #ff0000 dashed;'>";
+			$style = " style='border: 2px #ff0000 dashed;'";
 			break;
 		case 'prop':
-			$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
+			$style = " style='border: 2px yellow solid; background-color: white;'";
 			break;
 		case 'spam':
-			$controle .= "<div style='border: 2px black dotted;'>";
+			$style = " style='border: 2px black dotted;'";
 			break;
 		default:
-			$controle .= "<div>";
+			$style = "";
 			break;
 	}
 
-	$controle .= "<div>" .
-	  date_interface($forum_date_heure) .
-	  "</span>";
 	if ($forum_email_auteur) {
 		if (email_valide($forum_email_auteur))
 			$forum_email_auteur = "<a href='mailto:"
@@ -174,36 +162,35 @@ function controle_forum_boucle($row, $args) {
 			."</a>";
 		$forum_auteur .= " &mdash; $forum_email_auteur";
 	}
-	$controle .= safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>");
 
-	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip, 'controle_forum', $args);
-
-	$suite = "\n<br />$avant<b>$pref
-	<a href='$url'>$titre</a></b>"  
+	$suite = "\n<br />$avant<b>$pref\n<a href='$url'>$titre</a></b>"  
 	. "<div>".justifier(propre($forum_texte))."</div>";
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
-	$controle .= safehtml(lignes_longues($suite));
+	$mots = '';
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui") {
-	  $result_mots = sql_select("*", "spip_mots AS mots, spip_mots_forum AS lien", "lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+		$result_mots = sql_select("titre, type", "spip_mots AS mots, spip_mots_forum AS lien", "lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
-
-		while ($row_mots = sql_fetch($result_mots)) {
-			$titre_mot = propre($row_mots['titre']);
-			$type_mot = propre('<b>' . $row_mots['type'] .' :</b>');
-			$controle .= "\n$type_mot $titre_mot";
+		while ($r = sql_fetch($result_mots)) {
+			$mots .= "\n" . propre($r['titre']) . ' '
+			  . propre('<b>' . $r['type'] .' :</b>');
 		}
 	}
 
-	$controle .= $documents;
-
-	$controle .= "</div>\n";
-
-	$controle .= "</div>".fin_cadre_thread_forum(true);
-	return $controle;
+	return 	"\n<div><br /><a id='id$id_forum'></a></div>" .
+	  debut_cadre_thread_forum("", true, "", typo($forum_titre)) .
+	  "<div$style>" .
+	  date_interface($forum_date_heure) .
+	  safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>") .
+	  boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip, 'controle_forum', $args) .
+	  safehtml(lignes_longues($suite)) .
+	  $mots .
+	  join(', ', $documents) .
+	  "</div>".
+	  fin_cadre_thread_forum(true);
 }
 
 //
