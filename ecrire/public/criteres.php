@@ -410,9 +410,10 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	      }
 	  } else $sens ='';
 
-	  $boucle->order[] = ($fct ? "'$fct(' . $order . ')'" : $order)
-	    . $collecte
-	    . $sens;
+	  $t = ($fct ? "'$fct(' . $order . ')'" : $order) . $collecte . $sens;
+	  if (preg_match("/^(.*)'\s*\.\s*'([^']*')$/", $t, $r))
+	      $t = $r[1] . $r[2];
+	  $boucle->order[] = $t;
 	}
 }
 
@@ -436,11 +437,15 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 			$order = "(($critere)?' DESC':'')";
 		}
 
-	    $n = count($boucle->order);
-	    if ($n)
-	      $boucle->order[$n-1] .= " . $order";
-	    else
-	      $boucle->default_order[] =  ' DESC';
+		$n = count($boucle->order);
+		if (!$n)
+			$boucle->default_order[] =  ' DESC';
+		else {
+			$t = $boucle->order[$n-1] . " . $order";
+			if (preg_match("/^(.*)'\s*\.\s*'([^']*')$/", $t, $r))
+				$t = $r[1] . $r[2];
+			$boucle->order[$n-1] = $t;
+		}
 	  }
 }
 
