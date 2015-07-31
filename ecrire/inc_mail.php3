@@ -95,7 +95,6 @@ function nettoyer_caracteres_mail($t) {
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails;
-	include_ecrire('inc_filtres.php3');
 	include_ecrire('inc_charsets.php3');
 
 	if (!email_valide($email)) return false;
@@ -166,7 +165,6 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 function extrait_article($row) {
 	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_filtres.php3");
 
 	$adresse_site = lire_meta("adresse_site");
 

@@ -11,12 +11,34 @@
 \***************************************************************************/
 
 
-
 include ("inc.php3");
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
+
+//  checkbox avec imgage
+
+function http_label_img($statut, $etat, $var, $img, $texte) {
+  return "<label for='$statut'>". 
+    boutonne('checkbox',
+	     $var . '[]',
+	     $statut,
+	     (($etat !== false) ? ' checked="checked"' : '') .
+	     "id='$statut'") .
+    "&nbsp;" .
+    http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
+    " " .
+    $texte .
+    "</label><br />";
+}
+
+// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
+function boutonne($t, $n, $v, $a='') {
+  return "\n<input type='$t'" .
+    (!$n ? '' : " name='$n'") .
+    " value=\"$v\" $a />";
+}
 
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';

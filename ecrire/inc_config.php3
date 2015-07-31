@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_admin.php3");
-include_ecrire ("inc_mail.php3");
 
 //
 // Appliquer les valeurs par defaut pour les options non initialisees

@@ -57,7 +57,12 @@ function affiche_logos($logos, $lien, $align) {
 		. $mouseover
 		. " style='border-width: 0px;' class='spip_logos' />";
 
-	return ($lien ? http_href($lien, $milieu) : $milieu);
+	return (!$lien ? $milieu :
+		('<a href="' .
+		 str_replace('&', '&amp;', $lien) .
+		'">' .
+		$milieu .
+		'</a>'	 ));
 }
 
 //

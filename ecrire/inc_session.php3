@@ -213,7 +213,6 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("HTTP/1.0 401 Unauthorized");
 	echo "<b>$pb</b><p>$raison</p>[<a href='./'>$retour</a>] ";
 	if ($url) {
-		include_ecrire('inc_filtres.php3');
 		$url = quote_amp($url);
 		echo "[<a href='spip_cookie.php3?essai_auth_http=oui"
 			. "&amp;$url'>$re</a>]";

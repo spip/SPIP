@@ -60,7 +60,6 @@ function stats_load_engines() {
 function stats_show_keywords($kw_referer, $kw_referer_host) {
 	static $arr_engines;
 	static $url_site;
-	include_ecrire("inc_filtres.php3");
 
 	if (!$arr_engines) {
 		// Charger les moteurs de recherche

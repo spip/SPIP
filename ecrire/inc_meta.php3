@@ -42,7 +42,6 @@ function effacer_meta($nom) {
 //
 function ecrire_metas() {
 	global $meta;
-	include_ecrire('inc_filtres.php3'); # pour texte_script
 
 	lire_metas();
 

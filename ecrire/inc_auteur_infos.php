@@ -12,13 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_session.php3");
-include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
 function affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article)

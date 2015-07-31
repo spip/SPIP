@@ -14,9 +14,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_filtres.php3"); # pour http_script (normalement déjà fait)
-
-
 // ne pas faire d'erreur si les chaines sont > 254 caracteres
 function levenshtein255 ($a, $b) {
 	$a = substr($a, 0, 254);

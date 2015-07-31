@@ -15,13 +15,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// Transforme n'importe quel champ en une chaine utilisable
-// en PHP ou Javascript en toute securite
-// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
-function texte_script($texte) {
-	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
-}
-
 // Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
 // pas au charset de la page [iso-8859-1 par defaut])
@@ -171,53 +164,6 @@ function liens_ouvrants ($texte) {
 	return ereg_replace("<a ([^>]*https?://[^>]*class=\"spip_(out|url)\")>",
 		"<a \\1 target=\"_blank\">", $texte);
 }
-
-// Fabrique une balise A, avec un href conforme au validateur W3C
-// attention au cas ou la href est du Javascript avec des "'"
-
-function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
-	return '<a href="' .
-		str_replace('&', '&amp;', $href) .
-		'"' .
-		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
-		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
-		(!$class ? '' : ("\nclass=\"" . $class . "\"")) .
-		($evt ? "\n$evt" : '') .
-		'>' .
-		$clic .
-		'</a>';
-}
-
-// produit une balise img avec un champ alt d'office si vide
-// attention le htmlentities et la traduction doivent etre appliques avant.
-
-function http_img_pack($img, $alt, $att, $title='') {
-	return "<img src='" . _DIR_IMG_PACK . $img
-	  . ("'\nalt=\"" .
-	     ($alt ? $alt : ($title ? $title : ereg_replace('\..*$','',$img)))
-	     . '" ')
-	  . ($title ? " title=\"$title\"" : '')
-	  . $att . " />";
-}
-
-// variante avec un label et un checkbox
-
-function http_label_img($statut, $etat, $var, $img, $texte) {
-  return "<label for='$statut'>". 
-    "<input type='checkbox' " .
-    (($etat !== false) ? ' checked="checked"' : '') .
-    " name='$var" .
-    "[]' value='$statut' id='$statut'>&nbsp;" .
-    http_img_pack($img, $texte, "width='8' height='9' border='0'", $texte) .
-    " " .
-    $texte .
-    "</label><br />";
-}
-
-function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
-	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
-}
-
 
 // Transformer les sauts de paragraphe en simples passages a la ligne
 function PtoBR($texte){
@@ -1679,23 +1625,6 @@ function vider_attribut ($balise, $attribut) {
 	return inserer_attribut($balise, $attribut, '', false, true);
 }
 
-// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
-# a placer ailleurs que dans inc_filtres
-function boutonne($t, $n, $v, $a='') {
-  return "\n<input type='$t'" .
-    (!$n ? '' : " name='$n'") .
-    " value=\"$v\" $a />";
-}
-
-function http_script($script, $src='', $noscript='') {
-	return '<script type="text/javascript"'
-		. ($src ? " src=\"$src\"" : '')
-		. ">"
-		. ($script ? "<!--\n$script\n//-->" : '')
-		. "</script>\n"
-		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
-}
-
 
 // Un filtre ad hoc, qui retourne ce qu'il faut pour les tests de config
 // dans les squelettes : [(#URL_SITE_SPIP|tester_config{quoi})]
@@ -1713,13 +1642,6 @@ function tester_config($ignore, $quoi) {
 		default:
 			return '';
 	}
-}
-
-// transformation XML des "&" en "&amp;"
-function quote_amp($u) {
-	return preg_replace(
-		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
-		"&amp;",$u);
 }
 
 //

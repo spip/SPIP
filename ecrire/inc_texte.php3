@@ -616,7 +616,6 @@ function extraire_lien ($regs) {
 		$lien_url .= $ancre;
 
 		// supprimer les numeros des titres
-		include_ecrire("inc_filtres.php3");
 		$lien_texte = supprimer_numero($lien_texte);
 	}
 	else if (preg_match(',^\?(.*)$,s', $lien_url, $regs)) {

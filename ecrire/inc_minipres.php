@@ -14,10 +14,8 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_filtres.php3"); # pour les fonctions http_* (normalement deja la)
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
-
 
 //
 // Presentation des pages d'installation et d'erreurs
@@ -113,4 +111,46 @@ function afficher_bouton_preview() {
 		  . http_img_pack('naviguer-site.png', $x, '')
 		  ."&nbsp;$x</div>";
 }
+
+// Fabrique une balise A, avec un href conforme au validateur W3C
+// attention au cas ou la href est du Javascript avec des "'"
+
+function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
+	return '<a href="' .
+		str_replace('&', '&amp;', $href) .
+		'"' .
+		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
+		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
+		(!$class ? '' : ("\nclass=\"" . $class . "\"")) .
+		($evt ? "\n$evt" : '') .
+		'>' .
+		$clic .
+		'</a>';
+}
+
+// produit une balise img avec un champ alt d'office si vide
+// attention le htmlentities et la traduction doivent etre appliques avant.
+
+function http_img_pack($img, $alt, $att, $title='') {
+	return "<img src='" . _DIR_IMG_PACK . $img
+	  . ("'\nalt=\"" .
+	     ($alt ? $alt : ($title ? $title : ereg_replace('\..*$','',$img)))
+	     . '" ')
+	  . ($title ? " title=\"$title\"" : '')
+	  . $att . " />";
+}
+
+function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
+	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
+}
+
+function http_script($script, $src='', $noscript='') {
+	return '<script type="text/javascript"'
+		. ($src ? " src=\"$src\"" : '')
+		. ">"
+		. ($script ? "<!--\n$script\n//-->" : '')
+		. "</script>\n"
+		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
+}
+
 ?>
