@@ -1440,7 +1440,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
-	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui'  AND ((M.date_fin >= $avant OR M.date_heure >= $avant) AND M.date_heure <= $apres) AND M.statut='publie'", "M.date_heure, M.date_fin, M.type, M.texte, M.titre, M.id_message", "M.date_heure");
+	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui'  AND ((M.date_fin >= $avant OR M.date_heure >= $avant) AND M.date_heure <= $apres) AND M.statut='publie'", "M.id_message", "M.date_heure");
 	while($row=sql_fetch($result)){
 		$date_heure=$row["date_heure"];
 		$date_fin=$row["date_fin"];
