@@ -1028,7 +1028,6 @@ function maj_base() {
 				WHERE fichier like '%.$extension'");
 		}
 	}
-	exit;
 
 	//
 	// Mettre a jour le numero de version installee
