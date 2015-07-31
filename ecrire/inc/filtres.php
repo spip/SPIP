@@ -667,14 +667,18 @@ function choixsiegal($a1,$a2,$v,$f) {
 function normaliser_date($date, $forcer_jour = false) {
 	$date = vider_date($date);
 	if ($date) {
-		if (preg_match("/^[0-9]{8,10}$/", $date))
+		if (preg_match("/^[0-9]{8,10}$/", $date)) {
 			$date = date("Y-m-d H:i:s", $date);
-		if (preg_match("#^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$#", $date, $regs))
+		}
+		if (preg_match("#^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$#", $date, $regs)) {
+			$regs = array_pad($regs, 4, null); // eviter notice php
 			$date = $regs[1]."-00-00".$regs[3];
-		else if (preg_match("#^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$#", $date, $regs))
+		} else if (preg_match("#^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$#", $date, $regs)) {
+			$regs = array_pad($regs, 4, null); // eviter notice php
 			$date = preg_replace("@/@","-",$regs[1])."-00".$regs[3];
-		else
+		} else {
 			$date = date("Y-m-d H:i:s", strtotime($date));
+		}
 
 		if ($forcer_jour)
 			$date = str_replace('-00', '-01', $date);
