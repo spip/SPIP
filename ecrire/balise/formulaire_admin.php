@@ -97,23 +97,27 @@ function admin_objet()
 	include_spip('inc/urls');
 	$env = array();
 
-	foreach (array('mot','auteur','rubrique','breve','article','syndic'=>'site')
-	as $id => $obj) {
-		if (is_int($id)) $id = $obj;
-		$_id_type = id_table_objet($id);
-		if (isset($GLOBALS['contexte'][$_id_type]) AND $id_type = $GLOBALS['contexte'][$_id_type]) {
-			$id_type = sql_getfetsel($_id_type, table_objet_sql($id), "$_id_type=".intval($id_type));
-			if ($id_type) {
-				$env[$_id_type] = $id_type;
-				$env['objet'] = $id;
-				$env['id_objet'] = $id_type;
+	$trouver_table = charger_fonction('trouver_table','base');
+	$objets = urls_liste_objets(false);
+	$objets = array_diff($objets, array('rubrique'));
+	array_unshift($objets, 'rubrique');
+	foreach ($objets as $obj) {
+		$type = $obj;
+		$_id_type = id_table_objet($type);
+		if (isset($GLOBALS['contexte'][$_id_type]) AND $id = $GLOBALS['contexte'][$_id_type]) {
+			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=".intval($id));
+			if ($id) {
+				$env[$_id_type] = $id;
+				$env['objet'] = $type;
+				$env['id_objet'] = $id;
 				$g = 'generer_url_ecrire_'.$obj;
 				$env['voir_'.$obj] = 
-				  str_replace('&amp;', '&', $g($id_type, '','', 'prop'));
-				if ($id == 'article' OR $id == 'breve') {
+				  str_replace('&amp;', '&', $g($id, '','', 'prop'));
+				if ($desc = $trouver_table(table_objet_sql($type))
+					AND isset($desc['field']['id_rubrique'])) {
 					unset($env['id_rubrique']);
 					unset($env['voir_rubrique']);
-					if (admin_preview($id, $id_type))
+					if (admin_preview($type, $id, $desc))
 						$env['preview']=parametre_url(self(),'var_mode','preview','&');
 				}
 			}
@@ -124,15 +128,15 @@ function admin_objet()
 
 
 // http://doc.spip.org/@admin_preview
-function admin_preview($id, $id_type)
+function admin_preview($type, $id, $desc=null)
 {
 	if ($GLOBALS['var_preview']) return '';
 
-	if (!($id == 'article'
-	OR $id == 'breve'
-	OR $id == 'rubrique'
-	OR $id == 'syndic'))
-
+	if (!$desc) {
+		$trouver_table = charger_fonction('trouver_table','base');
+		$desc = $trouver_table(table_objet_sql($type));
+	}
+	if (!$desc OR !isset($desc['field']['statut']))
 		return '';
 
 	include_spip('inc/autoriser');
@@ -140,10 +144,10 @@ function admin_preview($id, $id_type)
 
 	$notpub = sql_in("statut", array('prop', 'prive'));
 
-	if  ($id == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
+	if  ($type == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
 		$notpub .= " OR (statut='publie' AND date>".sql_quote(date('Y-m-d H:i:s')).")";
 
-	return sql_fetsel('1', table_objet_sql($id), id_table_objet($id)."=".$id_type." AND ($notpub)");
+	return sql_fetsel('1', table_objet_sql($type), id_table_objet($type)."=".$id." AND ($notpub)");
 }
 
 //
