@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Pour les liens, on desactive les couleurs et
 /*  on affiche l'URL cible a la suite des liens sortants (!)
 ---------------------------------------------- */
-a, a:visited, a.spip_in, a.spip_out, a.spip_url, a.spip_glossaire { color: #552200; text-decoration: underline; }
+a, a:visited, a.spip_in, a.spip_out, a.spip_url, a.spip_glossaire { color: #520; text-decoration: underline; }
 a.spip_out:after, a.spip_url:after { display: inline; content: " [" attr(href) "]"; }
 
 
@@ -58,7 +58,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 .ps, .notes, .forum-decompte, #documents_portfolio, #documents_joints {
 	margin-top: 1.4em;
 	padding-top: 0.2em;
-	border-top: 2pt solid #CCCCCC;
+	border-top: 2pt solid #CCC;
 	font-size: 0.82em;
 }
 .ps h2, .notes h2, .forum-decompte, #documents_joints h2 { font-weight: bold; clear: both; }
@@ -71,21 +71,21 @@ q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 .lien, blockquote, .spip_poesie, .spip_cadre, .extrait .texte {
 	margin: 1em;
 	padding: 1em;
-	border: 1pt dotted #CCCCCC; }
+	border: 1pt dotted #CCC; }
 
 table {
  	width: 99%; background: #FFF; margin-bottom: 1em;
  	border-collapse: collapse; table-layout: fixed;
- 	border-top: 1pt solid #CCCCCC; border-left: 1pt solid #CCCCCC;
+ 	border-top: 1pt solid #CCC; border-left: 1pt solid #CCC;
  	font-size: 0.88em; }
-table td, table th { padding: 4pt; text-align: left; vertical-align: top; border-bottom: 1pt solid #CCCCCC; border-right: 1pt solid #CCCCCC; }
+table td, table th { padding: 4pt; text-align: left; vertical-align: top; border-bottom: 1pt solid #CCC; border-right: 1pt solid #CCC; }
 
 /*  Messages de forums
 ---------------------------------------------- */
 .forum { margin: 2em 0; font-size: 0.82em; }
 .forum-fil ul { margin-left: 0.5em; }
 .forum-chapo .forum-titre { display: block; font-weight: bold; }
-ul .message { background: #FAFAFA; border: 1pt solid #CCCCCC; padding: 1em; margin-bottom: 1em; }
+ul .message { background: #FAFAFA; border: 1pt solid #CCC; padding: 1em; margin-bottom: 1em; }
 
 /*  Listes et extraits introductifs 
 ---------------------------------------------- */
