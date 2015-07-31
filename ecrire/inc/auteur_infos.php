@@ -288,37 +288,16 @@ function apparait_auteur_infos($id_auteur, $auteur) {
 // http://doc.spip.org/@legender_auteur_voir
 function legender_auteur_voir($auteur) {
 	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options, $spip_lang_right;
+	$res = "";
 
 	if (!$id_auteur = $auteur['id_auteur']) {
 		$new = true;
 	}
 
-	$res .= "<div id='auteur_infos_voir'>";
-
-	$res = "<table width='100%' cellpadding='0' border='0' cellspacing='0'>"
-	. "<tr>"
-	. "<td  style='width: 100%' valign='top'>"
-	. gros_titre(
-		sinon($auteur['nom'],_T('item_nouvel_auteur')),
-		'',false);
-
-
-	$res .= "<div>&nbsp;</div>";
-
-	if (strlen($auteur['email']))
-		$res .= "<div>"._T('email_2')
-			." <b><a href='mailto:".htmlspecialchars($auteur['email'])."'>"
-			.$auteur['email']."</a></b></div>";
-
-	if ($auteur['url_site']) {
-		if (!$auteur['nom_site'])
-			$auteur['nom_site'] = _T('info_site');
-		$res .= propre(_T('info_site_2')." [{{".$auteur['nom_site']."}}->".$auteur['url_site']."]");
-	}
 
 	// Bouton "modifier" ?
 	if (autoriser('modifier', 'auteur', $id_auteur)) {
-		$res .= "</td>\n<td id='bouton_modifier_auteur'>";
+		$res .= "<span id='bouton_modifier_auteur'>";
 
 		if (_request('edit') == 'oui') {
 			$clic = _T('icone_retour');
@@ -330,7 +309,7 @@ function legender_auteur_voir($auteur) {
 
 		$h = generer_url_ecrire("auteur_infos","id_auteur=$id_auteur&edit=oui");
 		$h = "<a\nhref='$h'>$clic</a>";
-		$res .= icone($clic, $h, "redacteurs-24.gif", "edit.gif", '', '',true);
+		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
 
 		$res .= "<script type='text/javascript'><!--
 		var intitule_bouton = "._q($retour).";
@@ -340,7 +319,7 @@ function legender_auteur_voir($auteur) {
 			.toggle();
 			jQuery('#auteur_infos_voir')
 			.toggle();
-			jQuery('#bouton_modifier_auteur a span')
+			jQuery('#bouton_modifier_auteur > a > span')
 			.each(function(){
 				var tmp = jQuery(this).html();
 				jQuery(this).html(intitule_bouton);
@@ -349,7 +328,25 @@ function legender_auteur_voir($auteur) {
 			return false;
 		});
 		// --></script>\n";
-		$res .= "</td><tr><td colspan='2'>\n";
+		$res .= "</span>\n";
+	}
+	
+	$res .= gros_titre(
+		sinon($auteur['nom'],_T('item_nouvel_auteur')),
+		'',false);
+
+	$res .= "<div class='nettoyeur'></div>";
+	$res .= "<div id='auteur_infos_voir'>";
+
+	if (strlen($auteur['email']))
+		$res .= "<div>"._T('email_2')
+			." <b><a href='mailto:".htmlspecialchars($auteur['email'])."'>"
+			.$auteur['email']."</a></b></div>";
+
+	if ($auteur['url_site']) {
+		if (!$auteur['nom_site'])
+			$auteur['nom_site'] = _T('info_site');
+		$res .= propre(_T('info_site_2')." [{{".$auteur['nom_site']."}}->".$auteur['url_site']."]");
 	}
 
 	if (strlen($auteur['bio'])) {
@@ -364,8 +361,6 @@ function legender_auteur_voir($auteur) {
 		include_spip('inc/extra');
 		$res .= extra_affichage($auteur['extra'], 'auteurs');
 	}
-
-	$res .= "</td></tr></table>";
 
 	$res .= "</div>\n";
 
