@@ -42,12 +42,9 @@ function auth_rubrique($id_auteur, $statut)
 	if ($statut != '0minirezo') return $statut;
 
 	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
-
 	if (!spip_num_rows($result)) {
-		$GLOBALS['connect_toutes_rubriques'] = true;
 		return 0;
 	}
-
 	$rubriques = array();
 	for (;;) {
 		$r = array();
@@ -198,7 +195,6 @@ function inc_auth_dist() {
 	} elseif (is_array($droits))
 		$connect_id_rubrique = $droits;
 	else $connect_toutes_rubriques = true;
-
 	$connect_login = $row['login'];
 	// vide = pas de message d'erreur (cf exit(0) Unix)
 	return "";

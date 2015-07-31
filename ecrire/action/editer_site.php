@@ -155,7 +155,10 @@ function revisions_sites ($id_syndic, $c=false) {
 
 	// Changer le statut du site ?
 	include_spip('inc/auth');
-	auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
+	if (auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']) === 0)
+	  // horrible. A tirer au clair.
+		$GLOBALS['connect_toutes_rubriques'] = true;
+	  
 
 	$s = spip_query("SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic=$id_syndic");
 	$row = spip_fetch_array($s);
