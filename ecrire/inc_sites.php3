@@ -113,35 +113,30 @@ function analyser_site($url) {
 		$result['syndic'] = true;
 		$result['url_syndic'] = $url;
 		$channel = $regs[1];
-		if (ereg('<title[^>]*>([^<]*)</title>', $channel, $r)) {
-			$result['nom_site'] = filtrer_entites($r[1]);
-		}
-		if (ereg('<link[^>]*>([^<]*)</link>', $channel, $r)) {
+		if (ereg('<title[^>]*>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>', $channel, $r))
+			$result['nom_site'] = supprimer_tags(filtrer_entites($r[1]));
+		if (ereg('<link[^>]*>([^<]*)</link>', $channel, $r))
 			$result['url_site'] = filtrer_entites($r[1]);
-		}
 
 		// si le channel n'a pas de description, ne pas prendre celle d'un article
 		if ($a = strpos($channel, '<item>'))
 			$channel_desc = substr($channel, 0, $a);
 		else
 			$channel_desc = $channel;
-		if (ereg('<description[^>]*>([^<]*)</description>', $channel_desc, $r)) {
+		if (ereg('<description[^>]*>([^<]*)</description>', $channel_desc, $r))
 			$result['descriptif'] = filtrer_entites($r[1]);
-		}
 	}
 	else {
 		$result['syndic'] = false;
 		$result['url_site'] = $url;
-		if (eregi('<head>(.*)', $texte, $regs)) {
+		if (eregi('<head>(.*)', $texte, $regs))
 			$head = filtrer_entites(eregi_replace('</head>.*', '', $regs[1]));
-		}
-		else $head = $texte;
-		if (eregi('<title[^>]*>(.*)', $head, $regs)) {
+		else
+			$head = $texte;
+		if (eregi('<title[^>]*>(.*)', $head, $regs))
 			$result['nom_site'] = filtrer_entites(supprimer_tags(eregi_replace('</title>.*', '', $regs[1])));
-		}
-		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs)) { //"
+		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs))
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
-		}
 	}
 	return $result;
 }
@@ -182,8 +177,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		}
 		if (is_array($item)) {
 			for ($i = 0 ; $i < count($item) ; $i++) {
-				if (ereg("<title>([^<]*)</title>",$item[$i],$match))
-					$le_titre = addslashes(filtrer_entites($match[1]));
+				if (ereg("<title>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>",$item[$i],$match))
+					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[1])));
 				else continue;
 				if (ereg("<link>([^<]*)</link>",$item[$i],$match))
 					$le_lien = addslashes(filtrer_entites($match[1]));
@@ -199,8 +194,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				if (ereg("<author>([^<]*)</author>",$item[$i],$match))
 					$les_auteurs = addslashes(filtrer_entites($match[1]));
 				else $les_auteurs = "";
-				if (ereg("<description[^>]*>([^<]*)</description>",$item[$i],$match))
-					$la_description = addslashes(filtrer_entites($match[1]));
+				if (ereg("<description[^>]*>(.*)</description>",$item[$i],$match))
+					$la_description = supprimer_tags(addslashes(filtrer_entites($match[1])));
 				else $la_description = "";
 
 				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
