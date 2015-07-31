@@ -409,8 +409,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	// par hasard
 		if ($par == 'hasard') {
 			$par = "rand()";
-		  $boucle->select[]= $par . " AS alea";
-		  $order = "'alea'";
+			$boucle->select[]= $par . " AS alea";
+			$order = "'alea'";
 		}
 	// par titre_mot ou type_mot voire d'autres
 		else if (isset($exceptions_des_jointures[$par])) {
@@ -423,7 +423,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 			$order = "'".$boucle->id_table ."." . $m . "'";
 		}
 		// par champ. Verifier qu'ils sont presents.
-		elseif (preg_match("/^(.*)\.(.*)$/", $par, $r)) {
+		elseif (preg_match("/^([^,]*)\.(.*)$/", $par, $r)) {
 		  // cas du tri sur champ de jointure explicite
 			$t = array_search($r[1], $boucle->from);
 			if (!$t) {
@@ -444,7 +444,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 	      }
 	      }
 	  }
-	  if (preg_match("/^'(.*)'$/", $order, $m)) {
+	  if (preg_match('/^\'([^"]*)\'$/', $order, $m)) {
 	      $t = $m[1];
 	      if (strpos($t,'.') AND !in_array($t, $boucle->select)) {
 		$boucle->select[] = $t;
@@ -779,7 +779,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
 	$col_alias = $col;
 	$where_complement =false;
-//var_dump(array($fct, $col, $op, $val, $args_sql));
+
 	// Cas particulier : id_enfant => utiliser la colonne id_objet
 	if ($col == 'id_enfant')
 	  $col = $boucle->primary;
