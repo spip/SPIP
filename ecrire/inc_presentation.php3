@@ -1622,11 +1622,16 @@ function debut_gauche($rubrique = "asuivre") {
 	global $connect_id_auteur;
 	global $spip_ecran;
 	
-	if ($spip_ecran == "large") $largeur = 974;
-	else $largeur = 750;
+	if ($spip_ecran == "large") {
+		$largeur = 974;
+		$rspan = " rowspan=2";
+	}
+	else {
+		$largeur = 750;
+	}
 
 	echo "<br><table width=$largeur cellpadding=0 cellspacing=0 border=0>
-		<tr><td width=200 valign='top' rowspan=2><font face='Georgia,Garamond,Times,serif' size=2>\n";
+		<tr><td width=200 valign='top' $rspan><font face='Georgia,Garamond,Times,serif' size=2>\n";
 	
 
 	// Afficher les auteurs recemment connectes
@@ -1838,16 +1843,17 @@ function debut_droite() {
 	echo "<br></font>&nbsp;</td>";
 	
 	if ($spip_ecran == "etroit") {
-		echo "<td width=50 rowspan=2>&nbsp;";
+		echo "<td width=50>&nbsp;</td>";
 	}
 	else {
 	
 		if (!$deja_colonne_droite) {
 			creer_colonne_droite();
 		}
+		echo "</td></tr><tr>";
 	}
 	
-	echo '</td></tr><tr><td width=500 valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
+	echo '<td width=500 valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
 	// zap sessions si bonjour
 	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
