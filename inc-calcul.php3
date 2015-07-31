@@ -220,7 +220,7 @@ function executer_squelette($squelette, $contexte) {
 		$t = filemtime($squelette_cache);
 		if ((filemtime("$squelette.html") < $t)
 		AND (filemtime("inc-calcul-squel.php3") < $t)
-		AND (filemtime("mes_fonctions.php3") < $t)) {
+		AND (file_exists("mes_fonctions.php3") AND (filemtime("mes_fonctions.php3") < $t))) {
 			$use_cache = true;
 		}
 	}
