@@ -72,6 +72,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	$env['calcul'] = (_request('var_mode') ? 'recalcul' : 'calcul');
 	$env['debug'] = $var_preview ? "" : admin_debug();		
 	$env['analyser'] = (!$env['debug'] AND !$GLOBALS['xhtml']) ? '' : admin_valider();
+	$env['inclure'] = ($GLOBALS['var_inclure']?'inclure':'');
 
 	if (!$use_cache)
 		$env['use_cache'] = ' *';
