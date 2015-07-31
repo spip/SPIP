@@ -364,11 +364,11 @@ function phraser_criteres($params, &$result) {
 			      $result->hash = true;
 			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?)[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)[[:space:]]*"?([^<>=!"]*)"?$', $param, $m)) {
+			  } elseif (ereg('^(`?[A-Za-z_][A-Za-z_0-9]*\(?[A-Za-z_]*\)?`?)[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)[[:space:]]*"?([^<>=!"]*)"?$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
 							   (($m[1] == 'lang_select') ? $m[1] : trim($m[4])),
 							   $m[3], $m[2]);
-		  } elseif (preg_match("/^([!]?)[[:space:]]*([a-z_]+)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
+		  } elseif (preg_match("/^([!]?)[[:space:]]*([A-Za-z_][A-Za-z_0-9]*)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
 		  // contient aussi les comparaisons implicites !
 			    array_shift($v);
 			    if ($m[4])
