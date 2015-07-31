@@ -136,7 +136,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 }
 
 // http://doc.spip.org/@generer_supprimer_mot
-function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff)
+function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff='')
 {
 	$cont = ($total > 1)
 	? ''

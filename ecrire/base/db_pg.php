@@ -305,9 +305,13 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array()) {
 		include_spip('base/serial');
 		$desc = @$tables_principales[$table];
 	}
-	if (isset($desc['key']["PRIMARY KEY"]))
-		$ret = " RETURNING " . $desc['key']["PRIMARY KEY"];
-	else $ret = '';
+
+	// Dans les tables principales de SPIP, le numero de l'insertion
+	// est la valeur de l'unique et atomique cle primaire ===> RETURNING
+	// Le code actuel n'a pas besoin de ce numero dans les autres cas
+	// mais il faudra surement amelioer ca un jour.
+	$seq = @$desc['key']["PRIMARY KEY"];
+	$ret = preg_match('/\w+/', $seq) ? " RETURNING $seq" : '';
 
 	if ($GLOBALS['table_prefix'])
 		$table = preg_replace('/^spip/',
