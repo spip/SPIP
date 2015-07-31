@@ -145,9 +145,7 @@ function inscription_nouveau($declaration)
 
 	$declaration['statut'] = 'nouveau';
 
-	$n = spip_abstract_insert('spip_auteurs', 
-		('(' .join(',',array_keys($declaration)).')'),
-		("('" .join("','",array_map('addslashes', $declaration)) ."')"));
+	$n = spip_abstract_insert('spip_auteurs', ('(' .join(',',array_keys($declaration)).')'), ("('" .join("','",array_map('addslashes', $declaration)) ."')"));
 
 	$declaration['id_auteur'] = $n;
 
