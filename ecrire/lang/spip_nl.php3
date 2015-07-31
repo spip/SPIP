@@ -20,6 +20,7 @@ $GLOBALS['i18n_spip_nl'] = array(
 'admin_modifier_rubrique' => 'Rubriek wijzigen',
 'admin_recalculer' => 'Pagina vernieuwen',
 'aide_non_disponible' => 'Dit deel van de online handleiding is nog niet beschikbaar in het Nederlands.',
+'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de MySQL-gegevensbank naar versie @version@ is niet mogelijk. Mogelijk is dit te wijten aan onvoldoende schrijfrechten op de gegevensbank. Contacteer hiervoor je provider.',
 'avis_acces_interdit' => 'Toegang verboden',
 'avis_archive_incorrect' => 'Het bewaarde bestand is geen SPIP-bestand',
 'avis_archive_invalide' => 'Het bewaarde bestand is niet bruikbaar',
@@ -564,6 +565,8 @@ De publieke forums kunnen per artikel toegestaan worden
     starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
 'info_ecire_message_prive' => 'Een priv&eacute;-bericht schrijven',
 'info_ecrire_article' => 'Alvorens een artikel te kunnen schrijven, dien je minimaal &eacute;&eacute;n rubriek aanmaken.',
+'info_email_envoi' => 'Verzendadres (optioneel)',
+'info_email_envoi_txt' => 'Geef hieronder het adres op dat gebruikt wordt voor het versturen van e-mails. (Standaard wordt het adres van de bestemmeling als verzendadres gebruikt.)&nbsp;:',
 'info_email_invalide' => 'Fout e-mailadres.',
 'info_email_webmestre' => 'E-mailadres van de webmaster (optioneel)',
 'info_en_cours_validation' => 'Je artikels in redactie',
@@ -694,11 +697,10 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_moyenne' => 'gemiddeld:',
 'info_multi_articles' => 'Taalmenu voor artikels instellen?',
 'info_multi_cet_article' => 'Gebruikte taal in dit artikel is:',
-'info_multi_cette_rubrique' => 'Gerbuikte taal in deze rubriek is:',
 'info_multi_herit' => 'Standaardtaal',
-'info_multi_langues_choisies' => '<MODIF> Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
-  Talen die al in gebruik zijn (als eerste in de lijst getoond) kunnen niet geschrapt worden.
-  Opgelet: alleen de in het vet weergegeven talen worden in het publicatiesysteem ge&iuml;ntegreerd.',
+'info_multi_langues_choisies' => 'Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
+  Talen die al worden gebruikt (vooraan in de lijst getoond) kunnen niet geschrapt worden.
+',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken?',
 'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap?',
 'info_multilinguisme' => 'Meertaligheid',
@@ -1031,6 +1033,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'lien_forum_public' => 'Beheer het publieke forum van dit artikel',
 'lien_icones_interface' => 'De icoontjes van de interface zijn van <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'Uitgave',
+'lien_liberer_tous' => 'artikels vrijgeven',
 'lien_mise_a_jour_syndication' => 'Update nu',
 'lien_modifer_date' => 'Wijzig de datum',
 'lien_nom_site' => 'WEBSITENAME:',
@@ -1538,6 +1541,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_joindre_document' => 'Document toevoegen',
 'titre_langue_article' => 'TAAL VAN HET ATIKEL',
 'titre_langue_breve' => 'TAAL VAN HET NIEUWSBERICHT',
+'titre_langue_rubrique' => 'TAAL VAN DE RUBRIEK',
 'titre_langue_trad_article' => 'TAAL EN VERTALINGEN VAN HET ARTIKEL',
 'titre_les_articles' => 'ARTIKELS',
 'titre_liens_entrants' => 'Inkomende koppelingen van vandaag',
