@@ -46,6 +46,7 @@ function exec_auteur_infos_dist() {
 	} else auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect);
 }
 
+// http://doc.spip.org/@auteur_infos_ok
 function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 {
 	global $connect_id_auteur;

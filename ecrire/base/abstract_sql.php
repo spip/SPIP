@@ -282,6 +282,7 @@ function sql_errno($serveur='') {
 // Fonction la plus generale ... et la moins portable
 // A n'utiliser qu'en derniere extremite
 
+// http://doc.spip.org/@sql_query
 function sql_query($ins, $serveur='') {
   	$f = sql_serveur('query', $serveur);
 	return $f($ins);
