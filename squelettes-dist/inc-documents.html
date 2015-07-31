@@ -27,7 +27,7 @@
 ]
 <BOUCLE_documents_decompte(DOCUMENTS spip_documents_liens articles) {id_article} {mode=document}{texte=''}{extension !IN gif,jpg,png} {vu=non}>
 [(#TOTAL_BOUCLE|=={1}
-	|?{[(#INCLURE{fond=modeles/emb}{id_document}
+	|?{[(#INCLURE{fond=modeles/emb, id_document}
 	|trim)]})]</BOUCLE_documents_decompte>
 
 
