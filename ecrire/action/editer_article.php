@@ -161,8 +161,10 @@ function insert_article($id_rubrique) {
 	);
 
 	// controler si le serveur n'a pas renvoye une erreur
-	if ($id_article > 0 AND $GLOBALS['visiteur_session']['id_auteur'])
-		sql_insertq('spip_auteurs_liens', array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur'], 'objet'=>'article', 'id_objet' => $id_article));;
+	if ($id_article > 0 AND $GLOBALS['visiteur_session']['id_auteur']) {
+		include_spip('action/editer_auteur');
+		auteur_associer($GLOBALS['visiteur_session']['id_auteur'], array('article'=>$id_article));
+	}
 
 	return $id_article;
 }
