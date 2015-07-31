@@ -256,6 +256,7 @@ $spip_syndic_articles_key = array(
 $spip_forum = array(
 		"id_forum"	=> "bigint(21) NOT NULL",
 		"id_parent"	=> "bigint(21) DEFAULT '0' NOT NULL",
+		"id_thread"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_rubrique"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
 		"id_breve"	=> "bigint(21) DEFAULT '0' NOT NULL",

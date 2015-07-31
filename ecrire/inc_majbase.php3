@@ -878,6 +878,14 @@ function maj_base() {
 		maj_version(1.804);
 	}
 
+	if ($version_installee < 1.805) {
+		spip_query("ALTER TABLE spip_forum
+		ADD id_thread bigint(21) DEFAULT '0' NOT NULL");
+		include_ecrire('inc_forum.php3');
+		calculer_threads();
+		maj_version(1.805);
+	}
+
 	return true;
 }
 

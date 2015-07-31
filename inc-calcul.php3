@@ -87,8 +87,7 @@ function charger_squelette ($squelette) {
 		eval('?'.'>'.$skel_compile);
 
 		if (function_exists($nom)) {
-			if (!$GLOBALS['var_preview'])
-				ecrire_fichier ($phpfile, $skel_compile);
+			ecrire_fichier ($phpfile, $skel_compile);
 			return $nom;
 		}
 		else {
@@ -296,9 +295,8 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	serialize($page['signal']))." -->\n";
 
 	// Enregistrer le fichier cache
-	if ($delais>0)
-		if (!$GLOBALS['var_preview'])
-			ecrire_fichier($chemin_cache, $signal.$page['texte']);
+	if ($delais > 0)
+		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;
 }
@@ -368,24 +366,21 @@ spip_log("cherche logo $type $id_objet $on $off $flag_fichier");
 
 
 // Fonction appelee par le skel pour assembler les balises
-function _f($action, $texte='') {
+function _f($push = false, $texte='') {
 	static $pile_f = array();
-	switch ($action) {
-		// push
-		case 0:
-			array_push($pile_f, $texte);
-			return ($texte <> '');
-			break;
-		// pop
-		case 1:
-			return array_pop($pile_f);
-			break;
-		// pop & ignore
-		case -1:
-			array_pop($pile_f);
-			return false;
-			break;
+
+	// push et teste si nul
+	if ($push) {
+		array_push($pile_f, $texte);
+		if ($texte)
+			return true;
 	}
+	// ou pop
+	// Attention "return array_pop($pile_f)" provoquerait
+	// l'affichage du chiffre zero pour, par exemple, #TOTAL_BOUCLE
+	else
+		if ($texte = array_pop($pile_f))
+			return $texte;
 }
 
 ?>

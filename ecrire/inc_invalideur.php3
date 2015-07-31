@@ -62,26 +62,27 @@ function retire_cache($cache) {
 	if (preg_match(
 	"|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
 	$cache)) {
-		@unlink($cache);		// supprimer le fichier
-		@unlink($cache.'.NEW');	// et le fichier compagnon s'il existe
+		// supprimer le fichier (avec spip_flock)
+		supprimer_fichier($cache);
+		// et le fichier compagnon s'il existe
+		@unlink($cache.'.NEW');
 	} else
 		spip_log("Impossible de retirer $cache");
 }
 
 // Supprimer les caches marques "x"
-function retire_caches($forcer = false) {
+function retire_caches($chemin_prioritaire = '') {
 	if ($GLOBALS['flag_ecrire']) return;
 
-	// marque comme fait
-	effacer_meta('invalider');
-	ecrire_metas();
-
-	// essayer d'eviter de faire le meme travail qu'un autre processus
-	// attendre maxi 3 secondes
-	spip_get_lock("invalidation", 4);
+	// inutile de ramer si tout est invalide, on n'est pas tout seul
+	$max = 30;
+	// mais recuperer en priorite notre chemin
+	if ($chemin_prioritaire)
+		$order = "ORDER BY fichier != '$chemin_prioritaire'";
 
 	// faire le boulot de suppression
-	$q = spip_query("SELECT DISTINCT fichier FROM spip_caches WHERE type='x'");
+	$q = spip_query("SELECT DISTINCT fichier FROM spip_caches
+	WHERE type='x' $order LIMIT 0,$max");
 	if ($n = @spip_num_rows($q)) {
 		spip_log ("Retire $n caches");
 		while (list($cache) = spip_fetch_array($q)) {
@@ -90,6 +91,12 @@ function retire_caches($forcer = false) {
 		}
 		spip_query("DELETE FROM spip_caches WHERE "
 		.calcul_mysql_in('fichier', join(',',$supprimes)) );
+	}
+
+	// marque comme fait
+	if (count($supprimes) < $max) {
+		effacer_meta('invalider');
+		ecrire_metas();
 	}
 }
 

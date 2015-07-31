@@ -18,7 +18,11 @@ function nettoyer_uri() {
 	return $fichier_requete;
 }
 
-// le format souhaite : "CACHE/a/8400/bout-d-url.md5(.gz)"
+//
+// Le format souhaite : "CACHE/a/(8400/)bout-d-url.md5(.gz)"
+// Attention a modifier simultanement le sanity check de
+// la fonction retire_cache() dans ecrire/inc_invalideur.php3
+//
 function generer_nom_fichier_cache($contexte='', $fond='') {
 	global $delais;
 	global $flag_gz, $compresser_cache;

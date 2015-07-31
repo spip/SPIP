@@ -114,7 +114,19 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		}
 	}
 
+	// Calculer le chemin putatif du cache
 	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache('', $fond);
+
+	// Faut-il effacer des pages invalidees ?
+	if (lire_meta('invalider')) {
+		include_ecrire('inc_invalideur.php3');
+		include_ecrire('inc_meta.php3');
+		lire_metas();
+		if (lire_meta('invalider'))
+			retire_caches($chemin_cache);
+	}
+
+	// Peut-on utiliser un fichier cache ?
 	determiner_cache($delais, $use_cache, $chemin_cache);
 
 	// Repondre gentiment aux requetes sympas
@@ -279,7 +291,6 @@ function cherche_image_nommee($nom) {
 			return ($d);
 	}
 }
-
 
 // La fonction ci-dessous permet a un script de flusher ses resultats partiels
 function spip_ob_flush() {

@@ -98,8 +98,9 @@ function calculer_params($idb, &$boucles) {
 				if ($boucle->order) {
 					$boucle->order .= ' DESC';
 				} else {
-				  return array(_T('info_erreur_squelette'),
-					       $idb . (_L("&nbsp: inversion d'un ordre inexistant")));
+					include_local('inc-admin.php3');
+					erreur_squelette(_T('info_erreur_squelette'),
+					_L("&nbsp: inversion d'un ordre inexistant"), $idb);
 				}
 			}
 
@@ -140,10 +141,9 @@ function calculer_params($idb, &$boucles) {
 				$col = $match[1];
 				$col_table = $id_table;
 				// Valeur de comparaison
-				if ($match[3]) {
+				if ($match[3])
 					$val = calculer_param_dynamique($match[6], $boucles, $idb);
-					if (is_array($val)) return $val; #erreur
-				} else {
+				else {
 					$val = $match[1];
 					// Si id_parent, comparer l'id_parent avec l'id_objet
 					// de la boucle superieure
@@ -419,8 +419,9 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 		if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $c, $v))
 			return $v[0];
 		else {
-			spip_log("champ inexistant ? : $c");
-			return $c;
+			# erreur
+			include_local("inc-admin.php3");
+			erreur_squelette(_L("parametre dynamique inexistant ?"), '', $idb);
 		}
 	} else {
 		if (ereg('^\$(.*)$',$val,$m))

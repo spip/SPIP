@@ -202,10 +202,10 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.804;
+$spip_version = 1.805;
 
 // version de spip
-$spip_version_affichee = "1.8 alpha 5 CVS";
+$spip_version_affichee = "1.8 alpha 6 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
@@ -821,7 +821,8 @@ if (LOCK_UN!=3) {
 function test_flock ($dir, $fp=false) {
 	static $flock = array();
 	global $flag_flock;
-	if (!$flag_flock)
+	if (!$flag_flock
+	OR $os_serveur == 'windows') // sous win rename() plante avec fopen()
 		return false;
 
 	if (!$dir) $dir = '.';
@@ -853,20 +854,28 @@ function spip_flock($filehandle, $mode, $fichier) {
 
 	if (!test_flock($dir))
 		return true;
-	else
-		return @flock($filehandle, $mode);
+
+	$r = flock($filehandle, $mode);
+
+	// demande de verrou ==> risque de sleep ==> forcer la relecture de l'etat
+	if ($mode == LOCK_EX)
+		clearstatcache();
+
+	return $r;
 }
 
 function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
-		if (function_exists('file_get_contents'))
-			return @file_get_contents($fichier);
+		if (function_exists('file_get_contents')
+		AND $os_serveur !='windows') # windows retourne ''
+			return @file_get_contents ($fichier);
 		else
 			return join('', file($fichier));
 	} else
 			return join('', gzfile($fichier));
 	
 }
+
 // options = array(
 // 'phpcheck' => 'oui' # verifier qu'on a bien du php
 // dezippe automatiquement les fichiers .gz
@@ -909,13 +918,17 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 // zippe les fichiers .gz
 function ecrire_fichier ($fichier, $contenu) {
 
+	// Ne rien faire si on est en preview ou si une erreur
+	// grave s'est presentee (compilation du squelette, MySQL, etc)
+	if ($GLOBALS['var_preview'] OR defined('spip_erreur_fatale'))
+		return;
+
 	// Ecriture dans un fichier temporaire
 	// dans le repertoire destination
 	preg_match('|(.*)/([^/]*)$|', $fichier, $match);
 	$dir = $match[1];
 	$fichiertmp = $dir.'/'
-	.uniqid(substr(md5($fichier),0,6).'-'
-	.@getmypid()).".tmp";
+	.uniqid(substr(md5($fichier),0,6).'-'.@getmypid()).".tmp";
 
 	$gzip = (substr($fichier, -3) == '.gz');
 
@@ -934,36 +947,52 @@ function ecrire_fichier ($fichier, $contenu) {
 	if ($ft = @$fopen($fichiertmp, 'wb')) {
 		// on en profite pour tester flock()
 		$flock = test_flock($dir, $ft);
-		$s = @$fputs($ft, $contenu);
+		$s = @$fputs($ft, $contenu, $a = strlen($contenu));
 		@$fclose($ft);
-		$ok = (strlen($contenu) == $s);
+		$ok = ($s == $a);
 	}
 
 	if ($ok) {
 		// ouvrir et obtenir un verrou sur le fichier destination
-		if ($fp = @fopen($fichier, 'a')) {
-			if ($flock) while (!spip_flock($fp, LOCK_EX, $fichier));
+		if ($flock AND $fp = @fopen($fichier, 'a'))
+			while (!spip_flock($fp, LOCK_EX, $fichier));
 
-			// recopier le temporaire
-			$ok = @rename($fichiertmp, $fichier);
+		// recopier le temporaire
+		$ok = @rename("./".$fichiertmp, "./".$fichier);
 
-			// liberer le verrou
-			if ($flock) spip_flock($fp, LOCK_UN, $fichier);
-
+		// liberer le verrou
+		if ($flock AND $fp) {
+			spip_flock($fp, LOCK_UN, $fichier);
 			@fclose($fp);
 		}
 	}
 
 
 	// en cas d'echec effacer le temporaire
-	if (!$ok)
+	if (!$ok) {
+		spip_log("echec ecriture fichier $fichier");
 		@unlink($fichiertmp);
+	}
 
 	#spip_log("$fputs $fichier ".spip_timer('ecrire_fichier'));
 
 	return $ok;
 }
 
+//
+// Supprimer un fichier en attendant d'abord de le spip_flock
+//
+function supprimer_fichier ($fichier) {
+	if (!@file_exists($fichier))
+		return false;
+
+	if ($fl = @fopen($fichier, 'r')) {
+		while(!spip_flock($fl, LOCK_EX));
+		spip_flock($fl, LOCK_UN);
+		@fclose($fl);
+		@unlink($fichier);
+	}
+}
 
 //
 // Lire les meta cachees

@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_barre.php3");
+include_ecrire ("inc_forum.php3");
 
 
 if ($modif_forum != "oui") $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
@@ -14,6 +15,8 @@ if ($valider_forum AND ($statut!='')) {
 	$query = "INSERT INTO spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
 	"VALUES (\"$titre_message\", \"$texte\", NOW(), \"$nom_site\", \"$url_site\", \"$statut\", \"$connect_id_auteur\", \"$nom\", '$connect_email', '$id_rubrique', '$id_parent', '$id_article', '$id_breve', '$id_message', '$id_syndic')";
 	$result = spip_query($query);
+
+	calculer_threads();
 
 	if ($id_message > 0) {
 		$query = "UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'";

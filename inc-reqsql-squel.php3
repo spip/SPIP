@@ -130,7 +130,8 @@ function calculer_requete(&$boucle) {
 		join('","', array_unique($boucle->from)) .
 		'"), # FROM
 		array(' .
-		(!$boucle->where ? '' : ( '"' . join('","', $boucle->where) . '"')) .
+		(!$boucle->where ? '' : ( '"' . join('",
+		"', $boucle->where) . '"')) .
 		"), # WHERE
 		'".addslashes($boucle->group)."', # GROUP
 		'".addslashes($boucle->order)."', # ORDER
