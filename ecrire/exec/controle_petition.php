@@ -12,21 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/presentation');
+
 // http://doc.spip.org/@exec_controle_petition_dist
 function exec_controle_petition_dist()
 {
 	exec_controle_petition_args(intval(_request('id_article')),
-				    _request('type'),
-				    _request('date'),
-				    intval(_request('debut')),
-				    intval(_request('id_signature')));
+		_request('type'),
+		_request('date'),
+		intval(_request('debut')),
+		intval(_request('id_signature')),
+		intval(_request('pas'))); // a proposer grapiquement
 }
 
 // http://doc.spip.org/@exec_controle_petition_args
-function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature)
+function exec_controle_petition_args($id_article, $type, $date, $debut, $id_signature, $pas=0)
 {
-	include_spip('inc/presentation');
-
 	if (!preg_match('/^\w+$/',$type)) $type = 'public';
 	$statut='new';
 	$where = '';
@@ -63,8 +64,8 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 		if ($type == 'interne')   $where = "NOT($where)";
 		if ($id_article) $where .= " AND id_article=$id_article";
 		$order = "date_time DESC";
+		if (!$pas) $pas = 15;
 		$signatures = charger_fonction('signatures', 'inc');
-		$pas = floor(1.5*_TRANCHES);
 		if ($date) {
 			include_spip('inc/forum');
 			$query = array('SELECT' => 'UNIX_TIMESTAMP(date_time) AS d',
@@ -74,7 +75,7 @@ function exec_controle_petition_args($id_article, $type, $date, $debut, $id_sign
 			$debut = navigation_trouve_date($date, 'd', $pas, $query);
 		}
 
-		$r = $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, 15,  $type);
+		$r = $signatures('controle_petition', $id_article, $debut, $pas, $where, $order, $type);
 
 		if (_AJAX) {
 			ajax_retour($r);
