@@ -184,6 +184,7 @@ $GLOBALS['spip_matrice']['image_gamma'] = true;
 $GLOBALS['spip_matrice']['image_decal_couleur_127'] = true;
 $GLOBALS['spip_matrice']['image_sepia'] = true;
 $GLOBALS['spip_matrice']['image_aplatir'] = true;
+$GLOBALS['spip_matrice']['image_format'] = true;
 $GLOBALS['spip_matrice']['image_couleur_extraire'] = true;
 $GLOBALS['spip_matrice']['image_select'] = true;
 $GLOBALS['spip_matrice']['image_renforcement'] = true;

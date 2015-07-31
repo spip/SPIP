@@ -2149,6 +2149,18 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $trans
 	}
 	return image_ecrire_tag($image,array('src'=>$dest));
 }
+
+
+// Enregistrer une image dans un format donne
+// (conserve la transparence gif, png, ico)
+// utilise [->@image_aplatir]
+// http://doc.spip.org/@image_format
+function image_format($img, $format='png') {
+	return image_aplatir($img, $format, 'cccccc', null, true);
+}
+
+
+
 // A partir d'une image,
 // recupere une couleur
 // renvoit sous la forme hexadecimale ("F26C4E" par exemple).
