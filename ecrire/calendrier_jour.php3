@@ -57,10 +57,8 @@ debut_page(nom_jour("$annee-$mois-$jour")." ".affdate("$annee-$mois-$jour"),  "r
 		echo "<div style='float: $spip_lang_right; width: 120px;'>";
 		echo "<img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='border: 1px solid black;'>";
 		echo "&nbsp;";
-
-//		par semaine c'est joli mais ca ne fait rien...
-//		echo "<img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'>";
-//		echo "&nbsp;";
+		echo "<a href='calendrier_semaine.php3?mois=$mois&annee=$annee&jour=$jour'><img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		echo "&nbsp;";
 		echo "<a href='calendrier.php3?mois=$mois&annee=$annee'><img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo aide ("messcalen");
 		echo "</div>";
@@ -100,13 +98,13 @@ afficher_ical($connect_id_auteur);
 // afficher en reduction le tableau du jour suivant
 if ($spip_ecran == "large") {
 	creer_colonne_droite();	
-	calendrier_jour($jour+1,$mois,$annee, false);
+	calendrier_jour($jour+1,$mois,$annee, "col");
 }
 	
 debut_droite();
 
 echo "<div>&nbsp;</div>";
-calendrier_jour($jour,$mois,$annee, true);
+calendrier_jour($jour,$mois,$annee, "large");
 
 fin_page();
 
