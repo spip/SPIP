@@ -1800,6 +1800,31 @@ function filtre_find($array, $val) {
 	return ($array != '' AND in_array($val, $array));
 }
 
+
+// fonctions et, ou et xou
+// pour faciliter l'ecriture de tests conditionnels
+// ces fonctions retournent un espace si la condition 
+// est verifiee, sinon une chaine vide.
+
+// Filtre et : ($a && $b) 
+// [(#BALISE|=={val}|et{[(#AUTRE|=={val})]) Condition OK ]
+function filtre_et($a, $b){
+	return ($a && $b)?' ':'';	
+}
+
+// Filtre ou : ($a || $b) 
+// [(#BALISE|=={val}|ou{[(#AUTRE|=={val})]) Condition OK ]	
+function filtre_ou($a, $b){
+	return ($a || $b)?' ':'';	
+}
+	
+// Filtre xou : ($a xor $b) 
+// [(#BALISE|=={val}|xou{[(#AUTRE|=={val})]) Condition OK ]	
+function filtre_xou($a, $b){
+	return ($a XOR $b)?' ':'';	
+}	
+
+
 //
 // fonction standard de calcul de la balise #PAGINATION
 // on peut la surcharger en definissant dans mes_fonctions :
