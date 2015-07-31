@@ -971,14 +971,12 @@ function maj_base() {
 		maj_version(1.813);
 	}
 
-	// URLs propres auteurs (et prevoir les sites, sait-on jamais)
+	// URLs propres auteurs
 	if ($version_installee < 1.814) {
-		foreach (array('auteurs', 'syndic') as $objets) {
-			spip_query("ALTER TABLE spip_$objets
-				ADD url_propre VARCHAR(255) NOT NULL");
-			spip_query("ALTER TABLE spip_$objets
-				ADD INDEX url_propre (url_propre)");
-		}
+		spip_query("ALTER TABLE spip_auteurs
+			ADD url_propre VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs
+			ADD INDEX url_propre (url_propre)");
 		maj_version(1.814);
 	}
 
@@ -1044,6 +1042,20 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_mots DROP INDEX type");
 		spip_query("ALTER TABLE spip_mots CHANGE type type TEXT NOT NULL");
 		maj_version(1.822);
+	}
+
+	// URLs propres des sites (sait-on jamais)
+	// + oubli des KEY url_propre sur les auteurs si installation neuve
+	if ($version_installee < 1.830) {
+		spip_query("ALTER TABLE spip_syndic
+			ADD url_propre VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_syndic
+			ADD INDEX url_propre (url_propre)");
+		spip_query("ALTER TABLE spip_auteurs
+			ADD url_propre VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs
+			ADD INDEX url_propre (url_propre)");
+		maj_version(1.830);
 	}
 
 	return true;

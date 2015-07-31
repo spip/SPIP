@@ -45,12 +45,19 @@ else {
 	}
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
-	// que si $confirme_deplace == 'oui'
-
-	if ((spip_num_rows(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 0,1")) > 0)
-	AND ($confirme_deplace != 'oui')) {
+	// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
+	// breves en question
+	if ($GLOBALS['confirme_deplace'] == 'oui'
+	AND $id_parent > 0) {
+		list($id_secteur) = spip_fetch_array(spip_query(
+			"SELECT id_secteur FROM spip_rubriques
+			WHERE id_rubrique=$id_parent"));
+		if ($id_secteur)
+			spip_query("UPDATE spip_breves
+				SET id_rubrique=$id_secteur
+				WHERE id_rubrique=$id_rubrique");
+	} else
 		$id_parent = 0;
-	}
 
 	if ($flag_editable) {
 

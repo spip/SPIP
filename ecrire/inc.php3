@@ -28,8 +28,7 @@ include_ecrire("inc_forum.php3");
 include_ecrire('inc_admin.php3');
 
 
-//
-// Preferences de presentation
+//// Preferences de presentation
 //
 
 if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
