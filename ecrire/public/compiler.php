@@ -186,7 +186,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, $contexte, implode(',',$_options), "_request(\"connect\")") . ';';
 	}
 
-	return	"\n'<".	"?php ". $code . "\n?'." . "'>'";
+	return	"\n'<'.'".	"?php ". $code . "\n?'." . "'>'";
 }
 
 //
