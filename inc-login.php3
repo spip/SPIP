@@ -125,16 +125,8 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	}
 	else if ($prive) {
 		echo ouvre_login ("$nom_site<br><small>acc&egrave;s &agrave; l'espace priv&eacute;</small>");
-		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
-		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
-		echo "fournis lors de votre inscription. ";
 	} else {
-		echo ouvre_login ("$nom_site : identification");
-		if (!$message_login)
-			$message_login = "Pour vous identifier sur ce site,
-        	vous devez entrer les codes qui vous ont &eacute;t&eacute;
-        	fournis lors de votre inscription.";
-
+		echo ouvre_login ("$nom_site<br><small>identification</small>");
 		echo "<br>$message_login<br>\n";
 	}
 
@@ -167,7 +159,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
 		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40'></noscript>\n";
 
-		echo "<p>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
+		echo "<br><br>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
 		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
 
