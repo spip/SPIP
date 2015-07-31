@@ -310,6 +310,11 @@ function critere_recherche_dist($idb, &$boucles, $crit){
 
 	$boucle = &$boucles[$idb];
 
+	if (!$boucle->primary OR strpos($boucle->primary, ',')){
+		erreur_squelette(_T('zbug_critere_sur_table_sans_cle_primaire',array('critere'=>'recherche')), $boucle);
+		return;
+	}
+
 	if (isset($crit->param[0]))
 		$quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	else
@@ -327,6 +332,7 @@ function critere_recherche_dist($idb, &$boucles, $crit){
 		list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","'.$boucle->sql_serveur.'",'.$_modificateur.',"'.$boucle->primary.'");
 	}
 	';
+
 
 	$t = $boucle->id_table.'.'.$boucle->primary;
 	if (!in_array($t, $boucles[$idb]->select))
@@ -2306,7 +2312,7 @@ function critere_noeud_dist($idb, &$boucles, $crit){
 	$primary = $boucle->primary;
 
 	if (!$primary OR strpos($primary, ',')){
-		erreur_squelette(_T('zbug_doublon_sur_table_sans_cle_primaire'), "BOUCLE$idb");
+		erreur_squelette(_T('zbug_doublon_sur_table_sans_cle_primaire'), $boucle);
 		return;
 	}
 	$table = $boucle->type_requete;

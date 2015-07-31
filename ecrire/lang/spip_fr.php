@@ -687,6 +687,7 @@ et vous reconnecter au site.
 	'zbug_champ_hors_motif' => 'Champ @champ@ hors d’un contexte @motif@',
 	'zbug_code' => 'code',
 	'zbug_critere_inconnu' => 'Critère inconnu @critere@',
+	'zbug_critere_sur_table_sans_cle_primaire' => '{@critere@} sur une table sans clef primaire atomique',
 	'zbug_distant_interdit' => 'Externe interdit', # Contexte : une base de données "externe", pas gérée par SPIP, mais que SPIP 1.8 sait utiliser dans ses boucles -- seul problèmes certaines manipulations sont interdites sur ces bases-là.
 	'zbug_doublon_table_sans_cle_primaire' => 'Doublons sur une table sans clef primaire atomique',
 	'zbug_doublon_table_sans_index' => 'Doublons sur une table sans index',
