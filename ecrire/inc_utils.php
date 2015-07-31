@@ -486,6 +486,8 @@ function http_last_modified($lastmodified, $expire = 0) {
 // envoyer le navigateur sur une nouvelle adresse
 
 function redirige_par_entete($url, $fin="") {
+	## rustine temporaire
+	if (preg_match(',[^?],', $fin)) $fin = '?'.$fin;
 	spip_log("redirige $url$fin");
 	include_ecrire('inc_headers');
 	spip_header("Location: $url$fin");
