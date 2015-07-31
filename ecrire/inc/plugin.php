@@ -233,37 +233,6 @@ function verif_plugin($pipe_recherche = false){
 	ecrire_metas();
 }
 
-// mise a jour des donnees si envoi via formulaire
-// http://doc.spip.org/@enregistre_modif_plugin
-function enregistre_modif_plugin(){
-  // recuperer les plugins dans l'ordre des $_POST
-  $test = array();
-	foreach(liste_plugin_files() as $file){
-	  $test["statusplug_$file"] = $file;
-	}
-	// gerer les noms de repertoires qui ont un espace
-	// sachant qu'ils vont arriver dans le $_POST avec un _ a la place
-	// mais qu'il faut pas se melanger si jamais deux repertoire existent et ne different
-	// que par un espace et un underscore
-	foreach($test as $postvar=>$file){
-		$alt_postvar = str_replace(" ","_",$postvar); // les espaces deviennent des _
-		$alt_postvar = str_replace(".","_",$postvar); // les points deviennent des _
-		if (!isset($test[$alt_postvar]))
-	  	$test[$alt_postvar] = $file;
-	}
-	$plugin=array();
-	if (!isset($_POST['desactive_tous'])){
-		foreach($_POST as $choix=>$val){
-			if (isset($test[$choix])&&$val=='O')
-				$plugin[]=$test[$choix];
-		}
-	}
-	global $connect_id_auteur, $connect_login;
-	spip_log("Changement des plugins actifs par auteur id=$connect_id_auteur :".implode(',',$plugin));
-	ecrire_plugin_actifs($plugin);
-	ecrire_metas();
-}
-
 // http://doc.spip.org/@ordonne_plugin
 function ordonne_plugin(){
 	$liste = liste_chemin_plugin_actifs();
