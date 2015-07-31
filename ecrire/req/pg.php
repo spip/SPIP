@@ -512,7 +512,12 @@ function spip_pg_frommysql($arg)
 
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]\s*[)]/',
 			    ' EXTRACT(epoch FROM NOW())', $res);
-
+	
+	// la fonction md5(integer) n'est pas connu en pg
+	// il faut donc forcer les types en text (cas de md5(id_article))
+	$res = preg_replace('/md5\s*[(]([^\)]*)[)]/i',
+			    'MD5(CAST(\1 AS text))', $res);
+				
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]([^)]*)[)]/',
 			    ' EXTRACT(epoch FROM \1)', $res);
 
