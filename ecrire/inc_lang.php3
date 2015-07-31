@@ -195,7 +195,7 @@ function init_codes_langues() {
 	'bm' => "Bambara",
 	'bn' => "Bengali; Bangla",
 	'bo' => "Tibetan",
-	'br' => "breton",
+	'br' => "brezhoneg",
 	'ca' => "catal&#224;",
 	'co' => "corsu",
 	'cpf' => "Kr&eacute;ol r&eacute;yon&eacute;",
