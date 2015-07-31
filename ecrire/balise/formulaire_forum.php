@@ -161,10 +161,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		if ($afficher_texte != 'non') 
 			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot);
 
-		$alea = forum_fichier_tmp();
+		$arg = forum_fichier_tmp(join('', $ids));
 
-		include_spip('inc/actions');
-		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		// on sait que cette fonction est dans le fichier associe
+		$hash = calculer_action_auteur("ajout_forum-$arg");
 
 		// Poser un cookie pour ne pas retaper les infos invariables
 		include_spip('inc/cookie');
@@ -194,7 +195,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		'url' => $script, # ce sur quoi on fait le action='...'
 		'url_post' => $script_hidden, # pour les variables hidden
 		'url_site' => ($url_site ? $url_site : "http://"),
-		'alea' => $alea,
+		'arg' => $arg,
 		'hash' => $hash,
 		'nobot' => _request('nobot'),
 		'ajouter_groupe' => $ajouter_groupe,
@@ -253,10 +254,10 @@ function inclure_previsu($texte,$titre, $email_auteur, $auteur, $url_site, $nom_
 // si $afficher_texte = 'non')
 
 // http://doc.spip.org/@forum_fichier_tmp
-function forum_fichier_tmp()
+function forum_fichier_tmp($arg)
 {
 # astuce : mt_rand pour autoriser les hits simultanes
-	while (($alea = time() + @mt_rand())
+	while (($alea = time() + @mt_rand()) + intval($arg)
 	       AND @file_exists($f = _DIR_TMP."forum_$alea.lck"))
 	  {};
 	spip_touch ($f);

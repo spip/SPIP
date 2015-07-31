@@ -14,13 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
 include_spip('base/abstract_sql');
-include_spip('inc/actions');
 
 // Effacer un doc (et sa vignette)
 // http://doc.spip.org/@action_supprimer_dist
 function action_supprimer_dist() {
 
-	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f = charger_fonction('securiser_action', 'inc');
 	$var_f();
 
 	$arg = _request('arg');

@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
-include_spip('inc/actions');
 
 // En Ajax on utilise GET et sinon POST.
 // De plus Ajax en POST ne remplit pas $_POST 
@@ -23,7 +22,7 @@ include_spip('inc/actions');
 // http://doc.spip.org/@action_legender_dist
 function action_legender_dist() {
 	
-	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f = charger_fonction('securiser_action', 'inc');
 	$var_f();
 
 	$arg = _request('arg');

@@ -309,6 +309,7 @@ dist/vignettes/xml.png -text
 dist/vignettes/zip.png -text
 dist/win_width.htc -text
 ecrire/action/autoriser.php -text
+ecrire/action/converser.php -text
 ecrire/action/dater.php -text
 ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
@@ -492,6 +493,7 @@ ecrire/inc/plugin.php -text
 ecrire/inc/popularites.php -text
 ecrire/inc/referencer_traduction.php -text
 ecrire/inc/regler_moderation.php -text
+ecrire/inc/securiser_action.php -text
 ecrire/inc/selectionner.php -text
 ecrire/inc/selectionner_auteur.php -text
 ecrire/inc/sites_voir.php -text

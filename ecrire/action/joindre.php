@@ -27,7 +27,7 @@ function action_joindre_dist()
 	  $sousaction5,
 	  $_FILES,  $HTTP_POST_FILES;
 
-	$var_f = charger_fonction('controler_action_auteur', 'inc');
+	$var_f = charger_fonction('securiser_action', 'inc');
 	$var_f();
 
 	$redirect = _request('redirect');

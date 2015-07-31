@@ -161,24 +161,11 @@ if ($var_lang) {
 	}
  }
 
-// changer de langue espace prive (ou login)
-if ($var_lang_ecrire) {
-	include_spip('inc/lang');
-
-	spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
-	spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
-
-	if (_FILE_CONNECT
-	AND verifier_action_auteur("cookie-var_lang_ecrire", $hash)) {
-		spip_query("UPDATE spip_auteurs SET lang = " . _q($var_lang_ecrire) . " WHERE id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
-		$auteur_session['lang'] = $var_lang_ecrire;
-		$var_f = charger_fonction('session', 'inc');
-		$var_f($auteur_session);
-	}
-
-	$redirect = parametre_url($redirect,'lang',$var_lang_ecrire,'&');
+// changer de langue espace prive avant le login (i.e. pas authentfie)
+elseif ($var_lang_ecrire) {
+	include_spip('action/converser');
+	action_converser_post();
  }
-
   redirige_par_entete($redirect, true);
 }
 ?>
