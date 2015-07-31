@@ -536,7 +536,19 @@ function emboite_texte($texte, $fonc='',$self='')
 				$GLOBALS['xhtml_error'],
 				$regs,
 			       PREG_SET_ORDER);
-		$err = '<tr><th>#</th><th>Occ.</th><th>Li.</th><th>Col.</th><th>Err.</th></tr>';
+
+		$err = '<tr><th>'
+		.  _L('Numero')
+		. "</th><th>"
+		. _L('Occurrence')
+		. "</th><th>"
+		. _L('Ligne')
+		. "</th><th>"
+		. _L('Colonne')
+		. "</th><th>"
+		. _L('Erreur')
+		. "</th></tr>";
+
 		$fautifs = array();
 		$i = 0;
 		$encore = array();
@@ -572,7 +584,7 @@ function emboite_texte($texte, $fonc='',$self='')
 		.  $i
 		. "<a href='#fin_err'>"
 		.  _L(' erreur(s)')
-		.  "</a></h2><table id='debut_err'>"
+		.  "</a></h2><table id='debut_err' style='width: 100%'>"
 		. $err
 		. " </table><a id='fin_err'></a>";
 		return array(ancre_texte($texte, $fautifs), $err);
