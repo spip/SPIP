@@ -88,7 +88,7 @@ function assembler($fond, $connect='') {
 				$a = $renommer($url, $fond);
 				if (is_array($a)) {
 					list($ncontexte, $type, $url_redirect, $nfond) = $a;
-					if (isset($url_redirect)
+					if (strlen($url_redirect)
 					AND $url !== $url_redirect) {
 						spip_log("Redirige $url vers $url_redirect");
 						include_spip('inc/headers');

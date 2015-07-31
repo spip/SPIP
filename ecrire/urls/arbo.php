@@ -470,7 +470,10 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 	
 	include_spip('base/abstract_sql'); // chercher dans la table des URLS
 
-	// Compatilibite avec .htm/.html et autres terminaisons
+	// Revenir en utf-8 si encodage type %D8%A7 (farsi)
+	$url_propre = rawurldecode($url_propre);
+
+	// Compatibilite avec .htm/.html et autres terminaisons
 	$t = array_diff(array_unique(array_merge(array('.html','.htm','/'),url_arbo_terminaison(''))),array(''));
 	if (count($t))
 		$url_propre = preg_replace('{('
@@ -514,7 +517,7 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 			}
 			else {
 				// un segment est inconnu
-				if ($entite=='type_urls') {
+				if ($entite=='' OR $entite=='type_urls') {
 					// on genere une 404 comme il faut si on ne sait pas ou aller
 					return array(array(),'404');
 				}
@@ -523,12 +526,13 @@ function urls_arbo_dist($i, $entite, $args='', $ancre='') {
 		}
 
 		// gerer le retour depuis des urls propres
-		if ($entite=='type_urls' AND $GLOBALS['profondeur_url']<=0){
+		if (($entite=='' OR $entite=='type_urls')
+		AND $GLOBALS['profondeur_url']<=0){
 			$urls_anciennes = charger_fonction('propres','urls');
 			return $urls_anciennes($url_propre,$entite);
 		}
 	}
-	if ($entite=='type_urls') {
+	if ($entite=='' OR $entite=='type_urls' /* compat .htaccess 2.0 */) {
 		if ($type)
 			$entite =  ($type == 'syndic') ?  'site' : $type;
 		else {
