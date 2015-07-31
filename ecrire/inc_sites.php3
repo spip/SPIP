@@ -567,9 +567,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	global $flag_editable;
 
 	static $n_liste_sites;
-
-	$n_liste_sites++;
-	if (!$debut_liste_sites[$n_liste_sites]) $debut_liste_sites[$n_liste_sites] = 0;
+	global $spip_lang_rtl;
 
 	$adresse_page = substr($REQUEST_URI, strpos($REQUEST_URI, "/ecrire")+8, strlen($REQUEST_URI));
 	$adresse_page = ereg_replace("\&?debut\_liste\_sites\[$n_liste_sites\]\=[0-9]+","",$adresse_page);
@@ -580,131 +578,123 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 	$lien_url .= "debut_liste_sites[".$n_liste_sites."]=".$debut_liste_sites[$n_liste_sites]."&";
 
+	$cols = 2;
+	if ($connect_statut == '0minirezo') $cols ++;
+	if ($afficher_site) $cols ++;
 
-	$nombre_aff = 10;
+	$tranches = afficher_tranches_requete($requete, $cols);
 
- 	$result = spip_query($requete);
-	$num_rows = spip_num_rows($result);
+	if (strlen($tranches)) {
 
-	// Ne pas couper pour trop peu
-	if ($num_rows <= 1.5 * $nombre_aff) $nombre_aff = $num_rows;
+		if ($titre_table) echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
+		//debut_cadre_relief("rubrique-24.gif");
 
-		if ($num_rows > 0) {
-			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td width='100%' background=''>";
-			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
-
-			bandeau_titre_boite($titre_table, true);
-
-			if ($num_rows > $nombre_aff) {
-				echo "<tr><td background='' class='arial2' colspan='4'>";
-				for ($i = 0; $i < $num_rows; $i = $i + $nombre_aff){
-					$deb = $i + 1;
-					$fin = $i + $nombre_aff;
-					if ($fin > $num_rows) $fin = $num_rows;
-					if ($debut_liste_sites[$n_liste_sites] == $i) {
-						echo "[<b>$deb-$fin</b>] ";
-					} else {
-						echo "[<a href='".$adresse_page.$lien_url."debut_liste_sites[$n_liste_sites]=$i'>$deb-$fin</a>] ";
-					}
-				}
-				echo "</td></tr>";
-			}
-		
-			$ifond = 0;
-			$premier = true;
-			
-			$compteur_liste = 0;
-
-			while ($row = spip_fetch_array($result)) {
-				if ($compteur_liste >= $debut_liste_sites[$n_liste_sites] AND $compteur_liste < $debut_liste_sites[$n_liste_sites] + $nombre_aff) {
-					$ifond = $ifond ^ 1;
-					$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
-
-					$id_syndic_article=$row["id_syndic_article"];
-					$id_syndic=$row["id_syndic"];
-					$titre=typo($row["titre"]);
-					$url=$row["url"];
-					$date=$row["date"];
-					$lesauteurs=propre($row["lesauteurs"]);
-					$statut=$row["statut"];
-					$descriptif=$row["descriptif"];
-
-					echo "<tr bgcolor='$couleur'>";
-					
-					echo "<td class='arial1'>";
-					echo "<a href='$url'>";
-					if ($statut=='publie') {
-						if (acces_restreint_rubrique($id_rubrique))
-							$puce = 'puce-verte-anim.gif';
-						else
-							$puce='puce-verte.gif';
-					}
-					else if ($statut == "refuse") {
-							$puce = 'puce-poubelle.gif';
-					}
-
-					else if ($statut == "dispo") { // moderation : a valider
-							$puce = 'puce-rouge.gif';
-					}
-
-					else if ($statut == "off") { // vieillerie
-							$puce = 'puce-rouge-anim.gif';
-					}
-
-					echo http_img_pack($puce, "", "width='7' height='7' border='0'");
-
-					if ($statut == "refuse")
-						echo "<font color='black'>&nbsp;&nbsp;$titre</font>";
-					else
-						echo "&nbsp;&nbsp;".$titre;
-
-					echo "</a>";
-
-					if (strlen($lesauteurs)>0) echo "<br />"._T('info_auteurs_nombre')." <font color='#336666'>$lesauteurs</font>";
-					if (strlen($descriptif)>0) echo "<br />"._T('info_descriptif_nombre')." <font color='#336666'>$descriptif</font>";
-					
-					echo "</td>";
-					
-					// $my_sites cache les resultats des requetes sur les sites
-					if ($afficher_site) {
-						if (!$my_sites[$id_syndic])
-							$my_sites[$id_syndic] = spip_fetch_array(spip_query(
-								"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
-						echo "<td class='arial1' align='left'>";
-						$aff = $my_sites[$id_syndic]['nom_site'];
-						if ($my_sites[$id_syndic]['moderation'] == 'oui')
-							echo "<i>$aff</i>";
-						else
-							echo $aff;
-						echo "</td>";
-					} else echo "<td></td>";
-
-					echo "<td class='arial1' align='right'>";
-					
-					if ($connect_statut == '0minirezo'){
-						if ($statut == "publie"){
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
-						
-						}
-						else if ($statut == "refuse"){
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_retablir_lien')."</a>]";
-						}
-						else if ($statut == "dispo") {
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_valider_lien')."</a>]";
-						}
-					} else {
-						echo "&nbsp;";
-					}
-
-					echo "</td>";
-					echo "</tr></n>";
-
-			}
-			$compteur_liste++;
-
+		if ($titre_table) {
+			bandeau_titre_boite2($titre_table, "site-24.gif", "#999999", "white");
 		}
-		echo "</table></td></tr></table></p>";
+		echo "<table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
+
+		echo $tranches;
+
+		$result = spip_query($requete);
+
+		$table = '';
+		while ($row = spip_fetch_array($result)) {
+			$vals = '';
+
+			$id_syndic_article=$row["id_syndic_article"];
+			$id_syndic=$row["id_syndic"];
+			$titre=typo($row["titre"]);
+			$url=$row["url"];
+			$date=$row["date"];
+			$lesauteurs=propre($row["lesauteurs"]);
+			$statut=$row["statut"];
+			$descriptif=propre($row["descriptif"]);
+
+			
+			if ($statut=='publie') {
+				if (acces_restreint_rubrique($id_rubrique))
+					$puce = 'puce-verte-anim.gif';
+				else
+					$puce='puce-verte.gif';
+			}
+			else if ($statut == "refuse") {
+					$puce = 'puce-poubelle.gif';
+			}
+
+			else if ($statut == "dispo") { // moderation : a valider
+					$puce = 'puce-rouge.gif';
+			}
+
+			else if ($statut == "off") { // vieillerie
+					$puce = 'puce-rouge-anim.gif';
+			}
+
+			$s = http_img_pack($puce, "", "width='7' height='7' border='0'");
+			$vals[] = $s;
+
+			$s = "<a href='$url'>$titre</a>";
+			if (strlen($lesauteurs) > 0) $s .= " ($lesauteurs)";
+			if (strlen($descriptif) > 0) $s .= "<div class='arial1'>$descriptif</div>";
+			$vals[] = $s;
+
+			// $my_sites cache les resultats des requetes sur les sites
+			if ($afficher_site) {
+				if (!$my_sites[$id_syndic])
+					$my_sites[$id_syndic] = spip_fetch_array(spip_query(
+						"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
+
+				$aff = $my_sites[$id_syndic]['nom_site'];
+				if ($my_sites[$id_syndic]['moderation'] == 'oui')
+					$s = "<i>$aff</i>";
+				else
+					$s = $aff;
+					
+				$s = "<a href='sites.php3?id_syndic=$id_syndic'>$aff</a>";
+
+				$vals[] = $s;
+			}
+
+			
+			if ($connect_statut == '0minirezo'){
+				if ($statut == "publie"){
+					$s =  "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
+				
+				}
+				else if ($statut == "refuse"){
+					$s =  "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_retablir_lien')."</a>]";
+				}
+				else if ($statut == "dispo") {
+					$s = "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_valider_lien')."</a>]";
+				}
+				$vals[] = $s;
+			}
+					
+			$table[] = $vals;
+		}
+		spip_free_result($result);
+
+		
+		if ($afficher_site) {
+			$largeurs = array(7, '', '100');
+			$styles = array('','arial11', 'arial1');
+		} else {
+			$largeurs = array(7, '');
+			$styles = array('','arial11');
+		}
+		if ($connect_statut == '0minirezo') {
+			$largeurs[] = '80';
+			$styles[] = 'arial1';
+		}
+		
+		afficher_liste($largeurs, $table, $styles);
+
+		echo "</TABLE>";
+		//fin_cadre_relief();
+		echo "</div>";
 	}
+	return $tous_id;
 }
 
 
