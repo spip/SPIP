@@ -2258,7 +2258,7 @@ function couleur_4096($couleur) {
 
 
 // http://doc.spip.org/@couleur_extreme
-function couleur_extreme ($couleur, $limite=122) {
+function couleur_extreme ($couleur, $limite=0.5) {
 	// force la couleur au noir ou au blanc le plus proche
 	// -> donc couleur foncee devient noire
 	//    et couleur claire devient blanche
@@ -2269,9 +2269,24 @@ function couleur_extreme ($couleur, $limite=122) {
 	$green = $couleurs["green"];
 	$blue = $couleurs["blue"];
 	
+	
+	/*	
 	$moyenne = round(($red+$green+$blue)/3);
 
 	if ($moyenne > $limite) $couleur_texte = "ffffff";
+	else $couleur_texte = "000000";
+	*/
+
+	$hsl = couleur_rgb2hsl ($red, $green, $blue);
+
+	$h = $hsl["h"];
+	$s = $hsl["s"];
+	$l = $hsl["l"];
+	
+	$rvb = couleur_hsl2rgb($h, $s, $l);
+	print_r($rvb);
+
+	if ($hsl["l"] > $limite) $couleur_texte = "ffffff";
 	else $couleur_texte = "000000";
 
 	return $couleur_texte;
@@ -2363,6 +2378,164 @@ function couleur_saturation($couleur, $val) {
 	return $couleur;
 		
 }
+
+
+
+function couleur_rgb2hsv ($R,$G,$B) {
+	$var_R = ( $R / 255 ) ;                    //Where RGB values = 0 Ã· 255
+	$var_G = ( $G / 255 );
+	$var_B = ( $B / 255 );
+
+	$var_Min = min( $var_R, $var_G, $var_B ) ;   //Min. value of RGB
+	$var_Max = max( $var_R, $var_G, $var_B ) ;   //Max. value of RGB
+	$del_Max = $var_Max - $var_Min  ;           //Delta RGB value
+
+	$V = $var_Max;
+	$L = ( $var_Max + $var_Min ) / 2;
+	
+	if ( $del_Max == 0 )                     //This is a gray, no chroma...
+	{
+	   $H = 0 ;                            //HSL results = 0 Ã· 1
+	   $S = 0 ;
+	}
+	else                                    //Chromatic data...
+	{
+	   $S = $del_Max / $var_Max;
+	
+	   $del_R = ( ( ( $var_Max - $var_R ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+	   $del_G = ( ( ( $var_Max - $var_G ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+	   $del_B = ( ( ( $var_Max - $var_B ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+	
+	   if      ( $var_R == $var_Max ) $H = $del_B - $del_G;
+	   else if ( $var_G == $var_Max ) $H = ( 1 / 3 ) + $del_R - $del_B;
+	   else if ( $var_B == $var_Max ) $H = ( 2 / 3 ) + $del_G - $del_R;
+	
+	   if ( $H < 0 )  $H =  $H + 1;
+	   if ( $H > 1 )  $H = $H - 1;
+	}
+				
+	$ret["h"] = $H;
+	$ret["s"] = $S;
+	$ret["v"] = $V;
+	
+	return $ret;
+}
+
+
+function couleur_hsv2rgb ($H,$S,$V) {
+	
+	if ( $S == 0 )                       //HSV values = 0 Ã· 1
+	{
+	   $R = $V * 255;
+	   $G = $V * 255;
+	   $B = $V * 255;
+	}
+	else
+	{
+	   $var_h = $H * 6;
+	   if ( $var_h == 6 ) $var_h = 0 ;     //H must be < 1
+	   $var_i = floor( $var_h )  ;           //Or ... var_i = floor( var_h )
+	   $var_1 = $V * ( 1 - $S );
+	   $var_2 = $V * ( 1 - $S * ( $var_h - $var_i ) );
+	   $var_3 = $V * ( 1 - $S * ( 1 - ( $var_h - $var_i ) ) );
+	
+	
+	   if      ( $var_i == 0 ) { $var_r = $V     ; $var_g = $var_3 ; $var_b = $var_1 ; }
+	   else if ( $var_i == 1 ) { $var_r = $var_2 ; $var_g = $V     ; $var_b = $var_1 ; }
+	   else if ( $var_i == 2 ) { $var_r = $var_1 ; $var_g = $V     ; $var_b = $var_3 ; }
+	   else if ( $var_i == 3 ) { $var_r = $var_1 ; $var_g = $var_2 ; $var_b = $V ;     }
+	   else if ( $var_i == 4 ) { $var_r = $var_3 ; $var_g = $var_1 ; $var_b = $V ; }
+	   else                   { $var_r = $V     ; $var_g = $var_1 ; $var_b = $var_2; }
+	
+	   $R = $var_r * 255;                  //RGB results = 0 Ã· 255
+	   $G = $var_g * 255;
+	   $B = $var_b * 255;
+	}
+	$ret["r"] = floor($R);
+	$ret["g"] = floor($G);
+	$ret["b"] = floor($B);
+	
+	return $ret;
+}
+
+
+function couleur_rgb2hsl ($R,$G,$B) {
+	$var_R = ( $R / 255 ) ;                    //Where RGB values = 0 Ã· 255
+	$var_G = ( $G / 255 );
+	$var_B = ( $B / 255 );
+
+	$var_Min = min( $var_R, $var_G, $var_B ) ;   //Min. value of RGB
+	$var_Max = max( $var_R, $var_G, $var_B ) ;   //Max. value of RGB
+	$del_Max = $var_Max - $var_Min  ;           //Delta RGB value
+
+	$L = ( $var_Max + $var_Min ) / 2;
+	
+	if ( $del_Max == 0 )                     //This is a gray, no chroma...
+	{
+	   $H = 0 ;                            //HSL results = 0 Ã· 1
+	   $S = 0 ;
+	}
+	else                                    //Chromatic data...
+	{
+		if ($L < 0.5 ) $S = $del_Max / ( $var_Max+ $var_Min);
+		else $S = $del_Max/ ( 2 - $var_Max - $var_Min);
+
+		$del_R = ( ( ( $var_Max- $var_R) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+		$del_G = ( ( ( $var_Max- $var_G) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+		$del_B = ( ( ( $var_Max- $var_B) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+
+		if ( $var_R == $var_Max) $H= $del_B - $del_G;
+		else if ( $var_G == $var_Max) $H= ( 1 / 3 ) + $del_R - $del_B;
+		else if ( $var_B == $var_Max) $H= ( 2 / 3 ) + $del_G - $del_R;
+
+		if ( $H < 0 ) $H+= 1;
+		if ( $H > 1 ) $H-= 1;
+	}
+				
+	$ret["h"] = $H;
+	$ret["s"] = $S;
+	$ret["l"] = $L;
+	
+	return $ret;
+}
+
+
+function hue_2_rgb( $v1, $v2, $vH ) {
+   if ( $vH < 0 ) $vH += 1;
+   if ( $vH > 1 ) $vH -= 1;
+   if ( ( 6 * $vH ) < 1 ) return ( $v1 + ( $v2 - $v1 ) * 6 * $vH );
+   if ( ( 2 * $vH ) < 1 ) return ( $v2 );
+   if ( ( 3 * $vH ) < 2 ) return ( $v1 + ( $v2 - $v1 ) * ( ( 2 / 3 ) - $vH ) * 6 );
+   return ( $v1 );
+}
+
+function couleur_hsl2rgb ($H,$S,$L) {
+	
+	if ( $S == 0 )                       //HSV values = 0 Ã· 1
+	{
+	   $R = $V * 255;
+	   $G = $V * 255;
+	   $B = $V * 255;
+	}
+	else
+	{
+		if ( $L < 0.5 ) $var_2 = $L * ( 1 + $S );
+		else            $var_2 = ( $L + $S ) - ( $S * $L );
+
+		$var_1 = 2 * $L - $var_2;
+
+		$R = 255 * hue_2_rgb( $var_1, $var_2, $H + ( 1 / 3 ) ) ;
+		$G = 255 * hue_2_rgb( $var_1, $var_2, $H );
+		$B = 255 * hue_2_rgb( $var_1, $var_2, $H - ( 1 / 3 ) );
+	}
+	$ret["r"] = floor($R);
+	$ret["g"] = floor($G);
+	$ret["b"] = floor($B);
+	
+	return $ret;
+}
+
+
 
 
 // Image typographique
