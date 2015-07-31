@@ -3,7 +3,7 @@
 /*  ------------------------------------------ */
 
 
-/* Spip Styles : intertitre, citations, cadre, etc...
+/* Spip Styles : intertitre, citations, etc...
 ----------------------------------------------- */
 b.spip {}
 i.spip {}
@@ -25,29 +25,33 @@ h3.spip {
 p.spip {}
 p.spip_note {} /* inutile : a supprimer */
 
-blockquote.spip {}
+/* * Citations, code et poesie */
+q, blockquote, .spip_poesie, .spip_serif { font-family: Georgia, Garamond, Times, serif; }
+
+blockquote, blockquote.spip { 
+	margin: 10px 20px; 
+	padding: 0em 1em; 
+	border: 1px dotted #CCCCCC; }
 
 .spip_poesie { 
 	margin-bottom: 5px; 
 	margin: 10px 20px; 
 	padding-left: 10px; 
-	border-left: 1px solid #CCCCCC;
-	font-family: Georgia, Garamond, Times, serif; }
+	border-left: 1px solid #CCCCCC; }
 .spip_poesie div { text-indent: -60px; margin-left: 60px; }
-	
-.spip_serif { font-family: Georgia, Garamond, Times, serif; }
 
 .spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
-.spip_cadre { width: 100%; border: 1px solid #CCCCCC; }
+.spip_cadre { width: 100%; border: 1px dotted #CCCCCC; }
 
 /*  Tableaux
 ---------------------------------------------- */
-table.spip { 
-	margin: 0 auto; 
+table.spip {
 	width: 100%;
+	margin-bottom: 1em;
+	background: #FFF;
 	border: 1px solid #333333; 
 	border-collapse: collapse; 
-	font: 0.88em Verdana, Arial, Helvetica, sans-serif; }
+	font-size: 0.82em; }
 	
 table.spip caption { 
 	caption-side: top; /* bottom pas pris en compte par IE */
@@ -56,20 +60,20 @@ table.spip caption {
 	text-align: center; 
 	font-weight: bold; }
 	
-table.spip tr.row_first { background: #F8F8E8; text-align: center; font-size: 1em; }
-table.spip tr.row_odd { background: #F0F0F0; font-size: 1em; }
-table.spip tr.row_even { background: #FAFAFA; font-size: 1em; }
+table.spip tr.row_first { background: #F8F8E8; text-align: center; }
+table.spip tr.row_odd { background: #F0F0F0; }
+table.spip tr.row_even { background: #FAFAFA; }
 table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
 /*  Logos et documents
 ---------------------------------------------- */
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
-.spip_documents { font-family: Verdana, Arial, Helvetica, sans-serif; }
-.spip_documents_center { margin: auto; text-align: center; width: 80%; }
+.spip_documents {}
+.spip_documents_center { width: 100%; margin: auto; text-align: center; }
 .spip_documents_left { float: left; margin-right: 15px; text-align: left; }
 .spip_documents_right { float: right; margin-left: 15px; text-align: right; }
-.spip_doc_titre { font-weight: bold; text-align: center; font-size: 0.88em; }
+.spip_doc_titre { text-align: center; font-weight: bold; font-size: 0.88em; }
 .spip_doc_descriptif { clear: both; font-size: 0.82em; }
 
 /* *  Images typographiques (via image_typo), URL a revoir... */
@@ -113,45 +117,43 @@ form, fieldset, legend, label, input, textarea, select, option {
 	width: 99%;
 	background: #FCFCF0;
 	padding: 1px;
-	border: 1px solid #666666;
-	color: #000000;
-    font-size: 1em; }
+	border: 1px solid #666;
+	color: #000; }
 
 input.spip_bouton {
 	float: right;
-	/*width: auto;*/
-	background: #666666;
+	background: #666;
 	margin: 3px 0;
 	padding: 1px 2px;
-	border: 2px outset #666666;
+	border: 2px outset #666;
 	font-weight: bold;
-	color: #FFFFFF; }
+	color: #FFF; }
 
 /* * Reponse du formulaire (erreur) */
 .reponse_formulaire {
 	font-weight: bold;
 	color: #FF0000; }
 fieldset.reponse_formulaire {  
-	background: #FFFFFF;  
+	background: #FFF;  
 	border: 1px solid #FF6666; }
 fieldset.reponse_formulaire legend { font-weight: normal; }
 fieldset.reponse_formulaire p { padding: 4px; }
 
 /* * Previsualisation du message */
 .previsu {  
-	background: #FFFFFF;  
+	background: #FFF;  
 	margin-bottom: 16px;  
 	padding: 12px;  
-	border: 1px solid #666666;  
-	color: #000000; } 
+	border: 1px solid #666;  
+	color: #000; } 
 .previsu .titre {  
 	font-weight: bold;  
 	font-size: 1.18em; } 
 
 /* * Barre de raccourcis */
 a.spip_barre img {
-	border-left: 1px solid #FFFFFF;
-	border-top: 1px solid #FFFFFF;
+	border-left: 1px solid #FFF;
+	border-top: 1px solid #FFF;
 	border-right: 1px solid #AA9966;
 	border-bottom: 1px solid #AA9966;
 	padding: 3px;
@@ -198,7 +200,7 @@ div.choix_mots label { display: inline; }
 /*  ------------------------------------------ */
 a { text-decoration: none; color: #333333; }
 a.on { font-weight: bold; }
-a:hover { text-decoration: underline; color: #000000; }
+a:hover { text-decoration: underline; color: #000; }
 a.spip_in { color: #A02020; } /* liens internes */
 a.spip_out { color: #2020A0; } /* liens sortants */
 a.spip_url { color: #2020A0; } /* liens url sortants */

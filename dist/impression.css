@@ -2,128 +2,101 @@
 /*  Feuille de style specifique a l'impression                       */
 /*  ---------------------------------------------------------------- */
 
- 
-/* Pour les liens, on desactive les couleurs
-   et on affiche l'URL cible a la suite du lien (!) */
+/*  Correction des styles HTML par defaut
+---------------------------------------------- */
+body { background: #FFF; margin: 15pt; text-align: left; font: 12pt "Lucida Grande", "Lucida Sans Unicode", Verdana, sans-serif; color: #000; }
 
-a { color: black; text-decoration: underline; }
-a:visited { color: black; text-decoration: underline; }
-a.spip_in { color: black; text-decoration: underline; }
-a.spip_out { color: black; text-decoration: underline; }
-a:after {
-	display: inline;
-	border: 1px solid dotted;
-	content: " [" attr(href) "]";
-}
+img, table { margin: 0; padding: 0; border: 0; }
+ul, ol, li { margin: 0; padding: 0; list-style: none; }
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
-/*
- * Un peu de coquetterie
- */
+/*  Ne pas imprimer : on elimine les elements de navigation (display: none;)
+---------------------------------------------- */
+#entete, #hierarchie, #navigation, .encart, #pied { display: none; }
+.repondre, .forum-repondre-message, .formulaire_spip { display: none; }
+.spip-admin, .spip-admin-float, .invisible { display: none; }
+
+/*  Pour les liens, on desactive les couleurs et
+/*  on affiche l'URL cible a la suite des liens sortants (!)
+---------------------------------------------- */
+a, a:visited, a.spip_in, a.spip_out, a.spip_url, a.spip_glossaire { color: #552200; text-decoration: underline; }
+a.spip_out:after, a.spip_url:after { display: inline; content: " [" attr(href) "]"; }
+
+
+/*  Disposition : on choisit un affichage de base
+---------------------------------------------- */
+
+#page {}
+#contenu {}
+
+.nettoyeur { clear: both; }
+
+.spip_logos { float: right; margin-left: 0.8em; }
+
+/*  Un peu de coquetterie
+---------------------------------------------- */
+
+.cartouche { margin-bottom: 2em; }
+.cartouche small { font-size: 0.71em; }
+.cartouche .titre { font-size: 1.27em; font-weight: bold; }
+.cartouche p { margin: 0; padding: 0; clear: left; }
+.cartouche .traductions { display: none; }
+.cartouche .surtitre, .cartouche .soustitre { font-size: 0.82em; font-variant: small-caps; }
 
 .chapo {
-	line-height: 1.4em;
-	margin-top: 1em;
-}
-.texte {
-}
-.ps {
-	padding-top: 0.6em;
-	margin-top: 0.6em;
-	border-top: 1px dashed #404040;
-}
-.notes {
-	margin-top: 0.6em;
-	margin-bottom: 0.6em;
-	border-top: 1px solid #707070;
-}
-.structure {
-	display: none;
-}
-.spip-admin {
-	display: none;
-}
-
-
-.contenu {
-	margin: 10px;
-}
-.contenu h1 {
-	margin-top: 0em;
-	margin-bottom: 0em;
-}
-.contenu h1.titre-extrait {
-}
-.contenu h1.titre-texte {
-}
-.contenu .surtitre {
-	margin-top: 0em;
-	margin-bottom: 0em;
-}
-.contenu .detail {
-	margin-left: 2em;
-}
-.extrait {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-	margin-left: 2em;
-	margin-right: 0em;
+	margin-bottom: 1.5em; 
+	font-size: 0.82em; 
+	font-weight: bold; 
 	line-height: 1.4em;
 }
+.lien { font-size: 0.82em; font-weight: bold; }
 
+.texte { line-height: 1.4em; }
 
-/*
- * Disposition : on elimine les elements de navigation (display: none)
- * et on choisit un affichage de base pour le principal
- */
+h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15em; }
 
-#principal {
-	margin: 10px;
+.ps, .notes, .forum-decompte, #documents_portfolio, #documents_joints {
+	margin-top: 1.4em;
+	padding-top: 0.2em;
+	border-top: 2pt solid #CCCCCC;
+	font-size: 0.82em;
 }
+.ps h3, .notes h3, .forum-decompte, #documents_joints h3 { font-weight: bold; }
 
-#navigation {
-	display: none;
-}
+/*  Citations, tableaux, etc...
+---------------------------------------------- */
+q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
+.spip_code, .spip_cadre { font-family: monospace; }
 
-.encart {
-	display: none;
-}
+.lien, blockquote, .spip_poesie, .spip_cadre, .extrait .texte {
+ 	background: #FFF;
+	margin: 1em;
+	padding: 1em;
+	border: 1pt dotted #CCCCCC; }
 
-.cartouche {
-	margin-top: 0.5em;
-	padding-top: 1em;
-	margin-bottom: 1em;
-}
+table {
+ 	width: 99%; background: #FFF; margin-bottom: 1em;
+ 	border-collapse: collapse; table-layout: fixed;
+ 	border-top: 1pt solid #CCCCCC; border-left: 1pt solid #CCCCCC;
+ 	font-size: 0.88em; }
+table td, table th { padding: 4pt; text-align: left; vertical-align: top; border-bottom: 1pt solid #CCCCCC; border-right: 1pt solid #CCCCCC; }
 
-.cartouche .spip_logos {
-	margin-left: 0px;
-	padding-left: 0px;
-	margin-right: 0.8em;
-}
+/*  Messages de forums
+---------------------------------------------- */
+.forum { margin: 2em 0; font-size: 0.82em; }
+.forum-fil ul { margin-left: 0.5em; }
+.forum-chapo .forum-titre { display: block; font-weight: bold; }
+ul .message { background: #FAFAFA; border: 1pt solid #CCCCCC; padding: 1em; margin-bottom: 1em; }
 
+/*  Listes et extraits introductifs 
+---------------------------------------------- */
+.extrait { margin-bottom: 1em; padding-top: 0.3em; }
+.extrait .titre { font-size: 1.03em; font-weight: bold; }
+.extrait p { margin: 0; padding: 0; }
+.extrait small { display: block; font-size: 0.71em; }
 
-/*
- * Forums
- */
-
-.forum-repondre {
-	display: none;
-}
-.forum-repondre-message {
-	display: none;
-}
-
-
-/*
- *  Images typographiques (via image_typo) URL a revoir...
- */
-.image_typo {
-	behavior: url("spip.php?page=win_png");
-}
-
-/*
- * Boutons admin
- */
- 
-.spip-admin-float {
-	display: none;
-}
+/*  Plan du site
+---------------------------------------------- */
+#contenu.plan h3 { font-size: 1.15em; font-weight: bold; }
+#contenu.plan ul { margin-left: 1em; margin-bottom: 1em; }
+#contenu.plan li { list-style: square; }

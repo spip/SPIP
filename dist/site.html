@@ -11,10 +11,10 @@
 	<meta name="generator" content="SPIP" />
 
 	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
-	<BOUCLE_lang2(RUBRIQUES){id_rubrique}><link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="all" /></BOUCLE_lang2>
+	<BOUCLE_lang2(RUBRIQUES){id_rubrique}><link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" /></BOUCLE_lang2>
 
 	<!-- Feuille de styles CSS pour l'impression -->
 	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
@@ -70,7 +70,7 @@
 				[(#REM) Menu de navigation par rubriques ]
 				<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
-				[(#REM) Autres sites Web ]
+				[(#REM) Autres sites web ]
 				<B_sites>
 				<div class="syndic">
 					<h3 class="titre"><:sites_web:></h3>

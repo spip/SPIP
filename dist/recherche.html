@@ -9,10 +9,10 @@
 	<meta name="generator" content="SPIP" />
 
 	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
-	<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="all" />
+	<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'impression -->
 	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
@@ -44,14 +44,14 @@
             <div class="contre-encart">
 
                 [(#REM) Articles trouves ]
-                <B_articles><ul>
+                <B_articles><ol>
                     <BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {0,10}>
                     <li class="extrait">
                     <h3><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
                     <small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
                     </li>
                     </BOUCLE_articles>
-                </ul></B_articles>
+                </ol></B_articles>
 
             </div><!-- fin contre-encart -->
 
@@ -69,7 +69,7 @@
                 </div>
                 </B_rubriques>
 
-                [(#REM) Mots-cles trouves et articles associes ]
+                [(#REM) Mots-cles trouves ]
                 <B_mots>
                 <div class="divers">
                     <h3 class="titre"><:mots_clefs:></h3>
@@ -105,7 +105,7 @@
                 </div>
                 </B_messages>
 
-                [(#REM) Sites Web trouves ]
+                [(#REM) Sites web trouves ]
                 <B_sites>
                 <div class="syndic">
                     <h3 class="titre"><:sites_web:></h3>
