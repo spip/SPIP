@@ -159,6 +159,7 @@ $table_criteres_infixes = array('<', '>', '<=', '>=', '==', '===', '!=', '!==', 
 //ces variables ne sont pas initialisees par "$var = array()"
 // afin de permettre leur extension dans mes_options.php etc
 
+// http://doc.spip.org/@declarer_interfaces
 function declarer_interfaces(){
 global $exceptions_des_tables, $table_des_tables;
 global $table_date;
