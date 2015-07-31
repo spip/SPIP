@@ -38,7 +38,8 @@ hr.clear { visibility: hidden; }
 .no-js .display_au_chargement { display: block; }
 
 /* ajax */
-.image_loading {float:right;}
+div.ajaxbloc, div.ajax {position:relative;}
+div.ajaxbloc>.image_loading,div.ajax>.image_loading {position:absolute;right:0;}
 
 
 /* style par defaut sur les tables. selecteur generique pour avoir une faible priorite */
