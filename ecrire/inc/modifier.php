@@ -27,6 +27,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	include_spip('inc/filtres');
 
 	$table_objet = table_objet($type);
+	$spip_table_objet = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table_objet, $serveur);
@@ -76,7 +77,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
-				'table' => 'spip_'.$table_objet,
+				'table' => $spip_table_objet,
 				'id_objet' => $id,
 				'champs' => $options['champs']
 			),
@@ -102,7 +103,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	$verifier = array();
 	foreach ($champs as $ch => $val)
 		$verifier[] = "($ch IS NULL OR $ch!=$val)";
-	if (!sql_countsel("spip_$table_objet", "($id_table_objet=$id) AND (" . join(' OR ',$verifier). ")",
+	if (!sql_countsel($spip_table_objet, "($id_table_objet=$id) AND (" . join(' OR ',$verifier). ")",
 	null,null,null,$serveur))
 		return false;
 
@@ -114,7 +115,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		$champs[$options['date_modif']] = 'NOW()';
 
 	// allez on commit la modif
-	sql_update("spip_$table_objet", $champs, "$id_table_objet=$id", $serveur);
+	sql_update($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
 
 	// Invalider les caches
 	if ($options['invalideur']) {
@@ -131,7 +132,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	pipeline('post_edition',
 		array(
 			'args' => array(
-				'table' => 'spip_'.$table_objet,
+				'table' => $spip_table_objet,
 				'id_objet' => $id,
 				'champs' => $options['champs']
 			),
@@ -152,7 +153,7 @@ function marquer_doublons_documents($champs,$id,$id_table_objet,$table_objet){
 	if (!isset($champs['chapo'])) $load = 'chapo';
 	if ($load){
 		$champs[$load] = "";
-		$res = sql_select("$load", "spip_$table_objet", "$id_table_objet=".sql_quote($id));
+		$res = sql_select("$load", $spip_table_objet, "$id_table_objet=".sql_quote($id));
 		if ($row = sql_fetch($res) AND isset($row[$load]))
 			$champs[$load] = $row[$load];
 	}

@@ -216,7 +216,7 @@ function table_objet($type) {
 		'doc' => 'documents', # pour les modeles
 		'img' => 'documents',
 		'emb' => 'documents',
-		'forum' => 'forum', # hum
+		'forum' => 'forums', # hum hum redevient spip_forum par table_objet_sql mais casse par un bete "spip_".table_objet()
 		'groupe_mots' => 'groupes_mots', # hum
 		'groupe' => 'groupes_mots', # hum (EXPOSE)
 		'message' => 'messages',
@@ -235,7 +235,14 @@ function table_objet($type) {
 
 // http://doc.spip.org/@table_objet_sql
 function table_objet_sql($type) {
-	return 'spip_' . table_objet($type);
+	global $table_des_tables;
+	$nom = table_objet($type);
+	include_spip('public/interfaces');
+	if (isset($table_des_tables[$nom])) {
+		$t = $table_des_tables[$nom];
+		$nom = 'spip_' . $t;
+	}
+	return $nom ;
 }
 
 // http://doc.spip.org/@id_table_objet
