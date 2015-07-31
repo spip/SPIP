@@ -50,9 +50,10 @@ function inc_editer_mots_dist($objet, $id_objet, $cherche_mot, $select_groupe, $
 
 	if (!$cpt) {
 		if (!$flag) return;
-		$cpt = sql_fetch(editer_mots_droits("COUNT(*) AS n", "$table = 'oui'"));
+		$droit = substr($GLOBALS['visiteur_session']['statut'],1);
+		$cpt = sql_getfetsel("COUNT(*)", 'spip_groupes_mots', "$droit = 'oui' AND $table = 'oui'");
 
-		if (!$cpt['n']) return;
+		if (!$cpt) return;
 	}
 
 	//
