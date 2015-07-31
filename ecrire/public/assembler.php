@@ -122,10 +122,8 @@ function assembler_page ($fond) {
 	// Si requete HEAD ou Last-modified compatible, ignorer le texte
 	// et pas de content-type (pour contrer le bouton admin de inc-public)
 
-	spip_log("puis-je flinguer la page "  . $GLOBALS['HTTP_IF_MODIFIED_SINCE']  . "$headers_only"); 
 	if ($headers_only) {
 		$page['entetes']["Connection"] = "close";
-		spip_log("je flingue la page");
 		$page['texte'] = "";
 	} else {
 		if (!$use_cache)
