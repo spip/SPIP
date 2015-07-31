@@ -10,15 +10,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
 
-function brouteur_dist($id_rubrique)
+function brouteur_dist()
 {
-	global $spip_ecran, $spip_lang_left;
+  global $spip_ecran, $spip_lang_left,$id_rubrique;
 
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;

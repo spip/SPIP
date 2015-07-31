@@ -13,9 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
 include_ecrire('inc_forum.php3');
 
 function forum_parent($id_forum) {
@@ -198,10 +196,10 @@ function controle_un_forum($row, $rappel) {
 // Debut de la page de controle
 //
 
-function controle_forum($page, $debut, $debut_id_forum, $id_rubrique)
+function controle_forum_dist()
 {
 
-  global $connect_statut, $connect_toutes_rubriques;
+  global $page, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;
 
   debut_page(_T('titre_page_forum_suivi'), "redacteurs", "forum-controle");
 

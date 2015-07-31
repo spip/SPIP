@@ -260,8 +260,11 @@ function liste_rubriques($id_rubrique) {
 	return $rubriques;
 }
 
-function export_dist($id_rubrique, $maj)
+function export_dist()
 {
+
+	global $id_rubrique, $maj;
+	$id_rubrique = intval($id_rubrique);
 
 	header("Content-Type: text/plain");
 
