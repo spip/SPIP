@@ -355,3 +355,12 @@ div.navigation-calendrier img {
 .jour_gris { background:#eee;color:#000;}
 .jour_pris { background:#fff;color:#000;}
 .calendrier-cadreagenda { background:#eee;}
+
+/* grille du calendrier pour espace public */
+/* (pour le prive, style_prive predomine */
+
+.bordure_claire {	border: 1px solid gray;}
+.bordure_foncee {	border: 1px solid black;}
+.bordure_claire_basse {	border-bottom: 1px solid gray;}
+.bordure_claire_left {	border-left: 1px solid gray;}
+.bordure_claire_right {	border-right: 1px solid gray;}
