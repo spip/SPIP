@@ -1184,18 +1184,6 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
 	}
 
-	// Le navigateur accepte-t-il l'ajax ?
-	define('_SPIP_AJAX',  (!isset($_COOKIE['spip_accepte_ajax']))
-		? 1
-	       : (($_COOKIE['spip_accepte_ajax'] != -1) ? 1 : 0));
-
-	// La requete est-elle en ajax ?
-	define('_AJAX',
-		isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
-		OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
-		OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
-	);
-
 	//
 	// Capacites php (en fonction de la version)
 	//
@@ -1263,6 +1251,29 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	}
 	// s'il y a un cookie ou PHP_AUTH, initialiser visiteur_session
 	if (_FILE_CONNECT) verifier_visiteur();
+
+	// Gestion AJAX sauf pour le mode oo espace prive
+
+	if (isset($GLOBALS['visiteur_session']['prefs'])AND !_DIR_RESTREINT) {
+		$x = unserialize($GLOBALS['visiteur_session']['prefs']);
+		if ($x['display'] == 4) {
+			define('_SPIP_AJAX', -1);
+			if (isset($_COOKIE['spip_accepte_ajax']))
+				spip_setcookie('spip_accepte_ajax', -1, 0);
+		}
+	}
+
+	if (!defined('_SPIP_AJAX'))
+		define('_SPIP_AJAX', ((!isset($_COOKIE['spip_accepte_ajax']))
+			? 1
+		       : (($_COOKIE['spip_accepte_ajax'] != -1) ? 1 : 0)));
+
+	// La requete est-elle en ajax ?
+	define('_AJAX',
+		isset($_SERVER['HTTP_X_REQUESTED_WITH']) # ajax jQuery
+		OR @$_REQUEST['var_ajax_redir'] # redirection 302 apres ajax jQuery
+		OR @$_REQUEST['var_ajaxcharset'] # compat ascendante pour plugins
+	);
 
 	# nombre de pixels maxi pour calcul de la vignette avec gd
 	# au dela de 5500000 on considere que php n'est pas limite en memoire pour cette operation
