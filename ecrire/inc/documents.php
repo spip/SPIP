@@ -716,7 +716,7 @@ function afficher_portfolio(
 
 		echo formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
-		if ($flag_modif) 
+		if ($flag_modif)
 			echo formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
 
 		if (isset($document['info']))
@@ -773,7 +773,9 @@ function formulaire_tourner($id_document, $document, $script, $flag_modif, $type
 				."\n\tstyle='float: right;'\n\talt=\"$c\"\n\ttitle=\"$c\" />";
 	}
 
+	$res .= "<div style='text-align: center;'>";
 	$res .= document_et_vignette($document, $url, true);
+	$res .= "</div>\n";
 
 	$res .= "<div class='verdana1' style='text-align: center;'>";
 	$res .= " <font size='1' face='arial,helvetica,sans-serif' color='333333'>&lt;doc$id_document&gt;</font>";
@@ -786,9 +788,7 @@ function formulaire_tourner($id_document, $document, $script, $flag_modif, $type
 	// Signaler les documents distants par une icone de trombone
 	if ($document['distant'] == 'oui')
 		$boite .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
-	$boite .= "<div style='text-align:center;'><b>" . 
-		  typo($titre ? $titre : _T('info_sans_titre_2')) .
-		  "</b><div id='tourner-$id_document'>" .
+	$boite .= "<div id='tourner-$id_document'>" .
 		$res .
 		'</div></div>';
 
@@ -1172,7 +1172,7 @@ function date_formulaire_documenter($date, $id_document) {
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
- function formulaire_documenter($id_document, $document, $script, $type, $id, $ancre)
+function formulaire_documenter($id_document, $document, $script, $type, $id, $ancre)
 {
 	if ($document) {
 		// premier appel
@@ -1208,8 +1208,10 @@ function date_formulaire_documenter($date, $id_document) {
 	$entete = basename($document['fichier']);
 	if (($n=strlen($entete)) > 20) 
 		$entete = substr($entete, 0, 10)."...".substr($entete, $n-10, $n);
+	if (strlen($document['titre']))
+		$entete = "<b>". typo($titre) . "</b>";
 
-	$contenu = "<b>".typo($titre).'</b><br />';
+	$contenu = '';
 	if ($descriptif)
 	  $contenu .=  propre($descriptif)  . '<br />' ;
 	if ($document['largeur'] OR $document['hauteur'])
@@ -1246,21 +1248,29 @@ function date_formulaire_documenter($date, $id_document) {
 	  "' type='submit' />" .
 	  "</div>\n";
 
-	$bloc = "documenter-$id_document";
-
 	$corps = ajax_action_auteur("documenter", $id_document, $corps, $script, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre","show_docs=$id_document&id_$type=$id#$ancre");
 
 	$corps .= 
 	  $vignette .
 	  icone_horizontale(_T('icone_supprimer_document'), redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre"), $supp,  "supprimer.gif", false);
 
+	$bloc = "documenter-aff-$id_document";
+
+	$corps = "<div style='text-align:center;'>"
+		. "<div style='float:".$GLOBALS['spip_lang_left'].";'>"
+		. ($flag_deplie ?
+			bouton_block_visible($bloc) : bouton_block_invisible($bloc))
+		. "</div>\n"
+		. $entete
+		. "</div>\n"
+		. ($flag_deplie ?
+			debut_block_visible($bloc) : debut_block_invisible($bloc))
+		. $corps
+		. fin_block();
+
 	return ($flag_deplie === 'ajax') ? $corps :
-	  ((!$flag_deplie ?
-	    (bouton_block_invisible($bloc) . $entete . debut_block_invisible($bloc)) :
-	    (bouton_block_visible($bloc) . $entete . debut_block_visible($bloc))) .
-	   "<div id='$bloc' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] ."; padding: 5px; margin-top: 3px; background-color: white'>" .
+	   "<div id='documenter-$id_document' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] ."; padding: 5px; margin-top: 3px; background-color: white'>" .
 	   $corps .
-	  '</div>' .
-	   fin_block());
+	  '</div>';
 }
 ?>

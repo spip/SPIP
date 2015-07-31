@@ -14,7 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 global $numero_block, $compteur_block;
 
 $numero_block = array();
+
 $compteur_block = 0;
+
+$compteur_block = rand(1,250)*200;	// astuce idiote pour que les blocs ahah n'aient pas les memes numeros de triangle que la page principale (sinon le triangle d'un bloc importe par ahah agit sur un autre triangle... vivement jquery...).
+
 
 function debut_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
