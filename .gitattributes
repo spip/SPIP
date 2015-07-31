@@ -244,8 +244,6 @@ ecrire/img_pack/warning-24.gif -text
 ecrire/img_pack/warning.gif -text
 ecrire/img_pack/xml.gif -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
-ecrire/polices/dustismo.ttf -text
-ecrire/polices/dustismo_bold.ttf -text
 ecrire/puce.gif -text
 ecrire/puce_rtl.gif -text
 ecrire/rien.gif -text
