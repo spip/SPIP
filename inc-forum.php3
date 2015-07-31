@@ -26,8 +26,8 @@ else
 /* GESTION DU FORMULAIRE FORUM */
 /*******************************/
 
-// fabrique un bouton d'attribut Name $n, d'attribut Value $v et autres $a
-function boutonne($t, $n, $v, $a) {
+// fabrique un bouton de type $t de Name $n, de Value $v et autres attribut $a
+function boutonne($t, $n, $v, $a='') {
   return "\n<input type='$t'" .
     (!$n ? '' : " name='$n'") .
     " value=\"$v\" $a />";
