@@ -71,15 +71,16 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false) 
 			$cache[$recherche][$table] = array("''", '0');
 		} else {
 			$listes_ids = array();
-			$select = '0';
 			$primary = id_table_objet($table);
 			foreach ($points as $id => $p)
 				$listes_ids[$p['score']] .= ','.$id;
+			$select = '';
 			foreach ($listes_ids as $p => $liste_ids)
-				$select .= "+$p*(".
+				$select .= "+ (case when (".
 					sql_in("$table.$primary", substr($liste_ids, 1))
-					.") ";
+					.") then $p else 0 end) ";
 
+			$select = $select ? substr($select,1) : '0';
 			$cache[$recherche][$table] = array($select,
 				'('.sql_in("$table.$primary",
 					array_keys($points)).')'
