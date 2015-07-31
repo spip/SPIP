@@ -113,56 +113,60 @@ function traiter_formulaires_dynamiques(){
 				http_status(204); // No Content
 			exit;
 		}
-		// traiter les appels de bloc ajax
-		if (($v=_request('var_ajax'))
-		 AND ($v!=='form')
-		 AND ($args = _request('var_ajax_env'))
-		 AND ($cle = _request('var_ajax_cle')) ){ 
-			 if ((include_spip('inc/securiser_action'))
-			 AND ($cle == calculer_cle_action($args))) {
-				$args = unserialize(base64_decode($args));
-				if ($fond = $args['fond_ajax']){
-					include_spip('public/parametrer');
-					$contexte = calculer_contexte();
-					$contexte = array_merge($args, $contexte);
-					$page = evaluer_fond($fond,$contexte);
-					include_spip('inc/actions');
-					ajax_retour($page['texte']);
-					exit();
-				}
+
+		// traiter les appels de bloc ajax (ex: pagination)
+		if ($v = _request('var_ajax')
+		AND $v !== 'form'
+		AND $args = _request('var_ajax_env')) {
+			include_spip('inc/filtres');
+			if ($args = decoder_contexte_ajax($args)
+			AND $fond = $args['fond_ajax']) {
+				include_spip('public/parametrer');
+				$contexte = calculer_contexte();
+				$contexte = array_merge($args, $contexte);
+				$page = evaluer_fond($fond,$contexte);
+				include_spip('inc/actions');
+				ajax_retour($page['texte']);
 			}
-			include_spip('inc/actions');
-			ajax_retour('signature ajax incorrecte');
+			else {
+				include_spip('inc/actions');
+				ajax_retour('signature ajax incorrecte');
+			}
 			exit();
 		}
-		// traiter les formulaires dynamiques simplifies en charger/verifier/traiter
-		if (($form = _request('formulaire_action'))
-		 AND ($cle = _request('formulaire_action_cle'))
-		 AND (($args = _request('formulaire_action_args'))!==NULL)
-		 AND (include_spip('inc/securiser_action'))
-		 AND ($cle == calculer_cle_action($form . $args))) {
-			$args = unserialize(base64_decode($args));
-			if (
-			 (!($verifier = charger_fonction("verifier","formulaires/$form/",true))
-			   || (count($_POST["erreurs_$form"] = call_user_func_array($verifier,$args))==0))
-			 && ($traiter = charger_fonction("traiter","formulaires/$form/",true))
-			 ) {
-				$rev = call_user_func_array($traiter,$args);
-				// traiter peut retourner soit un message, soit un array(editable,message)
-				if (is_array($rev)) {
-					$_POST["editable_$form"] = $rev[0];
-					$_POST["message_ok_$form"] = $rev[1];
-				} else
-					$_POST["message_ok_$form"] = $rev;
-			}
-			// si le formulaire a ete soumis en ajax, on le renvoie direct !
-			if (_request('var_ajax')){
-				if (find_in_path('formulaire_.php','balise/',true)) {
-					include_spip('inc/actions');
-					array_unshift($args,$form);
-					ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
-					exit;
+
+		// traiter les formulaires dynamniques charger/verifier/traiter
+		if ($form = _request('formulaire_action')
+		AND $args = _request('formulaire_action_args')) {
+			include_spip('inc/filtres');
+			if ($args = decoder_contexte_ajax($args)
+			AND $args['form'] == $form) {
+				if (
+				 (!($verifier = charger_fonction("verifier","formulaires/$form/",true))
+				   || (count($_POST["erreurs_$form"] = call_user_func_array($verifier,$args))==0))
+				 && ($traiter = charger_fonction("traiter","formulaires/$form/",true))
+				 ) {
+					$rev = call_user_func_array($traiter,$args);
+					// traiter peut retourner soit un message, soit un array(editable,message)
+					if (is_array($rev)) {
+						$_POST["editable_$form"] = $rev[0];
+						$_POST["message_ok_$form"] = $rev[1];
+					} else
+						$_POST["message_ok_$form"] = $rev;
 				}
+				// si le formulaire a ete soumis en ajax, on le renvoie direct !
+				if (_request('var_ajax')){
+					if (find_in_path('formulaire_.php','balise/',true)) {
+						include_spip('inc/actions');
+						array_unshift($args,$form);
+						ajax_retour(inclure_balise_dynamique(call_user_func_array('balise_formulaire__dyn',$args),false),false);
+						exit;
+					}
+				}
+			} else {
+				include_spip('inc/actions');
+				ajax_retour('signature ajax incorrecte');
+				exit;
 			}
 		}
 		$done = true;

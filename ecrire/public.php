@@ -13,8 +13,7 @@
 if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
 
 // Distinguer une inclusion d'un appel initial
-if ($GLOBALS['_INC_PUBLIC']>0) {
-	$GLOBALS['_INC_PUBLIC']++;
+if ($GLOBALS['_INC_PUBLIC']++ > 0) {
 
 	// $fond passe par INCLURE(){fond=...}
 	if (isset($contexte_inclus['fond']))
@@ -37,8 +36,8 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 		AND $subpage['lang_select'] === true)
 			lang_select();
 	}
-} else {
-	$GLOBALS['_INC_PUBLIC']++;
+}
+else {
 
 	//
 	// Discriminer les appels
@@ -54,21 +53,11 @@ if ($GLOBALS['_INC_PUBLIC']>0) {
 			die('inc_version absent ?');
 
 
-	// Est-ce une action ?
-	// les action sont gerees dans public/assembler/traiter_formulaires_dynamiques
-	// de maniere unifiees public/prive
-
-/*	// Code experimental pour faire marcher ecrire/ a partir de spip.php
-	// pour tester decommenter et indiquer dans mes_options :
-	// define('_SPIP_ECRIRE_SCRIPT', '../spip.php');
-	else if ($exec = _request('exec')) {
-		include _DIR_RESTREINT.'index.php';
-		exit;
-	}
-*/
-
 	// cas normal, $fond defini dans le fichier d'appel
 	// note : securise anti-injection par inc/utils.php
+	// les actions sont gerees dans
+	// public/assembler/traiter_formulaires_dynamiques
+	// de maniere unifiee public/prive
 	else if (isset($fond)) { }
 
 	// page=xxxx demandee par l'url
