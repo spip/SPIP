@@ -686,7 +686,9 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	}
 
 	$c .= '.
-	"&retour=".rawurlencode($lien=_request("retour") ? $lien : nettoyer_uri())';
+	(($lien = (_request("retour") ? _request("retour") : ('.
+		($p->etoile ? "''" : 'nettoyer_uri()')
+	.'))) ? "&retour=".rawurlencode($lien) : "")';
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 

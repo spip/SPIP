@@ -99,8 +99,9 @@ function generer_url_breve($id_breve) {
 	return $url;
 }
 
-function generer_url_forum($id_forum) {
-	return "forum.php3?id_forum=$id_forum";
+function generer_url_forum($id_forum, $show_thread=false) {
+	include_ecrire('inc_forum.php3');
+	return generer_url_forum_dist($id_forum, $show_thread);
 }
 
 function generer_url_mot($id_mot) {

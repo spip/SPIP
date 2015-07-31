@@ -120,10 +120,18 @@ function mots_du_forum($ajouter_mot, $id_message)
 
 function enregistre_forum() {
 	global $REMOTE_ADDR, $auteur_session,
-	  $afficher_texte, $ajouter_mot, $alea, $hash,
-	  $auteur, $confirmer_forum, $email_auteur, $id_auteur,
-	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;
+		$afficher_texte, $ajouter_mot, $alea, $hash,
+		$auteur, $confirmer_forum, $email_auteur, $id_auteur,
+		$nom_site_forum, $retour_forum, $texte, $titre, $url_site;
+
 	$retour_forum = rawurldecode($retour_forum);
+
+	# retour a calculer (cf. inc-formulaire_forum)
+	if ($retour_forum == '!') {
+		$retour_forum = new Link();
+		$retour_forum = $retour_forum->getUrl(); # en cas d'echec du post
+		$calculer_retour = true;
+	}
 
 	// Recuperer les donnees postees du formulaire ou stocker '0'
 	foreach (array('id_article', 'id_breve', 'id_syndic',
@@ -181,7 +189,8 @@ function enregistre_forum() {
 	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
 						'publie');
 
-	spip_query("UPDATE spip_forum SET id_parent = $id_forum,
+	spip_query("UPDATE spip_forum
+	SET id_parent = $id_forum,
 	id_rubrique = $id_rubrique,
 	id_article = $id_article,
 	id_breve = $id_breve,
@@ -200,7 +209,19 @@ function enregistre_forum() {
 	WHERE id_forum = $id_message
 	");
 
-	// calculer_threads();
+	// Le cas echeant, calculer le retour
+	if ($calculer_retour) {
+		// Gestionnaire d'URLs
+		if (@file_exists("inc-urls.php3"))
+			include_local("inc-urls.php3");
+		else
+			include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+
+		if ($statut == 'publie')
+			$retour_forum = generer_url_forum($id_message);
+		else
+			$retour_forum = generer_url_forum($id_parent);
+	}
 
 	// Entrer les mots-cles associes
 	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);

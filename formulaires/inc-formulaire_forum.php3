@@ -91,16 +91,16 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	$previsu = ' ';
 
 	// au premier appel (pas de Post-var nommee "retour_forum")
-	// memoriser l'URL courante pour y revenir apres envoi du message
-	// aux appels suivants, reconduire la valeur.
+	// memoriser evntuellement l'URL de retour pour y revenir apres
+	// envoi du message ; aux appels suivants, reconduire la valeur.
 	// Initialiser aussi l'auteur
-
 	if (!$retour_forum = rawurldecode(_request('retour_forum'))) {
 		if ($retour_forum = rawurldecode(_request('retour')))
 			$retour_forum = str_replace('&var_mode=recalcul','',$retour_forum);
 		else {
-			$retour_forum = new Link();
-			$retour_forum = $retour_forum->getUrl();
+			// par defaut, on veut prendre url_forum(), mais elle ne sera connue
+			// qu'en sortie, on inscrit donc une valeur absurde ("!")
+			$retour_forum = "!";
 		}
 
 		if (isset($_COOKIE['spip_forum_user'])
