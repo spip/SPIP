@@ -46,7 +46,8 @@ function inc_meta_dist($table='meta')
 	// renouveller l'alea general si trop vieux ou sur demande explicite
 	if ((test_espace_prive() || isset($_GET['renouvelle_alea']))
 	AND $GLOBALS[$table]
-	AND (time() > _RENOUVELLE_ALEA + $GLOBALS['meta']['alea_ephemere_date'])) {
+	AND ($alea_ephemere_date = isset($GLOBALS['meta']['alea_ephemere_date']) ? $GLOBALS['meta']['alea_ephemere_date'] : 0)
+	AND (time() > _RENOUVELLE_ALEA + $alea_ephemere_date)) {
 		// si on n'a pas l'acces en ecriture sur le cache,
 		// ne pas renouveller l'alea sinon le cache devient faux
 		if (supprimer_fichier($cache)) {
