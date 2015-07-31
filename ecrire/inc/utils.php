@@ -146,13 +146,32 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
 	return $val;
 }
 
-//
-// Enregistrement des evenements
-//
-// http://doc.spip.org/@spip_log
-function spip_log($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
-	$log = charger_fonction('log', 'inc');
-	$log( $message, $logname, $logdir, $logsuf);
+/**
+ * Enregistrement des evenements
+ * Pour compatibilite arriere, la syntaxe sans premier argument
+ * est egalement supportee
+ * spip_log($message,$logname,..)
+ * le niveau par defaut est dans ce cas _LOG_GRAVITE_INFO
+ *  
+ * http://doc.spip.org/@spip_log
+ *
+ * @param int $niveau
+ * @param string $message
+ * @param string $logname
+ * @param string $logdir
+ * @param string $logsuf
+ */
+function spip_log($niveau, $message=NULL, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
+	$args = func_get_args();
+	// compat ancien format d'appel spip_log('message',..)
+	if (!is_numeric($niveau) OR is_null($message)){
+		$niveau = _LOG_GRAVITE_INFO;
+	  list($message,$logname,$logdir,$logsuf) = $args;
+	}
+	if ($niveau<=_LOG_FILTRE_GRAVITE){
+		$log = charger_fonction('log', 'inc');
+		$log( $message, $logname, $logdir, $logsuf);
+	}
 }
 
 //
@@ -1273,7 +1292,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_LOG_GRAVITE_CRITIQUE')) define('_LOG_GRAVITE_CRITIQUE', 2);
 	if (!defined('_LOG_GRAVITE_ERREUR')) define('_LOG_GRAVITE_ERREUR', 3);
 	if (!defined('_LOG_GRAVITE_AVERTISSEMENT')) define('_LOG_GRAVITE_AVERTISSEMENT', 4);
-	if (!defined('_LOG_GRAVITE_INFO_IMPORTANTE')) define('_LOG_GRAVITE_INFO_IMPORTANTE', 5);
+	if (!defined('_LOG_GRAVITE_INFO_IMPORTANTE')) define ('_LOG_GRAVITE_INFO_IMPORTANTE', 5);
 	if (!defined('_LOG_GRAVITE_INFO')) define('_LOG_GRAVITE_INFO', 6);
 	if (!defined('_LOG_GRAVITE_DEBUG')) define('_LOG_GRAVITE_DEBUG', 7);
 	// niveau maxi d'enregistrement des logs
