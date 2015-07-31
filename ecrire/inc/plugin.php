@@ -160,7 +160,12 @@ function liste_plugin_valides($liste_plug,&$infos, $force = false){
 						}
 					}
 					if (!erreur_necessite($infos[$plug]['necessite'], $liste)) {
-						$liste[$p] = array('dir'=>$plug,'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL);
+						$liste[$p] = array(
+							'nom' => $infos[$plug]['nom'],
+							'etat' => $infos[$plug]['etat'],
+							'dir'=>$plug,
+							'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL
+						);
 						unset($liste_plug[$k]);
 					}
 				}
