@@ -258,6 +258,16 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 
 	}
 
+	// Creer la vignette
+	if ($mode == 'document' AND lire_meta('creer_preview') == 'oui'
+	AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
+		include_ecrire('inc_logos.php3');
+		if (eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $dest_path, $regs)) {
+			include_local('inc-cache.php3');
+			$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';
+			creer_vignette($dest_path, lire_meta('taille_preview'), lire_meta('taille_preview'), 'jpg', $destination, 'AUTO', true);
+		}
+	}
 	return $id_document;
 }
 
