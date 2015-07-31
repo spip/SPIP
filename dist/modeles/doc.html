@@ -9,7 +9,11 @@
 
 ]
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-<dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></a></dt>[
+<BOUCLE_test_doc(DOCUMENTS){id_document}{mode=document}>
+<dt><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]" type="#MIME_TYPE"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'><img src='[(#LOGO_DOCUMENT||extraire_attribut{src})]' width='[(#LOGO_DOCUMENT||largeur)]' height='[(#LOGO_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' /></a></dt>
+</BOUCLE_test_doc>
+<dt>[<a href="(#ENV{lien})"[ class="(#ENV{lien_class})"]>]<img src='[(#EMBED_DOCUMENT||extraire_attribut{src})]' width='[(#EMBED_DOCUMENT||largeur)]' height='[(#EMBED_DOCUMENT||hauteur)]' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#ENV{lien}|?{</a>})]</dt>
+<//B_test_doc>[
 <dt class='spip_doc_titre'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#LOGO_DOCUMENT||largeur|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>
