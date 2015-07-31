@@ -218,7 +218,7 @@ return $GLOBALS[\'browser_layer\'];}
 
   global $couleur_foncee;
   return generer_url_post_ecrire($script, $args)
-	. "<table cellpadding=\'5\' cellspacing=\'0\' border=\'0\' width=\'100%\' background=\'"
+	. "<table cellpadding=\'5\' border=\'0\' width=\'100%\' background=\'"
 	.  chemin_image(\'rien.gif\') 
 	. "\'>"
 	. "<tr><td bgcolor=\'$couleur_foncee\' colspan=\'2\'><font size=\'2\' color=\'#ffffff\'><b>"

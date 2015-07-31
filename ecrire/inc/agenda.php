@@ -229,7 +229,7 @@ function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	} else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
-	  "<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
+	  "<table class='calendrier-table-$spip_ecran'>" .
 	  http_calendrier_mois_navigation($annee, $mois, $premier_jour, $dernier_jour, $echelle, $partie_cal, $script, $ancre) .
 	  $evt .
 	  '</table>' .
@@ -408,7 +408,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 	  } else $evt = "<tr><td>$evt</td></tr>";
 
 	return 
-	  "\n<table class='calendrier-table-$spip_ecran' cellspacing='0' cellpadding='0'>" .
+	  "\n<table class='calendrier-table-$spip_ecran'>" .
 	  http_calendrier_semaine_navigation($annee, $mois, $init, $echelle, $partie_cal, $script, $ancre) .
 	  $evt .
 	  "</table>" .

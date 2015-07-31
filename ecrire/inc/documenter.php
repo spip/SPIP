@@ -168,7 +168,7 @@ function documenter_boucle($documents, $type, $ancre, &$tous_autorises, $appelan
 	// pas de contenu, pas de tableau
 	if (!$res) return "";
 	
-	return "\n<table width='100%' cellspacing='0' cellpadding='4'>"
+	return "\n<table width='100%' cellpadding='4'>"
 	. $res
 	. "</table>";
 }

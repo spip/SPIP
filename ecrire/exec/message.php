@@ -219,7 +219,7 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 
 	echo "<div style='border: 1px solid $la_couleur; background-color: $fond; padding: 5px;'>"; // debut cadre de couleur
 	//echo debut_cadre_relief("messagerie-24.png", true);
-	echo "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>";
+	echo "\n<table width='100%' border='0'>";
 	echo "<tr><td>"; # uniques
 
 	echo "<span style='color: $la_couleur' class='verdana1 spip_small'><b>$le_type</b></span><br />";

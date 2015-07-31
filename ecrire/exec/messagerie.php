@@ -101,7 +101,7 @@ echo bouton_spip_rss('messagerie', array('id_auteur' => $connect_id_auteur));
 	$bouton = bouton_block_depliable(_T('info_principaux_correspondants'),true,'principaux');
 	echo debut_cadre('liste',"auteur-24.png",'',$bouton);
 	echo debut_block_depliable(true,'principaux');
-	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
+	echo "<table width='100%'>";
 	echo "<tr><td valign='top' style='width: 50%'>";
 	$count = ceil(count($cor)/2);
 	echo join("\n",array_slice($cor, 0, $count));
