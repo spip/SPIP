@@ -7,7 +7,7 @@ define("_ECRIRE_OPTIMISER", "1");
 
 
 function optimiser_base() {
-	spip_log (_T('log_optimier_base'));
+	spip_log ("optimisation de la base");
 
 	$mydate = date("YmdHis", time() - 24 * 3600);
 
@@ -124,7 +124,7 @@ function optimiser_base() {
 		if (!spip_num_rows($result2)) {
 			$query3 = "DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur";
 			$result3 = spip_query($query3);
-			spip_log (_T('log_suppression_auteur', array('id_auteur' => $id_auteur, 'nom' => $nom, 'email' => $email)));
+			spip_log ("suppression auteur $id_auteur ($nom, $email)");
 		}
 	}
 	
@@ -201,7 +201,7 @@ function optimiser_base() {
 		. "spip_index_dico, spip_index_articles, spip_index_rubriques, spip_index_breves, spip_index_auteurs, spip_index_mots, spip_index_syndic";
 	spip_query($query);
 	
-	spip_log(_T('log_optimisation_ok'));
+	spip_log("optimisation ok");
 }
 
 optimiser_base();

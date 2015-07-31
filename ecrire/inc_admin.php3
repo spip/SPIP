@@ -23,7 +23,7 @@ function debut_admin($action, $commentaire='') {
 	}
 	$fichier = fichier_admin($action);
 	if (file_exists("data/$fichier")) {
-		spip_log (_T('info_action_administration', array('action' => $action)));
+		spip_log ("Action admin: $action");
 		return true;
 	}
 

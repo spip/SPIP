@@ -175,6 +175,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 				// Aller chercher la page d'accueil
 				if (lire_meta("visiter_sites") == "oui") {
 					include_ecrire ("inc_sites.php3");
+					spip_log ("indexation contenu syndic ".$row['url_site']);
 					indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site']), 0, 50000)), 1);
 				}
 			}
@@ -229,8 +230,8 @@ function executer_une_indexation_syndic() {
 		if ($result = spip_query($query)) {
 			while ($row = spip_fetch_array($result)) {
 				$id_syndic = $row['id_syndic'];
-				indexer_syndic($id_syndic);
 				spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
+				indexer_syndic($id_syndic);
 			}
 		}
 	}
