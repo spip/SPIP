@@ -174,14 +174,16 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 }
 $texte = $texte_ajout . $texte;
 
+// preparer le virtuel
 
-if ($changer_virtuel) {
+if ($changer_virtuel && $flag_editable) {
 	if (!ereg("^(https?|ftp|mailto)://.+", trim($virtuel))) $virtuel = "";
 	if ($virtuel) $chapo = "=$virtuel";
 	else $chapo = "";
 	$query = "UPDATE spip_articles SET chapo=\"$chapo\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 }
+
 
 if ($titre && !$ajout_forum && $flag_editable) {
 	$surtitre = addslashes(corriger_caracteres($surtitre));
@@ -263,7 +265,11 @@ if ($row = spip_fetch_array($result)) {
 	$referers = $row["referers"];
 }
 
-
+// pour l'affichage du virtuel
+unset($virtuel);
+if (substr($chapo, 0, 1) == '=') {
+	$virtuel = substr($chapo, 1, strlen($chapo));
+}
 
 if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_redac, $regs)) {
         $mois_redac = $regs[2];
@@ -360,7 +366,7 @@ if ($id_article>0 AND $flag_editable)
 // Boites de configuration avancee
 //
 
-if ($options == "avancees") {
+if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 
 	echo "<p>";
 	debut_cadre_relief("forum-interne-24.gif");
@@ -532,14 +538,7 @@ if ($options == "avancees") {
 
 
 	// Redirection (article virtuel)
-
 	debut_cadre_relief("site-24.gif");
-
-	unset($virtuel);
-	if (substr($chapo, 0, 1) == '=') {
-		$virtuel = substr($chapo, 1, strlen($chapo));
-	}
-
 	$visible = ($changer_virtuel || $virtuel);
 
 	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
@@ -555,10 +554,9 @@ if ($options == "avancees") {
 	else
 		echo debut_block_invisible("redirection");
 
-	echo "<form action='articles.php3' method='post'>";
+	echo "<form action='articles.php3?id_article=$id_article' method='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
-
 	$virtuelhttp = ($virtuel ? "" : "http://");
 
 	echo "<INPUT TYPE='text' NAME='virtuel' CLASS='formo' style='font-size:9px;' VALUE=\"$virtuelhttp$virtuel\" SIZE='40'><br>";
@@ -567,7 +565,6 @@ if ($options == "avancees") {
 	echo "</font>";
 	echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
 	echo "</form>";
-
 	echo fin_block();
 
 	fin_cadre_relief();
