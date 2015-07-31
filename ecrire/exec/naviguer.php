@@ -103,29 +103,8 @@ function exec_naviguer_dist()
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
 
-	//  echo debut_cadre_relief($ze_logo, true);
-	if ($flag_editable
-	AND $id_rubrique > 0) {
-		$actions = icone_inline(_T('icone_modifier_rubrique'),
-			generer_url_ecrire("rubriques_edit",
-				"id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit.gif", $spip_lang_right);
 
-		// Supprimer cette rubrique (si vide)
-		if (tester_rubrique_vide($id_rubrique))
-			$actions .= icone_inline(_T('icone_supprimer_rubrique'),
-				redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif", $spip_lang_right);
-	}
-	else
-		$actions = ''; // rubrique non editable
-
-	$haut = "<div class='bandeau_actions'>$actions</div>"
-		. 
-	  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
-	  http_img_pack("admin-12.gif",'', "width='12' height='12'",
-			      _T('info_administrer_rubrique'))) .
-	     $titre,'', false)
-		. "<div class='nettoyeur'></div>\n";
-
+	$haut = montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_editable);
 	if ($extra)
 		include_spip('inc/extra');
 	if ($id_rubrique > 0)
@@ -456,14 +435,31 @@ EOF;
 }
 
 // http://doc.spip.org/@montre_naviguer
-function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editable)
+function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_editable)
 {
-	global $spip_lang_right, $spip_lang_left;
+	global $spip_lang_right;
+
+	if ($flag_editable
+	AND $id_rubrique > 0) {
+		$actions = icone_inline(_T('icone_modifier_rubrique'),
+			generer_url_ecrire("rubriques_edit",
+				"id_rubrique=$id_rubrique&retour=nav"), $ze_logo, "edit.gif", $spip_lang_right);
+
+		// Supprimer cette rubrique (si vide)
+		if (tester_rubrique_vide($id_rubrique))
+			$actions .= icone_inline(_T('icone_supprimer_rubrique'),
+				redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif", $spip_lang_right);
+	}
+	else
+		$actions = ''; // rubrique non editable
+
 	return 
+	  "<div class='bandeau_actions'>$actions</div>" .
 	  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
 	  http_img_pack("admin-12.gif",'', "width='12' height='12'",
 			      _T('info_administrer_rubrique'))) .
-	     $titre,'', false);
+	     $titre,'', false)
+		. "<div class='nettoyeur'></div>\n";
 }
 
 // http://doc.spip.org/@tester_rubrique_vide
