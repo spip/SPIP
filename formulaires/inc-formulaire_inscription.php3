@@ -192,7 +192,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	$htpass = generer_htpass($pass);
 	spip_query("UPDATE spip_auteurs
 		SET pass='$mdpass', htpass='$htpass'
-		WHERE id_auteur = ".$id_auteur);
+		WHERE id_auteur = ".intval($id_auteur));
 	ecrire_acces();
 	
 	return $pass;
