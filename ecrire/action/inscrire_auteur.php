@@ -289,10 +289,15 @@ function confirmer_statut_inscription($auteur){
 	if (!($s = tester_statut_inscription($auteur['prefs'])))
 		return $auteur;
 
+	include_spip('inc/autoriser');
+	// accorder l'autorisation de modif du statut auteur
+	autoriser_exception('modifier','auteur',$auteur['id_auteur']);
 	include_spip('action/editer_auteur');
 	// changer le statut
 	auteur_modifier($auteur['id_auteur'],array('statut'=> $s));
 	unset($_COOKIE['spip_session']); // forcer la maj de la session
+	// lever l'autorisation de modif du statut auteur
+	autoriser_exception('modifier','auteur',$auteur['id_auteur'],false);
 
 	// mettre a jour le statut
 	$auteur['statut'] = $s;
