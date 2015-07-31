@@ -74,6 +74,7 @@ function xhtml ($buffer) {
 		tidy_setopt('wrap', 0);
 		tidy_setopt('indent-spaces', 4);
 		tidy_setopt('output-xhtml', true);
+		tidy_setopt('add-xml-decl', true);
 		tidy_setopt('indent', 5);
 		tidy_setopt('show-body-only', false);
 		tidy_setopt('quote-nbsp', false);
