@@ -77,7 +77,7 @@ function phraser_inclure($texte, $ligne, $result) {
 
 function phraser_polyglotte($texte,$ligne, $result) {
 
-	while (eregi('<multi>(.*)</multi>', $texte, $match)) {
+  while (preg_match("@<multi>(.*?)</multi>@s", $texte, $match)) {
 		$p = strpos($texte, $match[0]);
 		$debut = substr($texte, 0, $p);
 		if ($p) {
