@@ -49,7 +49,10 @@ function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang)
 		echo http_script('var img_deplierhaut = "'. chemin_image('noeud_plus.gif') .'";
 var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 
-		echo http_script('', 'jquery-ui-1.8-drag-drop.min.js');
+		echo http_script('', 'ui/jquery.ui.widget.js');
+		echo http_script('', 'ui/jquery.ui.mouse.js');
+		echo http_script('', 'ui/jquery.ui.draggable.js');
+		echo http_script('', 'ui/jquery.ui.droppable.js');
 		echo http_script('', 'articles_tous_edite.js');
 		echo http_script('', 'pause.js');
 	

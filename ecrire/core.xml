@@ -250,6 +250,7 @@
 	</pipeline>
 	<pipeline><nom>insert_head_css</nom><action></action></pipeline>
 	<pipeline><nom>jquery_plugins</nom><action></action></pipeline>
+	<pipeline><nom>jqueryui_plugins</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noerase</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noexport</nom><action></action></pipeline>
 	<pipeline><nom>lister_tables_noimport</nom><action></action></pipeline>

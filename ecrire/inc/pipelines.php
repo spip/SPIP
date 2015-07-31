@@ -20,15 +20,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // http://doc.spip.org/@f_jQuery
 function f_jQuery ($texte) {
 	$x = '';
-	foreach (array_unique(pipeline('jquery_plugins',
-	array(
+	$jquery_plugins = pipeline('jquery_plugins',
+		array(
 		'javascript/jquery.js',
 		'javascript/jquery.form.js',
 		'javascript/jquery.autosave.js',
 		'javascript/jquery.placeholder-label.js',
 		'javascript/ajaxCallback.js',
 		'javascript/jquery.cookie.js'
-	))) as $script)
+		));
+	include_spip('inc/pipelines_ecrire');
+	$jqueryui_plugins = jqueryui_dependances(pipeline('jqueryui_plugins',
+		array(
+			'jquery.ui.core',
+		)));
+	foreach (array_unique(array_merge($jquery_plugins,$jqueryui_plugins)) as $script)
 		if ($script = find_in_path($script))
 			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
 	$texte = $x.$texte;
