@@ -1,0 +1,34 @@
+/*
+Copyright (c) 2009, Nicole Sullivan. All rights reserved.
+Code licensed under the BSD License:
+version: 0.2
+*/
+/* **************** BLOCK STRUCTURES ***************** */
+/* box */
+.box{margin:20px 0 0;}
+.bd,.ft{padding:0 10px;/*overflow:hidden;_overflow:visible; _zoom:1;*/}
+.hd {padding:5px 10px;}
+.box .inner{position:relative;}
+.box b{display:block;background-repeat:no-repeat;font-size:1%;position:relative;z-index:10;}
+.box .inner b{display:inline;font-size:inherit;position:static;}
+.box .tl, .box .tr, .box .bl, .box .br{height:10px; width:10px;float:left;}
+.box .tl{background-position: left top;}
+.box .tr{background-position: right top;}
+.box .bl{background-position: left bottom;}
+.box .br{background-position: right bottom;}
+.box .br,.box .tr{float:right;}
+.box .bl,.box .br{margin-top:-10px;}
+.box .top{background-position:center top;}
+.box .bottom{background-position:center bottom;_zoom:1;}/* this zoom required for IE5.5 only*/
+/* complex */
+.complex{overflow:hidden;*position:relative;*zoom:1;}/* position/zoom required for IE7, 6, 5.5 */
+.complex .tl, .complex .tr{height:32000px; margin-bottom:-32000px;width:10px;overflow:hidden;}
+.complex .bl, .complex .br{/*margin-top:0;*/}
+.complex .top{height:5px;}
+.complex .bottom{height:5px;/*margin-top:-10px;*/}
+/* pop  */
+.pop{overflow:visible;margin: 10px 20px 20px 10px; background-position:left top;}
+.pop .inner{right:-10px; bottom:-10px; background-position:right bottom;padding:10px;}
+.pop .tl, .pop .br{display:none;}
+.pop .bl{bottom:-10px;}
+.pop .tr{right:-10px;}

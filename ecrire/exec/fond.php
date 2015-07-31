@@ -41,4 +41,92 @@ function exec_fond_dist(){
 
 }
 
+/**
+ * #BOITE_OUVRIR{titre[,type]}
+ * Racourci pour ouvrir une boite (info, simple, pour noisette ...)
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_BOITE_OUVRIR_dist($p) {
+	$_titre = interprete_argument_balise(1,$p);
+	$_class = interprete_argument_balise(2,$p);
+	$_head_class = interprete_argument_balise(3,$p);
+	$_titre = ($_titre?$_titre:"''");
+	$_class = ($_class?", $_class":", 'simple'");
+	$_head_class = ($_head_class?", $_head_class":"");
+
+	$p->code = "boite_ouvrir($_titre$_class$_head_class)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * #BOITE_PIED{class}
+ * Racourci pour passer au pied de la boite, avant sa fermeture
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_BOITE_PIED_dist($p) {
+	$_class = interprete_argument_balise(1,$p);
+	$_class = ($_class?"$_class":"");
+
+	$p->code = "boite_pied($_class)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * #BOITE_FERMER
+ * Racourci pour fermer une boite ouverte
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_BOITE_FERMER_dist($p) {
+	$p->code = "boite_fermer()";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
+ * Ouvrir une boite
+ *
+ * @param string $titre
+ * @param string $class
+ * @return <type>
+ */
+function boite_ouvrir($titre, $class='', $head_class=''){
+	$class = "box $class";
+	$head_class = "hd $head_class";
+	if (strlen($titre) AND strpos($titre,'<h')===false)
+		$titre = "<h3>$titre</h3>";
+	return '<div class="'.$class.'">'
+	.'<b class="top"><b class="tl"></b><b class="tr"></b></b>'
+	.'<div class="inner">'
+	.($titre?'<div class="'.$head_class.'">'.$titre.'</div>':'')
+	.'<div class="bd">';
+}
+
+/**
+ * Passer au pied d'une boite
+ * @param <type> $class
+ * @return <type>
+ */
+function boite_pied($class='act'){
+	$class = "ft $class";
+	return 	'</div>'
+	.'<div class="'.$class.'">';
+}
+
+/**
+ * Fermer une boite
+ * @return <type>
+ */
+function boite_fermer(){
+	return '</div></div>'
+	.'<b class="bottom"><b class="bl"></b><b class="br"></b></b>'
+	.'</div>';
+}
 ?>
