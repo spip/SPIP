@@ -965,20 +965,15 @@ function spip_initialisation() {
 	// Ne pas se faire manger par un bug php qui accepte ?GLOBALS[truc]=toto
 	if (isset($_REQUEST['GLOBALS'])) die();
 	// nettoyer les magic quotes \' et les caracteres nuls %00
+var_dump($_GET);
 	spip_desinfecte($_GET);
 	spip_desinfecte($_POST);
 	spip_desinfecte($_COOKIE);
-	# et _REQUEST pour que tester_variable fonctionne meme avec magic_quotes
 	spip_desinfecte($_REQUEST);
-	#	if (@ini_get('register_globals')) // pas fiable
 	spip_desinfecte($GLOBALS);
-	// a la fin supprimer la variable anti-recursion devenue inutile
-	// (et meme nuisible, notamment si on teste $_POST)
-	unset($_GET['spip_recursions']);
-	unset($_POST['spip_recursions']);
-	unset($_COOKIE['spip_recursions']);
-	unset($_REQUEST['spip_recursions']);
-	unset($GLOBALS['spip_recursions']);
+var_dump($_GET);
+exit;
+
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
 
@@ -1082,19 +1077,15 @@ function spip_desinfecte(&$t) {
 	if (!isset($magic_quotes))
 		$magic_quotes = @get_magic_quotes_gpc();
 
-	if (is_string($t)) {
-		$t = str_replace(chr(0), '-', $t);
-		if ($magic_quotes)
-			$t = stripslashes($t);
-	}
-	else if (is_array($t)) {
-		foreach ($t as $key => $val) {
-			if (!is_array($val)
-			OR !isset($t['spip_recursions'])) { # interdire les recursions
-				$t['spip_recursions'] = true;
-				spip_desinfecte($t[$key]);
-			}
+	foreach ($t as $key => $val) {
+		if (is_string($t[$key])) {
+			if ($magic_quotes)
+				$t[$key] = stripslashes($t[$key]);
+			$t[$key] = str_replace(chr(0), '-', $t[$key]);
 		}
+		// traiter aussi les "texte_plus" de articles_edit
+		else if ($key == 'texte_plus' AND is_array($t[$key]))
+			spip_desinfecte($t[$key]);
 	}
 }
 

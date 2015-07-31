@@ -65,7 +65,7 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 		
 		$s .= bouton_block_invisible("$plug_file");
-		$s .= ($plugok=='O'?"<strong>":"").$info['nom'].($plugok=='O'?"</strong>":"");
+		$s .= ($plugok=='O'?"<strong>":"").typo($info['nom']).($plugok=='O'?"</strong>":"");
 		$s .= "</div>";
 		$s .= debut_block_invisible("$plug_file");
 		$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";

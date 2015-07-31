@@ -45,7 +45,7 @@ function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
 
 $GLOBALS['xhtml'] = 'tidy'; # se raccrocher aux brances de la nouvelle API
 
-function tidy($buffer) {
+function exec_tidy_dist($buffer) {
 	$buffer = traite_xhtml($buffer);
 
 /** ici commence la petite usine a gaz des traitements d'erreurs de tidy **/

@@ -70,7 +70,7 @@ function demander_conversion($tables_a_convertir, $action) {
 	exit;
 }
 
-function convert_utf8_dist() {
+function exec_convert_utf8_dist() {
 	include_ecrire('inc_meta');
 	include_ecrire('inc_charsets');
 	lire_metas();
