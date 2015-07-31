@@ -134,12 +134,16 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	} else {
 		$code = calculer_liste($p->texte, $p->descr, $boucles, $id_boucle);
-		
-		if (preg_match("/^'([^']*)'/s", $code, $r))
+		if ($code AND preg_match("/^'([^']*)'/s", $code, $r))
 			$fichier = $r[1];
 		else $fichier = '';
 	}
-
+	if (!$fichier) {
+		$erreur_p_i_i = array('zbug_parametres_inclus_incorrects',
+					 array('param' => $code));
+		erreur_squelette($erreur_p_i_i, $p);
+		return false;
+	}
 	$compil = texte_script(memoriser_contexte_compil($p));
 
 	// s'il y a une extension .php, ce n'est pas un squelette
@@ -170,7 +174,7 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 			unset($_contexte['ajax']);
 
 		$_contexte = join(",\n\t", $_contexte);
-	} else  $_contexte = ''; // vide (array()) ou erreur (false)
+	} else  return false; // j'aurais voulu toucher le fond ...
 
 	$contexte = 'array(' . $_contexte  .')';
 		
@@ -615,6 +619,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
 	if (!isset($descr['niv'])) $descr['niv'] = 0;
 	$codes = compile_cas($tableau, $descr, $boucles, $id_boucle);
+	if ($codes === false) return false;
 	$n = count($codes);
 	if (!$n) return "''";
 	$tab = str_repeat("\t", $descr['niv']);
@@ -645,6 +650,7 @@ define('_REGEXP_CONCAT_NON_VIDE', "/^(.*)[.]\s*'[^']+'\s*$/");
 
 // http://doc.spip.org/@compile_cas
 function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
+
         $codes = array();
 	// cas de la boucle recursive
 	if (is_array($id_boucle)) 
@@ -652,6 +658,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 	$type = !$id_boucle ? '' : $boucles[$id_boucle]->type_requete;
 	$tab = str_repeat("\t", ++$descr['niv']);
 	$mode = _request('var_mode_affiche');
+	$err_e_c = '';
 	// chaque commentaire introduit dans le code doit commencer
 	// par un caractere distinguant le cas, pour exploitation par debug.
 	foreach ($tableau as $p) {
@@ -689,11 +696,15 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 		case 'include':
 			$p->descr = $descr;
 			$code = calculer_inclure($p, $boucles, $id_boucle);
-			
-			$commentaire = '<INCLURE ' . addslashes(str_replace("\n", ' ', $code)) . '>';
-			$avant='';
-			$apres='';
-			$altern = "''";
+			if ($code === false) {
+				$err_e_c = true;
+				$code = "''";
+			} else {
+				$commentaire = '<INCLURE ' . addslashes(str_replace("\n", ' ', $code)) . '>';
+				$avant='';
+				$apres='';
+				$altern = "''";
+			}
 			break;
 
 		// boucle
@@ -702,10 +713,6 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr = $descr;
 			$newdescr['id_mere'] = $nom;
 			$newdescr['niv']++;
-			$code = 'BOUCLE' .
-			  str_replace("-","_", $nom) . $descr['nom'] .
-			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
-			$commentaire= "?$nom";
 			$avant = calculer_liste($p->avant,
 				$newdescr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
@@ -713,14 +720,22 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['niv']--;
 			$altern = calculer_liste($p->altern,
 				$newdescr, $boucles, $id_boucle);
-			if (!$boucles[$nom]->milieu
-			AND $boucles[$nom]->type_requete <> 'boucle') {
-				if ($altern != "''") $code .= "\n. $altern";
-				if ($avant<>"''" OR $apres<>"''")
-					spip_log("boucle $nom toujours vide, code superflu dans $id");
-				$avant = $apres = $altern = "''";
-			} else if ($altern != "''") $altern = "($altern)";
-
+			if (($avant === false) OR ($apres === false) OR ($altern === false)) {
+				$err_e_c = true;
+				$code = "''";
+			} else {
+				$code = 'BOUCLE' .
+				  str_replace("-","_", $nom) . $descr['nom'] .
+				  '($Cache, $Pile, $doublons, $Numrows, $SP)';
+				$commentaire= "?$nom";
+				if (!$boucles[$nom]->milieu
+				AND $boucles[$nom]->type_requete <> 'boucle') {
+					if ($altern != "''") $code .= "\n. $altern";
+					if ($avant<>"''" OR $apres<>"''")
+					  spip_log("boucle $nom toujours vide, code superflu dans $id");
+					$avant = $apres = $altern = "''";
+				} else if ($altern != "''") $altern = "($altern)";
+			}
 			break;
 
 		case 'idiome':
@@ -771,9 +786,10 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 
 		default: 
 		  // Erreur de construction de l'arbre de syntaxe abstraite
+			$code = "''";
 			$p->descr = $descr;
-			$msg = array('zbug_erreur_compilation');
-			erreur_squelette($msg, $p);
+			$err_e_c = array('zbug_erreur_compilation');
+			erreur_squelette($err_e_c, $p);
 		} // switch
 
 		if ($code != "''") {
@@ -785,7 +801,8 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 				$code));
 		}
 	} // foreach
-	return $codes;
+
+	return $err_e_c ? false : $codes;
 }
 
 // production d'une expression conditionnelle ((v=EXP) ? (p . v .s) : a)
@@ -1013,23 +1030,24 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
 			$req = $f($id, $boucles);
-		} else $req = "\n\treturn '';";
-		$boucles[$id]->return = 
-			"function BOUCLE" . strtr($id,"-","_") . $nom .
-			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
-			"\n\n\tstatic \$connect = " .
-			_q($boucles[$id]->sql_serveur) .
-			";" .
-			$req .
-			"\n}\n\n";
-
+			if ($boucle->return !== false) {
+				$boucles[$id]->return = 
+				"function BOUCLE" . strtr($id,"-","_") . $nom .
+				'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
+				"\n\n\tstatic \$connect = " .
+				_q($boucles[$id]->sql_serveur) .
+				";" .
+				$req .
+				"\n}\n\n";
+			}
+		}
 		if ($debug)
 			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
 	}
 
-	// Au final, si un critere au moins s'est mal compile
+	// Au final, si le corps ou un critere au moins s'est mal compile
 	// retourner False, sinon inserer leur decompilation
-	
+	if (is_bool($corps)) return false;
 	foreach($boucles as $id => $boucle) {
 		if ($boucle->type_requete === false) return false;
 		$boucle->return = "\n\n/* BOUCLE " .
