@@ -188,7 +188,8 @@ function extrait_article($row) {
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') 
 		$extrait .= "-> ".
-		  generer_url_public('spip_action.php', "action=redirect&id_article=$id_article") .
+		  // surtout pas de &amp; dans ce cas la.
+		  generer_url_public('spip_action.php') . "?action=redirect&id_article=$id_article" .
 		  "\n\n";
 	return $extrait;
 }
@@ -255,10 +256,7 @@ function envoyer_mail_proposition($id_article) {
 				     ."\n" 
 				     . _T('info_propose_5')
 				     ."\n" 
-				     . generer_url_ecrire($adresse_site 
-							 . '/' 
-							 . _DIR_RESTREINT_ABS 
-							 . "articles",
+				     . generer_url_ecrire("articles",
 							 "id_article=$id_article")
 				     . "\n\n\n" 
 				     . extrait_article($row));

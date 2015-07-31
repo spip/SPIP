@@ -1798,7 +1798,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 
 	return $res .
 	  '<link rel="stylesheet" type="text/css" href=\'' .
-	  generer_url_ecrire(_DIR_RESTREINT . 'spip_style',
+	  generer_url_ecrire('spip_style',
 			  "couleur_claire=" .
 			  urlencode($couleur_claire) .
 			  '&couleur_foncee=' .

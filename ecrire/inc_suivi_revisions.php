@@ -236,7 +236,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 			} else {
 				$item = array(
 					'title' => $titre,
-					'url' => generer_url_ecrire($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS."articles_versions","id_article=$id_article&id_version=$id_version"),
+					'url' => generer_url_ecrire("articles_versions","id_article=$id_article&id_version=$id_version"),
 					'date' => $date,
 					'author' => $nom,
 					'email' => $email

@@ -20,7 +20,7 @@ $included_files = array();
 
 function include_local($file, $silence=false) {
 	$nom = preg_replace("/\.php[3]?$/",'', $file);
-#	spip_log("$nom $file");
+#	spip_log("'$nom' '$file'");
 	if (@$GLOBALS['included_files'][$nom]++) return;
 	if (is_readable($f = $nom . '.php'))
 	  include($f);
@@ -614,9 +614,12 @@ function charger_generer_url() {
 // entre les scripts ecrire/*.php[3] et le script generique ecrire/index.php
 
 function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
-	return $script .
-		(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP) .
-		(!$args ? "" : ('?'  .str_replace('&', '&amp;', $args))) .
+	$site = $GLOBALS['meta']["adresse_site"];
+	$site .= ((substr($site, -1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
+	$args = str_replace('&', '&amp;', $args);
+	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+
+	return $site . $script . $ext . $args .
 		(!$retour ? "" : 
 		urlencode($retour . _EXTENSION_PHP .
 			  (!$retour_args ? "" : ('?' . $retour_args))));
@@ -626,11 +629,13 @@ function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 // il faudra substituer a l'appel ci-dessous la definition ci-dessus
 // lorsque celle-ci deviendra generique
 
-function generer_url_public($script, $args="", $retour="", $retour_args="") {
+function generer_url_public($script, $args="") {
 	if (!($site = $GLOBALS['meta']["adresse_site"]))
 		$site = _DIR_RACINE;
 	$site .= (($site[strlen($site)-1] <> '/') ?'/':'') . $script;
-	return generer_url_ecrire($site, $args, $retour, $retour_args);
+	return $site . 
+	  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP) .
+	  (!$args ? "" : ('?'  .str_replace('&', '&amp;', $args)));
 }
 
 ?>
