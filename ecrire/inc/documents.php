@@ -253,19 +253,20 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 		))
 		. '</div><br />';
 
-	//// Images sans documents
-	$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='image'", "", "D.id_document");
+	if (!_INTERFACE_DOCUMENTS) {
+		//// Images sans documents
+		$res = sql_select("D.id_document", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", "T.id_objet=" . intval($id) . " AND T.objet=" . sql_quote($type) . " AND D.mode='image'", "", "D.id_document");
 
-	$ret .= "\n<div id='liste_images'>";
+		$ret .= "\n<div id='liste_images'>";
 
-	while ($doc = sql_fetch($res)) {
-		$id_document = $doc['id_document'];
-		$deplier = ($id_document_actif==$id_document);
-		$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
+		while ($doc = sql_fetch($res)) {
+			$id_document = $doc['id_document'];
+			$deplier = ($id_document_actif==$id_document);
+			$ret .= afficher_case_document($id_document, $id, $script, $type, $deplier);
+		}
+
+		$ret .= "</div><br /><br />\n";
 	}
-
-	$ret .= "</div><br /><br />\n";
-
 	}
 
 	/// Ajouter nouveau document
