@@ -103,7 +103,7 @@ function erreur_necessite($n, $liste) {
 				$lien_download = '';
 				if (isset($need['src'])) {
 					$url = $need['src'];
-					include_ecrire('inc/charger_plugin');
+					include_spip('inc/charger_plugin');
 					$lien_download = '<br />'
 						.bouton_telechargement_plugin($url, strtolower($r[1]));
 				}
@@ -278,7 +278,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		if (is_array($infos)){
 			foreach($infos as $plug=>$info){
 				// definir le plugin, donc le path avant l'include du fichier options
-				// permet de faire des include_ecrire pour attraper un inc_ du plugin
+				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='options'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 					$splugs .= "define('_DIR_PLUGIN_$prefix',_DIR_PLUGINS.'$plug/');\n";
