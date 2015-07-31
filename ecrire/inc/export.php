@@ -21,7 +21,8 @@ function inc_export_dist($meta)
 	if (!isset($GLOBALS['meta'][$meta])) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else {
+	}
+	else {
 		$start = false;
 		list($gz, $archive, $rub, $tables_for_dump, $etape_actuelle, $sous_etape) = 
 			unserialize($GLOBALS['meta'][$meta]);
@@ -60,8 +61,7 @@ function inc_export_dist($meta)
 		}
 		$all = count($tables_for_dump);
 		if ($etape_actuelle > $all OR !$all){
-			include_spip('inc/headers');
-			redirige_par_entete(generer_action_auteur("export_all","end,$gz,$archive,$rub",'',true, true));
+			return "end,$gz,$archive,$rub"; // c'est fini !
 		}
 
 		include_spip('inc/minipres');
@@ -297,7 +297,7 @@ function export_select($row, $les_rubriques, $les_meres) {
 	if (isset($row['impt']) AND $row['impt'] !='oui') return false;
 	if (!$les_rubriques) return true;
 
-	// numero de rubrique non determinant pour les forums (0 à 99%)
+	// numero de rubrique non determinant pour les forums (0 ï¿½ 99%)
 	if (isset($row['id_rubrique']) AND $row['id_rubrique']) {
 		if (in_array($row['id_rubrique'], $les_rubriques)) {
 			if (isset($row['id_article']))
