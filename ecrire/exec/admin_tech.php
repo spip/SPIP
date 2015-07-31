@@ -87,13 +87,13 @@ function exec_admin_tech_dist()
 	$res .= "\n<p>" .
 	  _T('texte_admin_tech_03') .
 	  "</p>\n<ul>" .
-	  "\n<li><input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> " .
+	  "\n<li style='list-style:none;'><input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> " .
 	  _T('bouton_radio_sauvegarde_compressee', array('fichier'=>'')) .
 	  " </label><br />\n" .
 	  '<b>' . $dir_dump . "</b>" .
 	  $znom .
 	  "<b>.xml.gz</b></li>" . 
-	  "\n<li><input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'>" .
+	  "\n<li style='list-style:none;'><input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'>" .
 	  _T('bouton_radio_sauvegarde_non_compressee',  array('fichier'=>'')) .
 	  '</label><br /><b>' .
 	  $dir_dump .
@@ -124,15 +124,14 @@ function exec_admin_tech_dist()
 		$liste_choix = "<ul>"; 
 		foreach($liste_dump as $key=>$fichier){
 			$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
-			$liste_choix.="\n<li><input type='radio' name='archive' value='"
+			$liste_choix.="\n<li style='list-style:none;'><input type='radio' name='archive' value='"
 		. $affiche_fichier
 		. "' id='dump_$key' "
 		.  (($fichier==$selected)?"checked='checked' ":"")
 		. "/>\n<label for='dump_$key'>"
 		.   $file = str_replace('/', ' / ', $affiche_fichier)
 		. '&nbsp;&nbsp; ('
-		. _T('taille_octets',
-		     array('taille' => number_format(filesize($fichier), 0, ' ', ' ')))
+		. taille_en_octets(filesize($fichier))
 		. ')</label></li>';
 		}
  	
@@ -144,27 +143,33 @@ function exec_admin_tech_dist()
 			$texte_compresse = _T('texte_non_compresse')."&nbsp;";
 		}
 
-		$res = 	"\n<p style='text-align: justify;'> " .
+		echo debut_cadre_trait_couleur('',true,'',
+			_T('texte_restaurer_base'),'restaurer');
+
+		$res = "\n<p style='text-align: justify;'> " .
 		_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')) .
 		  '</p>' .
 		_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)) .
 		$liste_choix .
-		"\n<li><input type='radio' name='archive' value='' />" .
-		"\n<span class='spip_medium'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>" .
-		  debut_cadre_relief('',true) .
-		"<p><input name='insertion' type='checkbox' />&nbsp;" .
+		"\n<li style='list-style:none;'><input type='radio' name='archive' value='' />" .
+		"\n<span class='spip_x-small'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
+
+		// restauration partielle / fusion
+		$res .=
+		  debut_cadre_enfonce('',true) .
+		"<div>" .
+		 "<label><input name='insertion' type='checkbox' />&nbsp; ". 
 		  _T('sauvegarde_fusionner') .
-		  '</p>' .
-		  "<p>" .
+		  '</label><br />' .
 		  _T('sauvegarde_url_origine') .
-		  "<br /><input name='url_site' type='text' size='60'/>" .
-		  '</p>' .
-		  fin_cadre_relief(true);
-		
-		echo 
-			debut_cadre_trait_couleur('',true,'',_T('texte_restaurer_base'),'restaurer'),
-		  generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base')),
-		  fin_cadre_trait_couleur(true);
+		  " &nbsp; <input name='url_site' type='text' size='25' />" .
+		  '</div>' .
+		  fin_cadre_enfonce(true);
+
+		echo generer_form_ecrire('import_all', $res, '', _T('bouton_restaurer_base'));
+
+		echo fin_cadre_trait_couleur(true);
+
 	}
 
 	//
@@ -201,7 +206,7 @@ function nom_fichier_dump()
 	else $dir = determine_upload();
 
 	$site = isset($GLOBALS['meta']['nom_site'])
-	  ? preg_replace(",\W,is","_", substr(trim($GLOBALS['meta']['nom_site']),0,20))
+	  ? preg_replace(",\W,is","_", couper(translitteration(trim(typo($GLOBALS['meta']['nom_site']))),20))
 	  : 'spip';
 
 	$site .= '_' . date('Ymd');
