@@ -15,11 +15,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $spip_petitions = array(
 		"id_article"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"email_unique"	=> "CHAR (3)",
-		"site_obli"	=> "CHAR (3)",
-		"site_unique"	=> "CHAR (3)",
-		"message"	=> "CHAR (3)",
-		"texte"	=> "LONGTEXT",
+		"email_unique"	=> "CHAR (3) DEFAULT '' NOT NULL",
+		"site_obli"	=> "CHAR (3) DEFAULT '' NOT NULL",
+		"site_unique"	=> "CHAR (3) DEFAULT '' NOT NULL",
+		"message"	=> "CHAR (3) DEFAULT '' NOT NULL",
+		"texte"	=> "LONGTEXT DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_petitions_key = array(
@@ -58,7 +58,7 @@ $spip_referers_articles = array(
 		"id_article"	=> "int UNSIGNED NOT NULL",
 		"referer_md5"	=> "bigint UNSIGNED NOT NULL",
 		"date"		=> "DATE NOT NULL",
-		"referer"	=> "VARCHAR (255)",
+		"referer"	=> "VARCHAR (255) DEFAULT '' NOT NULL",
 		"visites"	=> "int UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
@@ -180,7 +180,7 @@ $spip_versions = array (
 		"id_article"	=> "bigint(21) NOT NULL",
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-		"id_auteur"	=> "VARCHAR(23)", # stocke aussi IP(v6)
+		"id_auteur"	=> "VARCHAR(23) DEFAULT '' NOT NULL", # stocke aussi IP(v6)
 		"titre_version"	=> "text DEFAULT '' NOT NULL",
 		"permanent"	=> "char(3)",
 		"champs"	=> "text");

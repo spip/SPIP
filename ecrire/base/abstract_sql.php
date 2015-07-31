@@ -294,8 +294,10 @@ function test_sql_int($type)
 }
 
 // donner le character set sql fonction de celui utilise par spip
+// $skip_verif permet de ne pas faire de verif a l'install car la bd n'est pas configuree
+// le script d'install se charge des verif lui meme
 // http://doc.spip.org/@spip_sql_character_set
-function spip_sql_character_set($charset){
+function spip_sql_character_set($charset, $skip_verif=false){
 	$sql_charset_coll = array(
 	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),
 	'cp1251'=>array('charset'=>'cp1251','collation'=>'cp1251_general_ci'),
@@ -309,9 +311,11 @@ function spip_sql_character_set($charset){
 	'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci')
 	);
 	if (isset($sql_charset_coll[$charset])){
+		if ($skip_verif)
+			return $sql_charset_coll[$charset];
 		// verifier que le character set vise est bien supporte par mysql
-		$res = spip_query("SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
-		if ($res && $row = mysql_fetch_assoc($res))
+		$res = spip_query($q="SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
+		if ($res AND ($row = sql_fetch($res)))
 			return $sql_charset_coll[$charset];
 	}
 
