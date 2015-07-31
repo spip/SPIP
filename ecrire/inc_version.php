@@ -81,19 +81,6 @@ if (!defined('_NOM_PERMANENTS_INACCESSIBLES')) define('_NOM_PERMANENTS_INACCESSI
 if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
 
-if (!defined('_IS_BOT')) {
-/**
- * Détecteur de robot d'indexation
- * 
- * Utilisé en divers endroits, centralisé ici
- */
-	define('_IS_BOT',
-		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
-			$_SERVER['HTTP_USER_AGENT'])
-	);
-}
-
 /** Le nom du fichier de personnalisation */
 if (!defined('_NOM_CONFIG')) define('_NOM_CONFIG', 'mes_options');
 
@@ -122,6 +109,19 @@ if (!defined('_ECRAN_SECURITE')
 AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
 	include $f;
 
+
+if (!defined('_IS_BOT')) {
+/**
+ * Détecteur de robot d'indexation
+ *
+ * Utilisé en divers endroits, centralisé ici
+ */
+	define('_IS_BOT',
+		isset($_SERVER['HTTP_USER_AGENT'])
+		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
+			$_SERVER['HTTP_USER_AGENT'])
+	);
+}
 
 //
 // *** Parametrage par defaut de SPIP ***
