@@ -52,15 +52,14 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$vignette = "<div style='margin-bottom: 10px;'>".vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)."</div>";
 	}
 
-	$s = ($ancre =='documents' ? '': '-');
-
+	//$s = ($ancre =='documents' ? '': '-');
 	$corps = legender_corps($ancre, $flag, $id, $id_document, $script, $type, $document, $label, $taille) .
 		$vignette .
 		"\n\n" .
 		legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $type);
 
 	// ne pas afficher le bouton de changement dans le portfolio ?
-	// mais tout cela n'est pas très extensible et declenchera d'autres bugs plus tard...
+	// mais tout cela n'est pas trÔøΩs extensible et declenchera d'autres bugs plus tard...
 	if (preg_match(",_edit,",$script))
 		$corps .= legender_image_doc($document, $id_document, $id, $type, $s, $script, $ancre);
 
@@ -219,8 +218,7 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 		$action = redirige_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&show_docs=$id_document#$ancre");
 	} else {
 		$iframe_redirect = generer_url_ecrire("documenter","id_$type=$id&type=$type",true);
-		$f = (!$s AND $id_vignette) ? "/$id_document" : '';
-		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette$f", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('form.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_vignette", $script, "id_$type=$id&type=$type&s=$s&show_docs=$id_document#$ancre", array($texte),'',"function(r,noeud) {noeud.innerHTML = r; \$('form.form_upload',noeud).async_upload(async_upload_portfolio_documents);}");
 	}
 
 	$joindre = charger_fonction('joindre', 'inc');
