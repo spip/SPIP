@@ -1823,6 +1823,7 @@ function spip_versions_sqlite(){
 
 class spip_sqlite {
 	static $requeteurs = array();
+	static $transaction_en_cours = array();
 
 	function spip_sqlite(){}
 
@@ -1840,6 +1841,7 @@ class spip_sqlite {
 
 	static function demarrer_transaction($serveur){
 		spip_sqlite::executer_requete("BEGIN TRANSACTION",$serveur);
+		spip_sqlite::$transaction_en_cours[$serveur] = true;
 	}
 
 	static function executer_requete($query, $serveur, $tracer=null){
@@ -1854,10 +1856,18 @@ class spip_sqlite {
 
 	static function annuler_transaction($serveur){
 		spip_sqlite::executer_requete("ROLLBACK",$serveur);
+		spip_sqlite::$transaction_en_cours[$serveur] = false;
 	}
 
 	static function finir_transaction($serveur){
+		// si pas de transaction en cours, ne rien faire et le dire
+		if (!isset (spip_sqlite::$transaction_en_cours[$serveur])
+		  OR spip_sqlite::$transaction_en_cours[$serveur]==false)
+			return false;
+		// sinon fermer la transaction et retourner true
 		spip_sqlite::executer_requete("COMMIT",$serveur);
+		spip_sqlite::$transaction_en_cours[$serveur] = false;
+		return true;
 	}
 }
 
