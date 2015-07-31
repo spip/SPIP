@@ -63,7 +63,7 @@ div.table_page { margin-top: 1em; }
 #chemin li em { display: none; }
 #chemin li a { color: white; }
 #chemin, #chemin ul, #chemin li, #chemin li .bloc { display: block; float: #GET{left}; margin: 0; padding: 0; margin-top: 0px; padding-top: 0px; list-style-type: none;}
-#chemin li .bloc {	white-space: no-wrap;	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{666666}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;	padding: 2px;	padding-#GET{left}: 10px;	padding-#GET{right}: 12px;	margin-#GET{left}: -5px; }
+#chemin li .bloc {	white-space: nowrap;	background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{666666}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;	padding: 2px;	padding-#GET{left}: 10px;	padding-#GET{right}: 12px;	margin-#GET{left}: -5px; }
 #chemin li li .bloc { display: block; margin-top: 0px; background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
 #chemin .aide {margin-top: 3px; margin-bottom: 15px;}
 
@@ -104,7 +104,7 @@ hr.fin_article_presentation {
 .formfx fieldset {border:0;margin:0;padding:0;}
 .formfx span.erreur {color:red;font-weight:bold;}
 ol.formfx,.formfx ol {
-	line-height: auto;
+	line-height: normal;
 	padding: 0px;
 	margin: 0px;
 	list-style-type: none;
@@ -334,7 +334,7 @@ div.pos_r { position: relative; }
 
 /* selecteur de rubriques */
 option.selec_rub { background-position: [(#GET{left})] center; background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=rubrique-12.gif); background-repeat: no-repeat; padding-#GET{left}: 16px; }
-option.niveau_1 { font-weight: bold; background: #GET{claire}; background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=secteur-12.gif) no-repeat; }
+option.niveau_1 { font-weight: bold; background: #GET{claire}; background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=secteur-12.gif); background-repeat:  no-repeat; }
 option.niveau_2 { color: #202020; border-bottom: 1px solid #GET{claire}; }
 option.niveau_3 { color: #404040; }
 option.niveau_4 { color: #606060; }
@@ -348,7 +348,7 @@ div.messages { padding: 5px; border-bottom: 1px solid #GET{foncee}; font-size: 1
 /* Icones de fonctions */
 a.icone26 { font-family: verdana, helvetica, arial, sans; font-size: 11px; font-weight: bold; color: #000; text-decoration: none; padding: 1px; margin-#GET{right}: 2px; }
 a.icone26:hover { text-decoration: none; }
-a.icone26 img { vertical-align: middle; behavior: background-color: #GET{foncee}; }
+a.icone26 img { vertical-align: middle; background-color: #GET{foncee}; }
 a.icone26:hover img { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=fond-gris-anim.gif); }
 .icone36 { border: 0; padding: 5px 0; margin: 0; text-align: center; text-decoration: none; font-size: x-small; width:72px; }
 .icone36 a, .icone36 a,a.icone36, a.icone36:hover { text-decoration: none; }
@@ -422,7 +422,7 @@ a.cellule-h-texte:hover { text-decoration: none; color: #000; border-#GET{right}
 div.onglet { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #FFF; }
 div.onglet a { color: #GET{foncee}; }
 div.onglet_on { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #GET{claire}; }
-div.onglet_on a, div.onglet_on a:hover { color: #GET{couleur}; text-decoration: none; }
+div.onglet_on a, div.onglet_on a:hover { color: #GET{claire}; text-decoration: none; }
 div.onglet_off { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; font-weight: bold; border: 1px solid #GET{foncee}; margin-#GET{right}: 3px; padding: 5px; background-color: #GET{foncee}; color: #FFF; }
 
 .reliefblanc { background-image: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=barre-blanc.gif); }
@@ -723,7 +723,7 @@ td.message, a.message { background: url(#EVAL{ _DIR_IMG_PACK}wrapper.php?file=m_
 #liste_plugins .nomplugin_on { background: #GET{claire}; }
 #liste_plugins .plugin_erreur { background:red; }
 .desc_plug { height:1.9em;overflow:hidden;border-bottom:1px dotted grey; }
-#liste_plug { border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto; }
+#liste_plug { border: solid 1px #GET{foncee}; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto; }
 
 /* exec=statistiques_visites */
 .trait_haut { background: #GET{foncee}; }
@@ -797,7 +797,7 @@ td.vu { background: #CCC; }
 .upload_message ol li {padding: 2px;}
 
 /* config/reducteur */
-.vignette_reducteur { text-align: center; vertical-align: center; float: #GET{left}; padding:2px; border:2px solid #FFF; width:150px; height:170px; }
+.vignette_reducteur { text-align: center; vertical-align: middle; float: #GET{left}; padding:2px; border:2px solid #FFF; width:150px; height:170px; }
 .vignette_reducteur.selected { font-weight: bold; border:2px dotted #GET{claire}; }
 .vignette_reducteur span { display: block; }
 /* config/locuteur */
