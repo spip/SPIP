@@ -164,6 +164,8 @@ define('_TRANCHES', 10);
 // le charset [utf-8] utilise par le client, utile a _request.
 if (isset($var_ajaxcharset)) {
 	header("Content-Type: text/html; charset=".$GLOBALS['meta']["charset"]);
+	// Voir si on pourrait faire ça pour tout le monde
+	utiliser_langue_visiteur(); 
 	$var_f = charger_fonction($exec, 'fragments', true);
 	if (!$var_f) $var_f = charger_fonction($exec, 'exec');
 	$fragment = $var_f();
@@ -204,7 +206,6 @@ AND $l = @unserialize($l)) {
 		}
 	}
 }
-
 // Trouver la fonction eventuellement surchagee et l'appeler.
 // Elle envoie parfois des en-tetes http,
 // et en mode Ajax retourne un resultat.
