@@ -101,6 +101,12 @@ function calculer_rubriques() {
 		}
 	} while ($continuer);
 
+	// point d'entree pour permettre a des plugins de gerer le statut
+	// autrement (par ex: toute rubrique est publiee des sa creation)
+	// Ce pipeline fait ce qu'il veut, mais s'il touche aux statuts/dates
+	// c'est statut_tmp/date_tmp qu'il doit modifier
+	pipeline('calculer_rubriques', null);
+
 	// "Commit" des modifs
 	spip_query("UPDATE spip_rubriques SET date=date_tmp, statut=statut_tmp");
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
