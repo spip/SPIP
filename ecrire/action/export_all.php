@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/export');
-include_spip('inc/actions');
 include_spip('inc/minipres');
 
 // http://doc.spip.org/@action_export_all_dist
@@ -34,6 +33,7 @@ function action_export_all_dist()
 	$file =  $dir . $archive;
 	spip_log("action $arg $file");
 	include_spip('inc/meta');
+	utiliser_langue_visiteur();
 	if ($quoi =='start'){
 		// creer l'en tete du fichier et retourner dans l'espace prive
 		include_spip('inc/export');
@@ -44,11 +44,11 @@ function action_export_all_dist()
 		  include_spip('inc/headers');
 		  redirige_par_entete(generer_url_ecrire('export_all'));
 		} else {
-			echo install_debut_html(_T('info_sauvegarde'));
-		  echo "<p>",
-		    _T('avis_erreur_sauvegarde', 
-		       array('type'=>'.', 'id_objet'=>'. .')),
-		    "</p>\n";
+		  echo minipres(_T('info_sauvegarde'),
+				"<p>".
+				_T('avis_erreur_sauvegarde',
+				   array('type'=>'.', 'id_objet'=>'. .')) .
+				"</p>\n");
 		  exit;
 		}
 	}elseif ($quoi=='end'){
@@ -57,28 +57,20 @@ function action_export_all_dist()
 		effacer_meta("status_dump");
 		effacer_meta("status_dump_tables");
 		ecrire_metas();
-		
-		include_spip('inc/lang');
-		utiliser_langue_visiteur();
-		
-		$size = 0;
-		if (file_exists($file))
-			$size = filesize($file);
-		$n = _T('taille_octets',
-			array('taille' => number_format($size, 0, ' ', ' ')));
-		$n = _T('info_sauvegarde_reussi_02',
-			array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)"));
-	
-		echo install_debut_html(_T('info_sauvegarde'));
+
+		$size = @(!file_exists($file) ? 0 : filesize($file));
+
 		if (!$size) {
-		  echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+			$corps = _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
 	
 		} else {
-			// ne pas effrayer inutilement: il peut y avoir moins de fichiers
-			// qu'annonce' si certains etaient vides
+	// ne pas effrayer inutilement: il peut y avoir moins de fichiers
+	// qu'annonce' si certains etaient vides
+			$n = _T('taille_octets', array('taille' => number_format($size, 0, ' ', ' ')));
 		
-			echo "<p style='text-align: left'>".
-			  $n,
+			$corps = "<p style='text-align: left'>".
+			  _T('info_sauvegarde_reussi_02',
+			     array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)")) .
 			  " <a href='" . generer_url_ecrire() . "'>".
 			_T('info_sauvegarde_reussi_03')
 			. "</a> "
@@ -89,10 +81,11 @@ function action_export_all_dist()
 			$tables_sauvegardees = array_keys($tables_sauvegardees);
 			sort($tables_sauvegardees);
 			$n = floor(count($tables_sauvegardees)/2);
-			echo "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>";
-			echo "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>";
+			$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
+			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>";
 		}
-		echo install_fin_html();
+		echo minipres(_T('info_sauvegarde'), $corps);
+		exit;
 	}
 }
 ?>
