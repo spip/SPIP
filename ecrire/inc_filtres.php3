@@ -144,42 +144,156 @@ function strtr2 ($texte, $trans) {
 	}
 }
 
+//
+// Conversions de charset
+//
+
 // transforme une chaine en entites unicode &#129;
-// a completer pour d'autres charsets...
 function entites_unicode($chaine) {
 	switch(lire_meta('charset')) {
+
 		case '':
 		case 'iso-8859-1':
-			while ($i = ord(substr($chaine,$p++)))
-				if ($i>127)
-					$s .= "&#$i;";
-				else
-					$s .= chr($i);
-			return $s;
+		// On commente cet appel tant qu'il reste des spip < 1.5 dans la nature
+		//	$chaine = iso_8859_1_to_unicode($chaine);
+			break;
+
+		case 'utf-8':
+			$chaine = utf_8_to_unicode($chaine);
 
 		default:
-			return $chaine;
+			break;
+
 	}
+	return $chaine;
 }
 
 // transforme les entites unicode &#129; dans le charset courant
-// (iso-8859-1 seulement pour l'instant) ; a completer pour d'autres charsets...
 function unicode2charset($chaine) {
 	switch(lire_meta('charset')) {
+
 		case '':
 		case 'iso-8859-1':
-			while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
-				$vu[$regs[1]] = true;
-				if ($regs[1] < 256)
-					$chaine = ereg_replace($regs[0], chr($regs[1]), $chaine);
-			}
+			$chaine = unicode_to_iso_8859_1($chaine);
 			break;
+
+		case 'utf-8':
+			$chaine = unicode_to_utf_8($chaine);
+
 		default:
 			break;
 	}
-
 	return $chaine;
 }
+
+
+// Il faut deux fonctions par charset : charset->unicode et unicode->charset
+
+function iso_8859_1_to_unicode($chaine) {
+	while ($i = ord(substr($chaine,$p++)))
+		if ($i>127)
+			$s .= "&#$i;";
+		else
+			$s .= chr($i);
+	return $s;
+}
+function unicode_to_iso_8859_1($chaine) {
+	while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
+		$vu[$regs[1]] = true;
+		if ($regs[1] < 256)
+			$chaine = ereg_replace($regs[0], chr($regs[1]), $chaine);
+	}
+	return $chaine;
+}
+
+function utf_8_to_unicode($source) {
+/*
+ * Ce code provient de php.net, son auteur est Ronen. Adapte pour compatibilite php3
+ */
+	// array used to figure what number to decrement from character order value 
+	// according to number of characters used to map unicode to ascii by utf-8
+	$decrement[4] = 240;
+	$decrement[3] = 224;
+	$decrement[2] = 192;
+	$decrement[1] = 0;
+
+	// the number of bits to shift each charNum by
+	$shift[1][0] = 0;
+	$shift[2][0] = 6;
+	$shift[2][1] = 0;
+	$shift[3][0] = 12;
+	$shift[3][1] = 6;
+	$shift[3][2] = 0;
+	$shift[4][0] = 18;
+	$shift[4][1] = 12;
+	$shift[4][2] = 6;
+	$shift[4][3] = 0;
+
+	$pos = 0;
+	$len = strlen ($source);
+	$encodedString = '';
+	while ($pos < $len) {
+		$char = '';
+		$asciiPos = ord (substr ($source, $pos, 1));
+		if (($asciiPos >= 240) && ($asciiPos <= 255)) {
+			// 4 chars representing one unicode character
+			$thisLetter = substr ($source, $pos, 4);
+			$pos += 4;
+		}
+		else if (($asciiPos >= 224) && ($asciiPos <= 239)) {
+			// 3 chars representing one unicode character
+			$thisLetter = substr ($source, $pos, 3);
+			$pos += 3;
+		}
+		else if (($asciiPos >= 192) && ($asciiPos <= 223)) {
+			// 2 chars representing one unicode character
+			$thisLetter = substr ($source, $pos, 2);
+			$pos += 2;
+		}
+		else {
+			// 1 char (lower ascii)
+			$thisLetter = substr ($source, $pos, 1);
+			$pos += 1;
+			$char = $thisLetter;
+		}
+
+		if ($char)
+			$encodedString .= $char;
+		else {	// process the string representing the letter to a unicode entity
+			$thisLen = strlen ($thisLetter);
+			$thisPos = 0;
+			$decimalCode = 0;
+			while ($thisPos < $thisLen) {
+				$thisCharOrd = ord (substr ($thisLetter, $thisPos, 1));
+				if ($thisPos == 0) {
+					$charNum = intval ($thisCharOrd - $decrement[$thisLen]);
+					$decimalCode += ($charNum << $shift[$thisLen][$thisPos]);
+				} else {
+					$charNum = intval ($thisCharOrd - 128);
+					$decimalCode += ($charNum << $shift[$thisLen][$thisPos]);
+				}
+				$thisPos++;
+			}
+			$encodedLetter = "&#". ereg_replace('^0+', '', $decimalCode) . ';';
+			$encodedString .= $encodedLetter;
+		}
+	}
+	return $encodedString;
+}
+function unicode_to_utf_8($chaine) {
+	while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
+		$num = $regs[1];
+		$vu[$num] = true;
+		if($num<128) $s = chr($num);	// Ce bloc provient de php.net, auteur Ronen
+		else if($num<1024) $s = chr(($num>>6)+192).chr(($num&63)+128);
+		else if($num<32768) $s = chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
+		else if($num<2097152) $s = chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
+		else $s = '';
+		$chaine = ereg_replace($regs[0], $s, $chaine);
+	}
+	return $chaine;
+}
+
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
