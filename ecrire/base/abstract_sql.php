@@ -152,6 +152,7 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='', $option
 {
 	$f = sql_serveur('insert', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $noms, $valeurs, $desc, $serveur, $option!==false);
 }
 
@@ -160,6 +161,7 @@ function sql_insertq($table, $couples=array(), $desc=array(), $serveur='', $opti
 {
 	$f = sql_serveur('insertq', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $couples, $desc, $serveur, $option!==false);
 }
 
@@ -168,6 +170,7 @@ function sql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur
 {
 	$f = sql_serveur('insertq_multi', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
 }
 
@@ -176,6 +179,7 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option
 {
 	$f = sql_serveur('update', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
 }
 
@@ -187,6 +191,7 @@ function sql_updateq($table, $exp, $where='', $desc=array(), $serveur='', $optio
 {
 	$f = sql_serveur('updateq', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $exp, $where, $desc, $serveur, $option!==false);
 }
 
@@ -195,6 +200,7 @@ function sql_delete($table, $where='', $serveur='', $option=true)
 {
 	$f = sql_serveur('delete', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $where, $serveur, $option!==false);
 }
 
@@ -203,6 +209,7 @@ function sql_replace($table, $couples, $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('replace', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $couples, $desc, $serveur, $option!==false);
 }
 
@@ -212,6 +219,7 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
 {
 	$f = sql_serveur('replace_multi', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $tab_couples, $desc, $serveur, $option!==false);
 }
 
@@ -220,6 +228,7 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_table', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $exist, $serveur, $option!==false);
 }
 
@@ -229,6 +238,7 @@ function sql_drop_view($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_view', $serveur, $continue = $option==='continue' OR $option===false);
 	if (!is_string($f) OR !$f) return false;
+	sql_purge_cache($serveur);
 	return $f($table, $exist, $serveur, $option!==false);
 }
 
@@ -360,13 +370,33 @@ function sql_fetsel_cache(
 	static $cache_fetsel=array();
 	$req = sql_get_select($select, $from, $where,	$groupby, $orderby, $limit, $having, $serveur);
 	if ($option==false) return $req;
-	$k = md5($req);
-	if (isset($cache_fetsel[$k])) return $cache_fetsel[$k];
+	return sql_fetsel_en_cache($req);
+}
+
+// Permet de stocker une ligne de requete sql_fetsel_cache dans un cache
+// * $req est la requete calculee (sql_fetsel et le parametre $option a false)
+//   - si le resultat est en cache, il sera donne
+//   - sinon, la requete est executee, mise en cache et renvoyee
+// * si $req === false, le cache est vide (cf. sql_purge_cache)
+function sql_fetsel_en_cache($req, $serveur=""){
+	static $cache=array();
+	// purger
+	if ($req===false) return is_array($cache = array());
+	// chercher en cache
+	$k = md5($req.$serveur);
+	if (isset($cache[$k])) return $cache[$k];
+	// sinon calculer
 	$r = sql_query($req, $serveur, $option!==false);
-	if (!$r) return $cache_fetsel[$k]=NULL;
+	if (!$r) return $cache[$k]=NULL;
 	$r2 = sql_fetch($r, $serveur, $option!==false);
 	sql_free($r, $serveur, $option!==false);
-	return $cache_fetsel[$k]=$r2;
+	return $cache[$k]=$r2;	
+	
+}
+
+// purge le cache de sql_fetsel_en_cache()
+function sql_purge_cache($serveur="") {
+	return sql_fetsel_en_cache(false, $serveur);
 }
 
 # Retourne l'unique champ demande dans une requete Select a resultat unique
