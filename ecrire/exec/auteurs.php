@@ -40,9 +40,7 @@ $lettre_prec ="";
 while ($auteur = spip_fetch_array($result)) {
 	if ($i>=$debut AND $i<$debut+$max_par_page) {
 		if ($auteur['statut'] == '0minirezo')
-			$auteur['restreint'] = spip_num_rows(
-				spip_query("SELECT * FROM spip_auteurs_rubriques
-				WHERE id_auteur=".$auteur['id_auteur']));
+			$auteur['restreint'] = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_auteur=".$auteur['id_auteur']));
 			$auteurs[] = $auteur;
 	}
 	$i++;
@@ -98,7 +96,8 @@ if ($connect_statut == '0minirezo') {
 	if ($connect_toutes_rubriques) icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif");
 	icone_horizontale(_T('icone_informations_personnelles'), generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"), "fiche-perso-24.gif","rien.gif");
 
-	if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"))) {
+	$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
+	if ($n) {
 		if ($visiteurs)
 			icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs",""), "auteur-24.gif", "");
 		else
