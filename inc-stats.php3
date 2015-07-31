@@ -81,13 +81,13 @@ function archiver_stats() {
 	}
 
 	// nettoyage du matin
-	if (date("Y-m-d") <> lire_meta("date_statistiques")) {
+	if (date("Y-m-d") <> ($last_date = lire_meta("date_statistiques"))) {
 		if (timeout('archiver_stats')) {
 			include_ecrire("inc_meta.php3");
 			include_ecrire("inc_statistiques.php3");
 			ecrire_meta("date_statistiques", date("Y-m-d"));
 			ecrire_metas();
-			calculer_visites(lire_meta("date_statistiques"));
+			calculer_visites($last_date);
 
 			if (lire_meta('activer_statistiques_ref') == 'oui') {
 				// purger les referers du jour
