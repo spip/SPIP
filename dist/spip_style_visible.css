@@ -1,9 +1,3 @@
-.invisible_au_chargement {
-	visibility: hidden;
-}
-.visible_au_chargement {
-	visibility: visible;
-}
-.display_au_chargement {
-	display: block;
-}
+.invisible_au_chargement { visibility: hidden; }
+.visible_au_chargement { visibility: visible; }
+.display_au_chargement { display: block; }

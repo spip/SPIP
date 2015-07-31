@@ -1,138 +1,31 @@
 body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 body { border: 0; }
 
-/*
- * Icones et bandeaux
- */
+/* * Icones et bandeaux */
 /* Da cenacellare
-#bandeau-principal {
-	background-color: white;
-	margin: 0;
-	padding: 0;
-	border-bottom: 1px solid black;
-}
+#bandeau-principal { background-color: #FFF; margin: 0; padding: 0; border-bottom: 1px solid black; }
+.bandeau-icones { background-color: #FFF; margin: 0; padding: 0; padding-bottom: 2px; padding-top: 4px; } */
+/* .bandeau_sec .gauche { margin-top: 0; padding: 2px; padding-top: 0; background-color: #FFF; border-bottom: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; z-index: 100; } */
+/* .bandeau-icones .separateur { vertical-align: middle; height: 100%; width: 11px; margin: 0; padding: 0; background-position: 5px 0px; } */
 
-.bandeau-icones {
-	background-color: white;
-	margin: 0;
-	padding: 0;
-	padding-bottom: 2px; 
-	padding-top: 4px;
-}
-*/
-/*
-.bandeau_sec .gauche {
-	margin-top: 0;
-	padding: 2px;
-	padding-top: 0;
-	background-color: white;
-	border-bottom: 1px solid black;
-	border-left: 1px solid black;
-	border-right: 1px solid black;
-	z-index: 100;
-}
-*/
-/*
-.bandeau-icones .separateur {
-	vertical-align: middle;
-	height: 100%;
-	width: 11px;
-	padding: 0;
-	margin: 0;
-	background-position: 5px 0px;
-}
-*/
+.bandeau_couleur { padding-right: 4px; padding-left: 4px; font-family: verdana, helvetica, arial, sans; font-size: 11px; color: #000; text-align: center; font-weight: bold; height: 22px; }
+.bandeau_couleur_sous { position: absolute; visibility: hidden; top: 0; color: #000; padding: 5px; padding-top: 2px; font-family: verdana, helvetica, arial, sans; font-size: 11px; border-bottom: 1px solid #FFF; border-right: 1px solid #FFF; }
 
-.bandeau_couleur {
-	padding-right: 4px;
-	padding-left: 4px;
-	font-family: verdana, helvetica, arial, sans;
-	font-size: 11px;
-	color: black;
-	text-align: center;
-	font-weight: bold;
-	height: 22px;
-}
+a.lien_sous { color: #666; }
+a.lien_sous:hover { color: #000; }
 
-.bandeau_couleur_sous {
-	position: absolute; 
-	visibility: hidden;
-	top: 0; 
-	color: black;
-	padding: 5px;
-	padding-top: 2px;
-	font-family: verdana, helvetica, arial, sans;
-	font-size: 11px;
-	border-bottom: 1px solid white;
-	border-right: 1px solid white;
-}
+div.bandeau_rubriques { background-color: #EEE; border: 1px solid #555; }
+a.bandeau_rub { width: 120px; display: block; font-size: 10px; padding: 2px; color: #666; text-decoration: none; border-bottom: 1px solid #cccccc; background-repeat: no-repeat; }
+a.bandeau_rub:hover { background-color: #FFF; text-decoration: none; color: #333; background-repeat: no-repeat; }
+div.bandeau_rub { position: absolute; top: 4px; background-color: #EEE; padding: 0; border: 1px solid #555; visibility: hidden; }
 
-a.lien_sous {
-	color: #666666;
-}
-a.lien_sous:hover {
-	color: black;
-}
+div.pos_r { position: relative; }
 
+option.selec_rub { background-repeat: no-repeat; }
 
-div.bandeau_rubriques {
-	background-color: #eeeeee; 
-	border: 1px solid #555555;
-}
-a.bandeau_rub {
-	width: 120px;
-	display: block;
-	font-size: 10px;
-	padding: 2px;
-	color: #666666;
-	text-decoration: none;
-	border-bottom: 1px solid #cccccc;
-	background-repeat: no-repeat;
-}
-a.bandeau_rub:hover {
-	background-color: white;
-	text-decoration: none;
-	color: #333333;
-	background-repeat: no-repeat;
-}
-div.bandeau_rub {
-	position: absolute;
-	top: 4px;
-	background-color: #eeeeee;
-	padding: 0;
-	border: 1px solid #555555;
-	visibility: hidden;
-}
-
-div.pos_r {
-	position: relative;
-}
-
-option.selec_rub {
-	background-repeat: no-repeat;
-}
-
-
-div.messages {
-	padding: 5px;
-	font-size: 10px;
-	font-weight: bold;
-}
-
+div.messages { padding: 5px; font-size: 10px; font-weight: bold; }
 
 /* Icones de fonctions */
-
-a.icone26 {
-	font-family: verdana, helvetica, arial, sans;
-	font-size: 11px;
-	font-weight: bold;
-	color: black;
-	text-decoration: none;
-	padding: 1px; 
-}
-a.icone26:hover {
-	text-decoration: none;
-}
-a.icone26 img {
-	vertical-align: middle;
-}
+a.icone26 { font-family: verdana, helvetica, arial, sans; font-size: 11px; font-weight: bold; color: #000; text-decoration: none; padding: 1px; }
+a.icone26:hover { text-decoration: none; }
+a.icone26 img { vertical-align: middle; }
