@@ -386,10 +386,9 @@ if ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
 
 
 $activer_statistiques = lire_meta("activer_statistiques");
-$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 
 if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non" AND $options == "avancees"){
-	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites, 'aff_ref' => $aff_ref)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
+	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
 }
 
 echo "</div>\n";

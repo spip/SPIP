@@ -357,7 +357,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
-	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
 	if (!ereg("^SELECT", $requete)) {
@@ -1072,9 +1071,7 @@ function barre_onglets($rubrique, $onglet){
 
 	if ($rubrique == "statistiques") {
 		onglet(_T('onglet_evolution_visite_mod'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
-		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref != "non")
-			onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
+		onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
 	if ($rubrique == "repartition") {
 		onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "rubriques", $onglet, "rubrique-24.gif");

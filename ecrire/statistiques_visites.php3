@@ -30,9 +30,7 @@ if ($origine) {
 	debut_page(_T('titre_page_statistiques_referers'), "suivi", "statistiques");
 	echo "<br><br>";
 	gros_titre(_T('titre_liens_entrants'));
-	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-	if ($activer_statistiques_ref != "non")
-		barre_onglets("statistiques", "referers");
+	barre_onglets("statistiques", "referers");
 
 	debut_gauche();
 	debut_boite_info();
@@ -47,9 +45,7 @@ else {
 	debut_page(_T('titre_page_statistiques_visites').$pourarticle, "suivi", "statistiques");
 	echo "<br><br>";
 	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
-	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-	if ($activer_statistiques_ref != "non")
-		barre_onglets("statistiques", "evolution");
+	barre_onglets("statistiques", "evolution");
 	if ($titre) gros_titre($titre);
 
 	debut_gauche();
@@ -585,31 +581,30 @@ if (!$origine) {
 //
 // Affichage des referers
 //
-if (lire_meta("activer_statistiques_ref") != "non"){
 
-	// nombre de referers a afficher
-	$limit = intval($limit);	//secu
-	if ($limit == 0)
-		$limit = 100;
+// nombre de referers a afficher
+$limit = intval($limit);	//secu
+if ($limit == 0)
+	$limit = 100;
 
-	// afficher quels referers ?
-	$vis = "visites";
-	if ($origine) {
-		$where = "visites_jour>0";
-		$vis = "visites_jour";
-		$table_ref = "spip_referers";
-	}
-
-	$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
-
-
-	echo "<br><br><br>";
-	gros_titre(_T("onglet_origine_visites"));
-	
-	echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-	echo aff_referers ($query, $limit);
-	echo "</font></p>";	
+// afficher quels referers ?
+$vis = "visites";
+if ($origine) {
+	$where = "visites_jour>0";
+	$vis = "visites_jour";
+	$table_ref = "spip_referers";
 }
+
+$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
+
+
+echo "<br><br><br>";
+gros_titre(_T("onglet_origine_visites"));
+
+echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
+echo aff_referers ($query, $limit);
+echo "</font></p>";	
+
 echo "</font>";
 
 fin_page();
