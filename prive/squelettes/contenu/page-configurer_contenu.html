@@ -8,11 +8,12 @@
 	#FORMULAIRE_CONFIGURER_RUBRIQUES
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_BREVES
+</div>
+
 <?php
 include_spip('inc/presentation');
-
-	$breves = charger_fonction('breves', 'configuration');
-	echo $breves();
 
 	$logos = charger_fonction('logos', 'configuration');
 	echo $logos();
