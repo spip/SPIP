@@ -99,32 +99,54 @@ function logo_modifier($objet, $id_objet, $etat, $source){
 	$size = @getimagesize($file_tmp);
 	$type = !$size ? '' : ($size[2]>3 ? '' : $GLOBALS['formats_logos'][$size[2]-1]);
 	if ($type){
+		@rename($file_tmp,$file_tmp.".$type");
+		$file_tmp = $file_tmp.".$type";
 		$poids = filesize($file_tmp);
 
-		if (defined('_LOGO_MAX_SIZE') AND $poids>_LOGO_MAX_SIZE*1024){
+		if (defined('_LOGO_MAX_WIDTH') OR defined('_LOGO_MAX_HEIGHT')) {
+
+			if ((defined('_LOGO_MAX_WIDTH') AND _LOGO_MAX_WIDTH AND $size[0]>_LOGO_MAX_WIDTH)
+				OR (defined('_LOGO_MAX_HEIGHT') AND _LOGO_MAX_HEIGHT AND $size[1]>_LOGO_MAX_HEIGHT) ){
+				$max_width = (defined('_LOGO_MAX_WIDTH') AND _LOGO_MAX_WIDTH)? _LOGO_MAX_WIDTH : '*';
+				$max_height = (defined('_LOGO_MAX_HEIGHT') AND _LOGO_MAX_HEIGHT)? _LOGO_MAX_HEIGHT : '*';
+
+				// pas la peine d'embeter le redacteur avec ca si on a active le calcul des miniatures
+				// on met directement a la taille maxi a la volee
+				if (isset($GLOBALS['meta']['creer_preview']) AND $GLOBALS['meta']['creer_preview']=='oui'){
+					include_spip('inc/filtres');
+					$img = filtrer('image_reduire', $file_tmp, $max_width, $max_height);
+					$img = extraire_attribut($img, 'src');
+					$img = supprimer_timestamp($img);
+					if (@file_exists($img) AND $img!==$file_tmp){
+						spip_unlink($file_tmp);
+						@rename($img, $file_tmp);
+						$size = @getimagesize($file_tmp);
+					}
+				}
+				// verifier au cas ou image_reduire a echoue
+				if ((defined('_LOGO_MAX_WIDTH') AND _LOGO_MAX_WIDTH AND $size[0]>_LOGO_MAX_WIDTH)
+					OR (defined('_LOGO_MAX_HEIGHT') AND _LOGO_MAX_HEIGHT AND $size[1]>_LOGO_MAX_HEIGHT) ){
+					spip_unlink($file_tmp);
+					$erreur = _T('info_logo_max_poids',
+						array(
+							'maxi' =>
+								_T('info_largeur_vignette',
+									array('largeur_vignette' => $max_width,
+										'hauteur_vignette' => $max_height)),
+							'actuel' =>
+								_T('info_largeur_vignette',
+									array('largeur_vignette' => $size[0],
+										'hauteur_vignette' => $size[1]))
+						));
+				}
+			}
+		}
+
+		if (!$erreur AND defined('_LOGO_MAX_SIZE') AND _LOGO_MAX_SIZE AND $poids>_LOGO_MAX_SIZE*1024){
 			spip_unlink($file_tmp);
 			$erreur = _T('info_logo_max_poids',
 				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
 					'actuel' => taille_en_octets($poids)));
-		}
-		elseif (defined('_LOGO_MAX_WIDTH') OR defined('_LOGO_MAX_HEIGHT')) {
-
-			if ((defined('_LOGO_MAX_WIDTH') AND $size[0]>_LOGO_MAX_WIDTH)
-				OR (defined('_LOGO_MAX_HEIGHT') AND $size[1]>_LOGO_MAX_HEIGHT)
-			){
-				spip_unlink($file_tmp);
-				$erreur = _T('info_logo_max_poids',
-					array(
-						'maxi' =>
-							_T('info_largeur_vignette',
-								array('largeur_vignette' => defined('_LOGO_MAX_WIDTH') ? _LOGO_MAX_WIDTH : '*',
-									'hauteur_vignette' => defined('_LOGO_MAX_HEIGHT') ? _LOGO_MAX_HEIGHT : '*')),
-						'actuel' =>
-							_T('info_largeur_vignette',
-								array('largeur_vignette' => $size[0],
-									'hauteur_vignette' => $size[1]))
-					));
-			}
 		}
 
 		if (!$erreur)
