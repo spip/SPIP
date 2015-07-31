@@ -435,7 +435,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 	return (!$auteurs) ? "" : join($auteurs, ", ");
 }
 
-function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
+function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 	$retour = spip_abstract_fetsel(
 		array('texte'),
 		array('spip_petitions'),
@@ -445,7 +445,7 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 
 	if (!$retour) return '';
 	# cette page est invalidee par toute petition
-	$Cache['varia']['pet'.$id_article] = 1;
+	$cache['varia']['pet'.$id_article] = 1;
 	# ne pas retourner '' car le texte sert aussi de presence
 	return ($retour['texte'] ? $retour['texte'] : ' ');
 }

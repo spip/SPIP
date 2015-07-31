@@ -713,16 +713,17 @@ function balise_PARAMETRES_FORUM_dist($p) {
 // Noter l'invalideur de la page contenant ces parametres,
 // en cas de premier post sur le forum
 function code_invalideur_forums($p, $code) {
-	include_spip('inc/invalideur');
 	$type = 'id_forum';
 	$valeur = "\n\t\tcalcul_index_forum("
-		// Retournera 4 [$SP] mais force la demande du champ a MySQL
+		// Retournera 4 [$SP] mais force la demande du champ SQL
 		. champ_sql('id_article', $p) . ','
 		. champ_sql('id_breve', $p) .  ','
 		. champ_sql('id_rubrique', $p) .','
 		. champ_sql('id_syndic', $p) .  ")\n\t";
 
-	return ajouter_invalideur($type, $valeur, $code);
+	return '
+	// invalideur '.$type.'
+	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
 }
 
 // Reference a l'URL de la page courante

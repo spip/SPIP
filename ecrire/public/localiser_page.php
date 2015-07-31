@@ -152,7 +152,7 @@ function signaler_squelette($contexte)
 
 
 
-function analyse_resultat_skel($nom, $Cache, $corps) {
+function analyse_resultat_skel($nom, $cache, $corps) {
 	$headers = array();
 
 	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
@@ -171,7 +171,7 @@ function analyse_resultat_skel($nom, $Cache, $corps) {
 	return array('texte' => $corps,
 		'squelette' => $nom,
 		'process_ins' => ((strpos($corps,'<'.'?')=== false)?'html':'php'),
-		'invalideurs' => $Cache,
+		'invalideurs' => $cache,
 		'entetes' => $headers,
 		'duree' => $headers['X-Spip-Cache']
 	);
