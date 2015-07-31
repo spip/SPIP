@@ -459,7 +459,7 @@ function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
 	$session = charger_fonction('session', 'inc');
 	$session($auteur);
 	$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
-	$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
+	$p['cnx'] = ($auteur['cookie'] == 'oui') ? 'perma' : '';
 	$p = array('prefs' => serialize($p));
 	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
 
