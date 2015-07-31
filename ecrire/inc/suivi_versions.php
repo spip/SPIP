@@ -48,7 +48,6 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	changer_typo($lang);
 	$lang_dir = lang_dir($lang);
 	$nb_aff = 10;
-	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 
 	if ($uniq_auteur) {
 		$req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
