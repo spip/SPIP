@@ -75,11 +75,14 @@ if (strval($nom)!='') {
 		if ($new_login) {
 			if (strlen($new_login) < 4)
 				$echec .= "<p>"._T('info_login_trop_court');
-			else if (spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($new_login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'")))
+			else {
+			  $n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE login='".addslashes($new_login)."' AND id_auteur!=$id_auteur AND statut!='5poubelle'"));
+			  if ($n['n'])
 				$echec .= "<p>"._T('info_login_existant');
-			else if ($new_login != $old_login) {
+			  else if ($new_login != $old_login) {
 				$modif_login = true;
 				$auteur['login'] = $new_login;
+			  }
 			}
 		}
 		// suppression du login
@@ -161,17 +164,8 @@ if (strval($nom)!='') {
 				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
 		}
 
-		if (!spip_query("UPDATE spip_auteurs SET $query_pass
-			nom='".addslashes($auteur['nom'])."',
-			login='".addslashes($auteur['login'])."',
-			bio='".addslashes($auteur['bio'])."',
-			email='".addslashes($auteur['email'])."',
-			nom_site='".addslashes($auteur['nom_site'])."',
-			url_site='".addslashes($auteur['url_site'])."',
-			pgp='".addslashes($auteur['pgp'])."'
-			$add_extra
-			WHERE id_auteur=".$auteur['id_auteur']))
-		  die($query);
+		$n = spip_query("UPDATE spip_auteurs SET $query_pass		nom='".addslashes($auteur['nom'])."',						login='".addslashes($auteur['login'])."',					bio='".addslashes($auteur['bio'])."',						email='".addslashes($auteur['email'])."',					nom_site='".addslashes($auteur['nom_site'])."',				url_site='".addslashes($auteur['url_site'])."',				pgp='".addslashes($auteur['pgp'])."'						$add_extra WHERE id_auteur=".$auteur['id_auteur']);
+		if ($n) die('UPDATE');
 	}
  }
 

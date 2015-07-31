@@ -1392,27 +1392,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		$champs_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
 	}
 
-	spip_query("UPDATE spip_articles SET surtitre='" .
-		   addslashes($champs['surtitre']) .
-		   "', titre='" .
-		   addslashes($champs['titre']) .
-		   "', soustitre='" .
-		   addslashes($champs['soustitre']) .
-		   "', id_rubrique=" .
-		   intval($id_rubrique) .
-		   ", descriptif='" .
-		   addslashes($champs['descriptif']) .
-		   "', chapo='" .
-		   addslashes($champs['chapo']) .
-		   "', texte='" .
-		   addslashes($champs['texte']) .
-		   "', ps='" .
-		   addslashes($champs['ps']) .
-		   "', url_site='" .
-		   addslashes($champs['url_site']) .
-		   "', nom_site='" .
-		   addslashes($champs['nom_site']) .
-		   "', date_modif=NOW() $champs_extra WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET surtitre='" .			   addslashes($champs['surtitre']) .	   "', titre='" .			   addslashes($champs['titre']) .	"', soustitre='" .			   addslashes($champs['soustitre']) .	   "', id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif='" .			   addslashes($champs['descriptif']) .	   "', chapo='" .			   addslashes($champs['chapo']) .	   "', texte='" .			   addslashes($champs['texte']) .	   "', ps='" .				   addslashes($champs['ps']) .		   "', url_site='" .			   addslashes($champs['url_site']) .	   "', nom_site='" .			   addslashes($champs['nom_site']) .	   "', date_modif=NOW() $champs_extra WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1481,7 +1461,8 @@ global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_
 inclus_non_articles($id_article);
 
 
-if ($row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article"))) {
+ $row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
+ if ($row) {
 	$statut_article = $row['statut'];
 	$titre_article = $row['titre'];
 	$id_rubrique = $row['id_rubrique'];
