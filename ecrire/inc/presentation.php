@@ -2851,8 +2851,9 @@ function fin_page($credits='') {
 }
 
 function debloquer_article($arg, $texte) {
-	$lien = _DIR_RESTREINT_ABS . parametre_url(self(), 'debloquer_article', $arg, '&');
-	return "<a href='" . generer_action_auteur('instituer', "collaboration-$arg", $lien) .
+	$lien = parametre_url(self(), 'debloquer_article', $arg, '&');
+	return "<a href='" .
+	  generer_action_auteur('instituer', "collaboration-$arg", _DIR_RESTREINT_ABS . $lien) .
 	  "' title=\"" .
 	  entites_html($texte) .
 	  "\">$texte&nbsp;" .

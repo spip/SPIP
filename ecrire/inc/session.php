@@ -293,6 +293,11 @@ function generer_action_auteur($action, $arg, $redirect="", $no_entites=false)
 	return generer_url_action($action, "arg=$arg&id_auteur=$connect_id_auteur&hash=$hash$redirect", $no_entites);
 }
 
+function redirige_action_auteur($action, $arg, $ret, $gra)
+{
+	return generer_action_auteur($action, $arg, generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS));
+}
+
 function determine_upload()
 {
 	global $connect_toutes_rubriques, $connect_login, $connect_statut ;

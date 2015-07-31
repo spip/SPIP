@@ -255,7 +255,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, generer_action_auteur('instituer', "langue-$id_rubrique-$id_parent", generer_url_ecrire("naviguer","id_rubrique=$id_rubrique", true)), $ze_logo, "supprimer.gif");
+	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, redirige_action_auteur('instituer', "langue-$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique"), $ze_logo, "supprimer.gif");
 	echo "</div>\n";
 	echo fin_block();
 
@@ -463,7 +463,7 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 	if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
 
 		echo "<p><div align='center'>";
-		icone(_T('icone_supprimer_rubrique'), generer_action_auteur('supprimer', "rubrique-$id_rubrique", generer_url_ecrire("naviguer","id_rubrique=$id_parent", true)), $ze_logo, "supprimer.gif");
+		icone(_T('icone_supprimer_rubrique'), redirige_action_auteur('supprimer', "rubrique-$id_rubrique", "naviguer","id_rubrique=$id_parent"), $ze_logo, "supprimer.gif");
 		echo "</div><p>";
 	}
 }

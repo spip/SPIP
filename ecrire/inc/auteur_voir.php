@@ -111,10 +111,13 @@ function auteur_voir_rubriques($id_auteur, $url_self)
 	if (!$restreint) {
 		echo _T('info_admin_gere_toutes_rubriques');
 	} else {
-		$modif = ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur);
-		$redirect = generer_url_ecrire($url_self, "id_auteur=$id_auteur", true); 
-		echo _T('info_admin_gere_rubriques');
-		echo "\n<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
+		$modif = ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) ? "id_auteur=$id_auteur" : '';
+
+		echo _T('info_admin_gere_rubriques'),
+			"\n<ul style='list-style-image: url(",
+			_DIR_IMG_PACK,
+			"rubrique-12.gif)'>";
+
 		while ($row_admin = spip_fetch_array($result_admin)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 			
@@ -123,7 +126,7 @@ function auteur_voir_rubriques($id_auteur, $url_self)
 			  "</a>";
 			
 			if ($modif) {
-			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_action_auteur('supprimer', "auteur_rubrique-$id_auteur-$id_rubrique", $redirect), "'>",
+			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", redirige_action_auteur('supprimer', "auteur_rubrique-$id_auteur-$id_rubrique", $url_self, $modif), "'>",
 					    _T('lien_supprimer_rubrique'),
 					    "</a>]</font>";
 			}
