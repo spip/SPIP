@@ -87,12 +87,12 @@ function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl)
   if (function_exists('generer_url_date'))
     return generer_url_date($script, $annee, $mois, $jour, $type, $finurl);
   else return	$script .		   
-	(ereg('[?&]$', $script) ?  "" : (strpos($script,'?') ? '&' : '?')) .
-		'annee=' . sprintf("%04d", $annee) . '&' .
-		'mois='  . sprintf("%02d", $mois) . '&' .
-		'jour='  . sprintf("%02d", $jour) . '&' .
+	(ereg('[?&]$', $script) ?  "" : (strpos($script,'?') ? '&amp;' : '?')) .
+		'annee=' . sprintf("%04d", $annee) . '&amp;' .
+		'mois='  . sprintf("%02d", $mois) . '&amp;' .
+		'jour='  . sprintf("%02d", $jour) . '&amp;' .
 		'type='  . $type .
-    		$finurl;
+		quote_amp($finurl);
 }
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
@@ -441,7 +441,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 			 ($ancre  ? ('/' . $numois) : ''));
 		$bandeau .= 
 		  "\n\t<th class='calendrier-th'>" .
-		  http_href((calendrier_args_date($script, date("Y",$nom), $numois, $num, 'jour', $ancre)), $clic, $clic) .
+		  http_href(calendrier_args_date($script, date("Y",$nom), $numois, $num, 'jour', $ancre), $clic, $clic) .
 		  "</th>";
 	}
 	return "\n<tr" .
@@ -673,7 +673,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 	onmouseout=\"this.style.zIndex=" . $i . "\">" .
 			  ((!$url) ? 
 					$sum :
-			   http_href($url, $sum, $desc,"border: 0px",$colors)) . 
+			   http_href(quote_amp($url), $sum, $desc,"border: 0px",$colors)) . 
 				"</div>";
 			}
 		}
@@ -772,22 +772,22 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
   $b = _T("lien_nouvea_pense_bete");
   $v = _T("lien_nouveau_message");
   $j=  _T("lien_nouvelle_annonce");
-  $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
+
   return 
-    http_href("$href&type=pb", 
+    http_href(http_php_scriptnq("message_edit","rv=$annee-$mois-$jour&new=oui&type=pb"), 
 	      $bleu . ($large ? $b : ''), 
 	      $b,
 	      'color: blue;',
 	      'calendrier-arial10') .
     "\n" .
-    http_href("$href&type=normal",
+    http_href(http_php_scriptnq("message_edit","rv=$annee-$mois-$jour&new=oui&type=normal"),
 	      $vert . ($large ? $v : ''), 
 	      $v,
 	      'color: green;',
 	      'calendrier-arial10') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
-      http_href("$href&type=affich",
+      http_href(http_php_scriptnq("message_edit","rv=$annee-$mois-$jour&new=oui&type=affich"),
 		$jaune . ($large ? $j : ''), 
 		$j,
 		'color: #ff9900;',
@@ -813,7 +813,7 @@ function http_calendrier_sans_heure($ev)
 	if (!$sum) $sum = $desc;
 	$i = isset($ev['DESCRIPTION']) ? 11 : 9; // 11: article; 9:autre
 	if ($ev['URL'])
-	  $sum = http_href($ev['URL'], $sum, $desc);
+	  $sum = http_href(quote_amp($ev['URL']), $sum, $desc);
 	return "\n<div class='calendrier-arial$i calendrier-evenement'>" .
 	  "<span class='" . $ev['CATEGORIES'] . "'>&nbsp;</span>&nbsp;$sum</div>"; 
 }
@@ -835,7 +835,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	if ($perso = $evenement['ATTENDEE'])
 	  $sum .=  '<br />' . substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 	if ($evenement['URL'])
-	  $sum = http_href($evenement['URL'], $sum, $desc, 'border: 0px');
+	  $sum = http_href(quote_amp($evenement['URL']), $sum, $desc, 'border: 0px');
 	$opacity = "";
 	$deb_h = substr($evenement['DTSTART'],-6,2);
 	$deb_m = substr($evenement['DTSTART'],-4,2);
@@ -901,8 +901,6 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 				 _T('suivant'));
 	}
 
-	$args_e = calendrier_args_date($script, $annee, $mois, $jour, $type, "&echelle=$echelle");
-	$args_p = calendrier_args_date($script, $annee, $mois, $jour, $type, "&partie_cal=$partie_cal");
 	$today=getdate(time());
 	$jour_today = $today["mday"];
 	$mois_today = $today["mon"];
@@ -916,29 +914,29 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	  . "><div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
 	     (
-		  http_href_img(("$args_e&partie_cal=tout$ancre"),
+		  http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&echelle=$echelle&partie_cal=tout$ancre"),
 				 "heures-tout.png",
 				 "class='calendrier-png" .
 				 (($partie_cal == "tout") ? " calendrier-opacity'" : "'"),
 				 _T('cal_jour_entier'))
-		  .http_href_img(("$args_e&partie_cal=matin$ancre"),
+		  .http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&echelle=$echelle&partie_cal=matin$ancre"),
 				 "heures-am.png",
 				 "class='calendrier-png" .
 				 (($partie_cal == "matin") ? " calendrier-opacity'" : "'"),
 				 _T('cal_matin'))
 
-		  .http_href_img(("$args_e&partie_cal=soir$ancre"),
+		  .http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&echelle=$echelle&partie_cal=soir$ancre"),
 				 "heures-pm.png", 
 				 "class='calendrier-png" .
 				 (($partie_cal == "soir") ? " calendrier-opacity'" : "'"),
 				 _T('cal_apresmidi'))
 		  . "&nbsp;"
-		  . http_href_img(("$args_p&echelle=" .
+		  . http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&partie_cal=$partie_cal&echelle=" .
 					  floor($echelle * 1.5)) . $ancre,
 					 "loupe-moins.gif",
 					 '',
 					 _T('info_zoom'). '-')
-		  . http_href_img(("$args_p&echelle=" .
+		  . http_href_img(calendrier_args_date($script, $annee, $mois, $jour, $type, "&partie_cal=$partie_cal&echelle=" .
 					  floor($echelle / 1.5)) . $ancre, 
 					 "loupe-plus.gif",
 					 '', 
@@ -1148,7 +1146,7 @@ function http_calendrier_rv($messages, $type) {
 	if (!$messages) return $total;
 	foreach ($messages as $row) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
-			$url = $match[1];
+			$url = quote_amp($match[1]);
 		else
 			$url = http_php_script("message", "id_message=".$row['id_message']);
 
