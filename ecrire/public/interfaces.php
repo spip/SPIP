@@ -187,8 +187,6 @@ $exceptions_des_tables['syndic_articles']['url_site']=array('spip_syndic',
 $exceptions_des_tables['syndic_articles']['nom_site']=array('spip_syndic',
 'nom_site');
 
-$exceptions_des_tables['signatures']['id_article']=array('spip_petitions', 'id_article');
-
 $table_date['articles']='date';
 $table_date['auteurs']='date';
 $table_date['breves']='date_heure';
