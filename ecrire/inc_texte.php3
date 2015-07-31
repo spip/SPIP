@@ -772,25 +772,17 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	$letexte = $texte_vu.typo($texte_a_voir); // typo de la queue du texte
 
 	//
-	// Insertion d'images utilisateur
+	// Insertion d'images et de documents utilisateur
 	//
-	while (eregi("<(IMG|DOC)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
+	while (eregi("<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
 		$letout = quotemeta($match[0]);
 		$letout = ereg_replace("\|", "\|", $letout);
 		$id_document = $match[2];
 		$align = $match[4];
-		$rempl = integre_image($id_document, $align, $match[1]);
-		$letexte = ereg_replace($letout, $rempl, $letexte);
-	}
-	//
-	// Insertion de fichiers multimedia
-	//
-	while (eregi("<(EMB)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
-		$letout = quotemeta($match[0]);
-		$letout = ereg_replace("\|", "\|", $letout);
-		$id_document = $match[2];
-		$align = $match[4];
-		$rempl = embed_document($id_document, $align);
+		if ($match[1] == "EMB")
+			$rempl = embed_document($id_document, $align);
+		else 
+			$rempl = integre_image($id_document, $align, $match[1]);
 		$letexte = ereg_replace($letout, $rempl, $letexte);
 	}
 
