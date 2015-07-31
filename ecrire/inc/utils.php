@@ -1634,6 +1634,12 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 	// (trim etait le 3eme argument, par defaut a true)
 	if (!is_array($options)) $options = array('trim'=>$options);
 	if (!isset($options['trim'])) $options['trim']=true;
+
+	if (isset($contexte['connect'])){
+		$connect = ($connect ? $connect : $contexte['connect']);
+		unset($contexte['connect']);
+	}
+
 	if (isset($options['modele']))
 		$contexte = creer_contexte_de_modele($contexte);
 
