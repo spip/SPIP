@@ -27,8 +27,7 @@ function insere_1_init($request) {
                 "PRIMARY KEY"	=> "id_old, id_new, type",
                 "KEY id_old"	=> "id_old");
 
-	include_spip('base/create');
-	spip_create_table('spip_translate', $spip_translate, $spip_translate_key, true);
+	spip_mysql_create('spip_translate', $spip_translate, $spip_translate_key, true);
 	// au cas ou la derniere fois ce serait terminee anormalement
 	spip_query("DELETE FROM spip_translate");
 	return insere_1bis_init($request);
@@ -126,7 +125,7 @@ function import_translate($values, $table, $desc, $request) {
 // Afin qu'inserer une 2e fois la meme sauvegarde ne change pas la base,
 // chaque entree de la sauvegarde est ignoree s'il existe une entree
 // de meme titre avec le meme contexte (parent etc) dans la base installee.
-// Une synchronisation plus fine serait preferable, cf [8002]
+// Une synchronisation plus fine serait preferable, cf [8004]
 
 // http://doc.spip.org/@import_inserer_translate
 function import_inserer_translate($values, $table, $desc, $request, $vals) {
@@ -192,7 +191,7 @@ function importe_translate_maj($k, $v)
 	if (!(isset($trans[$k]) AND isset($trans[$k][$v]))) return $v;
 
 	list($g, $titre, $ajout) = $trans[$k][$v];
-	if ($g < 0) {
+	if ($g <= 0) {
 		$f = 'import_identifie_parent_' . $k;
 		$g = $f($g, $titre, $v);
 		if ($g > 0)
@@ -324,7 +323,7 @@ function import_identifie_parent_id_rubrique($id_parent, $titre, $v)
 			$id_parent = (0 - $id_parent);
 			$gparent = $trans['id_rubrique'][$id_parent][0];
 			// parent deja renumerote depuis le debut la passe 2
-			if ($gparent > 0)
+			if ($gparent >= 0)
 			  $id_parent = $gparent;
 			else {
 			  // premiere occurrence du parent
