@@ -340,31 +340,31 @@ function date_relative($date) {
 	$decal = date("U") - date("U", strtotime($date));
 	
 	if ($decal < 0) {
-		$il_y_a = _T("date_dans");
+		$il_y_a = "date_dans";
 		$decal = -1 * $decal;
 	} else {
-		$il_y_a = _T("date_il_y_a");
+		$il_y_a = "date_il_y_a";
 	}
 	
 	if ($decal < 3600) {
 		$minutes = ceil($decal / 60);
-		$retour = "$il_y_a $minutes "._T("date_minutes"); 
+		$retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes"))); 
 	}
 	else if ($decal < (3600 * 24) ) {
 		$heures = ceil ($decal / 3600);
-		$retour = "$il_y_a $heures "._T("date_heures"); 
+		$retour = _T($il_y_a, array("delai"=>"$heures "._T("date_heures"))); 
 	}
 	else if ($decal < (3600 * 24 * 7)) {
 		$jours = ceil ($decal / (3600 * 24));
-		$retour = "$il_y_a $jours "._T("date_jours"); 
+		$retour = _T($il_y_a, array("delai"=>"$jours "._T("date_jours"))); 
 	}
 	else if ($decal < (3600 * 24 * 7 * 4)) {
 		$semaines = ceil ($decal / (3600 * 24 * 7));
-		$retour = "$il_y_a $semaines "._T("date_semaines"); 
+		$retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_semaines"))); 
 	}
 	else if ($decal < (3600 * 24 * 30 * 6)) {
 		$mois = ceil ($decal / (3600 * 24 * 30));
-		$retour = "$il_y_a $mois "._T("date_mois"); 
+		$retour = _T($il_y_a, array("delai"=>"$mois "._T("date_mois"))); 
 	}
 	else {
 		$retour = affdate_court($date);
