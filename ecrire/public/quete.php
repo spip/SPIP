@@ -96,17 +96,6 @@ function quete_document($id_document, $serveur='') {
 	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
-// http://doc.spip.org/@quete_petitions
-function quete_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = sql_getfetsel('texte', 'spip_petitions',("id_article=".intval($id_article)),'',array(),'','', $serveur);
-
-	if ($retour === NULL) return '';
-	# cette page est invalidee par toute petition
-	$cache['varia']['pet'.$id_article] = 1;
-	# ne pas retourner '' car le texte sert aussi de presence
-	return $retour ? $retour : ' ';
-}
-
 // recuperer une meta sur un site distant (en local il y a plus simple)
 // http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {

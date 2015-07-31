@@ -383,23 +383,6 @@ function autoriser_voir_dist($faire, $type, $id, $qui, $opt) {
 		OR auteurs_article($id, "id_auteur=".$qui['id_auteur']);
 }
 
-// Modifier une signature ?
-// = jamais !
-// http://doc.spip.org/@autoriser_signature_modifier_dist
-function autoriser_signature_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return
-		false;
-}
-
-// Moderer la petition ?
-// = modifier l'article correspondant
-// = droits par defaut sinon (admin complet pour moderation de tout)
-// http://doc.spip.org/@autoriser_modererpetition_dist
-function autoriser_modererpetition_dist($faire, $type, $id, $qui, $opt) {
-	return
-		autoriser('modifier', $type, $id, $qui, $opt);
-}
-
 // Est-on webmestre ? Signifie qu'on n'a meme pas besoin de passer par ftp
 // pour modifier les fichiers, cf. notamment inc/admin
 // = rien ni personne sauf definition de 
@@ -708,9 +691,6 @@ function autoriser_calendrier_bouton_dist($faire, $type='', $id=0, $qui = NULL, 
  * Activite
  */
 
-function autoriser_petitions_reactions_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return sql_countsel('spip_signatures')>0;
-}
 function autoriser_visiteurs_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	include_spip('inc/presentation');
 	return avoir_visiteurs(true);
