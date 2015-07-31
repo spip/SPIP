@@ -190,13 +190,12 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$onglet_interactivite = array(_L('Interactivit&eacute;'),
 		""
 	);
-		
+	
+	$r = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
 	$onglet_discuter = array(_L('Discuter'),
-    ($result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20") ?
-    	afficher_forum($result_forum, "sites","id_syndic=$id_syndic")
-    	:"")
-		);
-
+				 ($r ? afficher_forum($r, "sites","id_syndic=$id_syndic") : "")
+				 );
+	
 	echo 
 	  $haut 
 	  . afficher_onglets_pages(array(
