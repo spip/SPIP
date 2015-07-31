@@ -169,7 +169,10 @@ function erreur_necessite($n, $liste) {
 	return $msg;
 }
 
-
+// Resoud l'arbre de dependance des plugins et renvoie la liste des plugins, dans
+// l'ordre. Le tableau $ordre qui en ressort liste donc les plugins par ordre croissant
+// de priorite (le plus prioritaire est celui qui arrivera en dernier dans les pipelines
+// pour pouvoir modifier ce qu'on fait tous les autres, mais en premier dans le path).
 // http://doc.spip.org/@liste_plugin_valides
 function liste_plugin_valides($liste_plug, $force = false){
 	$liste = array();
@@ -321,6 +324,13 @@ function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 	return $liste;
 }
 
+// Genere automatiquement les scripts PHP suivants dans tmp/cache/ :
+// - charger_plugins_chemin.php
+// - charger_pipelines.php
+// - charger_plugin_fonctions.php
+// - charger_plugin_options.php
+// Ces scripts sont construits d'apres la liste ordonnee (selon l'arbre de dependances)
+// des plugins, et seront inclus a chaque hit au moment opportun.
 // http://doc.spip.org/@ecrire_plugin_actifs
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	static $liste_pipe_manquants=array();

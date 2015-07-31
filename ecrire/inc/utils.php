@@ -569,9 +569,12 @@ function texte_script($texte) {
 	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
 }
 
-// la fonction _chemin ajoute un repertoire au chemin courant si un repertoire lui est passe en parametre
-// retourne le chemin courant sinon, sous forme de array
-// seul le dossier squelette peut etre modifie en dehors de cette fonction, pour raison historique
+// Chaque appel a cette fonction ajoute un repertoire en tete du chemin courant (path)
+// si un repertoire lui est passe en parametre
+// retourne le chemin courant sinon, sous forme de array.
+// Si l'argument est de la forme dir1:dir2:dir3, ces 3 chemins sont places en tete
+// du path, dans cet ordre.
+// Exception: si un $dossier_squelette est defini, il reste en tete, pour raison historique
 // http://doc.spip.org/@_chemin
 function _chemin($dir_path=NULL){
 	static $path_base = NULL;
