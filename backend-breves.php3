@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "backend-breves";
 $delais = 3600;
 

@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("ecrire/inc_presentation.php3");
 

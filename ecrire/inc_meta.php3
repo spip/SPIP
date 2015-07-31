@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -50,7 +50,7 @@ function ecrire_metas() {
 	lire_metas();
 
 	$f = fopen("inc_meta_cache.php3", "w");
-	$s = '<?
+	$s = '<?php
 
 if (defined("_ECRIRE_INC_META")) return;
 define("_ECRIRE_INC_META", "1");

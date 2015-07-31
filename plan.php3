@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "plan";
 $delais = 2 * 3600;
 

@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -22,7 +22,7 @@ function include_local($file) {
 //
 
 $spip_version = 1.408; // version de la base
-$spip_version_affichee = "1.4 alpha 6"; // version de SPIP
+$spip_version_affichee = "1.4 alpha 7"; // version de SPIP
 
 
 //

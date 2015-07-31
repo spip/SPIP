@@ -1,4 +1,4 @@
-<?
+<?php
 
 $dir_ecrire = 'ecrire/';
 include ("ecrire/inc_version.php3");
@@ -29,7 +29,7 @@ if (!file_exists("CACHE/.plat") AND !file_exists("CACHE/$sousrep_cache")) {
 	@chmod("CACHE/$sousrep_cache", 0777);
 	$ok = false;
 	if ($f = @fopen("CACHE/$sousrep_cache/.test", "w")) {
-		@fputs($f, '<? $ok = true; ?'.'>');
+		@fputs($f, '<?php $ok = true; ?'.'>');
 		@fclose($f);
 		include("CACHE/$sousrep_cache/.test");
 	}
@@ -118,7 +118,7 @@ else {
 		}
 		if (substr($chapo, 0, 1) == '=') {
 			$url = substr($chapo, 1);
-			$texte = "<? @header (\"Location: $url\"); ?".">";
+			$texte = "<?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
 			$file = fopen($chemin_cache, "wb");
 			fwrite($file, $texte);

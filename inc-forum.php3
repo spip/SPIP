@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -113,7 +113,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	}	
 	
 	if ($forums_publics == "abonnement") {
-		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?>';
+		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
 	}
 	
 	$ret .= "\n";

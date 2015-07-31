@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc_version.php3");
 
@@ -29,7 +29,7 @@ else $aide_statut = "admin";
 
 
 
-<?
+<?php
 
 function rubrique($titre, $statut = "redac") {
 	global $aide;
@@ -92,7 +92,7 @@ function article($titre, $lien, $statut = "redac") {
 
 <TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=0>
 
-<?
+<?php
 
 if ($supp_rub) $les_rub=ereg_replace(",$supp_rub,","",$les_rub);
 if ($addrub) $les_rub.=",$addrub,";

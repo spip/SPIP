@@ -1,4 +1,4 @@
-<?
+<?php
 // redirige vers l'URL canonique de l'article,
 // en passant le parametre recalcul=oui
 

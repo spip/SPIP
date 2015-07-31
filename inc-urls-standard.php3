@@ -1,4 +1,4 @@
-<?
+<?php
 
 // executer une seule fois
 if (defined("_INC_URLS2")) return;

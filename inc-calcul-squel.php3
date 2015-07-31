@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -59,7 +59,11 @@ function parser_boucle($texte, $id_parent) {
 	$milieu = substr($texte, $p);
 
 	if (!ereg("(<BOUCLE([0-9]+|[-_][-_.a-zA-Z0-9]*)[[:space:]]*(\([^)]*\)([[:space:]]*\{[^}]*\})*)[[:space:]]*>)", $milieu, $match)) {
-		die ("<h2>Syntaxe boucle incorrecte :</h2>".htmlspecialchars($milieu));
+		include_local ("ecrire/inc_presentation.php3");
+		install_debut_html("Syntaxe boucle incorrecte");
+		echo '<p>La boucle ' . htmlspecialchars($milieu) . ' est incorrecte.';
+		install_fin_html();
+		exit;
 	}
 
 	$commande = $match[1];
@@ -1288,7 +1292,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		if (eregi("([^\"<>?[:space:]]+@[^\"<>?[:space:]]+)",$row[email],$match)) {
 			$email = $match[1];
-			$'.$nom_var.' = "<?
+			$'.$nom_var.' = "<?php
 				include (\'inc-formulaires.php3\'); ecrire_auteur($row[id_auteur],\'$email\');
 			?'.'>";
 		}

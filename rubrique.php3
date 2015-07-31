@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "rubrique";
 $delais = 2 * 3600;
 

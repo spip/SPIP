@@ -1,4 +1,4 @@
-<? 
+<?php 
 
 include ("inc.php3");
 

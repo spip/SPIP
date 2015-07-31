@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc_export.php3");
 

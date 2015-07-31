@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "forum";
 $delais = 0;
 

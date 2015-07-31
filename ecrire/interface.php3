@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc.php3");
 
@@ -12,7 +12,7 @@ debut_boite_info();
 Cette page vous permet de personnaliser votre interface (page en construction).
 Vous pouvez modifier, par exemple, le fond d'&eacute;cran de l'espace priv&eacute; de SPIP.
 
-<?
+<?php
 fin_boite_info();
 
 
@@ -25,12 +25,12 @@ echo aide ("intermodif");
 
 <P>
 
-<?
+<?php
 	debut_cadre_relief();
 ?>
 <TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH=100% BACKGROUND=''>
 <TR>
-<TD BGCOLOR='<? echo $couleur_foncee; ?>'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>
+<TD BGCOLOR='<?php echo $couleur_foncee; ?>'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>
 <B>Survol :</B>
 </TD></TR></TABLE>
 <P>
@@ -53,7 +53,7 @@ Si l'interface de SPIP vous semble un peu lente, vous pouvez d&eacute;sactiver l
 </CENTER>
 
 </FONT>
-<?
+<?php
 	fin_cadre_relief();
 
 ?>
@@ -63,7 +63,7 @@ Si l'interface de SPIP vous semble un peu lente, vous pouvez d&eacute;sactiver l
 
 <TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH=100% BACKGROUND=''>
 <TR>
-<TD BGCOLOR='<? echo $couleur_foncee; ?>'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>
+<TD BGCOLOR='<?php echo $couleur_foncee; ?>'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>
 <B>Fond d'&eacute;cran :</B>
 </TD></TR></TABLE>
 
@@ -98,7 +98,7 @@ Si l'interface de SPIP vous semble un peu lente, vous pouvez d&eacute;sactiver l
 
 
 
-<?
+<?php
 
 	debut_cadre_relief();
 

@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc.php3");
 include_local ("inc_mots.php3");

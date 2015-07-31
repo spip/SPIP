@@ -1,4 +1,4 @@
-<?
+<?php
 
 // inc-urls sert a generer les adresses des pages et, dans l'autre
 // sens, a recuperer l'id_article (par exemple) a partir de l'URL
