@@ -331,10 +331,19 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
 		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20));
 
-		// Signaler les documents distants par une icone de trombone
-		$dist = ($document['distant'] == 'oui')
-			? "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\t style='float: $spip_lang_right;'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n"
-			:'';
+		if ($document['distant'] == 'oui') {
+			$dist = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
+
+			// Signaler les documents distants par une icone de trombone
+			$dist .= "\n<img src='"._DIR_IMG_PACK.'attachment.gif'."'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
+			// Bouton permettant de copier en local le fichier
+			include_spip('inc/tourner');
+			$dist .= bouton_copier_local($document, $type, $id, $id_document, $script);
+			
+			$dist .="</div>\n";
+		} else {
+			$dist = '';
+		}
 
 		//
 		// Affichage de la vignette
