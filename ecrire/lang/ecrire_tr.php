@@ -426,6 +426,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'İsim',
 	'info_nom_destinataire' => 'Alıcının ismi',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Sitenizin ismi',
 	'info_nombre_articles' => '@nb_articles@ makale,',
 	'info_nombre_partcipants' => 'TARTIŞMAYA KATILANLAR :',

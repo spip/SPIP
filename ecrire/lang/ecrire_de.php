@@ -415,6 +415,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_nb_visiteurs' => '@nb@ Besucher',
 	'info_nom' => 'Name',
 	'info_nom_destinataire' => 'Name des Empfängers',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Name Ihrer Website',
 	'info_nombre_articles' => '@nb_articles@ Artikel,',
 	'info_nombre_partcipants' => 'TEILNEHMER DER DISKUSSION:',

@@ -419,6 +419,7 @@ L\'administrator dau sistèma ò de la ret vos deu poder fornir
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Nom',
 	'info_nom_destinataire' => 'Nom dau destinatari',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nom dau vòstre sit',
 	'info_nombre_articles' => '@nb_articles@ articles,',
 	'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSION:',

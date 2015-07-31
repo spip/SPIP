@@ -431,6 +431,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => '名字',
 	'info_nom_destinataire' => '接收者名字',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => '你的站点名',
 	'info_nombre_articles' => '@nb_articles@ 文章,',
 	'info_nombre_partcipants' => '讨论的参考者:',

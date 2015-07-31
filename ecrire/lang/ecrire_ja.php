@@ -422,6 +422,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => '名前',
 	'info_nom_destinataire' => '受取人の名前',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'ＨＰの名前',
 	'info_nombre_articles' => '@nb_articles@ 記事、',
 	'info_nombre_partcipants' => '討論の参加者:',

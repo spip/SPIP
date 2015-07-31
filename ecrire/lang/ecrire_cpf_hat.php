@@ -433,6 +433,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Kouman i rele',
 	'info_nom_destinataire' => 'Kouman destinatè i rele',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Kouman sit la li rele',
 	'info_nombre_articles' => '@nb_articles@ atik (yo),',
 	'info_nombre_partcipants' => 'PATISIPAN TO NAN KOZMAN :',

@@ -421,6 +421,7 @@ Riskloù zo e vefe distrujet ho tiaz titouroù pe ne\'z afe ket en-dro ken.<br /
 	'info_nb_visiteurs' => '@nb@ gweladennerion',
 	'info_nom' => 'Anv',
 	'info_nom_destinataire' => 'Anv an degemerer',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Anv ho lec\'hienn',
 	'info_nombre_articles' => '@nb_articles@ pennad,',
 	'info_nombre_partcipants' => 'PERZHIDI ER GAOZ :',

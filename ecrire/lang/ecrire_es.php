@@ -415,6 +415,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 	'info_nb_visiteurs' => '@nb@ visitantes',
 	'info_nom' => 'Nombre',
 	'info_nom_destinataire' => 'Nombre del destinatario o destinataria',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nombre de tu sitio',
 	'info_nombre_articles' => '@nb_articles@ artículos,',
 	'info_nombre_partcipants' => 'Participan en el debate...',

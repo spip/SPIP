@@ -413,6 +413,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 	'info_nb_visiteurs' => '@nb@ visitantes',
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome do destinatário',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome do seu site',
 	'info_nombre_articles' => '@nb_articles@ matérias,',
 	'info_nombre_partcipants' => 'PARTICIPANTES DA DISCUSSÃO:',

@@ -421,6 +421,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Navn',
 	'info_nom_destinataire' => 'Navn på modtager',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Dit websteds navn',
 	'info_nombre_articles' => '@nb_articles@ artikler,',
 	'info_nombre_partcipants' => 'DELTAGERE I DISKUSSIONEN:',

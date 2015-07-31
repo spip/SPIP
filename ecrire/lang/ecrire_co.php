@@ -449,6 +449,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	'info_nb_visiteurs' => '@nb@ visitori',
 	'info_nom' => 'Nome',
 	'info_nom_destinataire' => 'Nome di u destinatariu',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nome di u vostru situ',
 	'info_nombre_articles' => '@nb_articles@ artìculi,',
 	'info_nombre_partcipants' => 'PARTICIPANTI À A RAGIUNATA :',
