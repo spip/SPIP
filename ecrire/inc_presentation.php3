@@ -1877,29 +1877,24 @@ function fin_page($credits='') {
 	global $spip_version_affichee;
 	global $connect_id_auteur;
 
-	?>
 
-</td></tr></table>
+	echo "</td></tr></table>";
 
-<?php
-debut_grand_cadre();
+	debut_grand_cadre();
 
-echo "<div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-echo "<a href='http://www.uzine.net/spip'>SPIP $spip_version_affichee</a> ";
-echo _T('info_copyright');
+	echo "<div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "<b>SPIP $spip_version_affichee</b> ";
+	echo _T('info_copyright');
 
+	echo "<br>"._T('info_copyright_doc');
 
-if (ereg("jimmac", $credits))
-	echo "<br>"._T('lien_icones_interface');
-?>
-<p>
-</font></div>
-<?php
-fin_grand_cadre();
-?>
-</center>
+	if (ereg("jimmac", $credits))
+		echo "<br>"._T('lien_icones_interface');
 
-	<?php
+	echo "<p></font></div>";
+
+	fin_grand_cadre();
+	echo "</center>";
 
 	fin_html();
 }

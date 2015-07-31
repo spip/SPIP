@@ -55,11 +55,16 @@ function regler_langue_navigateur() {
 //
 // Traduire une chaine internationalisee
 //
-function traduire_chaine($text, $args) {
+function traduire_chaine($code, $args) {
 	global $spip_lang;
 	$var = "i18n_$spip_lang";
 	if (!$GLOBALS[$var]) charger_langue($spip_lang);
-	$text = $GLOBALS[$var][$text];
+	$text = $GLOBALS[$var][$code];
+
+	if (!$text) {
+		charger_langue('fr');
+		$text = $GLOBALS['i18n_fr'][$code];
+	}
 	if (!is_array($args)) return $text;
 
 	if ($GLOBALS['flag_str_replace']) {

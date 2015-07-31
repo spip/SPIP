@@ -207,6 +207,7 @@ function unicode2charset($chaine, $charset='AUTO') {
 
 		case 'utf-8':
 			$chaine = unicode_to_utf_8($chaine);
+			break;
 
 		default:
 			break;
