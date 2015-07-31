@@ -52,7 +52,7 @@ function generer_nom_fichier_cache($contexte, $page) {
 
 	if(!@file_exists($rep)) {
 		$rep = preg_replace(','._DIR_TMP.',', '', $rep);
-		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
+		$rep = sous_repertoire(_DIR_TMP, $rep, false,true);
 	}
 	$subdir = sous_repertoire($rep, substr($md_cache, 0, 1), true,true);
 	return $subdir.$cache;
