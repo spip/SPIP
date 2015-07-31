@@ -2484,7 +2484,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 // http://doc.spip.org/@barre_typo
 function barre_typo($id,$lang=''){
 	include_spip('inc/barre');
-	return '<div>' . afficher_barre("document.getElementById('$id')",false,$lang) . '</div>';
+	return '<div>' . afficher_barre("document.getElementById('$id')",true,$lang) . '</div>';
 }
 // http://doc.spip.org/@puce_changement_statut
 function puce_changement_statut($id_objet, $statut, $id_rubrique, $type, $ajax=false){
