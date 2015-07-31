@@ -219,9 +219,6 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 				$fieldset .= "<input type='radio' name='".$nom .
 				"' id='$nom-$valeur' value='$valeur'"
 				  .(($valeur==$contenu['valeur'])?"\nchecked='checked'":'')
-				  .(preg_match(',^(pass|login),', $nom)
-				  	?"\nautocomplete='off'"
-				  	:'')
 				  ."/>\n";
 				$fieldset .= "<label for='$nom-$valeur'>".$label."</label>\n";
 			}
@@ -229,7 +226,8 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 		}
 		else {
 			$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
-			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
+			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."'"
+							  .(preg_match(',^(pass|login),', $nom)?" autocomplete='off'":'') .	" />\n";
 		}
 	}
 	$fieldset .= "$horchamps</fieldset>\n";
