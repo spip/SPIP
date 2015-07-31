@@ -350,6 +350,11 @@ function afficher_article_rubrique($id_article, $id_rubrique, $id_secteur, $stat
 	$aider = charger_fonction('aider', 'inc');
 
 	$form = $chercher_rubrique($id_rubrique, 'article', $statut=='publie');
+	if (strpos($form,'<select')!==false) {
+		$form .= "<div style='text-align: $spip_lang_right;'>"
+			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+			. "</div>";
+	}
 
 	$msg = _T('titre_cadre_interieur_rubrique') .
 	  ((preg_match('/^<input[^>]*hidden[^<]*$/', $form)) ? '' : $aider("artrub"));
