@@ -1660,8 +1660,10 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			echo safehtml(justifier(propre($texte)));
 
-			if (strlen($url_site) > 10 AND $nom_site) {
+			if ($nom_site) {
+			  if (strlen($url_site) > 10)
 				echo "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
+			  else echo "<b>$nom_site</b>";
 			}
 
 			if (!$controle_id_article) {
@@ -1695,8 +1697,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			if ($spip_display != 4) echo "</td></tr></table>\n";
 
-			afficher_thread_forum($id_forum,$adresse_retour,$controle_id_article);
 
+			afficher_forum(spip_query("SELECT * FROM spip_forum WHERE id_parent='$id_forum'" . ($controle_id_article ? " AND statut<>'off'" : '') . " ORDER BY date_heure"), $adresse_retour, $controle_id_article);	
 		}
 		$i[$compteur_forum]++;
 	}
@@ -1704,20 +1706,6 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	spip_free_result($request);
 	$compteur_forum--;
 }
-
-function afficher_thread_forum($le_forum, $adresse_retour, $controle = 0) {
-	
-	if ($controle) {
-		$query_forum2 = "SELECT * FROM spip_forum WHERE id_parent='$le_forum' ORDER BY date_heure";
-	}
-	else {
-		$query_forum2 = "SELECT * FROM spip_forum WHERE id_parent='$le_forum' AND statut<>'off' ORDER BY date_heure";
-	}
- 	$result_forum2 = spip_query($query_forum2);
-	afficher_forum($result_forum2, $adresse_retour, $controle);
-	
-}
-
 
 function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
