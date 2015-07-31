@@ -676,7 +676,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 				 $where);
 		$where = array("'?'", "!$pred","''", $where);
 	}
-	spip_log("$arg, $op, $val[0], $col " . $crit->not);
+
 	$boucles[$idb]->where[]= $where;
 }
 
