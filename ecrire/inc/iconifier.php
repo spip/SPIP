@@ -129,10 +129,10 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 	}
 */
 
-	$afficher = "\n" .
+	$afficher = "\n<label for='image'>" .
 		_T('info_telecharger_nouveau_logo') .
-		"<br />" .
-		"\n<input name='image' type='file' class='forml spip_xx-small' size='15' />" .
+		"</label><br />" .
+		"\n<input name='image' id='image' type='file' class='forml spip_xx-small' size='15' />" .
 		"<div style='text-align: " .  $GLOBALS['spip_lang_right'] . "'>" .
 		"\n<input name='sousaction1' type='submit' value='" .
 		_T('bouton_telecharger') .
