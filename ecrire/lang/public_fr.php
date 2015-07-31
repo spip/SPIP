@@ -90,7 +90,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 'repondre_article' => 'Répondre à cet article',
 'repondre_breve' => 'Répondre à cette brève',
-'required' => '&nbsp;(obligatoire)',
 'resultats_recherche' => 'Résultats de la recherche',
 'retour_debut_forums' => 'Retour au début des forums',
 'rubrique' => 'Rubrique',
