@@ -904,7 +904,7 @@ ondblclick=\'storeCaret(this);\'>$texte</textarea>";
 	vieilles_log(\'generer_url_auteur\');  return generer_url_entite($id,"auteur", $args, $ancre);}',
 
  'charger_generer_url' => '($prive=NULL) {
-	vieilles_log(\'charger_generer_url\'); enerer_url_entite("", "", "", "", !$prive);}',
+	vieilles_log(\'charger_generer_url\'); generer_url_entite("", "", "", "", !$prive);}',
 
  'tester_variable' => '($n, $v) {
 	if (!isset($GLOBALS[$n])) $GLOBALS[$n] = $v;
