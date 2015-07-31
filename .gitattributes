@@ -109,6 +109,7 @@ ecrire/inc/filtres_images_lib_mini.php -text
 ecrire/inc/filtres_images_mini.php -text
 ecrire/inc/filtres_mime.php -text
 ecrire/inc/filtres_mini.php -text
+ecrire/inc/filtres_selecteur_generique.php -text
 ecrire/inc/headers.php -text
 ecrire/inc/icone_renommer.php -text
 ecrire/inc/iconifier.php -text
@@ -362,9 +363,7 @@ prive/formulaires/rediriger_article.html -text
 prive/formulaires/rediriger_article.php -text
 prive/formulaires/selecteur/ajax.html -text
 prive/formulaires/selecteur/articles.html -text
-prive/formulaires/selecteur/articles_fonctions.php -text
 prive/formulaires/selecteur/generique.html -text
-prive/formulaires/selecteur/generique_fonctions.php -text
 prive/formulaires/selecteur/hierarchie-articles.html -text
 prive/formulaires/selecteur/hierarchie-racine.html -text
 prive/formulaires/selecteur/hierarchie-rubriques.html -text
@@ -381,11 +380,8 @@ prive/formulaires/selecteur/lister-rubriques-rubriques.html -text
 prive/formulaires/selecteur/lister.html -text
 prive/formulaires/selecteur/navigateur.html -text
 prive/formulaires/selecteur/picker-ajax.html -text
-prive/formulaires/selecteur/picker-ajax_fonctions.php -text
 prive/formulaires/selecteur/picker.css -text
 prive/formulaires/selecteur/rubriques.html -text
-prive/formulaires/selecteur/rubriques_fonctions.php -text
-prive/formulaires/selecteur/selecteur_fonctions.php -text
 prive/formulaires/traduire.html -text
 prive/formulaires/traduire.php -text
 prive/ical_prive.html -text
