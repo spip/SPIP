@@ -456,20 +456,19 @@ if ($id_parent == "0" AND $coll != "0" AND $activer_breves!="non"){
 if (lire_meta("activer_sites") == 'oui') {
 	include_ecrire("inc_sites.php3");
 	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
+
+	$proposer_sites=lire_meta("proposer_sites");
+	if ($coll > 0 AND ($flag_editable OR $proposer_sites > 0)) {
+		$link = new Link('sites_edit.php3');
+		$link->addVar('id_rubrique', $coll);
+		$link->addVar('target', 'sites.php3');
+		$link->addVar('redirect', $clean_link->getUrl());
+	
+		echo "<div align='right'>";
+		icone(_T('info_sites_referencer'), $link->getUrl(), "site-24.gif", "creer.gif");
+		echo "</div><p>";
+	}
 }
-
-$proposer_sites=lire_meta("proposer_sites");
-if ($coll > 0 AND ($flag_editable OR $proposer_sites > 0)) {
-	$link = new Link('sites_edit.php3');
-	$link->addVar('id_rubrique', $coll);
-	$link->addVar('target', 'sites.php3');
-	$link->addVar('redirect', $clean_link->getUrl());
-
-	echo "<div align='right'>";
-	icone(_T('info_sites_referencer'), $link->getUrl(), "site-24.gif", "creer.gif");
-	echo "</div><p>";
-}
-
 
 /// Documents associes a la rubrique
 
