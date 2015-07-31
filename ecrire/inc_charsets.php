@@ -573,8 +573,9 @@ function transcoder_page($texte, $headers='') {
 	else if (preg_match(
 	',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),Uims',
 	$texte, $regs)
-	AND !preg_match(',^charset$,i', $charset)) # eviter #CHARSET des squelettes
-		$charset = trim(strtolower($regs[2]));
+	# eviter #CHARSET des squelettes
+	AND (($tmp = trim(strtolower($regs[2]))) != 'charset'))
+		$charset = $tmp;
 	// charset de la reponse http
 	else if (preg_match(',charset=([-_a-z0-9]+),i', $headers, $regs))
 		$charset = trim(strtolower($regs[1]));
