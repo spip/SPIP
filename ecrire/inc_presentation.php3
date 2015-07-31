@@ -829,7 +829,7 @@ function debut_html($titre = "") {
 	.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
 		.sanscadre {padding: 4px; margin: 0px; }
 		.aveccadre {cursor: pointer; padding: 3px; margin: 0px;  border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
-		.fondgris {padding: 4px; margin: 1px;}
+		.fondgris {cursor: pointer; padding: 4px; margin: 1px;}
 		.fondgrison {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;}
 		.fondgrison2 {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;}
 	.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
@@ -1049,7 +1049,7 @@ function barre_onglets($rubrique, $onglet){
 }
 
 
-function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = ""){
+function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
 	global $spip_display;
 	
 	if ($spip_display == 1){
@@ -1071,9 +1071,17 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	if (eregi("^javascript:",$lien)){
 		$java_lien = substr($lien, 11, strlen($lien));
 		$onClick = " onClick=\"$java_lien\"";
+		$a_href = '<script language="JavaScript"><!--' . "\n"
+			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\"");\n//--></script>'
+			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
+		$a_href = '<script language="JavaScript"><!--' . "\n"
+			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\" class=\\"icone\\"");\n//--></script>'
+			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
 		$onClick = " onClick=\"document.location='$lien'\"";
+		$a_href = "<a href=\"$lien\">";
+		$a_href_icone = "<a href=\"$lien\" class='icone'>";
 	}
 
 	if ($rubrique_icone == $rubrique){
@@ -1082,11 +1090,11 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
-		if ($spip_display != 1){	
-			echo "<a href=\"$lien\"><img src='img_pack/$fond'$alt$title border='0'></a><br>";
+		if ($spip_display != 1) {
+			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
-		if ($spip_display != 3){
-			echo "<a href=\"$lien\" class='icone'><font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+		if ($spip_display != 3) {
+			echo "$a_href_icone<font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 	} 
@@ -1096,11 +1104,11 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
-		if ($spip_display != 1){	
-			echo "<a href=\"$lien\"><img src='img_pack/$fond'$alt$title border='0' alt=' '></a><br>";
+		if ($spip_display != 1) {
+			echo "$a_href<img src='img_pack/$fond'$alt$title border='0' alt=' '></a><br>";
 		}
-		if ($spip_display != 3){
-			echo "<a href=\"$lien\" class='icone'><font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
+		if ($spip_display != 3) {
+			echo "$a_href_icone<font face='verdana,arial,helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 	}
@@ -1320,9 +1328,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
-		echo "\n<area shape='rect' href='$lien&set_disp=1' coords='0,0,20,15' title=\"Afficher uniquement le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=2' coords='19,0,40,15' title=\"Afficher les icones et le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=3' coords='41,0,59,15' title=\"Afficher uniquement les icones\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=1' coords='0,0,20,15' alt=\"Afficher uniquement le texte\" title=\"Afficher uniquement le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=2' coords='19,0,40,15' alt=\"Afficher les icones et le texte\" title=\"Afficher les icones et le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=3' coords='41,0,59,15' alt=\"Afficher uniquement les icones\" title=\"Afficher uniquement les icones\">";
 		echo "\n</map>";
 	
 	// Icones principales
@@ -1368,8 +1376,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<img src='img_pack/choix-layout.gif' alt='o' vspace=3 border=0 usemap='#map_layout'>";
 	echo "</font></td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48.gif");
-
+		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48.gif", "vide", "", "aide_index.php3");
 
 	echo "</td>";
 	echo "<td background=''>";
