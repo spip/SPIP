@@ -1683,15 +1683,18 @@ function calcul_bornes_pagination($courante, $nombre, $max = 10) {
 // Ces trois fonctions permettent de simuler les filtres |reset et |end
 // pour extraire la premiere ou la derniere valeur d'un tableau ; utile
 // pour la pagination (mais peut-etre a refaire plus simplement)
+// http://doc.spip.org/@filtre_valeur_tableau
 function filtre_valeur_tableau($array, $index) {
 	if (!is_array($array)
 	OR !isset($array[$index]))
 		return null;
 	return $array[$index];
 }
+// http://doc.spip.org/@filtre_reset
 function filtre_reset($array) {
 	return filtre_valeur_tableau($array,0);
 }
+// http://doc.spip.org/@filtre_end
 function filtre_end($array) {
 	return filtre_valeur_tableau($array,@count($array)-1);
 }

@@ -94,6 +94,7 @@ function squelette_obsolete($skel, $squelette) {
 }
 
 // Activer l'invalideur de session
+// http://doc.spip.org/@invalideur_session
 function invalideur_session(&$Cache) {
 	$Cache['session']=spip_session();
 	return '';

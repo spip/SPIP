@@ -187,7 +187,7 @@ function quete_rubrique($id_article) {
 
 # retourne le fichier d'un document
 
-// http://doc.spip.org/@quete_rubrique
+// http://doc.spip.org/@quete_fichier
 function quete_fichier($id_document, $serveur) {
 	$r = sql_fetsel(array('fichier'),
 			array('spip_documents'),
@@ -230,6 +230,7 @@ function quete_accepter_forum($id_article) {
 }
 
 // recuperer une meta sur un site distant (en local il y a plus simple)
+// http://doc.spip.org/@quete_meta
 function quete_meta($nom, $serveur) {
 	$r = sql_fetsel("valeur", "spip_meta", "nom=" . _q($nom), '','','','','','','',$serveur);
 	return $r['valeur'];
@@ -242,6 +243,7 @@ function quete_meta($nom, $serveur) {
 // et sous reserve que cette base distante est geree par SPIP.
 // Autrement cette balise est vu comme un champ normal dans cette base.
 
+// http://doc.spip.org/@generer_generer_url
 function generer_generer_url($type, $p)
 {
 	$_id = interprete_argument_balise(1,$p);
