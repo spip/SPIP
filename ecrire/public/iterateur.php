@@ -14,7 +14,7 @@
 /**
  * Fabrique d'iterateur
  * permet de charger n'importe quel iterateur IterateurXXX
- * fourni dans le fichier iterateurs/iterateur_xxx.php
+ * fourni dans le fichier iterateurs/xxx.php
  * 
  */
 class IterFactory{
