@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'اظهار نظر در مورد اين سايت',
-'contact' => 'Contact', # NEW
+'contact' => 'تماس',
 'copie_document_impossible' => 'روبرداري از اين سند ناممكن است',
 
 // D
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'در همان بخش',
 'memes_auteurs' => 'از همين نويسندگان',
 'message' => 'پيام',
-'messages_forum' => 'پيامهاى سخنگاه', # MODIF
+'messages_forum' => 'پيام‌ها',
 'messages_recents' => 'تازه ترين پيامهاى سخنگاه',
 'mots_clef' => 'كليدواژه',
 'mots_clefs' => 'واژه كليدها',

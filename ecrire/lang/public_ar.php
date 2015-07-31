@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'commenter_site' => 'تعليق على هذا الموقع',
-'contact' => 'Contact', # NEW
+'contact' => 'للاتصال',
 'copie_document_impossible' => 'لا يمكن نسخ المستند',
 
 // D
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'في هذا القسم أيضاً',
 'memes_auteurs' => 'من المؤلفين نفسهم ايضاً',
 'message' => 'مشاركة',
-'messages_forum' => 'مشاركة منتدى', # MODIF
+'messages_forum' => 'مشاركة منتدى',
 'messages_recents' => 'أحدث المشاركات',
 'mots_clef' => 'مفتاح',
 'mots_clefs' => 'المفاتيح',
