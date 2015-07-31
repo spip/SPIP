@@ -171,6 +171,7 @@ function autoriser_rubrique_modifier_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('publierdans', 'rubrique', $id, $qui, $opt);
 }
 
+// http://doc.spip.org/@autoriser_joindredocument_dist
 function autoriser_joindredocument_dist($faire, $type, $id, $qui, $opt){
 	return
 		(!isset($GLOBALS['meta']["documents_$type"]) OR $GLOBALS['meta']["documents_$type"]!='non')
