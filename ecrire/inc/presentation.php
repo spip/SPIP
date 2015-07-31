@@ -2032,15 +2032,23 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	if ($spip_display != 3){
 		$icone .= "<span>$texte</span>";
 	}
-	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'" .
-	  ((strlen($align) > 2) ? " align='$align' " : '') .
-	">\n<tr><td class='icone36$style' style='text-align:center;'><a
-	href='$lien'>$icone</a></td></tr></table>";
 
-	if ($afficher == 'oui')
-		echo $icone;
-	else
-		return $icone;
+	// cas d'ajax_action_auteur: faut defaire le boulot 
+	// (il faudrait fusionner avec le cas $javascript)
+	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
+	  list($x,$lien,$atts,$texte)= $r;
+	else $atts = '';
+	$lien = "\nhref='$lien'$atts";
+
+	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
+	. ((strlen($align) > 2) ? " align='$align' " : '')
+	. ">\n<tr><td class='icone36$style' style='text-align:center;'><a"
+	. $lien
+	. '>'
+	. $icone
+	. "</a></td></tr></table>\n";
+
+	if ($afficher == 'oui')	echo $icone; else return $icone;
 }
 
 // http://doc.spip.org/@icone_horizontale
@@ -2465,15 +2473,16 @@ function fin_grand_cadre($return=false){
 // Cadre formulaires
 
 // http://doc.spip.org/@debut_cadre_formulaire
-function debut_cadre_formulaire($style=''){
-	echo "\n<div class='cadre-formulaire'" .
+function debut_cadre_formulaire($style='', $return=false){
+	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
 	   ">";
+	if ($return) return  $x; else echo $x;
 }
 
 // http://doc.spip.org/@fin_cadre_formulaire
-function fin_cadre_formulaire(){
-	echo "</div>\n";
+function fin_cadre_formulaire($return=false){
+	if ($return) return  "</div>\n"; else echo "</div>\n";
 }
 
 

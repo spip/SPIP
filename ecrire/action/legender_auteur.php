@@ -20,21 +20,21 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@action_legender_auteur
 function action_legender_auteur()
 {
-  global $auteur_session, $bio,
-  $champs_extra,
-  $auteur_session,
-  $email,
-  $id_auteur,
-  $new_login,
-  $new_pass,
-  $new_pass2,
-  $nom,
-  $nom_site_auteur,
-  $perso_activer_imessage,
-  $pgp,
-  $redirect,
-  $statut,
-  $url_site;
+	global $auteur_session, $bio,
+	  $champs_extra,
+	  $auteur_session,
+	  $email,
+	  $id_auteur,
+	  $new_login,
+	  $new_pass,
+	  $new_pass2,
+	  $nom,
+	  $nom_site_auteur,
+	  $perso_activer_imessage,
+	  $pgp,
+	  $redirect,
+	  $statut,
+	  $url_site;
 
         $var_f = charger_fonction('controler_action_auteur', 'inc');
         $var_f();
@@ -43,14 +43,13 @@ function action_legender_auteur()
 
 	$echec = array();
 
-        if (!preg_match(",^(\d+)\D(\d+)(\D?)(.*)$,", $arg, $r)) {
+        if (!preg_match(",^(\d+)\D(\d*)(\D?)(.*)$,", $arg, $r)) {
 		$r = "action_legender_auteur_dist $arg pas compris";
 		spip_log($r);
 		$echec[]=$r;
         } else {
 
 	  list($tout, $id_auteur, $ajouter_id_article,$s, $n) = $r;
-	  spip_log("$tout, $id_auteur, $ajouter_id_article,$s, $n");
 //
 // si id_auteur est hors table, c'est une creation sinon une modif
 //
@@ -65,19 +64,16 @@ function action_legender_auteur()
 		$nom = $n ? $n : _T('ecrire:item_nouvel_auteur');
 	  } 
 
-	  $toutes_rub = " a voir ";
-
+	  $acces = ($id_auteur == $auteur_session['id_auteur']) ? true : " a voir ";
 	  $auteur['nom'] = corriger_caracteres($nom);
-
-	  // faut changer les connect en auteur_session. A finir.
 
 	// login et mot de passe
 	$modif_login = false;
 	$old_login = $auteur['login'];
 
 	if (($new_login<>$old_login) AND $auteur['source'] == 'spip') {
-		$toutes_rub = admin_general($auteur_session['id_auteur']);
-		if ($toutes_rub) {
+		if (admin_general($auteur_session['id_auteur'])) {
+			$acces = true;
 			if ($new_login) {
 				if (strlen($new_login) < 4)
 					$echec[]= 'info_login_trop_court';
@@ -100,10 +96,11 @@ function action_legender_auteur()
 	}
 
 	// changement de pass, a securiser en jaja ?
+
 	if ($new_pass AND ($statut != '5poubelle') AND $auteur['login'] AND $auteur['source'] == 'spip') {
-		if (is_string($toutes_rub))
-			$toutes_rub = admin_general($auteur_session['id_auteur']);
-		if ($toutes_rub) {
+		if (is_string($acces))
+			$acces = admin_general($auteur_session['id_auteur']);
+		if ($acces) {
 			if ($new_pass != $new_pass2)
 				$echec[]= 'info_passes_identiques';
 			else if ($new_pass AND strlen($new_pass) < 6)
@@ -126,11 +123,11 @@ function action_legender_auteur()
 
 	if (isset($email) AND $auteur_session['statut'] == '0minirezo') {
 		if (!($ok = ($statut <> '0minirezo'))) {
-			if (is_string($toutes_rub))
-				$toutes_rub = admin_general($auteur_session['id_auteur']);
+			if (is_string($acces))
+				$acces = admin_general($auteur_session['id_auteur']);
 		}
 		
-		if ($ok OR $toutes_rub) {
+		if ($ok OR $acces) {
 			$email = trim($email);	 
 			if ($email !='' AND !email_valide($email)) 
 				$echec[]= 'info_email_invalide';
@@ -181,32 +178,46 @@ function action_legender_auteur()
 		if (!$n) die('UPDATE');
 	}
 
-
-
-// Si on modifie la fiche auteur, reindexer et modifier htpasswd
-if ($nom OR $statut) {
-	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_spip("inc/indexation");
-		marquer_indexer('spip_auteurs', $id_auteur);
+// Si on modifie la fiche auteur, reindexer 
+	if ($nom OR $statut) {
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
+			include_spip("inc/indexation");
+			marquer_indexer('spip_auteurs', $id_auteur);
+		}
+	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
+		ecrire_acces();
+	}
 	}
 
-	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	ecrire_acces();
- }
-	}
-	spip_log("$id_auteur repart");
- if ($echec) 
-	$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur'&redirect=$redirect&echec=" . join('%%%', $echec), true, true);
- else {
-	if ($initial = ($tout[0]=='0'))
-		$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&initial=$initial&redirect=$redirect",true);
-	elseif ($redirect)
-	  $redirect = rawurldecode($redirect) . "&id_auteur=$id_auteur";
-	else $redirect = generer_url_ecrire('auteurs_edit',"id_auteur=$id_auteur", true);
+	if ($echec) $echec = '&echec=' . join('@@@', $echec);
 
- }
- spip_log("je repars vers $redirect");
- redirige_par_entete($redirect);
+	// il faudrait rajouter OR $echec mais il y a conflit avec Ajax
+
+	if (($init = ($tout[0]=='0'))) {
+	  // tout nouveau. envoyer le formulaire de saisie du reste
+	  // en transmettant le retour eventuel
+	  // decode / encode car encode pas necessairement deja fait.
+
+		$ret = !$redirect ? '' 
+		  : ('&redirect=' . rawurlencode(rawurldecode($redirect)));
+
+		$redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur&initial=$init$echec$ret",true);
+	} else {
+	  // modif: renvoyer le resultat ou a nouveau le formulaire si erreur
+		  if (!$redirect) {
+		    $redirect = generer_url_ecrire("auteur_infos", "id_auteur=$id_auteur", true, true);
+		    $ancre = '';
+		  } else 
+		    list($redirect,$anc) = split('#',rawurldecode($redirect));
+
+		if (!$echec) 
+		  $redirect .= '&initial=-1' . $anc;
+		else  {
+		  $redirect .= $echec . '&initial=0' . $anc;
+		}
+	}
+
+	redirige_par_entete($redirect);
 }
 
 // http://doc.spip.org/@admin_general
