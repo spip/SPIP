@@ -4,17 +4,6 @@ include ("inc.php3");
 
 include_ecrire ("inc_config.php3");
 
-function mySel($varaut,$variable){
-		$retour= " VALUE=\"$varaut\"";
-
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-
-	return $retour;
-}
-
-
 debut_page("Configuration du site", "administration", "configuration");
 
 echo "<br><br><br>";
