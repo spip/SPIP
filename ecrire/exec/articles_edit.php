@@ -88,32 +88,30 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	echo debut_droite("",true);
 	
-	echo articles_edit_presentation($new, $row['id_rubrique'], $lier_trad, $row['id_article'], $row['titre'],$config_fonc);
-
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
-
-	echo fin_gauche(), fin_page();
-}
-
-// http://doc.spip.org/@articles_edit_presentation
-function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article, $titre, $config_fonc){
 	$oups = ($lier_trad ?
 	     generer_url_ecrire("articles","id_article=$lier_trad")
 	     : ($new
-		? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
-		: generer_url_ecrire("articles","id_article=$id_article")
+		? generer_url_ecrire("naviguer","id_rubrique=".$row['id_rubrique'])
+		: generer_url_ecrire("articles","id_article=".$row['id_article'])
 		));
 	$contexte = array(
 	'icone_retour'=>icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$GLOBALS['spip_lang_left']),
 	'redirect'=>generer_url_ecrire("articles"),
 	'titre'=>$titre,
-	'new'=>$new?$new:$id_article,
-	'id_rubrique'=>$id_rubrique,
+	'new'=>$new?$new:$row['id_article'],
+	'id_rubrique'=>$row['id_rubrique'],
 	'lier_trad'=>$lier_trad,
 #	'id_article'=>$id_article,
-	'config_fonc'=>$config_fonc
+	'config_fonc'=>$config_fonc,
+	'id_verson'=>$id_version,
+	'row'=>$row, // passer row ici car il tient compte de la version anterieure si besoin
 	);
 	$page = evaluer_fond("prive/editer/article", $contexte, $connect);
-	return $page['texte'];
+	echo $page['texte'];
+	
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
+
+	echo fin_gauche(), fin_page();
 }
+
 ?>
