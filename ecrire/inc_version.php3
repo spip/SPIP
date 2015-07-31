@@ -251,6 +251,11 @@ $convert_command = 'convert';
 // voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2#43
 $pnmscale_command = 'pnmscale';
 
+// tidy en ligne de commande (si on ne l'a pas en module php,
+// ou si le module php ne marche pas)
+// $tidy_command = '/bin/tidy' ou '/usr/local/bin/tidy', ou simplement 'tidy'
+$tidy_command = '';
+
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
 
