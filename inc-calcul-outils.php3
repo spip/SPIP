@@ -1,63 +1,176 @@
 <?php
-    
-# Ce fichier concentre tous les appels SQL lors de l'execution d'un squelette.
 
-# Cette fonction est syste'matiquement appelee par les squelettes
-# pour constuire une requete SQL a` partir de la boucle SPIP originale.
-# Elle construit et exe'cute une reque^te SQL correspondant a` une balise Boucle
-# Elle notifie une erreur SQL dans le flux de sortie et termine le processus.
-# Sinon, retourne la ressource interrogeable par fetch_row ou fetch_array.
-# Elle peut etre re'de'finie pour s'interfacer avec d'autres serveurs SQL
-# Recoit en argument:
-# - le tableau des champs a` ramener
-# - le tableau des tables a` consulter
-# - le tableau des conditions a` remplir
-# - le crite`re de regroupement
-# - le crite`re de classement
-# - le crite`re de limite
-# - une sous-requete e'ventuelle (MySQL > 4.1)
-# - un compteur de sous-requete
-# - le nom de la table
-# - le nom de la boucle (pour le message d'erreur e'ventuel)
+//
+// Des fonctions diverses utilisees lors du calcul d'une page ; ces fonctions
+// bien pratiques n'ont gure de logique organisationnelle ; elles sont
+// appelees par certaines balises au moment du calcul des pages. (Peut-on
+// trouver un modele de donnees qui les associe physiquement au fichier
+// definissant leur balise ???
+//
 
-## NB : le traitement des SQL de forums est defini dans inc-forum.php3
+// ON TROUVERA EN QUEUE DE FICHIER LES FONCTIONS FAISANT DES APPELS SQL
 
-function spip_abstract_select (
-	$select = array(), $from = array(), $where = '',
-	$groupby = '', $orderby = '', $limit = '',
-	$sousrequete = '', $cpt = '',
-	$table = '', $id = '') {
 
-	$DB = 'spip_';
-	$q = " FROM $DB" . join(", $DB", $from)
-	. (is_array($where) ? ' WHERE ' . join(' AND ', $where) : '')
-	. ($groupby ? " GROUP BY $groupby" : '')
-	. ($orderby ? "\nORDER BY $orderby" : '')
-	. ($limit ? "\nLIMIT $limit" : '');
+// Ce fichier ne sera execute qu'une fois
+if (defined("_INC_CALCUL_OUTILS")) return;
+define("_INC_CALCUL_OUTILS", "1");
 
-	if (!$sousrequete)
-		$q = " SELECT ". join(", ", $select) . $q;
-	else
-		$q = " SELECT S_" . join(", S_", $select)
-		. " FROM (" . join(", ", $select)
-		. ", COUNT(".$sousrequete.") AS compteur " . $q
-		.") AS S_$table WHERE compteur=" . $cpt;
 
-	//
-	// Erreur ? C'est du debug, ou une erreur du serveur
-	//
-	if (!($result = @spip_query($q))) {
-		include_local('inc-admin.php3');
-		echo erreur_requete_boucle($q, $id, $table);
+#
+# AFFREUX !!  Passer tout ca en CSS au plus vite !
+#
+tester_variable('espace_logos',3);
+// HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
+tester_variable('espace_images',3);
+// HSPACE=xxx VSPACE=xxx pour les images integrees
+
+//
+// Retrouver le logo d'un objet (et son survol)
+//
+
+
+function cherche_image($id_objet, $type_objet) {
+	// cherche l'image liee a l'objet
+	$on = cherche_image_nommee($type_objet.'on'.$id_objet);
+
+	// cherche un survol
+	$off =(!$on ? '' :
+	cherche_image_nommee($type_objet.'off'.$id_objet));
+
+	if (!$on)
+		return false;
+
+	return array($on, $off);
+}
+
+function cherche_logo_objet ($type, $id_objet, $on = false, $off = false, $flag_fichier=false) {
+
+	# spip_log("cherche logo $type $id_objet $on $off $flag_fichier");
+	switch($type) {
+		case 'ARTICLE':
+			$logo = cherche_image($id_objet, 'art');
+			break;
+		case 'AUTEUR':
+			$logo = cherche_image($id_objet, 'aut');
+			break;
+		case 'BREVE':
+			$logo = cherche_image($id_objet, 'breve');
+			break;
+		case 'SITE':
+			$logo = cherche_image($id_objet, 'site');
+			break;
+		case 'MOT':
+			$logo = cherche_image($id_objet, 'mot');
+			break;
+		// recursivite
+		case 'RUBRIQUE':
+			if (!($logo = cherche_image ($id_objet, 'rub'))
+			AND $id_objet > 0)
+				$logo = cherche_logo_objet('RUBRIQUE',
+				sql_parent($id_objet), true, true);
+			break;
+		default:
+			spip_log("cherche_logo_objet: type '$type' inconnu");
 	}
 
-	#  spip_log(spip_num_rows($result));
-	return $result;
+	// Quelles images sont demandees ?
+	if (!$on) unset($logo[0]);
+	if (!$off) unset($logo[1]);
+
+	if ($logo[0] OR $logo[1])
+		return $logo;
+}
+
+// Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
+function affiche_logos($logo, $lien, $align, $flag_fichier) {
+	global $num_survol;
+	global $espace_logos;
+
+	list($arton,$artoff) = $logo;
+
+	// Pour les documents comme pour les logos, le filtre |fichier donne
+	// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+	// remarquable, mais a conserver pour compatibilite ascendante.
+	// -> http://www.spip.net/fr_article901.html
+	if ($flag_fichier) {
+		$on = ereg_replace("^IMG/","",$arton);
+		$off = ereg_replace("^IMG/","",$artoff);
+		return $on ? $on : $off;
+	}
+
+	$num_survol++;
+	if ($arton) {
+		//$imgsize = @getimagesize("$arton");
+		//$taille_image = ereg_replace("\"","'",$imgsize[3]);
+		if ($align) $align="align='$align' ";
+
+		$milieu = "<img src='$arton' $align".
+			" name='image$num_survol' ".$taille_image." border='0' alt=''".
+			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
+
+		if ($artoff) {
+			if ($lien) {
+				$afflien = "<a href='$lien'";
+				$afflien2 = "a>";
+			}
+			else {
+				$afflien = "<div";
+				$afflien2 = "div>";
+			}
+			$milieu = "$afflien onMouseOver=\"image$num_survol.src=".
+				"'$artoff'\" onMouseOut=\"image$num_survol.src=".
+				"'$arton'\">$milieu</$afflien2";
+		}
+		else if ($lien) {
+			$milieu = "<a href='$lien'>$milieu</a>";
+		}
+	} else {
+		$milieu="";
+	}
+	return $milieu;
 }
 
 
-# toutes les fonctions avec requete SQL, necessaires aux squelettes.
 
+//
+// fonction standard de calcul de la balise #INTRODUCTION
+// on peut la surcharger en definissant dans mes_fonctions.php3 :
+// function introduction($type,$texte,$descriptif) {...}
+//
+function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
+	if (function_exists("introduction"))
+		return introduction ($type, $texte, $chapo, $descriptif);
+
+	switch ($type) {
+		case 'articles':
+			if ($descriptif)
+				return propre($descriptif);
+			else if (substr($chapo, 0, 1) == '=')	// article virtuel
+				return '';
+			else
+				return PtoBR(propre(supprimer_tags(couper_intro($chapo."\n\n\n".$texte, 500))));
+			break;
+		case 'breves':
+			return PtoBR(propre(supprimer_tags(couper_intro($texte, 300))));
+			break;
+		case 'forums':
+			return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
+			break;
+		case 'rubriques':
+			if ($descriptif)
+				return propre($descriptif);
+			else
+				return PtoBR(propre(supprimer_tags(couper_intro($texte, 600))));
+			break;
+	}
+}
+
+
+//
+// FONCTIONS FAISANT DES APPELS SQL
+//
+
+# NB : a l'exception des fonctions de forum regroupees dans inc-forum.
 
 function calcul_exposer ($id, $type, $reference) {
 	static $exposer;
@@ -231,6 +344,7 @@ function sql_rubrique_fond($contexte, $lang) {
 		return array($id_rubrique_fond, $lang);
 	}
 }
+
 
 
 ?>

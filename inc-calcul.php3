@@ -15,8 +15,10 @@ include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
 include_ecrire("inc_forum.php3");
-include_local("inc-calcul_mysql3.php");
-include_local("inc-calcul_html4.php");
+include_local("inc-calcul-outils.php3");
+
+#include_local("inc-calcul_html");	# anciens noms des fichiers
+#include_local("inc-calcul_mysql");
 
 
 // Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
@@ -66,7 +68,12 @@ function charger_squelette ($squelette) {
 		}
 
 		// sinon le compiler
-		include_local("inc-calcul-squel.php3");
+		if ($GLOBALS['tradition']) {
+			include_local("inc-calcul-squel.php3");
+		}
+		else {
+			include_local("inc-compilo.php3");
+		}
 		if (!lire_fichier ($sourcefile, $skel)) { 
 			// erreur webmaster : $fond ne correspond a rien
 			include_ecrire ("inc_presentation.php3");
@@ -152,6 +159,7 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	// Calculer la page a partir du main() du skel compile
 	$page =  $fonc(array('cache' =>$cache),
 		array($contexte),
+		/* obsolete avec les doublons de inc-compilo */
 		array(
 			'articles' => '0',
 			'rubriques' => '0',
@@ -295,7 +303,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	serialize($page['signal']))." -->\n";
 
 	// Enregistrer le fichier cache
-	if ($delais > 0)
+	if ($delais > 0 AND empty($GLOBALS['HTTP_POST_VARS']))
 		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;
@@ -303,66 +311,6 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 
 
 
-# Fonctions appelees par les squelettes (insertion dans le code trop lourde)
-
-tester_variable('espace_logos',3);  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
-tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images integrees
-
-//
-// Retrouver le logo d'un objet (et son survol)
-//
-
-function cherche_image($id_objet, $type_objet) {
-	// cherche l'image liee a l'objet
-	$on = cherche_image_nommee($type_objet.'on'.$id_objet);
-
-	// cherche un survol
-	$off =(!$on ? '' :
-	cherche_image_nommee($type_objet.'off'.$id_objet));
-
-	if (!$on)
-		return false;
-
-	return array($on, $off);
-}
-
-function cherche_logo_objet ($type, $id_objet, $on = false, $off = false, $flag_fichier=false) {
-
-spip_log("cherche logo $type $id_objet $on $off $flag_fichier");
-	switch($type) {
-		case 'ARTICLE':
-			$logo = cherche_image($id_objet, 'art');
-			break;
-		case 'AUTEUR':
-			$logo = cherche_image($id_objet, 'aut');
-			break;
-		case 'BREVE':
-			$logo = cherche_image($id_objet, 'breve');
-			break;
-		case 'SITE':
-			$logo = cherche_image($id_objet, 'site');
-			break;
-		case 'MOT':
-			$logo = cherche_image($id_objet, 'mot');
-			break;
-		// recursivite
-		case 'RUBRIQUE':
-			if (!($logo = cherche_image ($id_objet, 'rub'))
-			AND $id_objet > 0)
-				$logo = cherche_logo_objet('RUBRIQUE',
-				sql_parent($id_objet), true, true);
-			break;
-		default:
-			spip_log("cherche_logo_objet: type '$type' inconnu");
-	}
-
-	// Quelles images sont demandees ?
-	if (!$on) unset($logo[0]);
-	if (!$off) unset($logo[1]);
-
-	if ($logo[0] OR $logo[1])
-		return $logo;
-}
 
 
 // Fonction appelee par le skel pour assembler les balises
@@ -381,6 +329,61 @@ function _f($push = false, $texte='') {
 	else
 		if ($texte = array_pop($pile_f))
 			return $texte;
+}
+
+### A passer peut-etre dans inc_db_mysql
+// Cette fonction est systematiquement appelee par les squelettes
+// pour constuire une requete SQL de type "lecture" (SELECT) a partir
+// de chaque boucle.
+// Elle construit et exe'cute une reque^te SQL correspondant a` une balise
+// Boucle ; elle notifie une erreur SQL dans le flux de sortie et termine
+// le processus.
+// Sinon, retourne la ressource interrogeable par fetch_row ou fetch_array.
+// Elle peut etre re'de'finie pour s'interfacer avec d'autres serveurs SQL
+// Recoit en argument:
+// - le tableau des champs a` ramener
+// - le tableau des tables a` consulter
+// - le tableau des conditions a` remplir
+// - le crite`re de regroupement
+// - le crite`re de classement
+// - le crite`re de limite
+// - une sous-requete e'ventuelle (MySQL > 4.1)
+// - un compteur de sous-requete
+// - le nom de la table
+// - le nom de la boucle (pour le message d'erreur e'ventuel)
+
+
+function spip_abstract_select (
+	$select = array(), $from = array(), $where = '',
+	$groupby = '', $orderby = '', $limit = '',
+	$sousrequete = '', $cpt = '',
+	$table = '', $id = '') {
+
+	$DB = 'spip_';
+	$q = " FROM $DB" . join(", $DB", $from)
+	. (is_array($where) ? ' WHERE ' . join(' AND ', $where) : '')
+	. ($groupby ? " GROUP BY $groupby" : '')
+	. ($orderby ? "\nORDER BY $orderby" : '')
+	. ($limit ? "\nLIMIT $limit" : '');
+
+	if (!$sousrequete)
+		$q = " SELECT ". join(", ", $select) . $q;
+	else
+		$q = " SELECT S_" . join(", S_", $select)
+		. " FROM (" . join(", ", $select)
+		. ", COUNT(".$sousrequete.") AS compteur " . $q
+		.") AS S_$table WHERE compteur=" . $cpt;
+
+	//
+	// Erreur ? C'est du debug, ou une erreur du serveur
+	//
+	if (!($result = @spip_query($q))) {
+		include_local('inc-admin.php3');
+		echo erreur_requete_boucle($q, $id, $table);
+	}
+
+	#  spip_log(spip_num_rows($result));
+	return $result;
 }
 
 ?>

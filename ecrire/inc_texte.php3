@@ -478,6 +478,8 @@ function typo($letexte) {
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place
 // et le lien "brut" a usage eventuel de redirection...
 function extraire_lien ($regs) {
+	global $flag_ecrire;
+
 	$lien_texte = $regs[1];
 
 	$lien_url = trim($regs[3]);
@@ -485,13 +487,12 @@ function extraire_lien ($regs) {
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
 		// Traitement des liens internes
-		if (@file_exists('inc-urls.php3')) {
-			include_local('inc-urls.php3');
-		} elseif (@file_exists('inc-urls-dist.php3')) {
-			include_local('inc-urls-dist.php3');
-		} else {
+		if ($flag_ecrire)
 			include_ecrire('inc_urls.php3');
-		}
+		else if (@file_exists('inc-urls.php3'))
+			include_local('inc-urls.php3');
+		else if (@file_exists('inc-urls-dist.php3'))
+			include_local('inc-urls-dist.php3');
 
 		$id_lien = $match[8];
 		$ancre = $match[9];
