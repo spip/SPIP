@@ -1089,8 +1089,11 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 			define('_SPIP_CHMOD', 0777);
 	}
 	
-	// le nom du repertoire plugins/
+	// le nom du repertoire plugins/ activables/desactivables
 	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+
+	// le nom du repertoire des extensions/ permanentes du core, toujours actives
+	define('_DIR_EXTENSIONS', _DIR_RACINE . "extensions/");
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
