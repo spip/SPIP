@@ -317,6 +317,7 @@ function taille_image($img) {
 	$mem = ereg_replace("\-flip\_v|\-flip\_h", "", $mem);
 	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
 
+	$srcsize = false;
 	if ($largeur_img[$mem] > 0) {
 		$srcWidth = $largeur_img[$mem];
 	} else {
@@ -328,7 +329,7 @@ function taille_image($img) {
 	if ($hauteur_img[$mem] > 0) {
 		$srcHeight = $hauteur_img[$mem];
 	} else {
-		if (!$srcHeight AND $srcsize = @getimagesize($logo)) {
+		if (!$srcHeight AND ($srcsize OR ($srcsize = @getimagesize($logo)))) {
 			$srcHeight = $srcsize[1];
 			$hauteur_img[$mem] = $srcHeight;
 		}
