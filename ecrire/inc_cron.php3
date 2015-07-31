@@ -184,14 +184,13 @@ function cron_visites($t) {
 	return 1;
 }
 
-function cron_mail($t)
-{
+function cron_mail($t) {
 	$adresse_neuf = lire_meta('adresse_neuf');
 	$jours_neuf = lire_meta('jours_neuf');
 
 	include_local("inc-calcul.php3");
 	$page= cherche_page('',
-				array('date' => date('Y-m-d H:i:s', $t)),
+				array('date' => date('Y-m-d H:i:s')),
 				'nouveautes',
 				'',
 				lire_meta('langue_site'));
