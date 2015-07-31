@@ -911,6 +911,7 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'titre_sites_tous' => 'Trang tham kh&#7843;o',
 'titre_suivi_petition' => 'Qu&#7843;n tr&#7883; Th&#7881;nh nguy&#7879;n th&#432;',
 'titre_syndication' => 'Syndicate trang web',
+'tout_dossier_upload' => 'T&#7845;t c&#7843; h&#7891; s&#417; @upload@',
 'trad_article_inexistant' => 'Kh&ocirc;ng c&oacute; b&agrave;i n&agrave;o v&#7899;i s&#7889; n&agrave;y',
 'trad_article_traduction' => 'T&#7845;t c&#7843; &#7845;n b&#7843;n c&#7911;a b&agrave;i n&agrave;y:',
 'trad_deja_traduit' => 'B&agrave;i n&agrave;y l&agrave; b&#7843;n d&#7883;ch c&#7911;a b&agrave;i hi&#7879;n th&#7901;i',
