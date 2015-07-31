@@ -290,6 +290,7 @@ $spip_pipeline = array(
 #	'verifie_js_necessaire' => '',
 	'mots_indexation' => '',
 	'nettoyer_raccourcis_typo' => '',
+	'objet_compte_enfants' => '',
 	'pre_boucle' => '',
 	'post_boucle' => '',
 	'pre_propre' => '|traiter_poesie|traiter_retours_chariots',
@@ -318,6 +319,7 @@ $spip_pipeline = array(
 	'recuperer_fond' => '',
 	'styliser' => '',
 	'trig_calculer_prochain_postdate' => '',
+	'trig_calculer_langues_rubriques' => '',
 	'trig_propager_les_secteurs' => '',
 );
 
