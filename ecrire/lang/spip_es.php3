@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Cambiar',
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Elegir',
+'bouton_enregistrer' => 'Guardar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la mensajer&iacute;a interna',
 'bouton_radio_envoi_annonces' => 'Enviar anuncios editoriales',
 'bouton_radio_non_envoi_annonces' => 'No enviar anuncios',
@@ -186,6 +187,7 @@ de los directorios mencionados. El procedimiento se explica detalladamente en la
 
 
 // F
+'fichier_introuvable' => 'No se encuentra el fichero @fichier@',
 'form_deja_inscrit' => 'Ya est&aacute;s inscrito.',
 'form_email_non_valide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
 'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',

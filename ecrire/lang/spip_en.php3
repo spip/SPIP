@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Modify',
 'bouton_chercher' => 'Search',
 'bouton_choisir' => 'Select',
+'bouton_enregistrer' => 'Save',
 'bouton_radio_desactiver_messagerie_interne' => 'Disable internal messaging',
 'bouton_radio_envoi_annonces' => 'Send editorial announcements',
 'bouton_radio_non_envoi_annonces' => 'Do not send any announcements',
@@ -186,6 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'File not found: @fichier@',
 'form_deja_inscrit' => 'You are already registered.',
 'form_email_non_valide' => 'Your e-mail address is not valid.',
 'form_forum_access_refuse' => 'You do not have access to this site anymore.',
@@ -640,7 +642,7 @@ and connect again to the site.
 // T
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
-'taille_octets' => '@taille@ bytes',
+'taille_octets' => '@taille@&nbsp;bytes',
 'texte_actualite_site_1' => 'When you become familiar with the interface, click on the &laquo;',
 'texte_actualite_site_2' => 'complete interface',
 'texte_actualite_site_3' => '&raquo; to make more features available.',

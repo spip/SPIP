@@ -118,7 +118,7 @@ problemi di compatibilit&agrave; con le applicazioni usate per modificare i prop
 // C
 'cache_mode_compresse' => 'I file di cache sono salvati in modalit&agrave; compressa.',
 'cache_mode_non_compresse' => 'I file di cache sono salvati in modalit&agrave; non compressa.',
-'cache_modifiable_webmestre' => 'Questi parametri possono essere modificati dal webmaster del sito.',
+'cache_modifiable_webmestre' => 'Questo parametro pu&ograve; essere modificato dal webmaster del sito.',
 'calendrier_synchro' => 'Se si utilizza un programma di agenda compatibile con <b>iCal</b>, &egrave; possibile sincronizzare i dati con le informazioni di questo sito',
 
 
@@ -130,6 +130,7 @@ problemi di compatibilit&agrave; con le applicazioni usate per modificare i prop
 'diff_texte_ajoute' => 'Testo aggiunto',
 'diff_texte_deplace' => 'Testo spostato',
 'diff_texte_supprime' => 'Testo cancellato',
+'double_clic_inserer_doc' => 'Doppio clic qui per inserire la scorciatoia nel testo',
 
 
 // E
@@ -375,6 +376,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_identification_publique' => 'La tua identit&agrave; pubblica...',
 'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull\'immagine corrispondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ci&ograve; significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>',
+'info_images_auto' => 'Immagini elaborate automaticamente',
 'info_informations_personnelles' => 'Quinta fase: <B>Informazioni personali</b>',
 'info_inscription_automatique' => 'Iscrizione automatica di nuovi redattori',
 'info_jeu_caractere' => 'Set di caratteri del sito',
@@ -506,6 +508,7 @@ impossibile.',
 'info_redacteurs' => 'Redattori',
 'info_redaction_en_cours' => 'IN CORSO DI REDAZIONE',
 'info_redirection' => 'Reindirizzamento',
+'info_referencer_doc_distant' => 'Mettere in repertorio un documento su Internet:',
 'info_refuses' => 'I tuoi articoli rifiutati',
 'info_reglage_ldap' => 'Opzioni: <B>Parametri per l\'importazione LDAP</b>',
 'info_renvoi_article' => '<B>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
@@ -611,6 +614,9 @@ Le traduzioni sono associate all\'originale,
 'info_visiteur_2' => 'del sito pubblico',
 'info_visiteurs' => 'Visitatori',
 'info_visiteurs_02' => 'Visitatori del sito pubblico',
+'install_echec_annonce' => 'L\'installazione potrebbe fallire oppure causare problemi di funzionalit&agrave; al sito...',
+'install_extension_mbstring' => 'SPIP non funziona con:',
+'install_extension_php_obligatoire' => 'SPIP esige l\'estensione php:',
 'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone &laquo;&nbsp;Avanti&nbsp;&raquo; per lanciare la procedura di installazione.',
 'intem_redacteur' => 'redattore',
 'item_accepter_inscriptions' => 'Accetta le iscrizioni',
@@ -741,6 +747,7 @@ Le traduzioni sono associate all\'originale,
 
 
 // T
+'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella <code>CACHE/</code> a  <b>@octets@</b>.',
 'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.',

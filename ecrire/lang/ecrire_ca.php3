@@ -116,7 +116,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 // C
 'cache_mode_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode comprimit.',
 'cache_mode_non_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode no comprimit.',
-'cache_modifiable_webmestre' => 'Aquests par&agrave;metres s&oacute;n modificables pel webmestre del lloc web.',
+'cache_modifiable_webmestre' => 'Aquest par&agrave;metre &eacute;s modificable pel webmestre del lloc Web.',
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
 
 
@@ -128,6 +128,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'diff_texte_ajoute' => 'Text afegit',
 'diff_texte_deplace' => 'Text despla&ccedil;at',
 'diff_texte_supprime' => 'Text suprimit',
+'double_clic_inserer_doc' => 'Feu un doble clic per inserir aquesta drecera en el text',
 
 
 // E
@@ -366,6 +367,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_identification_publique' => 'La vostra identitat p&uacute;blica...',
 'info_image_process' => 'Vulgueu seleccionar el millor m&egrave;tode de fabricaci&oacute; de vinyetes fent un clic damunt de la imatge corresponent. ',
 'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores &eacute;s que el servidor que allotja la vostra web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable t&egrave;cnic i demaneu les extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Imatges calculades autom&agrave;ticament',
 'info_informations_personnelles' => 'Cinqu&egrave; pas: <B>Informacions personals</B>',
 'info_inscription_automatique' => 'Inscripci&oacute; autom&agrave;tica dels nous redactors',
 'info_jeu_caractere' => 'Joc de car&agrave;cters del lloc',
@@ -485,6 +487,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'En proc&eacute;s de redacci&oacute;',
 'info_redirection' => 'Redireccionament',
+'info_referencer_doc_distant' => 'Referenciar un document a Internet&nbsp;:',
 'info_refuses' => 'Els vostres articles rebutjats',
 'info_reglage_ldap' => 'Opcions: <B>Posta a punt de l\'importaci&oacute; LDAP</B>',
 'info_renvoi_article' => '<B>Redirecci&oacute;.</B> Aquest article et porta a la p&agrave;gina:',
@@ -590,6 +593,9 @@ amb un color que indica el seu estat:',
 'info_visiteur_2' => 'del lloc p&uacute;blic',
 'info_visiteurs' => 'Visitants',
 'info_visiteurs_02' => 'Visitants del lloc p&uacute;blic',
+'install_echec_annonce' => 'La instal&middot;laci&oacute; probablement fracassar&agrave;, o anir&agrave; a parar a un lloc no funcional...',
+'install_extension_mbstring' => 'SPIP no funciona amb&nbsp;:',
+'install_extension_php_obligatoire' => 'SPIP exigeix l\'extensi&oacute; php&nbsp;:',
 'install_select_langue' => 'Seleccioneu un idioma i despr&eacute;s feu un clic en el bot&oacute; &laquo;&nbsp;seg&uuml;ent&nbsp;&raquo; per iniciar el proc&eacute;s d\'instal&middot;laci&oacute;.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar les inscripcions',
@@ -720,6 +726,7 @@ amb un color que indica el seu estat:',
 
 
 // T
+'taille_cache_image' => 'Les imatges calculades autom&agrave;ticament per SPIP (miniatures dels documents, t&iacute;tols presentats en forma gr&agrave;fica, funci&oacute;n matem&agrave;tiques en format TeX...) ocupen en el directori @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Aquest lloc no preveu limitar la mida del directori <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori <code>CACHE/</code> d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
 'taille_cache_octets' => 'La mida de la mem&ograve;ria cau &eacute;s actualment de @octets@.',
