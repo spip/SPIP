@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.0.7'); // 01 dec. 2011
+define('_ECRAN_SECURITE', '1.0.9'); // 29 mars 2012
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -24,7 +24,7 @@ if (isset($_GET['test_ecran_securite']))
 if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
-		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb,i',
+		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder,i',
 			(string) $_SERVER['HTTP_USER_AGENT'])
 	);
 
@@ -53,7 +53,7 @@ $cjpeg_command='';
 /*     - controle la variable lang, var_recherche, aide (XSS)
  *
  */
-foreach(array('lang', 'var_recherche', 'aide') as $var) {
+foreach(array('lang', 'var_recherche', 'aide', 'var_lang_r', 'lang_r') as $var) {
 	if (isset($_GET[$var]))
 		$_REQUEST[$var] = $GLOBALS[$var] = $_GET[$var] = preg_replace(',[^\w-]+,',' ',(string)$_GET[$var]);
 	if (isset($_POST[$var]))
