@@ -383,6 +383,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Pristupi sljedecoj etapi',
 'info_etape_suivante_1' => 'Mozete pristupiti sljedecoj etapi.',
 'info_etape_suivante_2' => 'Mozete pristupiti sljedecoj etapi.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'eksportuj baze u @archive@',
 'info_facilite_suivi_activite' => 'U svrhu posmatranja  editorijalne aktivnosti stranice, SPIP moze elektronskom postom  (npr. mailing listom urednika) proslijedjivati najave zahtijeva za publikaciju i ovjeru clanaka.',
 'info_fichiers_authent' => 'Dokument autentifikacije &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -667,7 +668,9 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'info_une_rubrique' => 'jedna rubrika,',
 'info_une_rubrique_02' => '1 rubrika',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL WEB STRANICE:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hiperlink:',
 'info_utilisation_spip' => 'Mozete poceti sa koristenjem sistema za asistirano objavljivanje...',
 'info_visites_par_mois' => 'Prikazi po mjesecu:',

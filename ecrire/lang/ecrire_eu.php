@@ -388,6 +388,7 @@ Ez balidatu inportazio galdera hau.
 'info_etape_suivante' => 'Hurrengo etapara pasa',
 'info_etape_suivante_1' => 'Hurrengoetapara pasa zaitezke',
 'info_etape_suivante_2' => 'Hurrengo etapara pasa zaitezke',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'basearen esportazioa @archive@-ra',
 'info_facilite_suivi_activite' => 'Jarduera editorialaren jarraipena errazteko, SPIP-ekkorreo elektronikoaren bidez bidali ahal dizkio, adibidez erredaktoreen zerrenda bati,artikuluen baliaztapen eta argitarapenen eskaeren iragarkiak.',
 'info_fichiers_authent' => '&laquo; .htpasswd &raquo; autentifikazio-fitxategiak',
@@ -682,7 +683,9 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'info_une_rubrique' => 'atal bat,',
 'info_une_rubrique_02' => 'atal bat',
 'info_url' => 'URL ',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'Gunearen URL-a',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hipertestu lotura:',
 'info_utilisation_spip' => 'Lagundutakoargitaratze sistema erabiltzen has zaitezke...',
 'info_visites_par_mois' => 'Bisitak hilabeteko :',

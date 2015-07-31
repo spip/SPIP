@@ -395,6 +395,7 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Que podetz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Que podetz passar a l\'estapa seguenta.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exportacion de la basa de cap t&agrave; @archive@',
 'info_facilite_suivi_activite' => 'T&agrave; facilitar lo seguit de l\'activitat editoriau deu sit, SPIP que\'vs p&ograve;t hornir per e-mail, per exemple a ua lista de corri&egrave;r deus redactors, l\'anonci de las demandas de publicacion e de las validacions d\'articles.',
 'info_fichiers_authent' => 'Fichi&egrave;rs d\'autentificacion &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -698,7 +699,9 @@ ua color qu\'indica lo lor estat:',
 'info_une_rubrique' => 'ua rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DEU SIT:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Ligam ipert&egrave;xt:',
 'info_utilisation_spip' => 'Ara que podetz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_visites_par_mois' => 'Afichatge per mes:',

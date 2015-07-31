@@ -406,6 +406,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'P&#345;ej&iacute;t k dal&#353;&iacute;mu kroku',
 'info_etape_suivante_1' => 'M&#367;&#382;ete p&#345;ej&iacute;t k dal&#353;&iacute;mu kroku.',
 'info_etape_suivante_2' => 'M&#367;&#382;ete p&#345;ej&iacute;t k dal&#353;&iacute;mu kroku.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'export datab&aacute;ze do @archive@',
 'info_facilite_suivi_activite' => 'Syst&eacute;m SPIP m&#367;&#382;e zas&iacute;lat elektronick&eacute; zpr&aacute;vy
   (nap&#345;. do diskusn&iacute; skupiny redaktor&#367;) oznamuj&iacute;c&iacute; &#382;&aacute;dosti o zve&#345;ejn&#283;n&iacute;
@@ -720,7 +721,9 @@ ukazuje jejich stav:',
 'info_une_rubrique' => 'jedna sekce, ',
 'info_une_rubrique_02' => '1 sekce',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL WEBU:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hypertextov&yacute; odkaz:',
 'info_utilisation_spip' => 'Nyn&iacute; m&#367;&#382;ete za&#269;&iacute;t pou&#382;&iacute;vat redak&#269;n&iacute; syst&eacute;m...',
 'info_visites_par_mois' => 'Zobrazen&iacute; po m&#283;s&iacute;c&iacute;ch:',

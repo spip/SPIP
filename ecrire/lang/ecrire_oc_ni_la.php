@@ -395,6 +395,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exportacion de la basa v&egrave;rs @archive@',
 'info_facilite_suivi_activite' => 'Per facilitar lo segut de l\'activitat editoriala dau sit, SPIP vos p&ograve;u fornir per e-mail, per exemple a una lista de corrier dei redactors, l\'anonci dei demandas de publicacion e dei validacions d\'articles.',
 'info_fichiers_authent' => 'Fichiers d\'autentificacion &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -698,7 +699,9 @@ un color indica lo sieu estat:',
 'info_une_rubrique' => 'una rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:', # MODIF
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DAU SIT:', # MODIF
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Ligam ipert&egrave;xt:',
 'info_utilisation_spip' => 'A&uuml;ra pod&egrave;tz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_visites_par_mois' => 'Afichatge per mes:',

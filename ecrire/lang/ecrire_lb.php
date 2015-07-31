@@ -388,6 +388,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_etape_suivante' => 'Weider bei de n&auml;chste Schr&euml;tt',
 'info_etape_suivante_1' => 'Dir k&euml;nnt bei de n&auml;chste Schr&euml;tt weidergo&euml;n.',
 'info_etape_suivante_2' => 'Dir k&euml;nnt bei de n&auml;chsten Schr&euml;tt weidergo&euml;n.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Export vun der Datebank op @archive@',
 'info_facilite_suivi_activite' => 'Fir d&eacute;i editorial Aktivit&eacute;iten ze verfolgen, kann SPIP d\'Demanden fir Artikelen ze publiz&eacute;ieren oder d\'Validatiounen un eng Mailing-L&euml;scht vun de Redakteren sch&eacute;cken.',
 'info_fichiers_authent' => 'Identifikatiouns-Fichier\'en ".htpasswd"',
@@ -674,7 +675,9 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_une_rubrique' => 'eng Rubrik,',
 'info_une_rubrique_02' => '1 Rubrik',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL VUM SITE:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Link:',
 'info_utilisation_spip' => 'Dir k&euml;nnt elo de System benotzen...',
 'info_visites_par_mois' => 'Visiten pro Mount:',

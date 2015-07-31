@@ -408,6 +408,7 @@ ou da rede',
 'info_etape_suivante' => 'Passar para a seguinte etapa',
 'info_etape_suivante_1' => 'Pode passar para a etapa seguinte',
 'info_etape_suivante_2' => 'Pode passar para a etapa seguinte',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exporta&ccedil;&atilde;o da base para @archive@',
 'info_facilite_suivi_activite' => 'A fim de facilitar o acompanhamento da actividade
  editorial do s&iacute;tio, SPIP pode fazer chegar por email, por exemplo
@@ -721,7 +722,9 @@ numa cor que indica o seu estado:',
 'info_une_rubrique' => 'uma rubrica,',
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL :', # MODIF
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DO S&Iacute;TIO :', # MODIF
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Liga&ccedil;&atilde;o hipertexto&nbsp;:',
 'info_utilisation_spip' => 'Pode come&ccedil;ar agora a utilizar o sistema de publica&ccedil;&atilde;o assistida...',
 'info_visites_par_mois' => 'Exibi&ccedil;&atilde;o por m&ecirc;s :',

@@ -415,6 +415,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Pass&agrave; &agrave; a pr&ugrave;ssima tappa',
 'info_etape_suivante_1' => 'Pudete pass&agrave; &agrave; a pr&ugrave;ssima tappa.',
 'info_etape_suivante_2' => 'Pudete pass&agrave; &agrave; a pr&ugrave;ssima tappa.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Spurtazione di a basa di dati versu @archive@',
 'info_facilite_suivi_activite' => 'Da rende pi&ugrave; f&agrave;ciule a aguardia di l\'attivit&agrave; edituriale di u situ, SPIP p&ograve; 
 		prucede &agrave; invii d\'email, per esempiu &agrave; una mailing-list di i scrittori, l\'annunciu di e dumande di 
@@ -736,7 +737,9 @@ U so statutu h&egrave; signalatu da u culore di l\'icona (scrittore = giallu; am
 'info_une_rubrique' => 'una r&ugrave;bbrica, ',
 'info_une_rubrique_02' => '1 r&ugrave;bbrica',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DI U SITU&nbsp;:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Lea ipertestu&nbsp;:',
 'info_utilisation_spip' => 'Av&agrave; pudete puru principi&agrave; &agrave; adupr&agrave; u sistema di pubblicazione assistita...',
 'info_visites_par_mois' => 'Vede mese per mese&nbsp;:',

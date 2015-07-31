@@ -390,6 +390,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Pasar a la siguiente etapa ',
 'info_etape_suivante_1' => 'Puedes pasar a la siguiente etapa ',
 'info_etape_suivante_2' => 'Puedes pasar a la etapa siguiente',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exportaci&oacute;n de la base hacia @archive@',
 'info_facilite_suivi_activite' => 'Para facilitar el seguimiento de la actividad editorial, SPIP puede enviar por correo electr&oacute;nico, por ejemplo a un lista de redactores y redactoras, anuncios de solicitudes de publicaci&oacute;n y de validaci&oacute;n de art&iacute;culos.',
 'info_fichiers_authent' => 'Archivos de autentificaci&oacute;n &laquo;.htpasswd&raquo;',
@@ -677,7 +678,9 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'info_une_rubrique' => 'una secci&oacute;n,',
 'info_une_rubrique_02' => '1 secci&oacute;n',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL del sitio:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Enlace hipertexto:',
 'info_utilisation_spip' => 'Puedes comenzar a utilizar el sistema de publicaci&oacute;n asistida...',
 'info_visites_par_mois' => 'Mostrar por mes :',

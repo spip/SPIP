@@ -390,6 +390,7 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_etape_suivante' => 'Qua b&#432;&#7899;c k&#7871;',
 'info_etape_suivante_1' => 'B&#7841;n c&#243; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
 'info_etape_suivante_2' => ' B&#7841;n c&#243; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => '&#272;em database ra ngo&#224;i v&#224;o @archive@',
 'info_facilite_suivi_activite' => '&#272;&#7875; l&agrave;m nh&#7865; c&ocirc;ng vi&#7879;c c&#7911;a Ban Bi&ecirc;n T&#7853;p, SPIP g&#7917;i b&#7857;ng email c&aacute;c th&ocirc;ng b&aacute;o xin ph&eacute;p &#273;&#259;ng v&agrave; ch&#7845;p thu&#7853;n b&agrave;i v&#7903; (&#273;&#7871;n mailing list c&#7911;a ch&#7911; b&uacute;t ch&#7859;ng h&#7841;n) ',
 'info_fichiers_authent' => 'H&#7891; s&#417; x&#225;c nh&#7853;n ".htpasswd"',
@@ -676,7 +677,9 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'info_une_rubrique' => 'm&#7897;t &#273;&#7873; m&#7909;c, ',
 'info_une_rubrique_02' => '1 &#273;&#7873; m&#7909;c',
 'info_url' => 'URL:', # MODIF
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL C&#7910;A WEBSITE:', # MODIF
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'N&#7889;i k&#7871;t:',
 'info_utilisation_spip' => 'SPIP s&#7861;n s&#224;ng &#273;&#7875; s&#7917; d&#7909;ng...',
 'info_visites_par_mois' => 'Hi&#7875;n th&#7883; h&#224;ng th&#225;ng:',

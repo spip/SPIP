@@ -393,6 +393,7 @@ ar skeudenno&ugrave; enframmet. Evel-se e c\'heller kroui&ntilde;, da skouer,
 'info_etape_suivante' => 'Tremen d\'al lankad war-lerc\'h',
 'info_etape_suivante_1' => 'Gallout a rit tremen d\'al lankad war-lerc\'h.',
 'info_etape_suivante_2' => 'Gallout a rit tremen d\'ar lankad war-lerc\'h.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'Oc\'h ezporzhia&ntilde; an diaz davet @archive@',
 'info_facilite_suivi_activite' => 'A-benn heulia&ntilde; aesoc\'h an oberererezh e c\'hell SPIP kas dre bostel,
   d\'ul roll-skigna&ntilde; enni ar skridaozerien da skouer,
@@ -696,7 +697,9 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'info_une_rubrique' => 'ur rubrikenn,',
 'info_une_rubrique_02' => '1 rubrikenn',
 'info_url' => 'URL&nbsp;:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL AL LEC\'HIENN&nbsp;:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Liamm gourskrid&nbsp;:',
 'info_utilisation_spip' => 'Brema&ntilde; e c\'hellit kregi&ntilde; da implijout ar reizhiad embann ameilet...',
 'info_visites_par_mois' => 'Diskouez dre viz :',

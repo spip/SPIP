@@ -405,6 +405,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Go to the next step',
 'info_etape_suivante_1' => 'You can move to the next step.',
 'info_etape_suivante_2' => 'You can move to the next step.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'export database to @archive@',
 'info_facilite_suivi_activite' => 'To facilitate the follow-up of the site\'s editorial;
   activities, SPIP can send notification by email, to an editor\'s mailing list for instance,
@@ -718,7 +719,9 @@ in a colour indicating their status:',
 'info_une_rubrique' => 'a section,',
 'info_une_rubrique_02' => '1 section',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'SITE\'S URL:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Hyperlink:',
 'info_utilisation_spip' => 'SPIP is now ready to be used...',
 'info_visites_par_mois' => 'Monthly display:',
@@ -987,7 +990,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_admin_tech_01' => 'This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole @img@, directory, which contains the images and the documents used in the articles and sections.',
 'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored by the same version of SPIP that created it. You should not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href="@spipnet@">SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
-	speed up its transfer to your machine or to a backup server and save some disk space.',
+ speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_admin_tech_04' => 'In order to merge with another database, you can restrict the backup to one section: ',
 'texte_adresse_annuaire_1' => '( If your directory is installed on the same machine as your Web site, it is probably &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'The following author was added to the article:',
@@ -1031,11 +1034,11 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_connexion_mysql' => 'Consult the information provided by your service provider. It should contain the connection codes for the SQL server.',
 'texte_contenu_article' => '(Content of the article in a few words.)',
 'texte_contenu_articles' => 'Based on the layout chosen for your site, you can decide
-		that some articles elements are not to be used.
-		Use the following list to choose which elements should be available.',
+  that some articles elements are not to be used.
+  Use the following list to choose which elements should be available.',
 'texte_crash_base' => 'If your database
-			crashed, you can try to repair it
-			automatically.',
+   crashed, you can try to repair it
+   automatically.',
 'texte_creer_rubrique' => 'Before being able to write articles,<br /> you must create a section.',
 'texte_date_creation_article' => 'DATE OF ARTICLE CREATION:',
 'texte_date_publication_anterieure' => 'Date of earlier publishing:',

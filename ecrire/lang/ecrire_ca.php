@@ -396,6 +396,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_etape_suivante' => 'Passar a l\'etapa seg&uuml;ent',
 'info_etape_suivante_1' => 'Pot passar a l\'etapa seg&uuml;ent.',
 'info_etape_suivante_2' => 'Pot passar a l\'etapa seg&uuml;ent.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => ' exportaci&oacute; de la base cap a @archive@',
 'info_facilite_suivi_activite' => 'Per tal de facilitat el seguiment de l\'activitat editorial, SPIP pot fer arribar per correu electr&ograve;nic, per exemple a una llista de correu dels redactors, l\'av&iacute;s de les peticions de publicaci&oacute; i de les validacions dels articles.',
 'info_fichiers_authent' => 'Fitxers d\'autentificaci&oacute; &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -691,7 +692,9 @@ amb un color que indica el seu estat:',
 'info_une_rubrique' => 'una secci&oacute;,',
 'info_une_rubrique_02' => '1 secci&oacute;',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DEL LLOC WEB:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Enlla&ccedil; hipertext:',
 'info_utilisation_spip' => 'Podeu comen&ccedil;ar a utilitzar el sistema de publicaci&oacute; assistida...',
 'info_visites_par_mois' => 'Mostrar per mes:',

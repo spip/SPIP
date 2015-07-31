@@ -406,6 +406,7 @@ sui singoli articoli; saranno invece proibiti nelle rubriche, nelle brevi, ecc',
 'info_etape_suivante' => 'Passare alla fase successiva',
 'info_etape_suivante_1' => 'Puoi passare alla fase successiva.',
 'info_etape_suivante_2' => 'Puoi passare alla fase successiva.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'esportazione del database verso @archive@',
 'info_facilite_suivi_activite' => 'Al fine di facilitare il monitoraggio
 dell\'attivit&agrave; editoriale del sito, SPIP pu&ograve; far pervenire via email,
@@ -715,7 +716,9 @@ Le traduzioni sono associate all\'originale,
 'info_une_rubrique' => 'una rubrica, ',
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DEL SITO:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Link ipertestuale:',
 'info_utilisation_spip' => 'Puoi ora cominciare ad utilizzare il sistema di pubblicazione assistita...',
 'info_visites_par_mois' => 'Visualizzazione per mese:',

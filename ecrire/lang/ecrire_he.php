@@ -399,6 +399,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => '&#1500;&#1498; &#1488;&#1500; &#1492;&#1513;&#1500;&#1489; &#1492;&#1489;&#1488;',
 'info_etape_suivante_1' => '.&#1492;&#1497;&#1504;&#1498; &#1497;&#1499;&#1493;&#1500; &#1500;&#1506;&#1489;&#1493;&#1512; &#1500;&#1513;&#1500;&#1489; &#1492;&#1489;&#1488;',
 'info_etape_suivante_2' => '.&#1492;&#1497;&#1504;&#1498; &#1497;&#1499;&#1493;&#1500; &#1500;&#1506;&#1489;&#1493;&#1512; &#1500;&#1513;&#1500;&#1489; &#1492;&#1489;&#1488;',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => '&#1497;&#1510;&#1493;&#1488; &#1489;&#1505;&#1497;&#1505; &#1504;&#1514;&#1493;&#1504;&#1497;&#1501; &#1488;&#1500; @archive@',
 'info_facilite_suivi_activite' => 'Afin de faciliter le suivi de l\'activit&eacute;
 		&eacute;ditoriale du site, SPIP peut faire parvenir par mail, par exemple
@@ -715,7 +716,9 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:', # NEW
 'info_une_rubrique' => '&#1511;&#1496;&#1490;&#1493;&#1512;&#1497;&#1492;,',
 'info_une_rubrique_02' => '1 rubrique', # NEW
 'info_url' => '&#1511;&#1497;&#1513;&#1493;&#1512; :',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DU SITE&nbsp;:', # NEW
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Lien hypertexte&nbsp;:', # NEW
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;e...', # NEW
 'info_visites_par_mois' => 'Affichage par mois :', # NEW

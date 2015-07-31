@@ -405,6 +405,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Przejd&#378; do nast&#281;pnego kroku',
 'info_etape_suivante_1' => 'Mo&#380;esz przej&#347;&#263; do nast&#281;pnego kroku.',
 'info_etape_suivante_2' => 'Mo&#380;esz przej&#347;&#263; do nast&#281;pnego kroku.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'eksportuj baz&#281; danych do @archive@',
 'info_facilite_suivi_activite' => 'W celu uproszczenia dzia&#322;a&#324;
   redakcyjnych strony, SPIP mo&#380;e wys&#322;a&#263; mailem, na przyk&#322;ad
@@ -719,7 +720,9 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'info_une_rubrique' => 'dzia&#322;,',
 'info_une_rubrique_02' => '1 dzia&#322;',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL STRONY:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => '&#321;&#261;cze hipertekstowe&nbsp;:',
 'info_utilisation_spip' => 'SPIP jest ju&#380; gotowy do u&#380;ytku...',
 'info_visites_par_mois' => 'Wizyt miesi&#281;cznie:',

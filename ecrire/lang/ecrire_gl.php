@@ -402,6 +402,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Pasar &aacute; etapa seguinte',
 'info_etape_suivante_1' => 'Podes pasar &aacute; etapa seguinte.',
 'info_etape_suivante_2' => 'Podes pasar &aacute; etapa seguinte.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'exportaci&oacute;n da base cara a @archive@',
 'info_facilite_suivi_activite' => 'Para facilitar o seguimento da actividade
   editorial do web, SPIP pode enviar por correo-e., por exemplo
@@ -715,7 +716,9 @@ cunha cor que indica o seu estado&nbsp;:',
 'info_une_rubrique' => 'un tema,',
 'info_une_rubrique_02' => '1 tema',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL DO WEB&nbsp;:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Ligaz&oacute;n de hipertexto&nbsp;:',
 'info_utilisation_spip' => 'Agora podes comezar a usar o sistema de publicaci&oacute;n asistida...',
 'info_visites_par_mois' => 'Ordear por mes:',

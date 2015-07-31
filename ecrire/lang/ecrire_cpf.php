@@ -430,6 +430,7 @@ domann d&eacute;gr&egrave;n molakl&eacute;-la
 'info_etape_suivante' => 'Pas l&eacute;tap answit',
 'info_etape_suivante_1' => 'I p&eacute; pas l&eacute;tap answit.',
 'info_etape_suivante_2' => 'I p&eacute; pas l&eacute;tap answit.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'L&eacute;sportasyon labaz aprosan  @archive@',
 'info_facilite_suivi_activite' => 'Pou swiv fasilman laktivit&eacute; l&eacute;ditoryal sir lo sit, SPIP i p&eacute; anvwa inn zanons dann fil-im&egrave;l pou tout bann zitilizat&egrave;r anrozistr&eacute;. Zanons komsa i kadr tout bann dommand pou lapiblikasyon oubyinsa bann konfirmasyon do derny&eacute; bann zartik.',
 'info_fichiers_authent' => 'Bann fisy&eacute; pou lotantifikasyon &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
@@ -734,7 +735,9 @@ sanm in koul&egrave;r i pr&eacute;siz son l&eacute;ta&nbsp;:',
 'info_une_rubrique' => 'inn rubrik,',
 'info_une_rubrique_02' => '1 rubrik',
 'info_url' => 'URL :',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL LO SITW&Egrave;B :',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Gatir w&egrave;b&nbsp;:',
 'info_utilisation_spip' => 'Ast&egrave;r ou p&eacute; anserv lo sist&egrave;m lapiblikasyon SPIP...',
 'info_visites_par_mois' => 'Afis pou lo mwa :',

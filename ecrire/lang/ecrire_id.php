@@ -405,6 +405,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante' => 'Lanjut ke langkah berikutnya',
 'info_etape_suivante_1' => 'Anda dapat pindah ke langkah selanjutnya.',
 'info_etape_suivante_2' => 'Anda dapat pindah ke langkah selanjutnya.',
+'info_exceptions_proxy' => 'Exceptions pour le proxy', # NEW
 'info_exportation_base' => 'ekspor database ke @archive@',
 'info_facilite_suivi_activite' => 'Untuk menfasilitasi tindak lanjut dari aktivitas editorial situs;
   SPIP dapat mengirimkan notifikasi melalui e-mail, ke daftar surat seorang editor,
@@ -716,7 +717,9 @@ dalam warna yang menunjukkan statusnya:',
 'info_une_rubrique' => 'sebuah bagian,',
 'info_une_rubrique_02' => '1 bagian',
 'info_url' => 'URL:',
+'info_url_proxy' => 'URL du proxy', # NEW
 'info_url_site' => 'URL SITUS:',
+'info_url_test_proxy' => 'URL de test', # NEW
 'info_urlref' => 'Tautan web:',
 'info_utilisation_spip' => 'SPIP siap untuk digunakan...',
 'info_visites_par_mois' => 'Tampilan bulanan:',
