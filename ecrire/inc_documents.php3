@@ -326,16 +326,12 @@ function fichiers_upload($dir) {
 
 	while ($f = readdir($d)) {
 		if (is_file("$dir/$f") AND is_readable("$dir/$f")
-		AND $f != 'remove.txt') {
+		AND $f != 'remove.txt')
 			$fichiers[] = "$dir/$f";
-		}
 		else
 		if (is_dir("$dir/$f") AND is_readable("$dir/$f")
-		AND $f != '.' AND $f != '..') {
-			$fichiers_dir = fichiers_upload("$dir/$f");
-			while (list(,$f2) = each ($fichiers_dir))
-				$fichiers[] = $f2;
-		}
+		AND $f != '.' AND $f != '..')
+			$fichiers = array_merge($fichiers, fichiers_upload("$dir/$f"));
 
 	}
 	closedir($d);
@@ -353,7 +349,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 	$fichiers = fichiers_upload($dir);
 	$exts = array();
 
-	while (list(, $f) = each($fichiers)) {
+	foreach ($fichiers as $f) {
 		$f = ereg_replace("^$dir/","",$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
@@ -366,17 +362,24 @@ function texte_upload_manuel($dir, $inclus = '') {
 			}
 			
 			$ledossier = substr($f, 0, strrpos($f,"/"));
-			if (strlen($ledossier) > 0) $ledossier = "$ledossier";
 			$lefichier = substr($f, strrpos($f, "/"), strlen($f));
 			
 			if ($ledossier != $ledossier_prec) {
-				$texte_upload .= "\n<option value=\"$ledossier\" style='font-weight: bold;'>Tout le dossier $ledossier</option>";
+				$texte_upload .= "\n<option value=\"$ledossier\" style='font-weight: bold;'>"
+				._T('tout_dossier_upload', array('upload' => $ledossier))
+				."</option>";
 			}
 			
 			$ledossier_prec = $ledossier;
 			
 			if ($exts[$ext] == 'oui') $texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier</option>";
 		}
+	}
+
+	if ($texte_upload) {
+		$texte_upload = "\n<option value=\"/\" style='font-weight: bold;'>"
+				._T('info_installer_tous_documents')
+				."</option>" . $texte_upload;
 	}
 
 	return $texte_upload;
