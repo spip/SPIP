@@ -63,6 +63,7 @@ function verifier_low_sec ($id_auteur, $cle, $action='') {
 }
 
 function effacer_low_sec($id_auteur) {
+	if (!$id_auteur = intval($id_auteur)) return; // jamais trop prudent ;)
 	spip_query("UPDATE spip_auteurs SET low_sec = '' WHERE id_auteur = $id_auteur");
 }
 
