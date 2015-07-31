@@ -2,7 +2,9 @@
 
 include ("inc.php3");
 include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_agenda.php3");
+include_ecrire ("Include/PHP4/calendrier.php");
+include_ecrire ("Include/MySQL3/calendrier.php");
+include_ecrire ("Include/HTML4/calendrier.php");
 
 
 
@@ -157,15 +159,17 @@ while($row = spip_fetch_array($result_message)) {
 
 	debut_gauche();
 	
-	if ($rv == 'oui') agenda ($lemois, $lannee, $lejour, $lemois, $lannee);
+	if ($rv == 'oui')
+	  echo http_calendrier_agenda ($lemois, $lannee, $lejour, $lemois, $lannee);
 	
-	afficher_taches();
-	
+	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
+	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+
 	if ($rv == "oui") {
-		creer_colonne_droite();	
-		calendrier_jour($lejour,$lemois,$lannee, "col", $id_message);
+	  creer_colonne_droite();	
+	  echo http_calendrier_jour($lejour,$lemois,$lannee, "col", $id_message);
 	}
-	
 	debut_droite();
 
 	if ($type == 'normal') {
