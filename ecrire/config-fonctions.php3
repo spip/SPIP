@@ -192,7 +192,7 @@ if ($options == 'avancees') {
 	diff&eacute;rents de l'alphabet romain (ou &laquo;&nbsp;occidental&nbsp;&raquo;) et ses d&eacute;riv&eacute;s.
 	Dans ce cas, il faut changer le r&eacute;glage par d&eacute;faut pour utiliser
 	un jeu de caract&egrave;res appropri&eacute;. N'oubliez pas non plus d'adapter
-	le site public en cons&eacute;quence.<p>";
+	le site public en cons&eacute;quence (balise <tt>#CHARSET</tt>).<p>";
 	echo "<blockquote><i>Ce r&eacute;glage n'a pas d'effet r&eacute;troactif. Par
 	cons&eacute;quent, les textes d&eacute;j&agrave; entr&eacute;s peuvent s'afficher
 	incorrectement &agrave; la suite d'une modification du r&eacute;glage. Dans tous
@@ -203,11 +203,11 @@ if ($options == 'avancees') {
 
 	echo "<TR><TD ALIGN='left' class='verdana2'>";
 	echo bouton_radio('charset', 'iso-8859-1',
-		"Alphabet occidental&nbsp; (<tt>ISO-8859-1</tt>): support&eacute; par tous les navigateurs, mais permet uniquement
+		"Alphabet occidental&nbsp; (<tt>iso-8859-1</tt>): support&eacute; par tous les navigateurs, mais permet uniquement
 		l'affichage des langues ouest-europ&eacute;ennes (anglais, fran&ccedil;ais, allemand...).", $charset == 'iso-8859-1');
 	echo "<br>";
 	echo bouton_radio('charset', 'utf-8',
-		"Alphabet universel&nbsp; (<tt>UTF-8</tt>): permet l'affichage de toutes les langues, mais n'est pas reconnu
+		"Alphabet universel&nbsp; (<tt>utf-8</tt>): permet l'affichage de toutes les langues, mais n'est pas reconnu
 		par tous les navigateurs &agrave; l'heure actuelle.", $charset == 'utf-8');
 	echo "<br>";
 	echo bouton_radio('charset', 'custom',
