@@ -479,6 +479,7 @@ ecrire/exec/statistiques_visites.php -text
 ecrire/exec/synchro.php -text
 ecrire/exec/tourner.php -text
 ecrire/exec/upgrade.php -text
+ecrire/exec/valider_xml.php -text
 ecrire/exec/virtualiser.php -text
 ecrire/inc/actions.php -text
 ecrire/inc/agenda.php -text

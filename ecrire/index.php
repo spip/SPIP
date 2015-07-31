@@ -192,12 +192,19 @@ AND $l = @unserialize($l)) {
 	}
 }
 
-// Trouver la fonction eventuellement surchagee et l'appeler.
-$var_f = charger_fonction($exec);
-if (!isset($GLOBALS['transformer_xml'])
-OR $GLOBALS['auteur_session']['statut']!='0minirezo')
-	$var_f();
- else { include('public/debug.php');
-   debug_script($var_f, true);
+// Passer la main aux outils XML a la demande.
+if (isset($GLOBALS['transformer_xml'])
+AND $GLOBALS['auteur_session']['statut']=='0minirezo') {
+	set_request('var_url', $exec);
+	$exec = $GLOBALS['transformer_xml'];
  }
+
+// Trouver la fonction eventuellement surchagee
+
+$var_f = charger_fonction($exec);
+
+// Feu !
+
+$var_f();
+
 ?>

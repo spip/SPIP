@@ -42,10 +42,12 @@ function afficher_debug_contexte($env) {
 
 // Si le code php produit des erreurs, on les affiche en surimpression
 // sauf pour un visiteur non admin (lui ne voit rien de special)
+// et en mode validation (fausse erreur "double occurrence insert_head")
 // ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
 // http://doc.spip.org/@affiche_erreurs_page
 function affiche_erreurs_page($tableau_des_erreurs) {
 
+	if ($GLOBALS['exec']=='valider_xml') return '';
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
 	foreach ($tableau_des_erreurs as $err) {
@@ -308,6 +310,7 @@ function ancre_texte($texte, $fautifs=array())
 	global $var_mode_ligne;
 	if ($var_mode_ligne) $fautifs[]= array($var_mode_ligne);
 	$res ='';
+
 	$s = highlight_string(str_replace('</script>','</@@@@@>',$texte),true);
 
 	$s = str_replace('/@@@@@','/script', // bug de highlight_string
@@ -318,6 +321,7 @@ function ancre_texte($texte, $fautifs=array())
 	$s = preg_replace(',<(\w[^<>]*)>([^<]*)<br />([^<]*)</\1>,',
 			  '<\1>\2</\1><br />' . "\n" . '<\1>\3</\1>',
 			  $s);
+
 	$tableau = explode("<br />", $s);
 
 	$ancre = md5($texte);
@@ -377,7 +381,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	$self = str_replace("\\'", '&#39;', self());
 	$self = parametre_url($self,'var_mode', 'debug');
 
-	debug_debut($fonc);
+	echo debug_debut($fonc);
 	if ($var_mode_affiche !== 'validation') {
 		$self = parametre_url($self,'var_mode', 'debug');
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
@@ -480,39 +484,6 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	exit;
 }
 
-// Fonction pour l'espace de redaction, appeler par ecrire/index.php
-
-// http://doc.spip.org/@debug_script
-function debug_script ($f, $apply=false) {
-
-	$transformer_xml=charger_fonction($GLOBALS['transformer_xml'], 'inc');
-	$t = $transformer_xml($f, $apply);
-
-	debug_debut($GLOBALS['exec']);
-	if (!isset($GLOBALS['xhtml_error'])) {
-		list (,$top, $avail, $grammaire, $rotlvl) = analyser_doctype($t);
-		$err = '<h3>' . _T('spip_conforme_dtd')
-		. "<br /><a href='" 
-		. $grammaire
-		. "'>"
-		. $rotlvl
-		. '</a></h3>';
-		list($t, ) = emboite_texte($t);
-	} else {
-		list($t, $err) = emboite_texte($t);
-	}
-
-	echo "<div style='text-align: center'><h1>", _T('analyse_xml') . '</h1>',
-	  $err,
-	   "<br /><a href='"
-	    . parametre_url(self(),'transformer_xml', '')
-	    . "'>"
-	    .  _T("access_interface_graphique")
-	    . "</a></div>";
-	echo $t;
-	echo "\n</div></div></body></html>";
-}
-
 // http://doc.spip.org/@debug_debut
 function debug_debut($titre)
 {
@@ -521,19 +492,19 @@ function debug_debut($titre)
 	include_spip('inc/filtres');
 	http_no_cache();
 	lang_select($auteur_session['lang']);
-	echo _DOCTYPE_ECRIRE,
-	  html_lang_attributes(),
-	  "<head>\n<title>",
+	return _DOCTYPE_ECRIRE .
+	  html_lang_attributes() .
+	  "<head>\n<title>" .
 	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 	   _T('admin_debug') . ' ' . $titre . ' (' .
-	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
-	  ")</title>\n",
-	  "<meta http-equiv='Content-Type' content='text/html",
-	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : ''),
-	  "' />\n",
+	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))) . 
+	  ")</title>\n" .
+	  "<meta http-equiv='Content-Type' content='text/html" .
+	  (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '') .
+	  "' />\n" .
 	  "<link rel='stylesheet' href='".url_absolue(find_in_path('spip_admin.css'))
-	  . "' type='text/css' />",
-	  "</head>\n<body style='margin:0 10px;'>",
+	  . "' type='text/css' />" .
+	  "</head>\n<body style='margin:0 10px;'>" .
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 }
 
@@ -559,6 +530,7 @@ function emboite_texte($texte, $fonc='',$self='')
 	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
                      $GLOBALS['xhtml_error'],
                      $eregs))
+
 		return array(ancre_texte($texte, array('', '')), true);
 	if (!isset($GLOBALS['debug_objets'])) {
 		preg_match_all(",(.*?)(\d+)(\D+(\d+)<br />),",
@@ -588,6 +560,7 @@ function emboite_texte($texte, $fonc='',$self='')
 		}			
 		$encore2 = array();
 		$colors = array('#e0e0f0', '#f8f8ff');
+
 		foreach($regs as $r) {
 			$i++;
 			list(,$msg, $ligne, $fin, $col) = $r;
