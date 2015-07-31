@@ -271,7 +271,7 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'entree_port_annuaire' => 'Lo nim&eacute;ro d-por dlo karn&eacute; ',
 'entree_signature' => 'Sinyatir',
 'entree_texte_breve' => 'Lo t&egrave;ks pou tit-nouv&egrave;l',
-'entree_titre_document' => 'Lo non dlo dokuman&nbsp;:',
+'entree_titre_document' => 'Lo non lo dokuman&nbsp;:',
 'entree_titre_image' => 'Lo nond limaz&nbsp;:',
 'entree_titre_obligatoire' => '<B>Titr</b> [N&eacute;s&eacute;s&egrave;r]<BR>',
 'entree_url' => 'Ladr&egrave;s (URL) out sitw&egrave;b',
