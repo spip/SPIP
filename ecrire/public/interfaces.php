@@ -194,14 +194,6 @@ function declarer_interfaces(){
 	$table_des_tables['rubriques']='rubriques';
 	$table_des_tables['hierarchie']='rubriques';
 
-	$table_titre['articles']= 'titre, lang';
-	$table_titre['rubriques']= 'titre, lang';
-	$table_titre['auteurs']= "nom AS titre, '' AS lang";
-
-	$table_date['articles']='date';
-	$table_date['auteurs']='date';
-	$table_date['rubriques']='date';
-
 	$table_statut['spip_articles'][] = array(
 		'champ' => 'statut',
 		'publie' => 'publie',

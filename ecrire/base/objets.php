@@ -49,6 +49,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_aucun_objet'=> 'info_aucun_article',
 				'info_1_objet' => 'info_1_article',
 				'info_nb_objets' => 'info_nb_articles',
+				'titre' => 'titre, lang',
+				'date' => 'date',
 				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'j_mots', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps'),
 				'rechercher_champs' => array(
 					'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
@@ -68,6 +70,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_aucun_objet'=> 'info_aucun_auteur',
 				'info_1_objet' => 'info_1_auteur',
 				'info_nb_objets' => 'info_nb_auteurs',
+				'titre' => "nom AS titre, '' AS lang",
+				'date' => 'date',
 				'champs_versionnes' => array('nom', 'bio', 'email', 'nom_site', 'url_site', 'login'),
 				'rechercher_champs' => array(
 					'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
@@ -84,6 +88,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_aucun_objet'=> 'info_aucun_rubrique',
 				'info_1_objet' => 'info_1_rubrique',
 				'info_nb_objets' => 'info_nb_rubriques',
+				'titre'=>'titre, lang',
+				'date' => 'date',
 				'champs_versionnes' => array('titre', 'descriptif', 'texte'),
 				'rechercher_champs' => array(
 					'titre' => 8, 'descriptif' => 5, 'texte' => 1
