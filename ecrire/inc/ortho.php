@@ -158,12 +158,6 @@ function choisir_miroirs_ortho($lang) {
 //
 function post_ortho($url, $texte, $lang) {
 
-	list($f, $fopen) = init_http('POST', $url, true /* refuse gz */);
-	if (!$f OR $fopen) {
-		spip_log("Echec connexion $url");
-		return false;
-	}
-
 	$gz = ($GLOBALS['flag_gz'] && strlen($texte) >= 200);
 	$boundary = '';
 	$vars = array(
@@ -187,54 +181,20 @@ function post_ortho($url, $texte, $lang) {
 		$vars['nul_echap'] = $str_echap;
 		$boundary = substr(md5(rand().'ortho'), 0, 8);
 	}
-	list($content_type, $body) = prepare_donnees_post($vars, $boundary);
-
-	// On envoie le contenu
-	fputs($f, $content_type);
-	fputs($f, "Content-Length: ".strlen($body)."\r\n");
-	fputs($f, "\r\n");	// Fin des entetes
-	fputs($f, $body);
-
-	// Lire les en-tetes HTTP de la reponse et decoder le Content-Length
-	$length = 0;
-	$s = fgets($f, 1000);
-	$statut = 0;
-	if (preg_match(',^HTTP/\d+\.\d+ (\d+) ,', $s, $r))
-		$statut = intval($r[1]);
-	if ($statut != 200) {
-		fclose($f);
-		return false;
-	}
-	$gz_deflate=false; // le serveur web compresse en gz ?
-	while ($s = trim(fgets($f, 1000))) {
-		if (preg_match(',Content-Length:(.*),i', $s, $r))
-			$length = intval($r[1]);
-		if (preg_match(',Content-Encoding:(.*)gzip,i', $s, $r))
-			$gz_deflate = true;
-	}
-	$r = "";
-
-	// Lire le corps de la reponse HTTP
-	if ($length) {
-		while (($l = strlen($r)) < $length) $r .= fread($f, $length - $l);
-	}
-	else while (!feof($f) AND $r .= fread($f, 1024));
-
-	fclose($f);
-
-	// decompression de GZ apache
-	if ($gz_deflate) $r = gzinflate(substr($r,10));
+	
+  $r = recuperer_page($url, false, false, 1048576, $vars, $boundary, true);
 
 	// decompression de GZ ortho
 	if ($gz) $r = gzuncompress($r);
 	return $r;
-
+	
 /*
- * Note a propos de la compression : si on ne refuse pas le gz dans init_http(),
+ * Note a propos de la compression : si on ne refuse pas le gz dans recuperer_page(),
  * le serveur d'ortho va retourner des donnees compressees deux fois ; le code
  * saurait les decompresser deux fois, mais on perd alors beaucoup de temps (on
  * passe, dans un test, de 5 s a 25 s de delai !)
  */
+
 }
 
 //

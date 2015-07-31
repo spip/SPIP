@@ -56,6 +56,25 @@ function copie_locale($source, $mode='auto') {
 }
 
 function prepare_donnees_post($donnees, $boundary = '') {
+  /* boundary automatique */
+  // Si on a plus de 500 octects de donnees, on "boundarise"
+  if($boundary == '' and is_array($donnees)) {
+    $taille = 0;
+    foreach ($donnees as $cle => $valeur) {
+  		if (is_array($valeur)) {
+  			foreach ($valeur as $val2) {
+          $taille += strlen($val2);
+        }
+      } else {
+        // faut-il utiliser spip_strlen() dans inc/charsets ?
+        $taille += strlen($valeur);
+      }
+    }
+    if($taille>500) {
+      $boundary = substr(md5(rand().'spip'), 0, 8);
+    }
+  }
+
 	if($boundary) {
 		// fabrique une chaine HTTP pour un POST avec boundary
 		$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
@@ -98,7 +117,11 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // options : get_headers si on veut recuperer les entetes
 // taille_max : arreter le contenu au-dela (0 = seulement les entetes)
 // Par defaut taille_max = 1Mo.
-function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576, $datas='') {
+// datas, une chaine ou un tableau pour faire un POST de donnees
+// boundary, pour forcer l'envoi par cette methode
+// et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
+function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576,
+  $datas='', $boundary='', $refuser_gz = false) {
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -115,7 +138,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	}
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
-		list($f, $fopen) = init_http($get, $url);
+		list($f, $fopen) = init_http($get, $url, $refuser_gz);
 
 		// si on a utilise fopen() - passer a la suite
 		if ($fopen) {
