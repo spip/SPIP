@@ -315,29 +315,34 @@ $spip_signatures_key = array(
 
 global $tables_principales;
 
-$tables_principales  = array(
- 'articles' => array('field' => &$spip_articles, 'key' => &$spip_articles_key),
- 'auteurs'  => array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key),
- 'breves'   => array('field' => &$spip_breves, 'key' => &$spip_breves_key),
- 'messages' => array('field' => &$spip_messages, 'key' => &$spip_messages_key),
- 'mots'     => array('field' => &$spip_mots, 'key' => &$spip_mots_key),
- 'groupes_mots' =>	array('field' => &$spip_groupes_mots,
-				'key' => &$spip_groupes_mots_key),
- 'rubriques' =>		array('field' => &$spip_rubriques, 
-		      		'key' => &$spip_rubriques_key),
- 'documents' =>		array('field' => &$spip_documents,
-		      		'key' => &$spip_documents_key),
- 'types_documents'	=> array('field' => &$spip_types_documents,
-			    	'key' => &$spip_types_documents_key),
- 'syndic'		=> array('field' => &$spip_syndic,
-		    		 'key' => &$spip_syndic_key),
- 'syndic_articles'	=> array('field' => &$spip_syndic_articles,
-				 'key' => &$spip_syndic_articles_key),
- 'forum' 		=> array('field' => &$spip_forum,
-				 'key' => &$spip_forum_key),
- 'signatures'		=> array('field' => &$spip_signatures,
-				 'key' => &$spip_signatures_key),
-);
+/// Attention: mes_fonctions peut avoir deja defini cette variable
+/// il faut donc rajouter, mais pas reinitialiser
 
+$tables_principales['articles'] =
+	array('field' => &$spip_articles, 'key' => &$spip_articles_key);
+$tables_principales['auteurs']  =
+	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key);
+$tables_principales['breves']   =
+	array('field' => &$spip_breves, 'key' => &$spip_breves_key);
+$tables_principales['messages'] =
+	array('field' => &$spip_messages, 'key' => &$spip_messages_key);
+$tables_principales['mots']     =
+	array('field' => &$spip_mots, 'key' => &$spip_mots_key);
+$tables_principales['groupes_mots'] =
+	array('field' => &$spip_groupes_mots, 'key' => &$spip_groupes_mots_key);
+$tables_principales['rubriques'] =
+	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
+$tables_principales['documents'] =
+	array('field' => &$spip_documents,  'key' => &$spip_documents_key);
+$tables_principales['types_documents']	=
+	array('field' => &$spip_types_documents, 'key' => &$spip_types_documents_key);
+$tables_principales['syndic'] =
+	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key);
+$tables_principales['syndic_articles']	=
+	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key);
+$tables_principales['forum'] =
+	array('field' => &$spip_forum,	'key' => &$spip_forum_key);
+$tables_principales['signatures'] =
+	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key);
 
 ?>
