@@ -21,7 +21,10 @@
 			<input type="text" id='var_login' name="var_login" class="forml" value="" size="40" />
 ][
 <div>
-			<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
+[<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;"><img	src="(#ENV{id_auteur}|silogoauteur)"
+	width="75"
+	alt="[(#ENV{login})]" /></div>]
+	<input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
 document.write("<:login_login:>&nbsp;<b>[(#ENV{login})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non[&amp;url=(#ENV{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
 //--></script>
@@ -33,14 +36,11 @@ document.write("<:login_login:>&nbsp;<b>[(#ENV{login})]<" + "/b><br />&#91;<a hr
 	<label><b><:login_login2:></b><br /></label>
 	<input type='text' name='session_login' class='forml' [value="(#ENV{login})" ]size='40' />
 </noscript>
-[<img	src="(#ENV{id_auteur}|silogoauteur)"
-	width="75"
-	valign="top"
-	align="right"
-	alt="[(#ENV{login})]" /><br /><br /><br />]
+
 </div>
 <p>
-		<label><b><:login_pass2:></b></label>&nbsp;<input type="password" name="session_password"[ id="var_login_(#ENV{login})]" class="forml" value="" size="40" />
+		<label><b><:login_pass2:></b></label>&nbsp;
+		<input type="password" name="session_password"[ id="var_login_(#ENV{login})]" class="forml" style="width: 140px;" value="" size="20" />
 		<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
 			 name="session_remember"
 			 id="session[_(#ENV{login})]"
