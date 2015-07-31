@@ -113,18 +113,19 @@ function mention_qui_edite ($id, $type='article') {
 // http://doc.spip.org/@liste_drapeau_edition
 function liste_drapeau_edition ($id_auteur, $type = 'article') {
 	$edition = lire_tableau_edition();
-
 	$articles_ouverts = array();
 
-	foreach ($edition as $objet => $data) {
-		if ($data[0] == $id_auteur
-		AND ($data[1] > time()-3600)
-		AND preg_match(",$type([0-9]+),", $objet, $regs)) {
+	foreach ($edition as $objet => $data)
+	if ($objet == 'article')
+	foreach ($data as $id => $auteurs)
+	{
+		if (isset($auteurs[$id_auteur])
+		AND (array_pop($auteurs[$id_auteur]) > time()-3600)) {
 			$row = spip_fetch_array(spip_query(
-			"SELECT titre, statut FROM spip_articles WHERE id_article=".$regs[1]
+			"SELECT titre, statut FROM spip_articles WHERE id_article=".$id
 			));
 			$articles_ouverts[] = array(
-				'id_article' => $regs[1],
+				'id_article' => $id,
 				'titre' => typo($row['titre']),
 				'statut' => typo($row['statut'])
 			);
@@ -138,12 +139,14 @@ function liste_drapeau_edition ($id_auteur, $type = 'article') {
 function debloquer_tous($id_auteur) {
 	$edition = lire_tableau_edition();
 	foreach ($edition as $objet => $data)
-		if ($data[0] == $id_auteur) {
-			unset ($edition[$objet]);
-			include_spip('inc/meta');
-			ecrire_meta('drapeau_edition', serialize($edition));
-			ecrire_metas();
+	if ($objet == 'article')
+	foreach ($data as $id => $auteurs)
+	{
+		if (isset($auteurs[$id_auteur])) {
+			unset ($edition[$objet][$id][$id_auteur]);
+			ecrire_tableau_edition($edition);
 		}
+	}
 }
 
 // quand l'auteur libere un article precis
@@ -152,11 +155,15 @@ function debloquer_edition($id_auteur, $debloquer_article, $type='article') {
 	$edition = lire_tableau_edition();
 
 	foreach ($edition as $objet => $data)
-		if ($data[0] == $id_auteur
-		AND $objet == $type.$debloquer_article) {
-			unset ($edition[$objet]);
+	if ($objet == $type)
+	foreach ($data as $id => $auteurs)
+	{
+		if ($id == $debloquer_article
+		AND isset($auteurs[$id_auteur])) {
+			unset ($edition[$objet][$id][$id_auteur]);
 			ecrire_tableau_edition($edition);
 		}
+	}
 }
 
 
