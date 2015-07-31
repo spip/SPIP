@@ -515,7 +515,7 @@ function date_ical ($date_heure, $minutes = 0) {
 // [(#ID_ARTICLE|exposer)] affiche 'on' si on est sur l'objet (article,
 // breve, rubrique, mot, auteur) correspondant a la page visualisee ;
 // Utiliser |exposer{on,off} pour modifier les valeurs de retour
-/*function exposer ($id, $identique='on', $different='') {
+function exposer ($id, $identique='on', $different='') {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 
 	// pour l'ordre des variables respecter celui des boutons de inc-admin.php3
@@ -529,7 +529,7 @@ function date_ical ($date_heure, $minutes = 0) {
 		return $identique;
 	else
 		return $different;
-}*/
+}
 
 
 //
