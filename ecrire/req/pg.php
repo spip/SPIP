@@ -120,7 +120,9 @@ function spip_pg_trace_query($query, $serveur='')
 	$connexion['last'] = $query;
 	$r = spip_pg_query_simple($link, $query);
 
-	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
+	if ($e = spip_pg_errno($serveur))	// Log de l'erreur eventuelle
+		$e .= spip_pg_error($query, $serveur); // et du fautif
+	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 }
 
 // Fonction de requete generale quand on est sur que c'est SQL standard.
@@ -1048,12 +1050,14 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 }
 
 // http://doc.spip.org/@spip_pg_error
-function spip_pg_error($serveur) {
-
-	$connexion = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-	$link = $connexion['link'];
+function spip_pg_error($query='', $serveur, $requeter=true) {
+	$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
 	$s = $link ? pg_last_error($link) : pg_last_error();
-	return str_replace('ERROR', 'errcode: 1000 ', $s);
+	if ($s) {
+		$s = str_replace('ERROR', 'errcode: 1000 ', $s);
+		spip_log("$s - $query", 'pg.'._LOG_ERREUR);
+	}
+	return $s;
 }
 
 // http://doc.spip.org/@spip_pg_errno
