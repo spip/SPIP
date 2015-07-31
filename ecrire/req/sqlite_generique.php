@@ -373,6 +373,9 @@ function spip_sqlite_errno($serveur='') {
 	} else {
 		$s = ": aucune ressource sqlite (link)";	
 	}
+	// si $s = '00000', ne pas croire a une erreur
+	if (!(int)$s) $s = 0;
+	
 	if ($s) spip_log("Erreur sqlite $s");
 
 	return $s;
@@ -728,7 +731,7 @@ function spip_sqlite_updateq($table, $champs, $where='', $desc=array(), $serveur
  */
 
 
-// fonction pour la premiere connexion a un serveur SqLite
+// fonction pour la premiere connexion a un serveur SQLite
 function _sqlite_init(){
 	if (!defined('_DIR_DB')) define('_DIR_DB', _DIR_ETC . 'bases/');
 	if (!defined('_SQLITE_CHMOD')) define('_SQLITE_CHMOD', _SPIP_CHMOD);
@@ -1177,8 +1180,13 @@ function spip_versions_sqlite(){
 
 
 /*
- * Class pour partager les lancements de requete 
- * pour sql_query() et sql_alter()
+ * Classe pour partager les lancements de requete
+ * - peut corriger la syntaxe des requetes pour la conformite a sqlite
+ * - peut tracer les requetes
+ * 
+ * Cette classe est presente essentiellement pour un preg_replace_callback 
+ * avec des parametres dans la fonction appelee que l'on souhaite incrementer 
+ * (fonction pour proteger les textes)
  * 
  */
 class sqlite_traiter_requete{
@@ -1190,7 +1198,12 @@ class sqlite_traiter_requete{
 	var $db = ''; // le nom de la base 
 	var $tracer = false; // doit-on tracer les requetes (var_profile)
 	
-	/* constructeur */
+	// Pour les corrections a effectuer sur les requetes :
+	var $textes = array(); 	// array(code=>'texte') trouvé
+	var $codeEchappements = "%@##@%";
+	
+	
+	// constructeur
 	function sqlite_traiter_requete($query, $serveur = ''){
 		$this->query = $query;
 		$this->serveur = $serveur;
@@ -1208,17 +1221,8 @@ class sqlite_traiter_requete{
 	}
 	
 	
-	/* transformer la requete pour sqlite */
-	function traduire_requete(){
-		$analyse = new sqlite_analyse_requete($this->link, $this->query, $this->db, $this->prefixe);
-		// transformer
-		$analyse->creerLesRequetes();
-		// renvoyer
-		$this->query = $analyse->query;
-	}
-	
-	
-	/* lancer la requete $this->requete et faire le tracage si demande */
+	// lancer la requete $this->query,
+	// faire le tracage si demande 
 	function executer_requete(){
 		$t = $this->tracer ? trace_query_start(): 0;
 		//echo("<br /><b>executer_requete() $this->serveur >></b> $this->query"); // boum ? pourquoi ?
@@ -1245,175 +1249,83 @@ class sqlite_traiter_requete{
 			$r = false;	
 		}
 
-		//if (!$r){
-		//	echo "<br /><small>#erreur serveur '$this->serveur' dans &gt; $this->query</small><br />";
-		//	echo "<br />- ".spip_sqlite_error($this->query, $this->serveur);
-		//}
 		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
 			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
 		
 		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;
 	}
-}
-
-
-/*
- * Une classe simplement pour un preg_replace_callback avec des parametres 
- * dans la fonction appelee que l'on souhaite incrementer (fonction pour proteger les textes)
- * 
- * Du coup, je mets aussi les traitements a faire dedans
- * 
- */
-class sqlite_analyse_requete {
-	var $sqlite = ''; 		// la ressource link (ou objet pdo)
-	var $query = ''; 		// la requete
-	var $queryCount = ''; 	// la requete pour comptage des lignes select (sqlite3/PDO)
-	var $db = ''; 			// le nom de la bdd
-	var $prefixe = ''; 		// le prefixe des tables
-	var $debug = false; 	// spip_logguer les actions
-	var $crier = false; 	// echo des actions
-	var $textes = array(); 	// array(code=>'texte') trouvé
 	
-	var $codeEchappements = "%@##@%";
-
-
-	function sqlite_analyse_requete(&$link, $query, $db, $prefixe){
-
-		$this->sqlite 		= $link;
-		$this->query 		= $query;
-		$this->db 			= $db;
-		$this->prefixe 		= $prefixe;
-		$this->queryCount 	= "";
-
-		$this->sqlite_version = _sqlite_is_version('', $this->sqlite);
-	}
-
-
-
-	function creerLesRequetes(){
-		$this->cacherLesTextes();
-		// traitements
-		$this->corrigerTout();
-		// hop, on remet les 'textes'
-		$this->afficherLesTextes();
-	}
-	
-	
-	// enlever le contenu 'texte' des requetes
-	function cacherLesTextes(){
+		
+	// transformer la requete pour sqlite 
+	// enleve les textes, transforme la requete pour quelle soit
+	// bien interpretee par sqlite, puis remet les textes
+	// la fonction affecte $this->query
+	function traduire_requete(){
+		//
+		// 1) Protection des textes en les remplacant par des codes
+		//
 		// enlever les echappements ''
 		$this->query = str_replace("''", $this->codeEchappements, $this->query);
 		// enlever les 'textes'
 		$this->textes = array(); // vider 
 		$this->query = preg_replace_callback("/('[^']*')/", array(&$this, '_remplacerTexteParCode'), $this->query);
-	}
-
-
-	// remettre le contenu 'texte' des requetes
-	function afficherLesTextes(){
-		// remettre les 'textes'
-		foreach ($this->textes as $cle=>$val){
-			$this->query = str_replace($cle, $val, $this->query);
-		}
-		// remettre les echappements ''
-		$this->query = str_replace($this->codeEchappements,"''",$this->query);
-	}
-	
-	
-	// les corrections
-	function corrigerTout(){
-		$this->corrigerCreateDatabase();
-		$this->corrigerInsertIgnore();
-		$this->corrigerDate();
-		$this->corrigerUsing();
-		$this->corrigerField();
-		$this->corrigerTablesFrom();
-		$this->corrigerZeroAsX();
-		$this->corrigerAntiquotes();
-		$this->corrigerRegexp();
-	}
-	
-	
-	// ` => rien
-	function corrigerAntiquotes(){
-		$this->query = str_replace('`','',$this->query);	
-	}
-	
-	
-	// Create Database -> ignore
-	function corrigerCreateDatabase(){
+		
+		//
+		// 2) Corrections de la requete
+		//
+		// Correction Create Database
+		// Create Database -> requete ignoree
 		if (strpos($this->query, 'CREATE DATABASE')===0){
 			spip_log("Sqlite : requete non executee -> $this->query","sqlite");
 			$this->query = "SELECT 1";	
 		}
-	}
-
-
-	// corriger les dates avec INTERVAL
-	function corrigerDate() { 
+		
+		// Correction Insert Ignore
+		// INSERT IGNORE -> insert (tout court et pas 'insert or replace')
+		if (strpos($this->query, 'INSERT IGNORE')===0){
+			#spip_log("Sqlite : requete transformee -> $this->query","sqlite");
+			$this->query = 'INSERT ' . substr($this->query,'13');	
+		}
+		
+		// Correction des dates avec INTERVAL
 		if (strpos($this->query, 'INTERVAL')!==false){
 			$this->query = preg_replace_callback("/DATE_(ADD|SUB).*INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U", 
 							array(&$this, '_remplacerDateParTime'), 
 							$this->query);
 		}
-	}
-	
-	
-	// FIELD (issu de pg) a tester !
-	function corrigerField(){
+		
+		// Correction Using
+		// USING (inutile et non reconnu en sqlite2)
+		if (($this->sqlite_version == 2) && (strpos($this->query, "USING")!==false)) {
+			$this->query = preg_replace('/USING\s*\([^\)]*\)/', '', $this->query);
+		}
+		
+		// Correction Field
+		// remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
 		if (strpos($this->query, 'FIELD')!==false){
 			$this->query = preg_replace_callback('/FIELD\s*\(([^\)]*)\)/', 
 							array(&$this, '_remplacerFieldParCase'), 
 							$this->query); 
 		}
-	}
-
-	
-	// INSERT IGNORE -> insert (tout court et pas 'insert or replace')
-	function corrigerInsertIgnore(){
-		if (strpos($this->query, 'INSERT IGNORE')===0){
-			#spip_log("Sqlite : requete transformee -> $this->query","sqlite");
-			$this->query = 'INSERT ' . substr($this->query,'13');	
-		}				
-	}	
-	
-	// critere REGEXP non reconnu en sqlite2
-	function corrigerRegexp(){
-		if (($this->sqlite_version == 2) && (strpos($this->query, 'REGEXP')!==false)){
-			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP($4, $1)', $this->query);
-		}
-	}
-	
-	// mettre les bons noms de table dans from, update, insert, replace...
-	function corrigerTablesFrom(){	
+		
+		// Correction des noms de tables FROM
+		// mettre les bons noms de table dans from, update, insert, replace...
 		if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $this->query, $regs)) {
 			$suite = strstr($this->query, $regs[0]);
 			$this->query = substr($this->query, 0, -strlen($suite));
 		} else $suite ='';
-
 		$pref = ($this->prefixe) ? $this->prefixe . "_": "";
 		$this->query = preg_replace('/([,\s])spip_/', '\1'.$pref, $this->query) . $suite;
-		#spip_log("_sqlite_traite_query: " . substr($this->query,0, 50) . ".... $this->db, $this->prefixe");	
-	}
 		
-		
-	// USING (inutile et non reconnu en sqlite2)
-	function corrigerUsing(){
-		if (($this->sqlite_version == 2) && (strpos($this->query, "USING")!==false)) {
-			$this->query = preg_replace('/USING\s*\([^\)]*\)/', '', $this->query);
-		}
-	}
-
-
-	// pg n'aime pas 0+x AS alias, sqlite, dans le meme style, 
-	// sqlite n'apprecie pas du tout SELECT 0 as x ... ORDER BY x
-	// il dit que x ne doit pas être un integer dans le orger by !
-	// on remplace du coup x par vide() dans ce cas uniquement
-	//
-	// rien que pour public/vertebrer.php ?
-	function corrigerZeroAsX(){
+		// Correction zero AS x
+		// pg n'aime pas 0+x AS alias, sqlite, dans le meme style, 
+		// n'apprecie pas du tout SELECT 0 as x ... ORDER BY x
+		// il dit que x ne doit pas être un integer dans le order by !
+		// on remplace du coup x par vide() dans ce cas uniquement
+		//
+		// rien que pour public/vertebrer.php ?
 		if ((strpos($this->query, "0 AS")!==false)){
-			// on ne remplace que dans ORDER BY ou GROUP BY 		
+			// on ne remplace que dans ORDER BY ou GROUP BY
 			if (preg_match('/\s(ORDER|GROUP) BY\s/i', $this->query, $regs)) {
 				$suite = strstr($this->query, $regs[0]);
 				$this->query = substr($this->query, 0, -strlen($suite));
@@ -1427,18 +1339,37 @@ class sqlite_analyse_requete {
 				$this->query .= $suite;
 			}
 		}
+		
+		// Correction Antiquotes
+		// ` => rien
+		$this->query = str_replace('`','',$this->query);
+		
+		// Correction critere REGEXP, non reconnu en sqlite2
+		if (($this->sqlite_version == 2) && (strpos($this->query, 'REGEXP')!==false)){
+			$this->query = preg_replace('/([^\s\(]*)(\s*)REGEXP(\s*)([^\s\)]*)/', 'REGEXP($4, $1)', $this->query);
+		}
+		
+		
+		//
+		// 3) Remise en place des textes d'origine
+		//
+		// remettre les 'textes'
+		foreach ($this->textes as $cle=>$val){
+			$this->query = str_replace($cle, $val, $this->query);
+		}
+		// remettre les echappements ''
+		$this->query = str_replace($this->codeEchappements,"''",$this->query);
 	}
 	
-	
-	// les callbacks
-	
+
+
+	// les callbacks	
 	// remplacer DATE_ / INTERVAL par DATE...strtotime
 	function _remplacerDateParTime($matches){
 		$op = strtoupper($matches[1] == 'ADD')?'+':'-';	
 		return "'".date("Y-m-d H:i:s", strtotime(" $op$matches[2] ".strtolower($matches[3])))."'";
-	}	
+	}
 
-	
 	// callback ou l'on remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
 	function _remplacerFieldParCase($matches){
 		$fields = substr($matches[0],6,-1); // ne recuperer que l'interieur X de field(X)
@@ -1454,12 +1385,12 @@ class sqlite_analyse_requete {
 		return "CASE $res ELSE 0 END ";			
 	}
 
-
 	// callback ou l'on sauve le texte qui est cache dans un tableau $this->textes
 	function _remplacerTexteParCode($matches){
 		$this->textes[$code = "%@##".count($this->textes)."##@%"] = $matches[1];
 		return $code;	
 	}
-		
+
 }
+
 ?>
