@@ -47,3 +47,13 @@
 	</div></form>
 	]
 </div>
+<script type="text/javascript">
+	jQuery('.action .delete').click(function(){
+		jQuery(this).parents('tr').addClass('remove').animate({opacity: "0.0"}, 'fast');
+	});
+	/* necessite le plugin jquery.color.js */
+	jQuery('tr.append').each(function(){
+		jQuery(this).css('opacity','0.0').animate({opacity: "1.0"}, 'slow').animate({backgroundColor: '#ffffff'}, 'slow',function(){jQuery(this).removeClass('append');});
+	});
+
+</script>
