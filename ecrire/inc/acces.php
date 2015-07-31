@@ -42,7 +42,7 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 }
 
 //
-// Creer un identifiant aleatoire (a fusionnner avec le precedent ?)
+// Creer un identifiant aleatoire
 //
 
 // http://doc.spip.org/@creer_uniqid
@@ -122,7 +122,6 @@ function initialiser_sel() {
 	if (CRYPT_MD5) $htsalt = '$1$'.creer_pass_aleatoire();
 	else return "";
 }
-
 
 // Cette fonction ne sert qu'a la connexion en mode http_auth.non LDAP
 // Son role est de creer le fichier htpasswd

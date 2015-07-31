@@ -63,9 +63,16 @@ function generer_url_document_dist($id_document, $args='', $ancre='') {
 	// par exemple acces_restreint
 	if ($GLOBALS['meta']["creer_htaccess"] == 'oui'
 	AND $row['distant'] != 'oui') {
-	  $args .= ($args ? "&" : '') . "arg=$id_document&file=" . rawurlencode($row['fichier']) . ($ancre ? "&ancre=$ancre" : '');
+		include_spip('inc/securiser_action');
+		$args .= ($args ? "&" : '')
+			. 'arg='.$id_document
+			. ($ancre ? "&ancre=$ancre" : '')
+			. '&cle=' . calculer_cle_action($id_document.','.$row['fichier'])
+			. '&file=' . rawurlencode($row['fichier'])
+			;
 		return generer_url_action('acceder_document', $args);
-	} else	return get_spip_doc($row['fichier']);
+	} else
+		return get_spip_doc($row['fichier']);
 }
 
 //

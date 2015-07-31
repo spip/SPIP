@@ -25,8 +25,8 @@ function action_acceder_document_dist() {
 	include_spip('inc/documents');
 
 	// $file exige pour eviter le scan id_document par id_document
-	$file = rawurldecode(_request('file'));
-	$file = get_spip_doc($file);
+	$f = rawurldecode(_request('file'));
+	$file = get_spip_doc($f);
 	$arg = rawurldecode(_request('arg'));
 
 	$status = $dcc = false;
@@ -57,8 +57,10 @@ function action_acceder_document_dist() {
 
 			//
 			// Verifier les droits de lecture du document
+			// en controlant la cle passee en argument
 			//
-			if (!autoriser('voir', 'document', $doc['id_document']))
+			include_spip('inc/securiser_action');
+			if (_request('cle') != calculer_cle_action($doc['id_document'].','.$f))
 				$status = 403;
 		}
 	}
