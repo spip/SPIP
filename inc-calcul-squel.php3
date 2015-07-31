@@ -278,8 +278,9 @@ function parser_boucle($texte, $id_parent) {
 						$doublons = 'oui';
 						$req_where[] = "$table.$id_objet NOT IN (\$id_doublons[$type])";
 					}
-					else if (ereg('^lang_select(=(oui|non))?$', $param, $match)) {
-						if (!$lang_select = $match[2]) $lang_select = 'oui';
+					else if (ereg('^(!)? *lang_select(=(oui|non))?$', $param, $match)) {
+						if (!$lang_select = $match[3]) $lang_select = 'oui';
+						if ($match[1]) $lang_select = ($lang_select=='oui')?'non':'oui';
 					}
 					else if (ereg('^ *"([^"]*)" *$', $param, $match)) {
 						$separateur = ereg_replace("'","\'",$match[1]);

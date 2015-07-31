@@ -63,32 +63,33 @@ export_objets($query, "groupe_mots", $f, $gz, $etape, 7, _T('info_sauvegarde_gro
 $query = "SELECT * FROM spip_breves".$debug_limit;
 export_objets($query, "breve", $f, $gz, $etape, 8, _T('info_sauvegarde_breves'));
 
-//$query = "SELECT * FROM spip_messages";
-//export_objets($query, "message", $f, $gz, $etape, 9, _T('info_sauvegarde_messages'));
+$query = "SELECT * FROM spip_messages";
+export_objets($query, "message", $f, $gz, $etape, 9, _T('info_sauvegarde_messages'));
 
 $query = "SELECT * FROM spip_forum".$debug_limit;
-export_objets($query, "forum", $f, $gz, $etape, 9, _T('info_sauvegarde_forums'));
+export_objets($query, "forum", $f, $gz, $etape, 10, _T('info_sauvegarde_forums'));
 
 $query = "SELECT * FROM spip_petitions";
-export_objets($query, "petition", $f, $gz, $etape, 10, _T('info_sauvegarde_petitions'));
+export_objets($query, "petition", $f, $gz, $etape, 11, _T('info_sauvegarde_petitions'));
 
 $query = "SELECT * FROM spip_signatures".$debug_limit;
-export_objets($query, "signature", $f, $gz, $etape, 11, _T('info_sauvegarde_signatures'));
+export_objets($query, "signature", $f, $gz, $etape, 12, _T('info_sauvegarde_signatures'));
 
 $query = "SELECT * FROM spip_syndic";
-export_objets($query, "syndic", $f, $gz, $etape, 12, _T('info_sauvegarde_sites_references'));
+export_objets($query, "syndic", $f, $gz, $etape, 13, _T('info_sauvegarde_sites_references'));
 
 $query = "SELECT * FROM spip_syndic_articles".$debug_limit;
-export_objets($query, "syndic_article", $f, $gz, $etape, 13, _T('info_sauvegarde_articles_sites_ref'));
+export_objets($query, "syndic_article", $f, $gz, $etape, 14, _T('info_sauvegarde_articles_sites_ref'));
 
-/*$query = "SELECT * FROM spip_visites".$debug_limit;
-export_objets($query, "spip_visite", $f, $gz, $etape, 14, _T('info_sauvegarde_visites'));
+$query = "SELECT * FROM spip_visites".$debug_limit;
+export_objets($query, "spip_visite", $f, $gz, $etape, 15, _T('info_sauvegarde_visites'));
 
 $query = "SELECT * FROM spip_referers".$debug_limit;
-export_objets($query, "spip_referers", $f, $gz, $etape, 15, _T('info_sauvegarde_refers'));
-*/
+export_objets($query, "spip_referers", $f, $gz, $etape, 16, _T('info_sauvegarde_refers'));
 
-if (!$etape OR $etape == 13){
+$etape_finale = 16;	// ici noter le numero de la derniere etape, ci-dessus
+
+if (!$etape OR $etape == $etape_finale){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
 	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='index.php3'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 }
@@ -102,7 +103,7 @@ install_fin_html();
 if ($gz) gzclose($f);
 else fclose($f);
 
-if (!$etape OR $etape == 14) fin_admin($action);
+if (!$etape OR $etape == $etape_finale) fin_admin($action);
 
 exit;
 
