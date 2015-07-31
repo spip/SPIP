@@ -115,8 +115,8 @@ function surcharger_langue($fichiers) {
 //
 // http://doc.spip.org/@inc_traduire_dist
 function inc_traduire_dist($ori, $lang) {
-
 	static $deja_vu = array();
+	static $local = array();
   
 	if (isset($deja_vu[$lang][$ori]))
 		return $deja_vu[$lang][$ori];
@@ -138,11 +138,15 @@ function inc_traduire_dist($ori, $lang) {
 			charger_langue($lang, $module);
 
 			// surcharge perso -- on cherche (lang/)local_xx.php ...
-			if ($f = chercher_module_lang('local', $lang))
-				surcharger_langue($f);
+			if (!isset($local['local_'.$lang]))
+				$local['local_'.$lang] = chercher_module_lang('local', $lang);
+			if ($local['local_'.$lang])
+				surcharger_langue($local['local_'.$lang]);
 			// ... puis (lang/)local.php
-			if ($f = chercher_module_lang('local'))
-				surcharger_langue($f);
+			if (!isset($local['local']))
+				$local['local'] = chercher_module_lang('local');
+			if ($local['local'])
+				surcharger_langue($local['local']);
 		}
 		if (isset($GLOBALS[$var][$code])) {
 			$text = $GLOBALS[$var][$code];
