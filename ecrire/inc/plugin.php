@@ -463,6 +463,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 		else $plugin = $plugin_valides;
 	}
 	$actifs_avant = $GLOBALS['meta']['plugin'];
+
+	// si une fonction de gestion de dependances existe, l'appeler ici
+	if ($ajouter_dependances = charger_fonction("ajouter_dependances","plugins",true)){
+		$plugin = $ajouter_dependances($plugin);
+	}
+
 	// recharger le xml des plugins a activer
 	// on forcer le reload ici, meme si le fichier xml n'a pas change
 	// pour ne pas rater l'ajout ou la suppression d'un fichier fonctions/options/administrations
