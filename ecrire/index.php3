@@ -156,29 +156,22 @@ if ($spip_display != 4) {
 	// Afficher le calendrier du mois s'il y a des rendez-vous
 	//
 	
-		$today = getdate(time());
-		$jour_today = $today["mday"];
-		$mois_today = $today["mon"];
-		$annee_today = $today["year"];
-		$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
-		$mois = mois($date);
-		$annee = annee($date);
-		$jour = jour($date);
-	
-		// rendez-vous personnels dans le mois
-		$evt = sql_calendrier_agenda($mois, $annee);
-		if ($evt) 
-		  echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3', '', $evt);
+	$mois = date("m");
+	$annee = date("Y");
+	$jour = date("d");
 
-		// et ceux du jour
-		$evt = date("Y-m-d");
-		$evt = sql_calendrier_interval_rv("'$evt'", "'$evt 23:59:59'");
+	$evt = sql_calendrier_agenda($annee, $mois);
+	if ($evt) 
+		echo http_calendrier_agenda ($annee, $mois, $jour, $mois, $annee, false, 'calendrier.php3', '', $evt);
 
-		if ($evt) 
-		  {
-		    echo http_calendrier_entetecol('calendrier.php3',$jour_today,$mois_today,$annee_today);
-		    echo http_calendrier_jour($jour_today,$mois_today,$annee_today, 90, $partie_cal, $echelle, '', '', '', array('', $evt));
-		  }
+	// et ceux du jour
+	$evt = date("Y-m-d");
+	$evt = sql_calendrier_interval_rv("'$evt'", "'$evt 23:59:59'");
+
+	if ($evt) {
+		echo http_calendrier_ics_titre($annee,$mois,$jour,'calendrier.php3');
+		echo http_calendrier_ics($annee, $mois, $jour, $echelle, $partie_cal, 90, array('', $evt));
+	}
 }
 
 debut_droite();

@@ -1994,6 +1994,11 @@ function afficher_menu_rubriques() {
 }
 
 
+function afficher_javascript ($html) {
+	  return http_script("
+document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
+}
+
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
 	global $couleurs_spip;
 	global $couleur_foncee;
@@ -2376,10 +2381,6 @@ else {
 	//
 	// Barre des gadgets
 	//
-	function afficher_javascript ($html) {
-	  return http_script("
-document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
-	}
 
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
 
@@ -2548,7 +2549,7 @@ document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
 			$gadget .= "<table><tr>";
 			$gadget .= "<td valign='top' width='200'>";
 				$gadget .= "<div>";
-				$gadget .= http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3');
+				$gadget .= http_calendrier_agenda($annee_today, $mois_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3');
 				$gadget .= "</div>";
 				$gadget .= "</td>";
 				if ($afficher_cal) {

@@ -70,6 +70,21 @@ a.calendrier-annee:hover {
   	vertical-align: top;
  }
 
+.calendrier-td { 
+	width: 14%;
+  	vertical-align: top;
+ }
+
+.calendrier-th { 
+	width: 14%;
+	padding: 5px;
+	text-align: center; 
+  	vertical-align: center;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: Verdana, Arial, Sans, sans-serif;
+ }
+
 .calendrier-table-etroit  .calendrier-td-gauche {
 	width: 0px;
   	vertical-align: top;
@@ -91,9 +106,8 @@ a.calendrier-annee:hover {
  }
 
 .calendrier-jour { 
+	position: relative; 
 	color: #999999;
-	background-color: white;
-	border: 1px solid #aaaaaa;
 }
 
 .calendrier-agenda { 

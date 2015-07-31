@@ -18,23 +18,20 @@ include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
-
-$id_rubrique = intval($id_rubrique);
-$flag_mots = lire_meta("articles_mots");
-
 //
 // Gerer les modifications...
 //
 
 $id_parent = intval($id_parent);
 $id_rubrique = intval($id_rubrique);
+$flag_mots = lire_meta("articles_mots");
 $flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
 
-if ($modifier_rubrique == "oui") {
-	calculer_rubriques();
-}
 
-if ($titre) {
+if (!$titre) {
+	if ($modifier_rubrique == "oui") calculer_rubriques();
+}
+else {
 	// creation, le cas echeant
 	if ($new == 'oui' AND $flag_editable AND !$id_rubrique) {
 		$id_rubrique = spip_abstract_insert("spip_rubriques", 
@@ -49,33 +46,25 @@ if ($titre) {
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
-	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique'";
-	$row = spip_fetch_array(spip_query($query));
-	if (($row['cnt'] > 0) and !($confirme_deplace == 'oui')) {
+
+	if ((spip_num_rows(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 0,1")) > 0)
+	AND ($confirme_deplace != 'oui')) {
 		$id_parent = 0;
 	}
 
-	// verifier qu'on envoie bien dans une rubrique autorisee
-	if (acces_rubrique($id_parent)) {
-		$change_parent = "id_parent=\"$id_parent\",";
-	}
-	else {
-		$change_parent = "";
-	}
-
-	$titre = addslashes($titre);
-	$descriptif = addslashes($descriptif);
-	$texte = addslashes($texte);
-
-	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
-	} else
-		$add_extra = '';
-
 	if ($flag_editable) {
-		$query = "UPDATE spip_rubriques SET $change_parent titre='$titre', descriptif='$descriptif', texte='$texte' $add_extra WHERE id_rubrique=$id_rubrique";
-		$result = spip_query($query);
+
+		if ($champs_extra) {
+			include_ecrire("inc_extra.php3");
+			$champs_extra = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
+		} 
+		spip_query("UPDATE spip_rubriques SET " .
+(acces_rubrique($id_parent) ? "id_parent=\"$id_parent\"," : "") . "
+titre='" . addslashes($titre) ."',
+descriptif='" . addslashes($descriptif) . "',
+texte='" . addslashes($texte) . "'
+$champs_extra
+WHERE id_rubrique=$id_rubrique");
 	}
 
 	calculer_rubriques();
@@ -90,7 +79,7 @@ if ($titre) {
 		include_ecrire ("inc_index.php3");
 		indexer_rubrique($id_rubrique);
 	}
-}
+ }
 
 //
 // Appliquer le changement de langue
@@ -114,10 +103,7 @@ if ($changer_lang AND $id_rubrique>0 AND lire_meta('multi_rubriques') == 'oui' A
 // infos sur cette rubrique
 //
 
-$query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
-$result=spip_query($query);
-
-while($row=spip_fetch_array($result)){
+if ($row=spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'"))){
 	$id_rubrique=$row['id_rubrique'];
 	$id_parent=$row['id_parent'];
 	$titre=$row['titre'];
@@ -187,12 +173,10 @@ if ($spip_display != 4) {
 	//
 	debut_raccourcis();
 	
-	$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-	$result = spip_query($query);
-	
+
 	icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
 	
-	if (spip_num_rows($result) > 0) {
+	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 0,1")) > 0) {
 		if ($id_rubrique > 0)
 			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif","creer.gif");
 	
