@@ -195,8 +195,8 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 	$varname = "texte$nb_texte";
 	$texte_plus = $$varname;	// double $ pour obtenir $texte1, $texte2...
 	if ($texte_plus){
-		$texte_plus = ereg_replace("<!--SPIP-->[\n\r]*","\n\n\n",$texte_plus);
-		$texte_ajout .= " ".$texte_plus;
+		$texte_plus = ereg_replace("<!--SPIP-->[\n\r]*","",$texte_plus);
+		$texte_ajout .= $texte_plus;
 	} else {
 		break;
 	}
