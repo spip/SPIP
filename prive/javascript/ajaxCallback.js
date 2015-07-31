@@ -15,8 +15,9 @@ if(!jQuery.load_handlers) {
     for ( var i = 0; i < jQuery.load_handlers.length; i++ )
 			jQuery.load_handlers[i].apply( root );
 	};
-	
-	jQuery.fn._load = jQuery.fn.load;
+
+	// jQuery uses _load, we use _ACBload
+	jQuery.fn._ACBload = jQuery.fn.load;
 	
 	jQuery.fn.load = function( url, params, callback ) {
 	
@@ -33,10 +34,10 @@ if(!jQuery.load_handlers) {
 		}
 		var callback2 = function(res,status) {triggerAjaxLoad(this);callback(res,status);};
 		
-		return this._load( url, params, callback2 );
+		return this._ACBload( url, params, callback2 );
 	};
 
-	jQuery._ajax = jQuery.ajax;
+	jQuery._ACBajax = jQuery.ajax;
 	
 	jQuery.ajax = function(type) {
 		//If called by _load exit now because the callback has already been set
@@ -51,7 +52,7 @@ if(!jQuery.load_handlers) {
 				orig_complete(res,status);
 				if(!dataType && !xml || dataType == "html") triggerAjaxLoad(document);
 		};
-		return jQuery._ajax(type); 
+		return jQuery._ACBajax(type);
 	};
 
 }
