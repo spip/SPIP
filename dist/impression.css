@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  on affiche l'URL cible a la suite des liens sortants (!)
 ---------------------------------------------- */
 a { color: #520; text-decoration: underline; }
-a.spip_out:after, a.spip_glossaire:after { display: inline; content: " [" attr(href) "]"; }
+a.spip_out:after, a.spip_glossaire:after,a.spip_mailto:after { display: inline; content: " [" attr(href) "]"; }
 
 
 /*  Un peu de coquetterie

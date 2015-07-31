@@ -59,6 +59,7 @@ table.spip_barre input.barre { width: 99%; background: transparent; border: 0; c
 a.spip_note {} /* liens vers notes de bas de page */
 a.spip_in { color: #900; } /* liens internes */
 a.spip_out { color: #009; } /* liens sortants */
+a.spip_mailto:before { content: "\002709"; } /* liens vers un email */
 a.spip_url { color: #009; } /* liens url sortants */
 a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
 a.spip_glossaire:hover { text-decoration: underline overline; }
