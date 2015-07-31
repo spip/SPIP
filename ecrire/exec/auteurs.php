@@ -292,37 +292,40 @@ function auteurs_href($clic, $args='', $att='')
 // http://doc.spip.org/@requete_auteurs
 function requete_auteurs($tri, $statut, $recherche=NULL)
 {
-	global $connect_statut, $spip_lang, $connect_id_auteur;
+	global $connect_id_auteur;
 
-	//
-	// Construire la requete
-	//
-	
 	// si on n'est pas minirezo, ignorer les auteurs sans article
 	// sauf les admins, toujours visibles.
 
 	// limiter les statuts affiches
-	if ($connect_statut == '0minirezo') {
+	if (autoriser('voir', 'auteur')) {
 		if ($statut[0]=='!') {
 			  $statut = substr($statut,1); $not = "NOT";
 		} else $not = '';
 		$visit = !statut_min_redac($statut);
 		$statut = preg_split('/\W+/', $statut); 
-		$sql_visible = sql_in("aut.statut", $statut, $not);
+		$where = sql_in("aut.statut", $statut, $not);
 	} else {
-		$sql_visible = "(
+		$where = "(
 			aut.statut = '0minirezo'
 			OR aut.id_auteur=$connect_id_auteur
 			OR " . sql_in('art.statut', array('prop', 'publie'))
 		. ')';
 		$visit = false;
 	}
+	if ($recherche) $where .= " AND $recherche" ;
+	return requete_auteurs_tri($tri, $where, $visit);
+}
+
+function requete_auteurs_tri($tri, $where, $visit=false)
+{
+	global $spip_lang;
 
 	$sql_sel = '';
 	$join = $visit ?
 	 ""
 	 : 
-	 (strpos($sql_visible,'art.statut')?("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" . " LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)"):"");
+	 (strpos($where,'art.statut')?("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" . " LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)"):"");
 	
 	// tri
 	switch ($tri) {
@@ -332,7 +335,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 		$join = $visit ?
 		 "LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur"
 		 : ("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur" 
-		. (strpos($sql_visible,'art.statut')?" LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)":""));
+		. (strpos($where,'art.statut')?" LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)":""));
 		break;
 	
 	case 'site':
@@ -361,9 +364,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 				"UPPER(aut.nom) AS unom", 
 				$sql_sel),array('',null)),
 		     'FROM' => "spip_auteurs AS aut $join",
-		     'WHERE' => $sql_visible . ($recherche 
-				? " AND $recherche" 
-				: ''),
+		     'WHERE' => $where,
 		     'GROUP BY' => "aut.statut, aut.nom_site, aut.nom, aut.id_auteur", 
 		     'ORDER BY' => $sql_order);
 }
