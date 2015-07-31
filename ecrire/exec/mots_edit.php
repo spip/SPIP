@@ -56,7 +56,7 @@ global  $champs_extra, $connect_statut, $spip_display, $les_notes;
 			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
 			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		}
-		$res = spip_num_rows(spip_query("SELECT id_groupe FROM spip_groupes_mots ". ($table ? "WHERE $table='oui'" : '') . " LIMIT 1"));
+		$res = sql_countsel('spip_groupes_mots', ($table ? "$table='oui'" : ''));
 
 		if (!$res) {
 		  // cas pathologique: 

@@ -78,7 +78,7 @@ function exec_naviguer_dist()
 		$parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		if (!$parent['id_parent']) {
 		  list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
-		  $n_forums = spip_num_rows(spip_query("SELECT id_forum FROM $from" .($where ? (" WHERE $where") : '')));
+		  $n_forums = sql_countsel($from, $where);
 		}
 	}
 	$iconifier = charger_fonction('iconifier', 'inc');

@@ -29,19 +29,11 @@ function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $excl
 	$ordre = array();
 	$rub = array();
 
-	$res = spip_query("
-	SELECT
-		rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie, rub2.id_rubrique AS id_enfant
-		FROM spip_rubriques AS rub1
-		LEFT JOIN spip_rubriques AS rub2
-		ON (rub1.id_rubrique = rub2.id_parent)
-		WHERE rub1.id_parent = "._q($id_rubrique)."
-		AND rub1.id_rubrique!="._q($exclu)."
-		AND (rub2.id_rubrique IS NULL OR rub2.id_rubrique!="._q($exclu).")
-	GROUP BY rub1.id_rubrique
-	ORDER BY 0+rub1.titre,rub1.titre
-	"
-	);
+	$res = sql_select("rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie, rub2.id_rubrique AS id_enfant",
+			  "spip_rubriques AS rub1 LEFT JOIN spip_rubriques AS rub2 ON (rub1.id_rubrique = rub2.id_parent)",
+			  "rub1.id_parent = "._q($id_rubrique)."
+			AND rub1.id_rubrique!="._q($exclu)."
+			AND (rub2.id_rubrique IS NULL OR rub2.id_rubrique!="._q($exclu).")",  "rub1.id_rubrique", "0+rub1.titre,rub1.titre");
 
 	while ($row = sql_fetch($res)) {
 		if (autoriser('voir','rubrique',$row['id_rubrique'])){

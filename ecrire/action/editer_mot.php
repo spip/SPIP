@@ -48,7 +48,7 @@ function action_editer_mot_post($r)
 	if ($nouv_mot ? $nouv_mot : ($nouv_mot = _request('nouv_mot'))) {
 		// recopie de:
 		// inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
-		$result = spip_num_rows(spip_query("SELECT id_mot FROM spip_mots_$table WHERE id_mot="._q($nouv_mot)." AND $table_id=$id_objet"));
+		$result = sql_countsel("spip_mots_$table", "id_mot=".intval($nouv_mot)." AND $table_id=$id_objet");
 		if (!$result)
 			spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ("._q($nouv_mot).", $id_objet)");
 	}
