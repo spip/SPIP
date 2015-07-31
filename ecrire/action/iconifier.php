@@ -36,7 +36,7 @@ function action_iconifier_dist()
 	elseif ($r[1] == '+')
 		action_spip_image_ajouter_dist($r[2], _request('sousaction2'), _request('source'));
 	else	action_spip_image_effacer_dist($r[2]);
-	
+
 	if(_request("iframe") == 'iframe') {
 		$redirect = urldecode($iframe_redirect)."&iframe=iframe";
 		redirige_par_entete(urldecode($redirect));
@@ -61,8 +61,8 @@ function action_spip_image_effacer_dist($arg) {
 
 
 /**
- * Permet d'ajouter un logo sur un objet, dont on passe le nom 
- * 
+ * Permet d'ajouter un logo sur un objet, dont on passe le nom
+ *
  * @example
  *     ```
  *     $logo = &$_FILES['logo_propose'];
@@ -70,7 +70,7 @@ function action_spip_image_effacer_dist($arg) {
  *     $spip_image_ajouter = charger_fonction('spip_image_ajouter','action');
  *     $spip_image_ajouter('arton'.$id_article,true,$logo);
  *     ```
- * 
+ *
  * @param string $arg
  *     Nom de l'image pour l'objet tel que `arton4`
  * @param bool $sousaction2
@@ -78,7 +78,10 @@ function action_spip_image_effacer_dist($arg) {
  *     - true pour le passer en 3e paramètre
  * @param string $source
  *     Chemin du logo uploadé sur le serveur en attente d'utilisation
- * @return void
+ * @param bool $return
+ *     true pour retourner les textes d'erreurs éventuels
+ * @return void|string
+ *     Rien ou texte d'erreur éventuel avec $return à true
 **/
 function action_spip_image_ajouter_dist($arg,$sousaction2,$source,$return=false) {
 	global $formats_logos;
@@ -94,7 +97,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source,$return=false)
 	else {
 		$f =_DIR_LOGOS . $arg . '.tmp';
 
-		if (!is_array($source)) 
+		if (!is_array($source))
 		// fichier dans upload/
 	  		$source = @copy(determine_upload() . $source, $f);
 		else {
@@ -148,7 +151,7 @@ function action_spip_image_ajouter_dist($arg,$sousaction2,$source,$return=false)
 			$erreur = _T('info_logo_format_interdit',
 									array('formats' => join(', ', $formats_logos)));
 		}
-	
+
 	}
 	if ($erreur){
 		if ($return)
