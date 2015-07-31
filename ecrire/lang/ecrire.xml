@@ -66,7 +66,9 @@
 	<langue code="it_fem" />
 	<langue code="ja" />
 	<langue code="km" />
-	<langue code="lb" />
+	<langue code="lb" url="http://trad.spip.org/tradlang_module/ecrire_?lang_cible=lb">
+		<traducteur nom="klaus++" lien="http://trad.spip.org/auteur/klaus" />
+	</langue>
 	<langue code="my" />
 	<langue code="nl" url="http://trad.spip.org/tradlang_module/ecrire_?lang_cible=nl">
 		<traducteur nom="mpossoz" lien="http://trad.spip.org/auteur/mpossoz" />
