@@ -187,7 +187,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_nom_fonction_interdit' => 'نام تابع مجاز نمیباشد',
 'erreur_plugin_nom_manquant' => 'نام plugin یافت نمیشود',
 'erreur_plugin_prefix_manquant' => 'بخش نامگذاری plugin کامل نمیباشد',
-'erreur_plugin_tag_plugin_absent' => 'plugin در فایل توضیحی موجود نمیباشد',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; در فایل توضیحی موجود نمیباشد',
 'erreur_plugin_version_manquant' => 'نسخه ی plugin موجود نمیباشد',
 
 // F

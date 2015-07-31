@@ -191,7 +191,7 @@ französischen SPIP-Dokumentation</a>.',
 'erreur_plugin_nom_fonction_interdit' => 'Unzulässiger Funktionsname',
 'erreur_plugin_nom_manquant' => 'Name des Plugin fehlt',
 'erreur_plugin_prefix_manquant' => 'Namespace des Plugin nicht definiert',
-'erreur_plugin_tag_plugin_absent' => 'fehlt in der Definitionsdatei', # modif
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; fehlt in der Definitionsdatei',
 'erreur_plugin_version_manquant' => 'Version des Plugin fehlt',
 
 // F
