@@ -299,6 +299,9 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
 
 /**
  * Copier de base a base
+ *
+ * @param string $status_file
+ *   nom avec chemin complet du fichier ou est stocke le status courant
  * @param array $tables
  *   liste des tables a copier
  * @param string $serveur_source
@@ -311,12 +314,13 @@ function base_preparer_table_dest($table, $desc, $serveur_dest, $init=false) {
  *   vider les tables sources apres copie
  * @param array $no_erase_dest
  *   liste des tables a ne pas vider systematiquement (ne seront videes que si existent dans la base source)
+ * @param array $where
+ *   liste optionnelle de condition where de selection des donnees pour chaque table
  * @return <type>
  */
-function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false, $no_erase_dest = array()) {
+function base_copier_tables($status_file, $tables, $serveur_source, $serveur_dest, $callback_progression = '', $max_time=0, $drop_source = false, $no_erase_dest = array(), $where=array()) {
 	spip_log("Copier ".count($tables)." tables de '$serveur_source' vers '$serveur_dest'",'dump');
 
-	$status_file = _DIR_TMP . "dump-copy-".md5(serialize($tables)."-$serveur_source-$serveur_dest").".txt";
 	if (!lire_fichier($status_file, $status)
 		OR !$status = unserialize($status))
 		$status = array();
@@ -361,7 +365,7 @@ function base_copier_tables($tables, $serveur_source, $serveur_dest, $callback_p
 				while (true) {
 					$n = intval($status['tables_copiees'][$table]);
 					// on copie par lot de 400
-					$res = sql_select('*',$table,'','','',"$n,400",'',$serveur_source);
+					$res = sql_select('*',$table,isset($where[$table])?$where[$table]:'','','',"$n,400",'',$serveur_source);
 					while ($row = sql_fetch($res,$serveur_source)){
 						// si l'enregistrement est deja en base, ca fera un echec ou un doublon
 						sql_insertq($table,$row,$desc_dest,$serveur_dest);
