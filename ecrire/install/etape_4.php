@@ -19,7 +19,7 @@ function install_etape_4_dist()
 {
 	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod, $table_prefix;
 	if (isset($_REQUEST['table_prefix'])) {
-		$table_prefix = $_REQUEST['table_prefix'];
+		$table_prefix = trim($_REQUEST['table_prefix']);
 	}
 
 	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
