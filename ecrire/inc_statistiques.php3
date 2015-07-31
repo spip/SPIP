@@ -245,7 +245,7 @@ function supprimer_referers($type = "") {
 	}
 
 	$query = "DELETE FROM $table WHERE date < DATE_SUB(NOW(),INTERVAL 7 DAY)";
-	if ($visites_min) $query .= " OR visites <= $visites_min";
+	if ($visites_min) $query .= " AND visites <= $visites_min";
 	$result = spip_query($query);
 }
 
