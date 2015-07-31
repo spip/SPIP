@@ -144,6 +144,8 @@ function suivre_invalideur($cond, $modif=true) {
  *
  *     - atime : timestamp pour ne supprimer que les fichiers antérieurs
  *       à cette date (via fileatime)
+ *     - mtime : timestamp pour ne supprimer que les fichiers antérieurs
+ *       à cette date (via filemtime)
  *     - limit : nombre maximum de suppressions
  * @return int
  *     Nombre de fichiers supprimés
@@ -159,8 +161,9 @@ function purger_repertoire($dir, $options=array()) {
 		if ($fichier[0] == '.') continue;
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
-			if (!isset($options['atime'])
-			OR (@fileatime($chemin) < $options['atime'])) {
+			if (  (!isset($options['atime']) OR (@fileatime($chemin) < $options['atime']))
+				AND (!isset($options['mtime']) OR (@filemtime($chemin) < $options['mtime']))
+			  ) {
 				supprimer_fichier($chemin);
 				$total ++;
 			}
