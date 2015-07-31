@@ -937,7 +937,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 	'titre_conflit_edition' => 'Bearbeitungskonflikt',
 	'titre_connexion_ldap' => 'Optionen: <b>LDAP-Verbindung</b>',
 	'titre_groupe_mots' => 'KATEGORIE:',
-	'titre_identite_site' => 'Identität der Website',
+	'titre_identite_site' => 'Name der Website', # &quot;Identité du site&quot; war &quot;Identität der Website&quot;, jetzt &quot;Name der Website&quot;, auch möglich &quot;Websitebezeichnung&quot; o.ä.
 	'titre_langue_article' => 'Sprache des Artikels',
 	'titre_langue_rubrique' => 'Sprache der Rubrik',
 	'titre_langue_trad_article' => 'SPRACHE UND ÜBERSETZUNGEN DES ARTIKELS',
