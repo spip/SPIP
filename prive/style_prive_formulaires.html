@@ -235,6 +235,7 @@
 /*
  * Cas particuliers
  */
+ 
 .formulaire_editer .editer_titre input,
 .formulaire_editer .editer_nom input{font-size:1.2em; font-weight:bold;}
 .formulaire_editer .editer_chapo textarea{height:12em;}
@@ -242,11 +243,17 @@
 /* le brouteur de rubrique en cas de petit ecran doit etre aussi plus petit ! */
 .etroit .formulaire_editer .editer_parent #titreparent{width:50% !important;}
 
-/* pour mettre le texte en grand...* /
-.formulaire_editer .editer_texte {padding-left:20px;}
-.formulaire_editer .editer_texte label {margin-left:-15px; display:block; float:none;}
-.formulaire_editer .editer_texte textarea{width:98%;}
-.formulaire_editer .editer_texte table.spip_barre{width:98%;}
+/* pour mettre les text-area en grand...* /
+.formulaire_editer .editer_texte,
+.formulaire_editer .editer_chapo,
+.formulaire_editer .editer_descriptif {padding-left:20px;}
+.formulaire_editer .editer_texte label,
+.formulaire_editer .editer_chapo label,
+.formulaire_editer .editer_descriptif label {margin-left:-15px;margin-bottom:5px; display:block; float:none;}
+.formulaire_editer .editer_texte textarea,
+.formulaire_editer .editer_chapo textarea,
+.formulaire_editer .editer_descriptif textarea {width:97%;}
+.formulaire_editer .editer_texte table.spip_barre {width:97%;}
 /* */
 
 
