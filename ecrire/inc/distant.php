@@ -27,7 +27,7 @@ function copie_locale($source, $mode='auto') {
 
 	$local = fichier_copie_locale($source);
 
-	if ($source != $local) {
+	if (($source != $local) AND (preg_match(',^\w+://,', $source))) {
 		if (($mode=='auto' AND !@file_exists($local))
 		OR $mode=='force') {
 			$contenu = recuperer_page($source);
