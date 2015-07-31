@@ -142,32 +142,6 @@ function install_fin_html() {
 	return "\n\t</div>\n\t</div>\n</body>\n</html>";
 }
 
-// http://doc.spip.org/@info_etape
-function info_etape($titre, $complement = ''){
-	$en_cours = _request('etape')?_request('etape'):"";
-	$liste = find_all_in_path('install/','etape_([0-9])+[.]php');
-	$debut = 1; $etat = "ok";
-	$last = count($liste);
-	
-	$aff_etapes = "<span id='etapes'>";
-	foreach($liste as $etape=>$fichier){
-		if ($etape=="etape_{$en_cours}.php"){
-			if ($debut<$last)
-				$etat = "encours";
-			else
-				$etat = "ok";
-		}
-		$aff_etapes .= "<span class='$etat'>".(($debut<$last)?$debut:"go")."</span>";
-		if ($etat == "encours")
-			$etat = 'todo';
-		$debut++;
-	}
-	$aff_etapes .= "<br class='nettoyeur' />&nbsp;</span>\n";
-	
-	return $aff_etapes."\n<h2>".$titre."</h2>\n" .
-	($complement ? "<br />".$complement."\n":'');
-}
-
 // http://doc.spip.org/@fieldset
 function fieldset($legend, $champs = array(), $horchamps='') {
 	$fieldset = "<fieldset>\n" .
@@ -394,13 +368,6 @@ function http_img_pack($img, $alt, $att, $title='') {
 	  . $att
 	  . " />";
 }
-
-// http://doc.spip.org/@http_href_img
-function http_href_img($href, $img, $att, $alt, $title='', $style='', $class='', $evt='') {
-	if (!$title) $title = $alt;
-	return  http_href($href, http_img_pack($img, $alt, $att), $title, $style, $class, $evt);
-}
-
 
 // http://doc.spip.org/@http_style_background
 function http_style_background($img, $att='')
