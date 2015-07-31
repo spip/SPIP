@@ -152,8 +152,9 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 $texte = $texte_ajout . $texte;
 
 
-if (strlen($virtuel) > 0) {
-	$chapo = "=$virtuel";
+if ($changer_virtuel OR $virtuel) {
+	if (strlen($virtuel) > 0) $chapo = "=$virtuel";
+	else $chapo = "";
 	$query = "UPDATE spip_articles SET chapo=\"$chapo\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 }
@@ -175,7 +176,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\" WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", auteur_modif=\"0\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') {
@@ -549,19 +550,21 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "</FORM>";
 	echo "</FONT>";
 	echo fin_block();
+	echo "<br>\n";
 }
 
 
 	if ($connect_statut=="0minirezo" AND $options=="avancees"){
-		echo "<p><center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
+		echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
 		echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
 		echo bouton_block_invisible("virtuel");
 		echo "REDIRECTION";
 		echo aide ("artvirt");
-		echo "</b></font></td></tr></table></center><p>";
+		echo "</b></font></td></tr></table></center>";
 		echo "<form action='articles.php3' method='post'>";
 		echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
+		echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 
 		echo debut_block_invisible("virtuel");
 		if (strlen($virtuel) == 0) $virtuel = "http://";
@@ -569,7 +572,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 		echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
 		echo "</font>";
-		echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'>";
+		echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
 		echo "</form>";
 		echo fin_block();
 	}
@@ -762,8 +765,33 @@ echo "</td>";
 
 if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='right'>";
-	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+	echo "<td  align='center'>";
+	// Recuperer les donnees de l'article
+	$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
+	$result = spip_query($query);
+	
+	while ($row = mysql_fetch_array($result)) {
+		$auteur_modif = $row["auteur_modif"];
+		$modification = $row["modification"];
+		$maintenant = $row["maintenant"];
+		
+		$date_diff = floor(($maintenant - $modification)/60);
+		
+		if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
+			$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
+			$result_auteur = spip_query($query_auteur);
+			while ($row_auteur = mysql_fetch_array($result_auteur)) {
+				$nom_auteur_modif = $row_auteur["nom"];
+			}
+			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
+			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif est intervenu sur cet article<br>(il y a $date_diff minutes)</font>";
+		}
+		else {
+			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+		}
+	}
+	
+
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -1312,7 +1340,9 @@ echo "\n\n<div align=right>";
 echo "</div>";
 }
 
-afficher_documents_non_inclus($id_article);
+/// Documents associes a l'article
+
+afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
 //
 // "Demander la publication"
