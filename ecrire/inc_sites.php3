@@ -214,6 +214,21 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	return ($get_headers ? $headers."\n" : '').$result;
 }
 
+// helas strtotime ne reconnait pas le format W3C
+// http://www.w3.org/TR/NOTE-datetime
+function my_strtotime($la_date) {
+
+	$s = strtotime($la_date);
+	if ($s > 0)
+		return $s;
+
+	if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
+		$la_date = str_replace("T", " ", $match[1])." GMT";
+		$la_date = strtotime($la_date) - intval($match[5]) * 3600;
+	}
+
+	return $la_date;
+}
 
 function trouver_format($texte) {
 	$syndic_version = '';
@@ -502,15 +517,8 @@ function analyser_backend($rss) {
 			$la_date = $match[1];
 		else if (preg_match($syndic_regexp['date2'],$item,$match))
 			$la_date = $match[1];
-		if ($la_date) {
-			// http://www.w3.org/TR/NOTE-datetime
-			if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
-				$la_date = str_replace("T", " ", $match[1])." GMT";
-				$la_date = strtotime($la_date) - intval($match[5]) * 3600;
-			}
-			else
-				$la_date = strtotime($la_date);
-		}
+		if ($la_date)
+			$la_date = my_strtotime($la_date);
 		if ($la_date < time() - 365 * 24 * 3600
 		OR $la_date > time() + 48 * 3600)
 			$la_date = time();
@@ -547,7 +555,7 @@ function analyser_backend($rss) {
 		// Honorer le <lastbuilddate> en forcant la date
 		if (preg_match(',<(lastbuilddate|modified)>([^<>]+)</\1>,i',
 		$item, $regs)
-		AND $lastbuilddate = strtotime(trim($regs[2]))
+		AND $lastbuilddate = my_strtotime(trim($regs[2]))
 		// pas dans le futur
 		AND $lastbuilddate < time())
 			$data['lastbuilddate'] = $lastbuilddate;
