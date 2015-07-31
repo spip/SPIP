@@ -324,8 +324,10 @@ function optimiser_base() {
 	//
 	// MySQL
 	//
+	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
+	else $table_pref = "";
 
-	$query = "SHOW TABLES LIKE '".$GLOBALS['table_prefix']."_%'";
+	$query = "SHOW TABLES LIKE '$table_pref%'";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $tables[] = $row[0];
 
