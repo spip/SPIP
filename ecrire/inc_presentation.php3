@@ -1731,7 +1731,7 @@ function debut_gauche($rubrique = "asuivre") {
 // Presentation de l'interface privee, marge de droite
 //
 
-function creer_colonne_droite(){
+function creer_colonne_droite($rubrique=""){
 	global $deja_colonne_droite;
 	global $changer_config;
 	global $activer_messagerie;
@@ -1808,13 +1808,13 @@ function creer_colonne_droite(){
 
 }
 
-function debut_droite() {
+function debut_droite($rubrique="") {
 	global $options, $spip_ecran, $deja_colonne_droite;
 	global $connect_id_auteur, $clean_link;
 	global $flag_3_colonnes, $flag_centre_large;
 
 	if ($options == "avancees") {
-		if (!$deja_colonne_droite) creer_colonne_droite();
+		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 		// liste des articles bloques
 		$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 		$result = spip_query($query);
@@ -1853,7 +1853,7 @@ function debut_droite() {
 	}
 	else {
 		if (!$deja_colonne_droite) {
-			creer_colonne_droite();
+			creer_colonne_droite($rubrique);
 		}
 		echo "</td></tr><tr>";
 	}

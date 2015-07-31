@@ -34,7 +34,7 @@ echo "<p>".propre("<IMG SRC='img_pack/m_envoi_jaune.gif' WIDTH='14' HEIGHT='7' B
 
 fin_boite_info();
 
-debut_droite();
+debut_droite("messagerie");
 
 
 function afficher_messages($titre_table, $query_message, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
