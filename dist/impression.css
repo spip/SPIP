@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 ---------------------------------------------- */
 .nettoyeur { clear: both; }
 
-/*  Pour les liens, on desactive les couleurs et
+/*  Pour les liens, on les souligne et
 /*  on affiche l'URL cible a la suite des liens sortants (!)
 ---------------------------------------------- */
 a { color: #520; text-decoration: underline; }
@@ -85,6 +85,6 @@ ul .forum-message { background: #EEE; border: 1pt solid #CCC; padding: 1em; marg
 
 /*  Plan du site
 ---------------------------------------------- */
-#page_plan #contenu h2 { font-size: 1.15em; font-weight: bold; }
-#page_plan #contenu ul { margin-left: 1em; margin-bottom: 1em; }
-#page_plan #contenu li { list-style: square; }
+.page_plan #contenu h2 { font-size: 1.15em; font-weight: bold; }
+.page_plan #contenu ul { margin-left: 1em; margin-bottom: 1em; }
+.page_plan #contenu li { list-style: square; }
