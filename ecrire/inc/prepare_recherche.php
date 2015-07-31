@@ -22,7 +22,7 @@ if (!defined('_DELAI_CACHE_resultats')) define('_DELAI_CACHE_resultats', 600);
  * http://doc.spip.org/@inc_prepare_recherche_dist
  * 
  * Le parametre $serveur est utilise pour savoir sur quelle base on cherche
- * mais l'index des resultats est toujours stocké sur le serveur principal
+ * mais l'index des resultats est toujours stockï¿½ sur le serveur principal
  * car on ne sait pas si la base distante dispose d'une table spip_resultats
  * ni meme si on aurait le droit d'ecrire dedans
  *
@@ -88,7 +88,7 @@ function inc_prepare_recherche_dist($recherche, $table='articles', $cond=false, 
 
 		// supprimer les anciens resultats de cette recherche
 		// et les resultats trop vieux avec une marge
-		sql_delete('spip_resultats', 'NOT(' .sql_date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR ($where)");
+		sql_delete('spip_resultats AS resultats', 'NOT(' .sql_date_proche('maj', (0-($delai_fraicheur+100)), " SECOND") . ") OR ($where)");
 
 		// inserer les resultats dans la table de cache des resultats
 		if (count($points)){
