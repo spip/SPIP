@@ -16,7 +16,7 @@ include_spip('inc/meta');
 // Tester nos capacites
 // http://doc.spip.org/@action_tester_dist
 function action_tester_dist() {
-	global $pnmscale_command,$arg;
+	global $arg;
 
 	// verifier les formats acceptes par GD
 	if ($arg == "gd1") {
@@ -78,38 +78,39 @@ function action_tester_dist() {
 	}
 
 	// verifier les formats netpbm
-	else if ($arg == "netpbm"
-	AND $pnmscale_command) {
+	else if ($arg == "netpbm") {
+		define('_PNMSCALE_COMMAND', 'pnmscale'); // chemin a changer dans mes_options
+		if (_PNMSCALE_COMMAND == '') return;
 		$netpbm_formats= Array();
 
 		$jpegtopnm_command = str_replace("pnmscale",
-			"jpegtopnm", $pnmscale_command);
+			"jpegtopnm", _PNMSCALE_COMMAND);
 		$pnmtojpeg_command = str_replace("pnmscale",
-			"pnmtojpeg", $pnmscale_command);
+			"pnmtojpeg", _PNMSCALE_COMMAND);
 
 		$vignette = _ROOT_IMG_PACK."test.jpg";
 		$dest = _DIR_VAR . "test-jpg.jpg";
-		$commande = "$jpegtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
+		$commande = "$jpegtopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
 		}
-		$giftopnm_command = str_replace("pnmscale", "giftopnm", $pnmscale_command);
-		$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
+		$giftopnm_command = str_replace("pnmscale", "giftopnm", _PNMSCALE_COMMAND);
+		$pnmtojpeg_command = str_replace("pnmscale", "pnmtojpeg", _PNMSCALE_COMMAND);
 		$vignette = _ROOT_IMG_PACK."test.gif";
 		$dest = _DIR_VAR . "test-gif.jpg";
-		$commande = "$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
+		$commande = "$giftopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "gif";
 		}
 
-		$pngtopnm_command = str_replace("pnmscale", "pngtopnm", $pnmscale_command);
+		$pngtopnm_command = str_replace("pnmscale", "pngtopnm", _PNMSCALE_COMMAND);
 		$vignette = _ROOT_IMG_PACK."test.png";
 		$dest = _DIR_VAR . "test-gif.jpg";
-		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
+		$commande = "$pngtopnm_command $vignette | "._PNMSCALE_COMMAND." -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
