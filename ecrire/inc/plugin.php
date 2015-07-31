@@ -358,7 +358,14 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file){
 						// on genere un if file_exists devant chaque include pour pouvoir garder le meme niveau d'erreur general
-						$s .= "if (file_exists(\$f=$dir_type.'$plug/".trim($file)."')){ include_once \$f;}\n";
+						$file = trim($file);
+
+						if (strpos($plug, constant($dir_type)) === 0) {
+							$dir = str_replace("'".constant($dir_type), $dir_type.".'", "'$plug/'");
+						}
+						else
+							$dir = $dir_type.".'$plug/'";
+						$s .= "if (file_exists(\$f=$dir.'".trim($file)."')){ include_once \$f;}\n";
 						$liste_fichier_verif[] = "$dir_type:$plug/".trim($file);
 					}
 				}
