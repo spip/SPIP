@@ -1553,7 +1553,6 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 					$en_ligne = 'preview';
 			break;
 		case 'breve':
-		case 'auteur':
 		case 'site':
 			if ($statut == 'publie')
 				$en_ligne = 'calcul';
@@ -1561,6 +1560,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 				$en_ligne = 'preview';
 			break;
 		case 'mot':
+		case 'auteur':
 			$en_ligne = 'calcul';
 			break;
 	}
