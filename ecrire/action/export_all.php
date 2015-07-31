@@ -40,6 +40,7 @@ function action_export_all_dist()
 	} elseif ($quoi=='end') export_all_fin($file, $meta);
 }
 
+// http://doc.spip.org/@export_all_fin
 function export_all_fin($file, $meta)
 {
 	global $spip_lang_left,$spip_lang_right;

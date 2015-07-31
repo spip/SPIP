@@ -203,6 +203,7 @@ function export_objets($table, $etape, $cpt, $dir, $archive, $gz, $total, $les_r
 // Envoi immediat au client.
 // Pour tester la robustesse ci-dessus, 
 // commenter 3 lignes et decommenter la derniere (sinon le 302 ne marche pas)
+// http://doc.spip.org/@echo_flush
 function echo_flush($texte)
 {
 	echo $texte;
@@ -273,6 +274,7 @@ function text_to_xml($string) {
 }
 
 // construit le repertoire ou preparer la sauvegarde
+// http://doc.spip.org/@export_subdir
 function export_subdir($rub)
 {
 	include_spip('inc/actions');
