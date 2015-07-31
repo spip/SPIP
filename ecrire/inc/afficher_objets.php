@@ -484,7 +484,7 @@ function afficher_articles_trad_boucle($row, $own='')
 	}
 
 	if (acces_restreint_rubrique($id_rubrique))
-		$img = http_img_pack("admin-12.gif", _T('titre_image_administrateur'), "width='12' height='12'", _T('titre_image_admin_article'));
+		$img = http_img_pack(chemin_image("auteur-0minirezo-16.png"), _T('titre_image_administrateur'), "", _T('titre_image_admin_article'));
 	else $img = '';
 
 	if (!$titre) $titre =  _T('ecrire:info_sans_titre');

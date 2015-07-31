@@ -45,10 +45,10 @@ function puce_statut_auteur_dist($id, $statut, $id_rubrique, $type, $ajax='') {
 		);
 
 	  $images_des_statuts = array(
-			   "info_administrateurs" => 'admin-12.gif',
-			   "info_redacteurs" =>'redac-12.gif',
-			   "info_visiteurs" => 'visit-12.gif',
-			   "info_statut_site_4" => 'poubelle.gif'
+			   "info_administrateurs" => chemin_image('auteur-0minirezo-16.png'),
+			   "info_redacteurs" =>chemin_image('auteur-1comite-16.png'),
+			   "info_visiteurs" => chemin_image('auteur-6forum-16.png'),
+			   "info_statut_site_4" => chemin_image('auteur-5poubelle-16.png')
 			   );
 	}
 

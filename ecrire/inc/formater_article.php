@@ -30,7 +30,7 @@ function inc_formater_article_dist($row, $own='')
 		if ($chercher_logo) 
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		$formater_auteur = charger_fonction('formater_auteur', 'inc');
-		$img_admin = http_img_pack("admin-12.gif", "", " width='12' height='12'", _T('titre_image_admin_article'));
+		$img_admin = http_img_pack(chemin_image('auteur-0minirezo-16.png'), "", "", _T('titre_image_admin_article'));
 
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND (!isset($GLOBALS['id_rubrique']))) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;

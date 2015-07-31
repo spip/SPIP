@@ -52,7 +52,7 @@ function enfant_rub($collection){
 			}
 
 			$lib_bouton = (!acces_restreint_rubrique($id_rubrique) ? "" :
-			   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
+			   http_img_pack(chemin_image('auteur-0minirezo-16.png'), '', " width='16' height='16'", _T('image_administrer_rubrique'))) .
 			  " <span dir='$lang_dir'><a href='" .
 			  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .
 			  "'>".

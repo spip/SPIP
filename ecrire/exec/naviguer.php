@@ -186,7 +186,7 @@ function infos_naviguer($id_rubrique, $statut, $row)
 	while ($row = sql_fetch($q)) {
 		$id = $row['id_auteur'];
 		$res .=
-			http_img_pack('admin-12.gif','','') .
+			http_img_pack(chemin_image('auteur-0minirezo-16.png'),'','') .
 			    " <a href='" . generer_url_ecrire('auteur_infos', "id_auteur=$id") .
 				"'>" .
 				extraire_multi($row['nom']) .
@@ -446,7 +446,7 @@ function montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_edita
 	return
 	  "<div class='bandeau_actions'>$actions</div>" .
 	  gros_titre((!acces_restreint_rubrique($id_rubrique) ? '' :
-	  http_img_pack("admin-12.gif",'', "width='12' height='12'",
+	  http_img_pack(chemin_image('auteur-0minirezo-16.png'),'', "",
 			      _T('info_administrer_rubrique'))) .
 	     $titre,'', false)
 		. "<div class='nettoyeur'></div>\n";
