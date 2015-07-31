@@ -274,7 +274,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		}
 
 		if ($mode == 'document')
-			$vignette = "<a href='$fichier'>$vignette</a>";
+			$vignette = "<a href='$url_fichier'>$vignette</a>";
 
 		// si affichage detaille ('DOC'), ajouter une legende
 		if (strtoupper($type_aff) == 'DOC') {
