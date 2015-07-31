@@ -17,7 +17,7 @@
 			this.next_session_password_md5.value = calcMD5("[(#ENV{alea_futur})]" + this.session_password.value);
 			this.session_password.value = "";
 			}']>
-	<fieldset class="spip_encadrer">
+	<fieldset>
 	<legend><:form_forum_identifiants:></legend>
 		[<p class="reponse_formulaire">(#ENV*{erreur})</p>]
 		[<p><label for="var_login"><:login_login2:></label>(#ENV{login}|?{'',' '})<br />

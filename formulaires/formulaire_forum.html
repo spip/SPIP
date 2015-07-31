@@ -23,7 +23,7 @@
 	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
 >
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
-	<fieldset class="spip_encadrer">
+	<fieldset>
 	<legend><:mots_clefs:> : #TITRE</legend>
 		<INCLURE{fond=choix_mots}{id_groupe}{ajouter_mot}{unseul}>
 	</fieldset>
@@ -35,7 +35,7 @@
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
-	<fieldset class="spip_encadrer">
+	<fieldset>
 	<legend><:form_pet_message_commentaire:></legend>
 	<p><label for="titre"><:forum_titre:></label>
 	<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
@@ -45,7 +45,7 @@
 	[(#ENV**{texte}|barre_textarea{12,40})]
 	</fieldset>
 
-	<fieldset class="spip_encadrer">
+	<fieldset>
 	<legend><:forum_lien_hyper:></legend>
 	<p><:forum_page_url:></p>
 	<p><label for="nom_site_forum"><:forum_titre:></label>
@@ -54,7 +54,7 @@
 	<input type="text" class="forml" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="#ENV{url_site}" /></p>
 	</fieldset>
 
-	<fieldset class="spip_encadrer">
+	<fieldset>
 	<legend><:forum_qui_etes_vous:></legend>
 	<p><label for="auteur"><:forum_votre_nom:></label>
 	<input type="text" class="forml" name="auteur" id="auteur" value="#ENV{auteur}" size="40"[ readonly="(#ENV{readonly})"] /></p>

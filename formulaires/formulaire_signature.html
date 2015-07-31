@@ -6,12 +6,12 @@
 [<form method="post" action="(#ENV{self})[#sp(#ENV{id_article})]">
 <input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
 
-[<fieldset class="spip_encadrer">
+[<fieldset>
 	<legend><:info_descriptif:></legend>
 	(#ENV*{texte}|propre)
 </fieldset>]
 
-<fieldset class="spip_encadrer">
+<fieldset>
 	<legend><:form_forum_identifiants:></legend>
 	<p><label for="nom_email"><:form_pet_votre_nom:></label>
 	<input type="text" class="forml" name="nom_email" id="nom_email" value="" size="20" /></p>
@@ -19,7 +19,7 @@
 	<input type="text" class="forml" name="adresse_email" id="adresse_email" value="" size="20" /></p>
 </fieldset>
 
-<fieldset class="spip_encadrer">
+<fieldset>
 	<legend><:info_lien_hypertexte:></legend>
 	[<p>(#ENV{site_obli})<:form_pet_votre_site:></p>]
 	<p><label for="signature_nom_site"><:form_pet_nom_site2:></label>
@@ -29,7 +29,7 @@
 </fieldset>
 
 [(#ENV{message})
-	<fieldset class="spip_encadrer">
+	<fieldset>
 		<legend><:form_pet_message_commentaire:></legend>
 		<p><label for="message"><:info_texte_message:></label>
 		<textarea class="forml" name="message" id="message" rows="3" cols="20"></textarea></p>
