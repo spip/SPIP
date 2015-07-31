@@ -60,11 +60,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	// Appel direct dans un squelette
 	if (!$row) {
 		if  (!$new) {
-			if (!autoriser('modifier',$type,$id))
-				// interdit a l'edition
-				return array('editable'=>false,'message_erreur'=>_T('info_acces_interdit'));
-
-			elseif ($select = charger_fonction($type."_select",'inc',true))
+		  	if ($select = charger_fonction($type."_select",'inc',true))
 				$row = $select($id, $id_parent, $lier_trad);
 			else $row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
 			if ($row)
@@ -86,8 +82,9 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$contexte = $row;
 	if ($id_parent && (!isset($contexte['id_parent']) OR $new))
 		$contexte['id_parent']=$id_parent;
+
 	if ($config_fonc)
-		$contexte['config'] = $config = $config_fonc($row);
+		$contexte['config'] = $config = $config_fonc($contexte);
 	$att_text = " class='formo' "
 	. $GLOBALS['browser_caret']
 	. " rows='"
