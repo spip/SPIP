@@ -10,6 +10,25 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion du formulaire d'édition de logo
+ *
+ * Ce formulaire ajoute, modifie ou supprime des logos sur les objets de SPIP.
+ * 
+ * - En dehors d'une boucle, ce formulaire modifie le logo du site.
+ * - Dans une boucle, il modifie le logo de la table selectionnée.
+ * 
+ * Pensez juste que l'appel de `#LOGO_{TYPE}` s'appuie sur le nom de la clé primaire et non sur le
+ * nom de l'objet réel. Par exemple on ecrira `#LOGO_GROUPE` (et non `#LOGO_GROUPEMOTS`) pour afficher
+ * un logo issu du formulaire mis dans une boucle `GROUPES_MOTS`
+ * 
+ * - il est possible de lui passer les paramètres objet et id : `#FORMULAIRE_EDITER_LOGO{article,1}`
+ * - il est possible de spécifier une URL de redirection apres traitement :
+ *   `#FORMULAIRE_EDITER_LOGO{article,1,#URL_ARTICLE}`
+ * 
+ * @package SPIP\Core\Formulaires
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 global $logo_libelles;
@@ -17,28 +36,15 @@ global $logo_libelles;
 $logo_libelles['site'] = _T('logo_site');
 $logo_libelles['racine'] = _T('logo_standard_rubrique');
 
-/**
- * Formulaire #EDITER_LOGO
- *
- * Ce formulaire ajoute, modifie ou supprime des logos sur les objets de SPIP.
- * - En dehors d'une boucle, ce formulaire modifie le logo du site.
- * - Dans une boucle, il modifie le logo de la table selectionnee.
- * Pensez juste que l'appel de #LOGO_{TYPE} s'appuie sur le nom de la cle primaire et non sur le
- * nom de l'objet reel. Par exemple on ecrira #LOGO_GROUPE (et non #LOGO_GROUPEMOTS) pour afficher
- * un logo issu du formulaire mis dans une boucle GROUPES_MOTS
- * - il est possible de lui passer les parametres objet et id : #FORMULAIRE_EDITER_LOGO{article,1}
- * - il est possible de spécifier une url de redirection apres traitement :
- * ex. #FORMULAIRE_EDITER_LOGO{article,1,#URL_ARTICLE}
- */
 
 /**
- * Chargement du formulaire
+ * Chargement du formulaire d'édition de logo
  *
  * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
- * @param integer $id_objet    Identifiant de l'objet
+ * @param int $id_objet        Identifiant de l'objet
  * @param string $retour       Url de redirection apres traitement
- * @param Array $options       Tableau d'option (exemple : image_reduire => 50)
- * @return Array               Variables d'environnement pour le fond
+ * @param array $options       Tableau d'option (exemple : image_reduire => 50)
+ * @return array               Variables d'environnement pour le fond
  */
 function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $options=array()){
 	// pas dans une boucle ? formulaire pour le logo du site
@@ -120,23 +126,30 @@ function formulaires_editer_logo_charger_dist($objet, $id_objet, $retour='', $op
 /**
  * Identifier le formulaire en faisant abstraction des parametres qui
  * ne representent pas l'objet edite
+ *
+ * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
+ * @param int $id_objet        Identifiant de l'objet
+ * @param string $retour       Url de redirection apres traitement
+ * @param array $options       Tableau d'option (exemple : image_reduire => 50)
+ * @return string              Hash du formulaire
  */
 function formulaires_editer_logo_identifier_dist($objet, $id_objet, $retour='', $options=array()){
 	return serialize(array($objet, $id_objet));
 }
 
 /**
- * Verification avant traitement
+ * Verification avant traitement du formulaire d'édition de logo
  *
  * On verifie que l'upload s'est bien passe et
  * que le document recu est une image (d'apres son extension)
  *
- * @param string $objet
- * @param integer $id_objet
- * @param string $retour
- * @return Array Tableau des erreurs
+ * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
+ * @param int $id_objet        Identifiant de l'objet
+ * @param string $retour       Url de redirection apres traitement
+ * @param array $options       Tableau d'option (exemple : image_reduire => 50)
+ * @return array               Erreurs du formulaire
  */
-function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour=''){
+function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour='', $options=array()){
 	$erreurs = array();
 	// verifier les extensions
 	$sources = formulaire_editer_logo_get_sources();
@@ -156,12 +169,13 @@ function formulaires_editer_logo_verifier_dist($objet, $id_objet, $retour=''){
  * Il est affecte au site si la balise n'est pas dans une boucle,
  * sinon a l'objet concerne par la boucle ou indiquee par les parametres d'appel
  *
- * @param string $objet
- * @param integer $id_objet
- * @param string $retour
- * @return Array
+ * @param string $objet        Objet SPIP auquel sera lie le document (ex. article)
+ * @param int $id_objet        Identifiant de l'objet
+ * @param string $retour       Url de redirection apres traitement
+ * @param array $options       Tableau d'option (exemple : image_reduire => 50)
+ * @return array               Retour des traitements
  */
-function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
+function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour='', $options=array()){
 	$res = array('editable'=>' ');
 	
 	// pas dans une boucle ? formulaire pour le logo du site
@@ -212,10 +226,11 @@ function formulaires_editer_logo_traiter_dist($objet, $id_objet, $retour=''){
 
 
 /**
- * Extraction des sources des fichiers uploades correspondant aux 2 logos (normal + survol)
+ * Extraction des sources des fichiers uploadés correspondant aux 2 logos (normal + survol)
  * si leur upload s'est bien passé
  *
- * @return Array
+ * @return array
+ *     Sources des fichiers dans les clés `on` ou `off`
  */
 function formulaire_editer_logo_get_sources(){
 	if (!$_FILES) $_FILES = isset($GLOBALS['HTTP_POST_FILES']) ? $GLOBALS['HTTP_POST_FILES'] : array();
