@@ -151,32 +151,21 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	debut_cadre_enfonce("mot-cle-24.gif", false, "", $bouton._T('titre_mots_cles').aide ("artmots"));
 
 	if ($flag_editable) {
-		if ($cherche_mot)
-			$nouveaux_mots = recherche_mot_cle($cherche_mot, intval($GLOBALS['select_groupe']), $id_objet,$nouv_mot, $table, $table_id, $url_base);
-
-	//////////////////////////////////////////////////////
-	// Appliquer les modifications sur les mots-cles
-	//
-
 		$reindexer = false;
-
-		if ($nouveaux_mots) {
+		if ($cherche_mot) {
+			$nouveaux_mots = recherche_mot_cle($cherche_mot, intval($GLOBALS['select_groupe']), $id_objet,$nouv_mot, $table, $table_id, $url_base);
 			while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
-				$result = spip_query("SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet");
-
-				if (!spip_num_rows($result)) {
-					spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)");
-				}
+			  $reindexer |= inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
 			}
-			$reindexer = ($GLOBALS['meta']['activer_moteur'] == 'oui');
-		}
-
-		if ($supp_mot) {
+			
+		} elseif ($nouv_mot) {
+		  $reindexer = inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
+		} elseif ($supp_mot) {
 			$result = spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . (($supp_mot == -1) ?  "" :  " AND id_mot=" . intval($supp_mot) ));
-			$reindexer = ($GLOBALS['meta']['activer_moteur'] == 'oui');
+			$reindexer = true;
 		}
 
-		if ($reindexer) {
+		if ($reindexer AND ($GLOBALS['meta']['activer_moteur'] == 'oui')) {
 			include_spip("inc/indexation");
 			marquer_indexer($objet, $id_objet);
 		}
@@ -185,6 +174,17 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	afficher_mots_cles($flag_editable, $id_objet, $table, $table_id, $url_base, $visible);
 	fin_cadre_enfonce();
 }
+
+function inserer_mot($table, $table_id, $id_objet, $id_mot)
+{
+	$result = spip_num_rows(spip_query("SELECT id_mot FROM $table WHERE id_mot=$id_mot AND $table_id=$id_objet"));
+
+	if (!$result) {
+		spip_query("INSERT INTO $table (id_mot,$table_id) VALUES ($id_mot, $id_objet)");
+	}
+	return $result;
+}
+
 
 function affiche_mots_ressemblant($cherche_mot, $id_objet, $resultat, $table_id, $url_base)
 {
