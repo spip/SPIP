@@ -272,8 +272,10 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Voc&ecirc; pode ativar um <b>cookie de correspond&ecirc;ncia</b>, que lhe permitir&aacute; passar facilmente do site p&uacute;blico para o site privado.',
 'info_activer_forum_public' => '<i>Para ativar os f&oacute;runs p&uacute;blicos, por favor, escolha o modo padr&atilde;o de modera&ccedil;&atilde;o:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'este administrador gerencia as seguintes se&ccedil;&otilde;es:',
 'info_admin_gere_toutes_rubriques' => 'Este administrador gerencia <b>todas as se&ccedil;&otilde;es</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Dar a este administrador os direitos de webmaster',
 'info_admin_webmestre' => 'Este administrador &eacute; <b>webmaster</b>',
 'info_administrateur' => 'Administrador',
@@ -682,6 +684,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'info_visiteur_2' => 'do site p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do site p&uacute;blico',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Endere&ccedil;o da base de dados atribu&iacute;do pelo servi&ccedil;o de hospedagem:',
 'install_base_ok' => 'A base @base@ foi reconhecida',
 'install_echec_annonce' => 'A instala&ccedil;&atilde;o ir&aacute;, provavelmente, falhar, ou levar a um site que n&atilde;o funciona...',

@@ -286,8 +286,10 @@ ou da rede',
  permitir&aacute; passar facilmente do s&iacute;tio p&uacute;blico ao s&iacute;tio privado ',
 'info_activer_forum_public' => '<i>Para activar os f&oacute;runs p&uacute;blicos, favor escolher o seu modo
   de modera&ccedil;&atilde;o por defeito </i>', # MODIF
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
 'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrador',
@@ -728,6 +730,7 @@ numa cor que indica o seu estado:',
 'info_visiteur_2' => 'do s&iacute;tio p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do s&iacute;tio p&uacute;blico',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'A instala&ccedil;&atilde;o vai provavelmente falhar,ou criar um s&iacute;tio n&atilde;o funcional',

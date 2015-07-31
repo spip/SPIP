@@ -273,8 +273,10 @@ H&#7891; s&#417; SPIP</a>.', # MODIF
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'B&#7841;n c&oacute; th&#7875; cho ch&#7841;y <b>administration cookie</b> &#273;&#7875; b&#7841;n c&oacute; th&#7875; qua l&#7841;i gi&#7919;a trang web c&ocirc;ng c&#7897;ng v&agrave; khu v&#7921;c ri&ecirc;ng.',
 'info_activer_forum_public' => '<i>&#272;&#7875; di&#7877;n &#273;&agrave;n c&ocirc;ng c&#7897;ng ho&#7841;t &#273;&#7897;ng, xin ch&#7885;n m&#7897;t trong nh&#7919;ng ph&#432;&#417;ng th&#7913;c &#273;i&#7873;u h&#7907;p sau &#273;&acirc;y</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Nh&acirc;n v&#7853;t n&agrave;y c&oacute; quy&#7873;n qu&#7843;n tr&#7883; c&aacute;c &#273;&#7873; m&#7909;c sau &#273;&acirc;y:',
 'info_admin_gere_toutes_rubriques' => 'Nh&acirc;n v&#7853;t n&agrave;y c&oacute; quy&#7873;n qu&#7843;n tr&#7883; <b>t&#7845;t c&#7843; c&aacute;c &#273;&#7873; m&#7909;c</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Qu&#7843;n l&yacute;',
@@ -683,6 +685,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'info_visiteur_2' => ' c&#7911;a website c&#244;ng',
 'info_visiteurs' => 'Kh&#225;ch',
 'info_visiteurs_02' => 'Kh&#225;ch c&#7911;a website c&#244;ng',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Database address attributed by the service provider', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Ph&#7847;n c&agrave;i &#273;&#7863;t n&agrave;y c&oacute; th&#7875; g&#7863;p tr&#7903; ng&#7841;i, ho&#7863;c khi&#7871;n website ho&#7841;t &#273;&#7897;ng kh&ocirc;ng ho&agrave;n ch&#7881;nh...',

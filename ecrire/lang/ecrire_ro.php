@@ -273,8 +273,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  permite s&#259; trece&#355;i cu u&#351;urin&#355;&#259; de la site-ul public la site-ul privat.',
 'info_activer_forum_public' => '<i>Pentru a activa forum-urile publice, v&#259; rug&#259;m s&#259; alege&#355;i modul
  lor de operare implicit:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Acest administrator gestioneaz&#259; rubricile urm&#259;toare :',
 'info_admin_gere_toutes_rubriques' => 'Acest administrator gestioneaz&#259; <b>toate rubricile</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
@@ -706,6 +708,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'info_visiteur_2' => '&nbsp;al site-ului public',
 'info_visiteurs' => 'Vizitatori',
 'info_visiteurs_02' => 'Vizitatorii site-ului public',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresa bazei de date furnizat&#259; de provider',
 'install_base_ok' => 'Baza @base@ fost recunoscut&#259;',
 'install_echec_annonce' => 'Instalarea va e&#351;ua probabil sau va conduce la un site nefunc&#355;ional...',

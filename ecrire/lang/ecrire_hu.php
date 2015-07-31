@@ -281,8 +281,10 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.', # MODIF
 'info_activer_cookie' => 'Egy <b>hivatkoz&aacute;si s&uuml;tit</b> (cookie) lehet aktiv&aacute;lni, melynek seg&iacute;ts&eacute;g&eacute;vel k&ouml;nnyen &aacute;t tud menni a nyilv&aacute;nos r&eacute;szr&#337;l a priv&aacute;t r&eacute;szre.',
 'info_activer_forum_public' => '<i>A nyilv&aacute;nos f&oacute;rumok aktiv&aacute;l&aacute;s&aacute;ra, v&aacute;lassza az alap&eacute;rtelmezett
  m&oacute;der&aacute;l&aacute;si m&oacute;djukat:</i>', # MODIF
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ez az adminisztr&aacute;tor a k&ouml;vetkez&#337; rovatokat kezelheti :',
 'info_admin_gere_toutes_rubriques' => 'Ez az adminisztr&aacute;tor az <b>&ouml;sszes rubrik&aacute;t</b> kezeli.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Adminisztr&aacute;tor',
@@ -705,6 +707,7 @@ ami &aacute;llapot&aacute;t jelzi&nbsp;:',
 'info_visiteur_2' => 'a publikus honlapnak',
 'info_visiteurs' => 'L&aacute;t&oacute;gat&oacute;k',
 'info_visiteurs_02' => 'A nyilv&aacute;nos honlap vend&eacute;gei',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'A telep&iacute;t&eacute;s val&oacute;szin&#369;leg nem fog siker&uuml;lni, vagy a honlap nem fog megfelel&#337;en m&#369;k&ouml;dni...',

@@ -277,8 +277,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  &#1500;&#1506;&#1489;&#1493;&#1512; &#1489;&#1511;&#1500;&#1493;&#1514; &#1502;&#1503; &#1492;&#1488;&#1514;&#1512; &#1492;&#1510;&#1497;&#1489;&#1493;&#1512;&#1497; &#1500;&#1488;&#1514;&#1512; &#1492;&#1508;&#1512;&#1496;&#1497;.',
 'info_activer_forum_public' => '&#1506;&#1500; &#1502;&#1504;&#1514; &#1500;&#1492;&#1508;&#1506;&#1497;&#1500; &#1488;&#1514; &#1492;&#1508;&#1493;&#1512;&#1493;&#1502;&#1497;&#1501; &#1492;&#1510;&#1497;&#1489;&#1493;&#1512;&#1497;&#1497;&#1501;, &#1488;&#1504;&#1488; &#1489;&#1495;&#1512; &#1488;&#1514; &#1502;&#1510;&#1489;
  &#1492;&#1489;&#1493;&#1512;&#1512;&#1493;&#1514; &#1513;&#1500;&#1492;&#1501; &#1499;&#1489;&#1512;&#1497;&#1512;&#1514; &#1502;&#1495;&#1491;&#1500;:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => '&#1492;&#1502;&#1504;&#1492;&#1500; &#1492;&#1494;&#1492; &#1502;&#1504;&#1492;&#1500; &#1488;&#1514; &#1492;&#1502;&#1491;&#1493;&#1512;&#1497;&#1501; &#1492;&#1489;&#1488;&#1497;&#1501;:',
 'info_admin_gere_toutes_rubriques' => '&#1492;&#1502;&#1504;&#1492;&#1500; &#1492;&#1494;&#1492; &#1502;&#1504;&#1492;&#1500; &#1488;&#1514; <b>&#1499;&#1500; &#1492;&#1502;&#1491;&#1493;&#1512;&#1497;&#1501;</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => '&#1502;&#1504;&#1492;&#1500;',
@@ -722,6 +724,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:', # NEW
 'info_visiteur_2' => '&#1488;&#1514;&#1512; &#1510;&#1497;&#1489;&#1493;&#1512;&#1497;',
 'info_visiteurs' => '&#1502;&#1489;&#1511;&#1512;&#1497;&#1501;',
 'info_visiteurs_02' => '&#1492;&#1502;&#1489;&#1511;&#1512;&#1497;&#1501; &#1489;&#1488;&#1514;&#1512; &#1488;&#1514; &#1492;&#1510;&#1497;&#1489;&#1493;&#1512;',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...', # NEW

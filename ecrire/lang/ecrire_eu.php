@@ -273,8 +273,10 @@ Ez balidatu inportazio galdera hau.
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Egokitasun-"cookie" bat aktibatu dezakezu; horrek aukera emango dizu orrialdeakeguneratzeko, eta jendaurreko ataletik erredakziora errazki aldatzeko ere.',
 'info_activer_forum_public' => 'Foru publikoak aktibatzeko, aukeratu moderazio erabat',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Pertsona horrek honako atal hauek administratzenditu:',
 'info_admin_gere_toutes_rubriques' => 'Administratzaile honek atal guztiakkudeatzen ditu.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administratzaile',
@@ -689,6 +691,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'info_visiteur_2' => 'gune publikoaren',
 'info_visiteurs' => 'Bisitariak',
 'info_visiteurs_02' => 'Gune publikoaren bisitariak',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Aterbetzaileak emandako datu-basearen helbidea',
 'install_base_ok' => '@base@ basea ezagutua izan da',
 'install_echec_annonce' => 'Instalazioak seguraski huts eginen du, edo martxan izanen ez den gune bat sortuko du...',

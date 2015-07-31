@@ -273,8 +273,10 @@ Arabat aotren an enporzhiadenn-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, se
 'info_1_visiteur' => '1 visiteur', # NEW
 'info_activer_cookie' => 'Gallout a rit implijout un <b>toupin heulia&ntilde;</b>, ar pezh a dalvezo deoc\'h da dremen en un doare aes eus al lec\'hienn brevez d\'an hini foran.',
 'info_activer_forum_public' => '<i>Evit enaoui&ntilde; ar foromo&ugrave; foran, dibabit un doare da habaskaat dre ziouer:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ar rubrikenno&ugrave; da-heul a vez meret gant ar merour-ma&ntilde; :',
 'info_admin_gere_toutes_rubriques' => 'An <b>holl rubrikenno&ugrave;</b> zo meret gant ar merour-ma&ntilde;.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Merour',
@@ -703,6 +705,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'info_visiteur_2' => 'al lec\'hienn foran',
 'info_visiteurs' => 'Gweladenner',
 'info_visiteurs_02' => 'Gweladenner al lec\'hienn foran',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Chomlec\'h an diaz titouro&ugrave; roet gant an herberc\'hier',
 'install_base_ok' => 'Anavezet eo bet an diaz @base@',
 'install_echec_annonce' => 'Moarvat e c\'hwito ar staliadur pe e kaso d\'ul lec\'hienn na\'z aio ket en-dro...',

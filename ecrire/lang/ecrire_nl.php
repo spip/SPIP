@@ -282,8 +282,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  tussen de het publieke en het private deel van de website.',
 'info_activer_forum_public' => '<i>Om de openbare forums te activeren, dien je een standaardinstelling
  voor het modereren te kiezen :</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Deze auteur beheert de volgende rubrieken :',
 'info_admin_gere_toutes_rubriques' => 'Deze auteur beheert<b>alle rubrieken</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Beheerder',
@@ -723,6 +725,7 @@ een kleur geeft hun status aan&nbsp;:',
 'info_visiteur_2' => 'van de publieke site',
 'info_visiteurs' => 'Bezoekers',
 'info_visiteurs_02' => 'Bezoekers van de publieke site',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => '<modif>Adres van de database die door leverancier wordt toegekend',
 'install_base_ok' => 'De basis @base@ werd erkend',
 'install_echec_annonce' => 'De installatie zal wellicht mislukken of leiden tot een niet-werkende site...',

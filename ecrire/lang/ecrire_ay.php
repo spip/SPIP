@@ -289,8 +289,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	permettra de passer facilement du site public au site priv&eacute;.', # NEW
 'info_activer_forum_public' => '<i>Pour activer les forums publics, veuillez choisir leur mode
 	de mod&eacute;ration par d&eacute;faut:</i>', # NEW
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Jutir t\'aqanakxa aka jaqiw apnaqi:',
 'info_admin_gere_toutes_rubriques' => 'Aka apnaqiriw apnaqi &lt;b&gt;taqpacha apnaqi&lt;/b&gt;.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Apnaqiri',
@@ -724,6 +726,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:', # NEW
 'info_visiteur_2' => 'du site public', # NEW
 'info_visiteurs' => 'Visiteurs', # NEW
 'info_visiteurs_02' => 'Visiteurs du site public', # NEW
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...', # NEW

@@ -283,8 +283,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_cookie' => 'Mo&#380;esz uaktywni&#263; <b>cookies korespondecji</b>, co ci
  pozwoli przechodzi&#263; &#322;atwo pomi&#281;dzy stron&#261; publiczn&#261; a prywatn&#261;.',
 'info_activer_forum_public' => '<i>Aby aktywowa&#263; forum publiczne, wybierz domy&#347;lny spos&oacute;b moderacji</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Ten administrator zarz&#261;dza nast&#281;puj&#261;cymi dzia&#322;ami:',
 'info_admin_gere_toutes_rubriques' => 'Ten administrator zarz&#261;dza <b>wszystkimi dzia&#322;ami</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
@@ -726,6 +728,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'info_visiteur_2' => 'strony publicznej',
 'info_visiteurs' => 'Odwiedzaj&#261;cy',
 'info_visiteurs_02' => 'Odwiedzaj&#261;cy stron&#281; publiczn&#261;',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adres bazy danych przyznany przez us&#322;ugodawc&#281; hostingowego',
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Instalacja mo&#380;e si&#281; nie powie&#347;&#263; lub mo&#380;e si&#281; zda&#380;y&#263;, &#380;e strona przestanie dzia&#322;a&#263; ...',

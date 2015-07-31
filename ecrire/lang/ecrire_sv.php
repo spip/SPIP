@@ -275,8 +275,10 @@ om import.<p>F&ouml;r mer information se <a href="@spipnet@">SPIP-dokumentatione
 'info_activer_cookie' => 'Du kan aktivera en <b>administrationscookie</b>, som till&aring;ter dig
  att enkelt v&auml;xla mellan den publika och den privata delen.',
 'info_activer_forum_public' => '<i>f&ouml;r att aktivera publika forum, var v&auml;nlig och v&auml;lj moderationss&auml;tt:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Den h&auml;r administrat&ouml;ren hanterar f&ouml;ljande avdelningar:',
 'info_admin_gere_toutes_rubriques' => 'Den h&auml;r administrat&ouml;ren hanterar <b>alla avdelningar</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrat&ouml;r',
@@ -719,6 +721,7 @@ med en f&auml;rg som visar deras status:',
 'info_visiteur_2' => 'p&aring; den publika delen',
 'info_visiteurs' => 'Bes&ouml;kare',
 'info_visiteurs_02' => 'Be&ouml;kare p&aring; den publika delen',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Databasadress tillhandah&aring;llen av webbhotellet',
 'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Den h&auml;r installationen kommer f&ouml;rmodligen inte att fungera, alternativt resulterar den i en sajt med reducerad funktionalitet ...',

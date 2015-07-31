@@ -280,8 +280,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_cookie' => 'Pode activar unha <b>cookie de correspondencia</b>, co cal poder&aacute; pasar facilmente do web p&uacute;blico ao web privado.',
 'info_activer_forum_public' => '<i>Para activar os foros p&amp;uacute;blicos, escolla o xeito
   de moderaci&amp;oacute;n predeterminado:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Esta persoa xestiona os seguintes temas:',
 'info_admin_gere_toutes_rubriques' => 'Esta persoa xestiona <b>todos os temas</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Dar a este administrador dereitos de webm&aacute;ster',
 'info_admin_webmestre' => 'Este administrdor &eacute; <b>webm&aacute;ster</b>',
 'info_administrateur' => 'Xesti&oacute;n',
@@ -722,6 +724,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'info_visiteur_2' => 'do web p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do web p&uacute;blico',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Enderezo da base de datos atribu&iacute;da polo aloxador',
 'install_base_ok' => 'A base @base@ foi reco&ntilde;ecida',
 'install_echec_annonce' => 'A instalaci&oacute;n probabelmente vai pechar ou lanzar un sitio non funcional...',

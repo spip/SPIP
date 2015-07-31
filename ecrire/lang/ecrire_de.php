@@ -269,8 +269,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_cookie' => 'Sie k&ouml;nnen ein <b>Verwaltungs-Cookie</b> setzen. Es erlaubt Ihnen, Artikel und Rubriken direkt aus der Website zu bearbeiten.',
 'info_activer_forum_public' => '<i>Um die &ouml;ffentlichen Foren zu aktivieren, w&auml;hlen Sie bitte
  die Moderation im Standardmodus:</i>',
+'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Dieser Administrator verwaltet die folgenden Rubriken:',
 'info_admin_gere_toutes_rubriques' => 'Dieser Administrator verwaltet <b>alle Rubriken</b>.',
+'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Diesem Administrator Webmaster-Rechte geben',
 'info_admin_webmestre' => 'Dieser Administrator ist <b>Webmaster</b>',
 'info_administrateur' => 'Administrator',
@@ -683,6 +685,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'info_visiteur_2' => 'des &ouml;ffentlichen Bereichs',
 'info_visiteurs' => 'Besucher',
 'info_visiteurs_02' => 'Besucher des &ouml;ffentlichen Bereichs',
+'info_webmestre_forces' => 'Les webmestres sont actuellement d&eacute;finis dans <tt>@file_options@</tt>.', # NEW
 'install_adresse_base_hebergeur' => 'Adresse der vom Provider zugewiesenen Datenbank',
 'install_base_ok' => 'Die Datenbank @base@ wurde erkannt',
 'install_echec_annonce' => 'Die Installation wird wahrscheinlich fehlschlagen oder eine nicht funktionierende Site ergeben.',
