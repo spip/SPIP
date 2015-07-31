@@ -109,7 +109,9 @@ function valider_resultats($res, $ext)
 			$color = ";color: red";
 		} else  {$color = '';}
 
-		$err = (!intval($nb)) ? '' : ($erreurs[0][0] . ($nb==1? '': '  ...'));
+		$err = (!intval($nb)) ? '' : 
+		  ($erreurs[0][0] . ' ' . _T('ligne') . ' ' .
+		   $erreurs[0][1] .($nb==1? '': '  ...'));
 		$h = $mode
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		: generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
