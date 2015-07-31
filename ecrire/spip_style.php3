@@ -206,8 +206,11 @@ td.icone a img {
  */
 
 a.spip_in  {background-color:#eeeeee;}
+a.spip_note {background-color:#eeeeee;}
 a.spip_out {}
-a.spip_note {}
+a.spip_url {}
+a.spip_glossaire:hover {text-decoration: underline overline;}
+
 .spip_recherche {padding: 2px; width : 100px; font-size: 9px;}
 .spip_cadre {
 	width : 100%;
