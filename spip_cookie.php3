@@ -94,6 +94,7 @@ if ($essai_login == "oui") {
 
 	// Essayer differentes methodes d'authentification
 	$auths = array('spip');
+	include_ecrire('inc_connect.php3'); // pour savoir si ldap est present 
 	if ($ldap_present) $auths[] = 'ldap';
 
 	$ok = false;
