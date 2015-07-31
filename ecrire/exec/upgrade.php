@@ -19,7 +19,6 @@ include_spip('inc/headers');
 function exec_upgrade_dist() {
 
 	global $spip_version;
-
 	if (!_FILE_CONNECT)
 		redirige_par_entete(generer_url_ecrire("install"));
 
