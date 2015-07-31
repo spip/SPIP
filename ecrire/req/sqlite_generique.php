@@ -395,17 +395,22 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 
 
 /**
- * Fonction de creation d'une table SQL nommee $nom
- * http://doc.spip.org/@spip_sqlite_create
+ * Crée une table SQL
  *
- * @param string $nom
- * @param array $champs
- * @param array $cles
- * @param bool $autoinc
- * @param bool $temporary
- * @param string $serveur
- * @param bool $requeter
- * @return bool|SQLiteResult|string
+ * Crée une table SQL nommee `$nom` à partir des 2 tableaux `$champs` et `$cles`
+ *
+ * @note Le nom des caches doit être inferieur à 64 caractères
+ * 
+ * @param string $nom      Nom de la table SQL
+ * @param array $champs    Couples (champ => description SQL)
+ * @param array $cles      Couples (type de clé => champ(s) de la clé)
+ * @param bool $autoinc    True pour ajouter un auto-incrément sur la Primary Key
+ * @param bool $temporary  True pour créer une table temporaire
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return array|null|resource|string
+ *     - string Texte de la requête si demandée
+ *     - true si la requête réussie, false sinon.
  */
 function spip_sqlite_create($nom, $champs, $cles, $autoinc = false, $temporary = false, $serveur = '', $requeter = true){
 	$query = _sqlite_requete_create($nom, $champs, $cles, $autoinc, $temporary, $ifnotexists = true, $serveur, $requeter);
@@ -430,13 +435,13 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc = false, $temporary =
 }
 
 /**
- * Fonction pour creer une base de donnees SQLite
+ * Crée une base de données SQLite
  *
- * @param string $nom le nom de la base (sans l'extension de fichier)
- * @param string $serveur le nom de la connexion
- * @param string $option options
+ * @param string $nom     Nom de la base (sans l'extension de fichier)
+ * @param string $serveur Nom de la connexion
+ * @param string $option  Options
  *
- * @return bool true si la base est creee.
+ * @return bool true si la base est créee.
  **/
 function spip_sqlite_create_base($nom, $serveur = '', $option = true){
 	$f = $nom.'.sqlite';
@@ -457,23 +462,20 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true){
 
 
 /**
- * Fonction de creation d'une vue SQL nommee $nom
- * http://doc.spip.org/@spip_sqlite_create_view
- *
+ * Crée une vue SQL nommée `$nom`
+ * 
  * @param string $nom
- * 		Nom de la vue a creer
+ *    Nom de la vue a creer
  * @param string $query_select
- * 		Texte de la requete de selection servant de base a la vue
+ *     Texte de la requête de sélection servant de base à la vue
  * @param string $serveur
- * 		Nom du connecteur
+ *     Nom du connecteur
  * @param bool $requeter
- * 		Effectuer la requete ?
- * 		- true pour executer
- * 		- false pour retourner le texte de la requete
+ *     Effectuer la requete, sinon la retourner
  * @return bool|SQLiteResult|string
- * 		Resultat de la requete ou
- * 		- false si erreur ou si la vue existe deja
- * 		- string texte de la requete si $requeter vaut false
+ *     - true si la vue est créée
+ *     - false si erreur ou si la vue existe déja
+ *     - string texte de la requête si $requeter vaut false
  */
 function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter = true){
 	if (!$query_select) return false;
@@ -625,7 +627,17 @@ function spip_sqlite_delete($table, $where = '', $serveur = '', $requeter = true
 }
 
 
-// http://doc.spip.org/@spip_sqlite_drop_table
+/**
+ * Supprime une table SQL
+ * 
+ * @param string $table    Nom de la table SQL
+ * @param string $exist    True pour ajouter un test d'existence avant de supprimer
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ */
 function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = true){
 	if ($exist) $exist = " IF EXISTS";
 
@@ -641,15 +653,17 @@ function spip_sqlite_drop_table($table, $exist = '', $serveur = '', $requeter = 
 		return false;
 }
 
+
 /**
- * supprime une vue
- * http://doc.spip.org/@spip_sqlite_drop_view
- *
- * @param  $view
- * @param string $exist
- * @param string $serveur
- * @param bool $requeter
- * @return bool|SQLiteResult|string
+ * Supprime une vue SQL
+ * 
+ * @param string $view     Nom de la vue SQL
+ * @param string $exist    True pour ajouter un test d'existence avant de supprimer
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - string Texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
  */
 function spip_sqlite_drop_view($view, $exist = '', $serveur = '', $requeter = true){
 	if ($exist) $exist = " IF EXISTS";
@@ -1132,15 +1146,19 @@ function spip_sqlite_date_proche($champ, $interval, $unite){
 	return "($champ $op datetime('".date("Y-m-d H:i:s")."', '$interval $unite'))";
 }
 
+
 /**
- * http://doc.spip.org/@spip_sqlite_repair
+ * Répare une table SQL
  *
- * pas de fonction native repair dans sqlite, mais on profite pour verifier que tous les champs (text|char) ont bien une clause DEFAULT
- *
- * @param $table
- * @param string $serveur
- * @param bool $requeter
- * @return array|null|resource|string
+ * Il n'y a pas de fonction native repair dans sqlite, mais on profite
+ * pour vérifier que tous les champs (text|char) ont bien une clause DEFAULT
+ * 
+ * @param string $table    Nom de la table SQL
+ * @param string $serveur  Nom de la connexion
+ * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @return string[]
+ *     Tableau avec clé 0 pouvant avoir " OK " ou " ERROR " indiquant
+ *     l'état de la table après la réparation
  */
 function spip_sqlite_repair($table, $serveur='',$requeter=true)
 {
@@ -1271,7 +1289,7 @@ function spip_sqlite_select($select, $from, $where = '', $groupby = '', $orderby
  * @param string $serveur
  *     Nom du connecteur
  * @param bool $requeter
- *     Inutilise
+ *     Inutilisé
  * 
  * @return bool|string
  *     - Nom de la base en cas de success.
@@ -1608,13 +1626,15 @@ function _sqlite_calculer_cite($v, $type){
 
 
 /**
- * renvoie grosso modo "$expression join($join, $v)"
- * http://doc.spip.org/@_sqlite_calculer_expression
- *
- * @param  $expression
- * @param  $v
- * @param string $join
- * @return string
+ * Calcule un expression pour une requête, en cumulant chaque élément
+ * avec l'opérateur de liaison ($join) indiqué
+ * 
+ * Renvoie grosso modo "$expression join($join, $v)"
+ * 
+ * @param string $expression Mot clé de l'expression, tel que "WHERE" ou "ORDER BY"
+ * @param array|string $v    Données de l'expression
+ * @param string $join       Si les données sont un tableau, elles seront groupées par cette jointure
+ * @return string            Texte de l'expression, une partie donc, du texte la requête.
  */
 function _sqlite_calculer_expression($expression, $v, $join = 'AND'){
 	if (empty($v))
@@ -1649,8 +1669,12 @@ function _sqlite_calculer_order($orderby){
 }
 
 
-// renvoie des 'nom AS alias' 
-// http://doc.spip.org/@_sqlite_calculer_select_as
+/**
+ * Renvoie des `nom AS alias`
+ * 
+ * @param array $args
+ * @return string Sélection de colonnes pour une clause SELECT
+ */
 function _sqlite_calculer_select_as($args){
 	$res = '';
 	foreach ($args as $k => $v){
