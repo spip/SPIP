@@ -322,7 +322,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 		if  (valid) {
 			window.open(trig+'&transformer_xml=valider_xml');
 		} else {
-			target.animeajax();
+			jQuery(target).animeajax();
 		}
 		res = jQuery.ajax({
 			"url":trig,
@@ -344,7 +344,7 @@ function AjaxSqueezeNode(trig, target, f, event)
 		target = doc.body;
 	}
 	else {
-		target.animeajax();
+		jQuery(target).animeajax();
 	}
 
 	jQuery(trig).ajaxSubmit({

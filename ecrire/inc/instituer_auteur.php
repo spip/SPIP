@@ -18,6 +18,14 @@ include_spip('inc/layer');
 include_spip('inc/presentation');
 include_spip('inc/message_select');
 
+
+// Deux constantes surchargeables :
+	// statut par defaut a la creation
+	define('_STATUT_AUTEUR_CREATION', '1comite');
+	// statuts associables a des rubriques (separes par des virgules)
+	define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo');
+
+
 //  affiche le statut de l'auteur dans l'espace prive
 // les admins voient et peuvent modifier les droits d'un auteur
 // les admins restreints les voient mais 
@@ -27,8 +35,9 @@ include_spip('inc/message_select');
 function inc_instituer_auteur_dist($auteur) {
 
 	if (!$id_auteur = $auteur['id_auteur']) {
-		$statut = '1comite';
-	} else 	$statut = $auteur['statut'];
+		$statut = _STATUT_AUTEUR_CREATION; 
+	} else
+		$statut = $auteur['statut'];
 
 	$ancre = "instituer_auteur-" . intval($id_auteur);
 
@@ -38,9 +47,13 @@ function inc_instituer_auteur_dist($auteur) {
 
 	$res = "<b>" . _T('info_statut_auteur')."</b> " . $menu;
 
-	// Prepare le bloc des rubriques restreintes ;
-	// si l'auteur n'est pas admin, on le cache
-	$vis = autoriser('publierdans','rubrique') ? '' : " style='display: none'";
+	// Prepare le bloc des rubriques pour les admins eventuellement restreints ;
+	// si l'auteur n'est pas '0minirezo', on le cache, pour pouvoir le reveler
+	// en jquery lorsque le menu de statut change
+	$vis = in_array($statut, explode(',', _STATUT_AUTEUR_RUBRIQUE))
+		? ''
+		: " style='display: none'";
+
 	if ($menu_restreints = choix_rubriques_admin_restreint($auteur))
 		$res .= "<div id='$ancre-aff'$vis>"
 			. $menu_restreints
@@ -78,8 +91,9 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	}
 
 	// Calculer le menu
+	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
 	return "<select name='statut' size='1' class='fondl'
-		onchange=\"(this.options[this.selectedIndex].value == '0minirezo')?jQuery('#$ancre').slideDown():jQuery('#$ancre:visible').slideUp();\">"
+		onchange=\"(this.options[this.selectedIndex].value.match(/$statut_rubrique/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
 	. liste_statuts_instituer($statut, $id_auteur) 
 	. $autres
 	. "\n<option" .
