@@ -164,12 +164,12 @@ function controle_un_forum($row) {
 	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
 
 	$suite = "\n<br />$avant<b>$pref
-	<a href='$url'>$titre</a></b>" . justifier(propre($forum_texte));
+	<a href='$url'>$titre</a></b>" . "<div style='overflow:hidden'>".justifier(propre($forum_texte))."</div>";
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$suite .= "\n<div style='text-align: left' class='serif'><b><a href='$forum_url_site'>$forum_nom_site</a></b></div>";
 
-	$controle .= safehtml($suite);
+	$controle .= safehtml(lignes_longues($suite));
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui") {
 	  $result_mots = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
