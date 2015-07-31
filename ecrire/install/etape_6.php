@@ -28,6 +28,11 @@ function install_etape_6_dist()
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
+	if (@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php'))
+		include(_FILE_CHMOD_INS . _FILE_TMP . '.php');
+	else
+		redirige_par_entete(generer_url_ecrire('install'));
+
 	# maintenant on connait le vrai charset du site s'il est deja configure
 	# sinon par defaut inc/meta reglera _DEFAULT_CHARSET
 	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
@@ -76,6 +81,13 @@ function install_etape_6_dist()
 		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
 		     _FILE_CONNECT_INS . '.php');
 		@unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
+	}
+
+	if (!@rename(_FILE_CHMOD_INS . _FILE_TMP . '.php',
+		    _FILE_CHMOD_INS . '.php')) {
+		copy(_FILE_CHMOD_INS . _FILE_TMP . '.php', 
+		     _FILE_CHMOD_INS . '.php');
+		@unlink(_FILE_CHMOD_INS . _FILE_TMP . '.php');
 	}
 
 	echo "<form action='./' method='post'>";

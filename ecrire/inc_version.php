@@ -303,6 +303,13 @@ function spip_initialisation_parametree($pi, $pa, $ti, $ta) {
 
 	define('_DIR_CONFIG', $pi);
 
+	// Le fichier de definition des droits d'acces en ecriture
+	define('_FILE_CHMOD_INS', ($pi . "chmod"));
+	define('_FILE_CHMOD',
+		(@is_readable($f = _FILE_CHMOD_INS . '.php') ? $f
+	:	false));
+	
+
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS_ANTE_192', (_DIR_RESTREINT . "inc_connect"));
 	define('_FILE_CONNECT_INS', ($pi . "connect"));
@@ -352,6 +359,14 @@ spip_initialisation_parametree(
        (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_INACCESSIBLE),
        (_DIR_RACINE  . _DIRNAME_TEMPORAIRE_ACCESSIBLE)
        );
+
+if (defined('_FILE_CHMOD')) {
+	if (@file_exists(_FILE_CHMOD)) {
+		include_once(_FILE_CHMOD);
+	}
+}else {
+	define('_SPIP_CHMOD', 0777);
+}
 
 //
 // Definitions standards (charge aussi inc/flock)

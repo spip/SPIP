@@ -66,6 +66,16 @@ function install_etape_4_dist()
 	}
 	echo "($result_ok) -->";
 
+	if($chmod) {
+		$conn = "<"."?php\n";
+		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
+		$conn .= "define('_SPIP_CHMOD', ".$chmod.");\n";
+		$conn .= "?".">";
+		if (!ecrire_fichier(_FILE_CHMOD_INS . _FILE_TMP . '.php',
+		$conn))
+			redirige_par_entete(generer_url_ecrire('install'));
+	}
+
 	if ($result_ok) {
 		if (preg_match(',(.*):(.*),', $adresse_db, $r))
 			list(,$adresse_db, $port) = $r;
@@ -74,7 +84,6 @@ function install_etape_4_dist()
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.4;\n";
-		$conn .= "define('_SPIP_CHMOD', ".$chmod.");\n";
 		$conn .= $ligne_rappel;
 		$conn .= "spip_connect_db("
 			. "'$adresse_db','$port','$login_db','$pass_db','$sel_db'"

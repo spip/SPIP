@@ -42,6 +42,9 @@ function install_etape_1_dist()
 			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
 			$login_db = $regs[3];
 		}
+	}
+	if(@file_exists(_FILE_CHMOD_INS . _FILE_TMP . '.php')){
+		$s = @join('', @file(_FILE_CHMOD_INS . _FILE_TMP . '.php'));
 		if(ereg("define\('_SPIP_CHMOD', (.*)\)", $s, $regs)) {
 			$chmod = $regs[1]; 
 		}
