@@ -546,7 +546,7 @@ function image_graver($img){
 	if (strlen($fichier) < 1)
 		$fichier = $img;
 	# si jamais le fichier final n'a pas ete calcule car suppose temporaire
-	if (!@file_exists($fichier)) 
+	if (!@file_exists($fichier))
 		reconstruire_image_intermediaire($fichier);
 	ramasse_miettes($fichier);
 	return $img; // on ne change rien
@@ -594,13 +594,15 @@ function _image_tag_changer_taille($tag,$width,$height,$style=false){
 		$style = "margin:${espace}px;".$style;
 		$tag = inserer_attribut($tag,'hspace','');
 	}
-	$tag = inserer_attribut($tag,'style',$style);
+	$tag = inserer_attribut($tag,'style',$style, true, $style ? false : true);
 	return $tag;
 }
 
 // function d'ecriture du de la balise img en sortie des filtre image
 // reprend le tag initial et surcharge les tags modifies
 function _image_ecrire_tag($valeurs,$surcharge=array()){
+	$valeurs = pipeline('image_ecrire_tag_preparer',$valeurs);
+
 	$tag = 	str_replace(">","/>",str_replace("/>",">",$valeurs['tag'])); // fermer les tags img pas bien fermes;
 	
 	// le style
@@ -648,6 +650,16 @@ function _image_ecrire_tag($valeurs,$surcharge=array()){
 		foreach($surcharge as $attribut=>$valeur)
 			$tag = inserer_attribut($tag,$attribut,$valeur);
 	
+	$tag = pipeline('image_ecrire_tag_finir',
+		array(
+			'args' => array(
+				'valeurs' => $valeurs,
+				'surcharge' => $surcharge,
+			),
+			'data' => $tag
+		)
+	);
+
 	return $tag;
 }
 
