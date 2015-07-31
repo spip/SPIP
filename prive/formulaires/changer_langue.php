@@ -33,8 +33,9 @@ function formulaires_changer_langue_charger_dist($objet,$id_objet,$retour=''){
 	$langue_parent = '';
 	if (isset($valeurs['id_rubrique']))
 		$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=".$valeurs['id_rubrique']);
-
 	$valeurs['_langues'] = liste_options_langues('changer_lang', $valeurs['langue'], $langue_parent);
+	if (!$valeurs['_langues']) return false;
+
 	$valeurs['_objet'] = $objet;
 	$valeurs['_id_objet'] = $id_objet;
 	$valeurs['changer_lang'] = $valeurs['lang'];
