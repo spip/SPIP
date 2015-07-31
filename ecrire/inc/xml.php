@@ -64,30 +64,32 @@ function spip_xml_parse($texte, $strict=true, $clean=true){
 		}
 		else{
 			// tag fermant
-			$chars = preg_split("{(</".preg_quote($closing_tag).">)}is",$txt,-1,PREG_SPLIT_DELIM_CAPTURE);
-			$content = "";
-			if (count($chars)>3){ // plusieurs tags fermant -> verifier les tags ouvrants/fermants
+			$ncclos = strlen("</$closing_tag>");
+			$p = strpos($txt,"</$closing_tag>");
+			if ($p!==FALSE){
 				$nclose =0; $nopen = 0;
-				preg_match_all("{<".preg_quote($closing_tag)."(\s*>|\s[^>]*[^/>]>)}is",$chars[0],$matches,PREG_SET_ORDER);
-				$nopen += count($matches);
-				while ($nopen>$nclose && (count($chars)>3)){
-					$content.=array_shift($chars);
-					$content.=array_shift($chars);
+				$d = 0;
+				while (
+					$p!==FALSE
+					AND (strpos($morceau,"<",$d)<$p)
+					AND ($morceau = substr($txt,$d,$p))
+					AND (($nopen+=preg_match_all("{<".preg_quote($closing_tag)."(\s*>|\s[^>]*[^/>]>)}is",$morceau,$matches,PREG_SET_ORDER))>$nclose)
+					){
 					$nclose++;
-					preg_match_all("{<".preg_quote($closing_tag)."(>|[^>]*[^/>]>)}is",$chars[0],$matches,PREG_SET_ORDER);
-					$nopen += count($matches);
+					$d+=$p+$ncclos;
+					$p = strpos($txt,"</$closing_tag>",$d);
 				}
+				if ($p!==FALSE) $p+=$d;
 			}
-			if (!isset($chars[1])) { // tag fermant manquant
+			if ($p===FALSE){
 				if ($strict){
 					$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
 					return $out;
 				}
 				else return $texte; // un tag qui constitue du texte a reporter dans $before
 			}
-			$content .= array_shift($chars);
-			array_shift($chars); // enlever le separateur
-			$txt = implode("",$chars);
+			$content = substr($txt,0,$p);
+			$txt = substr($txt,$p+$ncclos);
 			if (strpos($content,"<")===FALSE) // eviter une recursion si pas utile
 				$out[$tag][] = $content;
 			else
