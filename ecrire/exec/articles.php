@@ -756,7 +756,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 		// Changer article de reference de la trad
 		if ($id_trad_new = intval($id_trad_new)
-		AND $id_trad_old = intval($id_trad_old)
+		AND $id_trad_old = intval(_request('id_trad_old'))  # bizarre
 		AND $connect_statut=='0minirezo'
 		AND $connect_toutes_rubriques) { 
 			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new, date_modif=NOW() WHERE id_trad = $id_trad_old");
@@ -1547,7 +1547,10 @@ if (isset($_POST['titre'])) {
  }
 
 
-	if ($new == 'oui')
+	// renvoyer vers la page de l'article
+	if ($new == 'oui'
+	AND ! $lier_trad  # sauf dans le cas d'un lier_trad car le code de mise a jour du lien est au meme endroit que l'affichage (a corriger).
+	)
 		redirige_par_entete(
 			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
 
