@@ -7,43 +7,38 @@ define("_ECRIRE_INC_LOGOS", "1");
 
 
 function get_image($racine) {
-	if (@file_exists("../IMG/$racine.gif")) {
-		$fichier = "$racine.gif";
-	}
-	else if (@file_exists("../IMG/$racine.jpg")) {
-		$fichier = "$racine.jpg";
-	}
-	else if (@file_exists("../IMG/$racine.png")) {
-		$fichier = "$racine.png";
-	}
+	foreach (array('gif','jpg','png') as $fmt)
+		if (@file_exists("../IMG/$racine.".$fmt)) {
+			$fichier = "$racine.".$fmt;
+			break;
+		}
 
 	if ($fichier) {
 		$taille = resize_logo($fichier);
 
 		// contrer le cache du navigateur
-		if ($fid = @filesize("../IMG/$fichier") . @filemtime("../IMG/$fichier")) {
+		if ($fid = @filesize("../IMG/$fichier") . @filemtime("../IMG/$fichier"))
 			$fid = "?".md5($fid);
-		}
 		return array($fichier, $taille, $fid);
 	}
 	else return;
 }
 
 
-function resize_logo($image) {
+function resize_logo($image, $maxi=190) {
 	$limage = @getimagesize("../IMG/$image");
 	if (!$limage) return;
 	$limagelarge = $limage[0];
 	$limagehaut = $limage[1];
 
-	if ($limagelarge > 190){
-		$limagehaut = $limagehaut * 190 / $limagelarge;
-		$limagelarge = 190;
+	if ($limagelarge > $maxi){
+		$limagehaut = $limagehaut * $maxi / $limagelarge;
+		$limagelarge = $maxi;
 	}
 
-	if ($limagehaut > 190){
-		$limagelarge = $limagelarge * 190 / $limagehaut;
-		$limagehaut = 190;
+	if ($limagehaut > $maxi){
+		$limagelarge = $limagelarge * $maxi / $limagehaut;
+		$limagehaut = $maxi;
 	}
 
 	// arrondir a l'entier superieur
@@ -199,13 +194,13 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
 	global $convert_command;
+	global $formats_sortie;
 
 	if ($process == 'AUTO')
 		$process = lire_meta('image_process');
 
 	// liste des formats qu'on sait lire
 	$formats_graphiques = lire_meta('formats_graphiques');
-	$formats_sortie = array('jpg','png','gif');
 
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
@@ -237,8 +232,9 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 
 		// imagemagick en ligne de commande
 		if ($process == 'convert') {
-			$vignette = $destination.".jpg";
-			$commande = "$convert_command -size ${destWidth}x${destHeight} $image -geometry ${destWidth}x${destHeight} +profile \"*\" ".escapeshellcmd($vignette);
+			$format = $formats_sortie[0];
+			$vignette = $destination.".".$format;
+			$commande = "$convert_command -size ${destWidth}x${destHeight} ./$image -geometry ${destWidth}x${destHeight} +profile \"*\" ./".escapeshellcmd($vignette);
 			spip_log($commande);
 			exec($commande);
 			if (!@file_exists($vignette))
@@ -247,7 +243,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 		else
 		 // imagick (php4-imagemagick)
 		 if ($process == 'imagick') {
-			$vignette = "$destination.jpg";
+			$format = $formats_sortie[0];
+			$vignette = "$destination.".$format;
 			$handle = imagick_readimage($image);
 			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
 			imagick_write($handle, $vignette);
@@ -273,12 +270,14 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			// - on sauve de preference en JPEG (meilleure compression)
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
 			$gd_formats = lire_meta("gd_formats");
-			if (ereg("jpg", $gd_formats))
-				$destFormat = "jpg";
-			else if ($format == "gif" AND ereg("gif", $gd_formats) AND $GLOBALS['flag_ImageGif'])
-				$destFormat = "gif";
-			else if (ereg("png", $gd_formats))
-				$destFormat = "png";
+			foreach ($formats_sortie as $fmt) {
+				if (ereg($fmt, $gd_formats)) {
+					if ($format <> "gif" OR $GLOBALS['flag_ImageGif'])
+						$destFormat = $fmt;
+					break;
+				}
+			}
+
 			if (!$destFormat) return;
 
 			// Initialisation de l'image destination
