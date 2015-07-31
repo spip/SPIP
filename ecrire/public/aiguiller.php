@@ -12,6 +12,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function securiser_redirect_action($redirect){
+	if (tester_url_absolue($redirect) AND !defined('_AUTORISER_ACTION_ABS_REDIRECT'))
+		$redirect = "";
+	return $redirect;
+}
+
 // http://doc.spip.org/@traiter_appels_actions
 function traiter_appels_actions(){
 	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
@@ -30,13 +36,17 @@ function traiter_appels_actions(){
 			$url = parametre_url($url,'var_ajax',$v,'&');
 			$url = parametre_url($url,'var_ajax_env',$args,'&');
 			set_request('redirect',$url);
-		}		
+		}
+		else if(_request('redirect')){
+			set_request('redirect',securiser_redirect_action(_request('redirect')));
+		}
 		$var_f = charger_fonction($action, 'action');
 		$var_f();
 		if (!isset($GLOBALS['redirect'])) {
 			$GLOBALS['redirect'] = _request('redirect');
 			if ($_SERVER['REQUEST_METHOD'] == 'POST')
 				$GLOBALS['redirect'] = urldecode($GLOBALS['redirect']);
+			$GLOBALS['redirect'] = securiser_redirect_action($GLOBALS['redirect']);
 		}
 		if ($url = $GLOBALS['redirect']) {
 			// si l'action est provoque par un hit {ajax}

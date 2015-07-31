@@ -19,8 +19,8 @@ include_spip('inc/cookie');
 function action_cookie_dist() {
 
 	// La cible de notre operation de connexion
-	$url = _request('url');
-	$redirect = isset($url) ? $url : _DIR_RESTREINT;
+	$url = securiser_redirect_action(_request('url'));
+	$redirect = $url ? $url : generer_url_ecrire('accueil');
 	$redirect_echec = _request('url_echec');
 	if (!isset($redirect_echec)) {
 		if (strpos($redirect,_DIR_RESTREINT_ABS)!==false)
