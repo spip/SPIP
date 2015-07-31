@@ -1,10 +1,10 @@
 <?php
 
+include_ecrire('inc_meta.php3');
 include_ecrire('inc_forum.php3');
-include_local('inc-forum.php3');
 
 // Ce fichier inclus par inc-public a un comportement special
-// Voir commentaires dans celui-ci et dans inc-forum
+// Voir commentaires dans celui-ci et dans inc-formulaire_forum
 
 function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre)
 {
@@ -64,7 +64,8 @@ if (!$id_auteur)
 	$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
 
 if ($forum_id_article) {
-	$r = spip_fetch_array(spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$forum_id_article"));
+	$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$forum_id_article");
+	$r = spip_fetch_array($r);
 	if ($r)
 		$forums_publics = $r['accepter_forum'];
 	else

@@ -4,15 +4,15 @@
 // Formulaire de signature d'une petition
 //
 
-global $signature_array;
-$signature_array = array('petition');
+global $balise_FORMULAIRE_SIGNATURE_collecte;
+$balise_FORMULAIRE_SIGNATURE_collecte = array('petition');
 
-function signature_stat($args, $filtres)
+function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres)
 {
   return ($args[0] ? $args : '');
 }
 
-function signature_dyn($id_article) {
+function balise_FORMULAIRE_SIGNATURE_dyn($id_article) {
 	if ($GLOBALS['val_confirm'])
 		return _REPONSE_CONFIRMATION_SIGNATURE;	// geree par inc-public.php3
 	else if ($GLOBALS['nom_email'] AND $GLOBALS['adresse_email'])

@@ -1,10 +1,5 @@
 <?php
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_FORUM")) return;
-define("_INC_FORUM", "1");
-
 include_ecrire('inc_meta.php3');
 include_ecrire('inc_admin.php3');
 include_ecrire('inc_acces.php3');
@@ -15,6 +10,7 @@ include_ecrire('inc_mail.php3');
 include_ecrire('inc_barre.php3');
 include_ecrire('inc_forum.php3');
 include_ecrire("inc_abstract_sql.php3");
+include_local(_FILE_CONNECT);
 
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
@@ -25,11 +21,10 @@ else
 /*******************************/
 /* GESTION DU FORMULAIRE FORUM */
 /*******************************/
+global $balise_FORMULAIRE_FORUM_collecte;
+$balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
 
-global $forum_array;
-$forum_array = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
-
-function forum_stat($args, $filtres)
+function balise_FORMULAIRE_FORUM_stat($args, $filtres)
 {
   list ($idr, $idf, $ida, $idb, $ids) = $args;
 
@@ -41,7 +36,7 @@ function forum_stat($args, $filtres)
     array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids);
 }
 
-function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
+function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
@@ -51,22 +46,22 @@ function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id
 	else {
 	// identifiants des parents
 	  $args = '';  
-	  if ($id_rubrique) $args .= "&id_rubrique=$id_rubrique";
-	  if ($id_forum) $args .= "&id_forum=$id_forum";
-	  if ($id_article) $args .= "&id_article=$id_article";
-	  if ($id_breve) $args .= "&id_breve=$id_breve";
-	  if ($id_syndic) $args .= "&id_syndic=$id_syndic";
-	  if ($args) $url .= (strpos($url,'?') ? $args : ('?' . substr($args,1)));
+	  if ($id_rubrique) $args .= "id_rubrique=$id_rubrique";
+	  if ($id_forum) $args .= "id_forum=$id_forum";
+	  if ($id_article) $args .= "id_article=$id_article";
+	  if ($id_breve) $args .= "id_breve=$id_breve";
+	  if ($id_syndic) $args .= "id_syndic=$id_syndic";
+	  if ($args && strpos($url,$args)===false) $url .= (strpos($url,'?') ? '&' : '?') . $args;
 	}
 	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
 	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
-	$url = ereg_replace("[?&]var_url=[^&]*", '', $url);
+	$url = ereg_replace("[?&]url=[^&]*", '', $url);
 
 	// verifier l'identite des posteurs pour les forums sur abo
 	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"]))
 	  {
-	    include_local('inc-login.php3');
-	    return login_pour_tous($url, false, true, $url, 'forum');
+	    include_local('inc-login_public.php3');
+	    return login_pour_tous($GLOBALS['var_login'], $url, true, $url, 'forum');
 	  }
 	// au premier appel (pas de http-var nommee "retour")
 	// memoriser l'URL courante pour y revenir apres envoi du message
@@ -194,7 +189,7 @@ function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id
 		     'previsu' => $previsu,
 		     'retour' => $retour,
 		     'table' => $table,
-		     'texte' =>   $texte,
+		     'texte' => $texte,
 		     'titre' => $titre,
 		     'url' =>  $url,
 		     'url_site' => ($url_site ? $url_site : "http://")
@@ -282,78 +277,14 @@ function afficher_petits_logos_mots($id_mot) {
 	}
 }
 
-
-
-/***********************************************/
-/* FONCTIONS POUR LES BALISES LIEES AUX FORUMS */
-/***********************************************/
-
-// Noter l'invalideur de la page contenant ces parametres,
-// en cas de premier post sur le forum
-function code_invalideur_forums($p, $code) {
-	return '
-	// invalideur forums
-	(!($Cache[\'id_forum\'][calcul_index_forum(' . 
-				// Retournera 4 [$SP] mais force la demande du champ a MySQL
-				champ_sql('id_article', $p) . ',' .
-				champ_sql('id_breve', $p) .  ',' .
-				champ_sql('id_rubrique', $p) .',' .
-				champ_sql('id_syndic', $p) .  ")]=1)".
-				"?'':\n" . $code .")";
-}
-
-// Parametres de reponse a un forum
-function calculer_balise_parametres($p) {
-	$_accepter_forum = champ_sql('accepter_forum', $p);
-	$p->code = '
-	// refus des forums ?
-	('.$_accepter_forum.'=="non" OR
-	(lire_meta("forums_publics") == "non" AND !ereg("^(pos|pri|abo)", '.$_accepter_forum.')))
-	? "" : // sinon:
-	';
-
-	switch ($p->type_requete) {
-		case 'articles':
-			$c = '"id_article=".' . champ_sql('id_article', $p);
-			break;
-		case 'breves':
-			$c = '"id_breve=".' . champ_sql('id_breve', $p);
-			break;
-		case 'rubriques':
-			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
-			break;
-		case 'syndication':
-			$c = '"id_syndic=".' . champ_sql('id_syndic', $p);
-			break;
-		case 'forums':
-		default:
-			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
-			foreach ($liste_champs as $champ) {
-				$x = champ_sql( $champ, $p);
-				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
-			}
-			$c = "substr($c,1)";
-			break;
-	}
-
-	$c .= '.
-	"&retour=".rawurlencode($lien=$GLOBALS["HTTP_GET_VARS"]["retour"] ? $lien : nettoyer_uri())';
-
-	$p->code .= code_invalideur_forums($p, "(".$c.")");
-
-	$p->statut = 'html';
-	return $p;
-}
-
-
 /*******************************************************/
 /* FONCTIONS DE CALCUL DES DONNEES DU FORMULAIRE FORUM */
 /*******************************************************/
 
-
 //
 // Chercher le titre et la configuration du forum de l'element auquel on repond
 //
+
 function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 
 	// changer la table de reference s'il y a lieu (pour afficher_groupes[] !!)

@@ -242,9 +242,9 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	return $page;
 }
 
-function inclure_formulaire($r) {
+function inclure_balise_dynamique($r) {
 	if (is_string($r))
-		echo $r;	# ??? c'est du debug ou quoi ?
+		echo $r;
 	else {
 		list($fond, $delais, $contexte_inclus) = $r;
 		if ((!$contexte_inclus['lang']) AND
@@ -253,6 +253,4 @@ function inclure_formulaire($r) {
 		include('inc-public.php3');
 	}
 }
-
-
 ?>

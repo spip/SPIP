@@ -104,14 +104,14 @@ else {
 		if (!$mode)
 		  $mode = $inscriptions ? 'redac' : 'forum';
 
-		include_local("inc-inscription.php3");
-		include_local("inc-public-global.php3"); 
 		install_debut_html(_T('pass_vousinscrire'));
 		echo "<p>",
 		  (($mode != 'forum') ? _T('pass_espace_prive_bla') :
 		   _T('pass_forum_bla')),
-		  "\n</p>",
-		  inclure_formulaire(inscription_dyn($mode,
+		  "\n</p>";
+		include_local("inc-formulaire_inscription.php3");
+		include_local("inc-public-global.php3"); 
+		inclure_balise_dynamique(balise_formulaire_inscription_dyn($mode,
 							$GLOBALS['mail_inscription'],
 							$GLOBALS['nom_inscription']));
 	}

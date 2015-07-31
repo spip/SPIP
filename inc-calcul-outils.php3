@@ -144,11 +144,11 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
-function calculer_formulaire($nom, $args, $filtres) {
-	$file = 'inc-' .$nom . _EXTENSION_PHP;
+function executer_balise_dynamique($nom, $args, $filtres) {
+	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
 	include_local($file);
 
-	$f = $nom . '_stat';
+	$f = 'balise_' . $nom . '_stat';
 	$r = $f($args, $filtres);
 	if (!is_array($r))
 		return $r;
@@ -162,7 +162,7 @@ lang_select(\''
 include_local("'
 		. $file
 		. '");
-inclure_formulaire('
+inclure_balise_dynamique(balise_'
 		. $nom
 		. '_dyn(\''
 		. join("', '", array_map("addslashes", $r))
@@ -177,7 +177,7 @@ inclure_formulaire('
 // FONCTIONS FAISANT DES APPELS SQL
 //
 
-# NB : a l'exception des fonctions de forum regroupees dans inc-forum.
+# NB : a l'exception des fonctions pour les balises dynamiques
 
 function calcul_exposer ($id, $type, $reference) {
 	static $exposer;
