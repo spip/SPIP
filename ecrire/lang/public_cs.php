@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Zde je zpravodaj tohoto webu',
-'texte_lettre_information_2' => 'Tento soupis sumarizuje články a novinky publikované od ',
+'texte_lettre_information_2' => 'Tento soupis sumarizuje články a novinky publikované od ', # MODIF
 
 // V
 'ver_imprimer' => 'Verze pro tisk',

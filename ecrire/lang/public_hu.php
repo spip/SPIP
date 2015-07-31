@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Íme a honlap hírlevele',
-'texte_lettre_information_2' => 'Ez a hírlevél a cikkeket, ill. híreket összefoglalja azóta',
+'texte_lettre_information_2' => 'Ez a hírlevél a cikkeket, ill. híreket összefoglalja azóta', # MODIF
 
 // V
 'ver_imprimer' => 'Nyomtatható változat',

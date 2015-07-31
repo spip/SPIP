@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => '站点时事通讯',
-'texte_lettre_information_2' => '本封信统计自下述时间发表的文章和简要',
+'texte_lettre_information_2' => '本封信统计自下述时间发表的文章和简要', # MODIF
 
 // V
 'ver_imprimer' => '打印版本',
