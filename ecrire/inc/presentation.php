@@ -914,7 +914,8 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($logo = $chercher_logo($id_breve, 'id_breve', 'on')) {
 			list($fid, $dir, $nom, $format) = $logo;
-			$logo = ratio_image($fid, $nom, $format, 26, 20, "alt=''");
+			include_spip('inc/filtres_images');
+			$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
 			if ($logo)
 				$s .= "\n<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>$logo</span>";
 		}
@@ -1119,7 +1120,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 			$chercher_logo = charger_fonction('chercher_logo', 'inc');
 			if ($logo = $chercher_logo($id_auteur, 'id_auteur', 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
-				$logo = ratio_image($fid, $nom, $format, 48, 48, "alt=''");
+				include_spip('inc/filtres_images');
+				$logo = image_reduire("<img src='$fid' alt='' />", 48, 48);
 				if ($logo)
 					$titre_boite = "\n<div style='$voir_logo'>$logo</div>" ;
 			}
@@ -1951,7 +1953,8 @@ function enfant_rub($collection){
 		if ($voir_logo) {
 			if ($logo = $chercher_logo($id_rubrique, 'id_rubrique', 'on')) {
 				list($fid, $dir, $nom, $format) = $logo;
-				$logo = ratio_image($fid, $nom, $format, 48, 36, "alt=''");
+				include_spip('inc/filtres_images');
+				$logo = image_reduire("<img src='$fid' alt='' />", 48, 36);
 				if ($logo)
 					$logo =  "\n<div style='$voir_logo'>$logo</div>";
 			}

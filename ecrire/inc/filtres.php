@@ -176,17 +176,53 @@ function image_typo() {
 	return call_user_func_array('produire_image_typo', $tous);
 }
 
+//
+// Retourner taille d'une image
+// pour les filtres |largeur et |hauteur
+//
+// http://doc.spip.org/@taille_image
+function taille_image($img) {
+	static $largeur_img =array(), $hauteur_img= array();
+
+	$logo = extraire_attribut($img,'src');
+	if (!$logo) $logo = $img;
+	else {
+		$srcWidth = extraire_attribut($img,'width');
+		$srcHeight = extraire_attribut($img,'height');
+	}
+	
+	// pour essayer de limiter les lectures disque
+	// $meme remplace $logo, pour unifier certains fichiers dont on sait qu'ils ont la meme taille
+	$mem = $logo;
+	if (strrpos($mem,"/") > 0) $mem = substr($mem, strrpos($mem,"/")+1, strlen($mem));
+	$mem = ereg_replace("\-flip\_v|\-flip\_h", "", $mem);
+	$mem = ereg_replace("\-nb\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?\-[0-9]+(\.[0-9]+)?", "", $mem);
+
+	$srcsize = false;
+	$srcWidth = isset($largeur_img[$mem])?$largeur_img[$mem]:0;
+	if (isset($largeur_img[$mem]))
+		$srcWidth = $largeur_img[$mem];
+	if (!$srcWidth AND $srcsize = @getimagesize($logo)) {
+		$srcWidth = $srcsize[0];
+	 	$largeur_img[$mem] = $srcWidth;
+	}
+	if (isset($hauteur_img[$mem]))
+		$srcHeight = $hauteur_img[$mem];
+	if (!$srcHeight AND ($srcsize OR ($srcsize = @getimagesize($logo)))) {
+		$srcHeight = $srcsize[1];
+		$hauteur_img[$mem] = $srcHeight;
+	}
+	return array($srcHeight, $srcWidth);
+}
 // http://doc.spip.org/@largeur
 function largeur($img) {
 	if (!$img) return;
-	include_spip('inc/logos');
 	list ($h,$l) = taille_image($img);
 	return $l;
 }
 // http://doc.spip.org/@hauteur
 function hauteur($img) {
 	if (!$img) return;
-	include_spip('inc/logos');
 	list ($h,$l) = taille_image($img);
 	return $h;
 }

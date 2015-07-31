@@ -202,4 +202,13 @@ spip_log('afficher_formulaire_date() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['S
 	. "</form>";
 }
 
+// http://doc.spip.org/@ratio_image
+function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs) {
+	// $logo est le nom complet du logo ($logo = "chemin/$nom.$format)
+	// $nom et $format ne servent plus du fait du passage par le filtre image_reduire
+	include_spip('inc/filtres_images');
+	$res = image_reduire("<img src='$logo' $attributs />", $taille, $taille_y);
+	return $res;
+}
+
 ?>

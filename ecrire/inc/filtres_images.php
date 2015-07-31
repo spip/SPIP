@@ -12,23 +12,36 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/filtres'); // par precaution
 
-// selectionner les images qui vont subir une transformation sur un critere de taille
-// ls images exclues sont marquees d'une class no_image_filtrer qui bloque les filtres suivants
-// dans la fonction image_filtrer
-// http://doc.spip.org/@image_select
-function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $height_max=1000){
-	if (!$img) return $img;
-	include_spip('inc/logos');
-	$src = extraire_attribut($img,'src');
-	list ($h,$l) = taille_image($src);
-	if ($l<$width_min OR $l>$width_max OR $h<$height_min OR $h>$height_max){
-		$class = extraire_attribut($img,'class');
-		if (strpos($class,'no_image_filtrer')===FALSE)
-			$class .= " no_image_filtrer";
-		$img = inserer_attribut($img,'class',$class);
+// http://doc.spip.org/@cherche_image_nommee
+function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
+
+	if (ereg("^" . _DIR_IMG, $nom)) {
+		$nom = substr($nom,strlen(_DIR_IMG));
+	} else 	if (ereg("^" . _DIR_IMG_PACK, $nom)) {
+		$nom = substr($nom,strlen(_DIR_IMG_PACK));
+	} else if (ereg("^" . _DIR_IMG_ICONES_DIST, $nom)) {
+		$nom = substr($nom,strlen(_DIR_IMG_ICONES_DIST));
 	}
-	return $img;
+	$pos = strrpos($nom, "/");
+	if ($pos > 0) {
+		$chemin = substr($nom, 0, $pos+1);
+		$nom = substr($nom, $pos+1);
+	} else {
+		$chemin = "";
+	}
+
+	reset($formats);
+	while (list(, $format) = each($formats)) {
+		if (@file_exists(_DIR_IMG . "$chemin$nom.$format")){ 
+			return array((_DIR_IMG . $chemin), $nom, $format);
+		} else if (@file_exists(_DIR_IMG_PACK . "$chemin$nom.$format")){ 
+			return array((_DIR_IMG_PACK . $chemin), $nom, $format);
+		} else if (@file_exists(_DIR_IMG_ICONES_DIST . "$chemin$nom.$format")){ 
+			return array((_DIR_IMG_ICONES_DIST . $chemin), $nom, $format);
+		}
+	}
 }
 
 // Fonctions de traitement d'image
@@ -68,7 +81,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
-	include_spip('inc/logos');
 	list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 	// cas general :
 	// on a un dossier cache commun et un nom de fichier qui varie avec l'effet
@@ -95,7 +107,6 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 		$creer = false;
 	}
 	
-	include_spip('inc/logos');
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
 	$ret["fonction_image"] = "image".$term_fonction_dest;
@@ -176,11 +187,44 @@ function image_ecrire_tag($valeurs,$surcharge){
 		$tag = str_replace($src,$surcharge['src'],$tag);
 		unset($surcharge['src']);
 	}
+	
+	// regarder la class pour gerer le 'format_png' en fonction du format de l'image
+	// (et le remettre sinon)
+	/*$class = $valeurs['class'];
+	if (isset($surcharge['class'])){
+		$class = $surcharge['class'];
+		unset($surcharge['class']);
+	}*/
+	
 	if (count($surcharge))
 		foreach($surcharge as $attribut=>$valeur)
 			$tag = inserer_attribut($tag,$attribut,$valeur);
 
 	return $tag;
+}
+
+// selectionner les images qui vont subir une transformation sur un critere de taille
+// ls images exclues sont marquees d'une class no_image_filtrer qui bloque les filtres suivants
+// dans la fonction image_filtrer
+// http://doc.spip.org/@image_select
+function image_select($img,$width_min=0, $height_min=0, $width_max=10000, $height_max=1000){
+	if (!$img) return $img;
+	list ($h,$l) = taille_image($img);
+	$select = true;
+	if ($l<$width_min OR $l>$width_max OR $h<$height_min OR $h>$height_max)
+		$select = false;
+
+	$class = extraire_attribut($img,'class');
+	$p = strpos($class,'no_image_filtrer');
+	if (($select==false) AND ($p===FALSE)){
+		$class .= " no_image_filtrer";
+		$img = inserer_attribut($img,'class',$class);
+	}
+	if (($select==true) AND ($p!==FALSE)){
+		$class = preg_replace(",\s*no_image_filtrer,","",$class);
+		$img = inserer_attribut($img,'class',$class);
+	}
+	return $img;
 }
 
 // http://doc.spip.org/@image_creer_vignette
@@ -486,7 +530,6 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 		return image_ecrire_tag($image,array('src'=>$image['fichier_dest'],'width'=>$image['largeur_dest'],'height'=>$image['hauteur_dest']));
 
 	if ($cherche_image){
-		include_spip('inc/logos');
 		$cherche = cherche_image_nommee(substr($image['fichier'],0,-4), array($image["format_source"]));
 		if (!$cherche) return $img;
 		//list($chemin,$nom,$format) = $cherche;
@@ -516,7 +559,6 @@ function image_reduire($img, $taille = -1, $taille_y = -1, $force=false, $cherch
 // Reduire une image d'un certain facteur
 // http://doc.spip.org/@image_reduire_par
 function image_reduire_par ($img, $val=1, $force=false) {
-	include_spip('inc/logos');
 	list ($hauteur,$largeur) = taille_image($img);
 
 	$l = round($largeur/$val);
@@ -792,7 +834,6 @@ function image_masque($im, $masque, $pos="") {
 	}
 	else $placer = false;
 
-	include_spip('inc/logos'); // bicoz presence reduire_image, taille_image
 	if ($creer) {
 		
 		$masque = find_in_path($masque);
@@ -1457,7 +1498,6 @@ function image_rotation($im, $angle, $crop=false)
 			imagedestroy($im);
 		}
 	}
-	include_spip('inc/logos');
 	list ($src_y,$src_x) = taille_image($dest);
 	return image_ecrire_tag($image,array('src'=>$dest,'width'=>$src_x,'height'=>$src_y));
 }

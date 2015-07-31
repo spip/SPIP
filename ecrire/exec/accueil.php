@@ -289,7 +289,8 @@ if ($spip_display != 4) {
 		$chercher_logo = charger_fonction('chercher_logo', 'inc');
 		if ($res = $chercher_logo(0, 'id_syndic', 'on'))  {
 			list($fid, $dir, $nom, $format) = $res;
-			$res = ratio_image($fid, $nom, $format, 170, 170, "alt=''");
+			include_spip('inc/filtres_images');
+			$res = image_reduire("<img src='$fid' alt='' />", 170, 170);
 			if ($res)
 				echo  "<div style='text-align:center; margin-bottom: 5px;'>$res</div>";
 		}

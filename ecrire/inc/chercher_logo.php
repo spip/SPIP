@@ -12,8 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/logos');
-
 // http://doc.spip.org/@inc_chercher_logo_dist
 function inc_chercher_logo_dist($id, $id_type, $mode='on') {
 	global $formats_logos;
