@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_auteur' => 'di ',
-'participer_site' => '&Egrave; possibile partecipare alla vita di questo sito e proporre i propri articoli iscrivendosi qui sotto. Verr&agrave; spedita immediatamente un email con il codice di accesso all\'area riservata del sito.',
+'participer_site' => '&Egrave; possibile partecipare alla vita di questo sito e proporre degli articoli iscrivendosi qui sotto. Verr&agrave; spedito immediatamente un email con il codice di accesso all\'area riservata del sito.',
 'plan_site' => 'Mappa del sito',
 'popularite' => 'Popolarit&agrave;',
 'poster_message' => 'Inviare un messaggio',
@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repondre_breve' => 'Rispondere a questa breve',
 'repondre_message' => 'Rispondere al messaggio',
 'resultats_recherche' => 'Risultati della ricerca',
-'retour_debut_forums' => 'Ritorna all\'inizio dei forum',
+'retour_debut_forums' => 'Tornare all\'inizio dei forum',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubriche',
 
