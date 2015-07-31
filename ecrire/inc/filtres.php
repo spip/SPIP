@@ -224,7 +224,7 @@ function filtrer($filtre) {
 	}
 	else {
 		// le filtre n'existe pas, on provoque une erreur
-		erreur_squelette(texte_script(_T('zbug_erreur_filtre', array('filtre'=>$filtre))),'');
+	  erreur_squelette(_T('zbug_erreur_filtre', array('filtre'=>texte_script($filtre))));
 	}
 }
 
