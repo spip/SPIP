@@ -87,7 +87,7 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
 	// Facile : les liens fichiers (./xxxxx.css# -> chemin/xxxxx.css)
 	//
 	if (preg_match_all('@[.]/([^[[:space:]#<>"$\']+)[#]@',
-	$texte, $matches, PREG_SET_ORDER)
+	$texte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $r)
 			if ($fichier = find_in_path($r[1]))
 				$texte = str_replace ($r[0], $fichier, $texte);
