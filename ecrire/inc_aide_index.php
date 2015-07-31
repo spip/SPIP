@@ -24,12 +24,8 @@ function help_frame ($aide) {
 
 	echo "</head>\n";
 
-	$frame_menu = "<frame src=" .
-	  http_php_script('aide_index', "aide=$aide&var_lang=$spip_lang&frame=menu") . 
-	  " name=\"gauche\" scrolling=\"auto\" noresize>\n";
-	$frame_body = "<frame src=" .
-	  http_php_script('aide_index', "aide=$aide&var_lang=$spip_lang&frame=body") .
-	  " name=\"droite\" scrolling=\"auto\" noresize>\n";
+	$frame_menu = "<frame src='" . http_php_scriptnq('aide_index', "aide=$aide&var_lang=$spip_lang&frame=menu") . "' name=\"gauche\" scrolling=\"auto\" noresize>\n";
+	$frame_body = "<frame src='" . http_php_scriptnq('aide_index', "aide=$aide&var_lang=$spip_lang&frame=body") . "' name=\"droite\" scrolling=\"auto\" noresize>\n";
 
 	if ($GLOBALS['spip_lang_rtl']) {
 		echo '<frameset cols="*,160" border="0" frameborder="0" framespacing="0">';
@@ -138,7 +134,7 @@ function help_body($aide, $html) {
 		$p = strpos($suite, $r[0]);
 		$html .= substr($suite, 0, $p) .
 		  ($r[1] . 
-		   http_php_script("aide_index",
+		   http_php_scriptnq("aide_index",
 				   ("img=" . str_replace('/', '-', $r[3]))));
 
 		$suite = substr($suite, $p + strlen($r[0]));
@@ -211,9 +207,9 @@ table.spip td {
 <TR WIDTH=100% HEIGHT=60%>
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
 <CENTER>
-<img src=',
-		  http_php_script("aide_index", "img=AIDE--logo-spip.gif"),
-		  ' alt="SPIP" width="300" height="170" border="0">
+<img src="',
+		  http_php_scriptnq("aide_index", "img=AIDE--logo-spip.gif"),
+		  '" alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';
 	}
@@ -423,9 +419,9 @@ function article($titre, $lien, $statut = "redac") {
 		else {
 			$class = "article-inactif";
 		}
-		$texte[$ligne] .= "<a class='$class' id='$id' href=" .
-		  http_php_script("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang") .
-		  " target='droite' onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
+		$texte[$ligne] .= "<a class='$class' id='$id'
+ href='" . http_php_scriptnq("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang") .
+		  "' target='droite' onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
 	}
 }
 

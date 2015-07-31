@@ -1048,9 +1048,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 				echo "<li><b>".typo($nom_auteur)."</b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A HREF=" . 
-				  http_php_script('articles', "id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs") .
-				  ">"._T('lien_ajouter_auteur')."</A>";
+				echo " | <A href='", http_php_scriptnq('articles', "id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs"),
+				  "'>",_T('lien_ajouter_auteur'),"</A>";
 
 				if (trim($bio_auteur)) {
 					echo "<br />".couper(propre($bio_auteur), 100)."\n";
@@ -1149,9 +1148,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 
 			$vals[] = bonhomme_statut($row);
 
-			$vals[] = "<A HREF=" . 
-			  http_php_script('auteurs_edit', "id_auteur=$id_auteur") .
-			  "$bio_auteur>".typo($nom_auteur)."</A>";
+			$vals[] = "<A href='" . http_php_scriptnq('auteurs_edit', "id_auteur=$id_auteur") . "' $bio_auteur>".typo($nom_auteur)."</A>";
 
 			$vals[] = bouton_imessage($id_auteur);
 

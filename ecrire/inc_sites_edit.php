@@ -71,9 +71,7 @@ if ($new == 'oui'){
 	if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 		debut_cadre_relief("site-24.gif");
 		
-		echo '<form action=',
-		  http_php_script('sites'),
-		  ">\n",
+		echo "<form action='", http_php_scriptnq('sites'), "'>\n",
 		  "<input type='hidden' name='id_rubrique' value='$id_rubrique' />\n",
 		  "<input type='hidden' name='new' value='oui' />\n",
 		  "<input type='hidden' name='analyser_site' value='oui' />\n",

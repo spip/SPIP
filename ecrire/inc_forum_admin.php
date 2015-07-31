@@ -72,7 +72,7 @@ function forum_admin_dist()
 
   echo "<p><div align='center'>";
   icone (_T('icone_poster_message'), 
-	 http_php_script("forum_envoi", 
+	 http_php_scriptnq("forum_envoi", 
 			 "statut=$statutforum&adresse_retour=" .
 			 urlencode($urlforum) . 
 			 "&titre_message=" .

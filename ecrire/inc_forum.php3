@@ -70,10 +70,10 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$supprimer = false;
 			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 			if($forum_id_auteur)
-				$controle .= " - <A href=" .
-				  http_php_script('auteurs_edit',
+				$controle .= " - <A href='" .
+				  http_php_scriptnq('auteurs_edit',
 						  "id_auteur=$forum_id_auteur") .
-				  ">" ._T('lien_voir_auteur'). "</A>";
+				  "'>" ._T('lien_voir_auteur'). "</A>";
 			break;
 		# forum propose (a moderer) sur le site public
 		case "prop":
