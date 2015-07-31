@@ -164,7 +164,8 @@ else {
 		echo "<div class='iconeoff' style='padding: 5px;'>\n";
 		echo "<div style='font-size:small;' class='verdana1'>";
 		echo typo(_T('info_visites_plus_populaires'));
-		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
+		$open = "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
+		echo $open;
 		$liste = 0;
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -189,9 +190,8 @@ else {
 		// Par popularite
 		$result_suite = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND id_article IN ($articles_recents) AND id_article NOT IN ($articles_vus) ORDER BY popularite DESC");
 
-		
 		if (spip_num_rows($result_suite) > 0) {
-			echo "<br /><br />[...]<br /><br />";
+		  echo "</ol><div style='text-align: center'>[...]</div>",$open;
 			while ($row = spip_fetch_array($result_suite)) {
 				$titre = typo($row['titre']);
 				$l_article = $row['id_article'];
@@ -239,7 +239,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li><b>$titre</b></li>";
 				} else {
-					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "'\ntitle='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";
