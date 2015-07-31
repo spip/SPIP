@@ -34,6 +34,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
+	$titre = sinon($row["titre"],_T('info_sans_titre'));
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	if (!$row
@@ -73,7 +74,7 @@ function articles_edit($id_article, $id_rubrique,$lier_trad,  $id_version, $new,
 		# on est en new ; si on veut ajouter un document, on ne pourra
 		# pas l'accrocher a l'article (puisqu'il n'a pas d'id_article)...
 		# on indique donc un id_article farfelu (0-id_auteur) qu'on ramassera
-		# le moment venu, c'est-ˆ-dire lors de la creation de l'article
+		# le moment venu, c'est-a-dire lors de la creation de l'article
 		# dans editer_article.
 		echo afficher_documents_colonne(
 			0-$GLOBALS['auteur_session']['id_auteur'], 'article');

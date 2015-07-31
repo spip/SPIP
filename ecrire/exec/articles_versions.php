@@ -44,6 +44,14 @@ function exec_articles_versions_dist()
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
 	$titre_defaut = $titre = $row["titre"];
+	$surtitre = $row["surtitre"];
+	$soustitre = $row["soustitre"];
+	$descriptif = $row["descriptif"];
+	$chapo = $row["chapo"];
+	$texte = $row["texte"];
+	$ps = $row["ps"];
+	$nom_site = $row["nom_site"];
+	$url_site = $row["url_site"];
 	$date = $row["date"];
 	$statut_article = $row["statut"];
 	$maj = $row["maj"];

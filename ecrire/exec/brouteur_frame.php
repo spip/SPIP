@@ -37,7 +37,7 @@ function exec_brouteur_frame_dist() {
 	. (($c = $GLOBALS['meta']['charset']) ? "; charset=$c" : '')
 	. "' />\n"
 	. envoi_link(_T('info_mon_site_spip'))	
-	. pipeline('header_prive', $head)
+	. pipeline('header_prive')
 	. '<script type="text/javascript"><!--
 
 jQuery(function(){
