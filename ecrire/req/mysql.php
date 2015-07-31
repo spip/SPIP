@@ -127,6 +127,21 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
+	//Eviter de propager le GoneAway sur les autres requetes d'un même processus PHP
+	if ($e = spip_mysql_errno($serveur)) { 	// Log d'un Gone Away
+		if ($e == 2006) { //Si Gone Away on relance une connexion vierge
+			//Fermer la connexion defaillante
+			mysql_close($connexion['link']);
+			unset($GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]);
+			//Relancer une connexion vierge
+			spip_connect($serveur);
+			$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
+			$link = $connexion['link'];
+			//On retente au cas où
+			$r = $link ? mysql_query($query, $link) : mysql_query($query);
+		}
+	}
+
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
 	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
