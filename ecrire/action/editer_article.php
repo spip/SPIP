@@ -196,16 +196,10 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		// si l'article etait publie
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser l'article en statut 'propose'.
-		if ($statut == 'publie') {
-			if ($GLOBALS['auteur_session']['statut'] != '0minirezo')
-				$champs['statut'] = 'prop';
-			else {
-				include_spip('inc/auth');
-				$r = auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-				if (is_array($r) AND !$r[$id_rubrique])
-					$champs['statut'] = 'prop';
-			}
-		}
+		if ($statut == 'publie'
+		AND !autoriser('publierdans', 'rubrique', $id_rubrique))
+			$champs['statut'] = 'prop';
+
 	}
 
 

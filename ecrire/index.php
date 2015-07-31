@@ -42,13 +42,12 @@ if (autoriser_sans_cookie($exec)) {
 				(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
 				. str_replace('&amp;', '&', self()))), '&');
 
-		// $var_auth indique si c'est le statut qui est insuffisant
-		// un echec au "bonjour" (login initial) quand var_auth renvoie
-		// 'inconnu' signale sans doute un probleme de cookies
+		// un echec au "bonjour" (login initial) quand le statut est
+		// inconnu signale sans doute un probleme de cookies
 		if (isset($_GET['bonjour']))
 			$redirect = parametre_url($redirect,
 				'var_erreur',
-				($var_auth == 'inconnu'
+				(!isset($GLOBALS['auteur_session']['statut'])
 					? 'cookie'
 					: 'statut'
 				),

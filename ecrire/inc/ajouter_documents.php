@@ -309,22 +309,17 @@ function decoder_type_image($type, $strict = false) {
 // http://doc.spip.org/@traite_svg
 function traite_svg($file)
 {
-	global $connect_statut;
 	$texte = spip_file_get_contents($file);
 
-	// Securite si pas guru: virer les scripts et les references externes
-	// Trop expeditif, a ameliorer
-
-	$auth = charger_fonction('auth', 'inc');
-	if ($auth()) {echo minipres();exit;}
-
-	if ($connect_statut != '0minirezo') {
+	// Securite si pas admin : virer les scripts et les references externes
+	// sauf si on est en mode javascript 'ok' (1), cf. inc_version
+	if ($GLOBALS['filtrer_javascript'] < 1
+	AND $GLOBALS['auteur_session']['statut'] != '0minirezo')) {
 		include_spip('inc/texte');
 		$new = trim(safehtml($texte));
 		// petit bug safehtml
 		if (substr($new,0,2) == ']>') $new = ltrim(substr($new,2));
 		if ($new != $texte) ecrire_fichier($file, $texte = $new);
-		
 	}
 
 	$width = $height = 150;

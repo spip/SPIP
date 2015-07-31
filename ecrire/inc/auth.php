@@ -31,34 +31,6 @@ function auteurs_article($id_article, $cond='')
 	return spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
-// Retourne les droits de publication d'un auteur selon le codage suivant:
-// - le tableau de ses rubriques si c'est un admin restreint
-// - 0 si c'est un admin de plein droit
-// - la chaine indiquant son statut s'il n'est pas admin
-
-// http://doc.spip.org/@auth_rubrique
-function auth_rubrique($id_auteur, $statut)
-{
-	if ($statut != '0minirezo') return $statut;
-
-	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!='0'");
-	if (!spip_num_rows($result)) {
-		return 0;
-	}
-	$rubriques = array();
-	for (;;) {
-		$r = array();
-		while ($row = spip_fetch_array($result)) {
-			$id_rubrique = $row['id_rubrique'];
-			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
-		}
-		if (!$r) return $rubriques;
-		$r = join(',', $r);
-
-		$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
-	}
-}
-
 // Un nouvel inscrit prend son statut definitif a la 1ere connexion
 // Le statut a ete memorise dans bio (cf formulaire_inscription)
 // Si vide se rabattre sur le mode d'inscription 
@@ -146,21 +118,27 @@ function inc_auth_dist() {
 	if (!$where) return "inconnu";
 
 	// Trouver les autres infos dans la table auteurs.
-
 	$result = @spip_query("SELECT *, UNIX_TIMESTAMP(en_ligne) AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
-
 	if (!$row = spip_fetch_array($result)) {
-
-	  // il n'est PLUS connu. c'est SQL qui est desyncrho
+		// il n'est PLUS connu. c'est SQL qui est desyncrho
 		auth_areconnecter($connect_login);
 		return -1;
 	}
 
-	// connu. Mais avec quels droits ?
-	$connect_quand = $row['quand'];
+	// Le visiteur est connu
+
+	// Des globales pour tout l'espace prive
 	$connect_id_auteur = $row['id_auteur'];
+	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
-	$droits = auth_rubrique($connect_id_auteur, $connect_statut);
+
+	// Le tableau global auteur_session contient toutes les infos.
+	// Les plus utiles sont aussi dans les variables simples ci-dessus
+	$GLOBALS['auteur_session'] = $row;
+	$r = @unserialize($row['prefs']);
+	$GLOBALS['auteur_session']['prefs'] =
+	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
+
 
 	// rajouter les sessions meme en mode auth_http
 	// pour permettre les connexions multiples et identifier les visiteurs
@@ -177,27 +155,50 @@ function inc_auth_dist() {
 	}
 
 	// Indiquer la connexion. A la minute pres ca suffit.
-	if ((time() - 	$connect_quand)  >= 60) {
+	// $connect_quand est une globale utilisee par l'agenda
+	$connect_quand = $row['quand'];
+	if ((time() - $connect_quand)  >= 60) {
 		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 	}
 
-	// Le tableau global auteur_session contient toutes les infos.
-	// Les plus utiles sont aussi dans les variables simples ci-dessus
 
-	$GLOBALS['auteur_session'] = $row;
-	$r = @unserialize($row['prefs']);
-	$GLOBALS['auteur_session']['prefs'] =
-	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
+	// Etablir les droits selon le codage attendu
+	// dans ecrire/index.php ecrire/prive.php
 
-	if (is_string($droits)) {
-	  // ordres mineurs: redac, visiteur ou indefini
-		if ($droits != '1comite') return $droits;
-	} elseif (is_array($droits))
-		$connect_id_rubrique = $droits;
-	else $connect_toutes_rubriques = true;
-	$connect_login = $row['login'];
-	// vide = pas de message d'erreur (cf exit(0) Unix)
-	return "";
+
+	// Pas autorise a acceder a ecrire ? on renvoie le statut
+	// A noter : le premier appel a autoriser() a le bon gout
+	// d'initialiser $GLOBALS['auteur_session']['restreint'],
+	// qui ne figure pas dans le fichier de session
+	if (!autoriser('ecrire'))
+		return $connect_statut;
+
+	// Administrateurs
+	if ($connect_statut == '0minirezo') {
+		// Non restreints
+		if (!$GLOBALS['auteur_session']['restreint']) {
+			$connect_toutes_rubriques = true;
+			$connect_id_rubrique = array();
+			return '';
+		}
+
+		// Restreint
+		$connect_toutes_rubriques = false;
+		$connect_id_rubrique = $GLOBALS['auteur_session']['restreint'];
+		return '';
+	}
+
+	// Redacteur ?
+	if ($connect_statut == '1comite') {
+		$connect_toutes_rubriques = false;
+		$connect_id_rubrique = array();
+		return '';
+	}
+
+	// On ne devrait jamais arriver ici sauf si on a autoriser('ecrire')
+	// des non-redacteurs ; le cas n'est pour l'instant pas prevu => erreur -1
+	spip_log("Erreur statut auth($droits) non prevu");
+	return -1;
 }
 
 // Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui

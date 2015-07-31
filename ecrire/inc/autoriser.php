@@ -52,13 +52,12 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Admins restreints, les verifier ici (pas generique mais...)
 	// Par convention $restreint est un array des rubriques autorisees
-	// (y compris leurs sous-rubriques), ou 0 si admin complet
+	// (y compris leurs sous-rubriques), vide si admin complet
 	if (is_array($qui)
 	AND $qui['statut'] == '0minirezo'
 	AND !isset($qui['restreint'])) {
 		if (!isset($restreint[$qui['id_auteur']])) {
-			include_spip('inc/auth'); # pour auth_rubrique
-			$restreint[$qui['id_auteur']] = auth_rubrique($qui['id_auteur'], $qui['statut']);
+			$restreint[$qui['id_auteur']] = liste_rubriques_auteur($qui['id_auteur']);
 		}
 		$qui['restreint'] = $restreint[$qui['id_auteur']];
 	}
@@ -429,6 +428,35 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 // http://doc.spip.org/@autoriser_document_voir_dist
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
+}
+
+
+// Renvoie la liste des rubriques liees a cet auteur, independamment de son
+// statut (pour les admins restreints, il faut donc aussi verifier statut)
+function liste_rubriques_auteur($id_auteur) {
+	$id_auteur = intval($id_auteur);
+	$q = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$id_auteur AND id_rubrique!=0");
+
+	// Recurrence sur les sous-rubriques
+	$rubriques = array();
+	while ($q AND spip_num_rows($q)) {
+		$r = array();
+		while ($row = spip_fetch_array($q)) {
+			$id_rubrique = $row['id_rubrique'];
+			$r[]= $rubriques[$id_rubrique] = $id_rubrique;
+		}
+
+		// Fin de la recurrence : $rubriques est complet
+		$q = count($r)
+			? spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN (".join(',',$r).") AND id_rubrique NOT IN (".join(',',$r).")")
+			: false;
+	}
+
+	// Affecter l'auteur session le cas echeant
+	if ($GLOBALS['auteur_session']['id_auteur'] == $id_auteur)
+		$GLOBALS['auteur_session']['restreint'] = $rubriques;
+
+	return $rubriques;
 }
 
 ?>
