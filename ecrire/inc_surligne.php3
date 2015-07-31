@@ -58,7 +58,7 @@ function surligner_mots($page, $mots) {
 	// Remplacer une occurence de mot maxi par espace inter-tag (max 1 par paragraphe, sauf italiques etc.)
 	// se limiter a 4 remplacements pour ne pas bouffer le CPU
 	if ($mots_surligne) {
-		$regexp = '/((^|>)([^<]*[^[:alnum:]<])?)(('.join('|', $mots_surligne).')[[:alnum:]]*?)/Uis';
+		$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('.join('|', $mots_surligne).')[[:alnum:]_]*?)/Uis';
 		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
 	}
 
