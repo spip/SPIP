@@ -1095,7 +1095,7 @@ function extraire_tag($texte, $tag) {
 // http://doc.spip.org/@extraire_attribut
 function extraire_attribut($balise, $attribut, $complet = false) {
 	if (preg_match(
-	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\'"]*?)\\3)([^>]*>.*),isS',
+	',(.*?<[^>]*)(\s'.$attribut.'=\s*([\'"]?)([^\\3]*?)\\3)([^>]*>.*),isS',
 	$balise, $r)) {
 		$att = $r[4];
 	}
