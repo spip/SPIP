@@ -1141,9 +1141,9 @@ if ($flag_editable AND $options == 'avancees') {
 				$email = $row["email"];
 				$statut = $row["statut"];
 
-				$statut=ereg_replace("0minirezo", _T('info_administrateurs'), $statut);
-				$statut=ereg_replace("1comite", _T('info_redacteurs'), $statut);
-				$statut=ereg_replace("2redac", _T('info_redacteurs'), $statut);
+				$statut=str_replace("0minirezo", _T('info_administrateurs'), $statut);
+				$statut=str_replace("1comite", _T('info_redacteurs'), $statut);
+				$statut=str_replace("6visiteur", _T('info_visiteurs'), $statut);
 
 				$premiere = strtoupper(substr(trim($nom), 0, 1));
 

@@ -2822,7 +2822,9 @@ function debut_gauche($rubrique = "asuivre") {
 	}
 
 	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
-		<tr><td width='$largeur' class='colonne_etroite' valign='top' class='serif' $rspan>\n";
+		<tr><td width='$largeur' class='colonne_etroite' valign='top' class='serif' $rspan>
+		<div style='width: ${largeur}px;'>
+\n";
 		
 	if ($spip_display == 4) echo "<!-- ";
 
@@ -2875,6 +2877,8 @@ function debut_droite($rubrique="") {
 	global $lang_left;
 
 	if ($spip_display == 4) echo " -->";
+
+	echo "</div>\n"; # largeur fixe, cf. debut_gauche
 
 	if ($options == "avancees") {
 		// liste des articles bloques
