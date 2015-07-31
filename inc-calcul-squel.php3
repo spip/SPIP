@@ -367,6 +367,10 @@ function parser_boucle($texte, $id_parent) {
 						if ($type == 'documents' AND $col == 'extension') {
 							$col_table = 'types_d';
 						}
+						// HACK : selection des documents selon mode 'image' (a creer en dur dans la base)
+						else if ($type == 'documents' AND $col == 'mode' AND $val == 'image') {
+							$val = 'vignette';
+						}
 						// Cas particulier : lier les articles syndiques au site correspondant
 						else if ($type == 'syndic_articles')
 							$col_table = 'source';

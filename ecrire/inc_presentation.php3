@@ -413,7 +413,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$date = $row['date'];
 			$statut = $row['statut'];
 			$visites = $row['visites'];
-			$referers = $row['referers'];
+			$popularite = $row['popularite'];
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 
@@ -463,6 +463,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s = affdate($date);
 			if ($connect_statut == "0minirezo" AND $activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a></font>";
+				if ($popularite > 0) $s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>popularit&eacute;&nbsp;: $popularite%</a></font>";
 			}
 			$vals[] = $s;
 
