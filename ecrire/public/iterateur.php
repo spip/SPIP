@@ -107,6 +107,21 @@ class IterDecorator extends FilterIterator {
 	protected $func_filtre = null;
 
 	/**
+	 * Critere {offset, limit}
+	 * @var int
+	 * @var int
+	 */
+	protected $offset = null;
+	protected $limit = null;
+
+	/**
+	 * nombre d'elements recuperes depuis la position 0,
+	 * en tenant compte des filtres
+	 * @var int
+	 */
+	protected $fetched=0;
+
+	/**
 	 * Drapeau a activer en cas d'echec
 	 * (select SQL errone, non chargement des DATA, etc)
 	 */
@@ -127,8 +142,9 @@ class IterDecorator extends FilterIterator {
 		$this->command = $command;
 		$this->info = $info;
 		$this->pos = 0;
+		$this->fetched = 0;
 
-		// chercher la liste des champs a retournes par
+		// chercher la liste des champs a retourner par
 		// fetch si l'objet ne les calcule pas tout seul
 		if (!method_exists($this->iter, 'fetch')) {
 			$this->calculer_select();
@@ -226,8 +242,14 @@ class IterDecorator extends FilterIterator {
 			}
 		}
 
-		
-		// Appliquer les filtres sur (valeur)
+		// critere {2,7}
+		if ($this->command['limit']) {
+			$limit = explode(',',$this->command['limit']);
+			$this->offset = $limit[0];
+			$this->limit = $limit[1];
+		}
+
+		// Creer la fonction de filtrage sur $this
 		if ($this->filtre) {
 			$this->func_filtre = create_function('$me', $b = 'return ('.join(') AND (', $this->filtre).');');
 		}
@@ -255,7 +277,7 @@ class IterDecorator extends FilterIterator {
 		$filtre = '';
 		
 		if ($op == 'REGEXP') {
-			$filtre = '@preg_match("/". '.str_replace('\"', '"', $valeur).'."/", '.$a.')';
+			$filtre = 'match('.$a.', '.str_replace('\"', '"', $valeur).')';
 			$op = '';
 		} else if ($op == '=')
 			$op = '==';
@@ -287,6 +309,7 @@ class IterDecorator extends FilterIterator {
 	 */
 	public function rewind() {
 		$this->pos = 0;
+		$this->fetched = 0;
 		parent::rewind();
 	}
 
@@ -352,6 +375,7 @@ class IterDecorator extends FilterIterator {
 			$this->seek_loop($n);
 		}
 		$this->pos = $n;
+		$this->fetched = $n;
 		return true;
 	}
 
@@ -360,11 +384,11 @@ class IterDecorator extends FilterIterator {
 	 * un par un tous les elements
 	 */
 	private function seek_loop($n) {
-		if ($this->pos>$n)
+		if ($this->pos > $n)
 			$this->rewind();
 
-		while($this->pos<$n AND $this->valid()) {
-			$this->next();	
+		while ($this->pos < $n AND $this->valid()) {
+			$this->next();
 		}
 		
 		return true;
@@ -399,6 +423,7 @@ class IterDecorator extends FilterIterator {
 	 * Renvoyer un tableau des donnees correspondantes
 	 * a la position courante de l'iterateur
 	 * en controlant si on respecte le filtre
+	 * Appliquer aussi le critere {offset,limit}
 	 *
 	 * @return array|bool
 	 */
@@ -407,19 +432,24 @@ class IterDecorator extends FilterIterator {
 			return $this->iter->fetch();
 		} else {
 
-			while ($this->valid() AND !$this->accept()) {
+			while ($this->valid()
+			AND (
+				!$this->accept()
+				OR (isset($this->offset) AND $this->fetched++ < $this->offset)
+			))
 				$this->next();
-			}
-			
-			if (!$this->valid()) {
+
+			if (!$this->valid())
 				return false;
-			}
+
+			if (isset($this->limit)
+			AND $this->fetched > $this->offset + $this->limit)
+				return false;
 
 			$r = array();
 			foreach ($this->select as $nom) {
 				$r[$nom] = $this->get_select($nom);
 			}
-
 			$this->next();
 			return $r;
 		}
@@ -445,7 +475,7 @@ class IterDecorator extends FilterIterator {
 	}
 
 	/**
-	 * Accepte t'on l'entree courante lue ?
+	 * Accepte-t-on l'entree courante lue ?
 	 * On execute les filtres pour le savoir. 
 	**/
 	public function accept() {
