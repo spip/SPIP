@@ -44,7 +44,7 @@ function resolve_path($url) {
 // http://doc.spip.org/@suivre_lien
 function suivre_lien($url, $lien) {
 
-	if (preg_match(',^(mailto|javascript):,iS', $lien))
+	if (preg_match(',^(mailto|javascript|data):,iS', $lien))
 		return $lien;
 	if (preg_match(';^((?:[a-z]{3,7}:)?//.*?)(/.*)?$;iS', $lien, $r))
 		return $r[1].resolve_path($r[2]);
