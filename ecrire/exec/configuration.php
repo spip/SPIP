@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_configuration_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config;
+  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config, $spip_display;
 
 include_spip('inc/presentation');
 include_spip('inc/config');
@@ -58,7 +58,8 @@ debut_gauche();
 //
 // Le logo de notre site, c'est site{on,off}0.{gif,png,jpg}
 //
-afficher_boite_logo('site', '', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
+if ($spip_display != 4)
+	afficher_boite_logo('id_syndic', 0, _T('logo_site'), _T('logo_survol'), 'configuration');
 
 
 debut_droite();

@@ -249,12 +249,16 @@ function enfant_rub($collection){
 
 		if ($spip_display == 4) $les_enfants .= "<li>";
 
+		if ($voir_logo) {
+			$logo = decrire_logo("id_rubrique", 'on', $id_rubrique, 48, 36);
+			if ($logo)
+				$logo =  "<div style='$voir_logo'>$logo</div>";
+		}
 		$les_enfants .= "<div class='enfants'>" .
 			debut_cadre_sous_rub(($id_parent ? "rubrique-24.gif" : "secteur-24.gif"), true) .
-			(!$voir_logo ? "" :
-			 baliser_logo("rub", $id_rubrique, 48, 36, $voir_logo)) .
+			$logo .
 		  (!$les_sous_enfants ? "" : bouton_block_invisible("enfants$id_rubrique")) .
-		  (acces_restreint_rubrique($id_rubrique) ? "" :
+		  (!acces_restreint_rubrique($id_rubrique) ? "" :
 		   http_img_pack("admin-12.gif", '', " width='12' height='12'", _T('image_administrer_rubrique'))) .
 		  " <span dir='$lang_dir'><B><A href='" . 
 		  generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") .

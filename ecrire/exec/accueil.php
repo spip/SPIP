@@ -312,8 +312,9 @@ if ($spip_display != 4) {
 
 	if ($spip_display != 1) {
 		include_spip('inc/logos');
-		echo baliser_logo("site", 0, 170, 170,
-			"text-align:center; margin-bottom: 5px;");
+		$res = decrire_logo("id_syndic", 'on', 0, 170, 170);
+		if ($res)
+			echo  "<div style='text-align:center; margin-bottom: 5px;'>$res</div>";
 	}
 	echo "<div class='verdana1'>";
 

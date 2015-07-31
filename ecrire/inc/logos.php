@@ -48,16 +48,10 @@ function cherche_logo($id, $type, $mode, $formats = array ('gif', 'jpg', 'png'))
 	return array();
 }
 
-function baliser_logo($type, $id, $width, $height, $style='') {
-	global $spip_lang_right;
-	$logo = decrire_logo($type, 'on', $id, $width, $height);
-	if (!$logo) return "";
-	if (!$style) $style = "float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;";
-	return  "<div style='$style'>$logo</div>";
-}
 
-function decrire_logo($type, $mode, $id, $width, $height, $titre="", $redirect="") {
+function decrire_logo($id_objet, $mode, $id, $width, $height, $titre="", $script="") {
 		
+	$type = $GLOBALS['table_logos'][$id_objet];
 	if (!$img = cherche_logo($id, $type, $mode)) 	return '';
 	list($fid, $dir, $nom, $format) = $img;
 
@@ -74,7 +68,7 @@ function decrire_logo($type, $mode, $id, $width, $height, $titre="", $redirect="
 		"<font size='1'>" .
 		$xy .
 		"\n<br />[<a href='" .
-		generer_action_auteur("iconifier", "$nom.$format", $redirect) .
+		generer_action_auteur("iconifier", "$nom.$format", generer_url_ecrire($script, "$id_objet=$id", true)) .
 		"'>".
 		_T('lien_supprimer') .
 		"</a>]</font>" .
@@ -83,54 +77,60 @@ function decrire_logo($type, $mode, $id, $width, $height, $titre="", $redirect="
 	}
 }
 
-function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script) {
-	global $spip_display;
+function afficher_boite_logo($id_objet, $id, $texteon, $texteoff, $script) {
 
-	if ($spip_display != 4) {
-	
-	  $redirect = generer_url_ecrire($script, "$id_objet=$id", true);
-		$logon = $type.'on'.$id;
-		$logoff = $type.'off'.$id;
-		include_spip('inc/session');
-		echo "<p>";
-		debut_cadre_relief("image-24.gif");
-		echo "<div class='verdana1' style='text-align: center;'>";
-		$desc = afficher_logo($logon, $texteon, $type, 'on', $id, $redirect);
+	include_spip('inc/session');
+	echo "<p>";
+	debut_cadre_relief("image-24.gif");
+	echo "<div class='verdana1' style='text-align: center;'>";
+	$desc = afficher_logo($texteon, $id_objet, 'on', $id, $script);
 
-		if ($desc AND $texteoff) {
-			echo "<br /><br />";
-			afficher_logo($logoff, $texteoff, $type, 'off', $id, $redirect);
-		}
-
-		echo "</div>";
-		fin_cadre_relief();
-		echo "</p>";
+	if ($desc AND $texteoff) {
+		echo "<br /><br />";
+		afficher_logo($texteoff, $id_objet, 'off', $id, $script);
 	}
+
+	echo "</div>";
+	fin_cadre_relief();
+	echo "</p>";
 }
 
+global $table_logos;
 
-function afficher_logo($racine, $titre, $type, $mode, $id, $redirect) {
+$table_logos = array( // cf public/composer.php
+		     'id_article' => 'art', 
+		     'id_auteur' => 'aut', 
+		     'id_breve' => 'breve', 
+		     'id_mot' => 'mot', 
+		     'id_syndic'=> 'site',
+		     'id_rubrique' => 'rub'
+		     );
+
+function afficher_logo($titre, $id_objet, $mode, $id, $script) {
 	global $connect_id_auteur;
 
 	echo bouton_block_invisible(md5($titre)), "<b>", $titre, "</b>";
 
-	$logo = decrire_logo($type,$mode,$id, 170, 170, $titre, $redirect);
+	$logo = decrire_logo($id_objet,$mode,$id, 170, 170, $titre, $script);
 
 	if ($logo) {
 	  echo $logo;
 	}
 	else {
-		$hash = calculer_action_auteur("iconifier $racine");
+		$type = $GLOBALS['table_logos'][$id_objet];
+		$hash = calculer_action_auteur("iconifier $type$mode$id");
 		echo debut_block_invisible(md5($titre));
 
 		echo "\n\n<form action='" . generer_url_action('iconifier') . "' method='POST'
 			ENCTYPE='multipart/form-data'>
 			<div>";
-		echo "\n<input name='redirect' type='hidden' value='$redirect' />";
+		echo "\n<input name='redirect' type='hidden' value='",
+		  generer_url_ecrire($script, "$id_objet=$id"), 
+		  "' />";
 		echo "\n<input name='id_auteur' type='hidden' value='$connect_id_auteur' />";
 		echo "\n<input name='hash' type='hidden' value='$hash' />";
 		echo "\n<input name='action' type='hidden' value='iconifier' />";
-		echo "\n<input name='arg' type='hidden' value='$racine' />";
+		echo "\n<input name='arg' type='hidden' value='$type$mode$id' />";
 		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
 		echo "\n<input name='image' type='File' class='forml' style='font-size:9px;' size='15'>";
 		echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";

@@ -238,14 +238,11 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	echo "<div align='center'>\n";
 
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
-	echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n";
+	echo "<br /><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n";
 
-	voir_en_ligne ('article', $id_article, $statut_article);
+	voir_en_ligne('article', $id_article, $statut_article);
 
-
-	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
-
-	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non" AND $options == "avancees"){
+	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $GLOBALS['meta']["activer_statistiques"] != "non" AND $options == "avancees"){
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif");
 }
 
@@ -271,12 +268,12 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 				   $message, $texte_petition,
 				   $changer_virtuel, $virtuel)
 {
-  global $connect_statut, $options, $spip_lang_right;
+  global $connect_statut, $options, $spip_lang_right, $spip_display;
 
 // Logos de l'article
 
-	if ($id_article AND $flag_editable)
-	  afficher_boite_logo('art', 'id_article', $id_article,
+	if ($id_article AND $flag_editable AND ($spip_display != 4))
+	  afficher_boite_logo('id_article', $id_article,
 			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
 
 
@@ -440,7 +437,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	debut_cadre_relief("site-24.gif");
 	$visible = ($changer_virtuel || $virtuel);
 
-	echo "<div class='verdana1' style='text-align: center;'><b>";
+	echo "\n<div class='verdana1' style='text-align: center;'><b>";
 	if ($visible)
 		echo bouton_block_visible("redirection");
 	else
@@ -454,14 +451,14 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 		echo debut_block_invisible("redirection");
 
 	echo generer_url_post_ecrire("articles", "id_article=$id_article");
-	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
+	echo "\n<input type='hidden' name='changer_virtuel' value='oui' />";
 	$virtuelhttp = ($virtuel ? "" : "http://");
 
-	echo "<INPUT TYPE='text' NAME='virtuel' CLASS='formo' style='font-size:9px;' VALUE=\"$virtuelhttp$virtuel\" SIZE='40'><br>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
+	echo "<input type='text' name='virtuel' class='formo' style='font-size:9px;' value=\"$virtuelhttp$virtuel\" size='40' /><br />\n";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 	echo "(<b>"._T('texte_article_virtuel')."&nbsp;:</b> "._T('texte_reference_mais_redirige').")";
 	echo "</font>";
-	echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'></div>";
+	echo "\n<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' style='font-size:10px' /></div>";
 	echo "</form>";
 	echo fin_block();
 
@@ -703,7 +700,7 @@ else {
 function langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad)
 {
 
-  global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques;
+  global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right;
 
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
@@ -1194,7 +1191,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		echo "<div $dir_lang>";
 #	echo reduire_image(propre($texte), 500,10000);
 		echo propre($texte);
-		echo "<br clear='both' />";
+		echo "<br clear='all' />";
 		echo "</div>";
 
 		if ($ps) {
@@ -1540,6 +1537,7 @@ if (isset($_POST['titre'])) {
  }
 
  }
+
 
 	if ($new == 'oui')
 		redirige_par_entete(
