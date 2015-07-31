@@ -42,6 +42,13 @@ function exec_charger_plugin_dist($retour='') {
 		echo $s;
 		echo fin_boite_info(true);
 
+		echo pipeline('affiche_gauche',
+			array(
+			'args'=>array('exec'=>'charger_plugin'),
+			'data'=>afficher_librairies()
+			)
+		);
+
 		echo debut_droite('plugin', true);
 		// voire si on peut creer le repertoure auto/ sans rien demander
 		sous_repertoire(_DIR_PLUGINS_AUTO, '', true, true);
@@ -50,7 +57,14 @@ function exec_charger_plugin_dist($retour='') {
 		include_spip('inc/charger_plugin');
 		echo formulaire_charger_plugin($retour);
 		echo "</div>";
-		
+
+		echo pipeline('affiche_milieu',
+			array(
+			'args'=>array('exec'=>'charger_plugin'),
+			'data'=>afficher_librairies()
+			)
+		);
+
 		echo fin_gauche(), fin_page();
 	}
 }
