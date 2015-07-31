@@ -18,14 +18,12 @@ include_spip('inc/minipres');
 // http://doc.spip.org/@action_export_all_dist
 function action_export_all_dist()
 {
-	global $connect_toutes_rubriques ;
-
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	// determine upload va aussi initialiser connect_toutes_rubrique
+	// determine upload va aussi initialiser l'index "restreint"
 	$dir = determine_upload();
-	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
+	if (!$GLOBALS['auteur_session']['restreint'] AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 
 	list($quoi, $gz, $archive) = split(',', $arg);
