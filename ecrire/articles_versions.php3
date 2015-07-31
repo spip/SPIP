@@ -2,7 +2,7 @@
 
 include("inc.php3");
 
-include_ecrire("inc_diff.php3");
+include_ecrire("inc_revisions.php3");
 
 
 
@@ -50,7 +50,7 @@ if (!$id_diff) {
 //
 
 if ($id_version && $id_diff) {
-	include_ecrire("inc_difflcs.php3");
+	include_ecrire("inc_diff.php3");
 
 	if ($id_diff > $id_version) {
 		$t = $id_version;
@@ -188,24 +188,24 @@ while ($row = spip_fetch_array($result)) {
 		$link = new Link();
 		$link->addVar('id_version', $version_aff);
 		$link->delVar('id_diff');
-		echo "<a href='".$link->getUrl('diff')."' title=\"Afficher cette version\">$date</a>";
+		echo "<a href='".$link->getUrl('diff')."' title=\""._L("Afficher cette version")."\">$date</a>";
 	}
 	else {
 		echo "<b>$date</b>";
 	}
-	echo " (".$row['nom'].")";
-	if ($options == 'avancees') {
+	echo " (".typo($row['nom']).")";
+	if ($options == 'avancees') {	// note : c'est redondant car on ne peut arriver sur cette page qu'en options avancees...
 		//echo " <span style='color:#989898; font-size: 80%; font-weight: bold;'><i>#".$row['id_version']."</i></span>";
 		if ($version_aff != $id_version) {
 			echo " <span class='verdana2'>";
 			if ($version_aff == $id_diff) {
-				echo "<b>(comparaison)</b>";
+				echo "<b>("._L("comparaison").")</b>";
 			}
 			else {
 				$link = new Link();
 				$link->addVar('id_version', $id_version);
 				$link->addVar('id_diff', $version_aff);
-				echo "(<a href='".$link->getUrl('diff')."' title=\"Afficher les modifications d'avec cette version\">comparaison</a>)";
+				echo "(<a href='".$link->getUrl('diff')."' title=\""._L("Afficher les modifications d'avec cette version")."\">"._L("comparaison")."</a>)";
 			}
 			echo "</span>";
 		}
