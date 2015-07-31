@@ -163,8 +163,8 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
 	$p = array('prefs' => serialize($prefs));
 	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
-
 	//  bloquer ici le visiteur qui tente d'abuser de ses droits
+	verifier_visiteur();
 	return (is_null($prive) ? is_url_prive($cible) : $prive)
 	?  login_autoriser() : array();
 }
