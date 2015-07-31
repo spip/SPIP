@@ -40,7 +40,7 @@ document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display
 
 function fin_block() {
 	if ($GLOBALS['browser_layer'])
-		return "<div style='clear: both;'></div></div>";
+		return "<div style='clear: both;'></div>".http_script("document.write('</div>');","","</div>");
 }
 
 function bouton_block_invisible($nom_block, $icone='') {
@@ -178,8 +178,7 @@ ondbclick='storeCaret(this);'");
 
 	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 	// meme principe que le behavior win_width.htc pour MSIE
-
-$GLOBALS['browser_verifForm'] = 	(eregi("mozilla", $browser_name) AND $browser_rev >= 1.7) ?  "verifForm();" : "";
+$GLOBALS['browser_verifForm'] = (eregi("mozilla", $GLOBALS["browser_name"]) AND $GLOBALS["browser_rev"] >= 1.7) ?  "verifForm();" : "";
 
 function http_script($script, $src='', $noscript='') {
 	return '<script type="text/javascript"'
