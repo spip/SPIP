@@ -11,7 +11,7 @@
 	[(#GET{i}|<{#ENV{nombre_pages}}|?{'|',''})]
 ]
 #SET{i,#ENV{page_courante}|plus{1}}
-[(#GET{i}|<{#ENV{nombre_pages}}|?{' ',''})[
+[(#GET{i}|<={#ENV{nombre_pages}}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
 	][(#INCLURE{fond=modeles/paginationitem}{num=#GET{i}}{texte=<:public:page_suivante:>}{separateur=''}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
 ]
