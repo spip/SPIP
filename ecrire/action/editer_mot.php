@@ -49,7 +49,7 @@ function action_editer_mot_post($r)
 		// inserer_mot("spip_mots_$table", $table_id, $id_objet, $nouv_mot);
 		$result = sql_countsel("spip_mots_$table", "id_mot=".intval($nouv_mot)." AND $table_id=$id_objet");
 		if (!$result)
-			spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ("._q($nouv_mot).", $id_objet)");
+			sql_insertq("spip_mots_$table", array('id_mot' => $nouv_mot, $table_id =>$id_objet));
 	}
 
 	// Notifications, gestion des revisions, reindexation...
