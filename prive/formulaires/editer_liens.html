@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id}">
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id}[(#ENV{editable}|non)non_editable]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -7,10 +7,11 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-#ENV{id}"/>
-	  <p class='boutons'[(#ENV{_saisie_en_cours}|non)style="display:none;"]><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+	  <p class='boutons' style="display:none;"><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+	]
 		<INCLURE{fond=prive/listes/#ENV{_vue_liee},env,ajax}>
 
-		[(#ENV{visible,0}|oui)
+		[(#ENV{visible,0}|et{#ENV{editable}}|oui)
 			<div class="selecteur[(#ENV{recherche}|oui)filtre]">
 				<h3 class="titrem">[(#VAL{titre_ajouter_un_}|concat{#ENV{objet_source}}|_T)]</h3>
 				<INCLURE{fond=prive/listes/#ENV{_vue_ajout},env,ajax}>
@@ -32,6 +33,7 @@
 						><:bouton_changer:></a>&#93;
 			</div>
 		]
+	[(#ENV{editable})
 		[(#ENV{visible,0}|non)
 		<div class="toggle">
 			&#91;<button class="link" name="visible" value="1"><:bouton_changer:></button>&#93;

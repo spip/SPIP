@@ -43,6 +43,7 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 		'objet_source'=>$objet_source,
 		'recherche'=>'',
 		'visible'=>0,
+		'editable'=>autoriser('modifier',$objet,$id_objet),
 	);
 
 	return $valeurs;
