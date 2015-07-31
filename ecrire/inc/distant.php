@@ -805,6 +805,7 @@ function fichier_copie_locale($source){
  *     - 'taille' = intval
  *     - 'extension' = chaine
  *     - 'fichier' = chaine
+ *     - 'mime_type' = chaine
 **/
 function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image = true){
 
