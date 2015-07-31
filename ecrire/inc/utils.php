@@ -771,6 +771,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	return '';
 }
 
+// http://doc.spip.org/@generer_url_entite_absolue
 function generer_url_entite_absolue($id='', $entite='', $args='', $ancre='', $connect=NULL)
 {
 	if (!$connect) $connect = true;
