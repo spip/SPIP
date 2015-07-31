@@ -23,7 +23,7 @@ define('_ACTIVER_PUCE_RAPIDE', true);
 function echo_log($ret) {
 	spip_log("Page " . self() . ": echo ".substr($ret,0,50)."...",'echo');
 	echo 
-		(defined('_SIGNALER_ECHOS')?"#Echo#" :"")
+	/*(defined('_SIGNALER_ECHOS')?*/"#Echo#"/* :"")*/
 		. $ret;
 }
 // Faux HR, avec controle de couleur
