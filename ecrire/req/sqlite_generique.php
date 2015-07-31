@@ -1477,8 +1477,10 @@ function _sqlite_remplacements_definitions_table($query){
 		'/(big|small|medium|tiny)?int(eger)?'.$num.'/is' => 'INTEGER',		
 		'/enum'.$enum.'/is' => 'VARCHAR',
 		'/binary/is' => '',
+		'/COLLATE \w+_bin/is' => '',
 		'/auto_increment/is' => '',
 		'/(timestamp .* )ON .*$/is' => '\\1',
+		'/character set \w+/is' => '',
 	);
 
 	return preg_replace(array_keys($remplace), $remplace, $query);
