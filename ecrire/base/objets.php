@@ -120,8 +120,8 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 					"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 					"id_trad"	=> "bigint(21) DEFAULT '0' NOT NULL",
 					"nom_site"	=> "tinytext DEFAULT '' NOT NULL",
-					"url_site"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
-					"virtuel"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
+					"url_site"	=> "text DEFAULT '' NOT NULL",
+					"virtuel"	=> "text DEFAULT '' NOT NULL",
 				),
 				'key' => array(
 					"PRIMARY KEY"		=> "id_article",
