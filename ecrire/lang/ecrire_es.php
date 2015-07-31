@@ -195,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'forum_info_original' => 'original',
 
 // H
-'htaccess_a_simuler' => 'Advertencia: la configuraci&oacute;n de tu servidor HTTP no toma en ceunta los archivos @htaccess@. Para poder asegurar una buena seguridad, debes modificar la configuraci&oacute;n correspondiente, o si no que las constantes @constantes@ (que se pueden definir en el archivo mes_options.php) tomen valores de carpetas fuera de @document_root@.',
+'htaccess_a_simuler' => 'Advertencia: la configuraci&oacute;n de tu servidor HTTP no toma en cuenta los archivos @htaccess@. Para poder asegurar una buena seguridad, debes modificar la configuraci&oacute;n correspondiente, o si no que las constantes @constantes@ (que se pueden definir en el archivo mes_options.php) tomen valores de carpetas fuera de @document_root@.',
 'htaccess_inoperant' => 'htaccess inoperante',
 
 // I
