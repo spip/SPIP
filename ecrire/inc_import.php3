@@ -477,6 +477,7 @@ function import_init()
 		else {
 			$affiche_progression_pourcent = filesize($archive);
 			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
+			$gz = false;
 		}
 		$texte_boite = _T('info_base_restauration')."<p>
 		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
