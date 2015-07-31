@@ -59,6 +59,7 @@ function calculer_contexte() {
 }
 
 
+// http://doc.spip.org/@echapper_php_callback
 function echapper_php_callback($r) {
 	static $src = array();
 	static $dst = array();

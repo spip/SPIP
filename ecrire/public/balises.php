@@ -977,6 +977,7 @@ function balise_HTTP_HEADER_dist($p) {
 
 // Filtre a appliquer a l'ensemble de la page une fois calculee
 // (filtrage fait au niveau du squelette, et sans s'appliquer aux <INCLURE>)
+// http://doc.spip.org/@balise_FILTRE_dist
 function balise_FILTRE_dist($p) {
 	if ($p->param) {
 		$args = array();
