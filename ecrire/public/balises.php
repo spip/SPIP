@@ -158,7 +158,7 @@ function balise_URL_ARTICLE_dist($p) {
 	else {
 		$_id_article = '';
 		if ($p->param && !$p->param[0][0]){
-			$_id_article =  calculer_liste($p->param[0][1],
+			$_id_article = calculer_liste($p->param[0][1],
 								$p->descr,
 								$p->boucles,
 								$p->id_boucle);
@@ -543,35 +543,6 @@ function balise_RANG_dist ($p) {
 }
 
 
-// #MODELE
-// fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
-// exemples : #LESAUTEURS, #TRADUCTIONS, #DOC, #IMG...
-// http://doc.spip.org/@balise_MODELE_dist
-function balise_MODELE_dist($p){
-	$nom = strtolower($p->nom_champ);
-	$contexte = array();
-
-	// Si le champ existe dans la pile, on le met dans le contexte
-	// (exemple : #LESAUTEURS dans spip_syndic_articles)
-	$contexte[$nom] = champ_sql($nom, $p);
-
-	// Reserver la cle primaire de la boucle courante
-	if ($primary = $p->boucles[$p->id_boucle]->primary) {
-		$id = champ_sql($primary, $p);
-		$contexte[$primary] = $id;
-	}
-
-	// Preparer le code du contexte (id + champ)
-	foreach($contexte as $var=>$code)
-		$contexte[$var] = "'$var' => $code";
-
-	$p->code = "recuperer_fond('modeles/".$nom."',
-		array(".join(',', $contexte)."))";
-	$p->interdire_scripts = false; // securite assuree par le squelette
-
-	return $p;
-}
-
 // #PETITION 
 // retourne '' si l'article courant n'a pas de petition 
 // le texte de celle-ci sinon (et ' ' si il est vide)
@@ -682,12 +653,14 @@ function balise_GRAND_TOTAL_dist($p) {
 	return $p;
 }
 
+
+
 //
 // Fonction commune aux balises #LOGO_XXXX
 // (les balises portant ce type de nom sont traitees en bloc ici)
 //
-// http://doc.spip.org/@calculer_balise_logo
-function calculer_balise_logo ($p) {
+// http://doc.spip.org/@calculer_balise_logo_dist
+function calculer_balise_logo_dist ($p) {
 
 	eregi("^LOGO_([A-Z]+)(_.*)?$", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
