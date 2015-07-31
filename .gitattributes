@@ -145,6 +145,7 @@ ecrire/exec/documents_liste.php -text
 ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mots.php -text
 ecrire/exec/export_all.php -text
+ecrire/exec/fond.php -text
 ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
@@ -253,6 +254,7 @@ ecrire/inc/php3.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/prepare_recherche.php -text
+ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
 ecrire/inc/presenter_liste.php -text
 ecrire/inc/puce_statut.php -text
