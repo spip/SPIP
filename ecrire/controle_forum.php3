@@ -5,7 +5,7 @@ include ("inc.php3");
 
 debut_page("Suivi des forums", "messagerie", "forum-controle");
 
-$requete_base_controle =  "statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+$requete_base_controle =  "statut!='perso' AND statut != 'redac'";
 
 echo "<br><br><br>";
 if ($controle_sans == 'oui') {
@@ -15,10 +15,10 @@ if ($controle_sans == 'oui') {
 } else {
 	$controle_sans = '';
 	gros_titre("Suivi des forums");
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte=''";
+	$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND texte='' LIMIT 0,1";
 	$result_forum = spip_query($query_forum);
-	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
-	if ($total > 0) barre_onglets("suivi_forum", "tous");
+	if ($row = spip_fetch_array($result_forum))
+		barre_onglets("suivi_forum", "tous");
 }
 
 
@@ -69,7 +69,7 @@ debut_droite();
 
 
 function forum_parent($id_forum) {
-	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=\"$id_forum\" AND statut != 'redac'";
+	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'";
  	$result_forum = spip_query($query_forum);
 
  	while($row=spip_fetch_array($result_forum)){
@@ -163,175 +163,200 @@ function forum_parent($id_forum) {
 
 
 
-function controle_forum($request,$adresse_retour) {
-	global $compteur_forum;
-	static $nb_forum;
-	global $debut;
-	static $i;
+function controle_forum($row, $new) {
 	global $couleur_foncee;
 	global $mots_cles_forums;
 	global $controle_sans;
+	global $debut;
 
-	
-	$compteur_forum++; 
+	$controle = "<BR><BR>";
 
-	$nb_forum[$compteur_forum] = spip_num_rows($request);
-	$i[$compteur_forum] = 1;
- 	while($row=spip_fetch_array($request)){
-		$id_forum = $row['id_forum'];
-		$forum_id_parent = $row['id_parent'];
-		$forum_id_rubrique = $row['id_rubrique'];
-		$forum_id_article = $row['id_article'];
-		$forum_id_breve = $row['id_breve'];
-		$forum_date_heure = $row['date_heure'];
-		$forum_titre = echapper_tags($row['titre']);
-		$forum_texte = echapper_tags($row['texte']);
-		$forum_auteur = echapper_tags($row['auteur']);
-		$forum_email_auteur = echapper_tags($row['email_auteur']);
-		$forum_nom_site = echapper_tags($row['nom_site']);
-		$forum_url_site = echapper_tags($row['url_site']);
-		$forum_stat = $row['statut'];
-		$forum_ip = $row['ip'];
-		$forum_id_auteur = $row["id_auteur"];
-		
-		if ($compteur_forum==1)
-			echo "<BR><BR>";
-		if ($forum_stat=="off" OR $forum_stat == "privoff") {
-			echo "<div style='border: 1px #ff0000 solid'>";
-		}
-		else if($forum_stat=="prop"){
-			echo "<div style='border: 1px yellow solid'>";
-		}
-		else {
-			echo "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>";
-			echo "<div style='border: 1px #999999 dashed; background-color: white;'>";
-		}
-		echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR>";
-		echo "<TD WIDTH=100% VALIGN='top'>";
+	$id_forum = $row['id_forum'];
+	$forum_id_parent = $row['id_parent'];
+	$forum_id_rubrique = $row['id_rubrique'];
+	$forum_id_article = $row['id_article'];
+	$forum_id_breve = $row['id_breve'];
+	$forum_date_heure = $row['date_heure'];
+	$forum_titre = echapper_tags($row['titre']);
+	$forum_texte = echapper_tags($row['texte']);
+	$forum_auteur = echapper_tags($row['auteur']);
+	$forum_email_auteur = echapper_tags($row['email_auteur']);
+	$forum_nom_site = echapper_tags($row['nom_site']);
+	$forum_url_site = echapper_tags($row['url_site']);
+	$forum_stat = $row['statut'];
+	$forum_ip = $row['ip'];
+	$forum_id_auteur = $row["id_auteur"];
 
-		echo "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
-		echo "<TR><TD>";
-		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-		if ($forum_stat=="publie" OR $forum_stat == "off") {
-			echo "<img src='img_pack/racine-site-24.gif' border=0 align='left'>";
-			echo "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[sur le site public]</FONT> ";
-		}
-		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm" OR $forum_stat == "privoff"){
-			echo "<img src='img_pack/cadenas-24.gif' border=0 align='left'>";
-			echo "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[dans l'espace priv&eacute;]</FONT> ";
-		}
-		echo "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure).", ".heures($forum_date_heure)."h".minutes($forum_date_heure)."</FONT>";
-		if (strlen($forum_auteur) > 2) {
-			if (strlen($forum_email_auteur) > 3) {
-				$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
-			}
-			echo "<FONT FACE='arial,helvetica'> / <B>$forum_auteur</B></FONT>";
-		}
-
-		if ($forum_stat <> "off" AND $forum_stat <> "prioff") {
-			if ($forum_stat == "publie" OR $forum_stat == "prop")
-				icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
-			else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
-				icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
-		}
-		else {
-			echo "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
-			if($forum_id_auteur>0){
-				echo " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>Voir cet auteur</A>";
-			
-			}
-
-		}
-
-		if ($forum_stat=="prop"){
-			icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "creer.gif", "right");
-		}
-
-		echo "<BR>".forum_parent($id_forum);
-
-		echo "<P align='justify'>".propre($forum_texte);
-		
-		if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3) {
-			echo "<P align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
-		}
-
-		if ($mots_cles_forums == "oui"){
-			
-			$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
-			$result_mots = spip_query($query_mots);
-			
-			while ($row_mots = spip_fetch_array($result_mots)) {
-				$id_mot = $row_mots['id_mot'];
-				$titre_mot = propre($row_mots['titre']);
-				$type_mot = propre($row_mots['type']);
-				echo "<li> <b>$type_mot :</b> $titre_mot";
-			}
-			
-		}
-
-		echo "</FONT>";
-		echo "</TD></TR></TABLE>";
-		
-		echo "</TD></TR></TABLE>\n";
-		
-		if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop')) {
-			echo "</div>";
-		}
-		
-		echo "</div>";
+	if ($forum_stat=="off" OR $forum_stat == "privoff")
+		$controle .= "<div style='border: 1px #ff0000 solid'>";
+	else if($forum_stat=="prop")
+			$controle .= "<div style='border: 1px yellow solid'>";
+	else {
+		$controle .= "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>";
+		$controle .= "<div style='border: 1px #999999 dashed; background-color: white;'>";
 	}
+
+	$controle .= "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR>";
+	$controle .= "<TD WIDTH=100% VALIGN='top'>";
+
+	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
+	$controle .= "<TR><TD>";
+	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
+	if ($forum_stat=="publie" OR $forum_stat == "off") {
+		$controle .= "<img src='img_pack/racine-site-24.gif' border=0 align='left'>";
+		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[sur le site public]</FONT> ";
+	}
+	else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm" OR $forum_stat == "privoff"){
+		$controle .= "<img src='img_pack/cadenas-24.gif' border=0 align='left'>";
+		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[dans l'espace priv&eacute;]</FONT> ";
+	}
+
+	if ($new)
+		$new = " &nbsp; <i>(Nouveau)</i>";
+
+	$controle .= "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure).", ".heures($forum_date_heure)."h".minutes($forum_date_heure)."$new</FONT>";
+	if (strlen($forum_auteur) > 2) {
+		if (strlen($forum_email_auteur) > 3)
+			$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
+		$controle .= "<FONT FACE='arial,helvetica'> / <B>$forum_auteur</B></FONT>";
+	}
+
+	if ($forum_stat <> "off" AND $forum_stat <> "prioff") {
+		if ($forum_stat == "publie" OR $forum_stat == "prop")
+			$controle .= icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
+			$controle .= icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+	}
+	else {
+		$controle .= "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
+		if($forum_id_auteur>0)
+			$controle .= " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>Voir cet auteur</A>";
+	}
+
+	if ($forum_stat=="prop")
+		$controle .= icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "creer.gif", "right", 'non');
+
+	$controle .= "<BR>".forum_parent($id_forum);
+
+	$controle .= "<P align='justify'>".propre($forum_texte);
+		
+	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
+		$controle .= "<P align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
+
+	if ($mots_cles_forums == "oui") {
+		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
+		$result_mots = spip_query($query_mots);
+
+		while ($row_mots = spip_fetch_array($result_mots)) {
+			$id_mot = $row_mots['id_mot'];
+			$titre_mot = propre($row_mots['titre']);
+			$type_mot = propre($row_mots['type']);
+			$controle .= "<li> <b>$type_mot :</b> $titre_mot";
+		}
+	}
+
+	$controle .= "</FONT>";
+	$controle .= "</TD></TR></TABLE>";
+		
+	$controle .= "</TD></TR></TABLE>\n";
+		
+	if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop'))
+		$controle .= "</div>";
+		
+	$controle .= "</div>";
+
+	return $controle;
 }
 
-  
+
+//
+// Debut de la page de controle
+//  
+
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
  
-if ($connect_statut == "0minirezo") {
+if ($connect_statut != "0minirezo") {
+	echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
+	exit;
+}
 
-//	gros_titre("Suivi des forums");
 
-	if (!$debut) $debut = 0;
+// reglages
+if (!$debut) $debut = 0;
+$pack = 5;		// nb de forums affiches par page
+$enplus = 200;	// intervalle affiche autour du debut
+$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
+$limitnb = $debut + $enplus - $limitdeb;
+$wheretexte = $controle_sans ? "texte=''" : "texte!=''";
 
-	if ($controle_sans)
-		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte=''";
-	else
-		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte!=''";
 
-	$result_forum = spip_query($query_forum);
-	$total = 0;
-	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
+// recuperer le marque page
+if ($marque) {
+	$row = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(date_heure) AS dh FROM spip_forum WHERE id_forum=$marque"));
+	$prefs['suivi_forum'] = $row['dh'];
+	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
+}
+$datep = $prefs['suivi_forum'];
 
-	if ($total > 10) {
-		echo "<p>";
-		for ($i = 0; $i < $total; $i = $i + 10){
-			if ($i > 0) echo " | ";
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>$i</B></FONT>";
-			else
-				echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>$i</A>";
-		}
+$query_forum = "SELECT *, UNIX_TIMESTAMP(date_heure) AS dh FROM spip_forum WHERE $requete_base_controle AND $wheretexte ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb";
+$result_forum = spip_query($query_forum);
+
+$controle = '';
+
+$i = $limitdeb;
+
+if ($i>0) $affichezero = "<A HREF='controle_forum.php3'>0</A> ... | ";
+
+while ($row = spip_fetch_array($result_forum)) {
+
+	// est-ce que ce message doit s'afficher dans la liste ?
+	$ok_controle = (($i>=$debut) AND ($i<$debut + $pack));
+
+	// nouveaux / anciens
+	$new = ($datep AND ($datep < $row['dh']));
+	if ($new AND !$dejaaffichenew) {
+		echo "<small>&gt;&gt; Messages &agrave; contr&ocirc;ler :</small> ";
+		$dejaaffichenew = true;
+	}
+	if ($affichezero) {
+		echo $affichezero;
+		unset($affichezero);
 	}
 
-	if ($controle_sans)
-		$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND texte='' ORDER BY date_heure DESC LIMIT $debut,10";
-	else
-		$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND texte!='' ORDER BY date_heure DESC LIMIT $debut,10";
+	// marque-page
+	if ($ok_controle && !$marquepage)
+		$marquepage = $row['id_forum'];
+	if ($datep == $row['dh']) {
+		echo "<br><small>&gt;&gt; Messages contr&ocirc;l&eacute;s : "; // barre de navigation
+		$fermeanciens = "</small>";
+		if ($ok_controle)
+			$controle .= "<br><br><hr>";
+	}
+	
+	// barre de navigation
+	if ($i == $pack*floor($i/$pack)) {
+		if ($i > $limitdeb) echo " | ";
+		if ($i == $debut)
+			echo "<FONT SIZE=3><B>$i</B></FONT>";
+		else
+			echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>$i</A>";
+	}
 
-	$result_forum = spip_query($query_forum);
-	controle_forum($result_forum, "forum.php3");
+	// elements a controler
+	if ($ok_controle)
+		$controle .= controle_forum($row, $new);
 
-//	afficher_forum($result_forum, $forum_retour,'oui','non');
-
+	$i ++;
 }
-else {
-	echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
-}	
-		
+
+echo " | <A HREF='controle_forum.php3?debut=$i$controle_sans'>...</A>$fermeanciens";
+echo "<br><small>&gt;&gt; <a href='controle_forum.php3?debut=$debut$controle_sans&marque=$marquepage'><font color=black>Marquer les messages contr&ocirc;l&eacute;s</font></a></small>";
+
+echo $controle;
 
 echo "</FONT>";
 
-
 fin_page();
-
 
 ?>
 

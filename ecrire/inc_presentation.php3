@@ -1130,7 +1130,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 
 
-function icone($texte, $lien, $fond, $fonction="", $align=""){
+function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display, $couleur_claire, $couleur_foncee;
 	
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
@@ -1152,34 +1152,39 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 		$largeur = 70;
 	}
 
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
-	echo "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
-	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
+	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
+	$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
+	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0>";
 	if ($spip_display != 1){	
-		echo "<tr><td background='' align='center'>";
+		$icone .= "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
-			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
-			echo "<a href='$lien'><img src='img_pack/$fonction'$alt$title width='24' height='24' border='0'></a>";
-			echo "</td></tr></table>\n";
+			$icone .= "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
+			$icone .= "<a href='$lien'><img src='img_pack/$fonction'$alt$title width='24' height='24' border='0'></a>";
+			$icone .= "</td></tr></table>\n";
 		}
 		else {
-			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
-			echo "<a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0'></a>";
-			echo "</td></tr></table>\n";
+			$icone .= "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
+			$icone .= "<a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0'></a>";
+			$icone .= "</td></tr></table>\n";
 		}
-		echo "</td></tr>";
+		$icone .= "</td></tr>";
 	}
-	echo "<tr><td background=''>";
-	echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
-	echo "</td></tr>";
+	$icone .= "<tr><td background=''>";
+	$icone .= "<img src='img_pack/rien.gif' width=$largeur height=1>";
+	$icone .= "</td></tr>";
 	if ($spip_display != 3){
-		echo "<tr><td background='' align='center'>";
-		echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
-		echo "</td></tr>";
+		$icone .= "<tr><td background='' align='center'>";
+		$icone .= "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+		$icone .= "</td></tr>";
 	}
-	echo "</table>";
-	echo "</td></tr>";
-	echo "</table>";
+	$icone .= "</table>";
+	$icone .= "</td></tr>";
+	$icone .= "</table>";
+
+	if ($afficher == 'oui')
+		echo $icone;
+	else
+		return $icone;
 }
 
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
