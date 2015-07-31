@@ -1048,15 +1048,17 @@ function calculer_criteres($idb, &$boucles){
 }
 
 /**
+ * Désemberlificote les guillements et échappe (ou fera échapper) le contenu...
+ * 
  * Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
  * hum, c'est kwoi cette fonxion ? on va dire qu'elle desemberlificote les guillemets...
  *
  * http://doc.spip.org/@kwote
  *
- * @param string $lisp
- * @param string $serveur
- * @param string $type
- * @return string
+ * @param string $lisp    Code compilé
+ * @param string $serveur Connecteur de bdd utilisé
+ * @param string $type    Type d'échappement (char, int...)
+ * @return string         Code compilé rééchappé
  */
 function kwote($lisp, $serveur='', $type=''){
 	if (preg_match(_CODE_QUOTE, $lisp, $r))
@@ -1065,9 +1067,21 @@ function kwote($lisp, $serveur='', $type=''){
 		return "sql_quote($lisp)";
 }
 
-// Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
-// pour faire par exemple {id_article IN #ENV**{liste_articles}}
-// http://doc.spip.org/@critere_IN_dist
+
+/**
+ * Compile un critère possédant l'opérateur IN : {xx IN yy}
+ *
+ * Permet de restreindre un champ sur une liste de valeurs tel que
+ * {id_article IN 3,4} {id_article IN #LISTE{3,4}} 
+ *
+ * Si on a une liste de valeurs dans #ENV{x}, utiliser la double etoile
+ * pour faire par exemple {id_article IN #ENV**{liste_articles}}
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return void
+**/
 function critere_IN_dist($idb, &$boucles, $crit){
 	$r = calculer_critere_infixe($idb, $boucles, $crit);
 	if (!$r){
@@ -1271,6 +1285,22 @@ function calculer_critere_DEFAUT_dist($idb, &$boucles, $crit){
 	} else calculer_critere_DEFAUT_args($idb, $boucles, $crit, $r);
 }
 
+
+/**
+ * Compile un critère non déclaré explicitement, dont on reçoit une analyse
+ *
+ * Ajoute en fonction des arguments trouvés par calculer_critere_infixe()
+ * les conditions WHERE à appliquer sur la boucle.
+ * 
+ * @see calculer_critere_infixe()
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @param array $args     Description du critère
+ *                        Cf. retour de calculer_critere_infixe()
+ * @return void
+**/
 function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args){
 	list($arg, $op, $val, $col, $where_complement) = $args;
 
@@ -1311,7 +1341,42 @@ function calculer_critere_DEFAUT_args($idb, &$boucles, $crit, $args){
 		$boucles[$idb]->where[] = $where_complement;
 }
 
-// http://doc.spip.org/@calculer_critere_infixe
+
+/**
+ * Décrit un critère non déclaré explicitement
+ *
+ * Décrit un critère non déclaré comme {id_article} {id_article>3} en
+ * retournant un tableau de l'analyse si la colonne (ou l'alias) existe vraiment.
+ *
+ * Ajoute au passage pour chaque colonne utilisée (alias et colonne véritable)
+ * un modificateur['criteres'][colonne].
+ *
+ * S'occupe de rechercher des exceptions, tel que
+ * - les id_parent, id_enfant, id_secteur,
+ * - des colonnes avec des exceptions déclarées,
+ * - des critères de date (jour_relatif, ...),
+ * - des critères sur tables jointes explicites (mots.titre),
+ * - des critères sur tables de jointure non explicite (id_mot sur une boucle articles...)
+ * 
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array|string
+ *     Liste si on trouve le champ :
+ *     - string $arg
+ *         Opérande avant l'opérateur : souvent la colonne d'application du critère, parfois un calcul
+ *         plus complexe dans le cas des dates.
+ *     - string $op
+ *         L'opérateur utilisé, tel que '='
+ *     - string[] $val
+ *         Liste de codes PHP obtenant les valeurs des comparaisons (ex: id_article sur la boucle parente)
+ *         Souvent (toujours ?) un tableau d'un seul élément.
+ *     - $col_alias
+ *     - $where_complement
+ *     
+ *     Chaîne vide si on ne trouve pas le champ...
+**/
 function calculer_critere_infixe($idb, &$boucles, $crit){
 
 	global $table_criteres_infixes;
@@ -1343,8 +1408,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		$table = $critere_secteur($idb, $boucles, $val, $crit);
 	}
 
-		// cas id_article=xx qui se mappe en id_objet=xx AND objet=article
-		// sauf si exception declaree : sauter cette etape
+	// cas id_article=xx qui se mappe en id_objet=xx AND objet=article
+	// sauf si exception declaree : sauter cette etape
 	else if (
 		!isset($exceptions_des_jointures[table_objet_sql($table)][$col])
 		AND !isset($exceptions_des_jointures[$col])
@@ -1354,11 +1419,13 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		$col = array_shift($e);
 		$where_complement = primary_doublee($e, $table);
 	}
-		// Cas particulier : expressions de date
+
+	// Cas particulier : expressions de date
 	else if ($c = calculer_critere_infixe_date($idb, $boucles, $col)){
 		list($col,$col_vraie) = $c;
 		$table = '';
 	}
+	// table explicitée {mots.titre}
 	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)){
 		list(, $table, $col) = $r;
 		$col_alias = $col;
@@ -1374,6 +1441,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 		#$table = calculer_critere_externe_init($boucle, array($table), $col, $desc, ($crit->cond OR $op!='='), true);
 		if (!$table) return '';
 	}
+	// si le champ n'est pas trouvé dans la table,
+	// on cherche si une jointure peut l'obtenir
 	elseif (@!array_key_exists($col, $desc['field'])
 	         // Champ joker * des iterateurs DATA qui accepte tout
 	         AND @!array_key_exists('*', $desc['field'])
@@ -1385,7 +1454,8 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 
 	$col_vraie = ($col_vraie?$col_vraie:$col);
 	// Dans tous les cas,
-	// virer les guillemets eventuels autour d'un int (qui sont refuses par certains SQL) et passer dans sql_quote avec le type si connu
+	// virer les guillemets eventuels autour d'un int (qui sont refuses par certains SQL)
+	// et passer dans sql_quote avec le type si connu
 	// et int sinon si la valeur est numerique
 	// sinon introduire le vrai type du champ si connu dans le sql_quote (ou int NOT NULL sinon)
 	// Ne pas utiliser intval, PHP tronquant les Bigint de SQL
@@ -1440,6 +1510,30 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	return array($arg, $op, $val, $col_alias, $where_complement);
 }
 
+
+/**
+ * Décrit un critère non déclaré explicitement, sur un champ externe à la table
+ *
+ * Décrit un critère non déclaré comme {id_article} {id_article>3} qui correspond
+ * à un champ non présent dans la table, et donc à retrouver par jointure si possible.
+ *
+ * @param Boucle $boucle    Description de la boucle
+ * @param Critere $crit     Paramètres du critère dans cette boucle
+ * @param string $op        L'opérateur utilisé, tel que '='
+ * @param array $desc       Description de la table
+ * @param string $col       Nom de la colonne à trouver (la véritable)
+ * @param string $col_alias Alias de la colonne éventuel utilisé dans le critère ex: id_enfant
+ * @param string $table     Nom de la table SQL de la boucle
+ * @return array|string
+ *     Liste si jointure possible :
+ *     - string $col
+ *     - string $col_alias
+ *     - string $table
+ *     - array $where
+ *     - array $desc
+ *     
+ *     Chaîne vide si on ne trouve pas le champ par jointure...
+**/
 function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_alias, $table){
 	global $exceptions_des_jointures;
 	$where = '';
@@ -1510,10 +1604,23 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	return array($col, $col_alias, $table, $where, $desc);
 }
 
-// Ne pas appliquer sql_quote lors de la compilation,
-// car on ne connait pas le serveur SQL, donc s'il faut \' ou ''
 
-// http://doc.spip.org/@primary_doublee
+/**
+ * Calcule une condition WHERE entre un nom du champ et une valeur
+ * 
+ * Ne pas appliquer sql_quote lors de la compilation,
+ * car on ne connait pas le serveur SQL
+ *
+ * @todo Ce nom de fonction n'est pas très clair ?
+ *
+ * @param array $decompose  Liste nom du champ, code PHP pour obtenir la valeur
+ * @param string $table     Nom de la table
+ * @return string[]
+ *     Liste de 3 éléments pour une description where du compilateur :
+ *     - operateur (=),
+ *     - table.champ,
+ *     - valeur
+**/
 function primary_doublee($decompose, $table){
 	$e1 = reset($decompose);
 	$e2 = "sql_quote('".end($decompose)."')";
@@ -1521,23 +1628,31 @@ function primary_doublee($decompose, $table){
 }
 
 /**
- * Champ hors table, ca ne peut etre qu'une jointure.
- * On cherche la table du champ et on regarde si elle est deja jointe
+ * Champ hors table, ça ne peut être qu'une jointure.
+ * 
+ * On cherche la table du champ et on regarde si elle est déjà jointe
  * Si oui et qu'on y cherche un champ nouveau, pas de jointure supplementaire
  * Exemple: criteres {titre_mot=...}{type_mot=...}
  * Dans les 2 autres cas ==> jointure
  * (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
  * pour selectioner ce qui a exactement ces 2 mots-cles.
  *
- * http://doc.spip.org/@calculer_critere_externe_init
- *
- * @param  $boucle
- * @param  $joints
- * @param  $col
- * @param  $desc
- * @param  $cond
+ * @param Boucle $boucle
+ *     Description de la boucle
+ * @param array $joints
+ *     Liste de jointures possibles (ex: $boucle->jointures ou $boucle->jointures_explicites)
+ * @param string $col
+ *     Colonne cible de la jointure
+ * @param array $desc
+ *     Description de la table 
+ * @param bool $cond
+ *     Flag pour savoir si le critère est conditionnel ou non
  * @param bool|string $checkarrivee
- * @return mixed|string
+ *     string : nom de la table jointe où on veut trouver le champ.
+ *     n'a normalement pas d'appel sans $checkarrivee.
+ * @return string
+ *     Alias de la table de jointure (Lx)
+ *     Vide sinon.
  */
 function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $checkarrivee = false){
 	// si on demande un truc du genre spip_mots
@@ -1554,11 +1669,13 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 		}
 	}
 	foreach ($joints as $joint){
-		if ($arrivee = trouver_champ_exterieur($col, array($joint), $boucle, $checkarrivee)){
+		if ($arrivee = trouver_champ_exterieur($col, array($joint), $boucle, $checkarrivee)) {
+			// alias de table dans le from
 			$t = array_search($arrivee[0], $boucle->from);
 			// transformer eventuellement id_xx en (id_objet,objet)
 			$cols = trouver_champs_decomposes($col, $arrivee[1]);
 			if ($t){
+				// la table est déjà dans le FROM, on vérifie si le champ est utilisé.
 				$joindre = false;
 				foreach ($cols as $col){
 					$c = '/\b'.$t.".$col".'\b/';
@@ -1581,19 +1698,31 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $cond, $c
 }
 
 /**
- * Generer directement une jointure via une table de lien spip_xxx_liens
- * pour un critere {id_xxx}
- * @param  $boucle
- * @param  $joints
- * @param  $col
- * @param  $desc
- * @param  $cond
- * @param bool $checkarrivee
+ * Générer directement une jointure via une table de lien spip_xxx_liens
+ * pour un critère {id_xxx}
+ *
+ * @todo $checkarrivee doit être obligatoire ici ?
+ * 
+ * @param Boucle $boucle
+ *     Description de la boucle
+ * @param array $joints
+ *     Liste de jointures possibles (ex: $boucle->jointures ou $boucle->jointures_explicites)
+ * @param string $col
+ *     Colonne cible de la jointure
+ * @param array $desc
+ *     Description de la table 
+ * @param bool $cond
+ *     Flag pour savoir si le critère est conditionnel ou non
+ * @param bool|string $checkarrivee
+ *     string : nom de la table jointe où on veut trouver le champ.
+ *     n'a normalement pas d'appel sans $checkarrivee.
  * @return string
+ *     Alias de la table de jointure (Lx)
  */
 function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $checkarrivee = false){
 	$primary_arrivee = id_table_objet($checkarrivee);
 
+	// [FIXME] $checkarrivee peut-il arriver avec false ????
 	$intermediaire = trouver_champ_exterieur($primary_arrivee, $joints, $boucle, $checkarrivee."_liens");
 	$arrivee = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 
@@ -1609,7 +1738,18 @@ function calculer_lien_externe_init(&$boucle, $joints, $col, $desc, $cond, $chec
 }
 
 
-// http://doc.spip.org/@trouver_champ
+/**
+ * Recherche la présence d'un champ dans une valeur de tableau 
+ *
+ * @param string $champ
+ *     Expression régulière pour trouver un champ donné.
+ *     Exemple : /\barticles.titre\b/
+ * @param array $where
+ *     Tableau de valeurs dans lesquels chercher le champ.
+ * @return bool
+ *     true si le champ est trouvé quelque part dans $where
+ *     false sinon.
+**/
 function trouver_champ($champ, $where){
 	if (!is_array($where))
 		return preg_match($champ, $where);
@@ -1622,9 +1762,27 @@ function trouver_champ($champ, $where){
 }
 
 
-// determine l'operateur et les operandes
-
-// http://doc.spip.org/@calculer_critere_infixe_ops
+/**
+ * Détermine l'operateur et les opérandes d'un critère non déclaré
+ *
+ * Lorsque l'opérateur n'est pas explicite comme sur {id_article>0} c'est
+ * l'opérateur '=' qui est utilisé.
+ *
+ * Traite les cas particuliers id_parent, id_enfant, date, lang
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array
+ *     Liste :
+ *     - string $fct       Nom d'une fonction SQL sur le champ ou vide (ex: SUM)
+ *     - string $col       Nom de la colonne SQL utilisée
+ *     - string $op        Opérateur
+ *     - string[] $val
+ *         Liste de codes PHP obtenant les valeurs des comparaisons (ex: id_article sur la boucle parente)
+ *         Souvent un tableau d'un seul élément.
+ *     - string $args_sql  Suite des arguments du critère. ?
+**/
 function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 	// cas d'une valeur comparee a elle-meme ou son referent
 	if (count($crit->param)==0){
@@ -1693,7 +1851,8 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 
 	$fct = $args_sql = '';
 	// fonction SQL ?
-	if (preg_match('/^(.*)'.SQL_ARGS.'$/', $col, $m)){
+	// chercher FONCTION(champ) tel que CONCAT(titre,descriptif)
+	if (preg_match('/^(.*)'.SQL_ARGS.'$/', $col, $m)) {
 		$fct = $m[1];
 		preg_match('/^\(([^,]*)(.*)\)$/', $m[2], $a);
 		$col = $a[1];
@@ -1702,7 +1861,6 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit){
 			$args_sql = $m[2];
 		}
 		$args_sql .= $a[2];
-		;
 	}
 
 	return array($fct, $col, $op, $val, $args_sql);
@@ -1742,7 +1900,21 @@ function calculer_vieux_in($params){
 	return $newp;
 }
 
-// http://doc.spip.org/@calculer_critere_infixe_date
+/**
+ * Calcule les cas particuliers de critères de date
+ *
+ * Lorsque la colonne correspond à un critère de date, tel que
+ * jour, jour_relatif, jour_x, age, age_relatif, age_x...
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param string $col     Nom du champ demandé
+ * @return string|array
+ *     chaine vide si ne correspond pas à une date,
+ *     sinon liste
+ *     - expression SQL de calcul de la date,
+ *     - nom de la colonne de date (si le calcul n'est pas relatif)
+**/
 function calculer_critere_infixe_date($idb, &$boucles, $col){
 	if (!preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,", $col, $regs)) return '';
 
@@ -1819,7 +1991,21 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 	return array($col,$col_vraie);
 }
 
-// http://doc.spip.org/@calculer_param_date
+/**
+ * Calcule l'expression SQL permettant de trouver un nombre de jours écoulés.
+ *
+ * Le calcul SQL retournera un nombre de jours écoulés entre la date comparée
+ * et la colonne SQL indiquée
+ *
+ * @param string $date_compare
+ *     Code PHP permettant d'obtenir le timestamp référent.
+ *     C'est à partir de lui que l'on compte les jours
+ * @param string $date_orig
+ *     Nom de la colonne SQL qui possède la date
+ * @return string
+ *     Expression SQL calculant le nombre de jours écoulé entre une valeur
+ *     de colonne SQL et une date.
+**/
 function calculer_param_date($date_compare, $date_orig){
 	if (preg_match(",'\" *\.(.*)\. *\"',", $date_compare, $r)){
 		$init = "'\" . (\$x = $r[1]) . \"'";
@@ -1853,10 +2039,18 @@ function calculer_param_date($date_compare, $date_orig){
 }
 
 /**
- * (DATA){source mode, "xxxxxx", arg, arg, arg}
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * Compile le critère {source} d'une boucle DATA
+ *
+ * Permet de déclarer le mode d'obtention des données dans une boucle
+ * DATA (premier argument) et les données (la suite).
+ * 
+ * @example
+ *     (DATA){source mode, "xxxxxx", arg, arg, arg}
+ *     (DATA){source tableau, #LISTE{un,deux,trois}}
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_DATA_source_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1875,10 +2069,15 @@ function critere_DATA_source_dist($idb, &$boucles, $crit){
 
 
 /**
- * (DATA){datasource "xxxxxx", mode}  <= deprecated
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * Compile le critère {datasource} d'une boucle DATA
+ *
+ * Permet de déclarer le mode d'obtention des données dans une boucle DATA
+ *
+ * @deprecated Utiliser directement le critère {source}
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_DATA_datasource_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1889,10 +2088,17 @@ function critere_DATA_datasource_dist($idb, &$boucles, $crit){
 
 
 /**
- * (DATA){datacache}
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * Compile le critère {datacache} d'une boucle DATA
+ *
+ * Permet de transmettre une durée de cache (time to live) utilisée
+ * pour certaines sources d'obtention des données (par exemple RSS),
+ * indiquant alors au bout de combien de temps la donnée est à réobtenir.
+ *
+ * La durée par défaut est 1 journée.
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_DATA_datacache_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1902,12 +2108,14 @@ function critere_DATA_datacache_dist($idb, &$boucles, $crit){
 
 
 /**
- * Pour passer des arguments a un iterateur non-spip
- * (php:xxxIterator){args argument1, argument2, argument3}
+ * Compile le critère {args} d'une boucle PHP
+ * 
+ * Permet de passer des arguments à un iterateur non-spip
+ * (PHP:xxxIterator){args argument1, argument2, argument3}
  *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_php_args_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1919,12 +2127,17 @@ function critere_php_args_dist($idb, &$boucles, $crit){
 }
 
 /**
- * Passer une liste de donnees a l'iterateur DATA
- * (DATA){liste X1, X2, X3}
+ * Compile le critère {liste} d'une boucle DATA
+ * 
+ * Passe une liste de données à l'itérateur DATA
  *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * @example
+ *     (DATA){liste X1, X2, X3}
+ *     équivalent à (DATA){source tableau,#LISTE{X1, X2, X3}}
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_DATA_liste_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1935,12 +2148,25 @@ function critere_DATA_liste_dist($idb, &$boucles, $crit){
 }
 
 /**
- * Passer un enum min max a l'iterateur DATA
- * (DATA){enum Xmin, Xmax}
+ * Compile le critère {enum} d'une boucle DATA
+ * 
+ * Passe les valeurs de début et de fin d'une énumération, qui seront
+ * vues comme une liste d'autant d'éléments à parcourir pour aller du
+ * début à la fin.
  *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * Cela utilisera la fonction range() de PHP.
+ *
+ * @example
+ *     (DATA){enum Xdebut, Xfin}
+ *     (DATA){enum a,z}
+ *     (DATA){enum z,a}
+ *     (DATA){enum 1.0,9.2}
+ *
+ * @link http://php.net/manual/fr/function.range.php
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_DATA_enum_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1951,12 +2177,15 @@ function critere_DATA_enum_dist($idb, &$boucles, $crit){
 }
 
 /**
- * Extraire un chemin d'un tableau de donnees
+ * Compile le critère {datapath} d'une boucle DATA
+ * 
+ * Extrait un chemin d'un tableau de données
+ * 
  * (DATA){datapath query.results}
  *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_DATA_datapath_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1968,11 +2197,31 @@ function critere_DATA_datapath_dist($idb, &$boucles, $crit){
 
 
 /**
- * le critere {si ...} applicable a toutes les boucles
+ * Compile le critère {si}
+ * 
+ * Le critère {si condition} est applicable à toutes les boucles et conditionne
+ * l'exécution de la boucle au résultat de la condition. La partie alternative
+ * de la boucle est alors affichée si une condition n'est pas remplie (comme
+ * lorsque la boucle ne ramène pas de résultat).
+ * La différence étant que si la boucle devait réaliser une requête SQL
+ * (par exemple une boucle ARTICLES), celle ci n'est pas réalisée si la
+ * condition n'est pas remplie. 
+ * 
+ * Les valeurs de la condition sont forcément extérieures à cette boucle
+ * (sinon il faudrait l'exécuter pour connaître le résultat, qui doit tester
+ * si on exécute la boucle !)
  *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * Si plusieurs critères {si} sont présents, ils sont cumulés :
+ * si une seule des conditions n'est pas vérifiée, la boucle n'est pas exécutée.
+ * 
+ * @example
+ *     {si #ENV{exec}|=={article}}
+ *     {si (#_contenu:GRAND_TOTAL|>{10})}
+ *     {si #AUTORISER{voir,articles}}
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_si_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -1992,12 +2241,16 @@ function critere_si_dist($idb, &$boucles, $crit){
 }
 
 /**
+ * Compile le critère {tableau} d'une boucle POUR
+ * 
  * {tableau #XX} pour compatibilite ascendante boucle POUR
- * ... preferer la notation {datasource #XX,table}
+ * ... préférer la notation (DATA){source tableau,#XX}
  *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
+ * @deprecated Utiliser une boucle (DATA){source tableau,#XX}
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_POUR_tableau_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -2008,14 +2261,17 @@ function critere_POUR_tableau_dist($idb, &$boucles, $crit){
 
 
 /**
- * Trouver toutes les objets qui ont des enfants (les noeuds de l'arbre)
+ * Compile le critère {noeud}
+ * 
+ * Trouver tous les objets qui ont des enfants (les noeuds de l'arbre)
  * {noeud}
  * {!noeud} retourne les feuilles
  *
  * @global array $exceptions_des_tables
- * @param string $idb
- * @param array $boucles
- * @param Object $crit
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_noeud_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
@@ -2043,14 +2299,16 @@ function critere_noeud_dist($idb, &$boucles, $crit){
 }
 
 /**
- * Trouver toutes les objets qui n'ont pas d'enfants (les feuilles de l'arbre)
+ * Compile le critère {feuille}
+ * 
+ * Trouver tous les objets qui n'ont pas d'enfants (les feuilles de l'arbre)
  * {feuille}
  * {!feuille} retourne les noeuds
  *
  * @global array $exceptions_des_tables
- * @param string $idb
- * @param array $boucles
- * @param Object $crit
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
  */
 function critere_feuille_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
