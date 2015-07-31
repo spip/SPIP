@@ -12,7 +12,7 @@ input, select, textarea { font-size: 100%; font-family: inherit; }
 /* Fieldset */
 .formulaire_spip fieldset { clear: both; margin: 0 0 1em 0; padding: 0; border: 0; }
 .formulaire_spip fieldset legend { margin: 0; padding: 0; font-size: 1.05em; font-weight: bold; }
-* html .formulaire_spip fieldset legend { background-color: #fff; color: #333; } /* Preciser la couleur des legend et du fond pour IE6/Win */
+.formulaire_spip fieldset legend { *background-color: #fff; color: #333; } /* Preciser la couleur des legend et du fond pour IEx/Win */
 .formulaire_spip fieldset fieldset { margin-top: 1em; }
 .formulaire_spip fieldset fieldset legend { font-size: 1em; font-weight: normal; }
 
