@@ -7,7 +7,7 @@ include_local ("inc_presentation.php3");
 include_local ("inc_session.php3");
 
 $nom_site = lire_meta('nom_site');
-if (!$nom_site) $nom_site = 'spip';
+if (!$nom_site) $nom_site = 'Mon site SPIP';
 $url_site = lire_meta('adresse_site');
 if (!$url_site) $url_site = '../index.php3';
 
