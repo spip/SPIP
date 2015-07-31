@@ -11,6 +11,7 @@
 	// Ce fichier ne sera execute qu'une fois
 	if (defined("_ECRIRE_INC_SESSION")) return;
 	define("_ECRIRE_INC_SESSION", "1");
+	srand((double) microtime() * 1000000); // une fois et une seule par script
 
 
 	// Ajoute une session dans le cache des sessions
@@ -54,7 +55,7 @@
 	// attention aux trous de securite ;)
 	function cree_cookie_session ($auteur) {
 		if ($auteur->id_auteur > 0) {
-			$session = md5(rand()); //numero de session
+			$session = md5(rand()); // numero de session
 			ajouter_session($auteur, $session);
 			$cookie = $auteur->id_auteur ."@". $auteur->login ."@". $session;
 			return $cookie;
