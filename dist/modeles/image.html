@@ -1,5 +1,11 @@
 <BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID}>[(#INCLUS
-|=={image}|?{' '})[(#INCLURE{fond=modeles/img}{id_document=#ID}{embed=oui})]
+|=={image}|?{<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
+	 style='float:(#ENV{align}|match{left|right});[ width:(#LARGEUR)px;]']>[
+	<a href="(#ENV{lien})"[
+		class="(#ENV{lien_class})"]>]<img src='#URL_DOCUMENT'
+		[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][
+			title="(#TITRE|texte_backend)"]
+			alt="[(#TITRE|texte_backend)]" />[(#ENV{lien}|?{</a>})]</span>})
 ][(#INCLUS
 |=={embed}|?{' ',''})
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
