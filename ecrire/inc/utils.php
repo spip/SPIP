@@ -411,13 +411,26 @@ function _L($text, $args=array()) {
 
 // Nommage bizarre des tables d'objets
 function table_objet($type) {
-	if ($type == 'site' OR $type == 'syndic')
-		return 'syndic';
-	else if ($type == 'forum')
-		return 'forum';
-	else
-		return $type.'s';
+	static $surnoms = array(
+                'article' => 'articles',
+                'auteur' => 'auteurs',
+                'breve' => 'breves',
+                'document' => 'documents',
+                'forum' => 'forum', # hum
+                'groupe_mots' => 'groupes_mots', # hum
+                'message' => 'messages',
+                'mot' => 'mots',
+                'petition' => 'petitions',
+                'rubrique' => 'rubriques',
+                'signature' => 'signatures',
+                'syndic' => 'syndic',
+                'site' => 'syndic', # hum hum
+                'syndic_article' => 'syndic_articles',
+                'type_document' => 'types_documents' # hum
+		);
+	return $surnoms[$type];
 }
+
 function id_table_objet($type) {
 	if ($type == 'site' OR $type == 'syndic')
 		return 'id_syndic';
