@@ -89,8 +89,14 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 // Changer la langue courante
 //
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
- 	if ($lang && ereg(",$lang,", ",$all_langs,")) {
+	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang, $flag_ecrire;
+
+	if ($flag_ecrire)
+		$liste_langues = $all_langs;
+	else
+		$liste_langues = lire_meta('langues_multilingue');
+
+ 	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
 		$GLOBALS['spip_lang'] = $lang;
 
 		$spip_lang_rtl =   lang_dir($lang, '', '_rtl');
@@ -392,15 +398,20 @@ function lang_dselect ($rien='') {
 // Afficher un menu de selection de langue
 //
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
-	global $couleur_foncee, $couleur_claire;
+	global $couleur_foncee, $couleur_claire, $flag_ecrire;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
 
-	if ($nom_select == 'var_lang')
-		$langues = explode(',', $GLOBALS['all_langs']);
-	else
+	if ($flag_ecrire) {
+		if ($nom_select == 'var_lang')	// interface
+			$langues = explode(',', $GLOBALS['all_langs']);
+		else	// menu "langue de larticle"
+			$langues = explode(',', lire_meta('langues_multilingue'));
+	} else {
+		// site public : les langues proposees
 		$langues = explode(',', lire_meta('langues_multilingue'));
+	}
 
 	if (count($langues) <= 1) return;
 

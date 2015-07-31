@@ -95,6 +95,11 @@ if ($var_lang) {
 }
 $menu_lang = $GLOBALS['spip_lang'];
 
+// securite lang
+if ($lang) {
+	if (!ereg("^[a-z_]+$", $lang)) unset($lang);
+	if (!ereg(",$lang,", ",".lire_meta('langues_utilisees').",")) unset($lang);
+}
 
 //
 // Gestion du cache et calcul de la page
