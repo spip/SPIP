@@ -564,7 +564,6 @@ ecrire/exec/editer_mot.php -text
 ecrire/exec/export_all.php -text
 ecrire/exec/forum.php -text
 ecrire/exec/forum_admin.php -text
-ecrire/exec/forum_envoi.php -text
 ecrire/exec/grouper_mots.php -text
 ecrire/exec/iconifier.php -text
 ecrire/exec/import_all.php -text
@@ -590,6 +589,7 @@ ecrire/exec/mots_type.php -text
 ecrire/exec/naviguer.php -text
 ecrire/exec/petitionner.php -text
 ecrire/exec/plonger.php -text
+ecrire/exec/poster_forum_prive.php -text
 ecrire/exec/puce_statut.php -text
 ecrire/exec/recherche.php -text
 ecrire/exec/rechercher.php -text

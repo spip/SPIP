@@ -19,6 +19,8 @@ include_spip('inc/barre');
 function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site) {
 
 	// trouver a quoi on repond
+	$id_parent= intval($id_parent);
+	$id = intval($id);
 	$row = forum_envoi_parent($id_parent);
 
 	// apres le premier appel, afficher la saisie precedente
@@ -27,6 +29,7 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 	}
 
 	// determiner le retour et l'action
+
 	list($script,$retour) = split('\?', urldecode($script));
 	if (function_exists($f = 'forum_envoi_' . $script))
 		list($table, $objet, $titre, $num, $retour, $id, $corps) =
@@ -39,7 +42,9 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 		} else 	$titre_message = _T('texte_nouveau_message');
 	}
 
-	$form = forum_envoi_formulaire($id, generer_url_ecrire($script, $retour), $statut, $texte, $titre_message, $nom_site, $url_site);
+	$h = _request('var_ajaxcharset') ? '' : generer_url_ecrire($script, $retour);
+
+	$form = forum_envoi_formulaire($id, $h, $statut, $texte, $titre_message, $nom_site, $url_site);
 
 	return forum_envoi_form($id, $id_parent, $script, $statut, $titre, $row['texte'] . $corps, $form, $objet, $retour);
 }
@@ -47,8 +52,8 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 // http://doc.spip.org/@forum_envoi_form
 function forum_envoi_form($id, $id_parent, $script, $statut, $titre, $corps, $form, $objet, $args) {
 
-	$cat = intval($id) . '/'
-	  . intval($id_parent) . '/'
+	$cat = $id . '/'
+	  . $id_parent . '/'
 	  . $statut . '/'
 	  . $script . '/'
 	  . $objet;
@@ -62,8 +67,9 @@ $form
 	. "' /></div>"
 	. fin_cadre_formulaire(true);
 
-	return "\n<div>&nbsp;</div>"
-	. redirige_action_auteur('poster_forum_prive',$cat, $script, $args, $corps, "\nmethod='post' id='formulaire'");
+	if (_request('var_ajaxcharset'))
+	  return ajax_action_post('poster_forum_prive',$cat, $script, $args, $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
+	else return redirige_action_auteur('poster_forum_prive',$cat, $script, $args, $corps, "\nmethod='post' id='formulaire'");
 }
 
 // Chercher a quoi on repond pour l'afficher au debut
@@ -180,13 +186,8 @@ function forum_envoi_forum_admin($id, $row, $retour) {
 // http://doc.spip.org/@forum_envoi_formulaire
 function forum_envoi_formulaire($id, $retour, $statut, $texte, $titre, $nom_site, $url_site)
 {
-	if ($statut == "prive") $logo = "forum-interne-24.gif";
-	else if ($statut == "privadm") $logo = "forum-admin-24.gif";
-	else if ($statut == "privrac") $logo = "forum-interne-24.gif";
-	else $logo = "forum-public-24.gif";
-
 	return "\n<table border='0' cellpadding='0' cellspacing='0' width='100%'><tr><td>"
-	  . icone(_T('icone_retour'), $retour, $logo, '','', false)
+	  . (!$retour ? '' : icone(_T('icone_retour'), $retour, forum_logo($statut), '','', false))
 	  ."</td><td style='width: 100%'>"
 	  ."<b><label for='titre_message'>"
 	  . _T('info_titre')
@@ -241,7 +242,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre, $nom_site, $
 		. (!$nom_site ? '' : "<p><a href='$url_site'>$nom_site</a></p>")
 		. "\n<div style='text-align: right'><input class='fondo' type='submit' name='valider_forum' value='"
 		. _T('bouton_envoyer_message')
-		. "' /></div>"
+		. "'\nonclick='AjaxNamedSubmit(this)' /></div>"
 		. fin_cadre_thread_forum(true)
 		. "</td>"
 		. "</tr>\n"

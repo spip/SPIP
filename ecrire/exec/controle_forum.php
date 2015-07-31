@@ -207,17 +207,19 @@ function exec_controle_forum_dist()
   exec_controle_forum_args(intval(_request('id_rubrique')),
 			   _request('type'),
 			   intval(_request('debut')),
+			   intval(_request('pas')),
 			   _request('recherche'));
 }
 
 // http://doc.spip.org/@exec_controle_forum_args
-function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$recherche)
+function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$pas, $recherche)
 {
 	if (!autoriser('publierdans','rubrique',$id_rubrique)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 
+	if (!$pas) $pas = 20;	// nb de forums affiches par page
 	if (!preg_match('/^\w+$/', $type)) $type = 'public';
 	$formulaire_recherche = formulaire_recherche("controle_forum","<input type='hidden' name='type' value='$type' />");
 
@@ -230,7 +232,6 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$recherche)
 	  $debut = sql_countsel($from, $where . (" AND F.date_heure > '$d'"));
 	}
 
-	$pack = 20;	// nb de forums affiches par page
 	$enplus = 200;	// intervalle affiche autour du debut
 	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
 	$limitnb = $debut + $enplus - $limitdeb;
@@ -241,8 +242,9 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$recherche)
 	$query = sql_select("F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur", $from,  $where,'', "F.date_heure DESC", "$limitdeb, $limitnb");
   
 	$ancre = 'controle_forum';
-	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $limitdeb, $pack, $ancre, $query)
-	. affiche_tranche_forum($debut, $limitdeb, $pack, $query);
+	$n = sql_count($query);
+	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $pas, $ancre, $n, $enplus)
+	. affiche_tranche_forum($debut, $limitdeb, $pas, $query);
 
 	if (_request('var_ajaxcharset')) {
 		ajax_retour($mess);
@@ -303,12 +305,12 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$recherche)
 }
 
 // http://doc.spip.org/@affiche_tranche_forum
-function affiche_tranche_forum($debut, $i, $pack, $query)
+function affiche_tranche_forum($debut, $i, $pas, $query)
 {
 
   $res = '';
   while ($row = sql_fetch($query)) {
-	if (($i>=$debut) AND ($i<($debut + $pack)))
+	if (($i>=$debut) AND ($i<($debut + $pas)))
 		$res .= controle_un_forum($row);
 	$i ++;
   }

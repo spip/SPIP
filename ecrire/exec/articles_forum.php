@@ -23,10 +23,10 @@ function exec_articles_forum_dist()
 		return;
 
 	$debut = intval(_request('debut'));
-	$pack = intval(_request('pack'));
+	$pas = intval(_request('pas'));
 	$enplus = intval(_request('enplus'));
 
-	if (!$pack) $pack = 5; // nb de forums affiches par page
+	if (!$pas) $pas = 5; // nb de forums affiches par page
 	if (!$enplus) $enplus = 200;	// intervalle affiche autour du debut
 
 	$result = sql_select("titre, id_rubrique", "spip_articles", "id_article=$id_article");
@@ -42,9 +42,11 @@ function exec_articles_forum_dist()
 	$ancre = 'navigation-forum';
 	$result = sql_select("id_forum", "spip_forum",  "id_article=$id_article AND id_parent=0 AND statut IN ('publie', 'off', 'prop', 'spam')", '', '', "$limitdeb, $limitnb");
 
-	$res = sql_select("pied.id_forum,pied.id_parent,pied.id_rubrique,pied.id_article,pied.id_breve,pied.id_message,pied.id_syndic,pied.date_heure,pied.titre,pied.texte,pied.auteur,pied.email_auteur,pied.nom_site,pied.url_site,pied.statut,pied.ip,pied.id_auteur, max(thread.date_heure) AS date", "spip_forum AS pied, spip_forum AS thread", "pied.id_article=$id_article AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop', 'spam') AND thread.id_thread=pied.id_forum", "thread.id_thread",  "date DESC",  "$debut, $pack");
+	$res = sql_select("pied.id_forum,pied.id_parent,pied.id_rubrique,pied.id_article,pied.id_breve,pied.id_message,pied.id_syndic,pied.date_heure,pied.titre,pied.texte,pied.auteur,pied.email_auteur,pied.nom_site,pied.url_site,pied.statut,pied.ip,pied.id_auteur, max(thread.date_heure) AS date", "spip_forum AS pied, spip_forum AS thread", "pied.id_article=$id_article AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop', 'spam') AND thread.id_thread=pied.id_forum", "thread.id_thread",  "date DESC",  "$debut, $pas");
 
-	$mess = affiche_navigation_forum("articles_forum", "id_article=$id_article", $debut, $limitdeb, $pack, $ancre, $result)
+	$n = sql_count($result);
+
+	$mess = affiche_navigation_forum("articles_forum", "id_article=$id_article", $debut, $pas, $ancre, $total, $enplus)
 	. '<br />'
 	. afficher_forum($res,"", '', $id_article);
 

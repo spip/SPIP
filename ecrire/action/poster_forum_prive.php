@@ -61,15 +61,18 @@ function action_poster_forum_prive_post($r)
 			$notifications('forumprive', $id_forum);
 		}
 
-		redirige_par_entete(urldecode(_request('redirect'))."#id".$id_forum);
-		
+		$retour = urldecode(_request('redirect'));
+		$retour = parametre_url($retour, 'modif_forum', 'fin', '&');
+		$retour = parametre_url($retour, 'texte', $objet, '&');
+#		$retour = parametre_url($retour, 'script', $script, '&');
+		redirige_par_entete($retour ."#id".$id_forum);
 	} else {
 	   // previsualisation : on ne fait que passer .... 
 	   // et si les clients HTTP respectaient le RFC HTTP selon lequel
 	   // une redirection d'un POST doit etre en POST et pas en GET
 	   // on n'aurait pas a faire l'horreur ci-dessous.
 		  
-	   set_request('exec', 'forum_envoi');
+	   set_request('exec', 'poster_forum_prive');
 	   set_request('id', $id);
 	   set_request('id_parent', $id_parent);
 	   set_request('statut', $statut);

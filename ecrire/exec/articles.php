@@ -144,19 +144,11 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  . pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''))
 	  ;
 
-	$onglet_documents =
-	  articles_documents('article', $id_article)
-	  ;
-	
-	$onglet_interactivite =
-	  (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"")
-		;
-		
-	$onglet_discuter = !$statut_forum ? '' : (
-	 	icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statut_forum&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif",'center')
-		. $discuter($id_article, $debut_forum, $statut_forum));
+	$onglet_documents = articles_documents('article', $id_article);
+	$onglet_interactivite = (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"");
 
-	$hors_fiche = "";
+	$onglet_discuter = !$statut_forum ? '' : ($discuter($id_article, 'articles', 'id_article', $statut_forum, $debut_forum));
+	
 
 	return 
 	  $navigation
@@ -177,7 +169,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	    'interactivite'=>$onglet_interactivite,
 	    'discuter'=>_INTERFACE_ONGLETS?$onglet_discuter:""))
 	  . "</div>"
-	  . (_INTERFACE_ONGLETS?"":$onglet_discuter);
+	  . (_INTERFACE_ONGLETS?"":$onglet_discuter)
+;
 }
 
 // http://doc.spip.org/@articles_documents

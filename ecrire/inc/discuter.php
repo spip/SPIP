@@ -16,50 +16,57 @@ include_spip('inc/forum');
 include_spip('inc/presentation');
 
 // http://doc.spip.org/@formulaire_discuter
-function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $args, $mute=false)
-{
-	$nav ='';
-	if ($total > $total_afficher) {
-		$evt = (_SPIP_AJAX === 1);
-		$nav = "<div class='serif2 centered'>";
-		for ($i = 0; $i < $total; $i = $i + $total_afficher){
-			$y = $i + $total_afficher - 1;
-			if ($i == $debut)
-				$nav .= "<span class='spip_medium'><b>[$i-$y]</b></span> ";
-			else {
-				$a = "$args&debut=$i";
-				if (!$evt) {
-					$h = generer_url_ecrire($script, $a);
-				} else {
-					$h = generer_url_ecrire('discuter', $a);
-					$evt = "\nonclick=" . ajax_action_declencheur($h,'forum');
-				}
-				$nav .= "[<a href='$h#forum'$evt>$i-$y</a>] ";
-			}
-		}
-		$nav .= "</div>";
-	}
 
-	return $nav 
-	. afficher_forum($query, $script, $args, $mute)
-	. "<br />"
-	. $nav;
+function formulaire_discuter($script, $args, $debut, $pas, $ancre, $total, $objet)
+{
+	$nav = '';
+	$e = (_SPIP_AJAX === 1);
+	for ($tranche = 0; $tranche < $total; $tranche += $pas){
+		$y = $tranche + $pas - 1;
+		if ($tranche == $debut)
+			$nav .= "<span class='spip_medium'><b>[$tranche-$y]</b></span> ";
+		else {
+			$h = "$args&debut=$tranche";
+			if (!$e) {
+				$h = generer_url_ecrire($script, $h);
+			} else {
+				$h .= "&script=$script";
+				if ($objet) $h .= "&objet=$objet";
+				$h = generer_url_ecrire('discuter', $h);
+				$e = "\nonclick=" . ajax_action_declencheur($h,$ancre);
+			}
+			$nav .= "[<a href='$h#$ancre'$e>$tranche-$y</a>] ";
+		}
+	}
+	return "<div class='serif2 centered'>$nav</div>";
 }
 
 // http://doc.spip.org/@inc_discuter_dist
-function inc_discuter_dist($id_article, $debut=1, $statut='prive')
+function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas=8)
 {
 	$debut = intval($debut);
-	$id_article = intval($id_article);
-	$where = "id_article=" . sql_quote($id_article) . " AND id_parent=0 AND statut=" . sql_quote($statut);
+	$id = intval($id);
+	if (!$pas) $pas = 10;
+	$ancre = "poster_forum_prive-$id";
+	$clic = _T('icone_poster_message');
+	$logo = ($script == 'forum_admin') ?
+	  "forum-admin-24.gif" : "forum-interne-24.gif";
+	$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id=$id&script=$script") ."#formulaire";
+	$lien = icone_inline($clic, $lien, $logo, "creer.gif",'center', $ancre);
 
-	if (! ($n = sql_countsel('spip_forum', $where))) return '';
+	$where = (!$objet ? '' : ($objet . "=" . sql_quote($id) . " AND "))
+	  . "id_parent=0 AND statut=" . sql_quote($statut);
 
-	$total_afficher = 8;
-	$forum = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$total_afficher");
+	$n = sql_countsel('spip_forum', $where);
+	if (!$n) return $lien;
 
-	$res = formulaire_discuter($forum, $n, $debut, $total_afficher, 'articles', "id_article=$id_article&statut=$statut");
+	$nav = ($n <= $pas) ? '' :
+	  formulaire_discuter($script, "id=$id&$objet=$id&statut=$statut", $debut, $pas, $ancre, $n, $objet);
 
-	return ajax_action_greffe("forum", '', $res);
+	$q = sql_select('*', 'spip_forum', $where, '',  "date_heure DESC", "$debut,$pas");
+	$args = ($objet ? "$objet=$id&" : '') . "statut=$statut";
+	$q = afficher_forum($q, $script,  $args, false);
+	$res = $lien. $nav . $q	. "<br />" . $nav;
+	return ajax_action_greffe($ancre, '', $res);
 }
 ?>

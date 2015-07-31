@@ -148,13 +148,10 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	
 	$onglet_interactivite = "";
 		
-	$onglet_discuter = 
-	  icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_breve&script=breves_voir") . '#formulaire', "forum-interne-24.gif", "creer.gif", 'center')
-		. afficher_forum(sql_select("*", 'spip_forum', "statut='prive' AND id_breve=$id_breve AND id_parent=0",'', "date_heure DESC",  "20"), "breves_voir", "id_breve=$id_breve")
-	  ;
+	$discuter = charger_fonction('discuter', 'inc');
+	$onglet_discuter = $discuter($id_breve, 'breves_voir', 'id_breve');
 
-	echo 
-		debut_droite('', true)
+	echo debut_droite('', true)
 	  . "<div class='fiche_objet'>"
 	  . $haut 
 	  . afficher_onglets_pages(array(
