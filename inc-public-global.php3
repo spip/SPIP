@@ -397,6 +397,7 @@ if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf'))
 		else
 			$date = time() - 3600*24*$jours_neuf;
 		unset ($mail_nouveautes);
+		unset ($sujet_nouveautes);
 		$fond = 'nouveautes';
 		$delais = 0;
 		$contexte_inclus['date'] = date('Y-m-d H:i:s', $date);
@@ -405,9 +406,9 @@ if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf'))
 		// envoi
 		if ($mail_nouveautes) {
 			include_ecrire('inc_mail.php3');
-			$nom_site = lire_meta('nom_site');
+			$mail_nouveautes = filtrer_entites($mail_nouveautes);
 			spip_log("envoi mail nouveautes");
-			envoyer_mail($adresse_neuf, "[$nom_site] Les nouveautes", $mail_nouveautes);
+			envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
 		} else {
 			spip_log("envoi mail nouveautes : pas de nouveautes");
 		}

@@ -22,11 +22,13 @@ function entites_html($texte) {
 }
 
 
-function entites_date($date) {	// specifique : pour envoyer une date par mail
-	$date = ereg_replace("&ucirc;", "\xfb", $date);
-	$date = ereg_replace("&eacute;", "\xe9", $date);
-	return $date;
-}
+function filtrer_entites($texte) {	// html -> texte, a completer
+// NB en php4 il suffirait d'utiliser get_html_translation_table/array_flip
+	$trans['&ucirc;'] = "\xfb";
+	$trans['&eacute;'] = "\xe9";
+	$trans['&nbsp;'] = " ";
+	return strtr($texte,$trans); 
+} 
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
