@@ -1463,14 +1463,14 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
 'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een meer grondige update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand <tt>inc_connect.php3</tt> in de map <tt>ecrire</tt>. Herneem nu de installatie van SPIP om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand <tt>inc_connect.php3</tt> alvorens het te verwijderen...)',
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
 'texte_plan_trad' => '<NEW> Cette page vous permet de visualiser l\'&eacute;tat des traductions pour la langue choisie. 
-  La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave; jour, 
-  ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
+		La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave jour, 
+		ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
 'texte_plan_trad_en_cours' => '<NEW> Ce symbole indique qu\'un article est en cours de traduction&nbsp;: cela veut dire qu\'une traduction 
-  a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
-  &agrave; la traduction. ',
-'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave; 
-  un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
-  traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
+		a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
+		&agrave; la traduction. ',
+'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave 
+		un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
+		traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
 'texte_plan_trad_note' => 'Noot&nbsp;: alleen gepubliceerde artikels worden op deze pagina getoond.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',

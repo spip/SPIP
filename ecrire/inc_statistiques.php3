@@ -386,7 +386,6 @@ function aff_referers ($query, $limit=10, $plus = true) {
 		$referer = interdire_scripts($row['referer']);
 		$visites = $row['vis'];
 		$tmp = "";
-		$aff = "";
 		
 		$buff = stats_show_keywords($referer, $referer);
 
@@ -423,19 +422,19 @@ function aff_referers ($query, $limit=10, $plus = true) {
 	if (count($nbvisites) > 0) {
 		arsort($nbvisites);
 
-		$aff .= "<ul>";
+		$aff = "<ul>";
 		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
 			if ($lesdomaines[$numero] == '') next;
 
 			$visites = pos($nbvisites);
 			$ret = "\n<li>";
-		
+
 			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('info_visites')."</font> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
 			else $ret .= "<font color='#999999'>$visites "._T('info_visite')."</font> ";
-			
+
 			if (count($lesreferers[$numero]) > 1) {
-				$referers = join ($lesreferers[$numero],"</li><li>");
+				$referers = join ("</li><li>",$lesreferers[$numero]);
 				$aff .= "<p />";
 				$aff .= $ret;
 				$aff .= "<a href='http://".$lesurls[$numero]."'><b><font color='$couleur_foncee'>".$lesdomaines[$numero]."</font></b></a>";
@@ -444,9 +443,9 @@ function aff_referers ($query, $limit=10, $plus = true) {
 				$aff .= "</li><p />\n";
 			} else {
 				$aff .= $ret;
-				$lien = $lesdomaines[$numero].ereg_replace(" \([0-9]+\)$", "",$lesreferers[$numero][0]);
-				$aff .= "<a href='".$lesliens[$numero]."'><b>$lien</b></a>";
-				$aff .= "</li>";
+				eregi("^(<a [^>]+>)(.*) \([0-9]+\)", $lesreferers[$numero][0], $regs);
+				$aff .= "<b>".$regs[1].$lesdomaines[$numero].$regs[2]."</b>";
+				$aff .= "</li>\n";
 			}
 		}
 		$aff .= "</ul>";
