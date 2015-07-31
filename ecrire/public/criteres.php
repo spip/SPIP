@@ -740,7 +740,7 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 	}
 	list($arg, $op, $val, $col, $where_complement) = $r;
 
-	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : '', $arg, $op, $val, $col);
+	$in = critere_IN_cas($idb, $boucles, $crit->not ? 'NOT' : ($crit->exclus? 'exclus' :  ''), $arg, $op, $val, $col);
 //	inserer la condition; exemple: {id_mot ?IN (66, 62, 64)}
 	$where = $in;
 	if ($crit->cond) {
