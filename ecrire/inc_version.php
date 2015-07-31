@@ -399,7 +399,7 @@ else
 // Vanter notre art de la composition typographique
 
 if (!headers_sent())
-	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net" . ((isset($GLOBALS['meta']['plugin_header'])&&!isset($GLOBALS['plugin_header_silencieux']))?("/plugins ".$GLOBALS['meta']['plugin_header']):""));
+	@header("Composed-By: SPIP $spip_version_affichee @ www.spip.net" . ((isset($GLOBALS['meta']['plugin_header'])&&!isset($GLOBALS['plugin_header_silencieux']))?(" + ".$GLOBALS['meta']['plugin_header']):""));
 
 # spip_log($_SERVER['REQUEST_METHOD'].' '.self() . ' - '._FILE_CONNECT);
 
