@@ -769,7 +769,7 @@ et vous reconnecter au site.
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant',
 'zbug_pagination_sans_critere' => '#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects',
-'zbug_profile' => 'Temps calcul : @time@',
+'zbug_profile' => 'Temps de calcul&nbsp;: @time@',
 'zbug_resultat' => 'r&eacute;sultat',
 'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini',
 'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue',
