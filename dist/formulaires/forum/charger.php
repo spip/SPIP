@@ -80,6 +80,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		'afficher_texte' => $afficher_texte,
 		'table' => $table,
 		'texte' => '',
+		'config' => array('afficher_barre' => ' '),
 		'titre' => extraire_multi($titre),
 		'url' => $script, # ce sur quoi on fait le action='...'
 		'url_post' => $script_hidden, # pour les variables hidden

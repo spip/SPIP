@@ -59,9 +59,10 @@
 })]
 
 [(#CONFIG{forums_texte}|=={oui}|?{
-	<li class='textarea'><label for='texte'><:forum_texte|typo:>
-	<small><:info_creation_paragraphe:></small></label>
-	<textarea name='texte' id='texte'>[(#ENV{texte})]</textarea>
+	<li class='textarea'>
+	<label for='texte'><:forum_texte|typo:></label>
+	[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{texte}|barre_typo{#LANG}})]
+	<textarea name='texte' id='texte' rows='12'>[(#ENV{texte})]</textarea>
 	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 	</li>
 })]
@@ -77,6 +78,8 @@
 	<input class='text' type="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" /></li>
 	</ol></fieldset>
 })]
+
+	<INCLURE{fond=formulaires/login_forum} />
 
 	[(#REM) Piege a robots spammeurs ]
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
