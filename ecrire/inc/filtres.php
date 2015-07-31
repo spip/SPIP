@@ -2195,6 +2195,11 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	if ($hauteur_ligne == 0) 	$lineHeight = floor($textSize * 1.3);
 	else $lineHeight = $hauteur_ligne;
 
+	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', array());
+	$largeur_espace = $dimensions_espace[2] - $dimensions_espace[0];
+	$retour["espace"] = $largeur_espace;
+
+
 	$line = '';
 	while (count($words) > 0) {
 		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0], array());
@@ -2210,14 +2215,25 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	$height = count($lines) * $lineHeight; // the height of all the lines total
 	// do the actual printing
 	$i = 0;
+
+	// Deux passes pour recuperer, d'abord, largeur_ligne
+	// necessaire pour alignement right et center
 	foreach ($lines as $line) {
 		$line = ereg_replace("~", " ", $line);
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
+	}
+
+	foreach ($lines as $line) {
+		$line = ereg_replace("~", " ", $line);
+		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
+		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($align == "right") $left_pos = $largeur_max - $largeur_ligne;
 		else if ($align == "center") $left_pos = floor(($largeur_max - $largeur_ligne)/2);
 		else $left_pos = 0;
+		
+		
 		if ($fontps) {
 			$line = trim($line);
 			imagepstext ($image, "$line", $fontps, $textSizePs, $black, $grey2, $left + $left_pos, $top + $lineHeight * $i, 0, 0, 0, 16);
@@ -2230,9 +2246,6 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	$retour["height"] = $height + round(0.3 * $hauteur_ligne);
 	$retour["width"] = $largeur_max;
                  
-	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', array());
-	$largeur_espace = $dimensions_espace[2] - $dimensions_espace[0];
-	$retour["espace"] = $largeur_espace;
 	return $retour;
 }
 //array imagefttext ( resource image, float size, float angle, int x, int y, int col, string font_file, string text [, array extrainfo] )
