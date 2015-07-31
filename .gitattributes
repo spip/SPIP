@@ -600,6 +600,7 @@ ecrire/inc/legender.php -text
 ecrire/inc/message_select.php -text
 ecrire/inc/minipres.php -text
 ecrire/inc/modifier.php -text
+ecrire/inc/nfslock.php -text
 ecrire/inc/notifications.php -text
 ecrire/inc/petitionner.php -text
 ecrire/inc/plonger.php -text
