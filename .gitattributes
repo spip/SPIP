@@ -33,12 +33,8 @@ dist/javascript/formfx.js -text
 dist/modeles/application.html -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
-dist/modeles/audio.html -text
 dist/modeles/foreach.html -text
-dist/modeles/image.html -text
 dist/modeles/lesauteurs.html -text
-dist/modeles/text.html -text
-dist/modeles/video.html -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
@@ -749,15 +745,19 @@ prive/javascript/jquery.js -text
 prive/javascript/multilang.js -text
 prive/javascript/pause.js -text
 prive/minipres.css -text
+prive/modeles/audio.html -text
 prive/modeles/doc.html -text
 prive/modeles/emb.html -text
 prive/modeles/formulaire.html -text
+prive/modeles/image.html -text
 prive/modeles/img.html -text
 prive/modeles/pagination.html -text
 prive/modeles/pagination_page.html -text
 prive/modeles/pagination_page_precedent_suivant.html -text
 prive/modeles/pagination_precedent_suivant.html -text
 prive/modeles/paginationitem.html -text
+prive/modeles/text.html -text
+prive/modeles/video.html -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
 prive/spip_style.css -text
