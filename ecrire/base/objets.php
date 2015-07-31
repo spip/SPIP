@@ -61,7 +61,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'info_nb_objets' => 'info_nb_articles',
 				'titre' => 'titre, lang',
 				'date' => 'date',
-				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'j_mots', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps'),
+				'champs_versionnes' => array('id_rubrique', 'surtitre', 'titre', 'soustitre', 'jointure_mots', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps'),
 				'rechercher_champs' => array(
 					'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
 					'texte' => 1, 'ps' => 1, 'nom_site' => 1, 'url_site' => 1,
