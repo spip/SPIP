@@ -291,7 +291,7 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
 
   echo "<div class='serif2'>";
   $i = $limitdeb;
-  if ($i>0) echo "<a href=", http_php_script('controle_forum', $args),">0</a> ... | ";
+  if ($i>0) echo "<a href='", http_php_scriptnq('controle_forum', $args),"'>0</a> ... | ";
   $controle = '';
 
   while ($row = spip_fetch_array($result_forum)) {

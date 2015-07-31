@@ -306,7 +306,7 @@ global  $connect_statut, $options,
 
 	// nom
 	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
-	echo "<a href=", http_php_script('auteurs_edit',"id_auteur=".$row['id_auteur']), ">",typo($row['nom']),'</a>';
+	echo "<a href='", http_php_scriptnq('auteurs_edit',"id_auteur=".$row['id_auteur']), "'>",typo($row['nom']),'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
