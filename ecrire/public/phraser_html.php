@@ -159,7 +159,13 @@ function phraser_champs($texte,$ligne,$result) {
 			phraser_arg($suite, '', array(), $champ);
 			// ce ltrim est une ereur de conception
 			// mais on le conserve par souci de compatibilité
+			// On le normalise dans l'arbre de syntaxe abstraite
+			// pour faire sauter ce cas particulier a la decompil
 			$texte = ltrim($suite);
+			if ($n = (strlen($suite) - strlen($texte))) {
+				$champ->apres = array(new Texte);
+				$champ->apres[0]->texte = substr($suite,0,$n);
+			}
 		} else $texte = $suite;
 		if ($champ->nom_champ == 'EMBED_DOCUMENT')
 			phraser_vieux_emb($champ);
