@@ -270,7 +270,7 @@ function declarer_interfaces(){
 	$table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
 	$table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
 	$table_des_traitements['NOM_SITE_SPIP'][]= _TRAITEMENT_TYPO;
-	$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO;
+	$table_des_traitements['NOM'][]= _TRAITEMENT_TYPO_SANS_NUMERO;
 	$table_des_traitements['AUTEUR'][]= _TRAITEMENT_TYPO;
 	$table_des_traitements['PS'][]= _TRAITEMENT_RACCOURCIS;
 	$table_des_traitements['SOURCE'][]= _TRAITEMENT_TYPO;
