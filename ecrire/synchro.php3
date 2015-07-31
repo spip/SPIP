@@ -20,6 +20,19 @@ gros_titre(_T("icone_suivi_activite"));
 
 debut_gauche();
 
+debut_boite_info();
+
+echo '<font face="Verdana,Arial,Sans,sans-serif" size=1>';
+
+echo 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.<br /><br />';
+
+echo 'Pour plus de renseignements sur toutes ces techniques,<br /> n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.';
+
+echo '</font>';
+
+fin_boite_info();
+
+
 $suivi_edito=lire_meta("suivi_edito");
 $adresse_suivi=lire_meta("adresse_suivi");
 $adresse_site=lire_meta("adresse_site");
@@ -150,7 +163,6 @@ if ($suivi_edito == "oui" AND strlen($adresse_suivi) > 3 AND strlen($adresse_sui
 
 	echo fin_cadre_relief();
 
-	echo '<p><FONT FACE="Verdana,Arial,Sans,sans-serif" SIZE=1>Pour plus de renseignements sur toutes ces techniques,<br /> n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.</font></p>';
 
 
 fin_page();
