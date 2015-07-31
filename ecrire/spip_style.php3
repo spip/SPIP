@@ -30,6 +30,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .reliefgris { background-image: url(img_pack/barre-noir.gif) }
 .iconeoff { padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0 }
 .iconeon { cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee; }
+.iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif)}
 
 .profondeur { border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid }
 .hauteur { border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid }
@@ -155,6 +156,18 @@ td.icone a img {
 	font-size: 10px;
 	font-weight: bold;
 }
+.icone-h-danger {
+	padding: 3px;
+	margin: 2px;
+	border: 1px dashed black;
+	background: url(img_pack/rayures-sup.gif);
+	width: 100%;
+	color: #666666;
+	text-decoration: none;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+}
 .icone-h-on {
 	cursor: pointer;
 	padding: 3px;
@@ -185,11 +198,20 @@ td.icone a img {
 	color: #666666;
 	text-decoration: none;
 }
+.icone-h-danger a {
+	color: #666666;
+	text-decoration: none;
+}
 .icone-h-on a {
 	color: #666666;
 	text-decoration: none;
 }
 .icone-h .image img {
+	width: 24px;
+	height: 24px;
+	border: 0px;
+}
+.icone-h-danger .image img {
 	width: 24px;
 	height: 24px;
 	border: 0px;

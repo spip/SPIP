@@ -24,6 +24,11 @@ function enfant($leparent) {
 		$titre=$row['titre'];
 		$descriptif=$row['descriptif'];
 		$texte=$row['texte'];
+		$lang_rub = $row['lang'];
+		$langue_choisie_rub = $row['langue_choisie'];
+		
+		$titre = couper($titre." ", 50); // largeur maxi
+		if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$titre\n";		
 	}
 }

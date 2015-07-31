@@ -205,6 +205,8 @@ function enfant($leparent){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
 		$statut_rubrique=$row['statut'];
+		$lang_rub = $row['lang'];
+		$langue_choisie_rub = $row['langue_choisie'];
 		$style = "";
 
 		// si l'article est publie il faut etre admin pour avoir le menu
@@ -245,6 +247,7 @@ function enfant($leparent){
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
 			$titre = couper($titre." ", 50); // largeur maxi
+			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
 		}
 		$premier = 0;
@@ -257,7 +260,8 @@ function enfant($leparent){
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
+	if ($lier_trad) icone(_T('icone_retour'), "articles.php3?id_article=$lier_trad", "article-24.gif", "rien.gif");
+	else icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
@@ -286,6 +290,9 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE='$id_article'>";
 	else if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
+		
+	if ($lier_trad) echo "<INPUT TYPE='Hidden' NAME='lier_trad' VALUE='$lier_trad'>";
+
 
 	if (($articles_surtitre != "non") OR $surtitre) {
 		echo "<B>"._T('texte_sur_titre')."</B>";
