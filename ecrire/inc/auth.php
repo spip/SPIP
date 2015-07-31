@@ -399,10 +399,10 @@ function auth_informer_login($login){
  * @param string $md5next
  * @return mixed
  */
-function auth_identifier_login($login, $password, $md5pass="", $md5next=""){
+function auth_identifier_login($login, $password){
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
 		if ($auth = charger_fonction($methode, 'auth',true)
-		AND $auteur = $auth($login, $password, $md5pass, $md5next)) {
+		AND $auteur = $auth($login, $password)) {
 			spip_log("connexion de $login par methode $methode");
 			$auteur['auth'] = $methode;
 			return $auteur;
