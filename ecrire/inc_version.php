@@ -182,6 +182,7 @@ $spip_pipeline = array(
 	'affiche_gauche' => '',
 	'affiche_droite' => '',
 	'affiche_milieu' => '',
+	'rendu_evenement' => '',
 	'affichage_final' => '|f_surligne|f_tidy|f_admin', # cf. public/assembler
 	'taches_generales_cron' => ''
 );
