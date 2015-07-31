@@ -18,17 +18,18 @@ function maj_invalideurs ($fichier, $infosurpage, $delais) {
 	if ($fichier == '') return;	// ne pas noter les POST et les delais=0
 	spip_query("DELETE FROM spip_caches WHERE fichier='$fichier'");
 
-	// invalidation des forums
+	// invalidation des forums (l'invalideur est : 'id_forum/a23')
 	insere_invalideur($infosurpage['id_forum'],'id_forum', $fichier);
 
-	// invalidation du reste - on peut desactiver dans _FILE_OPTIONS
+	// invalidation des petitions (l'invalideur est : 'petition/petition')
+	insere_invalideur($infosurpage['petition'],'petition', $fichier);
+
+	// invalidation du reste - experimental a activer dans mes_options
 	if ($GLOBALS['invalider_caches']) {
 		insere_invalideur($infosurpage['id_article'],'id_article', $fichier);
-
-### a activer quand les suivre_invalideurs() seront ajoutes dans l'espace prive
-#		insere_invalideur($infosurpage['id_breve'], 'id_breve', $fichier);
-#		insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $fichier);
-#		insere_invalideur($infosurpage['id_syndic'],'id_syndic', $fichier);
+		insere_invalideur($infosurpage['id_breve'], 'id_breve', $fichier);
+		insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $fichier);
+		insere_invalideur($infosurpage['id_syndic'],'id_syndic', $fichier);
 	}
 }
 

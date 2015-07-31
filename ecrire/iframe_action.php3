@@ -5,6 +5,11 @@ echo "";
 
 if ($connect_statut == "0minirezo") {
 
+
+	#### OUH LA, il faudrait passer ca et les modifs des articles.php3 etc
+	#### dans un seul fichier, sinon toute modif faite ici doit etre reportee
+	#### la, et inversement : l'enfer
+
 	if ($action == 'statut_article' AND $id_article > 0) {
 
 		$query = "SELECT statut FROM spip_articles WHERE id_article=$id_article";

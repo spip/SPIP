@@ -211,6 +211,11 @@ if ($titre) {
 	calculer_rubriques();
 	calculer_langues_rubriques();
 
+	// invalider et reindexer
+	if ($invalider_caches) {
+		include_ecrire ("inc_invalideur.php3");
+		suivre_invalideur("id='id_rubrique/$coll'");
+	}
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
 		indexer_rubrique($coll);

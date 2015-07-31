@@ -115,9 +115,9 @@ function reponse_confirmation($id_article, $val_confirm) {
 				else {
 					$query = "UPDATE spip_signatures SET statut='publie' WHERE id_signature='$id_signature'";
 					$result = spip_query($query);
-					// invalider les pages de l'article
+					// invalider les pages ayant des boucles signatures
 					include_ecrire('inc_invalideur.php3');
-					suivre_invalideur("id='id_article/$id_article'");
+					suivre_invalideur("id='petition/petition'");
 	
 					$texte .= erreur(_T('form_pet_signature_validee'));
 				}

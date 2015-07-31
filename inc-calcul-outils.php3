@@ -326,22 +326,28 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='')
   return (!$auteurs) ? "" : join($auteurs, ", ");
 }
 
-function sql_petitions($id_article, $table, $id_boucle, $serveur='') {
-  return spip_abstract_fetsel(array('id_article', 'email_unique', 'site_obli', 'site_unique', 'message', 'texte'),
-			      array('petitions'),
-			      array("id_article=".intval($id_article)),
-			      '','','','',1, 
-			      $table, $id_boucle, $serveur);
+function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
+	$retour = spip_abstract_fetsel(
+		array('id_article', 'email_unique', 'site_obli', 'site_unique',
+		'message', 'texte'),
+		array('petitions'),
+		array("id_article=".intval($id_article)),
+		'','','','',1, 
+		$table, $id_boucle, $serveur);
+
+	if ($retour)
+		$Cache['petition']['petition'] = 1;	# cette page est invalidee par toute petition
+
+	return $retour;
 }
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
-function sql_chapo($id_article)
-{
-  return spip_abstract_fetsel(array('chapo'),
-			      array('articles'),
-			      array("id_article=".intval($id_article),
-				    "statut='publie'"));
+function sql_chapo($id_article) {
+	return spip_abstract_fetsel(array('chapo'),
+		array('articles'),
+		array("id_article=".intval($id_article),
+		"statut='publie'"));
 }
 
 // Calcul de la rubrique associee a la requete
