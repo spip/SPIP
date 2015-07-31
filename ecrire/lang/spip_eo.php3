@@ -1210,7 +1210,7 @@ reinstaladon de SPIP por rekrei novan bazon kaj novan administrant-aliron.',
 'texte_admin_tech_01' => 'Tiu opcio ebligas al vi konservi
 la enhavon de la bazo en dosiero stokota en la dosierujo <i>ecrire/data/</i>.
 Ne forgesu anka&#365; reakiri la tuta&#309;on de la dosierujo <i>IMG/</i>, kiu entenas
-la bildojn uzatajn en la artikoloj kaj la rubrikoj.',
+la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_admin_tech_02' => 'Atentu: tiu konserva&#309;o povas esti resta&#365;rata
 	NUR en pa&#285;o instalita sub la sama versio de SPIP. Oftas
 	la eraro fari konservadon anta&#365; ol &#285;isdatigi

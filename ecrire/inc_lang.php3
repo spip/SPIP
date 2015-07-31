@@ -163,8 +163,8 @@ function traduire_nom_langue($lang) {
 	'ne' => "Nepali",
 	'nl' => "Nederlands",
 	'no' => "norsk",
-	'oci_lnc' => "occitan",	// langadocian
-	'oci_prvni' => "ni&ccedil;ard",	// provencal nic,ard
+	'oci_lnc' => "langadocian",
+	'oci_prv_ni' => "ni&ccedil;ard",
 	'om' => "(Afan) Oromo",
 	'or' => "Oriya",
 	'pa' => "Punjabi",
