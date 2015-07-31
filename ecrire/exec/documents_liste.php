@@ -41,37 +41,36 @@ fin_boite_info();
 
 debut_droite();
 
-	// recupere les types
+	// recupere les titres des types
 	$res = spip_query("SELECT * FROM spip_types_documents");
 	while ($row = spip_fetch_array($res))
-		$types[$row['id_type']] = $row;
+		$types[$row['extension']] = $row;
 
-	$result = spip_query("SELECT docs.id_document AS id_doc, docs.id_type AS type, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub FROM spip_documents AS docs, spip_documents_rubriques AS lien, spip_rubriques AS rubrique WHERE docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_rubrique AND docs.mode = 'document' ORDER BY docs.date DESC");
-	
-	while($row=spip_fetch_array($result)){
-			$titre=$row['titre'];
-			$descriptif=$row['descriptif'];
-			$date=$row['date'];
-			$id_document=$row['id_doc'];
-			$id_rubrique=$row['id_rub'];
-			$titre_rub = typo($row['titre_rub']);
-			$fichier = $row['fichier'];
+	$result = spip_query("SELECT docs.id_document AS id_doc, docs.extension AS extension, docs.fichier AS fichier, docs.date AS date, docs.titre AS titre, docs.descriptif AS descriptif, lien.id_rubrique AS id_rub, rubrique.titre AS titre_rub FROM spip_documents AS docs, spip_documents_rubriques AS lien, spip_rubriques AS rubrique WHERE docs.id_document = lien.id_document AND rubrique.id_rubrique = lien.id_rubrique AND docs.mode = 'document' ORDER BY docs.date DESC");
 
-			if (!$titre) $titre = _T('info_document').' '.$id_document;
-			
-			debut_cadre_relief("doc-24.gif");
-			echo "<b>$titre</b> (" . $types[$row['type']]['titre'] . ', ' . affdate($date) . ")";
-			if ($descriptif)
-				echo "<p>".propre($descriptif) . '</p>';
-			else
-				echo "<p><tt>$fichier</tt>" . '</p>';
+	while ($row=spip_fetch_array($result)){
+		$titre=$row['titre'];
+		$descriptif=$row['descriptif'];
+		$date=$row['date'];
+		$id_document=$row['id_doc'];
+		$id_rubrique=$row['id_rub'];
+		$titre_rub = typo($row['titre_rub']);
+		$fichier = $row['fichier'];
 
-			echo "<p>"._T('info_dans_rubrique')." <a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>$titre_rub</a></p>";
-			
-			fin_cadre_relief();
+		if (!$titre) $titre = _T('info_document').' '.$id_document;
+
+		debut_cadre_relief("doc-24.gif");
+		echo "<b>$titre</b> (" . $types[$row['extension']]['titre'] . ', ' . affdate($date) . ")";
+		if ($descriptif)
+			echo propre($descriptif);
+		else
+			echo "<p><tt>$fichier</tt>" . '</p>';
+
+		echo "<p>"._T('info_dans_rubrique')." <a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>$titre_rub</a></p>";
+		fin_cadre_relief();
 	}
-	
 
-echo fin_gauche(), fin_page();
+	echo fin_gauche(), fin_page();
 }
+
 ?>

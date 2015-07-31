@@ -208,7 +208,8 @@ $spip_rubriques_key = array(
 $spip_documents = array(
 		"id_document"	=> "bigint(21) NOT NULL",
 		"id_vignette"	=> "bigint(21) DEFAULT '0' NOT NULL",
-		"id_type"	=> "bigint(21) DEFAULT '0' NOT NULL",
+/*		"id_type"	=> "bigint(21) DEFAULT '0' NOT NULL", */
+		"extension"	=> "VARCHAR(10)",
 		"titre"	=> "text",
 		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"descriptif"	=> "text",
@@ -225,24 +226,26 @@ $spip_documents_key = array(
 		"PRIMARY KEY"	=> "id_document",
 		"KEY id_vignette"	=> "id_vignette",
 		"KEY mode"	=> "mode",
-		"KEY id_type"	=> "id_type");
+		"KEY extension"	=> "extension");
 $spip_documents_join = array(
 		"id_document"=>"id_document",
-		"id_type"=>"id_type");
+		"extension"=>"extension");
 
 $spip_types_documents = array(
-		"id_type"	=> "bigint(21) NOT NULL",
+/*		"id_type"	=> "bigint(21) NOT NULL", */
+		"extension"	=> "varchar(10)",
 		"titre"	=> "text",
 		"descriptif"	=> "text",
-		"extension"	=> "varchar(10)",
 		"mime_type"	=> "varchar(100)",
 		"inclus"	=> "ENUM('non', 'image', 'embed') NOT NULL DEFAULT 'non'",
 		"upload"	=> "ENUM('oui', 'non') NOT NULL DEFAULT 'oui'",
 		"maj"	=> "TIMESTAMP");
 
 $spip_types_documents_key = array(
-		"PRIMARY KEY"	=> "id_type",
+/*		"PRIMARY KEY"	=> "id_type",
 		"UNIQUE extension"	=> "extension",
+*/
+		"PRIMARY KEY"	=> "extension",
 		"KEY inclus"	=> "inclus");
 
 $spip_syndic = array(

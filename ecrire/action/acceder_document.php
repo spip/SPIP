@@ -63,7 +63,7 @@ function action_acceder_document_dist() {
 		$where = "documents.fichier="._q(set_spip_doc($file))
 		. ($arg ? " AND documents.id_document=".intval($arg): '');
 
-		$s = spip_query("SELECT documents.id_document, documents.titre, documents.descriptif, documents.distant, documents.fichier, types.mime_type FROM spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.id_type=types.id_type WHERE ".$where);
+		$s = spip_query("SELECT documents.id_document, documents.titre, documents.descriptif, documents.distant, documents.fichier, types.mime_type FROM spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension WHERE ".$where);
 		if (!$doc = spip_fetch_array($s)) {
 			$status = 404;
 		} else {

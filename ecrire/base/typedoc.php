@@ -18,9 +18,9 @@ global $tables_images, $tables_sequences, $tables_documents, $tables_mime, $mime
 
 $tables_images = array(
 		       // Images reconnues par PHP
-		       'jpg' => 1, 
-		       'png' => 2, 
-		       'gif' => 3,
+		       'jpg' => 'JPEG', 
+		       'png' => 'PNG', 
+		       'gif' =>'GIF',
 
 		       // Autres images (peuvent utiliser le tag <img>)
 		       'bmp' => 'BMP',

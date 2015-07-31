@@ -56,7 +56,6 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			# $a['fichier'] est une copie locale du fichier
 
 			$fichier = $source;
-			$id_type = $a['id_type'];
 			$taille = $a['taille'];
 			$titre = $a['titre'];
 			$largeur = $a['largeur'];
@@ -129,7 +128,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 			spip_log("Impossible de copier_document($ext, $nom_envoye, $source)");
 			return;
 		}
-		$id_type = $row['id_type'];	# numero du type dans spip_types_documents:(
+		$extension = $row['extension'];
 		$type_inclus_image = ($row['inclus'] == 'image');
 
 		// Prevoir traitement specifique pour videos
@@ -224,14 +223,15 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	// passe "mode=document" et "id_document=.." (pas utilise)
 	if (!$id_document) {
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = spip_abstract_insert("spip_documents", "(id_type, titre, date, distant)", "($id_type, " . _q($titre) . ", NOW(), '$distant')");
+		$id_document = spip_abstract_insert("spip_documents", "(extension, titre, date, distant)", "("._q($extension).", " . _q($titre) . ", NOW(), '$distant')");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
-		    ) {
-		  spip_abstract_insert("spip_documents_".$type_lien."s",
-				       "(id_document, id_".$type_lien.")",
-				       "($id_document, $id_lien)");
+		) {
+			spip_abstract_insert("spip_documents_".$type_lien."s",
+				"(id_document, id_".$type_lien.")",
+				"($id_document, $id_lien)"
+			);
 		}
 		// par defaut (upload ZIP ou ftp) integrer
 		// les images en mode 'vignette' et le reste en mode document

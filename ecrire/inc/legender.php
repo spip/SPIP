@@ -75,7 +75,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		     array('largeur_vignette' => $document['largeur'],
 			   'hauteur_vignette' => $document['hauteur']));
 	else
-	  $contenu .= taille_en_octets($document['taille']) . ' - ';
+	  $contenu .= taille_en_octets($document['taille']);
 
 	if ($date) $contenu .= "<br />\n" . affdate($date);
 
@@ -186,8 +186,8 @@ function vignette_formulaire_legender($id_document, $document, $script, $type, $
 function formulaire_taille($document) {
 
 	// (on ne le propose pas pour les images qu'on sait
-	// lire, id_type<=3), sauf bug, ou document distant
-	if ($document['id_type'] <= 3
+	// lire : gif jpg png), sauf bug, ou document distant
+	if (in_array($document['extension'], array('gif','jpg','png'))
 	AND $document['hauteur']
 	AND $document['largeur']
 	AND $document['distant']!='oui')
@@ -195,10 +195,10 @@ function formulaire_taille($document) {
 	$id_document = $document['id_document'];
 
 	// Donnees sur le type de document
-	$t = @spip_abstract_fetsel('inclus,extension',
-		'spip_types_documents', "id_type=".$document['id_type']);
+	$extension = $document['extension'];
+	$t = spip_abstract_fetsel('inclus',
+		'spip_types_documents', "extension="._q($extension));
 	$type_inclus = $t['inclus'];
-	$extension = $t['extension'];
 
 	# TODO -- pour le MP3 "l x h pixels" ne va pas
 	if (($type_inclus == "embed" OR $type_inclus == "image")

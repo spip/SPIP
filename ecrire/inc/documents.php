@@ -30,12 +30,18 @@ function set_spip_doc($fichier) {
 // donne le chemin complet du fichier
 // http://doc.spip.org/@get_spip_doc
 function get_spip_doc($fichier) {
+	// fichier distant
 	if (preg_match(',^\w+://,', $fichier))
 		return $fichier;
-	else
-		return (strpos($fichier, _DIR_IMG) === false)
-			? _DIR_IMG . $fichier
-			: $fichier;
+
+	// gestion d'erreurs, fichier=''
+	if (!strlen($fichier))
+		return false;
+
+	// fichier normal
+	return (strpos($fichier, _DIR_IMG) === false)
+		? _DIR_IMG . $fichier
+		: $fichier;
 }
 
 // http://doc.spip.org/@generer_url_document_dist
@@ -107,10 +113,7 @@ function image_pattern($vignette) {
 
 // http://doc.spip.org/@document_et_vignette
 function document_et_vignette($document, $url, $portfolio=false) {
-	// a supprimer avec spip_types_documents
-	$extension = spip_fetch_array(spip_query("SELECT extension, mime_type FROM	spip_types_documents WHERE id_type=".$document['id_type']));
-	$mime = $extension['mime_type'];
-	$extension = $extension['extension'];
+	$extension = $document['extension'];
 	$vignette = $document['id_vignette'];
 
 	if ($vignette) 
@@ -153,8 +156,10 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 	if (!$url)
 		return $image;
-	else
-		return "<a href='$url'\n\ttype='$mime'>$image</a>";
+	else {
+		$t = spip_fetch_array(spip_query("SELECT mime_type FROM spip_types_documents WHERE extension="._q($document['extension'])));
+		return "<a href='$url'\n\ttype='".$t['mime_type']."'>$image</a>";
+	}
 }
 
 
@@ -286,7 +291,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
-	$id_type = $document['id_type'];
+	$extension = $document['extension'];
 	$titre = $document['titre'];
 	$descriptif = $document['descriptif'];
 	$url = generer_url_document($id_document);
@@ -302,9 +307,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	$cadre = strlen($titre) ? $titre : basename($document['fichier']);
 
-	$result = spip_query("SELECT titre,inclus,extension FROM spip_types_documents WHERE id_type=$id_type");
-	if ($letype = @spip_fetch_array($result)) {
-		$type_extension = $letype['extension'];
+	$result = spip_query("SELECT titre,inclus FROM spip_types_documents WHERE extension="._q($extension));
+	if ($letype = spip_fetch_array($result)) {
 		$type_inclus = $letype['inclus'];
 		$type_titre = $letype['titre'];
 	}
@@ -314,19 +318,6 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 	//
 	$ret = "";
 	if ($mode == 'document') {
-
-		# 'extension', a ajouter dans la base quand on supprimera spip_types_documents
-		switch ($id_type) {
-				case 1:
-					$document['extension'] = "jpg";
-					break;
-				case 2:
-					$document['extension'] = "png";
-					break;
-				case 3:
-					$document['extension'] = "gif";
-					break;
-			}
 
 		$ret .= "<a id='document$id_document' name='document$id_document'></a>\n";
 		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20));
@@ -354,7 +345,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		. '</div>'
 		. "\n<div class='verdana1' style='text-align: center; color: black;'>\n"
 		. ($type_titre ? $type_titre : 
-		      ( _T('info_document').' '.majuscules($type_extension)))
+		      ( _T('info_document').' '.majuscules($extension)))
 		. "</div>";
 
 		// Affichage du raccourci <doc...> correspondant

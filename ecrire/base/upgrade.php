@@ -1385,6 +1385,7 @@ function maj_base($version_cible = 0) {
 		}
 	  maj_version('1.935');
 	}
+
 	if (upgrade_vers(1.937, $version_installee, $version_cible)) {
 		// convertir les champs blob des tables spip en champs texte
 		convertir_un_champ_blob_en_text("spip_articles","texte","LONGTEXT");
@@ -1404,8 +1405,28 @@ function maj_base($version_cible = 0) {
 		convertir_un_champ_blob_en_text("spip_syndic_articles","descriptif","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_petitions","texte","LONGTEXT");
 		convertir_un_champ_blob_en_text("spip_ortho_cache","suggest","TEXT");
-		maj_version('1.937');
+		maj_version('1.938');
 	}
+
+	if (upgrade_vers(1.938, $version_installee, $version_cible)) {
+		// Ajouter un champ extension aux spip_documents, et le
+		// remplir avec les valeurs ad hoc
+		spip_query("ALTER TABLE spip_documents ADD extension VARCHAR(10) NOT NULL DEFAULT ''");
+		spip_query("ALTER TABLE spip_documents ADD INDEX extension (extension)");
+		$s = spip_query("SELECT id_type,extension FROM spip_types_documents");
+		while ($t = spip_fetch_array($s)) {
+			spip_query("UPDATE spip_documents
+				SET extension="._q($t['extension'])
+				." WHERE id_type="._q($t['id_type']));
+		}
+		spip_query("ALTER TABLE spip_documents DROP INDEX id_type, DROP id_type");
+		spip_query("ALTER TABLE spip_types_documents DROP INDEX id_type, DROP id_type");
+
+		## recreer la PRIMARY KEY sur spip_types_documents.extension
+		spip_query("ALTER TABLE spip_types_documents ADD PRIMARY KEY (extension)");
+		maj_version('1.938');
+	}
+
 }
 
 ?>

@@ -187,7 +187,7 @@ function gdRotate ($src, $dest, $rtt){
 	ImageInterlace($dst_img,0);
 
 	// obligatoire d'enregistrer dans le meme format, puisqu'on change le doc
-	// mais pas son id_type
+	// mais pas son extension
 	$save($dst_img,$dest);
 }
 

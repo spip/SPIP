@@ -375,8 +375,7 @@ function indexer_contenu_document ($row, $min_long=3) {
 	global $extracteur;
 
 	if ($row['mode'] == 'vignette') return;
-	$extension = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = ".$row['id_type']));
-	$extension = $extension['extension'];
+	$extension = $row['extension'];
 
 	// Voir si on sait lire le contenu (eventuellement en chargeant le
 	// fichier extract/pdf.php dans find_in_path() )

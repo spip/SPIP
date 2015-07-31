@@ -61,11 +61,11 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
 	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
-		$id_type = id_table_objet($type);
-		if ($n = intval($$id_type)) {
-			$s = spip_query("SELECT $id_type FROM spip_".table_objet($type)."	WHERE $id_type=".$$id_type);
+		$_id_type = id_table_objet($type);
+		if ($n = intval($$_id_type)) {
+			$s = spip_query("SELECT $_id_type FROM spip_".table_objet($type)."	WHERE $_id_type=".$n);
 			if ($s AND spip_num_rows($s)) {
-				$$id_type = $n;
+				$$_id_type = $n;
 				$objet_affiche = $type;
 				break;
 			}
@@ -135,7 +135,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		OR $objet_affiche == 'breve'
 		OR $objet_affiche == 'rubrique'
 		OR $objet_affiche == 'syndic')
-		  $preview = spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)." WHERE ".id_table_objet($objet_affiche)."=".$$id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")"));
+		  $preview = spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)." WHERE ".id_table_objet($objet_affiche)."=".$$_id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")"));
 	}
 
 	//
