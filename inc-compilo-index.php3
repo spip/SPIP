@@ -263,7 +263,7 @@ function applique_filtres($p) {
 				}
 				if (function_exists($fonc))
 				  $code = "$fonc($code$arglist)";
-				else if (strpos(" < > <= >= == <> ? ", " $fonc "))
+				else if (strpos(" < > <= >= == === != !== <> ? ", " $fonc "))
 				  $code = "($code $fonc "
 				    . substr($arglist,1)
 				    . ')';
@@ -288,9 +288,16 @@ function applique_filtres($p) {
 
 function filtres_arglist($args, $p, $sep) {
 	$arglist ='';
-	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
-		$arg = trim($regs[1]);
-		if ($arg) {
+	while (strlen($args)) {
+		if ($args[0] =='"')
+		  ereg(' *("[^"]*") *,?(.*)$', $args, $regs);
+		elseif ($args[0] =="'")
+		  ereg(" *('[^']*') *,?(.*)$", $args, $regs);
+		else
+		  ereg(' *([^,]+) *,?(.*)$', $args, $regs);
+		$arg = $regs[1];
+		spip_log("$args $arg");
+		if ($arg !== '') {
 			if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
 			elseif ($arg[0] =='<')
