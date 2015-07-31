@@ -46,10 +46,17 @@ function help_frame ($aide, $lang) {
 // Erreur aide non disponible
 // http://doc.spip.org/@erreur_aide_indisponible
 function erreur_aide_indisponible() {
-	global $help_server;
 	include_spip('inc/minipres');
 	return  minipres(_T('forum_titre_erreur'),
-		 "<div>$help_server: "._T('aide_non_disponible')."</div><div align='right'>".menu_langues('var_lang_ecrire')."</div>");
+				"<div><a href='" .
+				$GLOBALS['home_server'] .
+				"'>" .
+				$GLOBALS['help_server'] .
+			       "</a>&nbsp;: " .
+				_T('aide_non_disponible') .
+				"</div><div align='right'>" .
+				menu_langues('var_lang_ecrire') .
+				"</div>");
 }
 
 // Selection de l'aide correspondant a la langue demandee
@@ -141,6 +148,12 @@ table.spip td {
 // http://doc.spip.org/@help_panneau
 function help_panneau() {
 
+
+	$copyleft = _T('info_copyright_doc',
+			array('spipnet' => $GLOBALS['home_server']
+				. '/' .    $GLOBALS['spip_lang']
+				. '_'));
+
 	  return "<div align='center'>
 			<img src='" . chemin_image('logo-spip.gif') .
 		  "' alt='SPIP' style='width: 267px; height: 170px; border: 0px' />
@@ -150,7 +163,7 @@ function help_panneau() {
 			</div></div>
 			<div style='position:absolute; bottom: 10px; right:20px;
 			font-size: 12px; '>" .
-		preg_replace(",<a ,i", "<a class='target_blank' ",_T('info_copyright_doc')).
+			$copyleft .
 			'</div>';
 }
 
