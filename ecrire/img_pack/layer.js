@@ -139,19 +139,61 @@ function aff_selection (type, rac, id) {
 
 //
 // Cette fonction charge du contenu - dynamiquement - dans un 
-
+// Ajax
 
 var url_chargee = new Array();
 var xmlhttp = new Array();
 var image_search = new Array();
 
-// Ajax
 function createXmlHttp() {
 	if(window.XMLHttpRequest)
 		return new XMLHttpRequest(); 
 	else if(window.ActiveXObject)
 		return new ActiveXObject("Microsoft.XMLHTTP");
 }
+
+
+function ajah(method, url, flux, rappel)
+{
+	var xhr = createXmlHttp();
+
+	if (!xhr) return false;
+        xhr.onreadystatechange = function () {ajahReady(xhr, rappel);}
+        xhr.open(method, url, true);
+        xhr.send(flux);
+}
+
+function ajahReady(xhr, f) {
+	if (xhr.readyState == 4) {
+		if (xhr.status > 200) // Opera dit toujours 0 !
+                      {f('Erreur HTTP :  ' +  xhr.status);}
+                else  { f(xhr.responseText); }
+        }
+}
+
+function AjaxSqueeze(form, div)
+{
+	var i;
+	var u = '';
+	var noeud = document.getElementById(div); // pere du formulaire
+	if (!noeud) return true; // forcer l'envoi en mode non Ajax
+
+	for (i=0;i < form.elements.length;i++) {
+	  n = form.elements[i].name;
+	  if (n)  u += n+"="+escape(form.elements[i].value) + '&'  ;
+	}
+
+	u = form.getAttribute('action') +'?' + u;
+
+	// ce serait plus propre d'envoyer en Post mais FireFox coince
+	ajah('GET',
+	     u,
+	     null,
+	     function(r) { noeud.innerHTML = r;});
+ 
+	return false; // empecher l'envoi en mode non Ajax
+}
+
 
 function charger_id_url(myUrl, myField, jjscript) 
 {

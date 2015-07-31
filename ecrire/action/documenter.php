@@ -14,9 +14,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/filtres');
 
+// Utiliser $_REQUEST car en Ajax on utilise GET et sinon POST.
+
 function action_documenter_dist() {
 	
 	global $action, $arg, $hash, $id_auteur, $redirect;
+
 	include_spip('inc/actions');
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
@@ -29,30 +32,30 @@ function action_documenter_dist() {
 
 		$id_document = $r[1];
 
-		$titre_document = (corriger_caracteres($_POST['titre_document']));
-		$descriptif_document = (corriger_caracteres($_POST['descriptif_document']));
+		$titre_document = (corriger_caracteres($_REQUEST['titre_document']));
+		$descriptif_document = (corriger_caracteres($_REQUEST['descriptif_document']));
 
 			// taille du document (cas des embed)
-		if ($largeur_document = intval($_POST['largeur_document'])
-		AND $hauteur_document = intval($_POST['hauteur_document']))
+		if ($largeur_document = intval($_REQUEST['largeur_document'])
+		AND $hauteur_document = intval($_REQUEST['hauteur_document']))
 				$wh = ", largeur='$largeur_document',
 					hauteur='$hauteur_document'";
 		else $wh = "";
 
 			// Date du document (uniquement dans les rubriques)
-		if (!$_POST['jour_doc'])
-		  $date = '';
+		if (!$_REQUEST['jour_doc'])
+		  $d = '';
 		else {
-			if ($_POST['annee_doc'] == "0000")
-					$_POST['mois_doc'] = "00";
-			if ($_POST['mois_doc'] == "00")
-					$_POST['jour_doc'] = "00";
-			$d = $_POST['annee_doc'].'-'	.$_POST['mois_doc'].'-'.$_POST['jour_doc'];
+			if ($_REQUEST['annee_doc'] == "0000")
+					$_REQUEST['mois_doc'] = "00";
+			if ($_REQUEST['mois_doc'] == "00")
+					$_REQUEST['jour_doc'] = "00";
+			$date = $_REQUEST['annee_doc'].'-'	.$_REQUEST['mois_doc'].'-'.$_REQUEST['jour_doc'];
 
-			if (preg_match('/^[0-9-]+$/', $d)) $date=" date='$d',";
+			if (preg_match('/^[0-9-]+$/', $date)) $d=" date='$date',";
 		}
 				  
-		spip_query("UPDATE spip_documents SET$date titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
+		spip_query("UPDATE spip_documents SET$d titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
 
 
 		if ($date) {
@@ -66,3 +69,4 @@ function action_documenter_dist() {
 		marquer_indexer('document', $id_document);
 	}
 }
+?>
