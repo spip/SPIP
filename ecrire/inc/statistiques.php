@@ -144,7 +144,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 // Afficher les referers d'un article (ou du site)
 //
 function aff_referers ($query, $limit=10, $plus) {
-	global $spip_lang_right;
+	global $spip_lang_right, $source_vignettes;
 	// Charger les moteurs de recherche
 	$arr_engines = stats_load_engines();
 
@@ -197,7 +197,7 @@ function aff_referers ($query, $limit=10, $plus) {
 
 			$visites = pos($nbvisites);
 
-			$ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"http://open.thumbshots.org/image.pxf?url=http://".urlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; border: 0;\" /></a>";
+			if (strlen($source_vignettes) > 0) $ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".urlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; border: 0; margin-bottom: 3px; margin-left: 3px;\" /></a>";
 
 			$ret .= "\n<li>";
 

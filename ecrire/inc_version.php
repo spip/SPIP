@@ -143,6 +143,19 @@ $ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
 
+// Vignettes de previsulation des referers
+// dans les statistiques
+// 3 de trouves, possibilite de switcher
+// - Thumbshots.org: le moins instrusif, quand il n'a pas, il renvoit un pixel vide
+// - Girafa semble le plus complet, bicoz renvoit toujours la page d'accueil; mais avertissement si pas de preview
+// - Alexa, equivalent Thumbshots, avec vignettes beaucoup plus grandes mais avertissement si pas de preview
+//   Pour Alexa, penser a indiquer l'url du site dans l'id.
+//   Dans Alexa, si on supprimer size=small, alors vignettes tres grandes
+$source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
+// $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
+// $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
+
+
 // Controler les dates des item dans les flux RSS ?
 $controler_dates_rss = true;
 
