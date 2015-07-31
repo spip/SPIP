@@ -97,6 +97,7 @@
 	<pipeline nom="notifications_envoyer_mails" action="" />
 	<pipeline nom="objet_compte_enfants" action="" />
 	<pipeline nom="optimiser_base_disparus" action="" />
+	<pipeline nom="page_indisponible" action="" />
 	<pipeline nom="prepare_recherche" action="" />
 	<pipeline nom="pre_boucle" action="" />
 	<pipeline nom="post_boucle" action="" />
