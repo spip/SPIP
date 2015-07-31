@@ -145,22 +145,23 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 	}
 
 	// Tester si on est admin et il y a des choses supplementaires a dire
-	// (en cas d'erreur, var_mode a ete force a "debug").
+	$debug = (_request('var_mode') == 'debug') OR $tableau_des_temps;
 
-	$debug = ((_request('var_mode') == 'debug')  OR $tableau_des_temps);
-
-	$affiche_boutons_admin = (isset($_COOKIE['spip_admin'])  AND !$flag_preserver AND ($html OR $debug));
+	$affiche_boutons_admin = (
+		isset($_COOKIE['spip_admin'])
+		AND !$flag_preserver
+		AND $html
+	) OR $debug;
 
 	if ($affiche_boutons_admin)
 		include_spip('balise/formulaire_admin');
 
 	// Appeler ici le debusqueur en cas de demande explicite,
 	// pour qu'il ait toute latitude dans la presentation
-
-	if ($debug AND $affiche_boutons_admin) {
-			$var_mode_affiche = _request('var_mode_affiche');
-			$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-			echo erreur_squelette();
+	if ($debug) {
+		$var_mode_affiche = _request('var_mode_affiche');
+		$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
+		echo erreur_squelette();
 	}
 
 	// Execution de la page calculee
