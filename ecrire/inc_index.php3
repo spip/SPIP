@@ -296,6 +296,28 @@ function indexer_syndic($id_syndic) {
 	marquer_indexer('syndic', $id_syndic);
 }
 
+// n'indexer que les objets publies
+function critere_indexation($type) {
+	switch ($type) {
+		case 'article':
+		case 'breve':
+		case 'rubrique':
+		case 'syndic':
+		case 'forum':
+		case 'signature':
+			$critere = "statut='publie'";
+			break;
+		case 'auteur':
+			$critere = "statut IN ('0minirezo', '1comite')";
+			break;
+		case 'mot':
+		default:
+			$critere = '1=1';
+			break;
+	}
+	return $critere;
+}
+
 function effectuer_une_indexation($nombre_indexations = 1) {
 
 	// chercher un objet a indexer dans chacune des tables d'objets
@@ -305,31 +327,14 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		$table_objet = 'spip_'.table_objet($type);
 		$table_index = 'spip_index_'.table_objet($type);
 
-		// limiter aux objets publies
-		switch ($type) {
-			case 'article':
-			case 'breve':
-			case 'rubrique':
-			case 'syndic':
-			case 'forum':
-			case 'signature':
-				$critere = "AND statut='publie'";
-				break;
-			case 'auteur':
-				$critere = "AND statut IN ('0minirezo', '1comite')";
-				break;
-			case 'mot':
-			default:
-				$critere = '';
-				break;
-		}
+		$critere = critere_indexation($type);
 
 		if ($type == 'syndic')
 			$limit = 1;
 		else
 			$limit = $nombre_indexations;
 
-		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') $critere ORDER BY (idx='idx') LIMIT 0,$limit");
+		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') AND $critere ORDER BY (idx='idx') LIMIT 0,$limit");
 		while ($t = spip_fetch_array($s)) {
 			$vu[$type] .= $t[0].", ";
 			indexer_objet($type, $t[0], $t[1]);
