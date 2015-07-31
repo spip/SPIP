@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/charsets');
 include_spip('inc/filtres_mini');
 
-// http://doc.spip.org/@chercher_filtre
+// http://adoc.spip.org/@chercher_filtre
 function chercher_filtre($fonc, $default=NULL) {
 	if (!$fonc) return $default;
 	// Cas des types mime, sans confondre avec les appels de fonction de classe
@@ -734,10 +734,15 @@ function date_interface($date, $decalage_maxi = 43200/* 12*3600 */) {
 }
 
 // http://doc.spip.org/@date_relative
-function date_relative($date, $decalage_maxi=0) {
+function date_relative($date, $decalage_maxi=0,$ref_date=null) {
+	
+	if (is_null($ref_date))
+		$ref_time = time();
+	else
+		$ref_time = strtotime($ref_date);
 	
 	if (!$date) return;
-	$decal = date("U") - date("U", strtotime($date));
+	$decal = date("U",$ref_time) - date("U", strtotime($date));
 
 	if ($decalage_maxi AND ($decal > $decalage_maxi OR $decal < 0))
 		return '';
@@ -769,11 +774,11 @@ function date_relative($date, $decalage_maxi=0) {
 	else if ($decal > 3600 * 24) {
 		$jours = floor ($decal / (3600 * 24));
 		if ($jours < 2)
-			return _T("date_hier");
+			return $il_y_a=="date_dans"?_T("date_demain"):_T("date_hier");
 		else
 			$delai = "$jours "._T("date_jours");
 	}
-	else if ($decal > 3600) {
+	else if ($decal >= 3600) {
 		$heures = floor ($decal / 3600);
 		if ($heures < 2)
 			$delai = "$heures "._T("date_une_heure");
@@ -1643,7 +1648,7 @@ function form_hidden($action) {
 	AND $p[3]) {
 		$contexte = $p[0];
 		$contexte['page'] = $p[3];
-		$action = preg_replace('/^([^?]*)[?][^&]*/', '\1', $action);
+		$action = preg_replace('/([?]'.$p[3].'[^&=]*[0-9]+)(&|$)/', '?&', $action);
 	}
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas

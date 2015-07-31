@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
+include_spip('inc/plugin');
 
 function maj_vieille_base_charger_dist($version_cible){
 	$vieilles_bases = array(
@@ -25,7 +26,7 @@ function maj_vieille_base_charger_dist($version_cible){
 	);
 	$version = false;
 	foreach($vieilles_bases as $v=>$n){
-		if (!$version OR version_compare($v,$version_cible,'<'))
+		if (!$version OR spip_version_compare($v,$version_cible,'<'))
 			$version = $n;
 	}
 
