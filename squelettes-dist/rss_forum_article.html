@@ -19,7 +19,8 @@
 			ref="(#ID_FORUM|generer_url_forum_parent|url_absolue)"
 			href="(#ID_FORUM|generer_url_forum_parent|url_absolue)" />';
 		<dc:creator>[(#AUTEUR|texte_backend)][ &lt;(#EMAIL_AUTEUR|texte_backend)&gt;]</dc:creator>
-		<description>[ (#TEXTE|liens_absolus|texte_backend)]#NOTES</description>
+		<description>[
+		(#TEXTE|liens_absolus|texte_backend)][(#NOTES|texte_backend)]</description>
 	</item></BOUCLE_RSS>
 </BOUCLE_RSS_A>
 </channel>
