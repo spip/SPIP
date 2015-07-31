@@ -3,7 +3,7 @@
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -33,13 +33,13 @@
 	    </li>]
 
 	 	[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_rubrique}|oui)erreur]">
-			<label for="titreparent"><:titre_cadre_interieur_rubrique:></label>
+			<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>
 			<em class="aide">#AIDER{artrub}</em>
 			(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_rubrique},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})
 	    </li>]
 		
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
-	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{desctiptif}|oui)erreur]">
+	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:texte_descriptif_rapide:></label>
 			<em class="aide">#AIDER{artdesc}</em>
 			<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
@@ -58,7 +58,7 @@
 			<label for="chapo"><:info_chapeau:></label>
 			<em class="aide">#AIDER{arttitre}</em>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{chapo})</span>]
-			<textarea name='chapo' id='chapo'>[(#ENV**{chapo})]</textarea>
+			<textarea name='chapo' id='chapo'[ rows='(#ENV**{config}|table_valeur{lignes})'] cols='40'>[(#ENV**{chapo})]</textarea>
 		</li>]
 			]
 
@@ -70,7 +70,7 @@
 			[(#ENV**{_texte_trop_long,''})]
 			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
-			<textarea name='texte' id='text_area' class='barre_inserer'[
+			<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 			(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 			
 			<script type='text/javascript'><!--
@@ -110,6 +110,6 @@
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
-	</form>
+	</div></form>
 	]
 </div>

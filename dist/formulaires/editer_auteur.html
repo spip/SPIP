@@ -4,7 +4,7 @@
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur}) <:info_recommencer:></p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax[ (#ENV**{config}|table_valeur{ecran})]'>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' class='noajax'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -151,13 +151,13 @@
 				<ul>
 					<li class="editer_perso_activer_imessage">
 						<div class="champ">
-							<input type='radio' class='radio' name='perso_activer_imessage' value='oui' [(#ENV{imessage}|!={non}) checked='checked'] id='perso_activer_imessage_on'>
+							<input type='radio' class='radio' name='perso_activer_imessage' value='oui' [(#ENV{imessage}|!={non}|oui) checked='checked'] id='perso_activer_imessage_on' />
 							<label for='perso_activer_imessage_on'>
 								<:bouton_radio_apparaitre_liste_redacteurs_connectes:>
 							</label>
 						</div>
 						<div class="champ">
-							<input type='radio' class='radio' name='perso_activer_imessage' value='non' [(#ENV{imessage}|=={non}) checked='checked'] id='perso_activer_imessage_off'>
+							<input type='radio' class='radio' name='perso_activer_imessage' value='non' [(#ENV{imessage}|=={non}|oui) checked='checked'] id='perso_activer_imessage_off' />
 							<label for='perso_activer_imessage_off'>
 								<:bouton_radio_non_apparaitre_liste_redacteurs_connectes:>
 							</label>
@@ -179,17 +179,18 @@
 		[(#REM) Du coup, on commente celui-ci...
 		[<li class='editer_statut'>(#ENV**{config}|table_valeur{auteur}|instituer_auteur_ici)</li>]
 		]
-		[(#REM) Et on met un hidden...]
+	  </ul>
+	  	[(#REM) Et on met un hidden...]
 		[(#ENV{id_auteur}|oui) <input type='hidden' name='statut' value='#ENV{statut}' />]
 		[(#ENV{id_auteur}|non) <input type='hidden' name='statut' value='#EVAL{_STATUT_AUTEUR_CREATION}' />]
-	  </ul>
+
 	</fieldset>
 
 		  
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
-	</form>
+	</div></form>
 	]
 
 </div>
