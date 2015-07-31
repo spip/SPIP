@@ -36,7 +36,13 @@ function exec_calendrier_dist()
 	$type = 'mois';
   }
   $ancre = 'calendrier-1';
-  $time = array(_request('jour'), _request('mois'), _request('annee'));
+  if (_request('date')){
+	  $time = explode('-',_request('date'));
+	  $time = array_reverse($time);
+  }
+  else
+	  $time = array(_request('jour'), _request('mois'), _request('annee'));
+
   $r = generer_url_ecrire('calendrier', "type=$type") . "#$ancre";
   $r = http_calendrier_init($time, $type, _request('echelle'), _request('partie_cal'), $r);
 
