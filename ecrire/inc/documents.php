@@ -84,17 +84,29 @@ function document_et_vignette($document, $url, $portfolio=false) {
 				$image = image_pattern($vignette);
 			} else {
 				include_spip('inc/filtres');
-				$image = filtrer('image_reduire',_DIR_RACINE.$vignette['fichier'], 120, 110, false, true);
+				$image = filtrer('image_reduire',
+					suivre_lien(_DIR_RACINE, $vignette['fichier']),
+					120, 110, false, true);
 			}
 	}
 	else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
 	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_spip('inc/distant');
 		include_spip('inc/filtres');
+
+		if ($document['distant'] == 'oui')
+			$image = _DIR_RACINE.copie_locale($document['fichier']);
+		else
+			$image = _DIR_RACINE.$document['fichier'];
+
 		if ($portfolio) {
-			$image = filtrer('image_reduire',_DIR_RACINE.$document['fichier'], 110, 120, false, true);
+			$image = filtrer('image_reduire',
+				$image,
+				110, 120, false, true);
 		} else {
-			$image = filtrer('image_reduire',_DIR_RACINE.$document['fichier'],-1,-1,false, true);
+			$image = filtrer('image_reduire',
+				$image,
+				-1,-1,false, true);
 		}
 	} else {
 		$image = '';
