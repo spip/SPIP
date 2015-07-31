@@ -72,7 +72,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 		include_ecrire("inc_mail");
 		envoyer_mail($mail, $sujet, $texte, $adres,
-				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
+				"X-Originating-IP: ".$GLOBALS['ip']);
 		return _T('form_prop_message_envoye');
 	}
 

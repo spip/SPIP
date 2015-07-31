@@ -50,9 +50,15 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	include_ecrire('inc_acces');
 	verifier_htaccess(_DIR_CACHE);
 
-	$gzip = $GLOBALS['flag_gz'] ? '.gz' : '';
+	return $subdir.$fichier_cache;
+}
 
-	return $subdir.$fichier_cache.$gzip;
+// Faut-il compresser ce cache ? A partir de 16ko ca vaut le coup
+function cache_gz($page) {
+	if ($GLOBALS['flag_gz'] AND strlen($page['texte']) > 16*1024)
+		return '.gz';
+	else
+		return '';
 }
 
 //
@@ -145,6 +151,7 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 	return cache_valide($chemin_cache, $contenu, $date);
 }
 
+
 // retourne le nom du fichier cache, 
 // et affecte le param use_cache avec un nombre N:
 // < 0 s'il faut calculer la page sans la mettre en cache
@@ -162,13 +169,16 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 		$use_cache = -1;
 		return array('','',0);
 	}
-	
-	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
 
-	// cas sans jamais de calcul pour raison interne
+	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
+	if ($GLOBALS['flag_gz'] AND @file_exists($chemin_cache.'.gz'))
+		$chemin_cache .= '.gz';
+
+	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
 		$use_cache = 0;
-		return array($chemin_cache, @filemtime(_DIR_CACHE . $chemin_cache), 0);
+		return array($chemin_cache, array(),
+			@filemtime(_DIR_CACHE . $chemin_cache));
 	}
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
@@ -194,10 +204,9 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	if (!$use_cache AND $ok) return array($chemin_cache, $page, $time);
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
-
 	if (!$GLOBALS['db_ok']) {
 		if (file_exists(_DIR_CACHE . $chemin_cache))
-  			$use_cache = 0 ;
+			$use_cache = 0 ;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
 			include_ecrire('inc_minipres');
@@ -208,9 +217,9 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	return array((($use_cache < 0) ? "" : $chemin_cache), $page, $time);
 }
 
-// Passage par reference juste par souci d'economie
-
-function creer_cache(&$page, $chemin_cache, $duree) {
+// Creer le fichier cache
+# Passage par reference de $page par souci d'economie
+function creer_cache(&$page, &$chemin_cache, $duree) {
 	// Entrer dans la base les invalideurs calcules par le compilateur
 	// (et supprimer les anciens)
 
@@ -219,30 +228,29 @@ function creer_cache(&$page, $chemin_cache, $duree) {
 	if (strlen($t = $page['entetes']['X-Spip-Cache']))
 		$duree = intval($t);
 
-	include_ecrire('inc_invalideur');
-	maj_invalideurs($chemin_cache, $page['invalideurs'], $duree);
-
 	// Enregistrer le fichier cache qui contient
 	// 1) la carte d'identite de la page (ses "globals", genre id_article=7)
 	// 2) son contenu
 	$page['signal']['process_ins'] = $page['process_ins'];
 	$page['signal']['entetes'] = $page['entetes'];
-	$r = ecrire_fichier(_DIR_CACHE . $chemin_cache,
+
+	// Normaliser le chemin et supprimer l'eventuelle contrepartie -gz du cache
+	$chemin_cache = str_replace('.gz', '', $chemin_cache);
+	$gz = cache_gz($page);
+	supprimer_fichier(_DIR_CACHE . $chemin_cache . ($gz ? '' : '.gz'));
+
+	// l'enregistrer, compresse ou non...
+	$chemin_cache .= $gz;
+	ecrire_fichier(_DIR_CACHE . $chemin_cache,
 		"<!-- "
 		. str_replace("\n", " ", serialize($page['signal']))
 		. " -->\n"
 		. $page['texte']);
 
-	// Nouveau cache : creer un invalideur 't' fixant la date
-	// d'expiration et la taille du fichier
-	if ($r) {
-			// Ici on ajoute 3600s pour eviter toute concurrence
-			// entre un invalideur et un appel public de page
-		$bedtime = time() + $duree + 3600;
-		$taille = @filesize(_DIR_CACHE . $chemin_cache);
-		$fichier = addslashes($chemin_cache);
-		spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('$fichier','$bedtime','t','$taille')");
-	}
+	// Inserer ses invalideurs
+	include_ecrire('inc_invalideur');
+	maj_invalideurs($chemin_cache, $page, $duree);
+
 }
 
 function restaurer_meta_donnees ($contenu) {

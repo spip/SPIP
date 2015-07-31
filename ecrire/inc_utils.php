@@ -145,13 +145,13 @@ function spip_log($message, $logname='spip') {
 	if ($compteur++ > 100) return;
 
 	$pid = '(pid '.@getmypid().')';
-	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
 
-	$message = date("M d H:i:s")." $ip $pid "
+	$message = date("M d H:i:s").' '.$GLOBALS['ip'].' '.$pid.' '
 		.preg_replace("/\n*$/", "\n", $message);
 
 	$logfile = _DIR_SESSIONS . $logname . '.log';
-	if (@file_exists($logfile) && (@filesize($logfile) > 10*1024)) {
+	if (@file_exists($logfile)
+	AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
 	}
@@ -284,16 +284,19 @@ function self($root = false) {
 	if (!$root)
 		$url = preg_replace(',^[^?]*/,', '', $url);
 
-	// ajouter le cas echeant les variables _POST
+	// ajouter le cas echeant les variables _POST['id_...']
 	foreach ($_POST as $v => $c)
 		if (substr($v,0,3) == 'id_')
 			$url = parametre_url($url, $v, $c, '&');
 
 	// supprimer les variables sans interet
-	if (!_DIR_RESTREINT)
-		preg_replace (',[?&]('
-		.'lang|set_options|set_couleur|set_disp|set_ecran|show_docs'
-		.')=[^&]*,i', '', $url);
+	if (!_DIR_RESTREINT) {
+		$url = preg_replace (',([?&])('
+		.'lang|set_options|set_couleur|set_disp|set_ecran|show_docs|'
+		.'changer_lang|var_lang|action)=[^&]*,i', '\1', $url);
+		$url = preg_replace(',([?&])[&]+,', '\1', $url);
+		$url = preg_replace(',[&]$,', '\1', $url);
+	}
 
 	// eviter les hacks
 	$url = htmlspecialchars($url);
@@ -773,7 +776,7 @@ function generer_url_action($script, $args="", $no_entities=false) {
 
 
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
-// A remplacer (un jour!) par une gestion propre des variables admissibles ;-)
+// A remplacer (bientot ?) par une gestion propre des variables admissibles ;-)
 // Attention pour compatibilite max $_GET n'est pas superglobale
 // NB: c'est une fonction de maniere a ne pas pourrir $GLOBALS
 function spip_register_globals() {
@@ -785,13 +788,7 @@ function spip_register_globals() {
 
 		# ecrire/inc_auth
 		'REMOTE_USER',
-		'PHP_AUTH_USER', 'PHP_AUTH_PW',
-
-		# ecrire/inc_texte
-		'debut_intertitre', 'fin_intertitre', 'ligne_horizontale',
-		'ouvre_ref', 'ferme_ref', 'ouvre_note', 'ferme_note',
-		'les_notes', 'compt_note', 'nombre_surligne',
-		'url_glossaire_externe', 'puce', 'puce_rtl'
+		'PHP_AUTH_USER', 'PHP_AUTH_PW'
 	);
 
 	// Liste des variables (contexte) dont on refuse qu'elles soient cookie
@@ -810,40 +807,22 @@ function spip_register_globals() {
 	if (@ini_get('register_globals')) {
 		foreach ($refuse_gpc as $var) {
 			if (isset($GLOBALS[$var])) {
-				foreach (array('_GET', '_POST', '_COOKIE') as $_table) {
-					if (
-					// demande par le client
-					isset ($GLOBALS[$_table][$var])
-					// et pas modifie par les fichiers d'appel
-					AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
-					) // On ne sait pas si c'est un hack
-					{
-						# REMOTE_USER ou fond, c'est grave ;
-						# pour le reste (cookie 'lang', par exemple), simplement
-						# interdire la mise en cache de la page produite
-						switch ($var) {
-							case 'REMOTE_USER':
-							case 'fond':
-								die ("$var interdite");
-								break;
-							default:
-								define ('spip_interdire_cache', true);
-						}
-					}
-				}
+				if (
+				// demande par le client
+				isset ($_REQUEST[$var])
+				// et pas modifie par les fichiers d'appel
+				AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
+				) // Alors on ne sait pas si c'est un hack
+					die ("$var interdite");
 			}
 		}
 		foreach ($refuse_c as $var) {
 			if (isset($GLOBALS[$var])) {
-				foreach (array('_COOKIE') as $_table) {
-					if (
-					// demande par le client
-					isset ($GLOBALS[$_table][$var])
-					// et pas modifie par les fichiers d'appel
-					AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
-					)
-						define ('spip_interdire_cache', true);
-				}
+				if (
+				isset ($_COOKIE[$var])
+				AND $_COOKIE[$var] == $GLOBALS[$var]
+				)
+					define ('spip_interdire_cache', true);
 			}
 		}
 	}
@@ -863,6 +842,19 @@ function spip_register_globals() {
 	}
 }
 
+//
+// Gerer les variables de personnalisation, qui peuvent provenir
+// des fichiers d'appel, en verifiant qu'elles n'ont pas ete passees
+// par le visiteur (sinon, pas de cache)
+//
+function tester_variable($var, $val){
+	if (!isset($GLOBALS[$var])) {
+		$GLOBALS[$var] = $val;
+		return false;
+	}
+	if (isset($_REQUEST[$var]) AND $_REQUEST[$var] == $GLOBALS[$var])
+		die ("$var interdite");
+}
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper

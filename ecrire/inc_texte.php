@@ -16,20 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_filtres");
 
-//
-// Initialisation de quelques variables globales
-// (on peut les modifier globalement dans mes_fonctions,
-//  OU individuellement pour chaque type de page dans article, rubrique, etc.
-// cf doc...)
-//
-function tester_variable($nom_var, $val){
-	if (!isset($GLOBALS[$nom_var])) {
-		$GLOBALS[$nom_var] = $val;
-		return false;
-	}
-	return true;
-}
-
+// Verifier les variables de personnalisation
 tester_variable('debut_intertitre', "\n<h3 class=\"spip\">");
 tester_variable('fin_intertitre', "</h3>\n");
 tester_variable('ligne_horizontale', "\n<hr class=\"spip\" />\n");
@@ -42,18 +29,34 @@ tester_variable('compt_note', 0);
 tester_variable('nombre_surligne', 4);
 tester_variable('url_glossaire_externe', "http://@lang@.wikipedia.org/wiki/");
 
+// on initialise la puce ici car il serait couteux de faire le find_in_path()
+// a chaque hit, alors qu'on n'a besoin de cette valeur que lors du calcul
+function definir_puce() {
+	static $les_puces = array();
 
-// On ne prend la $puce_rtl par defaut que si $puce n'a pas ete redefinie
+	// Attention au sens, qui n'est pas defini de la meme facon dans
+	// l'espace prive (spip_lang est la langue de l'interface, lang_dir
+	// celle du texte) et public (spip_lang est la langue du texte)
+	include_ecrire('inc_lang');
+	$dir = _DIR_RESTREINT ?
+		lang_dir($GLOBALS['spip_lang']) : $GLOBALS['lang_dir'];
+	$p = ($dir == 'rtl') ? 'puce_rtl' : 'puce';
 
-//if (!tester_variable('puce', "<li class='spip_puce' style='list-style-image: url(puce.gif)'>")) {
-$puce = _DIR_RESTREINT ?
-	find_in_path('puce.gif'): _DIR_IMG_PACK.'puce.gif';
-$puce_rtl = _DIR_RESTREINT ?
-	find_in_path('puce_rtl.gif'): _DIR_IMG_PACK.'puce_rtl.gif';
-if (!tester_variable('puce', "<img class='spip_puce' src='$puce' alt='-' />&nbsp;")) {
-	tester_variable('puce_rtl', "<img class='spip_puce' src='$puce_rtl' alt='-' />&nbsp;");
+	if (!isset($les_puces[$p])) {
+		tester_variable($p, 'AUTO');
+		if ($GLOBALS[$p] == 'AUTO') {
+			$img = find_in_path($p.'.gif', _DIR_IMG_PACK);
+			list(,,,$size) = @getimagesize($img);
+			$img = '<img src="'.$img.'" '
+				.$size.' alt="-" border="0" />';
+		} else
+			$img = $GLOBALS[$p];
+
+		$les_puces[$p] = $img;
+	}
+
+	return $les_puces[$p];
 }
-
 
 //
 // Diverses fonctions essentielles
@@ -929,16 +932,6 @@ function traiter_raccourcis($letexte) {
 		}
 	}
 
-	// Puce
-	if (!$lang_dir) {
-		include_ecrire('inc_lang');
-		$lang_dir = lang_dir($GLOBALS['spip_lang']);
-	}
-	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl'])
-		$puce = $GLOBALS['puce_rtl'];
-	else
-		$puce = $GLOBALS['puce'];
-
 	// Harmoniser les retours chariot
 	$letexte = preg_replace(",\r\n?,", "\n", $letexte);
 
@@ -1083,6 +1076,10 @@ function traiter_raccourcis($letexte) {
 	// les listes
 	if (ereg("\n-[*#]", $letexte))
 		$letexte = traiter_listes($letexte);
+
+	// Puce
+	if (strpos($letexte, "\n- ") !== false)
+		$puce = definir_puce();
 
 	// autres raccourcis
 	$cherche1 = array(

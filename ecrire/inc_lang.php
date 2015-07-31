@@ -243,33 +243,28 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
-	if (!$lien) $lien = $GLOBALS['clean_link'];
+	if (!$lien)
+		$lien = self();
 
 	if ($nom_select == 'changer_lang') {
+		$lien = parametre_url($lien, 'changer_lang', '');
+		$lien = parametre_url($lien, 'url', '');
 		$cible = '';
-		if (is_object($lien)) {
-			$lien->delvar('changer_lang');
-			$lien->delvar('url');
-			$lien = $lien->getUrl();
-		    }
 	} else {
-		$args = "";
-		if (!_DIR_RESTREINT) {
-			$cible = _DIR_RESTREINT_ABS . 
-			  (is_object($lien) ? $lien->getUrl() : $lien);
-			if (_FILE_CONNECT) {
-			  include_ecrire('inc_session');
-			  $args = "id_auteur=$connect_id_auteur&valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
-			}
-
+		if (_DIR_RESTREINT) {
+			$cible = $lien;
 		} else {
-			$cible = $lien->getUrl();
+			$cible = _DIR_RESTREINT_ABS . $lien;
+			if (_FILE_CONNECT) {
+				include_ecrire('inc_session');
+				$args = "id_auteur=$connect_id_auteur&valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			}
 		}
-		$lien = generer_url_public("spip_cookie", $args);
+		$lien = generer_url_action('cookie', $args);
 	}
 
 	return "<form action='$lien' method='post' style='margin:0px; padding:0px;'>"
-	  . (!$cible ? '' : "<input type='hidden' name='url' value='".quote_amp($cible)."' />")
+	  . (!$cible ? '' : "<input type='hidden' name='url' value='$cible' />")
 	  . $texte
 	  . "<select name='$nom_select' "
 	  . (_DIR_RESTREINT ?
@@ -279,7 +274,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
 	      "class='fondl'"))
 	  . "\nonchange=\"document.location.href='"
-	  . $lien . (!$cible ? "" : ((strpos($lien,'?') ? '&amp;' : '?') . 'url=' . urlencode($cible)))
+	  . parametre_url($lien, 'url', str_replace('&amp;', '&', $cible))
 	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
 	  . $ret
 	  . "</select>\n"
@@ -298,13 +293,16 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 	if (count($langues) <= 1) return '';
 	$ret = '';
 	sort($langues);
-	while (list(, $l) = each ($langues)) {
+	foreach ($langues as $l) {
 		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
 		if ($l == $herit) {
 			$ret .= "<option class='maj-debut' style='font-weight: bold;' value='herit'$selected>"
 				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
 		}
-		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+		## ici ce serait bien de pouvoir choisir entre "langue par defaut"
+		## et "langue heritee"
+		else
+			$ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	return $ret;
 }

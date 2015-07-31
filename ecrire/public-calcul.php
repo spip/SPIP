@@ -107,7 +107,6 @@ function charger_squelette ($squelette) {
 			include_ecrire("inc_debug_sql");
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
-#		spip_log($skel_code);
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
@@ -163,8 +162,9 @@ function cherche_page ($cache, $contexte, $fond)  {
 			$page = $fonc(array('cache' => $cache), array($contexte));
 			spip_log("calcul ("
 				.spip_timer('calcul page')
-				.") ".trim("[$skel] $cache")
-				." - ".strlen($page['texte']).' octets'
+				.") [$skel] ".
+				($cache ? $cache.cache_gz($page).' ' : '')
+				.'- '.strlen($page['texte']).' octets'
 			);
 		}
 

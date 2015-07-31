@@ -66,6 +66,18 @@ $auto_compress = true;
 // 'standard': article.php3?id_article=123
 $type_urls = 'page';
 
+
+//
+// On note le numero IP du client dans la variable $ip
+//
+($ip = @$_SERVER['HTTP_X_FORWARDED_FOR']) OR $ip = @$_SERVER['REMOTE_ADDR'];
+
+// Pour renforcer la privacy, decommentez la ligne ci-dessous : SPIP ne pourra
+// alors conserver aucun numero IP, ni temporairement lors des visites (pour
+// gerer les statistiques ou dans spip.log), ni dans les forums (responsabilite)
+# $ip = substr(md5($ip),0,16);
+
+
 // creation des vignettes avec image magick en ligne de commande : mettre
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
@@ -102,10 +114,10 @@ $ignore_auth_http = false;
 $ignore_remote_user = true; # methode obsolete et risquee
 
 // Faut-il "invalider" les caches quand on depublie ou modifie un article ?
-// (experimental)
-# NB: cette option ne concerne que articles,breves,rubriques et site
-# car les forums et petitions sont toujours invalidants.
-$invalider_caches = false;
+# NB: cette option ne concerne pas les forums et petitions qui sont toujours
+# invalidants. (fonctionnalite experimentale : decommenter ci-dessous)
+#$invalider_caches = 'id_article,id_breve,id_rubrique,id_syndic';
+$invalider_caches = '';
 
 // Quota : la variable $quota_cache, si elle est > 0, indique la taille
 // totale maximale desiree des fichiers contenus dans le CACHE/ ;
@@ -132,13 +144,13 @@ $traiter_math = 'tex';
 // Controler les dates des item dans les flux RSS ?
 $controler_dates_rss = true;
 
-
 //
-// Plugins
+// Pipelines & plugins
 //
-// (plus tard on fera une interface graphique qui les liste et permet de
-// les activer un par un, dans tel ordre, etc)
 # les pipeline standards (traitements derivables aka points d'entree)
+# ils seront compiles par la suite
+# note: un pipeline non reference se compile aussi, mais uniquement
+# lorsqu'il est rencontre
 $spip_pipeline = array(
 	'pre_typo' => '|extraire_multi',
 	'post_typo' => '|quote_amp',
