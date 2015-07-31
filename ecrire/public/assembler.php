@@ -343,23 +343,22 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 			$args = is_array($page['contexte']['_pipeline'])?end($page['contexte']['_pipeline']):array();
 			$args['contexte'] = $page['contexte'];
 			unset($args['contexte']['_pipeline']); // par precaution, meme si le risque de boucle infinie est a priori nul
-			if (isset($GLOBALS['spip_pipeline'][$pipe]))
 				$texte = pipeline($pipe,array(
 				  'data'=>$texte,
-				  'args'=>$args));
+				  'args'=>$args),
+					false);
 		}
 		// Le parametre _pipeline devient deprecie, remplace par _pipelines au pluriel avec une syntaxe permettant plusieurs pipelines
 		if (isset($page['contexte']['_pipelines']) and is_array($page['contexte']['_pipelines'])) {
 			foreach($page['contexte']['_pipelines'] as $pipe=>$args){
-				if (isset($GLOBALS['spip_pipeline'][$pipe])){
-					$texte = pipeline(
-						$pipe,
-						array(
-							'data'=>$texte,
-							'args'=>$args
-						)
-					);
-				}
+				$texte = pipeline(
+					$pipe,
+					array(
+						'data'=>$texte,
+						'args'=>$args
+					),
+					false
+				);
 			}
 		}
 	}
@@ -375,72 +374,6 @@ function inclure_balise_dynamique($texte, $echo=true, $contexte_compil=array())
 		return $texte;
 
 }
-
-// Traiter var_recherche ou le referrer pour surligner les mots
-// http://doc.spip.org/@f_surligne
-function f_surligne ($texte) {
-	if (!$GLOBALS['html']) return $texte;
-	$rech = _request('var_recherche');
-	if (!$rech AND !isset($_SERVER['HTTP_REFERER'])) return $texte;
-	include_spip('inc/surligne');
-	return surligner_mots($texte, $rech);
-}
-
-// Valider/indenter a la demande.
-// http://doc.spip.org/@f_tidy
-function f_tidy ($texte) {
-	global $xhtml;
-
-	if ($xhtml # tidy demande
-	AND $GLOBALS['html'] # verifie que la page avait l'entete text/html
-	AND strlen($texte)
-	AND !headers_sent()) {
-		# Compatibilite ascendante
-		if (!is_string($xhtml)) $xhtml ='tidy';
-
-		if (!$f = charger_fonction($xhtml, 'inc', true)) {
-			spip_log("tidy absent, l'indenteur SPIP le remplace");
-			$f = charger_fonction('sax', 'xml');
-		}
-		return $f($texte);
-	}
-
-	return $texte;
-}
-
-// Offre #INSERT_HEAD sur tous les squelettes (bourrin)
-// a activer dans mes_options via :
-// $spip_pipeline['affichage_final'] .= '|f_insert_head';
-// http://doc.spip.org/@f_insert_head
-function f_insert_head($texte) {
-	if (!$GLOBALS['html']) return $texte;
-	include_spip('public/admin'); // pour strripos
-
-	($pos = stripos($texte, '</head>'))
-	    || ($pos = stripos($texte, '<body>'))
-	    || ($pos = 0);
-
-	if (false === strpos(substr($texte, 0,$pos), '<!-- insert_head -->')) {
-		$insert = "\n".pipeline('insert_head','<!-- f_insert_head -->')."\n";
-		$texte = substr_replace($texte, $insert, $pos, 0);
-	}
-
-	return $texte;
-}
-
-// Inserer au besoin les boutons admins
-// http://doc.spip.org/@f_admin
-function f_admin ($texte) {
-	if ($GLOBALS['affiche_boutons_admin']) {
-		include_spip('public/admin');
-		$texte = affiche_boutons_admin($texte);
-	}
-	if (_request('var_mode')=='noajax'){
-		$texte = preg_replace(',(class=[\'"][^\'"]*)ajax([^\'"]*[\'"]),Uims',"\\1\\2",$texte);
-	}
-	return $texte;
-}
-
 
 // http://doc.spip.org/@message_erreur_404
 function message_erreur_404 ($erreur= "", $code='404 Not Found') {

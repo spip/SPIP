@@ -105,6 +105,7 @@ ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
 ecrire/configuration/transcodeur.php -text
 ecrire/configuration/visiteurs.php -text
+ecrire/core.xml -text
 ecrire/exec/403.php -text
 ecrire/exec/404.php -text
 ecrire/exec/accueil.php -text
@@ -255,6 +256,8 @@ ecrire/inc/nfslock.php -text
 ecrire/inc/notes.php -text
 ecrire/inc/notifications.php -text
 ecrire/inc/php3.php -text
+ecrire/inc/pipelines.php -text
+ecrire/inc/pipelines_ecrire.php -text
 ecrire/inc/plonger.php -text
 ecrire/inc/plugin.php -text
 ecrire/inc/prepare_recherche.php -text
@@ -399,7 +402,6 @@ prive/contenu/item_rss_plugin.html -text
 prive/contenu/rubrique.html -text
 prive/contenu/site.html -text
 prive/contenu/syndic_article.html -text
-prive/core.xml -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/breve.html -text

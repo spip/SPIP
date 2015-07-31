@@ -180,16 +180,6 @@ function debut_javascript()
     http_script('', 'gadgets.js');
 }
 
-// Fonction standard pour le pipeline 'boite_infos'
-// http://doc.spip.org/@f_boite_infos
-function f_boite_infos($flux) {
-	$args = $flux['args'];
-	$type = $args['type'];
-	unset($args['row']);
-	$flux['data'] .= recuperer_fond("prive/infos/$type",$args);
-	return $flux;
-}
-
 //
 // Cadre centre (haut de page)
 //

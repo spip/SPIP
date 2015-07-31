@@ -33,33 +33,6 @@ function interdire_acces($ok=false) {
 }
 
 /**
- * Filtre d'ajout automatique du title dans les pages du prive en squelette
- * appelle dans le pipeline affichage_final_prive
- *
- * @param string $texte
- * @return string
- */
-function f_title_auto($texte){
-	if (strpos($texte,'<title>')===false
-	  AND
-			(preg_match(",<h1[^>]*>(.+)</h1>,Uims", $texte, $match)
-		   OR preg_match(",<h[23][^>]*>(.+)</h[23]>,Uims", $texte, $match))
-		AND $match = trim($match[1])
-		AND ($p = strpos($texte,'<head>'))!==FALSE) {
-		if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
-			$nom_site_spip=  _T('info_mon_site_spip');
-
-		$titre = "<title>["
-			. $nom_site_spip
-			. "] ". $match
-		  ."</title>";
-
-		$texte = substr_replace($texte, $titre, $p+6,0);
-	}
-	return $texte;
-}
-
-/**
  * #BOITE_OUVRIR{titre[,type]}
  * Racourci pour ouvrir une boite (info, simple, pour noisette ...)
  *
