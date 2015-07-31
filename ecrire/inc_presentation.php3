@@ -1675,33 +1675,28 @@ function debut_droite() {
 	<?php
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && $GLOBALS['secu']=='oui') {
-		debut_cadre_enfonce();
-		gros_titre("Informations de s&eacute;curit&eacute;");
-		echo "<p>";
+	if ($GLOBALS['spip_session'] && $GLOBALS['bonjour']=='oui') {
 		if (zap_sessions($GLOBALS['auteur_session']['login'], false)) {
-			echo '<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5"> ';
-			echo "<b>SPIP a conserv&eacute; en m&eacute;moire une autre connexion &agrave; votre nom.</b><br>";
-			echo "Le plus souvent c'est parce que vous ne vous &ecirc;tes pas d&eacute;connect&eacute; ";
-			echo "apr&egrave;s votre dernier passage, ou parce qu'il vous arrive de vous connecter ";
-			echo "depuis plusieurs navigateurs ou plusieurs ordinateurs diff&eacute;rents, ou encore ";
-			echo "parce que vous utilisez un identifiant partag&eacute; avec d'autres personnes.\n";
-			echo "<p>Si toutefois vous pensez que ces connexions n'ont pas lieu d'exister et que vous ";
-			echo "voulez emp&ecirc;cher au maximum tout probl&egrave;me de s&eacute;curit&eacute;, ";
-			echo "vous pouvez tuer toutes les autres connexions pr&eacute;sentes.\n";
-			echo "<form action='../spip_cookie.php3' method='post'>";
-			echo "<input type='hidden' name='zap_session' value='oui'>";
-			echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?secu=oui'>";
-			echo "<div align='right'>";
-			echo "<input type='submit' class='fondo' name='submit' value='Terminer les autres connexions'>";
-			echo "</form>\n";
+			debut_cadre_enfonce();
+			gros_titre("Informations de s&eacute;curit&eacute;");
+			echo "<p>";
+				echo "<form action='../spip_cookie.php3' method='post'>";
+				echo '<img src="img_pack/warning.gif" align="right" hspace="5" vspace="5"> ';
+				echo propre("{{Le syst&egrave;me de ce site a rep&eacute;r&eacute; une autre autorisation de connexion &agrave; votre nom.}}\n\n- Si vous utilisez actuellement un autre butineur (client Web, navigateur, {browser}) pour acc&eacute;der &agrave; ce site, cela est normal. Le syst&egrave;me a simplement remarqu&eacute; que vous utilisiez deux logiciels diff&eacute;rents pour naviguer sur le site.\n\n- Sinon, cela signifie que vous n'avez pas quitt&eacute; le syst&egrave;me en utilisant le bouton {{Se d&eacute;connecter}} lors de votre derni&egrave;re visite. Si vous &ecirc;tes la seule personne &agrave; acc&eacute;der &agrave; votre ordinateur, cela n'est pas grave; en revanche, si vous utilisez une machine accessible &agrave; d'autres utilisateurs, cela peut poser des probl&egrave;mes de s&eacute;curit&eacute;; dans ce cas, prenez l'habitude de  quitter le site en utilisant le bouton {{Se d&eacute;connecter}} ci-dessus, afin que personne ne puisse utiliser votre ordinateur pour se connecter en votre nom.\n\nSi vous n'utilisez pas actuellement un autre butineur pour acc&eacute;der &agrave; ce site, vous pouvez supprimer les anciennes connexions &agrave; votre nom en utilisant le bouton ci-dessous; cela permettra de &laquo;faire le m&eacute;nage&raquo; et d'assurer une meilleure s&eacute;curit&eacute; du syst&egrave;me.");
+				
+				
+				echo "<input type='hidden' name='zap_session' value='oui'>";
+				echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?bonjour=oui'>";
+				echo "<div align='right'>";
+				echo "<input type='submit' class='fondo' name='submit' value='Supprimer les autres connexions'>";
+				echo "</form>\n";
+			/*else {
+				echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><br>";
+				echo "D'autre part, si vous voulez que votre connexion actuelle soit supprim&eacute;e de la ";
+				echo "m&eacute;moire de SPIP, il suffit de vous d&eacute;connecter en utilisant l'icone d&eacute;di&eacute;e.";
+			}*/
+			fin_cadre_enfonce();
 		}
-		else {
-			echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><br>";
-			echo "D'autre part, si vous voulez que votre connexion actuelle soit supprim&eacute;e de la ";
-			echo "m&eacute;moire de SPIP, il suffit de vous d&eacute;connecter en utilisant l'icone d&eacute;di&eacute;e.";
-		}
-		fin_cadre_enfonce();
 	}
 }
 
