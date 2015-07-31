@@ -2,11 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title><:icone_agenda:> [#NOM_SITE_SPIP]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-<link rel="stylesheet" href="#CHEMIN{calendrier.css}" type="text/css" />
-<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}layer.js"></script>
-<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}presentation.js"></script>
-</head><body>
+	<title><:icone_agenda:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+	<meta name="robots" content="none" />
+	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+	<link rel="stylesheet" href="#CHEMIN{calendrier.css}" type="text/css" />
+	<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}layer.js"></script>
+	<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}presentation.js"></script>
+</head>
+
+<body id="page_agenda">
 [(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>]
 </body></html>
