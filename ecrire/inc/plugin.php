@@ -365,10 +365,11 @@ function plugin_controler_necessite($liste, $nom, $version)
 
 function plugin_controler_lib($lib, $url)
 {
-	if ($url) {
+	/* Feature sortie du core, voir STP
+	 * if ($url) {
 		include_spip('inc/charger_plugin');
 		$url = '<br />'	. bouton_telechargement_plugin($url, 'lib');
-	}
+	}*/
 	return _T('plugin_necessite_lib', array('lib'=>$lib)) . $url;
 }
 

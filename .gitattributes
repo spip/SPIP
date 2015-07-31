@@ -7,7 +7,6 @@ ecrire/action/ajouter_lien.php -text
 ecrire/action/annuler_job.php -text
 ecrire/action/auth.php -text
 ecrire/action/calculer_taille_cache.php -text
-ecrire/action/charger_plugin.php -text
 ecrire/action/confirmer_email.php -text
 ecrire/action/confirmer_inscription.php -text
 ecrire/action/converser.php -text
@@ -73,14 +72,11 @@ ecrire/exec/404.php -text
 ecrire/exec/admin_plugin.php -text
 ecrire/exec/base_delete_all.php -text
 ecrire/exec/base_repair.php -text
-ecrire/exec/charger_plugin.php -text
-ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/demande_mise_a_jour.php -text
 ecrire/exec/fond.php -text
 ecrire/exec/fond_monobloc.php -text
 ecrire/exec/index.php -text
 ecrire/exec/info_plugin.php -text
-ecrire/exec/info_plugin_distant.php -text
 ecrire/exec/informer.php -text
 ecrire/exec/install.php -text
 ecrire/exec/plonger.php -text
@@ -97,7 +93,6 @@ ecrire/inc/autoriser.php -text
 ecrire/inc/bandeau.php -text
 ecrire/inc/boutons.php -text
 ecrire/inc/charger_php_extension.php -text
-ecrire/inc/charger_plugin.php -text
 ecrire/inc/chercher_logo.php -text
 ecrire/inc/chercher_rubrique.php -text
 ecrire/inc/commencer_page.php -text
@@ -235,7 +230,6 @@ ecrire/plugin.xml -text
 ecrire/plugins/afficher_liste.php -text
 ecrire/plugins/afficher_nom_plugin.php -text
 ecrire/plugins/afficher_plugin.php -text
-ecrire/plugins/afficher_plugin_distant.php -text
 ecrire/plugins/afficher_repertoires.php -text
 ecrire/plugins/extraire_boutons.php -text
 ecrire/plugins/extraire_pipelines.php -text
