@@ -297,7 +297,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
 	      "class='fondl'"))
 	  . "\nonchange=\"document.location.href='"
-	  . $lien . (!$cible ? "" : "&amp;url=" . urlencode($cible))
+	  . $lien . (!$cible ? "" : ((strpos($lien,'?') ? '&amp;' : '?') . 'url=' . urlencode($cible)))
 	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
 	  . $ret
 	  . "</select>\n"
