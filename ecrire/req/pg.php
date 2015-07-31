@@ -124,7 +124,7 @@ function spip_pg_query($query, $serveur='')
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
+	if (preg_match('/\s(SET|VALUES|WHERE|DATABASE)\s/i', $query, $regs)) {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
 	} else $suite ='';
