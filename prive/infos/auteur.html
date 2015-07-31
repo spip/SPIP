@@ -3,7 +3,7 @@
 <div class='numero'><:titre_cadre_numero_auteur:><p>#ID_AUTEUR</p></div>
 <div class='nb_elements'>
 <BOUCLE_arts(ARTICLES){id_auteur}{statut!=poubelle} />[(#STATUT|<>{'6forum'}|?{' ', ''})<div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:info_articles:></div>]<//B_arts>
-<BOUCLE_forum(FORUMS){id_auteur}{statut!=poubelle} /><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:messages:></div><//B_forum>
+<BOUCLE_forum(FORUMS ?){id_auteur}{statut!=poubelle} /><div[(#TOTAL_BOUCLE|?{'',' class="noinfo"'})]>#TOTAL_BOUCLE <:messages:></div><//B_forum>
 </div>
 </div>
 
