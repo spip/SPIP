@@ -37,7 +37,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 		if ($r = spip_fetch_array($s)) {
 			$args[2] = $r['texte'];
 			// le signataire doit-il donner un site ?
-			$args[3] = ($r['site_obli'] == 'oui') ? ' ':'';
+			$args[3] = ($r['site_obli'] == 'oui') ? '':' ';
 			// le signataire peut-il proposer un commentaire
 			$args[4] = ($r['message'] == 'oui') ? ' ':'';
 		}
@@ -195,11 +195,11 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 			}
 	
 			if (strlen($nom_email) < 2) {
-				return (_T('form_indiquer_nom'));
+				return _T('form_indiquer_nom');
 			}
 	
 			if ($adresse_email == _T('info_mail_fournisseur')) {
-				return (_T('form_indiquer_email'));
+				return _T('form_indiquer_email');
 			}
 	
 			if ($email_unique == "oui") {
@@ -207,22 +207,22 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result = spip_query($query);
 				if (spip_num_rows($result) > 0) {
-					return (_T('form_pet_deja_signe'));
+					return _T('form_pet_deja_signe');
 				}
 			}
 	
 			if (!email_valide($adresse_email)) {
-				return (_T('form_email_non_valide'));
+				return _T('form_email_non_valide');
 			}
 	
 			if ($site_obli == "oui") {
 				if (!$nom_site) {
-					return (_T('form_indiquer_nom_site'));
+					return _T('form_indiquer_nom_site');
 				}
 				include_ecrire("inc_sites.php3");
 	
 				if (!recuperer_page($url_site)) {
-					return (_T('form_pet_url_invalide'));
+					return _T('form_pet_url_invalide');
 				}
 			}
 			if ($site_unique == "oui") {
@@ -230,7 +230,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND (statut='publie' OR statut='poubelle')";
 				$result = spip_query($query);
 				if (spip_num_rows($result) > 0) {
-					return (_T('form_pet_site_deja_enregistre'));
+					return _T('form_pet_site_deja_enregistre');
 				}
 			}
 	
