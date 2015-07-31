@@ -310,27 +310,14 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 //
 debut_raccourcis();
 
+icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
+
+// pas de rubrique ?
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
-
-icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
-echo "<p>";
-
-
-if (spip_num_rows($result) > 0) {
-	if ($coll > 0)
-		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
-
-	$activer_breves = lire_meta("activer_breves");
-	if ($activer_breves != "non" AND $id_parent == "0" AND $coll != "0") {
-		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
-	}
-}
-else {
-	if ($connect_statut == '0minirezo') {
+if (spip_num_rows($result) == 0)
+	if ($connect_statut == '0minirezo')
 		echo "<p>"._T('info_creation_rubrique');
-	}
-}
 
 fin_raccourcis();
 
