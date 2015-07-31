@@ -96,29 +96,23 @@ function decoder_hash_forum($email, $hash) {
 }
 
 
-function forum_abonnement() {
-	global $HTTP_COOKIE_VARS;
-	$email = $HTTP_COOKIE_VARS['spip_forum_email'];
-	$hash = $HTTP_COOKIE_VARS['spip_forum_hash'];
-		
-	$row = decoder_hash_forum($email, $hash);
-	echo "<div class='spip_encadrer'>";
-	if (!$row) {
-		echo "";
-		echo "\nVotre e-mail d'inscription :<BR><INPUT TYPE='text' CLASS='forml' NAME='email_forum_abo' VALUE='$email' SIZE='14'>";
-		echo "\n<BR>Votre mot de passe :<BR><INPUT TYPE='password' CLASS='forml' NAME='pass_forum_abo' VALUE='' SIZE='14'>";
-		echo "\n<BR><FONT SIZE=2>Pour participer &agrave; ce forum, vous devez indiquer l'identifiant personnel qui vous a &eacute;t&eacute; fourni. Si vous l'avez oubli&eacute;, ou si vous n'en n'avez pas encore, cliquez ci-dessous pour vous inscrire.</FONT>";
-		echo "\n<BR>[<A HREF=\"#formulaire_forum\" onMouseDown=\"window.open('spip_pass.php3','myWindow','scrollbars=yes,resizable=yes,width=400,height=200')\">Recevoir votre identifiant</A>]<P>";
-		echo "";
-	}
+function forum_abonnement($retour) {
+	if ($GLOBALS['auteur_session'])
+		return true;	// autoriser le formulaire
 	else {
-		$id_auteur = $row['id_auteur'];
-		$hash_email = calculer_action_auteur("email $email", $id_auteur);
-		echo "\nVous &ecirc;tes identifi&eacute; sous l'adresse e-mail&nbsp;: $email.";
-		echo "\n<INPUT TYPE='hidden' NAME='forum_id_auteur' VALUE='$id_auteur'>";
-		echo "\n<INPUT TYPE='hidden' NAME='hash_email' VALUE='$hash_email'>";
-	}
-	echo "</div><p>";
+		include_local("inc-login.php3");
+		$cible = new Link($retour);
+
+		$message_login = propre("Pour participer &agrave;
+		ce forum, vous devez vous enregistrer au pr&eacute;alable. Merci
+		d'indiquer ci-dessous l'identifiant personnel qui vous a
+		&eacute;t&eacute; fourni.\n_ Si vous l'avez oubli&eacute;, ou si
+		vous n'en avez pas encore, vous pouvez").
+' <script language="JavaScript"><!--
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=740,height=580\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander de nouveaux identifiants</a>.';
+		login($cible, false, $message_login);
+	} 
 }
 
 
@@ -135,24 +129,21 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$lien = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
 
 	$retour = $HTTP_GET_VARS['retour'];
-	if ($retour)
-		$retour = $retour;
-	else 
+	if (!$retour)
 		$retour = rawurlencode($lien);
+
+	if ($forums_publics == "abo")  // forums abo
+		$ret .= '<?php include("inc-forum.php3"); if (forum_abonnement($retour)) { ?'.'>';
+	else
+		$ret .= '<?php { ?'.'>';
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
 	$ret .= "\n<FORM ACTION='$lien' METHOD='post'>";
-	//$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
 	
 	if ($forums_publics == "pri") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}
 	
-	if ($forums_publics == "abo") {
-		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
-	}
-	
-	$ret .= "\n";
 	// recuperer le titre
 	if (! $titre) {
 		if ($id_parent)
@@ -379,6 +370,8 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	else  $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='Valider ce choix'></DIV>";
 	
 	$ret .= "</FORM>";
+
+	$ret .= '<?php } ?'.'>';	// fin forums abo
 	
 	return $ret;
 }

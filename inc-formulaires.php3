@@ -283,6 +283,9 @@ function formulaire_inscription() {
 	global $mail_inscription;
 	global $nom_inscription;
 
+	include_ecrire("inc_meta.php3");
+	$inscriptions_ecrire = (lire_meta("autoriser_inscriptions") == "oui");
+
 	if ($mail_inscription) {
 		include_ecrire("inc_connect.php3");
 		$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
@@ -295,6 +298,7 @@ function formulaire_inscription() {
 			$id_auteur = $row['id_auteur'];
 			$statut = $row['statut'];
 
+			echo "<b>";
 			if ($statut == '5poubelle') {
 				echo "Vous n'avez plus acc&egrave;s &agrave; ce site.";
 				$ok = false;
@@ -313,6 +317,7 @@ function formulaire_inscription() {
 				spip_query("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
 				$ok = true;
 			}
+			echo "</b>\n";
 		}
 
 		if ($ok) {

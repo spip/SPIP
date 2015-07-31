@@ -37,16 +37,17 @@ function auth_http($cible, $essai_auth_http) {
 }
 
 function ouvre_login($titre) {
-	$retour .= debut_cadre_enfonce();
+	$retour .= debut_cadre_enfonce("redacteurs-24.gif");
 	if ($titre) $retour .= gros_titre($titre);
+	$retour .= '<FONT size="2" FACE="arial,helvetica,sans-serif">';
 	return $retour;
 }
 
 function ferme_login() {
-	return fin_cadre_enfonce();
+	return "</FONT>".fin_cadre_enfonce();
 }
 
-function login($cible, $prive = 'prive') {
+function login($cible, $prive = 'prive', $message_login='') {
 	$login = $GLOBALS['var_login'];
 	$erreur = $GLOBALS['var_erreur'];
 	$echec_cookie = $GLOBALS['var_echec_cookie'];
@@ -60,9 +61,12 @@ function login($cible, $prive = 'prive') {
 
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
-	if ($auteur_session AND ! $logout)
+	if ($auteur_session AND ! $logout) {
+		$url = $cible->getUrl();
+		@Header("Location: $url");
+		echo "<a href='$url'>Vous &ecirc;tes en registr&eacute;... par ici...</a>\n";
 		return;
-
+	}
 
 	// initialisations
 	$nom_site = lire_meta('nom_site');
@@ -107,15 +111,21 @@ function login($cible, $prive = 'prive') {
 		echo ouvre_login ("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
 		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
-		echo "fournis lors de votre inscription.";
+		echo "fournis lors de votre inscription. ";
+		echo "Si vous l'avez oubli&eacute;, ou si vous n'en avez pas encore, vous pouvez".
+' <script language="JavaScript"><!--
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=740,height=580\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander de nouveaux identifiants</a>.';
 	} else {
 		echo ouvre_login ("$nom_site : identification");
-		echo "<p>Pour vous identifier sur ce site, ";
-		echo "vous devez entrer les codes qui vous ont &eacute;t&eacute; ";
-		echo "fournis lors de votre inscription.";
+		if (!$message_login)
+			$message_login = "Pour vous identifier sur ce site,
+        	vous devez entrer les codes qui vous ont &eacute;t&eacute;
+        	fournis lors de votre inscription.";
+
+		echo "<br><font size='2'>$message_login</font><br>\n";
 	}
 
-	echo "<p>&nbsp;<p>";
 
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
@@ -127,18 +137,8 @@ function login($cible, $prive = 'prive') {
 				this.session_password.value = \"\";
 			}'";
 		echo ">\n";
-		// statut
-		if ($row['statut'] == '0minirezo') {
-			$icone = "redacteurs-admin-24.gif";
-		} else if ($row['statut'] == '1comite') {
-			$icone = "redacteurs-24.gif";
-		}
-		debut_cadre_enfonce($icone);
 		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 
-		echo "<table cellpadding=0 cellspacing=0 border=0 width=100%>";
-		echo "<tr width=100%>";
-		echo "<td width=100%>";
 		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 		echo "<script type=\"text/javascript\"><!--\n" .
 			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
@@ -163,34 +163,22 @@ function login($cible, $prive = 'prive') {
 		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<input type='hidden' name='session_password_md5' value=''>\n";
 		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
-		echo "</td>";
-		if ($logo) {
-			echo "<td width=10><img src='ecrire/img_pack/rien.gif' width=10></td>";
-			echo "<td valign='top'>";
-			echo "<img src='$logo'>";
-			echo "</td>";
-		}
-		echo "</tr></table>";
 		echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
-		fin_cadre_enfonce();
 		echo "</form>";
 
 	}
-
 	else { // demander seulement le login
 
 		$url = $cible->getUrl();
 		$action = $clean_link->getUrl();
 
 		echo "<form name='form_login' action='$action' method='post'>\n";
-		debut_cadre_enfonce("redacteurs-24.gif");
 		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 		echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
 		echo "<input type='text' name='var_login' class='formo' value=\"\" size='40'><p>\n";
 
 		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
-		fin_cadre_enfonce();
 		echo "</form>";
 	}
 
@@ -210,8 +198,7 @@ function login($cible, $prive = 'prive') {
 	}
 
 
-	echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
-	echo "[<a href='$url_site'>retour au site public</a>]</font>";
+	if ($prive) echo "[<a href='$url_site'>retour au site public</a>]";
 
 	echo ferme_login();
 

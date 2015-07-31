@@ -60,6 +60,7 @@ function creer_base() {
 		alea_actuel tinytext NOT NULL,
 		alea_futur tinytext NOT NULL,
 		prefs tinytext NOT NULL,
+		cookie_oubli tinytext NOT NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut))";
@@ -976,6 +977,10 @@ function maj_base() {
 		spip_query("DROP TABLE spip_visites");
 		spip_query("DROP TABLE spip_visites_temp");
 		spip_query("DROP TABLE spip_visites_referers");
+	}
+
+	if ($version_installee < 1.458) {
+		spip_query("ALTER TABLE spip_auteurs ADD cookie_oubli TINYTEXT NOT NULL");
 	}
 
 
