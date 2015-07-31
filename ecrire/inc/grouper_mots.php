@@ -97,7 +97,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 	else if ($nb > 1)
 		$texte_lie[] = $nb." "._T('info_breves_03');
 
-	$ns = isset($occurrences['sites'][$id_mot]) ? $occurrences['sites'][$id_mot] : 0;
+	$ns = isset($occurrences['syndic'][$id_mot]) ? $occurrences['syndic'][$id_mot] : 0;
 	if ($ns == 1)
 		$texte_lie[] = _T('info_1_site');
 	else if ($ns > 1)
@@ -180,7 +180,7 @@ else $aff_articles = "'prop','publie'";
  $syndic = array(); 
  $result_syndic = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic, spip_mots AS M WHERE lien.id_mot=M.id_mot AND M.id_groupe=$id_groupe AND syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot");
  while ($row = spip_fetch_array($result_syndic)){
-	$sites[$row['id_mot']] = $row['cnt'];
+	$syndic[$row['id_mot']] = $row['cnt'];
 
  }
 
