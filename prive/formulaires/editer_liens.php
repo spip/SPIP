@@ -54,14 +54,19 @@ function formulaires_editer_liens_charger_dist($table_source,$objet,$id_objet){
 
 /**
  * Traiter le post des informations d'edition de liens
- * Les formulaires postent dans deux variables ajouter_lien et supprimer_lien
+ * Les formulaires postent dans trois variables ajouter_lien et supprimer_lien
+ * et remplacer_lien
  *
- * Elles peuvent etre chacune de trois formes differentes :
+ * Les deux premieres peuvent etre de trois formes differentes :
  * ajouter_lien[]="objet1-id1-objet2-id2"
  * ajouter_lien[objet1-id1-objet2-id2]="nimportequoi"
  * ajouter_lien['clenonnumerique']="objet1-id1-objet2-id2"
  * Dans ce dernier cas, la valeur ne sera prise en compte
  * que si _request('clenonnumerique') est vrai (submit associe a l'input)
+ *
+ * remplacer_lien doit etre de la forme
+ * remplacer_lien[objet1-id1-objet2-id2]="objet3-id3-objet2-id2"
+ * ou objet1-id1 est celui qu'on enleve et objet3-id3 celui qu'on ajoute
  *
  * @param string $table_source
  *		table des objets associes, doit correspondre a une table xxx_liens
@@ -91,21 +96,25 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 			# oups ne persiste que pour la derniere action, si suppression
 			set_request('_oups');
 		}
-		
-		if ($ajouter = _request('ajouter_lien')){
-			$ajouter_lien = charger_fonction('ajouter_lien','action');
-			foreach($ajouter as $k=>$v){
-				if ($lien = lien_verifier_action($k,$v)){
-					$ajouter_lien($lien);
+
+		$supprimer = _request('supprimer_lien');
+		$ajouter = _request('ajouter_lien');
+
+		// il est possible de preciser dans une seule variable un remplacement :
+		// remplacer_lien[old][new]
+		if ($remplacer = _request('remplacer_lien')){
+			foreach($remplacer as $k=>$v){
+				if ($old = lien_verifier_action($k,'')){
+					foreach(is_array($v)?$v:array($v) as $kn=>$vn)
+						if ($new = lien_verifier_action($kn,$vn)){
+							$supprimer[$old] = 'x';
+							$ajouter[$new] = '+';
+						}
 				}
 			}
-			# oups ne persiste que pour la derniere action, si suppression
-			# une suppression suivie d'un ajout dans le meme hit est un remplacement
-			# non annulable !
-			set_request('_oups');
 		}
-
-		if ($supprimer = _request('supprimer_lien')){
+		
+		if ($supprimer){
 			include_spip('action/editer_liens');
 			$oups = array();
 
@@ -118,6 +127,19 @@ function formulaires_editer_liens_traiter_dist($table_source,$objet,$id_objet){
 				}
 			}
 			set_request('_oups',$oups?serialize($oups):null);
+		}
+		
+		if ($ajouter){
+			$ajouter_lien = charger_fonction('ajouter_lien','action');
+			foreach($ajouter as $k=>$v){
+				if ($lien = lien_verifier_action($k,$v)){
+					$ajouter_lien($lien);
+				}
+			}
+			# oups ne persiste que pour la derniere action, si suppression
+			# une suppression suivie d'un ajout dans le meme hit est un remplacement
+			# non annulable !
+			set_request('_oups');
 		}
 	}
 
