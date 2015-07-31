@@ -72,7 +72,8 @@ function forum_affiche($debut, $admin=false)
 
 	$total =  ($row = spip_fetch_array($result_forum)) ? $row['cnt'] : 0;
 
-	if ($total > 10) echo liste_numeros_forum($script, $debut, $total);
+	if ($total > 10)
+		echo '<small>'.liste_numeros_forum($script, $debut, $total).'</small>';
 
   
 	echo "\n<div class='centered'>\n";
