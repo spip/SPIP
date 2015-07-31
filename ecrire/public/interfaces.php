@@ -214,10 +214,10 @@ $table_date['rubriques']='date';
 
 global $tables_jointures;
 
-$tables_jointures['spip_articles']['id_auteur']= 'auteurs_articles';
+$tables_jointures['spip_articles']['id_auteur']= 'auteurs_liens';
 $tables_jointures['spip_articles'][]= 'documents_liens';
 
-$tables_jointures['spip_auteurs'][]= 'auteurs_articles';
+$tables_jointures['spip_auteurs'][]= 'auteurs_liens';
 
 $tables_jointures['spip_documents'][]= 'documents_liens';
 $tables_jointures['spip_documents'][]= 'types_documents';
