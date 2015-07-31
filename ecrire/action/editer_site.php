@@ -222,7 +222,7 @@ function revisions_sites ($id_syndic, $c=false) {
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser le site en statut 'prop'.
 		if ($statut == 'publie') {
-			if (!autoriser('publierdans','rubrique',$id_parent, $id_auteur))
+			if (!autoriser('publierdans','rubrique',$id_parent))
 				$champs['statut'] = $statut = 'prop';
 		}
 	}
