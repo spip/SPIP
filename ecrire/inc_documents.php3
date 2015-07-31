@@ -40,7 +40,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		$id_type = $row['id_type'];
 		$titre = propre($row ['titre']);
 		$descriptif = propre($row['descriptif']);
-		$fichier = $row['fichier'];
+		$fichier = generer_url_document($id_document);
 		$largeur = $row['largeur'];
 		$hauteur = $row['hauteur'];
 		$taille = $row['taille'];
@@ -56,10 +56,6 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 		else $type = 'fichier';
 
-		// ajuster chemin d'acces au fichier
-		if ($GLOBALS['flag_ecrire']) {
-			if ($fichier) $fichier = "../$fichier";
-		}
 		// Pour RealVideo
 		if ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension))) {
 			$real = true;
@@ -151,7 +147,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$id_type = $row['id_type'];
 		$titre = typo($row['titre']);
 		$descriptif = propre($row['descriptif']);
-		$fichier = $row['fichier'];
+		$fichier = generer_url_document($id_document);
 		$largeur = $row['largeur'];
 		$hauteur = $row['hauteur'];
 		$taille = $row['taille'];
@@ -172,7 +168,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = spip_query($query_vignette);
 			if ($row_vignette = @spip_fetch_array($result_vignette)) {
-				$fichier_vignette = $row_vignette['fichier'];
+				$fichier_vignette = generer_url_document($id_vignette);
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
 			}
@@ -183,16 +179,14 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$hauteur_vignette = $hauteur;
 		}
 
-		// ajuster chemin d'acces au fichier
-		if ($GLOBALS['flag_ecrire']) {
-			if ($fichier) $fichier = "../$fichier";
-			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
-		}
-
 		// si pas de vignette, utiliser la vignette par defaut du type du document
 		if (!$fichier_vignette) {
 			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
 		}
+
+
+		if ($type_aff=='fichier_vignette')
+			return $fichier_vignette;
 
 		if ($fichier_vignette) {
 			$vignette = "<img src='$fichier_vignette' border=0";
@@ -282,9 +276,9 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 	}
 
 	if ($fichier_document)
-		return "<a href='../$fichier_document'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'></a>\n";
+		return "<a href='$fichier_document'><img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'></a>\n";
 	else
-		return "<img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'>\n";
+		return "<img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top'>\n";
 }
 
 
@@ -493,7 +487,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$id_type = $document->get('id_type');
 	$titre = $document->get('titre');
 	$descriptif = $document->get('descriptif');
-	$fichier = $document->get('fichier');
+	$fichier = generer_url_document($id_document);
 	$largeur = $document->get('largeur');
 	$hauteur = $document->get('hauteur');
 	$taille = $document->get('taille');
@@ -525,7 +519,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 		if ($id_vignette) $vignette = fetch_document($id_vignette);
 		if ($vignette) {
-			$fichier_vignette = $vignette->get('fichier');
+			$fichier_vignette = generer_url_document($id_vignette);
 			$largeur_vignette = $vignette->get('largeur');
 			$hauteur_vignette = $vignette->get('hauteur');
 			$taille_vignette = $vignette->get('taille');
@@ -563,7 +557,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$block = "doc_vignette $id_document";
 			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='../$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
+				echo "<a href='$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
 			}
 			echo "</div>\n";
 			echo "<font size='2'>\n";
@@ -610,7 +604,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo "$type_titre";
 		else 
 			echo "Document ".majuscules($type_extension);
-		echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
+		echo " : <a href='$fichier'>".taille_en_octets($taille)."</a>";
 
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
@@ -843,7 +837,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	$id_type = $document->get('id_type');
 	$titre = $document->get('titre');
 	$descriptif = $document->get('descriptif');
-	$fichier = $document->get('fichier');
+	$fichier = generer_url_document($id_document);
 	$largeur = $document->get('largeur');
 	$hauteur = $document->get('hauteur');
 	$taille = $document->get('taille');
@@ -879,7 +873,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 		if ($id_vignette) $vignette = fetch_document($id_vignette);
 		if ($vignette) {
-			$fichier_vignette = $vignette->get('fichier');
+			$fichier_vignette = generer_url_document($id_vignette);
 			$largeur_vignette = $vignette->get('largeur');
 			$hauteur_vignette = $vignette->get('hauteur');
 			$taille_vignette = $vignette->get('taille');
@@ -913,7 +907,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$block = "doc_vignette $id_document";
 			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='../$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
+				echo "<a href='$fichier'><img src='$icone' border=0 width='$largeur_icone' align='top' height='$hauteur_icone'></a>\n";
 			}
 			echo "</div>\n";
 			echo "<font size='2'>\n";
@@ -983,7 +977,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			} else {
 				echo "Document ".majuscules($type_extension);
 			}
-			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
+			echo " : <a href='$fichier'>".taille_en_octets($taille)."</a>";
 		}
 
 		$link = new Link($redirect_url);
