@@ -30,7 +30,7 @@ if ($test_dir)
 	$test_dirs[] = $test_dir;
 else {
 	if (!_FILE_CONNECT)
-	  $test_dirs[] = _DIR_RESTREINT;
+	  $test_dirs[] = basename(_FILE_CONNECT);
 }
 
 unset($bad_dirs);
@@ -93,9 +93,10 @@ if ($bad_dirs OR $absent_dirs) {
 	install_fin_html();
 
 } else {
-	redirige_par_entete(_FILE_CONNECT ? 
-			    "./ecrire/" : 
-			    "./ecrire/install.php3?etape=1");
+	if (!_FILE_CONNECT)
+		header("Location: ./ecrire/install.php3?etape=1");
+	else
+		header("Location: ./ecrire/");
 }
 
 ?>

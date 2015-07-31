@@ -414,18 +414,16 @@ echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 //
 function balise_LOGIN_PRIVE_dist($p) {
 	balise_distante_interdite($p);
-	$p->code = '("<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">")'; 
+	$p->code = '("<"."?php include(\'inc-login.php3\'); login((\$GLOBALS[\'var_url\'] ? \$GLOBALS[\'var_url\'] : \'' . _DIR_RESTREINT_ABS . '\'), \'prive\'); ?".">")'; 
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LOGIN_PUBLIC_dist($p) {
 	balise_distante_interdite($p);
-	if ($nom = $p->fonctions[0])
-	$lacible = "new Link('".$nom."')";
-	else
-	$lacible = '\$GLOBALS[\'clean_link\']';
-	$p->code = '("<"."?php include(\'inc-login.php3\'); login(' . $lacible . ', false); ?".">")';
+	$p->code = '("<"."?php include(\'inc-login.php3\'); login(\'' . 
+	    $p->fonctions[0]  .
+	    '\', false); ?".">")';
 	$p->fonctions = array();
 	$p->statut = 'php';
 	return $p;

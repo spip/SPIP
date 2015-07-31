@@ -16,11 +16,11 @@ else
 // Voir commentaires dans celui-ci et dans inc-forum
 
 $retour_forum = rawurldecode($retour);
-$forum_id_article = intval($forum_id_article);
-$forum_id_rubrique = intval($forum_id_rubrique);
-$forum_id_parent = intval($forum_id_parent);
-$forum_id_breve = intval($forum_id_breve);
-$forum_id_syndic = intval($forum_id_syndic);
+$forum_id_article = intval($id_article);
+$forum_id_rubrique = intval($id_rubrique);
+$forum_id_forum = intval($id_forum);
+$forum_id_breve = intval($id_breve);
+$forum_id_syndic = intval($id_syndic);
 $slash_texte = addslashes($texte);
 $slash_titre = addslashes($titre);
 $slash_nom_site_forum = addslashes($nom_site_forum);
@@ -93,7 +93,7 @@ $statut = ((!$validation_finale) ? 'redac' :
 if ($forum_id_forum > 0) $id_thread = $forum_id_forum;
 else $id_thread = $id_message;
 
-spip_query("UPDATE spip_forum SET id_parent = $forum_id_parent,
+spip_query("UPDATE spip_forum SET id_parent = $forum_id_forum,
 	id_rubrique =$forum_id_rubrique,
 	id_article = $forum_id_article,
 	id_breve = $forum_id_breve,
@@ -117,7 +117,7 @@ spip_query("UPDATE spip_forum SET id_parent = $forum_id_parent,
 if ($validation_finale) {
 	include_ecrire("inc_admin.php3");
 	if (!(verifier_action_auteur("ajout_forum $forum_id_rubrique".
-	" $forum_id_parent $forum_id_article $forum_id_breve".
+	" $forum_id_forum $forum_id_article $forum_id_breve".
 	" $forum_id_syndic $alea", $hash))) {
 		header("Status: 404");
 		exit;

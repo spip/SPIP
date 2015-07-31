@@ -111,6 +111,7 @@ else {
 		@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	else echo debut_entete($fond);
 		// Faudra-t-il post-traiter la page ?
+
 	define('spip_active_ob', $flag_ob AND
 		($var_debug OR $var_recherche OR $affiche_boutons_admin));
 
@@ -127,6 +128,7 @@ else {
 	else {
 
 			// Evaluer la page
+
 			if (!spip_active_ob) {
 				eval('?' . '>' . $page['texte']);
 				$contenu = '';

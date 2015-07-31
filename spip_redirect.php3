@@ -29,7 +29,7 @@ else if ($id_auteur) {
 	$url = generer_url_auteur($id_auteur);
 }
 else {
-	$url = 'ecrire/';
+	$url = _DIR_RESTREINT_ABS;
 }
 if (strpos($url,'?')) {
 	$super='&';

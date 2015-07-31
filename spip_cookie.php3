@@ -2,18 +2,6 @@
 
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session.php3");
-// determiner ou l'on veut retomber
-if ($url)
-	$cible = new Link($url);
-else
-	$cible = new Link('ecrire/');
-
-// cas particulier, logout dans l'espace public
-if ($logout_public) {
-    $logout = $logout_public;
-	if (!$url)
-		$url = 'index.php3';
-}
 
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
@@ -32,11 +20,18 @@ if ($change_session == 'oui') {
 		@header("Cache-Control: no-store, no-cache, must-revalidate");
 		@header('Pragma: no-cache');
 		@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		@readfile('ecrire/img_pack/rien.gif');
+		@readfile(_DIR_IMG_PACK . 'rien.gif');
 		exit;
 	}
 }
 
+// determiner ou l'on veut retomber
+spip_log("cook: $url");
+spip_log(rawurldecode($url));
+if ($url)
+	$cible = new Link($url);
+else
+	$cible = new Link(_DIR_RESTREINT_ABS);
 
 // tentative de connexion en auth_http
 if ($essai_auth_http AND !$ignore_auth_http) {
@@ -45,6 +40,12 @@ if ($essai_auth_http AND !$ignore_auth_http) {
 	exit;
 }
 
+// cas particulier, logout dans l'espace public
+if ($logout_public) {
+	$logout = $logout_public;
+	if (!$url)
+		$url = 'index.php3';
+}
 // tentative de logout
 if ($logout) {
 	include_ecrire("inc_session.php3");
@@ -65,21 +66,20 @@ if ($logout) {
 	redirige_par_entete($url ? $url : "spip_login.php3");
 }
 
-
 // en cas de login sur bonjour=oui, on tente de poser un cookie
 // puis de passer a spip_login qui diagnostiquera l'echec de cookie
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	$link = new Link("spip_login.php3?var_echec_cookie=oui");
-	$link->addVar("var_url", $cible->getUrl());
-	redirige_par_entete($link->getUrl());
+	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&var_url=" .
+			    ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS));
 }
 
 // Tentative de login
 unset ($cookie_session);
-
-
+$durl = rawurldecode($url);
+$redirect = (!$url ? _DIR_RESTREINT_ABS : (strpos($durl,"&retour=") ? ($url) : $url));
+#$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
 if ($essai_login == "oui") {
 	// Recuperer le login en champ hidden
 	if ($session_login_hidden AND !$session_login)
@@ -103,11 +103,9 @@ if ($essai_login == "oui") {
 			$ok = $auth->verifier_challenge_md5($login, $session_password_md5, $next_session_password_md5);
 			// Sinon essayer avec le mot de passe en clair
 			if (!$ok && $session_password) $ok = $auth->verifier($login, $session_password);
+			if ($ok)  { $auth->lire(); break; }
 		}
-		if ($ok) break;
 	}
-
-	if ($ok) $ok = $auth->lire();
 
 	if ($ok) {
 		$auth->activer();
@@ -120,27 +118,27 @@ if ($essai_login == "oui") {
 		if ($row_auteur = spip_fetch_array($result))
 			$cookie_session = creer_cookie_session($row_auteur);
 
-		if (ereg("ecrire/", $cible->getUrl())) {
-			$cible->addVar('bonjour','oui');
+		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
+		      $redirect .= (strpos($redirect, "?") ? "&" : "?") . 'bonjour=oui';
 		}
 	}
 	else {
-		if (ereg("ecrire/", $cible->getUrl())) {
-			$cible = new Link("spip_login.php3");
+		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
+			$redirect = "spip_login.php3";
 		}
-		$cible->addVar('var_login', $login);
+		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=$login";
 		if ($session_password || $session_password_md5)
-			$cible->addVar('var_erreur', 'pass');
-		$cible->addVar('var_url', urldecode($url));
+			$redirect .= '&var_erreur=pass';
+		$redirect .= '&var_url=' . $url;
 	}
-}
-
+ }
 
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
-	$cible->delVar('var_login');
-	$cible->addVar('var_login', '-1');
+	$redirect = ereg_replace("[?&]var_login=[^&]*", '', $redirect);
+	$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=-1";
+	spip_log("red $redirect");
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	spip_setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
@@ -165,8 +163,8 @@ if ($var_lang) {
 
 	if (changer_langue($var_lang)) {
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
-		$cible->delvar('lang');
-		$cible->addvar('lang', $var_lang);
+		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
+		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "lang=$var_lang";
 	}
 }
 
@@ -189,23 +187,24 @@ if ($var_lang_ecrire) {
 			}
 		}
 
-		$cible->delvar('lang');
-		$cible->addvar('lang', $var_lang_ecrire);
+		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
+		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "lang=$var_lang_ecrire";
 	}
 }
 
 // Redirection
 // Sous Apache, les cookies avec une redirection fonctionnent
 // Sinon, on fait un refresh HTTP
+
 if (ereg("^Apache", $SERVER_SOFTWARE)) {
-	redirige_par_entete($cible->getUrl());
+	redirige_par_entete($redirect);
 }
 else {
-	@header("Refresh: 0; url=" . $cible->getUrl());
+	@header("Refresh: 0; url=" . $redirect);
 	echo "<html><head>";
-	echo "<meta http-equiv='Refresh' content='0; url=".$cible->getUrl()."'>";
+	echo "<meta http-equiv='Refresh' content='0; url=".$redirect."'>";
 	echo "</head>\n";
-	echo "<body><a href='".$cible->getUrl()."'>"._T('navigateur_pas_redirige')."</a></body></html>";
+	echo "<body><a href='".$redirect."'>"._T('navigateur_pas_redirige')."</a></body></html>";
 }
 
 ?>
