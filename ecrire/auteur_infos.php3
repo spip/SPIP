@@ -151,6 +151,9 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 			spip_query("INSERT INTO spip_auteurs (nom) VALUES ('temp')");
 			$auteur['id_auteur'] = mysql_insert_id();
 			$id_auteur = $auteur['id_auteur'];
+
+			if (settype($ajouter_id_article,'integer') AND ($ajouter_id_article>0))
+				spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($id_auteur, $ajouter_id_article)");
 		}
 
 		$query = "UPDATE spip_auteurs SET $query_pass
@@ -174,6 +177,13 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	ecrire_acces();
 
 }
+
+// Redirection
+if (($redirect_ok == 'oui') AND ($redirect)) {
+	@Header("Location: ".rawurldecode($redirect));
+	exit; 
+}
+
 
 
 //
@@ -367,6 +377,10 @@ if ($statut == '0minirezo') {
 	}
 	fin_cadre_enfonce();
 }
+
+echo "<INPUT NAME='ajouter_id_article' VALUE='$ajouter_id_article' TYPE='hidden'>\n";
+echo "<INPUT NAME='redirect' VALUE='$redirect' TYPE='hidden'>\n";
+echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
 echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></DIV>";
 echo "</form>";

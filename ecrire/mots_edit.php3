@@ -26,13 +26,17 @@ if ($connect_statut == '0minirezo') {
 		$result = spip_query($query);
 	}
 
-	if ($titre) {
+	if ($titre_mot) {
 		if ($new == 'oui' && $id_groupe) {
 			spip_query("INSERT INTO spip_mots (id_groupe) VALUES ($id_groupe)");
 			$id_mot = mysql_insert_id();
+
+			// ajouter le mot a l'article
+			if (settype($ajouter_id_article, 'integer') AND ($ajouter_id_article>0))
+				spip_query("INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ($id_mot, $ajouter_id_article)");
 		}
 
-		$titre = addslashes($titre);
+		$titre_mot = addslashes($titre_mot);
 		$texte = addslashes($texte);
 		$descriptif = addslashes($descriptif);
 		$type = addslashes(corriger_caracteres($type));
@@ -40,7 +44,7 @@ if ($connect_statut == '0minirezo') {
 		if ($row = mysql_fetch_array($result))
 			$type = addslashes(corriger_caracteres($row['titre']));
 
-		$query = "UPDATE spip_mots SET titre=\"$titre\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe WHERE id_mot=$id_mot";
+		$query = "UPDATE spip_mots SET titre=\"$titre_mot\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe WHERE id_mot=$id_mot";
 		$result = spip_query($query);
 
 		if (lire_meta('activer_moteur') == 'oui') {
@@ -48,7 +52,7 @@ if ($connect_statut == '0minirezo') {
 		}
 	}
 	else if ($new == 'oui') {
-		$titre = 'Nouveau mot';
+		$titre_mot = 'Nouveau mot';
 	}
 }
 
@@ -68,14 +72,14 @@ $result = spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$id_mot = $row['id_mot'];
-	$titre = $row['titre'];
+	$titre_mot = $row['titre'];
 	$descriptif = $row['descriptif'];
 	$texte = $row['texte'];
 	$type = $row['type'];
 	$id_groupe = $row['id_groupe'];
 }
 
-debut_page("&laquo; $titre &raquo;", "documents", "mots");
+debut_page("&laquo; $titre_mot &raquo;", "documents", "mots");
 debut_gauche();
 
 
@@ -145,7 +149,7 @@ debut_cadre_relief("mot-cle-24.gif");
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td width='100%' valign='top'>";
-gros_titre($titre);
+gros_titre($titre_mot);
 
 
 if ($descriptif) {
@@ -205,20 +209,21 @@ if ($connect_statut =="0minirezo"){
 	echo "<FORM ACTION='mots_edit.php3' METHOD='post'>";
 	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 	if ($id_mot)
-		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE='$id_mot'>";
+		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE='$id_mot'>\n";
 	else if ($new=='oui')
-		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
-	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">";
-	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui'>";
+		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>\n";
+	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">\n";
+	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui'>\n";
+	echo "<INPUT TYPE='Hidden' NAME='ajouter_id_article' VALUE=\"$ajouter_id_article\">\n";
 
-	$titre = entites_html($titre);
+	$titre_mot = entites_html($titre_mot);
 	$descriptif = entites_html($descriptif);
 	$texte = entites_html($texte);
 
 	echo "<B>Nom ou titre du mot-cl&eacute;</B> [Obligatoire]";
 	echo aide ("mots");
 
-	echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'>";
+	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40'>";
 
 	// dans le groupe...
 	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
