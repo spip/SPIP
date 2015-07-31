@@ -146,7 +146,14 @@ function bouton_copier_local($document, $type, $id, $id_document, $script) {
 				  // afin de garder une homogeneite entre les differents boutons.
 			    "&id_document=$id_document&id=$id&type=$type");
 			    
+
+		// Hack ?
+		// demander confirmation javascript
+		$u = str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('copier_en_local'))));
+		$bouton_copier = str_replace('return AjaxSqueeze',
+			"return (!confirm('$u'))?false:AjaxSqueeze", $bouton_copier);
 	}
+
 	return $bouton_copier;
 }
 ?>
