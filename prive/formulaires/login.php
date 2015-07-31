@@ -24,6 +24,11 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	$erreur = _request('var_erreur');
 
 	if (!$login) $login = _request('var_login');
+	// si on est deja identifie
+	if (!$login AND isset($GLOBALS['visiteur_session']['login'])) {
+		$login = $GLOBALS['visiteur_session']['login'];
+	}
+	// ou si on a un cookie admin
 	if (!$login) {
 		if (isset($_COOKIE['spip_admin'])
 		AND preg_match(",^@(.*)$,", $_COOKIE['spip_admin'], $regs))
@@ -55,7 +60,9 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null)
 	if (is_null($prive) ? is_url_prive($cible) : $prive) {
 		include_spip('inc/autoriser');
 		$loge = autoriser('ecrire');
-	} else 	$loge = ($GLOBALS['visiteur_session']['auth'] != '');
+	} 
+	else
+		$loge = ($GLOBALS['visiteur_session']['auth'] != '');
 
 	// Si on est connecte, appeler traiter()
 	// et lancer la redirection si besoin
@@ -113,8 +120,13 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 				array('login' => htmlspecialchars($login))));
 	}
 
+	// appeler auth_identifier_login qui va :
+	// - renvoyer un string si echec (message d'erreur)
+	// - un array decrivant l'auteur identifie si possible
+	// - rediriger vers un SSO qui renverra in fine sur action/auth qui finira l'authentification
 	include_spip('inc/auth');
 	$auteur = auth_identifier_login($session_login, $session_password);
+	// on arrive ici si on ne s'est pas identifie avec un SSO
 	if (!is_array($auteur)) {
 		$erreurs = array();
 		if (is_string($auteur))
@@ -134,14 +146,8 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	// en gerant la duree demandee pour son cookie 
 	if ($session_remember !== NULL)
 		$auteur['cookie'] = $session_remember;
-	$session = charger_fonction('session', 'inc');
-	$session($auteur);
-	$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
-	$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
-	$p = array('prefs' => serialize($p));
-	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
-	//  bloquer ici le visiteur qui tente d'abuser de ses droits
-	verifier_visiteur();
+	auth_loger($auteur);
+
 	return (is_null($prive) ? is_url_prive($cible) : $prive)
 	?  login_autoriser() : array();
 }

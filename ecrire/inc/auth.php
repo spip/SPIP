@@ -295,6 +295,7 @@ function auth_trace($row, $date=null)
 	}
 }
 
+
 /** ----------------------------------------------------------------------------
  * API Authentification, gestion des identites centralisees
  */
@@ -337,6 +338,7 @@ function auth_formulaire_login($flux){
  * qui sera alors converti en login interne apres verification
  *
  * @param string $login
+ * @param string $serveur
  * @return string/bool
  */
 function auth_retrouver_login($login, $serveur=''){
@@ -364,6 +366,7 @@ function auth_retrouver_login($login, $serveur=''){
  * N'y aurait-il pas plus simple ?
  *
  * @param string $login
+ * @param string $serveur
  * @return array
  */
 function auth_informer_login($login, $serveur=''){
@@ -398,8 +401,7 @@ function auth_informer_login($login, $serveur=''){
  *
  * @param string $login
  * @param string $password
- * @param string $md5pass
- * @param string $md5next
+ * @param string $serveur
  * @return mixed
  */
 function auth_identifier_login($login, $password, $serveur=''){
@@ -420,10 +422,60 @@ function auth_identifier_login($login, $password, $serveur=''){
 }
 
 /**
+ * Fournir une url de retour apres login par un SSO
+ * pour finir l'authentification
+ *
+ * @param string $auth_methode
+ * @param string $login
+ * @param string $serveur
+ * @return string
+ */
+function auth_url_retour_login($auth_methode, $login, $redirect='', $serveur=''){
+	$securiser_action = charger_fonction('securiser_action','inc');
+	return $securiser_action('auth', "$auth_methode/$login", $redirect, true);
+}
+
+function auth_terminer_identifier_login($auth_methode, $login, $serveur=''){
+	$args = func_get_args();
+	$auteur = auth_administrer('terminer_identifier_login',$args);
+	return $auteur;
+}
+
+ /**
+  * Loger un auteur suite a son identification
+  *
+  * @param array $auteur
+  */
+ function auth_loger($auteur){
+	if (!is_array($auteur) OR !count($auteur))
+		return false;
+
+	$session = charger_fonction('session', 'inc');
+	$session($auteur);
+	$p = ($auteur['prefs']) ? unserialize($auteur['prefs']) : array();
+	$p['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
+	$p = array('prefs' => serialize($p));
+	sql_updateq('spip_auteurs', $p, "id_auteur=" . $auteur['id_auteur']);
+
+	// Si on est admin, poser le cookie de correspondance
+	if ($auteur['statut'] == '0minirezo') {
+		include_spip('inc/cookie');
+		spip_setcookie('spip_admin', '@'.$auteur['login'],
+		time() + 7 * 24 * 3600);
+	}
+
+	//  bloquer ici le visiteur qui tente d'abuser de ses droits
+	verifier_visiteur();
+	return true;
+}
+
+
+/**
  * Tester la possibilite de modifier le login d'authentification
  * pour la methode donnee
  *
  * @param string $auth_methode
+ * @param string $serveur
  * @return bool
  */
 function auth_autoriser_modifier_login($auth_methode, $serveur=''){
@@ -438,6 +490,7 @@ function auth_autoriser_modifier_login($auth_methode, $serveur=''){
  * @param string $auth_methode
  * @param string $new_login
  * @param int $id_auteur
+ * @param string $serveur
  * @return string
  *  message d'erreur ou chaine vide si pas d'erreur
  */
@@ -452,6 +505,7 @@ function auth_verifier_login($auth_methode, $new_login, $id_auteur=0, $serveur='
  * @param string $auth_methode
  * @param string $new_login
  * @param int $id_auteur
+ * @param string $serveur
  * @return bool
  */
 function auth_modifier_login($auth_methode, $new_login, $id_auteur, $serveur=''){
@@ -464,6 +518,7 @@ function auth_modifier_login($auth_methode, $new_login, $id_auteur, $serveur='')
  * pour la methode donnee
  *
  * @param string $auth_methode
+ * @param string $serveur
  * @return bool
  *	succes ou echec
  */
@@ -480,6 +535,7 @@ function auth_autoriser_modifier_pass($auth_methode, $serveur=''){
  * @param string $login
  * @param string $new_pass
  * @param int $id_auteur
+ * @param string $serveur
  * @return string
  *	message d'erreur ou chaine vide si pas d'erreur
  */
@@ -496,6 +552,7 @@ function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0, $ser
  * @param string $login
  * @param string $new_pass
  * @param int $id_auteur
+ * @param string $serveur
  * @return bool
  *	succes ou echec
  */
@@ -513,6 +570,7 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur, $serve
  * @param int $id_auteur
  * @param array $champs
  * @param array $options
+ * @param string $serveur
  * @return void
  */
 function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=array(), $options = array(), $serveur=''){
@@ -531,6 +589,13 @@ function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=arr
 }
 
 
+/**
+ *
+ * @param string $login
+ * @param string $pw
+ * @param string $serveur
+ * @return array
+ */
 function lire_php_auth($login, $pw, $serveur=''){
 	// en auth php, le login est forcement celui en base
 	// pas la peine de passer par la methode auth/xxx pour identifier le login
@@ -552,10 +617,16 @@ function lire_php_auth($login, $pw, $serveur=''){
 	return false;
 }
 
-//
-// entete php_auth (est-encore utilise ?)
-//
-// http://doc.spip.org/@ask_php_auth
+/**
+ * entete php_auth (est-encore utilise ?)
+ *
+ * @param <type> $pb
+ * @param <type> $raison
+ * @param <type> $retour
+ * @param <type> $url
+ * @param <type> $re
+ * @param <type> $lien
+ */
 function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
