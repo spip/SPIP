@@ -1239,12 +1239,21 @@ function traiter_poesie($letexte)
 // http://doc.spip.org/@autoliens_callback
 function autoliens_callback($r) {
 	if (strlen($l = $r[1])) {
-		if (preg_match(',^(http:/*),S', $l, $m))
+		// reperer le protocole
+		$protocol = 'http';
+		if (preg_match(',^((https?):/*),S', $l, $m)) {
 			$l = substr($l, strlen($m[1]));
+			$protocol = $m[2];
+		}
+		// valider le nom de domaine
 		if (preg_match(
-		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_])?\.)+[a-zA-Z]{2,6}\b/S', $l)) {
-			$l = inserer_attribut(expanser_liens('[->http://'.$l.']'),
-				'rel', 'nofollow');
+		'/^(?:[^\W_]((?:[^\W_]|-){0,61}[^\W_,])?\.)+[a-z]{2,6}\b/Si', $l)) {
+			// supprimer les ponctuations a la fin d'une URL
+			preg_match('/^(.*?)([,.;?])$/', $l, $k);
+			$l = inserer_attribut(
+				expanser_liens('[->'.$protocol.'://'.$k[1].']'),
+			'rel', 'nofollow')
+			.$k[2];
 			// si le texte ne contenait pas le 'http:' on le supprime aussi
 			if (!$m)
 				$l = str_replace('>http://', '>', $l);
@@ -1258,7 +1267,7 @@ function autoliens_callback($r) {
 // http://doc.spip.org/@traiter_raccourci_liens
 function traiter_raccourci_liens($texte) {
 	return preg_replace_callback(
-	';\[[^\[\]]*->.*?\]|<a\b.*?</a>|<[^<>]*>|(([a-z]{3,5}:|www\.)[^"\'\s\[\]\}\)<>]+);Si',
+	';\[[^\[\]]*->.*?\]|<a\b.*?</a>|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*);Si',
 	'autoliens_callback', $texte);
 	return $texte;
 }
