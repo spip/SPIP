@@ -519,6 +519,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 	return $set;
 }
 
+// http://doc.spip.org/@spip_pg_sequence
 function spip_pg_sequence($table, $desc)
 {
 	$prim = @$desc['key']['PRIMARY KEY'];
