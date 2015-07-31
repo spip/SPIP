@@ -250,7 +250,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <P>Post tio, vi povos',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas alireblaj skribe : 
 <ul>@bad_dirs@.</ul></b>
-<p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos',
+<p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos ',
 
 
 // E
@@ -656,7 +656,7 @@ Dankon pro via partopreno
 'info_erreur_restauration' => 'Eraro de &#349;ar&#285;o: neekzistanta dosiero.',
 'info_erreur_squelette' => '<NEW>Erreur sur le site',
 'info_erreur_squelette2' => '<NEW>Aucun squelette <b>@fichier@</b> n\'est disponible...',
-'info_erreur_systeme' => '<NEW>Erreur syst&egrave;me (errno @errsys@)',
+'info_erreur_systeme' => '<NEW>Erreur syst&egrave;me (errno @errsys@) ',
 'info_erreur_systeme2' => '<NEW><b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
 	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
 	ou contactez votre h&eacute;bergeur.</font><br></b>',
@@ -1405,7 +1405,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 			a&#365;tomatan riparadon.',
 'texte_creation_automatique_vignette' => 'La a&#365;tomata kreado de anta&#365;rigardaj vinjetoj estas aktivigita en tiu &#265;i teksejo. Se vi instalas pere de tiu &#265;i formularo bildojn en la formato(j) @gd_formats@, ili estos akompanataj de vinjeto de grandeco kun maksimume @taille_preview@&nbsp;bildpunktoj.',
 'texte_creer_rubrique' => 'Anta&#365; ol povi skribi artikolojn,<BR> vi devas krei rubrikon.',
-'texte_date_creation_article' => '<MODIF> ESTIGODATO DE LA ARTIKOLO',
+'texte_date_creation_article' => 'ESTIGODATO DE LA ARTIKOLO :',
 'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A PUBLIKIGO',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a publikigo.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO:',
