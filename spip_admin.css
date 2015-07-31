@@ -1,0 +1,49 @@
+/*
+ * Float ?
+ */
+.spip-admin-float {
+	bottom: 0px;
+	left: 0px;
+	position: fixed;
+}
+
+/*
+ * <ul><li>admin</li></ul>
+ */
+.spip-admin-bloc {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	background-color: transparent;
+	font-size: 10px;
+	z-index: 100;
+	color: #6C3;
+ /*	line-height: 3em; */
+}
+
+.spip-admin-bloc li {
+	padding: 0 2px;
+	display: inline;
+}
+
+.spip-admin-bloc ul {
+	display: inline;
+}
+
+a.spip-admin-boutons {
+	border-top: 1px solid #cecece;
+	border-bottom: 2px solid #4a4a4a;
+	border-left: 1px solid #cecece;
+	border-right: 1px solid #cecece;
+	text-decoration: none;
+	width: 3em;
+	text-align: center;
+	margin: 1em 0;
+	font-family: helvetica,arial,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	background-color: #fff;
+	color: #0c479d;
+}
+
+a:active.spip-admin-boutons {
+	background-color: #ccc;
+}

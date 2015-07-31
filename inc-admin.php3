@@ -11,12 +11,7 @@ define("_INC_ADMIN", "1");
 //
 
 function bouton_admin($titre, $lien) {
-	$link = new Link($lien);
-	$link->delVar('submit');
-	$ret = $link->getForm('GET');
-	$ret .= "<input type='submit' name='submit' value=\"".attribut_html($titre)."\" class='spip_bouton' />\n";
-	$ret .= "</form>";
-	return $ret;
+	return "<li><a href='$lien' class='spip-admin-boutons'>$titre</a></li>\n";
 }
 
 
@@ -28,27 +23,21 @@ function boutons_admin_debug () {
 		$link = $GLOBALS['clean_link'];
 		if ($link->getvar('var_afficher_debug') != 'page') {
 			$link->addvar('var_afficher_debug', 'page');
-			$ret .=  $link->getForm('GET');
-			$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_L('Debug cache'))."\" />";
-			$ret .= "</form>\n";
+			$ret .= bouton_admin(_L('Debug cache'), $link->getUrl());
 		}
 
 		$link = $GLOBALS['clean_link'];
 		if ($link->getvar('var_afficher_debug') != 'skel') {
 			$link->addvar('var_afficher_debug', 'skel');
 			$link->addvar('recalcul', 'oui');
-			$ret .=  $link->getForm('GET');
-			$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_L('Debug skel'))."\" />";
-			$ret .= "</form>\n";
+			$ret .= bouton_admin(_L('Debug skel'), $link->getUrl());
 		}
 
 		$link = $GLOBALS['clean_link'];
 		if ($link->getvar('var_afficher_debug') != '') {
 			$link->delvar('var_afficher_debug');
-			$link->addvar('recalcul', 'oui');
-			$ret .=  $link->getForm('GET');
-			$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('icone_retour'))."\" />";
-			$ret .= "</form>\n";
+			$link->delvar('recalcul');
+			$ret .= bouton_admin(_T('icone_retour'), $link->getUrl());
 		}
 	}
 	
@@ -68,8 +57,17 @@ function afficher_boutons_admin($pop) {
 	}
 	lang_select($lang);
 
+	// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
+	// puis celle du squelette (.spip-admin, cf. impression.css)
+	$ret .= "<link rel='stylesheet' href='spip_admin.css' type='text/css'>\n";
+	if (@file_exists('spip_admin_perso.css'))
+		$ret .= "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css'>\n";
+	$ret .= '<div class="spip-admin-float">
+	<div class="spip-admin-bloc" dir="'.lang_dir($lang,'ltr','rtl').'">
+	<div class="spip-admin">
+	<ul>';
+
 	// Bouton modifier
-	$ret = '<div class="spip-admin" dir="'.lang_dir($lang,'ltr','rtl').'">';
 	if ($id_article) {
 		$ret .= bouton_admin(_T('admin_modifier_article')." ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
@@ -89,9 +87,8 @@ function afficher_boutons_admin($pop) {
 	// Bouton Recalculer
 	$link = $GLOBALS['clean_link'];
 	$link->addVar('recalcul', 'oui');
-	$ret .=  $link->getForm('GET');
-	$ret .= "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\" />";
-	$ret .= "</form>\n";
+	$lien =  $link->getUrl();
+	$ret .= bouton_admin(_T('admin_recalculer').$pop, $lien);
 
 	// Bouton statistiques
 	if (lire_meta("activer_statistiques") != "non" AND $id_article
@@ -107,11 +104,26 @@ function afficher_boutons_admin($pop) {
 	// Boutons debug
 	$ret .= boutons_admin_debug();
 
-	$ret .= "</div>";
+	$ret .= "</ul></div></div></div>";
 
 	lang_dselect();
 
 	return $ret;
+}
+
+function page_debug($type,$texte,$fichier) {
+	@header('Content-Type: text/html; charset='.lire_meta('charset'));
+	echo "<html><head><title>Debug $type : $fichier</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<link rel='stylesheet' href='spip_admin.css' type='text/css'>\n";
+	if (@file_exists('spip_admin_perso.css')) echo "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css'>\n";
+	echo "</head><body>\n";
+	echo "<code>$fichier</code>\n";
+	echo '<div class="spip-admin-bloc">
+	<div class="spip-admin">';
+	echo boutons_admin_debug();
+	echo "</ul></div><hr />\n";
+	highlight_string($texte);
 }
 
 ?>

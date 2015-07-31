@@ -297,15 +297,17 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 	    // Optimisations si une au moins des 4 se'quences $*m  est vide
 
 	    if ($m) {
-	      // il faut achever le traitement de l'exp pre'ce'dente
+			$texte .= "\n\n\t\t# MILIEU\n";
+			// il faut achever le traitement de l'exp pre'ce'dente
 	      if ($exp) {
-		  $texte .= "\n\t\t\$t$niv " .
+		  $texte .= "\t\t\$t$niv " .
 		    (($firstset) ? "=" : ".=") .
 		    "$exp;$m" ;
 		  $firstset = false;
 		  $exp = "";
 	      } else { $texte .= $m;}
 	    }
+		$texte .= "\n\n\t\t# CODE\n";
 	    if (!($bm || $am || $om)) {
 	      // 3 se'quences vides: 'if' inutile
 	      $a = (($bc == "''") ?  "" : "$bc .") .

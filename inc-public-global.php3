@@ -218,11 +218,7 @@ function afficher_page_si_demande_admin ($type, $texte, $fichier){
 	AND $GLOBALS['var_afficher_debug'] == $type
 	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
 		include_local('inc-admin.php3');
-		@header('Content-Type: text/html; charset='.lire_meta('charset'));
-		echo "<code>$fichier</code>\n";
-		echo boutons_admin_debug();
-		echo "<hr />\n";
-		highlight_string($texte);
+		page_debug($type,$texte,$fichier);
 		exit;
 	}
 }
