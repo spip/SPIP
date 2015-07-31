@@ -320,6 +320,7 @@ function creer_base() {
 	$query = "CREATE TABLE spip_referers_temp (
 		ip INTEGER UNSIGNED NOT NULL,
 		referer VARCHAR(255) NOT NULL,
+		domaine VARCHAR(255) NOT NULL,
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
 		id_objet INTEGER UNSIGNED NOT NULL,
@@ -331,6 +332,7 @@ function creer_base() {
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
+		domaine VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
 		visites_jour INTEGER UNSIGNED NOT NULL,
 		maj TIMESTAMP,
@@ -342,6 +344,7 @@ function creer_base() {
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
+		domaine VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
 		maj TIMESTAMP,
 		PRIMARY KEY (id_article, referer_md5),
@@ -1350,6 +1353,46 @@ function maj_base() {
 		maj_version (1.709);
 	}
 
+	/* le bloc qui suit procede par etapes, car il risque de partir de timeout */
+	if ($version_installee < 1.710) {
+		set_time_limit(0);
+		spip_query("ALTER TABLE spip_referers ADD domaine varchar(255)");
+		spip_query("ALTER TABLE spip_referers_articles ADD domaine varchar(255)");
+		spip_query("UPDATE spip_referers SET domaine='-'");
+		spip_query("UPDATE spip_referers_articles SET domaine='-'");
+		spip_query("ALTER TABLE spip_referers_temp ADD domaine varchar(255);");
+		maj_version (1.710);
+	}
+	if ($version_installee < 1.711) {
+		set_time_limit(0);
+		spip_query("UPDATE spip_referers SET domaine = CONCAT(RIGHT(referer,LENGTH(referer) - locate('://',referer)-2), ' -') WHERE domaine = '-' AND referer LIKE '%://%'");
+		maj_version (1.711);
+	}
+	if ($version_installee < 1.712) {
+		set_time_limit(0);
+		spip_query("UPDATE spip_referers SET domaine = LEFT(domaine, locate('/',domaine)-1) WHERE domaine LIKE '%/% -'");
+		maj_version (1.712);
+	}
+	if ($version_installee < 1.713) {
+		set_time_limit(0);
+		spip_query("UPDATE spip_referers SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
+		maj_version (1.713);
+	}
+	if ($version_installee < 1.714) {
+		set_time_limit(0);
+		spip_query("UPDATE spip_referers_articles SET domaine = CONCAT(RIGHT(referer,LENGTH(referer) - locate('://',referer)-2), ' -') WHERE domaine = '-' AND referer LIKE '%://%'");
+		maj_version (1.714);
+	}
+	if ($version_installee < 1.715) {
+		set_time_limit(0);
+		spip_query("UPDATE spip_referers_articles SET domaine = LEFT(domaine, locate('/',domaine)-1) WHERE domaine LIKE '%/% -'");
+		maj_version (1.715);
+	}
+	if ($version_installee < 1.716) {
+		set_time_limit(0);
+		spip_query("UPDATE spip_referers_articles SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
+		maj_version (1.716);
+	}
 }
 
 ?>

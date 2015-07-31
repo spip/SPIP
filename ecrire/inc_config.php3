@@ -51,7 +51,7 @@ function init_config() {
 
 		'activer_moteur' => 'non',
 		'activer_statistiques' => 'oui',
-		'activer_statistiques_ref' => 'non',
+		'activer_statistiques_ref' => 'oui',
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',

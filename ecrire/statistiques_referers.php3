@@ -45,22 +45,26 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 echo "<ul>";
 // Recuperer les donnees du log
 $date = date("Y-m-d");
-$query = "SELECT referer, visites_jour FROM spip_referers ".
-	"WHERE visites_jour > 0 ".
-	"GROUP BY referer_md5 ORDER BY visites_jour DESC, referer LIMIT 0,800";
+
+// $query = "SELECT referer, visites_jour FROM spip_referers WHERE visites_jour > 0 GROUP BY referer_md5 ORDER BY visites_jour DESC, referer LIMIT 0,800";
+$query = "SELECT domaine, SUM(visites_jour) AS visites_jour, COUNT(*) AS compte FROM spip_referers WHERE (visites_jour > 0) AND (domaine != '') GROUP BY domaine ORDER BY visites_jour DESC LIMIT 0,200";
 $result = spip_query($query);
 
 while ($row = @spip_fetch_array($result)) {
-	$referer = $row['referer'];
+	$domaine = $row['domaine'];
 	$count = $row['visites_jour'];
 
-	echo "\n<li>";
+	echo "\n<li><b>$domaine</b> - ";
 	if ($count > 5) echo "<font color='red'>$count "._T('info_visites')." </font>";
 	else if ($count > 1) echo "$count "._T('info_visites')." ";
 	else echo "<font color='#999999'>$count "._T('info_visite')." </font>";
 
-	echo stats_show_keywords($referer, $referer);
-	echo "</li>\n";
+	$refs = spip_query("SELECT referer, visites_jour FROM spip_referers WHERE domaine = '$domaine' AND (visites_jour > 0) ORDER BY visites_jour DESC LIMIT 0,30");
+	while ($row_ref = spip_fetch_array($refs)) {
+		$referer = $row_ref['referer'];
+		echo "<br />".stats_show_keywords($referer, $referer);
+	}
+	echo "</li><hr />\n";
 }
 
 if (spip_num_rows($result) == 800)
