@@ -67,7 +67,8 @@ function balise_URL__dist($p) {
 
 	$nom = $p->nom_champ;
 	if ($nom === 'URL_') {
-		erreur_squelette(_T('zbug_info_erreur_squelette'), $p);
+		$msg = array('zbug_balise_sans_argument', array('balise' => ' URL_'));
+		erreur_squelette($msg, $p);
 		$p->interdire_scripts = false;
 		return $p;
 	} elseif ($f = charger_fonction($nom, 'balise', true)) {
