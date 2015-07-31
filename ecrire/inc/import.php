@@ -298,9 +298,9 @@ function affiche_progression_javascript($abs_pos,$size, $table="") {
 	if ($abs_pos == '100 %') {
 
 		if ($x = $GLOBALS['erreur_restauration'])
-			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('avis_erreur'))).": $x ';\n";
+			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('avis_erreur')))).": $x ';\n";
 		else
-			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(_T('info_fini')))."';\n";
+			echo "document.progression.recharge.value='".str_replace("'", "\\'", unicode_to_javascript(html2unicode(_T('info_fini'))))."';\n";
 		echo "document.progression.taille.value='$abs_pos';\n";
 		echo "window.setTimeout('location.href=\"".self()."\";',0);";
 	}
