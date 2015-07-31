@@ -1693,7 +1693,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 			if ($dico) {
 				// le hex est indispensable : apparemment bug de mysql
 				// sur output decimal 64 bits (a cause du unsigned ?)
-				$query2 = "SELECT HEX(hash) hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
+				$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 				$result2 = spip_query($query2);
 				while ($row2 = mysql_fetch_array($result2)) {
 					$h[] = "0x".$row2["hx"];
