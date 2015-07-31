@@ -41,14 +41,18 @@ function install_bases(){
 	// pour notre bien), on va tolerer les chiffres en plus des minuscules
 	// S'il n'est pas defini par mes_options/inc/mutualiser, on va le creer
 	// a partir de ce qui est envoye a l'installation
-	$table_prefix = ($GLOBALS['table_prefix'] != 'spip')
+	if (!defined('_INSTALL_TABLE_PREFIX')) {
+		$table_prefix = ($GLOBALS['table_prefix'] != 'spip')
 		? $GLOBALS['table_prefix']
 		: trim(preg_replace(',[^a-z0-9],','',strtolower(_request('tprefix'))));
-	// S'il est vide on remet spip
-	if (!$table_prefix)
-		$table_prefix = 'spip';
-	// Et si ce n'est pas spip, on le stocke dans le config/connect.php
-	$rappel_prefix = ($table_prefix != 'spip');
+		// S'il est vide on remet spip
+		if (!$table_prefix)
+			$table_prefix = 'spip';
+		// Et si ce n'est pas spip, on le stocke dans le config/connect.php
+		$rappel_prefix = ($table_prefix != 'spip');
+	} else {
+		$table_prefix = _INSTALL_TABLE_PREFIX;
+	}
 	// Enfin on l'installe pour notre connexion sur ce hit
 	$GLOBALS['table_prefix'] = $table_prefix;
 
