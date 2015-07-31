@@ -907,7 +907,6 @@ prive/transmettre/signatures_article.html -text
 prive/xhtml-lat1.ent -text
 prive/xhtml-special.ent -text
 prive/xhtml-symbol.ent -text
-/rien.gif -text
 /spip.php -text
 /spip.png -text
 tmp/remove.txt -text
