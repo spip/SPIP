@@ -45,6 +45,7 @@ function objet_associable($objet){
  * $objets_source et $objets_lies sont de la forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ * ou de la forme array("NOT",$id_objets) pour une selection par exclusion
  *
  * Les objets sources sont les pivots qui portent les liens
  * et pour lesquels une table spip_xxx_liens existe
@@ -240,7 +241,14 @@ function objet_traiter_liaisons($operation,$objets_source,$objets_lies, $set = n
 	foreach($objets_source as $objet=>$ids){
 		if ($a = objet_associable($objet)) {
 			list($primary,$l) = $a;
-			if (!is_array($ids)) $ids = array($ids);
+			if (!is_array($ids))
+				$ids = array($ids);
+			elseif(reset($ids)=="NOT"){
+				// si on demande un array('NOT',...) => recuperer la liste d'ids correspondants
+				$where = lien_where($primary,$ids,'*','*');
+				$ids = sql_allfetsel($primary,$l,$where);
+				$ids = array_map('reset',$ids);
+			}
 			foreach($ids as $id) {
 				$res = $operation($objet,$primary,$l,$id,$objets_lies,$set);
 				if ($res===false) {
@@ -347,13 +355,29 @@ function lien_where($primary, $id_source, $objet, $id_objet){
 	  OR (!is_array($id_objet) AND !strlen($id_objet)))
 		return array("0=1"); // securite
 
+	$not="";
+	if (is_array($id_source) AND reset($id_source)=="NOT"){
+		$not = array_shift($id_source);
+		$id_source = reset($id_source);
+	}
 	$where = array();
 	if ($id_source!=='*')
-		$where[] = (is_array($id_source)?sql_in(addslashes($primary),array_map('intval',$id_source)):addslashes($primary) . "=" . intval($id_source));
+		$where[] = (is_array($id_source)?sql_in(addslashes($primary),array_map('intval',$id_source),$not):addslashes($primary) . ($not?"<>":"=") . intval($id_source));
+	elseif ($not)
+		$where[] = "0=1"; // idiot mais quand meme
+
+	$not="";
+	if (is_array($id_objet) AND reset($id_objet)=="NOT"){
+		$not = array_shift($id_objet);
+		$id_objet = reset($id_objet);
+	}
+
 	if ($objet!=='*')
 		$where[] = "objet=".sql_quote($objet);
 	if ($id_objet!=='*')
-		$where[] = (is_array($id_objet)?sql_in('id_objet',array_map('intval',$id_objet)):"id_objet=".intval($id_objet));
+		$where[] = (is_array($id_objet)?sql_in('id_objet',array_map('intval',$id_objet),$not):"id_objet" . ($not?"<>":"=") . intval($id_objet));
+	elseif ($not)
+		$where[] = "0=1"; // idiot mais quand meme
 
 	return $where;
 }
@@ -380,7 +404,7 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 	$echec = false;
 	foreach($objets as $objet => $id_objets){
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
-		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		if (!is_array($id_objets) OR reset($id_objets)=="NOT") $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			// id_objet peut valoir '*'
 			$where = lien_where($primary, $id, $objet, $id_objet);
@@ -460,7 +484,7 @@ function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
 	$dels = 0;
 	foreach($objets as $objet => $id_objets){
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
-		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		if (!is_array($id_objets) OR reset($id_objets)=="NOT") $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
 			# les liens vers un objet inexistant
@@ -533,7 +557,7 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	unset($qualif['id_objet']);
 	foreach($objets as $objet => $id_objets){
 		$objet = ($objet=='*')?$objet:objet_type($objet); # securite
-		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		if (!is_array($id_objets) OR reset($id_objets)=="NOT") $id_objets = array($id_objets);
 		foreach($id_objets as $id_objet) {
 			$where = lien_where($primary, $id, $objet, $id_objet);
 			$e = sql_updateq($table_lien,$qualif,$where);
