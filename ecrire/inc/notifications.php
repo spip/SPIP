@@ -13,42 +13,36 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// Fonctione appelee par divers pipelines
+// La fonction de notification de base, qui dispatche le travail
+function inc_notifications_dist($quoi, $id=0, $options=array()) {
+	if (function_exists($f = 'notifications_'.$quoi)
+	OR function_exists($f = $f.'_dist')) {
+		spip_log("$f($quoi,$id"
+			.($options?",".serialize($options):"")
+			.")");
+		$f($quoi, $id, $options);
+	}
+}
+
+// Fonction appelee par divers pipelines
 // http://doc.spip.org/@notifications
-function notifications($pipeline, $x) {
+function notifications_instituerarticle($quoi, $id_article, $options) {
 
-	// En cas de changement de statut d'article vers 'publie' ou 'prop',
-	// envoyer un mail
-	if ($pipeline == 'post_edition'
-	AND $x['args']['table'] == 'spip_articles'
-	AND isset($x['data']['statut'])
-	AND (
-		$x['data']['statut'] == 'publie'
-		OR $x['data']['statut'] == 'prop')
-	) {
-
-		$id_article = $x['args']['id_objet'];
-		$statut = $x['data']['statut'];
-		$statut_ancien = $x['data']['statut_ancien'];
-
-		// ne devrait jamais se produire
-		if ($statut == $statut_ancien) {
-			spip_log("statut inchange");
-			return $x;
-		}
-
-		include_spip('inc/lang');
-		include_spip('inc/texte');
-		include_spip('inc/mail');
-
-		if ($statut == 'publie')
-			envoyer_mail_publication($id_article);
-
-		if ($statut == 'prop' AND $statut_ancien != 'publie')
-			envoyer_mail_proposition($id_article);
+	// ne devrait jamais se produire
+	if ($options['statut'] == $options['statut_ancien']) {
+		spip_log("statut inchange");
+		return;
 	}
 
-	return $x;
+	include_spip('inc/lang');
+	include_spip('inc/texte');
+	include_spip('inc/mail');
+
+	if ($options['statut'] == 'publie')
+		notifier_publication_article($id_article);
+
+	if ($options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
+		notifier_proposition_article($id_article);
 }
 
 
@@ -79,8 +73,8 @@ function extrait_article($row) {
 }
 
 
-// http://doc.spip.org/@envoyer_mail_publication
-function envoyer_mail_publication($id_article) {
+// http://doc.spip.org/@notifier_publication_article
+function notifier_publication_article($id_article) {
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
@@ -118,8 +112,8 @@ function envoyer_mail_publication($id_article) {
 	}
 }
 
-// http://doc.spip.org/@envoyer_mail_proposition
-function envoyer_mail_proposition($id_article) {
+// http://doc.spip.org/@notifier_proposition_article
+function notifier_proposition_article($id_article) {
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
 	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
@@ -153,5 +147,125 @@ function envoyer_mail_proposition($id_article) {
 	}
 }
 
+function email_notification_forum ($t, $email) {
+
+	// Rechercher la langue du destinataire
+	if ($l = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE email=" . _q($email))))
+		lang_select($l['lang']);
+
+
+	charger_generer_url();
+
+	if ($t['statut'] == 'prop') # forum modere
+		$url = generer_url_ecrire('controle_forum', "debut_id_forum=".$t['id_forum']);
+	else if (function_exists('generer_url_forum'))
+		$url = generer_url_forum($t['id_forum']);
+	else {
+		spip_log('inc-urls personnalise : ajoutez generer_url_forum() !');
+		if ($t['id_article'])
+			$url = generer_url_article($t['id_article']);
+		else
+			$url = './';
+	}
+
+	$sujet = "[" .
+	  entites_html(textebrut(typo($GLOBALS['meta']["nom_site"]))) .
+	  "] ["._T('forum_forum')."] ".typo($t['titre']);
+
+	$parauteur = (strlen($t['auteur']) <= 2) ? '' :
+	  (" " ._T('forum_par_auteur', array('auteur' => $t['auteur'])) . 
+	   ($t['email_auteur'] ? ' <' . $t['email_auteur'] . '>' : ''));
+
+	$corps = _T('form_forum_message_auto') .
+		"\n\n" .
+		_T('forum_poste_par', array('parauteur' => $parauteur)).
+		"\n"
+		. _T('forum_ne_repondez_pas')
+		. "\n"
+		. url_absolue($url)
+		. "\n\n\n".textebrut(typo($t['titre']))
+		."\n\n".textebrut(propre($t['texte']))
+		. "\n\n".$t['nom_site']."\n".$t['url_site']."\n";
+
+	if ($l)
+		lang_dselect();
+
+	return array('subject' => $sujet, 'body' => $corps);
+}
+
+function notifications_forumposte_dist($quoi, $id_forum) {
+	$s = spip_query("SELECT * FROM spip_forum WHERE id_forum="._q($id_forum));
+	if (!$t = spip_fetch_array($s))
+		return;
+
+	include_spip('inc/texte');
+	include_spip('inc/filtres');
+	include_spip('inc/mail');
+
+
+	// Qui va-t-on prevenir ?
+	$tous = array();
+
+	// 1. Les auteurs de l'article ?
+	if ($GLOBALS['meta']['prevenir_auteurs'] == 'oui') {
+		$result = spip_query("SELECT auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article="._q($t['id_article'])." AND auteurs.id_auteur=lien.id_auteur");
+
+		while ($r = spip_fetch_array($result))
+			$tous[] = $r['email'];
+	}
+
+	// 2. Tous les participants a ce *thread* (desactive pour l'instant,
+	// et ne fonctionne que pour les forums moderes a posteriori)
+	// TODO: proposer une case a cocher ou un lien dans le message
+	// pour se retirer d'un troll (hack: replacer @ par % dans l'email)
+	if (defined('_SUIVI_FORUM_THREAD')
+	AND _SUIVI_FORUM_THREAD
+	AND $t['statut'] == 'publie') {
+		$s = spip_query("SELECT DISTINCT(email_auteur) FROM spip_forum WHERE id_thread=".$t['id_thread']." AND email_auteur != ''");
+		while ($r = spip_fetch_array($s))
+			$tous[] = $r['email_auteur'];
+	}
+
+	// 3. Tous les auteurs des messages qui precedent (desactive egalement)
+	// (possibilite exclusive de la possibilite precedente)
+	// TODO: est-ce utile, par rapport au thread ?
+	else if (defined('_SUIVI_FORUMS_REPONSES')
+	AND _SUIVI_FORUMS_REPONSES
+	AND $t['statut'] == 'publie') {
+		$id_parent = $id_forum;
+		while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
+			$tous[] = $r['email_auteur'];
+			$id_parent = $r['id_parent'];
+		}
+	}
+
+	// 4. Les moderateurs definis par mes_options
+	// TODO: a passer en meta
+	// define('_MODERATEURS_FORUM', 'email1,email2,email3');
+	if (defined('_MODERATEURS_FORUM'))
+	foreach (explode(',', _SPIP_MODERATEURS_FORUM) as $m) {
+		$tous[] = $m;
+	}
+
+
+	// Nettoyer le tableau
+	// Ne pas ecrire au posteur du message !
+	$destinataires = array();
+	foreach ($tous as $m) {
+		if ($m = email_valide($m)
+		AND $m != trim($t['email_auteur']))
+			$destinataires[$m]++;
+	}
+
+	//
+	// Envoyer les emails
+	//
+	// TODO: changer le corps selon le statut (auteur de l'article, moderateur, etc)
+	foreach (array_keys($destinataires) as $email) {
+		$msg = email_notification_forum($t, $email);
+		envoyer_mail($email, $msg['subject'], $msg['body']);
+	}
+
+}
 
 ?>
