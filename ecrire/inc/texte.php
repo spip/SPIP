@@ -414,6 +414,7 @@ function safehtml($t) {
 			define('XML_HTMLSAX3', dirname($f).'/');
 			include($f);
 			$process = new safehtml();
+			$process->deleteTags[] = 'param'; // sinon bug Firefox
 		} else die('pas de safe');
 		if ($process)
 			$test = 1; # ok
