@@ -40,12 +40,16 @@ function auth_http($url, $essai_auth_http) {
 function login($cible, $prive = 'prive') {
 
 	global $auteur_session;
-
-	$cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
-	$cible = ereg_replace("[?&]var_url[^&]*", '', $cible);
-
 	global $clean_link;
+
 	$clean_link->delVar('var_erreur');
+
+	if (!$cible)
+	  $cible = $clean_link;
+	else
+	  $cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
+
+	$cible = ereg_replace("[?&]var_url[^&]*", '', $cible);
 	$clean_link->delVar('var_login');
 	$action = urldecode($clean_link->getUrl());
 
