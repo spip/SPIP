@@ -23,10 +23,10 @@ function message_oubli($email, $param)
 {
 	$r = formulaires_oubli_mail($email);
 	if (is_array($r) AND $r[1]) {
-		include_spip('inc/acces'); # pour creer_uniqid
 		include_spip('inc/texte'); # pour corriger_typo
-		$cookie = creer_uniqid();
-		sql_updateq("spip_auteurs", array("cookie_oubli" => $cookie), "id_auteur=" . $r[1]['id_auteur']);
+
+		include_spip('action/inscrire_auteur');
+		$cookie = auteur_attribuer_jeton($r[1]['id_auteur']);
 
 		$nom = textebrut(corriger_typo($GLOBALS['meta']["nom_site"]));
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');

@@ -11,6 +11,8 @@
 
 <:form_forum_bonjour{nom=#ENV{nom}}:>
 
+<:form_forum_confirmer_email{url_confirm=#ENV{url_confirm}}:>
+
 #SET{url_site,#URL_SITE_SPIP/}
 [(#ENV{mode}|=={6forum}|oui)
 #SET{url_login,#URL_PAGE{login}}

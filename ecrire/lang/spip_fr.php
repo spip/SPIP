@@ -251,6 +251,7 @@ sera ignorée) :
 'form_email_non_valide' => 'Votre adresse email n\'est pas valide.',
 'form_forum_access_refuse' => 'Vous n\'avez plus accès à ce site.',
 'form_forum_bonjour' => 'Bonjour @nom@,',
+'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@',
 'form_forum_email_deja_enregistre' => 'Cette adresse e-mail est déjà enregistrée, vous pouvez donc utiliser votre mot de passe habituel.',
 'form_forum_identifiant_mail' => 'Votre nouvel identifiant vient de vous être envoyé par email.',
 'form_forum_identifiants' => 'Identifiants personnels',
