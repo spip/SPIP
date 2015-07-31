@@ -24,11 +24,11 @@
 
 			<div class="cartouche">
 				[(#LOGO_AUTEUR||image_reduire{200,200})]
-				<h1 class="titre #EDIT{qui}">#NOM</h1>
-				[<p class="soustitre #EDIT{hyperlien}"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+				<h1 class="#EDIT{qui} titre">#NOM</h1>
+				[<p class="#EDIT{hyperlien} soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 			</div>
 
-			[<div class="texte #EDIT{bio}">(#BIO)</div><br />]
+			[<div class="#EDIT{bio} texte">(#BIO)</div><br />]
 
 			<br class="nettoyeur" />
 
