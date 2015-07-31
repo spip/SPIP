@@ -315,8 +315,7 @@ function f_tidy ($texte) {
 	AND (_request('var_fragment') === NULL)
 	AND !headers_sent()) {
 		# Compatibilite ascendante
-		if ($xhtml === true) $xhtml ='tidy';
-		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
+		if (!is_string($xhtml)) $xhtml ='tidy';
 
 		if ($f = charger_fonction($xhtml, 'inc'))
 			$texte = $f($texte);

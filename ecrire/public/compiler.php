@@ -447,7 +447,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	  return
 		(($n==1) ? $codes[0] : 
 			 "(" . join (" .\n$tab", $codes) . ")");
-	else return "debug_sequence('$id_boucle', '" .
+	else return "@debug_sequence('$id_boucle', '" .
 	  ($descr['nom']) .
 	  "', " .
 	  $descr['niv'] .

@@ -107,7 +107,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		)
 	) ? parametre_url(self(),'var_mode', 'debug', '&'): '';
 	$analyser = !$xhtml ? "" :
-		(($xhtml === 'spip_sax') ?
+		(($xhtml === 'sax') ?
 		(parametre_url(self(), 'var_mode', 'debug', '&')
 			.'&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
