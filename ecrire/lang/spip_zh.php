@@ -60,7 +60,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'barre_lien' => '转为超文本链接[http://...]',
 'barre_lien_input' => '请输入目标链接(您可以使用 http://www.mysite.com的格式或直接指出在本站中该文章的编号).',
 'barre_note' => '转为[[页尾标号]]',
-'barre_paragraphe' => '<modif>新建段落', # MODIF
+'barre_paragraphe' => '新建段落', # MODIF
 'barre_quote' => '<quote>引用一个消息</quote>',
 'bouton_changer' => '修改',
 'bouton_chercher' => '搜索',
@@ -85,10 +85,10 @@ Zhen QIN (zhen_q@21cn.com)',
 'cal_par_mois' => '按月显示日程',
 'cal_par_semaine' => '按周显示日程',
 'choix_couleur_interface' => '颜色',
-'choix_interface' => '<modif>界面切换', # MODIF
+'choix_interface' => '界面切换', # MODIF
 'colonne' => '列',
 'confirm_changer_statut' => '注意，您要求改变这一项目的状态。请确认继续。',
-'correcte' => '<modif>生效', # MODIF
+'correcte' => '生效', # MODIF
 
 // D
 'date_aujourdhui' => '今天',
@@ -151,10 +151,10 @@ Zhen QIN (zhen_q@21cn.com)',
 'date_jnum8' => '8',
 'date_jnum9' => '9',
 'date_jour_1' => '星期日',
-'date_jour_1_abbr' => '<modif>周日', # MODIF
+'date_jour_1_abbr' => '周日', # MODIF
 'date_jour_1_initiale' => '星期天',
 'date_jour_2' => '星期一',
-'date_jour_2_abbr' => '<modif>星期一', # MODIF
+'date_jour_2_abbr' => '星期一', # MODIF
 'date_jour_2_initiale' => 'l.',
 'date_jour_3' => '星期二',
 'date_jour_3_abbr' => '星期二',
@@ -664,7 +664,7 @@ sera ignorée) :
 'titre_mots_cles' => '关键词',
 'titre_probleme_technique' => '警告:技术问题 MYSQL 制止访问站点的这部分,谢谢理解 .', # MODIF
 'titre_publier_document' => '在此栏下发布文档',
-'titre_signatures_attente' => '<modif>签名等待认证', # MODIF
+'titre_signatures_attente' => '签名等待认证', # MODIF
 'titre_signatures_confirmees' => 'Signatures confirmées', # NEW
 'titre_statistiques' => '站点统计',
 'titre_titre_document' => '文章标题:',
