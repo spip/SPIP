@@ -13,6 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('public/decompiler');
+include_spip('inc/filtres_mini');
 
 // Le debusqueur repose sur la globale debug_objets,
 // affectee par le compilateur et le code produit par celui-ci.

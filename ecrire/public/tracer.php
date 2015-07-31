@@ -38,6 +38,7 @@ function trace_query_end($query, $start, $result, $erreur, $serveur=''){
 // http://doc.spip.org/@trace_query_chrono
 function trace_query_chrono($m1, $m2, $query, $result, $serveur='')
 {
+	include_spip('inc/filtres_mini');
 	static $tt = 0, $nb=0;
 	global $tableau_des_temps;
 
