@@ -699,16 +699,13 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
 	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
 	# porter un nom et faire partie de l'API.
-	if ($filtres = $p->param) {
-		$retour = array_shift($filtres);
-		if  (!array_shift($retour)) {
-		  $p->fonctions = $a;
-		  array_shift( $p->param );
+	if ($p->param && !$p->param[0][0]) {
+		  $retour = array_shift( $p->param );
+		  array_shift($retour);
 		  $retour = calculer_liste($retour[0],
 					   $p->descr,
 					   $p->boucles,
 					   $p->id_boucle);
-		}
 	}
 	else
 		$retour = "''";
