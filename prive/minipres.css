@@ -1,11 +1,13 @@
 /* Correction des styles par defaut
 ---------------------------------------------- */
 html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font: .9em sans-serif; color: #2e3436; }
+body { font: .9em/20px sans-serif; color: #222; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
-h1 { margin: 1em auto; font-size: 1.2em; font-weight: bold; color: #5c3566; text-align: center; }
-h2 { margin: 0.80em 0 0.80em 0; font-size: 1.1em; font-weight: normal; }
+h1 { margin: 0 auto 20px auto; font-size: 1.2em; font-weight: bold; color: #5c3566; text-align: center; }
+h2 { margin: 0 0 20px 0; font-size: 1.1em; font-weight: normal; }
+h3.spip { margin: 0 auto 20px auto; font-size: 1em; font-weight: bold; }
+p { margin: 0 0 20px 0; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
 ul,ol,li { list-style: none; }
@@ -13,7 +15,7 @@ ul,ol,li { list-style: none; }
 
 /* Disposition a l'ecran
 ---------------------------------------------- */
-body { background: #EEE url(images/background.gif) repeat; }
+body { background: #EEE url(images/background.gif) repeat fixed; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 0; font-size: 0; }
@@ -30,7 +32,9 @@ label {}
 
 body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; padding: 1em; }
 
-#minipres { width: 38em; background: #fff repeat; margin: 1em auto; padding: 1em; border: 1px solid #888; }
+#minipres { width: 40em; background: #fff repeat; margin: 20px auto; padding: 20px; border: 1px solid #EEE;
+-webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px;
+-webkit-box-shadow: 0 0 20px #666; -moz-box-shadow: 0 0 20px #666; box-shadow: 0 0 20px #666; }
 
 .pass #minipres { width: 90%; }
 
@@ -79,11 +83,11 @@ body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; paddi
 
 .formulaire_spip { background: none; border: none; margin: 0; padding: 0; }
 .formulaire_spip .boutons {text-align: right;}
-.formulaire_spip fieldset { margin: 0; padding: 0; border: 1px solid #babdb6; padding: 1em; font-size: 1em; }
+.formulaire_spip fieldset { margin: 0; padding: 20px; border: 1px solid #babdb6; font-size: 1em; }
 .formulaire_spip fieldset ul {margin: 0; padding: 0; list-style: none; }
 .formulaire_spip fieldset ul li label,
 .formulaire_spip fieldset ul li .erreur_message,
-.formulaire_spip fieldset ul li .details { display: block; width: auto; }
+.formulaire_spip fieldset ul li .details { display: block; width: auto; margin: 0; }
 
 /* Page de login
 ---------------------------------------------- */
@@ -99,7 +103,7 @@ body.minipres fieldset, body.minipres .fieldset  { border: 1px solid #ccc; paddi
 .page_login .formulaire_login fieldset ul li { margin: 0; padding: 0.50em 0; }
 .page_login .formulaire_login fieldset ul li input.text,
 .page_login .formulaire_login fieldset ul li input.password { width: 11em; margin: 0; display: inline; }
-.page_login .retour { clear: both; text-align: center; font-size: .9em; }
+.page_login .retour { clear: both; margin: 0; text-align: center; font-size: .9em; }
 
 
 /* Oublie du mot de passe
