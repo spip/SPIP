@@ -93,6 +93,7 @@ function liste_metas()
 // mets les meta a des valeurs conventionnelles quand elles sont vides
 // et recalcule les langues
 
+// http://doc.spip.org/@actualise_metas
 function actualise_metas($liste_meta)
 {
 	while (list($nom, $valeur) = each($liste_meta)) {
