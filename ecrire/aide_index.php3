@@ -36,6 +36,7 @@ function help_frame ($aide) {
 	global $spip_lang;
 
 	echo "</head>\n";
+
 	$frame_menu = "<frame src=\"aide_index.php3?aide=$aide&var_lang=$spip_lang&frame=menu\" name=\"gauche\" scrolling=\"auto\" noresize>\n";
 	$frame_body = "<frame src=\"aide_index.php3?aide=$aide&var_lang=$spip_lang&frame=body\" name=\"droite\" scrolling=\"auto\" noresize>\n";
 
@@ -70,24 +71,18 @@ function fichier_aide($lang_aide = '') {
 		AND $r = fichier_aide($regs[1]))
 			return $r;
 
-	else {
+	else if ($help_server) {
 		// Aide internet, en cache ?
 		include_ecrire('inc_sites.php3');
 		if (@file_exists($fichier_aide = "data/aide-$lang_aide-aide.html"))
-			return array(file($fichier_aide), $lang_aide, "$help_server/$lang_aide-aide.html", true);
+			return array(file($fichier_aide), $lang_aide);
 		else {
 			// sinon aller la chercher sur le site d'aide
-			if ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")) {
-				$ecrire_cache = ecrire_fichier ($fichier_aide, $contenu);
-				return array($contenu, $lang_aide, $help_server, $ecrire_cache);
-			} else
-				define ('erreur_langue',
-					'<p>'
-					._L('L\'aide en ligne, pour cette langue, n\'est pas install&eacute;e. Et une erreur de connexion s\'est produite lors de la tentative de t&eacute;l&eacute;chargement.')
-					.propre('- ')._L('Si vous utilisez ce site en-dehors d\'une connexion Internet, vous pouvez installer l\'aide en local, dans le r&eacute;pertoire <tt>ecrire/AIDE/</tt>.')
-					.propre('- ')._L('Vous pouvez aussi tenter une nouvelle connexion en rechargeant cette page.')
-					.propre('- ')._L('Ou encore, choisir l\'aide dans une autre langue.')
-				);
+			if (ecrire_fichier('data/aide-test', "test")
+			AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html"))) {
+				ecrire_fichier ($fichier_aide, $contenu);
+				return array($contenu, $lang_aide);
+			}
 		}
 	}
 
@@ -95,41 +90,33 @@ function fichier_aide($lang_aide = '') {
 }
 
 
-function help_body($aide) {
+function help_body($aide, $html) {
 	global $help_server;
 
 	if (!$aide) $aide = 'spip';
 
 	// Recuperation du contenu de l'aide demandee
-	list($html, $l, $url_aide, $ecrire_cache) = fichier_aide();
 	$html = analyse_aide($html, $aide);
 
 	// Recherche des images de l'aide
 	$suite = $html;
 	$html = "";
-	while (ereg("AIDE/([-_a-zA-Z0-9]*/?)([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
-		$f = $r[2];
-		
+	while (preg_match("@(<img([^<>]* +)? src=['\"])"
+		. "((AIDE|IMG)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@i",
+	$suite, $r)) {
+
+		$image = $r[3];
+		$image_plat = str_replace('/', '-', $image);
+
 		# Image installee a l'ancienne
-		if (@file_exists("AIDE/$l/$f"))
-			$f = "AIDE/$l/$f";
+		if (@file_exists($image))
+			$f = $image;
 		else
-		# Image telechargee
-		if (@file_exists("data/aide-${l}-$f"))
-			$f = "aide_index.php3?img=${l}-$f";
-		else
-		# Image a telecharger
-		if ($url_aide) {
-			if ($ecrire_cache AND $contenu =
-			recuperer_page("$help_server/$l/$f")
-			AND ecrire_fichier ("data/aide-${l}-$f", $contenu))
-				$f = "aide_index.php3?img=${l}-$f";
-			else
-				$f = "$help_server/$l/$f"; # erreur
-		}
+		# Image telechargee ou a telecharger
+			$f = "aide_index.php3?img=$image_plat";
 
 		$p = strpos($suite, $r[0]);
-		$html .= substr($suite, 0, $p) . $f;
+		$html .= substr($suite, 0, $p) . $r[1].$f;
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
 
@@ -200,7 +187,7 @@ table.spip td {
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
 
 <CENTER>
-<img src="aide_index.php3?img=-logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
+<img src="aide_index.php3?img=AIDE--logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';
 	}
@@ -229,18 +216,20 @@ table.spip td {
 function help_img($regs) {
 	global $help_server;
 
-	list ($cache, $lang, $file, $ext) = $regs;
+	list ($cache, $rep, $lang, $file, $ext) = $regs;
+
 	header("Content-Type: image/$ext");
 	if (@file_exists('data/aide-'.$cache)) {
 		readfile('data/aide-'.$cache);
 	} else {
 		include_ecrire('inc_sites.php3');
-		if ($contenu =
-		recuperer_page("$help_server/$lang/$file")) {
+		if (ecrire_fichier('data/aide-test', "test")
+		AND ($contenu =
+		recuperer_page("$help_server/$rep/$lang/$file"))) {
 			echo $contenu;
 			ecrire_fichier ('data/aide-'.$cache, $contenu);
 		} else
-			header ("Location: $help_server/$lang/$file");
+			header ("Location: $help_server/$rep/$lang/$file");
 	}
 	exit;
 }
@@ -248,7 +237,7 @@ function help_img($regs) {
 ///////////////////////////////////////
 // Le menu de gauche
 //
-function help_menu($aide) {
+function help_menu($aide, $html) {
 	global $spip_lang_left, $spip_lang_rtl, $spip_lang_right;
 
 echo '<style type="text/css">
@@ -324,7 +313,6 @@ echo '
 
 
 	// Recuperation et analyse de la structure de l'aide demandee
-	list($html, $l, $url_aide, $ecrire_cache) = fichier_aide();
 	$sections = analyse_aide($html);
 	foreach ($sections as $section) {
 		if ($section[1] == '1') {
@@ -444,16 +432,32 @@ function analyse_aide($html, $aide=false) {
 //
 // Distribuer le travail
 //
-if (preg_match(',^([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
+if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
 	help_img($regs);
 else {
-	entetes_html();
-	if ($frame == 'menu')
-		help_menu($aide);
-	else if ($frame == 'body')
-		help_body($aide);
-	else
-		help_frame($aide);
+	list($html, $l, $url_aide) = fichier_aide();
+
+	// On n'a pas d'aide du tout
+	if (!$html) {
+		// Renvoyer sur l'aide en ligne du serveur externe
+		if ($help_server)
+			@Header("Location: $help_server/ecrire/aide_index.php3?var_lang=$spip_lang");
+		// Ou alors message d'erreur
+		else {
+			include_ecrire('inc_presentation.php3');
+			install_debut_html(_L('Erreur : documentation non disponible'));
+			echo "<p>"._L('Votre site a &eacute;t&eacute; install&eacute; sans aide en ligne, et n\'est pas connect&eacute; &agrave; un serveur ext&eacute;rieur d\'aide en ligne. Sorry.');
+			install_fin_html();
+		}
+	} else {
+		entetes_html();
+		if ($frame == 'menu')
+			help_menu($aide, $html);
+		else if ($frame == 'body')
+			help_body($aide, $html);
+		else
+			help_frame($aide);
+	}
 }
 
 ?>
