@@ -152,7 +152,11 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 	// liberer le verrou et fermer le fichier
 		spip_fclose_unlock($fp);
 		@chmod($fichier, _SPIP_CHMOD & 0666);
-		if ($ok) return $ok;
+		if ($ok) {
+			if (!defined('_OPCACHE_BUG') AND function_exists('opcache_invalidate'))
+				opcache_invalidate($fichier, true);
+			return $ok;
+		}
 	}
 
 	include_spip('inc/autoriser');
