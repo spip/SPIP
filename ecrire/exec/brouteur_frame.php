@@ -38,32 +38,34 @@ function exec_brouteur_frame_dist()
 
 
 	if ($special == "redac") {
-		$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
+		$query = "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
 		$result=spip_query($query);
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
 			echo "<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
+				$id_rubrique=$row['id_rubrique'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+				echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article&id_rubrique=$id_rubrique"),"\"'>",$titre,"</a>";
 			}
 			echo "</div>";
 		}
 	
 	}
 	else if ($special == "valider") {
-		$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC";
+		$query = "SELECT articles.id_article, article.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC";
 		$result=spip_query($query);
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
 			echo "<div class='plan-articles'>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
+				$id_rubrique=$row['id_rubrique'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
+				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article&id_rubrique=$id_rubrique"),"\"'>",$titre,"</a>";
 			}
 			echo "</div>";
 		}
@@ -136,17 +138,18 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 
 	
 		if ($id_rubrique > 0) {
-			if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
-			else $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
+			if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
+			else $query = "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
 			$result=spip_query($query);
 			if (spip_num_rows($result)>0) {
 				echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
 				echo "<div class='plan-articles'>";
 				while($row=spip_fetch_array($result)){
 					$id_article=$row['id_article'];
+					$id_rubrique=$row['id_rubrique'];
 					$titre = typo($row['titre']);
 					$statut = $row['statut'];
-					echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article")."\"'>",$titre,"</a>";
+					echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article&id_rubrique=$id_rubrique")."\"'>",$titre,"</a>";
 				}
 				echo "</div>";
 			}
