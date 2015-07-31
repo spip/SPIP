@@ -781,7 +781,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$r
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	$seq = spip_pg_sequence($table,true);
 	// si pas de cle primaire dans l'insertion, renvoyer curval
 	if (!preg_match(",\b$seq\b,",$champs)){
@@ -815,7 +815,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$r
 // http://doc.spip.org/@spip_pg_insertq
 function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  $desc['field'];
 	
@@ -834,7 +834,7 @@ function spip_pg_insertq($table, $couples=array(), $desc=array(), $serveur='',$r
 // http://doc.spip.org/@spip_pg_insertq_multi
 function spip_pg_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	$fields =  isset($desc['field'])?$desc['field']:array();
 	
@@ -892,7 +892,7 @@ function spip_pg_update($table, $couples, $where='', $desc='', $serveur='',$requ
 // http://doc.spip.org/@spip_pg_updateq
 function spip_pg_updateq($table, $couples, $where='', $desc=array(), $serveur='',$requeter=true) {
 	if (!$couples) return;
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	$fields = $desc['field'];
 	foreach ($couples as $k => $val) {
 		$couples[$k] = spip_pg_cite($val, $fields[$k]);
@@ -910,7 +910,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='',$requeter=true) {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	if (!$desc) $desc = description_table($table);
+	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) die("$table insertion sans description");
 	$prim = $desc['key']['PRIMARY KEY'];
 	$ids = preg_split('/,\s*/', $prim);
