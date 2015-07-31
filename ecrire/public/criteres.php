@@ -1514,13 +1514,15 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 			$col = "YEAR($date_orig)";
 			break;
 		case 'heure':
-			$col = "DATE_FORMAT($date_orig, '%H:%i')";
+			$col = "DATE_FORMAT($date_orig, \\'%H:%i\\')";
 			break;
 		case 'age':
 			$col = calculer_param_date("NOW()", $date_orig);
+			$col_vraie = "";// comparer a un int (par defaut)
 			break;
 		case 'age_relatif':
 			$col = calculer_param_date($date_compare, $date_orig);
+			$col_vraie = "";// comparer a un int (par defaut)
 			break;
 		case 'jour_relatif':
 			$col = "LEAST(TO_DAYS(".$date_compare.")-TO_DAYS(".
@@ -1529,15 +1531,18 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 			       $date_compare.")-MONTH(".$date_orig.
 			       "))+365.2422*(YEAR(".$date_compare.")-YEAR(".
 			       $date_orig.")))";
+			$col_vraie = "";// comparer a un int (par defaut)
 			break;
 		case 'mois_relatif':
 			$col = "MONTH(".$date_compare.")-MONTH(".
 			       $date_orig.")+12*(YEAR(".$date_compare.
 			       ")-YEAR(".$date_orig."))";
+			$col_vraie = "";// comparer a un int (par defaut)
 			break;
 		case 'annee_relatif':
 			$col = "YEAR(".$date_compare.")-YEAR(".
 			       $date_orig.")";
+			$col_vraie = "";// comparer a un int (par defaut)
 			break;
 	}
 	return array($col,$col_vraie);
