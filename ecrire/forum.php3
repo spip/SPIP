@@ -12,6 +12,6 @@
 
   // obsolete, mais assurer le service pour les vieux liens
 include ("inc.php3");
-$var_f = include_fonction(basename('forum_admin'));
-$var_f($debut, $admin);
+$var_f = include_fonction('forum_admin');
+$var_f();
 ?>

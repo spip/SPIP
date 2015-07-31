@@ -13,14 +13,17 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
 
-function messagerie_dist($id_message, $detruire_message, $supp_dest)
+function messagerie_dist()
 {
 
   global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;
 
-if ($supp_dest) {
+  $id_message = intval($id_message);
+  $detruire_message = intval($detruire_message);
+  $supp_dest = intval($supp_dest);
+
+  if ($supp_dest) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
 }
 
@@ -29,7 +32,6 @@ if ($detruire_message) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$detruire_message");
 	spip_query("DELETE FROM spip_forum WHERE id_message=$detruire_message");
 }
-
 
 debut_page(_T('titre_page_messagerie'), "redacteurs", "messagerie");
 

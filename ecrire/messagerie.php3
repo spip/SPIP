@@ -12,5 +12,5 @@
 
 include ("inc.php3");
 $var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
-$var_f(intval($id_message), intval($detruire_message), $supp_dest);
+$var_f();
 ?>
