@@ -212,11 +212,21 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $texte = $boucle->id_table . '.' . trim($m[1]);
 		  $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
 		  $order = "multi";
+	// par num champ(, suite)
+	      }	else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
+		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
+		  $suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
+		  if ($suite !== "''")
+		    $texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')" . " . \"";
+		  $as = 'num' .($boucle->order ? count($boucle->order) : "");
+		  $boucle->select[] = $texte . " AS $as";
+		  $order = "'$as'";
 	      } else {
 	      $fct = "";
 	      if (!ereg("^" . CHAMP_SQL_PLUS_FONC . '$', $par, $match)) 
 		erreur_squelette(_T('zbug_info_erreur_squelette'), "{par $par} BOUCLE$idb");
 	      else {
+		spip_log("par $par");
 		if ($match[2]) { $par = substr($match[2],1,-1); $fct = $match[1]; }
 	// par hasard
 		if ($par == 'hasard') {
@@ -244,16 +254,6 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		else if ($m = ($exceptions_des_jointures[$par])) {
 		  $order = critere_par_jointure($boucle, $m);
 			 }
-	// par num champ(, suite)
-		else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
-		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
-		  $suite = calculer_liste($tri, array(), $boucles, $boucle->id_parent);
-		  if ($suite !== "''")
-		    $texte = "\" . ((\$x = $suite) ? ('$texte' . \$x) : '0')" . " . \"";
-		  $as = 'num' .($boucle->order ? count($boucle->order) : "");
-		  $boucle->select[] = $texte . " AS $as";
-		  $order = "'$as'";
-		}
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
 			$m = $GLOBALS['table_date'][$boucle->type_requete];
