@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'color',
 'choix_interface' => 'Selecci&oacute;n de la interfase',
-'colonne' => '<NEW>Colonne',
+'colonne' => 'Columna',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
 'correcte' => 'correcta',
 
@@ -200,7 +200,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
 <p>Una vez terminado este proceso, podr&aacute;s  
 ',
-'double_occurrence' => '<NEW>Double occurrence',
+'double_occurrence' => 'Doble ocurrencia',
 
 
 // E
@@ -208,9 +208,9 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'entree_titre_document' => 'T&iacute;tulo del documento',
 'entree_titre_image' => 'T&iacute;tulo de la imagen',
 'envoi_via_le_site' => 'Env&iacute;o a trav&eacute;s del sitio',
-'erreur' => '<NEW>Erreur',
-'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
-'erreur_texte' => '<NEW>erreur(s)',
+'erreur' => 'Error',
+'erreur_balise_non_fermee' => '&uacute;ltima baliza no cerrada:',
+'erreur_texte' => 'error(es)',
 
 
 // F
@@ -559,7 +559,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'lien_visite_site' => 'Visitar este sitio',
 'lien_visites' => '@visites@ visitas.',
 'lien_voir_auteur' => 'Ver esta autor/a',
-'ligne' => '<NEW>Ligne',
+'ligne' => 'L&iacute;nea',
 'login_acces_prive' => 'acceso al espacio privado',
 'login_autre_identifiant' => 'conectarse con otro nombre de usuario',
 'login_connexion_refusee' => 'Conexi&oacute;n rechazada.',
@@ -596,11 +596,11 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 
 // N
 'navigateur_pas_redirige' => 'Si tu navegador no te redirige automaticamente, pincha aqu&iacute; para continuar.',
-'numero' => '<NEW>Num&eacute;ro',
+'numero' => 'N&uacute;mero',
 
 
 // O
-'occurence' => '<NEW>Occurence',
+'occurence' => 'Ocurrencia',
 'onglet_affacer_base' => 'Borrar la base',
 'onglet_auteur' => 'La autor/a',
 'onglet_contenu_site' => 'Contenido del sitio',
@@ -662,7 +662,7 @@ volver a conectarte al sitio.
 
 
 // S
-'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
+'spip_conforme_dtd' => 'SPIP considera este documento como conforme a su DOCTYPE:',
 'squelette' => 'esqueleto',
 'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, l&iacute;nea',
 'squelette_ligne' => 'esqueleto, l&iacute;nea',
@@ -738,22 +738,38 @@ Intenta',
 'zbug_code' => 'c&oacute;digo',
 'zbug_critere_inconnu' => 'criterio desconocido @critere@',
 'zbug_distant_interdit' => 'externo prohibido',
-'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
+'zbug_doublon_table_sans_index' => 'duplicados en una tabla sin &iacute;ndice',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: doble definici&oacute;n',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: falta la baliza de cierre',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxis de bucle incorrecto',
-'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
+'zbug_erreur_compilation' => 'Error de compilaci&oacute;n',
 'zbug_erreur_execution_page' => 'error de ejecuci&oacute;n de la p&aacute;gina',
 'zbug_erreur_filtre' => 'Error: filtro <b>&laquo; @filtre@ &raquo;</b> no definido',
 'zbug_erreur_meme_parent' => '{meme_parent} s&oacute;lo se aplica a los  bucles (FORUMS) o (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Error(es) en el esqueleto',
 'zbug_info_erreur_squelette' => 'Error en el sitio',
 'zbug_inversion_ordre_inexistant' => 'inversi&oacute;n de un orden inexistente',
-'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
+'zbug_pagination_sans_critere' => '#PAGINATION sin criterio {pagination} o empleado en un bucle recurssivo',
 'zbug_parametres_inclus_incorrects' => 'Par&aacute;metreos de inclusi&oacute;n incorrectos',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'servidor SQL indefinido',
-'zbug_table_inconnue' => 'Tabla SQL &laquo;@table@&raquo; desconocida'
+'zbug_table_inconnue' => 'Tabla SQL &laquo;@table@&raquo; desconocida',
+'zxml_connus_attributs' => 'atributos conocidos',
+'zxml_de' => 'de',
+'zxml_inconnu_attribut' => 'atributos desconocidos',
+'zxml_inconnu_balise' => 'baliza desconocida',
+'zxml_inconnu_entite' => 'entidad desconocida',
+'zxml_inconnu_id' => 'ID desconocido',
+'zxml_mais_de' => 'pero de',
+'zxml_non_conforme' => 'no es conforme por el motivo',
+'zxml_non_fils' => 'no es hijo de ',
+'zxml_nonvide_balise' => 'baliza no vac&iacute;a',
+'zxml_obligatoire_attribut' => 'atributo obligatorio pero ausente en',
+'zxml_succession_fils_incorrecte' => 'succesi&oacute;n de hijos incorrecta',
+'zxml_survoler' => 'pasar por aqu&iacute; para ver los correctos',
+'zxml_valeur_attribut' => 'valor del atributo',
+'zxml_vide_balise' => 'baliza vac&iacute;a',
+'zxml_vu' => 'visto antes'
 
 );
 

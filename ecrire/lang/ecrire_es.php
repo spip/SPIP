@@ -33,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'No tienes acceso a este mensaje.',
 'avis_non_acces_page' => 'No tienes acceso a esta p&aacute;gina.',
 'avis_operation_echec' => 'La operaci&oacute;n ha fallado.',
+'avis_operation_impossible' => 'Operaci&oacute;n imposible',
 'avis_probleme_archive' => 'Problema de lectura del archivo @archive@',
 'avis_site_introuvable' => 'No se encuentra el sitio',
 'avis_site_syndique_probleme' => 'ATENCI&Oacute;N: la sindicaci&oacute;n de ese sitio encontr&oacute; un problema; por lo cual se interrumpi&oacute; el sistema temporalmente. Verifica la direcci&oacute;n del archivo de sindicaci&oacute;n de este sitio (<b>@url_syndic@</b>), e intenta una nueva recuperaci&oacute;n de la informaci&oacute;n.',
@@ -47,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'A&ntilde;adir',
 'bouton_ajouter_participant' => 'A&Ntilde;ADIR UN PARTICIPANTE:',
 'bouton_annonce' => 'ANUNCIO',
+'bouton_annuler' => 'Anular',
 'bouton_checkbox_envoi_message' => 'posibilidad de enviar un mensaje',
 'bouton_checkbox_indiquer_site' => 'indicar obligatoriamente un sitio Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los administradores y administradoras del sitio',
@@ -104,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Los archivos de cach&eacute; se almacenan en modo no comprimido.',
 'cache_modifiable_webmestre' => 'Este par&aacute;metro es modificable por la webmistress del sitio.',
 'calendrier_synchro' => 'Si utilizas un software de agenda compatible <b>iCal</b>, puedes sincronizarlo con la actualidad editorial de este sitio.',
+'connexion_ldap' => 'Conexi&oacute;n:',
 
 
 // D
@@ -164,10 +167,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_plugin_version_manquant' => 'Falta la versi&oacute;n del plugin',
 
 
+// F
+'forum_info_original' => 'original',
+
+
 // I
 'ical_info1' => 'En esta p&aacute;gina se presentan diferentes maneras de quedar en contacto con la vida del sitio.',
 'ical_info2' => 'Para mayor informaci&oacute;n sobre todas estas t&eacute;cnicas, no dudes en consultar <a href="http://www.spip.net/fr_suivi">la documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Tienes dos calendarios a tu disposici&oacute;n. El primero es un plano del sitio que anuncia todos los art&iacute;culos publicados. El segundo contiene los anuncios editoriales y tus &uacute;ltimos mensajes privados: s&oacute;lo t&uacute; lo v&eacute;s gracias a una clave personal, que podr&aacute;s modificar en cualquier momento cambiando tu contrase&ntilde;a.',
+'ical_lien_rss_breves' => 'Sindicaci&oacute;n de breves del sitio',
 'ical_methode_http' => 'Descargar',
 'ical_methode_webcal' => 'Sincronizaci&oacute;n (webcal://)',
 'ical_texte_js' => 'Una l&iacute;nea de javascript te permite mostrar muy simplemente, en cualquier sitio que te pertenece, los art&iacute;culos recientes publicados en este sitio.',
@@ -453,12 +461,13 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'debe ser realizada una actulizaci&amp;oacute;n para adaptar
  la base de datos a esta nueva versi&oacute;n de SPIP.',
+'info_proxy_ok' => 'Test del proxy logrado.',
 'info_ps' => 'P.-S.',
 'info_publier' => 'publicar',
 'info_publies' => 'Tus art&iacute;culos publicados',
 'info_question_accepter_visiteurs' => 'Si en los esqueletos de tu sitio est&aacute; previsto el registro de visitantes sin acceso al espacio privado, tendr&aacute;s que activar la opci&oacute;n siguiente:',
 'info_question_gerer_statistiques' => '&iquest;Deseas que tu sitio gestione las estad&iacute;sticas de las visitas?',
-'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceptas inscripciones al espacio de redacci&oacute;n de nuevas personas apartir del sitio p&uacute;blico? Si aceptas, las personas que visitan el sitio podr&aacute;n inscribirse desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para proponer sus propios art&iacute;culos. <blockquote><i>Durante la fase de inscripci&oacute;n, reciben un correo electr&oacute;nico autom&aacute;tico que les indica sus c&oacute;digos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus servidores: en tal caso, se hace imposible la inscripci&oacute;n autom&aacute;tica. ',
+'info_question_inscription_nouveaux_redacteurs' => '&iquest;Se aceptan inscripciones de nuevas redactoras y redactores a partir del sitio p&uacute;blico? Si se acepta, las personas que visitan el sitio podr&aacute;n inscribirse desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para proponer sus propios art&iacute;culos. <blockquote><i>Durante la fase de inscripci&oacute;n, reciben un correo electr&oacute;nico autom&aacute;tico que les indica sus c&oacute;digos de acceso al sitio privado. Ciertos proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus servidores: en tal caso, se hace imposible la inscripci&oacute;n autom&aacute;tica. ',
 'info_question_mots_cles' => '&iquest;Deseas utilizar las palabras clave en tu sitio?',
 'info_question_proposer_site' => '&iquest;Qui&eacute;n puede proponer los sitios referenciados?',
 'info_question_utilisation_moteur_recherche' => '&iquest;Deseas utilizar el motor de b&uacute;squeda integrado de SPIP? (desactivarlo agiliza el sitio)',
@@ -586,6 +595,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'install_echec_annonce' => 'La instalaci&oacute;n probablemente va a fallar, o crear&aacute; un sitio que no funcione...',
 'install_extension_mbstring' => 'SPIP no funciona con&nbsp;:',
 'install_extension_php_obligatoire' => 'SPIP exige instalar la extensi&oacute;n php&nbsp;:',
+'install_php_version' => 'PHP versi&oacute;n @version@ insuficiente (m&iacute;nimo = @minimum@)',
 'install_select_langue' => 'Selecciona un idioma y despu&eacute;s pulsa el bot&oacute;n &laquo;siguiente&raquo; para iniciar el proceso de instalaci&oacute;n.',
 'intem_redacteur' => 'redactor/a',
 'item_accepter_inscriptions' => 'Aceptar las inscripciones',
@@ -673,6 +683,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'lien_supprimer_rubrique' => 'Suprimir esta secci&oacute;n',
 'lien_tout_deplier' => 'Desplegar todo',
 'lien_tout_replier' => 'Replegar todo',
+'lien_tout_supprimer' => 'Suprimir todo',
 'lien_trier_nom' => 'Ordenar por nombre',
 'lien_trier_nombre_articles' => 'Ordenar por n&uacute;mero de art&iacute;culos',
 'lien_trier_statut' => 'Ordenar por estado',
@@ -720,6 +731,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'plugin_etat_stable' => 'estable',
 'plugin_etat_test' => 'en prueba',
 'plugins_liste' => 'Lista de plugins',
+'protocole_ldap' => 'Versi&oacute;n del protocolo:',
 
 
 // R
@@ -727,6 +739,8 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 
 
 // S
+'sauvegarde_fusionner' => 'Fusionar la base actual y el respaldo',
+'sauvegarde_url_origine' => 'Eventualemente, URL del sitio de origen:',
 'statut_admin_restreint' => '(administrador restringido)',
 'syndic_choix_moderation' => '&iquest;Qu&eacute; hacemos con los siguientes enlaces que vengan de este sitio?',
 'syndic_choix_oublier' => '&iquest;Qu&eacute; hacemos con los enlaces que no figuren en el archivo de sindicaci&oacute;n?',
@@ -968,6 +982,7 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br />- Un segundo m
 'titre_sites_tous' => 'Los sitios referenciados',
 'titre_suivi_petition' => 'Gesti&oacute;n de las peticiones',
 'titre_syndication' => 'Sindicaci&oacute;n de sitios',
+'tls_ldap' => 'Transport Layer Security:',
 'tout_dossier_upload' => 'Toda la carpeta @upload@',
 'trad_article_inexistant' => 'No hay ning&uacute;n art&iacute;culo con ese n&uacute;mero.',
 'trad_article_traduction' => 'Todas las versiones de este art&iacute;culo:',

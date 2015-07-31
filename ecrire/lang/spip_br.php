@@ -197,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Implijit ar meziant FTP a-benn kemm ar gwirio&ugrave; evit pep teul.
   Displeget eo an hentenn en diell-stalia&ntilde;.</p>
   <p>Ur wech graet se e c\'helloc\'h ',
+'double_occurrence' => 'Kavet div wech',
 
 
 // E
@@ -205,6 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Titl ar skeudenn&nbsp;:',
 'envoi_via_le_site' => 'Kas dre al lec\'hienn',
 'erreur' => 'Fazi',
+'erreur_balise_non_fermee' => 'Balizenn ziwezha&ntilde; chomet digor :',
 'erreur_texte' => 'fazi',
 
 
@@ -752,7 +754,23 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'zbug_parametres_inclus_incorrects' => 'Arventerio&ugrave;-ensoc\'ha&ntilde; direizh',
 'zbug_resultat' => 'disoc\'h',
 'zbug_serveur_indefini' => 'servijer SQL didermen',
-'zbug_table_inconnue' => 'Taol SQL &laquo; @table@ &raquo; dianavez'
+'zbug_table_inconnue' => 'Taol SQL &laquo; @table@ &raquo; dianavez',
+'zxml_connus_attributs' => 'perzhio&ugrave; anavezet',
+'zxml_de' => 'da',
+'zxml_inconnu_attribut' => 'perzh dianavez',
+'zxml_inconnu_balise' => 'balizenn dianav',
+'zxml_inconnu_entite' => 'elfenn dianav',
+'zxml_inconnu_id' => 'ID dianav',
+'zxml_mais_de' => 'met eus',
+'zxml_non_conforme' => 'ne glot ket gant an abeg',
+'zxml_non_fils' => 'n\'eo ket ur mab da',
+'zxml_nonvide_balise' => 'balizenn ket goullo',
+'zxml_obligatoire_attribut' => 'perzh rediet, met na gaver ket e-barzh ',
+'zxml_succession_fils_incorrecte' => 'dirien eo arridennad ar mibien',
+'zxml_survoler' => 'tremen buan evit gwelet ar re reizh',
+'zxml_valeur_attribut' => 'talvoudegezh ar perzh',
+'zxml_vide_balise' => 'balizenn c\'houllo',
+'zxml_vu' => 'bet gwelet en a-raok'
 
 );
 

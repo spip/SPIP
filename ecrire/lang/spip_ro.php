@@ -83,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'calendar pe s&#259;pt&#259;m&acirc;n&#259;',
 'choix_couleur_interface' => 'culoare',
 'choix_interface' => 'alegerea interfe&#355;ei',
+'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Aten&#355;ie, a&#355;i cerut schimbarea st&#259;rii acestui element. Dori&#355;i s&#259; continua&#355;i ?',
 'correcte' => 'corect&#259;',
 
@@ -197,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Pentru a remedia aceast&#259; problem&#259;, utiliza&#355;i clientul dumneavoastr&#259; favorit de FTP pentru a modifica drepturile de acces ale fiec&#259;rui
   dintre aceste directoare. Procedura este explicat&#259; &icirc;n detaliu &icirc;n manualul de instalare.</p>
   <p>Odat&#259; terminat&#259; aceast&#259; manipulare, pute&#355;i ',
+'double_occurrence' => '<NEW>Double occurrence',
 
 
 // E
@@ -204,6 +206,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Titlul documentului&nbsp;:',
 'entree_titre_image' => 'Titlul imaginii&nbsp;:',
 'envoi_via_le_site' => 'Trimitere via site',
+'erreur' => '<NEW>Erreur',
+'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_texte' => '<NEW>erreur(s)',
 
 
 // F
@@ -587,6 +592,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'lien_visite_site' => 'vizita&#355;i acest site',
 'lien_visites' => '@visites@&nbsp;vizite',
 'lien_voir_auteur' => 'Vede&#355;i acest autor',
+'ligne' => '<NEW>Ligne',
 'lnfo_liens' => 'leg&#259;turi :',
 'login_acces_prive' => 'acces la sec&#355;iunea privat&#259;',
 'login_autre_identifiant' => 'conectare sub un alt cont',
@@ -627,9 +633,11 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 
 // N
 'navigateur_pas_redirige' => 'Dac&#259; navigatorul dumneavoastr&#259; nu este redirijat &icirc;n mod automatic, face&#355;i click aici pentru a continua.',
+'numero' => '<NEW>Num&eacute;ro',
 
 
 // O
+'occurence' => '<NEW>Occurence',
 'onglet_affacer_base' => '&#350;terge&#355;i baza',
 'onglet_agenda' => 'Agend&#259;',
 'onglet_auteur' => 'Autorul',
@@ -702,6 +710,7 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 
 
 // S
+'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'schelet',
 'squelette_inclus_ligne' => 'schelet inclus, linia',
 'squelette_ligne' => 'schelet, linia',
@@ -796,19 +805,38 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'zbug_code' => 'cod',
 'zbug_critere_inconnu' => 'criteriu necunoscut @critere@',
 'zbug_distant_interdit' => 'extern interzis',
+'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: defini&#355;ie dubl&#259;',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag-ul de &icirc;nchidere lipse&#351;te',
 'zbug_erreur_boucle_syntaxe' => 'Sintax&#259; de bucl&#259; incorect&#259;',
+'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
 'zbug_erreur_execution_page' => 'eroare de execu&#355;ie a paginii',
 'zbug_erreur_filtre' => 'Eroare : filtrul <b>&laquo; @filtre@ &raquo;</b> nu este definit',
 'zbug_erreur_meme_parent' => '{meme_parent} nu se aplic&#259; dec&acirc;t buclelor (FORUMS) sau (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Eroare/Erori &icirc;n schelet',
 'zbug_info_erreur_squelette' => 'Eroare pe site',
 'zbug_inversion_ordre_inexistant' => 'inversie de un ordin necunoscut',
+'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Parametrii de includere incorec&#355;i',
 'zbug_resultat' => 'rezultat',
 'zbug_serveur_indefini' => 'server SQL nedefinit',
-'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; necunoscut&#259;'
+'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; necunoscut&#259;',
+'zxml_connus_attributs' => '<NEW>attributs connus',
+'zxml_de' => '<NEW>de',
+'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
+'zxml_inconnu_balise' => '<NEW>balise inconnue',
+'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
+'zxml_inconnu_id' => '<NEW>ID inconnu',
+'zxml_mais_de' => '<NEW>mais de',
+'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
+'zxml_non_fils' => '<NEW>n\'est pas un fils de',
+'zxml_nonvide_balise' => '<NEW>balise non vide',
+'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
+'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
+'zxml_survoler' => '<NEW>survoler pour voir les corrects',
+'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
+'zxml_vide_balise' => '<NEW>balise vide',
+'zxml_vu' => '<NEW>vu auparavant'
 
 );
 

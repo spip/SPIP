@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'kalender per week',
 'choix_couleur_interface' => '<NEW>couleur ',
 'choix_interface' => '<NEW>choix  de l\'interface',
+'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Opgelet. Je hebt gevraagd de status van dit element te wijzigen. Wil je verdergaan ?',
 'correcte' => 'juist',
 
@@ -196,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p />Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
  De procedure is gedetailleerd uitgelegd in de installatiehandleiding
   <p />Eenmaal deze wijziging doorgevoerd, kan je ',
+'double_occurrence' => '<NEW>Double occurrence',
 
 
 // E
@@ -203,6 +205,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Documenttitel:',
 'entree_titre_image' => 'Afbeeldingstitel:',
 'envoi_via_le_site' => 'Verzending via de site',
+'erreur' => '<NEW>Erreur',
+'erreur_balise_non_fermee' => '<NEW>derni&egrave;re balise non referm&eacute;e :',
+'erreur_texte' => '<NEW>erreur(s)',
 
 
 // F
@@ -551,6 +556,7 @@ Bedankt voor je deelname
 'lien_visite_site' => 'Bezoek de site',
 'lien_visites' => '@visites@ bezoeken',
 'lien_voir_auteur' => 'Auteur nakijken',
+'ligne' => '<NEW>Ligne',
 'login_acces_prive' => 'Toegang tot het private deel',
 'login_autre_identifiant' => 'Verbinden met een andere inlognaam',
 'login_connexion_refusee' => 'Verbinding geweigerd.',
@@ -593,9 +599,11 @@ Bedankt voor je deelname
 
 // N
 'navigateur_pas_redirige' => 'Wanneer je bladerprogramma niet doorverwijst, klik dan hier om verder te gaan.',
+'numero' => '<NEW>Num&eacute;ro',
 
 
 // O
+'occurence' => '<NEW>Occurence',
 'onglet_affacer_base' => 'Database verwijderen',
 'onglet_auteur' => 'Auteur',
 'onglet_contenu_site' => 'Inhoud van de site',
@@ -661,6 +669,7 @@ opnieuw verbinding maken met de site
 
 
 // S
+'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => 'sjabloon',
 'squelette_inclus_ligne' => 'sjabloon inbegrepen, lijn',
 'squelette_ligne' => 'sjabloon, lijn',
@@ -749,19 +758,38 @@ opnieuw verbinding maken met de site
 'zbug_code' => 'code',
 'zbug_critere_inconnu' => 'criterium onbekend @critere@',
 'zbug_distant_interdit' => 'externe niet toegestaan',
+'zbug_doublon_table_sans_index' => '<NEW>doublons sur une table sans index',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dubbel gebruik',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: sluitingshaakje ontbreekt',
 'zbug_erreur_boucle_syntaxe' => 'Onjuiste syntaxis van de lus',
+'zbug_erreur_compilation' => '<NEW>Erreur de compilation',
 'zbug_erreur_execution_page' => 'uitvoeringsfout van deze pagina',
 'zbug_erreur_filtre' => 'Fout : de filter <b>&laquo; @filtre@ &raquo;</b> is niet gedefinieerd',
 'zbug_erreur_meme_parent' => '{meme_parent} is enkel van toepassing op de lussen (FORUMS) en (RUBRIQUES)',
 'zbug_erreur_squelette' => 'Fout(en) in het sjabloon',
 'zbug_info_erreur_squelette' => 'Fout op de site',
 'zbug_inversion_ordre_inexistant' => 'Omkering van een ongekende orde',
+'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Parameters voor insluiting niet correct',
 'zbug_resultat' => 'resultaat',
 'zbug_serveur_indefini' => 'SQL server niet gedefinieerd',
-'zbug_table_inconnue' => 'SQL tabel &laquo; @table@ &raquo; onbekend'
+'zbug_table_inconnue' => 'SQL tabel &laquo; @table@ &raquo; onbekend',
+'zxml_connus_attributs' => '<NEW>attributs connus',
+'zxml_de' => '<NEW>de',
+'zxml_inconnu_attribut' => '<NEW>attribut inconnu',
+'zxml_inconnu_balise' => '<NEW>balise inconnue',
+'zxml_inconnu_entite' => '<NEW>entit&eacute; inconnue',
+'zxml_inconnu_id' => '<NEW>ID inconnu',
+'zxml_mais_de' => '<NEW>mais de',
+'zxml_non_conforme' => '<NEW>n\'est pas conforme au motif',
+'zxml_non_fils' => '<NEW>n\'est pas un fils de',
+'zxml_nonvide_balise' => '<NEW>balise non vide',
+'zxml_obligatoire_attribut' => '<NEW>attribut obligatoire mais absent dans',
+'zxml_succession_fils_incorrecte' => '<NEW>succession des fils incorrecte',
+'zxml_survoler' => '<NEW>survoler pour voir les corrects',
+'zxml_valeur_attribut' => '<NEW>valeur de l\'attribut',
+'zxml_vide_balise' => '<NEW>balise vide',
+'zxml_vu' => '<NEW>vu auparavant'
 
 );
 
