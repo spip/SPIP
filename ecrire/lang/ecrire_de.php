@@ -423,7 +423,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 	'info_non_modifiable' => 'kann nicht geändert werden.',
 	'info_non_suppression_mot_cle' => 'ich möchte dieses Schlagwort nicht löschen.',
 	'info_note_numero' => 'Notiz @numero@',
-	'info_notes' => 'Notizen',
+	'info_notes' => 'Anmerkungen', # Fußnoten bzw. #NOTES werden besser als "Anmerkungen" denn als "Notizen" bezeichnet.
 	'info_nouveaux_message' => 'Neue Nachrichten',
 	'info_nouvel_article' => 'Neuer Artikel',
 	'info_nouvelle_traduction' => 'Neue Übersetzung:',
@@ -587,8 +587,8 @@ in einer Farbe, die den Status anzeigt :',
 	'install_serveur_hebergeur' => 'Vom Provider bereitgestellter Datenbankserver',
 	'install_table_prefix_hebergeur' => 'Prefix der vom Provider zugeteilten Tabelle',
 	'install_tables_base' => 'Tabellen der Datenbank',
-	'install_types_db_connus' => 'SPIP kann <b>MySQL</b> (am weitesten verbreitet), <b>PostgreSQL</b> und <b>SQLite</b> verwenden.', # MODIF
-	'install_types_db_connus_avertissement' => 'Achtung: Mehrere Plugins benötigen MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP beherrscht <b>MySQL</b> (am weitesten verbreitet) und  <b>SQLite</b>.', # Geht PostGreSQL jetzt nicht mehr?
+	'install_types_db_connus_avertissement' => '<b>PostgreSQL</b> wird testweise unterstützt.',
 	'instituer_erreur_statut_a_change' => 'Der Status wurde bereits geändert.',
 	'instituer_erreur_statut_non_autorise' => 'Sie dürfen diesen Status nicht auswählen.',
 	'intem_redacteur' => 'Redakteur',
@@ -733,7 +733,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugin_info_install_ok' => 'Installation war erfolgreich.',
 	'plugin_info_necessite' => 'Erfordert:',
 	'plugin_info_non_compatible_spip' => 'Dieses Plugin ist nicht mit SPIP kompatibel.',
-	'plugin_info_plugins_dist_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und sind aktiviert.', # MODIF
+	'plugin_info_plugins_dist_1' => 'Diese Erweiterungen liegen im Verzeichnis @plugins_dist@ und werden dort aktiviert.',
 	'plugin_info_plugins_dist_2' => 'Man kann sie nicht deaktivieren.', # MODIF
 	'plugin_info_telecharger' => 'herunterladen von @url@ und in @rep@ installieren',
 	'plugin_librairies_installees' => 'Installierte Bibliotheken',
@@ -763,7 +763,7 @@ in einer Farbe, die den Status anzeigt :',
 	'plugins_disponibles' => '@count@ verfügbare Plugins.',
 	'plugins_erreur' => 'Fehler in den Plugins: @plugins@',
 	'plugins_liste' => 'Installierte Plugins',
-	'plugins_liste_dist' => 'Erweiterungen', # MODIF
+	'plugins_liste_dist' => 'Gesicherte Plugins', # Das hat jetzt aber mit plugins_liste_dist nichts mehr zu tun.
 	'plugins_recents' => 'Neueste Plugins.',
 	'plugins_tous_liste' => 'Alle',
 	'plugins_vue_hierarchie' => 'Hierarchie',
