@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calendar pe lun&#259;',
 'cal_par_semaine' => 'calendar pe s&#259;pt&#259;m&acirc;n&#259;',
 'confirm_changer_statut' => 'Aten&#355;ie, a&#355;i cerut schimbarea st&#259;rii acestui element. Dori&#355;i s&#259; continua&#355;i ?',
+'correcte' => 'corect&#259;',
 
 
 // D
@@ -350,6 +351,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'image_tourner_droite' => 'Rota&#355;ie 90&deg; la dreapta',
 'image_tourner_gauche' => 'Rota&#355;ie 90&deg; la st&acirc;nga',
 'img_indisponible' => 'imagine nedisponibil&#259;',
+'impossible' => 'imposibil',
 'info_a_suivre' => 'DE URM&#258;RIT&nbsp;&raquo;',
 'info_a_valider' => '[de validat]',
 'info_acces_interdit' => 'Acces interzis',
@@ -680,6 +682,9 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 
 
 // S
+'squelette' => 'schelet',
+'squelette_inclus_ligne' => 'schelet inclus, linia',
+'squelette_ligne' => 'schelet, linia',
 'stats_visites_et_popularite' => '@visites@ vizite&nbsp;; popularitate&nbsp;: @popularite@',
 'suivant' => 'urm&#259;torul',
 
