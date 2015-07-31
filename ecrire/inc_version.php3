@@ -240,6 +240,12 @@ $test_i18n = false;
 // faut-il souligner en gris, dans articles.php3, les espaces insecables ?
 $activer_revision_nbsp = false;
 
+// Syndication : faut-il integrer les <enclosure> des flux RSS sous
+// forme de documents distants dans la table spip_documents ?
+// (par defaut, on se contente de conserver une trace de ces documents
+// dans le champ #TAGS de l'article syndique).
+$integrer_enclosures = false;
+
 // gestion des extras (voir inc_extra.php3 pour plus d'informations)
 $champs_extra = false;
 $champs_extra_proposes = false;

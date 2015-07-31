@@ -291,7 +291,15 @@ function analyser_site($url) {
 }
 
 // Inserer les references aux fichiers joints
+// presentes sous la forme microformat <a rel="enclosure">
 function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
+	if (!preg_match_all(
+	',<a([[:space:]][^>]*)?[[:space:]]rel=[\'"]enclosure[^>]*>,',
+	$enclosures, $regs, PREG_PATTERN_ORDER))
+		return false;
+	$enclosures = $regs[0];
+
+	include_ecrire('inc_filtres.php3'); # pour extraire_attribut
 
 	list($id_syndic_article) = spip_fetch_array(spip_query(
 	"SELECT id_syndic_article FROM spip_syndic_articles
@@ -303,15 +311,13 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
 
 	// Integrer les enclosures
 	foreach ($enclosures as $enclosure) {
-		// url et type sont obligatoires
-		if (preg_match(',[[:space:]]url=[\'"]?([^\'">]*),i',
-		$enclosure, $enc_regs_url)
-		AND preg_match(',[[:space:]]type=[\'"]?([^\'">]*),i',
-		$enclosure, $enc_regs_type)) {
+		// href et type sont obligatoires
+		if ($enc_regs_url = extraire_attribut($enclosure,'href')
+		AND $enc_regs_type = extraire_attribut($enclosure,'type')) {
 
-			$url = substr(urldecode($enc_regs_url[1]), 0,255);
+			$url = substr(urldecode($enc_regs_url), 0,255);
 			$url = addslashes(abs_url($url, $le_lien));
-			$type = $enc_regs_type[1];
+			$type = $enc_regs_type;
 
 			// Verifier que le content-type nous convient
 			list($id_type) = spip_fetch_array(spip_query("SELECT id_type
@@ -325,12 +331,7 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
 			}
 
 			// length : optionnel (non bloquant)
-			if (preg_match(',[[:space:]]length=[\'"]?([^\'"]*),i',
-			$enclosure, $enc_regs_length)) {
-				$taille = intval($enc_regs_length[1]);
-			} else {
-				$taille = 0;
-			}
+			$taille = intval(extraire_attribut($enclosure, 'length'));
 
 			// Inserer l'enclosure dans la table spip_documents
 			if ($t = spip_fetch_array(spip_query("SELECT id_document FROM
@@ -568,7 +569,8 @@ function analyser_backend($rss) {
 		// Trouver les pieces jointes <enclosure> (RSS)
 		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
 		$item, $matches, PREG_PATTERN_ORDER))
-			$data['enclosures'] = $matches[0];
+			$data['enclosures'] = join(', ',
+				array_map('enclosure2microformat', $matches[0]));
 
 		$articles[] = $data;
 	}
@@ -576,10 +578,24 @@ function analyser_backend($rss) {
 	return $articles;
 }
 
+// Passe un <enclosure url="fichier" length="5588242" type="audio/mpeg"/>
+// au format microformat <a rel="enclosure" href="fichier" ...>fichier</a>
+function enclosure2microformat($e) {
+	include_ecrire('inc_filtres.php3');
+	$url = extraire_attribut($e, 'url');
+	$fichier = basename($url) OR $fichier;
+	$e = preg_replace(',<enclosure[[:space:]],i','<a rel="enclosure" ', $e)
+		. $fichier.'</a>';
+	$e = inserer_attribut($e, 'url', '');
+	$e = inserer_attribut($e, 'href', filtrer_entites($url));
+	$e = str_replace('/>', '>', $e);
+	return $e;
+}
+
 //
 // Insere un article syndique (renvoie true si l'article est nouveau)
 //
-function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume) {
+function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $url_syndic, $resume, $documents) {
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 	$le_lien = substr($data['url'], 0,255);
@@ -616,6 +632,12 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	$update_date = $data['lastbuilddate'] ?
 		"date = FROM_UNIXTIME(".$data['lastbuilddate'].")," : '';
 
+	// tags & enclosures
+	if ($data['tags'] AND $data['enclosures'])
+		$tags = $data['tags'].', '.$data['enclosures'];
+	else
+		$tags = $data['tags'].$data['enclosures'];
+
 	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
 	spip_query ("UPDATE spip_syndic_articles SET
 	titre='".addslashes($data['titre'])."',
@@ -625,11 +647,12 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	lang='".addslashes(substr($data['lang'],0,10))."',
 	source='".addslashes(substr($data['source'],0,255))."',
 	url_source='".addslashes(substr($data['url_source'],0,255))."',
-	tags='".addslashes($data['tags'])."'
+	tags='".addslashes($tags)."'
 	WHERE id_syndic='$now_id_syndic' AND url='".addslashes($le_lien)."'");
 
 	// Inserer les enclosures
-	if ($data['enclosures']) {
+	if ($GLOBALS['integrer_enclosures']
+	AND $data['enclosures']) {
 		traiter_les_enclosures_rss($data['enclosures'],
 			$now_id_syndic, $le_lien);
 	}
@@ -678,7 +701,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		$urls = array();
 		foreach ($articles as $data) {
 			if ($data['url']) {
-				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume']);
+				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents']);
 				$urls[] = $data['url'];
 			}
 		}
@@ -904,7 +927,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 			$id_syndic_article=$row["id_syndic_article"];
 			$id_syndic=$row["id_syndic"];
-			$titre=typo($row["titre"]);
+			$titre=safehtml($row["titre"]);
 			$url=$row["url"];
 			$date=$row["date"];
 			$lesauteurs=typo($row["lesauteurs"]);
@@ -940,7 +963,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$s.= " ($date)";
 
 			// S'il y a des fichiers joints (enclosures), on les affiche ici
-			if (spip_num_rows($q = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_syndic AS lien WHERE lien.id_syndic_article = $id_syndic_article AND lien.id_document = docs.id_document"))) {
+/*			if (spip_num_rows($q = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_syndic AS lien WHERE lien.id_syndic_article = $id_syndic_article AND lien.id_document = docs.id_document"))) {
 				include_ecrire('inc_documents.php3');
 				while ($t = spip_fetch_array($q)) {
 					$t = $t['fichier'];
@@ -951,15 +974,19 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 							entites_html($t));
 				}
 			}
+*/
+			// Tags : d'un cote les enclosures, de l'autre les liens
+			if($e = afficher_enclosures($row['tags']))
+				$s .= ' '.$e;
 
 			// descriptif
 			if (strlen($descriptif) > 0)
 				$s .= "<div class='arial1'>".safehtml($descriptif)."</div>";
 
 			// tags
-			if (strlen($row['tags']))
+			if ($tags = afficher_tags($row['tags']))
 				$s .= "<div style='float:$spip_lang_right;'><em>"
-					. $row['tags'] . '</em></div>';
+					. $tags . '</em></div>';
 
 			// source
 			if (strlen($row['url_source']))

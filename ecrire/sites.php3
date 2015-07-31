@@ -429,6 +429,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			));
 
 		// Oublier les vieux liens ?
+		// Depublier les liens qui ne figurent plus ?
 		# appliquer les choix
 		if ($miroir == 'oui' OR $miroir == 'non')
 			spip_query("UPDATE spip_syndic SET miroir='$miroir'
