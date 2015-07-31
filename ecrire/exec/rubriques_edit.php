@@ -34,8 +34,8 @@ function exec_rubriques_edit_dist()
 		$texte = "";
 		$id_parent = intval($id_parent);
 
-		if (!autoriser('publierdans','rubrique',$id_parent)) {
-			$id_parent = $GLOBALS['connect_id_rubrique'][0];
+		if (!autoriser('creerrubriquedans','rubrique',$id_parent)) {
+			$id_parent = reset($GLOBALS['connect_id_rubrique']);
 		}
 	} else {
 		$id_rubrique = intval($id_rubrique);
@@ -54,8 +54,8 @@ function exec_rubriques_edit_dist()
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 
 	if ($connect_statut !='0minirezo'
-	OR ($new AND !autoriser('voir','rubrique',$id_parent))
-	OR (!$new AND !autoriser('voir','rubrique',$id_rubrique)))  {
+	OR ($new=='oui' AND !autoriser('creerrubriquedans','rubrique',$id_parent))
+	OR ($new!='oui' AND !autoriser('modifier','rubrique',$id_rubrique)))  {
 		echo $commencer_page(_T('info_modifier_titre', array('titre' => $titre)), "naviguer", "rubriques", $id_rubrique);
 		echo "<strong>"._T('avis_acces_interdit')."</strong>";
 		echo fin_page();
