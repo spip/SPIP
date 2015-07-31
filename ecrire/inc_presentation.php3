@@ -384,6 +384,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$date = $row['date'];
 			$statut = $row['statut'];
 			$visites = $row['visites'];
+			$descriptif = $row['descriptif'];
+			if ($descriptif) $descriptif = " title='".attribut_html(typo($descriptif))."'";
 
 			$query_petition = "SELECT COUNT(*) AS cnt FROM spip_petitions WHERE id_article=$id_article";
 			$row_petition = mysql_fetch_array(spip_query($query_petition));
@@ -421,7 +423,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$puce = "puce-$puce.gif";
 
 			$s .= "<img src=\"img_pack/$puce\" alt='-' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
-			$s .= "<a href=\"articles.php3?id_article=$id_article\">".typo($titre)."</a>";
+			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif>".typo($titre)."</a>";
 			if ($petition) $s .= " <Font size=1 color='red'>P&Eacute;TITION</font>";
 
 			$vals[] = $s;
