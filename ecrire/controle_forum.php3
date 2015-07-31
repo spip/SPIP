@@ -10,15 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("inc.php3");
-
-$nom = "controle_forum";
-$f = find_in_path('inc_' . $nom . '.php');
-if ($f) 
-  include($f);
-else  include_ecrire('inc_' . $nom . '.php');
-if (function_exists($nom))
-  $nom($page, $debut, $debut_id_forum, $id_rubrique);
-
+$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
+$var_f($page, $debut, $debut_id_forum, $id_rubrique);
 ?>

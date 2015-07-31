@@ -1209,7 +1209,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
 
 			$s = "<div>";
-			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
+			$s .= "<a href='breves_voir.php3?id_breve=$id_breve' style=\"display:block;\">";
 
 			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 				include_ecrire("inc_logos.php3");

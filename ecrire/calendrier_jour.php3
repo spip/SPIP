@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 if (!isset($_GET['type'])) $type = 'jour';
-include ("calendrier.php3");
-exit;
+include ("inc.php3");
+$var_f = include_fonction('calendrier');
+$var_f($type, $css);
 ?>

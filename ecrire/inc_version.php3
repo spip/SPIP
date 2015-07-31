@@ -54,6 +54,38 @@ function include_ecrire($file) {
 	else spip_log($file . " illisble");
 }
 
+function include_fonction($nom) {
+# Hack pour etre compatible avec les mes_options qui appellent cette fonction
+	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
+	$inc = ('inc_' . $nom . '.php');
+	$f = find_in_path($inc);
+	if ($f && (!$GLOBALS['included_files'][$f]++) && is_readable($f))
+		include($f);
+	else {
+		$f = _DIR_INCLUDE . $inc;
+		if ((!$GLOBALS['included_files'][$f]++) && is_readable($f))
+			include($f);
+		else {
+		  // provisoire avant renommage php/php3
+			$f = _DIR_INCLUDE . ('inc_' . $nom . '.php3');
+			if ((!$GLOBALS['included_files'][$f]++) && is_readable($f))
+				include($f);
+			else {
+			  spip_log($inc . " inconnu");
+			// esperons qu'elle est dans les fichiers deja lus
+			  return $nom;
+			}
+		}
+	}
+	if (function_exists($nom))
+		return $nom;
+	elseif (function_exists($nom .= "_dist"))
+		return $nom;
+	else {
+		spip_log("fonction $var_nom indisponible");
+		exit;
+	}
+}
 
 // *********** traiter les variables ************
 
