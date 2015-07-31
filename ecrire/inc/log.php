@@ -17,7 +17,7 @@ function inc_log_dist($message, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
 	static $compteur = array();
 	global $nombre_de_logs, $taille_des_logs;
 
-	if (is_null($logname))
+	if (is_null($logname) OR !is_string($logname))
 		$logname = defined('_FILE_LOG') ? _FILE_LOG : 'spip';
 	if (!isset($compteur[$logname])) $compteur[$logname] = 0;
 	if ($logname != 'maj'
