@@ -64,6 +64,29 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 	return $texte;
 }
 
+//
+// vignette pour les documents lies
+//
+function vignette_par_defaut ($type_extension) {
+	if ($GLOBALS['flag_ecrire'])
+		$img = "IMG2";
+	else
+		$img = "IMG";
+		$filename = "$img/type_$type_extension.png";
+
+	if (file_exists($filename)) {
+		$vig = "<img src='$filename'>";
+	} else {
+		$vig =  "<table cellpadding=0 cellspacing=0 border=0 width=35 height=32 align='left' valign='bottom'>\n";
+		$vig .= "<tr width=35 height=32>\n";
+		$vig .= "<td width=35 height=32 background='$img/document-vierge.gif' align='left'>\n";
+		$vig .= "<table bgcolor='#666666' style='border: solid 1px black; margin-top: 10px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px;' cellspacing=0 border=0>\n";
+		$vig .= "<tr><td><font face='verdana,arial,helvetica,sans-serif' color='white' size='1'>$type_extension</font></td></tr></table>\n";
+		$vig .= "</td></tr></table>\n&nbsp;&nbsp;&nbsp;";
+	}
+
+	return $vig;
+}
 
 // Mise de cote des echappements
 function echappe_html($letexte,$source) {
@@ -208,6 +231,12 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
 
+		// on construira le lien en fonction du type de doc
+		$result_type = mysql_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
+		if ($type = @mysql_fetch_object($result_type)) {
+			$extension = $type->extension;
+		}
+
 		if ($id_vignette) {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = mysql_query($query_vignette);
@@ -222,6 +251,7 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
 		}
+
 		if ($GLOBALS['flag_ecrire']) {
 			if ($fichier) $fichier = "../$fichier";
 			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
@@ -241,7 +271,7 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 				$vignette .= " hspace='5' vspace='3'>";
 		}
 		else {
-			$vignette = "pas de pr&eacute;visualisation";
+			$vignette = vignette_par_defaut($extension);
 		}
 
 		if ($mode == 'document' OR $affichage_detaille)

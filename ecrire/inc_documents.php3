@@ -5,7 +5,6 @@
 if (defined("_ECRIRE_INC_DOCUMENTS")) return;
 define("_ECRIRE_INC_DOCUMENTS", "1");
 
-
 function texte_upload($inclus){
 	$myDir = opendir("upload");
 	while($entryName = readdir($myDir)) {
@@ -115,106 +114,22 @@ function afficher_document($id_document, $id_doc_actif=0) {
 		"</font>\n". "<br>".$raccourci_img;
 
 	//
-	// Affichage de la vignette
-	//
-
-	$result_vignette = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
-	$row_vignette = @mysql_fetch_array($result_vignette);
-
-	if ($row_vignette) {
-		$fichier_vignette = $row_vignette['fichier'];
-		$largeur_vignette = $row_vignette['largeur'];
-		$hauteur_vignette = $row_vignette['hauteur'];
-		$taille_vignette = $row_vignette['taille'];
-	}
-
-	echo "<td width='150' align='center' valign='top'>\n";
-	echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
-	echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
-
-	if ($fichier_vignette) {
-		echo vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
-		echo "<font size='2'>\n";
-		$hash = calculer_action_auteur("supp_doc ".$id_vignette);
-		echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
-		echo "supprimer la vignette";
-		echo "</a>]</font><br>\n";
-
-		echo $raccourci_doc; $raccourci_img='';
-	}
-	else {
-
-		//
-		// joli icone a la main
-		//
-		echo "<table cellpadding=0 cellspacing=0 border=0 width=35 height=32 align='left' valign='bottom'>\n";
-		echo "<tr width=35 height=32>\n";
-		echo "<td width=35 height=32 background='IMG2/document-vierge.gif' align='left'>\n";
-		echo "<table bgcolor='#666666' style='border: solid 1px black; margin-top: 10px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px;' cellspacing=0 border=0>\n";
-		echo "<tr><td><font face='verdana,arial,helvetica,sans-serif' color='white' size='1'>$type_extension</font></td></tr></table>\n";
-		echo "</td></tr></table>\n&nbsp;&nbsp;&nbsp;";
-
-		// retour aux choses serieuses
-		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'>\n";
-		$hash = calculer_action_auteur("ajout_doc");
-		echo "<form action='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
-		echo "<input name='redirect' type='Hidden' VALUE='article_documents.php3'>";
-		echo "<input name='ajout_doc' type='Hidden' VALUE='oui'>";
-		echo "<input name='id_document' type='Hidden' VALUE='$id_document'>";
-		echo "<input name='id_article' type='Hidden' VALUE='$id_article'>";
-		echo "<input name='mode' type='Hidden' VALUE='vignette'>";
-		echo "<Input name='hash_id_auteur' type='Hidden' VALUE='$connect_id_auteur'>";
-		echo "<input name='hash' type='Hidden' VALUE='$hash'>";
-
-		if (tester_upload()) {
-			echo "<small><b>T&eacute;l&eacute;charger une nouvelle image&nbsp;:</b></small>";
-			echo aide ("artimg");
-			echo "<small><br><INPUT NAME='image' TYPE='File'>\n";
-			echo " <INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'></small>\n";
-		}
-		if ($GLOBALS['connect_statut'] == '0minirezo') {
-			echo "<br>";
-			$texte_upload = texte_upload("image");
-			if ($texte_upload) {
-				echo "\nS&eacute;lectionner un fichier&nbsp;:";
-				echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
-				echo $texte_upload;
-				echo "\n</SELECT>";
-				echo "\n</option>";
-				echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='Choisir' CLASS='fondo'>";
-			}
-			else if (!tester_upload()) {
-				echo "Installer des images dans le dossier /ecrire/upload pour pouvoir les s&eacute;lectionner ici.";
-			}
-		}
-		echo "</form>\n";
-		echo "</font>\n";
-	}
-
-	echo "</div>\n";
-	echo "</td>\n";
-
-	//
 	// Afficher un apercu (pour les images)
 	//
 	if ($type_inclus == 'image') {
-		echo "<td width='150' align='center' valign='top'>\n";
+		echo "<td width='150' align='center' valign='top' rowspan='2'>\n";
 		echo "<div style='border: 1px solid #808080; padding: 4px; background-color: #e0f080;'>\n";
 		echo "<font size='2'><b>IMAGE</b></font><br>";
-
-		$fichier_vignette = $row['fichier'];
-		$largeur_vignette = $row['largeur'];
-		$hauteur_vignette = $row['hauteur'];
-		echo vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
+		echo vignette($largeur, $hauteur, $fichier);
 		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'><br>$largeur x $hauteur pixels<br><br></font>";
-		echo $raccourci_img;
+		echo $raccourci_doc; $raccourci_doc='';
 	}
 
 	//
 	// Afficher le document en tant que tel
 	//
 
-	echo "<td width='100%' align='left' valign='top'>\n";
+	echo "<td width='100%' align='left' valign='top' colspan='2'>\n";
 
 	if ($descriptif) {
 		echo debut_cadre_relief();
@@ -245,7 +160,81 @@ function afficher_document($id_document, $id_doc_actif=0) {
 	echo "</font>";
 
 
+	//
+	// Affichage de la vignette
+	//
+
+	$result_vignette = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
+	$row_vignette = @mysql_fetch_array($result_vignette);
+
+	if ($row_vignette) {
+		$fichier_vignette = $row_vignette['fichier'];
+		$largeur_vignette = $row_vignette['largeur'];
+		$hauteur_vignette = $row_vignette['hauteur'];
+		$taille_vignette = $row_vignette['taille'];
+	}
+
+	if ($type_inclus == 'image') 
+		echo "<tr><td width='100%'>&nbsp;<td align='right' valign='top'>\n";
+	else
+		echo "<td width='150' align='right' valign='top'>\n";
+	echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
+	echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
+
+	if ($fichier_vignette) {
+		echo vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
+		echo "<font size='2'>\n";
+		$hash = calculer_action_auteur("supp_doc ".$id_vignette);
+		echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
+		echo "supprimer la vignette";
+		echo "</a>]</font><br>\n";
+	}
+	else {
+		// pas de vignette
+		echo vignette_par_defaut ($type_extension);
+		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'>\n";
+		$hash = calculer_action_auteur("ajout_doc");
+		echo "<form action='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
+		echo "<input name='redirect' type='Hidden' VALUE='article_documents.php3'>";
+		echo "<input name='ajout_doc' type='Hidden' VALUE='oui'>";
+		echo "<input name='id_document' type='Hidden' VALUE='$id_document'>";
+		echo "<input name='id_article' type='Hidden' VALUE='$id_article'>";
+		echo "<input name='mode' type='Hidden' VALUE='vignette'>";
+		echo "<Input name='hash_id_auteur' type='Hidden' VALUE='$connect_id_auteur'>";
+		echo "<input name='hash' type='Hidden' VALUE='$hash'>";
+
+		if (tester_upload()) {
+			echo "<small><b>Nouvelle vignette&nbsp;:</b></small>";
+			echo aide ("artimg");
+			echo "<small><br><INPUT NAME='image' TYPE='File'>\n";
+			echo "<div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'></div></small>\n";
+		}
+		if ($GLOBALS['connect_statut'] == '0minirezo') {
+			echo "<br>";
+			$texte_upload = texte_upload("image");
+			if ($texte_upload) {
+				echo "\nS&eacute;lectionner un fichier&nbsp;:";
+				echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
+				echo $texte_upload;
+				echo "\n</SELECT>";
+				echo "\n</option>";
+				echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='Choisir' CLASS='fondo'>";
+			}
+			else if (!tester_upload()) {
+				echo "Installer des images dans le dossier /ecrire/upload pour pouvoir les s&eacute;lectionner ici.";
+			}
+		}
+		echo "</form>\n";
+		echo "</font>\n";
+	}
+
+	echo $raccourci_doc;
+	echo "</div>\n";
 	echo "</td>\n";
+
+	//
+	// fin de la boite document
+	//
 
 	echo "</tr></table>\n";
 
