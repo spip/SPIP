@@ -44,7 +44,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 	if (strlen($lang) > 0)
 		$req_where .= " AND articles.lang='".addslashes($lang)."'";
 
-	if ($id_secteur > 0) $req_where .= " AND articles.id_secteur = $id_secteur";
+	if ($id_secteur > 0)
+		$req_where .= " AND articles.id_secteur = ".intval($id_secteur);
 
 	$query = "
 		SELECT versions.*, articles.statut, articles.titre 
