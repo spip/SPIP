@@ -13,9 +13,9 @@ include_ecrire ("inc_calendrier.php");
 // Aide
 //
 function aide($aide='') {
-	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $dir_ecrire;
+	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $dir_ecrire, $spip_display;
 
-	if (!$aide) return;
+	if (!$aide OR $spip_display == 4) return;
 
 	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire
 	."aide_index.php3?aide=$aide&amp;var_lang=$spip_lang\" target=\"spip_aide\" ".
@@ -114,7 +114,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	}
 	
 	if (strlen($titre) > 0) {
-		$ret .= "<div class='cadre-titre'$style_gauche>$titre</div>";
+		$ret .= "<h3 class='cadre-titre'$style_gauche>$titre</h3>";
 	}
 	
 	
@@ -371,35 +371,54 @@ function afficher_plus($lien) {
 function afficher_liste($largeurs, $table, $styles = '') {
 	global $couleur_claire;
 	global $browser_name;
+	global $spip_display;
+	global $spip_lang_left;
 
 	if (!is_array($table)) return;
 	reset($table);
 	echo "\n";
-	while (list(, $t) = each($table)) {
-		// $couleur_fond = ($ifond ^= 1) ? '#FFFFFF' : $couleur_claire;
-		//echo "<tr bgcolor=\"$couleur_fond\">";
-		if (eregi("msie", $browser_name)) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
-		echo "<tr class='tr_liste'$msover>";
-		reset($largeurs);
-		if ($styles) reset($styles);
-		while (list(, $texte) = each($t)) {
-			$style = $largeur = "";
-			list(, $largeur) = each($largeurs);
-			if ($styles) list(, $style) = each($styles);
-			if (!trim($texte)) $texte .= "&nbsp;";
-			echo "<td";
-			if ($largeur) echo " width=\"$largeur\"";
-			if ($style) echo " class=\"$style\"";
-			echo ">$texte</td>";
+	if ($spip_display != 4) {
+		while (list(, $t) = each($table)) {
+			if (eregi("msie", $browser_name)) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
+			echo "<tr class='tr_liste'$msover>";
+			reset($largeurs);
+			if ($styles) reset($styles);
+			while (list(, $texte) = each($t)) {
+				$style = $largeur = "";
+				list(, $largeur) = each($largeurs);
+				if ($styles) list(, $style) = each($styles);
+				if (!trim($texte)) $texte .= "&nbsp;";
+				echo "<td";
+				if ($largeur) echo " width=\"$largeur\"";
+				if ($style) echo " class=\"$style\"";
+				echo ">$texte</td>";
+			}
+			echo "</tr>\n";
 		}
-		echo "</tr>\n";
+	} else {
+		echo "<ul style='text-align: $spip_lang_left;'>";
+		while (list(, $t) = each($table)) {
+			echo "<li>";
+			reset($largeurs);
+			if ($styles) reset($styles);
+			while (list(, $texte) = each($t)) {
+				$style = $largeur = "";
+				list(, $largeur) = each($largeurs);
+				
+				if (!$largeur) {
+					echo $texte." ";
+				}
+			}
+			echo "</li>\n";
+		}
+		echo "</ul>";
 	}
 	echo "\n";
 }
 
 function afficher_tranches_requete(&$query, $colspan) {
 	static $ancre = 0;
-	global $spip_lang_right;
+	global $spip_lang_right, $spip_display;
 
 	$query = trim($query);
 	$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
@@ -422,7 +441,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 		$ancre++;
 
 		$texte .= "<a name='a$ancre'></a>";
-		$texte .= "<tr style='background-color: #dddddd;'><td class=\"arial2\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
+		if ($spip_display != 4) $texte .= "<tr style='background-color: #dddddd;'><td class=\"arial2\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
 
 		for ($i = 0; $i < $num_rows; $i += $nb_aff){
 			$deb = $i + 1;
@@ -438,8 +457,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 				$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">$deb</A>";
 			}
 		}
-		$texte .= "</td>\n";
-		$texte .= "<td class=\"arial2\" style='border-bottom: 1px solid #444444; text-align: $spip_lang_right;' colspan=\"1\" align=\"right\" valign=\"top\">";
+		if ($spip_display != 4) $texte .= "</td>\n";
+		if ($spip_display != 4) $texte .= "<td class=\"arial2\" style='border-bottom: 1px solid #444444; text-align: $spip_lang_right;' colspan=\"1\" align=\"right\" valign=\"top\">";
 		if ($deb_aff == -1) {
 			$texte .= "<B>"._T('info_tout_afficher')."</B>";
 		} else {
@@ -448,8 +467,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 			$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</A>";
 		}
 
-		$texte .= "</td>\n";
-		$texte .= "</tr>\n";
+		if ($spip_display != 4) $texte .= "</td>\n";
+		if ($spip_display != 4) $texte .= "</tr>\n";
 
 
 		if ($deb_aff != -1) {
@@ -461,6 +480,17 @@ function afficher_tranches_requete(&$query, $colspan) {
 	return $texte;
 }
 
+
+function afficher_liste_debut_tableau() {
+	global $spip_display;
+
+	if ($spip_display != 4) return "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+}
+
+function afficher_liste_fin_tableau() {
+	global $spip_display;
+	if ($spip_display != 4) return "</table>";
+}
 
 
 //
@@ -497,7 +527,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	}
 
 
-	if ($spip_display == 4) {
+/*	if ($spip_display == 4) {
 		$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 		$result = spip_query($requete);
 		
@@ -528,7 +558,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "</ul>";
 		}
 	}
-	else {
+	else {*/
 	
 		if ($options == "avancees")  $ajout_col = 1;
 		else $ajout_col = 0;
@@ -547,8 +577,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			echo "<div class='liste'>";
 			bandeau_titre_boite2($titre_table, "article-24.gif");
 	
-			echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-	
+			//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+			echo afficher_liste_debut_tableau();
 	
 			echo $tranches;
 	
@@ -622,7 +652,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
 				$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
 				
-				if ($spip_display != 1 AND lire_meta('image_process') != "non") {
+				if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 					$logo = get_image("arton$id_article");
 					if ($logo) {
 						$fichier = $logo[0];
@@ -691,12 +721,13 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			}
 			afficher_liste($largeurs, $table, $styles);
 	
-			echo "</table>";
+			//echo "</table>";
+			echo afficher_liste_fin_tableau();
 			echo "</div>";
 			//if ($afficher_cadre) fin_cadre_gris_clair();
 	
 		}
-	}
+	//}
 	return $tous_id;
 }
 
@@ -1946,7 +1977,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	$compteur_survol ++;
 	$icone .= "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' $aligner width='$largeur'>";
 		$icone .= "<tr><td class='icone36$style' style='text-align:center;'><a href='$lien'>";
-	if ($spip_display != 1){
+	if ($spip_display != 1 AND $spip_display != 4){
 		if ($fonction != "rien.gif"){
 			$icone .= "<img src='img_pack/$fonction'$alt$title style='background: url(img_pack/$fond) no-repeat center center;' width='24' height='24' border='0'>";
 		}
@@ -2780,9 +2811,8 @@ else {
 
 function gros_titre($titre, $ze_logo=''){
 	global $couleur_foncee, $spip_display;
-	
 	if ($spip_display == 4) {
-		echo "<h1>".typo($titre)."</h1>";
+		echo "\n<h1>".typo($titre)."</h1>&nbsp;\n";
 	}
 	else {
 		echo "<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>";
@@ -2830,7 +2860,7 @@ function fin_cadre_formulaire(){
 
 function debut_gauche($rubrique = "asuivre") {
 	global $connect_statut, $cookie_admin;
-	global $options;
+	global $options, $spip_display;
 	global $connect_id_auteur;
 	global $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
@@ -2858,6 +2888,8 @@ function debut_gauche($rubrique = "asuivre") {
 
 	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
 		<tr><td width='$largeur' valign='top' class='serif' $rspan>\n";
+		
+	if ($spip_display == 4) echo "<!-- ";
 
 }
 
@@ -2902,10 +2934,12 @@ function creer_colonne_droite($rubrique=""){
 }
 
 function debut_droite($rubrique="") {
-	global $options, $spip_ecran, $deja_colonne_droite;
+	global $options, $spip_ecran, $deja_colonne_droite, $spip_display;
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques, $clean_link;
 	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
 	global $lang_left;
+
+	if ($spip_display == 4) echo " -->";
 
 	if ($options == "avancees") {
 		// liste des articles bloques

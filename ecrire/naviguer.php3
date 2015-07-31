@@ -298,60 +298,61 @@ changer_typo('', 'rubrique'.$coll);
 
 debut_gauche();
 
-if ($coll > 0) {
-	debut_boite_info();
-	echo "<CENTER>";
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_numero_rubrique')."</B></FONT>";
-	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$coll</B></FONT>";
-	echo "</CENTER>";
-
-	voir_en_ligne ('rubrique', $coll, $statut);
-
-	fin_boite_info();
-}
-
-//
-// Logos de la rubrique
-//
-
-$rubon = "rubon$coll";
-$ruboff = "ruboff$coll";
-
-if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
-	if ($coll > 0)
-		afficher_boite_logo($rubon, $ruboff, _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
-	else
-		afficher_boite_logo($rubon, $ruboff, _T('logo_standard_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
-}
-
-
-//
-// Afficher les boutons de creation d'article et de breve
-//
-debut_raccourcis();
-
-$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-$result = spip_query($query);
-
-icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
-
-if (spip_num_rows($result) > 0) {
-	if ($coll > 0)
-		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
-
-	$activer_breves = lire_meta("activer_breves");
-	if ($activer_breves != "non" AND $id_parent == "0" AND $coll != "0") {
-		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
+if ($spip_display != 4) {
+	if ($coll > 0) {
+		debut_boite_info();
+		echo "<CENTER>";
+		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_numero_rubrique')."</B></FONT>";
+		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$coll</B></FONT>";
+		echo "</CENTER>";
+	
+		voir_en_ligne ('rubrique', $coll, $statut);
+	
+		fin_boite_info();
 	}
-}
-else {
-	if ($connect_statut == '0minirezo') {
-		echo "<p>"._T('info_creation_rubrique');
+	
+	//
+	// Logos de la rubrique
+	//
+	
+	$rubon = "rubon$coll";
+	$ruboff = "ruboff$coll";
+	
+	if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
+		if ($coll > 0)
+			afficher_boite_logo($rubon, $ruboff, _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
+		else
+			afficher_boite_logo($rubon, $ruboff, _T('logo_standard_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
 	}
+	
+	
+	//
+	// Afficher les boutons de creation d'article et de breve
+	//
+	debut_raccourcis();
+	
+	$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+	$result = spip_query($query);
+	
+	icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
+	
+	if (spip_num_rows($result) > 0) {
+		if ($coll > 0)
+			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
+	
+		$activer_breves = lire_meta("activer_breves");
+		if ($activer_breves != "non" AND $id_parent == "0" AND $coll != "0") {
+			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
+		}
+	}
+	else {
+		if ($connect_statut == '0minirezo') {
+			echo "<p>"._T('info_creation_rubrique');
+		}
+	}
+	
+	fin_raccourcis();
 }
-
-fin_raccourcis();
-
 
 
 debut_droite();
@@ -377,7 +378,7 @@ gros_titre($fleche.$titre);
 echo "</td>";
 
 if ($coll > 0 AND $flag_editable) {
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td><img src='img_pack/rien.gif' alt='' width=5></td>\n";
 	echo "<td  align='right' valign='top'>";
 	icone(_T('icone_modifier_rubrique'), "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
 	echo "</td>";
@@ -468,7 +469,7 @@ if (strpos($les_enfants2,"<div class='enfants'>")){
 // Afficher les sous-rubriques
 echo "<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
-echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' width=20></td>";
+echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' alt='' width=20></td>";
 echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
 if (strlen($les_enfants2) > 0) echo "<p>";
 echo "</td></tr>";

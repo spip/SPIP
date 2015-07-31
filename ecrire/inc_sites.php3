@@ -477,7 +477,7 @@ function afficher_sites($titre_table, $requete) {
 			}
 
 			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
-			$s .= "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+			$s .= "<img src='img_pack/$puce' alt='' width='7' height='7' border='0'>&nbsp;&nbsp;";
 			
 			$s .= typo($nom_site);
 			/*if ($moderation == 'oui')

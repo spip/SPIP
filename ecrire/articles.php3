@@ -773,7 +773,7 @@ echo "</td>";
 
 
 if ($flag_editable) {
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td><img src='img_pack/rien.gif' alt='' width=5></td>\n";
 	echo "<td align='center'>";
 	$flag_modif = false;
 
@@ -1582,7 +1582,7 @@ if ($flag_editable) {
 // Documents associes a l'article
 //
 
-afficher_documents_non_inclus($id_article, "article", $flag_editable);
+if ($spip_display != 4) afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
 //
 // "Demander la publication"
