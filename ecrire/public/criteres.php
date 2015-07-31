@@ -236,23 +236,14 @@ function critere_meme_parent_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@branche
 // http://doc.spip.org/@critere_branche_dist
 function critere_branche_dist($idb, &$boucles, $crit) {
-	global $table_des_tables;
 	$not = $crit->not;
 	$boucle = &$boucles[$idb];
 
 	$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
 
-	//Trouver une jointure
-	$type = $boucle->type_requete;
-	$nom = $table_des_tables[$type];
-	list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
-	$cle = trouver_champ_exterieur('id_rubrique', $boucle->jointures, $boucle);
-	if ($cle)
-		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
-
 	$c = "calcul_mysql_in('" .
-		($cle ? "L$cle" : $boucle->id_table) .
-		".id_rubrique', calcul_branche($arg), '')";
+	  $boucle->id_table .
+	  ".id_rubrique', calcul_branche($arg), '')";
 	if ($crit->cond) $c = "($arg ? $c : 1)";
 			
 	if ($not)
