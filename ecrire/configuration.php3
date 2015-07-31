@@ -81,7 +81,7 @@ debut_cadre_couleur("racine-site-24.gif");
 		fin_cadre_relief();
 	}
 
-	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
 
 fin_cadre_couleur();
 

@@ -510,7 +510,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 		echo "<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
 		echo "<img src='"._DIR_IMG_PACK.'attachment.gif',
 			"' style='float: $spip_lang_right;' alt=\"\" />\n";
-		echo "\n"._L('R&eacute;f&eacute;rencer un document sur l\'internet')."&nbsp;:<br />";
+		echo "\n"._T('info_referencer_doc_distant')."<br />";
 		echo "\n<input name='image_url' size='32' class='fondo' value='http://' />";
 		echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok_url' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
 		echo "</div>\n";
@@ -738,7 +738,7 @@ entites_html($document['fichier'])."\" />\n";
 				}
 
 				echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
-				echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
+				echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
 				echo "</div>";
 				echo "</form>";
 
@@ -1061,7 +1061,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 		$pipe = "|$align";
 
 		if ($GLOBALS['browser_barre'])
-			$onclick = " ondblclick='barre_inserer(\"&lt;$doc$id$pipe&gt;\", document.formulaire.texte);' title=\"". entites_html(_L('Doucle-cliquez pour ins&eacute;rer ce raccourci dans le texte'))."\"";
+			$onclick = " ondblclick='barre_inserer(\"&lt;$doc$id$pipe&gt;\", document.formulaire.texte);' title=\"". entites_html(_T('double_clic_inserer_doc'))."\"";
 	} else {
 		$align='center';
 	}
@@ -1215,7 +1215,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			afficher_formulaire_taille($document, $type_inclus);
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
-		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
+		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
 		echo "</div>";
 		echo "</form>";
 
@@ -1335,7 +1335,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		}
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
-		echo "<input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
+		echo "<input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
 		echo "</div>";
 		echo "</div>";
 		echo "</form>";

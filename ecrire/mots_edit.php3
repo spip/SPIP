@@ -278,7 +278,7 @@ if ($connect_statut =="0minirezo"){
 		extra_saisie($extra, 'mots', $id_groupe);
 	}
 
-	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
 	
 	echo "</div>";
 	echo "</FORM>";

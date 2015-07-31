@@ -279,7 +279,7 @@ if ($champs_extra) {
 	}
 
 
-echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
 echo "</FORM>";
 
 if ($cadre_ouvert) fin_cadre_enfonce();

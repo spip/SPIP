@@ -505,7 +505,7 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='Hidden' NAME='statut_nouv' VALUE=\"prepa\" SIZE='40'><P>";
 
 	echo "<DIV ALIGN='right'>";
-	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
+	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
 	echo "</DIV></FORM>";
 
 fin_cadre_formulaire();

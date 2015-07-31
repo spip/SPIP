@@ -412,7 +412,7 @@ echo "<INPUT NAME='ajouter_id_article' VALUE='$ajouter_id_article' TYPE='hidden'
 echo "<INPUT NAME='redirect' VALUE='$redirect' TYPE='hidden'>\n";
 echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
-echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></DIV>";
+echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'></DIV>";
 
 echo "</div>";
 
