@@ -705,6 +705,38 @@ function autoriser_syndic_editermots_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser_rubrique_editermots_dist($faire,'syndic',0,$qui,$opts);
 }
 
+// http://doc.spip.org/@autoriser_rubrique_iconifier_dist
+function autoriser_rubrique_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+	return autoriser('publierdans', 'rubrique', $id, $qui, $opt);
+}
+// http://doc.spip.org/@autoriser_auteur_iconifier_dist
+function autoriser_auteur_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+ return (($id == $qui['id_auteur']) OR
+ 		(($qui['statut'] == '0minirezo') AND !$qui['restreint']));
+}
+// http://doc.spip.org/@autoriser_mot_iconifier_dist
+function autoriser_mot_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+ return (($qui['statut'] == '0minirezo') AND !$qui['restreint']);
+}
+// http://doc.spip.org/@autoriser_article_iconifier_dist
+function autoriser_iconifier_dist($faire,$quoi,$id,$qui,$opts){
+	// On reprend le code de l'ancien iconifier pour definir les autorisations pour les autres
+	// objets SPIP. De ce fait meme de nouveaux objets bases sur cet algorithme peuvent continuer
+	// a fonctionner. Cependant il est recommander de leur definir une autorisation specifique
+	$table = table_objet_sql($quoi);
+	$id_objet = id_table_objet($quoi);
+	$row = sql_fetsel("id_rubrique, statut", $table, "$id_objet=$id");
+	$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
+
+	if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
+	  $jointure = table_jointure('auteur', 'article');
+	  if ($droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur"))
+		$droit = true;
+	}
+
+	return $droit;
+}
+
 // Deux fonctions sans surprise pour permettre les tests
 // Dire toujours OK
 // http://doc.spip.org/@autoriser_ok_dist

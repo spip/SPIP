@@ -25,36 +25,17 @@ function exec_iconifier_dist()
 }
 
 // http://doc.spip.org/@exec_iconifier_args
-function exec_iconifier_args($id, $type, $script, $iframe=false)
+function exec_iconifier_args($id, $primary, $script, $iframe=false)
 {
-	global $connect_id_auteur, $connect_toutes_rubriques;;
-	if (!preg_match('/^\w+$/', "$type$script")) {
-		$droit = false;
-	} else {
-		if ($type == 'id_rubrique')
-			$droit = autoriser('publierdans','rubrique',$id);
-		elseif ($type == 'id_auteur')
-			$droit = (($id == $connect_id_auteur) OR $connect_toutes_rubriques);
-		elseif ($type == 'id_mot')
-			$droit = $connect_toutes_rubriques;
-		else {
-			$table=substr($type, 3) . (($type == 'id_syndic') ? '' : 's');
-			$row = sql_fetsel("id_rubrique, statut", "spip_$table", "$type=$id");
-			$droit = autoriser('publierdans','rubrique',$row['id_rubrique']);
-			if (!$droit AND  ($row['statut'] == 'prepa' OR $row['statut'] == 'prop' OR $row['statut'] == 'poubelle')) {
-			  $jointure = table_jointure('auteur', 'article');
-			  $droit = sql_fetsel("id_auteur", "spip_$jointure", "id_article=".sql_quote($id) . " AND id_auteur=$connect_id_auteur");
-			}
-		}
-	}
-
-	if (!$droit) {
+	$type = objet_type(table_objet(substr($primary, 3)));
+	if (!preg_match('/^\w+$/', "$primary$script")
+	  OR !autoriser('iconifier', $type, $id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 
 		$iconifier = charger_fonction('iconifier', 'inc');
-		$ret = $iconifier($type, $id, $script, $visible=true);
+		$ret = $iconifier($primary, $id, $script, $visible=true);
 	
 		if ($iframe!=='iframe') 
 			ajax_retour($ret);
@@ -62,5 +43,4 @@ function exec_iconifier_args($id, $type, $script, $iframe=false)
 			echo "<div class='upload_answer upload_document_added'>$ret</div>";
 		}
 	}
-}
-?>
+}?>
