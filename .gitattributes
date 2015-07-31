@@ -370,6 +370,7 @@ ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
 ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
+/inc-public.php3 -text
 /puce.gif -text
 /puce_rtl.gif -text
 /rien.gif -text
