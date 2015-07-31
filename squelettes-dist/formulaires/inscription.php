@@ -49,12 +49,13 @@ function formulaires_inscription_verifier_dist($mode='', $id=0) {
 
 	if (!$nom = _request('nom_inscription'))
 		$erreurs['nom_inscription'] = _T("info_obligatoire");
-	if (!$mail = _request('mail_inscription'))
+	if (!$mail = strval(_request('mail_inscription')))
 		$erreurs['mail_inscription'] = _T("info_obligatoire");
 	
 	// compatibilite avec anciennes fonction surchargeables
 	// plus de definition par defaut
 	if (!count($erreurs)){
+		include_spip('action/inscrire_auteur');
 		if (function_exists('test_inscription'))
 			$f = 'test_inscription';
 		else 
