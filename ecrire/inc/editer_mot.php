@@ -343,6 +343,8 @@ function formulaire_mots_cles($id_groupes_vus, $id_objet, $les_mots, $table, $ta
 // http://doc.spip.org/@menu_mots
 function menu_mots($row, $id_groupes_vus, $les_mots)
 {
+	$rand = rand(0,10000); # pour antifocus & ajax
+
 	$id_groupe = $row['id_groupe'];
 
 	$result = spip_query("SELECT id_mot, type, titre FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY type, titre");
@@ -360,7 +362,7 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 
 	// forcer le recalcul du noeud car on est en Ajax
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
-	$jscript2 = "if(!antifocus_mots[$id_groupe]){this.value='';antifocus_mots[$id_groupe]=true;}";
+	$jscript2 = "if(!antifocus_mots['$rand-$id_groupe']){this.value='';antifocus_mots['$rand-$id_groupe']=true;}";
 
 	if ($n > 50) {
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
