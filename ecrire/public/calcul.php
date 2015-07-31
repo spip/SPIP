@@ -61,10 +61,10 @@ function squelette_obsolete($skel, $squelette) {
 # - des fonctions de traduction de balise, de critere et de boucle
 # - des declaration de tables SQL supplementaires
 
-function charger_squelette ($squelette) {
-	$ext = $GLOBALS['extension_squelette'];
-	$nom = $ext . '_' . md5($squelette);
-	$sourcefile = $squelette . ".$ext";
+function charger_squelette ($squelette, $mime_type, $gram) {
+
+	$nom = $mime_type . '_' . md5($squelette);
+	$sourcefile = $squelette . ".$gram";
 
 	// le squelette est-il deja en memoire (INCLURE  a repetition)
 	if (function_exists($nom))
@@ -96,7 +96,7 @@ function charger_squelette ($squelette) {
 
 	if (function_exists($nom)) return $nom;
 
-	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
+	$skel_code = calculer_squelette($skel, $nom, $gram, $sourcefile);
 	// Tester si le compilateur renvoie une erreur
 
 	if (is_array($skel_code))
@@ -145,14 +145,16 @@ function cherche_page ($cache, $contexte, $fond)  {
 		lang_select($lang);
 
 	$f = include_fonction('trouver_squelette', 'public');
-	$skel = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
+	list($skel,$mime_type, $gram) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
-	// Charger le squelette et recuperer sa fonction principale
-	// (compilation automatique au besoin) et calculer
+	// Compiler le squelette en specifiant les langages cibles et source
+	// (cette compilation n'intervient qu'en cas de modif du squelette)
+	// et appliquer sa fonction principale sur le contexte 
+	// Passer le nom du cache pour produire sa destruction automatique
 
 	$page = array();
 
-	if ($fonc = charger_squelette($skel)) {
+	if ($fonc = charger_squelette($skel, $mime_type, $gram)) {
 		spip_timer('calcul page');
 		$page = $fonc(array('cache' => $cache), array($contexte));
 		spip_log("calcul ("
@@ -163,12 +165,9 @@ function cherche_page ($cache, $contexte, $fond)  {
 		);
 	}
 
-	// Passer la main au debuggueur)
 	if ($GLOBALS['var_mode'] == 'debug') {
 		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
-#	spip_log("page " . strlen($page['texte']) . " $skel .  $fonc");
-	// Retourner la structure de la page
 
 	return $page;
 }
