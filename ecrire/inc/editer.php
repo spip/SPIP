@@ -32,12 +32,11 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$table_objet = table_objet($type);
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
-	
 	$new = $id;
 	// Appel direct dans un squelette
 	if (!$row) {
 		if ($select = charger_fonction($type."_select",'inc',true)){
-			$row = article_select($id, $id_parent, $lier_trad);
+			$row = $select($id, $id_parent, $lier_trad);
 			if (!$row) return '';
 		}
 		else {
