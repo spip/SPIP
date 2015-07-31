@@ -81,7 +81,7 @@ function exec_auteurs_args($statut, $tri, $debut, $recherche=NULL, $trouve='', $
 
 		echo bandeau_auteurs($tri, $visiteurs);
 		
-		echo  $trouve, "<div class='nettoyeur' /></div>";
+		echo  $trouve, "<div class='nettoyeur'></div>";
 
 		echo "<div id='auteurs'>", $recherche, "</div>";
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));

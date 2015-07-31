@@ -138,7 +138,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 		    ? icone_inline(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",$spip_lang_right)
 		    : icone_inline(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",$spip_lang_right))
 	    ."</div>":""))
-	  . "<div class='nettoyeur' /></div>"
+	  . "<div class='nettoyeur'></div>"
 	  . $boucles;
 
 	$onglet_enfants = pipeline('affiche_enfants',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>$onglet_enfants));
@@ -357,16 +357,16 @@ function contenu_naviguer($id_rubrique, $id_parent) {
 	if ($n && !_INTERFACE_ONGLETS) {
 		if (autoriser('creerarticledans','rubrique',$id_rubrique))
 		  $bouton_article .= icone_inline(_T('icone_ecrire_article'), generer_url_ecrire("articles_edit","id_rubrique=$id_rubrique&new=oui"), "article-24.gif","creer.gif", $spip_lang_right)
-		  . "<div class='nettoyeur' /></div>";
+		  . "<div class='nettoyeur'></div>";
 
 		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if (autoriser('creerbrevedans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent)))
 		  $bouton_breves .= icone_inline(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","id_rubrique=$id_rubrique&new=oui"), "breve-24.gif","creer.gif", $spip_lang_right)
-		  . "<div class='nettoyeur' /></div>";
+		  . "<div class='nettoyeur'></div>";
 
 		if (autoriser('creersitedans','rubrique',$id_rubrique))
 			$bouton_sites .= icone_inline(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique"), "site-24.gif", "creer.gif", $spip_lang_right)
-		  . "<div class='nettoyeur' /></div>";
+		  . "<div class='nettoyeur'></div>";
 	}
 
 	//////////  Les articles en cours de redaction
