@@ -321,7 +321,7 @@ function mySel($varaut,$variable) {
 				debut_cadre_enfonce();	
 				echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">';
 				echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
-				<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</font></b>\n";
+				<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un responsable Žditorial pourra vous en attribuer un nouveau).</font></b>\n";
 				fin_cadre_enfonce();	
 				echo "<p>";
 			}
@@ -353,7 +353,7 @@ function mySel($varaut,$variable) {
 			echo "<center><B>Statut de cet auteur : </B> ";
 			echo " <SELECT NAME='statut' SIZE=1 CLASS='fondl'>";
 			if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques)
-				echo "<OPTION".mySel("0minirezo",$statut).">administrateur";
+				echo "<OPTION".mySel("0minirezo",$statut).">responsable &eacute;ditorial";
 			echo "<OPTION".mySel("1comite",$statut).">r&eacute;dacteur";
 			echo "<OPTION".mySel("5poubelle",$statut).">&agrave; la poubelle";
 			if ($statut=="6forum") echo "<OPTION".mySel("6forum",$statut).">participant au forum";
@@ -374,10 +374,10 @@ function mySel($varaut,$variable) {
 			$result_admin = spip_query($query_admin);
 			
 			if (mysql_num_rows($result_admin) == 0) {
-				echo "Cet administrateur g&egrave;re <b>toutes les rubriques</b>.";
+				echo "Ce responsable &eacute;ditorial g&egrave;re <b>toutes les rubriques</b>.";
 			}
 			else {
-				echo "Cet administrateur g&egrave;re les rubriques suivantes :\n";
+				echo "Cet responsable &eacute;ditorial g&egrave;re les rubriques suivantes :\n";
 				echo "<ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
 				while ($row_admin = mysql_fetch_array($result_admin)) {
 					$id_rubrique = $row_admin["id_rubrique"];

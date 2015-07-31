@@ -151,8 +151,14 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 }
 $texte = $texte_ajout . $texte;
 
+
+if (strlen($virtuel) > 0) {
+	$chapo = "=$virtuel";
+	$query = "UPDATE spip_articles SET chapo=\"$chapo\" WHERE id_article=$id_article";
+	$result = spip_query($query);
+}
+
 if ($titre && !$ajout_forum && $flag_editable) {
-	if (strlen($virtuel) > 0 AND $confirme_virtuel == "oui") $chapo = "=$virtuel";
 
 	$surtitre = addslashes(corriger_caracteres($surtitre));
 	$titre = addslashes(corriger_caracteres($titre));
@@ -369,7 +375,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	if ($change_accepter_forum) $visible = true;
 
 	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
-	echo "<tr><td width='100%' align='center' bgcolor='#FFCC66'>\n";
+	echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
 	if ($visible)
 		echo bouton_block_visible("forumarticle");
@@ -471,7 +477,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$visible = false;
 
 	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
-	echo "<tr><td width='100%' align='center' bgcolor='#FFCC66'>\n";
+	echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
 	if ($visible)
 		echo bouton_block_visible("petition");
@@ -546,6 +552,32 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 }
 
 
+	if ($connect_statut=="0minirezo" AND $options=="avancees"){
+		echo "<p><center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
+		echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
+		echo bouton_block_invisible("virtuel");
+		echo "REDIRECTION";
+		echo aide ("artvirt");
+		echo "</b></font></td></tr></table></center><p>";
+		echo "<form action='articles.php3' method='post'>";
+		echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
+
+		echo debut_block_invisible("virtuel");
+		if (strlen($virtuel) == 0) $virtuel = "http://";
+		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><P>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
+		echo "</font>";
+		echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'>";
+		echo "</form>";
+		echo fin_block();
+	}
+
+
+
+
+
 if ($boite_ouverte) {
 	fin_boite_info();
 }
@@ -569,9 +601,20 @@ icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
 
 if ($connect_statut == '0minirezo') {
 	echo "<p>";
-	$retour = urlencode("articles.php3?id_article=$id_article");
-	icone_horizontale("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.gif", "creer.gif");
-	
+
+		echo "<form action='articles.php3' method='post'>";
+		echo "<div class='iconeon' style='padding:5px;'>";
+		echo "<input type='Hidden' name='id_article' value='$id_article'>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 color='#333333'>Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article&nbsp;:</font>";
+			echo "<div><INPUT TYPE='text' NAME='creer_auteur' CLASS='forml' style='font-size:9px;' VALUE='' SIZE='20'></div>";
+			echo "<div align='right'><INPUT TYPE='submit' NAME='Cr&eacute;er' style='font-size:9px;' VALUE='Cr&eacute;er' CLASS='fondl'></div>";
+		echo "</div>";
+		echo "</form>";
+
+
+
+
+
 	$articles_mots = lire_meta('articles_mots');
 	if ($articles_mots != "non") {
 		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mot-cle-24.gif", "creer.gif");
@@ -1126,28 +1169,6 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "</div></FORM>";
 	}
 	
-	if ($connect_statut == "0minirezo"){
-		echo "<form action='articles.php3' method='post'>";
-		echo "<input type='Hidden' name='id_article' value='$id_article'>";
-		echo "<table cellpadding=0 cellspacing=0 border=0 width=100%>";
-		echo "<tr width=100%>";
-		echo "<td valign='top'>";
-		echo bouton_block_invisible("creer_auteur,creer_auteur2");
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1>Cr&eacute;er et ajouter un nouvel auteur&nbsp;:</font>";
-		echo "</td>";
-		echo "<td width=20>&nbsp;</td>";
-		echo "<td valign='top' width=150>";
-			echo debut_block_invisible("creer_auteur");
-			echo "<INPUT TYPE='text' NAME='creer_auteur' CLASS='forml' style='font-size:9px;' VALUE='' SIZE='20'>";
-			echo fin_block();
-		echo "</td><td>";
-			echo debut_block_invisible("creer_auteur2");
-			echo " <INPUT TYPE='submit' NAME='Cr&eacute;er' style='font-size:9px;' VALUE='Cr&eacute;er' CLASS='fondl'>";
-			echo fin_block();
-		echo "</td>";	
-		echo "</tr></table>";
-		echo "</form>";
-	}
 		
 	echo fin_block();
 }

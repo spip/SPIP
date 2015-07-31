@@ -8,6 +8,7 @@ $choix = join($aff_art,"");
 
 if (ereg("5poubelle",$choix)) debut_page("Auteurs","redacteurs","redac-poubelle");
 else if (ereg("0minirezo",$choix)) debut_page("Auteurs","redacteurs","administrateurs");
+else if ($sans_acces == "oui") debut_page("Auteurs","redacteurs","redacteurs_sans");
 else debut_page("Auteurs","redacteurs","redacteurs");
 
 debut_gauche();
@@ -49,6 +50,7 @@ $retour=urlencode("auteurs.php3?class=$class&aff_art[]=$aff_art&liste_lettres=$l
 
 function calculer_auteurs($result) {
 	global $les_auteurs;
+	global $sans_acces, $choix;
 	
 	global $k_nom;
 	global $k_email;
@@ -59,16 +61,22 @@ function calculer_auteurs($result) {
 	global $nombre_auteurs;
 		
 	while ($row = mysql_fetch_array($result)) {
-		$nombre_auteurs++;
-		$id_auteur = $row["id_auteur"];
-		$k_nom[$id_auteur] = ucfirst(trim($row["nom"]));
-		$k_email[$id_auteur] = $row["email"];
-		$k_url_site[$id_auteur] = $row["url_site"];
-		$k_statut[$id_auteur] = $row["statut"];
-		$k_nombre_articles[$id_auteur]=$row["compteur"];
-		if (($row["messagerie"] == "non") OR ($row['login'] == ''))
-			$k_messagerie[$id_auteur]= "non";
-		$les_auteurs.=",$id_auteur";
+		$pass = $row["pass"];
+	
+		if (!ereg("1comite",$choix) 
+			OR (ereg("1comite",$choix) 
+				AND (($sans_acces=="oui" AND strlen($pass)==0) OR ($sans_acces!="oui" AND strlen($pass)>0)))){
+			$nombre_auteurs++;
+			$id_auteur = $row["id_auteur"];
+			$k_nom[$id_auteur] = ucfirst(trim($row["nom"]));
+			$k_email[$id_auteur] = $row["email"];
+			$k_url_site[$id_auteur] = $row["url_site"];
+			$k_statut[$id_auteur] = $row["statut"];
+			$k_nombre_articles[$id_auteur]=$row["compteur"];
+			if (($row["messagerie"] == "non") OR ($row['login'] == ''))
+				$k_messagerie[$id_auteur]= "non";
+			$les_auteurs.=",$id_auteur";
+		}
 	}
 }
 

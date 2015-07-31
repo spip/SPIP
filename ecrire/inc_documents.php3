@@ -454,10 +454,10 @@ function afficher_documents_non_inclus($id_article) {
 		/// Ajouter nouveau document/image
 		
 		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
-		echo "<span style='padding: 2px; background-color: $couleur_claire; text-align: left; color: black;'>";
+		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: left; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");	
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
-		echo "</span>\n";
+		echo "</div>\n";
 		echo debut_block_invisible("ajouter_document");
 		
 		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";

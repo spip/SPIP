@@ -15,7 +15,7 @@ debut_gauche();
 
 debut_boite_info();
 
-echo propre("{{Cette page est uniquement accessible aux administrateurs.}}<P> Elle donne acc&egrave;s aux diff&eacute;rentes
+echo propre("{{Cette page est uniquement accessible aux responsables du site.}}<P> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d'entre elles donnent lieu &agrave; un processus d'authentification sp&eacute;cifique, qui
 exige d'avoir un acc&egrave;s FTP au site Web.");
 
