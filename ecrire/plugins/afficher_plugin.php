@@ -25,16 +25,24 @@ function plugins_afficher_plugin_dist($url_page, $plug_file, $actif, $expose=fal
 	$get_infos = charger_fonction('get_infos','plugins');
 	$info = $get_infos($plug_file, $force_reload, $dir_plugins);
 	$prefix = $info['prefix'];
-	$erreur = (!isset($info['erreur']) ? ''
-	: ("<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>"));
+	$cfg = "";
 
-	$cfg = !$actif ? '' : plugin_bouton_config($plug_file,$info,$dir_plugins);
+	if (!plugin_version_compatible($info['compatible'], $GLOBALS['spip_version_branche'])){
+		$erreur = http_img_pack("plugin-dis-32.png",_T('plugin_info_non_compatible_spip')," class='picto_err'",_T('plugin_info_non_compatible_spip'));
+		$class_li .= " disabled";
+	}
+	elseif (isset($info['erreur'])) {
+		$class_li .= " error";
+		$erreur = http_img_pack("plugin-err-32.png",_T('plugin_info_erreur_xml')," class='picto_err'",_T('plugin_info_erreur_xml'))
+		  . "<div class='erreur'>" . join('<br >', $info['erreur']) . "</div>";
+	}
+	else
+		$cfg = $actif ? plugin_bouton_config($plug_file,$info,$dir_plugins) : "";
 
 	// numerotons les occurrences d'un meme prefix
 	$versions[$prefix] = $id = isset($versions[$prefix]) ? $versions[$prefix] + 1 : '';
 
-	$class_li .= ($actif?" actif":"") . ($expose?" on":"") . (isset($info['erreur']) ? " erreur" : '');
-
+	$class_li .= ($actif?" actif":"") . ($expose?" on":"");
 	return "<li id='$prefix$id' class='$class_li'>"
 	. (($erreur OR $dir_plugins===_DIR_EXTENSIONS)
 	   ? '': plugin_checkbox(++$id_input, $plug_file, $actif))
@@ -89,14 +97,16 @@ function plugin_checkbox($id_input, $file, $actif)
 }
 
 // Cartouche Resume
-
-function plugin_resume($info, $dir_plugins, $plug_file, $url_page)
-{
+function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 	$prefix = $info['prefix'];
 	$dir = "$dir_plugins$plug_file";
-	$desc = plugin_propre($info['description'], "$dir/lang/$prefix");
-	if (($p=strpos($desc, "<br />"))!==FALSE)
-		$desc = substr($desc, 0,$p);
+	$slogan = plugin_propre($info['slogan'], "$dir/lang/$prefix");
+	// une seule ligne dans le slogan : couper si besoin
+	if (($p=strpos($slogan, "<br />"))!==FALSE)
+		$slogan = substr($slogan, 0,$p);
+	// couper par securite
+	$slogan = couper($slogan, 70);
+
 	$url = parametre_url($url_page, "plugin", $dir);
 
 	if (isset($info['icon']) and $i = trim($info['icon'])) {
@@ -106,17 +116,16 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page)
 	} else $i = '';
 
 	return "<div class='resume'>"
-	. "<h3 class='nom'><a href='$url' rel='info'>"
+	. "<h3><a href='$url' rel='info'>"
 	. typo($info['nom'])
 	. "</a></h3>"
 	. " <span class='version'>".$info['version']."</span>"
 	. " <span class='etat'> - "
 	. plugin_etat_en_clair($info['etat'])
 	. "</span>"
-	. "<div class='short'>".couper($desc,70)."</div>"
+	. "<div class='short'>".$slogan."</div>"
 	. $i
 	. "</div>";
-
 }
 
 function plugin_desintalle($plug_file){
@@ -164,47 +173,49 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 	$s = "";
 	// TODO: le traiter_multi ici n'est pas beau
 	// cf. description du plugin/_stable_/ortho/plugin.xml
-	if (isset($info['description']))
-	  $s .= "<div class='desc'>".plugin_propre($info['description'], $dir) . "</div>\n";
+	if (isset($info['description'])) {
+		$lien = "";
+		if (trim($info['lien'])) {
+			$lien = $info['lien'];
+			if (!preg_match(',^https?://,iS', $lien))
+				$lien = extraire_attribut(extraire_balise(propre($lien),'a'),'href');
+			$lien = "\n_ <em class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></em>';
+		}
+		$s .= "<dd class='desc'>".plugin_propre($info['description'] . $lien, $dir);
+		$s .= "</dd>\n";
+	}
 
 	if (isset($info['auteur']) AND trim($info['auteur']))
-	  $s .= "<div class='auteurs'>" . _T('public:par_auteur') .' '. plugin_propre($info['auteur'], $dir) . "</div>\n";
+	  $s .= "<dt class='auteurs'>" . _T('public:par_auteur') ."</dt><dd class='auteurs'>". plugin_propre($info['auteur'], $dir) . "</dd>\n";
 	if (isset($info['licence']))
-	  $s .= "<div class='licence'> - " . _T('intitule_licence') .' '. plugin_propre($info['licence'], $dir) . "</div>\n";
-
-	if (trim($info['lien'])) {
-		$lien = $info['lien'];
-		if (!preg_match(',^https?://,iS', $lien))
-			$lien = extraire_attribut(extraire_balise(propre($lien),'a'),'href');
-		$s .= "<div class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></div>';
-	}
+	  $s .= "<dt class='licence'>" . _T('intitule_licence') ."</dt><dd class='licence'>". plugin_propre($info['licence'], $dir) . "</dd>\n";
+	$s = "<dl>$s</dl>";
 
 	//
 	// Ajouter les infos techniques
 	//
 	$infotech = array();
 
-	$version = _T('version') .' '.  $info['version'];
+	$version = "<dt>"._T('version')."</dt><dd>".$info['version'];
 	// Version SVN
 	if ($svn_revision = version_svn_courante($dir_plugins.$plug_file))
 		$version .= ($svn_revision<0 ? ' SVN':'').' ['.abs($svn_revision).']';
+	$version .="</dd>";
 	$infotech[] = $version;
 
+	$infotech[] = "<dt>"._T('repertoire_plugins')."</dt><dd>".joli_repertoire($plug_file)."</dd>";
 	// source zip le cas echeant
-	$source = (lire_fichier($dir_plugins.$plug_file.'/install.log', $log)
+	$infotech[] = (lire_fichier($dir_plugins.$plug_file.'/install.log', $log)
 	AND preg_match(',^source:(.*)$,m', $log, $r))
-		? '<br />'._T('plugin_source').' '.trim($r[1])
+		? '<dt>'._T('plugin_source').'</dt><dd>'.trim($r[1])."</dd>"
 		:'';
 
-	$nec = !$info['necessite'] ? '' : 
-	  ('<div>' .  _L('Necessite&nbsp;: ') . join(' ', array_map('array_shift', $info['necessite'])) . '</div>');
+	$infotech[] = !$info['necessite'] ? '' :
+	  ('<dt>' .  _T('plugin_info_necessite') . '</dt><dd>' . join(' ', array_map('array_shift', $info['necessite'])) . '</dd>');
 
-	$s .= "<div class='tech'>"
-		. join(' &mdash; ', $infotech) .
-		 '<br />' . _T('repertoire_plugins') .' '. $plug_file
-		. $source
-		. $nec
-		."</div>";
+	$s .= "<dl class='tech'>"
+		. join('', $infotech)
+		."</dl>";
 
 
 	return $s;

@@ -26,31 +26,33 @@
 .liste-plugins .liste-items .item {position:relative;padding-#ENV{left}:76px; padding-#ENV{right}: 10px;}
 .liste-plugins .liste-items .item.actif {background:#eee;}
 .liste-plugins .liste-items .item.actif:hover {background:#e8e8e8;}
-.liste-plugins .liste-items .item.erreur {background:#fdd;}
-.liste-plugins .liste-items .item.erreur .erreur {color:red;font-weight:bold;}
 .liste-plugins .liste-items .item.on {background:[#(#ENV{claire}|couleur_eclaircir)];}
+.liste-plugins .liste-items .item.disabled {filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6;}
+.liste-plugins .liste-items .item.error {margin:0;}
+
+.liste-plugins .liste-items .item .resume {min-height:32px;}
 
 .liste-plugins .liste-items .item .short {color:#666;font-size:0.95em;}
-.liste-plugins .liste-items .item.on .short {display:none;}
 .liste-plugins .liste-items .item .check {float:#ENV{left};margin-#ENV{left}:-70px;position:relative;display:inline;}
 .liste-plugins .liste-items .item .check input {margin:0;}
 .liste-plugins .liste-items .item .check label {display:none;}
 
 .liste-plugins .liste-items .item .download {float:#ENV{left};margin-#ENV{left}:-70px;position:relative;display:inline;}
 
-.liste-plugins .liste-items .item .nom {font-size:1.2em;display:inline;}
-.liste-plugins .liste-items .item .nom a {color:#444;}
-.liste-plugins .liste-items .item.actif .nom a {color:#ENV{foncee};}
+.liste-plugins .liste-items .item h3 {display:inline;}
+.liste-plugins .liste-items .item h3 a {color:#444;}
+.liste-plugins .liste-items .item.actif h3 a {color:#ENV{foncee};}
 
 .liste-plugins .liste-items .item .icon {position:absolute;top:3px;#ENV{left}:34px;width:32px;height:32px;overflow:hidden;}
 .liste-plugins .liste-items .item .actions {float:#ENV{right};visibility:hidden;}
 .liste-plugins .liste-items .item:hover .actions {visibility:visible;}
+
+.liste-plugins .liste-items .item .picto_err,
 .liste-plugins .liste-items .item .cfg_link { position:absolute; right:4px; top:4px; }
 
-.liste-plugins .liste-items .item .details .desc {padding:5px 0 2px;}
-.liste-plugins .liste-items .item .details .auteurs {font-style:italic;padding-bottom:5px;display:inline;}
-.liste-plugins .liste-items .item .details .licence {display:inline;}
-.liste-plugins .liste-items .item .details .tech {font-size:0.9em;float:#ENV{right};text-align:#ENV{right};clear:#ENV{left}}
+.liste-plugins .liste-items .item .details dl {float:left;width:62%;margin-bottom:0;}
+.liste-plugins .liste-items .item .details dl.tech {float:right; width:32%;font-size:0.9em;word-wrap:break-word;text-align:#ENV{right};}
+.liste-plugins .liste-items .item .details .tech dd {margin-bottom:0;}
 
 .install-plugins {border-bottom:1px solid #ddd;color:#555;font-size:0.95em;padding:10px;position:relative;padding-#ENV{right}:150px;}
 .install-plugins .ok,.install-plugins .erreur {position:absolute;top:10px;right:10px;width:130px;font-weight:bold;text-align:right;}
