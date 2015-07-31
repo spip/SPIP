@@ -294,7 +294,7 @@ function AjaxSqueezeNode(trig, noeud, f)
 	
 	// retour std si pas precise: affecter ce noeud avec ce retour
 	if (!f) callback = function(r) { noeud.innerHTML = r; verifForm(noeud); triggerAjaxLoad(noeud);}
-	else callback = function(r) { f(r); verifForm(noeud); triggerAjaxLoad(noeud);}
+	else callback = function(r) { f(r,noeud); verifForm(noeud); triggerAjaxLoad(noeud);}
 	
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
