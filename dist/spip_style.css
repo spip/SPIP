@@ -87,9 +87,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
 /* Correction des styles HTML par defaut
 ----------------------------------------------- */
-form, fieldset, legend, label, input, textarea, select, option {
-	margin: 0; padding: 0; border: 0;
-	font-family: Verdana, Arial, Helvetica, sans-serif; }
+.formulaire_spip form, .formulaire_spip fieldset, .formulaire_spip legend, .formulaire_spip label, .formulaire_spip input, .formulaire_spip textarea, .formulaire_spip select, .formulaire_spip option { margin: 0; padding: 0; border: 0; }
 
 /* Styles de Spip
 ----------------------------------------------- */
