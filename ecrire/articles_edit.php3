@@ -202,7 +202,7 @@ function afficher_jour($jour){
 function enfant($leparent){
 	global $id_parent;
 	global $id_rubrique;
-	global $i;
+	static $i = 0, $premier = 1;
 	global $statut;
 	global $connect_toutes_rubriques;
 	global $connect_id_rubriques;
@@ -230,18 +230,38 @@ function enfant($leparent){
 		for ($count=1;$count<$i;$count++){
 			$espace.="&nbsp;&nbsp;&nbsp; ";
 		}
-		if ($i > 3) $style .= "color: #666666;";
+/*		if ($i > 3) $style .= "color: #666666;";
 		if ($i > 4) $style .= "font-style: italic;";
-		if ($i < 3) $style .= "font-weight:bold; ";
-		if ($i==1) {
+		if ($i < 3) $style .= "font-weight:bold; ";*/
+
+		switch ($i) {
+		case 1:
 			$espace= "";
-			$style .= "background-color: $couleur_claire;";
+			$style .= "font-weight: bold;";
+			break;
+		case 2:
+			$style .= "color: #202020;";
+			break;
+		case 3:
+			$style .= "color: #404040;";
+			break;
+		case 4:
+			$style .= "color: #606060;";
+			break;
+		case 5:
+			$style .= "color: #808080;";
+			break;
+		default;
+			$style .= "color: #A0A0A0;";
+			break;
 		}
-		if ($statut_rubrique!='publie') $titre = "($titre)";
+//		if ($statut_rubrique!='publie') $titre = "($titre)";
 
 		if ($rubrique_acceptable) {
+			if ($i == 1 && !$premier) echo "<OPTION VALUE='0'>\n";
 			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
 		}
+		$premier = 0;
 		enfant($my_rubrique);
 	}
 	$i=$i-1;
@@ -261,10 +281,8 @@ gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
 
-
-
-
 echo "<P><HR><P>";
+
 	$titre = entites_html($titre);
 	$soustitre = htmlspecialchars($soustitre);
 	$surtitre = htmlspecialchars($surtitre);
@@ -274,17 +292,16 @@ echo "<P><HR><P>";
 	$texte = entites_html($texte);
 	$ps = htmlspecialchars($ps);
 
-
 	echo "<FORM ACTION='articles.php3?id_article=$id_article' METHOD='post'>";
 
 	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-
-	if (($articles_surtitre!="non") OR strlen($surtitre)>0){
+	if (($articles_surtitre != "non") OR strlen($surtitre) > 0) {
 		echo "<B>Sur-titre</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
-	}else{
+	}
+	else {
 		echo "<INPUT TYPE='hidden' NAME='surtitre' VALUE=\"$surtitre\" >";
 	}
 	
@@ -292,11 +309,12 @@ echo "<P><HR><P>";
 	echo aide ("arttitre");
 	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
 
-	if (($articles_soustitre!="non") OR strlen($soustitre) > 0) {
+	if (($articles_soustitre != "non") OR strlen($soustitre) > 0) {
 		echo "<B>Sous-titre</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><P>";
-	}else{
+	}
+	else {
 		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";	
 	}
 
@@ -315,21 +333,21 @@ echo "<P><HR><P>";
 	}
 
 	if ($options == "avancees") {
-
 		debut_cadre_relief("$logo_parent");
 		
 		echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
 		echo aide ("artrub");
-		echo "<BR><SELECT NAME='id_rubrique' style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
+		echo "<BR><SELECT NAME='id_rubrique' style='background-color:$couleur_claire; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
 		enfant(0);
 		echo "</SELECT><BR>\n";
 		echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
 		fin_cadre_relief();
-	} else {
+	}
+	else {
 		echo "<INPUT TYPE='hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";	
 	}
 
-	if (($options=="avancees" AND $articles_descriptif!="non") OR strlen($descriptif) > 0) {
+	if (($options == "avancees" AND $articles_descriptif != "non") OR strlen($descriptif) > 0) {
 		echo "<P><B>Descriptif rapide</B>";
 		echo aide ("artdesc");
 		echo "<BR>(Contenu de l'article en quelques mots.)<BR>";
@@ -337,11 +355,9 @@ echo "<P><HR><P>";
 		echo $descriptif;
 		echo "</TEXTAREA><P>\n";
 	}
-	else{
+	else {
 		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
 	}
-
-
 	
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1, strlen($chapo));
@@ -368,22 +384,19 @@ echo "<P><HR><P>";
 		echo "</div><p>\n";
 	}
 
-
 	echo "<HR>";
 
-
-	if (($articles_chapeau!="non") OR strlen($chapeau) > 0) {
+	if (($articles_chapeau != "non") OR strlen($chapo) > 0) {
 		echo "<B>Chapeau</B>";
 		echo aide ("artchap");
 		echo "<BR>(Texte introductif de l'article.)<BR>";
 		echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
 		echo $chapo;
 		echo "</TEXTAREA><P>\n";
-	}else{
-			echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
-
 	}
-	
+	else {
+		echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
+	}
 
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
@@ -397,7 +410,7 @@ echo "<P><HR><P>";
 				list($texte1,$texte) = coupe_trop_long($texte);
 
 				$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
-					" CLASS='forml' ROWS='20' COLS='40' wrap=soft>" .
+					" CLASS='formo' ROWS='20' COLS='40' wrap=soft>" .
 					$texte1 . "</TEXTAREA><P>\n";
 			}
 		}
@@ -409,23 +422,19 @@ echo "<P><HR><P>";
 	
 	echo $textes_supplement;
 
-	echo "<BR><TEXTAREA NAME='texte' CLASS='forml' ROWS='20' COLS='40' wrap=soft>";
+	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' ROWS='20' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
-
 	
-	if (($articles_ps!="non") OR strlen($ps) > 0) {
+	if (($articles_ps != "non" AND $options == "avancees") OR strlen($ps) > 0) {
 		echo "<B>Post-Scriptum</B><BR>";
 		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='3' COLS='40' wrap=soft>";
 		echo $ps;
 		echo "</TEXTAREA><P>\n";
-	}else{
-			echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
 	}
-
-
-
-
+	else {
+		echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
+	}
 
 	echo "<INPUT TYPE='Hidden' NAME='date' VALUE=\"$date\" SIZE='40'><P>";
 
