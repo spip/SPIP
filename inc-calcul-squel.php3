@@ -1357,15 +1357,15 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	case 'FORMULAIRE_FORUM':
 		$milieu = '
+		$spip_lang = $GLOBALS["spip_lang"];
+		$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\'); lang_select(\'$spip_lang\'); ";
 		switch ($pile_boucles[$id_instance]->type_requete) {
 		case "articles":
-			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
-				echo retour_forum(0, 0, $contexte[id_article], 0, 0); ?".">";
+			$'.$nom_var.' .= "echo retour_forum(0, 0, $contexte[id_article], 0, 0); ";
 			break;
 
 		case "breves":
-			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
-				echo retour_forum(0, 0, 0, $contexte[id_breve], 0); ?".">";
+			$'.$nom_var.' .= "echo retour_forum(0, 0, 0, $contexte[id_breve], 0); ";
 			break;
 
 		case "forums":
@@ -1384,10 +1384,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			break;
 
 		default:
-			$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\');
-				echo retour_forum(\'$contexte[id_rubrique]\', \'$contexte[id_forum]\', \'$contexte[id_article]\', \'$contexte[id_breve]\', \'$contexte[id_syndic]\'); ?".">";
+			$'.$nom_var.' .= "echo retour_forum(\'$contexte[id_rubrique]\', \'$contexte[id_forum]\', \'$contexte[id_article]\', \'$contexte[id_breve]\', \'$contexte[id_syndic]\'); ";
 			break;
 		}
+		$'.$nom_var.' .= "lang_dselect(); ?".">";
 		';
 		break;
 
