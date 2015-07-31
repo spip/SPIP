@@ -299,7 +299,7 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
  */
 function trouver_rubrique_creer_objet($id_rubrique,$objet){
 	global $connect_id_rubrique;
-	if (!$id_rubrique){
+	if (!$id_rubrique AND defined('_CHOIX_RUBRIQUE_PAR_DEFAUT') AND _CHOIX_RUBRIQUE_PAR_DEFAUT){
 		$in = !count($connect_id_rubrique)
 			? ''
 			: (" AND ".sql_in('id_rubrique', $connect_id_rubrique));
