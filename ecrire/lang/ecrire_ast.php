@@ -884,7 +884,7 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
  col so valor predetermináu (nun crear
  esos ficheros).</p>',
 	'texte_informations_personnelles_1' => 'Agora el sistema va create un accesu personalizáu al sitiu.',
-	'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalación, y el to accesu siempre funciona, pues',
+	'texte_informations_personnelles_2' => '(Nota: si esto ye una reinstalación, y el to accesu siempre funciona, pues', # MODIF
 	'texte_introductif_article' => '(Testu d\'introducción de l\'artículu.)',
 	'texte_jeu_caractere' => 'Encamiéntase emplegar, pal to sitiu, l\'alfabetu universal (<tt>utf-8</tt>): esti permite amosar los testos en toes les llingües, y ya nun da problemes de compatibilidá colos ñavegadores modernos.',
 	'texte_jeu_caractere_2' => 'Atención: esti axuste nun provoca la conversión de los testos que ya tean grabaos na base de datos.',

@@ -864,7 +864,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'texte_enrichir_mise_a_jour' => 'Metninizin sayfa düzenini « tipografi kısaltmaları » kullanarak zenginleştirebilirsiniz.',
 	'texte_fichier_authent' => 'SPIP\'in, .htpasswd ve .htpasswd-admin özel dosyalarını  @dossier@ dizininde yaratması gerekir mi ? Bu dosyalar sizin, sitenizin başka yerlerine sadece yazar ve yöneticilerin erişmesini sınırlamanızı sağlayabilir (örneğin, dışsal istatistik programı). Bunun bir yararı olmadığını düşünüyorsanız bu seçeneği varsayılan değerinde bırakabilirsiniz (dosya yaratma işlemi yapılmaz).', # MODIF
 	'texte_informations_personnelles_1' => 'Sistem şimdi size kişiselleştirilmiş bir erişim (hesap) yaratacaktır.',
-	'texte_informations_personnelles_2' => '(Not : eğer yeniden kurulum sözkonusu ise ve erişiminiz halen çalışıyorsa, yapabileceğiniz :',
+	'texte_informations_personnelles_2' => '(Not : eğer yeniden kurulum sözkonusu ise ve erişiminiz halen çalışıyorsa, yapabileceğiniz :', # MODIF
 	'texte_introductif_article' => '(Makalenin giriş metni.)',
 	'texte_jeu_caractere' => 'Sitenizde evrensel alfabe (<tt>utf-8</tt>)  kullanmanız önerilir: bu alfabe metinlerin tüm dillerde görüntülenmesine olanak tanır ve  modern web tarayıcılarında hiç sorun yaratmaz.',
 	'texte_jeu_caractere_2' => 'Dikkat : bu ayar veritabanına önceden kaydedilmiş metinleri dönüştürmez.',

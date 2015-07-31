@@ -860,7 +860,7 @@ una color indica lor estat:',
   a sa valor predefinida (pas cap de creacion
   dels fichièrs).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Ara lo sistèma vos crearà un accès personalizat al sit.',
-	'texte_informations_personnelles_2' => '(Nòta: se s\'agís d\'una reïnstallacion, e se vòstre accès fonciona encara, podètz',
+	'texte_informations_personnelles_2' => '(Nòta: se s\'agís d\'una reïnstallacion, e se vòstre accès fonciona encara, podètz', # MODIF
 	'texte_introductif_article' => '(Tèxt introductiu de l\'article.)',
 	'texte_jeu_caractere' => 'S\'aconselha d\'emplegar, sus vòstre sit, l\'alfabet universal  (<tt>utf-8</tt>) :permet d\'afichar totas las lengas, e pausa pas pus de problèmas de compatibilitat amb los navigators modèrnes.',
 	'texte_jeu_caractere_2' => 'Atencion : Aqueste reglatge convertís pas los tèxtes ja enregistrats dins la basa de donadas. ',

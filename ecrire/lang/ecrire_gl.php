@@ -877,7 +877,7 @@ cunha cor que indica o seu estado :',
  co seu valor predeterminado (non crear
 estes ficheiros).</p>',
 	'texte_informations_personnelles_1' => 'O sistema vaiche crear agora un acceso personalizado ao web',
-	'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalación, e o teu acceso vai sen atrancos, podes',
+	'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalación, e o teu acceso vai sen atrancos, podes', # MODIF
 	'texte_introductif_article' => '(Texto introdutorio do artigo.)',
 	'texte_jeu_caractere' => 'Aconséllase empregar, no seu web, o alfabeto universal (<tt>utf-8</tt>) : isto permite mostrar textos en todas as linguas, e non presenta problemas de compatibilidade cos navegadores modernos.',
 	'texte_jeu_caractere_2' => 'Atención : este axuste non ten efecto retroactivo. Daquela, non se produce a conversión dos textos xa rexistrados na base de datos.',

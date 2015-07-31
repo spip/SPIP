@@ -859,7 +859,7 @@ Als u geen nut ervan hebt, kunt u deze keuze
  laten  aan zijn waarde per gebrek (niet een oprichting
   bestanden).</p>',
 	'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u creëren.',
-	'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
+	'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je', # MODIF
 	'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
 	'texte_jeu_caractere' => 'Het is aan te raden op je site het universele alfabet (<tt>utf-8</tt>) te gebruiken :dit laat de weergave van teksten toe in alle talen en stelt geen compatibilieitsprobleemet de recente bladerprogramma\'s.',
 	'texte_jeu_caractere_2' => 'Opgelet : deze instelling zal teksten die reeds werden ingevoerd in de gegevensbank niet omzetten.',

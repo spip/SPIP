@@ -844,7 +844,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 	'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
  Aquests fitxers us poden servir per restringir l\'accés als autors i als administradors a altres llocs de la vostra Web (programa extern d\'estadístiques, per exemple).</p> Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no crear fitxers).</p>',
 	'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un accés personalitzat al web.',
-	'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.lació mantenint el vostre accés pot',
+	'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.lació mantenint el vostre accés pot', # MODIF
 	'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
 	'texte_jeu_caractere' => 'És aconsellable utilitzar, al vostre lloc Web, l\'alfabet universal (<tt>utf-8</tt>) : aquest permet la presentació de texts en totes les llengües, i no posa problemes de compatibilitat amb els navegadors moderns.',
 	'texte_jeu_caractere_2' => 'Alerta: aquesta modificació no suposa la conversió dels textos ja registrats a la base de dades.',

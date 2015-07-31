@@ -835,7 +835,7 @@ Benotzt d\'Lëscht hei drënner fir unzegin wéi eng Elementer e kann benotzen.'
 Dës Fichier\'en kënnen den Zougang vun den Redakteren an Administrateuren op verschidden Deeler vum Site kontrolléieren (z.B. externe Statistik-Program).</p><p>
 Wann dir dat nët braucht, da loosst dës Optioun op sengem Default (kéng Fichier\'en maachen).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'De System gët Iech elo e personnaliséierten Zougang zum Site.',
-	'texte_informations_personnelles_2' => '(N.B.: wann ët eng Re-Installatioun ass, a wann ären Zougang nach fonktionnéiert,',
+	'texte_informations_personnelles_2' => '(N.B.: wann ët eng Re-Installatioun ass, a wann ären Zougang nach fonktionnéiert,', # MODIF
 	'texte_introductif_article' => '(Aleedung vum Artikel.)',
 	'texte_jeu_caractere' => 'Mir roden Iech ob ärem Site dat universalt Alphabet (<tt>UTF-8</tt>) ze gebrauchen: ët kann d\'Texter an allen Sproochen uweisen, an huet keng Kompatibilitéits-Problemer méi mat de moderne Browser\'en.',
 	'texte_jeu_caractere_2' => 'Opgepasst: Dës Astellung mecht kéng Conversioun vun den Texter déi schons an der Datebank sinn.',

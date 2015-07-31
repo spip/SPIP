@@ -876,7 +876,7 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
   membiarkannya dengan nilai standar yang diberikan (tidak ada 
   pemmbuat berkas-berkas baru).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Sistem akan memberikan anda sekarang akses tersendiri ke situs.',
-	'texte_informations_personnelles_2' => '(Catatan: jika ini adalah instalasi kembali, dan akses anda masih berlaku, anda dapat',
+	'texte_informations_personnelles_2' => '(Catatan: jika ini adalah instalasi kembali, dan akses anda masih berlaku, anda dapat', # MODIF
 	'texte_introductif_article' => '(Teks Pengantar artikel.)',
 	'texte_jeu_caractere' => 'Anda disarankan menggunakan aksara universal (<tt>utf-8</tt>) di situs anda. Ini memungkinkan untuk menampilkan teks dalam segala bahsa. Browser modern tidak akan mengalami kesulitan dalam menangani set karakter ini.',
 	'texte_jeu_caractere_2' => 'Catatan: Pengaturan ini tidak akan mengubah teks yang sudah disimpan dalam database.',

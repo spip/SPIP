@@ -860,7 +860,7 @@ ua color qu\'indica lo lor estat:',
   a la soa valor predefinida (nada creacion
   deus fichièrs).', # MODIF
 	'texte_informations_personnelles_1' => 'Ara lo sistèma que\'vs crearà un accès personalizat au sit.',
-	'texte_informations_personnelles_2' => '(Nòta: se s\'ageish d\'ua reïnstallacion, e se lo vòste accès fonciona enqüèra, que podetz',
+	'texte_informations_personnelles_2' => '(Nòta: se s\'ageish d\'ua reïnstallacion, e se lo vòste accès fonciona enqüèra, que podetz', # MODIF
 	'texte_introductif_article' => '(Tèxt introductiu de l\'article.)',
 	'texte_jeu_caractere' => 'Aquesta opcion qu\'ei utila se lo vòste sit deu afichar alfabets
  diferents de l\'alfabet latin (o "occidentau") e los sons derivats.

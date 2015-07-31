@@ -877,7 +877,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    (没有建
   文件).', # MODIF
 	'texte_informations_personnelles_1' => '系统将提供给你提供定制访问.',
-	'texte_informations_personnelles_2' => '(注意: 如果是重新安装, 你的访问正在工作, 你可以',
+	'texte_informations_personnelles_2' => '(注意: 如果是重新安装, 你的访问正在工作, 你可以', # MODIF
 	'texte_introductif_article' => '(文章介绍.)',
 	'texte_jeu_caractere' => '如果你的站点显示的字符不同于罗马数字(就是 «western»)
  这个选项很有用.

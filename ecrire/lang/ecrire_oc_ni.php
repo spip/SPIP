@@ -851,7 +851,7 @@ una color indica lo sieu estat :',
   à la sieu valor predefinida (minga de creacion
   de fichiers).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Aüra lo sistema vos va crear un accès personalisat au sit.',
-	'texte_informations_personnelles_2' => '(Nòta: se s\'agisse d\'una reïnstalacion, e se lo voastre accès fonciona encara, podètz',
+	'texte_informations_personnelles_2' => '(Nòta: se s\'agisse d\'una reïnstalacion, e se lo voastre accès fonciona encara, podètz', # MODIF
 	'texte_introductif_article' => '(Tèxt introductiu de l\'article.)',
 	'texte_jeu_caractere' => 'Es conselhat d\'emplegar, sus lo voastre site, l\'alfabet universau (<tt>utf-8</tt>) : permete d\'afichar de tèxtes dins toti li lengas sensa problema de compatibilitat emb lu navigators modernes.',
 	'texte_jeu_caractere_2' => 'Atencion: aquest reglatge provoca pas la conversion de tèxtos jà registrats dins la basa de donadas.',

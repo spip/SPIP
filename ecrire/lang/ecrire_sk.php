@@ -874,7 +874,7 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
   s predvolenou hodnotou (žiadne 
   vytváranie súborov).</p>',
 	'texte_informations_personnelles_1' => 'Systém vám teraz vytvorí osobný účet pre túto stránku.',
-	'texte_informations_personnelles_2' => '(Poznámka: ak je to reinštalácia a váš prihlasovací účet stále funguje, môžete ',
+	'texte_informations_personnelles_2' => '(Poznámka: ide o preinštaláciu, ak vám stále funguje prístup ',
 	'texte_introductif_article' => '(Úvodný text článku.)',
 	'texte_jeu_caractere' => 'Na stránke sa odporúča používať „univerzálnu abecedu“ (<tt>utf-8</tt>). To umožní zobraziť text v hocijakom jazyku. Všetky moderné prehliadače sú s touto znakovou sadou úplne kompatibilné.',
 	'texte_jeu_caractere_2' => 'Pozn.: Týmto nastavením neskonvertujete text, ktorý sa už nachádza v databáze.',
