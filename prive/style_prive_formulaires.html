@@ -42,7 +42,7 @@
 .formulaire_spip input.password,
 .formulaire_spip textarea,
 .formulaire_spip select {
-	display: block;
+	/*display: block;*/
 	font-size:1em;
 	margin:0;
 	width: 96%;
@@ -264,7 +264,7 @@ padding-top:10px;
 
 /* Fieldset */
 
-.formulaire_spip li.editer_type_fieldset {padding:0;}
+.formulaire_spip li.fieldset {padding:0;}
 .formulaire_spip fieldset {
 	margin: 0px;
 	padding: 10px 0px;
@@ -273,7 +273,9 @@ padding-top:10px;
 	width:auto;
 }
 
-.formulaire_spip h3.legend {
+.formulaire_spip h3.legend,
+.formulaire_spip legend
+ {
 	display: block;
 	float: [(#GET{left})];
 	margin: 0px;
