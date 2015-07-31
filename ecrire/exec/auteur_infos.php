@@ -20,8 +20,8 @@ function exec_auteur_infos_dist() {
 
 	exec_auteur_infos_args(intval(_request('id_auteur')),
 		_request('echec'),
-		_request('redirect'),
-		_request('new'));
+		_request('new'),
+		_request('redirect'));
 }
 
 function exec_auteur_infos_args($id_auteur, $echec, $new, $redirect)
