@@ -85,11 +85,9 @@ function charger_squelette ($squelette, $mime_type, $gram, $sourcefile) {
 
 	if (function_exists($nom)) return $nom;
 
-	// charger le source, si possible 
+	// charger le source, si possible, et compiler 
 	if (lire_fichier ($sourcefile, $skel)) {
-		include_spip('public/compilo');
-		$f = 'public_compiler_squelette_dist';
-#	$f = include_fonction('compiler_squelette', 'public');
+		$f = include_fonction('compiler_squelette', 'public');
 		$skel_code = $f($skel, $nom, $gram, $sourcefile);
 	}
 
@@ -244,7 +242,7 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	$f = include_fonction('trouver_squelette', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
-	// Charge le squelette en specifiant les langages cibles et source
+	// Charger le squelette en specifiant les langages cibles et source
 	// au cas il faudrait le compiler (source posterieure au resultat)
 	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
@@ -268,5 +266,4 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	if (!is_array($signal)) $page['signal'] = signaler_squelette($local);
 	return $page;
 }
-
 ?>
