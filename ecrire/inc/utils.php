@@ -554,7 +554,7 @@ function id_table_objet($type) {
 	else if ($type == 'petition')
 		return 'id_article';
 	else {
-		$t = table_objet($type);
+		$t = "spip_".table_objet($type);
 		global $tables_principales;
 		if (isset($tables_principales[$t]['key']["PRIMARY KEY"]))
 			return $tables_principales[$t]['key']["PRIMARY KEY"];
