@@ -619,7 +619,7 @@ td.icone a img {
 	background-image: url(img_pack/puce-poubelle-breve.gif);
 }
 
-a.foncee, a.foncee:hover, a.claire, a.claire:hover, a.creer, a.creer:hover {
+a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 	display: inline;
 	float: none;
 	padding: 2px;
@@ -627,24 +627,36 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, a.creer, a.creer:hover {
 	margin-left: 1px;
 	margin-right: 1px;
 	border: 0px;
-	font-family: Verdana, Arial, Sans, sans-serif;
+	font-family: Arial, Helvetica, Sans, sans-serif;
 	font-size: 9px;
 	text-decoration: none;
+	z-index: 1;
 
 }
-
 a.foncee, a.foncee:hover {
 	background-color: <?php echo $couleur_foncee; ?>;
 	color: white;
+	border: 1px solid <?php echo $couleur_foncee; ?>;
 }
 a.claire, a.claire:hover {
 	background-color: <?php echo $couleur_claire; ?>;
 	color: <?php echo $couleur_foncee; ?>;
+	border: 1px solid <?php echo $couleur_foncee; ?>;
 }
-a.creer, a.creer:hover {
+span.lang_base {
+	color: #666666;
+	border: 1px solid #666666;
+	background-color: #eeeeee;
+}
+span.creer {
+	color: #333333;
+	border: 1px solid #333333;
 	background-color: white;
-	color: black;
-	border: 1px solid black;
+}
+.trad_float {
+	float: <?php echo $right; ?>;
+	z-index: 20;
+	margin-top: 4px;'
 }
 
 
@@ -728,3 +740,4 @@ table.spip td {
 	text-align: left;
 	vertical-align: center;
 }
+
