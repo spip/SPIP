@@ -119,8 +119,8 @@ function install_6()
 	echo "<B>"._T('info_code_acces')."</B>";
 	echo "<P>"._T('info_utilisation_spip');
 
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP))
-		include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
@@ -166,11 +166,11 @@ function install_6()
 	include_spip('inc/acces');
 	ecrire_acces();
 
-	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
-		    _FILE_CONNECT_INS . _EXTENSION_PHP)) {
-		copy(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, 
-		     _FILE_CONNECT_INS . _EXTENSION_PHP);
-		@unlink(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
+		    _FILE_CONNECT_INS . '.php')) {
+		copy(_FILE_CONNECT_INS . _FILE_TMP . '.php', 
+		     _FILE_CONNECT_INS . '.php');
+		@unlink(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	}
 
 	echo "<form action='./' method='post'>";
@@ -188,8 +188,8 @@ function install_5()
 
 	install_debut_html();
 
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP))
-		include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php'))
+		include(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	else
 		redirige_par_entete(generer_url_ecrire('install'));
 
@@ -318,7 +318,7 @@ function install_4()
 			. ");\n";
 		$conn .= "?".">";
 
-		if (!ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
+		if (!ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php',
 		$conn))
 			redirige_par_entete(generer_url_ecrire('install'));
 
@@ -477,8 +477,8 @@ function install_1()
 	$pass_db = '';
 
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP)) {
-		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP));
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
+		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . '.php'));
 		if (ereg("mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)", $s, $regs)) {
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
@@ -547,7 +547,7 @@ function install_ldap5()
 
 	install_debut_html();
 
-	include_once(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	include_once(_FILE_CONNECT_INS . _FILE_TMP . '.php');
 	include_spip('inc/meta');
 	ecrire_meta("ldap_statut_import", $statut_ldap);
 	ecrire_metas();
@@ -589,7 +589,7 @@ function install_ldap4()
 		echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
 		echo "<P>";
 
-		lire_fichier(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, $conn);
+		lire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
 		if ($p = strpos($conn, '?'.'>')) 
 			$conn = substr($conn, 0, $p);
 		if (!strpos($conn, 'spip_connect_ldap')) {
@@ -602,7 +602,7 @@ function install_ldap4()
 			$conn .= "\$GLOBALS['ldap_present'] = true;\n";
 		}
 		$conn .= "?".">";
-		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, $conn);
+		ecrire_fichier(_FILE_CONNECT_INS . _FILE_TMP . '.php', $conn);
 
 		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
@@ -737,8 +737,8 @@ function install_ldap1()
 	$port_ldap = 389;
 
 	// Recuperer les anciennes donnees (si presentes)
-	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP)) {
-		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP));
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . '.php')) {
+		$s = @join('', @file(_FILE_CONNECT_INS . _FILE_TMP . '.php'));
 		if (ereg('ldap_connect\("(.*)","(.*)"\)', $s, $regs)) {
 			$adresse_ldap = $regs[1];
 			$port_ldap = $regs[2];
@@ -786,9 +786,9 @@ function install_unpack()
   fin_admin($action);
 
 	## ??????? a verifier
-  if (@file_exists(_DIR_RACINE . "spip_loader" . _EXTENSION_PHP))
+  if (@file_exists(_DIR_RACINE . "spip_loader" . '.php'))
     redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
-  else if (@file_exists(_DIR_RACINE . "spip_unpack" . _EXTENSION_PHP))
+  else if (@file_exists(_DIR_RACINE . "spip_unpack" . '.php'))
     redirige_par_entete(generer_url_public("spip_unpack"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else
     redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");

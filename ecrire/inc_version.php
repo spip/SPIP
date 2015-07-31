@@ -14,7 +14,11 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-@define('_EXTENSION_PHP', '.php');
+# compatibilite anciennes versions
+# si vous n'avez aucun fichier .php3, redefinissez a ""
+# ca fera foncer find_in_path
+@define('_EXTENSION_PHP', '.php3');
+#@define('_EXTENSION_PHP', '');
 
 # le nom du repertoire ecrire/
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
@@ -222,7 +226,7 @@ if (defined('_FILE_OPTIONS')) {
 		include_once(_FILE_OPTIONS);
 	}
 	# COMPATIBILITE .php3
-	else if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
+	else if (_EXTENSION_PHP && @file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
 		define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
 		include_once(_FILE_OPTIONS);
 	}

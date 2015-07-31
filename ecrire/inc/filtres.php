@@ -2288,7 +2288,7 @@ function image_typo() {
 	
 	if (!file_exists($fichier) AND $flag_gd_typo) {
 		# que faire si la police n'existe pas ?
-		$font = find_in_path('polices/'.$police, _DIR_INCLUDE);
+		$font = find_in_path(_DIR_POLICES . $police);
 
 		$imgbidon = imageCreateTrueColor($largeur, 45);
 		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille, 'left', $hauteur_ligne);
@@ -2451,7 +2451,7 @@ function barre_textarea($texte, $rows, $cols) {
 	static $num_textarea = 0;
 	include_spip('inc/layer');
 
-	$texte = interdire_scripts(entites_html($texte));
+	$texte = safehtml(entites_html($texte));
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
 
