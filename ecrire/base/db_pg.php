@@ -370,6 +370,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 	return -1;
 }
 
+// http://doc.spip.org/@spip_pg_insertq
 function spip_pg_insertq($table, $couples, $desc=array(), $serveur='') {
 
 	if (!$desc) {

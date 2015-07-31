@@ -26,7 +26,7 @@ function sql_serveur($ins_sql, $serveur='') {
 	exit;
 }
 
-// http://doc.spip.org/@spip_sql_set_connect_charset
+// http://doc.spip.org/@sql_set_connect_charset
 function sql_set_connect_charset($charset,$serveur=''){
 	$f = sql_serveur('set_connect_charset', $serveur);
 	return $f($charset, $serveur);
@@ -102,6 +102,7 @@ function sql_insert($table, $noms, $valeurs, $desc=array(), $serveur='')
 	return $f($table, $noms, $valeurs, $desc, $serveur);
 }
 
+// http://doc.spip.org/@sql_insertq
 function sql_insertq($table, $couples, $desc=array(), $serveur='')
 {
 	$f = sql_serveur('insertq', $serveur);
