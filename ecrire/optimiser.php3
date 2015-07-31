@@ -197,6 +197,7 @@ function optimiser_base() {
 	// Documents
 	//
 
+/*
 	$query = "SELECT id_document FROM spip_documents_articles";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $documents[] = $row['id_document'];
@@ -238,7 +239,7 @@ function optimiser_base() {
 			}
 		}
 	}
-
+*/
 
 	//
 	// Forums
