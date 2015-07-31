@@ -69,6 +69,8 @@ function _sqlite_init_functions(&$sqlite){
 		'TO_DAYS'		=> array( '_sqlite_func_to_days'		,1),
 #		'TRIM'			=> array( 'trim'						,1), // present en theorie
 
+		'TIMESTAMPDIFF' => array('_sqlite_timestampdiff'		/*,3*/),
+
 		'UNIX_TIMESTAMP'=> array( '_sqlite_func_unix_timestamp'	,1),
 #		'UPPER'			=> array( 'strtoupper'					,1), // present v2.4		
 
@@ -271,6 +273,75 @@ function _sqlite_func_substring($string,$start,$len=null){
 		return substr($string,$start);
 	else
 		return substr($string,$start,$len);
+}
+
+/**
+ * Calcul de la difference entre 2 timestamp, exprimes dans l'unite fournie en premier argument
+ * emule https://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html#function_timestampdiff
+ * @param string $unit
+ * @param string $date1
+ * @param string $date2
+ * @return int
+ */
+function _sqlite_timestampdiff($unit,$date1,$date2){
+	// PHP >= 5.3
+	if (function_exists("date_diff")){
+		$d1 = date_create($date1);
+		$d2 = date_create($date2);
+		$diff = date_diff($d1,$d2);
+		$inv = $diff->invert?-1:1;
+		switch($unit){
+			case "YEAR":
+				return $inv*$diff->y;
+			case "QUARTER":
+				return $inv*(4*$diff->y+intval(floor($diff->m/3)));
+			case "MONTH":
+				return $inv*(12*$diff->y+$diff->m);
+			case "WEEK":
+				return $inv*intval(floor($diff->days/7));
+			case "DAY":
+				#var_dump($inv*$diff->days);
+				return $inv*$diff->days;
+			case "HOUR":
+				return $inv*(24*$diff->days+$diff->h);
+			case "MINUTE":
+				return $inv*((24*$diff->days+$diff->h)*60+$diff->i);
+			case "SECOND":
+				return $inv*(((24*$diff->days+$diff->h)*60+$diff->i)*60+$diff->s);
+			case "MICROSECOND":
+				return $inv*(((24*$diff->days+$diff->h)*60+$diff->i)*60+$diff->s)*1000000;
+		}
+		return 0;
+	}
+	// PHP < 5.3
+	else {
+		$d1 = strtotime($date1);
+		$d2 = strtotime($date2);
+		$diff = $d2 - $d1;
+		$sign = ($diff<0?-1:1);
+		$diff = $sign * $diff;
+		switch($unit){
+			case "YEAR":
+				$diff = $d2-$d1;
+				return $sign*(date('Y',abs($diff))-date('Y',0));
+			case "QUARTER":
+				return $sign*(4*(date('Y',abs($diff))-date('Y',0))+intval(floor((date('m',$diff)-1)/3)));
+			case "MONTH":
+				return $sign*((date('Y',$diff)-date('Y',0))*12+date('m',$diff)-1);
+			case "WEEK":
+				return intval(floor(($d2-$d1)/3600/7));
+			case "DAY":
+				return intval(floor(($d2-$d1)/3600/24));
+			case "HOUR":
+				return intval(floor(($d2-$d1)/3600));
+			case "MINUTE":
+				return intval(floor(($d2-$d1)/60));
+			case "SECOND":
+				return $d2-$d1;
+			case "MICROSECOND":
+				return $d2-$d1*1000000;
+		}
+	}
 }
 
 // http://doc.spip.org/@_sqlite_func_unix_timestamp
