@@ -179,6 +179,7 @@ function calculer_contexte_implicite(){
 	$contexte_implicite = array(
 		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => $_SERVER['HTTP_HOST'],
+		'https' => $_SERVER['HTTPS'],
 		'espace' => test_espace_prive(),
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
 		'notes' => $notes?$notes('','contexter_cache'):'',
