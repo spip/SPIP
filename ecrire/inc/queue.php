@@ -57,12 +57,12 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	if (
 			$no_duplicate
 		AND
-			sql_countsel('spip_jobs',
+			$id_job = sql_getfetsel('id_job','spip_jobs',
 				'status='.intval(_JQ_SCHEDULED).' AND fonction='.sql_quote($function)
 				.(($no_duplicate==='function_only')?'':
 				 ' AND md5args='.sql_quote($md5args).' AND inclure='.sql_quote($file)))
 		)
-		return false;
+		return $id_job;
 
 	// si pas de date programee, des que possible
 	if (!$time)

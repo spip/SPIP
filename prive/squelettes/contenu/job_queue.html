@@ -22,7 +22,7 @@ genie_queue_watch_dist();
 				[(#AUTORISER{'annuler','job',#ID_JOB}|oui)
 				<div class="actions">
 					[(#BOUTON_ACTION{<:annuler:>,#URL_ACTION_AUTEUR{annuler_job,#ID_JOB,#SELF},ajax})]
-					[(#BOUTON_ACTION{<:queue_executer_maintenant:>,#URL_ACTION_AUTEUR{forcer_job,#ID_JOB,#SELF},ajax})]
+					[(#BOUTON_ACTION{<:queue_executer_maintenant:>,#URL_ACTION_AUTEUR{forcer_job,#ID_JOB,#SELF}})]
 				</div>
 				]
 			</li>

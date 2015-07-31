@@ -597,7 +597,8 @@ function cron ($taches=array(), $taches_old= array()) {
  * @param $arguments
  *   Optional array of arguments to pass to the function.
  * @param $file
- *   Optional file path which needs to be included for $fucntion.
+ *   Optional file path which needs to be included for $function.
+ *   if ends with '/', will do charger_fonction($function,$file);
  * @param $no_duplicate
  *   If TRUE, do not add the job to the queue if one with the same function and
  *   arguments already exists.
