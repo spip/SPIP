@@ -12,8 +12,7 @@ $delais = 3600;
 // 2. faire des forums uniquement pour affecter des mots-cles
 // $afficher_texte = "non";
 
-// En cas de forums sur abonnement, on a un panneau de login
-$flag_dynamique = true;
+// forum sur abonnement => login; ne pas oublier le header "no-cache"
 
 include ("inc-public.php3");
 

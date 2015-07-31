@@ -598,9 +598,9 @@ function balise_EXTRA_dist ($p) {
 	$p->code = $_extra;
 
 	// Gerer la notation [(#EXTRA|isbn)]
-	if ($p->params) {
+	if ($p->param) {
 		include_ecrire("inc_extra");
-		list ($key, $champ_extra) = each($p->params);	// le premier filtre
+		list ($key, $champ_extra) = each($p->param);	// le premier filtre
 		$type_extra = $p->type_requete;
 		$champ = $champ_extra[1];
 
@@ -609,7 +609,7 @@ function balise_EXTRA_dist ($p) {
 	// on aura le type_extra du sous-objet (!)
 		if (extra_champ_valide($type_extra, $champ))
 		{
-			array_shift($p->params);
+			array_shift($p->param);
 # A quoi ca sert ?
 #		$p->code = "extra($p->code, '".addslashes($champ)."')";
 
@@ -764,6 +764,19 @@ function balise_REM_dist($p) {
 	$p->code="''";
 	$p->interdire_scripts = false;
 	return $p;
+}
+
+//
+// #HTTP
+// pour les entetes. A n'utiliser qu'en debut de squelette
+//
+function balise_HTTP_dist($p) {
+  $a = $p->param[0];
+  array_shift($a);
+  $code = "";
+  foreach($a as $v) $code .= 'header("' . $v[0]->texte . '");';
+  $p->code="('<'.'?php $code  ?' . '>')";
+  return $p;
 }
 
 ?>

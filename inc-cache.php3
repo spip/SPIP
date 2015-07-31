@@ -210,6 +210,8 @@ function creer_cache(&$page, $chemin_cache, $duree) {
 	// Enregistrer le fichier cache qui contient
 	// 1) la carte d'identite de la page (ses "globals", genre id_article=7)
 	// 2) son contenu
+	$page['signal']['process_ins'] = $page['process_ins'];
+	$page['signal']['entetes'] = $page['entetes'];
 	$r = ecrire_fichier($chemin_cache,
 		"<!-- "
 		. str_replace("\n", " ", serialize($page['signal']))

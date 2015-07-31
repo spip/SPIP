@@ -70,6 +70,7 @@ function calcule_header_et_page ($fond) {
 
 function obtenir_page_ancienne ($chemin_cache, $fond, $inclusion=false) {
 
+	global $lastmodified ;
 	//
 	// Lire le fichier cache
 	//
@@ -114,14 +115,18 @@ function is_preview()
 // calculer la page principale et envoyer les entetes
 //
 function afficher_page_globale ($fond) {
-	global $flag_dynamique, $flag_ob, $flag_preserver,
-	  $lastmodified, $recherche, $use_cache, $var_mode, $var_preview;
-	global $_GET, $_POST, $_COOKIE, $_SERVER;
+	global $flag_dynamique, $flag_ob, $flag_preserver,$lastmodified,
+		$use_cache, $var_mode, $var_preview;
+	global $_COOKIE, $_SERVER;
 
 	include_local("inc-cache");
 
 	// Peut-on utiliser un fichier cache ?
 	$chemin_cache = determiner_cache($use_cache, NULL, $fond);
+	if ($chemin_cache)
+		$lastmodified = @filemtime($chemin_cache);
+	else
+		$lastmodified = time();
 
 	// demande de previsualisation ?
 	// -> inc-calcul n'enregistrera pas les fichiers caches
@@ -130,92 +135,109 @@ function afficher_page_globale ($fond) {
 			$var_mode = 'recalcul';
 			$var_preview = true;
 			spip_log('preview !');
-		} else
-			$var_preview = false;
+		} else	$var_preview = false;
 
-	// Repondre gentiment aux requetes sympas
-	// (ici on ne tient pas compte d'une obsolence du cache ou des
-	// eventuels fichiers inclus modifies depuis la date
-	// HTTP_IF_MODIFIED_SINCE du client)
+
+	$headers_only = ($_SERVER['REQUEST_METHOD'] == 'HEAD');
+
+	// une perennite valide a meme reponse qu'une requete HEAD
+
 	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND !$var_mode
 	AND $chemin_cache AND !$flag_dynamique) {
-		$lastmodified = @filemtime($chemin_cache);
-		$headers_only = http_last_modified($lastmodified);
+		if (!preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) {
+			$since = preg_replace('/;.*/', '',
+				$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
+			$since = str_replace('GMT', '', $since);
+			if (trim($since) == http_gmoddate($lastmodified)) {
+				$status = 304;
+				$headers_only = true;
+			}
+		}
 	}
-	$headers_only |= ($_SERVER['REQUEST_METHOD'] == 'HEAD');
+
+	// si le last-modified (mis + bas) est suffisant, ne meme pas mettre
+	// de content-type (pour contrer le bouton admin de inc-public)
 
 	if ($headers_only) {
-		if ($chemin_cache)
-			$t = @filemtime($chemin_cache);
-		else
-			$t = time();
-		@header('Last-Modified: '.http_gmoddate($t).' GMT');
-		@header('Connection: close');
-		// Pas de bouton admin pour un HEAD
-		$flag_preserver = true;
-	}
-	else {
-		// Obtenir la page
+		$page['entetes']["Connection"] = "close";
+	} else {
 		if (!$use_cache)
 			$page = obtenir_page_ancienne ($chemin_cache, $fond, false);
 		else {
 			include_local('inc-calcul');
 			$page = calculer_page_globale ($chemin_cache, $fond);
-
 			if ($chemin_cache)
 				creer_cache($page, $chemin_cache, $use_cache);
 		}
-	}
 
-	if ($chemin_cache) $page['cache'] = $chemin_cache;
+		if ($chemin_cache) $page['cache'] = $chemin_cache;
 
-	if ($page['process_ins'] == 'php') {
-		if (!isset($flag_preserver))
-			$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']);
+		// compatibilite. devrait pouvoir sauter
+		if ($page['process_ins'] == 'php') {
+			auto_content_type($page['texte']);
+			auto_expire($page['texte']);
+		}
 
-		$expire = preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$php, $r);
-		if (!isset($flag_dynamique))
-		      $flag_dynamique = $expire && (intval($r[1]) === 0);
-	}
+		$flag_preserver |=  (headers_sent());
 
-	if ($var_preview AND !$flag_preserver) {
-		include_ecrire('inc_minipres');
-		$page['texte'] .= afficher_bouton_preview();
-	}
-	//
-	// Envoyer les entetes appropries
-	// a condition d'etre sur de pouvoir le faire
-	//
-	if (!headers_sent() AND !$flag_preserver) {
+	// Definir les entetes si ce n'est fait 
 
-		// Content-type: par defaut html+charset (poss surcharge par la suite)
-		header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+		if (!$flag_preserver) {
 
-		if ($flag_ob) {
+			if (!isset($page['entetes']['Content-Type'])) {
+				$page['entetes']['Content-Type'] = 
+					"text/html; charset="
+					. $GLOBALS['meta']['charset'];
+			}
+			if ($flag_ob) {
 			// Si la page est vide, produire l'erreur 404
-			if (trim($page['texte']) === ''
-			AND $var_mode != 'debug') {
-				$page = message_erreur_404();	
-			}
-			// Interdire au client de cacher un login, un admin ou un recalcul
-			else if ($flag_dynamique OR $var_mode
-			OR $_COOKIE['spip_admin']) {
-				header("Cache-Control: no-cache,must-revalidate");
-				header("Pragma: no-cache");
-			}
-			// Pour les autres donner l'heure de modif
-			else if ($lastmodified) {
-				header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+				if (trim($page['texte']) === ''
+				    AND $var_mode != 'debug') {
+					$page = message_erreur_404();
+					$status = 404;
+					$flag_dynamique = true;
+				}
+	// pas de mise en cache pour les observateurs (et si pas deja indique)
+				if ($flag_dynamique 
+				    OR $_COOKIE['spip_admin']
+				    OR $var_mode) {
+				  $page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
+				  $page['entetes']["Pragma"] = "no-cache";
+				} 
 			}
 		}
 	}
+
+	// toujours utile
+	$page['entetes']["Last-Modified"]=http_gmoddate($lastmodified)." GMT";
+	$page['status'] = $status;
 
 	return $page;
 }
 
+//
+// 2 fonctions pour compatibilite arriere. Sont probablement superflues
+//
+
+function auto_content_type($code)
+{
+	global $flag_preserver;
+	if (!isset($flag_preserver))
+		$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$code);
+}
+
+function auto_expire($code)
+{
+	global $flag_dynamique;
+	if (!isset($flag_dynamique)) {
+		if (preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$code, $r))
+			$flag_dynamique = (intval($r[1]) === 0);
+	}
+}
 
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 
+	global $lastmodified;
 	// Peut-on utiliser un fichier cache ?
 	$chemin_cache = determiner_cache($use_cache, $contexte_inclus, $fond);
 
@@ -242,7 +264,6 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	else {
 		include_local('inc-calcul');
 		$page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
-		$page['signal']['process_ins'] = $page['process_ins'];
 		$lastmodified = time();
 		if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
 	}
@@ -319,9 +340,6 @@ function message_erreur_404 ($erreur= "") {
 		else if (isset($GLOBALS['id_syndic']))
 		$erreur = 'public:aucun_site';
 	}
-	include_ecrire('inc_headers');
-	http_status(404);
-
 	return array('texte' => '<'.'?php
 			$contexte_inclus = array("fond" => 404,
  				"erreur" => _T("' . $erreur  . '"));

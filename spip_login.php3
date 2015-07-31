@@ -12,8 +12,6 @@
 
 $fond = "login";
 $delais = 3600;
-$flag_dynamique = true;
-$flag_preserver = true;
 $forcer_lang = true;
 
 // Compatibilite anciennes versions de SPIP : si un 'var_url' (cible du login)

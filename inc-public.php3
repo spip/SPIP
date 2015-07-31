@@ -29,15 +29,29 @@ if (defined("_INC_PUBLIC")) {
 	}
 	include_local('inc-public-global');
 
-	// Calculer la page en envoyant seulement les en-tetes, pas la page
 	$tableau_des_erreurs = array();
 	$page = calcule_header_et_page ($fond);
 
+	if ($page['status']) {
+			include_ecrire('inc_headers');
+			http_status($page['status']);
+	}
+
+	foreach($page['entetes'] as $k => $v)
+		  { header("$k: $v");}
+
+	$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
+
+	if ($var_preview AND $html) {
+		include_ecrire('inc_minipres');
+		$page['texte'] .= afficher_bouton_preview();
+	}
+
 	// est-on admin ?
-	if ($affiche_boutons_admin = (
-	(!$flag_preserver AND $GLOBALS['_COOKIE']['spip_admin'])
-	OR $var_mode == 'debug'))
-	  include_local(find_in_path('inc-formulaire_admin'. _EXTENSION_PHP));
+	if ($affiche_boutons_admin = ($_COOKIE['spip_admin'] 
+				      AND ($html OR ($var_mode == 'debug'))))
+
+		include_local(find_in_path('inc-formulaire_admin'. _EXTENSION_PHP));
 	// Execution de la page calculee
 
 	// 1. Cas d'une page contenant uniquement du HTML :
@@ -94,7 +108,7 @@ if (defined("_INC_PUBLIC")) {
 	}
 
 	// Valider/indenter a la demande. garder la compatibilite tidy
-	if (trim($page) AND $xhtml AND !$flag_preserver AND !headers_sent()) {
+	if (trim($page) AND $xhtml AND $html AND !headers_sent()) {
 		$f = include_fonction(($xhtml === true) ? 'tidy' : $xhtml);
 		$page = $f($page);
 	}
