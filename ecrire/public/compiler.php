@@ -925,7 +925,8 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		$boucle = $boucles[$id] = pipeline('pre_boucle', $boucle);
 		if ($boucle->return === false) continue;
 		// appeler la fonction de definition de la boucle
-		if ($boucle->type_requete) {
+
+		if ($req = $boucle->type_requete) {
 			$f = 'boucle_'.strtoupper($req);
 		// si pas de definition perso, definition spip
 			if (!function_exists($f)) $f = $f.'_dist';
