@@ -32,9 +32,10 @@ function balise_CONFIGURER_METAS_dyn($form) {
 
 	include_spip("balise/formulaire_");
 	if (!existe_formulaire($form)) return '';
+	$args = func_get_args();
 	return array('formulaires/' . $form,
 		     3600, 
-		     balise_FORMULAIRE__contexte("configurer_metas", func_get_args()));
+		     balise_FORMULAIRE__contexte("configurer_metas", $args));
 }
 
 ?>
