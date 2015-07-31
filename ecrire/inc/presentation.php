@@ -953,6 +953,9 @@ function fin_page()
 	. "</body></html>\n";
 }
 
+// Determiner si une nouvelle version de SPIP est disponible
+// sans demander tout le temps au serveur de versions si leur liste a change'.
+
 define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
 define('_VERSIONS_LISTE', 'archives.xml');
 
@@ -962,17 +965,17 @@ function info_maj ($dir, $file, $version)
 	list($maj,$min,$rev) = preg_split('/\D+/', $version);
 #	list($maj,$min,$rev) = preg_split('/\D+/', '1.9.2i'); # pour test
 #	list($maj,$min,$rev) = preg_split('/\D+/', '2.0.8'); # pour test
-	include_spip('inc/distant');
-	$dir = _VERSIONS_SERVEUR . $dir . '/';
-	$liste = $dir . _VERSIONS_LISTE;
-	if (!$page = copie_locale($liste, 'modif')) return '';
-	$page = file_get_contents(_DIR_RACINE . $page);
+
+	$nom = _DIR_CACHE_XML . _VERSIONS_LISTE;
+	$page = !file_exists($nom) ? '' : file_get_contents($nom);
+	$page = info_maj_cache($nom, $dir, $page);
+
 	// reperer toutes les versions de numero majeur superieur ou egal
 	// (a revoir quand on arrivera a SPIP V10 ...)
 	$p = substr("0123456789", intval($maj));
-	$re = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
-	preg_match_all($re, $page, $m,  PREG_SET_ORDER);
-	$new = '';
+	$p = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
+	preg_match_all($p, $page, $m,  PREG_SET_ORDER);
+	$page = '';
 	foreach ($m as $v) {
 			list(, $maj2, $min2,, $rev2) = $v;
 			if (($maj2 > $maj)
@@ -980,14 +983,36 @@ function info_maj ($dir, $file, $version)
 				AND (($min2 > $min)
 					OR (($min2 == $min)
 						AND ($rev2 > $rev))))) {
-			  $new .= $maj2 . '.' . $min2 . '.' . $rev2 . ' ';
+			  $page .= $maj2 . '.' . $min2 . '.' . $rev2 . ' ';
 		}
 	}
 
-	if (!$new) return "";
-	return "<br /><a style='color: red' href='$dir' title='$new'>" . 
+	if (!$page) return "";
+	return "<br /><a style='color: red' href='$dir' title='$page'>" . 
 	    _T('nouvelles_versions') .
 	    '</a><br />';
+}
+
+// Verifie que la liste $page des versions dans le fichier $nom est a jour
+// Ce fichier rajoute dans ce fichier l'alea ephemere courant;
+// on teste la nouveaute par If-Modified-Since, 
+// et seulement quand celui-ci a change' pour limiter les acces HTTP
+
+function info_maj_cache($nom, $dir, $page='')
+{
+	$re = '<archives id="a' . $GLOBALS['meta']["alea_ephemere"] . '">';
+	if (preg_match("/$re/", $page)) return $page;
+
+	$url = _VERSIONS_SERVEUR . $dir . '/' . _VERSIONS_LISTE;
+	$a = file_exists($nom) ? filemtime($nom) : '';
+	include_spip('inc/distant');
+	$res = recuperer_lapage($url, false, 'GET', _COPIE_LOCALE_MAX_SIZE, '',false, $a);
+	// Si rien de neuf (ou inaccessible), garder l'ancienne
+	if ($res) list(, $page) = $res;
+	// Placer l'indicateur de fraicheur
+	$page = preg_replace('/^<archives.*?>/', $re, $page);
+	ecrire_fichier($nom, $page);
+	return $page;
 }
 
 // http://doc.spip.org/@info_copyright
