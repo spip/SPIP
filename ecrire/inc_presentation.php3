@@ -1423,11 +1423,10 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 	if ($code) echo $code."\n";
 
-	afficher_script_layer();
 ?>
 <script type="text/javascript" src="../mathmlinHTML.js"></script>
 
-<script language="JavaScript">
+<script type='text/javascript'><!--
 // Boolean variable to keep track of user's SVG support
 var hasSVGSupport = false;
 
@@ -1443,16 +1442,14 @@ if (navigator.mimeTypes != null && navigator.mimeTypes.length > 0) {
 }else{
         useVBMethod = true;
 }
-</script>
+--></script>
 
-<script language="VBScript">
-' VB Script method to detect SVG viewer in IE
-' this will not be run by browsers with no support for VB Script
+<script language="VBScript"><!--
 On Error Resume Next
 If useVBMethod = true Then
         hasSVGSupport = IsObject(CreateObject("Adobe.SVGCtl"))
 End If
-</script>
+--></script>
 
 
 <script type='text/javascript'><!--
@@ -1489,7 +1486,9 @@ End If
 	
 	function hide_obj(obj) {
 		element = findObj(obj);
-		if (element.style.visibility != "hidden") element.style.visibility = "hidden";
+		if(element) {
+			if (element.style.visibility != "hidden") element.style.visibility = "hidden";
+		}
 	}
 
 	function changestyle(id_couche, element, style) {
@@ -1703,6 +1702,10 @@ End If
 	var antifocus=false; // effacement titre quand new=oui
 	
 //--></script>
+
+	<?php afficher_script_layer(); ?>
+
+
 	<link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
 	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
 	<link rel="stylesheet" href="spip_style_print.css" type="text/css" media="print">
