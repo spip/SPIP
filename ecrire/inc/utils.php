@@ -337,7 +337,7 @@ function nettoyer_uri() {
 // http://doc.spip.org/@self
 function self($amp = '&amp;', $root = false) {
 	$url = nettoyer_uri();
-	if (!$root AND !defined('_SET_HTML_BASE'))
+	if (!$root AND (!defined('_SET_HTML_BASE') OR !_SET_HTML_BASE OR !$GLOBALS['profondeur_url']))
 		$url = preg_replace(',^[^?]*/,', '', $url);
 
 	// ajouter le cas echeant les variables _POST['id_...']
