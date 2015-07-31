@@ -361,13 +361,14 @@ function chercher_squelette($fond, $id_rubrique) {
 // Calculer la page courante
 //
 
-function calculer_page($fond) {
+function calculer_page($fond, $contexte) {
 	global $id_doublons;
-	global $contexte;
-	global $fichier_requete;
-	global $id_rubrique_fond;
 
-	$contexte = '';
+	static $pile_doublons = '';
+	static $n_doublons = 0;
+
+	$pile_doublons[++$n_doublons] = $id_doublons;
+
 	$id_doublons = '';
 	$id_doublons['articles'] = '0';
 	$id_doublons['rubriques'] = '0';
@@ -378,6 +379,21 @@ function calculer_page($fond) {
 	$id_doublons['syndication'] = '0';
 	$id_doublons['documents'] = '0';
 
+	$texte = executer_squelette($fond, $contexte);
+
+	$id_doublons = $pile_doublons[$n_doublons--];
+
+	return $texte;
+}
+
+
+function calculer_page_globale($fond) {
+	global $id_doublons;
+	global $contexte;
+	global $fichier_requete;
+	global $id_rubrique_fond;
+
+	$contexte = '';
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_mot', 'id_document');
 	reset($contexte_defaut);
@@ -434,7 +450,7 @@ function calculer_page($fond) {
 		}
 	}
 
-	return $signale_globals.executer_squelette($fond, $contexte);
+	return $signale_globals.calculer_page($fond, $contexte);
 }
 
 ?>

@@ -48,9 +48,11 @@ function utiliser_cache($chemin_cache, $delais) {
 			$use_cache = true;
 		}
 		else {
-			$lastmodified = filemtime($chemin_cache);
-			$ledelais = time() - $lastmodified;
-			$use_cache &= ($ledelais < $delais AND $ledelais > 0);
+			$t = filemtime($chemin_cache);
+			$ledelais = time() - $t;
+			$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
+			// Inclusions multiples : derniere modification
+			if ($lastmodified < $t) $lastmodified = $t;
 		}
 	}
 	else {
