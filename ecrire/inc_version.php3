@@ -995,7 +995,10 @@ function creer_repertoire($base, $subdir) {
 
 function creer_repertoire_documents($ext) {
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	return  _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	$dir =  _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	// mode parano: verifier a chaque fois
+	if (lire_meta("creer_htaccess") == 'oui') verifier_htaccess($dir);
+	return $dir;
 }
 
 // Pour les documents comme pour les logos, le filtre |fichier donne

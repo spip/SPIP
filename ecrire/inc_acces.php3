@@ -128,6 +128,20 @@ function generer_htpass($pass) {
 	else return '';
 }
 
+function gerer_htaccess()
+{
+  $mode = lire_meta('creer_htaccess');
+	$r = spip_query("SELECT extension FROM spip_types_documents");
+	while ($e = spip_fetch_array($r)) {
+	  spip_log(_DIR_DOC . $e['extension']);
+		if (is_dir($dir = _DIR_DOC . $e['extension'])) {
+			if ($mode == 'oui')
+				verifier_htaccess($dir);
+			else @unlink("$dir/.htaccess");
+		}
+	}
+	return $mode;
+}
 
 initialiser_sel();
 
