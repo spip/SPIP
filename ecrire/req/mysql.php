@@ -338,7 +338,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		}
 
 		$query .= "$s\n\t\t$k $v"
-			. (($autoinc && ($p == $k) && preg_match(',\b(big)?int\b,i', $v))
+			. (($autoinc && ($p == $k) && preg_match(',\b(big|small|medium)?int\b,i', $v))
 				? " auto_increment"
 				: ''
 			);
