@@ -1091,7 +1091,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 	switch ($type) {
 	case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non') {
-				$n = sql_fetsel("id_article", "spip_articles", "id_article=$id AND date<=NOW()");
+				$n = sql_fetsel("id_article", "spip_articles", "id_article=$id AND date<=".sql_quote(date('Y-m-d H:i:s')));
 				if (!$n) $statut = 'prop';
 			}
 			if ($statut == 'publie')
