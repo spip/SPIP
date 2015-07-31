@@ -420,7 +420,8 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 	// (on ne le propose pas pour les images qu'on sait
 	// lire, id_type<=3), sauf bug, ou document distant
 	if ($document['id_type'] <= 3
-	AND $document['hauteur']*$document['largeur']>0
+	AND $document['hauteur']
+	AND $document['largeur']
 	AND $document['distant']!='oui')
 		return '';
 
@@ -433,7 +434,8 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 
 	if (($type_inclus == "embed"  #meme pour le MP3 : "l x h pixels"? 
 	OR $type_inclus == "image")
-	AND $document['largeur']*$document['hauteur']) {
+	    AND $document['largeur']
+	    AND $document['hauteur']) {
 		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
 		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5'>";
 		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5'> "._T('info_pixels');
@@ -445,23 +447,27 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_multiple = true, $forcer_document = false, $type="") {
-	global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right;
+function afficher_upload($image_url, $redirect='', $intitule, $inclus = '', $envoi_multiple = true, $mode, $type="") {
+  global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
 	static $num_form = 0; $num_form ++;
 
 	if (!$redirect)
 		$redirect = $clean_link->getUrl();
-	$link->addVar('redirect', $redirect);
 
-	if ($forcer_document)
-		$link->addVar('forcer_document', 'oui');
+	$link = new Link ($image_url);
+	$link->addVar('redirect', $redirect);
+	$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+	$link->addVar('hash_id_auteur', $connect_id_auteur);
+	$link->addVar('ajout_doc', 'oui');
+	$link->addVar('mode', $mode);
+	$link->addVar('type', $type);
 
 	echo $link->getForm('POST', '', 'multipart/form-data');
 	echo "<div>";
 
 	// bouton permettant de telecharger 10 images ou docs a la fois
 	$envoi_multiple &= ($options == "avancees");
-	if ($envoi_multiple OR $forcer_document)
+	if ($envoi_multiple OR ($mode = 'document' AND $type))
 		echo bouton_block_invisible("ftp$num_form");
 
 	if (tester_upload()) {
@@ -492,19 +498,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 	AND $envoi_multiple) {
 		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
 		if ($texte_upload) {
-			echo "<p><div style='color: #505050;'>";
-			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
-			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br />";
-			echo "\n<select name='image2' size='1' class='fondl'>";
-			echo $texte_upload;
-			echo "\n</select>";
-			if ($type == 'rubrique')
-			  echo "<br />\n<span style='margin-left: 20px'><input type='radio' name='identifier' />&nbsp;&nbsp;",
-			    _L("et identifier l'arborescence du r&eacute;pertoire &agrave; celle des rubriques."),
-			    "</span>\n";
-			echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok_ftp' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
-
-			echo "</div>\n";
+		  echo afficher_transferer_upload($texte_upload,$type);
 		}
 		else {
 			echo "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
@@ -514,7 +508,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 	}
 
 	// Lien document distant, jamais en mode image
-	if ($forcer_document) {
+	if ($mode = 'document' AND $type) {
 		echo "<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
 		echo "<img src='"._DIR_IMG_PACK.'attachment.gif',
 			"' style='float: $spip_lang_right;' alt=\"\" />\n";
@@ -527,9 +521,27 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 	echo "</div>\n";
 	echo fin_block();
 	echo "</form>\n";
-
 }
 
+function afficher_transferer_upload($texte_upload,$type)
+{
+			
+  return "<p><div style='color: #505050;'>" .
+    "\n"._T('info_selectionner_fichier')."&nbsp;:<br />" .
+    "\n<select name='image2' size='1' class='fondl'>" .
+    $texte_upload .
+    "\n</select>" .
+    (($type != 'rubrique') ? "" :
+     ("<br />\n<span style='margin-left: 20px'><input type='radio' name='identifier' />&nbsp;&nbsp;" .
+      _L("et identifier l'arborescence du r&eacute;pertoire &agrave; celle des rubriques.") .
+      "</span>\n")) .
+     "<div align='".
+     $GLOBALS['spip_lang_right'] .
+     "'><input name='ok_ftp' type='Submit' value='" .
+     _T('bouton_choisir').
+     "' class='fondo'></div>" .
+     "</div>\n";
+     }
 
 //
 // Afficher les documents non inclus
@@ -821,16 +833,13 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 	else {
 
 		// lien "upload vignette"
-		$link = new Link ($image_url);
-		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('id_document', $id_document);
-		$link->addVar('mode', 'vignette');
-		$link->addVar('ancre', $album);
-		afficher_upload($link,
-			$redirect_url.'&show_docs='.$id_document,
-			/* _T('info_remplacer_vignette') */'', 'portfolio', false);
+	  $image_url .= "&id_document=$id_document&ancre=$album";
+	  afficher_upload($image_url,
+				$redirect_url.'&show_docs='.$id_document,
+				/* _T('info_remplacer_vignette') */'',
+				'portfolio',
+				false,
+				'vignette');
 	}
 	echo fin_block();
 }
@@ -918,13 +927,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		
-		$link = new Link ($image_url);
-		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('type', $type);
-
-		afficher_upload($link, $redirect_url, _T('info_telecharger_ordinateur'), '', true, true, $type);
+		
+		afficher_upload($image_url, $redirect_url, _T('info_telecharger_ordinateur'), '', true, 'document', $type);
 		
 		echo fin_cadre_relief();
 		
@@ -960,16 +964,9 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
 
-	$link = new Link ($image_url);
-	$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-	$link->addVar('hash_id_auteur', $connect_id_auteur);
-	$link->addVar('ajout_doc', 'oui');
-	$link->addVar('mode', 'vignette');
-	$link->addVar('type', $type);
-	afficher_upload($link, $redirect_url, _T('info_telecharger'));
+	afficher_upload($image_url, $redirect_url, _T('info_telecharger'),'',true,'vignette',$type);
 
 	fin_cadre_relief();
-
 
 	//// Documents associes
 	$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
@@ -1014,14 +1011,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 
 		debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
-			$link = new Link ($image_url);
-			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('ajout_doc', 'oui');
-			$link->addVar('mode', 'document');
-			$link->addVar('type', $type);
-		afficher_upload($link, $redirect_url,
-			_T('info_telecharger_ordinateur'));
+		afficher_upload($image_url, $redirect_url,_T('info_telecharger_ordinateur'), '',true,'document',$type);
 		fin_cadre_enfonce();
 	}
 

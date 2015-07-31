@@ -24,17 +24,7 @@ include_ecrire("inc_admin.php3");			# verifier_action_auteur
 include_ecrire("inc_abstract_sql.php3");	# spip_insert
 include_ecrire('inc_documents.php3');		# fichiers_upload()
 
-
-// Recuperer les variables d'upload
-if (!$_FILES)
-	$_FILES = &$HTTP_POST_FILES;
-if (!is_array($_FILES))
-	$_FILES = array();
-foreach ($_FILES as $id => $file) {
-	if ($file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
-		unset ($_FILES[$id]);
-}
-
+$documents_actifs = array();
 //
 // Le switch principal : quelle est l'action demandee
 //
@@ -43,42 +33,62 @@ foreach ($_FILES as $id => $file) {
 if ($test_vignette)
 	redirige_par_entete(tester_vignette($test_vignette));
 
-//
-// Ajout de documents
-//
-else if ($ajout_doc == 'oui') {
+ else if ($ajout_doc == "oui")
+   {
 
-	// Autorisation ?
-	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
-		die ('Interdit');
-	// Cas d'un document distant reference sur internet
-	if (preg_match(',^https?://....+,i', $_POST['image_url'])) {
-		$_FILES = array(
+// Autorisation ?
+     if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
+	die ('Interdit');
+
+// Cas d'un document distant reference sur internet
+     if (preg_match(',^https?://....+,i', $_POST['image_url'])) {
+	ajouter_les_fichiers(array(
 			array('name' => basename($_POST['image_url']),
 			'tmp_name' => $_POST['image_url'])
-		);
-		ajouter_les_fichiers($_FILES, 'distant', $type, $id_article, $id_document);
-	} else {
-	// Si on est en mode 'document', les images doivent etre installees
-	// comme documents dans le portfolio
-		if ($forcer_document) $mode = 'document';
-		if ($_POST['image2']
-		    AND !strstr($_POST['image2'], '..')
-		    AND $_POST['ok_ftp']
-		    )
-		  //
-		  // Cas d'un fichier ou d'un repertoire installe dans ecrire/upload/
-		  //
-		  $_FILES = ajouter_par_upload($_POST['image2'], $_POST['identifier'], $id_article, $hash_id_auteur);
+			), 'distant', $type, $id_article, $id_document, $documents_actifs);
+ } else {
 
-		if (function_exists('gzopen') AND !($mode == 'distant'))
-		  $_FILES = deballer_upload($_FILES, $_POST['source_zip'],$action_zip, $hash, $hash_id_auteur, $id_article, $id_document, $mode, $redirect, $type);
-		ajouter_les_fichiers($_FILES, $mode, $type, $id_article, $id_document);}
-
-}
-
+  $image2 = $_POST['image2'];
+  if ($image2 AND !strstr($image2, '..') AND $_POST['ok_ftp']) {
+  //
+  // Cas d'un fichier ou d'un repertoire installe dans ecrire/upload/
+  //
+	$upload = _DIR_TRANSFERT .$image2;
+	if (!is_dir($upload))
+	  // seul un fichier est demande
+	  $_FILES = array(
+				array ('name' => basename($upload),
+				'tmp_name' => $upload)
+				);
+	else $_FILES = ajouter_par_upload($upload, $_POST['identifier'], $id_article, $hash_id_auteur);
+  } else {
+	if (!$_FILES)
+		$_FILES = &$HTTP_POST_FILES;
+	if (!is_array($_FILES))
+		$_FILES = array();
+	foreach ($_FILES as $id => $file) {
+		if ($file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+			unset ($_FILES[$id]);
+	}
+  }
+  if (function_exists('gzopen') AND !($mode == 'distant'))
+	$_FILES = deballer_upload($_FILES, $_POST['source_zip'],$action_zip, $hash, $hash_id_auteur, $id_article, $id_document, $mode, $redirect, $type);
+  
+  ajouter_les_fichiers($_FILES, $mode, $type, $id_article, $id_document, $documents_actifs);
+     }
+   }
 // Ajout d'un logo
 else if ($ajout_logo == "oui" and $logo) {
+
+  // Recuperer les variables d'upload
+  if (!$_FILES)
+    $_FILES = &$HTTP_POST_FILES;
+  if (!is_array($_FILES))
+    $_FILES = array();
+  foreach ($_FILES as $id => $file) {
+    if ($file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+      unset ($_FILES[$id]);
+  }
 	if ($desc = array_pop($_FILES)
 	AND verifier_action_auteur("ajout_logo $logo",
 	$hash, $hash_id_auteur))
