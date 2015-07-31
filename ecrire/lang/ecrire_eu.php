@@ -822,7 +822,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 	'texte_enrichir_mise_a_jour' => 'Zure testuaren formatua aberastu dezakezu,"tipografia-lasterbideak" erabiliz',
 	'texte_fichier_authent' => '<b>SPIP-ek sortu behar ote ditu <tt>.htpasswd</tt> et <tt>.htpasswd-admin</tt> fitxategi bereziak @dossier@ direktorioan ?</b>
 <p>Fitxategi hauek egileei eta administrazaileei zure guneko inguru batzutan (adibidez, kanpoko estatistika-programa) sarbidea murrizteko baliatzen ahal ditzakezu.</p>
-<p>Ez bazaizu baliagarri, aukera hau bere lehentasunezko balioan utz dezakezu (fitxategien sortzerik ez).</p>',
+<p>Ez bazaizu baliagarri, aukera hau bere lehentasunezko balioan utz dezakezu (fitxategien sortzerik ez).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Sistemak oraintokirako norberako sarrera sortuko du.',
 	'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen bada, ahal duzu',
 	'texte_introductif_article' => '(Artikuluaren sarrera.)',

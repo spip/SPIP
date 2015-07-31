@@ -847,7 +847,7 @@ in einer Farbe, die den Status anzeigt :',
 	'texte_en_cours_validation' => 'Die folgenden Einträge sind zur Veröffentlichung vorgeschlagen.',
 	'texte_enrichir_mise_a_jour' => 'Sie können Ihren Text ansprechend gestalten, indem Sie die typografischen Abkürzungen verwenden.',
 	'texte_fichier_authent' => '<b>Soll SPIP die Dateien <tt>.htpasswd</tt> und <tt>.htpasswd-admin</tt> im Verzeichnis @dossier@ anlegen?</b><p>
- Mit diesen Dateien können Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschränken.</p><p>Wenn Sie diese Möglickeit nicht nutzen, könnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>',
+ Mit diesen Dateien können Sie den Zugang zu anderen Bereichen Ihrer Website (z.B. externe Logfile-Auswertungen) auf Redakteure und Administratoren beschränken.</p><p>Wenn Sie diese Möglickeit nicht nutzen, könnn Sie hier die Grundeinstellung (Dateien werden nicht angelegt) beibehalten.</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Das System wird nun persönliche Zugangsdaten für Sie anlegen.',
 	'texte_informations_personnelles_2' => '(Hinweis: Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, können Sie',
 	'texte_introductif_article' => '(Einleitender Text des Artikels.)',

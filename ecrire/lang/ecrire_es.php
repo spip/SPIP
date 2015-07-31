@@ -849,7 +849,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'texte_fichier_authent' => '<b>¿Debe SPIP crear los archivos especiales <tt>.htpasswd</tt>
  y <tt>.htpasswd-admin</tt> en la carpeta @dossier@?</b><p>
 Estos archivos pueden servir para restringir el acceso a las autoras y administradores en otros lugares de tu sitio (programa externo de estadísticas, por ejemplo).<p>
-Si no le ves utilidad, puedes dejar esta opción con su valor por omisión (no crear los archivos).</p>',
+Si no le ves utilidad, puedes dejar esta opción con su valor por omisión (no crear los archivos).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'El sistema va a crear ahora un acceso personalizado al sitio.',
 	'texte_informations_personnelles_2' => '(Nota: si se trata de una reinstalación, y tu acceso todavía funciona, puedes ',
 	'texte_introductif_article' => '(Introducción del artículo.)',

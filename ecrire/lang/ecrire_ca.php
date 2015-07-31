@@ -829,7 +829,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr�
 	'texte_en_cours_validation' => 'Els continguts que hi ha aquí a sota estan a l’espera de ser validats. ',
 	'texte_enrichir_mise_a_jour' => 'Podeu enriquir la compaginació del text emprant "dreceres tipogràfiques".',
 	'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt>.htpasswd</tt> i <tt>.htpasswd-admin</tt> en el directori @dossier@ ?</b><p>
- Aquests fitxers us poden servir per restringir l’accés als autors i als administradors a altres llocs de la vostra Web (programa extern d’estadístiques, per exemple).</p> Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no crear fitxers).</p>',
+ Aquests fitxers us poden servir per restringir l’accés als autors i als administradors a altres llocs de la vostra Web (programa extern d’estadístiques, per exemple).</p> Si no li veieu cap utilitat, podeu deixar aquesta opció en el seu valor per defecte (no crear fitxers).</p>', # MODIF
 	'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un accés personalitzat al web.',
 	'texte_informations_personnelles_2' => ' (Nota: si es tracta d’una reinstal.lació mantenint el vostre accés pot', # MODIF
 	'texte_introductif_article' => ' (Texte introductiu de l’article.)',

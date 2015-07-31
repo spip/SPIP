@@ -879,7 +879,7 @@ preinštalovať SPIP, vytvoriť novú databázu a nový účet pre administrát
   (napr. externý štatistický program).</p><p>
   Ak takéto súbory nepotrebujete, môžete ponechať túto možnosť
   s predvolenou hodnotou (žiadne 
-  vytváranie súborov).</p>',
+  vytváranie súborov).</p>', # MODIF
 	'texte_informations_personnelles_1' => 'Systém vám teraz vytvorí osobný účet pre túto stránku.',
 	'texte_informations_personnelles_2' => '(Poznámka: ide o preinštaláciu, ak vám stále funguje prístup ',
 	'texte_introductif_article' => '(Úvodný text článku.)',
