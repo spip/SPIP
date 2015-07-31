@@ -172,6 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_auteur' => 'Créer un nouvel auteur et l’associer à cet article',
 	'icone_creer_mot_cle' => 'Créer un nouveau mot-clé et le lier à cet article',
 	'icone_creer_rubrique_2' => 'Créer une nouvelle rubrique',
+	'icone_developpement' => 'Développement',
 	'icone_edition' => 'Édition',
 	'icone_ma_langue' => 'Ma langue',
 	'icone_mes_infos' => 'Mes informations',
@@ -197,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_visiteur' => '1 visiteur',
 	'info_activer_cookie' => 'Vous pouvez activer un <b>cookie de correspondance</b>, ce qui vous
 	permettra de passer facilement du site public au site privé.',
+	'info_activer_menu_developpement' => 'Afficher le menu Développement',
 	'info_admin_etre_webmestre' => 'Me donner les droits de webmestre',
 	'info_admin_gere_rubriques' => 'Cet administrateur gère les rubriques suivantes :',
 	'info_admin_gere_toutes_rubriques' => 'Cet administrateur gère <b>toutes les rubriques</b>',

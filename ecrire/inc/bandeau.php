@@ -103,8 +103,9 @@ function definir_barre_boutons($contexte=array(),$icones = true, $autorise = tru
 				+ array_slice($boutons_admin[$parent]->sousmenu,$position,100);
 			}
 			if (!$parent
-			// provisoire, eviter les vieux boutons
-			AND (!in_array($id,array('forum','statistiques_visites')))
+				// provisoire, eviter les vieux boutons
+				AND (!in_array($id,array('forum','statistiques_visites')))
+				AND autoriser('menu',"_$id",0,NULL,array('contexte'=>$contexte))
 
 			) {
 				$position = (isset($infos['position']) and $infos['position']) ? $infos['position'] : count($boutons_admin);
