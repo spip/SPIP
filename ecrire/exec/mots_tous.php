@@ -52,7 +52,7 @@ function exec_mots_tous_dist()
 // On boucle d'abord sur les groupes de mots
 //
 
-	$result = spip_query("SELECT *, ".sql_multi ("titre", "$spip_lang")." FROM spip_groupes_mots ORDER BY multi");
+	$result = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");
 
 	while ($row_groupes = sql_fetch($result)) {
 		$id_groupe = $row_groupes['id_groupe'];

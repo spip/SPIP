@@ -59,7 +59,7 @@ function statistiques_csv($id) {
 	if ($id)
 		$s = sql_select("date, visites", "spip_visites_articles", "id_article=$id", "", "date");
 	else
-		$s = spip_query("SELECT date, visites FROM spip_visites ORDER BY date");
+		$s = sql_select("date, visites", "spip_visites", "", "", "date");
 	while ($t = sql_fetch($s)) {
 		echo $t['date'].";".$t['visites']."\n";
 	}

@@ -116,7 +116,7 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art,$spip_lang_dir){
 	$sel_lang[$spip_lang] = $spip_lang;
 
 	if (autoriser('publierdans', 'rubrique', 0))
-		$result = spip_query("SELECT id_article, titre, statut, id_rubrique, lang, id_trad, date_modif FROM spip_articles ORDER BY date DESC");
+		$result = sql_select("id_article, titre, statut, id_rubrique, lang, id_trad, date_modif", "spip_articles", "", "", "date DESC");
 	else 
 		$result = sql_select("articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif", "spip_articles AS articles LEFT JOIN spip_auteurs_articles AS lien ON articles.id_article=lien.id_article", "articles.statut = 'publie' OR articles.statut =	'prop' OR (articles.statut = 'prepa'  AND lien.id_auteur=" . _q($GLOBALS['auteur_session']['id_auteur']) . ")", "id_article", "articles.date DESC");
 
