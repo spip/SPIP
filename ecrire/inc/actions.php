@@ -215,6 +215,11 @@ function ajax_retour($corps,$xml = true)
 		header('Content-Type: text/html; charset='. $c);
 		$debut = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
 	}
+	if (count($GLOBALS['tableau_des_erreurs']) AND isset($_COOKIE['spip_admin'])) {
+		find_in_path('debug.php','public/',true);
+		$corps = affiche_erreurs_page($GLOBALS['tableau_des_erreurs']) . $corps;
+	}
+
 	echo $debut, $corps, $fin;
 }
 
