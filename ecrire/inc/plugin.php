@@ -32,7 +32,7 @@ function liste_plugin_files(){
 	return $plugin_files;
 }
 
-//  à utiliser pour initialiser ma variable globale $plugin
+//  A utiliser pour initialiser ma variable globale $plugin
 // http://doc.spip.org/@liste_plugin_actifs
 function liste_plugin_actifs(){
   $meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
@@ -126,7 +126,12 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 
 	$liste_fichier_verif2 = pipeline_precompile();
 	$liste_fichier_verif = array_merge($liste_fichier_verif,$liste_fichier_verif2);
-	verification_precompile($liste_fichier_verif);
+
+	// horrible !
+	foreach ($liste_fichier_verif as $k => $f)
+		$liste_fichier_verif[$k] = _DIR_PLUGINS.preg_replace(",(_DIR_PLUGINS\.)?',", "", $f);
+	ecrire_fichier(_DIR_TMP.'verifier_plugins.txt',
+		serialize($liste_fichier_verif));
 }
 
 // precompilation des pipelines
@@ -176,25 +181,7 @@ function pipeline_precompile(){
 	return $liste_fichier_verif;
 }
 
-// http://doc.spip.org/@verification_precompile
-function verification_precompile($liste_fichier_verif){
-	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;
-	// http://doc.spip.org/@verifier_presence_plugins
-	function verifier_presence_plugins(){
-		\$ok = true;";
-	$end_file = "
-		return \$ok;
-	}\n?".">";
-	$content = "";
-	foreach($liste_fichier_verif as $fichier){
-		$content .= "
-		\$ok = \$ok & @is_readable($fichier);";
-	}
-	ecrire_fichier(_DIR_TMP."verifier_presence_plugins.php",
-		$start_file . $content . $end_file);
-}
-
-// pas sur que ça serve juste au cas où
+// pas sur que ca serve...
 // http://doc.spip.org/@liste_plugin_inactifs
 function liste_plugin_inactifs(){
 	return array_diff (liste_plugin_files(),liste_plugin_actifs());
@@ -462,24 +449,13 @@ function plugin_verifie_conformite($plug,&$arbre){
 }
 
 // http://doc.spip.org/@verifie_include_plugins
-function verifie_include_plugins(){
-	global $auteur_session;
-	if ($auteur_session['statut']!='0minirezo') return;
-	// verifier la presence des plugins (on a pu en deplacer un)
-	if (@is_readable(_DIR_TMP."verifier_presence_plugins.php")){
-		// verification precompile
-		include_once(_DIR_TMP."verifier_presence_plugins.php");
-		$ok = verifier_presence_plugins();
-		if ($ok) return;
-	}
+function verifie_include_plugins() {
 	if (_request('exec')!="admin_plugin"){
-		if (@is_readable(_DIR_PLUGINS)){
+		if (@is_readable(_DIR_PLUGINS))
 			redirige_par_entete(generer_url_ecrire("admin_plugin"));
-			exit;
-		}
+
 		// plus de repertoire plugin existant, le menu n'existe plus
 		// on fait une mise a jour silencieuse
-		include_spip('inc/plugin');
 		// generer les fichiers php precompiles
 		// de chargement des plugins et des pipelines
 		verif_plugin();

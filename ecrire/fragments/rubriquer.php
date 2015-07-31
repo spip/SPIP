@@ -12,28 +12,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_dater_dist
-function exec_dater_dist()
+# petit moteur de recherche sur les rubriques
+
+// http://doc.spip.org/@fragments_rubriquer_dist
+function fragments_rubriquer_dist()
 {
-	global $id_article;
-	$id_article = intval($id_article);
+	global $id;
+	$id = intval($id);
 
-	if (!acces_article($id_article)) {
-		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
-		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
-	}
-
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
-
-	$statut_article = $row['statut'];
-	$date = $row["date"];
-	$date_redac = $row["date_redac"];
-
-	include_spip('inc/actions');
-	include_spip('exec/articles');
-
-	return formulaire_dater($id_article, 'ajax', $statut_article, $date, $date_redac);
+	include_spip('inc/texte');
+	include_spip('inc/mini_nav');
+	return mini_nav ($id, "aff_nav_recherche", 
+			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
+			"';", 0, true);
 }
-
-?>

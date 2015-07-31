@@ -12,10 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_tourner_dist
-function exec_tourner_dist()
+function fragments_legender_dist()
 {
-	global $id_document, $script, $id, $type, $ancre;
+	global $id_document, $id, $type, $ancre, $script;
 	$id = intval($id);
 	$id_document = intval($id_document);
 
@@ -30,7 +29,6 @@ function exec_tourner_dist()
 	include_spip('inc/documents');
 	include_spip('inc/presentation');
 
-	return formulaire_tourner($id_document, array(), $script, 'ajax', $type);
+	return formulaire_legender($id_document, array(), $script, $type, $id, $ancre);
 }
-
 ?>

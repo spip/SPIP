@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/actions');
 include_spip('base/abstract_sql');
 
-function exec_grouper_mots_dist()
+function fragments_grouper_mots_dist()
 {
 	$id_groupe = intval(_request('id_groupe'));
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots WHERE id_groupe=$id_groupe"));

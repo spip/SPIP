@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('exec/grouper_mots');
+include_spip('fragments/grouper_mots');
 
 // http://doc.spip.org/@exec_mots_tous_dist
 function exec_mots_tous_dist()

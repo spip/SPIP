@@ -152,14 +152,31 @@ if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 			$auteur_session['lang'] = $var_lang_ecrire;
 			$var_f = charger_fonction('session', 'inc');
 			$var_f($auteur_session);
-	       }
+		}
 	}
- }
+}
 
 //
+// Fragment (ajax) ?
+//
+// var_ajaxcharset repere les requetes de fragments, et indique en plus
+// le charset [utf-8] utilise par le client, utile a _request.
+if (isset($var_ajaxcharset)) {
+	header("Content-Type: text/html; charset=".$GLOBALS['meta']["charset"]);
+	$var_f = charger_fonction($exec, 'fragments');
+	$fragment = $var_f();
+	echo "<","?xml version='1.0' encoding='",
+		$GLOBALS['meta']["charset"],"'?",">\n";
+	echo $fragment;
+	exit;
+}
+
+
+//
+// Gestion d'une page normale de l'espace prive
+//
+
 // Controle de la version, sauf si on est deja en train de s'en occuper
-//
-
 if (!isset($reinstall)) {
 	if ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))) {
 		include_spip('inc/admin');
@@ -167,35 +184,30 @@ if (!isset($reinstall)) {
 	}
 }
 
-//
 // Controle d'interruption d'une longue restauration
-//
-if ($GLOBALS['_COOKIE']['spip_admin']
-AND isset($GLOBALS['meta']["debut_restauration"])
-AND !($exec=='js_menu_rubriques'))
+if ($_COOKIE['spip_admin']
+AND isset($GLOBALS['meta']["debut_restauration"]))
 	$exec = 'import_all';
-else 
-	// ne pas interrompre une restauration ou un upgrade par un redirect inoportun
-	if ($exec!='upgrade' && $auteur_session['statut']=='0minirezo') {
-		// on verifie la configuration des plugins
-		include_spip('inc/plugin');
-		verifie_include_plugins();
+
+// Verification des plugins
+// (ne pas interrompre une restauration ou un upgrade)
+if ($exec!='upgrade'
+AND $auteur_session['statut']=='0minirezo'
+AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
+AND false
+AND $l = @unserialize($l)) {
+	foreach ($l as $fichier) {
+		if (!@is_readable($fichier)) {
+			include_spip('inc/plugin');
+			verifie_include_plugins();
+		}
 	}
+}
 
 // Trouver la fonction eventuellement surchagee et l'appeler.
 // Elle envoie parfois des en-tetes http,
 // et en mode Ajax retourne un resultat.
-
 $var_f = charger_fonction($exec);
-$r = $var_f(); 
+$var_f();
 
-// Un retour d'Ajax est repere par cette variable, 
-// (qui donne en + le charset utilise par le client, utile a _request).
-// Il faut preciser le charset utilise par le serveur,
-// mais pas avec header(Content-Type ... charset): ca bloque MSIE
-
-if (isset($var_ajaxcharset)) {
-	header("Content-Type: text/html; charset=".$GLOBALS['meta']["charset"]);
-	echo "<","?xml version='1.0' encoding='",$GLOBALS['meta']["charset"],"'?",">\n", $r;
- }
 ?>
