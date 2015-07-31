@@ -55,6 +55,7 @@ function action_instituer_groupe_mots_post($r)
 }
 
 
+// http://doc.spip.org/@action_instituer_groupe_mots_get
 function action_instituer_groupe_mots_get($table)
 {
 	$titre = _T('info_mot_sans_groupe');

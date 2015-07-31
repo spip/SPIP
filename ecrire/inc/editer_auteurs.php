@@ -44,6 +44,7 @@ function inc_editer_auteurs_dist($type, $id, $flag, $cherche_auteur, $ids, $titr
 	return editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $GLOBALS['meta']['ldap_statut_import'],$titre_boite,$script_edit_objet, $arg_ajax);
 }
 
+// http://doc.spip.org/@editer_auteurs_objet
 function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_auteurs, $futurs, $statut, $titre_boite,$script_edit_objet, $arg_ajax)
 {
 	global $spip_lang_left, $spip_lang_right, $options;
@@ -120,6 +121,7 @@ function editer_auteurs_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aut
 	return ajax_action_greffe("editer_auteurs-$id", $res);
 }
 
+// http://doc.spip.org/@determiner_auteurs_objet
 function determiner_auteurs_objet($type, $id, $cond='')
 {
 	$les_auteurs = array();
@@ -132,6 +134,7 @@ function determiner_auteurs_objet($type, $id, $cond='')
 	return $les_auteurs;
 }
 
+// http://doc.spip.org/@rechercher_auteurs_objet
 function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edit_objet, $arg_ajax)
 {
 	if (!$ids) {
@@ -176,6 +179,7 @@ function rechercher_auteurs_objet($cherche_auteur, $ids, $type, $id, $script_edi
 	}
 }
 
+// http://doc.spip.org/@afficher_auteurs_objet
 function afficher_auteurs_objet($type, $id, $flag_editable, $les_auteurs, $script_edit, $script_edit_auteur, $arg_ajax)
 {
 	global $connect_statut, $options,$connect_id_auteur, $spip_display;
@@ -206,6 +210,7 @@ function afficher_auteurs_objet($type, $id, $flag_editable, $les_auteurs, $scrip
 }
 
 
+// http://doc.spip.org/@ajouter_auteurs_objet
 function ajouter_auteurs_objet($type, $id, $les_auteurs,$script_edit, $arg_ajax)
 {
 	$query = determiner_non_auteurs($les_auteurs, "statut, nom");
@@ -246,6 +251,7 @@ function determiner_non_auteurs($les_auteurs, $order)
 }
 
 
+// http://doc.spip.org/@objet_auteur_select
 function objet_auteur_select($result)
 {
 	global $couleur_claire ;
