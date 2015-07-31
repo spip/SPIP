@@ -99,19 +99,49 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 
 //
-// Compiler les statistiques temporaires : visites et referers (si active)
+// Optimiser les informations liees aux referers
 //
 
-function calculer_100_referers() {
-	$nombre_de_refs = 100;
+function supprimer_referers($type = "") {
+	$table = 'spip_referers';
+	if ($type) {
+		$table .= '_'. $type . 's';
+		$col_id = 'id_' . $type;
+		$query = "SELECT COUNT(DISTINCT $col_id) AS count FROM $table";
+		$result = spip_query($query);
+		if ($row = @spip_fetch_array($result)) {
+			$count = $row['count'];
+		}
+	}
+	if (!$count) $count = 1;
+
+	$query = "SELECT visites FROM $table ".
+		"ORDER BY visites LIMIT ".intval($count * 100).",1";
+	$result = spip_query($query);
+	$visites_min =  1;
+	if ($row = @spip_fetch_array($result)) {
+		$visites_min = $row['visites'];
+	}
+
+	$query = "DELETE FROM $table WHERE (date < DATE_SUB(NOW(),INTERVAL 7 DAY) AND visites <= $visites_min) OR (date < DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$result = spip_query($query);
+}
+
+
+
+//
+// Compiler les statistiques temporaires : referers (si active)
+//
+
+function calculer_n_referers($nb_referers) {
 	$date = date("Y-m-d");
 
 	// Selectionner 100 referers sur tout le site
 	$query = "SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
-		"FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nombre_de_refs";
+		"FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nb_referers";
 	$result = spip_query($query);
 
-	$encore = (spip_num_rows($result) == $nombre_de_refs);
+	$encore = (spip_num_rows($result) == $nb_referers);
 
 	$referer_insert = "";
 	$referer_update = "";
@@ -134,7 +164,6 @@ function calculer_100_referers() {
 			$result = spip_query($query);
 		}
 	}
-
 	if (is_array($referer_insert)) {
 		$query_insert = "INSERT DELAYED IGNORE INTO spip_referers ".
 			"(date, referer, referer_md5, visites) VALUES ".join(', ', $referer_insert);
@@ -174,28 +203,34 @@ function calculer_100_referers() {
 		$result_insert = spip_query($query_insert);
 	}
 
+	// Effacer les referers traites
 	if (is_array($referer_vus)) {
 		$query_effacer = "DELETE FROM spip_referers_temp WHERE referer_md5 IN (".join(",",$referer_vus).")";
-		$result_effacer = spip_query($query_effacer);	
+		$result_effacer = spip_query($query_effacer);
 	}
 
-	// a-t-on atteint le dernier referer ?
+	// A-t-on atteint le dernier referer ?
 	return $encore;
 }
 
+
 function calculer_referers() {
-	$encore = calculer_100_referers();
+	$encore = calculer_n_referers(100);
 	if ($encore) {
 		include_ecrire("inc_meta.php3");
 		ecrire_meta ("calculer_referers_now", "oui");
 		ecrire_metas();
 	} else {
-		// un peu de menage
+		// Supprimer les referers trop vieux
 		supprimer_referers();
 		supprimer_referers("article");
 	}
 }
 
+
+//
+// Compiler les statistiques temporaires : visites
+//
 
 function calculer_visites($date = "") {
 
@@ -232,14 +267,9 @@ function calculer_visites($date = "") {
 	}
 
 	$query_effacer = "DELETE FROM spip_visites_temp";
-	$result_effacer = spip_query($query_effacer);	
+	$result_effacer = spip_query($query_effacer);
 
 	// Mise a jour de la base
-	if (is_array($visites_insert)) {
-		$query_insert = "INSERT DELAYED IGNORE INTO spip_visites_articles (date, id_article, visites) ".
-				"VALUES ".join(', ', $visites_insert);
-		$result_insert = spip_query($query_insert);
-	}
 	if (is_array($visites_update)) {
 		while (list($visites, $articles) = each($visites_update)) {
 			$query = "UPDATE spip_articles SET visites = visites + $visites ".
@@ -247,42 +277,12 @@ function calculer_visites($date = "") {
 			$result = spip_query($query);
 		}
 	}
-
-/*	if (lire_meta('activer_statistiques_ref') != 'non') {
-		calculer_referers($date);
-	} */
-}
-
-
-//
-// Optimiser les informations liees aux referers
-//
-
-function supprimer_referers($type = "") {
-	$table = 'spip_referers';
-	if ($type) {
-		$table .= '_'. $type . 's';
-		$col_id = 'id_' . $type;
-		$query = "SELECT COUNT(DISTINCT $col_id) AS count FROM $table";
-		$result = spip_query($query);
-		if ($row = @spip_fetch_array($result)) {
-			$count = $row['count'];
-		}
+	if (is_array($visites_insert)) {
+		$query_insert = "INSERT DELAYED IGNORE INTO spip_visites_articles (date, id_article, visites) ".
+				"VALUES ".join(', ', $visites_insert);
+		$result_insert = spip_query($query_insert);
 	}
-	if (!$count) $count = 1;
-
-	$query = "SELECT visites FROM $table ".
-		"ORDER BY visites LIMIT ".intval($count * 100).",1";
-	$result = spip_query($query);
-	$visites_min =  1;
-	if ($row = @spip_fetch_array($result)) {
-		$visites_min = $row['visites'];
-	}
-
-	$query = "DELETE FROM $table WHERE (date < DATE_SUB(NOW(),INTERVAL 7 DAY) AND visites <= $visites_min) OR (date < DATE_SUB(NOW(),INTERVAL 30 DAY)";
-	$result = spip_query($query);
 }
-
 
 
 //
