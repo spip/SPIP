@@ -103,17 +103,19 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				}
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 width='100%'>";
 				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif' width='100%'><TD style='border-bottom: 1px solid #cccccc;'>";
+				if ($niveau==0){
+					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*100);
+					echo "<div style='float: $spip_lang_right;'>$pourcent%</div>";
+				}
+
 				echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
 				
+			
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
 				
 				echo "<span class='verdana1'>";	
 				echo "<A HREF='naviguer.php3?coll=$id_rubrique' style='color: black;'>$titre</A>";
 				
-				if ($niveau==0){
-					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*100);
-					echo "<div style='float: $spip_lang_right;'>$pourcent %</div>";
-				}
 				
 				echo "</span>";
 				echo "</TD><TD ALIGN='right' width='105' style='border-bottom: 1px solid #cccccc;'>";
@@ -180,7 +182,9 @@ if ($total_vis<1) $total_vis=1;
 
 debut_cadre_relief("statistiques-24.gif");
 //echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 style='border: 1px solid #aaaaaa;'>";
+echo "<div style='border: 1px solid #aaaaaa;'>";
 enfants_aff(0,100);
+echo "</div>";
 //echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0></TD>";
 
 
