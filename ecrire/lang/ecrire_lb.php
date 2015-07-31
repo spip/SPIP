@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Wichtege Grupp:</b> &euml;t ass wiirklech ugeroden e Schl&euml;sselwuert aus d&euml;sem Grupp ze wielen.',
 'avis_deplacement_rubrique' => 'Opgepasst! D&euml;s Rubrik huet @contient_breves@ br&egrave;ve@scb@: wann der se r&eacute;ckelt, klickt d&euml;st Konfirmatiouns-Feld un.',
 'avis_destinataire_obligatoire' => 'Dir musst d&euml;n Empf&auml;nger uginn ier der d&euml;sen Message fortsch&eacute;ckt.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fehler bei der SQL-Verbindung',
 'avis_erreur_version_archive' => 'Opgepasst! De Fichier @archive@ korrespond&eacute;iert zu enger anerer SPIP-Versioun w&eacute;i d&eacute;i install&eacute;iert.
 Dir kommt an grouss Schwieregkeeten:
@@ -142,6 +143,7 @@ der Dokumentatioun vu SPIP</a>.',
 // E
 'email' => 'Email',
 'email_2' => 'Email:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adress vun der Sammlung',
 'entree_adresse_email' => '&Auml;r Email-Adress',
 'entree_adresse_fichier_syndication' => 'Adress vum Fichier fir d\'Syndicatioun:',
@@ -178,6 +180,7 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'entree_texte_breve' => 'Text vun der Kuerzmeldung',
 'entree_titre_obligatoire' => '<b>Titel</b> [Obligatoresch]<br />',
 'entree_url' => 'D\'Adress (URL) vun &auml;rem Site',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fichier fehlt',
 'erreur_plugin_fichier_def_absent' => 'Definitiouns-Fichier fehlt',
 'erreur_plugin_nom_fonction_interdit' => 'Fonktiouns-Numm verbueden',
@@ -250,6 +253,8 @@ D&euml;s Informatiounen kritt dir vum Administrateur vum System oder vum Netzwie
 'info_activer_forum_public' => '<i>Fir d&eacute;i &ouml;ffentl&euml;ch Forum\'en anzeschalten, wielt d\'Default-Moderatiouns-Method:</i>',
 'info_admin_gere_rubriques' => 'D&euml;sen Administrateur k&euml;nmert s&euml;ch &euml;m folgend Rubriken:',
 'info_admin_gere_toutes_rubriques' => 'D&euml;sen Administrateur k&euml;mmert s&euml;ch &euml;m <b>all Rubriken</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrateur',
 'info_administrateur_1' => 'Administrateur',
 'info_administrateur_2' => 'vum Site (<i>oppassen beim benotzen)',
@@ -508,7 +513,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_question_activer_compactage_js' => 'W&euml;llt dir d\'Kompressioun vun de Skripter (Javascript) aschalten?',
 'info_question_activer_compresseur' => 'W&euml;llt dir d\'Kompressioun vum HTTP-Flow aschalten?',
 'info_question_gerer_statistiques' => 'Soll &auml;re Site d\'Statistik vun de Visiten g&eacute;r&eacute;ieren?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.',
+'info_question_inscription_nouveaux_redacteurs' => 'Accept&eacute;iert dier d\'Aschreiwe vu neie Redakteren direkt vum &ouml;ffentl&euml;che Site? Wa jo, da k&euml;nnen d\'Visiteuren s&euml;ch iwert een automat&euml;sche Formulaire aschreiwen an esou Zougang op de privaten Deel kr&eacute;ien fir hir Artikelen ze propos&eacute;ieren. <blockquote><i>W&auml;hrend der Aschreiwungs-Phase kr&eacute;ien d\'Benotzer automat&euml;sch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Sch&eacute;cken vun Email vun hieren Serveren aus: an deem Fall ass d\'automat&euml;scht Aschreiwen onm&eacute;iglech.', # MODIF
 'info_question_mots_cles' => 'W&euml;llt dir Schl&euml;sselwierder op &auml;rem Site benotzen?',
 'info_question_proposer_site' => 'Wie kann e Site propos&eacute;ieren?',
 'info_question_utilisation_moteur_recherche' => 'W&euml;llt dir de Sich-Motor vu SPIP benotzen?
@@ -617,6 +622,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_total' => 'Total:',
 'info_tous_articles_en_redaction' => 'All d\'Artikelen an der Aarbecht',
 'info_tous_articles_presents' => 'All d\'Artikelen d&eacute;i an d&euml;ser Rubrik publiz&eacute;iert sinn',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'all:',
 'info_tous_redacteurs' => 'Annoncen un all d\'Redakteren',
 'info_tout_site' => 'De ganzen Site',
@@ -655,7 +661,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'install_select_langue' => 'Wielt eng Sprooch a klickt op de Kn&auml;ppchen "Weider" fir d\'Installatioun ze starten.',
 'install_select_type_db' => 'Gidd den Typ vun der Datebank un:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Datebankserver vum Hosting zougewisen',
@@ -807,6 +813,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'page_pas_proxy' => 'D&euml;s S&auml;it d&auml;rf n&euml;t duerch de Proxy',
 'pas_de_proxy_pour' => 'Wa n&eacute;ideg dann gidd d&eacute;i Maschinen oder Domainer un fir d&eacute;i d&euml;se Proxy n&euml;t zielt (z.B.: @exemple@)',
 'plugin_charge_paquet' => 'De Package @name@ lueden',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'Fehler: onm&eacute;iglech @zip@ ze lueden',
 'plugin_erreur_droit1' => 'D\'Directory <code>@dest@</code> ass n&euml;t schreiwbar.',
 'plugin_erreur_droit2' => 'Kontroll&eacute;iert d\'Rechter op d&euml;ser Directory oder install&eacute;iert d\'Fichier\'en via FTP.',
@@ -817,6 +824,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_etat_test' => 'am Test',
 'plugin_impossible_activer' => 'De Plugin @plugin@ ka n&euml;t aktiv&eacute;iert ginn',
 'plugin_info_automatique1' => 'Wann dir d\'automat&euml;sch Installatioun vun Plugin\'e erlaabt, dann:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'erstellt de R&eacute;pertoire <code>@rep@</code>;',
 'plugin_info_automatique3' => 'kontroll&eacute;iert op de Server kann an d&euml;se Repertoire schreiwen.',
 'plugin_info_automatique_creer' => 'am Root-Repertoire vum Site ze erstellen.',
@@ -828,6 +836,8 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_info_automatique_liste_update' => 'L&euml;schten updaten',
 'plugin_info_automatique_ou' => 'oder...',
 'plugin_info_automatique_select' => 'Wielt e Plugin: SPIP lued en erof an install&eacute;iert en am Repertoire <code>@rep@</code>; wann de Plugin schons do ass g&euml;tt en Update gemaach.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'Eroflueden vun @url@ an Installatioun an @rep@',
 'plugin_librairies_installees' => 'Install&eacute;iert Librairie\'en',
 'plugin_necessite_lib' => 'D&euml;se Plugin brauch d\'Librairie @lib@',
@@ -836,6 +846,7 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_source' => 'Quell:&nbsp;',
 'plugin_titre_automatique' => 'Automat&euml;sch Installatioun',
 'plugin_titre_automatique_ajouter' => 'Plugin\'e derb&auml;i setzen',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Fuert weider fir ze aktiv&eacute;ieren',
 'plugin_zip_adresse' => 'gidd hei d\'Adress vun engem Plugin-Zip-Fichier un, oder d\'Adress vun enger L&euml;scht vu Plugin\'e.',
 'plugin_zip_adresse_champ' => 'Adress vum Plugin oder vun der L&euml;scht&nbsp;',
@@ -844,11 +855,17 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'plugin_zip_installe_rep_finie' => 'De Fichier @zip@ ass entpackt an am Repertoire @rep@ install&eacute;iert ginn',
 'plugin_zip_installer' => 'Dir k&euml;nnt en elo install&eacute;ieren.',
 'plugin_zip_telecharge' => 'De Fichier @zip@ ass erofgeluede ginn',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ aktiv&eacute;iert Plugin\'e.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ Plugin\'e',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ Plugin\'e verf&uuml;gbar.',
 'plugins_erreur' => 'Fehler an de Plugin\'e: @plugins@',
 'plugins_liste' => 'L&euml;scht vun de Plugin\'en',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Hi&eacute;rarchie',
 'plugins_vue_liste' => 'L&euml;scht',
 'protocole_ldap' => 'Versioun vum Protokol:',

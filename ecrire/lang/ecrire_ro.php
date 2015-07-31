@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grup important:</b>  e foarte indicat s&#259; selec&#355;iona&#355;i un cuv&acirc;nt cheie &icirc;n acest grup.',
 'avis_deplacement_rubrique' => 'Aten&#355;ie! &Icirc;n aceast&#259; rubric&#259; se g&#259;sesc @contient_breves@ &#351;tiri@scb@: dac&#259; o deplasa&#355;i, bifa&#355;i aceast&#259; caset&#259; de confirmare.',
 'avis_destinataire_obligatoire' => 'Trebuie sa indica&#355;i un destinatar &icirc;nainte de a trimite mesajul',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Eroare de conexiune SQL',
 'avis_erreur_version_archive' => '<b>Aten&#355;ie! Fi&#351;ierul @archive@ corespunde unei versiuni SPIP anterioare celei pe care a&#355;i instalat-o.</b> Ve&#355;i &icirc;nt&acirc;mpina dificult&#259;&#355;i serioase: risc de distrugere a bazei de date, defecte &icirc;n func&#355;ionarea site-ului, &#351;.a.m.d. Nu valida&#355;i importarea. Pentru informa&#355;ii suplimentare, consulta&#355;i <a href="@spipnet@">                                documenta&#355;ia SPIP.</a>.',
 'avis_espace_interdit' => '<b>Spa&#355;iu interzis</b><div>SPIP este d&eacute;j&agrave; instalat</div>.',
@@ -141,6 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'email',
 'email_2' => 'email :',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adresa anuarului',
 'entree_adresse_email' => 'Adresa dumneavoastr&#259; de email',
 'entree_adresse_fichier_syndication' => 'Adresa fi&#351;ierului pentru sindicalizare&nbsp;:',
@@ -177,6 +179,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Textul &#351;tirii',
 'entree_titre_obligatoire' => '<b>Titlu</b> [Obligatoriu]<br />',
 'entree_url' => 'Adresa (URL) site-ului dumneavoastr&#259;',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fi&#351;ier lips&#259;',
 'erreur_plugin_fichier_def_absent' => 'Fi&#351;ier de defini&#355;ii lips&#259;',
 'erreur_plugin_nom_fonction_interdit' => 'Nume de func&#355;ie interzis',
@@ -251,6 +254,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  lor de operare implicit:</i>',
 'info_admin_gere_rubriques' => 'Acest administrator gestioneaz&#259; rubricile urm&#259;toare :',
 'info_admin_gere_toutes_rubriques' => 'Acest administrator gestioneaz&#259; <b>toate rubricile</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
 'info_administrateur_2' => 'al site-ului (<i>utiliza&#355;i cu pruden&#355;&#259;</i>)',
@@ -522,7 +527,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_activer_compactage_js' => 'Dori&#355;i s&#259; activa&#355;i compactarea scripturilor (javascript) ?',
 'info_question_activer_compresseur' => 'Dori&#355;i s&#259; activa&#355;i compresia fluxului HTTP ?',
 'info_question_gerer_statistiques' => 'Site-ul dumneavoastr&#259; trebuie s&#259; gestioneze statisticile vizitelor&nbsp;?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accepta&#355;i &icirc;nscrierea de noi redactori
+'info_question_inscription_nouveaux_redacteurs' => 'Accepta&#355;i &icirc;nscrierea de noi redactori
   &icirc;n partea public&#259; a site-ului&nbsp;? Dac&#259; accepta&#355;i, vizitatorii vor putea s&#259; se &icirc;nscrie
   cu ajutorul unui formular automatizat &#351;i vor putea avea acces la spa&#355;iul privat pentru a propune
   propriile lor articole. <blockquote><i>Ca urmare a procesului de &icirc;nscriere,
@@ -530,7 +535,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   care le va furniza codurile de acces la site-ul privat. Anumi&#355;i
   furnizori de hosting dezactiveaz&#259; trimiterea de email-uri de pe
   server-ele lor&nbsp;: &icirc;n acest caz &icirc;nscrierea automatic&#259; este
-  imposibil&#259;.',
+  imposibil&#259;.', # MODIF
 'info_question_mots_cles' => 'Dori&#355;i s&#259; utiliza&#355;i cuvintele-cheie pe site-ul dumneavoastr&#259;&nbsp;?',
 'info_question_proposer_site' => 'Cine poate propune site-uri referen&#355;iate&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Dori&#355;i s&#259; utiliza&#355;i motorul de c&#259;utare integrat &icirc;n SPIP&nbsp;?
@@ -640,6 +645,7 @@ Imaginile cu dimensiuni mai mari nu vor fi reduse.',
 'info_total' => 'total :',
 'info_tous_articles_en_redaction' => 'Toate articolele &icirc;n curs de redactare',
 'info_tous_articles_presents' => 'Toate articolele publicate &icirc;n aceast&#259; rubric&#259;',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'toate :',
 'info_tous_redacteurs' => 'Anun&#355;uri c&#259;tre to&#355;i redactorii',
 'info_tout_site' => 'Tot site-ul',
@@ -680,7 +686,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'install_select_langue' => 'Selec&#355;iona&#355;i o limb&#259; &#351;i face&#355;i click pe butonul &laquo;&nbsp;urm&#259;torul&nbsp;&raquo; pentru a lansa procedura de instalare.',
 'install_select_type_db' => 'Indica&#355;i tipul bazei de date&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Server de baz&#259; de date atribuit de c&#259;tre provider',
@@ -832,6 +838,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'page_pas_proxy' => 'Aceast&#259; pagin&#259; nu trebuie s&#259; treac&#259; prin proxy',
 'pas_de_proxy_pour' => '&Icirc;n caz de nevoie, indica&#355;i ma&#351;inile sau domeniile pentru care acest proxy nu trebuie folosit (de exemplu&nbsp;: @exemple@)',
 'plugin_charge_paquet' => '&Icirc;nc&#259;rcarea pachetului @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'eroare&nbsp;: imposibil de &icirc;nc&#259;rcat @zip@',
 'plugin_erreur_droit1' => 'Directorul <code>@dest@</code> nu este accesibil pentru opera&#355;ii de scriere.',
 'plugin_erreur_droit2' => 'V&#259; rug&#259;m s&#259; verifica&#355;i drepturile &icirc;n acest director (&#351;i s&#259; &icirc;l crea&#355;i, &icirc;n cazul &icirc;n care nu exist&#259;) sau s&#259; instala&#355;i fi&#351;ierele prin FTP.',
@@ -842,6 +849,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'plugin_etat_test' => '&icirc;n test',
 'plugin_impossible_activer' => 'Imposibil de activat plugin-ul @plugin@',
 'plugin_info_automatique1' => 'Dac&#259; vre&#355;i s&#259; autoriza&#355;i instalarea automat&#259; a plug-in-urilor, v&#259; rug&#259;m s&#259;&nbsp;:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'crea&#355;i un director <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'verifica&#355;i c&#259; server-ul este autorizat s&#259; scrie &icirc;n acest director.',
 'plugin_info_automatique_creer' => 'de creat &icirc;n directorul r&#259;d&#259;cin&#259; al site-ului.',
@@ -853,6 +861,8 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'plugin_info_automatique_liste_update' => 'Aduce&#355;i listele la zi',
 'plugin_info_automatique_ou' => 'sau...',
 'plugin_info_automatique_select' => 'Selec&#355;iona&#355;i mai jos un plug-in&nbsp;: SPIP o s&#259; &icirc;l descarce &#351;i &icirc;l va instala &icirc;n directorul <code>@rep@</code>&nbsp;; dac&#259; acest plug-in exist&#259; deja, el va fi adus la zi.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'de desc&#259;rcat de la @url@ &#351;i de instalat &icirc;n @rep@',
 'plugin_librairies_installees' => 'Libr&#259;riile instalate',
 'plugin_necessite_lib' => 'Acest plug-in are nevoie de libr&#259;ria @lib@',
@@ -861,6 +871,7 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'plugin_source' => 'sursa:&nbsp;',
 'plugin_titre_automatique' => 'Instalare automatic&#259;',
 'plugin_titre_automatique_ajouter' => 'Ad&#259;uga&#355;i plug-in-uri',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Continua&#355;i pentru a-l activa',
 'plugin_zip_adresse' => 'indica&#355;i mai jos adresa unui fi&#351;ier zip con&#355;in&acirc;nd plug-in-ul de desc&#259;rcat, sau chiar adresa unei liste de plug-in-uri.',
 'plugin_zip_adresse_champ' => 'Adresa plug-uluiin sau a listei&nbsp;',
@@ -869,11 +880,17 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 'plugin_zip_installe_rep_finie' => 'Fi&#351;ierul @zip@ a fost decomprimat &#351;i instalat &icirc;n directorul @rep@',
 'plugin_zip_installer' => 'Pute&#355;i acum s&#259; &icirc;l instala&#355;i.',
 'plugin_zip_telecharge' => 'Fi&#351;ierul @zip@ a fost desc&#259;rcat',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ plug-in-uri activate.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plug-in-uri',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plug-in-uri disponibile.',
 'plugins_erreur' => 'Eroare &icirc;n plug-in-urile : @plugins@',
 'plugins_liste' => 'Lista plugin-urilor',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Ierarhie',
 'plugins_vue_liste' => 'List&#259;',
 'protocole_ldap' => 'Versiunea protocolului :',

@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grupu importante:</b> s\'encamienta fonderamente escoyer una pallabra-clave pa esti grupu.',
 'avis_deplacement_rubrique' => '&iexcl;Atenci&oacute;n! Esta estaya conti&eacute;n @contient_breves@ breve@scb@: si la mueves, ties que marcar esti cuadru de confirmaci&oacute;n.',
 'avis_destinataire_obligatoire' => 'Ties qu\'indicar un destinatariu enantes d\'unviar esti mensaxe.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fallu de conex&oacute;n SQL',
 'avis_erreur_version_archive' => '<b>&iexcl;Atenci&oacute;n! L\'archivu @archive@ concasa con
     otra versi&oacute;n de SPIP distinta de la que ta
@@ -153,6 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'corr&eacute;u electr&oacute;nicu',
 'email_2' => 'correu elletr&oacute;nicu:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Se&ntilde;es de l\'anuariu',
 'entree_adresse_email' => 'Les tos se&ntilde;es d\'email',
 'entree_adresse_fichier_syndication' => 'Se&ntilde;es de l\'archivu de sindicaci&oacute;n:',
@@ -190,6 +192,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Testu de la breve',
 'entree_titre_obligatoire' => '<b>T&iacute;tulu</b> [Obligatoriu]<br />',
 'entree_url' => 'Les se&ntilde;es (URL) del to sitiu web',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Falta l\'archivu',
 'erreur_plugin_fichier_def_absent' => 'Falta l\'archivu de definici&oacute;n',
 'erreur_plugin_nom_fonction_interdit' => 'Nome de funci&oacute;n encaboxada',
@@ -264,6 +267,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  de moderaci&oacute;n por omisi&oacute;n:</i>',
 'info_admin_gere_rubriques' => 'Esti alministrador xestiona les estayes siguientes:',
 'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toles estayes</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Xesti&oacute;n',
 'info_administrateur_1' => 'Xesti&oacute;n',
 'info_administrateur_2' => 'de la web (<i>&uacute;salo con cuid&aacute;u</i>)',
@@ -664,6 +669,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.',
 'info_total' => 'total:',
 'info_tous_articles_en_redaction' => 'Tolos art&iacute;culos en cursu de redaici&oacute;n',
 'info_tous_articles_presents' => 'Tolos art&iacute;culos espublizaos nesta estaya',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'tolos:',
 'info_tous_redacteurs' => 'Anuncios pa tolos redactores',
 'info_tout_site' => 'Tou el sitiu',
@@ -704,7 +710,7 @@ con una color que indica el est&aacute;u:',
 'install_select_langue' => 'Escueye una ll&iacute;ngua y calca nel bot&oacute;n &laquo;siguiente&raquo; pa llanzar el procesu d\'instalaci&oacute;n.',
 'install_select_type_db' => 'Indicar el tipu de base de datos:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Sirvidor de base de datos conse&ntilde;&aacute;u pol agospiador web',
@@ -856,6 +862,7 @@ con una color que indica el est&aacute;u:',
 'page_pas_proxy' => 'Esta p&aacute;xina nun debe pasar pol proxy',
 'pas_de_proxy_pour' => 'Si fai falta, indica les m&aacute;quines o dominios pa los que esti proxy nun debe aplicase (por exemplu: @exemple@)',
 'plugin_charge_paquet' => 'Carga del paquete @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'fallu: nun ye posible cargar @zip@',
 'plugin_erreur_droit1' => 'El direutoriu <code>@dest@</code> nun ye accesible pa escritura.',
 'plugin_erreur_droit2' => 'Verifica los permisos d\'esti direutoriu (o cr&eacute;alu si ye\'l casu), o instala los archivos per FTP.',
@@ -866,6 +873,7 @@ con una color que indica el est&aacute;u:',
 'plugin_etat_test' => 'en prebes',
 'plugin_impossible_activer' => 'Nun ye posible activar el plugin @plugin@',
 'plugin_info_automatique1' => 'Si se quier autorizar la instalaci&oacute;n autom&aacute;tica de los plugins, hai que:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'crear un direutoriu <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'verificar que\'l sirvidor tenga permisos pa escribir nesi direutoriu.',
 'plugin_info_automatique_creer' => 'que hai que crear na raiz del sitiu.',
@@ -877,6 +885,8 @@ con una color que indica el est&aacute;u:',
 'plugin_info_automatique_liste_update' => 'Actualizar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleiciona un plugin d\'embaxo: SPIP va descargalu y anicialu nel direutoriu <code>@rep@</code>&nbsp;; si el plugin ya esiste, pondrase al d&iacute;a.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'a descargar de @url@ y a instalar en @rep@',
 'plugin_librairies_installees' => 'Llibrer&iacute;es instal&aacute;es',
 'plugin_necessite_lib' => 'Esti plugin necesita la llibrer&iacute;a @lib@',
@@ -885,6 +895,7 @@ con una color que indica el est&aacute;u:',
 'plugin_source' => 'fonte:&nbsp;',
 'plugin_titre_automatique' => 'Instalaci&oacute;n autom&aacute;tica',
 'plugin_titre_automatique_ajouter' => 'Amestar plugins',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Contin&uacute;a pa activalu',
 'plugin_zip_adresse' => 'indica embaxo les se&ntilde;es d\'un archivu zip de plugin a descargar, o mesmo les se&ntilde;es d\'una llista de plugins.',
 'plugin_zip_adresse_champ' => 'Se&ntilde;es del plugin o de la llista&nbsp;',
@@ -893,11 +904,17 @@ con una color que indica el est&aacute;u:',
 'plugin_zip_installe_rep_finie' => 'L\'archivu @zip@ descomprimiose y qued&oacute; instalau nel direutoriu @rep@',
 'plugin_zip_installer' => 'Pues instalalu agora.',
 'plugin_zip_telecharge' => 'Descargose l\'archivu @zip@',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ plugins activaos.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plugins',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugins disponibles.',
 'plugins_erreur' => 'Error nos plugins: @plugins@',
 'plugins_liste' => 'Llista de los plugins',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Xerarqu&iacute;a',
 'plugins_vue_liste' => 'Llista',
 'protocole_ldap' => 'Versi&oacute;n del protocolu:',

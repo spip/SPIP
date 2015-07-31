@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Gruppo importante:</b> &egrave; consigliato selezionare una parola chiave in questo gruppo.',
 'avis_deplacement_rubrique' => 'Attenzione! Questa rubrica contiene @contient_breves@ breve/i: se vuoi spostarla, spunta questa casella per confermare.',
 'avis_destinataire_obligatoire' => 'Devi indicare un destinatario prima di mandare questo messaggio.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Errore di connessione SQL',
 'avis_erreur_version_archive' => '<b>Attenzione! Il file @archive@ corrisponde a
 una versione di SPIP diversa da quella installata.</b> Potranno sorgere notevoli problemi:
@@ -152,6 +153,7 @@ cancellarli successivamente).',
 // E
 'email' => 'email',
 'email_2' => 'email:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Indirizzo della rubrica',
 'entree_adresse_email' => 'Il tuo indirizzo email',
 'entree_adresse_fichier_syndication' => 'Indirizzo del file di syndication:',
@@ -188,6 +190,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'entree_texte_breve' => 'Testo della breve',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'File non presente',
 'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
 'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
@@ -262,6 +265,8 @@ di passare facilmente dal sito pubblico all\'interfaccia privata.',
 di moderazione predefinito:</i>',
 'info_admin_gere_rubriques' => 'Questa amministratrice gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questa amministratrice gestisce <b>tutte le rubriche</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Amministratrice',
 'info_administrateur_1' => 'Amministratrice',
 'info_administrateur_2' => 'del sito (<i>da utilizzare con prudenza</i>)',
@@ -540,14 +545,14 @@ il database alla nuova versione di SPIP.',
 'info_question_activer_compactage_js' => 'Si desidera attivare la compressione degli script (javascript)?',
 'info_question_activer_compresseur' => 'Si desidera attivare la compressione del flusso HTTP?',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Accettate le iscrizioni di nuove redattrici
+'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuove redattrici
 direttamente  dal sito pubblico? In questo caso, chi visita il sito potr&agrave; iscriversi
 grazie ad un modulo automatizzato e accedere all\'area riservata per proporre
 i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
 le utenti ricevono automaticamente un email
 che fornisce loro i codici d\'accesso al sito privato. Alcuni
 hoster disattivano l\'invio di email dai propri server: in questo caso, l\'iscrizione automatica &egrave;
-impossibile.',
+impossibile.', # MODIF
 'info_question_mots_cles' => 'Vuoi utilizzare le parole chiave nel sito?',
 'info_question_proposer_site' => 'Chi pu&ograve; proporre i siti da citare?',
 'info_question_utilisation_moteur_recherche' => 'Desideri utilizzare il motore di ricerca integrato di SPIP?
@@ -656,6 +661,7 @@ impossibile.',
 'info_total' => 'totale: ',
 'info_tous_articles_en_redaction' => 'Tutti gli articoli in corso di redazione',
 'info_tous_articles_presents' => 'Tutti gli articoli pubblicati in questa rubrica',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'tutti i:',
 'info_tous_redacteurs' => 'Annunci a tutte le redattrici',
 'info_tout_site' => 'Tutto il sito',
@@ -696,7 +702,7 @@ Le traduzioni sono associate all\'originale,
 'install_select_langue' => 'Seleziona una lingua e poi clicca sul bottone &laquo;&nbsp;Avanti&nbsp;&raquo; per lanciare la procedura di installazione.',
 'install_select_type_db' => 'Indicare il tipo di database:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Server del database attribuito dall\'hoster',
@@ -848,6 +854,7 @@ Le traduzioni sono associate all\'originale,
 'page_pas_proxy' => 'Questa pagina non deve passare attraverso il proxy',
 'pas_de_proxy_pour' => 'Se necessario, indicare i server o i domini per i quali non si deve applicare questo proxy (per esempio: @exemple@)',
 'plugin_charge_paquet' => 'Caricamento del pacchetto @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'errore: impossibile caricare @zip@',
 'plugin_erreur_droit1' => 'La cartella <code>@dest@</code> non ha i permessi di scrittura.',
 'plugin_erreur_droit2' => 'Verificare i diritti su questa cartella (e, se necessario, crearla), o installare i file tramite FTP.',
@@ -858,6 +865,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_etat_test' => 'in prova',
 'plugin_impossible_activer' => 'Impossibile attivare il plug-in @plugin@',
 'plugin_info_automatique1' => 'Se si desidera autorizzare l\'installazione automatica dei plug-in &egrave; necessario: ',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'creare una cartella <code>@rep@</code>;',
 'plugin_info_automatique3' => 'verificare che il server sia autorizzato a scrivere in questa cartella.',
 'plugin_info_automatique_creer' => 'da creare alla radice del sito.',
@@ -869,6 +877,8 @@ Le traduzioni sono associate all\'originale,
 'plugin_info_automatique_liste_update' => 'Aggiornare gli elenchi',
 'plugin_info_automatique_ou' => 'oppure...',
 'plugin_info_automatique_select' => 'Selezionata un plug-in qui sotto: SPIP lo scaricher&agrave; e lo installer&agrave; nella cartella <code>@rep@</code>; se questo plug-in &egrave; gi&agrave; presente verr&agrave; aggiornato.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'da scaricare da @url@ e da installare in @rep@',
 'plugin_librairies_installees' => 'Librerie installate',
 'plugin_necessite_lib' => 'Questo plug-in richiede la libreria @lib@',
@@ -877,6 +887,7 @@ Le traduzioni sono associate all\'originale,
 'plugin_source' => 'origine:&nbsp;',
 'plugin_titre_automatique' => 'Installazione automatica',
 'plugin_titre_automatique_ajouter' => 'Aggiungere dei plug-in',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Continuare per attivarlo',
 'plugin_zip_adresse' => 'indicate qui sotto l\'indirizzo di un file zip del plug-in da scaricare, oppure l\'indirizzo di un elenco di plug-in.',
 'plugin_zip_adresse_champ' => 'Indirizzo del plug-in o dell\'elenco&nbsp;',
@@ -885,11 +896,17 @@ Le traduzioni sono associate all\'originale,
 'plugin_zip_installe_rep_finie' => 'Il file @zip@ &egrave; stato decompresso e installato nella cartella @rep@',
 'plugin_zip_installer' => 'Ora &egrave; possibile installarlo.',
 'plugin_zip_telecharge' => 'Il file @zip@ &egrave; stato scaricato',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ plug-in attivati.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plug-in',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plug-in disponibili.',
 'plugins_erreur' => 'Errore nei plug-in: @plugins@',
 'plugins_liste' => 'Elenco dei plugin',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Struttura gerarchica',
 'plugins_vue_liste' => 'Elenco',
 'protocole_ldap' => 'Versione del protocollo:',

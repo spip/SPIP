@@ -8,30 +8,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'activer_plugin' => 'Activer le plugin', # NEW
+'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Denne del af online-hj&aelig;lpen er endnu ikke tilg&aelig;ngelig p&aring; dansk.',
+'auteur' => 'Auteur&nbsp;:', # NEW
 'avis_acces_interdit' => 'Ingen adgang',
 'avis_article_modifie' => 'Advarsel, @nom_auteur_modif@ har arbejdet p&aring; denne artikel for @date_diff@ minutter siden',
 'avis_aucun_resultat' => 'Ingen resultater fundet.',
 'avis_chemin_invalide_1' => 'Den sti som du har valgt',
 'avis_chemin_invalide_2' => 'ser ikke ud til at v&aelig;re gyldig. G&aring; tilbage til sidste side og kontroller de oplysninger, du har indtastet.',
-'avis_connexion_echec_1' => '<MODIF>Ingen forbindelse til SQL-serveren',
+'avis_connexion_echec_1' => 'Ingen forbindelse til SQL-serveren', # MODIF
 'avis_connexion_echec_2' => 'G&aring; tilbage til sidste side og kontroller de oplysninger, du har indtastet',
-'avis_connexion_echec_3' => '<MODIF><b>NB:</b> P&aring; mange servere skal du <b>anmode om</b> at f&aring; &aring;bnet adgang til en SQL-database, f&oslash;r du kan bruge den. Hvis du ikke kan etablere en forbindelse, s&aring; kontroller venligst at du har indgivet denne anmodning.',
+'avis_connexion_echec_3' => '<b>NB:</b> P&aring; mange servere skal du <b>anmode om</b> at f&aring; &aring;bnet adgang til en SQL-database, f&oslash;r du kan bruge den. Hvis du ikke kan etablere en forbindelse, s&aring; kontroller venligst at du har indgivet denne anmodning.', # MODIF
 'avis_connexion_ldap_echec_1' => 'Ingen forbindelse til LDAP-serveren',
 'avis_connexion_ldap_echec_2' => 'G&aring; tilbage til sidste side og kontroller de oplysninger, du har indtastet.',
 'avis_connexion_ldap_echec_3' => 'Alternativt kan du v&aelig;lge ikke at benytte LDAP til at importere brugere.',
 'avis_conseil_selection_mot_cle' => '<b>Vigtig gruppe:</b> Det anbefales kraftigt at v&aelig;lge et n&oslash;gleord til denne gruppe.',
 'avis_deplacement_rubrique' => 'Advarsel! Dette afsnit indeholder @contient_breves@ nyheder@scb@: Hvis du vil flytte den, s&aring; afkryds venligst her for at bekr&aelig;fte.',
 'avis_destinataire_obligatoire' => 'Du skal v&aelig;lge en modtager, f&oslash;r du kan sende meddelelsen.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Fejl i forbindelse til SQL',
-'avis_erreur_version_archive' => '<MODIF> <b>Advarsel! Filen @archive@ h&oslash;rer til 
+'avis_erreur_version_archive' => ' <b>Advarsel! Filen @archive@ h&oslash;rer til 
     en anden version af SPIP end den du har
     installeret.</b> Du risikerer store
     vanskeligheder: risiko for at &oslash;del&aelig;gge din database, 
     forskellige funktionsfejl p&aring; webstedet, osv. 
     Forts&aelig;t ikke indl&aelig;sningen.<p>For mere
     information henvises til <a href="@spipnet@">,
-                                SPIP-dokumentationen</A>.',
+                                SPIP-dokumentationen</A>.', # MODIF
 'avis_espace_interdit' => '<b>Forbudt omr&aring;de</b><p>SPIP er allerede installeret.',
 'avis_lecture_noms_bases_1' => 'Installationsprogrammet kunne ikke l&aelig;se navnene p&aring; de installerede databaser.',
 'avis_lecture_noms_bases_2' => 'Enten er databasen ikke tilg&aelig;ngelig, eller ogs&aring; er funktionen, som giver oversigt
@@ -40,9 +44,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_message' => 'Du har ikke adgang til denne meddelelse.',
 'avis_non_acces_page' => 'Du har ikke adgang til denne side.',
 'avis_operation_echec' => 'Opgaven mislykkedes.',
+'avis_operation_impossible' => 'Op&eacute;ration impossible', # NEW
 'avis_probleme_archive' => 'L&aelig;sefejl i filen @archive@',
 'avis_site_introuvable' => 'Webstedet ikke fundet',
-'avis_site_syndique_probleme' => '<MODIF>Advarsel: syndikering med dette websted er st&oslash;dt p&aring; et problem; derfor afbrydes systemet midlertidigt. Kontroller adressen p&aring; webstedets syndikeringsfil (<b>@url_syndic@</b>), og pr&oslash;v at f&aring; adgang til data igen.',
+'avis_site_syndique_probleme' => 'Advarsel: syndikering med dette websted er st&oslash;dt p&aring; et problem; derfor afbrydes systemet midlertidigt. Kontroller adressen p&aring; webstedets syndikeringsfil (<b>@url_syndic@</b>), og pr&oslash;v at f&aring; adgang til data igen.', # MODIF
 'avis_sites_probleme_syndication' => 'Disse websteder har problemer med syndikering',
 'avis_sites_syndiques_probleme' => 'Disse syndikerede sider giver problemer',
 'avis_suppression_base' => 'ADVARSEL, sletning kan ikke omg&oslash;res',
@@ -53,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Tilf&oslash;j',
 'bouton_ajouter_participant' => 'TILF&Oslash;J DELTAGER:',
 'bouton_annonce' => 'ANNONCERING',
+'bouton_annuler' => 'Annuler', # NEW
 'bouton_checkbox_envoi_message' => 'mulighed for at sende en meddelelse',
 'bouton_checkbox_indiquer_site' => 'obligatorisk angivelse af websted ',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'administratorer af webstedet',
@@ -61,7 +67,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'kun en signatur pr. e-mail-adresse',
 'bouton_checkbox_signature_unique_site' => 'kun en signatur pr. websted',
 'bouton_demande_publication' => 'Anmod om at f&aring; offentliggjort denne artikel',
+'bouton_desactive_tout' => 'Tout d&eacute;sactiver', # NEW
+'bouton_desinstaller' => 'D&eacute;sinstaller', # NEW
 'bouton_effacer_index' => 'Slet indeksering',
+'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Slet alt',
 'bouton_envoi_message_02' => 'SEND MEDDELELSE',
 'bouton_envoyer_message' => 'Send f&aelig;rdig meddelelse',
@@ -106,23 +115,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_voir_message' => 'Vis indl&aelig;g f&oslash;r godkendelse',
 
 // C
-'cache_mode_compresse' => '<NEW>The cache files are saved in compressed mode.',
-'cache_mode_non_compresse' => '<NEW>The cache files are written in uncompressed mode.',
-'cache_modifiable_webmestre' => '<NEW>These parameters can be modified by the webmaster.',
+'cache_mode_compresse' => 'The cache files are saved in compressed mode.', # NEW
+'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.', # NEW
+'cache_modifiable_webmestre' => 'These parameters can be modified by the webmaster.', # NEW
 'calendrier_synchro' => 'Hvis du benytter en kalenderapplikation, der er kompatibel med <b>iCal</b>, kan du synkronisere med information p&aring; dette websted.',
+'config_activer_champs' => 'Activer les champs suivants', # NEW
+'config_choix_base_sup' => 'indiquer une base sur ce serveur', # NEW
+'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles', # NEW
+'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.', # NEW
+'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:', # NEW
+'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e', # NEW
+'config_info_logos' => 'Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;', # NEW
+'config_info_logos_utiliser' => 'Utiliser les logos', # NEW
+'config_info_logos_utiliser_non' => 'Ne pas utiliser les logos', # NEW
+'config_info_logos_utiliser_survol' => 'Utiliser les logos de survol', # NEW
+'config_info_logos_utiliser_survol_non' => 'Ne pas utiliser les logos de survol', # NEW
+'config_info_redirection' => 'En activant cette option, vous pourrez cr&eacute;er des articles virtuels, simples r&eacute;f&eacute;rences d\'articles publi&eacute;s sur d\'autres sites ou hors de SPIP.', # NEW
+'config_redirection' => 'Articles virtuels', # NEW
+'config_titre_base_sup' => 'D&eacute;claration d\'une base suppl&eacute;mentaire', # NEW
+'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire', # NEW
+'connexion_ldap' => 'Connexion :', # NEW
+'copier_en_local' => 'Copier en local', # NEW
 
 // D
 'date_mot_heures' => 'timer',
-'diff_para_ajoute' => '<NEW>Added paragraph',
-'diff_para_deplace' => '<NEW>Moved paragraph',
-'diff_para_supprime' => '<NEW>Deleted paragraph',
-'diff_texte_ajoute' => '<NEW>Added text',
-'diff_texte_deplace' => '<NEW>Moved text',
-'diff_texte_supprime' => '<NEW>Deleted text',
+'diff_para_ajoute' => 'Added paragraph', # NEW
+'diff_para_deplace' => 'Moved paragraph', # NEW
+'diff_para_supprime' => 'Deleted paragraph', # NEW
+'diff_texte_ajoute' => 'Added text', # NEW
+'diff_texte_deplace' => 'Moved text', # NEW
+'diff_texte_supprime' => 'Deleted text', # NEW
+'double_clic_inserer_doc' => 'Double-cliquez pour ins&eacute;rer ce raccourci dans le texte', # NEW
 
 // E
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adresse p&aring; kataloget',
 'entree_adresse_email' => 'Din e-mail-adresse',
 'entree_adresse_fichier_syndication' => 'Adresse p&aring; syndikeringsfil:',
@@ -158,11 +186,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Nyhedstekst',
 'entree_titre_obligatoire' => '<b>Titel</b> [Skal oplyses]<br />',
 'entree_url' => 'Dit websteds URL',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
+'erreur_plugin_fichier_def_absent' => 'Fichier de d&eacute;finition absent', # NEW
+'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit', # NEW
+'erreur_plugin_nom_manquant' => 'Nom du plugin manquant', # NEW
+'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non d&eacute;fini', # NEW
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de d&eacute;finition', # NEW
+'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
+
+// F
+'forum_info_original' => 'original', # NEW
 
 // I
 'ical_info1' => 'Denne side viser flere m&aring;der til at f&oslash;lge med i aktiviteter p&aring; dette websted.',
-'ical_info2' => '<MODIF>For mere information, bes&oslash;g <a href="@spipnet@">SPIP dokumentation</a>.',
+'ical_info2' => 'For mere information, bes&oslash;g <a href="@spipnet@">SPIP dokumentation</a>.', # MODIF
 'ical_info_calendrier' => 'To kalendere st&aring;r til r&aring;dighed. Den f&oslash;rste er en oversigt over webstedet, der viser alle offentliggjorte artikler.Den anden indeholder b&aring;de redaktionelle annonceringer og dine seneste private meddelelser. Den er forbeholdt dig i kraft af en personlig n&oslash;gle, som du kan &aelig;ndre n&aring;r som helst ved at forny din adgangskode.',
+'ical_lien_rss_breves' => 'Syndication des br&egrave;ves du site', # NEW
 'ical_methode_http' => 'Filhentning',
 'ical_methode_webcal' => 'Synkronisering (webcal://)',
 'ical_texte_js' => 'Med en linies javascript kan du nemt vise de senest offentliggjorte artikler p&aring; et websted, der tilh&oslash;rer dig.',
@@ -173,6 +213,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_titre_mailing' => 'Postliste',
 'ical_titre_rss' => '&laquo;Backend&raquo; filer',
 'icone_activer_cookie' => 'Opret administrationscookie',
+'icone_admin_plugin' => 'Gestion des plugins', # NEW
 'icone_afficher_auteurs' => 'Vis forfattere',
 'icone_afficher_visiteurs' => 'Vis bes&oslash;gende',
 'icone_arret_discussion' => 'Stop deltagelse i denne diskussion',
@@ -181,6 +222,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creation_mots_cles' => 'Opret nyt n&oslash;gleord',
 'icone_creer_auteur' => 'Opret ny forfatter og tilknyt til denne artikel',
 'icone_creer_mot_cle' => 'Opret nyt n&oslash;gleord og tilknyt til denne artikel',
+'icone_creer_mot_cle_breve' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cette br&egrave;ve', # NEW
+'icone_creer_mot_cle_rubrique' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cette rubrique', # NEW
+'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => 'Opret nyt afsnit',
 'icone_ecrire_nouvel_article' => 'Nye indl&aelig;g i dette afsnit',
 'icone_envoyer_message' => 'Send denne meddelelse',
@@ -189,12 +233,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_modifier_article' => 'Ret denne artikel',
 'icone_modifier_breve' => 'Ret denne nyhed',
 'icone_modifier_message' => 'Ret denne meddelelse',
+'icone_modifier_mot' => 'Modifier ce mot-cl&eacute;', # NEW
 'icone_modifier_rubrique' => 'Ret dette afsnit',
 'icone_modifier_site' => 'Ret dette websted',
 'icone_poster_message' => 'Opret meddelelse',
 'icone_publier_breve' => 'Offentligg&oslash;r nyhed',
 'icone_referencer_nouveau_site' => 'Ny webstedshenvisning',
 'icone_refuser_breve' => 'Afvis nyhed',
+'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tilbage',
 'icone_retour_article' => 'Tilbage til artikel',
 'icone_suivi_forum' => 'Opf&oslash;lgning i offentligt forum: @nb_forums@ bidrag',
@@ -213,6 +259,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_activer_forum_public' => '<i>For at &aring;bne op for offentlige forummer, skal du v&aelig;lge, hvordan deres godkendelsesprocedure skal v&aelig;re som standard:</i>',
 'info_admin_gere_rubriques' => 'Denne administrator administrerer f&oslash;lgende afsnit:',
 'info_admin_gere_toutes_rubriques' => 'Denne administrator administrerer <b>alle afsnit</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
 'info_administrateur_2' => 'af webstedet (<i>anvend med forsigtighed</i>)',
@@ -252,8 +300,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_auteurs_trouves' => 'Forfattere fundet',
 'info_authentification_externe' => 'Ekstern adgangskontrol',
 'info_avertissement' => 'Advarsel',
+'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Din databasestruktur er installeret.',
 'info_base_restauration' => 'Genoprettelse af databasen er i gang.',
+'info_bloquer' => 'bloquer', # NEW
 'info_breves' => 'Bruger dit websted nyhedssystemet?',
 'info_breves_03' => 'nyheder',
 'info_breves_liees_mot' => 'Nyheder knyttet til dette n&oslash;gleord',
@@ -270,10 +320,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>.</sup> af @liste@',
 'info_code_acces' => 'Glem ikke dine egne adgangsoplysninger!',
 'info_comment_lire_tableau' => 'S&aring;dan l&aelig;ses grafen',
+'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
+'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
+'info_compresseur_titre' => 'Optimisations et compression', # NEW
+'info_config_forums_prive' => 'Dans l&#8217;espace priv&#233; du site, vous pouvez activer plusieurs types de forums&nbsp;:', # NEW
+'info_config_forums_prive_admin' => 'Un forum r&#233;serv&#233; aux administrateurs du site&nbsp;:', # NEW
+'info_config_forums_prive_global' => 'Un forum global, ouvert &#224; tous les r&#233;dacteurs&nbsp;:', # NEW
+'info_config_forums_prive_objets' => 'Un forum sous chaque article, br&#232;ve, site r&#233;f&#233;renc&#233;, etc.&nbsp;:', # NEW
 'info_config_suivi' => 'Hvis denne adresse svarer til en postliste, kan du nedefor angive, hvor webstedets bes&oslash;gende kan lade sig registrere. Denne adresse kan v&aelig;re en  URL (f.eks. siden med tilmelding til listen via web), eller en e-mail adresse med et s&aelig;rligt emne tilknyttet (f.eks.: <tt>@adresse_suivi@?subject=abonner</tt>):',
 'info_config_suivi_explication' => 'Du kan abonnere p&aring; dette websteds postliste. Du vil s&aring; via e-mail modtage annonceringer vedr&oslash;rende artikler og nyheder, der er indsendt til offentligg&oslash;relse.',
 'info_confirmer_passe' => 'Bekr&aelig;ft ny adgangskode:',
+'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont &#233;t&#233; modifi&#233;s par ailleurs. Vos modifications sur ces champs n\'ont donc pas &#233;t&#233; enregistr&#233;es.', # NEW
+'info_conflit_edition_differences' => 'Diff&#233;rences&nbsp;:', # NEW
+'info_conflit_edition_version_enregistree' => 'La version enregistr&#233;e&nbsp;:', # NEW
+'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Andet skrift: <b>Fors&oslash;g p&aring; opkobling til databasen</b>',
+'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
 'info_connexion_ldap_ok' => '<b>Din LDAP-opkobling lykkedes.</b><p> Du kan g&aring; til n&aelig;ste skridt.',
 'info_connexion_mysql' => 'F&oslash;rste skridt: <b>Din SQL opkobling</b>',
 'info_connexion_ok' => 'Opkoblingen lykkedes.',
@@ -298,6 +360,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_desactiver_messagerie_personnelle' => 'Du kan &aring;bne eller lukke for personlige meddelelser p&aring; dette websted.',
 'info_descriptif' => 'Beskrivelse:',
+'info_desinstaller_plugin' => 'supprime les donn&eacute;es et d&eacute;sactive le plugin', # NEW
 'info_discussion_cours' => 'Igangv&aelig;rende diskussioner',
 'info_ecrire_article' => 'F&oslash;r du kan lave artikler, skal du oprette mindst et afsnit.',
 'info_email_envoi' => 'Afsenderens e-mail adresse (valgfri)',
@@ -319,7 +382,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_forum_interne' => 'internt forum',
 'info_forum_ouvert' => 'I det private afsnit af webstedet er der et forum &aring;bent for alle registrerede redakt&oslash;rer. Nedenfor kan du &aring;bne et ekstra forum alene for administratorer.',
 'info_forum_statistiques' => 'Bes&oslash;gsstatistik',
-'info_forums_abo_invites' => '<NEW>Your site contains forums by subscription; visitors may register for them on the public site.',
+'info_forums_abo_invites' => 'Your site contains forums by subscription; visitors may register for them on the public site.', # NEW
 'info_gauche_admin_effacer' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
 'info_gauche_admin_tech' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
 'info_gauche_admin_vider' => '<b>Kun administratorer har adgang til denne side.</b><p> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
@@ -338,17 +401,18 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_groupe_important' => 'vigtig gruppe',
 'info_hebergeur_desactiver_envoi_email' => 'Nogle webhoteller tillader ikke automatisk udsendelse af e-mails. I s&aring; fald kan f&oslash;lgende funktioner i SPIP ikke benyttes.',
 'info_hier' => 'i g&aring;r:',
-'info_historique' => '<NEW>Revisions:',
-'info_historique_activer' => '<NEW>Enable revisions follow-up',
-'info_historique_affiche' => '<NEW>Display this version',
-'info_historique_comparaison' => '<NEW>compare',
-'info_historique_desactiver' => '<NEW>Disable revisions follow-up',
-'info_historique_lien' => '<NEW>Display list of versions',
-'info_historique_texte' => '<NEW>Revisions follow-up allows you to keep track of every modifications added to an article and displays the differences between successive versions.',
-'info_historique_titre' => '<NEW>Revisions follow-up',
+'info_historique' => 'Revisions:', # NEW
+'info_historique_activer' => 'Enable revisions follow-up', # NEW
+'info_historique_affiche' => 'Display this version', # NEW
+'info_historique_comparaison' => 'compare', # NEW
+'info_historique_desactiver' => 'Disable revisions follow-up', # NEW
+'info_historique_lien' => 'Display list of versions', # NEW
+'info_historique_texte' => 'Revisions follow-up allows you to keep track of every modifications added to an article and displays the differences between successive versions.', # NEW
+'info_historique_titre' => 'Revisions follow-up', # NEW
 'info_identification_publique' => 'Din offentlige identitet...',
 'info_image_process' => 'V&aelig;lg den bedste metode til at skabe miniaturebilleder ved at klikke p&aring; det korresponderende billede.',
-'info_image_process2' => '<NEW><b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the &laquo;GD&raquo; or &laquo;Imagick&raquo; extensions to be installed.</i>',
+'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the &laquo;GD&raquo; or &laquo;Imagick&raquo; extensions to be installed.</i>', # NEW
+'info_images_auto' => 'Images calcul&eacute;es automatiquement', # NEW
 'info_informations_personnelles' => 'Femte trin: <b>Personlig information</b>',
 'info_inscription_automatique' => 'Automatisk registrering af nye redakt&oslash;rer',
 'info_jeu_caractere' => 'Webstedets tegns&aelig;t',
@@ -367,8 +431,9 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_liste_redacteurs_connectes' => 'Oversigt over tilknyttede reakt&oslash;rer',
 'info_login_existant' => 'Dette login findes allerede.',
 'info_login_trop_court' => 'Login for kort.',
+'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maksimum:',
-'info_meme_rubrique' => '<NEW>In the same section',
+'info_meme_rubrique' => 'In the same section', # NEW
 'info_message' => 'Meddelelse fra',
 'info_message_efface' => 'MEDDELELSE SLETTET',
 'info_message_en_redaction' => 'Dine meddelelser under redaktion',
@@ -377,7 +442,9 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_mise_a_niveau_base' => 'SQL databaseopgradering',
 'info_mise_a_niveau_base_2' => '{{Advarsel!}} Du har installeret en version af SPIP-filer, der er &aelig;ldre end dem, der var p&aring; webstedet i forvejen. Du risikerer at miste databasen og webstedet vil ikke fungere ordentligt mere.<br />{{Geninstraller SPIP-filerne.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standard funktionsm&aring;de for offentlige forummer',
+'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Ret nyhed:',
+'info_modifier_mot' => 'Modifier le mot-cl&eacute; :', # NEW
 'info_modifier_rubrique' => 'Ret afsnit:',
 'info_modifier_titre' => 'Ret: @titre@',
 'info_mon_site_spip' => 'Mit SPIP-websted',
@@ -414,18 +481,21 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_nouvelle_traduction' => 'Ny overs&aelig;ttelse:',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Skal udfyldes]',
-'info_option_accepter_visiteurs' => '<NEW>Allow visitors registration from the public site',
-'info_option_email' => '<MODIF>N&aring;r en bes&oslash;gende p&aring; webstedet sender en meddelelse til forummet, som drejer sig om denne artikel, kan artiklens forfatter f&aring; underretning om meddelelsen via e-mail. &Oslash;nsker du at bruge denne mulighed?',
+'info_option_accepter_visiteurs' => 'Allow visitors registration from the public site', # NEW
+'info_option_email' => 'N&aring;r en bes&oslash;gende p&aring; webstedet sender en meddelelse til forummet, som drejer sig om denne artikel, kan artiklens forfatter f&aring; underretning om meddelelsen via e-mail. &Oslash;nsker du at bruge denne mulighed?', # MODIF
 'info_option_faire_suivre' => 'Videresend meddelelser i forummer til artiklernes forfattere',
-'info_option_ne_pas_accepter_visiteurs' => '<NEW>Refuse visitor registration',
+'info_option_ne_pas_accepter_visiteurs' => 'Refuse visitor registration', # NEW
 'info_option_ne_pas_faire_suivre' => 'Videresend ikke meddelelser i forummer',
 'info_options_avancees' => 'AVANCEREDE INDSTILLINGER',
-'info_ortho_activer' => '<NEW>Enable the spell checker.',
-'info_ortho_desactiver' => '<NEW>Disable the spell checker.',
+'info_ortho_activer' => 'Enable the spell checker.', # NEW
+'info_ortho_desactiver' => 'Disable the spell checker.', # NEW
 'info_ou' => 'eller...',
 'info_oui_suppression_mot_cle' => 'Jeg &oslash;nsker at slette dette n&oslash;gleord permanent.',
 'info_page_interdite' => 'Forbudt side',
+'info_par_nom' => 'par nom', # NEW
 'info_par_nombre_article' => '(efter antal artiker)',
+'info_par_statut' => 'par statut', # NEW
+'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_pas_de_forum' => 'intet forum',
 'info_passe_trop_court' => 'Adgangskode for kort.',
 'info_passes_identiques' => 'De to adgangskoder er ikke ens.',
@@ -440,27 +510,37 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_post_scriptum' => 'Efterskrift',
 'info_post_scriptum_2' => 'Efterskrift:',
 'info_pour' => 'til',
-'info_preview_admin' => '<NEW>Only administrators have access to the preview mode',
-'info_preview_comite' => '<NEW>All authors have access to the preview mode',
-'info_preview_desactive' => '<NEW>Preview mode is disabled',
-'info_preview_texte' => '<NEW>It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?',
+'info_preview_admin' => 'Only administrators have access to the preview mode', # NEW
+'info_preview_comite' => 'All authors have access to the preview mode', # NEW
+'info_preview_desactive' => 'Preview mode is disabled', # NEW
+'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?', # NEW
 'info_principaux_correspondants' => 'Dine hovedbidragydere',
 'info_procedez_par_etape' => 'g&aring; frem skridt for skridt',
 'info_procedure_maj_version' => 'opgraderingsprocdeduren b&oslash;r f&oslash;lges for at tilpasse databasen til den nye version af SPIP.',
+'info_proxy_ok' => 'Test du proxy r&eacute;ussi.', # NEW
 'info_ps' => 'P.S.',
+'info_publier' => 'publier', # NEW
 'info_publies' => 'Dine offentliggjorte artikler',
-'info_question_accepter_visiteurs' => '<NEW>If your site\'s templates allow visitors to register without entering the private area, please activate the following option:',
+'info_question_accepter_visiteurs' => 'If your site\'s templates allow visitors to register without entering the private area, please activate the following option:', # NEW
+'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
+'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
+'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'Skal dit websted danne bes&oslash;gsstatistik?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Vil du tillade, at nye redakt&oslash;rer tilmelder sig
+'info_question_inscription_nouveaux_redacteurs' => 'Vil du tillade, at nye redakt&oslash;rer tilmelder sig
 		p&aring; det offentligt tilg&aelig;ngelige websted? Ja betyder, at bes&oslash;gende kan tilmelde sig p&aring; en automatisk dannet formular,
 		og derefter f&aring; adgang til det private omr&aring;de, hvor de kan vedligeholde deres egne artikler.
 		<blockquote><i>Under tilmeldingen modtager brugerne en automatisk dannet e-mail med deres adgangskode til det
 		private websted. Nogle webhoteller tillader ikke at der sendes e-mails fra deres servere. I s&aring; fald kan automatisk
-		tilmelding ikke finde sted.',
+		tilmelding ikke finde sted.', # MODIF
 'info_question_mots_cles' => '&Oslash;nsker du at bruge n&oslash;gleord p&aring; webstedet?',
 'info_question_proposer_site' => 'Hvem kan foresl&aring; henvisninger til websteder?',
 'info_question_utilisation_moteur_recherche' => '&Oslash;nsker du at anvende den s&oslash;gefunktion, der findes i SPIP?
 	(At frav&aelig;lge s&oslash;gefunktionen g&oslash;r webstedet hurtigere.)',
+'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
+'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs &#224; joindre des documents (images, sons...) &#224; leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).', # NEW
+'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents consid&eacute;r&eacute;s comme fiables par SPIP, mettre une &eacute;toile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'N&oslash;gleord i denne grupe kan tildeles efter:',
 'info_racine_site' => 'Top',
 'info_recharger_page' => 'V&aelig;r venlig at genindl&aelig;se denne side om et &oslash;jeblik.',
@@ -473,11 +553,13 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_redacteurs' => 'Redakt&oslash;rer',
 'info_redaction_en_cours' => 'REDIGERING ER IGANG',
 'info_redirection' => 'Viderestilling',
+'info_referencer_doc_distant' => 'R&eacute;f&eacute;rencer un document sur l\'internet&nbsp;:', # NEW
 'info_refuses' => 'Dine artikler er afvist',
 'info_reglage_ldap' => 'Muligheder: <b>Konfigurere LDAP underst&oslash;ttelse</b>',
 'info_renvoi_article' => '<b>Viderestilling.</b> Denne artikel henviser til siden:',
 'info_reserve_admin' => 'Kun administratorer kan &aelig;ndre denne adresse.',
-'info_restauration_sauvegarde' => '<MODIF>Genindl&aelig;sning af sikkerhedskopi @archive@',
+'info_restauration_sauvegarde' => 'Genindl&aelig;sning af sikkerhedskopi @archive@', # MODIF
+'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Begr&aelig;ns administrationsrettigheder til dette afsnit:',
 'info_resultat_recherche' => 'S&oslash;geresultater:',
 'info_rubriques' => 'Afsnit',
@@ -503,6 +585,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_sauvegarde_reussi_02' => 'Databasen er gemt i @archive@. Du kan',
 'info_sauvegarde_reussi_03' => 'returnere til administration',
 'info_sauvegarde_reussi_04' => 'af webstedet.',
+'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez', # NEW
 'info_sauvegarde_rubriques' => 'Sikkerhedskopi af afsnit',
 'info_sauvegarde_signatures' => 'Sikkerhedskopi af underskrifter',
 'info_sauvegarde_sites_references' => 'Sikkerhedskopi af links til websteder',
@@ -527,7 +610,9 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_sites_trouves_dans_texte' => 'Websteder fundet (i teksten)',
 'info_sous_titre' => 'Underrubrik:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => '<MODIF>Denne forfatters status:',
+'info_statut_auteur' => 'Denne forfatters status:', # MODIF
+'info_statut_auteur_a_confirmer' => 'Inscription &agrave; confirmer', # NEW
+'info_statut_auteur_autre' => 'Autre statut&nbsp;:', # NEW
 'info_statut_efface' => 'Slettet',
 'info_statut_redacteur' => 'Redakt&oslash;r',
 'info_statut_site_1' => 'Dette websted er:',
@@ -539,6 +624,10 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_suivi_activite' => 'Opf&oslash;lgning p&aring; redaktionelle aktiviteter',
 'info_supprimer_mot' => 'slet dette n&oslash;gleord',
 'info_surtitre' => 'Hovedoverskrift:',
+'info_syndication_integrale_1' => 'Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).', # NEW
+'info_syndication_integrale_2' => 'Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?', # NEW
+'info_table_prefix' => 'Vous pouvez modifier le pr&eacute;fixe du nom des tables de donn&eacute;es (ceci est indispensable lorsque l\'on souhaite installer plusieurs sites dans la m&ecirc;me base de donn&eacute;es). Ce pr&eacute;fixe s\'&eacute;crit en lettres minuscules, non accentu&eacute;es, et sans espace.', # NEW
+'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas r&eacute;duites.', # NEW
 'info_taille_maximale_vignette' => 'Max. st&oslash;rrelse p&aring; piktogram dannet af systemet:',
 'info_terminer_installation' => 'Du kan nu afslutte standardinstallationen.',
 'info_texte' => 'Tekst',
@@ -551,6 +640,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_total' => 'ialt:',
 'info_tous_articles_en_redaction' => 'Alle artikler undervejs',
 'info_tous_articles_presents' => 'Alle artikler offentliggjort i dette afsnit',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'for hver:',
 'info_tous_redacteurs' => 'Annonceringer til alle redakt&oslash;rer',
 'info_tout_site' => 'Hele webstedet',
@@ -578,8 +668,29 @@ i en farve, der angiver deres status:',
 'info_visiteur_2' => 'p&aring; den offentligt tilg&aelig;ngelige websted',
 'info_visiteurs' => 'Bes&oslash;gende',
 'info_visiteurs_02' => 'Bes&oslash;gende p&aring; offentligt websted',
+'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
+'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
+'install_echec_annonce' => 'L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...', # NEW
+'install_extension_mbstring' => 'SPIP ne fonctionne pas avec&nbsp;:', # NEW
+'install_extension_php_obligatoire' => 'SPIP exige l\'extension php&nbsp;:', # NEW
+'install_login_base_hebergeur' => 'Login de connexion attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_nom_base_hebergeur' => 'Nom de la base attribu&eacute; par l\'h&eacute;bergeur&nbsp;:', # NEW
+'install_pas_table' => 'Base actuellement sans tables', # NEW
+'install_pass_base_hebergeur' => 'Mot de passe de connexion attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_php_version' => 'PHP version @version@ insuffisant (minimum = @minimum@)', # NEW
 'install_select_langue' => 'V&aelig;lg et sprog og klik derefter p&aring; knappen &laquo;n&aelig;ste&raquo; for at igangs&aelig;tte installationen.',
+'install_select_type_db' => 'Indiquer le type de base de donn&eacute;es&nbsp;:', # NEW
+'install_select_type_mysql' => 'MySQL', # NEW
+'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_sqlite2' => 'SQLite 2', # NEW
+'install_select_type_sqlite3' => 'SQLite 3', # NEW
+'install_serveur_hebergeur' => 'Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_table_prefix_hebergeur' => 'Pr&eacute;fixe de table attribu&eacute; par l\'h&eacute;bergeur&nbsp;:', # NEW
+'install_tables_base' => 'Tables de la base', # NEW
+'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
+'install_types_db_connus_avertissement' => 'Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
 'intem_redacteur' => 'redakt&oslash;r',
+'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Tillad tilmeldinger',
 'item_activer_forum_administrateur' => 'Sl&aring; funktionen administratorforum til',
 'item_activer_messages_avertissement' => 'Tillad advarselsmeddelelser',
@@ -588,6 +699,8 @@ i en farve, der angiver deres status:',
 'item_ajout_mots_cles' => 'Tillad at knytte n&oslash;gleord til forummer',
 'item_autoriser_documents_joints' => 'Tillad at vedh&aelig;fte dokumenter til artikler',
 'item_autoriser_documents_joints_rubriques' => 'Tillad dokumenter i afsnit',
+'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
+'item_autoriser_syndication_integrale' => 'Diffuser l\'int&eacute;gralit&eacute; des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Afsp&aelig;r syndikerede links indtil de er godkendt',
 'item_breve_refusee' => 'NEJ - Nyhed afvist',
 'item_breve_validee' => 'JA - Nyhed godkendt',
@@ -596,12 +709,16 @@ i en farve, der angiver deres status:',
 'item_choix_non_generation_miniature' => 'Dan ikke miniaturebilleder.',
 'item_choix_redacteurs' => 'redakt&oslash;rer',
 'item_choix_visiteurs' => 'bes&oslash;gende p&aring; den offentlige websted',
+'item_compresseur' => 'Activer la compression', # NEW
+'item_config_forums_prive_global' => 'Activer le forum des r&#233;dacteurs', # NEW
+'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Dan .htpasswd filer',
 'item_desactiver_forum_administrateur' => 'Sl&aring; funktionen administratorforum fra',
 'item_gerer_annuaire_site_web' => 'Vedligehold katalog over websteder',
 'item_gerer_statistiques' => 'Dan statistik',
 'item_limiter_recherche' => 'Begr&aelig;ns s&oslash;gning til information p&aring; din eget websted',
 'item_login' => 'Login',
+'item_messagerie_agenda' => 'Activer la messagerie et l&#8217;agenda', # NEW
 'item_mots_cles_association_articles' => 'artiklerne',
 'item_mots_cles_association_breves' => 'nyhederne',
 'item_mots_cles_association_rubriques' => 'afsnittene',
@@ -613,11 +730,17 @@ i en farve, der angiver deres status:',
 'item_non_ajout_mots_cles' => 'Tillad ikke at knytte n&oslash;gleord til forummer',
 'item_non_autoriser_documents_joints' => 'Tillad ikke vedh&aelig;ftning af dokumenter til artikler',
 'item_non_autoriser_documents_joints_rubriques' => 'Tillad ikke dokumenter i afsnit',
+'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
+'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un r&eacute;sum&eacute;', # NEW
 'item_non_bloquer_liens_syndiques' => 'Undlad at sp&aelig;rre links til syndikerede websteder',
+'item_non_compresseur' => 'D&#233;sactiver la compression', # NEW
+'item_non_config_forums_prive_global' => 'D&#233;sactiver le forum des r&#233;dacteurs', # NEW
+'item_non_config_forums_prive_objets' => 'D&#233;sactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Dan ikke disse filer',
 'item_non_gerer_annuaire_site_web' => 'Vedligehold ikke katalog over websteder',
 'item_non_gerer_statistiques' => 'Dan ikke statistik',
 'item_non_limiter_recherche' => 'Udvid s&oslash;gning til indholdet i linkede websteder',
+'item_non_messagerie_agenda' => 'D&#233;sactiver la messagerie et l&#8217;agenda', # NEW
 'item_non_publier_articles' => 'Vent med at offentligg&oslash;re artikler til deres publiceringsdato.',
 'item_non_utiliser_breves' => 'Luk ikke op for nyheder',
 'item_non_utiliser_config_groupe_mots_cles' => 'Undlad at anvende avanceret konfigurering af n&oslash;gleordsgrupper',
@@ -660,6 +783,7 @@ i en farve, der angiver deres status:',
 'lien_supprimer_rubrique' => 'slet dette afsnit',
 'lien_tout_deplier' => 'Udfold alle',
 'lien_tout_replier' => 'Sammenfold alle',
+'lien_tout_supprimer' => 'Tout supprimer', # NEW
 'lien_trier_nom' => 'Sorter efter navn',
 'lien_trier_nombre_articles' => 'Sorter efter antal artikler',
 'lien_trier_statut' => 'Sorter efter status',
@@ -683,42 +807,130 @@ i en farve, der angiver deres status:',
 'mois_non_connu' => 'ukendt',
 
 // O
+'onglet_contenu' => 'Contenu', # NEW
+'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
+'onglet_discuter' => 'Discuter', # NEW
+'onglet_documents' => 'Documents', # NEW
+'onglet_interactivite' => 'Interactivit&eacute;', # NEW
+'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'nu',
-'ortho_ajouter_ce_mot' => '<NEW>Add this word to the dictionary',
-'ortho_aucune_suggestion' => '<NEW>No suggestion was found for this word.',
-'ortho_avis_privacy' => '<NEW>Spip contains a spell checker. However, before enabling it, please read the following paragraph carefully:',
-'ortho_avis_privacy2' => '<NEW>In order to check spelling  a text, the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some level of confidentiality. If you are concerned about your data, do not activate this option (and withdraw all your information from the web at once).',
-'ortho_ce_mot_connu' => '<NEW>This word is in the site\'s dictionary.',
-'ortho_dico_absent' => '<NEW>No dictionary was found for this language',
-'ortho_mode_demploi' => '<NEW>Urecognised words have been highlighted in red. Click on these words to see suggested corrections.',
-'ortho_mots_a_corriger' => '<NEW>words to correct',
-'ortho_orthographe' => '<NEW>Spelling',
-'ortho_supprimer_ce_mot' => '<NEW>Remove this word from the dictionary',
-'ortho_trop_de_fautes' => '<NEW>Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
-'ortho_verif_impossible' => '<NEW>The system cannot check the spelling of this text.',
-'ortho_verifier' => '<NEW>Spell check',
+'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
+'ortho_ajouter_ce_mot' => 'Add this word to the dictionary', # NEW
+'ortho_aucune_suggestion' => 'No suggestion was found for this word.', # NEW
+'ortho_avis_privacy' => 'Spip contains a spell checker. However, before enabling it, please read the following paragraph carefully:', # NEW
+'ortho_avis_privacy2' => 'In order to check spelling  a text, the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some level of confidentiality. If you are concerned about your data, do not activate this option (and withdraw all your information from the web at once).', # NEW
+'ortho_ce_mot_connu' => 'This word is in the site\'s dictionary.', # NEW
+'ortho_dico_absent' => 'No dictionary was found for this language', # NEW
+'ortho_mode_demploi' => 'Urecognised words have been highlighted in red. Click on these words to see suggested corrections.', # NEW
+'ortho_mots_a_corriger' => 'words to correct', # NEW
+'ortho_orthographe' => 'Spelling', # NEW
+'ortho_supprimer_ce_mot' => 'Remove this word from the dictionary', # NEW
+'ortho_trop_de_fautes' => 'Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.', # NEW
+'ortho_verif_impossible' => 'The system cannot check the spelling of this text.', # NEW
+'ortho_verifier' => 'Spell check', # NEW
+
+// P
+'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW
+'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)', # NEW
+'plugin_charge_paquet' => 'Chargement du paquet @name@', # NEW
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
+'plugin_erreur_charger' => 'erreur&nbsp;: impossible de charger @zip@', # NEW
+'plugin_erreur_droit1' => 'Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.', # NEW
+'plugin_erreur_droit2' => 'Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.', # NEW
+'plugin_erreur_zip' => 'echec pclzip&nbsp;: erreur @status@', # NEW
+'plugin_etat_developpement' => 'en d&eacute;veloppement', # NEW
+'plugin_etat_experimental' => 'exp&eacute;rimental', # NEW
+'plugin_etat_stable' => 'stable', # NEW
+'plugin_etat_test' => 'en test', # NEW
+'plugin_impossible_activer' => 'Impossible d\'activer le plugin @plugin@', # NEW
+'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:', # NEW
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
+'plugin_info_automatique2' => 'cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;', # NEW
+'plugin_info_automatique3' => 'v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.', # NEW
+'plugin_info_automatique_creer' => '&#224; cr&#233;er &#224; la racine du site.', # NEW
+'plugin_info_automatique_exemples' => 'exemples&nbsp;:', # NEW
+'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>', # NEW
+'plugin_info_automatique_lib' => 'Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.', # NEW
+'plugin_info_automatique_liste' => 'Vos listes de plugins&nbsp;:', # NEW
+'plugin_info_automatique_liste_officielle' => 'les plugins officiels', # NEW
+'plugin_info_automatique_liste_update' => 'Mettre &#224; jour les listes', # NEW
+'plugin_info_automatique_ou' => 'ou...', # NEW
+'plugin_info_automatique_select' => 'S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.', # NEW
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
+'plugin_info_telecharger' => '&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@', # NEW
+'plugin_librairies_installees' => 'Librairies install&#233;es', # NEW
+'plugin_necessite_lib' => 'Ce plugin n&#233;cessite la librairie @lib@', # NEW
+'plugin_necessite_plugin' => 'N&eacute;cessite le plugin @plugin@ en version @version@ minimum.', # NEW
+'plugin_necessite_spip' => 'N&eacute;cessite SPIP en version @version@ minimum.', # NEW
+'plugin_source' => 'source:&nbsp;', # NEW
+'plugin_titre_automatique' => 'Installation automatique', # NEW
+'plugin_titre_automatique_ajouter' => 'Ajouter des plugins', # NEW
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_zip_active' => 'Continuez pour l\'activer', # NEW
+'plugin_zip_adresse' => 'indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.', # NEW
+'plugin_zip_adresse_champ' => 'Adresse du plugin ou de la liste&nbsp;', # NEW
+'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>', # NEW
+'plugin_zip_installe_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.', # NEW
+'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@', # NEW
+'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.', # NEW
+'plugin_zip_telecharge' => 'Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;', # NEW
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
+'plugins_actifs' => '@count@ plugins activ&#233;s.', # NEW
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_compte' => '@count@ plugins', # NEW
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
+'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
+'plugins_liste' => 'Liste des plugins', # NEW
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
+'plugins_vue_hierarchie' => 'Hi&eacute;rarchie', # NEW
+'plugins_vue_liste' => 'Liste', # NEW
+'protocole_ldap' => 'Version du protocole :', # NEW
+
+// R
+'repertoire_plugins' => 'R&eacute;pertoire&nbsp;:', # NEW
 
 // S
+'sans_heure' => 'sans heure', # NEW
+'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
+'sauvegarde_fusionner_depublier' => 'D&eacute;publier les objets fusionn&eacute;s', # NEW
+'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(begr&aelig;nset admin)',
+'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site&nbsp;?', # NEW
+'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?', # NEW
+'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:', # NEW
+'syndic_lien_obsolete' => 'lien obsol&egrave;te', # NEW
+'syndic_option_miroir' => 'les bloquer automatiquement', # NEW
+'syndic_option_oubli' => 'les effacer (apr&egrave;s @mois@&nbsp;mois)', # NEW
+'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
+'syndic_option_resume_oui' => 'un simple r&eacute;sum&eacute; (au format texte)', # NEW
+'syndic_options' => 'Options de syndication&nbsp;:', # NEW
 
 // T
-'taille_cache_infinie' => '<NEW>This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.',
-'taille_cache_maxi' => '<NEW>SPIP will try to limit the size of the <code>CACHE/</code> directory to approximately <b>@octets@</b> of data.',
-'taille_cache_octets' => '<NEW>The size of the cache is currently @octets@.',
-'taille_cache_vide' => '<NEW>The cache is empty.',
-'taille_repertoire_cache' => '<NEW>Current size of the cache',
-'text_article_propose_publication' => '<MODIF>Artiklen er sendt til offentligg&oslash;relse. Hold dig ikke tilbage fra at give din mening til kende gennem det forum, der er tilknyttet artiklen (nederst p&aring; siden).',
+'taille_cache_image' => 'Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.', # NEW
+'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.', # NEW
+'taille_cache_maxi' => 'SPIP will try to limit the size of the <code>CACHE/</code> directory to approximately <b>@octets@</b> of data.', # NEW
+'taille_cache_octets' => 'The size of the cache is currently @octets@.', # NEW
+'taille_cache_vide' => 'The cache is empty.', # NEW
+'taille_repertoire_cache' => 'Current size of the cache', # NEW
+'text_article_propose_publication' => 'Artiklen er sendt til offentligg&oslash;relse. Hold dig ikke tilbage fra at give din mening til kende gennem det forum, der er tilknyttet artiklen (nederst p&aring; siden).', # MODIF
+'text_article_propose_publication_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Nogle LDAP-servere tillader ikke anonym adgang. I s&aring; fald m&aring; du angive en brugeridentifikation for senere at kunne s&oslash;ge efter information i kataloget. Men i de fleste tilf&aelig;lde kan du lade de f&oslash;lgende felter st&aring; tomme.',
 'texte_admin_effacer_01' => 'Denne kommando sletter <i>hele</i> indholdet i databasen,
 	herunder <i>hele</i> ops&aelig;tningen for redakt&oslash;rer og administratorer. N&aring;r du har udf&oslash;rt den, b&oslash;r du 
 	geninstallere SPIP for at danne en ny database og &aring;bne op for den f&oslash;rste administratoradgang.',
+'texte_admin_effacer_stats' => 'Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.', # NEW
 'texte_admin_tech_01' => 'Dette valg giver dig mulighed for at gemme databasens indhold i en fil lagret i kataloget 
  @dossier@.
  Husk ogs&aring; at medtage hele kataloget <i>IMG/</i>, som rummer de billeder og dokumenter, der bruges i artikler og afsnit.',
-'texte_admin_tech_02' => '<MODIF>Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
+'texte_admin_tech_02' => 'Advarsel: denne sikkerhedskopi kan KUN genindl&aelig;ses p&aring; et websted, der har installeret samme version af SPIP.
  Det er en almindelig misforst&aring;else at tage sikkerhedskopi af et websted forud for opgradering af SPIP...
- For mere information henvises til <a href="@spipnet@">SPIP dokumentation</a>.',
+ For mere information henvises til <a href="@spipnet@">SPIP dokumentation</a>.', # MODIF
 'texte_admin_tech_03' => 'Du kan v&aelig;lge at gemme filen i komprimeret form for hurtigere at kunne overf&oslash;re den til din maskine eller tage en sikkerhedskopi af serveren og spare diskplads.',
+'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Hvis dit katalog findes p&aring; samme server som webstedet, er det formentlig &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'F&oslash;lgende forfatter har bidraget til artiklen:',
 'texte_annuaire_ldap_1' => 'Hvis du har adgang til et LDAP-katalog, kan du anvende det til automatisk at importere brugere i SPIP.',
@@ -733,18 +945,26 @@ i en farve, der angiver deres status:',
 'texte_choix_base_1' => 'V&aelig;lg database:',
 'texte_choix_base_2' => 'SQL server indeholder et antal databaser.',
 'texte_choix_base_3' => '<b>V&aelig;lg</b> v&aelig;lg nedenfor den database, som webhotellet har tildelt dig:',
+'texte_choix_table_prefix' => 'Pr&eacute;fixe des tables&nbsp;:', # NEW
 'texte_commande_vider_tables_indexation' => 'Brug denne kommando til at t&oslash;mme de indekstabeller, som benyttes af SPIP\'s indbyggede s&oslash;gefunktion.
 			Derved kan du spare diskplads.',
 'texte_comment_lire_tableau' => 'Artiklens rangering i popularitetslisten vises i marginen. Artiklens popularitet 
 		(et overslag over hvor mange daglige bes&oslash;g den vil opn&aring;, hvis det aktuelle trafikomfang opretholdes) 
 		og antallet af bes&oslash;g, der er registreret siden begyndelsen, vises i den ballon, der kommer til syne n&aring;r musen 
 		holdes over titlen.',
+'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
+'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
 'texte_compresse_ou_non' => '(denne kan v&aelig;re komprimeret eller ikke)',
+'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
+visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
+site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
+demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elementer',
 'texte_config_groupe_mots_cles' => '&Oslash;nsker du at aktivere den avancerede konfiguration af n&oslash;gleordsgrupper, ved f.eks. at specificere
 			 at et entydigt ord pr. gruppe kan v&aelig;lges, at en gruppe er vigtig...?',
-'texte_connexion_mysql' => '<MODIF>Sl&aring; op i de oplysninger, som dit webhotel har stillet til r&aring;dighed: Hvis webhotellet underst&oslash;tter SQL, b&oslash;r det indeholde oplysninger om opkobling.',
+'texte_conflit_edition_correction' => 'Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
+'texte_connexion_mysql' => 'Sl&aring; op i de oplysninger, som dit webhotel har stillet til r&aring;dighed: Hvis webhotellet underst&oslash;tter SQL, b&oslash;r det indeholde oplysninger om opkobling.', # MODIF
 'texte_contenu_article' => '(Artiklens indhold med f&aring; ord.)',
 'texte_contenu_articles' => 'Med udgangspunkt i det layout du har valgt til dit websted, kan du v&aelig;lge at nogle artikelelementer ikke skal benyttes.
 		Benyt f&oslash;lgende liste til at bestemme, hvilke elementer der skal v&aelig;re til r&aring;dighed.',
@@ -761,13 +981,15 @@ i en farve, der angiver deres status:',
 'texte_documents_joints_2' => 'Denne konfiguration hindrer ikke inds&aelig;ttelse af billeder direkte i dokumenter.',
 'texte_effacer_base' => 'Slet SPIP databasen',
 'texte_effacer_donnees_indexation' => 'Slet indekseringsdata',
-'texte_en_cours_validation' => '<MODIF>F&oslash;lgende artikler og nyheder er foresl&aring;et offentliggjort. T&oslash;v ikke med at give din mening til kende via de fora, som er knyttet til artiklerne.',
+'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
+'texte_en_cours_validation' => 'F&oslash;lgende artikler og nyheder er foresl&aring;et offentliggjort. T&oslash;v ikke med at give din mening til kende via de fora, som er knyttet til artiklerne.', # MODIF
+'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'Du kan forbedre layoutet af teksten ved at benytte &laquo;typografiske koder&raquo;.',
-'texte_fichier_authent' => '<MODIF><b>Skal SPIP oprette specielle <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<b>Skal SPIP oprette specielle <tt>.htpasswd</tt>
 		og <tt>.htpasswd-admin</tt> filer i kataloget @dossier@?</b><p>
 		Disse filer kan benyttes til at begr&aelig;nse adgangen for forfattere og administratorer til andre dele af dit websted
 		(f.eks. et eksternt statistikprogram).<p>
-		Hvis du ikke har benyttet s&aring;danne filer f&oslash;r, kan du v&aelig;lge standardv&aelig;rdien (ingen filoprettelse).',
+		Hvis du ikke har benyttet s&aring;danne filer f&oslash;r, kan du v&aelig;lge standardv&aelig;rdien (ingen filoprettelse).', # MODIF
 'texte_informations_personnelles_1' => 'Systemet vil give dig en tilpasset adgang til webstedet.',
 'texte_informations_personnelles_2' => '(Bem&aelig;rk: hvis det er en geninstallation og din adgang stadig fungerer, kan du',
 'texte_introductif_article' => '(Introduktion til artiklen)',
@@ -776,6 +998,9 @@ i en farve, der angiver deres status:',
 'texte_jeu_caractere_2' => 'Denne indstilling har ikke tilbagevirkende kraft.
 	Tekst, der allerede er lagt ind, kan derfor blive vist forkert efter &aelig;ndring af denne indstilling.
 	Du kan dog altid vende tilbage til den oprindelige indstilling.',
+'texte_jeu_caractere_3' => 'Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:', # NEW
+'texte_jeu_caractere_4' => 'Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:', # NEW
+'texte_jeu_caractere_conversion' => 'Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Hvis din meddelelse henviser til en artikel der er offentliggjort p&aring; webben, eller til en side der giver flere oplysninger, s&aring; indtast her artiklens overskrift og dens URL.)',
 'texte_liens_sites_syndiques' => 'Links til syndikerede sider kan sp&aelig;rres p&aring; forh&aring;nd; f&oslash;lgende indstilling er standardindstillingen for syndikerede websteder, n&aring;r de er oprettet.
 			Det er s&aring;ledes p&aring; trods heraf muligt at sp&aelig;rre hvert link individuelt eller at v&aelig;lge for hver websted at sp&aelig;rre de links der kommer fra en givet websted.',
@@ -783,6 +1008,7 @@ i en farve, der angiver deres status:',
 'texte_login_precaution' => 'Advarsel! Dette er den login, du er koblet p&aring; med nu.
 	Brug denne formular med forsigtighed ...',
 'texte_message_edit' => 'Advarsel: Denne meddelelse kan &aelig;ndres af alle webstedets administratorer, og den er synlig for alle redakt&oslash;rer. Benyt kun annonceringer til at g&oslash;re opm&aelig;rksom p&aring; vigtige begivenheder p&aring; webstedet.',
+'texte_messagerie_agenda' => 'Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.', # NEW
 'texte_messages_publics' => 'Offentlige bidrag til artiklen:',
 'texte_mise_a_niveau_base_1' => 'Du har netop opdateret SPIP\'s filer.
 	Du skal nu opdatere webstedets database.',
@@ -807,6 +1033,7 @@ i en farve, der angiver deres status:',
 'texte_plus_trois_car' => 'mere end 3 tegn',
 'texte_plusieurs_articles' => 'Der er fundet flere forfattere til "@cherche_auteur@":',
 'texte_port_annuaire' => '(Standardv&aelig;rdien passer for det meste.)',
+'texte_presente_plugin' => 'Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.', # NEW
 'texte_proposer_publication' => 'N&aring;r din artikel er f&aelig;rdig,<br /> kan du indsende den til offentligg&oslash;relse.',
 'texte_proxy' => 'I nogle tilf&aelig;lde (intranet, beskyttede netv&aelig;rk...),
 		er det n&oslash;dvendigt at benytte en <i>proxy HTTP</i> for at komme i kontakt med syndikerede websteder.
@@ -822,6 +1049,7 @@ i en farve, der angiver deres status:',
 'texte_referencement_automatique' => '<b>Automatiserede webstedshenvisninger</b><br />
 		Du kan hurtigt henvise til et websted ved nedenfor at angive dens URL eller adressen p&aring; dens datakilde. 
 		SPIP vil automatisk indhente oplysninger om webstedet (titel, beskrivelse...).',
+'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>N&aring;r nogle SQL foresp&oslash;rgsler systematisk og uden tilsyneladende grund g&aring;r galt, er det muligt at fejlen ligger i selve databasen.</b>
 		<p>SQL har en funktion, der reparerer dens tabeller, hvis de er blevet &oslash;delagt ved et uheld. 
 		Her kan du fors&oslash;ge at igangs&aelig;tte denne reparationsfunktion; 
@@ -857,10 +1085,10 @@ i en farve, der angiver deres status:',
 		Dette giver dig bl.a. mulighed for at gennemtvinge opdatering af alle sider i tilf&aelig;lde af 
 		at du har lavet v&aelig;sentlige grafiske eller strukturelle &aelig;ndringer p&aring; webstedet.',
 'texte_sur_titre' => 'Hovedoverskrift',
-'texte_syndication' => '<MODIF>Hvis webstedet tillader det, er det muligt automatisk at hente en oversigt over det
+'texte_syndication' => 'Hvis webstedet tillader det, er det muligt automatisk at hente en oversigt over det
 		seneste materiale. For at g&oslash;re dette, skal du igangs&aelig;tte syndikering.
 		<blockquote><i>Nogle webhoteller tillader ikke denne funktion.
-		I s&aring; fald kan du ikke foretage indholdssyndikering fra dit websted.</i></blockquote>',
+		I s&aring; fald kan du ikke foretage indholdssyndikering fra dit websted.</i></blockquote>', # MODIF
 'texte_table_ok' => ': denne tabel er OK.',
 'texte_tables_indexation_vides' => 'S&oslash;gefunktionens indekstabeller er tomme.',
 'texte_tentative_recuperation' => 'Reparationsfors&oslash;g',
@@ -873,12 +1101,14 @@ i en farve, der angiver deres status:',
 		vise &laquo;&aring;bne&raquo; artikler for at undg&aring; samtidige &aelig;ndringer. Denne indstilling er som standard
 		sl&aring;et fra for at undg&aring; utidige advarselsmeddelelser.',
 'texte_trop_resultats_auteurs' => 'For mange resultater til "@cherche_auteur@"; v&aelig;r venlig at afgr&aelig;nse s&oslash;gningen yderligere.',
+'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
+'texte_type_urls_attention' => 'Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.', # NEW
 'texte_unpack' => 'download af seneste version',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Hvis du benytter SPIP\'s indbyggede s&oslash;gefunktion, kan du p&aring; forskellig vis foretage
+'texte_utilisation_moteur_syndiques' => 'Hvis du benytter SPIP\'s indbyggede s&oslash;gefunktion, kan du p&aring; forskellig vis foretage
 		s&oslash;gninger p&aring; websteder og i syndikerede artikler. <br /><img src=\'puce.gif\'> Den enkleste best&aring;r i kun at 
 		s&oslash;ge i artiklernes overskrifter og beskrivelser. <br /><img src=\'puce.gif\'> 
 		En anden metode, som er st&aelig;rkere, lader SPIP s&oslash;ge i teksten p&aring; de websteder, der henvises til. 
-		Hvis du henviser til et websted, vil SPIP selv s&oslash;ge i dens tekst.',
+		Hvis du henviser til et websted, vil SPIP selv s&oslash;ge i dens tekst.', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Denne metode tvinger SPIP til j&aelig;vnligt at bes&oslash;ge webstedet, hvilket kan koste 
 		en forringelse af svartiderne p&aring; din eget websted.',
 'texte_vide' => 'tom',
@@ -896,9 +1126,16 @@ i en farve, der angiver deres status:',
 'titre_cadre_interieur_rubrique' => 'I afsnit',
 'titre_cadre_numero_auteur' => 'FORFATTER NUMMER',
 'titre_cadre_signature_obligatoire' => '<b>Underskrift</b> [Obligatorisk]<br />',
+'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
+'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
+'titre_config_contenu_notifications' => 'Notifications', # NEW
+'titre_config_contenu_prive' => 'Dans l&#8217;espace priv&#233;', # NEW
+'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Konfigurering af webstedet',
+'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Konfiguration af n&oslash;gleordsgrupper',
 'titre_configuration' => 'Konfigurering af webstedet',
+'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Indstillinger: <b>Din LDAP forbindelse</b>',
 'titre_dernier_article_syndique' => 'Senest syndikerede artikler',
 'titre_documents_joints' => 'Vedh&aelig;ftede dokumenter',
@@ -911,6 +1148,7 @@ i en farve, der angiver deres status:',
 'titre_langue_rubrique' => 'SPROGAFSNIT',
 'titre_langue_trad_article' => 'ARTIKLENS SPROG OG OVERS&AElig;TTELSER',
 'titre_les_articles' => 'ARTIKLER',
+'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
 'titre_mots_cles_dans_forum' => 'N&oslash;gleord i forummer p&aring; det offentlige websted',
 'titre_mots_tous' => 'N&oslash;gleord',
 'titre_naviguer_dans_le_site' => 'Gennemse webstedet...',
@@ -942,7 +1180,10 @@ i en farve, der angiver deres status:',
 'titre_page_recherche' => 'S&oslash;geresultater @recherche@',
 'titre_page_sites_tous' => 'Links til websteder',
 'titre_page_statistiques' => 'Statistik pr. afsnit',
+'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Statistik (indkommende links)',
+'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
+'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
 'titre_page_statistiques_visites' => 'Bes&oslash;gsstatistik',
 'titre_page_upgrade' => 'SPIP opgradering',
 'titre_publication_articles_post_dates' => 'Offentligg&oslash;relse af fremdaterede artikler',
@@ -957,6 +1198,9 @@ i en farve, der angiver deres status:',
 'titre_sites_tous' => 'Websteder der henvises til',
 'titre_suivi_petition' => 'Opf&oslash;lgning p&aring; appeller',
 'titre_syndication' => 'Webstedssyndikering',
+'titre_type_urls' => 'Type d\'adresses URL', # NEW
+'tls_ldap' => 'Transport Layer Security :', # NEW
+'tout_dossier_upload' => 'Tout le dossier @upload@', # NEW
 'trad_article_inexistant' => 'Der findes ingen artikel med dette nummer.',
 'trad_article_traduction' => 'Alle udgaver af denne artikel&nbsp;:',
 'trad_deja_traduit' => 'Denne artikel er allerede en overs&aelig;ttelse af den aktuelle artikel.',
@@ -964,8 +1208,31 @@ i en farve, der angiver deres status:',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
 'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
 
+// U
+'upload_fichier_zip' => 'Fichier ZIP', # NEW
+'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.', # NEW
+'upload_fichier_zip_texte2' => 'Ce fichier peut &ecirc;tre&nbsp;:', # NEW
+'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio', # NEW
+'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
+'upload_limit' => 'Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.', # NEW
+'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction', # NEW
+'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:', # NEW
+'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;', # NEW
+'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
+'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
+'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.', # NEW
+'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW
+'utf8_convert_erreur_deja' => 'Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...', # NEW
+'utf8_convert_erreur_orig' => 'Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.', # NEW
+'utf8_convert_termine' => 'C\'est termin&eacute;&nbsp;!', # NEW
+'utf8_convert_timeout' => '<b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.', # NEW
+'utf8_convert_verifier' => 'Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.', # NEW
+'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
+
 // V
-'version_initiale' => '<NEW>Initial version'
+'version' => 'Version&nbsp;:', # NEW
+'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.', # NEW
+'version_initiale' => 'Initial version', # NE
 );
 
 ?>

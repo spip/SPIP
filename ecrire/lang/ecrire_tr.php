@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>&Ouml;nemli grup&nbsp;:</b> bu grupta anahtar s&ouml;zc&uuml;k se&ccedil;meniz &#351;iddetle &ouml;nerilir.',
 'avis_deplacement_rubrique' => 'Dikkat&nbsp;! Bu b&ouml;l&uuml;m @contient_breves@ k&#305;sa haber @scb@&nbsp; i&ccedil;eriyor: e&#287;er yerini de&#287;i&#351;tiriyorsan&#305;z (ta&#351;&#305;yorsan&#305;z) l&uuml;tfen bu onay kutucu&#287;unu i&#351;aretleyin.',
 'avis_destinataire_obligatoire' => 'Bu iletiyi yollamadan &ouml;nce kime yollamak istedi&#287;inizi belirmelisiniz.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL ba&#287;lant&#305;s&#305; hatas&#305;',
 'avis_erreur_version_archive' => '<b>Dikkat! @archive@ dosyas&#305; kulland&#305;&#287;&#305;n&#305;z
 SPIP s&uuml;r&uuml;m&uuml;ne uymuyor.</b> B&uuml;y&uuml;k zorluklarla
@@ -146,6 +147,7 @@ sonradan yok edebilir).',
 // E
 'email' => 'e-posta',
 'email_2' => 'e-posta :',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Rehber adresi',
 'entree_adresse_email' => 'E-posta adresiniz',
 'entree_adresse_fichier_syndication' => 'Payla&#351;&#305;m dosyas&#305;n&#305;n adresi :',
@@ -181,6 +183,7 @@ sonradan yok edebilir).',
 'entree_texte_breve' => 'K&#305;sa haber &ouml;zeti',
 'entree_titre_obligatoire' => '<b>Ba&#351;l&#305;k</b>  [Zorunlu]',
 'entree_url' => 'Sitenizin adresi (URL)',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Dosya eksik',
 'erreur_plugin_fichier_def_absent' => 'Tan&#305;mlama dosyas&#305; eksik',
 'erreur_plugin_nom_fonction_interdit' => 'Yasaklanm&#305;&#351; i&#351;lev ismi',
@@ -254,6 +257,8 @@ sonradan yok edebilir).',
 'info_activer_forum_public' => 'Kamu forumlar&#305;n&#305; &ccedil;al&#305;&#351;t&#305;rmak i&ccedil;in, l&uuml;tfen varsay&#305;lan bir y&ouml;netim kipi se&ccedil;iniz :',
 'info_admin_gere_rubriques' => 'Bu y&ouml;netici &#351;u b&ouml;l&uuml;mleri y&ouml;netiyor :',
 'info_admin_gere_toutes_rubriques' => 'Bu y&ouml;netici <b>t&uuml;m b&ouml;l&uuml;mleri</b> y&ouml;netiyor.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Y&ouml;netici',
 'info_administrateur_1' => 'Y&ouml;netici',
 'info_administrateur_2' => 'sitenindir (<i>dikkatli kullan&#305;n&#305;z</i>)',
@@ -531,13 +536,13 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_question_activer_compactage_js' => 'Skriptlerin (javascript) s&#305;k&#305;&#351;t&#305;r&#305;lmas&#305;n&#305; aktive etmek ister misiniz ?',
 'info_question_activer_compresseur' => 'HTTP ak&#305;&#351;&#305;n&#305;n s&#305;k&#305;&#351;t&#305;r&#305;lmas&#305;n&#305; aktive etmek ister misiniz ?',
 'info_question_gerer_statistiques' => 'Siteniz ziyaret istatisti&#287;ini y&ouml;netmeli mi ?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Kamu sitesinden yeni edit&ouml;rlerin kaydolmas&#305;n&#305; kabul ediyor musunuz ?
+'info_question_inscription_nouveaux_redacteurs' => 'Kamu sitesinden yeni edit&ouml;rlerin kaydolmas&#305;n&#305; kabul ediyor musunuz ?
     E&#287;er kabul ediyorsan&#305;z, ziyaret&ccedil;iler otomatik
     bir form ile kaydolabilecek ve kendi makalelerini
     &ouml;nermek &uuml;zere &ouml;zel alana eri&#351;eceklerdir. 
 <blockquote><i>Kay&#305;t a&#351;amas&#305;nda,    kullan&#305;c&#305;lara,  &ouml;zel siteye eri&#351;im &#351;ifresi veren bir otomatik
     e-posta g&ouml;nderilir. Baz&#305; Hizmet bilgisayarlar&#305; kendi sunucular&#305;ndan
-    e-posta yollanmas&#305;n&#305; durduruyorlar&nbsp;: bu durumda otomatik kay&#305;t olanaks&#305;zd&#305;r.',
+    e-posta yollanmas&#305;n&#305; durduruyorlar&nbsp;: bu durumda otomatik kay&#305;t olanaks&#305;zd&#305;r.', # MODIF
 'info_question_mots_cles' => 'Sitenizde anahtar s&ouml;zc&uuml;k kullanmak istiyor musunuz ?',
 'info_question_proposer_site' => 'Kim at&#305;fta bulunulan siteler &ouml;nerebilir ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP\'in entegre arama motorunu kullanmak istiyor musunuz ?
@@ -646,6 +651,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_total' => 'toplam :',
 'info_tous_articles_en_redaction' => 'Yaz&#305;lmakta olan t&uuml;m makaleler',
 'info_tous_articles_presents' => 'Bu b&ouml;l&uuml;mde yay&#305;nlanan t&uuml;m makaleler',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'her bir :',
 'info_tous_redacteurs' => 'T&uuml;m yazarlara duyuru',
 'info_tout_site' => 'T&uuml;m siteyi',
@@ -686,7 +692,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'install_select_langue' => 'Bir dil se&ccedil;iniz, sonra &laquo;&nbsp;bir sonraki&nbsp;&raquo; d&uuml;&#287;mesini t&#305;klay&#305;p y&uuml;kleme i&#351;lemini ba&#351;lat&#305;n&#305;z.',
 'install_select_type_db' => 'Veri taban&#305;n&#305;n tipini belirtiniz&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servis sa&#287;lay&#305;c&#305; taraf&#305;ndan sa&#287;lanan veri taban&#305; sunucusu',
@@ -838,6 +844,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'page_pas_proxy' => 'Bu sayfa velilden (proxy) ge&ccedil;memeli',
 'pas_de_proxy_pour' => 'Gerekirse, bu vekilin uygulanmayaca&#287;&#305;  makineleri veya alanlar&#305; belirtiniz (&ouml;rne&#287;in&nbsp;: @ornek@)',
 'plugin_charge_paquet' => '@name@ paketinin y&uuml;klenmesi',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'hata&nbsp;: @zip@ y&uuml;klenmesi olanaks&#305;z',
 'plugin_erreur_droit1' => '<code>@dest@</code> dizini yazmak i&ccedil;in izinli de&#287;il.',
 'plugin_erreur_droit2' => 'Bu dizindeki haklar&#305; kontrol ediniz (ve hata durumunda olu&#351;turunuz) veya dosyalar&#305; FTP ile kurunuz.',
@@ -848,6 +855,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_etat_test' => 'test a&#351;amas&#305;nda',
 'plugin_impossible_activer' => '@plugin@ plugin\'ini aktive etmek olanaks&#305;z',
 'plugin_info_automatique1' => 'Eklentilerin otomatik y&uuml;klenmesini istiyorsan&#305;z, l&uuml;tfen&nbsp;:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => '<code>@rep@</code> isimli bir dizin olu&#351;turun&nbsp;;',
 'plugin_info_automatique3' => 'sunucunun bu dizine yazma hakk&#305; oldu&#287;unu kontrol ediniz',
 'plugin_info_automatique_creer' => 'sitenin k&ouml;k dizinini olu&#351;turma',
@@ -859,6 +867,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_info_automatique_liste_update' => 'Listeleri g&uuml;ncelle',
 'plugin_info_automatique_ou' => 'veya...',
 'plugin_info_automatique_select' => 'A&#351;a&#287;&#305;dan bir eklenti se&ccedil;iniz&nbsp;: SPIP o eklentiyi indirecek ve <code>@rep@</code> dizinine kuracakt&#305;r&nbsp;; e&#287;er bu eklenti zaten kurulu ise g&uuml;ncellenecektir.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine y&uuml;klemeye',
 'plugin_librairies_installees' => 'Kurulu k&uuml;t&uuml;phaneler',
 'plugin_necessite_lib' => 'Bu eklenti @lib@ k&uuml;t&uuml;phanesini gerektirir',
@@ -867,6 +877,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_source' => 'kaynak:&nbsp;',
 'plugin_titre_automatique' => 'Otomatik kurulum',
 'plugin_titre_automatique_ajouter' => 'Eklenti ekleyiniz',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Aktive etmek i&ccedil;in devam ediniz',
 'plugin_zip_adresse' => 'a&#351;a&#287;&#305;da indirilecek eklentiye ait zip dosyas&#305;n&#305;n adresini veya bir &ccedil;ok eklentinin adres listesini belirtiniz.',
 'plugin_zip_adresse_champ' => 'Eklentinin veya listenin adresi&nbsp;',
@@ -875,11 +886,17 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'plugin_zip_installe_rep_finie' => '@zip@ dosyas&#305; a&ccedil;&#305;ld&#305; ve @rep@ dizinine y&uuml;klendi.',
 'plugin_zip_installer' => '&#350;imdi y&uuml;kleyebilirsiniz.',
 'plugin_zip_telecharge' => '@zip@ dosyas&#305; bilgisayara indirildi',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ eklenti etkinle&#351;tirildi.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ eklenti',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ eklenti kullan&#305;labilir durumda.',
 'plugins_erreur' => 'Eklentilerde hata var : @plugins@',
 'plugins_liste' => 'Plugin listesi',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Hiyerar&#351;i',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Protokol s&uuml;r&uuml;m&uuml; :',

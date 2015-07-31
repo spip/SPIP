@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Grup important&nbsp;:</b> &eacute;s molt aconssellable seleccionar una contrasenya a aquest grup. ',
 'avis_deplacement_rubrique' => 'Atenci&oacute;&nbsp;! Aquesta secci&oacute; cont&eacute; @contient_breves@ breu@scb@&nbsp;: si la moveu, assenyaleu-ho en aquesta casella de confirmaci&oacute;.',
 'avis_destinataire_obligatoire' => 'Ha d\'escriure un destinatari abans d\'enviar el missatge.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Error de connexi&oacute; SQL',
 'avis_erreur_version_archive' => '<b>Atenci&oacute;! El fitxer @archive@ correspon a una versi&oacute; diferent d\'SPIP de la instal&middot;lada.</b> Us podeu trobar amb grans dificultats: risc de destrucci&oacute; de la base de dades, mal funcionament del lloc, etc. Cal que no valideu aquesta sol&middot;licitud d\'importaci&oacute;.<p> Si voleu m&eacute;s informaci&oacute;, consulteu <a href="@spipnet@"> la documentaci&oacute; d\'SPIP</a>.',
 'avis_espace_interdit' => '<b>Zona prohibida</b><div>SPIP ja est&agrave; instal&middot;lat.</div>',
@@ -145,6 +146,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 // E
 'email' => 'correu electr&ograve;nic',
 'email_2' => 'correu electr&ograve;nic:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adre&ccedil;a del directori',
 'entree_adresse_email' => 'L\'adre&ccedil;a electr&ograve;nica ',
 'entree_adresse_fichier_syndication' => 'Adre&ccedil;a del fitxer de sindicaci&oacute;:',
@@ -182,6 +184,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_texte_breve' => 'Text de la breu',
 'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligatori]<br />',
 'entree_url' => 'L\'adre&ccedil;a (URL) del vostre lloc',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fitxer absent',
 'erreur_plugin_fichier_def_absent' => 'Fitxer de definici&oacute; absent',
 'erreur_plugin_nom_fonction_interdit' => 'Nom de funci&oacute; prohibit',
@@ -255,6 +258,8 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
  de moderaci&oacute; per defecte:</i>',
 'info_admin_gere_rubriques' => 'Aquest administrador gestiona les seg&uuml;ents seccions:',
 'info_admin_gere_toutes_rubriques' => 'Aquest administrador gestiona <b>totes les seccions</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrador',
 'info_administrateur_1' => 'Administrador',
 'info_administrateur_2' => ' del lloc (<i>utilitzar amb precauci&oacute;</i>)',
@@ -632,6 +637,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'info_total' => 'total :',
 'info_tous_articles_en_redaction' => 'Tots els articles en proc&eacute;s de redacci&oacute;',
 'info_tous_articles_presents' => 'Tots els articles publicats en aquesta secci&oacute;',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'tots els:',
 'info_tous_redacteurs' => 'Avisos a tots els redactors',
 'info_tout_site' => 'Tot el lloc',
@@ -672,7 +678,7 @@ amb un color que indica el seu estat:',
 'install_select_langue' => 'Seleccioneu un idioma i despr&eacute;s feu un clic en el bot&oacute; &laquo;&nbsp;seg&uuml;ent&nbsp;&raquo; per iniciar el proc&eacute;s d\'instal&middot;laci&oacute;.',
 'install_select_type_db' => 'Indicar el tipus de base de dades:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Servidor de base de dades atribu&iuml;t per l\'hostatjador',
@@ -824,6 +830,7 @@ amb un color que indica el seu estat:',
 'page_pas_proxy' => 'Aquesta p&agrave;gina no ha de passar pel proxy',
 'pas_de_proxy_pour' => 'Si ho necessiteu, indiqueu les m&agrave;quines o dominis als que aquest proxy no s\'ha d\'aplicar (per exemple: @exemple@)',
 'plugin_charge_paquet' => 'C&agrave;rrega del paquet @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'error: impossible de carregar @zip@',
 'plugin_erreur_droit1' => 'El directori <code>@dest@</code> no &eacute;s accessible en escriptura. ',
 'plugin_erreur_droit2' => 'Verifiqueu els drets sobre aquest directori (i creeu-los si &eacute;s necessari), o instal&middot;leu els fitxer per FTP.',
@@ -834,6 +841,7 @@ amb un color que indica el seu estat:',
 'plugin_etat_test' => 'en prova',
 'plugin_impossible_activer' => 'Impossible activar el plugin @plugin@',
 'plugin_info_automatique1' => 'Si voleu autoritzar la instal&middot;laci&oacute; autom&agrave;tica dels plugins, vulgueu:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'crear un directori <code>@rep@</code>&nbsp;;',
 'plugin_info_automatique3' => 'verificar que el servidor est&agrave; autoritzat per escriure en aquest directori.',
 'plugin_info_automatique_creer' => 'per crear a l\'arrel del lloc.',
@@ -845,6 +853,8 @@ amb un color que indica el seu estat:',
 'plugin_info_automatique_liste_update' => 'Actualitzar les llistes',
 'plugin_info_automatique_ou' => 'o...',
 'plugin_info_automatique_select' => 'Seleccioneu m&eacute;s avall un plugin: SPIP el baixar&agrave; i l\'instal&middot;lar&agrave; a dins del directori <code>@rep@</code>&nbsp;; si aquest plugin ja existeix, s\'actualitzar&agrave;.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'baixar-lo des de @url@ i instal&middot;lar-lo a @rep@',
 'plugin_librairies_installees' => 'Llibreries instal&middot;lades',
 'plugin_necessite_lib' => 'Aquest plugin necessita la llibreria @lib@',
@@ -853,6 +863,7 @@ amb un color que indica el seu estat:',
 'plugin_source' => 'font:&nbsp;',
 'plugin_titre_automatique' => 'Instal&middot;laci&oacute; autom&agrave;tica',
 'plugin_titre_automatique_ajouter' => 'Afegir plugins',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Continueu per activar-lo',
 'plugin_zip_adresse' => 'indiqueu m&eacute;s avall l\'adre&ccedil;a d\'un fitxer zip de plugin a baixar, o fins i tot l\'adre&ccedil;a d\'una llista de plugins.',
 'plugin_zip_adresse_champ' => 'Adre&ccedil;a del plugin o de la llista&nbsp;',
@@ -861,11 +872,17 @@ amb un color que indica el seu estat:',
 'plugin_zip_installe_rep_finie' => 'El fitxer @zip@ s\'ha descomprimit i instal&middot;lat en el directori @rep@',
 'plugin_zip_installer' => 'Ara el podeu instal&middot;lar.',
 'plugin_zip_telecharge' => 'El fitxer @zip@ s\'ha baixat',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ plugins actius.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plugins',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugins disponibles.',
 'plugins_erreur' => 'Error en els plugins: @plugins@',
 'plugins_liste' => 'Llista dels connectors',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Jerarquia',
 'plugins_vue_liste' => 'Llista',
 'protocole_ldap' => 'Versi&oacute; del protocol:',

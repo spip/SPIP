@@ -8,28 +8,30 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
-'activer_plugin' => '<NEW>Activate plugin',
+'activer_plugin' => 'Activate plugin', # NEW
+'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Ph&#7847;n gi&uacute;p &#273;&#7905; n&agrave;y ch&#432;a &#273;&#432;&#7907;c d&#7883;ch sang ng&ocirc;n ng&#7919; n&agrave;y.',
-'auteur' => '<NEW>Author:',
+'auteur' => 'Author:', # NEW
 'avis_acces_interdit' => 'Qu&yacute; v&#7883; kh&ocirc;ng c&oacute; quy&#7873;n v&agrave;o &#273;&acirc;y.',
 'avis_article_modifie' => 'Coi ch&#7915;ng, @nom_auteur_modif@ v&#7915;a s&#7917;a b&agrave;i n&agrave;y c&aacute;ch &#273;&acirc;y @date_diff@ ph&uacute;t',
 'avis_aucun_resultat' => 'Kh&ocirc;ng c&oacute; k&#7871;t qu&#7843;.',
 'avis_chemin_invalide_1' => 'H&#432;&#7899;ng &#273;i m&agrave; b&#7841;n &#273;&atilde; ch&#7885;n',
 'avis_chemin_invalide_2' => 'd&#432;&#7901;ng nh&#432; kh&ocirc;ng &#273;&uacute;ng. Xin vui l&ograve;ng tr&#7903; l&#7841;i trang tr&#432;&#7899;c v&agrave; xem l&#7841;i c&aacute;c d&#7919; ki&#7879;n cung c&#7845;p.',
-'avis_connexion_echec_1' => '<MODIF>Kh&ocirc;ng n&#7889;i v&agrave;o SQL &#273;&#432;&#7907;c.',
+'avis_connexion_echec_1' => 'Kh&ocirc;ng n&#7889;i v&agrave;o SQL &#273;&#432;&#7907;c.', # MODIF
 'avis_connexion_echec_2' => 'Tr&#7903; l&#7841;i trang tr&#432;&#7899;c v&agrave; ki&#7875;m l&#7841;i c&aacute;c d&#7919; ki&#7879;n v&#7915;a cho v&agrave;o.',
-'avis_connexion_echec_3' => '<MODIF><b>T.B.</b> Trong m&#7897;t s&#7889; server, b&#7841;n ph&#7843;i <b>y&ecirc;u c&#7847;u</b> quy&#7873;n &#273;&#432;&#7907;c s&#7917; d&#7909;ng SQL database tr&#432;&#7899;c khi d&ugrave;ng. N&#7871;u b&#7841;n kh&ocirc;ng n&#7889;i v&agrave;o &#273;&#432;&#7907;c, h&atilde;y xem l&#7841;i coi b&#7841;n c&oacute; y&ecirc;u c&#7847;u ch&#432;a.',
+'avis_connexion_echec_3' => '<b>T.B.</b> Trong m&#7897;t s&#7889; server, b&#7841;n ph&#7843;i <b>y&ecirc;u c&#7847;u</b> quy&#7873;n &#273;&#432;&#7907;c s&#7917; d&#7909;ng SQL database tr&#432;&#7899;c khi d&ugrave;ng. N&#7871;u b&#7841;n kh&ocirc;ng n&#7889;i v&agrave;o &#273;&#432;&#7907;c, h&atilde;y xem l&#7841;i coi b&#7841;n c&oacute; y&ecirc;u c&#7847;u ch&#432;a.', # MODIF
 'avis_connexion_ldap_echec_1' => 'Kh&ocirc;ng n&#7889;i v&agrave;o LDAP server &#273;&#432;&#7907;c.',
 'avis_connexion_ldap_echec_2' => 'Tr&#7903; l&#7841;i trang tr&#432;&#7899;c v&agrave; xem l&#7841;i c&aacute;c d&#7919; ki&#7879;n &#273;&atilde; cung c&#7845;p.',
 'avis_connexion_ldap_echec_3' => 'M&#7897;t c&aacute;ch kh&aacute;c, &#273;&#7915;ng d&ugrave;ng LDAP support &#273;&#7875; &#273;em t&ecirc;n ng&#432;&#7901;i d&ugrave;ng v&agrave;o.',
 'avis_conseil_selection_mot_cle' => '<b>Nh&oacute;m quan tr&#7885;ng</b>: &#273;&#7873; ngh&#7883; b&#7841;n n&ecirc;n ch&#7885;n m&#7897;t t&#7915; then ch&#7889;t trong nh&oacute;m n&agrave;y.',
 'avis_deplacement_rubrique' => 'L&#431;U &Yacute;! &#272;&#7873; m&#7909;c n&agrave;y ch&#7913;a @contient_breves@ c&aacute;c tin ng&#7855;n @scb@: n&#7871;u b&#7841;n d&#7901;i n&oacute; &#273;i, xin &#273;&aacute;nh d&#7845;u v&agrave;o &ocirc; n&agrave;y &#273;&#7875; x&aacute;c nh&#7853;n.',
 'avis_destinataire_obligatoire' => 'Ph&#7843;i ch&#7885;n m&#7897;t ng&#432;&#7901;i nh&#7853;n tr&#432;&#7899;c khi g&#7917;i th&#432; t&iacute;n n&agrave;y &#273;i.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'C&oacute; L&#7895;i-kh&ocirc;ng n&#7889;i v&#7899;i SQL',
-'avis_erreur_version_archive' => '<MODIF><b>B&aacute;o &#273;&#7897;ng! H&#7891; s&#417; @archive@ thu&#7897;c d&#7841;ng SPIP kh&aacute;c v&#7899;i d&#7841;ng m&agrave; b&#7841;n c&oacute;.</b>
+'avis_erreur_version_archive' => '<b>B&aacute;o &#273;&#7897;ng! H&#7891; s&#417; @archive@ thu&#7897;c d&#7841;ng SPIP kh&aacute;c v&#7899;i d&#7841;ng m&agrave; b&#7841;n c&oacute;.</b>
  B&#7841;n s&#7869; g&#7863;p r&#7845;t nhi&#7873;u r&#7855;c r&#7889;i: c&oacute; th&#7875; database b&#7883; ti&ecirc;u h&#7911;y, website b&#7883; tr&#7855;c tr&#7903;, v.v...
  Xin &#273;&#7915;ng n&#7897;p b&agrave;i n&agrave;y v&agrave;o.<p> &#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t, xem b&agrave;i <a href="@spipnet@">
-H&#7891; s&#417; SPIP</a>.',
+H&#7891; s&#417; SPIP</a>.', # MODIF
 'avis_espace_interdit' => '<b>V&ugrave;ng c&#7845;m &#273;&#7883;a</b><p>SPIP &#273;&atilde; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; r&#7891;i.',
 'avis_lecture_noms_bases_1' => 'Nhu li&#7879;u thi&#7871;t tr&iacute; kh&ocirc;ng &#273;&#7885;c &#273;&#432;&#7907;c t&ecirc;n c&#7911;a database thi&#7871;t tr&iacute;.',
 'avis_lecture_noms_bases_2' => 'Kh&ocirc;ng c&oacute; database n&agrave;o h&#7871;t, ho&#7863;c &#273;&#7863;c &#273;i&#7875;m cho ph&eacute;p li&#7879;t k&ecirc; t&ecirc;n database b&#7883; t&#7855;t &#273;i v&igrave; l&yacute; do an ninh (th&#432;&#7901;ng l&agrave; nh&#432; v&#7853;y cho nhi&#7873;u m&aacute;y ch&#7911;)',
@@ -37,10 +39,10 @@ H&#7891; s&#417; SPIP</a>.',
 'avis_non_acces_message' => 'B&#7841;n kh&ocirc;ng c&oacute; quy&#7873;n xem th&#432; t&iacute;n n&agrave;y.',
 'avis_non_acces_page' => 'B&#7841;n kh&ocirc;ng c&oacute; quy&#7873;n v&agrave;o trang n&agrave;y.',
 'avis_operation_echec' => 'Thao t&aacute;c th&#7845;t b&#7841;i.',
-'avis_operation_impossible' => '<NEW>Operation impossible',
+'avis_operation_impossible' => 'Operation impossible', # NEW
 'avis_probleme_archive' => 'C&oacute; l&#7895;i khi &#273;&#7885;c h&#7891; s&#417; @archive@',
 'avis_site_introuvable' => 'Kh&ocirc;ng t&igrave;m &#273;&#432;&#7907;c trang web',
-'avis_site_syndique_probleme' => '<MODIF>C&#7843;nh b&aacute;o: g&#7863;p tr&#7903; ng&#7841;i khi syndicate website n&agrave;y; th&agrave;nh ra h&#7879; th&#7889;ng b&#7883; gi&aacute;n &#273;o&#7841;n t&#7841;m th&#7901;i. Xin xem l&#7841;i &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; syndication c&#7911;a website (<b>@url_syndic@</b>), v&agrave; l&agrave;m l&#7841;i vi&#7879;c thu h&#7891;i d&#7919; ki&#7879;n. B&aacute;o &#272;&#7897;ng: l&uacute;c syndicate trang web n&agrave;y th&igrave; g&#7863;p v&#7845;n &#273;&#7873;; v&igrave; v&#7853;y m&agrave; h&#7879; th&#7889;ng b&#7883; gi&aacute;n &#273;o&#7841;n t&#7841;m th&#7901;i. Xin xem l&#7841;i &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; syndication c&#7911;a trang web n&agrave;y (<b>@url_syndic@</b>), v&agrave; t&igrave;m c&aacute;ch th&acirc;u h&#7891;i d&#7919; ki&#7879;n l&#7841;i.',
+'avis_site_syndique_probleme' => 'C&#7843;nh b&aacute;o: g&#7863;p tr&#7903; ng&#7841;i khi syndicate website n&agrave;y; th&agrave;nh ra h&#7879; th&#7889;ng b&#7883; gi&aacute;n &#273;o&#7841;n t&#7841;m th&#7901;i. Xin xem l&#7841;i &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; syndication c&#7911;a website (<b>@url_syndic@</b>), v&agrave; l&agrave;m l&#7841;i vi&#7879;c thu h&#7891;i d&#7919; ki&#7879;n. B&aacute;o &#272;&#7897;ng: l&uacute;c syndicate trang web n&agrave;y th&igrave; g&#7863;p v&#7845;n &#273;&#7873;; v&igrave; v&#7853;y m&agrave; h&#7879; th&#7889;ng b&#7883; gi&aacute;n &#273;o&#7841;n t&#7841;m th&#7901;i. Xin xem l&#7841;i &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; syndication c&#7911;a trang web n&agrave;y (<b>@url_syndic@</b>), v&agrave; t&igrave;m c&aacute;ch th&acirc;u h&#7891;i d&#7919; ki&#7879;n l&#7841;i.', # MODIF
 'avis_sites_probleme_syndication' => 'Trang web n&agrave;y g&#7863;p ph&#7843;i v&#7845;n &#273;&#7873; khi xu&#7845;t b&#7843;n',
 'avis_sites_syndiques_probleme' => 'Nh&#7919;ng website xu&#7845;t b&#7843;n song h&agrave;nh n&agrave;y cho bi&#7871;t c&oacute; v&#7845;n &#273;&#7873;',
 'avis_suppression_base' => 'B&Aacute;O &#272;&#7896;NG, x&oacute;a d&#7919; ki&#7879;n r&#7891;i s&#7869; kh&ocirc;ng l&#7845;y l&#7841;i &#273;&#432;&#7907;c',
@@ -51,7 +53,7 @@ H&#7891; s&#417; SPIP</a>.',
 'bouton_ajouter' => 'Th&ecirc;m',
 'bouton_ajouter_participant' => 'TH&Ecirc;M M&#7896;T THAM D&#7920; VI&Ecirc;N:',
 'bouton_annonce' => 'TH&Ocirc;NG B&Aacute;O',
-'bouton_annuler' => '<NEW>Cancel',
+'bouton_annuler' => 'Cancel', # NEW
 'bouton_checkbox_envoi_message' => 'C&oacute; th&#7875; vi&#7871;t v&agrave;i ch&#7919; ',
 'bouton_checkbox_indiquer_site' => 'Q&uacute;y v&#7883; ph&#7843;i ghi t&ecirc;n m&#7897;t trang Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'qu&#7843;n tr&#7883; vi&ecirc;n',
@@ -60,9 +62,10 @@ H&#7891; s&#417; SPIP</a>.',
 'bouton_checkbox_signature_unique_email' => 'Ch&#7881; m&#7897;t ch&#7919; k&yacute; cho m&#7897;t &#273;&#7883;a ch&#7881; email ',
 'bouton_checkbox_signature_unique_site' => 'Ch&#7881; m&#7897;t ch&#7919; k&yacute; cho m&#7897;t &#273;&#7883;a ch&#7881; Web',
 'bouton_demande_publication' => '&#272;&#7873; ngh&#7883; b&agrave;i n&agrave;y cho ban bi&ecirc;n t&#7853;p',
-'bouton_desactive_tout' => '<NEW>Disable all',
-'bouton_desinstaller' => '<NEW>Uninstall',
+'bouton_desactive_tout' => 'Disable all', # NEW
+'bouton_desinstaller' => 'Uninstall', # NEW
 'bouton_effacer_index' => 'Xo&aacute; b&#7843;n index',
+'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Xo&aacute; T&#7844;T C&#7842;',
 'bouton_envoi_message_02' => 'G&#7916;I TH&#431; T&Iacute;N',
 'bouton_envoyer_message' => 'Tin th&#432; &#273;&#7847;y &#273;&#7911;: G&#7917;i &#273;i ',
@@ -91,10 +94,10 @@ H&#7891; s&#417; SPIP</a>.',
 'bouton_radio_pas_petition' => 'Kh&ocirc;ng d&ugrave;ng',
 'bouton_radio_petition_activee' => 'Th&#7881;nh nguy&#7879;n th&#432; &#273;&#432;&#7907;c m&#7903; l&ecirc;n',
 'bouton_radio_publication_immediate' => 'Ph&aacute;t h&agrave;nh th&#432; t&iacute;n ngay l&#7853;p t&#7913;c (th&#432; g&#7917;i &#273;i s&#7869; hi&#7879;n l&ecirc;n ngay, qu&#7843;n tr&#7883; vi&ecirc;n c&oacute; th&#7875; x&oacute;a ch&uacute;ng sau &#273;&oacute;).',
-'bouton_radio_sauvegarde_compressee' => '<MODIF>l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng n&eacute;n trong
-@fichier@',
-'bouton_radio_sauvegarde_non_compressee' => '<MODIF>l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng th&#432;&#7901;ng trong
-@fichier@',
+'bouton_radio_sauvegarde_compressee' => 'l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng n&eacute;n trong
+@fichier@', # MODIF
+'bouton_radio_sauvegarde_non_compressee' => 'l&#432;u tr&#7919; l&#7841;i d&#432;&#7899;i d&#7841;ng th&#432;&#7901;ng trong
+@fichier@', # MODIF
 'bouton_radio_supprimer_petition' => 'X&oacute;a th&#7881;nh nguy&#7879;n th&#432;',
 'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'CHUY&#7874;N T&#7898;I',
@@ -111,16 +114,23 @@ H&#7891; s&#417; SPIP</a>.',
 'cache_mode_non_compresse' => 'H&#7891; s&#417; cache &#273;&#432;&#7907;c gi&#7919; nguy&ecirc;n d&#7841;ng, kh&ocirc;ng n&eacute;n.',
 'cache_modifiable_webmestre' => 'Webmaster c&oacute; th&#7875; &#273;i&#7873;u ch&#7881;nh c&aacute;c th&ocirc;ng s&#7889; n&agrave;y.',
 'calendrier_synchro' => 'N&#7871;u b&#7841;n c&oacute; thi&#7871;t tr&iacute; nhu li&#7879;u nh&#7853;t k&yacute; t&#432;&#417;ng &#7913;ng v&#7899;i <b>iCal</b>, b&#7841;n c&oacute; th&#7875; &#273;&#7891;ng b&#7897; h&oacute;a n&oacute; v&#7899;i trang web.',
-'config_activer_champs' => '<NEW>Activate the following fields',
-'config_info_logos' => '<NEW>Each element of the site can have its logo and also a "mouseover" logo',
-'config_info_logos_utiliser' => '<NEW>Use logos',
-'config_info_logos_utiliser_non' => '<NEW>Do not use logos',
-'config_info_logos_utiliser_survol' => '<NEW>Use "mouseover" logos',
-'config_info_logos_utiliser_survol_non' => '<NEW>Do not use "mouseover" logos',
-'config_info_redirection' => '<NEW>By activating this option you can create virtual articles, which are simply references to articles published on other sites whether SPIP sites or not.',
-'config_redirection' => '<NEW>Virtual articles',
-'connexion_ldap' => '<NEW>Connection:',
-'copier_en_local' => '<NEW>Copy to local site',
+'config_activer_champs' => 'Activate the following fields', # NEW
+'config_choix_base_sup' => 'indiquer une base sur ce serveur', # NEW
+'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles', # NEW
+'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.', # NEW
+'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:', # NEW
+'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e', # NEW
+'config_info_logos' => 'Each element of the site can have its logo and also a "mouseover" logo', # NEW
+'config_info_logos_utiliser' => 'Use logos', # NEW
+'config_info_logos_utiliser_non' => 'Do not use logos', # NEW
+'config_info_logos_utiliser_survol' => 'Use "mouseover" logos', # NEW
+'config_info_logos_utiliser_survol_non' => 'Do not use "mouseover" logos', # NEW
+'config_info_redirection' => 'By activating this option you can create virtual articles, which are simply references to articles published on other sites whether SPIP sites or not.', # NEW
+'config_redirection' => 'Virtual articles', # NEW
+'config_titre_base_sup' => 'D&eacute;claration d\'une base suppl&eacute;mentaire', # NEW
+'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire', # NEW
+'connexion_ldap' => 'Connection:', # NEW
+'copier_en_local' => 'Copy to local site', # NEW
 
 // D
 'date_mot_heures' => 'Gi&#7901;',
@@ -135,9 +145,10 @@ H&#7891; s&#417; SPIP</a>.',
 // E
 'email' => '&ETH;i&#7879;n th&#432;',
 'email_2' => '&ETH;i&#7879;n th&#432;:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => '&#272;&#7883;a ch&#7881; ng&#259;n',
 'entree_adresse_email' => '&#272;i&#7841; ch&#7881; email c&#7911;a b&#7841;n',
-'entree_adresse_fichier_syndication' => '<MODIF>&#272;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; &laquo;backend&raquo; &#273;&#7875; syndicate:',
+'entree_adresse_fichier_syndication' => '&#272;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; &laquo;backend&raquo; &#273;&#7875; syndicate:', # MODIF
 'entree_adresse_site' => '<b>&#272;&#7883;a ch&#7881; Website</b> [B&#7855;t bu&#7897;c]',
 'entree_base_donnee_1' => '&#272;&#7883;a ch&#7881; database',
 'entree_base_donnee_2' => '(Th&ocirc;ng th&#432;&#7901;ng, &#273;&#7883;a ch&#7881; n&agrave;y gi&#7889;ng &#273;&#7883;a ch&#7881; website c&#7911;a b&#7841;n, &#273;&ocirc;i khi n&oacute; mang t&ecirc;n &laquo;localhost&raquo;, v&agrave; c&oacute; khi n&oacute; &#273;&#7875; tr&#7889;ng.)',
@@ -170,22 +181,23 @@ H&#7891; s&#417; SPIP</a>.',
 'entree_texte_breve' => 'N&#7897;i dung tin ng&#7855;n',
 'entree_titre_obligatoire' => '<b>T&#7921;a &#273;&#7873;</b> [B&#7855;t bu&#7897;c]<br />',
 'entree_url' => '&#272;&#7883;a ch&#7881; website c&#7911;a b&#7841;n',
-'erreur_plugin_fichier_absent' => '<NEW>File missing',
-'erreur_plugin_fichier_def_absent' => '<NEW>Definition file missing',
-'erreur_plugin_nom_fonction_interdit' => '<NEW>Prohibited function name',
-'erreur_plugin_nom_manquant' => '<NEW>Missing plugin name',
-'erreur_plugin_prefix_manquant' => '<NEW>Plugin\'s namespace undefined',
-'erreur_plugin_tag_plugin_absent' => '<NEW>&lt;plugin&gt; missing in the definition file',
-'erreur_plugin_version_manquant' => '<NEW>Missing version of the plugin',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_fichier_absent' => 'File missing', # NEW
+'erreur_plugin_fichier_def_absent' => 'Definition file missing', # NEW
+'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name', # NEW
+'erreur_plugin_nom_manquant' => 'Missing plugin name', # NEW
+'erreur_plugin_prefix_manquant' => 'Plugin\'s namespace undefined', # NEW
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file', # NEW
+'erreur_plugin_version_manquant' => 'Missing version of the plugin', # NEW
 
 // F
-'forum_info_original' => '<NEW>original',
+'forum_info_original' => 'original', # NEW
 
 // I
 'ical_info1' => 'Trang n&agrave;y cho b&#7841;n bi&#7871;t c&aacute;c c&aacute;ch &#273;&#7875; theo d&otilde;i c&aacute;c ho&#7841;t &#273;&#7897;ng c&#7911;a trang web n&agrave;y.',
-'ical_info2' => '<MODIF>&#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t xin v&agrave;o xem trang web <a href="@spipnet@">SPIP\'s documentation</a>.',
+'ical_info2' => '&#272;&#7875; bi&#7871;t th&ecirc;m chi ti&#7871;t xin v&agrave;o xem trang web <a href="@spipnet@">SPIP\'s documentation</a>.', # MODIF
 'ical_info_calendrier' => 'B&#7841;n c&oacute; 2 th&#7901;i bi&#7875;u &#273;&#7875; s&#7917; d&#7909;ng. Th&#7901;i bi&#7875;u th&#7913; nh&#7845;t li&#7879;t k&ecirc; t&#7845;t c&#7843; c&aacute;c b&agrave;i vi&#7871;t &#273;&#432;&#7907;c &#273;&#259;ng. Th&#7901;i bi&#7875;u th&#7913; hai li&#7879;t k&ecirc; c&aacute;c th&ocirc;ng b&aacute;o c&#7911;a Ban Bi&ecirc;n T&#7853;p v&agrave; nh&#7919;ng th&ocirc;ng tin c&aacute; nh&acirc;n c&#7911;a b&#7841;n. Ph&#7847;n n&agrave;y &#273;&#432;&#7907;c d&agrave;nh cho b&#7841;n qua m&#7897;t m&#7853;t m&atilde; ri&ecirc;ng m&agrave; b&#7841;n c&oacute; th&#7875; thay &#273;&#7893;i b&#7857;ng c&aacute;ch thay &#273;&#7893;i m&#7853;t m&atilde; c&#7911;a m&igrave;nh.',
-'ical_lien_rss_breves' => '<NEW>Syndication of the site\'s news items',
+'ical_lien_rss_breves' => 'Syndication of the site\'s news items', # NEW
 'ical_methode_http' => '&#272;ang t&#7843;i xu&#7889;ng',
 'ical_methode_webcal' => '&#272;&#7891;ng b&#7897; ho&aacute; (webcal://)',
 'ical_texte_js' => 'M&#7897;t m&#7879;nh l&#7879;nh javascript c&oacute; th&#7875; &#273;&#432;&#7907;c s&#7917; d&#7909;ng &#273;&#7875; hi&#7875;n th&#7883; nh&#7919;ng b&agrave;i v&#7905; m&#7899;i nh&#7845;t &#273;&#432;&#7907;c &#273;&#259;ng c&#7911;a trang web n&agrave;y tr&ecirc;n b&#7845;t k&#7923; trang web n&agrave;o c&#7911;a b&#7841;n m&#7897;t c&aacute;ch r&#7845;t d&#7877; d&agrave;ng.',
@@ -194,9 +206,9 @@ H&#7891; s&#417; SPIP</a>.',
 'ical_texte_rss' => 'B&#7841;n c&oacute; th&#7875; &#273;&#7897;ng b&#7897; ho&aacute; c&aacute;c tin t&#7913;c m&#7899;i nh&#7845;t c&#7911;a trang web n&agrave;y b&#7857;ng b&#7845;t k&#7923; h&#7879; th&#7889;ng &#273;&#7885;c d&#7841;ng XML/RSS (Rich Site Summary) n&agrave;o. XML/RSS c&#361;ng l&agrave; d&#7841;ng h&#7891; s&#417; m&agrave; SPIP c&oacute; th&#7875; d&ugrave;ng &#273;&#7875; &#273;&#7885;c c&aacute;c tin t&#7913;c m&#7899;i nh&#7845;t &#273;&#259;ng t&#7843;i b&#7903;i c&aacute;c trang web d&ugrave;ng c&ugrave;ng m&#7897;t h&#7879; trao &#273;&#7893;i t&#432;&#417;ng &#7913;ng.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
-'ical_titre_rss' => '<MODIF>H&#7891; s&#417; &laquo;Backend&raquo;',
+'ical_titre_rss' => 'H&#7891; s&#417; &laquo;Backend&raquo;', # MODIF
 'icone_activer_cookie' => 'D&ugrave;ng Cookie',
-'icone_admin_plugin' => '<NEW>Manage plugins',
+'icone_admin_plugin' => 'Manage plugins', # NEW
 'icone_afficher_auteurs' => 'Tr&igrave;nh b&agrave;y t&ecirc;n t&aacute;c gi&#7843; ',
 'icone_afficher_visiteurs' => 'Tr&igrave;nh b&agrave;y s&#7889; &#273;&#7897;c gi&#7843;',
 'icone_arret_discussion' => 'Kh&ocirc;ng tham gia v&agrave;o cu&#7897;c th&#7843;o lu&#7853;n n&agrave;y n&#7919;a',
@@ -205,9 +217,9 @@ H&#7891; s&#417; SPIP</a>.',
 'icone_creation_mots_cles' => 'Th&ecirc;m t&#7915; then ch&#7889;t m&#7899;i ',
 'icone_creer_auteur' => 'Th&ecirc;m t&ecirc;n m&#7897;t t&aacute;c gi&#7843; m&#7899;i v&agrave; ghi v&agrave;o b&agrave;i n&agrave;y',
 'icone_creer_mot_cle' => 'Th&ecirc;m m&#7897;t t&#7915; then ch&#7889;t m&#7899;i v&agrave; ghi v&agrave;o b&agrave;i n&agrave;y',
-'icone_creer_mot_cle_breve' => '<NEW>Create a new keyword and attach it to this news item',
-'icone_creer_mot_cle_rubrique' => '<NEW>Create a new keyword and attach it to this section',
-'icone_creer_mot_cle_site' => '<NEW>Create a new keyword and attach it to this site',
+'icone_creer_mot_cle_breve' => 'Create a new keyword and attach it to this news item', # NEW
+'icone_creer_mot_cle_rubrique' => 'Create a new keyword and attach it to this section', # NEW
+'icone_creer_mot_cle_site' => 'Create a new keyword and attach it to this site', # NEW
 'icone_creer_rubrique_2' => 'Th&ecirc;m m&#7897;t &#273;&#7873; m&#7909;c m&#7899;i ',
 'icone_ecrire_nouvel_article' => 'Tin ng&#7855;n trong &#273;&#7873; m&#7909;c n&agrave;y',
 'icone_envoyer_message' => 'G&#7917;i th&#432; t&iacute;n n&agrave;y',
@@ -216,12 +228,14 @@ H&#7891; s&#417; SPIP</a>.',
 'icone_modifier_article' => 'S&#7917;a b&agrave;i n&agrave;y',
 'icone_modifier_breve' => 'S&#7917;a tin ng&#7855;n n&agrave;y',
 'icone_modifier_message' => 'S&#7917;a th&#432; t&iacute;n n&agrave;y',
+'icone_modifier_mot' => 'Modifier ce mot-cl&eacute;', # NEW
 'icone_modifier_rubrique' => 'S&#7917;a &#273;&#7873; m&#7909;c n&agrave;y',
 'icone_modifier_site' => 'S&#7917;a li&ecirc;n k&#7871;t n&agrave;y',
 'icone_poster_message' => 'G&#7917;i m&#7897;t th&#432; t&iacute;n ',
 'icone_publier_breve' => '&ETH;&#259;ng m&#7851;u tin n&agrave;y',
 'icone_referencer_nouveau_site' => 'Th&ecirc;m m&#7897;t &#273;i&#7875;m n&#7889;i v&agrave;o trang Web kh&aacute;c',
 'icone_refuser_breve' => 'T&#7915; ch&#7889;i tin ng&#7855;n n&agrave;y',
+'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tr&#7903; l&#7841;i',
 'icone_retour_article' => 'Tr&#7903; v&#7873; b&agrave;i tr&#432;&#7899;c',
 'icone_suivi_forum' => 'Theo d&otilde;i di&#7877;n &#273;&agrave;n : @nb_forums@ d&oacute;ng g&oacute;p',
@@ -240,6 +254,8 @@ H&#7891; s&#417; SPIP</a>.',
 'info_activer_forum_public' => '<i>&#272;&#7875; di&#7877;n &#273;&agrave;n c&ocirc;ng c&#7897;ng ho&#7841;t &#273;&#7897;ng, xin ch&#7885;n m&#7897;t trong nh&#7919;ng ph&#432;&#417;ng th&#7913;c &#273;i&#7873;u h&#7907;p sau &#273;&acirc;y</i>',
 'info_admin_gere_rubriques' => 'Nh&acirc;n v&#7853;t n&agrave;y c&oacute; quy&#7873;n qu&#7843;n tr&#7883; c&aacute;c &#273;&#7873; m&#7909;c sau &#273;&acirc;y:',
 'info_admin_gere_toutes_rubriques' => 'Nh&acirc;n v&#7853;t n&agrave;y c&oacute; quy&#7873;n qu&#7843;n tr&#7883; <b>t&#7845;t c&#7843; c&aacute;c &#273;&#7873; m&#7909;c</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Qu&#7843;n l&yacute;',
 'info_administrateur_1' => 'Qu&#7843;n l&yacute;',
 'info_administrateur_2' => 'c&#7911;a trang web (<i>s&#7917; d&#7909;ng c&#7849;n th&#7853;n</i>)',
@@ -276,6 +292,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_auteurs_trouves' => 'Nh&#7919;ng t&aacute;c gi&#7843; t&igrave;m th&#7845;y',
 'info_authentification_externe' => 'X&aacute;c nh&#7853;n t&#7915; b&ecirc;n ngo&agrave;i',
 'info_avertissement' => 'B&aacute;o &#273;&#7897;ng',
+'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'C&#7845;u tr&uacute;c database c&#7911;a b&#7841;n &#273;&atilde; &#273;&#432;&#7907;c thi&#7871;t tr&iacute;.',
 'info_base_restauration' => '&#272;ang h&#7891;i ph&#7909;c l&#7841;i database.',
 'info_bloquer' => 'ng&#259;n ch&#7853;n',
@@ -295,10 +312,22 @@ H&#7891; s&#417; SPIP</a>.',
 'info_classement_2' => ' trong s&#7889; @liste@',
 'info_code_acces' => '&#272;&#7915;ng qu&#234;n m&#227; s&#7889; &#273;&#7875; v&#224;o c&#7911;a b&#7841;n!',
 'info_comment_lire_tableau' => 'C&#225;ch &#273;&#7885;c &#273;&#7891; th&#7883; n&#224;y',
+'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
+'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
+'info_compresseur_titre' => 'Optimisations et compression', # NEW
+'info_config_forums_prive' => 'Dans l&#8217;espace priv&#233; du site, vous pouvez activer plusieurs types de forums&nbsp;:', # NEW
+'info_config_forums_prive_admin' => 'Un forum r&#233;serv&#233; aux administrateurs du site&nbsp;:', # NEW
+'info_config_forums_prive_global' => 'Un forum global, ouvert &#224; tous les r&#233;dacteurs&nbsp;:', # NEW
+'info_config_forums_prive_objets' => 'Un forum sous chaque article, br&#232;ve, site r&#233;f&#233;renc&#233;, etc.&nbsp;:', # NEW
 'info_config_suivi' => 'N&#7871;u &#273;&#7883;a ch&#7881; n&agrave;y l&agrave; c&#7911;a m&#7897;t mailing list,  b&#7841;n cho bi&#7871;t &#273;&#7883;a ch&#7881; &#273;&#7875; ghi danh. &#272;&#7883;a ch&#7881; ghi danh c&oacute; th&#7875; l&agrave; URL (th&iacute; d&#7909; trang ghi danh qua web), hay &#273;&#7883;a ch&#7881; email c&oacute; ghi r&otilde; t&#7921;a &#273;&#7873; (subject). Th&iacute; d&#7909;: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'B&#7841;n c&oacute; th&#7875; ghi danh v&agrave;o mailing list d&#432;&#7899;i &#273;&acirc;y, n&#7871;u b&#7841;n mu&#7889;n nh&#7853;n th&ocirc;ng tin c&aacute;c b&agrave;i &#273;&#432;&#7907;c n&#7897;p v&agrave;o trang web n&agrave;y.',
 'info_confirmer_passe' => 'X&#225;c nh&#7853;n l&#7841;i m&#7853;t m&#227; m&#7899;i:',
+'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont &#233;t&#233; modifi&#233;s par ailleurs. Vos modifications sur ces champs n\'ont donc pas &#233;t&#233; enregistr&#233;es.', # NEW
+'info_conflit_edition_differences' => 'Diff&#233;rences&nbsp;:', # NEW
+'info_conflit_edition_version_enregistree' => 'La version enregistr&#233;e&nbsp;:', # NEW
+'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'B&#432;&#7899;c th&#7913; nh&igrave;: <b>th&#7917; n&#7889;i v&agrave;o database</b>',
+'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
 'info_connexion_ldap_ok' => 'N&#7889;i v&agrave;o LDAP t&#7889;t &#273;&#7865;p.</b><p /> B&#7841;n c&oacute; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
 'info_connexion_mysql' => 'B&#432;&#7899;c th&#7913; nh&#7845;t: <b>N&#7889;i v&agrave;o SQL c&#7911;a b&#7841;n</b>',
 'info_connexion_ok' => 'N&#7889;i v&agrave;o t&#7889;t &#273;&#7865;p.',
@@ -322,7 +351,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_desactiver_forum_public' => 'Kh&oacute;a vi&#7879;c s&#7917; d&#7909;ng di&#7877;n &#273;&agrave;n c&ocirc;ng c&#7897;ng. Di&#7877;n &#273;&agrave;n c&ocirc;ng c&#7897;ng c&oacute; th&#7875; &#273;&#432;&#7907;c cho ph&eacute;p theo t&#7915;ng tr&#432;&#7901;ng h&#7907;p m&#7897;t cho c&aacute;c b&agrave;i v&#7903;; tuy nhi&ecirc;n s&#7869; c&#7845;m kh&ocirc;ng &#273;&#432;&#7907;c d&ugrave;ng cho c&aacute;c &#273;&#7873; m&#7909;c, tin ng&#7855;n, v.v...',
 'info_desactiver_messagerie_personnelle' => 'B&#7841;n c&oacute; th&#7875; t&#7855;t/m&#7903; h&#7897;p th&#432; t&iacute;n c&aacute; nh&acirc;n c&#7911;a b&#7841;n.',
 'info_descriptif' => 'T&oacute;m l&#432;&#7907;c:',
-'info_desinstaller_plugin' => '<NEW>deletes the data and deactivates the plugin',
+'info_desinstaller_plugin' => 'deletes the data and deactivates the plugin', # NEW
 'info_discussion_cours' => '&#272;ang trao &#273;&#7893;i',
 'info_ecrire_article' => '&#272;&#7875; c&oacute; th&#7875; so&#7841;n m&#7897;t b&agrave;i v&#7903;, b&#7841;n ph&#7843;i l&#7853;p ra m&#7897;t &#273;&#7873; m&#7909;c tr&#432;&#7899;c &#273;&atilde;. <Tr&#432;&#7899;c khi c&#243; th&#7875; vi&#7871;t b&#224;i, b&#7841;n ph&#7843;i l&#7853;p ra &#237;t nh&#7845;t m&#7897;t &#273;&#7873; m&#7909;c.',
 'info_email_envoi' => '&#272;&#7883;a ch&#7881; email c&#7911;a ng&#432;&#7901;i g&#7917;i (kh&ocirc;ng b&#7855;t bu&#7897;c)',
@@ -392,7 +421,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_liste_redacteurs_connectes' => 'Danh s&#225;ch c&#225;c ch&#7911; b&#250;t &#273;ang n&#7889;i v&#224;o',
 'info_login_existant' => 'Login n&#224;y &#273;&#227; c&#243;.',
 'info_login_trop_court' => 'Login ng&#7855;n qu&#225;.',
-'info_logos' => '<NEW>The logos',
+'info_logos' => 'The logos', # NEW
 'info_maximum' => 't&#7889;i &#273;a:',
 'info_meme_rubrique' => 'C&#361;ng &#273;&#7873; m&#7909;c',
 'info_message' => 'Th&#432; t&iacute;n t&#7915; ',
@@ -403,7 +432,9 @@ H&#7891; s&#417; SPIP</a>.',
 'info_mise_a_niveau_base' => 'N&#226;ng c&#7845;p database SQL',
 'info_mise_a_niveau_base_2' => '{{C&#7843;nh b&#225;o!}}B&#7841;n v&#7915;a thi&#7871;t tr&#237; m&#7897;t &#7845;n b&#7843;n SPIP c&#361; h&#417;n &#7845;n b&#7843;n thi&#7871;t tr&#237; tr&#432;&#7899;c &#273;&#226;y: database c&#7911;a b&#7841;n c&#243; th&#7875; g&#7863;p r&#7911;i ro m&#7845;t m&#225;t v&#224; webiste kh&#244;ng ho&#7841;t &#273;&#7897;ng &#273;&#250;ng n&#7919;a.{{T&#225;i thi&#7871;t tr&#237; c&#225;c h&#7891; s&#417; SPIP.}} ',
 'info_mode_fonctionnement_defaut_forum_public' => 'C&#225;ch th&#7913;c &#273;i&#7873;u h&#224;nh &#273;&#7883;nh s&#7861;n c&#7911;a di&#7877;n &#273;&#224;n c&#244;ng',
+'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'S&#7917;a &#273;&#7893;i tin ng&#7855;n:',
+'info_modifier_mot' => 'Modifier le mot-cl&eacute; :', # NEW
 'info_modifier_rubrique' => 'S&#7917;a &#273;&#7893;i &#273;&#7873; m&#7909;c:',
 'info_modifier_titre' => 'S&#7917;a &#273;&#7893;i: @titre@',
 'info_mon_site_spip' => 'Website SPIP c&#7911;a t&#244;i',
@@ -439,7 +470,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_numero_article' => 'S&#7888; TH&#7912; T&#7920; B&#192;I:',
 'info_obligatoire_02' => '[B&#7855;t bu&#7897;c] ',
 'info_option_accepter_visiteurs' => 'Cho ph&eacute;p kh&aacute;ch ghi danh t&#7915; trang c&ocirc;ng c&#7897;ng',
-'info_option_email' => '<MODIF>Khi m&#7897;t v&#7883; kh&aacute;ch g&#7917;i th&#432; t&iacute;n v&agrave;o di&#7877;n &#273;&agrave;n c&oacute; li&ecirc;n h&#7879; t&#7899;i m&#7897;t b&agrave;i vi&#7871;t, t&aacute;c gi&#7843; b&agrave;i vi&#7871;t &#273;&oacute; c&oacute; th&#7875; &#273;&#432;&#7907;c th&ocirc;ng b&aacute;o qua email. B&#7841;n c&oacute; mu&#7889;n d&ugrave;ng &#273;&#7863;c &#273;i&#7875;m n&agrave;y kh&ocirc;ng? ',
+'info_option_email' => 'Khi m&#7897;t v&#7883; kh&aacute;ch g&#7917;i th&#432; t&iacute;n v&agrave;o di&#7877;n &#273;&agrave;n c&oacute; li&ecirc;n h&#7879; t&#7899;i m&#7897;t b&agrave;i vi&#7871;t, t&aacute;c gi&#7843; b&agrave;i vi&#7871;t &#273;&oacute; c&oacute; th&#7875; &#273;&#432;&#7907;c th&ocirc;ng b&aacute;o qua email. B&#7841;n c&oacute; mu&#7889;n d&ugrave;ng &#273;&#7863;c &#273;i&#7875;m n&agrave;y kh&ocirc;ng? ', # MODIF
 'info_option_faire_suivre' => 'Chuy&#7875;n th&#432; t&iacute;n trong di&#7877;n &#273;&agrave;n &#273;&#7871;n t&aacute;c gi&#7843; b&agrave;i',
 'info_option_ne_pas_accepter_visiteurs' => 'T&#7915; ch&#7889;i kh&aacute;ch ghi danh',
 'info_option_ne_pas_faire_suivre' => '&#272;&#7915;ng chuy&#7875;n th&#432; t&iacute;n c&#7911;a di&#7877;n &#273;&agrave;n',
@@ -449,10 +480,10 @@ H&#7891; s&#417; SPIP</a>.',
 'info_ou' => 'ho&#7863;c... ',
 'info_oui_suppression_mot_cle' => 'T&#244;i mu&#7889;n x&#243;a lu&#244;n t&#7915; then ch&#7889;t n&#224;y.',
 'info_page_interdite' => 'Trang c&#7845;m v&#224;o',
-'info_par_nom' => '<NEW>by name',
+'info_par_nom' => 'by name', # NEW
 'info_par_nombre_article' => '(theo s&#7889; l&#432;&#7907;ng b&#224;i) ',
-'info_par_statut' => '<NEW>by status',
-'info_par_tri' => '<NEW>\'(by @tri@)\'',
+'info_par_statut' => 'by status', # NEW
+'info_par_tri' => '\'(by @tri@)\'', # NEW
 'info_pas_de_forum' => 'kh&#244;ng c&#243; di&#7877;n &#273;&#224;n',
 'info_passe_trop_court' => 'M&#7853;t m&#227; ng&#7855;n qu&#225;.',
 'info_passes_identiques' => 'Hai m&#7853;t m&#227; kh&#244;ng gi&#7889;ng h&#7879;t nhau.',
@@ -474,16 +505,24 @@ H&#7891; s&#417; SPIP</a>.',
 'info_principaux_correspondants' => 'Nh&#7919;ng ng&#432;&#7901;i li&ecirc;n l&#7841;c ch&iacute;nh',
 'info_procedez_par_etape' => 'Xin ti&#7871;p di&#7877;n t&#7915;ng b&#432;&#7899;c m&#7897;t',
 'info_procedure_maj_version' => 'Quy tr&#236;nh n&#226;ng c&#7845;p c&#7847;n &#273;&#432;&#7907;c ch&#7841;y &#273;&#7875; database th&#237;ch &#7913;ng v&#7899;i &#7845;n b&#7843;n SPIP m&#7899;i.',
-'info_proxy_ok' => '<NEW>Test of the proxy successful.',
-'info_ps' => '<MODIF>T&#225;i b&#250;t.',
+'info_proxy_ok' => 'Test of the proxy successful.', # NEW
+'info_ps' => 'T&#225;i b&#250;t.', # MODIF
 'info_publier' => '&#273;&#259;ng t&#7843;i',
 'info_publies' => 'B&agrave;i c&#7911;a b&#7841;n &#273;&#432;&#7907;c &#273;&#259;ng online',
 'info_question_accepter_visiteurs' => 'N&#7871;u trang web cho ph&eacute;p kh&aacute;ch ghi danh m&agrave; kh&ocirc;ng c&#7847;n ph&#7843;i v&agrave;o v&ugrave;ng ri&ecirc;ng, th&igrave; xin h&atilde;y m&#7903; l&ecirc;n nh&#7919;ng ch&#7885;n l&#7921;a sau:',
+'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
+'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
+'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'C&oacute; mu&#7889;n qu&#7843;n tr&#7883; c&aacute;c con s&#7889; th&#7889;ng k&ecirc;?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>B&#7841;n c&oacute; cho ph&eacute;p ghi danh c&aacute;c ch&#7911; b&uacute;t m&#7899;i t&#7915; website c&ocirc;ng c&#7897;ng kh&ocirc;ng? N&#7871;u &#273;&#7891;ng &yacute;, kh&aacute;ch c&oacute; th&#7875; ghi danh qua m&#7897;t m&#7851;u t&#7921; &#273;&#7897;ng, v&agrave; s&#7869; &#273;&#432;&#7907;c ph&eacute;p v&agrave;o v&ugrave;ng ri&ecirc;ng c&#7911;a h&#7885; &#273;&#7875; so&#7841;n b&agrave;i. <blockquote><i>Trong qu&aacute; tr&igrave;nh ghi danh, ng&#432;&#7901;i d&ugrave;ng s&#7869; nh&#7853;n &#273;&#432;&#7907;c email cho bi&#7871;t login/m&#7853;t m&atilde; v&agrave;o ch&#7895; ri&ecirc;ng c&#7911;a h&#7885;. M&#7897;t s&#7889; m&aacute;y ch&#7911; t&#7855;t &#273;&#7863;c &#273;i&#7875;m n&agrave;y: trong tr&#432;&#7901;ng h&#7907;p &#273;&oacute;, ghi danh t&#7921; &#273;&#7897;ng kh&ocirc;ng d&ugrave;ng &#273;&#432;&#7907;c.</i>',
+'info_question_inscription_nouveaux_redacteurs' => 'B&#7841;n c&oacute; cho ph&eacute;p ghi danh c&aacute;c ch&#7911; b&uacute;t m&#7899;i t&#7915; website c&ocirc;ng c&#7897;ng kh&ocirc;ng? N&#7871;u &#273;&#7891;ng &yacute;, kh&aacute;ch c&oacute; th&#7875; ghi danh qua m&#7897;t m&#7851;u t&#7921; &#273;&#7897;ng, v&agrave; s&#7869; &#273;&#432;&#7907;c ph&eacute;p v&agrave;o v&ugrave;ng ri&ecirc;ng c&#7911;a h&#7885; &#273;&#7875; so&#7841;n b&agrave;i. <blockquote><i>Trong qu&aacute; tr&igrave;nh ghi danh, ng&#432;&#7901;i d&ugrave;ng s&#7869; nh&#7853;n &#273;&#432;&#7907;c email cho bi&#7871;t login/m&#7853;t m&atilde; v&agrave;o ch&#7895; ri&ecirc;ng c&#7911;a h&#7885;. M&#7897;t s&#7889; m&aacute;y ch&#7911; t&#7855;t &#273;&#7863;c &#273;i&#7875;m n&agrave;y: trong tr&#432;&#7901;ng h&#7907;p &#273;&oacute;, ghi danh t&#7921; &#273;&#7897;ng kh&ocirc;ng d&ugrave;ng &#273;&#432;&#7907;c.</i>', # MODIF
 'info_question_mots_cles' => 'B&#7841;n c&#243; mu&#7889;n d&#249;ng t&#7915; then ch&#7889;t trong website? ',
 'info_question_proposer_site' => 'Ai c&oacute; quy&#7873;n &#273;&#7873; ngh&#7883; c&aacute;c website n&#7889;i k&#7871;t?',
 'info_question_utilisation_moteur_recherche' => 'B&#7841;n c&oacute; mu&#7889;n d&ugrave;ng c&#417; ph&#7853;n t&igrave;m ki&#7871;m c&oacute; s&#7861;n c&#7911;a SPIP? (<i>N&#7871;u t&#7855;t n&oacute; &#273;i s&#7869; l&agrave;m h&#7879; th&#7889;ng ch&#7841;y l&#7865; h&#417;n</i>) ',
+'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
+'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs &#224; joindre des documents (images, sons...) &#224; leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).', # NEW
+'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents consid&eacute;r&eacute;s comme fiables par SPIP, mettre une &eacute;toile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Nh&#7919;ng ng&#432;&#7901;i c&oacute; quy&#7873;n &#7845;n &#273;&#7883;nh c&aacute;c t&#7915; then ch&#7889;t n&agrave;y:',
 'info_racine_site' => 'G&#7889;c c&#7911;a website',
 'info_recharger_page' => 'Xin n&#7841;p l&#7841;i trang n&#224;y trong gi&#226;y l&#225;t.',
@@ -501,7 +540,8 @@ H&#7891; s&#417; SPIP</a>.',
 'info_reglage_ldap' => 'Ch&#7885;n l&#7921;a: <b>&#272;i&#7873;u ch&#7881;nh vi&#7879;c nh&#7853;p LDAP</b>',
 'info_renvoi_article' => '<b>Chuy&#7875;n h&#432;&#7899;ng.</b> B&#224;i n&#224;y n&#7889;i &#273;&#7871;n trang: ',
 'info_reserve_admin' => 'Ch&#7881; c&#243; qu&#7843;n tr&#7883; vi&#234;n m&#7899;i c&#243; th&#7875; s&#7917;a &#273;&#7893;i &#273;&#7883;a ch&#7881; n&#224;y.',
-'info_restauration_sauvegarde' => '<MODIF>Ph&#7909;c h&#7891;i h&#7891; s&#417; d&#7921; tr&#7919; @archive@',
+'info_restauration_sauvegarde' => 'Ph&#7909;c h&#7891;i h&#7891; s&#417; d&#7921; tr&#7919; @archive@', # MODIF
+'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Gi&#7899;i h&#7841;n vi&#7879;c qu&#7843;n tr&#7883; trong &#273;&#7873; m&#7909;c:',
 'info_resultat_recherche' => 'K&#7871;t qu&#7843; t&#236;m ki&#7871;m:',
 'info_rubriques' => '&#272;&#7873; m&#7909;c',
@@ -524,9 +564,10 @@ H&#7891; s&#417; SPIP</a>.',
 'info_sauvegarde_petitions' => 'D&#7921; tr&#7919; c&#225;c th&#7881;nh nguy&#7879;n th&#432;',
 'info_sauvegarde_refers' => 'D&#7921; tr&#7919; referrers',
 'info_sauvegarde_reussi_01' => 'D&#7921; tr&#7919; th&#224;nh c&#244;ng.',
-'info_sauvegarde_reussi_02' => '<MODIF>Database &#273;&#432;&#7907;c l&#432;u tr&#7919; trong @archive@. B&#7841;n c&#243; th&#7875; ',
+'info_sauvegarde_reussi_02' => 'Database &#273;&#432;&#7907;c l&#432;u tr&#7919; trong @archive@. B&#7841;n c&#243; th&#7875; ', # MODIF
 'info_sauvegarde_reussi_03' => 'tr&#7903; l&#7841;i vi&#7879;c qu&#7843;n tr&#7883;',
 'info_sauvegarde_reussi_04' => 'website c&#7911;a b&#7841;n.',
+'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez', # NEW
 'info_sauvegarde_rubriques' => 'D&#7921; tr&#7919; c&#225;c &#273;&#7873; m&#7909;c',
 'info_sauvegarde_signatures' => 'D&#7921; tr&#7919; c&#225;c ch&#7919; k&#253; th&#7881;nh nguy&#7879;n th&#432;',
 'info_sauvegarde_sites_references' => 'D&#7921; tr&#7919; c&#225;c website n&#7889;i k&#7871;t',
@@ -551,9 +592,9 @@ H&#7891; s&#417; SPIP</a>.',
 'info_sites_trouves_dans_texte' => 'T&#236;m th&#7845;y website (trong v&#259;n t&#7921;)',
 'info_sous_titre' => 'T&#7921;a &#273;&#7873; ph&#7909;:',
 'info_statut_administrateur' => 'Qu&#7843;n tr&#7883; vi&#234;n',
-'info_statut_auteur' => '<MODIF>Quy&#7873;n h&#7841;n c&#7911;a t&aacute;c gi&#7843;:',
-'info_statut_auteur_a_confirmer' => '<NEW>Registration to be confirmed',
-'info_statut_auteur_autre' => '<NEW>Other status:',
+'info_statut_auteur' => 'Quy&#7873;n h&#7841;n c&#7911;a t&aacute;c gi&#7843;:', # MODIF
+'info_statut_auteur_a_confirmer' => 'Registration to be confirmed', # NEW
+'info_statut_auteur_autre' => 'Other status:', # NEW
 'info_statut_efface' => 'X&#243;a',
 'info_statut_redacteur' => 'Ch&#7911; b&#250;t',
 'info_statut_site_1' => 'Website n&#224;y l&#224;:',
@@ -565,9 +606,10 @@ H&#7891; s&#417; SPIP</a>.',
 'info_suivi_activite' => 'Th&ocirc;ng tin cho Ban Bi&ecirc;n T&#7853;p',
 'info_supprimer_mot' => 'x&#243;a t&#7915; then ch&#7889;t n&#224;y',
 'info_surtitre' => '&#272;&#7847;u &#273;&#7873;:',
-'info_syndication_integrale_1' => '<NEW>Your site offers syndication files (see &#147;<a href="@url@">@titre@</a>&#148;).',
-'info_syndication_integrale_2' => '<NEW>Do you wish to send whole articles or only a summary of a few hundred characters?',
-'info_table_prefix' => '<NEW>It is possible to change the prefix of the names of the database tables. (you need to do this if you are installing several sites in the same database). The prefix must be written in unaccented, lower-case letters without any spaces.',
+'info_syndication_integrale_1' => 'Your site offers syndication files (see &#147;<a href="@url@">@titre@</a>&#148;).', # NEW
+'info_syndication_integrale_2' => 'Do you wish to send whole articles or only a summary of a few hundred characters?', # NEW
+'info_table_prefix' => 'It is possible to change the prefix of the names of the database tables. (you need to do this if you are installing several sites in the same database). The prefix must be written in unaccented, lower-case letters without any spaces.', # NEW
+'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas r&eacute;duites.', # NEW
 'info_taille_maximale_vignette' => 'K&iacute;ch th&#432;&#7899;c t&#7889;i &#273;a c&#7911;a h&igrave;nh m&#7851;u:',
 'info_terminer_installation' => 'B&#7841;n c&#243; th&#7875; k&#7871;t th&#250;c quy tr&#236;nh thi&#7871;t tr&#237; c&#259;n b&#7843;n.',
 'info_texte' => 'Th&acirc;n b&agrave;i',
@@ -580,6 +622,7 @@ H&#7891; s&#417; SPIP</a>.',
 'info_total' => 't&#7893;ng c&#7897;ng: ',
 'info_tous_articles_en_redaction' => 'T&#7845;t c&#7843; b&#224;i v&#7903; &#273;ang &#273;&#432;&#7907;c so&#7841;n',
 'info_tous_articles_presents' => 'T&#7845;t c&#7843; b&#224;i v&#7903; &#273;&#227; ph&#225;t h&#224;nh trong &#273;&#7873; m&#7909;c n&#224;y',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'm&#7895;i:',
 'info_tous_redacteurs' => 'Th&#244;ng b&#225;o &#273;&#7871;n t&#7845;t c&#7843; ch&#7911; b&#250;t',
 'info_tout_site' => 'To&#224;n b&#7897; website',
@@ -597,8 +640,8 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'info_une_breve' => 'm&#7897;t tin ng&#7855;n, ',
 'info_une_rubrique' => 'm&#7897;t &#273;&#7873; m&#7909;c, ',
 'info_une_rubrique_02' => '1 &#273;&#7873; m&#7909;c',
-'info_url' => '<MODIF>URL:',
-'info_url_site' => '<MODIF>URL C&#7910;A WEBSITE:',
+'info_url' => 'URL:', # MODIF
+'info_url_site' => 'URL C&#7910;A WEBSITE:', # MODIF
 'info_urlref' => 'N&#7889;i k&#7871;t:',
 'info_utilisation_spip' => 'SPIP s&#7861;n s&#224;ng &#273;&#7875; s&#7917; d&#7909;ng...',
 'info_visites_par_mois' => 'Hi&#7875;n th&#7883; h&#224;ng th&#225;ng:',
@@ -607,17 +650,29 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'info_visiteur_2' => ' c&#7911;a website c&#244;ng',
 'info_visiteurs' => 'Kh&#225;ch',
 'info_visiteurs_02' => 'Kh&#225;ch c&#7911;a website c&#244;ng',
-'install_adresse_base_hebergeur' => '<NEW>Database address attributed by the service provider',
+'install_adresse_base_hebergeur' => 'Database address attributed by the service provider', # NEW
+'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'Ph&#7847;n c&agrave;i &#273;&#7863;t n&agrave;y c&oacute; th&#7875; g&#7863;p tr&#7903; ng&#7841;i, ho&#7863;c khi&#7871;n website ho&#7841;t &#273;&#7897;ng kh&ocirc;ng ho&agrave;n ch&#7881;nh...',
 'install_extension_mbstring' => 'SPIP kh&ocirc;ng ho&#7841;t &#273;&#7897;ng v&#7899;i:',
 'install_extension_php_obligatoire' => 'SPIP c&#7847;n m&#7897;t b&#7897; ph&#7853;n php:',
-'install_login_base_hebergeur' => '<NEW>Login attributed by the service provider',
-'install_nom_base_hebergeur' => '<NEW>Database name attributed by the service provider:',
-'install_pass_base_hebergeur' => '<NEW>Connection password attributed by the service provider',
-'install_php_version' => '<NEW>The PHP version @version@ is too old (minimum = @minimum@)',
+'install_login_base_hebergeur' => 'Login attributed by the service provider', # NEW
+'install_nom_base_hebergeur' => 'Database name attributed by the service provider:', # NEW
+'install_pas_table' => 'Base actuellement sans tables', # NEW
+'install_pass_base_hebergeur' => 'Connection password attributed by the service provider', # NEW
+'install_php_version' => 'The PHP version @version@ is too old (minimum = @minimum@)', # NEW
 'install_select_langue' => 'Ch&#7885;n m&#7897;t ng&ocirc;n ng&#7919;, r&#7891;i b&#7845;m v&agrave;o n&uacute;t "K&#7871; ti&#7871;p" &#273;&#7875; b&#7855;t &#273;&#7847;u th&#7875; th&#7913;c thi&#7871;t tr&iacute;.',
-'install_table_prefix_hebergeur' => '<NEW>Table prefix attributed by the service provider:',
+'install_select_type_db' => 'Indiquer le type de base de donn&eacute;es&nbsp;:', # NEW
+'install_select_type_mysql' => 'MySQL', # NEW
+'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_sqlite2' => 'SQLite 2', # NEW
+'install_select_type_sqlite3' => 'SQLite 3', # NEW
+'install_serveur_hebergeur' => 'Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_table_prefix_hebergeur' => 'Table prefix attributed by the service provider:', # NEW
+'install_tables_base' => 'Tables de la base', # NEW
+'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
+'install_types_db_connus_avertissement' => 'Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
 'intem_redacteur' => 'ch&#7911; b&uacute;t',
+'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Cho ph&eacute;p ghi danh',
 'item_activer_forum_administrateur' => 'M&#7903; di&#7877;n &#273;&agrave;n qu&#7843;n tr&#7883;',
 'item_activer_messages_avertissement' => 'Cho ph&eacute;p c&#7843;nh b&aacute;o',
@@ -626,7 +681,8 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'item_ajout_mots_cles' => 'Cho ph&eacute;p th&ecirc;m c&aacute;c t&#7915; then ch&#7889;t v&agrave;o di&#7877;n &#273;&agrave;n',
 'item_autoriser_documents_joints' => 'Cho ph&eacute;p &#273;&iacute;nh k&egrave;m t&agrave;i li&#7879;u v&agrave;o b&agrave;i v&#7903;',
 'item_autoriser_documents_joints_rubriques' => 'Cho ph&eacute;p &#273;&iacute;nh k&egrave;m t&agrave;i li&#7879;u trong &#273;&#7873; m&#7909;c',
-'item_autoriser_syndication_integrale' => '<NEW>Include entire articles in the syndication files',
+'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
+'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
 'item_bloquer_liens_syndiques' => 'Ng&#259;n l&#7841;i, kh&ocirc;ng ch&#7845;p thu&#7853;n c&aacute;c &#273;i&#7875;m n&#7889;i syndicated',
 'item_breve_refusee' => 'T&#7914; CH&#7888;I - kh&ocirc;ng &#273;&#259;ng',
 'item_breve_validee' => 'CH&#7844;P THU&#7852;N &#273;&#259;ng t&#7843;i',
@@ -635,12 +691,16 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'item_choix_non_generation_miniature' => '&#272;&#7915;ng t&#7841;o ra h&igrave;nh m&#7851;u.',
 'item_choix_redacteurs' => 'ch&#7911; b&#250;t',
 'item_choix_visiteurs' => 'Kh&#225;ch c&#7911;a website c&#244;ng',
+'item_compresseur' => 'Activer la compression', # NEW
+'item_config_forums_prive_global' => 'Activer le forum des r&#233;dacteurs', # NEW
+'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'L&#7853;p ra h&#7891; s&#417; .htpasswd',
 'item_desactiver_forum_administrateur' => 'Kh&#243;a di&#7877;n &#273;&#224;n qu&#7843;n tr&#7883; vi&#234;n',
 'item_gerer_annuaire_site_web' => 'Qu&#7843;n tr&#7883; th&#432; m&#7909;c website',
 'item_gerer_statistiques' => 'Qu&#7843;n tr&#7883; s&#7889; th&#7889;ng k&#234;',
 'item_limiter_recherche' => 'Gi&#7899;i h&#7841;n vi&#7879;c t&#236;m ki&#7871;m trong kh&#7889;i l&#432;&#7907;ng tin c&#7911;a website b&#7841;n',
 'item_login' => 'Login',
+'item_messagerie_agenda' => 'Activer la messagerie et l&#8217;agenda', # NEW
 'item_mots_cles_association_articles' => 'b&#224;i v&#7903;',
 'item_mots_cles_association_breves' => 'tin ng&#7855;n',
 'item_mots_cles_association_rubriques' => 'c&#225;c &#273;&#7873; m&#7909;c',
@@ -652,12 +712,17 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'item_non_ajout_mots_cles' => 'Kh&ocirc;ng cho ph&eacute;p th&ecirc;m c&aacute;c t&#7915; then ch&#7889;t v&agrave;o di&#7877;n &#273;&agrave;n',
 'item_non_autoriser_documents_joints' => 'Kh&ocirc;ng cho ph&eacute;p &#273;&iacute;nh k&egrave;m t&agrave;i li&#7879;u v&agrave;o b&agrave;i v&#7903;',
 'item_non_autoriser_documents_joints_rubriques' => 'Kh&ocirc;ng cho ph&eacute;p &#273;&iacute;nh k&egrave;m t&agrave;i li&#7879;u trong &#273;&#7873; m&#7909;c',
-'item_non_autoriser_syndication_integrale' => '<NEW>Only send a summary',
+'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
+'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
 'item_non_bloquer_liens_syndiques' => 'Kh&#244;ng ng&#259;n ch&#7863;n c&#225;c &#273;i&#7875;m n&#7889;i k&#7871;t t&#7915; syndication',
+'item_non_compresseur' => 'D&#233;sactiver la compression', # NEW
+'item_non_config_forums_prive_global' => 'D&#233;sactiver le forum des r&#233;dacteurs', # NEW
+'item_non_config_forums_prive_objets' => 'D&#233;sactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => '&#272;&#7915;ng l&#7853;p ra c&#225;c h&#7891; s&#417; n&#224;y',
 'item_non_gerer_annuaire_site_web' => 'T&#7855;t th&#432; m&#7909;c websites',
 'item_non_gerer_statistiques' => 'Kh&#244;ng qu&#7843;n tr&#7883; c&#225;c th&#7889;ng k&#234;',
 'item_non_limiter_recherche' => 'N&#7899;i r&#7897;ng vi&#7879;c t&#236;m ki&#7871;m qua &#273;&#7871;n n&#7897;i dung c&#7911;a c&#225;c website n&#7889;i k&#7871;t',
+'item_non_messagerie_agenda' => 'D&#233;sactiver la messagerie et l&#8217;agenda', # NEW
 'item_non_publier_articles' => 'Kh&ocirc;ng &#273;&#259;ng t&#7843;i b&agrave;i tr&#432;&#7899;c ng&agrave;y &#273;&#432;&#7907;c ph&eacute;p &#273;&#259;ng.',
 'item_non_utiliser_breves' => 'Kh&ocirc;ng d&ugrave;ng tin ng&#7855;n',
 'item_non_utiliser_config_groupe_mots_cles' => 'Kh&ocirc;ng d&ugrave;ng c&#7845;u h&igrave;nh cao c&#7845;p c&#7911;a nh&oacute;m t&#7915; then ch&#7889;t',
@@ -700,7 +765,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'lien_supprimer_rubrique' => 'x&#243;a &#273;&#7873; m&#7909;c n&#224;y',
 'lien_tout_deplier' => 'M&#7903; ra t&#7845;t c&#7843;',
 'lien_tout_replier' => 'G&#7897;p t&#7845;t c&#7843; l&#7841;i',
-'lien_tout_supprimer' => '<NEW>Delete all',
+'lien_tout_supprimer' => 'Delete all', # NEW
 'lien_trier_nom' => 'X&#7871;p theo t&ecirc;n',
 'lien_trier_nombre_articles' => 'S&#7855;p th&#7913; t&#7921; theo s&#7889; b&agrave;i',
 'lien_trier_statut' => 'S&#7855;p th&#7913; t&#7921; theo t&igrave;nh tr&#7841;ng',
@@ -724,7 +789,14 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'mois_non_connu' => 'kh&ocirc;ng nh&#7853;n ra th&aacute;ng n&agrave;y &#273;&#432;&#7907;c',
 
 // O
+'onglet_contenu' => 'Contenu', # NEW
+'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
+'onglet_discuter' => 'Discuter', # NEW
+'onglet_documents' => 'Documents', # NEW
+'onglet_interactivite' => 'Interactivit&eacute;', # NEW
+'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'hi&#7879;n nay',
+'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
 'ortho_ajouter_ce_mot' => 'Th&ecirc;m t&#7915; n&agrave;y v&agrave;o t&#7921; &#273;i&#7875;n',
 'ortho_aucune_suggestion' => 'Kh&ocirc;ng c&oacute; &#273;&#7873; ngh&#7883; n&agrave;o cho t&#7915; n&agrave;y.',
 'ortho_avis_privacy' => 'Spip c&oacute; c&#417; ph&#7853;n x&eacute;t l&#7895;i ch&iacute;nh t&#7843;. Tuy nhi&ecirc;n, tr&#432;&#7899;c khi m&#7903; l&ecirc;n, xin vui l&ograve;ng &#273;&#7885;c k&#7929; ghi ch&uacute; sau:',
@@ -740,49 +812,103 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'ortho_verifier' => 'X&eacute;t l&#7895;i',
 
 // P
-'pas_de_proxy_pour' => '<NEW>If necessary, indicate for which machines or domains this proxy should not apply (for example: @exemple@)',
-'plugin_etat_developpement' => '<NEW>under development',
-'plugin_etat_experimental' => '<NEW>experimental',
-'plugin_etat_stable' => '<NEW>stable',
-'plugin_etat_test' => '<NEW>being tested',
-'plugin_impossible_activer' => '<NEW>Impossible to activate the plugin  @plugin@',
-'plugin_necessite_plugin' => '<NEW>Version @version@ or newer of the plugin @plugin@ is required.',
-'plugin_necessite_spip' => '<NEW>SPIP version @version@ or newer is required.',
-'plugins_liste' => '<NEW>Plugin list',
-'protocole_ldap' => '<NEW>Protocol version:',
+'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW
+'pas_de_proxy_pour' => 'If necessary, indicate for which machines or domains this proxy should not apply (for example: @exemple@)', # NEW
+'plugin_charge_paquet' => 'Chargement du paquet @name@', # NEW
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
+'plugin_erreur_charger' => 'erreur&nbsp;: impossible de charger @zip@', # NEW
+'plugin_erreur_droit1' => 'Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.', # NEW
+'plugin_erreur_droit2' => 'Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.', # NEW
+'plugin_erreur_zip' => 'echec pclzip&nbsp;: erreur @status@', # NEW
+'plugin_etat_developpement' => 'under development', # NEW
+'plugin_etat_experimental' => 'experimental', # NEW
+'plugin_etat_stable' => 'stable', # NEW
+'plugin_etat_test' => 'being tested', # NEW
+'plugin_impossible_activer' => 'Impossible to activate the plugin  @plugin@', # NEW
+'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:', # NEW
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
+'plugin_info_automatique2' => 'cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;', # NEW
+'plugin_info_automatique3' => 'v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.', # NEW
+'plugin_info_automatique_creer' => '&#224; cr&#233;er &#224; la racine du site.', # NEW
+'plugin_info_automatique_exemples' => 'exemples&nbsp;:', # NEW
+'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>', # NEW
+'plugin_info_automatique_lib' => 'Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.', # NEW
+'plugin_info_automatique_liste' => 'Vos listes de plugins&nbsp;:', # NEW
+'plugin_info_automatique_liste_officielle' => 'les plugins officiels', # NEW
+'plugin_info_automatique_liste_update' => 'Mettre &#224; jour les listes', # NEW
+'plugin_info_automatique_ou' => 'ou...', # NEW
+'plugin_info_automatique_select' => 'S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.', # NEW
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
+'plugin_info_telecharger' => '&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@', # NEW
+'plugin_librairies_installees' => 'Librairies install&#233;es', # NEW
+'plugin_necessite_lib' => 'Ce plugin n&#233;cessite la librairie @lib@', # NEW
+'plugin_necessite_plugin' => 'Version @version@ or newer of the plugin @plugin@ is required.', # NEW
+'plugin_necessite_spip' => 'SPIP version @version@ or newer is required.', # NEW
+'plugin_source' => 'source:&nbsp;', # NEW
+'plugin_titre_automatique' => 'Installation automatique', # NEW
+'plugin_titre_automatique_ajouter' => 'Ajouter des plugins', # NEW
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_zip_active' => 'Continuez pour l\'activer', # NEW
+'plugin_zip_adresse' => 'indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.', # NEW
+'plugin_zip_adresse_champ' => 'Adresse du plugin ou de la liste&nbsp;', # NEW
+'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>', # NEW
+'plugin_zip_installe_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.', # NEW
+'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@', # NEW
+'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.', # NEW
+'plugin_zip_telecharge' => 'Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;', # NEW
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
+'plugins_actifs' => '@count@ plugins activ&#233;s.', # NEW
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_compte' => '@count@ plugins', # NEW
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
+'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
+'plugins_liste' => 'Plugin list', # NEW
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
+'plugins_vue_hierarchie' => 'Hi&eacute;rarchie', # NEW
+'plugins_vue_liste' => 'Liste', # NEW
+'protocole_ldap' => 'Protocol version:', # NEW
 
 // R
-'repertoire_plugins' => '<NEW>Directory:',
+'repertoire_plugins' => 'Directory:', # NEW
 
 // S
-'sauvegarde_fusionner' => '<NEW>Merge the current database with the backup',
-'sauvegarde_url_origine' => '<NEW>If necessary, the URL of the source site:',
+'sans_heure' => 'sans heure', # NEW
+'sauvegarde_fusionner' => 'Merge the current database with the backup', # NEW
+'sauvegarde_fusionner_depublier' => 'D&eacute;publier les objets fusionn&eacute;s', # NEW
+'sauvegarde_url_origine' => 'If necessary, the URL of the source site:', # NEW
 'statut_admin_restreint' => '(Qu&#7843;n tr&#7883; vi&ecirc;n c&#243; gi&#7899;i h&#7841;n)',
 'syndic_choix_moderation' => 'C&aacute;c n&#7889;i k&#7871;t s&#7855;p t&#7899;i t&#7915; trang web n&agrave;y &#273;&#432;&#7907;c gi&#7843;i quy&#7871;t ra sao?',
 'syndic_choix_oublier' => 'Gi&#7843;i quy&#7871;t ra sao v&#7899;i c&aacute;c n&#7889;i k&#7871;t kh&ocirc;ng c&ograve;n n&#7857;m trong t&#7853;p h&#7891; s&#417; syndication?',
-'syndic_choix_resume' => '<NEW>Some sites offer the full text of their articles. When the full text is available, do you wish to syndicate:',
+'syndic_choix_resume' => 'Some sites offer the full text of their articles. When the full text is available, do you wish to syndicate:', # NEW
 'syndic_lien_obsolete' => 'n&#7889;i k&#7871;t kh&ocirc;ng d&ugrave;ng n&#7919;a',
 'syndic_option_miroir' => 't&#7921; &#273;&#7897;ng ng&#259;n ch&uacute;ng',
 'syndic_option_oubli' => 'xo&aacute; ch&uacute;ng (sau @mois@&nbsp;th&aacute;ng)',
-'syndic_option_resume_non' => '<NEW>the full content of the articles (HTML format)',
-'syndic_option_resume_oui' => '<NEW>just a summary (text format)',
+'syndic_option_resume_non' => 'the full content of the articles (HTML format)', # NEW
+'syndic_option_resume_oui' => 'just a summary (text format)', # NEW
 'syndic_options' => 'C&aacute;c &#273;&#7863;c t&iacute;nh syndication:',
 
 // T
 'taille_cache_image' => 'C&aacute;c h&igrave;nh &#273;&#432;&#7907;c t&iacute;nh to&aacute;n t&#7921; &#273;&#7897;ng b&#7903;i SPIP (h&igrave;nh nh&#7887;, t&#7921;a &#273;&#7873; &#273;&#432;&#7907;c &#273;&#7893;i th&agrave;nh h&igrave;nh, c&ocirc;ng th&#7913;c to&aacute;n h&#7885;c d&#432;&#7899;i d&#7841;ng TeX, v.v...) chi&#7871;m t&#7893;ng c&#7897;ng @taille@ trong ng&#259;n @dir@.',
-'taille_cache_infinie' => '<MODIF>Trang web kh&ocirc;ng c&oacute; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code>.',
-'taille_cache_maxi' => '<MODIF>SPIP s&#7869; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code> v&agrave;o kho&#7843;ng <b>@octets@</b> d&#7919; li&#7879;u.',
+'taille_cache_infinie' => 'Trang web kh&ocirc;ng c&oacute; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code>.', # MODIF
+'taille_cache_maxi' => 'SPIP s&#7869; gi&#7899;i h&#7841;n kh&#7893; c&#7911;a ng&#259;n <code>CACHE/</code> v&agrave;o kho&#7843;ng <b>@octets@</b> d&#7919; li&#7879;u.', # MODIF
 'taille_cache_octets' => 'Kh&#7893; c&#7911;a cache hi&#7879;n th&#7901;i l&agrave; @octets@.',
 'taille_cache_vide' => 'Cache tr&#7889;ng r&#7895;ng.',
 'taille_repertoire_cache' => 'Kh&#7893; hi&#7879;n th&#7901;i c&#7911;a cache',
-'text_article_propose_publication' => '<MODIF>B&agrave;i n&#7897;p &#273;&#7875; chu&#7849;n b&#7883; ph&aacute;t h&agrave;nh. Xin &#273;&#7915;ng ng&#7847;n ng&#7841;i cho &yacute; ki&#7871;n c&#7911;a b&#7841;n qua di&#7877;n &#273;&agrave;n &#273;&iacute;nh k&egrave;m theo b&agrave;i n&agrave;y (&#7903; cu&#7889;i trang).',
+'text_article_propose_publication' => 'B&agrave;i n&#7897;p &#273;&#7875; chu&#7849;n b&#7883; ph&aacute;t h&agrave;nh. Xin &#273;&#7915;ng ng&#7847;n ng&#7841;i cho &yacute; ki&#7871;n c&#7911;a b&#7841;n qua di&#7877;n &#273;&agrave;n &#273;&iacute;nh k&egrave;m theo b&agrave;i n&agrave;y (&#7903; cu&#7889;i trang).', # MODIF
+'text_article_propose_publication_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'M&#7897;t s&#7889; server LDAP kh&#244;ng cho ph&#233;p v&#224;o &#7849;n danh. Trong tr&#432;&#7901;ng h&#7907;p n&#224;y b&#7841;n ph&#7843;i d&#249;ng m&#7897;t k&#253; danh &#273;&#7847;u ti&#234;n &#273;&#7875; c&#243; th&#7875; &#273;i t&#236;m t&#242;i d&#7919; ki&#7879;n trong danh b&#7841; sau &#273;&#243;. Tuy nhi&#234;n, trong h&#7847;u h&#7871;t tr&#432;&#7901;ng h&#7907;p, nh&#7919;ng kho&#7843;ng sau &#273;&#226;y c&#243; th&#7875; &#273;&#7875; tr&#7889;ng.',
 'texte_admin_effacer_01' => 'M&#7879;nh l&#7879;nh n&agrave;y x&oacute;a <i>t&#7845;t c&#7843;</i> n&#7897;i dung c&#7911;a database, lu&ocirc;n c&#7843; login/m&#7853;t m&atilde; c&#7911;a c&aacute;c ch&#7911; b&uacute;t v&agrave; qu&#7843;n l&yacute;. Sau khi ch&#7841;y m&#7879;nh l&#7879;nh n&agrave;y xong, b&#7841;n n&ecirc;n thi&#7871;t tr&iacute; l&#7841;i SPIP &#273;&#7875; t&aacute;i l&#7853;p l&#7841;i m&#7897;t database m&#7899;i c&ugrave;ng v&#7899;i login/m&#7853;t m&atilde; c&#7911;a qu&#7843;n tr&#7883; vi&ecirc;n &#273;&#7847;u ti&ecirc;n.',
-'texte_admin_tech_01' => '<MODIF>Ch&#7885;n l&#7921;a n&agrave;y cho ph&eacute;p b&#7841;n gi&#7919; l&#7841;i n&#7897;i dung c&#7911;a database v&agrave;o trong m&#7897;t h&#7891; s&#417; &#273;&#7921;ng trong ng&#259;n @dossier@. V&agrave; c&#361;ng &#273;&#7915;ng qu&ecirc;n c&#7845;t gi&#7919; l&#7841;i l&#7841;i to&agrave;n b&#7897; ng&#259;n <i>IMG/</i>, ch&#7913;a &#273;&#7921;ng c&aacute;c h&igrave;nh &#7843;nh d&ugrave;ng trong c&aacute;c b&agrave;i v&#7903; v&agrave; &#273;&#7873; m&#7909;c.',
-'texte_admin_tech_02' => '<MODIF><b>C&#7843;nh b&aacute;o</b>: CH&#7880; C&Oacute; TH&#7874; ph&#7909;c h&#7891;i b&#7843;n d&#7921; tr&#7919; n&agrave;y trong m&#7897;t website c&oacute; c&ugrave;ng &#7845;n b&#7843;n SPIP.
+'texte_admin_effacer_stats' => 'Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.', # NEW
+'texte_admin_tech_01' => 'Ch&#7885;n l&#7921;a n&agrave;y cho ph&eacute;p b&#7841;n gi&#7919; l&#7841;i n&#7897;i dung c&#7911;a database v&agrave;o trong m&#7897;t h&#7891; s&#417; &#273;&#7921;ng trong ng&#259;n @dossier@. V&agrave; c&#361;ng &#273;&#7915;ng qu&ecirc;n c&#7845;t gi&#7919; l&#7841;i l&#7841;i to&agrave;n b&#7897; ng&#259;n <i>IMG/</i>, ch&#7913;a &#273;&#7921;ng c&aacute;c h&igrave;nh &#7843;nh d&ugrave;ng trong c&aacute;c b&agrave;i v&#7903; v&agrave; &#273;&#7873; m&#7909;c.', # MODIF
+'texte_admin_tech_02' => '<b>C&#7843;nh b&aacute;o</b>: CH&#7880; C&Oacute; TH&#7874; ph&#7909;c h&#7891;i b&#7843;n d&#7921; tr&#7919; n&agrave;y trong m&#7897;t website c&oacute; c&ugrave;ng &#7845;n b&#7843;n SPIP.
  L&#7895;i l&#7847;m th&#432;&#7901;ng hay v&#7845;p ph&#7843;i l&agrave; th&#7921;c hi&#7879;n vi&#7879;c d&#7921; tr&#7919; database tr&#432;&#7899;c khi n&acirc;ng c&#7845;p SPIP...
- &#272;&#7875; bi&#7871;t th&ecirc;m, xin &#273;&#7885;c [t&agrave;i li&#7879;u SPIP->http://www.spip.net/fr_article1489.html].',
+ &#272;&#7875; bi&#7871;t th&ecirc;m, xin &#273;&#7885;c [t&agrave;i li&#7879;u SPIP->http://www.spip.net/fr_article1489.html].', # MODIF
 'texte_admin_tech_03' => 'B&#7841;n c&oacute; th&#7875; ch&#7885;n gi&#7919; h&#7891; s&#417; trong d&#7841;ng n&eacute;n &#273;&#7875; sao ch&eacute;p, chuy&#7875;n t&#7843;i cho l&#7865;, c&#361;ng nh&#432; ti&#7871;t ki&#7879;m &#273;&#432;&#7907;c ch&#7895; trong d&#297;a.',
+'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(N&#7871;u ng&#259;n c&#7911;a b&#7841;n &#273;&#432;&#7907;c thi&#7871;t tr&#237; tr&#234;n c&#249;ng m&#225;y v&#7899;i website c&#7911;a b&#7841;n, t&#234;n n&#243; th&#432;&#7901;ng l&#224; &#38;laquo;localhost&#38;raquo;.)',
 'texte_ajout_auteur' => 'T&#225;c gi&#7843; sau &#273;&#226;y &#273;&#432;&#7907;c th&#234;m v&#224;o cho b&#224;i: ',
 'texte_annuaire_ldap_1' => 'N&#7871;u b&#7841;n v&#224;o &#273;&#432;&#7907;c m&#7897;t danh b&#7841; (LDAP), b&#7841;n c&#243; th&#7875; d&#249;ng n&#243; &#273;&#7875; nh&#7853;p v&#224;o t&#7921; &#273;&#7897;ng nh&#7919;ng ng&#432;&#7901;i s&#7917; d&#7909;ng trong SPIP.',
@@ -797,14 +923,21 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_choix_base_1' => 'Ch&#7885;n database c&#7911;a b&#7841;n:',
 'texte_choix_base_2' => 'Server SQL ch&#7913;a nhi&#7873;u database.',
 'texte_choix_base_3' => '<b>Ch&#7885;n</b> m&#7897;t trong s&#7889; d&#432;&#7899;i &#273;&#226;y thu&#7897;c v&#7873; b&#7841;n:',
-'texte_choix_table_prefix' => '<NEW>Prefix for tables:',
+'texte_choix_table_prefix' => 'Prefix for tables:', # NEW
 'texte_commande_vider_tables_indexation' => 'D&#249;ng m&#7879;nh l&#7879;nh n&#224;y &#273;&#7875; d&#7885;n s&#7841;ch b&#7843;n index d&#249;ng b&#7903;i c&#417; ph&#7853;n t&#236;m ki&#7871;m c&#7911;a SPIP. L&#224;m th&#7871; &#273;&#7875; ti&#7871;t ki&#7879;m &#273;&#432;&#7907;c m&#7897;t s&#7889; ch&#7895; tr&#7889;ng trong d&#297;a.',
 'texte_comment_lire_tableau' => 'B&agrave;i v&#7903; &#273;&#432;&#7907;c s&#7855;p h&#7841;ng theo m&#7913;c &#273;&#7897; ph&#7893; th&ocirc;ng (xem c&#7897;t tr&aacute;i). &#272;&#7875; xem m&#7913;c &#273;&#7897; ph&#7893; th&ocirc;ng (&#432;&#7899;c l&#432;&#7907;ng s&#7889; l&#7847;n v&agrave;o xem h&agrave;ng ng&agrave;y theo &#273;&agrave; hi&#7879;n t&#7841;i) v&agrave; s&#7889; l&#7847;n v&agrave;o xem c&#7911;a m&#7895;i b&agrave;i, b&#7841;n di chuy&#7875;n con chu&#7897;t l&ecirc;n tr&ecirc;n t&ecirc;n b&agrave;i.',
+'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
+'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
 'texte_compresse_ou_non' => '(c&oacute; th&#7875; trong d&#7841;ng n&eacute;n ho&#7863;c d&#7841;ng th&#432;&#7901;ng) ',
+'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
+visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
+site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
+demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ m&#243;n',
 'texte_compte_elements' => '@count@ m&#243;n',
 'texte_config_groupe_mots_cles' => 'B&#7841;n c&#243; mu&#7889;n m&#7903; &#273;&#7863;c &#273;i&#7875;m c&#7845;u h&#236;nh cao c&#7845;p c&#7911;a nh&#243;m t&#7915; then ch&#7889;t, b&#7857;ng c&#225;ch, l&#7845;y th&#237; d&#7909; nh&#432; m&#7897;t ch&#7919; &#273;&#7863;c th&#249; cho m&#7895;i nh&#243;m c&#243; th&#7875; &#273;&#432;&#7907;c ch&#7885;n, nh&#243;m quan tr&#7885;ng...? ',
-'texte_connexion_mysql' => '<MODIF>Xem l&#7841;i t&#224;i li&#7879;u cung c&#7845;p b&#7903;i m&#225;y ch&#7911;: n&#7871;u d&#249;ng SQL, m&#225;y ch&#7911; cho b&#7841;n m&#227; s&#7889; ra v&#224;o server SQL. ',
+'texte_conflit_edition_correction' => 'Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
+'texte_connexion_mysql' => 'Xem l&#7841;i t&#224;i li&#7879;u cung c&#7845;p b&#7903;i m&#225;y ch&#7911;: n&#7871;u d&#249;ng SQL, m&#225;y ch&#7911; cho b&#7841;n m&#227; s&#7889; ra v&#224;o server SQL. ', # MODIF
 'texte_contenu_article' => '(M&#244; t&#7843; ng&#7855;n g&#7885;n n&#7897;i dung c&#7911;a b&#224;i) ',
 'texte_contenu_articles' => 'D&#7921;a v&agrave;o c&#7845;u tr&uacute;c ch&#7885;n l&#7921;a cho website n&agrave;y, b&#7841;n c&oacute; th&#7875; quy&#7871;t &#273;&#7883;nh nh&#7919;ng ph&#7847;n n&agrave;o c&#7911;a b&agrave;i v&#7903; kh&ocirc;ng c&#7847;n d&ugrave;ng. Chi&#7871;u theo danh s&aacute;ch d&#432;&#7899;i &#273;&acirc;y &#273;&#7875; ch&#7885;n nh&#7919;ng ph&#7847;n n&agrave;o c&#7911;a b&agrave;i v&#7903; d&ugrave;ng &#273;&#432;&#7907;c.',
 'texte_crash_base' => 'N&#7871;u database b&#7883; h&#432;, b&#7841;n c&#243; th&#7875; t&#236;m c&#225;ch s&#7917;a ch&#7919;a t&#7921; &#273;&#7897;ng.',
@@ -819,23 +952,26 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_documents_joints_2' => 'L&#431;U &Yacute;: B&#7889; tr&iacute; hi&#7879;n nay kh&ocirc;ng ng&#259;n ng&#7915;a vi&#7879;c nh&eacute;t h&igrave;nh tr&#7921;c ti&#7871;p v&agrave;o b&agrave;i v&#7903;.',
 'texte_effacer_base' => 'X&#243;a database SPIP',
 'texte_effacer_donnees_indexation' => 'X&#243;a d&#7919; ki&#7879;n indexing',
-'texte_en_cours_validation' => '<MODIF>B&agrave;i v&#7903; v&agrave; tin ng&#7855;n sau &#273;&acirc;y &#273;&#432;&#7907;c n&#7897;p &#273;&#7875; ch&#7901; ph&aacute;t h&agrave;nh. Xin g&oacute;p &yacute; qua di&#7877;n &#273;&agrave;n &#273;&iacute;nh k&egrave;m. ',
+'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
+'texte_en_cours_validation' => 'B&agrave;i v&#7903; v&agrave; tin ng&#7855;n sau &#273;&acirc;y &#273;&#432;&#7907;c n&#7897;p &#273;&#7875; ch&#7901; ph&aacute;t h&agrave;nh. Xin g&oacute;p &yacute; qua di&#7877;n &#273;&agrave;n &#273;&iacute;nh k&egrave;m. ', # MODIF
+'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'B&#7841;n c&oacute; th&#7875; tr&igrave;nh b&agrave;y v&#259;n b&#7843;n g&#7885;n &#273;&#7865;p h&#417;n b&#7857;ng c&aacute;ch d&ugrave;ng nh&#7919;ng <b>&laquo;l&#7889;i x&#7871;p b&agrave;i t&#7855;t&raquo;</b>.',
-'texte_fichier_authent' => '<MODIF>SPIP c&oacute; n&ecirc;n l&#7853;p ra h&#7891; s&#417; &#273;&#7863;c bi&#7879;t <tt>.htpasswd</tt> v&agrave; <tt>.htpasswd-admin</tt> trong th&#432; m&#7909;c @dossier@?</b><p> Hai h&#7891; s&#417; n&agrave;y d&ugrave;ng &#273;&#7875; gi&#7899;i h&#7841;n c&aacute;c t&aacute;c gi&#7843; v&agrave; qu&#7843;n l&yacute; vi&ecirc;n ra/v&agrave;o c&aacute;c n&#417;i kh&aacute;c trong website.<p>N&#7871;u b&#7841;n ch&#432;a t&#7915;ng s&#7917; d&#7909;ng &#273;&#7863;c t&iacute;nh n&agrave;y, h&atilde;y &#273;&#7875; nguy&ecirc;n l&#7921;a ch&#7885;n n&agrave;y v&#7899;i c&aacute;c gi&aacute; tr&#7883; &#273;&#7883;nh s&#7861;n (kh&ocirc;ng l&#7853;p ra h&#7891; s&#417;). ',
+'texte_fichier_authent' => 'SPIP c&oacute; n&ecirc;n l&#7853;p ra h&#7891; s&#417; &#273;&#7863;c bi&#7879;t <tt>.htpasswd</tt> v&agrave; <tt>.htpasswd-admin</tt> trong th&#432; m&#7909;c @dossier@?</b><p> Hai h&#7891; s&#417; n&agrave;y d&ugrave;ng &#273;&#7875; gi&#7899;i h&#7841;n c&aacute;c t&aacute;c gi&#7843; v&agrave; qu&#7843;n l&yacute; vi&ecirc;n ra/v&agrave;o c&aacute;c n&#417;i kh&aacute;c trong website.<p>N&#7871;u b&#7841;n ch&#432;a t&#7915;ng s&#7917; d&#7909;ng &#273;&#7863;c t&iacute;nh n&agrave;y, h&atilde;y &#273;&#7875; nguy&ecirc;n l&#7921;a ch&#7885;n n&agrave;y v&#7899;i c&aacute;c gi&aacute; tr&#7883; &#273;&#7883;nh s&#7861;n (kh&ocirc;ng l&#7853;p ra h&#7891; s&#417;). ', # MODIF
 'texte_informations_personnelles_1' => 'H&#7879; th&#7889;ng s&#7869; cung c&#7845;p cho b&#7841;n l&#7889;i ra/v&#224;o website.',
 'texte_informations_personnelles_2' => '(Ghi ch&#250;: n&#7871;u &#273;&#226;y l&#224; t&#225;i thi&#7871;t tr&#237;, v&#224; vi&#7879;c ra/v&#224;o c&#7911;a b&#7841;n v&#7851;n b&#236;nh th&#432;&#7901;ng, b&#7841;n ti&#7871;p t&#7909;c v&#7853;y ',
 'texte_introductif_article' => '(L&#7901;i m&#7903; &#273;&#7847;u cho b&#224;i vi&#7871;t.) ',
-'texte_jeu_caractere' => '<MODIF>Ch&#7885;n l&#7921;a n&agrave;y th&iacute;ch h&#7907;p n&#7871;u website b&#7841;n d&ugrave;ng ng&ocirc;n ng&#7919; kh&aacute;c v&#7899;i m&#7851;u t&#7921; latinh (t&#7913;c "western") v&agrave; c&aacute;c ng&ocirc;n ng&#7919; c&ugrave;ng h&#7879;.
- Trong tr&#432;&#7901;ng h&#7907;p n&agrave;y, ph&#7843;i ch&#7885;n m&#7897;t b&#7897; m&atilde; kh&aacute;c. V&agrave; c&#361;ng n&ecirc;n nh&#7899; s&#7917;a &#273;&#7893;i website &#273;&#7875; th&iacute;ch &#7913;ng (<tt>#CHARSET</tt> tag).',
-'texte_jeu_caractere_2' => '<MODIF>S&#7917;a &#273;&#7893;i n&agrave;y kh&ocirc;ng c&oacute; hi&#7879;u l&#7921;c tr&#7903; v&#7873; tr&#432;&#7899;c. Do &#273;&oacute;, b&agrave;i v&#7903; &#273;&atilde; cho v&agrave;o c&oacute; th&#7875; hi&#7879;n ra kh&ocirc;ng &#273;&uacute;ng sau khi s&#7917;a b&#7843;ng m&atilde; l&#7841;i. Tuy nhi&ecirc;n, b&#7841;n v&#7851;n c&oacute; th&#7875; ch&#7885;n tr&#7903; l&#7841;i b&#7843;ng m&atilde; tr&#432;&#7899;c &#273;&oacute;. ',
-'texte_jeu_caractere_3' => '<NEW>Your site currently uses this character set:',
-'texte_jeu_caractere_4' => '<NEW>If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:',
-'texte_jeu_caractere_conversion' => '<NEW>Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.',
+'texte_jeu_caractere' => 'Ch&#7885;n l&#7921;a n&agrave;y th&iacute;ch h&#7907;p n&#7871;u website b&#7841;n d&ugrave;ng ng&ocirc;n ng&#7919; kh&aacute;c v&#7899;i m&#7851;u t&#7921; latinh (t&#7913;c "western") v&agrave; c&aacute;c ng&ocirc;n ng&#7919; c&ugrave;ng h&#7879;.
+ Trong tr&#432;&#7901;ng h&#7907;p n&agrave;y, ph&#7843;i ch&#7885;n m&#7897;t b&#7897; m&atilde; kh&aacute;c. V&agrave; c&#361;ng n&ecirc;n nh&#7899; s&#7917;a &#273;&#7893;i website &#273;&#7875; th&iacute;ch &#7913;ng (<tt>#CHARSET</tt> tag).', # MODIF
+'texte_jeu_caractere_2' => 'S&#7917;a &#273;&#7893;i n&agrave;y kh&ocirc;ng c&oacute; hi&#7879;u l&#7921;c tr&#7903; v&#7873; tr&#432;&#7899;c. Do &#273;&oacute;, b&agrave;i v&#7903; &#273;&atilde; cho v&agrave;o c&oacute; th&#7875; hi&#7879;n ra kh&ocirc;ng &#273;&uacute;ng sau khi s&#7917;a b&#7843;ng m&atilde; l&#7841;i. Tuy nhi&ecirc;n, b&#7841;n v&#7851;n c&oacute; th&#7875; ch&#7885;n tr&#7903; l&#7841;i b&#7843;ng m&atilde; tr&#432;&#7899;c &#273;&oacute;. ', # MODIF
+'texte_jeu_caractere_3' => 'Your site currently uses this character set:', # NEW
+'texte_jeu_caractere_4' => 'If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:', # NEW
+'texte_jeu_caractere_conversion' => 'Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.', # NEW
 'texte_lien_hypertexte' => '(N&#7871;u th&#432; t&iacute;n c&oacute; &#273;&#7873; c&#7853;p &#273;&#7871;n b&agrave;i &#273;&atilde; &#273;&#259;ng t&#7843;i tr&ecirc;n web, hay &#273;&#7873; c&#7853;p &#273;&#7871;n m&#7897;t trang web c&oacute; th&ecirc;m d&#7919; ki&#7879;n, xin &#273;i&#7873;n v&agrave;o &#273;&acirc;y t&#7921;a &#273;&#7873; v&agrave; &#273;&#7883;a ch&#7881;.)',
 'texte_liens_sites_syndiques' => 'Nh&#7919;ng &#273;i&#7875;m n&#7889;i t&#7915; website syndicated c&#243; th&#7875; &#273;&#432;&#7907;c ch&#7863;n tr&#432;&#7899;c; l&#7889;i b&#7889; tr&#237; sau &#273;&#226;y cho th&#7845;y c&#225;ch b&#7889; tr&#237; &#273;&#7883;nh s&#7861;n cho nh&#7919;ng website syndicated khi &#273;&#432;&#7907;c l&#7853;p ra. C&#243; th&#7875; ng&#259;n ch&#7863;n t&#7915;ng &#273;i&#7875;m n&#7889;i m&#7897;t, ho&#7863;c ch&#7863;n t&#7845;t c&#7843; c&#225;c &#273;i&#7875;m n&#7889;i &#273;&#7871;n t&#7915; b&#7845;t c&#7913; website n&#224;o.',
 'texte_login_ldap_1' => '(&#272;&#7875; tr&#7889;ng n&#7871;u mu&#7889;n ra/v&#224;o &#7849;n danh ho&#7863;c cho bi&#7871;t tr&#7885;n v&#7865;n l&#7897; tuy&#7871;n, l&#7845;y th&#237; d&#7909; &#38;laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&#38;raquo;.)',
 'texte_login_precaution' => 'C&#7843;nh b&#225;o! &#272;&#226;y l&#224; login b&#7841;n d&#249;ng &#273;&#7875; v&#224;o. D&#249;ng m&#7851;u n&#224;y c&#7849;n th&#7853;n...',
 'texte_message_edit' => 'C&#7843;nh b&aacute;o: th&#432; t&iacute;n n&agrave;y c&oacute; th&#7875; &#273;&#432;&#7907;c s&#7917;a b&#7903;i b&#7845;t c&#7913; ng&#432;&#7901;i qu&#7843;n l&yacute; n&agrave;o, v&agrave; m&#7885;i ch&#7911; b&uacute;t &#273;&#7873;u xem &#273;&#432;&#7907;c. Ch&#7881; n&ecirc;n th&ocirc;ng b&aacute;o &#273;&#7875; nh&#7845;n m&#7841;nh nh&#7919;ng vi&#7879;c quan tr&#7885;ng &#273;&#7889;i v&#7899;i website.',
+'texte_messagerie_agenda' => 'Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.', # NEW
 'texte_messages_publics' => 'Th&#432; t&iacute;n c&ocirc;ng c&#7897;ng c&#7911;a b&agrave;i:',
 'texte_mise_a_niveau_base_1' => 'B&#7841;n v&#7915;a c&#7853;p nh&#7853;t h&#7891; s&#417; SPIP. B&#226;y gi&#7901; b&#7841;n ph&#7843;i n&#226;ng c&#7845;p database c&#7911;a website.',
 'texte_modifier_article' => 'S&#7917;a b&#224;i:',
@@ -850,7 +986,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_nouveau_message' => 'Th&#432; t&iacute;n m&#7899;i',
 'texte_nouveau_mot' => 'T&#7915; then ch&#7889;t m&#7899;i',
 'texte_nouvelle_version_spip_1' => 'B&#7841;n v&#7915;a thi&#7871;t tr&#237; &#7845;n b&#7843;n m&#7899;i c&#7911;a SPIP.',
-'texte_nouvelle_version_spip_2' => '<MODIF>&#7844;n b&#7843;n m&#7899;i n&agrave;y c&#7847;n c&#7853;p nh&#7853;t
+'texte_nouvelle_version_spip_2' => '&#7844;n b&#7843;n m&#7899;i n&agrave;y c&#7847;n c&#7853;p nh&#7853;t
  k&#7929; l&#432;&#7903;ng h&#417;n b&igrave;nh th&#432;&#7901;ng.
  N&#7871;u b&#7841;n l&agrave; webmaster, h&atilde;y x&oacute;a h&#7891; s&#417;
  <tt>inc_connect.php3</tt> trong ng&#259;n <tt>ecrire</tt>
@@ -858,12 +994,12 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
  nh&#7919;ng s&#7889; li&#7879;u m&oacute;c n&#7889;i v&agrave;o database.
  <p>(TB.: n&#7871;u b&#7841;n qu&ecirc;n m&#7845;t s&#7889; li&#7879;u m&oacute;c n&#7889;i
  xem l&#7841;i h&#7891; s&#417; <tt>inc_connect.php3</tt>
- tr&#432;&#7899;c khi x&oacute;a ...)',
+ tr&#432;&#7899;c khi x&oacute;a ...)', # MODIF
 'texte_operation_echec' => 'Tr&#7903; l&#7841;i trang tr&#432;&#7899;c &#273;&#243;, ch&#7885;n database kh&#225;c ho&#7863;c l&#7853;p ra database m&#7899;i. Ki&#7875;m l&#7841;i c&#225;c d&#7919; ki&#7879;n m&#225;y ch&#7911; cung c&#7845;p.',
 'texte_plus_trois_car' => ' h&#417;n 3 m&#7851;u t&#7921;',
 'texte_plusieurs_articles' => 'T&#236;m th&#7845;y nhi&#7873;u t&#225;c gi&#7843; cho "@cherche_auteur@":',
 'texte_port_annuaire' => 'Gi&#225; tr&#7883; cho s&#7861;n th&#432;&#7901;ng ph&#249; h&#7907;p.',
-'texte_presente_plugin' => '<NEW>This page lists the available plugins on the site. Activate the plugins you require by ticking the corresponding box.',
+'texte_presente_plugin' => 'This page lists the available plugins on the site. Activate the plugins you require by ticking the corresponding box.', # NEW
 'texte_proposer_publication' => 'Khi so&#7841;n b&agrave;i xong,<br />b&#7841;n n&#7897;p v&agrave;o &#273;&#7875; ch&#7901; &#273;&#432;&#7907;c &#273;&#259;ng l&ecirc;n.',
 'texte_proxy' => 'Trong m&#7897;t s&#7889; tr&#432;&#7901;ng h&#7907;p (intranet, m&#7841;ng &#273;&#432;&#7907;c b&#7843;o v&#7879; ...), c&#7847;n thi&#7871;t ph&#7843;i d&ugrave;ng <i>proxy HTTP</i> &#273;&#7875; v&#7899;i t&#7899;i c&aacute;c website syndicated. N&#7871;u c&oacute; proxy, cho &#273;&#7883;a ch&#7881; v&agrave;o d&#432;&#7899;i &#273;&acirc;y, 
 <tt><html>http://proxy:8080</html></tt>. Th&#432;&#7901;ng th&igrave; b&#7841;n &#273;&#7875; khung n&agrave;y tr&#7889;ng.',
@@ -873,13 +1009,14 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_recapitiule_liste_documents' => 'Trang n&agrave;y t&oacute;m t&#7855;t danh s&aacute;ch c&aacute;c t&agrave;i li&#7879;u b&#7841;n &#273;&#7875; trong c&aacute;c &#273;&#7873; m&#7909;c. &#272;&#7875; tu s&#7917;a d&#7919; ki&#7879;n c&#7911;a m&#7895;i t&agrave;i li&#7879;u, theo &#273;i&#7875;m n&#7889;i &#273;&#7875; &#273;&#7871;n trang c&#7911;a &#273;&#7873; m&#7909;c &#273;&oacute;.',
 'texte_recuperer_base' => 'S&#7919;a ch&#7919;a database',
 'texte_reference_mais_redirige' => 'B&#224;i n&#7889;i k&#7871;t trong website SPIP, nh&#432;ng chuy&#7875;n h&#432;&#7899;ng qua &#273;&#7883;a ch&#7881; URL kh&#225;c.',
-'texte_referencement_automatique' => '<MODIF><b>N&#7889;i k&#7871;t website t&#7921; &#273;&#7897;ng</b> B&#7841;n c&#243; th&#7875; n&#7889;i k&#7871;t m&#7897;t website nhanh ch&#243;ng b&#7857;ng c&#225;ch cho v&#224;o d&#432;&#7899;i &#273;&#226;y &#273;&#7883;a ch&#7881; URL, hay &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; backend. SPIP s&#7869; t&#7921; &#273;&#7897;ng thu th&#7853;p l&#7845;y c&#225;c d&#7919; ki&#7879;n li&#234;n h&#7879; &#273;&#7871;n website &#273;&#243; (t&#7921;a &#273;&#7873;, m&#244; t&#7843; ...).',
+'texte_referencement_automatique' => '<b>N&#7889;i k&#7871;t website t&#7921; &#273;&#7897;ng</b> B&#7841;n c&#243; th&#7875; n&#7889;i k&#7871;t m&#7897;t website nhanh ch&#243;ng b&#7857;ng c&#225;ch cho v&#224;o d&#432;&#7899;i &#273;&#226;y &#273;&#7883;a ch&#7881; URL, hay &#273;&#7883;a ch&#7881; c&#7911;a h&#7891; s&#417; backend. SPIP s&#7869; t&#7921; &#273;&#7897;ng thu th&#7853;p l&#7845;y c&#225;c d&#7919; ki&#7879;n li&#234;n h&#7879; &#273;&#7871;n website &#273;&#243; (t&#7921;a &#273;&#7873;, m&#244; t&#7843; ...).', # MODIF
+'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Khi m&#7897;t s&#7889; h&#7887;i-&#273;&aacute;p SQL tr&#432;&#7907;t h&agrave;ng lo&#7841;t v&agrave; c&oacute; v&#7867; nh&#432; kh&ocirc;ng c&oacute; l&yacute; do g&igrave; c&#7843;, &#273;i&#7873;u &#273;&oacute; cho th&#7845;y c&oacute; th&#7875; ch&iacute;nh database l&agrave; th&#7911; ph&#7841;m. </b><p>SQL c&oacute; m&#7897;t &#273;&#7863;c &#273;i&#7875;m s&#7917;a ch&#7919;a c&aacute;c b&#7843;n c&#7911;a n&oacute; khi ch&uacute;ng b&#7883; h&#432; h&#7841;i. B&#7841;n c&oacute; th&#7875; th&#7917; d&ugrave;ng &#273;&#7863;c &#273;i&#7875;m s&#7917;a ch&#7919;a n&agrave;y, trong tr&#432;&#7901;ng h&#7907;p th&#7845;t b&#7841;i, b&#7841;n n&ecirc;n gi&#7919; l&#7841;i m&#7897;t b&#7843;n sao c&#7911;a m&agrave;n &#7843;nh &#273;&#7875; gi&uacute;p soi s&aacute;ng v&#7845;n &#273;&#7873; ... <p> N&#7871;u v&#7845;n &#273;&#7873; v&#7851;n ti&#7871;p t&#7909;c x&#7843;y ra, li&ecirc;n l&#7841;c v&#7899;i ch&#7911; nh&acirc;n c&#7911;a m&aacute;y.',
 'texte_restaurer_base' => 'Ph&#7909;c h&#7891;i n&#7897;i dung c&#7911;a kho d&#7921; tr&#7919; database',
-'texte_restaurer_sauvegarde' => '<MODIF>Ch&#7885;n l&#7921;a n&#224;y cho ph&#233;p b&#7841;n ph&#7909;c h&#7891;i m&#7897;t h&#7891; s&#417; d&#7921; tr&#7919; tr&#432;&#7899;c &#273;&#243; c&#7911;a database. &#272;&#7875; th&#7921;c hi&#7879;n &#273;i&#7873;u n&#224;y, h&#7891; s&#417; ch&#7913;a ph&#7847;n d&#7921; tr&#7919; ph&#7843;i &#273;&#432;&#7907;c n&#234;n gi&#7919; &#7903; th&#432; m&#7909;c @dossier@. C&#7849;n th&#7853;n v&#7899;i &#273;&#7863;c &#273;i&#7875;m n&#224;y: <b>B&#7845;t c&#7913; s&#7917;a &#273;&#7893;i hay th&#7845;t tho&#225;t n&#224;o x&#7843;y ra l&#224; kh&#244;ng l&#224;m ng&#432;&#7907;c l&#7841;i &#273;&#432;&#7907;c.</b>',
+'texte_restaurer_sauvegarde' => 'Ch&#7885;n l&#7921;a n&#224;y cho ph&#233;p b&#7841;n ph&#7909;c h&#7891;i m&#7897;t h&#7891; s&#417; d&#7921; tr&#7919; tr&#432;&#7899;c &#273;&#243; c&#7911;a database. &#272;&#7875; th&#7921;c hi&#7879;n &#273;i&#7873;u n&#224;y, h&#7891; s&#417; ch&#7913;a ph&#7847;n d&#7921; tr&#7919; ph&#7843;i &#273;&#432;&#7907;c n&#234;n gi&#7919; &#7903; th&#432; m&#7909;c @dossier@. C&#7849;n th&#7853;n v&#7899;i &#273;&#7863;c &#273;i&#7875;m n&#224;y: <b>B&#7845;t c&#7913; s&#7917;a &#273;&#7893;i hay th&#7845;t tho&#225;t n&#224;o x&#7843;y ra l&#224; kh&#244;ng l&#224;m ng&#432;&#7907;c l&#7841;i &#273;&#432;&#7907;c.</b>', # MODIF
 'texte_sauvegarde' => 'D&#7921; tr&#7919; n&#7897;i dung c&#7911;a database',
 'texte_sauvegarde_base' => 'D&#7921; tr&#7919; database',
-'texte_sauvegarde_compressee' => '<MODIF>D&#7921; tr&#7919; s&#7869; ch&#7913;a trong h&#7891; s&#417; kh&#244;ng n&#233;n @fichier@.',
+'texte_sauvegarde_compressee' => 'D&#7921; tr&#7919; s&#7869; ch&#7913;a trong h&#7891; s&#417; kh&#244;ng n&#233;n @fichier@.', # MODIF
 'texte_selection_langue_principale' => 'B&#7841;n ch&#7885;n m&#7897;t "ng&ocirc;n ng&#7919; ch&iacute;nh" sau &#273;&acirc;y cho website. &#272;i&#7873;u n&agrave;y kh&ocirc;ng c&oacute; ngh&#297;a l&agrave; b&#7841;n ch&#7881; c&oacute; th&#7875; d&ugrave;ng ng&ocirc;n ng&#7919; &#273;&oacute; cho c&aacute;c b&agrave;i v&#7903;, m&agrave; b&#7841;n mu&#7889;n d&ugrave;ng ng&ocirc;n ng&#7919; n&agrave;o trong b&agrave;i c&#361;ng &#273;&#432;&#7907;c. Ch&#7885;n ng&ocirc;n ng&#7919; ch&iacute;nh cho web site ch&#7881; &#273;&#7875;
 <ul>
 <li> ch&#7885;n c&aacute;ch ghi ng&agrave;y th&aacute;ng cho ph&ugrave; h&#7907;p v&#7899;i ng&ocirc;n ng&#7919; &#273;&atilde; ch&#7885;n</li>
@@ -895,7 +1032,7 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_statut_refuses' => 'b&#7883; t&#7915; ch&#7889;i',
 'texte_suppression_fichiers' => 'D&ugrave;ng m&#7879;nh l&#7879;nh n&agrave;y &#273;&#7875; x&oacute;a t&#7845;t c&#7843; h&#7891; s&#417; trong SPIP cache. L&agrave;m v&#7853;y &#273;&#7875; bu&#7897;c l&agrave;m m&#7899;i l&#7841;i m&#7885;i trang web, trong tr&#432;&#7901;ng h&#7907;p b&#7841;n v&#7915;a c&oacute; m&#7897;t s&#7889; thay &#273;&#7893;i v&#7873; &#273;&#7891; h&#7885;a hay c&#7845;u tr&uacute;c c&#7911;a website.',
 'texte_sur_titre' => '&#272;&#7847;u &#273;&#7873;',
-'texte_syndication' => '<MODIF>N&#7871;u website cho ph&#233;p, b&#7841;n c&#243; th&#7875; truy t&#236;m t&#7921; &#273;&#7897;ng danh s&#225;ch c&#225;c d&#7919; li&#7879;u m&#7899;i nh&#7845;t. &#272;&#7875; l&#224;m chuy&#7879;n n&#224;y, b&#7841;n ph&#7843;i m&#7903; &#273;&#7863;c &#273;i&#7875;m syndication l&#234;n. <blockquote><i>M&#7897;t s&#7889; m&#225;y kh&#244;ng cho ph&#233;p d&#249;ng ch&#7913;c n&#259;ng n&#224;y, trong tr&#432;&#7901;ng h&#7907;p &#273;&#243;, b&#7841;n kh&#244;ng d&#249;ng &#273;&#7863;c &#273;i&#7875;m syndication t&#7915; website c&#7911;a b&#7841;n &#273;&#432;&#7907;c.</i></blockquote>',
+'texte_syndication' => 'N&#7871;u website cho ph&#233;p, b&#7841;n c&#243; th&#7875; truy t&#236;m t&#7921; &#273;&#7897;ng danh s&#225;ch c&#225;c d&#7919; li&#7879;u m&#7899;i nh&#7845;t. &#272;&#7875; l&#224;m chuy&#7879;n n&#224;y, b&#7841;n ph&#7843;i m&#7903; &#273;&#7863;c &#273;i&#7875;m syndication l&#234;n. <blockquote><i>M&#7897;t s&#7889; m&#225;y kh&#244;ng cho ph&#233;p d&#249;ng ch&#7913;c n&#259;ng n&#224;y, trong tr&#432;&#7901;ng h&#7907;p &#273;&#243;, b&#7841;n kh&#244;ng d&#249;ng &#273;&#7863;c &#273;i&#7875;m syndication t&#7915; website c&#7911;a b&#7841;n &#273;&#432;&#7907;c.</i></blockquote>', # MODIF
 'texte_table_ok' => ': b&#7843;n n&#224;y OK.',
 'texte_tables_indexation_vides' => 'B&#7843;n indexing c&#7911;a m&#225;y tr&#7889;ng r&#7895;ng. ',
 'texte_tentative_recuperation' => 'T&#236;m c&#225;ch s&#7917;a ch&#7919;a',
@@ -907,8 +1044,10 @@ v&agrave; hi&#7875;n ra v&#7899;i nh&#7919;ng m&agrave;u kh&aacute;c nhau t&ugra
 'texte_travail_collaboratif' => 'N&#7871;u c&oacute; nhi&#7873;u ng&#432;&#7901;i c&ugrave;ng so&#7841;n/s&#7917;a &#273;&#7893;i m&#7897;t b&agrave;i, h&#7879; th&#7889;ng c&oacute; th&#7875; cho th&#7845;y nh&#7919;ng b&agrave;i &#273;ang &#273;&#432;&#7907;c &laquo;l&agrave;m vi&#7879;c&raquo; &#273;&#7875; tr&aacute;nh tr&#432;&#7901;ng h&#7907;p s&#7917;a &#273;&#7893;i c&ugrave;ng m&#7897;t l&uacute;c. 
 B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc;ng:',
 'texte_trop_resultats_auteurs' => 'Qu&#225; nhi&#7873;u k&#7871;t qu&#7843; khi t&#236;m "@cherche_auteur@"; h&#227;y duy&#7879;t l&#7841;i vi&#7879;c t&#236;m ki&#7871;m.',
+'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
+'texte_type_urls_attention' => 'Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.', # NEW
 'texte_unpack' => '&#272;ang t&#7843;i xu&#7889;ng &#7845;n b&#7843;n m&#7899;i nh&#7845;t',
-'texte_utilisation_moteur_syndiques' => '<MODIF>N&#7871;u b&#7841;n d&#249;ng c&#417; ph&#7853;n t&#236;m ki&#7871;m c&#7911;a SPIP, b&#7841;n c&#243; th&#7875; t&#236;m trong webiste v&#224; b&#224;i v&#7903; syndicated b&#7857;ng nhi&#7873;u c&#225;ch kh&#225;c nhau. <br /><img src=\'puce.gif\'>C&#225;ch &#273;&#417;n gi&#7843;n nh&#7845;t l&#224; t&#236;m trong t&#7921;a &#273;&#7873; v&#224; ph&#7847;n m&#244; t&#7843; b&#224;i. <br /><img src=\'puce.gif\'> C&#225;ch th&#7913; nh&#7845;t, m&#7841;nh h&#417;n, cho ph&#233;p SPIP t&#236;m ki&#7871;m trong v&#259;n b&#7843;n c&#7911;a website n&#7889;i k&#7871;t. N&#7871;u b&#7841;n n&#7889;i k&#7871;t m&#7897;t website, SPIP s&#7869; t&#236;m trong v&#259;n b&#7843;n c&#7911;a website &#273;&#243;. ',
+'texte_utilisation_moteur_syndiques' => 'N&#7871;u b&#7841;n d&#249;ng c&#417; ph&#7853;n t&#236;m ki&#7871;m c&#7911;a SPIP, b&#7841;n c&#243; th&#7875; t&#236;m trong webiste v&#224; b&#224;i v&#7903; syndicated b&#7857;ng nhi&#7873;u c&#225;ch kh&#225;c nhau. <br /><img src=\'puce.gif\'>C&#225;ch &#273;&#417;n gi&#7843;n nh&#7845;t l&#224; t&#236;m trong t&#7921;a &#273;&#7873; v&#224; ph&#7847;n m&#244; t&#7843; b&#224;i. <br /><img src=\'puce.gif\'> C&#225;ch th&#7913; nh&#7845;t, m&#7841;nh h&#417;n, cho ph&#233;p SPIP t&#236;m ki&#7871;m trong v&#259;n b&#7843;n c&#7911;a website n&#7889;i k&#7871;t. N&#7871;u b&#7841;n n&#7889;i k&#7871;t m&#7897;t website, SPIP s&#7869; t&#236;m trong v&#259;n b&#7843;n c&#7911;a website &#273;&#243;. ', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Ph&#432;&#417;ng ph&#225;p n&#224;y bu&#7897;c SPIP &#273;&#7871;n vi&#7871;ng th&#432;&#7901;ng xuy&#234;n nh&#7919;ng website k&#7871;t n&#7889;i; vi&#7879;c n&#224;y c&#243; th&#7875; l&#224;m gi&#7843;m hi&#7879;u su&#7845;t c&#7911;a website b&#7841;n.',
 'texte_vide' => 'Tr&#7889;ng r&#7895;ng',
 'texte_vider_cache' => 'D&#7885;n s&#7841;ch cache',
@@ -925,9 +1064,16 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'titre_cadre_interieur_rubrique' => 'Trong &#273;&#7873; m&#7909;c',
 'titre_cadre_numero_auteur' => 'S&#7888; TH&#7912; T&#7920; T&Aacute;C GI&#7842;',
 'titre_cadre_signature_obligatoire' => '<b>Danh t&aacute;nh</b> [B&#7855;t bu&#7897;c]<br />',
+'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
+'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
+'titre_config_contenu_notifications' => 'Notifications', # NEW
+'titre_config_contenu_prive' => 'Dans l&#8217;espace priv&#233;', # NEW
+'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'C&#7845;u h&igrave;nh c&#7911;a website',
+'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'C&#7845;u h&igrave;nh c&aacute;c nh&oacute;m t&#7915; then ch&#7889;t',
 'titre_configuration' => 'C&#7845;u h&igrave;nh c&#7911;a website',
+'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'T&ugrave;y ch&#7885;n: <b>K&#7871;t n&#7889;i v&agrave;o LDAP</b>',
 'titre_dernier_article_syndique' => 'Nh&#7919;ng b&agrave;i v&#7915;a &#273;&#432;&#7907;c li&ecirc;n k&#7871;t',
 'titre_documents_joints' => 'T&agrave;i li&#7879;u &#273;&iacute;nh k&egrave;m',
@@ -940,6 +1086,7 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'titre_langue_rubrique' => 'NG&Ocirc;N NG&#7918; C&#7910;A &#272;&#7872; M&#7908;C',
 'titre_langue_trad_article' => 'NG&Ocirc;N NG&#7918; V&Agrave; D&#7882;CH THU&#7852;T C&#7910;A B&Agrave;I',
 'titre_les_articles' => 'B&Agrave;I V&#7902;',
+'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
 'titre_mots_cles_dans_forum' => 'Nh&#7919;ng t&#7915; then ch&#7889;t trong di&#7877;n &#273;&agrave;n c&ocirc;ng c&#7897;ng',
 'titre_mots_tous' => 'T&#7915; then ch&#7889;t',
 'titre_naviguer_dans_le_site' => 'Xem trang web...',
@@ -971,7 +1118,10 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'titre_page_recherche' => 'K&#7871;t qu&#7843; t&igrave;m ki&#7871;m @recherche@',
 'titre_page_sites_tous' => 'Trang n&#7889;i k&#7871;t',
 'titre_page_statistiques' => 'Th&#7889;ng k&ecirc; theo t&#7915;ng &#273;&#7873; m&#7909;c',
+'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Th&#7889;ng k&ecirc; (c&aacute;c &#273;i&#7875;m n&#7889;i v&agrave;o)',
+'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
+'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
 'titre_page_statistiques_visites' => 'Th&#7889;ng k&ecirc; v&#7873; th&#259;m vi&#7871;ng',
 'titre_page_upgrade' => 'n&acirc;ng c&#7845;p SPIP',
 'titre_publication_articles_post_dates' => '&#272;&#259;ng t&#7843;i b&agrave;i v&#7903; c&oacute; &#273;&#7873; ng&agrave;y',
@@ -986,7 +1136,8 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'titre_sites_tous' => 'Trang tham kh&#7843;o',
 'titre_suivi_petition' => 'Qu&#7843;n tr&#7883; Th&#7881;nh nguy&#7879;n th&#432;',
 'titre_syndication' => 'Syndicate trang web',
-'tls_ldap' => '<NEW>Transport Layer Security :',
+'titre_type_urls' => 'Type d\'adresses URL', # NEW
+'tls_ldap' => 'Transport Layer Security :', # NEW
 'tout_dossier_upload' => 'T&#7845;t c&#7843; h&#7891; s&#417; @upload@',
 'trad_article_inexistant' => 'Kh&ocirc;ng c&oacute; b&agrave;i n&agrave;o v&#7899;i s&#7889; n&agrave;y',
 'trad_article_traduction' => 'T&#7845;t c&#7843; &#7845;n b&#7843;n c&#7911;a b&agrave;i n&agrave;y:',
@@ -999,21 +1150,26 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'upload_fichier_zip' => 'H&#7891; s&#417; ZIP',
 'upload_fichier_zip_texte' => 'H&#7891; s&#417; b&#7841;n t&iacute;nh thi&#7871;t tr&iacute; l&agrave; h&#7891; s&#417; ZIP.',
 'upload_fichier_zip_texte2' => 'H&#7891; s&#417; n&agrave;y c&oacute; th&#7875;:',
+'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio', # NEW
+'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
 'upload_limit' => 'H&#7891; s&#417; n&agrave;y qu&aacute; to cho server; kh&#7893; l&#7899;n nh&#7845;t cho ph&eacute;p <i>&#273;em l&ecirc;n</i> l&agrave; @max@.',
+'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction', # NEW
 'upload_zip_decompacter' => '&#273;&#432;&#7907;c m&#7903; ra v&agrave; h&#7891; s&#417; trong &#273;&oacute; s&#7869; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; v&agrave;o trang web. C&aacute;c h&#7891; s&#417; s&#7869; &#273;&#432;&#7907;c thi&#7871;t tr&iacute; l&agrave;:',
 'upload_zip_telquel' => 'thi&#7871;t tr&iacute; y nguy&ecirc;n, h&#7891; s&#417; ZIP;',
-'utf8_convert_attendez' => '<NEW>Wait a few seconds and then reload this page.',
-'utf8_convert_avertissement' => '<NEW>You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.',
-'utf8_convert_backup' => '<NEW>Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@.',
-'utf8_convert_erreur_deja' => '<NEW>Your site is already in @charset@, there is no point in converting.',
-'utf8_convert_erreur_orig' => '<NEW>Error: the character set @charset@ is not supported.',
-'utf8_convert_termine' => '<NEW>Finished!',
-'utf8_convert_timeout' => '<NEW><b>Important:</b> If the server  indicates <i>timeout</i>, please continue to reload the page until you receive the message &laquo;Finished!&raquo;.',
-'utf8_convert_verifier' => '<NEW>You now need to empty the site cache and then check if all is well on the public pages of the site. If you are stuck with a major problem, a backup of your original data (in SQL format) has been made in the @rep@ directory.',
-'utf8_convertir_votre_site' => '<NEW>Convert your site to utf-8',
+'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
+'utf8_convert_attendez' => 'Wait a few seconds and then reload this page.', # NEW
+'utf8_convert_avertissement' => 'You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.', # NEW
+'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@.', # NEW
+'utf8_convert_erreur_deja' => 'Your site is already in @charset@, there is no point in converting.', # NEW
+'utf8_convert_erreur_orig' => 'Error: the character set @charset@ is not supported.', # NEW
+'utf8_convert_termine' => 'Finished!', # NEW
+'utf8_convert_timeout' => '<b>Important:</b> If the server  indicates <i>timeout</i>, please continue to reload the page until you receive the message &laquo;Finished!&raquo;.', # NEW
+'utf8_convert_verifier' => 'You now need to empty the site cache and then check if all is well on the public pages of the site. If you are stuck with a major problem, a backup of your original data (in SQL format) has been made in the @rep@ directory.', # NEW
+'utf8_convertir_votre_site' => 'Convert your site to utf-8', # NEW
 
 // V
-'version' => '<NEW>Version:',
+'version' => 'Version:', # NEW
+'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.', # NEW
 'version_initiale' => '&#7844;n b&#7843;n &#273;&#7847;u ti&ecirc;n'
 );
 

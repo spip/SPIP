@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => 'Talde garrantzitsua: talde honetatik gako-hitz bat aukeratzea aholkatzen da.',
 'avis_deplacement_rubrique' => 'ADI EGON!. Atal honek (@contient_breves@)breve@scb@. Mugitzen baduzu, eragin ezazu baieztapen-kutxatila hau.',
 'avis_destinataire_obligatoire' => 'Mezu hau igorri aurretik jasotzailea zehaztu behar duzu.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'SQL lokarri-errorea',
 'avis_erreur_version_archive' => '<b>KONTUZ !
 
@@ -144,6 +145,7 @@ Ez balidatu inportazio galdera hau.
 // E
 'email' => 'posta elektronikoa',
 'email_2' => 'posta elektronikoa:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Urtekariaren helbidea',
 'entree_adresse_email' => 'Zureposta elektronikoa',
 'entree_adresse_fichier_syndication' => 'Sindikazioarako "backend"fitxeroaren helbidea.',
@@ -179,6 +181,7 @@ Ez balidatu inportazio galdera hau.
 'entree_texte_breve' => 'Berri laburraren testua',
 'entree_titre_obligatoire' => '<b>Izenburua</b> [Derrigorrezko]<br />',
 'entree_url' => 'Zure lekuaren (URL) helbidea',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Fitxategia ez dago',
 'erreur_plugin_fichier_def_absent' => 'Definizio fitxategia ez dago',
 'erreur_plugin_nom_fonction_interdit' => 'Funtzio izena debekatuta',
@@ -251,6 +254,8 @@ Ez balidatu inportazio galdera hau.
 'info_activer_forum_public' => 'Foru publikoak aktibatzeko, aukeratu moderazio erabat',
 'info_admin_gere_rubriques' => 'Pertsona horrek honako atal hauek administratzenditu:',
 'info_admin_gere_toutes_rubriques' => 'Administratzaile honek atal guztiakkudeatzen ditu.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administratzaile',
 'info_administrateur_1' => 'Administratzaile',
 'info_administrateur_2' => 'gunean (kontu handiz erabili)',
@@ -510,12 +515,12 @@ Kasu honetan, SPIP-eko hurrengo funtzinalitateak ez dute funtzionatuko.',
 'info_question_activer_compactage_js' => 'Javascript script-en trinkotzea aktibatu al nahi duzu ?',
 'info_question_activer_compresseur' => 'HTTP korrontearen konprimitzea aktibatu al nahi duzu ?',
 'info_question_gerer_statistiques' => 'Zure tokiakbisiten estatistikak kudeatzea nahi duzu?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
+'info_question_inscription_nouveaux_redacteurs' => 'Gune publikotik idazlari berrien inskripzioak onartzen dituzu ?
 Onartzen badituzu, bisitariak inprimaki automatizatu batetik harpidetu ahal izango dira eta orduan eremu pribatuan sartuko dira beren artikuluak proposatzeko.
 
 Inskribatzean, erabiltzaileek mezu elektroniko automatiko bat jasotzen dute gune pribaturako sarbide-kodeak emanez.
 
-Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarietatik : kasu honetan, inskripzio automatikoa ezinezkoa da.',
+Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarietatik : kasu honetan, inskripzio automatikoa ezinezkoa da.', # MODIF
 'info_question_mots_cles' => 'Zure gunean gako-hitzakerabili nahi dituzu?',
 'info_question_proposer_site' => 'Nork proposatu ahal ditu gune erreferentziatuak ?',
 'info_question_utilisation_moteur_recherche' => 'SPIP-ean integratutako bilatzailea erabili nahi duzu ?
@@ -524,7 +529,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_question_vignettes_referer_non' => 'Bisiten jatorrien guneen kapturak ez erakutsi',
 'info_question_vignettes_referer_oui' => 'Bisiten jatorrien guneen kapturak erakutsi',
 'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs &agrave; joindre des documents (images, sons...) &agrave; leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autoris&eacute;s pour les forums (ex: gif, jpg, png, mp3).',
-'info_question_visiteur_ajout_document_forum_format' => '<MODIF>Le cas &#233;ch&#233;ant, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).',
+'info_question_visiteur_ajout_document_forum_format' => 'Le cas &#233;ch&#233;ant, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).', # MODIF
 'info_qui_attribue_mot_cle' => 'Talde honetako hitzak hurrengoagatik esleituak izan daitzeke :',
 'info_racine_site' => 'Gunearen erroa',
 'info_recharger_page' => 'Mesedez orrialde hau berriz kargatu minutu batzuk barru.',
@@ -624,6 +629,7 @@ Ostapen zuzkitzaile batzuek mail-bidalketa desaktibatzen dute bere zerbitzarieta
 'info_total' => 'guztira :',
 'info_tous_articles_en_redaction' => 'Artikulu guztiak idazteko bidean',
 'info_tous_articles_presents' => 'Argitaratutako artikulu guztiak eremu honetan',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'guztiak :',
 'info_tous_redacteurs' => 'Idazlari guztientzako abisuak',
 'info_tout_site' => 'Gune guztia',
@@ -663,7 +669,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'install_select_langue' => 'Hizkuntza bat aukeratu eta &laquo; hurrengoa &raquo; botoian klikatu instalazio-prozedura hasteko.',
 'install_select_type_db' => 'Zehaztu datu-base mota&nbsp;:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Aterbetzaileak emandako datu-base zerbitzaria',
@@ -815,6 +821,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'page_pas_proxy' => 'Orri hau ez da proxy-tik pasa behar',
 'pas_de_proxy_pour' => 'Beharrez, zehaztu zein tresna edo eremuentzat proxy hau ez den aplikatu behar (adibidez&nbsp;:@exemple@)',
 'plugin_charge_paquet' => '@name@ paketearen kargatzea',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'errorea&nbsp;: @zip@ kargatzea ezinezkoa da',
 'plugin_erreur_droit1' => '<code>@dest@</code> direktorioan ezin da idatzi.',
 'plugin_erreur_droit2' => 'Direktorio hunen eskubideak baiezta itzazu (sortuz beharrez), edo fitxategiak FTParen bidez instala itzazu.',
@@ -825,6 +832,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugin_etat_test' => 'proban',
 'plugin_impossible_activer' => '@plugin@ plugin-a ezin da aktibatu',
 'plugin_info_automatique1' => 'Plugin-en instalazio automatikoa onartu nahi al baduzu, otoi&nbsp;:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => '<code>@rep@</code> direktorio bat sortu;',
 'plugin_info_automatique3' => 'Direktorio hunetan zerbitzariak idazteko eskubidea baduela segurta ezazu.',
 'plugin_info_automatique_creer' => 'gunearen erroan sortzekoa.',
@@ -836,6 +844,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugin_info_automatique_liste_update' => 'Zerrendak gaurkotu',
 'plugin_info_automatique_ou' => 'edo...',
 'plugin_info_automatique_select' => 'Plugin bat aukera ezazu beherago : SPIPek deskargatuko du eta <code>@rep@</code> direktorioan instalatuko du&nbsp;; plugin hau jadanik existitzen bada, gaurkotua izanen da.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => '@url@ helbidetik deskargatu beharra, eta @rep@ direktorioan instalatzekoa',
 'plugin_librairies_installees' => 'Instalatutako liburutegiak',
 'plugin_necessite_lib' => 'plugin hunek @lib@ liburutegia beharesten du.',
@@ -844,6 +854,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugin_source' => 'iturria:&nbsp;',
 'plugin_titre_automatique' => 'Instalazio automatikoa',
 'plugin_titre_automatique_ajouter' => 'Plugin batzu gehitu',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Aktibatzeko, segitu',
 'plugin_zip_adresse' => 'Hemen zehaz eazu deskargatu nahi duzun plugin  baten zip fitxategiaren helbidea, edo plugin zerrenda baten helbidea.',
 'plugin_zip_adresse_champ' => 'pluginaren edo zerrendaren helbidea&nbsp;',
@@ -852,11 +863,17 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 'plugin_zip_installe_rep_finie' => '@zip@ fitxategia deskonprimitua izan da eta @rep@ direktorioan instalatua',
 'plugin_zip_installer' => 'Orai instalatzen ahal duzu.',
 'plugin_zip_telecharge' => '@zip@ fitxategia telekargatua izan da',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ plugin aktibatuak.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plugin',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugin erabilgarriak',
 'plugins_erreur' => 'Errorea pluginetan : @plugins@',
 'plugins_liste' => 'Pluginen zerrenda',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Hierarkia',
 'plugins_vue_liste' => 'Zerrenda',
 'protocole_ldap' => 'Protokoloaren bersioa :',
@@ -951,14 +968,14 @@ Ez baduzu baliagarritasunik, aukera hau bere balio lehenetsiari utzi ahal diozu 
 'texte_jeu_caractere' => 'Aukera hau probetxugarria da zure guneak alfabeto erromatarreko (edo &laquo; mendebaldarrekoa &raquo;) alfabetodesberdinak eta bere eratorriak erakutsi behar baditu. Kasu honetan, komenigarria izango litzatekekonfigurazio lehenetsia aldatzea karaktere-joko egoki baterako ; kasu guztietan probak egiteagomendatzen dizugu irtenbide on bat aurkitzeko. Parametro hau aldatzen baduzu,ez ahaztu ondorioko gune publikoa egokitzen (#CHARSET marka).',
 'texte_jeu_caractere_2' => 'Konfigurazio honek ez du atzeraeraginezko efekturik. Beraz,dagoeneko sartutako testuak gaizki bistaratu ahal dira konfigurazioaren aldaketa batenondorioz. Kasu guztietan, kalteri gabe aurreko konfiguraziora itzuli ahalizango zara.',
 'texte_jeu_caractere_3' => 'Zure gunea karaktere-joko huntan instalatua da&nbsp;:',
-'texte_jeu_caractere_4' => '<NEW>Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
-'texte_jeu_caractere_conversion' => '<NEW>Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
+'texte_jeu_caractere_4' => 'Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:', # NEW
+'texte_jeu_caractere_conversion' => 'Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => 'Zure mezua Web-gunean argitaratutakoartikulu bati baldin badagokio, edo informazio gehiago dituen orrialde bati, jarri orainorriaren izenburua eta bere URL helbidea)',
-'texte_liens_sites_syndiques' => '<MODIF>sindikatutakoguneetako estekak a priori blokeatu ahal dira ; azpiko konfigurazioak sindikatutakoguneen konfigurazio lehenetsia adierazten du bere sorrera ondoren. Hala ere, gero estekabakoitza banan-banan desblokeatzea posible da, edo lekuz leku, gune batetik edo bestetik datozenestekak blokeatzeko aukera izatea.',
-'texte_login_ldap_1' => '<MODIF>(Hutsik laga sarbide anonimo baterako, edo bide osoan sartu, adibidez «uid=dupont, ou=users, dc=mon-domaine, dc=com ».)',
+'texte_liens_sites_syndiques' => 'sindikatutakoguneetako estekak a priori blokeatu ahal dira ; azpiko konfigurazioak sindikatutakoguneen konfigurazio lehenetsia adierazten du bere sorrera ondoren. Hala ere, gero estekabakoitza banan-banan desblokeatzea posible da, edo lekuz leku, gune batetik edo bestetik datozenestekak blokeatzeko aukera izatea.', # MODIF
+'texte_login_ldap_1' => '(Hutsik laga sarbide anonimo baterako, edo bide osoan sartu, adibidez «uid=dupont, ou=users, dc=mon-domaine, dc=com ».)', # MODIF
 'texte_login_precaution' => 'Kontuz ! Hau da orain konektatuta zaudenarekiko login-a. Inprimaki hau kontuz erabili...',
 'texte_message_edit' => 'Adi Egon: tokiarenadministratzaileek mezu hau alda dezakete, eta erredaktore guztiek ikus dezakete.Iragarkiak erabili bakar bakarrik tokiaren bizitzaren gertakari garrantzitsuakiragartzeko.',
-'texte_messagerie_agenda' => '<NEW>Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.',
+'texte_messagerie_agenda' => 'Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.', # NEW
 'texte_messages_publics' => 'Artikuluaren mezu publikoak',
 'texte_mise_a_niveau_base_1' => 'SPIP-eko artxiboak berritu egin dituzu eta oraintokiaren data basea berritu egin behar duzu.',
 'texte_modifier_article' => 'Artikuluaaldatu:',
@@ -981,7 +998,7 @@ beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 'texte_plus_trois_car' => '3 karakter baino gehiago',
 'texte_plusieurs_articles' => '"@cherche_auteur@" irizpiderako autore bat bainogehiago aurkitu egin dira:',
 'texte_port_annuaire' => '(Besteak adierazi ezean,adierazitako balioa oro har zuzena da.)',
-'texte_presente_plugin' => '<NEW>Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
+'texte_presente_plugin' => 'Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.', # NEW
 'texte_proposer_publication' => 'Zure artikulua bukatuta egongo denean, zure argitarapena proposa dezakezu',
 'texte_proxy' => 'Kasu batzuetan (Intranet, babestutako sareak...), beharrezkoa izan daiteke proxy HTTP baterabiltzea elkartutako tokietara heltzeko. 
 Horrela baldin bada, jarraian ipini berehelbidea, http://proxy:8080 erapean. 
@@ -994,7 +1011,7 @@ Orokorrean, aukera hau hutsik geratuko da.',
 'texte_reference_mais_redirige' => 'Zure tokianerreferentziatutako artikulua eta beste URL batengana berzuzenduta.',
 'texte_referencement_automatique' => '<b>Leku bat automatikoki erreferentzia egitea</b>
 Leku baten URL-a edo lekuaren "backend" artxiboaren helbidea, SPIP automatikoki argibideak (izenburua, azalpena....) berreskuratuko ditu.',
-'texte_referencement_automatique_verifier' => '<NEW>Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.',
+'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => 'SQL eskaera batzuk sistematikoki huts egiten dutenean eta badirudi ez dagoelaarrazoirik,posible da datu basea bera huts egiten ari dela. SQL-k gaitasun bat daukabere taulak konpontzeko istripu baten erruz hondatuak izan direnean. 
 Hemenkonponketa hau egiten saia zaitezke; huts eginez gero, gorde emaitzaren kopia bat,posible baita huts egitearen aztarnak izatea... 
 Arazoa berriro gertatzen baldin bada, zureostatu-sariaren hornitzailearekin kontaktuan jarri.',
@@ -1024,8 +1041,8 @@ Horretarako, bilketa aktibatu behar duzu. Ostapen zuzkitzaile batzuk ez dute fun
 'texte_travail_article' => '@nom_auteur_modif@ artikulu hau berridatzi egin duduela@date_diff@ minutu.',
 'texte_travail_collaboratif' => 'Sarritan erredaktore batbaino gehiago artikulu berberan lan egiten dute, sistemak duela gutxi "irekiak" izandiren artikuluak erakutsi ahal du, aldi bereko aldaketak saihesteko. Aukera hau,kontrakoa egin ezean, desaktibatuta dago ezorduko abisu mezuak saihesteko.',
 'texte_trop_resultats_auteurs' => '"@cherche_auteur@" bilaketarako emaitza gehiegi.Irizpideak zehaztu.',
-'texte_type_urls' => '<NEW>Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.',
-'texte_type_urls_attention' => '<NEW>Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.',
+'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
+'texte_type_urls_attention' => 'Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.', # NEW
 'texte_unpack' => 'Azken bertsiotik telekargatua.',
 'texte_utilisation_moteur_syndiques' => 'SPIP-en barneratutako bilaketa motorra erabiltzen duzunean, 
 bilaketak tokietan eta sindikatutako artikuluetan bi era desberdinetan egin ditzakezu
@@ -1048,16 +1065,16 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_cadre_interieur_rubrique' => 'Atalaren barnera',
 'titre_cadre_numero_auteur' => 'IDAZLEA',
 'titre_cadre_signature_obligatoire' => 'Izenpetzea [Derrigorrezkoa]',
-'titre_compacter_script_css' => '<NEW>Compactage des scripts et CSS',
-'titre_compresser_flux_http' => '<NEW>Compression du flux HTTP',
-'titre_config_contenu_notifications' => '<NEW>Notifications',
-'titre_config_contenu_prive' => '<NEW>Dans l&#8217;espace priv&#233;',
-'titre_config_contenu_public' => '<NEW>Sur le site public',
+'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
+'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
+'titre_config_contenu_notifications' => 'Notifications', # NEW
+'titre_config_contenu_prive' => 'Dans l&#8217;espace priv&#233;', # NEW
+'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Tokiaren konfigurazioa',
-'titre_config_forums_prive' => '<NEW>Forums de l&#8217;espace priv&#233;',
+'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Gako-hitzen taldeen konfigurazioa',
 'titre_configuration' => 'Tokiarenkonfigurazioa',
-'titre_conflit_edition' => '<NEW>Conflit lors de l\'&#233;dition',
+'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Aukerak: zure LDAP konexioa',
 'titre_dernier_article_syndique' => 'Azken artikulu elkartuak',
 'titre_documents_joints' => 'Erantsitako dokumentuak',
@@ -1104,8 +1121,8 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_page_statistiques' => 'Atalez atal estatistikak',
 'titre_page_statistiques_messages_forum' => 'Foroko mezuak',
 'titre_page_statistiques_referers' => 'Estatistikak (sartu direnloturak)',
-'titre_page_statistiques_signatures_jour' => '<NEW>Nombre de signatures par jour',
-'titre_page_statistiques_signatures_mois' => '<NEW>Nombre de signatures par mois',
+'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
+'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
 'titre_page_statistiques_visites' => 'Bisiten estatistikak',
 'titre_page_upgrade' => 'SPIPen gaurkotzea',
 'titre_publication_articles_post_dates' => 'Geroko datarekinartikuluen argitarapena',
@@ -1120,7 +1137,7 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'titre_sites_tous' => 'Erreferentziatutako tokiak',
 'titre_suivi_petition' => 'Eskaerenkudeaketa',
 'titre_syndication' => 'Tokien elkarpena',
-'titre_type_urls' => '<NEW>Type d\'adresses URL',
+'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Karpeta osoa @upload@',
 'trad_article_inexistant' => 'Zenbaki horrekin ez dago artikulurik',
@@ -1134,21 +1151,21 @@ Toki bat erreferentziatzen baldin baduzu, orduan SPIP-ek tokiaren edukiaren barr
 'upload_fichier_zip' => 'ZIP fitxategia',
 'upload_fichier_zip_texte' => 'Instalatzea proposatzen den fitxategia Zip fitxategi bat da.',
 'upload_fichier_zip_texte2' => 'Fitxategi hau izan ahal da:',
-'upload_info_mode_document' => '<NEW>D&#233;poser cette image dans le portfolio',
-'upload_info_mode_image' => '<NEW>Retirer cette image du portfolio',
+'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio', # NEW
+'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
 'upload_limit' => 'Fitxategi hauhandiegia da zerbitzarirako; baimendutako gehienezko tamainia upload-ean@max@-koa da.',
-'upload_zip_conserver' => '<NEW>Conserver l&#8217;archive apr&#232;s extraction',
+'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction', # NEW
 'upload_zip_decompacter' => 'deskonprimituta eta gunean instalatutadaukan elementu bakoitza. Gunean instalatu egingo diren fitxategiak dira:',
 'upload_zip_telquel' => 'Besterik gabe instalatuta, Zip fitxategi bezala;',
-'upload_zip_titrer' => '<NEW>Titrer selon le nom des fichiers',
-'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
-'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
-'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.',
-'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
-'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
-'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
-'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
-'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
+'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
+'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
+'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.', # NEW
+'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW
+'utf8_convert_erreur_deja' => 'Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...', # NEW
+'utf8_convert_erreur_orig' => 'Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.', # NEW
+'utf8_convert_termine' => 'C\'est termin&eacute;&nbsp;!', # NEW
+'utf8_convert_timeout' => '<b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.', # NEW
+'utf8_convert_verifier' => 'Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.', # NEW
 'utf8_convertir_votre_site' => 'Zure gunean utf-8-era konbertitu',
 
 // V

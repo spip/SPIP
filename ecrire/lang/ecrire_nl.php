@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Belangrijke groep:</b> het is erg aan te bevelen een trefwoord uit deze groep te kiezen.',
 'avis_deplacement_rubrique' => 'Opgelet! Deze rubiek bevat @contient_breves@ br&egrave;ve@scb@: als je haar verplaatst, gelieve dit te bevestigen door hier het vakje aan te vinken.',
 'avis_destinataire_obligatoire' => 'Je dient een bestemmeling op te geven vooraleer dit bericht te verzenden.',
+'avis_doublon_mot_cle' => 'Er bestaat al een sleutelwoord met dat titel. Wilt U echt dit sleutelwoord op te slaan ?',
 'avis_erreur_connexion_mysql' => 'Verbinding met de SQL connectie mislukt',
 'avis_erreur_version_archive' => '<b>Opgelet! Het bestand @archive@ komt overeen met een andere
     SPIP-versie dan deze die is ge&iuml;nstalleerd.</b> Dit kan voor
@@ -150,6 +151,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
+'en_savoir_plus' => 'Meer weten hierover',
 'entree_adresse_annuaire' => 'Plaats van het adresboek',
 'entree_adresse_email' => 'Uw e-mail adres',
 'entree_adresse_fichier_syndication' => 'Adres van het bestand voor syndicatie&nbsp;:',
@@ -186,6 +188,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Tekst van het bericht',
 'entree_titre_obligatoire' => '<b>Titel</b> [verplicht]<br />',
 'entree_url' => 'Je website-adres (URL)',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
 'erreur_plugin_fichier_absent' => 'Bestand ontbreekt',
 'erreur_plugin_fichier_def_absent' => 'Definitiebestand ontbreekt',
 'erreur_plugin_nom_fonction_interdit' => 'Functienaam verboden',
@@ -260,6 +263,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  voor het modereren te kiezen :</i>',
 'info_admin_gere_rubriques' => 'Deze auteur beheert de volgende rubrieken :',
 'info_admin_gere_toutes_rubriques' => 'Deze auteur beheert<b>alle rubrieken</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Beheerder',
 'info_administrateur_1' => 'Beheerder',
 'info_administrateur_2' => 'van de website (<i>voorzichtig gebruiken</i>)',
@@ -657,6 +662,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_total' => 'totaal :',
 'info_tous_articles_en_redaction' => 'Alle artikels in redactie',
 'info_tous_articles_presents' => 'Alle gepubliceerde artikels van deze rubriek',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'alle :',
 'info_tous_redacteurs' => 'Berichten voor alle redacteurs',
 'info_tout_site' => 'Volledige site',
@@ -697,7 +703,7 @@ een kleur geeft hun status aan&nbsp;:',
 'install_select_langue' => 'Kies een taal en klik vervolgens op de knop  &laquo;volgende&raquo; om de installatie te beginnen.',
 'install_select_type_db' => 'Het basissoort gegevens aangeven:',
 'install_select_type_mysql' => 'MySQL',
-'install_select_type_pg' => 'PostgreSQL',
+'install_select_type_pg' => 'PostgreSQL', # NEW
 'install_select_type_sqlite2' => 'SQLite 2',
 'install_select_type_sqlite3' => 'SQLite 3',
 'install_serveur_hebergeur' => 'Basisserver van gegevens die door de leverancier wordt toegekend',
@@ -849,6 +855,7 @@ een kleur geeft hun status aan&nbsp;:',
 'page_pas_proxy' => 'Deze bladzijde moet niet via proxy gaan',
 'pas_de_proxy_pour' => 'Desnoods geeft de machines of gebieden aan waarvoor dit proxy niet moet van toepassing zijn (bijvoorbeeld&nbsp;: @exemple@)',
 'plugin_charge_paquet' => 'Lading van het pak @name@',
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
 'plugin_erreur_charger' => 'fout&nbsp;: onmogelijk om @zip@ te laden',
 'plugin_erreur_droit1' => 'De lijst <code>@dest@</code> is niet toegankelijk in schrift.',
 'plugin_erreur_droit2' => 'Gelieve de rechten op deze lijst (en het eventueel te cre&euml;ren) controleren, of de bestanden door FTP plaatsen.',
@@ -859,6 +866,7 @@ een kleur geeft hun status aan&nbsp;:',
 'plugin_etat_test' => 'in test',
 'plugin_impossible_activer' => 'Onmogelijk om plugin @plugin@ te activeren',
 'plugin_info_automatique1' => 'Als u tot de automatische installatie van plugins wilt machtiging verlenen, zal willen&nbsp;:',
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
 'plugin_info_automatique2' => 'een lijst <code>@rep@</code> cre&euml;ren&nbsp;;',
 'plugin_info_automatique3' => 'controleren dat de server wordt gemachtigd om in deze lijst te schrijven.',
 'plugin_info_automatique_creer' => 'om aan de wortel van de plaats te cre&euml;ren.',
@@ -870,6 +878,8 @@ een kleur geeft hun status aan&nbsp;:',
 'plugin_info_automatique_liste_update' => 'De lijsten bijwerken',
 'plugin_info_automatique_ou' => 'om...',
 'plugin_info_automatique_select' => 'Selecteert hieronder een plugin&nbsp;: SPIP zal het downloaden en zal in de lijst <code>@rep@</code>&nbsp; het plaatsen; als dit plugin reeds bestaat, zal hij bijgewerkt worden.',
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
 'plugin_info_telecharger' => 'om sinds @url@ te downloaden en om te plaatsen in @rep@',
 'plugin_librairies_installees' => 'Geplaatste boekhandels',
 'plugin_necessite_lib' => 'Dit plugin vereist de boekhandel @lib@',
@@ -878,6 +888,7 @@ een kleur geeft hun status aan&nbsp;:',
 'plugin_source' => 'oorsprong:&nbsp;',
 'plugin_titre_automatique' => 'Automatische installatie',
 'plugin_titre_automatique_ajouter' => 'Een plugins toevoegen',
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
 'plugin_zip_active' => 'Gaat door om het te activeren',
 'plugin_zip_adresse' => 'geeft hieronder het adres van een bestand zip van te downloaden plugin, of nog het adres van een lijst van plugins aan.',
 'plugin_zip_adresse_champ' => 'Adres van plugin of de lijst&nbsp;',
@@ -886,11 +897,17 @@ een kleur geeft hun status aan&nbsp;:',
 'plugin_zip_installe_rep_finie' => 'Het bestand @zip@ is unzip en werd in de lijst @rep@ geplaatst',
 'plugin_zip_installer' => 'U kunt nu het plaatsen.',
 'plugin_zip_telecharge' => 'Het bestand @zip@ werd geladen',
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
 'plugins_actifs' => '@count@ plugins activeren.',
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
 'plugins_compte' => '@count@ plugins',
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
 'plugins_disponibles' => '@count@ plugins beschikbaar.',
 'plugins_erreur' => 'De fout in plugins: @plugins@',
 'plugins_liste' => 'Lijst van plugins',
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
 'plugins_vue_hierarchie' => 'Hi&euml;rarchie',
 'plugins_vue_liste' => 'Lijst',
 'protocole_ldap' => 'De versie van het protocol :',

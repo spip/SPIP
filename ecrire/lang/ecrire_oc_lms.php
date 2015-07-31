@@ -8,25 +8,29 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
+'activer_plugin' => 'Activer le plugin', # NEW
+'affichage' => 'Affichage', # NEW
 'aide_non_disponible' => 'Quela part de l\'ajuda en linha es pas enquera disponibla per questa lenga.',
+'auteur' => 'Auteur&nbsp;:', # NEW
 'avis_acces_interdit' => 'Acc&egrave;s pro&iuml;bit.',
 'avis_article_modifie' => 'Atencion, @nom_auteur_modif@ a trabalhat sus aquel article qu&ograve; fai @date_diff@ minutas',
 'avis_aucun_resultat' => 'Brisa de resultat.',
 'avis_chemin_invalide_1' => 'Lo chamin qu\'avetz chausit',
 'avis_chemin_invalide_2' => 'sembla pas valid. Volhatz tornar vers la pagina anteriora per verificar las informacions fornidas.',
-'avis_connexion_echec_1' => '<MODIF>La connexion au servidor SQL a frolhat.',
+'avis_connexion_echec_1' => 'La connexion au servidor SQL a frolhat.', # MODIF
 'avis_connexion_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'avetz fornidas.',
-'avis_connexion_echec_3' => '<MODIF><b>N.B.</b> Sus ben daus servidors, devetz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa SQL avans de la poder utilizar. Se vos podetz pas connectar, verificatz qu\'ajatz be realizat queu procediment.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Sus ben daus servidors, devetz <b>demandar</b> qu\'activen v&ograve;stre acc&egrave;s a la basa SQL avans de la poder utilizar. Se vos podetz pas connectar, verificatz qu\'ajatz be realizat queu procediment.', # MODIF
 'avis_connexion_ldap_echec_1' => 'La connexion au servidor LDAP a frolhat.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pagina anteriora, e verificatz las informacions qu\'avetz fornidas. ',
 'avis_connexion_ldap_echec_3' => 'Alternativament, utilizetz pas lo sup&ograve;rt LDAP per importar daus utilizaires.',
 'avis_conseil_selection_mot_cle' => '<b>Grop important:</b> s\'aconselha f&ograve;rt de seleccionar un mot clau dins queu grop.',
 'avis_deplacement_rubrique' => 'Atention! Quela rubrica conten @contient_breves@ brevas@scb@: se la despla&ccedil;atz, voudretz be oschar quela casa de confirmacion.',
 'avis_destinataire_obligatoire' => 'Devetz indicar un destinatari avans de mandar queu messatge.',
+'avis_doublon_mot_cle' => 'Un mot existe deja avec ce titre. &Ecirc;tes vous s&ucirc;r de vouloir cr&eacute;er le m&ecirc;meme ?', # NEW
 'avis_erreur_connexion_mysql' => 'Error de connexion SQL',
-'avis_erreur_version_archive' => '<MODIF><b>Atencion! Lo fichier @archive@ correspond emb una autra version d\'SPIP que la qu\'avetz installada.</b> Anatz vers de las dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments divers dau sit, etc. Validetz pas quela demanda d\'importacion.<p> Per mai d\'informacions, vesetz
+'avis_erreur_version_archive' => '<b>Atencion! Lo fichier @archive@ correspond emb una autra version d\'SPIP que la qu\'avetz installada.</b> Anatz vers de las dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments divers dau sit, etc. Validetz pas quela demanda d\'importacion.<p> Per mai d\'informacions, vesetz
 <a href="@spipnet@">
-la documentacion d\'SPIP</a>.',
+la documentacion d\'SPIP</a>.', # MODIF
 'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas pogut legir los noms de las basas de donadas installadas.',
 'avis_lecture_noms_bases_2' => 'Si&aacute; brisa de basa es pas disponibla, si&aacute; la foncion que permet d\'entierar las basas es estada desactivada per de las rasons de seguretat (quo es lo cas chas mai d\'un auberjador).',
@@ -34,9 +38,10 @@ la documentacion d\'SPIP</a>.',
 'avis_non_acces_message' => 'Podetz pas accedir a queu messatge.',
 'avis_non_acces_page' => 'Podetz pas accedir a quela pagina.',
 'avis_operation_echec' => 'L\'operacion a frolhat.',
+'avis_operation_impossible' => 'Op&eacute;ration impossible', # NEW
 'avis_probleme_archive' => 'Problema de lectura dau fichier @archive@',
 'avis_site_introuvable' => 'Sit introbable',
-'avis_site_syndique_probleme' => '<MODIF>Atencion: la sindicacion de queu sit a encontrat un problema; lo sistema es doncas interromput tempor&agrave;riament. Verificatz l\'adrei&ccedil;a dau fichier de sindicacion de queu sit (<b>@url_syndic@</b>), e tornatz assajar de recuperar las informacions.',
+'avis_site_syndique_probleme' => 'Atencion: la sindicacion de queu sit a encontrat un problema; lo sistema es doncas interromput tempor&agrave;riament. Verificatz l\'adrei&ccedil;a dau fichier de sindicacion de queu sit (<b>@url_syndic@</b>), e tornatz assajar de recuperar las informacions.', # MODIF
 'avis_sites_probleme_syndication' => 'Quilhs sits an encontrat un problema de sindicacion',
 'avis_sites_syndiques_probleme' => 'Quilhs sits sindicats an pausat un problema',
 'avis_suppression_base' => 'ATENCION, suprimir las donadas es irreversible',
@@ -47,6 +52,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_ajouter' => 'Apondre',
 'bouton_ajouter_participant' => 'APONDRE UN PARTICIPANT:',
 'bouton_annonce' => 'ANONCI',
+'bouton_annuler' => 'Annuler', # NEW
 'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 'bouton_checkbox_indiquer_site' => 'indicar obligatoriament un sit web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los administrators dau sit',
@@ -55,7 +61,10 @@ la documentacion d\'SPIP</a>.',
 'bouton_checkbox_signature_unique_email' => 'Nonm&agrave;s una signatura per adrei&ccedil;a e-mail',
 'bouton_checkbox_signature_unique_site' => 'Nonm&agrave;s una signatura per sit web',
 'bouton_demande_publication' => 'Demandar la publicacion de queste article',
+'bouton_desactive_tout' => 'Tout d&eacute;sactiver', # NEW
+'bouton_desinstaller' => 'D&eacute;sinstaller', # NEW
 'bouton_effacer_index' => 'Esfa&ccedil;ar los index',
+'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Esfa&ccedil;ar tot',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
@@ -108,6 +117,23 @@ la documentacion d\'SPIP</a>.',
 'cache_mode_non_compresse' => 'Los fichiers de l\'escondedor son registrats en m&ograve;de non comprimit.',
 'cache_modifiable_webmestre' => 'Lo webmestre dau sit p&ograve;t modificar questes parametres.',
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo podetz sincronizar emb l\'actualitat dau sit.',
+'config_activer_champs' => 'Activer les champs suivants', # NEW
+'config_choix_base_sup' => 'indiquer une base sur ce serveur', # NEW
+'config_erreur_base_sup' => 'SPIP n\'a pas acc&egrave;s &agrave; la liste des bases accessibles', # NEW
+'config_info_base_sup' => 'Si vous avez d\'autres bases de donn&eacute;es &agrave; interroger &agrave; travers SPIP, avec son serveur SQL ou avec un autre, le formulaire ci-dessous, vous permet de les d&eacute;clarer. Si vous laissez certains champs vides, les identifiants de connexion &agrave; la base principale seront utilis&eacute;s.', # NEW
+'config_info_base_sup_disponibles' => 'Bases suppl&eacute;mentaires d&eacute;j&agrave; interrogeables:', # NEW
+'config_info_enregistree' => 'La nouvelle configuration a &eacute;t&eacute; enregistr&eacute;e', # NEW
+'config_info_logos' => 'Chaque &eacute;l&eacute;ment du site peut avoir un logo, ainsi qu\'un &laquo;&nbsp;logo de survol&nbsp;&raquo;', # NEW
+'config_info_logos_utiliser' => 'Utiliser les logos', # NEW
+'config_info_logos_utiliser_non' => 'Ne pas utiliser les logos', # NEW
+'config_info_logos_utiliser_survol' => 'Utiliser les logos de survol', # NEW
+'config_info_logos_utiliser_survol_non' => 'Ne pas utiliser les logos de survol', # NEW
+'config_info_redirection' => 'En activant cette option, vous pourrez cr&eacute;er des articles virtuels, simples r&eacute;f&eacute;rences d\'articles publi&eacute;s sur d\'autres sites ou hors de SPIP.', # NEW
+'config_redirection' => 'Articles virtuels', # NEW
+'config_titre_base_sup' => 'D&eacute;claration d\'une base suppl&eacute;mentaire', # NEW
+'config_titre_base_sup_choix' => 'Choisissez une base suppl&eacute;mentaire', # NEW
+'connexion_ldap' => 'Connexion :', # NEW
+'copier_en_local' => 'Copier en local', # NEW
 
 // D
 'date_mot_heures' => 'oras',
@@ -122,6 +148,7 @@ la documentacion d\'SPIP</a>.',
 // E
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
+'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adrei&ccedil;a de l\'annuari',
 'entree_adresse_email' => 'V&ograve;stra adrei&ccedil;a e-mail',
 'entree_adresse_fichier_syndication' => 'Adrei&ccedil;a dau fichier "backend" per la sindicacion:',
@@ -159,11 +186,23 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'entree_texte_breve' => 'Text de la breva',
 'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adrei&ccedil;a (URL) de v&ograve;stre sit',
+'erreur_plugin_desinstalation_echouee' => 'La d&eacute;sinstallation du plugin a echou&eacute;e. Vous pouvez n&eacute;anmoins le desactiver.', # NEW
+'erreur_plugin_fichier_absent' => 'Fichier absent', # NEW
+'erreur_plugin_fichier_def_absent' => 'Fichier de d&eacute;finition absent', # NEW
+'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit', # NEW
+'erreur_plugin_nom_manquant' => 'Nom du plugin manquant', # NEW
+'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non d&eacute;fini', # NEW
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de d&eacute;finition', # NEW
+'erreur_plugin_version_manquant' => 'Version du plugin manquante', # NEW
+
+// F
+'forum_info_original' => 'original', # NEW
 
 // I
 'ical_info1' => 'Quela pagina m&ograve;stra daus met&ograve;des diferents per restar en contacte emb la vida de queu sit.',
-'ical_info2' => '<MODIF>Per t&eacute;ner mai d\'informacions subre quelas tecnicas, esitetz pas de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.',
+'ical_info2' => 'Per t&eacute;ner mai d\'informacions subre quelas tecnicas, esitetz pas de consultar <a href="@spipnet@">la documentacion d\'SPIP</a>.', # MODIF
 'ical_info_calendrier' => 'I a dos chalendiers a la v&ograve;stra disposicion. Lo primier es un plan dau sit qu\'an&oacute;ncia tots los articles publicats. Lo segond conten los anoncis editoriaus en mai de v&ograve;stres darriers messatges privats: vos es reservat gr&agrave;cias a una clau personala, que la podetz modificar en tot moment en renovant v&ograve;stre mot de santa Clara. ',
+'ical_lien_rss_breves' => 'Syndication des br&egrave;ves du site', # NEW
 'ical_methode_http' => 'Telecharjament',
 'ical_methode_webcal' => 'Sincronizacion (webcal://)',
 'ical_texte_js' => 'Los articles publicats en queu sit se p&ograve;den afichar aisat, dins tots los sits v&ograve;stres, en far servir una linha javascript. ',
@@ -174,6 +213,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'ical_titre_mailing' => 'Lista de corrier',
 'ical_titre_rss' => 'Fichiers &laquo;backend&raquo;',
 'icone_activer_cookie' => 'Activar lo cookie de correspond&eacute;ncia',
+'icone_admin_plugin' => 'Gestion des plugins', # NEW
 'icone_afficher_auteurs' => 'Afichar los autors',
 'icone_afficher_visiteurs' => 'Afichar los vesitaires',
 'icone_arret_discussion' => 'Quitar quela discussion',
@@ -182,6 +222,9 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_creation_mots_cles' => 'Crear un mot clau nu&ograve;u',
 'icone_creer_auteur' => 'Crear un autor nu&ograve;u e l\'associar a quel article',
 'icone_creer_mot_cle' => 'Crear un mot clau nu&ograve;u e lo liar a quel article',
+'icone_creer_mot_cle_breve' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cette br&egrave;ve', # NEW
+'icone_creer_mot_cle_rubrique' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cette rubrique', # NEW
+'icone_creer_mot_cle_site' => 'Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; ce site', # NEW
 'icone_creer_rubrique_2' => 'Crear una rubrica nu&ograve;va',
 'icone_ecrire_nouvel_article' => 'Las brevas contengudas dins quela rubrica',
 'icone_envoyer_message' => 'Mandar queu messatge',
@@ -190,12 +233,14 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'icone_modifier_article' => 'Modificar quel article',
 'icone_modifier_breve' => 'Modificar quela breva',
 'icone_modifier_message' => 'Modificar queu messatge',
+'icone_modifier_mot' => 'Modifier ce mot-cl&eacute;', # NEW
 'icone_modifier_rubrique' => 'Modificar quela rubrica',
 'icone_modifier_site' => 'Modificar queu sit',
 'icone_poster_message' => 'Postar un messatge',
 'icone_publier_breve' => 'Publicar quela breva',
 'icone_referencer_nouveau_site' => 'Referenciar un sit nu&ograve;u',
 'icone_refuser_breve' => 'Refusar quela breva',
+'icone_relancer_signataire' => 'Relancer le signataire', # NEW
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_suivi_forum' => 'Segut dau forum public: @nb_forums@&nbsp;contribucion(s)',
@@ -214,6 +259,8 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_activer_forum_public' => '<i>Per activar los forums publics, volhatz chausir lor m&ograve;de de moderacion predefinit:</i>',
 'info_admin_gere_rubriques' => 'Quel administrator ger&iacute;s las rubricas seguentas:',
 'info_admin_gere_toutes_rubriques' => 'Quel administrator ger&iacute;s <b>totas las rubricas</b>.',
+'info_admin_statuer_webmestre' => 'Donner &agrave; cet administrateur les droits de webmestre', # NEW
+'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
 'info_administrateur' => 'Administrator',
 'info_administrateur_1' => 'Administrator',
 'info_administrateur_2' => 'dau sit(<i>d\'utilizar emb precaucion</i>)',
@@ -250,6 +297,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_auteurs_trouves' => 'Autors trobats',
 'info_authentification_externe' => 'Autentificacion externa',
 'info_avertissement' => 'Av&iacute;s',
+'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'L\'estructura de v&ograve;stra basa de donadas es installada.',
 'info_base_restauration' => 'La basa es en cors de restauracion.',
 'info_bloquer' => 'blocar',
@@ -269,10 +317,22 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;stres c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir queu tableu',
+'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Il est recommand&#233; de v&#233;rifier au pr&#233;alable si l\'h&#233;bergeur compresse d&#233;j&#224; syst&#233;matiquement les scripts php&nbsp;; pour cela, vous pouvez par exemple utiliser le service suivant&nbsp;: @testgzip@', # NEW
+'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages t&eacute;l&eacute;charg&eacute;es. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
+'info_compresseur_titre' => 'Optimisations et compression', # NEW
+'info_config_forums_prive' => 'Dans l&#8217;espace priv&#233; du site, vous pouvez activer plusieurs types de forums&nbsp;:', # NEW
+'info_config_forums_prive_admin' => 'Un forum r&#233;serv&#233; aux administrateurs du site&nbsp;:', # NEW
+'info_config_forums_prive_global' => 'Un forum global, ouvert &#224; tous les r&#233;dacteurs&nbsp;:', # NEW
+'info_config_forums_prive_objets' => 'Un forum sous chaque article, br&#232;ve, site r&#233;f&#233;renc&#233;, etc.&nbsp;:', # NEW
 'info_config_suivi' => 'Se quela adrei&ccedil;a correspond a una lista de corrier, podetz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants au sit se p&ograve;den inscriure. Quela adrei&ccedil;a p&ograve;t estre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subjecte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Podetz recebre automaticament, per e-mail, los anoncis pertochant l\'activitat editoriala de queu sit. Per qu&ograve; faire, vos podetz abonar a la lista de corrier seguenta:',
 'info_confirmer_passe' => 'Confirmar queu mot de santa Clara noveu:',
+'info_conflit_edition_avis_non_sauvegarde' => 'Attention, les champs suivants ont &#233;t&#233; modifi&#233;s par ailleurs. Vos modifications sur ces champs n\'ont donc pas &#233;t&#233; enregistr&#233;es.', # NEW
+'info_conflit_edition_differences' => 'Diff&#233;rences&nbsp;:', # NEW
+'info_conflit_edition_version_enregistree' => 'La version enregistr&#233;e&nbsp;:', # NEW
+'info_conflit_edition_votre_version' => 'Votre version&nbsp;:', # NEW
 'info_connexion_base' => 'Segonda estapa: <b>Assai de connexion a la basa</b>',
+'info_connexion_base_donnee' => 'Connexion &agrave; votre base de donn&eacute;es', # NEW
 'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><p> Podetz passar a l\'estapa seguenta.',
 'info_connexion_mysql' => 'Primiera estapa:<b>V&ograve;stra connexion SQL</b>',
 'info_connexion_ok' => 'La connexion a abotit.',
@@ -296,6 +356,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_desactiver_forum_public' => 'Desactivar l\'utilizacion daus forums publics. Los forums publics poir&aacute;n &egrave;sser autorizats au cas per cas subre los articles; ser&aacute;n pro&iuml;bits subre las rubricas, brevas, etc.',
 'info_desactiver_messagerie_personnelle' => 'Podetz activar o desactivar v&ograve;stra messatjari&aacute; personala subre queu sit.',
 'info_descriptif' => 'Descriptiu:',
+'info_desinstaller_plugin' => 'supprime les donn&eacute;es et d&eacute;sactive le plugin', # NEW
 'info_discussion_cours' => 'Discussions en cors',
 'info_ecrire_article' => 'Avans de poder escriure daus articles, vos chau crear aumens una rubrica.',
 'info_email_envoi' => 'Adrei&ccedil;a e-mail d\'enviament (opcionau)',
@@ -368,6 +429,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_liste_redacteurs_connectes' => 'Tiera daus redactors connectats',
 'info_login_existant' => 'Queu login ja exist&iacute;s.',
 'info_login_trop_court' => 'Login tr&ograve;p cort.',
+'info_logos' => 'Les logos', # NEW
 'info_maximum' => 'maximum:',
 'info_meme_rubrique' => 'Dins la mesma rubrica',
 'info_message' => 'Messatge dau',
@@ -382,7 +444,9 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
    e v&ograve;stre sit foncionar&aacute; pas mai.<br />{{Tornatz installar los
   fichiers d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'M&ograve;de de foncionament predefinit daus forums publics',
+'info_modifier_auteur' => 'Modifier l\'auteur :', # NEW
 'info_modifier_breve' => 'Modificar la breva:',
+'info_modifier_mot' => 'Modifier le mot-cl&eacute; :', # NEW
 'info_modifier_rubrique' => 'Modificar la rubrica:',
 'info_modifier_titre' => 'Modificar: @titre@',
 'info_mon_site_spip' => 'Mon sit SPIP',
@@ -419,9 +483,9 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_numero_article' => 'ARTICLE NUMERO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion daus vesitaires dau sit public',
-'info_option_email' => '<MODIF>Quand un vesitaire dau sit manda un messatge nu&ograve;u au forum
+'info_option_email' => 'Quand un vesitaire dau sit manda un messatge nu&ograve;u au forum
  associat a un article, se\'n p&ograve;t avisar los autors
- de l\'article per e-mail. Desiratz d\'utilizar quela opcion?',
+ de l\'article per e-mail. Desiratz d\'utilizar quela opcion?', # MODIF
 'info_option_faire_suivre' => 'Far segre los messatges daus forums aus autors daus articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar l\'inscripcion de vesitaires',
 'info_option_ne_pas_faire_suivre' => 'Pas far segre los messatges daus forums',
@@ -431,7 +495,10 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_ou' => 'o... ',
 'info_oui_suppression_mot_cle' => 'V&ograve;le suprimir queu mot clau definitivament.',
 'info_page_interdite' => 'Pagina pro&iuml;bida',
+'info_par_nom' => 'par nom', # NEW
 'info_par_nombre_article' => '(per nombre d\'articles)',
+'info_par_statut' => 'par statut', # NEW
+'info_par_tri' => '\'(par @tri@)\'', # NEW
 'info_pas_de_forum' => 'Brisa de forum',
 'info_passe_trop_court' => 'Mot de santa Clara tr&ograve;p cort.',
 'info_passes_identiques' => 'Los dos mots de santa Clara son pas identics.',
@@ -454,21 +521,30 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_procedez_par_etape' => 'procedissetz estapa per estapa',
 'info_procedure_maj_version' => 'Chau lan&ccedil;ar la procedura d\'actualizacion per adaptar
  la basa de donadas a la version novela d\'SPIP.',
+'info_proxy_ok' => 'Test du proxy r&eacute;ussi.', # NEW
 'info_ps' => 'P.S.',
 'info_publier' => 'publicar',
 'info_publies' => 'V&ograve;stres articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas de v&ograve;stre sit web se prevei lo registrament de vesitaires sens acc&egrave;s a l\'espaci privat, volhatz activar l\'opcion seguenta:',
+'info_question_activer_compactage_css' => 'Souhaitez-vous activer le compactage des feuilles de style (CSS) ?', # NEW
+'info_question_activer_compactage_js' => 'Souhaitez-vous activer le compactage des scripts (javascript) ?', # NEW
+'info_question_activer_compresseur' => 'Voulez-vous activer la compression du flux HTTP ?', # NEW
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, las estadisticas de las vesitas?',
-'info_question_inscription_nouveaux_redacteurs' => '<MODIF>Acceptatz que daus redactors noveus s\'inscrivan
+'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que daus redactors noveus s\'inscrivan
  a partir dau sit public? Se o acceptatz, los vesitaires se poir&aacute;n inscriure
  gr&agrave;cias a un formulari automatizat e donc accedir&aacute;n a l\'espaci privat per
  prepausar daus articles.<blockquote><i> Durant la fasa d\'inscripcion, los utilizaires receben un e-mail automatic
  que lor baila un c&ograve;de d\'acc&egrave;s au sit privat.
 Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidors: en queu cas, l\'inscripcion automatica es
- impossibla.',
+ impossibla.', # MODIF
 'info_question_mots_cles' => 'Desiratz d\'utilizar los mots clau subre v&ograve;stre sit?',
 'info_question_proposer_site' => 'Quau p&ograve;t prepausar daus sits referenciats?',
 'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cerchador integrat a SPIP? (lo desactivar abriva lo foncionament dau sistema.)',
+'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aper&ccedil;us des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
+'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
+'info_question_visiteur_ajout_document_forum' => 'Si vous souhaitez autoriser les visiteurs &#224; joindre des documents (images, sons...) &#224; leurs messages de forum, indiquer ci-dessous la liste des extensions de documents autoris&#233;s pour les forums (ex: gif, jpg, png, mp3).', # NEW
+'info_question_visiteur_ajout_document_forum_format' => 'Si vous souhaitez autoriser tous les types de documents consid&eacute;r&eacute;s comme fiables par SPIP, mettre une &eacute;toile. Pour ne rien autoriser, ne rien indiquer.', # NEW
 'info_qui_attribue_mot_cle' => 'Los mots de queu grop p&ograve;den &egrave;sser atribuits per:',
 'info_racine_site' => 'Rai&ccedil; dau sit',
 'info_recharger_page' => 'Volhatz tornar charjar quela pagina dins un momenton.',
@@ -486,7 +562,8 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<b>Redireccion.</b> Quel article remanda a la pagina:',
 'info_reserve_admin' => 'Nonm&agrave;s los administrators p&ograve;den modificar quela adrei&ccedil;a.',
-'info_restauration_sauvegarde' => '<MODIF>restauracion de la sauvagarda @archive@',
+'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@', # MODIF
+'info_restauration_sauvegarde_insert' => 'Insertion de @archive@ dans la base', # NEW
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la cercha:',
 'info_rubriques' => 'Rubricas',
@@ -512,6 +589,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_sauvegarde_reussi_02' => 'La basa es estada sauvagardada dins @archive@. Podetz',
 'info_sauvegarde_reussi_03' => 'tornar a la gestion',
 'info_sauvegarde_reussi_04' => 'de v&ograve;stre sit.',
+'info_sauvegarde_rubrique_reussi' => 'Les tables de la rubrique @titre@ ont &eacute;t&eacute; sauvegard&eacute;e dans @archive@. Vous pouvez', # NEW
 'info_sauvegarde_rubriques' => 'Sauvagardar las rubricas',
 'info_sauvegarde_signatures' => 'Sauvagardar las signaturas de peticions',
 'info_sauvegarde_sites_references' => 'Sauvagardar los sits referenciats',
@@ -536,7 +614,9 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_sites_trouves_dans_texte' => 'Sits trobats (dins lo text)',
 'info_sous_titre' => 'Sost&iacute;tol:',
 'info_statut_administrateur' => 'Administrator',
-'info_statut_auteur' => '<MODIF>Estatut de quel autor:',
+'info_statut_auteur' => 'Estatut de quel autor:', # MODIF
+'info_statut_auteur_a_confirmer' => 'Inscription &agrave; confirmer', # NEW
+'info_statut_auteur_autre' => 'Autre statut&nbsp;:', # NEW
 'info_statut_efface' => 'Esfa&ccedil;at',
 'info_statut_redacteur' => 'Redactor',
 'info_statut_site_1' => 'Queu sit es:',
@@ -548,6 +628,10 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_suivi_activite' => 'Segut de l\'activitat editoriala',
 'info_supprimer_mot' => 'suprimir queu mot',
 'info_surtitre' => 'Subret&iacute;tol:',
+'info_syndication_integrale_1' => 'Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).', # NEW
+'info_syndication_integrale_2' => 'Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?', # NEW
+'info_table_prefix' => 'Vous pouvez modifier le pr&eacute;fixe du nom des tables de donn&eacute;es (ceci est indispensable lorsque l\'on souhaite installer plusieurs sites dans la m&ecirc;me base de donn&eacute;es). Ce pr&eacute;fixe s\'&eacute;crit en lettres minuscules, non accentu&eacute;es, et sans espace.', # NEW
+'info_taille_maximale_images' => 'SPIP va tester la taille maximale des images qu\'il peut traiter (en millions de pixels).<br /> Les images plus grandes ne seront pas r&eacute;duites.', # NEW
 'info_taille_maximale_vignette' => 'Talha maximala de las vinhetas congreadas per lo sistema:',
 'info_terminer_installation' => 'Aura podetz \'chabar la procedura d\'installacion estandard.',
 'info_texte' => 'Text',
@@ -560,6 +644,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_total' => 'totau: ',
 'info_tous_articles_en_redaction' => 'Tots los articles en cors de redaccion',
 'info_tous_articles_presents' => 'Tots los articles publicats dins quela rubrica',
+'info_tous_articles_refuses' => 'Tous les articles refus&eacute;s', # NEW
 'info_tous_les' => 'tots los:',
 'info_tous_redacteurs' => 'Anoncis per tots los redactors ',
 'info_tout_site' => 'Tot lo sit ',
@@ -587,11 +672,29 @@ una color indica lor estat:',
 'info_visiteur_2' => 'dau sit public',
 'info_visiteurs' => 'Vesitaires',
 'info_visiteurs_02' => 'Vesitaires dau sit public',
+'install_adresse_base_hebergeur' => 'Adresse de la base de donn&eacute;es attribu&eacute;e par l\'h&eacute;bergeur', # NEW
+'install_base_ok' => 'La base @base@ a &eacute;t&eacute; reconnue', # NEW
 'install_echec_annonce' => 'L\'installacion frolhar&aacute;, o abotir&aacute; a un sit non foncionau...',
 'install_extension_mbstring' => 'SPIP fonciona pas emb:',
 'install_extension_php_obligatoire' => 'SPIP exig&iacute;s l\'extension php:',
+'install_login_base_hebergeur' => 'Login de connexion attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_nom_base_hebergeur' => 'Nom de la base attribu&eacute; par l\'h&eacute;bergeur&nbsp;:', # NEW
+'install_pas_table' => 'Base actuellement sans tables', # NEW
+'install_pass_base_hebergeur' => 'Mot de passe de connexion attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_php_version' => 'PHP version @version@ insuffisant (minimum = @minimum@)', # NEW
 'install_select_langue' => 'Seleccionatz una lenga puei clicatz lo boton &laquo;&nbsp;seguent&nbsp;&raquo; per amodar la procedura d\'installacion.',
+'install_select_type_db' => 'Indiquer le type de base de donn&eacute;es&nbsp;:', # NEW
+'install_select_type_mysql' => 'MySQL', # NEW
+'install_select_type_pg' => 'PostgreSQL', # NEW
+'install_select_type_sqlite2' => 'SQLite 2', # NEW
+'install_select_type_sqlite3' => 'SQLite 3', # NEW
+'install_serveur_hebergeur' => 'Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur', # NEW
+'install_table_prefix_hebergeur' => 'Pr&eacute;fixe de table attribu&eacute; par l\'h&eacute;bergeur&nbsp;:', # NEW
+'install_tables_base' => 'Tables de la base', # NEW
+'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus r&eacute;pandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
+'install_types_db_connus_avertissement' => 'Attention&nbsp;: plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
 'intem_redacteur' => 'redactor',
+'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Acceptar las inscripcions',
 'item_activer_forum_administrateur' => 'Activar lo forum daus administrators',
 'item_activer_messages_avertissement' => 'Activar los messatges d\'avertiment',
@@ -600,6 +703,8 @@ una color indica lor estat:',
 'item_ajout_mots_cles' => 'Autorizar que s\'aponda daus mots clau aus forums',
 'item_autoriser_documents_joints' => 'Autorizar que se jonha daus documents aus articles',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar los documents dins las rubricas',
+'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
+'item_autoriser_syndication_integrale' => 'Diffuser l\'int&eacute;gralit&eacute; des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Blocar los liams sindicats per validacion',
 'item_breve_refusee' => 'NON - Breva refusada',
 'item_breve_validee' => '&Ograve;C - Breva validada',
@@ -608,12 +713,16 @@ una color indica lor estat:',
 'item_choix_non_generation_miniature' => 'Pas congrear de miniaturas daus imatges.',
 'item_choix_redacteurs' => 'los redactors',
 'item_choix_visiteurs' => 'los vesitaires dau sit public',
+'item_compresseur' => 'Activer la compression', # NEW
+'item_config_forums_prive_global' => 'Activer le forum des r&#233;dacteurs', # NEW
+'item_config_forums_prive_objets' => 'Activer ces forums', # NEW
 'item_creer_fichiers_authent' => 'Crear daus fichiers .htpasswd',
 'item_desactiver_forum_administrateur' => 'Desactivar lo forum daus administrators',
 'item_gerer_annuaire_site_web' => 'Gerir un annuari de sits web',
 'item_gerer_statistiques' => 'Gerir las estadisticas',
 'item_limiter_recherche' => 'Limitar la cercha a las informacions contengudas dins v&ograve;stre sit',
 'item_login' => 'Login',
+'item_messagerie_agenda' => 'Activer la messagerie et l&#8217;agenda', # NEW
 'item_mots_cles_association_articles' => 'aus articles',
 'item_mots_cles_association_breves' => 'a las brevas',
 'item_mots_cles_association_rubriques' => 'a las rubricas',
@@ -625,11 +734,17 @@ una color indica lor estat:',
 'item_non_ajout_mots_cles' => 'Pro&iuml;bir l\'utilizacion daus mots clau dins los forums',
 'item_non_autoriser_documents_joints' => 'Pas autorizar los documents dins los articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Pas autorizar los documents dins las rubricas',
+'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
+'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un r&eacute;sum&eacute;', # NEW
 'item_non_bloquer_liens_syndiques' => 'Pas blocar los liams eissits de la sindicacion',
+'item_non_compresseur' => 'D&#233;sactiver la compression', # NEW
+'item_non_config_forums_prive_global' => 'D&#233;sactiver le forum des r&#233;dacteurs', # NEW
+'item_non_config_forums_prive_objets' => 'D&#233;sactiver ces forums', # NEW
 'item_non_creer_fichiers_authent' => 'Pas crear quilhs fichiers',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'annuari de sits web',
 'item_non_gerer_statistiques' => 'Pas gerir las estadisticas',
 'item_non_limiter_recherche' => 'Eslarjar la cercha au contengut daus sits referenciats',
+'item_non_messagerie_agenda' => 'D&#233;sactiver la messagerie et l&#8217;agenda', # NEW
 'item_non_publier_articles' => 'Pas publicar los articles avans la data de publicacion previsda.',
 'item_non_utiliser_breves' => 'Pas utilizar las brevas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Pas utilizar la configuracion avan&ccedil;ada daus grops de mots clau',
@@ -672,6 +787,7 @@ una color indica lor estat:',
 'lien_supprimer_rubrique' => 'suprimir quela rubrica',
 'lien_tout_deplier' => 'Desplejar tot',
 'lien_tout_replier' => 'Tornar plejar',
+'lien_tout_supprimer' => 'Tout supprimer', # NEW
 'lien_trier_nom' => 'Triar per nom',
 'lien_trier_nombre_articles' => 'Triar per nombre d\'articles',
 'lien_trier_statut' => 'Triar per estatut',
@@ -695,7 +811,14 @@ una color indica lor estat:',
 'mois_non_connu' => 'non conegut',
 
 // O
+'onglet_contenu' => 'Contenu', # NEW
+'onglet_declarer_une_autre_base' => 'D&eacute;clarer une autre base', # NEW
+'onglet_discuter' => 'Discuter', # NEW
+'onglet_documents' => 'Documents', # NEW
+'onglet_interactivite' => 'Interactivit&eacute;', # NEW
+'onglet_proprietes' => 'Propri&eacute;t&eacute;s', # NEW
 'onglet_repartition_actuelle' => 'per lo temps que vai',
+'onglet_sous_rubriques' => 'Sous-rubriques', # NEW
 'ortho_ajouter_ce_mot' => 'Ajustar queste mot au diccionari',
 'ortho_aucune_suggestion' => 'S\'es pas trobat brisa de suggestion per queste mot.',
 'ortho_avis_privacy' => 'Un verificador d\'ortografia es integrat a SPIP. Emper, avans d\'activar quela foncionalitat, volhatz legir emb atencion lo paragraf seguent:',
@@ -710,13 +833,84 @@ una color indica lor estat:',
 'ortho_verif_impossible' => 'Lo sist&egrave;ma p&ograve;t pas verificar l\'ortografia de queste text.',
 'ortho_verifier' => 'Verificar l\'ortografia',
 
+// P
+'page_pas_proxy' => 'Cette page ne doit pas passer par le proxy', # NEW
+'pas_de_proxy_pour' => 'Au besoin, indiquez les machines ou domaines pour lesquels ce proxy ne doit pas s\'appliquer (par exemple&nbsp;: @exemple@)', # NEW
+'plugin_charge_paquet' => 'Chargement du paquet @name@', # NEW
+'plugin_charger' => 'T&#233;l&#233;charger', # NEW
+'plugin_erreur_charger' => 'erreur&nbsp;: impossible de charger @zip@', # NEW
+'plugin_erreur_droit1' => 'Le r&#233;pertoire <code>@dest@</code> n\'est pas accessible en &#233;criture.', # NEW
+'plugin_erreur_droit2' => 'Veuillez v&#233;rifier les droits sur ce r&#233;pertoire (et le cr&#233;er le cas &#233;ch&#233;ant), ou installer les fichiers par FTP.', # NEW
+'plugin_erreur_zip' => 'echec pclzip&nbsp;: erreur @status@', # NEW
+'plugin_etat_developpement' => 'en d&eacute;veloppement', # NEW
+'plugin_etat_experimental' => 'exp&eacute;rimental', # NEW
+'plugin_etat_stable' => 'stable', # NEW
+'plugin_etat_test' => 'en test', # NEW
+'plugin_impossible_activer' => 'Impossible d\'activer le plugin @plugin@', # NEW
+'plugin_info_automatique1' => 'Si vous souhaitez autoriser l\'installation automatique des plugins, veuillez&nbsp;:', # NEW
+'plugin_info_automatique1_lib' => 'Si vous souhaitez autoriser l\'installation automatique de cette librairie, veuillez&nbsp;:', # NEW
+'plugin_info_automatique2' => 'cr&#233;er un r&#233;pertoire <code>@rep@</code>&nbsp;;', # NEW
+'plugin_info_automatique3' => 'v&#233;rifier que le serveur est autoris&#233; &#224; &#233;crire dans ce r&#233;pertoire.', # NEW
+'plugin_info_automatique_creer' => '&#224; cr&#233;er &#224; la racine du site.', # NEW
+'plugin_info_automatique_exemples' => 'exemples&nbsp;:', # NEW
+'plugin_info_automatique_ftp' => 'Vous pouvez installer des plugins, par FTP, dans le r&#233;pertoire <tt>@rep@</tt>', # NEW
+'plugin_info_automatique_lib' => 'Certains plugins demandent aussi &#224; pouvoir t&#233;l&#233;charger des fichiers dans le r&#233;pertoire <code>lib/</code>, &#224; cr&#233;er le cas &#233;ch&#233;ant &#224; la racine du site.', # NEW
+'plugin_info_automatique_liste' => 'Vos listes de plugins&nbsp;:', # NEW
+'plugin_info_automatique_liste_officielle' => 'les plugins officiels', # NEW
+'plugin_info_automatique_liste_update' => 'Mettre &#224; jour les listes', # NEW
+'plugin_info_automatique_ou' => 'ou...', # NEW
+'plugin_info_automatique_select' => 'S&#233;lectionnez ci-dessous un plugin&nbsp;: SPIP le t&#233;l&#233;chargera et l\'installera dans le r&#233;pertoire <code>@rep@</code>&nbsp;; si ce plugin existe d&#233;j&#224;, il sera mis &#224; jour.', # NEW
+'plugin_info_extension_1' => 'Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', # NEW
+'plugin_info_extension_2' => 'Elles ne sont pas d&#233;sactivables.', # NEW
+'plugin_info_telecharger' => '&#224; t&#233;l&#233;charger depuis @url@ et &#224; installer dans @rep@', # NEW
+'plugin_librairies_installees' => 'Librairies install&#233;es', # NEW
+'plugin_necessite_lib' => 'Ce plugin n&#233;cessite la librairie @lib@', # NEW
+'plugin_necessite_plugin' => 'N&eacute;cessite le plugin @plugin@ en version @version@ minimum.', # NEW
+'plugin_necessite_spip' => 'N&eacute;cessite SPIP en version @version@ minimum.', # NEW
+'plugin_source' => 'source:&nbsp;', # NEW
+'plugin_titre_automatique' => 'Installation automatique', # NEW
+'plugin_titre_automatique_ajouter' => 'Ajouter des plugins', # NEW
+'plugin_titre_installation' => 'Installation du plugin @plugin@', # NEW
+'plugin_zip_active' => 'Continuez pour l\'activer', # NEW
+'plugin_zip_adresse' => 'indiquez ci-dessous l\'adresse d\'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l\'adresse d\'une liste de plugins.', # NEW
+'plugin_zip_adresse_champ' => 'Adresse du plugin ou de la liste&nbsp;', # NEW
+'plugin_zip_content' => 'Il contient les fichiers suivants (@taille@),<br />pr&#234;ts &#224; installer dans le r&#233;pertoire <code>@rep@</code>', # NEW
+'plugin_zip_installe_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233;.', # NEW
+'plugin_zip_installe_rep_finie' => 'Le fichier @zip@ a &#233;t&#233; d&#233;compact&#233; et install&#233; dans le r&#233;pertoire @rep@', # NEW
+'plugin_zip_installer' => 'Vous pouvez maintenant l\'installer.', # NEW
+'plugin_zip_telecharge' => 'Le fichier @zip@ a &#233;t&#233; t&#233;l&#233;charg&#233;', # NEW
+'plugins_actif_aucun' => 'Aucun plugin activ&#233;.', # NEW
+'plugins_actif_un' => 'Un plugin activ&#233;.', # NEW
+'plugins_actifs' => '@count@ plugins activ&#233;s.', # NEW
+'plugins_actifs_liste' => 'Plugins actifs', # NEW
+'plugins_compte' => '@count@ plugins', # NEW
+'plugins_disponible_un' => 'Un plugin disponible.', # NEW
+'plugins_disponibles' => '@count@ plugins disponibles.', # NEW
+'plugins_erreur' => 'Erreur dans les plugins : @plugins@', # NEW
+'plugins_liste' => 'Liste des plugins', # NEW
+'plugins_liste_extensions' => 'Extensions', # NEW
+'plugins_recents' => 'Plugins r&eacute;cents.', # NEW
+'plugins_vue_hierarchie' => 'Hi&eacute;rarchie', # NEW
+'plugins_vue_liste' => 'Liste', # NEW
+'protocole_ldap' => 'Version du protocole :', # NEW
+
+// R
+'repertoire_plugins' => 'R&eacute;pertoire&nbsp;:', # NEW
+
 // S
+'sans_heure' => 'sans heure', # NEW
+'sauvegarde_fusionner' => 'Fusionner la base actuelle et la sauvegarde', # NEW
+'sauvegarde_fusionner_depublier' => 'D&eacute;publier les objets fusionn&eacute;s', # NEW
+'sauvegarde_url_origine' => 'Eventuellement, URL du site d\'origine :', # NEW
 'statut_admin_restreint' => '(admin. restrench)',
 'syndic_choix_moderation' => 'Que se p&ograve;t far emb los liams venents que provenon de queu sit?',
 'syndic_choix_oublier' => 'Que se p&ograve;t far emb los liams que figuran pas pus dins lo fichier de sindicacion?',
+'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:', # NEW
 'syndic_lien_obsolete' => 'liam obsolet',
 'syndic_option_miroir' => 'los blocar sus lo c&ograve;p',
 'syndic_option_oubli' => 'los esfa&ccedil;ar (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)', # NEW
+'syndic_option_resume_oui' => 'un simple r&eacute;sum&eacute; (au format texte)', # NEW
 'syndic_options' => 'Opcions de sindicacion:',
 
 // T
@@ -726,16 +920,19 @@ una color indica lor estat:',
 'taille_cache_octets' => 'Aura la talha de l\'escondedor compassa @octets@.',
 'taille_cache_vide' => 'L\'escondedor es voide.',
 'taille_repertoire_cache' => 'Talha dau repert&ograve;ri escondedor',
-'text_article_propose_publication' => '<MODIF>Article prepausat per la publicacion. Esitetz pas de donar v&ograve;stre av&aacute;s gr&agrave;cias au forum estachat a quel article (en bas de pagina).',
+'text_article_propose_publication' => 'Article prepausat per la publicacion. Esitetz pas de donar v&ograve;stre av&aacute;s gr&agrave;cias au forum estachat a quel article (en bas de pagina).', # MODIF
+'text_article_propose_publication_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).', # NEW
 'texte_acces_ldap_anonyme_1' => 'Quauques servidors LDAP acceptan brisa d\'acc&egrave;s anonim. En queu cas, chau especificar un identificant d\'acc&egrave;s iniciau per poder puei cerchar de las informacions dins l\'annuari. Pasmens, los champs seguents se poir&aacute;n laissar voides dins lo pus mai daus cas.',
 'texte_admin_effacer_01' => 'Quela comanda esfa&ccedil;a <i>tot</i> lo contengut de la basa de donadas,
  incl&uacute;s <i>tots</i> los acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa novela e mai un primier acc&egrave;s administrator.',
+'texte_admin_effacer_stats' => 'Cette commande efface toutes les donn&eacute;es li&eacute;es aux statistiques de visite du site, y compris la popularit&eacute; des articles.', # NEW
 'texte_admin_tech_01' => 'Quela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que ser&aacute; servat dins lo repert&ograve;ri @dossier@.
 Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>, que conten los imatges e los documents utilizats dins los articles e rubricas.',
-'texte_admin_tech_02' => '<MODIF>Atencion: quela sauvagarda se poir&aacute; restaurar
- SOLAMENT dins un sit installat emb la mesma version d\'SPIP. Donc subretot chau pas "voidar la basa" en esperar de re&iuml;nstallar la sauvagarda apr&egrave;s una actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.',
+'texte_admin_tech_02' => 'Atencion: quela sauvagarda se poir&aacute; restaurar
+ SOLAMENT dins un sit installat emb la mesma version d\'SPIP. Donc subretot chau pas "voidar la basa" en esperar de re&iuml;nstallar la sauvagarda apr&egrave;s una actualizacion. Consultatz <a href="@spipnet@">la documentacion d\'SPIP</a>.', # MODIF
 'texte_admin_tech_03' => 'Podetz chausir de sauvagardar lo fichier sos forma comprimida, per fin
  d\'abrivar son transferiment chas vos o chas un servidor de sauvagardas, e per fin d\'eschivar de l\'espaci disc.',
+'texte_admin_tech_04' => 'Dans un but de fusion avec une autre base, vous pouvez limiter la sauvegarde &agrave; la rubrique: ', # NEW
 'texte_adresse_annuaire_1' => '(Se v&ograve;stre annuari es installat subre la mesma maquina que queu sit web, s\'ag&iacute;s probable de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seguent es estat apondut a l\'article:',
 'texte_annuaire_ldap_1' => 'S\'accedissetz a un annuari (LDAP), lo podetz utilizar per importar automaticament daus utilizaires sos SPIP.',
@@ -751,6 +948,7 @@ Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</
 'texte_choix_base_1' => 'Chausissetz v&ograve;stra basa:',
 'texte_choix_base_2' => 'Lo servidor SQL conten mai d\'una basa de donadas.',
 'texte_choix_base_3' => '<b>Chausissetz</b> &ccedil;ai sos la que v&ograve;stre auberjador vos a atribuida:',
+'texte_choix_table_prefix' => 'Pr&eacute;fixe des tables&nbsp;:', # NEW
 'texte_commande_vider_tables_indexation' => 'Utilizatz quela comanda per voidar las taulas d\'indexacion utilizadas per lo cerchador integrat a SPIP. Qu&ograve; lai permetr&aacute;
  de ganhar de l\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
@@ -758,13 +956,20 @@ dins lo classament per popularitat, es indicat dins lo marge; la popularitat de 
 (una estimacion dau nombre de vesitas quotidianas qu\'eu recebr&aacute; se lo ritme actuau de consultacion se manten) e lo nombre de vesitas recebudas
 dempuei lo comen&ccedil;ament s\'afichan dins la bofi&ograve;la
 qu\'apareis quand la murja passa sus lo t&iacute;tol.',
+'texte_compacter_avertissement' => 'Attention &#224; ne pas activer ces options durant le d&#233;veloppement de votre site : les &#233;l&#233;ments compact&#233;s perdent toute lisibilit&#233;.', # NEW
+'texte_compacter_script_css' => 'SPIP peut compacter les scripts javascript et les feuilles de style CSS, pour les enregistrer dans des fichiers statiques ; cela acc&#233;l&#232;re l\'affichage du site.', # NEW
 'texte_compresse_ou_non' => '(Queste se p&ograve;t comprimir o non)',
+'texte_compresseur_page' => 'SPIP peut compresser automatiquement chaque page qu\'il envoie aux
+visiteurs du site. Ce r&#233;glage permet d\'optimiser la bande passante (le
+site est plus rapide derri&#232;re une liaison &#224; faible d&#233;bit), mais
+demande plus de puissance au serveur.', # NEW
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
 'texte_config_groupe_mots_cles' => 'Desiratz, vos, d\'activar la configuracion avan&ccedil;ada daus mots clau,
  en indicant per exemple que se p&ograve;t seleccionar un mot unenc
  per grop, qu\'un grop es important...?',
-'texte_connexion_mysql' => '<MODIF>Consultatz las informacions que v&ograve;stre auberjador forn&iacute;s: i devetz trobar, se v&ograve;stre auberjador sup&ograve;rta SQL, los c&ograve;des de connexion au servidor SQL.',
+'texte_conflit_edition_correction' => 'Veuillez contr&#244;ler ci-dessous les diff&#233;rences entre les deux versions du texte&nbsp;; vous pouvez aussi copier vos modifications, puis recommencer.', # NEW
+'texte_connexion_mysql' => 'Consultatz las informacions que v&ograve;stre auberjador forn&iacute;s: i devetz trobar, se v&ograve;stre auberjador sup&ograve;rta SQL, los c&ograve;des de connexion au servidor SQL.', # MODIF
 'texte_contenu_article' => '(Contengut de l\'article en quauques mots.)',
 'texte_contenu_articles' => 'Segon la maqueta que v&ograve;stre sit a adoptada, podetz decidir
  que quauques elements daus articles s\'utilizen pas.
@@ -786,16 +991,18 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_documents_joints_2' => 'Queu reglatge empacha pas d\'inserir daus imatges directament dins los articles.',
 'texte_effacer_base' => 'Esfa&ccedil;ar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar las donadas d\'indexacion',
-'texte_en_cours_validation' => '<MODIF>Se prepausa de publicar los articles e brevas &ccedil;ai sos. Esitetz pas per donar v&ograve;stre av&iacute;s gr&agrave;cias aus forums que i son estachats.',
+'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
+'texte_en_cours_validation' => 'Se prepausa de publicar los articles e brevas &ccedil;ai sos. Esitetz pas per donar v&ograve;stre av&iacute;s gr&agrave;cias aus forums que i son estachats.', # MODIF
+'texte_en_cours_validation_forum' => 'N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.', # NEW
 'texte_enrichir_mise_a_jour' => 'Podetz enrichir la compaginacion de v&ograve;stre text en utilizar de las "escorchieras tipograficas".',
-'texte_fichier_authent' => '<MODIF><b>Deu crear, SPIP, daus fichiers especiaus  <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<b>Deu crear, SPIP, daus fichiers especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri @dossier@?</b><p>
   Quilhs fichiers vos p&ograve;den servir per restr&eacute;nher l\'acc&egrave;s aus autors
   e administrators endac&ograve;m mai dins v&ograve;stre sit
   (programa externe d\'estadisticas, per exemple).<p>
  Se vos serv pas, podetz laissar questa opcion
   a sa valor predefinida (brisa de creacion
-  daus fichiers).',
+  daus fichiers).', # MODIF
 'texte_informations_personnelles_1' => 'Aura lo sistema vos crear&aacute; un acc&egrave;s personalizat au sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'ag&iacute;s d\'una re&iuml;nstallacion, e se v&ograve;stre acc&egrave;s fonciona enquera, podetz',
 'texte_introductif_article' => '(Text introductiu de l\'article.)',
@@ -808,6 +1015,9 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
  los texts ja sasits se p&ograve;den afichar
  d\'una maniera incorrecta apr&egrave;s que s\'aja modificat lo reglatge. Coma que si&aacute;
  poiretz tornar sens damatge au reglatge precedent.',
+'texte_jeu_caractere_3' => 'Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:', # NEW
+'texte_jeu_caractere_4' => 'Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:', # NEW
+'texte_jeu_caractere_conversion' => 'Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.', # NEW
 'texte_lien_hypertexte' => '(Se v&ograve;stre messatge se refer&iacute;s a un article publicat sus lo web, o a una pagina fornissent mai d\'informacions, volhatz indicar &ccedil;ai sos lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Los liams eissits daus sits sindicats se p&ograve;den
    blocar a pri&ograve;ri; lo reglatge
@@ -820,6 +1030,7 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_login_precaution' => 'Atencion! Quo es lo login emb lo quau setz aura connectat/ada. 
  Utilizatz queste formulari emb precaucion...',
 'texte_message_edit' => 'Atencion: queste messatge, chasque redactor lo p&ograve;t veire, e chasque administrator dau sit lo p&ograve;t modificar. Utilizatz los anoncis nonm&agrave;s per expausar daus eveniments importants de la vida dau sit.',
+'texte_messagerie_agenda' => 'Une messagerie permet aux r&#233;dacteurs du site de communiquer entre eux directement dans l&#8217;espace priv&#233; du site. Elle est associ&#233;e &#224; un agenda.', # NEW
 'texte_messages_publics' => 'Messatges publics de l\'article:',
 'texte_mise_a_niveau_base_1' => 'Venetz d\'actualizar los fichiers SPIP.
  Aura chau metre a niveu la basa de donadas
@@ -848,6 +1059,7 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_plus_trois_car' => 'mai de 3 caracters',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor indicada coma predefinida conven en generau.)',
+'texte_presente_plugin' => 'Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.', # NEW
 'texte_proposer_publication' => 'Quand auretz \'chabat v&ograve;stre article,<br /> poiretz prepausar que si&aacute; publicat.',
 'texte_proxy' => 'Dins quauques cas (intranet, rets protegidas...),
   se p&ograve;t que chalha utilizar un <i>proxy HTTP</i> per at&eacute;nher los sits sindicats.
@@ -864,6 +1076,7 @@ tornar calcular nonm&agrave;s una pagina, passatz pusleu per l\'espaci public e 
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit vers una autra URL.',
 'texte_referencement_automatique' => '<b>Referenciament automatizat d\'un sit</b><br /> Podetz referenciar de briu un sit web en indicar &ccedil;ai sos l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichier backend. SPIP atrapar&aacute; automaticament las informacions que concernissen queu sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique_verifier' => 'Veuillez v&eacute;rifier les informations fournies par <tt>@url@</tt> avant d\'enregistrer.', # NEW
 'texte_requetes_echouent' => '<b>Quand quauques requestas SQL frolhan
   sistematicament e sens rason aparenta, se p&ograve;t
   que qu&ograve; lai venha be ben de la basa de donadas.  </b><p>
@@ -898,11 +1111,11 @@ dins lo repert&ograve;ri @dossier@.
 dins l\'escondedor SPIP. Qu&ograve; permet per exemple de for&ccedil;ar un calcul nu&ograve;u de totas las paginas
 s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_sur_titre' => 'Subret&iacute;tol',
-'texte_syndication' => '<MODIF>Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
+'texte_syndication' => 'Se p&ograve;t recuperar automaticament, quand un sit web o permet, 
   la tiera de sas novetats. Per qu&ograve; far, vos chau activar la sindicacion. 
   <blockquote><i>Quauques auberjadors activan pas quela foncionalitat; 
   en queu cas, poiretz pas utilizar la sindicacion de contengut
-  dempuei v&ograve;stre sit.</i></blockquote>',
+  dempuei v&ograve;stre sit.</i></blockquote>', # MODIF
 'texte_table_ok' => ': questa taula es condrecha.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion dau motor son voidas.',
 'texte_tentative_recuperation' => 'Assai de reparacion',
@@ -920,8 +1133,10 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
   per fin d\'evitar d\'afichar daus messatges d\'avertiment
   intempestius.',
 'texte_trop_resultats_auteurs' => 'Tr&ograve;p de resultats per "@cherche_auteur@" ; volhatz afinar la cercha.',
+'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.', # NEW
+'texte_type_urls_attention' => 'Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.', # NEW
 'texte_unpack' => 'telecharjament de la darriera version',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Quand utilizatz lo cerchador integrat 
+'texte_utilisation_moteur_syndiques' => 'Quand utilizatz lo cerchador integrat 
     a SPIP, podetz far las cerchas sus los sits e
     articles sindicats de doas manieras
     diferentas. <br /><img src=\'puce.gif\'> Lo mai
@@ -931,7 +1146,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
     a SPIP de cerchar maitot dins lo text daus
     sits referenciats. 
    Se referenciatz un sit, aladonc SPIP far&aacute; la
-    cercha dins lo text dau quite sit.',
+    cercha dins lo text dau quite sit.', # MODIF
 'texte_utilisation_moteur_syndiques_2' => 'Queu met&ograve;de obliga SPIP de vesitar
     regularament los sits referenciats,
     qu&ograve; p&ograve;t alentir un pauc v&ograve;stre quite
@@ -951,9 +1166,16 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_cadre_interieur_rubrique' => 'Dedins la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NUMERO',
 'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligat&ograve;ria]<br />',
+'titre_compacter_script_css' => 'Compactage des scripts et CSS', # NEW
+'titre_compresser_flux_http' => 'Compression du flux HTTP', # NEW
+'titre_config_contenu_notifications' => 'Notifications', # NEW
+'titre_config_contenu_prive' => 'Dans l&#8217;espace priv&#233;', # NEW
+'titre_config_contenu_public' => 'Sur le site public', # NEW
 'titre_config_fonctions' => 'Configuracion dau sit',
+'titre_config_forums_prive' => 'Forums de l&#8217;espace priv&#233;', # NEW
 'titre_config_groupe_mots_cles' => 'Configuracion daus grops de mots clau',
 'titre_configuration' => 'Configuracion dau sit',
+'titre_conflit_edition' => 'Conflit lors de l\'&#233;dition', # NEW
 'titre_connexion_ldap' => 'Opcions: <b>V&ograve;stra connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
 'titre_documents_joints' => 'Documents jonchs',
@@ -966,6 +1188,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_langue_rubrique' => 'LENGA DE LA RUBRICA',
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
+'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW
 'titre_mots_cles_dans_forum' => 'Mots clau dins los forums dau sit public',
 'titre_mots_tous' => 'Los mots clau',
 'titre_naviguer_dans_le_site' => 'Navigar per lo sit...',
@@ -997,7 +1220,10 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_page_recherche' => 'Resultats de la cercha @recherche@',
 'titre_page_sites_tous' => 'Los sits referenciats',
 'titre_page_statistiques' => 'Estadisticas per rubricas',
+'titre_page_statistiques_messages_forum' => 'Messages de forum', # NEW
 'titre_page_statistiques_referers' => 'Estadisticas (liams entrants)',
+'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
+'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
 'titre_page_statistiques_visites' => 'Estadisticas de las vesitas',
 'titre_page_upgrade' => 'Mesa a niveu d\'SPIP',
 'titre_publication_articles_post_dates' => 'Publicacion daus articles p&ograve;stdatats',
@@ -1012,6 +1238,8 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_sites_tous' => 'Los sits referenciats',
 'titre_suivi_petition' => 'Segut de las peticions',
 'titre_syndication' => 'Sindicacion de sits',
+'titre_type_urls' => 'Type d\'adresses URL', # NEW
+'tls_ldap' => 'Transport Layer Security :', # NEW
 'tout_dossier_upload' => 'Tot lo dorsier @upload@',
 'trad_article_inexistant' => 'I a brisa d\'article que p&ograve;rte queu numero.',
 'trad_article_traduction' => 'Totas las versions de quel article:',
@@ -1024,11 +1252,26 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'upload_fichier_zip' => 'Fichier ZIP',
 'upload_fichier_zip_texte' => 'Lo fichier que prepausatz d\'installar es un fichier Zip.',
 'upload_fichier_zip_texte2' => 'Queu fichier p&ograve;t &egrave;sser:',
+'upload_info_mode_document' => 'D&#233;poser cette image dans le portfolio', # NEW
+'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
 'upload_limit' => 'Queu fichier es tr&ograve;p gr&ograve;s per lo servidor; la talha maxima autorizada en <i>upload</i> es de @max@.',
+'upload_zip_conserver' => 'Conserver l&#8217;archive apr&#232;s extraction', # NEW
 'upload_zip_decompacter' => 'descomprimit e chasque element que conten installat sus lo sit. Laidonc los fichiers que ser&aacute;n installats sus lo sit son:',
 'upload_zip_telquel' => 'installat tau coma es, coma archiu comprimit Zip;',
+'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
+'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
+'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.', # NEW
+'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW
+'utf8_convert_erreur_deja' => 'Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...', # NEW
+'utf8_convert_erreur_orig' => 'Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.', # NEW
+'utf8_convert_termine' => 'C\'est termin&eacute;&nbsp;!', # NEW
+'utf8_convert_timeout' => '<b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.', # NEW
+'utf8_convert_verifier' => 'Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.', # NEW
+'utf8_convertir_votre_site' => 'Convertir votre site en utf-8', # NEW
 
 // V
+'version' => 'Version&nbsp;:', # NEW
+'version_deplace_rubrique' => 'D&#233;plac&#233; de <b>&#171;&nbsp;@from@&nbsp;&#187;</b> vers <b>&#171;&nbsp;@to@&nbsp;&#187;</b>.', # NEW
 'version_initiale' => 'Version iniciala'
 );
 
