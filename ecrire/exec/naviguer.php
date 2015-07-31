@@ -155,7 +155,7 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_
 			))
 		 :$onglet_contenu.$onglet_proprietes).
 	  "</div>".
-	  (_INTERFACE_ONGLETS?"":$onglet_enfants.$onglet_interactivite);
+	  (_INTERFACE_ONGLETS?"":$onglet_enfants.$onglet_documents.$onglet_interactivite);
 }
 
 // http://doc.spip.org/@infos_naviguer
