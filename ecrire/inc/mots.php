@@ -159,8 +159,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	$tous_les_mots = split(" *[,;] *", $cherche_mot);
 	while ((list(,$cherche_mot) = each ($tous_les_mots)) AND $cherche_mot) {
 		echo "<P ALIGN='left'>";
-		$query = "SELECT id_mot, titre FROM spip_mots WHERE id_groupe='$select_groupe'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_mot, titre FROM spip_mots WHERE id_groupe='$select_groupe'");
+
 		unset($table_mots);
 		unset($table_ids);
 		while ($row = spip_fetch_array($result)) {
@@ -180,8 +180,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			else if ($table == 'breves') echo _T('info_la_breve');
 			else if ($table == 'rubriques') echo _T('info_la_rubrique');
 			echo " : </B><BR>";
-			$query = "SELECT * FROM spip_mots WHERE id_mot=$nouv_mot";
-			$result = spip_query($query);
+			$result = spip_query("SELECT * FROM spip_mots WHERE id_mot=$nouv_mot");
+
 			echo "<UL>";
 			while ($row = spip_fetch_array($result)) {
 				$id_mot = $row['id_mot'];
@@ -206,8 +206,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				}
 				$les_mots = join(',', $les_mots);
 				echo "<B>"._T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot))."</B><BR>";
-				$query = "SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre";
-				$result = spip_query($query);
+				$result = spip_query("SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre");
+
 				echo "<UL>";
 				while ($row = spip_fetch_array($result)) {
 					$id_mot = $row['id_mot'];
@@ -249,23 +249,20 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	if ($nouveaux_mots && $flag_editable) {
 		while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
-			$query = "SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet";
-			$result = spip_query($query);
+			$result = spip_query("SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet");
+
 			if (!spip_num_rows($result)) {
-				$query = "INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)";
-				$result = spip_query($query);
+				$result = spip_query("INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)");
+
 			}
 		}
 		$reindexer = true;
 	}
 
-	if ($supp_mot && $flag_editable) {
-		if ($supp_mot == -1)
-			$mots_supp = "";
-		else
-			$mots_supp = " AND id_mot=$supp_mot";
-		$query = "DELETE FROM spip_mots_$table WHERE $table_id=$id_objet $mots_supp";
-		$result = spip_query($query);
+	if ($flag_editable && ($supp_mot = intval($suppmot))) {
+		$result = spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . 
+				     (($supp_mot == -1) ?  "" :  " AND id_mot=$supp_mot"));
+
 		$reindexer = true;
 	}
 
@@ -281,8 +278,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	unset($les_mots);
 
-	$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre";
-	$result = spip_query($query);
+	$result = spip_query("SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre");
+
 
 	if (spip_num_rows($result) > 0) {
 		echo "<div class='liste'>";
@@ -298,8 +295,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$titre_mot = $row['titre'];
 			$descriptif_mot = $row['descriptif'];
 			$id_groupe = $row['id_groupe'];
-			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE id_groupe = $id_groupe";
-			$result_groupe = spip_query($query_groupe);
+			$result_groupe = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe = $id_groupe");
+
 			while($row_groupe = spip_fetch_array($result_groupe)) {
 				$id_groupe = $row_groupe['id_groupe'];
 				$titre_groupe = entites_html($row_groupe['titre']);
@@ -333,8 +330,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			if ($unseul == "oui" AND $flag_groupe) {
 				$s =  generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots") . 
 					"<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
-				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre";
-				$result_autres_mots = spip_query($query_autres_mots);
+				$result_autres_mots = spip_query("SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre");
+
 				while ($row_autres = spip_fetch_array($result_autres_mots)) {
 					$le_mot = $row_autres['id_mot'];
 					$le_titre_mot = supprimer_tags(typo($row_autres['titre']));
@@ -372,9 +369,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 		$largeurs = array('25', '', '', '');
 		$styles = array('arial11', 'arial2', 'arial2', 'arial1');
-		afficher_liste($largeurs, $tableau, $styles);
-	
-	
+		echo afficher_liste($largeurs, $tableau, $styles);
 		echo "</table></div>";
 	}
 
@@ -387,10 +382,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
 	else $id_groupes_vus = "0";
 
-	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui'
-	AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui'
-	AND id_groupe NOT IN ($id_groupes_vus)";
-	$nb_groupes = spip_num_rows(spip_query($query_groupes));
+	$nb_groupes = spip_num_rows(spip_query("SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)"));
+
 
 	//
 	// Afficher le formulaire d'ajout de mots-cles
@@ -426,11 +419,11 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 
-		$query_groupes = "SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE $table = 'oui'
+		$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE $table = 'oui'
 		AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR
 		(unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus)))
-		ORDER BY multi";
-		$result_groupes = spip_query($query_groupes);
+		ORDER BY multi");
+
 
 		// Afficher un menu par groupe de mots
 
@@ -448,10 +441,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$acces_comite = $row_groupes['comite'];
 			$acces_forum = $row_groupes['forum'];
 			
-			$query = "SELECT * FROM spip_mots WHERE id_groupe = '$id_groupe' ";
-			if ($les_mots) $query .= "AND id_mot NOT IN ($les_mots) ";
-			$query .= "ORDER BY type, titre";
-			$result = spip_query($query);
+			$result = spip_query("SELECT * FROM spip_mots WHERE id_groupe =$id_groupe " . ($les_mots ? "AND id_mot NOT IN ($les_mots) " : '') .  "ORDER BY type, titre");
+
 			if (spip_num_rows($result) > 0) {
 				if ((spip_num_rows($result) > 50)) {
 					echo "\n<tr>";
@@ -701,7 +692,7 @@ function afficher_groupe_mots($id_groupe) {
 			$largeurs = array('', 100);
 			$styles = array('arial11', 'arial1');
 		}
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		echo "</table>";
 //		fin_cadre_relief();

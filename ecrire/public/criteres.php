@@ -54,7 +54,6 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	if (!$boucle->primary)
 		erreur_squelette(_L('doublons sur une table sans index'), $param);
 	$nom = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	spip_log("doublons $nom");
 	$boucle->where[] = '" .' .
 	  "\ncalcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
 	  "', " .

@@ -85,8 +85,8 @@ function afficher_messages($titre_table, $query_message, &$messages_vus, $affich
 			// Auteurs
 
 			if ($afficher_auteurs) {
-				$query_auteurs = "SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur";
-				$result_auteurs = spip_query($query_auteurs);
+				$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur");
+
 				$auteurs = '';
 				while ($row_auteurs = spip_fetch_array($result_auteurs)) {
 					$id_auteur = $row_auteurs['id_auteur'];
@@ -105,8 +105,7 @@ function afficher_messages($titre_table, $query_message, &$messages_vus, $affich
 			//
 			// Messages de forums
 			
-			$query_forum = "SELECT * FROM spip_forum WHERE id_message = $id_message";
-			$total_forum = spip_num_rows(spip_query($query_forum));
+			$total_forum = spip_num_rows(spip_query("SELECT id_message FROM spip_forum WHERE id_message = $id_message"));
 			
 			if ($total_forum > 0) $vals[] = "($total_forum)";
 			else $vals[] = "";
@@ -149,7 +148,7 @@ function afficher_messages($titre_table, $query_message, &$messages_vus, $affich
 			$largeurs = array('', 20, 120);
 			$styles = array('arial2', 'arial1', 'arial1');
 		}
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		echo "</TABLE>";
 		echo "</div>\n\n";
