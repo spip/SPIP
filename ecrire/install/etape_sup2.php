@@ -48,9 +48,15 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 	else
 		$port = '';
 
+	$adresse_db = addslashes($adresse_db);
+	$port = addslashes($port);
+	$login_db = addslashes($login_db);
+	$pass_db = addslashes($pass_db);
+	$sup_db = addslashes($sup_db);
+	$server_db = addslashes($server_db);
 	$conn = "spip_connect_db("
-	. "'$adresse_db','$port','$login_db','"
-	. addcslashes($pass_db, "'\\") . "','$sup_db'"
+	. "'$adresse_db','$port','$login_db',"
+	. "'$pass_db','$sup_db'"
 	. ",'$server_db', '');\n";
 
 	install_fichier_connexion(_DIR_CONNECT . $sup_db . '.php', $conn);
