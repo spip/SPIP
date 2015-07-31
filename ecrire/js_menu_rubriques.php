@@ -2,17 +2,13 @@
 
 include_once("inc.php3");
 
-// Gestion d'expiration de ce jaja
-$expire = $date + 3600*24;
+if (http_last_modified(@filemtime("js_menu_rubriques.php"), time() + 24 * 3600)) 
+	exit;
 
-$headers_only = http_last_modified($expire);
+// mettre absolument le charset :
+// Apache-AdvancedExtranetServer & FireFox s'entendent mal sinon
 
-$date = gmdate("D, d M Y H:i:s", $date);
-$expire = gmdate("D, d M Y H:i:s", $expire);
-@Header ("Content-Type: text/javascript");
-if ($headers_only) exit;
-@Header ("Last-Modified: ".$date." GMT");
-@Header ("Expires: ".$expire." GMT");
+@Header ("Content-Type: text/javascript; charset=iso-8859-1");
 
 function extraire_article($id_p) {
 	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
