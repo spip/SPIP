@@ -333,7 +333,9 @@ function champs_traitements ($p) {
 	// dans les filtres propre() ou typo()
 	// (qui traitent les raccourcis <docXX> referencant les docs)
 
-	if ($p->descr['documents']
+	if (isset($p->descr['documents']) 
+	AND 
+	  $p->descr['documents']
 	AND (
 		(strpos($ps,'propre') !== false)
 		OR
