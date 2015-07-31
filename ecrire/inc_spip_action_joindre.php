@@ -137,7 +137,7 @@ function spip_action_joindre6($arg, $mode, $type, $id, $id_document,$hash, $id_a
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    include_ecrire('pclzip.lib');
+	    include_ecrire('inc_pclzip');
 	    $archive = new PclZip($arg);
 	    $archive->extract(
 			      PCLZIP_OPT_PATH, _tmp_dir,
