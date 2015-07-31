@@ -56,7 +56,7 @@ function copie_locale($source, $mode='auto') {
 		return $local;
 
 	if ($mode=='modif' OR !$t) {
-		$res = recuperer_page($source, $localrac,false,_COPIE_LOCALE_MAX_SIZE, '','',false, $t ? @filemtime($localrac) : '');
+		$res = recuperer_page($source, $localrac,false,_COPIE_LOCALE_MAX_SIZE, '','',false, $t ? filemtime($localrac) : '');
 		if (!$res) return $t ? $local : false;
 #		spip_log ('ecrire copie locale '.$localrac." taille $res");
 			

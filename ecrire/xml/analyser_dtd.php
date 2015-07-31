@@ -28,7 +28,7 @@ function charger_dtd($grammaire, $avail, $rotlvl)
 
 	if (lire_fichier($file, $r)) {
 		if (!$grammaire) return array();
-		if (($avail == 'SYSTEM') AND @filemtime($file) < filemtime($grammaire))
+		if (($avail == 'SYSTEM') AND filemtime($file) < filemtime($grammaire))
 				$r = false;
 	}
 
