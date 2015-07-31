@@ -13,7 +13,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/filtres'); // par precaution
-
+include_spip('inc/filtres_images_mini'); // par precaution
 
 /**
  * Transforme une couleur vectorielle R,G,B en hexa
