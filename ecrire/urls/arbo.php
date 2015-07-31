@@ -29,14 +29,23 @@ define('CONFIRMER_MODIFIER_URL', false);
  *
  * SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
  * Variantes :
+ * 
+ * Terminaison :
+ * les terminaisons ne *sont pas* stockees en base, elles servent juste
+ * a rendre les url jolies ou conformes a un usage
  * pour avoir des url terminant par html
  * define ('_terminaison_urls_arbo', '.html');
+ * 
+ * pour preciser des terminaisons particulieres pour certains types
+ * $GLOBALS['url_arbo_terminaisons']=array(
+ * 'rubrique' => '/',
+ * 'mot' => '',
+ * 'groupe' => '/',
+ * 'defaut' => '.html');
  * 
  * pour avoir des url numeriques (id) du type 12/5/4/article/23
  * define ('_URLS_ARBO_MIN',255);
  * 
- * pour avoir des url sans les types 
- * define ('_urls_arbo_sans_type',1);
  * 
  * pour conserver la casse des titres dans les url
  * define ('_url_arbo_minuscules',0);
@@ -54,6 +63,12 @@ define('CONFIRMER_MODIFIER_URL', false);
  *			  'site'=>array('id_rubrique','rubrique'),
  * 				'mot'=>array('id_groupe','groupes_mot'));
  * 
+ * pour personaliser les types
+ * $GLOBALS['url_arbo_types']=array(
+ * 'rubrique'=>'', // pas de type pour les rubriques
+ * 'article'=>'a',
+ * 'mot'=>'tags'
+ * );
  * 
  */
 
@@ -61,7 +76,6 @@ define('CONFIRMER_MODIFIER_URL', false);
 define ('_debut_urls_arbo', '');
 define ('_terminaison_urls_arbo', '');
 define ('_url_arbo_sep_id','-');
-define ('_urls_arbo_sans_type',0);
 define ('_url_arbo_minuscules',1);
 
 // Ces chaines servaient de marqueurs a l'epoque ou les URL propres devaient
@@ -73,6 +87,38 @@ define ('_url_arbo_minuscules',1);
 #define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
 define('_MARQUEUR_URL', false);
 
+function url_arbo_terminaison($type){
+	static $terminaison_types = null;
+	if ($terminaison_types==null){
+		$terminaison_types = array('rubrique' => '/','mot' => '','defaut' => defined(_terminaison_urls_arbo)?_terminaison_urls_arbo:'.html');
+		if (isset($GLOBALS['url_arbo_terminaisons']))
+			$terminaison_types = array_merge($terminaison_types,$GLOBALS['url_arbo_terminaisons']);
+	}
+	// si c'est un appel avec type='' c'est pour avoir la liste des terminaisons
+	if (!$type)
+		return array_unique(array_values($terminaison_types));
+	if (isset($terminaison_types[$type]))
+		return $terminaison_types[$type];
+	elseif (isset($terminaison_types['defaut']))
+		return $terminaison_types['defaut'];
+	return "";
+}
+
+function url_arbo_type($type){
+	// par defaut les rubriques ne sont pas typees, mais le reste oui
+	static $synonymes_types = null;
+	if (!$synonymes_types){
+		$synonymes_types = array('rubrique'=>'');
+		if (isset($GLOBALS['url_arbo_types']) AND is_array($GLOBALS['url_arbo_types']))
+			$synonymes_types = array_merge($synonymes_types,$GLOBALS['url_arbo_types']);
+	}
+	// si c'est un appel avec type='' c'est pour avoir la liste inversee des synonymes
+	if (!$type)
+		return array_flip($synonymes_types);
+	return 
+	    ($t=(isset($synonymes_types[$type])?$synonymes_types[$type]:$type))  // le type ou son synonyme
+	  . ($t?'/':''); // le / eventuel pour separer, si le synonyme n'est pas vide
+}
 
 if (!function_exists('creer_chaine_url')) {
 // Pipeline pour creation d'une adresse : il recoit l'url propose par le
@@ -132,8 +178,10 @@ function creer_chaine_url($x) {
 		if (strlen($url) < _URLS_ARBO_MIN)
 			$url = $objet['id_objet']; // '12'
 	}
-
-	$x['data'] = ((_urls_arbo_sans_type OR $objet['type']=='rubrique')?'':$objet['type'].'/').$url;
+	
+	$x['data'] = 
+		url_arbo_type($objet['type']) // le type ou son synonyme
+	  . $url; // le titre
 
 	return $x;
 }
@@ -144,15 +192,11 @@ function declarer_url_arbo_rec($url,$type,$parent,$type_parent){
 	if (is_null($parent)){
 		return $url;
 	}
-	elseif($type!='rubrique') {
+	if($parent==0)
+		return rtrim($url,'/');
+	else {
 		$url_parent = declarer_url_arbo($type_parent?$type_parent:'rubrique',$parent);
-		return $url_parent . (substr($url_parent,-1)=='/'?'':'/') .$url;
-	}
-	else{
-		if($parent==0)
-			return $url.'/';
-		else
-			return declarer_url_arbo($type_parent?$type_parent:'rubrique',$parent). $url.'/';
+		return rtrim($url_parent,'/') . '/' . rtrim($url,'/');
 	}
 }
 
@@ -325,8 +369,8 @@ function _generer_url_arbo($type, $id, $args='', $ancre='') {
 
 	if ($propre) {
 		$url = _debut_urls_arbo
-			. $propre
-			. (substr($propre,-1)=='/'?'':_terminaison_urls_arbo);
+			. rtrim($propre,'/')
+			. url_arbo_terminaison($type);
 	} else {
 
 	// objet connu mais sans possibilite d'URL lisible, revenir au defaut
@@ -355,8 +399,6 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 
 	if (is_numeric($i))
 		return _generer_url_arbo($entite, $i, $args, $ancre);
-
-  	$url = rtrim($i,"/");
 
 	$id_objet = $type = 0;
 
@@ -413,13 +455,14 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 	
 	include_spip('base/abstract_sql'); // chercher dans la table des URLS
 
-	// Compatilibite avec propres2
-	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
+	// Compatilibite avec .htm/.html et autres terminaisons
+	$t = array_diff(array_unique(array_merge(array('.html','.htm','/'),url_arbo_terminaison(''))),array(''));
+	if (count($t))
+		$url_propre = preg_replace('{('
+		  .implode('|',array_map('preg_quote',$t)).')$}i', '', $url_propre);
+
+	$synonymes_types = url_arbo_type('');
 	
-	// optimisation perfo
-	if (preg_match(',([^/]*)/$,',$url_propre,$regs)){
-		$url_propre = 'rubrique/'.$regs[1];
-	}
 	// recuperer tous les objets de larbo xxx/article/yyy/mot/zzzz
 	$url_arbo = explode('/',$url_propre);
 	while (count($url_arbo)>0){
@@ -428,10 +471,11 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 			$type = array_pop($url_arbo);
 		else
 			$type=null;
+		$typesyn = isset($synonymes_types[$type])?$synonymes_types[$type]:$type;
 		// Compatibilite avec les anciens marqueurs d'URL propres
 		// Tester l'entree telle quelle (avec 'url_libre' des sites ont pu avoir des entrees avec marqueurs dans la table spip_urls)
 		if (is_null($type)
-		  OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$type/$url_propre")))) {
+		  OR !$row=sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote("$typesyn/$url_propre")))) {
 		  if (!is_null($type))
 				array_push($url_arbo,$type);
 			$row = sql_fetsel('id_objet, type, date', 'spip_urls',array('url='.sql_quote($url_propre)));
