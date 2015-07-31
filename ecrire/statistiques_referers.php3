@@ -29,10 +29,8 @@ if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 debut_page(_T('titre_page_statistiques_referers'), "administration", "statistiques");
 echo "<br><br><br>";
-if ($aujourdhui == 'oui')
-	gros_titre(_T('titre_liens_entrants'));
-else
-	gros_titre(_T('titre_liens_entrants_total'));
+
+	//gros_titre(_T('titre_liens_entrants'));
 
 barre_onglets("statistiques", "referers");
 
@@ -51,13 +49,6 @@ if ($connect_statut != '0minirezo') {
 	exit;
 }
 
-echo "<div align='right' style='width: 150;'>";
-if ($aujourdhui == 'oui')
-	icone_horizontale(_T('titre_liens_entrants_total'), "statistiques_referers.php3", "statistiques-24.gif");
-else
-	icone_horizontale(_T('titre_liens_entrants'), "statistiques_referers.php3?aujourdhui=oui", "statistiques-24.gif");
-echo "</div>";
-
 
 //
 // Affichage des referers
@@ -69,16 +60,9 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 		$limit = 100;
 
 	// afficher quels referers ?
-	$vis = "visites";
-	if ($aujourdhui == 'oui') {
-		$where = "visites_jour>0";
-		$vis = "visites_jour";
-		$table_ref = "spip_referers";
-	}
-	else {
-		$table_ref = "spip_referers";
-		$where = "1";
-	}
+	$where = "visites_jour>0";
+	$vis = "visites_jour";
+	$table_ref = "spip_referers";
 
 	$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
 
