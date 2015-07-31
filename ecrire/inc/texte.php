@@ -211,14 +211,14 @@ function traiter_echap_frame_dist($regs) {
 // http://doc.spip.org/@traiter_echap_script_dist
 function traiter_echap_script_dist($regs) {
 	// rendre joli (et inactif) si c'est un script language=php
-	if (preg_match(',<script\b[^>]+php,ims',
-	$regs[0]))
+	if (preg_match(',<script\b[^>]+php,ims', $regs[0]))
 		return highlight_string($regs[0],true);
 
 	// Cas normal : le script passe tel quel
 	return $regs[0];
 }
 
+define('_PROTEGE_BLOCS', ',<(html|code|cadre|frame|script)(\s[^>]*)?>(.*)</\1>,UimsS');
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
@@ -228,11 +228,7 @@ $preg='') {
 	if (!is_string($letexte) or !strlen($letexte))
 		return $letexte;
 
-	if (!$preg) $preg = ',<(html|code|cadre|frame|script)'
-			.'(\s[^>]*)?'
-			.'>(.*)</\1>,UimsS';
-	if (preg_match_all(
-	$preg,
+	if (preg_match_all($preg ? $preg : _PROTEGE_BLOCS,
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		// echappements tels quels ?
@@ -261,8 +257,7 @@ $preg='') {
 	}
 
 	// Echapper le php pour faire joli (ici, c'est pas pour la securite)
-	if (preg_match_all(
-	',<[?].*($|[?]>),UisS',
+	if (preg_match_all(',<[?].*($|[?]>),UisS',
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		$letexte = str_replace($regs[0],
@@ -282,8 +277,7 @@ $preg='') {
 function echappe_retour($letexte, $source='', $filtre = "") {
 	if (strpos($letexte,"base64$source")) {
 		# spip_log(htmlspecialchars($letexte));  ## pour les curieux
-		if (preg_match_all(
-		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*>\s*</\1>,UmsS',
+		if (preg_match_all(',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*>\s*</\1>,UmsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
@@ -347,7 +341,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if ($GLOBALS['meta']['charset']=='utf-8'){
 		$long = charset2unicode($texte);
 		$long = spip_substr($long, 0, max($taille,1));
-		$nbcharutf = preg_match_all("/(&#[0-9]{3,5};)/S",$long,$matches);
+		$nbcharutf = preg_match_all('/(&#[0-9]{3,5};)/S', $long, $matches);
 		$taille += $nbcharutf;
 	}
 
@@ -542,12 +536,13 @@ function corriger_typo($letexte) {
 	$letexte = corriger_caracteres($letexte);
 
 	// Charger & appliquer la fonction de typographie
+
 	if ($typographie = charger_fonction(lang_typo(), 'typographie')) {
 
 		// Proteger les caracteres typographiques a l'interieur des tags html
 		$protege = "!':;?~%-";
 		$illegal = "\x1\x2\x3\x4\x5\x6\x7\x8";
-		if (preg_match_all(",</?[a-z!][^<>]*[".preg_quote($protege)."][^<>]*>,imsS",
+		if (preg_match_all(',</?[a-z!][^<>]*['.preg_quote($protege).'][^<>]*>,imsS',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$insert = $reg[0];
@@ -557,7 +552,6 @@ function corriger_typo($letexte) {
 				$letexte = str_replace($reg[0], $insert, $letexte);
 			}
 		}
-
 
 		$letexte = $typographie($letexte);
 
@@ -611,7 +605,7 @@ function traiter_tableau($bloc) {
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
 			else if (preg_match($reg_line1,	$ligne, $thead)) {
-			  	preg_match_all("/\|([^|]*)/S", $ligne, $cols);
+			  	preg_match_all('/\|([^|]*)/S', $ligne, $cols);
 				$ligne='';$cols= $cols[1];
 				$colspan=1;
 				for($c=count($cols)-1; $c>=0; $c--) {
@@ -643,7 +637,7 @@ function traiter_tableau($bloc) {
 			$ligne = preg_replace("/\n{2,}/", "<br />\n", $ligne);
 
 			// tout mettre dans un tableau 2d
-			preg_match_all("/\|([^|]*)/S", $ligne, $cols);
+			preg_match_all('/\|([^|]*)/S', $ligne, $cols);
 			$lignes[]= $cols[1];
 		}
 	}
@@ -838,8 +832,7 @@ function paragrapher($letexte, $forcer=true) {
 			'<p>'.$letexte.'<STOP P>');
 
 		// Fermer les paragraphes (y compris sur "STOP P")
-		$letexte = preg_replace(
-			',(<p\s.*)(</?(STOP P|'._BALISES_BLOCS.')[>[:space:]]),UimsS',
+		$letexte = preg_replace(',(<p\s.*)(</?(STOP P|'._BALISES_BLOCS.')[>[:space:]]),UimsS',
 			"\n\\1</p>\n\\2", $letexte);
 
 		// Supprimer les marqueurs "STOP P"
@@ -980,8 +973,7 @@ function traite_raccourci_notes($letexte)
 	}
 
 	$mes_notes = '';
-	$regexp = ', *\[\[(.*?)\]\],msS';
-	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
+	if (preg_match_all(', *\[\[(.*?)\]\],msS', $letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 		$note_source = $regs[0];
 		$note_texte = $regs[1];
