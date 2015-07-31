@@ -35,7 +35,6 @@ function exec_admin_plugin() {
 	}
 
 	verif_plugin();
-	installe_plugins();
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 
@@ -126,6 +125,9 @@ EOF;
 	$s .= "<p><span class='experimental'>&nbsp;</span>"._T('plugin_etat_experimental')."</p>";
 	echo $s;
 	echo fin_boite_info(true);
+
+	// on fait l'installation ici, cela permet aux scripts d'install de faire des affichages ...
+	installe_plugins();
 
 	echo debut_droite('plugin',true);
 
