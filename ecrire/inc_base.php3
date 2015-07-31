@@ -266,11 +266,10 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites_temp (
-		date DATE '0000-00-00 00:00:00' NOT NULL,
+		date DATE NOT NULL,
 		ip INTEGER UNSIGNED NOT NULL,
 		type varchar(16) NOT NULL,
-		referer text NOT NULL,
-		KEY ip (ip))";
+		referer text NOT NULL)";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites (
