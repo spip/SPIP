@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// V
 	'ver_imprimer' => 'Версия для печати',
 	'voir_en_ligne' => 'См. онлайн',
-	'voir_squelette' => 'показать шаблон этой страницы'
+	'voir_squelette' => 'Показать шаблон этой страницы'
 );
 
 ?>
