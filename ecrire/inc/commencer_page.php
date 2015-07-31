@@ -215,9 +215,9 @@ function alertes_auteur($id_auteur) {
 	$alertes[] = avertissement_messagerie($id_auteur);
 
 	if ($alertes = array_filter($alertes))
-		return "<div class='messages'>".
+		return "<div class='wrap-messages'><div class='messages'>".
 			join('<hr />', $alertes)
-			."</div>";
+			."</div></div>";
 }
 
 // http://doc.spip.org/@auteurs_recemment_connectes
@@ -235,7 +235,7 @@ function auteurs_recemment_connectes($id_auteur)
 		$res .= "$mail&nbsp;$auteurs" . ", ";
 	}
 
-	return "<div class='messages' style='color:#666;'>" .
+	return "<div class='en_lignes' style='color:#666;'>" .
 	  "<b>"._T('info_en_ligne'). "&nbsp;</b>" .
 	  substr($res,0,-2) .
 	  "</div>";

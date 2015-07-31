@@ -39,13 +39,13 @@ body, body * { font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
 
 #page { font-size: small; }
 /* ecran etroit*/
-#conteneur,.table_page { clear: both; margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 750px; margin-top:0.5em;}
+#conteneur,.table_page,div.messages { clear: both; margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 750px; margin-top:0.5em;}
 #navigation { float: #GET{left}; width: 200px; min-height: 100px; }
 #contenu { float: #GET{left} ; margin-#GET{left}: 30px; width: 505px; }
 #extra { float: #GET{left}; width: 200px; }
 
 /* ecran large*/
-.large #conteneur,.large .table_page { margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 974px; }
+.large #conteneur,.large .table_page,.large div.messages { margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 974px; }
 .large #navigation { float: #GET{left}; width: 200px; }
 .large #contenu { float: #GET{left}; margin-#GET{left}: 17px; width: 540px; }
 .large #extra { float: #GET{right}; width: 200px; }
@@ -203,7 +203,13 @@ option.niveau_5 { color: #808080; }
 option.niveau_6 { color: #a0a0a0; }
 
 
-div.messages { padding: 5px; border-bottom: 1px solid #GET{foncee}; font-size: 10px; font-weight: bold; }
+div.wrap-messages, div.en_lignes { padding: 5px; border-bottom: 1px solid #GET{foncee}; font-weight: bold;}
+div.wrap-messages {background:#333;color:#fff;}
+div.messages {margin-top:0;font-size: 11px;}
+div.messages ul {text-align:left;}
+
+div.en_lignes { font-size: 10px;}
+
 
 
 /* Icones de fonctions */
