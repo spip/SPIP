@@ -1081,6 +1081,14 @@ function maj_base() {
 		maj_version(1.903);
 	}
 
+	// suppression des anciennes tables temporaires des visites
+	// (maintenant stockees sous forme de fichiers)
+	if ($version_installee < 1.904) {
+		spip_query("DROP TABLE IF EXISTS spip_visites_temp");
+		spip_query("DROP TABLE IF EXISTS spip_referers_temp");
+		maj_version(1.904);
+	}
+
 	return true;
 }
 
