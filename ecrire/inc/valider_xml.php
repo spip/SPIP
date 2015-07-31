@@ -226,6 +226,7 @@ function validerAttribut($parser, $name, $val, $bal)
 	}
 }
 
+// http://doc.spip.org/@valider_motif
 function valider_motif($parser, $name, $val, $bal, $motif)
 {
 	global $phraseur_xml;
@@ -242,6 +243,7 @@ function valider_motif($parser, $name, $val, $bal, $motif)
 	}
 }
 
+// http://doc.spip.org/@valider_idref
 function valider_idref($nom, $ligne, $col)
 {
 	global $phraseur_xml;
