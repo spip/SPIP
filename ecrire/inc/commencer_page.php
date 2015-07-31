@@ -55,8 +55,23 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	. '<div class="largeur">';
 }
 
-// envoi du doctype et du <head><title>...</head>
-// http://doc.spip.org/@init_entete
+/**
+ * Envoi du DOCTYPE et du `<head><title>...</head>`
+ * 
+ * @uses _DOCTYPE_ECRIRE
+ * @uses textebrut()
+ * @uses typo()
+ * @uses html_lang_attributes()
+ * @uses init_head()
+ * 
+ * @param string $titre
+ *     Titre de la page
+ * @param integer $dummy
+ *     Valeur non utilisée…
+ * @param bool $minipres
+ * @return string
+ *     Entête du fichier HTML avec le DOCTYPE
+ */
 function init_entete($titre='', $dummy=0, $minipres=false) {
 	include_spip('inc/texte');
 	if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
@@ -73,13 +88,37 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
 	. init_head($titre, $dummy, $minipres)
 	. "</head>\n";
 }
-
+/**
+ * Retourne le code HTML du head (intégration des JS et CSS) de l'espace privé
+ *
+ * Code HTML récupéré du squelette `prive/squelettes/head/dist`
+ * 
+ * @param string $titre
+ * @param integer $dummy
+ * @param bool $minipres
+ * @return string
+ */
 function init_head($titre='', $dummy=0, $minipres=false) {
 	return recuperer_fond("prive/squelettes/head/dist",array('titre'=>$titre,'minipres'=>$minipres?' ':''));
 }
 
-// fonction envoyant la double serie d'icones de redac
-// http://doc.spip.org/@init_body
+/**
+ * Fonction envoyant la double série d'icônes de rédac
+ * 
+ * @uses init_body_class()
+ * @uses inc_bandeau_dist()
+ * 
+ * @pipeline_appel body_prive
+ * 
+ * @global mixed $connect_id_auteur
+ * @global mixed $auth_can_disconnect
+ *
+ * @param string $rubrique
+ * @param string $sous_rubrique
+ * @param integer $id_rubrique
+ * @param bool $menu
+ * @return string
+ */
 function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='',$menu=true) {
 	global $connect_id_auteur, $auth_can_disconnect;
 
@@ -96,7 +135,14 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 	return $res
 	 . $bandeau();
 }
-
+/**
+ * Calcule les classes CSS à intégrer à la balise `<body>` de l'espace privé
+ *
+ * Les classes sont calculées en fonction des préférences de l'utilisateur,
+ * par exemple s'il choisit d'avoir ou non les icônes.
+ * 
+ * @return string Classes CSS (séparées par des espaces)
+ */
 function init_body_class() {
 	$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
 		? $GLOBALS['visiteur_session']['prefs']['display']
