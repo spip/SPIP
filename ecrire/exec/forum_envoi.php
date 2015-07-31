@@ -82,7 +82,7 @@ function forum_envoi(
 
 	} else { $parent = $titre_parent = $id_message = ''; $row = array();}
 
-	list($script,$retour) = split('\?', urldecode($script));
+	list($script,$retour) = preg_split('/[?]/', urldecode($script));
 	if (function_exists($f = 'forum_envoi_' . $script))
 	  list($table, $objet, $titre, $num, $retour, $id, $corps) =
 	    $f($id, $row, $retour);

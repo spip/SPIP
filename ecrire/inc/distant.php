@@ -311,7 +311,7 @@ function recuperer_infos_distantes($source, $max=0) {
 	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
 	// ca echoue l'utilisateur devra les entrer...
 	if ($headers = recuperer_page($source, false, true, $max)) {
-		list($headers, $a['body']) = split("\n\n", $headers, 2);
+		list($headers, $a['body']) = preg_split(',\n\n,', $headers, 2);
 		$t = preg_match(",\nContent-Type: *([^[:space:];]*),i",
 				"\n$headers", $regs);
 		if ($t) {

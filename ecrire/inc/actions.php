@@ -194,24 +194,7 @@ function ajax_retour($corps,$xml = true)
 	exit;
 }
 
-/* specifique FF+FB
-// http://doc.spip.org/@ajax_debug_retour
-function ajax_debug_retour($corps, $c)
-{
-	$sax = charger_fonction('sax', 'inc');
-	$corps = $sax($corps);
-	if ($GLOBALS['xhtml_error']) {
-	  spip_log("ajax_retour " .  $GLOBALS['REQUEST_URI'] . $GLOBALS['xhtml_error']);
-	  $debut = "<script type='text/javascript'>console.log('";
-	  $fin = "')</script>\n";
-	  echo $GLOBALS['xhtml_error']
-	  . $debut
-	  . join("$fin$debut", split("\n", addslashes($corps)))
-	  . $fin;
-	  exit;
-	}
-}
-*/
+
 
 // http://doc.spip.org/@determine_upload
 function determine_upload()
