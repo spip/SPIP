@@ -489,6 +489,8 @@ function id_table_objet($type) {
 		return 'id_document';
 	else if ($type == 'petition')
 		return 'id_article';
+	else if ($type == 'type')
+		return 'extension';
 	else {
 		$t = "spip_".table_objet($type);
 		global $tables_principales;
