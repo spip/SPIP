@@ -91,7 +91,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 // Fonctions de traitement d'image
 // uniquement pour GD2
 // http://doc.spip.org/@image_valeurs_trans
-function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL) {
+function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_creation = NULL, $find_in_path = false) {
 	static $images_recalcul = array();
 	if (strlen($img)==0) return false;
 
@@ -129,7 +129,7 @@ function _image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cr
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
 
-	if (@file_exists($f = $fichier)){
+	if (@file_exists($f = $fichier) OR ($find_in_path AND find_in_path($f = $fichier))){
 		list ($ret["hauteur"],$ret["largeur"]) = taille_image($img);
 		$date_src = @filemtime($f);
 	}
