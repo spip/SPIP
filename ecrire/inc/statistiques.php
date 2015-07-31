@@ -17,14 +17,8 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 	$out = "";
 	// Par popularite
 	$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND popularite > 0", "", "popularite DESC",'','',$serveur);
-
-	if (sql_count($result,$serveur)) {
-		$out .= "<br />\n";
-		$out .= "<div class='iconeoff' style='padding: 5px;'>\n";
-		$out .= "<div class='verdana1 spip_x-small'>";
-		$out .= typo(_T('info_visites_plus_populaires'));
-		$out .= "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
-		while ($row = sql_fetch($result,$serveur)) {
+	$out = '';
+	while ($row = sql_fetch($result,$serveur)) {
 			$titre = typo(supprime_img($row['titre'],''));
 			$l_article = $row['id_article'];
 			$visites = $row['visites'];
@@ -41,15 +35,14 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 					$out .= "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
-		}
-		$recents = array();
-		$q = sql_select("id_article", "spip_articles", "statut='publie' AND popularite > 0", "", "date DESC", "10",'',$serveur);
-
-		while ($r = sql_fetch($q,$serveur))
+	}
+	$recents = array();
+	$q = sql_select("id_article", "spip_articles", "statut='publie' AND popularite > 0", "", "date DESC", "10",'',$serveur);
+	while ($r = sql_fetch($q,$serveur))
 			if (!in_array($r['id_article'], $articles_vus))
 				$recents[]= $r['id_article'];
 
-		if ($recents) {
+	if ($recents) {
 			$result = sql_select("id_article, titre, popularite, visites", "spip_articles", "statut='publie' AND " . sql_in('id_article', $recents), "", "popularite DESC",'','',$serveur);
 
 			$out .= "</ol><div style='text-align: center'>[...]</div>" . "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
@@ -66,16 +59,22 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 					$out .= "\n<li><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
-		}
-			
-		$out .= "</ol>";
-
-		$out .= "<b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau');
-
-		$out .= "</div>";
-		$out .= "</div>";
 	}
-	return $out;
+
+	return !$out ? '' : (
+		"<br />\n"
+		."<div class='iconeoff' style='padding: 5px'>\n"
+		."<div class='verdana1 spip_x-small'>"
+		.typo(_T('info_visites_plus_populaires'))
+		."<ol style='padding-left:40px; font-size:x-small;color:#666666;'>"
+		.$out
+			
+		."</ol>"
+
+		."<b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau')
+
+		."</div>"
+		."</div>");
 }
 
 // http://doc.spip.org/@aff_statistique_visites_par_visites

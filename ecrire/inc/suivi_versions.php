@@ -38,8 +38,7 @@ function titre_rubrique($id_rubrique) {
 	if (!$id = intval($id_rubrique))
 		return _T('info_sans_titre');
 
-	$t = sql_fetsel('titre', 'spip_rubriques', "id_rubrique=$id");
-	return typo($t['titre']);
+	return typo(sql_getfetsel('titre', 'spip_rubriques', "id_rubrique=$id"));
 }
 
 
@@ -64,52 +63,16 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	if ($id_secteur > 0)
 		$req_where .= " AND articles.id_secteur = ".intval($id_secteur);
 
-	$req_where = "versions.id_article = articles.id_article AND versions.id_version > 1 $req_where";
+	$req_where = "versions.id_version > 1 $req_where";
 
 	$req_sel = "versions.id_version, versions.id_auteur, versions.date, versions.id_article, articles.statut, articles.titre";
 
-	$result = sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
+	$req_from = 'spip_versions AS versions LEFT JOIN spip_articles AS articles ON versions.id_article = articles.id_article';
 
-	if (sql_count($result) > 0) {
-
-		$revisions = '';
-
-		// Afficher l'entete de la boite
-		if (!$rss) {
-			$titre_table =  '<b>' . _T('icone_suivi_revisions').aide('suivimodif')  . '</b>';
-			if ($court)
-				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
-				. $titre_table;
-
-	
-			$total = sql_count(sql_select($req_sel, 'spip_versions AS versions, spip_articles AS articles', $req_where, '','', "0, 149"));
-			$id_liste = 't'.substr(md5("$req_where 149"),0,8);
-			$bouton = bouton_block_depliable($titre_table,true,$id_liste);
-			$revisions .= debut_cadre('liste',"historique-24.gif",'',$bouton)
-	 		 . debut_block_depliable(true,$id_liste);
-		
-			if ($total > $nb_aff) {
-				$nb_tranches = ceil($total / $nb_aff);
-			
-				$revisions .= "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>\n";
-		
-				for ($i = 0; $i < $nb_tranches; $i++) {
-					if ($i > 0) $revisions .= " | ";
-					if ($i*$nb_aff == $debut) $revisions .= "<b>";
-					else {
-					  $next = ($i * $nb_aff);
-$revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&id_auteur=$uniq_auteur&lang_choisie=$lang")."'>";
-					}
-					$revisions .= (($i * $nb_aff) + 1);
-					if ($i*$nb_aff == $debut) $revisions .= "</b>";
-					else $revisions .= "</a>";
-				}
-				$revisions .= "</div>";
-			}
-		}
-
-		// Afficher les 10 elements
-		while ($row = sql_fetch($result)) {
+	$revisions = '';
+	$items = array();
+	$result = sql_select($req_sel, $req_from, $req_where, '', 'versions.date DESC', "$debut, $nb_aff");
+	while ($row = sql_fetch($result)) {
 			$id_version = $row['id_version'];
 			$id_auteur = $row['id_auteur'];
 			$date = $row['date'];
@@ -132,14 +95,7 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 
 					$revisions .= "\n<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 		
-					$titre_bouton = "<span class='arial2'>";
-					$titre_bouton .= puce_statut($statut);
-					$titre_bouton .= "\n&nbsp;<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
-					$titre_bouton .= "<span class='arial1' dir='$lang_dir'>";
-					$titre_bouton .= "\n".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
-					$titre_bouton .= "</span>";
-					if (strlen($nom)>0) $titre_bouton .= "($nom)";
-					$titre_bouton .= "</span>";
+					$titre_bouton = revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom);
 					if (!$court)
 						$revisions .= bouton_block_depliable($titre_bouton,false,"$id_version-$id_article-$id_auteur");
 					else
@@ -181,16 +137,67 @@ $revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_
 				
 				if (!$rss) $revisions .= "</div>";
 	
-				if ($rss)
-					$items[] = $item;
+				else $items[] = $item;
 			}
-		}		
-		if (!$rss) $revisions .= fin_block() . fin_cadre();
-	}
+	}		
 
 	if ($rss)
 		return $items;
-	else return $revisions;
+	elseif (!$revisions) return '';
+	else return 
+	  revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $req_from, $req_where, $uniq_auteur)
+	  . $revisions
+	  . fin_block()
+	  . fin_cadre();
+}
+
+function revisions_bouton($id_article, $id_auteur, $id_version, $titre, $statut, $date, $lang_dir, $nom)
+{
+	$titre_bouton = "<span class='arial2'>";
+	$titre_bouton .= puce_statut($statut);
+	$titre_bouton .= "\n&nbsp;<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
+	$titre_bouton .= "<span class='arial1' dir='$lang_dir'>";
+	$titre_bouton .= "\n".date_relative($date)." "; # laisser un peu de privacy aux redacteurs
+	$titre_bouton .= "</span>";
+	if (strlen($nom)>0) $titre_bouton .= "($nom)";
+	$titre_bouton .= "</span>";
+	return $titre_bouton;
+}
+
+function revisions_entete_boite($court, $debut, $id_secteur, $lang, $nb_aff, $req_from, $req_where, $uniq_auteur)
+{
+
+	$titre_table =  '<b>' . _T('icone_suivi_revisions').aide('suivimodif')  . '</b>';
+	if ($court)
+		$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
+		. $titre_table;
+
+	$total = sql_countsel($req_from, $req_where, '', "0, 149");
+	$id_liste = 't'.substr(md5("$req_where 149"),0,8);
+	$bouton = bouton_block_depliable($titre_table,true,$id_liste);
+	$revisions = debut_cadre('liste',"historique-24.gif",'',$bouton)
+	. debut_block_depliable(true,$id_liste);
+		
+	if ($total > $nb_aff) {
+		$nb_tranches = ceil($total / $nb_aff);
+			
+		$revisions .= "\n<div class='arial2' style='background-color: #dddddd; padding: 5px;'>\n";
+		
+		for ($i = 0; $i < $nb_tranches; $i++) {
+			if ($i > 0) $revisions .= " | ";
+			if ($i*$nb_aff == $debut)
+				$revisions .= "<b>";
+			else {
+				$next = ($i * $nb_aff);
+				$revisions .= "<a href='".generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&id_auteur=$uniq_auteur&lang_choisie=$lang")."'>";
+			}
+			$revisions .= (($i * $nb_aff) + 1);
+			if ($i*$nb_aff == $debut) $revisions .= "</b>";
+			else $revisions .= "</a>";
+		}
+		$revisions .= "</div>";
+	}
+	return $revisions;
 }
 
 // retourne un array() des champs modifies a la version id_version
