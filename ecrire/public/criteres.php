@@ -764,6 +764,7 @@ function calculer_criteres($idb, &$boucles){
 	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
 	// s'il y avait une erreur de syntaxe, propager cette info
 	if (!is_array($boucle->criteres)) return array();
+
 	foreach ($boucle->criteres as $crit){
 		$critere = $crit->op;
 		// critere personnalise ?
