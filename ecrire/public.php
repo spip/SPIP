@@ -10,38 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
-
 // Distinguer une inclusion d'un appel initial
-if ($GLOBALS['_INC_PUBLIC']++ > 0) {
 
-	// $fond passe par INCLURE(){fond=...}
-	if (isset($contexte_inclus['fond']))
-		$fond = $contexte_inclus['fond'];
-	$fonds = array($fond);
-	if (is_array($fond)) $fonds=$fond;
-	foreach($fonds as $fond){
-		$subpage = inclure_page($fond, $contexte_inclus, _request('connect'));
-		if ($subpage['process_ins'] == 'html'){
-			echo $subpage['texte'];
-		}
-		else {
-			xml_hack($subpage, true);
-			eval('?' . '>' . $subpage['texte']);
-			// xml_hack($subpage); # sera nettoye apres l'eval() final
-		}
-	
-		// est-ce possible ?
-		if (isset($subpage['lang_select'])
-		AND $subpage['lang_select'] === true)
-			lang_select();
-	}
-}
-else {
+if (isset($GLOBALS['_INC_PUBLIC'])) {
 
-	//
-	// Discriminer les appels
-	//
+	echo recuperer_fond($fond, $contexte_inclus, array(), _request('connect'));
+
+} else {
+
+	$GLOBALS['_INC_PUBLIC'] = 0;
 
 	// Faut-il initialiser SPIP ? (oui dans le cas general)
 	if (!defined('_DIR_RESTREINT_ABS'))
@@ -53,14 +30,12 @@ else {
 			die('inc_version absent ?');
 
 
-	// cas normal, $fond defini dans le fichier d'appel
+	// $fond defini dans le fichier d'appel ?
 	// note : securise anti-injection par inc/utils.php
-	// les actions sont gerees dans
-	// public/assembler/traiter_formulaires_dynamiques
-	// de maniere unifiee public/prive
+
 	else if (isset($fond)) { }
 
-	// page=xxxx demandee par l'url
+	// fond demande dans l'url par page=xxxx ?
 	else if (isset($_GET[_SPIP_PAGE])) {
 		$fond = $_GET[_SPIP_PAGE];
 		// Securite
@@ -75,7 +50,7 @@ else {
 		// mais pas d'en retirer un en conservant les autres.
 		if ($_GET['action'] === $fond)
 			unset($_GET['action']);
-	# par defaut
+	# sinon, fond par defaut
 	} else {
 		// traiter le cas pathologique d'un upload de document ayant echoue
 		// car trop gros
@@ -90,10 +65,6 @@ else {
 		$fond = 'sommaire';
 	}
 
-	//
-	// Aller chercher la page
-	//
-
 	$tableau_des_erreurs = 	$tableau_des_temps = array();
 
 	// Particularites de certains squelettes
@@ -107,7 +78,8 @@ else {
 
 	$lang = !isset($_GET['lang']) ? '' : lang_select($_GET['lang']);
 
-	// Charger l'aiguilleur qui va mettre sur la bonne voie les traitements derogatoires
+	// Charger l'aiguilleur des traitements derogatoires
+	// (action en base SQL, formulaires CVT, AJax)
 	include_spip('public/aiguiller');
 	if (
 		// cas des appels actions ?action=xxx
@@ -119,6 +91,14 @@ else {
 	 	// cas des formulaires charger/verifier/traiter
 	  traiter_formulaires_dynamiques())
 	  exit; // le hit est fini !
+
+	// si signature de petition, l'enregistrer avant d'afficher la page
+	// afin que celle-ci contienne la signature
+
+	if (isset($_GET['var_confirm'])) {
+		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature');
+		$reponse_confirmation($_GET['var_confirm']);
+	}
 
 	// Il y a du texte a produire, charger le metteur en page
 	include_spip('public/assembler');

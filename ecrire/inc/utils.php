@@ -1413,13 +1413,28 @@ function exec_info_dist() {
  */
 // http://doc.spip.org/@recuperer_fond
 function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='') {
-	// assurer la compat avec l'ancienne syntaxe (trim etait le 3eme argument, par defaut a true)
+	include_spip('public/assembler');
+	// assurer la compat avec l'ancienne syntaxe
+	// (trim etait le 3eme argument, par defaut a true)
 	if (!is_array($options)) $options = array('trim'=>$options);
 	if (!isset($options['trim'])) $options['trim']=true;
+	if (isset($options['modele']))
+		$contexte = creer_contexte_de_modele($contexte);
 
 	$texte = "";
 	$pages = array();
-	include_spip('public/assembler');
+	if (isset($contexte['fond']))
+		$fond = $contexte['fond'];
+	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
+	if (!isset($contexte['lang']))
+		$contexte['lang'] = $GLOBALS['spip_lang'];
+
+	if ($contexte['lang'] != $GLOBALS['meta']['langue_site']) {
+		$lang_select = lang_select($contexte['lang']);
+	} else $lang_select ='';
+
+	@$GLOBALS['_INC_PUBLIC']++;
+
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $connect);
 		if (isset($options['raw']) AND $options['raw'])
@@ -1427,7 +1442,10 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		else
 			$texte .= $options['trim'] ? rtrim($page['texte']) : $page['texte'];
 	}
-	
+
+	$GLOBALS['_INC_PUBLIC']--;
+
+	if ($lang_select) lang_select();	
 	if (isset($options['raw']) AND $options['raw'])
 		return is_array($fond)?$pages:reset($pages);
 	else

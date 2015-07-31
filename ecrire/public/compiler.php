@@ -40,9 +40,9 @@ include_spip('public/balises');
 include_spip('public/jointures');
 
 // http://doc.spip.org/@argumenter_inclure
-function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true){
+function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true	, $lang = ''){
 	$l = array();
-	$lang = '';
+
 	foreach($struct->param as $val) {
 		$var = array_shift($val);
 		if ($var == 'lang') {
@@ -56,6 +56,9 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 	}
 	// Cas particulier de la langue : si {lang=xx} est definie, on
 	// la passe, sinon on passe la langue courante au moment du calcul
+	// sauf si on n'en veut pas 
+	if ($lang === false) return $l;
+
 	$l['lang'] = ($echap?"\'lang\' => ' . argumenter_squelette(":"'lang' => ")  .
 		($lang
 			? calculer_liste($lang[0], $descr, $boucles, $id_boucle)

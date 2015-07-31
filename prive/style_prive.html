@@ -21,7 +21,7 @@
 #SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
 
 [(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
-[(#INCLURE{fond=style_vieilles_def}{couleur_claire}{couleur_foncee}{ltr})]
+[(#INCLURE{fond=style_vieilles_def}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 
 body { background-color: #f8f7f3; margin: 0; border: 0; color: #000; scrollbar-face-color: #FFF; scrollbar-shadow-color: #FFF; scrollbar-highlight-color: #FFF; scrollbar-3dlight-color: #GET{claire}; scrollbar-darkshadow-color: #FFF; scrollbar-track-color: #GET{foncee}; scrollbar-arrow-color: #GET{foncee}; }
 body, body * { font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
@@ -766,5 +766,5 @@ body.sites .no_onglets #contenu #wysiwyg div.contenu_nom_site {display: none;}
 }
 
 /******** Formulaires **************/
-[(#INCLURE{fond=style_prive_formulaires}{couleur_claire}{couleur_foncee}{ltr})]
+[(#INCLURE{fond=style_prive_formulaires}{couleur_claire}{couleur_foncee}{lang}{ltr})]
 /******** Formulaires fin  **************/

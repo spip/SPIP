@@ -85,12 +85,12 @@ function traiter_appels_inclusions_ajax(){
 			include_spip('public/assembler');
 			$contexte = calculer_contexte();
 			$contexte = array_merge($args, $contexte);
-			$page = evaluer_fond($fond,$contexte);
+			$page = recuperer_fond($fond,$contexte,array('trim'=>false));
 			$texte = $page['texte'];
 		}
 		else 
 			$texte = _L('signature ajax bloc incorrecte');
-		ajax_retour($page['texte']);
+		ajax_retour($texte);
 		return true; // on a fini le hit
 	}
 	return false;	

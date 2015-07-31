@@ -10,92 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-// http://doc.spip.org/@init_var_mode
-function init_var_mode(){
-	static $done = false;
-	if (!$done) {
-		// On fixe $GLOBALS['var_mode']
-		$GLOBALS['var_mode'] = false;
-		$GLOBALS['var_preview'] = false;
-		$GLOBALS['var_images'] = false;
-		if (isset($_GET['var_mode'])) {
-			// tout le monde peut calcul/recalcul
-			if ($_GET['var_mode'] == 'calcul'
-			OR $_GET['var_mode'] == 'recalcul')
-				$GLOBALS['var_mode'] = $_GET['var_mode'];
-		
-			// preview et debug necessitent une autorisation
-			else if ($_GET['var_mode'] == 'preview'
-			OR $_GET['var_mode'] == 'debug') {
-				include_spip('inc/autoriser');
-				if (autoriser(
-					($_GET['var_mode'] == 'preview')
-						? 'previsualiser'
-						: 'debug'
-				)) {
-					// preview ?
-					if ($_GET['var_mode'] == 'preview') {
-						// forcer le compilo et ignorer les caches existants
-						$GLOBALS['var_mode'] = 'recalcul';
-						// truquer les boucles et ne pas enregistrer de cache
-						$GLOBALS['var_preview'] = true;
-					}
-					// seul cas ici: 'debug'
-					else { 
-						$GLOBALS['var_mode'] = $_GET['var_mode'];
-					}
-					spip_log($GLOBALS['visiteur_session']['nom']
-						. " ".$GLOBALS['var_mode']);
-				}
-				// pas autorise ?
-				else {
-					// si on n'est pas connecte on se redirige
-					if (!$GLOBALS['visiteur_session']) {
-						include_spip('inc/headers');
-						redirige_par_entete(generer_url_public('login',
-						'url='.rawurlencode(
-						parametre_url(self(), 'var_mode', $_GET['var_mode'], '&')
-						), true));
-					}
-					// sinon tant pis
-				}
-			}
-			else if ($_GET['var_mode'] == 'images'){
-				// forcer le compilo et ignorer les caches existants
-				$GLOBALS['var_mode'] = 'calcul';
-				// indiquer qu'on doit recalculer les images
-				$GLOBALS['var_images'] = true;
-			}
-		}		
-		$done = true;
-	}
-}
-
-// fonction pour l'envoi de fichier
-// http://doc.spip.org/@envoyer_page
-function envoyer_page($fond, $contexte)
-{
-	$page = inclure_page($fond, $contexte);
-	if (!is_array($page['entetes'])) {
-		include_spip('inc/headers');
-		redirige_par_entete(generer_url_public('404'));
-	}
-	envoyer_entetes($page['entetes']);
-	echo $page['texte'];
-}
-
-// Envoyer les entetes, en retenant ceux qui sont a usage interne
-// et demarrent par X-Spip-...
-// http://doc.spip.org/@envoyer_entetes
-function envoyer_entetes($entetes) {
-	foreach ($entetes as $k => $v)
-	#	if (strncmp($k, 'X-Spip-', 7))
-			@header("$k: $v");
-}
-
 
 //
 // calcule la page et les entetes
@@ -104,26 +19,16 @@ function envoyer_entetes($entetes) {
 //
 
 // http://doc.spip.org/@assembler
-function assembler($fond, $connect='', $lang='') {
+function assembler($fond, $connect='') {
 
 	global $flag_preserver,$lastmodified, $use_cache;
 
-	// si signature de petition, l'enregistrer avant d'afficher la page
-	// afin que celle-ci contienne la signature
-	if (isset($_GET['var_confirm'])) {
-		$reponse_confirmation = charger_fonction('reponse_confirmation','formulaires/signature');
-		$reponse_confirmation($_GET['var_confirm']);
-	}
-	
-	init_var_mode();
-	
-	if ($lang) lang_select();
-
+	$GLOBALS['contexte'] = calculer_contexte();
 	// Cette fonction est utilisee deux fois
 	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	// Si un resultat est retourne, c'est un message d'impossibilite
-	$res = $cacher(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
+	$res = $cacher($GLOBALS['contexte'], $use_cache, $chemin_cache, $page, $lastmodified);
 	if ($res) {return array('texte' => $res);}
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
@@ -158,13 +63,14 @@ function assembler($fond, $connect='', $lang='') {
 	} else {
 		// si la page est prise dans le cache
 		if (!$use_cache)  {
-			// Informer les boutons d'admin du contexte
+		// Informer les boutons d'admin du contexte
+		// (fourni par assembler_contexte lors de la mise en cache)
 			$GLOBALS['contexte'] = $page['contexte'];
 		}
 		// sinon analyser le contexte & calculer la page
 		else {
-			$parametrer = charger_fonction('parametrer', 'public');
 			assembler_contexte($fond);
+			$parametrer = charger_fonction('parametrer', 'public');
 			$page = $parametrer($fond, $GLOBALS['contexte'], $chemin_cache, $connect);
 
 			// Ajouter les scripts avant de mettre en cache
@@ -222,7 +128,6 @@ function assembler($fond, $connect='', $lang='') {
 // http://doc.spip.org/@assembler_contexte
 function assembler_contexte(&$fond)
 {
-	$GLOBALS['contexte'] = calculer_contexte();
 	$renommer_urls = generer_url_entite();
 	if (!$renommer_urls) {
 			// compatibilite <= 1.9.2
@@ -242,22 +147,15 @@ function assembler_contexte(&$fond)
 // http://doc.spip.org/@calculer_contexte
 function calculer_contexte() {
 
-	include_spip('inc/filtres'); // pour normaliser_date
 	$contexte = array();
 	foreach($_GET as $var => $val) {
-		if (strpos($var, 'var_') !== 0)
+		if (strpos($var, 'var_') !== 0 AND $var != 'PHPSESSID')
 			$contexte[$var] = $val;
 	}
 	foreach($_POST as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
-
-	if (($a = _request('date')) !== null)
-		$contexte['date'] = $contexte['date_redac'] = normaliser_date($a);
-	else
-		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
-
 	return $contexte;
 }
 
@@ -277,66 +175,56 @@ function auto_content_type($page)
 }
 
 // http://doc.spip.org/@inclure_page
-function inclure_page($fond, $contexte_inclus, $connect='') {
+function inclure_page($fond, $contexte, $connect='') {
+
 	global $lastmodified;
-	if (!defined('_PAS_DE_PAGE_404'))
-		define('_PAS_DE_PAGE_404',1);
 
-	$contexte_inclus['fond'] = $fond; // securite, necessaire pour calculer correctement le cache
-
-	// Si on a inclus sans fixer le critere de lang, on prend la langue courante
-	if (!isset($contexte_inclus['lang']))
-		$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
-
-	if ($contexte_inclus['lang'] != $GLOBALS['meta']['langue_site']) {
-		$lang_select = lang_select($contexte_inclus['lang']);
-	} else $lang_select ='';
-
-	init_var_mode();
-
+	// pour calculer correctement le nom du cache
+	$contexte['fond'] = $fond; 
 	$cacher = charger_fonction('cacher', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache :
 	// emplacement, validite, et, s'il est valide, contenu & age
-	$cacher($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
-
-	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
-	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent
-	
-	// ATTENTION : les balises dynamiques passent par la, et l'ajout de la date/heure/seconde rend
-	// tout cache invalide, meme si le reste des arguments est constant
-	// probleme possible de perf ici
-	if (!isset($contexte_inclus['date']))
-		$contexte_inclus['date'] = date('Y-m-d H:i:s');
-	if (!isset($contexte_inclus['date_redac']))
-		$contexte_inclus['date_redac'] = $contexte_inclus['date'];
-	// il faut enlever le fond de contexte inclus car sinon il prend la main
+	$res = $cacher($contexte, $use_cache, $chemin_cache, $page, $lastinclude);
+	// enlever le fond de contexte inclus car sinon il prend la main
 	// dans les sous inclusions -> boucle infinie d'inclusion identique
-	unset($contexte_inclus['fond']);
+	unset($contexte['fond']);
+
+	if ($res) {return array('texte' => $res);}
 
 	// Si use_cache vaut 0, la page a ete tiree du cache et se trouve dans $page
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
 	}
-	// sinon on la calcule
+	// sinon on la calcule et on ajoute la date (et date_redac)
+	// dans le contexte, pour que les criteres {age} etc fonctionnent
+	// ATTENTION : les balises dynamiques passent par la, 
+	// l'ajout de la date/heure/seconde rend tout cache invalide,
+	// meme si le reste des arguments est constant
+	// probleme possible de perf ici
 	else {
+		include_spip('inc/filtres'); // pour normaliser_date
+		if (isset($contexte['date']))
+			$contexte['date'] = normaliser_date($contexte['date']);
+		else	$contexte['date'] = date("Y-m-d H:i:s");
+
+		if (!isset($contexte['date_redac']))
+			$contexte['date_redac'] = $contexte['date'];
+		else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
 		$parametrer = charger_fonction('parametrer', 'public');
-		$page = $parametrer($fond, $contexte_inclus, $chemin_cache, $connect);
+		$page = $parametrer($fond, $contexte, $chemin_cache, $connect);
 
 		$lastmodified = time();
 		// et on l'enregistre sur le disque
 		if ($chemin_cache
 		AND $page['entetes']['X-Spip-Cache'] > 0)
-			$cacher($contexte_inclus, $use_cache, $chemin_cache, $page,
+			$cacher($contexte, $use_cache, $chemin_cache, $page,
 				$lastmodified);
 	}
-	if ($lang_select) lang_select();
 
 	return $page;
 }
 
-
 # Attention, un appel explicite a cette fonction suppose certains include
-# (voir l'exemple de spip_inscription et spip_pass)
 # $echo = faut-il faire echo ou return
 
 // http://doc.spip.org/@inclure_balise_dynamique
@@ -350,10 +238,13 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		// delais a l'ancienne, c'est pratiquement mort
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
-		$GLOBALS['_INC_PUBLIC']++;
-		$page = inclure_page($fond, $contexte_inclus);
-		$GLOBALS['delais'] = $d;
 
+		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true));
+
+		$texte = $page['texte'];
+
+		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
+		$GLOBALS['delais'] = $d;
 		// Faire remonter les entetes
 		if (is_array($page['entetes'])) {
 			// mais pas toutes
@@ -366,19 +257,6 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 					array_merge($GLOBALS['page']['entetes'],$page['entetes']);
 			}
 		}
-
-		if ($page['process_ins'] == 'html') {
-				$texte = $page['texte'];
-		} else {
-				ob_start();
-				xml_hack($page, true);
-				eval('?' . '>' . $page['texte']);
-				$texte = ob_get_contents();
-				xml_hack($page);
-				ob_end_clean();
-		}
-		page_base_href($texte);
-		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
 		// on se refere a $page['contexte'] a la place
 		if (isset($page['contexte']['_pipeline'])) {
 			$pipe = is_array($page['contexte']['_pipeline'])?reset($page['contexte']['_pipeline']):$page['contexte']['_pipeline'];
@@ -491,8 +369,9 @@ function f_msie ($texte) {
 
 // http://doc.spip.org/@message_erreur_404
 function message_erreur_404 ($erreur= "") {
-	if (defined('_PAS_DE_PAGE_404'))
-		return "erreur";
+	static $deja = false;
+	if ($deja) return "erreur";
+	$deja = true;
 	if (!$erreur) {
 		if (isset($GLOBALS['id_article']))
 		$erreur = 'public:aucun_article';
@@ -544,6 +423,7 @@ function creer_contexte_de_modele($args) {
 // Calcule le modele et retourne la mini-page ainsi calculee
 // http://doc.spip.org/@inclure_modele
 function inclure_modele($type, $id, $params, $lien, $connect='') {
+	spip_log("inclumode $compteur $type $id " . @join(',', $params));
 	static $compteur;
 	if (++$compteur>10) return ''; # ne pas boucler indefiniment
 
@@ -628,8 +508,8 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 	$GLOBALS['compt_note'] = 0;
 
 	// Appliquer le modele avec le contexte
-	$page = evaluer_fond($contexte['fond'], $contexte, $connect);
-	$retour = trim($page['texte']);
+	$page = recuperer_fond($fond, $contexte, array('raw' => true));
+	$retour = $page['texte'];
 
 	// Lever un drapeau (global) si le modele utilise #SESSION
 	// a destination de public/parametrer
@@ -673,18 +553,17 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 
 // Un inclure_page qui marche aussi pour l'espace prive
 // fonction interne a spip, ne pas appeler directement
-// pour recuperer $page complet, utiliser recuperer_fond($fond,$contexte,array('raw'=>true))
+// pour recuperer $page complet, utiliser:
+// 	recuperer_fond($fond,$contexte,array('raw'=>true))
 // http://doc.spip.org/@evaluer_fond
 function evaluer_fond ($fond, $contexte=array(), $connect=null) {
-
-	if (!isset($GLOBALS['_INC_PUBLIC'])) $GLOBALS['_INC_PUBLIC'] = 0;
-	$GLOBALS['_INC_PUBLIC']++;
 
 	if (isset($contexte['fond'])
 	AND $fond === '')
 		$fond = $contexte['fond'];
 
 	$page = inclure_page($fond, $contexte, $connect);
+
 	// Lever un drapeau (global) si le fond utilise #SESSION
 	// a destination de public/parametrer
 	if (isset($page['invalideurs'])
@@ -700,8 +579,6 @@ function evaluer_fond ($fond, $contexte=array(), $connect=null) {
 		ob_end_clean();
 	}
 	page_base_href($page['texte']);
-	
-	$GLOBALS['_INC_PUBLIC']--;
 
 	return $page;
 }
@@ -759,4 +636,15 @@ function page_base_href(&$texte){
 		}
 	}
 }
+
+
+// Envoyer les entetes, en retenant ceux qui sont a usage interne
+// et demarrent par X-Spip-...
+// http://doc.spip.org/@envoyer_entetes
+function envoyer_entetes($entetes) {
+	foreach ($entetes as $k => $v)
+	#	if (strncmp($k, 'X-Spip-', 7))
+			@header("$k: $v");
+}
+
 ?>
