@@ -554,12 +554,15 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 
 	if ($prefixe) $table = preg_replace('/^spip/', $prefixe, $table);
 
+	$query ="INSERT INTO $table $champs VALUES $valeurs";
+	if (!$requeter) return $query;
+	
 	if (isset($_GET['var_profile'])) {
 		include_spip('public/tracer');
 		$t = trace_query_start();
 	} else $t = 0 ;
  
-	$connexion['last'] = $query ="INSERT INTO $table $champs VALUES $valeurs";
+	$connexion['last'] = $query;
 #	spip_log($query);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
@@ -650,6 +653,7 @@ function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
 			  calculer_mysql_expression('DELETE FROM', $table, ',')
 			. calculer_mysql_expression('WHERE', $where),
 			$serveur, $requeter);
+	if (!$requeter) return $res;
 	if ($res){
 		$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 		return $link ? mysql_affected_rows($link) : mysql_affected_rows();
