@@ -86,9 +86,9 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 		array('formulaire_ecrire_auteur', 0,
 			array(
 			'id' => $id,
-			'mailko' => $mailko ? $puce : '',
+			'mailko' => $mailko ? ' ' : '',
 			'mail' => $adres,
-			'sujetko' => ($texte && !$sujet) ? $puce : '',
+			'sujetko' => ($texte && !$sujet) ? ' ' : '',
 			'sujet' => $sujet,
 			'texte' => $texte,
 			'valide' => ($validable ? $id : ''),
