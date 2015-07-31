@@ -1391,7 +1391,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if ($auth_can_disconnect) {
 		echo "<td width='5'>&nbsp;</td>";
-		icone_bandeau_secondaire ("Se d&eacute;connecter", "../login.php3?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
+		icone_bandeau_secondaire ("Se d&eacute;connecter", "../spip_login.php3?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
 	}
 
 	echo "</tr></table>";

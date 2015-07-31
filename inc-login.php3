@@ -18,7 +18,7 @@ function auth_http($cible, $redirect_echec, $essai_auth_http) {
 	if ($essai_auth_http == 'oui') {
 		include_ecrire('inc_session.php3');
 		if (!verifier_php_auth()) {
-			ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='login.php3?essai_auth_http=oui'>Nouvelle tentative</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
+			ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='$redirect_echec?essai_auth_http=oui'>Nouvelle tentative</a>] [<a href='ecrire/'>espace priv&eacute</a>]");
 		} else {
 			$cible->addVar('bonjour','oui');
 			@header("Location: " . $cible->getUrl() );
@@ -128,7 +128,7 @@ function login($cible, $redirect_echec) {
 		echo "<td width=100%>";
 		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 		echo "<script type=\"text/javascript\"><!--\n" .
-			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=login.php3\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
+			"document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode("spip_login.php3")."\\'>se connecter sous un autre identifiant</a>]</font>');\n" .
 			"//--></script>\n";
 		echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
