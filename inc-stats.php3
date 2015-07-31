@@ -88,7 +88,7 @@ if ($GLOBALS['populogarithme'] == 'oui') {
 	if ($id_article) {
 		$pts = ($log_referer == '') ? 1 : 2;
 		$query = "UPDATE spip_articles
-			SET popularite = popularite*POW(1-$a,NOW()-maj)+$b*$pts
+			SET popularite = popularite*POW(1-$a,(NOW()-maj)/60)+$b*$pts
 		    WHERE id_article = $id_article";
 		include_ecrire("inc_connect.php3"); // pas cool
 		if ($GLOBALS['db_ok'])
@@ -102,7 +102,7 @@ if ($GLOBALS['populogarithme'] == 'oui') {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			$query = "UPDATE spip_articles
-				SET popularite = popularite*POW(1-$a,NOW()-maj)";
+				SET popularite = popularite*POW(1-$a,(NOW()-maj)/60)";
 			spip_query($query);
 			include_ecrire("inc_meta.php3");
 			ecrire_meta("date_stats_popularite", time());
