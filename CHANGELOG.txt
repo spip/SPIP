@@ -1,3 +1,59 @@
+SPIP-core spip-3.0.4 -> spip-3.0.5 
+--------------------------------- 
+
+r19786 | cedric    | 2012-08-02 14:35:20 | Complement a r19775 : explications et optimisation (il faut en fait doubler la condition objet='xxx' pour être exact et optimisé)
+r19794 | cedric    | 2012-08-05 00:02:49 | eviter une notice
+r19795 | cedric    | 2012-08-05 00:07:21 | r19756 en mieux : on ne modifie defaut que si on compose une expression, sinon on le renvoie tel quelMais dans tous les cas #RANG ne fonctionnera pas comme attendu si une boucle DATA est dans la pile. A revoir sans doute.
+r19796 | cedric    | 2012-08-05 11:25:51 | Les fonctions champ_sql et index_pile s'enrichissent d'un parametre supplementaire permettant de ne pas remonter dans la pile des boucles et de ne chercher que dans la premiere englobante. La valeur true par defaut ne change rien au comportement des fonctions.
+r19797 | cedric    | 2012-08-05 11:28:15 | Quand on cherche le champ SQL rang avant de le composer, on ne veut regarder que dans la premiere boucle englobante. Si pas de champ, on compose alors la valeur calculee (repare le champ #RANG dans une boucle englobée par une boucle DATA).Au besoin, une reference explicite #_autreboucle:RANG permet de cibler le vrai champ SQL (ou calculé) d'une boucle englobante superieure
+r19801 | kent1     | 2012-08-07 16:04:14 | correction du commentaire de code... le pipeline a changé de ajouter_boutons => ajouter_menus
+r19809 | b_b       | 2012-08-11 13:56:29 | report de r19808 : appliquer direction_css aux css des boutons d'admin (George)
+r19811 | b_b       | 2012-08-14 11:52:01 | report de r19810 ; ferme #2820 : fix pour les langues en RTL
+r19816 | kent1     | 2012-08-16 14:29:18 | report de r19815 :Paginer les listes de rubriques par 500 dans le privé.Evite que la page plante dans les cas où l'on a beaucoup de sous-rubriques d'une même rubrique (testé avec plus de 70000)
+r19818 | b_b       | 2012-08-16 19:09:38 | Report de r19817 : Réparer le message qui signale la dispo d'une nouvelle version de SPIP (tonton)
+r19827 | cedric    | 2012-08-20 11:22:08 | Report de r19825 : class grostitre manquante (arno)
+r19828 | cedric    | 2012-08-20 11:23:07 | Report de r19826 : Les submits en display:none sont ignorés par certains navigateurs (webkit) et non déclenchés par "Entrée" qui active alors le mauvais bouton (arno)
+r19833 | kent1     | 2012-08-22 13:29:46 | #GET{rubriques_branche} n'est jamais utilisé... On vire cette boucle qui peut prendre des plombes si on a beaucoup de rubriques
+r19848 | b_b       | 2012-08-26 12:27:37 | report de r19847 : orthographe (patv)
+r19857 | b_b       | 2012-09-04 10:25:35 | éviter un débordement du bloc ajax qui liste les articles d'une rubrique quand on est connecté en tant que rédacteur (touti)
+r19868 | cedric    | 2012-09-07 15:05:59 | Les bonnes URLS dans le RSS de l'espace privé (Ferme #2826)
+r19869 | cedric    | 2012-09-07 16:16:41 | Ferme #2793 : ne pas echapper les single quotes dans les flux RSS, certains outils de syndications echouent a comprendre cela
+r19870 | cedric    | 2012-09-07 16:58:16 | #2839 : la configuration Articles : Menu de langue [non] / Articles gérer les liens de traduction [oui] est licite et doit être possible
+r19871 | cedric    | 2012-09-07 17:12:08 | Ferme #2839 : Quand on a pas activé le menu de langue sur un objet mais la possibilité de le traduire, afficher quand même le formulaire_traduire mais sans permettre de changer de langue. La creation d'un article hérite alors automatiquement de la langue de la rubrique dans cette configuration
+r19872 | cedric    | 2012-09-07 17:21:39 | #2752 : Retablir le fonctionnement de #FORMULAIRE_INSCRIPTION
+r19873 | cedric    | 2012-09-07 17:25:14 | Le second argument focus a été supprimé dans SPIP 3, et PHPDOCFerme #2752
+r19878 | cedric    | 2012-09-07 17:39:30 | r18995 avait enlevé la suppression des articles à la poubelle, par erreur (b_b, MegaHell)
+r19880 | cedric    | 2012-09-07 20:57:53 | Ferme #2839, vraiment : r19871 avait bien retabli le choix de la configuration qui fait que article_inserer pose la langue de la rubrique lorsqu'on crée une traduction. Mais le #FORMULAIRE_ARTICLE poste un changer_lang en cas de trad, qui était ignoré dans SPIP 2.x sur les articles, mais plus ici en vertu de sa prise en charge générique.On l'annule donc dans le traiter du formulaire, ce qui a le moins d'impact possible, car la feature sert sur les autres objets.
+r19891 | marcimat  | 2012-09-10 21:27:52 | Report de r19890
+r19893 | marcimat  | 2012-09-10 21:34:47 | Tss ! Un rien trop vite dans r19890 (suppression par inadvertance du formulaire)
+r19894 | cedric    | 2012-09-11 09:43:31 | La fonction notifications_envoyer_mails est capable de prendre en charge un mail <html> dans $texte. Dans ce cas elle extrait le sujet (si besoin) de la balise <title>, et ajoute un headers Content-Type si besoin.+PHPDoc
+r19897 | cedric    | 2012-09-11 12:56:18 | Dans une requete HEAD renvoyer le vrai en-tête. Pour cela on est bien obligé de calculer toute la page, mais on coupe la connexion après les entête http.On perd donc la rapidité de calcul des requetes HEAD au profit de leur exactitude.Dans la mesure ou HEAD représente en général moins de 1% des requetes (voire de l'ordre de 2/1000 sur un echantillon de sites en production) la perte en performance serveur est négligeable (d'autant plus qu'une réponse 200 a toute les chances de générer une requete complète à suivre).A contrario, en cas de soucis, ou pour analyser une page ou le comportement de SPIP, avoir une réponse pertinente sur HEAD est plus utile. Et la page est en cache pour l'éventuelle requete complète qui suit.
+r19901 | marcimat  | 2012-09-12 11:15:21 | Report de r19900 : classes lat sur les colonnes des exec php
+
+plugins-dist spip-3.0.4 -> spip-3.0.5 
+--------------------------------- 
+
+r64570 | yffic     | 2012-08-07 19:46:04 | Petite précision sur le message d'erreur en cas de répertoire lib inexistant
+r64787 | kent1     | 2012-08-14 11:34:43 | un peu de documentation
+r64791 | kent1     | 2012-08-14 11:49:07 | Report de r64790Un petit peu de doc
+r64826 | kent1     | 2012-08-15 11:04:50 | Report de r64825 :Bonne déclaration des pipelines pour qu'ils n'affichent pas de message d'erreur dans les logsOn ajoute credits dans les champs versionnésSur la page d'édition d'un document, pouvoir délier/supprimer le document si on en a les droitsL'inclusion pour les listes des documents afin qu'ils apparaissent dans la recherche... c'est un peu chiant de rechercher un document avec la recherche standard du privé et de tomber sur une page videSi on a beaucoup de documents, pouvoir augmenter le nombre de documents visibles de la médiathèque par 10 | 50 | 100 | 500 en fonction du nombre de documents dans le siteNouvelle option de tri dans la médiathèque : filtrer les documents n'ayant pas de vignette personnalisée
+r64923 | kent1     | 2012-08-17 15:47:39 | Report de r64922Une chaine de langue manquante lorsque l'on souhaite revenir à une révision
+r65024 | cedric    | 2012-08-20 11:25:16 | Report de r65023 : Les submits en display:none sont ignorés par certains navigateurs (webkit) et non déclenchés par "Entrée" qui active alors le mauvais bouton (arno)
+r65460 | cedric    | 2012-09-03 11:33:48 | L'element <description> du <channel> atom est obligatoire, gardons le même si il est vide (Olivier G.)
+r65678 | cedric    | 2012-09-07 16:39:39 | Corrige http://core.spip.org/issues/2771 mais pas generique, a revoir
+r65711 | rasta     | 2012-09-10 16:03:13 | Bug sur l'accès aux documents protégés : suppression du test qui visait à optimiser, car on tombait alors paradoxalement sur le "deny from all" dès qu'un document n'était pas restreint (quand tout le monde pouvait le voir).
+r65718 | rasta     | 2012-09-10 16:58:38 | Il ne faut pas générer des entités dans l'URL, celle-ci n'étant pas forcément pour une utilisation dans du HTML
+r65739 | marcimat  | 2012-09-11 10:41:50 | Suppression du porte plume avant recopie du trunk
+r65740 | marcimat  | 2012-09-11 10:42:36 | Report du trunk de porte plume dans la branche
+r65741 | marcimat  | 2012-09-11 10:44:05 | Version de spip max est la 3.0
+r65742 | marcimat  | 2012-09-11 10:45:54 | Suppression de SVP avant recopie du trunk
+r65743 | marcimat  | 2012-09-11 10:46:42 | Report du trunk de SVP dans la branche
+r65786 | marcimat  | 2012-09-12 08:54:47 | Report de r65785 : Les très vieux appels à afficher_documents_colonne() n'affichaient plus la gestion des documents. On mappe la fonction sur l'inclusion du squelette qui va bien.
+r65787 | marcimat  | 2012-09-12 09:37:44 | Suppression du plugin grenier avant de rapatrier le trunk actuel (vieilles listes de mots et scripts utf en plus)
+r65788 | marcimat  | 2012-09-12 09:39:35 | Trunk de grenier dans la branche 3 : vieilles liste de mots et scripts utf8 en plus
+r65789 | cedric    | 2012-09-12 09:42:46 | Mise a jour de la librairie Colorbox en 1.3.20.1 patchée d'après https://github.com/Cerdic/colorbox
+r65793 | marcimat  | 2012-09-12 10:06:06 | Report de r65971 (correction de noms de variables).Commande utiliséesvn merge -r 65790:HEAD plugins/grenier branches/spip-3.0/plugins/grenierCette commande est à préférer plutot que de supprimer la branche et copier le trunk (cédric).
+
 SPIP spip-3.0.3 -> spip-3.0.4
 -----------------------------------------
 
