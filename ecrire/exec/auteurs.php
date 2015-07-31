@@ -290,17 +290,17 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	// limiter les statuts affiches
 	if ($connect_statut == '0minirezo') {
 		if ($statut[0]=='!') {
-			  $statut = substr($statut,1); $not = " NOT";
+			  $statut = substr($statut,1); $not = "NOT";
 		} else $not = '';
 		$visit = !statut_min_redac($statut);
-		$statut = preg_replace('/\W+/',"','",$statut); 
-		$sql_visible = "aut.statut$not IN ('$statut')";
+		$statut = preg_split('/\W+/', $statut); 
+		$sql_visible = sql_in("aut.statut", $statut, $not);
 	} else {
 		$sql_visible = "(
 			aut.statut = '0minirezo'
-			OR art.statut IN ('prop', 'publie')
 			OR aut.id_auteur=$connect_id_auteur
-		)";
+			OR " . sql_in('art.statut', array('prop', 'publie'))
+		. ')';
 		$visit = false;
 	}
 
