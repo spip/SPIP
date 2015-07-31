@@ -29,12 +29,17 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 	// la traduction ;
 	// - [{en}->art2] => traduction anglaise de l'article 2, sinon art 2
 	// - [{}->art2] => traduction en langue courante de l'art 2, sinon art 2
+	// s'applique a tout objet traduit
 	if ($hlang
 	AND $match = typer_raccourci($lien)) { 
-		@list($type,,$id,,$args,,$ancre) = $match; 
-		if ($id_trad = sql_getfetsel('id_trad', 'spip_articles', "id_article=$id")
-		AND $id_dest = sql_getfetsel('id_article', 'spip_articles',
-			"id_trad=$id_trad AND lang=" . sql_quote($hlang))
+		@list($type,,$id,,$args,,$ancre) = $match;
+		$table_objet_sql = table_objet_sql($type);
+		$id_table_objet = id_table_objet($type);
+		if ($row=sql_fetsel('*', $table_objet_sql, "$id_table_objet=".intval($id))
+			AND isset($row['id_trad'])
+			AND isset($row['lang'])
+			AND $id_dest = sql_getfetsel($id_table_objet, $table_objet_sql,"id_trad=".intval($row['id_trad'])." AND lang=" . sql_quote($hlang))
+			AND objet_test_si_publie($type,$id_dest)
 		)
 			$lien = "$type$id_dest";
 		else
