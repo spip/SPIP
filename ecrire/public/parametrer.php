@@ -159,10 +159,10 @@ function sql_chapo($id_article) {
 # retourne le parent d'une rubrique
 
 function sql_parent($id_rubrique) {
-	$id_parent = spip_abstract_fetsel(array('id_parent'), 
+	$id_parent = spip_abstract_fetsel(array('id_parent'),
 			array('spip_rubriques'), 
 			array("id_rubrique=" . intval($id_rubrique)));
-	return $id_parent['id_parent'];
+	return intval($id_parent['id_parent']);
 }
 
 # retourne la profondeur d'une rubrique
