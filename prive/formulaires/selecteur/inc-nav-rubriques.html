@@ -10,10 +10,11 @@
 	alt='ajouter'
 	width="16"
 	height="16"
-	/></a>#TITRE]<a
+	/></a>#TITRE][(#ID_RUBRIQUE|test_enfants_rubrique{#LISTE{#ENV{articles,''}}}|?{[
+	<a
 	class='ajax'
-	href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'>[#TITRE(#ENV{rubriques,0}|non)]<img
-	class='ouvrir' src='#CHEMIN_IMAGE{fleche-droite-16.png}' alt='' /></a></li>
+	href='[(#SELF|parametre_url{id_r,#ID_RUBRIQUE})]'
+		>[#TITRE(#ENV{rubriques,0}|non)](#CHEMIN_IMAGE{fleche-droite-16.png}|balise_img{'',ouvrir})</a>],[#TITRE(#ENV{rubriques,0}|non)]})]</li>
 </BOUCLE_enfants>
 </ul>
 </B_enfants>
