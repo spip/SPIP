@@ -3,13 +3,13 @@
 <rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
 
 <channel>
-	<title>[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)]</title>
+	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 	<link>#URL_SITE_SPIP/</link>
 	<description></description>
 	<language>#LANG</language>
 
 	<image>
-		<title>[(#NOM_SITE_SPIP|textebrut|entites_html|entites_unicode)]</title>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 		<url>#URL_SITE_SPIP/IMG/ruboff0.gif</url>
 		<link>#URL_SITE_SPIP/</link>
 		<description></description>
@@ -20,11 +20,11 @@
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
 	<BOUCLE1(ARTICLES){branche}{par date}{inverse}{0,10}>
 		<item>
-			<title>[(#TITRE|textebrut|entites_html|entites_unicode)]</title>
+			<title>[(#TITRE|texte_backend)]</title>
 			<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 			<date>#DATE</date>
-			<description>[(#LOGO_ARTICLE|left||entites_html) ][(#INTRODUCTION|textebrut|entites_html|entites_unicode)]</description>
-			<author><BOUCLE23(AUTEURS){id_article}{", "}>[(#NOM|textebrut|entites_html|entites_unicode)]</BOUCLE23></author>
+			<description>[(#INTRODUCTION|texte_backend)]</description>
+			<author><BOUCLE23(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE23></author>
 		</item>
 	</BOUCLE1>
 </BOUCLE_rub>
@@ -33,22 +33,22 @@
 
 	<BOUCLE2(ARTICLES){tout}{par date}{inverse}{0,10}{unique}>
 	    <item>
-	      <title>[(#TITRE|textebrut|entites_html|entites_unicode)]</title>
+	      <title>[(#TITRE|texte_backend)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 	      <date>#DATE</date>
-	      <description>[(#LOGO_ARTICLE|left||entites_html) ][(#INTRODUCTION|textebrut|entites_html|entites_unicode)]</description>
-	      <author><BOUCLE_aut2(AUTEURS){id_article}{", "}>[(#NOM|textebrut|entites_html|entites_unicode)]</BOUCLE_aut2></author>
-	      <dc:creator><BOUCLE_aut2b(AUTEURS){id_article}{", "}>[(#NOM|textebrut|entites_html|entites_unicode)]</BOUCLE_aut2b></dc:creator>
+	      <description>[(#INTRODUCTION|texte_backend)]</description>
+	      <author><BOUCLE_aut2(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2></author>
+	      <dc:creator><BOUCLE_aut2b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2b></dc:creator>
 	    </item>
 	</BOUCLE2>
 	<BOUCLE3(ARTICLES){tout}{par date}{inverse}{age<3}{unique}>
 	    <item>
-	      <title>[(#TITRE|textebrut|entites_html|entites_unicode)]</title>
+	      <title>[(#TITRE|texte_backend)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 	      <date>#DATE</date>
-	      <description>[(#LOGO_ARTICLE|left||entites_html) ][(#INTRODUCTION|textebrut|entites_html|entites_unicode)]</description>
-	      <author><BOUCLE_aut3(auteurs){id_article}{","}>[(#NOM|textebrut|entites_html|entites_unicode)]</BOUCLE_aut3></author>
-	      <dc:creator><BOUCLE_aut3b(AUTEURS){id_article}{", "}>[(#NOM|textebrut|entites_html|entites_unicode)]</BOUCLE_aut3b></dc:creator>
+	      <description>[(#INTRODUCTION|texte_backend)]</description>
+	      <author><BOUCLE_aut3(auteurs){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_aut3></author>
+	      <dc:creator><BOUCLE_aut3b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut3b></dc:creator>
 	    </item>
 	</BOUCLE3>
 <//B_rub>
