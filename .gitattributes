@@ -133,6 +133,7 @@ dist/images/mot-cle-24.gif -text
 dist/images/naviguer-site.png -text
 dist/images/noeud_moins.gif -text
 dist/images/noeud_plus.gif -text
+dist/images/pale.gif -text
 dist/images/pense-bete.gif -text
 dist/images/petite-cle.gif -text
 dist/images/petition-24.gif -text
@@ -257,6 +258,7 @@ dist/modeles/pagination_page.html -text
 dist/modeles/pagination_page_precedent_suivant.html -text
 dist/modeles/pagination_precedent_suivant.html -text
 dist/modeles/paginationitem.html -text
+dist/pale.gif -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
