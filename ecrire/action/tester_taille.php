@@ -28,7 +28,7 @@ function action_tester_taille_error_handler($output)
 function action_tester_taille_dist() {
 	
 	if (!autoriser('configurer'))
-	return;
+		return;
 	
 	$taille = _request('arg');
 	$taille = explode('-',$taille);
