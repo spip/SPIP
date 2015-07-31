@@ -38,7 +38,7 @@ function selecteur_lister_objets($whitelist=array(), $blacklist=array()){
 	// Ensuite on cherche ce qu'on doit afficher : au moins ceux qu'on peut sélectionner
 	$objets_afficher = $objets_selectionner;
 	
-	// Il faut alors chercher d'éventuels parents obligatoires :
+	// Il faut alors chercher d'éventuels parents obligatoires en plus :
 	// lister-trucs-bidules.html => on doit afficher des "trucs" pour trouver des "bidules"
 	if (!$liste_parents){
 		$liste_parents = find_all_in_path('formulaires/selecteur/', 'lister-[\w]+-[\w]+[.]html$');
@@ -47,8 +47,8 @@ function selecteur_lister_objets($whitelist=array(), $blacklist=array()){
 		preg_match('/^lister-([\w]+)-([\w]+)[.]html$/', $fichier, $captures);
 		$parent = $captures[1];
 		$type = $captures[2];
-		// Si le type fait partie de ce qu'on veut sélectionner alors on ajoute le parent à l'affichage
-		if (in_array($type, $objets_selectionner)){
+		// Si le type fait partie de ce qu'on doit afficher alors on ajoute aussi le parent à l'affichage
+		if (in_array($type, $objets_afficher)){
 			$objets_afficher[] = $parent;
 		}
 	}
