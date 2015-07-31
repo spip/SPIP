@@ -41,7 +41,7 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 		. "\"\nondbclick=\""
 		. $ondbClick
 		. $onClick
-		. "\">\n<div class='pashighlight'>"
+		. "\">\n<div class='highlight off'>"
 		. _T("info_racine_site")
 		. "</div></div>";
 	} else $onClick = '';
