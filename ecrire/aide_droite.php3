@@ -10,6 +10,9 @@ if (file_exists("inc_connect.php3")) {
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_lang.php3");
+
+utiliser_langue_visiteur();
+
 ?>
 <HTML>
 <head>
