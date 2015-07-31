@@ -18,6 +18,7 @@ function cron_maintenance ($t) {
 
 	// Verifier que le .htaccess (deny all) est bien la
 	include_spip('inc/acces');
+	verifier_htaccess(_DIR_CONFIG);
 	verifier_htaccess(_DIR_CACHE);
 
 	// Supprimer les vieilles fonctions ajax enregistrees
