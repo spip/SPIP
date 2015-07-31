@@ -37,7 +37,7 @@
 						#SET{name,adresse_suivi_inscription}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 							#SET{adresse_suivi,#ENV{adresse_suivi}|sinon{mailing@monsite.net}}
-							<label for="#GET{name}">Adresse de desincription</label>[
+							<label for="#GET{name}"><:info_adresse_desinscription:></label>[
 							<span class='erreur_message'>(#GET{erreurs})</span>
 							]<p class="explication"><:info_config_suivi{adresse_suivi=#GET{adresse_suivi}}:></p>
 							<input type="text" class="text" name="#GET{name}" id="#GET{name}" value="#ENV*{#GET{name}}" />
