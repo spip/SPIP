@@ -74,15 +74,15 @@ function install_etape_sup2_dist()
 		$pass_db  = _INSTALL_PASS_DB;
 
 	$server_db =_request('server_db');
-	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
-		$server_d = _INSTALL_SERVER_DB;
+	if (!$server_db AND  defined('_INSTALL_SERVER_DB'))
+		$server_db = _INSTALL_SERVER_DB;
 
 	// Ceci indique la base principale (passe en hidden)
 	// pour qu'on la refuse comme choix de base secondaire a chaque tour.
 
 	$sel_db =_request('sel_db');
-	if (!$server_d AND  defined('_INSTALL_SERVER_DB'))
-		$server_d = _INSTALL_NAME_DB;
+	if (!$sel_db AND  defined('_INSTALL_NAME_DB'))
+		$sel_db = _INSTALL_NAME_DB;
 
 	// le choix
 	$choix_db = _request('choix_db');
