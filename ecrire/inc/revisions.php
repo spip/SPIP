@@ -364,8 +364,8 @@ function apparier_paras($src, $dest, $flou = true) {
 // http://doc.spip.org/@recuperer_version
 function recuperer_version($id_article, $id_version) {
 
-	$row = sql_fetsel("champs", "spip_versions", "id_article=$id_article AND id_version=$id_version");
-	if (!$row OR !is_array($champs = unserialize($row['champs'])))
+	$champs = sql_getfetsel("champs", "spip_versions", "id_article=" . intval($id_article) . " AND id_version=" . intval($id_version));
+	if (!$champs OR !is_array($champs = unserialize($champs)))
 		return array();
 	else return reconstuire_version($champs,
 			 recuperer_fragments($id_article, $id_version));

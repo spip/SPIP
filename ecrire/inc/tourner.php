@@ -26,10 +26,12 @@ function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 		$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 	}
 
-	if (preg_match('/^\w+$/',$type)) { // securite
-		$id = sql_fetsel("id_$type", "spip_documents_$type" . "s", "id_document = " . intval($id_document));
-		$id = $id["id_$type"];
-	} else $id = 0; // le hash sera inutilisable
+	$table = 'spip_documents_' . $type . 's';
+	$prim = id_table_objet($table);
+	if (!$prim) return '';
+	$prim = 'id_' . $type;
+	// si pas de doc le hash sera inutilisable
+	$id = intval(sql_getfetsel($prim, $table, "id_document = " . intval($id_document)));
 
 	$titre = $document['titre'];
 	$id_vignette = $document['id_vignette'];

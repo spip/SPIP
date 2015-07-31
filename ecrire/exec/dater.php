@@ -21,23 +21,21 @@ function exec_dater_dist()
 // http://doc.spip.org/@exec_dater_args
 function exec_dater_args($id, $type)
 {
-	// securite
-	if (!preg_match('/^\w+$/',$type)
-	OR !autoriser('voir',$type,$id)) {
+	$table = table_objet_sql($type);
+	$prim = id_table_objet($table); // pour secu
+
+	if (!$prim OR !autoriser('voir',$type,$id)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 
-	$table = ($type=='syndic') ? 'syndic' : ($type . 's');
-	$row = sql_fetsel("*", "spip_$table", "id_$type=$id");
-
-	$statut = $row['statut'];
-	$date = $row[($type!='breve')?"date":"date_heure"];
-	$date_redac = isset($row["date_redac"]) ? $row["date_redac"] : '';
-
-	$script = ($type=='article')? 'articles' : ($type == 'breve' ? 'breves_voir' : 'sites');
-	$dater = charger_fonction('dater', 'inc');
-	ajax_retour($dater($id, 'ajax', $statut, $type, $script, $date, $date_redac));
+		$row = sql_fetsel("*", $table, "id_$type=$id");
+		$statut = $row['statut'];
+		$date = $row[($type!='breve')?"date":"date_heure"];
+		$date_redac = isset($row["date_redac"]) ? $row["date_redac"] : '';
+		$script = ($type=='article')? 'articles' : ($type == 'breve' ? 'breves_voir' : 'sites');
+		$dater = charger_fonction('dater', 'inc');
+		ajax_retour($dater($id, 'ajax', $statut, $type, $script, $date, $date_redac));
 	}
 }
 ?>

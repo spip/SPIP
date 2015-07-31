@@ -17,10 +17,15 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_articles_tous_dist
 function exec_articles_tous_dist()
 {
+	exec_articles_tous_args(intval(_request('id_rubrique')),
+				_request('aff_art'),
+				_request('sel_lang'),
+				_request('var_ajaxcharset'));
+}
+
+function exec_articles_tous_args($id_rubrique, $aff_art, $sel_lang, $var_ajaxcharset)
+{
 	global $browser_layer,$spip_lang_right,$spip_lang_left;
-	
-	$aff_art = _request('aff_art');
-	$sel_lang = _request('sel_lang');
 
 	changer_typo(); // pour definir la direction de la langue
 	if (!is_array($aff_art)) $aff_art = array('prop','publie');
@@ -31,8 +36,8 @@ function exec_articles_tous_dist()
 		AND $GLOBALS['meta']['gerer_trad'] == 'oui');
 
 	list($article,$text_article,$aff_statut) = texte_articles_tous($sel_lang, $flag_trad, $aff_art, lang_dir());
-	if (_request('var_ajaxcharset')&&_request('id_rubrique')) 
-		ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, _request('id_rubrique'), $flag_trad, 2));
+	if ($var_ajaxcharset AND $id_rubrique) 
+		ajax_retour(afficher_contenu_rubrique($article, $enfant, $text_article, $id_rubrique, $flag_trad, 2));
 	else {
 
 		pipeline('exec_init',array('args'=>array('exec'=>'articles_tous'),'data'=>''));
