@@ -87,6 +87,7 @@ if ($flag_gd) {
 debut_cadre_relief("racine-site-24.gif");
 
 $activer_moteur = lire_meta("activer_moteur");
+$activer_moteur_forum = lire_meta("activer_moteur_forum");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_moteur_recherche')."</FONT></B> ".aide ("confmoteur")."</TD></TR>";
@@ -100,6 +101,14 @@ afficher_choix('activer_moteur', $activer_moteur,
 	array('oui' => _T('item_utiliser_moteur_recherche'),
 		'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ');
 echo "</TD></TR>";
+
+if ($activer_moteur == 'oui') {
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
+	afficher_choix('activer_moteur_forum', $activer_moteur_forum,
+	array('oui' => _T('item_utiliser_moteur_recherche_forum'),
+		'non' => _T('item_non_utiliser_moteur_recherche_forum')), ' &nbsp; ');
+	echo "</TD></TR>";
+}
 
 echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";

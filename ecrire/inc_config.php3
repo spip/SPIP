@@ -50,9 +50,10 @@ function init_config() {
 		'quoi_de_neuf' => 'non',
 		'forum_prive_admin' => 'non',
 
-		'activer_moteur' => 'non',
+		'activer_moteur' => 'oui',
+		'activer_moteur_forum' => 'non',
 		'activer_statistiques' => 'oui',
-		'activer_statistiques_ref' => 'non',
+		'activer_statistiques_ref' => 'oui',
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
@@ -227,6 +228,7 @@ function appliquer_modifs_config() {
 		'forum_prive_admin',
 
 		'activer_moteur',
+		'activer_moteur_forum',
 		'activer_statistiques',
 		'activer_statistiques_ref',
 

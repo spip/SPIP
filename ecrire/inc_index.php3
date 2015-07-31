@@ -348,7 +348,9 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 	// chercher un objet a indexer dans chacune des tables d'objets
 	$vu = array();
-	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
+	$types = array('article','auteur','breve','mot','rubrique','signature','syndic');
+	if (lire_meta('activer_moteur_forum') == 'oui') $types[]='forum';
+
 	while (list(,$type) = each($types)) {
 		$table_objet = 'spip_'.table_objet($type);
 		$table_index = 'spip_index_'.table_objet($type);
