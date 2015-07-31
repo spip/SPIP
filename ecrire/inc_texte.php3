@@ -723,6 +723,10 @@ function traiter_tableau($bloc) {
 				$class = 'row_'.alterner($l, 'even', 'odd');
 			}
 
+			// Gerer les listes a puce dans les cellules
+			if (ereg("\n-[*#]", $ligne))
+				$ligne = traiter_listes($ligne);
+
 			// Pas de paragraphes dans les cellules
 			$ligne = preg_replace(",\n\n+,", "<br />\n", $ligne);
 
