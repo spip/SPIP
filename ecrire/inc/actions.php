@@ -132,10 +132,10 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 		// Methode Ajax
 		else {
 			if ($args AND !$args_ajax) $args_ajax = "&$args";
-			return redirige_action_auteur($action,
+				return redirige_action_auteur($action,
 				$id,
 				$action,
-				"var_ajax=1&script=$script$args_ajax",
+				"script=$script$args_ajax&var_ajaxcharset=utf-8",
 				$corps,
 				" method='post'\nonsubmit='return AjaxSqueeze(this, \"$ancre\")'");
 		}
@@ -155,7 +155,7 @@ function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_aj
 		$ajax = redirige_action_auteur($action,
 			$id,
 			$action,
-			"var_ajax=1&script=$script$args_ajax");
+			"script=$script$args_ajax&var_ajaxcharset=utf-8");
 
 		if ($att) $clic = "\n<div$att>$clic</div>";
 		return "<a href='$href'\nonclick='return !AjaxSqueeze(\"$ajax\",\"$ancre\");'>$clic</a>";

@@ -249,18 +249,18 @@ function _request($var) {
 	elseif (isset($_POST[$var])) $a = $_POST[$var];
 	else return NULL;
 
-	// temporaire: si on est en ajax tout a ete encode
+	// temporaire: si on est en ajax et en POST tout a ete encode
 	// via encodeURIComponent, il faut donc repasser
-	// dans le charset local.... on le repere grace
-	// a la variable var_charset=utf-8 ajoutee dans
-	// la fonction AjaxSqueeze() de layer.js
-	if (isset($_REQUEST['var_charset'])
+	// dans le charset local.... on le connait grace
+	// a la variable var_ajaxcharset ajoutee dans layer.js
+
+	if (isset($_POST['var_ajaxcharset'])
 	AND isset($GLOBALS['meta']['charset'])
-	AND $GLOBALS['meta']['charset'] != $_REQUEST['var_charset']
+	AND $GLOBALS['meta']['charset'] != $_POST['var_ajaxcharset']
 	AND is_string($a)
 	AND preg_match(',[\x80-\xFF],', $a)) {
 		include_spip('inc/charsets');
-		return importer_charset($a, $_REQUEST['var_charset']);
+		return importer_charset($a, $_POST['var_ajaxcharset']);
 	}
 
 	return $a;

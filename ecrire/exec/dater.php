@@ -29,7 +29,7 @@ function exec_dater_dist()
 	$statut_article = $row['statut'];
 	$date = $row["date"];
 	$date_redac = $row["date_redac"];
-	spip_log("ater $id_article $date");
+
 	include_spip('inc/actions');
 	include_spip('exec/articles');
 

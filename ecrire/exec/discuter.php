@@ -20,19 +20,21 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 {
 	$res = $nav ='';
 	if ($total > $total_afficher) {
+		$evt = $_COOKIE['spip_accepte_ajax'] == 1;
 		$nav = "<div class='serif2' align='center'>";
 		for ($i = 0; $i < $total; $i = $i + $total_afficher){
 			$y = $i + $total_afficher - 1;
 			if ($i == $debut)
 				$nav .= "<font size='3'><b>[$i-$y]</b></font> ";
 			else {
-				if ($_COOKIE['spip_accepte_ajax'] != 1 ) {
-					$h = generer_url_ecrire($script, "$args&debut=$i");
-					$nav .= "[<a href='$h#forum'>$i-$y</a>] ";
+				$a = "$args&debut=$i";
+				if (!$evt) {
+					$h = generer_url_ecrire($script, $a);
 				} else {
-					$h = generer_url_ecrire('discuter', "$args&debut=$i&var_ajax=1#forum");
-					$nav .= "[<span\nonclick='AjaxSqueeze(\"$h\",\n\t\"forum\")'>$i-$y</span>] ";
+					$h = generer_url_ecrire('discuter', $a);
+					$evt = "\nonclick='return !AjaxSqueeze(\"$h\",\n\t\"forum\")'";
 				}
+				$nav .= "[<a href='$h#forum'$evt>$i-$y</a>] ";
 			}
 		}
 		$nav .= "</div>";
@@ -43,7 +45,9 @@ function formulaire_discuter($query, $total, $debut, $total_afficher, $script, $
 	. "<br />"
 	. $nav;
 
-	return (_request('var_ajax')) ? $res : "<div id='forum'>$res</div>";
+	return (_request('var_ajaxcharset'))
+	? $res
+	: "<div id='forum'>$res</div>";
 }
 
 // http://doc.spip.org/@exec_discuter_dist

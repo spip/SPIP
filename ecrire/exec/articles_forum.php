@@ -49,7 +49,7 @@ function exec_articles_forum_dist()
 
 	$droit= $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique);
 
-	if (_request('var_ajax') AND $droit) return $mess;
+	if (_request('var_ajaxcharset') AND $droit) return $mess;
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 

@@ -25,7 +25,6 @@ function action_dater_dist() {
 		spip_log("action_dater_dist $arg pas compris");
 	}
 	else {
-	  spip_log("dater : " ._request('avec_redac'));
 		include_spip('inc/date');
 		if (!isset($_REQUEST['avec_redac']))
 			spip_query("UPDATE spip_articles SET date='" . format_mysql_date(_request('annee'), _request('mois'), _request('jour'), _request('heure'), _request('minute')) ."'	WHERE id_article=$r[1]");
