@@ -518,8 +518,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
-	AND preg_match(",^(date|mois|annee|heure|age|"
-	."age_relatif|jour_relatif|mois_relatif|annee_relatif)(_[a-z]+)?$,",
+	AND preg_match(",^(date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
 	$col, $regs)) {
 		list($col, $col_table) =
 		calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[2]);
@@ -769,20 +768,24 @@ function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
 	global $table_date; 
 	$boucle = $boucles[$idb];
 
+	$date_orig = $table_date[$boucle->type_requete];
+
 	if ($suite) {
 	# NOTE : A transformer en recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
-		if ($suite =='_redac' OR $suite=='_modif')
+		if ($suite == '_relatif') {
+			$col = $col.'_relatif';
+		}
+		else if ($suite =='_redac' OR $suite=='_modif')
 			$date_orig = 'date'.$suite;
 		else
 			$date_orig = substr($suite, 1);
-	} else
-		$date_orig = $table_date[$boucle->type_requete];
+	}
 
-	$date_orig = $boucle->id_table . ".$date_orig";
 	$date_compare = '\'" . normaliser_date(' .
-	      calculer_argument_precedent($idb, 'date' . $suite, $boucles) .
+	      calculer_argument_precedent($idb, $date_orig, $boucles) .
 	      ') . "\'';
+	$date_orig = $boucle->id_table . '.' . $date_orig;
 
 	if ($col == 'date') {
 			$col = $date_orig;
