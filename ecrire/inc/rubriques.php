@@ -102,7 +102,7 @@ function depublier_branche_rubrique_if($id_rubrique)
 		if (sql_countsel("spip_rubriques",  "id_parent=$id_pred AND statut='publie'"))
 			return $id_pred != $id_rubrique;;
 
-		$compte = pipeline('objet_compte_enfants_publies',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_pred),'data'=>array()));
+		$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_pred,'statut'=>'publie'),'data'=>array()));
 		foreach($compte as $objet => $n)
 			if ($n)
 				return $id_pred != $id_rubrique;
