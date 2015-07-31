@@ -245,6 +245,7 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 							a = a.attr('href');
 							setTimeout(function(){
 								document.location.replace(a);
+								window.location.reload(); // si seul l'ancre a change, on force le reload
 							},10);
 							// ne pas arreter l'etat loading, puisqu'on redirige !
 							// mais le relancer car l'image loading a pu disparaitre
