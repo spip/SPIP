@@ -1683,17 +1683,22 @@ a.ical {
 	width: 10px;
 }
 
+/* Titre d'une boite */
 .titrem { 
-	display: block;
-	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] top; 
-	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px; 
+	display: block; background-color: #eee;
+	font-weight: bold;
+	padding-top: 6px; padding-bottom: 4px;
 	background-repeat: no-repeat;
+	background-position: [(#ENV{ltr}|choixsiegal{left,left,right})] 6px;
+	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
 	}
-.titrem.replie {background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif);}
-.titrem.hover { background-color: #eee; }
-.titrem.deplie { display: block; background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+/* Deplier / Replier */
+.replie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierhaut[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif); }
+.hover { background-color: ##ENV{couleur_claire,edf3fe}; }
+.deplie { background-image: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=deplierbas.gif); }
+.impliable { background: none; }
 .bloc_depliable { display: none; }
-.bloc_depliable.deplie { display: block; }
+.bloc_depliable.deplie { display: block; background: none; }
 
 td.pense-bete, a.pense-bete {
 	background: url(#EVAL{_DIR_IMG_PACK}wrapper.php?file=m_envoi_bleu[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) center left no-repeat;
