@@ -88,8 +88,7 @@ function liste_metas()
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
 		'gerer_trad' => 'non',
-		'langues_multilingue' => '',
-		'interface_mode' => ''
+		'langues_multilingue' => ''
 	);
 }
 

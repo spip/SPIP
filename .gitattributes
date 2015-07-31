@@ -239,15 +239,12 @@ dist/javascript/articles_tous_edite.js -text
 dist/javascript/async_upload.js -text
 dist/javascript/bgiframe.js -text
 dist/javascript/dragdrop_interface.js -text
-dist/javascript/form.js -text
+dist/javascript/jquery.form.js -text
 dist/javascript/jquery.iepnghack.js -text
 dist/javascript/jquery.js -text
-dist/javascript/jquery.tabs.min.js -text
 dist/javascript/multilang.js -text
 dist/javascript/pause.js -text
 dist/jquery.js.html -text
-dist/jquery.tabs-ie.css -text
-dist/jquery.tabs.css -text
 dist/minipres.css -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
@@ -447,7 +444,6 @@ ecrire/configuration/documents.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
 ecrire/configuration/indexeur.php -text
-ecrire/configuration/interfaceur.php -text
 ecrire/configuration/langue.php -text
 ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
