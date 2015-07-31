@@ -8,12 +8,15 @@
  * @param string $label
  * @return string
  */
-function choisir_rubriques_admin_restreint($id_auteur,$label='') {
+function choisir_rubriques_admin_restreint($id_auteur,$label='', $sel_css="#liste_rubriques_restreintes", $img_remove="") {
 	global $spip_lang;
 	$res = "";
 	// Ajouter une rubrique a un administrateur restreint
 	if ($chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
 	  AND $a = $chercher_rubrique(0, 'auteur', false)) {
+
+		if ($img_remove)
+			$img_remove = addslashes("<a href=\"#\" onclick=\"jQuery(this).parent().remove();return false;\" class=\"removelink\">$img_remove</a>");
 
 		$res =
 		  "\n<div id='ajax_rubrique'>\n"
@@ -33,9 +36,10 @@ jQuery(function(){
 		titre=titre.replace(/^\\s+/,'');
 		// Ajouter la rubrique selectionnee au formulaire,
 		// sous la forme d'un input name='rubriques[]'
-		var el = '<input type=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
-		if (!jQuery('#liste_rubriques_restreintes input[value='+id_parent+']').length) {
-			jQuery('#liste_rubriques_restreintes').append('<li>'+el+'</li>');
+		var el = '<input type=\'checkbox\' class=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
+		el = el + '$img_remove';
+		if (!jQuery('$sel_css input[value='+id_parent+']').length) {
+			jQuery('$sel_css').append('<li class=\"rubrique\">'+el+'</li>');
 		}
 	});
 });

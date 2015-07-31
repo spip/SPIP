@@ -47,11 +47,15 @@ div.rub-ouverte, a.rub-ouverte { padding-#GET{right}: 10px; background: url([(#C
 /* ----- */
 
 ul.item_picked {list-style:none;margin:0;padding:0;float:left;}
-ul.item_picked li {margin:0 2px 2px;padding:2px;background:#eee;border:1px solid #GET{claire};float:#GET{left};clear:none;}
+ul.item_picked li {margin:0 2px 2px;padding:2px;background:#eee;border:1px solid #GET{claire};float:#GET{left};clear:none;background-repeat:no-repeat;background-position: [(#GET{left}) ]center;}
 ul.item_picked li span.sep {display:none;}
+ul.item_picked li label {margin:0;display:inline;float:none;}
+.js ul.item_picked li .checkbox {display: none;}
 
-ul.item_picked li.article {padding-#GET{left}:15px;background:url([(#CHEMIN_IMAGE{article-12.png}|url_absolue)]) no-repeat [(#GET{left}) ]center;}
-ul.item_picked li.rubrique {padding-#GET{left}:15px;background:url([(#CHEMIN_IMAGE{rubrique-12.png}|url_absolue)]) no-repeat [(#GET{left}) ]center;}
+ul.item_picked li.article {padding-#GET{left}:15px;background-image:url([(#CHEMIN_IMAGE{article-12.png}|url_absolue)]);}
+ul.item_picked li.rubrique {padding-#GET{left}:15px;background-image:url([(#CHEMIN_IMAGE{rubrique-12.png}|url_absolue)]);}
+
+
 
 ul.item_picked.select li {padding:2px 0;border:0;font-weight:bold;background:none;float:none;}
 ul.item_picked.select ul > li {float:#GET{left};}
