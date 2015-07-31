@@ -194,6 +194,9 @@ function formulaires_login_traiter_dist($cible="",$login="",$prive=null){
 	if (is_null($prive) ? is_url_prive($cible) : $prive) {
 		$cible = parametre_url($cible, 'bonjour', 'oui', '&');
 	}
+	if ($cible=='@page_auteur')
+		$cible = generer_url_entite($GLOBALS['auteur_session']['id_auteur'],'auteur');
+
 	if ($cible) {
 		$cible = parametre_url($cible, 'var_login', '', '&');
 	} 
