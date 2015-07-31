@@ -501,6 +501,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_site_2' => 'אתר אינטרנט :',
 'info_site_min' => 'אתר',
 'info_site_reference_2' => 'Site référencé', # NEW
+'info_site_web' => 'אתר אינטרנט :',
 'info_sites' => 'אתרים',
 'info_sites_lies_mot' => 'Les sites référencés liés à ce mot-clé', # NEW
 'info_sites_proxy' => 'Utiliser un proxy', # NEW
@@ -526,6 +527,7 @@ exige d\'avoir un accès FTP au site Web.</p>', # MODIF
 'info_texte' => 'טקסט',
 'info_texte_explicatif' => 'Texte explicatif', # NEW
 'info_texte_long' => '(le texte est long : il apparaît donc en plusieurs parties qui seront recollées après validation.)', # NEW
+'info_texte_message' => 'הטקסט של ההודעה שלך :',
 'info_texte_message_02' => 'Texte du message', # NEW
 'info_titre' => 'כותר :',
 'info_total' => 'הכל :',
