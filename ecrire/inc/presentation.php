@@ -1011,6 +1011,7 @@ function info_maj_cache($nom, $dir, $page='')
 	if ($res) list(, $page) = $res;
 	// Placer l'indicateur de fraicheur
 	$page = preg_replace('/^<archives.*?>/', $re, $page);
+	sous_repertoire(_DIR_CACHE_XML);
 	ecrire_fichier($nom, $page);
 	return $page;
 }
