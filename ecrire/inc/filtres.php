@@ -1542,8 +1542,10 @@ function tester_config($id, $mode='') {
 	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
 
 	default:
-	  if ($mode AND $mode == addslashes($mode))
-	    return $mode;
+	  if ($mode AND $mode == addslashes($mode)){
+		include_spip("inc/autoriser");
+		return autoriser("inscrireauteur",$mode)?$mode:"";
+	  }
 	  if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
 	    return $GLOBALS['liste_des_statuts']['info_redacteurs'];
 	  if ($GLOBALS['meta']["accepter_visiteurs"] == "oui")
