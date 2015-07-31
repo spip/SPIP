@@ -573,9 +573,16 @@ function forum_logo($statut)
 }
 
 
-// http://doc.spip.org/@envoi_link
-function envoi_link($nom_site_spip, $minipres=false) {
-	global $visiteur_session, $spip_display, $spip_lang;
+// Retourne les parametres de personnalisation css de l'espace prive
+// (ltr et couleurs) ce qui permet une ecriture comme :
+// generer_url_public('style_prive', parametres_css_prive())
+// qu'il est alors possible de recuperer dans le squelette style_prive.html avec 
+// #SET{claire,##ENV{couleur_claire,edf3fe}}
+// #SET{foncee,##ENV{couleur_foncee,3874b0}}
+// #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+// #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+function parametres_css_prive(){
+	global $visiteur_session;
 
 	$c = (is_array($visiteur_session)
 	AND is_array($visiteur_session['prefs']))
@@ -583,9 +590,15 @@ function envoi_link($nom_site_spip, $minipres=false) {
 		: 1;
 
 	$couleurs = charger_fonction('couleurs', 'inc');
-	$paramcss = 'ltr='
-	. $GLOBALS['spip_lang_left'] . '&'
-	. $couleurs($c);
+	return 'ltr=' . $GLOBALS['spip_lang_left'] . '&'. $couleurs($c);	
+}
+
+
+// http://doc.spip.org/@envoi_link
+function envoi_link($nom_site_spip, $minipres=false) {
+	global $spip_display, $spip_lang;
+
+	$paramcss = parametres_css_prive();
 
 	// CSS de secours en cas de non fonct de la suivante
 	$res = '<link rel="stylesheet" type="text/css" href="'
