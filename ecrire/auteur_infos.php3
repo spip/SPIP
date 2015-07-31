@@ -229,9 +229,9 @@ if (!$echec AND $redirect_ok == "oui") {
 //
 
 if ($connect_id_auteur == $id_auteur)
-	debut_page($auteur['nom'], "asuivre", "perso");
+	debut_page($auteur['nom'], "auteurs", "perso");
 else
-	debut_page($auteur['nom'],"documents","redacteurs");
+	debut_page($auteur['nom'],"auteurs","redacteurs");
 
 echo "<br><br><br>";
 

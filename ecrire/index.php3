@@ -33,7 +33,9 @@ if ($spip_display != 4) {
 	//
 	
 	if ($connect_statut == "0minirezo" AND $cookie_admin) {
-		icone_horizontale(_T('icone_supprimer_cookie') . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
+		$texte = _T('icone_supprimer_cookie');
+		if ($spip_display != 1) $texte .= aide("cookie");
+		icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 	}
 
 
@@ -41,20 +43,26 @@ if ($spip_display != 4) {
 	$nom_site_spip = propre(lire_meta("nom_site"));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 	
-	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
-	include_ecrire("inc_logos.php3");
-
-	$logo = get_image("rubon0");
-	if ($logo) {
-		$fichier = $logo[0];
-		$taille = $logo[1];
-		$fid = $logo[2];
-		if ($taille) {
-			$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
-		}
-		echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'><img src='../IMG/$fichier$fid' $taille_html border='0' alt='' /></a></div>";
-	}
 	
+	echo "<div>&nbsp;</div>";
+	
+	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
+
+
+	if ($spip_display != 1) {
+		include_ecrire("inc_logos.php3");
+	
+		$logo = get_image("rubon0");
+		if ($logo) {
+			$fichier = $logo[0];
+			$taille = $logo[1];
+			$fid = $logo[2];
+			if ($taille) {
+				$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
+			}
+			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'><img src='../IMG/$fichier$fid' $taille_html border='0' alt='' /></a></div>";
+		}
+	}
 	echo "<div class='verdana1'>";
 	$query = "SELECT count(*) AS cnt FROM spip_articles where statut='publie'";
 	$result = spip_fetch_array(spip_query($query));
@@ -69,7 +77,7 @@ if ($spip_display != 4) {
 	
 	if ($nb_art_redac OR $nb_art_prop OR $nb_art_publie) 
 	{
-		echo afficher_plus("articles.php3")."<b>"._T('info_articles')."</b>";
+		echo afficher_plus("articles_page.php3")."<b>"._T('info_articles')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if ($nb_art_redac) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$nb_art_redac;
 		if ($nb_art_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_art_prop;

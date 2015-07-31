@@ -131,7 +131,7 @@ function controle_forum($row, $rappel) {
 //	$controle.=  "[$forum_stat]";
 	if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
 	else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
-	else if ($forum_stat == "privrac") $logo = "forum-admin-24.gif";
+	else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
 	else $logo = "forum-public-24.gif";
 
 	$controle .= debut_cadre_thread_forum("", true, "", typo($forum_titre));
@@ -224,7 +224,7 @@ function controle_forum($row, $rappel) {
 	return $controle;
 }
 
-debut_page(_T('titre_page_forum_suivi'), "suivi", "forum-controle");
+debut_page(_T('titre_page_forum_suivi'), "redacteurs", "forum-controle");
 
 if (!$page) $page = "public";
 
