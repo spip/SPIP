@@ -228,8 +228,8 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$add_extra = '';
 
 	// Verifier qu'on envoie bien dans une rubrique autorisee
-	if ($flag_auteur OR acces_rubrique($id_rubrique)) {
-		$change_rubrique = "id_rubrique=\"$id_rubrique\",";
+	if ($id_rubrique>0 AND ($flag_auteur OR acces_rubrique($id_rubrique))) {
+		$change_rubrique = "id_rubrique=$id_rubrique,";
 	} else {
 		$change_rubrique = "";
 	}
