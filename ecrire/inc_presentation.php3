@@ -2052,9 +2052,9 @@ else {
 			if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
 			else $req_where = " AND articles.statut IN ('prop','publie')"; 
 			$nombre_versions = spip_num_rows(spip_query("
-SELECT versions.*, articles.statut, articles.titre
-FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 0,1"));
+				SELECT versions.*, articles.statut, articles.titre
+				FROM spip_versions AS versions, spip_articles AS articles 
+				WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 0,1"));
 			if ($nombre_versions > 0 OR 1==1) {
 				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_revisions.php3", "historique-24.gif", "revisions", $sous_rubrique);
 			}
@@ -2131,6 +2131,8 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_
 		if ($connect_toutes_rubriques) bandeau_barre_verticale();
 
 		icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques.php3", "rubrique-24.gif", "repartition", $sous_rubrique);
+		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
+			icone_bandeau_secondaire (_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues-24.gif", "repartition-langues", $sous_rubrique);
 		icone_bandeau_secondaire (_T('titre_liens_entrants'), "statistiques_referers.php3", "referers-24.gif", "referers", $sous_rubrique);
 
 		echo "</tr></table></div></div>";
