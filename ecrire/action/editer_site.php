@@ -182,10 +182,11 @@ function revisions_sites ($id_syndic, $c=false) {
 			$champs[$champ] = corriger_caracteres($val);
 	}
 
-	$s = spip_query("SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic=$id_syndic");
+	$s = spip_query("SELECT statut, id_rubrique, id_secteur FROM spip_syndic WHERE id_syndic=$id_syndic");
 	$row = sql_fetch($s);
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $row['statut'];
+	$id_secteur_old = $row['id_secteur'];
 
 	$statut = _request('statut', $c);
 
@@ -207,13 +208,15 @@ function revisions_sites ($id_syndic, $c=false) {
 		$statut = $statut_ancien;
 
 	// Changer de rubrique ?
-	// Verifier que la rubrique demandee est differente
-	// de la rubrique actuelle
+	// Verifier que la rubrique demandee est differente de l'actuelle,
+	// et qu'elle existe. Recuperer son secteur
+
 	if ($id_parent = intval(_request('id_parent', $c))
 	AND $id_parent != $id_rubrique
-	AND (sql_fetch(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
+	AND ($r = sql_fetch(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent")))) {
 		$champs['id_rubrique'] = $id_parent;
-
+		if ($id_secteur_old != $r['id_secteur'])
+			$champs['id_secteur'] = $r['id_secteur'];
 		// si le site est publie
 		// et que le demandeur n'est pas admin de la rubrique
 		// repasser le site en statut 'prop'.
@@ -230,6 +233,11 @@ function revisions_sites ($id_syndic, $c=false) {
 			$champs['extra'] = $extra;
 	}
 
+	if (!$champs) return;
+
+	// Enregistrer les modifications
+	sql_updateq('spip_syndic', $champs, "id_syndic=$id_syndic");
+
 	// Envoyer aux plugins
 	include_spip('inc/modifier'); # temporaire pour eviter un bug
 	$champs = pipeline('pre_edition',
@@ -242,15 +250,6 @@ function revisions_sites ($id_syndic, $c=false) {
 		)
 	);
 
-	$update = array();
-	foreach ($champs as $champ => $val)
-		$update[] = $champ . '=' . _q($val);
-
-	if (!count($update)) return;
-
-	// Enregistrer les modifications
-	spip_query("UPDATE spip_syndic SET ".join(', ',$update)." WHERE id_syndic=$id_syndic");
-
 	// marquer le fait que le site est travaille par toto a telle date
 	// une alerte sera donnee aux autres redacteurs sur exec=sites
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
@@ -258,23 +257,6 @@ function revisions_sites ($id_syndic, $c=false) {
 		signale_edition ($id_syndic, $GLOBALS['auteur_session'], 'syndic');
 	}
 
-	// Si on deplace le site
-	// - propager les secteurs
-	// - changer sa langue (si heritee)
-	if (isset($champs['id_rubrique'])) {
-		propager_les_secteurs();
-
-		$row = sql_fetch(spip_query("SELECT lang, langue_choisie FROM spip_syndic WHERE id_syndic=$id_syndic"));
-		$langue_old = $row['lang'];
-		$langue_choisie_old = $row['langue_choisie'];
-
-		if ($langue_choisie_old != "oui") {
-			$row = sql_fetch(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_new = $row['lang'];
-			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_syndic SET lang = '$langue_new' WHERE id_syndic = $id_syndic");
-		}
-	}
 
 	//
 	// Post-modifications
