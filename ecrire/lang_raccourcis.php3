@@ -35,7 +35,7 @@ if (!$d = @opendir(_DIR_LANG)) return;
 while ($f = readdir($d)) {
 	if (ereg('^([a-z_]+)\.php3?$', $f, $regs))
 		$nom_module = $regs[1];
-		if (!ereg('^spip\_', $nom_module) && ereg("^([a-zA-Z]+)\_".$spip_lang."$", $nom_module, $reps))
+		if (!ereg('^(spip|ecrire)\_', $nom_module) && ereg("^([a-zA-Z]+)\_".$spip_lang."$", $nom_module, $reps))
 			$modules[] = $reps[1];
 }
 closedir($d);

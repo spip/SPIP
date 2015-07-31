@@ -130,11 +130,12 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 // produit une balise img avec un champ alt d'office (et different) si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 
-function http_img_pack($img, $alt, $att) {
-  static $num = 0;
-  return "<img src='" . _DIR_IMG_PACK . $img .
-    ("'\nalt=\"" . ($alt ? $alt : ('img_pack' . $num++)) . '" ') .
-    $att . " />";
+function http_img_pack($img, $alt, $att, $title='') {
+	static $num = 0;
+	return "<img src='" . _DIR_IMG_PACK . $img
+		. ("'\nalt=\"" . ($alt ? $alt : ('img_pack' . $num++)) . '" ')
+		. ($title ? " title=\"$title\"" : '')
+		. $att . " />";
 }
 
 function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
