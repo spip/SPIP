@@ -21,8 +21,10 @@ function entites_html($texte) {
 	return corriger_entites_html(htmlspecialchars($texte));
 }
 
-
 function filtrer_entites($texte) {	// html -> texte, a completer
+	if (lire_meta('charset') != 'iso-8859-1')
+		return $texte;
+
 	// NB en php4 il suffirait d'utiliser get_html_translation_table/array_flip
 	// HTML_ENTITIES
 	$trans = array(
@@ -149,13 +151,21 @@ function strtr2 ($texte, $trans) {
 //
 
 // transforme une chaine en entites unicode &#129;
-function entites_unicode($chaine) {
-	switch(lire_meta('charset')) {
+function entites_unicode($chaine, $charset='AUTO') {
+	if ($charset == 'AUTO')
+		$charset=lire_meta('charset');
 
-		case '':
+	switch($charset) {
+
 		case 'iso-8859-1':
-		// On commente cet appel tant qu'il reste des spip < 1.5 dans la nature
+		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
 		//	$chaine = iso_8859_1_to_unicode($chaine);
+			break;
+		// FORCE-iso-8859-1 passe le message suivant : on VEUT la conversion, meme
+		// si elle est desactivee dans entites_unicode pour maintenir (temporairement)
+		// la lisibilite de notre backend sur des SPIP v<1.5
+		case 'FORCE-iso-8859-1':
+			$chaine = iso_8859_1_to_unicode($chaine);
 			break;
 
 		case 'utf-8':
@@ -169,10 +179,12 @@ function entites_unicode($chaine) {
 }
 
 // transforme les entites unicode &#129; dans le charset courant
-function unicode2charset($chaine) {
-	switch(lire_meta('charset')) {
+function unicode2charset($chaine, $charset='AUTO') {
+	if ($charset == 'AUTO')
+		$charset=lire_meta('charset');
 
-		case '':
+	switch($charset) {
+
 		case 'iso-8859-1':
 			$chaine = unicode_to_iso_8859_1($chaine);
 			break;
@@ -335,6 +347,8 @@ function liens_ouvrants ($texte) {
 
 // Corrige les caracteres degoutants utilises par les Windozeries
 function corriger_caracteres($texte) {
+	if (lire_meta('charset') != 'iso-8859-1')
+		return $texte;
 	// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
 	return strtr($texte, chr(145).chr(146).chr(180).chr(147).chr(148).chr(150).chr(151), "'''".'""--');
 }
@@ -349,6 +363,8 @@ function PtoBR($texte){
 
 // Majuscules y compris accents, en HTML
 function majuscules($texte) {
+	if (lire_meta('charset') != 'iso-8859-1')
+		return $texte;
 	$suite = htmlentities($texte);
 	$suite = ereg_replace('&amp;', '&', $suite);
 	$suite = ereg_replace('&lt;', '<', $suite);
@@ -499,7 +515,7 @@ function affdate_base($numdate, $vue) {
 	if ($mois > 0){
 		$saison = "hiver";
 		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = "printemps";
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = "\xe9t\xe9";
+		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = unicode2charset("&#233;t&#233;");
 		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = "automne";
 		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = "hiver";
 	}

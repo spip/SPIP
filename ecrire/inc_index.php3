@@ -21,9 +21,11 @@ function nettoyer_chaine_indexation($texte) {
 		/* u */ chr(249).chr(250).chr(251).chr(252).
 		/* yNn */ chr(255).chr(209).chr(241);
 	$texte = ereg_replace("<[^<]*>", "", $texte);
-	return strtolower(strtr($texte,
-		$accents,
-		"AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn"));
+	if (lire_meta('charset') == 'iso-8859-1')
+		$texte = strtolower(strtr($texte,
+			$accents,
+			"AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn"));
+	return $texte;
 }
 
 // Merci a Herve Lefebvre pour son apport sur cette fonction
