@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_aucun_resultat' => 'Brak wynik&oacute;w szukania.',
 'avis_chemin_invalide_1' => '&#346;cie&#380;ka, kt&oacute;r&#261; wybra&#322;e&#347;',
 'avis_chemin_invalide_2' => 'wydaje si&#281; nieprawid&#322;owa. Prosz&#281; powr&oacute;ci&#263; na poprzedni&#261; stron&#281; w celu weryfikacji informacji.',
-'avis_connexion_echec_1' => 'Po&#322;&#261;czenie z serwerem MySQL nie powiod&#322;o si&#281;.',
+'avis_connexion_echec_1' => 'Po&#322;&#261;czenie z serwerem SQL nie powiod&#322;o si&#281;.',
 'avis_connexion_echec_2' => 'Powr&oacute;&#263; do poprzedniej strony i zweryfikuj podane informacje.',
 'avis_connexion_echec_3' => '<b>Uwaga</b> W przypadku wielu serwer&oacute;w musisz <b>poprosi&#263;</b> o uaktywnienie dost&#281;pu do bazy danych, aby m&oacute;c z niej korzysta&#263;. Je&#347;li nie mo&#380;esz si&#281; po&#322;&#261;czy&#263;, upewnij si&#281;, czy poprosi&#322;e&#347; o dost&#281;p.',
 'avis_connexion_ldap_echec_1' => 'Po&#322;&#261;czenie z LDAP nie powiod&#322;o si&#281;.',
@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Wa&#380;na grupa:</b> Zaleca si&#281; wyb&oacute;r s&#322;owa kluczowego dla tej grupy.',
 'avis_deplacement_rubrique' => 'Uwaga! Ten dzia&#322; zawiera @contient_breves@ news@scb@: je&#347;li chcesz go przenie&#347;&#263;, prosz&#281; zaznacz to okienko.',
 'avis_destinataire_obligatoire' => 'Aby wys&#322;a&#263; t&#281; wiadomo&#347;&#263;, musisz wybra&#263; odbiorc&#281;.',
-'avis_erreur_connexion_mysql' => 'B&#322;&#261;d po&#322;&#261;czenia z MySQL',
+'avis_erreur_connexion_mysql' => 'B&#322;&#261;d po&#322;&#261;czenia z SQL',
 'avis_erreur_version_archive' => '<b>Ostrze&#380;enie! Plik @archive@ odpowiada
     wersji SPIP innej, ni&#380;
     zainstalowana przez Ciebie.</b> Wi&#261;&#380;e si&#281; to z powa&#380;nymi
@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_sites_probleme_syndication' => 'Te strony maj&#261; problem z syndykacj&#261;',
 'avis_sites_syndiques_probleme' => 'Nast&#281;puj&#261;ce strony syndykowane sprawiaj&#261; problem',
 'avis_suppression_base' => 'OSTRZE&#379;ENIE, usuni&#281;cie danych jest nieodwracalne',
-'avis_version_mysql' => 'Twoja wersja MySQL (@version_mysql@) nie umo&#380;liwia auto-naprawy tablic baz danych.',
+'avis_version_mysql' => 'Twoja wersja SQL (@version_mysql@) nie umo&#380;liwia auto-naprawy tablic baz danych.',
 
 
 // B
@@ -317,7 +317,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Potwierd&#378; nowe has&#322;o:',
 'info_connexion_base' => 'Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych',
 'info_connexion_ldap_ok' => '<b>Po&#322;&#261;czenie LDAP powiod&#322;o si&#281;.<b><p /> Id&#378; do nast&#281;pnego etapu.',
-'info_connexion_mysql' => 'Po&#322;&#261;czenie z baz&#261; MySQL',
+'info_connexion_mysql' => 'Po&#322;&#261;czenie z baz&#261; SQL',
 'info_connexion_ok' => 'Po&#322;&#261;czenie powiod&#322;o si&#281;.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Zawarto&#347;&#263; artyku&#322;&oacute;w',
@@ -431,7 +431,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_message_en_redaction' => 'Twoje wiadomo&#347;ci w trakcie tworzenia',
 'info_message_technique' => 'Wiadomo&#347;&#263; techniczna:',
 'info_messagerie_interne' => 'Poczta wewn&#281;trzna',
-'info_mise_a_niveau_base' => 'uaktualnianie bazy MySQL',
+'info_mise_a_niveau_base' => 'uaktualnianie bazy SQL',
 'info_mise_a_niveau_base_2' => '{{Uwaga !}} Zainstalowa&#322;e&#347; tak&#261; wersj&#281;
   plik&oacute;w SPIP, kt&oacute;re nale&#380;&#261; do wcze&#347;niejszej ni&#380; posiadana przez ciebie wersja:
   twoja baza danych mo&#380;e zosta&#263; zniszczona
@@ -855,7 +855,7 @@ zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierw
  szybko umie&#347;ci&#263; na stronie zwi&#281;z&#322;e informacje i zarz&#261;dza&#263;
  przegl&#261;dem prasy, albo kalendarzem wydarze&#324;...',
 'texte_choix_base_1' => 'Wybierz baz&#281; danych:',
-'texte_choix_base_2' => 'Serwer MySQL zawiera kilka baz danych.',
+'texte_choix_base_2' => 'Serwer SQL zawiera kilka baz danych.',
 'texte_choix_base_3' => '<b>Wybierz</b>, jaka zosta&#322;a Ci przyznana przez Tw&oacute;j serwis hostingowy:',
 'texte_choix_table_prefix' => 'Prefix tablic:',
 'texte_commande_vider_tables_indexation' => 'Skorzystaj z tego polecenia w celu opr&oacute;&#380;nienia tabeli indeksuj&#261;cych, kt&oacute;re u&#380;ywane s&#261;
@@ -872,7 +872,7 @@ od pocz&#261;tku opublikowania artyku&#322;u pojawi si&#281; kiedy najedziesz my
 'texte_config_groupe_mots_cles' => 'Czy &#380;yczysz sobie, aby w&#322;&#261;czy&#263; zaawansowan&#261; konfiguracj&#281; s&#322;&oacute;w kluczowych,
    gdzie mo&#380;esz zaznaczy&#263; np. jedno s&#322;owo
    s&#322;owa wg grup, wg wa&#380;no&#347;ci grup...&nbsp;?',
-'texte_connexion_mysql' => 'Sprawd&#378; informacje dostarczone przez Tw&oacute;j serwis hostingowy&nbsp;: znajdzies tam, je&#347;li serwer korzysta z MySQL, kody s&#322;u&#380;&#261;ce do po&#322;&#261;czenia z serwerem MySQL.',
+'texte_connexion_mysql' => 'Sprawd&#378; informacje dostarczone przez Tw&oacute;j serwis hostingowy&nbsp;: znajdzies tam, je&#347;li serwer korzysta z SQL, kody s&#322;u&#380;&#261;ce do po&#322;&#261;czenia z serwerem SQL.',
 'texte_contenu_article' => '(Zawarto&#347;&#263; artyku&#322;u w kilku s&#322;owach.)',
 'texte_contenu_articles' => 'Zale&#380;nie od struktury jak&#261; przyj&#261;&#322;e&#347; dla swojego serwisu, mo&#380;esz zdecydowa&#263;,
  kt&oacute;rych element&oacute;w artyku&#322;&oacute;w nie u&#380;ywa&#263;.Korzystaj&#261;c z poni&#380;szej listy, wybierz u&#380;ywane elementy.',
@@ -965,10 +965,10 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
 'texte_recuperer_base' => 'Napraw baz&#281; danych',
 'texte_reference_mais_redirige' => 'linki z artyku&#322;&oacute;w w twoim serwisie SPIP, przekierowuj&#261;ce do innych URL-i.',
 'texte_referencement_automatique' => '<b>Zautomatyzowane dodawanie link&oacute;w</b><br />Mo&#380;esz szybko doda&#263; link do jakiej&#347; strony internetowej, wpisuj&#261;c poni&#380;ej jej adres, oraz adres jej pliku syndykacji. SPIP automatycznie dopisze informacje, dotycz&#261;ce tej strony (tytu&#322;, opis...).',
-'texte_requetes_echouent' => '<b>Je&#347;li pewne zapytania MySQL nie udaj&#261; si&#281;
+'texte_requetes_echouent' => '<b>Je&#347;li pewne zapytania SQL nie udaj&#261; si&#281;
   regularnie i bez widocznego powodu, mo&#380;liwe jest
   &#380;e powodem tego jest baza danych</b><p>
-  MySQL ma mo&#380;liwo&#347;&#263; naprawy poszczeg&oacute;lnych tabel
+  SQL ma mo&#380;liwo&#347;&#263; naprawy poszczeg&oacute;lnych tabel
   je&#347;li przez przypadek zosta&#322;y uszkodzone.
  Mo&#380;esz spr&oacute;bowa&#263; naprawi&#263; je tutaj&nbsp;; je&#347;li jednak nie powiedzie si&#281; taka operacja,
   zachcowaj kopi&#281; wy&#347;wietlanego komunikatu, poniewa&#380; mo&#380;e on zawiera&#263; wskaz&oacute;wki w czym tkwi poroblem.

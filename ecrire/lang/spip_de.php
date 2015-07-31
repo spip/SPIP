@@ -553,7 +553,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'lien_visites' => '@visites@ Besuche',
 'lien_voir_auteur' => 'Autor anzeigen',
 'ligne' => 'Zeile',
-'login' => '<NEW>Connexion',
+'login' => 'Login',
 'login_acces_prive' => 'Login zum Redaktionssystem',
 'login_autre_identifiant' => 'Unter anderem Namen anmelden',
 'login_cookie_accepte' => 'Bitte stellen Sie Ihren Webbrowser so ein, dass er sie akzeptiert (zumindest f&uuml;r diese Website).',
