@@ -267,13 +267,10 @@ function cron_mail($t) {
 	// $t = 0 si le fichier de lock a ete detruit
 	if (!$t) $t = time() - (3600 * 24 * $jours_neuf);
 
-	include_spip('public/calcul');
-	$page= cherche_page('',
+	$f = include_fonction('localiser_page', 'public');
+	$page = $f('nouveautes',
 			    array('date' => date('Y-m-d H:i:s', $t),
-				  'jours_neuf' => $jours_neuf),
-				'nouveautes',
-				'',
-				$GLOBALS['meta']['langue_site']);
+				  'jours_neuf' => $jours_neuf));
 	$page = $page['texte'];
 	if (substr($page,0,5) == '<'.'?php') {
 # ancienne version: squelette en PHP avec affection des 2 variables ci-dessous
