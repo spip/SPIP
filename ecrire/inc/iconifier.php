@@ -25,7 +25,9 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 	$iframe_script = generer_url_ecrire('iconifier',"type=$id_objet&$id_objet=$id&script=$script",true);
 	$iframe = "<input type='hidden' name='iframe_redirect' value='".rawurlencode($iframe_script)."' />\n";
 
-	if (!$logo = $chercher_logo($id, $id_objet, 'on')) {
+	$logo = $chercher_logo($id, $id_objet, 'on');
+	$logo_s = $chercher_logo($id, $id_objet, 'off');
+	if (!$logo) {
 		if ($flag_modif AND $GLOBALS['meta']['activer_logos'] != 'non') {
 			$masque = indiquer_logo($texteon, $id_objet, 'on', $id, $script, $iframe);
 			$masque = "<div class='cadre_padding'>$masque</div>";
@@ -33,13 +35,13 @@ function inc_iconifier_dist($id_objet, $id,  $script, $visible=false, $flag_modi
 			$res = debut_block_depliable($visible,'on') . $masque . fin_block();
 		}
 	} else {
-		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif);
+		list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
 
 		$bouton = bouton_block_depliable($texteon, $visible, 'on');
 
 		$survol = '';
 		$texteoff = _T('logo_survol');
-		if (!$logo = $chercher_logo($id, $id_objet, 'off')) {
+		if (!$logo = $logo_s) {
 			if ($flag_modif AND $GLOBALS['meta']['activer_logos_survol'] == 'oui') {
 				$masque = "<br />".indiquer_logo($texteoff, $id_objet, 'off', $id, $script, $iframe);
 				$survol .= "<br />".block_parfois_visible('off', $texteoff, $masque, null, $visible);
