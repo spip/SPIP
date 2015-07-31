@@ -18,6 +18,8 @@ include_ecrire ("inc_date.php3");
 include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_forum.php3");
 include_ecrire ("inc_abstract_sql.php3");
+$f = find_in_path("inc_articles.php");
+include($f ? $f : (_DIR_INCLUDE . "inc_articles.php"));
 
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
@@ -120,11 +122,6 @@ if ($statut_nouv) {
 	}
 }
 
-// 'publie' => reindexer
-if ($ok_nouveau_statut AND $statut_nouv == 'publie' AND $statut_nouv != $statut_ancien AND (lire_meta('activer_moteur') == 'oui')) {
-	include_ecrire ("inc_index.php3");
-	marquer_indexer('article', $id_article);
-}
 
 // 'dŽpublie' => invalider les caches
 if ($ok_nouveau_statut AND $statut_ancien == 'publie' AND $statut_nouv != $statut_ancien AND $invalider_caches) {
@@ -259,18 +256,6 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$result = spip_query($query);
 	calculer_rubriques();
 
-	// invalider et reindexer
-	if ($statut_article == 'publie') {
-		if ($invalider_caches) {
-			include_ecrire ("inc_invalideur.php3");
-			suivre_invalideur("id='id_article/$id_article'");
-		}
-		if (lire_meta('activer_moteur') == 'oui') {
-			include_ecrire ("inc_index.php3");
-			marquer_indexer('article', $id_article);
-		}
-	}
-
 	// Stockage des versions
 	if ($articles_versions) {
 		ajouter_version($id_article, $champs_versions, '', $connect_id_auteur);
@@ -295,7 +280,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	// marquer l'article (important pour les articles nouvellement crees)
 	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 	$id_article_bloque = $id_article;   // message pour inc_presentation
-}
+ }
 
 
 
@@ -1613,17 +1598,10 @@ echo "</div>\n";
 fin_page();
 
 // Taches lentes
-if ($ok_nouveau_statut) {
-	@flush();
-	calculer_rubriques();
-	if ($statut_nouv == 'publie' AND $statut_ancien != $statut_nouv) {
-		include_ecrire("inc_mail.php3");
-		envoyer_mail_publication($id_article);
-	}
-	if ($statut_nouv == "prop" AND $statut_ancien != $statut_nouv AND $statut_ancien != 'publie') {
-		include_ecrire("inc_mail.php3");
-		envoyer_mail_proposition($id_article);
-	}
+
+
+if ($ok_nouveau_statut AND $statut_ancien != $statut_nouv) {
+  cron_articles($id_article, $statut_nouv, $statut_ancien);
 }
 
 ?>
