@@ -56,7 +56,6 @@ la documentacion d\'SPIP</a>.', # MODIF
 'bouton_desactive_tout' => 'Tout désactiver', # NEW
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Esfaçar los indèx',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Esfaçar-ac tot',
 'bouton_envoi_message_02' => 'MANDAR UN MESSATGE',
 'bouton_envoyer_message' => 'Messatge definitiu: mandar',
@@ -112,6 +111,7 @@ la documentacion d\'SPIP</a>.', # MODIF
 'date_mot_heures' => 'òras',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -192,7 +192,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'icone_creer_rubrique_2' => 'Crear ua rubrica nava',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Mandar aqueth messatge',
-'icone_evolution_visites' => 'Evolucion de las vesitas<br />@visites@ vesitas',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -235,7 +234,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_adresse' => 'a l\'adreiça:',
 'info_adresse_url' => 'Adreiça (URL) deu sit public',
 'info_afficher_visites' => 'Afichar las vesitas per:',
-'info_affichier_visites_articles_plus_visites' => 'Afichar las vesitas entaus <b>articles mei vesitats dempuish lo començament:</b>',
 'info_aide_en_ligne' => 'Ajuda en linha SPIP',
 'info_ajout_image' => 'Quan ajustatz imatges com estacaments juntats a un article, SPIP que pòt crear automaticament entà vos vinhetas (miniaturas) deus imatges inserits. Aquò que permet per exemple de crear automaticament ua galaria o un pòrtfòlio.',
 'info_ajout_participant' => 'Lo participant seguent qu\'ei ajustat:',
@@ -278,7 +276,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_classement_1' => '<sup>èr</sup> de @liste@',
 'info_classement_2' => '<sup>au</sup> de @liste@',
 'info_code_acces' => 'N\'oblidetz pas los vòstes còdes d\'accès pròpis!',
-'info_comment_lire_tableau' => 'Quin legir aqueth tablèu',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -324,7 +321,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_exportation_base' => 'exportacion de la basa de cap tà @archive@',
 'info_facilite_suivi_activite' => 'Tà facilitar lo seguit de l\'activitat editoriau deu sit, SPIP que\'vs pòt hornir per e-mail, per exemple a ua lista de corrièr deus redactors, l\'anonci de las demandas de publicacion e de las validacions d\'articles.',
 'info_fichiers_authent' => 'Fichièrs d\'autentificacion « .htpasswd »',
-'info_forum_statistiques' => 'Estadisticas de las vesitas',
 'info_forums_abo_invites' => 'Lo vòste sit web que horneish  forums entaus abonats; dens lo sit public los vesitaires que son convidats a registrà\'s.',
 'info_gauche_admin_effacer' => '<b>A aquera pagina, sonque los responsables deu sit qu\'i pòden accedir.</b><p> Que permet de trobar las diferentas foncions de mantienença tecnica. Daubuas qu\'implican un procès d\'autentificacion especific que necessita un accès FTP au sit web.', # MODIF
 'info_gauche_admin_tech' => '<b>A aquera pagina, sonque los responsables deu sit qu\'i pòden accedir.</b><p> Que permet de trobar las diferentas foncions de mantienença tecnica. Daubuas qu\'implican un procès d\'autentificacion especific que necessita un accès FTP au sit web.', # MODIF
@@ -439,8 +435,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_plus_cinq_car_2' => '(mei de 5 caractèrs)',
 'info_plus_trois_car' => '(mei de 3 caractèrs)',
 'info_popularite' => 'popularitat: @popularite@; vesitas: @visites@',
-'info_popularite_2' => 'popularitat deu sit:',
-'info_popularite_3' => 'popularitat: @popularite@; vesitas: @visites@',
 'info_popularite_4' => 'popularitat: @popularite@; vesitas: @visites@',
 'info_post_scriptum' => 'Post-scriptum',
 'info_post_scriptum_2' => 'Post-scriptum:',
@@ -449,7 +443,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_preview_comite' => 'Tots los redactors que pòden previsualizar lo sit',
 'info_preview_desactive' => 'La previsualizacion qu\'ei deu tot desactivada',
 'info_preview_texte' => 'Qu\'ei possible de previsualizar lo sit com s\'avèvan publicat tots los articles e brèvas (qui tienen aumensh l\'estatut "prepausat"). E la cau obrir, aquera possibilitat, aus administrators sonque, a tots los redactors, o non pas a degun?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Los vòstes correspondents principaus',
 'info_procedez_par_etape' => 'proceditz estapa per estapa',
 'info_procedure_maj_version' => 'Que cau lançar la procedura d\'actualizacion tà adaptar
@@ -459,7 +452,6 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 'info_publier' => 'publicar',
 'info_publies' => 'Los vòstes articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas deu vòste sit web e\'s preved lo registrament de vesitaires shens accès a l\'espaci privat, volhatz activar l\'opcion seguenta:',
-'info_question_gerer_statistiques' => 'E deu gerir, lo vòste sit, las estadisticas de las vesitas?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptatz que redactors navèths e s\'inscrívian
  a partir deu sit public? S\'ac acceptatz, los vesitaires que\'s poiràn inscríver
  mercés a un formulari automatizat e alavetz qu\'accediràn a l\'espaci privat entà
@@ -468,9 +460,7 @@ L\'administrator deu sistèma o de l\'arret que\'vs deu poder hornir
 Daubuns aubergaders n\'autorizan pas lo mandadís d\'e-mails dempuish los lors serviders: en aqueth cas, l\'inscripcion automatica qu\'ei
  impossibla.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'E desiratz d\'utilizar lo cercader integrat a SPIP? (lo desactivar qu\'accelèra lo foncionament deu sistèma.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Arradit deu sit',
 'info_recharger_page' => 'Volhatz tornar cargar aquera pagina dens un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tròp de resultats entà "@cherche_auteur@"; volhatz afinar la cèrca.',
@@ -553,7 +543,6 @@ ua color qu\'indica lo lor estat:',
 'info_urlref' => 'Ligam ipertèxt:',
 'info_utilisation_spip' => 'Ara que podetz començar d\'utilizar lo sistèma de publicacion assistida...',
 'info_visites_par_mois' => 'Afichatge per mes:',
-'info_visites_plus_populaires' => 'Afichar las vesitas <b>taus articles mei populars</b> e <b>taus darrèrs articles publicats:</b>',
 'info_visiteur_1' => 'Vesitaire',
 'info_visiteur_2' => 'deu sit public',
 'info_visiteurs' => 'Vesitaires',
@@ -596,7 +585,6 @@ ua color qu\'indica lo lor estat:',
 'item_choix_redacteurs' => 'los redactors',
 'item_choix_visiteurs' => 'los vesitaires deu sit public',
 'item_creer_fichiers_authent' => 'Crear fichièrs .htpasswd',
-'item_gerer_statistiques' => 'Gerir las estadisticas',
 'item_limiter_recherche' => 'Limitar la cèrca a las informacions contengudas dens lo vòste sit',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -776,7 +764,6 @@ ua color qu\'indica lo lor estat:',
 'texte_acces_ldap_anonyme_1' => 'Daubuns serviders LDAP n\'accèptan pas nat accès anonim. En aqueth cas, que cau especificar un identificant d\'accès iniciau tà poder puish cercar informacions dens l\'annuari. Totun, los camps seguents que\'s poiràn deishar vueids dens la màger part deus cas.',
 'texte_admin_effacer_01' => 'Aquera comanda qu\'esfaça <i>tot</i> lo contengut de la basa de dadas,
  inclús <i>tots</i> los accès redactors e administrators. Un còp que l\'auratz executada, qu\'auratz de tornar lançar l\'installacion d\'SPIP tà tornar crear ua basa navèra atau com un permèr accès administrator.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Se lo vòste annuari ei installat sus la medisha maquina qu\'aqueth sit web, que s\'ageish probable de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seguent qu\'ei estat ajustat a l\'article:',
 'texte_annuaire_ldap_1' => 'S\'acceditz a un annuari (LDAP), que\'u podetz utilizar tà importar automaticament utilizaires devath SPIP.',
@@ -793,11 +780,6 @@ ua color qu\'indica lo lor estat:',
 'texte_choix_table_prefix' => 'Préfixe des tables :', # NEW
 'texte_commande_vider_tables_indexation' => 'Utilizatz aquera comanda tà vueidar las taulas d\'indexacion utilizadas peu cercader integrat a SPIP. Aquò que permeterà
  de ganhar espaci disc.',
-'texte_comment_lire_tableau' => 'Lo reng de l\'article,
-dens lo classament per popularitat, qu\'ei indicat dens lo marge; la popularitat de l\'article 
-(ua estimacion deu nombre de vesitas quotidianas qu\'eth receberà se lo ritme actuau de consultacion se mantien) e lo nombre de vesitas recebudas
-dempuish lo començament que s\'afichan dens la bohòrla 
-qu\'apareish quan la murga e passa suu títol.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(Aqueste que\'s pòt comprimir o non)',
@@ -904,7 +886,6 @@ tornar calcular sonque ua pagina, passatz meilèu per l\'espaci public e utiliza
  <li> la natura deu motor tipografic que SPIP e deu utilizar tau rendut deus tèxts;</li>
  <li> la lenga utilizada dens los formularis deu sit public;</li>
  <li> la lenga presentada com predefinida dens l\'espaci privat.</li></ul>',
-'texte_signification' => 'Las barras escuras que representan las entradas cumuladas (totau de las sosrubricas), las barras claras lo nombre de vesitas tà cada rubrica.',
 'texte_sous_titre' => 'Sostítol',
 'texte_statistiques_visites' => '(barras escuras:  dimenge / corba escura: evolucion de la mejana)',
 'texte_statut_attente_validation' => 'en espèra de validacion',
@@ -972,7 +953,6 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcions: <b>La vòsta connexion LDAP</b>',
-'titre_evolution_visite' => 'Evolucion de las vesitas',
 'titre_groupe_mots' => 'GROP DE MOTS:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LENGA DE L\'ARTICLE',
@@ -999,11 +979,9 @@ s\'avetz modificat de bèth pro lo grafisme o l\'estructura deu sit.',
 'titre_page_message_edit' => 'Redigir un messatge',
 'titre_page_messagerie' => 'La vòsta messatjaria',
 'titre_page_recherche' => 'Resultats de la cèrca @recherche@',
-'titre_page_statistiques' => 'Estadisticas per rubricas',
 'titre_page_statistiques_referers' => 'Estadisticas (ligams entrants)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Estadisticas de las vesitas',
 'titre_page_upgrade' => 'Hicada a nivèu d\'SPIP',
 'titre_publication_articles_post_dates' => 'Publicacion deus articles pòstdatats',
 'titre_referencer_site' => 'Referenciar lo sit:',

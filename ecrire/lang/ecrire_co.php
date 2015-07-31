@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Tuttu disattivà',
 'bouton_desinstaller' => 'Disistallà',
 'bouton_effacer_index' => 'Sguassà l\'ìndici',
-'bouton_effacer_statistiques' => 'Sguassà e statìstiche',
 'bouton_effacer_tout' => 'TUTTU sguassà',
 'bouton_envoi_message_02' => 'MANDÀ UN MESSAGIU',
 'bouton_envoyer_message' => 'Messagiu definitivu : mandà',
@@ -118,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'ore',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'email',
 'email_2' => 'email :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -202,7 +202,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Creà una nova rùbbrica',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Mandà u messagiu',
-'icone_evolution_visites' => 'Evuluzione di e vìsite<br />@visites@ vìsite',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -246,7 +245,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'à l\'indirizzu :',
 'info_adresse_url' => 'Indirizzu (URL) di u situ pùbblicu',
 'info_afficher_visites' => 'Vede e vìsite per :',
-'info_affichier_visites_articles_plus_visites' => 'Vede e vìsite per <b>l\'artìculu i più letti dipoi u principiu di u situ :</b>',
 'info_aide_en_ligne' => 'Aiutu in ligna SPIP',
 'info_ajout_image' => 'Quand\'è vo aghjunghjite imàgini cum\'è ducumenti alleati à un artìculu, 
 		SPIP pò creà per voi, in autumàticu, figurette ridotte da l\'imàgini inserite. Per esempiu vi permette di creà 
@@ -292,7 +290,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>o</sup> nant\'à @liste@',
 'info_classement_2' => '<sup>o</sup> nant\'à @liste@',
 'info_code_acces' => 'Ùn vi scurdate di i vostri còdici d\'accessu !',
-'info_comment_lire_tableau' => 'Cumu leghje stu tavulone ?',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Arricumandemu di verificà capunanzu sì l\'òspite cumpressa digià in autumàticu i script php;. Pè sapè la, 
 		pudete aduprà per esempiu stu serviziu : @testgzip@',
@@ -347,7 +344,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		prucede à invii d\'email, per esempiu à una mailing-list di i scrittori, l\'annunciu di e dumande di 
 		pubblicazione è cunvalidazione d\'artìculi.',
 'info_fichiers_authent' => 'Schedari d\'autentificazione ".htpasswd"',
-'info_forum_statistiques' => 'Statìstiche di e vìsite',
 'info_forums_abo_invites' => 'U vostru situ cumporta fori accessìbuli solu à l\'abbunati. Per ciò esiste una pàgina d\'iscrizzione in u situ pùbblicu.',
 'info_gauche_admin_effacer' => '<b>Sta pàgina hè accessìbule solu à i rispunsèvuli di u situ.</b><p> 
 		Permette l\'accessu à e diverse funzioni di mantenimentu tècnicu. 
@@ -468,8 +464,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_plus_cinq_car_2' => '(Più di 5 caràtteri)',
 'info_plus_trois_car' => '(Più di 3 caràtteri)',
 'info_popularite' => 'pupularità : @popularite@ ; vìsite : @visites@',
-'info_popularite_2' => 'pupularità di u situ : ',
-'info_popularite_3' => 'pupularità : @popularite@ ; vìsite : @visites@',
 'info_popularite_4' => 'pupularità : @popularite@ ; vìsite : @visites@',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-Scriptum :',
@@ -479,7 +473,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_preview_desactive' => 'A vista in antìcipu di u situ hè propriu disattivata',
 'info_preview_texte' => 'Hè pussìbule avè una vista in antìcipu di u situ cù tutti l\'artìculi è i dispacci "pruposti" per a pubblicazione. Sta pussibulità 
 		deve esse attivata solu pè l\'amministratori, à tutti i scrittori o puru disattivata.',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'I currispundenti principali',
 'info_procedez_par_etape' => 'avanzà un passu dopu l\'altru',
 'info_procedure_maj_version' => 'Deve esse lanciatu a l\'aghjurnamentu pè addattà a basa di dati à a nova versione di SPIP.',
@@ -489,7 +482,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_publies' => 'I vostri artìculi pubblicati',
 'info_question_accepter_visiteurs' => 'Sè i mudelli di pàgina di u vostru situ privedenu l\'arregistramentu d\'utilizatori senza accessu à u spaziu privatu, 
 		attivate puru a funziunalità quì sottu :',
-'info_question_gerer_statistiques' => 'Deve gestisce u vostru situ e statìstiche di vìsite ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accettate l\'iscrizzioni di nuvelli scrittori
 	da u situ pùbblicu ? In stu casu, i visitori si puderanu iscrive usendu un furmulariu autumàticu
 	è accede tandu à u spaziu privatu per prupone i so propri artìculi.
@@ -498,9 +490,7 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 	òspiti disattiveghjanu l\'inviu d\'email da i so propri servori : in stu casu, vene impussìbule l\'iscrizzione autumàtica.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'vulete aduprà u mutore di ricerca integratu di SPIP ?
 	(disattivu vene acceleratu u funziunamentu di u sistema)',
-'info_question_vignettes_referer' => 'Cunsultendu e statìstiche, pudete puru vede in antìcipu siti d\'orìgine di e vìsite',
 'info_question_vignettes_referer_non' => 'Ùn vede micca a cattura di screnu di i siti d\'orìgine di e vìsite',
-'info_question_vignettes_referer_oui' => 'Vede a cattura di screnu di i siti d\'orìgine di e vìsite',
 'info_racine_site' => 'Ràdica di u situ',
 'info_recharger_page' => 'Aghjurnate sta pàgina da quì à un minutu.',
 'info_recherche_auteur_a_affiner' => 'Troppu risultati per "@cherche_auteur@"; precisate puru a ricerca.',
@@ -586,7 +576,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'info_urlref' => 'Lea ipertestu :',
 'info_utilisation_spip' => 'Avà pudete puru principià à aduprà u sistema di pubblicazione assistita...',
 'info_visites_par_mois' => 'Vede mese per mese :',
-'info_visites_plus_populaires' => 'Vede e vìsite per <b>l\'artìculi i più pupulari</b> è per <b>l\'ùltimi artìculi pubblicati :</b>',
 'info_visiteur_1' => 'Visitori',
 'info_visiteur_2' => 'di u situ pùbblicu',
 'info_visiteurs' => 'Visitori',
@@ -629,7 +618,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'item_choix_redacteurs' => 'i scrittori',
 'item_choix_visiteurs' => 'i visitori di u situ pùbblicu',
 'item_creer_fichiers_authent' => 'Creà i schedari .htpasswd',
-'item_gerer_statistiques' => 'Gestisce e statìstiche',
 'item_limiter_recherche' => 'Limità a ricerca à l\'infurmazioni cuntenute in u vostru situ',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Attivà a messageria è l\'agenda',
@@ -816,7 +804,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'texte_admin_effacer_01' => 'Sta cumanda sguassa u cuntenutu <i>sanu sanu</i> di a basa di dati, 
 	compresi <i>tutti</i> i login di i scrittori è amministratori. Dopu avè la eseguita, vi tuccherà à rilancià a prucedura di stallazione 
 	per turnà à creà una nova basa di dati è un primu ID amministrativu.',
-'texte_admin_effacer_stats' => 'Sta cumanda sguassa tutti i dati leati à e statìstiche di vìsite di u situ, cumpresa a pupularità di l\'artìculi.',
 'texte_adresse_annuaire_1' => '(S\'ellu hè stallatu l\'annuariu nant\'à listessa màcchina chè stu situ web, à colpu sicuru deve esse "localhost".)',
 'texte_ajout_auteur' => 'Hè statu aghjuntu à l\'artìculu u seguente autore :',
 'texte_annuaire_ldap_1' => 'Sè vo avete accessu à un annuariu (LDAP), u pudete puru aduprà da impurtà in autumàticu utilizatori sottu SPIP.',
@@ -837,9 +824,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'texte_choix_table_prefix' => 'Prefissu di e tàvule :',
 'texte_commande_vider_tables_indexation' => 'Aduprà sta cumanda pè sviutà e tàvule d\'indizzazione usate da u mutore di ricerca 
 		integratu à SPIP. Cusì vincerebbe spaziu discu.',
-'texte_comment_lire_tableau' => 'U rangu di l\'artìculu in a classìfica pè pupularità hè indettatu quì sopra. A pupularità di l\'artìculu (stimata da 
-	u nùmeru di vìsite cutidianu ch\'ellu riceverà l\'artìculu s\'ellu ferma uguale u rìtimu attuale di cunsultazione) è u nùmeru di vìsite ricevute 
-	dipoi u principiu sò da vede in a scatuletta chì s\'apre quandu omu passa u topu sopr\'à u tìtulu.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(pò esse cumpressu o micca)',
@@ -929,8 +913,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 		<li> a natura di u mutore tipugràficu ch\'ellu deve aduprà SPIP per a messa in forma di u testu;</li>
 		<li> a lingua aduprata in e finestre di diàlogu di u situ pùbblicu;</li>
 		<li> a lingua predefinita in u spaziu pùbblicu riservatu à l\'amministrazione.</li></ul>',
-'texte_signification' => 'L\'aste più scure riprisentanu l\'entrate cumulate (per u tutale di e sotturùbbriche), l\'aste più chjare u nùmeru di vìsite 
-		per ogni rùbbrica.',
 'texte_sous_titre' => 'Sottutìtulu',
 'texte_statistiques_visites' => '(aste scure :  dumèniche / curva scura : evuluzione di a media)',
 'texte_statut_attente_validation' => 'in attesa di cunvalidazione',
@@ -983,7 +965,6 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Cunflittu à tempu à l\'edizione',
 'titre_connexion_ldap' => 'Opzioni : <b>A vostra cunnessione LDAP</b>',
-'titre_evolution_visite' => 'Evuluzione di e vìsite',
 'titre_groupe_mots' => 'GRUPPU DI PARULLE :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LINGUA DI L\'ARTÌCULU',
@@ -1010,11 +991,9 @@ U so statutu hè signalatu da u culore di l\'icona (scrittore = giallu; amminist
 'titre_page_message_edit' => 'Scrive un messagiu',
 'titre_page_messagerie' => 'I vostri messagi',
 'titre_page_recherche' => 'Risultati di a ricerca @recherche@',
-'titre_page_statistiques' => 'Statìstiche per rùbbrica',
 'titre_page_statistiques_referers' => 'Statìstiche (lee versu u vostru situ)',
 'titre_page_statistiques_signatures_jour' => 'Nùmeru di zifre à u ghjornu',
 'titre_page_statistiques_signatures_mois' => 'Nùmeru di zifre à u mese',
-'titre_page_statistiques_visites' => 'Statìstiche di vìsite',
 'titre_page_upgrade' => 'Aghjurnamentu di SPIP',
 'titre_publication_articles_post_dates' => 'Pubblicazione di l\'artìculi postdatati',
 'titre_referencer_site' => 'Riferisce u situ :',

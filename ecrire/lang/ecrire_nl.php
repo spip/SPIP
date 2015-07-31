@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Alles desactiveren',
 'bouton_desinstaller' => 'Terugtrekken',
 'bouton_effacer_index' => 'Index verwijderen',
-'bouton_effacer_statistiques' => 'De statistieken uitwissen',
 'bouton_effacer_tout' => 'ALLES wissen',
 'bouton_envoi_message_02' => 'EEN BERICHT VERZENDEN',
 'bouton_envoyer_message' => 'Definitief bericht : versturen',
@@ -117,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'uur',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
 'en_savoir_plus' => 'Meer weten hierover',
@@ -196,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Een nieuwe rubriek aanmaken',
 'icone_edition' => 'Uitgave',
 'icone_envoyer_message' => 'Bericht verzenden',
-'icone_evolution_visites' => 'Evolutie van de bezoeken<br />@visites@ bezoeken',
 'icone_ma_langue' => 'Mijn taal',
 'icone_mes_infos' => 'Mijn informatie',
 'icone_mes_preferences' => 'Mijn Voorkeuren',
@@ -240,7 +239,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'aan/naar het adres:',
 'info_adresse_url' => 'Adres (URL) van de website',
 'info_afficher_visites' => 'Toon het aantal bezoeken voor:',
-'info_affichier_visites_articles_plus_visites' => 'Bezoekers tonen voor <b>de meest bezochte artikels sinds het begin:</b>',
 'info_aide_en_ligne' => 'ONLINE HELP VAN SPIP',
 'info_ajout_image' => 'Als je afbeeldingen als bijlage aan een document toevoegt,
   kan SPIP hiervan automatisch miniaturen aanmaken.
@@ -286,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>ste</sup> op @liste@',
 'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
-'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
 'info_compatibilite_html' => 'HTML-standaard te volgen',
 'info_compresseur_gzip' => '<b>N. B. :</b> Hij wordt aanbevolen om eerst te controleren of leverancier de scripts php  reeds systematisch samenperst; daarvoor, kunt u bijvoorbeeld de volgende dienst gebruiken : @testgzip@',
 'info_compresseur_texte' => 'Als uw server de bladzijdes HTML niet automatisch samendrukt om ze te verzenden naar de internauten, kunt u deze samendrukking proberen te forceren om het gewicht van de gedownloade bladzijdes te verminderen. <b>Aandacht</b>: dat kan bepaalde servers aanzienlijk vertragen.',
@@ -334,7 +331,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  vergemakkelijken, kan SPIP mails versturen -bijvoorbeeld naar een mailinglist van redacteurs-
  met de aankondiging van vragen voor publicatie of goedgekeurde publicaties.',
 'info_fichiers_authent' => 'Verificatiebestand ".htpasswd"',
-'info_forum_statistiques' => 'Statistieken van de bezoeken',
 'info_forums_abo_invites' => 'Je site bevat forums met abonnement; bezoekers worden dus op de publieke site verzocht zich in te schrijven.',
 'info_gauche_admin_effacer' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot verschillende onderhoudstaken. Voor sommige taken is een afzonderlijke aanmelding tot de site via FTP vereist.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p> Ze geeft toegang tot allerlei technische onderhoudstaken.
@@ -452,8 +448,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(Meer dan 5 karakters)',
 'info_plus_trois_car' => '(Meer dan 3 karakters)',
 'info_popularite' => 'populariteit: @popularite@; bezoeken: @visites@',
-'info_popularite_2' => 'populariteit van de site:',
-'info_popularite_3' => 'populariteit: @popularite@; bezoeken: @visites@',
 'info_popularite_4' => 'populariteit: @popularite@; bezoeken: @visites@',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum :',
@@ -462,7 +456,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Alle redacteurs kunnen de site in preview zien',
 'info_preview_desactive' => 'Preview van de site is uitgeschakeld',
 'info_preview_texte' => 'Nu is het ook mogelijk om de site in preview mode te zien, alsof alle artikels en berichten (indien ze tenminste werden « voorgesteld voor publicatie ») ook echt waren gepubliceerd.Dient deze mogelijkheid te worden voorzien voor de beheerders alleen, voor alle redacteurs of voor niemand ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Je belangrijkste correspondenten',
 'info_procedez_par_etape' => 'volg stap voor stap',
 'info_procedure_maj_version' => 'de procedure voor updaten die nodig is om de databank aan te passen
@@ -472,7 +465,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publiceren',
 'info_publies' => 'Je gepubliceerde artikels',
 'info_question_accepter_visiteurs' => 'Als de sjablonen van je site voorzien dat bezoekers zich kunnen registreren zonder toegang tot de privé-ruimte, activeer dan de volgende optie :',
-'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aanvaard je inschrijvingen van nieuwe redacteuren vanop
  de publieke site? Indien wel, dan kunnen bezoekers
  zich via een geautomatiseerd formulier inschrijven en
@@ -485,9 +477,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  niet mogelijk.</i></blockquote>',
 'info_question_utilisation_moteur_recherche' => 'Wil je gebruik maken van de geintegreerde zoekmachine van SPIP ?
  (niet-activeren hiervan versnelt de werking van het systeem.)',
-'info_question_vignettes_referer' => 'Wanneer u de statistieken raadpleegt, kunt u korte overzichten van de plaatsen van oorsprong van de bezoeken zichtbaar maken',
 'info_question_vignettes_referer_non' => 'Niet de vangsten van de sites van oorsprong van de bezoeken te kennen geven',
-'info_question_vignettes_referer_oui' => 'De vangsten van de siten van oorsprong van de bezoeken te kennen geven',
 'info_racine_site' => 'Begin van de site',
 'info_recharger_page' => 'Gelieve deze pagina binnen enkele ogenblikken te herladen.',
 'info_recherche_auteur_a_affiner' => 'Teveel resultaten voor "@cherche_auteur@" ; gelieve de zoekopdracht te verfijnen.',
@@ -570,7 +560,6 @@ een kleur geeft hun status aan :',
 'info_urlref' => 'Adres van de koppeling :',
 'info_utilisation_spip' => 'Je kan het publicatiesysteem nu gebruiken...',
 'info_visites_par_mois' => 'Tonen per maand :',
-'info_visites_plus_populaires' => 'Toon de bezoeken voor <b>de meest populaire artikels</b> en voor <b>de laatst gepubliceerde artikels:</b>',
 'info_visiteur_1' => 'Bezoeker',
 'info_visiteur_2' => 'van de publieke site',
 'info_visiteurs' => 'Bezoekers',
@@ -613,7 +602,6 @@ een kleur geeft hun status aan :',
 'item_choix_redacteurs' => 'de redacteurs',
 'item_choix_visiteurs' => 'bezoekers van de publieke site',
 'item_creer_fichiers_authent' => 'de .htpasswd bestanden aanmaken',
-'item_gerer_statistiques' => 'Statistieken aanmaken',
 'item_limiter_recherche' => 'opzoeking beperken tot informatie van je eigen site',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'De besteldienst en de agenda activeren',
@@ -793,7 +781,6 @@ een kleur geeft hun status aan :',
 'texte_acces_ldap_anonyme_1' => 'Sommige LDAP-servers aanvaarden geen anonieme toegang. In zo\'n geval dien je één loginnaam op te geven om vervolgens informatie in het adressenboek te zoeken. In de meeste gevallen kan je de volgende velden echter leeg laten.',
 'texte_admin_effacer_01' => 'Met dit commando vernietig je de  <i>volledige</i> inhoud van de databank,
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
-'texte_admin_effacer_stats' => 'Deze bestelling wist alle gegevens in verband met de statistieken van bezoek van de plaats uit, met inbegrip van de populariteit van de artikelen.',
 'texte_adresse_annuaire_1' => '(Als de map is geïnstalleerd is op dezelfde computer als je website, is het waarschijnlijk «localhost».)',
 'texte_ajout_auteur' => 'Deze auteuer is toegevoegd aan het artikel :',
 'texte_annuaire_ldap_1' => 'Als je toegang hebt tot een LDAP-adresboek, kan je dit gebruiken om automatisch gebruikers in te voeren in SPIP.',
@@ -810,17 +797,6 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_choix_table_prefix' => 'Voorvoegsel van de tabelen :',
 'texte_commande_vider_tables_indexation' => 'Gebruik dit commando als je de tabellen met indices wil leegmaken die door de
  zoekmachine van SPIP gebruikt worden. Zo kan je schijfruimte vrijmaken.',
-'texte_comment_lire_tableau' => 'De plaats van het artikel,
- in de rangschikking volgens populariteit, is in de marge
- aangegeven; de populariteit(*) van het artikel en het
- aantal bezoeken sinds het het begin van de site staan in
- het vakje dat verschijnt als je met de muis over de
- titel van het artikel komt.
-
-(*) de populariteit van een artikel is een schatting van
- het aantal bezoeken dat het artikel op een dag zal
- krijgen als huidige ritme van raadpleging wordt
- aangehouden.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(deze kan gecomprimeerd worden of niet)',
@@ -911,7 +887,6 @@ Als u geen nut ervan hebt, kunt u deze keuze
  <li> de aard van de typografische motor die SPIP dient te gebruiken om teksten te tonen;</li>
  <li> de taal die gebruikt moet worden op de formulieren van de publieke site;</li>
  <li> de taal die standaard wordt voorgesteld in het private gedeelte.</li></ul>',
-'texte_signification' => 'De donkere balkjes stellen alle samengetelde bezoeken weer (totaal van alle subrubrieken), de lichte balkjes het aantal bezoeken voor elke rubriek.',
 'texte_sous_titre' => 'Ondertitel',
 'texte_statistiques_visites' => '(donkere balkjes :  zondag / donkere lijn : evolutie van het gemiddelde)',
 'texte_statut_attente_validation' => 'wachten op goedkeuring',
@@ -977,7 +952,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflict bij de uitgave',
 'titre_connexion_ldap' => 'Opties: <b>Je LDAP-verbinding</b>',
-'titre_evolution_visite' => 'Evolutie van de bezoeken',
 'titre_groupe_mots' => 'WOORDENGROEP:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'TAAL VAN HET ATIKEL',
@@ -1004,11 +978,9 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_page_message_edit' => 'Een bericht opstellen',
 'titre_page_messagerie' => 'Je brievenbus',
 'titre_page_recherche' => 'Zoekresultaat voor @recherche@ ',
-'titre_page_statistiques' => 'Statistieken per rubriek',
 'titre_page_statistiques_referers' => 'Statistieken (per referer)',
 'titre_page_statistiques_signatures_jour' => 'Aantal handtekeningen per dag',
 'titre_page_statistiques_signatures_mois' => 'Aantal handtekeningen per maand',
-'titre_page_statistiques_visites' => 'Statistieken van de bezoeken',
 'titre_page_upgrade' => 'Bijwerken van SPIP',
 'titre_publication_articles_post_dates' => 'Publicatie van postgedateerde artikels',
 'titre_referencer_site' => 'Deze site koppelen :',

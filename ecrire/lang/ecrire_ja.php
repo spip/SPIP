@@ -61,7 +61,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'bouton_desactive_tout' => 'すべて無効',
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'インデックスの削除',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'すべての削除',
 'bouton_envoi_message_02' => 'メッセージを送る',
 'bouton_envoyer_message' => '最後のメッセージ: 送る',
@@ -117,6 +116,7 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'date_mot_heures' => '時',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'メール',
 'email_2' => 'メール：',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -195,7 +195,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'icone_creer_rubrique_2' => '新しいセクションを作る',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'このメッセージを送る',
-'icone_evolution_visites' => '訪問率<br />@visites@訪問',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -239,7 +238,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_adresse' => 'そのアドレスへ:',
 'info_adresse_url' => 'あなたの公開サイトのURL',
 'info_afficher_visites' => '訪問者の表示:',
-'info_affichier_visites_articles_plus_visites' => '<b>はじめの頃から最も多く訪問された記事</b>の訪問者の表示：',
 'info_aide_en_ligne' => 'SPIPオンラインヘルプ',
 'info_ajout_image' => '記事に添付書類として画像イメージを付け加えるとき、
   SPIPは自動的にヴィニェット＜半身像・ロゴなど＞（サムネイル）を
@@ -285,7 +283,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_classement_1' => ' @liste@ の外',
 'info_classement_2' => '  @liste@ 外',
 'info_code_acces' => 'あなたの所有するアクセスコードを忘れないで下さい！',
-'info_comment_lire_tableau' => 'この画像を読み込むには',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -331,7 +328,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_exportation_base' => '@archive@ へデータベースをエキスポート（輸出）',
 'info_facilite_suivi_activite' => 'サイトでの編集活動のお手伝いのために、SPIPは記事公開要求、適性検査の結果など、メールで自動送信することが出来ます。（例えばメーリングリストなど）',
 'info_fichiers_authent' => '認証ファイル ".htpasswd"',
-'info_forum_statistiques' => '訪問者の統計',
 'info_forums_abo_invites' => 'あなたのサイトはサブスクリプションのための掲示板を持っています; 訪問者達はパブリックなサイトでそれらのために登録するかもしれません。',
 'info_gauche_admin_effacer' => '<b>管理者のみがこのページにアクセス出来る。</b><p> そのページはさまざまな技術的メンテナンスのための手順を提供します。いくらかの手順では同WEBサイトへのFTPアクセスによる特別な認証手順が必要です。</p>', # MODIF
 'info_gauche_admin_tech' => '<b>管理者のみがこのページにアクセス出来る。</b><p> そのページはさまざまな技術的メンテナンスのための手順を提供します。いくらかの手順では同WEBサイトへのFTPアクセスによる特別な認証手順が必要です。</p>', # MODIF
@@ -442,8 +438,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_plus_cinq_car_2' => '(６文字以上)',
 'info_plus_trois_car' => '(４文字以上)',
 'info_popularite' => '人気度: @popularite@; 訪問者: @visites@',
-'info_popularite_2' => 'サイトの人気度:',
-'info_popularite_3' => '人気度: @popularite@; 訪問者: @visites@',
 'info_popularite_4' => '人気度: @popularite@; 訪問者: @visites@',
 'info_post_scriptum' => 'Postscript',
 'info_post_scriptum_2' => 'Postscript:',
@@ -452,7 +446,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_preview_comite' => 'すべての編集者がプレビューモードへアクセス出来る',
 'info_preview_desactive' => 'プレビューモードは使用不能',
 'info_preview_texte' => '（少なくとも"提出中"状態の）すべての記事とニュースを公表した時どのように見えるか試しに見ることが出来ます。このプレビューモードは管理人だけに限定するか、すべての編集者に開放するか、完全に無効にすることが出来ます。',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'あなたの主な通信者',
 'info_procedez_par_etape' => 'どうかステップbyステップで進んでください',
 'info_procedure_maj_version' => '新しいバージョンのSPIPに順応させるために、データベースをアップグレードするべきです。',
@@ -461,13 +454,10 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_publier' => '発表',
 'info_publies' => 'オンラインに公開されたあなたの記事',
 'info_question_accepter_visiteurs' => 'もしあなたのサイトのテンプレートが、プライベートエリアに入らないで登録する訪問者たちを許すなら、次のオプションを有効にしてください:',
-'info_question_gerer_statistiques' => 'あなたのサイトの訪問者の統計を管理すべきですか？',
 'info_question_inscription_nouveaux_redacteurs' => '公開されているサイトで新しいエディターの登録を募りますか？　許可した場合、訪問者たちはフォームから自動で登録でき、プライベートエリアにアクセスし自分の記事を提出できます。 <blockquote><i>登録作業中に、ユーザーは自動的に送信されるプライベートエリアへのIDとパスワードを記したe-mailを受け取ります。若干のホストでは、それらサーバー上からメールが送れない場合があります：そういう場合、自動登録を実施できません。', # MODIF
 'info_question_utilisation_moteur_recherche' => 'SPIPに結合された検索エンジンを使いたいですか?
  (無効にするとシステムが早くなります。)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'サイトのルート',
 'info_recharger_page' => 'ちょっとしてからこのページを再読込してください。',
 'info_recherche_auteur_a_affiner' => '"@cherche_auteur@"の検索結果が多すぎます; もうちょっとキーワードをひねって検索して下さい。',
@@ -550,7 +540,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_urlref' => 'リンク:',
 'info_utilisation_spip' => 'SPIPが使えるように準備中...',
 'info_visites_par_mois' => '月単位で表示:',
-'info_visites_plus_populaires' => '訪問者を表示 <b>一番人気のある記事</b> と <b>最新の公開記事:</b>',
 'info_visiteur_1' => '訪問者',
 'info_visiteur_2' => 'パブリックなサイトの',
 'info_visiteurs' => '訪問者',
@@ -593,7 +582,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_choix_redacteurs' => 'エディターズ',
 'item_choix_visiteurs' => 'パブリックなサイトの訪問者',
 'item_creer_fichiers_authent' => '.htpasswdファイルを作る',
-'item_gerer_statistiques' => '統計を管理',
 'item_limiter_recherche' => 'あなたのサイトに含まれている情報に検索を制限する',
 'item_login' => 'ログインID',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -772,7 +760,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'text_article_propose_publication' => 'この記事は公開の為に提出されました。この記事の掲示板で、どうぞためらわずに意見してください(ページの一番下)。', # MODIF
 'texte_acces_ldap_anonyme_1' => 'いくらかのLDAPサーバーはどんな匿名でのアクセスも許しません。こういう場合、あなたはこの後ディレクトリの情報を検索できる最初のIDを入力する必要があります。しかしながら、次のところはほとんどの場合は空欄のままで大丈夫です。',
 'texte_admin_effacer_01' => 'この手順はデータベースの<i>すべての</i> 内容を削除します。<i>すべての</i> エディター達や管理者のアクセスの為の設定も含みます。実行した後、新しいデータベースを作り、管理者が最初にアクセスするため、SPIPを再インストールする必要があります。',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '( もしあなたのディレクトリがあなたのWebサイトと同じマシンにインストールされているなら、それはおそらく«localhost»。）',
 'texte_ajout_auteur' => '次の著者は記事に加筆した:',
 'texte_annuaire_ldap_1' => 'もしあなたがディレクトリ（LDAP）にアクセスできるのなら、SPIPに自動的にユーザーを輸入（インポート）することが可能です。',
@@ -788,7 +775,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_choix_base_3' => 'あなたのホストがあなたに割り当てたものを<b>下から１つ選んで下さい</b>:',
 'texte_choix_table_prefix' => 'Préfixe des tables :', # NEW
 'texte_commande_vider_tables_indexation' => 'この手順を使うとSPIPに結合された検索エンジンが使っているインデックステーブルが空になります。いくらかのディスクが空くことでしょう。',
-'texte_comment_lire_tableau' => '記事のランク、分類の人気はマージンで示されます; 記事の人気度（１日の訪問者の概算数。トラフィックの実際のペースを表しています）と、初めからの訪問者数は、記事の題名上にマウスのカーソルを置いておくと表示されます。',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(これが圧縮できなかったか、違う)',
@@ -861,7 +847,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 <li> 公開されているサイトの掲示板で使われる言語</li>
 
 <li> プライベートエリア内で表示される標準言語</li></ul>',
-'texte_signification' => '濃い線は累積的な項目を（サブセクションの合計）、薄い線はそれぞれのセクションの訪問者数を表しています。',
 'texte_sous_titre' => 'サブタイトル',
 'texte_statistiques_visites' => '(黒い線： 日曜日 / 黒い曲線：平均水準)',
 'texte_statut_attente_validation' => '適正検査前',
@@ -907,7 +892,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'オプションズ: <b>あなたのLDAPコネクション</b>',
-'titre_evolution_visite' => '訪れるレベル',
 'titre_groupe_mots' => 'キーワードグループ:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => '記事の言語',
@@ -934,11 +918,9 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_page_message_edit' => 'メッセージを書く',
 'titre_page_messagerie' => 'あなたのメッセージング',
 'titre_page_recherche' => '検索語 @recherche@ による検索結果',
-'titre_page_statistiques' => 'セクションごとの統計',
 'titre_page_statistiques_referers' => '統計（入ってくるリンク）',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => '訪問者の統計',
 'titre_page_upgrade' => 'SPIPアップグレード',
 'titre_publication_articles_post_dates' => '記事の投稿時間の公開',
 'titre_referencer_site' => 'サイトの参照:',

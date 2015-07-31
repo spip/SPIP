@@ -60,7 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Tout désactiver', # NEW
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => '删除索引',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => '删除所有',
 'bouton_envoi_message_02' => '发消息',
 'bouton_envoyer_message' => '最后消息:发送',
@@ -116,6 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => '时',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => '电子邮件',
 'email_2' => '电子邮件:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -194,7 +194,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => '新建专栏',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => '发送这个消息',
-'icone_evolution_visites' => '访问进展<br />@visites@个访问', # MODIF
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -237,7 +236,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => '给地址:',
 'info_adresse_url' => '您的公众站点URL地址',
 'info_afficher_visites' => '显示访问者:',
-'info_affichier_visites_articles_plus_visites' => '显示<b>从开始访问最流行文章的</b>访问者:',
 'info_aide_en_ligne' => 'SPIP在线帮助',
 'info_ajout_image' => '当您添加图像作为文章的附加文档,  SPIP 能根据插入的图片自动创建缩略图.
 这将允许, 例如, 自动创建
@@ -282,7 +280,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>st</sup> 出了 @liste@',
 'info_classement_2' => '<sup>th</sup> 出了 @liste@',
 'info_code_acces' => '不要忘记你的访问码!',
-'info_comment_lire_tableau' => '如何读图',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -331,7 +328,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   公共请求和文章
   确认的声明.',
 'info_fichiers_authent' => '认证文件 ".htpasswd"',
-'info_forum_statistiques' => '访问统计',
 'info_forums_abo_invites' => '您的网站包含要求注册的公共论坛；所以公共网站的访客将被要求注册。',
 'info_gauche_admin_effacer' => '<MODIF><b>只有管理员才有权访问该页.</b><p> 它提供访问不同的技术维护任务. 其中有些需要特殊认证，必须通过FTP访问站点.', # MODIF
 'info_gauche_admin_tech' => '<b>只有管理者才有权访问这页.</b><p> 它提供多种多种
@@ -451,8 +447,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(多于 5 字符)',
 'info_plus_trois_car' => '(多于 3 字符)',
 'info_popularite' => '流行: @popularite@; 访问: @visites@',
-'info_popularite_2' => '站点流行:',
-'info_popularite_3' => '流行: @popularite@; 访问: @visites@',
 'info_popularite_4' => '流行: @popularite@; 访问: @visites@',
 'info_post_scriptum' => '后记',
 'info_post_scriptum_2' => '后记:',
@@ -461,7 +455,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => '所有的编辑均可预览网站',
 'info_preview_desactive' => '完全关闭预览功能',
 'info_preview_texte' => '可以预览整个网站，就像所有的文章和短消息（至少有 « 建议发表 »资格）都被发表了一样。向管理员，编辑开放这一功能，还是不向任何人开放？',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => '你主要的通讯者',
 'info_procedez_par_etape' => '请一步步进行下去',
 'info_procedure_maj_version' => '升级过程应该适应
@@ -471,7 +464,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publier', # NEW
 'info_publies' => '你的文章在线出版',
 'info_question_accepter_visiteurs' => '如果您的网站骨架设定访问者可以从公共网站注册，而不用到私人空间，请激活如下功能:',
-'info_question_gerer_statistiques' => '你的站点管理访问者统计吗?',
 'info_question_inscription_nouveaux_redacteurs' => '你允许新编辑从公共站点注册吗?
   如果你愿意, 访问将通过自动表单注册
   , 将能访问私有区维护文章
@@ -483,9 +475,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   不生效.', # MODIF
 'info_question_utilisation_moteur_recherche' => '你希望SPIP集成搜索引擎吗?
  (使它不可用能加速系统的性能.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => '站点根',
 'info_recharger_page' => '请重新载入该页.',
 'info_recherche_auteur_a_affiner' => '太多结果"@cherche_auteur@"; 请重定义搜索.',
@@ -568,7 +558,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_urlref' => '超链接:',
 'info_utilisation_spip' => 'SPIP 准备使用...',
 'info_visites_par_mois' => '每月显示:',
-'info_visites_plus_populaires' => '显示 <b>最流行的文章</b> 访问者和 <b>最近发表的文章:</b>',
 'info_visiteur_1' => '访问者',
 'info_visiteur_2' => '公共站点',
 'info_visiteurs' => '访问者',
@@ -611,7 +600,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_redacteurs' => '编辑者',
 'item_choix_visiteurs' => '公共站点的访问者',
 'item_creer_fichiers_authent' => '创建 .htpasswd 文件',
-'item_gerer_statistiques' => '管理统计',
 'item_limiter_recherche' => '限制搜索你站点包括的内容',
 'item_login' => '登录',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -792,7 +780,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_admin_effacer_01' => '命令删除数据库的<i>所有</i> 内容包括
 <i>所有</i> 访问者和管理者的访问参数. 执行后, 为新建数据库和第一个管理员访问你应
 重新安装 SPIP .',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '( 如果你的目录安装到同样机器作为WEB站点, 可能 «localhost».)',
 'texte_ajout_auteur' => '以下作者加到文章:',
 'texte_annuaire_ldap_1' => '若你有权访问(LDAP) 目录, 你可用它在SPIP下自动导入用户.',
@@ -810,13 +797,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_commande_vider_tables_indexation' => '使用命令清空被SPIP集成的搜索引擎用到的索引表
    . 它将允许你保留磁盘空间
    .',
-'texte_comment_lire_tableau' => '根据流行程序的不同文章的等级,
-  , 在页边标识 
-  ; 文章流行度 (
-   如果正常带宽维护每天的访问者数量
-  ) 并且访问者数量记录
-  自从鼠标开始移过标题显示在气球上
-  .',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(这个被压缩或没有)',
@@ -929,7 +909,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li> 公众站点上论坛的语言</li>
 
 <li> 私有区显示缺省语言.</li></ul>',
-'texte_signification' => '<MODIF>深色条代表条目总数（子专栏总数），浅色条代表各个专栏的访问人数.',
 'texte_sous_titre' => '子标题',
 'texte_statistiques_visites' => '(黑线:  周日 / 夜晚 曲线: 平均进展)',
 'texte_statut_attente_validation' => '未确认',
@@ -984,7 +963,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => '选项: <b>你的 LDAP 连接</b>',
-'titre_evolution_visite' => '访问者评估',
 'titre_groupe_mots' => '关键词组:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => '文章语言',
@@ -1011,11 +989,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_message_edit' => '写消息',
 'titre_page_messagerie' => '您的消息',
 'titre_page_recherche' => '搜索结果@recherche@',
-'titre_page_statistiques' => '按专栏统计',
 'titre_page_statistiques_referers' => '统计(引入链接)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => '访问者统计',
 'titre_page_upgrade' => 'SPIP升级 ',
 'titre_publication_articles_post_dates' => '发表日期文章的出版物',
 'titre_referencer_site' => '参考站点:',

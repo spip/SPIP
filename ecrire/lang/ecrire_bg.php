@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Деактивирайте всички',
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Изтриване на индекси',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Изтриване на ВСИЧКО',
 'bouton_envoi_message_02' => 'ИЗПРАЩАНЕ НА СЪОБЩЕНИЕ',
 'bouton_envoyer_message' => 'Последно съобщение: изпращане',
@@ -118,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'ч.',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'електронен адрес',
 'email_2' => 'електронен адрес:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -196,7 +196,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Създаване на рубрика',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Изпращане на съобщението',
-'icone_evolution_visites' => 'Развитие на посещенията<br />@visites@ посещения',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -240,7 +239,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'към адрес:',
 'info_adresse_url' => 'Публичен URL на сайта ',
 'info_afficher_visites' => 'Показване на посещения за:',
-'info_affichier_visites_articles_plus_visites' => 'Показване на посещения за <b>най-посещаваните статии от началото:</b>',
 'info_aide_en_ligne' => 'Помощник',
 'info_ajout_image' => 'Когато се добавят изображения под формата на приложени документи към 
   статия, СПИП автоматично създава умалени образи (винетки)
@@ -286,7 +284,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => '<sup>st</sup> от общо @liste@',
 'info_classement_2' => '<sup>th</sup> от общо @liste@',
 'info_code_acces' => 'Не забравяйте личния си код за достъп!',
-'info_comment_lire_tableau' => 'Как да се чете тази схема',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -336,7 +333,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   на редактори, например.
 ',
 'info_fichiers_authent' => 'Файл за удостоверяване автентичността: .htpasswd',
-'info_forum_statistiques' => 'Статистика на посещенията',
 'info_forums_abo_invites' => 'Сайтът Ви съдържа форуми посредством предварителен абонамент; посетителите могат да се регистират за тях през публичния сайт.',
 'info_gauche_admin_effacer' => '<b>Само администратори имат достъп до тази страница.</b><p> Тя осигурява достъп до различни технически задачи за поддръжка. Някои от тях позволяват специфичен процес на идентификация и изискват FTP достъп до сайта.', # MODIF
 'info_gauche_admin_tech' => '<b>Само администратори имат достъп до тази страница.</b><p> Тя осигурява достъп до различни
@@ -456,8 +452,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(повече от 5 знака)',
 'info_plus_trois_car' => '(повече от 3 знака)',
 'info_popularite' => 'популярност: @popularite@; посещения: @visites@',
-'info_popularite_2' => 'популярност на сайта:',
-'info_popularite_3' => 'популярност: @popularite@; посещения: @visites@',
 'info_popularite_4' => 'популярност: @popularite@; поесещения: @visites@',
 'info_post_scriptum' => 'Постскриптум',
 'info_post_scriptum_2' => 'Постскриптум:',
@@ -466,7 +460,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Всички автори имат достъп до предварителния преглед',
 'info_preview_desactive' => 'Изключване на функцията "предварителен достъп"',
 'info_preview_texte' => 'Възможно е да се прави предварителен преглед на сайта все едно, че всички статии и новини (които имат статус "изпратени") са вече публикувани. Да бъде ли даден достъп към тази функция на администраторите само, да бъде ли възможна за всички автори на сайта или да бъде изключена напълно?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Вашите основни кореспонденти',
 'info_procedez_par_etape' => 'моля, продължете напред стъпка по стъпка',
 'info_procedure_maj_version' => 'процедурата по обновяване трябва да се стартира,
@@ -476,7 +469,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'публикуване',
 'info_publies' => 'Вашите публикувани статии',
 'info_question_accepter_visiteurs' => 'Ако шаблоните на сайта Ви позволяват посетителите да се регистират без да влизат в личната зона, активирайте следната опция:',
-'info_question_gerer_statistiques' => 'Желаете ли сайтът да поддържа статистика на посещенията?',
 'info_question_inscription_nouveaux_redacteurs' => 'Позволявате ли регистрацията на нови редактори от
   публикувания сайт. Ако сте съгласни, посетителите трябва да се
   регистрират през автоматичната форма, за да имат достъп до личната зона и
@@ -488,9 +480,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   не би могла да се осъществи.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Желаете ли да използвате търсещата машина под СПИП?
  (при отказване действието й увеличавате скоростта на действие на системата.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Схема на сайта',
 'info_recharger_page' => 'Моля, презаредете страницата след малко.',
 'info_recherche_auteur_a_affiner' => 'Твърде много намерени резултати за @cherche_auteur@; моля, прецизирайте търсенето си.',
@@ -572,7 +562,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_urlref' => 'Препратка в хипертекст:',
 'info_utilisation_spip' => 'СПИП вече е готов за използване.',
 'info_visites_par_mois' => 'Месечен дисплей:',
-'info_visites_plus_populaires' => 'Показване на посещения за <b>най-четени статии</b> и за <b>най-новите публикувани статии:</b>',
 'info_visiteur_1' => 'Посетител',
 'info_visiteur_2' => 'публичен сайт',
 'info_visiteurs' => 'Посетители',
@@ -615,7 +604,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_redacteurs' => 'редактори',
 'item_choix_visiteurs' => 'посетители на публичния сайт',
 'item_creer_fichiers_authent' => 'Създаване на файлове от типа .htpasswd',
-'item_gerer_statistiques' => 'Управление на статистиката',
 'item_limiter_recherche' => 'Ограничаване търсенето на информация, съдържаща се само във Вашия сайт',
 'item_login' => 'Потребителско име',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -796,7 +784,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_admin_effacer_01' => 'Тази команда изтрива <i>цялото</i> съдържание в базата данни,
 включително <i>всички</i> параметри за достъп за редактори и администратори. След нейното изпълнение, трябва
 да се преинсталира СПИП, за да се създаде нова база данни и първи администраторски достъп.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '( Ако директорията Ви е инсталирана на същата машина, на която и Интернет сайта, вероятно е «localhost».)',
 'texte_ajout_auteur' => 'Следният автор бе добавен към статията:',
 'texte_annuaire_ldap_1' => 'Ако разполагате с достъп до (LDAP) директория, можете да я използвате, за да вписвате автоматично потребители в СПИП.',
@@ -814,13 +801,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_commande_vider_tables_indexation' => 'Използвайте тази команда, за да изпразните таблиците с индекси
    използвани от търсачката на СПИП. Това ще Ви позволи
    да спестите малко място на диска.',
-'texte_comment_lire_tableau' => 'Мястото на статията според
-  класификацията за популярност (посещаемост) е указана в полето.
-  Популярността на статията (оценка от
-  броя на посещенията за един ден, ако се следва текущия 
-  трафик) и записания брой на посещенията
-  от самото начало, са показани в балона, който
-  се появява, когато мишката се позиционира върху заглавието.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(може да бъде или да не бъде компресиран)',
@@ -925,7 +905,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <li> езикът, който се използва във формите на публичния сайт</li>
 
 <li> езикът по подразбиране на данните в личната зона.</li></ul>',
-'texte_signification' => 'Тъмните ивици представляват натрупващи се посещения (общо за всички подрубрики), а светлите - броя на посещенията за всяка отделна рубрика.',
 'texte_sous_titre' => 'Подзаглавие',
 'texte_statistiques_visites' => '(тъмни ивици: неделя / тъмна крива: средно развитие)',
 'texte_statut_attente_validation' => 'за одобрение',
@@ -980,7 +959,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Възможности: <b>Вашата LDAP-връзка</b>',
-'titre_evolution_visite' => 'Развитие на посещенията',
 'titre_groupe_mots' => 'ГРУПА ОТ КЛЮЧОВИ ДУМИ:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'ЕЗИК НА СТАТИЯТА',
@@ -1007,11 +985,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_message_edit' => 'Писане на съобщение',
 'titre_page_messagerie' => 'Вашите съобщения',
 'titre_page_recherche' => 'Резултати от търсенето @recherche@',
-'titre_page_statistiques' => 'Статистика по рубрики',
 'titre_page_statistiques_referers' => 'Статистика (входящи препратки)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Статистика на посещенията',
 'titre_page_upgrade' => 'Актуализация на СПИП',
 'titre_publication_articles_post_dates' => 'Публикуване на статии с отминала дата',
 'titre_referencer_site' => 'Свързване на сайта:',

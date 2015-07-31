@@ -54,7 +54,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Dezactivaţi totul',
 'bouton_desinstaller' => 'Dezinstalaţi',
 'bouton_effacer_index' => 'Ştergeţi indecşii',
-'bouton_effacer_statistiques' => 'Ştergeţi statisticile',
 'bouton_effacer_tout' => 'Ştergeţi TOTUL',
 'bouton_envoi_message_02' => 'TRIMITEŢI UN MESAJ',
 'bouton_envoyer_message' => 'Mesajul definitiv: trimiteţi',
@@ -110,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'ore',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'email',
 'email_2' => 'email :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -189,7 +189,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Creaţi o nouă rubrică',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Trimiteţi acest mesaj',
-'icone_evolution_visites' => 'Evoluţia vizitelor<br />@visites@ vizite',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -233,7 +232,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'la adresa :',
 'info_adresse_url' => 'Adresa (URL) a site-ului public',
 'info_afficher_visites' => 'Afişează vizitele pentru :',
-'info_affichier_visites_articles_plus_visites' => 'Afişează vizitele pentru <b>cele mai vizitate articole de la început:</b>',
 'info_aide_en_ligne' => 'Ajutor SPIP în linie',
 'info_ajout_image' => 'Când adăugaţi imagini ca documente ataşate unui articol, SPIP poate crea pentru dvs. viniéte ale imaginilor introduse. Aceasta permite de exemplu crearea automată a unei galerii sau a unui portofoliu.',
 'info_ajout_participant' => 'Participantul următor a fost adăugat :',
@@ -276,7 +274,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => 'pe @liste@',
 'info_classement_2' => 'pe @liste@',
 'info_code_acces' => 'Nu uitaţi propriile dumeavoastră coduri de acces !',
-'info_comment_lire_tableau' => 'Cum se citeşte acest tablou',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Este recomandabil să verificaţi în prealabil dacă server-ul comprimă în mod sistematic scripturile php ; pentru a face acest test, puteţi să folosiţi de exemplu serviciul următor : @testgzip@',
 'info_compresseur_texte' => 'Dacă server-ul dumneavoastră nu comprimă în mod automat paginile html când acestea sunt trimise pe internet, puteţi încerca să forţaţi această compresie  pentru a diminua mărimea paginilor încărcate. <b>Atenţie</b> : această operaţie poate încetini considerabil anumite servere.',
@@ -322,7 +319,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_exportation_base' => 'exportul bazei de date către @archive@',
 'info_facilite_suivi_activite' => 'Pentru a uşura urmărirea activităţii editoriale a site-ului, SPIP poate trimite prin email cererile de publicare şi de validare a articolelor. De exemplu, destinatarul poate fi o listă de distribuţie a redacţiei.',
 'info_fichiers_authent' => 'Fişiere de autentificare « .htpasswd »',
-'info_forum_statistiques' => 'Statisticile vizitelor',
 'info_forums_abo_invites' => 'Site-ul dumneavoastră are forum-uri cu abonament ; vizitatorii sunt, aşadar, invitaţi să se înregistreze pe site-ul public.',
 'info_gauche_admin_effacer' => '<b>Această pagină este accesibilă doar responsabililor acestui site</b><br /> Ea dă acces la diverse funcţii de întreţinere tehnică. Unele dintre aceste funcţii cer un proces de autentificare specific, de exemplu să aveţi un acces FTP la site-ul Web.', # MODIF
 'info_gauche_admin_tech' => '<b>Această pagină este accesibilă doar responsabililor acestui site</b><br /> Ea dă acces la diverse funcţii de întreţinere tehnică. Unele dintre aceste funcţii cer un proces de autentificare specific, de exemplu să aveţi un acces FTP la site-ul Web.', # MODIF
@@ -438,8 +434,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(Mai mult de 5 caractere)',
 'info_plus_trois_car' => '(Mai mult de 3 caractere)',
 'info_popularite' => 'popularitate : @popularite@ ; vizite : @visites@',
-'info_popularite_2' => 'popularitatea site-ului :',
-'info_popularite_3' => 'popularitate : @popularite@ ; vizites : @visites@',
 'info_popularite_4' => 'popularitate : @popularite@ ; vizites : @visites@',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum :',
@@ -448,7 +442,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => 'Toţi redactorii pot previzualiza site-ul',
 'info_preview_desactive' => 'Previzualizarea este complet dezactivată',
 'info_preview_texte' => 'Este posibilă previzualizarea site-ului ca şi cum toate articolele şi ştirile (care au cel puţin starea « propus ») ar fi fost deja publicate. Această posibilitate trebuie să fie disponibilă doar pentru administratori, la toţi redactorii, sau nimănui ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Corespondenţii dumneavoastră principali',
 'info_procedez_par_etape' => 'procedaţi etapă cu etapă',
 'info_procedure_maj_version' => 'procedura de aducere la zi trebuie lansată pentru a adapta
@@ -458,7 +451,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publicaţi',
 'info_publies' => 'Articolele dumneavoatră publicate în direct',
 'info_question_accepter_visiteurs' => 'Dacă scheletele site-ului dumneavoastră prevăd înregistrarea vizitatorilor fără acces la spaţiul privat, vă rugăm să activaţi opţiunea de mai jos :',
-'info_question_gerer_statistiques' => 'Site-ul dumneavoastră trebuie să gestioneze statisticile vizitelor ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptaţi înscrierea de noi redactori
   în partea publică a site-ului ? Dacă acceptaţi, vizitatorii vor putea să se înscrie
   cu ajutorul unui formular automatizat şi vor putea avea acces la spaţiul privat pentru a propune
@@ -470,9 +462,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   imposibilă.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Doriţi să utilizaţi motorul de căutare integrat în SPIP ?
  (funcţionarea sistemului este mai rapidă fără activarea motorului de căutare.)',
-'info_question_vignettes_referer' => 'Atunci când vizualizaţi statisticile, puteţi vizualiza pre-vederi ale site-uri de unde provin vizitele',
 'info_question_vignettes_referer_non' => 'Nu afişati capturile site-urilor de unde vin vizitele',
-'info_question_vignettes_referer_oui' => 'Afişaţi capturile site-urilor de unde provin vizitele',
 'info_racine_site' => 'Rădăcina site-ului',
 'info_recharger_page' => 'Vă rugăm să reîncărcaţi această pagină în câteva momente.',
 'info_recherche_auteur_a_affiner' => 'Prea multe rezultate pentru "@cherche_auteur@" ; vă rugăm să rafinaţi termenii căutării.',
@@ -556,7 +546,6 @@ cu o culoare care le indică starea :',
 'info_urlref' => 'Legătură hipertext :',
 'info_utilisation_spip' => 'Puteţi începe acum să folosiţi sistemul de publicare asistată...',
 'info_visites_par_mois' => 'Afişare pe lună :',
-'info_visites_plus_populaires' => 'Afişaţi vizitele pentru <b>articolele cele mai populare</b> şi pentru <b>ultimele articole publicate</b> :',
 'info_visiteur_1' => 'Vizitator',
 'info_visiteur_2' => ' al site-ului public',
 'info_visiteurs' => 'Vizitatori',
@@ -599,7 +588,6 @@ cu o culoare care le indică starea :',
 'item_choix_redacteurs' => 'redactorii',
 'item_choix_visiteurs' => 'vizitatorii site-ului public',
 'item_creer_fichiers_authent' => 'Creaţi fişierele .htpasswd',
-'item_gerer_statistiques' => 'Gestionaţi statisticile',
 'item_limiter_recherche' => 'Limitaţi căutarea la informaţille conţinute pe site-ul dumneavoastră',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activaţi mesageria şi agenda',
@@ -780,7 +768,6 @@ cu o culoare care le indică starea :',
 'texte_admin_effacer_01' => 'Această comandă şterge <i>tot</i> conţinutul bazei de date,
 incluzând <i>toate</i> informaţiile referitoare la redactori sau administratori. După execuţia acestei comenzi va trebui să relansaţi procedura de
 reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces administrator.',
-'texte_admin_effacer_stats' => 'Această comandă şterge toate datele legate de statisticile vizitelor în site, incluzând şi datele de popularitate a articolelor.',
 'texte_adresse_annuaire_1' => '(Dacă anuarul este instalat pe aceeaşi maşină ca şi site-ul Web, este vorba probabil de «localhost».)',
 'texte_ajout_auteur' => 'Autorul următor a fost adăugat la articol :',
 'texte_annuaire_ldap_1' => 'Dacă avezi un acces la un anuar LDAP, puteţi să îl folosiţi pentru a importa în mod automat utilizatorii SPIP.',
@@ -798,10 +785,6 @@ reinstalare a SPIP pentru a recrea o nouă bază de date cât şi un nou acces a
 'texte_commande_vider_tables_indexation' => 'Utilizaţi această comandă pentru a goli tabelele de indexare utilizate
    de către motorul de căutare integrat în SPIP. Această operaţie vă va permite să
    câştigaţi spaţiu pe disc.',
-'texte_comment_lire_tableau' => 'Rangul articolului,
-  în clasamentul de popularitate este indicat cu o marjă ;
-  popularitatea articolului (care este o estimare a numărului de vizite zilnice pe care articolul le va primi dacă ritmul actual de consultare se menţine) şi numărul de vizite primite
-  de la început sunt afişate în mica fereastră care apare la un survol al mouse-ului deasupra titlului.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(acesta poate fi comprimat sau nu)',
@@ -885,7 +868,6 @@ Dacă problema persistă, vă rugăm să-l contactaţi pe furnizorul dumneavoast
  <li> natura motorului tipografic pe care SPIP îl foloseşte pentru afişarea site-ului public;</li>
  <li> limba folosită în formularele site-ului public;</li>
  <li> limba implicită în spaţiul privat.</li></ul>',
-'texte_signification' => 'Barele întunecate reprezintă intrarile cumulate (totalul sub-rubricilor), barele  deschise la culoare reprezintă numărul de vizite pentru fiecare rubrică.',
 'texte_sous_titre' => 'Sub-titlu',
 'texte_statistiques_visites' => '(barele întunecate :  duminicile / curba întunecată : evoluţia mediei)',
 'texte_statut_attente_validation' => 'în aşteptarea validării',
@@ -944,7 +926,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflict în timpul editării',
 'titre_connexion_ldap' => 'Opţiuni : <b>Conexiunea dumneavoastră LDAP</b>',
-'titre_evolution_visite' => 'Evoluţia vizitelor',
 'titre_groupe_mots' => 'GRUP DE CUVINTE :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LIMBA ARTICOLULUI',
@@ -971,11 +952,9 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_message_edit' => 'Scrieţi un mesaj',
 'titre_page_messagerie' => 'Mesageria dumneavoastră',
 'titre_page_recherche' => 'Rezultatele căutării @recherche@',
-'titre_page_statistiques' => 'Statisticile pe rubrici',
 'titre_page_statistiques_referers' => 'Statistici (legături în intrare)',
 'titre_page_statistiques_signatures_jour' => 'Număr de semnături pe zi',
 'titre_page_statistiques_signatures_mois' => 'Număr de semnături pe lună',
-'titre_page_statistiques_visites' => 'Statisticile vizitelor',
 'titre_page_upgrade' => 'Actualizaţi SPIP',
 'titre_publication_articles_post_dates' => 'Publicarea articolelor post-datate',
 'titre_referencer_site' => 'Referenţiaţi site-ul :',

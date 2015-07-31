@@ -61,7 +61,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'Empeche laktivasyon',
 'bouton_desinstaller' => 'Désinstaller', # NEW
 'bouton_effacer_index' => 'Kraze endèks yo',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Kraze TOUT',
 'bouton_envoi_message_02' => 'VOYE YON MESAJ',
 'bouton_envoyer_message' => 'Mesaj se bon : voye',
@@ -117,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'èr yo',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'limèl',
 'email_2' => 'limèl :',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -198,7 +198,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'icone_creer_rubrique_2' => 'Kreye yon nouvo ribrik',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Voye mesaj la',
-'icone_evolution_visites' => 'Evolisyon vizit yo<br />@visites@ vizit yo',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -242,7 +241,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_adresse' => 'sou ladrès :',
 'info_adresse_url' => 'Ladrès(URL) sit piblik',
 'info_afficher_visites' => 'Fè parèt vizit yo pou :',
-'info_affichier_visites_articles_plus_visites' => 'Fè parè vizit yo <b>tout atik plis vizite depi koumansman  :</b>',
 'info_aide_en_ligne' => 'Bourad an liy SPIP',
 'info_ajout_image' => 'Kan w vlé ajoute kèk imaj tankou kèk dokiman jwenn sou yon atik,
  Spip kap kreye kèk vinyèt ak imaj yo w te mèt sou sit la(kèk piti imaj)otomatikman.Konsa gen posib
@@ -288,7 +286,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_classement_1' => '<sup>ye</sup> sou @liste@',
 'info_classement_2' => '<sup>em</sup> sou @liste@',
 'info_code_acces' => 'Oubliy pa kod laksè w-a, pou w mèm !',
-'info_comment_lire_tableau' => 'Kouman fè lekti tablo-a',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -336,7 +333,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 , SPIP kapab
  voye tout domann osnon konfimasyon pou fè parèt yon atik pa egsanp nan list-limèl pou redaktè.',
 'info_fichiers_authent' => 'Fichye yo pou lotantifikasyon « .htpasswd »',
-'info_forum_statistiques' => 'Estatistik tout vizit',
 'info_forums_abo_invites' => 'Sit w genyen fowom sou abonman ; vizitè   se invite enskri ali sou sit piblik.',
 'info_gauche_admin_effacer' => '<b>Responsab sit-la selman kapab fè lekti paj-la.</b><p> Li pèrmè laksé pou diféran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laksé FTP pou sitweb-la.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Responsab sit-la selman kapab fè lekti paj-la.</b><p> Li pèrmè laksé pou diféran fonksyon teknik pou swen sit sa-a. Genyen fonksyon sa-yo ki doman yon otantifikasyon espesifik ki doman yon laksé FTP pou sitweb-la.</p>', # MODIF
@@ -453,8 +449,6 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_plus_cinq_car_2' => '(Plis de 5 kawaktè-lenprimri)',
 'info_plus_trois_car' => '(Plis de 3 kawaktè-lenprimri)',
 'info_popularite' => 'kouman se popilè : @popularite@ ; vizit yo : @visites@',
-'info_popularite_2' => 'popilarite sit-la :',
-'info_popularite_3' => 'kouman se popilè : @popularite@ ; vizit yo : @visites@',
 'info_popularite_4' => 'kouman se popilè : @popularite@ ; vizit yo : @visites@',
 'info_post_scriptum' => 'Gen di ankò',
 'info_post_scriptum_2' => 'Gen di ankò :',
@@ -463,7 +457,6 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_preview_comite' => 'Tout redakté kapab gad avan sit-la kom li te an liy',
 'info_preview_desactive' => 'Sistèm pou gad avan kom te an liy tout patisipasyon, l ap pa aktive ',
 'info_preview_texte' => 'Posib gad avan sit-la kom si tout atik ek tinouvèl sa-yo (yon ki lestati  « se pwopozé » omwen) te pibliyé an liy. Eske w vle bay posibilite a ouvè  pou tout komandè sèlman, oubyen tout rédaktè, ousinon pa okenn moun sa-mèm ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Ou gwoup kowespondan pli enpòtan',
 'info_procedez_par_etape' => 'avans etap pa etap',
 'info_procedure_maj_version' => 'fòk w koumans larnouvèlman labaz pou adapte labazdone
@@ -473,7 +466,6 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_publier' => 'pibliye',
 'info_publies' => 'Atik w-a ki ap pibliye an liy',
 'info_question_accepter_visiteurs' => 'Si leskelèt sit w la, li ka pwopoze lenskripsyon vizitè ki pa laksé lespas privé, mèsi w aktive lopsyon issit anba :',
-'info_question_gerer_statistiques' => 'Eske w vle sit w kapab okipe estatistik pou vizit yo ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aksepte ounon pa aksepte w tout enskripsyon nouvo redaktè sou lespas piblik sit-la ?
 Si wi ka aksepte, vizité yo ke enskri azot depi
    yon fòmilè,  pou zot ke sere laksé nan espas privé pou zot kapab pwopoze
@@ -485,9 +477,7 @@ Si wi ka aksepte, vizité yo ke enskri azot depi
   inposib.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Eske w vle itilize motè pou chèche de SPIP ?
  (enlèv ali ke rann sistèm pli rapid ek soup.)',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Rasin sit-la',
 'info_recharger_page' => 'Tapri rochaj paj la nan kèk minit.',
 'info_recherche_auteur_a_affiner' => 'Genyen trò rezilta pou "@cherche_auteur@" ; tanpri souple fè yon nouvo chèche pli prési.',
@@ -570,7 +560,6 @@ nan yon koulè ki bay lestati ali :',
 'info_urlref' => 'Lyen ipètèks :',
 'info_utilisation_spip' => 'Kounyen-a,ou kapab koumanse itilize sistèm pou piblikasyon ki édé...',
 'info_visites_par_mois' => 'Fè parèt pa mwa :',
-'info_visites_plus_populaires' => 'Afiche tout visit pou <b> atik ki pli popilè</b> ak pou <b>denyé atik an liy :</b>',
 'info_visiteur_1' => 'Vizitè',
 'info_visiteur_2' => 'd sit piblik',
 'info_visiteurs' => 'Vizitè yo',
@@ -613,7 +602,6 @@ nan yon koulè ki bay lestati ali :',
 'item_choix_redacteurs' => 'redaktè yo',
 'item_choix_visiteurs' => 'vizitè yo d sit piblik',
 'item_creer_fichiers_authent' => 'Kreye fichye yo .htpasswd',
-'item_gerer_statistiques' => 'Okipe lestatistik yo',
 'item_limiter_recherche' => 'Sere lachèche nan limit lenfomasyon ki kontni sit a w. ',
 'item_login' => 'Nonkod',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -794,7 +782,6 @@ nan yon koulè ki bay lestati ali :',
 'texte_admin_effacer_01' => 'Komand la li efase <i>tout</i> kontni antye nan labazdone,
 ak <i>tout</i> aksé rédaktè ak komanè yo. Si w te fé mache ali, fòk w enstalé  yon lòt fwa laprosédi
 lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Si laniyé aw se enstalé sou mèm machin sévè sit aw, se posib li rele senpman «localhost».)',
 'texte_ajout_auteur' => 'Lotè-a te fin ajoute pou atik-la :',
 'texte_annuaire_ldap_1' => 'Si w gen laksé lanyiè (LDAP), w kapab itilize ali pou enpòte otomatikman itilizatè yo sou SPIP.',
@@ -812,13 +799,6 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
 'texte_commande_vider_tables_indexation' => 'Itilize komand-la pou vide tout tabl endeksasyon ki itilizé
    nan motè-lachèche ki prézan nan SPIP. Ke permèt aw
  kembe lespas diks.',
-'texte_comment_lire_tableau' => 'Plas latik-la,
-  nan klasman popilawite, se enskri sou kote ; populawite atik-la
- (yon kont nonb
-  vizit pa jou atik-la ki rannkout si li kembe ritm-la kounyen-a)
- ak nonb vizit ki vini 
-  depi koumansman, zot ka afich
-  nan yon bil ki parèt kank w vole sou titr-la.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(li mèm se petèt konprese, petèt non)',
@@ -919,7 +899,6 @@ W kapab esey issit yon aranjman ;
  <li> ki mòtè tipografik, fòk sistèm SPIP li itilize pou rann tout tèks sou sit-la ;</li>
  <li> ki lang fòk sit itilize nan tout fòmilè sou sit piblik ;</li>
  <li> ki lang se prézanté otomatikman nan lespas privé.</li></ul>',
-'texte_signification' => 'Tou liy nwa se limaj tout rantré kimilé  (yon total pou tout souribrik), tout liy klèr se nonb visit sa-yo pou chak ribrik.',
 'texte_sous_titre' => 'Soutitr (Kouman i relé osi)',
 'texte_statistiques_visites' => '(tout liy nwa :  dimanch / lakourb nwa : lévolisyon mwayenn sa)',
 'texte_statut_attente_validation' => 'ki tann pou konfimé',
@@ -986,7 +965,6 @@ ou nan dékripsyon atik sa-yo
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opsyon sa-yo : <b>ou konèksyon LDAP</b>',
-'titre_evolution_visite' => 'Evolisyon vizit yo',
 'titre_groupe_mots' => 'GWOUP MOKLE :',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'LALANNG ATIK-LA',
@@ -1013,11 +991,9 @@ ou nan dékripsyon atik sa-yo
 'titre_page_message_edit' => 'Ekri yon mesaj',
 'titre_page_messagerie' => 'Ou kazmodekri ',
 'titre_page_recherche' => 'Rezilta chèche @recherche@',
-'titre_page_statistiques' => 'Estatsitik pou tout pati yo nan sit sa a',
 'titre_page_statistiques_referers' => 'Rézilta estatistik (lyen sa-yo ka rive)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Estatistik pou tout vizit yo',
 'titre_page_upgrade' => 'Mèt SPIP nan nivle',
 'titre_publication_articles_post_dates' => 'Piblikasyon tout atik yo posdate',
 'titre_referencer_site' => 'Referanse sit la :',

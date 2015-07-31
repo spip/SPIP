@@ -57,7 +57,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'bouton_desactive_tout' => 'Disable all', # NEW
 'bouton_desinstaller' => 'Uninstall', # NEW
 'bouton_effacer_index' => 'Xoá bản index',
-'bouton_effacer_statistiques' => 'Effacer les statistiques', # NEW
 'bouton_effacer_tout' => 'Xoá TẤT CẢ',
 'bouton_envoi_message_02' => 'GỬI THƯ TÍN',
 'bouton_envoyer_message' => 'Tin thư đầy đủ: Gửi đi ',
@@ -113,6 +112,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'date_mot_heures' => 'Giờ',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'Ðiện thư',
 'email_2' => 'Ðiện thư:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -191,7 +191,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'icone_creer_rubrique_2' => 'Thêm một đề mục mới ',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Gửi thư tín này',
-'icone_evolution_visites' => 'Thống kê<br />@visites@ độc giả',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -234,7 +233,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_adresse' => 'đến địa chỉ:',
 'info_adresse_url' => 'Địa chỉ trang web của bạn',
 'info_afficher_visites' => 'Liệt kê những lần viếng thăm cho:',
-'info_affichier_visites_articles_plus_visites' => 'Cho thấy số lần vào xem của <b>những bài được đọc nhiều nhất từ ban đầu:</b>',
 'info_aide_en_ligne' => 'Giúp đỡ SPIP online',
 'info_ajout_image' => 'Khi bạn đính kèm hình (trong dạng hồ sơ) vào một bài, SPIP có thể tự động chế ra các hình mẫu để xem trước (tức thumbnails) từ tấm hình nguyên thủy. Với đặc điểm này có thể tự động thiết lập ra một tập/bộ hình ảnh, album.',
 'info_ajout_participant' => 'Những tham dự viên sau đây đã được thêm vào:',
@@ -277,7 +275,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_classement_1' => ' trong số @liste@',
 'info_classement_2' => ' trong số @liste@',
 'info_code_acces' => 'Đừng quên mã số để vào của bạn!',
-'info_comment_lire_tableau' => 'Cách đọc đồ thị này',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N. B. :</b> Il est recommandé de vérifier au préalable si l\'hébergeur compresse déjà systématiquement les scripts php ; pour cela, vous pouvez par exemple utiliser le service suivant : @testgzip@', # NEW
 'info_compresseur_texte' => 'Si votre serveur ne comprime pas automatiquement les pages html pour les envoyer aux internautes, vous pouvez essayer de forcer cette compression pour diminuer le poids des pages téléchargées. <b>Attention</b> : cela peut ralentir considerablement certains serveurs.', # NEW
@@ -323,7 +320,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_exportation_base' => 'Đem database ra ngoài vào @archive@',
 'info_facilite_suivi_activite' => 'Để làm nhẹ công việc của Ban Biên Tập, SPIP gửi bằng email các thông báo xin phép đăng và chấp thuận bài vở (đến mailing list của chủ bút chẳng hạn) ',
 'info_fichiers_authent' => 'Hồ sơ xác nhận ".htpasswd"',
-'info_forum_statistiques' => 'Thống kê thăm viếng',
 'info_forums_abo_invites' => 'Trang web có các diễn đàn cần ghi danh; khách có thể vào ghi danh ở trang công cộng.',
 'info_gauche_admin_effacer' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số việc quản trị kỹ thuật. Một số việc đòi hỏi phải có chứng nhận đặc biệt, và cần phải dùng FTP để vào trang web.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Chỉ có quản trị viên được phép vào trang này.</b><p> Nơi đây cho phép bạn thực hiện một số công việc bảo trì. Một số việc cần phải có chứng nhận đặc biệt, cần phải dùng FTP để vào trang web.</p>', # MODIF
@@ -430,8 +426,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_plus_cinq_car_2' => '(Hơn 5 mẫu tự) ',
 'info_plus_trois_car' => '(Hơn 3 mẫu tự) ',
 'info_popularite' => 'Mức phổ thông: @popularite@; lần viếng: @visites@',
-'info_popularite_2' => 'Mức phổ thông của website: ',
-'info_popularite_3' => 'Mức phổ thông: @popularite@; lần viếng: @visites@',
 'info_popularite_4' => 'Mức phổ thông: @popularite@; lần viếng: @visites@',
 'info_post_scriptum' => 'Tái bút',
 'info_post_scriptum_2' => 'Tái bút:',
@@ -440,7 +434,6 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_preview_comite' => 'Tất cả tác giả có thể dùng dạng xem trước.',
 'info_preview_desactive' => 'Dạng xem trước chưa mở lên',
 'info_preview_texte' => 'Bạn có thể xem trước trang web mà các bài vở, tin ngắn (với tình trạng "được đăng") trong đó như đã được cho đăng lên chính thức. Dạng xem trước này chỉ nên giới hạn cho quản trị viên, cho tất cả các tác giả, hay hoàn toàn tắt nó đi ?',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Những người liên lạc chính',
 'info_procedez_par_etape' => 'Xin tiếp diễn từng bước một',
 'info_procedure_maj_version' => 'Quy trình nâng cấp cần được chạy để database thích ứng với ấn bản SPIP mới.',
@@ -449,12 +442,9 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_publier' => 'đăng tải',
 'info_publies' => 'Bài của bạn được đăng online',
 'info_question_accepter_visiteurs' => 'Nếu trang web cho phép khách ghi danh mà không cần phải vào vùng riêng, thì xin hãy mở lên những chọn lựa sau:',
-'info_question_gerer_statistiques' => 'Có muốn quản trị các con số thống kê?',
 'info_question_inscription_nouveaux_redacteurs' => 'Bạn có cho phép ghi danh các chủ bút mới từ website công cộng không? Nếu đồng ý, khách có thể ghi danh qua một mẫu tự động, và sẽ được phép vào vùng riêng của họ để soạn bài. <blockquote><i>Trong quá trình ghi danh, người dùng sẽ nhận được email cho biết login/mật mã vào chỗ riêng của họ. Một số máy chủ tắt đặc điểm này: trong trường hợp đó, ghi danh tự động không dùng được.</i>', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Bạn có muốn dùng cơ phận tìm kiếm có sẵn của SPIP? (<i>Nếu tắt nó đi sẽ làm hệ thống chạy lẹ hơn</i>) ',
-'info_question_vignettes_referer' => 'Lorsque vous consultez les statistiques, vous pouvez visualiser des aperçus des sites d\'origine des visites', # NEW
 'info_question_vignettes_referer_non' => 'Ne pas afficher les captures des sites d\'origine des visites', # NEW
-'info_question_vignettes_referer_oui' => 'Afficher les captures des sites d\'origine des visites', # NEW
 'info_racine_site' => 'Gốc của website',
 'info_recharger_page' => 'Xin nạp lại trang này trong giây lát.',
 'info_recherche_auteur_a_affiner' => 'Quá nhiều kết quả cho "@cherche_auteur@"; Xin lọc lựa lại việc tìm kiếm.',
@@ -537,7 +527,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'info_urlref' => 'Nối kết:',
 'info_utilisation_spip' => 'SPIP sẵn sàng để sử dụng...',
 'info_visites_par_mois' => 'Hiển thị hàng tháng:',
-'info_visites_plus_populaires' => 'Cho thấy số lần vào xem của <b>những bài được chuộng nhất</b> và của <b>những bài đăng tải sau cùng:</b>',
 'info_visiteur_1' => 'Khách',
 'info_visiteur_2' => ' của website công',
 'info_visiteurs' => 'Khách',
@@ -580,7 +569,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'item_choix_redacteurs' => 'chủ bút',
 'item_choix_visiteurs' => 'Khách của website công',
 'item_creer_fichiers_authent' => 'Lập ra hồ sơ .htpasswd',
-'item_gerer_statistiques' => 'Quản trị số thống kê',
 'item_limiter_recherche' => 'Giới hạn việc tìm kiếm trong khối lượng tin của website bạn',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'Activer la messagerie et l’agenda', # NEW
@@ -759,7 +747,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'text_article_propose_publication' => 'Bài nộp để chuẩn bị phát hành. Xin đừng ngần ngại cho ý kiến của bạn qua diễn đàn đính kèm theo bài này (ở cuối trang).', # MODIF
 'texte_acces_ldap_anonyme_1' => 'Một số server LDAP không cho phép vào ẩn danh. Trong trường hợp này bạn phải dùng một ký danh đầu tiên để có thể đi tìm tòi dữ kiện trong danh bạ sau đó. Tuy nhiên, trong hầu hết trường hợp, những khoảng sau đây có thể để trống.',
 'texte_admin_effacer_01' => 'Mệnh lệnh này xóa <i>tất cả</i> nội dung của database, luôn cả login/mật mã của các chủ bút và quản lý. Sau khi chạy mệnh lệnh này xong, bạn nên thiết trí lại SPIP để tái lập lại một database mới cùng với login/mật mã của quản trị viên đầu tiên.',
-'texte_admin_effacer_stats' => 'Cette commande efface toutes les données liées aux statistiques de visite du site, y compris la popularité des articles.', # NEW
 'texte_adresse_annuaire_1' => '(Nếu ngăn của bạn được thiết trí trên cùng máy với website của bạn, tên nó thường là &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Tác giả sau đây được thêm vào cho bài: ',
 'texte_annuaire_ldap_1' => 'Nếu bạn vào được một danh bạ (LDAP), bạn có thể dùng nó để nhập vào tự động những người sử dụng trong SPIP.',
@@ -775,7 +762,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'texte_choix_base_3' => '<b>Chọn</b> một trong số dưới đây thuộc về bạn:',
 'texte_choix_table_prefix' => 'Prefix for tables:', # NEW
 'texte_commande_vider_tables_indexation' => 'Dùng mệnh lệnh này để dọn sạch bản index dùng bởi cơ phận tìm kiếm của SPIP. Làm thế để tiết kiệm được một số chỗ trống trong dĩa.',
-'texte_comment_lire_tableau' => 'Bài vở được sắp hạng theo mức độ phổ thông (xem cột trái). Để xem mức độ phổ thông (ước lượng số lần vào xem hàng ngày theo đà hiện tại) và số lần vào xem của mỗi bài, bạn di chuyển con chuột lên trên tên bài.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(có thể trong dạng nén hoặc dạng thường) ',
@@ -853,7 +839,6 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 <li> ngôn ngữ dùng trong các mẫu đơn của website</i>
 <li> ngôn ngữ chính hiển trị trong các vùng riêng</li>
 </ul>',
-'texte_signification' => 'Thanh đậm biểu hiện tất cả số bài (tổng cộng của các đề mục phụ), thanh lợt biểu hiện số lần vào xem của mỗi đề mục. ',
 'texte_sous_titre' => 'Tựa đề phụ',
 'texte_statistiques_visites' => 'Thah đậm: Chủ nhật / vòng cong đậm: đợt trung bình)',
 'texte_statut_attente_validation' => 'đang chờ chấp thuận',
@@ -900,7 +885,6 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Tùy chọn: <b>Kết nối vào LDAP</b>',
-'titre_evolution_visite' => 'Thống Kê',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'NGÔN NGỮ CỦA BÀI',
@@ -927,11 +911,9 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_page_message_edit' => 'Viết thư tín',
 'titre_page_messagerie' => 'Thư tín của bạn',
 'titre_page_recherche' => 'Kết quả tìm kiếm @recherche@',
-'titre_page_statistiques' => 'Thống kê theo từng đề mục',
 'titre_page_statistiques_referers' => 'Thống kê (các điểm nối vào)',
 'titre_page_statistiques_signatures_jour' => 'Nombre de signatures par jour', # NEW
 'titre_page_statistiques_signatures_mois' => 'Nombre de signatures par mois', # NEW
-'titre_page_statistiques_visites' => 'Thống kê về thăm viếng',
 'titre_page_upgrade' => 'nâng cấp SPIP',
 'titre_publication_articles_post_dates' => 'Đăng tải bài vở có đề ngày',
 'titre_referencer_site' => 'Nối qua website:',

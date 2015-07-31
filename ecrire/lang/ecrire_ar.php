@@ -62,7 +62,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_desactive_tout' => 'تعطيل الكل',
 'bouton_desinstaller' => 'إزالة التثبيت',
 'bouton_effacer_index' => 'حذف الفهارس',
-'bouton_effacer_statistiques' => 'حذف الاحصاءات',
 'bouton_effacer_tout' => 'حذف الكل',
 'bouton_envoi_message_02' => 'بعث برسالة',
 'bouton_envoyer_message' => 'صيغة نهائية : إرسال',
@@ -118,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_mot_heures' => 'ساعات',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'البريد الالكتروني',
 'email_2' => 'البريد الالكتروني :',
 'en_savoir_plus' => 'مزيد من المعلومات',
@@ -198,7 +198,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'إنشاء قسم جديد',
 'icone_edition' => 'تحرير',
 'icone_envoyer_message' => 'إبعث بهذه الرسالة',
-'icone_evolution_visites' => 'تطور الزيارات <br />@visites@ زيارة ',
 'icone_ma_langue' => 'لغتي',
 'icone_mes_infos' => 'بياناتي',
 'icone_mes_preferences' => 'تفضيلاتي',
@@ -242,7 +241,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_adresse' => 'الى العنوان:',
 'info_adresse_url' => 'عنوان الموقع العمومي',
 'info_afficher_visites' => 'إظهار الزيارات لـ:',
-'info_affichier_visites_articles_plus_visites' => 'إظهار الزيارات المتعلقة <b> بأكثر المقالات زيارة منذ البداية:</ b>',
 'info_aide_en_ligne' => 'تعليمات SPIP الفورية',
 'info_ajout_image' => 'عندما تضيف صوراً على شكل مستندات مربوطة بمقال ما،
 يمكن لـ SPIP ان ينشئ آلياً مصغرات عن
@@ -288,7 +286,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_1' => ' من أصل @liste@ مقال',
 'info_classement_2' => 'من أصل @liste@ مقال',
 'info_code_acces' => 'لا تنسى بيانات الدخول الخاصة بك!',
-'info_comment_lire_tableau' => 'كيفية قراءة هذا الرسم البياني',
 'info_compatibilite_html' => 'مقاييس HTML التي يجب اتباعها',
 'info_compresseur_gzip' => '<b>ملاحظة</b>: ننصح بالتأكد أولاً ما اذا كان المضيف يضغط بشكل منتظم ملفات php. للتأكد، يمكنك مثلاًاستخدام الخدمة التالية: @testgzip@',
 'info_compresseur_texte' => 'اذا كان خادم موقعك لا يضغت صفحات html آلياً قبل ارسالها الى الزوار، يمكنك محاولة فرض هذا الضغط لتخفيض وزن الصفحات المرسلة. <b>تحذير</b>: هذا الامر قد يؤدي الى ابطاء بعض اجهزة الخدمة بشكل ملحوظ.',
@@ -337,7 +334,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 الإعلان عن
 طلبات النشر وتصديق المقالات.',
 'info_fichiers_authent' => 'ملف التحقق «.htpasswd»',
-'info_forum_statistiques' => 'إحصاءات الزيارات',
 'info_forums_abo_invites' => 'يحتوي موقعك على منتديات بالاشتراك. يشترك الزوار اذاً من الموقع العمومي.',
 'info_gauche_admin_effacer' => '<b>لا يحق إلا لمسؤولي الموقع الوصول الى هذه الصفحة. </b><p>إنها توفر الوصول الى وظائف متنوعة للصيانة التقنية. وتتطلب بعض هذه الوظائف عملية تحقق محددة تحتاج الى الوصول الى الموقع عبر بروتوكول FTP .</p>',
 'info_gauche_admin_tech' => '<b>لا يحق إلا لمسؤولي الموقع الوصول الى هذه الصفحة.</b><p> إنها توفر الوصول الى وظائف
@@ -458,8 +454,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_plus_cinq_car_2' => '(أكثر من خمسة حروف)',
 'info_plus_trois_car' => '(أكثر من ثلاثة حروف)',
 'info_popularite' => 'الشعبية: @popularite@؛ الزيارات: @visites@',
-'info_popularite_2' => 'شعبية الموقع:',
-'info_popularite_3' => 'الشعبية: @popularite@؛ الزيارات: @visites@',
 'info_popularite_4' => 'الشعبية: @popularite@؛ الزيارات: @visites@',
 'info_post_scriptum' => 'الملحق',
 'info_post_scriptum_2' => 'الملحق:',
@@ -468,7 +462,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_preview_comite' => ' يحق لجميع المحررين الاطلاع على عرض مسبق للموقع',
 'info_preview_desactive' => 'تم تعطيل العرض المسبق',
 'info_preview_texte' => 'من الممكن عرض الموقع مسبقاً كما لو ان كل المقالات والاخبار (التي تتمتع بوضعية «مقترح» على الاقل) منشورة. هل تتاح هذه الوظيفة للمدراء فقط او لجميع المحررين او تُعطل؟',
-'info_previsions' => 'توقعات:',
 'info_principaux_correspondants' => 'مراسلوك الأساسيون',
 'info_procedez_par_etape' => 'الرجاء إتباع الخطوة خطوة ',
 'info_procedure_maj_version' => 'يجب تنفيذ عملية الترقية لتكييف
@@ -478,7 +471,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'نشر',
 'info_publies' => 'مقالاتك المنشورة',
 'info_question_accepter_visiteurs' => 'اذا كانت صفحات موقعك النموذجية تفسح المجال للزوار الذين لا يتمتعون بحق الدخول الى المجال الخاص لتسجيل انفسهم، قم بتفعيل الخيار التالي:',
-'info_question_gerer_statistiques' => 'هل تريد أن يدير الموقع إحصاءات الزيارات؟',
 'info_question_inscription_nouveaux_redacteurs' => 'هل تسمح بتسجيل محررين جدد من
 الموقع العام؟ إذا وافقت، سيتمكن الزوار من التسجيل
 عبر إستمارة آلية والدخول الى المجال الخاص
@@ -490,9 +482,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 التسجيل الآلي.</blockquote>',
 'info_question_utilisation_moteur_recherche' => 'هل ترغب في استخدام محرك البحث المدمج في SPIP؟
 (ايقافه يسرّع أداء النظام)',
-'info_question_vignettes_referer' => 'عندما تعين الاحضاءات، يمكنك ايضاً مشاهدة مصغرات عن المواقع الصادرة منها.',
 'info_question_vignettes_referer_non' => 'عدم عرض مصغرات عن مواقع مصدر الزيارات',
-'info_question_vignettes_referer_oui' => 'عرض مصغرات عن مواقع مصدر الزيارات',
 'info_racine_site' => 'أصل الموقع',
 'info_recharger_page' => 'الرجاء إعادة تحميل الصفحة بعد لحظات.',
 'info_recherche_auteur_a_affiner' => 'تم العثور على عدد كبير جداً من النتائج لـ "@cherche_auteur@" ، الرجاء زيادة دقة البحث.',
@@ -575,7 +565,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_urlref' => 'وصلة هايبرتكست:',
 'info_utilisation_spip' => 'أصبح نظام النشر الآلي جاهزاً للاستخدام...',
 'info_visites_par_mois' => 'عرض حسب الشهر:',
-'info_visites_plus_populaires' => 'إظهار الزيارات <b>لأكثر المقالات شعبية</b> و<b>لأحدث المقالات المنشورة:</ b>',
 'info_visiteur_1' => 'زائر',
 'info_visiteur_2' => 'للموقع العمومي',
 'info_visiteurs' => 'الزوار',
@@ -618,7 +607,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_choix_redacteurs' => 'المحررون',
 'item_choix_visiteurs' => 'زوار الموقع العمومي',
 'item_creer_fichiers_authent' => 'إنشاء ملفات .htpasswd',
-'item_gerer_statistiques' => 'إدارة الإحصاءات',
 'item_limiter_recherche' => 'إقتصار البحث على المعلومات الموجودة في موقعك',
 'item_login' => ' المعرّف',
 'item_messagerie_agenda' => 'تفعيل المراسلة والمفكرة',
@@ -799,7 +787,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_admin_effacer_01' => 'يقوم هذا الأمر بحذف  كامل محتوى قاعدة البيانات،
 بما في ذلك كل  وسائط الوصول للمحررين والمدراء. بعد تنفيذه، يتحتم عليك
 إعادة تثبيت SPIP لإعادة إنتاج قاعدة جديدة ووسيط دخول أول مدير.',
-'texte_admin_effacer_stats' => 'هذا الأمر يحذف كل البيانات المرتبطة بإحصاءات  زيارات الموقع، بما فيها شعبية المقالات.',
 'texte_adresse_annuaire_1' => 'إذا كان دليلك مثبت على الجهاز نفسه الذي يحتوي موقعك، فإنه على الأرجح «localhost»)).',
 'texte_ajout_auteur' => 'تمت إضافة المؤلف التالي الى المقال:',
 'texte_annuaire_ldap_1' => 'إذا كان لديك إمكتان وصول الى دليل LDAP، يمكنك استخدامه لجلب المستخدمين آلياً الى SPIP.',
@@ -817,13 +804,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_commande_vider_tables_indexation' => 'إستخدم هذا الأمر لتفريغ جداول الفهرسة التي يستعملها
 محرك البحث المدمج في SPIP. ويتيح لك ذلك
 توفير بعض المساحة على القرص الثابت.',
-'texte_comment_lire_tableau' => 'تظهر مرتبة
-المقال في تصنيف الشعبية، في
-الهامش؛ وتظهر شعبية المقال (تقدير
-لعدد الزيارات اليومية التي قد يسجلها اذا حافظ
-تصفح الموقع على وتيرته الحالية) وعدد الزيارات
-المسجلة منذ البداية، في المربع الذي
-يظهر لدى حوم مؤشر الفأرة فوق العنوان.',
 'texte_compatibilite_html' => 'يمكنك الطلب من SPIP إنتاج علامات متوافقة مع مقياس <i>HTML4</i> في الموقع العمومي او السماح له باستخدام إمكانات مقياس <i>HTML5</i> الأحدث.',
 'texte_compatibilite_html_attention' => 'لا يشكل تفعيل خيار <i>HTML5</i> أية مخاطرة، ولكن اذا اخترت التفعيل يجب ان تبدأ صفحات موقعك بالعبارة التالية لكي تكون صالحة: <code><!DOCTYPE html></code>.',
 'texte_compresse_ou_non' => '(يمكن ضغط هذا أم لا)',
@@ -920,7 +900,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <ul><li> طبيعة محرك الكتابة الذي يجب على SPIP استخدامه لتنسيق النصوص؛</li>
 <ul><li> اللغة المستخدمة في إستمارات الموقع العام؛</li>
 <ul><li> اللغة الافتراضية التي يعرضها المجال الخاص. </li></ul>',
-'texte_signification' => 'القضبان الداكنة تجسد البنود المتراكمة (مجموع الأقسام الفرعية)، القضبان الفاتحة تجسد عدد الزيارات لكل قسم.',
 'texte_sous_titre' => 'العنوان الفرعي',
 'texte_statistiques_visites' => '(القضبان الداكنة: الأحد / المنحنيات الداكنة: التطور الوسطي)',
 'texte_statut_attente_validation' => 'بانتظار التصديق',
@@ -988,7 +967,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_configurer_preferences' => 'إعداد التفضيلات',
 'titre_conflit_edition' => 'تضارب لدى التحرير',
 'titre_connexion_ldap' => 'خيارات: <b>إتصالLDAP </b>',
-'titre_evolution_visite' => 'تطور الزيارات',
 'titre_groupe_mots' => 'مجموعة مفاتيح:',
 'titre_identite_site' => 'هوية الموقع',
 'titre_langue_article' => 'لغة المقال',
@@ -1015,11 +993,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_page_message_edit' => 'كتابة رسالة',
 'titre_page_messagerie' => 'مراسلاتك',
 'titre_page_recherche' => 'نتائج البحث @recherche@',
-'titre_page_statistiques' => 'الاحصاءات حسب القسم',
 'titre_page_statistiques_referers' => 'الاحصاءات (الوصلات الآتية)',
 'titre_page_statistiques_signatures_jour' => 'عدد التوقيعات في اليوم',
 'titre_page_statistiques_signatures_mois' => 'عدد التوقيعات في الشهر',
-'titre_page_statistiques_visites' => 'إحصاءات الزيارات',
 'titre_page_upgrade' => 'ترقية SPIP',
 'titre_publication_articles_post_dates' => 'نشر المقالات المؤجلة',
 'titre_referencer_site' => 'تبويب الموقع:',

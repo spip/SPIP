@@ -57,7 +57,6 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'bouton_desactive_tout' => 'Alles désactivéieren',
 'bouton_desinstaller' => 'De-installéieren',
 'bouton_effacer_index' => 'Den Index läschen',
-'bouton_effacer_statistiques' => 'Statistik läschen',
 'bouton_effacer_tout' => 'ALLES läschen',
 'bouton_envoi_message_02' => 'MESSAGE SCHÉCKEN',
 'bouton_envoyer_message' => 'Definitiven Message: schécken',
@@ -113,6 +112,7 @@ der Dokumentatioun vu SPIP</a>.</p>', # MODIF
 'date_mot_heures' => 'h',
 
 // E
+'ecran_securite' => ' + écran de sécurité @version@', # NEW
 'email' => 'Email',
 'email_2' => 'Email:',
 'en_savoir_plus' => 'En savoir plus', # NEW
@@ -192,7 +192,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'icone_creer_rubrique_2' => 'Nei Rubrik derbäi setzen',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Dëse Message schécken',
-'icone_evolution_visites' => 'Evolutioun vun den Visiten<br />@visites@ Visiten',
 'icone_ma_langue' => 'Ma langue', # NEW
 'icone_mes_infos' => 'Mes informations', # NEW
 'icone_mes_preferences' => 'Mes préférences', # NEW
@@ -235,7 +234,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_adresse' => 'op der Adress:',
 'info_adresse_url' => 'Adress (URL) vum öffentlëche Site',
 'info_afficher_visites' => 'D\'Visiten weisen fir:',
-'info_affichier_visites_articles_plus_visites' => 'D\'Visiten fir <b>déi am meeschten gefroten Artikel zënter dem Ufank</b> weisen:',
 'info_aide_en_ligne' => 'Online-Hëllef vu SPIP',
 'info_ajout_image' => 'Wann dir engem Artikel Biller als Dokumenter derbäi setzt, kann SPIP Iech automatësch Vignetten (Miniaturen) maachen. Dat erlaabt Iech z.B. automatesch eng Galerie ze maachen.',
 'info_ajout_participant' => 'De folgenden gouf derbäi gesat:',
@@ -278,7 +276,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_classement_1' => '. an @liste@',
 'info_classement_2' => '. an @liste@',
 'info_code_acces' => 'Vergiesst är Login-Informatiounen nët!',
-'info_comment_lire_tableau' => 'Wéi een dës Tabell liesen soll',
 'info_compatibilite_html' => 'Norme HTML à suivre', # NEW
 'info_compresseur_gzip' => '<b>N.B.:</b> Kontrolléiert op ären Hebergeur PHP-Skripter kompriméiert; dir kënnt dofir dësen Service benotzen: @testgzip@',
 'info_compresseur_texte' => 'Wann äre Server d\'HTML-Säiten nët automatësch kompriméiert, kënnt dir probéieren eng Kompressioun ze forcéieren. <b>Opgepasst</b>: dat kann verschidde Serveren méi lues maachen.',
@@ -324,7 +321,6 @@ Dës Informatiounen kritt dir vum Administrateur vum System oder vum Netzwierk.'
 'info_exportation_base' => 'Export vun der Datebank op @archive@',
 'info_facilite_suivi_activite' => 'Fir déi editorial Aktivitéiten ze verfolgen, kann SPIP d\'Demanden fir Artikelen ze publizéieren oder d\'Validatiounen un eng Mailing-Lëscht vun de Redakteren schécken.',
 'info_fichiers_authent' => 'Identifikatiouns-Fichier\'en ".htpasswd"',
-'info_forum_statistiques' => 'Statistik vun de Visiten',
 'info_forums_abo_invites' => 'Äre Site huet Forum\'en wou een sech umelden muss; d\'Visiteuren ginn also agelueden sëch ze enregistréieren.',
 'info_gauche_admin_effacer' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
 'info_gauche_admin_tech' => '<b>Dës Säit ass fir déi Responsabel vum Site reservéiert.</b><p>Si erlaabt d\'Maintenance-Aarbechten. Bei verschiddene Prozeduren muss een sëch iwwer FTP identifizéieren kënnen.</p>', # MODIF
@@ -432,8 +428,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_plus_cinq_car_2' => '(Méi wéi 5 Buchstawen)',
 'info_plus_trois_car' => '(Méi wéi 3 Buchstawen)',
 'info_popularite' => 'Popularitéit: @popularite@; Visiten: @visites@',
-'info_popularite_2' => 'Popularitéit vum Site:',
-'info_popularite_3' => 'Popularitéit: @popularite@; Visiten: @visites@',
 'info_popularite_4' => 'Popularitéit: @popularite@; Visiten: @visites@',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum:',
@@ -442,7 +436,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_preview_comite' => 'All d\'Redakteren kënnen de Site previsualiséieren',
 'info_preview_desactive' => 'D\'Prévisualisatioun ass ausgeschalt',
 'info_preview_texte' => 'Dir kënnt de Site prévisualiséieren wéi wann all d\'Artikelen an d\'Kuerzmeldungen (déi op manst de Status "propséiert" hunn) publizéiert wären. Soll dës Méiglechkeet fir just d\'Administrateuren, fir all d\'Redakteren oder fir keen gëllen.',
-'info_previsions' => 'prévisions :', # NEW
 'info_principaux_correspondants' => 'Är wichtegst Korrespondenten',
 'info_procedez_par_etape' => 'gidd Schrëtt fir Schrëtt fir',
 'info_procedure_maj_version' => 'D\'Update-Prozedur muss ausgeféiert ginn fir är Datebank un déi nei SPIP-Versioun unzepassen.',
@@ -451,13 +444,10 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_publier' => 'fräischalten',
 'info_publies' => 'Är publizéiert Artikelen',
 'info_question_accepter_visiteurs' => 'Wann är Skeletter d\'Aschreiwung vu Visiteuren ouni Zougang op de privaten Deel virgesinn, da schalt d\'Optioun hei drënner an:',
-'info_question_gerer_statistiques' => 'Soll äre Site d\'Statistik vun de Visiten géréieren?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptéiert dier d\'Aschreiwe vu neie Redakteren direkt vum öffentlëche Site? Wa jo, da kënnen d\'Visiteuren sëch iwert een automatësche Formulaire aschreiwen an esou Zougang op de privaten Deel kréien fir hir Artikelen ze proposéieren. <blockquote><i>Während der Aschreiwungs-Phase kréien d\'Benotzer automatësch en Email mat hieren Zougangsinformatiounen. Verschidde Provideren verbidden d\'Schécken vun Email vun hieren Serveren aus: an deem Fall ass d\'automatëscht Aschreiwen onméiglech.', # MODIF
 'info_question_utilisation_moteur_recherche' => 'Wëllt dir de Sich-Motor vu SPIP benotzen?
 (ausschalten mëcht de System méi séier.)',
-'info_question_vignettes_referer' => 'Wann dir d\'Statistik kuckt kënnt dir eng Preview vun den Ausgangs-Site gesinn',
 'info_question_vignettes_referer_non' => 'D\'Preview vun den Ausgangs-Site nët weisen',
-'info_question_vignettes_referer_oui' => 'Preview vun den Ausgangs-Site weisen',
 'info_racine_site' => 'Wuerzel vum Site',
 'info_recharger_page' => 'Lued dës Säit an e puer Sekonnen nei.',
 'info_recherche_auteur_a_affiner' => 'Zevill Resultater fir "@cherche_auteur@"; verbessert är Sich.',
@@ -538,7 +528,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'info_urlref' => 'Link:',
 'info_utilisation_spip' => 'Dir kënnt elo de System benotzen...',
 'info_visites_par_mois' => 'Visiten pro Mount:',
-'info_visites_plus_populaires' => 'Visiten weisen fir <b>déi populärsten</b> a fir <b>déi läscht publizéiert</b> Artikelen:',
 'info_visiteur_1' => 'Visiteur',
 'info_visiteur_2' => 'vum öffentlëche Site',
 'info_visiteurs' => 'Visiteuren',
@@ -581,7 +570,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'item_choix_redacteurs' => 'd\'Redakteren',
 'item_choix_visiteurs' => 'd\'Visiteuren vum öffentlëche Site',
 'item_creer_fichiers_authent' => 'D\'Fichier\'en .htpasswd maachen',
-'item_gerer_statistiques' => 'Statistik maachen',
 'item_limiter_recherche' => 'D\'Sich vun den Informatiounen op äre Site limitéieren',
 'item_login' => 'Login',
 'item_messagerie_agenda' => 'D\'Messagerie an den Agenda aschalten',
@@ -760,7 +748,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'text_article_propose_publication' => 'Fir d\'Publikatioun proposéierten Artikel.',
 'texte_acces_ldap_anonyme_1' => 'Verschidden LDAP-Serveren erlaben keen anonymen Zougang. An deem Fall musst dir en initialen Zougang uginn fir Informatiounen am Annuaire kënnen ze sichen. An deenen meeschten Fäll kënnt dër dës Felder eidel loossen.',
 'texte_admin_effacer_01' => 'Dës Prozedur läscht <i>alles</i> aus der Datebank, och <i>all</i> Zougäng vun de Redakteren an Administrateuren. Duerno musst dir SPIP nei installéieren fir eng nei Datebank an den éischten Administrateur-Zougang derbäi ze setzen.',
-'texte_admin_effacer_stats' => 'Dës Prozedur läscht d\'Statistik an d\'Popularitéit vun den Artikele vun ärem Site.',
 'texte_adresse_annuaire_1' => '(Wann ären Annuaire op dersëlwechter Maschinn installéiert ass, dann as et hei warscheinlëch "localhost".)',
 'texte_ajout_auteur' => 'Dësen Auteur gouf beim Artikel derbäi gesat:',
 'texte_annuaire_ldap_1' => 'Wann dir Zougang zu engem Annuaire (LDAP) hutt, da kënnt dir e benotzen fir automatësch d\'Benotzer vu SPIP ze importéieren.',
@@ -776,7 +763,6 @@ Déi schons gebrauchten Sproochen (als éischt ugewisen) kënnen nët ausgeschal
 'texte_choix_base_3' => '<b>Wielt</b> hei déi Iech vun ärem Provider zougewisen gouf:',
 'texte_choix_table_prefix' => 'Préfixe vun den Tabellen:',
 'texte_commande_vider_tables_indexation' => 'Benotzt dës Prozedur fir d\'Index-Tabellen vum SPIP Sich-Motor eidel ze maachen. Domat gewant dir Disk-Plaz.',
-'texte_comment_lire_tableau' => 'D\'Plaz vum Artikel am Klassement no Popularitéit steet am Rand; d\'Popularitéit vum Artikel (eng Estimatioun vun der Zuel vun de Visiten pro Dag wann ët esou weidergeet) an Zuel vun de Visiten zënter Ufank stinn an der Erklärung déi erschéngt wann dier mat der Maus iwwer den Titel fuert.',
 'texte_compatibilite_html' => 'Vous pouvez demander à SPIP de produire, sur le site public, du code compatible avec la norme <i>HTML4</i>, ou lui permettre d\'utiliser les possibilités plus modernes du <i>HTML5</i>.', # NEW
 'texte_compatibilite_html_attention' => 'Il n\'y a aucun risque à activer l\'option <i>HTML5</i>, mais si vous le faites, les pages de votre site devront commencer par la mention suivante pour rester valides : <code>&lt;!DOCTYPE html&gt;</code>.', # NEW
 'texte_compresse_ou_non' => '(dee kann kompriméiert sinn oder nët)',
@@ -847,7 +833,6 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 <li>sätzt den typographesche Motor deen SPIP benotzen soll fir Texter ze weisen;</li>
 <li>sätzt d\'Sprooch déi an den öffentlëchen Formulairen benotzt gët;</li>
 <li>sätzt d\'Default-Sprooch am privaten Deel vum Site.</li></ul>',
-'texte_signification' => 'Déi kumuléiert Donnéen sinn donkel (Total vun den Ënner-Rubriken), d\'Zuel vun de Visiten fir all Rubrik sinn hell.',
 'texte_sous_titre' => 'Ënnertitel',
 'texte_statistiques_visites' => '(donkel:  Sonndeg / Kurv: Evolutioun vun der Moyenne)',
 'texte_statut_attente_validation' => 'waart op d\'Validatioun',
@@ -894,7 +879,6 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_configurer_preferences' => 'Configurer vos préférences', # NEW
 'titre_conflit_edition' => 'Konflikt wärend der Editioun',
 'titre_connexion_ldap' => 'Optiounen: <b>Är LDAP-Verbindung</b>',
-'titre_evolution_visite' => 'Évolutioun vun de Visiten',
 'titre_groupe_mots' => 'WUERT-GRUPP:',
 'titre_identite_site' => 'Identité du site', # NEW
 'titre_langue_article' => 'SPROOCH VUM ARTIKEL',
@@ -921,11 +905,9 @@ Dës Optioun ass par défaut ausgeschalt fir nët andauernd Warnungen ze weisen.
 'titre_page_message_edit' => 'E Message schreiwen',
 'titre_page_messagerie' => 'Är Messagerie',
 'titre_page_recherche' => 'Resultater vun der Sich @recherche@',
-'titre_page_statistiques' => 'Statistik pro Rubrik',
 'titre_page_statistiques_referers' => 'Statistik (Linken déi eran kommen)',
 'titre_page_statistiques_signatures_jour' => 'Zuel vun den Ënnerschrëften pro Dag',
 'titre_page_statistiques_signatures_mois' => 'Zuel vun den Ënnerschrëfte pro Mount',
-'titre_page_statistiques_visites' => 'Statistik vun de Visiten',
 'titre_page_upgrade' => 'SPIP updaten',
 'titre_publication_articles_post_dates' => 'Publizéieren vun den post-datéierten Artikelen',
 'titre_referencer_site' => 'De Site referenzéieren:',
