@@ -3225,7 +3225,7 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 	return "<a href='"
 	. $url
 	. "'>"
-	. '<span class="rss-button">'.$button.'</span>'
+	. http_img_pack('feed.png', $button, ' border="0" ')
 	. "</a>";
 }
 
