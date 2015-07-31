@@ -54,7 +54,7 @@ function action_instituer_groupe_mots_post($id_groupe)
 		if ($id_groupe) {	// modif groupe
 			sql_updateq("spip_mots", array("type" => $change_type), "id_groupe=$id_groupe");
 
-			spip_query("UPDATE spip_groupes_mots SET titre=" . _q($change_type) . ", texte=" . _q($texte) . ", descriptif=" . _q($descriptif) . ", unseul=" . _q($unseul) . ", obligatoire=" . _q($obligatoire) . ", articles=" . _q($articles) . ", breves=" . _q($breves) . ", rubriques=" . _q($rubriques) . ", syndic=" . _q($syndic) . ",	minirezo=" . _q($acces_minirezo) . ", comite=" . _q($acces_comite) . ", forum=" . _q($acces_forum) . " WHERE id_groupe=$id_groupe");
+			sql_updateq("spip_groupes_mots", array("titre" =>$change_type,"texte"=>$texte,"descriptif"=>$descriptif,"unseul"=>$unseul,"obligatoire"=>$obligatoire,"articles"=>$articles,"breves"=>$breves,"rubriques"=>$rubriques,"syndic"=>$syndic,"minirezo"=>$acces_minirezo,"comite"=>$acces_comite,"forum"=>$acces_forum), "id_groupe=$id_groupe");
 
 		} else {	// creation groupe
 			sql_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . _q($change_type) . ", " . _q($texte) . " , " . _q($descriptif) . " , " . _q($unseul) . " , " . _q($obligatoire) . " , " . _q($articles) . " ," . _q($breves) . " , " . _q($rubriques) . " , " . _q($syndic) . " , " . _q($acces_minirezo) . " ,  " . _q($acces_comite) . " , " . _q($acces_forum) . " )");

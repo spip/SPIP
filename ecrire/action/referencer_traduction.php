@@ -35,7 +35,7 @@ function action_referencer_traduction_dist() {
 			sql_updateq("spip_articles", array("id_trad" => 0), "id_trad=" . $r[2]);
 	} elseif (preg_match(",^(\d+)\D(\d+)\D(\d+)$,", $arg, $r)) {
 	  // modifier le groupe de traduction de $r[1] (SQL le trouvera)
-		spip_query("UPDATE spip_articles SET id_trad = " . $r[3] . " WHERE id_trad =" . $r[2]);
+		sql_update('spip_articles', array("id_trad" => $r[3]), "id_trad=" . $r[2]);
 	} elseif (preg_match(",^(\d+)\D(\d+)$,", $arg, $r)) {
 		instituer_langue_article($r[1],$r[2]);
 	} else {
@@ -50,14 +50,13 @@ function instituer_langue_article($id_article, $id_rubrique) {
 
 	if ($GLOBALS['meta']['multi_articles'] == 'oui' AND $changer_lang) {
 		if ($changer_lang != "herit") {
-			spip_query("UPDATE spip_articles SET lang=" . _q($changer_lang) . ", langue_choisie='oui' WHERE id_article=$id_article");
+			sql_updateq('spip_articles', array('lang'=>$changer_lang, 'langue_choisie'=>'oui'), "id_article=$id_article");
 			include_spip('inc/rubriques');
 			$langues = calculer_langues_utilisees();
 			ecrire_meta('langues_utilisees', $langues);
 		} else {
-			$langue_parent = sql_fetsel("lang", "spip_rubriques", "id_rubrique=" . $id_rubrique);
-			$langue_parent=$langue_parent['lang'];
-			spip_query("UPDATE spip_articles SET lang=" . _q($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
+			$langue_parent = sql_getfetsel("lang", "spip_rubriques", "id_rubrique=" . $id_rubrique);
+			sql_updateq('spip_articles', array('lang'=>$langue_parent, 'langue_choisie'=>'non'), "id_article=$id_article");
 		}
 	}
 }
