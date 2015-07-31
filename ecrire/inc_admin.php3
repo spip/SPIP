@@ -22,7 +22,10 @@ function debut_admin($action, $commentaire='') {
 		exit;
 	}
 	$fichier = fichier_admin($action);
-	if (file_exists("data/$fichier")) return true;
+	if (file_exists("data/$fichier")) {
+		spip_log ("Action admin: $action");
+		return true;
+	}
 
 	include_ecrire ("inc_presentation.php3");
 	install_debut_html("Action : $action");
