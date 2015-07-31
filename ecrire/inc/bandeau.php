@@ -352,4 +352,9 @@ function inc_bandeau_dist($rubrique, $sous_rubrique, $largeur)
 		;
 
 }
+// Pour memoire
+define('_LARGEUR_ICONES_BANDEAU',
+	((@$GLOBALS['spip_display'] == 3) ? 60 : 80)
+	+ ((@$GLOBALS['spip_ecran'] == 'large') ? 30 : 0)
+	+ (($GLOBALS['connect_toutes_rubriques']) ? 0 : 30));
 ?>
