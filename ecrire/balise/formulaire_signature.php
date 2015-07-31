@@ -203,10 +203,9 @@ function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site,
 
 	// tout le monde est la.
 
-	$result_petition = sql_select('*', 'spip_petitions', "id_article=$id_article");
+	$row = sql_fetsel('*', 'spip_petitions', "id_article=$id_article");
 
-	if (!$row = sql_fetch($result_petition)) 
-		return _T('form_pet_probleme_technique');
+	if (!$row) return _T('form_pet_probleme_technique');
 
 	if ($row['site_obli'] == "oui") {
 		if (!strlen($site)

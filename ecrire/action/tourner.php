@@ -28,10 +28,9 @@ function action_tourner_dist() {
 function action_tourner_post($r)
 {
 	$arg = $r[1];
-	$result = sql_select("fichier", "spip_documents", "id_document=$arg");
+	$row = sql_fetsel("fichier", "spip_documents", "id_document=$arg");
 
-	if (!$row = sql_fetch($result))
-		return;
+	if (!$row) return;
 
 	include_spip('inc/charsets');	# pour le nom de fichier
 	include_spip('inc/documents'); 

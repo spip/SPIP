@@ -176,8 +176,7 @@ function revisions_sites ($id_syndic, $c=false) {
 		$c);
 
 
-	$s = sql_select("statut, id_rubrique, id_secteur", "spip_syndic", "id_syndic=$id_syndic");
-	$row = sql_fetch($s);
+	$row = sql_fetsel("statut, id_rubrique, id_secteur", "spip_syndic", "id_syndic=$id_syndic");
 	$id_rubrique = $row['id_rubrique'];
 	$statut_ancien = $row['statut'];
 	$id_secteur_old = $row['id_secteur'];

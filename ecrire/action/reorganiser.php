@@ -36,8 +36,7 @@ function reorganiser_article_rubrique($id_article, $id_rubrique)
 
 		include_spip('action/editer_article');
 		include_spip('inc/rubriques');
-		$s = sql_select("statut, id_rubrique", "spip_articles", "id_article=$id_article");
-		$s = sql_fetch($s);
+		$s = sql_fetsel("statut, id_rubrique", "spip_articles", "id_article=$id_article");
 		editer_article_heritage($id_article,
 					$s['id_rubrique'], 
 					$s['statut'],
@@ -54,12 +53,10 @@ function reorganiser_rubrique_rubrique($id_quoi, $id_cible)
 		if (!$id_cible)
 			$id_secteur = $id_quoi;
 		else {
-			$s = sql_select("id_secteur", "spip_rubriques", "id_rubrique=$id_cible");
-			$s = sql_fetch($s);
-			$id_secteur = $s['id_secteur'];
+			$id_secteur = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=$id_cible");
 		}
 
-		$s = sql_select("statut, id_parent", "spip_rubriques", "id_rubrique=$id_quoi");
+		$s = sql_fetsel("statut, id_parent", "spip_rubriques", "id_rubrique=$id_quoi");
 
 		sql_updateq('spip_rubriques', array('id_parent' => $id_cible, 'id_secteur'=>$id_secteur),  "id_rubrique=".sql_quote($id_quoi));
 

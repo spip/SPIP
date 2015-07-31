@@ -20,9 +20,8 @@ function action_instituer_forum_dist() {
 
 	list($id_forum, $statut) = preg_split('/\W/', $arg);
 	$id_forum = intval($id_forum);
-	$result = sql_select("*", "spip_forum", "id_forum=$id_forum");
-	if (!($row = sql_fetch($result)))
-		return;
+	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_forum");
+	if (!$row) return;
 
 	// invalider les pages comportant ce forum
 	include_spip('inc/invalideur');
