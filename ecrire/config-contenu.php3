@@ -328,6 +328,8 @@ if (function_exists("imagejpeg")){
 //// Activer/desactiver creation automatique de vignettes
 	debut_cadre_relief("image-24.png");
 
+	$gd_formats=lire_meta("gd_formats");
+
 	$creer_preview=lire_meta("creer_preview");
 	$taille_preview=lire_meta("taille_preview");
 	if ($taille_preview < 15) $taille_preview = 120;
@@ -336,30 +338,39 @@ if (function_exists("imagejpeg")){
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_claire' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>Cr&eacute;ation automatique de vignettes de pr&eacute;visualisation</FONT></B></TD></TR>";
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>Lorsque vous installez des images au format JPEG en tant que document joint, SPIP peut cr&eacute;er pour vous, automatiquement, des vignettes de pr&eacute;visualisation. Cette option facilite, par exemple, la cr&eacute;ation d'un portfolio.</FONT>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>Lorsque vous installez des images en tant que document joint, SPIP peut cr&eacute;er pour vous, automatiquement, des vignettes de pr&eacute;visualisation. Cette option facilite, par exemple, la cr&eacute;ation d'un portfolio.</FONT>";
 	echo "</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($creer_preview!="oui"){
-		echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' id='creer_preview_on'>";
-		echo " <label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label> ";
-			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
-			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-			echo " pixels";
+	if (strlen($gd_formats)>0){
+		if ($creer_preview!="oui"){
+			echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' id='creer_preview_on'>";
+			echo " <label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label> ";
+				echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
+				echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+				echo " pixels";
+			
+			echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' CHECKED id='creer_preview_off'>";
+			echo " <B><label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label></B> ";
+		}else{
+			echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' CHECKED id='creer_preview_on'>";
+			echo " <b><label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label></b> ";
+				echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
+				echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+				echo " pixels";
+			echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' id='creer_preview_off'>";
+			echo " <label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label> ";
+		}
 		
-		echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' CHECKED id='creer_preview_off'>";
-		echo " <B><label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label></B> ";
-	}else{
-		echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' CHECKED id='creer_preview_on'>";
-		echo " <b><label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label></b> ";
-			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
-			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-			echo " pixels";
-		echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' id='creer_preview_off'>";
-		echo " <label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label> ";
+	echo "<p>Formats d'images pouvant &ecirc;tre utilis&eacute;es pour cr&eacute;er des vignettes&nbsp;: $gd_formats.<p>";	
 	}
 
+	
+
+		//Tester les formats acceptes par GD
+		echo "<a href='../spip_image.php3?test_formats=oui&redirect=config-contenu.php3'>Tester les formats d'image que ce site peut utiliser pour cr&eacute;er des vignettes</a>";
+		
 	echo "</FONT>";
 	echo "</TD></TR>\n";
 	echo "<TR><TD ALIGN='right' COLSPAN=2>";
