@@ -2576,7 +2576,7 @@ document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
 			$gadget .= "<table><tr>";
 			$gadget .= "<td valign='top' width='200'>";
 				$gadget .= "<div>";
-				$gadget .= http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+				$gadget .= http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3');
 				$gadget .= "</div>";
 				$gadget .= "</td>";
 				if ($afficher_cal) {

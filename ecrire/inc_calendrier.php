@@ -608,7 +608,7 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
 {
   global $bleu, $jaune, $vert;
   $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
-  $script = 'calendrier.php3' ; // ok pour espace de redac, pas pour public
+  $script =  $GLOBALS['PHP_SELF'] ;
   return "\n" .
     http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee", $clic) .
     "\n" .
@@ -735,7 +735,8 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 
 function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false,  $script='', $ancre='') {
 
-  if (!$script) $script =  'calendrier.php3?' ;
+  if (!$script) $script =  $GLOBALS['PHP_SELF'] ;
+  if (!strpos($script, '?')) $script .= '?';
   if (!$mois) {$mois = 12; $annee--;}
   elseif ($mois==13) {$mois = 1; $annee++;}
   return 
