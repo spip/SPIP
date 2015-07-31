@@ -63,7 +63,7 @@ function inc_documenter_dist(
 
 		$style = est_inclus($id_document) ? ' background-color: #cccccc;':'';
 
-		$deplier = in_array($id_document, explode('-', _request('show_docs')));
+		$deplier = in_array($id_document, explode(',', _request('show_docs')));
 
 		if (!$case)
 			$res .= "<tr style='border-top: 1px solid black;'>";
