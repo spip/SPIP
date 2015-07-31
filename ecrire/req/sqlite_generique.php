@@ -435,6 +435,7 @@ function spip_sqlite_in($val, $valeurs, $not='', $serveur='') {
 	// limite a 255 elements aussi en sqlite ou non ?
 	if (is_array($valeurs))
 		$valeurs = join(',', array_map('spip_sqlite_quote', $valeurs));
+	elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 
 	$n = $i = 0;

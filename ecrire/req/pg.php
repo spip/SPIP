@@ -745,6 +745,7 @@ function spip_pg_in($val, $valeurs, $not='', $serveur) {
 //
 	if (is_array($valeurs))
 		$valeurs = join(',', array_map('_q', $valeurs));
+	elseif ($valeurs[0]===',') $valeurs = substr($valeurs,1);
 	if (!strlen(trim($valeurs))) return ($not ? "0=0" : '0=1');
 	if (strpos($valeurs, "CAST(x'") !== false)
 		return "($val=" . join("OR $val=", explode(',',$valeurs)).')';
