@@ -99,14 +99,6 @@ div.detailplugin hr {
 	border-left:0;
 	border-right:0;
 	}
-span.dev{	background:url({$dir_img_pack}puce-poubelle.gif) top left no-repeat;}
-span.test{	background:url({$dir_img_pack}puce-orange.gif) top left  no-repeat;}
-span.stable{	background:url({$dir_img_pack}puce-verte.gif) top left  no-repeat;}
-span.experimental{	background:url({$dir_img_pack}puce-rouge.gif) top left  no-repeat;}
-span.dev,span.test,span.stable,span.experimental{
-	display:block;float:left;
-	width:9px; height:9px;margin-right:5px;margin-top:5px;
-}
 div.nomplugin label {display:none;}
 EOF;
 	echo "</style>\n";
@@ -303,22 +295,32 @@ function ligne_plug($plug_file, $actif, $id){
 	$nom = typo($info['nom']);
 
 	$id = substr(md5("aide_$plug_file"),0,8);
-	$s .= "<span class='$etat' title='$etat'>&nbsp;</span>";
+	$puce_etat = array(
+	"dev"=>"<img src='"._DIR_IMG_PACK . "puce-poubelle.gif' width='9' height='9' alt='dev' />",
+	"test"=>"<img src='"._DIR_IMG_PACK . "puce-orange.gif' width='9' height='9' alt='dev' />",
+	"stable"=>"<img src='"._DIR_IMG_PACK . "puce-verte.gif' width='9' height='9' alt='dev' />",
+	"experimental"=>"<img src='"._DIR_IMG_PACK . "puce-rouge.gif' width='9' height='9' alt='dev' />",
+	);
+	
+	if (isset($puce_etat[$etat]))
+	$s .= $puce_etat[$etat];
 
 	if (!$erreur){
-		$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
+		$name = 's' . substr(md5("statusplug_$plug_file"),0,16);
+		$s .= "<input type='checkbox' name='$name' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
-		$s .= " class='check' /> <label for='label_$id_input'>"._T('activer_plugin')."</label>";
+		$s .= " class='check' />";
+		$s .= "<label for='label_$id_input'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 
 	//$s .= bouton_block_invisible("$plug_file");
-	$url_stat = generer_url_ecrire(_request('exec'),"plug=$plug_file");
+	$url_stat = generer_url_ecrire(_request('exec'),"plug=".urlencode($plug_file));
 	$s .= "<a href='$url_stat' rel='info'>$nom</a>";
 
 	$s .= "<div class='info'>";
 	// afficher les details d'un plug en secours
-	if (_request('plug')==$plug_file)
+	if (urldecode(_request('plug'))==$plug_file)
 		$s .= affiche_bloc_plugin($plug_file, $info);
 	$s .= "</div>";
 
