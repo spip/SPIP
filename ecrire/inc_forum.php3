@@ -85,25 +85,23 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	}
 
 	$link = new Link();
-	$link = $link->geturl() . "#id$id_forum";
-	$ulink = urlencode($link);
+	$link = _DIR_RESTREINT_ABS . $link->geturl() . "#id$id_forum";
 
 	if ($supprimer)
-		$controle .= icone(_T('icone_supprimer_message'), generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$supprimer&redirect=$ulink"),
+	  $controle .= icone(_T('icone_supprimer_message'), generer_action_auteur('instituer', "forum $id_forum $supprimer", $link),
 			$logo,
 			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
-		$controle .= icone(_T('icone_valider_message'), generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$ulink"),
+		$controle .= icone(_T('icone_valider_message'), generer_action_auteur('instituer', "forum $id_forum $valider", $link),
 			$logo,
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
 
-	  $redirect =  urlencode(generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link), true));
-	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$redirect"),
-				   $logo,
-				   "creer.gif", 'right', 'non');
+	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer', "forum $id_forum $valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . urlencode($link), true)),
+			     $logo,
+			     "creer.gif", 'right', 'non');
 	}
 
 	return $controle;
