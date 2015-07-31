@@ -65,9 +65,11 @@ function parser_inclure($texte) {
 }
 
 function parser_champs($texte) {
-	$result=Array();
+	$result = array();
 	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
-		$p = strpos($texte, $regs[0]);
+	  $p = strpos($texte, $regs[0]);
+
+	  if ($regs[4] || !ereg("[0-9a-z]", $regs[5][0])) {
 		if ($p) {
 			$champ = new Texte;
 			$champ->texte = (substr($texte, 0, $p));
@@ -80,8 +82,16 @@ function parser_champs($texte) {
 		$champ->etoile = $regs[4];
 		$texte = $regs[5];
 		$result[] = $champ;
+	  } else {
+	    // faux champ
+	    $champ = new Texte;
+	    $champ->texte = (substr($texte, 0, $p+1));
+	    $result[] = $champ;
+	    $texte = (substr($texte, $p+1));
+	  }
 	}
 	if ($texte) {
+	  
 		$champ = new Texte;
 		$champ->texte = $texte;
 		$result[] = $champ;
