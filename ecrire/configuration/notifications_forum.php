@@ -19,7 +19,9 @@ function configuration_notifications_forum_dist()
 {
 	$res = '';
 	$m = $GLOBALS['meta']['prevenir_auteurs'];
-	foreach ($GLOBALS['liste_des_forums'] as $desc => $val) {
+	$l = $GLOBALS['liste_des_forums'];
+	unset($l['info_pas_de_forum']);
+	foreach ($l as $desc => $val) {
 		$name = 'prevenir_auteurs_' . $val;
 		$lib = _T($desc);
 		$vu = (($m == 'oui') OR strpos($m,",$val,")!==false);
