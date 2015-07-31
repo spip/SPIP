@@ -82,8 +82,6 @@ if ($essai_login == "oui") {
 	}
 
 	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass' AND statut<>'5poubelle'";
-	echo "$query<p>";
-
 	$result = spip_query($query);
 
 	if ($row_auteur = mysql_fetch_array($result)) { // login reussi
