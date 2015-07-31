@@ -150,7 +150,7 @@ function creer_repertoire($base, $subdir) {
 		@unlink("$path/.test");
 	}
 	if ($ok) return "$subdir/";
-	redirige_par_entete(generer_url_public('spip_test_dirs'));
+	redirige_par_entete(generer_url_public('spip_action.php'), '?action=test_dirs');
 }
 
 ?>
