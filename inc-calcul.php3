@@ -473,7 +473,8 @@ function calculer_page_globale($fond) {
 	// Generer le contexte
 	$contexte = '';
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
-		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe', 'id_document');
+		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
+		'id_mot', 'id_groupe', 'id_document', 'lang');
 	reset($contexte_defaut);
 	while (list(, $val) = each($contexte_defaut)) {
 		if ($GLOBALS[$val]) {
@@ -489,8 +490,6 @@ function calculer_page_globale($fond) {
 	// Analyser les URLs personnalisees (inc-urls-...)
 	recuperer_parametres_url($fond, $fichier_requete);
 	$lang = lire_meta('langue_site');
-	if ($contexte['lang'])
-		$lang = $contexte['lang'];	// si inc-urls veut fixer la langue
 
 	// Calcul de la rubrique associee a la requete
 	// (selection de squelette specifique)
@@ -523,6 +522,8 @@ function calculer_page_globale($fond) {
 	else {
 		$id_rubrique_fond = 0;
 	}
+	if ($contexte['lang'])
+		$lang = $contexte['lang'];	// si inc-urls veut fixer la langue
 
 	$fond = chercher_squelette($fond, $id_rubrique_fond);
 
