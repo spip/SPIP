@@ -52,8 +52,8 @@
 	width: 100%;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box; 
-	-ms-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 }
 
 
@@ -67,8 +67,8 @@
 	width: 100%;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box; 
-	-ms-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 }
 
 .formulaire_spip .reponse_formulaire_erreur,
@@ -94,8 +94,8 @@
 	width: 100%;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box; 
-	-ms-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	border: 1px solid #GET{claire};
 	border-bottom: 0px;
 	padding: 3px;
@@ -113,8 +113,8 @@
 	font-size: 1.05em;
 	line-height: 1.4em;
 }
-.formulaire_spip input.submit, 
-.formulaire_spip input.reset, 
+.formulaire_spip input.submit,
+.formulaire_spip input.reset,
 .formulaire_spip input.button {
 	width: auto;
 }
@@ -156,7 +156,7 @@
 /* ul li */
 .formulaire_spip ul {
 	margin: 0;
-	padding: 0;
+	padding: 5px 0;
 	list-style: none;
 }
 .formulaire_spip ul li ul {
@@ -164,22 +164,15 @@
 }
 .formulaire_spip li {
 	margin: 0;
-	padding: 10px;
+	padding: 5px 10px;
 	clear:both;
 	overflow:hidden;
-}
-.formulaire_spip li:first-child {
-	padding-top: 10px;
-}
-
-.formulaire_spip>form li {
-	padding-top: 0px;	
 }
 
 /* annuler les f@@@@ div de sa majeste */
 div.edition, div.label {display:inline;}
 
-/* Formulaires alignes a gauche 
+/* Formulaires alignes a gauche
 c'est le par defaut des formulaires de Spip */
 .formulaire_spip li,
 .formulaire_spip li.gauche {padding-#GET{left}:140px;}
@@ -188,7 +181,7 @@ c'est le par defaut des formulaires de Spip */
 .formulaire_spip li.gauche label {
 	width: 114px;
 	float:#GET{left};
-	margin-#GET{left}:-130px; 
+	margin-#GET{left}:-130px;
 	text-align: #GET{left};
 	/*vertical-align: top;*/
 	/* for IE 6*/
@@ -300,8 +293,8 @@ padding-top:10px;
 
 .formulaire_spip li.fieldset {padding:0;}
 .formulaire_spip fieldset {
-	margin: 0px;
-	padding: 0 0 10px 0;
+	margin: 5px 0 0px;
+	padding: 0px 0 10px 0;
 	border: 0;
 	width:auto;
 	border-top: 1px solid #ccc;
@@ -351,7 +344,7 @@ padding-top:10px;
 .formulaire_spip .boutons {
 	[background-color: #(#GET{claire}|couleur_eclaircir);]
 	[border-top: 1px solid (#GET{claire});]
-	margin:0; 
+	margin:0;
 	clear:both;
 	text-align: #GET{right};
 	padding: 7px 1em;
@@ -387,10 +380,12 @@ padding-top:10px;
 }
 
 
-.formulaire_spip li.editer_parent, 
+.formulaire_spip li.editer_parent,
 .formulaire_spip li.editer_groupe_mot,
 .formulaire_editer_auteur li.editer_statut {
 	background-color: [#(#ENV{couleur_claire}|couleur_eclaircir)];
+	margin-top:5px;
+	padding-bottom:10px;
 }
 .formulaire_spip li.editer_parent .rubrique_actuelle {clear:#GET{left};}
 
@@ -423,11 +418,11 @@ padding-top:10px;
 }
 
 .formulaire_spip li.editer_syndication {
-	padding-#GET{left}: 10px;	
+	padding-#GET{left}: 10px;
 }
 
 
-.formulaire_spip li.editer_parent label, 
+.formulaire_spip li.editer_parent label,
 .formulaire_spip li.editer_groupe_mot label {
 	color: black;
 	font-weight: bold;
@@ -446,9 +441,9 @@ padding-top:10px;
 .formulaire_spip table.spip_barre tr {
 	width: 98%;
 }
-.formulaire_spip table.spip_barre a img { 
+.formulaire_spip table.spip_barre a img {
 	[(#EVAL{_DIR_IMG_PACK}|concat{fond-fondo.gif}|background_image{[(#ENV{couleur_claire}|couleur_eclaircir)], center center })]
-	padding: 3px; border: 1px outset #GET{claire}; 
+	padding: 3px; border: 1px outset #GET{claire};
 }
 .formulaire_spip table.spip_barre a:hover img { background: #fff; border: 1px solid #cc9; }
 .formulaire_spip table.spip_barre input.barre { width: 99%; background: transparent; border: 0; color: #f57900; }
@@ -456,10 +451,10 @@ padding-top:10px;
 
 .formulaire_spip li.editer_parent .choix label,
 .formulaire_spip .choix label{
-	float:none; 
+	float:none;
 	display:inline;
-	margin-#GET{left}: 5px; 
-	font-weight:normal; 
+	margin-#GET{left}: 5px;
+	font-weight:normal;
 	text-transform: none;
 	font-size: 1em;
 	background: none;
@@ -489,11 +484,11 @@ padding-top:10px;
 #navigation .formulaire_spip li label,#extra .formulaire_spip li label {
 	text-transform: none;
 	color: #444444;
-	
+
 	-moz-display: inline-box;
 	display: inline-block;
 	font-weight: normal;
-	
+
 	padding: 0;
 	padding-top: 3px;
 	padding-bottom: 3px;
