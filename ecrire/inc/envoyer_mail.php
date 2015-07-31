@@ -97,6 +97,9 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
 
+	// Traiter les headers existants
+	if (strlen($headers)) $headers = trim($headers)."\n";
+
 	// Fournir si possible un Message-Id: conforme au RFC1036,
 	// sinon SpamAssassin denoncera un MSGID_FROM_MTA_HEADER
 
@@ -113,7 +116,7 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 
 	// ceci est la RegExp NO_REAL_NAME faisant hurler SpamAssassin
 	if (preg_match('/^["\s]*\<?\S+\@\S+\>?\s*$/', $from))
-		$from .= ' (' . str_replace(')','', translitteration($GLOBALS['meta']["nom_site"])) . ')';
+		$from .= ' (' . str_replace(')','', translitteration(str_replace('@', ' at ', $from))) . ')';
 
 	// Et maintenant le champ From:
 	$headers .= "From: $from\n";
