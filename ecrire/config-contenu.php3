@@ -49,27 +49,27 @@ if ($changer_config == 'oui') {
 	}
 	if ($requete_appliquer) spip_query($requete_appliquer);
 
-
-	$adresse_site = ereg_replace("/$", "", $adresse_site);
-
-	ecrire_meta("activer_breves", $activer_breves);
-	ecrire_meta("config_precise_groupes", $config_precise_groupes);
-	ecrire_meta("mots_cles_forums", $mots_cles_forums);
-	ecrire_meta("visiter_sites", $visiter_sites);
-	ecrire_meta("proposer_sites", $proposer_sites);
-	ecrire_meta("articles_surtitre", $articles_surtitre);
-	ecrire_meta("articles_soustitre", $articles_soustitre);
-	ecrire_meta("articles_descriptif", $articles_descriptif);
-	ecrire_meta("articles_chapeau", $articles_chapeau);
-	ecrire_meta("articles_ps", $articles_ps);
-	ecrire_meta("articles_redac", $articles_redac);
-	ecrire_meta("articles_mots", $articles_mots);
-	ecrire_meta("post_dates", $post_dates);
-	ecrire_meta("creer_preview", $creer_preview);
-	ecrire_meta("taille_preview", $taille_preview);
-	ecrire_meta("activer_syndic", $activer_syndic);
-	ecrire_meta("visiter_sites", $visiter_sites);
-
+	$liste_meta = array(
+		'activer_breves',
+		'config_precise_groupes',
+		'mots_cles_forums',
+		'articles_surtitre',
+		'articles_soustitre',
+		'articles_descriptif',
+		'articles_chapeau',
+		'articles_ps',
+		'articles_redac',
+		'articles_mots',
+		'post_dates',
+		'creer_preview',
+		'taille_preview',
+		'activer_sites',
+		'proposer_sites',
+		'activer_syndic',
+		'visiter_sites'
+	);
+	while (list(,$meta) = each($liste_meta))
+		if ($$meta) ecrire_meta($meta, $$meta);
 	ecrire_metas();	
 
 	if ($purger_skel) {
@@ -545,79 +545,92 @@ debut_cadre_relief("site-24.gif");
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Listes de sites r&eacute;f&eacute;renc&eacute;s et syndication</FONT></B> ".aide ("rubsyn")."</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>SPIP vous permet de cr&eacute;er des listes de sites r&eacute;f&eacute;renc&eacute;s (annuaire de liens).";
+	$activer_sites = lire_meta('activer_sites');
 
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
 
-	echo "<p>Qui peut proposer des sites r&eacute;f&eacute;renc&eacute;s&nbsp;?";
-		echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
-			echo "<OPTION".mySel('0',$proposer_sites).">les administrateurs\n";
-			echo "<OPTION".mySel('1',$proposer_sites).">les r&eacute;dacteurs\n";
-			echo "<OPTION".mySel('2',$proposer_sites).">les visiteurs du site public\n";
-		echo "</SELECT></center><P>\n";
-
-
-
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-
-	echo "<TR><TD BGCOLOR='EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Syndication de sites</FONT></B> ".aide ("rubsyn")."</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Il est possible de r&eacute;cup&eacute;rer, pour chaque site r&eacute;f&eacute;renc&eacute; (lorsque ce site le permet), la liste de ses derni&egrave;res publications. Pour cela, vous devez activer la syndication de SPIP. <font color='red'>Certains h&eacute;bergeurs interdisent la consultation de sites externes depuis leurs machines&nbsp;; dans ce cas, vous ne pourrez pas utiliser la syndication de contenu depuis votre site.</font> <p>Votre site utilise-t-il le syst&egrave;me de syndication de sites&nbsp;?</FONT>";
-	echo "</TD></TR>";
-
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($activer_syndic == "non") {
-		echo "<p align='center'><INPUT TYPE='radio' NAME='activer_syndic' VALUE='oui' id='syndic_on'>";
-		echo " <label for='syndic_on'>Utiliser la syndication</label> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' CHECKED id='syndic_off'>";
-		echo " <B><label for='syndic_off'>Ne pas utiliser la syndication</label></B> ";
-	}
-	else {
-		echo "<p align='center'><INPUT TYPE='radio' NAME='activer_syndic' VALUE='oui' id='syndic_on' CHECKED>";
-		echo " <B><label for='syndic_on'>Utiliser la syndication</label></B> ";
-		echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' id='syndic_off'>";
-		echo " <label for='syndic_off'>Ne pas utiliser la syndication</label> ";
-
-		// Si indexation, activer/desactiver pages recuperees
-
-		$activer_moteur = lire_meta("activer_moteur");
-		
-		if ($activer_moteur == "oui") {
-			echo "<p><hr><p align='left'>"; 
-			echo "Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP, vous pouvez effectuer les recherches ".
-				"sur les sites et les articles syndiqu&eacute;s de deux mani&egrave;res diff&eacute;rentes. <br><img src='puce.gif'> La plus ".
-				"simple consiste &agrave; rechercher uniquement dans les titres et les descriptifs des articles. <br><img src='puce.gif'> Une seconde ".
-				"m&eacute;thode, beaucoup plus puissante, permet &agrave; SPIP de rechercher &eacute;galement dans le texte des sites r&eacute;f&eacute;renc&eacute;s&nbsp;. ".
-				"Si vous r&eacute;f&eacute;rencez un site, SPIP va alors effectuer la recherche dans le texte du site lui-m&ecirc;me. ";
-			echo "<font color='red'>Cette m&eacute;thode oblige SPIP &agrave; visiter r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
-				ce qui peut provoquer un l&eacute;ger ralentissement de votre propre site.</font>";
-
-			if ($visiter_sites == "oui") {
-				echo "<p><INPUT TYPE='radio' NAME='visiter_sites' VALUE='non' id='visiter_off'>";
-				echo " <label for='visiter_off'>Recherche limit&eacute;e aux informations de votre site</label> ";
-				echo "<br><INPUT TYPE='radio' NAME='visiter_sites' VALUE='oui' id='visiter_on' CHECKED>";
-				echo " <B><label for='visiter_on'>Recherche en utilisant le contenu des sites r&eacute;f&eacute;renc&eacute;s</label></B> ";
-			}
-			else {
-				echo "<p><INPUT TYPE='radio' NAME='visiter_sites' VALUE='non' id='visiter_off' CHECKED>";
-				echo " <b><label for='visiter_off'>Recherche limit&eacute;e aux informations de votre site</label></b> ";
-				echo "<br><INPUT TYPE='radio' NAME='visiter_sites' VALUE='oui' id='visiter_on'>";
-				echo " <label for='visiter_on'>Recherche en utilisant le contenu des sites r&eacute;f&eacute;renc&eacute;s</label> ";
-			}
-		}
-		else {
-			echo "<INPUT TYPE='hidden' NAME='visiter_sites' VALUE='$visiter_sites'>";
-		}
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>SPIP vous permet de cr&eacute;er des listes de sites r&eacute;f&eacute;renc&eacute;s (annuaire de liens).<p>";
+	if ($activer_sites=="non"){
+		echo "<INPUT TYPE='radio' NAME='activer_sites' VALUE='oui' id='sites_on'>";
+		echo " <label for='sites_on'>G&eacute;rer un annuaire de sites</label> ";
+		echo " <br>&nbsp; <INPUT TYPE='radio' NAME='activer_sites' VALUE='non' CHECKED id='sites_off'>";
+		echo " <B><label for='sites_off'>D&eacute;sactiver l'annuaire de sites</label></B> ";
+	}else{
+		echo "<INPUT TYPE='radio' NAME='activer_sites' VALUE='oui' id='sites_on' CHECKED>";
+		echo " <B><label for='sites_on'>G&eacute;rer un annuaire de sites</label></B> ";
+		echo " <br>&nbsp; <INPUT TYPE='radio' NAME='activer_sites' VALUE='non' id='sites_off'>";
+		echo " <label for='sites_off'>D&eacute;sactiver l'annuaire de sites</label> ";
 	}
 
 	echo "</FONT>";
 	echo "</TD></TR>\n";
 
+	if ($activer_sites <> 'non') {
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+		echo "<hr><p>Qui peut proposer des sites r&eacute;f&eacute;renc&eacute;s&nbsp;?";
+			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
+				echo "<OPTION".mySel('0',$proposer_sites).">les administrateurs\n";
+				echo "<OPTION".mySel('1',$proposer_sites).">les r&eacute;dacteurs\n";
+				echo "<OPTION".mySel('2',$proposer_sites).">les visiteurs du site public\n";
+			echo "</SELECT></center><P>\n";
+		echo "</FONT>";
+		echo "</TD></TR>";
+
+		echo "<TR><TD BGCOLOR='EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Syndication de sites</FONT></B> ".aide ("rubsyn")."</TD></TR>";
+
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Il est possible de r&eacute;cup&eacute;rer, pour chaque site r&eacute;f&eacute;renc&eacute; (lorsque ce site le permet), la liste de ses derni&egrave;res publications. Pour cela, vous devez activer la syndication de SPIP. <font color='red'>Certains h&eacute;bergeurs interdisent la consultation de sites externes depuis leurs machines&nbsp;; dans ce cas, vous ne pourrez pas utiliser la syndication de contenu depuis votre site.</font> <p>Votre site utilise-t-il le syst&egrave;me de syndication de sites&nbsp;?</FONT>";
+		echo "</TD></TR>";
+
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+		if ($activer_syndic == "non") {
+			echo "<p align='center'><INPUT TYPE='radio' NAME='activer_syndic' VALUE='oui' id='syndic_on'>";
+			echo " <label for='syndic_on'>Utiliser la syndication</label> ";
+			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' CHECKED id='syndic_off'>";
+			echo " <B><label for='syndic_off'>Ne pas utiliser la syndication</label></B> ";
+		}
+		else {
+			echo "<p align='center'><INPUT TYPE='radio' NAME='activer_syndic' VALUE='oui' id='syndic_on' CHECKED>";
+			echo " <B><label for='syndic_on'>Utiliser la syndication</label></B> ";
+			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_syndic' VALUE='non' id='syndic_off'>";
+			echo " <label for='syndic_off'>Ne pas utiliser la syndication</label> ";
+
+			// Si indexation, activer/desactiver pages recuperees
+
+			$activer_moteur = lire_meta("activer_moteur");
+			if ($activer_moteur == "oui") {
+				echo "<p><hr><p align='left'>"; 
+				echo "Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP, vous pouvez effectuer les recherches ".
+					"sur les sites et les articles syndiqu&eacute;s de deux mani&egrave;res diff&eacute;rentes. <br><img src='puce.gif'> La plus ".
+					"simple consiste &agrave; rechercher uniquement dans les titres et les descriptifs des articles. <br><img src='puce.gif'> Une seconde ".
+					"m&eacute;thode, beaucoup plus puissante, permet &agrave; SPIP de rechercher &eacute;galement dans le texte des sites r&eacute;f&eacute;renc&eacute;s&nbsp;. ".
+					"Si vous r&eacute;f&eacute;rencez un site, SPIP va alors effectuer la recherche dans le texte du site lui-m&ecirc;me. ";
+				echo "<font color='red'>Cette m&eacute;thode oblige SPIP &agrave; visiter r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
+					ce qui peut provoquer un l&eacute;ger ralentissement de votre propre site.</font>";
+
+				if ($visiter_sites == "oui") {
+					echo "<p><INPUT TYPE='radio' NAME='visiter_sites' VALUE='non' id='visiter_off'>";
+					echo " <label for='visiter_off'>Recherche limit&eacute;e aux informations de votre site</label> ";
+					echo "<br><INPUT TYPE='radio' NAME='visiter_sites' VALUE='oui' id='visiter_on' CHECKED>";
+					echo " <B><label for='visiter_on'>Recherche en utilisant le contenu des sites r&eacute;f&eacute;renc&eacute;s</label></B> ";
+				}
+				else {
+					echo "<p><INPUT TYPE='radio' NAME='visiter_sites' VALUE='non' id='visiter_off' CHECKED>";
+					echo " <b><label for='visiter_off'>Recherche limit&eacute;e aux informations de votre site</label></b> ";
+					echo "<br><INPUT TYPE='radio' NAME='visiter_sites' VALUE='oui' id='visiter_on'>";
+					echo " <label for='visiter_on'>Recherche en utilisant le contenu des sites r&eacute;f&eacute;renc&eacute;s</label> ";
+				}
+			}
+			else {
+				echo "<INPUT TYPE='hidden' NAME='visiter_sites' VALUE='$visiter_sites'>";
+			}
+		}
+
+		echo "</FONT>";
+		echo "</TD></TR>\n";
+	}
 
 	echo "<TR><TD ALIGN='right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
@@ -626,12 +639,7 @@ debut_cadre_relief("site-24.gif");
 
 fin_cadre_relief();
 
-
-
-
-
 echo "</form>";
-
 
 fin_page();
 
