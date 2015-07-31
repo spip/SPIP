@@ -552,20 +552,33 @@ if (!$PATH_TRANSLATED) {
 }
 
 # obsoletes: utiliser les constantes ci-dessus.
-# Conserver pour compatibité vieilles contrib uniquement
+# Conserver pour compatibilite vieilles contrib uniquement
 $flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
 $dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 // API d'appel a la base de donnees
 function spip_query($query) {
-	if (!_FILE_CONNECT)  {$GLOBALS['db_ok'] = false; return;}
-	include_local(_FILE_CONNECT);
-	if (!$GLOBALS['db_ok'])	return;
+
+	// Essaie de se connecter
+	if (_FILE_CONNECT)
+		include_local(_FILE_CONNECT);
+	else
+	// installation ?
+	if (_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP)
+		include_local(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+
+	// Erreur de connexion
+	if (!$GLOBALS['db_ok'])
+		return;
+
+	// Vieux format de fichier connexion
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
 		@Header("Location: upgrade.php3?reinstall=oui");
 		exit;
 	}
+
+	// Faire la requete
 	return spip_query_db($query);
 }
 

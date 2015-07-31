@@ -6,6 +6,7 @@
 if (function_exists('inclure_page_lang'))
 	inclure_page_lang($fond, $delais, $contexte_inclus);
 else {
+	define ("_INC_PUBLIC", 1);
 	include ("ecrire/inc_version.php3");
 	include_local('inc-public-global.php3');
 
