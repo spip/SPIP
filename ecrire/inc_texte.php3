@@ -641,9 +641,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $ferme_note;
 	global $flag_strpos_3, $flag_preg_replace, $flag_str_replace;
 
-	$flag_str_replace = false;
-	$flag_preg_replace = false;
-
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
 
