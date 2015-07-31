@@ -36,7 +36,7 @@ function exec_articles_args($id_article)
 		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
 		$res = debut_gauche('accueil',true)
-		.  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
+		  .  articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'), _request('debut'))
 		  . "<br /><br /><div class='centered'>"
 		. "</div>"
 		. fin_gauche();
@@ -53,7 +53,7 @@ function exec_articles_args($id_article)
 }
 
 // http://doc.spip.org/@articles_affiche
-function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
+function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err, $debut_forum=0, $statut_forum='prive')
 {
 	global $spip_display, $spip_lang_left, $spip_lang_right, $connect_id_auteur,$dir_lang;
 
@@ -151,10 +151,9 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	  (_INTERFACE_ONGLETS?boites_de_config_articles($id_article):"")
 		;
 		
-	$onglet_discuter = 
-	 	icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif",'center')
-	 	.$discuter($id_article, false,  _request('debut'))
-		;
+	$onglet_discuter = !$statut_forum ? '' : (
+	 	icone_inline(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=$statut_forum&id=$id_article&script=articles") ."#formulaire", "forum-interne-24.gif", "creer.gif",'center')
+		. $discuter($id_article, $debut_forum, $statut_forum));
 
 	$hors_fiche = "";
 
