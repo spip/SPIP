@@ -342,7 +342,7 @@ jQuery.fn.ajaxbloc = function() {
  * ajaxid est l'id passe en argument de INCLURE{ajax=ajaxid}
  * @param string ajaxid
  */
-function ajaxRefreshBloc(ajaxid){
+function ajaxReload(ajaxid){
 	jQuery('div.ajaxbloc.ajax-id-'+ajaxid).trigger('reload');
 }
 
