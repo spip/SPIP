@@ -259,6 +259,7 @@ ecrire/img_pack/xml.gif -text
 ecrire/inc_accueil.php -text
 ecrire/inc_aide_index.php -text
 ecrire/inc_ajax.php3 -text
+ecrire/inc_ajax_page.php -text
 ecrire/inc_articles.php -text
 ecrire/inc_articles_edit.php -text
 ecrire/inc_articles_page.php -text
