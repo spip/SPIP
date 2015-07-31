@@ -1669,6 +1669,8 @@ class sqlite_traiter_requete{
  
 # spip_log("requete: $this->serveur >> $this->query",'query'); // boum ? pourquoi ?
 		if ($this->link){
+			// memoriser la derniere erreur PHP vue
+			$e = error_get_last();
 			// sauver la derniere requete
 			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $this->query;
 			
@@ -1693,6 +1695,13 @@ class sqlite_traiter_requete{
 			} else {
 				$r = sqlite_query($this->link, $this->query);
 			}
+
+			// loger les warnings/erreurs eventuels de sqlite remontant dans PHP
+			if ($err = error_get_last() AND $err!=$e) {
+				$err = strip_tags($err['message'])." in ".$err['file']." line ".$err['line'];
+				spip_log("$err - ".$this->query, 'sqlite');
+			}
+
 		} else {
 			$r = false;	
 		}
