@@ -219,27 +219,24 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 
 // Traitement final des echappements
 function echappe_retour($letexte, $les_echap, $source='') {
-  $cherche = "@@SPIP_$source";
-  $n = strlen($cherche);
-  $debut = '';
-  while(($pos = strpos($letexte, $cherche)) !== false) {
-    ereg("^([0-9]+)@@(.*)$",substr($letexte,$pos+$n),$regs);
-    $rempl = $les_echap[$regs[1]];
-# si $rempl est un tableau, c'est le résultat (cf echappe_html) de eregi sur :
+	$expr = ",@@SPIP_$source([0-9]+)@@,";
+	if (preg_match_all($expr, $letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$rempl = $les_echap[$reg[1]];
+# si $rempl est un tableau, c'est le resultat (cf echappe_html) de eregi sur :
 # <(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?
-    if (is_array($rempl))
-	  {
-		    include_ecrire("inc_documents.php3");
-		    $type = strtoupper($rempl[1]);
-		    if ($type == 'EMB')
-		      $rempl = embed_document($rempl[2], $rempl[4]);
-		    else
-		      $rempl = integre_image($rempl[2], $rempl[4], $type);
-	  }
-    $debut .= substr($letexte,0,$pos) . $rempl;
-    $letexte = $regs[2];
-  }
-  return $debut . $letexte;
+			if (is_array($rempl)) {
+				include_ecrire("inc_documents.php3");
+				$type = strtoupper($rempl[1]);
+				if ($type == 'EMB')
+					$rempl = embed_document($rempl[2], $rempl[4]);
+				else
+					$rempl = integre_image($rempl[2], $rempl[4], $type);
+			}
+			$letexte = str_replace($reg[0], $rempl, $letexte);
+		}
+	}
+	return $letexte;
 }
 
 
