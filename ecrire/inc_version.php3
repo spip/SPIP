@@ -96,11 +96,20 @@ function magic_unquote($_table, $http='') {
 }
 
 @set_magic_quotes_runtime(0);
+
 if (@get_magic_quotes_gpc()) {
 	magic_unquote('_GET');
 	magic_unquote('_POST');
 	magic_unquote('_COOKIE');
+
+	// si register_globals est "on" mais ini_get desactive, on a un souci ;
+	// il faut alors mettre la ligne suivante dans un .htaccess a la racine
+	//   php_value magic_quotes_gpc 0
+	// ou commenter le if() ci-dessous
+	if (@ini_get('register_globals'))
+		magic_unquote('GLOBALS');
 }
+
 
 //
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
