@@ -167,10 +167,7 @@ function phraser_champs($texte,$ligne,$result) {
 				$champ->apres[0]->texte = substr($suite,0,$n);
 			}
 		} else $texte = $suite;
-		if ($champ->nom_champ == 'EMBED_DOCUMENT') {
-			include_spip('public/normaliser');
-			phraser_vieux_emb($champ);
-		}
+		phraser_vieux($champ);
 		$result[] = $champ;
 	  } else {
 	    // faux champ
@@ -295,7 +292,7 @@ function phraser_arg(&$texte, $sep, $result, &$pointeur_champ) {
 		      $args = $champ->apres ;
 		      $champ->apres = '';
 		    }
-
+		    phraser_vieux($champ);
 		    if ($par==')') $args = substr($args,1);
 		    $collecte[] = $champ;
 		    $result[] = $champ;
@@ -356,21 +353,7 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			$champ->etoile = $match[6];
 			// phraser_args indiquera ou commence apres
 			$result = phraser_args($match[7], ")", $sep, $result, $champ);
-			if (preg_match(",^LOGO_[A-Z]+,", $nom)
-			AND $champ->param) {
-				include_spip('public/normaliser');
-				phraser_vieux_logos($champ);
-			} elseif ($nom == 'EMBED_DOCUMENT') {
-				include_spip('public/normaliser');
-				phraser_vieux_emb($champ);
-			} elseif ($nom == 'FORMULAIRE_RECHERCHE'
-				AND $champ->param) {
-				include_spip('public/normaliser');
-				phraser_vieux_recherche($champ);
-			} elseif ($nom == 'EXPOSER') {
-				include_spip('public/normaliser');
-				phraser_vieux_exposer($champ);
-			}
+			phraser_vieux($champ);
 			$champ->avant =
 				phraser_champs_exterieurs($match[1],$n,$sep,$result);
 			$debut = substr($champ->apres,1);
@@ -397,6 +380,32 @@ function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
 			$texte = $x;
 		else
 			return phraser_champs_exterieurs($x, $ligne, $sep, $result);
+	}
+}
+
+function phraser_vieux(&$champ)
+{
+	$nom = $champ->nom_champ;
+	if ($nom == 'EMBED_DOCUMENT') {
+		include_spip('public/normaliser');
+		phraser_vieux_emb($champ);
+	} elseif ($nom == 'EXPOSER') {
+		include_spip('public/normaliser');
+		phraser_vieux_exposer($champ);
+	} elseif ($champ->param) {
+		if ($nom == 'FORMULAIRE_RECHERCHE') {
+			include_spip('public/normaliser');
+			phraser_vieux_recherche($champ);
+		} elseif (preg_match(",^LOGO_[A-Z]+,", $nom)) {
+			include_spip('public/normaliser');
+			phraser_vieux_logos($champ);
+		} elseif ($nom == 'MODELE') {
+			include_spip('public/normaliser');
+			phraser_vieux_modele($champ);
+		} elseif ($nom == 'INCLURE' OR $nom == 'INCLUDE') {
+			include_spip('public/normaliser');
+			phraser_vieux_inclu($champ);
+		}
 	}
 }
 
