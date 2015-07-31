@@ -20,22 +20,13 @@ function inc_informer_auteur_dist($id)
 	global $couleur_foncee,$spip_display,$spip_lang_right ;
 
 	include_spip('inc/presentation');
+	include_spip('inc/formater_auteur');
 
 	$res = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur = $id");
 	if ($row = spip_fetch_array($res)) {
 			$nom = typo(extraire_multi($row["nom"]));
 			$bio = propre($row["bio"]);
-			$mail = $row['email'];
-			if (!email_valide($mail))
-				$nom .= "(<span style='color:red'>"
-				. _T('info_email_invalide')
-				. '</span>)';
-			else $nom = "<a href='mailto:$mail' title=\""
-			  . _T('info_ecire_message_prive')
-			  . '">'
-			  . $nom
-			  . "</a>";
-
+			$mail = formater_auteur_mail($row['email']);
 			$nb = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_articles WHERE id_auteur=$id"));
 			if ($nb['n'] > 1)
 			$nb = $nb['n']."&nbsp;"._T('info_article_2');
@@ -65,7 +56,9 @@ function inc_informer_auteur_dist($id)
 	. generer_url_ecrire('auteur_infos', "id_auteur=$id&initial=-1")
 	. "'>"
 	. bonhomme_statut($row)
-	. "</a> <b>"
+	. "</a> "
+	. $mail
+	. " <b>"
 	. $nom
 	. "</b><br />"
 	. $nb

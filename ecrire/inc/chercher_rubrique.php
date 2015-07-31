@@ -219,13 +219,15 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 
 function construire_selecteur($url, $js, $idom, $name, $titre='', $id=0)
 {
+	$icone = ($idom == 'selection_auteur') ? 'message.gif' : 'loupe.png';
 	return 	"<table width='100%'><tr width='100%'><td width='45'><a	href='#'\nonclick=\""
 	.  $js
 	. "charger_node_url_si_vide('"
 	. $url
 	. "', this.parentNode.parentNode.parentNode.parentNode.nextSibling, this.nextSibling)\"><img src='"
 	. _DIR_IMG_PACK
-	. "loupe.png' style='vertical-align: middle;'/></a><img src='"
+	. $icone
+	. "' style='vertical-align: middle;'/></a><img src='"
 	. _DIR_IMG_PACK
 	. "searching.gif' id='img_"
 	.  $idom

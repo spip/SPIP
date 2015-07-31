@@ -38,16 +38,7 @@ function inc_formater_auteur_dist($id_auteur) {
 
 	if (($id_auteur == $connect_id_auteur) OR $row['parti'])
 		$vals[]= '&nbsp;';
-	else {
-		if ($row['email']) $href='mailto:' . $row['email'];
-		else $href = generer_url_ecrire("message_edit","new=oui&dest=$id_auteur&type=normal");
-
-		$vals[]= "<a href='$href' title=\""
-		  . _T('email')
-		  . '">'
-		  . http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7'", _T('info_envoyer_message_prive'))
-		  . '</a>';
-	}
+	else	$vals[]= formater_auteur_mail($row['email']);
 
 	if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
 		$bio_auteur = " title=\"$bio_auteur\"";
@@ -71,5 +62,19 @@ function inc_formater_auteur_dist($id_auteur) {
 	else $vals[] =  "&nbsp;";
 
 	return $vals;
+}
+
+function formater_auteur_mail($email)
+{
+	global $spip_lang_rtl;
+
+	if ($email) $href='mailto:' . $email;
+	else $href = generer_url_ecrire("message_edit","new=oui&dest=$id_auteur&type=normal");
+
+	return "<a href='$href' title=\""
+		  . _T('email')
+		  . '">'
+		. http_img_pack("m_envoi$spip_lang_rtl.gif", "m&gt;", "width='14' height='7'", _T('info_envoyer_message_prive'))
+		  . '</a>';
 }
 ?>
