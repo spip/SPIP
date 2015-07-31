@@ -210,18 +210,18 @@ function optimiser_base_disparus($attente = 86400) {
 	# les liens d'articles sur des auteurs effaces
 	$res = sql_select("L.id_auteur AS id",
 		      "spip_auteurs_articles AS L
-		        LEFT JOIN spip_auteurs AS auteurs
-		          ON L.id_auteur=auteurs.id_auteur",
-			"auteurs.id_auteur IS NULL");
+		        LEFT JOIN spip_auteurs AS A
+		          ON L.id_auteur=A.id_auteur",
+			"A.id_auteur IS NULL");
 
 	$n+= optimiser_sansref('spip_auteurs_articles', 'id_auteur', $res);
 
 	# les liens de messages sur des auteurs effaces
-	$res = sql_select("auteurs_messages.id_auteur AS id",
-		      "spip_auteurs_messages AS auteurs_messages
-		        LEFT JOIN spip_auteurs AS auteurs
-		          ON auteurs_messages.id_auteur=auteurs.id_auteur",
-			"auteurs.id_auteur IS NULL");
+	$res = sql_select("M.id_auteur AS id",
+		      "spip_auteurs_messages AS M
+		        LEFT JOIN spip_auteurs AS A
+		          ON M.id_auteur=A.id_auteur",
+			"A.id_auteur IS NULL");
 
 	$n+= optimiser_sansref('spip_auteurs_messages', 'id_auteur', $res);
 
@@ -235,12 +235,12 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= optimiser_sansref('spip_auteurs_rubriques', 'id_rubrique', $res);
 
 	# effacer les auteurs poubelle qui ne sont lies a aucun article
-	$res = sql_select("auteurs.id_auteur AS id",
-		      	"spip_auteurs AS auteurs
+	$res = sql_select("A.id_auteur AS id",
+		      	"spip_auteurs AS A
 		      	LEFT JOIN spip_auteurs_articles AS L
-		          ON L.id_auteur=auteurs.id_auteur",
+		          ON L.id_auteur=A.id_auteur",
 			"L.id_auteur IS NULL
-		       	AND auteurs.statut='5poubelle' AND auteurs.maj < $mydate");
+		       	AND A.statut='5poubelle' AND A.maj < $mydate");
 
 	$n+= optimiser_sansref('spip_auteurs', 'id_auteur', $res);
 
@@ -278,11 +278,11 @@ function optimiser_base_disparus($attente = 86400) {
 	//
 
 	# supprimer les messages lies a un auteur disparu
-	$res = sql_select("messages.id_message AS id",
-		      "spip_messages AS messages
-		        LEFT JOIN spip_auteurs AS auteurs
-		          ON auteurs.id_auteur=messages.id_auteur",
-			"auteurs.id_auteur IS NULL");
+	$res = sql_select("M.id_message AS id",
+		      "spip_messages AS M
+		        LEFT JOIN spip_auteurs AS A
+		          ON A.id_auteur=M.id_auteur",
+			"A.id_auteur IS NULL");
 
 	$n+= optimiser_sansref('spip_messages', 'id_message', $res);
 
@@ -294,20 +294,20 @@ function optimiser_base_disparus($attente = 86400) {
 
 
 	# les liens mots-articles sur des mots effaces
-	$res = sql_select("M.id_mot AS id",
-		        "spip_mots_articles AS M
-		        LEFT JOIN spip_mots AS mots
-		          ON M.id_mot=mots.id_mot",
-			"mots.id_mot IS NULL");
+	$res = sql_select("A.id_mot AS id",
+		        "spip_mots_articles AS A
+		        LEFT JOIN spip_mots AS M
+		          ON A.id_mot=M.id_mot",
+			"M.id_mot IS NULL");
 
 	$n+= optimiser_sansref('spip_mots_articles', 'id_mot', $res);
 
 	# les liens mots-breves sur des mots effaces
-	$res = sql_select("M.id_mot AS id",
-		        "spip_mots_breves AS M
-		        LEFT JOIN spip_mots AS mots
-		          ON M.id_mot=mots.id_mot",
-			"mots.id_mot IS NULL");
+	$res = sql_select("B.id_mot AS id",
+		        "spip_mots_breves AS B
+		        LEFT JOIN spip_mots AS M
+		          ON B.id_mot=M.id_mot",
+			"M.id_mot IS NULL");
 
 	$n+= optimiser_sansref('spip_mots_breves', 'id_mot', $res);
 
