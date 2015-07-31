@@ -414,14 +414,12 @@ function inc_ls_to_array_dist($u) {
 	$glob = charger_fonction('glob_to_array', 'inc');
 	$a = $glob($u);
 	foreach ($a as &$v) {
-		$b = @stat($v);
-		if (is_array($b))
-			foreach ($b as $k => $ignore)
-				if (is_numeric($k)) unset($b[$k]);
-		$v = array_merge(array(
-			'file' => $v,
-			'basename' => basename($v)
-			),
+		$b = (array) @stat($v);
+		foreach ($b as $k => $ignore)
+			if (is_numeric($k)) unset($b[$k]);
+		$b['file'] = basename($v);
+		$v = array_merge(
+			pathinfo($v),
 			$b
 		);
 	}
