@@ -49,18 +49,15 @@ function configuration_relayeur_dist($retour_proxy)
 		}
 	}
 
-	$encours = $http_proxy ? $http_proxy : "http://proxy:8080";
-	$exemple = $http_noproxy ? $http_noproxy : "127.0.0.1 .mondomaine.net";
+	$encours = "<label for='http_proxy'>" . ($http_proxy ? $http_proxy : "http://proxy:8080") . '</label>' ;
+	$exemple = "<label for='http_noproxy'>" . ($http_noproxy ? $http_noproxy : "127.0.0.1 .mondomaine.net") . "</label>";
 	$res = "\n<div class='verdana2'>"
-	  . "<label for='http_proxy'>"
 	  . propre(_T('texte_proxy', array('proxy_en_cours' => "<b><tt><html>$encours</html></tt></b>")))
-	  . "</label></div>"
+	  . "</div>"
 	  . "\n<div class='verdana2'>"
 	  . "<input type='text' name='http_proxy' id='http_proxy' size='40' class='forml' value='$http_proxy' />"
 	  . "<br />"
-	  . "<label for='http_noproxy'>"
 	  . propre(_T('pas_de_proxy_pour', array('exemple' => "<b><tt><html>$exemple</html></tt></b>")))
-	  . "</label>"
 	  . "<input type='text' name='http_noproxy' id='http_noproxy' size='40' class='forml' value='$http_noproxy' />"
 	  . $res
 	  . "</div>";

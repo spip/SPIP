@@ -168,7 +168,6 @@ function format_choisi()
 
 // http://doc.spip.org/@afficher_choix_vignette
 function afficher_choix_vignette($process) {
-	static $cpt_cellule = 0;
 
 	//global $taille_preview;
 	$taille_preview = 120;
@@ -179,20 +178,12 @@ function afficher_choix_vignette($process) {
 		
 	} */
 
-	if($cpt_cellule>=3) {
-		$cpt_cellule = 0;
-		$retour .= "\n</tr><tr>\n";
-	}
-	else {
-		$cpt_cellule += 1;
-		$retour = '';
-	}
 
 	$class = '';
 	if ($process == $GLOBALS['meta']['image_process']) {
 	  $class = " selected";
 	} 
-	return 	$retour . "\n<div class='vignette_reducteur$class'"
+	return "\n<div class='vignette_reducteur$class'"
 	. "><a href='"
 	. generer_url_ecrire("config_fonctions", "image_process=$process")
 	. "'><img src='"

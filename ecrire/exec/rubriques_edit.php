@@ -125,25 +125,31 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 		$scb = _T('avis_deplacement_rubrique',
 			array('contient_breves' => $contient_breves,
 			      'scb' => $scb));
-		$form .= "<div><span class='spip_small'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;" . $scb . "</span></label></div>\n";
+		$form .= "\n<div class='spip_small'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;" . $scb . "</label></div>\n";
 	} else
 		$form .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 
 	$form .= fin_cadre_couleur(true)
-	. "<br />";
+	. "<br />\n";
 
 	if (($GLOBALS['meta']['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
-		$form .= "<b>"._T('texte_descriptif_rapide')."</b><br />"
-			. "<label for='descriptif'>" . _T('entree_contenu_rubrique')."<label><br />"
+		$form .= "<b>"
+			. _T('texte_descriptif_rapide')
+			."</b><br />\n"
+			. "<label for='descriptif'>" 
+			. _T('entree_contenu_rubrique')
+			. "</label><br />"
 			. "<textarea name='descriptif' id='descriptif' class='forml' rows='4' cols='40'>"
 			. entites_html($descriptif)
 			. "</textarea>\n";
 	}
 
 	if (($GLOBALS['meta']['rubriques_texte'] == "oui") OR strlen($texte)) {
-		$form .= "<label for='texte'><b>"._T('info_texte_explicatif')."</label></b>"
+		$form .= "<label for='texte'><b>"
+		. _T('info_texte_explicatif')
+		. "</b></label>"
 		. aide ("raccourcis")
-		. "<br /><textarea name='texte' id='texte' rows='15' class='formo' cols='40'>"
+		. "\n<br /><textarea name='texte' id='texte' rows='15' class='formo' cols='40'>"
 		. entites_html($texte)
 		. "</textarea>\n";
 	}
@@ -155,11 +161,11 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 
 	$form .= "\n<div style='text-align: right'><input type='submit' value='"
 	. _T('bouton_enregistrer')
-	. "' class='fondo' />\n</p>";
+	. "' class='fondo' /></div>";
 
 	echo redirige_action_auteur("editer_rubrique", $id_rubrique ? $id_rubrique : 'oui', 'naviguer', '', $form, " method='post'");
 
-	echo fin_cadre_formulaire(true);
+	echo "\n", fin_cadre_formulaire(true);
 
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'rubriques_edit','id_rubrique'=>$id_rubrique),'data'=>''));	  
 

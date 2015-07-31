@@ -98,7 +98,7 @@ function exec_mots_type_dist()
 	  . entites_html($descriptif)
 	  . "</textarea>\n";
 
-	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b><label><br />";
+	$res .= "<br /><label for='texte'><b>"._T('info_texte_explicatif')."</b></label><br />";
 	$res .= "<textarea name='texte' id='texte' rows='8' class='forml' cols='40'>";
 	$res .= entites_html($texte);
 	$res .= "</textarea>\n";
