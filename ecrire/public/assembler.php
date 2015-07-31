@@ -206,7 +206,8 @@ function inclure_page($fond, $contexte_inclus) {
 	}
 
 	$fcache = charger_fonction('cacher', 'public');
-	// Garnir ces quatre parametres avec les infos sur le cache
+	// Garnir ces quatre parametres avec les infos sur le cache :
+	// emplacement, validite, et, s'il est valide, contenu & age
 	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
 	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
@@ -216,20 +217,23 @@ function inclure_page($fond, $contexte_inclus) {
 	if (!isset($contexte_inclus['date_redac']))
 		$contexte_inclus['date_redac'] = $contexte_inclus['date'];
 
-	// On va ensuite chercher la page
+	// Si use_cache vaut 0, la page a ete tiree du cache et se trouve dans $page
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
-	} else {
+	}
+	// sinon on la calcule
+	else {
 		$f = charger_fonction('parametrer', 'public');
 		$page = $f($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
-		if ($chemin_cache)
-			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastmodified);
+		// et on l'enregistre sur le disque
+		if ($chemin_cache
+		AND $page['entetes']['X-Spip-Cache'] > 0)
+			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page,
+				$lastmodified);
 	}
 	if($lang_select)
 		lang_dselect();
-
-#print_r($contexte_inclus);print_r($page);exit;
 
 	return $page;
 }

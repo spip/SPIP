@@ -319,14 +319,25 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	$f = charger_fonction('composer', 'public');
 
 	if ($fonc = $f($skel, $mime_type, $gram, $sourcefile)){
-		spip_timer('calcul page');
+		spip_timer($a = 'calcul page '.rand(0,1000));
 		$page = $fonc(array('cache' => $cache), array($local));
+
+		// spip_log: un joli contexte
+		$info = array();
+		foreach($local as $var => $val)
+			if($val)
+				$info[] = "$var='$val'";
 		spip_log("calcul ("
-			.spip_timer('calcul page')
-			.") [$skel] ".
-			 join(", ", $local)
+			.spip_timer($a)
+			.") [$skel] "
+			. join(', ',$info)
 			.' ('.strlen($page['texte']).' octets)'
 		);
+
+		// Si #CACHE{} n'etait pas la, le mettre a $delais
+		if (!isset($page['entetes']['X-Spip-Cache']))
+			$page['entetes']['X-Spip-Cache'] = $GLOBALS['delais'];
+
 	} else
 		$page = array();
 
@@ -337,4 +348,5 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	$page['signal'] = signaler_squelette($local);
 	return $page;
 }
+
 ?>
