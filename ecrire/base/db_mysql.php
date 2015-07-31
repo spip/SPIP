@@ -116,7 +116,7 @@ function spip_mysql_timing($m1, $m2, $query, $result)
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
 			   $sousrequete, $having,
-			   $table, $id, $serveur) {
+			   $table, $id, $server) {
 
 	$query = (!is_array($select) ? $select : join(", ", $select)) .
 		(!$from ? '' :
@@ -201,7 +201,7 @@ function traite_query($query) {
 // et comportant les identifants de connexion SQL
 // db_ok est globale, pour test par base_db_mysql_dist ci-dessus
 // Ce serait plus propre de reduire FILE_CONNECT a un fichier de donnees
-// et et d'appeler cette fonction a partir de base_db_mysql_dist.
+// et d'appeler cette fonction a partir de base_db_mysql_dist.
 
 // http://doc.spip.org/@spip_connect_db
 function spip_connect_db($host, $port, $login, $pass, $db) {
