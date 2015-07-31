@@ -41,7 +41,7 @@ function action_editer_signatures_post($r)
 		if ($row['statut']=='poubelle')
 			sql_updateq("spip_signatures", array("statut" => 'publie'), "id_signature=$id");
 		else {
-			include_spip('balise/formulaire_signature');
+			include_spip('formulaires/signature');
 			include_spip('inc/texte');
 			
 			$id_article = $row['id_article'];
