@@ -27,6 +27,7 @@ function optimiser_base($attente = 86400) {
 	// MySQL
 	//
 
+// http://doc.spip.org/@optimiser_base_une_table
 function optimiser_base_une_table() {
 
 	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
@@ -60,6 +61,7 @@ function optimiser_base_une_table() {
 // Utilitaire exploitant le SELECT et appliquant DELETE
 // L'index du SELECT doit s'appeler "id"
 
+// http://doc.spip.org/@optimiser_sansref
 function optimiser_sansref($table, $id, $sel)
 {
 	$in = array();
@@ -78,6 +80,7 @@ function optimiser_sansref($table, $id, $sel)
 // Maintenant que MySQL 5 a des Cascades on pourrait faire autrement
 // mais on garde la compatibilite avec les versions precedentes.
 
+// http://doc.spip.org/@optimiser_base_disparus
 function optimiser_base_disparus($attente = 86400) {
 
 	# format = 20060610110141, si on veut forcer une optimisation tout de suite
@@ -394,6 +397,7 @@ function optimiser_base_disparus($attente = 86400) {
 }
 
 
+// http://doc.spip.org/@optimiser_base_indexation
 function optimiser_base_indexation($attente) {
 	// les objets inutiles
 	include_spip('inc/indexation');
