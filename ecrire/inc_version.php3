@@ -106,6 +106,11 @@ $dossier_squelettes = "";
 // navigateur l'accepte (valable pour apache 1.3 seulement) ?
 $auto_compress = true;
 
+// creation des vignettes avec image magick en ligne de commande : mettre
+// le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
+// Note : preferer GD2 ou le module php imagick s'ils sont disponibles
+$convert_command = 'convert';
+
 // faut-il loger les infos de debug dans data/spip.log ?  (peu utilise)
 $debug = false;
 
@@ -208,11 +213,12 @@ $flag_sapi_name = function_exists("php_sapi_name");
 $flag_utf8_decode = function_exists("utf8_decode");
 $flag_ldap = function_exists("ldap_connect");
 $flag_flock = function_exists("flock");
-$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor") && function_exists("gd_info");
-$flag_ImageCopyResampled = function_exists("ImageCopyResampled") && function_exists("gd_info");
+$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor");
+$flag_ImageCopyResampled = function_exists("ImageCopyResampled");
 $flag_ImageGif = function_exists("ImageGif");
 $flag_ImageJpeg = function_exists("ImageJpeg");
 $flag_ImagePng = function_exists("ImagePng");
+$flag_imagick = function_exists("imagick_create");	// http://pear.sourceforge.net/en/packages.imagick.php
 $flag_multibyte = function_exists("mb_encode_mimeheader");
 $flag_iconv = function_exists("iconv");
 $flag_strtotime = function_exists("strtotime");
