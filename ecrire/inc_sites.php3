@@ -663,7 +663,7 @@ function analyser_site($url) {
 		include_ecrire('inc_distant');
 		include_ecrire('feedfinder');
 		$feeds = get_feed_from_url($url, $texte);
-		if (count($feeds>1)) {
+		if (count($feeds)>1) {
 			spip_log("feedfinder.php :\n".join("\n", $feeds));
 			$result['url_syndic'] = "select: ".join(' ',$feeds);
 		} else
