@@ -538,10 +538,11 @@ function calculer_select ($select = array(), $from = array(),
 	list($where_simples,$where_sous) = trouver_sous_requetes($where);
 	//var_dump($where_sous);
 	foreach($where_sous as $k=>$w) {
+		$menage = true;
 		// on recupere la sous requete 
 		$sous = match_self($w);
 		array_push($where_simples,$sous[2]);
-		$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,$where_simples,$join,$groupby,$orderby,'',$having,$table,$id,$serveur,false).")");
+		$where[$k] = remplace_sous_requete($w,"(".calculer_select($sous[1],$from,$from_type,array($sous[2],'0=0'),$join,$groupby,$orderby,'',$having,$table,$id,$serveur,false).")");
 		array_pop($where_simples);
 	}
 	//var_dump($where);
@@ -567,7 +568,7 @@ function calculer_select ($select = array(), $from = array(),
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
-		OR calculer_jointnul($cle, $where)) {
+		OR calculer_jointnul($cle, $where_simples)) {
 			$sfrom = "\n\t".(isset($from_type[$cle])?$from_type[$cle]:"INNER")." JOIN " . $from[$cle] . " AS $cle ON ($cle.$c = $t.$c)" . $sfrom;
 			$equiv[]= $c;
 		} else { unset($join[$k]);}
