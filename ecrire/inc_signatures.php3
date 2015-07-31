@@ -103,17 +103,16 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 	}
 	else $script .= '?';
 
-	$res = spip_query("SELECT COUNT(*) AS cnt FROM spip_signatures WHERE $where AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)");
+	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)");
 
-	$total = ($row = spip_fetch_array($res)) ? $row['cnt'] : 0;
-
-	if ($total > $limit) {
-		for ($i = 0; $i < $total; $i += $limit){
-			if ($i > 0) echo " | ";
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>$i</B></FONT>";
+	while ($row = spip_fetch_array($res)) {
+		if($c++%10==0) {	
+			if ($c > 1) echo " | ";
+			$date = entites_html(affdate_court($row['date_time']));
+			if ($c == ($debut+1))
+				echo "<FONT SIZE=3><B>$c</B></FONT>";
 			else
-			  echo "<A HREF='$script","debut=$i'>$i</A>";
+			  echo "<A alt='$date' title='$date' HREF='$script","debut=".($c-1)."'>$c</A>";
 		}
 	}
 	return $where;
