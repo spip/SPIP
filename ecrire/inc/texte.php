@@ -835,7 +835,7 @@ function traiter_tableau($bloc) {
 //
 // http://doc.spip.org/@traiter_listes
 function traiter_listes ($texte) {
-	global $class_spip;
+	global $class_spip, $class_spip_plus;
 	$parags = preg_split(",\n[[:space:]]*\n,S", $texte);
 	$texte ='';
 
@@ -882,7 +882,7 @@ function traiter_listes ($texte) {
 				while ($niveau < $profond) {
 					if ($niveau == 0) $ajout .= "\n\n";
 					$niveau ++;
-					$ajout .= "<$type$class_spip>";
+					$ajout .= "<$type$class_spip_plus>";
 					$pile_type[$niveau] = "</$type>";
 				}
 
@@ -1145,8 +1145,8 @@ function traiter_raccourcis($letexte) {
 
 	// Verifier les variables de personnalisation
 	if (!$tester_variables++) {
-		// class_spip : savoir si on veut class="spip" sur p, i, strong & listes
-		// class_spip_plus : class="spip" sur les h3, hr, quote, tables...
+		// class_spip : savoir si on veut class="spip" sur p i strong & li
+		// class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
 		// la difference c'est que des css specifiques existent pour les seconds
 		tester_variable('class_spip', '');  /*' class="spip"'*/
 		tester_variable('class_spip_plus', ' class="spip"');
