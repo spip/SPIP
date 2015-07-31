@@ -100,14 +100,6 @@ $cookie_prefix = "spip";
 // (a modifier si l'on veut passer rapidement d'un jeu de squelettes a un autre)
 $dossier_squelettes = "";
 
-// faut-il autoriser SPIP a compresser les pages a la volee quand le
-// navigateur l'accepte (valable pour apache >= 1.3 seulement) ?
-// du point de vue d'un webmestre : oui pour sa bande passante
-// du point de vue de l'ecologie generale du serveur : il faut s'en remettre a la config apache
-// true permet au webmestre de configurer dans le configurateur
-// false force a non sans permettre de l'activer
-$auto_compress = true;
-
 // Pour le javascript, trois modes : parano (-1), prive (0), ok (1)
 // parano le refuse partout, ok l'accepte partout
 // le mode par defaut le signale en rouge dans l'espace prive
@@ -424,20 +416,19 @@ AND $flag_ob
 AND strlen(ob_get_contents())==0
 AND !headers_sent()) {
 	if (
-	($GLOBALS['auto_compress']!=false)# AND $GLOBALS['meta']['auto_compress']=='oui')
-	&& function_exists('ob_gzhandler')
+	$GLOBALS['meta']['auto_compress_http'] == 'oui'
 	// special bug de proxy
-	&& !(isset($_SERVER['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $_SERVER['HTTP_VIA']))
+	AND !(isset($_SERVER['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $_SERVER['HTTP_VIA']))
 	// special bug Netscape Win 4.0x
-	&& (strpos($_SERVER['HTTP_USER_AGENT'], 'Mozilla/4.0') === false)
+	AND (strpos($_SERVER['HTTP_USER_AGENT'], 'Mozilla/4.0') === false)
 	// special bug Apache2x
 	#&& !preg_match(",Apache(-[^ ]+)?/2,i", $_SERVER['SERVER_SOFTWARE'])
 	// test suspendu: http://article.gmane.org/gmane.comp.web.spip.devel/32038/
 	#&& !($GLOBALS['flag_sapi_name'] AND preg_match(",^apache2,", @php_sapi_name()))
 	// si la compression est deja commencee, stop
-	&& !@ini_get("zlib.output_compression")
-	&& !@ini_get("output_handler")
-	&& !isset($_GET['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
+	# && !@ini_get("zlib.output_compression")
+	AND !@ini_get("output_handler")
+	AND !isset($_GET['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
 	)
 		ob_start('ob_gzhandler');
 }

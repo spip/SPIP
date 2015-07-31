@@ -2358,15 +2358,18 @@ function filtre_cache_static($scripts,$type='js'){
 	return array($nom, "<!-- $comms -->\n");
 }
 
-// http://doc.spip.org/@compacte_head
-function compacte_head($flux){
+
+// Appelee par compacte_head() si le webmestre le desire, cette fonction
+// compacte les scripts js dans un fichier statique pose dans local/
+// en entree : un <head> html.
+// http://doc.spip.org/@compacte_head_js
+function compacte_head_js($flux) {
 	$url_base = url_de_base();
 	$url_page = substr(generer_url_public('A'), 0, -1);
 	$dir = preg_quote($url_page,',').'|'.preg_quote(preg_replace(",^$url_base,",_DIR_RACINE,$url_page),',');
 
-	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
-	// rechercher les js, les agglomerer et les compacter, et mettre le tout dans un cache statique
 	$scripts = array();
+	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
 	foreach (extraire_balises($flux_nocomment,'script') as $s) {
 		if (extraire_attribut($s, 'type') === 'text/javascript'
 		AND $src = extraire_attribut($s, 'src')
@@ -2393,8 +2396,20 @@ function compacte_head($flux){
 		$flux = str_replace($scripts,"",$flux);
 	}
 
-	// rechercher les css, les agglomerer et les compacter, par type de media
+	return $flux;
+}
+
+// Appelee par compacte_head() si le webmestre le desire, cette fonction
+// compacte les feuilles de style css dans un fichier statique pose dans local/
+// en entree : un <head> html.
+// http://doc.spip.org/@compacte_head_css
+function compacte_head_css($flux) {
+	$url_base = url_de_base();
+	$url_page = substr(generer_url_public('A'), 0, -1);
+	$dir = preg_quote($url_page,',').'|'.preg_quote(preg_replace(",^$url_base,",_DIR_RACINE,$url_page),',');
+
 	$css = array();
+	$flux_nocomment = preg_replace(",<!--.*-->,Uims","",$flux);
 	foreach (extraire_balises($flux_nocomment, 'link') as $s) {
 		if (extraire_attribut($s, 'rel') === 'stylesheet'
 		AND (!($type = extraire_attribut($s, 'type'))
@@ -2433,6 +2448,17 @@ function compacte_head($flux){
 		}
 	}
 
+	return $flux;
+}
+
+// Cette fonction verifie les reglages du site et traite le compactage
+// des css et/ou js d'un <head>
+// http://doc.spip.org/@compacte_head
+function compacte_head($flux){
+	if ($GLOBALS['meta']['auto_compress_css'] == 'oui')
+		$flux = compacte_head_css($flux);
+	if ($GLOBALS['meta']['auto_compress_js'] == 'oui')
+		$flux = compacte_head_js($flux);
 	return $flux;
 }
 
