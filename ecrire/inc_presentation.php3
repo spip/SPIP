@@ -1536,15 +1536,25 @@ function debut_droite() {
 function fin_html() {
 	global $spip_version_affichee;
 ?>
-<p align='right'><font face="Verdana, Arial, Helvetica, sans-serif" size='2'>
+<blockquote><p>&nbsp;</p>
+<div align='right'><font face="Verdana, Arial, Helvetica, sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>.</p>
-<?php if ($GLOBALS['spip_session']) {
+est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
+
+<?php
+if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
+	echo "<br>Les icones de l'interface sont distribu&eacute;es en GPL par <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>";
+}
+?>
+</div></blockquote>
+<?php 
+if ($GLOBALS['spip_session']) {
 	echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
 	echo "<script type='text/javascript'><!-- \n";
 	echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";
 	echo "// --></script>\n";
-} ?></body></html>
+} ?>
+</body></html>
 <?php
 	flush();
 }
