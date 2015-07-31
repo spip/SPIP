@@ -106,7 +106,7 @@ function inc_documenter_dist(
 			. "</div>\n";
 		}
 		$head .= debut_block_depliable(true,"portfolio_$ancre");
-		$pied = fin_block();
+		$pied = fin_block().fin_cadre();
 	}
 
 	$res = $head

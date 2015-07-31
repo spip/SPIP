@@ -151,7 +151,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	. afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra)
 
 	. (!$flag_editable ? ''
-	   :  (bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right') . "<br class='nettoyeur'>"))
+	   :  (bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", '', 'right') . "<br class='nettoyeur' />"))
 	. (($spip_display == 4) ? ''
 	 : articles_documents($flag_editable, 'article', $id_article))
 
@@ -383,7 +383,7 @@ global $id_article;
 		if (strlen($texte) > 0) {
 			$res .= "\n<div  dir='$lang_dir' class='crayon article-texte-$id_article'>"
 			.  propre($texte)
-			.  "<br style='clear: both;' />"
+			.  "<div class='nettoyeur'></div>"
 			.  "</div>";
 		}
 

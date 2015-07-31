@@ -52,7 +52,7 @@ function debut_block_depliable($deplie,$id=""){
 }
 // http://doc.spip.org/@fin_block
 function fin_block() {
-	return "<div class='nettoyeur' /></div></div>";
+	return "<div class='nettoyeur'></div>\n</div>";
 }
 // $texte : texte du bouton
 // $deplie : true (deplie) ou false (plie) ou -1 (inactif) ou 'incertain' pour que le bouton s'auto init au chargement de la page 
