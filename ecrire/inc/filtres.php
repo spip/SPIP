@@ -2567,19 +2567,35 @@ function tri_protege_champ($t){
  * pour la clause order
  * 'multi xxx' devient simplement 'multi' qui est calcule dans le select
  * @param string $t
+ * @param array $from
  * @return string
  */
-function tri_champ_order($t){
-	if (strncmp($t,'num ',4)==0){
-		$t = substr($t,4);
-		$t = preg_replace(',\s,','',$t);
-		$t = "0+$t";
-		return $t;
-	}
-	elseif(strncmp($t,'multi ',6)==0){
+function tri_champ_order($t, $from=null){
+	if(strncmp($t,'multi ',6)==0){
 		return "multi";
 	}
-	return preg_replace(',\s,','',$t);
+
+	$champ = $t;
+
+	if (strncmp($t,'num ',4)==0)
+		$champ = substr($t,4);
+	// enlever les autres espaces non evacues par tri_protege_champ
+	$champ = preg_replace(',\s,','',$champ);
+
+	if (is_array($from)){
+		$trouver_table = charger_fonction('trouver_table','base');
+		foreach($from as $idt=>$table_sql){
+			if ($desc = $trouver_table($table_sql)
+				AND isset($desc['field'][$champ])){
+				$champ = "$idt.$champ";
+				break;
+			}
+		}
+	}
+	if (strncmp($t,'num ',4)==0)
+		return "0+$champ";
+	else
+		return $champ;
 }
 
 /**
