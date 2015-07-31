@@ -325,7 +325,6 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'icone_brouteur' => 'Navegaci&oacute; r&agrave;pida',
 'icone_configuration_site' => 'Configuraci&oacute;',
 'icone_configurer_site' => 'Configurar el vostre lloc',
-'icone_creer_mot_cle' => 'Crear una nova paraula clau i lligar-la a aquest article',
 'icone_creer_nouvel_auteur' => 'Crear un nou autor o autora',
 'icone_creer_rubrique' => 'Crear una secci&oacute;',
 'icone_creer_sous_rubrique' => 'Crear una subsecci&oacute;',

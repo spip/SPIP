@@ -328,7 +328,6 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'icone_brouteur' => 'Menu podr&#281;czne',
 'icone_configuration_site' => 'Konfiguracja',
 'icone_configurer_site' => 'Konfiguruj swoj&#261; stron&#281;',
-'icone_creer_mot_cle' => 'Stw&oacute;rz nowe s&#322;owo kluczowe i skojarz je z tym artyku&#322;em',
 'icone_creer_nouvel_auteur' => 'Utw&oacute;rz nowego autora',
 'icone_creer_rubrique' => 'Utw&oacute;rz dzia&#322;',
 'icone_creer_sous_rubrique' => 'Utw&oacute;rz poddzia&#322;',

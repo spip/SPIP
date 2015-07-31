@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Errore: vedi sopra',
 'avis_erreur_connexion' => 'Errore di connessione',
 'avis_erreur_cookie' => 'problema di cookie',
-'avis_erreur_fonction_contexte' => 'Errore di programmazione. Questa funzione non avrebbe dovuto essere chiamata in questo contesto.',
+'avis_erreur_fonction_contexte' => 'Errore di programmazione. Questa funzione non deve essere chiamata in questo contesto.',
 'avis_erreur_mysql' => 'Errore MySQL ',
 'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
 'avis_erreur_visiteur' => 'Problema di accesso all\'area riservata',
@@ -193,15 +193,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' per iniziare realmente l\'installazione',
 'dirs_preliminaire' => 'Prima di iniziare: <b>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => 'Problema nei diritti di accesso',
-'dirs_repertoires_absents' => '<b>Le seguenti cartelle non sono state trovate: <ul>@bad_dirs@.</ul> </b>
-  <p />Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
+'dirs_repertoires_absents' => '<p><b>Le seguenti cartelle non sono state trovate: </b></p><ul>@bad_dirs@.</ul>
+  <p>Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
   Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
-  qui sopra; se non &egrave; cos&igrave;, rinomina le cartelle utilizzando il tuo software FTP.
-  <p />Una volta effettuata questa correzione, si potr&agrave;',
-'dirs_repertoires_suivants' => '<b>Le seguenti cartelle non sono accessibili in scrittura: <ul>@bad_dirs@.</ul></b>
-<p />Utilizzare un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
-di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.
-<p />Una volta attribuiti i permessi, si potr&agrave; ',
+  qui sopra; se non &egrave; cos&igrave;, rinominare le cartelle utilizzando il software FTP.
+  <p>Una volta effettuata questa correzione, si potr&agrave;',
+'dirs_repertoires_suivants' => '<p><b>Le seguenti cartelle non sono accessibili in scrittura:</b></p> <ul>@bad_dirs@</ul>
+<p>Per risolvere il problema, utilizzare un client FTP per impostare i diritti di accesso
+di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida d\'installazione.</p>
+<p>Una volta attribuiti i permessi, si potr&agrave; ',
 'double_occurrence' => 'Doppia occorrenza',
 
 
@@ -298,7 +298,7 @@ Grazie per la partecipazione',
 'forum_non_inscrit' => 'Non sei iscritta, oppure l\'indirizzo o la password inseriti non sono corretti.',
 'forum_page_url' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web o ad una pagina contenente maggiori informazioni, &egrave; possibile indicare di seguito il titolo della pagina ed il suo indirizzo URL.)',
 'forum_par_auteur' => 'di @auteur@',
-'forum_poste_par' => 'Messaggio inviato da @auteur@ in calce al tuo articolo.',
+'forum_poste_par' => 'Messaggio inviato da @parauteur@ in calce all\'articolo  &laquo; @titre@ &raquo;.',
 'forum_probleme_database' => 'Problema nel database. Il tuo messaggio non &egrave; stato registrato.',
 'forum_qui_etes_vous' => '<b>Chi sei?</b> (opzionale)',
 'forum_texte' => 'Testo del messaggio:',
@@ -329,7 +329,6 @@ che ti &egrave; stato fornito.  Se non sei registrata, devi',
 'icone_brouteur' => 'Navigazione rapida',
 'icone_configuration_site' => 'Configurazione del sito',
 'icone_configurer_site' => 'Configura il sito',
-'icone_creer_mot_cle' => 'Crea una nuova parola chiave e collegala a questo articolo',
 'icone_creer_nouvel_auteur' => 'Crea una nuova autrice',
 'icone_creer_rubrique' => 'Crea una rubrica',
 'icone_creer_sous_rubrique' => 'Crea una sottorubrica',
@@ -519,7 +518,7 @@ o contatta il tuo hoster.</font>',
 'info_sites_referencer' => 'Inserisci un sito in repertorio',
 'info_supprimer_vignette' => 'Cancella l\'immagine',
 'info_symbole_bleu' => 'Il simbolo <b>blu</b> indica un <b>memo</b>: cio&egrave; un messaggio ad uso personale.',
-'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutte le redattrici </b>: modificabile da tutte le amministratrici e visibile da tutte le redattrici.',
+'info_symbole_jaune' => 'Il simbolo <b>giallo</b> indica un <b>annuncio a tutte le redattrici</b>: modificabile da tutte le amministratrici e visibile da tutte le redattrici.',
 'info_symbole_vert' => 'Il simbolo <b>verde</b> indica i <b>messaggi scambiati con altre utenti  </b> del sito.',
 'info_syndication' => 'syndication:',
 'info_syndication_articles' => 'articolo/i',

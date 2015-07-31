@@ -328,7 +328,6 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'icone_calendrier_messagerie' => '-vid-',
 'icone_configuration_site' => 'Configurare',
 'icone_configurer_site' => 'Configura&#355;i-v&#259; site-ul',
-'icone_creer_mot_cle' => 'Crea&#355;i un nou cuv&acirc;nt-cheie &#351;i lega&#355;i-l de acest articol.',
 'icone_creer_nouvel_auteur' => 'Crea&#355;i un nou autor',
 'icone_creer_rubrique' => 'Crea&#355;i o rubric&#259;',
 'icone_creer_sous_rubrique' => 'Crea&#355;i o sub-rubric&#259;',

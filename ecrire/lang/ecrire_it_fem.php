@@ -30,7 +30,7 @@ rischio di distruzione del database, malfunzionamenti diversi del sito ecc.
 Non confermare questa richiesta d\'importazione!
 <p />Per ulteriori informazioni, vedere <A HREF=\'http://www.spip.net/it_article2827.html\'>
 la documentazione di SPIP</a>.',
-'avis_espace_interdit' => '<b>Area vietata</b><p />SPIP &egrave; gi&agrave; installato.</p>',
+'avis_espace_interdit' => '<MODIF><b>Area vietata</b><p />SPIP &egrave; gi&agrave; installato.</p>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
 disattivata per motivi sicurezza (verifica con l\'amministratrice di sistema).',
@@ -50,7 +50,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 
 
 // B
-'bouton_acces_ldap' => 'Aggiungi l\'accesso a LDAP >>',
+'bouton_acces_ldap' => '<MODIF>Aggiungi l\'accesso a LDAP >>',
 'bouton_ajouter' => 'Aggiungi',
 'bouton_ajouter_participant' => 'AGGIUNGI UNA UTENTE:',
 'bouton_annonce' => 'ANNUNCIO',
@@ -153,7 +153,7 @@ cancellarli successivamente).',
 'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell\'intero sito, qualche volta corrisponde a "localhost", altre volte invece non &egrave; necessario specificarlo.)',
 'entree_biographie' => 'La tua biografia in breve.',
 'entree_breve_publiee' => 'Questa breve deve essere pubblicata?',
-'entree_chemin_acces' => '<b>Inserire</b> il percorso d\'accesso:',
+'entree_chemin_acces' => '<MODIF><b>Inserire</b> il percorso d\'accesso:',
 'entree_cle_pgp' => 'Chiave PGP',
 'entree_contenu_rubrique' => '(Contenuto della rubrica in qualche parola)',
 'entree_description_site' => 'Descrizione del sito',
@@ -162,7 +162,7 @@ cancellarli successivamente).',
 Se non conosci queste informazioni, richiedile all\'amministratrice del sistema o della rete.',
 'entree_infos_perso' => 'Chi sei?',
 'entree_interieur_rubrique' => 'All\'interno della rubrica:',
-'entree_liens_sites' => '<b>Link ipertestuale</b> (riferimento, sito da visitare...)',
+'entree_liens_sites' => '<MODIF><b>Link ipertestuale</b> (riferimento, sito da visitare...)',
 'entree_login' => 'Login',
 'entree_login_connexion_1' => 'Il login di connessione',
 'entree_login_connexion_2' => '(Corrisponde a volte al login d\'accesso via FTP; in alcuni casi non occorre specificare nulla)',
@@ -179,7 +179,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'entree_port_annuaire' => 'Il numero di porta della rubrica',
 'entree_signature' => 'Firma',
 'entree_texte_breve' => 'Testo della breve',
-'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
+'entree_titre_obligatoire' => '<MODIF><b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
 'erreur_plugin_fichier_absent' => 'File non presente',
 'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
@@ -217,10 +217,14 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_creation_groupe_mots' => 'Crea un nuovo gruppo',
 'icone_creation_mots_cles' => 'Crea una nuova parola chiave',
 'icone_creer_auteur' => 'Crea una nuova autrice ed associala a questo articolo',
+'icone_creer_mot_cle' => 'Crea una nuova parola chiave e collegala a questo articolo',
+'icone_creer_mot_cle_breve' => 'Creare una nuova parola chiave e collegarla a questa breve',
+'icone_creer_mot_cle_rubrique' => 'Creare una nuova parola chiave e collegarla a questa rubrica',
+'icone_creer_mot_cle_site' => 'Creare una nuova parola chiave e collegarla a questo sito',
 'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
 'icone_ecrire_nouvel_article' => 'Le brevi contenute nella rubrica',
 'icone_envoyer_message' => 'Invia questo messaggio',
-'icone_evolution_visites' => 'Evoluzione delle visite<br />@visites@ visite',
+'icone_evolution_visites' => '<MODIF>Evoluzione delle visite<br />@visites@ visite',
 'icone_modif_groupe_mots' => 'Modifica questo gruppo',
 'icone_modifier_article' => 'Modifica l\'articolo',
 'icone_modifier_breve' => 'Modifica la breve',
@@ -247,7 +251,7 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'info_1_site' => '1 sito',
 'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetter&agrave;
 di passare facilmente dal sito pubblico all\'interfaccia privata.',
-'info_activer_forum_public' => '<i>Per attivare i forum pubblici, scegli il tipo
+'info_activer_forum_public' => '<MODIF><i>Per attivare i forum pubblici, scegli il tipo
 di moderazione predefinito:</i>',
 'info_admin_gere_rubriques' => 'Questa amministratrice gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questa amministratrice gestisce <b>tutte le rubriche</b>.',
@@ -300,9 +304,9 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_changer_nom_groupe' => 'Cambiare il nome di questo gruppo:',
 'info_chapeau' => 'Introduzione',
 'info_chapeau_2' => 'Introduzione:',
-'info_chemin_acces_1' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
+'info_chemin_acces_1' => '<MODIF>Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco</b>',
 'info_chemin_acces_2' => '&Egrave; necessario specificare il percorso per accedere ai dati nell\'elenco. Questa informazione &egrave; indispensabile al fine di leggere i profili utente in esso contenuti.',
-'info_chemin_acces_annuaire' => 'Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco',
+'info_chemin_acces_annuaire' => '<MODIF>Opzioni: <b>Percorso d\'accesso ai dati nell\'elenco',
 'info_choix_base' => 'Terza fase: ',
 'info_classement_1' => '<sup>o</sup> su @liste@',
 'info_classement_2' => '<sup>o</sup> su @liste@',
@@ -311,26 +315,26 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_config_suivi' => 'Se questo indirizzo corrisponde a una mailing-list, &egrave; possibile indicare qui sotto l\'indirizzo al quale i partecipanti del sito possono iscriversi. Questo indirizzo pu&ograve; essere una URL (per esempio la pagina di iscrizione via Web alla lista), oppure un indirizzo email che contiene un Oggetto specifico (per esempio: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => '&Egrave; possibile abbonarsi alla mailing-list di questo sito. Verranno spedite per email le notifiche degli articoli e delle brevi proposte per la pubblicazione.',
 'info_confirmer_passe' => 'Conferma la nuova password:',
-'info_connexion_base' => 'Seconda fase: <b>Prova di connessione al database</b>',
+'info_connexion_base' => '<MODIF>Seconda fase: <b>Prova di connessione al database</b>',
 'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</b><p /> &Egrave; possibile passare alla fase successiva.',
-'info_connexion_mysql' => 'Prima fase: <b>La connessione a MySQL</b>',
+'info_connexion_mysql' => '<MODIF>Prima fase: <b>La connessione a MySQL</b>',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_contact' => 'Contatti',
 'info_contenu_articles' => 'Contentuto degli articoli',
 'info_creation_mots_cles' => 'In questa pagina &egrave; possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
-'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
-'info_creation_tables' => 'Quarta fase: <b>Creazione delle tabelle nel database</b>',
-'info_creer_base' => '<b>Creare</b> un nuovo database:',
+'info_creation_rubrique' => '<MODIF>Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
+'info_creation_tables' => '<MODIF>Quarta fase: <b>Creazione delle tabelle nel database</b>',
+'info_creer_base' => '<MODIF><b>Creare</b> un nuovo database:',
 'info_dans_groupe' => 'Nel gruppo:',
 'info_dans_rubrique' => 'Nella rubrica:',
 'info_date_publication_anterieure' => 'Data di redazione anteriore:',
 'info_date_referencement' => 'DATA DI INSERIMENTO IN REPERTORIO DI QUESTO SITO:',
-'info_delet_mots_cles' => 'Hai chiesto
+'info_delet_mots_cles' => '<MODIF>Hai chiesto
 di eliminare la parola chiave
 <b>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
 <b>@texte_lie@</b>, &egrave; necessario confermare la decisione:',
-'info_derniere_etape' => 'Ultima fase: <b>Finito!',
+'info_derniere_etape' => '<MODIF>Ultima fase: <b>Finito!',
 'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito &egrave; stata effettuata il',
 'info_derniers_articles_publies' => 'I tuoi ultimi articoli pubblicati',
 'info_desactiver_forum_public' => 'Disattiva l\'uso dei forum pubblici.
@@ -377,8 +381,8 @@ le autrici eliminate, invece, da un cestino.',
 'info_gauche_numero_auteur' => 'AUTRICE NUMERO',
 'info_gauche_numero_breve' => 'BREVE NUMERO',
 'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco &egrave; valido per&ograve; solo per oggi essendo azzerato ogni 24 ore.',
-'info_gauche_suivi_forum' => 'La pagina di <i>monitoraggio dei forum</i> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi del forum pubblico di quest\'articolo, permettendone la gestione.',
-'info_gauche_suivi_forum_2' => 'La pagina di <i>monitoraggio dei forum</i> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi dei forum del sito, sia quelli del sito pubblico che quelli dell\'area riservata, permettendone la gestione.',
+'info_gauche_suivi_forum' => '<MODIF>La pagina di <i>monitoraggio dei forum</i> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi del forum pubblico di quest\'articolo, permettendone la gestione.',
+'info_gauche_suivi_forum_2' => '<MODIF>La pagina di <i>monitoraggio dei forum</i> &egrave; uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi dei forum del sito, sia quelli del sito pubblico che quelli dell\'area riservata, permettendone la gestione.',
 'info_gauche_visiteurs_enregistres' => 'Trovi qui i visitatori registrati allo spazio
 pubblico del sito (forum su abbonamento).',
 'info_generation_miniatures_images' => 'Generazione di thumbnail di immagini',
@@ -399,7 +403,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull\'immagine corrispondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ci&ograve; significa che la configurazione del server non permette l\'uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi al responsabile tecnico chiedendo di installare le estensioni "GD" o "Imagick".</i>',
 'info_images_auto' => 'Immagini elaborate automaticamente',
-'info_informations_personnelles' => 'Quinta fase: <b>Informazioni personali</b>',
+'info_informations_personnelles' => '<MODIF>Quinta fase: <b>Informazioni personali</b>',
 'info_inscription_automatique' => 'Iscrizione automatica di nuove redattrici',
 'info_jeu_caractere' => 'Set di caratteri del sito',
 'info_jours' => 'giorni',
@@ -426,7 +430,7 @@ dai loro server. In questo caso, le funzionalit&agrave; di SPIP di seguito ripor
 'info_message_technique' => 'Messaggio tecnico:',
 'info_messagerie_interne' => 'Sistema di messaggistica interna',
 'info_mise_a_niveau_base' => 'aggiornamento del database MySQL',
-'info_mise_a_niveau_base_2' => '{{Attenzione!}} &Egrave; stata installata una versione
+'info_mise_a_niveau_base_2' => '<MODIF>{{Attenzione!}} &Egrave; stata installata una versione
 dei file di SPIP {precedente} rispetto a quella che era in uso per questo sito:
 le informazioni contenute nel database sono probabilmente andate perse.<br />{{Reinstallare i file di SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo di funzionamento predefinito dei forum pubblici',
@@ -511,7 +515,7 @@ il database alla nuova versione di SPIP.',
 'info_publies' => 'I tuoi articoli pubblicati',
 'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all\'area riservata. Attivare la seguente funzionalit&agrave;:',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
-'info_question_inscription_nouveaux_redacteurs' => '&Egrave; possibile accettare le iscrizioni di nuove redattrici
+'info_question_inscription_nouveaux_redacteurs' => '<MODIF>&Egrave; possibile accettare le iscrizioni di nuove redattrici
 direttamente  dal sito pubblico. In questo caso, i visitatori potranno iscriversi
 grazie ad un modulo automatizzato e accedere allo spazio privato per proporre
 i propri articoli. <blockquote><i>Durante la fase d\'iscrizione,
@@ -537,8 +541,8 @@ impossibile.',
 'info_redirection' => 'Reindirizzamento',
 'info_referencer_doc_distant' => 'Mettere in repertorio un documento su Internet:',
 'info_refuses' => 'I tuoi articoli rifiutati',
-'info_reglage_ldap' => 'Opzioni: <b>Parametri per l\'importazione LDAP</b>',
-'info_renvoi_article' => '<b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
+'info_reglage_ldap' => '<MODIF>Opzioni: <b>Parametri per l\'importazione LDAP</b>',
+'info_renvoi_article' => '<MODIF><b>Reindirizzamento.</b> Quest\'articolo rimanda alla pagina:',
 'info_reserve_admin' => 'Solo le amministratrici possono modificare quest\'indirizzo.',
 'info_restauration_sauvegarde' => 'ripristino del salvataggio @archive@',
 'info_restreindre_rubrique' => 'Limita la facolt&agrave; di gestione alla rubrica:',
@@ -606,7 +610,7 @@ impossibile.',
 'info_surtitre' => 'Occhiello:',
 'info_syndication_integrale_1' => 'Il tuo sito propone dei file di  syndication (vedi &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
 'info_syndication_integrale_2' => 'Si desidera trasmettere gli articoli in versione integrale oppure in versione riassunta di un centinaio di caratteri?',
-'info_table_prefix' => 'I dati di questo sito sono registrati in tabelle chiamate <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, ecc. Se si installano pi&ugrave; siti nel medesimo database, &egrave; possibile modificare questo prefisso (attenzione, usando esclusivamente lettere minuscole e prive di accenti).',
+'info_table_prefix' => '<MODIF>I dati di questo sito sono registrati in tabelle chiamate <tt><b>spip</b>_articles</tt>, <tt><b>spip</b>_rubriques</tt>, ecc. Se si installano pi&ugrave; siti nel medesimo database, &egrave; possibile modificare questo prefisso (attenzione, usando esclusivamente lettere minuscole e prive di accenti).',
 'info_taille_maximale_vignette' => 'Dimensione massima delle immagini create dal sistema:',
 'info_terminer_installation' => 'Puoi ora terminare la procedura d\'installazione standard.',
 'info_texte' => 'Testo',
@@ -828,7 +832,7 @@ Le traduzioni sono associate all\'originale,
 'texte_admin_effacer_01' => 'Questo commando cancella <i>tutto</i> il contenuto del database,
  compresi <i>tutti</i> i login delle redattrici e delle amministratrici. Dopo averlo eseguito, dovrai riavviare la procedura di installazione per ricreare un nuovo database e un primo ID amministrativo.',
 'texte_admin_tech_01' => 'Questa opzione permette di salvare il contenuto del database in un file che sar&agrave; conservato nella cartella @dossier@.
-Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documentii utilizzati negli articoli e nelle rubriche.',
+Non dimenticare di recuperare integralmente anche la cartella @img@, che contiene le immagini e i documenti utilizzati negli articoli e nelle rubriche.',
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 In particolare &egrave; sbagliato cancellare il database pensando di ripristinare questo salvataggio su una nuova versione di SPIP...
 Per maggiori informazioni consulta <a href="http://www.spip.net/it_article2827.html">la documentazione di SPIP</a>.',
@@ -849,7 +853,7 @@ di mettere on line rapidamente delle news di attualit&agrave;,
 di gestire una rassegna stampa o un calendario di eventi, ecc.',
 'texte_choix_base_1' => 'Scegli il database:',
 'texte_choix_base_2' => 'Il server MySQL contiene diversi database.',
-'texte_choix_base_3' => '<b>Seleziona</b> quello che &egrave; stato attribuito al tuo dominio:',
+'texte_choix_base_3' => '<MODIF><b>Seleziona</b> quello che &egrave; stato attribuito al tuo dominio:',
 'texte_choix_table_prefix' => 'Prefisso delle tabelle:',
 'texte_commande_vider_tables_indexation' => 'Utilizza questo comando per svuotare le tabelle d\'incidizzazione utilizzate
 dal motore di ricerca integrato di SPIP. Ci&ograve; permetter&agrave;
@@ -864,7 +868,7 @@ quando si passa con il mouse sopra al titolo.',
 'texte_compresse_ou_non' => '(pu&ograve; essere compresso o meno)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementi',
-'texte_config_groupe_mots_cles' => 'Vuoi attivare la configurazione avanzata delle parole chiave,
+'texte_config_groupe_mots_cles' => '<MODIF>Vuoi attivare la configurazione avanzata delle parole chiave,
 indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo o che un gruppo &egrave; importante, ecc.?',
 'texte_connexion_mysql' => 'Consulta le informazioni fornite dal tuo hoster: devi poterci trovare, se il tuo dominio sopporta MySQL, i codici di collegamento al server MySQL.',
 'texte_contenu_article' => 'Contenuto dell\'articolo in poche parole (<em>abstract</em>)',
@@ -872,7 +876,7 @@ indicando per esempio che si pu&ograve; selezionare una parola unica per gruppo 
 che alcuni elementi degli articoli siano utilizzati oppure no.
 Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.',
 'texte_crash_base' => 'Se il database &egrave; stato danneggiato, puoi tentare un ripristino automatico.',
-'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<br /> devi creare una rubrica.',
+'texte_creer_rubrique' => '<MODIF>Prima di poter scrivere degli articoli,<br /> devi creare una rubrica.',
 'texte_date_creation_article' => 'DATA DI CREAZIONE DELL\'ARTICOLO:',
 'texte_date_publication_anterieure' => 'DATA DI REDAZIONE ANTERIORE',
 'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di redazione anteriore.',
@@ -924,7 +928,7 @@ reindicizzati. Questo commando, quindi, &egrave; utile solo in casi eccezionali.
 indipendentemente dal posto che occupano nelle diverse rubriche.
 Si pu&ograve; quindi arricchire la navigazione del sito, o utilizzare queste propriet&agrave;
 per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
-'texte_mots_cles_dans_forum' => 'Vuoi consentire ai visitatori di selezionare delle parole chiave nei forum pubblici? (Attenzione: questa opzione &egrave; relativamente complessa da gestire in modo corretto.)',
+'texte_mots_cles_dans_forum' => '<MODIF>Vuoi consentire ai visitatori di selezionare delle parole chiave nei forum pubblici? (Attenzione: questa opzione &egrave; relativamente complessa da gestire in modo corretto.)',
 'texte_multilinguisme' => 'Se desideri gestire gli articoli in diverse lingue, con un sistema di navigazione complesso, &egrave; possibile aggiungere un menu di selezione della lingua negli articoli e/o nelle rubriche, in funzione della struttura del sito.',
 'texte_multilinguisme_trad' => '&Egrave; anche possibile attivare un sistema di gestione dei link fra le diverse traduzioni di un articolo.',
 'texte_non_compresse' => '<i>non compresso</i> (il tuo server non supporta questa funzionalit&agrave;)',
@@ -938,8 +942,8 @@ per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
 'texte_port_annuaire' => '(Il valore predefinito &egrave; in genere quello adatto.)',
 'texte_presente_plugin' => 'Questa pagina elenca i plugin disponibili sul sito. &Egrave; possibile attivare i plugin necessari selezionando la casella corrispondente.',
-'texte_proposer_publication' => 'Quando l\'articolo &egrave; completo,<br /> puoi proporne la pubblicazione.',
-'texte_proxy' => 'In alcuni casi (intranet, reti protette...),
+'texte_proposer_publication' => '<MODIF>Quando l\'articolo &egrave; completo,<br /> puoi proporne la pubblicazione.',
+'texte_proxy' => '<MODIF>In alcuni casi (intranet, reti protette...),
 pu&ograve; essere necessario utilizzare un <i>proxy HTTP</i> per accedere ai siti in syndication.
 In questo caso, va indicato l\'indirizzo del server nella forma
 <tt><html>http://proxy:8080</html></tt>. Altrimenti
@@ -952,7 +956,7 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_recapitiule_liste_documents' => 'Questa pagina mostra l\'elenco dei documenti allegati alle rubriche. Per modificare le informazioni di un documento, seguire il link verso la relativa pagina di rubrica.',
 'texte_recuperer_base' => 'Ripara il database',
 'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
-'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br />&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
+'texte_referencement_automatique' => '<MODIF><b>Inserimento automatizzato in repertorio</b><br />&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
 'texte_requetes_echouent' => '<b>Quando alcune query MySQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
 che sia per colpa del database stesso.</b><p />
@@ -995,7 +999,7 @@ a partire dal tuo sito.</i></blockquote>',
 'texte_test_proxy' => 'Per fare una prova di questo proxy, indicare qui l\'indirizzo
 di un sito Web da testare.',
 'texte_titre_02' => 'Titolo:',
-'texte_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]',
+'texte_titre_obligatoire' => '<MODIF><b>Titolo</b> [Obbligatorio]',
 'texte_travail_article' => '@nom_auteur_modif@ ha lavorato su questo articolo @date_diff@ minuti fa',
 'texte_travail_collaboratif' => 'Se diverse autrici lavorano spesso sullo stesso articolo,
 il sistema pu&ograve; segnalare gli articoli &laquo;aperti&raquo;
@@ -1004,7 +1008,7 @@ Questa opzione &egrave; disattivata di default
 per evitare di generare messaggi d\'avvertimento intempestivi.',
 'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
 'texte_unpack' => 'scarica l\'ultima versione',
-'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
+'texte_utilisation_moteur_syndiques' => '<MODIF>Quando utilizzi il motore di ricerca integrato di SPIP,
 puoi effettuare le ricerche sui siti e
 gli articoli in syndication
 in due modalit&agrave; diverse. <br />- La pi&ugrave; semplice
@@ -1029,7 +1033,7 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'titre_cadre_forum_interne' => 'Forum interno',
 'titre_cadre_interieur_rubrique' => 'All\'interno della rubrica',
 'titre_cadre_numero_auteur' => 'AUTRICE NUMERO',
-'titre_cadre_signature_obligatoire' => '<b>Firma</b> [Obbligatoria]<br />',
+'titre_cadre_signature_obligatoire' => '<MODIF><b>Firma</b> [Obbligatoria]<br />',
 'titre_config_fonctions' => 'Configurazione del sito',
 'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
 'titre_configuration' => 'Configurazione del sito',

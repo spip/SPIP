@@ -321,7 +321,6 @@ Vielen Dank f&uuml;r Ihre Teilnahme
 'icone_brouteur' => '&Uuml;bersicht',
 'icone_configuration_site' => 'Konfiguration',
 'icone_configurer_site' => 'Ihre Website konfigurieren',
-'icone_creer_mot_cle' => 'Neues Schlagwort anlegen und mit diesem Artikel verkn&uuml;pfen',
 'icone_creer_nouvel_auteur' => 'Neuen Autor anlegen',
 'icone_creer_rubrique' => 'Neue Rubrik anlegen',
 'icone_creer_sous_rubrique' => 'Neue Unterrubrik anlegen',

@@ -327,7 +327,6 @@ Dankon pro via partopreno
 'icone_brouteur' => 'Rapida retumado',
 'icone_configuration_site' => 'Konfiguro',
 'icone_configurer_site' => 'Konfiguri vian retejon',
-'icone_creer_mot_cle' => 'Krei novan &#349;losilvorton kaj ligi &#285;in al tiu artikolo',
 'icone_creer_nouvel_auteur' => 'Krei novan a&#365;toron',
 'icone_creer_rubrique' => 'Krei novan rubrikon',
 'icone_creer_sous_rubrique' => 'Krei sub-rubrikon',

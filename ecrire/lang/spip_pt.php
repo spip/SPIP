@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afficher_trad' => '<NEW>afficher les traductions',
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualiza&ccedil;&atilde;o da base MySQL para a vers&atilde;o @version@ &eacute;  imposs&iacute;vel, talvez por causa de um problema de direito de modifica&ccedil;&atilde;o na base de dados. Contactar com o seu servi&ccedil;o de hospedagem.',
 'analyse_xml' => 'An&aacute;lise XML',
+'annuler' => 'Cancelar',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
 'avis_archive_incorrect' => 'o ficheiro arquivo n&atilde;o &eacute; um ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivo n&atilde;o &eacute; v&aacute;lido ',
@@ -80,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calend&aacute;rio por dia',
 'cal_par_mois' => 'calend&aacute;rio por m&ecirc;s',
 'cal_par_semaine' => 'calend&aacute;rio por semana',
-'choix_couleur_interface' => '<NEW>couleur ',
+'choix_couleur_interface' => 'cor',
 'choix_interface' => '<NEW>choix  de l\'interface',
 'colonne' => '<NEW>Colonne',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, solicitou a altera&ccedil;&atilde;o do estatuto deste elemento. Deseja continuar?',
@@ -258,6 +259,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 ',
 'form_pet_message_commentaire' => 'Uma mensagem, um coment&aacute;rio&nbsp;?',
 'form_pet_nom_site2' => 'Nome do seu s&iacute;tio Web',
+'form_pet_probleme_liens' => '<NEW>Veuillez reprendre votre message en supprimant les liens hypertexte.',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, as assinaturas est&atilde;o temporariamente suspensas.',
 'form_pet_signature_pasprise' => 'A sua assinatura n&atilde;o est&aacute; tomada em conta.',
 'form_pet_signature_validee' => 'A sua assinatura foi validada. Obrigado!',
@@ -325,7 +327,6 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_brouteur' => 'Navega&ccedil;&atilde;o r&aacute;pida',
 'icone_configuration_site' => 'Configura&ccedil;&atilde;o',
 'icone_configurer_site' => 'Configurar o seu s&iacute;tio',
-'icone_creer_mot_cle' => 'Criar uma nova palavra-chave e vincul&aacute;-la a este artigo',
 'icone_creer_nouvel_auteur' => 'Criar um novo autor',
 'icone_creer_rubrique' => 'Criar uma rubrica',
 'icone_creer_sous_rubrique' => 'Criar uma sub-rubrica',
@@ -413,6 +414,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_description_2' => 'Descri&ccedil;&atilde;o&nbsp;:',
 'info_dimension' => 'Dimens&otilde;es&nbsp;:',
 'info_document' => 'Documento',
+'info_document_indisponible' => '<NEW>Ce document n\'est pas disponible',
 'info_documents' => 'Documentos',
 'info_echange_message' => 'SPIP permite a troca de mensagens e a constitui&ccedil;&atilde;o de f&oacute;runs privados de discuss&atilde;o
 entre os participantes do s&iacute;tio. Pode activar ou
@@ -505,6 +507,8 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_sans_titre_2' => 'sem t&iacute;tulo',
 'info_selectionner_fichier' => '<MODIF>Pode seleccionar um ficheiro do dossier @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar um ficheiro&nbsp;:',
+'info_signature_supprimee' => '<NEW>Signature supprim&eacute;e',
+'info_signature_supprimee_erreur' => '<NEW>Erreur&nbsp;: ce code de suppression ne correspond a aucune signature',
 'info_site_attente' => 'S&iacute;tio Web &agrave; espera de valida&ccedil;&atilde;o',
 'info_site_reference' => 'S&iacute;tio referenciado em linha',
 'info_site_refuse' => 'S&iacute;tio Web recusado',
@@ -665,6 +669,10 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'previsualiser' => 'Visualizar',
 
 
+// R
+'retour' => '<NEW>Retour',
+
+
 // S
 'spip_conforme_dtd' => '<NEW>SPIP consid&egrave;re ce document comme conforme &agrave; son DOCTYPE :',
 'squelette' => '<NEW>squelette',
@@ -691,7 +699,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
   Notar bem esta refer&ecirc;ncia, voltar a tentar o nivelamento
 , e enfim verificar que as imagens aparecem
  sempre nos artigos.',
-'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
+'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
 'texte_inc_auth_1' => '<MODIF>Voc&ecirc; est&aacute; identificado sob o
    login <b>@auth_login@</b>, mas este j&aacute;/ n&atilde;o existe na base.
  Tente',
@@ -765,6 +773,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'zbug_inversion_ordre_inexistant' => 'invers&atilde;o de uma ordem inexistente',
 'zbug_pagination_sans_critere' => '<NEW>#PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
 'zbug_parametres_inclus_incorrects' => 'Par&acirc;metros de inclus&atilde;o incorrectos',
+'zbug_profile' => '<NEW>Temps de calcul&nbsp;: @time@',
 'zbug_resultat' => 'resultado',
 'zbug_serveur_indefini' => 'sevidor SQL n&atilde;o definido',
 'zbug_table_inconnue' => 'Tabela SQL &laquo;@table@&raquo; desconhecida',
