@@ -184,7 +184,7 @@ function creer_fichier_vignette($vignette, $test_cache_only=false) {
 			inserer_vignette_base($vignette, $preview['fichier']);
 			return $preview['fichier'];
 		}
-		include_ecrire('inc_documents');
+		include_spip('inc/documents');
 		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }

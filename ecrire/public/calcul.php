@@ -22,7 +22,7 @@ include_ecrire("inc_meta");
 include_ecrire("inc_index");
 include_ecrire("inc_texte");
 include_ecrire("inc_lang");
-include_ecrire("inc_documents");
+include_spip('inc/documents');
 include_ecrire("inc_abstract_sql");
 include_ecrire("inc_forum");
 include_ecrire("inc_debug_sql");

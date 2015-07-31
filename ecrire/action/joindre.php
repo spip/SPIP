@@ -105,7 +105,7 @@ function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_a
 				'tmp_name' => $upload)
 			 );
 	else {
-	  include_ecrire('inc_documents');
+	  include_spip('inc/documents');
 	  $files = array();
 	  foreach (preg_files($upload) as $fichier) {
 			$files[]= array (
@@ -132,7 +132,7 @@ function spip_action_joindre6($arg, $mode, $type, $id, $id_document,$hash, $id_a
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    include_ecrire('inc_pclzip');
+	    include_spip('inc/pclzip');
 	    $archive = new PclZip($arg);
 	    $archive->extract(
 			      PCLZIP_OPT_PATH, _tmp_dir,

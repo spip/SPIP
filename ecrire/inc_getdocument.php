@@ -260,7 +260,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);
 			$nom_envoye .= '.zip'; # conserver l'extension dans le nom de fichier, par exemple toto.js => toto.js.zip
 			$fichier = deplacer_fichier_upload($source, $tmp);
-			include_ecrire('inc_pclzip');
+			include_spip('inc/pclzip');
 			$source = _DIR_IMG.'tmp/archive.zip';
 			$archive = new PclZip($source);
 			$v_list = $archive->create($tmp,
@@ -411,13 +411,13 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 				);
 			if (!$zip) die ('Erreur upload zip'); # pathologique
 			// Est-ce qu'on sait le lire ?
-			include_ecrire('inc_pclzip');
+			include_spip('inc/pclzip');
 			$archive = new PclZip($zip);
 			if ($archive) {
 // presenter une interface pour choisir si fichier joint ou decompacte
 // passer ca en squelette un de ces jours.
 
-			  include_ecrire('inc_documents');
+			  include_spip('inc/documents');
 			  $texte =
 			"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
 			_T('upload_zip_telquel').
