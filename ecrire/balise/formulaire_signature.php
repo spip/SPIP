@@ -123,7 +123,6 @@ function reponse_confirmation($var_confirm = '') {
 				}
 				$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
 
-	
 				while ($row = spip_fetch_array($result_petition)) {
 					$id_article = $row['id_article'];
 					$email_unique = $row['email_unique'];
@@ -230,12 +229,18 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 			}
 		}
 		$passw = test_pass();
-		/* impossible a present
-		if ($refus == "oui") return _T('form_pet_signature_pasprise');
-		*/
-		$url = parametre_url($url_page,	'var_confirm',$passw,'&') ."#sp$id_article";
-		$row = spip_fetch_array(spip_abstract_select('titre', 'spip_articles', "id_article=$id_article"));
-		$titre = $row['titre'];
+
+		$row = spip_fetch_array(spip_abstract_select('titre,lang', 'spip_articles', "id_article=$id_article"));
+		lang_select($row['lang']);
+		$titre = textebrut(typo($row['titre']));
+		lang_dselect();
+
+		// preparer l'url de confirmation
+		$url = parametre_url($url_page,	'var_confirm',$passw,'&');
+		if ($row['lang'] != $GLOBALS['meta']['langue_site'])
+			$url = parametre_url($url, "lang", $row['lang'],'&');
+		$url .= "#sp$id_article";
+
 		$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 
 		if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
