@@ -63,6 +63,8 @@ function exec_configuration_dist(){
 	echo $articles();
 	$futurs = charger_fonction('futurs', 'configuration');
 	echo $futurs();
+	$redirection = charger_fonction('redirection', 'configuration');
+	echo $redirection();
 	echo fin_cadre_trait_couleur(true);
 
 	$rubriques = charger_fonction('rubriques', 'configuration');
