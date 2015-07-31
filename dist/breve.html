@@ -156,7 +156,7 @@
 
 <!-- Forums -->
 
-[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)"><:repondre_breve:></A></B></div>]
+[<div class="forum-repondre"><B><a  href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_breve:></a></B></div>]
 <br />
 
 <h1 class="structure"><:forum:></h1>
@@ -172,7 +172,7 @@
 <a name="forum#ID_FORUM"></a>
 <div class="forum-chapo">
 <div class="forum-titre">#TITRE</div>
-[(#DATE|affdate)][, <:par_auteur:> <A HREF="mailto:#EMAIL">(#NOM)</A>]
+[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:[(#EMAIL|entites_html)]">(#NOM)</a>]
 </div>
 <div class="forum-item">
 #TEXTE
@@ -190,7 +190,7 @@
 	<a name="forum#ID_FORUM"></a>
 	<div class="forum-chapo">
 	<div class="forum-titre">#TITRE</div>
-	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+	[(#DATE|affdate)][, par <a href="mailto:[(#EMAIL|entites_html)]">(#NOM)</a>]
 	</div>
 	<div class="forum-item">
 	#TEXTE
