@@ -10,7 +10,6 @@ dist/formulaires/inc-choix_mots.html -text
 dist/formulaires/inc-forum_ajouter_mot.html -text
 dist/formulaires/inc-forum_bloc_choix_mots.html -text
 dist/formulaires/inc-login_forum_abo.html -text
-dist/formulaires/inc-logo_auteur.html -text
 dist/formulaires/inscription.php -text
 dist/formulaires/mot_de_passe.html -text
 dist/formulaires/mot_de_passe.php -text
@@ -451,7 +450,6 @@ ecrire/xml/interfaces.php -text
 ecrire/xml/valider.php -text
 /index.php -text
 local/remove.txt -text
-prive/authentifier_login.html -text
 prive/contenu/article.html -text
 prive/contenu/breve.html -text
 prive/contenu/rubrique.html -text
@@ -478,6 +476,7 @@ prive/formulaires/editer_rubrique.php -text
 prive/formulaires/editer_site.html -text
 prive/formulaires/editer_site.php -text
 prive/formulaires/editer_site_fonctions.php -text
+prive/formulaires/inc-logo_auteur.html -text
 prive/formulaires/login.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
@@ -726,6 +725,8 @@ prive/images/warning-24.gif -text
 prive/images/warning.gif -text
 prive/images/wrapper.php -text
 prive/images/xml.gif -text
+prive/informer_auteur.html -text
+prive/informer_auteur_fonctions.php -text
 prive/infos/article.html -text
 prive/infos/article_fonctions.php -text
 prive/infos/auteur.html -text

@@ -10,9 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function image_bg ($img, $couleur, $pos="") {
-	if (function_exists("imagecreatetruecolor")) return "background: url(".url_absolue(extraire_attribut(image_sepia($img, $couleur), "src")).") $pos;";
-	else return "background-color: #$couleur;";
+// Filtre ad hoc pour le formulaire de login:
+// le parametre var_login n'est pas dans le contexte pour optimiser le cache
+// il faut aller le chercher a la main
+function informer_auteur($bof)
+{
+  	include_spip('inc/json');
+	include_spip('inc/identifier_login');
+	$row = informer_login(_request('var_login'));
+	if (is_array($row))
+		unset($row['id_auteur']);
+	else $row = array();
+	return json_export($row);
 }
 
 ?>
