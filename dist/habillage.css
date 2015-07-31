@@ -78,9 +78,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 ---------------------------------------------- */
 
 /* * Entete */
-#entete {
-	width: 100%;
-	font-size: 0.77em; }
+#entete { width: 100%; }
 #entete #nom_site_spip {
 	float: left;
 	font-weight: bold;
