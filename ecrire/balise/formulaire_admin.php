@@ -157,6 +157,7 @@ function admin_objet()
 	$trouver_table = charger_fonction('trouver_table','base');
 	$objets = urls_liste_objets(false);
 	$objets = array_diff($objets, array('rubrique'));
+	$objets = array_reverse($objets);
 	array_unshift($objets, 'rubrique');
 	foreach ($objets as $obj) {
 		$type = $obj;
