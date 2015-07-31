@@ -260,36 +260,8 @@ Zure helbide berria baieztatzeko ondoko helbidea bisita ezazu.
 'form_indiquer_email' => 'Zure posta elektronikoaren heldibea adierazi.',
 'form_indiquer_nom' => 'Zure izena adierazi.',
 'form_indiquer_nom_site' => 'Zure webgunearen izena adierazi.',
-'form_pet_adresse_site' => 'Zure gunearen helbidea',
-'form_pet_aucune_signature' => 'Ez dago kode honi dagokion sinadurarik...',
-'form_pet_confirmation' => 'Zure sinadura baieztatu:',
 'form_pet_deja_enregistre' => 'Gune hau erregistraturik dago jadanik',
-'form_pet_deja_signe' => 'Testu hau dagoeneko sinatu duzu.',
-'form_pet_envoi_mail_confirmation' => 'Oraintxe bertan baieztapen-mezu elektroniko bat @email@ helbidera igorri dugu. Mezu horretan aipatutako Web helbidea bisitatu behar duzu zure sinadura onartzeko.',
-'form_pet_mail_confirmation' => 'Kaixo, 
-
-@titre@ eskaera sinatzea eskatu duzu.
-
-Hurrengo informazioak eman dituzu: 
-   Izena: @nom_email@
-   Lekua: @nom_site@ - @url_site@
-
-GARRANTZITSUA... 
-Zure sinadura onartzeko, hurrengo helbidera konektatzea beharrezkoa da (bestela, zure eskaera ez da onartuko):
-
-@url@
-
-Milesker parte hartzeagatik ',
-'form_pet_nom_site2' => 'Zure Webgunearen izena',
-'form_pet_probleme_liens' => 'Otoi, zure mezua bermoldatu hiperestekak kenduz.',
-'form_pet_probleme_technique' => 'Arazo teknikoa, sinadurak behin-behineko etenaldian daude.',
 'form_pet_signature_pasprise' => 'Zure sinadura ez da kontuan hartua izan.',
-'form_pet_signature_validee' => 'Zure sinadura onartuta dago. Gunearen hurrengo gaurkotzean agertuko da. Eskerrik asko!',
-'form_pet_site_deja_enregistre' => 'Gune hau erregistraturik dago jadanik',
-'form_pet_url_invalide' => 'Zuk aipatutako URL-ak ez du balio',
-'form_pet_votre_email' => 'Zure posta-elektronikoaren helbidea',
-'form_pet_votre_nom' => 'Zure izena edo goitizena',
-'form_pet_votre_site' => 'Webgune bat baldin baduzu, jarraian adierazi dezakezu',
 'form_prop_confirmer_envoi' => 'Bidalketa baieztatu',
 'form_prop_description' => 'Deskripzio/oharra',
 'form_prop_enregistre' => 'Zure proposamena erregistraturik dago, gune honen arduradunek onartu ondoren agerian linean izango da.',
@@ -333,7 +305,6 @@ Milesker parte hartzeagatik ',
 'icone_interface_simple' => 'Interfaze bakuna',
 'icone_maintenance_site' => 'Gunearen mantentze-lana',
 'icone_messagerie_personnelle' => 'Mezularitza pertsonala',
-'icone_mots_cles' => 'Gako-hitzak',
 'icone_repartition_actuelle' => 'Oraingo banaketa erakutsi',
 'icone_repartition_debut' => 'Banaketa hasieratik erakutsi ',
 'icone_repartition_visites' => 'Bisiten banaketa',
@@ -484,15 +455,11 @@ Azpimarratu gabeko hizkuntzetarako, elementuak gunearen hizkuntza nagusian agert
 'info_rechercher_02' => 'Bilatu :',
 'info_remplacer_vignette' => 'Ikono lehenetsiaren ordez zuk aukeratutako irudi bat jarri :',
 'info_retablir_lien' => 'esteka berrezarri',
-'info_retirer_mot' => 'Hitz hau kendu',
-'info_retirer_mots' => 'Hitz guztiak kendu',
 'info_rubriques_nb' => '@nb@ atal',
 'info_rubriques_un' => 'Atal 1',
 'info_sans_titre_2' => 'izenbururik gabe',
 'info_selectionner_fichier' => '<i>Upload</i> direktorioko dokumentu bat hauta dezakezu',
 'info_selectionner_fichier_2' => 'Dokumentu bat hautatu :',
-'info_signature_supprimee' => 'Sinadura kendua',
-'info_signature_supprimee_erreur' => 'Errorea : ezabaketa-kode hau ez da sinadura bati lotua',
 'info_site_attente' => 'Balioztatua izateko zain dagoen Webgunea',
 'info_site_reference' => 'Linean erreferentziatutako gunea',
 'info_site_refuse' => 'Web Gune errefusatua',

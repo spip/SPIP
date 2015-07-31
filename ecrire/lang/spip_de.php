@@ -260,40 +260,8 @@ wird Ihre Adresse beibehalten):
 'form_indiquer_email' => 'Bitte geben Sie Ihre E-Mail-Adresse an.',
 'form_indiquer_nom' => 'Bitte geben Sie Ihren Namen an.',
 'form_indiquer_nom_site' => 'Bitte geben Sie den Namen Ihrer Website an.',
-'form_pet_adresse_site' => 'Adresse Ihrer Website',
-'form_pet_aucune_signature' => 'Diesem Code entspricht keine Signatur...',
-'form_pet_confirmation' => 'Bitte bestätigen Sie Ihre Unterschrift:',
 'form_pet_deja_enregistre' => 'Diese Website wurde bereits erfasst',
-'form_pet_deja_signe' => 'Sie haben diesen Text bereits unterschrieben.',
-'form_pet_envoi_mail_confirmation' => 'Eine E-mail mit den Daten zum Bestätigen wurde an @email@ geschickt. Sie müssen die dort angegebene WWW-Seite öffnen, um Ihre Unterschrift zu bestätigen.',
-'form_pet_mail_confirmation' => 'Hallo,
-
-Sie möchten diese Petition unterzeichnen:
-@titre@.
-
-Sie haben die folgenden Angaben gemacht:
-    Name: @nom_email@
-    Website: @nom_site@ - @url_site@
-    @message@
-
-ACHTUNG:
-Um Ihre Unterschrift zu bestätigen müssen Sie diese Seite aufrufen (wenn Sie es nicht tun, wird Ihre Unterschrift verworfen):
-
-    @url@
-
-
-Vielen Dank für Ihre Teilnahme
-',
-'form_pet_nom_site2' => 'Name Ihrer Website',
-'form_pet_probleme_liens' => 'Bitte entfernen Sie die Hyperlinks aus Ihrer Nachricht.',
-'form_pet_probleme_technique' => 'Technisches Problem: Signaturen sind vorübergehend nicht möglich.',
 'form_pet_signature_pasprise' => 'Ihre Signatur wird nicht berücksichtigt.',
-'form_pet_signature_validee' => 'Ihre Signatur wurde erfolgreich geprüft. Vielen Dank!',
-'form_pet_site_deja_enregistre' => 'Diese Website wurde bereits erfasst',
-'form_pet_url_invalide' => 'Sie haben einen ungültigen URL angegeben.',
-'form_pet_votre_email' => 'Ihre E-Mail Adresse',
-'form_pet_votre_nom' => 'Ihr Name oder Pseudonym',
-'form_pet_votre_site' => 'Wenn Sie eine eigene Website haben, können Sie sie hier eintragen',
 'form_prop_confirmer_envoi' => 'Senden',
 'form_prop_description' => 'Beschreibung/Kommentar',
 'form_prop_enregistre' => 'Ihr Vorschlag wurde gespeichert und wird nach Freigabe durch die Redaktion der Website angezeigt.',
@@ -337,7 +305,6 @@ Vielen Dank für Ihre Teilnahme
 'icone_interface_simple' => 'Standardmodus',
 'icone_maintenance_site' => 'Wartung',
 'icone_messagerie_personnelle' => 'Persönliche Nachrichten',
-'icone_mots_cles' => 'Schlagworte',
 'icone_repartition_actuelle' => 'Aktuelle Verteilung anzeigen',
 'icone_repartition_debut' => 'Seit Einrichtung der Website',
 'icone_repartition_visites' => 'Verteilung der Besuche',
@@ -487,15 +454,11 @@ Vielen Dank für Ihre Teilnahme
 'info_rechercher_02' => 'Suchen:',
 'info_remplacer_vignette' => 'Ersetzen Sie das Standard-Piktogramm durch ein eigenes Logo:',
 'info_retablir_lien' => 'Link wieder freigeben',
-'info_retirer_mot' => 'Wort entfernen',
-'info_retirer_mots' => 'Alle Worte entfernen',
 'info_rubriques_nb' => '@nb@ Rubriken',
 'info_rubriques_un' => '1 Rubrik',
 'info_sans_titre_2' => 'ohne Titel',
 'info_selectionner_fichier' => 'Sie können eine Datei aus dem Verzeichnis @upload@ auswählen.',
 'info_selectionner_fichier_2' => 'Wählen Sie eine Datei:',
-'info_signature_supprimee' => 'Unterschrift gelöscht',
-'info_signature_supprimee_erreur' => 'Fehler: Dieser Löschcode entspricht keiner Unterschrift.',
 'info_site_attente' => 'Websites, die auf Freigabe warten',
 'info_site_reference' => 'Verlinkte Website online',
 'info_site_refuse' => 'Abgelehnte Website',

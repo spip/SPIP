@@ -266,43 +266,8 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'form_indiquer_email' => 'Utjawi aruskipayirimat uñachayam',
 'form_indiquer_nom' => 'Sutim uñachayam',
 'form_indiquer_nom_site' => 'Web qamawimat suti uñachayam',
-'form_pet_adresse_site' => 'Qamawimat utjawipa',
-'form_pet_aucune_signature' => 'Janiw ni mä imt\'at qillqa utjkiti aka wakt\'at chimpuru',
-'form_pet_confirmation' => 'Imt\'at qillqamar iyaw sam:',
 'form_pet_deja_enregistre' => 'Aka qamawix qillqt\'ataxiwa',
-'form_pet_deja_signe' => 'Aka saw qillqt\'xtaw.',
-'form_pet_envoi_mail_confirmation' => 'Anchhitax mä iyaw sat aruskipayiri apayapxta. Iyawsamxa jisa sañatakix utjaw web aytat aka yatiyawinx uk tumpañamaw.',
-'form_pet_mail_confirmation' => 'Kamisaki, 
-
-Mayiw iyaw saña uk maytawa:
-@titre@.
-
-Arkir yatiyaw jasakiptaytaw:
-
-    Suti: @nom_email@
-    Qamawi: @nom_site@ - @url_site@
-    @message@
-
-YÄQATAWA...
-
-Iyaw sawima iyaw sañatakix utjawir uñachayata ukar chinusiñamawa
-(jan ukjax, iyaw sawimax janiw yäqatakaniti): 
-
-    @url@
-
-
-Arsusiwitamatxa yuspagara
-   ',
-'form_pet_nom_site2' => 'Web qamawiman sutipa',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Jan wali, iyawsanakax sayt\'ataw anchhichanakax.',
 'form_pet_signature_pasprise' => 'Iyawsamax janiw qillqaskiti.',
-'form_pet_signature_validee' => 'Iyawsamax iyaw sataxiwa. ¡Yuspajara!',
-'form_pet_site_deja_enregistre' => 'Aka qamawix qillqt\'ataxiwa',
-'form_pet_url_invalide' => 'URL uka uñachayktax janiw iyaw satakiti.',
-'form_pet_votre_email' => 'Juman aruskipayiriman utjawipa',
-'form_pet_votre_nom' => 'Sutima jan ukasti sutichama',
-'form_pet_votre_site' => 'Sitix mä Web qamawi utjtam, uñachayasmaw',
 'form_prop_confirmer_envoi' => 'Apawi iyaw sañapuni',
 'form_prop_description' => 'Uñt\'ayawi/amuyawi',
 'form_prop_enregistre' => 'Amtatamax qillqataxiwa, iyaw sapkani khitinakatix apnaqapxi aka qamawxa ukatwa naktat uñstani.',
@@ -348,7 +313,6 @@ Arsusiwitamatxa yuspagara
 'icone_interface_simple' => 'Mä ajanuki',
 'icone_maintenance_site' => 'Qamawit uñjawi',
 'icone_messagerie_personnelle' => 'Sapa maynit yatiyañanaka',
-'icone_mots_cles' => 'Imt\'at arunaka',
 'icone_repartition_actuelle' => 'Jichha lakiraw uñachaña',
 'icone_repartition_debut' => 'Qalltatpach lakiraw uñachaña',
 'icone_repartition_visites' => 'Tumpatanakat lakirawi',
@@ -502,15 +466,11 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_rechercher_02' => 'Thaqhaña',
 'info_remplacer_vignette' => 'Nayrt\'at jisk\'a salta lantiñawa mä salta ajllitampi:',
 'info_retablir_lien' => 'chinu askichaña',
-'info_retirer_mot' => 'Aru apaqaña',
-'info_retirer_mots' => 'Taqpach arunak apaqaña',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'Jan sutichawimpi',
 'info_selectionner_fichier' => 'Jach\'a q\'ipitxa mä qillqa q\'ip ajllismaw @upload@',
 'info_selectionner_fichier_2' => 'Mä qillqa q\'ipi ajlliña...',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Iyaw satañapatakix Web ukax suyaski',
 'info_site_reference' => 'Qamaw naktat aytata',
 'info_site_refuse' => 'Web qamaw janiw sata',

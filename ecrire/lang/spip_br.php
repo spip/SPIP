@@ -261,41 +261,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Skrivit ho postel mar plij.',
 'form_indiquer_nom' => 'Skrivit hoc\'h anv mar plij.',
 'form_indiquer_nom_site' => 'Skrivit anv ho lec\'hienn.',
-'form_pet_adresse_site' => 'Chomlec\'h ho lec\'hienn',
-'form_pet_aucune_signature' => 'Sinadur ebet ne glot gant ar c\'hod-mañ...',
-'form_pet_confirmation' => 'Kadarnait ho sinadur mar-plij :',
 'form_pet_deja_enregistre' => 'Enrollet eo al lec\'hienn-mañ c\'hoazh',
-'form_pet_deja_signe' => 'Sinet eo bet an destenn-se ganeoc\'h c\'hoazh.',
-'form_pet_envoi_mail_confirmation' => 'Emeur o paouez kas ur postel gwiriañ da @email@. Ret e vo deoc\'h gweladenniñ ar chomlec\'h meneget er postel-se a-benn kadarnaat ho sinadur.',
-'form_pet_mail_confirmation' => 'Demat, 
-
-Goulennet hoc\'h eus sinañ ar sinadeg :
-@titre@.
-
-An titouroù-mañ zo bet roet ganeoc\'h :
-    Anv: @nom_email@
-    Lec\'hienn: @nom_site@ - @url_site@
-@message@
-
-POUEZUS...
-Evit kadarnaat ho sinadur eo trawalc\'h deoc\'h mont d\'ar chomlec\'h amañ dindan
-(ma ne rit ket se, ne vo ket ouzhpennet ho sinadur) :
-
-    @url@
-
-
-Trugarez da gemer perzh
-',
-'form_pet_nom_site2' => 'Anv ho lec\'hienn',
-'form_pet_probleme_liens' => 'Savit ho kemennadenn en-dro en ur dennañ ar gourliammoù zo enni. ',
-'form_pet_probleme_technique' => 'Ur gudenn deknikel zo, n\'haller ket sinañ evit ar poent.',
 'form_pet_signature_pasprise' => 'N\'eus ket bet dalc\'het kont eus ho sinadur.',
-'form_pet_signature_validee' => 'Kadarnet eo bet ho sinadur. Trugarez !',
-'form_pet_site_deja_enregistre' => 'Enrollet eo bet al lec\'hienn-mañ c\'hoazh',
-'form_pet_url_invalide' => 'Direizh eo an URL bet merket ganeoc\'h.',
-'form_pet_votre_email' => 'Ho chomlec\'h postel',
-'form_pet_votre_nom' => 'Hoc\'h anv pe lesanv',
-'form_pet_votre_site' => 'M\'ho peus ul lec\'hienn Web e c\'hellit he mennegiñ amañ da-heul',
 'form_prop_confirmer_envoi' => 'Kadarnaat ar c\'has',
 'form_prop_description' => 'Deskrivadur/evezhiadenn',
 'form_prop_enregistre' => 'Enrollet eo bet ho kinnig. Embannet e vo goude bezañ bet asantet gant tud e-karg eus al lec\'hienn-mañ.',
@@ -339,7 +306,6 @@ Trugarez da gemer perzh
 'icone_interface_simple' => 'Etrefas eeunaet',
 'icone_maintenance_site' => 'Ober war-dro al lec\'hienn',
 'icone_messagerie_personnelle' => 'Postelerezh hiniennel',
-'icone_mots_cles' => 'Gerioù-stur',
 'icone_repartition_actuelle' => 'Diskouez an dasparzh er mare-mañ',
 'icone_repartition_debut' => 'Diskouez an dasparzh abaoe an deroù',
 'icone_repartition_visites' => 'Dasparzh ar gweladennoù',
@@ -489,15 +455,11 @@ Trugarez da gemer perzh
 'info_rechercher_02' => 'Klask :',
 'info_remplacer_vignette' => 'Erlec\'hiañ ar skeudennig dre ziouer gant ul logo deoc\'h :',
 'info_retablir_lien' => 'adlakaat al liamm-mañ',
-'info_retirer_mot' => 'Tennañ ar ger-mañ',
-'info_retirer_mots' => 'Tennañ an holl c\'herioù',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'titl ebet',
 'info_selectionner_fichier' => 'Gallout a rit diuzañ ur restr eus an teuliad @upload@',
 'info_selectionner_fichier_2' => 'Diuzañ ur restr :',
-'info_signature_supprimee' => 'Diverket eo bet ar sinadur',
-'info_signature_supprimee_erreur' => 'Fazi : ne glot ar c\'hod diverkañ-mañ gant sinadur ebet.',
 'info_site_attente' => 'Lec\'hienn a c\'hortoz bezañ kadarnaet',
 'info_site_reference' => 'Lec\'hienn menegeret enlinenn',
 'info_site_refuse' => 'Lec\'hienn bet nac\'het',

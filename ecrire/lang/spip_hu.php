@@ -261,41 +261,8 @@ the address below. (Otherwise your request will be ignored.):
 'form_indiquer_email' => 'Kérjük, adja meg e-mail címét.',
 'form_indiquer_nom' => 'Kérjük, adja meg a nevét.',
 'form_indiquer_nom_site' => 'Kérjük, adja meg honlapjának címét.',
-'form_pet_adresse_site' => 'Honlapjának címe',
-'form_pet_aucune_signature' => 'Egyetlen aláírás sem felel meg ennek a kódnak...',
-'form_pet_confirmation' => 'Kérjük, erősítse meg aláírását:',
 'form_pet_deja_enregistre' => 'Ezt a honlapot már regisztrálták',
-'form_pet_deja_signe' => 'Már aláírta ezt a szöveget.',
-'form_pet_envoi_mail_confirmation' => 'A megerősítő e-mailt elküldtük. Aláírásának hitelesítéséhez látogassa meg a benne található címet.', # MODIF
-'form_pet_mail_confirmation' => 'Jó napot!
-
-Kérte, hogy aláírhassa ezt a peticiót:
-@titre@.
-
-A következő adatokat adta meg:
-    Név: @nom_email@
-    Honlap: @nom_site@ - @url_site@
-    @message@
-
-FONTOS...
-Az aláírás érvényesítéséhez a
-lenti címhez kell csatlakozni (ellenkező esetben az Ön kérése el lesz utasítva) :
-
-    @url@
-
-
-Köszönjük részvételét!
-',
-'form_pet_nom_site2' => 'Honlapjának neve',
-'form_pet_probleme_liens' => 'Kérjük, törölje a hiperhivatkozásokat üzenetéből.',
-'form_pet_probleme_technique' => 'Technikai hiba, az aláírás ideiglenesen fel van függesztve.',
 'form_pet_signature_pasprise' => 'Az Ön aláírása nincs figyelembe véve.',
-'form_pet_signature_validee' => 'Aláírását hitelesítettük. Köszönjük !',
-'form_pet_site_deja_enregistre' => 'Ezt a honlapot már regisztrálták',
-'form_pet_url_invalide' => 'A beírt URL nem érvényes.',
-'form_pet_votre_email' => 'Az Ön email címe',
-'form_pet_votre_nom' => 'Az Ön neve vagy felhasználóneve',
-'form_pet_votre_site' => 'Amennyiben van saját honlapja, lejjebb jelezheti',
 'form_prop_confirmer_envoi' => 'Erősítse meg a küldést',
 'form_prop_description' => 'Leírás/hozzászólás',
 'form_prop_enregistre' => 'A javaslatát felvettük. Nyilvánosan akkor fog megjelenni, miután e honlap adminisztrátorai jóváhagyták.',
@@ -339,7 +306,6 @@ Köszönjük részvételét!
 'icone_interface_simple' => 'egyszerűsített felület',
 'icone_maintenance_site' => 'Honlap karbantartása',
 'icone_messagerie_personnelle' => 'Személyes levelezés',
-'icone_mots_cles' => 'Kulcsszavak',
 'icone_repartition_actuelle' => 'Jelenlegi megosztás megjelenítése',
 'icone_repartition_debut' => 'Kezdettől megjeleníteni a megosztást',
 'icone_repartition_visites' => 'Látógatások szétosztása',
@@ -489,15 +455,11 @@ Köszönjük részvételét!
 'info_rechercher_02' => 'Keresés :',
 'info_remplacer_vignette' => 'Az alapértelmezett bélyegkép helyettesítése egy személyes logoval :',
 'info_retablir_lien' => 'visszaállítani ezt a linket',
-'info_retirer_mot' => 'A szó törlése',
-'info_retirer_mots' => 'Az összes szó törlése',
 'info_rubriques_nb' => '@nb@ sections', # NEW
 'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'cím nélkül',
 'info_selectionner_fichier' => 'Kijelölhet egy fájlt az @upload@ mappából',
 'info_selectionner_fichier_2' => 'Válasszon egy fájlt :',
-'info_signature_supprimee' => 'Aláírás törölve',
-'info_signature_supprimee_erreur' => 'Hiba: a törlési kód nem egyezik egyetlen aláírással sem',
 'info_site_attente' => 'Jóvahagyás alatti honlap',
 'info_site_reference' => 'Felvett honlap',
 'info_site_refuse' => 'Elutasított honlap',

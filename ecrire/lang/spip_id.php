@@ -265,40 +265,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Silakan masukkan alamat e-mail anda.',
 'form_indiquer_nom' => 'Silakan masukkan nama anda.',
 'form_indiquer_nom_site' => 'Silakan masukkan nama situs anda.',
-'form_pet_adresse_site' => 'URL situs anda',
-'form_pet_aucune_signature' => 'Tidak ada tanda tangan yang cocok dengan kode ini...',
-'form_pet_confirmation' => 'Silakan konfirmasi tanda tangan anda:',
 'form_pet_deja_enregistre' => 'Situs ini telah terdaftar',
-'form_pet_deja_signe' => 'Anda telah menandatangani teks ini.',
-'form_pet_envoi_mail_confirmation' => 'Sebuah e-mail konfirmasi telah dikirimkan kepada anda. Anda harus mengunjungi URL yang tercantum dalam email ini untuk menvalidasi tanda tangan anda.', # MODIF
-'form_pet_mail_confirmation' => 'Halo,
-
-Anda telah menandatangani petisi:
-@titre@.
-
-Anda memberikan informasi berikut:
-    Nama: @nom_email@
-    Situs: @nom_site@ - @url_site@
-@message@
-
-PESAN...
-Untuk menvalidasi tanda tangan anda, anda hanya perlu mengunjungi
-alamat di bawah (atau permohonan anda
-akan ditolak):
-    @url@
-
-Terima kasih atas partisipasi anda!
-',
-'form_pet_nom_site2' => 'Nama situs web anda',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Permasalahan teknis, sistem tanda tangan untuk sementara waktu terganggu.',
 'form_pet_signature_pasprise' => 'Tanda tangan anda tidak dihiraukan.',
-'form_pet_signature_validee' => 'Tanda tangan anda sah. Terima kasih!',
-'form_pet_site_deja_enregistre' => 'Situs ini telah terdaftar',
-'form_pet_url_invalide' => 'URL yang anda berikan tidak sah.',
-'form_pet_votre_email' => 'Alamat e-mail anda',
-'form_pet_votre_nom' => 'Nama atau alias anda',
-'form_pet_votre_site' => 'Jika anda memiliki sebuah situs web, anda dapat memasukkannya di bawah',
 'form_prop_confirmer_envoi' => 'Konfirmasi dispatch',
 'form_prop_description' => 'Deskripsi/komentar',
 'form_prop_enregistre' => 'Proposal anda telah disimpan, dan akan muncul secara online setelah divalidasi oleh administrator situs ini.',
@@ -342,7 +310,6 @@ Terima kasih atas partisipasi anda!
 'icone_interface_simple' => 'Tatap muka disederhana',
 'icone_maintenance_site' => 'Pemeliharaan situs',
 'icone_messagerie_personnelle' => 'Sistem pesan pribadi',
-'icone_mots_cles' => 'Kata-kata kunci',
 'icone_repartition_actuelle' => 'Tampilkan distribusi sekarang',
 'icone_repartition_debut' => 'Tampilkan distribusi dari awal',
 'icone_repartition_visites' => 'Distribusi kunjungan',
@@ -492,15 +459,11 @@ Terima kasih atas partisipasi anda!
 'info_rechercher_02' => 'Pencarian:',
 'info_remplacer_vignette' => 'Ganti gambar kecil standar dengan sebuah logo yang disediakan:',
 'info_retablir_lien' => 'pulihkan tautan ini',
-'info_retirer_mot' => 'Hapus kata kunci ini',
-'info_retirer_mots' => 'Hapus semua kata kunci',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'tidak berjudul',
 'info_selectionner_fichier' => 'Anda dapat memilih sebuah berkas dari direktori @upload@',
 'info_selectionner_fichier_2' => 'Pilih sebuah berkas:',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Validasi tertunda situs web',
 'info_site_reference' => 'Situs-situs referensi online',
 'info_site_refuse' => 'Situs web ditolak',

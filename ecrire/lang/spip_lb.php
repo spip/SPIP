@@ -261,41 +261,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Gidd weg är Email-Adress un.',
 'form_indiquer_nom' => 'Gidd weg äre Numm un.',
 'form_indiquer_nom_site' => 'Gidd weg de Numm vun ärem Site un.',
-'form_pet_adresse_site' => 'Adress vun ärem Site',
-'form_pet_aucune_signature' => 'Ët entsprëcht keng Ënnerschrëft dësem Kode...',
-'form_pet_confirmation' => 'Konfirméiert weg är Ënnerschrëft:',
 'form_pet_deja_enregistre' => 'Dëse Site ass schon ageschriwen',
-'form_pet_deja_signe' => 'Dir hutt dësen Text schon ënnerschriwen.',
-'form_pet_envoi_mail_confirmation' => 'E Konfirmatiouns-Email gouf lo grad un @email@ geschéckt. Dir musst op déi Adress surfen déi am Email steet fir är Ënnerschrëft ze bestätegen.',
-'form_pet_mail_confirmation' => 'Bonjour,
-
-Dir hutt gefroot fir d\'Petitioun:
-@titre@
-ze ënnerschreiwen.
-
-Dir hutt déi hei Informatiounen uginn:
-    Numm: @nom_email@
-    Site: @nom_site@ - @url_site@
-    @message@
-
-WICHTEG...
-Fir är Ënnerschrëft ze validéieren, surft op dës Adress (am aneren Fall gët är Demande verworf):
-
-    @url@
-
-
-Merci fir är Participatioun
-',
-'form_pet_nom_site2' => 'Numm vun ärem Site',
-'form_pet_probleme_liens' => 'Korrigéiert äre Message a maacht d\'Hypertext-Linken ewech.',
-'form_pet_probleme_technique' => 'Technësche Problem, d\'Ënnerschrëften si momentan ausser Betrieb.',
 'form_pet_signature_pasprise' => 'Är Ënnerschrëft ass nët ugeholl ginn.',
-'form_pet_signature_validee' => 'Är Ënnerschrëft ass validéiert. Merci!',
-'form_pet_site_deja_enregistre' => 'Dëse Site ass schon ageschriwen',
-'form_pet_url_invalide' => 'D\'URL déi der uginn hutt ass nët richteg.',
-'form_pet_votre_email' => 'Är Email-Adress',
-'form_pet_votre_nom' => 'Äre Numm oder Pseudo',
-'form_pet_votre_site' => 'Wann dir e Web-Site hutt, da kënnt dër en hei uginn',
 'form_prop_confirmer_envoi' => 'Konfirméiert d\'Schécken',
 'form_prop_description' => 'Beschreiwung/Kommentar',
 'form_prop_enregistre' => 'Är Propositioun ass enregistréiert, si geet online wann se vun engem Responsabelen vun desem Site validéiert ass.',
@@ -339,7 +306,6 @@ Merci fir är Participatioun
 'icone_interface_simple' => 'Einfachen Interface',
 'icone_maintenance_site' => 'Maintenance vum Site',
 'icone_messagerie_personnelle' => 'Perséinlech Messagerie',
-'icone_mots_cles' => 'Schlësselwierder',
 'icone_repartition_actuelle' => 'Déi aktuell Verdeelung weisen',
 'icone_repartition_debut' => 'D\'Verdeelung säit dem Ufank weisen',
 'icone_repartition_visites' => 'Verdeelung vun de Visiten',
@@ -489,15 +455,11 @@ oder kontaktéiert äre Provider.</span>',
 'info_rechercher_02' => 'Sichen:',
 'info_remplacer_vignette' => 'D\'Vignette duerch e speziellen Logo ersätzen:',
 'info_retablir_lien' => 'Dëse Link zerëcksetzen',
-'info_retirer_mot' => 'Dëst Wuert läschen',
-'info_retirer_mots' => 'D\'Wierder all läschen',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ouni Titel',
 'info_selectionner_fichier' => 'Dir kënnt e Fichier aus dem Dossier @upload@ wielen',
 'info_selectionner_fichier_2' => 'Wielt e Fichier:',
-'info_signature_supprimee' => 'Ënnerschrëft geläscht',
-'info_signature_supprimee_erreur' => 'Fehler: dëse Läsch-Code entsprëcht kénger Ënnerschrëft',
 'info_site_attente' => 'Site waard op d\'Validatioun',
 'info_site_reference' => 'Referenzéierten Site, publizéiert',
 'info_site_refuse' => 'Refuséierten Site',

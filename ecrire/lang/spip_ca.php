@@ -257,42 +257,8 @@ Per confirmar la nova adreça, només heu de connectar-vos a l\'adreça que hi h
 'form_indiquer_email' => 'Indiqueu la vostra adreça electrònica.',
 'form_indiquer_nom' => 'Indiqueu el vostre nom.',
 'form_indiquer_nom_site' => 'Indiqueu el nom del vostre lloc.',
-'form_pet_adresse_site' => 'L\'adreça del vostre lloc',
-'form_pet_aucune_signature' => 'No hi ha cap signatura que correspongui a aquest codi...',
-'form_pet_confirmation' => 'Confirmeu la vostra signatura:',
 'form_pet_deja_enregistre' => 'Aquest lloc ja està registrat.',
-'form_pet_deja_signe' => 'Ja heu signat aquest text.',
-'form_pet_envoi_mail_confirmation' => 'Us acabem d\'enviar un correu electrònic de confirmació a @email@. Heu d\'anar a l\'adreça Web que s\'hi esmenta per validar la vostra signatura. ',
-'form_pet_mail_confirmation' => 'Bon dia,
-
-Heu sol·licitat signar la petició:
-@titre@.
-
-Heu facilitat les següents informacions:
-    Nom: @nom_email@
-    Lloc: @nom_site@ - @url_site@
-    @message@
-
-IMPORTANT...
-Per validar la vostra signatura, heu de connectar-vos a l\'adreça
-indicada a continuació (en cas contrari, la sol·licitud serà
-rebutjada) :
-
-    @url@
-
-
-Gràcies per la participació
-',
-'form_pet_nom_site2' => 'Nom del vostre lloc Web',
-'form_pet_probleme_liens' => 'Vulgueu reprendre el vostre missatge suprimint-ne els enllaços.',
-'form_pet_probleme_technique' => 'Problema tècnic, les signatures estan temporalment suspeses.',
 'form_pet_signature_pasprise' => 'La seva signatura no s\'ha tingut en compte.',
-'form_pet_signature_validee' => 'La seva signatura ha estat validada. Gràcies!',
-'form_pet_site_deja_enregistre' => 'Aquest lloc està ja enregistrat',
-'form_pet_url_invalide' => 'L\'URL que heu indicat no és vàlida.',
-'form_pet_votre_email' => 'Correu electrònic:',
-'form_pet_votre_nom' => 'El vostre nom o pseudònim',
-'form_pet_votre_site' => 'Si teniu un lloc Web, podeu indicar-ho aquí sota',
 'form_prop_confirmer_envoi' => 'Confirmar l\'enviament',
 'form_prop_description' => 'Descripció/commentari',
 'form_prop_enregistre' => 'La seva proposta ha estat registrada, apareixerà en línia després de ser validada pels responsables d\'aquest lloc.',
@@ -336,7 +302,6 @@ Gràcies per la participació
 'icone_interface_simple' => 'Interfície simple',
 'icone_maintenance_site' => 'Manteniment del lloc',
 'icone_messagerie_personnelle' => 'Missatgeria personal',
-'icone_mots_cles' => 'Paraules clau',
 'icone_repartition_actuelle' => 'Mostrar la distribució actual',
 'icone_repartition_debut' => 'Mostrar la distribució des del començament',
 'icone_repartition_visites' => 'Repartiment de les visites',
@@ -486,15 +451,11 @@ Gràcies per la participació
 'info_rechercher_02' => 'Cercar:',
 'info_remplacer_vignette' => 'Substituir la icona per defecte per un logotip personalitzat:',
 'info_retablir_lien' => 'restaurar aquest enllaç',
-'info_retirer_mot' => 'suprimir aquesta paraula',
-'info_retirer_mots' => 'suprimir totes les paraules',
 'info_rubriques_nb' => '@nb@ seccions',
 'info_rubriques_un' => '1 secció',
 'info_sans_titre_2' => 'sense títol',
 'info_selectionner_fichier' => 'Podeu seleccionar un fitxer de la carpeta @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fitxer:',
-'info_signature_supprimee' => 'Signatura eliminada',
-'info_signature_supprimee_erreur' => 'Error: el codi de supressió no correspon a cap signatura',
 'info_site_attente' => 'Lloc Web pendent de validació',
 'info_site_reference' => 'Lloc referenciat en línia',
 'info_site_refuse' => 'Lloc Web rebutjat',

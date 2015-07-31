@@ -259,43 +259,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Lütfen e-posta adresinizi belirtiniz.',
 'form_indiquer_nom' => 'Lütfen isminizi belirtiniz.',
 'form_indiquer_nom_site' => 'Lütfen sitenizin ismini belirtiniz.',
-'form_pet_adresse_site' => 'Sitenizin adresi',
-'form_pet_aucune_signature' => 'Bu koda karşılık hiç bir imza yok...',
-'form_pet_confirmation' => 'Lütfen imzanızı onaylayınız :',
 'form_pet_deja_enregistre' => 'Bu site zaten kayıtlı',
-'form_pet_deja_signe' => 'Bu metni zaten imzalamışsınız.',
-'form_pet_envoi_mail_confirmation' => 'Şu anda @email@ adresine bir doğrulama e-postası gönderildi. İmzanızı doğrulamak için bu iletide belirtilen web adresini ziyaret etmelisiniz.',
-'form_pet_mail_confirmation' => 'Merhaba,
-
-Bir dilekçe imzalamak istediniz :
-@titre@.
-
-Ve şu bilgileri girdiniz :
-    İsim: @nom_email@
-    Site: @nom_site@ - @url_site@
-    @message@
-
-
-ÖNEMLİ ...
-İmzanızı onaylamak için aşağıdaki adrese bağlanmanız yeterli
- (aksi halde isteğiniz
-reddedilecektir) :
-
-    @url@
-
-
-Katılımınız için teşekkürler
-',
-'form_pet_nom_site2' => 'Sitenizin ismi',
-'form_pet_probleme_liens' => 'Lütfen iletinizi hipermetin bağlarını silerek tekrar giriniz',
-'form_pet_probleme_technique' => 'Teknik bir sorun var, imzalar geçici olarak iptal edildi.',
 'form_pet_signature_pasprise' => 'İmzanız dikkate alınmadı.',
-'form_pet_signature_validee' => 'İmzanız onaylandı. Teşekkürler !',
-'form_pet_site_deja_enregistre' => 'Bu site zaten kayıtlı',
-'form_pet_url_invalide' => 'Belirttiğiniz Url geçerli değil.',
-'form_pet_votre_email' => 'E-posta adresiniz',
-'form_pet_votre_nom' => 'İsminiz veya takma isminiz',
-'form_pet_votre_site' => 'Eğer bir siteniz varsa bunu aşağıda belirtebilirsiniz',
 'form_prop_confirmer_envoi' => 'Gönderiyi onayla',
 'form_prop_description' => 'Tanım / Yorum',
 'form_prop_enregistre' => 'Öneriniz kaydedildi, sitenin sorumluları tarafından onaylandıktan sonra çevrimiçi yayınlanacak.',
@@ -339,7 +304,6 @@ Katılımınız için teşekkürler
 'icone_interface_simple' => 'Basit arayüz',
 'icone_maintenance_site' => 'Site bakımı',
 'icone_messagerie_personnelle' => 'Kişisel iletiler',
-'icone_mots_cles' => 'Anahtar sözcükler',
 'icone_repartition_actuelle' => 'Mevcut dağılımı göster',
 'icone_repartition_debut' => 'Dağılımı en başından itibaren göster',
 'icone_repartition_visites' => 'Ziyaretlerin dağılımı',
@@ -489,15 +453,11 @@ Katılımınız için teşekkürler
 'info_rechercher_02' => 'Ara :',
 'info_remplacer_vignette' => 'Varsayılan etiketi kişiselleştirilmiş bir logo ile değiştir :',
 'info_retablir_lien' => 'Bu bağlantıyı tekrar kur',
-'info_retirer_mot' => 'Bu anahtar sözcüğü geri al',
-'info_retirer_mots' => 'Tüm anahtar sözcükleri geri al',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'başlıksız',
 'info_selectionner_fichier' => '@upload@ dizininden bir dosya seçebilirsiniz. ',
 'info_selectionner_fichier_2' => 'Bir dosya seç :',
-'info_signature_supprimee' => 'İmza silinmiş',
-'info_signature_supprimee_erreur' => 'Hata : bu silme kodu hiçbir imzaya karşı düşmüyor',
 'info_site_attente' => 'Onaylanmayı bekleyen Web sitesi',
 'info_site_reference' => 'Atıfta bulunulan çevrimiçi site',
 'info_site_refuse' => 'Web sitesi reddedildi',

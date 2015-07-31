@@ -262,40 +262,8 @@ indirizzo qui sotto. (Altrimenti la tua richiesta sarà ignorata.):
 'form_indiquer_email' => 'Indica il tuo indirizzo email.',
 'form_indiquer_nom' => 'Indica il tuo nome.',
 'form_indiquer_nom_site' => 'Indica il nome del tuo sito.',
-'form_pet_adresse_site' => 'Indirizzo del sito',
-'form_pet_aucune_signature' => 'Nessuna adesione corrisponde a questo codice...',
-'form_pet_confirmation' => 'Conferma l\'adesione:',
 'form_pet_deja_enregistre' => 'Questo sito è già registrato',
-'form_pet_deja_signe' => 'Hai già firmato questo testo.',
-'form_pet_envoi_mail_confirmation' => 'Ti è stato appena inviato un messaggio di posta elettronica all\'indirizzo @email@. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
-'form_pet_mail_confirmation' => 'Salve,
-
-Hai richiesto di firmare la petizione:
-@titre@.
-
-Hai fornito le seguenti informazioni:
-    Nome: @nom_email@
-    Sito: @nom_site@ - @url_site@
-    @message@
-
-IMPORTANTE...
-
-Per confermare la tua adesione è sufficiente visitare l\'indirizzo web qui sotto (se non lo fai, la tua domanda sarà respinta):
-
-    @url@
-
-
-Grazie per la partecipazione',
-'form_pet_nom_site2' => 'Nome del tuo sito Web',
-'form_pet_probleme_liens' => 'Per favore, riprenda il suo messaggio ed elimini i link ipertestuali.',
-'form_pet_probleme_technique' => 'Le adesioni sono temporaneamente sospese per il verificarsi di problemi tecnici.',
 'form_pet_signature_pasprise' => 'La tua adesione non è stata presa in considerazione.',
-'form_pet_signature_validee' => 'La tua adesione è stata confermata. Grazie!',
-'form_pet_site_deja_enregistre' => 'Questo sito è già registrato',
-'form_pet_url_invalide' => 'L\'URL indicato non risulta valido.',
-'form_pet_votre_email' => 'Il tuo indirizzo email',
-'form_pet_votre_nom' => 'Nome o pseudonimo',
-'form_pet_votre_site' => 'Se hai un sito Web, puoi segnalarlo qui sotto',
 'form_prop_confirmer_envoi' => 'Conferma l\'invio',
 'form_prop_description' => 'Descrizione/commento',
 'form_prop_enregistre' => 'La tua proposta è stata registrata ed apparirà on line dopo l\'approvazione del responsabile del sito.',
@@ -339,7 +307,6 @@ Grazie per la partecipazione',
 'icone_interface_simple' => 'Interfaccia semplificata',
 'icone_maintenance_site' => 'Manutenzione tecnica',
 'icone_messagerie_personnelle' => 'Messaggi personali',
-'icone_mots_cles' => 'Parole chiave',
 'icone_repartition_actuelle' => 'Mostra la ripartizione attuale',
 'icone_repartition_debut' => 'Mostra la ripartizione dall\'inizio',
 'icone_repartition_visites' => 'Distribuzione delle visite',
@@ -491,15 +458,11 @@ o contatta il tuo hoster.</font>',
 'info_rechercher_02' => 'Cerca:',
 'info_remplacer_vignette' => 'Sostituire l\'icona predefinita con una personalizzata:',
 'info_retablir_lien' => 'ripristinare questo link',
-'info_retirer_mot' => 'Rimuovere questa parola',
-'info_retirer_mots' => 'Rimuovere tutte le parole',
 'info_rubriques_nb' => '@nb@ sezioni',
 'info_rubriques_un' => '1 sezione',
 'info_sans_titre_2' => 'senza titolo',
 'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 'info_selectionner_fichier_2' => 'Seleziona un file:',
-'info_signature_supprimee' => 'Firma eliminata',
-'info_signature_supprimee_erreur' => 'Errore: questo codice di eliminazione non corrisponde a nessuna firma',
 'info_site_attente' => 'Sito Web in attesa di convalida',
 'info_site_reference' => 'Sito repertoriato in linea',
 'info_site_refuse' => 'Sito Web rifiutato',

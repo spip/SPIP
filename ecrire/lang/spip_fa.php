@@ -254,36 +254,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_indiquer_email' => 'خواهشمند است آدرس ايميل تان را مشخص كنيد ',
 'form_indiquer_nom' => '.خواهشمند است نام تان را مشخص كنيد',
 'form_indiquer_nom_site' => '.خواهشمند است نام سايت تان را مشخص كنيد',
-'form_pet_adresse_site' => 'آدرس سايت تان',
-'form_pet_aucune_signature' => '...هيچ امضائى با اين كد مطابقت نميكند  ',
-'form_pet_confirmation' => ':خواهشمند است امضاء تان را تأئيد كنيد',
 'form_pet_deja_enregistre' => 'اين سايت قبلأ ثبت شده',
-'form_pet_deja_signe' => '.شما قبلأ اين متن را امضاء كرده ايد',
-'form_pet_envoi_mail_confirmation' => 'يك نامه الكترونكي براى تأئيد @email@ برايتان فرستاده شده. شما بايد از آدرس ذكر شده براى تأئيد امضاء تان ديدن نمائيد',
-'form_pet_mail_confirmation' => 'سلام,
- 
- شما تقاضاى امضاء يك درخواست راكرده ايد    @titre@.
-
-: شما اطلاعات زير را بما داده ايد:
-    
-@nom_email@:نام @nom_site@-@url_site@سايت :
-مهم  
- براى تأئيد امضاء تان، كافيست كه به آدرس زير متصل شويد ( در غير اين صورت درخواستتان رد 
-خواهد شد
-    @url@
-
-از شركتتان متشكريم
- ',
-'form_pet_nom_site2' => 'نام سايتتان<b>      ',
-'form_pet_probleme_liens' => 'خواهشمند است پیامتان را با حذف پیوند هایپرتکت دریافت کنید.',
-'form_pet_probleme_technique' => 'نقص فنى، امضاء ها موقتأ لغو شدند',
 'form_pet_signature_pasprise' => '.امضاء تان قبول نشده',
-'form_pet_signature_validee' => 'امضاء تان تأئيد شد. متشكريم !',
-'form_pet_site_deja_enregistre' => 'اين سايت قبلأ ثبت شده',
-'form_pet_url_invalide' => 'كه مشخص كرده ايد معتبر نميباشد URL ',
-'form_pet_votre_email' => 'آدرس ايميل تان',
-'form_pet_votre_nom' => 'نام يا نام مستعارتان',
-'form_pet_votre_site' => 'اگر داراى سايتى هستيد، ميتوانيد آنرا در زير ذكر كنيد',
 'form_prop_confirmer_envoi' => 'تأئيد فرستادن',
 'form_prop_description' => 'توصيف/تفسير',
 'form_prop_enregistre' => 'پيشنهاد شما ثبت شد، پس از تأئيد مسئولان سايت بروى سايت خواهد رفت',
@@ -327,7 +299,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_interface_simple' => 'نماى ساده',
 'icone_maintenance_site' => 'تعمير و نگهدارى سايت',
 'icone_messagerie_personnelle' => 'پيك شخصى',
-'icone_mots_cles' => 'واژه-كليدها',
 'icone_repartition_actuelle' => 'نمايش توزيع كنونى',
 'icone_repartition_debut' => 'اعلان توزيع از ابتدا',
 'icone_repartition_visites' => 'نمودار بازديدها',
@@ -476,15 +447,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rechercher_02' => 'جستجو:',
 'info_remplacer_vignette' => ': علامت گرافيكى شخصى (لوگو ) را جايگزين تصوير كنيد',
 'info_retablir_lien' => 'اين پيوند را دوباره برقرار كنيد',
-'info_retirer_mot' => 'اين واژه را برداريد',
-'info_retirer_mots' => 'تمام واژه ها را برداريد',
 'info_rubriques_nb' => '@nb@ بخش‌ها',
 'info_rubriques_un' => 'بخش 1',
 'info_sans_titre_2' => 'بدون عنوان',
 'info_selectionner_fichier' => 'شما ميتوانيد يك فايل از پرونده @upload@ انتخاب كنيد',
 'info_selectionner_fichier_2' => ': يك فايل انتخاب كنيد',
-'info_signature_supprimee' => 'امضا حذف شده',
-'info_signature_supprimee_erreur' => 'اشتباه: این کد حذفی به هیچ امضائی مربوط نیست',
 'info_site_attente' => 'سايت در انتظار تائيد',
 'info_site_reference' => 'سايت مرجع روى خط ',
 'info_site_refuse' => 'سايت پذيرفته نشده',

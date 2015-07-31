@@ -257,42 +257,8 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 'form_indiquer_email' => 'Por favor, informe o seu endereço de e-mail.',
 'form_indiquer_nom' => 'Por favor, informe o seu nome.',
 'form_indiquer_nom_site' => 'Por favor, informe o nome do seu site.',
-'form_pet_adresse_site' => 'Endereço do seu site',
-'form_pet_aucune_signature' => 'Nenhuma assinatura corresponde a este código...',
-'form_pet_confirmation' => 'Por favor, confirme a sua assinatura:',
 'form_pet_deja_enregistre' => 'Este site já está cadastrado',
-'form_pet_deja_signe' => 'Você já assinou este texto.',
-'form_pet_envoi_mail_confirmation' => 'Um e-mail de confirmação acabou de ser enviado para @email@. Você deverá visitar o endereço web mencionado na mensagem para validar a sua assinatura.',
-'form_pet_mail_confirmation' => 'Bom dia,
-
-Você pediu para assinar a petição:
-@titre@.
-
-Você forneceu as informações abaixo:
-    Nome: @nom_email@
-    Site: @nom_site@ - @url_site@
-    @message@
-
-IMPORTANTE...
-Para validar a sua assinatura, basta se conectar ao
-endereço abaixo (caso contrário, seu pedido será
-rejeitado):
-
-    @url@
-
-
-Obrigado por participar
-',
-'form_pet_nom_site2' => 'Nome do seu website',
-'form_pet_probleme_liens' => 'Por favor, retire os links hipertexto da sua mensagem.',
-'form_pet_probleme_technique' => 'Problema técnico: as assinaturas estão suspensas temporariamente.',
 'form_pet_signature_pasprise' => 'Sua assinatura não foi computada.',
-'form_pet_signature_validee' => 'Sua assinatura foi validada. Obrigado!',
-'form_pet_site_deja_enregistre' => 'Este site já está cadastrado',
-'form_pet_url_invalide' => 'O URL que você informou não é válido.',
-'form_pet_votre_email' => 'Seu endereço de e-mail',
-'form_pet_votre_nom' => 'Seu nome ou apelido',
-'form_pet_votre_site' => 'Se você tem um website, você pode informá-lo abaixo',
 'form_prop_confirmer_envoi' => 'Confirmar o envio',
 'form_prop_description' => 'Descrição / comentário',
 'form_prop_enregistre' => 'Sua proposta foi cadastrada, ela aparecerá online após ser validada pelos responsáveis deste site.',
@@ -336,7 +302,6 @@ Obrigado por participar
 'icone_interface_simple' => 'Interface simplificada',
 'icone_maintenance_site' => 'Manutenção do site',
 'icone_messagerie_personnelle' => 'Mensagens pessoais',
-'icone_mots_cles' => 'Palavras-chave',
 'icone_repartition_actuelle' => 'Exibir a repartição atual',
 'icone_repartition_debut' => 'Exibir a repartição após o início',
 'icone_repartition_visites' => 'Repartição das visitas',
@@ -486,15 +451,11 @@ Obrigado por participar
 'info_rechercher_02' => 'Procurar:',
 'info_remplacer_vignette' => 'Substituir o ícone padrão por um logo personalizado:',
 'info_retablir_lien' => 'reabilitar este link',
-'info_retirer_mot' => 'Retirar esta palavra-chave',
-'info_retirer_mots' => 'Retirar todas as palavras-chave',
 'info_rubriques_nb' => '@nb@ seções',
 'info_rubriques_un' => '1 seção',
 'info_sans_titre_2' => 'sem título',
 'info_selectionner_fichier' => 'Você pode escolher um arquivo do diretório @upload@',
 'info_selectionner_fichier_2' => 'Selecionar um arquivo:',
-'info_signature_supprimee' => 'Assinatura excluída',
-'info_signature_supprimee_erreur' => 'Erro: este código de exclusão não corresponde a nenhuma assinatura',
 'info_site_attente' => 'Website aguardando validação',
 'info_site_reference' => 'Site referenciado online',
 'info_site_refuse' => 'Website recusado',

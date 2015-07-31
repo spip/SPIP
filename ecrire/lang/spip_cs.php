@@ -262,42 +262,8 @@ na webu "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Zadejte svůj e-mail.',
 'form_indiquer_nom' => 'Zadejte své jméno.',
 'form_indiquer_nom_site' => 'Zadejte název svého webu.',
-'form_pet_adresse_site' => 'Zadejte adresu URL svého webu',
-'form_pet_aucune_signature' => 'Tomuto kódu neodpovídá žádný podpis...',
-'form_pet_confirmation' => 'Potvrďte svůj podpis:',
 'form_pet_deja_enregistre' => 'Tento web je již zaregistrován',
-'form_pet_deja_signe' => 'Tento text jste již podepsali.',
-'form_pet_envoi_mail_confirmation' => 'Byla vám zaslána elektronická zpráva s potvrzením. Platnost podpisu ověříte na adrese URL, která je v této zprávě uvedena.', # MODIF
-'form_pet_mail_confirmation' => 'Dobrý den,
-
-Rozhodli jste se podepsat petici:
-@titre@.
-
-Uvedli jste následující údaje:
-    Jméno: @nom_email@
-    Web: @nom_site@ - @url_site@
-    @message@
-
-DŮLEŽITÉ UPOZORNĚNÍ...
-Platnost svého podpisu potvrdíte přechodem
-na níže uvedenou adresu (jinak bude váš požadavek
-zamítnut):
-
-    @url@
-
-
-Děkujeme vám za účast
-',
-'form_pet_nom_site2' => 'Název vašeho webu',
-'form_pet_probleme_liens' => 'Please edit your message, taking out all hyperlinks.', # NEW
-'form_pet_probleme_technique' => 'Z technických důvodů nelze momentálně podepisovat.',
 'form_pet_signature_pasprise' => 'Váš podpis nebyl zohledněn.',
-'form_pet_signature_validee' => 'Váš podpis je platný. Děkujeme vám!',
-'form_pet_site_deja_enregistre' => 'Tento web je již zaregistrován',
-'form_pet_url_invalide' => 'Zadali jste neplatnou adresu URL.',
-'form_pet_votre_email' => 'Nová elektronická adresa',
-'form_pet_votre_nom' => 'Jméno nebo přezdívka (alias)',
-'form_pet_votre_site' => 'Máte-li web, můžete dále zadat jeho adresu',
 'form_prop_confirmer_envoi' => 'Potvrďte odeslání',
 'form_prop_description' => 'Popis/poznámka',
 'form_prop_enregistre' => 'Váš návrh byl zaregistrován. Po kontrole správci tohoto webu bude zvěřejněn online.',
@@ -341,7 +307,6 @@ Děkujeme vám za účast
 'icone_interface_simple' => 'Jednoduché rozhraní',
 'icone_maintenance_site' => 'Údržba webu',
 'icone_messagerie_personnelle' => 'Osobní zprávy',
-'icone_mots_cles' => 'Klíčová slova',
 'icone_repartition_actuelle' => 'Zobrazit aktuální rozdělení',
 'icone_repartition_debut' => 'Zobrazit rozdělení od počátku',
 'icone_repartition_visites' => 'Rozdělení návštěv',
@@ -491,15 +456,11 @@ Děkujeme vám za účast
 'info_rechercher_02' => 'Najít:',
 'info_remplacer_vignette' => 'Nahradit standardní náhled vlastním logem:',
 'info_retablir_lien' => 'obnovit tento odkaz',
-'info_retirer_mot' => 'Odstranit toto klíčové slovo',
-'info_retirer_mots' => 'Odstranit všechna klíčová slova',
 'info_rubriques_nb' => '@nb@ sections', # NEW
 'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'bez názvu',
 'info_selectionner_fichier' => 'Můžete vybrat soubor ze složky @upload@',
 'info_selectionner_fichier_2' => 'Vybrat soubor:',
-'info_signature_supprimee' => 'Signature deleted', # NEW
-'info_signature_supprimee_erreur' => 'Error: this deletion code does not correspond to any signature', # NEW
 'info_site_attente' => 'Web čeká na schválení',
 'info_site_reference' => 'Web odkazovaný online',
 'info_site_refuse' => 'Web byl odmítnut',

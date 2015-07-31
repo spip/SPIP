@@ -263,42 +263,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Rinsignate puru u vostru indirizzu email.',
 'form_indiquer_nom' => 'Rinsignate puru u vostru nome.',
 'form_indiquer_nom_site' => 'Rinsignate puru u nome di u vostru situ.',
-'form_pet_adresse_site' => 'Indirizzu di u vostru situ',
-'form_pet_aucune_signature' => 'Nisuna zifra currisponde à stu còdice ...',
-'form_pet_confirmation' => 'Cunfirmate puru a vostra zifra :',
 'form_pet_deja_enregistre' => 'Hè digià arregistratu stu situ',
-'form_pet_deja_signe' => 'Avete digià zifratu stu testu.',
-'form_pet_envoi_mail_confirmation' => 'Vi hè statu mandatu avà un email di cunfirmazione à @email@. Vi tuccherà à andà à visità
-	l\'indirizzu Web mintuvatu in stu email da cunvalidà a vostra zifra.',
-'form_pet_mail_confirmation' => 'Bonghjornu,
-
-Avete dumandatu à zifrà a petizione :
-@titre@.
-
-Avete furnitu e seguenti infurmazioni :
-    Nome: @nom_email@
-    Situ: @nom_site@ - @url_site@
-    @message@
-
-IMPURTANTE ...
-Per cunvalidà a vostra zifra, basta à cunnette vi à 
-l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
-
-    @url@
-
-
-À ringrazià vi
-',
-'form_pet_nom_site2' => 'Nome di u vostru situ Web',
-'form_pet_probleme_liens' => 'Ripigliate puru u vostru messagiu caccendu e lee ipertestu.',
-'form_pet_probleme_technique' => 'Problemu tècnicu, e zifre sò suspese per qualchì tempu.',
 'form_pet_signature_pasprise' => 'Ùn hè stata pigliata in contu a vostra zifra.',
-'form_pet_signature_validee' => 'Hè cunvalidata a vostra zifra. À ringrazià vi !',
-'form_pet_site_deja_enregistre' => 'Hè digià arregistrau stu situ',
-'form_pet_url_invalide' => 'Ùn hè vàlida l\'URL da voi rinsignata.',
-'form_pet_votre_email' => 'U vostru indirizzu email',
-'form_pet_votre_nom' => 'U vostru nome o pseudo',
-'form_pet_votre_site' => 'Sè vo avete un situ Web, rinsignate lu puru quì sottu',
 'form_prop_confirmer_envoi' => 'Cunfirmate l\'inviu',
 'form_prop_description' => 'Discrizzione/Cummentu',
 'form_prop_enregistre' => 'Hè stata arregistrata a vostra pruposta. Cumpariscerà in ligna dopu cunvalidazione da i respunsèvuli di stu situ.',
@@ -343,7 +309,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'icone_interface_simple' => 'Interfaccia simplificata',
 'icone_maintenance_site' => 'Mantenimentu di u situ',
 'icone_messagerie_personnelle' => 'Messageria persunale',
-'icone_mots_cles' => 'Segni',
 'icone_repartition_actuelle' => 'Vede u spartimentu attuale',
 'icone_repartition_debut' => 'Vede u spartimentu da u principiu',
 'icone_repartition_visites' => 'Spartimentu di e vìsite',
@@ -495,15 +460,11 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'info_rechercher_02' => 'Ricircà :',
 'info_remplacer_vignette' => 'Rimpiazzà a figuretta predefinita cù un logo persunalizatu :',
 'info_retablir_lien' => 'ristabbilisce sta lea',
-'info_retirer_mot' => 'Sguassà sta parulla',
-'info_retirer_mots' => 'Sguassà tutte e parulle',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'senza tìtulu',
 'info_selectionner_fichier' => 'Pudete sceglie un scedariu da u cartulare @upload@',
 'info_selectionner_fichier_2' => 'Sceglie un schedariu :',
-'info_signature_supprimee' => 'Zifra sguassata',
-'info_signature_supprimee_erreur' => 'Errore : stu còdice di sguassamentu ùn currisponde à nisuna zifra',
 'info_site_attente' => 'Situ Web in attesa di cunvàlida',
 'info_site_reference' => 'Situ riferitu in ligna',
 'info_site_refuse' => 'Situ Web rifiutatu',

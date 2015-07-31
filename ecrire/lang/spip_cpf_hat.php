@@ -263,38 +263,8 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 'form_indiquer_email' => 'Mèsi enskri ladrès limèl ou.',
 'form_indiquer_nom' => 'Mèsi enskri kouman w rele',
 'form_indiquer_nom_site' => 'Mèsi enskri kouman sit ou-a li rele',
-'form_pet_adresse_site' => 'Ladrès sit ou',
-'form_pet_aucune_signature' => 'Okenn siyati ka koresponn kod-la...',
-'form_pet_confirmation' => 'Mèsi konfime siyati ou :',
 'form_pet_deja_enregistre' => 'Sit-la se deja enskri',
-'form_pet_deja_signe' => 'W te deja sinye tèks-la.',
-'form_pet_envoi_mail_confirmation' => 'Yon limèl pou konfine te fin voye a w. Fòk w vizite ladrès wèb te done nan limèl pou w konfime siyati ou.', # MODIF
-'form_pet_mail_confirmation' => 'Bonjou,
-
-W la domman mèt siyati nan petisyon-nan :
-@titre@.
-
-W te done tout ranséynman  swivan :
-    Kouman rele: @nom_email@
-    sit ou: @nom_site@ - @url_site@
-
-...
-
-Pou konfime siyati-a, fòk sèlman w abòd ladrès anba (sinon, sitwèb-la ke pa enskri siyati ou) :
-    @url@
-
-Mèsi  w soutni petisyon-nan
-', # MODIF
-'form_pet_nom_site2' => 'Kouman sitwèb ou rele',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => 'Pwoblèm teknik, siyati se pa posib kounye-a. Tann pwoblèm-la ke aranje pou rete sispann a yo.',
 'form_pet_signature_pasprise' => 'Siyati ou se pa aksepte.',
-'form_pet_signature_validee' => 'Siyati ou se konfime. Mèsi !',
-'form_pet_site_deja_enregistre' => 'Sit-la se deja enskri',
-'form_pet_url_invalide' => 'URL w te done se pa bon.',
-'form_pet_votre_email' => 'Ladrès limèl ou',
-'form_pet_votre_nom' => 'Kouman w rele',
-'form_pet_votre_site' => 'Si w ap gen sitwèb, se posib enskri ali isit-enba-mèm',
 'form_prop_confirmer_envoi' => 'Konfime w vle voye i',
 'form_prop_description' => 'Dekrisyon/komantè',
 'form_prop_enregistre' => 'Pwopozisyon ou se kounye-a  ap enskri, li ke parèt apre yon komandè te konfime ali. ',
@@ -338,7 +308,6 @@ Mèsi  w soutni petisyon-nan
 'icone_interface_simple' => 'Entèfas senp',
 'icone_maintenance_site' => 'Swen pou sit la',
 'icone_messagerie_personnelle' => 'Kazmodékri',
-'icone_mots_cles' => 'Mokle yo',
 'icone_repartition_actuelle' => 'Afiche repatisyon kounye-a',
 'icone_repartition_debut' => 'Afiche repatisyon depi koumansman',
 'icone_repartition_visites' => 'Repatisyon vizit yo',
@@ -488,15 +457,11 @@ Mèsi  w soutni petisyon-nan
 'info_rechercher_02' => 'Chèche :',
 'info_remplacer_vignette' => 'Chanje vinyèt otomatik ek yon logo pèsonèl :',
 'info_retablir_lien' => 'Romèt lyen-nan',
-'info_retirer_mot' => 'Kraze mokle-a',
-'info_retirer_mots' => 'Kraze tout mokle yo',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ki pa rele',
 'info_selectionner_fichier' => 'W kapab chwazi yon fichye nan dosyé @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Chwazi yon fichye :',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Sit web ki tann yon komandè konfime ali',
 'info_site_reference' => 'Sit referanse an liy',
 'info_site_refuse' => 'Sit we ki te fin refize',

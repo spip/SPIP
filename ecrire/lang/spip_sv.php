@@ -255,38 +255,8 @@ För att bekräfta din nya adress måste du gå till
 'form_indiquer_email' => 'Var god ange in din epost-adress.',
 'form_indiquer_nom' => 'Var god ange in ditt namn.',
 'form_indiquer_nom_site' => 'Var god och ange din sajts namn',
-'form_pet_adresse_site' => 'Din sajts URL',
-'form_pet_aucune_signature' => 'Inga underskrifter motsvarar denna kod...',
-'form_pet_confirmation' => 'Var god och bekräfta din underskrift:',
 'form_pet_deja_enregistre' => 'Den här sajten är redan registrerad',
-'form_pet_deja_signe' => 'Du har redan skrivit under texten.',
-'form_pet_envoi_mail_confirmation' => 'Ett epost med en begäran om bekräftelse har precis skickats till @email@. Du bör besöka den URL som står i brevet för att bekräfta din inmatning.',
-'form_pet_mail_confirmation' => 'Hej,
-
-Du har begärt att skriva under namninsamlingen:
-@titre@.
-
-Du angav följande information:
-    Namn: @nom_email@
-    Sajt: @nom_site@ - @url_site@
-
-VIKTIGT...
-För att bekräfta din underskrift behöver du besöka
-adressen nedan (annars kommer din begäran att nekas:
-    @url@
-
-Tack för ditt deltagande
-',
-'form_pet_nom_site2' => 'Namn på din webbssajt',
-'form_pet_probleme_liens' => 'Var vänlig ändra ditt meddelande, ta bort alla hyperlänkar.',
-'form_pet_probleme_technique' => 'Registrering är tillfälligtvis omöjligt på grund av ett tekniskt problem.',
 'form_pet_signature_pasprise' => 'Din underskrift har ignorerats.',
-'form_pet_signature_validee' => 'Din signatur är giltig. Tack!',
-'form_pet_site_deja_enregistre' => 'Den här sajten är redan registrerad',
-'form_pet_url_invalide' => 'URL:en som du angivit är inte giltig.',
-'form_pet_votre_email' => 'Din epost-adress',
-'form_pet_votre_nom' => 'Ditt namn eller aliass',
-'form_pet_votre_site' => 'Om du har en webbssajt, kan du ange dess adress nedan',
 'form_prop_confirmer_envoi' => 'Bekräfta',
 'form_prop_description' => 'Beskrivning/kommentar',
 'form_prop_enregistre' => 'Ditt förslag har sparats, det kommer att visas online när det har godkänts av en administratör för denna sajt.',
@@ -330,7 +300,6 @@ Tack för ditt deltagande
 'icone_interface_simple' => 'Förenklat gränssnitt',
 'icone_maintenance_site' => 'Underhåll av sajten',
 'icone_messagerie_personnelle' => 'Personligt meddelandesystem',
-'icone_mots_cles' => 'Nyckelord',
 'icone_repartition_actuelle' => 'Visa den nuvarande fördelningen',
 'icone_repartition_debut' => 'Visa fördelningen från starten',
 'icone_repartition_visites' => 'Fördelning av besök',
@@ -480,15 +449,11 @@ Tack för ditt deltagande
 'info_rechercher_02' => 'Sök:',
 'info_remplacer_vignette' => 'Byt ut standardikonen mot en egen ikon:',
 'info_retablir_lien' => 'återskapa den här länken',
-'info_retirer_mot' => 'Radera nyckelordet',
-'info_retirer_mots' => 'Radera alla nyckelord',
 'info_rubriques_nb' => '@nb@ avdelningar',
 'info_rubriques_un' => '1 avdelning',
 'info_sans_titre_2' => 'utan titel',
 'info_selectionner_fichier' => 'Du kan välja en fil i foldern @upload@',
 'info_selectionner_fichier_2' => 'Välj en fil:',
-'info_signature_supprimee' => 'Underskriften raderades',
-'info_signature_supprimee_erreur' => 'Fel: den här raderingskoden motsvarar ingen underskrift',
 'info_site_attente' => 'Webbsajten väntar på godkännande',
 'info_site_reference' => 'Länkade sajter ',
 'info_site_refuse' => 'Webbsajten refuserad',

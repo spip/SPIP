@@ -263,42 +263,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_indiquer_email' => 'الرجاء إدخال عنوانك الإلكتروني.',
 'form_indiquer_nom' => 'الرجاء إدخال اسمك.',
 'form_indiquer_nom_site' => 'الرجاء إدخال إسم موقعك.',
-'form_pet_adresse_site' => 'عنوان موقعك',
-'form_pet_aucune_signature' => 'لا يوجد أي توقيع يناسب هذه القيمة...',
-'form_pet_confirmation' => 'الرجاء تأكيد توقيعك:',
 'form_pet_deja_enregistre' => 'سبق تسجيل هذا الموقع',
-'form_pet_deja_signe' => 'سبق ووقعت هذا النص.',
-'form_pet_envoi_mail_confirmation' => 'لقد تم إرسال بريد إلكتروني للتأكيد إلى @email@. يجب عليك أن تزور العنوان المذكور في الرسالة للتصديق على توقيعك.',
-'form_pet_mail_confirmation' => 'مرحباً،
-
-طلبت توقيع العريضة:
-@titre@.
-
-لقد أدخلت المعلومات التالية:
-    الاسم: @nom_email@
-    الموقع: @nom_site@ - @url_site@
-
-مهم جداً...
-للتصديق على توقيعك يكفي أن تتصل
-بالعنوان أدناه (إذا لم تفعل، سيتم
-رفض طلبك):
-
-    @url@
-
-
-شكراً لمساهمتك
-
-',
-'form_pet_nom_site2' => 'اسم موقعك',
-'form_pet_probleme_liens' => 'الرجاء إعادة إدخال رسالتك بعد حذف كل روابط هايبرتكست.',
-'form_pet_probleme_technique' => 'مشكلة تقنية، التوقيعات معلقة مؤقتاً.',
 'form_pet_signature_pasprise' => 'تم تجاهل توقيعك.',
-'form_pet_signature_validee' => 'توقيعك صالح. شكراً!',
-'form_pet_site_deja_enregistre' => 'سبق تسجيل هذا الموقع',
-'form_pet_url_invalide' => 'العنوان الذي أدخلته غير صالح.',
-'form_pet_votre_email' => 'عنوانك الإلكتروني',
-'form_pet_votre_nom' => 'اسمك أو لقبك',
-'form_pet_votre_site' => 'إذا كان لديك موقع، قم بإدخاله أدناه',
 'form_prop_confirmer_envoi' => 'تأكيد الإرسال',
 'form_prop_description' => 'وصف/تعليق',
 'form_prop_enregistre' => 'تم تسجيل اقتراحك، سوف يظهر بعد تصديقه من قبل مسئولي هذا الموقع.',
@@ -342,7 +308,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_interface_simple' => 'واجهة مبسّطة',
 'icone_maintenance_site' => 'صيانة الموقع',
 'icone_messagerie_personnelle' => 'المراسلة الشخصية',
-'icone_mots_cles' => 'المفاتيح',
 'icone_repartition_actuelle' => 'إظهار التوزيع الحالي',
 'icone_repartition_debut' => 'إظهار التوزيع منذ البداية',
 'icone_repartition_visites' => 'توزيع الزيارات',
@@ -492,15 +457,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_rechercher_02' => 'بحث:',
 'info_remplacer_vignette' => 'استبدال المصغر الافتراضي بشعار شخصي:',
 'info_retablir_lien' => 'استرجاع هذه الوصلة',
-'info_retirer_mot' => 'حذف هذا المفتاح',
-'info_retirer_mots' => 'حذف كل المفاتيح',
 'info_rubriques_nb' => '@nb@ قسم',
 'info_rubriques_un' => 'قسم واحد',
 'info_sans_titre_2' => 'بدون عنوان',
 'info_selectionner_fichier' => 'يمكنك تحديد ملف من المجلد @upload@:',
 'info_selectionner_fichier_2' => 'تحديد ملف:',
-'info_signature_supprimee' => 'توقيع محذوف',
-'info_signature_supprimee_erreur' => 'خطأ: معلومات الحذف هذه لا تناسب اي توقيع',
 'info_site_attente' => 'موقع بانتظار التصديق',
 'info_site_reference' => 'موقع مبوب على النسيج',
 'info_site_refuse' => 'موقع مرفوض',

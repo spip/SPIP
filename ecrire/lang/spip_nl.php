@@ -262,41 +262,8 @@ de website "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Vul hier je e-mailadres in.',
 'form_indiquer_nom' => 'Vul hier je naam in.',
 'form_indiquer_nom_site' => 'Gelieve de naam van je site op te geven.',
-'form_pet_adresse_site' => 'Adres van je website',
-'form_pet_aucune_signature' => 'Geen enkele naam komt overeen met deze code ...',
-'form_pet_confirmation' => 'Gelieve je handtekening te bevestigen :',
 'form_pet_deja_enregistre' => 'Deze website is reeds geregistreerd',
-'form_pet_deja_signe' => 'Je hebt deze tekst al ondertekend.',
-'form_pet_envoi_mail_confirmation' => 'Een elektronische bevestigingspost is zojuist naar @email@ verzonden. U zult het Web adres moeten bezoeken dat in deze post wordt vermeld om uw handtekening te valideren.',
-'form_pet_mail_confirmation' => 'Hallo,
-
-Je hebt gevraagd om deze petitie te ondertekenen :
-@titre@.
-
-Je hebt ons de volgende informatie bezorgd :
-    Naam: @nom_email@
-    Site: @nom_site@ - @url_site@
-    @message@
-
-BELANGRIJK...
-Om je gegevens te valideren, volstaat het het onderstaande adres
- aan te klikken (in het andere geval, zal je aanvraag verworpen worden) :
-
-    @url@
-
-
-Bedankt voor je deelname
-',
-'form_pet_nom_site2' => 'Naam van je website',
-'form_pet_probleme_liens' => 'Gelieve uw bericht te herbeginnen zonder internet links.',
-'form_pet_probleme_technique' => 'Technisch probleem. Inloggen is momenteel niet mogelijk.',
 'form_pet_signature_pasprise' => 'Met je naam wordt geen rekening gehouden.',
-'form_pet_signature_validee' => 'Je naam is goedgekeurd. Bedankt!',
-'form_pet_site_deja_enregistre' => 'Deze website is reeds geregistreerd',
-'form_pet_url_invalide' => 'De URL die je opgaf, is ongeldig.',
-'form_pet_votre_email' => 'Je e-mailadres',
-'form_pet_votre_nom' => 'Je naam of alias',
-'form_pet_votre_site' => 'Als je een website hebt, kan je ze hier vermelden',
 'form_prop_confirmer_envoi' => 'Bevestig de verzending',
 'form_prop_description' => 'Beschrijving / commentaar',
 'form_prop_enregistre' => 'Je voorstel is geregistreerd. Het zal online verschijnen nadat de eindredacteur van de website het heeft goedgekeurd.',
@@ -340,7 +307,6 @@ Bedankt voor je deelname
 'icone_interface_simple' => 'Eenvoudige interface',
 'icone_maintenance_site' => 'Onderhoud van de website',
 'icone_messagerie_personnelle' => 'Persoonlijk berichtensysteem',
-'icone_mots_cles' => 'Trefwoorden',
 'icone_repartition_actuelle' => 'De huidige verdeling tonen',
 'icone_repartition_debut' => 'De verdeling sinds het begin tonen',
 'icone_repartition_visites' => 'Verdeling van de bezoeken',
@@ -491,15 +457,11 @@ Bedankt voor je deelname
 'info_rechercher_02' => 'Zoeken:',
 'info_remplacer_vignette' => 'Vervang de standaard mini-afbeelding door een gepersonaliseerd logo:',
 'info_retablir_lien' => 'deze link hernieuwen',
-'info_retirer_mot' => 'Trek dat woord',
-'info_retirer_mots' => 'Alle trefwoorden intrekken',
 'info_rubriques_nb' => '@nb@ rubrieken',
 'info_rubriques_un' => '1 rubriek',
 'info_sans_titre_2' => 'zonder titel',
 'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map @upload@',
 'info_selectionner_fichier_2' => 'Een bestand selecteren:',
-'info_signature_supprimee' => 'Handtekening verwijderd',
-'info_signature_supprimee_erreur' => 'Fout : de verwijderde code komt met geen enkele handtekening overeen.',
 'info_site_attente' => 'website ter goedkeuring voorgelegd',
 'info_site_reference' => 'Online gekoppelde site',
 'info_site_refuse' => 'Website weigerd',

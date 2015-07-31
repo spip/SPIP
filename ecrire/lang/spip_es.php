@@ -262,43 +262,8 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indica tu dirección de correo electrónico.',
 'form_indiquer_nom' => 'Indica tu nombre.',
 'form_indiquer_nom_site' => 'Indica el nombre de tu sitio Web.',
-'form_pet_adresse_site' => 'Dirección de tu sitio',
-'form_pet_aucune_signature' => 'No hay ninguna firma que corresponda a este código...',
-'form_pet_confirmation' => 'Ratifica tu firma: ',
 'form_pet_deja_enregistre' => 'Este sitio ya está registrado',
-'form_pet_deja_signe' => 'Ya has firmado este texto.',
-'form_pet_envoi_mail_confirmation' => 'Se acaba de enviar un mensaje de confirmación a @email@. Tienes que ingresar a la dirección Web que contiene para validar tu firma.',
-'form_pet_mail_confirmation' => 'Hola,
-
-Has solicitado añadir tu firma a:
-@titre@.
-
-Con la siguiente información:
-
-    Nombre: @nom_email@
-    Sitio: @nom_site@ - @url_site@
-    @message@
-
-IMPORTANTE...
-Para confirmar tu firma, debes ingresar a
-la dirección web indicada a continuación (de lo contrario, tu firma
-no podrá ser tomada en cuenta):
-
-    @url@
-
-
-Gracias por tu participación
-',
-'form_pet_nom_site2' => 'Nombre de tu sitio Web',
-'form_pet_probleme_liens' => 'Ingresa nuevamente tu mensaje, quitando los enlaces hypertexto.',
-'form_pet_probleme_technique' => 'Problema técnico, las firmas están temporalmente suspendidas.',
 'form_pet_signature_pasprise' => 'Tu firma no ha sido tomada en cuenta.',
-'form_pet_signature_validee' => 'Tu firma está validada. ¡Gracias!',
-'form_pet_site_deja_enregistre' => 'Este sitio ya está registrado',
-'form_pet_url_invalide' => 'La URL que has indicado no es válida.',
-'form_pet_votre_email' => 'Tu dirección de correo electrónico',
-'form_pet_votre_nom' => 'Tu nombre o pseudónimo',
-'form_pet_votre_site' => 'Si tienes un sitio Web, puedes indicarlo a continuación',
 'form_prop_confirmer_envoi' => 'Confirmar el envío',
 'form_prop_description' => 'Descripción/comentario',
 'form_prop_enregistre' => 'Tu propuesta ha sido registrada, aparecerá en línea después de la validación por el equipo responsable de este sitio.',
@@ -342,7 +307,6 @@ Gracias por tu participación
 'icone_interface_simple' => 'Interfaz simple',
 'icone_maintenance_site' => 'Mantenimiento del sitio',
 'icone_messagerie_personnelle' => 'Mensajería personal',
-'icone_mots_cles' => 'Palabras clave',
 'icone_repartition_actuelle' => 'Mostrar el reparto actual',
 'icone_repartition_debut' => 'Mostrar el reparto desde el comienzo',
 'icone_repartition_visites' => 'Distribución de las visitas',
@@ -492,15 +456,11 @@ Gracias por tu participación
 'info_rechercher_02' => 'Buscar',
 'info_remplacer_vignette' => 'Reemplazar el icono predeterminado por una imagen de tu elección :',
 'info_retablir_lien' => 'restablecer el enlace',
-'info_retirer_mot' => 'Retirar la palabra',
-'info_retirer_mots' => 'Retirar todas las palabras',
 'info_rubriques_nb' => '@nb@ secciones',
 'info_rubriques_un' => '1 sección',
 'info_sans_titre_2' => 'sin título',
 'info_selectionner_fichier' => 'Puedes seleccionar un documento del directorio @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un documento...',
-'info_signature_supprimee' => 'Firma eliminada',
-'info_signature_supprimee_erreur' => 'Error: este código de eliminación no  corresponde a ninguna firma',
 'info_site_attente' => 'Sitio Web en espera de validación',
 'info_site_reference' => 'Sitio referenciado en línea',
 'info_site_refuse' => 'Sitio Web rechazado',

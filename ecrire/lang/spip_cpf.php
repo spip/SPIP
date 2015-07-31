@@ -271,38 +271,8 @@ sera ignorée) :
 'form_indiquer_email' => 'Mersi inskri out ladrès imèl.',
 'form_indiquer_nom' => 'Mersi mèt isi out non.',
 'form_indiquer_nom_site' => 'Mersi mèt isi lo non out sitwèb.',
-'form_pet_adresse_site' => 'Ladrès out sitwèb',
-'form_pet_aucune_signature' => 'Astèr, nana pwinn sinyatir èk kod la-minm...',
-'form_pet_confirmation' => 'Mersi konfirm tèrla out sinyatir :',
 'form_pet_deja_enregistre' => 'Sitwèb-la lé déza anrozistré',
-'form_pet_deja_signe' => 'Ou la déza finn sinyé lo tèks-la.',
-'form_pet_envoi_mail_confirmation' => 'Inn limèl pou konfirmé la finn dèt anvwayé aou. Li donn aou inn ladrès sitwèb. Lé nésésèr ou sava bat-karé sir lo sit-la pou konfirm vréman out sinyatir.', # MODIF
-'form_pet_mail_confirmation' => 'Oté,
-
-Ou la domman sinyé lo filsinyatir-la :
-@titre@.
-
-Ou la doné bann ranséynman  swivan :
-    Nom: @nom_email@
-    Site: @nom_site@ - @url_site@
-
-PANGAR...
-
-Pou konfirm out sinyatir-la, i fo sèlman akost ladrès anba (si lé pa fé, sitwèb-la i sava pa antyen kon out doman) :
-    @url@
-
-Mersi aou mèt ansanm isi
-',
-'form_pet_nom_site2' => '<b>Lo non out sitwèb ',
-'form_pet_probleme_liens' => 'Arpran out\' mèzaz pou siprim bann gatiraz.',
-'form_pet_probleme_technique' => 'Astèr, nana inn larlik èk latéknik : bann sinyatir lé baré pou inn moman.',
 'form_pet_signature_pasprise' => 'Lé pa posib antyen pa out sinyatir.',
-'form_pet_signature_validee' => 'Out sinyatir lé konfirmé. Mersi aou !',
-'form_pet_site_deja_enregistre' => 'Sitwèb-la la déza finn dèt anrozistré',
-'form_pet_url_invalide' => 'Ladrès URL ou la finn doné lé pa korèk.',
-'form_pet_votre_email' => 'Out ladrès imèl',
-'form_pet_votre_nom' => 'Out vrénon ou ti-non-gaté',
-'form_pet_votre_site' => 'Si out néna out prop sitwèb, i pé mèt ali anba tèrla :',
 'form_prop_confirmer_envoi' => 'Konfirm lanvwa',
 'form_prop_description' => 'Kosa i lé/arkont son lavi',
 'form_prop_enregistre' => 'Out kontribusyon lé byen arivé. Li sra disponib an liyn apré lakonfirmasyon inndé responsab lo sit.',
@@ -346,7 +316,6 @@ Mersi aou mèt ansanm isi
 'icone_interface_simple' => 'Lintèrfas sinp',
 'icone_maintenance_site' => 'Lantrotyen lo sitwèb',
 'icone_messagerie_personnelle' => 'Out kazmodékri',
-'icone_mots_cles' => 'Bann molaklé',
 'icone_repartition_actuelle' => 'Armontr kouk sa lé partazé astèr ',
 'icone_repartition_debut' => 'Armontr kouk sa lé partazé dopi lorizin',
 'icone_repartition_visites' => 'Koman i partaz bann vizit',
@@ -496,15 +465,11 @@ Mersi aou mèt ansanm isi
 'info_rechercher_02' => 'Rod :',
 'info_remplacer_vignette' => 'Sanz lavinyèt sanswa kont out prop logo :',
 'info_retablir_lien' => 'Armèt lo gatir dégréné-la',
-'info_retirer_mot' => 'Anlèv mo-la',
-'info_retirer_mots' => 'Anlèv tout bann mo',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'néna pwinn titr',
 'info_selectionner_fichier' => 'Ou i pé swazi in fisyé dann dosyé @upload@',
 'info_selectionner_fichier_2' => 'Swazi inn fisyé :',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => 'Sitwèb-la lé apré espèr lakonfirmasyon',
 'info_site_reference' => 'Sitwèb référansé an liyn',
 'info_site_refuse' => 'Sitwèb-la lé arfizé',

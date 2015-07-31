@@ -264,36 +264,8 @@ sera ignorée) :
 'form_indiquer_email' => '请输入您的电子邮件地址.',
 'form_indiquer_nom' => '请输入您的名字.',
 'form_indiquer_nom_site' => '请输入您的站点名字.',
-'form_pet_adresse_site' => '站点链接',
-'form_pet_aucune_signature' => '没有与该代码匹配的签名...',
-'form_pet_confirmation' => '请确定签名:',
 'form_pet_deja_enregistre' => '站点已经注册',
-'form_pet_deja_signe' => '您已经签署该文.',
-'form_pet_envoi_mail_confirmation' => '一封确认信已经发送给您,请访问邮件中的链接确认您的签名.', # MODIF
-'form_pet_mail_confirmation' => '您好,
-
-您要求在请求:@titre@上签名.
-
-您提供了以下信息:
-    姓名: @nom_email@
-    站点: @nom_site@ - @url_site@
-
-重要...
-确认您的签名只需访问以下地址 (否则, 您的请求将被拒绝):
-    @url@
-
-感谢您的参与
-', # MODIF
-'form_pet_nom_site2' => '您的站点名',
-'form_pet_probleme_liens' => 'Veuillez reprendre votre message en supprimant les liens hypertexte.', # NEW
-'form_pet_probleme_technique' => '技术问题,签名被即刻中断.',
 'form_pet_signature_pasprise' => '签名被忽略.',
-'form_pet_signature_validee' => '您的签名有效,站点更新后将显示.谢谢!', # MODIF
-'form_pet_site_deja_enregistre' => '站点已经注册',
-'form_pet_url_invalide' => '您输入的URL无效.',
-'form_pet_votre_email' => '您的电子邮件地址',
-'form_pet_votre_nom' => '您的名字或昵称',
-'form_pet_votre_site' => '如果您有个人网站,您可以在下面输入',
 'form_prop_confirmer_envoi' => '确认发送',
 'form_prop_description' => '描述/注释',
 'form_prop_enregistre' => '你的提议已经被记录, 站点管理员使它有效它将在线显示.',
@@ -337,7 +309,6 @@ sera ignorée) :
 'icone_interface_simple' => '简单界面',
 'icone_maintenance_site' => '站点维护',
 'icone_messagerie_personnelle' => '个人消息',
-'icone_mots_cles' => '关键词',
 'icone_repartition_actuelle' => '显示实际分布',
 'icone_repartition_debut' => '显示从开始的分布',
 'icone_repartition_visites' => '访问分布',
@@ -487,15 +458,11 @@ sera ignorée) :
 'info_rechercher_02' => '搜索:',
 'info_remplacer_vignette' => '用定制的图标取代缺省的图标:',
 'info_retablir_lien' => '恢复这个连接',
-'info_retirer_mot' => '移动这个关键词',
-'info_retirer_mots' => '移去所有的关键词',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => '无标题',
 'info_selectionner_fichier' => '<MODIF>从@upload@文件中选择一个文件',
 'info_selectionner_fichier_2' => '选择一个文件:',
-'info_signature_supprimee' => 'Signature supprimée', # NEW
-'info_signature_supprimee_erreur' => 'Erreur : ce code de suppression ne correspond a aucune signature', # NEW
 'info_site_attente' => '未确认的站点',
 'info_site_reference' => '在线引用的站点',
 'info_site_refuse' => '丢弃的站点',
