@@ -50,8 +50,9 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['lien'])){
 		$ret['documentation'] = trim(join(' ',$arbre['lien']));
 		if ($ret['documentation']) {
+			// le lien de doc doit etre une url et c'est tout
 			if (!preg_match(',^https?://,iS', $ret['documentation']))
-				$ret['documentation'] = extraire_attribut(extraire_balise(propre($ret['documentation']),'a'),'href');
+				$ret['documentation'] = "";
 		}
 	}
 
