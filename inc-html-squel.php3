@@ -198,7 +198,6 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
 	while ($args && $args[0] != '}') {
-
 		if ($args[0] == '"')
 			preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
 		else if ($args[0] == "'")
@@ -214,6 +213,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		}
 
 		$arg = $regs[2];
+
 		if (trim($regs[1])) {
 			$champ = new Texte;
 			$champ->texte = $arg;
@@ -242,7 +242,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$result[] = $champ;
 			$collecte[] = $champ;
 		    }
-		    $rec = substr($args, $n + strlen($r[3])+1);
+		    $rec = substr($args, $n + strlen($r[0]));
 		    $champ = new Champ;
 		    $champ->nom_boucle = $r[2];
 		    $champ->nom_champ = $r[3];
@@ -488,8 +488,8 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		} else {
 			$result->type_requete = $type;
 			phraser_args($milieu,">","",$all_res,$result);
-			phraser_criteres($result->param, $result);
 			$milieu = substr($result->apres,1);
+			phraser_criteres($result->param, $result);
 			$result->apres = "";
 		}
 		//
