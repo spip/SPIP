@@ -19,7 +19,7 @@ function install_etape_4_dist()
 {
 	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
 
-	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_creation_tables'));
 
@@ -112,12 +112,9 @@ function install_etape_4_dist()
 
 		echo "<p><b>"._T('info_base_installee')."</b></p><p>\n"._T('info_etape_suivante_1');
 
-		echo generer_url_post_ecrire('install');
-		echo "<input type='hidden' name='etape' value='5' />";
-
-		echo bouton_suivant();
-
-		echo "</form>";
+		echo generer_post_ecrire('install', (
+		 "<input type='hidden' name='etape' value='5' />"
+		 . bouton_suivant()));
 	}
 	else if ($result_ok) {
 		echo _T('alerte_maj_impossible', array('version' => $spip_version));

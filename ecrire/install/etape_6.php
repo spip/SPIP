@@ -28,7 +28,7 @@ function install_etape_6_dist()
 		exit;
 	}
 
-	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_derniere_etape'),
 			"<b>"._T('info_code_acces')."</b><br />" .

@@ -45,38 +45,37 @@ function install_etape_1_dist()
 			$chmod = $regs[1]; 
 		}
 	}
-	echo generer_url_post_ecrire('install');
-	echo "<input type='hidden' name='etape' value='2' />";
-	echo "<input type='hidden' name='chmod' value='$chmod' />";
-	echo fieldset(_T('entree_base_donnee_1'),
+	echo generer_post_ecrire('install', (
+	  "\n<input type='hidden' name='etape' value='2' />" 
+	. "\n<input type='hidden' name='chmod' value='$chmod' />"
+	. fieldset(_T('entree_base_donnee_1'),
 		array(
 			'adresse_db' => array(
 				'label' => _T('entree_base_donnee_2'),
 				'valeur' => $adresse_db
 			),
 		)
-	);
+	)
 
-	echo fieldset(_T('entree_login_connexion_1'),
+	. fieldset(_T('entree_login_connexion_1'),
 		array(
 			'login_db' => array(
 				'label' => _T('entree_login_connexion_2'),
 				'valeur' => $login_db
 			),
 		)
-	);
+	)
 
-	echo fieldset(_T('entree_mot_passe_1'),
+	. fieldset(_T('entree_mot_passe_1'),
 		array(
 			'pass_db' => array(
 				'label' => _T('entree_mot_passe_2'),
 				'valeur' => $pass_db
 			),
 		)
-	);
+	)
 
-	echo bouton_suivant();
-	echo "</form>";
+	. bouton_suivant()));
 
 	echo install_fin_html();
 }

@@ -20,10 +20,8 @@ function exec_install_dist()
 {
 	$etape = _request('etape');
 	if (_FILE_CONNECT) {
-		echo minipres('AUTO', _T('avis_espace_interdit'));
-		echo generer_url_post_ecrire('accueil')
-			. bouton_suivant()
-			. "</form>";
+		echo minipres('AUTO', _T('avis_espace_interdit') .
+			      generer_post_ecrire('accueil', bouton_suivant()));
 		exit;
 	} else {
 

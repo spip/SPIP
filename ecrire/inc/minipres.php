@@ -179,7 +179,7 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 			$fieldset .= "<br />\n";
 		}
 		else {
-			$fieldset .= "<input ".$class."type='".$type."' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
+			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."' />\n";
 		}
 	}
 	$fieldset .= "$horchamps</fieldset>\n";

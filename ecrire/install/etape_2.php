@@ -15,7 +15,7 @@ function install_etape_2_dist()
 {
 	global $adresse_db, $login_db, $pass_db, $spip_lang_right,$chmod;
 
-	echo install_debut_html('AUTO', ' onLoad="document.getElementById(\'suivant\').focus();return false;"');
+	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 
 	echo info_etape(_T('info_connexion_base'));
 
@@ -27,15 +27,14 @@ function install_etape_2_dist()
 	if (($db_connect=="0") && $link){
 		echo "<p><b>"._T('info_connexion_ok')."</b></p><p> "._T('info_etape_suivante_2')."</p>";
 
-		echo generer_url_post_ecrire('install');
-		echo "<input type='hidden' name='etape' value='3' />";
-		echo "<input type='hidden' name='chmod' value='$chmod' />";
-		echo "<input type='hidden' name='adresse_db'  value=\"$adresse_db\" />";
-		echo "<input type='hidden' name='login_db' value=\"$login_db\" />";
-		echo "<input type='hidden' name='pass_db' value=\"$pass_db\" />";
+		echo generer_post_ecrire('install', (
+		  "\n<input type='hidden' name='etape' value='3' />"
+		. "\n<input type='hidden' name='chmod' value='$chmod' />"
+		. "\n<input type='hidden' name='adresse_db'  value=\"$adresse_db\" />"
+		. "\n<input type='hidden' name='login_db' value=\"$login_db\" />"
+		. "\n<input type='hidden' name='pass_db' value=\"$pass_db\" />"
 
-		echo bouton_suivant();
-		echo "</form>";
+		. bouton_suivant()));
 	}
 	else {
 		echo "<p><b>"._T('avis_connexion_echec_1')."</b></p>";
