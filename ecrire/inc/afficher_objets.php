@@ -191,6 +191,7 @@ function afficher_complement_site($row){
 		$s .= "<div style='color: red;'>"._T('info_syndication')."</div>";
 	}
 	if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
+		$id_syndic = $row['id_syndic'];
 		$total_art = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE id_syndic='$id_syndic'"));
 		$s .= " " . $total_art['n'] . " " . _T('info_syndication_articles');
 	} else {
