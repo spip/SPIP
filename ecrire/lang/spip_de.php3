@@ -208,7 +208,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_deja_enregistre' => 'Diese Website wurde bereits erfasst',
 'form_pet_deja_signe' => 'Sie haben diesen Text bereits unterschrieben.',
 'form_pet_envoi_mail_confirmation' => 'Eine E-mail mit den Daten zum Best&auml;tigen wurde Ihnen zugeschickt. Sie m&uuml;ssen die dort angegebene WWW-Seite &ouml;ffnen, um Ihre Unterschrift zu best&auml;tigen.',
-'form_pet_mail_confirmation' => 'Hallo, Sie m&ouml;chten diese Petition unterzeichnen:
+'form_pet_mail_confirmation' => '<MODIF>Hallo, Sie m&ouml;chten diese Petition unterzeichnen:
     @titre@.
 
 Sie haben die folgenden Angaben gemacht:

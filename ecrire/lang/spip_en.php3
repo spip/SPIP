@@ -215,22 +215,23 @@ the site "@nom_site_spip@" (@adresse_login@):',
 'form_pet_deja_enregistre' => 'This site is already registered',
 'form_pet_deja_signe' => 'You have already signed this text.',
 'form_pet_envoi_mail_confirmation' => 'A confirmation e-mail has just been sent to you. You should visit the URL mentioned in this mail to validate your signature.',
-'form_pet_mail_confirmation' => 'Good day,
+'form_pet_mail_confirmation' => 'Hello,
 
-You requested to sign the petition:
+You asked to sign the petition:
 @titre@.
 
 You provided the following information:
     Name: @nom_email@
     Site: @nom_site@ - @url_site@
+@message@
 
 IMPORTANT...
-To validate your signature, you just have to connect to
-the address below (otherwise, your request
+To validate your signature, you just need to connect to
+the address below (otherwise your request
 will be rejected):
     @url@
 
-Thank you for your participation
+Thank you for your participation!
 ',
 'form_pet_message_commentaire' => 'Any message or comment?',
 'form_pet_nom_site2' => 'Name of your web site',

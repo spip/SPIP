@@ -200,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(esta &eacute; unha mensaxe autom&aacute;tica)',
 'form_forum_pass' => 'chave:',
 'form_forum_probleme_mail' => 'Problema de mail: non se puido enviar o identificador.',
-'form_forum_voici1' => 'Velaqu&iacute; os seus identificadores para participar na vida
+'form_forum_voici1' => 'Velaqu&iacute; os seus datos identificadores para participar na vida
 do web "@nom_site_spip@" (@adresse_site@):',
-'form_forum_voici2' => 'Estes son os datos que precisas para propor artigos en "@nom_site_spip@" (@adresse_login@):',
+'form_forum_voici2' => 'Estes son os datos que precisa para propor artigos en "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indique o seu enderezo de correo-e.',
 'form_indiquer_nom' => 'Indica o teu nome.',
 'form_indiquer_nom_site' => 'Indique o nome do seu web.',
@@ -212,25 +212,25 @@ do web "@nom_site_spip@" (@adresse_site@):',
 'form_pet_deja_enregistre' => 'Este web xa foi rexistrado',
 'form_pet_deja_signe' => 'Xa asinaches este texto.',
 'form_pet_envoi_mail_confirmation' => 'Enviouse.che un correo electr&oacute;nico de confirmaci&oacute;n. Ter&aacute;s que visitar o enderezo web mencionado no mesmo para validar a t&uacute;a sinatura.',
-'form_pet_mail_confirmation' => '&Oacute;la,
+'form_pet_mail_confirmation' => 'Ola,
 
-Solicitou asinar a petici&oacute;n:
+Pediu asinar a solicitude:
 @titre@.
 
 Proporcionou os seguintes datos:
      Nome: @nom_email@
      Web: @nom_site@ - @url_site@
-
+     @message@
 
 IMPORTANTE...
-Para validar a s&uacute;a sinatura, s&oacute; ten que entrar no
-enderezo de m&aacute;is abaixo (no caso contrario, a s&uacute;a petici&oacute;n
+Para validar a s&uacute;a sinatura, s&oacute; ten que conectar co
+enderezo de m&aacute;is abaixo (no caso contrario, a s&uacute;a solicitude
 ser&aacute; rexeitada):
 
      @url@
 
 
-Gracias pola s&uacute;a participaci&oacute;n
+Grazas pola s&uacute;a participaci&oacute;n
 ',
 'form_pet_message_commentaire' => 'Algunha mensaxe, un comentario?',
 'form_pet_nom_site2' => 'Nome do seu Web',
@@ -267,7 +267,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'forum_message_trop_long' => 'A mensaxe &eacute; longa de m&aacute;is. O tama&ntilde;o m&aacute;ximo permitido &eacute; de 20000 caract&eacute;res.',
 'forum_ne_repondez_pas' => 'Resposta este correo no foro do enderezo seguinte:',
 'forum_non_inscrit' => 'A&iacute;nda non se rexistrou, ou o enderezo ou a chave andan errados.',
-'forum_page_url' => 'Se a t&uacute;a mensaxe se refire a un artigo publicado en Internet, ou a unha p&aacute;xina que cont&eacute;n m&aacute;is informaci&oacute;ns, indica a continuaci&oacute;n o t&iacute;tulo da p&aacute;xina e a s&uacute;a direcci&oacute;n URL',
+'forum_page_url' => '(Se a t&uacute;a mensaxe se refire a un artigo publicado en Internet, ou a unha p&aacute;xina que cont&eacute;n m&aacute;is informaci&oacute;ns, indica a continuaci&oacute;n o t&iacute;tulo da p&aacute;xina e o seu enderezo URL)',
 'forum_par_auteur' => 'por @auteur@',
 'forum_poste_par' => 'Mensaxe enviada @parauteur@ en resposta &oacute; teu artigo.',
 'forum_probleme_database' => 'Problema da base de datos, a t&uacute;a mensaxe non foi rexistrada.',
@@ -412,10 +412,10 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n da vi&ntilde;eta:',
 'info_installation_systeme_publication' => 'Instalaci&oacute;n do sistema de publicaci&oacute;n...',
-'info_installer_documents' => 'Podes instalar automaticamente todos os documentos contidos no cartafol ou directorio@upload@.',
-'info_installer_ftp' => 'Como administrador/a, podes instalar (por FTP) os ficheiros no directorio  /@upload@ para podelas seleccionar directamente aqu&iacute;.',
+'info_installer_documents' => 'Pode instalar automaticamente todos os documentos contidos no cartafol ou directorio @upload@.',
+'info_installer_ftp' => 'Como administrador/a, pode instalar (por FTP) os ficheiros no cartafol  /@upload@ para despois podelas seleccionar directamente aqu&iacute;.',
 'info_installer_images' => 'Podes instalar imaxes nos formatos PNG, JPEG e GIF.',
-'info_installer_images_dossier' => 'Instalar imaxes no cartafol @upload@ para poder seleccionalas.',
+'info_installer_images_dossier' => 'Instalar imaxes no cartafol @upload@ para poder seleccionalas aqu&iacute;.',
 'info_installer_tous_documents' => 'Instalar todos os documentos',
 'info_interface_complete' => 'Interface completa',
 'info_interface_simple' => 'Interface sinxela',
@@ -477,7 +477,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_retirer_mot' => 'Retirar esta palabra',
 'info_retirer_mots' => 'Retirar todas as palabras',
 'info_sans_titre_2' => 'sen t&iacute;tulo',
-'info_selectionner_fichier' => 'Podes seleccionar un ficheiro do directorio @upload@',
+'info_selectionner_fichier' => 'Pode seleccionar un ficheiro do cartafol @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
 'info_site_attente' => 'Sitio web agardando pola validaci&oacute;n',
 'info_site_reference' => 'Lugar referido en li&ntilde;a',
@@ -666,9 +666,9 @@ e reconectar co web.
   un pouco &oacute; tanto do funcionamento do sistema SPIP.
   <P align="justify"><B>En xeral, &eacute; moi recomendable que estas p&aacute;xinas sexan
   xestionadas polo/a webm&aacute;ster principal do web.</B>',
-'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>.  Rev&iacute;seo como administrador/a do web.',
+'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>. Rev&iacute;seo co perfil de administrador/a do web.',
 'texte_inc_meta_2' => 'Comprobar os dereitos de escritura',
-'texte_inc_meta_3' => 'no directorio <code>@repertoire@</code>.',
+'texte_inc_meta_3' => 'no cartafol <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'en proceso de redacci&oacute;n',
 'texte_statut_poubelle' => 'no lixo',
 'texte_statut_propose_evaluation' => 'proposto para evaluaci&oacute;n',

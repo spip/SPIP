@@ -220,10 +220,11 @@ en el sitio "@nom_site_spip@" (@adresse_login@):',
 Has solicitado firmar la petici&oacute;n:
 @titre@.
 
-Has facilitado las siguientes informaciones:
+Has facilitado la siguient informaci&oacute;n:
 
     Nombre: @nom_email@
     Sitio: @nom_site@ - @url_site@
+    @message@
 
 IMPORTANTE...
 
@@ -232,6 +233,7 @@ la direcci&oacute;n indicada a continuaci&oacute;n (en caso contrario, tu firma
 no ser&aacute; tomada en cuenta):
 
     @url@
+
 
 Gracias por tu participaci&oacute;n
 ',

@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 's&#259;pt&#259;m&acirc;ni',
 'dirs_commencer' => ' pentru a &icirc;ncepe cu adev&#259;rat instalarea',
 'dirs_preliminaire' => 'Preliminar : <b>Regla&#355;i drepturile de acces</b>',
-'dirs_probleme_droits' => '<MODIF>Problem&#259; de drepturi de acces',
+'dirs_probleme_droits' => 'Problem&#259; de drepturi de acces',
 'dirs_repertoires_absents' => '<b>Urm&#259;toarele directoare nu au fost g&#259;site&nbsp;: <ul>@bad_dirs@.</ul> </b>
   Cel mai probabil, aceast&#259; situa&#355;ie este datorat&#259; unei probleme de litere majuscule sau minuscule.
  Verifica&#539;i ca litere majuscule &#351;i minuscule a acestor directoare s&#259; concorde cu ceea ce este afi&#351;at
@@ -200,9 +200,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(acesta este un mesaj automatic)',
 'form_forum_pass' => 'parola :',
 'form_forum_probleme_mail' => 'Problem&#259; de email&nbsp;: identificatorul nu poate fi trimis.',
-'form_forum_voici1' => '<MODIF>Iat&#259; identificatorii dumneavoastr&#259; pentru a participa la activitatea
+'form_forum_voici1' => 'Iat&#259; identificatorii dumneavoastr&#259; pentru a participa la activitatea
 site-ului "@nom_site_spip@" (@adresse_site@) :',
-'form_forum_voici2' => '<MODIF>Iat&#259; identificatorii dvs. pentru  "@nom_site_spip@" (@adresse_login@):',
+'form_forum_voici2' => 'Iat&#259; identificatorii dvs. pentru a putea propune articole pe
+site-ul "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'V&#259; rug&#259;m sa indica&#355;i adresa dumneavoastr&#259; de email.',
 'form_indiquer_nom' => 'Va rug&#259;m s&#259; indica&#355;i numele dumneavoastr&#259;.',
 'form_indiquer_nom_site' => 'V&#259; rug&#259;m s&#259; indica&#355;i adresa site-ul dumneavoastr&#259; de web.',
@@ -223,7 +224,7 @@ A&#355;i furnizat informa&#355;iile urm&#259;toare :
 
 
 IMPORTANT...
-Pentru a valida semn&#259;tura, trebuie  s&#259; vizita&#539;i
+Pentru a valida semn&#259;tura, trebuie s&#259; vizita&#355;i
 adresa de mai jos (&icirc;n caz contrat, cererea dumneavoastr&#259; va fi refuzat&#259;) :
 
     @url@
@@ -383,7 +384,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_copyright_gpl' => 'sub licen&#355;&#259; GPL',
 'info_cours_edition' => 'Articolele dumneavoastr&#259; &icirc;n curs de redactare',
 'info_creer_repertoire' => 'V&#259; rug&#259;m s&#259; crea&#355;i un fi&#537;ier sau un director numit&nbsp;:',
-'info_creer_repertoire_2' => '<MODIF>sub directorul <b>@repertoire@</b>, apoi&nbsp;:',
+'info_creer_repertoire_2' => 'sub directorul <b>@repertoire@</b>, apoi&nbsp;:',
 'info_creer_vignette' => 'crearea vini&eacute;tei &icirc;n mod automat ',
 'info_dans_espace_prive' => '[&icirc;n spa&#355;iul privat]',
 'info_deplier' => 'Desface&#355;i',
@@ -407,9 +408,9 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_erreur_requete' => 'Eroare &icirc;n cererea :',
 'info_erreur_squelette2' => 'Nici un schelet <b>@fichier@</b> nu este disponibil...',
 'info_erreur_systeme' => 'Eroare sistem (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>Discul este probabil plin sau baza de date este corupt&#259;.
+'info_erreur_systeme2' => 'Discul este probabil plin sau baza de date este corupt&#259;.
  <font color=\'red\'>&Icirc;ncerca&#355;i s&#259; <a href=\'@script@\'>repara&#355;i baza de date</a>,
- sau contacta&#355;i-l pe furnizorul dumneavoastr&#259; de hosting.</font>
+ sau contacta&#355;i-l pe furnizorul dumneavoastr&#259; de internet.</font>
 ',
 'info_fini' => 'Este gata !',
 'info_format_image' => 'Formatele de imagini care pot fi folosite la crearea vini&eacute;telor&nbsp;: @gd_formats@.',
