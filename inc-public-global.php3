@@ -404,8 +404,8 @@ if ($db_ok) {
 		// envoi
 		if ($mail_nouveautes) {
 			include_ecrire('inc_mail.php3');
-			$nom_site_spip = lire_meta('nom_site_spip');
-			envoyer_mail($adresse_neuf, "[$nom_site_spip] Les nouveautes", $mail_nouveautes);
+			$nom_site = lire_meta('nom_site');
+			envoyer_mail($adresse_neuf, "[$nom_site] Les nouveautes", $mail_nouveautes);
 		}
 	}
 }
