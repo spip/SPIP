@@ -639,7 +639,7 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
 }
 
-define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
+define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*[^()]*)\)[^()]*$/');
 // Recupere la definition d'une table ou d'une vue MySQL
 // colonnes, indexes, etc.
 // au meme format que la definition des tables de SPIP

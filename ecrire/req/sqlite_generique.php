@@ -1209,7 +1209,7 @@ function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 	return spip_sqlite_query("SELECT name FROM sqlite_master WHERE type='table' AND tbl_name REGEXP "._q($match), $serveur, $requeter);
 }
 
-define('_SQLITE_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
+define('_SQLITE_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*[^()]*)\)[^()]*$/');
 // http://doc.spip.org/@spip_sqlite_showtable
 function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 	$query =
@@ -1229,9 +1229,9 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 	// c'est une table
 	// il faut parser le create
 	if (!$vue){
-		if (!preg_match(_SQLITE_RE_SHOW_TABLE, array_shift($a), $r))
+		if (!preg_match(_SQLITE_RE_SHOW_TABLE, array_shift($a), $r)){
 			return "";
-		else {
+		} else {
 			$desc = $r[1];
 			// extraction d'une KEY éventuelle en prenant garde de ne pas
 			// relever un champ dont le nom contient KEY (ex. ID_WHISKEY)
@@ -1304,8 +1304,9 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 				$keys['KEY '.$key] = $colonnes;
 			}
 		}
-		// c'est une vue, on liste les champs disponibles simplement
-	} else {
+	}
+	// c'est une vue, on liste les champs disponibles simplement
+	else {
 		if ($res = sql_fetsel('*', $nom_table, '', '', '', '1', '', $serveur)){ // limit 1
 			$fields = array();
 			foreach ($res as $c => $v) $fields[$c] = '';
