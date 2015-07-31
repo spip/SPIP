@@ -164,13 +164,14 @@ jQuery.fn.ajaxbloc = function() {
 
 // Ajaxer les formulaires qui le demandent, au demarrage
 jQuery(function() {
-	jQuery('.ajax').formulaire_dyn_ajax();
+	jQuery('form').parents('.ajax')
+	.each(function(){$(this).formulaire_dyn_ajax();});
 	jQuery('.ajaxbloc').each(function(){$(this).ajaxbloc();});
 });
 // ... et a chaque fois que le DOM change
 onAjaxLoad(function() {
-	jQuery('.ajax', this)
-	.formulaire_dyn_ajax();
+	jQuery('form', this).parents('.ajax')
+	.each(function(){$(this).formulaire_dyn_ajax();});
 	jQuery('.ajaxbloc', this)
 	.each(function(){$(this).ajaxbloc();});
 });
