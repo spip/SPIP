@@ -750,6 +750,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_login_trop_court' => 'Login tr&ograve;p cort.',
 'info_mail_fournisseur' => 'vos@hornider.com',
 'info_maximum' => 'maximum:',
+'info_meme_rubrique' => 'Dens la medisha rubrica',
 'info_message' => 'Messatge deu',
 'info_message_2' => 'MESSATGE',
 'info_message_efface' => 'MESSATGE ESFA&Ccedil;AT',
@@ -817,6 +818,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_nouveaux_messages' => 'QU\'AVETZ @total_messages@ MESSATGES NAUS',
 'info_nouvel_article' => 'Article nau',
 'info_nouvelle_traduction' => 'Arrevirada nava:',
+'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quan un vesitaire deu sit e manda un messatge nau au forum
