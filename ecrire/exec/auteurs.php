@@ -38,7 +38,7 @@ function exec_auteurs_dist()
 		$tables = array('auteur'=>$tables['auteur']);
 		$recherche = recherche_en_base($cherche, $tables,array('toutvoir'=>true));
 		if ($recherche['auteur'])
-			$recherche = sql_in('aut.id_auteur', array_keys($recherche['auteur']));
+			$recherche = array_keys($recherche['auteur']);
 		else {$recherche = NULL; $cherche = '';}
 	}
 	$form = formulaire_recherche("auteurs",(($s=_request('statut'))?"<input type='hidden' name='statut' value='$s' />":""));
@@ -339,6 +339,8 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 	//
 	// La requete de base est tres sympa
 	// (pour les visiteurs, ca postule que les messages concernent des articles)
+	if ($recherche)
+		$recherche = (" AND " . sql_in('A.id_auteur', $recherche));
 	return array('SELECT' =>
 			array_diff(
 			array(
@@ -349,9 +351,7 @@ function requete_auteurs($tri, $statut, $recherche=NULL)
 				"UPPER(A.nom) AS unom", 
 				$sql_sel),array('',null)),
 		     'FROM' => "spip_auteurs AS A $join",
-		     'WHERE' => $sql_visible . ($recherche 
-				? " AND $recherche" 
-				: ''),
+		     'WHERE' => $sql_visible . $recherche, 
 		     'GROUP BY' => "A.statut, A.nom_site, A.nom, A.id_auteur", 
 		     'ORDER BY' => $sql_order);
 }
