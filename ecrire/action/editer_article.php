@@ -241,7 +241,8 @@ function instituer_article($id_article, $c, $calcul_rub=true) {
 		array(
 			'args' => array(
 				'table' => 'spip_articles',
-				'id_objet' => $id_article
+				'id_objet' => $id_article,
+				'action'=>'instituer'
 			),
 			'data' => $champs
 		)
