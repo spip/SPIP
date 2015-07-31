@@ -67,6 +67,21 @@ $GLOBALS['i18n_spip_es'] = array(
 
 
 // B
+'barre_a_accent_grave' => '<NEW> Ins&eacute;rer un A accent grave majuscule',
+'barre_aide' => '<NEW> Utilisez les raccourcis typographiques pour enrichir votre mise en page',
+'barre_aide_rac' => '<NEW> En savoir plus sur les raccourcis typographiques',
+'barre_e_accent_aigu' => '<NEW> Ins&eacute;rer un E accent aigu majuscule',
+'barre_eo' => '<NEW> Ins&eacute;rer un E dans l\'O',
+'barre_eo_maj' => '<NEW> Ins&eacute;rer un Edans l\'O majuscule',
+'barre_gras' => '<NEW> Mettre en {{gras}}',
+'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_simples' => '<NEW> Entourer de &ldquo;guillemets&rdquo;',
+'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
+'barre_italic' => '<NEW> Mettre en {italique}',
+'barre_lien' => '<NEW> Transformer en [lien hypertexte->http://...]',
+'barre_lien_input' => '<NEW> Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
+'barre_note' => '<NEW> Transformer en [[Note de bas de page]]',
+'barre_quote' => '<NEW> <quote>Citer un message</quote>',
 'bouton_acces_ldap' => 'A&ntilde;adir el acceso a LDAP >>',
 'bouton_ajouter' => 'A&ntilde;adir',
 'bouton_ajouter_document' => 'A&ntilde;adir un documento',

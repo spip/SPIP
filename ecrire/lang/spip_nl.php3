@@ -74,6 +74,21 @@ $GLOBALS['i18n_spip_nl'] = array(
 
 
 // B
+'barre_a_accent_grave' => 'Hoofdletter A met accent grave toevoegen',
+'barre_aide' => 'Typografische snelkoppelingen gebruiken voor de pagina-opmaak',
+'barre_aide_rac' => 'Meer weten over typografische snelkoppelingen',
+'barre_e_accent_aigu' => 'Hoofdletter E met accent aigu toevoegen',
+'barre_eo' => 'O gekoppeld aan E (ligatuur) toevoegen',
+'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',
+'barre_gras' => 'In het {{vet}} zetten',
+'barre_guillemets' => 'Met &laquo; Franse haakjes &raquo; omringen',
+'barre_guillemets_simples' => 'Met “haakjes” omringen',
+'barre_intertitre' => 'Omzetten naar {{{tussentitel}}}',
+'barre_italic' => '{cursief} zetten',
+'barre_lien' => 'Omzetten naar [hypertekst verwijzing->http://...]',
+'barre_lien_input' => 'Gelieve hier het adres van de koppeling op te geven. Je kan naar een webpagina verwijzen onder de vorm http://www.mijnsite.com ofwel het nummer van een artikel van deze site invullen.',
+'barre_note' => 'Omzetten naar een [[Voetnoot]]',
+'barre_quote' => '<quote>een bericht citeren</quote>',
 'bouton_acces_ldap' => 'LDAP toegang toevoegen >>',
 'bouton_ajouter' => 'Toevoegen',
 'bouton_ajouter_document' => 'EEN DOCUMENT TOEVOEGEN',
