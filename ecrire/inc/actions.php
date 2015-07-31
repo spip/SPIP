@@ -208,7 +208,7 @@ function ajax_retour($corps,$xml = true)
 		return;
 	}
 
-	if (count($GLOBALS['tableau_des_temps'])) {
+	if (isset($GLOBALS['tableau_des_temps'])) {
 		include_spip('public/debug');
 		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
 	} else $chrono = '';
