@@ -48,16 +48,34 @@ function cvtconf_formulaire_traiter($flux){
 	  AND strncmp($form,'configurer_',11)==0 // un #FORMULAIRE_CONFIGURER_XXX
 		AND !charger_fonction("traiter","formulaires/$form/",true) // sans fonction traiter()
 		) {
+		$trace = cvtconf_formulaires_configurer_enregistre($form,$flux['args']['args']);
+		$flux['data'] = array('message_ok'=>_T('config_info_enregistree').$trace,'editable'=>true);
+	}
+	return $flux;
+}
 
+/**
+ * Enregistrer les donnees d'un formulaire $form appele avec les arguments $args
+ * Cette fonction peut etre appellee manuellement et explicitement depuis la fonction traiter()
+ * d'un formulaire configurer_xxx dont on veut personaliser le traitement
+ * sans reecrire le stockage des donnees
+ *
+ * @param string $form
+ *   nom du formulaire "configurer_xxx"
+ * @param array $args
+ *   arguments de l'appel de la fonction traiter ($args = func_get_args();)
+ * @return string
+ */
+function cvtconf_formulaires_configurer_enregistre($form,$args){
 		// charger les valeurs
 		// ce qui permet de prendre en charge une fonction charger() existante
 		// qui prend alors la main sur l'auto detection
 		if ($charger_valeurs = charger_fonction("charger","formulaires/$form/",true))
-			$valeurs = call_user_func_array($charger_valeurs,$flux['args']['args']);
+			$valeurs = call_user_func_array($charger_valeurs,$args);
 		$valeurs = pipeline(
 			'formulaire_charger',
 			array(
-				'args'=>array('form'=>$form,'args'=>$flux['args']['args'],'je_suis_poste'=>false),
+				'args'=>array('form'=>$form,'args'=>$args,'je_suis_poste'=>false),
 				'data'=>$valeurs)
 		);
 		// ne pas stocker editable !
@@ -70,11 +88,41 @@ function cvtconf_formulaire_traiter($flux){
 				$store[$k] = _request($k);
 		}
 
-		$trace = cvtconf_configurer_stocker($form,$valeurs,$store);
+		return cvtconf_configurer_stocker($form,$valeurs,$store);
+}
 
-		$flux['data'] = array('message_ok'=>_T('config_info_enregistree').$trace,'editable'=>true);
-	}
-	return $flux;
+/**
+ * Definir la regle de conteneur, en fonction de la presence
+ * des
+ * _meta_table : nom de la table meta ou stocker (par defaut 'meta')
+ * _meta_casier : nom du casier dans lequel serializer (par defaut xx de formulaire_configurer_xx)
+ * _meta_prefixe : prefixer les meta (alternative au casier) dans la table des meta (par defaur rien)
+ * _meta_stockage : Methode externe de stockage. Aucune n'est fournie par le core.
+ *
+ * @param string $form
+ * @param array $valeurs
+ * @return array
+ */
+function cvtconf_definir_configurer_conteneur($form,$valeurs) {
+		// stocker en base
+		// par defaut, dans un casier serialize dans spip_meta (idem CFG)
+		$casier = substr($form,11);
+		$table = 'meta';
+		$prefixe = '';
+		$stockage = '';
+
+		if (isset($valeurs['_meta_casier']))   $casier   = $valeurs['_meta_casier'];
+		if (isset($valeurs['_meta_prefixe']))  $prefixe  = $valeurs['_meta_prefixe'];
+		if (isset($valeurs['_meta_stockage'])) $stockage = $valeurs['_meta_stockage'] . '::';
+			
+		// si on indique juste une table, il faut vider les autres proprietes
+		// car par defaut on utilise ni casier ni prefixe dans ce cas
+		if (isset($valeurs['_meta_table'])) {
+			$table = $valeurs['_meta_table'];
+			$casier = (isset($valeurs['_meta_casier'])?$valeurs['_meta_casier']:'');
+		}
+	
+		return array($table,$casier,$prefixe,$stockage);
 }
 
 /**
@@ -121,43 +169,11 @@ function cvtconf_formulaires_configurer_recense($form){
 }
 
 /**
- * Definir la regle de conteneur, en fonction de la presence
- * des
- * _meta_table : nom de la table meta ou stocker (par defaut 'meta')
- * _meta_casier : nom du casier dans lequel serializer (par defaut xx de formulaire_configurer_xx)
- * _meta_prefixe : prefixer les meta (alternative au casier) dans la table des meta (par defaur rien)
- * _meta_stockage : Methode externe de stockage. Aucune n'est fournie par le core.
- *
+ * Stocker les metas
  * @param string $form
  * @param array $valeurs
- */
-function cvtconf_definir_configurer_conteneur($form,$valeurs) {
-		// stocker en base
-		// par defaut, dans un casier serialize dans spip_meta (idem CFG)
-		$casier = substr($form,11);
-		$table = 'meta';
-		$prefixe = '';
-		$stockage = '';
-
-		if (isset($valeurs['_meta_casier']))   $casier   = $valeurs['_meta_casier'];
-		if (isset($valeurs['_meta_prefixe']))  $prefixe  = $valeurs['_meta_prefixe'];
-		if (isset($valeurs['_meta_stockage'])) $stockage = $valeurs['_meta_stockage'] . '::';
-			
-		// si on indique juste une table, il faut vider les autres proprietes
-		// car par defaut on utilise ni casier ni prefixe dans ce cas
-		if (isset($valeurs['_meta_table'])) {
-			$table = $valeurs['_meta_table'];
-			$casier = (isset($valeurs['_meta_casier'])?$valeurs['_meta_casier']:'');
-		}
-	
-		return array($table,$casier,$prefixe,$stockage);
-}
-
-/**
- * Stocker les metas
- * @param <type> $form
- * @param <type> $valeurs
- * @param <type> $store
+ * @param array $store
+ * @return string
  */
 function cvtconf_configurer_stocker($form,$valeurs,$store) {
 	$trace = '';
@@ -180,6 +196,11 @@ function cvtconf_configurer_stocker($form,$valeurs,$store) {
 	return $trace;
 }
 
+/**
+ * Lecture en base des metas d'un form
+ * @param string $form
+ * @param array $valeurs
+ */
 function cvtconf_configurer_lire_meta($form,&$valeurs) {
 	list($table,$casier,$prefixe,$stockage) = cvtconf_definir_configurer_conteneur($form,$valeurs);
 
