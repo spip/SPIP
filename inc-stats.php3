@@ -32,6 +32,12 @@ function ecrire_stats() {
 	$date = date("Y-m-d");
 	$last_date = lire_meta("date_statistiques");
 
+	// Conversion IP 4 octets -> entier 32 bits
+	if (ereg("^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$", $log_ip, $r)) {
+		$log_ip = sprintf("0x%02x%02x%02x%02x", $r[1], $r[2], $r[3], $r[4]);
+	}
+	else return;
+
 	// Archivage des visites temporaires
 	if ($date != $last_date) {
 		include_ecrire("inc_connect.php3");
@@ -49,7 +55,7 @@ function ecrire_stats() {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			$query = "INSERT DELAYED IGNORE INTO spip_visites_temp (ip, type, id_objet) ".
-				"VALUES (INET_ATON('$log_ip'), '$log_type', $log_id_num)";
+				"VALUES ($log_ip, '$log_type', $log_id_num)";
 			spip_query($query);
 		}
 	}
@@ -65,7 +71,7 @@ function ecrire_stats() {
 			if ($GLOBALS['db_ok']) {
 				$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
 				$query = "INSERT DELAYED IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
-					"VALUES (INET_ATON('$log_ip'), '$log_referer', $referer_md5, '$log_type', $log_id_num)";
+					"VALUES ($log_ip, '$log_referer', $referer_md5, '$log_type', $log_id_num)";
 				spip_query($query);
 			}
 		}
