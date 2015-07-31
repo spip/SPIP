@@ -1348,6 +1348,7 @@ function balise_ARRAY_dist($p) {
 
 //#FOREACH
 //
+// http://doc.spip.org/@balise_FOREACH_dist
 function balise_FOREACH_dist($p) {
         $_tableau = interprete_argument_balise(1,$p);
         if($_tableau == "''" OR $_tableau == NULL) $_tableau = "'ENV'";
