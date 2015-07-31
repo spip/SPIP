@@ -20,13 +20,28 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-# retourne le chapeau d'un article, et seulement s'il est publie
-
-// http://doc.spip.org/@quete_chapo
+/**
+ * retourne l'url de redirection d'un article virtuel, seulement si il est publié
+ * http://doc.spip.org/@quete_chapo
+ *
+ * @param $id_article
+ * @param $connect
+ * @return array|bool|null
+ */
 function quete_virtuel($id_article, $connect) {
 	return sql_getfetsel('virtuel', 'spip_articles', array("id_article=".intval($id_article), "statut='publie'"), '','','','',$connect);
 }
 
+/**
+ * Retourne le couple parent,lang pour toute table
+ * en pratique id_rubrique si present (ou id_parent pour table rubriques)
+ * et champ lang si present
+ *
+ * @param string $table
+ * @param int $id
+ * @param string $connect
+ * @return array
+ */
 function quete_parent_lang($table,$id,$connect=''){
 	static $cache_quete = array();
 
@@ -50,8 +65,17 @@ function quete_parent_lang($table,$id,$connect=''){
 }
 
 
-# retourne le parent d'une rubrique
-// http://doc.spip.org/@quete_parent
+/**
+ * retourne le parent d'une rubrique
+ * repose sur la fonction quete_parent_lang pour la mutualisation
+ * +mise en cache sql des requetes
+ *
+ * http://doc.spip.org/@quete_parent
+ *
+ * @param int $id_rubrique
+ * @param string $connect
+ * @return int
+ */
 function quete_parent($id_rubrique, $connect='') {
 	if (!$id_rubrique = intval($id_rubrique))
 		return 0;
@@ -59,18 +83,32 @@ function quete_parent($id_rubrique, $connect='') {
 	return $id_parent['id_parent'];
 }
 
-# retourne la rubrique d'un article
-
-// http://doc.spip.org/@quete_rubrique
+/**
+ * retourne la rubrique d'un article
+ * repose sur la fonction quete_parent_lang pour la mutualisation
+ * +mise en cache sql des requetes
+ *
+ * http://doc.spip.org/@quete_rubrique
+ *
+ * @param int $id_article
+ * @param $serveur
+ * @return
+ */
 function quete_rubrique($id_article, $serveur) {
 	$id_parent = quete_parent_lang('spip_articles',$id_article,$serveur);
 	return $id_parent['id_rubrique'];
 }
 
 
-# retourne la profondeur d'une rubrique
-
-// http://doc.spip.org/@quete_profondeur
+/**
+ * retourne la profondeur d'une rubrique
+ *
+ * http://doc.spip.org/@quete_profondeur
+ *
+ * @param int $id
+ * @param string $connect
+ * @return int
+ */
 function quete_profondeur($id, $connect='') {
 	$n = 0;
 	while ($id) {
@@ -84,6 +122,7 @@ function quete_profondeur($id, $connect='') {
 /**
  * retourne la condition sur la date lorsqu'il y a des post-dates
  * @param string $champ_date
+ * @param string $serveur
  * @return string
  */
 function quete_condition_postdates($champ_date, $serveur='') {
@@ -135,32 +174,57 @@ function quete_condition_statut($mstatut,$previsu,$publie, $serveur=''){
   }
 }
 
-# retourne le fichier d'un document
-
-// http://doc.spip.org/@quete_fichier
+/**
+ * retourne le fichier d'un document
+ *
+ * http://doc.spip.org/@quete_fichier
+ *
+ * @param int $id_document
+ * @param string $serveur
+ * @return array|bool|null
+ */
 function quete_fichier($id_document, $serveur='') {
 	return sql_getfetsel('fichier', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
-# Toute les infos sur un document
-
+/**
+ * Toute les infos sur un document
+ *
+ * @param int $id_document
+ * @param string $serveur
+ * @return array|bool
+ */
 function quete_document($id_document, $serveur='') {
 	return sql_fetsel('*', 'spip_documents', ("id_document=" . intval($id_document)),	'',array(), '', '', $serveur);
 }
 
-// recuperer une meta sur un site distant (en local il y a plus simple)
-// http://doc.spip.org/@quete_meta
+/**
+ * recuperer une meta sur un site distant (en local il y a plus simple)
+ *
+ * http://doc.spip.org/@quete_meta
+ *
+ * @param $nom
+ * @param $serveur
+ * @return array|bool|null
+ */
 function quete_meta($nom, $serveur) {
 	return sql_getfetsel("valeur", "spip_meta", "nom=" . sql_quote($nom),
 			     '','','','',$serveur);
 }
 
-//
-// Retourne le logo d'un objet, eventuellement par heritage
-// Si flag <> false, retourne le chemin du fichier
-// sinon retourne un tableau de 3 elements:
-// le chemin du fichier, celui du logo de survol, l'attribut style=w/h
-
+/**
+ * Retourne le logo d'un objet, eventuellement par heritage
+ * Si flag <> false, retourne le chemin du fichier
+ * sinon retourne un tableau de 3 elements:
+ * le chemin du fichier, celui du logo de survol, l'attribut style=w/h
+ *
+ * @param string $type
+ * @param string $onoff
+ * @param int $id
+ * @param int $id_rubrique
+ * @param bool $flag
+ * @return array|string
+ */
 function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 	static $chercher_logo;
 	if (is_null($chercher_logo))
@@ -194,8 +258,15 @@ function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 	}
 }
 
-// fonction appelee par la balise #LOGO_DOCUMENT
-// http://doc.spip.org/@calcule_logo_document
+/**
+ * fonction appelee par la balise #LOGO_DOCUMENT
+ *
+ * http://doc.spip.org/@calcule_logo_document
+ *
+ * @param array $row
+ * @param string $connect
+ * @return bool|string
+ */
 function quete_logo_file($row, $connect=NULL) {
 	include_spip('inc/documents');
 	$logo = vignette_logo_document($row, $connect);
@@ -272,7 +343,20 @@ function vignette_logo_document($row, $connect='')
 	return generer_url_entite($row['id_document'], 'document','','', $connect);
 }
 
-// http://doc.spip.org/@calcul_exposer
+/**
+ * Calcul pour savoir si un objet est expose dans le contexte
+ * fournit par $reference
+ * 
+ * http://doc.spip.org/@calcul_exposer
+ *
+ * @param int $id
+ * @param string $prim
+ * @param array $reference
+ * @param int $parent
+ * @param string $type
+ * @param string $connect
+ * @return bool|string
+ */
 function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	static $exposer = array();
 
@@ -330,6 +414,17 @@ function calcul_exposer ($id, $prim, $reference, $parent, $type, $connect='') {
 	return isset($exposer[$m][$prim]) ? isset($exposer[$m][$prim][$id]) : '';
 }
 
+/**
+ * Trouver le numero de page d'une pagination indirecte
+ * lorsque debut_xxx=@123
+ * on cherche la page qui contient l'item dont la cle primaire vaut 123
+ *
+ * @param string $primary
+ * @param int|string $valeur
+ * @param int $pas
+ * @param objetc $iter
+ * @return int
+ */
 function quete_debut_pagination($primary,$valeur,$pas,$iter){
 	// on ne devrait pas arriver ici si la cle primaire est inexistante
 	// ou composee, mais verifions
