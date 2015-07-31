@@ -39,7 +39,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	$select = 'id_mot, id_groupe, titre, descriptif, '
 	. sql_multi ("titre", $spip_lang);
 
-	$result = sql_select($select, 'spip_mots', "id_groupe=$id_groupe", '',  'multi', (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff"));
+	$requete = array('SELECT' => $select, 'FROM' => 'spip_mots', 'WHERE' => "id_groupe=$id_groupe", 'ORDER BY' => 'multi', 'LIMIT' => (($deb_aff < 0) ? '' : "$deb_aff, $nb_aff"));
 
 	$tableau = array();
 	$occurrences = calculer_liens_mots($id_groupe);
@@ -52,7 +52,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	}
 
 	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
-	  . xhtml_table_id_type($result, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tranches);
+	  . xhtml_table_id_type($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $largeurs, $styles, $tranches);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle

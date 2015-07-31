@@ -446,13 +446,15 @@ function affiche_tranche_bandeau($requete, $tmp_var, $force, $skel, $own='')
 }
 
 // http://doc.spip.org/@xhtml_table_id_type
-function xhtml_table_id_type($req, $fonc, &$prims, $own, $force, $largeurs, $styles, $tranches = '', $title='', $icone='')
+function xhtml_table_id_type($requete, $fonc, &$prims, $own, $force, $largeurs, $styles, $tranches = '', $title='', $icone='')
 {
 	global $spip_display, $spip_lang_left;
 
 	$prim = $prims;
 	$prims = array();
-	if (!sql_count($req)) {
+	$result = sql_select((isset($requete["SELECT"]) ? $requete["SELECT"] : "*"), $requete['FROM'], $requete['WHERE'], $requete['GROUP BY'], $requete['ORDER BY'], $requete['LIMIT']);
+
+	if (!sql_count($result)) {
 		if (!$force) return '';
 	} else {
 	if ($spip_display != 4) {
@@ -461,7 +463,7 @@ function xhtml_table_id_type($req, $fonc, &$prims, $own, $force, $largeurs, $sty
 			onmouseover=\"changeclass(this,'tr_liste_over');\"
 			onmouseout=\"changeclass(this,'tr_liste');\"" ;
 
-		while ($r = sql_fetch($req)) {
+		while ($r = sql_fetch($result)) {
 		  if ($prim) $prims[]= $r[$prim];
 		  if ($vals = $fonc($r, $own)) {
 			reset($largeurs);
@@ -491,7 +493,7 @@ function xhtml_table_id_type($req, $fonc, &$prims, $own, $force, $largeurs, $sty
 			}
 		}
 	}
-	sql_free($req);
+	sql_free($result);
 	}
 
 	$id = 't'.substr(md5($title),0,8);
