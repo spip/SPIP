@@ -122,9 +122,9 @@ $GLOBALS['spip_matrice']['image_reduire'] = true;//'inc/filtres_images_mini.php'
 $GLOBALS['spip_matrice']['image_reduire_par'] = true;//'inc/filtres_images_mini.php';
 $GLOBALS['spip_matrice']['image_passe_partout'] = true;//'inc/filtres_images_mini.php';
 
-$GLOBALS['spip_matrice']['couleur_html_to_hex'] = true;//'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['couleur_foncer'] = true;//'inc/filtres_images_mini.php';
-$GLOBALS['spip_matrice']['couleur_eclaircir'] = true;//'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_html_to_hex'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_foncer'] = 'inc/filtres_images_mini.php';
+$GLOBALS['spip_matrice']['couleur_eclaircir'] = 'inc/filtres_images_mini.php';
 
 // ou pour inclure un script au moment ou l'on cherche le filtre
 $GLOBALS['spip_matrice']['filtre_image_dist'] = 'inc/filtres_mime.php';
@@ -2128,7 +2128,8 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 		if (strpos($k,'debut_') === 0)
 			unset($c[$k]);
 
-	include_spip("inc/securiser_action");
+	if (!function_exists('calculer_cle_action'))
+		include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
 	$c = serialize(array($c,$cle));
 
@@ -2161,7 +2162,8 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 // la procedure inverse de encoder_contexte_ajax()
 // http://doc.spip.org/@decoder_contexte_ajax
 function decoder_contexte_ajax($c,$form='') {
-	include_spip("inc/securiser_action");
+	if (!function_exists('calculer_cle_action'))
+		include_spip("inc/securiser_action");
 	if (( (defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX) OR strlen($c)==32)
 		AND $dir = sous_repertoire(_DIR_CACHE, 'contextes')
 		AND lire_fichier("$dir/c$c",$contexte)) {
@@ -2184,7 +2186,8 @@ function decoder_contexte_ajax($c,$form='') {
 // http://doc.spip.org/@_xor
 function _xor($message, $key=null){
 	if (is_null($key)) {
-		include_spip("inc/securiser_action");
+		if (!function_exists('calculer_cle_action'))
+			include_spip("inc/securiser_action");
 		$key = pack("H*", calculer_cle_action('_xor'));
 	}
 

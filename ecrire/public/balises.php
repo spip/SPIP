@@ -1199,7 +1199,7 @@ function balise_AUTORISER_dist($p) {
 	while ($_v = interprete_argument_balise($n++,$p))
 		$_code[] = $_v;
 
-	$p->code = '(include_spip("inc/autoriser")&&autoriser(' . join(', ',$_code).')?" ":"")';
+	$p->code = '((function_exists("autoriser")||include_spip("inc/autoriser"))&&autoriser(' . join(', ',$_code).')?" ":"")';
 	$p->interdire_scripts = false;
 	return $p;
 }

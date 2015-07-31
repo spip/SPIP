@@ -356,13 +356,16 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 // et on remplace ceux a l'interieur ou au bout par -
 // http://doc.spip.org/@ancre_url
 function ancre_url($url, $ancre) {
-	include_spip('inc/charsets');
 	// lever l'#ancre
 	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
 		$url = $r[1];
 	}
-	$ancre = preg_replace(array('/^[^-_a-zA-Z0-9]+/', '/[^-_a-zA-Z0-9]/'), array('', '-'),
-					translitteration($ancre));
+	if (preg_match('/[^-_a-zA-Z0-9]+/S',$ancre)){
+		if (!function_exists('translitteration'))
+			include_spip('inc/charsets');
+		$ancre = preg_replace(array('/^[^-_a-zA-Z0-9]+/', '/[^-_a-zA-Z0-9]/'), array('', '-'),
+						translitteration($ancre));
+	}
 	return $url . (strlen($ancre) ? '#'. $ancre : '');
 }
 
@@ -833,13 +836,15 @@ function lister_themes_prives(){
 }
 
 function find_in_theme($file, $subdir='', $include=false){
+	static $themefiles=array();
+	if (isset($themefiles["$subdir$file"])) return $themefiles["$subdir$file"];
 	$themes = lister_themes_prives();
 	foreach($themes as $theme){
 		if ($f = find_in_path($file,"prive/themes/$theme/$subdir",$include))
-			return $f;
+			return $themefiles["$subdir$file"] = $f;
 	}
 	spip_log("$file introuvable dans le theme prive ".reset($themes),'theme');
-	return "";
+	return $themefiles["$subdir$file"] = "";
 }
 
 // Cherche une image dans les dossiers images
@@ -1060,7 +1065,6 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	}
 	if ($res) return $res;
 	// Sinon c'est un raccourci ou compat SPIP < 2
-	include_spip('inc/lien');
 	if (!function_exists($f = 'generer_url_' . $entite)) {
 		if (!function_exists($f .= '_dist')) $f = '';
 	}

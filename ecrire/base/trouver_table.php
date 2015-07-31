@@ -13,6 +13,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('public/interfaces');
 include_spip('base/objets');
+include_spip('base/serial');
+include_spip('base/auxiliaires');
 
 // Trouve la description d'une table, en particulier celle d'une boucle
 // Si on ne la trouve pas, on demande au serveur SQL
@@ -86,7 +88,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 		  $connexion['tables'] = $desc_cache;
 	}
 	if (!isset($connexion['tables'][$nom])) {
-		include_spip('base/serial');
 
 		if (isset($tables_principales[$nom_sql]))
 			$fdesc = $tables_principales[$nom_sql];
@@ -98,7 +99,6 @@ function base_trouver_table_dist($nom, $serveur='', $table_spip = true){
 			$fdesc = &$tables_principales[$nom_sql];
 		}
 		else {
-			include_spip('base/auxiliaires');
 			if (isset($tables_auxiliaires['spip_' .$nom])) {
 				$nom_sql = 'spip_' . $nom;
 				$fdesc = &$tables_auxiliaires[$nom_sql];
