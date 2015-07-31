@@ -264,7 +264,6 @@ function enfant($leparent){
 	static $i = 0, $premier = 1;
 	global $statut;
 	global $connect_toutes_rubriques;
-	global $connect_id_rubriques;
 	global $couleur_claire, $spip_lang_left;
 	global $browser_name;
 

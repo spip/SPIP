@@ -63,6 +63,9 @@ gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
 
+// Ne pas donner les cles du forum a des non-admins
+if (! ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)))
+	return;
 
 echo "<div class='serif2'>";
 
@@ -97,10 +100,7 @@ while ($row = spip_fetch_array($result_forum)) {
 }
 echo "<A HREF='articles_forum.php3?id_article=$id_article&debut=$i&page=$page'>...</A>";
 
-echo $controle;
-
 echo "</div>";
-
 
 
 $mots_cles_forums = lire_meta("mots_cles_forums");
@@ -108,7 +108,7 @@ $mots_cles_forums = lire_meta("mots_cles_forums");
 if ($connect_statut == "0minirezo") {
 	$query_forum = "SELECT * FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') ORDER BY date_heure DESC LIMIT $debut, $pack";
 	$result_forum = spip_query($query_forum);
-	afficher_forum($result_forum, $forum_retour, 'oui');
+	afficher_forum($result_forum, $forum_retour, $id_article);
 }
 
 echo "</FONT>";
