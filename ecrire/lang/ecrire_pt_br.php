@@ -763,7 +763,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 
 	// Q
 	'queue_executer_maintenant' => 'Executar agora',
-	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinstalar a lista com as tarefas periódicas',
+	'queue_info_purger' => 'Você pode excluir todas as tarefas em espera e reinstalar a lista com as tarefas periódicas', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ trabalhos em espera',
 	'queue_next_job_in_nb_sec' => 'Próximo trabalho em @nb@ s',
 	'queue_no_job_in_queue' => 'Nenhum tarefa em espera',
@@ -779,8 +779,8 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'statut_admin_restreint' => '(admin limitado)',
 
 	// T
-	'tache_cron_asap' => 'Tarefa CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Tarefa CRON @function@ (a cada @nb@ s)',
+	'tache_cron_asap' => 'Tarefa CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'Tarefa CRON @function@ (a cada @nb@ s)', # MODIF
 	'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (ícones de documentos, títulos apresentados sob a forma gráfica, funções matemáticas em formato TeX...) ocupam, no diretório @dir@, um total de @taille@.',
 	'taille_cache_infinie' => 'Este site não prevê limitação de tamanho do diretório do cache.',
 	'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diretório do cache deste site em cerca de <b>@octets@</b>.',

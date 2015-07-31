@@ -756,7 +756,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Elo ausféieren',
-	'queue_info_purger' => 'Dir kënnt all Aarbechten déi nach ustinn läschen an d\'Lëscht mat de periodeschen Aarbechten nei starten',
+	'queue_info_purger' => 'Dir kënnt all Aarbechten déi nach ustinn läschen an d\'Lëscht mat de periodeschen Aarbechten nei starten', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ Aarbechten an der Waardeschläif',
 	'queue_next_job_in_nb_sec' => 'Nächst Aarbecht an @nb@ s',
 	'queue_no_job_in_queue' => 'Kéng Aarbecht an der Waardeschläif',
@@ -772,8 +772,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(restriktiven Admin)',
 
 	// T
-	'tache_cron_asap' => 'CRON-Aarbecht @function@ (ASAP)',
-	'tache_cron_secondes' => 'CRON-Aarbecht @function@ (all @nb@ s)',
+	'tache_cron_asap' => 'CRON-Aarbecht @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'CRON-Aarbecht @function@ (all @nb@ s)', # MODIF
 	'taille_cache_image' => 'Déi automatësch berechent Biller (Vignette vun Dokumenter, graphesch Titelen, mathematesch Formelen am TeX-Format...) brauchen am Dossier @dir@ eng Plaz vun @taille@.',
 	'taille_cache_infinie' => 'De Cache vun dësem Site ass net an der Gréisst beschränkt.',
 	'taille_cache_maxi' => 'SPIP probéiert d\'Gréisst vum Cache vun dësem Site op ongeféier <b>@octets@</b> ze beschränken.',

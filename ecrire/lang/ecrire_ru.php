@@ -781,7 +781,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Q
 	'queue_executer_maintenant' => 'Запустить',
-	'queue_info_purger' => 'Вы можете удалить все текущие задачи и обнулить всю очередь задач',
+	'queue_info_purger' => 'Вы можете удалить все текущие задачи и обнулить всю очередь задач', # MODIF
 	'queue_nb_jobs_in_queue' => 'В очереди @nb@ задач',
 	'queue_next_job_in_nb_sec' => 'Следующая задача  через @nb@ s',
 	'queue_no_job_in_queue' => 'Список задач пуст',
@@ -797,8 +797,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_admin_restreint' => '(ограниченный администратор)',
 
 	// T
-	'tache_cron_asap' => 'CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'CRON @function@ (каждые @nb@ с)',
+	'tache_cron_asap' => 'CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'CRON @function@ (каждые @nb@ с)', # MODIF
 	'taille_cache_image' => 'Кэш файлов изображений ( автоматически пережатые картинки, изображения формул и текста, трасформированного в графику) занимает @taille@ в каталоге @dir@.',
 	'taille_cache_infinie' => 'На вашем сайте нет ограничений на размер кэша.',
 	'taille_cache_maxi' => 'Заданный максимальный размер файлов кэша составляет приблизительно <b> @octets@ </b>.',

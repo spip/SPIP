@@ -787,7 +787,7 @@ Le traduzioni sono associate all\'originale,
 
 	// Q
 	'queue_executer_maintenant' => 'Esegui adesso',
-	'queue_info_purger' => 'È possibile eliminare tutti i lavori in sospeso e reinizializzare lista con delle elaborazioni periodiche',
+	'queue_info_purger' => 'È possibile eliminare tutti i lavori in sospeso e reinizializzare lista con delle elaborazioni periodiche', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ processi in coda',
 	'queue_next_job_in_nb_sec' => 'Prossimo processo in @nb@ s',
 	'queue_no_job_in_queue' => 'Nessun processo appeso',
@@ -803,8 +803,8 @@ Le traduzioni sono associate all\'originale,
 	'statut_admin_restreint' => '(ammin. parziale)',
 
 	// T
-	'tache_cron_asap' => 'Task CRON @function@ (ASAP)',
-	'tache_cron_secondes' => 'Task CRON @function@ (ogni @nb@ s)',
+	'tache_cron_asap' => 'Task CRON @function@ (ASAP)', # MODIF
+	'tache_cron_secondes' => 'Task CRON @function@ (ogni @nb@ s)', # MODIF
 	'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 	'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
 	'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',

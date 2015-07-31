@@ -772,7 +772,7 @@ in einer Farbe, die den Status anzeigt :',
 
 	// Q
 	'queue_executer_maintenant' => 'Jetzt ausführen',
-	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.',
+	'queue_info_purger' => 'Sie können alle anstehenden Jobs löschen und so die Liste der regelmäßigen Jobs neu initialisieren.', # MODIF
 	'queue_nb_jobs_in_queue' => '@nb@ Jobs in der Warteschlange',
 	'queue_next_job_in_nb_sec' => 'Nächster Job in @nb@ s',
 	'queue_no_job_in_queue' => 'Keine Aufgaben in der Warteschlange',
@@ -788,8 +788,8 @@ in einer Farbe, die den Status anzeigt :',
 	'statut_admin_restreint' => '(Rubrik-Admin)',
 
 	// T
-	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)',
-	'tache_cron_secondes' => 'Cronjob @function@ (alle @nb@ Sekunden)',
+	'tache_cron_asap' => 'Cronjob @function@ (unverzüglich)', # MODIF
+	'tache_cron_secondes' => 'Cronjob @function@ (alle @nb@ Sekunden)', # MODIF
 	'taille_cache_image' => 'Dei von SPIP automatisch berechneten Grafiken (Icons für Dokumente, als Grafiken gespeicherte Titel, mathematische Ausdrücke im Format TeX...) belegen insgesamt @taille@ im Verzeichnis @dir@.',
 	'taille_cache_infinie' => 'Die Grösse des <code>CACHE/</code> dieser Website wird nicht begrenzt.',
 	'taille_cache_maxi' => 'SPIP versucht die Grösse des <code>CACHE/</code> der Website auf ca. <b>@octets@</b> Byte zu begrenzen.',
