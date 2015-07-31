@@ -38,7 +38,7 @@ function ecrire_stats() {
 		if ($row = mysql_fetch_array($result)) {
 			$visites = $row['visites'];
 			echo "[$visites visites]";
-			bouton("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
+			bouton_public("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 			
 		}
 	}
