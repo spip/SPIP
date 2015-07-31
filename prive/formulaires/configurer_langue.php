@@ -49,6 +49,8 @@ function formulaires_configurer_langue_traiter_dist(){
 		// verif que la langue demandee est licite
 		if (changer_langue($lang)) {
 			ecrire_meta('langue_site', $lang);
+			// le test a defait ca:
+			utiliser_langue_visiteur();
 			$res['message_ok'] = _T('config_info_enregistree');
 		}
 		// le test a defait ca:
