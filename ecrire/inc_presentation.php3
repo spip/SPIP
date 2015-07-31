@@ -18,7 +18,7 @@ function aide ($aide) {
 	return " <script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700,height=80%'); ".
+	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700,height=1000'); ".
 	'void(0);\">");'.
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
