@@ -106,7 +106,7 @@ function retire_caches() {
 		foreach ($suppr as $cache => $ignore)
 			retire_cache($cache);
 		spip_query("DELETE FROM spip_caches WHERE "
-		.calcul_mysql_in('fichier', "'".join("','",$supprimes)."'") );
+		.calcul_mysql_in('fichier', "'".join("','",$suppr)."'") );
 	}
 }
 
