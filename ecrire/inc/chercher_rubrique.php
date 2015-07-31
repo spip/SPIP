@@ -216,7 +216,7 @@ function construire_selecteur($url, $js, $idom, $name, $init='', $id=0)
 	. $url
 	. "', this.parentNode.nextSibling, this.nextSibling,'',event)\"><img src='"
 	. chemin_image($icone)
-	. "'\nstyle='vertical-align: middle;' alt='"._T('titre_image_selecteur_rubrique')."' /></a><img src='"
+	. "'\nstyle='vertical-align: middle;' alt='"._T('titre_image_selecteur')."' /></a><img src='"
 	. chemin_image('searching.gif') 
 	. "' id='img_"
 	.  $idom

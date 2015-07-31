@@ -663,7 +663,7 @@ et vous reconnecter au site.
 	'titre_image_auteur_supprime' => 'Auteur supprimé',
 	'titre_image_redacteur' => 'Rédacteur sans accès',
 	'titre_image_redacteur_02' => 'Rédacteur',
-	'titre_image_selecteur_rubrique' => 'Afficher la liste des rubriques',
+	'titre_image_selecteur' => 'Afficher la liste',
 	'titre_image_visiteur' => 'Visiteur',
 	'titre_joindre_document' => 'JOINDRE UN DOCUMENT',
 	'titre_mots_cles' => 'MOTS-CLÉS',
