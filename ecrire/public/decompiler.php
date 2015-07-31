@@ -89,7 +89,7 @@ function decompiler_champ($struct, $fmt, $prof=0, $next='')
 	$apres = public_decompiler($struct->apres, $fmt, $prof);
 	$args = $filtres = '';
 	if ($p = $struct->param) {
-		if (!$p[0][0])
+		if ($p[0][0]==='')
 		  $args = decompiler_liste(array(array_shift($p)), $fmt, $prof);
 		$filtres = decompiler_liste($p, $fmt, $prof);
 	}
@@ -116,7 +116,7 @@ function decompiler_liste($sources, $fmt, $prof=0) {
 			  $args[]= $v[0]->avant . $v[0]->texte . $v[0]->apres;
 			else $args[]= public_decompiler($v, $fmt, 0-$prof);
 		}
-		if ($r OR $args) $res .= $f($r, $args, $prof);
+		if (($r!=='') OR $args) $res .= $f($r, $args, $prof);
 	}
 	return $res;
 }
