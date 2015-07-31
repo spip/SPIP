@@ -134,7 +134,7 @@ else {
 		echo "<div class='iconeoff' style='padding: 5px;'>\n";
 		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo typo(_T('info_visites_plus_populaires'));
-		echo "<ol style='padding-left:25px; font-size:x-small;color:#666666;'>";
+		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 		$liste = 0;
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -195,9 +195,9 @@ else {
 		creer_colonne_droite();
 
 		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
-		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;overflow:hidden;'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
-		echo "<ol style='padding-left:25px; font-size:x-small;color:#666666;'>";
+		echo "<ol style='padding-left:40px; font-size:x-small;color:#666666;'>";
 
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -764,7 +764,7 @@ $result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where O
 echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
 
-echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'><br />";
+echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;overflow:hidden;'><br />";
 echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
 echo "<br /></div>";	
 
