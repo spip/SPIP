@@ -725,6 +725,11 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
 
+		if (!$langue_parent)
+			$langue_parent = $GLOBALS['meta']['langue_site'];
+		if (!$langue_article)
+			$langue_article = $langue_parent;
+
 		debut_cadre_couleur();
 		echo "<div style='text-align: center;'>";
 		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
