@@ -394,6 +394,7 @@ if (!_DIR_RESTREINT)
 if (!(_FILE_CONNECT
 OR autoriser_sans_cookie(_request('exec'))
 OR _request('action') == 'cookie'
+OR _request('action') == 'converser'
 OR _request('action') == 'test_dirs')) {
 
 	// Si on peut installer, on lance illico
