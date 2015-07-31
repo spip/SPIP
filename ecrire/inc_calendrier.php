@@ -233,7 +233,7 @@ function http_calendrier_retire_args($script, $args)
 function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 			    $script, $args_pred, $args_suiv, $type, $ancre)
 {
-  global $spip_lang_right, $spip_lang_left;
+  global $spip_lang_right, $spip_lang_left, $couleur_claire;
 
 	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
 
@@ -305,27 +305,79 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=tout" .
 			"&$args"),
-								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-tout.png' alt='tout' class='format_png' />") . "</span>";
+								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-tout.png' width='13' height='13' alt='tout' class='format_png' />") . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "matin") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
 		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=matin" .
 			"&$args"),
-								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-am.png' alt='AM' class='format_png' />") . "</span>";
+								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-am.png' width='13' height='13' alt='AM' class='format_png' />") . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "soir") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
 		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=soir" .
 			"&$args"),
-								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-pm.png' alt='PM' class='format_png' />") . "</span>";
+								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-pm.png' width='13' height='13' alt='PM' class='format_png' />") . "</span>";
  	}
+
+
+
+
+			$gadget = "<div id='nav_agenda' style='position: relative; visibility: hidden;z-index: 1000; '><div style='position: absolute; padding: 5px; background-color: $couleur_claire; margin-bottom: 5px; -moz-border-radius-bottomleft: 8px; -moz-border-radius-bottomright: 8px;'>";
+			//$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
+			//$gadget .= _T('icone_agenda');
+			//$gadget .= "</a>";
+			
+		//	$mois = $GLOBALS['mois'];
+		//	$jour = $GLOBALS['jour'];
+		//	$annee =$GLOBALS['annee'];
+			
+			$annee_avant = $annee - 1;
+			$annee_apres = $annee + 1;
+
+			$gadget .= "<table cellpadding='0' cellspacing='5' border='0' width='100%'>";
+			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+			for ($i=$mois; $i < 13; $i++) {
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
+					nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
+			}
+			for ($i=1; $i < $mois - 1; $i++) {
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
+			}
+			$gadget .= "</td>";
+			$gadget .= "</tr>";
+			$gadget .= "<tr>";
+			$gadget .= "<td valign='top' width='33%'>";
+			$gadget .= http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= "</td><td valign='top' width='33%'>";
+			$gadget .= http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= "</td><td valign='top' width='33%'>";
+			$gadget .= http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= "</td>";
+			$gadget .= "</tr>";
+			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
+			for ($i=$mois+2; $i <= 12; $i++) {
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
+			}
+			for ($i=1; $i < $mois+1; $i++) {
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
+					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
+			}
+			$gadget .= "</td></tr>";
+			$gadget .= "</table>";
+			
+			$gadget .= "</div></div>";
+
+
  
-	return $retour .
+	return "<div onMouseOver=\"montrer('nav_agenda');\" onMouseOut=\"cacher('nav_agenda');\">".$retour .
 	  "&nbsp;&nbsp;&nbsp;" .
 	  (_DIR_RESTREINT ? '' :  aide("messcalen")) .
-	  "</div>";    
+	  "</div>".$gadget."</div>";    
 }
 
 # affichage du bandeau d'un calendrier d'une journee

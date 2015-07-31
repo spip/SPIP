@@ -2753,81 +2753,17 @@ else {
 		$result_rv = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 
 		if (spip_num_rows($result_pb) OR spip_num_rows($result_rv)) {
-			if ($GLOBALS['afficher_bandeau_calendrier']) $largeur = "800px";
-			else $largeur = "410px";
+			$largeur = "410px";
 			$afficher_cal = true;
 		}
 		else {
-			if ($GLOBALS['afficher_bandeau_calendrier']) $largeur = "600px";
-			else $largeur = "200px";
+			$largeur = "200px";
 			$afficher_cal = false;
 		}
 
 
 
 		// Calendrier
-		if ($GLOBALS['afficher_bandeau_calendrier']) {
-			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 0px;'>";
-			$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
-			$gadget .= _T('icone_agenda');
-			$gadget .= "</a>";
-			
-			$mois = $GLOBALS['mois'];
-			$jour = $GLOBALS['jour'];
-			$annee =$GLOBALS['annee'];
-
-			$annee_avant = $annee - 1;
-			$annee_apres = $annee + 1;
-
-			$gadget .= "<table cellpadding='0' cellspacing='10' border='0'>";
-			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
-			for ($i=$mois; $i < 13; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
-					nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
-			}
-			for ($i=1; $i < $mois - 1; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
-					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
-			}
-			$gadget .= "</td>";
-
-				if ($afficher_cal) {
-					$gadget .= "<td valign='top' width='200' rowspan='3'>";
-					$gadget .= "<div>&nbsp;</div>";
-					$gadget .= "<div style='color: black;'>";
-					$gadget .=  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-					$gadget .=  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
-					$gadget .=  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-					$gadget .= "</div>";
-					$gadget .= "</td>";
-				}
-		
-			$gadget .= "</tr>";
-			$gadget .= "<tr>";
-			$gadget .= "<td valign='top' width='180'>";
-			$gadget .= http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
-			$gadget .= "</td><td valign='top' width='180'>";
-			$gadget .= http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
-			$gadget .= "</td><td valign='top' width='180'>";
-			$gadget .= http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
-			$gadget .= "</td>";
-			$gadget .= "</tr>";
-			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
-			$gadget .= "<div>&nbsp;</div>";
-			for ($i=$mois+2; $i <= 12; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
-					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
-			}
-			for ($i=1; $i < $mois+1; $i++) {
-				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
-					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
-			}
-			$gadget .= "</td></tr>";
-			$gadget .= "</table>";
-			
-			$gadget .= "</div>";
-		
-		} else {
 			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
 			$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
 			$gadget .= _T('icone_agenda');
@@ -2853,7 +2789,6 @@ else {
 			
 			$gadget .= "</tr></table>";
 			$gadget .= "</div>";
-		}
 	echo afficher_javascript($gadget);
 	// FIN GADGET Agenda
 
