@@ -35,27 +35,30 @@ function index_pile($idb, $nom_champ, &$boucles)
     if (!$t) $t = $r; // pour les tables non Spip
     // $t est le nom PHP de cette table 
 #    spip_log("'$idb' '$r' '$c' '$nom_champ'");
-    $x = $tables_principales[$t];
-    if (!$x) 
+    $desc = $tables_principales[$t];
+    if (!$desc) 
     {
       include_local("inc-debug-squel.php3");
       erreur_squelette(_L("Table SQL absente de \$tables_principales dans inc_serialbase"), $r, "'$idb'");
     }
-
-    $a = $x['field'];
-    $e = $a[$c];
-#    spip_log("	Dans $idb ($t $e): $x");    
-    // $e est le type SQL de l'entre'e (on s'en sert comme boole'en uniquement)
-      if ($e)
-      // entite' SPIP homonyme au champ SQL
-      { $e = $c; }
+    $excep = $exceptions_des_tables[$r][$c];
+    if ($excep)
+      {
+	if (!is_array($excep))
+# entite' SPIP alias d'un champ SQL
+	  { $e = $excep;}
+	else
+# entite' SPIP alias d'un champ dans une autre table SQL 
+	  { $t = $excep[0]; $e = $excep[1]; }
+      }
     else
       {
-      // entite' SPIP alias d'un champ SQL
-	$e = $exceptions_des_tables[$r][$c];
-	if (is_array($e))
-      // entite' SPIP dans une table SQL annexe qu'il faut pre'ciser
-	  { $t = $e[0]; $e = $e[1]; } }
+	$e = $desc['field'][$c];
+# $e est le type SQL de l'entre'e (on s'en sert comme boole'en uniquement)
+# entite' SPIP homonyme au champ SQL
+	if ($e) $e = $c;
+      }
+#    spip_log("	Dans $idb ($t $e): $desc");    
     if ($e)
       {
 	$boucles[$idb]->select[] = $t . "." . $e;
