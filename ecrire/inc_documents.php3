@@ -600,8 +600,8 @@ function afficher_upload($image_url, $redirect='', $intitule, $inclus = '', $env
 				array(
 				'redirect' => $redirect,
 				'hash' => calculer_action_auteur("joindre $mode"),
-				'hash_id_auteur' => $connect_id_auteur,
-				'doc' => $mode,
+				'id_auteur' => $connect_id_auteur,
+				'arg' => $mode,
 				'type' => $type),
 				$image_url,
 				'multipart/form-data');
@@ -664,8 +664,8 @@ function afficher_portfolio(
 	$type = "article",		# article ou rubrique ?
 	$album = 'portfolio',	# album d'images ou de documents ?
 	$flag_modif = false,	# a-t-on le droit de modifier ?
-	$image_url,				# adresse du lien spip_image
-	$redirect_url,			# adresse du retour apres spip-image
+	$image_url,				# adresse du lien spip_action
+	$redirect_url,			# adresse du retour apres spip_action
 	$couleur				# couleur des cases du tableau
 ) {
 	charger_generer_url();
@@ -894,9 +894,9 @@ function bouton_tourner_document($url, $redirect, $id, $album, $rot)
 	$link_rot = new Link ($url);
 	$action = 'tourner';
 	$link_rot->addVar('hash', calculer_action_auteur("$action $id"));
-	$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+	$link_rot->addVar('id_auteur', $connect_id_auteur);
 	$link_rot->addVar('action', $action);
-	$link_rot->addVar('doc', $id);
+	$link_rot->addVar('arg', $id);
 	$link_rot->addVar('var_rot', $rot);
 	$link_rot->addVar('redirect', $redirect.'&show_docs='.$id);
 	$link_rot->addVar('ancre', $album);
@@ -910,9 +910,9 @@ function bouton_supprime_document_et_vignette($url, $redirect, $id, $album)
 	$action = 'supprimer';
 	$link_supp = new Link ($url);
 	$link_supp->addVar('hash', calculer_action_auteur($action ." ".$id));
-	$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
+	$link_supp->addVar('id_auteur', $connect_id_auteur);
 	$link_supp->addVar('action', $action);
-	$link_supp->addVar('doc', $id);
+	$link_supp->addVar('arg', $id);
 	$link_supp->addVar('redirect', $redirect);
 	$link_supp->addVar('ancre', $album);
 	return $link_supp->getUrl();
@@ -955,7 +955,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $options;
 	global $spip_lang_left, $spip_lang_right;
 
-	$image_url = generer_url_public('spip_image',
+	$image_url = generer_url_public('spip_action.php',
 					(!$id_article ? "" : ('id_article='.$id_article)));
 
 	$redirect_url = new Link();
@@ -1056,7 +1056,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	global $clean_link;
 	global $id_doc_actif;
 
-	$image_url = generer_url_public('spip_image',
+	$image_url = generer_url_public('spip_action.php',
 					(!$id_article ? "" : ('id_article='.$id_article)));
 
 	# HACK!!! simule une mise en page pour affecter les document_vu()

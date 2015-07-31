@@ -19,7 +19,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // mode = 'force' - charger toujours (mettre a jour)
 //
 function copie_locale($source, $mode='auto') {
-	include_ecrire('inc_getdocument');
 
 	// Si copie_locale() est appele depuis l'espace prive
 	if (!_DIR_RESTREINT
