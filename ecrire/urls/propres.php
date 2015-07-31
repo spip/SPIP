@@ -64,6 +64,8 @@ function retirer_marqueurs_url_propre($url_propre) {
 	return $url_propre;
 }
 
+
+if (!function_exists('creer_chaine_url')) {
 // Pipeline pour creation d'une adresse : il recoit l'url propose par le
 // precedent, un tableau indiquant le titre de l'objet, son type, son id,
 // et doit donner en retour une chaine d'url, sans se soucier de la
@@ -129,6 +131,7 @@ function creer_chaine_url($x) {
 	$x['data'] = $url;
 
 	return $x;
+}
 }
 
 
