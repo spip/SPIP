@@ -61,14 +61,14 @@ a.icone:hover { text-decoration: none; }
 a.spip_barre img {
 	border-left: 1px solid #ffffff;
 	border-top: 1px solid #ffffff;
-	border-right: 1px solid #999999;
-	border-bottom: 1px solid #999999;
-	padding: 1px;
-	background-color: #cccccc;
+	border-right: 1px solid #666666;
+	border-bottom: 1px solid #666666;
+	padding: 3px;
+	background-color: <?php echo $couleur_claire; ?>;
 }
 a.spip_barre:hover img {
 	border: 1px solid #808080;
-	padding: 1px;
+	padding: 3px;
 	background-color: #f8f8f4;
 }
 
