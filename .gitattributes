@@ -338,6 +338,7 @@ ecrire/inc_statistiques_referers.php -text
 ecrire/inc_statistiques_repartition.php -text
 ecrire/inc_statistiques_svg.php -text
 ecrire/inc_statistiques_visites.php -text
+ecrire/inc_suivi_versions.php -text
 ecrire/inc_synchro.php -text
 ecrire/inc_upgrade.php -text
 ecrire/inc_utils.php -text
