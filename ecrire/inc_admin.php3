@@ -59,4 +59,21 @@ function fin_admin($action) {
 	@rmdir(_DIR_SESSIONS . $fichier);
 }
 
+
+function demande_maj_version()
+{
+	include_ecrire("inc_presentation");
+	debut_page();
+	echo "<blockquote><blockquote><h4><font color='red'>",
+	_T('info_message_technique'),
+	"</font><br> ",
+	_T('info_procedure_maj_version'),
+	"</h4>",
+	_T('info_administrateur_site_01'),
+	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
+	_T('info_administrateur_site_02'),
+	"</a></blockquote></blockquote><p>";
+	fin_page();
+	exit;
+}
 ?>

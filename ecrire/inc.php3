@@ -150,7 +150,7 @@ if (!isset($reinstall)) {
 
 	if ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))) {
 
-	  include_ecrire('inc_upgrade');
+	  include_ecrire('inc_admin');
 	  demande_maj_version();
 	}
  }
