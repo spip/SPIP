@@ -128,7 +128,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// faudrait expanser le foreach a la compil, car y en a souvent qu'un 
 	// et puis faire un [] plutot qu'un "','."
 	if ($boucle->doublons)
-		$corps .= "		foreach(" . $boucle->doublons . ' as $k) $doublons[$k]= "," . ' .
+		$corps .= "		foreach(" . $boucle->doublons . ' as $k) $doublons[$k] .= "," . ' .
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons\n";
 
