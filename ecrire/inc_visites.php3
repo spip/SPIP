@@ -125,15 +125,18 @@ function calculer_visites($t) {
 		. join("), ('$date',", $articles)
 		. ")");
 
-		// enregistrer les visites
+		// enregistrer les visites dans les deux tables
 		$ar = array(); # tableau num -> liste des articles ayant num visites
 		foreach($visites_a as $id_article => $num)
 			$ar[$num][] = $id_article;
 		foreach ($ar as $num => $liste) {
+			$in = calcul_mysql_in('id_article', join(',',$liste));
 			spip_query("UPDATE spip_visites_articles
 			SET visites = visites+$num
-			WHERE date='$date' AND ".
-			calcul_mysql_in('id_article', join(',',$liste)));
+			WHERE date='$date' AND $in");
+			spip_query("UPDATE spip_articles
+			SET visites = visites+$num, maj = maj
+			WHERE $in");
 			## Ajouter un JOIN sur le statut de l'article ?
 		}
 	}
