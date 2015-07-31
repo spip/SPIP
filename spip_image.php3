@@ -8,6 +8,7 @@ include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
 
+
 /* ResizeGif with (height % width) */
 function RatioResizeImg( $image, $newWidth, $newHeight){ 
 
@@ -97,18 +98,7 @@ function deplacer_fichier_upload($source, $dest) {
 
 	$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
-	if ($ok)
-		@chmod($dest, '0666');
-/*	else {
-		$f = @fopen($dest,'w');
-		if ($f)
-			fclose ($f);
-		else {
-			@header ("Location: spip_test_dirs.php3?test_dir=".dirname($dest));
-			exit;
-		}
-	}*/
-
+	@chmod($loc, 0666);
 	return $ok;
 }
 
@@ -230,7 +220,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$id_document = 0;
 	}
 	if (!$id_document) {
-		$query = "INSERT spip_documents (id_type, titre) VALUES ($id_type, 'sans titre')";
+		$query = "INSERT spip_documents (id_type, titre) VALUES ($id_type, '')";
 		mysql_query($query);
 		$id_document = mysql_insert_id();
 		$nouveau = true;
@@ -265,7 +255,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$hauteur_prev = $preview['height'];
 		$largeur_prev = $preview['width'];
 		$fichier_prev = $preview['fichier'];
-		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('1', 'vignette', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
+		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('1', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
 		mysql_query($query);
 		$id_preview = mysql_insert_id();
 		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
@@ -275,7 +265,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	//
 	// Recopier le fichier
 	//
-
 	$size_image = getimagesize($dest_path);
 	$type_image = decoder_type_image($size_image[2]);
 	if ($type_image) {
@@ -303,7 +292,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	}
 	
 	if ($doc_vignette){
-		$query = "UPDATE spip_documents SET id_vignette=$doc_vignette, titre='$titre', descriptif='$descriptif' WHERE id_document=$id_document";
+		$query = "UPDATE spip_documents SET id_vignette=$doc_vignette, titre='', descriptif='' WHERE id_document=$id_document";
 		mysql_query($query);
 	
 	}
@@ -319,25 +308,44 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 if (!$image_name AND $image2) {
 	$image = "ecrire/upload/".$image2;
 	$image_name = $image;
-	$supprimer_ecrire_upload = $image;
-} else {
-	$supprimer_ecrire_upload = '';
 }
 
 //
 // ajouter un document
 //
 if ($ajout_doc == 'oui') {
-	if ($forcer_document == 'oui')
-		$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document);
-	else
-		$id_document = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	if ($dossier_complet){
+		$myDir = opendir('ecrire/upload');
+		while($entryName = readdir($myDir)) {
+			if (is_file("ecrire/upload/".$entryName) AND !($entryName=='remove.txt')) {
+			if (ereg("\.([^.]+)$", $entryName, $match)) {
+					$ext = strtolower($match[1]);
+					if ($ext == 'jpeg')
+						$ext = 'jpg';
+					$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
+					if ($inclus)
+						$req .= " AND inclus='$inclus'";
+					if (@mysql_fetch_array(mysql_query($req)))
+						$id_document = ajout_doc('ecrire/upload/'.$entryName, 'ecrire/upload/'.$entryName, '', 'document', '');
+				}
+			}
+		}
+		closedir($myDir);
+	
+	} 
+	else {
+		if ($forcer_document == 'oui')
+			$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document);
+		else
+			$id_document = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	}
 }
 
 
 // joindre un document
 if ($joindre_doc == 'oui'){
 	$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document, $doc_vignette, $titre_vignette, $descriptif_vignette);
+	
 }
 
 
@@ -382,13 +390,7 @@ if ($doc_supp) {
 }
 
 
-// supprimer le fichier original si pris dans ecrire/upload
-/*if ($supprimer_ecrire_upload)
-	@unlink ($supprimer_ecrire_upload);*/
 
-//
-// redirection
-//
 if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 else $vars = $HTTP_GET_VARS;
 $redirect_url = "ecrire/" . $vars["redirect"];
