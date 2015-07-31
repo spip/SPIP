@@ -41,7 +41,7 @@ function formulaire_charger_plugin($retour='') {
 		if (!@is_dir(_DIR_PLUGINS_AUTO)
 		OR !is_writeable(_DIR_PLUGINS_AUTO)) {
 		  $auto = _T('plugin_info_automatique1')."\n"
-			.'<ol><li>'._T('plugin_info_automatique2',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</li>'
+			.'<ol class="spip"><li>'._T('plugin_info_automatique2',array('rep'=>joli_repertoire(_DIR_PLUGINS_AUTO))).'</li>'
 			.'<li>'._T('plugin_info_automatique3').aide("install0")."</li></ol>"
 		  ."\n<p>"._T('plugin_info_automatique_lib')."</p>";
 		}

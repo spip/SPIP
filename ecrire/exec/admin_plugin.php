@@ -51,8 +51,11 @@ function exec_admin_plugin_dist($retour='') {
 	echo "<br />\n";
 	echo "<br />\n";
 
+	$quoi = _request('voir');
+	$quoi = $quoi ? $quoi : 'actifs';
+
 	echo gros_titre(_T('icone_admin_plugin'),'',false);
-	echo barre_onglets("plugins", "admin_plugin");
+	echo barre_onglets("plugins", $quoi=='actifs'?"plugins_actifs":"admin_plugin");
 
 	echo debut_gauche('plugin',true);
 	echo debut_boite_info(true);
@@ -94,66 +97,65 @@ function exec_admin_plugin_dist($retour='') {
 		$plugins_interessants = array();
 
 	echo "<div class='liste-plugins formulaire_spip'>";
-	if ($lpf) {
-		echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
-		'liste_plugins');
-		echo "<p>"._T('texte_presente_plugin')."</p>";
 
+	echo debut_cadre_trait_couleur('plugin-24.gif',true,'',_T('plugins_liste'),
+	'plugins');
 
-		$sub = "\n<div class='boutons'>"
-		.  "<input type='submit' class='submit save' style='display:none;' value='"._T('bouton_enregistrer')
-		."' />"
-		.  "<input type='submit' class='submit update' value='".singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count')
-		."' />"
-		. "</div>";
-
-
-		$quoi = _request('voir');
-		$quoi = $quoi ? $quoi : 'actifs';
-
-		$no_button = false;
-		$corps .= "<div class='liens'>"
-		 . lien_ou_expose(parametre_url(self(),'voir','actifs'), sinon(singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'),_T('plugins_actif_aucun')), $quoi=='actifs')
-		 . ' | '
-		 . lien_ou_expose(parametre_url(self(),'voir','recents'), _T('plugins_recents'), $quoi=='recents')
-		 . ' | '
-		 . lien_ou_expose(parametre_url(self(),'voir','tous'), singulier_ou_pluriel(count($lpf),'plugins_disponible_un','plugins_disponibles','count'), $quoi=='tous')
-		 . "</div>";
-
-			// la liste
-			if ($quoi=='actifs'){
-				$aff = affiche_les_plugins($lcpa, $lcpa, $format);
-				$corps .= ($aff ? $aff : ($no_button = "<h3>"._T('plugins_actif_aucun')."</h3>"));
-			} elseif ($quoi=='tous')
-				$corps .= affiche_les_plugins($lpf, $lcpa, $format);
-			else {
-				$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
-				$lcpaffiche = array();
-				foreach ($lpf as $f)
-					if (!strpos($f, '/')
-					OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
-					OR in_array($f, $lcpa)
-					OR in_array($f, $plugins_interessants))
-						$lcpaffiche[] = $f;
-
-				$corps .= affiche_les_plugins($lcpaffiche, $lcpa, $format);
-
-			}
-
-			if (!$no_button)
-				$corps .= "\n<br />" . $sub;
-
-			echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
-
-			echo fin_cadre_trait_couleur(true);
+	if ($quoi!=='actifs'){
+		if ($lpf)
+			echo "<p>"._T('texte_presente_plugin')."</p>";
+		else {
+			if (!@is_dir(_DIR_PLUGINS))
+				echo  "<p>"._T('plugin_info_automatique_ftp',array('rep'=>joli_repertoire(_DIR_PLUGINS)))
+							. " &mdash; "._T('plugin_info_automatique_creer')."</p>";
+		}
 	}
+
+	if ($quoi=='actifs' OR $lpf)
+		echo "<h3>".sinon(
+						singulier_ou_pluriel(count($lcpa), 'plugins_actif_un', 'plugins_actifs', 'count'),
+						_T('plugins_actif_aucun')
+						)."</h3>";
+
+	$sub = "\n<div class='boutons' style='display:none;'>"
+	.  "<input type='submit' class='submit save' value='"._T('bouton_enregistrer')
+	."' />"
+	. "</div>";
+
+
+	$no_button = false;
+
+	// la liste
+	if ($quoi=='actifs'){
+		$aff = affiche_les_plugins($lcpa, $lcpa, $format);
+		$no_button = !strlen($aff);
+		$corps .= $aff;
+	}
+	elseif ($quoi=='tous')
+		$corps .= affiche_les_plugins($lpf, $lcpa, $format);
 	else {
-		if (!@is_dir(_DIR_PLUGINS))
-			echo  "<p>"._T('plugin_info_automatique_ftp',array('rep'=>joli_repertoire(_DIR_PLUGINS)))
-						. " &mdash; "._T('plugin_info_automatique_creer')."</p>";
+		$dir_auto = substr(_DIR_PLUGINS_AUTO, strlen(_DIR_PLUGINS));
+		$lcpaffiche = array();
+		foreach ($lpf as $f)
+			if (!strpos($f, '/')
+			OR ($dir_auto AND substr($f, 0, strlen($dir_auto)) == $dir_auto)
+			OR in_array($f, $lcpa)
+			OR in_array($f, $plugins_interessants))
+				$lcpaffiche[] = $f;
+
+		$corps .= affiche_les_plugins($lcpaffiche, $lcpa, $format);
+
 	}
 
-	echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
+	if (!$no_button)
+		$corps .= "\n<br />" . $sub;
+
+	echo redirige_action_post('activer_plugins','activer','admin_plugin','', $corps);
+
+	echo fin_cadre_trait_couleur(true);
+
+	if ($quoi=='actifs')
+		echo affiche_les_extensions(liste_chemin_plugin_actifs(_DIR_EXTENSIONS));
 	echo "</div>";
 	
 	echo 	http_script("
@@ -177,7 +179,7 @@ function exec_admin_plugin_dist($retour='') {
 			return false;
 		});
 		jQuery('.plugins li.item input.checkbox').change(function(){
-			jQuery(this).parents('form').eq(0).find('.boutons .save').show().siblings('.update').hide();
+			jQuery(this).parents('form').eq(0).find('.boutons').slideDown();
 		});
 	});
 	");
@@ -197,11 +199,11 @@ function affiche_les_extensions($liste_plugins_actifs){
 	$res = "";
 	if ($liste_extensions = liste_plugin_files(_DIR_EXTENSIONS)) {
 		$res .= "<div id='extensions'>";
-		$res .= debut_cadre_trait_couleur('plugin-24.gif',true,'',_L('Extensions'),
+		$res .= debut_cadre_trait_couleur('',true,'',_T('plugins_liste_extensions'),
 		'liste_extensions');
 		$res .= "<p>"
-			._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
-			. '<br />'. _L('Elles ne sont pas d&#233;sactivables.')
+			._T('plugin_info_extension_1', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
+			. '<br />'. _T('plugin_info_extension_2')
 			."</p>";
 
 		$format = 'liste';
