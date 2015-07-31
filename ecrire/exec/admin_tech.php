@@ -141,12 +141,12 @@ echo "</table>";
 	"\n<span class='spip_medium'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></span></li></ul>";
 	  
 	debut_cadre_relief();
-	echo  "<p><input name='insertion' type='radio' />&nbsp;",
+	echo  "<p><input name='insertion' type='checkbox' />&nbsp;",
 	  _T('sauvegarde_fusionner'),
 	  '</p>';
 	echo  "<p>",
 	  _T('sauvegarde_url_origine'),
-	  "<input name='url_site' type='text' />",
+	  "<br /><input name='url_site' type='text' size='60'/>",
 	  '</p>';
 	fin_cadre_relief();
 
