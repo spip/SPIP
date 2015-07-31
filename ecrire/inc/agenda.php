@@ -1379,6 +1379,9 @@ function  quete_calendrier_interval_forums($limites, &$evenements) {
 # 3 fonctions retournant les evenements d'une periode
 # le tableau retourne est indexe par les balises du format ics
 # afin qu'il soit facile de produire de tels documents.
+# L'URL de chacun de ces evenements est celle de l'espace prive
+# pour faciliter la navigation, ce qu'on obtient utilisant 
+# le 4e argument des fonctions generer_url_ecrire_$table 
 
 // http://doc.spip.org/@quete_calendrier_interval_articles
 function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
@@ -1398,7 +1401,7 @@ function quete_calendrier_interval_articles($avant, $apres, &$evenements) {
 				'CATEGORIES' => calendrier_categories('spip_articles', $id, 'id_article'),
 				'DESCRIPTION' => $row['descriptif'] ? $row['descriptif'] : $langues[$row['lang']],
 				'SUMMARY' => $row['titre'],
-				'URL' => generer_url_article($id, '','','prop'));
+				'URL' => generer_url_ecrire_article($id, '','','prop'));
 	}
 }
 
@@ -1415,7 +1418,7 @@ function quete_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 				'CATEGORIES' => calendrier_categories('spip_rubriques', $id, 'id_rubrique'),
 				'DESCRIPTION' => $row['descriptif'],
 				'SUMMARY' => $row['titre'],
-				'URL' => generer_url_rubrique($id, '','', 'prop'));
+				'URL' => generer_url_ecrire_rubrique($id, '','', 'prop'));
 	}
 }
 
@@ -1429,7 +1432,7 @@ function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
 		if (autoriser('voir','breve',$id))
 			$evenements[$amj][]=
 			array(
-			      'URL' => generer_url_breve($id, '','', 'prop'),
+			      'URL' => generer_url_ecrire_breve($id, '','', 'prop'),
 			      'CATEGORIES' => calendrier_categories('spip_breves', $ir, 'id_breve'),
 			      'SUMMARY' => $row['titre']);
 	}
