@@ -413,7 +413,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 // Qu'une seule base pour le moment
 
 // http://doc.spip.org/@spip_pg_listdbs
-function spip_pg_listdbs() {
+function spip_pg_listdbs($serveur) {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 	return spip_pg_query_simple("select * from pg_database");
@@ -453,7 +453,7 @@ function spip_pg_select($select, $from, $where='',
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
 
 	// Erreur ? C'est du debug, ou une erreur du serveur
-	// il faudrait mettre ici le déclenchement du message SQL
+	// il faudrait mettre ici le declenchement du message SQL
 	// actuellement dans erreur_requete_boucle
 
 	if ($requeter && $GLOBALS['var_mode'] == 'debug') {
@@ -582,7 +582,7 @@ function spip_pg_frommysql($arg)
 			    $res);
 
 	$res = preg_replace('/TO_DAYS\s*[(]([^()]*([(][^)]*[)][()]*)*)[)]/',
-			    ' EXTRACT(day FROM \1 - \'0000-01-01\')',
+			    ' EXTRACT(day FROM \1 - \'0001-01-01\')',
 			    $res);
 
 	$res = preg_replace("/(EXTRACT[(][^ ]* FROM *)\"([^\"]*)\"/", '\1\'\2\'', $res);
@@ -726,7 +726,7 @@ function spip_pg_count($res, $serveur='',$requeter=true) {
   
 // http://doc.spip.org/@spip_pg_free
 function spip_pg_free($res, $serveur='',$requeter=true) {
-  // rien à faire en postgres
+  // rien a faire en postgres
 }
 
 // http://doc.spip.org/@spip_pg_delete
@@ -999,7 +999,6 @@ function spip_pg_hex($v)
 	return "CAST(x'" . $v . "' as bigint)";
 }
 
-
 function spip_pg_quote($v, $type='')
 {
 	return ($type === 'int' AND !$v) ? '0' :  _q($v);
@@ -1224,7 +1223,7 @@ function mysql2pg_type($v)
 		str_replace("mediumtext", 'text',
 		preg_replace("/tinytext/i", 'text',
 	  	str_replace("longblob", 'text',
-		str_replace("0000-00-00",'0000-01-01',
+		str_replace("0000-00-00",'0001-01-01',
 		preg_replace("/datetime/i", 'timestamp',
 		preg_replace("/unsigned/i", '', 	
 		preg_replace("/double/i", 'double precision', 	 	
