@@ -1170,7 +1170,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	else {
 		$hauteur = 70;
 		$largeur = 80;
-		$alt = " alt=\"\"";
+		$alt = " alt=\" \"";
 	}
 
 	if (!$menu_accesskey) $menu_accesskey = 1;
@@ -1189,7 +1189,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){
 			echo "<tr><td background='' align='center'>";
-			echo "<a$accesskey href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
+			echo "<a$accesskey_icone href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
 			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
