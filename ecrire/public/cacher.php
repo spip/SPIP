@@ -50,10 +50,7 @@ function generer_nom_fichier_cache($contexte, $page) {
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
 	$rep = _DIR_CACHE;
 
-	if(!@file_exists($rep)) {
-		$rep = preg_replace(','._DIR_TMP.',', '', $rep);
-		$rep = sous_repertoire(_DIR_TMP, $rep, false,true);
-	}
+	$rep = sous_repertoire($rep, '', false,true);
 	$subdir = sous_repertoire($rep, substr($md_cache, 0, 1), true,true);
 	return $subdir.$cache;
 }
@@ -161,6 +158,11 @@ function creer_cache(&$page, &$chemin_cache) {
 		
 	}
 
+	// ajouter la date de production dans le cache lui meme
+	// (qui contient deja sa duree de validite)
+	$page['lastmodified'] = time();
+
+
 	// l'enregistrer, compresse ou non...
 	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache,
 		serialize(gzip_page($page)));
@@ -230,12 +232,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	// Controler l'existence d'un cache nous correspondant, dans les
 	// deux versions possibles : session ou non
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
-	if (@file_exists(_DIR_CACHE . ($f = $chemin_cache))
-	OR $fs = @file_exists(_DIR_CACHE . ($f = cache_sessionne($f).spip_session()))
-	) {
-		$lastmodified = @filemtime(_DIR_CACHE . $f);
-	} else
-		$lastmodified = 0;
+	$lastmodified = 0;
+	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
+		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f).spip_session()), $page);
 
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
@@ -274,11 +273,10 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		$GLOBALS['delais'] = _DUREE_CACHE_DEFAUT;
 	}
 
-	// Lire le fichier cache et determiner sa validite
-	if ($lastmodified
-	AND lire_fichier(_DIR_CACHE . $f, $page)) {
-		$page = @unserialize($page);
-		$use_cache = cache_valide($page, $lastmodified);
+	// decoder le cache et determiner sa validite
+	if (strlen($page) AND
+		$page = @unserialize($page)) {
+		$use_cache = cache_valide($page, $page['lastmodified']);
 		if (!$use_cache) {
 			// $page est un cache utilisable
 			gunzip_page($page);
@@ -291,7 +289,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 	if (!spip_connect()) {
-		if ($lastmodified)
+		if ($page)
 			$use_cache = 0;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
