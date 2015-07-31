@@ -150,7 +150,7 @@ function modifier_contenu($type, $id, $options, $c=null, $serveur='') {
 				$id_rubrique = 0;
 				if ($desc['field']['id_rubrique']){
 					$parent = ($type=='rubrique')?'id_parent':'id_rubrique';
-					$id_rubrique = sql_fetsel($parent, $spip_table_objet, "$id_table_objet=".intval($id));
+					$id_rubrique = sql_getfetsel($parent, $spip_table_objet, "$id_table_objet=".intval($id));
 				}
 				$instituer_langue_objet = charger_fonction('instituer_langue_objet','action');
 				$champs['lang'] = $instituer_langue_objet($type,$id, $id_rubrique, $changer_lang);
