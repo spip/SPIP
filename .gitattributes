@@ -27,6 +27,7 @@ ecrire/action/ajouter.php -text
 ecrire/action/autoriser.php -text
 ecrire/action/dater.php -text
 ecrire/action/documenter.php -text
+ecrire/action/editer_article.php -text
 ecrire/action/ical.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/instituer_article.php -text

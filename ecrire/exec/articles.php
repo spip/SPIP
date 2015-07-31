@@ -31,14 +31,11 @@ function exec_articles_dist()
 	$id_parent = intval($id_parent);
 	$lier_trad = intval($lier_trad);
 	$supp_mot = intval($supp_mot);
-	if (!($id_article=intval($id_article))) {
-		if ($new!='oui')  redirige_par_entete("./");
-		$id_article = insert_article($id_parent);
-	}
+	$id_article= intval($id_article);
 
 	pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
-	$row = spip_fetch_array(spip_query("SELECT statut, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
+	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 
 	if (!$row) {
 	   // cas du numero hors table
@@ -52,42 +49,9 @@ function exec_articles_dist()
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_article = $row['statut'];
-	$statut_rubrique = acces_rubrique($id_rubrique);
-
-	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
-
-	$flag_modifiable = ($flag_auteur OR $statut_rubrique);
-
-	if ($flag_modifiable AND $id_parent)
- // Les redacteurs ont le droit de changer la rubrique destination
- // avant la publication de l'article, mais plus apres
-			$id_rubrique = $id_parent;
-
-	$flag_editable = ($flag_modifiable OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
-
-	if ($flag_editable) {
-		if (isset($_POST['titre'])) {
-   // id_article_bloque,  globale dans inc/presentation 
-			$id_article_bloque =     $id_article;  
-			articles_set($id_article, $id_rubrique, $flag_modifiable);
-		}
-
-	// renvoyer vers la page de l'article
-		if ($new == 'oui'
-		AND ! $lier_trad  # sauf dans le cas d'un lier_trad car le code de mise a jour du lien est au meme endroit que l'affichage (a corriger).
-		    )
-			redirige_par_entete(
-				generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
-	}
-
-	// recharger apres mise a jour de articles_set
-	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
-
-	$id_article = $row["id_article"];
 	$surtitre = $row["surtitre"];
 	$titre = $row["titre"];
 	$soustitre = $row["soustitre"];
-	$id_rubrique = $row["id_rubrique"];
 	$descriptif = $row["descriptif"];
 	$nom_site = $row["nom_site"];
 	$url_site = $row["url_site"];
@@ -95,7 +59,6 @@ function exec_articles_dist()
 	$texte = $row["texte"];
 	$ps = $row["ps"];
 	$date = $row["date"];
-	$statut_article = $row["statut"];
 	$maj = $row["maj"];
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
@@ -104,6 +67,14 @@ function exec_articles_dist()
 	$id_trad = $row["id_trad"];
 	$id_version = $row["id_version"];
 	
+	$statut_rubrique = acces_rubrique($id_rubrique);
+
+	$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
+
+	$flag_modifiable = ($flag_auteur OR $statut_rubrique);
+
+	$flag_editable = ($flag_modifiable OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+
 	// aucun doc implicitement inclus au depart.
 	inclus_non_articles($id_article);
 	
@@ -127,7 +98,7 @@ boite_info_articles($id_article, $statut_article, $visites, $id_version);
 // Logos de l'article
 //
 
-  if ($id_article AND $flag_editable AND ($spip_display != 4)) {
+  if ($flag_editable AND ($spip_display != 4)) {
 	  include_spip('inc/chercher_logo');
 	  echo afficher_boite_logo('id_article', $id_article,
 			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
@@ -1179,21 +1150,6 @@ function formulaire_instituer_article($id_article, $statut, $script, $args)
   */
 }
 
-
-//
-// Reunit les textes decoupes parce que trop longs
-//
-
-function trop_longs_articles($texte_plus)
-{
-	$nb_texte = 0;
-	while ($nb_texte ++ < count($texte_plus)+1){
-		$texte_ajout .= ereg_replace("<!--SPIP-->[\n\r]*","",
-					     $texte_plus[$nb_texte]);
-	}
-	return $texte_ajout;
-}
-
 // Passer les images/docs en "inclus=non"
 
 function inclus_non_articles($id_article)
@@ -1210,112 +1166,6 @@ if (count($ze_doc)>0){
 	spip_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
 }
 
-}
-
-function revisions_articles ($id_article, $id_rubrique, $change_rubrique, $titre_article) {
-{
-	global $connect_id_auteur, $flag_revisions, $champs_extra;
-
-	$texte = trop_longs_articles(_request('texte_plus')) . _request('texte');
-	$new = _request('new');
-	$champs = array(
-		'surtitre' => corriger_caracteres(_request('surtitre')),
-		'titre' => $titre_article,
-		'soustitre' => corriger_caracteres(_request('soustitre')),
-		'descriptif' => corriger_caracteres(_request('descriptif')),
-		'nom_site' => corriger_caracteres(_request('nom_site')),
-		'url_site' => corriger_caracteres(_request('url_site')),
-		'chapo' => corriger_caracteres( _request('chapo')),
-		'texte' => corriger_caracteres($texte),
-		'ps' => corriger_caracteres(_request('ps')))  ;
-
-	// Stockage des versions : creer une premier version si non-existante
-	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		include_spip('inc/revisions');
-		if  ($new != 'oui') {
-			$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
-			if (!spip_num_rows($query)) {
-				$select = join(", ", array_keys($champs));
-				$query = spip_query("SELECT $select FROM spip_articles WHERE id_article=$id_article");
-				$champs_originaux = spip_fetch_array($query);
-				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'), 0);
-
-				// Remettre une date un peu ancienne pour la version initiale 
-				if ($id_version == 1) // test inutile ?
-				spip_query("UPDATE spip_versions SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR) WHERE id_article=$id_article AND id_version=1");
-			}
-		}
-	}
-
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		$champs_extra = extra_recup_saisie("articles", _request('id_secteur'));
-	}
-
-	spip_query("UPDATE spip_articles SET surtitre=" . spip_abstract_quote($champs['surtitre']) . ", titre=" . spip_abstract_quote($champs['titre']) . ", soustitre=" . spip_abstract_quote($champs['soustitre']) . ", id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif=" . spip_abstract_quote($champs['descriptif']) . ", chapo=" . spip_abstract_quote($champs['chapo']) . ", texte=" . spip_abstract_quote($champs['texte']) . ", ps=" . spip_abstract_quote($champs['ps']) . ", url_site=" . spip_abstract_quote($champs['url_site']) . ", nom_site=" . spip_abstract_quote($champs['nom_site']) . ", date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
-
-	// Stockage des versions
-	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		ajouter_version($id_article, $champs, '', $connect_id_auteur);
-	}
-
-	// marquer le fait que l'article est travaille par toto a telle date
-	// une alerte sera donnee aux autres redacteurs sur exec=articles
-	if ($GLOBALS['meta']['articles_modif'] != 'non') {
-		include_spip('inc/drapeau_edition');
-		if ($id_article)
-			signale_edition ($id_article, $connect_id_auteur, 'article');
-	}
-
-
-	// Changer la langue heritee
-	if ($id_rubrique != _request('id_rubrique_old')) {
-		propager_les_secteurs();
-		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-		$langue_old = $row['lang'];
-		$langue_choisie_old = $row['langue_choisie'];
-
-		if ($langue_choisie_old != "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_new = $row['lang'];
-			if ($langue_new != $langue_old)
-				spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
-		}
-	}
-
-	calculer_rubriques();
- }
-}
-
-function insert_article($id_parent)
-{
-	global $connect_id_auteur;
-	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
-	if (!$id_rubrique = intval($id_parent)) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
-		$id_rubrique = $row['id_rubrique'];
-	}
-
-	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-
-	$id_article = spip_abstract_insert("spip_articles",
-			"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
-			"($id_rubrique, 'prepa', NOW(), '" .
-				substr($GLOBALS['meta']['forums_publics'],0,3)
-				. "', '"
-				. ($row["lang"] ? $row["lang"] : $GLOBALS['meta']['langue_site'])
-				. "', 'non')");
-	spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('$connect_id_auteur','$id_article')");
-	return $id_article;
-}
-
-function articles_set($id_article, $id_rubrique, $statut)
-{
-
-   if (!strlen($titre_article=corriger_caracteres($_POST['titre'])))
-		$titre_article = _T('info_sans_titre');
-
-   revisions_articles ($id_article, $id_rubrique, $statut, $titre_article);
 }
 
 ?>
