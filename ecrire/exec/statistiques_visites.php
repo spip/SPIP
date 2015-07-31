@@ -154,8 +154,10 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	}
 
 	if ($id_article) {
-		echo statistiques_signatures($duree, $interval, $type, $id_article, $serveur);
-		echo statistiques_forums("statut='publie'", $id_article, $serveur);
+		$signatures = charger_fonction('signatures', 'statistiques');
+		echo $signatures($duree, $interval, $type, $id_article, $serveur);
+		$forums = charger_fonction('forums', 'statistiques');
+		echo $forums($duree, $interval, $type, $id_article, $serveur);
 	}
 
 	$referenceurs = charger_fonction('referenceurs', 'inc');
