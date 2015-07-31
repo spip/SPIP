@@ -201,7 +201,7 @@ function calculer_contexte_implicite(){
 	if (is_null($notes))
 		$notes = charger_fonction('notes','inc');
 	$contexte_implicite = array(
-		'squelettes' => $GLOBALS['dossier_squelettes'],
+		'squelettes' => $GLOBALS['dossier_squelettes'], // devrait etre 'chemin' => $GLOBALS['path_sig'], ?
 		'host' => $_SERVER['HTTP_HOST'],
 		'marqueur' => (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : ''),
 		'notes' => $notes('','contexter_cache'),
