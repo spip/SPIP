@@ -56,18 +56,58 @@ class IterFactory{
 
 class IterDecorator implements Iterator {
 	private $iter;
-	
+	protected $filtre = array();
+	protected $func_filtre = null;
+
 	public function __construct(Iterator $iter, $command, $info){
 		$this->iter = $iter;
 		$this->command = $command;
 		$this->info = $info;
 		$this->pos = 0;
 		$this->total = $this->count();
+
+
+		$op = '';
+		if (is_array($this->command['where'])) {
+			foreach ($this->command['where'] as $k => $com) {
+				switch($com[1]) {
+					case 'valeur':
+						unset($op);
+						if ($com[0] == 'REGEXP')
+							$this->filtre[] = 'preg_match("/". '.str_replace('\"', '"', $com[2]).'."/", $'.$com[1].')';
+						else if ($com[0] == '=')
+							$op = '==';
+						else if (in_array($com[0], array('<','<=', '>', '>=')))
+							$op = $com[0];
+
+						if ($op)
+							$this->filtre[] = '$'.$com[1].$op.str_replace('\"', '"', $com[2]);
+
+						break;
+				}
+
+			}
+		}
+
+
+		// Appliquer les filtres sur (valeur)
+		if ($this->filtre) {
+			$this->func_filtre = create_function('$cle,$valeur', $b = 'return ('.join(') AND (', $this->filtre).');');
+			$this->total = null; # il faudra tout parcourir pour compter
+		}
+
 	}
  
-	public function next (){
+	public function next(){
 		$this->pos++;
 		$this->iter->next();
+
+		if ($f = $this->func_filtre) {
+			while ($this->valid()
+			AND !$f($this->pos,$this->current())) {
+				$this->iter->next();
+			}
+		}
 	}
 
 	/**
@@ -210,7 +250,7 @@ class IterDecorator implements Iterator {
 	public function fetch() {
 		if (method_exists($this->iter, 'fetch')) {
 			return $this->iter->fetch();
-		} else {		
+		} else {
 			if ($this->valid()) {
 				$r = array('cle' => $this->key(), 'valeur' => $this->current());
 				$this->next();
