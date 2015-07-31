@@ -25,7 +25,7 @@ include_spip('inc/autoriser');
 // ne peuvent les utiliser que pour mettre un auteur a la poubelle
 
 // http://doc.spip.org/@inc_instituer_auteur_dist
-function inc_instituer_auteur_dist($auteur) {
+function inc_instituer_auteur_dist($auteur, $modif = true) {
 
 	if (!$id_auteur = $auteur['id_auteur']) {
 		$statut = _STATUT_AUTEUR_CREATION;
@@ -34,11 +34,11 @@ function inc_instituer_auteur_dist($auteur) {
 
 	$ancre =  "instituer_auteur-" . intval($id_auteur);
 
-	$menu = choix_statut_auteur($statut, $id_auteur, "$ancre-aff");
-
+	$menu = $modif ? choix_statut_auteur($statut, $id_auteur, "$ancre-aff"):traduire_statut_auteur($auteur['statut']);
 	if (!$menu) return '';
 
-	$res = "<label>" . _T('info_statut_auteur')."</label> " . $menu;
+	$label = $modif?'label':'b';
+	$res = "<$label>" . _T('info_statut_auteur')."</$label> " . $menu;
 
 	// Prepare le bloc des rubriques pour les admins eventuellement restreints ;
 	// si l'auteur n'est pas '0minirezo', on le cache, pour pouvoir le reveler
@@ -47,7 +47,7 @@ function inc_instituer_auteur_dist($auteur) {
 		? ''
 		: " style='display: none'";
 
-	if ($menu_restreints = choix_rubriques_admin_restreint($auteur))
+	if ($menu_restreints = choix_rubriques_admin_restreint($auteur, $modif))
 		$res .= "<div class='instituer_auteur' id='$ancre-aff'$vis>"
 			. $menu_restreints
 			. "</div>";
@@ -55,6 +55,20 @@ function inc_instituer_auteur_dist($auteur) {
 	return $res;
 }
 
+function traduire_statut_auteur($statut){
+	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
+		       "info_redacteurs" =>  _T('intem_redacteur'),
+		       "info_visiteurs" => _T('item_visiteur'));
+	if (isset($recom[$statut]))
+		return $recom[$statut];
+	
+	// retrouver directement par le statut sinon
+	if ($t = array_search($statut, $GLOBALS['liste_des_statuts'])
+	  AND isset($recom[$t]))
+		return $recom[$t];
+	
+	return '';
+}
 
 // Menu de choix d'un statut d'auteur
 // http://doc.spip.org/@choix_statut_auteur
@@ -65,10 +79,6 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	null, array('statut' => '?')))
 		return '';
 
-	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
-		       "info_redacteurs" =>  _T('intem_redacteur'),
-		       "info_visiteurs" => _T('item_visiteur'));
-	
 	// A-t-on le droit de promouvoir cet auteur comme admin 
 	// et y a-t-il des visiteurs ?
 
@@ -83,8 +93,8 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 
 	$menu = '';
 	foreach($droits as $k => $v) {
-		if (isset($recom[$k]))
-			$menu .=  mySel($v, $statut, $recom[$k]);
+		if ($k = traduire_statut_auteur($k))
+			$menu .=  mySel($v, $statut, $k);
 	}
 
 	// Chercher tous les statuts non permis a present
@@ -93,8 +103,8 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	$hstatut = htmlentities($statut);
 	while ($r = sql_fetch($q)) {
 		$nom = htmlentities($r['statut']);
-		$t = array_search($nom, $GLOBALS['liste_des_statuts']);
-		$t = !$t ? (_T('info_statut_auteur_autre') . ' ' . $nom) : $recom[$t];
+		$t = traduire_statut_auteur($nom);
+		$t = !$t ? (_T('info_statut_auteur_autre') . ' ' . $nom) : $t;
 		$menu .= mySel($nom, $hstatut, $t);
 	}
 
@@ -114,8 +124,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	. "</select>\n";
 }
 
-// http://doc.spip.org/@choix_rubriques_admin_restreint
-function choix_rubriques_admin_restreint($auteur) {
+function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 	global $spip_lang;
 
 	$id_auteur = intval($auteur['id_auteur']);
@@ -125,7 +134,7 @@ function choix_rubriques_admin_restreint($auteur) {
 	$menu = $restreint = '';
 	// L'autorisation de modifier les rubriques restreintes
 	// est egale a l'autorisation de passer en admin
-	$modif = autoriser('modifier', 'auteur', $id_auteur, null, array('statut' => '0minirezo'));
+	$modif &= autoriser('modifier', 'auteur', $id_auteur, null, array('statut' => '0minirezo'));
 	while ($row_admin = sql_fetch($result)) {
 		$id_rubrique = $row_admin["id_rubrique"];
 		$h = generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique");
@@ -160,10 +169,19 @@ function choix_rubriques_admin_restreint($auteur) {
 	if ($auteur['statut'] != '0minirezo')
 		$phrase = '';
 
-	$res = "<p>$phrase</p>\n$menu";
+	return "<p>$phrase</p>\n$menu";
+}
+
+// http://doc.spip.org/@choix_rubriques_admin_restreint
+function choix_rubriques_admin_restreint($auteur, $modif=true) {
+	global $spip_lang;
+
+	$id_auteur = intval($auteur['id_auteur']);
+	$res = afficher_rubriques_admin_restreintes($auteur, $modif);
 
 	// Ajouter une rubrique a un administrateur restreint
-	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreintes' => true))
+	if ($modif
+	AND autoriser('modifier', 'auteur', $id_auteur, NULL, array('restreintes' => true))
 	AND $chercher_rubrique = charger_fonction('chercher_rubrique', 'inc')
 	AND $a = $chercher_rubrique(0, 'auteur', false)) {
 
