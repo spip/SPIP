@@ -61,12 +61,11 @@ table.spip td {
 
 --></style>
 </head>
-<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24">
-
-
-<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>
-
-<?php
+<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"<?php
+if ($spip_lang_rtl)
+	echo " dir='rtl'";
+echo ">";
+echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
 if (strlen($aide) < 2) $aide = "spip";
 

@@ -36,7 +36,8 @@ function test_login($mail) {
 }
 
 function erreur($zetexte){
- 	return "<BR><IMG SRC='puce.gif' BORDER=0> $zetexte";
+	global $spip_lang_rtl;
+ 	return "<BR><IMG SRC='puce$spip_lang_rtl.gif' BORDER=0> $zetexte";
 }
 
 

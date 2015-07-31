@@ -122,7 +122,7 @@ if (spip_num_rows($result) > 0){
 		else
 			$url = "message.php3?id_message=".$row->id_message;
 		$titre = typo($row->titre);
-		echo "<div style='padding-top: 2px;'><img src='img_pack/m_envoi_jaune.gif' border=0> <a href='$url'>$titre</a></div>\n";
+		echo "<div style='padding-top: 2px;'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' border=0> <a href='$url'>$titre</a></div>\n";
 	}
 	echo "</font>";
 	fin_cadre_enfonce();

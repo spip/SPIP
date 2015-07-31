@@ -76,6 +76,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable) {
 	global $flag_mots_ressemblants;
 	global $connect_statut;
+	global $spip_lang_rtl;
 	$select_groupe = $GLOBALS['select_groupe'];
 
 	if ($table == 'articles') {
@@ -351,7 +352,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
 				if (test_layer()) echo "<script type='text/javascript'><!--
 				triangle = MM_findObj('triangle' + $couche_a_redresser);
-				if (triangle) triangle.src = 'img_pack/deplierbas.gif';
+				if (triangle) triangle.src = 'img_pack/deplierbas$spip_lang_rtl.gif';
 				//--></script>";
 			}
 			else

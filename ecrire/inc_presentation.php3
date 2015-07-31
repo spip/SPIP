@@ -12,7 +12,7 @@ utiliser_langue_visiteur();
 // Aide
 //
 function aide ($aide='') {
-	global $couleur_foncee;
+	global $couleur_foncee, $spip_lang_rtl;
 
 	if (!$aide) return;
 
@@ -27,7 +27,7 @@ function aide ($aide='') {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="'._T('info_image_aide').'" title="'._T('titre_image_aide').'" width="12" height="12" border="0" align="middle"></a>'; // "
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide'.$spip_lang_rtl.'.gif" alt="'._T('info_image_aide').'" title="'._T('titre_image_aide').'" width="12" height="12" border="0" align="middle"></a>'; // "
 }
 
 
@@ -37,6 +37,7 @@ function aide ($aide='') {
 function bouton_imessage($destinataire, $row = '') {
 	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
 	global $connect_id_auteur;
+	global $spip_lang_rtl;
 
 	$url = new Link("message_edit.php3");
 
@@ -60,7 +61,7 @@ function bouton_imessage($destinataire, $row = '') {
 	if ($destinataire) $title = _T('info_envoyer_message_prive');
 	else $title = _T('info_ecire_message_prive');
 
-	$texte_bouton = "<img src='img_pack/m_envoi.gif' width='14' height='7' border='0'>";
+	$texte_bouton = "<img src='img_pack/m_envoi$spip_lang_rtl.gif' width='14' height='7' border='0'>";
 	return "<a href='". $url->getUrl() ."' title=\"$title\">$texte_bouton</a>";
 }
 
@@ -70,10 +71,19 @@ function bouton_imessage($destinataire, $row = '') {
 
 function debut_cadre($style, $icone, $fonction) {
 	global $spip_display;
+
+	if ($GLOBALS['spip_lang_rtl']) {
+		$g = 'd';
+		$d = 'g';
+	} else {
+		$g = 'g';
+		$d = 'd';
+	}
+
 	if ($spip_display != 1){
 		if (strlen($icone)<3) $icone = "rien.gif";
 		$retour_aff .= "\n<table class='cadre' cellspacing='0' cellpadding='0'><tr>";
-		$retour_aff .= "\n<td class='$style-hg'></td>";
+		$retour_aff .= "\n<td class='$style-h$g'></td>";
 		$retour_aff .= "\n<td class='$style-h'>";
 		if ($fonction) {
 			$retour_aff .= "<div style='background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
@@ -82,8 +92,8 @@ function debut_cadre($style, $icone, $fonction) {
 		}
 		else $retour_aff .= "<img src='img_pack/$icone'>";
 		$retour_aff .= "</td>";
-		$retour_aff .= "\n<td class='$style-hd'></td></tr>";
-		$retour_aff .= "\n<tr><td class='$style-g'></td>";
+		$retour_aff .= "\n<td class='$style-h$d'></td></tr>";
+		$retour_aff .= "\n<tr><td class='$style-$g'></td>";
 		$retour_aff .= "\n<td class='$style-c'>";
 	}
 	return $retour_aff;
@@ -91,12 +101,21 @@ function debut_cadre($style, $icone, $fonction) {
 
 function fin_cadre($style) {
 	global $spip_display;
+
+	if ($GLOBALS['spip_lang_rtl']) {
+		$g = 'd';
+		$d = 'g';
+	} else {
+		$g = 'g';
+		$d = 'd';
+	}
+
 	if ($spip_display != 1){
 		$retour_aff .= "\n</td>";
-		$retour_aff .= "\n<td class='$style-d'></td></tr>";
-		$retour_aff .= "\n<tr><td class='$style-bg'></td>";
+		$retour_aff .= "\n<td class='$style-$d'></td></tr>";
+		$retour_aff .= "\n<tr><td class='$style-b$g'></td>";
 		$retour_aff .= "\n<td class='$style-b'></td>";
-		$retour_aff .= "\n<td class='$style-bd'></td></tr>";
+		$retour_aff .= "\n<td class='$style-b$d'></td></tr>";
 		$retour_aff .= "\n<tr><td><img src='img_pack/rien.gif' alt='' width='1' height='5'></td></tr>";
 		$retour_aff .= "\n</table>\n";
 	}
@@ -542,6 +561,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 function afficher_rubriques($titre_table, $requete) {
 	global $connect_id_auteur;
+	global $spip_lang_rtl;
 
 	$tranches = afficher_tranches_requete($requete, 2);
 
@@ -573,7 +593,7 @@ function afficher_rubriques($titre_table, $requete) {
 			$titre = $row['titre'];
 
 			$s = "<b><a href=\"naviguer.php3?coll=$id_rubrique\">";
-			$puce = "puce.gif";
+			$puce = "puce$spip_lang_rtl.gif";
 			$s .= "<img src=\"$puce\" alt=\"- \" border=\"0\"> ";
 			$s .= typo($titre);
 			$s .= "</A></b>";
@@ -864,7 +884,7 @@ function bouton($titre,$lien) {
 function debut_html($titre = "") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
 	global $flag_ecrire;
-	global $spip_lang;
+	global $spip_lang_rtl;
 
 	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
@@ -893,7 +913,7 @@ function changeclass(objet, myClass)
 </head>
 <body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php
 
-	if ($spip_lang == 'ar')
+	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	echo ">";
 }
@@ -918,7 +938,10 @@ function debut_onglet(){
 		echo "\n";
 		echo "<p><table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td>";
-		echo "<img src='img_pack/barre-g.gif' alt='' width='16' height='40'>";
+		if ($GLOBALS['spip_lang_rtl'])
+			echo "<img src='img_pack/barre-d.gif' alt='' width='16' height='40'>";
+		else
+			echo "<img src='img_pack/barre-g.gif' alt='' width='16' height='40'>";
 		echo "</td>";
 	}
 }
@@ -931,7 +954,10 @@ function fin_onglet(){
 		echo "</table>";
 	} else {
 		echo "<td>";
-		echo "<img src='img_pack/barre-d.gif' alt='' width='16' height='40'>";
+		if ($GLOBALS['spip_lang_rtl'])
+			echo "<img src='img_pack/barre-g.gif' alt='' width='16' height='40'>";
+		else
+			echo "<img src='img_pack/barre-d.gif' alt='' width='16' height='40'>";
 		echo "</td></tr>";
 		echo "</table>";
 	}
@@ -1286,6 +1312,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_toutes_rubriques;
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display, $spip_ecran;
+	global $spip_lang_rtl;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	global $clean_link;
 	
@@ -1329,7 +1356,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif);' width='100%'><tr width='100%'><td width='100%' align='center'>";
 	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 		icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
-		icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48.gif", "documents", $rubrique);
+		icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.gif", "documents", $rubrique);
 		if ($options == "avancees") {
 			icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
@@ -1351,10 +1378,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
-		echo "<img src='img_pack/choix-layout.gif' alt='' vspace=3 border=0 usemap='#map_layout'>";
+		echo "<img src='img_pack/choix-layout$spip_lang_rtl.gif' alt='' vspace=3 border=0 usemap='#map_layout'>";
 	echo "</font></td>";
-		icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48.gif", "vide", "", "aide_index.php3");
-		icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48.gif");
+		icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
+		icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.gif");
 	echo "</tr></table>";
 	echo "</td></tr></table>";
 
@@ -1459,7 +1486,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if ($auth_can_disconnect) {
 		echo "<td width='5'>&nbsp;</td>";
-		icone_bandeau_secondaire (_T('icone_deconnecter'), "../spip_cookie.php3?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
+		icone_bandeau_secondaire (_T('icone_deconnecter'), "../spip_cookie.php3?logout=$connect_login", "deconnecter-24$spip_lang_rtl.gif", "", $sous_rubrique, "deconnect");
 	}
 
 	echo "</tr></table>";
@@ -1625,6 +1652,7 @@ function debut_gauche($rubrique = "asuivre") {
 	global $connect_id_auteur;
 	global $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
+	global $spip_lang_rtl;
 
 	$flag_3_colonnes = false;
 	$largeur = 200;
@@ -1674,12 +1702,12 @@ function debut_gauche($rubrique = "asuivre") {
 			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
 			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
 			if ($rubrique == "messagerie") {
-				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='' width='14' height='7' border='0'>";
+				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
 				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>";
-				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='' width='14' height='7' border='0'>";
+				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
 				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>";
 				if ($connect_statut == "0minirezo") {
-					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='' width='14' height='7' border='0'>";
+					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
 					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>";
 				}
 			}
@@ -1753,12 +1781,12 @@ function creer_colonne_droite($rubrique=""){
 			$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
 			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
 			if ($rubrique == "messagerie") {
-				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='' width='14' height='7' border='0'>";
+				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
 				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>";
-				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='' width='14' height='7' border='0'>";
+				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
 				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>";
 				if ($connect_statut == "0minirezo") {
-					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='' width='14' height='7' border='0'>";
+					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
 					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>";
 				}
 			}
@@ -1929,6 +1957,7 @@ function afficher_parents($id_rubrique) {
 //
 
 function install_debut_html($titre='AUTO', $onload='') {
+	global $spip_lang_rtl;
 
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
@@ -1954,7 +1983,10 @@ function install_debut_html($titre='AUTO', $onload='') {
 </style>
 </head>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php if($onload) echo " onLoad=\"$onload\""; ?>>
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php
+	if ($onload) echo " onLoad=\"$onload\"";
+	if ($spip_lang_rtl) echo " dir='rtl'";
+?>>
 
 <br><br><br>
 <center>
