@@ -70,6 +70,8 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	$fichier = $struct->texte;
+print_r($struct);
+die("$fichier, $path");
 
 	# raccourci <INCLURE{fond=xxx}> sans fichier .php
 	if (!strlen($fichier))
