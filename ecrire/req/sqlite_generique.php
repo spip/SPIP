@@ -724,9 +724,11 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 	} else $t = 0 ;
  
 	$query="INSERT OR REPLACE INTO $table $champs VALUES $valeurs";
-	if (!$requeter) return $query;
+	
 	
 	if ($r = spip_sqlite_query($query, $serveur)) {
+		if (!$requeter) return $query;
+		
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
 	} else $nb = 0;
@@ -843,6 +845,21 @@ function spip_sqlite_quote($v, $type=''){
 }
 
 
+/**
+ * Tester si une date est proche de la valeur d'un champ
+ *
+ * @param string $champ le nom du champ a tester
+ * @param int $interval valeur de l'interval : -1, 4, ...
+ * @param string $unite utite utilisee (DAY, MONTH, YEAR, ...)
+ * @return string expression SQL
+**/
+function spip_sqlite_date_proche($champ, $interval, $unite)
+{
+	$op = $interval > 0 ? '>' : '<';
+	return "($champ $op datetime('" . date("Y-m-d H:i:s") . "', '$interval $unite'))";
+}
+
+
 // http://doc.spip.org/@spip_sqlite_replace
 function spip_sqlite_replace($table, $couples, $desc=array(), $serveur='',$requeter=true) {
 	if (!$desc) $desc = description_table($table);
@@ -891,11 +908,7 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 		. ($orderby ? ("\nORDER BY " . _sqlite_calculer_order($orderby)) :'')
 		. ($limit ? "\nLIMIT $limit" : '');
 
-	// renvoyer la requete inerte si demandee
-	if ($requeter === false) return $query;
-
-	$r = spip_sqlite_query($query, $serveur, $requeter);
-	return $r ? $r : $query;
+	return spip_sqlite_query($query, $serveur, $requeter);
 }
 
 
@@ -1404,6 +1417,7 @@ function _sqlite_ref_fonctions(){
 		'create' => 'spip_sqlite_create',
 		'create_base' => 'spip_sqlite_create_base',
 		'create_view' => 'spip_sqlite_create_view',
+		'date_proche' => 'spip_sqlite_date_proche',
 		'delete' => 'spip_sqlite_delete',
 		'drop_table' => 'spip_sqlite_drop_table',
 		'drop_view' => 'spip_sqlite_drop_view',
@@ -1702,6 +1716,7 @@ class sqlite_traiter_requete{
 		}
 		
 		// Correction des dates avec INTERVAL
+		// utiliser sql_date_proche() de preference
 		if (strpos($this->query, 'INTERVAL')!==false){
 			$this->query = preg_replace_callback("/DATE_(ADD|SUB).*INTERVAL\s+(\d+)\s+([a-zA-Z]+)\)/U", 
 							array(&$this, '_remplacerDateParTime'), 
@@ -1797,7 +1812,7 @@ class sqlite_traiter_requete{
 // http://doc.spip.org/@_remplacerDateParTime
 	function _remplacerDateParTime($matches){
 		$op = strtoupper($matches[1] == 'ADD')?'+':'-';	
-		return "'".date("Y-m-d H:i:s", strtotime(" $op$matches[2] ".strtolower($matches[3])))."'";
+		return "datetime('" . date("Y-m-d H:i:s") . "', '$op$matches[2] $matches[3]')";
 	}
 
 	// callback ou l'on remplace FIELD(table,i,j,k...) par CASE WHEN table=i THEN n ... ELSE 0 END
