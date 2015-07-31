@@ -17,7 +17,7 @@ include_spip('iterateur/iterateur');
 /**
  * Iterateur SQL
  */
-class IterateurSQL extends IterateurSPIP {
+class IterateurSQL implements Iterator {
 
 	/**
 	 * ressource sql
@@ -43,7 +43,7 @@ class IterateurSQL extends IterateurSPIP {
 		if ($ok)
 			$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
 	  $this->pos = 0;
-	  $this->total = $this->total();
+	  $this->total = $this->count();
 	}
 
 	/*
@@ -62,7 +62,6 @@ class IterateurSQL extends IterateurSPIP {
 	 * @return bool
 	 */
 	public function rewind() {
-		parent::rewind();
 		return $this->seek(0);
 	}
 
@@ -81,6 +80,10 @@ class IterateurSQL extends IterateurSPIP {
 	public function current() {
 		return $this->row;
 	}
+
+	public function key() {
+		return $this->pos;
+	}
 	
 	/**
 	 * Sauter a une position absolue
@@ -98,11 +101,11 @@ class IterateurSQL extends IterateurSPIP {
 				$this->select();
 			}
 			// et utiliser la methode par defaut pour se deplacer au bon endroit
-			parent::seek($n);
-			return true;
+			// (sera fait en cas d'echec de cette fonction)
+			return false;
 		}
 		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
-		$this->pos = min($n,$this->total());
+		$this->pos = min($n,$this->count());
 		return true;
 	}
 
@@ -112,7 +115,6 @@ class IterateurSQL extends IterateurSPIP {
 	 */
 	public function next(){
 		$this->row = sql_fetch($this->sqlresult, $this->command['connect']);
-		parent::next();
 	}
 
 	/**
@@ -133,7 +135,6 @@ class IterateurSQL extends IterateurSPIP {
 	 * @return bool
 	 */
 	public function free(){
-		parent::free();
 		if (!$this->sqlresult) return true;
 		$a = sql_free($this->sqlresult, $this->command['connect']);
 	  $this->sqlresult = null;
@@ -144,7 +145,7 @@ class IterateurSQL extends IterateurSPIP {
 	 * Compter le nombre de resultats
 	 * @return int
 	 */
-	public function total() {
+	public function count() {
 		if (is_null($this->total))
 			if (!$this->sqlresult)
 				$this->total = 0;
