@@ -701,7 +701,7 @@ entites_html($document['fichier'])."\" />\n";
 
 				echo $link->getForm('POST', $album);
 				echo "<b>"._T('titre_titre_document')."</b><br />\n";
-				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
+				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
 
 				// modifier la date (seulement dans les rubriques - et encore)
 				if ($type == 'rubrique'
@@ -712,16 +712,11 @@ entites_html($document['fichier'])."\" />\n";
 						$jour = $regs[3];
 						$annee = $regs[1];
 					}
-					echo "<b>"._T('info_mise_en_ligne')."</b><br />\n";
-					echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					echo afficher_jour($jour);
-					echo "</SELECT>";
-					echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					echo afficher_mois($mois);
-					echo "</SELECT>";
-					echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					echo afficher_annee($annee);
-					echo "</SELECT><br />";
+					echo "<b>"._T('info_mise_en_ligne')."</b><br />\n",
+					  afficher_jour($jour, "NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
+					  afficher_mois($mois, "NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
+					  afficher_annee($annee, "NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\""),
+					  "<br />\n";
 				}
 
 				// bloc descriptif (affiche ou hidden)
