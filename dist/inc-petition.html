@@ -3,21 +3,26 @@
 
 [(#REM) Signatures de la petition ]
 <B_signatures>
+<form method='get' action='#SELF'>
 <div id="signatures">
-
+	[(#SELF|form_hidden)]
 	#ANCRE_PAGINATION
 
 	<table summary="<:signatures_petition:>">
 	<caption><h2>#GRAND_TOTAL <:signatures_petition:></h2></caption>
-	<thead>
 		<tr>
-		<th scope="col"><:date:></th>
-		<th scope="col"><:nom:></th>
-		<th scope="col"><:message:></th>
+		<th style='text-align: center'>
+		  <a href='[(#SELF|parametre_url{tri,date_time}|parametre_url{tri_inverse,''})]#signatures'><:date:></a>
+		</th>
+		<th style='text-align: center'>
+		  <a href='[(#SELF|parametre_url{tri,nom_email}|parametre_url{tri_inverse,''})]#signatures'><:nom:></a>
+		</th>
+		<th style='text-align: center'><:message:></th>
 		</tr>
-	</thead>
-	<tbody>
-<BOUCLE_signatures(SIGNATURES) {recherche ?}{id_article} {par date}{inverse} {pagination 15}>
+<BOUCLE_signatures(SIGNATURES) {id_article} {pagination 15} 
+	{recherche ?#ENV{cherche_signature}}
+	{!par #ENV{tri}}{par #ENV{tri_inverse}}
+	{!par #ENV{tri,#ENV{tri_inverse}}|?{'',date_time}}>
 		<tr>
 		<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
 		<td class="signature-nom"><div class="#EDIT{qui}">#NOM</div>[
@@ -25,10 +30,19 @@
 		[<td class="signature-message"><div class="#EDIT{message}">(#MESSAGE|PtoBR)</div></td>]
 		</tr>
 </BOUCLE_signatures>
-	</tbody>
+		<tr>
+		<th style='text-align: center'>
+		  <a href='[(#SELF|parametre_url{tri_inverse,date_time}|parametre_url{tri,''})]#signatures'><:date:></a>
+		</th>
+		<th style='text-align: center'>
+		  <a href='[(#SELF|parametre_url{tri_inverse,nom_email}|parametre_url{tri,''})]#signatures'><:nom:></a>
+		</th>
+		<th style='float: right'>
+			<:info_rechercher:> <input name='cherche_signature' />
+		</th>
+		</tr>
 	</table>
-
-	[<p class="pagination">(#PAGINATION)</p>]
-
 </div>
+	[<p class="pagination">(#PAGINATION)</p>]
+</form>
 </B_signatures>
