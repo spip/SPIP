@@ -793,7 +793,7 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'mois_non_connu' => 'unbekannt',
 
 // N
-'nouvelle_version_spip' => 'La version @version@ de SPIP est disponible', # NEW
+'nouvelle_version_spip' => 'SPIP Version @version@ ist verf&uuml;gbar.',
 
 // O
 'onglet_contenu' => 'Inhalt',
