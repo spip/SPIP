@@ -22,12 +22,7 @@ function protege_champ($texte){
 /* prendre en charge par defaut les balises formulaires simples */
 // http://doc.spip.org/@balise_FORMULAIRE__dist
 function balise_FORMULAIRE__dist($p) {
-	preg_match(",^FORMULAIRE_(.*)?$,", $p->nom_champ, $regs);
-	if (!strlen($form = $regs[1])){
-		//$form = interprete_argument_balise(1,$p);
-	}
-	
-	return calculer_balise_dynamique($p,"FORMULAIRE_$form",array());
+	return calculer_balise_dynamique($p, $p->nom_champ, array());
 }
 
 /* prendre en charge par defaut les balises dynamiques formulaires simples */
