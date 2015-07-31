@@ -25,11 +25,9 @@ function action_referencer_traduction_dist() {
 
 	if (preg_match(",^(\d+)$,", $arg, $r)
 	AND $trad = intval(_request('lier_trad'))) {
-
 		include_spip('action/editer_article');
-		if (article_referent($r[1], $trad))
-			redirige_par_entete(urldecode(_request('redirect')) . '&trad_err=1');
-
+		if ($err = article_referent($r[1], array('lier_trad' => $trad)))
+			redirige_par_entete(urldecode(_request('redirect')) . $err);
 	} elseif (preg_match(",^(\d+)\D-(\d+)$,", $arg, $r))  {
 	  // supprimer le lien de traduction
 		spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);

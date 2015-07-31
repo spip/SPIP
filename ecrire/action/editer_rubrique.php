@@ -113,7 +113,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_enregistre_contenu',
+	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_rubriques',
@@ -145,6 +145,17 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// invalider les caches marques de cette rubrique
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_rubrique/$id_rubrique'");
+
+	// Notification ?
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_rubriques',
+				'id_objet' => $id_rubrique
+			),
+			'data' => $champs
+		)
+	);
 
 }
 

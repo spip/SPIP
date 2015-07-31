@@ -19,8 +19,9 @@ function notifications($pipeline, $x) {
 
 	// En cas de changement de statut d'article vers 'publie' ou 'prop',
 	// envoyer un mail
-	if ($pipeline == 'pre_enregistre_contenu'
+	if ($pipeline == 'post_edition'
 	AND $x['args']['table'] == 'spip_articles'
+	AND isset($x['data']['statut'])
 	AND (
 		$x['data']['statut'] == 'publie'
 		OR $x['data']['statut'] == 'prop')

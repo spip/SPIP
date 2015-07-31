@@ -124,7 +124,7 @@ function revisions_auteurs($id_auteur, $c=false) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_enregistre_contenu',
+	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_auteurs',
@@ -149,6 +149,16 @@ function revisions_auteurs($id_auteur, $c=false) {
 		signale_edition ($id_auteur, $GLOBALS['auteur_session'], 'auteur');
 	}
 
+	// Notification ?
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_auteurs',
+				'id_objet' => $id_auteur
+			),
+			'data' => $champs
+		)
+	);
 }
 
 ?>

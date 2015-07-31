@@ -181,7 +181,7 @@ function revisions_syndics ($id_syndic, $c=false) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_enregistre_contenu',
+	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_syndic',
@@ -247,6 +247,17 @@ function revisions_syndics ($id_syndic, $c=false) {
 	AND isset($champ['id_rubrique'])) {
 		calculer_rubriques();
 	}
+
+	// Notification ?
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_syndic',
+				'id_objet' => $id_syndic
+			),
+			'data' => $champs
+		)
+	);
 }
 
 

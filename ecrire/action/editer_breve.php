@@ -140,7 +140,7 @@ function revisions_breves ($id_breve, $c=false) {
 	}
 
 	// Envoyer aux plugins
-	$champs = pipeline('pre_enregistre_contenu',
+	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_breves',
@@ -205,6 +205,17 @@ function revisions_breves ($id_breve, $c=false) {
 	AND isset($champ['id_rubrique'])) {
 		calculer_rubriques();
 	}
+
+	// Notification ?
+	pipeline('post_edition',
+		array(
+			'args' => array(
+				'table' => 'spip_breves',
+				'id_objet' => $id_breve
+			),
+			'data' => $champs
+		)
+	);
 }
 
 ?>
