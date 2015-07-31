@@ -157,19 +157,19 @@ function calculer_rubriques_publiees() {
 
 	// Afficher les articles post-dates ?
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-		"AND fille.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
+		"AND A.date <= ".sql_quote(date('Y-m-d H:i:s')) : '';
 
-	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_articles AS fille", "rub.id_rubrique = fille.id_rubrique AND fille.statut='publie' $postdates ", "rub.id_rubrique");
+	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_articles AS A", "R.id_rubrique = A.id_rubrique AND A.statut='publie' $postdates ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
 		sql_updateq("spip_rubriques", array("statut_tmp" => 'publie', "date_tmp" => $row['date_h']), "id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont une breve publie
-	$r = sql_select("rub.id_rubrique AS id, max(fille.date_heure) AS date_h", "spip_rubriques AS rub, spip_breves AS fille", "rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date_heure AND fille.statut='publie' ", "rub.id_rubrique");
+	$r = sql_select("R.id_rubrique AS id, max(A.date_heure) AS date_h", "spip_rubriques AS R, spip_breves AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date_heure AND A.statut='publie' ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
 	  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']), "id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont un site publie
-	$r = sql_select("rub.id_rubrique AS id, max(fille.date) AS date_h", "spip_rubriques AS rub, spip_syndic AS fille", "rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date AND fille.statut='publie' ", "rub.id_rubrique");
+	$r = sql_select("R.id_rubrique AS id, max(A.date) AS date_h", "spip_rubriques AS R, spip_syndic AS A", "R.id_rubrique = A.id_rubrique AND R.date_tmp <= A.date AND A.statut='publie' ", "R.id_rubrique");
 	while ($row = sql_fetch($r))
 		sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 	
@@ -184,7 +184,7 @@ function calculer_rubriques_publiees() {
 	// on tourne tant que les donnees remontent vers la racine.
 	do {
 		$continuer = false;
-		$r = sql_select("rub.id_rubrique AS id, max(fille.date_tmp) AS date_h", "spip_rubriques AS rub, spip_rubriques AS fille", "rub.id_rubrique = fille.id_parent AND (rub.date_tmp < fille.date_tmp OR rub.statut_tmp<>'publie') AND fille.statut_tmp='publie' ", "rub.id_rubrique");
+		$r = sql_select("R.id_rubrique AS id, max(A.date_tmp) AS date_h", "spip_rubriques AS R, spip_rubriques AS A", "R.id_rubrique = A.id_parent AND (R.date_tmp < A.date_tmp OR R.statut_tmp<>'publie') AND A.statut_tmp='publie' ", "R.id_rubrique");
 		while ($row = sql_fetch($r)) {
 		  sql_updateq('spip_rubriques', array('statut_tmp'=>'publie', 'date_tmp'=>$row['date_h']),"id_rubrique=".$row['id']);
 			$continuer = true;
@@ -204,7 +204,7 @@ function propager_les_secteurs()
 	// reparer les rubriques qui n'ont pas l'id_secteur de leur parent
 	do {
 		$continuer = false;
-		$r = sql_select("fille.id_rubrique AS id, maman.id_secteur AS secteur", "spip_rubriques AS fille, spip_rubriques AS maman", "fille.id_parent = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
+		$r = sql_select("A.id_rubrique AS id, R.id_secteur AS secteur", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.id_secteur <> R.id_secteur");
 		while ($row = sql_fetch($r)) {
 			sql_update("spip_rubriques", array("id_secteur" => $row['secteur']), "id_rubrique=".$row['id']);
 			$continuer = true;
@@ -212,13 +212,13 @@ function propager_les_secteurs()
 	} while ($continuer);
 	
 	// reparer les articles
-	$r = sql_select("fille.id_article AS id, maman.id_secteur AS secteur", "spip_articles AS fille, spip_rubriques AS maman", "fille.id_rubrique = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
+	$r = sql_select("A.id_article AS id, R.id_secteur AS secteur", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
 
 	while ($row = sql_fetch($r)) {
 		sql_update("spip_articles", array("id_secteur" => $row['secteur']), "id_article=".$row['id']);
 	}
 	// reparer les sites
-	$r = sql_select("fille.id_syndic AS id, maman.id_secteur AS secteur", "spip_syndic AS fille, spip_rubriques AS maman", "fille.id_rubrique = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
+	$r = sql_select("A.id_syndic AS id, R.id_secteur AS secteur", "spip_syndic AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.id_secteur <> R.id_secteur");
 	while ($row = sql_fetch($r))
 		sql_update("spip_syndic", array("id_secteur" => $row['secteur']), "id_syndic=".$row['id']);
 
@@ -231,7 +231,7 @@ function propager_les_secteurs()
 //
 // http://doc.spip.org/@calculer_langues_rubriques_etape
 function calculer_langues_rubriques_etape() {
-	$s = sql_select("fille.id_rubrique AS id_rubrique, mere.lang AS lang", "spip_rubriques AS fille, spip_rubriques AS mere", "fille.id_parent = mere.id_rubrique AND fille.langue_choisie != 'oui' AND mere.lang<>'' AND mere.lang<>fille.lang");
+	$s = sql_select("A.id_rubrique AS id_rubrique, R.lang AS lang", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.langue_choisie != 'oui' AND R.lang<>'' AND R.lang<>A.lang");
 
 	while ($row = sql_fetch($s)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -249,14 +249,14 @@ function calculer_langues_rubriques() {
 	while (calculer_langues_rubriques_etape());
 
 	// articles
-	$s = sql_select("fils.id_article AS id_article, mere.lang AS lang", "spip_articles AS fils, spip_rubriques AS mere", "fils.id_rubrique = mere.id_rubrique AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'') AND mere.lang<>fils.lang");
+	$s = sql_select("A.id_article AS id_article, R.lang AS lang", "spip_articles AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.langue_choisie != 'oui' AND (A.lang='' OR R.lang<>'') AND R.lang<>A.lang");
 	while ($row = sql_fetch($s)) {
 		$id_article = $row['id_article'];
 		sql_updateq('spip_articles', array("lang"=> $row['lang'], 'langue_choisie'=>'non'), "id_article=$id_article");
 	}
 
 	// breves
-	$s = sql_select("fils.id_breve AS id_breve, mere.lang AS lang", "spip_breves AS fils, spip_rubriques AS mere", "fils.id_rubrique = mere.id_rubrique AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'') AND mere.lang<>fils.lang");
+	$s = sql_select("A.id_breve AS id_breve, R.lang AS lang", "spip_breves AS A, spip_rubriques AS R", "A.id_rubrique = R.id_rubrique AND A.langue_choisie != 'oui' AND (A.lang='' OR R.lang<>'') AND R.lang<>A.lang");
 	while ($row = sql_fetch($s)) {
 		$id_breve = $row['id_breve'];
 		sql_updateq('spip_breves', array("lang"=>$row['lang'], 'langue_choisie'=>'non'), "id_breve=$id_breve");

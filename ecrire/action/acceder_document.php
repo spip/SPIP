@@ -39,7 +39,7 @@ function action_acceder_document_dist() {
 		$where = "documents.fichier=".sql_quote(set_spip_doc($file))
 		. ($arg ? " AND documents.id_document=".intval($arg): '');
 
-		$doc = sql_fetsel("documents.id_document, documents.titre, documents.fichier, types.mime_type, types.inclus, documents.extension", "spip_documents AS documents LEFT JOIN spip_types_documents AS types ON documents.extension=types.extension",$where);
+		$doc = sql_fetsel("D.id_document, D.titre, D.fichier, T.mime_type, T.inclus, D.extension", "spip_documents AS D LEFT JOIN spip_types_documents AS T ON D.extension=T.extension",$where);
 		if (!$doc) {
 			$status = 404;
 		} else {

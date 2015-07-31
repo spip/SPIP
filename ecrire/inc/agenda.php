@@ -1258,8 +1258,8 @@ function calendrier_categories($table, $num, $objet)
     return generer_calendrier_class($table, $num, $objet);
   else {
     // cf agenda.css
-    $result= sql_fetsel((($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . " AS id", $table, "$objet=$num");
-    if ($result) $num = $result['id'];
+    $num= sql_getfetsel((($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . " AS id", $table, "$objet=$num");
+
     return 'calendrier-couleur' . (($num%14)+1);
   }
 }
@@ -1440,7 +1440,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
-	$result=sql_select("messages.id_message, messages.titre, messages.texte, messages.date_heure, messages.date_fin, messages.type", "spip_messages AS messages LEFT JOIN spip_auteurs_messages AS lien ON (lien.id_message=messages.id_message)",	"(lien.id_auteur=$connect_id_auteur OR messages.type='affich') AND	messages.rv='oui'  AND	((messages.date_fin >= $avant OR messages.date_heure >= $avant) AND messages.date_heure <= $apres) AND	messages.statut='publie'", "messages.date_heure, messages.date_fin, messages.type, messages.texte, messages.titre, messages.id_message", "messages.date_heure");
+	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui'  AND ((M.date_fin >= $avant OR M.date_heure >= $avant) AND M.date_heure <= $apres) AND M.statut='publie'", "M.date_heure, M.date_fin, M.type, M.texte, M.titre, M.id_message", "M.date_heure");
 	while($row=sql_fetch($result)){
 		$date_heure=$row["date_heure"];
 		$date_fin=$row["date_fin"];
@@ -1457,11 +1457,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 		      $cat = 'calendrier-couleur12';
 		    else {
 		      $cat = 'calendrier-couleur9';
-		      $auteurs = array();
-		      $result_aut=sql_select("nom", "spip_auteurs AS auteurs, spip_auteurs_messages AS lien", "	(lien.id_message=$id_message  AND	(auteurs.id_auteur!=$connect_id_auteur  AND	lien.id_auteur=auteurs.id_auteur))");
-			while($row_auteur=sql_fetch($result_aut)){
-				$auteurs[] = $row_auteur['nom'];
-			}
+		      $auteurs = array_map('array_shift', sql_allfetsel("nom", "spip_auteurs AS A LEFT JOIN spip_auteurs_messages AS L ON L.id_auteur=A.id_auteur", "(L.id_message=$id_message AND (A.id_auteur!=$connect_id_auteur))"));
 		    }
 		  }
 		}
@@ -1516,46 +1512,35 @@ function tache_redirige ($row) {
 // http://doc.spip.org/@quete_calendrier_taches_annonces
 function quete_calendrier_taches_annonces () {
 	global $connect_id_auteur;
-	$r = array();
-	if (!$connect_id_auteur) return $r;
 
-	$result = sql_select("texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location", "spip_messages", "type = 'affich' AND rv != 'oui' AND statut = 'publie'", "", "date_heure DESC");
+	if (!$connect_id_auteur) return array();
 
-	while ($row = sql_fetch($result)) {
-		$row['url'] = tache_redirige($row);
-		$r[] = $row;
-	}
+	$r = sql_allfetsel("texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location", "spip_messages", "type = 'affich' AND rv != 'oui' AND statut = 'publie'", "", "date_heure DESC");
+
+	foreach ($r as $k => $row) $r[$k]['url'] = tache_redirige($row);
 	return $r;
 }
 
 // http://doc.spip.org/@quete_calendrier_taches_pb
 function quete_calendrier_taches_pb () {
 	global $connect_id_auteur;
-	$r = array();
-	if (!$connect_id_auteur) return $r;
 
-	$result = sql_select("texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location", "spip_messages AS messages", "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
+	if (!$connect_id_auteur) return array();
 
-	while ($row = sql_fetch($result)) {
-		$row['url'] = tache_redirige($row);
-		$r[] = $row;
-	}
+	$r = sql_allfetsel("texte AS description, id_message AS uid, date_heure AS dtstart, date_fin AS dtend, titre AS summary, type AS category, rv AS location", "spip_messages", "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
 
+	foreach ($r as $k => $row) $r[$k]['url'] = tache_redirige($row);
 	return $r;
 }
 
 // http://doc.spip.org/@quete_calendrier_taches_rv
 function quete_calendrier_taches_rv () {
 	global $connect_id_auteur;
-	$r = array();
-	if (!$connect_id_auteur) return $r;
 
-	$result = sql_select("messages.texte AS description, messages.id_message AS uid, messages.date_heure AS dtstart, messages.date_fin AS dtend, messages.titre AS summary, messages.type AS category, messages.rv AS location", "spip_messages AS messages LEFT JOIN spip_auteurs_messages AS lien ON (lien.id_message=messages.id_message)", "(lien.id_auteur=$connect_id_auteur OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie'", "messages.id_message",  "messages.date_heure");
-	while ($row = sql_fetch($result)) {
-		$row['url'] = tache_redirige($row);
-		$r[] = $row;
-	}
+	if (!$connect_id_auteur) return array();
 
+	$r = sql_allfetsel("M.texte AS description, M.id_message AS uid, M.date_heure AS dtstart, M.date_fin AS dtend, M.titre AS summary, M.type AS category, M.rv AS location", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui' AND ( (M.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND M.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (M.date_heure < NOW() AND M.date_fin > NOW() )) AND M.statut='publie'", "M.id_message",  "M.date_heure");
+	foreach ($r as $k => $row) $r[$k]['url'] = tache_redirige($row);
 	return  $r;
 }
 
@@ -1570,8 +1555,8 @@ function quete_calendrier_agenda ($annee, $mois) {
 	$annee = annee($date);
 
 	// rendez-vous personnels dans le mois
-	$result_messages = sql_select("messages.titre AS summary, messages.texte AS description, messages.id_message AS uid, messages.date_heure", "spip_messages AS messages, spip_auteurs_messages AS lien", "((lien.id_auteur=$connect_id_auteur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
-	while($row=sql_fetch($result_messages)){
+	$result_messages = sql_select("M.titre AS summary, M.texte AS description, M.id_message AS uid, M.date_heure", "spip_messages AS M, spip_auteurs_messages AS L", "((L.id_auteur=$connect_id_auteur AND L.id_message=M.id_message) OR M.type='affich') AND M.rv='oui' AND M.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND M.statut='publie'");
+	while($row=sql_fetch($result_messages)) {
 		$rv[journum($row['date_heure'])] = $row;
 	}
 	return $rv;

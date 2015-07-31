@@ -63,7 +63,7 @@ function extrait_article($row) {
 	$statut = $row['statut'];
 
 	$les_auteurs = "";
-	$result_auteurs = sql_select("nom", "spip_auteurs AS auteurs, spip_auteurs_articles AS lien", "lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
+	$result_auteurs = sql_select("nom", "spip_auteurs AS A, spip_auteurs_articles AS L", "L.id_article=$id_article AND A.id_auteur=L.id_auteur");
 
 	while ($row = sql_fetch($result_auteurs)) {
 		if ($les_auteurs) $les_auteurs .= ', ';
