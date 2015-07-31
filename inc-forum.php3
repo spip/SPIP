@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -6,13 +6,13 @@ if (defined("_INC_FORUM")) return;
 define("_INC_FORUM", "1");
 
 
-include_local ("ecrire/inc_connect.php3");
-include_local ("ecrire/inc_meta.php3");
-include_local ("ecrire/inc_admin.php3");
-include_local ("ecrire/inc_acces.php3");
-include_local ("ecrire/inc_texte.php3");
-include_local ("ecrire/inc_filtres.php3");
-include_local ("ecrire/inc_mail.php3");
+include_ecrire("inc_connect.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_admin.php3");
+include_ecrire("inc_acces.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_mail.php3");
 if (file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
 }
@@ -35,11 +35,10 @@ function get_forums_publics($id_article=0) {
 }
 
 function generer_pass_forum($email = '') {
-	$passw = generer_htpass(md5($email.rand().$passw));
-	$passw = ereg_replace("[./]", "", $passw);
+	$passw = creer_pass_aleatoire(9, $email);
+	$passw = ereg_replace("[./]", "a", $passw);
 	$passw = ereg_replace("[I1l]", "L", $passw);
 	$passw = ereg_replace("[0O]", "o", $passw);
-	$passw = substr($passw, -8);
 	return $passw;
 }
 
@@ -84,7 +83,6 @@ function afficher_petits_logos_mots($id_mot) {
 
 function decoder_hash_forum($email, $hash) {
 	if (!$email OR !$hash) return false;
-	include("ecrire/inc_connect.php3");
 	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
 	$result = mysql_query($query);
 	while ($row = mysql_fetch_array($result)) {
@@ -129,7 +127,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$afficher_groupe = $GLOBALS["afficher_groupe"];
 	$afficher_texte = $GLOBALS["afficher_texte"];
 
-
 	$forums_publics = get_forums_publics($id_article);
 	if ($forums_publics == "non") return;
 
@@ -145,32 +142,16 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	if ($p = strrpos($PATH_TRANSLATED, '/')) $fich = substr($fich, $p + 1);
 	if ($p = strpos($fich, '?')) $fich = substr($fich, 0, $p);
 
-
-
-	$lien = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
-
-	$retour = $HTTP_GET_VARS['retour'];
-	if ($retour)
-		$retour = $retour;
-	else 
-		$retour = rawurlencode($lien);
-
-	$fich = $REQUEST_URI;
-	if ($p = strrpos($REQUEST_URI, '/')) $fich = substr($fich, $p + 1);
-	//if ($p = strpos($fich, '?')) $fich = substr($fich, 0, $p);
-	//$fich = urlencode($fich);
-	
-
 	$ret .= "\n<A NAME='formulaire_forum'>";
 	$ret .= "\n<FORM ACTION='$fich' METHOD='post'>";
 	$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
-	
+
 	if ($forums_publics == "pri") {
-		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
+		$ret .= "Ce forum est mod&eacute;r&eacute; a priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}
 	
 	if ($forums_publics == "abo") {
-		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
+		$ret .= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
 	}
 	
 	$ret .= "\n";
@@ -191,6 +172,8 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
 	
+
+	// <previsualisation>
 
 	if (!$id_message > 0){
 		$nouveau_document = true;
@@ -251,18 +234,20 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 		$ret .= "</div>\n<p>";
 	}
-	
+
 	/*
 	if ($forums_publics == "pri") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}	
 	
 	if ($forums_publics == "abo") {
-		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?>';
+		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?>';
 	}
 	*/
 	
 	$ret .= "\n";
+
+	// </previsualisation>
 
 	$seed = (double) (microtime() + 1) * time() * 1000000;
 	@mt_srand($seed);
