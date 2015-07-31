@@ -19,7 +19,8 @@ $GLOBALS['auteur_session'] = '';
 // On verifie l'IP et le nom du navigateur
 //
 function hash_env() {
-	return md5(getenv('REMOTE_ADDR') . getenv('HTTP_USER_AGENT'));
+	global $HTTP_SERVER_VARS;
+	return md5($HTTP_SERVER_VARS['REMOTE_ADDR'] . $HTTP_SERVER_VARS['HTTP_USER_AGENT']);
 }
 
 
@@ -147,10 +148,10 @@ function zap_sessions ($id_auteur, $zap) {
 
 	$dir = opendir($dirname);
 	$t = time();
-	while(($item = readdir($dir)) != ''){
+	while(($item = readdir($dir)) != '') {
 		$chemin = "$dirname$item";
 		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php3$", $item, $regs)
-		AND ($fichier_session != $chemin)) {
+			AND ($fichier_session != $chemin)) {
 
 			// Si c'est une vieille session, on jette
 			if (($t - filemtime($chemin)) > 48 * 3600)
