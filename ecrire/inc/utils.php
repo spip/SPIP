@@ -323,10 +323,11 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 // pour calcul du nom du fichier cache et autres
 //
 function nettoyer_uri() {
-	return preg_replace
+	return preg_replace(',[?&]$,', '',
+		preg_replace
 		(',([?&])(PHPSESSID|(var_[^=&]*))=[^&]*(&|$),i',
 		'\1',
-		$GLOBALS['REQUEST_URI']);
+		$GLOBALS['REQUEST_URI']));
 }
 
 //
