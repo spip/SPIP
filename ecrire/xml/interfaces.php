@@ -15,7 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/sax');
 
 define('_REGEXP_DOCTYPE',
-	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
+	'/^((<[?][^>]*>)*\s*(<!--.*?-->)*)*<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>\s*/');
+
+define('_MESSAGE_DOCTYPE', '<!-- SPIP CORRIGE -->');
 
 define('_SUB_REGEXP_SYMBOL', '[A-Za-z_][\w_:.-]*');
 
@@ -25,7 +27,7 @@ define('_REGEXP_ENTITY_USE', '/%('  . _SUB_REGEXP_SYMBOL . ');/');
 define('_REGEXP_ENTITY_DEF', '/^%('  . _SUB_REGEXP_SYMBOL . ');/');
 define('_REGEXP_ENTITY_DECL', '/^<!ENTITY\s+(%?)\s*(' .
 		_SUB_REGEXP_SYMBOL .
-		';?)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE)?\s*"([^"]*)"\s*("([^"]*)")?\s*>\s*(.*)$/s');
+		';?)\s+(PUBLIC|SYSTEM|INCLUDE|IGNORE|CDATA)?\s*"([^"]*)"\s*(--.*?--)?("([^"]*)")?\s*>\s*(.*)$/s');
 
 // Document Type Compilation
 
