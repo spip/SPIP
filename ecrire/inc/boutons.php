@@ -60,10 +60,10 @@ function barre_onglets_plugins() {
 
 	$onglets=array();
 	$onglets['plugins_actifs']=
-		  new Bouton('plugin-24.gif', 'plugins_actifs_liste',
+		  new Bouton('plugin-24.png', 'plugins_actifs_liste',
 			generer_url_ecrire("admin_plugin"));
 	$onglets['admin_plugin']=
-		  new Bouton('plugin-24.gif', 'plugins_liste',
+		  new Bouton('plugin-24.png', 'plugins_liste',
 			generer_url_ecrire("admin_plugin","voir=tous"));
 	$onglets['charger_plugin']=
 		  new Bouton('spip-pack-24.png', 'plugin_titre_automatique_ajouter',

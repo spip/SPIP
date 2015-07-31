@@ -4,8 +4,8 @@
 .item_picker .frame h2 {margin:0;padding:5px;background:#999;}
 .item_picker .frame ul {list-style:none;margin:0;padding:0;}
 .item_picker .frame ul li {list-style:none;margin:0;padding:2px;padding-left:26px;}
-.item_picker .frame ul li.rubrique {background:url(prive/images/rubrique-24.gif) no-repeat top left;}
-.item_picker .frame ul li.article {background:url(prive/images/article-24.gif) no-repeat top left;}
+.item_picker .frame ul li.rubrique {background:url(#CHEMIN_IMAGE{rubrique-24.png}) no-repeat top left;}
+.item_picker .frame ul li.article {background:url(#CHEMIN_IMAGE{article-24.png}) no-repeat top left;}
 
 .item_picker .frame ul li:hover {background-color:#999;}
 
