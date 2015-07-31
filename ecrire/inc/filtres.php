@@ -1949,7 +1949,8 @@ function direction_css ($css, $voulue='') {
 function url_absolue_css ($css) {
 	if (!preg_match(',\.css$,i', $css, $r)) return $css;
 
-	$path = dirname(url_absolue($css))."/"; // pour mettre sur les images
+	$url_absolue_css = url_absolue($css);
+	$path = dirname($url_absolue_css)."/"; // pour mettre sur les images
 	
 	$f = basename($css,'.css');
 	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
@@ -1960,7 +1961,15 @@ function url_absolue_css ($css) {
 	AND ($GLOBALS['var_mode'] != 'recalcul'))
 		return $f;
 
-	if (!lire_fichier($css, $contenu))
+	if ($url_absolue_css==$css){
+		if (strncmp($GLOBALS['meta']['adresse_site'],$css,$l=strlen($GLOBALS['meta']['adresse_site']))!=0
+		 OR !lire_fichier(_DIR_RACINE . substr($css,$l), $contenu)){
+		 		include_spip('inc/distant');
+		 		if (!$contenu = recuperer_page($css))
+					return $css;
+		}
+	}
+	elseif (!lire_fichier($css, $contenu))
 		return $css;
 
 	// passer les url relatives a la css d'origine en url absolues
@@ -2256,6 +2265,98 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 			return $plugins_actifs[$plugin] ? 1 : 0;
 		else
 			return $plugins_actifs[$plugin][$type_info];
+}
+
+
+function filtre_cache_static($scripts,$type='js'){
+	$nom = "";
+	if (!is_array($scripts) && $scripts) $scripts = array($scripts);
+	if (count($scripts)){
+		$dir = sous_repertoire(_DIR_VAR,'cache-'.$type);
+		$nom = $dir . md5(serialize($scripts)) . ".$type";
+		if (
+		  (_request('var_mode')=='recalcul')
+		  OR (!file_exists($nom))){
+		  	$fichier = "";
+		  	foreach($scripts as $script){
+		  		if (!is_array($script)){
+				  	if ($type=='css')
+				  		$script = url_absolue_css($script);
+		  			lire_fichier($script,$contenu);
+		  			$fichier .= $contenu . "\n";
+		  		}
+		  		else {
+		  			parse_str($script[1],$contexte);
+		  			$contenu = evaluer_fond($script[0],$contexte);
+		  			if ($type=='css'){
+							$self = url_absolue(self(true));
+							$path = $path = pathinfo($self);
+							$path = $path['dirname'].'/';
+							// passer les url relatives a la css d'origine en url absolues
+							$contenu = preg_replace(",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims","url($path\\1)",$contenu);
+		  				
+		  			}
+		  			$fichier .= $contenu['texte'];
+		  		}
+		  	}
+		  	// compacter
+		  	$fichier = compacte($fichier,$type);
+		  	// ecrire
+		  	ecrire_fichier($nom,$fichier);
+		  }
+	}
+	return $nom;
+}
+
+function f_compacte_head($flux){
+	$self = url_absolue(self(true));
+	$path = $path = pathinfo($self);
+	$dir = preg_quote($path['dirname'].'/',',');
+
+	// rechercher les js, les agglomerer et les compacter, et mettre le tout dans un cache statique
+	$scripts = array();
+	preg_match_all(",<script\s[^>]*src=['\"]([^'\"]*)['\"][^>]*>\s*</script>,",$flux,$regs,PREG_SET_ORDER);
+	foreach($regs as $script){
+		$src = $script[1];
+		if (preg_match(",(".$dir."|)spip.php[?](page=([^&]*).*)$,",$src,$r)){
+			$src = array($r[3],str_replace('&amp;','&',$r[2]));
+		}
+		$scripts[$script[0]] = $src;
+	}
+	if ($src = filtre_cache_static($scripts,'js')){
+		$scripts = array_keys($scripts);
+		$flux = str_replace(reset($scripts),"<script type='text/javascript' src='$src'></script>",$flux);
+		$flux = str_replace($scripts,"",$flux);
+	}
+
+	// rechercher les css, les agglomerer et les compacter, par type de media
+	$css = array();
+	preg_match_all(",<link\s[^>]*href=['\"]([^'\"]*)['\"][^>]*>,",$flux,$regs,PREG_SET_ORDER);
+	foreach($regs as $style){
+		if (preg_match(',rel=["\']stylesheet["\'],i',$style[0])) {
+			$m = 0;
+			// regarder si un media est dispo
+			preg_match(',media=["\']([^\'"]*)["\'],i',$style[0],$m);
+			$src = $style[1];
+			if (preg_match(",(".$dir."|)spip.php[?](page=([^&]*).*)$,",$src,$r)){
+				$src = array($r[3],str_replace('&amp;','&',$r[2]));
+			}
+			$css[$m[1]][$style[0]] = $src;
+		}
+	}
+
+	// et mettre le tout dans un cache statique
+	foreach($css as $m=>$s){
+		// si plus d'une css pour ce media ou si c'est une css dynamique
+		if (count($s)>1 OR is_array(reset($s))){
+			if ($src = filtre_cache_static($s,'css')){
+				$s = array_keys($s);
+				$flux = str_replace(reset($s),"<link rel='stylesheet'".($m?" media='$m'":"")." href='$src' />",$flux);
+				$flux = str_replace($s,"",$flux);
+			}
+		}
+	}
+	return $flux;
 }
 
 ?>
