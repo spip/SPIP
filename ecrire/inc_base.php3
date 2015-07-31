@@ -608,7 +608,10 @@ function maj_base() {
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit d'une nouvelle installation
 	//   => ne pas passer par le processus de mise a jour
 	//
-	if (!$version_installee) $version_installee = $spip_version;
+	if (!$version_installee) {
+		$version_installee = $spip_version;
+		maj_version($version_installee);
+	}
 	
 	//
 	// Selection en fonction de la version
