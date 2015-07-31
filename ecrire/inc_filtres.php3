@@ -519,7 +519,7 @@ function exposer ($id, $identique='on', $different='') {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 
 	// pour l'ordre des variables respecter celui des boutons de inc-admin.php3
-	$objet = id_article
+	$objet = $id_article
 	OR $objet = $id_breve
 	OR $objet = $id_rubrique
 	OR $objet = $id_mot
