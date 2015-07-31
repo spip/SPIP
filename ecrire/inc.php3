@@ -136,4 +136,8 @@ if (!isset($reinstall)) {
 	  demande_maj_version();
 	}
  }
+
+$var_f = include_fonction($SCRIPT_NAME);
+$var_f();
+
 ?>

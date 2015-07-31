@@ -12,7 +12,6 @@
 
   // obsolete, mais assurer le service pour les vieux liens
 if (!isset($_GET['type'])) $type = 'jour';
+$SCRIPT_NAME = 'calendrier.php3';
 include ("inc.php3");
-$var_f = include_fonction('calendrier');
-$var_f();
 ?>

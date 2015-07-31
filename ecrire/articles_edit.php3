@@ -11,6 +11,4 @@
 \***************************************************************************/
 
 include ("inc.php3");
-$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
-$var_f(intval($id_article), intval($id_rubrique), intval($lier_trad), $new);
 ?>

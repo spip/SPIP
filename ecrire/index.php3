@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+$SCRIPT_NAME = 'accueil.php3';
 include ("inc.php3");
-$var_f = include_fonction('accueil');
-$var_f();
 ?>

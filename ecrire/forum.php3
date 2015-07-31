@@ -11,7 +11,6 @@
 \***************************************************************************/
 
   // obsolete, mais assurer le service pour les vieux liens
+$SCRIPT_NAME = 'forum_admin.php3';
 include ("inc.php3");
-$var_f = include_fonction('forum_admin');
-$var_f();
 ?>
