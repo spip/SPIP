@@ -1600,9 +1600,11 @@ function form_hidden($action) {
 	if ($p = urls_decoder_url($action, '')
 		AND reset($p)) {
 		$fond = array_shift($p);
-		$contexte = array_shift($p);
-		$contexte['page'] = $fond;
-		$action = preg_replace('/([?]'.preg_quote($fond).'[^&=]*[0-9]+)(&|$)/', '?&', $action);
+		if ($fond!='404'){
+			$contexte = array_shift($p);
+			$contexte['page'] = $fond;
+			$action = preg_replace('/([?]'.preg_quote($fond).'[^&=]*[0-9]+)(&|$)/', '?&', $action);
+		}
 	}
 
 	// on va remplir un tableau de valeurs en prenant bien soin de ne pas
