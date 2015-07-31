@@ -109,7 +109,6 @@ function debut_block_visible($nom_block){
 			$compteur_block++;
 			$numero_block["$nom_block"] = $compteur_block;
 		}
-		
 		$retour .= "<div id='Layer".$numero_block["$nom_block"]."' style='display: block'>";
 	}
 	return $retour;
@@ -124,14 +123,14 @@ function debut_block_invisible($nom_block){
 			$compteur_block++;
 			$numero_block["$nom_block"] = $compteur_block;
 		}
-		
-		$retour = "\n<script language='JavaScript'>\n";
-		$retour .= "<!--\n";
+
+		$retour = "\n<script language='JavaScript'><!--\n";
 		$retour .= "vis['".$numero_block["$nom_block"]."'] = 'hide';\n";
+		$retour .= "document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');\n";
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
 		
-		$retour .= "<div id='Layer".$numero_block["$nom_block"]."' style='display: none; margin-top: 1;'>";
+		$retour .= "<noscript><div id='Layer".$numero_block["$nom_block"]."' style='display: block;'></noscript>\n";
 	}
 	return $retour;
 }
@@ -149,7 +148,6 @@ function bouton_block_invisible($nom_block) {
 	$num_triangle = $compteur_block + 1;
 
 	if (test_layer()) {
-		
 		$blocks = explode(",", $nom_block);
 		
 		for ($index=0; $index < count($blocks); $index ++){
@@ -160,9 +158,16 @@ function bouton_block_invisible($nom_block) {
 				$numero_block["$nom_block"] = $compteur_block;
 			}
 
-			$javasc .= "swap_couche('$compteur_block');";
+			$javasc .= "swap_couche(\\'$compteur_block\\');";
 		}
-		return "<a href=\"javascript:$javasc\"><img name='triangle$num_triangle' src='img_pack/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
+		$retour = "\n<script language='JavaScript'><!--\n";
+		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle$num_triangle\" src=\"img_pack/deplierhaut.gif\" alt=\"D&eacute;plier\" title=\"D&eacute;plier\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";
+		$retour .= "//-->\n";
+		$retour .= "</script>\n";
+		
+		$retour .= "<noscript><img name='triangle$num_triangle' src='img_pack/deplierbas.gif' alt='*' width='16' height='14' border='0'></noscript>\n";
+		return $retour;
+//		return "<a href=\"javascript:$javasc\"><img name='triangle$num_triangle' src='img_pack/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 
