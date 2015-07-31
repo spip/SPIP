@@ -324,7 +324,7 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 			else
 				$infos_tables[$t] = renseigner_table_objet_sql($t,$infos_tables[$t]);
 		}
-		var_dump($infos_tables['spip_mots']['tables_jointures']);
+
 		// repercuter les proprietes generales communes a tous les objets
 		foreach(array_keys($infos_tables) as $t) {
 			foreach($all as $i=>$v)
