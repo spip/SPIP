@@ -56,6 +56,7 @@ function liste_metas()
 		'forums_titre' => 'oui',
 		'forums_texte' => 'oui',
 		'forums_urlref' => 'non',
+		'formats_documents_forum' => '',
 
 		'activer_sites' => 'non',
 		'proposer_sites' => 0,

@@ -206,6 +206,20 @@ function inc_forum_insert_dist($force_statut = NULL) {
 
 	revision_forum($id_message, $c);
 
+	// Ajouter un document
+	if (isset($_FILES['ajouter_document'])
+	AND $_FILES['ajouter_document']['tmp_name']) {
+		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		$ajouter_documents(
+			$_FILES['ajouter_document']['tmp_name'],
+			$_FILES['ajouter_document']['name'], 'forum', $id_message,
+			'document', 0, &$documents_actifs);
+		// supprimer le temporaire et ses meta donnees
+		spip_unlink($_FILES['ajouter_document']['tmp_name']);
+		spip_unlink(preg_replace(',\.bin$',
+			'.txt', $_FILES['ajouter_document']['tmp_name']));
+	}
+
 	// Notification
 	if ($notifications = charger_fonction('notifications', 'inc'))
 		$notifications('forumposte', $id_message);

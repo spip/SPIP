@@ -22,6 +22,15 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 			<div class="#EDIT{texte} forum-texte">
 				[(#TEXTE|lignes_longues)]
 				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+				<BOUCLE_doc(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#EMBED_DOCUMENT|image_reduire{300})]
+				,
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+				})]
+				</BOUCLE_doc>
+
 				[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
 			</div>
 		</div>
@@ -39,6 +48,16 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 					<div class="#EDIT{texte} forum-texte">
 						[(#TEXTE|lignes_longues)]
 						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+
+				<BOUCLE_doc2(DOCUMENTS){id_forum}>
+				[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[(#EMBED_DOCUMENT|image_reduire{300})]
+				,
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+				})]
+				</BOUCLE_doc2>
+
+
 						[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
 					</div>
 				</div>

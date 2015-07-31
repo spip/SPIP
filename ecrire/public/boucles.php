@@ -176,10 +176,13 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	AND !$boucle->modificateur['criteres']['id_article']
 	AND !$boucle->modificateur['criteres']['id_breve']
 	AND !$boucle->modificateur['criteres']['id_rubrique']
+	AND !$boucle->modificateur['criteres']['id_forum']
 	AND !$boucle->modificateur['criteres']['id_document']
 	) {
 		# Espace avant LEFT JOIN indispensable pour insertion de AS
 		# a refaire plus proprement
+
+		## la boucle par defaut ignore les documents de forum
 		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_articles AS a
 			ON $id_table.id_document=a.id_document
 			LEFT JOIN spip_articles AS aa

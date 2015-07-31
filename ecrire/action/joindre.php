@@ -188,6 +188,8 @@ function joindre_documents($files, $mode, $type, $id, $id_document, $hash, $redi
 	}
 
 	foreach ($files as $arg) {
+		// verifier l'extension du fichier en fonction de son type mime
+		list($extension,$arg['name']) = fixer_extension_document($arg);
 		check_upload_error($arg['error']);
 		$x = $ajouter_documents($arg['tmp_name'], $arg['name'], 
 				    $type, $id, $mode, $id_document, $actifs);

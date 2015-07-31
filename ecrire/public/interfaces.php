@@ -241,12 +241,14 @@ $tables_jointures['spip_breves'][]= 'mots';
 $tables_jointures['spip_documents'][]= 'documents_articles';
 $tables_jointures['spip_documents'][]= 'documents_rubriques';
 $tables_jointures['spip_documents'][]= 'documents_breves';
+$tables_jointures['spip_documents'][]= 'documents_forum';
 $tables_jointures['spip_documents'][]= 'mots_documents';
 $tables_jointures['spip_documents'][]= 'types_documents';
 $tables_jointures['spip_documents'][]= 'mots';
 
 $tables_jointures['spip_forum'][]= 'mots_forum';
 $tables_jointures['spip_forum'][]= 'mots';
+$tables_jointures['spip_forum'][]= 'documents_forum';
 
 $tables_jointures['spip_rubriques'][]= 'mots_rubriques';
 $tables_jointures['spip_rubriques'][]= 'documents_rubriques';

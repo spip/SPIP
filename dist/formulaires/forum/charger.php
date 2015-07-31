@@ -50,7 +50,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	// envoi du message ; aux appels suivants, reconduire la valeur.
 	// Initialiser aussi l'auteur
 	if ($retour_forum = rawurldecode(_request('retour')))
-		$retour_forum = str_replace('&var_mode=recalcul','',$retour_forum);
+		$retour_forum =  str_replace('&var_mode=recalcul','',$retour_forum);
 	else {
 		// par defaut, on veut prendre url_forum(), mais elle ne sera connue
 		// qu'en sortie, on inscrit donc une valeur absurde ("!")
@@ -73,6 +73,11 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 	foreach ($ids as $id => $v)
 		$script_hidden = parametre_url($script_hidden, $id, $v, '&');
 
+	// l'ajout de documents est-il autorise ?
+	// cf. verifier.php
+	if ($formats_documents_forum = array_filter(array_map('trim', explode(',',$GLOBALS['meta']['formats_documents_forum']))))
+		$cle_ajouter_document = calculer_cle_action($a = 'ajouter-document-'.join('-',array_map('intval',$ids)));
+
 	return array(
 		'modere' => (($type != 'pri') ? '' : ' '),
 		'nom_site' => '',
@@ -81,11 +86,14 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour) {
 		'table' => $table,
 		'texte' => '',
 		'config' => array('afficher_barre' => ' '),
-		'titre' => extraire_multi($titre),
+		'titre' => str_replace('~', ' ', extraire_multi($titre)),
 		'url' => $script, # ce sur quoi on fait le action='...'
 		'url_post' => $script_hidden, # pour les variables hidden
 		'url_site' => "http://",
 		'arg' => $arg,
+		'cle_ajouter_document' => $cle_ajouter_document,
+		'formats_documents_forum' => $formats_documents_forum,
+		'ajouter_document' => $_FILES['ajouter_document']['name'],
 		'hash' => $hash,
 		'nobot' => _request('nobot'),
 		'ajouter_groupe' => $ajouter_groupe,
