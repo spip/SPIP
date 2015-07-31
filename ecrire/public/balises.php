@@ -265,6 +265,19 @@ function balise_EXPOSE_dist($p) {
 	return calculer_balise_expose($p, $on, $off);
 }
 
+// #VALEUR renvoie le champ valeur
+// #VALEUR{x} renvoie #VALEUR|table_valeur{x}
+// #VALEUR{a.b} renvoie #VALEUR|table_valeur{a.b}
+// http://doc.spip.org/@balise_VALEUR_dist
+function balise_VALEUR_dist($p) {
+	$p->code = '$Pile[$SP]["valeur"]';
+	if (($v = interprete_argument_balise(1,$p))!==NULL){
+		$p->code = 'table_valeur('.$p->code.', '.$v.')';
+	}
+	$p->interdire_scripts = false;
+	return $p;
+}
+
 // http://doc.spip.org/@calculer_balise_expose
 function calculer_balise_expose($p, $on, $off)
 {
