@@ -19,7 +19,7 @@ spip_connect();
 
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public
 // avec une variable d'URL nommee confirmer_forum 
-// Voir commentaires dans inc-formulaire_forum
+// Voir commentaires dans balise/formulaire_forum
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
 	include_spip('inc/texte');
@@ -162,8 +162,21 @@ function inc_forum_insert_dist() {
 
 	# retour a calculer (cf. inc-formulaire_forum)
 	if ($retour_forum == '!') {
-		$retour_forum = self(); # en cas d'echec du post
-		$retour_forum=str_replace('&amp;','&',$retour_forum);
+		// on calcule a priori l'adresse de retour {en cas d'echec du POST}
+		charger_generer_url();
+		if ($id_forum)
+			$retour_forum = generer_url_forum($id_forum);
+		elseif ($id_article)
+			$retour_forum = generer_url_article($id_article);
+		elseif ($id_breve)
+			$retour_forum = generer_url_breve($id_breve);
+		elseif ($id_syndic)
+			$retour_forum = generer_url_syndic($id_syndic);
+		elseif ($id_rubrique) # toujours en dernier
+			$retour_forum = generer_url_rubrique($id_rubrique);
+		$retour_forum = str_replace('&amp;','&',$retour_forum);
+
+		// mais la veritable adresse de retour sera calculee apres insertion
 		$calculer_retour = true;
 	}
 
@@ -199,6 +212,17 @@ function inc_forum_insert_dist() {
 
 	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
 						'publie');
+
+	// Antispam : si 'nobot' a ete renseigne, ca ne peut etre qu'un bot
+	if (strlen(_request('nobot'))) {
+		spip_log("spam forum: ".print_r($_POST, true));
+		include_spip('inc/mail');
+		envoyer_mail($GLOBALS['meta']['email_webmaster'], 'intrusion forum',
+			"tentative de spam forum detectee :\n\n".
+			'$_POST = '.print_r($_POST, true)."\n\n".
+			'$_SERVER = '.print_r($_SERVER, true));
+		return $retour_forum; # echec silencieux du POST
+	}
 
 	// Entrer le message dans la base
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
