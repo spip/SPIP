@@ -890,8 +890,8 @@ function spip_initialisation() {
 	define('_DIR_IMG_ICONES_BARRE', _DIR_IMG_PACK . "icones_barre/");
 
 	# le chemin php (absolu) vers les images standard (pour hebergement centralise)
-	define('_ROOT_IMG_PACK', (dirname(__FILE__) . '/img_pack/'));
-	define('_ROOT_IMG_ICONES_DIST', (dirname(__FILE__) . '/img_pack/icones/'));
+	define('_ROOT_IMG_PACK', (dirname(dirname(__FILE__)) . '/img_pack/'));
+	define('_ROOT_IMG_ICONES_DIST', (dirname(dirname(__FILE__)) . '/img_pack/icones/'));
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
