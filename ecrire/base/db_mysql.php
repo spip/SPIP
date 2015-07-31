@@ -36,9 +36,12 @@ function spip_query_db($query) {
 
 function spip_mysql_trace($query, $start, $result)
 {
+	$s = mysql_errno();
+
 	if ($start) spip_mysql_timing($start, microtime(), $query, $result);
 
-	if ($s = trim(mysql_errno().' '.mysql_error())) {
+	if ($s) {
+		$s .= ' '.mysql_error();
 		if ($GLOBALS['mysql_debug']
 		AND (($GLOBALS['connect_statut'] == '0minirezo')
 		  OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) {
