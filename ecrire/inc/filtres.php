@@ -1502,7 +1502,7 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=
 	if ($vider AND strlen($val)==0)
 		$insert = '';
 	else
-		$insert = " $attribut='$val' ";
+		$insert = " $attribut='$val'";
 
 	list($old, $r) = extraire_attribut($balise, $attribut, true);
 
@@ -1512,11 +1512,11 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true, $vider=
 	}
 	else {
 		// preferer une balise " />" (comme <img />)
-		if (preg_match(',[[:space:]]/>,S', $balise))
-			$balise = preg_replace(",[[:space:]]/>,S", $insert."/>", $balise, 1);
+		if (preg_match(',/>,', $balise))
+			$balise = preg_replace(",\s?/>,S", $insert." />", $balise, 1);
 		// sinon une balise <a ...> ... </a>
 		else
-			$balise = preg_replace(",>,", $insert.">", $balise, 1);
+			$balise = preg_replace(",\s?>,S", $insert.">", $balise, 1);
 	}
 
 	return $balise;
