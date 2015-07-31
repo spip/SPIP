@@ -3,7 +3,7 @@
  * Distributed under the BSD License
  * Some bits taken from Paul Johnston's SHA-1 implementation
  */
-var chrsz = 16;  /* bits per input character. 8 - ASCII; 16 - Unicode  */
+var chrsz = 8;  /* bits per input character. 8 - ASCII; 16 - Unicode  */
 function safe_add (x, y) {
   var lsw = (x & 0xFFFF) + (y & 0xFFFF);
   var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
@@ -58,6 +58,5 @@ function binb2hex (binarray) {
 function hex_sha256(s){return binb2hex(core_sha256(str2binb(s),s.length * chrsz));}
 /* test if the JS-interpreter is working properly */
 function sha256_self_test(){
-	return (chrsz==16 && hex_sha256("message digest")=="44911ad1e18f35c0ee9c80582d1aa66c00a18f34a188676ed5f0dc94d05a4fd7")
-	 || (chrsz==8 && hex_sha256("message digest") == "f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650");
+	return hex_sha256("message digest") == "f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650";
 }
