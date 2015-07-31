@@ -246,7 +246,7 @@ function fichier_copie_locale($source) {
 function recuperer_infos_distantes($source, $max=0) {
 
 	$a = array();
-
+	$mime_type = '';
 	// On va directement charger le debut des images et des fichiers html,
 	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
 	// ca echoue l'utilisateur devra les entrer...
@@ -255,8 +255,8 @@ function recuperer_infos_distantes($source, $max=0) {
 		$t = preg_match(",\nContent-Type: *([^[:space:];]*),i",
 				"\n$headers", $regs);
 		if ($t) {
-		  $mime_type = addslashes(trim($regs[1]));
-		  $t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type='$mime_type'"));
+		  $mime_type = (trim($regs[1]));
+		  $t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type='" . addslashes($mime_type) ."'"));
 		}
 		if ($t) {
 			spip_log("mime-type $mime_type ok");

@@ -101,7 +101,7 @@ function avertissement_config() {
 
 	echo "<div class='verdana2' align='justify'>
 	<p align='center'><B>"._T('avis_attention')."</B></p>",
-	  http_img_pack("warning.gif", addslashes(_T('avis_attention')), "width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;'");
+	  http_img_pack("warning.gif", (_T('avis_attention')), "width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;'");
 
 	echo _T('texte_inc_config');
 
