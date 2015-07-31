@@ -37,11 +37,22 @@ function action_calculer_taille_cache_dist($arg=null){
 	}
 	else {
 		include_spip('inc/invalideur');
-		$taille = intval(taille_du_cache());
-		$res = ($taille<=250000) ?
-			_T('taille_cache_vide')
-			:
-			_T('taille_cache_octets',array('octets'=>taille_en_octets($taille)));
+		$taille =
+			calculer_taille_dossier(_DIR_CACHE_XML)
+			+calculer_taille_dossier(_DIR_CACHE.'skel/')
+			+calculer_taille_dossier(_DIR_CACHE.'wheels/')
+			+calculer_taille_dossier(_DIR_CACHE.'contextes/')
+		;
+		$taille += intval(taille_du_cache());
+		if ($taille<=150000){
+			$res = _T('taille_cache_vide');
+		}
+		elseif ($taille<=1024*1024){
+			$res = _T('taille_cache_moins_de',array('octets'=>taille_en_octets(1024*1024)));
+		}
+		else {
+			$res = _T('taille_cache_octets',array('octets'=>taille_en_octets($taille)));
+		}
 		$res = "<b>$res</b>";
 	}
 	
