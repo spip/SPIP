@@ -147,14 +147,17 @@ function critere_pagination_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->mode_partie = 'p+';
 	$boucle->partie =
-		// tester si le numero de page demande est de la forme '@yyy'
-		'substr($partie=(isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.')),0,1)==\'@\'?'
-		// dans ce cas, on retrouve la page par un appel a quete_debut_pagination,
-		// et on place dans Pile[0]['debut_xxx'] le vrai numero de page pour la balise #PAGINATION
-		// et dans Pile[0][@primary] = yyy pour permettre a la balise #EXPOSER d'exposer l'objet
-		.'($Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($partie,1),'.intval($pas).',$result,'._q($boucle->sql_serveur).'))'
-		// sinon on fait un intval sur la valeur demandee, et c'est tout
-		.':intval($partie)';
+		 // tester si le numero de page demande est de la forme '@yyy'
+		 'isset($Pile[0][\'debut\'.'.$debut.']) ? $Pile[0][\'debut\'.'.$debut.'] : _request(\'debut\'.'.$debut.");\n"
+		."\tif(substr(\$debut_boucle,0,1)=='@'){\n"
+		."\t\t".'$debut_boucle = $Pile[0][\'debut\'.'.$debut.'] = quete_debut_pagination(\''.$boucle->primary.'\',$Pile[0][\'@'.$boucle->primary.'\'] = substr($debut_boucle,1),'.intval($pas).',$result,'._q($boucle->sql_serveur).');'."\n"
+		."\t\t".'if (!sql_seek($result,0,'._q($boucle->sql_serveur).")){\n"
+		."\t\t\t".'@sql_free($result,'._q($boucle->sql_serveur).");\n"
+		."\t\t\t".'$result = calculer_select($select, $from, $type, $where, $join, $groupby, $orderby, $limit, $having, $table, $id, $connect);'."\n"
+		."\t\t}\n"
+		."\t}\n"
+		."\t".'$debut_boucle = intval($debut_boucle)';
+
 
 	$boucle->modificateur['debut_nom'] = $debut;
 	$boucle->total_parties = $pas;
