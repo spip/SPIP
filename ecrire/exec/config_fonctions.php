@@ -47,7 +47,6 @@ function exec_config_fonctions_dist()
 	$compteur = charger_fonction('compteur', 'configuration');
 	$avertisseur = charger_fonction('avertisseur', 'configuration');
 	$versionneur = charger_fonction('versionneur', 'configuration');
-	$correcteur = charger_fonction('correcteur', 'configuration');
 	$previsualiseur = charger_fonction('previsualiseur', 'configuration');
 	$relayeur = charger_fonction('relayeur', 'configuration');
 
