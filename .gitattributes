@@ -103,7 +103,6 @@ ecrire/img_pack/cookie-24.gif -text
 ecrire/img_pack/creer.gif -text
 ecrire/img_pack/croix-rouge.gif -text
 ecrire/img_pack/deconnecter-24.gif -text
-ecrire/img_pack/deconnecter-24_rtl.gif -text
 ecrire/img_pack/degrade.jpg -text
 ecrire/img_pack/deplierbas.gif -text
 ecrire/img_pack/deplierhaut.gif -text
@@ -127,6 +126,9 @@ ecrire/img_pack/forum-droite_rtl.gif -text
 ecrire/img_pack/forum-interne-24.gif -text
 ecrire/img_pack/forum-vert.gif -text
 ecrire/img_pack/groupe-mot-24.gif -text
+ecrire/img_pack/heures-am.png -text
+ecrire/img_pack/heures-pm.png -text
+ecrire/img_pack/heures-tout.png -text
 ecrire/img_pack/historique-24.gif -text
 ecrire/img_pack/image-24.gif -text
 ecrire/img_pack/interface-display.gif -text
@@ -138,6 +140,8 @@ ecrire/img_pack/langues-24.gif -text
 ecrire/img_pack/langues-modif-12.gif -text
 ecrire/img_pack/langues-off-12.gif -text
 ecrire/img_pack/logo-spip.gif -text
+ecrire/img_pack/loupe-moins.gif -text
+ecrire/img_pack/loupe-plus.gif -text
 ecrire/img_pack/loupe.gif -text
 ecrire/img_pack/m_envoi.gif -text
 ecrire/img_pack/m_envoi_bleu.gif -text

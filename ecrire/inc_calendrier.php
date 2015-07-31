@@ -279,27 +279,35 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 		$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
 		$retour .= http_calendrier_href($script . "type=$type&set_echelle=" .
 				floor($echelle * 1.5) . "&$args",
-				"<img src='$img_dir/loupe.gif' alt='zoom-' />");
+				"<img src='$img_dir/loupe-moins.gif' alt='zoom-' />");
 		$retour .= http_calendrier_href(($script . "type=$type&set_echelle=" .
 			floor($echelle / 1.5) .
 			"&$args"),
-					"<img src='$img_dir/loupe.gif'  alt='zoom-' />");
- 	
- 		$retour .= "<span style='font-size: 9px'>";
-		$retour .= http_calendrier_href(($script . "type=$type".
+					"<img src='$img_dir/loupe-plus.gif'  alt='zoom+' />");
+
+ 		$retour .= "&nbsp;&nbsp;";
+	
+	
+		if ($GLOBALS['partie_cal'] == "tout") $img_att = " class='navigation-bouton-desactive'";
+		else $img_att = "";
+		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=tout" .
 			"&$args"),
-					"&nbsp;[tout]");
-		$retour .= http_calendrier_href(($script . "type=$type".
+					"<img src='$img_dir/heures-tout.png' alt='tout' class='format_png' /></span>");
+
+		if ($GLOBALS['partie_cal'] == "matin") $img_att = " class='navigation-bouton-desactive'";
+		else $img_att = "";
+		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=matin" .
 			"&$args"),
-					"[AM]");
-		$retour .= http_calendrier_href(($script . "type=$type".
+					"<img src='$img_dir/heures-am.png' alt='AM' class='format_png' /></span>");
+
+		if ($GLOBALS['partie_cal'] == "soir") $img_att = " class='navigation-bouton-desactive'";
+		else $img_att = "";
+		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=soir" .
 			"&$args"),
-					"[PM]");
-		$retour .= "</span>";
- 	
+					"<img src='$img_dir/heures-pm.png' alt='PM' class='format_png' /></span>");
  	}
  
  
