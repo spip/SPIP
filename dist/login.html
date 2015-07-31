@@ -5,7 +5,7 @@
 #CACHE{24 * 3600}
 #HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title><:login_acces_prive:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
@@ -19,12 +19,12 @@
 	body.page_login { text-align: center; font: 1em Verdana, Tahoma, Geneva, Helvetica, sans-serif; }
 	#minipres { width:30em;}
 	.formulaire_spip { text-align: #LANG_LEFT; font-size: 0.8em; }
-	.formulaire_spip fieldset {border: 1px solid #BABDB6; padding:10px;font-size:1em;}
+	.formulaire_spip fieldset {border: 1px solid #BABDB6; padding:10px;font-size: 1em;}
 	.formulaire_menu_lang { float: #LANG_RIGHT; }
 	.formulaire_menu_lang label { display: none; }
 	.formulaire_login { clear: both; }
 	.spip_logos { float: right; padding-left: 10px; }
-	.forml,input {font-size: 1.0em;}
+	.forml,input { font-size: 1.0em;}
 	p .forml { width:20em; font-family: inherit; }
 	.spip_bouton input { float: #LANG_RIGHT; }
 	.reponse_formulaire { font-weight: bold; color: red; }

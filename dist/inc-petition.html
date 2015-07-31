@@ -21,14 +21,14 @@
 		<tr>
 		<td class="signature-date">[(#DATE|affdate_jourcourt)]</td>
 		<td class="signature-nom"><div class="#EDIT{qui}">#NOM</div>[
-		<div class="#EDIT{hyperlien}"><a href="(#URL_SITE)" class="spip_out" style="font-size:small;">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]</td>
+		<div class="#EDIT{hyperlien}"><a href="(#URL_SITE)" class="spip_out" style="font-size: small;">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]</td>
 		[<td class="signature-message"><div class="#EDIT{message}">(#MESSAGE|PtoBR)</div></td>]
 		</tr>
 </BOUCLE_signatures>
 	</tbody>
 	</table>
 
-	[<p class="pagination">(#PAGINATION)</p>]
+	[<p class="pagination"><:suite:> : (#PAGINATION)</p>]
 
 </div>
 </B_signatures>
