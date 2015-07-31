@@ -27,10 +27,10 @@
 [(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})]
 <input type="hidden" name="session_login_hidden" value="(#ENV{login})" />
 <script type="text/javascript"><!--
-document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a href='[(#ENV{action2}
+document.write("<p><:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><br />&#91;<a href='[(#ENV{action2}
 	|parametre_url{cookie_admin,non}
 	|parametre_url{url,#ENV*{url}}
-	|parametre_url{retour,#ENV*{self}})]'><:login_autre_identifiant:><" + "/a>&#93;")
+	|parametre_url{retour,#ENV*{self}})]'><:login_autre_identifiant:><" + "/a>&#93;</p>")
 //--></script>
 <noscript>
 	<p class="reponse_formulaire"><:login_non_securise:> <a href="[(#ENV{action})]"><:login_recharger:></a>.</p>
@@ -57,10 +57,11 @@ document.getElementById('var_login[_(#ENV{login})]').focus();
 	(#ENV{auth_http}|form_hidden)
 	]
 	<fieldset>
-	<legend><:login_preferez_refuser:></legend>
+	<legend><:login_sans_cookiie:></legend>
+	<p><:login_preferez_refuser:>
 	<input type="hidden" name="essai_auth_http" value="oui"/>
 	[<input type="hidden" name="url" value="(#ENV{url})"/>]
-	<input type="submit" class="spip_bouton" value="<:login_sans_cookiie:>"/>
+	<input type="submit" class="spip_bouton" value="<:login_sans_cookiie:>"/></p>
 	</fieldset>
 	</form>
 ]
