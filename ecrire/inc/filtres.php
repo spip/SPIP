@@ -2005,9 +2005,6 @@ function vider_attribut ($balise, $attribut) {
 /**
  * Un filtre pour déterminer le nom du statut des inscrits
  *
- * @use tester_statut_inscription()
- * 
- *
  * @deprecated a virer en 3.1
  *
  * @param void|int $id

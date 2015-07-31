@@ -1266,7 +1266,7 @@ function acces_restreint_rubrique($id_rubrique) {
  * 
  * Fonction utilisee dans des autorisations des boutons / menus du prive des objets enfants (articles, breves, sites)
  *
- * @param string $table  	la table a verifier
+ * @param string $table     la table a vérifier
  * @return bool             true si un parent existe
  */
 function verifier_table_non_vide($table='spip_rubriques') {
@@ -1277,20 +1277,24 @@ function verifier_table_non_vide($table='spip_rubriques') {
 }
 
 /**
- * Une autorisation determiner la possibilite de s'inscire pour un statut et un id_rubrique,
- * a l'aide de la liste globale des statuts (tableau mode => nom du mode)
- * Utile pour le formulaire d'inscription.
- * Par defaut, seuls 6forum et 1comite possibles, les autres sont en false
- * pour un nouveau mode il suffit de definir l'autorisation specifique
+ * Détermine la possibilité de s'inscire sur le site
  *
- * @param $faire
- * @param $quoi
- *   statut auteur demande
- * @param $id
- *   id_rubrique eventuel (pas utilise ici, utilise dans des usages persos)
- * @param $qui
- * @param $opt
- * @return bool
+ * Pour un statut et un éventuel id_rubrique donné, indique,
+ * à l'aide de la liste globale des statuts (tableau mode => nom du mode)
+ * si le visiteur peut s'inscrire sur le site.
+ * 
+ * Utile pour le formulaire d'inscription.
+ * 
+ * Par défaut, seuls `6forum` et `1comite` sont possibles, les autres sont
+ * en `false`. Pour un nouveau mode il suffit de définir l'autorisation
+ * spécifique.
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Statut demandé
+ * @param  int    $id    Identifiant éventuel, par exemple de rubrique
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_inscrireauteur_dist($faire, $quoi, $id, $qui, $opt){
 

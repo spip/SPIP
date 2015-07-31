@@ -47,15 +47,22 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 /**
  * Calculs de paramètres de contexte automatiques pour la balise FORMULAIRE_INSCRIPTION
  *
+ * En absence de mode d'inscription transmis à la balise, celui-ci est
+ * calculé en fonction de la configuration :
+ *
+ * - '1comite' si les rédacteurs peuvent s'inscrire,
+ * - '6forum' sinon si les forums sur abonnements sont actifs,
+ * - rien sinon.
+ * 
  * @example
  *     ```
- *     [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+ *     #FORMULAIRE_INSCRIPTION
+ *     [(#FORMULAIRE_INSCRIPTION{mode_inscription, #ID_RUBRIQUE})]
  *     ```
- * @use tester_config()
- *
+ * 
  * @param array $args
- *   - args[0] un statut d'auteur (redacteur par defaut)
- *   - args[1] indique la rubrique eventuelle de proposition
+ *   - args[0] un statut d'auteur (rédacteur par defaut)
+ *   - args[1] indique la rubrique éventuelle de proposition
  * @param array $context_compil
  *   Tableau d'informations sur la compilation
  * @return array|string
