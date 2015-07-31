@@ -1798,7 +1798,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 	}
 
 	return $res .
-	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_ecrire('spip_style', $args_color) .
+	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_public('spip_action.php', "action=style&$args_color") .
 	  "'>\n" .
 	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 

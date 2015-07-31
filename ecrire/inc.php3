@@ -109,10 +109,8 @@ $spip_display = $prefs['display'];
 $choix_couleur = $prefs['couleur'];
 if (!isset($couleurs_spip[$choix_couleur])) $choix_couleur = 1;
 
-if (!isset($couleur_foncee))
-	$couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
-if (!isset($couleur_claire))
-	$couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
+$couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
+$couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
 
 define (_ATTRIBUTES_BODY,  "
 link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
