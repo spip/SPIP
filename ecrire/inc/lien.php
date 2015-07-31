@@ -20,9 +20,11 @@ include_spip('base/abstract_sql');
 // et en plus on veut pouvoir les passer en pipeline
 //
 
-// http://doc.spip.org/@traiter_raccourci_lien_lang
-function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='')
-{
+function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='') {
+	static $u=null;
+	if (!$u) $u=url_de_base();
+	$typo = false;
+
 	// Si une langue est demandee sur un raccourci d'article, chercher
 	// la traduction ;
 	// - [{en}->art2] => traduction anglaise de l'article 2, sinon art 2
@@ -48,11 +50,13 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 		$mime = isset($lien['mime']) ? " type='".$lien['mime']."'" : "";
 		$lien = $lien['url'];
 	}
-	if (substr($lien,0,1) == '#')  # ancres pures (internes a la page)
+
+	$lien = trim($lien);
+	if (strncmp($lien,"#",1) == 0)  # ancres pures (internes a la page)
 		$class = 'spip_ancre';
-	elseif (preg_match('/^\s*mailto:/',$lien)) # pseudo URL de mail
+	elseif (strncasecmp($lien,'mailto:',7)==0) # pseudo URL de mail
 		$class = "spip_mail";
-	elseif (preg_match('/^<html>/',$texte)) # cf traiter_lien_explicite
+	elseif (strncmp($texte,'<html>',6)==0) # cf traiter_lien_explicite
 		$class = "spip_url spip_out";
 	elseif (!$class) $class = "spip_out"; # si pas spip_in|spip_glossaire
 
@@ -62,20 +66,24 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 
 	$lang = ($hlang ? " hreflang='$hlang'" : '');
 
-	if ($title) $title = ' title="'.texte_backend($title).'"';
+	if ($title) $title = ' title="'.attribut_html($title).'"';
 
 	// rel=external pour les liens externes
-	if (preg_match(',^https?://,S', $lien)
-	AND false === strpos("$lien/", url_de_base()))
+	if ((strncmp($lien,'http://',7)==0 OR strncmp($lien,'https://',8)==0)
+	  AND strncmp("$lien/", $u ,strlen($u))!=0)
 		$rel = trim("$rel external");
 	if ($rel) $rel = " rel='$rel'";
 
-	$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
-
+	if (traiter_modeles($texte, false, $echapper ? 'TYPO' : '', $connect)==$texte){
+		$texte = typo($texte, true, $connect);
+		$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
+		return $lien;
+	}
 	# ceci s'execute heureusement avant les tableaux et leur "|".
 	# Attention, le texte initial est deja echappe mais pas forcement
 	# celui retourne par calculer_url.
 	# Penser au cas [<imgXX|right>->URL], qui exige typo('<a>...</a>')
+	$lien = "<a href=\"".str_replace('"', '&quot;', $lien)."\" class='$class'$lang$title$rel$mime>$texte</a>";
 	return typo($lien, true, $connect);
 }
 
@@ -86,20 +94,53 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
 
 // http://doc.spip.org/@expanser_liens
-function expanser_liens($texte, $connect='')
+function expanser_liens($t, $connect='')
 {
-	$texte = pipeline('pre_liens', $texte);
-	$sources = $inserts = $regs = array();
-	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {
-		$lien = charger_fonction('lien', 'inc');
-		foreach ($regs as $k => $reg) {
 
+	$t = pipeline('pre_liens', $t);
+
+	expanser_un_lien($connect,'init');
+
+	if (strpos($t, '->') !== false)
+		$t = preg_replace_callback (_RACCOURCI_LIEN, 'expanser_un_lien',$t);
+
+	// on passe a traiter_modeles la liste des liens reperes pour lui permettre
+	// de remettre le texte d'origine dans les parametres du modele
+	$t = traiter_modeles($t, false, false, $connect, expanser_un_lien('','sources'));
+
+ 	$t = corriger_typo($t);
+
+	$t = expanser_un_lien($t,'reinsert');
+
+	return $t;
+}
+
+
+function expanser_un_lien($reg, $quoi='echappe'){
+	static $pile = array();
+	static $inserts;
+	static $sources;
+	static $regs;
+	static $k = 0;
+	static $lien;
+	static $connect='';
+
+	switch ($quoi){
+		case 'init':
+			if (!$lien) $lien = charger_fonction('lien', 'inc');
+			array_push($pile,array($inserts,$sources,$regs,$connect,$k));
+			$inserts = $sources = $regs = array();
+			$connect = $reg; // stocker le $connect pour les appels a inc_lien_dist
+			$k=0;
+			return;
+			break;
+		case 'echappe':
 			$inserts[$k] = '@@SPIP_ECHAPPE_LIEN_' . $k . '@@';
 			$sources[$k] = $reg[0];
-			$texte = str_replace($sources[$k], $inserts[$k], $texte);
 
+			#$titre=$reg[1];
 			list($titre, $bulle, $hlang) = traiter_raccourci_lien_atts($reg[1]);
-			$r = $reg[count($reg)-1];
+			$r = end($reg);
 			// la mise en lien automatique est passee par la a tort !
 			// corrigeons pour eviter d'avoir un <a...> dans un href...
 			if (strncmp($r,'<a',2)==0){
@@ -111,15 +152,18 @@ function expanser_liens($texte, $connect='')
 				$r = $href;
 			}
 			$regs[$k] = $lien($r, $titre, '', $bulle, $hlang, '', $connect);
-		}
+			return $inserts[$k++];
+			break;
+		case 'reinsert':
+			if (count($inserts))
+				$reg = str_replace($inserts, $regs, $reg);
+			list($inserts,$sources,$regs,$connect,$k) = array_pop($pile);
+			return $reg;
+			break;
+		case 'sources':
+			return array($inserts, $sources);
+			break;
 	}
-
-	// on passe a traiter_modeles la liste des liens reperes pour lui permettre
-	// de remettre le texte d'origine dans les parametres du modele
-	$texte = traiter_modeles($texte, false, false, $connect, array($inserts, $sources));
- 	$texte = corriger_typo($texte);
-	$texte = str_replace($inserts, $regs, $texte);
-	return $texte;
 }
 
 // Meme analyse mais pour eliminer les liens
@@ -170,7 +214,8 @@ function traiter_raccourci_lien_atts($texte) {
 
 	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
-	if (preg_match(_RACCOURCI_ATTRIBUTS, $texte, $m)) {
+	if (strpbrk($texte, "|{") !== false AND
+	  preg_match(_RACCOURCI_ATTRIBUTS, $texte, $m)) {
 
 		$n =count($m);
 		// |infobulle ?
@@ -182,15 +227,15 @@ function traiter_raccourci_lien_atts($texte) {
 				if (traduire_nom_langue($m[5]) <> $m[5]) {
 					$hlang = $m[5];
 				} elseif (!$m[5]) {
-					$hlang = test_espace_prive() ? 
+					$hlang = test_espace_prive() ?
 					  $GLOBALS['lang_objet'] : $GLOBALS['spip_lang'];
 				// sinon c'est un italique
 				} else {
 					$m[1] .= $m[4];
 				}
-			
-	// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
-	// est peut-etre une langue
+
+			// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
+			// est peut-etre une langue
 			} else if (preg_match('/^[a-z_]+$/', $m[3])) {
 			// si c'est un code de langue connu, on met un hreflang
 			// mais on laisse le title (c'est arbitraire tout ca...)

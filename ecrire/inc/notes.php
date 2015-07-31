@@ -92,14 +92,15 @@ function inc_notes_dist($arg,$operation='traiter')
 	}
 }
 
-define('_RACCOURCI_NOTES', ', *\[\[(\s*(<([^>\'"]*)>)?(.*?))\]\],msS');
+define('_RACCOURCI_NOTES', ',\[\[(\s*(<([^>\'"]*)>)?(.*?))\]\],msS');
 
 function traiter_raccourci_notes($letexte, $marqueur_notes)
 {
 	global $compt_note,   $les_notes, $notes_vues;
 	global $ouvre_ref, $ferme_ref;
 
-	if (!preg_match_all(_RACCOURCI_NOTES, $letexte, $m, PREG_SET_ORDER))
+	if (strpos($letexte, '[[') === false
+	OR !preg_match_all(_RACCOURCI_NOTES, $letexte, $m, PREG_SET_ORDER))
 		return array($letexte, array());
 
 	// quand il y a plusieurs series de notes sur une meme page
@@ -127,7 +128,8 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		$att = ($notes_vues[$ancre]++) ? '' : " id='nh$ancre'";
 
 		// creer le popup 'title' sur l'appel de note
-		if ($title = supprimer_tags(propre($note_texte))) {
+		// propre est couteux => nettoyer_raccourcis_typo
+		if ($title = supprimer_tags(nettoyer_raccourcis_typo($note_texte))) {
 			$title = " title='" . couper($title,80) . "'";
 		}
 
@@ -140,7 +142,7 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		if ($nom) $nom = "$ouvre_ref<a href='#nb$ancre' class='spip_note' rel='footnote'$title$att>$nom</a>$ferme_ref";
 
 		$pos = strpos($letexte, $note_source);
-		$letexte = substr($letexte, 0, $pos)
+		$letexte = rtrim(substr($letexte, 0, $pos), ' ')
 		. code_echappement($nom)
 		. substr($letexte, $pos + strlen($note_source));
 
@@ -160,11 +162,12 @@ function traiter_les_notes($notes) {
 			list($ancre, $nom, $texte) = $r;
 			$atts = " href='#nh$ancre' class='spip_note' title='$title $ancre' rev='footnote'";
 			$mes_notes .= "\n\n"
-			. "<p id='nb$ancre'". ($GLOBALS['class_spip'] ? " class='spip_note'" : "") .">"
+			. "<div id='nb$ancre'><p". ($GLOBALS['class_spip'] ? " class='spip_note'" : "") .">"
 			. code_echappement($nom
 				? "$ouvre_note<a$atts>$nom</a>$ferme_note"
 				: '')
-			. $texte;
+			. $texte
+			.'</div>';
 		}
 		$mes_notes = propre($mes_notes);
 	}
