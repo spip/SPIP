@@ -20,17 +20,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // le processus.
 // Sinon, retourne la ressource interrogeable par spip_abstract_fetch.
 // Recoit en argument:
-// - le tableau des champs a` ramener
-// - le tableau des tables a` consulter
-// - le tableau des conditions a` remplir
-// - le crite`re de regroupement
-// - le crite`re de classement
-// - le crite`re de limite
-// - une sous-requete e'ventuelle (MySQL > 4.1)
-// - un compteur de sous-requete
-// - le nom de la table
+// - le tableau des champs a` ramener (Select)
+// - le tableau des tables a` consulter (From)
+// - le tableau des conditions a` remplir (Where)
+// - le crite`re de regroupement (Group by)
+// - le tableau de classement (Order By)
+// - le crite`re de limite (Limit)
+// - une sous-requete e'ventuelle (inutilisee pour le moment. MySQL > 4.1)
+// - le tableau des des post-conditions a remplir (Having)
+// - le nom de la table (pour le message d'erreur e'ventuel)
 // - le nom de la boucle (pour le message d'erreur e'ventuel)
-// - le serveur sollicite
+// - le serveur sollicite (pour retrouver la connexion)
 
 function spip_abstract_select (
 	$select = array(), $from = array(), $where = array(),
@@ -116,11 +116,11 @@ function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 function spip_abstract_fetsel(
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
-	$sousrequete = '', $cpt = '',
+	$sousrequete = '', $having = array(),
 	$table = '', $id = '', $serveur='') {
 	return spip_abstract_fetch(spip_abstract_select(
 $select, $from, $where,	$groupby, $orderby, $limit,
-$sousrequete, $cpt, $table, $id, $serveur),
+$sousrequete, $having, $table, $id, $serveur),
 				   $serveur);
 }
 
