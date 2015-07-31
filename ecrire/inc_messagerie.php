@@ -74,11 +74,11 @@ fin_cadre_relief();
 echo
     debut_cadre_enfonce('',true) .
     "<div class='verdana1'>"._T("calendrier_synchro") .
-    "<a href='synchro.php3' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
-    "<td><a href='synchro.php3'><div class='cell-i'>"
+    "<a href=" . http_php_script("synchro","") . " class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
+    "<td><a href=" . http_php_script("synchro","") . "><div class='cell-i'>"
     . http_img_pack("rien.gif", ' ', http_style_background('synchro-24.gif', "; background-repeat: no-repeat; background-position: center center;"))
     . "</div></a></td>\n"
-    . "<td class='cellule-h-lien'><a href='synchro.php3' class='cellule-h'>" 
+    . "<td class='cellule-h-lien'><a href=" . http_php_script("synchro","") . " class='cellule-h'>" 
     . _T("icone_suivi_activite")
     . "</a></td>\n</tr></table></a>\n" ."</div>" .
     fin_cadre_enfonce(true);
@@ -153,7 +153,7 @@ if (spip_num_rows($result) > 0) {
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' border='0'> <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom</a> ($total)</div></div>";
+		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' border='0'> <a href=" . http_php_script("auteurs_edit","id_auteur=$id_auteur") . ">$nom</a> ($total)</div></div>";
 		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' style='background-color: #eeeeee;'>";
 	}
 	echo "</td></tr></table>";

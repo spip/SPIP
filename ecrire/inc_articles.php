@@ -570,7 +570,7 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='art
 				if ($options == "avancees") {
 					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_article</b></div>";
 				}
-				echo "<a class='$ze_statut' style='font-size: 10px;' href='articles.php3?id_article=$ze_article'>$numero$ze_titre</a>";
+				echo "<a class='$ze_statut' style='font-size: 10px;' href=" . http_php_script("articles","id_article=$ze_article") . ">$numero$ze_titre</a>";
 			}
 			echo "</div>";
 			echo "</div>";
@@ -900,7 +900,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 				} else {
 				  if ($connect_statut=='0minirezo'
 				  AND $connect_toutes_rubriques)
-				  	$vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'>". 
+				  	$vals[] = "<a href=" . http_php_script("articles","id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad") . ">". 
 				    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'", _T('trad_reference')) . "</a>";
 				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
 				}
@@ -909,7 +909,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 				$s = typo($titre_trad);
 				if ($id_article_trad != $id_article) 
-					$s = "<a href='articles.php3?id_article=$id_article_trad'>$s</a>";
+					$s = "<a href=" . http_php_script("articles","id_article=$id_article_trad") . ">$s</a>";
 				if ($id_article_trad == $id_trad)
 					$s .= " "._T('trad_reference');
 

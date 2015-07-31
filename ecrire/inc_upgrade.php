@@ -101,7 +101,7 @@ function demande_maj_version()
 	_T('info_procedure_maj_version'),
 	"</h4>",
 	_T('info_administrateur_site_01'),
-	" <a href='upgrade.php3'>",
+	" <a href=" . http_php_script("upgrade","") . ">",
 	_T('info_administrateur_site_02'),
 	"</a></blockquote></blockquote><p>";
 	fin_page();

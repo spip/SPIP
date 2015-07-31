@@ -101,7 +101,7 @@ else {
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
-		echo "<li><b><a href='statistiques_visites.php3'>"._T('info_tout_site')."</a></b>";
+		echo "<li><b><a href=" . http_php_script("statistiques_visites","") . ">"._T('info_tout_site')."</a></b>";
 	} else {
 		echo "<li><b>"._T('titre_page_articles_tous')."</b>";
 	}
@@ -146,7 +146,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li value='$liste'><b>$titre</b>";
 				} else {
-					echo "\n<li value='$liste'><a href='statistiques_visites.php3?id_article=$l_article' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a>";
+					echo "\n<li value='$liste'><a href=" . http_php_script("statistiques_visites","id_article=$l_article") . " title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a>";
 				}
 			}
 		}
@@ -168,7 +168,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li value='$numero'><a href=" . http_php_script("statistiques_visites","id_article=$l_article") . " title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
 		}
@@ -206,7 +206,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li value='$numero'><a href=" . http_php_script("statistiques_visites","id_article=$l_article") . " title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";

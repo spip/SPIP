@@ -47,7 +47,7 @@ SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
-			 'avant' => "<a href='articles_forum.php3?id_article=$id_article'><font color='red'>"._T('lien_forum_public'). "</font></a><br>");
+			 'avant' => "<a href=" . http_php_script("articles_forum","id_article=$id_article") . "><font color='red'>"._T('lien_forum_public'). "</font></a><br>");
 	  }
 	}
 	else if ($forum_id_rubrique > 0) {

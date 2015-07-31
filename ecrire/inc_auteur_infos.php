@@ -544,7 +544,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
 				while ($row_admin = spip_fetch_array($result_admin)) {
 					$id_rubrique = $row_admin["id_rubrique"];
-					echo "<li><a href='naviguer.php3?id_rubrique=$id_rubrique'>", typo($row_admin["titre"]), "</a>";
+					echo "<li><a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . ">", typo($row_admin["titre"]), "</a>";
 
 					if ($connect_toutes_rubriques
 					AND $connect_id_auteur != $id_auteur) {
