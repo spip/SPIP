@@ -337,7 +337,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 
 	global $spip_lang_left,$browser_name;
 
-	$evt = (eregi("msie", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
+	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
 
 	reset($largeurs);
 	if ($styles) reset($styles);
@@ -1152,7 +1152,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	else if ($statut=="original") {
 		$res .= "\n<div style='border: 1px solid green; padding: 5px;'>";
 	}
-
+	$res .= "<table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td>";
 	$res .= "<div style='font-weight: normal;'>". date_interface($date_heure) . "&nbsp;&nbsp;";
 
 	if ($id_auteur) {
@@ -1196,6 +1196,8 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui")
 		$res .= afficher_forum_mots($id_forum);
+
+	$res .= "</td></tr></table>";
 
 	if ($statut == "off" OR $statut == "prop") $res .= "</div>";
 
@@ -1431,15 +1433,14 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	return $res;
 }
 
-// l'argument align n'est plus jamais fourni
 // http://doc.spip.org/@icone
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display;
 
 	if ($fonction == "supprimer.gif") {
-		$style = '-danger';
+		$style = 'icone36-danger';
 	} else {
-		$style = '';
+		$style = 'icone36';
 		if (strlen($fonction) < 3) $fonction = "rien.gif";
 	}
 
@@ -1461,31 +1462,34 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$alt = $texte;
 	}
 
+	$size = 24;
+	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
+		$size = $match[1];
 	if ($spip_display != 1 AND $spip_display != 4){
 		if ($fonction != "rien.gif"){
-		  $icone = http_img_pack($fonction, $alt, "$title width='24' height='24'\n" .
+		  $icone = http_img_pack($fonction, $alt, "$title width='$size' height='$size'\n" .
 					  http_style_background($fond, "no-repeat center center"));
 		}
 		else {
-			$icone = http_img_pack($fond, $alt, "$title width='24' height='24'");
+			$icone = http_img_pack($fond, $alt, "$title width='$size' height='$size'");
 		}
 	} else $icone = '';
 
-	if ($spip_display != 3){
-		$icone .= "<span>$texte</span>";
-	}
+	if ($spip_display != 3)	$icone .= "<span>$texte</span>";
 
 	// cas d'ajax_action_auteur: faut defaire le boulot 
 	// (il faudrait fusionner avec le cas $javascript)
 	if (preg_match(",^<a\shref='([^']*)'([^>]*)>(.*)</a>$,i",$lien,$r))
-	  list($x,$lien,$atts,$texte)= $r;
+		list($x,$lien,$atts,$texte)= $r;
 	else $atts = '';
-	$lien = "\nhref='$lien'$atts";
-
+	
 	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'"
-	. ">\n<tr><td class='icone36$style'><a"
+	. ($align ? " align='$align'" : '')
+	. ">\n<tr><td class='$style'><a"
+	. $atts
+	. "\nhref='"
 	. $lien
-	. '>'
+	. "'>"
 	. $icone
 	. "</a></td></tr></table>\n";
 
