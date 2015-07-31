@@ -69,7 +69,6 @@ function liste_metas()
 
 		'activer_moteur' => 'non',
 		'articles_versions' => 'non',
-		'articles_ortho' => 'non',
 		'preview' => 'non',
 		'activer_statistiques' => 'non',
 
@@ -253,7 +252,6 @@ function appliquer_modifs_config() {
 
 		'activer_moteur',
 		'articles_versions',
-		'articles_ortho',
 		'preview',
 		'activer_statistiques',
 

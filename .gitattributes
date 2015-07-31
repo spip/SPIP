@@ -132,7 +132,6 @@ dist/images/mot-cle-24.gif -text
 dist/images/naviguer-site.png -text
 dist/images/noeud_moins.gif -text
 dist/images/noeud_plus.gif -text
-dist/images/ortho-24.gif -text
 dist/images/pense-bete.gif -text
 dist/images/petite-cle.gif -text
 dist/images/petition-24.gif -text
@@ -450,7 +449,6 @@ ecrire/exec/aide_index.php -text
 ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
 ecrire/exec/articles_forum.php -text
-ecrire/exec/articles_ortho.php -text
 ecrire/exec/articles_page.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/articles_versions.php -text

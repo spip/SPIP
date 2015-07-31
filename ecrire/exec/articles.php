@@ -70,10 +70,8 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$ps = $row["ps"];
 	$date = $row["date"];
 	$date_redac = $row["date_redac"];
-	$visites = $row["visites"];
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
-	$id_version = $row["id_version"];
 	
 	if (substr($chapo, 0, 1) != '=')
 	  $virtuel ='';
@@ -108,8 +106,16 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$instituer_article = charger_fonction('instituer_article', 'inc');
 
-	$res =  boite_info_articles($id_article, $statut_article, $visites, $id_version)
+	$boite = pipeline ('boite_infos', array('data' => '',
+		'args' => array(
+			'type'=>'article',
+			'id' => $id_article,
+			'row' => $row
+		)
+	));
 
+	$res =
+		debut_boite_info(true). $boite . fin_boite_info(true)
 	.	$icone
 
 	.	boites_de_config_articles($id_article)
@@ -208,37 +214,6 @@ $(\"form.form_upload\").async_upload(async_upload_portfolio_documents);
 	return "<div id='portfolio'>" . $documenter($id, 'article', 'portfolio', $flag_editable) . "</div><br />"
 	. "<div id='documents'>" . $documenter($id, 'article', 'documents', $flag_editable) . "</div>"
 	. $res;
-}
-
-// http://doc.spip.org/@boite_info_articles
-function boite_info_articles($id_article, $statut_article, $visites, $id_version)
-{
-	$res = "\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>" 
-	. _T('info_numero_article')
-	.  "<br /><span class='spip_xx-large'>"
-	.  $id_article
-	.  '</span></div>'
-	. voir_en_ligne('article', $id_article, $statut_article, 'racine-24.gif', false);
-
-	if ($statut_article == 'publie'
-	AND $visites > 0
-	AND $GLOBALS['meta']["activer_statistiques"] != "non"
-	AND autoriser('voirstats', 'article', $id_article)) {
-		$res .= icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), generer_url_ecrire("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif", false);
-	}
-
-	if (($GLOBALS['meta']["articles_versions"]=='oui')
-	AND $id_version>1 
-	AND autoriser('voirrevisions', 'article', $id_article))
-		$res .= icone_horizontale(_T('info_historique_lien'), generer_url_ecrire("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif", false);
-
-	// Correction orthographique
-	if ($GLOBALS['meta']['articles_ortho'] == 'oui') {
-		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
-		$res .= icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id_article"), "ortho-24.gif", "rien.gif", false, $js_ortho);
-	}
-
-	return  debut_boite_info(true). $res . fin_boite_info(true);
 }
 
 //

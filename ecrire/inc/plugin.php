@@ -698,21 +698,38 @@ function affiche_bloc_plugin($plug_file, $info) {
 	$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
 	$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
 
+
+	// TODO: le traiter_multi ici n'est pas beau
+	// cf. description du plugin/_stable_/ortho/plugin.xml
 	if (isset($info['description']))
-		$s .= "<hr/>" . propre($info['description']) . "<br/>";
+		$s .= "<hr/>" . plugin_propre($info['description']) . "<br/>";
 
 	if (isset($info['auteur']))
-		$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
+		$s .= "<hr/>" . _T('auteur') .' '. plugin_propre($info['auteur']) . "<br/>";
 
 	if (trim($info['lien'])) {
 		if (preg_match(',^https?://,iS', $info['lien']))
-			$s .= "<hr/>" . _T('info_url') .' '. propre("[->".$info['lien']."]") . "<br/>";
+			$s .= "<hr/>" . _T('info_url') .' '. plugin_propre("[->".$info['lien']."]") . "<br/>";
 		else
-			$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
+			$s .= "<hr/>" . _T('info_url') .' '. plugin_propre($info['lien']) . "<br/>";
 	}
 	$s .= "</div>";
 
 	return $s;
 }
+
+function plugin_propre($texte) {
+	$mem = $GLOBALS['toujours_paragrapher'];
+	$GLOBALS['toujours_paragrapher'] = false;
+	$regexp = "|<:([^>]*):>|";
+	if (preg_match_all($regexp, $texte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs)
+		$texte = str_replace($regs[0],
+		_T('spip/ecrire/public:'.$regs[1]), $texte);
+	$texte = propre($texte);
+	$GLOBALS['toujours_paragrapher'] = $mem;
+	return $texte;
+}
+
 
 ?>
