@@ -77,8 +77,12 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	$id_trad = $row["id_trad"];
 	$id_version = $row["id_version"];
 	
-	$virtuel =  (substr($chapo, 0, 1) == '=')  ? substr($chapo, 1) : '';
-
+	if (substr($chapo, 0, 1) != '=')
+	  $virtuel ='';
+	else {
+	  $virtuel = chapo_redirige(substr($chapo, 1));
+	  $virtuel = $virtuel[3];
+	}
 
 	$statut_rubrique = autoriser('publierdans', 'rubrique', $id_rubrique);
 	$flag_editable = autoriser('modifier', 'article', $id_article);
