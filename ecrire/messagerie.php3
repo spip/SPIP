@@ -14,7 +14,7 @@ if ($detruire_message) {
 
 
 debut_page("Votre messagerie", "messagerie", "messagerie");
-debut_gauche();
+debut_gauche("messagerie");
 
 
 debut_boite_info();

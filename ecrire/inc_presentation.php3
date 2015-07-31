@@ -1563,7 +1563,7 @@ function fin_cadre_formulaire(){
 // Debut de la colonne de gauche
 //
 
-function debut_gauche() {
+function debut_gauche($rubrique = "asuivre") {
 	global $connect_statut, $cookie_admin;
 	global $REQUEST_URI;
 	global $options;
@@ -1605,33 +1605,35 @@ function debut_gauche() {
 	}
 
 	if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
-	
 		if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-		 	$query2 = "SELECT * FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
+		 	$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
 			$result_auteurs = spip_query($query2);
 			$nb_connectes = mysql_num_rows($result_auteurs);
 		}
 
-		if ($options == "avancees" OR $nb_connectes > 0) debut_cadre_relief("messagerie-24.gif");
-		if ($options == "avancees") {
+		$flag_cadre = ($options == "avancees" AND ($rubrique == "messagerie" OR $nb_connectes > 0));
+		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
+		if ($options == "avancees" AND $rubrique == "messagerie") {
 			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
 			echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
 			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a><p>";
 		}
-		
-		if ($nb_connectes > 0) {
+
+		if ($flag_cadre) {
 			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
-			echo "<p><b>Actuellement en ligne&nbsp;:</b>";
-		
-			while($row = mysql_fetch_array($result_auteurs)){
-				$id_auteur = $row["id_auteur"];
-				$nom_auteur = typo($row["nom"]);
-				echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-			}	
+			if ($nb_connectes > 0) {
+				echo "<b>Actuellement en ligne&nbsp;:</b>";
+				while ($row = mysql_fetch_array($result_auteurs)) {
+					$id_auteur = $row["id_auteur"];
+					$nom_auteur = typo($row["nom"]);
+					echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+				}
+			}
+			else echo "Aucun utilisateur n'est en ligne actuellement.";
 			echo "</font>";
 		}
-		if ($options == "avancees" OR $nb_connectes > 0) fin_cadre_relief();
+		if ($flag_cadre) fin_cadre_relief();
 	}	
 
 	if ($options == "avancees") {
