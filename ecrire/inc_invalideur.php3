@@ -60,10 +60,12 @@ function retire_cache($cache) {
 	if ($GLOBALS['flag_ecrire']) return;
 	# spip_log("kill $cache ?");
 	if (preg_match(
-	"|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+$|i",
-	$cache))
+	"|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
+	$cache)) {
 		@unlink($cache);		// supprimer le fichier
 		@unlink($cache.'.NEW');	// et le fichier compagnon s'il existe
+	} else
+		spip_log("Impossible de retirer $cache");
 }
 
 // Supprimer les caches marques "x"
