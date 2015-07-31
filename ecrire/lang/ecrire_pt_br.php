@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'A conexão com a base de dados falhou.',
 'avis_connexion_echec_2' => 'Volte para a página anterior e verifique as informações que você forneceu.',
 'avis_connexion_echec_3' => '<b>N.B.</b> Em diversos servidores, você precisa <b>solicitar</b> a ativação do seu acesso à base de dados antes de poder utilizá-la. Se você não consegue se conectar, verifique se você efetuou esse pedido.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'A conexão ao servidorLDAP falhou.',
 'avis_connexion_ldap_echec_2' => 'Volte para a página anterior e verifique as informações que você forneceu.',
 'avis_connexion_ldap_echec_3' => 'Opcionalmente, não use o suporte LDAP para importar os usuários.',
@@ -118,16 +119,20 @@ risco de destruição da sua base de dados, mal funcionamento generalizado do si
 'en_savoir_plus' => 'Saiba mais',
 'entree_adresse_annuaire' => 'Endereço do catálogo',
 'entree_adresse_email' => 'Seu endereço de e-mail',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Endereço da base de dados',
 'entree_base_donnee_2' => '(Frequentemente este endereço corresponde ao do seu site, às vezes ele corresponde ao nome «localhost», algumas vezes ele deve ser deixado completamente em branco.)',
 'entree_biographie' => 'Biografia curta em poucas palavras.',
 'entree_chemin_acces' => '<b>Informe</b> o caminho de acesso:',
 'entree_cle_pgp' => 'Sua chave PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Conteúdo da seção em poucas palavras.)',
 'entree_identifiants_connexion' => 'Seus identificadores de conexão...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Informe os seus dados de conexão ao seu catálogo LDAP.
 Estas informações deverão ser fornecidas pelo administrador do sistema ou da rede.',
 'entree_infos_perso' => 'Quem é você?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'No interior da seção:',
 'entree_liens_sites' => '<b>Link hipertexto</b> (referência, site a visitar...)',
 'entree_login' => 'Seu login',
@@ -140,13 +145,16 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'entree_nom_fichier' => 'Por favor, entre o nome do arquivo @texte_compresse@:',
 'entree_nom_pseudo' => 'Seu nome ou apelido',
 'entree_nom_pseudo_1' => '(Seu nome ou apelido)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'O nome do seu site',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Nova senha',
 'entree_passe_ldap' => 'Senha',
 'entree_port_annuaire' => 'O número da porta do catálogo',
 'entree_signature' => 'Assinatura',
 'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />',
 'entree_url' => 'O endereço (URL) do seu site',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome',
 'erreur_nom_connect_incorrect' => 'Este nome de servidor não é autorizado',
 'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, você pode desativá-lo.',
@@ -222,7 +230,8 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_activer_cookie' => 'Você pode ativar um <b>cookie de correspondência</b>, que lhe permitirá passar facilmente do site público para o site privado.',
 'info_admin_etre_webmestre' => 'Me conceder direitos de webmaster',
 'info_admin_gere_rubriques' => 'este administrador gerencia as seguintes seções:',
-'info_admin_gere_toutes_rubriques' => 'Este administrador gerencia <b>todas as seções</b>.',
+'info_admin_gere_toutes_rubriques' => 'Este administrador gerencia <b>todas as seções</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Eu sou <b>webmaster</b>',
 'info_admin_statuer_webmestre' => 'Dar a este administrador os direitos de webmaster',
 'info_admin_webmestre' => 'Este administrador é <b>webmaster</b>',
@@ -298,7 +307,7 @@ Estas informações deverão ser fornecidas pelo administrador do sistema ou da 
 'info_contact' => 'Contato',
 'info_contenu_articles' => 'Conteúdo das matérias',
 'info_contributions' => 'Contribuições',
-'info_creation_paragraphe' => '(Para criar parágrafos, basta deixar linhas em branco.)',
+'info_creation_paragraphe' => '(Para criar parágrafos, basta deixar linhas em branco.)', # MODIF
 'info_creation_rubrique' => 'Antes de poder escrever matérias, você deve criar, pelo menos, uma seção.<br />',
 'info_creation_tables' => 'Criação das tabelas da base',
 'info_creer_base' => '<b>Criar</b> uma nova base de dados:',
@@ -362,7 +371,7 @@ os autores excluídos por uma lixeira.',
 'info_liste_redacteurs_connectes' => 'Lista de redatores conectados',
 'info_login_existant' => 'Este login já está cadastrado.',
 'info_login_trop_court' => 'Login muito curto.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Os ícones',
 'info_maximum' => 'máximo:',
 'info_meme_rubrique' => 'Na mesma seção',
@@ -414,7 +423,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_nouvel_article' => 'Nova matéria',
 'info_nouvelle_traduction' => 'Nova tradução:',
 'info_numero_article' => 'MATÉRIA NÚMERO:',
-'info_obligatoire_02' => '[Obrigatório]',
+'info_obligatoire_02' => '[Obrigatório]', # MODIF
 'info_option_accepter_visiteurs' => 'Aceitar a inscrição de visitantes do site público',
 'info_option_faire_suivre' => 'Encaminhar as mensagens dos fóruns aos autores das matérias',
 'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscrição dos visitantes',
@@ -428,7 +437,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_par_statut' => 'por status',
 'info_par_tri' => '\'(por @tri@)\'',
 'info_passe_trop_court' => 'Senha muito curta.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'As duas senhas não são idênticas.',
 'info_pense_bete_ancien' => 'Seus lembretes antigos',
 'info_plus_cinq_car' => 'mais de 5 caracteres',
@@ -483,7 +492,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_site_2' => 'site:',
 'info_site_min' => 'site',
 'info_site_reference_2' => 'Site referenciado',
-'info_site_web' => 'WEBSITE:',
+'info_site_web' => 'WEBSITE:', # MODIF
 'info_sites' => 'sites',
 'info_sites_lies_mot' => 'Os sites referenciados ligados a esta palavra-chave',
 'info_sites_proxy' => 'Utilizar um proxy',
@@ -492,6 +501,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_sous_titre' => 'Subtítulo:',
 'info_statut_administrateur' => 'Administrador',
 'info_statut_auteur' => 'Status deste autor:',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Inscrição a confirmar',
 'info_statut_auteur_autre' => 'Outro status:',
 'info_statut_efface' => 'Excluído',
@@ -509,7 +519,7 @@ Os idiomas já utilizados no site (no topo da lista) não podem ser desativados.
 'info_texte' => 'Texto',
 'info_texte_explicatif' => 'Texto explicativo',
 'info_texte_long' => '(o texto é longo: ele aparecerá em diversas partes que serão recombinadas após validação.)',
-'info_texte_message' => 'Texto da sua mensagem:',
+'info_texte_message' => 'Texto da sua mensagem:', # MODIF
 'info_texte_message_02' => 'Texto da mensagem',
 'info_titre' => 'Título:',
 'info_total' => 'total:',
@@ -565,6 +575,8 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'install_tables_base' => 'Tabelas da base',
 'install_types_db_connus' => 'SPIP pode usar <b>MySQL</b> (a mais ampla), <b>PostgreSQL</b> e <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Atenção: diversos plugins só funcionam com MySQL',
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'redator',
 'intitule_licence' => 'Licença',
 'item_accepter_inscriptions' => 'Aceitar as inscrições',
@@ -755,6 +767,8 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'statut_admin_restreint' => '(admin limitado)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (ícones de documentos, títulos apresentados sob a forma gráfica, funções matemáticas em formato TeX...) ocupam, no diretório @dir@, um total de @taille@.',
 'taille_cache_infinie' => 'Este site não prevê limitação de tamanho do diretório do cache.',
 'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diretório do cache deste site em cerca de <b>@octets@</b>.',
@@ -799,7 +813,7 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 'texte_effacer_base' => 'Apagar a base de dados do SPIP',
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexação',
 'texte_effacer_statistiques' => 'Apagar as estatísticas',
-'texte_en_cours_validation' => 'As matérias e notas abaixo estão propostas para publicação.',
+'texte_en_cours_validation' => 'As matérias e notas abaixo estão propostas para publicação.', # MODIF
 'texte_enrichir_mise_a_jour' => 'Você pode enriquecer a diagramação do seu texto usando «atalhos tipográficos».',
 'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diretório @dossier@?</b><p>
 Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras áreas do seu site (programas externos de estatísticas, por exemplo).</p><p>
@@ -894,8 +908,8 @@ Se o problema persistir, contate o seu serviço de hospedagem.</p>',
 'titre_connexion_ldap' => 'Opções: <b>Sua conexão LDAP</b>',
 'titre_groupe_mots' => 'GRUPO DE PALAVRAS-CHAVE:',
 'titre_identite_site' => 'Identidade do site',
-'titre_langue_article' => 'IDIOMA DA MATÉRIA',
-'titre_langue_rubrique' => 'IDIOMA DA SEÇÃO',
+'titre_langue_article' => 'IDIOMA DA MATÉRIA', # MODIF
+'titre_langue_rubrique' => 'IDIOMA DA SEÇÃO', # MODIF
 'titre_langue_trad_article' => 'IDIOMA E TRADUÇÕES DA MATÉRIA',
 'titre_les_articles' => 'AS MATÉRIAS',
 'titre_messagerie_agenda' => 'Mensagens internas e agenda',

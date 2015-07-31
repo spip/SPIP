@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'La conexion à la base de donadas a soït.',
 'avis_connexion_echec_2' => 'Tornatz à la pàgina anteriora, e verificatz li informacions qu\'avètz fornidi.',
 'avis_connexion_echec_3' => '<b>N.B.</b> Sus totplen de servidors, devètz <b>demandar</b> l\'activacion dau voastre accès à la basa de donadas denant de la poder utilisar. Se vos podètz pas connectar, verificatz qu\'avètz ben realisat aqueu procediment.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'La connexion au servidor LDAP a soït.',
 'avis_connexion_ldap_echec_2' => 'Tornatz a la pàgina anteriora, e verificatz li informacions que nos avètz fornidi. ',
 'avis_connexion_ldap_echec_3' => 'D\'un biais alternatiu, utilisetz pas lo supoart LDAP per importar d\'utilisaires.',
@@ -118,16 +119,20 @@ la documentacion de SPIP</a>.</p>', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Adreça de l\'annuari',
 'entree_adresse_email' => 'La voastra adreça e-mail',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Adreça de la basa de donadas',
 'entree_base_donnee_2' => '(Soventi fès, aquela adreça correspoande à-n-aquela dau voastre sit, de còups que li a, correspoande à la mencion "localhost", d\'autres còups, es laissada vuèia completament.)',
 'entree_biographie' => 'Biografia brèva, en quauqui paraulas.',
 'entree_chemin_acces' => '<b>Ficar</b> lo camin d\'accès:',
 'entree_cle_pgp' => 'La voastra clau PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Contengut de la rubrica en quauqui paraulas.)',
 'entree_identifiants_connexion' => 'Voastri identificants de connexion...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Vorgatz intrar dins aqueu formulari li informacions de connexion au voastre annuari LDAD.
 Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau sistema, ò de la ret.',
 'entree_infos_perso' => 'Cu siètz?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Dintre la rubrica:',
 'entree_liens_sites' => '<b>Ligam ipertèxt</b> (referença, sit da visitar...)',
 'entree_login' => 'Lo voastre login',
@@ -140,13 +145,16 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'entree_nom_fichier' => 'Vorgatz intrar lo nom dau fichier @texte_compresse@:',
 'entree_nom_pseudo' => 'Lo voastre nom ò lo voastre pseudonim',
 'entree_nom_pseudo_1' => '(Lo voastre nom ò lo voastre pseudonim)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Lo nom dau voastre sit',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Novèu mòt de santa Clara',
 'entree_passe_ldap' => 'Mòt de santa Clara',
 'entree_port_annuaire' => 'Lo número de poart de l\'annuari',
 'entree_signature' => 'Signatura',
 'entree_titre_obligatoire' => '<b>Titre</b> [Obligatòri]<br />',
 'entree_url' => 'L\'adreça (URL) dau voastre sit',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -222,7 +230,8 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_activer_cookie' => 'Podètz activar un <b>cookie de correspondença</b>; aquò vos permetrà de passar facilament dau sit public au sit privat.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Aquel administrator gerisse li rubricas seguentas:',
-'info_admin_gere_toutes_rubriques' => 'Aquel administrador gerisse <b>toti li rubricas</b>.',
+'info_admin_gere_toutes_rubriques' => 'Aquel administrador gerisse <b>toti li rubricas</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -298,7 +307,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_contact' => 'Contact',
 'info_contenu_articles' => 'Contengut dei articles',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vuèii, tot simplament)',
+'info_creation_paragraphe' => '(Per crear de paragrafs, laissatz de linhas vuèii, tot simplament)', # MODIF
 'info_creation_rubrique' => 'Denant de poder escriure d\'articles,<br /> devètz crear aumens una rubrica.<br />',
 'info_creation_tables' => 'Creacion dei taulas de la basa',
 'info_creer_base' => '<b>Crear</b> una basa nòva de donadas:',
@@ -362,7 +371,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_liste_redacteurs_connectes' => 'Tiera dei redactors connectats',
 'info_login_existant' => 'Aqueu login ja existisse.',
 'info_login_trop_court' => 'Login tròup cort.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Lu lògos',
 'info_maximum' => 'maximum :',
 'info_meme_rubrique' => 'Dins la mema rubrica',
@@ -418,7 +427,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_nouvel_article' => 'Article nòu',
 'info_nouvelle_traduction' => 'Novèla revirada :',
 'info_numero_article' => 'ARTICLE NÚMERO',
-'info_obligatoire_02' => '[Obligatòri]',
+'info_obligatoire_02' => '[Obligatòri]', # MODIF
 'info_option_accepter_visiteurs' => 'Acceptar l\'inscripcion dei visitaires dau sit public',
 'info_option_faire_suivre' => 'Faire sègre lu messatges dei fòros ai autors dei articles',
 'info_option_ne_pas_accepter_visiteurs' => 'Refusar l\'inscripcion de visitaires',
@@ -432,7 +441,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_par_statut' => 'per estatut',
 'info_par_tri' => '\'(per @tri@)\'',
 'info_passe_trop_court' => 'Mòt de santa Clara tròup cort.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Li doi mòts de santa Clara son pas identics.',
 'info_pense_bete_ancien' => 'Li voastri anciani nòtas de renembrança', # MODIF
 'info_plus_cinq_car' => 'mai de 5 caractèrs',
@@ -495,7 +504,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_site_2' => 'sit : ',
 'info_site_min' => 'sit',
 'info_site_reference_2' => 'Sit referençat',
-'info_site_web' => 'SIT WEB :',
+'info_site_web' => 'SIT WEB :', # MODIF
 'info_sites' => ' sits',
 'info_sites_lies_mot' => 'Lu sits referençats ligats à-n-aqueu mòt clau',
 'info_sites_proxy' => 'Utilisar un proxy',
@@ -504,6 +513,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_sous_titre' => 'Jostitre:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'Estatut d\'aquel autor :',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Inscripcion de confirmar',
 'info_statut_auteur_autre' => 'Autre estatut:',
 'info_statut_efface' => 'Escaçat',
@@ -521,7 +531,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 'info_texte' => 'Tèxt',
 'info_texte_explicatif' => 'Tèxt explicatiu',
 'info_texte_long' => '(lo tèxt es lòng: apareisse doncas en tròç distints que si tornaràn empegar un còup validats.)',
-'info_texte_message' => 'Tèxt dau voastre messatge:',
+'info_texte_message' => 'Tèxt dau voastre messatge:', # MODIF
 'info_texte_message_02' => 'Tèxt dau messatge',
 'info_titre' => 'Titre:',
 'info_total' => 'totau : ',
@@ -578,6 +588,8 @@ una color indica lo sieu estat :',
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Acceptar li inscripcions',
@@ -768,6 +780,8 @@ una color indica lo sieu estat :',
 'statut_admin_restreint' => '(admin limitat)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Lu imatges que SPIP a calculat automaticament (vinhetas dei documents, títols presentats en forma gràfica, foncions matematiqui en format TeX...) ocupon dins lo repertòri @dir@ un totau de @taille@.',
 'taille_cache_infinie' => 'Aquèu site prevei pas de limitacion de talha dau repertòri de l\'amagador.',
 'taille_cache_maxi' => 'SPIP prova de limitar la talha dau repertòri de l\'amagador d\'aqueu sit à circa <b>@octets@</b> de donadas.',
@@ -817,7 +831,7 @@ una color indica lo sieu estat :',
 'texte_effacer_base' => 'Escaçar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Escaçar li donadas d\'indexacion',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
-'texte_en_cours_validation' => 'Si prepaua de publicar lu articles e brèvas çai sota.',
+'texte_en_cours_validation' => 'Si prepaua de publicar lu articles e brèvas çai sota.', # MODIF
 'texte_enrichir_mise_a_jour' => 'Podètz enriquir la compaginacion dau voastre tèxt en utilisant d\'"escorchas tipografiqui"',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repertòri @dossier@ ?</b><p>
@@ -958,8 +972,8 @@ s\'avètz bravament modificat lo grafisme ò l\'estructura dau sit.',
 'titre_connexion_ldap' => 'Opcions : <b>La voastra connexion LDAP</b>',
 'titre_groupe_mots' => 'GROP DE MÒTS :',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'LENGA DE L\'ARTICLE',
-'titre_langue_rubrique' => 'LENGA DE LA RUBRICA',
+'titre_langue_article' => 'LENGA DE L\'ARTICLE', # MODIF
+'titre_langue_rubrique' => 'LENGA DE LA RUBRICA', # MODIF
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LU ARTICLES',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

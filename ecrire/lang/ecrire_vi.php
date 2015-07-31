@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'Không nối vào SQL được.', # MODIF
 'avis_connexion_echec_2' => 'Trở lại trang trước và kiểm lại các dữ kiện vừa cho vào.',
 'avis_connexion_echec_3' => '<b>T.B.</b> Trong một số server, bạn phải <b>yêu cầu</b> quyền được sử dụng SQL database trước khi dùng. Nếu bạn không nối vào được, hãy xem lại coi bạn có yêu cầu chưa.', # MODIF
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'Không nối vào LDAP server được.',
 'avis_connexion_ldap_echec_2' => 'Trở lại trang trước và xem lại các dữ kiện đã cung cấp.',
 'avis_connexion_ldap_echec_3' => 'Một cách khác, đừng dùng LDAP support để đem tên người dùng vào.',
@@ -119,15 +120,19 @@ Hồ sơ SPIP</a>.', # MODIF
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Địa chỉ ngăn',
 'entree_adresse_email' => 'Điạ chỉ email của bạn',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Địa chỉ database',
 'entree_base_donnee_2' => '(Thông thường, địa chỉ này giống địa chỉ website của bạn, đôi khi nó mang tên «localhost», và có khi nó để trống.)',
 'entree_biographie' => 'Tiểu sử ngắn gọn (một vài chữ).',
 'entree_chemin_acces' => '<b>Xin cho biết</b> tên ngăn:',
 'entree_cle_pgp' => 'Khóa PGP của bạn',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Mô tả ngắn gọn nội dung của đề mục)',
 'entree_identifiants_connexion' => 'Tên gọi lúc nối vào của bạn...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Xin điền vào mẫu này với các dữ kiện móc nối LDAP. Bạn sẽ được người quản lý mạng hoặc hệ điều hành cho biết các dữ kiện này.',
 'entree_infos_perso' => 'Bạn là ai?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Trong đề mục:',
 'entree_liens_sites' => '<b>Điểm nối hypertext</b> (tham khảo, website đến viếng...)',
 'entree_login' => 'Login của bạn',
@@ -140,13 +145,16 @@ Hồ sơ SPIP</a>.', # MODIF
 'entree_nom_fichier' => 'Xin điền tên hồ sơ @texte_compresse@:',
 'entree_nom_pseudo' => 'Tên hoặc bí danh của bạn',
 'entree_nom_pseudo_1' => '(Tên hay bí danh của bạn)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Tên website của bạn',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Mật mã mới',
 'entree_passe_ldap' => 'Mật mã',
 'entree_port_annuaire' => 'Số cổng của thư mục',
 'entree_signature' => 'Chữ ký',
 'entree_titre_obligatoire' => '<b>Tựa đề</b> [Bắt buộc]<br />',
 'entree_url' => 'Địa chỉ website của bạn',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -222,7 +230,8 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_activer_cookie' => 'Bạn có thể cho chạy <b>administration cookie</b> để bạn có thể qua lại giữa trang web công cộng và khu vực riêng.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Nhân vật này có quyền quản trị các đề mục sau đây:',
-'info_admin_gere_toutes_rubriques' => 'Nhân vật này có quyền quản trị <b>tất cả các đề mục</b>.',
+'info_admin_gere_toutes_rubriques' => 'Nhân vật này có quyền quản trị <b>tất cả các đề mục</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -298,7 +307,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_contact' => 'Liên lạc',
 'info_contenu_articles' => 'Nội dung bài',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Để bắt đầu đoạn văn mới, bạn chỉ cần chừa hàng trống)',
+'info_creation_paragraphe' => '(Để bắt đầu đoạn văn mới, bạn chỉ cần chừa hàng trống)', # MODIF
 'info_creation_rubrique' => 'Trước khi được phép viết một bài mới, bạn phải lập ra ít nhất một đề mục.',
 'info_creation_tables' => 'Bước thứ tư: <b>Tạo lập ra các bảng trong database</b>',
 'info_creer_base' => '<b>Tạo lập</b> ra một database mới:',
@@ -360,7 +369,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_liste_redacteurs_connectes' => 'Danh sách các chủ bút đang nối vào',
 'info_login_existant' => 'Login này đã có.',
 'info_login_trop_court' => 'Login ngắn quá.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'The logos', # NEW
 'info_maximum' => 'tối đa:',
 'info_meme_rubrique' => 'Cũng đề mục',
@@ -412,7 +421,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_nouvel_article' => 'Bài mới',
 'info_nouvelle_traduction' => 'Bản dịch mới:',
 'info_numero_article' => 'SỐ THỨ TỰ BÀI:',
-'info_obligatoire_02' => '[Bắt buộc] ',
+'info_obligatoire_02' => '[Bắt buộc] ', # MODIF
 'info_option_accepter_visiteurs' => 'Cho phép khách ghi danh từ trang công cộng',
 'info_option_faire_suivre' => 'Chuyển thư tín trong diễn đàn đến tác giả bài',
 'info_option_ne_pas_accepter_visiteurs' => 'Từ chối khách ghi danh',
@@ -426,7 +435,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_par_statut' => 'by status', # NEW
 'info_par_tri' => '\'(by @tri@)\'', # NEW
 'info_passe_trop_court' => 'Mật mã ngắn quá.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Hai mật mã không giống hệt nhau.',
 'info_pense_bete_ancien' => 'Bản ghi nhớ cũ của bạn', # MODIF
 'info_plus_cinq_car' => 'hơn 5 mẫu tự',
@@ -481,7 +490,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_site_2' => 'website: ',
 'info_site_min' => 'website',
 'info_site_reference_2' => 'Website nối kết',
-'info_site_web' => 'WEB SITE:',
+'info_site_web' => 'WEB SITE:', # MODIF
 'info_sites' => 'website',
 'info_sites_lies_mot' => 'Những website nối kết liên đới với từ then chốt này',
 'info_sites_proxy' => 'Dùng một proxy',
@@ -490,6 +499,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_sous_titre' => 'Tựa đề phụ:',
 'info_statut_administrateur' => 'Quản trị viên',
 'info_statut_auteur' => 'Quyền hạn của tác giả:', # MODIF
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Registration to be confirmed', # NEW
 'info_statut_auteur_autre' => 'Other status:', # NEW
 'info_statut_efface' => 'Xóa',
@@ -507,7 +517,7 @@ Hồ sơ SPIP</a>.', # MODIF
 'info_texte' => 'Thân bài',
 'info_texte_explicatif' => 'Giảng giải',
 'info_texte_long' => 'Văn tự quá dài: nó sẽ được cho xem qua nhiều phần và được gôm ại sau khi được chấp thuận.)',
-'info_texte_message' => 'Thân bài:',
+'info_texte_message' => 'Thân bài:', # MODIF
 'info_texte_message_02' => 'Thân bài',
 'info_titre' => 'Tựa đề:',
 'info_total' => 'tổng cộng: ',
@@ -564,6 +574,8 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'install_tables_base' => 'Tables de la base', # NEW
 'install_types_db_connus' => 'SPIP sait utiliser <b>MySQL</b> (le plus répandu), <b>PostgreSQL</b> et <b>SQLite</b>.', # NEW
 'install_types_db_connus_avertissement' => 'Attention : plusieurs plugins ne fonctionnent qu\'avec MySQL', # NEW
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'chủ bút',
 'intitule_licence' => 'Licence', # NEW
 'item_accepter_inscriptions' => 'Cho phép ghi danh',
@@ -754,6 +766,8 @@ và hiển ra với những màu khác nhau tùy theo tình trạng bài vở :
 'statut_admin_restreint' => '(Quản trị viên có giới hạn)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Các hình được tính toán tự động bởi SPIP (hình nhỏ, tựa đề được đổi thành hình, công thức toán học dưới dạng TeX, v.v...) chiếm tổng cộng @taille@ trong ngăn @dir@.',
 'taille_cache_infinie' => 'Trang web không có giới hạn khổ của ngăn <code>CACHE/</code>.', # MODIF
 'taille_cache_maxi' => 'SPIP sẽ giới hạn khổ của ngăn <code>CACHE/</code> vào khoảng <b>@octets@</b> dữ liệu.', # MODIF
@@ -901,8 +915,8 @@ Bạn có thể cho phép cảnh báo hay không:',
 'titre_connexion_ldap' => 'Tùy chọn: <b>Kết nối vào LDAP</b>',
 'titre_groupe_mots' => 'NHÓM TỪ THEN CHỐT:',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'NGÔN NGỮ CỦA BÀI',
-'titre_langue_rubrique' => 'NGÔN NGỮ CỦA ĐỀ MỤC',
+'titre_langue_article' => 'NGÔN NGỮ CỦA BÀI', # MODIF
+'titre_langue_rubrique' => 'NGÔN NGỮ CỦA ĐỀ MỤC', # MODIF
 'titre_langue_trad_article' => 'NGÔN NGỮ VÀ DỊCH THUẬT CỦA BÀI',
 'titre_les_articles' => 'BÀI VỞ',
 'titre_messagerie_agenda' => 'Messagerie et agenda', # NEW

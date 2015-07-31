@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'Falló l\'enxertu al servidor SQL.',
 'avis_connexion_echec_2' => 'Torna a la páxina cabera y revisa los datos que pusiste.',
 'avis_connexion_echec_3' => '<b>Nota:</b> En munchos sirvidores, fai falta <b>pidir</b> la activación del accesu a la base de datos enantes de poder usala. Si nun puedes conectate, mira si ficiste esi trámite.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'Hubo un fallu na conexón al sirvidor LDAP.',
 'avis_connexion_ldap_echec_2' => 'Torna a la páxina anterior, y revisa la información qu\'escribisti n\'ella.',
 'avis_connexion_ldap_echec_3' => 'D\'otru mou, nun uses el sofitu de LDAP pa importar usuarios.',
@@ -124,17 +125,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_savoir_plus' => 'Pa saber más',
 'entree_adresse_annuaire' => 'Señes de l\'anuariu',
 'entree_adresse_email' => 'Les tos señes d\'email',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Señes de la base de datos',
 'entree_base_donnee_2' => '(Bien de veces estes señes correspuendense coles del sitiu mesmu, dacuando son el nome «localhost», o sinon dexense vacíes dafechu.)',
 'entree_biographie' => 'Biografía curtia en delles pallabres.',
 'entree_chemin_acces' => '<b>Enxertar</b> la ruta d\'accesu:',
 'entree_cle_pgp' => 'La to clave PGP',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Conteníu de la estaya en delles pallabres.)',
 'entree_identifiants_connexion' => 'Los identificadores pa la to conexón...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Nesti formulariu has d\'enxertar la información pa coneutate al sirvidor de señes LDAP.
  Esta información tien que apurrítela l\'alministrador del sistema,
  o de la rede.',
 'entree_infos_perso' => '¿Quién yes?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Dientro de l\'estaya:',
 'entree_liens_sites' => '<b>Enllaz d\'hipertestu</b> (referencia, sitiu a visitar...)',
 'entree_login' => 'El to login',
@@ -147,13 +152,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_nom_fichier' => 'Has d\'amestar el nome de l\'archivu @texte_compresse@:',
 'entree_nom_pseudo' => 'El to nome o nomatu',
 'entree_nom_pseudo_1' => '(El to nome o nomatu)',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Nome del to sitiu web',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Contraseña nueva',
 'entree_passe_ldap' => 'Contraseña',
 'entree_port_annuaire' => 'Númberu de puertu del sirvidor de señes',
 'entree_signature' => 'Robla',
 'entree_titre_obligatoire' => '<b>Títulu</b> [Obligatoriu]<br />',
 'entree_url' => 'Les señes (URL) del to sitiu web',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'Falló la desinstalación del complementu. Sicasí, puedes desactivalu.',
@@ -230,7 +238,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  permitite que pases fácilmente del sitiu públicu al sitiu privau.',
 'info_admin_etre_webmestre' => 'Conseñame permisos de webmaster',
 'info_admin_gere_rubriques' => 'Esti alministrador xestiona les estayes siguientes:',
-'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toles estayes</b>.',
+'info_admin_gere_toutes_rubriques' => 'Esti alministrador xestiona <b>toles estayes</b>.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Yá soi <b>webmaster</b>',
 'info_admin_statuer_webmestre' => 'Da-y a esti alministrador permisos de webmaster',
 'info_admin_webmestre' => 'Esti alministrador ye <b>webmaster</b>',
@@ -309,7 +318,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_contact' => 'Contautu',
 'info_contenu_articles' => 'Conteníu de los artículos',
 'info_contributions' => 'Collaboraciones',
-'info_creation_paragraphe' => '(Pa crear párrafos, dexa llínies vacíes ente ellos.)',
+'info_creation_paragraphe' => '(Pa crear párrafos, dexa llínies vacíes ente ellos.)', # MODIF
 'info_creation_rubrique' => 'Enantes que puedas escribir artículos<br />debes crear polo menos una estaya.<br />',
 'info_creation_tables' => 'Creación de les tables de la base',
 'info_creer_base' => '<b>Crear</b> una nueva base datos:',
@@ -383,7 +392,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_liste_redacteurs_connectes' => 'Llista de los redactores conectáos',
 'info_login_existant' => 'Esti nome ya esiste.',
 'info_login_trop_court' => 'El nome ye mui curtiu.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Los logos',
 'info_maximum' => 'másimu:',
 'info_meme_rubrique' => 'Na mesma estaya',
@@ -440,7 +449,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_nouvel_article' => 'Artículu nuevu',
 'info_nouvelle_traduction' => 'Traducción nueva:',
 'info_numero_article' => 'ARTÍCULU NÚMBERU:',
-'info_obligatoire_02' => '[Obligatorio]',
+'info_obligatoire_02' => '[Obligatorio]', # MODIF
 'info_option_accepter_visiteurs' => 'Aceptar la inscripción de visitantes del sitiu públicu',
 'info_option_faire_suivre' => 'Unvia-yos copia de los mensaxes de los foros a los autores de los artículos',
 'info_option_ne_pas_accepter_visiteurs' => 'Refugar la inscripción de los visitantes',
@@ -454,7 +463,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_par_statut' => 'pol cargu',
 'info_par_tri' => '\'(por @tri@)\'',
 'info_passe_trop_court' => 'La contraseña ye mui curtia.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'Les dos contraseñes nun concasen.',
 'info_pense_bete_ancien' => 'Recordatorios antiguos',
 'info_plus_cinq_car' => 'más de 5 carauteres',
@@ -519,7 +528,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_site_2' => 'sitiu:',
 'info_site_min' => 'sitiu Web',
 'info_site_reference_2' => 'Sitiu referenciau',
-'info_site_web' => 'SITIU WEB:',
+'info_site_web' => 'SITIU WEB:', # MODIF
 'info_sites' => 'sitios',
 'info_sites_lies_mot' => 'Los sitios referenciaos enllazaos con esta pallabra-clave',
 'info_sites_proxy' => 'Utilizar un proxy',
@@ -528,6 +537,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_sous_titre' => 'Subtítulu:',
 'info_statut_administrateur' => 'Alministrador',
 'info_statut_auteur' => 'Estatutu d\'esti autor:',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Inscripción por confirmar',
 'info_statut_auteur_autre' => 'Otru estatutu:',
 'info_statut_efface' => 'Esborráu',
@@ -545,7 +555,7 @@ fai falta tener accesu per FTP al sirvidor del sitiu Web.</p>',
 'info_texte' => 'Testu',
 'info_texte_explicatif' => 'Testu explicativu',
 'info_texte_long' => '(el testu ye llargu: poro apaez en delles partes que volverán a amestase tres de la validación.)',
-'info_texte_message' => 'Testu del to mensaxe:',
+'info_texte_message' => 'Testu del to mensaxe:', # MODIF
 'info_texte_message_02' => 'Testu del mensaxe',
 'info_titre' => 'Títulu:',
 'info_total' => 'total:',
@@ -602,6 +612,8 @@ con una color que indica el estáu:',
 'install_tables_base' => 'Tables de la base',
 'install_types_db_connus' => 'SPIP sabe utilizar <b>MySQL</b> (la más estendida), <b>PostgreSQL</b> y <b>SQLite</b>.',
 'install_types_db_connus_avertissement' => 'Atención: hai dellos plugins que nun funcionen más que con MySQL',
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'redactor',
 'intitule_licence' => 'Llicencia',
 'item_accepter_inscriptions' => 'Aceptar les inscripciones',
@@ -792,6 +804,8 @@ con una color que indica el estáu:',
 'statut_admin_restreint' => '(almin llendau)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'Les imaxes calculáes automáticamente por SPIP (miniatures de documentos, títulos en formatu gráficu, funciones matemátiques en formatu TeX...) ocupen nel direutoriu @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Esti sitiu nun conseña llendes de tamañu pal direutoriu de caché.',
 'taille_cache_maxi' => 'SPIP tenta llendar el tamañu del direutoriu de caché d\'esti sitiu a unos <b>@octets@</b> de datos.',
@@ -844,7 +858,7 @@ reinstalación de SPIP pa crear una nueva base igual que un primer accesu d\'alm
 'texte_effacer_base' => 'Desaniciar la base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Desaniciar los datos d\'indexación',
 'texte_effacer_statistiques' => 'Desaniciar les estadístiques',
-'texte_en_cours_validation' => 'Los artículos y breves d\'embaxo tan propuestos pa espublizase.',
+'texte_en_cours_validation' => 'Los artículos y breves d\'embaxo tan propuestos pa espublizase.', # MODIF
 'texte_enrichir_mise_a_jour' => 'Pues arriquecer la paxinación del testu utilizando los «atayos tipográficos».',
 'texte_fichier_authent' => '<b>¿Tien SPIP que crear los ficheros especiales <tt>.htpasswd</tt>
   y <tt>.htpasswd-admin</tt> na carpeta @dossier@?</b><p>
@@ -983,8 +997,8 @@ vienes de facer cambéos importantes nel grafismu o na estructura del sitiu.',
 'titre_connexion_ldap' => 'Axustes: <b>La to conexón LDAP</b>',
 'titre_groupe_mots' => 'GRUPU DE PALLABRES:',
 'titre_identite_site' => 'Identidá del sitiu',
-'titre_langue_article' => 'LLINGUA DE L\'ARTICULU',
-'titre_langue_rubrique' => 'LLINGUA DE LA ESTAYA',
+'titre_langue_article' => 'LLINGUA DE L\'ARTICULU', # MODIF
+'titre_langue_rubrique' => 'LLINGUA DE LA ESTAYA', # MODIF
 'titre_langue_trad_article' => 'LLINGUA Y TRADUCCIONES DE L\'ARTÍCULU',
 'titre_les_articles' => 'LOS ARTÍCULOS',
 'titre_messagerie_agenda' => 'Mensaxería y axenda',

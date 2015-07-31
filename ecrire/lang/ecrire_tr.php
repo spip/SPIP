@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_echec_1' => 'SQL veri tabanına bağlantı başarısız.',
 'avis_connexion_echec_2' => 'Bir önceki sayfaya geri dönüp verdiğiniz bilgileri kontrol edin.',
 'avis_connexion_echec_3' => '<b>Not:</b> Bir çok sunucuda, SQL veritabanı kullanabilmek için aktive edilmesini <b>talep etmeniz</b> gerekir. Eğer bağlanamıyorsanız bunu talep edip etmediğinizi kontrol edin.',
+'avis_connexion_erreur_nom_base' => 'Le nom de la base ne peut contenir que des lettres, des chiffres et des tirets', # NEW
 'avis_connexion_ldap_echec_1' => 'LDAP sunucusuna bağlantı başarısız.',
 'avis_connexion_ldap_echec_2' => 'Bir önceki sayfaya dönüp verdiğiniz bilgileri kontrol edin.',
 'avis_connexion_ldap_echec_3' => 'Buna alternatif olarak, kullanıcı ithal etmek için LDAP sunucusunu kullanmayın.',
@@ -121,15 +122,19 @@ Bu ithal istemini onaylamayın.
 'en_savoir_plus' => 'En savoir plus', # NEW
 'entree_adresse_annuaire' => 'Rehber adresi',
 'entree_adresse_email' => 'E-posta adresiniz',
+'entree_adresse_email_2' => 'Adresse email', # NEW
 'entree_base_donnee_1' => 'Veritabanı adresi',
 'entree_base_donnee_2' => '(Bu adres çoğunlukla site adresinize karşı düşer, bazen «localhost» ifadesine karşı düşer, bazen tamamen boş bırakılır.)',
 'entree_biographie' => 'Bir kaç sözcükle kısa biyografi.',
 'entree_chemin_acces' => 'Erişim yolunu <b>giriniz</b> :',
 'entree_cle_pgp' => 'PGP anahtarınız',
+'entree_cle_pgp_2' => 'Clé PGP', # NEW
 'entree_contenu_rubrique' => '(Bir kaç sözcükle bölüm içeriği.)',
 'entree_identifiants_connexion' => 'Bağlantı tanımlayıcılarınız...',
+'entree_identifiants_connexion_2' => 'Identifiants de connexion', # NEW
 'entree_informations_connexion_ldap' => 'Lütfen bu forma LDAP rehberine bağlantı için kullandığınız bilgileri giriniz. Bu bilgiler size sistem ya da ağ yöneticisi tarafından verilebilir.',
 'entree_infos_perso' => 'Kimsiniz ?',
+'entree_infos_perso_2' => 'Qui est l\'auteur ?', # NEW
 'entree_interieur_rubrique' => 'Bölüm içerisinde :',
 'entree_liens_sites' => '<b>Hipermetin bağı</b> (atıflar, ziyaret edilecek site...)',
 'entree_login' => 'Kullanıcı isminiz',
@@ -142,13 +147,16 @@ Bu ithal istemini onaylamayın.
 'entree_nom_fichier' => 'Lütfen dosya ismini giriniz  @texte_compresse@:',
 'entree_nom_pseudo' => 'Adınız ya da takma adınız ',
 'entree_nom_pseudo_1' => '(Adınız ya da takma adınız) ',
+'entree_nom_pseudo_2' => 'Nom ou pseudo', # NEW
 'entree_nom_site' => 'Sitenizin adı ',
+'entree_nom_site_2' => 'Nom du site de l\'auteur', # NEW
 'entree_nouveau_passe' => 'Yeni şifre',
 'entree_passe_ldap' => 'Şifre',
 'entree_port_annuaire' => 'Rehberin kapı numarası',
 'entree_signature' => 'İmza',
 'entree_titre_obligatoire' => '<b>Başlık</b>  [Zorunlu]',
 'entree_url' => 'Sitenizin adresi (URL)',
+'entree_url_2' => 'Adresse (URL) du site', # NEW
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
 'erreur_nom_connect_incorrect' => 'Ce nom de serveur n\'est pas autorisé', # NEW
 'erreur_plugin_desinstalation_echouee' => 'La désinstallation du plugin a echoué. Vous pouvez néanmoins le desactiver.', # NEW
@@ -225,7 +233,8 @@ Bu ithal istemini onaylamayın.
  bu sizin kolayca kamu sitesinden özel siteye geçmenizi sağlar.',
 'info_admin_etre_webmestre' => 'Me donner les droits de webmestre', # NEW
 'info_admin_gere_rubriques' => 'Bu yönetici şu bölümleri yönetiyor :',
-'info_admin_gere_toutes_rubriques' => 'Bu yönetici <b>tüm bölümleri</b> yönetiyor.',
+'info_admin_gere_toutes_rubriques' => 'Bu yönetici <b>tüm bölümleri</b> yönetiyor.', # MODIF
+'info_admin_gere_toutes_rubriques_2' => 'Je gère <b>toutes les rubriques</b>', # NEW
 'info_admin_je_suis_webmestre' => 'Je suis <b>webmestre</b>', # NEW
 'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
 'info_admin_webmestre' => 'Cet administrateur est <b>webmestre</b>', # NEW
@@ -304,7 +313,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_contact' => 'İletişim',
 'info_contenu_articles' => 'Makalelerin içeriği',
 'info_contributions' => 'Contributions', # NEW
-'info_creation_paragraphe' => '(Paragraf yaratmak için sadece boş bir kaç satır bırakınız.)',
+'info_creation_paragraphe' => '(Paragraf yaratmak için sadece boş bir kaç satır bırakınız.)', # MODIF
 'info_creation_rubrique' => 'Makale yazmadan önce en az bir bölüm yaratmanız gerekir.',
 'info_creation_tables' => 'Veritabanı tablolarının yaratılması',
 'info_creer_base' => 'Yeni bir veritabanı <b>yaratılması</b> :',
@@ -371,7 +380,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_liste_redacteurs_connectes' => 'Bağlanan yazarlar',
 'info_login_existant' => 'Bu kullanıcı ismi zaten var.',
 'info_login_trop_court' => 'Kullanıcı ismi çok kısa.',
-'info_login_trop_court_car_pluriel' => 'Votre login doit contenir au moins @nb@ caractères.', # NEW
+'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
 'info_logos' => 'Logolar',
 'info_maximum' => 'En fazla :',
 'info_meme_rubrique' => 'Aynı bölümde',
@@ -428,7 +437,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_nouvel_article' => 'Yeni makale',
 'info_nouvelle_traduction' => 'Yeni çeviri :',
 'info_numero_article' => 'MAKALE N° :',
-'info_obligatoire_02' => '[Zorunlu]',
+'info_obligatoire_02' => '[Zorunlu]', # MODIF
 'info_option_accepter_visiteurs' => 'Kamu sitesi ziyaretçilerinin kaydını kabul et',
 'info_option_faire_suivre' => 'Forum iletilerinin makale yazarlarına gönderilmesi',
 'info_option_ne_pas_accepter_visiteurs' => 'Ziyaretçi kayıdını reddet',
@@ -442,7 +451,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_par_statut' => 'duruma göre',
 'info_par_tri' => '\'(@tri@ sıralamasına göre) \'',
 'info_passe_trop_court' => 'Şifre çok kısa.',
-'info_passe_trop_court_car_pluriel' => 'Votre mot de passe doit contenir au moins @nb@ caractères.', # NEW
+'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 'info_passes_identiques' => 'İki şifre aynı değil.',
 'info_pense_bete_ancien' => 'Eski hatırlatmalarınız', # MODIF
 'info_plus_cinq_car' => '5 karakterden fazla',
@@ -505,7 +514,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_site_2' => 'Site :',
 'info_site_min' => 'Site ',
 'info_site_reference_2' => 'Atıfta bulunan site',
-'info_site_web' => 'WEB SiTESİ :',
+'info_site_web' => 'WEB SiTESİ :', # MODIF
 'info_sites' => 'Siteler',
 'info_sites_lies_mot' => 'Bu anahtar sözcüğe bağlı atıfta bulunulan siteler',
 'info_sites_proxy' => 'Vekil kullan',
@@ -514,6 +523,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_sous_titre' => 'Alt-başlık :',
 'info_statut_administrateur' => 'Yönetici',
 'info_statut_auteur' => 'Bu yazarın statüsü :',
+'info_statut_auteur_2' => 'Je suis', # NEW
 'info_statut_auteur_a_confirmer' => 'Onaylanacak kayıt',
 'info_statut_auteur_autre' => 'Diğer statü :',
 'info_statut_efface' => 'Silindi',
@@ -531,7 +541,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_texte' => 'Metin',
 'info_texte_explicatif' => 'Açıklama metni ',
 'info_texte_long' => '(Metin uzun : dolayısıyla onaylandıktan sonra bir araya getirilecek birkaç parça halinde görünüyor.)',
-'info_texte_message' => 'İletinizin metni :',
+'info_texte_message' => 'İletinizin metni :', # MODIF
 'info_texte_message_02' => 'İleti metni',
 'info_titre' => 'Başlık :',
 'info_total' => 'toplam :',
@@ -588,6 +598,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'install_tables_base' => 'Veri tabanı tabloları',
 'install_types_db_connus' => 'SPIP <b>MySQL</b> (en yaygın), <b>PostgreSQL</b> ve <b>SQLite</b> kullanmayı bilir.',
 'install_types_db_connus_avertissement' => 'Dikkat : bir çok eklenti sadece MySQL ile çalışır',
+'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
+'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
 'intem_redacteur' => 'Yazar',
 'intitule_licence' => 'Lisans',
 'item_accepter_inscriptions' => 'Kayıtları kabul et',
@@ -778,6 +790,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'statut_admin_restreint' => '(sınırlı yönetici)',
 
 // T
+'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
+'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 'taille_cache_image' => 'SPIP tarafından otomatik olarak hesaplanan resimler (doküman ikonları, grafik olarak gösterilen başlıklar, TeX biçimindeki matematik işlevler...) @dir@ dizininde toplam @taille@ yer tutuyor.',
 'taille_cache_infinie' => 'Bu site <code>önbellek (CACHE)</code> dizininin boyutu için herhangi bir sınır öngörmüyor.',
 'taille_cache_maxi' => 'SPIP, bu sitenin <code>önbellek (CACHE)</code> dizininin boyutunu yaklaşık @octets@ lik veriyle sınırlamaya çalışıyor.',
@@ -831,7 +845,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_effacer_base' => 'SPIP veritabanını sil',
 'texte_effacer_donnees_indexation' => 'Endeksleme verilerini sil',
 'texte_effacer_statistiques' => 'İstatistikleri sil',
-'texte_en_cours_validation' => 'Aşağıdaki makale ve kısa haberler yayın için önerilmiştir. ',
+'texte_en_cours_validation' => 'Aşağıdaki makale ve kısa haberler yayın için önerilmiştir. ', # MODIF
 'texte_enrichir_mise_a_jour' => 'Metninizin sayfa düzenini « tipografi kısaltmaları » kullanarak zenginleştirebilirsiniz.',
 'texte_fichier_authent' => 'SPIP\'in, .htpasswd ve .htpasswd-admin özel dosyalarını  @dossier@ dizininde yaratması gerekir mi ? Bu dosyalar sizin, sitenizin başka yerlerine sadece yazar ve yöneticilerin erişmesini sınırlamanızı sağlayabilir (örneğin, dışsal istatistik programı). Bunun bir yararı olmadığını düşünüyorsanız bu seçeneği varsayılan değerinde bırakabilirsiniz (dosya yaratma işlemi yapılmaz).', # MODIF
 'texte_informations_personnelles_1' => 'Sistem şimdi size kişiselleştirilmiş bir erişim (hesap) yaratacaktır.',
@@ -923,8 +937,8 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_connexion_ldap' => 'Seçenekler : <b>LDAP bağlantılarınız</b>',
 'titre_groupe_mots' => 'SÖZCÜK GRUBU:',
 'titre_identite_site' => 'Identité du site', # NEW
-'titre_langue_article' => 'MAKALENİN DİLİ ',
-'titre_langue_rubrique' => 'BÖLÜMÜN DİLİ',
+'titre_langue_article' => 'MAKALENİN DİLİ ', # MODIF
+'titre_langue_rubrique' => 'BÖLÜMÜN DİLİ', # MODIF
 'titre_langue_trad_article' => 'MAKALENİN DİLİ VE ÇEVİRİLERİ ',
 'titre_les_articles' => 'MAKALELER',
 'titre_messagerie_agenda' => 'Mesajlaşma ve Ajanda',
