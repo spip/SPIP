@@ -1,8 +1,5 @@
 <div class="formulaire_spip formulaire_forum formfx"  id="formulaire_forum">
 [(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='spacer' />
-#SET{reponse_nom,''}
-#SET{reponse_id,''}
-<BOUCLE_enreponse(FORUMS){id_forum}>#SET{reponse_nom,#NOM|sinon{#TITRE}|couper{80}}#SET{reponse_id,#ID_AUTEUR}</BOUCLE_enreponse>
 
 [(#ENV{login_forum_abo})
 <INCLURE{fond=formulaires/login_forum_abo}{inscription}{oubli}>
@@ -40,19 +37,18 @@
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
 [<input type="hidden" name="titre" value="(#ENV{titre})" />]
-<p class="bouton"><input type="submit" value="<:forum_valider:>" /></p>]
+<p class="spip_bouton"><input type="submit" value="<:forum_valider:>" /></p>]
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
 	<fieldset>
 	<legend><:form_pet_message_commentaire:></legend><ol>
-	[<li class='enreponse'><:en_reponse_a:> <span>(#GET{reponse_nom})</span></li>]
 	[<li>(#INCLURE{fond=formulaires/forum_bloc_choix_mots}{table=#ENV*{table}}{ajouter_mot})</li>]
 
 [(#CONFIG{forums_titre}|=={oui}|?{
 	<li class='text'><label for="titre"><:forum_titre:></label>
 	<input class='text' type="text" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" />
-	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</div>]
 	</li>
 ,
 	<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
@@ -60,10 +56,12 @@
 
 [(#CONFIG{forums_texte}|=={oui}|?{
 	<li class='textarea'>
-	<label for='texte'><:forum_texte|typo:></label>
-	[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{texte}|barre_typo{#LANG}})]
+	<label for='texte' style='width:100%'><:forum_texte|typo:></label>
+	<small><:info_creation_paragraphe:></small>
+	[(#ENV**{config}|table_valeur{afficher_barre}|
+		?{#VAL{texte}|barre_typo{#LANG}})]
 	<textarea name='texte' id='texte' rows='12'>[(#ENV{texte})]</textarea>
-	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+	[<div class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</div>]
 	</li>
 })]
 	</ol></fieldset>
@@ -85,7 +83,7 @@
 	<p style="display: none;"><label for="nobot"><:antispam_champ_vide:></label>
 	<input type="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" /></p>
 
-	<p class="bouton"><input type="submit" value="<:forum_voir_avant:>" /></p>
+	<p class="spip_bouton"><input type="submit" value="<:forum_voir_avant:>" /></p>
 ]
 </div>
 </form>

@@ -61,14 +61,16 @@
 
 
 		[(#REM) Petition :
-		La petition ayant une PAGINATION il faut absolument {env}][
-	(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}>]
+		La petition ayant une PAGINATION il faut absolument {env}
+		et pourquoi pas ajax
+		][(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}{ajax}>]
 
         [<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
-        [(#REM) Forum de l'article ]
-        <a href="#forum" name="forum" id="forum"></a>
-        <INCLURE{fond=inc-forum}{id_article}{id_forum}{repondre}{ajax}{reponse=<:repondre_article:>}>
+		[(#REM) Forum de l'article ]
+		<a href="#forum" name="forum" id="forum"></a>
+		<INCLURE{fond=inc-forum}{id_article} />
+		[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_article:></a></p>] 
 
 	</div><!--#contenu-->
 	</div><!--#conteneur-->

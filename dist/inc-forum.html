@@ -14,7 +14,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 
 	<li class="forum-fil">
 
-		<div class="forum-message[ (#EXPOSE{on})]" id='forum-message-#ID_FORUM'>
+		<div class="forum-message">
 			<div class="forum-chapo">
 				<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
 				<small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small>
@@ -22,17 +22,16 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 			<div class="#EDIT{texte} forum-texte">
 				[(#TEXTE|lignes_longues)]
 				[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-				[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{id_forum,#ID_FORUM})#forum-message-#ID_FORUM" rel="noindex nofollow"><:repondre_message:></a></p>]
+				[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
 			</div>
 		</div>
-		[(#EXPOSE{' '})<div class='ajax'>#FORMULAIRE_FORUM</div>]
 
 		<B_forums_fils>
 		<ul>
 			<BOUCLE_forums_fils(FORUMS) {id_parent} {par date}>
 
 			<li>
-				<div class="forum-message[ (#EXPOSE{on})]" id='forum-message-#ID_FORUM'>
+				<div class="forum-message">
 					<div class="forum-chapo">
 						<strong class="#EDIT{titre} forum-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
 						<small>[(#DATE|affdate_jourcourt)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> <span class="#EDIT{qui}">(#NOM|couper{80})</span>]</small>
@@ -40,10 +39,9 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 					<div class="#EDIT{texte} forum-texte">
 						[(#TEXTE|lignes_longues)]
 						[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-						[<p class="repondre"><a class='ajax' href="(#SELF|parametre_url{id_forum,#ID_FORUM})#forum-message-#ID_FORUM" rel="noindex nofollow"><:repondre_message:></a></p>]
+						[<p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:repondre_message:></a></p>]
 					</div>
 				</div>
-				[(#EXPOSE{' '})<div class='ajax'>#FORMULAIRE_FORUM</div>]
 
 				<BOUCLE_forums_boucle(boucle_forums_fils)></BOUCLE_forums_boucle>
 
@@ -58,5 +56,3 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 
 </ul>
 </B_forums>
-
-<INCLURE{fond=inc-forum-repondre}{ajax}{env}>
