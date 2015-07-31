@@ -504,9 +504,12 @@ function affdate_base($numdate, $vue) {
 
 	case 'annee':
 		return $annee;
-	}
 
-	return "<blink>"._T('info_format_non_defini')."</blink>";
+	// Cas d'une vue non definie : retomber sur le format
+	// de date propose par http://www.php.net/date
+	default:
+		return date($vue, strtotime($numdate));
+	}
 }
 
 function nom_jour($numdate) {
@@ -537,8 +540,8 @@ function saison($numdate) {
 	return affdate_base($numdate, 'saison');
 }
 
-function affdate($numdate) {
-	return affdate_base($numdate, 'entier');
+function affdate($numdate, $format='entier') {
+	return affdate_base($numdate, $format);
 }
 
 function affdate_court($numdate) {
@@ -758,6 +761,21 @@ function avant_typo_smallcaps($texte) {
 	return $texte;
 }
 
+//
+// Ce filtre retourne la donnee si c'est la premiere fois qu'il la voit ;
+// possibilite de gerer differentes "familles" de donnees |unique{famille}
+# ameliorations possibles :
+# 1) si la donnee est grosse, mettre son md5 comme cle
+# 2) purger $mem quand on change de squelette (sinon bug inclusions)
+//
+// http://www.spip.net/@unique
+function unique($donnee, $famille='') {
+	static $mem;
+	if (!($mem[$famille][$donnee]++))
+		return $donnee;
+}
+
+
 function extraire_attribut($balise, $attribut) {
 # la mise en facteur ne marche pas....
 #  if (preg_match("/<[^>]*\s+$attribut=(['\"])([^\\1]*)\\1/i", $balise, $r))
@@ -769,6 +787,7 @@ function extraire_attribut($balise, $attribut) {
 }
 
 // fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
+# a placer ailleurs que dans inc_filtres
 function boutonne($t, $n, $v, $a='') {
   return "\n<input type='$t'" .
     (!$n ? '' : " name='$n'") .
