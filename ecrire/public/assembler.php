@@ -406,7 +406,7 @@ function creer_contexte_de_modele($args) {
 
 // Calcule le modele et retourne la mini-page ainsi calculee
 // http://doc.spip.org/@inclure_modele
-function inclure_modele($type, $id, $params, $lien, $connect='') {
+function inclure_modele($type, $id, $params, $lien, $connect='', $env=array()) {
 
 	static $compteur;
 	if (++$compteur>10) return ''; # ne pas boucler indefiniment
@@ -440,9 +440,9 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		return false;
 	$fond = 'modeles/'.$fond;
 	// Creer le contexte
-	$contexte = array( 
-		'dir_racine' => _DIR_RACINE # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte 
-	); 
+	$contexte = $env;
+	$contexte['dir_racine'] = _DIR_RACINE; # eviter de mixer un cache racine et un cache ecrire (meme si pour l'instant les modeles ne sont pas caches, le resultat etant different il faut que le contexte en tienne compte
+
 	// Le numero du modele est mis dans l'environnement
 	// d'une part sous l'identifiant "id"
 	// et d'autre part sous l'identifiant de la cle primaire

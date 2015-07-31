@@ -211,9 +211,9 @@ function declarer_interfaces(){
 
 	global  $table_des_traitements;
 
-	define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect)');
-	define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect)');
-	define('_TRAITEMENT_TYPO_SANS_NUMERO', 'typo(supprimer_numero(%s), "TYPO", $connect)');
+	define('_TRAITEMENT_TYPO', 'typo(%s, "TYPO", $connect, $Pile[0])');
+	define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect, $Pile[0])');
+	define('_TRAITEMENT_TYPO_SANS_NUMERO', 'typo(supprimer_numero(%s), "TYPO", $connect, $Pile[0])');
 
 	$table_des_traitements['BIO'][]= _TRAITEMENT_RACCOURCIS;
 	$table_des_traitements['CHAPO'][]= _TRAITEMENT_RACCOURCIS;

@@ -20,7 +20,7 @@ include_spip('base/abstract_sql');
 // et en plus on veut pouvoir les passer en pipeline
 //
 
-function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='') {
+function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='', $connect='', $env=array()) {
 
 	return $lien;
 }
@@ -32,7 +32,7 @@ function inc_lien_dist($lien, $texte='', $class='', $title='', $hlang='', $rel='
 define('_RACCOURCI_LIEN', "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS");
 
 // http://doc.spip.org/@expanser_liens
-function expanser_liens($t, $connect=''){
+function expanser_liens($t, $connect='', $env=array()){
 
 	$t = pipeline('pre_liens', $t);
 
@@ -239,7 +239,7 @@ define('_RACCOURCI_MODELE',
 define('_RACCOURCI_MODELE_DEBUT', '@^' . _RACCOURCI_MODELE .'@isS');
 
 // http://doc.spip.org/@traiter_modeles
-function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens = null) {
+function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens = null, $env = array()) {
 	// preserver la compatibilite : true = recherche des documents
 	if ($doublons===true)
 		$doublons = array('documents'=>array('doc','emb','img'));
@@ -281,7 +281,7 @@ function traiter_modeles($texte, $doublons=false, $echap='', $connect='', $liens
 				// dans les parametres, plutot que les liens echappes
 				if (!is_null($liens))
 					$params = str_replace($liens[0], $liens[1], $params);
-			  $modele = inclure_modele($type, $id, $params, $lien, $connect);
+			  $modele = inclure_modele($type, $id, $params, $lien, $connect, $env);
 				// en cas d'echec, 
 				// si l'objet demande a une url, 
 				// creer un petit encadre vers elle
