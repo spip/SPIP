@@ -27,27 +27,25 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 	static $dejafait = false;
 
 	if ($GLOBALS['flag_preserver'] || !$GLOBALS['spip_admin'])
-	  return '';
+		return '';
 
-	if (!is_array($debug))
-	  {
-	    if ($dejafait) return '';
-	  }
-	else {
-	  if ($dejafait) {
-	    $res = '';
-	    foreach($debug['sourcefile'] as $k => $v) {
-	      if (strpos($v,'formulaire_admin') === 0)
-		{return $debug['resultat'][$k . 'tout'];}
-	    }
-	    return '';
-	  }
+	if (!is_array($debug)) {
+		if ($dejafait)
+			return '';
+	} else {
+		if ($dejafait) {
+			$res = '';
+			foreach($debug['sourcefile'] as $k => $v) {
+				if (strpos($v,'formulaire_admin') === 0)
+					return $debug['resultat'][$k . 'tout'];
+			}
+			return '';
+		}
 	}
-
 	$dejafait = true;
 
-	include(_FILE_CONNECT);
 	// regler les boutons dans la langue de l'admin (sinon tant pis)
+	include(_FILE_CONNECT);
 	$login = addslashes(ereg_replace('^@','',$GLOBALS['spip_admin']));
 	if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'"))) {
 		$lang = $row['lang'];
@@ -66,8 +64,8 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 	if (!$var_preview) {
 		// Bouton statistiques
 		if (lire_meta("activer_statistiques") != "non" 
-		    AND $id_article
-		    AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
+		AND $id_article
+		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
 			if (spip_fetch_array(spip_query("SELECT id_article
 			FROM spip_articles WHERE statut='publie'
 			AND id_article =".intval($id_article)))) {
@@ -80,28 +78,34 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 		}
 
 		// Bouton de debug
-		$debug = (($forcer_debug
-			  OR $GLOBALS['bouton_admin_debug']
-			  OR ($GLOBALS['var_mode'] == 'debug'
-			      AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug']))
-		  	AND ($GLOBALS['code_activation_debug'] == 'oui' OR
-			     ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) ?
-		  'debug' : '';
+		$debug = (
+			($forcer_debug
+			OR $GLOBALS['bouton_admin_debug']
+			OR ($GLOBALS['var_mode'] == 'debug'
+				AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug']
+			)) AND ($GLOBALS['code_activation_debug'] == 'oui'
+				OR $GLOBALS['auteur_session']['statut'] == '0minirezo')
+		) ? 'debug' : '';
 	}
 
+	// hack - ne pas avoir la rubrique si un autre bouton est deja present
+	if ($id_article OR $id_breve) unset ($id_rubrique);
+
 	return array('formulaire_admin', 0,
-		     array(
-			   'action' => $action,
-			   'id_article' => $id_article,
-			   'id_auteur' => $id_auteur,
-			   'id_breve' => $id_breve,
-			   'debug' => $debug,
-			   'id_mot' => $id_mot,
-			   'popularite' => intval($popularite),
-			   'rubrique' => $rubrique,
-			   'statistiques' => $statistiques,
-			   'visites' => intval($visites),
-			   'use_cache' => ($use_cache ? ' *' : '')));
+			array(
+				'id_article' => $id_article,
+				'id_rubrique' => $id_rubrique,
+				'id_auteur' => $id_auteur,
+				'id_breve' => $id_breve,
+				'id_mot' => $id_mot,
+				'action' => $action,
+				'debug' => $debug,
+				'popularite' => intval($popularite),
+				'statistiques' => $statistiques,
+				'visites' => intval($visites),
+				'use_cache' => ($use_cache ? ' *' : '')
+			)
+		);
 }
 
 
@@ -111,20 +115,12 @@ function perso_admin($texte) {
 	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
 	if (@file_exists('spip_admin_perso.css'))
 		$css2 = "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
-	else $css2 = '';
-	$x = strpos($texte,$css);
-	if ($x !== false) {
-		if ($css2) {
-			$x+=strlen($css);
-			return substr($texte,0,$x) . $css2 . substr($texte,$x+1);
-		} else 	return $texte;
-	} else {
-		if (eregi('<(/head|body)', $texte, $regs)) {
-			$texte = explode($regs[0], $texte, 2);
-			return $texte[0] . $css. $css2 . $regs[0] . $texte[1];
-		} else
-			return $css . $css2 . $texte;
-	}
+
+	if (eregi('<(/head|body)', $texte, $regs)) {
+		$texte = explode($regs[0], $texte, 2);
+		return $texte[0] . $css. $css2 . $regs[0] . $texte[1];
+	} else
+		return $css . $css2 . $texte;
 }
 
 ?>

@@ -176,7 +176,14 @@ function cherche_page ($cache, $contexte, $fond)  {
 	return $page;
 }
 
-// Contexte: les parametres HHTP sauf ceux ajoutés par spip + la globale date
+
+//
+// Contexte : lors du calcul d'une page spip etablit le contexte a partir
+// des variables $HTTP_GET_VARS et $HTTP_POST_VARS, et leur ajoute la date
+// Note : pour hacker le contexte depuis le fichier d'appel (article.php3),
+// il est recommande de modifier $HTTP_GET_VARS['toto'] (meme si la page est
+// appelee avec la methode POST).
+//
 function calculer_contexte() {
 	foreach($GLOBALS['HTTP_GET_VARS'] as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
