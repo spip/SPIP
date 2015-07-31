@@ -76,7 +76,7 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_doc_descriptif { clear: both; font-size: 0.70em; }
 
 /* *  Images typographiques (via image_typo), URL a revoir... */
-.format_png { behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]); }
+.format_png { behavior: dist/win_width.htc; }
 
 /*  ------------------------------------------ */
 /*  Habillage des formulaires 
@@ -176,9 +176,8 @@ div.choix_mots label { display: inline; }
 #page_login .formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
 #page_login a { color: #e86519; }
 
-/*  ------------------------------------------ */
 /*  Couleurs des liens de Spip
-/*  ------------------------------------------ */
+----------------------------------------------- */
 a.spip_in { color: #A02020; } /* liens internes */
 a.spip_out { color: #2020A0; } /* liens sortants */
 a.spip_url { color: #2020A0; } /* liens url sortants */
