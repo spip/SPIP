@@ -303,7 +303,7 @@ function rindex_pile($p, $champ, $motif)
 	while ($b != '') {
 	if ($s = $p->boucles[$b]->param) {
 	  foreach($s as $v) {
-		if (strpos($v,$motif) !== false) {
+		if (strpos($v[1][0]->texte,$motif) !== false) {
 		  $p->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
 			"]['$champ']";
 		  $b = '';
