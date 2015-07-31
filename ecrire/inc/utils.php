@@ -1212,8 +1212,8 @@ function verifier_visiteur() {
 	// Attention on separe bien session_nom et nom, pour eviter
 	// les melanges entre donnees SQL et variables plus aleatoires
 	if (
-		_request('session_nom')
-		OR _request('session_email')
+		_request('session_nom') !== null
+		OR _request('session_email') !== null
 	) {
 		@spip_initialisation();
 		$session = charger_fonction('session', 'inc');
