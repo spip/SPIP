@@ -1500,10 +1500,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			if ($total_messages == 1) {
 				while($row = @mysql_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<a href='message.php3?id_message=$ze_message'><font color='red'>VOUS AVEZ UN NOUVEAU MESSAGE</font></a>";
+					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>VOUS AVEZ UN NOUVEAU MESSAGE</b></font></a>";
 				}
 			}
-			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='white'>VOUS AVEZ $total_messages NOUVEAUX MESSAGES</font></a>";
+			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>VOUS AVEZ $total_messages NOUVEAUX MESSAGES</font></a>";
 			$result_messages = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur' AND messages.statut='publie' AND lien.id_message=messages.id_message AND messages.rv='oui' AND messages.date_heure>DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY messages.id_message");
 			$total_messages = @mysql_num_rows($result_messages);
 			
