@@ -376,6 +376,7 @@ function etat_base_accueil()
 	return $res ;
 }
 
+// http://doc.spip.org/@acceuil_liste_participants
 function acceuil_liste_participants()
 {
 	$q = spip_query("SELECT COUNT(*) AS cnt, statut FROM spip_auteurs GROUP BY statut HAVING cnt <>0 AND statut IN ('" . join("','", $GLOBALS['liste_des_statuts']) . "')");
