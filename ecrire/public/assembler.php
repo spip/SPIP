@@ -439,7 +439,7 @@ function inclure_modele($type, $id, $params, $lien) {
 	if (!find_in_path($fond.'.html')) {
 		if (!$lien)
 			$lien = calculer_url("$type$id", '', 'tout');
-		if ($lien[1] == 'spip_url')
+		if (strpos($lien[1],'spip_url') !== false)
 			return false;
 		else
 			return '<a href="'.$lien[0].'" class="spip_modele'
