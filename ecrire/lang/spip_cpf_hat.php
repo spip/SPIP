@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Chanje',
 'bouton_chercher' => 'Ch&egrave;che',
 'bouton_choisir' => 'Chwazi',
+'bouton_deplacer' => 'D&eacute;placer', # NEW
 'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
 'bouton_enregistrer' => 'Enskri',
 'bouton_radio_desactiver_messagerie_interne' => 'Rete kazmodekri',

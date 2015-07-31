@@ -69,6 +69,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'bouton_changer' => '&#20462;&#25913;',
 'bouton_chercher' => '&#25628;&#32034;',
 'bouton_choisir' => '&#36873;&#25321;',
+'bouton_deplacer' => 'D&eacute;placer', # NEW
 'bouton_download' => 'T&eacute;l&eacute;charger', # NEW
 'bouton_enregistrer' => '&#20445;&#23384;',
 'bouton_radio_desactiver_messagerie_interne' => '&#20572;&#29992;&#20869;&#37096;&#28040;&#24687;',
