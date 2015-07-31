@@ -306,9 +306,10 @@ $meta = $connect_id_rubrique = array();
 // *** Fin des globales *** //
 
 //
-// Definitions des fonctions (charge aussi inc/flock)
+// Charger les fonctions liees aux serveurs Http et Sql.
 //
 require_once _DIR_RESTREINT . 'inc/utils.php';
+require_once _DIR_RESTREINT . 'base/connect_sql.php';
 
 // Definition personnelles eventuelles
 
@@ -321,6 +322,7 @@ error_reporting(SPIP_ERREUR_REPORT);
 
 //
 // INITIALISER LES REPERTOIRES NON PARTAGEABLES ET LES CONSTANTES
+// (charge aussi inc/flock)
 //
 // mais l'inclusion precedente a peut-etre deja appele cette fonction
 // ou a defini certaines des constantes que cette fonction doit definir
