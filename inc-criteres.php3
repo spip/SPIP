@@ -666,11 +666,15 @@ function calculer_critere_externe(&$boucle, $id_table, $lien, $join, $suite) {
 	$boucle->lien = true;
 	$boucle->from["L$num"] = $lien;
 	$boucle->join[] = "$id_field=L$num." . $join;
+	/* cette clause semble contradictoire avec un eventuel ORDER BY
+	 // cf http://article.gmane.org/gmane.comp.web.spip.devel/30497
 	if (!in_array($id_field, $boucle->group))
 	  $boucle->group[] = $id_field;
 	// postgres exige que le champ pour GROUP soit dans le SELECT
 	if (!in_array($id_field, $boucle->select))
 	  $boucle->select[] = $id_field;
+	*/
+
 	return $num;
 }
 
