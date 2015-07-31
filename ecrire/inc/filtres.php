@@ -1881,6 +1881,17 @@ function extraire_trads($bloc) {
 
 
 /**
+ * Calculer l'initiale d'un nom
+ *
+ * @param string $nom
+ * @return string L'initiale en majuscule
+ */
+function filtre_initiale($nom){
+	return spip_substr(trim(strtoupper(extraire_multi($nom))),0,1);
+}
+
+
+/**
  * Retourne la donnée si c'est la première fois qu'il la voit
  *
  * Il est possible de gérer différentes "familles" de données avec

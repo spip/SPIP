@@ -16,9 +16,9 @@
 
 		#SET{p,''}
 		<BOUCLE_lettre(AUTEURS){tout}{id_auteur?}{where?}{statut?}{recherche?}{par multi nom}{id_auteur==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#NOM**|extraire_multi|initiale|unique|oui)
+		(#NOM**|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutaut,@#ID_AUTEUR}|ancre_url{paginationaut}|afficher_initiale{#NOM**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutaut,@#ID_AUTEUR}|ancre_url{paginationaut}|afficher_initiale{#NOM**|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -40,7 +40,7 @@
 	<tbody>
 	<BOUCLE_liste_aut(AUTEURS){tout}{id_auteur?}{id_mot?}{where?}{statut?}{recherche?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} aut}{!compteur_articles_filtres #ENV{filtre_statut_articles,poubelle}}>
 		[(#LANG|changer_typo)]
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|initiale|=={#ENV{i}}|?{on}|unique)]">
 			<td class='statut'>[(#STATUT|puce_statut{auteur})]</td>
 			<td class="messagerie">[<a href="(#ID_AUTEUR|auteur_lien_messagerie{#EN_LIGNE,#STATUT,#IMESSAGE})">[(#CHEMIN{images/m_envoi.gif}|balise_img{<:info_envoyer_message_prive:>})]</a>]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a>[ <small>((#WEBMESTRE|=={oui}|?{<:statut_webmestre:>}))</small>][ <small>((#STATUT|=={0minirezo}|et{#AUTORISER{'','','',#ID_AUTEUR}|non}|?{<:statut_admin_restreint:>}))</small>]</td>
