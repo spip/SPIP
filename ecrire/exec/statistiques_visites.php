@@ -121,9 +121,11 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 
 	$where2 = $duree ? "$order > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL $duree $type)": '';
 	if ($where) $where2 = $where2 ?  "$where2 AND $where" : $where;
-	$log = statistiques_collecte_date('visites', "(CEIL(UNIX_TIMESTAMP($order) / $interval) *  $interval)", $table, $where2, $serveur);
 
-	
+	// sur certains SQL, la division produit un entier tronque a la valeur inferieure
+	// on ne peut donc faire un CEIL, il faut faire un FLOOR
+	$log = statistiques_collecte_date('visites', "(FLOOR((UNIX_TIMESTAMP($order)+$interval-1) / $interval) *  $interval)", $table, $where2, $serveur);
+
 	if ($log)
 	  $res = statistiques_tous($log, $id_article, $table, $where, $order, $serveur, $duree, $interval, $total_absolu, $val_popularite,  $classement, $liste);
 	  
