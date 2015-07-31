@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *   table_sql demandee explicitement
  * @param array $desc
  *   description connue de la table sql demandee
- * @return array
+ * @return array|bool
  */
 function lister_table_objets_sql($table_sql=null, $desc=array()){
 	static $infos_tables = null;
@@ -59,7 +59,8 @@ function lister_table_objets_sql($table_sql=null, $desc=array()){
 			$infos_tables[$t] = renseigner_table_objet_sql($t,$infos);
 	}
 	if ($table_sql AND !isset($infos_tables[$table_sql])){
-		$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
+	#	$infos_tables[$table_sql] = renseigner_table_objet_sql($table_sql,$desc);
+		return false;
 	}
 	if ($table_sql)
 		return $infos_tables[$table_sql];
