@@ -1291,8 +1291,12 @@ else {
 echo "</div>";
 }
 
+
+//
 // Documents associes a l'article
+//
 afficher_documents_non_inclus($id_article, "article", $flag_editable);
+
 
 //
 // "Demander la publication"

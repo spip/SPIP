@@ -140,10 +140,9 @@ if ($statut == 'publie') {
 fin_boite_info();
 
 
-echo "<p><center>";
-	icone ("Voir toutes les br&egrave;ves", "breves.php3", "breve-24.gif","rien.gif");
-	icone ("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
-echo "</center>";
+debut_raccourcis();
+icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+fin_raccourcis();
 
 
 //////////////////////////////////////////////////////
