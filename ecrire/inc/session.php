@@ -67,6 +67,13 @@ function ajouter_session($auteur) {
 		if (isset($auteur_verif['hash_env'])) unset($auteur_verif['hash_env']);
 		if (isset($auteur_verif['ip_change'])) unset($auteur_verif['ip_change']);
 		
+		// Les variables vraiment nulle ne sont pas à prendre en compte non plus
+		foreach($auteur_verif as $variable=>$valeur){
+			if ($valeur === null){
+				unset($auteur_verif[$variable]);
+			}
+		}
+		
 		// Si c'est vide alors on supprime et on ne fait rien
 		if (!$auteur_verif){
 			if (@file_exists($fichier_session)) spip_unlink($fichier_session);
@@ -103,12 +110,8 @@ function ajouter_session($auteur) {
 // Ajouter une donnee dans la session SPIP
 // http://doc.spip.org/@session_set
 function session_set($nom, $val=null) {
-	// On ajoute que si la valeur n'est pas nulle
-	if ($val !== null)
-		$GLOBALS['visiteur_session'][$nom] = $val;
-	// Sinon on regarde si la valeur existait afin de la supprimer
-	elseif (isset($GLOBALS['visiteur_session'][$nom]))
-		unset($GLOBALS['visiteur_session'][$nom]);
+	// On ajoute la valeur dans la globale
+	$GLOBALS['visiteur_session'][$nom] = $val;
 	
 	ajouter_session($GLOBALS['visiteur_session']);
 	actualiser_sessions($GLOBALS['visiteur_session']);
@@ -158,7 +161,14 @@ function ecrire_fichier_session($fichier, $auteur) {
 	unset($auteur['low_sec']);
 	unset($auteur['alea_actuel']);
 	unset($auteur['alea_futur']);
-
+	
+	// ne pas enregistrer les valeurs vraiment nulle dans le fichier
+	foreach($auteur as $variable=>$valeur){
+		if ($valeur === null){
+			unset($auteur[$variable]);
+		}
+	}
+	
 	// enregistrer les autres donnees du visiteur
 	$texte = "<"."?php\n";
 	foreach ($auteur as $var => $val)
