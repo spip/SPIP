@@ -504,28 +504,25 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 
 function afficher_compactes($image_name) {
 
-	$afficher_message_zip = false;
 	$zip = new PclZip($image_name);
 
 	if ($list = $zip->listContent()) {
 	// si pas possible de decompacter: installer comme fichier zip joint
 	// Verifier si le contenu peut etre uploade (verif extension)
+		$aff_fichiers = array();
 		for ($i=0; $i<sizeof($list); $i++) {
 			for(reset($list[$i]); $key = key($list[$i]); next($list[$i])) {
 			
 				if ($key == "stored_filename") {
-					if (ereg("\.([^.]+)$", $list[$i][$key], $match)) {
-						$ext = addslashes(strtolower($match[1]));
-						$ext = corriger_extension($ext);
-
-						// Regexp des fichiers a ignorer
-						if (!ereg("^(\.|.*/\.|.*__MACOSX/)",
-						$list[$i][$key])) {
-							$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
-							$result = spip_query($query);
+					$f =  $list[$i][$key];
+					  // Regexp des fichiers a ignorer
+					if (!ereg("^(\.|.*/\.|.*__MACOSX/)", $f)) {
+						if (ereg("\.([^.]+)$", $f, $match)) {
+							$result = spip_query("SELECT * FROM spip_types_documents WHERE extension='"
+. corriger_extension(addslashes(strtolower($match[1]))) 
+									     . "' AND upload='oui'");
 							if ($row = @spip_fetch_array($result)) {
-								$afficher_message_zip = true;
-								$aff_fichiers .= "<li>".$list[$i][$key]."</li>";
+								$aff_fichiers []= $f;
 							}
 						}
 					}
@@ -534,34 +531,43 @@ function afficher_compactes($image_name) {
 		}
 	}
 
-	if (!$afficher_message_zip) return false;
-	  
-		// presenter une interface pour choisir si fichier joint ou decompacter
-		include_ecrire ("inc_presentation.php3");
-		install_debut_html(_T('upload_fichier_zip'));
-		
-		echo "<p>"._T('upload_fichier_zip_texte')."</p>";
-		echo "<p>"._T('upload_fichier_zip_texte2')."</p>";
-		
-		$link = new Link();
-		$link->delVar("image");
-		$link->delVar("image2");
-		$link->addVar("image_name", $image_name);
+	if (!$aff_fichiers) return false;
 
-		echo $link->getForm('POST');
-		
-		echo _L('')."<div><input type='radio' checked name='action_zip' value='telquel'>"._T('upload_zip_telquel')."</div>";
-		echo "<div><input type='radio' name='action_zip' value='decompacter'>"._T('upload_zip_decompacter')."</div>";
-		
-		echo "<ul>$aff_fichiers</ul>";
-		
-		echo "<div>&nbsp;</div>";
-		echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='"._T('bouton_valider')."'></div>";
-		
-		echo "</form>";
-		install_fin_html();
-			
-		return true;
+// presenter une interface pour choisir si fichier joint ou decompacter
+// passer ca en squelette un de ces jours.
+
+	$link = new Link();
+	$link->delVar("image");
+	$link->delVar("image2");
+	$link->addVar("image_name", $image_name);
+	
+	include_ecrire ("inc_presentation.php3");
+	install_debut_html(_T('upload_fichier_zip'));
+
+	echo "<p>",
+		_T('upload_fichier_zip_texte'),
+		"</p>",
+		"<p>",
+		_T('upload_fichier_zip_texte2'),
+		"</p>",
+		$link->getForm('POST'),
+		_L(''),
+		"<div><input type='radio' checked name='action_zip' value='telquel'>",
+		_T('upload_zip_telquel'),
+		"</div>",
+		"<div><input type='radio' name='action_zip' value='decompacter'>",
+		_T('upload_zip_decompacter'),
+		"</div>",
+		"<ul><li>" ,
+		 join("</li>\n<li>",$aff_fichiers) ,
+		 "</li></ul>",
+		"<div>&nbsp;</div>",
+		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='",
+		_T('bouton_valider'),
+		"'></div>",
+		"</form>";
+	install_fin_html();
+	return true;
 }
 
 //
@@ -650,8 +656,10 @@ elseif ($doc_rotate)
 if (!$redirect) {
 	if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 	else $vars = $HTTP_GET_VARS;
+	$redirect = $vars["redirect"];
+	if (!$redirect) $redirect = 'articles.php3'; # ne devrait pas arriver
 
-	$link = new Link(_DIR_RESTREINT_ABS . $vars["redirect"]);
+	$link = new Link(_DIR_RESTREINT_ABS . $redirect);
 	reset($vars);
 	while (list ($key, $val) = each ($vars)) {
 	  if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip)$", $key)) {

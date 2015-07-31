@@ -202,10 +202,12 @@ function verifier_php_auth() {
 //
 // entete php_auth
 //
-function ask_php_auth($text_failure) {
+function ask_php_auth($text_failure, $raison, $retour, $url, $re, $lien) {
 	@Header("WWW-Authenticate: Basic realm=\"espace prive\"");
 	@Header("HTTP/1.0 401 Unauthorized");
-	echo $text_failure;
+	echo "<b>$text_failure</b><p>$raison</p>[<a href='./'>$retour</a>] ",
+	  "[<a href='spip_cookie.php3?essai_auth_http=oui&amp;$url'>$re</a>]",
+	  (!$lien ? '' : " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]");
 	exit;
 }
 

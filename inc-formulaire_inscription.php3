@@ -5,21 +5,23 @@ include_ecrire('inc_abstract_sql.php3');
 global $balise_FORMULAIRE_INSCRIPTION_collecte ;
 $balise_FORMULAIRE_INSCRIPTION_collecte = array('mail_inscription', 'nom_inscription');
 
+// args 0 et 1 sont mail et nom ci-dessus, args2 le parametre de la balise
+
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres)
 {
-  list($mail_inscription, $nom_inscription) = $args;
   return ((lire_meta('accepter_inscriptions') != 'oui') ? '' :
-	  array('redac', $mail_inscription, $nom_inscription));
+	  array('redac', $args[0], $args[1], 
+		($args[2] == 'focus' ? 'nom_inscription' : '')));
 }
 
-function balise_FORMULAIRE_INSCRIPTION_dyn($type, $mail_inscription, $nom_inscription) {
-	if (($type == 'redac') AND (lire_meta("accepter_inscriptions") == "oui"))
+function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscription, $focus) {
+	if (($mode == 'redac') AND (lire_meta("accepter_inscriptions") == "oui"))
 		$statut = "nouveau";
-	else if (($type == 'forum') AND ((lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')))
+	else if (($mode == 'forum') AND ((lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')))
 		$statut = "6forum";
 	else return _T('pass_rien_a_faire_ici');
 
-	if (test_mail_ins($type, $mail_inscription) && $nom_inscription) {
+	if (test_mail_ins($mode, $mail_inscription) && $nom_inscription) {
 		include(_FILE_CONNECT);
 		// envoyer les identifiants si l'abonne n'existe pas déjà.
 		if (!$row = spip_fetch_array(spip_query("SELECT statut, id_auteur, login, pass FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."' LIMIT 1")))
@@ -33,13 +35,13 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($type, $mail_inscription, $nom_inscri
 					 '(nom, email, login, pass, statut, htpass)',
 					 "('".addslashes($nom_inscription)."',  '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
 			ecrire_acces();
-			return envoyer_inscription($mail_inscription, $statut, $type, $login, $pass);
+			return envoyer_inscription($mail_inscription, $statut, $mode, $login, $pass);
 		  }
 
 		else {
 		  // existant mais encore muet, renvoyer les infos
 			if ($row['statut'] == 'nouveau') {
-			  return (envoyer_inscription($mail_inscription, $row['statut'], $type, $row['login'], $row['pass']));
+			  return (envoyer_inscription($mail_inscription, $row['statut'], $mode, $row['login'], $row['pass']));
 			} else {
 				if ($row['statut'] == '5poubelle')
 		  // dead
@@ -54,7 +56,9 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($type, $mail_inscription, $nom_inscri
 	else {
 		if (!$nom_inscription) 
 		  {
-		       return array("formulaire_inscription-dist",0);
+		    return array("formulaire_inscription",0,
+				 array('focus' => $focus,
+				       'mode' => $mode));
 		  }
 		else {
 		  spip_log("Mail incorrect: '$mail_inscription'");
@@ -66,7 +70,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($type, $mail_inscription, $nom_inscri
 // fonction qu'on peut redefinir pour filtrer selon l'adresse mail
 // cas general: controler juste que l'adresse n'est pas vide
 
-function test_mail_ins($type, $mail_inscription) {
+function test_mail_ins($mode, $mail_inscription) {
   return trim($mail_inscription);
 }
 

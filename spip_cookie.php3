@@ -3,26 +3,20 @@
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session.php3");
 
-
 // gerer l'auth http
 function auth_http($url, $essai_auth_http) {
-	$lien = " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
 	if ($essai_auth_http == 'oui') {
-		include_ecrire('inc_session.php3');
 		if (!verifier_php_auth()) {
 		  $url = quote_amp(urlencode($url));
-			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;url=$url'>"._T('login_nouvelle_tentative')."</a>]";
-			if (ereg(_DIR_RESTREINT_ABS, $url))
-			  $page_erreur .= $lien;
-			ask_php_auth($page_erreur);
+		  ask_php_auth(_T('login_connexion_refusee'),_T('login_login_pass_incorrect'),_T('login_retour_site'), "url=$url",_T('login_nouvelle_tentative'), (ereg(_DIR_RESTREINT_ABS, $url)));
+		  exit;
 		}
 		else
 			redirige_par_entete($url);
 	}
 	// si demande logout auth_http
 	else if ($essai_auth_http == 'logout') {
-		include_ecrire('inc_session.php3');
-		ask_php_auth("<b>"._T('login_deconnexion_ok')."</b><p />"._T('login_verifiez_navigateur')."<p />[<a href='./'>"._T('login_retour_public')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;redirect=ecrire'>"._T('login_test_navigateur')."</a>] $lien");
+		ask_php_auth(_T('login_deconnexion_ok'),_T('login_verifiez_navigateur'),_T('login_retour_public'),"redirect=ecrire",_T('login_test_navigateur'), true);
 		exit;
 	}
 }
@@ -66,7 +60,6 @@ if ($logout_public) {
 }
 // tentative de logout
 if ($logout) {
-	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 	if ($auteur_session['login'] == $logout) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
@@ -185,7 +178,6 @@ if ($var_lang) {
 // changer de langue espace prive (ou login)
 if ($var_lang_ecrire) {
 	include_ecrire('inc_lang.php3');
-	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 
 	if (changer_langue($var_lang_ecrire)) {

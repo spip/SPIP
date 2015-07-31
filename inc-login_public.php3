@@ -3,6 +3,7 @@
 include(_FILE_CONNECT);
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_session.php3");
+include_ecrire("inc_filtres.php3");
 
 global $balise_LOGIN_PUBLIC_collecte;
 $balise_LOGIN_PUBLIC_collecte = array('url');
@@ -55,7 +56,7 @@ function login_explicite($login, $cible, $mode) {
 
 function login_pour_tous($login, $cible, $message, $action, $mode) {
 
-  global $ignore_auth_http, $spip_admin, $php_module, $spip_lang_left;
+  global $ignore_auth_http, $spip_admin, $php_module;
 
 	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
 	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
@@ -65,10 +66,6 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 	  $echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
 	$auth = ($echec_cookie AND $php_module AND !$ignore_auth_http) ?
 	  'spip_cookie.php3' : '';
-	$sinscrire = ((lire_meta("accepter_inscriptions") == "oui") OR
-		      (($mode == 'forum') AND (
-				     lire_meta("accepter_visiteurs") == "oui"
-				     OR lire_meta('forums_publics') == 'abo')));
 	// Le login est memorise dans le cookie d'admin eventuel
 	if (!$login) {
 		if (ereg("^@(.*)$", $spip_admin, $regs))
@@ -101,12 +98,8 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 				       'action' => $action,
 				       'url' => $cible,
 				       'auth' => $auth,
-				       'mode' => $mode,
-				       'oubli' => (tester_mail() ? ' ' : ''),
 				       'echec_cookie' => ($echec_cookie ? ' ' : ''),
-				       'spip_lang_left' => $spip_lang_left,
 				       'message' => ($message ? ' ' : ''),
-				       'sinscrire' => ($sinscrire ? ' ': ''),
 				       )
 				 )
 		     );
@@ -121,15 +114,13 @@ function filtre_rester_connecte($prefs)
 	return $prefs['cnx'] == 'perma' ? ' checked="checked"' : '';
 }
 
-function retoursite($mode)
+function silogoauteur($id_auteur)
 {
-  return (($mode == 'forum') ? '' : (lire_meta('adresse_site'))) ;
+  $f = _DIR_IMG . 'auton' . $id_auteur . '.jpg';
+  return (@file_exists($f) ? $f : '');
 }
 
-function vide($a) {return $a ? '' : ' ';}
 
-function choisir($t,$v,$f) {return $t ? $v : $f;}
-
-function egal($a1,$a2) {return ($a1 == $a2) ? ' ' : '';}
+function choisir_noeud($t,$v,$f) {return $t ? ("_$t" . ".$v") : ".$f";}
 
 ?>
