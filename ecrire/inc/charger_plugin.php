@@ -309,7 +309,7 @@ function liste_fichiers_pclzip($status) {
 	$l .= "<ul style='font-size:x-small;'>\n";
 	foreach ($list as $f) {
 		if (basename($f) == 'svn.revision')
-			lire_fichier($status['dirname'].'/'.$f,$svn);
+			lire_fichier($status['tmpname'].'/'.$f,$svn);
 		if ($joli = preg_replace(',^(.*/)([^/]+/?)$,', '<span style="visibility:hidden">\1</span>\2', $f))
 			$l .= "<li>".$joli."</li>\n";
 	}
