@@ -711,20 +711,20 @@ else if ($statut_article == 'poubelle') {
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 if ($surtitre) {
-	echo "<span $lang_dir><font face='arial,helvetica' size=3><b>";
+	echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
 	echo typo($surtitre);
 	echo "</b></font></span>\n";
 }
 	gros_titre($titre, $logo_statut);
 if ($soustitre) {
-	echo "<span $lang_dir><font face='arial,helvetica' size=3><b>";
+	echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
 	echo typo($soustitre);
 	echo "</b></font></span>\n";
 }
 
 
 if ($descriptif) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $lang_dir>";
+	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
@@ -1267,7 +1267,7 @@ if ((lire_meta('multi_articles') == 'oui')
 				$statut_trad = $row["statut"];
 
 				changer_typo($lang_trad);
-				$titre_trad = "<span $lang_dir>$titre_trad</span>";
+				$titre_trad = "<span $dir_lang>$titre_trad</span>";
 
 				if ($ifond == 1) {
 					$ifond = 0;
@@ -1465,15 +1465,15 @@ if ($virtuel) {
 	fin_boite_info();
 }
 else {
-	echo "<div $lang_dir><b>";
+	echo "<div $dir_lang><b>";
 	echo justifier(propre($chapo));
 	echo "</b></div>\n\n";
 
-	echo "<div $lang_dir>".justifier(propre($texte))."</div>";
+	echo "<div $dir_lang>".justifier(propre($texte))."</div>";
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $lang_dir><font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<div $dir_lang><font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
 		echo "</font></div>";
 		echo fin_cadre_enfonce();
@@ -1481,7 +1481,7 @@ else {
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
-		echo "<div $lang_dir><font size=2>";
+		echo "<div $dir_lang><font size=2>";
 		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
 		echo "</font></div>";
 		echo fin_cadre_relief();

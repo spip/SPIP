@@ -559,9 +559,11 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $ouvre_note;
 	global $ferme_note;
 	global $flag_pcre;
+	global $lang_dir;
 
 	// Puce
-	$lang_dir = lang_dir($GLOBALS['spip_lang']);
+	if (!$lang_dir)
+		$lang_dir = lang_dir($GLOBALS['spip_lang']);
 	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl']) $puce = $GLOBALS['puce_rtl'];
 	else $puce = $GLOBALS['puce'];
 

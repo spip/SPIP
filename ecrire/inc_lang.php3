@@ -329,13 +329,14 @@ function lang_typo($lang) {
 
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
 function changer_typo($lang = '') {
-	global $lang_typo, $lang_dir;
+	global $lang_typo, $lang_dir, $dir_lang;
 
 	if (!$lang)
 		$lang = lire_meta('langue_site');
 
 	$lang_typo = lang_typo($lang);
-	$lang_dir = " dir='".lang_dir($lang)."'";
+	$lang_dir = lang_dir($lang);
+	$dir_lang = " dir='$lang_dir'";
 }
 
 // selectionner une langue
