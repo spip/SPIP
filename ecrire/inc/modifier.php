@@ -162,7 +162,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 			)
 		);
 	}
-var_dump($conflits);
+	
 	// S'il y a un conflit, prevenir l'auteur de faire un copier/coller
 	if ($conflits) {
 		$redirect = url_absolue(
