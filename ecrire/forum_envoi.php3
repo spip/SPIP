@@ -139,7 +139,13 @@ else {
 debut_cadre_formulaire();
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
-	icone(_T('icone_retour'), $adresse_retour, "forum-interne-24.gif");
+$forum_stat = $statut;
+if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
+ else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
+ else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
+ else $logo = "forum-public-24.gif";
+
+icone(_T('icone_retour'), $adresse_retour, $logo);
 echo "</TD>";
 
 echo "<TD><IMG SRC='" . _DIR_IMG_PACK . "rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
