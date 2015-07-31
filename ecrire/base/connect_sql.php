@@ -283,9 +283,9 @@ function table_jointure($x, $y) {
  * @return array
  */
 function query_echappe_textes($query){
-	static $codeEchappements = array("''"=>"\x1@##@\x1","\'"=>"\x2@##@\x2");
+	static $codeEchappements = array("''"=>"\x1@##@\x1", "\'"=>"\x2@##@\x2", "\\\""=>"\x3@##@\x3");
 	$query = str_replace(array_keys($codeEchappements), array_values($codeEchappements), $query);
-	if (preg_match_all("/(['\"])[^']*(\\1)/S",$query,$textes)){
+	if (preg_match_all("/((['])[^']*(\\2))|(([\"])[^\"]*(\\5))/S",$query,$textes)){
 		$textes = reset($textes); // indice 0 du match
 		switch(count($textes)){
 			case 0:$replace=array();break;
@@ -317,7 +317,7 @@ function query_echappe_textes($query){
  * @return string
  */
 function query_reinjecte_textes($query, $textes){
-	static $codeEchappements = array("''"=>"\x1@##@\x1","\'"=>"\x2@##@\x2");
+	static $codeEchappements = array("''"=>"\x1@##@\x1", "\'"=>"\x2@##@\x2", "\\\""=>"\x3@##@\x3");
 	# debug de la substitution
 	#if (($c1=substr_count($query,"%"))!=($c2=count($textes))){
 	#	spip_log("$c1 ::". $query,"tradquery"._LOG_ERREUR);
