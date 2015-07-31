@@ -75,18 +75,15 @@ function formulaires_mot_de_passe_traiter_dist($id_auteur=null){
 	}
 	elseif ($p=_request('p')) {
 		$p = preg_replace(',[^0-9a-f.],i','',$p);
-		$row = sql_fetsel('id_auteur,login','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'5poubelle'","pass<>''"));
+		$row = sql_fetsel('id_auteur,login,source','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'5poubelle'","pass<>''"));
 	}
 
 	if ($row
 	 && ($id_auteur = $row['id_auteur'])
 	 && ($oubli = _request('oubli'))) {
-		include_spip('inc/acces');
-		$mdpass = md5($oubli);
-		$htpass = generer_htpass($oubli);
-		include_spip('base/abstract_sql');
-		sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "id_auteur=" . intval($id_auteur));
-	
+		include_spip('inc/auth');
+		auth_modifier_pass($row['source'], $row['login'], $oubli, $id_auteur);
+
 		$login = $row['login'];
 		$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
 		"<p>" . _T('pass_rappel_login', array('login' => $login));

@@ -210,10 +210,9 @@ function test_login($nom, $mail) {
 function creer_pass_pour_auteur($id_auteur) {
 	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(8, $id_auteur);
-	$mdpass = md5($pass);
-	$htpass = generer_htpass($pass);
-	sql_updateq('spip_auteurs', array('pass'=>$mdpass, 'htpass'=>$htpass),"id_auteur = ".intval($id_auteur));
-	ecrire_acces();
+	$row = sql_fetsel('source,login','spip_auteurs','id_auteur='.intval($id_auteur));
+	include_spip('inc/auth');
+	auth_modifier_pass($row['source'], $row['login'], $pass, $id_auteur);
 	
 	return $pass;
 }
