@@ -51,7 +51,9 @@ function init_entete($titre='', $dummy=0, $minipres=false) {
 }
 
 function init_head($titre='', $dummy=0, $minipres=false) {
-	return recuperer_fond("prive/squelettes/head/dist",array('titre'=>$titre,'minipres'=>$minipres?' ':''));
+	return
+		"<title>$titre</title>"
+		. recuperer_fond("prive/squelettes/head/dist",array('titre'=>$titre,'minipres'=>$minipres?' ':''));
 }
 
 // fonction envoyant la double serie d'icones de redac
