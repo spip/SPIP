@@ -32,6 +32,7 @@ function liste_plugin_files(){
 	return $plugin_files;
 }
 
+// http://doc.spip.org/@liste_plugin_valides
 function liste_plugin_valides($liste_plug,&$infos){
 	$liste = array();
 	$infos = array();
@@ -62,6 +63,7 @@ function liste_plugin_actifs(){
 	else
 		return array();
 }
+// http://doc.spip.org/@liste_chemin_plugin_actifs
 function liste_chemin_plugin_actifs(){
 	$liste = liste_plugin_actifs();
 	foreach ($liste as $prefix=>$infos) {
