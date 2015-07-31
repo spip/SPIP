@@ -281,6 +281,7 @@ function import_tables($request, $dir) {
 function import_init_meta($tag, $atts, $charset, $request)
 {
 	$version_archive = $atts['version_archive'];
+	$insert = $request['insertion'] ;
 	ecrire_meta('attributs_archive_restauration', serialize($atts),'non');
 	ecrire_meta('version_archive_restauration', $version_archive,'non');
 	ecrire_meta('tag_archive_restauration', $tag,'non');
@@ -302,12 +303,14 @@ function import_init_meta($tag, $atts, $charset, $request)
 			// faire la conversion de charset en php :(
 			effacer_meta('restauration_charset_sql_connexion'); # precaution
 			spip_log("charset de restauration inconnu de sql : $charset");
-			if ($request['insertion'])
+			if ($insert)
 				ecrire_meta('charset_insertion', $charset,'non');
 			else	ecrire_meta('charset_restauration', $charset,'non');
 		}
 	}
-	spip_log("Debut de l'importation (charset: $charset, format: $version_archive)" . ($request['insertion'] ? " insertion $i" : ''));
+
+	$i = $insert ? ("insertion  $insert") : '';
+	spip_log("Debut de l'importation (charset: $charset, format: $version_archive) $i");
 	return $version_archive;
 }
 
