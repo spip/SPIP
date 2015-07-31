@@ -424,7 +424,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 // Peut-on faire de l'upload ftp ?
 // par defaut, les administrateurs
 //
-// http://doc.spip.org/@autoriser_document_voir_dist
+// http://doc.spip.org/@autoriser_chargerftp_dist
 function autoriser_chargerftp_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo';
 }
