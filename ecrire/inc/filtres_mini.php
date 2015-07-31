@@ -44,26 +44,29 @@ function suivre_lien($url, $lien) {
 		return $lien;
 	if (preg_match(',^([a-z0-9]+://.*?)(/.*)?$,iS', $lien, $r))
 		return $r[1].resolve_path($r[2]);
-	
+
 	# L'url site spip est un lien absolu aussi
 	if ($lien == $GLOBALS['meta']['adresse_site']){
 		return $lien;
 	}
-	
+
 	# lien relatif, il faut verifier l'url de base
-	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?([^/#]*)(#.*)?$,S', $url, $regs)) {
+	# commencer par virer la chaine de get de l'url de base
+	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?([^/#?]*)([?][^#]*)?(#.*)?$,S', $url, $regs)) {
 		$debut = $regs[1];
 		$dir = !strlen($regs[2]) ? '/' : $regs[2];
 		$mot = $regs[3];
-		$hash = isset($regs[4])?$regs[4]:"";
+		$get = isset($regs[4])?$regs[4]:"";
+		$hash = isset($regs[5])?$regs[5]:"";
 	}
+	#var_dump(array('url'=>$url,'debut'=>$debut,'dir'=>$dir,'mot'=>$mot,'get'=>$get,'hash'=>$hash));
 	switch (substr($lien,0,1)) {
 		case '/':
 			return $debut . resolve_path($lien);
 		case '#':
-			return $debut . resolve_path($dir.$mot.$lien);
+			return $debut . resolve_path($dir.$mot.$get.$lien);
 		case '':
-			return $debut . resolve_path($dir.$mot.$hash);
+			return $debut . resolve_path($dir.$mot.$get.$hash);
 		default:
 			return $debut . resolve_path($dir.$lien);
 	}
