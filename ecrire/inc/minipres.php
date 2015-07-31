@@ -42,6 +42,7 @@ function install_debut_html($titre = 'AUTO') {
 	  "</title>
 	  <style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
 	  "a {text-decoration: none; }",
+	  "img {border: 0; }",
 	  "\n\n]]>\n--></style>\n\n
 </head>
 <body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>
