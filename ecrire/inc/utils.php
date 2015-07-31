@@ -1724,7 +1724,7 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 
 function trouve_modele($nom)
 {
-	return find_in_path($nom.'.'. _EXTENSION_SQUELETTES, 'modeles');
+	return find_in_path( 'modeles/' . $nom.'.'. _EXTENSION_SQUELETTES);
 }
 
 // Charger dynamiquement une extension php
