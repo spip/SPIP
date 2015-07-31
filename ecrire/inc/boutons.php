@@ -67,9 +67,6 @@ function barre_onglets_config_lang() {
 	$onglets['multi']=
 		  new Bouton('traduction-24.png', 'info_multilinguisme',
 			generer_url_ecrire("config_multilang"));
-		$onglets['fichiers']=
-		  new Bouton('traduction-24.png', 'module_fichiers_langues',
-			generer_url_ecrire("lang_raccourcis"));
 	return $onglets;
 }
 
