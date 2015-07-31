@@ -20,7 +20,7 @@ define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
-define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
+define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options' . _EXTENSION_PHP);
 define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 define('_FILE_CONNECT',
 	(@is_readable(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
@@ -68,11 +68,11 @@ spip_register_globals();
 // *** Parametrage par defaut de SPIP ***
 //
 // Ces parametres d'ordre technique peuvent etre modifies
-// dans ecrire/mes_options.php3 (_FILE_OPTIONS) Les valeurs
+// dans ecrire/mes_options (_FILE_OPTIONS) Les valeurs
 // specifiees dans ce dernier fichier remplaceront automatiquement
 // les valeurs ci-dessous.
 //
-// Pour creer ecrire/mes_options.php3 : recopier simplement
+// Pour creer ecrire/mes_options : recopier simplement
 // les lignes ci-dessous, et ajouter le marquage de debut et
 // de fin de fichier PHP ("< ?php" et "? >", sans les espaces)
 //
@@ -121,14 +121,14 @@ $mysql_profile = false;
 // la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
 // (A desactiver en cas de soucis de connexion chez certains hebergeurs)
 // Note: un test a l'installation peut aussi avoir desactive
-// $mysql_rappel_nom_base directement dans le fichier inc_connect.php3
+// $mysql_rappel_nom_base directement dans le fichier inc_connect
 $mysql_rappel_connexion = true;
 $mysql_rappel_nom_base = true;
 
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
 
-// gestion des extras (voir inc_extra.php3 pour plus d'informations)
+// gestion des extras (voir inc_extra pour plus d'informations)
 $champs_extra = false;
 $champs_extra_proposes = false;
 
@@ -218,7 +218,7 @@ function define_once ($constant, $valeur) {
 
 
 //
-// Inclure le fichier ecrire/mes_options.php3 (ou equivalent)
+// Inclure le fichier ecrire/mes_options (ou equivalent)
 //
 if (@file_exists(_FILE_OPTIONS)) {
 	include(_FILE_OPTIONS);

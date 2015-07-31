@@ -69,7 +69,7 @@ function afficher_raccourcis($module = "public") {
 	global $couleur_foncee;
 	
 	$lang = $module.'_'.$spip_lang;
-	$fichier_lang = $lang.'.php3';
+	$fichier_lang = $lang._EXTENSION_PHP;
 
 	if (@file_exists(_DIR_LANG . $fichier_lang)) {
 		$GLOBALS['idx_lang'] = 'i18n_' . $lang;

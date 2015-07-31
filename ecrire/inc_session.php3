@@ -40,7 +40,7 @@ function hash_env() {
 function fichier_session($id_session, $alea) {
 	if (ereg("^([0-9]+_)", $id_session, $regs))
 		$id_auteur = $regs[1];
-	return _DIR_SESSIONS . 'session_'.$id_auteur.md5($id_session.' '.$alea).'.php3';
+	return _DIR_SESSIONS . 'session_'.$id_auteur.md5($id_session.' '.$alea)._EXTENSION_PHP;
 
 }
 
