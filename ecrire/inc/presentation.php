@@ -1243,20 +1243,16 @@ function afficher_forum_mots($id_forum)
 function afficher_forum_4($compteur_forum, $nb_forum, $thread)
 {
 	global $spip_lang_rtl;
+	$fleche2="forum-droite$spip_lang_rtl.gif";
 	$fleche='rien.gif';
+	$vertical = _DIR_IMG_PACK . 'forum-vert.gif';
+	$rien = _DIR_IMG_PACK . 'rien.gif';
 	$res = '';
 	for ($j=2;$j<=$compteur_forum AND $j<20;$j++){
-		$fond[$j]=_DIR_IMG_PACK . 'rien.gif';
-		if ($thread[$j]!=$nb_forum[$j]){
-			$fond[$j]=_DIR_IMG_PACK . 'forum-vert.gif';
-		}
-		if ($j==$compteur_forum){
-			$fleche="forum-droite$spip_lang_rtl.gif";
-		}
-		$res .= "<td style='width: 10px; background-color: "
-		.  $fond[$j]
-		.  "' valign='top'>"
-		. http_img_pack($fleche, "", "width='10' height='13'")
+		$res .= "<td style='width: 10px; vertical-align: top; background-image: url("
+		. (($thread[$j]!=$nb_forum[$j]) ? $vertical : $rien)
+		.  ");'>"
+		. http_img_pack(($j==$compteur_forum) ? $fleche2 : $fleche, "", "width='10' height='13'")
 		. "</td>\n";
 	}
 	return $res;
