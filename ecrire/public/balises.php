@@ -1249,10 +1249,12 @@ function balise_MODELE_dist($p) {
 	// le cas spip_syndic_articles)
 	#$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
 
-	// Reserver la cle primaire de la boucle courante
-	if ($primary = $p->boucles[$p->id_boucle]->primary) {
-		$id = champ_sql($primary, $p);
-		$code_contexte[] = "'$primary='.".$id;
+	// Reserver la cle primaire de la boucle courante si elle existe
+	if ($idb = $p->id_boucle) {
+		if ($primary = $p->boucles[$idb]->primary) {
+			$id = champ_sql($primary, $p);
+			$code_contexte[] = "'$primary='.".$id;
+		}
 	}
 
 	$p->code = "( ((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))<5)?

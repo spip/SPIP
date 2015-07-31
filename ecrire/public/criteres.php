@@ -682,7 +682,8 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			$op = '<>';
 	} else $op = '=';
 
-	$arg = "'FIELD($arg,' . _q($var) . ')'";
+
+	$arg = "((_q($var)===\"''\") ? 0 : ('FIELD($arg,' . _q($var) . ')'))";
 	$boucles[$idb]->select[]=  "\" . $arg . \" AS cpt$cpt";
 	$op = array("'$op'", $arg, 0);
 
@@ -788,7 +789,6 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		if (strpos($val[0], '_q(') === 0
 		AND test_sql_int($desc['field'][$col]))
 				$val[0] = 'intval' . substr($val[0],2);
-		spip_log("typer $nom $col $idb $d $val[0]");
 	}
 	// tag du critere pour permettre aux boucles de modifier leurs requetes par defaut en fonction de ca
 	$boucles[$idb]->modificateur['criteres'][$col] = true;
@@ -899,9 +899,8 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   foreach($res as $r) {
     list($d, $a, $j) = $r;
     if (!$id_table) $id_table = $d;
-    $type = $a[1]['field'][$j];
     $n = ++$cpt;
-    $boucle->join[$n]= array("'$id_table'", test_sql_int($type) ? $j : "'$j'");
+    $boucle->join[$n]= array("'$id_table'","'$j'");
     $boucle->from[$id_table = "L$n"] = $a[0];    
   }
 
