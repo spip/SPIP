@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Trocar',
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Elexir',
-'bouton_deplacer' => 'D&eacute;placer', # NEW
+'bouton_deplacer' => 'Desprazar',
 'bouton_download' => 'Descargar',
 'bouton_enregistrer' => 'Rexistrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar a mensaxer&iacute;a interna',
@@ -386,7 +386,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'icone_tous_articles' => 'Os teus artigos',
 'icone_tous_auteur' => 'Todo o equipo de redacci&oacute;n',
 'icone_valider_message' => 'Validar a mensaxe',
-'icone_visiter_site' => 'Ver o web', # MODIF
+'icone_visiter_site' => 'Ver o web p&uacute;blico',
 'icone_voir_en_ligne' => 'Ver en li&ntilde;a',
 'image_tourner_180' => 'Rotaci&oacute;n 180&deg;',
 'image_tourner_droite' => 'Rotaci&oacute;n 90&deg; &aacute; dereita',
@@ -571,7 +571,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'As t&uacute;as citas pendentes',
 'info_zoom' => 'zoom',
-'infos_vos_pense_bete' => 'As t&uacute;as notas', # MODIF
+'infos_vos_pense_bete' => 'As s&uacute;as notas',
 'item_breve_proposee' => 'Breve proposta',
 
 // L
