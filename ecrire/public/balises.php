@@ -574,7 +574,8 @@ function balise_LESAUTEURS_dist ($p) {
 // http://doc.spip.org/@balise_RANG_dist
 function balise_RANG_dist ($p) {
 	$_titre = champ_sql('titre', $p);
-	$p->code = "recuperer_numero($_titre)";
+	$_rang = champ_sql('rang', $p);
+	$p->code = "(($_rang)?($_rang):recuperer_numero($_titre))";
 	$p->interdire_scripts = false;
 	return $p;
 }
