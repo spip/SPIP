@@ -573,7 +573,7 @@ jQuery.fn.ajaxbloc = function() {
 	  }).addClass('bind-ajaxReload');
 
 		jQuery(ajaxbloc_selecteur,this).not('.noajax,.bind-ajax')
-			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,{force:jQuery(this).is('.nocache')});})
+			.click(function(){return jQuery.spip.ajaxClick(blocfrag,this.href,{force:jQuery(this).is('.nocache'),history:!jQuery(this).is('.nohistory')});})
 			.addClass('bind-ajax')
 			.filter('.preload').each(function(){
 				var href = this.href;
