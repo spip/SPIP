@@ -45,21 +45,20 @@ function include_ecrire($file, $silence=false) {
 function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	// Securite de base
-	if (!preg_match(',^[\w-]+$,', $nom))
+	if (!preg_match(',^\w+$,', $nom))
 		redirige_par_entete('./');
 
 	if (substr($dossier,-1) == '/') $dossier = substr($dossier,0,-1);
 	// Si la fonction existe deja (definie par mes_options, par exemple)
-	if (function_exists($f = $dossier.'_'.$nom)
-	OR function_exists($f = $dossier.'_'.$nom.'_dist'))
-		return $f;
+	;
+	if (function_exists($f = $dossier.'_'.$nom)) return $f;
+	if (function_exists($g = $f . '_dist'))	return $g;
 
 	// Sinon charger le fichier de declaration
-	$inc = include_spip($dossier.'/'. strtolower($nom));
+	$inc = include_spip($dossier.'/'. $nom);
 
-	if (function_exists($f = $dossier.'_'.$nom) # definition perso ?
-	OR function_exists($f = $dossier.'_'.$nom.'_dist')) # definition standard
-		return $f;
+	if (function_exists($f)) return $f;
+	if (function_exists($g)) return $g;
 
 	if ($continue) return false;
 
