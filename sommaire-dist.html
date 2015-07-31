@@ -1,177 +1,173 @@
-<HTML>
-<HEAD>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="fr">
+<head>
 <title>[#NOM_SITE_SPIP] </title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+
+</head>
+
+<body bgcolor="white">
 
 
-<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
-<B_haut>
-	<TR BGCOLOR="#000000">
-	<TD ALIGN="center">
-	<A HREF="#URL_SITE_SPIP/"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
-	</TD>	
-	
-	<BOUCLE_haut(RUBRIQUES){id_parent=0}{par titre}{0,5}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut>
-	</TR>
-</B_haut>
-<B_haut2>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut2(RUBRIQUES){id_parent=0}{par titre}{5,6}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut2>
-	</TR>
-</B_haut2>
-<B_haut3>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut3(RUBRIQUES){id_parent=0}{par titre}{11,6}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut3>
-	</TR>
-</B_haut3>
-<B_haut4>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut4(RUBRIQUES){id_parent=0}{par titre}{17,5}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut4>
-	</TR>
-</B_haut4>
-</TABLE>
+<div id="navigation">
 
-<CENTER>
+<h1 class="structure">Navigation</h1>
 
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=632>
-<TR>
-<TD WIDTH=400 ALIGN="left" VALIGN="bottom">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-	<BR><BR>
-	<BOUCLE_premier_article(ARTICLES){tout}{par date}{inverse}{0,1}>
-		<P align="right"><FONT SIZE=1><B>[(#DATE|nom_jour|majuscules)] [(#DATE|jour)] [(#DATE|nom_mois|majuscules)] [(#DATE|annee)]</B></FONT> <BR>
+<!-- Menu de navigation general -->
 
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	</li>
+</ul>
+</div>
 
-		<FONT SIZE=4>
-		[(#SURTITRE)<BR>]
-		<FONT SIZE=5>#TITRE</FONT>
-		[<BR>(#SOUSTITRE)]
-		</FONT>
+<!-- Formulaire de recherche -->
 
-		<B_AUTEUR1><BR><B>par 
-		<BOUCLE_AUTEUR1(AUTEURS){id_article}{", "}{par nom}>
-		#NOM
-		</BOUCLE_AUTEUR1></B></B_AUTEUR1>
+[(#FORMULAIRE_RECHERCHE)]
+
+<!-- Menu de navigation rubriques -->
+
+<B_rubriques>
+<div class="menu">
+<ul class="rubriques">
+<BOUCLE_rubriques(RUBRIQUES) {racine} {par titre}>
+<li>
+<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+<B_sous_rubriques>
+	<ul class="menu-liste">
+<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par date} {inverse} {0,3}>
+	<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+</BOUCLE_sous_rubriques>
+	</ul>
+</B_sous_rubriques>
+</li>
+</BOUCLE_rubriques>
+</ul>
+</div>
+</B_rubriques>
+
+<!-- Logo SPIP -->
+
+<a href="http://www.uzine.net/spip">
+<img src="NAVPICS/petit-logo-spip.gif" width="88" height="31" border="0" alt="Site r&eacute;alis&eacute; avec SPIP">
+</a>
+
+</div>
 
 
-		<P align="left">
-		[(#LOGO_ARTICLE_RUBRIQUE|right|#URL_ARTICLE)]
-		#INTRODUCTION
-		<P align="right"><A HREF="#URL_ARTICLE">Lire la suite</A>
-	</BOUCLE_premier_article>
-	<P>
-	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-	<TR WIDTH=100%>
-	<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-	</TR>
-	</TABLE>
-	<BOUCLE_articles(ARTICLES){tout}{par date}{inverse}{1,5}> 
-		<P align="right"><FONT SIZE=1><B>[(#DATE|nom_jour|majuscules)] [(#DATE|jour)] [(#DATE|nom_mois|majuscules)]</B></FONT> <BR>
-		<FONT SIZE=2>
-		[(#SURTITRE)<BR>]
-		<FONT SIZE=3><A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A></FONT>
-		[<BR>(#SOUSTITRE)]
+<!-- Une : derniers articles publies -->
 
-		<B_AUTEUR2><BR><B>par 
-		<BOUCLE_AUTEUR2(AUTEURS){id_article}{", "}{par nom}>
-		#NOM
-		</BOUCLE_AUTEUR2></B></B_AUTEUR2>
+<div id="principal" class="contenu">
 
-		</FONT>
-	
-	</BOUCLE_articles>
+<h1 class="structure">A la une du site</h1>
 
-	[
-	<P>
-	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-	<TR WIDTH=100%>
-	<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-	</TR>
-	</TABLE>
-	<P>
-	<DIV ALIGN="right">
-	<FONT SIZE="2">
-	<B>Rechercher</B> dans ce site : (#FORMULAIRE_RECHERCHE|recherche.php3)
-	</FONT>
-	</DIV>
-	]
+<BOUCLE_article_un(ARTICLES) {par date} {inverse} {0,2}>
+	[(#LOGO_ARTICLE_RUBRIQUE|right)]
+	[<div class="surtitre">(#SURTITRE)</div>]
+	<h2 class="titre-extrait"><a href="#URL_ARTICLE">#TITRE</a></h2>
+	[<div class="surtitre">(#SOUSTITRE)</div>]
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	<B_auteurs_un>par <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
+	</div>
+	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+	<br>
+</BOUCLE_article_un>
 
-	</FONT>
-	<BR><BR>
-</TD>
 
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=8 BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=200 VALIGN="bottom">
+	<div class="encart">
 
-	<BOUCLE_premiere_breve(BREVES){tout}{par date}{inverse}{0,1}>
-		<BR><BR>[(#LOGO_BREVE|#URL_BREVE)<BR>]
-		<FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-		<B>[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]</B>
-		</FONT><BR>
-		<A HREF="#URL_BREVE"><FONT FACE="arial,helvetica,sans-serif" SIZE=3>#TITRE</FONT></A>
-		[<BR><FONT FACE="arial,helvetica,sans-serif" SIZE=1>(#INTRODUCTION)</FONT>]
-	</BOUCLE_premiere_breve>
+	<!-- Breves -->
 
-	<BOUCLE_breves(BREVES){tout}{par date}{inverse}{1,5}>
-		<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-		[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]
-		</FONT><BR>
-		<A HREF="#URL_BREVE"><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	<h1 class="structure">Derni&egrave;res br&egrave;ves</h1>
+
+	<B_breves>
+	<div class="menu">
+	<div class="breves">
+		<div class="menu-titre">
+		Br&egrave;ves
+		</div>
+		<ul>
+	<BOUCLE_breves(BREVES) {par date} {inverse} {0,8}>
+		<li class="menu-item">
+		<i>[(#DATE|affdate_court)]</i>:
+		<a href="#URL_BREVE">#TITRE</a>
+		</li>
 	</BOUCLE_breves>
+		</ul>
+	</div>
+	</div>
+	</B_breves>
 
-	<P>
-	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-	<TR WIDTH=100%>
-	<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-	</TR>
-	</TABLE>
+	<!-- Sur le Web -->
+
+	<h1 class="structure">Nouveaut&eacute;s sur le Web</h1>
 
 	<B_syndic>
-	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-	<B>SUR LE WEB :</B>
-	<BOUCLE_syndic(SYNDIC_ARTICLES){tout}{par date}{inverse}{0,8}>
-	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
+	<div class="menu">
+	<div class="divers">
+		<div class="menu-titre">
+		Sur le Web
+		</div>
+		<ul>
+	<BOUCLE_syndic(SYNDIC_ARTICLES) {par date} {inverse} {0,8}>
+		<li class="menu-item">
+		<a href="#URL_ARTICLE">#TITRE</a>
+		</li>
 	</BOUCLE_syndic>
-	</FONT>
+		</ul>
+	</div>
+	</div>
 	</B_syndic>
-	<BR><BR>
+
+	<!-- Inscription au site -->
+
+	[<div class="formulaire">Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous
+	inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes
+	d'acc&egrave;s &agrave; l'espace priv&eacute; du site.<p>
+	(#FORMULAIRE_INSCRIPTION)</div>]
+
+	</div>
 
 
+<h1 class="structure">Articles r&eacute;cents</h1>
 
-	[<hr><p><FONT FACE="arial,helvetica,sans-serif" SIZE=1><B>Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d'acc&egrave;s &agrave; l'espace priv&eacute; du site.</B><p>(#FORMULAIRE_INSCRIPTION)</font>]
+<!-- Articles recents -->
+
+<BOUCLE_articles_recents(ARTICLES) {par date} {inverse} {2,8}>
+	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	<B_auteurs_recents>par <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_recents>
+	</div>
+	<br>
+</BOUCLE_articles_recents>
 
 
+</div>
 
-</TD>
-</TR>
-</TABLE>
 
-<INCLURE(pied.php3)>
-
-</CENTER>
-
-</BODY>
-</HTML>
+</body>
+</html>
 
 

@@ -1,373 +1,270 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+
+<html lang="fr">
 <head>
-<title>
-<BOUCLE_titre(ARTICLES){id_article}>#TITRE</BOUCLE_titre>
-</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
+<title>#TITRE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="projection, screen, tv">
+<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
+<link rel="stylesheet" href="impression.css" type="text/css" media="print">
+
 </head>
-<body bgcolor="#ffffff" text="#000000" link="#e86519" vlink="#6e003a" alink="#ff9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
-<BOUCLE_principale(ARTICLES){id_article}{doublons}>
+<body bgcolor="white">
 
-<!-- Ici on insere les boucles de la hierarchie (haut de page)
-     Voir http://www.uzine.net/article1828.html -->
-<INCLURE (hierarchie.php3) {id_rubrique} >
+<div id="navigation">
 
+<h1 class="structure">Navigation</h1>
 
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BGCOLOR="#000000"><img src="NAVPICS/rien.gif" alt="" width="1" height="1" border="0"></TD>
-</TR>
-</TABLE>
+<!-- Menu de navigation general -->
 
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	</li>
+</ul>
+</div>
 
+<!-- Formulaire de recherche -->
 
-
-<CENTER>
-
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR>
-<TD WIDTH=200 ALIGN="center" VALIGN="middle">
-	<BR><BR>
-
-	[(#LOGO_ARTICLE)]
-
-	<BR><BR>
-</TD>
-
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=4><img src="NAVPICS/rien.gif" alt="" width="4" height="8" border="0"></TD>
-<TD WIDTH=462 VALIGN="top">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-	<BR><BR>
-
-	[(#SURTITRE|majuscules)]
-	[<BR><FONT SIZE=6><B>(#TITRE)</B></FONT>]
-	[<BR>(#SOUSTITRE|majuscules)]
-
-	<P>[Premi&egrave;re publication : (#DATE_REDAC|affdate), mise en ligne: ] [(#DATE|nom_jour)] [(#DATE|affdate)][, <B>par (#LESAUTEURS)</B>]
-	</FONT>
-	<BR><BR><BR>
-</TD></TR></TABLE>
+[(#FORMULAIRE_RECHERCHE)]
 
 
+<!-- Menu de navigation rubriques -->
+
+<B_rubriques>
+<div class="menu">
+<ol class="rubriques">
+<BOUCLE_rubriques(HIERARCHIE) {id_article}>
+<li>
+<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+<B_sous_rubriques>
+	<ul class="menu-liste">
+<BOUCLE_sous_rubriques(RUBRIQUES) {meme_parent} {exclus} {par date} {inverse} {0,3}>
+	<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+</BOUCLE_sous_rubriques>
+	</ul>
+</B_sous_rubriques>
+</li>
+</BOUCLE_rubriques>
+</ol>
+</div>
+</B_rubriques>
 
 
+<!-- Menu de navigation mots-cles -->
+
+<B_mots>
+<div class="menu">
+
+<h1 class="structure">Mots-cl&eacute;s associ&eacute;s &agrave; l'article</h1>
+
+<ul class="divers" title="Mots-cl&eacute;s associ&eacute;s &agrave; l'article">
+<BOUCLE_mots(MOTS) {id_article} {par titre}>
+<li>
+<div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+<B_articles_mots>
+	<ul class="menu-liste">
+<BOUCLE_articles_mots(ARTICLES) {id_mot} {par hasard} {0,4}>
+	<li class="menu-item"><a href="#URL_ARTICLE" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
+</BOUCLE_articles_mots>
+	</ul>
+</B_articles_mots>
+</li>
+</BOUCLE_mots>
+</ul>
+</div>
+</B_mots>
 
 
+<!-- Liens des forums -->
+<BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
+[<div class="menu" title="Les derniers messages publi&eacute;s sur le forum de cet article">
 
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR>
-<TD WIDTH=200 ALIGN="left" VALIGN="top">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+<h1 class="structure">Derni&egrave;res discussions sur le forum de cet article</h1>
 
+<ul class="forums">
 
-
-	<B_meme_rubrique>
-	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-	<B>DANS LA MEME RUBRIQUE :</B>
-	<BOUCLE_meme_rubrique(ARTICLES){id_rubrique}{doublons}{0,10}{par hasard}>
-	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
-	</BOUCLE_meme_rubrique>
-	</FONT>
-	</B_meme_rubrique>
-
-
-	<B_Mots_Cles>
-	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-	<B>THEMES ABORDES :</B>
-	<BOUCLE_Mots_Cles(MOTS){id_article}{par titre}>
-		<P>[(#LOGO_MOT)<BR>]
-		<B>#TITRE</B>
-		<BOUCLE_meme_mot(ARTICLES){id_mot}{doublons}{0,10}{par hasard}>
-		<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
-		</BOUCLE_meme_mot>
-		<BOUCLE_meme_mot_breves(BREVES){id_mot}{doublons}{0,10}{par hasard}>
-		<BR><IMG SRC="puce.gif"> <I><A HREF="#URL_BREVE">#TITRE</A></I>
-		</BOUCLE_meme_mot_breves>
-	</BOUCLE_Mots_Cles>
+<li class="menu-titre">(#TOTAL_BOUCLE) message(s) de forum.</li>]
+<//B_forums_decompte>
+<BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{0,5}>
+    <li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
+    <a href="#forum#ID_FORUM">#TITRE</a>
+    </li>
+</BOUCLE_forums_liens>
+</ul>
+</div>
+</B_forums_liens>
 
 
-	<B_syndic>
-	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-	<B>SUR LE WEB :</B>
-	<BOUCLE_syndic(SYNDIC_ARTICLES){id_rubrique}{par date}{inverse}{0,8}>
-	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
-	</BOUCLE_syndic>
-	</FONT>
-	</B_syndic>
-
-
-
-
-
-
-
-	</FONT>
-	<BR><BR>
-</TD>
-
-<TD WIDTH=8 ROWSPAN=2><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=8 ROWSPAN=2 BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=8 ROWSPAN=2><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=450 ROWSPAN=2 VALIGN="top">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-
-
-	[<B>(#CHAPO|justifier)<P></B>]
-
-
-	[(#TEXTE|justifier)]
-
-
-<center><table cellpadding=0 cellspacing=10>
-<B_portfolio>
-<tr width=100%>
-<BOUCLE_portfolio(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,3}>
-<td width=33% valign="top" align="center">
-[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-<font face="verdana,arial,helvetica,sans-serif" size=2>
-[<br><b>(#TITRE)</b>]
-[<br>(#DESCRIPTIF)]
-</font>
-</td>
-</BOUCLE_portfolio>
-	<BOUCLE_port_rec(BOUCLE_portfolio)></BOUCLE_port_rec>
-</tr>
-</B_portfolio>
-</table></center>
-
-
-	[<FONT SIZE=2><P>(#PS|justifier)</P></FONT>]
-	[<HR><FONT SIZE=2><P>(#NOTES)</P></FONT>]
+</div>
 
 
 
+<!-- Une : derniers articles publies -->
 
+<div class="contenu" id="principal">
 
+<div class="cartouche">
+[(#LOGO_ARTICLE|left)]
+[<div class="surtitre">(#SURTITRE)</div>]
+<h1 class="titre-texte">#TITRE</h1>
+[<div class="surtitre">(#SOUSTITRE)</div>]
+Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee).]
+</div>
 
-<B_documents>
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-</TR>
-</TABLE>
+	<div class="encart">
 
+	<!-- Auteurs de l'article -->
 
-<center>Documents li&eacute;s</center>
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{doublons}>
-	<tr>
-	<td align='center'>
-	[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-	</td>
-	<td width=10>&nbsp;</td>
-	<td>
-	<font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
-	[: (#DESCRIPTIF)]<br>
-	[(#TYPE_DOCUMENT) -] [(#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]
-	</td></tr>
-</BOUCLE_documents>
-<tr><td>&nbsp;</td></tr></table>
-</B_documents>
+	<B_auteurs>
 
-
-<B_signatures><br><br><p>
-<font face="verdana, helvetica,arial,sans-serif" size=4><b>Les signataires</b></font><p>
-<table width="450" cellpadding="0" cellspacing="0" border="0">
-<tr><td width="147" valign="top">
-<BOUCLE_signatures(SIGNATURES){id_article}{par date}{inverse}{1/3}{0,200}>
-<font face="helvetica,arial,sans-serif" size=2>
-[<b><a href="#URL_SITE">(#NOM_SITE)</a><br></b>]
-[(#NOM)<br>]
-[(#MESSAGE)]<p>
-</font>
-</BOUCLE_signatures>
-</td>
-<td width="5">&nbsp;</td>
-<td width="147" valign="top">
-<BOUCLE_signatures2(SIGNATURES){id_article}{par date}{inverse}{2/3}{0,200}>
-<font face="helvetica,arial,sans-serif" size=2>
-[<b><a href="#URL_SITE">(#NOM_SITE)</a><br></b>]
-[(#NOM)<br>]
-[(#MESSAGE)]<p>
-</font>
-</BOUCLE_signatures2>
-</td>
-<td width="4">&nbsp;</td>
-<td width="147" valign="top">
-<BOUCLE_signatures3(SIGNATURES){id_article}{par date}{inverse}{3/3}{0,200}>
-<font face="helvetica,arial,sans-serif" size=2>
-[<b><a href="#URL_SITE">(#NOM_SITE)</a><br></b>]
-[(#NOM)<br>]
-[(#MESSAGE)]<p>
-</font>
-</BOUCLE_signatures3>
-</td>
-</tr></table>
-<br><br>
-</B_signatures>
-
-
-
-[<p align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet article</A></B></font></p>]
-
-</FONT>
-<BR><BR>
-
-</TD>
-</TR>
-
-<TR>
-<TD WIDTH=200 ALIGN="left" VALIGN="bottom">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-
-	<BOUCLE_auteurs(AUTEURS){id_article}>
-	<P>
-	[<a href="mailto:#EMAIL">(#LOGO_AUTEUR)</a><BR>]
-	<B>[<A HREF="mailto:(#EMAIL)">]#NOM</A></B><BR>
-	[<A HREF="(#URL_SITE)">][<IMG SRC="puce.gif" BORDER=0>(#NOM_SITE)<BR>]</A>
-	[<IMG SRC="puce.gif">(#BIO)]
-	</P>
+	<div class="menu">
+	<h2 class="structure">Des m&ecirc;mes auteurs...</h2>
+	<ul class="divers">
+	<BOUCLE_auteurs(AUTEURS) {id_article} {par nom}>
+		<li>
+		<div class="menu-titre" title="&eacute;crire &agrave; cet auteur"><a href="mailto:#EMAIL">#NOM</a></div>
+		<ul>
+		[<li class="menu-item" style="text-align: center"><a href="(#URL_SITE)">#NOM_SITE</a></li>]
+		[<li class="menu-item" style="text-align: center">(#BIO)</li>]
+	<B_articles_auteur>
+	<BOUCLE_articles_auteur(ARTICLES) {id_auteur} {par popularite} {inverse} {0,5}>
+		<li class="menu-item"><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+	</BOUCLE_articles_auteur>
+		</ul>
+		</li>
 	</BOUCLE_auteurs>
+	</ul>
+	</div>
 
-	[<BR><BR><HR><SMALL>(#FORMULAIRE_SIGNATURE)</SMALL>]
+	</B_auteurs>
 
+	<!-- Articles dans la meme rubrique -->
 
-	</FONT>
-	<BR><BR>
+	<B_articles_rubrique>
 
+	<div class="menu">
+	<div class="breves">
+		<h2 class="structure">Dans la m&ecirc;me rubrique...</h2>
+		<div class="menu-titre">
+		Dans la m&ecirc;me rubrique
+		</div>
+		<ul>
+	<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par hasard} {0,8}>
+		<li class="menu-item">
+		<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+		</li>
+	</BOUCLE_articles_rubrique>
+		</ul>
+	</div>
+	</div>
 
-</TD>
-</TR>
+	</B_articles_rubrique>
 
-
-
-</TABLE>
-
-
-
-<B_forums_liens>
-
-
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-</TR>
-</TABLE>
-
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=674>
-<TR WIDTH=674>
-<TD WIDTH=200 ALIGN="left" VALIGN="top">
-	<BR><BR>
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
-	<A NAME='liens_forums'>
-	<BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
-	[Il y a (#TOTAL_BOUCLE) contribution(s) au forum.]
-	<//B_forums_decompte>
-
-	<BR><BR>
-	<BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}>
-		<A HREF="#forum#ID_FORUM"><IMG SRC="puce.gif" BORDER=0>#TITRE</A>
-		<BR>(#COMPTEUR_BOUCLE/#TOTAL_BOUCLE) [(#DATE|affdate)][, par (#NOM)]
-		<BR>
-	</BOUCLE_forums_liens>
-	</FONT>
-	<BR><BR>
-</TD>
-
-<TD WIDTH=12><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></TD>
-<TD WIDTH=462 VALIGN="top">
+	</div>
 
 
-	<BR><BR>
+[<div class="chapo">(#CHAPO)</div>]
+[<div class="texte">(#TEXTE)</div>]
+[<div class="ps">(#PS)</div>]
+[<div class="notes">(#NOTES)</div>]
+<br>
 
-	<BOUCLE_Forums(FORUMS){id_article}{par date}{inverse}>
-	<A NAME="forum#ID_FORUM">
-	<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=462 BGCOLOR="#000000">
-	<TR><TD BGCOLOR='#444444' WIDTH="100%">
-	<font face=Arial,Helvetica SIZE=2>
-	<B>[<FONT COLOR="#FFFFFF">(#TITRE)</FONT>]</B> 
-	</font>
-	</TD></TR>
-	<TR><TD BGCOLOR='#FFFFFF' WIDTH=100%>
-	<font face=Arial,Helvetica SIZE=1>
+
+<!-- Forums -->
+
+[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet  article</A></B></div>]
+<br>
+
+<h1 class="structure">Forum de l'article</h1>
+
+<B_forums>
+<ul class="forum-total">
+
+<BOUCLE_Forums(FORUMS){id_article}{par date}{inverse}>
+
+<li>
+<div class="forum-fil">
+
+<div class="forum">
+<a name="forum#ID_FORUM"></a>
+<div class="forum-chapo">
+<div class="forum-titre">#TITRE</div>
+[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+</div>
+<div class="forum-item">
+#TEXTE
+[<div class='forum-titre'><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+[<div align='right'><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+</div>
+</div>
+
+<!--BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
+<li>#LOGO_MOT <b>#TYPE :</b> #TITRE</li>
+</BOUCLE_mots_forum-->
+
+<B_forums_fils>
+	<ul>
+	<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+
+	<li>
+	<div class="forum">
+	<a name="forum#ID_FORUM"></a>
+	<div class="forum-chapo">
+	<div class="forum-titre">#TITRE</div>
 	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-	 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
-	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
-	</font>
-	</TD></TR>
-	<TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
-	<font face=Arial,Helvetica SIZE=2>
-	<P>#TEXTE
+	</div>
+	<div class="forum-item">
+	#TEXTE
+	[<div class='forum-titre'><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+	[<div align='right'><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+	</div>
 
-	<BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
-		<li>#LOGO_MOT <b>#TYPE :</b> #TITRE
-	</BOUCLE_mots_forum>
-	
-	
-	
-	[<div align='right'><font size=1><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce message</A></font></div>]
-	</font>
-	</TD></TR></TABLE>
+	<!--BOUCLE_mots_fils(MOTS){id_forum}{par type, titre}>
+	#LOGO_MOT <b>#TYPE :</b> #TITRE
+	</BOUCLE_mots_fils-->
 
+	</div>
 
-	<B_fils>
-	<UL>
-		<font face=Arial,Helvetica SIZE=2>
-		<BOUCLE_fils(FORUMS){id_parent}{par date}>
-		<P>
-		<A NAME="forum#ID_FORUM">
-		<LI><B>[(#TITRE)]</B>
-		<BR><font SIZE=1>
-		[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-		 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
-		[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
-		</font>
-		<HR NOSHADE SIZE=1>
-		#TEXTE
-		[<div align="right"><font size=1><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce message</A></font></div>]
-	
-		<BOUCLE_mots_fils(MOTS){id_forum}{par type, titre}>
-			<li>#LOGO_MOT <b>#TYPE :</b> #TITRE
-		</BOUCLE_mots_fils>
-		
+	<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+	</li>
 
-			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
-	
-		</BOUCLE_fils>
-		</font>
-	</UL>
-	</B_fils>
+	</BOUCLE_forums_fils>
+	</ul>
+</B_forums_fils>
+
+</div>
+</li>
+</BOUCLE_Forums>
+
+</ul>
+</B_Forums>
+
+</div>
 
 
-
-	<P>
-
-	</BOUCLE_Forums>
-
-</TD>
-</TR>
-</TABLE>
-<P>
-<!--/B_forums_liens-->
+</body>
+</html>
 
 
-</CENTER>
-
-
-</BOUCLE_principale>
-
-
-
-<CENTER>
-
-<INCLURE(pied.php3)>
-
-</CENTER>
-
-
-
-</BODY>
-</HTML>
+</BOUCLE_article_principal>

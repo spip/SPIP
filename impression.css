@@ -1,0 +1,101 @@
+
+/*
+ * Feuille de style specifique a l'impression
+ */
+ 
+/* Pour les liens, on desactive les couleurs
+   et on affiche l'URL cible a la suite du lien (!) */
+
+a { color: black; text-decoration: underline; }
+a:visited { color: black; text-decoration: underline; }
+a.spip_in { color: black; text-decoration: underline; }
+a.spip_out { color: black; text-decoration: underline; }
+a:after {
+	display: inline;
+	border: 1px solid dotted;
+	content: " [" attr(href) "]";
+}
+
+/*
+ * Un peu de coquetterie
+ */
+
+.chapo {
+	line-height: 1.4em;
+	margin-top: 1em;
+}
+.texte {
+}
+.ps {
+	padding-top: 0.6em;
+	margin-top: 0.6em;
+	border-top: 1px dashed #404040;
+}
+.notes {
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	border-top: 1px solid #707070;
+}
+.structure {
+	display: none;
+}
+.spip-admin {
+	display: none;
+}
+
+
+.contenu {
+	margin: 10px;
+}
+.contenu h1 {
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+.contenu h1.titre-extrait {
+}
+.contenu h1.titre-texte {
+}
+.contenu .surtitre {
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+.contenu .detail {
+	margin-left: 2em;
+}
+.extrait {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: 2em;
+	margin-right: 0em;
+	line-height: 1.4em;
+}
+
+
+/*
+ * Disposition : on elimine les elements de navigation (display: none)
+ * et on choisit un affichage de base pour le principal
+ */
+
+#principal {
+	margin: 10px;
+}
+
+#navigation {
+	display: none;
+}
+
+#encart {
+	display: none;
+}
+
+#cartouche {
+	margin-top: 0.5em;
+	padding-top: 1em;
+	margin-bottom: 1em;
+}
+
+#cartouche .spip_logos {
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-right: 0.8em;
+}

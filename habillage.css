@@ -1,0 +1,375 @@
+
+
+/*
+ * Mise en page des textes (bordures...)
+ */
+
+.chapo {
+	line-height: 1.4em;
+	margin-top: 1em;
+}
+.texte {
+}
+.ps {
+	padding-top: 0.6em;
+	margin-top: 0.6em;
+	border-top: 1px dashed #404040;
+}
+.notes {
+	margin-top: 0.6em;
+	margin-bottom: 0.6em;
+	border-top: 1px solid #a0a0a0;
+	padding: 1.5em;
+}
+
+/*
+ * Habillage des menus et de la navigation
+ */
+
+.menu {
+	border: 1px solid #a0a0a0;
+	border-top: 0px;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 16px;
+}
+.menu ul {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 4px;
+	list-style: none;
+}
+.menu ol {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 4px;
+	list-style: none;
+}
+.menu-titre {
+	border-top: 1px solid #a0a0a0;
+	border-bottom: 1px dashed #d0d0d0;
+	margin: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	font-size: 90%;
+}
+.menu-item {
+	margin: 0px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	font-size: 80%;
+}
+
+/* Des couleurs specifiques selon les types de menus */
+
+.general		{ background-color: #f8f8e8; text-align:center; }
+.general .menu-titre 	{ background-color: #fcfcf0; }
+
+.rubriques 		{ background-color: #eaffea; text-align:center; }
+.rubriques .menu-titre	{ background-color: #f2fff2; }
+
+.breves 		{ background-color: #ffeaea; }
+.breves .menu-titre	{ background-color: #fff2f2; text-align:center; }
+
+.divers 		{ background-color: #eaeaff; }
+.divers .menu-titre	{ background-color: #f2f2ff; text-align:center; }
+
+.forums 		{ background-color: #e8f8f8; }
+.forums .menu-titre	{ background-color: #f0fcfc; text-align:center; }
+
+
+/*
+ * Styles pour le contenu (c-a-d. la colonne principale)
+ */
+
+.contenu {
+	margin: 15px;
+}
+.contenu h2.titre-extrait {
+}
+.contenu h2.titre-texte {
+}
+.contenu .surtitre {
+	margin-top: 0em;
+	margin-bottom: 0em;
+}
+.contenu .detail {
+	margin-left: 2em;
+}
+.contenu .detail .important {
+	color: #a02020;
+}
+.extrait {
+	margin: 0.1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: 2em;
+	margin-right: 0.1em;
+	line-height: 1.4em;
+}
+.liste-articles {
+	margin-top: 1em;
+	margin-bottom: 1em;
+	clear: left;
+}
+.contenu .forum-repondre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+	font-size: 90%;
+	font-weight: bold;
+	margin-top: 0.6em;
+}
+
+
+/*
+ * Disposition a l'ecran : colonnes, encarts, cartouches
+ */
+
+#principal {
+	position: absolute;
+	left: 18em;
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+	margin-right: 2em;
+	margin-top: 1.5em;
+}
+
+#plan {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	margin: 1.8em;
+	padding: 0px;
+}
+
+#navigation {
+/*	position: fixed;*/
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 14em;
+	padding: 0px;
+	margin: 0px;
+	margin-left: 1.8em;
+	margin-top: 1.5em;
+}
+
+.encart {
+	float: right;
+	width: 14em;
+	margin-left: 2em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-right: 0px;
+}
+
+.cartouche {
+	padding-top: 1em;
+	border-top: 2px solid #404040;
+	margin-bottom: 1em;
+}
+
+.cartouche .spip_logos {
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-right: 0.8em;
+}
+
+
+/*
+ * Habillage du plan du site
+ */
+
+.plan-secteur {
+	margin-top: 0em;
+	margin-bottom: 3em;
+	clear: right;
+}
+
+.plan-secteur h1 {
+	display: block;
+	border: 1px solid #a0a0a0;
+	margin: 0px;
+	padding: 8px;
+	font-size: 150%;
+	font-weight: bold;
+	background-color: #e0ffe0;
+	text-align:center;
+}
+.plan-rubriques {
+}
+.plan-rubriques {
+	clear: left;
+	display: block;
+	list-style: none;
+}
+.plan-rubrique {
+	display: inline;
+	border: 1px solid #a0a0a0;
+	padding: 3px;
+	font-weight: bold;
+}
+.plan-articles {
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+	list-style: square;
+}
+
+/* Eclaircissement progressif des rubriques en fonction de la profondeur */
+
+ul .plan-rubrique {
+	background-color: #e0ffe0;
+	border-color: #b8b8b8;
+}
+ul ul .plan-rubrique {
+	background-color: #eaffea;
+	border-color: #d0d0d0;
+}
+ul ul ul .plan-rubrique {
+	background-color: #f4fff4;
+	border-color: #e8e8e8;
+}
+
+
+/*
+ * Habillage des forums
+ */
+
+ul.forum-total {
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+}
+.forum-fil {
+	margin-top: 3em;
+}
+.forum-fil ul {
+	display: block;
+	margin: 0px;
+	margin-left: 2em;
+	padding: 0px;
+	list-style: none;
+}
+.forum-titre {
+	font-weight: bold;
+	font-size: 120%;
+}
+.forum-item {
+	margin: 0px;
+	padding: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0em;
+	text-align: justify;
+	color: #303030;
+	font-size: 80%;
+}
+
+
+/* Boite d'un forum : eclaircissement progressif des bords */
+
+ul .forum {
+	border: 1px solid #909090;
+	padding: 0px;
+	margin: 0px;
+	margin-bottom: 1em;
+}
+ul ul .forum {
+	border: 1px solid #a4a4a4;
+}
+ul ul ul .forum {
+	border: 1px solid #b8b8b8;
+}
+ul ul ul ul .forum {
+	border: 1px solid #cccccc;
+}
+ul ul ul ul ul .forum {
+	border: 1px solid #e0e0e0;
+}
+ul ul ul ul ul ul .forum {
+	border: 1px dashed #e0e0e0;
+}
+
+/* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
+
+ul .forum-chapo {
+	border: 0px;
+	border-bottom: 1px dashed #b8b8b8;
+	margin: 0px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	font-size: 90%;
+	background: #c4e0e0;
+}
+ul ul .forum-chapo {
+	background: #d4e8e8;
+}
+ul ul ul .forum-chapo {
+	background: #e4f0f0;
+}
+ul ul ul ul .forum-chapo {
+	background: #f4f8f8;
+}
+ul ul ul ul ul .forum-chapo {
+	background: #ffffff;
+}
+
+
+/*
+ * Formulaires
+ */
+
+.formrecherche {
+	background-color: #f2f2f2;
+	color: #505030;
+	margin: 0px;
+	padding: 2px;
+	border: solid 1px #909090;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 80%;
+	font-weight: normal;
+}
+
+.formulaire {
+	color: black;
+	margin: 0px;
+	margin-bottom: 16px;
+	padding: 4px;
+	border: 1px solid #a0a0a0;
+	background-color: #f6f6f6;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 80%;
+	font-weight: normal;
+}
+.forml {
+	background-color: #ececec;
+	margin: 4px;
+	padding: 1px;
+	border: dashed 1px #909090;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 90%;
+}
+.spip_bouton {
+	border: 2px solid #404040;
+	padding: 3px;
+	background: #d0d0d0;
+	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+}
+.spip-admin {
+	position: fixed;
+	bottom: 0px;
+	font-size: 90%;
+	padding: 2px;
+	line-height: 1.4em;
+}
+
+

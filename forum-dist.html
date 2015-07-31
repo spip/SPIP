@@ -1,115 +1,98 @@
-<HTML>
-<HEAD>
-<title>[#NOM_SITE_SPIP] </title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="fr">
+<head>
+<title>[#NOM_SITE_SPIP] Poster un message</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
-<B_haut>
-	<TR BGCOLOR="#000000">
-	<TD ALIGN="center">
-	<A HREF="#URL_SITE_SPIP/"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
-	</TD>	
-	
-	<BOUCLE_haut(RUBRIQUES){id_parent=0}{par titre}{0,5}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut>
-	</TR>
-</B_haut>
-<B_haut2>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut2(RUBRIQUES){id_parent=0}{par titre}{5,6}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut2>
-	</TR>
-</B_haut2>
-<B_haut3>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut3(RUBRIQUES){id_parent=0}{par titre}{11,6}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut3>
-	</TR>
-</B_haut3>
-<B_haut4>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut4(RUBRIQUES){id_parent=0}{par titre}{17,5}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut4>
-	</TR>
-</B_haut4>
-</TABLE>
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
 
-<CENTER>
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+
+</head>
+
+<body bgcolor="white">
 
 
+<div id="navigation">
 
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR>
-<TD WIDTH=330 ALIGN="left" VALIGN="top">
-	<BR><BR>
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+<h1 class="structure">Navigation</h1>
 
+<!-- Menu de navigation general -->
 
-	<BOUCLE_article(ARTICLES){id_article}>
-	<FONT SIZE=1>EN REPONSE A L'ARTICLE :</FONT>
-	<BR><FONT SIZE=3><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_ARTICLE">#TITRE</A></FONT>
-	<P>
-	</BOUCLE_article>
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	</li>
+</ul>
+</div>
 
-	<BOUCLE_breve(BREVES){id_breve}>
-	<FONT SIZE=1>EN REPONSE A LA BREVE :</FONT>
-	<BR><FONT SIZE=3><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_BREVE">#TITRE</A></FONT>
-	<P>
-	</BOUCLE_breve>
-
-
-	<BOUCLE_rep_forum(FORUMS){id_forum}>
-	<FONT SIZE=1>EN REPONSE AU MESSAGE :</FONT>
-	<BR><FONT SIZE=3><IMG SRC="puce.gif" BORDER=0> #TITRE</FONT>
-	<P><FONT SIZE=1>#TEXTE</FONT>
-	<P>
-	</BOUCLE_rep_forum>
+</div>
 
 
+<!-- Une : derniers articles publies -->
+
+<div id="principal" class="contenu">
+
+<h1 class="structure">Poster un message</h1>
+
+<BOUCLE_article(ARTICLES) {id_article}>
+	En r&eacute;ponse &agrave; l'article&nbsp;:
+	[(#LOGO_ARTICLE|right)]
+	[<div class="surtitre">(#SURTITRE)</div>]
+	<h2 class="titre-extrait"><a href="#URL_ARTICLE">#TITRE</a></h2>
+	[<div class="surtitre">(#SOUSTITRE)</div>]
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	<B_auteurs_un>par <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
+	</div>
+	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+	<br>
+</BOUCLE_article>
+
+<BOUCLE_breve(BREVES) {id_breve}>
+	En r&eacute;ponse &agrave; la br&egrave;ve&nbsp;:
+	[(#LOGO_BREVE|right)]
+	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	</div>
+	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
+	<br>
+</BOUCLE_breve>
+
+<BOUCLE_forum_parent(FORUMS) {id_forum}>
+	En r&eacute;ponse au message&nbsp;:
+	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	</div>
+	[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
+	<br>
+</BOUCLE_forum_parent>
 
 
+#FORMULAIRE_FORUM
 
 
-
-	</FONT>
-	<BR><BR>
-</TD>
-
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=4><img src="NAVPICS/rien.gif" alt="" width="4" height="8" border="0"></TD>
-<TD WIDTH=332 VALIGN="top">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-	<BR><BR>
-
-	#FORMULAIRE_FORUM
+</div>
 
 
-
-	</FONT>
-	<BR><BR>
-</TD></TR></TABLE>
-
-
-<INCLURE(pied.php3)>
-
-</CENTER>
-
-</BODY>
-</HTML>
+</body>
+</html>
 
 

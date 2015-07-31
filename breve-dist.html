@@ -1,216 +1,234 @@
-<HTML>
-<HEAD>
-<title>#NOM_SITE_SPIP</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<BOUCLE_breve_principal(BREVES) {id_breve}>
 
-<BOUCLE_principale(BREVES){id_breve}{doublons}>
+<html lang="fr">
+<head>
+<title>#TITRE</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-<!-- Ici on insere les boucles de la hierarchie (haut de page)
-     Voir http://www.uzine.net/article1828.html -->
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
 
-<INCLURE (hierarchie.php3) {id_rubrique} >
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
 
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="projection, screen, tv">
+<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
+<link rel="stylesheet" href="impression.css" type="text/css" media="print">
 
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BGCOLOR="#000000"><img src="NAVPICS/rien.gif" alt="" width="1" height="1" border="0"></TD>
-</TR>
-</TABLE>
+</head>
 
-
-
-
-<CENTER>
-
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR>
-<TD WIDTH=200 ALIGN="center" VALIGN="middle">
-	<BR><BR>
-
-	[(#LOGO_BREVE)]
-
-	<BR><BR>
-
-	<DIV ALIGN='left'>
-	<B_Mots_Cles>
-	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-	<B>THEMES ABORDES :</B>
-	<BOUCLE_Mots_Cles(MOTS){id_breve}{par titre}>
-		<BR><B>#TITRE</B>
-		<BOUCLE_meme_mot(ARTICLES){id_mot}{doublons}{0,10}{par hasard}>
-		<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
-		</BOUCLE_meme_mot>
-		<BOUCLE_meme_mot_breves(BREVES){id_mot}{doublons}{0,10}{par hasard}>
-		<BR><IMG SRC="puce.gif"> <I><A HREF="#URL_BREVE">#TITRE</A></I>
-		</BOUCLE_meme_mot_breves>
-	</BOUCLE_Mots_Cles>
-	</DIV>
-</TD>
-
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=4><img src="NAVPICS/rien.gif" alt="" width="4" height="8" border="0"></TD>
-<TD WIDTH=462 VALIGN="top" ROWSPAN=2>
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-	<BR><BR>
-
-	[<FONT SIZE=6><B>(#TITRE)</B></FONT>]
-
-	<P>[(#DATE|nom_jour)] [(#DATE|affdate)]
-	
-	
-	
-	[(#TEXTE|justifier)]
-	[<HR><FONT SIZE=2><P>(#NOTES)</P></FONT>]
-
-	
-	[<HR SIZE=1 NOSHADE><P><FONT SIZE =1>VOIR EN LIGNE :</FONT> <A HREF="(#URL_SITE)">#NOM_SITE</A>]
-	
-	[<P align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cette br&egrave;ve</A></B></font>]
-
-	
-	</FONT>
-	<BR><BR><BR>
-</TD></TR>
-
-<TR>
-<TD WIDTH=200 ALIGN="left" VALIGN="bottom">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=1>
-
-	<B_breves>
-	<FONT SIZE=1>LES AUTRES BREVES <BR>DE CETTE RUBRIQUE :</FONT>
-	<BOUCLE_breves(BREVES){id_secteur}{par date}{inverse}{0,10}>
-		<BR>
-		<IMG SRC="puce.gif" BORDER=0> [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]
-		<BR>
-		<A HREF="#URL_BREVE"><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</BOUCLE_breves>
-	</FONT>
-	<BR><BR><BR>
-
-</TD>
-</TR>
-
-</TABLE>
+<body bgcolor="white">
 
 
+<div id="navigation">
+
+<h1 class="structure">Navigation</h1>
+
+<!-- Menu de navigation general -->
+
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	</li>
+</ul>
+</div>
+
+<!-- Formulaire de recherche -->
+
+[(#FORMULAIRE_RECHERCHE)]
+
+<!-- Menu de navigation rubriques -->
+
+<div class="menu">
+<ul class="rubriques">
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+<li>
+<div class="menu-titre"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+</li>
+<BOUCLE_autres_rubriques(RUBRIQUES) {racine} {exclus} {par titre}>
+	<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+</BOUCLE_autres_rubriques>
+</BOUCLE_rubrique>
+</ul>
+</div>
+
+
+<!-- Menu de navigation mots-cles -->
+
+<B_mots>
+<div class="menu">
+<ul class="divers" title="Mots-cl&eacute;s associ&eacute;s &agrave; la br&egrave;ve">
+<BOUCLE_mots(MOTS) {id_article} {par titre}>
+<li>
+<div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
+<B_breves_mots>
+	<ul class="menu-liste">
+<BOUCLE_breves_mots(BREVES) {id_mot} {par hasard} {0,4}>
+	<li class="menu-item"><a href="#URL_BREVE">#TITRE</a></li>
+</BOUCLE_breves_mots>
+	</ul>
+</B_breves_mots>
+</li>
+</BOUCLE_mots>
+</ul>
+</div>
+</B_mots>
+
+
+<!-- Articles dans le meme secteur -->
+
+<B_articles_secteur>
+
+<div class="menu">
+<div class="breves" title="Derniers articles parus dans cette partie du site">
+	<div class="menu-titre">
+	Derniers articles
+	</div>
+	<ul>
+<BOUCLE_articles_secteur(ARTICLES) {id_secteur} {par date} {inverse} {0,5}>
+	<li class="menu-item">
+	<a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a>
+	</li>
+</BOUCLE_articles_secteur>
+	</ul>
+</div>
+</div>
+
+</B_articles_secteur>
+
+
+</div>
 
 
 
+<!-- Contenu : corps de la breve -->
+
+<div class="contenu" id="principal">
+
+<div id="cartouche">
+[(#LOGO_BREVE|left)]
+<h1 class="titre-texte">#TITRE</h1>
+Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee).]
+</div>
+
+	<div class="encart">
+
+	<!-- Breves dans la meme rubrique -->
+
+	<B_breves_rubrique>
+
+	<div class="menu">
+	<div class="breves" title="Derni&egrave;res br&egrave;ves parues dans la m&ecirc;me rubrique">
+		<h1 class="structure">Derni&egrave;res br&egrave;ves dans la m&ecirc;me rubrique</h1>
+		<div class="menu-titre">
+		Autres br&egrave;ves
+		</div>
+		<ul>
+	<BOUCLE_breves_rubrique(BREVES) {id_rubrique} {exclus} {par date} {inverse} {0,8}>
+		<li class="menu-item">
+		<i>[(#DATE|affdate_court)]</i>:
+		<a href="#URL_BREVE">#TITRE</a>
+		</li>
+	</BOUCLE_breves_rubrique>
+		</ul>
+	</div>
+	</div>
+
+	</B_breves_rubrique>
+
+	</div>
 
 
-<B_forums_liens>
+[<div class="texte">(#TEXTE)</div>]
+[<div class="chapo">Voir en ligne&nbsp;: <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a>.</div>]
+[<div class="notes">(#NOTES)</div>]
+
+<br>
 
 
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-</TR>
-</TABLE>
+<!-- Forums -->
 
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=674>
-<TR WIDTH=674>
-<TD WIDTH=200 ALIGN="left" VALIGN="top">
-	<BR><BR>
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
-	<A NAME='liens_forums'>
-	<BOUCLE_forums_liens(FORUMS){id_breve}{par date}{inverse}>
-		<A HREF="#forum#ID_FORUM"><IMG SRC="puce.gif" BORDER=0>#TITRE</A>
-		<BR>[(#DATE|affdate)][, par (#NOM)]
-		<BR>
-	</BOUCLE_forums_liens>
-	</FONT>
-	<BR><BR>
-</TD>
+[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cette br&egrave;ve</A></B></div>]
+<br>
 
-<TD WIDTH=12><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></TD>
-<TD WIDTH=462 VALIGN="top">
+<h1 class="structure">Forum de la br&egrave;ve</h1>
 
-	<BR><BR>
+<B_Forums>
+<ul class="forum-total">
 
-	<BOUCLE_Forums(FORUMS){id_breve}{par date}{inverse}>
-	<A NAME="forum#ID_FORUM">
-	<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=462 BGCOLOR="#000000">
-	<TR><TD BGCOLOR='#444444' WIDTH="100%">
-	<font face=Arial,Helvetica SIZE=2>
-	<B>[<FONT COLOR="#FFFFFF">(#TITRE)</FONT>]</B> 
-	</font>
-	</TD></TR>
-	<TR><TD BGCOLOR='#FFFFFF' WIDTH=100%>
-	<font face=Arial,Helvetica SIZE=1>
+<BOUCLE_Forums(FORUMS){id_breve}{par date}{inverse}>
+
+<li>
+<div class="forum-fil">
+<div class="forum">
+<a name="forum#ID_FORUM"></a>
+<div class="forum-chapo">
+<div class="forum-titre">#TITRE</div>
+[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+</div>
+<div class="forum-item">
+#TEXTE
+[<div class='forum-titre'><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+[<div align='right'><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+</div>
+</div>
+<!--BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
+<li>#LOGO_MOT <b>#TYPE :</b> #TITRE</li>
+</BOUCLE_mots_forum-->
+
+<B_forums_fils>
+	<ul>
+	<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+
+	<li>
+	<div class="forum">
+	<a name="forum#ID_FORUM"></a>
+	<div class="forum-chapo">
+	<div class="forum-titre">#TITRE</div>
 	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-	 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
-	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
-	</font>
-	</TD></TR>
-	<TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
-	<font face=Arial,Helvetica SIZE=2>
-	<P>#TEXTE
-	<P align='right'>[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
-	</font>
-	</TD></TR></TABLE>
+	</div>
+	<div class="forum-item">
+	#TEXTE
+	[<div class='forum-titre'><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
+	[<div align='right'><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+	</div>
+
+	<!--BOUCLE_mots_fils(MOTS){id_forum}{par type, titre}>
+	#LOGO_MOT <b>#TYPE :</b> #TITRE
+	</BOUCLE_mots_fils-->
+
+	</div>
+
+	<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+	</li>
+
+	</BOUCLE_forums_fils>
+	</ul>
+</B_forums_fils>
+
+</div>
+</li>
+</BOUCLE_Forums>
+
+</ul>
+</B_Forums>
+
+</div>
+
+</body>
+</html>
 
 
-	<B_fils>
-	<UL>
-		<font face=Arial,Helvetica SIZE=2>
-		<BOUCLE_fils(FORUMS){id_parent}{par date}>
-		<P>
-		<A NAME="forum#ID_FORUM">
-		<B>[(#TITRE)]</B>
-		<BR><font SIZE=1>
-		[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-		 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
-		[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
-		</font>
-		<HR NOSHADE SIZE=1>
-		#TEXTE
-		<P align="right">[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]
-			
-
-			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
-	
-		</BOUCLE_fils>
-		</font>
-	</UL>
-	</B_fils>
-
-
-
-	<P>
-
-	</BOUCLE_Forums>
-</TD>
-</TR>
-</TABLE>
-<P>
-</B_forums_liens>
-
-
-
-
-
-
-</CENTER>
-
-
-
-
-
-
-
-</BOUCLE_principale>
-
-<CENTER>
-
-<INCLURE(pied.php3)>
-
-</CENTER>
-
-
-</BODY>
-</HTML>
-
-
+</BOUCLE_breve_principal>
