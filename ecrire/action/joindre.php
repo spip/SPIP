@@ -83,7 +83,6 @@ function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_a
 	$files = array();
 	if (is_array($arg))
 	  foreach ($arg as $file) {
-	  var_dump($file);
 		if (!($file['error'] == 4) /* UPLOAD_ERR_NO_FILE */)
 			$files[]=$file;
 	}
