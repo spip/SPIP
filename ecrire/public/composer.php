@@ -581,7 +581,6 @@ function calculer_select ($select = array(), $from = array(),
 // parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
 // si elle est seulement utile a Ln+1 elle meme inutile
 	
-	$sfrom = '';
 	$afrom = array();
 	$equiv = array();
 	$k = count($join);
@@ -599,7 +598,7 @@ function calculer_select ($select = array(), $from = array(),
 		if (is_numeric($cle))
 			$cle = "L$k";
 		if (!$menage
-		OR strpos($sfrom, " $cle.")
+		OR isset($afrom[$cle])
 		OR calculer_jointnul($cle, $select)
 		OR calculer_jointnul($cle, $join)
 		OR calculer_jointnul($cle, $having)
