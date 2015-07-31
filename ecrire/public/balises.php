@@ -592,19 +592,49 @@ function balise_POPULARITE_dist ($p) {
 	return $p;
 }
 
-// #PAGINATION
-// Le code produit est trompeur, car les modeles ne fournissent pas Pile[0].
-// On produit un appel a _request si on ne l'a pas, mais c'est inexact:
-// l'absence peut etre due a une faute de frappe dans le contexte inclus.
-
+/**
+ * Code de compilation pour la balise `#PAGINATION`
+ *
+ * Le code produit est trompeur, car les modèles ne fournissent pas Pile[0].
+ * On produit un appel à `_request` si on ne l'a pas, mais c'est inexact:
+ * l'absence peut-être due à une faute de frappe dans le contexte inclus.
+ */
 define('CODE_PAGINATION',
 	'%s($Numrows["%s"]["grand_total"],
  		%s,
 		isset($Pile[0][%4$s])?$Pile[0][%4$s]:intval(_request(%4$s)),
 		%5$s, %6$s, %7$s, %8$s, array(%9$s))');
 
-// http://www.spip.net/fr_article3367.html
-// http://doc.spip.org/@balise_PAGINATION_dist
+/**
+ * Compile la balise `#PAGINATION` chargée d'afficher une pagination
+ *
+ * Elle charge le modèle `pagination.html` (par défaut), mais un paramètre
+ * permet d'indiquer d'autres modèles. `#PAGINATION{nom}` utilisera le
+ * modèle `pagination_nom.html`.
+ *
+ * Cette balise nécessite le critère `pagination` sur la boucle où elle
+ * est utilisée.
+ *
+ * @balise PAGINATION
+ * @link http://www.spip.net/3367 Le système de pagination
+ * @see filtre_pagination_dist()
+ * @see critere_pagination_dist()
+ * @see balise_ANCRE_PAGINATION_dist()
+ * @example
+ *    ```
+ *    [<p class="pagination">(#PAGINATION{prive})</p>]
+ *    ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @param string $liste
+ *     Afficher ou non les liens de pagination (variable de type `string`
+ *     car code à faire écrire au compilateur) :
+ *     - `true` pour les afficher
+ *     - `false` pour afficher uniquement l'ancre.
+ * @return Champ
+ *     Pile complétée par le code à générer
+ */
 function balise_PAGINATION_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 
@@ -662,9 +692,29 @@ function balise_PAGINATION_dist($p, $liste='true') {
 }
 
 
-// N'afficher que l'ancre de la pagination (au-dessus, par exemple, alors
-// qu'on mettra les liens en-dessous de la liste paginee)
-// http://doc.spip.org/@balise_ANCRE_PAGINATION_dist
+
+/**
+ * Compile la balise `#ANCRE_PAGINATION` chargée d'afficher l'ancre
+ * de la pagination
+ *
+ * Cette ancre peut ainsi être placée au-dessus la liste des éléments
+ * de la boucle alors qu'on mettra les liens de pagination en-dessous de
+ * cette liste paginée.
+ * 
+ * Cette balise nécessite le critère `pagination` sur la boucle où elle
+ * est utilisée.
+ * 
+ * @balise ANCRE_PAGINATION
+ * @link http://www.spip.net/3367 Le système de pagination
+ * @link http://www.spip.net/4328 Balise ANCRE_PAGINATION
+ * @see critere_pagination_dist()
+ * @see balise_PAGINATION_dist()
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_ANCRE_PAGINATION_dist($p) {
 	if ($f = charger_fonction('PAGINATION', 'balise', true))
 		return $f($p, $liste='false');
@@ -1342,12 +1392,25 @@ function balise_TOTAL_UNIQUE_dist($p) {
 	return $p;
 }
 
-//
-// #ARRAY
-// pour creer un array php a partir d'arguments calcules
-// #ARRAY{key1,val1,key2,val2 ...} retourne array(key1=>val1,...)
-//
-// http://doc.spip.org/@balise_ARRAY_dist
+/**
+ * Compile la balise `#ARRAY` créant un tableau PHP associatif
+ *
+ * Crée un `array` PHP à partir d'arguments calculés.
+ * Chaque paire d'arguments représente la clé et la valeur du tableau.
+ * 
+ * @balise ARRAY
+ * @link http://www.spip.net/4009
+ * @example
+ *     ```
+ *     #ARRAY{key1,val1,key2,val2 ...} retourne
+ *     array( key1 => val1, key2 => val2, ...)
+ *     ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_ARRAY_dist($p) {
 	$_code = array();
 	$n=1;
@@ -1364,6 +1427,8 @@ function balise_ARRAY_dist($p) {
 /**
  * Compile la balise `#LISTE` qui crée un tableau PHP avec les valeurs, sans préciser les clés
  *
+ * @balise LISTE
+ * @link http://www.spip.net/5547
  * @example
  *    ```
  *    #LISTE{a,b,c,d,e} 
@@ -1384,10 +1449,34 @@ function balise_LISTE_dist($p) {
 	return $p;
 }
 
-// Appelle la fonction autoriser et renvoie ' ' si OK, '' si niet
-// A noter : la priorite des operateurs exige && plutot que AND
-// Cette balise cree un cache par session
-// http://doc.spip.org/@balise_AUTORISER_dist
+
+/**
+ * Compile la balise `#AUTORISER` qui teste une autorisation
+ *
+ * Appelle la fonction `autoriser()` avec les mêmes arguments,
+ * et renvoie un espace ' ' si OK (l'action est autorisée),
+ * sinon une chaine vide '' (l'action n'est pas autorisée).
+ *
+ * Cette balise créée un cache par session.
+ * 
+ * @note
+ *     La priorité des opérateurs exige && plutot que AND
+ * 
+ * @balise AUTORISER
+ * @link http://www.spip.net/3896
+ * @see autoriser()
+ * @see sinon_interdire_acces()
+ * @example
+ *    ```
+ *    [(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}) ... ]
+ *    [(#AUTORISER{voir,rubrique,#ID_RUBRIQUE}|sinon_interdire_acces)]
+ *    ```
+ *
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_AUTORISER_dist($p) {
 	$_code = array();
 	$p->descr['session'] = true; // faire un cache par session
@@ -1415,8 +1504,23 @@ function balise_PLUGIN_dist($p) {
 	return $p;
 }
 
-// Appelle la fonction inc_aider_dist
-// http://doc.spip.org/@balise_AIDER_dist
+/**
+ * Compile la balise `#AIDER` qui permet d’afficher l’icone de l’aide
+ * au sein des squelettes.
+ *
+ * @balise ACTION_FORMULAIRE
+ * @see inc_aider_dist()
+ * @link http://www.spip.net/4733
+ * @example
+ *     ```
+ *     #AIDER{titre}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_AIDER_dist($p) {
 	$_motif = interprete_argument_balise(1,$p);
 	$s = "'" . addslashes($p->descr['sourcefile']) . "'";
@@ -1425,9 +1529,23 @@ function balise_AIDER_dist($p) {
 	return $p;
 }
 
-// Insertion du contexte des formulaires charger/verifier/traiter
-// avec les hidden de l'url d'action
-// http://doc.spip.org/@balise_ACTION_FORMULAIRE
+/**
+ * Compile la balise `#ACTION_FORMULAIRE` qui insère le contexte
+ * des formulaires charger / vérifier / traiter avec les hidden de
+ * l'URL d'action
+ *
+ * @balise ACTION_FORMULAIRE
+ * @example
+ *     ```
+ *     <form method='post' action='#ENV{action}'><div>
+ *     #ACTION_FORMULAIRE{#ENV{action}}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée par le code à générer
+**/
 function balise_ACTION_FORMULAIRE($p){
 	if (!$_url = interprete_argument_balise(1,$p))
 		$_url = "@\$Pile[0]['action']";
