@@ -716,9 +716,19 @@ function spip_mysql_hex($v)
 	return "0x" . $v;
 }
 
-function spip_mysql_quote($v, $type='')
-{
-	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+function spip_mysql_quote($v, $type='') {
+	if ($type) {
+		if (!is_array($v))
+			return spip_mysql_cite($v,$type);
+		// si c'est un tableau, le parcourir en propageant le type
+		foreach($v as $k=>$r)
+			$v[$k] = spip_mysql_quote($r, $type='');
+		return $v;
+	}
+	// si on ne connait pas le type, s'en remettre a _q :
+	// on ne fera pas mieux
+	else
+		return _q($v);
 }
 
 function spip_mysql_date_proche($champ, $interval, $unite)
@@ -770,13 +780,17 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 
 // http://doc.spip.org/@spip_mysql_cite
 function spip_mysql_cite($v, $type) {
-	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v)
-	OR (sql_test_int($type)
-		 AND (is_numeric($v)
-		      OR (ctype_xdigit(substr($v,2))
-			  AND $v[0]=='0' AND $v[1]=='x'))))
+	if (sql_test_date($type) AND preg_match('/^\w+\(/', $v))
 		return $v;
-	else return  ("'" . addslashes($v) . "'");
+	if (sql_test_int($type)) {
+		if (is_numeric($v) OR (ctype_xdigit(substr($v,2))
+			  AND $v[0]=='0' AND $v[1]=='x'))
+			return $v;
+		// si pas numerique, forcer le intval
+		else
+			return intval($v);
+	}
+	return  ("'" . addslashes($v) . "'");
 }
 
 // Ces deux fonctions n'ont pas d'equivalent exact PostGres
