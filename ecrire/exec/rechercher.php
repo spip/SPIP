@@ -34,7 +34,7 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do)
 {
 	if (!$do) $do = 'aff';
 
-	$where = preg_split("\s+", $type);
+	$where = preg_split(",\s+,", $type);
 	if ($where) {
 		foreach ($where as $k => $v) 
 			$where[$k] = "'%" . substr(str_replace("%","\%", sql_quote($v)),1,-1) . "%'";
