@@ -48,12 +48,25 @@ function liste_des_champs() {
 // options :
 // - toutvoir pour eviter autoriser(voir)
 // - flags pour eviter les flags regexp par defaut (UimsS)
+// - champs pour retourner les champs concernes
+// - score pour retourner un score
 // http://doc.spip.org/@recherche_en_base
-function recherche_en_base($recherche='', $tables=NULL, $options=NULL) {
+function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 	if (!is_array($tables))
 		$tables = liste_des_champs();
 
 	include_spip('inc/autoriser');
+
+	// options par defaut
+	$options = array_merge(array(
+		'preg_flags' => 'UimsS',
+		'toutvoir' => false,
+		'champs' => false,
+		'score' => false,
+		'matches' => false
+		),
+		$options
+	);
 
 	$results = array();
 
@@ -73,9 +86,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=NULL) {
 		$q = _q($recherche);
 	}
 
-	if (!isset($options['preg_flags']))
-		$options['flags'] = 'UimsS';
-	$preg = '/'.$recherche.'/' . $options['flags'];
+	$preg = '/'.$recherche.'/' . $options['preg_flags'];
 
 	foreach ($tables as $table => $champs) {
 		$a = array();
@@ -95,18 +106,46 @@ function recherche_en_base($recherche='', $tables=NULL, $options=NULL) {
 			.' WHERE ('
 			. join (' OR ', $a)
 			. ")");
+
 		while ($t = spip_fetch_array($s)) {
-			$id = $t[$_id_table];
-			if ($options['toutvoir'] OR autoriser('voir', $table, $id)) {
+			$id = intval($t[$_id_table]);
+			if ($options['toutvoir']
+			OR autoriser('voir', $table, $id)) {
 				// indiquer les champs concernes
-				$vus = array();
+				$champs_vus = array();
+				$score = 0;
+				$matches = array();
+
+				if ($recherche == "$id")
+					$champs_vus[$_id_table] = $id;
+
 				foreach ($champs as $champ) {
-					if (preg_match($preg, $t[$champ]))
-						$vus[$champ] = $t[$champ];
+					if ($n = 
+						($options['score'] || $options['matches'])
+						? preg_match_all($preg, $t[$champ], $regs, PREG_SET_ORDER)
+						: preg_match($preg, $t[$champ])
+					) {
+						$champs_vus[$_id_table] = $id;
+						if ($options['champs'])
+							$champs_vus[$champ] = $t[$champ];
+						if ($options['score'])
+							$score += $n; // * valeur du champ
+						if ($options['matches'])
+							$matches[$champ] = $regs;
+					}
 				}
-				// et l'id, si besoin
-				if ($vus OR $recherche == "$id")
-					$results[$table][$id] = array_merge(array($_id_table => $id), $vus);
+
+				if ($champs_vus) {
+					if (!isset($results[$table]))
+						$results[$table] = array();
+					$results[$table][$id] = array(
+						'champs' => $champs_vus
+					);
+					if ($score)
+						$results[$table][$id]['score'] = $score;
+					if ($matches)
+						$results[$table][$id]['matches'] = $matches;
+				}
 			}
 		}
 	}
@@ -120,14 +159,21 @@ function recherche_en_base($recherche='', $tables=NULL, $options=NULL) {
 function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=array()) {
 	include_spip('inc/modifier');
 
+	// options par defaut
+	$options = array_merge(array(
+		'preg_flags' => 'UimsS',
+		'toutmodifier' => false
+		),
+		$options
+	);
+
+
 	if (!is_array($tables))
 		$tables = liste_des_champs();
 
 	$results = recherche_en_base($recherche, $tables, $options);
 
-	if (!isset($options['preg_flags']))
-		$options['flags'] = 'UimsS';
-	$preg = '/'.$recherche.'/' . $options['flags'];
+	$preg = '/'.$recherche.'/' . $options['preg_flags'];
 
 	foreach ($results as $table => $r) {
 		$_id_table = id_table_objet($table);
