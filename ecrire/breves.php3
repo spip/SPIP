@@ -10,21 +10,23 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("inc.php3");
-$f = find_in_path("inc_breves.php");
-include($f ? $f : (_DIR_INCLUDE . "inc_breves.php"));
 
-if ($statut AND $connect_statut == "0minirezo") {
-  changer_statut_breves($id_breve, $statut);
-  redirige_par_entete("breves.php3");
-}
+// prendre $var_* comme variables pour eviter les conflits avec les http_vars
 
-debut_page(_T('titre_page_breves'), "documents", "breves");
-debut_gauche();
-debut_droite();
-enfant(0);
-fin_page();
+$var_nom = "breves";
+$var_f = find_in_path('inc_' . $var_nom . '.php');
 
+if ($var_f) 
+  include($var_f);
+elseif (file_exists($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
+  include($var_f);
+
+if (function_exists($var_nom))
+  $var_nom();
+elseif (function_exists($var_f = $var_nom . "_dist"))
+  $var_f();
+else
+   spip_log("fonction $var_nom indisponible");
 ?>
 
