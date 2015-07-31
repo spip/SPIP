@@ -494,11 +494,8 @@ function import_all($f, $gz=false) {
 function affiche_progression_javascript($abs_pos) {
 	global $affiche_progression_pourcent;
 
-	// 8ko pour forcer le flush
-	for ($i=0; $i<8192; $i++)
-		echo " ";
-
-	echo " --><script language='javascript'><!--\n";
+	flush();
+	echo " --><script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
 		$taille = $abs_pos;
@@ -514,7 +511,7 @@ function affiche_progression_javascript($abs_pos) {
 
 	echo "document.progression.taille.value='$taille';\n";
 	echo "//--></script><!--\n";
-	flush;
+	flush();
 }
 
 ?>
