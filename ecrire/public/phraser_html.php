@@ -48,24 +48,24 @@ function phraser_arguments_inclure($p,$rejet_filtres = false){
 			else
 				$champ->param[$k] = $v;
 		}
-		else {
-			if ($var->type != 'texte')
-				if ($rejet_filtres)
-					break; // on est arrive sur un filtre sans argument qui suit la balise
-				else
-					erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
-			else {
-				$champ->param[$k] = $v;
-				preg_match(",^([^=]*)(=)?(.*)$,", $var->texte,$m);
-				if ($m[2]) {
-					$champ->param[$k][0] = $m[1];
-					$val = $m[3];
-					if (preg_match(',^[\'"](.*)[\'"]$,', $val, $m)) $val = $m[1];
-					$champ->param[$k][1][0]->texte = $val;
-				}
-				else
-					$champ->param[$k] = array($m[1]);
+		else
+		if ($var->type != 'texte') {
+			if ($rejet_filtres)
+				break; // on est arrive sur un filtre sans argument qui suit la balise
+			else
+				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),$var);
+		} else {
+			$champ->param[$k] = $v;
+			preg_match(",^([^=]*)(=)?(.*)$,", $var->texte,$m);
+			if ($m[2]) {
+				$champ->param[$k][0] = $m[1];
+				$val = $m[3];
+				if (preg_match(',^[\'"](.*)[\'"]$,', $val, $m)) $val = $m[1];
+				$champ->param[$k][1][0]->texte = $val;
 			}
+			else
+				$champ->param[$k] = array($m[1]);
+
 		}
 	}
 	return $champ;
@@ -90,9 +90,7 @@ function phraser_inclure($texte, $ligne, $result) {
 		$champ->param = $champ_->param;
 		$texte = substr($champ->apres, strpos($champ->apres, '>')+1);
 		$champ->apres = "";
-		if (preg_match(',^</INCLU[DR]E>,', $texte)) {	
-			$texte = substr($texte,10);
-		}
+		$texte = preg_replace(',^</INCLU[DR]E>,', '', $texte);
 		$result[] = $champ;
 	}
 	return (($texte==="") ? $result : phraser_idiomes($texte, $ligne, $result));

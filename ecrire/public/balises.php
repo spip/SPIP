@@ -1059,11 +1059,19 @@ function balise_INCLURE_dist($p) {
 	$_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $id_boucle, false);
 
 	if (isset($_contexte['fond'])) {
+
+		// Gerer ajax
 		if (isset($_contexte['ajax'])){
 			$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
 			$_contexte['fond'] = "'fond' => 'fond/ajax_stat'";
 			unset($_contexte['ajax']);
 		}
+
+		// #INCLURE{doublons}
+		if (isset($_contexte['doublons'])) {
+			$_contexte['doublons'] = "'doublons' => \$doublons";
+		}
+
 		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
 		if (isset($_contexte['env'])
 		|| isset($_contexte['self'])
@@ -1071,10 +1079,12 @@ function balise_INCLURE_dist($p) {
 			$flag_env = true;
 			unset($_contexte['env']);
 		} else $flag_env = false;
+
 		$l = 'array(' . join(",\n\t", $_contexte) .')';
 		if ($flag_env) {
 			$l = "array_merge(\$Pile[0],$l)";
 		}
+
 		$connect = !$id_boucle ? '' 
 		  : $p->boucles[$id_boucle]->sql_serveur;
 

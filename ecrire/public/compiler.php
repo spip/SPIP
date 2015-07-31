@@ -68,12 +68,12 @@ function argumenter_inclure($struct, $descr, &$boucles, $id_boucle, $echap=true)
 // Calculer un <INCLURE()>
 //
 // http://doc.spip.org/@calculer_inclure
-function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
+function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 
 	# Si pas raccourci <INCLURE{fond=xxx}> 
 	# chercher le fichier, eventuellement en changeant.php3 => .php
 	# et en gardant la compatibilite <INCLURE(page.php3)>
-	if ($fichier = $struct->texte) {
+	if ($fichier = $p->texte) {
 		if (preg_match(',^(.*[.]php)3$,', $fichier, $r)) {
 			$fichier = $r[1];
 		}
@@ -91,7 +91,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 		}
 	}
 
-	$_contexte = argumenter_inclure($struct, $descr, $boucles, $id_boucle);
+	$_contexte = argumenter_inclure($p, $descr, $boucles, $id_boucle);
 	if (isset($_contexte['fond']) && isset($_contexte['ajax'])){
 		$_contexte['fond_ajax'] = preg_replace(",fond,","fond_ajax",$_contexte['fond'],1);
 		$_contexte['fond'] = "\'fond\' => ' . argumenter_squelette('fond/ajax') . '";
@@ -100,6 +100,13 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	if ($env = (isset($_contexte['env'])|| isset($_contexte['self']))) {
 		unset($_contexte['env']);
 	}
+
+	// <INCLURE{doublons}>
+	if (isset($_contexte['doublons'])) {
+		// noter les doublons dans l'appel a public.php
+		$_contexte['doublons'] = "\\'doublons\\' => '.var_export(\$doublons,true).'";
+	}
+
 	$contexte = 'array(' . join(",\n\t", $_contexte) .')';
 	if ($env) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
@@ -107,9 +114,9 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = $contexte;"
-		. "\n\tinclude(" .
+		. "\n\tinclude " .
 		($fichier ? "\\'$path\\'" : ('_DIR_RESTREINT . "public.php"')).
-		");" .
+		";" .
 		"\n?'." . "'>'";
  }
 
@@ -721,21 +728,22 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	include_spip('inc/charsets');
 	$squelette = transcoder_page($squelette);
 
+	// Informations sur le squelette
+	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile,
+		'squelette' => $squelette);
+	unset($squelette);
+
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = array();
 	spip_timer('calcul_skel');
 
+
 	$f = charger_fonction('phraser_'.$gram, 'public');
 
-	$racine = $f($squelette, '',$boucles, $nom);
+	$racine = $f($descr['squelette'], '', $boucles, $nom);
 
-	// tableau des informations sur le squelette
-	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile);
-
-	// Signaler une boucle documents (les autres influent dessus)
-	// Et demander la description des tables une fois pour toutes
-
+	// Demander la description des tables une fois pour toutes
 	foreach($boucles as $id => $boucle) {
 		$type = $boucle->type_requete;
 		if ($type != 'boucle') {
@@ -753,8 +761,6 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 				if ((!$boucles[$id]->jointures)
 				AND (is_array($x = $tables_jointures[$nom_table])))
 					$boucles[$id]->jointures = $x;
-				if (($type == 'documents') && $boucle->doublons)
-					{ $descr['documents'] = true;  }
 			} else {
 				$boucles[$id]->type_requete = '';
 				$x = $boucles[$id]->sql_serveur;
@@ -769,6 +775,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 			}
 		}
 	}
+
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
 	foreach($boucles as $id => $boucle) { 
@@ -870,6 +877,13 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 	  ($connect ? " pour $connect" : '') . ".
 //
 function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
+
+'
+	// reporter de maniere securisee les doublons inclus
+.'
+	if (is_array($Pile[0]["doublons"]))
+		$doublons = nettoyer_env_doublons($Pile[0]["doublons"]);
+
 	$connect = ' .
 	_q($connect) . ';
 	$page = ' .
@@ -884,7 +898,7 @@ function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0)
 ?".">";
 
 	if (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug')
-		squelette_debug_compile($nom, $sourcefile, $code, $squelette);
+		squelette_debug_compile($nom, $sourcefile, $code, $descr['squelette']);
 	return $code;
 
 }

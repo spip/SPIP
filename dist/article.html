@@ -42,50 +42,31 @@
 			[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
 			[<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>]
 		</div>
-		
-		[(#REM) Portfolio : album d'images ]
-		<B_documents_portfolio>
-        <div id="documents_portfolio">
-            <h2><:info_portfolio:></h2>
-            <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>[
-		<a href="(#URL_DOCUMENT)" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"][ class="(#_article_principal:EXPOSE)"]>[(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})]</a>
-	]</BOUCLE_documents_portfolio>
-        </div>
-        </B_documents_portfolio>
-        <BOUCLE_afficher_document(DOCUMENTS) {id_article}{id_document} {mode=document}{extension IN png,jpg,gif}>
-        <div class="spip_documents spip_documents_center" id="document_actif">
-            [(#EMBED_DOCUMENT|image_reduire{500,0})]
-            [<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
-            [<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
-        </div>
-        </BOUCLE_afficher_document>
-		
+
+
 		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
         
 		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
 
-        [(#REM) Autres documents joints a l'article. Si un seul et texte vide, incrustation automatique ; a noter : le {!doublons A} permet de retrouver les documents dans la boucle suivante ]
-		<BOUCLE_documents_decompte(DOCUMENTS) {id_article} {mode=document}{doublons}{doublons A}
-		 />[(#TOTAL_BOUCLE|<>{1}|?{' ',#TEXTE**}|?{'',' '})
-		<INCLURE{fond=inc-documents}{id_article}>]
-		<//B_documents_decompte>
-		
-        <B_documents_joints>
-        <div class="menu" id="documents_joints">
-            <h2><:titre_documents_joints:></h2>
-            <ul>
-                <BOUCLE_documents_joints(DOCUMENTS){!doublons A} {par num titre, date}>[
-                <li>
-                    <strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
-                    <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
-                    #DESCRIPTIF
-                ]</li>
-                </BOUCLE_documents_joints>
-            </ul>
-        </div>
-        </B_documents_joints>[
-        
-        (#REM) Petition :
+
+
+		[(#REM) Gestion du portfolio et des documents
+			Le critere d'inclusion {doublons} permet d'eviter de lister
+			 les documents deja integres dans la balise # TEXTE
+			Le critere d'incrustation permet d'incruster un document
+			 qui serait unique : on le fait si # TEXTE est vide
+			Le critere {env} permet de passer d'autres arguments de la page
+			 par exemple l'id_document choisi pour un affichage complet
+		]
+		[(#INCLURE{fond=inc-documents}
+			{id_article}
+			{doublons}
+			{incruster=[(#TEXTE**|=={''})]}
+			{env}
+		)]
+
+
+		[(#REM) Petition :
 		La petition ayant une PAGINATION il faut absolument {env}][
 	(#PETITION|?{' '})<INCLURE{fond=inc-petition}{id_article}{env}>]
 
