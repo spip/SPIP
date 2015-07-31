@@ -184,25 +184,19 @@ if ($les_notes) {
 debut_cadre_relief();
 
 if ($surtitre) {
-	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-	echo $surtitre;
-	echo "</b></font></span>\n";
+	echo "<span $dir_lang><span style='font-family: arial,helvetica; font-size: 16px;'><b>", $surtitre, "</b></span></span>\n";
 }
 gros_titre($titre);
 
 if ($soustitre) {
-	echo "<span $dir_lang><font face='arial,helvetica' size='3'><b>";
-	echo $soustitre;
-	echo "</b></font></span>\n";
+	echo "<span $dir_lang><span style='font-family: arial,helvetica; font-size: 16px;'><b>", $soustitre, "</b></span></span>\n";
 }
 
 if ($descriptif OR $url_site OR $nom_site) {
 	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
-	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
-	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
-	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
-	echo $descriptif;
-	echo "</font>";
+	$t = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
+	$t .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
+	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>", $t, "</font>";
 	echo "</div>";
 }
 
@@ -227,18 +221,13 @@ else {
 
 	if ($ps) {
 		echo debut_cadre_enfonce();
-		echo "<div $dir_lang><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
-		echo "<b>"._T('info_ps')."</b> ";
-		echo $ps;
-		echo "</font></div>";
+		echo "<div $dir_lang><font size='2' face='Verdana,Arial,Sans,sans-serif'>", "<b>"._T('info_ps')."</b>", $ps, "</font></div>";
 		echo fin_cadre_enfonce();
 	}
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
-		echo "<div $dir_lang><font size='2'>";
-		echo "<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes;
-		echo "</font></div>";
+		echo "<div $dir_lang><span style='font-size: 14px;'>", "<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes, "</span></div>";
 		echo fin_cadre_relief();
 	}
 

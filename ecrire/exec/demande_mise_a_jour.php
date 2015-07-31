@@ -18,9 +18,7 @@ function exec_demande_mise_a_jour_dist() {
 	include_spip('inc/presentation');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page();
-	echo "<blockquote><blockquote><h4><font color='red'>",
-	_T('info_message_technique'),
-	"</font><br /> ",
+	echo "<blockquote><blockquote><h4><font color='red'>",	_T('info_message_technique'),"</font><br /> ",
 	_T('info_procedure_maj_version'),
 	"</h4>",
 	_T('info_administrateur_site_01'),

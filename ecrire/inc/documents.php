@@ -310,9 +310,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 				$ret .= "</div>";
 			}
 		} else {
-			$ret .= "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>".
-			  affiche_raccourci_doc('doc', $id_document, '').
-			  "</font></div>";
+			$ret .= "<div style='padding:2px;'><font size='1' face='arial,helvetica,sans-serif'>". affiche_raccourci_doc('doc', $id_document, ''). "</font></div>";
 		}
 
 		$legender = charger_fonction('legender', 'inc');
@@ -332,8 +330,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		//
 		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
 		//
-		$raccourci_doc = "<div style='padding:2px;'>
-		<font size='1' face='arial,helvetica,sans-serif'>";
+		$raccourci_doc = "";
 		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
 			$doc = 'doc';
 		else
@@ -346,7 +343,8 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 		} else {
 			$raccourci_doc .= affiche_raccourci_doc($doc, $id_document, '');
 		}
-		$raccourci_doc .= "</font></div>\n";
+		$raccourci_doc = "<div style='padding:2px;'>
+		<font size='1' face='arial,helvetica,sans-serif'>$raccourci_doc</font></div>\n";
 
 		//
 		// Afficher un apercu (pour les images)

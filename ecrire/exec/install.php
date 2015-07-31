@@ -71,13 +71,13 @@ function tester_compatibilite_hebergement() {
 		. "mbstring.func_overload=$a - <a href='http://se.php.net/mb_string'>mb_string</a>.<br /><small>";
 
 	if ($err) {
-			echo "<p><font face='Verdana,Arial,Sans,sans-serif' size='4'><b>"._T('avis_attention').'</b> <p>'._T('install_echec_annonce')."</p></font>";
+			echo "<p style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 18px;'><b>"._T('avis_attention').'</b></p><p>'._T('install_echec_annonce')."</p><ul>";
 		while (list(,$e) = each ($err))
 			echo "<li>$e</li>\n";
 
 		# a priori ici on pourrait die(), mais il faut laisser la possibilite
 		# de forcer malgre tout (pour tester, ou si bug de detection)
-		echo "<p /><hr />\n";
+		echo "</ul><hr />\n";
 	}
 }
 

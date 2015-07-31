@@ -261,10 +261,7 @@ function exec_controle_forum_dist()
 
 			debut_gauche();
 			debut_boite_info();
-			echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
-			echo _T('info_gauche_suivi_forum_2');
-			echo aide("suiviforum");
-			echo "</font>";
+			echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 14px;'>", _T('info_gauche_suivi_forum_2'), aide("suiviforum"), "</span>";
 
 			// Afficher le lien RSS
 

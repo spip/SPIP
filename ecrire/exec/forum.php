@@ -24,7 +24,7 @@ function liste_numeros_forum($script, $debut, $total)
 	for ($i = 0; $i < $total; $i = $i + 10){
 		if ($i > 0) echo " | ";
 		if ($i == $debut)
-			echo "\n<font size='3'><b>$i</b></font>";
+			echo "\n<span style='font-size: 16px;'><b>$i</b></span>";
 		else
 			echo "\n<a href='", generer_url_ecrire($script, "debut=$i"), "'>$i</a>";
 	}

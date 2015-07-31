@@ -149,7 +149,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 			fin_cadre_enfonce();	
 		}
 		else {
-			echo "<p><font face='Verdana,Arial,Sans,sans-serif' size='3'><b>".affdate($date_heure)."&nbsp;</b></font></p>";
+			echo "<p><span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 16px;'><b>".affdate($date_heure)."&nbsp;</b></span></p>";
 		}
 	}
 
@@ -192,7 +192,7 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	echo propre($texte_case);
 
 	if ($les_notes) {
-		echo "<hr width='70%' height='1' align='left'><font size='2'>$les_notes</font>\n";
+		echo "<hr width='70%' height='1' align='left'><span style='font-size: 14px;'>$les_notes</span>\n";
 	}
 
 	// afficher les extra

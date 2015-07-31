@@ -71,36 +71,30 @@ function exec_mots_tous_dist()
 
 		debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
 		// Affichage des options du groupe (types d'elements, permissions...)
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>";
-		if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
-		if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
-		if ($rubriques == "oui") echo "> "._T('info_rubriques')." &nbsp;&nbsp;";
-		if ($syndic == "oui") echo "> "._T('icone_sites_references')." &nbsp;&nbsp;";
+		$res = '';
+		if ($articles == "oui") $res .= "> "._T('info_articles_2')." &nbsp;&nbsp;";
+		if ($breves == "oui") $res .= "> "._T('info_breves_02')." &nbsp;&nbsp;";
+		if ($rubriques == "oui") $res .= "> "._T('info_rubriques')." &nbsp;&nbsp;";
+		if ($syndic == "oui") $res .= "> "._T('icone_sites_references')." &nbsp;&nbsp;";
 
-		if ($unseul == "oui" OR $obligatoire == "oui") echo "<br />";
-		if ($unseul == "oui") echo "> "._T('info_un_mot')." &nbsp;&nbsp;";
-		if ($obligatoire == "oui") echo "> "._T('info_groupe_important')." &nbsp;&nbsp;";
+		if ($unseul == "oui" OR $obligatoire == "oui") $res .= "<br />";
+		if ($unseul == "oui") $res .= "> "._T('info_un_mot')." &nbsp;&nbsp;";
+		if ($obligatoire == "oui") $res .= "> "._T('info_groupe_important')." &nbsp;&nbsp;";
 
-		echo "<br />";
-		if ($acces_minirezo == "oui") echo "> "._T('info_administrateurs')." &nbsp;&nbsp;";
-		if ($acces_comite == "oui") echo "> "._T('info_redacteurs')." &nbsp;&nbsp;";
-		if ($acces_forum == "oui") echo "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
+		$res .= "<br />";
+		if ($acces_minirezo == "oui") $res .= "> "._T('info_administrateurs')." &nbsp;&nbsp;";
+		if ($acces_comite == "oui") $res .= "> "._T('info_redacteurs')." &nbsp;&nbsp;";
+		if ($acces_forum == "oui") $res .= "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 
-		echo "</font>";
+ 		echo "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'>", $res, "</span>";
 		if ($descriptif) {
 			echo "<div style='border: 1px dashed #aaaaaa;'>";
-			echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
-			echo "<b>",_T('info_descriptif'),"</b> ";
-			echo propre($descriptif);
-			echo "&nbsp; ";
-			echo "</font>";
+			echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>", "<b>",_T('info_descriptif'),"</b> ", propre($descriptif), "&nbsp; ", "</font>";
 			echo "</div>";
 		}
 
 		if (strlen($texte)>0){
-			echo "<font face='Verdana,Arial,Sans,sans-serif'>";
-			echo propre($texte);
-			echo "</font>";
+			echo "<font face='Verdana,Arial,Sans,sans-serif'>", propre($texte), "</font>";
 		}
 
 		//

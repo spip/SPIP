@@ -97,9 +97,7 @@ function exec_mots_type_dist()
 	. "</td>"
 	. "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n"
 	. "<td style='width: 100%' valign='top'>"
-	. "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"
-	. _T('titre_groupe_mots')
-	. "</b></font><br />"
+	  . "<span style='font-family: Verdana,Arial,Sans,sans-serif; font-size: 12px;'><b>". _T('titre_groupe_mots') . "</b></span><br />"
 	  . gros_titre($titre,'',false)
 	. aide("motsgroupes")
 	. "<div style='font-family: Verdana,Arial,Sans,sans-serif;'>"
