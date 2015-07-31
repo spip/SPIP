@@ -58,8 +58,12 @@ if (defined('_INC_PUBLIC')) {
 		$var_f();
 		if (isset($redirect) && $redirect)
 			redirige_par_entete(urldecode($redirect));
-		else http_status(204);
-		spip_log("action $action renvoie status 204");
+		else if (!headers_sent()) {
+			http_status(204);
+			spip_log("action $action renvoie status 204");
+		} else {
+			spip_log("action $action renvoie du contenu");
+		}
 		exit;
 	}
 
