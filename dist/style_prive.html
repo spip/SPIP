@@ -29,6 +29,14 @@ body {
 }
 body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 
+/* Espaceur de blocs */
+.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
+
+/* Non visible a l'ecran */
+.invisible { position: absolute; top: -3000em; height: 1%; }
+.none { display: none; }
+
+/* * */
 .toile_claire {
 	background-color: ##ENV{couleur_claire,edf3fe};
 }
@@ -118,8 +126,6 @@ body, body * { font-family: Verdana, Geneva, Sans, sans-serif; }
 td {
 	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 }
-/* Espaceur de blocs */
-.nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }
 
 /*
  * Formulaires
