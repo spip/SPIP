@@ -30,9 +30,9 @@
 			<td class='titre principale'><span
 							[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)class="on"]
 							dir="#LANG_DIR"
-							lang="#LANG"><a
+							lang="#LANG">[(#EXPOSE|?{#TITRE,<a
 							href="[(#ID_ARTICLE|generer_url_entite{article})]"
-							title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a></span>
+							title="<:info_numero_abbreviation|attribut_html:> #ID_ARTICLE">[(#RANG). ]#TITRE</a>})]</span>
 				[(#ENV{id_trad}|=={#ID_ARTICLE}|oui)<:trad_reference:>]
 			</td>
 			<td class='langue'>[(#LANG|traduire_nom_langue)]</td>
