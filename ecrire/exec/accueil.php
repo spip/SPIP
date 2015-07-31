@@ -464,7 +464,7 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 echo "<p>";
  $vos_articles = afficher_articles(afficher_plus(generer_url_ecrire('articles_page'))._T('info_en_cours_validation'),	array('FROM' => "spip_articles AS articles, spip_auteurs_articles AS lien", "WHERE" => "articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa'", "ORDER BY" => "articles.date DESC"));
 
- $vos_articles = !$vos_articles ? '' : (' AND articles.id_article NOT IN ('.join($vos_articles,',').')');
+ $vos_articles = !$vos_articles ? '' : (' AND articles.id_article NOT IN ('.join(',',$vos_articles) .')');
 
   colonne_gauche_accueil($id_rubrique,
 			 $GLOBALS['meta']["activer_breves"],
