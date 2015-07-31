@@ -1020,9 +1020,9 @@ function traiter_raccourcis_generale($letexte) {
 
 	// 3. Manger les <no p>
 	$letexte = preg_replace(
-		',<p([[:space:]][^>]*)?'.'>(\s*</no p>)+,ims', '', $letexte);
+		',(<p([[:space:]][^>]*)?'.'>)?(\s*</no p>)+,ims', '', $letexte);
 	$letexte = preg_replace(
-		',(<no p>\s*)+</p([[:space:]][^>]*)?'.'>,ims', '', $letexte);
+		',(<no p>\s*)+(</p([[:space:]][^>]*)?'.'>)?,ims', '', $letexte);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
