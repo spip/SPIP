@@ -613,6 +613,9 @@ prive/images/m_envoi_rtl.gif -text
 prive/images/mail-auto-24.gif -text
 prive/images/mail-forum-24.gif -text
 prive/images/message.gif -text
+prive/images/message_erreur-24.png -text
+prive/images/message_notice-24.png -text
+prive/images/message_ok-24.png -text
 prive/images/messagerie-24.gif -text
 prive/images/messagerie-48.png -text
 prive/images/minipres-gris.png -text
