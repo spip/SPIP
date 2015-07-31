@@ -440,7 +440,8 @@ function calculer_page_globale($fond) {
 			$contexte[$val] = (int) $GLOBALS[$val];
 		}
 	}
-	if ($GLOBALS['date']) $contexte['date'] = normaliser_date($GLOBALS['date']);
+	if ($GLOBALS['date'])
+		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
 
 	// Calcul de la rubrique associee a la requete
 	// (selection de squelette specifique)
