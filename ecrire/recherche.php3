@@ -1,7 +1,7 @@
 <?php
 
 include ("inc.php3");
-include_local ("inc_mots.php3");
+include_ecrire ("inc_mots.php3");
 
 debut_page("R&eacute;sultats de la recherche");
 

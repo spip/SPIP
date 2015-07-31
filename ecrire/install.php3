@@ -1,7 +1,7 @@
 <?php
 
 include ("inc_version.php3");
-include_local ("inc_presentation.php3");
+include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
 	install_debut_html();
@@ -10,8 +10,8 @@ if (file_exists("inc_connect.php3")) {
 	exit;
 }
 
-include_local ("inc_acces.php3");
-include_local ("inc_base.php3");
+include_ecrire ("inc_acces.php3");
+include_ecrire ("inc_base.php3");
 
 if ($etape6) {
 	install_debut_html();
@@ -42,7 +42,7 @@ if ($etape6) {
 		spip_query($query);
 
 		// inserer email comme email webmaster principal
-		include_local('inc_meta.php3');
+		include_ecrire('inc_meta.php3');
 		ecrire_meta('email_webmaster', $email);
 		ecrire_metas();
 	}

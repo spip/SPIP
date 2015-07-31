@@ -123,9 +123,9 @@ if (($date - $date_opt) > 24 * 3600) {
 }
 
 
-include_local ("inc_mail.php3");
-include_local ("inc_sites.php3");
-include_local ("inc_index.php3");
+include_ecrire ("inc_mail.php3");
+include_ecrire ("inc_sites.php3");
+include_ecrire ("inc_index.php3");
 
 envoyer_mail_quoi_de_neuf();
 

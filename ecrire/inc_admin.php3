@@ -21,7 +21,7 @@ function debut_admin($action, $commentaire='') {
 	$lien = $requete_fichier;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
-		include_local ("inc_presentation.php3");
+		include_ecrire ("inc_presentation.php3");
 		install_debut_html("Acc&egrave;s refus&eacute;");
 		install_fin_html();
 		exit;
@@ -29,7 +29,7 @@ function debut_admin($action, $commentaire='') {
 	$fichier = fichier_admin($action);
 	if (file_exists("data/$fichier")) return true;
 
-	include_local ("inc_presentation.php3");
+	include_ecrire ("inc_presentation.php3");
 	install_debut_html("Action : $action");
 
 		if ($commentaire) {

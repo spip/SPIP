@@ -1,9 +1,9 @@
 <?php
 
 include ("inc.php3");
-include_local ("inc_index.php3");
-include_local ("inc_logos.php3");
-include_local ("inc_mots.php3");
+include_ecrire ("inc_index.php3");
+include_ecrire ("inc_logos.php3");
+include_ecrire ("inc_mots.php3");
 
 if (!$id_breve) $id_breve=0;
 

@@ -86,7 +86,7 @@ function auth() {
 			@header("Location: ../spip_cookie.php3?essai_auth_http=logout");
 			exit;
 		} else {
-			include_local ("inc_session.php3");
+			include_ecrire ("inc_session.php3");
 			if (verifier_php_auth()) {
 				$auth_login = $PHP_AUTH_USER;
 				$auth_pass_ok = true;
@@ -106,8 +106,8 @@ function auth() {
 
 	// Authentification session
 	else if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
-		include_local ("inc_meta.php3");
-		include_local ("inc_session.php3");
+		include_ecrire ("inc_meta.php3");
+		include_ecrire ("inc_session.php3");
 		if (verifier_session($cookie_session)) {
 			if ($auteur_session['statut'] == '0minirezo' OR $auteur_session['statut'] == '1comite') {
 				$auth_login = $auteur_session['login'];
