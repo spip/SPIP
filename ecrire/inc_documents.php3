@@ -714,13 +714,13 @@ entites_html($document['fichier'])."\" />\n";
 					}
 					echo "<b>"._T('info_mise_en_ligne')."</b><br />\n";
 					echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					afficher_jour($jour);
+					echo afficher_jour($jour);
 					echo "</SELECT>";
 					echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					afficher_mois($mois);
+					echo afficher_mois($mois);
 					echo "</SELECT>";
 					echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					afficher_annee($annee);
+					echo afficher_annee($annee);
 					echo "</SELECT><br />";
 				}
 
