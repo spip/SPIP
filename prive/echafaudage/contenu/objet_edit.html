@@ -2,7 +2,7 @@
 	[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|sinon_interdire_acces)]
 ][(#ID_OBJET|non)
 	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{#OBJET}}
-	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{[creer(#OBJET)dans],rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+	[(#GET{id_rubrique}|?{[(#AUTORISER{[creer(#OBJET)dans],rubrique,#GET{id_rubrique}})],[(#AUTORISER{creer,#OBJET})]}|sinon_interdire_acces)]
 ]
 #SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{#OBJET},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
 

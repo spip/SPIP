@@ -149,6 +149,13 @@ function autoriser_ecrire_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
+// A-t-on le droit de creer un contenu :
+// par defaut ceux qui accedent a l'espace prive,
+// peut etre surcharge au cas par cas
+function autoriser_creer_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
+}
+
 // http://doc.spip.org/@autoriser_previsualiser_dist
 function autoriser_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	// si auteur pas autorise, NIET
