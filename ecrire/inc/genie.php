@@ -106,9 +106,6 @@ function taches_generales($taches_generales = array()) {
 	// verifier si une mise a jour de spip est disponible (2 fois par semaine suffit largement)
 	$taches_generales['mise_a_jour'] = 3*24*3600;
 
-	// Supprimer les sessions anonymes et/ou anciennes (egalement fait en se deconnectant de l'espace prive)
-	$taches_generales['supprimer_vieilles_sessions'] = 7*24*3600;
-
 	return pipeline('taches_generales_cron',$taches_generales);
 }
 
@@ -180,18 +177,5 @@ function queue_genie_replan_job($function,$period,$last=null,$time=0, $priority=
 		queue_add_job($function, _T('tache_cron_secondes', array('function'=>$function, 'nb'=>$period)), array($last), "genie/", 'function_only', $time, $priority);
 }
 
-
-/**
- * Supprime les vieilles sessions 
- *
- * @param int
-**/
-function genie_supprimer_vieilles_sessions_dist() {
-	spip_log("Purge des vieilles sessions");
-	include_spip('inc/session');
-	// supprimer les vieilles sessions uniquement
-	supprimer_sessions(0, true, false);
-	return 1;
-}
 
 ?>
