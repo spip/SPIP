@@ -1146,14 +1146,14 @@ p.spip_note {
 
 
 a.spip_in  {
-	background-color:#eeeeee;
-	padding: 2px;	
+	border-bottom: 1px dashed;
 }
-a.spip_note {background-color:#eeeeee;}
 a.spip_out {
 	background: url(img_pack/spip_out.gif) <?php echo $right; ?> center no-repeat;
 	padding-<?php echo $right; ?>: 10px;
+	border-bottom: 1px solid;
 }
+a.spip_note {background-color:#eeeeee;}
 a.spip_url {}
 a.spip_glossaire:hover {text-decoration: underline overline;}
 
