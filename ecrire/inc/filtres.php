@@ -1268,7 +1268,12 @@ function extra($letexte, $champ) {
 function post_autobr($texte, $delim="\n_ ") {
 	$texte = str_replace("\r\n", "\r", $texte);
 	$texte = str_replace("\r", "\n", $texte);
+
+	preg_match(",\n+$,", $texte, $fin);
+	$texte = substr($texte, 0, -strlen($fin[0]));
+
 	$texte = echappe_html($texte, '', true);
+
 
 	$debut = '';
 	$suite = $texte;
@@ -1288,7 +1293,7 @@ function post_autobr($texte, $delim="\n_ ") {
 	$texte = $debut.$suite;
 
 	$texte = echappe_retour($texte);
-	return $texte;
+	return $texte.$fin[0];
 }
 
 
