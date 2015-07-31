@@ -89,13 +89,15 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// Rajouter d'office ces deux parametres
 		// (mais vaudrait mieux que le compilateur sache le simuler
 		// car ca interdit l'usage de criteres conditionnels dessus).
-		if (!isset($contexte['date']))
+		if (!isset($contexte['date'])) {
 			$contexte['date'] = date("Y-m-d H:i:s");
-		else $contexte['date'] = normaliser_date($contexte['date']);
+			$contexte['date_default'] = true;
+		} else $contexte['date'] = normaliser_date($contexte['date']);
 
-		if (!isset($contexte['date_redac']))
+		if (!isset($contexte['date_redac'])) {
 			$contexte['date_redac'] = date("Y-m-d H:i:s");
-		else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
+			$contexte['date_redac_default'] = true;
+		} else $contexte['date_redac'] = normaliser_date($contexte['date_redac']);
 
 	// Passer le nom du cache pour produire sa destruction automatique
 		$page = $fonc(array('cache' => $cache), array($contexte));
