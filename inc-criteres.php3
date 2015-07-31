@@ -208,15 +208,14 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 	if ($not)
 		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
 
-	$param = substr($param,3);
+	$param = ltrim(substr($param,3));
 
 	while ($param) {
 
-		preg_match('/[[:space:]]*([^,]*)[[:space:]]*,?(.*)/ims',
+		preg_match('/(([^{,]*\{[^}]*\})|([^,]*))[[:space:]]*,?[[:space:]]*(.*)/ims',
 			   $param, $regs);
-		$param = $regs[2];
-		$tri = trim($regs[1]);
-
+		$param = $regs[4];
+		$tri = $regs[1];
 	// par hasard
 		if ($tri == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()
