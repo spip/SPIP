@@ -72,7 +72,7 @@ $GLOBALS['langues_ok'] = 'fr';
 $GLOBALS['langues_tests'] = 'en,ro,eo,es,ar,br';
 $GLOBALS['all_langs'] = $GLOBALS['langues_ok'].",".$GLOBALS['langues_tests'];
 
-$GLOBALS['spip_lang'] = 'zg';
+$GLOBALS['spip_lang'] = 'fr';
 if (!regler_langue_navigateur())
 	changer_langue(lire_meta('langue_site'));
 if ($GLOBALS['prefs']['spip_lang'])

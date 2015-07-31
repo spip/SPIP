@@ -69,8 +69,6 @@ if (strlen($aide) < 2) $aide = "spip";
 
 // Selection du fichier d'aide correspondant a la langue
 $lang_aide = $GLOBALS['spip_lang'];
-// provisoire ;-))
-if ($lang_aide == 'zg') $lang_aide = 'en';
 
 if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
 	$fichier_aide = "AIDE/fr/aide";
