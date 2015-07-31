@@ -554,7 +554,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	else  {
 	  $nom = $table_des_tables[$type];
 	  list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
-	  if (!array_key_exists($col, $desc['field'])) {
+	  if (@!array_key_exists($col, $desc['field'])) {
 		if ($exceptions_des_jointures[$col])
 			$col = $exceptions_des_jointures[$col];
 		$col_table = calculer_critere_externe_init($boucle, $col, $desc, $crit);
@@ -658,27 +658,30 @@ function trouver_cles_table($keys)
   return array_keys($res);
 }
 
+// Trouve la description d'une table dans les globales de Spip
+// (le prefixe des tables y est toujours 'spip_', son chgt est ulterieur)
+// Si on ne la trouve pas, on demande au serveur SQL (marche pas toujours)
+
 function trouver_def_table($nom, &$boucle)
 {
 	global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
 
-	spip_log("tdt $nom");
 	$nom_table = $nom;
 	$s = $boucle->sql_serveur;
 	if (!$s) {
-		 $s = 'localhost';
-    // indirection (pour les rares cas ou le nom de la table!=type)
-		 if (in_array($nom, $table_des_tables))
-		   $nom_table = (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom);
+		$s = 'localhost';
+		if (in_array($nom, $table_des_tables))
+		   $nom_table = 'spip_' . $nom;
 
 	}
 
 	$desc = $tables_des_serveurs_sql[$s][$nom_table];
+
 	if ($desc)
 		return array($nom_table, $desc);
 
 	include_spip('base/auxiliaires');
-	$nom_table = (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom);
+	$nom_table = 'spip_' . $nom;
 	if ($desc = $tables_auxiliaires[$nom_table])
 		return array($nom_table, $desc);
 
