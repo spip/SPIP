@@ -242,14 +242,14 @@ function spip_pg_select($select, $from, $where='',
 	  if (is_array($having))
 	    $having = join("\n\tAND ", array_map('calculer_pg_where', $having));
 	}
-	$q =  spip_pg_frommysql($select)
-	  . (!$from ? '' : ("\nFROM " . spip_pg_from($from, $prefixe)))
+	$from =  spip_pg_from($from, $prefixe);
+	$q =  "SELECT ". spip_pg_frommysql($select)
+	  . (!$from ? '' : "\nFROM $from")
 	  . (!$where ? '' : ("\nWHERE " . (!is_array($where) ? calculer_pg_where($where) : (join("\n\tAND ", array_map('calculer_pg_where', $where))))))
 	  . spip_pg_groupby($groupby, $from, $select)
 	  . (!$having ? '' : "\nHAVING $having")
 	  . ($orderby ? ("\nORDER BY $orderby") :'')
 	  . (!$limit ? '' : (" LIMIT $count" . (!$offset ? '' : " OFFSET $offset")));
-		$q = " SELECT ". $q;
 
 	// Erreur ? C'est du debug, ou une erreur du serveur
 	// il faudrait mettre ici le déclenchement du message SQL
@@ -257,7 +257,7 @@ function spip_pg_select($select, $from, $where='',
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		boucle_debug_resultat($id, '', $q);
+		boucle_debug_requete($q);
 	}
 
 	if (!($res = spip_pg_trace_query($q, $serveur))) {
