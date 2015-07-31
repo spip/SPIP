@@ -283,9 +283,12 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	else $condition = ($annee == $annee_today && $mois == $mois_today && $jour == $jour_today);
 	
 	$condition ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
+	
+	$retour .= "<span onMouseOver=\"montrer('nav_agenda');\">";
 	$retour .= http_calendrier_href($script . "type=$type&echelle=$echelle&$arguments",
 					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-today.gif' alt=\"aujourd\'hui\" $img_att />"),
 		    'aujourd\'hui');
+	$retour .= "</span>";
 
  	if ($type != "mois") {
 		$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -325,7 +328,7 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 
 
 
-			$gadget = "<div id='nav_agenda' style='position: relative; visibility: hidden;z-index: 1000; '><div style='position: absolute; padding: 5px; background-color: $couleur_claire; margin-bottom: 5px; -moz-border-radius-bottomleft: 8px; -moz-border-radius-bottomright: 8px;'>";
+			$gadget = "<div id='nav_agenda' onMouseOver=\"montrer('nav_agenda');\" onMouseOut=\"cacher('nav_agenda');\" style='position: relative; visibility: hidden;z-index: 1000; '><div style='position: absolute; padding: 5px; background-color: $couleur_claire; margin-bottom: 5px; -moz-border-radius-bottomleft: 8px; -moz-border-radius-bottomright: 8px;'>";
 			//$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
 			//$gadget .= _T('icone_agenda');
 			//$gadget .= "</a>";
@@ -374,10 +377,10 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 
 
  
-	return "<div onMouseOver=\"montrer('nav_agenda');\" onMouseOut=\"cacher('nav_agenda');\">".$retour .
+	return $retour .
 	  "&nbsp;&nbsp;&nbsp;" .
 	  (_DIR_RESTREINT ? '' :  aide("messcalen")) .
-	  "</div>".$gadget."</div>";    
+	  "</div>".$gadget;    
 }
 
 # affichage du bandeau d'un calendrier d'une journee
