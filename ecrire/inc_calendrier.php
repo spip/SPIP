@@ -15,6 +15,8 @@
 if (defined("_ECRIRE_INC_CALENDRIER")) return;
 define("_ECRIRE_INC_CALENDRIER", "1");
 
+# Typographie generale des calendriers de 3 type: jour/mois/annee
+
 define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
 
 // Ecrire cookies
@@ -31,10 +33,6 @@ if ($GLOBALS['set_partie_cal']) {
 } else 
 	$GLOBALS['partie_cal'] = $GLOBALS['_COOKIE']['spip_partie_cal'];
 
-
-# Typographie generale des calendriers de 3 type: jour/mois/annee
-# Il faudrait rationnaliser le nom des fonctions 
-# avec des suffixes identiques pour les memes fonctionnalites des 3 types
 
 global $bleu, $vert, $jaune;
 $style = "class='calendrier-icone'";
@@ -63,7 +61,9 @@ function http_calendrier_init($date='', $ltype='', $lechelle='', $lpartie_cal=''
 	$script = http_calendrier_retire_args($script);
 	if (!_DIR_RESTREINT) http_calendrier_titre($date, $type);
 	$f = 'http_calendrier_init_' . $type;
-	return $f($date, $echelle, $partie_cal, $script);
+	$g = 'sql_calendrier_' . $type;
+	return $f($date, $echelle, $partie_cal, $script, 
+		  sql_calendrier_interval($g($annee,$mois, $jour)));
 }
 
 function http_calendrier_titre($date, $type)
@@ -187,16 +187,14 @@ $opacity background-color: $b; color: $c; border: 1px solid $c";
 
 # affiche un mois en grand, avec des tableau de clics vers d'autres mois
 
-function http_calendrier_init_mois($date, $echelle, $partie_cal, $script)
+function http_calendrier_init_mois($date, $echelle, $partie_cal, $script ,$evt)
 {
 	$annee = annee($date);
 	$mois = mois($date);
 	$premier_jour = '01';
-	$dernier_jour = 31;
-	while (!(checkdate($mois,$dernier_jour,$annee))) $dernier_jour--;
 
-	list($articles, $breves, $evenements) = 
-		sql_calendrier_interval_mois($annee,$mois, $premier_jour);
+	list($articles, $breves, $evenements) = $evt;
+
 	if ($articles)
 		foreach($articles as $d => $v) 
 			{ $r = http_calendrier_image_et_typo($v);
@@ -208,6 +206,8 @@ function http_calendrier_init_mois($date, $echelle, $partie_cal, $script)
 			  $evenements[$d] = !$evenements[$d] ?  
 			    $r : array_merge($evenements[$d], $r); }
 
+	$dernier_jour = 31;
+	while (!(checkdate($mois,$dernier_jour,$annee))) $dernier_jour--;
 	$total = "<div>&nbsp;</div>" .
 	  http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $evenements, $script, 'http_calendrier_clics');
 
@@ -400,11 +400,6 @@ style='position: absolute; padding: 5px; background-color: $couleur_claire; marg
 
 function http_calendrier_navigation_jour($jour,$mois,$annee, $partie_cal, $echelle, $script, $nav)
 {
-  $today=getdate(time());
-  $jour_today = $today["mday"];
-  $mois_today = $today["mon"];
-  $annee_today = $today["year"];
-//  return "<table width='100%'>" .
    return
      http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 				(nom_jour("$annee-$mois-$jour") . " " .
@@ -414,7 +409,6 @@ function http_calendrier_navigation_jour($jour,$mois,$annee, $partie_cal, $echel
 				"jour=".($jour+1)."&mois=$mois&annee=$annee",
 				'jour',
 				$nav);
-// "</table>";
 }
 
 # affichage du bandeau d'un calendrier d'une semaine
@@ -478,7 +472,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 	} else { $ancre = ''; $purscript = $script; }
 	if ($purscript[strlen($purscript)-1] == '?') 
 	  $purscript = substr($purscript,0,-1);
-	spip_log($purscript);
+
 	$nav = http_calendrier_navigation($j,
 					$mois,
 					$annee,
@@ -503,7 +497,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 			    _T('date_jour_1')),
 		      $couleur_claire,
 		      $couleur_foncee) .
-	http_calendrier_suitede7($mois,$annee, $premier_jour, $dernier_jour,$evenements, $fclic, $purscript) .
+	http_calendrier_suitede7($mois,$annee, $premier_jour, $dernier_jour,$evenements, $fclic, $purscript, $ancre) .
 	'</table>';
 }
 
@@ -526,7 +520,7 @@ function http_calendrier_les_jours($intitul, $claire, $foncee)
 # et avec le resultat de l'application du parametre fonctionnel $fclic
 # sur les valeurs jour/mois/annee et script
 
-function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic, $script)
+function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic, $script, $ancre='')
 {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 
@@ -574,9 +568,11 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 			$premier = false;
 		}
 		else $border_left = "";
-
+		$href = $script . 
+		  (strpos($script,'?') ? '&' : '?') .
+		  "jour=$jour&mois=$mois_en_cours&annee=$annee_en_cours";
 		$ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond;$border_left'>" .
-		  $fclic($annee_en_cours, $mois_en_cours, $jour, $jour_mois, $script) .
+		  $fclic($annee_en_cours, $mois_en_cours, $jour, $jour_mois, $href, $ancre) .
 			(!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
 			"\n\t</td>";
 		if ($jour_semaine==0) 
@@ -591,30 +587,21 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 
 # 3 fonctions pour servir de parametre a la precedente
 
-function http_calendrier_sans_clics($annee, $mois, $jour, $clic, $script)
+function http_calendrier_sans_clics($annee, $mois, $jour, $clic, $script, $ancre)
 {
     return $clic;
 }
 
-function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic, $script)
+function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic, $script, $ancre)
 {
-  if (ereg('^(.*)(#[^=&]*)$',$script,$m)) {
-    $script = $m[1];
-    $ancre = $m[2];
-  } else $ancre = '';
-  $script .= (strpos($script,'?') ? '&' : '?');
   $d = mktime(0,0,0,$mois, $jour, $annee);
-  $mois = date("m", $d);
-  $annee = date("Y", $d);
-  $jour = date("d", $d);
-  $commun = $script . "jour=$jour&mois=$mois&annee=$annee";
   ereg('^(.*>)[^<>]+(<.*)$',$clic,$m);
   $semaine = $m[1] . "S" . date("W", $d) . $m[2];
   return 
     "<table width='100%'>\n<tr><td align='left'>". 
-    http_href("$commun&type=jour" . $ancre, $clic) .
+    http_href("$script&type=jour" . $ancre, $clic) .
     "</td><td align='right'>" .
-    http_href("$commun&type=semaine" . $ancre,$semaine) .
+    http_href("$script&type=semaine" . $ancre,$semaine) .
     "</td></tr>\n</table>";
 }
 
@@ -623,7 +610,7 @@ function http_calendrier_clics($annee, $mois, $jour, $clic, $script)
   global $bleu, $jaune, $vert;
   $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
   return "\n" .
-    http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee", $clic) .
+    http_href("$script&type=jour", $clic) .
     "\n" .
     (_DIR_RESTREINT ? '' : (
     http_href("$href&type=pb", 
@@ -1117,7 +1104,7 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 }
 
 
-function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script){
+function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script, $evt){
 	global $spip_ecran;
 	$jour = journum($date);
 	$mois = mois($date);
@@ -1128,14 +1115,14 @@ function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script){
 	if ($spip_ecran == "large") {
 		$retour .= "<td style='font-family: Arial, Sans, sans-serif; font-size: 10px' class='calendrier-td-$spip_ecran-bord'>" .
 			"<div style='height: 29px;'>&nbsp;</div>".
-		  http_calendrier_jour($jour-1,$mois,$annee, "col", $partie_cal, $echelle, 0, $script) .
+		  http_calendrier_jour($jour-1,$mois,$annee, "col", $partie_cal, $echelle, 0, $script, $evt) .
 			"</td>\n<td style='width: 20px'>&nbsp;</td>\n";
 	}
 	$retour .= "\n<td class='calendrier-td-$spip_ecran-centre'>" .
 		"<div>" .
 	  http_calendrier_navigation_jour($jour,$mois,$annee, $partie_cal, $echelle, $script, '') .
 		"</div>".
-	  http_calendrier_jour($jour,$mois,$annee, "large", $partie_cal, $echelle, 0, $script) .
+	  http_calendrier_jour($jour,$mois,$annee, "large", $partie_cal, $echelle, 0, $script, $evt) .
 		'</td>';
 		
 		# afficher en reduction le tableau du jour suivant
@@ -1143,11 +1130,11 @@ function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script){
 	  "\n<td style='width: 20px'>&nbsp;</td>" .
 			"\n<td style='font-family: Arial, Sans, sans-serif; font-size: 10px' class='calendrier-td-$spip_ecran-bord'>" .
 			"<div style='height: 29px;'>&nbsp;</div>".
-	  http_calendrier_jour($jour+1,$mois,$annee, "col", $partie_cal, $echelle, 0, $script) .
+	http_calendrier_jour($jour+1,$mois,$annee, "col", $partie_cal, $echelle, 0, $script, $evt) .
 	  '</td></tr></table>';
 }
 
-function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script)
+function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script, $evt)
 {
 	global $spip_ecran;	
 
@@ -1155,8 +1142,7 @@ function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script)
 	$mois_today = mois($date);
 	$annee_today = annee($date);
 
-	list($articles, $breves, $messages) = 
-		sql_calendrier_interval_semaine($annee_today,$mois_today,$jour_today);
+	list($articles, $breves, $messages) = $evt;
 
 	return 
 		"<div>&nbsp;</div>" .
@@ -1205,7 +1191,7 @@ function http_calendrier_entete($script, $large, $jour,$mois,$annee)
 	}
 }
 
-function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, $echelle, $le_message = 0, $script =  'calendrier.php3') {
+function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, $echelle, $le_message = 0, $script =  'calendrier.php3', $evt='') {
 	global $spip_lang_left, $calendrier_message_fermeture;
 	
 	if ($partie_cal == "soir") {
@@ -1225,7 +1211,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, 
 	$annee = annee($date);
 	
 	list($articles, $breves, $messages) =
-	  sql_calendrier_interval_jour($annee,$mois,$jour);
+		($evt ? $evt : sql_calendrier_interval(sql_calendrier_jour($annee,$mois, $jour )));
 
 	$j = sprintf("%04d%02d%02d", $annee,$mois,$jour);
 	
@@ -1344,37 +1330,40 @@ function http_calendrier_rv($messages, $type) {
 
 
 
-function sql_calendrier_interval_jour($annee,$mois,$jour) {
-	$avant = "'$annee-$mois-$jour'";
-	$apres = "'$annee-$mois-$jour 23:59:59'";
+//------- fonctions d'appel MySQL. 
+// au dela cette limite, pas de production HTML
 
-	return array(sql_calendrier_interval_articles($avant, $apres),
-		sql_calendrier_interval_breves($avant, $apres),
-		sql_calendrier_interval_rv($avant, $apres));
+function sql_calendrier_mois($annee,$mois,$jour) {
+	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,1,$annee)) . "'";
+	$apres = "'" . date("Y-m-d", mktime(0,0,0,$mois+1,1,$annee)) .
+	" 00:00:00'";
+	return array($avant, $apres);
 }
 
-function sql_calendrier_interval_semaine($annee,$mois,$jour) {
+function sql_calendrier_semaine($annee,$mois,$jour) {
 	$w_day = date("w", mktime(0,0,0,$mois, $jour, $annee));
 	if ($w_day == 0) $w_day = 7; // Gaffe: le dimanche est zero
 	$debut = $jour-$w_day;
-	$avant = "'" . date("Y-m-d", mktime(1,1,1,$mois,$debut,$annee)) . "'";
+	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,$debut,$annee)) . "'";
 	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$debut+7,$annee)) .
 	" 23:59:59'";
-
-	return array(sql_calendrier_interval_articles($avant, $apres),
-		sql_calendrier_interval_breves($avant, $apres),
-		sql_calendrier_interval_rv($avant, $apres));
+	return array($avant, $apres);
 }
 
-function sql_calendrier_interval_mois($annee,$mois,$jour) {
-	$periode = $annee . '-' . sprintf("%02d", $mois) . '-01';
-	$avant = "'$periode'";
-	// $apres = "DATE_ADD('$periode', INTERVAL 1 MONTH)";
-	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois+1,$debut,$annee)) .
+// ici on prend en fait le jour, la veille et le lendemain
+
+function sql_calendrier_jour($annee,$mois,$jour) {
+	$avant = "'" . date("Y-m-d", mktime(0,0,0,$mois,$jour-1,$annee)) . "'";
+	$apres = "'" . date("Y-m-d", mktime(1,1,1,$mois,$jour+1,$annee)) .
 	" 23:59:59'";
+	return array($avant, $apres);
+}
+
+function sql_calendrier_interval($limites) {
+	list($avant, $apres) = $limites;
 	return array(sql_calendrier_interval_articles($avant, $apres),
-		sql_calendrier_interval_breves($avant, $apres),
-		sql_calendrier_interval_rv($avant, $apres));
+		     sql_calendrier_interval_breves($avant, $apres),
+		     sql_calendrier_interval_rv($avant, $apres));
 }
 
 # 3 fonctions retournant les evenements d'une periode
@@ -1533,6 +1522,7 @@ WHERE	(lien.id_message='$id_message'
   return $evenements;
 }
 
+// fonction SQL, pour la messagerie
 
 function sql_calendrier_taches_annonces () {
 	global $connect_id_auteur;
@@ -1624,8 +1614,6 @@ function calendrier_echelle($debut, $fin, $echelle)
 	       floor (14 / (1+($echelle/240))),
 	       floor(240 / $echelle));
 }
-
-
 
 // ce tableau est l'equivalent du switch affectant des globales dans inc.php
 // plus 2 autres issus du inc_agenda originel
