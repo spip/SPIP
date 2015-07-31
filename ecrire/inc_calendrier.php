@@ -18,6 +18,41 @@ define("_ECRIRE_INC_CALENDRIER", "1");
 include_ecrire("inc_texte.php3");
 charger_generer_url();
 
+function calendrier($type, $css="")
+{
+  spip_log("css $css");
+  $date = date("Y-m-d", time()); 
+  if ($type == 'semaine') {
+
+	$GLOBALS['afficher_bandeau_calendrier_semaine'] = true;
+
+	$titre = _T('titre_page_calendrier',
+		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
+	  }
+  elseif ($type == 'jour') {
+	$titre = nom_jour($date)." ". affdate_jourcourt($date);
+ }
+  else {
+	$titre = _T('titre_page_calendrier',
+		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
+	  }
+
+  $nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
+  if (!$nom_site_spip) $nom_site_spip="SPIP";
+  
+  // envoi des en-tetes, du doctype et du <head><title...
+  echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre)));
+  envoi_link($nom_site_spip);
+  if ($css)
+    echo '<link rel="stylesheet" href="', addslashes($css), '" type="text/css">', "\n";
+  echo "\n</head>\n";
+  debut_body();
+  init_body("redacteurs", "calendrier");
+  echo "<div>&nbsp;</div>" ;
+  echo http_calendrier_init('', $type);
+  fin_page();
+}
+
 //  Typographie generale des calendriers de 3 type: jour/semaine/mois(ou plus)
 
 // Notes: pour toutes les fonctions ayant parmi leurs parametres
@@ -131,14 +166,7 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 
 	if (!$time) 
 	  {
-	    $today=getdate(time());
-	    if (!$annee)
-	      $annee = $today["year"];
-	    if (!$mois)
-	      $mois = $today["mon"];
-	    if (!$jour)
-	      $jour = $today["mday"];
-	    $time = mktime(0,0,0,$mois, $jour, $annee);
+	    $time = time();
 	    $type= 'mois';
 	  }
 
@@ -151,7 +179,6 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script ? $script :
 						  $GLOBALS['clean_link']->getUrl()); 
-	if (!_DIR_RESTREINT) http_calendrier_titre($time, $ltype);
 	if (!$evt) {
 	  $g = 'sql_calendrier_' . $ltype;
 	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));
@@ -162,30 +189,6 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	$f = 'http_calendrier_' . $ltype;
 	return $f($annee, $mois, $jour, $lechelle, $lpartie_cal, $script, $ancre, $evt);
 
-}
-
-# titre de la page, si on est dans l'espace de redaction
-
-function http_calendrier_titre($time, $type)
-{
-  $date = date("Y-m-d", $time); # a optimiser
-if ($type == 'semaine') {
-
-	$GLOBALS['afficher_bandeau_calendrier_semaine'] = true;
-
-	$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-	  }
-elseif ($type == 'jour') {
-	$titre = nom_jour($date)." ". affdate_jourcourt($date);
- }
- else {
-	$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-	  }
-
- debut_page($titre, "redacteurs", "calendrier");
- echo "<div>&nbsp;</div>" ;
 }
 
 # affichage d'un calendrier de plusieurs semaines
@@ -1222,16 +1225,16 @@ function http_calendrier_rv($messages, $type) {
 	  fin_cadre_enfonce(true);
 }
 
-function calendrier_categories($table, $num)
+function calendrier_categories($table, $num, $objet)
 {
   if (function_exists('generer_calendrier_class'))
-    return generer_calendrier_class($table, $num);
+    return generer_calendrier_class($table, $num, $objet);
   else {
     // cf calendrier.css
     $result= spip_fetch_array(spip_query("
-SELECT	" . (($table == 'spip_articles') ? 'id_secteur' : 'id_rubrique') . "
+SELECT	" . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . "
 FROM	$table
-WHERE	". (($table == 'spip_articles') ? 'id_article' : 'id_breve') . "=$num
+WHERE	$objet=$num
 "));
     if ($result) $num = $result[0];
     return 'calendrier-couleur' . (($num%14)+1);
@@ -1276,6 +1279,7 @@ function sql_calendrier_interval($limites) {
 	$evt = array();
 	sql_calendrier_interval_articles($avant, $apres, $evt);
 	sql_calendrier_interval_breves($avant, $apres, $evt);
+	sql_calendrier_interval_rubriques($avant, $apres, $evt);
 	return array($evt, sql_calendrier_interval_rv($avant, $apres));
 }
 
@@ -1303,14 +1307,11 @@ ORDER BY date_heure
 # 3 fonctions retournant les evenements d'une periode
 # le tableau retourne est indexe par les balises du format ics
 # afin qu'il soit facile de produire de tels documents.
-# Pour les articles post-dates vus de l'espace public,
-# on regarde si c'est une redirection pour avoir une url interessante
-# sinon on prend " ", c'est-a-dire la page d'appel du calendrier
 
 function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 	
 	$result=spip_query("
-SELECT	id_article, titre, date, descriptif, chapo, id_secteur
+SELECT	id_article, titre, date, descriptif, chapo
 FROM	spip_articles
 WHERE	statut='publie'
  AND	date >= $avant
@@ -1322,10 +1323,33 @@ ORDER BY date
 		$id = $row['id_article'];
 		$evenements[$amj][]=
 		    array(
-			'CATEGORIES' => calendrier_categories('spip_articles', $id),
+			  'CATEGORIES' => calendrier_categories('spip_articles', $id, 'id_article'),
 			'DESCRIPTION' => $row['descriptif'],
 			'SUMMARY' => $row['titre'],
 			'URL' => generer_url_article($id));
+	}
+}
+
+function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
+	
+	$result=spip_query("
+SELECT	DISTINCT R.id_rubrique, titre, descriptif, date
+FROM	spip_rubriques AS R, spip_documents_rubriques AS L
+WHERE	statut='publie'
+ AND	date >= $avant
+ AND	date < $apres
+ AND	R.id_rubrique = L.id_rubrique
+ORDER BY date
+");
+	while($row=spip_fetch_array($result)){
+		$amj = date_anneemoisjour($row['date']);
+		$id = $row['id_rubrique'];
+		$evenements[$amj][]=
+		    array(
+			  'CATEGORIES' => calendrier_categories('spip_rubriques', $id, 'id_rubrique'),
+			'DESCRIPTION' => $row['descriptif'],
+			'SUMMARY' => $row['titre'],
+			'URL' => generer_url_rubrique($id));
 	}
 }
 
@@ -1345,7 +1369,7 @@ ORDER BY date_heure
 		$evenements[$amj][]=
 		array(
 		      'URL' => generer_url_breve($id),
-		      'CATEGORIES' => calendrier_categories('spip_breves', $ir),
+		      'CATEGORIES' => calendrier_categories('spip_breves', $ir, 'id_breve'),
 		      'SUMMARY' => $row['titre']);
 	}
 }
