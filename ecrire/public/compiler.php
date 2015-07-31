@@ -121,21 +121,18 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 // http://doc.spip.org/@calculer_inclure
 function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 
-	# Si pas raccourci <INCLURE{fond=xxx}> 
-	# chercher le fichier, eventuellement en changeant.php3 => .php
-	# et en gardant la compatibilite <INCLURE(page.php3)>
+	// si ce champ est present, ce n'est pas un squelette
 	if ($fichier = $p->texte) {
-		if (preg_match(',^(.*[.]php)3$,', $fichier, $r)) {
-			$fichier = $r[1];
-		}
-		if ($fichier == 'page.php') {
-			$fichier = '';
-		}
 		// si inexistant, on essaiera a l'execution
 		if ($path = find_in_path($fichier))
 			$path = "\"$path\"";
 		else $path = "find_in_path(\"$fichier\")";
-	}
+		$code = "if (is_readable(\$path = $path))
+ 		include \$path;
+	else { include_spip(\"public/debug\");
+			erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
+				 _T(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")));}";
+	} else 	$code = 'include _DIR_RESTREINT . "public.php";';
 
 	$_contexte = argumenter_inclure($p->param, false, $descr, $boucles, $id_boucle);
 
@@ -144,9 +141,8 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 		unset($_contexte['env']);
 	}
 
-	// <INCLURE{doublons}>
+	// noter les doublons dans l'appel a public.php
 	if (isset($_contexte['doublons'])) {
-		// noter les doublons dans l'appel a public.php
 		$_contexte['doublons'] = "\\'doublons\\' => '.var_export(\$doublons,true).'";
 	}
 
@@ -157,15 +153,6 @@ function calculer_inclure($p, $descr, &$boucles, $id_boucle) {
 	if ($env) {
 		$contexte = "array_merge('.var_export(\$Pile[0],1).',$contexte)";
 	}
-
-	$code = !$fichier
-	? ('include _DIR_RESTREINT . "public.php";')
-	  : "if (is_readable(\$path = $path))
- 		include \$path;
-	else { include_spip(\"public/debug\");
-			erreur_squelette(_T(\"zbug_info_erreur_squelette\"),
-				 _T(\"fichier_introuvable\", array(\"fichier\" => \"$fichier\")));}";
-
 
 	// Gerer ajax
 	if ($ajax) {
