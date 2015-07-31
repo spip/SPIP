@@ -6,11 +6,16 @@
 /* Disposition a l'ecran des blocs principaux
 ---------------------------------------------- */
 body { background: #FFF; margin: 0; padding: 0; text-align: center; }
-#page { width: 48em; text-align: left; margin-left: auto; margin-right: auto; }
+#page { text-align: left; }
+
+/*#page { width: 48em; text-align: left; margin-left: auto; margin-right: auto; }
 
 #conteneur { width: 100%; }
 #conteneur #contenu { float: left; width: 33em; }
-#conteneur #navigation { float: right; width: 12em; text-align: center; }
+#conteneur #navigation { float: right; width: 12em; text-align: center; }*/
+
+#navigation { background: #CCCCFF; }
+#extra { background: #FFCC66; }
 
 /* Entete */
 #entete { width: 100%; border-bottom: 2px solid #333; }
@@ -23,8 +28,8 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #hierarchie a { text-decoration: none; }
 
 /* Pied de page */
-#pied { clear: both; width: 100%; margin-top: 4em; border-top: 1px solid #CCC; text-align: center; }
-#pied img { vertical-align: bottom; }
+/*#pied { clear: both; width: 100%; margin-top: 4em; border-top: 1px solid #CCC; text-align: center; }
+#pied img { vertical-align: bottom; }*/
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; margin: 0; padding: 0; border: none; height: 0; line-height: 1px; font-size: 1px; }

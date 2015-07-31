@@ -14,111 +14,114 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+	[(#REM) Contenu principal : contenu de l'article ]
+    <div id="conteneur">
+    <div id="contenu">
+    
+        [(#REM) Fil d'Ariane ]
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
-	<div id="conteneur">
+        <div class="cartouche">
+            <div class="surlignable">
+            [(#LOGO_ARTICLE||image_reduire{200,200})]
+            [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+            <h1 class="#EDIT{titre}">#TITRE</h1>
+            [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+            </div>
 
-		[(#REM) Contenu principal : contenu de l'article ]
-		<div id="contenu">
+            <p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
 
-			<div class="cartouche">
-				<div class="surlignable">
-  				[(#LOGO_ARTICLE||image_reduire{200,200})]
-  				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
-  				<h1 class="#EDIT{titre}">#TITRE</h1>
-  				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-				</div>
+            [(#REM) Inclure le modele des liens de traductions ]
+            #MODELE{article_traductions}
 
-				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+        </div>
 
-				[(#REM) Inclure le modele des liens de traductions ]
-				#MODELE{article_traductions}
+        <div class="surlignable">
+        [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{520,0})</div>]
+        
+        [<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+        [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
+        </div>
 
-			</div>
+        [(#REM) Portfolio : album d'images ]
+        <B_documents_portfolio>
+        <div id="documents_portfolio">
+            <h2><:info_portfolio:></h2>
+            <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+            [<a href="#URL_DOCUMENT" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
+            </BOUCLE_documents_portfolio>
+        </div>
+        </B_documents_portfolio>
+        <BOUCLE_afficher_document(DOCUMENTS) {id_article}{id_document} {mode=document}{extension IN png,jpg,gif}>
+        <div class="spip_documents spip_documents_center" id="document_actif">
+            [(#EMBED_DOCUMENT|image_reduire{520,0})]
+            [<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
+            [<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
+        </div>
+        </BOUCLE_afficher_document>
 
-			<div class="surlignable">
-  			[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{520,0})</div>]
-  			
-  			[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-  			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
-			</div>
+        [<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS)</div></div>]
 
-			[(#REM) Portfolio : album d'images ]
-			<B_documents_portfolio>
-			<div id="documents_portfolio">
-				<h2><:info_portfolio:></h2>
-				<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
-				[<a href="#URL_DOCUMENT" type="#MIME_TYPE" onClick="location.href='[(#URL_ARTICLE|parametre_url{id_document,#ID_DOCUMENT})]#documents_portfolio';return false;"[ title="(#TITRE|couper{80}|texte_backend)"]>(#FICHIER|copie_locale|image_reduire{0,60}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a>]
-				</BOUCLE_documents_portfolio>
-			</div>
-			</B_documents_portfolio>
-			<BOUCLE_afficher_document(DOCUMENTS) {id_article}{id_document} {mode=document}{extension IN png,jpg,gif}>
-			<div class="spip_documents spip_documents_center" id="document_actif">
-				[(#EMBED_DOCUMENT|image_reduire{520,0})]
-				[<div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div>]
-				[<div class="#EDIT{descriptif} spip_doc_descriptif">(#DESCRIPTIF)</div>]
-			</div>
-			</BOUCLE_afficher_document>
+        [(#REM) Autres documents joints a l'article ]
+        <B_documents_joints>
+        <div class="menu" id="documents_joints">
+            <h2><:titre_documents_joints:></h2>
+            <ul>
+                <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
+                <li>
+                    <strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+                    <small>(#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)])</small>
+                    #DESCRIPTIF
+                </li>
+                </BOUCLE_documents_joints>
+            </ul>
+        </div>
+        </B_documents_joints>
+        
+        [(#REM) Petition :
+        La petition ayant une PAGINATION il faut absolument lui passer env]
+        [(#PETITION|?{' '})
+            <INCLURE{fond=inc-petition}{id_article}{env}>
+        ]
 
-			[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS)</div></div>]
+        [<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
 
-			[(#REM) Autres documents joints a l'article ]
-			<B_documents_joints>
-			<div class="menu" id="documents_joints">
-				<h2><:titre_documents_joints:></h2>
-				<ul>
-					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
-					<li>
-						<strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
-                        <small>(#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)])</small>
-                        #DESCRIPTIF
-					</li>
-					</BOUCLE_documents_joints>
-				</ul>
-			</div>
-			</B_documents_joints>
-			
-			[(#REM) Petition :
-			La petition ayant une PAGINATION il faut absolument lui passer env]
-			[(#PETITION|?{' '})
-				<INCLURE{fond=inc-petition}{id_article}{env}>
-			]
+        [(#REM) Forum de l'article ]
+        <a href="#forum" name="forum" id="forum"></a>
+        <INCLURE{fond=inc-forum}{id_article}>
+        [<p class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
 
-			[<div class="notes surlignable"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
-
-			[(#REM) Forum de l'article ]
-			<a href="#forum" name="forum" id="forum"></a>
-			<INCLURE{fond=inc-forum}{id_article}>
-			[<p class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
-
-		</div><!--#contenu-->
-
-
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
-
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}{id_rubrique}>
-
-			[(#REM) Articles dans la meme rubrique ]
-			<B_articles_rubrique>
-			<div class="menu">
-				<h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
-				<ul>
-					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
-					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
-					</BOUCLE_articles_rubrique>
-				</ul>
-			</div>
-			</B_articles_rubrique>
-
-			[(#REM) Menu de navigation mots-cles ]
-			#MODELE{article_mots}
-
-		</div><!--#navigation-->
-
+	</div><!--#contenu-->
 	</div><!--#conteneur-->
+
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}{id_rubrique}>
+
+        [(#REM) Articles dans la meme rubrique ]
+        <B_articles_rubrique>
+        <div class="menu">
+            <h2><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
+            <ul>
+                <BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse} {0,10}>
+                <li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
+                </BOUCLE_articles_rubrique>
+            </ul>
+        </div>
+        </B_articles_rubrique>
+
+        [(#REM) Menu de navigation mots-cles ]
+        #MODELE{article_mots}
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+	&nbsp;
+    </div><!--#extra-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>

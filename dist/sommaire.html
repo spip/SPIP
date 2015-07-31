@@ -13,88 +13,91 @@
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
 
-	[(#REM) Fil d'Ariane ]
-	<div id="hierarchie"><:accueil_site:></div>
-
+	[(#REM) Contenu principal : derniers articles publies ]
 	<div id="conteneur">
+    <div id="contenu">
 
-		[(#REM) Contenu principal : derniers articles publies ]
-		<div id="contenu">
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><:accueil_site:></div>
 
-			<h1>#NOM_SITE_SPIP</h1>
-			[<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
+        <h1>#NOM_SITE_SPIP</h1>
+        [<div class="chapo">(#DESCRIPTIF_SITE_SPIP)</div>]
 
-			[(#REM) Derniers articles ]
-			<B_articles_recents>
-			<div class="menu articles">
-                [(#ANCRE_PAGINATION)]
-				<h2><:derniers_articles:></h2>
-				<ul>
-					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
-					<li>
-						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
-						<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
-						<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
-						[<div class="#EDIT{intro} introduction">(#INTRODUCTION)</div>]
-                        <br class="nettoyeur" />
-					</li>
-					</BOUCLE_articles_recents>
-				</ul>
-                [<p class="pagination">(#PAGINATION)</p>]
-			</div>
-			</B_articles_recents>
-            
-            [(#REM) Breves ]
-            <B_breves>
-            <div class="menu">
-                <h2><:dernieres_breves:></h2>
-                <ul>
-                    <BOUCLE_breves(BREVES) {par date}{inverse} {0,5}>
-                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
-                    </BOUCLE_breves>
-                </ul>
-            </div>
-            </B_breves>
+        [(#REM) Derniers articles ]
+        <B_articles_recents>
+        <div class="menu articles">
+            [(#ANCRE_PAGINATION)]
+            <h2><:derniers_articles:></h2>
+            <ul>
+                <BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {pagination 5}>
+                <li>
+                    [(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|image_reduire{150,100})]
+                    <h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+                    <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+                    [<div class="#EDIT{intro} introduction">(#INTRODUCTION)</div>]
+                    <br class="nettoyeur" />
+                </li>
+                </BOUCLE_articles_recents>
+            </ul>
+            [<p class="pagination">(#PAGINATION)</p>]
+        </div>
+        </B_articles_recents>
+        
+        [(#REM) Breves ]
+        <B_breves>
+        <div class="menu">
+            <h2><:dernieres_breves:></h2>
+            <ul>
+                <BOUCLE_breves(BREVES) {par date}{inverse} {0,5}>
+                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_BREVE">#TITRE</a></li>
+                </BOUCLE_breves>
+            </ul>
+        </div>
+        </B_breves>
 
-            [(#REM) Liens des forums ]
-            <B_forums_liens>
-            <div class="menu forums">
-                <h2><:derniers_commentaires:></h2>
-                <p><:messages_recents:></p>
-                <ul>
-                    <BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
-                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
-                    </BOUCLE_forums_liens>
-                </ul>
-            </div>
-            </B_forums_liens>
+        [(#REM) Liens des forums ]
+        <B_forums_liens>
+        <div class="menu forums">
+            <h2><:derniers_commentaires:></h2>
+            <p><:messages_recents:></p>
+            <ul>
+                <BOUCLE_forums_liens(FORUMS) {plat} {par date}{inverse} {0,8}>
+                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_FORUM">[(#TEXTE|couper{80})]</a></li>
+                </BOUCLE_forums_liens>
+            </ul>
+        </div>
+        </B_forums_liens>
 
-            [(#REM) Sur le Web ]
-            <B_syndic>
-            <div class="menu">
-                <h2><:nouveautes_web:></h2>
-                <ul>
-                <BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
-                    <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
-                </BOUCLE_syndic>
-                </ul>
-            </div>
-            </B_syndic>
+        [(#REM) Sur le Web ]
+        <B_syndic>
+        <div class="menu">
+            <h2><:nouveautes_web:></h2>
+            <ul>
+            <BOUCLE_syndic(SYNDIC_ARTICLES) {age<180} {par date}{inverse} {0,6}>
+                <li>[(#DATE|affdate_court) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|texte_backend)"] class="spip_out">#TITRE</a></li>
+            </BOUCLE_syndic>
+            </ul>
+        </div>
+        </B_syndic>
 
-		</div><!--#contenu-->
-
-		[(#REM) Menu de navigation laterale ]
-		<div id="navigation">
-
-			[(#REM) Menu de navigation par rubriques ]
-			<INCLURE{fond=inc-rubriques}>
-
-			[(#REM) Inscription au site ]
-			#FORMULAIRE_INSCRIPTION
-
-		</div><!--#navigation-->
-
+	</div><!--#contenu-->
 	</div><!--#conteneur-->
+
+    [(#REM) Menu de navigation laterale ]
+    <div id="navigation">
+
+        [(#REM) Menu de navigation par rubriques ]
+        <INCLURE{fond=inc-rubriques}>
+
+    </div><!--#navigation-->
+    
+    [(#REM) Menu de navigation laterale ]
+    <div id="extra">
+
+        [(#REM) Inscription au site ]
+        #FORMULAIRE_INSCRIPTION
+
+    </div><!--#extra-->
 
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
