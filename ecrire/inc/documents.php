@@ -282,7 +282,7 @@ function afficher_documents_colonne($id, $type="article",$script=NULL) {
 	}
 	$ret .= "</div>";
 	if (test_espace_prive()){
-		$ret .= http_script('', _DIR_JAVASCRIPT."async_upload.js")
+		$ret .= http_script('', "async_upload.js")
 		  . http_script('$("form.form_upload").async_upload(async_upload_article_edit)');
 	}
     
@@ -307,7 +307,7 @@ function affiche_raccourci_doc($doc, $id, $align) {
 	}
 	
 	return
-		  ((++$num > 1) ? "" : "\n<script type='text/javascript' src='" . _DIR_JAVASCRIPT . "spip_barre.js'></script>")
+	  ((++$num > 1) ? "" : http_script('',  "spip_barre.js"))
 		. "\n<div style='text-align: $align'$onclick>&lt;$doc$id$pipe&gt;</div>\n";
 }
 

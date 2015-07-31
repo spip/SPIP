@@ -47,7 +47,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
 	$ret = ($num_barre > 1)  ? '' :
-	  http_script('', _DIR_JAVASCRIPT . 'spip_barre.js');
+	  http_script('',  'spip_barre.js');
 	$ret .= "<table class='spip_barre' cellpadding='0' cellspacing='0' border='0'>";
 	$ret .= "\n<tr>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";

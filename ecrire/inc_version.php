@@ -30,9 +30,6 @@ define('_DIR_RESTREINT',
 # ou inversement ?
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
-# le chemin http (relatif) vers les bibliotheques JavaScript
-define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'dist/javascript/'));
-
 // Icones
 # le chemin http (relatif) vers les images standard
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'dist/images/'));
@@ -45,6 +42,8 @@ define('_DIR_IMG_ICONES_BARRE', _DIR_RACINE . "dist/icones_barre/");
 define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/dist/images/');
 define('_ROOT_IMG_ICONES_DIST', dirname(dirname(__FILE__)) . '/dist/vignettes/');
 
+# le nom du repertoire des  bibliotheques JavaScript
+define('_DIR_JAVASCRIPT', 'javascript/');
 
 # Le nom des 4 repertoires modifiables par les scripts lances par httpd
 # Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
@@ -291,7 +290,7 @@ $liste_des_forums = array(
 
 // version des signatures de fonctions PHP
 // (= numero SVN de leur derniere modif cassant la compatibilite)
-$spip_version_code = 11156;
+$spip_version_code = 11169;
 // version de la base SQL (= numero SVN de sa derniere modif)
 $spip_version = 11088;
 // version de l'interface a la base
@@ -337,6 +336,9 @@ error_reporting(SPIP_ERREUR_REPORT);
 	(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
 	(_DIR_RACINE  . _NOM_TEMPORAIRES_ACCESSIBLES)
 );
+
+define('_FILE_JQUERY', "\n<script src=\"".generer_url_public('jquery.js')
+       . "\" type=\"text/javascript\"></script>\n");
 
 // chargement des plugins : doit arriver en dernier
 // car dans les plugins on peut inclure inc-version
