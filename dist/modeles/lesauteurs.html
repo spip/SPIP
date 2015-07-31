@@ -6,7 +6,8 @@
 	  passee dans #ENV par le compilo, en la securisant avec safehtml.
 
 ]
+
 <BOUCLE_auteurs(AUTEURS) {id_article} {par nom} {", "}>
 <a href="#URL_AUTEUR">#NOM</a></BOUCLE_auteurs>
 
-<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic_article}>[(#ENV**{lesauteurs}|safehtml)]</BOUCLE_syndic>
+[(#ID_SYNDIC_ARTICLE|?{#ENV**{lesauteurs}|safehtml})]
