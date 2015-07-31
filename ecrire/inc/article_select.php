@@ -88,7 +88,7 @@ else if ($new=='oui') {
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		if ($id_article)
-			signale_edition ($id_article, $connect_id_auteur, 'article');
+			signale_edition ($id_article,  $GLOBALS['auteur_session'], 'article');
 	}
 
 	return $row;

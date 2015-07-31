@@ -30,15 +30,28 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@lire_tableau_edition
 function lire_tableau_edition () {
 	$edition = @unserialize($GLOBALS['meta']['drapeau_edition']);
-	if (!$edition) $edition = array();
+	if (!$edition) return array();
 	$changed = false;
 
+	$bon_pour_le_service = time()-3600;
 	// parcourir le tableau et virer les vieux
 	foreach ($edition as $objet => $data) {
-		if ($data[1] < time()-3600) {
-			unset ($edition[$objet]);
-			$changed = true;
+		if (!is_array($data))
+			unset ($edition[$objet]); // vieille version
+		else foreach ($data as $id => $tab) {
+			if (!is_array($tab))
+			  unset ($edition[$objet][$tab]); // vieille version
+			else foreach ($tab as $n => $duo) {
+				if (current($duo) < $bon_pour_le_service) {
+					unset($edition[$objet][$id][$n]);
+					$changed = true;
+				}
+			}
+			if (!$edition[$objet][$id])
+				unset($edition[$objet][$id]);
 		}
+		if (!$edition[$objet])
+			unset($edition[$objet]);
 	}
 
 	if ($changed)
@@ -61,29 +74,20 @@ function signale_edition ($id, $auteur, $type='article') {
 	if ($id_a = $auteur['id_auteur'])
 		$nom = $auteur['nom'];
 	else
-		$nom = $GLOBALS['ip'];
-	$edition[$type.$id] = array ($id_a, time(), $nom);
+		$nom = $id_a = $GLOBALS['ip'];
+	if (!is_array($edition[$type][$id]))
+		$edition[$type][$id] = array();
+	$edition[$type][$id][$id_a][$nom] = time();
 	ecrire_tableau_edition($edition);
 }
 
 // Qui edite mon objet ?
 // http://doc.spip.org/@qui_edite
 function qui_edite ($id, $type='article') {
+
 	$edition = lire_tableau_edition();
 
-	if (list($id, $date, $nom) = $edition[$type.$id]
-	AND $date > time() - 3600) {
-
-		$date_diff = floor( (time()-$date) / 60);
-		$nom_auteur_modif = typo($nom);
-
-		// attention ce format est lie a la chaine de langue
-		return array(
-			'id_auteur_modif' => $id_auteur,
-			'nom_auteur_modif' => $nom_auteur_modif,
-			'date_diff' => $date_diff
-		);
-	}
+	return $edition[$type][$id];
 }
 
 // Quels sont les articles en cours d'edition par X ?
