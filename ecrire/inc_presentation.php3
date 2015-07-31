@@ -2952,11 +2952,17 @@ document.img_session.src='../spip_cookie.php3?change_session=oui'");
 
 }
 
+function info_copyright() {
+	global $spip_version_affichee;
+	$spip = "SPIP $spip_version_affichee";
+
+	$lien = "<a href='aide_index.php3?aide=licence&var_lang=".$GLOBALS['spip_lang']."' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">"
+	. _T('info_copyright_gpl')."</a>";
+	echo _T('info_copyright', array('spip' => $spip, 'lien_gpl' => $lien));
+}
 
 function fin_page($credits='') {
-	global $spip_version_affichee, $spip_display;
-	global $connect_id_auteur;
-	global $multi_popup;
+	global $spip_display;
 
 	echo "</td></tr></table>";
 
@@ -2969,16 +2975,9 @@ function fin_page($credits='') {
 
 	if ($spip_display == 4) {
 		echo "<div><a href=\"index.php3?set_disp=2\">"._T("access_interface_graphique")."</a></div>";
-	} else {	
-
-		echo "<b>SPIP $spip_version_affichee</b> ";
-		echo _T('info_copyright');
-	
+	} else {
+		echo info_copyright();
 		echo "<br>"._T('info_copyright_doc');
-	
-	//	if (ereg("jimmac", $credits))
-	//		echo "<br>"._T('lien_icones_interface');
-	
 		echo "</div><p>";
 	}
 
