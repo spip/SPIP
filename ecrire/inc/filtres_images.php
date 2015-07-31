@@ -2236,7 +2236,10 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	// C'est dommage, parce que la rasterisation des caracteres est autrement plus jolie qu'avec TTF.
 	// A garder sous le coude en attendant que ca ne soit plus une grosse bouse.
 	// Si police Postscript et que fonction existe...
-	if ((strncomp(substr($font,-4),".pfb",4)==0) AND function_exists("imagepstext") AND 1==2) {
+	if (
+	false AND
+	substr($font,-4) == ".pfb"
+	AND function_exists("imagepstext")) {
 		// Traitement specifique pour polices PostScript (experimental)
 		$textSizePs = round(1.32 * $textSize);
 		if ($GLOBALS["font"]["$font"]) {
