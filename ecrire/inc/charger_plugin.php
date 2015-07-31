@@ -104,36 +104,49 @@ function interface_plugins_auto($retour) {
 		$res .= "<style type='text/css'><!--
 		.desc_plug {
 	height:1.9em;overflow:hidden;border-bottom:1px dotted grey;
-} // --></style>\n";
+}
+#liste_plug {
+	border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto;
+}
+// --></style>\n";
 
-		$res .= "<div style='border: solid 1px $couleur_foncee; padding:3px; background-color:white; height: 200px; overflow:auto;overflow-y: auto;' class='cadre-trait-couleur'>\n";
+		$res .= "<div id='liste_plug' class='cadre-trait-couleur'>\n";
 # <select name='url_zip_plugin'>
 #			."<option>"._L('choisir...')."</option>"
 			$res .= join("\n",$menu);
 #			."\n</select></p>\n";
 		$res .= "</div>\n";
 
-		$res .= http_script("
-		jQuery('.desc_plug').click(function() {
-			var me = this;
-			jQuery('#desc').load('".generer_url_ecrire('charger_plugin_descr', 'url=', '\\x26')."'+$(me).find('input').attr('value'));
-		});")
-		."\n<div id='desc'></div>\n";
+		$res .= "\n<div id='desc'></div>\n";
 
 
 
 		$res .= _L("ou...");
 	}
 
-
-	$res .= _L("<p><label>indiquez ci-dessous l'adresse d'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l'adresse d'une liste de plugins.");
+	$res .= '<label>';
+	$res .= _L("<p>indiquez ci-dessous l'adresse d'un fichier zip de plugin &#224; t&#233;l&#233;charger, ou encore l'adresse d'une liste de plugins.</p>");
 	
 	$res .= '<p>('._L('exemples :').' http://files.spip.org/spip-zone/paquets.rss.xml.gz ; http://www.spip-contrib.net/spip.php?page=backend&amp;id_mot=112)</p>';
 
-	// TODO: OU l'adresse d'une liste de plugins
-	// TODO: OU uploadez un fichier ZIP ou une liste de plugins
 
-	$res .= "<br /><input type='text' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' /></label></p>\n";
+	$res .= "<br />
+	<input type='radio' id='antiradio' name='url_zip_plugin' value='' />
+	<input type='text' id='url_zip_plugin2' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' /></p></label>\n";
+
+	$res .= http_script("
+	// charger en ajax le descriptif si on click une div
+	jQuery('#liste_plug .desc_plug').click(function(e) {
+		jQuery('#desc').load('".generer_url_ecrire('charger_plugin_descr', 'url=', '\\x26')."'+jQuery('input', this).attr('value'));
+	});
+	// deselectionner un bouton radio si on change l'url
+	jQuery('#url_zip_plugin2').bind('change', function() {
+		jQuery('#antiradio').attr('checked','on');
+		jQuery('#desc').html('');
+	});
+	jQuery('#antiradio').hide();
+	");
+
 
 	$res .= "</td></tr>";
 	$res .= "</table>\n"
@@ -506,7 +519,7 @@ function bouton_telechargement_plugin($url, $rep) {
 			."<input type='submit' name='ok' value='"._T('bouton_telecharger')."' />",
 			"\nmethod='post'");
 
-	return _L("&#224; t&#233;l&#233;charger depuis ").$url.$bouton;
+	return _L("&#224; t&#233;l&#233;charger depuis $url et &#224; installer dans $rep/").$bouton;
 
 }
 

@@ -56,6 +56,24 @@ function plugin_version_compatible($intervalle,$version){
 }
 
 
+// Faire la liste des librairies disponibles
+// retourne un array ( nom de la lib => repertoire , ... )
+
+function liste_librairies() {
+	$libs = array();
+	foreach (array_reverse(creer_chemin()) as $d) {
+		if (is_dir($dir = $d.'lib/')
+		AND $t = @opendir($dir)) {
+			while (($f = readdir($t)) !== false) {
+				if ($f[0] != '.'
+				AND is_dir("$dir/$f"))
+					$libs[$f] = $dir;
+			}
+		}
+	}
+	return $libs;
+}
+
 // Prend comme argument le tableau des <necessite> et retourne false si
 // tout est bon, et un message d'erreur sinon
 // http://doc.spip.org/@erreur_necessite
@@ -83,8 +101,8 @@ function erreur_necessite($n, $liste) {
 			$lib = trim($r[2]);
 			if (!find_in_path('lib/'.$lib)) {
 				$lien_download = '';
-				if (isset($n[0]['src'])) {
-					$url = $n[0]['src'];
+				if (isset($need['src'])) {
+					$url = $need['src'];
 					include_ecrire('inc/charger_plugin');
 					$lien_download = '<br />'
 						.bouton_telechargement_plugin($url, strtolower($r[1]));

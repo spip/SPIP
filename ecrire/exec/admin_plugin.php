@@ -63,6 +63,15 @@ function exec_admin_plugin_dist($retour='') {
 		fin_cadre_enfonce();
 	}
 
+	// Lister les librairies disponibles
+	if ($libs = liste_librairies()) {
+		debut_cadre_enfonce('', '', '', _L('Librairies install&#233;es'));
+		ksort($libs);
+		foreach ($libs as $lib => $rep)
+		echo "<dt>$lib</dt><dd>".joli_repertoire($rep)."</dd>";
+		fin_cadre_enfonce();
+	}
+
 	echo debut_droite('plugin', true);
 
 	$lpf = liste_plugin_files();
