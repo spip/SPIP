@@ -73,7 +73,7 @@ function info_maj_cache($nom, $dir, $page='')
 	if (preg_match("/$re/", $page)) return $page;
 
 	$url = _VERSIONS_SERVEUR . $dir . '/' . _VERSIONS_LISTE;
-	$a = file_exists($nom) ? filemtime($nom) : '';
+	$a = file_exists($nom) ? @filemtime($nom) : '';
 	include_spip('inc/distant');
 	$res = recuperer_lapage($url, false, 'GET', _COPIE_LOCALE_MAX_SIZE, '',false, $a);
 	// Si rien de neuf (ou inaccessible), garder l'ancienne

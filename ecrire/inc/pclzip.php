@@ -2577,7 +2577,7 @@
     // ----- Look for regular folder
     else if ($p_filedescr['type']=='folder') {
       $p_header['external'] = 0x00000010;
-      $p_header['mtime'] = filemtime($p_filename);
+      $p_header['mtime'] = @filemtime($p_filename);
       $p_header['size'] = filesize($p_filename);
     }
     
@@ -2596,7 +2596,7 @@
       $p_header['mtime'] = time();
     }
     else {
-      $p_header['mtime'] = filemtime($p_filename);
+      $p_header['mtime'] = @filemtime($p_filename);
     }
 
     // ------ Look for file comment
@@ -3766,7 +3766,7 @@
       }
 
       // ----- Look if the extracted file is older
-      else if (filemtime($p_entry['filename']) > $p_entry['mtime'])
+      else if (@filemtime($p_entry['filename']) > $p_entry['mtime'])
       {
         // ----- Change the file status
         if (   (isset($p_options[PCLZIP_OPT_REPLACE_NEWER]))
