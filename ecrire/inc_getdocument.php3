@@ -184,36 +184,6 @@ function verifier_compactes($zip) {
 	}
 }
 
-function afficher_compactes($image_name /* not used */, $fichiers, $link) {
-// presenter une interface pour choisir si fichier joint ou decompacter
-// passer ca en squelette un de ces jours.
-
-	include_ecrire ("inc_presentation.php3");
-	install_debut_html(_T('upload_fichier_zip'));
-	echo "<p>",
-		_T('upload_fichier_zip_texte'),
-		"</p>",
-		"<p>",
-		_T('upload_fichier_zip_texte2'),
-		"</p>",
-		$link->getForm('POST'),
-		"<div><input type='radio' checked name='action_zip' value='telquel'>",
-		_T('upload_zip_telquel'),
-		"</div>",
-		"<div><input type='radio' name='action_zip' value='decompacter'>",
-		_T('upload_zip_decompacter'),
-		"</div>",
-		"<ul><li>" ,
-		 join("</li>\n<li>",$fichiers) ,
-		 "</li></ul>",
-		"<div>&nbsp;</div>",
-		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='",
-		_T('bouton_valider'),
-		"'></div>",
-		"</form>";
-	install_fin_html();
-}
-
 // Si on doit conserver une copie locale des fichiers distants, autant que ca
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
@@ -321,11 +291,23 @@ function recuperer_infos_distantes($source, $max=0) {
 //
 // Ajouter un document (au format $_FILES)
 //
+# $source,	# le fichier sur le serveur (/var/tmp/xyz34)
+# $nom_envoye,	# son nom chez le client (portequoi.pdf)
+# $type_lien,	# lie a un article, une breve ou une rubrique ?
+# $id_lien,	# identifiant de l'article (ou rubrique) lie
+# $mode,	# 'vignette' => image en mode image
+#		# ou vignette personnalisee liee a un document
+		# 'document' => doc ou image en mode document
+		# 'distant' => lien internet
+# $id_document,	# pour une vignette, l'id_document de maman
+# $actifs	# les documents dont il faudra ouvrir la boite de dialogue
+
 function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
-	// Documents distants : pas trop de verifications bloquantes, mais un test
-	// via une requete HEAD pour savoir si la ressource existe (non 404), si le
-	// content-type est connu, et si possible recuperer la taille, voire plus.
+// Documents distants : pas trop de verifications bloquantes, mais un test
+// via une requete HEAD pour savoir si la ressource existe (non 404), si le
+// content-type est connu, et si possible recuperer la taille, voire plus.
+	spip_log ("ajout du document $nom_envoye  ($mode $type_lien $id_lien $id_document)");
 	if ($mode == 'distant') {
 		if ($a = recuperer_infos_distantes($source)) {
 			# fichier local pour creer la vignette (!!),
@@ -521,144 +503,182 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	return true;
 }
 
+function afficher_compactes($fichiers, $args, $action) {
+// presenter une interface pour choisir si fichier joint ou decompacte
+// passer ca en squelette un de ces jours.
+
+	include_ecrire ("inc_presentation.php3");
+	install_debut_html(_T('upload_fichier_zip'));
+	echo "<p>",
+		_T('upload_fichier_zip_texte'),
+		"</p>",
+		"<p>",
+		_T('upload_fichier_zip_texte2'),
+		"</p>",
+		construire_upload(
+			"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
+			_T('upload_zip_telquel').
+			"</div>".
+			"<div><input type='radio' name='sousaction5' value='6'>".
+			_T('upload_zip_decompacter').
+			"</div>".
+			"<ul><li>" .
+			join("</li>\n<li>",$fichiers) .
+			"</li></ul>".
+			"<div>&nbsp;</div>".
+			"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
+			_T('bouton_valider').
+			"'></div>",
+			$args, $action);
+	install_fin_html();
+}
+
 //
-// Upload d'un ZIP
+// Traiter la liste des fichiers
 //
 
-function deballer_upload($_FILES, $source, $action_zip, $hash, $hash_id_auteur, $id_article, $id_document, $mode, $redirect, $type)
+function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$actifs)
 {
-  // traiter la reponse de l'utilisateur ('telquel' ou 'decompacter')
-  if ($source AND !strstr($source, '..')) # securite
-    {
-	$_FILES = array(
-		array('name' => basename($source),
-			'tmp_name' => $source)
-		);
-    }
+	if (function_exists('gzopen') 
+	AND !($mode == 'distant')
+	AND (count($files) == 1)) {
+
+		$desc = $files[0];
+		if (preg_match('/\.zip$/i', $desc['name'])
+		    OR ($desc['type'] == 'application/zip')) {
 	
-  // traiter le zip si c'en est un tout seul
-  if (count($_FILES) == 1 AND $action_zip!='telquel') {
-	$desc = array_pop($_FILES); # recuperer la description
-	$_FILES = array($desc);
-	
-	if (preg_match('/\.zip$/i', $desc['name'])
-	    OR ($desc['type'] == 'application/zip')) {
-	
-	  // on pose le fichier dans le repertoire zip et on met
-	  // a jour $_FILES (nota : copier_document n'ecrase pas
-	  // un fichier avec lui-meme : ca autorise a boucler)
-	  $zip = copier_document("zip",
+	  // on pose le fichier dans le repertoire zip 
+	  // (nota : copier_document n'ecrase pas un fichier avec lui-meme
+	  // ca autorise a boucler)
+			$zip = copier_document("zip",
 					$desc['name'],
 					$desc['tmp_name']
 				);
-	  if (!$zip) die ('Erreur upload zip'); # pathologique
-	  $desc['tmp_name'] = $zip;	# nouvel emplacement du fichier
-	  $_FILES = array($desc);
-	
-	  // Est-ce qu'on sait le lire ?
-	  require_once(_DIR_RESTREINT . 'pclzip.lib.php');
-	  $archive = new PclZip($zip);
-	  $contenu = verifier_compactes($archive);
-	
-	  // si non, on le force comme document
-	    // sans effet meme en global !!
-	  /*	  if (!$contenu) {
-	    	$forcer_document = 'oui';
-	    }
-	  else  */
-	  // si le deballage est demande
-	  if ($action_zip == 'decompacter') {
-	    // 1. on deballe
+			if (!$zip) die ('Erreur upload zip'); # pathologique
+			// Est-ce qu'on sait le lire ?
+			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+			$archive = new PclZip($zip);
+			if ($archive) {
+			  // demander confirmation
+			  afficher_compactes(verifier_compactes($archive),
+					     array(
+					 'redirect' => $redirect,
+					 'hash' => $hash,
+					 'hash_id_auteur' => $hash_id_auteur,
+					 'chemin' => $zip,
+					 'mode' => $mode,
+					 'type' => $type),
+				   "spip_image.php3?id_article=$id");
+			  // a tout de suite en joindre5 ou joindre6
+			  exit;
+			}
+		}
+	}
+	foreach ($files as $arg) {
+		check_upload_error($arg['error']);
+		ajouter_un_document($arg['tmp_name'], $arg['name'], 
+				    $type, $id, $mode, $id_document, $actifs);
+	}
+}
+
+//
+// Fonctions referencees dans spip-image par calcul
+//
+
+// Cas d'un document distant reference sur internet
+
+function joindre2($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	examiner_les_fichiers(array(
+				   array('name' => basename($arg),
+					 'tmp_name' => $arg)
+				   ), 'distant', $type, $id, $id_document,
+			     $hash, $hash_id_auteur, $redirect, &$actifs);
+}
+
+// Cas d'un fichier transmis
+
+function joindre1($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	$files = array();
+	if (is_array($arg))
+	  foreach ($arg as $file) {
+		if (!$file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+			$files[]=$file;
+	}
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+			     $hash, $hash_id_auteur, $redirect, $actifs);
+} 
+
+// copie de tout ou partie du repertoire upload
+
+function joindre3($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	if (!$arg || strstr($arg, '..')) return;
+	    
+	$upload = (_DIR_TRANSFERT .$arg);
+
+	if (!is_dir($upload))
+	  // seul un fichier est demande
+	  $files = array(array ('name' => basename($upload),
+				'tmp_name' => $upload)
+			 );
+	else {
+	  $files = array();
+	  foreach (fichiers_upload($upload) as $fichier) {
+			$files[]= array (
+					'name' => basename($fichier),
+					'tmp_name' => $fichier
+					);
+	  }
+	}
+
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+			     $hash, $hash_id_auteur, $redirect, $actifs);
+}
+
+//  identifie les repertoires de upload aux rubriques Spip
+
+function joindre4($arg, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$documents_actifs)
+{
+	if (!$arg || strstr($arg, '..')) return;
+	$upload = (_DIR_TRANSFERT .$arg);
+	identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
+	include_ecrire("inc_rubriques.php3");
+	calculer_rubriques();
+}
+
+//  Zip avec confirmation "tel quel"
+
+function joindre5($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+  	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
+}
+
+// cas du zip a deballer. On ressort la bibli 
+
+function joindre6($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
+	    require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+	    $archive = new PclZip($arg);
 	    $archive->extract(
 			      PCLZIP_OPT_PATH, _tmp_dir,
 			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
 			      );
 	    $contenu = verifier_compactes($archive);
-	    // 2. on supprime le fichier temporaire
-	    @unlink($zip);
+	    //  on supprime la copie temporaire
+	    @unlink($arg);
 	    
-	    $_FILES = array();
-	    foreach ($contenu as $fichier) {
-	      $_FILES[] = array(
-				'name' => basename($fichier),
-				'tmp_name' => _tmp_dir.basename($fichier));
-	    }
-	  }
-	  
-	  // sinon on demande une reponse
-	  else {
-		$link = new Link('spip_image.php3');
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('redirect', $redirect);
-		$link->addVar('id_article', $id_article);
-		$link->addVar('mode', $mode);
-		$link->addVar('type', $type);
-		$link->addVar('hash', $hash);
-		$link->addVar('hash_id_auteur', $hash_id_auteur);
-		$link->addVar('source_zip', $zip);
-		afficher_compactes($desc, $contenu, $link);
-		exit;
-	  }
-	}
-  }
-  return $_FILES;
+	    foreach ($contenu as $fichier)
+		ajouter_un_document(_tmp_dir.basename($fichier),
+				    basename($fichier),
+				    $type, $id, $mode, $id_document, $actifs);
+	    effacer_repertoire_temporaire(_tmp_dir);
 }
 
-	//
-	// Traiter la liste des fichiers
-	//
-
-function ajouter_les_fichiers($_FILES, $mode, $type, $id, $id_document, &$actifs)
-{
-	foreach ($_FILES as $file) {
-		// afficher l'erreur 'fichier trop gros' ou autre
-		check_upload_error($file['error']);
-
-		spip_log ("ajout du document ".$file['name'].", $mode ($type $id $id_document)");
-		ajouter_un_document (
-			$file['tmp_name'],	# le fichier sur le serveur (/var/tmp/xyz34)
-			$file['name'],		# son nom chez le client (portequoi.pdf)
-			$type,				# lie a un article, une breve ou une rubrique ?
-			$id,		# identifiant de l'article (ou rubrique) lie
-			$mode,				# 'vignette' => image en mode image
-								# ou vignette personnalisee liee a un document
-								# 'document' => doc ou image en mode document
-								# 'distant' => lien internet
-			$id_document,		# pour une vignette, l'id_document de maman
-			$actifs	# tableau des id_document "actifs" (par ref)
-		);
-	}	// foreach $_FILES
-
-	// Nettoyer le repertoire temporaire d'extraction des fichiers
-	if (defined('_tmp_dir'))
-		effacer_repertoire_temporaire(_tmp_dir);
-}
-
-// lire le repertoire upload et retourner ses fichiers
-
-function ajouter_par_upload($upload, $identifier, $id, $id_auteur, &$actifs)
-{
-		$files = array();
-		if ($identifier)
-		  { 
-		    identifie_repertoire_et_rubrique($upload, $id, $id_auteur, $actifs);
-		    include_ecrire("inc_rubriques.php3");
-		    calculer_rubriques();
-		  }
-		else {
-			foreach (fichiers_upload($upload) as $fichier) {
-				$files[] = array (
-					'name' => basename($fichier),
-					'tmp_name' => $fichier
-					);
-			}
-		}
-		return $files;
-}
-
-function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art, &$actifs)
+function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0)
 {
   static $exts = array();
 
@@ -742,7 +762,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art, 
 	$rub=spip_abstract_insert($GLOBALS['table_prefix'] . "_rubriques",
 				  "(titre,id_parent,statut)",
 				  "('" . addslashes($v) . "', $id_rubrique, 'prepa')");
-	$m = identifie_repertoire_et_rubrique($k, $rub, $id_auteur, $art, $actifs);
+	$m = identifie_repertoire_et_rubrique($k, $rub, $id_auteur, $art);
 	if ($m)
 	  $n++;
 	else {
@@ -755,6 +775,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art, 
   return $n;
  
 }
+
 
 //
 // Convertit le type numerique retourne par getimagesize() en extension fichier
