@@ -22,12 +22,12 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 	return "<a\nhref=\"javascript:"
 		.$action
 		."\" class='spip_barre' tabindex='1000'\ntitle=\""
-		.attribut_html($help)
+		.addslashes(attribut_html($help))
 		."\"" 
 		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
 		  .addslashes(attribut_html($help))
 		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
-		  .attribut_html(_T('barre_aide'))
+		  .addslashes(attribut_html(_T('barre_aide')))
 		  ."', $champhelp)\"")
 		."><img\nsrc='"
 		._DIR_IMG_ICONES_BARRE
