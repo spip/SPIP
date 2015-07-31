@@ -170,6 +170,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cache_mode_compresse' => 'The cache files are written in compressed mode.',
+'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
+'cache_modifiable_webmestre' => 'These parameters can be changed by the webmaster.',
 'calendrier_synchro' => 'If you use a diary application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
 
 
@@ -620,7 +623,7 @@ Thank you for your participation
 'info_contenance' => 'This site contains:',
 'info_contenu_articles' => 'Articles content',
 'info_contribution' => 'forum contributions',
-'info_copyright' => 'is a free software distributed <a href=\'license.txt\'>under GPL license.</a>',
+'info_copyright' => 'is free software distributed <a href=\'license.txt\'>under GPL license.</a>',
 'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.spip.net/en\'>http://www.spip.net/en</a>.',
 'info_cours_edition' => 'Your articles in progress',
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
@@ -728,7 +731,7 @@ requiring an FTP access to the Web site.',
 'info_historique_affiche' => 'Display this version',
 'info_historique_comparaison' => 'compare',
 'info_historique_desactiver' => 'Disable revisions follow-up',
-'info_historique_lien' => 'Display history account',
+'info_historique_lien' => 'Display list of versions',
 'info_historique_texte' => 'Revisions follow-up allows you to keep track of every modifications added to an article and displays the differences between successive versions.',
 'info_historique_titre' => 'Revisions follow-up',
 'info_identification_publique' => 'Your public identity...',
@@ -852,6 +855,8 @@ requiring an FTP access to the Web site.',
 'info_option_faire_suivre' => 'Forward forums messages to articles authors',
 'info_option_ne_pas_faire_suivre' => 'Do not forward forums messages',
 'info_options_avancees' => 'ADVANCED OPTIONS',
+'info_ortho_activer' => 'Activate the spell checker.',
+'info_ortho_desactiver' => 'Deactivate the spell checker.',
 'info_ou' => 'or...',
 'info_oui_suppression_mot_cle' => 'I want to delete this keyword permanently.',
 'info_page_interdite' => 'Forbidden page',
@@ -880,6 +885,10 @@ requiring an FTP access to the Web site.',
 'info_pour' => 'for',
 'info_premier_resultat' => '[@debut_limit@ first results out of @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ first results out of @total@]',
+'info_preview_admin' => 'Only administrators have access to preview mode',
+'info_preview_comite' => 'All authors have access to preview mode',
+'info_preview_desactive' => 'Preview mode is completely deactivated',
+'info_preview_texte' => 'It is possible to preview the site as if all articles and news items (which have at least the status "proposed") were already published. Should this preview mode be restricted to administrators, open to all authors, or turned off completely?',
 'info_principaux_correspondants' => 'Your main correspondents',
 'info_probleme_grave' => 'error of',
 'info_procedez_par_etape' => 'please proceed step by step',
@@ -1311,6 +1320,20 @@ in a colour indicating their status:',
 'onglet_repartition_rubrique' => 'Distribution by section',
 'onglet_save_restaur_base' => 'Backup/restore the database',
 'onglet_vider_cache' => 'Empty the cache',
+'ortho_ajouter_ce_mot' => 'Add this word to the dictionary',
+'ortho_aucune_suggestion' => 'No suggestion was found for this word.',
+'ortho_avis_privacy' => 'Spip contains a spell checker. However, before activating it, please read the following paragraph carefully:',
+'ortho_avis_privacy2' => 'In order to check spelling the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some confidentiality. If you are concerned about the confidentiality of your data, do not activate this option.',
+'ortho_ce_mot_connu' => 'This word is contained in the site\'s dictionary.',
+'ortho_dico_absent' => 'No dictionary was found for this language',
+'ortho_mode_demploi' => 'Urecognised words have been highlighted in red. Click on these words to see suggested corrections.',
+'ortho_mots_a_corriger' => 'words to correct',
+'ortho_orthographe' => 'Spelling',
+'ortho_supprimer_ce_mot' => 'Remove this word from the dictionary',
+'ortho_trop_de_fautes' => 'Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
+'ortho_trop_de_fautes2' => 'Begin by correcting the most obvious mistakes, then try again.',
+'ortho_verif_impossible' => 'The system cannot check the spelling of this text.',
+'ortho_verifier' => 'Check spelling',
 
 
 // P
@@ -1353,6 +1376,8 @@ and connect again to the site.
 'pass_retour_public' => 'Back to the public site',
 'pass_rien_a_faire_ici' => 'Nothing to do here.',
 'pass_vousinscrire' => 'Registering with the site',
+'previsualisation' => 'Preview',
+'previsualiser' => 'Show preview',
 
 
 // S
@@ -1361,9 +1386,14 @@ and connect again to the site.
 
 
 // T
+'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.',
+'taille_cache_maxi' => 'SPIP will try to limit the size of the <code>CACHE/</code> directory to approximately <b>@octets@</b> of data.',
+'taille_cache_octets' => 'The size of the cache is currently @octets@.',
+'taille_cache_vide' => 'The cache is empty.',
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
 'taille_octets' => '@taille@ bytes',
+'taille_repertoire_cache' => 'Current size of the cache',
 'text_article_propose_publication' => 'Article submitted for publication. Do not hesitate to give your opinion through the forum attached to this article (at the bottom of the page).',
 'texte_acces_ldap_anonyme_1' => 'Some LDAP servers do not allow any anonymous access. In this case you must indicate an initial access identifier to be able to search for information in the directory afterwards. However, in most cases the following fields can be left empty.',
 'texte_actualite_site_1' => 'When you become familiar with the interface, click on the &laquo;',
@@ -1466,9 +1496,9 @@ the images and the documents used in the articles and sections.',
 	familiar with the functioning of the SPIP system. <P align="justify"><B>More
 	generally, you are strongly advised
 	to let the main webmaster of your site deal with this page.</b>',
-'texte_inc_meta_1' => 'As a site administrator, please',
+'texte_inc_meta_1' => 'The system encountered an error when trying to write the file <code>ecrire/data/meta_cache.php3</code>. As a site administrator, please',
 'texte_inc_meta_2' => 'verify write permissions',
-'texte_inc_meta_3' => 'over the directory ecrire/',
+'texte_inc_meta_3' => 'of the directory <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'The system will provide you now with a custom access to the site.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can',
 'texte_introductif_article' => '(Introductory Text to the article.)',
@@ -1713,7 +1743,20 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_delier' => 'Stop linking this article to its translations',
 'trad_lier' => 'This article is a translation of article number:',
 'trad_new' => 'Write a new translation of this article',
-'trad_reference' => '(reference article)'
+'trad_reference' => '(reference article)',
+
+
+// U
+'upload_fichier_zip' => 'ZIP file',
+'upload_fichier_zip_texte' => 'The file you are intending to install is a ZIP file.',
+'upload_fichier_zip_texte2' => 'This file can be:',
+'upload_limit' => 'This file is too big for the server; the maximum size allowed for <i>upload</i> is @max@.',
+'upload_zip_decompacter' => 'decompressed and each file it contains will be installed on the site. The files which will be installed are:',
+'upload_zip_telquel' => 'installed as it is, as a ZIP file;',
+
+
+// V
+'version_initiale' => 'Initial version'
 
 );
 

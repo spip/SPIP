@@ -168,6 +168,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 
 // C
+'cache_mode_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode comprimit.',
+'cache_mode_non_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode no comprimit.',
+'cache_modifiable_webmestre' => 'Aquests par&agrave;metres s&oacute;n modificables pel webmestre del lloc web.',
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
 
 
@@ -443,7 +446,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'icone_breves' => 'Breus',
 'icone_brouteur' => 'Navegaci&oacute; r&agrave;pida',
 'icone_calendrier' => 'Calendari',
-'icone_configuration_site' => 'Configuraci&oacute; del lloc',
+'icone_configuration_site' => 'Configuraci&oacute;',
 'icone_configurer_site' => 'Configurar el vostre lloc',
 'icone_creation_groupe_mots' => 'Crear un nou grup de paraules',
 'icone_creation_mots_cles' => 'Crear una nova paraula clau',
@@ -831,6 +834,8 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_option_faire_suivre' => 'Reenviar els missatges del f&ograve;rum als autors dels articles',
 'info_option_ne_pas_faire_suivre' => 'No reenviar els missatges dels f&ograve;rums',
 'info_options_avancees' => 'OPCIONS AVAN&Ccedil;ADES',
+'info_ortho_activer' => 'Activar la verificaci&oacute; ortogr&agrave;fica.',
+'info_ortho_desactiver' => 'Desactivar la verificaci&oacute; ortogr&agrave;fica',
 'info_ou' => 'o...',
 'info_oui_suppression_mot_cle' => 'vull suprimir definitivament aquesta paraula clau.',
 'info_page_interdite' => 'P&agrave;gina prohibida',
@@ -859,6 +864,10 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_pour' => 'per',
 'info_premier_resultat' => '[@debut_limit@ primers resultats sobre @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primers resultats sobre @total@]',
+'info_preview_admin' => 'Nom&eacute;s els administradors poden previsualitzar el lloc web',
+'info_preview_comite' => 'Tots els redactors poden previsualitzar el lloc',
+'info_preview_desactive' => 'La previsualitzaci&oacute; est&agrave; totalment desactivada',
+'info_preview_texte' => '&Eacute;s possible previsualitzar el lloc com si tots els articles i breus(que almenys tinguen l\'estatus de "proposats") estigueren publicats. Aquesta possibilitat ha d\'estar nom&eacute;s a l\'abast dels administradors, o tamb&eacute; de tots els redactors, o per ning&uacute;?',
 'info_principaux_correspondants' => 'Els vostres principals corresponsals',
 'info_probleme_grave' => 'problema de',
 'info_procedez_par_etape' => 'procediu pas per pas',
@@ -1278,6 +1287,20 @@ amb un color que indica el seu estat:',
 'onglet_repartition_rubrique' => 'Distribuci&oacute; per seccions',
 'onglet_save_restaur_base' => 'C&ograve;pia de seguretat/restaurar base de dades',
 'onglet_vider_cache' => 'Buidar la mem&ograve;ria cau',
+'ortho_ajouter_ce_mot' => 'Afegir aquest mot al diccionari',
+'ortho_aucune_suggestion' => 'Cap sugger&egrave;ncia ha estat trobada per aquesta paraula.',
+'ortho_avis_privacy' => 'La verificaci&oacute; ortogr&agrave;fica ha estat integrada a l\'SPIP. Abans d\'activar aquesta funcionalitat, si us plau llegeisca el seg&uuml;ent par&agrave;graf amb atenci&oacute;: ',
+'ortho_avis_privacy2' => 'Per verificar l\'ortografia d\'un text, el lloc enviar&agrave; la llista de les paraules a controlar cap un dels "servidors ortogr&agrave;fics" externs posats a la vostra disposici&oacute; per diferents membres de la comunitat SPIP. Les paraules s&oacute;n enviats desordenats per mantindre un m&iacute;nim de confidencialitat. Si pateix per la confidencialitat de les seues dades no activeu aquesta opci&oacute; (i retireu tot el seguit d\'informacions seues del Web).',
+'ortho_ce_mot_connu' => 'Aquesta paraula forma part del diccionari del lloc.',
+'ortho_dico_absent' => 'No ha estat trobat cap diccionari per aquesta llengua',
+'ortho_mode_demploi' => 'Les paraules no reconegudes s&oacute;n subratllades en roig. Pots clicar a sobre de cada mot per afegir alguna de les paraules suggerides.',
+'ortho_mots_a_corriger' => 'paraula a corregir',
+'ortho_orthographe' => 'Ortografia',
+'ortho_supprimer_ce_mot' => 'Treure aquesta paraula del diccionari',
+'ortho_trop_de_fautes' => 'Atenci&oacute;: el vostre text cont&eacute; massa errades, no es suggereix cap correci&oacute; per tal de no sobrecarregar el sistema.',
+'ortho_trop_de_fautes2' => 'Comenceu per corregir les faltes m&eacute;s evidents i torneu a provar.',
+'ortho_verif_impossible' => 'El sistema no pot verificar l\'ortografia d\'aquest text.',
+'ortho_verifier' => 'Verificar l\'ortografia',
 
 
 // P
@@ -1314,6 +1337,8 @@ i tornar-vos a connectar al lloc.
 'pass_retour_public' => 'Tornar al lloc p&uacute;blic',
 'pass_rien_a_faire_ici' => 'Res a fer ac&iacute;.',
 'pass_vousinscrire' => 'Incriure\'s a aquesta web',
+'previsualisation' => 'Previsualitzaci&oacute;',
+'previsualiser' => 'Previsualitzar',
 
 
 // S
@@ -1322,9 +1347,14 @@ i tornar-vos a connectar al lloc.
 
 
 // T
+'taille_cache_infinie' => 'Aquest lloc no preveu limitar la mida del directori <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP prova de limitar la mida del directori <code>CACHE/</code> d\'aquest lloc a aproximadament <b>@octets@</b> de dades.',
+'taille_cache_octets' => 'La mida de la mem&ograve;ria cau &eacute;s actualment de @octets@.',
+'taille_cache_vide' => 'La mem&ograve;ria cau est&agrave; buida.',
 'taille_ko' => '@taille@&nbsp;kB',
 'taille_mo' => '@taille@&nbsp;MB',
 'taille_octets' => '@taille@&nbsp;bytes',
+'taille_repertoire_cache' => 'Mida del directori de la mem&ograve;ria cau',
 'text_article_propose_publication' => 'Article proposat a la seva publicaci&oacute;. No dubteu a donar la vostra opini&oacute; gr&agrave;cies al f&ograve;rum adjunt a aquest article (al capdavall de la p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidors LDAP no accepten accessos an&ograve;nims. En aquest cas &eacute;s necessari especificar un identificador d\'acc&eacute;s inicial per tal de poder buscar informacions en el directori. En la majoria de casos tanmateix, els camps seg&uuml;ents es podr&aacute;n deixar buits.',
 'texte_actualite_site_1' => 'Quan estareu familiaritzats amb la interf&iacute;cie, podreu clicar a &laquo;',
@@ -1403,9 +1433,9 @@ i <tt>.htpasswd-admin</tt>en el directori <tt>ecrire/date/</tt>? </b></p>
 funcionament de la web.Recomanem no tocar res fins que no li siga familiar el funcionament del sistema SPIP.<P align="justify"><B>
 Generalment, es molt aconsellable
  deixar la c&agrave;rrega de aquestes p&agrave;gines al webmestre/webmestressa principal de la vostra web.</B>',
-'texte_inc_meta_1' => '<MODIF>Per favor, com a administrador del web,',
-'texte_inc_meta_2' => '<MODIF>verifiqueu els drets d\'escriptura',
-'texte_inc_meta_3' => '<MODIF>sobre el directori ecrire/',
+'texte_inc_meta_1' => 'El sistema ha trobat un error durant l\'escritura del fitxer <code>ecrire/data/meta_cache.php3</code>.Si us plau, ja que sou l\'administrador/a del lloc web,',
+'texte_inc_meta_2' => 'verifiqueu els drets d\'escriptura',
+'texte_inc_meta_3' => 'del directori <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => ' El sistema va ara a fer-vos un acc&eacute;s personalitzat al web.',
 'texte_informations_personnelles_2' => ' (Nota: si es tracta d\'una reinstal.laci&oacute; mantenint el vostre acc&eacute;s pot',
 'texte_introductif_article' => ' (Texte introductiu de l\'article.)',
@@ -1617,7 +1647,20 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions',
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
-'trad_reference' => '(article de refer&egrave;ncia)'
+'trad_reference' => '(article de refer&egrave;ncia)',
+
+
+// U
+'upload_fichier_zip' => 'Fitxer ZIP',
+'upload_fichier_zip_texte' => 'El fitxer que voleu instal&middot;lar &eacute;s un fitxer Zip.',
+'upload_fichier_zip_texte2' => 'El fitxer pot ser:',
+'upload_limit' => 'El fitxer &eacute;s massa gran pel servidor; la   mida m&agrave;xima autoritzada en <i>upload</i> &eacute;s de @max@.',
+'upload_zip_decompacter' => 'descomprimit i cada element que cont&eacute; instal&middot;lat en el lloc. Els fitxers que llavors seran instal&middot;lat en el lloc s&oacute;n:',
+'upload_zip_telquel' => 'instal&middot;lat tal qual, com a arxiu comprimit Zip;',
+
+
+// V
+'version_initiale' => 'Versi&oacute; inicial'
 
 );
 
