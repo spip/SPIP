@@ -566,7 +566,7 @@ function spip_sqlite_drop_index($nom, $table, $serveur='', $requeter=true) {
  * @return string erreur eventuelle
 **/
 // http://doc.spip.org/@spip_sqlite_error
-function spip_sqlite_error($serveur='') {
+function spip_sqlite_error($query='', $serveur='') {
 	$link  = _sqlite_link($serveur);
 	
 	if (_sqlite_is_version(3, $link)) {
