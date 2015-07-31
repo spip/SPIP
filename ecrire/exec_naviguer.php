@@ -513,7 +513,7 @@ function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $de
 		"(titre, id_parent)",
 		"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 
-	return enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, 'oui');
+	return enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang);
 }
 
 function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
