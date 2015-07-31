@@ -249,6 +249,13 @@ function revisions_sites ($id_syndic, $c=false) {
 		suivre_invalideur("id='id_syndic/$id_syndic'");
 	}
 
+	// Notifications
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		$notifications('instituersite', $id_syndic,
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>($champs['date']?$champs['date']:$row['date']))
+		);
+	}
+
 	include_spip('inc/rubriques');
 	calculer_rubriques_if($id_rubrique, $champs, $statut_ancien);
 }
