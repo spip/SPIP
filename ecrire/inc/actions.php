@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 // fonction de securite appelee par les scripts de action/
-// cf fabrication des arguments dans genere_action
+// cf fabrication des arguments dans generer_action_auteur
 
 // http://doc.spip.org/@inc_controler_action_auteur_dist
 function inc_controler_action_auteur_dist()

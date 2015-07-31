@@ -36,7 +36,6 @@ function acces_restreint_rubrique($id_rubrique) {
 // http://doc.spip.org/@acces_mots
 function acces_mots() {
 	global $connect_toutes_rubriques;
-
 	return $connect_toutes_rubriques;
 }
 
@@ -47,7 +46,8 @@ function acces_article($id_article)
 
 	if ($connect_toutes_rubriques) return true;
 
-	$row = spip_fetch_array(spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id_article"));
+	$s = spip_query("SELECT id_rubrique, statut FROM spip_articles WHERE id_article=$id_article");
+	$row = spip_fetch_array($s);
 
 	if (acces_rubrique($row['id_rubrique'])) return true;
 
@@ -63,7 +63,13 @@ function acces_article($id_article)
 // http://doc.spip.org/@auth_rubrique
 function auth_rubrique()
 {
-	global $connect_id_auteur, $connect_toutes_rubriques, $connect_id_rubrique;
+	global $connect_statut, $connect_id_auteur, $connect_toutes_rubriques, $connect_id_rubrique;
+
+	if ($connect_statut != '0minirezo') {
+		$connect_toutes_rubriques = false;
+		$connect_id_rubrique = array();
+		return;
+	}
 
 	$result = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'");
 
