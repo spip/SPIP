@@ -28,7 +28,7 @@ function base_upgrade_dist($titre='', $reprise='')
 	if ($GLOBALS['spip_version']!=$GLOBALS['meta']['version_installee']) {
 		if (!is_numeric(_request('reinstall'))) {
 			include_spip('base/create');
-			spip_log("recree les tables eventuellement disparues");
+			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"recree les tables eventuellement disparues","maj");
 			creer_base();
 		}
 		$meta = _request('meta');
@@ -42,7 +42,7 @@ function base_upgrade_dist($titre='', $reprise='')
 				  _request('table'));
 		if ($res) {
 			if (!is_array($res))
-				spip_log("Pb d'acces SQL a la mise a jour");
+				spip_log(_LOG_GRAVITE_INFO_ERREUR,"Pb d'acces SQL a la mise a jour","maj");
 			else {
 				include_spip('inc/minipres');
 				echo minipres(_T('avis_operation_echec') . ' ' . join(' ', $res));
@@ -50,7 +50,7 @@ function base_upgrade_dist($titre='', $reprise='')
 			}
 		}
 	}
-	spip_log("Fin de mise a jour SQL. Debut m-a-j acces et config");
+	spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"Fin de mise a jour SQL. Debut m-a-j acces et config","maj");
 	
 	// supprimer quelques fichiers temporaires qui peuvent se retrouver invalides
 	spip_unlink(_DIR_TMP.'plugin_xml.cache');
@@ -80,7 +80,7 @@ function maj_base($version_cible = 0) {
 	//
 	// version_installee = 1.702; quand on a besoin de forcer une MAJ
 	
-	spip_log("Version anterieure: $version_installee. Courante: $spip_version_base");
+	spip_log(_LOG_GRAVITE_INFO_IMPORTANTE,"Version anterieure: $version_installee. Courante: $spip_version_base","maj");
 	if (!$version_installee OR ($spip_version_base < $version_installee)) {
 		sql_replace('spip_meta', 
 		      array('nom' => 'version_installee',
@@ -98,9 +98,9 @@ function maj_base($version_cible = 0) {
 			$nom  = sprintf("v%03d",$n);
 			$f = charger_fonction($nom, 'maj', true);
 			if ($f) {
-				spip_log("$f repercute les modifications de la version " . ($n/10));
+				spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "$f repercute les modifications de la version " . ($n/10),"maj");
 				$f($version_installee, $spip_version_base);
-			} else spip_log("pas de fonction pour la maj $n $nom");
+			} else spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "pas de fonction pour la maj $n $nom","maj");
 			$n++;
 		}
 		include_spip('maj/v019_pre193');
@@ -148,7 +148,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 			
 			if ($etape) return array($installe, $etape);
 			$n = time() - $time;
-			spip_log("$table $meta: $installee en $n secondes",'maj');
+			spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "$table $meta: $installee en $n secondes",'maj');
 			if ($meta) ecrire_meta($meta, $installee,'non', $table);
 		} // rien pour SQL
 		if ($n >= _UPGRADE_TIME_OUT) {
@@ -158,7 +158,7 @@ function maj_while($installee, $cible, $maj, $meta='', $table='meta')
 	// indispensable pour les chgt de versions qui n'ecrivent pas en base
 	// tant pis pour la redondance eventuelle avec ci-dessus
 	if ($meta) ecrire_meta($meta, $installee,'non');
-	spip_log("MAJ terminee. $meta: $installee",'maj');
+	spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "MAJ terminee. $meta: $installee",'maj');
 	return array();
 }
 
@@ -174,10 +174,10 @@ function serie_alter($serie, $q = array(), $meta='', $table='meta') {
 			$msg = "maj $table $meta etape $i";
 			if (is_array($r)
 			AND function_exists($f = array_shift($r))) {
-				spip_log("$msg: $f " . join(',',$r),'maj');
+				spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "$msg: $f " . join(',',$r),'maj');
 				ecrire_meta($meta, $i+1, 'non', $table); // attention on enregistre le meta avant de lancer la fonction, de maniere a eviter de boucler sur timeout
 				call_user_func_array($f, $r);
-				spip_log("$meta: ok", 'maj');
+				spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "$meta: ok", 'maj');
 			} else return $i+1;
 		}
 	}
@@ -222,7 +222,7 @@ function maj_version ($version, $test = true) {
 			$GLOBALS['meta']['version_installee'] = $version;
 			sql_updateq('spip_meta',  array('valeur' => $version), "nom=" . sql_quote('version_installee') );
 		}
-		spip_log("mise a jour de la base en $version");
+		spip_log(_LOG_GRAVITE_INFO_IMPORTANTE, "mise a jour de la base en $version","maj");
 	} else {
 		echo _T('alerte_maj_impossible', array('version' => $version));
 		exit;

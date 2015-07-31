@@ -162,15 +162,21 @@ function pipeline($action, $val=null , $create_ifnotexists = true) {
  * @param string $logsuf
  */
 function spip_log($niveau, $message=NULL, $logname=NULL, $logdir=NULL, $logsuf=NULL) {
+	static $pre = array();
 	$args = func_get_args();
 	// compat ancien format d'appel spip_log('message',..)
 	if (!is_numeric($niveau) OR is_null($message)){
 		$niveau = _LOG_GRAVITE_INFO;
 	  list($message,$logname,$logdir,$logsuf) = $args;
 	}
-	if ($niveau<=_LOG_FILTRE_GRAVITE){
+	if ($niveau<=(defined('_LOG_FILTRE_GRAVITE')?_LOG_FILTRE_GRAVITE:_LOG_GRAVITE_DEBUG)){
+		if (!$pre)
+			$pre = array(
+				_LOG_GRAVITE_HS=>'HS',_LOG_GRAVITE_ALERTE_ROUGE=>'ALERTEROUGE',_LOG_GRAVITE_CRITIQUE=>'CRITIQUE',
+				_LOG_GRAVITE_ERREUR=>'ERREUR',_LOG_GRAVITE_AVERTISSEMENT=>'WARNING',_LOG_GRAVITE_INFO_IMPORTANTE=>'!INFO',
+				_LOG_GRAVITE_INFO=>'INFO',_LOG_GRAVITE_DEBUG=>'DEBUG');
 		$log = charger_fonction('log', 'inc');
-		$log( $message, $logname, $logdir, $logsuf);
+		$log($pre[$niveau].":".$message, $logname, $logdir, $logsuf);
 	}
 }
 
@@ -1295,8 +1301,6 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!defined('_LOG_GRAVITE_INFO_IMPORTANTE')) define ('_LOG_GRAVITE_INFO_IMPORTANTE', 5);
 	if (!defined('_LOG_GRAVITE_INFO')) define('_LOG_GRAVITE_INFO', 6);
 	if (!defined('_LOG_GRAVITE_DEBUG')) define('_LOG_GRAVITE_DEBUG', 7);
-	// niveau maxi d'enregistrement des logs
-	if (!defined('_LOG_FILTRE_GRAVITE')) define('_LOG_FILTRE_GRAVITE', 5);
 
 	// Sommes-nous dans l'empire du Mal ?
 	// (ou sous le signe du Pingouin, ascendant GNU ?)
@@ -1434,6 +1438,8 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 function spip_initialisation_suite() {
 	static $too_late = 0;
 	if ($too_late++) return;
+	// niveau maxi d'enregistrement des logs
+	if (!defined('_LOG_FILTRE_GRAVITE')) define('_LOG_FILTRE_GRAVITE', 5);
 
 	// taille mini des login
 	if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT', 4);
