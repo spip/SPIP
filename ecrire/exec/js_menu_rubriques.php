@@ -115,15 +115,20 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		  . '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
 		
 		$ret .= '<table cellspacing=\"0\" cellpadding=\"0\"><tr><td valign=\"top\">';		
-		$ret .= "<div  style='width: 170px;'>";
+		$ret .= "<div  style='width: 200px;'>";
+		
+		$nb_rub = count($arr_rub);
+		$ret_ligne =  ceil($nb_rub / ceil($nb_rub / $max_lignes)) + 1;
+				
 		foreach( $arr_rub as $id_rub => $titre_rub) {
 			$count_ligne ++;
 			
-			if ($count_ligne == $max_lignes) {
+			if ($count_ligne == $ret_ligne) {
 				$count_ligne = 0;
 				$ret .= "</div>";
-				$ret .= '</td><td>&nbsp;</td><td valign=\"top\">';
-				$ret .= "<div  style='width: 170px;'>";
+				$ret .= "</td>";
+				$ret .= '<td valign=\"top\" style=\"border-left: 1px solid #cccccc;\">';
+				$ret .= "<div  style='width: 200px;'>";
 
 			}
 		
