@@ -2266,6 +2266,7 @@ else {
 			$clean_link->delVar('set_ecran');
 						
 			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			ksort($couleurs_spip);
 			while (list($key,$val) = each($couleurs_spip)) {
 					$clean_link->delVar('set_couleur');
 					$clean_link->addVar('set_couleur', $key);
