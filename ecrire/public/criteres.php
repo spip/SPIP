@@ -1034,8 +1034,9 @@ function trouver_table($type, $boucle)
 
 	$serveur = $boucle->sql_serveur;
 	$s = $serveur ? $serveur : 0;
-	if (!isset($type_des_serveurs[$s])) spip_connect($serveur);
-
+	if (!isset($type_des_serveurs[$s])) {
+		if (!spip_connect($serveur)) return null;
+	}
 	$spip = ($type_des_serveurs[$s] == 'spip');
 
 	if ($spip AND isset($table_des_tables[$type])) {
