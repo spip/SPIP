@@ -293,6 +293,10 @@ function spip_release_lock($nom) {
 	spip_query("SELECT RELEASE_LOCK('$nom')");
 }
 
+function spip_mysql_version() {
+	$row = spip_fetch_array(spip_query("SELECT version() AS n"));
+	return ($row['n']);
+}
 
 //
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante

@@ -342,8 +342,8 @@ function import_tables($f, $tables, $gz=false) {
 	include_spip('inc/meta');
 	lire_metas();
 
-	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'");
-	list($my_date) = spip_fetch_array($s);
+	$s = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"));
+	$my_date = $s['d'];
 
 	if (!$my_date) {
 		spip_log("importation: debut_restauration absent");

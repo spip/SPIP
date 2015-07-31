@@ -26,22 +26,21 @@ include_spip('inc/admin');
 include_spip('inc/texte');
 include_spip('inc/minipres');
 
-
 function verifier_base() {
-	if (! $res1= spip_query("SHOW TABLES"))
-		return false;
+	$res1= spip_query("SHOW TABLES");
+	if (!$res1) return false;
 
 	$res = "";
 	while ($tab = spip_fetch_array($res1)) {
 		$res .= "<p><b>".$tab[0]."</b> ";
 
-		if (!($result_repair = spip_query("REPAIR TABLE ".$tab[0])))
-			return false;
+		$result_repair = spip_query("REPAIR TABLE ".$tab[0]);
+		if (!$result_repair) return false;
 
-		if (!($result = spip_query("SELECT COUNT(*) FROM ".$tab[0])))
-			return false;
+		$result = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM ".$tab[0]));
+		if (!$result) return false;
 
-		list($count) = spip_fetch_array($result);
+		$count = $result['n'];
 		if ($count>1)
 			$res .= "("._T('texte_compte_elements', array('count' => $count)).")\n";
 		else if ($count==1)
@@ -64,35 +63,30 @@ function verifier_base() {
 
 function exec_admin_repair_dist()
 {
-
-// verifier version MySQL
-if (! $res1= spip_query("SELECT version()"))
-	$message = _T('avis_erreur_connexion_mysql');
-else {
-	$tab = spip_fetch_array($res1);
-	$version_mysql = $tab[0];
-	if ($version_mysql < '3.23.14')
-		$message = _T('avis_version_mysql', array('version_mysql' => $version_mysql));
+	$version_mysql = spip_mysql_version();
+	if (!$version_mysql)
+	  $message = _T('avis_erreur_connexion_mysql');
 	else {
-		$message = _T('texte_requetes_echouent');
-		$ok = true;
+	  if ($version_mysql < '3.23.14')
+	    $message = _T('avis_version_mysql', array('version_mysql' => $version_mysql));
+	  else {
+	    $message = _T('texte_requetes_echouent');
+	    $ok = true;
+	  }
+	}
+
+	$action = _T('texte_tenter_reparation');
+
+	if ($ok) {
+		debut_admin(generer_url_post_ecrire("admin_repair"), $action, $message);
+
+		if (! $res = verifier_base())
+			$res = "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br /><br /><br />\n";
+		fin_admin($action);
+		minipres(_T('texte_tentative_recuperation'), $res);
+	}
+	else {
+	  minipres(_T('titre_reparation'), "<p>$message</p>");
 	}
 }
-
-$action = _T('texte_tenter_reparation');
-
-if ($ok) {
-	debut_admin(generer_url_post_ecrire("admin_repair"), $action, $message);
-
-	if (! $res = verifier_base())
-	  $res = "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br /><br /><br />\n";
-	fin_admin($action);
-	minipres(_T('texte_tentative_recuperation'), $res);
-}
-else {
-	minipres(_T('titre_reparation'), "<p>$message</p>");
-}
-
-}
-
 ?>

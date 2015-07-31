@@ -123,13 +123,12 @@ function afficher_sites($titre_table, $requete) {
 				$vals[] = $s;
 			//echo "</td>";					
 			//echo "<td class='arial1'>";
-			$s = "";
+
 			if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-				$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
-				list($total_art) = spip_fetch_array($result_art);
-				$s .= " $total_art "._T('info_syndication_articles');
+				$total_art = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE id_syndic='$id_syndic'"));
+				$s = " " . $total_art['n'] . " " . _T('info_syndication_articles');
 			} else {
-				$s .= "&nbsp;";
+				$s = "&nbsp;";
 			}
 			$vals[] = $s;
 			//echo "</td>";					
@@ -250,7 +249,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 
 			// $my_sites cache les resultats des requetes sur les sites
 			if (!$my_sites[$id_syndic])
-				$my_sites[$id_syndic] = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
+				$my_sites[$id_syndic] = spip_fetch_array(spip_query("SELECT nom_site, moderation, miroir FROM spip_syndic WHERE id_syndic=$id_syndic"));
 
 			if (!$id) {
 				$aff = $my_sites[$id_syndic]['nom_site'];
