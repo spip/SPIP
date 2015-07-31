@@ -26,7 +26,10 @@ function action_tester_taille_error_handler($output)
 // Tester nos capacites a creer des images avec GD2 (taille memoire)
 // http://doc.spip.org/@action_tester_taille_dist
 function action_tester_taille_dist() {
-
+	
+	if (!autoriser('configurer'))
+	return;
+	
 	$taille = _request('arg');
 	$taille = explode('-',$taille);
 
