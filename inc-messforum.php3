@@ -217,10 +217,12 @@ function enregistre_forum() {
 		else
 			include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
-		if ($statut == 'publie')
-			$retour_forum = generer_url_forum($id_message);
-		else
-			$retour_forum = generer_url_forum($id_parent);
+		// le retour automatique envoie sur le thread, ce qui permet
+		// de traiter elegamment le cas des forums moderes a priori.
+		// Cela assure aussi qu'on retrouve son message dans le thread
+		// dans le cas des forums moderes a posteriori, ce qui n'est
+		// pas plus mal.
+		$retour_forum = generer_url_forum($id_message, true);
 	}
 
 	// Entrer les mots-cles associes
