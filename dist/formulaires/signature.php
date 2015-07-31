@@ -212,6 +212,12 @@ function formulaires_signature_reponse_confirmation_dist($var_confirm = '') {
 
 	if (!$confirm) {
 		$confirm = _T('form_pet_signature_validee');
+
+		// noter dans la session que l'email est valide
+		// de facon a permettre de signer les prochaines
+		// petitions sans refaire un tour d'email
+		session_set('email_confirme', $adresse_email);
+
 		// invalider les pages ayant des boucles signatures
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='varia/pet$id_article'");
@@ -235,45 +241,85 @@ function inc_controler_signature_dist($id_article, $nom, $mail, $message, $site,
 
 	// tout le monde est la.
 	// cela a ete verifie en amont, dans formulaires_signature_verifier()
-	$row = sql_fetsel('*', 'spip_petitions', "id_article=$id_article");
+	if (!$row = sql_fetsel('*', 'spip_petitions', "id_article=$id_article"))
+		return _T('form_pet_probleme_technique');
 
-	if (!$row) return _T('form_pet_probleme_technique');
-
-	$passw = test_pass();
-	if (!signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url_site, $message, $lang, $passw))
+	if (!$ret = signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url_site, $message, $lang, $statut))
 		return _T('form_pet_probleme_technique');
 
 	$id_signature = sql_insertq('spip_signatures', array(
 		'id_article' => $id_article,
 		'date_time' => 'NOW()',
-		'statut' => $passw,
+		'statut' => $statut,
 		'ad_email' => $mail,
 		'url_site' => $url_site));
 
 	if (!$id_signature) return _T('form_pet_probleme_technique');
+
 	include_spip('inc/modifier');
 	revision_signature($id_signature, array(
-				'nom_email' => $nom,
-				'ad_email' => $mail,
-				'message' => $message,
-				'nom_site' => $site,
-				'url_site' => $url_site
-				));
-	return _T('form_pet_envoi_mail_confirmation',array('email'=>$mail));
+		'nom_email' => $nom,
+		'ad_email' => $mail,
+		'message' => $message,
+		'nom_site' => $site,
+		'url_site' => $url_site
+	));
+
+	return $ret;
 }
 
 // http://doc.spip.org/@signature_a_confirmer
-function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url, $msg, $lang, $passw)
+function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url, $msg, $lang, &$statut)
 {
+
+	// Si on est deja connecte et que notre mail a ete valide d'une maniere
+	// ou d'une autre, on entre directement la signature dans la base, sans
+	// envoyer d'email. Sinon email de verification
+	if (
+		// Cas 1: on est loge et on signe avec son vrai email
+		(
+		isset($GLOBALS['visiteur_session']['statut'])
+		AND $GLOBALS['visiteur_session']['session_email'] == $GLOBALS['visiteur_session']['email']
+		AND strlen($GLOBALS['visiteur_session']['email'])
+		)
+
+		// Cas 2: on a deja signe une petition, et on conserve le meme email
+		OR (
+		isset($GLOBALS['visiteur_session']['email_confirme'])
+		AND $GLOBALS['visiteur_session']['session_email'] == $GLOBALS['visiteur_session']['email_confirme']
+		AND strlen($GLOBALS['visiteur_session']['session_email'])
+		)
+	) {
+		$statut = 'publie';
+		// invalider le cache !
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='varia/pet$id_article'");
+
+		// message de reussite : en ajax, preciser qu'il faut recharger la page
+		// pour voir le resultat
+		return
+			_T('form_pet_signature_validee')
+			. (_AJAX
+				? "<br />"._T('ecrire:info_recharger_page')
+				: ''
+			);
+	}
+
+
+	//
+	// Cas normal : envoi d'une demande de confirmation
+	//
 	$row = sql_fetsel('titre,lang', 'spip_articles', "id_article=$id_article");
 	$lang = lang_select($row['lang']);
 	$titre = textebrut(typo($row['titre']));
 	if ($lang) lang_select();
 
+	$statut = signature_test_pass();
+
 	if ($lang != $GLOBALS['meta']['langue_site'])
 		  $url_page = parametre_url($url_page, "lang", $lang,'&');
 
-	$url_page = parametre_url($url_page, 'var_confirm', $passw, '&')
+	$url_page = parametre_url($url_page, 'var_confirm', $statut, '&')
 	. "#sp$id_article";
 
 	$r = _T('form_pet_mail_confirmation',
@@ -284,12 +330,12 @@ function signature_a_confirmer($id_article, $url_page, $nom, $mail, $site, $url,
 		       'url' => $url_page,
 		       'message' => $msg));
 
-spip_log($r);
-
 	$titre = _T('form_pet_confirmation')." ". $titre;
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	return $envoyer_mail($mail,$titre, $r); 
+	if ($envoyer_mail($mail,$titre, $r))
+		return _T('form_pet_envoi_mail_confirmation',array('email'=>$mail));
 
+	return false; # erreur d'envoi de l'email
 }
 
 // Pour eviter le recours a un verrou (qui bloque l'acces a la base),
@@ -320,14 +366,16 @@ function signature_entrop($where)
 	return $entrop;
 }
 
-// http://doc.spip.org/@test_pass
-function test_pass() {
+// Creer un mot de passe aleatoire et verifier qu'il est unique
+// dans la table des signatures
+// http://doc.spip.org/@signature_test_pass
+function signature_test_pass() {
 	include_spip('inc/acces');
-	for (;;) {
+	do {
 		$passw = creer_pass_aleatoire();
-		if (!sql_countsel('spip_signatures', "statut='$passw'"))
-			return $passw;
-	}
+	} while (sql_countsel('spip_signatures', "statut='$passw'") > 0);
 
+	return $passw;
 }
+
 ?>
