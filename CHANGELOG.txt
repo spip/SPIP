@@ -1,5 +1,4 @@
 Core 2.1.11->2.1.12 (16/10/2011)
-
 r18562 | ben      | 2011-09-22 22:39:46 | changelog 2.1.11
 r18580 | denisb   | 2011-09-26 08:18:59 | traduire.php : caster la globale détruite plus haut pour php5 plus rigoureux que son ancêtre.
 r18582 | fil      | 2011-09-27 10:07:59 | tiens les documents ne passaient pas par les pipelines pre_insertion / post_insertion
