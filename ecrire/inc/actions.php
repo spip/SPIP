@@ -212,7 +212,7 @@ function ajax_retour($corps,$xml = true)
 
 		$c = $GLOBALS['meta']["charset"];
 		header('Content-Type: text/html; charset='. $c);
-		$debut = $xml?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'';
+		$debut = (($xml AND strlen(trim($corps)))?'<' . "?xml version='1.0' encoding='" . $c . "'?" . ">\n":'');
 	}
 	if (count($GLOBALS['tableau_des_erreurs']) AND isset($_COOKIE['spip_admin'])) {
 		find_in_path('debug.php','public/',true);
