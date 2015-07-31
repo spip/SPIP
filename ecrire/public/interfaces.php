@@ -237,7 +237,7 @@ function declarer_interfaces(){
 	$table_des_traitements['ENV'][]= 'entites_html(%s,true)';
 
 	// valeur par defaut pour les balises non listees ci-dessus
-	$table_des_traitements['*'][]= '%s';
+	$table_des_traitements['*'][]= false; // pas de traitement, mais permet au compilo de trouver la declaration suivante
 	// toujours securiser les DATA
 	$table_des_traitements['*']['DATA']= 'safehtml(%s)';
 

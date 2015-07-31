@@ -360,18 +360,27 @@ function champs_traitements ($p) {
 		$ps = $table_des_traitements['*'];
 
 	if (is_array($ps)) {
-	  // new style
+	  // Recuperer le type de boucle (articles, DATA) et la table SQL sur laquelle elle porte
+		if ($p->nom_boucle){
+			$type_requete = $p->boucles[$p->nom_boucle]->type_requete;
+			$table_sql = isset($p->boucles[$p->nom_boucle]->show['table_sql'])?$p->boucles[$p->nom_boucle]->show['table_sql']:false;
+		}
+		else{
+			$type_requete = $p->type_requete;
+			$table_sql = isset($p->boucles[$p->id_boucle]->show['table_sql'])?$p->boucles[$p->id_boucle]->show['table_sql']:false;
+		}
 
-		if ($p->nom_boucle)
-			$type = $p->boucles[$p->nom_boucle]->type_requete;
-		else
-			$type = $p->type_requete;
-		// le traitement peut n'etre defini que pour une table en particulier
-		if (isset($ps[$type]))
-			$ps = $ps[$type];
+		// le traitement peut n'etre defini que pour une table en particulier "spip_articles"
+		if ($table_sql AND isset($ps[$table_sql]))
+			$ps = $ps[$type_requete];
+		// ou pour une boucle en particulier "DATA","articles"
+		elseif (isset($ps[$table_sql]))
+			$ps = $ps[$type_requete];
+		// ou pour indiferrement quelle que soit la boucle
 		elseif(isset($ps[0]))
 			$ps = $ps[0];
-		else $ps=false;
+		else
+			$ps=false;
 	}
 
 	if (!$ps) return $p->code;
