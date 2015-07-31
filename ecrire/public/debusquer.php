@@ -437,6 +437,7 @@ function debusquer_boucles($boucles, $nom_skel, $self)
 			$i++;
 			$nom = $boucle->id_boucle;
 			$req = $boucle->type_requete;
+			$crit = decompiler_criteres($boucle->param, $boucle->criteres);
 			$self2 = $self .  "&amp;var_mode_objet=" .  $objet;
 
 			$res .= "\n<tr style='background-color: " .
@@ -462,6 +463,8 @@ function debusquer_boucles($boucles, $nom_skel, $self)
 			  (($var_mode_objet == $objet) ? "<b>$nom</b>" : $nom) .
 			  "</td><td>\n" .
 			  $req .
+			  "</td><td>\n" .
+			  $crit .
 			  "</td></tr>";
 		}
 	}
