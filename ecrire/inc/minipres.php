@@ -35,6 +35,8 @@ function install_debut_html($titre = 'AUTO', $onLoad = '') {
 	if (!headers_sent())
 		header('Content-Type: text/html; charset=utf-8');
 	
+	// au cas ou minipres() est appele avant spip_initialisation_suite()
+	@define('_DOCTYPE_ECRIRE', '');
 	return  _DOCTYPE_ECRIRE.
 		html_lang_attributes().
 		"<head>\n".
