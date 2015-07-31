@@ -22,10 +22,10 @@
 	</div>
 ]</BOUCLE_G>[
 (#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
-<br /><div align='right'>[
-<input type='hidden' name='titre' value='(#ENV{titre})' />]
-<input type='submit' class='spip_bouton' value="<:forum_valider:>" />
-</div>][
+<br />
+[<input type="hidden" name="titre" value="(#ENV{titre})" />]
+<input type="submit" class="spip_bouton" value="<:forum_valider:>" />
+][
 (#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 		<fieldset class="spip_encadrer">
 		<legend><strong><:forum_titre:></strong></legend>
@@ -59,7 +59,5 @@
 				readonly='(#ENV{readonly})'] /></p>
 		</fieldset>
 
-		<div align="#LANG_RIGHT">
-		<input type="submit" value="<:forum_voir_avant:>"
-		class="spip_bouton" /></div>
+		<input type="submit" value="<:forum_voir_avant:>" class="spip_bouton" />
 ]</form>

@@ -1,28 +1,21 @@
 <p><:participer_site:></p>
 [(#ENV*{message})]
-[
-(#ENV*{message}|?{'',' '})[
- (#ENV{mode}|=={forum}|?{' ',''})
-	<:pass_forum_bla:><br /><br />
-][
- (#ENV{mode}|=={redac}|?{' ',''})<:pass_espace_prive_bla:>
-<br /><br />
-]<div class='spip_serif'><:form_forum_indiquer_nom_email:>
-<br /><br />
-<form	id="inscription" method='post' action="[(#ENV{self})]">
-	<fieldset class='spip_sanscadre'>
+[(#ENV*{message}|?{'',' '})[
+ (#ENV{mode}|=={forum}|?{' ',''})<:pass_forum_bla:><br /><br />]
+[(#ENV{mode}|=={redac}|?{' ',''})<:pass_espace_prive_bla:><br /><br />]
+<form id="inscription" method='post' action="[(#ENV{self})]">
+	<fieldset class="spip_encadrer">
 		<legend><:form_forum_identifiants:></legend>
+		<p><:form_forum_indiquer_nom_email:></p>
 		<p><label><:form_pet_votre_nom:></label>
 		  <input type="text" class="forml" name="nom_inscription" value="" size="30" /></p>
 		<p><label><:form_pet_votre_email:></label>
 		  <input type="text" class="forml" name="mail_inscription" value="" size="30" /></p>
 	</fieldset>
-	<div align="right">
-		<input type="submit" class="spip_bouton" value="<:bouton_valider:>" />
-	</div> 
+<input type="submit" class="spip_bouton" value="<:bouton_valider:>" />
 </form>
-</div>[
-<script type="text/javascript"><!--
+</div>
+[<script type="text/javascript"><!--
 document.inscription.(#ENV{focus}).focus()
 --></script>]
 ][<br />
