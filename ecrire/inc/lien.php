@@ -189,7 +189,7 @@ function traiter_autoliens($r) {
 	return $m ? $r : str_replace('>http://', '>', $r);
 }
 
-define('_EXTRAIRE_LIENS', ',' . '\[[^\[\]]*(?:<-|->).*?\]' . '|<a\b.*?</a\b' . '|<.*?>' . '|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*)' .',imsS');
+define('_EXTRAIRE_LIENS', ',' . '\[[^\[\]]*(?:<-|->).*?\]' . '|<a\b.*?</a\b' . '|<\w.*?>' . '|((?:https?:/|www\.)[^"\'\s\[\]\}\)<>]*)' .',imsS');
 
 // Les URLs brutes sont converties en <a href='url'>url</a>
 // http://doc.spip.org/@traiter_raccourci_liens
