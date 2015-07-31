@@ -193,7 +193,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		$num_echap++;
 
 		$letexte = str_replace($match[0],
-			"@@SPIP_$source$num_echap@@", $letexte);
+			"</no p>@@SPIP_$source$num_echap@@<no p>", $letexte);
 		$les_echap[$num_echap] = $match;
 	}
 
@@ -932,11 +932,12 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
 
 	// paragrapher
-	if (strpos(' '.$letexte, '<p class="spip">')) {
+	if (strpos(' '.$letexte, '<p class="spip">')) # ce test est destine a disparaitre, avec un impact sur les textes a un seul paragraphe
+	{
 		$letexte = '<p class="spip">'.str_replace('<p class="spip">', "</p>\n".'<p class="spip">', $letexte).'</p>';
-		$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*</no p>', '', $letexte);
-		$letexte = ereg_replace('<no p>[[:space:]]*(</p>)?', '', $letexte);
 	}
+	$letexte = preg_replace(',(<p class="spip">)?\s*(<center>)?\s*</no p>,ims', '\2', $letexte);
+	$letexte = preg_replace(',<no p>\s*(</center>)?\s*(</p>)?,ims', '\1', $letexte);
 
 	// intertitres / hr / blockquote / table / ul compliants
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
