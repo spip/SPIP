@@ -30,7 +30,7 @@ $debug = false;
 $spip_version = 1.469;
 
 // version de spip
-$spip_version_affichee = "1.5a2 CVS";
+$spip_version_affichee = "1.5a3 CVS";
 
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
