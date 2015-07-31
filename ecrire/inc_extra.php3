@@ -14,7 +14,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Pour utiliser les champs "extra", il faut installer dans le fichier
-// ecrire/mes_options.php3 un tableau definissant les champs pour chaque
+// ecrire/mes_options un tableau definissant les champs pour chaque
 // type d'objet que l'on veut Žtendre (article, rubrique, breve, auteur,
 // site ou mot). Pour acceder aux valeurs des champs extra dans les
 // squelettes du site public, utiliser la notation :

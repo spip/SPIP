@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function afficher_barre($champ, $forum=false) {
 	global $barre_typo;
 	tester_variable("barre_typo", "spip");
-	if($barre_typo != '' &&  file_exists(_DIR_RESTREINT."inc_barre_$barre_typo.php3")) {
+	if($barre_typo != '' &&  file_exists(_DIR_RESTREINT."inc_barre_$barre_typo" . _EXTENSION_PHP)) {
 		include_ecrire("inc_barre_$barre_typo");
 		$f = "afficher_barre_$barre_typo";
 		if(function_exists($f)) {
