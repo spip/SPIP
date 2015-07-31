@@ -6,7 +6,7 @@
  *    
  * @author Renato Formato <renatoformato@virgilio.it> 
  *  
- * @version 0.33
+ * @version 0.34
  *
  *  Options
  *  - exact (string, default:"exact") 
@@ -40,6 +40,9 @@
  *  - keys (string, default:null)
  *    Disable the analisys of the referrer and search for the words given as argument    
  *    
+ *  - min_length (number, defalt:null)
+ *    Set the minimun length of a key  
+ *   
  */
 
 (function($){
@@ -50,20 +53,21 @@
     SearchHighlight.options = $.extend({exact:"exact",style_name:'hilite',style_name_suffix:true},options);
     
     if(options.engines) SearchHighlight.engines.unshift(options.engines);  
-    var q = options.keys!=undefined?options.keys.toLowerCase().split(/[\s,\+\.]+/):SearchHighlight.decodeURL(ref,SearchHighlight.engines);
+    var q = SearchHighlight.splitKeywords(options.keys!=undefined?options.keys.toLowerCase():SearchHighlight.decodeURL(ref,SearchHighlight.engines));
     if(q && q.join("")) {
       SearchHighlight.buildReplaceTools(q);
+      if(!SearchHighlight.regex) return this;
       return this.each(function(){
         var el = this;
         if(el==document) el = $("body")[0];
-        SearchHighlight.hiliteElement(el, q); 
+        SearchHighlight.hiliteElement(el); 
       })
     } else return this;
   };    
 
   var SearchHighlight = {
     options: {},
-    regex: [],
+    regex: null,
     engines: [
     [/^http:\/\/(www\.)?google\./i, /q=([^&]+)/i],                            // Google
     [/^http:\/\/(www\.)?search\.yahoo\./i, /p=([^&]+)/i],                     // Yahoo
@@ -96,13 +100,29 @@
         }
       });
       
-      if (query) {
-      query = query.replace(/(\'|")/, '\$1');
-      query = query.split(/[\s,\+\.]+/);
-      }
-      
       return query;
     },
+    splitKeywords: function(query) {
+      if(query) {
+        //do not split keywords enclosed by "
+        var m = query.match(/"([^"]*)"/g); 
+        if(m)
+          for(var i=0, ml=m.length;i<ml;i++) {
+            var regex = new RegExp(m[i]);
+            query = query.replace(regex,'@@@'+i+'@@@');
+          }
+        query = query.split(/[\s,\+\.]+/);
+        if(m)
+          for(var i=0,l = query.length;i<l;i++) {
+            for(var j=0, ml=m.length;j<ml;j++) {
+              var regex = new RegExp("@@@"+j+"@@@");
+              query[i] = query[i].replace(regex,m[j].substring(1,m[j].length-1))
+            }
+          }
+      };
+      return query;
+    },
+    
 		regexAccent : [
       [/[\xC0-\xC5\u0100-\u0105]/ig,'a'],
       [/[\xC7\u0106-\u010D]/ig,'c'],
@@ -129,10 +149,12 @@
     buildReplaceTools : function(query) {
         var re = [], regex;
         $.each(query,function(i,n){
-            if(n = SearchHighlight.replaceAccent(n).replace(SearchHighlight.escapeRegEx,"$1\\$2"))
-              re.push(n);        
+            if(SearchHighlight.options.min_length && n.length>=SearchHighlight.options.min_length)
+              if(n = SearchHighlight.replaceAccent(n).replace(SearchHighlight.escapeRegEx,"$1\\$2"))
+                re.push(n);        
         });
         
+        if(!re.length) return;
         regex = re.join("|");
         switch(SearchHighlight.options.exact) {
           case "exact":
@@ -150,17 +172,17 @@
         });       
     },
     nosearch: /s(?:cript|tyle)|textarea/i,
-    hiliteElement: function(el, query) {
+    hiliteElement: function(el) {
         var opt = SearchHighlight.options, elHighlight, noHighlight;
         elHighlight = opt.highlight?$(opt.highlight):$("body"); 
         if(!elHighlight.length) elHighlight = $("body"); 
         noHighlight = opt.nohighlight?$(opt.nohighlight):$([]);
                 
         elHighlight.each(function(){
-          SearchHighlight.hiliteTree(this,query,noHighlight);
+          SearchHighlight.hiliteTree(this,noHighlight);
         });
     },
-    hiliteTree : function(el,query,noHighlight) {
+    hiliteTree : function(el,noHighlight) {
         if(noHighlight.index(el)!=-1) return;
         var matchIndex = SearchHighlight.options.exact=="whole"?1:0;
         for(var startIndex=0,endIndex=el.childNodes.length;startIndex<endIndex;startIndex++) {
@@ -186,7 +208,7 @@
               }                
             } else {
               if(item.nodeType==1 && item.nodeName.search(SearchHighlight.nosearch)==-1)
-                  SearchHighlight.hiliteTree(item,query,noHighlight);
+                  SearchHighlight.hiliteTree(item,noHighlight);
             }	
           }
         }    
