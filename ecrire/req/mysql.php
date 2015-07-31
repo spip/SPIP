@@ -138,7 +138,9 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	$connexion['last'] = $query;
 	$r = $link ? mysql_query($query, $link) : mysql_query($query);
 
-	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
+	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
+		$e .= spip_mysql_error($query, $serveur); // et du fautif
+	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 }
 
 // http://doc.spip.org/@spip_mysql_alter
@@ -511,24 +513,26 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	return $c;
 }
 
+// Bien specifier le serveur auquel on s'adresse,
+// mais a l'install la globale n'est pas encore completement definie
 // http://doc.spip.org/@spip_mysql_error
-function spip_mysql_error($serveur='') {
-	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-	$link = $connexion['link'];
-	$e = ($link ? mysql_error($link) : mysql_error());
-	return  ($e ? $e . $connexion['last']:'');
+function spip_mysql_error($query='', $serveur='',$requeter=true) {
+	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	$s = $link ? mysql_error($link) : mysql_error();
+	if ($s) spip_log("$s - $query", 'mysql');
+	return $s;
 }
 
 // A transposer dans les portages
 // http://doc.spip.org/@spip_mysql_errno
-function spip_mysql_errno($serveur='') {
-	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
-	$link = $connexion['link'];
+function spip_mysql_errno($serveur='',$requeter=true) {
+	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
 	$s = $link ? mysql_errno($link) : mysql_errno();
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
 		define('spip_interdire_cache', true);
+	if ($s) spip_log("Erreur mysql $s");
 	return $s;
 }
 
@@ -566,9 +570,11 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 #	spip_log($query);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
-	else $r = false;
-
-	return $t ? trace_query_end($query, $t, $r, $serveur) : $r;
+	else {
+	  if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
+		$e .= spip_mysql_error($query, $serveur); // et du fautif
+	}
+	return $t ? trace_query_end($query, $t, $r, $e, $serveur) : $r;
 
 	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }
