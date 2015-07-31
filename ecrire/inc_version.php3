@@ -594,7 +594,9 @@ function http_gmoddate($lastmodified) {
 }
 function http_last_modified($lastmodified, $expire = 0) {
 	$gmoddate = http_gmoddate($lastmodified);
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']) {
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']
+	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
+	{
 		$if_modified_since = ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
 		if ($if_modified_since == $gmoddate) {
