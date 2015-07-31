@@ -82,7 +82,7 @@ function argumenter_inclure($params, $rejet_filtres, $descr, &$boucles, $id_bouc
 				  if ($var !== 1)
 				    $val = ($echap?"\'$var\' => ' . argumenter_squelette(":"'$var' => ")
 				    . $val . ($echap? ") . '":" ");
-
+				  else $val = $echap ? "'.$val.'" : $val;
 				  $l[$var] = $val;
 				}
 			}
