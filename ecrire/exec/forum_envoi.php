@@ -131,6 +131,7 @@ function forum_envoi(
 	  . fin_page();
 }
 
+// http://doc.spip.org/@forum_envoi_articles
 function forum_envoi_articles($id, $row, $retour) {
 	$table ='articles';
 	$objet = 'id_article';
@@ -141,6 +142,7 @@ function forum_envoi_articles($id, $row, $retour) {
 	return array($table, $objet, $titre, $num, $retour, $id, '');
 }
 
+// http://doc.spip.org/@forum_envoi_breves_voir
 function forum_envoi_breves_voir($id, $row, $retour) {
 	$table = 'breves';
 	$objet = 'id_breve';
@@ -151,6 +153,7 @@ function forum_envoi_breves_voir($id, $row, $retour) {
 	return array($table, $objet, $titre, $num, $retour, $id, '');
 }
 
+// http://doc.spip.org/@forum_envoi_message
 function forum_envoi_message($id, $row, $retour) {
 	$table = 'messages';
 	$objet = 'id_message';
@@ -161,6 +164,7 @@ function forum_envoi_message($id, $row, $retour) {
 	return array($table, $objet, $titre, $num, $retour, $id, '');
 }
 
+// http://doc.spip.org/@forum_envoi_naviguer
 function forum_envoi_naviguer($id, $row, $retour) {
 	$table = 'rubriques';
 	$objet = 'id_rubrique';
@@ -171,6 +175,7 @@ function forum_envoi_naviguer($id, $row, $retour) {
 	return array($table, $objet, $titre, $num, $retour, $id, '');
 }
 
+// http://doc.spip.org/@forum_envoi_sites
 function forum_envoi_sites($id, $row, $retour) {
 	$table = 'syndic';
 	$objet = 'id_syndic';
@@ -181,6 +186,7 @@ function forum_envoi_sites($id, $row, $retour) {
 	return array($table, $objet, $titre, $num, $retour, $id, '');
 }
 
+// http://doc.spip.org/@forum_envoi_forum
 function forum_envoi_forum($id, $row, $retour) {
 
 	$table = $titre = $num = '';
@@ -192,6 +198,7 @@ function forum_envoi_forum($id, $row, $retour) {
 	return array($table, $objet, $titre, $num, $retour, $id, $corps);
 }
 
+// http://doc.spip.org/@forum_envoi_forum_admin
 function forum_envoi_forum_admin($id, $row, $retour) {
 	return forum_envoi_forum($id, $row, $retour);
 }
