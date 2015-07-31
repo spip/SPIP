@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Duplicata de la fonction disponible dans _core_/forum/urls
  * pour permettre l'utilisation du plugin urls_etendues avec spip 2.0

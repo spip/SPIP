@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // infos :
 // il ne faut pas avoir de PDO::CONSTANTE dans ce fichier sinon php4 se tue !
 // idem, il ne faut pas de $obj->toto()->toto sinon php4 se tue !

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function instituer_breve($id_breve, $id_rubrique, $statut=-1){
 	$statut_rubrique = autoriser('publierdans', 'rubrique', $id_rubrique);
 	if ($statut_rubrique) {

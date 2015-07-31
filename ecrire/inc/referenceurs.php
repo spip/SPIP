@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 //
 // Afficher les referers d'un article (ou du site)
 //
