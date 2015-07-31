@@ -181,7 +181,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		}
 
 		// Faut-il exposer ?
-		$code = '(calcul_exposer($Pile[$SP], $Pile[0]) ? \'$on\': \'$off\')';
+		$code = '(calcul_exposer($Pile[$SP], $Pile[0]) ?'." '$on': '$off')";
 
 		break;
 
