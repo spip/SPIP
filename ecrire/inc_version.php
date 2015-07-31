@@ -9,81 +9,113 @@
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
-#
+
+/**
+ * Initialisation de SPIP 
+ *
+ * @package SPIP\Chargement
+**/
 
 if (defined('_ECRIRE_INC_VERSION')) return;
+
+/**
+ * Indique que SPIP est chargé
+ *
+ * Cela permet des tests de sécurités pour les fichiers PHP
+ * de SPIP et des plugins qui peuvent vérifier que SPIP est chargé
+ * et donc que les fichiers ne sont pas appelés en dehors de l'usage de SPIP
+ */
 define('_ECRIRE_INC_VERSION', "1");
 
 # masquer les eventuelles erreurs sur les premiers define
 error_reporting(E_ALL ^ E_NOTICE);
 
-# version PHP minimum exigee (cf. inc/utils)
+/** version PHP minimum exigee (cf. inc/utils) */
 define ('_PHP_MIN', '5.1.0');
 
-# le nom du repertoire ecrire/
+/** le nom du repertoire ecrire/ */
 if (!defined('_DIR_RESTREINT_ABS')) define('_DIR_RESTREINT_ABS', 'ecrire/');
-# sommes-nous dans ecrire/ ?
+
+/**
+ * Chemin relatif pour aller dans ecrire
+ *
+ * - vide si on est dans ecrire
+ * - 'ecrire/' sinon
+ */
 define('_DIR_RESTREINT',
  (!is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
-# ou inversement ?
+
+/**
+ * Chemin relatif pour aller à la racine
+ *
+ * - vide si on est dans le public
+ * - '../' sinon
+ */
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
-# chemins absolus
+/** chemin absolu vers la racine */
 define('_ROOT_RACINE', dirname(dirname(__FILE__)).'/');
+/** chemin absolu vers le repertoire de travail */
 define('_ROOT_CWD', getcwd().'/');
+/** chemin absolu vers ecrire */
 define('_ROOT_RESTREINT', _ROOT_CWD . _DIR_RESTREINT);
 
 // Icones
-# nom du dossier images
+/** Nom du dossier images */
 if (!defined('_NOM_IMG_PACK')) define('_NOM_IMG_PACK', 'images/');
-# le chemin http (relatif) vers les images standard
+/** le chemin http (relatif) vers les images standard */
 define('_DIR_IMG_PACK', (_DIR_RACINE . 'prive/' . _NOM_IMG_PACK));
 
-# le chemin php (absolu) vers les images standard (pour hebergement centralise)
+/** le chemin php (absolu) vers les images standard (pour hebergement centralise) */
 define('_ROOT_IMG_PACK', dirname(dirname(__FILE__)) . '/prive/' . _NOM_IMG_PACK);
 
-# le nom du repertoire des  bibliotheques JavaScript
+/** Nom du repertoire des  bibliotheques JavaScript */
 if (!defined('_JAVASCRIPT')) define('_JAVASCRIPT', 'javascript/'); // utilisable avec #CHEMIN et find_in_path
+/** le nom du repertoire des  bibliotheques JavaScript du prive */
 define('_DIR_JAVASCRIPT', (_DIR_RACINE . 'prive/' . _JAVASCRIPT));
 
 # Le nom des 4 repertoires modifiables par les scripts lances par httpd
 # Par defaut ces 4 noms seront suffixes par _DIR_RACINE (cf plus bas)
 # mais on peut les mettre ailleurs et changer completement les noms
 
-# le nom du repertoire des fichiers Temporaires Inaccessibles par http://
+/** le nom du repertoire des fichiers Temporaires Inaccessibles par http:// */
 if (!defined('_NOM_TEMPORAIRES_INACCESSIBLES')) define('_NOM_TEMPORAIRES_INACCESSIBLES', "tmp/");
-# le nom du repertoire des fichiers Temporaires Accessibles par http://
+/** le nom du repertoire des fichiers Temporaires Accessibles par http:// */
 if (!defined('_NOM_TEMPORAIRES_ACCESSIBLES')) define('_NOM_TEMPORAIRES_ACCESSIBLES', "local/");
-# le nom du repertoire des fichiers Permanents Inaccessibles par http://
+/** le nom du repertoire des fichiers Permanents Inaccessibles par http:// */
 if (!defined('_NOM_PERMANENTS_INACCESSIBLES')) define('_NOM_PERMANENTS_INACCESSIBLES', "config/");
-# le nom du repertoire des fichiers Permanents Accessibles par http://
+/** le nom du repertoire des fichiers Permanents Accessibles par http:// */
 if (!defined('_NOM_PERMANENTS_ACCESSIBLES')) define('_NOM_PERMANENTS_ACCESSIBLES', "IMG/");
 
-/*
- * detecteur de robot d'indexation
- * utilise en divers endroits, centralise ici
+
+if (!defined('_IS_BOT')) {
+/**
+ * Détecteur de robot d'indexation
+ * 
+ * Utilisé en divers endroits, centralisé ici
  */
-if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
 		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex,i',
 			$_SERVER['HTTP_USER_AGENT'])
 	);
+}
 
-
-// Le nom du fichier de personnalisation
+/** Le nom du fichier de personnalisation */
 if (!defined('_NOM_CONFIG')) define('_NOM_CONFIG', 'mes_options');
 
 // Son emplacement absolu si on le trouve
 if (@file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . _NOM_CONFIG . '.php')
 OR (@file_exists($f = _ROOT_RESTREINT . _NOM_CONFIG . '.php'))) {
+	/** Emplacement absolu du fichier d'option */
 	define('_FILE_OPTIONS', $f);
 } else define('_FILE_OPTIONS', '');
 
-// les modules par defaut pour la traduction.
-// Constante utilisee par le compilateur et le decompilateur
-// sa valeur etant traitee par inc_traduire_dist
-
+/**
+ * Modules par défaut pour la traduction.
+ * 
+ * Constante utilisée par le compilateur et le décompilateur
+ * sa valeur etant traitée par inc_traduire_dist */
 if (!defined('MODULES_IDIOMES')) define('MODULES_IDIOMES', 'public|spip|ecrire');
 
 // *** Fin des define *** //
@@ -324,12 +356,13 @@ require_once _ROOT_RESTREINT . 'base/connect_sql.php';
 
 if (_FILE_OPTIONS) {include_once _FILE_OPTIONS;}
 
-// Masquer les warning
-if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192); // compatibilite PHP 5.3
+/** Compatibilite PHP 5.3 */
+if (!defined('E_DEPRECATED')) define('E_DEPRECATED', 8192);
+/** Masquer les warning */
 if (!defined('SPIP_ERREUR_REPORT')) define('SPIP_ERREUR_REPORT', E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 error_reporting(SPIP_ERREUR_REPORT);
 
-// niveau maxi d'enregistrement des logs
+/** niveau maxi d'enregistrement des logs */
 defined('_LOG_FILTRE_GRAVITE') || define('_LOG_FILTRE_GRAVITE', _LOG_INFO_IMPORTANTE);
 
 // Initialisations critiques non surchargeables par les plugins
@@ -396,8 +429,12 @@ OR _request('action') == 'test_dirs')) {
 }
 
 
-// Vanter notre art de la composition typographique
-// La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
+/**
+ * Header "Composed-By"
+ * 
+ * Vanter notre art de la composition typographique
+ * La globale $spip_header_silencieux permet de rendre le header minimal pour raisons de securite
+ */
 if (!defined('_HEADER_COMPOSED_BY')) define('_HEADER_COMPOSED_BY', "Composed-By: SPIP");
 if (!headers_sent()) {
 	header("Vary: Cookie, Accept-Encoding");
