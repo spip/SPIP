@@ -22,7 +22,7 @@
 		  <ol class="formfx">
 		    <li class="editer_login obligatoire">
 		      <label for="var_login"><:login_login2:></label>
-		      <input class='text' type='text' name='var_login' id='var_login' class='forml' value="[(#ENV**{var_login})]" size='40' />
+		      <input class='text forml' type='text' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40' />
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{var_login})</span>]
 		    </li>
 		    <li class="editer_password obligatoire">
