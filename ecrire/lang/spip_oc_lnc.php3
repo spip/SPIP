@@ -190,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'S&egrave;tz ja inscrich(a).',
 'form_email_non_valide' => 'V&ograve;stra adrei&ccedil;a e-mail es pas valida.',
 'form_forum_access_refuse' => 'Pod&egrave;tz pas mai accedir a aquel sit.',
-'form_forum_bonjour' => 'Bonjorn,',
+'form_forum_bonjour' => 'Bonjorn @nom@,,',
 'form_forum_email_deja_enregistre' => 'Aquela adrei&ccedil;a e-mail ja es registrada, adoncas pod&egrave;tz utilizar v&ograve;stre mot de santa Clara costumi&egrave;r.',
 'form_forum_identifiant_mail' => 'Vos av&egrave;m mandat v&ograve;stre identificant nov&egrave;l per e-mail.',
 'form_forum_identifiants' => 'Identificants personals',
@@ -282,7 +282,7 @@ Merc&eacute;s per v&ograve;stra participacion
   aquel forum, primi&egrave;r vos cal registrar. Merc&eacute;s
   de marcar &ccedil;ai sota l\'identificant personal qu\'av&egrave;tz recebut.
  Se s&egrave;tz pas registrat/ada, av&egrave;tz de',
-'forum_vous_inscrire' => '<MODIF>vos inscriure </a> d\'en primi&egrave;r.',
+'forum_vous_inscrire' => 'vos inscriure ',
 
 
 // I
@@ -374,9 +374,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_contact_developpeur' => 'Volgatz contactar un desvolopaire.',
 'info_contenance' => 'Aquel sit conten:',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => '<MODIF>es un logicial liure distribuit <a href=\'copyright_fr.html\'>jos lic&eacute;ncia GPL.</a>',
+'info_copyright' => '@spip@ es un logicial liure distribuit @lien_gpl@.',
 'info_copyright_doc' => ' Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
-'info_copyright_gpl' => '<NEW>sous licence GPL',
+'info_copyright_gpl' => 'jos lic&eacute;ncia GPL',
 'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Volgatz crear un fichi&egrave;r o un repert&ograve;ri nommat',
 'info_creer_repertoire_2' => 'dintre lo sosrepert&ograve;ri   <b>ecrire/data/</b>, pu&egrave;i:',

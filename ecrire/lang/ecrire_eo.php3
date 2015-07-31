@@ -439,7 +439,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_popularite_2' => 'populareco de la teksejo&nbsp;:',
 'info_popularite_3' => 'populareco&nbsp;:&nbsp;@popularite@&nbsp;; vizito&nbsp;:&nbsp;@visites@',
 'info_popularite_4' => 'populareco&nbsp;:&nbsp;@popularite@&nbsp;; vizitoj&nbsp;:&nbsp;@visites@',
-'info_popularite_5' => 'populareco&nbsp;:',
 'info_post_scriptum' => 'Postskribo',
 'info_post_scriptum_2' => 'Postskribo:',
 'info_pour' => 'por',
