@@ -39,8 +39,23 @@ function formulaires_login_charger_dist($cible="",$login="",$prive=null){
 	// si la duree de l'alea est inferieure a 12 h (valeur par defaut)
 	$rester_connecte = (_RENOUVELLE_ALEA < 12*3600) ? '' : ' ';
 
+	// Gerer le cas ou un utilisateur ne souhaite pas de cookie
+	// on propose alors un formulaire pour s'authentifier via http
+	$auth_http = '';	
+	if (!$ignore_auth_http
+		AND _request('var_erreur')=='cookie' 
+		AND $_COOKIE['spip_session'] != 'test_echec_cookie'
+		AND (($GLOBALS['flag_sapi_name'] AND preg_match(",apache,i", @php_sapi_name()))
+			OR preg_match(",^Apache.* PHP,", $_SERVER['SERVER_SOFTWARE']))
+		// Attention dans le cas 'intranet' la proposition de se loger
+		// par auth_http peut conduire a l'echec.
+		AND !(isset($_SERVER['PHP_AUTH_USER']) AND isset($_SERVER['PHP_AUTH_PW'])))
+	{
+		$auth_http = generer_url_action('cookie',"",false,true);
+	}
+		
 	$valeurs = array(
-		#'auth_http' => $auth_http,
+		'auth_http' => $auth_http,
 		'var_login' => $login,
 		'rester_connecte' => $rester_connecte,
 		'_logo' => isset($auteur['logo'])?$auteur['logo']:'',
@@ -104,18 +119,6 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 	$session_md5next = _request('next_session_password_md5');
 	$session_remember = _request('session_remember');
 
-	#$pose_cookie = generer_url_action('cookie',"",false,true);
-	$auth_http = '';	
-	if ($echec_cookie AND !$ignore_auth_http) {
-		if (($GLOBALS['flag_sapi_name']
-		     AND preg_match(",apache,i", @php_sapi_name()))
-		OR preg_match(",^Apache.* PHP,", $_SERVER['SERVER_SOFTWARE']))
-			$auth_http = $pose_cookie;
-	}
-	// Attention dans le cas 'intranet' la proposition de se loger
-	// par auth_http peut conduire a l'echec.
-	if (isset($_SERVER['PHP_AUTH_USER']) AND isset($_SERVER['PHP_AUTH_PW']))
-		$auth_http = '';
 
 	if ($session_login) {
 		$row =  sql_fetsel('*', 'spip_auteurs', "login=" . sql_quote($session_login));

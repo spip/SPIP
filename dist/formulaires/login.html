@@ -42,8 +42,8 @@
 		</fieldset>
 	</form>
 	]
-	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif 
-	<form action="(#ENV{auth_http})" method="get">[
+	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]
+	[<form action="(#ENV{auth_http})" method="get">[
 	(#ENV{auth_http}|form_hidden)
 	]
 	<fieldset>
