@@ -22,7 +22,7 @@
 
 		<ul>
 		[(#ENV{id_syndic}|intval|sinon{#ENV{url_site}}|non)
-		[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_site}|=={oui}|oui})
+			[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_sites}|>{0}|oui})
 			<li class="editer_referencement_automatise fieldset">
 			  <fieldset>
 				  <ul>
