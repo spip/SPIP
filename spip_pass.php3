@@ -84,7 +84,7 @@ if ($erreur)
 	echo "<font color='red' size='+1'><b>$erreur</b></font>";
 else {
 	if ($inscription_ecrire || forums_sur_abo()) {
-		echo "<small>";
+		echo "<font size=2>";
 		if ($inscriptions_ecrire) {
 			echo propre ("L'espace priv&eacute; de ce site est ouvert aux visiteurs,
 			apr&egrave;s inscription. Votre identifiant vous permettra de consulter
@@ -96,7 +96,7 @@ else {
 		}
 		echo "\n<p>".propre ("Pour obtenir votre identifiant personnel,
 		indiquez ici votre nom et votre adresse email. Les codes vous
-		parviendront rapidement par courrier électronique.");
+		parviendront rapidement par courrier &eacute;lectronique.");
 
 		formulaire_inscription();
 	}
@@ -105,17 +105,17 @@ else {
 
 	gros_titre("Mot de passe oubli&eacute;?");
 
-	echo "<p>".propre("indiquez ci-dessous l'adresse email sous laquelle vous
+	echo "<p><div align='left'>".propre("Indiquez ci-dessous l'adresse email sous laquelle vous
 		vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
 		recevrez un email vous indiquant la marche &agrave; suivre pour
-		r&eacute;cup&eacute;rer votre acc&egrave;s.");
+		r&eacute;cup&eacute;rer votre acc&egrave;s.")."</div>";
 
 	echo '<form action="spip_pass.php3" method="post">';
 	echo '<div align="right">';
 	echo '<input type="text" name="email_oubli" value="">';
 	echo '  <input type=submit name="oubli" value="Vite !" class="spip_bouton"></div></form>';
 
-	echo "</small>";
+	echo "</font>";
 }
 
 echo "<p align='right'><script type='text/javascript'><!--
