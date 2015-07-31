@@ -15,8 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@afficher_debug_contexte
 function afficher_debug_contexte($env) {
-	static $n;
-	$n++;
 
 	if (is_array($env_tab = @unserialize($env)))
 		$env = $env_tab;
@@ -211,7 +209,6 @@ define('_DEBUG_MAX_SQUELETTE_ERREURS', 4);
 // http://doc.spip.org/@erreur_squelette
 function erreur_squelette($message='', $lieu='') {
 	global $tableau_des_erreurs;
-	static $runs;
 
 	if (is_array($message)) list($message, $lieu) = $message;
 
@@ -219,7 +216,7 @@ function erreur_squelette($message='', $lieu='') {
 	$GLOBALS['bouton_admin_debug'] = true;
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
-	if (++$runs > _DEBUG_MAX_SQUELETTE_ERREURS AND _DEBUG_MAX_SQUELETTE_ERREURS) {
+	if (count($tableau_des_erreurs) > _DEBUG_MAX_SQUELETTE_ERREURS AND _DEBUG_MAX_SQUELETTE_ERREURS) {
 		if ($_COOKIE['spip_admin'] OR
 		($GLOBALS['var_mode'] == 'debug')) {
 			include_spip('inc/minipres');
