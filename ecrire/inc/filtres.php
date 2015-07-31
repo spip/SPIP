@@ -2420,12 +2420,17 @@ function _xor($message, $key=null){
  *
  * @param string $url
  * @param string $libelle
+ *   le texte du lien
  * @param bool $on
+ *   etat expose (genere un strong) ou non (genere un lien)
  * @param string $class
  * @param string $title
+ * @param string $rel
+ * @param string $evt
+ *   complement a la balise a pour gerer un evenement javascript, de la forme " onclick='...'"
  * @return string
  */
-function lien_ou_expose($url,$clic,$on=false,$class="",$title="",$rel="", $evt=''){
+function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel="", $evt=''){
 	if ($on) {
 		$bal = "strong";
 		$att = "class='on'";
@@ -2438,12 +2443,7 @@ function lien_ou_expose($url,$clic,$on=false,$class="",$title="",$rel="", $evt='
 		.$evt;
 	}
 
-	if (!preg_match('@^<(p|div)([^>]*)>(.*)</\1>$@', $clic, $r))
-		return "<$bal $att>$clic</$bal>";
-	else {
-		list(,$b,$a,$c) = $r;
-		return "<$b$a><$bal $att>$c</$bal></$b>";
-	}
+	return "<$bal $att>$libelle</$bal>";
 }
 
 
