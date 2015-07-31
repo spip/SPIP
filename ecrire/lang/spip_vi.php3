@@ -289,6 +289,11 @@ H&#7891; s&#417; SPIP</a>.',
 'entree_titre_image' => 'T&#7921;a &#273;&#7873; h&igrave;nh:',
 'entree_titre_obligatoire' => '<B>T&#7921;a &#273;&#7873;</B> [B&#7855;t bu&#7897;c]<BR>',
 'entree_url' => '&#272;&#7883;a ch&#7881; website c&#7911;a b&#7841;n',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F

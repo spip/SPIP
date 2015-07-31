@@ -171,10 +171,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 // C
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
-'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
-'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
-'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
-'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -309,6 +305,11 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_titre_image' => 'T&iacute;tol de la imatge:',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</B> [Obligatori]<BR>',
 'entree_url' => 'L\'adre&ccedil;a (URL) del vostre lloc',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F
@@ -1661,7 +1662,14 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions',
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
-'trad_reference' => '(article de refer&egrave;ncia)'
+'trad_reference' => '(article de refer&egrave;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
+'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
+'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
+'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 

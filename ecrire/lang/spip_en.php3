@@ -308,6 +308,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Image title:',
 'entree_titre_obligatoire' => '<B>Title</b> [Compulsory]<BR>',
 'entree_url' => 'Your site\'s URL',
+'erreur_boucle_double' => 'BOUCLE@id@: double definition',
+'erreur_boucle_fermant' => 'BOUCLE@id@: missing closing tag',
+'erreur_boucle_syntaxe' => 'Incorrect loop (BOUCLE) syntax ',
+'erreur_boucle_syntaxe2' => 'The loop (BOUCLE) @milieu@ is incorrect.',
+'erreur_filtre' => 'Error - undefined filter: <b>&laquo; @filtre@ &raquo;</b>',
 
 
 // F

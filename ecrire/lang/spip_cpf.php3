@@ -342,6 +342,11 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'entree_titre_image' => 'Lo nond limaz&nbsp;:',
 'entree_titre_obligatoire' => '<B>Titr</b> [N&eacute;s&eacute;s&egrave;r]<BR>',
 'entree_url' => 'Ladr&egrave;s (URL) out sitw&egrave;b',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F

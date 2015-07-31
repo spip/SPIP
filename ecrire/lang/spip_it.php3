@@ -305,6 +305,11 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'entree_titre_image' => 'Titolo dell\'immagine:',
 'entree_titre_obligatoire' => '<B>Titolo</B> [Obbligatorio]<BR>',
 'entree_url' => 'Indirizzo (URL) del sito',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F
