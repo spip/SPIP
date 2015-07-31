@@ -114,7 +114,6 @@ ecrire/exec/admin_effacer.php -text
 ecrire/exec/admin_plugin.php -text
 ecrire/exec/admin_repair.php -text
 ecrire/exec/admin_tech.php -text
-ecrire/exec/admin_vider.php -text
 ecrire/exec/aide_index.php -text
 ecrire/exec/articles.php -text
 ecrire/exec/articles_edit.php -text
@@ -737,6 +736,8 @@ prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
+prive/squelettes/contenu/page-admin_vider.html -text
+prive/squelettes/contenu/page-admin_vider_fonctions.php -text
 prive/squelettes/contenu/page-breves.html -text
 prive/squelettes/contenu/page-charte.html -text
 prive/squelettes/contenu/page-configurer.html -text
