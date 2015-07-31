@@ -95,7 +95,7 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 
 	if ($moi AND preg_match($moi, $script))
 		$evt .= "\nonclick=" . ajax_action_declencheur($h,$ancre);
-	return http_href($url, $clic, $titre, $style, $class, $evt);
+	return http_href($url, PtoBR($clic), attribut_html($titre), $style, $class, $evt);
 }
 
 // Fabrique une balise A, avec tous les attributs possibles
@@ -706,7 +706,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			
 			$url = isset($evenement['URL'])
 			  ? $evenement['URL'] : ''; 
-			$desc = propre($evenement['DESCRIPTION']);
+			$desc = PtoBR(propre($evenement['DESCRIPTION']));
 			$perso = substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 			$lieu = isset($evenement['LOCATION']) ?
 				$evenement['LOCATION'] : '';
@@ -720,7 +720,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			if (($largeur > 90) && $desc)
 			  $sum .=  "\n<br /><span class='calendrier-noir'>$desc</span>";
 			$colors = $evenement['CATEGORIES'];
-		  $sum = ((!$url) ? $sum : http_href(quote_amp($url), $sum, $desc,"border: 0px",$colors));
+		  $sum = ((!$url) ? $sum : http_href(quote_amp($url), $sum, attribut_html($desc),"border: 0px",$colors));
 			$sum = pipeline('agenda_rendu_evenement',array('args'=>array('evenement'=>$evenement,'type'=>'ics'),'data'=>$sum));
 
 			$total .= "\n<div class='calendrier-arial10 $colors' 
@@ -853,12 +853,12 @@ function http_calendrier_sans_date($annee, $mois, $evenements)
 // http://doc.spip.org/@http_calendrier_sans_heure
 function http_calendrier_sans_heure($ev)
 {
-	$desc = propre($ev['DESCRIPTION']);
+	$desc = PtoBR(propre($ev['DESCRIPTION']));
 	$sum = typo($ev['SUMMARY']);
 	if (!$sum) $sum = $desc;
 	$i = isset($ev['DESCRIPTION']) ? 11 : 9; // 11: article; 9:autre
 	if ($ev['URL'])
-	  $sum = http_href(quote_amp($ev['URL']), $sum, $desc);
+	  $sum = http_href(quote_amp($ev['URL']), $sum, attribut_html($desc));
 	$sum = pipeline('agenda_rendu_evenement',array('args'=>array('evenement'=>$ev,'type'=>'sans_heure'),'data'=>$sum));
 	return "\n<div class='calendrier-arial$i calendrier-evenement'>" .
 	  "<span class='" . $ev['CATEGORIES'] . "'>&nbsp;</span>&nbsp;$sum</div>"; 
@@ -873,7 +873,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	if (($jour_debut <= 0) OR ($jour_debut > $amj) OR ($jour_fin < $amj))
 	  return "";
 	
-	$desc = propre($evenement['DESCRIPTION']);
+	$desc = PtoBR(propre($evenement['DESCRIPTION']));
 	$sum = $evenement['SUMMARY'];
 	$u = $GLOBALS['meta']['pcre_u'];
 	$sum = typo($sum);
@@ -883,7 +883,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	if ($perso = $evenement['ATTENDEE'])
 	  $sum .=  '<br />' . substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 	if ($evenement['URL'])
-	  $sum = http_href(quote_amp($evenement['URL']), $sum, $desc, 'border: 0px');
+	  $sum = http_href(quote_amp($evenement['URL']), $sum, attribut_html($desc), 'border: 0px');
 
 	$sum = pipeline('agenda_rendu_evenement',array('args'=>array('evenement'=>$evenement,'type'=>'avec_heure'),'data'=>$sum));
 	$opacity = "";
@@ -1281,20 +1281,20 @@ function http_calendrier_ics_message($annee, $mois, $jour, $large)
   return "&nbsp;" .
     http_href(generer_action_auteur("editer_message","pb/$annee-$mois-$jour"), 
 	       ($large ? $b : '&nbsp;'), 
-	      $b,
+	      attribut_html($b),
 	      'color: blue;',
 	      'calendrier-arial10 pense-bete') .
     "\n" .
     http_href(generer_action_auteur("editer_message","normal/$annee-$mois-$jour"), 
 	       ($large ? $v : '&nbsp;'), 
-	      $v,
+	      attribut_html($v),
 	      'color: green;',
 	      'calendrier-arial10 message') .
     (($GLOBALS['connect_statut'] != "0minirezo") ? "" :
      ("\n" .
     http_href(generer_action_auteur("editer_message","affich/$annee-$mois-$jour"), 
 		($large ? $j : '&nbsp;'), 
-		$j,
+		attribut_html($j),
 		'color: #ff9900;',
 		'calendrier-arial10 annonce')));
 }
