@@ -1162,7 +1162,7 @@ function traiter_raccourci_lien($regs) {
 			}
 			// sinon c'est un italique
 			else {
-				$m[1] .= '{'.$m[3].'}';
+				$m[1] .= $m[4];
 			}
 		}
 		// S'il n'y a pas de hreflang sous la forme {}, ce qui suit le |
