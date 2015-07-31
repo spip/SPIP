@@ -18,7 +18,7 @@ function formulaires_ecrire_auteur_charger_dist($id_auteur, $id_article, $mail){
 	$valeurs = array(
 		'sujet_message_auteur'=>'',
 		'texte_message_auteur'=>'',
-		'email_message_auteur'=>$GLOBALS['visiteur_session']['email']
+		'email_message_auteur'=>isset($GLOBALS['visiteur_session']['email'])?$GLOBALS['visiteur_session']['email']:''
 	);
 	
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
