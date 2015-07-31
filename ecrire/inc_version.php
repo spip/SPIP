@@ -304,10 +304,10 @@ $spip_sql_version = 1;
 // (ce qui marche pour yy ne marchera pas forcement sur une version plus ancienne)
 // type nouvelles fonctionnalites, deplacement de fonctions ...
 $spip_version_affichee = '1.9.3 dev';
-$spip_version_code = '1.9300';
+$spip_version_code = '1.9301';
 
 // ** Securite **
-$auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
+$visiteur_session = $auteur_session = $connect_statut = $connect_toutes_rubriques =  $hash_recherche = $hash_recherche_strict = $ldap_present ='';
 $meta = $connect_id_rubrique = array();
 
 // *** Fin des globales *** //

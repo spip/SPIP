@@ -93,8 +93,8 @@ function inc_auth_dist() {
 				if (!$connect_id_auteur) {
 					$_SERVER['PHP_AUTH_PW'] = '';
 					$auth_can_disconnect = true;
-					$GLOBALS['auteur_session'] = $r;
-					$connect_login = $GLOBALS['auteur_session']['login'];
+					$GLOBALS['visiteur_session'] = $r;
+					$connect_login = $GLOBALS['visiteur_session']['login'];
 				} else {
 				  // cas de la session en plus de PHP_AUTH
 				  /*				  if ($connect_id_auteur != $r['id_auteur']){
@@ -139,19 +139,19 @@ function inc_auth_dist() {
 	$connect_login = $row['login'];
 	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
-	// Le tableau global auteur_session contient toutes les infos pertinentes
-	// et a jour (tandis que $auteur_session peut avoir des valeurs un peu datees
+	// Le tableau global visiteur_session contient toutes les infos pertinentes
+	// et a jour (tandis que $visiteur_session peut avoir des valeurs un peu datees
 	// s'il est pris dans le fichier de session)
 	// Les plus utiles sont aussi dans les variables simples ci-dessus
-	$GLOBALS['auteur_session'] = array_merge($GLOBALS['auteur_session'], $row);
+	$GLOBALS['visiteur_session'] = array_merge($GLOBALS['visiteur_session'], $row);
 	$r = @unserialize($row['prefs']);
-	$GLOBALS['auteur_session']['prefs'] =
+	$GLOBALS['visiteur_session']['prefs'] =
 	  (@isset($r['couleur'])) ? $r : array('couleur' =>1, 'display'=>0);
 	// au cas ou : ne pas memoriser les champs sensibles
-	unset($GLOBALS['auteur_session']['pass']);
-	unset($GLOBALS['auteur_session']['htpass']);
-	unset($GLOBALS['auteur_session']['alea_actuel']);
-	unset($GLOBALS['auteur_session']['alea_futur']);
+	unset($GLOBALS['visiteur_session']['pass']);
+	unset($GLOBALS['visiteur_session']['htpass']);
+	unset($GLOBALS['visiteur_session']['alea_actuel']);
+	unset($GLOBALS['visiteur_session']['alea_futur']);
 
 	// rajouter les sessions meme en mode auth_http
 	// pour permettre les connexions multiples et identifier les visiteurs
@@ -172,7 +172,7 @@ function inc_auth_dist() {
 
 	// Pas autorise a acceder a ecrire ? on renvoie le statut
 	// A noter : le premier appel a autoriser() a le bon gout
-	// d'initialiser $GLOBALS['auteur_session']['restreint'],
+	// d'initialiser $GLOBALS['visiteur_session']['restreint'],
 	// qui ne figure pas dans le fichier de session
 	include_spip('inc/autoriser');
 
@@ -183,8 +183,8 @@ function inc_auth_dist() {
 
 	// Administrateurs
 	if ($connect_statut == '0minirezo') {
-		if (is_array($GLOBALS['auteur_session']['restreint']))
-			$connect_id_rubrique = $GLOBALS['auteur_session']['restreint'];
+		if (is_array($GLOBALS['visiteur_session']['restreint']))
+			$connect_id_rubrique = $GLOBALS['visiteur_session']['restreint'];
 		$connect_toutes_rubriques = !$connect_id_rubrique;
 	} 
 	// Pour les redacteurs, inc_version a fait l'initialisation minimale

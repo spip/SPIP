@@ -41,7 +41,7 @@ if (!function_exists('autoriser')) {
 
 
 // API pour une fonction generique d'autorisation :
-// $qui est : vide (on prend alors auteur_session)
+// $qui est : vide (on prend alors visiteur_session)
 //            un id_auteur (on regarde dans la base)
 //            un tableau auteur complet, y compris [restreint]
 // $faire est une action ('modifier', 'publier'...)
@@ -55,9 +55,9 @@ if (!function_exists('autoriser')) {
 // http://doc.spip.org/@autoriser_dist
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
-	// Qui ? auteur_session ?
+	// Qui ? visiteur_session ?
 	if ($qui === NULL)
-	  $qui = $GLOBALS['auteur_session'] ? $GLOBALS['auteur_session'] : array('statut' => '', 'id_auteur' =>0);
+	  $qui = $GLOBALS['visiteur_session'] ? $GLOBALS['visiteur_session'] : array('statut' => '', 'id_auteur' =>0);
 	elseif (is_numeric($qui)) {
 		$qui = sql_fetsel("*", "spip_auteurs", "id_auteur=".$qui);
 	}
@@ -565,8 +565,8 @@ function liste_rubriques_auteur($id_auteur, $raz=false) {
 	}
 
 	// Affecter l'auteur session le cas echeant
-	if ($GLOBALS['auteur_session']['id_auteur'] == $id_auteur)
-		$GLOBALS['auteur_session']['restreint'] = $rubriques;
+	if ($GLOBALS['visiteur_session']['id_auteur'] == $id_auteur)
+		$GLOBALS['visiteur_session']['restreint'] = $rubriques;
 			
 
 	return $restreint[$id_auteur] = $rubriques;

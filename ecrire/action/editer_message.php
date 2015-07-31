@@ -82,7 +82,7 @@ function action_editer_message_post_choisir($id_message) {
 	else {
 		include_spip('inc/mots');
 		include_spip('inc/charsets'); // pour tranlitteration
-		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 		$cherche_auteur= _request('cherche_auteur');
 		$query = sql_select("id_auteur, nom", "spip_auteurs", "messagerie<>'non' AND id_auteur<>'$id_auteur' AND pass<>'' AND login<>''");
 		$table_auteurs = array();
@@ -116,7 +116,7 @@ function action_editer_message_post_envoyer($id_message, $statut) {
 function action_editer_message_post_nouveau($type, $dest='', $rv='')
 {
 
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 
 	$mydate = date("YmdHis", time() - 2 * 24 * 3600);
 	sql_delete("spip_messages", "(statut = 'redac') AND (date_heure < $mydate)");

@@ -53,7 +53,7 @@ function exec_statistiques_svg_ok($id_article,  $aff_jours, $visites_today, $exp
 	$couleurs = charger_fonction('couleurs', 'inc');
 	$paramcss = 'ltr='
 	. $GLOBALS['spip_lang_left'] . '&'
-	. $couleurs($GLOBALS['auteur_session']['prefs']['couleur']);
+	. $couleurs($GLOBALS['visiteur_session']['prefs']['couleur']);
 
 	echo "<"."?xml version=\"1.0\" standalone=\"no\"?>\n";
 	echo '<', '?xml-stylesheet type="text/css" href="', generer_url_public('style_svg', $paramcss, true), '" ?', ">\n";

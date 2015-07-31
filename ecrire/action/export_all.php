@@ -22,7 +22,7 @@ function action_export_all_dist()
 	$arg = $securiser_action();
 
 	@list($quoi, $gz, $archive, $rub) = split(',', $arg);
-	$meta = 'status_dump_'  . $GLOBALS['auteur_session']['id_auteur'];
+	$meta = 'status_dump_'  . $GLOBALS['visiteur_session']['id_auteur'];
 	$file =  export_subdir($rub) . $archive;
 
 	utiliser_langue_visiteur();

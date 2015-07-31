@@ -33,7 +33,7 @@ function article_select($id_article, $id_rubrique=0, $lier_trad=0, $id_version=0
 // une alerte sera donnee aux autres redacteurs sur exec=articles
 		if ($GLOBALS['meta']['articles_modif'] != 'non') {
 			include_spip('inc/drapeau_edition');
-			signale_edition ($id_article,  $GLOBALS['auteur_session'], 'article');
+			signale_edition ($id_article,  $GLOBALS['visiteur_session'], 'article');
 		}
 		$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
 	// si une ancienne revision est demandee, la charger

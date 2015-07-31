@@ -842,7 +842,7 @@ function balise_SESSION_dist($p) {
 		? 'balise_ENV'
 		: 'balise_ENV_dist';
 
-	$p = $f($p, '$GLOBALS["auteur_session"]');
+	$p = $f($p, '$GLOBALS["visiteur_session"]');
 	return $p;
 }
 

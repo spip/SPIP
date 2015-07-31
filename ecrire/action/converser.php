@@ -27,10 +27,10 @@ function action_converser_dist()
 			$securiser_action = charger_fonction('securiser_action', 'inc');
 			$securiser_action();
 
-			sql_updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['auteur_session']['id_auteur']);
-			$GLOBALS['auteur_session']['lang'] = $lang;
+			sql_updateq("spip_auteurs", array("lang" => $lang), "id_auteur = " . $GLOBALS['visiteur_session']['id_auteur']);
+			$GLOBALS['visiteur_session']['lang'] = $lang;
 			$session = charger_fonction('session', 'inc');
-			if ($spip_session = $session($GLOBALS['auteur_session'])) {
+			if ($spip_session = $session($GLOBALS['visiteur_session'])) {
 				spip_setcookie(
 					'spip_session',
 					$spip_session,

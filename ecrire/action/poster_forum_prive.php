@@ -44,9 +44,9 @@ function action_poster_forum_prive_post($r)
 			'nom_site' => _request('nom_site'),
 			'url_site' => _request('url_site'),
 			'statut' => $statut,
-			'id_auteur' =>$GLOBALS['auteur_session']['id_auteur'],
-			'auteur' => $GLOBALS['auteur_session']['nom'],
-			'email_auteur' => $GLOBALS['auteur_session']['email'],
+			'id_auteur' =>$GLOBALS['visiteur_session']['id_auteur'],
+			'auteur' => $GLOBALS['visiteur_session']['nom'],
+			'email_auteur' => $GLOBALS['visiteur_session']['email'],
 			'id_parent' => $id_parent));
 
 		calculer_threads();

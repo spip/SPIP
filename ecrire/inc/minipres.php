@@ -75,7 +75,7 @@ function minipres($titre='', $corps="", $onload='')
 		  ?  _T('avis_espace_interdit')
 		  : $titre . '&nbsp;: '. _T('info_acces_interdit');
 		$corps = generer_form_ecrire('accueil', '','',_T('public:accueil_site'));
-		spip_log($GLOBALS['auteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
+		spip_log($GLOBALS['visiteur_session']['nom'] . " $titre " . $_SERVER['REQUEST_URI']);
 	}
 
 	return install_debut_html($titre, $onload)

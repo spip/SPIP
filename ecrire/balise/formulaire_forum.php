@@ -124,7 +124,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($type == "abo") {
-		if (!$GLOBALS["auteur_session"]['statut']) {
+		if (!$GLOBALS["visiteur_session"]['statut']) {
 			return array('formulaires/login_forum_abo',
 				3600,
 				array(
@@ -137,8 +137,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	}
 
 	// Indiquer le nom du visiteur
-	$auteur = $GLOBALS['auteur_session']['nom'];
-	$email_auteur = $GLOBALS['auteur_session']['email'];
+	$auteur = $GLOBALS['visiteur_session']['nom'];
+	$email_auteur = $GLOBALS['visiteur_session']['email'];
 
 	// Tableau des valeurs servant au calcul d'une signature de securite.
 	// Elles seront placees en Input Hidden pour que inc/forum_insert

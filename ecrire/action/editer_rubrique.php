@@ -84,7 +84,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 			AND autoriser('publierdans', 'rubrique', $old_parent)
 			      )) {
 				if ($s['statut'] != 'new') {
-					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
+					spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['visiteur_session']['id_auteur'] . ' '.  $GLOBALS['visiteur_session']['statut']);
 				}
 			} elseif (editer_rubrique_breves($id_rubrique, $id_parent, $c)) {
 				$champs['id_parent'] = $id_parent;

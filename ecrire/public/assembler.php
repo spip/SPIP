@@ -47,13 +47,13 @@ function init_var_mode(){
 					else { 
 						$GLOBALS['var_mode'] = $_GET['var_mode'];
 					}
-					spip_log($GLOBALS['auteur_session']['nom']
+					spip_log($GLOBALS['visiteur_session']['nom']
 						. " ".$GLOBALS['var_mode']);
 				}
 				// pas autorise ?
 				else {
 					// si on n'est pas connecte on se redirige
-					if (!$GLOBALS['auteur_session']) {
+					if (!$GLOBALS['visiteur_session']) {
 						include_spip('inc/headers');
 						redirige_par_entete(generer_url_public('login',
 						'url='.rawurlencode(

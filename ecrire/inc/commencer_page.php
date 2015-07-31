@@ -128,7 +128,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 		. "' class='icone26' title=\""
 		. entites_html(_T('icone_informations_personnelles'))
 		. '">'
-		. typo($GLOBALS['auteur_session']['nom'])
+		. typo($GLOBALS['visiteur_session']['nom'])
 		. "</a></div></li>"
 		. "<li style='width:20px'><div class='menu-item'> &nbsp; </div></li>"
 		. "<li id='bandeau_couleur3' class='bandeau_couleur'><div class='menu-item'>";

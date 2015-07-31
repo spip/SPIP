@@ -26,9 +26,9 @@ spip_connect();
 // http://doc.spip.org/@controler_forum_abo
 function controler_forum_abo($retour)
 {
-	global $auteur_session;
-	if ($auteur_session) {
-		$statut = $auteur_session['statut'];
+	global $visiteur_session;
+	if ($visiteur_session) {
+		$statut = $visiteur_session['statut'];
 		if (!$statut OR $statut == '5poubelle') {
 			ask_php_auth(_T('forum_acces_refuse'),
 				     _T('forum_cliquer_retour',
@@ -193,8 +193,8 @@ function inc_forum_insert_dist($force_statut = NULL) {
 	//
 	include_spip('inc/modifier');
 	// Injecter les bonnes valeurs dans le contexte $c
-	set_request('auteur', $GLOBALS['auteur_session']['nom']);
-	set_request('email_auteur', $GLOBALS['auteur_session']['email']);
+	set_request('auteur', $GLOBALS['visiteur_session']['nom']);
+	set_request('email_auteur', $GLOBALS['visiteur_session']['email']);
 	revision_forum($id_message);
 
 	// Notification

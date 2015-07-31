@@ -241,8 +241,8 @@ function utiliser_langue_visiteur() {
 	if (isset($_COOKIE[$l]))
 		if (changer_langue($l = $_COOKIE[$l])) return $l;
 
-	if (isset($GLOBALS['auteur_session']['lang']))
-		if (changer_langue($l = $GLOBALS['auteur_session']['lang']))
+	if (isset($GLOBALS['visiteur_session']['lang']))
+		if (changer_langue($l = $GLOBALS['visiteur_session']['lang']))
 			return $l;
 
 	foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {

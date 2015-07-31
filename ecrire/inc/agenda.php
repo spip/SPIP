@@ -1192,7 +1192,7 @@ function http_calendrier_rv($messages, $type) {
 
 	$total = $date_rv = '';
 	if (!$messages) return $total;
-	$connect_quand = $GLOBALS['auteur_session']['quand'];
+	$connect_quand = $GLOBALS['visiteur_session']['quand'];
 
 	foreach ($messages as $row) {
 		$rv = ($row['location'] == 'oui');

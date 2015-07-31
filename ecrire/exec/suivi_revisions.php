@@ -23,8 +23,8 @@ function exec_suivi_revisions_dist()
 	$id_auteur = intval(_request('id_auteur'));
 	$id_secteur = intval(_request('id_secteur'));
 
-	$nom_auteur = $GLOBALS['auteur_session']['nom'];
-	$connecte = $GLOBALS['auteur_session']['id_auteur'];
+	$nom_auteur = $GLOBALS['visiteur_session']['nom'];
+	$connecte = $GLOBALS['visiteur_session']['id_auteur'];
 	if ($id_auteur == $connecte) $id_auteur = false;
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');

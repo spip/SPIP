@@ -55,12 +55,12 @@ function securiser_action_auteur($action, $arg, $redirect="", $mode=false, $att=
 
 // http://doc.spip.org/@caracteriser_auteur
 function caracteriser_auteur() {
-	global $auteur_session;
+	global $visiteur_session;
 	static $caracterisation = array();
 
 	if ($caracterisation) return $caracterisation;
 
-	if (!isset($auteur_session['id_auteur'])) {
+	if (!isset($visiteur_session['id_auteur'])) {
 	// si l'auteur courant n'est pas connu alors qu'il peut demander une action
 	// c'est une connexion par php_auth ou 1 instal, on se rabat sur le cookie.
 	// S'il n'avait pas le droit de realiser cette action, le hash sera faux.
@@ -72,9 +72,9 @@ function caracteriser_auteur() {
 		} else return array('','');
 	}
 	// Eviter l'acces SQL si le pass est connu de PHP
-	$id_auteur = $auteur_session['id_auteur'];
-	if (isset($auteur_session['pass']) AND $auteur_session['pass'])
-		return $caracterisation = array($id_auteur, $auteur_session['pass']); 
+	$id_auteur = $visiteur_session['id_auteur'];
+	if (isset($visiteur_session['pass']) AND $visiteur_session['pass'])
+		return $caracterisation = array($id_auteur, $visiteur_session['pass']); 
 	else if ($id_auteur>0) {
 		$t = sql_select("id_auteur, pass", "spip_auteurs", "id_auteur=$id_auteur");
 		if ($t = sql_fetch($t))

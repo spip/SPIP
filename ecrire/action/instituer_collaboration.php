@@ -21,9 +21,9 @@ function action_instituer_collaboration_dist() {
 	if ($arg) {
 		include_spip('inc/drapeau_edition');
 		if ($arg == 'tous')
-			debloquer_tous($GLOBALS['auteur_session']['id_auteur']);
+			debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
 		else
-			debloquer_edition($GLOBALS['auteur_session']['id_auteur'], $arg, 'article');
+			debloquer_edition($GLOBALS['visiteur_session']['id_auteur'], $arg, 'article');
 	}
 }
 ?>

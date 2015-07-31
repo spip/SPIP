@@ -249,7 +249,7 @@ function revisions_sites ($id_syndic, $c=false) {
 	// une alerte sera donnee aux autres redacteurs sur exec=sites
 	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
-		signale_edition ($id_syndic, $GLOBALS['auteur_session'], 'syndic');
+		signale_edition ($id_syndic, $GLOBALS['visiteur_session'], 'syndic');
 	}
 
 

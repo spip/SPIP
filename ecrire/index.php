@@ -53,7 +53,7 @@ if (autoriser_sans_cookie($exec)) {
 		if (isset($_GET['bonjour']))
 			$redirect = parametre_url($redirect,
 				'var_erreur',
-				(!isset($GLOBALS['auteur_session']['statut'])
+				(!isset($GLOBALS['visiteur_session']['statut'])
 					? 'cookie'
 					: 'statut'
 				),
@@ -70,23 +70,23 @@ if (autoriser_sans_cookie($exec)) {
 $prefs_mod = false;
 
 if (isset($_GET['set_couleur'])) {
-	$GLOBALS['auteur_session']['prefs']['couleur'] = intval($_GET['set_couleur']);
+	$GLOBALS['visiteur_session']['prefs']['couleur'] = intval($_GET['set_couleur']);
 	$prefs_mod = true;
 }
 if (isset($_GET['set_disp'])) {
-	$GLOBALS['auteur_session']['prefs']['display'] = intval($_GET['set_disp']);
+	$GLOBALS['visiteur_session']['prefs']['display'] = intval($_GET['set_disp']);
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth) {
-	sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['auteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['auteur_session']['id_auteur']));
+	sql_updateq('spip_auteurs', array('prefs' => serialize($GLOBALS['visiteur_session']['prefs'])), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
 
 	// Si modif des couleurs en ajax, stop ici
 	if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') exit;
 }
 
 // compatibilite ascendante
-$GLOBALS['spip_display'] = isset($GLOBALS['auteur_session']['prefs']['display'])
-	? $GLOBALS['auteur_session']['prefs']['display']
+$GLOBALS['spip_display'] = isset($GLOBALS['visiteur_session']['prefs']['display'])
+	? $GLOBALS['visiteur_session']['prefs']['display']
 	: 0;
 
 if (isset($_GET['set_ecran'])) {
@@ -106,13 +106,13 @@ if (isset($_COOKIE['spip_lang_ecrire'])) {
 	if ($var_auth)
 		changer_langue($_COOKIE['spip_lang_ecrire']);
 	// si authentifie, changer definitivement si ce n'est fait
-	elseif (($_COOKIE['spip_lang_ecrire'] <> $GLOBALS['auteur_session']['lang'])
+	elseif (($_COOKIE['spip_lang_ecrire'] <> $GLOBALS['visiteur_session']['lang'])
 		AND changer_langue($_COOKIE['spip_lang_ecrire'])) {
-			sql_updateq('spip_auteurs', array('lang' => $_COOKIE['spip_lang_ecrire']), "id_auteur=" .intval($GLOBALS['auteur_session']['id_auteur']));
+			sql_updateq('spip_auteurs', array('lang' => $_COOKIE['spip_lang_ecrire']), "id_auteur=" .intval($GLOBALS['visiteur_session']['id_auteur']));
 
-			$GLOBALS['auteur_session']['lang'] = $_COOKIE['spip_lang_ecrire'];
+			$GLOBALS['visiteur_session']['lang'] = $_COOKIE['spip_lang_ecrire'];
 			$session = charger_fonction('session', 'inc');
-			$session($GLOBALS['auteur_session']);
+			$session($GLOBALS['visiteur_session']);
 	}
 }
 

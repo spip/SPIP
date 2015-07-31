@@ -62,7 +62,7 @@ function action_cookie_dist() {
 		$auteur = array();
 
 		// Essayer tour a tour les differentes sources d'authenfication
-		// on s'en souviendra dans auteur_session['auth']
+		// on s'en souviendra dans visiteur_session['auth']
 		$sources_auth = array('spip', 'ldap');
 		while (!$auteur
 		AND list(,$methode) = each($sources_auth)) {

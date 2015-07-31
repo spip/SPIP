@@ -33,7 +33,7 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 	if (!autoriser('modifier', 'auteur', $id_auteur))
 		return $infos . $bloc_statut;
 
-	$setconnecte = $GLOBALS['auteur_session']['id_auteur'] == $id_auteur;
+	$setconnecte = $GLOBALS['visiteur_session']['id_auteur'] == $id_auteur;
 
 	// Elaborer le formulaire
 

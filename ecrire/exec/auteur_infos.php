@@ -96,7 +96,7 @@ function auteur_infos_ok($auteur, $id_auteur, $echec, $new, $redirect)
 		// nouvel auteur : le hack classique
 		else if ($fiche)
 			echo $iconifier('id_auteur',
-			0 - $GLOBALS['auteur_session']['id_auteur'],
+			0 - $GLOBALS['visiteur_session']['id_auteur'],
 			'auteur_infos');
 
 		echo creer_colonne_droite('', true);

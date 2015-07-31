@@ -79,7 +79,7 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 		# le moment venu, c'est-a-dire lors de la creation de l'article
 		# dans editer_article.
 		echo afficher_documents_colonne(
-			0-$GLOBALS['auteur_session']['id_auteur'], 'article');
+			0-$GLOBALS['visiteur_session']['id_auteur'], 'article');
 	}
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));

@@ -638,7 +638,7 @@ function enregistrer_nouvelle_revision($x) {
 				$champs[$key] = $x['data'][$key];
 
 		if (count($champs))
-			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['auteur_session']['id_auteur']);
+			ajouter_version($x['args']['id_objet'], $champs, '', $GLOBALS['visiteur_session']['id_auteur']);
 	}
 
 	return $x;

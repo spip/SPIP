@@ -264,7 +264,7 @@ function personnel_accueil($coockcookie)
 		$res .= $t;
 	}
 	$titre_cadre = afficher_plus(generer_url_ecrire("auteur_infos","id_auteur=$connect_id_auteur"));
-	$titre_cadre .= majuscules(typo($GLOBALS['auteur_session']['nom']));
+	$titre_cadre .= majuscules(typo($GLOBALS['visiteur_session']['nom']));
 	
 	return debut_cadre_relief("fiche-perso-24.gif",true, '',$titre_cadre)
 	. $res
