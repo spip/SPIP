@@ -176,6 +176,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'divclass' => $float,
 			'analyser' => $analyser,
 			'lang' => $lang,
+			'calcul' => (_request('var_mode') ? 'recalcul' : 'calcul'),
 			'xhtml_error' => isset($GLOBALS['xhtml_error']) ? $GLOBALS['xhtml_error'] : ''
 			)
 		     );
