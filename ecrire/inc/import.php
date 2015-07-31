@@ -176,7 +176,7 @@ function import_tables($f, $gz=false) {
 	global $import_ok, $abs_pos, $my_pos;
 	static $time_javascript;
 
-	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'", SPIP_NUM));
+	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"), SPIP_NUM);
 
 	if (!$my_date) return false;
 
