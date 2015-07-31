@@ -16,14 +16,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_selectionner_dist()
 {
-	global $id, $exclus, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
+	$id = intval(_request('id'));
+	$exclus = intval(_request('exclus'));
 	$type = _request('type');
+	$rac = _request('racine');
 
 	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	ajax_retour(mini_nav($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj_forcer('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve'));
+	$selectionner = charger_fonction('selectionner', 'inc');
+	ajax_retour($selectionner($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj_forcer('selection_rubrique').style.display='none';", $exclus, $rac, $type!='breve'));
 
 }
 ?>
