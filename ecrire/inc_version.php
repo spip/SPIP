@@ -374,7 +374,7 @@ error_reporting(SPIP_ERREUR_REPORT);
 // ou a defini certaines des constantes que cette fonction doit definir
 // ===> on execute en neutralisant les messages d'erreur
 
-@spip_core_initialisation(
+@spip_initialisation_core(
 	(_DIR_RACINE  . _NOM_PERMANENTS_INACCESSIBLES),
 	(_DIR_RACINE  . _NOM_PERMANENTS_ACCESSIBLES),
 	(_DIR_RACINE  . _NOM_TEMPORAIRES_INACCESSIBLES),
@@ -391,7 +391,7 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	// chargement optimise precompile
 	include_once(_DIR_TMP."charger_plugins_options.php");
 } else {
-	@spip_initialisation();
+	@spip_initialisation_suite();
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
@@ -403,7 +403,7 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	}
 }
 // Initialisations non critiques surchargeables par les plugins
-@spip_initialisation();
+@spip_initialisation_suite();
 
 if (!defined('_OUTILS_DEVELOPPEURS'))
 	define('_OUTILS_DEVELOPPEURS',false);
