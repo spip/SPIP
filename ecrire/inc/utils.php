@@ -309,10 +309,10 @@ function spip_connect_main($connexion)
 		redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
 	}
 
-	$f = $connexion['select'];
+	if (!($f = $connexion['select'])) return false;
 	if (!$r = $f('valeur','spip_meta', "nom='charset_sql_connexion'"))
 		return false;
-	$f = $connexion['fetch'];
+	if (!($f = $connexion['fetch'])) return false;
 	$r = $f($r);
 	return ($r['valeur'] ? $r['valeur'] : -1);
 }
