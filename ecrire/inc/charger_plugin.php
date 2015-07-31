@@ -91,9 +91,18 @@ function formulaire_charger_plugin($retour='') {
 	$res .= "<br /><input type='text' name='url_zip_plugin2' value='http://files.spip.org/spip-zone/' size='50' /></label></p>\n";
 
 	$res .= "</td></tr>";
-	$res .= "</table>\n";
+	$res .= "</table>\n"
+		. "<div style='float:".$GLOBALS['spip_lang_right'].";'><input type='submit' value='"
+		. _T('bouton_valider')
+		.  "' class='fondo' />\n"
+		.  "</div>\n";
 
-	$res = ajax_action_post('charger_plugin', '', 'admin_plugin', '', $res);
+	$res = redirige_action_auteur('charger_plugin',
+				0,
+				'',
+				'',
+				$res,
+				"\nmethod='post'");
 
 
 	$res .= afficher_liste_listes_plugins();
@@ -377,7 +386,8 @@ function afficher_liste_listes_plugins() {
 	$ret = '<p>'._L('Vos listes de plugins :').'</p><ul>';
 		$ret .= '<li>'._L('les plugins officiels').'</li>';
 	foreach ($flux as $url => $c) {
-		$a = '<a href="'.generer_url_action('charger_plugin', 'supprimer_flux='.rawurlencode($url)).'">x</a>';
+		$a = '<a href="'.parametre_url(
+			generer_action_auteur('charger_plugin', 'supprimer_flux'),'supprimer_flux', $url).'">x</a>';
 		$ret .= '<li>'.PtoBR(propre("[->$url]")).' ('.$c
 			.' plugins) '.$a.'</li>';
 	}

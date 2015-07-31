@@ -22,6 +22,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_charger_plugin_dist() {
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
+
 	include_spip('inc/minipres');
 	include_spip('inc/charger_plugin');
 
@@ -50,6 +53,9 @@ function action_charger_plugin_dist() {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('admin_plugin'));
 	}
+
+	## si ici on n'est pas en POST c'est qu'il y a un loup
+	if (!$_POST) die('pas normal');
 
 	# destination des fichiers
 	$dest = _DIR_PLUGINS_AUTO;
@@ -110,14 +116,21 @@ function action_charger_plugin_dist() {
 		_request('extract')
 			? generer_form_ecrire('admin_plugin&plug='.preg_replace(',^[^/]+/|/$,', '', $status['dirname']),
 				$texte . bouton_suivant())
-			: "<form action='".self()."' method='post'>"
-				.form_hidden(
+			: redirige_action_auteur(_request('action'),
+				0,
+				'',
+				'',
+					form_hidden(
 					'?action='._request('action')
 					.'&url_zip_plugin='.$zip.'&extract=oui'
-				)
-				.$texte
-				."<a class='suivant' href='".generer_url_ecrire('admin_plugin')."'>Annuler</a>"
-				.bouton_suivant()."</form>\n"
+					.'&hash='._request('hash')
+					)
+					.$texte
+					."<a class='suivant' href='"
+						.generer_url_ecrire('admin_plugin')
+					."'>Annuler</a>"
+				.bouton_suivant(),
+				"\nmethod='post'")
 	);
 	exit;
 
