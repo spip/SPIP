@@ -41,7 +41,7 @@ img {
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
-	behavior: url(#URL_SITE_SPIP/#CHEMIN{win_width.htc});
+	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
  	font-size: 12px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
@@ -52,7 +52,7 @@ img {
 	background-color: white; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; float: none; 
-	behavior: url(#URL_SITE_SPIP/#CHEMIN{win_width.htc});
+	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
  	font-size: 12px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
@@ -1235,7 +1235,7 @@ a.spip_glossaire:hover {
 	margin-top: 10px;
 	padding: 5px;
 	border: 1px solid #666666;
-	behavior: url(#URL_SITE_SPIP/#CHEMIN{win_width.htc});
+	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
 }
 blockquote.spip {
 	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 40px;

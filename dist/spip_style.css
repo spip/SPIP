@@ -3,7 +3,7 @@ a {
 }
 
 a:hover {
-	color:#FF9900;
+	color:#ff9900;
 	text-decoration: underline;
 }
 
@@ -76,7 +76,7 @@ table.spip caption{
 }
 
 table.spip tr.row_first {
-	background-color: #FCF4D0;
+	background-color: #fcf4d0;
 }
 
 table.spip tr.row_odd {
@@ -84,7 +84,7 @@ table.spip tr.row_odd {
 }
 
 table.spip tr.row_even {
-	background-color: #F0F0F0;
+	background-color: #f0f0f0;
 }
 
 table.spip td {
@@ -107,12 +107,12 @@ blockquote.spip {
 	padding-right: 10px;
 }
 
-.forml { width: 100% ; background-color: #FFDDAA;}
+.forml { width: 100% ; background-color: #ffddaa;}
 
 .spip_encadrer {
 	font-family: helvetica, arial, sans-serif;
 	width : 95%;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	padding: 5px;
 	border: 1px #666666 solid;
 }
@@ -128,7 +128,7 @@ blockquote.spip {
 
 .spip_cadre {
 	width : 95%;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	padding: 5px;
 	margin-top: 10px;
 }
@@ -144,7 +144,7 @@ div.spip_poesie div {
 	margin-left: 60px;
 }
 
-.spip_bouton { background-color: #FFCC00;}
+.spip_bouton { background-color: #ffcc00;}
 
 form.formrecherche { 
 	margin-top: 5px;
@@ -152,7 +152,7 @@ form.formrecherche {
 }
 input.formrecherche {
 	width: 95%;
-	background-color: #FFDDAA;
+	background-color: #ffddaa;
 }
 
 .reponse_formulaire {
@@ -162,14 +162,14 @@ input.formrecherche {
 	color: red;
 }
 
-.spip_surligne { background-color: #FFFF66; }
+.spip_surligne { background-color: #ffff66; }
 
 
 /*
- *  Images typographiques (via image_typo)
+ *  Images typographiques (via image_typo), URL a revoir...
  */
 .format_png {
-	behavior: url("dist/win_png.htc");
+	behavior: url(spip.php?page=win_png);
 }
 
 
@@ -183,7 +183,7 @@ a.spip_barre img {
 	border-right: 1px solid #aa9966;
 	border-bottom: 1px solid #aa9966;
 	padding: 3px;
-	background-color: #FFDDAA;
+	background-color: #ffddaa;
 }
 a.spip_barre:hover img {
 	border: 1px solid #808080;

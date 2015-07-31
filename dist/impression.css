@@ -114,10 +114,10 @@ a:after {
 
 
 /*
- *  Images typographiques (via image_typo)
+ *  Images typographiques (via image_typo) URL a revoir...
  */
 .image_typo {
-	behavior: url("win_png.htc");
+	behavior: url("spip.php?page=win_png");
 }
 
 /*
