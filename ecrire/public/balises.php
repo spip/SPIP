@@ -820,6 +820,7 @@ function balise_CONFIG_dist($p) {
 		return balise_ENV_dist($p, '$GLOBALS["meta"]');
 }
 
+// http://doc.spip.org/@balise_CONNECT_dist
 function balise_CONNECT_dist($p) {
 	$p->code = '($connect ? $connect : NULL)';
 	$p->interdire_scripts = false;
