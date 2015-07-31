@@ -135,7 +135,7 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 		if (!is_array($crit)) continue; // boucle recursive
 		array_shift($crit);
 		$args = array();
-		foreach($crit as $v) {
+		foreach($crit as $i => $v) {
 		  if ((count($v) == 1) 
 		      AND $v[0]->type=='texte'
 		      AND $v[0]->apres)
@@ -143,10 +143,11 @@ function decompiler_criteres($sources, $comp, $fmt='', $prof=0) {
 		  else {
 		    $res2 = array();
 		    foreach($v as $k => $p) {
-		      if (!isset($p->type)) continue; #??????
-		      $d = 'decompiler_' . $p->type;
-		      $r = $d($p, $fmt, (0-$prof), @$v[$k+1]);
-		      $res2[]= array($p->type, $r);
+			if (isset($p->type)
+			AND function_exists($d = 'decompiler_' . $p->type)) {
+				$r = $d($p, $fmt, (0-$prof), @$v[$k+1]);
+				$res2[]= array($p->type, $r);
+			} else spip_log("critere $i / $k mal forme");
 		    }
 		    $args[]= $res2;
 		  }
