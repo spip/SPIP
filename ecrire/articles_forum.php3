@@ -111,7 +111,14 @@ echo "</div>";
 $mots_cles_forums = lire_meta("mots_cles_forums");
 
 if ($connect_statut == "0minirezo") {
-	$query_forum = "SELECT * FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') ORDER BY date_heure DESC LIMIT $debut, $pack";
+	$query_forum = "SELECT pied.*, max(thread.date_heure) AS date
+		FROM spip_forum AS pied, spip_forum AS thread
+		WHERE pied.id_article='$id_article'
+		AND pied.id_parent=0
+		AND pied.statut IN ('publie', 'off', 'prop')
+		AND thread.id_thread=pied.id_forum
+		GROUP BY id_thread
+		ORDER BY date DESC LIMIT $debut, $pack";
 	$result_forum = spip_query($query_forum);
 	afficher_forum($result_forum, $forum_retour, $id_article);
 }
