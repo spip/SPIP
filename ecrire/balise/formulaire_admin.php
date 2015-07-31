@@ -104,8 +104,10 @@ function admin_objet()
 	array_unshift($objets, 'rubrique');
 	foreach ($objets as $obj) {
 		$type = $obj;
-		$_id_type = id_table_objet($type);
-		if (isset($GLOBALS['contexte'][$_id_type]) AND $id = $GLOBALS['contexte'][$_id_type]) {
+		if ($type==objet_type($type,false)
+			AND $_id_type = id_table_objet($type)
+			AND isset($GLOBALS['contexte'][$_id_type])
+			AND $id = $GLOBALS['contexte'][$_id_type]) {
 			$id = sql_getfetsel($_id_type, table_objet_sql($type), "$_id_type=".intval($id));
 			if ($id) {
 				$env[$_id_type] = $id;
