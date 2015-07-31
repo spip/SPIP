@@ -294,7 +294,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_classement_2' => 'von @liste@',
 'info_code_acces' => 'Vergessen Sie ihre Zugangsdaten nicht!',
 'info_compatibilite_html' => 'Zu respektierende HTML Norm',
-'info_compresseur_gzip' => 'Wir empfehlen vorab zu testen, ob der Provider bereits PHP-Skripte komprimiert. Dazu können Sie z.B. den Dienst @testgzip@ nutzen.', # Ma primière traduction avec trad.spip.org - mercin kent1 ! MODIF
+'info_compresseur_gzip' => 'Wir empfehlen, vorab zu testen, ob der Provider bereits PHP-Skripte komprimiert. Dazu können Sie z.B. den Dienst @testgzip@ nutzen.', # Ma première traduction avec trad.spip.org - merci kent1 !
 'info_compresseur_texte' => 'Falls Ihr Server HTML Seiten nicht automatisch für die Übertragung zum Websurfer komprimiert, können Sie hier versuchen, die Kompression zu erzeingen und so die Datenmenge der übertragenen Seiten zu reduzieren. <b>Achtung</b> : Diese Einstellung kann manche Server merklich verlangsamen.',
 'info_config_suivi' => 'Wenn es sich bei dieser Adresse um eine Mailing-Liste handelt, können Sie unten die Adresse angeben, unter der sich Teilnehmer der Website anmelden können. Es kann sich um den URL einer Webseite handeln (die ein Anmeldeformular enthält) oder um eine E-Mail Adresse mit angehängtem Parameter (z.B. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Sie können die Mailing-Liste dieser Website abonnieren. Sie werden dann per E-Mail über neu zur Veröffentlichung vorgeschlagene Artikel informiert.',
@@ -327,7 +327,7 @@ französischen SPIP-Dokumentation</a>.',
 'info_ecrire_article' => 'Bevor Sie Artikel schreiben könnnen, müssen Sie mindestens eine Rubrik anlegen.',
 'info_email_envoi' => 'Absenderadresse (freiwillige Angabe)',
 'info_email_envoi_txt' => 'Geben Sie hier die Absenderadresse der E-Mails an (ohne diese Angabe wird die Empfängeradresse als Absender eingetragen). ',
-'info_email_webmestre' => 'E-Mail des Webmasters (freiwillige Angabe)', # MODIF
+'info_email_webmestre' => 'E-Mail des Webmasters',
 'info_entrer_code_alphabet' => 'Geben Sie die Bezeichnung des gewünschten Zeichensatz an: ',
 'info_envoi_email_automatique' => 'Automatischer Mailversand',
 'info_envoyer_maintenant' => 'Jetzt schicken',
@@ -361,7 +361,7 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_historique_texte' => 'Die Versionskontrolle ermöglicht es, alle Änderungen an einem Artikel aufzuzeichnen und die Unterschiede zwischen aufeinander folgenden Versionen anzuzeigen.',
 'info_identification_publique' => 'Ihre öffentliche Identität ...',
 'info_image_process' => 'Bitte wählen Sie das beste Verfahren zum Generieren der Miniaturbilder, indem Sie auf ein Bild klicken.',
-'info_image_process2' => '<b>Bemerkung:</b> <i>Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht für die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen möchten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen «GD» oder «Imagick» einzurichten.</i>', # MODIF
+'info_image_process2' => 'Wenn kein Bild angezeigt wird, ist der Server ihrer Website nicht für die Verwendung solcher Werkzeuge eingerichtet. Wenn Sie diese Funktionen nutzen möchten, wenden Sie sich bitte an den verantwortlichen Techniker und bitten ihn, die Erweiterungen «GD» oder «Imagick» einzurichten.',
 'info_images_auto' => 'automatisch berechnete Bilder',
 'info_informations_personnelles' => 'Persönliche Informationen',
 'info_inscription_automatique' => 'Automatische Anmeldung neuer Redakteure',
@@ -465,13 +465,13 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gelb; Admin
 'info_question_inscription_nouveaux_redacteurs' => 'Möchten Sie, dass sich neue Redakteure vom öffentlichen Bereich
  aus anmelden können?  Wenn Sie es wollen, können sich Besucher über ein automatisch
  erstelltes Formular anmelden und Artikel vorschlagen.
- <blockquote><i>Nach der Anmeldung erhalten die neuen Redakteure automatisch
+ <div class="notice">Nach der Anmeldung erhalten die neuen Redakteure automatisch
  eine E-Mail mit ihren Zugangsdaten. Manche Webhoster unterbinden den Mailversand
  von ihren Webservern aus.
- In diesem Fall funktioniert die automatische Anmeldung nicht.', # MODIF
+ In diesem Fall funktioniert die automatische Anmeldung nicht.</div>',
 'info_question_utilisation_moteur_recherche' => 'Wollen Sie die integrierte Suchfunktion von SPIP verwenden? (ohne Suchfunktion wird Ihr System schneller.)',
 'info_question_vignettes_referer_non' => 'Keine Thumbnails der Herkunftswebsites anzeigen',
-'info_qui_edite' => '@nom_auteur_modif@ hat vor  @date_diff@ an diesem Objekt gearbeitet.', # MODIF
+'info_qui_edite' => '@nom_auteur_modif@ hat vor  @date_diff@ Minuten an diesem Objekt gearbeitet.',
 'info_racine_site' => 'OBERSTE EBENE DER WEBSITE',
 'info_recharger_page' => 'Bitte laden Sie diese Seite in ein paar Augenblicken erneut.',
 'info_recherche_auteur_a_affiner' => 'Zu viele Fundstellen für R20;@cherche_auteur@R21; - bitte grenzen Sie die Suche ein.',
