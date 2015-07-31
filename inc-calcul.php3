@@ -56,9 +56,10 @@ function transformer_lien_logo($contexte, $lien) {
 // Ajouter le &var_recherche=toto dans les boucles de recherche
 //
 function url_var_recherche($url, $activer_url_recherche) {
+	include_ecrire('inc_surligne.php3');
 	if ($activer_url_recherche && $GLOBALS['HTTP_GET_VARS']['recherche'] && !ereg("var_recherche", $url)) {
 		$url .= strpos($url, '?') ? '&' : '?';
-		$url .= "var_recherche=".urlencode($GLOBALS['recherche']);
+		$url .= "var_recherche=".urlencode(surligner_sans_accents($GLOBALS['recherche']));
 	}
 	return $url;
 }

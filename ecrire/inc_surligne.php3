@@ -6,13 +6,8 @@ if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
 
-// utilise avec ob_start() et ob_get_contents() pour
-// mettre en rouge les mots passes dans $var_recherche
-function surligner_mots($page, $mots) {
-	global $nombre_surligne;
-	include_ecrire("inc_texte.php3"); // pour le reglage de $nombre_surligne
 
-	// si quelqu'un a une idee pour rendre ca compatible utf-8 ?
+function surligner_sans_accents ($mot) {
 	$accents =
 		/* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
 		/* a */ chr(224).chr(225).chr(226).chr(227).chr(228).chr(229).
@@ -27,6 +22,25 @@ function surligner_mots($page, $mots) {
 		/* u */ chr(249).chr(250).chr(251).chr(252).
 		/* yNn */ chr(255).chr(209).chr(241);
 
+	if (lire_meta('charset') == 'utf-8') {
+		include_ecrire('inc_charsets.php3');
+		$mot = unicode2charset(utf_8_to_unicode($mot), 'iso-8859-1');
+	}
+
+	return strtr($mot, $accents, "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
+}
+
+// tres sale
+function split_by_char($str) {
+$len = strlen($str);
+$streturn = array();
+for ($i=0; $i<$len; $i++) {
+$streturn[$i] = substr($str, $i, 1);
+}
+return $streturn;
+}
+
+function surligner_regexp_accents ($mot) {
 	$accents_regexp = array(
 		"a" => "[a".chr(224).chr(225).chr(226).chr(227).chr(228).chr(229). chr(192).chr(193).chr(194).chr(195).chr(196).chr(197)."]",
 		"o" => "[o".chr(242).chr(243).chr(244).chr(245).chr(246).chr(248). chr(210).chr(211).chr(212).chr(213).chr(214).chr(216)."]",
@@ -38,19 +52,41 @@ function surligner_mots($page, $mots) {
 		"n" => "[n".chr(209).chr(241)."]"
 	);
 
+	$mot = surligner_sans_accents ($mot);
+	if (lire_meta('charset') == 'utf-8') {
+		while(list($k,$s) = each ($accents_regexp)) {
+			$accents_regexp_utf8[$k] = "(".join("|", split_by_char(ereg_replace("\]|\[","",$accents_regexp[$k]))).")";
+		}
+		$mot = strtr(strtolower($mot), $accents_regexp_utf8);
+		$mot = importer_charset($mot, 'iso-8859-1');
+	} else
+		$mot = strtr(strtolower($mot), $accents_regexp);
+
+	return $mot;
+}
+
+// utilise avec ob_start() et ob_get_contents() pour
+// mettre en rouge les mots passes dans $var_recherche
+function surligner_mots($page, $mots) {
+	global $nombre_surligne;
+	include_ecrire("inc_texte.php3"); // pour le reglage de $nombre_surligne
+
 	// Remplacer les caracteres potentiellement accentues dans la chaine
 	// de recherche par les choix correspondants en syntaxe regexp (!)
 	$mots = split("[[:space:]]+", $mots);
+
 	while (list(, $mot) = each ($mots)) {
 		if (strlen($mot) >= 2) {
-			$mot = strtr($mot, $accents, "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
-			$mot = strtr(strtolower($mot), $accents_regexp);
+			$mot = surligner_regexp_accents($mot);
 			$mots_surligne[] = $mot;
 		}
 	}
 
+	if (is_array($mots_surligne))
+		$mots_surligne = join('|', $mots_surligne);
+
 	// ne pas traiter tout ce qui est avant </head> ou <body>
-	$regexp = '/<\/head>|<body[^>]*>/i';
+	$regexp = '/<\/head>|<body[^>]*>/i'.$u;
 	if (preg_match($regexp, $page, $exp)) {
 		$debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
 		$page = substr($page, strlen($debut));
@@ -62,11 +98,10 @@ function surligner_mots($page, $mots) {
 	// traiter <textarea...>....</textarea> comme un tag.
 	if ($mots_surligne) {
 		$page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
-		$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('.join('|', $mots_surligne).')[[:alnum:]_]*?)/Uis';
+		$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('.$mots_surligne.')[[:alnum:]_]*?)/Uis';
 		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
 		$page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
 	}
-
 	return $debut.$page;
 }
 
