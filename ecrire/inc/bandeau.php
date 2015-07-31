@@ -249,17 +249,18 @@ function bandeau_creer_url($url, $args=""){
 // http://doc.spip.org/@bandeau_principal
 function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 {
+	$num = count($GLOBALS['boutons_admin']);
+	// Reperer si on veut un espacement entre les 2 parties du bandeau.
+	if (key_exists('espacement', $GLOBALS['boutons_admin'])) $num--;
+    // Et eviter de produire un UL vide.
+	if ($num <= 0) return '';
 	$res = '';
 	$decal = 0;
-	//cherche les espacement pour determiner leur largeur
-	$num_espacements = 0;
-	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
-		 if ($page=='espacement') $num_espacements++;
-	}
-	$larg_espacements = ($largeur-(count($GLOBALS['boutons_admin'])-$num_espacements)*_LARGEUR_ICONES_BANDEAU)/$num_espacements;
+
 	foreach($GLOBALS['boutons_admin'] as $page => $detail) {
 		if ($page=='espacement') {
-			$res .= "<li class='cellule48' style='width:".$larg_espacements."px'><span class='menu-item' style='width:"._LARGEUR_ICONES_BANDEAU."px'>&nbsp;</span></li>";
+			$espacement = $largeur-($num*_LARGEUR_ICONES_BANDEAU) . 'px';
+			$res .= "<li class='cellule48' style='width:$espacement'><span class='menu-item' style='width:"._LARGEUR_ICONES_BANDEAU."px'>&nbsp;</span></li>";
 		} else {
 			if ($detail->url)
 				$lien_noscript = bandeau_creer_url($detail->url);
