@@ -506,7 +506,7 @@ function sql_count($res, $serveur='', $option=true)
  * Indique au gestionnaire SQL de libérer de sa mémoire la ressoucre de
  * résultat indiquée car on n'a plus besoin de l'utiliser.
  * 
- * @param Ressource|Object $r
+ * @param Ressource|Object $res
  *     Ressource de résultat
  * @param string $serveur
  *     Nom de la connexion
@@ -845,7 +845,12 @@ function sql_drop_table($table, $exist='', $serveur='', $option=true)
  * @param string $table    Nom de la vue SQL
  * @param string $exist    True pour ajouter un test d'existence avant de supprimer
  * @param string $serveur  Nom de la connexion
- * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @param bool $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
  *     - string Texte de la requête si demandé
  *     - true si la requête a réussie, false sinon
@@ -1025,7 +1030,12 @@ function sql_create($nom, $champs, $cles=array(), $autoinc=false, $temporary=fal
  * @api
  * @param string $nom      Nom de la base (sans l'extension de fichier si gestionnaire SQLite)
  * @param string $serveur  Nom de la connexion
- * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @param bool $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool true si la base est créee.
  **/
 function sql_create_base($nom, $serveur='', $option=true)
@@ -1116,9 +1126,14 @@ function sql_errno($serveur='') {
  * Retourne une explication de requête (Explain) SQL
  *
  * @api
- * @param string $query    Texte de la requête
+ * @param string $q        Texte de la requête
  * @param string $serveur  Nom de la connexion
- * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @param bool $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return array           Tableau de l'explication
  */
 function sql_explain($q, $serveur='', $option=true) {
@@ -1135,7 +1150,12 @@ function sql_explain($q, $serveur='', $option=true) {
  * @api
  * @param string $table    Nom de la table
  * @param string $serveur  Nom de la connexion
- * @param bool $requeter   Exécuter de la requête, sinon la retourner
+ * @param bool $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool            Toujours true
  */
 function sql_optimize($table, $serveur='', $option=true) {
@@ -1152,7 +1172,12 @@ function sql_optimize($table, $serveur='', $option=true) {
  * @api
  * @param string $table    Nom de la table SQL
  * @param string $serveur  Nom de la connexion
- * @param bool $requeter   Exécuter la requête, sinon la retourner
+ * @param bool $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return bool|string
  *     - string Texte de la requête si demandée,
  *     - true si la requête a réussie, false sinon

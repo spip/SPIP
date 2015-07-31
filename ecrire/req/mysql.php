@@ -850,6 +850,8 @@ function spip_mysql_countsel($from = array(), $where = array(),
  *     Requête qui était exécutée
  * @param string $serveur
  *     Nom de la connexion
+ * @param bool $requeter
+ *     Inutilisé
  * @return string
  *     Erreur eventuelle
  **/
@@ -910,16 +912,28 @@ function spip_mysql_free($r, $serveur='',$requeter=true) {
 	return (is_resource($r)?mysql_free_result($r):false);
 }
 
-// http://doc.spip.org/@spip_mysql_insert
 /**
- * @param $table
- * @param $champs
- * @param $valeurs
- * @param string $desc
+ * Insère une ligne dans une table 
+ *
+ * @param string $table
+ *     Nom de la table SQL
+ * @param string $champs
+ *     Liste des colonnes impactées,
+ * @param string $valeurs
+ *     Liste des valeurs,
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
  * @param string $serveur
+ *     Nom du connecteur
  * @param bool $requeter
- * @return int|string
- */
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string|int|array
+ *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur,
+ *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
+**/
 function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
@@ -950,38 +964,59 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$req
 	// return $r ? $r : (($r===0) ? -1 : 0); pb avec le multi-base.
 }
 
-// http://doc.spip.org/@spip_mysql_insertq
 /**
- * @param $table
- * @param array $couples
+ * Insère une ligne dans une table, en protégeant chaque valeur
+ *
+ * @param string $table
+ *     Nom de la table SQL
+ * @param string $couples
+ *    Couples (colonne => valeur)
  * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
  * @param string $serveur
+ *     Nom du connecteur
  * @param bool $requeter
- * @return int|string
- */
-function spip_mysql_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string|int|array
+ *     - int|true identifiant de l'élément inséré (si possible), ou true, si réussite
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur,
+ *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
+**/
+function spip_mysqli_insertq($table, $couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table, $serveur);
 	if (!$desc) $couples = array();
 	$fields =  isset($desc['field'])?$desc['field']:array();
 
 	foreach ($couples as $champ => $val) {
-		$couples[$champ]= spip_mysql_cite($val, $fields[$champ]);
+		$couples[$champ]= spip_mysqli_cite($val, $fields[$champ]);
 	}
 
-	return spip_mysql_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
+	return spip_mysqli_insert($table, "(".join(',',array_keys($couples)).")", "(".join(',', $couples).")", $desc, $serveur, $requeter);
 }
 
 
-// http://doc.spip.org/@spip_mysql_insertq_multi
 /**
- * @param $table
+ * Insère plusieurs lignes d'un coup dans une table
+ *
+ * @param string $table
+ *     Nom de la table SQL
  * @param array $tab_couples
+ *     Tableau de tableaux associatifs (colonne => valeur)
  * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
  * @param string $serveur
+ *     Nom du connecteur
  * @param bool $requeter
- * @return bool|int|string
- */
+ *     Exécuter la requête, sinon la retourner
+ * @return bool|string
+ *     - True en cas de succès,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $serveur='',$requeter=true) {
 
 	if (!$desc) $desc = description_table($table, $serveur);
