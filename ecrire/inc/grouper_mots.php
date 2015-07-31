@@ -41,11 +41,11 @@ function inc_grouper_mots_dist($id_groupe, $total) {
 	} else {
 		$styles = array(array('arial11'), array('arial1', 100));
 	}
-	return $presenter_liste($requete, 'afficher_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $styles, $tmp_var, '', '', $url);
+	return $presenter_liste($requete, 'presenter_groupe_mots_boucle', $tableau, array($occurrences, $total, $deb_aff), false, $styles, $tmp_var, '', '', $url);
 }
 
 // http://doc.spip.org/@afficher_groupe_mots_boucle
-function afficher_groupe_mots_boucle($row, $own)
+function presenter_groupe_mots_boucle($row, $own)
 {
 	global $connect_statut;
 
