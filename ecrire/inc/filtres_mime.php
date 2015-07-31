@@ -24,7 +24,7 @@ function filtre_message_dist($t) {return '';}
 function filtre_multipart_dist($t) {return '';}
 
 // http://doc.spip.org/@filtre_text_txt_dist
-function filtre_text_txt_dist($t) {
+function filtre_text_dist($t) {
 	return '<pre>' . echapper_tags($t) . '</pre>';
 }
 
@@ -52,7 +52,7 @@ function filtre_text_csv_dist($t) {
 function filtre_text_html_dist($t)
 {
 	if (!preg_match(',^(.*?)<body[^>]*>(.*)</body>,is', $t, $r))
-		return filtre_text_txt_dist($t);
+		return appliquer_filtre($t,'text/plain');
 
 	list(,$h,$t) = $r;
 
