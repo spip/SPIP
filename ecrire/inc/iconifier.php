@@ -147,14 +147,18 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 // http://doc.spip.org/@decrire_logo
 function decrire_logo($id_objet, $mode, $id, $width, $height, $img, $titre="", $script="", $flag_modif=true) {
 
-	list($fid, $dir, $nom, $format) = $img;
+	list($fid, $dir, $nom, $format, $timestamp) = $img;
 	include_spip('inc/filtres_images_mini');
+
 	$res = image_reduire("<img src='$fid' alt='' class='miniature_logo' />", $width, $height);
 
-	if ($res)
+	if ($res){
+			$src = extraire_attribut($res,'src');
+			$res = inserer_attribut($res, 'src', "$src?$timestamp");
 	    $res = "<div><a href='" .	$fid . "'>$res</a></div>";
+	}
 	else
-	    $res = "<img src='$fid' width='$width' height='$height' alt=\"" . htmlentities($titre) . '" />';
+	    $res = "<img src='$fid?$timestamp' width='$width' height='$height' alt=\"" . htmlentities($titre) . '" />';
 	if ($taille = @getimagesize($fid))
 		$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 
