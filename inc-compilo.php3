@@ -201,8 +201,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	}
 
 	// Cas {1/3} {1,4} {n-2,1}...
-	$flag_parties = ($boucle->partie AND $boucle->total_parties);
-	$flag_cpt = $flag_parties || // pas '$compteur' a cause du cas 0
+	$flag_cpt = $boucle->mode_partie || // pas '$compteur' a cause du cas 0
 		strpos($return,'compteur_boucle');
 
 	//
@@ -210,13 +209,13 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	$debut = '';
 	if ($flag_cpt)
-		$debut = "\n		\$compteur_boucle++;";
+		$debut .= "\n		\$compteur_boucle++;";
 
-	if ($flag_parties)
+	if ($boucle->mode_partie)
 		$debut .= '
-		if ($compteur_boucle >= $debut_boucle
-		AND $compteur_boucle <= $fin_boucle) {';
-	
+		if ($compteur_boucle-1 >= $debut_boucle
+		AND $compteur_boucle-1 <= $fin_boucle) {';
+
 	if ($lang_select AND !$constant)
 		$debut .= '
 			if ($x = $Pile[$SP]["lang"]) $GLOBALS[\'spip_lang\'] = $x; // lang_select';
@@ -246,7 +245,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	}
 
 	// Fin de parties
-	if ($flag_parties)
+	if ($boucle->mode_partie)
 		$corps .= "\n		}\n";
 
 
@@ -329,8 +328,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($flag_cpt)
 		$init .= "\n	\$compteur_boucle = 0;";
 
-
-	if ($flag_parties)
+	$boucle->mode_partie.$boucle->partie.$boucle->total_parties."  ";
+	if ($boucle->mode_partie)
 		$init .= calculer_parties($boucle->partie,
 			$boucle->mode_partie,
 			$boucle->total_parties,
@@ -387,17 +386,17 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 	// {x,1}
 	if ($op2 == '+') {
 		$retour .= "\n	"
-			. '$fin_boucle = $debut_boucle + ' . $partie . ' - 1;';
+			. '$fin_boucle = $debut_boucle + ' . $total_parties . ' - 1;';
 	}
 	// {x,n-1}
 	if ($op2 == '-') {
 		$retour .= "\n	"
-			. '$fin_boucle = $debut_boucle+($nombre_boucle-'.$partie.')-1;';
+			.'$fin_boucle = $debut_boucle + $nombre_boucle - '.$total_parties.' - 1;';
 	}
 
 	// Rabattre $fin_boucle sur le maximum
 	$retour .= "\n	"
-		.'$fin_boucle = min($fin_boucle, $nombre_boucle);';
+		.'$fin_boucle = min($fin_boucle, $nombre_boucle - 1);';
 
 	// calcul du total boucle final
 	$retour .= "\n	"
