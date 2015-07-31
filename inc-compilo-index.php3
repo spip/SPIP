@@ -279,7 +279,7 @@ function champs_traitements ($p) {
 		if (!$ps)
 			$ps = $table_des_traitements[$p->nom_champ][0];
 	}
-		 
+
 	if (!$ps) return $p->code;
 
 	// Si une boucle sous-jacente (?) traite les documents, on insere ici
@@ -295,6 +295,18 @@ function champs_traitements ($p) {
 	// il faudrait aussi corriger les raccourcis d'URL locales
 	if ($p->boucles[$p->id_boucle]->sql_serveur)
 		$p->code = 'supprime_img(' . $p->code . ')';
+
+
+	// Passer |safehtml sur les boucles "sensibles"
+	switch ($p->type_requete) {
+		case 'forums':
+		case 'signatures':
+		case 'syndic_articles':
+			$ps = str_replace('%s', 'safehtml(%s)', $ps);
+			break;
+		default:
+			break;
+	}
 
 	// Remplacer enfin le placeholder %s par le vrai code de la balise
 	return str_replace('%s', $p->code, $ps);
@@ -321,22 +333,8 @@ function applique_filtres($p) {
 
 	// Securite
 	if ($p->interdire_scripts
-	AND $p->etoile != '**') {
-
-		switch ($p->type_requete) {
-			// Passer |safehtml sur les boucles "sensibles"
-			case 'forums':
-			case 'signatures':
-			case 'syndic_articles':
-				$code = "safehtml($code)";
-				break;
-
-			// et |interdire_scripts sur les autres
-			default:
-				$code = "interdire_scripts($code)";
-				break;
-		}
-	}
+	AND $p->etoile != '**')
+		$code = "interdire_scripts($code)";
 
 	return $code;
 }
