@@ -298,6 +298,12 @@ $liste_des_forums = array(
 			'info_pas_de_forum' => 'non'
 );
 
+// liste des methodes d'authentifications
+$liste_des_authentifications = array(
+			'spip'=>'spip',
+			'ldap'=>'ldap'
+);
+
 // Experimental : pour supprimer systematiquement l'affichage des numeros
 // de classement des titres, recopier la ligne suivante dans mes_options :
 # $table_des_traitements['TITRE'][]= 'typo(supprimer_numero(%s))';

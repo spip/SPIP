@@ -68,7 +68,7 @@ function verifier_login($session_login, $session_password, $session_md5pass="", 
 
 	// Essayer tour a tour les differentes sources d'authenfication
 	// on s'en souviendra dans visiteur_session['auth']
-	$sources_auth = array('spip', 'ldap');
+	$sources_auth = $GLOBALS['liste_des_authentifications'];
 	while (!$auteur
 	AND list(,$methode) = each($sources_auth)) {
 		if ($auth = charger_fonction('auth_'.$methode, 'inc', true)
