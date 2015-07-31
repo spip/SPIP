@@ -11,7 +11,7 @@
 			<li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
 				<label for="oubli"><:pass_choix_pass:></label>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
-				<input type='password' name='oubli' id='oubli' value="#ENV**{oubli}" />
+				<input type='password' class='password' name='oubli' id='oubli' value="#ENV**{oubli}" />
 			</li>
 		</ul>
 	</fieldset>

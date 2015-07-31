@@ -11,7 +11,7 @@
 			<li class="saisie_oubli obligatoire[ (#ENV*{erreurs}|table_valeur{oubli}|oui)erreur]">
 				<label for="oubli"><:form_pet_votre_email:></label>
 				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{oubli})</span>]
-				<input type='text' name='oubli' id='oubli' value="#ENV**{oubli}" />
+				<input type='text' class='text' name='oubli' id='oubli' value="#ENV**{oubli}" />
 			</li>
 		</ul>
 	</fieldset>
