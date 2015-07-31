@@ -42,8 +42,9 @@ tester_variable('url_glossaire_externe', "http://@lang@.wikipedia.org/wiki/");
 
 // On ne prend la $puce_rtl par defaut que si $puce n'a pas ete redefinie
 
-if (!tester_variable('puce', "<li class='spip_puce' style='list-style-image: url(puce.gif)'>")) {
-	tester_variable('puce_rtl', "<li class='spip_puce' style='list-style-image: url(puce_rtl.gif)'>");
+//if (!tester_variable('puce', "<li class='spip_puce' style='list-style-image: url(puce.gif)'>")) {
+if (!tester_variable('puce', "<img class='spip_puce' src='puce.gif' alt='-'>&nbsp;")) {
+	tester_variable('puce_rtl', "<img class='spip_puce' src='puce_rtl.gif' alt='-'>&nbsp;");
 }
 
 
