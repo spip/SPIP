@@ -185,7 +185,6 @@ echo "<P><HR><P>";
 	debut_cadre_couleur("$logo_parent", false, "", _T('titre_cadre_interieur_rubrique').aide ("artrub"));
 
 	// appel du selecteur de rubrique
-	include_ecrire('inc_rubriques');
 	$restreint = ($GLOBALS['statut'] == 'publie');
 	echo selecteur_rubrique($id_rubrique, 'article', $restreint);
 
