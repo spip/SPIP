@@ -82,7 +82,7 @@ function bandeau_menu() {
 		}
 		$ret .= "</div>";
 	}
-	unset($GLOBALS['db_art_cache']); // On libère la mémoire
+	unset($GLOBALS['db_art_cache']); // On libere la memoire
 	return $ret;
 }
 
@@ -157,9 +157,9 @@ function js_menu_rubriques_dist()
 	header('Content-type: text/javascript; charset='.$GLOBALS['meta']['charset']);
 	include_ecrire("inc_texte.php3");
 	echo "document.write(\"";
-	echo "<table><tr><td valign='top' width='200'>";
+	echo "<div valign='top' width='200'>";
 	echo bandeau_menu();
-	echo "</td></tr></table>";
+	echo "</div>";
 	echo "\");\n";
 }
 ?>

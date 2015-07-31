@@ -12,7 +12,9 @@ a.spip_in { }
 a.spip_out { }
 a.spip_glossaire { }
 
-.spip_code { }
+.spip_code {
+	font-family: monospace;
+}
 
 p.spip_note { }
 

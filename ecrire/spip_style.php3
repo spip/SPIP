@@ -1245,6 +1245,9 @@ a.spip_out {
 a.spip_url {
 }
 
+.spip_code {
+	font-family: monospace;
+}
 
 a.spip_note {
 	background-color:#eeeeee;
