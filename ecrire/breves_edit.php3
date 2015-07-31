@@ -15,29 +15,6 @@ include ("inc.php3");
 include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_barre.php3");
 
-function enfant($leparent) {
-	global $id_parent;
-	global $id_rubrique;
-	global $spip_lang_left;
-	
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent'
- 		ORDER BY 0+titre,titre";
- 	$result=spip_query($query);
-	$style = http_style_background('secteur-12.gif',  "$spip_lang_left no-repeat; padding-$spip_lang_left: 16px");
-
-	while($row=spip_fetch_array($result)){
-		$my_rubrique=$row['id_rubrique'];
-		$titre=$row['titre'];
-		$lang_rub = $row['lang'];
-		$langue_choisie_rub = $row['langue_choisie'];
-		
-		$titre = couper(textebrut(typo($titre)), 50); // largeur maxi
-		if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique). $style .'>' .
-		  supprimer_tags($titre)."\n";
-	}
-}
-
 $id_breve = intval($id_breve);
 if ($new != "oui") {
 	$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
@@ -130,9 +107,9 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	debut_cadre_couleur("$logo_parent", false, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
 
-		echo "<SELECT NAME='id_rubrique' CLASS='forml' style='max-height: 24px; font-size: 90%;' SIZE=1>\n";
-		enfant(0);
-		echo "</SELECT>\n";
+	// selecteur de rubrique (pas d'ajax car toujours racine)
+	include_ecrire('inc_rubriques.php3');
+	echo selecteur_rubrique_html($id_rubrique, 'breve', ($statut == 'publie'));
 
 	fin_cadre_couleur();
 	

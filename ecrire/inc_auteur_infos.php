@@ -256,24 +256,6 @@ function apparait_auteur_infos($id_auteur, $auteur)
 	}
 }
 
-function ajax_rubriques_acces($id_parent)
-{
-	$query = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_parent");
-	if ($row = spip_fetch_array($query)) {
-		$titre_parent = entites_html(typo($row["titre"])); 
-	} else {
-		$titre_parent = entites_html(_T("info_racine_site"));
-	}
-	
-	return  "<table width='100%'><tr width='100%'><td width='45'>" . 
-	  "<a href='#' onClick=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';} return true;\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> " . 
-	  "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;' />" . 
-	  "</td><td>" . 
-	  "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />" . 
-	  "<input type='hidden' id='id_rubrique' name='id_rubrique' value='$id_rubrique' />" . 
-	  "</td></tr></table><div id='selection_rubrique' style='display: none;'></div>";
-
-}
 
 function choix_statut_auteur($statut)
 {
@@ -381,20 +363,24 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 				echo "</ul>";
 		}
 		echo "</div>\n";
-		// si on a le droit de donner des droits, prevoir Ajax.
-		echo debut_block_visible("statut$id_auteur");
+
+		// Ajouter une rubrique a un administrateur restreint
 		if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-				echo "\n<div id='ajax_rubrique' class='arial1'><br />\n";
-				if (spip_num_rows($result_admin) == 0) {
-					echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
-				} else {
-					echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
-				}
-				echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
-				echo ajax_rubriques_acces(0);
-				echo "</div>\n";
-			}
-		echo fin_block();
+			echo debut_block_visible("statut$id_auteur");
+			echo "\n<div id='ajax_rubrique' class='arial1'><br />\n";
+			if (spip_num_rows($result_admin) == 0)
+				echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
+			else
+				echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
+			echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
+
+			// selecteur de rubrique
+			include_ecrire('inc_rubriques.php3');
+			echo selecteur_rubrique(0, 'auteur', false);
+
+			echo "</div>\n";
+			echo fin_block();
+		}
 
 		echo '</div>'; // fin de la balise a visibilite conditionnelle
 

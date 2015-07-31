@@ -22,7 +22,7 @@ if (!$id_breve) $id_breve=0;
 $flag_mots = lire_meta("articles_mots");
 
 if (($id_breve == 0) AND ($new == "oui")) {
-	$id_rubrique = intval($id_rubrique);
+	$id_rubrique = intval($id_parent);
 	$langue_new = '';
 	$result_lang_rub = spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 	if ($row = spip_fetch_array($result_lang_rub)) {
@@ -46,6 +46,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 	$titre = addslashes($titre);
 	$texte = addslashes($texte);
 	$lien_titre = addslashes($lien_titre);
+	$id_rubrique = intval($id_parent);
 
 	// recoller les champs du extra
 	if ($champs_extra) {

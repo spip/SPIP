@@ -11,101 +11,6 @@
 \***************************************************************************/
 
 
-// Cree un menu de rubriques a partir de la rubrique parent (recursif
-// et pas efficace)
-function enfant($leparent){
-	global $id_parent;
-	global $id_rubrique;
-	static $i = 0, $premier = 1;
-	global $statut;
-	global $connect_toutes_rubriques;
-	global $couleur_claire, $spip_lang_left;
-	global $browser_name, $browser_version;
-	global $ja_rub;
-
-	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY 0+titre, titre";
- 	$result=spip_query($query);
-
-	while($row=spip_fetch_array($result)){
-		$my_rubrique=$row['id_rubrique'];
-		$titre=$row['titre'];
-		$statut_rubrique=$row['statut'];
-		$lang_rub = $row['lang'];
-		$langue_choisie_rub = $row['langue_choisie'];
-		$style = "";
-		$espace = "";
-
-		// si l'article est publie il faut etre admin pour avoir le menu
-		// sinon le menu est present en entier (proposer un article)
-		if ($statut != "publie" OR acces_rubrique($my_rubrique)) {
-			$rubrique_acceptable = true;
-		} else {
-			$rubrique_acceptable = false;
-		}
-
-
-		if (eregi("mozilla", $browser_name)) {
-			$style .= "padding-$spip_lang_left: 16px; ";
-			$style .= "margin-$spip_lang_left: ".(($i-1)*16)."px;";
-		} else {
-			for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-		}
-		switch ($i) {
-		case 1:
-			$espace= "";
-			$style .= "font-weight: bold;";
-			break;
-		case 2:
-			$style .= "color: #202020;";
-			break;
-		case 3:
-			$style .= "color: #404040;";
-			break;
-		case 4:
-			$style .= "color: #606060;";
-			break;
-		case 5:
-			$style .= "color: #808080;";
-			break;
-		default:
-			$style .= "color: #A0A0A0;";
-			break;
-		}
-		if ($i==1) {
-			$style .= "background-image: url(" . _DIR_IMG_PACK. "secteur-12.gif);";
-			$style .= "background-color: $couleur_claire;";
-			$style .= "font-weight: bold;";
-		}
-		else if ($i==2) {
-			//$style .= "background: url(" . _DIR_IMG_PACK. "rubrique-12.gif) $spip_lang_left no-repeat;";
-			$style .= "border-bottom: 1px solid $couleur_claire;";
-			$style .= "font-weight: bold;";
-		}
-		else {
-			//$style .= "background: url(" . _DIR_IMG_PACK. "rubrique-12.gif) $spip_lang_left no-repeat;";
-		}
-
-			$selec_rub = "selec_rub";
-			if ($browser_name == "MSIE" AND floor($browser_version) == "5") $selec_rub = ""; // Bug de MSIE MacOs 9.0
-
-		if ($rubrique_acceptable) {
-			if ($i == 1 && !$premier) echo "<option value='$my_rubrique'>\n"; // sert a separer les secteurs
-			// largeur maxi a 50
-			$titre = couper(supprimer_tags(typo(extraire_multi($titre)))." ", 50);
-			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-			echo "<option".mySel($my_rubrique,$id_rubrique)." class='$selec_rub' style=\"$style\">$espace$titre</option>\n";
-		
-		
-			$ja_rub .= addslashes("[$my_rubrique] $titre ///");
-		}
-		$premier = 0;
-		enfant($my_rubrique);
-	}
-	$i=$i-1;
-}
-
-
 //
 // Gestion des textes trop longs (limitation brouteurs)
 //
@@ -134,34 +39,6 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 		return (array($texte,''));
 }
 
-
-function rubrique_articles_edit($titre_parent, $id_rubrique)
-{
-	global $spip_display;
-
-	// Mode sans Ajax
-	if ($GLOBALS['_COOKIE']['spip_accepte_ajax'] < 1) {
-		echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width: 99%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
-		enfant(0);
-		echo "</SELECT><BR>\n";
-		
-		echo _T('texte_rappel_selection_champs');
-	
-	}
-
-	// Mode avec Ajax
-	else {
-		echo "<table width='100%'><tr width='100%'><td width='45'>";
-		echo "<a href=\"#\" onClick=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';}\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
-		echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
-		echo "</td><td>";
-		echo "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
-		echo "<input type='hidden' id='id_rubrique' name='id_rubrique' value='$id_rubrique' />";
-		echo "</td></tr></table>";
-		echo "<div id='selection_rubrique' style='display: none;'></div>";
-	
-	}
-}
 
 
 function chapo_articles_edit($chapo, $articles_chapeau)
@@ -306,7 +183,10 @@ echo "<P><HR><P>";
 	}
 	debut_cadre_couleur("$logo_parent", false, "", _T('titre_cadre_interieur_rubrique').aide ("artrub"));
 
-	rubrique_articles_edit($titre_parent, $id_rubrique);
+	// appel du selecteur de rubrique
+	include_ecrire('inc_rubriques.php3');
+	$restreint = ($GLOBALS['statut'] == 'publie');
+	echo selecteur_rubrique($id_rubrique, 'article', $restreint);
 
 	fin_cadre_couleur();
 	

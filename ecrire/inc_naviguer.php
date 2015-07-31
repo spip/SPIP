@@ -418,11 +418,9 @@ function maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descri
 		}
 		// alors action = modifier
 		else {
-	  // si c'est une rubrique-secteur contenant des breves, ne deplacer
-	  // que si $confirme_deplace == 'oui'
-
-			if (($GLOBALS['confirme_deplace'] == 'oui') AND
-			    (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1")) > 0))
+			// si c'est une rubrique-secteur contenant des breves, ne deplacer
+			// que si $confirme_deplace == 'oui'
+			if ($GLOBALS['confirme_deplace'] != 'oui')
 				$id_parent = 0;
 		}
 		if ($GLOBALS['champs_extra']) {
