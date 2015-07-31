@@ -367,7 +367,8 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 			if (!isset($status['tables_copiees'][$table]))
 				$status['tables_copiees'][$table] = 0;
 
-			if ($status['tables_copiees'][$table]>=0
+			if (is_numeric($status['tables_copiees'][$table])
+				AND $status['tables_copiees'][$table]>=0
 				AND $desc_dest = base_preparer_table_dest($table, $desc_source, $serveur_dest, $status['tables_copiees'][$table] == 0)){
 				if ($callback_progression)
 					$callback_progression($status['tables_copiees'][$table],0,$table);
@@ -395,7 +396,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 					sql_drop_table($table,'',$serveur_source);
 					spip_log("drop $table sur serveur source '$serveur_source'",'dump');
 				}
-				$status['tables_copiees'][$table]=-max($status['tables_copiees'][$table],1);
+				$status['tables_copiees'][$table]=($status['tables_copiees'][$table]?-$status['tables_copiees'][$table]:"zero");
 				ecrire_fichier($status_file,serialize($status));
 				spip_log("tables_recopiees ".implode(',',$status['tables_copiees']),'dump');
 				if ($callback_progression)
@@ -403,7 +404,7 @@ function base_copier_tables($status_file, $tables, $serveur_source, $serveur_des
 			}
 			else {
 				if ($callback_progression)
-					$callback_progression(0,$status['tables_copiees'][$table],"$table".($status['tables_copiees'][$table]>=0?"[Echec]":""));
+					$callback_progression(0,$status['tables_copiees'][$table],"$table".((is_numeric($status['tables_copiees'][$table]) AND $status['tables_copiees'][$table]>=0)?"[Echec]":""));
 			}
 		}
 	}
