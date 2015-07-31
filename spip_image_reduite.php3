@@ -15,15 +15,25 @@ include ("ecrire/inc_version.php3");
 include_ecrire("inc_admin.php3");
 include_ecrire("inc_logos.php3");
 
-$img = $_GET['img'];
-$logo = $img;
-
 if (!$taille_y)
 	$taille_y = $taille_x;
-	
-if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
-	if ($i = cherche_image_nommee($regs[1], array($regs[2]))
-		AND verifier_action_auteur("reduire $taille_x $taille_y", $hash, $hash_id_auteur))
+
+// Chercher l'image dans le repertoire IMG/
+if (eregi("(\.\./)?(.*)\.(jpg|gif|png)$", $img, $regs)
+AND $i = cherche_image_nommee($regs[2], array($regs[3])) # hu ?
+) {
+	$img = $i[0].$i[1].'.'.$i[2];
+	// si on a deja la bonne taille, pas la peine de se fatiguer
+	$taille = @getimagesize($img);
+	if ($taille_x == $taille[0] AND $taille_y == $taille[1])
+		$stop = true;
+}
+
+if (lire_meta('creer_preview') <> 'oui')
+	$stop = true;
+
+if (!$stop
+AND verifier_action_auteur("reduire $taille_x $taille_y", $hash, $hash_id_auteur))
 	{
 		list($dir,$nom,$format) = $i;
 		$logo = $dir . $nom . '.' . $format;
@@ -31,18 +41,12 @@ if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		include_ecrire("inc_logos.php3");
 		$suffixe = '-'.$taille_x.'x'.$taille_y;
 		$preview = creer_vignette($logo, $taille_x, $taille_y, $format,('cache'.$suffixe), $nom.$suffixe);
-		if ($preview) {
-			$vignette = $preview['fichier'];
-			$width = $preview['width'];
-			$height = $preview['height'];
-			$retour = $vignette;
-		}
-		else if ($taille_origine = @getimagesize($logo)) {
-			$retour = $logo;
-		}
-
-		redirige_par_entete($retour);
-	}
+		if ($preview)
+			$img = $preview['fichier'];
 }
+
+// Envoie le navigateur vers l'image cible
+redirige_par_entete($img);
+
 
 ?>
