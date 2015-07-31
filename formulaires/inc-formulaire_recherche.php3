@@ -34,7 +34,7 @@ function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 	  }
 	}
 	if (!$lien)
-		$lien = 'recherche.php3';	# par defaut
+		$lien = 'recherche' .  _EXTENSION_PHP ;	# par defaut
 
 	return array('formulaire_recherche', 3600, 
 		array(

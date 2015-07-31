@@ -85,7 +85,7 @@ function login_pour_tous($login, $cible, $action) {
 	if ($echec_cookie AND !$ignore_auth_http) {
 		include_ecrire('inc_headers');
 		if (php_module())
-			$auth_http = 'spip_cookie.php3';
+			$auth_http = 'spip_cookie' . _EXTENSION_PHP;
 	}
 	// Attention dans le cas 'intranet' la proposition de se loger
 	// par auth_http peut conduire a l'echec.
@@ -142,7 +142,7 @@ function login_pour_tous($login, $cible, $action) {
 		array_merge(
 				array_map('texte_script', $row),
 				array(
-					'action2' => ($login ? 'spip_cookie.php3' : $action),
+				      'action2' => ($login ? ('spip_cookie' . _EXTENSION_PHP): $action),
 					'erreur' => $erreur,
 					'action' => $action,
 					'url' => $cible,

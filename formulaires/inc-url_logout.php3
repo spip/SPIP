@@ -29,7 +29,7 @@ function balise_URL_LOGOUT_dyn($cible) {
 		$cible = $link->getUrl();
 	}
 
-	return 'spip_cookie.php3?logout_public=' . $login
+	return 'spip_cookie' . _EXTENSION_PHP . '?logout_public=' . $login
 		. '&amp;url=' . urlencode($cible);
 }
 
