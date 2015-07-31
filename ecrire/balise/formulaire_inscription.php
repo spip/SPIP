@@ -17,22 +17,32 @@ include_spip('inc/filtres');
 
 // Balise independante du contexte
 
-// http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION
+/**
+ * http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION
+ *
+ * @param object $p
+ * @return mixed
+ */
 function balise_FORMULAIRE_INSCRIPTION ($p) {
 
 	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
 }
 
-// args[0] un statut d'auteur (redacteur par defaut)
-// args[1] indique le focus eventuel
-// args[2] indique la rubrique eventuelle de proposition
-// [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
-
-// http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
+/**
+ * http://doc.spip.org/@balise_FORMULAIRE_INSCRIPTION_stat
+ *
+ * [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
+ *
+ * @param array $args
+ *   args[0] un statut d'auteur (redacteur par defaut)
+ *   args[1] indique la rubrique eventuelle de proposition
+ * @param array $context_compil
+ * @return array|string
+ */
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $context_compil) {
-	list($mode, $focus, $id) = $args;
+	list($mode, $id) = $args;
 	$mode = tester_config($id, $mode);
-	return $mode ? array($mode, $focus, $id) : '';
+	return $mode ? array($mode, $id) : '';
 }
 
 ?>
