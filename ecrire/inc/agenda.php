@@ -1517,7 +1517,7 @@ function sql_calendrier_taches_annonces () {
 
 	$result = spip_query("SELECT texte AS DESCRIPTION, id_message AS UID, date_heure AS DTSTART, date_fin AS DTEND, titre AS SUMMARY, type AS CATEGORY, rv AS LOCATION FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC");
 
-	while ($row = spip_fetch_array($result, SPIP_ASSOC)) {
+	while ($row = spip_fetch_array($result)) {
 		$row['URL'] = tache_redirige($row);
 		$r[] = $row;
 	}
@@ -1532,7 +1532,7 @@ function sql_calendrier_taches_pb () {
 
 	$result = spip_query("SELECT texte AS DESCRIPTION, id_message AS UID, date_heure AS DTSTART, date_fin AS DTEND, titre AS SUMMARY, type AS CATEGORY, rv AS LOCATION FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
 
-	while ($row = spip_fetch_array($result, SPIP_ASSOC)) {
+	while ($row = spip_fetch_array($result)) {
 		$row['URL'] = tache_redirige($row);
 		$r[] = $row;
 	}
@@ -1547,7 +1547,7 @@ function sql_calendrier_taches_rv () {
 	if (!$connect_id_auteur) return $r;
 
 	$result = spip_query("SELECT messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure AS DTSTART, messages.date_fin AS DTEND, messages.titre AS SUMMARY, messages.type AS CATEGORY, messages.rv AS LOCATION FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE ((lien.id_auteur=$connect_id_auteur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
-	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
+	while ($row = spip_fetch_array($result)) {
 		$row['URL'] = tache_redirige($row);
 		$r[] = $row;
 	}
@@ -1567,7 +1567,7 @@ function sql_calendrier_agenda ($annee, $mois) {
 
 	// rendez-vous personnels dans le mois
 	$result_messages=spip_query("SELECT messages.titre AS SUMMARY, messages.texte AS DESCRIPTION, messages.id_message AS UID, messages.date_heure FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur=$connect_id_auteur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie'");
-	while($row=spip_fetch_array($result_messages, SPIP_ASSOC)){
+	while($row=spip_fetch_array($result_messages)){
 		$rv[journum($row['date_heure'])] = $row;
 	}
 	return $rv;
