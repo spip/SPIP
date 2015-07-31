@@ -683,6 +683,7 @@ function creer_chemin() {
 // chercher une librairie (lib/$lib/)
 // destine aux plugins qui veulent des lib non spip
 // dans le chemin mais aussi dans _DIR_PLUGINS_AUTO
+// http://doc.spip.org/@find_lib
 function find_lib($lib) {
 	return find_in_path('lib/'.$lib);
 }

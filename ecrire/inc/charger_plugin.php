@@ -67,6 +67,7 @@ function formulaire_charger_plugin($retour='') {
 }
 
 
+// http://doc.spip.org/@interface_plugins_auto
 function interface_plugins_auto($retour) {
 
 	$res = "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">";
@@ -458,6 +459,7 @@ function afficher_liste_listes_plugins() {
 
 // Si le chargement auto est autorise, un bouton
 // sinon on donne l'url du zip
+// http://doc.spip.org/@bouton_telechargement_plugin
 function bouton_telechargement_plugin($url, $rep) {
 	if (_DIR_PLUGINS_AUTO
 	AND @is_dir(_DIR_PLUGINS_AUTO))
