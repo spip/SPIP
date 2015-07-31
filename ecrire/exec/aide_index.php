@@ -435,13 +435,14 @@ function article($titre, $lien, $statut = "redac") {
 // http://doc.spip.org/@analyse_aide
 function analyse_aide($html, $aide=false) {
 
-	preg_match_all(',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism',
-	$html, $regs, PREG_SET_ORDER);
-
 	// pas de sujet precis: retourner le tableau des sujets
-	if (!$aide) 	return $regs;
+	if (!$aide) {
+		preg_match_all(',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism',
+	$html, $regs, PREG_SET_ORDER);
+		return $regs;
+	}
 
-	unset ($regs);
+	// sinon retourner le chapitre demande
 	$preg = ',<h2( class="spip")?'	. ">$aide/(.+?)</h2>(.*)$,ism";
 	preg_match($preg, $html, $regs);
 	return preg_replace(',<h[12].*,ism', '', $regs[3]);
