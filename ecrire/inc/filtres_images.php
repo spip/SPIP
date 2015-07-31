@@ -1386,7 +1386,9 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $trans
 // utilise [->@image_aplatir]
 // http://doc.spip.org/@image_format
 function image_format($img, $format='png') {
-	return image_aplatir($img, $format, 'cccccc', null, true);
+	$qualite = null;
+	if ($format=='png8') {$format='png';$qualite=128;}
+	return image_aplatir($img, $format, 'cccccc', $qualite, true);
 }
 
 
