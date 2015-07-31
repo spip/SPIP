@@ -12,11 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Fonction appelee dans une boucle, calculer les invariants au premier appel.
+
 function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_langue, $langue_defaut)
 {
 	global $dir_lang, $options, $spip_lang_right, $spip_display;
 	static $pret = false;
-	static $chercher_logo, $img_admin, $bouton_auteur;
+	static $chercher_logo, $img_admin, $bouton_auteur, $nb;
 
 	if (!$pret) {
 		$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
@@ -25,6 +27,9 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 		if ($afficher_auteurs)
 			$formater_auteur = charger_fonction('formater_auteur', 'inc');
 		$img_admin = http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+		$nb = ($options != "avancees")
+		  ? ''
+		  : _T('info_numero_abbreviation');
 		$pret = true;
 	}
 
@@ -41,10 +46,10 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 	$id_rubrique = $row['id_rubrique'];
 	$date = $row['date'];
 	$statut = $row['statut'];
-	if ($lang = $row['lang']) changer_typo($lang);
 	$descriptif = $row['descriptif'];
+	if ($lang = $row['lang']) changer_typo($lang);
 
-	$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
+	$vals[]= puce_statut_article($id_article, $statut, $id_rubrique);
 
 	$vals[]= "<div>"
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
@@ -61,28 +66,24 @@ function inc_formater_article($id_article, $row, $afficher_auteurs, $afficher_la
 	. (!($afficher_langue AND $lang != $langue_defaut) ? '' :
 	   (" <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>"))
 	. (!$row['petition'] ? '' : (" <font size=1 color='red'>"._T('lien_petitions')."</font>"))
-
 	. "</a>"
 	. "</div>";
 	
 	if ($formater_auteur) {
-		$les_auteurs = "";
-		$result_auteurs = auteurs_article($id_article);
 
-		while ($row = spip_fetch_array($result_auteurs)) {
-			list($s, $mail, $nom, $w, $p) = $formater_auteur($row['id_auteur']);
+		$result = auteurs_article($id_article);
+		$les_auteurs = "";
+		while ($r = spip_fetch_array($result)) {
+			list($s, $mail, $nom, $w, $p) = $formater_auteur($r['id_auteur']);
 			$les_auteurs .= "$mail&nbsp;$nom, ";
 		}
 		$vals[] = substr($les_auteurs, 0, -2);
-	}
+	} else $vals[]= '&nbsp;';
 
-	// La date
-	$vals[] = affdate_jourcourt($date);
+	$s = affdate_jourcourt($date);
+	$vals[] = $s ? $s : '&nbsp;';
 
-	// Le numero (moche)
-	if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
-	}
+	if  ($nb) $vals[]= "<b>" . $nb . $id_article . '</b>';
 
 	return $vals;
 }
