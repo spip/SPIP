@@ -65,12 +65,12 @@ $GLOBALS['maj'][11388] = array(array('maj_11388'));
 
 // reparer spip_mots.type = titre du groupe
 function maj_11431 () {
-	// mysql only 
+	// mysql only
 	// spip_query("UPDATE spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe) SET a.type=b.titre");
-	
+
 	// selection des mots cles dont le type est different du groupe
 	$res = sql_select(
-		array("a.id_mot AS id_mot", "b.titre AS type"), 
+		array("a.id_mot AS id_mot", "b.titre AS type"),
 		array("spip_mots AS a LEFT JOIN spip_groupes_mots AS b ON (a.id_groupe = b.id_groupe)"),
 		array("a.type != b.titre"));
 	// mise a jour de ces mots la
@@ -82,7 +82,7 @@ function maj_11431 () {
 }
 $GLOBALS['maj'][11431] = array(array('maj_11431'));
 
-// reparer spip_types_documents.id_type 
+// reparer spip_types_documents.id_type
 // qui est parfois encore present
 function maj_11778 () {
 	// si presence id_type
@@ -234,5 +234,9 @@ $GLOBALS['maj'][14558] = array(array('upgrade_types_documents'));
 // etre sur qu'ils sont bien unipotents(?)...
 $GLOBALS['maj'][14559] = $GLOBALS['maj'][13904]+$GLOBALS['maj'][13929]+$GLOBALS['maj'][14558];
 
+// Restauration correcte des types mime des fichiers Ogg
+// http://trac.rezo.net/trac/spip/ticket/1941
+// + Types de fichiers : f4a/f4b/f4p/f4v/mpc http://en.wikipedia.org/wiki/Flv#File_formats
+$GLOBALS['maj'][15676] = array(array('upgrade_types_documents'));
 
 ?>
