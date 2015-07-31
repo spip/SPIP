@@ -37,18 +37,7 @@ function calendrier_dist($type, $css="")
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	  }
 
-  $nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
-  if (!$nom_site_spip) $nom_site_spip="SPIP";
-  
-  // envoi des en-tetes, du doctype et du <head><title...
-  echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre))),
-    envoi_link($nom_site_spip);
-  if ($css)
-    echo '<link rel="stylesheet" href="', addslashes($css), '" type="text/css" />', "\n";
-  echo "\n</head>\n";
-  echo "<body $attributes_body
-	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
-  init_body("redacteurs", "calendrier");
+  debut_page($titre, "redacteurs", "calendrier","",$css);
   echo "<div>&nbsp;</div>" ;
   echo http_calendrier_init('', $type);
   fin_page();

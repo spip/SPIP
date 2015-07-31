@@ -29,7 +29,7 @@ define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
 define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 define('_FILE_CONNECT',
-	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
+	(@is_readable(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
 		(_FILE_CONNECT_INS . _EXTENSION_PHP)
 	 : false));
 
@@ -430,6 +430,8 @@ define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 
 define_once('_ACCESS_FILE_NAME', '.htaccess');
 define_once('_AUTH_USER_FILE', '.htpasswd');
+
+define_once('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 
 
 // tidy en ligne de commande (si on ne l'a pas en module php,
@@ -940,7 +942,26 @@ function http_last_modified($lastmodified, $expire = 0) {
 	return $headers_only;
 }
 
+function http_no_cache()
+{
+	if (headers_sent()) return;
+	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
+
+	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
+	// il faudrait aussi pour Safari
+	// header("Cache-Control: post-check=0, pre-check=0", false)
+	// mais ca ne respecte pas
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+
+	header("Content-Type: text/html; charset=$charset");
+	header("Expires: 0");
+	header("Last-Modified: " .gmdate("D, d M Y H:i:s"). " GMT");
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	header("Pragma: no-cache");
+}
+
 // envoyer le navigateur sur une nouvelle adresse
+
 function redirige_par_entete($url) {
 	spip_log("redirige $url");
 	include_ecrire('inc_headers.php');

@@ -13,9 +13,16 @@
 
 include ("inc.php3");
 
-echo debut_entete(""), envoi_link("",""), "\n</head>\n";
-
-echo "<body $attributes_body
+http_no_cache();
+echo '<html lang="', 
+  $GLOBALS['spip_lang'],
+  '" dir="',
+  ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),
+  '">
+<head>',
+  envoi_link("",""),
+'</head>',
+"\n<body $attributes_body
 	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
 
 	if ($spip_ecran == "large") {

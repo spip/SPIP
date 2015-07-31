@@ -127,9 +127,16 @@ function erreur_squelette($message='', $lieu='') {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		($GLOBALS['var_mode'] == 'debug')) {
-			include_ecrire('inc_presentation.php3');
-			echo debut_entete(_T('admin_debug')), '</head><body>',
-				affiche_erreurs_page($tableau_des_erreurs);
+			http_no_cache();
+			echo _DOCTYPE_ECRIRE,
+			  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+			  "<head>\n<title>",
+			  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
+			   _T('admin_debug') . ' ' .
+			   supprimer_tags(extraire_multi(lire_meta('nom_site')))), 
+			  "</title>\n</head><body>",
+			  affiche_erreurs_page($tableau_des_erreurs),
+			  "</body></html>";
 			exit;
 		}
 	}
@@ -307,7 +314,6 @@ function ancre_texte($texte, $fautifs=array())
 // l'environnement graphique du debuggueur 
 function debug_dumpfile ($texte, $fonc, $type) {
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
-	include_ecrire('inc_presentation.php3');
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
@@ -325,10 +331,14 @@ function debug_dumpfile ($texte, $fonc, $type) {
 // - ca fait 2 headers !
 	ob_end_clean();
 
-	@header('Content-Type: text/html; charset='.lire_meta('charset'));
-	echo debut_entete('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
-			  _T('admin_debug') . ' ' .
-			  supprimer_tags(extraire_multi(lire_meta('nom_site')))), 
+	http_no_cache();
+	echo _DOCTYPE_ECRIRE,
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n<title>",
+	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
+	   _T('admin_debug') . ' ' .
+	   supprimer_tags(extraire_multi(lire_meta('nom_site')))), 
+	  "</title>\n",
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css'>",
 	  "</head>\n<body style='margin:0 10px;'>",
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
