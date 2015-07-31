@@ -644,7 +644,7 @@ Zure pasahitza sarean atzeman ahal izatea nahi ez baduzu, JavaScript-a aktibatu 
 'onglet_repartition_rubrique' => 'Atalkako banaketa ',
 'onglet_save_restaur_base' => 'Segurtasun kopia sortu eta basea berrezarri',
 'onglet_vider_cache' => 'Cachea hustu',
-'ortho_trop_de_fautes2' => 'Akats nabarienak zuzentzen hasi eta saiatu berriro.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'pasahitz berria aukeratu:',

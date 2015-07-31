@@ -656,7 +656,7 @@ dann out navigat&egrave;r &eacute;',
 'onglet_repartition_rubrique' => 'Partaz sanm rubrik',
 'onglet_save_restaur_base' => 'Sovgard/rosarz l&eacute;ta labaz',
 'onglet_vider_cache' => 'D&eacute;vid lo kas',
-'ortho_trop_de_fautes2' => 'Koriz avann out grogrinn larlik &egrave;k out grafi, apr&eacute;sa ou sra pou es&egrave;y diksyon&egrave;r-la.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Mersi swazi out nouvo modpas :',

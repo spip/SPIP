@@ -653,7 +653,7 @@ Dankon pro via partopreno
 'onglet_repartition_rubrique' => 'Distribuo la&#365; rubrikoj',
 'onglet_save_restaur_base' => 'Savkopii/resta&#365;ri la datenbazon',
 'onglet_vider_cache' => 'Malplenigi la staplon',
-'ortho_trop_de_fautes2' => 'Bonvolu korekti la plej evidentajn erarojn kaj poste reprovu.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Bonvolu elekti vian novan pasvorton:',

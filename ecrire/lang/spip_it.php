@@ -650,7 +650,7 @@ devi attivare Javascript nel tuo browser e',
 'onglet_repartition_rubrique' => 'Ripartizione per rubriche',
 'onglet_save_restaur_base' => 'Salva/ripristina il database',
 'onglet_vider_cache' => 'Svuota la cache',
-'ortho_trop_de_fautes2' => 'Correggere gli errori pi&ugrave; evidenti e ricontrollare il testo in un secondo tempo.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Inserisci una nuova password:',

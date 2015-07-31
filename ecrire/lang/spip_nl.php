@@ -655,7 +655,7 @@ Bedankt voor je deelname
 'onglet_repartition_rubrique' => 'Verdeling per rubriek',
 'onglet_save_restaur_base' => 'Backup/terugzetten van de databank',
 'onglet_vider_cache' => 'Cache leegmaken',
-'ortho_trop_de_fautes2' => 'Begin met het verbeteren van de meest zichtbare fouten en probeer vervolgens opnieuw.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Kies je nieuwe paswoord:',

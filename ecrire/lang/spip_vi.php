@@ -641,7 +641,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.', # MODIF
 'onglet_repartition_rubrique' => 'Ph&acirc;n lo&#7841;i theo &#273;&#7873; m&#7909;c',
 'onglet_save_restaur_base' => 'L&#432;u tr&#7919;/ph&#7909;c h&#7891;i database',
 'onglet_vider_cache' => 'D&#7885;n s&#7841;ch cache',
-'ortho_trop_de_fautes2' => 'H&atilde;y &#273;i&#7873;u ch&#7881;nh nh&#7919;ng l&#7895;i hi&#7875;n nhi&ecirc;n tr&#432;&#7899;c, r&#7891;i th&#7917; l&#7841;i.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Xin ch&#7885;n m&#7853;t m&atilde; m&#7899;i:',

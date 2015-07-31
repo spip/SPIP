@@ -651,7 +651,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'onglet_repartition_rubrique' => 'Reparticion per rubricas',
 'onglet_save_restaur_base' => 'Sauvagardar/restaurar la basa',
 'onglet_vider_cache' => 'Vujar l\'escondedor',
-'ortho_trop_de_fautes2' => 'Comen&ccedil;atz per corregir leis errors mai evidentas e tornatz assajar puei.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Vougatz chausir v&ograve;stre mot de santa Clara nov&egrave;u:',

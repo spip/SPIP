@@ -623,7 +623,7 @@ sera ignor&eacute;e) :
 'onglet_repartition_rubrique' => 'Distribucija po rubrikama',
 'onglet_save_restaur_base' => 'Backup/obnova baze podataka',
 'onglet_vider_cache' => 'Isprazni kes',
-'ortho_trop_de_fautes2' => 'Pocnite sa ispravljanjem ociglednih gresaka, zatim pokusajte ponovo.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Izaberite vasu novu lozinku:',

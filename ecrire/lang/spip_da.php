@@ -648,7 +648,7 @@ eller kontakt din internetudbyder.</font>', # MODIF
 'onglet_repartition_rubrique' => 'Fordeling p&aring; afsnit',
 'onglet_save_restaur_base' => 'Sikkerhedskopi/genindl&aelig;sning af databasen',
 'onglet_vider_cache' => 'T&oslash;m cachen',
-'ortho_trop_de_fautes2' => 'Start by correcting the most obvious mistakes, then try again.', # NEW
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'V&aelig;lg ny adgangskode:',

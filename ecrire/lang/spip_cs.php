@@ -653,7 +653,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'onglet_repartition_rubrique' => 'Rozd&#283;len&iacute; podle sekc&iacute;',
 'onglet_save_restaur_base' => 'Z&aacute;loha/obnova datab&aacute;ze',
 'onglet_vider_cache' => 'Vymazat mezipam&#283;t (cache)',
-'ortho_trop_de_fautes2' => 'Odstra&#328;te chyby patrn&eacute; na prvn&iacute; pohled a zkuste to znovu.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Zadejte nov&eacute; heslo:',

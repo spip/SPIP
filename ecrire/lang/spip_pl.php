@@ -653,7 +653,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'onglet_repartition_rubrique' => 'Roz&#322;o&#380;enie dzia&#322;&oacute;w',
 'onglet_save_restaur_base' => 'Backup/zapisywanie bazy danych',
 'onglet_vider_cache' => 'Opr&oacute;&#380;nij cache',
-'ortho_trop_de_fautes2' => 'Zacznij od usuni&#281;cia najbardziej oczywistych b&#322;&#281;d&oacute;w i spr&oacute;buj powt&oacute;rnie.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.', # NEW
 
 // P
 'pass_choix_pass' => 'Prosz&#281; wybra&#263; swoje nowe has&#322;o:',
