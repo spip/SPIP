@@ -99,8 +99,8 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 				if ($gauche > 0) echo "<td style='width: " .$gauche."px'></td>";
 				echo "\n<td style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
 				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' style='height: 8px; border: 0px; width: ".$visites_abs."px;' alt= ' '/>";
-				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='toile_foncee' style='height: 8px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
-				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='toile_claire' style='width: " . $largeur_vert ."px; height: 8px; border: 0px' alt=' ' />";
+				if ($largeur_rouge>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_cumul' style='height: 8px; border: 0px; width: " . $largeur_rouge . "px;' alt=' ' />";
+				if ($largeur_vert>0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' class='couleur_nombre' style='width: " . $largeur_vert ."px; height: 8px; border: 0px' alt=' ' />";
 				
 				echo "</td></tr></table>\n";
 				echo "</td></tr></table>";
@@ -133,16 +133,8 @@ function exec_statistiques_repartition_dist()
 		exit;
 	}
 
-	if ($spip_ecran == "large") {
-		$largeur_table = 974;
-		$taille = 550;
-	} else {
-		$largeur_table = 750;
-		$taille = 400;
-	}
-
-	echo "\n<br /><br /><table width='$largeur_table'><tr><td class='verdana2' style='text-align: center;  width: $largeur_table" . "px;'>";
-	gros_titre(_T('titre_page_statistiques'));
+	echo debut_grand_cadre(true);
+	echo gros_titre(_T('titre_page_statistiques'),'',false);
 
 	if ($critere == "debut") {
 		$critere = "visites";
@@ -157,17 +149,14 @@ function exec_statistiques_repartition_dist()
 	if ($abs_total<1) $abs_total=1;
 	$nombre_vis[0] = 0;
 
-	debut_cadre_relief("statistiques-24.gif");
+	echo debut_cadre_relief("statistiques-24.gif",true);
 	echo "<div style='border: 1px solid #aaaaaa;'>";
 	enfants_aff(0,$taille, $critere);
 	echo "</div><br />",
 	  "<div class='verdana3' style='text-align: left;'>",
 	  _T('texte_signification'),
 	  "</div>";
-	fin_cadre_relief();
-
-	echo "</td></tr></table>";
-
-	echo fin_page();
+	echo fin_cadre_relief(true);
+	echo fin_grand_cadre(true),fin_page();
 }
 ?>

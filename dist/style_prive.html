@@ -199,7 +199,13 @@ select.fondl {
 /*style for #bandeau_couleur*/
 .bandeau_couleur {text-align: #GET{left};padding:0px;margin:0px}
 
-#bandeau_couleur {min-height:20px;padding:2px 0}
+#bandeau_couleur {
+	min-height:20px;padding:2px 0
+	max-height: 40px;
+	width: 100%;
+	border-bottom: solid 1px white;
+	background:#GET{claire};
+}
 #bandeau_couleur1 .menu-item {width:230px;text-align:#ENV{ltr}}
 #bandeau_couleur3 .menu-item {width:150px;text-align:#GET{right}}
 #bandeau_couleur4 .menu-item {width:68px;text-align:center;margin:0 5px}
@@ -1775,6 +1781,9 @@ td.message, a.message {
 .couleur_mois { background:#GET{claire};}
 .couleur_prevision { background:#eee;}
 .couleur_realise {background:#999;}
+
+.couleur_cumul {background:#666;}
+.couleur_nombre {background:#eee;}
 
 /* agenda */
 .bandeau_agenda { background:#GET{claire};}
