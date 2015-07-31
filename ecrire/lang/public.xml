@@ -74,6 +74,7 @@
 	<langue code="my" />
 	<langue code="ne" />
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/public?lang_cible=nl">
+		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="oc_auv" />
