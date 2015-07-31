@@ -48,6 +48,7 @@ if ($flag_function_exists) {
 	$flag_crypt = function_exists("crypt");
 	$flag_wordwrap = function_exists("wordwrap");
 	$flag_apc = function_exists("apc_rm");
+	$flag_sapi_name = function_exists("php_sapi_name");
 }
 else {
 	$gz_exists = false;
@@ -56,6 +57,7 @@ else {
 	$flag_crypt = true; // la non-existence de crypt est une exception
 	$flag_wordwrap = false;
 	$flag_apc = false;
+	$flag_sapi_name = false;
 }
 
 
@@ -191,7 +193,8 @@ if (!$PATH_TRANSLATED) {
 // Infos de config PHP
 //
 
-if (ereg("^Apache", $SERVER_SOFTWARE) AND ereg(" PHP", $SERVER_SOFTWARE)) $php_module = true;
+$php_module = ($flag_sapi_name AND @php_sapi_name() == 'apache') OR
+	(ereg("^Apache", $SERVER_SOFTWARE) AND ereg(" PHP", $SERVER_SOFTWARE));
 
 function tester_upload() {
 	global $hebergeur;
