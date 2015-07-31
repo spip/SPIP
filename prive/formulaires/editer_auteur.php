@@ -51,11 +51,22 @@ function auteurs_edit_config($row)
 }
 
 function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $lier_article=0, $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
+	include_spip('inc/filtres');
 	$erreurs = formulaires_editer_objet_verifier('auteur',$id_auteur,array('nom'));
+	// tags présents dans le nom/signature
+	if (!nom_acceptable(_request('nom'))) {
+		$erreurs['nom'] = _T("info_nom_pas_conforme");
+		$erreurs['message_erreur'] .= _T("info_nom_pas_conforme");
+	}
+	// on ne veut pas pas ce protocole là
+	if (preg_match(",^\s*javascript,i", _request('url_site'))) {
+		$erreurs['url_site'] = _T('info_url_site_pas_conforme');
+		$erreurs['message_erreur'] .= _T("info_url_site_pas_conforme");
+	}
 	// login trop court ou existant
 	if ($p = _request('new_login')) {
 		if ((strlen($p) < _LOGIN_TROP_COURT)
-		AND $p !== sql_getfetsel("login", "spip_auteurs", "id_auteur=" . sql_quote($id_auteur))) {
+			AND $p !== sql_getfetsel("login", "spip_auteurs", "id_auteur=" . sql_quote($id_auteur))) {
 			$erreurs['login'] = _T('info_login_trop_court');
 			$erreurs['message_erreur'] .= _T('info_login_trop_court');
 		} elseif (sql_countsel('spip_auteurs', "login=" . sql_quote($p) . " AND id_auteur!=" . intval($id_auteur) . " AND statut!='5poubelle'")) {

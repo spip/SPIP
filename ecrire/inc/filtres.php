@@ -1597,6 +1597,33 @@ function modulo($nb, $mod, $add=0) {
 	return ($mod?$nb%$mod:0)+$add;
 }
 
+/**
+ * Vérifie qu'un nom (d'auteur) ne comporte pas d'autres tags que <multi>
+ * et ceux volontairement spécifiés dans la constante
+ *
+ * @param string $nom
+ *      Nom (signature) proposé
+ * @return bool
+ *      - false si pas conforme,
+ *      - true sinon
+**/
+function nom_acceptable($nom) {
+	if (!is_string($nom)) {
+		return false;
+	}
+	if (!defined('_TAGS_LOGIN')) define('_TAGS_LOGIN','');
+	$tags_acceptes = array_unique(explode(',', 'multi,' . _TAGS_LOGIN));
+	foreach($tags_acceptes as $tag) {
+		if (strlen($tag)) {
+			$remp1[] = '<'.trim($tag).'>';
+			$remp1[] = '</'.trim($tag).'>';
+			$remp2[] = '\x60'.trim($tag).'\x61';
+			$remp2[] = '\x60/'.trim($tag).'\x61';
+		}
+	}	
+	$v_nom = str_replace($remp2, $remp1, supprimer_tags(str_replace($remp1, $remp2, $nom)));
+	return str_replace('&lt;', '<', $v_nom) == $nom;
+}
 
 // Verifier la conformite d'une ou plusieurs adresses email
 //  retourne false ou la  normalisation de la derniere adresse donnee
