@@ -11,11 +11,6 @@ define("_ECRIRE_INC_VERSION", "1");
 // et on nettoie les GET/POST/COOKIE le cas echeant
 //
 
-$php_version = explode('.', phpversion());
-$php_version_maj = (int) $php_version[0];
-$php_version_med = (int) $php_version[1];
-if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
-
 function magic_unquote($table) {
 	if (is_array($GLOBALS[$table])) {
 	        reset($GLOBALS[$table]);
@@ -26,12 +21,8 @@ function magic_unquote($table) {
 	}
 }
 
-$flag_magic_quotes = ($php_version_maj > 3 OR $php_version_min >= 6);
-if ($flag_magic_quotes) {
-	@set_magic_quotes_runtime(0);
-	$unquote_gpc = get_magic_quotes_gpc();
-}
-else $unquote_gpc = true;
+@set_magic_quotes_runtime(0);
+$unquote_gpc = @get_magic_quotes_gpc();
 
 if ($unquote_gpc) {
 	magic_unquote('HTTP_GET_VARS');
@@ -219,10 +210,6 @@ $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 //
 function spip_setcookie ($name='', $value='', $expire=0, $path='', $domain='', $secure='') {
 	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
-
-	// patch safari beta 51-60
-	if (!$path AND eregi("Safari", $GLOBALS['HTTP_USER_AGENT']))
-		$path = ereg_replace("/[^/]+$", "/", $GLOBALS['REQUEST_URI']);
 
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);
