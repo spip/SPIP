@@ -140,7 +140,12 @@ function abs_url($texte, $base='') {
 * @return string
 */
 function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $double_encode = true){
-	if (is_null($flags)) $flags = ENT_COMPAT|ENT_HTML401;
+	if (is_null($flags)) {
+		if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400)
+			$flags = ENT_COMPAT;
+		else
+			$flags = ENT_COMPAT|ENT_HTML401;
+	}
 
 	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
 		return htmlspecialchars($string,$flags,$encoding);
@@ -158,7 +163,12 @@ function spip_htmlspecialchars($string, $flags=null, $encoding='ISO-8859-1', $do
 * @return string
 */
 function spip_htmlentities($string,$flags=null,$encoding = 'ISO-8859-1',$double_encode = true){
-	if (is_null($flags)) $flags = ENT_COMPAT|ENT_HTML401;
+	if (is_null($flags)) {
+		if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50400)
+			$flags = ENT_COMPAT;
+		else
+			$flags = ENT_COMPAT|ENT_HTML401;
+	}
 
 	if (!defined('PHP_VERSION_ID') OR PHP_VERSION_ID < 50203)
 		return htmlentities($string,$flags,$encoding);
