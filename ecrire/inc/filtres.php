@@ -1792,11 +1792,11 @@ function filtre_valeur_tableau($array, $index) {
 }
 // http://doc.spip.org/@filtre_reset
 function filtre_reset($array) {
-	return filtre_valeur_tableau($array,0);
+	return !is_array($array) ? null : reset($array);
 }
 // http://doc.spip.org/@filtre_end
 function filtre_end($array) {
-	return filtre_valeur_tableau($array,@count($array)-1);
+	return !is_array($array) ? null : end($array);
 }
 
 // http://doc.spip.org/@filtre_push
