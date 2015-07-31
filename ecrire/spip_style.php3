@@ -848,6 +848,20 @@ a.bouton_rotation:hover img {
 	background-color: <? echo $couleur_claire; ?>;
 	-moz-border-radius: 8px;
 }
+.cadre-couleur div.cadre-titre {
+	background: <? echo $couleur_foncee; ?>;
+	border-bottom: 2px solid <? echo $couleur_foncee; ?>;
+	color: white;	
+}
+
+.cadre-couleur-foncee {
+	background-color: <? echo $couleur_foncee; ?>;
+	-moz-border-radius: 8px;
+}
+.cadre-couleur-foncee div.cadre-titre {
+	color: white;	
+}
+
 
 
 .cadre-trait-couleur {
