@@ -1089,13 +1089,14 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'login_motpasseoublie' => 'mot&nbsp;de&nbsp;passe&nbsp;oubli&eacute;&nbsp;?',
 'login_non_securise' => 'Attention, ce formulaire n\'est pas s&eacute;curis&eacute;.
 			Si vous ne voulez pas que votre mot de passe puisse &ecirc;tre
-			intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript 
+			intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript
 			dans votre navigateur et',
 'login_nouvelle_tentative' => 'Nouvelle tentative',
 'login_par_ici' => 'Vous &ecirc;tes enregistr&eacute;... par ici...',
 'login_pass2' => 'Mot de passe&nbsp;:',
 'login_preferez_refuser' => '<b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode de connexion (moins s&eacute;curis&eacute;e) est &agrave; votre disposition&nbsp;:',
 'login_recharger' => 'recharger cette page',
+'login_rester_identifie' => 'Rester identifi&eacute; quelques jours',
 'login_retour_public' => 'Retour au site public',
 'login_retour_site' => 'Retour au site public',
 'login_retoursitepublic' => 'retour&nbsp;au&nbsp;site&nbsp;public',

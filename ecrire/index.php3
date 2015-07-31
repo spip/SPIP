@@ -69,6 +69,8 @@ function sous_enfant($collection2){
 // Infos personnelles : nom, utilisation de la messagerie
 //
 
+if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
+
 echo "<p align='left'>";
 debut_cadre_relief("fiche-perso-24.gif");
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
@@ -446,7 +448,7 @@ if (lire_meta('calculer_rubriques') == 'oui') {
 
 $maj_alea = $meta_maj['alea_ephemere'];
 $t_jour = substr($maj_alea, 6, 2);
-if ($t_jour != date('d')) {
+if (abs($t_jour - date('d')) > 2) {
 	include_ecrire("inc_session.php3");
 	$alea = md5(creer_uniqid());
 	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
