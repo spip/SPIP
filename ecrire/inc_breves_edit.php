@@ -92,7 +92,7 @@ if ($new != "oui") {
 
 
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
-	if ($id_breve) $lien = "?id_breve=$id_breve";
+	if ($id_breve) $lien = "id_breve=$id_breve";
 	echo "<form action='" . generer_url_ecrire("breves_voir","$lien") . "' method='post' name='formulaire'>";
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_breve' VALUE=\"oui\">";
@@ -136,7 +136,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	echo "<p /><B>"._T('entree_texte_breve')."</B><BR>";
 	echo afficher_barre('document.formulaire.texte');
 	echo "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
-	echo $texte;
+	echo entites_html($texte);
 	echo "</TEXTAREA><P>\n";
 
 
