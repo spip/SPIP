@@ -84,7 +84,6 @@ ecrire/configuration/breves.php -text
 ecrire/configuration/documents.php -text
 ecrire/configuration/futurs.php -text
 ecrire/configuration/index.php -text
-ecrire/configuration/locuteur.php -text
 ecrire/configuration/logos.php -text
 ecrire/configuration/messagerie_agenda.php -text
 ecrire/configuration/moderniseur_html.php -text
@@ -92,7 +91,6 @@ ecrire/configuration/previsualiseur.php -text
 ecrire/configuration/redacteurs.php -text
 ecrire/configuration/redirection.php -text
 ecrire/configuration/reducteur.php -text
-ecrire/configuration/referenceur.php -text
 ecrire/configuration/relayeur.php -text
 ecrire/configuration/rubriques.php -text
 ecrire/configuration/syndications.php -text
@@ -119,7 +117,6 @@ ecrire/exec/charger_plugin.php -text
 ecrire/exec/charger_plugin_descr.php -text
 ecrire/exec/config_contenu.php -text
 ecrire/exec/config_fonctions.php -text
-ecrire/exec/config_multilang.php -text
 ecrire/exec/configuration.php -text
 ecrire/exec/configurer_contenu.php -text
 ecrire/exec/configurer_moderniseur_html.php -text
@@ -394,6 +391,8 @@ prive/formulaires/configurer_langage.php -text
 prive/formulaires/configurer_langue.html -text
 prive/formulaires/configurer_langue.php -text
 prive/formulaires/configurer_metas.php -text
+prive/formulaires/configurer_multilinguisme.html -text
+prive/formulaires/configurer_multilinguisme.php -text
 prive/formulaires/configurer_preferences.html -text
 prive/formulaires/configurer_preferences.php -text
 prive/formulaires/configurer_transcodeur.html -text
@@ -719,6 +718,7 @@ prive/squelettes/contenu/page-configurer.html -text
 prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-configurer_langage.html -text
 prive/squelettes/contenu/page-configurer_langue.html -text
+prive/squelettes/contenu/page-configurer_multilang.html -text
 prive/squelettes/contenu/page-configurer_preferences.html -text
 prive/squelettes/contenu/page-debug.html -text
 prive/squelettes/extra/dist.html -text
@@ -746,6 +746,7 @@ prive/squelettes/top/page-charte.html -text
 prive/squelettes/top/page-configurer_identite.html -text
 prive/squelettes/top/page-configurer_langage.html -text
 prive/squelettes/top/page-configurer_langue.html -text
+prive/squelettes/top/page-configurer_multilang.html -text
 prive/squelettes/top/page-configurer_preferences.html -text
 prive/stats/echelle.html -text
 prive/style_prive.html -text
