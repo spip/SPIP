@@ -23,11 +23,5 @@ if (isset($hash)) {
 
 $var_f = include_fonction('spip_action_' . $action);
 $var_f();
-
-## le lien $redirect peut etre relatif a ecrire/ ou absolu : a nettoyer !!
-if ($redirect) {
-	include_ecrire('inc_filtres');
-	redirige_par_entete(suivre_lien(url_de_base()._DIR_RESTREINT,$redirect));
-}
-
+if ($redirect) redirige_par_entete($redirect);
 ?>

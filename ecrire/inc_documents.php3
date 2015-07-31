@@ -540,7 +540,6 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 
 function afficher_upload(
 $id_article, 
-$redirect='', 
 $intitule, 
 $inclus = '', 
 $mode, 
@@ -591,8 +590,8 @@ $document=0) {
 
 	$res .= "</div>\n" . fin_block();
 
-	if (!$redirect) 
-		$redirect = $clean_link->getUrl();
+	$redirect = $clean_link->getUrl();
+	spip_log("afficher_upload new  $redirect");
 	if ($type == "rubrique")
 		$redirect .='&amp;action=calculer_rubriques';
 		
@@ -818,7 +817,7 @@ entites_html($document['fichier'])."\" />\n";
 
 				// bloc mettre a jour la vignette
 				echo "<hr />";
-				bloc_gerer_vignette($document, $id_article, $redirect_url, $album);
+				bloc_gerer_vignette($document, $id_article, $type, $album);
 
 				echo "</div>";
 				
@@ -902,7 +901,7 @@ function bouton_supprime_document_et_vignette($id_article, $redirect, $id, $albu
     ("&amp;ancre=$album");
 }
 
-function bloc_gerer_vignette($document, $id_article, $redirect_url, $album) {
+function bloc_gerer_vignette($document, $id_article, $type, $album) {
 	global $connect_id_auteur;
 
 	$id_document = $document['id_document'];
@@ -915,7 +914,7 @@ function bloc_gerer_vignette($document, $id_article, $redirect_url, $album) {
 	  icone_horizontale (_T('info_supprimer_vignette'), bouton_supprime_document_et_vignette($id_article, 	$redirect_url .'&show_docs='.$id_document, $id_vignette, $album), "vignette-24.png", "supprimer.gif");
 	} else {
 
-	  echo afficher_upload($id_article, $redirect_url,'portfolio', false, 'vignette', '', $album, $id_document);
+	  echo afficher_upload($id_article,'portfolio', false, 'vignette', $type, $album, $id_document);
 	}
 	echo fin_block();
 }
@@ -988,7 +987,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<div align='right'>";
 		echo "<table width='50%' cellpadding=0 cellspacing=0 border=0><tr><td style='text-align: $spip_lang_left;'>";
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
-		echo afficher_upload($id_article, "", _T('info_telecharger_ordinateur'), '', 'document', $type);
+		echo afficher_upload($id_article, _T('info_telecharger_ordinateur'), '', 'document', $type);
 		echo fin_cadre_relief();
 		echo "</td></tr></table>";
 		echo "</div>";
@@ -1015,7 +1014,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
 
-	echo afficher_upload($id, '', _T('info_telecharger'),'','vignette',$type);
+	echo afficher_upload($id, _T('info_telecharger'),'','vignette',$type);
 
 	fin_cadre_relief();
 
@@ -1053,7 +1052,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	if ($type == "article" AND $GLOBALS['meta']["documents_$type"] != 'non') {
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 		debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
-		echo afficher_upload($id, '',_T('info_telecharger_ordinateur'), '','document',$type);
+		echo afficher_upload($id,_T('info_telecharger_ordinateur'), '','document',$type);
 		fin_cadre_enfonce();
 	}
 
@@ -1258,7 +1257,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 					$document['extension'] = "gif";
 					break;
 			}
-			bloc_gerer_vignette($document, $id, $clean_link->getUrl(), 'documents');
+			bloc_gerer_vignette($document, $id, $type, 'documents');
 			echo "</div>\n";
 		}
 
