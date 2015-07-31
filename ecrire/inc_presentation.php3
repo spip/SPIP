@@ -715,7 +715,8 @@ function debut_html($titre = "") {
 	a.spip_in  {background-color:#eeeeee;}
 	a.spip_out {}
 	a.spip_note {}
-	.spip_recherche {width : 100%}
+	.spip_code {text-align: left}
+	.spip_recherche {width: 100%}
 	.spip_cadre { 
 		width : 100%;
 		background-color: #FFFFFF; 
