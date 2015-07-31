@@ -18,7 +18,7 @@ include_spip('base/abstract_sql');
 spip_connect();
 
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public
-// avec une variable d'URL nomme confirmer_forum 
+// avec une variable d'URL nommee confirmer_forum 
 // Voir commentaires dans inc-formulaire_forum
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
@@ -117,7 +117,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 				VALUES ($id_mot, $id_message)");
 }
 
-function enregistre_forum() {
+function inc_forum_insert_dist() {
 	global $auteur_session,
 		$afficher_texte, $ajouter_mot, $alea, $hash,
 		$auteur, $confirmer_forum, $email_auteur, $id_auteur,
