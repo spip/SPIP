@@ -2737,4 +2737,14 @@ function timestamp($fichier){
 	return "$fichier?$m";
 }
 
+/**
+ * Nettoyer le titre d'un email
+ * eviter une erreur lorsqu'on utilise |nettoyer_titre_email dans un squelette de mail
+ * @param  $titre
+ * @return mixed
+ */
+function filtre_nettoyer_titre_email_dist($titre){
+	include_spip('inc/envoyer_mail');
+	return nettoyer_titre_email($titre);
+}
 ?>
