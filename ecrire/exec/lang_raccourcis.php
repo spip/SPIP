@@ -37,24 +37,25 @@ function exec_lang_raccourcis_dist() {
 	echo $commencer_page(_T('module_fichier_langue').": $module",
 		"configuration", "langues");
 
+	echo gros_titre(_T('module_fichier_langue').": $module",'', false),
+	  barre_onglets("config_lang", "fichiers");
+
+
 	echo debut_gauche('', true);
 
 	if (count($modules) > 1) {
 
-		echo "<br /><br /><br /><br /><br /><br /><br /><br /><br />";
 		echo debut_cadre_relief('',true,'',_T('module_fichiers_langues'));
 
 		foreach ($modules as $nom_module) {
-			if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><b>$nom_module</b></div>";
-			else echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><a href='" . generer_url_ecrire("lang_raccourcis","module=$nom_module") . "'>$nom_module</a></div>";
+			if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;'><b>$nom_module</b></div>";
+			else echo "<div style='padding-$spip_lang_left: 10px;'><a href='" . generer_url_ecrire("lang_raccourcis","module=$nom_module") . "'>$nom_module</a></div>";
 		}
 		echo fin_cadre_relief(true);
 	}
 
 	echo debut_droite('', true);
 
-	echo gros_titre(_T('module_fichier_langue').": $module",'', false),
-	  barre_onglets("config_lang", "fichiers");
 
 	afficher_raccourcis($module);
 
@@ -75,8 +76,6 @@ function afficher_raccourcis($module = "public") {
 	if ($module != "public" AND $module != "local")
 		$aff_nom_module = "$module:";
 
-	echo "<div class='arial2'>"._T('module_texte_explicatif')."</div>";
-	echo "<div>&nbsp;</div>";
 
 	foreach (preg_files(repertoire_lang().$module.'_[a-z_]+\.php[3]?$') as $f)
 		if (preg_match(",^".$module."\_([a-z_]+)\.php[3]?$,", $f, $regs))
@@ -91,13 +90,15 @@ function afficher_raccourcis($module = "public") {
 	}
 
 	echo debut_cadre_relief('',true,'','','raccourcis');
+	echo "<div class='arial2'>"._T('module_texte_explicatif')."</div>";
+	echo "<div>&nbsp;</div>";
 	echo "\n<table class='spip' style='border:0;'>";
-	echo "\n<tr class='titrem'><th class='verdana1'>"._T('module_raccourci')."</th>\n<th class='verdana2'>"._T('module_texte_affiche')."</th></tr>\n";
+	echo "\n<tr class='row_first'><th class='verdana2'>"._T('module_raccourci')."</th>\n<th class='verdana2'>"._T('module_texte_affiche')."</th></tr>\n";
 
 	$i = 0;
 	foreach ($tableau as $raccourci => $val) {
 		$bgcolor = alterner(++$i, 'row_even','row_odd');
-		echo "\n<tr class='$bgcolor'><td class='verdana2'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
+		echo "\n<tr class='$bgcolor'><td class='arial11'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
 	}
 
 	echo "</table>",fin_cadre_relief(true);
