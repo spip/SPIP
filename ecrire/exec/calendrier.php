@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 
 function exec_calendrier_dist()
 {
-  global $type, $css;
+  global $type, $css, $var_ajax;
 // icones standards, fonction de la direction de la langue
 
   global $bleu, $vert, $jaune, $spip_lang_rtl;
@@ -39,10 +39,14 @@ function exec_calendrier_dist()
 	$titre = _T('titre_page_calendrier',
 		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
 	  }
+  $ancre = 'calendrier-1';
+
+  $r = http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')) . "#$ancre");
+
+  if (_request(var_ajax)) return $r;
 
   debut_page($titre, "accueil", "calendrier","",$css);
-  echo "<div>&nbsp;</div>" ;
-  echo http_calendrier_init('', $type, '','',generer_url_ecrire('calendrier', ($type ? "type=$type" : '')));
+  echo "<div>&nbsp;</div><div id='", $ancre, "'>",$r,'</div>';
   fin_page();
 }
 
