@@ -54,7 +54,8 @@ function exec_admin_plugin_dist($retour='') {
 	// on fait l'installation ici, cela permet aux scripts d'install de faire des affichages ...
 	installe_plugins();
 
-
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'admin_plugin'),'data'=>''));
+	
 	// Si on a CFG, ajoute un lien (oui c'est mal)
 	if (defined('_DIR_PLUGIN_CFG')) {
 		echo debut_cadre_enfonce('',true);
@@ -74,7 +75,9 @@ function exec_admin_plugin_dist($retour='') {
 	}
 
 	echo debut_droite('plugin', true);
-
+	
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'admin_plugin'),'data'=>''));
+	
 	$lpf = liste_plugin_files();
 	$lcpa = liste_chemin_plugin_actifs();
 	$plugins_interessants = @array_keys(unserialize($GLOBALS['meta']['plugins_interessants']));
@@ -359,10 +362,10 @@ function ligne_plug($plug_file, $actif, $id){
 
 	$id = substr(md5("aide_$plug_file"),0,8);
 	$puce_etat = array(
-	"dev"=>"<img src='". chemin_image('puce-poubelle.gif') . "' width='9' height='9' alt='dev' />",
-	"test"=>"<img src='". chemin_image('puce-orange.gif') . "' width='9' height='9' alt='dev' />",
-	"stable"=>"<img src='". chemin_image('puce-verte.gif') . "' width='9' height='9' alt='dev' />",
-	"experimental"=>"<img src='". chemin_image('puce-rouge.gif') . "' width='9' height='9' alt='dev' />",
+		"dev"=>"<img src='". chemin_image('puce-poubelle.gif') . "' width='9' height='9' alt='"._T('plugin_etat_developpement')."' />",
+		"test"=>"<img src='". chemin_image('puce-orange.gif') . "' width='9' height='9' alt='"._T('plugin_etat_test')."' />",
+		"stable"=>"<img src='". chemin_image('puce-verte.gif') . "' width='9' height='9' alt='"._T('plugin_etat_stable')."' />",
+		"experimental"=>"<img src='". chemin_image('puce-rouge.gif') . "' width='9' height='9' alt='"._T('plugin_etat_experimental')."' />",
 	);
 	
 	if (isset($puce_etat[$etat]))
