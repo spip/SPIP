@@ -56,9 +56,14 @@ function inc_session_dist($auteur=false)
  * http://doc.spip.org/@supprimer_sessions
  *
  * @param int $id_auteur
+ * 		Identifiant d'auteur dont on veut supprimer les sessions
  * @param bool $toutes
+ * 		Supprimer aussi les vieilles sessions des autres auteurs ?
+ * @param bool $actives
+ * 		false pour ne pas supprimer les sessions valides de $id_auteur.
+ * 		false revient donc a uniquement supprimer les vieilles sessions !
  */
-function supprimer_sessions($id_auteur, $toutes=true) {
+function supprimer_sessions($id_auteur, $toutes=true, $actives=true) {
 
 	spip_log("supprimer sessions auteur $id_auteur");
 	if ($toutes OR $id_auteur!==$GLOBALS['visiteur_session']['id_auteur']) {
@@ -67,7 +72,7 @@ function supprimer_sessions($id_auteur, $toutes=true) {
 		while(($f = readdir($dir)) !== false) {
 			if (preg_match(",^[^\d-]*(-?\d+)_\w{32}\.php[3]?$,", $f, $regs)){
 				$f = _DIR_SESSIONS . $f;
-				if (($regs[1] == $id_auteur) OR ($t > filemtime($f)))
+				if (($actives AND $regs[1] == $id_auteur) OR ($t > filemtime($f)))
 					spip_unlink($f);
 			}
 		}
