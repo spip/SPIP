@@ -337,7 +337,7 @@ function nettoyer_uri() {
 // http://doc.spip.org/@self
 function self($amp = '&amp;', $root = false) {
 	$url = nettoyer_uri();
-	if (!$root)
+	if (!$root AND !defined('_SET_HTML_BASE'))
 		$url = preg_replace(',^[^?]*/,', '', $url);
 
 	// ajouter le cas echeant les variables _POST['id_...']
@@ -1426,7 +1426,8 @@ function evaluer_fond ($fond, $contexte=array(), $options=array(), $connect=null
 		$page['process_ins'] = 'html';
 		ob_end_clean();
 	}
-
+	page_base_href($page['texte']);
+	
 	$GLOBALS['_INC_PUBLIC']--;
 
 	return $page;
