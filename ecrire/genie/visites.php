@@ -64,8 +64,9 @@ function calculer_visites($t) {
 	// et faire les calculs correspondants
 
 	// Traiter jusqu'a 100 sessions datant d'au moins 30 minutes
-	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'),-1,_CRON_LOT_FICHIERS_VISITE);
+	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
 
+	$compteur = _CRON_LOT_FICHIERS_VISITE;
 	$date_init = time()-30*60;
 	foreach ($sessions as $item) {
 		if (($d=@filemtime($item)) < $date_init) {
@@ -75,6 +76,8 @@ function calculer_visites($t) {
 			compte_fichier_visite($item,
 				$visites[$d], $visites_a[$d], $referers[$d], $referers_a[$d]);
 			spip_unlink($item);
+			if (--$compteur <= 0)
+				break;
 		}
 		#else spip_log("$item pas vieux");
 	}
