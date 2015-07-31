@@ -180,7 +180,8 @@ if ($options == "avancees") {
 		if (lire_meta("activer_statistiques") == 'oui')
 			icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif");
 		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif");
-		icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif");
+		if ($connect_toutes_rubriques)
+			icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif");
 	}
 }
 else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
