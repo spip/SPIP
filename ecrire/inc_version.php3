@@ -758,7 +758,7 @@ $clean_link = $this_link;
 
 if (count($GLOBALS['HTTP_POST_VARS'])) {
 	$clean_link->clearVars();
-	$vars = array('id_article', 'coll', 'id_breve', 'id_rubrique', 'id_syndic', 'id_mot', 'id_auteur'); // il en manque probablement ?
+	$vars = array('id_article', 'coll', 'id_breve', 'id_rubrique', 'id_syndic', 'id_mot', 'id_auteur', 'var_login'); // il en manque probablement ?
 	while (list(,$var) = each($vars)) {
 		if (isset($$var)) {
 			$clean_link->addVar($var, $$var);
