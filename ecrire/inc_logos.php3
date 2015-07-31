@@ -32,7 +32,7 @@ function decrire_logo($racine) {
 	return '';
 }
 
-function resize_logo($limage, $maxi=190) {
+function resize_logo($limage, $maxi=170) {
 
 	$limagelarge = $limage[0];
 	$limagehaut = $limage[1];
