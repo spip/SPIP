@@ -101,9 +101,10 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
-		spip_query("INSERT INTO spip_forum (date_heure, titre, ip, statut)
-		VALUES (NOW(), '".addslashes($titre)."', '$REMOTE_ADDR', 'redac')");
-		$id_message = spip_insert_id();
+		$id_message = spip_insert('spip_forum', 
+					  "(date_heure, titre, ip, statut)",
+					  "(NOW(), '".addslashes($titre)."', '$REMOTE_ADDR', 'redac')");
+
 	}
 
 	// Generation d'une valeur de securite pour validation

@@ -30,8 +30,12 @@ if ($id_article==0) {
 		$langue_choisie_new = 'non';
 
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
-		spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum, lang, langue_choisie) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
-		$id_article = spip_insert_id();
+
+		$id_article = spip_insert("spip_articles",
+					     "(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
+					     "($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
+
+
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
 		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
 	} else {
@@ -936,13 +940,13 @@ debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide
 //
 
 // Creer un nouvel auteur et l'ajouter
-
+#spip_log("$creer_auteur AND $connect_statut");
+# ce code n'est jamais execute. A tirer au clair
 if ($creer_auteur AND $connect_statut=='0minirezo'){
 	$creer_auteur = addslashes($creer_auteur);
-	$query_creer = "INSERT INTO spip_auteurs (nom, statut) VALUES (\"$creer_auteur\", '1comite')";
-	$result_creer = spip_query($query_creer);
 
-	$nouv_auteur = spip_insert_id();
+	$nouv_auteur = spip_insert('spip_auteurs', "(nom, statut)",
+				      "(\"$creer_auteur\", '1comite')");
 	$ajout_auteur = true;
 }
 

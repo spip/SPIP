@@ -80,10 +80,9 @@ if ($new == 'oui') {
 	
 		$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
 	
-		$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation) ".
-			"VALUES ('"._T('avis_site_introuvable')."', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
-		$result = spip_query($query);
-		$id_syndic = spip_insert_id();
+		$id_syndic = spip_insert("spip_syndic",
+					 "(nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation)",
+					 "('"._T('avis_site_introuvable')."', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')");
 	}
 }
 

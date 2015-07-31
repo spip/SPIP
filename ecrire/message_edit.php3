@@ -134,9 +134,9 @@ if ($new == "oui") {
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
 
-	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('".addslashes(filtrer_entites(_T('texte_nouveau_message')))."', NOW(), '$statut', '$type', $connect_id_auteur)";
-	$result = spip_query($query);
-	$id_message = spip_insert_id();
+	$id_message = spip_insert("spip_messages",
+				  "(titre, date_heure, statut, type, id_auteur)", 
+				  "('".addslashes(filtrer_entites(_T('texte_nouveau_message')))."', NOW(), '$statut', '$type', $connect_id_auteur)");
 	
 	if ($rv) {
 		spip_query("UPDATE spip_messages SET rv='oui', date_heure='$rv 12:00:00', date_fin= '$rv 13:00:00' WHERE id_message = $id_message");

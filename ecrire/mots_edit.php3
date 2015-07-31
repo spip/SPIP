@@ -27,8 +27,8 @@ if ($connect_statut == '0minirezo') {
 
 	if ($titre_mot) {
 		if ($new == 'oui' && $id_groupe) {
-			spip_query("INSERT INTO spip_mots (id_groupe) VALUES ($id_groupe)");
-			$id_mot = spip_insert_id();
+		  $id_mot = spip_insert("spip_mots", '(id_groupe)', "($id_groupe)");
+
 
 			// ajouter le mot a l'article
 			if (settype($ajouter_id_article, 'integer') AND ($ajouter_id_article>0))
@@ -245,10 +245,11 @@ if ($connect_statut =="0minirezo"){
 		$row_groupes = spip_fetch_array($result);
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
-			spip_query("INSERT INTO spip_groupes_mots SET titre='".addslashes(_T('info_mot_sans_groupe'))."', unseul='non', obligatoire='non',
-                articles='oui', breves='oui', rubriques='non', syndic='oui',
-                0minirezo='oui', 1comite='non', 6forum='non'");
-			$row_groupes['id_groupe'] = spip_insert_id();
+		  $row_groupes['id_groupe'] = spip_insert("spip_groupes_mots",
+							  "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)",
+							  "('" .
+							  addslashes(_T('info_mot_sans_groupe'))."', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'");
+
 		}
 		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
 	}
