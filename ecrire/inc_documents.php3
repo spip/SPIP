@@ -799,10 +799,7 @@ entites_html($document['fichier'])."\" />\n";
 				$link->addVar('id_document', $id_document);
 				$link->addVar('show_docs', $id_document);
 
-				if ($document['id_article'])
-					$query = '?id_article='.$document['id_article'];
-				if ($document['id_rubrique'])
-					$query = '?id_rubrique='.$document['id_rubrique'];
+				$query = '?id_'.$type.'='.$document['id_type'];
 				$query .= '&show_docs='.$id_document;
 
 				echo $link->getForm('POST', "$query#$album");
