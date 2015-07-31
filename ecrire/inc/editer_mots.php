@@ -80,7 +80,8 @@ function chercher_inserer_mot($cherche_mot, $select_groupe, $objet, $id_objet, $
 		pipeline('post_edition',
 				array(
 					'args' => array(
-					'table' => $table,
+					'operation' => 'editer_mots',
+					'table' => table_objet_sql($objet),
 					'id_objet' => $id_objet
 					),
 				'data' => null
@@ -93,10 +94,10 @@ function chercher_inserer_mot($cherche_mot, $select_groupe, $objet, $id_objet, $
 function inserer_mot($table, $table_id, $id_objet, $id_mot)
 {
 	$r = sql_countsel($table, "id_mot=$id_mot AND $table_id=$id_objet");
-
-	if (!$r) sql_insertq($table, array('id_mot' =>$id_mot,  $table_id => $id_objet));
-
-	return $r;
+	if (!$r) {
+		sql_insertq($table, array('id_mot' =>$id_mot,  $table_id => $id_objet));
+		return true;
+	}
 }
 
 
