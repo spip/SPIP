@@ -1,10 +1,12 @@
-<BOUCLE_auteur_principal(AUTEURS) {id_auteur}>
+<BOUCLE_principale(AUTEURS) {id_auteur}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>
 <title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
 <INCLURE{fond=inc-head}{favicon=#LOGO_AUTEUR} />
+[(#REM) Lien vers le flux RSS des articles de l'auteur ]
+<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
 </head>
 
 <body class="page_auteur">
@@ -86,4 +88,4 @@
 </div><!--#page-->
 </body>
 </html>
-</BOUCLE_auteur_principal>
+</BOUCLE_principale>
