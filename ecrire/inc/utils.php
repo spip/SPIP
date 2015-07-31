@@ -1917,7 +1917,7 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-	if (isset($_SERVER['REQUEST_URI']) AND !$_SERVER['REDIRECT_STATUS']) {
+	if (isset($_SERVER['REQUEST_URI'])) {
 		$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
 	} else {
 		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
@@ -1945,27 +1945,25 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	if (!_DIR_RESTREINT)
 		$GLOBALS['profondeur_url'] = 1;
 	else {
-		if (!isset($_SERVER['REQUEST_URI']) OR $_SERVER['REDIRECT_STATUS'])
-			$uri_ref = "";
-		else {
-			$uri_ref = $_SERVER["SCRIPT_NAME"];
-			if (!$uri_ref
+		$uri = isset($_SERVER['REQUEST_URI']) ? explode('?', $_SERVER['REQUEST_URI']) : '';
+		$uri_ref = $_SERVER["SCRIPT_NAME"];
+		if (!$uri_ref
 			// si on est appele avec un autre ti, on est sans doute en mutu
 			// si jamais c'est de la mutu avec sous rep, on est perdu si on se fie
 			// a spip.php qui est a la racine du spip, et vue qu'on sait pas se reperer
 			// s'en remettre a l'adresse du site. alea jacta est.
 			OR $ti!==_NOM_TEMPORAIRES_INACCESSIBLES){
 
-				if (isset($GLOBALS['meta']['adresse_site'])) {
-					$uri_ref = parse_url($GLOBALS['meta']['adresse_site']);
-					$uri_ref = $uri_ref['path'].'/';
-				}
+			if (isset($GLOBALS['meta']['adresse_site'])) {
+				$uri_ref = parse_url($GLOBALS['meta']['adresse_site']);
+				$uri_ref = $uri_ref['path'].'/';
 			}
+			else
+				$uri_ref = "";
 		}
-		if (!$uri_ref)
+		if (!$uri OR !$uri_ref)
 			$GLOBALS['profondeur_url'] = 0;
 		else {
-			$uri = explode('?', $_SERVER['REQUEST_URI']);
 			$GLOBALS['profondeur_url'] = max(0,
 				substr_count($uri[0], '/')
 				- substr_count($uri_ref,'/'));
