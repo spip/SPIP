@@ -38,8 +38,7 @@ function tester_variable($var, $val){
 // Retourne aussi un double tableau raccourci / texte-clair les utilisant.
 
 // http://doc.spip.org/@traiter_variables_sales
-function traiter_variables_sales()
-{
+function traiter_variables_sales() {
 	global $class_spip, $class_spip_plus;
 // class_spip : savoir si on veut class="spip" sur p i strong & li
 // class_spip_plus : class="spip" sur les ul ol h3 hr quote table...
@@ -51,6 +50,7 @@ function traiter_variables_sales()
 	return array(array(
 		/* 0 */ 	"/\n(----+|____+)/S",
 		/* 1 */ 	"/\n-- */S",
+		/* 2 */ 	"/\n- */S",  /* DOIT rester a cette position */
 		/* 3 */ 	"/\n_ +/S",
 		/* 4 */   "/(^|[^{])[{][{][{]/S",
 		/* 5 */   "/[}][}][}]($|[^}])/S",
@@ -68,6 +68,7 @@ function traiter_variables_sales()
 		     array(
 		/* 0 */ 	"\n\n" . tester_variable('ligne_horizontale', "\n<hr$class_spip_plus />\n") . "\n\n",
 		/* 1 */ 	"\n<br />&mdash;&nbsp;",
+		/* 2 */ 	"\n<br />".definir_puce()."&nbsp;",
 		/* 3 */ 	"\n<br />",
 		/* 4 */ 	"\$1\n\n" . tester_variable('debut_intertitre', "\n<h3$class_spip_plus>"),
 		/* 5 */ 	tester_variable('fin_intertitre', "</h3>\n") ."\n\n\$1",
@@ -86,31 +87,27 @@ function traiter_variables_sales()
 }
 
 // On initialise la puce pour eviter find_in_path() a chaque rencontre de \n-
+// Mais attention elle depend de la direction et de X_fonctions.php, ainsi que
+// de l'espace choisi (public/prive)
 // http://doc.spip.org/@definir_puce
 function definir_puce() {
-	static $les_puces = array();
 
 	// Attention au sens, qui n'est pas defini de la meme facon dans
 	// l'espace prive (spip_lang est la langue de l'interface, lang_dir
 	// celle du texte) et public (spip_lang est la langue du texte)
-
 	$dir = _DIR_RESTREINT ? lang_dir() : lang_dir($GLOBALS['spip_lang']);
-	$p = ($dir == 'rtl') ? 'puce_rtl' : 'puce';
 
-	if (!isset($les_puces[$p])) {
-		tester_variable($p, 'AUTO');
-		if ($GLOBALS[$p] == 'AUTO') {
-			$img = find_in_path($p.'.gif');
-			list(,,,$size) = @getimagesize($img);
-			$img = '<img src="'.$img.'" '
-				.$size.' alt="-" />';
-		} else
-			$img = $GLOBALS[$p];
+	$p = 'puce' . (test_espace_prive() ? '_prive' : '');
+	if ($dir == 'rtl') $p .= '_rtl';
 
-		$les_puces[$p] = $img;
+	tester_variable($p, 'AUTO');
+	if ($GLOBALS[$p] == 'AUTO') {
+		$img = find_in_path($p.'.gif');
+		list(,,,$size) = @getimagesize($img);
+		$GLOBALS[$p] = '<img src="'.$img.'" '
+			.$size.' alt="-" />';
 	}
-
-	return $les_puces[$p];
+	return $GLOBALS[$p];
 }
 
 //
@@ -1307,8 +1304,6 @@ function traiter_poesie($letexte)
 // http://doc.spip.org/@traiter_raccourcis
 function traiter_raccourcis($letexte) {
 
-	static $remplace = NULL;
-
 	// Appeler les fonctions de pre_traitement
 	$letexte = pipeline('pre_propre', $letexte);
 
@@ -1329,16 +1324,7 @@ function traiter_raccourcis($letexte) {
 
 	// A present on introduit des attributs class_spip*
 	// Init de leur valeur et connexes au premier appel
-	if (!$remplace)
-		$remplace = traiter_variables_sales();
-
-	// La puce depend de la direction, on ne peut pas la definir static
-	$r = $remplace;
-	if (strpos("\n".$letexte, "\n-") !== false) {
-		$r[0][] = /* 2 */ 	"/\n- */S";
-		$r[1][] = /* 2 */ 	"\n<br />".definir_puce()."&nbsp;";
-	}
-
+	$remplace = traiter_variables_sales();
 
 	//
 	// Tableaux
@@ -1376,8 +1362,8 @@ function traiter_raccourcis($letexte) {
 	}
 
 	// autres raccourcis
-	$letexte = preg_replace($r[0], $r[1], $letexte);
-	$letexte = preg_replace("@^ <br />@S", "", $letexte);
+	$letexte = preg_replace($remplace[0], $remplace[1], $letexte);
+	$letexte = preg_replace('@^\n<br />@S', '', $letexte);
 
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
