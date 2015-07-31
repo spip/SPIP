@@ -53,7 +53,7 @@ function inc_auteur_infos_dist($auteur, $redirect) {
 
 // http://doc.spip.org/@afficher_erreurs_auteur
 function afficher_erreurs_auteur($echec) {
-	foreach (split('@@@',$echec) as $e)
+	foreach (explode('@@@',$echec) as $e)
 		$corps .= '<p>' . _T($e) . "</p>\n";
 
 	$corps = debut_cadre_relief('', true)
