@@ -34,7 +34,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 			if ($GLOBALS['flag_apc']) {
 				apc_rm($chemin_cache);
 			}
-			spip_log("calcul: $chemin_cache");
+			spip_log("calcul($delais): $chemin_cache");
 			$f = fopen($chemin_cache, "wb");
 			fwrite($f, $page);
 			fclose($f);
@@ -131,7 +131,7 @@ if (!$use_cache) {
 			if ($GLOBALS['flag_apc']) {
 				apc_rm($chemin_cache);
 			}
-			spip_log("calcul: $chemin_cache");
+			spip_log("calcul($delais): $chemin_cache");
 			$file = fopen($chemin_cache, "wb");
 			fwrite($file, $page);
 			fclose($file);
