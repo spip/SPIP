@@ -133,13 +133,21 @@ function cache_valide(&$page, $date) {
 		return 0;
 }
 
-function cache_sessionne($chemin_cache, $creer=false) {
+function cache_sessionne($chemin_cache, $session, $creer=false) {
 	$fs = substr(md5($chemin_cache),0,8);
 	$a = substr($fs,0,1);
 	$b = sous_repertoire(_DIR_CACHE, $a);
-	if ($creer)
-		sous_repertoire($b, $fs);
-	return $a.'/'.$fs.'/_';
+	// si la session n'est pas anonyme, creer un sous dossier
+	// car spip est susceptible de generer auant de caches que de visiteur identifie
+	if ($session){
+		if ($creer)
+			sous_repertoire($b, $fs);
+		return $a.'/'.$fs.'/_'.$session;
+	}
+	// sinon un simple fichier suffixe par _anonyme
+	else {
+		return $a.'/'.$fs.'_anonyme';
+	}
 }
 
 // Creer le fichier cache
@@ -154,7 +162,7 @@ function creer_cache(&$page, &$chemin_cache) {
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		supprimer_fichier(_DIR_CACHE . $chemin_cache);
-		$chemin_cache = cache_sessionne($chemin_cache, true).$page['invalideurs']['session'];
+		$chemin_cache = cache_sessionne($chemin_cache,$page['invalideurs']['session'], true);
 		
 	}
 
@@ -234,7 +242,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
 	$lastmodified = 0;
 	if (!lire_fichier(_DIR_CACHE . ($f = $chemin_cache), $page))
-		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f).spip_session()), $page);
+		$fs = lire_fichier(_DIR_CACHE . ($f = cache_sessionne($f, spip_session())), $page);
 
 	// HEAD : cas sans jamais de calcul pour raisons de performance
 	if ($_SERVER['REQUEST_METHOD'] == 'HEAD') {
