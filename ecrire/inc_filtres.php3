@@ -897,7 +897,7 @@ function hauteur($img) {
 
 // Fonctions de traitement d'image
 // uniquement pour GD2
-function valeurs_image_trans($img, $effet) {
+function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	include_ecrire("inc_logos.php3");
 
 	if (strlen($img)==0) return false;
@@ -915,15 +915,20 @@ function valeurs_image_trans($img, $effet) {
 
 	if (ereg("\.(gif|jpg|png)$", $fichier, $regs)) {
 		$terminaison = $regs[1];
+		$terminaison_dest = $terminaison;
 	}
+	if ($forcer_format) $terminaison_dest = $forcer_format;
+	
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
-	$fichier_dest = "$nom_fichier-$effet.$terminaison";
+	$fichier_dest = "$nom_fichier-$effet.$terminaison_dest";
 	
 	$term_fonction = $terminaison;
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
+	$term_fonction_dest = $terminaison_dest;
+	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
 	
 	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
-	$fonction_image = "image".$term_fonction;
+	$fonction_image = "image".$term_fonction_dest;
 	
 	$largeur = largeur($img);
 	$hauteur = hauteur($img);
@@ -984,6 +989,56 @@ function image_flip_vertical($im)
 	return "<img src='$dest'$tags />";
 }
 
+// Transforme l'image en PNG transparent
+// alpha = 0: aucune transparence
+// alpha = 127: completement transparent
+function image_alpha($im, $alpha = 63)
+{
+	include_ecrire('inc_logos.php3');
+	
+	$image = valeurs_image_trans($im, "alpha-$alpha", "png");
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+		imagealphablending ($im_, FALSE );
+		imagesavealpha ( $im_, TRUE );
+
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y = 0; $y < $y_i; $y++) {
+				$rgb = ImageColorAt($im, $x, $y);
+				
+				if (function_exists(imagecolorallocatealpha)) {
+					$r = ($rgb >> 16) & 0xFF;
+					$g = ($rgb >> 8) & 0xFF;
+					$b = $rgb & 0xFF;
+					$rgb = imagecolorallocatealpha($im_, $r, $g, $b, $alpha);
+				}
+				imagesetpixel ( $im_, $x, $y, $rgb );
+			}
+		}
+		$image["fonction_image"]($im_, "$dest");
+	}
+	
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+
 function image_flip_horizontal($im)
 {
 	include_ecrire('inc_logos.php3');
@@ -1035,9 +1090,34 @@ function image_nb($im)
 	
 	$creer = $image["creer"];
 	
+	// Methode precise
+	// resultat plus beau, mais tres lourd
+	/*
 	if ($creer) {
 		$im_ = $image["fonction_imagecreatefrom"]($im);
-		imagetruecolortopalette($im_, false, 256);
+		
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y=0; $y < $y_i; $y++) {
+				$rgb = ImageColorAt($im_, $x, $y);
+				$r = ($rgb >> 16) & 0xFF;
+				$g = ($rgb >> 8) & 0xFF;
+				$b = $rgb & 0xFF;
+
+				$c = round(.299 * $r+ .587 * $g + .114 * $b);
+
+				$color = ImageColorAllocate( $im_, $c, $c, $c );
+				imagesetpixel ($im_, $x, $y, $color);			
+			}
+		}
+		$image["fonction_image"]($im_, "$dest");
+		
+	}
+	*/
+	// Methode avec reduction de couleurs
+	// moins precise, mais infiniment plus rapide!
+	if ($creer) {
+		$im_ = $image["fonction_imagecreatefrom"]($im);
+		imagetruecolortopalette($im_, true, 256);
 
 		for($a=0; $a<imagecolorstotal ($im_); $a++)
 		{
@@ -1049,6 +1129,7 @@ function image_nb($im)
 
 		$image["fonction_image"]($im_, "$dest");
 	}
+
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
@@ -1089,7 +1170,7 @@ function image_gamma($im, $gamma = 0)
 	
 	if ($creer) {
 		$im_ = $image["fonction_imagecreatefrom"]($im);
-		imagetruecolortopalette($im_, false, 256);
+		imagetruecolortopalette($im_, true, 256);
 
 		for($a=0; $a<imagecolorstotal ($im_); $a++)
 		{
@@ -1140,7 +1221,7 @@ function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
 	
 	if ($creer) {
 		$im_ = $image["fonction_imagecreatefrom"]($im);
-		imagetruecolortopalette($im_, false, 256);
+		imagetruecolortopalette($im_, true, 256);
 
 		for($a=0; $a<imagecolorstotal ($im_); $a++)
 		{
