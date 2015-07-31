@@ -373,6 +373,7 @@ prive/formulaires/selecteur/hierarchie-racine.html -text
 prive/formulaires/selecteur/hierarchie-rubriques.html -text
 prive/formulaires/selecteur/inc-nav-articles.html -text
 prive/formulaires/selecteur/inc-nav-rubriques.html -text
+prive/formulaires/selecteur/inc-nav-rubriques_fonctions.php -text
 prive/formulaires/selecteur/inc-sel-articles.html -text
 prive/formulaires/selecteur/inc-sel-rubriques.html -text
 prive/formulaires/selecteur/jquery-ui-1.8.custom.js -text
