@@ -92,6 +92,21 @@ function aide($aide='') {
 		. "</a>";
 }
 
+//
+// Mention, le cas echeant, de la revision SVN courante
+//
+function version_svn_courante() {
+	if (lire_fichier(_DIR_RACINE.'.svn/entries', $c1)
+	AND lire_fichier(_DIR_RESTREINT.'.svn/entries', $c2)
+	# repertoires relativement accessoires
+	AND (lire_fichier(_DIR_RACINE.'formulaires/.svn/entries', $c3) or true)
+	AND (lire_fichier(_DIR_RACINE.'plugins/.svn/entries', $c4) or true)
+	AND (lire_fichier(_DIR_RACINE.'IMG/.svn/entries', $c5) or true)
+	AND preg_match_all(',committed-rev="([0-9]+)",', "$c1$c2$c3$c4$c5",
+	$r, PREG_PATTERN_ORDER))
+		return max($r[1]);
+}
+
 function info_copyright() {
 	global $spip_version_affichee, $spip_lang;
 
@@ -100,17 +115,8 @@ function info_copyright() {
 	//
 	// Mention, le cas echeant, de la revision SVN courante
 	//
-	if (lire_fichier(_DIR_RACINE.'.svn/entries', $c1)
-	AND lire_fichier(_DIR_RESTREINT.'.svn/entries', $c2)
-	# repertoires relativement accessoires
-	AND (lire_fichier(_DIR_RACINE.'formulaires/.svn/entries', $c3) or true)
-	AND (lire_fichier(_DIR_RACINE.'plugins/.svn/entries', $c4) or true)
-	AND (lire_fichier(_DIR_RACINE.'IMG/.svn/entries', $c5) or true)
-	AND preg_match_all(',committed-rev="([0-9]+)",', "$c1$c2$c3$c4$c5",
-	$r, PREG_PATTERN_ORDER)) {
-		$svn_revision = max($r[1]);
+	if ($svn_revision = version_svn_courante())
 		$version .= " SVN [<a href='http://trac.rezo.net/trac/spip/changeset/$svn_revision' target='_blank'>$svn_revision</a>]";
-	}
 
 	echo _T('info_copyright', 
 		   array('spip' => "<b>SPIP $version</b> ",
