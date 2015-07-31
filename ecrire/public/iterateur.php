@@ -35,7 +35,7 @@ class IterFactory{
 		}
 
 		// chercher un iterateur PHP existant (par exemple dans SPL)
-		// (il faudrait passer l'argument ->serveur
+		// (il faudrait passer l'argument ->sql_serveur
 		// pour etre certain qu'on est sur un "php:")
 		if (class_exists($iterateur)) {
 			$a = isset($command['args']) ? $command['args'] : array() ;
