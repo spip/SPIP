@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_editer formulaire_editer_article formulaire_editer_article-#ENV{id_article,nouveau}">
-	<!-- br class='spacer' / -->
+	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -47,12 +47,12 @@
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_chapeau}|=={non}|?{#ENV**{chapo,''},' '}|oui)
 	    [<li class='editer_virtuel[ (#ENV**{erreurs}|table_valeur{virtuel}|oui)erreur]'>(#ENV**{chapo}|match{^=}|oui)
-				<label for='virtuel'><:info_redirection:></label>
-				<em class="aide">#AIDER{artvirt}</em>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{virtuel})</span>]
-				<input type='text' class='text' name='virtuel' id='virtuel' value="[(#ENV**{chapo}|replace{^=,''})]" />
-				<input type='hidden' name='changer_virtuel' value='oui' />
-				<p class='explication'><:texte_article_virtuel_reference:></p>
+			<label for='virtuel'><:info_redirection:></label>
+			<em class="aide">#AIDER{artvirt}</em>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{virtuel})</span>]
+			<input type='text' class='text' name='virtuel' id='virtuel' value="[(#ENV**{chapo}|replace{^=,''})]" />
+			<input type='hidden' name='changer_virtuel' value='oui' />
+			<p class='explication'><:texte_article_virtuel_reference:></p>
 		</li>]
 		[<li class="editer_chapo[ (#ENV**{erreurs}|table_valeur{chapo}|oui)erreur]">(#ENV**{chapo}|match{^=}|non)
 			<label for="chapo"><:info_chapeau:></label>
@@ -89,21 +89,22 @@
 
 	  	[(#ENV**{config}|table_valeur{articles_urlref}|=={non}|?{#ENV**{url_site,#ENV**{nom_site,''}},' '}|oui)
 	  	<li class="editer_liens_sites">
-	    <fieldset>
-	      <h3 class='legend'><:entree_liens_sites:></h3>
-	      <ul>
-			<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
-				<label for="nom_site"><:info_titre:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
-				<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
-			</li>
-			<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
-				<label for="url_site"><:info_url:></label>
-				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
-				<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
-			</li>
-		  </ul>
-	    </fieldset></li>]
+			<fieldset>
+				<legend><:entree_liens_sites:></legend>
+				<ul>
+				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]">
+					<label for="nom_site"><:info_titre:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
+					<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
+				</li>
+				<li class="editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
+					<label for="url_site"><:info_url:></label>
+					[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
+					<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
+				</li>
+				</ul>
+			</fieldset>
+		</li>]
 	    
 	  </ul>
 

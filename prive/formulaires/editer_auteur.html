@@ -34,10 +34,10 @@
 			<input type='text' class='text[ (#GET{disable}|oui)disabled]' name='email' id='email' value="[(#ENV**{email})]" #GET{disable}/>
 	    </li>
 	    <li class="editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
-	      <label for="bio"><:entree_infos_perso:></label>
-		  [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</span>]
-		  <p class="explication"><:entree_biographie:></p>
-		  <textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
+			<label for="bio"><:entree_infos_perso:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</span>]
+			<p class="explication"><:entree_biographie:></p>
+			<textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
 	    </li>
 	    [(#REM)
 	    	Cle PGP
@@ -52,7 +52,7 @@
 		]		
 	  	<li class='editer_liens_sites'>
 			<fieldset>
-			<h3 class='legend'><:info_site_web:></h3>
+			<legend><:info_site_web:></legend>
 			<ul>
 				<li class="editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
 					<label for="nom_site_auteur"><:entree_nom_site:></label>
@@ -101,7 +101,7 @@
 		]
 		<li class='editer_identification'>
 			<fieldset>
-				<h3 class='legend'><:entree_identifiants_connexion:></h3>
+				<legend><:entree_identifiants_connexion:></legend>
 				[(#REM) Avertissement en cas de modifs de ses propres donnees ]
 				[(#GET{edit_login}|or{#GET{edit_pass}}|and{#GET{connecte}}|oui)
 					<em class='attention'><:texte_login_precaution:></em>
@@ -144,7 +144,7 @@
 		]
 		<li class='editer_redacteurs_connectes'>
 			<fieldset>
-			<h3 class='legend'><:info_liste_redacteurs_connectes:></h3>
+				<legend><:info_liste_redacteurs_connectes:></legend>
 				<p class='explication'><:texte_auteur_messagerie:></p>
 				<ul>
 					<li class="editer_perso_activer_imessage">
