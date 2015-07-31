@@ -30,9 +30,15 @@ function auth_ldap_dist ($login, $pass) {
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
 	$result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'");
 
+	if ($result) return $result;
+
 	// sinon importer les infos depuis LDAP, 
 	// avec le statut par defaut a l'install
-	return $result ? $result : auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
+
+	$n = auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"], $login);
+	if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
+	spip_log("Creation de l'auteur '$login' impossible");
+	return array();
 }
 
 // http://doc.spip.org/@auth_ldap_search
@@ -71,57 +77,51 @@ function auth_ldap_search($login, $pass)
 	return '';
 }
 
-// http://doc.spip.org/@auth_ldap_inserer
-function auth_ldap_inserer($dn, $statut)
+function auth_ldap_retrouver($dn, $desc='')
 {
+	if (!$desc) $desc = array('nom' => "cn",
+				  'email' => "mail", 
+				  'bio' => "description");
+
+	// Lire les infos sur l'utilisateur à partir de son DN depuis LDAP
+
 	$ldap_link = spip_connect_ldap();
 	$ldap_link = $ldap_link['link'];
-
-	// refuser d'importer n'importe qui 
-	if (!$statut) return array();
-
-	// Lire les infos sur l'uid de l'utilisateur depuis LDAP 
-	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
-		
-	// Si ça ne marche pas, essayer avec le samaccountname
-	if (!$result) {
-		$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("samaccountname", "cn", "mail", "description"));
-		$uid = 'samaccountname';
-	} else  $uid = 'uid';
+	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array_values($desc));
 
 	if (!$result) return array();
 
-	    // Recuperer les donnees de l'auteur
-	$info = @ldap_get_entries($ldap_link, $result);
-	if (!is_array($info)) return array();
-	for ($i = 0; $i < $info["count"]; $i++) {
-		$val = $info[$i];
-		if (is_array($val)) {
-				if (!$nom) $nom = $val['cn'][0];
-				if (!$email) $email = $val['mail'][0];
-				if (!$login) $login = $val[$uid][0];
-				if (!$bio) $bio = $val['description'][0];
-		}
-	}
+	// Recuperer les donnees du premier (unique?) compte de l'auteur
+	$val = @ldap_get_entries($ldap_link, $result);
+	if (!is_array($val) OR !is_array($val[0])) return array();
+	$val = $val[0];
 
 	// Convertir depuis UTF-8 (jeu de caracteres par defaut)
 	include_spip('inc/charsets');
-	$nom = importer_charset($nom, 'utf-8');
-	$email = importer_charset($email, 'utf-8');
-	$bio = importer_charset($bio, 'utf-8');
-	$login = strtolower(importer_charset($login, 'utf-8'));
 
-	$n = sql_insertq('spip_auteurs', array(
-			'source' => 'ldap',
-			'nom' => $nom,
-			'login' => $login,
-			'email' => $email,
-			'bio' => $bio,
-			'statut' => $statut,
-			'pass' => ''));
+	foreach ($desc as $k => $v)
+		$desc[$k] = importer_charset($val[strtolower($v)][0], 'utf-8');
+	return $desc;
+}
 
-	if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
-	spip_log("Creation de l'auteur '$nom' impossible");
-	return array();
+
+// http://doc.spip.org/@auth_ldap_inserer
+// Ajout du paramètre $login
+function auth_ldap_inserer($dn, $statut, $login='', $desc='')
+{
+	// refuser d'importer n'importe qui 
+	if (!$statut) return array();
+
+	$val = auth_ldap_retrouver($dn);
+	if (!$val) return array();
+
+	return sql_insertq('spip_auteurs', array(
+				'source' => 'ldap',
+				'login' => $login,
+				'statut' => $statut,
+				'email' => $val['email'],
+				'nom' => $val['nom'],
+				'bio' => $val['bio'],
+				'pass' => ''));
 }
 ?>
