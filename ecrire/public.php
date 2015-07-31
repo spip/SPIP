@@ -84,8 +84,14 @@ if (defined('_INC_PUBLIC')) {
 		http_status($page['status']);
 	}
 
-	$html = $page['entetes'];
-	$html = (!isset($html['Content-Type']) ? '' : preg_match(',^\s*text/html,',$html['Content-Type']));
+	// Content-Type ?
+	if (!isset($page['entetes']['Content-Type'])) {
+		$page['entetes']['Content-Type'] = 
+			"text/html; charset=" . $GLOBALS['meta']['charset'];
+		$html = true;
+	} else {
+		$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
+	}
 
 	if ($var_preview AND $html) {
 		include_spip('inc/minipres');

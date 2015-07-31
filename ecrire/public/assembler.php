@@ -138,20 +138,15 @@ function assembler_page ($fond) {
 	// Definir les entetes si ce n'est fait 
 
 		if (!$flag_preserver) {
-
-			$page['entetes']['Content-Type'] = 
-					"text/html; charset="
-					. $GLOBALS['meta']['charset'];
 			if ($flag_ob) {
 			// Si la page est vide, produire l'erreur 404
 				if (trim($page['texte']) === ''
 				    AND $var_mode != 'debug') {
 					$page = message_erreur_404();
-					$page['status'] = $status;
 					$flag_dynamique = true;
 				}
 	// pas de cache client en mode 'observation (ou si deja indique)
-				if ($flag_dynamique  OR $var_mode) {
+				if ($flag_dynamique OR $var_mode) {
 				  $page['entetes']["Cache-Control"]= "no-cache,must-revalidate";
 				  $page['entetes']["Pragma"] = "no-cache";
 				} 
@@ -161,7 +156,6 @@ function assembler_page ($fond) {
 
 	if ($lastmodified)
 		$page['entetes']["Last-Modified"]=gmdate("D, d M Y H:i:s", $lastmodified)." GMT";
-		
 
 	return $page;
 }
@@ -334,10 +328,11 @@ function message_erreur_404 ($erreur= "") {
 		$erreur = 'public:aucun_site';
 	}
 	$contexte_inclus = array(
-		'fond' => '404',
 		'erreur' => _T($erreur)
 	);
-	return inclure_page($fond, $contexte_inclus);
+	$page = inclure_page('404', $contexte_inclus);
+	$page['status'] = 404;
+	return $page;
 }
 
 // fonction permettant de recuperer le resultat du calcul d'un squelette
