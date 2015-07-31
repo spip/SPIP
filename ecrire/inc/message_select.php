@@ -16,7 +16,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@afficher_messages
 function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
-	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
 	$tmp_var = 't_' . substr(md5($where.$from), 0, 4);
 

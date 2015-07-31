@@ -69,7 +69,6 @@ function exec_lang_raccourcis_dist() {
 // http://doc.spip.org/@afficher_raccourcis
 function afficher_raccourcis($module = "public") {
 	global $spip_lang;
-	global $couleur_foncee;
 	
 	charger_langue($spip_lang, $module);
 

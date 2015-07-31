@@ -43,8 +43,7 @@ $GLOBALS['selecteur_rubrique'] = 'inc_chercher_rubrique_dist';
 
 // http://doc.spip.org/@style_menu_rubriques
 function style_menu_rubriques($i) {
-	global $browser_name, $browser_version;
-	global $couleur_claire, $spip_lang_left;
+	global $browser_name, $browser_version, $spip_lang_left;
 
 	$espace = '';
 	if (preg_match(",mozilla,i", $browser_name)) {
@@ -79,17 +78,16 @@ function style_menu_rubriques($i) {
 
 	if ($i==1) {
 		$style .= "background-image: url(" . _DIR_IMG_PACK. "secteur-12.gif);";
-		$style .= "background-color: $couleur_claire;";
 		$style .= "font-weight: bold;";
+		$class = "toile_claire";
 	}
 	else if ($i==2) {
-		$style .= "border-bottom: 1px solid $couleur_claire;";
 		$style .= "font-weight: bold;";
-	}
+		$style .= "bordure_claire_basse";
+	} else $class = '';
 
-	if ($style) $style = " style='$style'";
 
-	return array($style,$espace);
+	return array($class,$style,$espace);
 }
 
 // http://doc.spip.org/@sous_menu_rubriques
@@ -106,21 +104,21 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 	// selected ?
 	$selected = ($root == $id_rubrique) ? ' selected="selected"' : '';
 
+	// le style en fonction de la profondeur
+	list($class, $style, $espace) = style_menu_rubriques($niv);
+
 	// class='selec_rub' sauf pour contourner le bug MSIE / MacOs 9.0
 	if (!($browser_name == "MSIE" AND floor($browser_version) == "5"))
-		$class = " class='selec_rub'";
-
-	// le style en fonction de la profondeur
-	list($style,$espace) = style_menu_rubriques($niv);
+		$class .= " selec_rub";
 
 	// creer l'<option> pour la rubrique $root
-	$r = '';
+
 	if (isset($data[$root])) # pas de racine sauf pour les rubriques
 	{
-		$r .= "<option$selected value='$root'$class$style>$espace"
+		$r = "<option$selected value='$root' class='$class' style='$style'>$espace"
 		.$data[$root]
 		.'</option>'."\n";
-	}
+	} else 	$r = '';
 	
 	// et le sous-menu pour ses enfants
 	$sous = '';

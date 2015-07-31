@@ -856,7 +856,7 @@ function afficher_articles_trad_boucle($row)
 
 // http://doc.spip.org/@afficher_breves
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global  $couleur_foncee, $options;
+	global  $options;
  
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
 	     AND (!isset($GLOBALS['id_rubrique'])))
@@ -1539,7 +1539,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $af = true
 
 // http://doc.spip.org/@gros_titre
 function gros_titre($titre, $ze_logo='', $aff=true){
-	global $couleur_foncee, $spip_display;
+	global $spip_display;
 	if ($spip_display == 4) {
 		$res = "\n<h1>".typo($titre)."</h1>&nbsp;\n";
 	}
@@ -1706,7 +1706,7 @@ function debut_droite($rubrique="", $return= false) {
 // http://doc.spip.org/@liste_articles_bloques
 function liste_articles_bloques()
 {
-	global $connect_id_auteur, $couleur_foncee;
+	global $connect_id_auteur;
 
 	$res = '';
 	if ($GLOBALS['meta']["articles_modif"] != "non") {

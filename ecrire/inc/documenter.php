@@ -25,15 +25,17 @@ function inc_documenter_dist(
 	$couleur='',		# couleur des cases du tableau
 	$appelant =''		# pour le rappel (cf plugin)
 ) {
-	global $couleur_claire, $spip_lang_left, $spip_lang_right;
+	global $spip_lang_left, $spip_lang_right;
 
 	if (is_int($doc)) {
 		if ($ancre == 'portfolio') {
 			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
-			$couleur = $couleur_claire;
+			$toile = 'toile_claire';
+			$couleur = 'bordure_claire_';
 		} else {
 			$lies = spip_query("SELECT docs.*,l.id_$type,l.vu FROM spip_documents AS docs, spip_documents_".$type."s AS l,spip_types_documents AS lestypes WHERE l.id_$type=$doc AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension NOT IN ('gif', 'jpg', 'png') ORDER BY 0+docs.titre, docs.date");
-			$couleur = '#aaaaaa';
+			$toile = 'toile_gris_fort';
+			$couleur = 'bordure_grise_';
 		}
 
 		$documents = array();
@@ -43,6 +45,8 @@ function inc_documenter_dist(
 		$documents = $doc;
 
 	if (!$documents) return '';
+
+	$class = "${couleur}basse $couleur$spip_lang_left";
 
 	charger_generer_url();
 	// la derniere case d'une rangee
@@ -77,8 +81,8 @@ function inc_documenter_dist(
 		if (!$case)
 			$res .= "<tr style='border-top: 1px solid black;'>";
 		else if ($case == $bord_droit)
-			$style .= " border-$spip_lang_right: 1px solid $couleur;";
-		$res .= "\n<td  style='width:33%; text-align: $spip_lang_left; border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur; $style' valign='top'>"
+			$class .= " ${couleur}$spip_lang_right";
+		$res .= "\n<td  class='$class' style='width:33%; text-align: $spip_lang_left; $style' valign='top'>"
 		.  $tourner($id_document, $document, $script, $flag, $type)
 		. (!$flag  ? '' :
 		   $legender($id_document, $document, $script, $type, $document["id_$type"], $ancre, $deplier))
@@ -97,13 +101,13 @@ function inc_documenter_dist(
 
 	// fermer la derniere ligne
 	if ($case) {
-		$res .= "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
+		$res .= "<td class='$couleur$spip_lang_left'>&nbsp;</td>";
 		$res .= "</tr>";
 	}
 
 	$s = ($ancre =='documents' ? '': '-');
 	if (is_int($doc)) {
-		$head = "\n<div style='background-color: $couleur; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'>\n<b>".majuscules(_T("info_$ancre"))."</b></div>";
+		$head = "\n<div style='padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2 $toile'>\n<b>".majuscules(_T("info_$ancre"))."</b></div>";
 
 		if (count($documents) > 3) {
 			$head .= "<div style='background-color: #dddddd; padding: 4px; color: black; text-align: right' class='arial1'>"

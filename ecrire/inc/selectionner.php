@@ -57,7 +57,7 @@ function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $r
 // http://doc.spip.org/@construire_selectionner_hierarchie
 function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name, $url_init='')
 {
-	global $couleur_foncee, $spip_lang_right;
+	global $spip_lang_right;
 
 	$idom1 = $idom . "_champ_recherche";
 	$idom2 = $idom . "_principal";
@@ -101,8 +101,9 @@ function construire_selectionner_hierarchie($idom, $liste, $racine, $url, $name,
 	. $idom6
 	. "')\"" 
 	. " />"
-	. "\n</td></tr></table><div id='$idom2'"
-	. " style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'><div id='$idom4'"
+	. "\n</td></tr></table><div id='"
+	.  $idom2
+	.  "' class='toile_blanche bordure_foncee' style='position: relative; height: 170px; overflow: auto;'><div id='$idom4'"
 	. " class='arial1'>" 
 	. $liste
 	. "</div></div>\n<div id='$idom3'></div></div>\n";

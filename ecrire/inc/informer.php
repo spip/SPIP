@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@inc_informer_dist
 function inc_informer_dist($id, $col, $exclus, $rac, $type)
 {
-	global $couleur_foncee,$spip_display,$spip_lang_right ;
+	global $spip_display,$spip_lang_right ;
 
 	include_spip('inc/texte');
 	if ($type == "rubrique") {
@@ -58,7 +58,7 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type)
 	. entites_html($titre)
 	. "\" />"
 	. "</div>"
-	. "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>"
+	. "<div class='arial2 bordure_foncee toile_blanche' style='padding: 5px; border-top: 0px;'>"
 	. (!$res ? '' : $res)
 	. "<div><p><b>$titre</b></p></div>"
 	. (!$descriptif ? '' : "<div>$descriptif</div>")

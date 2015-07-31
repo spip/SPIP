@@ -103,7 +103,7 @@ function exec_config_fonctions_dist()
 // http://doc.spip.org/@afficher_choix_vignette
 function afficher_choix_vignette($process) {
 	static $cpt_cellule = 0;
-	global $couleur_foncee;
+
 	//global $taille_preview;
 	$taille_preview = 120;
 
@@ -122,11 +122,12 @@ function afficher_choix_vignette($process) {
 		$retour = '';
 	}
 
-	$style = (($process == $GLOBALS['meta']['image_process'])
-	? " border: 2px; border-style: dotted; border-color: $couleur_foncee; font-weight: bold;"
-	: "");
+	if ($process == $GLOBALS['meta']['image_process']) {
+	  $style = " font-weight: bold;";
+	  $class = " class='bordure_foncee_pointillee'";
+	} else $style = $class = '';
 
-	return 	$retour . "\n<td  style='text-align: center; vertical-align:center; width: ".($taille_preview+4)."px;$style'"
+	return 	$retour . "\n<td  style='text-align: center; vertical-align:center; width: ".($taille_preview+4)."px;$style'$class"
 	. "><a href='"
 	. generer_url_ecrire("config_fonctions", "image_process=$process")
 	. "'><img src='"

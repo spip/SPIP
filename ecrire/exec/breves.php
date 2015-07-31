@@ -17,7 +17,7 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_breves_dist
 function exec_breves_dist()
 {
-	global  $couleur_foncee, $spip_lang_left, $spip_lang_right;
+	global  $spip_lang_left, $spip_lang_right;
 
 	charger_generer_url();
  	pipeline('exec_init',array('args'=>array('exec'=>'breves'),'data'=>''));

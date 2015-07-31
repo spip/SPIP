@@ -291,7 +291,7 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 // http://doc.spip.org/@objet_auteur_select
 function objet_auteur_select($result)
 {
-	global $couleur_claire, $connect_statut ;
+	global $connect_statut ;
 
 	$statut_old = $premiere_old = $res = '';
 
