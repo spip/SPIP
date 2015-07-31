@@ -506,7 +506,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_afficher_icones_seuls' => 'j&ograve;n&#596;',
 'lien_afficher_texte_icones' => 'xl&#603; w&eacute;m&agrave; l&#603;',
 'lien_afficher_texte_seul' => 'xl&#603; w&eacute;m&agrave; l&#603;',
-'lien_icones_interface' => 'mi t&ograve; m&#603; &#598;&ograve; kpl&eacute;kpl&eacute; m&#603; &#596; l&#603;.',
 'lien_liberer' => 'mi s&#596; j&oacute;',
 'lien_liberer_tous' => 'mi s&#596; w&eacute;kp&aacute; l&#603;  j&oacute;',
 'lien_nouvea_pense_bete' => 'l&igrave;n t&agrave;m&#603; &agrave;g&uacute;&#598;&agrave;g&#596;',

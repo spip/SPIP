@@ -40,7 +40,7 @@ inn ot versyon Spip sak ou la mi andan out sit.</b> Ou va giny gro traka :
 
 
 
-Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bezwin inn p&eacute; plid zinformasyon, g&egrave;t <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bezwin inn p&eacute; plid zinformasyon, g&egrave;t <a href="@spipnet@">
 
                                 ladocumentasyon lo SPIP-la</a>.',
 'avis_espace_interdit' => '<b>Ou na pwinn permisyon ariv dann l&eacute;pas-t&egrave;rla </b><p>Ou la d&eacute;za finn m&egrave;t inn versyon d-SPIP.',
@@ -203,7 +203,7 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 
 // I
 'ical_info1' => 'Paz-la i donn aou plizi&egrave;r many&egrave;r r&egrave;s an gatiraz &egrave;k lo vi lo sit-la.',
-'ical_info2' => 'Si ou i v&eacute; dot ranseyman si bann teknik anl&egrave;r, ezit pa rogard&eacute; <a href="http://www.spip.net/fr_suivi">bann paz dokimantasyon pou SPIP</a>.',
+'ical_info2' => 'Si ou i v&eacute; dot ranseyman si bann teknik anl&egrave;r, ezit pa rogard&eacute; <a href="@spipnet@">bann paz dokimantasyon pou SPIP</a>.',
 'ical_info_calendrier' => 'Ast&egrave;r n&eacute;na d&eacute; kalandry&eacute; disponib. Promy&eacute; l&eacute; in many&egrave;r d\'kart pou lo sit, sak i donn a ou tout bann zartik la finn d&egrave;t pibliy&eacute;. D&eacute;zi&egrave;m-la, i donn aou tout bann zanons l&eacute;ditoryal &egrave;k zot derny&eacute; mod&eacute;kri andann out l&eacute;spas priv&eacute; (out kazmod&eacute;kri)&nbsp;: laks&eacute; d&eacute;zy&egrave;m kalandry&eacute;-la, li l&eacute; r&eacute;zerv&eacute;. ou minm s&egrave;lman l&eacute; kav konsilt ali sanm inn sort kl&eacute; priv&eacute;, sak ou p&eacute; sanz kank i v&eacute; (sanz s&egrave;lman out modpas). ',
 'ical_methode_http' => 'T&eacute;l&eacute;sarzman',
 'ical_methode_webcal' => 'Po f&eacute; lasinkronizasyon(webcal://)',
@@ -802,7 +802,7 @@ la bazdodn&eacute;. Pou sa minm, oubli pa m&egrave;t ali andann  fisy&eacute; pr
 Oubli pa r&eacute;kup&egrave;r osi tout sak nana dann r&eacute;pertwar <i>IMG/</i>, s&eacute; dir
 tout bann zimaz &egrave;k tout bann dokiman kn&eacute;na dann bann zartik &egrave;k bann rubrik.',
 'texte_admin_tech_02' => 'Tansyon pangar : sovgard-la li sra posib r&eacute;stor&eacute; 
-S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Pangar sirtou pa  &laquo;&nbsp;d&eacute;gren&eacute; labaz-la&nbsp;&raquo;  &egrave;k lid&eacute; install in in sovgar apr&eacute; larnouv&egrave;lman.Pour plid d&eacute;tay anon vwar isi lapaz <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
+S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Pangar sirtou pa  &laquo;&nbsp;d&eacute;gren&eacute; labaz-la&nbsp;&raquo;  &egrave;k lid&eacute; install in in sovgar apr&eacute; larnouv&egrave;lman.Pour plid d&eacute;tay anon vwar isi lapaz <a href="@spipnet@">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Ou p&eacute; swazi sovgard lo fisy&eacute; dann manyir-konpers&eacute;. Manyir-la i perm&eacute; rand pli takini lo transf&egrave;r d-fisy&eacute; sir out lordinat&egrave;r oubyin sa lo serv&egrave;r pou bann sovgard. L&eacute; itil aou pour kons&egrave;rv out l&eacute;spas-diks.',
 'texte_adresse_annuaire_1' => '(Si out karn&eacute; l&eacute; instal&eacute; sir lamasin par&eacute;y minm sitw&egrave;b-la, n&eacute;na grannsans i sra pour &egrave;t &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Lot&egrave;r answit la fin d&egrave;t azout&eacute; pou lartik-la :',
