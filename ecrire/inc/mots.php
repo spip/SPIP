@@ -33,14 +33,17 @@ function reduire_mot($mot) {
 
 // http://doc.spip.org/@mots_ressemblants
 function mots_ressemblants($mot, $table_mots, $table_ids='') {
+
+	$result = array();
+
+	if (!$table_mots) return $result;
+
 	$lim = 2;
 	$nb = 0;
 	$opt = 1000000;
 	$mot_opt = '';
 	$mot = reduire_mot($mot);
 	$len = strlen($mot);
-
-	if (!$table_mots) return '';
 
 	while (!$nb AND $lim < 10) {
 		reset($table_mots);
@@ -78,7 +81,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 		$lim += 2;
 	}
 
-	if (!$nb) return '';
+	if (!$nb) return $result;
 	reset($selection);
 	if ($opt > -1) {
 		$moy = 1;
