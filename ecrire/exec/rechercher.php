@@ -58,11 +58,12 @@ function exec_rechercher_args($id, $type, $exclus, $rac, $do){
 
 	$where = preg_split(",\s+,", $type);
 	if ($where){
-		foreach ($where as $k => $v)
-			$where[$k] = "'%" . substr(str_replace("%", "\%", sql_quote($v)), 1, -1) . "%'";
+		foreach ($where as $k => $v){
+			$where[$k] = "'%" . substr(str_replace("%", "\%", sql_quote($v,'','string')), 1, -1) . "%'";
+		}
 		$where_titre = ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
 		$where_desc = ("(descriptif LIKE " . join(" AND descriptif LIKE ", $where) . ")");
-		$where_id = ("(id_rubrique = " . join(" AND id_rubrique = ", $where) . ")");
+		$where_id = ("(id_rubrique = " . intval($type) . ")");
 	} else {
 		$where_titre = " 1=2";
 		$where_desc = " 1=2";
