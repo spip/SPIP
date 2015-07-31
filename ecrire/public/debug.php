@@ -78,8 +78,8 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 	if (preg_match('/err(no|code):?[[:space:]]*([0-9]+)/i', $erreur, $regs))
 		$errno = $regs[2];
 	else if (($errno == 1030 OR $errno <= 1026)
-		AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
-	$errno = $regs[1];
+		AND preg_match('/\D(\d+)\D', $erreur, $regs))
+		$errno = $regs[1];
 
 	// Erreur systeme
 	if ($errno > 0 AND $errno < 200) {
@@ -275,10 +275,10 @@ function trouve_squelette_inclus($script)
       // a defaut on cherche le param 'page'
       if (!preg_match("/'param' => '([^']*)'/", $script, $reg))
 	$reg[1] = "inconnu";
-  $incl = $reg[1] . '.html$';
+  $incl = '@' . $reg[1] . '.html$@';
 
   foreach($debug_objets['sourcefile'] as $k => $v) {
-    if (ereg($incl,$v)) return $k;
+    if (preg_match($incl,$v)) return $k;
   }
   return "";
 }
@@ -527,9 +527,9 @@ function emboite_texte($texte, $fonc='',$self='')
  
 	if (!$texte)
 		return array(ancre_texte($texte, array('','')), false);
-	elseif (!ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$",
+	elseif (!preg_match("@^\s*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$@",
                      $GLOBALS['xhtml_error'],
-                     $eregs))
+                     $regs2))
 
 		return array(ancre_texte($texte, array('', '')), true);
 	if (!isset($GLOBALS['debug_objets'])) {
@@ -591,13 +591,13 @@ function emboite_texte($texte, $fonc='',$self='')
 		. " </table><a id='fin_err'></a>";
 		return array(ancre_texte($texte, $fautifs), $err);
 	} else {
-		$fermant = $eregs[2];
-		$ouvrant = $eregs[4];
+		$fermant = $regs2[2];
+		$ouvrant = $regs2[4];
 		$rf = reference_boucle_debug($fermant, $fonc, $self);
 		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
-		$err = $eregs[1] .
-		  "<a href='#L" . $eregs[2] . "'>$eregs[2]</a>$rf" .
-		  $eregs[3] ."<a href='#L" . $eregs[4] . "'>$eregs[4]</a>$ro";
+		$err = $regs2[1] .
+		  "<a href='#L" . $regs2[2] . "'>$regs2[2]</a>$rf" .
+		  $regs2[3] ."<a href='#L" . $regs2[4] . "'>$regs2[4]</a>$ro";
 		return array(ancre_texte($texte, array(array($ouvrant), array($fermant))), $err);
 	}
 }

@@ -551,17 +551,17 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 function calculer_critere_parties_aux($idb, &$boucles, $param) {
 	if ($param[0]->type != 'texte')
 	  {
-	    $a1 = calculer_liste(array($param[0]), array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
-	  ereg('^ *(-([0-9]+))? *$', $param[1]->texte, $m);
-	  return array("intval($a1)", ($m[2] ? $m[2] : 0));
+		$a1 = calculer_liste(array($param[0]), array('id_mere' => $idb), $boucles, $boucles[$idb]->id_parent);
+		preg_match('/^ *(-([0-9]+))? *$/', $param[1]->texte, $m);
+		return array("intval($a1)", ($m[2] ? $m[2] : 0));
 	  } else {
-	    preg_match('@^ *(([0-9]+)|n) *(- *([0-9]+)? *)?$@', $param[0]->texte, $m);
-	    $a1 = $m[1];
-	    if (!$m[3])
-	      return array($a1, 0);
-	    elseif ($m[4])
-	      return array($a1, $m[4]);
-	    else return array($a1, 
+		preg_match('@^ *(([0-9]+)|n) *(- *([0-9]+)? *)?$@', $param[0]->texte, $m);
+		$a1 = $m[1];
+		if (!$m[3])
+		  return array($a1, 0);
+		elseif ($m[4])
+		  return array($a1, $m[4]);
+		else return array($a1, 
 			      calculer_liste(array($param[1]), array(), $boucles[$idb]->id_parent, $boucles));
 	}
 }
@@ -1082,7 +1082,7 @@ function calculer_vieux_in($params)
 		    if ($v[0]->type != 'texte')
 		      $newp[] = $v;
 		    else {
-		      foreach(split(',', $v[0]->texte) as $x) {
+		      foreach(preg_split('/,/', $v[0]->texte) as $x) {
 			$t = new Texte;
 			$t->texte = $x;
 			$newp[] = array($t);
