@@ -292,7 +292,7 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!($length=strlen($texte)) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
 	while ($offset<$length
-		AND strlen(preg_replace(",<[^>]+>,Uims","",substr($texte,0,$offset)))<$taille)
+		AND strlen(preg_replace(",<(!--|\w|/)[^>]+>,Uims","",substr($texte,0,$offset)))<$taille)
 		$offset = 2*$offset;
 	if (	$offset<$length
 			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
@@ -313,16 +313,16 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	// supprimer les traits, lignes etc
 	$texte = preg_replace("/(^|\r|\n)(-[-#\*]*|_ )/", "\r", $texte);
 
-	// supprimer les tags
-	$texte = supprimer_tags($texte);
-	$texte = trim(str_replace("\n"," ", $texte));
-	$texte .= "\n";	// marquer la fin
-
 	// travailler en accents charset
 	$texte = unicode2charset(html2unicode($texte, /* secure */ true));
 	if (!function_exists('nettoyer_raccourcis_typo'))
 		include_spip('inc/lien');
 	$texte = nettoyer_raccourcis_typo($texte);
+
+	// supprimer les tags
+	$texte = supprimer_tags($texte);
+	$texte = trim(str_replace("\n"," ", $texte));
+	$texte .= "\n";	// marquer la fin
 
 	// corriger la longueur de coupe
 	// en fonction de la presence de caracteres utf
