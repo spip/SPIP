@@ -26,7 +26,7 @@ function exec_admin_repair_dist()
 {
 	$ok = false;
 	spip_connect();
-	$version_mysql = spip_sql_version();
+	$version_mysql = sql_version();
 	if (!$version_mysql)
 	  $message = _T('avis_erreur_connexion_mysql');
 	else {
