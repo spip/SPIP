@@ -38,7 +38,7 @@ else {
 	$super='?';
 }
 if ($recalcul) $url .= $super."var_mode=recalcul";
-else if ($preview) $url .= $super."var_preview=oui";
+else if ($preview) $url .= $super."var_mode=preview";
 @header("Location: $url");
 
 ?>

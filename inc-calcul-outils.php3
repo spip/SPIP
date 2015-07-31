@@ -377,7 +377,7 @@ function sql_accepter_forum($id_article) {
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique par id_rubrique & lang)
 
-function sql_rubrique_fond($contexte, $lang) {
+function sql_rubrique_fond($contexte) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
 		$row = spip_abstract_fetsel(array('lang'),
