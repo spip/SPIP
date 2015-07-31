@@ -1573,15 +1573,13 @@ function vider_attribut ($balise, $attribut) {
 /**
  * Un filtre pour determiner le nom du satut des inscrits
  *
- * @deprecated a virer en 3.1
- *
  * @param void|int $id
  * @param string $mode
  * @return string
  */
 function tester_config($id, $mode='') {
-	include_spip('inc/autoriser');
-	return autoriser('inscrireauteur', $mode, $id) ? $mode : '';
+	include_spip('action/inscrire_auteur');
+	return tester_statut_inscription($mode, $id);
 }
 
 //
