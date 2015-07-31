@@ -55,20 +55,44 @@ function changer_statut_forum($id_forum, $statut) {
 	}
 }
 
-// Installer un bouton de moderation (securise) dans l'espace prive
+function controler_statut_forum ($controle_forum, $id_controle_forum) {
+	// Verifier qu'on a le droit d'agir sur ce forum
+	global $connect_toutes_rubriques, $connect_statut;
+	$ok = ($connect_statut == "0minirezo" AND $connect_toutes_rubriques);
+	if (!$ok) return;
+
+	// Que faut-il faire ?
+	switch($controle_forum) {
+		case 'supp_forum':
+			$statut = 'off';
+			break;
+		case 'supp_forum_priv':
+			$statut = 'privoff';
+			break;
+		case 'valid_forum':
+			$statut = 'publie';
+			break;
+		// nb : les forums prives (privrac ou prive), une fois effaces
+		// (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
+		// n'est pas effacable
+	}
+	changer_statut_forum($id_controle_forum, $statut);
+	return $statut;
+}
+
+// Installer un bouton de moderation dans l'espace prive
 function controle_cache_forum($action, $id, $texte, $fond, $fonction, $but='') {
 	$link = new Link();
-  
+
 	$link->addvar('controle_forum', $action);
 	$link->addvar('id_controle_forum', $id);
-	$link->addvar('hash', calculer_action_auteur("$action$id"));
 	$link = $link->geturl() . "#id$id";
 
 	if ($but)
-	  $link = $but . "&retour= ecrire/" . urlencode($link);
+		$link = $but . "&retour= ecrire/" . urlencode($link);
 
 	return icone($texte,
-		     $link,
+		$link,
 		$fond,
 		$fonction,
 		"right",

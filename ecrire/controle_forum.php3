@@ -227,7 +227,17 @@ default:
 	break;
 }
 
-if (!$debut) $debut = 0;
+// Si un id_controle_forum est demande, on adapte le debut
+if ($debut_id_forum = intval($debut_id_forum)
+AND $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum
+WHERE id_forum=$debut_id_forum"))) {
+	$result_forum = spip_query("SELECT id_forum FROM spip_forum
+		WHERE " . $query_forum . "
+		AND date_heure > '".$d['date_heure']."'");
+	$debut = spip_num_rows($result_forum);
+}
+if (!$debut=intval($debut)) $debut = 0;
+
 $pack = 20;	// nb de forums affiches par page
 $enplus = 200;	// intervalle affiche autour du debut
 $limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
