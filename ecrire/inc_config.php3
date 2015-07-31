@@ -78,7 +78,7 @@ function avertissement_config() {
 
 	<P align="justify">
 	<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">
-<?
+<?php
 
 	echo _T('texte_inc_config');
 ?>
