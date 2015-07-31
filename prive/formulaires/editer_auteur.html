@@ -89,8 +89,8 @@
 		]
 		[(#GET{ok}|non)
 			[(#GET{connecte})
-				#SET{edit_login,1}
-				#SET{edit_pass,0}
+				#SET{edit_login,0}
+				#SET{edit_pass,1}
 				#SET{ok,1}
 			]
 		]
@@ -175,12 +175,10 @@
 		]
 	  </ul>
 	  	[(#REM) Et on met un hidden...]
-		[(#ENV{id_auteur}|oui) <input type='hidden' name='statut' value='#ENV{statut}' />]
 		[(#ENV{id_auteur}|non) <input type='hidden' name='statut' value='#EVAL{_STATUT_AUTEUR_CREATION}' />]
 
 	</fieldset>
 
-		  
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
