@@ -144,19 +144,23 @@ if (!class_exists('nanoSha2'))
         function sigma_1($x) { return (int) ($this->ROTR($x, 17)^$this->ROTR($x, 19)^$this->SHR($x, 10)); }
 
 
-				function string2ordUTF8($s,&$byteSize=null){
+				function string2ordUTF8($s,&$byteSize){
 					$chars = array();
+					// par defaut sur 8bits
 					$byteSize = 8;
 					$i = 0;
 					while ($i<strlen($s)){
 						$chars[] = $this->ordUTF8($s, $i, $bytes);
 						$i+=$bytes;
+						// mais si un char necessite 16bits, on passe tout sur 16
+						// sinon on ne concorde pas avec le lecture de la chaine en js
+						// et le sha256 js
 						if ($bytes>1) $byteSize = 16;
 					}
 					return $chars;
 				}
 
-				function ordUTF8($c, $index = 0, &$bytes = null)
+				function ordUTF8($c, $index = 0, &$bytes)
 				{
 					$len = strlen($c);
 					$bytes = 0;
