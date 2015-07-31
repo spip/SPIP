@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'ayl&#305;k takvim',
 'cal_par_semaine' => 'haftal&#305;k takvim',
 'confirm_changer_statut' => 'Dikkat, bu eleman&#305;n durumunu de&#287;i&#351;tirmek istediniz. Devam etmek istiyor musunuz ?',
+'correcte' => 'do&#287;ru',
 
 
 // D
@@ -351,6 +352,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'image_tourner_droite' => '90&deg; sa&#287;a d&ouml;nd&uuml;r',
 'image_tourner_gauche' => '90&deg; sola d&ouml;nd&uuml;r',
 'img_indisponible' => 'resim mevcut de&#287;il',
+'impossible' => 'olanaks&#305;z',
 'info_a_suivre' => '&#304;ZLENECEK&nbsp;&raquo;',
 'info_a_valider' => '[onaylanacak]',
 'info_acces_interdit' => 'Eri&#351;im yasak',
@@ -675,6 +677,9 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 
 
 // S
+'squelette' => 'iskelet',
+'squelette_inclus_ligne' => 'iskelet eklendi, sat&#305;r',
+'squelette_ligne' => 'iskelet, sat&#305;r',
 'stats_visites_et_popularite' => '@visites@ ziyaret; pop&uuml;lerlik : @popularite@',
 'suivant' => 'sonraki',
 

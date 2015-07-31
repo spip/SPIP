@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calend&aacute;rio por m&ecirc;s',
 'cal_par_semaine' => 'calend&aacute;rio por semana',
 'confirm_changer_statut' => 'Aten&ccedil;&atilde;o, voc&ecirc; solicitou a altera&ccedil;&atilde;o de status deste elemento. Deseja continuar?',
+'correcte' => 'correta',
 
 
 // D
@@ -208,7 +209,7 @@ Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios
 'form_pet_deja_enregistre' => 'Este site j&aacute; est&aacute; cadastrado',
 'form_pet_deja_signe' => 'Voc&ecirc; j&aacute; assinou este texto.',
 'form_pet_envoi_mail_confirmation' => 'Um e-mail de confirma&ccedil;&atilde;o acabou de lhe ser enviado. Voc&ecirc; dever&aacute; visitar o endere&ccedil;o web mencionado na mensagem para validar a sua assinatura.',
-'form_pet_mail_confirmation' => '<MODIF>Bom dia,
+'form_pet_mail_confirmation' => 'Bom dia,
 
 Voc&ecirc; pediu para assinar a peti&ccedil;&atilde;o:
 @titre@.
@@ -340,6 +341,7 @@ Obrigado por participar
 'image_tourner_droite' => 'Rodar 90&deg; &agrave; direita',
 'image_tourner_gauche' => 'Rodar 90&deg; &agrave; esquerda',
 'img_indisponible' => 'imagem indispon&iacute;vel',
+'impossible' => 'imposs&iacute;vel',
 'info_a_suivre' => 'ACOMPANHAR&raquo;',
 'info_a_valider' => '[para validar]',
 'info_acces_interdit' => 'Acesso interdito',
@@ -622,6 +624,9 @@ e reconectar-se com o site.
 
 
 // S
+'squelette' => 'esqueleto',
+'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, linha',
+'squelette_ligne' => 'esqueleto, linha',
 'stats_visites_et_popularite' => '@visites@ visitas; popularidade: @popularite@',
 'suivant' => 'seguinte',
 

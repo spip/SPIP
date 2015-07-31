@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'W&#322;&#261;cz rozszerzenie',
 'aide_non_disponible' => 'Ta cz&#281;&#347;&#263; pomocy on-line nie jest jeszcze dost&#281;pna w tym j&#281;zyku.',
+'auteur' => 'Autor&nbsp;:',
 'avis_acces_interdit' => 'Dost&#281;p zabroniony.',
 'avis_article_modifie' => 'Uwaga, @nom_auteur_modif@ pracowa&#322; nad tym artyku&#322;em @date_diff@ minut temu.',
 'avis_aucun_resultat' => 'Brak wynik&oacute;w szukania.',
@@ -60,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'tylko jeden podpis na adres e-mail',
 'bouton_checkbox_signature_unique_site' => 'tylko jeden podpis na stron&#281; internetow&#261;',
 'bouton_demande_publication' => 'Pro&#347;ba o publikacj&#281; artyku&#322;u',
+'bouton_desactive_tout' => 'Wy&#322;&#261;cz wszystko',
 'bouton_effacer_index' => 'Usu&#324; indeksowanie',
 'bouton_effacer_tout' => 'Usu&#324; WSZYSTKO',
 'bouton_envoi_message_02' => 'WY&#346;LIJ WIADOMO&#346;&#262;',
@@ -90,10 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nie pokazuj w li&#347;cie redaktor&oacute;w',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysy&#322;aj &#380;adnych zawiadomie&#324; redakcyjnych',
 'bouton_radio_non_syndication' => 'Bez syndykacji',
-'bouton_radio_occidental' => 'Alfabet zachodni(<tt>iso-8859-1</tt>): pozwala przede wszystkimi wy&#347;wietla&#263; j&#281;zyki zachodnio-europejskie (angielski, francuski, niemiecki...&nbsp;;
-Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j&#281;zykami.',
 'bouton_radio_pas_petition' => 'Wy&#322;&#261;cz og&#322;oszenia',
-'bouton_radio_personnalise' => 'Dostosuj zestaw znak&oacute;w: wybierz t&#281; opcj&#281;, je&#347;li chcesz u&#380;ywa&#263; szczeg&oacute;lnego zestawu znak&oacute;w',
 'bouton_radio_petition_activee' => 'Og&#322;oszenia w&#322;&#261;czone',
 'bouton_radio_publication_immediate' => 'Natychmiastowa publikacja wiadomo&#347;ci
  (posty b&#281;d&#261; si&#281; ukazywa&#263; w momencie ich wys&#322;ania, administratorzy mog&#261;
@@ -102,7 +102,6 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'bouton_radio_sauvegarde_non_compressee' => 'Zapisz w postaci nieskompresowanej w <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Usu&#324; og&#322;oszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
-'bouton_radio_universel' => 'Alfabet (kodowanie) uniwersalny&nbsp; (<tt>utf-8</tt>): mo&#380;e wy&#347;wietlic teksty we wszystkich j&#281;zykach, ale mo&#380;e sprawia&#263; k&#322;opoty oprogramowaniu, kt&oacute;rego u&#380;ywasz do modyfikacji twoich szkielet&oacute;w, oraz niekt&oacute;rym klientom pocztowym.',
 'bouton_redirection' => 'PRZEKIERUJ',
 'bouton_relancer_installation' => 'Uruchom ponownie instalacj&#281;',
 'bouton_restaurer_base' => 'Przywr&oacute;&#263; baz&#281; danych',
@@ -136,7 +135,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'email_2' => 'e-mail:',
 'entree_adresse_annuaire' => 'Adres katalogu',
 'entree_adresse_email' => 'Tw&oacute;j adres e-mail',
-'entree_adresse_fichier_syndication' => 'Adres pliku "backend" do syndykacji:',
+'entree_adresse_fichier_syndication' => 'Adres pliku syndykacji:',
 'entree_adresse_site' => '<b>URL strony</b> [obowi&#261;zkowo]',
 'entree_base_donnee_1' => 'Adres bazy danych',
 'entree_base_donnee_2' => '(Cz&#281;sto adres ten jest taki sam, jak adres strony, czasem odpowiada nazwie &laquo;serwera lokalnego&raquo;, a czasem jest pozostawiony pusty.)',
@@ -169,6 +168,13 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'entree_texte_breve' => 'Tekst newsa',
 'entree_titre_obligatoire' => '<B>Tytu&#322;</b> [Obowi&#261;zkowo]<BR>',
 'entree_url' => 'URL Twojej strony',
+'erreur_plugin_fichier_absent' => 'Brak pliku',
+'erreur_plugin_fichier_def_absent' => 'Brak pliku definicji',
+'erreur_plugin_nom_fonction_interdit' => 'Nieprawid&#322;owa nazwa funkcji',
+'erreur_plugin_nom_manquant' => 'Brak nazwy rozszerzenia',
+'erreur_plugin_prefix_manquant' => 'Nie zdefiniowana nazwa rozszerzenia',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; nie ma w pliku definicji',
+'erreur_plugin_version_manquant' => 'Brakuje wersji rozszerzenia',
 
 
 // I
@@ -183,8 +189,9 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'ical_texte_rss' => 'Mo&#380;esz syndykowa&#263; nowo&#347;ci z tego serwisu w jakimkolwiek czytniku plik&oacute;w formatu XML/RSS (Rich Site Summary). Ten format pozwala SPIP odczytywa&#263; nowo&#347;ci opublikowane w innych serwisach (serwisach syndykowanych).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista Mailowa',
-'ical_titre_rss' => 'Pliki &laquo; backend &raquo;',
+'ical_titre_rss' => 'Pliki syndykacji',
 'icone_activer_cookie' => 'Aktywuj cookies korespondencji',
+'icone_admin_plugin' => 'Zarz&#261;dzanie rozszerzeniami',
 'icone_afficher_auteurs' => 'Poka&#380; autor&oacute;w',
 'icone_afficher_visiteurs' => 'Poka&#380; odwiedzaj&#261;cych',
 'icone_arret_discussion' => 'Zaprzesta&#324; udzia&#322;u w tej dyskusji',
@@ -567,6 +574,8 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_sous_titre' => 'Podtytu&#322;:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'Status tego autora:',
+'info_statut_auteur_a_confirmer' => 'Potwierdzenie subskrypcji',
+'info_statut_auteur_autre' => 'Inny status&nbsp;:',
 'info_statut_efface' => 'Usuni&#281;to',
 'info_statut_redacteur' => 'Redaktor',
 'info_statut_site_1' => 'Ta strona jest:',
@@ -578,6 +587,8 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_suivi_activite' => 'Archiwum aktywno&#347;ci edytorskiej',
 'info_supprimer_mot' => 'usu&#324; s&#322;owo kluczowe',
 'info_surtitre' => 'Nadtytu&#322; :',
+'info_syndication_integrale_1' => 'Twoja strona oferuje plik syndykacji &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Czy chcesz przesy&#322;a&#263; ca&#322;e artyku&#322;y czy wolisz dystrybuowa&#263; podsumowanie ograniczone do kilkuset znak&oacute;w&nbsp;?',
 'info_taille_maximale_vignette' => 'Maksymalny rozmiar minitaurek, generowanych przez system&nbsp;:',
 'info_terminer_installation' => 'Mo&#380;esz teraz zako&#324;czy&#263; proces standardowej instalacji.',
 'info_texte' => 'Tekst',
@@ -629,6 +640,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'item_ajout_mots_cles' => 'Autoryzuj s&#322;owa kluczowe dodane do forum',
 'item_autoriser_documents_joints' => 'Autoryzuj za&#322;&#261;czniki do artyku&#322;&oacute;w',
 'item_autoriser_documents_joints_rubriques' => 'Autoryzacja dokument&oacute;w w dzia&#322;ach',
+'item_autoriser_syndication_integrale' => 'Wysy&#322;anie pe&#322;nej tre&#347;ci artyku&#322;&oacute;w w pliku syndykacji',
 'item_bloquer_liens_syndiques' => 'Zablokuj akceptacj&#281; syndykowanych link&oacute;w',
 'item_breve_refusee' => 'NIE - news odrzucony',
 'item_breve_validee' => 'TAK - news zatwierdzony',
@@ -654,6 +666,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'item_non_ajout_mots_cles' => 'Nie autoryzuj dodawania s&#322;&oacute;w kluczowych do forum',
 'item_non_autoriser_documents_joints' => 'Nie autoryzuj dokument&oacute;w w artyku&#322;ach',
 'item_non_autoriser_documents_joints_rubriques' => 'Nie autoryzuj dokument&oacute;w w dzia&#322;ach',
+'item_non_autoriser_syndication_integrale' => 'Wysy&#322;anie podsumowania',
 'item_non_bloquer_liens_syndiques' => 'Nie blokuj &#322;&#261;czy pochodz&#261;cych z syndykacji',
 'item_non_creer_fichiers_authent' => 'Nie tw&oacute;rz tych plik&oacute;w',
 'item_non_gerer_annuaire_site_web' => 'Wy&#322;&#261;cz katalog stron www',
@@ -744,14 +757,29 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'ortho_verifier' => 'Sprawd&#378; ortografi&#281;',
 
 
+// P
+'plugin_etat_developpement' => 'wersja rozwojowa',
+'plugin_etat_experimental' => 'wersja eksperymentalna',
+'plugin_etat_stable' => 'wersja stabilna',
+'plugin_etat_test' => 'wersja testowa',
+'plugins_liste' => 'Lista rozszerze&#324;',
+
+
+// R
+'repertoire_plugins' => 'Katalog&nbsp;:',
+
+
 // S
 'statut_admin_restreint' => '(admin z ograniczeniami)',
 'syndic_choix_moderation' => 'Co zrobi&#263; z linkami, kt&oacute;re pochodz&#261; z tego serwisu ?',
 'syndic_choix_oublier' => 'Co zrobi&#263; z linkami, kt&oacute;rych nie ma ju&#380; w pliku syndykacji?',
-'syndic_lien_obsolete' => '<NEW>lien obsol&egrave;te',
-'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
-'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
-'syndic_options' => '<NEW>Options de syndication&nbsp;:',
+'syndic_choix_resume' => 'Niekt&oacute;re strony publikuj&#261; pe&#322;ny tekst artyku&#322;&oacute;w. Je&#347;li dost&#281;pna jest taka wersja czy chcesz z niej skorzysta&#263;&nbsp;:',
+'syndic_lien_obsolete' => 'nieaktualny link',
+'syndic_option_miroir' => 'blokowa&#263; automatycznie',
+'syndic_option_oubli' => 'usun&#261;&#263; (po @mois@&nbsp; miesi&#261;cach)',
+'syndic_option_resume_non' => 'pe&#322;na tre&#347;&#263; artyku&#322;&oacute;w (w formacie HTML)',
+'syndic_option_resume_oui' => 'posumowanie (w postaci tekstowej)',
+'syndic_options' => 'Opcje syndykacji&nbsp;:',
 
 
 // T
@@ -834,15 +862,11 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
 'texte_informations_personnelles_2' => '(Informacja: je&#347;li jest to reinstalacja, a Tw&oacute;j dost&#281;p wci&#261;&#380; dzia&#322;a, mo&#380;esz',
 'texte_introductif_article' => '(Tekst wprowadzaj&#261;cy do artyku&#322;u.)',
-'texte_jeu_caractere' => 'Ta opcja jest u&#380;yteczna je&#347;li Twoja strona ma by&#263; wy&#347;wietlana w alfabecie
- innym ni&#380; alfabet roma&#324;ski (lub "zachodni") i jego odmiany.
- W tym przypadku nale&#380;y zmieni&#263; domy&#347;lne ustawienia aby u&#380;ywa&#263;
- odpowiedniego kodowania. Radzimy &#380;eby&#347; wykona&#322; przed dokonaniem ostatecznego wyboru odpowiednie testy. Nie zapomnij o dostosowania stron publicznych
- (znacznik <tt>#CHARSET</tt>), je&#347;li zmieniasz te parametry.',
-'texte_jeu_caractere_2' => 'Tych ustawie&#324; nie mo&#380;na cofn&#261;&#263;. Za
- tym idzie, &#380;e teksty ju&#380; wpisane
- mog&#261; si&#281; wy&#347;wietla&#263; nieprawid&#322;owo po wprowadzeniu zmian. Jednak
- zawsze mo&#380;na bez problemu powr&oacute;ci&#263; do poprzednich ustawie&#324;.',
+'texte_jeu_caractere' => 'Zaleca si&#281; u&#380;ywania uniwersalnego kodowania (<tt>utf-8</tt>), co pozwala na wy&#347;wietlanie tekst&oacute;w we wszystkich j&#281;zykach i jest kompatybilne ze wszystkimi wsp&oacute;&#322;czesnymi przegl&#261;darkami.',
+'texte_jeu_caractere_2' => 'Uwaga: te ustawienia nie powoduj&#261; konwersji tekst&oacute;w ju&#380; zapisanych w bazie danych.',
+'texte_jeu_caractere_3' => 'Twoja strona pracuje obecnie w kodowaniu&nbsp;:',
+'texte_jeu_caractere_4' => 'Je&#347;li to nie odpowiada aktualnemu kodowaniu Twoich danych (np. po odtworzeniu bazy danych), lub je&#347;li <em>uruchamiasz stron&#281;</em> i chcesz ustami&#263; inne kodowanie, wpisz je tutaj:',
+'texte_jeu_caractere_conversion' => 'Wskaz&oacute;wka&nbsp;: mo&#380;esz chcie&#263; przekonwertowa&#263;  swoje dane z ca&#322;ego serwisu (artyku&#322;y, aktualno&#347;ci, fora, itd) na kodowanie <tt>utf-8</tt>, udaj&#261;c si&#281; na <a href="@url@"> stron&#281; konwertera utf-8</a>.',
 'texte_lien_hypertexte' => '(Je&#347;li Twoja wiadomo&#347;&#263; odnosi si&#281; do jakiego&#347; artyku&#322;u opublikowanego w internecie, albo do strony, na kt&oacute;rej mo&#380;na znale&#378;&#263; dodatkowe informacje, wpisz tytu&#322; strony i jej adres URL.)',
 'texte_liens_sites_syndiques' => '&#321;&#261;cza pochodz&#261;ce z syndykacji mog&#261;
    by&#263; domy&#347;lnie zablokowane&nbsp;; regulacja tego
@@ -876,11 +900,12 @@ multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oac
 'texte_nouveau_message' => 'Nowa wiadomo&#347;&#263;',
 'texte_nouveau_mot' => 'Nowe s&#322;owo kluczowe',
 'texte_nouvelle_version_spip_1' => 'Nowa wersja SPIP zosta&#322;a zainstalowana.',
-'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik <tt>inc_connect.php3</tt> z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku <tt>inc_connect.php3</tt> zanim go skasujesz...)',
+'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik @connect@ z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku @connect@ zanim go skasujesz...)',
 'texte_operation_echec' => 'Powr&oacute;&#263; do poprzedniej strony, wybierz inn&#261; baz&#281; danych lub stw&oacute;rz now&#261;. Sprawd&#378; informacje podane przez tw&oacute;j serwis hostingowy.',
 'texte_plus_trois_car' => 'wi&#281;cej ni&#380; 3 znaki',
 'texte_plusieurs_articles' => 'Kilku autor&oacute;w zosta&#322;o znalezionych dla "@cherche_auteur@":',
 'texte_port_annuaire' => '(Warto&#347;&#263; podana domy&#347;lnie zwykle pasuje .)',
+'texte_presente_plugin' => 'Oto jest lista dost&#281;pnych rozszerze&#324; (plugin&oacute;w). Mo&#380;esz aktywowa&#263; te rozszerzenia, kt&oacute;rych potrzebujesz, zaznaczaj&#261;c odpowiednie pole.',
 'texte_proposer_publication' => 'Gdy Tw&oacute;j artyku&#322; jest uko&#324;czony,<br> mo&#380;esz zatwierdzi&#263; go do publikacji.',
 'texte_proxy' => 'W niekt&oacute;rych przypadkach (intranet, sieci chronione...),
   mo&#380;e zaj&#347;&#263; konieczno&#347;&#263; wykorzystania <I>proxy HTTP</I> aby dosta&#263; si&#281; do stron zrzeszonych.
@@ -896,7 +921,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
 'texte_recapitiule_liste_documents' => 'Ta strona wy&#347;wietla w postaci listy dokumenty kt&oacute;re umie&#347;ci&#322;e&#347; w dzia&#322;ach. Aby zmieni&#263; informacje o danym dokumencie, kliknij na &#322;&#261;cze prowadz&#261;ce do strony danego dzia&#322;u.',
 'texte_recuperer_base' => 'Napraw baz&#281; danych',
 'texte_reference_mais_redirige' => 'linki z artyku&#322;&oacute;w w twoim serwisie SPIP, przekierowuj&#261;ce do innych URL-i.',
-'texte_referencement_automatique' => '<b>Zautomatyzowane dodawanie link&oacute;w</b><br>Mo&#380;esz szybko doda&#263; link do jakiej&#347; strony internetowej, wpisuj&#261;c poni&#380;ej jej adres, oraz adres jej pliku backend. SPIP automatycznie dopisze informacje, dotycz&#261;ce tej strony (tytu&#322;, opis...).',
+'texte_referencement_automatique' => '<b>Zautomatyzowane dodawanie link&oacute;w</b><br>Mo&#380;esz szybko doda&#263; link do jakiej&#347; strony internetowej, wpisuj&#261;c poni&#380;ej jej adres, oraz adres jej pliku syndykacji. SPIP automatycznie dopisze informacje, dotycz&#261;ce tej strony (tytu&#322;, opis...).',
 'texte_requetes_echouent' => '<b>Je&#347;li pewne zapytania MySQL nie udaj&#261; si&#281;
   regularnie i bez widocznego powodu, mo&#380;liwe jest
   &#380;e powodem tego jest baza danych</b><p>
@@ -952,9 +977,9 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
 'texte_utilisation_moteur_syndiques' => 'Je&#347;li korzystasz ze zintegorwanej wyszukiwarki 
     SPIP, mo&#380;esz dokonywa&#263; przeszukiwania
     do&#322;&#261;czonych artyku&#322;&oacute;w na dwa sposoby.
-    <br><img src=\'puce.gif\'> Najprostszy
+    <br>- Najprostszy
     polega na wyszukiwaniu jedynie
-    w tytu&#322;ach i skr&oacute;tach artyku&#322;&oacute;w. <br><img src=\'puce.gif\'>
+    w tytu&#322;ach i skr&oacute;tach artyku&#322;&oacute;w. <br>-
     Druga, o wiele pot&#281;&#380;niejsza metoda, pozwala
     SPIP w tekstach stron, kt&oacute;rych linki s&#261; do&#322;&#261;czone&nbsp;. Je&#347;li
     zatem do&#322;&#261;czacie link do jakiej&#347; strony, SPIP dokona automatycznie
@@ -1047,7 +1072,20 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
 
 
+// U
+'utf8_convert_attendez' => 'Poczekaj chwil&#281; i od&#347;wie&#380; stron&#281;.',
+'utf8_convert_avertissement' => 'Zamierzasz przekonwertowa&#263; zawarto&#347;&#263; Twojej bazy danych (artyku&#322;y, aktualno&#347;ci, etc.) z kodowania <b>@orig@</b> na kodowanie <b>@charset@</b>.',
+'utf8_convert_backup' => 'Nie zapomnij wykona&#263; wcze&#347;niej kopi&#281; bezpiecze&#324;stwa Twojej strony. Powiniene&#347; tak&#380;e zweryfikowa&#263; czy Twoje szkielety i pliki j&#281;zykowe s&#261; zgodne z @charset@. W innym wypadku przegl&#261;d zmian - je&#347;li jest aktywny - zostanie zniszczony.',
+'utf8_convert_erreur_deja' => 'Twoja strona ju&#380; jest w kodowaniu @charset@, nie ma potrzeby konwertowania...',
+'utf8_convert_erreur_orig' => 'B&#322;&#261;d&nbsp;: kodowanie @charset@ nie jest wspierane.',
+'utf8_convert_termine' => 'Zako&#324;czone&nbsp;!',
+'utf8_convert_timeout' => '<b>Wa&#380;ne&nbsp;:</b> w przypadu <i>timeout</i> serwera, od&#347;wie&#380; stron&#281; a&#380; wy&#347;wietlenia si&#281; "Zako&#324;czone".',
+'utf8_convert_verifier' => 'Teraz powinene&#347; opr&oacute;&#380;ni&#263; CACHE i sprawdzi&#263;, czy wszystko przebieg&#322;o dobrze. W przypadku jakichkolwiek problem&oacute;w pami&#281;taj, &#380;e zawsze masz w odwodzie kopi&#281; bazy dancyh (w formacie SQL) w katalogu @rep@.',
+'utf8_convertir_votre_site' => 'Konwertuj stron&#281; na utf-8.',
+
+
 // V
+'version' => 'Wersja&nbsp;:',
 'version_initiale' => 'Wersja pocz&#261;tkowa'
 
 );

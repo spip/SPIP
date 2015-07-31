@@ -216,7 +216,7 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'form_pet_confirmation' => 'Conferma l\'adesione:',
 'form_pet_deja_enregistre' => 'Questo sito &egrave; gi&agrave; registrato',
 'form_pet_deja_signe' => 'Hai gi&agrave; firmato questo testo.',
-'form_pet_envoi_mail_confirmation' => 'Ti stato appena inviato un messaggio di posta elettronica. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
+'form_pet_envoi_mail_confirmation' => 'Ti &egrave; stato appena inviato un messaggio di posta elettronica. Dovrai visitare l\'indirizzo web che appare nel messaggio per confermare la tua adesione.',
 'form_pet_mail_confirmation' => 'Salve,
 
 Hai richiesto di firmare la petizione:

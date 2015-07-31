@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'calendario por semana',
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
+'correcte' => 'correcto',
 
 
 // D
@@ -345,6 +346,7 @@ Grazas pola s&uacute;a participaci&oacute;n
 'image_tourner_droite' => 'Rotaci&oacute;n 90&deg; &aacute; dereita',
 'image_tourner_gauche' => 'Rotaci&oacute;n 90&deg; &aacute; esquerda',
 'img_indisponible' => 'imaxe non dispo&ntilde;&iacute;bel',
+'impossible' => 'impos&iacute;bel',
 'info_a_suivre' => 'PANEL DE CONTROL &raquo;',
 'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acceso prohibido',
@@ -636,6 +638,9 @@ e reconectar co web.
 
 
 // S
+'squelette' => 'esqueleto',
+'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, li&ntilde;a',
+'squelette_ligne' => 'esquelto, li&ntilde;a',
 'stats_visites_et_popularite' => '@visites@ visitas; popularidade: @popularite@',
 'suivant' => 'seguinte',
 

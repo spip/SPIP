@@ -61,6 +61,7 @@ Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e pro
 'bouton_checkbox_signature_unique_email' => 'una sola adesione per indirizzo email',
 'bouton_checkbox_signature_unique_site' => 'una sola adesione per sito Web',
 'bouton_demande_publication' => 'Chiedi la pubblicazione di questo articolo',
+'bouton_desactive_tout' => 'Disattiva tutto',
 'bouton_effacer_index' => 'Cancella gli indici',
 'bouton_effacer_tout' => 'Cancella TUTTO',
 'bouton_envoi_message_02' => 'INVIA UN MESSAGGIO',

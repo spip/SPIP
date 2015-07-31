@@ -62,6 +62,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_checkbox_signature_unique_email' => 'una sola signatura per adre&ccedil;a electr&ograve;nica ',
 'bouton_checkbox_signature_unique_site' => 'una sola signatura per lloc Web',
 'bouton_demande_publication' => 'Demanar la publicaci&oacute; d\'aquest article',
+'bouton_desactive_tout' => 'Desactivar-ho tot',
 'bouton_effacer_index' => 'Esborrar els &iacute;ndex',
 'bouton_effacer_tout' => 'Esborrar-ho TOT',
 'bouton_envoi_message_02' => 'ENVIAR UN MISSATGE',
@@ -180,7 +181,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 // I
 'ical_info1' => 'Aquesta p&agrave;gina mostra diferents maneres per estar en contacte amb la vida d\'aquest lloc.',
 'ical_info2' => 'Per tenir m&eacute;s informacions sobre aquestes t&egrave;cniques, no dubteu a consultar <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
-'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposici&oacute;. El primer &eacute;s un mapa del lloc que anuncia tots els articles publicats. El segon cont&eacute; els anuncis editorials a m&eacute;s dels vostres darrers missatges privats: est&agrave; reservat per vosaltres gr&agrave;cies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
+'ical_info_calendrier' => 'Hi ha dos calendaris a la vostra disposici&oacute;. El primer &eacute;s un mapa del lloc que mostra tots els articles publicats. El segon cont&eacute; els anuncis editorials a m&eacute;s dels vostres darrers missatges privats: est&agrave; reservat per vosaltres gr&agrave;cies a una clau personal, que podeu modificar en tot moment renovant la vostra contrasenya. ',
 'ical_methode_http' => 'Desc&agrave;rrega',
 'ical_methode_webcal' => 'Sincronitzaci&oacute; (webcal://)',
 'ical_texte_js' => 'Els articles publicats en aquest lloc poden ser mostrats f&agrave;cilment, en qualsevol lloc vostre, mitjan&ccedil;ant una l&iacute;nia de javascript. ',

@@ -6,43 +6,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => 'Akceptejo de la teksejo',
+'accueil_site' => 'Hejmpa&#285;o',
 'articles' => 'Artikoloj',
 'articles_auteur' => 'Artikoloj de tiu a&#365;toro',
 'articles_populaires' => 'La plej popularaj artikoloj',
 'articles_recents' => 'La plej fre&#349;aj artikoloj',
-'articles_rubrique' => 'Artikoloj de tiu rubriko',
-'aucun_article' => 'Nenia artikolo en tiu adreso',
-'aucun_auteur' => 'Nenia a&#365;toro en tiu adreso',
-'aucun_site' => 'Nenia teksejo en tiu adreso',
-'aucune_breve' => 'Nenia informeto en tiu adreso',
-'aucune_rubrique' => 'Nenia rubriko en tiu adreso',
-'autres_breves' => 'Neniaj informetoj',
+'articles_rubrique' => 'Artikoloj el tiu rubriko',
+'aucun_article' => 'Neniu artikolo &#265;e tiu adreso',
+'aucun_auteur' => 'Neniu a&#365;toro por tiu adreso',
+'aucun_site' => 'Neniu retejo &#265;e tiu adreso',
+'aucune_breve' => 'Neniu fulm-informo &#265;e tiu adreso',
+'aucune_rubrique' => 'Neniu rubriko &#265;e tiu adreso',
+'autres_breves' => 'Neniu fulm-informo',
 'autres_groupes_mots_clefs' => 'Aliaj grupoj de &#349;losilvortoj',
-'autres_sites' => 'Aliaj teksejoj',
+'autres_sites' => 'Aliaj retejoj',
 
 
 // B
 'bonjour' => 'Bonan tagon',
-'breves' => 'Informetoj',
+'breves' => 'Fulm-informoj',
 
 
 // C
-'commenter_site' => 'Komenti tiun teksejon',
+'commenter_site' => 'Komenti tiun retejon',
 
 
 // D
 'date' => 'Dato',
 'dernier_ajout' => 'Lasta aldono',
-'dernieres_breves' => 'Lastaj informetoj',
+'dernieres_breves' => 'Lastaj fulm-informoj',
 'derniers_articles' => 'Lastaj artikoloj',
 'derniers_commentaires' => 'Lastaj komentoj',
-'derniers_messages_forum' => 'Lastaj mesa&#285;oj publikitaj en la forumoj',
+'derniers_messages_forum' => 'Lastaj mesa&#285;oj publikigitaj en la forumoj',
 
 
 // E
 'edition_mode_texte' => 'Teksta eldono de',
-'en_reponse' => 'Respondo al&nbsp;:',
+'en_reponse' => 'Responde al&nbsp;:',
 'en_resume' => 'Resume',
 'envoyer_message' => 'Sendi mesa&#285;on',
 'espace_prive' => 'Privata spaco',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // H
-'hierarchie_site' => 'Hierarkio de la teksejo',
+'hierarchie_site' => 'Hierarkio de la retejo',
 
 
 // J
@@ -61,9 +61,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // M
-'meme_auteur' => 'De tiu &#265;i a&#365;toro',
+'meme_auteur' => 'De la sama a&#365;toro',
 'meme_rubrique' => 'En la sama rubriko',
-'memes_auteurs' => 'De tiuj &#265;i a&#365;toroj',
+'memes_auteurs' => 'De samaj a&#365;toroj',
 'message' => 'Mesa&#285;o',
 'messages_forum' => 'Forum-mesa&#285;oj',
 'messages_recents' => 'La plej fre&#349;aj forum-mesa&#285;oj',
@@ -72,53 +72,53 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // N
-'navigation' => 'Navigado',
+'navigation' => 'Retumado',
 'nom' => 'Nomo',
 'nouveautes' => 'La nova&#309;oj',
-'nouveautes_web' => 'Nova&#309;oj en la reto',
+'nouveautes_web' => 'Nova&#309;oj &#265;e la reto',
 'nouveaux_articles' => 'Novaj artikoloj',
-'nouvelles_breves' => 'Novaj informetoj',
+'nouvelles_breves' => 'Novaj fulm-informoj',
 
 
 // P
 'page_precedente' => 'anta&#365;a pa&#285;o',
 'page_suivante' => 'sekvanta pa&#285;o',
 'par_auteur' => 'de ',
-'participer_site' => 'Por partopreni la vivon de tiu teksejo kaj proponi viajn propajn artikolojn, registri&#285;u &#265;i sube. Vi tuje ricevos retpo&#349;tmesa&#285;on indikante vian kodon por aliri en la privata spaco.',
-'plan_site' => 'Plano de la teksejo',
+'participer_site' => 'Por partopreni la vivon de tiu retejo kaj proponi viajn propajn artikolojn, registri&#285;u &#265;i sube. Vi tuj ricevos retleteron indikante ensalutilojn por eniri la privatan spacon.',
+'plan_site' => 'Retejo-mapo',
 'popularite' => 'Populareco',
 'poster_message' => 'Sendi mesa&#285;on',
-'proposer_site' => 'Vi povas proponi teksejon aldonota al tiu rubriko:',
+'proposer_site' => 'Vi povas proponi retejon aldonotan al tiu rubriko&nbsp;:',
 
 
 // R
 'repondre_article' => 'Respondi al tiu artikolo',
-'repondre_breve' => 'Respondi al tiu informeto',
+'repondre_breve' => 'Respondi al tiu fulm-informo',
 'repondre_message' => 'Respondi al tiu mesa&#285;o',
-'resultats_recherche' => 'Rezultoj de la ser&#265;o',
-'retour_debut_forums' => 'Reiro al la komenco de forumoj',
+'resultats_recherche' => 'Ser&#265;o-rezultoj',
+'retour_debut_forums' => 'Reen al forumoj-komenco',
 'rubrique' => 'Rubriko',
 'rubriques' => 'Rubrikoj',
 
 
 // S
 'signatures_petition' => 'Subskriboj',
-'site_realise_avec_spip' => 'Teksejo realigita kun SPIP',
-'sites_web' => 'Retaj teksejoj',
+'site_realise_avec_spip' => 'Retejo realigita per SPIP',
+'sites_web' => 'Retejoj',
 'sous_rubriques' => 'Sub-rubrikoj',
-'suite' => 'jeno',
-'sur_web' => 'En reto',
-'syndiquer_rubrique' => 'Kunligigi tiun rubrikon',
-'syndiquer_site' => 'Kunligigi &#265;iu la teksejo',
+'suite' => 'sekvo',
+'sur_web' => '&#264;e la reto',
+'syndiquer_rubrique' => 'Abonrilatigi tiun rubrikon',
+'syndiquer_site' => 'Abonrilatigi la tutan retejon',
 
 
 // T
-'texte_lettre_information' => '&#264;i-tie estas la inform-letero de teksejo',
-'texte_lettre_information_2' => 'Tiu letero nombrigas artikolojn kaj informetojn publikigitaj de',
+'texte_lettre_information' => 'Jen la reteja inform-letero',
+'texte_lettre_information_2' => 'Tiu letero enkalkulas artikolojn la kaj fulm-informojn publikigitajn de',
 
 
 // V
-'ver_imprimer' => 'Printigota versio',
+'ver_imprimer' => 'Elprintenda versio',
 'voir_en_ligne' => 'Vidi konektite'
 
 );

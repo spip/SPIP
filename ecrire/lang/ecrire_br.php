@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Enaoui&ntilde; ar plugin',
 'aide_non_disponible' => 'N\'ema&ntilde; ket al lodenn-ma&ntilde; eus ar sikour en-linenn da gaout er yezh-ma&ntilde; c\'hoazh.',
+'auteur' => 'Skridaozer&nbsp;:',
 'avis_acces_interdit' => 'Arabat dont tre',
 'avis_article_modifie' => 'Diwallit, @nom_auteur_modif@ en deus labouret war ar pennad-se @date_diff@ munutenn \'zo',
 'avis_aucun_resultat' => 'Disoc\'h ebet.',
@@ -52,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'ur sinadur hepken dre bostel',
 'bouton_checkbox_signature_unique_site' => 'ur sinadur hepken dre lec\'hienn Web',
 'bouton_demande_publication' => 'Goulenn ma vo embannet ar pennad-ma&ntilde;',
+'bouton_desactive_tout' => 'Disenaoui&ntilde; pep tra',
 'bouton_effacer_index' => 'Diverka&ntilde; ar rollo&ugrave;',
 'bouton_effacer_tout' => 'Diverka&ntilde; PEP TRA',
 'bouton_envoi_message_02' => 'KAS UR C\'HEMENNADENN',
@@ -78,18 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'chom hep beza&ntilde; diskouezet e listenn ar skridaozerien kennasket',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Chom hep kas kemenno&ugrave;-embann',
 'bouton_radio_non_syndication' => 'Sindikadur ebet',
-'bouton_radio_occidental' => 'Lizherennaoueg kornogad (<tt>iso-8859-1</tt>)&nbsp;: rei&ntilde; a ra tu
-		da lenn dreist-holl yezho&ugrave; Europa ar c\'hornog (saozneg, galleg, alamaneg...)&nbsp;;
-		gant SPIP e c\'heller koulskoude mera&ntilde; mat a-walc\'h ar yezho&ugrave; all.',
 'bouton_radio_pas_petition' => 'Sinadeg ebet',
-'bouton_radio_personnalise' => 'Stumm-lizherenno&ugrave; ispisial : implijit an dra-se m\'ho peus c\'hoant da implijout ur stumm ispisial d\'ho lizhereno&ugrave;',
 'bouton_radio_petition_activee' => 'Sinadeg war-enaou',
 'bouton_radio_publication_immediate' => 'Embann ar c\'hemennadenno&ugrave; diouzhtu (embannet e vez ar c\'hemennadenno&ugrave; diouzhtu goude beza&ntilde; skrivet, war-lerc\'h e c\'hellont beza&ntilde; diverket gant ar c\'hasourien)',
 'bouton_radio_sauvegarde_compressee' => 'restr-savetei&ntilde;, gwaeget, dindan <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'restr-savetei&ntilde;, ket gwaeget, dindan<b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Dilemel ar sinadeg',
 'bouton_radio_syndication' => 'Sindikadur',
-'bouton_radio_universel' => 'Lizherennaoueg bedel&nbsp; (<tt>utf-8</tt>): rei&ntilde; a ra tu da lenn en holl yezho&ugrave;, met gallout a ra sevel kudenno&ugrave; kendere gant ar mezianto&ugrave; implijet evit kemm ho sklosenno&ugrave;, ha gant lennerien-postelo&ugrave; \'zo.',
 'bouton_redirection' => 'ADSTURIA&Ntilde;',
 'bouton_relancer_installation' => 'Adkregi&ntilde; gant ar staliadur',
 'bouton_restaurer_base' => 'Resteurel an diaz',
@@ -123,7 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'postel :',
 'entree_adresse_annuaire' => 'Chomlec\'h ar roll dud',
 'entree_adresse_email' => 'Ho postel',
-'entree_adresse_fichier_syndication' => 'Chomlec\'h ar restr &laquo;&nbsp;backend&nbsp;&raquo; evit ar sindikadur&nbsp;:',
+'entree_adresse_fichier_syndication' => 'Chomlec\'h ar restr evit al liamma&ntilde;-RSS&nbsp;:',
 'entree_adresse_site' => '<b>Chomlec\'h al lec\'hienn</b> [Rediet]',
 'entree_base_donnee_1' => 'Chomlec\'h an diaz-titouro&ugrave;',
 'entree_base_donnee_2' => '(Alies e klot ar chomlec\'h-se gant hini ho lec\'hienn, a-wecho&ugrave; e klot gant ar menneg &laquo;localhost&raquo;, a-wecho&ugrave; e chom goullo)',
@@ -157,6 +155,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Testenn ar berrskrid',
 'entree_titre_obligatoire' => '<B>Titl</B> [Rediet]<BR>',
 'entree_url' => 'Chomlec\'h (URL) ho lec\'hienn',
+'erreur_plugin_fichier_absent' => 'N\'eus ket ouzh ar restr',
+'erreur_plugin_fichier_def_absent' => 'N\'eus ket ouzh ar restr termeni&ntilde;',
+'erreur_plugin_nom_fonction_interdit' => 'Difennet eo anv ar fonksion',
+'erreur_plugin_nom_manquant' => 'Dianv eo an astenn',
+'erreur_plugin_prefix_manquant' => 'N\'eo ket termenet tachenn-envel an astenn',
+'erreur_plugin_tag_plugin_absent' => 'N\'eus ket ouzh an astenn er restr-termeni&ntilde;',
+'erreur_plugin_version_manquant' => 'N\'eus ket ouzh arreval an astenn',
 
 
 // I
@@ -171,8 +176,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'Gallout a rit sindika&ntilde; nevezinti ar forum-ma&ntilde; war forzh peseurt lenner kelo&ugrave; XML/RSS (Rich Site Summary). A-drugarez d\'ar stumm-se ivez e c\'hell SPIP lenn an nevezinti war al lec\'hienno&ugrave; all hag a implij ur stumm heglot (lec\'hienno&ugrave; sindikaet).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Listenn-skigna&ntilde;',
-'ical_titre_rss' => 'Restro&ugrave; &laquo; backend &raquo;',
+'ical_titre_rss' => 'Restro&ugrave; sindikadur',
 'icone_activer_cookie' => 'Enaoui&ntilde; an toupin-heulia&ntilde;',
+'icone_admin_plugin' => 'Mera&ntilde;s an astenno&ugrave;',
 'icone_afficher_auteurs' => 'Diskouez ar skridaozerien',
 'icone_afficher_visiteurs' => 'Diskouez ar gweladennerien',
 'icone_arret_discussion' => 'Paouez da gemer perzh en tabut-ma&ntilde;',
@@ -541,6 +547,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sous_titre' => 'Istitl :',
 'info_statut_administrateur' => 'Merour',
 'info_statut_auteur' => 'Statud ar skridaozer-ma&ntilde; :',
+'info_statut_auteur_a_confirmer' => 'Enskriva&ntilde; da veza&ntilde; kadarnaet',
+'info_statut_auteur_autre' => 'Statud all&nbsp;:',
 'info_statut_efface' => 'Diverket;',
 'info_statut_redacteur' => 'Skridaozer',
 'info_statut_site_1' => 'Al lec\'hienn-ma&ntilde; a zo&nbsp;:',
@@ -552,6 +560,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_suivi_activite' => 'Heulia&ntilde; an obererezh-embann',
 'info_supprimer_mot' => 'Dilemel ar ger-ma&ntilde;',
 'info_surtitre' => 'Ustitl',
+'info_syndication_integrale_1' => 'Kinnig a ra ho lec\'hienn restro&ugrave;-sindika&ntilde; (gwelet &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Daoust ha c\'hoant ho peus da ginnig ar pennado&ugrave; a-bezh, pe da embann ur verradennig outo, un nebeud a gant arouez enni ?',
 'info_taille_maximale_vignette' => 'Ment brasa&ntilde; ar skeudennigo&ugrave; krouet gant ar poellad&nbsp;:',
 'info_terminer_installation' => 'Brema&ntilde; e c\'hellit echui&ntilde; gant al labour-stalia&ntilde;.',
 'info_texte' => 'Testenn',
@@ -581,8 +591,8 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'info_une_breve' => 'ur berrskrid,',
 'info_une_rubrique' => 'ur rummad,',
 'info_une_rubrique_02' => '1 rummad',
-'info_url' => 'URL :',
-'info_url_site' => 'URL AL LEC\'HIENN :',
+'info_url' => 'URL&nbsp;:',
+'info_url_site' => 'URL AL LEC\'HIENN&nbsp;:',
 'info_urlref' => 'Liamm&nbsp;:',
 'info_utilisation_spip' => 'Brema&ntilde; e c\'hellit kregi&ntilde; da implijout ar sistem skoazell evit an embann...',
 'info_visites_par_mois' => 'Diskouez dre viz :',
@@ -604,6 +614,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'item_ajout_mots_cles' => 'Aotrea&ntilde; ma vo staget gerio&ugrave;-alc\'hwez ouzh ar forumo&ugrave;',
 'item_autoriser_documents_joints' => 'Aotrea&ntilde; an teuliado&ugrave; stag ouzh ar pennado&ugrave;',
 'item_autoriser_documents_joints_rubriques' => 'Aotrea&ntilde; an teuliado&ugrave; er rummado&ugrave;',
+'item_autoriser_syndication_integrale' => 'Kinnig ar pennado&ugrave; a-bezh ar restro&ugrave;-sindika&ntilde;',
 'item_bloquer_liens_syndiques' => 'Herzel ouzh al liammo&ugrave; RSS evit an asant',
 'item_breve_refusee' => 'NANN - Berrskrid nac\'het',
 'item_breve_validee' => 'YA - Berskrid asantet',
@@ -629,6 +640,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'item_non_ajout_mots_cles' => 'Difenn implij gerio&ugrave;-alc\'hwez er forumo&ugrave;',
 'item_non_autoriser_documents_joints' => 'Nac\'ha&ntilde; an teuliado&ugrave; stag ouzh ar pennado&ugrave;',
 'item_non_autoriser_documents_joints_rubriques' => 'Nac\'ha&ntilde; an teuliado&ugrave; stag ouzh ar rummado&ugrave;',
+'item_non_autoriser_syndication_integrale' => 'Embann un diverradenn hepken',
 'item_non_bloquer_liens_syndiques' => 'Chom hep herzel al liammo&ugrave; RSS',
 'item_non_creer_fichiers_authent' => 'Chom hep kroui&ntilde; ar restro&ugrave;-se',
 'item_non_gerer_annuaire_site_web' => 'Chom hep ober gant listenn al lec\'hienno&ugrave;-Web',
@@ -719,6 +731,18 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'ortho_verifier' => 'Gwiria&ntilde; ar reizhskriva&ntilde;',
 
 
+// P
+'plugin_etat_developpement' => 'war-zioren',
+'plugin_etat_experimental' => 'arnodek',
+'plugin_etat_stable' => 'stabil',
+'plugin_etat_test' => 'war-arnodi&ntilde;',
+'plugins_liste' => 'Listenn an astenno&ugrave;',
+
+
+// R
+'repertoire_plugins' => 'Teul&nbsp;:',
+
+
 // S
 'statut_admin_restreint' => '(merour strishaet)',
 'syndic_choix_moderation' => 'Petra ober gant al liammo&ugrave; a zeu a teuio ouzh al lec\'hienn-ma&ntilde;&nbsp;?',
@@ -805,14 +829,11 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_informations_personnelles_1' => 'Brema&ntilde; e vo krouet aotreo&ugrave; ispisial da zont-tre war al lec\'hienn evidoc\'h.',
 'texte_informations_personnelles_2' => '(Notenn : m\'emaoc\'h oc\'h adstalia&ntilde; SPIP hag ez a c\'hoazh ho aotreo&ugrave; kozh en-dro e c\'hellit ',
 'texte_introductif_article' => '(Testenn-digeri&ntilde; ar pennad)',
-'texte_jeu_caractere' => 'Servijout a ra an dilenn-ma&ntilde; ma rank ho lec\'hienn ober gant lizherennaouego&ugrave;
-	dishe&ntilde;vel ouzh an hini -roman (ou &laquo;&nbsp;pe -gornog&nbsp;&raquo;) hag ar re diveret outa&ntilde;.
-	En degouezh-se e c\'hell beza&ntilde; gwelloc\'h kemm ar pezh a zo lakaet dre-ziouer evit
-	ul lizherennaoueg a zere&nbsp;; forzh penaos oc\'h aliet d\'ober taolio&ugrave;-arnod a-benn kavout an diskoulmo&ugrave;.
-	Ma kemmit tra pe dra ama&ntilde;, n\'ankouait ket ober memes tra war al lodenn foran (<tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'N\'eus ket efedo&ugrave; war-gil gant an dilenn-ma&ntilde;. 
-	Dre-se e c\'hell an testenno&ugrave; bet skrivet dija beza&ntilde; diskouezet fall goude m\'ho pefe kemmet trao&ugrave; \'zo ama&ntilde;.
-	Gallout a reoc\'h distrei&ntilde; d\'ho tibabo&ugrave; kent, ha renket e vo ar gudenn.',
+'texte_jeu_caractere' => 'Gant al lizherennaoueg hollvedel (<tt>utf-8</tt>) oc\'h aliet d\'ober &nbsp;: aotrea&ntilde; a ra ma vefe diskouezet an destenno&ugrave; e forzh peseurt yezh, ha ne sav mui kudenn heglotusted ebet gant ar merdeerien a-vrema&ntilde;.',
+'texte_jeu_caractere_2' => 'Diwallit : o kemm an dra-se, ne vo ket che&ntilde;chet stumm d\'an destenno&ugrave; a zo bet enrollet betek-henn war an diaz-titouro&ugrave;.',
+'texte_jeu_caractere_3' => 'Gant al lizherennaoueg-ma&ntilde; e ra ho lec\'hienn&nbsp;:',
+'texte_jeu_caractere_4' => 'Ma ne glot ket gant ho roado&ugrave; gwirion (da skouer, m\'emaoc\'h o paouez resteurel un diaz-titouro&ugrave;), pe ma <em>loc\'hit gant al lec\'hienn-ma&ntilde;</em> hag ho peus c\'hoant d\'ober gant ul lizherennaoueg all, resisait se ama&ntilde;-dindan&nbsp;:',
+'texte_jeu_caractere_conversion' => 'Da c\'houzout&nbsp;:Gallout a rit amdrei&ntilde; ho holl testenno&ugrave; (pennado&ugrave;, berrskrido&ugrave;, forumo&ugrave;, h.a.)ur wech da vatdavet al lizherennaoueg <tt>utf-8</tt>, o vont war <a href="@url@">ar bajenn eiltala&ntilde; davet an utf-8</a>.',
 'texte_lien_hypertexte' => '(Ma rit menneg ouzh ur pennad all o tont eus Internet, pe ur bajenn gant muioc\'h a ditouro&ugrave;, grit anv ouzh hounezh, gant he URL goude titl ar bajenn.)',
 'texte_liens_sites_syndiques' => 'Gallout a ra al liammo&ugrave;-RSS beza&ntilde; harzet a-raok embann&nbsp;;
 			ama&ntilde;-dindan e vez diskouezet ar pezh a vez dibabet dre ziouer evito goude ma vezont krouet.
@@ -844,6 +865,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_plus_trois_car' => 'ouzhpenn 3 arouez',
 'texte_plusieurs_articles' => 'Meur a skridaozer bet kavet evit "@cherche_auteur@":',
 'texte_port_annuaire' => '(An talvoud roet dre-ziouer eo peurliesa&ntilde; an hini vat.)',
+'texte_presente_plugin' => 'War ar bajenn-ma&ntilde; ema&ntilde; listennet an astenno&ugrave; da gaout evit al lec\'hienn-ma&ntilde;. Gallout a rit ober gant ar re a zere, o tiuz an dachado&ugrave; a zere',
 'texte_proposer_publication' => 'Pa\'z eo peurechu ho pennad <br> e c\'hellit kinnig ma vo embannet.',
 'texte_proxy' => 'E degouezhio&ugrave; \'zo (intranet, rouedado&ugrave; gwarezet,...),
 		e c\'hell beza&ntilde; dav ober gant ur <I>proxy HTTP</I>evit tizhout al lec\'hienno&ugrave; RSS.
@@ -855,7 +877,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_recapitiule_liste_documents' => 'War ar bajenn-ma&ntilde; ema&ntilde; listennet an teuliado&ugrave; ho peus lakaet er rummado&ugrave;. Evit kemm titouro&ugrave; pep teuliad, heuliit al liamm war bajenn e rummad.',
 'texte_recuperer_base' => 'Kempenn an diaz-titouro&ugrave;',
 'texte_reference_mais_redirige' => 'pennad listennet en ho lec\'hienn SPIP, met adsturiet davet un URL all.',
-'texte_referencement_automatique' => '<b>Listenna&ntilde; emgefreek ul lec\'hienn</b><br>Gallout a rit listenna&ntilde; buan ul lec\'hienn Web o skriva&ntilde; ama&ntilde;-dindan e URL, pe chomlec\'h e restr backend. SPIP a adkemero e-unan an titouro&ugrave; diwar-benn al lec\'hienn (titl, deskrivadur, ...).',
+'texte_referencement_automatique' => '<b>Listenna&ntilde; emgefreek ul lec\'hienn</b><br>Gallout a rit listenna&ntilde; buan ul lec\'hienn Web o skriva&ntilde; ama&ntilde;-dindan e URL, pe chomlec\'h e restr sindika&ntilde;. SPIP a tezastumo e-unan an titouro&ugrave; diwar-benn al lec\'hienn (titl, deskrivadur, ...).',
 'texte_requetes_echouent' => '<b>Pa sank galvadenno&ugrave; MySQL en un doare ingal ha diabeg,
   e c\'hell beza&ntilde; dre fazi an diaz-titouro&ugrave;</b><p />
   Gant MySQL e c\'hell an taolio&ugrave; mazaouet emgempenn.
@@ -899,10 +921,10 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 		Ne vez ket implijet ar servij-ma&ntilde; dre-ziouer evit chom hep kaout kemenno&ugrave;-berz a-hed an amzer.',
 'texte_trop_resultats_auteurs' => 'Re a zisoc\'ho&ugrave; evit "@cherche_auteur@" ; spisait ho enklask.',
 'texte_unpack' => 'o pellgarga&ntilde; an arreval diwezha&ntilde;',
-'texte_utilisation_moteur_syndiques' => 'Daou zoare a zo d\'ober enklasko&ugrave; el lec\'hienno&ugrave; listennet RSS gant benvegad-enklask diabarzh SPIP.<br>
-				<img src=\'puce.gif\'>Gant an hini simpla&ntilde; e vez klasket e titlo&ugrave; ha testenno&ugrave;-kinnig ar pennado&ugrave; hepken.<br>
-				<img src=\'puce.gif\'>Gant an eil doare, kalz galloudusoc\'h, e vo graet an enklask en holl destenno&ugrave; da gaout war al lec\'hienno&ugrave; listennet.
-				Ma listennit ul lec\'hienn e raio SPIP e enklask e holl testenn al lec\'hienn.',
+'texte_utilisation_moteur_syndiques' => 'Daou zoare a zo d\'ober enklasko&ugrave; el lec\'hienno&ugrave; listennet gant benvegad-enklask diabarzh SPIP.<br>
+    - Gant an hini simpla&ntilde; e vez klasket e titlo&ugrave; ha testenno&ugrave;-kinnig ar pennado&ugrave; hepken.<br>
+    Gant an eil doare, kalz galloudusoc\'h, e vo graet an enklask en holl destenno&ugrave; da gaout war al lec\'hienno&ugrave; listennet.
+    Ma listennit ul lec\'hienn e raio SPIP e enklask e holl testenn al lec\'hienn.',
 'texte_utilisation_moteur_syndiques_2' => 'Ar servij-se a lak SPIP da weladenni&ntilde; alies al lec\'hienno&ugrave; listennet, ar pezh a c\'hell gorrekaat ho lec\'hienn-c\'hwi.',
 'texte_vide' => 'goullo',
 'texte_vider_cache' => 'Goullonderi&ntilde; ar memoret',
@@ -989,7 +1011,20 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'trad_new' => 'Skriva&ntilde; troidigezh nevez ar pennad-skid ma&ntilde;',
 
 
+// U
+'utf8_convert_attendez' => 'Gortozit un tammig, hag adkargit ar bajenn-ma&ntilde;',
+'utf8_convert_avertissement' => 'Emaoc\'h war-nes amdrei&ntilde; endalc\'had ho tiaz-titouro&ugrave; (pennado&ugrave;, berrskrido&ugrave;, h.a.), eus al lizherennaoueg <b>@orig@</b> d\'an hini <b>@charset@</b>.',
+'utf8_convert_backup' => 'N\'ankouait ket savetei&ntilde; ho lec\'hienn penn-da-benn en a-raok. Rankout a rafec\'h ivez gwiriekaat eo heglot ho frammo&ugrave; gant @charset@. Heulia&ntilde; ar che&ntilde;chamanto&ugrave;, ma vez enaouet, a vo mazaouet.',
+'utf8_convert_erreur_deja' => 'Dija ema&ntilde; ho lec\'hienn e @charset@, n\'eus netra d\'ober...',
+'utf8_convert_erreur_orig' => 'Fazi&nbsp;: ne vez ket gouza&ntilde;vet al lizherennaoueg @charset@',
+'utf8_convert_termine' => 'Echu eo&nbsp;!',
+'utf8_convert_timeout' => '<b>A-bouez&nbsp;:</b> ma c\'hoarvez un <i>timeout</i> gant ar servijer, adkargit ar bajenn betek ma tiskouezhfe  &laquo;&nbsp;echu&nbsp;&raquo;.',
+'utf8_convert_verifier' => 'Brema&ntilde; e rankit goullonderi&ntilde; ar vemoret ha gwiria&ntilde; eo mat pep tra war lodenn foran al lec\'hienn. Ma c\'hoarvez ur gudenn vras, ez eo bet miret ho roado&ugrave; (er stumm SQL) en teul @rep@.',
+'utf8_convertir_votre_site' => 'Amdrei&ntilde; ho lec\'hienn davet uft-8',
+
+
 // V
+'version' => 'Arreval&nbsp;:',
 'version_initiale' => 'Stumm orin'
 
 );
