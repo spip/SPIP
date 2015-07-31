@@ -1159,7 +1159,7 @@ function balise_CACHE_dist($p) {
 //
 // http://doc.spip.org/@balise_INSERT_HEAD_dist
 function balise_INSERT_HEAD_dist($p) {
-	$p->code = "pipeline('insert_head','')";
+	$p->code = "(isset(\$Pile['flags']['insert_head'])?'':(pipeline('insert_head','') . vide(\$Pile['flags']['insert_head']=1)))";
 	$p->interdire_scripts = false;
 	return $p;
 }

@@ -327,6 +327,27 @@ function f_tidy ($texte) {
 	return $texte;
 }
 
+// Inserer les css et js meme si #INSERT_HEAD n'est pas dans le squelette
+function f_insert_head($texte){
+	return "<!--insert_head-->".$texte;
+}
+
+function f_insert_head_defaut($texte){
+	if ($GLOBALS['desactiver_insert_head_defaut']==true) return $texte;
+	if (($p = strpos($texte,"<!--insert_head-->"))!==FALSE){
+		if ($GLOBALS['auteur_session']['statut']!='0minirezo') return $texte;
+		if (strpos($texte,"<!--insert_head-->",$p+18)!==FALSE){
+			include_spip('public/debug');
+			$texte = affiche_erreurs_page(array(array("#INSERT_HEAD",_L("Double occurence")))) . $texte;
+		}
+		return $texte;
+	}
+	if (!preg_match(",<head[^>]*>,Uis",$texte,$regs)) return $texte;
+	$insert = "\n".pipeline('insert_head','')."\n";
+	$texte = str_replace($regs[0],$regs[0].$insert,$texte);
+	return $texte;
+}
+
 // Inserer au besoin les boutons admins
 // http://doc.spip.org/@f_admin
 function f_admin ($texte) {
