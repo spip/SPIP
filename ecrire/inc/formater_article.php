@@ -86,7 +86,7 @@ function inc_formater_article_dist($row)
 	$s = affdate_jourcourt($date);
 	$vals[] = $s ? $s : '&nbsp;';
 
-	if  ($nb) $vals[]= afficher_numero_edit($id_article, 'id_article', 'articles_edit');
+	if  ($nb) $vals[]= afficher_numero_edit($id_article, 'id_article', 'article');
 
 	if ($options == "avancees") { // Afficher le numero (JMB)
 		  $largeurs = array(11, '', 80, 100, 50);
