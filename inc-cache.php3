@@ -113,14 +113,16 @@ function retire_caches($chemin = '') {
 
 	// Et puis une centaine d'autres
 	if (lire_meta('invalider_caches')) {
-		$on_efface = true;
+		$compte = 1;
 		effacer_meta('invalider_caches'); # concurrence
 		ecrire_metas();
 
 		$q = spip_query("SELECT fichier FROM spip_caches
 		WHERE type='x' LIMIT 0,100");
-		while ($r = spip_fetch_array($q))
+		while ($r = spip_fetch_array($q)) {
+			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
 			$suppr[$r['fichier']] = true;
+		}
 	}
 
 
@@ -132,9 +134,9 @@ function retire_caches($chemin = '') {
 		.calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
 	}
 
-	// signaler aux suivants
-	if ($on_efface) {
-		if ($n>99)
+	// Si on a regarde (compte > 0), signaler s'il reste des caches invalides
+	if ($compte > 0) {
+		if ($compte > 100) # s'il y en a 101 c'est qu'on n'a pas fini
 			ecrire_meta('invalider_caches', 'oui');
 		else
 			effacer_meta('invalider');
