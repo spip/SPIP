@@ -43,7 +43,7 @@ function valider_xml_ok($url, $req_ext)
 		$texte = $bandeau = $err = '';
 	} else {
 		include_spip('inc/distant');
-
+		include_spip('public/debug');
 		if (is_dir($url)) {
 			$dir = (substr($url,-1,1) === '/') ? $url : "$url/";
 			$ext = (!$req_ext) ? 'php' : $req_ext;
