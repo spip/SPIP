@@ -187,9 +187,10 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 	$resultats = array();
 	foreach ($todo2 as $do){
 		$do = trim($do);
-		if (!preg_match('/(DROP PRIMARY KEY|DROP INDEX|DROP COLUMN|DROP'
+		if (!preg_match('/(DROP PRIMARY KEY|DROP KEY|DROP INDEX|DROP COLUMN|DROP'
 		                .'|CHANGE COLUMN|CHANGE|MODIFY|RENAME TO|RENAME'
-		                .'|ADD PRIMARY KEY|ADD INDEX|ADD UNIQUE|ADD COLUMN|ADD'
+		                .'|ADD PRIMARY KEY|ADD KEY|ADD INDEX|ADD UNIQUE KEY|ADD UNIQUE'
+		                .'|ADD COLUMN|ADD'
 		                .')\s*([^\s]*)\s*(.*)?/i', $do, $matches)){
 			spip_log("SQLite : Probleme de ALTER TABLE, utilisation non reconnue dans : $do \n(requete d'origine : $query)", 'sqlite.'._LOG_ERREUR);
 			return false;
@@ -212,6 +213,7 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 
 		switch ($cle) {
 			// suppression d'un index
+			case 'DROP KEY':
 			case 'DROP INDEX':
 				$nom_index = $colonne_origine;
 				spip_sqlite_drop_index($nom_index, $table, $serveur);
@@ -297,9 +299,11 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
 				}
 				break;
 			// ajout d'un index
+			case 'ADD UNIQUE KEY':
 			case 'ADD UNIQUE':
 				$unique=true;
 			case 'ADD INDEX':
+			case 'ADD KEY':
 				// peut etre "(colonne)" ou "nom_index (colonnes)"
 				// bug potentiel si qqn met "(colonne, colonne)"
 				//
