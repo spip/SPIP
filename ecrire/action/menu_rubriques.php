@@ -27,7 +27,6 @@ function action_menu_rubriques_dist() {
 		exit;
 	}
 
-	header("Cache-Control: no-cache, must-revalidate");
 	if ($date = intval(_request('date')))
 		header("Last-Modified: ".gmdate("D, d M Y H:i:s", $date)." GMT");
 
@@ -38,6 +37,7 @@ function action_menu_rubriques_dist() {
 		include_spip('inc/headers');
 		header('Content-Type: text/html; charset='. $GLOBALS['meta']['charset']);
 		http_status(304);
+		exit;
 	} else {
 		include_spip('inc/actions');
 		$ret = menu_rubriques();
