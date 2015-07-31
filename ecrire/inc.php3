@@ -17,10 +17,8 @@ include_ecrire('inc_cookie');
 // Determiner l'action demandee
 //
 
-if ($_GET['exec'] AND
-preg_match(',^[0-9a-z_]*$,i', $_GET['exec']))
-	$exec = $_GET['exec'];
- else $exec = $SCRIPT_NAME;
+$exec = $_REQUEST['exec'];
+if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = $SCRIPT_NAME;
 
 $var_auth ="";
 if (autoriser_sans_cookie($exec)) {

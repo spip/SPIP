@@ -68,10 +68,8 @@ debut_boite_alerte();
 echo "\n<div class='serif'>";
 echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
 
- echo "\n<form action='", generer_url_ecrire("delete_all"),
-   "' method='GET'>";
- echo "\n<div align='right'>",
-   "<input type='hidden' name='reinstall' value='non' />",
+ echo  generer_url_post_ecrire("delete_all", "reinstall=non"),
+   "\n<div align='right'>",
    "<input class='fondo' type='submit' value='",
    _T('bouton_effacer_tout'),
    "' /></div></form>",

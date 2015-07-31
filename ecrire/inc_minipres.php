@@ -182,21 +182,23 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
 }
 
-// Pour les formulaires en methode POST, mettre le id_ a la fois en 
-// input-hidden et apres le "?" du champ action:
+// Pour les formulaires en methode POST,
+// mettre les arguments a la fois en input-hidden et dans le champ action:
 // 1) on peut ainsi memoriser le signet comme si c'etait un GET
 // 2) ca suit http://en.wikipedia.org/wiki/Representational_State_Transfer
 
+// Attention: generer_url_ecrire peut rajouter des args
+
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='') {
 	$hidden = "";
-	if ($args)
-	  foreach(split('&',$args) as $c) {
+	$action = generer_url_ecrire($script, $args) ;
+	if ($p = strpos($action, '?'))
+	  foreach(preg_split('/&(amp;)?/',substr($action,$p+1)) as $c) {
 		$hidden .= "\n<input name='" . 
 		  str_replace('=', "' value='", $c) .
-		  " 'type='hidden' />";
+		  "' type='hidden' />";
 	}
 	if ($name) $name = " name='$name'";
-	$action = generer_url_ecrire($script, $args) . $ancre;
-	return "\n<form action='$action'$name method='post'>$hidden";
+	return "\n<form action='$action$ancre'$name method='post'>$hidden";
 }
 ?>

@@ -387,12 +387,10 @@ if ($flag_editable AND $options == 'avancees') {
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 
-	echo "<form action='", generer_url_ecrire('sites'), "'>\n",
-	  "<center><b>",
+	echo generer_url_post_ecrire('sites', "id_syndic=$id_syndic&$id_parent=$id_rubrique"),
+	  "\n<center><b>",
 	  _T('info_statut_site_1'),
 	  "</b> &nbsp;&nbsp; \n",
-	  "<input type='hidden' name='id_parent' value='$id_rubrique' />\n",
-	  "<input type='hidden' name='id_syndic' value='$id_syndic' />\n",
 	  "<select name='nouveau_statut' size='1' class='fondl'>\n",
 	  my_sel("prop",_T('info_statut_site_3'),$statut),
 	  my_sel("publie",_T('info_statut_site_2'),$statut),

@@ -71,8 +71,7 @@ if ($new == 'oui'){
 	if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 		debut_cadre_relief("site-24.gif");
 		
-		echo "<form action='", generer_url_ecrire('sites'), "'>\n",
-		  "<input type='hidden' name='id_rubrique' value='$id_rubrique' />\n",
+		echo generer_url_post_ecrire('sites', "id_rubrique=$id_rubrique"),
 		  "<input type='hidden' name='new' value='oui' />\n",
 		  "<input type='hidden' name='analyser_site' value='oui' />\n",
 		  "<input type='hidden' name='redirect' value='",

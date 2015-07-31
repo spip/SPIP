@@ -59,13 +59,12 @@ echo _T('texte_sauvegarde')."</FONT></B></TD></TR>";
 
 echo "<tr><td class='serif'>";
 
-echo "\n<form action='" . generer_url_ecrire("export_all") . "' method='GET'>";
-
-echo "\n<p align='justify'>";
-echo http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
-echo _T('texte_admin_tech_01');
-
-echo "<p>"._T('texte_admin_tech_02');
+ echo  generer_url_post_ecrire("export_all", "reinstall=non"),
+   "\n<p align='justify'>",
+   http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
+   _T('texte_admin_tech_01'),
+   "<p>",
+   _T('texte_admin_tech_02');
 
 if ($flag_gz) {
 	echo "\n<p align='justify'>"._T('texte_admin_tech_03')."<p>";
@@ -76,7 +75,7 @@ else {
 	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee');
 	echo "\n<INPUT TYPE='hidden' NAME='gz' VALUE='0' />";
 }
-echo "\n<input type='hidden' name='reinstall' value='non' />";
+
 echo "\n<div align='right'><input class='fondo' type='submit' VALUE='"._T('texte_sauvegarde_base')."'></div></form>";
 
 echo "</td></tr>";
@@ -87,17 +86,14 @@ echo "</TABLE>";
 // Restauration de la base
 //
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
-echo _T('texte_restaurer_base')."</FONT></B></TD></TR>";
-
-echo "<TR><td class='serif'>";
-
-echo "\n<form action='" . generer_url_ecrire("import_all","") . "' method='get'>";
-
-echo "\n<p align='justify'> "._T('texte_restaurer_sauvegarde');
-
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">",
+	"<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>",
+	"<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>",
+	_T('texte_restaurer_base')."</FONT></B></TD></TR>",
+	"<TR><td class='serif'>",
+	generer_url_post_ecrire("import_all"),
+	"\n<p align='justify'> ",
+	_T('texte_restaurer_sauvegarde');
 
 if ($flag_gz) {
 	$fichier_defaut = 'dump.xml.gz';
@@ -108,13 +104,13 @@ else {
 	$texte_compresse = _T('texte_non_compresse')."&nbsp;";
 }
 
-echo "\n<p>"._T('entree_nom_fichier', array('texte_compresse' => $texte_compresse));
-echo "\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>";
+echo "\n<p>"._T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
+	"\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>";
 
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>";
+echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>";
 
-echo "</td></tr>";
-echo "</TABLE>";
+echo "</td></tr>",
+	"</TABLE>";
 
 
 //
@@ -127,18 +123,16 @@ if ($options == "avancees") {
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
-		echo _T('texte_recuperer_base')."</FONT></B></TD></TR>";
-
-		echo "<TR><TD class='serif'>";
-
-		echo "\n<form action='" . generer_url_ecrire("admin_repair","") . "' method='get'>";
-
-		echo "\n<p align='justify'>"._T('texte_crash_base');
-
-		echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_tenter_recuperation')."'></DIV></FORM>";
-
-		echo "</TD></TR>";
-		echo "</TABLE>";
+		echo _T('texte_recuperer_base'),
+			"</FONT></B></TD></TR>",
+			"<TR><TD class='serif'>",
+			generer_url_post_ecrire("admin_repair"),
+			"\n<p align='justify'>"._T('texte_crash_base'),
+			"\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='",
+		 	_T('bouton_tenter_recuperation'),
+			"'></DIV></FORM>",
+			"</TD></TR>",
+			"</TABLE>";
 	}
 }
 
