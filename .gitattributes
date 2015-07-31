@@ -103,6 +103,7 @@ ecrire/exec/delete_all.php -text
 ecrire/exec/discuter.php -text
 ecrire/exec/documenter.php -text
 ecrire/exec/documents_liste.php -text
+ecrire/exec/editer_auteurs.php -text
 ecrire/exec/editer_mot.php -text
 ecrire/exec/export_all.php -text
 ecrire/exec/forum.php -text

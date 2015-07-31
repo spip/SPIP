@@ -23,7 +23,7 @@ function action_editer_auteurs_dist() {
 
 	$arg = _request('arg');
 	$redirect = _request('redirect');
-spip_log("action_editer_auteur: $arg compris");
+
 	if (preg_match(",^\W*(\d+)\W-(\d+)$,", $arg, $r)) {
 		supprimer_auteur_et_rediriger($r[1], $r[2], $redirect);
 	}
