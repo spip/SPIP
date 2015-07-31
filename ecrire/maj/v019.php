@@ -107,7 +107,7 @@ function maj_v019_dist($version_installee, $version_cible)
 		maj_version(1.906);
 	}
 	if (upgrade_vers(1.907, $version_installee, $version_cible)) {
-		spip_query("ALTER TABLE spip_forumforum` ADD INDEX `idx` (`idx`)");
+		spip_query("ALTER TABLE spip_forum ADD INDEX `idx` (`idx`)");
 		maj_version(1.907);
 	}
 	// Oups ! on stockait les tags de syndication sous la forme rel="category"
@@ -196,7 +196,7 @@ function maj_v019_dist($version_installee, $version_cible)
 	// Permettre d'enregistrer un numero IP dans les revisions d'articles
 	// a la place de l'id_auteur
 	if (upgrade_vers(1.918, $version_installee, $version_cible)) {
-		spip_query("ALTER TABLE spip_versionsversions` CHANGE `id_auteur` `id_auteur` VARCHAR(23)");
+		spip_query("ALTER TABLE spip_versions CHANGE `id_auteur` `id_auteur` VARCHAR(23)");
 		maj_version(1.918);
 	}
 
