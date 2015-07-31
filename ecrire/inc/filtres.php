@@ -59,15 +59,15 @@ function filtre_text_csv_dist($t)
 	$t = preg_replace("/([\n$sep])\"\"\"/",'\\1"&#34#',$t);
 	$t = str_replace('""','&#34#',$t);
 	preg_match_all('/"[^"]*"/', $t, $r);
-	foreach($r[0] as $cell) 
-		$t = str_replace($cell, 
+	foreach($r[0] as $cell)
+		$t = str_replace($cell,
 			str_replace($sep, $hs,
-				str_replace("\n", "<br />", 
+				str_replace("\n", "<br />",
 					    substr($cell,1,-1))),
 			$t);
 	list($entete, $corps) = preg_split(',\n,',$t,2);
 	$caption = '';
-	// sauter la ligne de tete formee seulement de separateurs 
+	// sauter la ligne de tete formee seulement de separateurs
 	if (substr_count($entete, $sep) == strlen($entete)) {
 		list($entete, $corps) = preg_split(',\n,',$corps,2);
 	}
@@ -666,7 +666,7 @@ function attribut_html($texte) {
 	$u = $GLOBALS['meta']['pcre_u'];
 	$texte = texte_backend(preg_replace(array(",\n,",",\s(?=\s),msS".$u),array(" ",""),textebrut($texte)));
 	$texte = str_replace(array("'",'"'),array('&#39;', '&#34;'), $texte);
-	
+
 	return preg_replace(array("/&(amp;|#38;)/","/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,5};)/"),array("&","&#38;") , $texte);
 }
 
@@ -766,9 +766,9 @@ function vider_date($letexte) {
 function recup_heure($date){
 
 	static $d = array(0,0,0);
-	if (!preg_match('#([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $date, $r)) 
+	if (!preg_match('#([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2})#', $date, $r))
 		return $d;
-	
+
 	array_shift($r);
 	return $r;
 }
@@ -837,7 +837,7 @@ function recup_date($numdate){
 		$heures = $regs[4];
 		$minutes = $regs[5];
 		$secondes = $regs[6];
-	} else $annee = $mois =  $jour =''; 
+	} else $annee = $mois =  $jour ='';
 	if ($annee > 4000) $annee -= 9000;
 	if (substr($jour, 0, 1) == '0') $jour = substr($jour, 1);
 
@@ -857,7 +857,7 @@ function date_interface($date, $decalage_maxi = 43200/* 12*3600 */) {
 
 // http://doc.spip.org/@date_relative
 function date_relative($date, $decalage_maxi=0) {
-	
+
 	if (!$date) return;
 	$decal = date("U") - date("U", strtotime($date));
 
@@ -870,26 +870,26 @@ function date_relative($date, $decalage_maxi=0) {
 	} else {
 		$il_y_a = "date_il_y_a";
 	}
-	
+
 	if ($decal < 3600) {
 		$minutes = ceil($decal / 60);
-		$retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes"))); 
+		$retour = _T($il_y_a, array("delai"=>"$minutes "._T("date_minutes")));
 	}
 	else if ($decal < (3600 * 24) ) {
 		$heures = ceil ($decal / 3600);
-		$retour = _T($il_y_a, array("delai"=>"$heures "._T("date_heures"))); 
+		$retour = _T($il_y_a, array("delai"=>"$heures "._T("date_heures")));
 	}
 	else if ($decal < (3600 * 24 * 7)) {
 		$jours = ceil ($decal / (3600 * 24));
-		$retour = _T($il_y_a, array("delai"=>"$jours "._T("date_jours"))); 
+		$retour = _T($il_y_a, array("delai"=>"$jours "._T("date_jours")));
 	}
 	else if ($decal < (3600 * 24 * 7 * 4)) {
 		$semaines = ceil ($decal / (3600 * 24 * 7));
-		$retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_semaines"))); 
+		$retour = _T($il_y_a, array("delai"=>"$semaines "._T("date_semaines")));
 	}
 	else if ($decal < (3600 * 24 * 30 * 6)) {
 		$mois = ceil ($decal / (3600 * 24 * 30));
-		$retour = _T($il_y_a, array("delai"=>"$mois "._T("date_mois"))); 
+		$retour = _T($il_y_a, array("delai"=>"$mois "._T("date_mois")));
 	}
 	else {
 		$retour = affdate_court($date);
@@ -903,7 +903,7 @@ function date_relative($date, $decalage_maxi=0) {
 
 // http://doc.spip.org/@date_relativecourt
 function date_relativecourt($date, $decalage_maxi=0) {
-	
+
 	if (!$date) return;
 	$decal = date("U",strtotime(date('Y-m-d'))-strtotime(date('Y-m-d',strtotime($date))));
 
@@ -932,7 +932,7 @@ function date_relativecourt($date, $decalage_maxi=0) {
 }
 
 // http://doc.spip.org/@affdate_base
-function affdate_base($numdate, $vue, $param = '') { 
+function affdate_base($numdate, $vue, $param = '') {
 	global $spip_lang;
 	$date_array = recup_date($numdate);
 	if (!$date_array) return;
@@ -1162,7 +1162,7 @@ function filtrer_ical($texte) {
 function date_ical($date, $addminutes = 0) {
 	list($heures, $minutes, $secondes) = recup_heure($date);
 	list($annee, $mois, $jour) = recup_date($date);
-	return date("Ymd\THis", 
+	return date("Ymd\THis",
 		    mktime($heures, $minutes+$addminutes,$secondes,$mois,$jour,$annee));
 }
 
@@ -1222,7 +1222,7 @@ function agenda_connu($type)
 
 
 // Cette fonction memorise dans un tableau indexe par son 5e arg
-// un evenement decrit par les 4 autres (date, descriptif, titre, URL). 
+// un evenement decrit par les 4 autres (date, descriptif, titre, URL).
 // Appellee avec une date nulle, elle renvoie le tableau construit.
 // l'indexation par le 5e arg autorise plusieurs calendriers dans une page
 
@@ -1245,8 +1245,8 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 }
 
 // Cette fonction recoit:
-// - un nombre d'evenements, 
-// - une chaine a afficher si ce nombre est nul, 
+// - un nombre d'evenements,
+// - une chaine a afficher si ce nombre est nul,
 // - un type de calendrier
 // -- et une suite de noms N.
 // Elle demande a la fonction precedente son tableau
@@ -1262,18 +1262,18 @@ function agenda_affiche($i)
 	include_spip('inc/agenda');
 	$args = func_get_args();
 	// date ou nombre d'evenements (on pourrait l'afficher)
-	$nb = array_shift($args); 
+	$nb = array_shift($args);
 	$evt = array_shift($args);
 	$type = array_shift($args);
 		spip_log("evt $nb");
-	if (!$nb) { 
+	if (!$nb) {
 		$d = array(time());
 	} else {
 		$agenda = agenda_memo(0);
 		$evt = array();
-		foreach (($args ? $args : array_keys($agenda)) as $k) {  
+		foreach (($args ? $args : array_keys($agenda)) as $k) {
 			if (is_array($agenda[$k]))
-				foreach($agenda[$k] as $d => $v) { 
+				foreach($agenda[$k] as $d => $v) {
 					$evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
 				}
 		}
@@ -1282,8 +1282,8 @@ function agenda_affiche($i)
 	if (count($d)){
 		$mindate = min($d);
 		$start = strtotime($mindate);
-	} else {  
-		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));  
+	} else {
+		$mindate = ($j=_request('jour')) * ($m=_request('mois')) * ($a=_request('annee'));
   		if ($mindate)
 			$start = mktime(0,0,0, $m, $j, $a);
   		else $start = mktime(0,0,0);
@@ -1370,7 +1370,7 @@ function multi_trad ($trads, $lang='') {
 
 function multi_trads ($trads, $lang='') {
 
-	if (!$lang) $lang = $GLOBALS['spip_lang']; 
+	if (!$lang) $lang = $GLOBALS['spip_lang'];
 
 	if (isset($trads[$lang])) {
 		return $lang;
@@ -1378,7 +1378,7 @@ function multi_trads ($trads, $lang='') {
 	}	// cas des langues xx_yy
 	else if (preg_match(',^([a-z]+)_,', $lang, $regs) AND isset($trads[$regs[1]])) {
 		return $regs[1];
-	}	
+	}
 	else  return '';
 }
 
@@ -1491,10 +1491,10 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 			$r[4] = substr($r[3], 1, -1);
 			$r[3] = $r[3][0];
 		} elseif ($r[3]!=='') {
-			$r[4] = $r[3]; 
+			$r[4] = $r[3];
 			$r[3] = '';
 		} else {
-			$r[4] = trim($r[2]); 
+			$r[4] = trim($r[2]);
 		}
 		$att = filtrer_entites(str_replace("&#39;", "'", $r[4]));
 	}
@@ -1560,7 +1560,7 @@ function tester_config($id, $mode='') {
 	case 'info_redacteurs' :
 	  return (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? $mode : '');
 
-	case 'info_visiteurs' : 
+	case 'info_visiteurs' :
 	  return (($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo') ? $mode : '');
 
 	default:
@@ -1649,7 +1649,7 @@ function afficher_enclosures($tags) {
 	foreach (extraire_balises($tags, 'a') as $tag) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
 		AND $t = extraire_attribut($tag, 'href')) {
-			$s[] = preg_replace(',>[^<]+</a>,S', 
+			$s[] = preg_replace(',>[^<]+</a>,S',
 				'>'
 				.http_img_pack('attachment.gif', $t,
 					'height="15" width="15" title="'.attribut_html($t).'"')
@@ -1787,14 +1787,14 @@ function regledetrois($a,$b,$c)
 
 // Fournit la suite de Input-Hidden correspondant aux parametres de
 // l'URL donnee en argument, compatible avec les types_urls depuis [14444].
-// S'il s'agit de l'URL de la page d'appel, 
+// S'il s'agit de l'URL de la page d'appel,
 // il sait retrouver les parametres implicites des types_urls cryptiques.
 // Si c'est un type_url cryptique sur autre chose, c'est parfois incomplet.
 // cf. tests/filtres/form_hidden.html
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
 	static $uri = '';
-  
+
 	if (!$uri) $uri = url_absolue(nettoyer_uri());
 	$contexte = array();
 	if ($uri == url_absolue($action)
@@ -1901,7 +1901,7 @@ function filtre_find($array, $val) {
 function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $modele='', $connect='', $env=array()) {
 	static $ancres = array();
 	$bloc_ancre = "";
-	
+
 	if ($pas<1) return;
 
 	$debut = 'debut'.$nom; // 'debut_articles'
@@ -2003,7 +2003,7 @@ function direction_css ($css, $voulue='') {
 		array('right', 'left', '@@@@L E F T@@@@'),
 		array('@@@@L E F T@@@@', 'right', 'left'),
 		$contenu);
-	
+
 	// reperer les @import auxquels il faut propager le direction_css
 	preg_match_all(",\@import\s*url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",$contenu,$regs);
 	$src = array();$src_direction_css = array();$src_faux_abs=array();
@@ -2044,8 +2044,8 @@ function url_absolue_css ($css) {
 	$url_absolue_css = url_absolue($css);
 
 	$f = basename($css,'.css');
-	$f = sous_repertoire (_DIR_VAR, 'cache-css') 
-		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f) 
+	$f = sous_repertoire (_DIR_VAR, 'cache-css')
+		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-urlabs-" . substr(md5("$css-urlabs"), 0,4) . "\\2",$f)
 		. '.css';
 
 	if ((@filemtime($f) > @filemtime($css))
@@ -2262,9 +2262,9 @@ function compacte($source, $format = null) {
 		// si c'est une css, il faut reecrire les url en absolu
   	if ($format=='css')
   		$source = url_absolue_css($source);
-		
+
 		$f = basename($source,'.'.$format);
-		$f = sous_repertoire (_DIR_VAR, 'cache-'.$format) 
+		$f = sous_repertoire (_DIR_VAR, 'cache-'.$format)
 		. preg_replace(",(.*?)(_rtl|_ltr)?$,","\\1-compacte-"
 		. substr(md5("$source-compacte"), 0,4) . "\\2", $f, 1)
 		. '.' . $format;
@@ -2298,7 +2298,7 @@ function compacte($source, $format = null) {
 function http_wrapper($img){
 	static $wrapper_state=NULL;
 	static $wrapper_table = array();
-	
+
 	if (strpos($img,'/')===FALSE) // on ne prefixe par _NOM_IMG_PACK que si c'est un nom de fichier sans chemin
 		$f = chemin_image($img);
 	else { // sinon, le path a ete fourni
@@ -2307,7 +2307,7 @@ function http_wrapper($img){
 		if (substr($f,0,strlen("../"._DIR_PLUGINS))=="../"._DIR_PLUGINS)
 			$f = substr($img,3); // on enleve le ../ qui ne faisait que ramener au rep courant
 	}
-	
+
 	if ($wrapper_state==NULL){
 		global $browser_name;
 		if (!strlen($browser_name)){include_spip('inc/layer');}
@@ -2579,7 +2579,7 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 		// si c'est une rubrique-secteur contenant des breves, demander la
 		// confirmation du deplacement
 		$contient_breves = sql_countsel('spip_breves', "id_rubrique=$id");
-	
+
 		if ($contient_breves > 0) {
 			$scb = ($contient_breves>1? 's':'');
 			$scb = _T('avis_deplacement_rubrique',
@@ -2597,15 +2597,15 @@ function chercher_rubrique($msg,$id, $id_parent, $type, $id_secteur, $restreint,
 				. "</div>";
 		}
 		$form = "<input type='hidden' name='editer_$type' value='oui' />\n" . $form;
-		$form = generer_action_auteur("editer_$type", $id, self(), $form, " method='post' class='submit_plongeur'");	
+		$form = generer_action_auteur("editer_$type", $id, self(), $form, " method='post' class='submit_plongeur'");
 	}
 
 	if ($retour_sans_cadre)
 		return $form;
-		
+
 	include_spip('inc/presentation');
 	return debut_cadre_couleur($logo, true, "", $msg) . $form .fin_cadre_couleur(true);
-	
+
 }
 
 // http://doc.spip.org/@barre_typo
@@ -2639,12 +2639,23 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
 	include_spip("inc/securiser_action");
 	$cle = calculer_cle_action($form.(is_array($c)?serialize($c):$c));
 	$c = serialize(array($c,$cle));
-	if (function_exists('gzdeflate') && function_exists('gzinflate'))
-		$c = gzdeflate($c);
-	$c = _xor($c);
-	$c = base64_encode($c);
+
+	if ((defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX)
+		AND $dir = sous_repertoire(_DIR_CACHE, 'contextes')) {
+		// stocker les contextes sur disque et ne passer qu'un hash dans l'url
+		$md5 = md5($c);
+		ecrire_fichier("$dir/c$md5",$c);
+		$c = $md5;
+	}
+	else {
+		if (function_exists('gzdeflate') && function_exists('gzinflate'))
+			$c = gzdeflate($c);
+		$c = _xor($c);
+		$c = base64_encode($c);
+	}
+
 	if ($emboite === NULL) return $c;
-	return !trim($emboite) ? '' :  
+	return !trim($emboite) ? '' :
 	"<div class='ajaxbloc env-$c'>\n$emboite</div><!-- ajaxbloc -->\n";
 }
 
@@ -2652,11 +2663,17 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL) {
 // http://doc.spip.org/@decoder_contexte_ajax
 function decoder_contexte_ajax($c,$form='') {
 	include_spip("inc/securiser_action");
-
-	$c = @base64_decode($c);
-	$c = _xor($c);
-	if (function_exists('gzdeflate') && function_exists('gzinflate'))
-		$c = @gzinflate($c);
+	if (( (defined('_CACHE_CONTEXTES_AJAX') AND _CACHE_CONTEXTES_AJAX) OR strlen($c)==32)
+		AND $dir = sous_repertoire(_DIR_CACHE, 'contextes')
+		AND lire_fichier("$dir/c$c",$contexte)) {
+			$c = $contexte;
+	}
+	else {
+		$c = @base64_decode($c);
+		$c = _xor($c);
+		if (function_exists('gzdeflate') && function_exists('gzinflate'))
+			$c = @gzinflate($c);
+	}
 	list($env, $cle) = @unserialize($c);
 
 	if ($cle == calculer_cle_action($form.(is_array($env)?serialize($env):$env)))
