@@ -45,12 +45,6 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	$page = tester_redirection($fond, $contexte, $connect);
 	if ($page) return $page;
 
-	// Choisir entre $fond-dist.html, $fond=7.html, etc?
-	$id_rubrique_fond = 0;
-	// Chercher le fond qui va servir de squelette
-	if ($r = quete_rubrique_fond($contexte))
-		list($id_rubrique_fond, $lang) = $r;
-
 	if (isset($contexte['lang']))
 		$lang = $contexte['lang'];
 	elseif (!isset($lang))
@@ -61,7 +55,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 
 	$styliser = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) =
-		$styliser($fond, $id_rubrique_fond, $GLOBALS['spip_lang'], $connect);
+		$styliser($fond, $contexte, $GLOBALS['spip_lang'], $connect);
 
 	$debug = (isset($GLOBALS['var_mode']) && ($GLOBALS['var_mode'] == 'debug'));
 	// sauver le nom de l'eventuel squelette en cours d'execution
@@ -148,44 +142,6 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	return $page;
 }
 
-// Calcul de la rubrique associee a la requete
-// (selection de squelette specifique par id_rubrique & lang)
-
-// http://doc.spip.org/@quete_rubrique_fond
-function quete_rubrique_fond($contexte) {
-
-	if (isset($contexte['id_rubrique'])
-	AND $id = intval($contexte['id_rubrique'])
-	AND $row = quete_parent_lang('spip_rubriques',$id)) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array ($id, $lang);
-	}
-
-	if (isset($contexte['id_breve'])
-	AND $id = intval($contexte['id_breve'])
-	AND $row = quete_parent_lang('spip_breves',$id)
-	AND $id_rubrique_fond = $row['id_rubrique']) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array($id_rubrique_fond, $lang);
-	}
-
-	if (isset($contexte['id_syndic'])
-	AND $id = intval($contexte['id_syndic'])
-	AND $row = quete_parent_lang('spip_syndic',$id)
-	AND $id_rubrique_fond = $row['id_rubrique']
-	AND $row = quete_parent_lang('spip_rubriques',$id_rubrique_fond)) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array($id_rubrique_fond, $lang);
-	}
-
-	if (isset($contexte['id_article'])
-	AND $id = intval($contexte['id_article'])
-	AND $row = quete_parent_lang('spip_articles',$id)
-	AND $id_rubrique_fond = $row['id_rubrique']) {
-		$lang = isset($row['lang']) ? $row['lang'] : '';
-		return array($id_rubrique_fond, $lang);
-	}
-}
 
 // si le champ chapo commence par '=' c'est une redirection.
 // avec un eventuel raccourci Spip
