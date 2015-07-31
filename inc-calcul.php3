@@ -51,6 +51,16 @@ function transformer_lien_logo($contexte, $lien) {
 	return $lien;
 }
 
+//
+// Ajouter le &var_recherche=toto dans les boucles de recherche
+//
+function url_var_recherche ($url) {
+	if ($GLOBALS['activer_url_recherche'] && $GLOBALS['recherche'] && !ereg("var_recherche", $url)) {
+		$url .= strpos('?', $url) ? '&' : '?';
+		$url .= "var_recherche=".urlencode($GLOBALS['recherche']);
+	}
+	return $url;
+}
 
 //
 // Retrouver le logo d'un objet (et son survol)
