@@ -537,14 +537,14 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	$opt = sous_menu_rubriques($id_rubrique,0, 0,$data,$enfants,$idem, $restreint, $type);
 	$att = " name='id_parent'\nstyle='font-size: 90%; width: 99%; font-face: verdana,arial,helvetica,sans-serif; max-height: 24px;'";
 
-	if (preg_match(',^<option[^>]*>([^<]*)</option>$,',$opt,$r))
-	  $r = "<input$att type='hidden' value='" . $r[1] . "' />" . $r[1] ;
+	if (preg_match(',^<option[^<>]*value=.(\d*).[^<>]*>([^<]*)</option>$,',$opt,$r))
+	  $r = "<input$att type='hidden' value='" . $r[1] . "' />" . $r[2] ;
 	else 
 	  $r = "<select$att size='1'>\n$opt</select>\n";
 
 	# message pour neuneus (a supprimer ?)
-	if ($type != 'auteur' AND $type != 'breve')
-		$r .= "\n<br />"._T('texte_rappel_selection_champs');
+#	if ($type != 'auteur' AND $type != 'breve')
+#		$r .= "\n<br />"._T('texte_rappel_selection_champs');
 
 	return $r;
 }
