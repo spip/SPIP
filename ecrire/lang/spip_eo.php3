@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modifu tiun &#265;i rubrikon',
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'aide_non_disponible' => 'Tiu parto de la konektita helpilo ankora&#365; ne estas disponebla en tiu lingvo.',
-'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al version @version@ ne estas ebla. La problemo eble deveni por malbonaj rajtoj en la datenbazo. Bonvolu kontakti vian gastiganton.',
+'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne estas ebla. La problemo eble deveni pro malbonaj rajtoj en la datenbazo. Bonvolu kontakti vian gastiganton.',
 'avis_acces_interdit' => 'Malpermesita aliro.',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne estas valida',
@@ -74,16 +74,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'barre_a_accent_grave' => 'Enigi A gravigitan cxefliteron',
-'barre_aide' => 'Uzi la tipografiajn &#349;parvojojn por ri&#265;igi vian enpa&#285;igon',
+'barre_a_accent_grave' => 'Enigu malakut-akcentan majusklan A',
+'barre_aide' => 'Uzu la tipografiajn &#349;parvojojn por ri&#265;igi vian enpa&#285;igon',
 'barre_aide_rac' => 'Pli scii pri la tipografiaj &#349;parvojoj',
-'barre_e_accent_aigu' => 'Enigi E gravigitan cxefliteron',
-'barre_eo' => 'Enigi E en la O',
+'barre_e_accent_aigu' => 'Enigu malakut-akcentan majusklan E',
+'barre_eo' => 'Enigu E en majusklan O',
 'barre_eo_maj' => 'Enigi E en la O &#265;eflitero',
 'barre_gras' => '{{Grasigi}}',
-'barre_guillemets' => '&#264;irka&#365;i kun &laquo; francaj citiloj &raquo;',
-'barre_guillemets_de' => '&#264;irka&#365;i kun „citiloj“',
-'barre_intertitre' => '{{{Intertitiligi}}}',
+'barre_guillemets' => '&#264;irka&#365;igi per &laquo; francaj citiloj &raquo;',
+'barre_guillemets_de' => '&#264;irka&#365;igi per „citiloj“',
+'barre_intertitre' => '{{{Intertitoligi}}}',
 'barre_italic' => '{Kursivigi}',
 'barre_lien' => 'Transformi al [reta ligo->http://...]',
 'barre_lien_input' => 'Bonvolu indiki la retadreson de via ligo (vi povas indiki ret-adreson, tiel kiel http://www.monsite.com a&#365; simple indiki numeron de artikolo en tiu teksejo.',
@@ -194,11 +194,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'por vere komenci la instaladon',
 'dirs_preliminaire' => 'Anta&#365;e: <B>&#284;ustigu la alirrajtojn</B>',
 'dirs_probleme_droits' => '<b>Problemo de alirrajtoj</b>',
-'dirs_repertoires_absents' => '<B>La jenaj dosieruloj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Probable, la problemo deveni el malbona &#265;efliterigito a&#365; etliterigito.
-  Kontrolu ke la etliteroj kaj la &#265;efliteroj akordas kun la afi&#349;ado &#265;i-supre;
-  se ili ne akordas, bonvolu renomi la dosierulojn kun via FTPa programo por korekti la eraron.
-  <P>Tiam &#265;i farotaj, vi povos',
+'dirs_repertoires_absents' => '<B>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
+  <P>Kulpas ver&#349;ajne mal&#285;usta uskleco.
+  Certigu ke la uskleco akordas kun la afi&#349;ado &#265;i-supre;
+  se ili ne akordas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
+  <P>Post tio, vi povos',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas alireblaj skribe : 
 <ul>@bad_dirs@.</ul><p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos',
 
@@ -560,8 +560,8 @@ Dankon pro via partopreno
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj inter la partoprenantoj de la teksejo. Vi povas aktivigi a&#365; malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesa&#285;on',
 'info_ecrire_article' => 'Anta&#365; ol havi la eblecon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
-'info_email_envoi' => 'Retpo&#349;tadreso (nedeviga)',
-'info_email_envoi_txt' => 'Indiku &#265;i-tie la adreson uzota por sendi po&#349;tmesa&#285;ojn (defa&#365;lte, la destina adreso estos uzita)&nbsp;:',
+'info_email_envoi' => 'Senda retpo&#349;tadreso (nedeviga)',
+'info_email_envoi_txt' => 'Indiku &#265;i-tie la adreson uzotan por sendi po&#349;tmesa&#285;ojn (defa&#365;lte, la ricev-adreso estos uzata)&nbsp;:',
 'info_email_invalide' => 'Nevalida retpo&#349;tadreso.',
 'info_email_webmestre' => 'Retpo&#349;tadreso de la teksestro (eventuale)',
 'info_en_cours_validation' => 'Viaj nun redaktataj artikoloj',
@@ -605,7 +605,7 @@ Dankon pro via partopreno
 'info_gauche_visiteurs_enregistres' => 'Vi trovos &#265;i tie la registritajn vizitantojn
 	en la publika spaco de la teksejo (forumoj la&#365; abono).',
 'info_generation_miniatures_images' => 'Generado de miniaturoj de la bildoj',
-'info_gerer_trad' => 'Mastrumi la ligojn de traduko ?',
+'info_gerer_trad' => '&#264;u mastrumi la ligojn de traduko ?',
 'info_grand_ecran' => 'Granda ekrano',
 'info_groupe_important' => 'Grava grupo',
 'info_hebergeur_desactiver_envoi_email' => '&#264;e kelkaj TTT-gastigantoj, la a&#365;tomata sendado de retpo&#349;t-mesa&#285;oj ekde ilia servilo ne aktivas. Tiam, la jenaj funkcioj de SPIP ne funkcios.',
@@ -679,13 +679,13 @@ Dankon pro via partopreno
 'info_mots_cles' => 'La &#349;losilvortoj',
 'info_mots_cles_association' => 'Eblas ligi la &#349;losilvortojn de tiu grupo kun:',
 'info_moyenne' => 'meznombro:',
-'info_multi_articles' => 'Aktivigi la lingv-menuon en la artikoloj&nbsp;?',
+'info_multi_articles' => '&#264;u aktivigi la lingvomenuon en la artikoloj&nbsp;?',
 'info_multi_cet_article' => 'Lingvo de tiu artikolo&nbsp;:',
 'info_multi_herit' => 'Defa&#365;lta lingvo',
 'info_multi_langues_choisies' => 'Bonvolu elkti &#265;i-sube la lingvojn kiel disponigos la redatistojn de via teksejo.
   La lingvojn jam uzitaj en la teksejo (&#265;ef-afi&#349;itaj) vi ne povas malaktivigi.',
-'info_multi_rubriques' => 'Aktivigi la lingv-menuon en la rubrikioj&nbsp;?',
-'info_multi_secteurs' => '... nur por la rubrikoj situitaj en la radiko&nbsp;?',
+'info_multi_rubriques' => '&#264;u aktivigi la lingvomenuon en la rubrikioj&nbsp;?',
+'info_multi_secteurs' => '... nur por la rubrikoj situantaj en la radiko&nbsp;?',
 'info_multilinguisme' => 'Plurlingvismo',
 'info_nexen_1' => 'Via TTT-gastiganto estas Nexen Services.',
 'info_nexen_2' => 'Sekurigu la dosierujon <tt>ecrire/data</tt> pere de',
@@ -1073,7 +1073,7 @@ Dankon pro via partopreno
 'login_pass2' => 'Pasvorto&nbsp;:',
 'login_preferez_refuser' => '<b>Se vi preferas rifuzi kuketojn</b>, alia konektometodo (malpli sekura) estas je via dispono&nbsp;:',
 'login_recharger' => 're&#349;argi tiun &#265;i pa&#285;on',
-'login_rester_identifie' => 'Resti identigita kelkaj tagoj',
+'login_rester_identifie' => 'Resti identigita kelkajn tagojn',
 'login_retour_public' => 'Reveno al la publika spaco',
 'login_retour_site' => 'Reveno al la publika spaco',
 'login_retoursitepublic' => 'reveno&nbsp;al&nbsp;la&nbsp;publika&nbsp;spaco',
@@ -1177,7 +1177,7 @@ Dankon pro via partopreno
 'onglet_origine_visites' => 'Deveno de la vizitoj',
 'onglet_repartition_actuelle' => 'nun',
 'onglet_repartition_debut' => 'dekomence',
-'onglet_repartition_lang' => 'per lingvoj',
+'onglet_repartition_lang' => 'la lingvoj',
 'onglet_repartition_rubrique' => 'Dispartigo la&#365; rubrikoj',
 'onglet_save_restaur_base' => 'Konservi/restarigi la bazon',
 'onglet_vider_cache' => 'Malplenigi la tenejon',
@@ -1270,7 +1270,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_choix_base_1' => 'Elektu vian bazon:',
 'texte_choix_base_2' => 'La MySQL-servilo entenas plurajn datenbazojn.',
 'texte_choix_base_3' => '<B>Elektu</B> &#265;i-poste tiun kiu estis al vi atribuita de via gastiganto:',
-'texte_choix_langue_defaut' => 'Bonvolu elekti &#265;i-sube la defaultan lingvon de via teksejo, kaj anka&#365; la lingvojn kiuj estos proponitaj al la redaktistoj.',
+'texte_choix_langue_defaut' => 'Bonvolu elekti &#265;i-sube la defa&#365;ltan lingvon de via eksejo, kaj anka&#365; la lingvojn kiuj estu proponitaj al la redaktistoj.',
 'texte_commande_vider_tables_indexation' => 'Uzu tiun ordonon por malplenigi la indeksado-tabelojn uzatajn
 			de la SPIP-interna ser&#265;ilo. Tio ebligos al vi
 			gajni diskospacon.',
@@ -1388,8 +1388,8 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 		ri&#265;igi la krozadon de via teksejo, e&#265; uzi tiujn ecojn
 		por fasoni la aspekton de la artikoloj en viaj skeletoj.',
 'texte_mots_cles_dans_forum' => '&#264;u vi deziras permesi la uzadon de la &#349;losilvortoj, elekteblaj por la vizitantoj, en la forumoj de la publika spaco&nbsp;? (Atentu&nbsp;: tiu opcio estas relative kompleksa por &#285;uste uzi &#285;in.)',
-'texte_multilinguisme' => 'Se vi volus mastrumi la artikolojn en pluraj lingvojn, kun kompleksa navigado, vi povas aldoni menuon de lingv-elekto en la artikoloj kaj/a&#365; en la rubrikoj, konformite la organisado de via tejsejo.',
-'texte_multilinguisme_trad' => 'Anka&#365;, vi povas aktivigi ilon por mastrumi la ligojn inter la malsamaj traduka&#309;oj de artikolo.',
+'texte_multilinguisme' => 'Se vi deziras mastrumi la artikolojn en pluraj lingvoj, per kompleksa navigado, vi povas aldoni menuon de lingvoelekto en la artikoloj kaj/a&#365; en la rubrikoj, konforme al la organizado de via teksejo.',
+'texte_multilinguisme_trad' => 'Vi povas anka&#365; aktivigi ilon por mastrumi la ligojn inter la diversaj traduka&#309;oj de artikolo.',
 'texte_non_compresse' => '<i>ne densigita</i> (&#265;ar via servilo ne subtenas tiun funkcion)',
 'texte_non_fonction_referencement' => 'Vi povas preferi ne uzi tiun a&#365;tomatan funkcion kaj indiki mem la elementojn koncernantajn tiun &#265;i teksejon...',
 'texte_nouveau_message' => 'Nova mesa&#285;o',
@@ -1591,10 +1591,10 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_syndication' => 'Kunligado de teksejoj',
 'titre_titre_document' => 'Titolo de la dokumento&nbsp;:',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
-'trad_article_traduction' => '&#264;iuj la versioj de tiu artikolo&nbsp;:',
-'trad_deja_traduit' => 'Tiu artikolo jam estas la traduko de la kuranta artikolo.',
+'trad_article_traduction' => '&#264;iuj versioj de tiu artikolo&nbsp;:',
+'trad_deja_traduit' => 'Tiu artikolo jam estas traduko de la kuranta artikolo.',
 'trad_delier' => 'Ne plu ligi tiun artikolon kun &#285;iaj tradukoj',
-'trad_lier' => 'Tiu artikolo estas la trduko de la artikolo numerita&nbsp;:',
+'trad_lier' => 'Tiu artikolo estas traduko de la artikolo numerita&nbsp;:',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo',
 'trad_reference' => '(artikolo referenca)'
 

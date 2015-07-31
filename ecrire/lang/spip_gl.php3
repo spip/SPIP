@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_gl'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -20,6 +20,7 @@ $GLOBALS['i18n_spip_gl'] = array(
 'admin_modifier_rubrique' => 'Modificar este tema',
 'admin_recalculer' => 'Recargar a p&aacute;xina',
 'aide_non_disponible' => 'Esta parte da axuda en li&ntilde;a a&iacute;nda non est&aacute; dispo&ntilde;ible nesta lingua.',
+'alerte_maj_impossible' => '<NEW> <b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_archive_incorrect' => 'o ficheiro arquivado non &eacute; un ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivado non &eacute; v&aacute;lido',
@@ -48,7 +49,7 @@ $GLOBALS['i18n_spip_gl'] = array(
 'avis_erreur_fonction_contexte' => 'Erro de programaci&oacute;n. Esta funci&oacute;n non se debe chamar neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
-'avis_erreur_version_archive' => '<B>Atenci&oacute;n! O ficheiro @archive@ corresponde a
+'avis_erreur_version_archive' => '<MODIF> <B>Atenci&oacute;n! O ficheiro @archive@ corresponde a
 		outra versi&oacute;n de SPIP que non &eacute; a que tes instalada.</B>
 		Podes estar en graves problemas: risco de destrucci&oacute;n masiva
 		da t&uacute;a base de datos, fallos no funcionamento do lugar, etc.
@@ -72,6 +73,21 @@ $GLOBALS['i18n_spip_gl'] = array(
 
 
 // B
+'barre_a_accent_grave' => '<NEW> Ins&eacute;rer un A accent grave majuscule',
+'barre_aide' => '<NEW> Utilisez les raccourcis typographiques pour enrichir votre mise en page',
+'barre_aide_rac' => '<NEW> En savoir plus sur les raccourcis typographiques',
+'barre_e_accent_aigu' => '<NEW> Ins&eacute;rer un E accent aigu majuscule',
+'barre_eo' => '<NEW> Ins&eacute;rer un E dans l\'O',
+'barre_eo_maj' => '<NEW> Ins&eacute;rer un Edans l\'O majuscule',
+'barre_gras' => '<NEW> Mettre en {{gras}}',
+'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_de' => '<NEW> Entourer de &bdquo;guillemets&ldquo;',
+'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
+'barre_italic' => '<NEW> Mettre en {italique}',
+'barre_lien' => '<NEW> Transformer en [lien hypertexte->http://...]',
+'barre_lien_input' => '<NEW> Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
+'barre_note' => '<NEW> Transformer en [[Note de bas de page]]',
+'barre_quote' => '<NEW> <quote>Citer un message</quote>',
 'bouton_acces_ldap' => 'Engadir o acceso a LDAP >>',
 'bouton_ajouter' => 'Engadir',
 'bouton_ajouter_document' => 'ENGADIR UN DOCUMENTO',
@@ -185,6 +201,11 @@ $GLOBALS['i18n_spip_gl'] = array(
 'dirs_commencer' => ' para escomezar realmente a instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <B>Regular os permisos de acceso</B>',
 'dirs_probleme_droits' => '<b>Problema de permisos de acceso</b>',
+'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
+		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'dirs_repertoires_suivants' => '<B>Non se pode escreber nos directorios seguintes: <ul>@bad_dirs@.</ul></B>
 		<P>Para arranxa.lo, emprega o teu cliente de FTP e troca os permisos de acceso de cada un
 		deles. O procedemento est&aacute; explicado po.lo mi&uacute;do na gu&iacute;a de instalaci&oacute;n.
@@ -498,7 +519,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_breves_valider' => 'Breves por validar',
 'info_changer_nom_groupe' => 'Trocar o nome deste grupo:',
 'info_chapeau' => 'Cabeceira',
-'info_chapeau_2' => 'Cabeceira:',
+'info_chapeau_2' => '<MODIF> Cabeceira:',
 'info_chemin_acces_1' => 'Opci&oacute;ns: <B>Ruta de acceso na gu&iacute;a</B>',
 'info_chemin_acces_2' => 'En adiante, ter&aacute;s que configurar a ruta de acceso &aacute;s informaci&oacute;ns na gu&iacute;a. Esta informaci&oacute;n &eacute; indispensable para ler os perf&iacute;s de usuari@s gardados na gu&iacute;a.',
 'info_chemin_acces_annuaire' => 'Opci&oacute;ns: <B>Ruta de acceso na gu&iacute;a',
@@ -519,7 +540,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_contenu_articles' => 'Contido dos artigos',
 'info_contribution' => 'contribuci&oacute;ns no foro',
 'info_copyright' => '&eacute; un programa libre distribuido <a href=\'copyright_fr.html\'>baixo licencia GPL.</a>',
-'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.spip.net/gl\'>http://www.spip.net/gl</a>.',
+'info_copyright_doc' => '<MODIF> Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.spip.net/gl\'>http://www.spip.net/gl</a>.',
 'info_cours_edition' => 'Os teus artigos en proceso de edici&oacute;n',
 'info_creation_mots_cles' => 'Crea e configura eiqu&iacute; as palabras chave do lugar',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as valeiras.)',
@@ -558,6 +579,8 @@ Gracias pola t&uacute;a participaci&oacute;n
 		desactivar esta funcionalidade.',
 'info_ecire_message_prive' => 'Escreber unha mensaxe privada',
 'info_ecrire_article' => 'Antes de poder escreber artigos, tes que crear, alomenos un tema.',
+'info_email_envoi' => '<NEW> Adresse email d\'envoi (optionnel)',
+'info_email_envoi_txt' => '<NEW> Indiquez ici l\'adresse &agrave; utiliser pour envoyer les emails (&agrave; d&eacute;faut, l\'adresse destinataire sera utilis&eacute;e comme adresse d\'envoi)&nbsp;:',
 'info_email_invalide' => 'Enderezo de e-mail non v&aacute;lido.',
 'info_email_webmestre' => 'Enderezo e-mail d@ webmestre/a (opcional)',
 'info_en_cours_validation' => 'Os teus artigos en proceso de redacci&oacute;n',
@@ -608,6 +631,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_gauche_visiteurs_enregistres' => 'eiqu&iacute; atopar&aacute;s as visitas rexistradas
 		no espazo p&uacute;blico do lugar (foros baixo rexistro).',
 'info_generation_miniatures_images' => 'Creaci&oacute;n de miniaturas das imaxes',
+'info_gerer_trad' => '<NEW> G&eacute;rer les liens de traduction ?',
 'info_grand_ecran' => 'Pantaia grande',
 'info_groupe_important' => 'Grupo importante',
 'info_hebergeur_desactiver_envoi_email' => 'Alg&uacute;ns proveedores desactivan o env&iacute;o autom&aacute;tico de
@@ -639,6 +663,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_la_rubrique' => 'o tema',
 'info_laisser_champs_vides' => 'deixar estes campos valeiros)',
 'info_langue_defaut' => ' Idioma por defecto:',
+'info_langue_interface' => '<NEW> Langue de l\'interface',
 'info_langue_principale' => 'Idioma principal do lugar',
 'info_langues' => 'Idiomas do lugar',
 'info_langues_proposees' => 'Idiomas propostos:',
@@ -687,9 +712,13 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_mots_cles_association' => 'As palabras chave deste grupo poden estar aociadas:',
 'info_moyenne' => 'mediana:',
 'info_multi_articles' => '<NEW> Activer le menu de langue sur les articles&nbsp;?',
-'info_multi_cet_article' => '<NEW> Cet article est en&nbsp;:',
+'info_multi_cet_article' => '<NEW> Langue de cet article&nbsp;:',
 'info_multi_cette_rubrique' => '<NEW> Cette rubrique est en&nbsp;:',
+'info_multi_herit' => '<NEW> Langue par d&eacute;faut',
+'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
+		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => '<NEW> Activer le menu de langue sur les rubriques&nbsp;?',
+'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => '<NEW> Multilinguisme',
 'info_nexen_1' => 'O teu albergador &eacute; Nexen Services.',
 'info_nexen_2' => 'A proteci&oacute;n do directorio <tt>ecrire/data/</tt> tense que facer a traverso de',
@@ -922,6 +951,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_une_rubrique_02' => '1 tema',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DO LUGAR:',
+'info_urlref' => '<NEW> Lien hypertexte&nbsp;:',
 'info_utilisation_messagerie_interne' => 'Est&aacute;s empregando a mensaxer&iacute;a interna deste lugar.',
 'info_utilisation_spip' => 'Agora podes comezar a usar o sistema de publicaci&oacute;n asistida...',
 'info_valider_lien' => 'validar esta ligaz&oacute;n',
@@ -1020,6 +1050,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'lien_forum_public' => 'Xestionar o foro p&uacute;blico deste artigo',
 'lien_icones_interface' => 'As iconas da interface son do <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'liberar',
+'lien_liberer_tous' => '<NEW> lib&eacute;rer ces articles',
 'lien_mise_a_jour_syndication' => 'Po&ntilde;er &oacute; d&iacute;a agora',
 'lien_modifer_date' => 'Modificar a data',
 'lien_nom_site' => 'NOME DO LUGAR:',
@@ -1070,7 +1101,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'login_login2' => 'Login (identificador de conexi&oacute;n &oacute; lugar):',
 'login_login_pass_incorrect' => '(Login ou contrasinal incorrectos.)',
 'login_motpasseoublie' => 'esqueciches o contrasinal?',
-'login_non_securise' => 'Atenci&oacute;n, este formul&aacute;rio non &eacute; seguro.
+'login_non_securise' => '<MODIF> Atenci&oacute;n, este formul&aacute;rio non &eacute; seguro.
 		Se non queres que o teu contrasinal poda ser interceptado
 		na rede, activa o Xavascript no teu navegador e',
 'login_nouvelle_tentative' => 'Nova tentativa',
@@ -1078,6 +1109,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'login_pass2' => 'Contrasinal:',
 'login_preferez_refuser' => '<b>Se prefires non usar as cookies</b>, tes outro m&eacute;todo de conexi&oacute;n (menos seguro) &aacute; t&uacute;a disposici&oacute;n:',
 'login_recharger' => 'recargar a p&aacute;xina',
+'login_rester_identifie' => '<NEW> Rester identifi&eacute; quelques jours',
 'login_retour_public' => 'Voltar &oacute; lugar p&uacute;blico',
 'login_retour_site' => 'Voltar &oacute; lugar p&uacute;blico',
 'login_retoursitepublic' => 'voltar &oacute; lugar p&uacute;blico',
@@ -1170,10 +1202,12 @@ Gracias pola t&uacute;a participaci&oacute;n
 'onglet_auteur' => 'A persoa',
 'onglet_contenu_site' => 'Contido do lugar',
 'onglet_evolution_visite' => 'Evoluci&oacute;n das visitas',
+'onglet_evolution_visite_mod' => '<NEW> &Eacute;volution',
 'onglet_fonctions_avances' => 'Funci&oacute;ns avanzadas',
 'onglet_informations_personnelles' => 'Informaci&oacute;ns perso&aacute;is',
 'onglet_interactivite' => 'Interactividade',
 'onglet_langue' => 'Idiomas do lugar',
+'onglet_langues' => '<NEW> Langues',
 'onglet_messagerie' => 'Mensaxer&iacute;a',
 'onglet_messages_internes' => 'Mensaxes internas',
 'onglet_messages_publics' => 'Mensaxes p&uacute;blicas',
@@ -1181,6 +1215,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'onglet_origine_visites' => 'Orixe das visitas',
 'onglet_repartition_actuelle' => 'actualmente',
 'onglet_repartition_debut' => 'dende o princ&iacute;pio',
+'onglet_repartition_lang' => '<NEW> par langues',
 'onglet_repartition_rubrique' => 'Distribuci&oacute;n por temas',
 'onglet_save_restaur_base' => 'Gardar/restaurar a base',
 'onglet_vider_cache' => 'Valeirar a cach&eacute;',
@@ -1250,7 +1285,7 @@ e reconectar co lugar.
 		que ser&aacute; almaceado no directorio <i>ecrire/data</i>.
 		Non esquezas recuperar todo o directorio <i>IMG/</i>, que &eacute; o que cont&eacute;n as imaxes
 		empregadas nos artigos e os temas.',
-'texte_admin_tech_02' => 'Atenci&oacute;n: esta copia de seguridade s&oacute; poder&aacute; ser restaurada
+'texte_admin_tech_02' => '<MODIF> Atenci&oacute;n: esta copia de seguridade s&oacute; poder&aacute; ser restaurada
 		nun lugar que te&ntilde;a instalada a mesma versi&oacute;n de SPIP. O erro de facer unha c&oacute;pia de
 		seguridade antes de po&ntilde;er &oacute; d&iacute;a o SPIP &eacute; habitual... Para m&aacute;is detalles, consulta
 		<a href="http://www.spip.net/fr_article1489.html">a documentaci&oacute;n de SPIP</a>.',
@@ -1385,6 +1420,7 @@ e reconectar co lugar.
 		para persoalizar a presentaci&oacute;n dos artigos dentro dos teus esqueletes.',
 'texte_mots_cles_dans_forum' => 'Queres permitir o emprego de palabras chave, seleccionables po.las visitas, nos foros do lugar p&uacute;blico? (Atenci&oacute;n: esta opci&oacute;n &eacute; relativamente complexa de empregar correctamente.)',
 'texte_multilinguisme' => '<NEW> Si vous souhaitez g&eacute;rer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de s&eacute;lection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.',
+'texte_multilinguisme_trad' => '<NEW> Vous pouvez &eacute;galement activer un syst&egrave;me de gestion de liens entre les diff&eacute;rentes traductions d\'un article.',
 'texte_non_compresse' => '<i>non comprimido</i> (o teu servidor non soporta esta funcionalidade)',
 'texte_non_fonction_referencement' => 'Podes preferir non usar esta funci&oacute;n autom&aacute;tica, e indicar a man os elementos concernentes a este lugar...',
 'texte_nouveau_message' => 'Nova mensaxe',
@@ -1511,6 +1547,10 @@ e reconectar co lugar.
 'titre_image_redacteur_02' => 'Redactor/a',
 'titre_image_visiteur' => 'Visitante',
 'titre_joindre_document' => 'ADXUNTAR UN DOCUMENTO',
+'titre_langue_article' => '<NEW> LANGUE DE L\'ARTICLE',
+'titre_langue_breve' => '<NEW> LANGUE DE LA BR&Egrave;VE',
+'titre_langue_rubrique' => '<NEW> LANGUE DE LA RUBRIQUE',
+'titre_langue_trad_article' => '<NEW> LANGUE ET TRADUCTIONS DE L\'ARTICLE',
 'titre_les_articles' => 'OS ARTIGOS',
 'titre_liens_entrants' => 'As ligaz&oacute;ns entrantes do d&iacute;a',
 'titre_mots_cles' => 'PALABRAS CHAVE',
@@ -1564,7 +1604,14 @@ e reconectar co lugar.
 'titre_statistiques' => 'Estat&iacute;sticas do lugar',
 'titre_suivi_petition' => 'Seguemento das petici&oacute;ns',
 'titre_syndication' => 'Afiliaci&oacute;n de lugares',
-'titre_titre_document' => 'T&iacute;tulo do documento:'
+'titre_titre_document' => 'T&iacute;tulo do documento:',
+'trad_article_inexistant' => '<NEW> Il n\'y a pas d\'article portant ce num&eacute;ro.',
+'trad_article_traduction' => '<NEW> Toutes les versions de cet article&nbsp;:',
+'trad_deja_traduit' => '<NEW> Cet article est d&eacute;j&agrave; une traduction du pr&eacute;sent article.',
+'trad_delier' => '<NEW> Ne plus lier cet article &agrave; ces traductions',
+'trad_lier' => '<NEW> Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
+'trad_new' => '<NEW> &Eacute;crire une nouvelle traduction de cet article',
+'trad_reference' => '<NEW> (article de r&eacute;f&eacute;rence)'
 
 );
 
