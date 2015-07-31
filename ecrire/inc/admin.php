@@ -29,7 +29,8 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 		spip_log("meta: $script " . join(',', $_POST));
 		ecrire_meta($script, serialize($_POST));
 		ecrire_metas();
-	} else 	admin_verifie_session($script);
+	} elseif  ($script !== 'admin_repair')
+		admin_verifie_session($script);
 
 	$base = charger_fonction($script, 'base');
 	$base($titre,$reprise);
@@ -40,27 +41,40 @@ function inc_admin_dist($script, $titre, $comment='', $retour='')
 
 // Gestion dans la meta "admin" du script d'administation demande,
 // pour eviter des executions en parallele, notamment apres Time-Out.
-// Cette meta contient le nom du script et, a un codage pres, du demandeur.
+// Cette meta contient le nom du script et, a un hachage pres, du demandeur.
 // Le code de ecrire/index.php devie toute demande d'execution d'un script
 // vers le script d'administration indique par cette meta si elle est là.
 // Au niveau de la fonction inc_admin, on controle la meta 'admin'.
-// Si la meta n'est pas la, c'est le debut on la cree 
-// Sinon, on verifie que le connecte est bien celui ayant entame 
-// l'operation d'administration, 
-// Si le connecte n'est pas le bon, on refuse la connexion.
+// Si la meta n'est pas la, 
+//	c'est le debut on la cree.
+// Sinon, si le hachage actuel est le meme que celui en base, 
+//	c'est une reprise, on continue
+// Sinon, si le hachage differe a cause du connecte,
+// 	c'est une arrivee inoppotune, on refuse sa connexion.
+// Enfin, si hachage differe pour une autre raison
+// 	c'est que l'operation se passe mal, on la stoppe
 
 // http://doc.spip.org/@admin_verifie_session
 function admin_verifie_session($script) {
 
 	include_spip('base/abstract_sql');
-	$signal = $script . ' ' . fichier_admin($action);
+	$pref = sprintf("_%d_",$GLOBALS['auteur_session']['id_auteur']) .
+	$signal = fichier_admin($script, "$script$pref");
 	$row = sql_fetsel('valeur', 'spip_meta', "nom='admin'");
 	if (!$row) {
 		ecrire_meta('admin', $signal,'non');
 		ecrire_metas();
-	} elseif ($row['valeur'] != $signal)
-		die(_T('info_travaux_texte'));
-	else spip_log("reprise de $script");
+	} else {
+		if (($s = $row['valeur']) != $signal) {
+			if (intval(susbtr($s, strpos($s,'_')+1))<>
+			    $GLOBALS['auteur_session']['id_auteur']) {
+			  include_spip('inc/minipres');
+			  echo minipres(_T('info_travaux_texte'));
+			  exit;
+			}
+		}
+	}
+	spip_log("admin $pref" . ($row ? " (reprise)" : ''));
 }
 
 // http://doc.spip.org/@dir_admin
@@ -74,9 +88,10 @@ function dir_admin()
 }
 
 // http://doc.spip.org/@fichier_admin
-function fichier_admin($action) {
+function fichier_admin($action, $pref='admin_') {
 
-	return "admin_".substr(md5($action.(time() & ~2047).$GLOBALS['auteur_session']['login']), 0, 10);
+	return $pref . 
+	  substr(md5($action.(time() & ~2047).$GLOBALS['auteur_session']['login']), 0, 10);
 }
 
 // demande la creation d'un repertoire et sort

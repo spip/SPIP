@@ -14,14 +14,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@base_admin_repair_dist
 function base_admin_repair_dist() {
-	$res1= spip_query("SHOW TABLES");
 
+  $connexion = $GLOBALS['connexions'][0];
+  $prefixe = $connexion['prefixe'];
+  $res1= spip_query("SHOW TABLES LIKE " . _q("$prefixe%"));
 	$res = "";
 	if ($res1) { while ($r = sql_fetch($res1)) {
 		$tab = array_shift($r);
 
 		$res .= "<p><b>$tab</b> ";
-
+		spip_log("Repare $tab");
 		$result_repair = spip_query("REPAIR TABLE ".$tab);
 		if (!$result_repair) return false;
 
@@ -44,14 +46,14 @@ function base_admin_repair_dist() {
 			$res .= " "._T('texte_table_ok')."<br />\n";
 	  }
 	}
-
-	include_spip('inc/rubriques');
-	calculer_rubriques();
-
 	if (!$res) {
 		$res = "<br /><br /><span style='color: red; font-weight: bold;'><tt>"._T('avis_erreur_mysql').' '.sql_errno().': '.sql_error() ."</tt></span><br /><br /><br />\n";
+	} else {
+		include_spip('inc/rubriques');
+		calculer_rubriques();
 	}
 	include_spip('inc/minipres');
-	echo minipres(_T('texte_tentative_recuperation'), $res);
+	echo minipres(_T('texte_tentative_recuperation'),
+			$res . generer_form_ecrire('accueil', '','',_T('public:accueil_site')));
 }
 ?>
