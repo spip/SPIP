@@ -205,7 +205,7 @@ function deplacer_fichier_upload($source, $dest, $move=false) {
 // et true si erreur = pas de fichier
 // pour les autres erreurs affiche le message d'erreur et meurt
 // http://doc.spip.org/@check_upload_error
-function check_upload_error($error, $msg='') {
+function check_upload_error($error, $msg='', $return=false) {
 	global $spip_lang_right;
 
 	if (!$error) return false;
@@ -239,8 +239,10 @@ function check_upload_error($error, $msg='') {
 	}
 
 	spip_log ("erreur upload $error");
+	if ($return)
+		return $msg;
 
-  	if(_request("iframe")=="iframe") {
+  if(_request("iframe")=="iframe") {
 	  echo "<div class='upload_answer upload_error'>$msg</div>";
 	  exit;
 	}
