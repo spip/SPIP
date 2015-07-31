@@ -866,8 +866,8 @@ function http_calendrier_avec_heure($evenement, $amj)
 	
 	$desc = propre($evenement['DESCRIPTION']);
 	$sum = $evenement['SUMMARY'];
-	if (!$sum) $sum = $desc;
 	$sum = ereg_replace(' +','&nbsp;', typo($sum));
+	if (!$sum) $sum = $desc;
 	if ($lieu = $evenement['LOCATION'])
 	  $sum .= '<br />' . $lieu;
 	if ($perso = $evenement['ATTENDEE'])

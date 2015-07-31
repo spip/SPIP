@@ -79,6 +79,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
 	$term_fonction_dest = $terminaison_dest;
 	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
+	
 
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = $nom_fichier;
@@ -115,7 +116,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	
 	$ret["fichier"] = $fichier;
 	$ret["fonction_imagecreatefrom"] = "imagecreatefrom".$term_fonction;
-	$ret["fonction_image"] = "image".$term_fonction_dest;
+	$ret["fonction_image"] = "image_image".$term_fonction_dest;
 	$ret["fichier_dest"] = $fichier_dest;
 	$ret["format_source"] = $terminaison;
 	$ret["format_dest"] = $terminaison_dest;
@@ -127,6 +128,30 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$ret["tag"] = $img;
 	return $ret;
 }
+
+// http://doc.spip.org/@image_imagepng
+function image_imagepng($img,$fichier) {
+	$tmp = $fichier."tmp";
+	$ret = imagepng($img,$tmp);
+	rename($tmp, $fichier);
+	return $ret;
+}
+
+// http://doc.spip.org/@image_imagegif
+function image_imagegif($img,$fichier) {
+	$tmp = $fichier."tmp";
+	$ret = imagegif($img,$tmp);
+	rename($tmp, $fichier);
+	return $ret;
+}
+// http://doc.spip.org/@image_imagejpeg
+function image_imagejpeg($img,$fichier) {
+	$tmp = $fichier."tmp";
+	$ret = imagejpeg($img,$tmp);
+	rename($tmp, $fichier);
+	return $ret;
+}
+
 // Transforme une image a palette indexee (256 couleurs max) en "vraies" couleurs RGB
 // http://doc.spip.org/@imagepalettetotruecolor
  function imagepalettetotruecolor(&$img) {
@@ -1543,7 +1568,11 @@ function image_imagick () {
 			$arr[0] = $handle;
 			for ($i=2; $i < count($tous); $i++) $arr[] = $tous[$i];
 			call_user_func_array($fonc, $arr);
-			imagick_writeimage( $handle, $dest);
+			// Creer image dans fichier temporaire, puis renommer vers "bon" fichier
+			// de facon a eviter time_out pendant creation de l'image definitive
+			$tmp = ereg_replace("\.png$", "-tmp.png", $dest);
+			imagick_writeimage( $handle, $tmp);
+			rename($tmp, $dest);
 		} 
 	}
 	list ($src_y,$src_x) = taille_image($dest);

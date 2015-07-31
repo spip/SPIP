@@ -75,15 +75,17 @@ function analyser_dtd($loc, $avail, &$dtc)
 	}
 
 	if (!$dtd) {
-		spip_log("DTD $loc inaccessible");
+		spip_log("DTD '$loc' inaccessible");
 		return false;
-	}
+	} else 	spip_log("analyse de la DTD $loc ");
 
 	while ($dtd) {
 		if ($dtd[0] != '<')
 			$r = analyser_dtd_lexeme($dtd, $dtc, $loc);
 		elseif ($dtd[1] != '!')
 			$r = analyser_dtd_pi($dtd, $dtc, $loc);
+		elseif ($dtd[2] == '[')
+			$r = analyser_dtd_data($dtd, $dtc, $loc);
 		else switch ($dtd[3]) {
 	  case '%' : $r = analyser_dtd_data($dtd, $dtc, $loc); break;
 	  case 'T' : $r = analyser_dtd_attlist($dtd, $dtc, $loc);break;
@@ -92,15 +94,13 @@ function analyser_dtd($loc, $avail, &$dtc)
 	  case 'O' : $r = analyser_dtd_notation($dtd, $dtc, $loc);break;
 	  case '-' : $r = analyser_dtd_comment($dtd, $dtc, $loc); break;
 	  default: $r = -1;
-	  }
-
+		  }
 		if (!is_string($r)) {
 			spip_log("erreur $r dans la DTD  " . substr($dtd,0,80) . ".....");
 			return false;
 		}
 		$dtd = $r;
- 
-	}
+ 	}
 	return true;
 }
 
@@ -141,8 +141,8 @@ function analyser_dtd_lexeme($dtd, &$dtc, $grammaire){
 
 // http://doc.spip.org/@analyser_dtd_data
 function analyser_dtd_data($dtd, &$dtc, $grammaire){
-	if (!preg_match('/^<!\[%([^;]*);\s*\[\s*(.*?)\]\]>\s*(.*)$/s',$dtd, $m))
-		return -6;
+	if (!preg_match('/^<!\[\s*%\s*([^;]*);\s*\[\s*(.*?)\]\]>\s*(.*)$/s',$dtd, $m))
+		return -11;
 	if ($dtc->macros[$m[1]] == 'INCLUDE')
 		$retour = $m[2] . $m[3];
 	else $retour = $m[3]; 
@@ -163,7 +163,7 @@ function analyser_dtd_entity($dtd, &$dtc, $grammaire)
 	if (!preg_match(_REGEXP_ENTITY_DECL, $dtd, $m))
 		return -2;
 
-	list($t, $term, $nom, $type, $val, $q, $alt, $dtd) = $m;
+	list($t, $term, $nom, $type, $val, $q, $c, $alt, $dtd) = $m;
 
 	if (isset($dtc->macros[$nom]) AND $dtc->macros[$nom])
 		return $dtd;
