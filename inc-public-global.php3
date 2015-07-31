@@ -45,6 +45,14 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		$lastmodified = max($lastmodified, @filemtime($chemin_cache));
 		# spip_log ("cache $chemin_cache $lasmodified");
 
+		// Analyser la carte d'identite du squelette
+		if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match)) {
+			$page['texte'] = substr($page['texte'], strlen($match[0]));
+			if (is_array($tablo = unserialize($match[1])))
+				foreach ($tablo as $var=>$val)
+					$page[$var] = $val;
+		}
+
 		// Le fichier compagnon NEW existe => ce cache est utilise
 		// pour la premiere fois : on change alors d'invalideur 't'
 		// pour le rendre plus perenne
@@ -65,13 +73,6 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 			if ($GLOBALS['db_ok'])
 				@unlink($chemin_cache.'.NEW');
 		}
-	}
-
-	// Analyser la carte d'identite du squelette
-	if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match)) {
-		$page['texte'] = substr($page['texte'], strlen($match[0]));
-		foreach (unserialize($match[1]) as $var=>$val)
-			$page[$var] = $val;
 	}
 
 	return $page;
