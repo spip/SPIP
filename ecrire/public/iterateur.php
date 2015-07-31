@@ -42,13 +42,12 @@ class IterFactory{
 			$class = "Iterateur".$iterateur;
 			if (!include_spip("iterateur/" . strtolower($iterateur))
 			  OR !class_exists($class)) {
-
 				die("Iterateur $iterateur non trouv&#233;");
 				// si l'iterateur n'existe pas, on se rabat sur le generique
-				$class = "IterateurSPIP";
-				include_spip("iterateur/iterateur");
+				$iter = new Iterator();
+			} else {
+				$iter = new $class($command, $info);
 			}
-			$iter = new $class($command, $info);
 		}
 		return new IterDecorator($iter, $command, $info);
 	}
@@ -64,8 +63,6 @@ class IterDecorator implements Iterator {
 		$this->info = $info;
 		$this->pos = 0;
 		$this->total = $this->count();
-		spip_log($this->iter,'iter');
-		spip_log($this->total,'iter');
 	}
  
 	public function next (){
