@@ -744,7 +744,8 @@ function agenda_affiche($i)
   $type = array_shift($args);
   $self = new Link();
   $self = $self->getUrl();
-  if (!$nb) return http_calendrier_init('', $type, '', '', $self, $sinon);
+  if (!$nb) 
+    return http_calendrier_init('', $type, '', '', $self, "<tr><td>$sinon</td></tr>");
   $agenda = agenda_memo(0);
   $evt = array();
   foreach (($args ? $args : array_keys($agenda)) as $k) {  
