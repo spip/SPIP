@@ -137,7 +137,7 @@ function mozWrap(txtarea, open, close)
 		selEnd = selLength;
 	
 	// Raccourcir la selection par double-clic si dernier caractere est espace	
-	if ((txtarea.value).substring(selEnd-1,selEnd) == ' ') selEnd = selEnd-1;
+	if (selEnd - selStart > 0 && (txtarea.value).substring(selEnd-1,selEnd) == ' ') selEnd = selEnd-1;
 	
 	var s1 = (txtarea.value).substring(0,selStart);
 	var s2 = (txtarea.value).substring(selStart, selEnd)
