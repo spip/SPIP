@@ -1184,7 +1184,7 @@ function critere_IN_cas($idb, &$boucles, $crit2, $arg, $op, $val, $col){
 	$boucles[$idb]->in .= $x;
 
 	// inserer le tri par defaut selon les ordres du IN ... 
-	// avec une ecriture de type FIELD qui degrade les performances (du meme ordre qu'un rexgexp)
+	// avec une ecriture de type FIELD qui degrade les performances (du meme ordre qu'un regexp)
 	// et que l'on limite donc strictement aux cas necessaires :
 	// si ce n'est pas un !IN, et si il n'y a pas d'autre order dans la boucle
 	if (!$crit2){
