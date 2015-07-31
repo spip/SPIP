@@ -1093,7 +1093,7 @@ function spip_initialisation($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 
 	// Lire les meta cachees et initier le noyau (espace public uniquement)
 	$GLOBALS['noyau'] = array();
-	if (lire_fichier(_FILE_META, $meta)) {
+	if (lire_fichier_securise(_FILE_META, $meta)) {
 		$GLOBALS['meta'] = @unserialize($meta);
 		if (_DIR_RESTREINT
 		AND isset($GLOBALS['meta']['noyau'])
