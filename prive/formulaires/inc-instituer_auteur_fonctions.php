@@ -33,17 +33,20 @@ function choisir_rubriques_admin_restreint($id_auteur,$label='', $sel_css="#list
 jQuery(function(){
 	jQuery('#id_parent')
 	.bind('change', function(){
-		var id_parent = this.value;
-		var titre = jQuery('#titreparent').attr('value') || this.options[this.selectedIndex].text;
-		titre=titre.replace(/^\\s+/,'');
-		// Ajouter la rubrique selectionnee au formulaire,
-		// sous la forme d'un input name='rubriques[]'
-		var el = '<input type=\'checkbox\' class=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
-		el = el + '$img_remove';
-		if (!jQuery('$sel_css input[value='+id_parent+']').length) {
-			jQuery('$sel_css').append('<li class=\"rubrique\">'+el+'</li>');
+		var id_parent = parseInt(this.value);
+		if (id_parent){
+			var titre = jQuery('#titreparent').attr('value') || this.options[this.selectedIndex].text;
+			titre=titre.replace(/^\\s+/,'');
+			// Ajouter la rubrique selectionnee au formulaire,
+			// sous la forme d'un input name='rubriques[]'
+			var el = '<input type=\'checkbox\' class=\'checkbox\' checked=\'checked\' name=\'restreintes[]\' value=\''+id_parent+'\' /> ' + '<label><a href=\'?exec=rubrique&amp;id_rubrique='+id_parent+'\' target=\'_blank\'>'+titre+'</a></label>';
+			el = el + '$img_remove';
+			if (!jQuery('$sel_css input[value='+id_parent+']').length) {
+				jQuery('$sel_css').append('<li class=\"rubrique\">'+el+'</li>');
+			}
 		}
-	});
+	})
+	.attr('name','noname');
 });
 /*]]>*/</script>";
 
