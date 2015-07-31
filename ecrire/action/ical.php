@@ -101,7 +101,7 @@ function action_ical_dist()
 // http://doc.spip.org/@spip_ical_rendez_vous
 function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 {
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=sql_select("messages.*", "spip_messages AS messages, spip_auteurs_messages AS lien", "((lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' ", " messages.id_message ", " messages.date_heure");
 	while($row=sql_fetch($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
@@ -152,7 +152,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 // http://doc.spip.org/@spip_ical_taches
 function spip_ical_taches($id_utilisateur, $nom_site)
 {
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=sql_select("messages.*", "spip_messages AS messages, spip_auteurs_messages AS lien", "lien.id_auteur=$id_utilisateur AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' ", " messages.id_message ", " messages.date_heure");
 	while($row=sql_fetch($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
