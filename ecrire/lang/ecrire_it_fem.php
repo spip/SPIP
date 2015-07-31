@@ -151,7 +151,7 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'ical_info2' => 'Per ulteriori informazioni su tutte queste tecniche, non esitate a consultare <a href="@spipnet@">la documentazione di SPIP</a>.',
 	'ical_info_calendrier' => 'Sono disponibili due calendari. Il primo è una mappa del sito che annuncia tutti gli articoli pubblicati. Il secondo contiene gli annunci editoriali e gli ultimi messaggi privati: è un’area riservata, mediante identificativo personale, che è possibile modificare in qualsiasi momento rinnovando la password personale.',
 	'ical_methode_http' => 'Download',
-	'ical_methode_webcal' => 'Sincronizzazione (webcal://)', # MODIF
+	'ical_methode_webcal' => 'Sincronizzazione (webcal://)',
 	'ical_texte_js' => 'Una linea in javascript permette di visualizzare, con molta semplicità e su qualsiasi tipo di sito, gli articoli recenti pubblicati su questo sito.',
 	'ical_texte_prive' => 'Questo calendario, ad uso strettamente privato, dà informazioni sull’attività redazionale privata di questo sito (impegni e appuntamenti personali, articoli e brevi proposti...).',
 	'ical_texte_public' => 'Questo calendario permette di monitorare l’attività pubblica del sito (articoli e brevi pubblicati).',
@@ -185,7 +185,7 @@ Se non conosci queste informazioni, richiedile all’amministratrice del sistema
 	'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetterà
 di passare facilmente dal sito pubblico all’interfaccia privata.',
 	'info_admin_gere_rubriques' => 'Questa amministratrice gestisce le seguenti rubriche:',
-	'info_admin_gere_toutes_rubriques' => 'Questa amministratrice gestisce <b>tutte le rubriche</b>.', # MODIF
+	'info_admin_gere_toutes_rubriques' => 'Questa amministratrice gestisce <b>tutte le rubriche</b>.',
 	'info_administrateur' => 'Amministratrice',
 	'info_administrateur_1' => 'Amministratrice',
 	'info_administrateur_2' => 'del sito (<i>da utilizzare con prudenza</i>)',
@@ -235,12 +235,12 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_conflit_edition_votre_version' => 'La tua versione:',
 	'info_connexion_base' => 'Prova di connessione al database',
 	'info_connexion_base_donnee' => 'Connessione al proprio database',
-	'info_connexion_ldap_ok' => 'La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>', # MODIF
+	'info_connexion_ldap_ok' => 'La connessione LDAP è riuscita.</b><p> È possibile passare alla fase successiva.</p>',
 	'info_connexion_mysql' => 'La connessione a SQL',
 	'info_connexion_ok' => 'La connessione è riuscita.',
 	'info_contact' => 'Contatti',
 	'info_contenu_articles' => 'Contentuto degli articoli',
-	'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)', # MODIF
+	'info_creation_paragraphe' => 'Per creare dei paragrafi indipendenti, lasciare delle righe vuote.', # RELIRE
 	'info_creation_rubrique' => 'Prima di poter scrivere degli articoli, <br />devi creare almeno una rubrica.<br />',
 	'info_creation_tables' => 'Creazione delle tabelle nel database',
 	'info_creer_base' => '<b>Creare</b> un nuovo database:',
@@ -254,7 +254,7 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 	'info_ecrire_article' => 'Prima di poter scrivere degli articoli, devi creare almeno una rubrica.',
 	'info_email_envoi' => 'Indirizzo email del mittente (opzionale)',
 	'info_email_envoi_txt' => 'Indicare qui l’indirizzo da utilizzare per l’invio degli email (come impostazione predefinita l’indirizzo del destinatario sarà utilizzato come indirizzo del mittente):',
-	'info_email_webmestre' => 'Indirizzo email della webmistress (opzionale)', # MODIF
+	'info_email_webmestre' => 'Indirizzo email della webmistress', # RELIRE
 	'info_envoi_email_automatique' => 'Invio di email automatico',
 	'info_envoyer_maintenant' => 'Invia adesso',
 	'info_etape_suivante' => 'Passare alla fase successiva',
@@ -267,12 +267,12 @@ per esempio ad una mailing-list delle redattrici, l’annuncio delle domande di
 pubblicazione e di convalida degli articoli.',
 	'info_fichiers_authent' => 'File d’autenticazione ".htpasswd"',
 	'info_forums_abo_invites' => 'Il sito comprende dei forum accessibili solo a utenti registrate. Nel sito pubblico è quindi presente una pagina d’iscrizione.',
-	'info_gauche_admin_tech' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l’accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie a un accesso FTP.</p>', # MODIF
-	'info_gauche_admin_vider' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l’accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una specifica procedura di identificazione, eseguibile grazie ad un accesso FTP.</p>', # MODIF
+	'info_gauche_admin_tech' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l’accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una procedura di identificazione specifica, tramite accesso FTP.</p>', # RELIRE
+	'info_gauche_admin_vider' => '<b>Questa pagina è accessibile solo alle responsabili del sito.</b><p> Permette l’accesso alle diverse funzioni di manutenzione tecnica. Alcune di esse richiedono una procedura di identificazione specifica, tramite accesso FTP.</p>', # RELIRE
 	'info_gauche_auteurs' => 'Elenco di tutte le autrici del sito.
 Il loro status è indicato dal colore dell’icona (redattrice = giallo; amministratrice = verde).',
 	'info_gauche_auteurs_exterieurs' => 'Le autrici esterne, senza accesso al sito, sono indicate da un’icona blu;
-le autrici eliminate, invece, da un cestino.', # MODIF
+                le autrici eliminate sono indicate da un’icona grigia.', # RELIRE
 	'info_gauche_messagerie' => 'Il sistema di messaggistica permette di scambiare dei messaggi tra redattrici, di conservare dei memo (promemoria ad uso personale) o di pubblicare degli annunci nel pannello di controllo dell’area riservata (se sei amministratrice).',
 	'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco è valido però solo per oggi essendo azzerato ogni 24 ore.',
 	'info_gauche_visiteurs_enregistres' => 'Trovi qui i visitatori registrati allo spazio
@@ -283,7 +283,7 @@ dai loro server. In questo caso, le funzionalità di SPIP di seguito riportate n
 	'info_hier' => 'ieri:',
 	'info_identification_publique' => 'La tua identità pubblica...',
 	'info_image_process' => 'Seleziona il metodo migliore per la creazione delle anteprime cliccando sull’immagine corrispondente.',
-	'info_image_process2' => '<b>N.B.</b> <i>Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l’uso di alcune funzioni grafiche. Se si desidera utilizzarle, rivolgersi alla responsabile tecnica chiedendo di installare le estensioni "GD" o "Imagick".</i>', # MODIF
+	'info_image_process2' => 'Se non appare alcuna immagine, ciò significa che la configurazione del server non permette l’uso di tali funzioni. Se si desidera utilizzarle, contattate la responsabile tecnica chiedendo delle estensioni "GD" o "Imagick".', # RELIRE
 	'info_images_auto' => 'Immagini elaborate automaticamente',
 	'info_informations_personnelles' => 'Informazioni personali',
 	'info_inscription_automatique' => 'Iscrizione automatica di nuove redattrici',
@@ -331,7 +331,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 	'info_nouvel_article' => 'Nuovo articolo',
 	'info_nouvelle_traduction' => 'Nuova traduzione:',
 	'info_numero_article' => 'ARTICOLO NUMERO:',
-	'info_obligatoire_02' => '[obbligatorio]', # MODIF
+	'info_obligatoire_02' => '(obbligatorio)',
 	'info_option_accepter_visiteurs' => 'Accetta l’iscrizione di utenti del sito pubblico',
 	'info_option_ne_pas_accepter_visiteurs' => 'Rifiuta l’iscrizione di utenti',
 	'info_options_avancees' => 'OPZIONE AVANZATA',
@@ -360,14 +360,15 @@ il database alla nuova versione di SPIP.',
 	'info_publies' => 'I tuoi articoli pubblicati',
 	'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all’area riservata. Attivare la seguente funzionalità:',
 	'info_question_inscription_nouveaux_redacteurs' => 'Accettate le iscrizioni di nuove redattrici
-direttamente  dal sito pubblico? In questo caso, chi visita il sito potrà iscriversi
-grazie ad un modulo automatizzato e accedere all’area riservata per proporre
-i propri articoli. <blockquote><i>Durante la fase d’iscrizione,
-le utenti ricevono automaticamente un email
+direttamente dal sito pubblico? In questo caso, chi visita il sito potrà iscriversi
+grazie ad un modulo automatizzato e potrà accedere all’area riservata per proporre i propri articoli.
+<div class="notice">Durante la fase d’iscrizione,
+le utenti ricevono automaticamente un’email
 che fornisce loro i codici d’accesso al sito privato. Alcuni
-hoster disattivano l’invio di email dai propri server: in questo caso, l’iscrizione automatica è
-impossibile.', # MODIF
-	'info_qui_edite' => '@nom_auteur_modif@ a travaillé sur ce contenu il y a @date_diff@ minutes', # MODIF
+host disattivano l’invio di email dai
+propri server: in questo caso, l’iscrizione automatica è
+impossibile.', # RELIRE
+	'info_qui_edite' => '@nom_auteur_modif@ ha lavorato su questo contenuto @date_diff@ minuti fa',
 	'info_racine_site' => 'Root del sito',
 	'info_recharger_page' => 'Aggiorna questa pagina fra qualche istante.',
 	'info_recherche_auteur_zero' => 'Nessun risultato per "@cherche_auteur@".',
@@ -393,7 +394,7 @@ impossibile.', # MODIF
 	'info_site_2' => 'sito: ',
 	'info_site_min' => 'sito',
 	'info_site_reference_2' => 'Sito repertoriato',
-	'info_site_web' => 'SITO WEB:', # MODIF
+	'info_site_web' => 'Sito Web :',
 	'info_sites' => 'siti',
 	'info_sites_lies_mot' => 'I siti in repertorio legati a questa parola chiave',
 	'info_sites_proxy' => 'Utilizza un proxy',
@@ -417,7 +418,7 @@ impossibile.', # MODIF
 	'info_texte' => 'Testo',
 	'info_texte_explicatif' => 'Testo esplicativo',
 	'info_texte_long' => '(il testo è lungo: è quindi visualizzato in più sezioni che verranno riunificate dopo la convalida)',
-	'info_texte_message' => 'Testo del messaggio:', # MODIF
+	'info_texte_message' => 'Testo del messaggio',
 	'info_texte_message_02' => 'Testo del messaggio',
 	'info_titre' => 'Titolo:',
 	'info_total' => 'totale: ',
@@ -462,8 +463,8 @@ Le traduzioni sono associate all’originale,
 	'install_serveur_hebergeur' => 'Server del database attribuito dall’hoster',
 	'install_table_prefix_hebergeur' => 'Prefisso della tabella attribuito dal provider:',
 	'install_tables_base' => 'Tabelle del database',
-	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso), <b>PostgreSQL</b> e <b>SQLite</b>.', # MODIF
-	'install_types_db_connus_avertissement' => 'Attenzione: numerosi plug-in funziano solamente con MySQL', # MODIF
+	'install_types_db_connus' => 'SPIP può utilizzare <b>MySQL</b> (il più diffuso) e <b>SQLite</b>.',
+	'install_types_db_connus_avertissement' => 'Il supporto <b>PostgreSQL</b> viene proposto a titolo sperimentale', # RELIRE
 	'intem_redacteur' => 'redattrice',
 	'intitule_licence' => 'Licenza',
 	'item_accepter_inscriptions' => 'Accetta le iscrizioni',
@@ -513,12 +514,12 @@ Le traduzioni sono associate all’originale,
 	'lien_trier_nombre_articles' => 'Ordina per numero di articoli',
 	'lien_trier_statut' => 'Ordina per status',
 	'lien_voir_en_ligne' => 'VEDI ON LINE:',
-	'logo_article' => 'LOGO DELL’ARTICOLO', # MODIF
-	'logo_auteur' => 'LOGO DELL’AUTORE', # MODIF
-	'logo_rubrique' => 'LOGO DELLA RUBRICA', # MODIF
-	'logo_site' => 'LOGO DI QUESTO SITO ', # MODIF
-	'logo_standard_rubrique' => 'LOGO STANDARD DELLE RUBRICHE', # MODIF
-	'logo_survol' => 'LOGO ROLLOVER', # MODIF
+	'logo_article' => 'Logo dell’articolo',
+	'logo_auteur' => 'Logo dell’autrice',
+	'logo_rubrique' => 'Logo della rubrica',
+	'logo_site' => 'Logo di questo sito',
+	'logo_standard_rubrique' => 'Logo standard delle rubriche',
+	'logo_survol' => 'Logo rollover', # RELIRE
 
 	// M
 	'menu_aide_installation_choix_base' => 'Scegliere il database',
@@ -590,17 +591,17 @@ Le traduzioni sono associate all’originale,
 
 	// R
 	'repertoire_plugins' => 'Cartella:',
-	'required' => '[Obbligatorio]', # MODIF
+	'required' => '(obbligatorio)',
 
 	// S
 	'sans_heure' => 'ora mancante',
-	'statut_admin_restreint' => '(ammin parziale)', # MODIF
+	'statut_admin_restreint' => 'admin limitato', # RELIRE
 
 	// T
 	'taille_cache_image' => 'Le immagini elaborate automaticamente da SPIP (icone dei documenti, titoli in formato grafico, funzioni matematiche in formato TeX...) occupano nella cartella @dir@ in tutto @taille@.',
 	'taille_cache_infinie' => 'Questo sito non prevede limiti alle dimensioni della cartella della cache.',
 	'taille_cache_maxi' => 'SPIP tenta di limitare le dimensioni della cartella della cache di questo sito a circa <b>@octets@</b> di dati.',
-	'taille_cache_octets' => 'La cartella della cache occupa attualmente @octets@ su disco.', # MODIF
+	'taille_cache_octets' => 'Attualmente la cache è di circa @octets@.', # RELIRE
 	'taille_cache_vide' => 'La cache è vuota.',
 	'taille_repertoire_cache' => 'Dimensioni della cartella di cache',
 	'text_article_propose_publication' => 'Articolo proposto per la pubblicazione. ',
@@ -637,18 +638,16 @@ Serviti dell’elenco qui sotto per indicare quali elementi rendere disponibili.
 	'texte_descriptif_rapide' => 'Descrizione rapida',
 	'texte_effacer_base' => 'Cancella il database SPIP',
 	'texte_effacer_statistiques' => 'Cancellare le statistiche',
-	'texte_en_cours_validation' => 'Gli articoli e le brevi elencati qui sotto sono proposti per la pubblicazione. ', # MODIF
+	'texte_en_cours_validation' => 'I contenuti qui di seguito sono in attesa di validazione. ', # RELIRE
 	'texte_enrichir_mise_a_jour' => 'Puoi arricchire la formattazione del testo utilizzando le «scorciatoie tipografiche»',
-	'texte_fichier_authent' => '<b>SPIP deve creare i file speciali <tt>.htpasswd</tt>
-e <tt>.htpasswd-admin</tt> nella cartella @dossier@?</b><p>
- Questi file possono servire a limitare l’accesso alle autrici
-e alle amministratrici in particolari aree del sito
-(per esempio, per un programma esterno di statistiche).</p><p>
-Se ciò non è necessario, lasciare quest’opzione
-al suo valore predefinito (nessuna creazione 
-di file).</p>', # MODIF
+	'texte_fichier_authent' => '<b>SPIP deve creare i file speciali
+<tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> nella cartella @dossier@ ?</b>
+<p>Questi file possono servire a limitare l’accesso alle autrici
+e alle amministratrici in particolari aree del vostro sito (per esempio, per un programma esterno di statistiche).</p>
+<p>Se ciò non è necessario, lasciare quest’opzione al suo valore predefinito (nessuna creazione 
+di file).</p>', # RELIRE
 	'texte_informations_personnelles_1' => 'Il sistema creerà un tuo accesso personalizzato al sito.',
-	'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ', # MODIF
+	'texte_informations_personnelles_2' => '(Nota : trattandosi di una reinstallazione, se il tuo accesso funziona ancora potete ', # RELIRE
 	'texte_introductif_article' => 'Testo introduttivo dell’articolo',
 	'texte_jeu_caractere' => 'Si consiglia di utilizzare sul proprio sito l’alfabeto universale (<tt>utf-8</tt>): esso permette di visualizzare i testi in tutte le lingue e non pone problemi di compatibilità con i browser moderni.',
 	'texte_jeu_caractere_3' => 'Il tuo sito usa attualmente il set di caratteri:',
@@ -660,11 +659,11 @@ Utilizza questo modulo con cognizione di causa...',
 	'texte_mise_a_niveau_base_1' => 'Hai aggiornato i file SPIP.
 Adesso è necessario aggiornare il database.',
 	'texte_modifier_article' => 'Modifica l’articolo:',
-	'texte_multilinguisme' => 'Se desideri gestire gli articoli in diverse lingue, con un sistema di navigazione complesso, è possibile aggiungere un menu di selezione della lingua negli articoli e/o nelle rubriche, in funzione della struttura del sito.', # MODIF
-	'texte_multilinguisme_trad' => 'È anche possibile attivare un sistema di gestione dei link fra le diverse traduzioni di un articolo.', # MODIF
+	'texte_multilinguisme' => 'Se desideri gestire gli articoli in diverse lingue, con un sistema di navigazione complesso, è possibile aggiungere un menu di selezione della lingua negli articoli e/o nelle rubriche, in funzione della struttura del sito.', # RELIRE
+	'texte_multilinguisme_trad' => 'È anche possibile attivare un sistema di gestione di link fra le diverse traduzioni relative ad alcuni elementi.', # RELIRE
 	'texte_non_compresse' => '<i>non compresso</i> (il tuo server non supporta questa funzionalità)',
 	'texte_nouvelle_version_spip_1' => 'Hai installato una nuova versione di SPIP.',
-	'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento più radicale del solito. Se sei la webmistress del sito, cancella il file @connect@ e riprendi l’installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>', # MODIF
+	'texte_nouvelle_version_spip_2' => 'Questa nuova versione necessita un aggiornamento più radicale del solito. Se sei la webmistress del sito, cancella il file @connect@ e riprendi l’installazione al fine di aggiornare i parametri di connessione al database.<p> (NB: se hai dimenticato i parametri di connessione, rileggi il file @connect@ prima di cancellarlo...)</p>', # RELIRE
 	'texte_operation_echec' => 'Torna alla pagina precedente, seleziona un altro database o creane uno nuovo. Verifica le informazioni fornite dal tuo hoster.',
 	'texte_plus_trois_car' => 'più di tre caratteri',
 	'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
@@ -681,12 +680,15 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante «r
 	'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
 	'texte_requetes_echouent' => '<b>Quando alcune query SQL falliscono
 ripetutamente e senza un chiaro motivo, è possibile
-che sia per colpa del database stesso.</b><p>
-SQL dispone di una funzione di ripristino delle tabelle
-danneggiate inavvertitamente. È possibile tentare il ripristino;
-in caso di errore, conservare una copia del messaggio visualizzato,
-contenente forse delle informazioni preziose...</p><p>
-Se il problema persiste, contattare la webmistress.</p>', # MODIF
+che sia per colpa del database
+stesso.</b><p>
+Il vostro server SQL dispone di una funzione di ripristino delle tabelle
+danneggiate
+inavvertitamente. È possibile tentare il ripristino; in
+caso di errore, conservate una copia del messaggio visualizzato, contenente,
+forse, delle informazioni preziose...</p><p>
+Se il problema persiste, contattate la vostra
+webmistress.</p>', # RELIRE
 	'texte_selection_langue_principale' => 'Puoi selezionare qui sotto la «lingua predefinita» del sito. Questa scelta non obbliga - fortunatamente! - a scrivere gli articoli nella stessa lingua, ma permette di determinare:
 <ul><li> il formato di default delle date sul sito pubblico;</li>
 <li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo;</li>
@@ -731,8 +733,8 @@ per evitare di generare messaggi d’avvertimento intempestivi.',
 	'titre_conflit_edition' => 'Conflitto all’atto dell’edizione',
 	'titre_connexion_ldap' => 'Opzioni: <b>La connessione LDAP</b>',
 	'titre_groupe_mots' => 'GRUPPO DI PAROLE CHIAVE:',
-	'titre_langue_article' => 'LINGUA DELL’ARTICOLO', # MODIF
-	'titre_langue_rubrique' => 'LINGUA DELLA RUBRICA', # MODIF
+	'titre_langue_article' => 'Lingua dell’articolo',
+	'titre_langue_rubrique' => 'Lingua della rubrica',
 	'titre_langue_trad_article' => 'LINGUA E TRADUZIONI DELL’ARTICOLO',
 	'titre_les_articles' => 'GLI ARTICOLI',
 	'titre_messagerie_agenda' => 'Messagistica e agenda',
@@ -753,9 +755,9 @@ per evitare di generare messaggi d’avvertimento intempestivi.',
 	'titre_suivi_petition' => 'Monitoraggio delle petizioni',
 	'tls_ldap' => 'Transport Layer Security:',
 	'trad_article_traduction' => 'Tutte le versioni di questo articolo:',
-	'trad_delier' => 'Non collegare più questo articolo alle sue traduzioni', # MODIF
+	'trad_delier' => 'Non collegare più a queste traduzioni', # RELIRE
 	'trad_lier' => 'Questo articolo è una traduzione dell’articolo numero:',
-	'trad_new' => 'Scrivere una nuova traduzione dell’articolo', # MODIF
+	'trad_new' => 'Scrivere una nuova traduzione',
 
 	// U
 	'utf8_convert_erreur_orig' => 'Errore: il set di caratteri @charset@ non è supportato.',
