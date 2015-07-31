@@ -23,6 +23,9 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 
 	include_spip('inc/charsets');
 
+	// On renvoie la DTD utilisee
+	$ret['dtd'] = "plugin";
+
 	if (isset($arbre['categorie']))
 		$ret['categorie'] = trim(spip_xml_aplatit($arbre['categorie']));
 	if (isset($arbre['nom']))
