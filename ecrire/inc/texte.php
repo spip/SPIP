@@ -141,13 +141,9 @@ function traiter_echap_code_dist($regs) {
 // http://doc.spip.org/@traiter_echap_cadre_dist
 function traiter_echap_cadre_dist($regs) {
 	$echap = trim(entites_html($regs[3]));
-	$total_lignes = substr_count($echap, "\n") + 1;
-	$echap = "<form action=\"/\" method=\"get\"><div>"
-	."<textarea readonly='readonly' cols='40' rows='$total_lignes' "
-	."class='spip_cadre' dir='ltr'>"
-	.$echap
-	."</textarea></div></form>";
-	return $echap;
+	$n = substr_count($echap, "\n") + 1;
+	$echap = "\n<textarea readonly='readonly' cols='40' rows='$n' class='spip_cadre' dir='ltr'>$echap</textarea>";
+	return generer_post_ecrire('', $echap, "action='' method='get'");
 }
 // http://doc.spip.org/@traiter_echap_frame_dist
 function traiter_echap_frame_dist($regs) {

@@ -44,9 +44,9 @@ function exec_recherche_dist() {
 		$onfocus = " onfocus=\"this.value='';\"";
 	}
 
-	echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'><div>";
-	echo "<input type='hidden' name='exec' value='recherche' />";
-	echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />';
+	echo generer_post_ecrire("recherche", 
+				 ('<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r"' . $onfocus . ' />'),
+				 " method='get'");
 
 /*
 	// Si on est autorise a modifier, proposer le choix de REMPLACER

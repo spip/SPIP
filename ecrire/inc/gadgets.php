@@ -52,15 +52,11 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	// FIN GADGET Navigation rapide
 
 	// GADGET Recherche
+	$r =  _T('info_rechercher');
 	$bandeau .= "\n<div id='bandeaurecherche' class='bandeau bandeau_couleur_sous' style='text-align:$spip_lang_left;$spip_lang_left: 60px;'>"
-	. "<form method='get' style='margin: 0px; position: relative;' action='"
-	 . generer_url_ecrire("recherche")
-	. "'><div>"
-	. "<input type='hidden' name='exec' value='recherche' />"
-	. "<input type=\"text\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\""
-	. _T('info_rechercher')
-	. "\" name=\"recherche\" class=\"formo\" accesskey=\"r\" />"
-	. "</div></form>"
+	. generer_post_ecrire('recherche', 
+		("<input type='text' size='10' value='$r' name='recherche' class='formo' accesskey='r' id='form_recherche' style='width: 140px;' />"),
+		" method='get' style='margin: 0px; position: relative;'")
 	. "</div>";
 	// FIN GADGET recherche
 

@@ -952,7 +952,7 @@ function generer_post_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 
 	return "<form action='"
-	. generer_url_ecrire($script)
+	. ($script ? generer_url_ecrire($script) : '')
 	. "' "
 	. ($atts ? $atts : " method='post'")
 	.  "><div>\n"
