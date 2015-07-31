@@ -102,7 +102,7 @@ function balise_FORMULAIRE__dyn($form)
 	$args['form'] = $form;
 
 	return array("formulaires/$form",
-		0,
+		3600,
 		array_merge(
 			$valeurs,
 			array(
