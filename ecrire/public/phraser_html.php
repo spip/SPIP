@@ -34,7 +34,7 @@ define('CHAMP_ETENDU', '/\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]/S'
 define('BALISE_INCLURE','/<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?/S');
 
 define('SQL_ARGS', '(\([^)]*\))');
-define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9]*)' . SQL_ARGS . '?`?');
+define('CHAMP_SQL_PLUS_FONC', '`?([A-Z_][A-Z_0-9.]*)' . SQL_ARGS . '?`?');
 
 // http://doc.spip.org/@phraser_arguments_inclure
 function phraser_arguments_inclure($p,$rejet_filtres = false){
