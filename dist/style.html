@@ -1,4 +1,16 @@
-#HTTP{"Content-type: text/css", 360000}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+]
+#HTTP{360000}
+#HTTP{Content-type: text/css}
+#HTTP{Vary: Accept-Encoding}
+
 /*
  * Police par defaut (bof...)
  */
