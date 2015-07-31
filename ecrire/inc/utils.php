@@ -240,6 +240,7 @@ function set_request($var, $val = NULL, $c=false) {
 // Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
 //            [(#SELF|parametre_url{suite,''})] (supprime)
 //            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
+//            [(#SELF|parametre_url{suite[],1})] (tableaux valeurs multiples)
 // http://doc.spip.org/@parametre_url
 function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
@@ -266,9 +267,13 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 			if ($v === NULL) {
 				return $r[2]?substr($r[2],1):'';
 			}
-			elseif (!$v) {// suppression
+			// suppression
+			elseif (!$v) {
 				unset($url[$n]);
-			} else {
+			}
+			// ajout ; dans le cas d'un tableau ne rien faire, dans
+			// le cas d'une variable nrmale remplacer au meme endroit dans l'url
+			elseif (substr($r[1],-2) != '[]') {
 				$url[$n] = $r[1].'='.$u;
 				unset($ajouts[$r[1]]);
 			}

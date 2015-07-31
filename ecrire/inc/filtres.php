@@ -1772,22 +1772,32 @@ function valeur_numerique($expr) {
 	return intval($a);
 }
 
-// La fonction suivante ne sert plus aujourd'hui qu'aux squelettes des
-// balises dynamiques, en attendant une nouvelle conception qui permettra
-// d'eviter les redondances de calcul et d'ecriture qu'elle induit.
-// Elle fournit la suite de Input-Hidden correspondant aux parametres de 
-// l'URL donnee en argument. Ce besoin de ne devrait pas apparaitre,
-// utiliser plutot generer_form_ecrire.
+// Fournit la suite de Input-Hidden correspondant aux parametres de
+// l'URL donnee en argument
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
-	$hidden = '';
+	$hidden = array();
 	if (false !== ($p = strpos($action, '?')))
 		foreach(preg_split('/&(amp;)?/S',substr($action,$p+1)) as $c) {
-			$hidden .= "\n<input name='" .
-				entites_html(rawurldecode(str_replace('=', "' value='", $c))) .
-				"' type='hidden' />";
+			list($var,$val) = explode('=', $c, 2);
+			$input = '<input name="'
+				. entites_html($var)
+				.'"'
+				. (is_null($val)
+					? ''
+					: ' value="'.entites_html(rawurldecode($val)).'"'
+					)
+				. ' type="hidden" />';
+
+			// si c'est une variable de la forme a[]=2, cumuler les input
+			// sinon ne conserver que le premier
+			if (preg_match(',\[\]$,S', $var))
+				$hidden[] = $input;
+			else
+				if (!isset($hidden[$var]))
+					$hidden[$var] = $input;
 	}
-	return $hidden;
+	return join("\n", $hidden);
 }
 
 // http://doc.spip.org/@filtre_bornes_pagination_dist
