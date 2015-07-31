@@ -1200,6 +1200,13 @@ function maj_base() {
 		spip_query("UPDATE spip_syndic SET url_site = REPLACE(url_site, '&amp;', '&')");
 		maj_version (1.473);
 	}
+
+	if ($version_installee < 1.600) {
+		include_ecrire('inc_index.php3');
+		purger_index();
+		creer_liste_indexation();
+		maj_version (1.600);
+	}
 }
 
 ?>

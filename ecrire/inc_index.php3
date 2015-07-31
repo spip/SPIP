@@ -263,6 +263,16 @@ function creer_liste_indexation() {
 	}
 }
 
+function purger_index() {
+		spip_query("DELETE FROM spip_index_articles");
+		spip_query("DELETE FROM spip_index_auteurs");
+		spip_query("DELETE FROM spip_index_breves");
+		spip_query("DELETE FROM spip_index_mots");
+		spip_query("DELETE FROM spip_index_rubriques");
+		spip_query("DELETE FROM spip_index_syndic");
+		spip_query("DELETE FROM spip_index_dico");
+}
+
 // cree la requete pour une recherche en txt integral
 function requete_txt_integral($objet, $hash_recherche) {
 	if ($objet == 'syndic') {
