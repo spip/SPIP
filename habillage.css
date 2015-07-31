@@ -333,6 +333,47 @@ ul ul ul ul ul .forum-chapo {
 
 
 /*
+ * Habillage des petitions
+ */
+
+.signatures {
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	width: 100%;
+}
+.signatures td {
+	-moz-border-radius: 0.4em;
+}
+.signatures-titre {
+	clear: right;
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;
+	padding: 0.5em;
+	margin: 0px;
+}
+.signature-date {
+	white-space: nowrap;
+	background: #e4f0f0;
+	padding: 0.5em;
+}
+.signature-nom {
+	font-weight: bold;
+	background: #ecf4f4;
+	padding: 0.2em;
+	text-align: center;
+}
+.signature-message {
+	font-size: 85%;
+	background: #f4f8f8;
+	padding: 0.4em;
+	text-align: justify;
+}
+
+
+/*
  * Formulaires
  */
 

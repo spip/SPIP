@@ -186,6 +186,8 @@
 
 	</B_articles_rubrique>
 
+	#FORMULAIRE_SIGNATURE
+
 	</div>
 
 
@@ -198,6 +200,33 @@
 [(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
 </BOUCLE_documents_joints>
 <br>
+
+
+<!-- Signatures petition -->
+
+<BOUCLE_signatures_decompte(SIGNATURES) {id_article}></BOUCLE_signatures_decompte>
+[<div class="signatures-titre">(#TOTAL_BOUCLE) signatures &agrave; cette p&eacute;tition</div>
+
+<table class="signatures">
+<thead class="structure">
+<tr>
+	<td>Date</td>
+	<td>Nom et site Web</td>
+	<td>Message</td>
+</tr>
+</thead>
+<tbody>]
+<//B_signatures_decompte>
+<BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {0,30}>
+<tr>
+	<td class="signature-date">[(#DATE|affdate_court)]</td>
+	<td class="signature-nom">#NOM[<br><a href="#URL_SITE">(#NOM_SITE)</a>]</td>
+	[<td class="signature-message">(#MESSAGE)</td>]
+</tr>
+</BOUCLE_signatures>
+</tbody>
+</table>
+</B_signatures>
 
 
 <!-- Forums -->
