@@ -149,6 +149,7 @@ $GLOBALS['codes_langues'] = array(
 	'om' => "(Afan) Oromo",
 	'or' => "Oriya",
 	'pa' => "Punjabi",
+	'pbb' => 'Nasa Yuwe',
 	'pl' => "polski",
 	'ps' => "Pashto, Pushto",
 	'pt' => "Portugu&#234;s",
