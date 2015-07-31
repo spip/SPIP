@@ -221,10 +221,11 @@ function exec_brouteur_frame_dist() {
 		// en derniere colonne, afficher articles et breves
 		if ($frame == 0 AND $id_rubrique==0) {
 
-			$cpt = sql_countsel("spip_articles AS articles, spip_auteurs_articles AS lien", "articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur=$connect_id_auteur", "articles.id_article");
+			$cpt = sql_fetsel('A.id_article', "spip_auteurs_articles AS A LEFT JOIN spip_articles AS L ON A.id_article = L.id_article", "L.statut = 'prepa' AND A.id_auteur=$connect_id_auteur", "A.id_article");
+
 			if ($cpt) {
 
-				echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",($frame+1),"'>",
+			  echo "\n<div class='brouteur_icone_article'><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui$profile"), "' class='iframe' rel='",($frame+1),"'>",
 				_T("info_cours_edition"),"</a></b></div>";
 			}
 			
