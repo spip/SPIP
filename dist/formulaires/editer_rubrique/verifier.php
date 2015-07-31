@@ -17,20 +17,7 @@ include_spip('inc/editer');
 
 function formulaires_editer_rubrique_verifier_dist($id_rubrique='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='rubriques_edit_config', $row=array(), $hidden=''){
 
-	$erreurs = array();
-	if (intval($id_article)) {
-		$conflits = controler_contenu('rubrique',$id_rubrique);
-		if (count($conflits)) {
-			foreach($conflits as $champ=>$conflit){
-				$erreurs[$champ] .= _L("ATTENTION : Ce champ a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est :<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>");
-			}
-		}
-	}
-	foreach(array('titre') as $obli){
-		if (!_request($obli))
-			$erreurs[$obli] .= _L("Cette information est obligatoire");;
-	}
-
+	$erreurs = formulaires_editer_objet_verifier('rubrique',$id_rubrique,array('titre'));
 	return $erreurs;
 }
 

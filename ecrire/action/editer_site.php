@@ -49,9 +49,8 @@ function action_editer_site_dist() {
 			$id_syndic = insert_syndic(_request('id_parent'));
 			revisions_sites($id_syndic);
 		} else {
-			redirige_par_entete(
-				generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')
-			);
+			include_spip('inc/headers');
+			return array(0,redirige_formulaire(generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')));
 		}
 	}
 	// Envoi depuis le formulaire d'analyse automatique d'un site
@@ -67,10 +66,10 @@ function action_editer_site_dist() {
 				@rename($auto['logo'],
 				_DIR_IMG . 'siteon'.$id_syndic.'.'.$auto['format_logo']);
 		}
-		else
-			redirige_par_entete(
-				generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')
-			);
+		else{
+			include_spip('inc/headers');
+			return array(0,redirige_formulaire(generer_url_ecrire('sites_edit', 'id_rubrique='._request('id_parent'),'&')));
+		}
 	}
 	// Erreur
 	else {
@@ -113,10 +112,14 @@ function action_editer_site_dist() {
 		// (i.e. appeler la fct suivante avec gestion du verrou)
 		cron(0, array('syndic' => -91));
 	}
-	// Rediriger le navigateur
+	if (_request('redirect')) {
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_syndic', $id_syndic, '&');
-	redirige_par_entete($redirect);
+		include_spip('inc/headers');
+		redirige_par_entete($redirect);
+	}
+	else 
+		return array($id_syndic,'');
 }
 
 // Cette fonction redefinit la tache standard de syndication

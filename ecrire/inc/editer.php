@@ -29,6 +29,23 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 	return $message;
 }
 
+function formulaires_editer_objet_verifier($type,$id='new', $oblis = array()){
+	$erreurs = array();
+	if (intval($id)) {
+		$conflits = controler_contenu($type,$id);
+		if (count($conflits)) {
+			foreach($conflits as $champ=>$conflit){
+				$erreurs[$champ] .= _L("ATTENTION : Ce champ a &eacute;t&eacute; modifi&eacute; par ailleurs. La valeur actuelle est :<br /><textarea readonly='readonly' class='forml'>".$conflit['base']."</textarea>");
+			}
+		}
+	}
+	foreach($oblis as $obli){
+		if (!_request($obli))
+			$erreurs[$obli] .= _L("Cette information est obligatoire");;
+	}
+	return $erreurs;
+}
+
 // http://doc.spip.org/@formulaires_editer_objet_charger
 function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_trad=0, $retour='', $config_fonc='articles_edit_config', $row=array(), $hidden=''){
 	$table_objet = table_objet($type);
@@ -50,8 +67,10 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
 	$id = ($new OR $lier_trad) ? 'oui' : $row[$id_table_objet];
+	
 
 	$contexte = $row;
+	$contexte['new'] = $id;
 	$contexte['config'] = $config = $config_fonc($row);
 	$att_text = " class='formo' "
 	. $GLOBALS['browser_caret']
