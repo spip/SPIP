@@ -10,6 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion de l'action pour s'autoriser webmestre 
+ * 
+ * @package SPIP\Core\Autorisations
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
