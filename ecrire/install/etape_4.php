@@ -30,7 +30,7 @@ function install_etape_4_dist()
 	if($login) {
 		$echec = ($pass!=$pass_verif) ?
 		  _T('info_passes_identiques')
-		  : ((strlen($pass)<5) ?
+		  : ((strlen($pass)<6) ?
 		     _T('info_passe_trop_court')
 		     : ((strlen($login)<3) ?
 			_T('info_login_trop_court')
