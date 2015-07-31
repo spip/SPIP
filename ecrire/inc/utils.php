@@ -408,7 +408,7 @@ function _L($text, $args=array(), $class=NULL) {
 		}
 		// Si des variables n'ont pas ete inserees, le signaler
 		// (chaines de langues pas a jour)
-		if ($args) spip_log("$text:  variables inutilis�es " . join(', ', $args));
+		if ($args) spip_log("$text:  variables inutilisees " . join(', ', $args));
 	}
 
 	if ($GLOBALS['test_i18n'] AND $class===NULL)
