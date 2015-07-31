@@ -1286,6 +1286,18 @@ function balise_PIPELINE_dist($p) {
 }
 
 //
+// #EDIT
+// une balise qui ne fait rien, pour surcharge par le plugin widgets
+//
+// http://doc.spip.org/@balise_EDIT_dist
+function balise_EDIT_dist($p) {
+	$p->code = "''";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
+//
 // #TOTAL_UNIQUE
 // pour recuperer le nombre d'elements affiches par l'intermediaire du filtre
 // |unique

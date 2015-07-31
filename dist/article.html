@@ -25,9 +25,9 @@
 			<div class="cartouche">
 				#DEBUT_SURLIGNE
 				[(#LOGO_ARTICLE||image_reduire{200,200})]
-				[<p class="surtitre">(#SURTITRE)</p>]
-				<h1 class="titre">#TITRE</h1>
-				[<p class="soustitre">(#SOUSTITRE)</p>]
+				[<p class="surtitre #EDIT{surtitre}">(#SURTITRE)</p>]
+				<h1 class="titre #EDIT{titre}">#TITRE</h1>
+				[<p class="soustitre #EDIT{soustitre}">(#SOUSTITRE)</p>]
 				#FIN_SURLIGNE
 
 				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
@@ -36,12 +36,12 @@
 				#MODELE{article_traductions}
 
 			</div>
-			
+
 			#DEBUT_SURLIGNE
-			[<div class="chapo">(#CHAPO)</div>]
+			[<div class="chapo #EDIT{chapo}">(#CHAPO)</div>]
 			<br class="nettoyeur" />
-			[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-			[<div class="texte">(#TEXTE|image_reduire{520,0})</div>]
+			[<p class="lien #EDIT{hyperlien}"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="texte #EDIT{texte}">(#TEXTE|image_reduire{520,0})</div>]
 			#FIN_SURLIGNE
 
 			[(#REM) Portfolio : album d'images ]
@@ -56,12 +56,12 @@
 			<BOUCLE_afficher_document(DOCUMENTS) {id_document} {id_article} {mode=document}{extension IN png,jpg,gif}>
 			<div class="spip_documents spip_documents_center" id="document_actif">
 				#EMBED_DOCUMENT
-				[<div class="spip_doc_titre">(#TITRE)</div>]
-				[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+				[<div class="spip_doc_titre #EDIT{titre}">(#TITRE)</div>]
+				[<div class="spip_doc_descriptif #EDIT{descriptif}">(#DESCRIPTIF)</div>]
 			</div>
 			</BOUCLE_afficher_document>
 
-			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE(#PS)#FIN_SURLIGNE</div>]
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
 
 			[(#REM) Autres documents joints a l'article ]
 			<B_documents_joints>
