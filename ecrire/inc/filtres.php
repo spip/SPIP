@@ -665,7 +665,7 @@ function recup_date($numdate){
 		$mois = $regs[2];
 		$jour ='';
 	}
-	elseif (preg_match('#([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})#', $numdate, $regs)){
+	elseif (preg_match('#^([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})$#', $numdate, $regs)){
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour = $regs[3];
@@ -890,8 +890,8 @@ function affdate_mois_annee($numdate) {
 function affdate_heure($numdate) {
 	$date_array = recup_date($numdate);
 	if (!$date_array) return;
-	list($annee, $mois, $jour, $heures, $minutes, $secondes)= $date_array;
-	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes("$heures:$minutes:$secondes")));
+	list($annee, $mois, $jour)= $date_array;
+	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' =>  heures_minutes($numdate)));
 }
 
 
