@@ -69,6 +69,11 @@ function chercher_filtre($fonc) {
 		return NULL;
 }
 
+function appliquer_filtre($arg, $filtre) {
+	$f = chercher_filtre(preg_replace('/\W/','_', $filtre));
+	return $f ? $f($arg) : $arg;
+}
+
 // Appliquer un filtre (eventuellement defini dans la matrice) aux donnees
 // et arguments
 // http://doc.spip.org/@filtrer
@@ -86,6 +91,12 @@ function filtrer($filtre) {
 	}
 }
 
+function filtre_text_csv($t)
+{
+	return propre("\n|" .
+		      str_replace(';','|',preg_replace('/\r?\n/', "|\n|",$t))
+		      . "|\n");
+}
 
 // http://doc.spip.org/@spip_version
 function spip_version() {

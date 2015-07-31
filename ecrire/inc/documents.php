@@ -44,6 +44,15 @@ function get_spip_doc($fichier) {
 		: $fichier;
 }
 
+function contenu_document($id_document)
+{
+	$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".sql_quote($id_document));
+	if (!$r) return '';
+	$f = $r['fichier'];
+	$f = ($r['distant'] =='oui') ? copie_locale($f) : get_spip_doc($f);
+	return spip_file_get_contents($f);
+}
+
 // http://doc.spip.org/@generer_url_document_dist
 function generer_url_document_dist($id_document, $args='', $ancre='') {
 	if (intval($id_document) <= 0)

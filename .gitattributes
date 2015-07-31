@@ -249,11 +249,14 @@ dist/javascript/pause.js -text
 dist/jquery.js.html -text
 dist/loupe.png -text
 dist/minipres.css -text
+dist/modeles/application.html -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
+dist/modeles/audio.html -text
 dist/modeles/doc.html -text
 dist/modeles/emb.html -text
 dist/modeles/foreach.html -text
+dist/modeles/image.html -text
 dist/modeles/img.html -text
 dist/modeles/lesauteurs.html -text
 dist/modeles/pagination.html -text
@@ -261,6 +264,8 @@ dist/modeles/pagination_page.html -text
 dist/modeles/pagination_page_precedent_suivant.html -text
 dist/modeles/pagination_precedent_suivant.html -text
 dist/modeles/paginationitem.html -text
+dist/modeles/text.html -text
+dist/modeles/video.html -text
 dist/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 dist/polices/dustismo.ttf -text
 dist/polices/dustismo_bold.ttf -text
