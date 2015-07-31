@@ -17,7 +17,7 @@
 	    <li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 			<label for="nom"><:titre_cadre_signature_obligatoire:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom})</span>]
-			<p class='commentaire'><:entree_nom_pseudo:></p>
+			<p class='explication'><:entree_nom_pseudo:></p>
 			<input type='text' name='nom' id='nom' class='text' value="[(#ENV**{nom,#VAL{ecrire:item_nouvel_auteur}|_T})]"
 			[(#ENV{nom,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
@@ -32,13 +32,13 @@
 	    <li class="editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
 			<label for="email"><:entree_adresse_email:></label>
 			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{email})</span>]
-			[(#GET{disable}|oui) <p class='commentaire'><:info_reserve_admin:></p>]
+			[(#GET{disable}|oui) <p class='explication'><:info_reserve_admin:></p>]
 			<input type='text' name='email' id='email' class='text[ (#GET{disable}|oui)disabled]' value="[(#ENV**{email})]" #GET{disable}/>
 	    </li>
 	    <li class="editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
 	      <label for="bio"><:entree_infos_perso:></label>
 		  [<span class='erreur'>(#ENV**{erreurs}|table_valeur{bio})</span>]
-		  <p class="commentaire"><:entree_biographie:></p>
+		  <p class="explication"><:entree_biographie:></p>
 		  <textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
 	    </li>
 	    [(#REM)
@@ -114,13 +114,13 @@
 					[(#GET{edit_login}|oui)
 						<label for='new_login'><:item_login:></label>
 						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{login})</span>]
-						<p class='commentaire'>(<:texte_plus_trois_car:>)</p>
+						<p class='explication'>(<:texte_plus_trois_car:>)</p>
 						<input autocomplete="off" type='text' name='new_login' id='new_login' class='text' value="[(#ENV**{login})]" />
 
 					]
 					[(#GET{edit_login}|non)
 						<label for='login'><:item_login:></label>
-						<p class='commentaire'>(<:info_non_modifiable:>)</p>
+						<p class='explication'>(<:info_non_modifiable:>)</p>
 						<input type='text' disabled='disabled' name='login' id='login' class='text' value="[(#ENV**{login})]" />
 					]				
 				</li>
@@ -128,7 +128,7 @@
 					<li class='editer_new_pass[ (#ENV**{erreurs}|table_valeur{new_pass}|oui)erreur]'>
 						<label for='new_pass'><:entree_nouveau_passe:></label>
 						[<span class='erreur'>(#ENV**{erreurs}|table_valeur{new_pass})</span>]
-						<p class='commentaire'>(<:info_plus_cinq_car:>)</p>
+						<p class='explication'>(<:info_plus_cinq_car:>)</p>
 						<input type='password' autocomplete="off" class='password' name='new_pass' id='new_pass' value="" />
 					</li>
 					<li class='editer_new_pass2'>
@@ -147,7 +147,7 @@
 		<li class='editer_redacteurs_connectes'>
 			<fieldset>
 			<legend><:info_liste_redacteurs_connectes:></legend>
-				<p class='commentaire'><:texte_auteur_messagerie:></p>
+				<p class='explication'><:texte_auteur_messagerie:></p>
 				<ul>
 					<li class="editer_perso_activer_imessage">
 						<div class="champ">
