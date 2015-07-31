@@ -11,35 +11,68 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier definit les boucles standard de SPIP
-//
+/**
+ * Ce fichier definit les boucles standard de SPIP
+ *
+ * @package SPIP\Compilateur\Boucles
+**/
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-//
-// Boucle standard, sans condition rajoutee
-//
-// http://doc.spip.org/@boucle_DEFAUT_dist
+
+/**
+ * Compile une boucle standard, sans condition rajoutée
+ *
+ * @param string $id_boucle
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @return string
+ *     Code PHP compilé de la boucle
+**/
 function boucle_DEFAUT_dist($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
 
-//
-// <BOUCLE(BOUCLE)> boucle dite recursive
-//
-// http://doc.spip.org/@boucle_BOUCLE_dist
+/**
+ * Compile une boucle récursive
+ * 
+ * <BOUCLE(BOUCLE)>
+ *
+ * @param string $id_boucle
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @return string
+ *     Code PHP compilé de la boucle
+**/
 function boucle_BOUCLE_dist($id_boucle, &$boucles) {
-
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
 
-//
-// <BOUCLE(HIERARCHIE)>
-//
-// http://doc.spip.org/@boucle_HIERARCHIE_dist
+/**
+ * Compile une boucle HIERARCHIE
+ * 
+ * <BOUCLE(HIERARCHIE)>
+ *
+ * Cette boucle (aliasée sur la table RUBRIQUES)
+ * - recherche un id_rubrique dans les boucles parentes,
+ * - extrait sa hiérarchie, en prenant ou non la rubrique en cours en fonction du critère {tout}
+ * - crée une condition WHERE avec ces identifiants ansi qu'une clause ORDER
+ * - compile la boucle.
+ *
+ * Le code compilé calculant la hierarchie est ajouté au tout début de la
+ * fonction de boucle et quitte la boucle si aucune rubrique n'est trouvée.
+ *
+ * @param string $id_boucle
+ *     Identifiant de la boucle
+ * @param array $boucles
+ *     AST du squelette
+ * @return string
+ *     Code PHP compilé de la boucle
+**/
 function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table . ".id_rubrique";

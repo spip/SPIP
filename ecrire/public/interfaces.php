@@ -287,13 +287,80 @@ class Boucle {
 	 * une autre boucle comme <BOUCLE_rec(boucle_identifiant) />, cette
 	 * boucle (identifiant) reçoit dans cette propriété l'identifiant
 	 * de l'appelant (rec)
-	 */
-	var $externe = '';
+	 *
+	 * @var string */
+	public $externe = '';
+
 	// champs pour la construction de la requete SQL
-	var $select = array();
-	var $from = array();
-	var $from_type = array();
-	var $where = array();
+
+	/**
+	 * Liste des champs à récupérer par la boucle
+	 *
+	 * Expression 'table.nom_champ' ou calculée 'nom_champ AS x'
+	 * 
+	 * @var string[] */
+	public $select = array();
+
+	/**
+	 * Liste des alias / tables SQL utilisées dans la boucle
+	 *
+	 * L'index est un identifiant (xx dans spip_xx assez souvent) qui servira
+	 * d'alias au nom de la table ; la valeur est le nom de la table SQL désirée.
+	 *
+	 * L'index 0 peut définir le type de sources de données de l'itérateur DATA
+	 * 
+	 * @var string[] */
+	public $from = array();
+
+	/**
+	 * Liste des alias / type de jointures utilisées dans la boucle
+	 * 
+	 * L'index est le nom d'alias (comme pour la propriété $from), et la valeur
+	 * un type de jointure parmi 'INNER', 'LEFT', 'RIGHT', 'OUTER'.
+	 *  
+	 * Lorsque le type n'est pas déclaré pour un alias, c'est 'INNER'
+	 * qui sera utilisé par défaut (créant donc un INNER JOIN).
+	 *
+	 * @var string[] */
+	public $from_type = array();
+
+	/**
+	 * Liste des conditions WHERE de la boucle
+	 *
+	 * Permet de restreindre les éléments retournés par une boucle
+	 * en fonctions des conditions transmises dans ce tableau.
+	 *
+	 * Ce tableau peut avoir plusieurs niveaux de profondeur.
+	 * 
+	 * Les éléments du premier niveau sont reliés par des AND, donc
+	 * chaque élément ajouté directement au where par
+	 * $boucle->where[] = array(...) ou $boucle->where[] = "'expression'"
+	 * est une condition AND en plus.
+	 * 
+	 * Par contre, lorsqu'on indique un tableau, il peut décrire des relations
+	 * internes différentes. Soit $expr un tableau d'expressions quelconques de 3 valeurs :
+	 * $expr = array(operateur, val1, val2)
+	 * 
+	 * Ces 3 valeurs sont des expressions PHP. L'opérateur désigne l'opérande
+	 * à réaliser tel que :
+	 * - "'='" , "'>='", "'<'", "'IN'", "'REGEXP'", "'LIKE'", ... :
+	 *    val1 et val2 sont des champs et valeurs à utiliser dans la comparaison
+	 *    suivant cet ordre : "val1 operateur val2".
+	 *    Exemple : $boucle->where[] = array("'='", "'articles.statut'", "'\"publie\"'");
+	 * - "'AND'", "'OR'", "'NOT'" :
+	 *    dans ce cas val1 et val2 sont également des expressions
+	 *    de comparaison complètes, et peuvent être eux-même des tableaux comme $expr
+	 *    Exemples :
+	 *    $boucle->where[] = array("'OR'", $expr1, $expr2);
+	 *    $boucle->where[] = array("'NOT'", $expr); // val2 n'existe pas avec NOT
+	 *
+	 * D'autres noms sont possibles pour l'opérateur (le nombre de valeurs diffère) :
+	 * - "'SELF'", "'SUBSELECT'" : indiquent des sous requêtes
+	 * - "'?'" : indique une condition à faire évaluer (val1 ? val2 : val3)
+	 * 
+	 * @var array */
+	public $where = array();
+
 	var $join = array();
 	var $having = array();
 	var $limit;
@@ -304,13 +371,52 @@ class Boucle {
 	var $hash = "" ;
 	var $in = "" ;
 	var $sous_requete = false;
-	var $hierarchie = '';
-	var $statut = false; # definition/surcharge du statut des elements retournes
+
+	/**
+	 * Code PHP qui sera ajouté en tout début de la fonction de boucle
+	 *
+	 * Il sert à insérer le code calculant une hierarchie
+	 *
+	 * @var string */
+	public $hierarchie = '';
+
+	/**
+	 * Indique la présence d'un critère sur le statut
+	 * 
+	 * @deprecated Remplacé par $boucle->modificateur['criteres']['statut']
+	 * @var bool */
+	public $statut = false;
+
 	// champs pour la construction du corps PHP
-	var $show = array();
-	var $id_table;
-	var $primary;
-	var $return;
+
+	/**
+	 * Description des sources de données de la boucle
+	 *
+	 * Description des données de la boucle issu de trouver_table
+	 * dans le cadre de l'itérateur SQL et contenant au moins l'index 'field'.
+	 * 
+	 * @see base_trouver_table_dist()
+	 * @var array */
+	public $show = array();
+
+	/**
+	 * Nom de la table SQL principale de la boucle, sans son préfixe
+	 *
+	 * @var string */
+	public $id_table;
+
+	/**
+	 * Nom de la clé primaire de la table SQL principale de la boucle
+	 *
+	 * @var string */
+	public $primary;
+
+	/**
+	 * Code PHP compilé de la boucle
+	 *
+	 * @var string */
+	public $return;
+
 	var $numrows = false;
 	var $cptrows = false;
 
@@ -340,7 +446,14 @@ class Boucle {
 
 	var $modificateur = array(); // table pour stocker les modificateurs de boucle tels que tout, plat ..., utilisable par les plugins egalement
 
-	var $iterateur = ''; // type d'iterateur
+	/**
+	 * Type d'itérateur utilisé pour cette boucle
+	 *
+	 * - 'SQL' dans le cadre d'une boucle sur une table SQL
+	 * - 'DATA' pour l'itérateur DATA, ...
+	 *
+	 * @var string */
+	public $iterateur = ''; // type d'iterateur
 
 	// obsoletes, conserves provisoirement pour compatibilite
 	var $tout = false;
