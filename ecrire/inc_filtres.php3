@@ -150,7 +150,7 @@ function entites_unicode($chaine) {
 	switch(lire_meta('charset')) {
 		case '':
 		case 'iso-8859-1':
-			while ($i=ord(substr($chaine,$p++)))
+			while ($i = ord(substr($chaine,$p++)))
 				if ($i>127)
 					$s .= "&#$i;";
 				else
@@ -158,8 +158,27 @@ function entites_unicode($chaine) {
 			return $s;
 
 		default:
-			return "non".$chaine;
+			return $chaine;
 	}
+}
+
+// transforme les entites unicode &#129; dans le charset courant
+// (iso-8859-1 seulement pour l'instant) ; a completer pour d'autres charsets...
+function unicode2charset($chaine) {
+	switch(lire_meta('charset')) {
+		case '':
+		case 'iso-8859-1':
+			while (ereg('&#([0-9]+);', $chaine, $regs) AND !$vu[$regs[1]]) {
+				$vu[$regs[1]] = true;
+				if ($regs[1] < 256)
+					$chaine = ereg_replace($regs[0], chr($regs[1]), $chaine);
+			}
+			break;
+		default:
+			break;
+	}
+
+	return $chaine;
 }
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")

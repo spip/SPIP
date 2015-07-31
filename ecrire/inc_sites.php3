@@ -85,7 +85,9 @@ function recuperer_page($url) {
 
 
 function analyser_site($url) {
-	$texte = recuperer_page($url);
+	include_ecrire("inc_filtres.php3");
+
+	$texte = unicode2charset(recuperer_page($url));
 	if (!$texte) return false;
 	$result = '';
 	if (ereg('<channel[^>]*>(.*)</channel>', $texte, $regs)) {
@@ -127,6 +129,8 @@ function analyser_site($url) {
 
 
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
+	include_ecrire("inc_filtres.php3");
+
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 	
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
@@ -142,7 +146,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	$le_retour=recuperer_page($la_query);
+	$le_retour = unicode2charset(recuperer_page($la_query));
 
 	if (strlen($le_retour)>10){
 
@@ -241,7 +245,6 @@ function afficher_sites($titre_table, $requete) {
 	$tranches = afficher_tranches_requete($requete, 3);
 
 	if ($tranches) {
-		//echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
 		debut_cadre_relief("site-24.gif");
 
 		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
@@ -378,8 +381,6 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	if ($num_rows <= 1.5 * $nombre_aff) $nombre_aff = $num_rows;
 	
 		if ($num_rows > 0) {
-			//bandeau_titre_boite($titre_table);
-
 			echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
 			echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
 
@@ -480,7 +481,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 						else if ($statut == "dispo") {
 							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>valider ce lien</a>]";
 						}
-					}else{
+					} else {
 						echo "&nbsp;";
 					}
 
