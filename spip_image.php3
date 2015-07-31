@@ -58,7 +58,7 @@ function tester_vignette ($test_vignette) {
 		if (function_exists('ImageCreateFromGIF')) {
 			$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
 			if ($srcImage) {
-				//$gd_formats[] = "gif";
+				$gd_formats[] = "gif";
 				ImageDestroy( $srcImage );
 			}
 		}
