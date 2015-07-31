@@ -27,7 +27,7 @@
 		<INCLURE{fond=inc-entete}{lang}>
 
     [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a>
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a>
 
 		<BOUCLE_contexte_article(ARTICLES) {id_article}>
 			<BOUCLE_ariane_article(HIERARCHIE) {id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane_article>
