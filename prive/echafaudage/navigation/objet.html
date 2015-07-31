@@ -5,7 +5,13 @@
 	#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type',#OBJET,'id',#ID_OBJET}}}
 	#BOITE_FERMER
 
+	<div class="ajax">
+	#FORMULAIRE_EDITER_LOGO{#OBJET,#ID_OBJET,'',#ENV**}
+	</div>
+	
 	#PIPELINE{afficher_config_objet,#ARRAY{args,#ARRAY{type,#OBJET,id,#ID_OBJET},data,''}}
+
+	
 	#SET{ok,' '}
 ][
 

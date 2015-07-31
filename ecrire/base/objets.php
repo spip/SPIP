@@ -329,7 +329,9 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['texte_objets'] = $infos['type'].':'.'titre_'.$infos['table_objet'];
 	if (!isset($infos['texte_objet']))
 		$infos['texte_objet'] = $infos['type'].':'.'titre_'.$infos['type'];
-
+	if (!isset($infos['texte_logo_objet']))  // objet:titre_logo_objet "Logo de ce X"
+		$infos['texte_logo_objet'] = $infos['type'].':'.'titre_logo_'.$infos['type'];
+		
 	// objet:info_aucun_objet
 	if (!isset($infos['info_aucun_objet']))
 		$infos['info_aucun_objet'] = $infos['type'].':'.'info_aucun_'.$infos['type'];
@@ -339,6 +341,7 @@ function renseigner_table_objet_sql($table_sql,$infos){
 	// objet:info_nb_objets
 	if (!isset($infos['info_nb_objets']))
 		$infos['info_nb_objets'] = $infos['type'].':'.'info_nb_'.$infos['table_objet'];
+
 
 	if (!isset($infos['titre']))
 		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : '';
