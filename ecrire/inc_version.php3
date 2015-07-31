@@ -657,9 +657,11 @@ function spip_debug($message) {
 function spip_log($message) {
 	global $flag_ecrire;
 
-	$pid = @getmypid();
-	$uid = @get_current_user();
-	$message = date("M d H:i:s")." spip $uid"."[$pid]: "
+	if (!$pid = @getmypid()) $pid ='-';
+	if (!$uid = @get_current_user()) $uid = '-';
+	if (!$ip = $GLOBALS['HTTP_SERVER_VARS']['REMOTE_ADDR']) $ip = '-';
+
+	$message = date("M d H:i:s")." $ip $uid"."[$pid] "
 	.ereg_replace("\n*$", "\n", $message);
 
 	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
@@ -671,5 +673,9 @@ function spip_log($message) {
 			logrotate();
 	}
 }
+
+// en mode debug, loger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
+if ($debug)
+	spip_debug("$REQUEST_METHOD: ".($flag_ecrire ? "/ecrire/" : "/").$clean_link->getUrl());
 
 ?>
