@@ -297,6 +297,15 @@ function vider_url($url) {
 	return $url;
 }
 
+function parametre_url($url, $parametre, $valeur = '__global__') {
+	$link = new Link(str_replace('&amp;', '&', $url));
+	if($valeur == '__global__')
+		$valeur = $GLOBALS[$parametre];
+	if(empty($valeur)) $link->DelVar($parametre);
+	else $link->AddVar($parametre, $valeur);
+	return quote_amp($link->getUrl());
+}
+
 //
 // Ajouter le &var_recherche=toto dans les boucles de recherche
 //
