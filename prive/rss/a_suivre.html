@@ -7,31 +7,26 @@ if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},rss,#ENV{op}, #ENV{args}}|?{1,0})]) {
 	<link>[(#URL_ECRIRE|url_absolue|texte_backend)]</link>
 	<description></description>
 	<language>#LANG</language>
-<?php $rss = array();
 <BOUCLE_A(ARTICLES){!par date}{statut=prop}{0,10}>
-$rss['[(#DATE|date_ical)]'] .= '
 	<item>
-		<title><:info_article_propose|texte_backendq:> : [(#TITRE|texte_backendq)]</title>
-		<link>[(#URL_ECRIRE{article, id_article=#ID_ARTICLE}|url_absolue|texte_backendq)]</link>
-		<guid isPermaLink="true">[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backendq)]</guid>
+		<title><:info_article_propose|texte_backend:> : [(#TITRE|texte_backend)]</title>
+		<link>[(#URL_ECRIRE{article, id_article=#ID_ARTICLE}|url_absolue|texte_backend)]</link>
+		<guid isPermaLink="true">[(#URL_ECRIRE{articles, id_article=#ID_ARTICLE}|url_absolue|texte_backend)]</guid>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG|texte_backendq)</dc:language>]
-	<BOUCLE_AA(AUTEURS){id_article}{0,1}><dc:creator>[(#NOM|texte_backendq)][ &lt;(#EMAIL|texte_backendq)&gt;]</dc:creator></BOUCLE_AA>
-		<description>[(#INTRODUCTION|texte_backendq)]</description>
-	</item>';
+		[<dc:language>(#LANG|texte_backend)</dc:language>]
+	<BOUCLE_AA(AUTEURS){id_article}{0,1}><dc:creator>[(#NOM|texte_backend)][ &lt;(#EMAIL|texte_backend)&gt;]</dc:creator></BOUCLE_AA>
+		<description>[(#INTRODUCTION|texte_backend)]</description>
+	</item>
 </BOUCLE_A>
 <BOUCLE_objets(DATA){source table,#REM|lister_tables_objets_sql}>
 	#SET{fond,#VAL{prive/rss/a_suivre-}|concat{#VALEUR{table_objet}}}
 	[(#GET{fond}|trouver_fond|oui)#INCLURE*{fond=#GET{fond}}]
 </BOUCLE_objets>
-krsort($rss);
-echo join('',$rss);
-?>
 </channel>
 </rss><?php
 } else {
 include_spip('inc/minipres'); 
 echo minipres();
 }?></BOUCLE0>
-
+#FILTRE{trier_rss}
