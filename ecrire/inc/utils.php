@@ -1239,7 +1239,7 @@ function spip_initialisation_suite() {
 	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
-	define('_COPIE_LOCALE_MAX_SIZE',2097152); // poids en octet
+	define('_COPIE_LOCALE_MAX_SIZE',16777216); // poids en octet
 
 	// qq chaines standard
 	define('_ACCESS_FILE_NAME', '.htaccess');

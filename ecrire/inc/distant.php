@@ -46,15 +46,9 @@ function copie_locale($source, $mode='auto') {
 	AND preg_match(',^\w+://,', $source)) {
 		if (($mode=='auto' AND !@file_exists(_DIR_RACINE.$local))
 		OR $mode=='force') {
-			$contenu = recuperer_page($source,false,false,_COPIE_LOCALE_MAX_SIZE);
-			if (!$contenu) return false;
-			if (preg_match(',[.](jpg|gif|png)$,i',$local) 
-			  AND strlen($contenu)>_COPIE_LOCALE_MAX_SIZE){
-			  spip_log ('ERREUR copie locale image '._DIR_RACINE.$local.' superieure a  '._COPIE_LOCALE_MAX_SIZE);
-			  return false;
-			}
-			ecrire_fichier(_DIR_RACINE.$local, $contenu);
-			spip_log ('ecrire copie locale '._DIR_RACINE.$local);
+			$res = recuperer_page($source,_DIR_RACINE.$local,false,_COPIE_LOCALE_MAX_SIZE);
+			if (!$res) return false;
+			spip_log ('ecrire copie locale '._DIR_RACINE.$local." taille $res");
 			
 			// pour une eventuelle indexation
 			pipeline('post_edition',
@@ -161,12 +155,17 @@ function prepare_donnees_post($donnees, $boundary = '') {
 // et refuser_gz pour forcer le refus de la compression (cas des serveurs orthographiques)
 // date_verif, un timestamp unix pour arreter la recuperation si la page distante n'a pas ete modifiee depuis une date donnee
 // uri_referer, preciser un referer different
+// si munge_charset est une chaine, alors c'est un nom de fichier
+// dans lequel on ecrit directement la page
 // http://doc.spip.org/@recuperer_page
 function recuperer_page($url, $munge_charset=false, $get_headers=false,
-	$taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false,
+	$taille_max = null, $datas='', $boundary='', $refuser_gz = false,
 	$date_verif = '', $uri_referer = '') {
-  	$gz = false;
-  // Accepter les URLs au format feed:// ou qui ont oublie le http://
+	$gz = false;
+	if (is_null($taille_max))
+		$taille_max = is_string($munge_charset)?_COPIE_LOCALE_MAX_SIZE:1048576;
+
+	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
 	if (!preg_match(',^[a-z]+://,i', $url)) $url = 'http://'.$url;
 
@@ -194,10 +193,16 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false,
 
 // args comme ci-dessus (presque)
 // retourne l'URL en cas de 301, un tableau (entete, corps) si ok, false sinon
-
+// si $trans est null -> on ne veut que les headers
+// si $trans est une chaine, c'est un nom de fichier pour ecrire directement dedans
 // http://doc.spip.org/@recuperer_lapage
 function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576, $datas='', $boundary='', $refuser_gz = false, $date_verif = '', $uri_referer = '')
 {
+	// si on ecrit directement dans un fichier, 
+	// pour ne pas manipuler en memoire
+	// refuser gz
+	if (is_string($trans) AND $trans)
+		$refuser_gz = true;
 	// ouvrir la connexion et envoyer la requete et ses en-tetes
 	list($f, $fopen) = init_http($get, $url, $refuser_gz, $uri_referer, $datas);
 	if (!$f) {
@@ -226,7 +231,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 
 #	spip_log("recup  $headers" );
 	if ($trans === NULL) return array($headers, '');
-	$result = recuperer_body($f, $taille_max);
+	$result = recuperer_body($f, $taille_max,is_string($trans)?$trans:'');
 	fclose($f);
 	if (!$result) return array($headers, $result);
 
@@ -235,7 +240,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 		$result = spip_gzinflate_body($result);
 	}
 	// Faut-il l'importer dans notre charset local ?
-	if ($trans) {
+	if ($trans===true) {
 		include_spip('inc/charsets');
 		$result = transcoder_page ($result, $headers);
 	}
@@ -268,11 +273,27 @@ function spip_gzinflate_body($gzData){
 
 
 // http://doc.spip.org/@recuperer_body
-function recuperer_body($f, $taille_max=1048576)
+function recuperer_body($f, $taille_max=1048576, $fichier='')
 {
+	$taille = 0;
 	$result = '';
-	while (!feof($f) AND strlen($result)<$taille_max)
-		$result .= fread($f, 16384);
+	if ($fichier){
+		$fp = spip_fopen_lock($fichier, 'w',LOCK_EX);
+		if (!$fp) return false;
+		$result = 0; // on renvoie la taille du fichier
+	}
+	while (!feof($f) AND $taille<$taille_max){
+		$res = fread($f, 16384);
+		$taille += strlen($res);
+		if ($fp){
+			fwrite($fp,$res);
+			$result = $taille;
+		}
+		else
+			$result .= $res;
+	}
+	if ($fp)
+		spip_fclose_unlock($fp);
 	return $result;
 }
 
@@ -354,6 +375,7 @@ function fichier_copie_locale($source) {
 	$path_parts = pathinfo($source);
 	$ext = $path_parts ? $path_parts['extension'] : '';
 	if ($ext
+		AND preg_match(',^\w+$,',$ext) // pas de php?truc=1&...
 	  AND $f=nom_fichier_copie_locale($source, $ext)
 	  AND file_exists(_DIR_RACINE . $f))
 	  return $f;
