@@ -29,7 +29,7 @@ function inc_commencer_page_dist($titre = "", $rubrique = "accueil", $sous_rubri
 	return init_entete($titre, $id_rubrique, $minipres)
 	. init_body($rubrique, $sous_rubrique, $id_rubrique,$menu)
 	. "<div id='page'>"
-	. avertissement_messagerie()
+	. alertes_auteur()
 	. auteurs_recemment_connectes();
 }
 
@@ -195,11 +195,36 @@ function avertissement_messagerie() {
 	if ($total_messages == 1) {
 		$row = @spip_fetch_array($result_messages);
 		$ze_message=$row['id_message'];
-		return "<div class='messages'><a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' classe='ligne_foncee'>"._T('info_nouveau_message')."</a></div>";
+		return "<a href='" . generer_url_ecrire("message","id_message=$ze_message") . "' classe='ligne_foncee'>"._T('info_nouveau_message')."</a>";
 	} elseif ($total_messages > 1)
-		return "<div class='messages'><a href='" . generer_url_ecrire("messagerie") . "' classe='ligne_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</a></div>";
+		return "<a href='" . generer_url_ecrire("messagerie") . "' classe='ligne_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</a>";
 	else return '';
 }
+
+function alertes_auteur() {
+	global $connect_statut;
+	if ($connect_statut == '0minirezo'
+	AND (
+		$GLOBALS['meta']['message_crash_tables']
+		OR false // autres alertes administrateur
+	)) {
+		$alertes = array();
+
+		if ($GLOBALS['meta']['message_crash_tables']) {
+			include_spip('inc/maintenance');
+			if ($msg = message_crash_tables())
+				$alertes[] = $msg;
+		}
+	}
+
+	$alertes[] = avertissement_messagerie();
+
+	if ($alertes = array_filter($alertes))
+		return "<div class='messages'>".
+			join('<hr />', $alertes)
+			."</div>";
+}
+
 
 
 // http://doc.spip.org/@auteurs_recemment_connectes
