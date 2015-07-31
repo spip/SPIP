@@ -63,8 +63,13 @@ function inc_ajouter_documents_dist ($source, $nom_envoye, $type_lien, $id_lien,
 		// - interdit a l'upload ?
 		// - quel numero dans spip_types_documents ?  =-(
 		// - est-ce "inclus" comme une image ?
-		preg_match(",\.([^.]+)$,", $nom_envoye, $match);
-		$ext = (corriger_extension(strtolower($match[1])));
+		preg_match(",^(.*)\.([^.]+)$,", $nom_envoye, $match);
+		@list(,$titre,$ext) = $match;
+		// securite : pas de . en dehors de celui separant l'extension
+		// sinon il est possible d'injecter du php dans un toto.php.txt
+		$nom_envoye = str_replace('.','-',$titre).'.'.$ext;
+
+		$ext = corriger_extension(strtolower($ext));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
 		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension=" . _q($ext) . " AND upload='oui'");
