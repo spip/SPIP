@@ -581,6 +581,7 @@ function forum_logo($statut)
 // #SET{foncee,##ENV{couleur_foncee,3874b0}}
 // #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 // #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+// http://doc.spip.org/@parametres_css_prive
 function parametres_css_prive(){
 	global $visiteur_session;
 
