@@ -202,7 +202,7 @@ function auth_dist() {
 			install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
 		} else {
 
-			install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href=",  http_php_script(_DIR_LOGIN . "spip_cookie","logout=$auth_login"), '>', _T('texte_inc_auth_2'), "</A>",_T('texte_inc_auth_3');install_fin_html();
+			install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  http_php_scriptnq(_DIR_LOGIN . "spip_cookie","logout=$auth_login"), "'>", _T('texte_inc_auth_2'), "</A>",_T('texte_inc_auth_3');install_fin_html();
 		}
 		exit;
 	}

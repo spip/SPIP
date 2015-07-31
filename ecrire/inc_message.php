@@ -321,7 +321,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  else {
 		  echo
 		    debut_block_invisible("ajouter_auteur"),
-		    "<br /><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href='" . http_php_script("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></font></div>",
+		    "<br /><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href='" . http_php_scriptnq("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></font></div>",
 		    fin_block();
 		}
 	  fin_cadre_enfonce();

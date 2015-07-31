@@ -29,17 +29,19 @@ function install_debut_html($titre = 'AUTO') {
 	echo  _DOCTYPE_ECRIRE ,
 	  "<html lang='",$GLOBALS['spip_lang'],
 	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
-	  "<head>\n" ,
-	  "<title>$titre</title>\n" ,
-	  '<link rel="stylesheet" type="text/css" href=' ,
-	  http_php_script(_DIR_RESTREINT . 'spip_style', 
+	  "<head>\n",
+	  "<title>",
+	  $titre,
+	  "</title>\n" ,
+	  '<link rel="stylesheet" type="text/css" href=\'' ,
+	  http_php_scriptnq(_DIR_RESTREINT . 'spip_style', 
 			  "couleur_claire=" .
 			  urlencode('#FFCC66') .
 			  '&couleur_foncee=' .
 			  urlencode('#000000') .
 			  '&left=' . 
 			  $GLOBALS['spip_lang_left']) ,
-	  ">
+	  "'>
 <style type='text/css'>
 <!--
 	a {text-decoration: none; }
@@ -73,10 +75,10 @@ function aide($aide='') {
 
 	if (!$aide OR $spip_display == 4) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=" 
-		. http_php_script(_DIR_RESTREINT . "aide_index", 
+	return "&nbsp;&nbsp;<a class='aide' href='" 
+		. http_php_scriptnq(_DIR_RESTREINT . "aide_index", 
 			"aide=$aide&var_lang=$spip_lang")
-		. " target=\"spip_aide\" "
+		. "' target=\"spip_aide\" "
 		. "onclick=\"javascript:window.open(this.href,"
 		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "
 		. "height=580'); return false;\">"
