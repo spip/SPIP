@@ -174,6 +174,11 @@ function traiter_formulaires_dynamiques($get=false){
 						'args'=>array('form'=>$form,'args'=>$args),
 						'data'=>$verifier?call_user_func_array($verifier,$args):array())
 					);
+		// accessibilite : si des erreurs mais pas de message general l'ajouter
+		if (count($post["erreurs_$form"]) AND !isset($post["erreurs_$form"]['message_erreur'])){
+			$post["erreurs_$form"]['message_erreur'] = singulier_ou_pluriel(count($post["erreurs_$form"]),'avis_1_erreur_saisie','avis_nb_erreurs_saisie');
+		}
+
 		// si on ne demandait qu'une verif json
 		if (_request('formulaire_action_verifier_json')){
 			include_spip('inc/json');
