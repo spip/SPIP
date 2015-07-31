@@ -139,7 +139,7 @@ function init_body($rubrique='accueil', $sous_rubrique='accueil', $id_rubrique='
 
 		// couleurs
 	$couleurs = charger_fonction('couleurs', 'inc');
-	$items .= "<div id='preferences_couleurs' title='" . attribut_html(_T('titre_changer_couleur_interface')) . "'>";
+	$items .= "<div id='preferences_couleurs'>";
 	$items .= $couleurs() . "</div>";
 
 	$items .= "</div></li>";
