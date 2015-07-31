@@ -2622,13 +2622,13 @@ function balise_TRI_dist($p, $liste='true') {
  */
 function balise_SAUTER_dist($p){
 	$id_boucle = $p->id_boucle;
-	$boucle = $p->boucles[$id_boucle];
 
-	if (!$boucle) {
+	if (empty($p->boucles[$id_boucle])) {
 		$msg = array('zbug_champ_hors_boucle', array('champ' => '#SAUTER'));
 		erreur_squelette($msg, $p);
 	}
 	else {
+		$boucle = $p->boucles[$id_boucle];
 		$_saut = interprete_argument_balise(1,$p);
 		$_compteur = "\$Numrows['$id_boucle']['compteur_boucle']";
 		$_total = "\$Numrows['$id_boucle']['total']";
