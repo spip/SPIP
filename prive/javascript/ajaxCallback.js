@@ -145,6 +145,9 @@ jQuery.spip.updateReaderBuffer = function(){
 
 jQuery.fn.formulaire_setARIA = function(){
 	if (!this.closest('.ariaformprop').length){
+		// eviter une double execution du js au moment de sa reinsertion dans le DOM par wrap()
+		// cf http://bugs.jquery.com/ticket/7447
+		this.find('script').remove();
 		this.wrap('<div class="ariaformprop" aria-live="assertive" aria-atomic="true"></div>');
 	}
 	return this;
