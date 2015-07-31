@@ -699,8 +699,9 @@ function find_in_path ($filename) {
 		$sous = $dir.$p['dirname'];
 		if (!isset($ram[$sous]))
 			$ram[$sous] = memoriser_fichiers($sous);
-		if ($ram[$sous][$p['basename']])
-			return $sous.'/'.$p['basename'];
+		if ($ram[$sous][$p['basename']]
+		AND is_readable($f = $sous.'/'.$p['basename']))
+			return $f;
 	}
 }
 
