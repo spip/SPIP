@@ -17,9 +17,12 @@ include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_auteur_infos_dist
 function exec_auteur_infos_dist() {
-	global $connect_id_auteur;
+	global $connect_id_auteur, $spip_display;
 
 	$id_auteur = intval(_request('id_auteur'));
+	$redirect = _request('redirect');
+	$echec = _request('echec');
+	$new = _request('new');
 
 	pipeline('exec_init',
 		array('args' => array(
@@ -38,9 +41,13 @@ function exec_auteur_infos_dist() {
 			$auteur['nom'] = _request('nom');
 	}
 
-	$auteur_infos = charger_fonction('auteur_infos', 'inc');
-	$fiche = $auteur_infos($auteur, _request('redirect'));
+	if (!$auteur AND !$new) {
+		include_spip('inc/headers');
+		redirige_par_entete(generer_url_ecrire('auteurs'));
+	}
 
+	$auteur_infos = charger_fonction('auteur_infos', 'inc');
+	$fiche = $auteur_infos($auteur, $new, $echec, _request('edit'), intval(_request('lier_id_article')), $redirect);
 
 /*	// Si on est appele en ajax, on renvoie la fiche
 	if (_request('var_ajaxcharset')) {
@@ -151,7 +158,7 @@ function auteurs_interventions($auteur) {
 	$id_auteur = $auteur['id_auteur'];
 	$statut = $auteur['statut'];
 
-	global $connect_statut, $connect_id_auteur;
+	global $connect_id_auteur;
 
 	include_spip('inc/message_select');
 
