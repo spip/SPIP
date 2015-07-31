@@ -20,5 +20,7 @@ elseif (file_exists($f = (_DIR_INCLUDE . 'inc_' . $nom . '.php')))
   include($f);
 if (function_exists($nom))
   $nom($type, $css);
-
+if (function_exists($f = $nom . "_dist"))
+  $f($type, $css);
+spip_log("fonction $nom indisponible");
 ?>

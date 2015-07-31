@@ -18,7 +18,7 @@ define("_ECRIRE_INC_CALENDRIER", "1");
 include_ecrire("inc_texte.php3");
 charger_generer_url();
 
-function calendrier($type, $css="")
+function calendrier_dist($type, $css="")
 {
   $date = date("Y-m-d", time()); 
   if ($type == 'semaine') {
@@ -566,7 +566,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 		$fin = 15;
 	} else {
 		$debut = 7;
-		$fin =20;
+		$fin =21;
 	}
 	
 	if ($echelle==0) $echelle = DEFAUT_D_ECHELLE;
