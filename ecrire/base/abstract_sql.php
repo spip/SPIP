@@ -117,6 +117,12 @@ function spip_abstract_delete($table, $where, $serveur='')
 	return $f($table, $where);
 }
 
+function spip_abstract_replace($table, $values, $keys, $serveur='')
+{
+	$f = spip_abstract_serveur('replace', $serveur);
+	return $f($table, $values, $keys);
+}
+
 // http://doc.spip.org/@spip_abstract_showtable
 function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 {
@@ -210,18 +216,13 @@ function description_table($nom){
 		return array($nom, $tables_externes[$nom]);
 
 	$nom_table = $nom;
-	if (in_array($nom, $table_des_tables))
-	   $nom_table = 'spip_' . $nom;
-
 	include_spip('base/serial');
 	if (isset($tables_principales[$nom_table]))
 		return array($nom_table, $tables_principales[$nom_table]);
-
-	include_spip('base/auxiliaires');
-	$nom_table = 'spip_' . $nom;
 	if (isset($tables_auxiliaires[$nom_table]))
 		return array($nom_table, $tables_auxiliaires[$nom_table]);
 
+	$nom_table = 'spip_' . $nom; // discutable
 	if ($desc = spip_abstract_showtable($nom, '', true))
 		if (isset($desc['field'])) {
 			$tables_externes[$nom] = $desc;
@@ -270,4 +271,13 @@ function spip_sql_version() {
 	$row = spip_abstract_fetch(spip_query("SELECT version() AS n"));
 	return ($row['n']);
 }
+
+// http://doc.spip.org/@test_sql_int
+function test_sql_int($type)
+{
+	return (strpos($type, 'bigint') === 0
+	OR strpos($type, 'int') === 0
+	OR strpos($type, 'tinyint') === 0);
+}
+
 ?>
