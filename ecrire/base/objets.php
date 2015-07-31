@@ -642,7 +642,7 @@ function renseigner_table_objet_sql($table_sql,&$infos){
  */
 function renseigner_table_objet_interfaces($table_sql,&$infos){
 	if (!isset($infos['titre']))
-		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : '';
+		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : "'' as titre,'' as lang";
 	if (!isset($infos['date']))
 		$infos['date'] = isset($GLOBALS['table_date'][$infos['table_objet']]) ? $GLOBALS['table_date'][$infos['table_objet']] : '';
 	if (!isset($infos['statut']))
