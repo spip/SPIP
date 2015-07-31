@@ -317,7 +317,7 @@ if ($flag_editable) {
 	$link = new Link('sites_edit.php3');
 	$link->addVar('id_syndic');
 	$link->addVar('target', $clean_link->getUrl());
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
 	icone(_T('icone_modifier_site'), $link->getUrl(), "site-24.gif", "edit.gif");
 	echo "</td>";
@@ -341,7 +341,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<FORM ACTION='sites.php3?id_syndic=$id_syndic' METHOD='GET'>";
 		echo "<INPUT TYPE='hidden' NAME='id_syndic' VALUE='$id_syndic'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='img_pack/rien.gif'>";
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>"._T('info_date_referencement');
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";

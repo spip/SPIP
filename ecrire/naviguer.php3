@@ -56,7 +56,7 @@ function enfant($collection){
 
 //				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' />";
 				$les_enfants.= "<div style='position: absolute; $spip_lang_right: 0px; top: 0px; width: ".$w."px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' /></div>";
-				$les_enfants.= "<img src='img_pack/rien.gif' width='$w' height='$h' align='$spip_lang_right' />";
+				$les_enfants.= "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$w' height='$h' align='$spip_lang_right' />";
 				
 			}
 		}
@@ -66,7 +66,7 @@ function enfant($collection){
 		}
 
 		if (acces_restreint_rubrique($id_rubrique))
-			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
+			$les_enfants .= "<img src='" . _DIR_IMG_PACK . "admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
 
 		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
 		if (strlen($descriptif)) {
@@ -383,12 +383,12 @@ debut_cadre_relief($ze_logo);
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 if (acces_restreint_rubrique($id_rubrique))
-	$fleche = "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubrique')."'> ";
+	$fleche = "<img src='" . _DIR_IMG_PACK . "admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubrique')."'> ";
 gros_titre($fleche.$titre);
 echo "</td>";
 
 if ($coll > 0 AND $flag_editable) {
-	echo "<td><img src='img_pack/rien.gif' alt='' width=5></td>\n";
+	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=5></td>\n";
 	echo "<td  align='right' valign='top'>";
 	icone(_T('icone_modifier_rubrique'), "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
 	echo "</td>";
@@ -479,7 +479,7 @@ if (strpos($les_enfants2,"<div class='enfants'>")){
 // Afficher les sous-rubriques
 echo "<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
-echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' alt='' width=20></td>";
+echo "<td width=20 rowspan=2><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=20></td>";
 echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
 if (strlen($les_enfants2) > 0) echo "<p>";
 echo "</td></tr>";

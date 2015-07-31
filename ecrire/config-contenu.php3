@@ -53,7 +53,7 @@ debut_cadre_trait_couleur("forum-interne-24.gif", false, "", _T('info_mode_fonct
 $forums_publics=lire_meta("forums_publics");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 
 	if ($forums_publics == "non") $block = "'none', 'block'"; 
@@ -63,11 +63,11 @@ echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verd
 
 echo "</TD></TR>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 echo _T('info_activer_forum_public');
 echo "</TD></TR>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 
 	if ($forums_publics == "posteriori") $block = "'none', 'block'"; 
@@ -87,7 +87,7 @@ echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verd
 
 echo "</TD></TR>\n";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 if ($options == 'avancees') {
 	echo "<div id='config-options' class='display_au_chargement'>";
@@ -137,12 +137,12 @@ if ($options == "avancees") {
 	$accepter_inscriptions=lire_meta("accepter_inscriptions");
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_question_inscription_nouveaux_redacteurs')."</i></blockquote>";
 	echo "</TD></TR>";
 
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='center' class='verdana2'>";
 	afficher_choix('accepter_inscriptions', $accepter_inscriptions,
 		array('oui' => _T('item_accepter_inscriptions'),
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
@@ -158,14 +158,14 @@ if ($options == "avancees") {
 		_T('info_visiteurs'));
 		echo debut_block_invisible("accepter_visiteurs");
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 
 		if ($forums_publics<>'abo'
 		AND !spip_num_rows(spip_query("SELECT id_article
 		FROM spip_articles WHERE accepter_forum='abo'"))) {
 			echo _T('info_question_accepter_visiteurs');
 			echo "</TD></TR>";
-			echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 			afficher_choix('accepter_visiteurs', $accepter_visiteurs,
 				array('oui' => _T('info_option_accepter_visiteurs'),
 					'non' => _T('info_option_ne_pas_accepter_visiteurs')));
@@ -201,17 +201,17 @@ if (tester_mail()) {
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo "<blockquote><i>"._T('info_hebergeur_desactiver_envoi_email')."</i></blockquote>";
 	echo "</TD></TR></table>";
 
 	debut_cadre_relief("", false, "", _T('info_envoi_forum'));
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_option_email');
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 	afficher_choix('prevenir_auteurs', $prevenir_auteurs,
 		array('oui' => _T('info_option_faire_suivre'),
 			'non' => _T('info_option_ne_pas_faire_suivre')));
@@ -230,13 +230,13 @@ if (tester_mail()) {
 	debut_cadre_relief("", false, "", _T('info_suivi_activite'));
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_facilite_suivi_activite')."</FONT>";
 	echo "</TD></TR></table>";
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("suivi_edito", "oui", _T('bouton_radio_envoi_annonces_adresse'), $suivi_edito == "oui", "changeVisible(this.checked, 'config-edito', 'block', 'none');");
 
@@ -274,11 +274,11 @@ if (tester_mail()) {
 	debut_cadre_relief("", false, "", _T('info_annonce_nouveautes'));
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 	echo _T('info_non_envoi_annonce_dernieres_nouveautes');
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("quoi_de_neuf", "oui", _T('bouton_radio_envoi_liste_nouveautes'), $quoi_de_neuf == "oui", "changeVisible(this.checked, 'config-neuf', 'block', 'none');");
 	//	echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on' CHECKED>";
@@ -309,7 +309,7 @@ if (tester_mail()) {
 		echo "<p />";
 		debut_cadre_relief("", false, "", _T('info_email_envoi'));
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 		echo _T('info_email_envoi_txt');
 		echo " <input type='text' name='email_envoi' value=\"$email_envoi\" size='20' CLASS='fondl'>";
 		echo "</TD></TR>";

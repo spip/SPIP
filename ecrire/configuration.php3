@@ -112,7 +112,7 @@ if ($options == 'avancees') {
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'>";
+	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' COLSPAN='2' class='verdana2'>";
 	echo _T('texte_contenu_articles');
 	echo "</TD></TR>";
 
@@ -314,7 +314,7 @@ if ($options == "avancees") {
 			echo "</TD></TR>";
 
 			echo "<TR>";
-			echo "<TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+			echo "<TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 			afficher_choix('mots_cles_forums', $mots_cles_forums,
 				array('oui' => _T('item_ajout_mots_cles'),
 					'non' => _T('item_non_ajout_mots_cles')));
@@ -352,7 +352,7 @@ $moderation_sites = lire_meta("moderation_sites");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 		echo bouton_radio("activer_sites", "oui", _T('item_gerer_annuaire_site_web'), $activer_sites == "oui", "changeVisible(this.checked, 'config-site', 'block', 'none');");
 		echo " &nbsp;";
@@ -372,7 +372,7 @@ else $style = "display: none;";
 		echo "<p />";
 		debut_cadre_relief();
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>";
 		echo _T('info_question_proposer_site');
 			echo "<center><SELECT NAME='proposer_sites' CLASS='fondo' SIZE=1>\n";
@@ -392,11 +392,11 @@ else $style = "display: none;";
 		//
 		// Reglage de la syndication
 		//
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 		echo _T('texte_syndication');
 		echo "</TD></TR>";
 	
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
 
 			echo bouton_radio("activer_syndic", "oui", _T('item_utiliser_syndication'), $activer_syndic == "oui", "changeVisible(this.checked, 'config-syndic', 'block', 'none');");
 			echo "<br />";

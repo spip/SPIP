@@ -121,8 +121,8 @@ debut_cadre_enfonce("langues-24.gif");
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
 					echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='".($taille+5)."' HEIGHT=8>";
 					echo "<TR><TD style='align:$spip_lang_right; background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-					if ($visites_abs > 0) echo "<img src='img_pack/rien.gif' width='$visites_abs' height='8'>";
-					if ($visites>0) echo "<IMG SRC='img_pack/rien.gif' style='background-color: $couleur_foncee;' WIDTH='$visites' HEIGHT=8 BORDER=0>";
+					if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$visites_abs' height='8'>";
+					if ($visites>0) echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' WIDTH='$visites' HEIGHT=8 BORDER=0>";
 					echo "</TD></TR></TABLE>\n";
 	
 				echo "</td>";

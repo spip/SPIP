@@ -99,7 +99,7 @@ function avertissement_config() {
 
 	echo "<div class='verdana2' align='justify'>
 	<p align='center'><B>"._T('avis_attention')."</B></p>
-	<img src='img_pack/warning.gif' alt='' width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;' />";
+	<img src='" . _DIR_IMG_PACK . "warning.gif' alt='' width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;' />";
 
 	echo _T('texte_inc_config');
 

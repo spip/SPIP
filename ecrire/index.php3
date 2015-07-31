@@ -396,7 +396,7 @@ if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 		echo _T('info_activer_cookie');
 		echo aide ("cookie");
 		echo "</td>";
-		echo "<td width=10><img src='img_pack/rien.gif' width=10 alt='' />";
+		echo "<td width=10><img src='" . _DIR_IMG_PACK . "rien.gif' width=10 alt='' />";
 		echo "</td>";
 		echo "<td width='250'>";
 		icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");

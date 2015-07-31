@@ -218,7 +218,7 @@ debut_cadre_relief('auteur-24.gif');
 echo "<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0 WIDTH='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 echo "<tr bgcolor='#DBE1C5'>";
 echo "<td width='20'>";
-	$img = "<img src='img_pack/admin-12.gif' alt='' border='0'>";
+	$img = "<img src='" . _DIR_IMG_PACK . "admin-12.gif' alt='' border='0'>";
 	if ($tri=='statut')
 		echo $img;
 	else

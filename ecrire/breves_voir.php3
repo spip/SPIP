@@ -216,7 +216,7 @@ gros_titre($titre);
 echo "</td>";
 
 if ($flag_editable) {
-	echo "<td><img src='img_pack/rien.gif' alt='' width=5></td>\n";
+	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=5></td>\n";
 	echo "<td  align='right'>";
 	icone(_T('icone_modifier_breve'), "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.gif", "edit.gif");
 	echo "</td>";
@@ -239,7 +239,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<FORM ACTION='breves_voir.php3?id_breve=$id_breve' METHOD='GET'>";
 		echo "<INPUT TYPE='hidden' NAME='id_breve' VALUE='$id_breve'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='img_pack/rien.gif'>";
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>"._T('texte_date_publication_article');
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
@@ -344,7 +344,7 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	icone(_T('icone_publier_breve'), "breves.php3?id_breve=$id_breve&statut=publie", "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
-	echo "<td><img src='img_pack/rien.gif' alt='' width=5></td>\n";
+	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=5></td>\n";
 	echo "<td  align='right'>";
 	icone(_T('icone_refuser_breve'), "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.gif", "supprimer.gif");
 	echo "</td>";
