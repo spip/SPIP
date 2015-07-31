@@ -184,6 +184,17 @@ function detruit_restaurateur()
 function import_tables($request, $dir) {
 	global $import_ok, $abs_pos,  $affiche_progression_pourcent;
 
+	// regarder si on est pas en train d'importer dans une copie des tables
+	if (isset($GLOBALS['meta']['restauration_table_prefix'])) {
+		$charger = charger_fonction('charger','maj/vieille_base');
+		$charger($GLOBALS['meta']['vieille_version_installee']);
+		$GLOBALS['serveur_vieille_base'] = 0;
+		$GLOBALS['connexions'][$GLOBALS['serveur_vieille_base']]['prefixe'] = $GLOBALS['meta']['restauration_table_prefix'];
+		// recharger les metas
+		lire_metas();
+	}
+
+
 	$abs_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
 		$GLOBALS['meta']["status_restauration"];
 
@@ -274,6 +285,33 @@ function import_tables($request, $dir) {
 		$res = '';
 		affiche_progression_javascript('100 %', $size);
 	}
+	
+	if ($GLOBALS['spip_version'] != (str_replace(',','.',$GLOBALS['meta']['version_installee']))){
+		include_spip('base/upgrade');
+		maj_base(); // upgrade jusqu'a la version courante
+	}
+	// regarder si on est pas en train d'importer dans une copie des tables
+	if (isset($GLOBALS['meta']['restauration_table_prefix_source'])){
+		$prefixe_source = $GLOBALS['meta']['restauration_table_prefix_source'];
+		
+		$GLOBALS['connexions']['-1'] = $GLOBALS['connexions'][0];
+		// rebasculer le serveur sur les bonnes tables pour finir proprement
+		$GLOBALS['connexions'][0]['prefixe'] = $prefixe_source;
+
+		$tables = import_table_choix($request);
+		// recopier les tables l'une sur l'autre
+		// il FAUT recharger les bonnes desc serial/aux avant ...
+		$GLOBALS['tables_principales'] = $GLOBALS['nouvelle_base']['tables_principales'];
+		$GLOBALS['tables_auxiliaires'] = $GLOBALS['nouvelle_base']['tables_auxiliaires'];
+		foreach ($tables as $table){
+			$res = sql_select('*',$table,'','','','','','-1');
+			while ($row = sql_fetch($res,'-1')){
+				sql_insertq($table,$row);
+			}
+			sql_drop_table($table,'','-1');
+		}
+	}
+	
 
 	return $res ;
 }
@@ -281,6 +319,21 @@ function import_tables($request, $dir) {
 // http://doc.spip.org/@import_init_meta
 function import_init_meta($tag, $atts, $charset, $request)
 {
+	$version_base = $atts['version_base'];
+	if (version_compare($version_base,$GLOBALS['spip_version'],'<')
+	 && !isset($GLOBALS['meta']['restauration_table_prefix'])
+	 && ($request['insertion']!='on')
+	 && ($request['insertion']!='passe2')){
+		// effacer les tables ici
+		$init = $request['init'];
+		$init($request);
+
+		// creer une base avec les tables dans l'ancienne version
+		// et changer de contexte
+		$creer_base_anterieure = charger_fonction('create','maj/vieille_base');
+		$creer_base_anterieure($version_base);
+	}
+	
 	$version_archive = $atts['version_archive'];
 	$insert = $request['insertion'] ;
 	ecrire_meta('attributs_archive_restauration', serialize($atts),'non');
