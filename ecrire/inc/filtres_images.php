@@ -2057,18 +2057,17 @@ function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL)
 				imagesetpixel ($im_, $x, $y, $color);	
 			}
 		}
-
 		// passer en palette si besoin
-		if ($format!=='jpg' AND ($format!=='png' OR $qualite==0)){
-			// creer l'image finale a palette (on recycle l'image initiale)
-			imagetruecolortopalette($im,true,$qualite);
+		if ($format=='gif' OR ($format=='png' AND $qualite!==0)){
+			// creer l'image finale a palette (on recycle l'image initiale)			
+			@imagetruecolortopalette($im,true,$qualite);
 			//$im = imagecreate($x_i, $y_i);
 			// copier l'image true color vers la palette
 			imagecopy($im, $im_, 0, 0, 0, 0, $x_i, $y_i);
 			// matcher les couleurs au mieux par rapport a l'image initiale
 			// si la fonction est disponible (php>=4.3)
 			if (function_exists('imagecolormatch'))
-				imagecolormatch($im_, $im);
+				@imagecolormatch($im_, $im);
 			// produire le resultat
 			$image["fonction_image"]($im, "$dest");
 		}
@@ -2105,10 +2104,10 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 				$newheight = 20;
 			
 				$thumb = imagecreate($newwidth, $newheight);
-	
-				if (strncmp($terminaison,"jpg",3)==0) $source = imagecreatefromjpeg($fichier);
-				if (strncmp($terminaison,"gif",3)==0) $source = imagecreatefromgif($fichier);
-				if (strncmp($terminaison,"png",3)==0) $source = imagecreatefrompng($fichier);
+
+				if (eregi("\.je?pg$", $fichier)) $source = imagecreatefromjpeg($fichier);
+				if (eregi("\.gif$", $fichier)) $source = imagecreatefromgif($fichier);
+				if (eregi("\.png$", $fichier)) $source = imagecreatefrompng($fichier);
 				imagepalettetotruecolor($source);
 
 				imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
