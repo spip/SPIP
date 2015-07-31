@@ -273,7 +273,7 @@ function integre_image($id_document, $align, $type_aff) {
 	//
 	$alt_titre_doc = entites_html(texte_backend(supprimer_tags($titre)));
 	$alt_infos_doc = entites_html($type
-		. (($taille>0) ? ' - '.taille_en_octets($taille) : ''));
+		. (($taille>0) ? ' - '.texte_backend(taille_en_octets($taille)) : ''));
 	if ($row['distant'] == 'oui')
 		$alt_infos_doc .= ", ".$url_fichier;
 	if ($alt_titre_doc) $alt_sep = ', ';
