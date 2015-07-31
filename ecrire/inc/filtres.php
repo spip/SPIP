@@ -2162,10 +2162,11 @@ function encoder_contexte_ajax($c,$form='', $emboite=NULL, $ajaxid='') {
 	// toujours encoder l'url source dans le bloc ajax
 	$r = self();
 	$r = ' data-origin="'.$r.'"';
+	$class = 'ajaxbloc';
 	if ($ajaxid AND is_string($ajaxid)){
-		$c .= ' ajax-id-'.$ajaxid;
+		$class .= ' ajax-id-'.$ajaxid;
 	}
-	return "<div class='ajaxbloc' data-ajax-env='$c'$r>\n$emboite</div><!--ajaxbloc-->\n";
+	return "<div class='$class' data-ajax-env='$c'$r>\n$emboite</div><!--ajaxbloc-->\n";
 }
 
 // la procedure inverse de encoder_contexte_ajax()
