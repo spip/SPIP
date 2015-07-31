@@ -106,7 +106,7 @@ function init_body_class() {
 // http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie($id_auteur) {
 
-	$result_messages = sql_allfetsel("L.id_message", "spip_messages AS M LEFT JOIN spip_auteurs_liens AS L ON (L.objet='message' AND L.id_objet=M.id_message)", "L.id_auteur=".intval($id_auteur)." AND vu='non' AND statut='publie' AND type='normal'");
+	$result_messages = sql_allfetsel("M.id_message", "spip_messages AS M LEFT JOIN spip_auteurs_liens AS L ON (L.objet='message' AND L.id_objet=M.id_message)", "L.id_auteur=".intval($id_auteur)." AND vu='non' AND statut='publie' AND type='normal'");
 	$total_messages = count($result_messages);
 	if ($total_messages == 1) {
 		$row = $result_messages[0];
