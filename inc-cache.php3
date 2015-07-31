@@ -17,11 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Attention a modifier simultanement le sanity check de
 // la fonction retire_cache()
 //
-function generer_nom_fichier_cache($contexte='', $fond='') {
+function generer_nom_fichier_cache($contexte, $fond) {
 	global $_SERVER;
 	global $flag_gz;
 
-	if (!$contexte) {
+	if ($contexte === NULL) {
 		$fichier_requete = nettoyer_uri();
 	} else {
 		$fichier_requete = $fond;
@@ -143,7 +143,7 @@ function cache_valide($chemin_cache) {
 // retourne le nom du fichier cache, 
 // et affecte le param use_cache selon les specs de la fonction cache_valide
 
-function determiner_cache(&$use_cache, $contexte,$fond) {
+function determiner_cache(&$use_cache, $contexte, $fond) {
 	global $_SERVER;
 
 	// pour tester si la base est dispo
