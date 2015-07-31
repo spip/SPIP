@@ -74,7 +74,11 @@ function plugins_get_infos_dist($plug=false, $reload=false, $dir = _DIR_PLUGINS,
 	if (!isset($cache[$dir])) {
 		return array();
 	}
-	return is_string($plug) ? $cache[$dir][$plug] : $cache[$dir];
+	if (is_string($plug)) {
+		return isset($cache[$dir][$plug]) ? $cache[$dir][$plug] : array();
+	} else {
+		return $cache[$dir];
+	}
 }
 
 
