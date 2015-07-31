@@ -133,18 +133,20 @@ if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND 
 //
 
 $effacer_cache = !$delais; // $delais peut etre modifie par une inclusion de squelette...
-if (file_exists($chemin_cache)) {
-	if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui') {
-		if ($lastmodified) {
-			@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastmodified)." GMT");
-			@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + $delais)." GMT");
-		}
+
+if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui') {
+	if ($lastmodified) {
+		@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastmodified)." GMT");
+		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + $delais)." GMT");
 	}
-	else {
-		@Header("Expires: 0");
-		@Header("Cache-Control: no-cache,must-revalidate");
-		@Header("Pragma: no-cache");
-	}
+}
+else {
+	@Header("Expires: 0");
+	@Header("Cache-Control: no-cache,must-revalidate");
+	@Header("Pragma: no-cache");
+}
+
+if (file_exists($chemin_cache) && ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'HEAD')) {
 	include ($chemin_cache);
 }
 
