@@ -12,6 +12,8 @@ function texte_upload($inclus){
 		if (is_file("upload/".$entryName) AND !($entryName=='remove.txt')) {
 			if (ereg("\.([^.]+)$", $entryName, $match)) {
 				$ext = strtolower($match[1]);
+				if ($ext == 'jpeg')
+					$ext = 'jpg';
 				$req = "SELECT * FROM spip_types_documents WHERE extension='$ext'";
 				if ($inclus)
 					$req .= " AND inclus='$inclus'";
@@ -242,10 +244,13 @@ function pave_documents($id_article) {
 			$nbdoc += $type->cnt;
 		}
 
-		$a = "<a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=630,height=550'); void(0);\">";
+		$a = "<a href=\"javascript:window.open('article_documents.php3?id_article=$id_article',
+			'docs_article', 'scrollbars=yes,resizable=yes,width=630,height=550'); void(0);\">";
 
-		if ($nbdoc) $icone = "documents-directory.png";
-		else $icone = "download-dir.png";
+		if ($nbdoc)
+			$icone = "documents-directory.png";
+		else
+			$icone = "download-dir.png";
 		$txticone = "$a<img src='IMG2/$icone' width='48' height='48' border='0'></a>";
 
 		if ($nbdoc == 0) {
@@ -254,11 +259,11 @@ function pave_documents($id_article) {
 		else {
 			$txtdoc .= $a."<b>";
 			if ($nbdoc == 1)
-				$txtdoc .= "Un document li&eacute; &agrave; l'article</b></a>";
+				$txtdoc .= "Un document li&eacute; &agrave; l'article</b></a><br>\n";
 			else {
 				$txtdoc .= "$nbdoc documents li&eacute;s &agrave; l'article</b></a><br>\n";
-				//$txtdoc .= $documents;
 			}
+			$txtdoc .= $documents;
 		}
 
 		debut_boite_info();
