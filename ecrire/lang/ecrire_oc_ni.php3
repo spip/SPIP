@@ -709,9 +709,12 @@ una color indica lo sieu estat:',
 'statut_admin_restreint' => '(admin limitat)',
 'syndic_choix_moderation' => 'Que faire dei estacs venentsen provenen&ccedil;a d\'aqu&egrave;u sit&nbsp;?',
 'syndic_choix_oublier' => 'Que faire dei estacs que figuran pas plus dins lo fichi&egrave;r de syndicacion&nbsp;?',
+'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'Estac vielh',
 'syndic_option_miroir' => 'li blocar automaticament',
 'syndic_option_oubli' => 'li efa&ccedil;ar (apr&egrave;s @mois@&nbsp;mes)',
+'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
+'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Opcions de syndicacion&nbsp;:',
 
 
