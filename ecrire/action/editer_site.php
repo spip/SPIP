@@ -114,6 +114,7 @@ function action_editer_site_dist() {
 // Cette fonction redefinit la tache standard de syndication
 // pour la forcer a syndiquer le site dans la globale genie_syndic_now
 
+// http://doc.spip.org/@genie_syndic
 function genie_syndic($t) {
 	include_spip('cron/syndic');
 	$t = syndic_a_jour($GLOBALS['genie_syndic_now']);

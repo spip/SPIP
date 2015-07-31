@@ -382,6 +382,7 @@ function definir_barre_gadgets() {
 	);
 }
 
+// http://doc.spip.org/@bandeau_creer_url
 function bandeau_creer_url($url, $args=""){
 	if (preg_match(',[\/\?],',$url))
 		return $url;
