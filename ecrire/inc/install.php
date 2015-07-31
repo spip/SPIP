@@ -215,24 +215,15 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 	$sqlite2 = in_array(2, $versions);
 	$sqlite3 = in_array(3, $versions);
 
+	// cacher le formlaire s'il n' a qu'un serveur 
+	// ou si l'installation est predefinie avec un serveur particulier
 	if (($pg + $mysql + $sqlite2 + $sqlite3) == 1){
 		if ($mysql) 	$server_db = 'mysql';
 		if ($pg) 		$server_db = 'pg';
 		if ($sqlite2) 	$server_db = 'sqlite2';
 		if ($sqlite3) 	$server_db = 'sqlite3';
-	}
-
-	else if ($predef[0]) {
-		if (!is_string($predef[0])) {
-			$server_db = _INSTALL_SERVER_DB;
-			$m = $p = '';
-		} else {
-			$server_db ='';
-			$m = strcasecmp($predef[0], 'mysql') ? '' : " selected='selected'";
-			$p = strcasecmp($predef[0], 'pg') ? '' : " selected='selected'";
-	  		$s2 = strcasecmp($predef[0], 'sqlite2') ? '' : " selected='selected'";
-	  		$s3 = strcasecmp($predef[0], 'sqlite3') ? '' : " selected='selected'";
-		}
+	} elseif ($predef[0]) {
+		$server_db = _INSTALL_SERVER_DB;
 	}
 
 	return generer_form_ecrire('install', (
@@ -244,8 +235,13 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 			:"")
 			
 	. '<script language="javascript" src=' . find_in_path('javascript/jquery.js') . '></script>'
-	. '<script language="javascript">
+	. '<script language="javascript"><!--
 		$(document).ready(function() {
+			if ($("input[@type=hidden][@name=server_db]").attr("value").match("sqlite*")){
+				$("#install_adresse_base_hebergeur").hide();
+				$("#install_login_base_hebergeur").hide();
+				$("#install_pass_base_hebergeur").hide();
+			}			
 			$("#sql_serveur_db").change(function(){
 				if ($(this).find("option:selected").attr("value").match("sqlite*")){
 					$("#install_adresse_base_hebergeur").hide();
@@ -258,24 +254,27 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 				}
 			});
 		});
-		</script>'
+		// --></script>'
 	
 	. ($server_db
 		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
+			. (($predef[0])
+				?_L('<b>Serveur de base de donn&eacute;es attribu&eacute; par l\'h&eacute;bergeur</b>')
+				:'')
 		: ('<fieldset><legend>'
 		._L('Indiquer le type de base de donn&eacute;es :')
 		. "\n<select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
-			? "\n<option value='mysql'$m>"._L('MySQL')."</option>"
+			? "\n<option value='mysql'>"._L('MySQL')."</option>"
 			: '')
 		. ($pg
-			? "\n<option value='pg'$p>"._L('PostGreSQL')."</option>"
+			? "\n<option value='pg'>"._L('PostGreSQL')."</option>"
 			: '')
 		. (($sqlite2)
-			? "\n<option value='sqlite2'$s2>"._L('SQLite 2')."</option>"
+			? "\n<option value='sqlite2'>"._L('SQLite 2')."</option>"
 			: '')
 		. (($sqlite3)
-			? "\n<option value='sqlite3'$s3>"._L('SQLite 3')."</option>"
+			? "\n<option value='sqlite3'>"._L('SQLite 3')."</option>"
 			: '')
 		   . "\n</select></legend></fieldset>")
 	)
