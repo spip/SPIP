@@ -10,21 +10,43 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Fichier gérant l'actualisation et le suivi des rubriques, et de leurs branches
+ *
+ * @package SPIP\Rubriques
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-// Fonction a appeler lorsque le statut d'un objet change dans une rubrique
-// ou que la rubrique est deplacee.
-// Le 2e arg est un tableau ayant un index "statut" (indiquant le nouveau)
-// et eventuellement un index "id_rubrique" (indiquant le deplacement)
-
-// Si le statut passe a "publie", la rubrique et ses parents y passent aussi
-// et les langues utilisees sont recalculees.
-// Consequences symetriques s'il est depublie'.
-// S'il est deplace' alors qu'il etait publiee, double consequence.
-// Tout cela devrait passer en SQL, sous forme de Cascade SQL.
-
-// http://doc.spip.org/@calculer_rubriques_if
+/**
+ * Recalcule les statuts d'une rubrique
+ * 
+ * Fonction à appeler lorsque le statut d'un objet change dans une rubrique
+ * ou que la rubrique est deplacée.
+ * 
+ * Si le statut passe a "publie", la rubrique et ses parents y passent aussi
+ * et les langues utilisees sont recalculées.
+ * Conséquences symétriques s'il est depublié.
+ * 
+ * S'il est deplacé alors qu'il était publiée, double conséquence.
+ * 
+ * Tout cela devrait passer en SQL, sous forme de Cascade SQL.
+ *
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique
+ * @param array $modifs
+ *     Tableau de description des modifications.
+ *     Peut avoir 2 index, 'statut' étant obligatoire :
+ *     - statut : indique le nouveau statut de la rubrique
+ *     - id_rubrique : indiquer la rubrique dans laquelle on déplace la rubrique (son nouveau parent donc)
+ * @param string $statut_ancien
+ *     Ancien statut de la rubrique
+ * @param bool $postdate
+ *     true pour recalculer aussi la date du prochain article post-daté
+ * @return bool
+ *     true si le statut change effectivement
+**/
 function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postdate = false)
 {
 	$neuf = false;
@@ -58,11 +80,20 @@ function calculer_rubriques_if ($id_rubrique, $modifs, $statut_ancien='', $postd
 	ecrire_meta('langues_utilisees', $langues);
 }
 
-// Si premiere publication dans une rubrique, la passer en statut "publie"
-// avec consequence sur ses parentes.
-// Retourne Vrai si le statut a change
 
-// http://doc.spip.org/@publier_branche_rubrique
+/**
+ * Publie une rubrique et sa hiérarchie de rubriques
+ * 
+ * Fonction à appeler lorsqu'on dépublie ou supprime quelque chose
+ * dans une rubrique. 
+ *
+ * [fixme] Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
+ * 
+ * @param int $id_rubrique
+ *     Identifiant de la rubrique
+ * @return bool
+ *     true si le statut change effectivement
+ */
 function publier_branche_rubrique($id_rubrique)
 {
 	$id_pred = $id_rubrique;
@@ -78,13 +109,17 @@ function publier_branche_rubrique($id_rubrique)
 }
 
 /**
- * Fonction a appeler lorsqu'on depublie ou supprime qqch dans une rubrique
- * retourne Vrai si le statut change effectivement
+ * Dépublie si nécessaire des éléments d'une hiérarchie de rubriques
+ * 
+ * Fonction à appeler lorsqu'on dépublie ou supprime quelque chose
+ * dans une rubrique. 
  *
- * http://doc.spip.org/@depublier_branche_rubrique_if
- *
+ * [fixme] Le nom de la fonction est trompeur, vu que la fonction remonte dans la hierarchie !
+ * 
  * @param int $id_rubrique
+ *     Identifiant de la rubrique
  * @return bool
+ *     true si le statut change effectivement
  */
 function depublier_branche_rubrique_if($id_rubrique){
 	$date = date('Y-m-d H:i:s'); // figer la date
@@ -104,16 +139,20 @@ function depublier_branche_rubrique_if($id_rubrique){
 }
 
 /**
- * Depublier une rubrique si aucun contenu publie connu
- * retourne true si la rubrique a ete depubliee
- *
+ * Dépublier une rubrique si aucun contenu publié connu n'est trouvé dedans
+ * 
  * @param int $id_rubrique
- * @param string $date
+ *     Identifiant de la rubrique à tester
+ * @param string|null $date
+ *     Date pour le calcul des éléments post-datés.
+ *     null = date actuelle.
  * @return bool
+ *    true si la rubrique a été dépubliée
  */
 function depublier_rubrique_if($id_rubrique,$date=null){
-	if (is_null($date))
+	if (is_null($date)) {
 		$date = date('Y-m-d H:i:s');
+	}
 	$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
 		" AND date <= ".sql_quote($date) : '';
 
@@ -156,12 +195,20 @@ function depublier_rubrique_if($id_rubrique,$date=null){
 	return true;
 }
 
-//
-// Fonction appelee apres importation:
-// calculer les meta-donnes resultantes,
-// remettre de la coherence au cas ou la base importee en manquait
-// Cette fonction doit etre invoque sans processus concurrent potentiel.
-// http://doc.spip.org/@calculer_rubriques
+
+/**
+ * Recalcule des héritages de rubriques
+ *
+ * Recalcule le statut des rubriques, les langues héritées et la date
+ * du prochain article post-daté
+ * 
+ * Cette fonction est appelée après importation: elle calcule les meta-donnes
+ * resultantes et remet de la coherence au cas où la base importée en manquait
+ * 
+ * Cette fonction doit etre invoquée sans processus concurrent potentiel.
+ * 
+ * @return void
+**/
 function calculer_rubriques() {
 
 	calculer_rubriques_publiees();
@@ -178,12 +225,17 @@ function calculer_rubriques() {
 	calculer_prochain_postdate();
 }
 
-// Recalcule l'ensemble des donnees associees a l'arborescence des rubriques
-// Attention, faute de SQL transactionnel on travaille sur
-// des champs temporaires afin de ne pas casser la base
-// pendant la demi seconde de recalculs
 
-// http://doc.spip.org/@calculer_rubriques_publiees
+/**
+ *  
+ * Recalcule l'ensemble des donnees associees a l'arborescence des rubriques
+ * 
+ * Attention, faute de SQL transactionnel on travaille sur
+ * des champs temporaires afin de ne pas casser la base
+ * pendant la demi seconde de recalculs
+ * 
+ * @return void
+**/
 function calculer_rubriques_publiees() {
 
 	// Mettre les compteurs a zero
@@ -224,7 +276,14 @@ function calculer_rubriques_publiees() {
 	sql_update('spip_rubriques', array('date'=>'date_tmp', 'statut'=>'statut_tmp'));
 }
 
-// http://doc.spip.org/@propager_les_secteurs
+/**
+ * Recalcule les secteurs et les profondeurs des rubriques (et articles)
+ *
+ * Cherche les rubriques ayant des id_secteur ou profondeurs ne correspondant pas
+ * avec leur parent, et les met à jour. De même avec les articles et leur id_secteur
+ * 
+ * @return void
+**/
 function propager_les_secteurs()
 {
 	// fixer les id_secteur des rubriques racines
@@ -251,10 +310,17 @@ function propager_les_secteurs()
 	pipeline('trig_propager_les_secteurs','');
 }
 
-//
-// Calculer la langue des sous-rubriques et des articles
-//
-// http://doc.spip.org/@calculer_langues_rubriques_etape
+
+/**
+ * Recalcule les langues héritées des sous-rubriques
+ *
+ * Cherche les langues incorrectes de sous rubriques, qui doivent hériter
+ * de la rubrique parente lorsque langue_choisie est différent de oui,
+ * et les corrige.
+ * 
+ * @return bool
+ *     true si un changement a eu lieu
+**/
 function calculer_langues_rubriques_etape() {
 	$s = sql_select("A.id_rubrique AS id_rubrique, R.lang AS lang", "spip_rubriques AS A, spip_rubriques AS R", "A.id_parent = R.id_rubrique AND A.langue_choisie != 'oui' AND R.lang<>'' AND R.lang<>A.lang");
 
@@ -267,7 +333,18 @@ function calculer_langues_rubriques_etape() {
 	return $t;
 }
 
-// http://doc.spip.org/@calculer_langues_rubriques
+/**
+ * Recalcule les langues des rubriques et articles
+ *
+ * Redéfinit la langue du site sur les rubriques sans langue spécifiée
+ * (langue_choisie différent de 'oui')
+ * 
+ * Redéfinit les langues des articles sans langue spécifiée
+ * (langue_choisie différent de 'oui') en les rebasant sur la langue
+ * de la rubrique parente lorsque ce n'est pas le cas.
+ *
+ * @return void 
+**/
 function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
@@ -291,9 +368,19 @@ function calculer_langues_rubriques() {
 	pipeline('trig_calculer_langues_rubriques','');
 }
 
-// Cette fonction calcule la liste des langues reellement utilisees dans le
-// site public
-// http://doc.spip.org/@calculer_langues_utilisees
+
+/**
+ * Calcule la liste des langues reellement utilisees dans le site public
+ *
+ * La recherche de langue est effectuée en recréant une boucle pour chaque
+ * objet éditorial gérant des langues de sorte que les éléments non publiés
+ * ne sont pas pris en compte.
+ * 
+ * @param string $serveur
+ *    Nom du connecteur à la base de données
+ * @return string
+ *    Liste des langues utilisées séparées par des virgules
+**/
 function calculer_langues_utilisees ($serveur='') {
 	include_spip('public/interfaces');
 	include_spip('public/compiler');
@@ -344,22 +431,30 @@ function calculer_langues_utilisees ($serveur='') {
 }
 
 /**
- * http://doc.spip.org/@calcul_branche
- * depreciee, pour compatibilite
+ * Calcule une branche de rubriques
+ * 
+ * Dépréciée, pour compatibilité
  *
+ * @deprecated
+ * @see calcul_branche_in()
+ * 
  * @param string|int|array $generation
  * @return string
  */
 function calcul_branche ($generation) {return calcul_branche_in($generation);}
 
 /**
- * Calcul d'une branche
- * (liste des id_rubrique contenues dans une rubrique donnee)
- * pour le critere {branche}
- * http://doc.spip.org/@calcul_branche_in
+ * Calcul d'une branche de rubrique
+ * 
+ * Liste des id_rubrique contenues dans une rubrique donnée
  *
+ * @see inc_calcul_branche_in_dist()
+ * 
  * @param string|int|array $id
+ *     Identifiant de la, ou des rubriques noeuds
  * @return string
+ *     Liste des identifiants séparés par des virgules,
+ *     incluant les rubriques noeuds et toutes leurs descendances
  */
 function calcul_branche_in($id) {
 	$calcul_branche_in = charger_fonction('calcul_branche_in','inc');
@@ -367,13 +462,16 @@ function calcul_branche_in($id) {
 }
 
 /**
- * Calcul d'une hierarchie
- * (liste des id_rubrique contenants une rubrique donnee)
- * (contrairement a la fonction calcul_branche_in qui calcule les
- * rubriques contenues)
+ * Calcul d'une hiérarchie
+ * 
+ * Liste des id_rubrique contenant une rubrique donnée
  *
- * @param mixed $id
+ * @see inc_calcul_hierarchie_in_dist()
+ * @param string|int|array $id
+ *     Identifiant de la, ou des rubriques dont on veut obtenir les hierarchies
  * @return string
+ *     Liste des identifiants séparés par des virgules,
+ *     incluant les rubriques transmises et toutes leurs parentées
  */
 function calcul_hierarchie_in($id) {
 	$calcul_hierarchie_in = charger_fonction('calcul_hierarchie_in','inc');
@@ -382,13 +480,18 @@ function calcul_hierarchie_in($id) {
 
 
 /**
- * Calcul d'une branche
- * (liste des id_rubrique contenues dans une rubrique donnee)
+ * Calcul d'une branche de rubriques
+ * 
+ * Liste des id_rubrique contenues dans une rubrique donnée
  * pour le critere {branche}
- * fonction surchargeable pour optimisation
+ * 
+ * Fonction surchargeable pour optimisation
  *
  * @param string|int|array $id
+ *     Identifiant de la, ou des rubriques noeuds
  * @return string
+ *     Liste des identifiants séparés par des virgules,
+ *     incluant les rubriques noeuds et toutes leurs descendances
  */
 function inc_calcul_branche_in_dist($id) {
 	static $b = array();
@@ -421,13 +524,17 @@ function inc_calcul_branche_in_dist($id) {
 
 
 /**
- * Calcul d'une hierarchie
- * (liste des id_rubrique contenants une rubrique donnee)
- * (contrairement a la fonction calcul_branche_in qui calcule les
- * rubriques contenues)
+ * Calcul d'une hiérarchie
+ * 
+ * Liste des id_rubrique contenant une rubrique donnée,
+ * contrairement à la fonction calcul_branche_in() qui calcule les
+ * rubriques contenues
  *
  * @param string|int|array $id
+ *     Identifiant de la, ou des rubriques dont on veut obtenir les hierarchies
  * @return string
+ *     Liste des identifiants séparés par des virgules,
+ *     incluant les rubriques transmises et toutes leurs parentées
  */
 function inc_calcul_hierarchie_in_dist($id) {
 	static $b = array();
@@ -456,11 +563,16 @@ function inc_calcul_hierarchie_in_dist($id) {
 }
 
 
-// Appelee lorsqu'un (ou plusieurs) article post-date arrive a terme 
-// ou est redate'
-// Si $check, affecte le statut des rubriques concernees.
-
-// http://doc.spip.org/@calculer_prochain_postdate
+/**
+ * Calcule la date du prochain article post-daté 
+ *
+ * Appelée lorsqu'un (ou plusieurs) article post-daté arrive à terme
+ * ou est redaté
+ * 
+ * @param bool $check
+ *     true pour affecter le statut des rubriques concernées.
+ * @return void
+**/
 function calculer_prochain_postdate($check= false) {
 	include_spip('base/abstract_sql');
 	if ($check) {
@@ -486,14 +598,30 @@ function calculer_prochain_postdate($check= false) {
 	spip_log("prochain postdate: $t");
 }
 
-
-// creer_rubrique_nommee('truc/machin/chose') va creer
-// une rubrique truc, une sous-rubrique machin, et une sous-sous-rubrique
-// chose, sans creer de rubrique si elle existe deja
-// a partir de id_rubrique (par defaut, a partir de la racine)
-// NB: cette fonction est tres pratique, mais pas utilisee dans le core
-// pour rester legere elle n'appelle pas calculer_rubriques()
-// http://doc.spip.org/@creer_rubrique_nommee
+/**
+ * Crée une arborescence de rubrique
+ * 
+ * creer_rubrique_nommee('truc/machin/chose') va créer
+ * une rubrique truc, une sous-rubrique machin, et une sous-sous-rubrique
+ * chose, sans créer de rubrique si elle existe deja
+ * à partir de id_rubrique (par défaut, à partir de la racine)
+ *
+ * La fonction cherche tout de même si les rubriques demandées
+ * (pour la parentée indiquée) n'existent pas déjà avant d'en
+ * créer de nouvelles
+ * 
+ * NB: cette fonction est très pratique, mais pas utilisée dans le core
+ * pour rester légère elle n'appelle pas calculer_rubriques()
+ *
+ * @param string $titre
+ *     Titre des rubriques, séparés par des /
+ * @param int $id_parent
+ *     Identifiant de la rubrique parente
+ * @param string $serveur
+ *     Nom du connecteur à la base de données
+ * @return int
+ *     Identifiant de la rubrique la plus profonde.
+ */
 function creer_rubrique_nommee($titre, $id_parent=0, $serveur='') {
 
 	// eclater l'arborescence demandee
