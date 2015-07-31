@@ -1,7 +1,7 @@
 <?php
 
 //
-// Ce fichier ne sera execute qu'une fois   
+// Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CHARSETS")) return;
 define("_ECRIRE_INC_CHARSETS", "1");
 
