@@ -10,9 +10,40 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Outils pour lecture de XML
+ *
+ * @package SPIP\Core\XML
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// http://doc.spip.org/@spip_xml_load
+
+/**
+ * Lit un fichier xml donné et renvoie son arbre.
+ *
+ * @example
+ *     ```
+ *     include_spip('inc/xml');
+ *     $arbre = spip_xml_load(_DIR_PLUGINS . "$plug/plugin.xml");
+ *     ```
+ *
+ * @uses spip_xml_parse()
+ * 
+ * @param string $fichier
+ *     Chemin local ou URL distante du fichier XML
+ * @param bool $strict
+ *     true pour râler si une balise n'est pas correctement fermée, false sinon.
+ * @param bool $clean ?
+ * @param int $taille_max
+ *     Taille maximale si fichier distant
+ * @param string|array $datas
+ *     Données à envoyer pour récupérer le fichier distant
+ * @param int $profondeur ?
+ * @return array|bool
+ *     - array : l'arbre XML,
+ *     - false si l'arbre xml ne peut être créé ou est vide
+**/
 function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 1048576, $datas='', $profondeur = -1){
 	$contenu = "";
 	if (preg_match(",^(http|ftp)://,",$fichier)){
@@ -28,7 +59,22 @@ function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 104857
 }
 
 if (!defined('_SPIP_XML_TAG_SPLIT')) define('_SPIP_XML_TAG_SPLIT', "{<([^:>][^>]*?)>}sS");
-// http://doc.spip.org/@spip_xml_parse
+
+/**
+ * Parse une chaine XML donnée et retourne un tableau.
+ *
+ * @see spip_xml_aplatit() pour l'inverse
+ * 
+ * @param string $texte
+ *     Texte XML
+ * @param bool $strict
+ *     true pour râler si une balise n'est pas correctement fermée, false sinon.
+ * @param bool $clean ?
+ * @param int $profondeur ?
+ * @return array|bool
+ *     - array : l'arbre XML,
+ *     - false si l'arbre xml ne peut être créé ou est vide
+**/
 function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 	$out = array();
   // enlever les commentaires
