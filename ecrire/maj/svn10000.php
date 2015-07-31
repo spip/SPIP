@@ -479,4 +479,18 @@ $GLOBALS['maj'][19236] = array(
 	array('maj_collation_sqlite'),
 );
 
+$GLOBALS['maj'][19268] = array(
+	array('supprimer_toutes_sessions'),
+);
+
+
+function supprimer_toutes_sessions() {
+	spip_log("supprimer sessions auteur");
+	$dir = opendir(_DIR_SESSIONS);
+	while(($f = readdir($dir)) !== false) {
+		spip_unlink(_DIR_SESSIONS . $f);
+		if (time() >= _TIME_OUT) return;
+	}
+}
+
 ?>
