@@ -71,25 +71,36 @@ table.spip td {
 
 if (strlen($aide) < 2) $aide = "spip";
 
-
-// selection de la langue
+// Selection du fichier d'aide correspondant a la langue
 $lang_aide = $GLOBALS['spip_lang'];
 // provisoire ;-))
 if ($lang_aide == 'zg') $lang_aide = 'en';
 
-if (!file_exists($fichier_aide = "AIDE_$lang_aide/aide")) {
-	$fichier_aide = "AIDE/aide";
-	$lang_aide = '';
+if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
+	$fichier_aide = "AIDE/fr/aide";
+	$lang_aide = 'fr';
 }
-else $lang_aide = '_'.$lang_aide;
 
 $html = join('', file($fichier_aide));
 
 $html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
 $html = substr($html, 0, strpos($html, "</$aide>"));
 
-echo ereg_replace("AIDE(/[^[:space:]]+\.(gif|jpg))", "AIDE$lang_aide\\1",
-	justifier(propre($html)."<p>"));
+// Localisation des images de l'aide (si disponibles)
+$suite = $html;
+$html = "";
+while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
+	$f = $r[1];
+	if (file_exists("AIDE/$lang_aide/$f")) $f = "$lang_aide/$f";
+	else if (file_exists("AIDE/en/$f")) $f = "en/$f";
+	else if (file_exists("AIDE/fr/$f")) $f = "fr/$f";
+	$p = strpos($suite, $r[0]);
+	$html .= substr($suite, 0, $p) . "AIDE/$f";
+	$suite = substr($suite, $p + strlen($r[0]));
+}
+$html .= $suite;
+
+echo justifier(propre($html)."<p>");
 echo "<font size=2>$les_notes</font><p>";
 
 ?>

@@ -542,9 +542,7 @@ else if ($etape == 'ldap1') {
 
 	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
-	echo "<P>"._T('entree_informations_connexion_ldap_1');
-	echo _T('entree_informations_connexion_ldap_2');
-	echo _T('entree_informations_connexion_ldap_3');
+	echo "<P>"._T('entree_informations_connexion_ldap');
 
 	$adresse_ldap = 'localhost';
 	$port_ldap = 389;

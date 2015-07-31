@@ -163,7 +163,7 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 if ($options == "avancees") {
 	echo "<p>";
 	if (lire_meta("activer_messagerie") == 'oui' AND $connect_activer_messagerie != 'non') {
-		icone_horizontale(_T('icone_messagerie_peronnelle'), "messagerie.php3", "messagerie-24.gif");
+		icone_horizontale(_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif");
 	}
 
 	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
@@ -264,7 +264,7 @@ if ($connect_statut == "0minirezo") {
 	if (!$cookie_admin) {
 		echo "<table width=100%><tr width=100%>";
 		echo "<td width=100%>";
-		echo _T('info_activer_cookie_1')."</b>"._T('info_activer_cookie_2');
+		echo _T('info_activer_cookie');
 		echo aide ("cookie");
 		echo "</td>";
 		echo "<td width=10><img src='img_pack/rien.gif' width=10>";
