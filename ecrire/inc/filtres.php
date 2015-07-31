@@ -1779,10 +1779,20 @@ function env_to_attributs ($texte){
 }
 
 // Inserer jQuery
+// et au passage verifier qu'on ne doublonne pas #INSERT_HEAD
 // http://doc.spip.org/@f_jQuery
 function f_jQuery ($texte) {
-	$js = "<script src=\"".generer_url_public('jquery.js')."\" type=\"text/javascript\"></script>\n";
- 	return $js.$texte;
+	static $doublon=0;
+	if ($doublon++) {
+		include_spip('public/debug');
+		$texte = affiche_erreurs_page(array(
+			array("#INSERT_HEAD",_L("Double occurence")))
+		) . $texte;
+	} else {
+		$texte .= "\n<script src=\"".generer_url_public('jquery.js')
+			. "\" type=\"text/javascript\"></script>\n";
+	}
+	return $texte;
 }
 
 // Concatener des chaines

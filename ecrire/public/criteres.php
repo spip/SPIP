@@ -67,7 +67,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
 				"')");
-# la ligne suivante avait l'intention d'éviter une collecte deja faite
+# la ligne suivante avait l'intention d'eviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
 # {!doublons A}{doublons B}
 # (de http://article.gmane.org/gmane.comp.web.spip.devel/31034)
@@ -700,7 +700,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// garde pour compatibilite avec code des plugins anterieurs, mais redondant avec la ligne precedente
 	if ($col == 'statut') $boucles[$idb]->statut = true;
 
-	// ajout pour le cas spécial des forums
+	// ajout pour le cas special des forums
 	// il faut alors interdire a la fonction de boucle sur forum
 	// de selectionner uniquement les forums sans pere
 

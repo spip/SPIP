@@ -327,26 +327,23 @@ function f_tidy ($texte) {
 	return $texte;
 }
 
-// Inserer les css et js meme si #INSERT_HEAD n'est pas dans le squelette
+// Offre #INSERT_HEAD sur tous les squelettes (bourrin)
+// a activer dans mes_options via :
+// $spip_pipeline['affichage_final'] .= '|f_insert_head';
 // http://doc.spip.org/@f_insert_head
-function f_insert_head($texte){
-	return "<!--insert_head-->".$texte;
-}
+function f_insert_head($texte) {
+	if (!$GLOBALS['html']) return $texte;
+	include_spip('public/admin'); // pour strripos
 
-// http://doc.spip.org/@f_insert_head_defaut
-function f_insert_head_defaut($texte){
-	if ($GLOBALS['desactiver_insert_head_defaut']==true) return $texte;
-	if (($p = strpos($texte,"<!--insert_head-->"))!==FALSE){
-		if ($GLOBALS['auteur_session']['statut']!='0minirezo') return $texte;
-		if (strpos($texte,"<!--insert_head-->",$p+18)!==FALSE){
-			include_spip('public/debug');
-			$texte = affiche_erreurs_page(array(array("#INSERT_HEAD",_L("Double occurence")))) . $texte;
-		}
-		return $texte;
+	($pos = stripos($texte, '</head>'))
+	    || ($pos = stripos($texte, '<body>'))
+	    || ($pos = 0);
+
+	if (false === strpos(substr($texte, 0,$pos), '<!-- insert_head -->')) {
+		$insert = "\n".pipeline('insert_head','<!-- f_insert_head -->')."\n";
+		$texte = substr_replace($texte, $insert, $pos, 0);
 	}
-	if (!preg_match(",<head[^>]*>,Uis",$texte,$regs)) return $texte;
-	$insert = "\n".pipeline('insert_head','')."\n";
-	$texte = str_replace($regs[0],$regs[0].$insert,$texte);
+
 	return $texte;
 }
 
