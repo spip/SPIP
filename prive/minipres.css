@@ -1,14 +1,14 @@
 /* Correction des styles par defaut
 ---------------------------------------------- */
-html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
-body { font: 1em Verdana, Geneva, Sans, sans-serif; color: #2e3436; }
+html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { font: 1em sans-serif; color: #2e3436; }
 input, textarea, select { font-size: 100%; font-family: inherit; }
 
 h1 { margin: 1em 0 1em 0; font-size: 1.2em; font-weigth: bold; color: #5c3566; }
 h2 { margin: 0.80em 0 0.80em 0; font-size: 1.1em; font-weigth: normal; }
 
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
-ul,ol,li { list-style: none; /*text-align: justify;*/ }
+ul,ol,li { list-style: none; }
 
 
 /* Disposition a l'ecran
@@ -56,18 +56,12 @@ p.resultat.echec { background-color: #d60c0c; }
 #etapes span.encours { background: url(images/etape-encours.gif) center no-repeat; }
 #etapes span.todo { background: url(images/etape-todo.gif) center no-repeat; }
 
-#infos_etapes { height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; text-align: left; font-family: helvetica, arial, sans; list-style: none; }
-#infos_etapes li { float: left; margin-left: -28px; padding-left: 29px; text-align: left; font-size: 0.85em; line-height: 1.05em; }
-#infos_etapes li .fond { width: 9em; height: 69px; padding-right: 2em; padding-top: 10px; }
-#infos_etapes li span.numero_etape { float: left; display: block; height: 50px; margin-left: -10px; padding-right: 3px; padding-left: 3px; padding-top: 7px; font-weight: bold; font-size: 3em; font-family: helvetica, arial, sans; }
-#infos_etapes li.encours { background: url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat left top; color: #fff; font-weight: bold; }
-#infos_etapes li.encours .fond { background: #ecb043 url(../prive/images/degrade-etapes-fonce-left.gif) no-repeat -30px top; }
-#infos_etapes li.prochains  { background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; color: #888; }
-#infos_etapes li.prochains .fond { background: #dbdbdb url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
-#infos_etapes li.valides { background: url(../prive/images/degrade-etapes-vert-left.gif) no-repeat left top; color: #116d05; }
-#infos_etapes li.valides .fond { background: #88f560 url(../prive/images/degrade-etapes-vert-left.gif) no-repeat -30px top; }
-#infos_etapes li.erreur { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat left top; color: #fff; }
-#infos_etapes li.erreur .fond { background: url(../prive/images/degrade-etapes-rouge-left.gif) no-repeat -30px top; }
+#infos_etapes { height: 63px; overflow: hidden; margin: 0; padding: 0; padding-left: 10px; background: #dbdbdb url(../prive/images/degrade-etapes-clair-left.gif) no-repeat right top; text-align: left; font-family: helvetica, arial, sans; list-style: none; }
+#infos_etapes li { float: left; margin-left: -28px; padding-left: 29px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat left top; color: #555; text-align: left; font-size: 0.85em; line-height: 1.05em; }
+#infos_etapes li .fond { width: 9em; height: 69px; padding-right: 2em; padding-top: 10px; background: url(../prive/images/degrade-etapes-clair-left.gif) no-repeat -30px top; }
+#infos_etapes li span.numero_etape { float: left; display: block; height: 50px; margin-left: -10px; padding: 7px 3px 0 3px; font-weight: bold; font-size: 3em; }
+#infos_etapes li.on { background-image: url(../prive/images/degrade-etapes-vert-left.gif); color: #fff; font-weight: bold; }
+#infos_etapes li.on .fond { background-color: #88f560; background-image:  url(../prive/images/degrade-etapes-vert-left.gif); }
 
 
 /* Page de login
