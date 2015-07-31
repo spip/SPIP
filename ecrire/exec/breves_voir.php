@@ -106,7 +106,8 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 	$editer_mot = charger_fonction('editer_mot', 'inc');
 	if ($champs_extra AND $extra)
 		include_spip('inc/extra');
-	
+	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
+
 	$actions = 
 		voir_en_ligne('breve', $id_breve, $statut, 'racine-24.gif', false)
 	  . ($flag_editable ? icone_inline(
@@ -149,22 +150,8 @@ function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 
 	$onglet_contenu = array(_L('Contenu'),
 		(($flag_editable AND ($statut !== 'publie')) ? "<p class='breve_prop'>".affdate($date_heure)."</p>" : "")
-	  . (strlen($descriptif) > 1 ? 
-		  "<span class='label'>"._T('info_descriptif')."</span>"
-		  . "<span  dir='$lang_dir' class='descriptif crayon rubrique-descriptif-$id_rubrique'>" . propre($descriptif) . "</span>\n" :"")
-		. (($url_site OR $nom_site) ? 
-			  "<span class='label'>"._T('entree_liens_sites')."</span>"
-			  . "<span  dir='$lang_dir' class='url_site crayon article-url_site-$id_article'>" . propre("[".$nom_site."->".$url_site."]") . "</span>\n" :"" )
-		. (strlen($texte) > 1 ? 
-		  "<span class='label'>"._T('info_texte')."</span>"
-		  . "<span  dir='$lang_dir' class='texte crayon rubrique-texte-$id_rubrique'>" . propre($texte) . "</span>\n" :"")
-		. ($les_notes ?
-		  "<span class='label'>"._T('info_notes')."</span>"
-			  . "<span  dir='$lang_dir' class='notes'>"
-			  . justifier($les_notes) : "")
-		. (($champs_extra AND $extra) ? extra_affichage($extra, "breves") : "" )
-
-		);
+		. $afficher_contenu_objet('breve', $id_breve,$row)
+	);
 
 	$onglet_proprietes = array(_L('Propri&eacute;t&eacute;s'),
 		($dater ? $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure) : "")

@@ -79,6 +79,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 		$instituer_site = charger_fonction('instituer_site','inc');
 	if ($GLOBALS['champs_extra'] AND $extra)
 		include_spip('inc/extra');
+	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	$logo = '';
  	$chercher_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
@@ -136,10 +137,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 	$onglet_contenu = array(_L('Contenu'),
 		($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
-
-		. (strlen($descriptif) > 1 ? 
-		  "<span class='label'>"._T('info_descriptif')."</span>"
-		  . "<span  dir='$lang_dir' class='descriptif crayon rubrique-descriptif-$id_rubrique'>" . propre($descriptif) . "</span>\n" :"")
+		. $afficher_contenu_objet('site', $id_syndic,$row)
 
 		. (($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") ?
 		  "<p class='site_syndique'><a href='".htmlspecialchars($url_syndic)."'>"

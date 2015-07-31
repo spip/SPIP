@@ -557,6 +557,7 @@ ecrire/genie/maintenance.php -text
 ecrire/genie/popularites.php -text
 ecrire/genie/syndic.php -text
 ecrire/inc/actions.php -text
+ecrire/inc/afficher_contenu_objet.php -text
 ecrire/inc/afficher_objets.php -text
 ecrire/inc/agenda.php -text
 ecrire/inc/aider.php -text
