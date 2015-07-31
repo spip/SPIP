@@ -21,43 +21,68 @@ function action_export_all_dist()
 {
 	global $connect_toutes_rubriques ;
 	
-        $securiser_action = charger_fonction('securiser_action', 'inc');
-        $arg = $securiser_action();
+	$securiser_action = charger_fonction('securiser_action', 'inc');
+	$arg = $securiser_action();
 
 	// determine upload va aussi initialiser connect_toutes_rubrique
 	$dir = determine_upload();
 	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
 		$dir = _DIR_DUMP;
 
-	list($file, $nb) = split('/', $arg);
-	$file =  $dir . $file;
-	//$files = ramasse_parties($file, $file, $nb, true);
+	list($archive, $action) = split('/', $arg);
 	
-	effacer_meta("status_dump");
-	ecrire_metas();
-
-	$n = _T('taille_octets',
-		array('taille' => number_format(filesize($file), 0, ' ', ' ')));
-	$n = _T('info_sauvegarde_reussi_02',
-		array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)"));
-
-	echo install_debut_html(_T('info_sauvegarde'));
-	if (!$files) {
-	  echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
-
-	} else {
-	// ne pas effrayer inutilement: il peut y avoir moins de fichiers
-	// qu'annonce' si certains etaient vides
-
-	echo "<!--", join("\n", $files), '-->';
-	echo "<p style='text-align: left'>".
-	  $n,
-	" <a href='" . _DIR_RESTREINT . "'>".
-	_T('info_sauvegarde_reussi_03')
-	. "</a> "
-	._T('info_sauvegarde_reussi_04')
-	. "</p>\n";
+#	var_dump($file);
+#	var_dump($action);
+	$file =  $dir . $archive;
+#	var_dump($file);
+#die();		
+	include_spip('inc/meta');
+	if ($action=='start'){
+		// ecrire le debut du fichier
+		include_spip('inc/export');
+		ecrire_fichier($file, export_entete(),false);
+		
+		lire_metas();
+		$status_dump = explode("::",$GLOBALS['meta']["status_dump"]);
+		$gz = $statut_dump[0];
+		// ca demarre
+		ecrire_meta("status_dump", "$gz::$archive::1::0",'non');
+		ecrire_metas();
+		
+		// retour a la case depart pour vraiment faire le dump
+		include_spip('inc/headers');
+		redirige_par_entete(_request('redirect'));
 	}
-	echo install_fin_html();
+	elseif($action=='end'){
+
+		effacer_meta("status_dump");
+		ecrire_metas();
+	
+		$size = 0;
+		if (file_exists($file))
+			$size = filesize($file);
+		$n = _T('taille_octets',
+			array('taille' => number_format($size, 0, ' ', ' ')));
+		$n = _T('info_sauvegarde_reussi_02',
+			array('archive' => ':<br /><b>'.joli_repertoire($file)."</b> ($n)"));
+	
+		echo install_debut_html(_T('info_sauvegarde'));
+		if (!$size) {
+		  echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
+	
+		} else {
+			// ne pas effrayer inutilement: il peut y avoir moins de fichiers
+			// qu'annonce' si certains etaient vides
+		
+			echo "<p style='text-align: left'>".
+			  $n,
+			" <a href='" . _DIR_RESTREINT . "'>".
+			_T('info_sauvegarde_reussi_03')
+			. "</a> "
+			._T('info_sauvegarde_reussi_04')
+			. "</p>\n";
+		}
+		echo install_fin_html();
+	}
 }
 ?>
