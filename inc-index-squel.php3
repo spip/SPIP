@@ -124,6 +124,10 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 		return $f($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
 	}
 
+	// S'agit-il d'un logo ? Une fonction speciale les traite tous
+	if (ereg('^LOGO_', $nom_champ) AND $p = calculer_champ_LOGO($p))
+		return $p->retour();
+
 	// On regarde ensuite s'il y a un champ SQL homonyme,
 	// et on definit le type et les traitements
 	$code = index_pile($id_boucle, $nom_champ, $boucles);

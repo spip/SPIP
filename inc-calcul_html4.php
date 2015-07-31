@@ -4,9 +4,21 @@ if (defined("_CALCUL_HTML4")) return;
 define("_CALCUL_HTML4", "1");
 
 // Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
-function affiche_logos($arton, $artoff, $lien, $align) {
+function affiche_logos($logo, $lien, $align, $flag_fichier) {
 	global $num_survol;
 	global $espace_logos;
+
+	list($arton,$artoff) = $logo;
+
+	// Pour les documents comme pour les logos, le filtre |fichier donne
+	// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+	// remarquable, mais a conserver pour compatibilite ascendante.
+	// -> http://www.spip.net/fr_article901.html
+	if ($flag_fichier) {
+		$on = ereg_replace("^IMG/","",$arton);
+		$off = ereg_replace("^IMG/","",$artoff);
+		return $on ? $on : $off;
+	}
 
 	$num_survol++;
 	if ($arton) {

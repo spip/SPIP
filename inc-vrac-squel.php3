@@ -24,19 +24,19 @@ function balise_CHARSET_dist($p) {
 
 
 function balise_LANG_LEFT_dist($p) {
-	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'left','right')";
+	$p->code = "lang_dir(\$spip_lang,'left','right')";
 	$p->type = 'php';
 	return $p;
 }
 
 function balise_LANG_RIGHT_dist($p) {
-	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'right','left')";
+	$p->code = "lang_dir(\$spip_lang,'right','left')";
 	$p->type = 'php';
 	return $p;
 }
 
 function balise_LANG_DIR_dist($p) {
-	$p->code = "lang_dir(\$GLOBALS['spip_lang'],'ltr','rtl')";
+	$p->code = "lang_dir(\$spip_lang,'ltr','rtl')";
 	$p->type = 'php';
 	return $p;
 }
@@ -176,12 +176,12 @@ function balise_URL_AUTEUR_dist($p) {
 }
 
 function balise_NOTES_dist($p) {
-	$p->entete = '$lacible = $GLOBALS["les_notes"];
-$GLOBALS["les_notes"] = "";
-$GLOBALS["compt_note"] = 0;
-$GLOBALS["marqueur_notes"] ++;
-';
-	$p->code = '$lacible';
+	// Recuperer les notes
+	$p->code = '$GLOBALS["les_notes"]';
+	// Vider ensuite les globales des notes recuperees
+	// avec une formule qui renvoit toujours ""
+	$p->code .= '. ($GLOBALS["les_notes"] = $GLOBALS["compt_note"] = '
+	. '($GLOBALS["marqueur_notes"]++)?"":"")';
 	$p->type = 'html';
 	return $p;
 }
@@ -289,15 +289,10 @@ function balise_EXPOSER_dist($p) {
 // Inserer directement un document dans le squelette
 //
 function balise_EMBED_DOCUMENT_dist($p) {
-	$p->entete = '
-$lacible = '
-	. champ_sql('id_document',$p)
-	. ';
-$lacible = embed_document($lacible, \'' .
-	($fonctions ? join($fonctions, "|") : "") .
-	'\', false);';
-	$fonctions = "";
-	$p->code = '$lacible';
+	$_id_document = champ_sql('id_document',$p);
+	$p->code = "embed_document($_id_document, '" .
+	texte_script($p->fonctions ? join($p->fonctions, "|") : "") .
+	"', false)";
 	$p->type = 'html';
 	return $p;
 }
@@ -371,82 +366,6 @@ function balise_URL_LOGOUT_dist($p) {
 	$p->type = 'php';
 	return $p;
 }
-
-function balise_LOGO_ARTICLE_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_ARTICLE_NORMAL_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_ARTICLE_RUBRIQUE_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_ARTICLE_SURVOL_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_AUTEUR_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_AUTEUR_NORMAL_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_AUTEUR_SURVOL_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_SITE_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_BREVE_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_BREVE_RUBRIQUE_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_MOT_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_RUBRIQUE_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_RUBRIQUE_NORMAL_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_RUBRIQUE_SURVOL_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
-function balise_LOGO_DOCUMENT_dist($p) {
-	// retour immediat: filtres derogatoires traites dans la fonction
-	return calculer_champ_LOGO($p);
-}
-
 
 function balise_INTRODUCTION_dist ($p) {
 	$_type = $p->boucles[$p->id_boucle]->type_requete;
