@@ -15,9 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function debut_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
 	if (!$browser_layer) return '';
-	if (!$numero_block["$nom_block"] > 0){
+	if (!isset($numero_block[$nom_block])){
 		$compteur_block++;
-		$numero_block["$nom_block"] = $compteur_block;
+		$numero_block[$nom_block] = $compteur_block;
 	}
 	return "<div id='Layer".$numero_block["$nom_block"]."' style='display: block;'>";
 
@@ -26,15 +26,15 @@ function debut_block_visible($nom_block){
 function debut_block_invisible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
 	if (!$browser_layer) return '';
-	if (!$numero_block["$nom_block"] > 0){
+	if (!isset($numero_block[$nom_block])){
 		$compteur_block++;
-		$numero_block["$nom_block"] = $compteur_block;
+		$numero_block[$nom_block] = $compteur_block;
 	}
 	
-	return http_script("vis['".$numero_block["$nom_block"]."'] = 'hide';
-document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1px;\">');",
+	return http_script("vis['".$numero_block[$nom_block]."'] = 'hide';
+document.write('<div id=\"Layer".$numero_block[$nom_block]."\" style=\"display: none; margin-top: 1px;\">');",
 			      '',
-			   "<div id='Layer".$numero_block["$nom_block"]."' style='display: block;'>");
+			   "<div id='Layer".$numero_block[$nom_block]."' style='display: block;'>");
 
 }
 
@@ -52,9 +52,9 @@ function bouton_block_invisible($nom_block, $icone='') {
 	for ($index=0; $index < count($blocks); $index ++){
 		$nom_block = $blocks[$index];
 
-		if (!$numero_block["$nom_block"] > 0){
+		if (!isset($numero_block[$nom_block])){
 			$compteur_block++;
-			$numero_block["$nom_block"] = $compteur_block;
+			$numero_block[$nom_block] = $compteur_block;
 		}
 
 		if (!$icone) {
@@ -77,9 +77,9 @@ function bouton_block_visible($nom_block){
 	for ($index=0; $index < count($blocks); $index ++){
 		$nom_block = $blocks[$index];
 
-		if (!$numero_block["$nom_block"] > 0){
+		if (!isset($numero_block[$nom_block])){
 			$compteur_block++;
-			$numero_block["$nom_block"] = $compteur_block;
+			$numero_block[$nom_block] = $compteur_block;
 		}
 
 		$javasc[] = '[' . $numero_block[$nom_block] . ',0]';

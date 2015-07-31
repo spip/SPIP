@@ -309,7 +309,7 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	&& (phpversion()<>'4.0.4')
 	&& function_exists("ob_gzhandler")
 	// special bug de proxy
-	&& !preg_match(",NetCache|Hasd_proxy,i", $GLOBALS['HTTP_VIA'])
+	&& !(isset($GLOBALS['HTTP_VIA']) AND preg_match(",NetCache|Hasd_proxy,i", $GLOBALS['HTTP_VIA']))
 	// special bug Netscape Win 4.0x
 	&& !preg_match(",Mozilla/4\.0[^ ].*Win,i", $GLOBALS['HTTP_USER_AGENT'])
 	// special bug Apache2x
@@ -319,7 +319,7 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	// si la compression est deja commencee, stop
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler")
-	&& !$GLOBALS['var_mode'] # bug avec le debugueur qui appelle ob_end_clean()
+	&& !isset($GLOBALS['var_mode']) # bug avec le debugueur qui appelle ob_end_clean()
 	)
 		ob_start('ob_gzhandler');
 }

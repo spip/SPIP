@@ -21,14 +21,14 @@ function acces_rubrique($id_rubrique) {
 	global $connect_toutes_rubriques;
 	global $connect_id_rubrique;
 
-	return ($connect_toutes_rubriques OR $connect_id_rubrique[$id_rubrique]);
+	return ($connect_toutes_rubriques OR isset($connect_id_rubrique[$id_rubrique]));
 }
 
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 	global $connect_statut;
 
-	return ($connect_statut == "0minirezo" AND $connect_id_rubrique[$id_rubrique]);
+	return ($connect_statut == "0minirezo" AND isset($connect_id_rubrique[$id_rubrique]));
 }
 
 

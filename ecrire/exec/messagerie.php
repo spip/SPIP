@@ -123,6 +123,7 @@ if (spip_num_rows($result) > 0) {
 
 	echo "<table width='100%' cellpadding='0' cellspacing='0'>";
 	echo "<tr><td valign='top' width='50%'>";
+	$count = $i = 0;
 	while($row = spip_fetch_array($result)) {
 		$count ++;
 		if ($i == 1) {

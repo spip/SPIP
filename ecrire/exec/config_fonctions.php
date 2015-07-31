@@ -128,21 +128,15 @@ function vignettes_config()
 
 	debut_cadre_trait_couleur("image-24.gif");
 
-	$formats_graphiques = $GLOBALS['meta']["formats_graphiques"];
-
 	debut_cadre_relief("", false, "", _T("info_image_process_titre"));
 
 	echo "<p class='verdana2'>";
 	echo _T('info_image_process');
 	echo "</p>";
-
 		// application du choix de vignette
 	if ($image_process) {
-		ecrire_meta('image_process', $image_process);
-		ecrire_metas(); // a cause du switch ci-dessous
-						
 			// mettre a jour les formats graphiques lisibles
-		switch ($GLOBALS['meta']['image_process']) {
+		switch ($image_process) {
 				case 'gd1':
 				case 'gd2':
 					$formats_graphiques = $GLOBALS['meta']['gd_formats_read'];
@@ -154,15 +148,18 @@ function vignettes_config()
 				case 'imagick':
 					$formats_graphiques = 'gif,jpg,png';
 					break;
-				case 'non': #debug
+				default: #debug
 					$formats_graphiques = '';
+					$image_process = 'non';
 					break;
 			}
 		ecrire_meta('formats_graphiques', $formats_graphiques);
+		ecrire_meta('image_process', $image_process);
 		ecrire_metas();
-	}
+	} else 	$formats_graphiques = $GLOBALS['meta']["formats_graphiques"];
 
 	echo "<table width='100%' align='center'><tr>";
+	$nb_process = 0;
 
 	// Tester les formats
 	if ( /* GD disponible ? */

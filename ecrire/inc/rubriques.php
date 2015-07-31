@@ -291,9 +291,9 @@ function sous_enfant_rub($collection2){
 
 	$result3 = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre");
 
-	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
-		while($row=spip_fetch_array($result3)){
+	if (!spip_num_rows($result3)) return '';
+	$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+	while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
@@ -301,9 +301,8 @@ function sous_enfant_rub($collection2){
 
 			$retour.="<div class='arial11' " .
 			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique2") . "'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
-		}
-		$retour .= "</ul>\n\n".fin_block()."\n\n";
 	}
+	$retour .= "</ul>\n\n".fin_block()."\n\n";
 	
 	return $retour;
 }

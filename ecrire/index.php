@@ -92,27 +92,29 @@ if (autoriser_sans_cookie($exec)) {
 // Preferences de presentation
 //
 
-if ($set_couleur) {
+$prefs_mod = false;
+
+if (isset($set_couleur)) {
 	$prefs['couleur'] = floor($set_couleur);
 	$prefs_mod = true;
 }
-if ($set_disp) {
+if (isset($set_disp)) {
 	$prefs['display'] = floor($set_disp);
 	$prefs_mod = true;
 }
-if ($set_options == 'avancees' OR $set_options == 'basiques') {
+if (isset($set_options) AND ($set_options == 'avancees' OR $set_options == 'basiques')) {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
 if ($prefs_mod AND !$var_auth)
 	update_prefs_session($prefs, $connect_id_auteur);
 
-if ($set_ecran) {
+if (isset($set_ecran)) {
 	// Poser un cookie, car ce reglage depend plus du navigateur que de l'utilisateur
 	spip_setcookie('spip_ecran', $set_ecran, time() + 365 * 24 * 3600);
 	$spip_ecran = $set_ecran;
 }
-if (!$spip_ecran) $spip_ecran = "etroit";
+if (!isset($spip_ecran)) $spip_ecran = "etroit";
 
 
 
@@ -125,25 +127,26 @@ if (!isset($couleurs_spip[$choix_couleur])) $choix_couleur = 1;
 $couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
 $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
 
-define (_ATTRIBUTES_BODY,  "
+define ('_ATTRIBUTES_BODY',  "
 link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
 vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 bgcolor='#f8f7f3' text='#000000' 
 topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
-	($spip_lang_rtl ? " dir='rtl'" : ""));
+	(isset($spip_lang_rtl) ? " dir='rtl'" : ""));
 
-define(_TRANCHES, 10);
+define('_TRANCHES', 10);
 
 // charger l'affichage minimal et initialiser a la langue par defaut
 include_spip('inc/minipres');
 
 //  si la langue est specifiee par cookie alors ...
-if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']) {
+if (isset($GLOBALS['_COOKIE']['spip_lang_ecrire'])) {
 
+	$spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire'];
 	// si pas authentifie, changer juste pour cette execution
 	if ($var_auth)
-		changer_langue($spip_lang_ecrire);
+		changer_langue($GLOBALS['_COOKIE']['spip_lang_ecrire']);
 	// si authentifie, changer definitivement si ce n'est fait
 	else {	if (($spip_lang_ecrire <> $auteur_session['lang'])
 		AND changer_langue($spip_lang_ecrire)) {
@@ -167,7 +170,7 @@ if (!isset($reinstall)) {
 // Controle d'interruption d'une longue restauration
 //
 if ($GLOBALS['_COOKIE']['spip_admin']
-AND $GLOBALS['meta']["debut_restauration"]
+AND isset($GLOBALS['meta']["debut_restauration"])
 AND !($exec=='js_menu_rubriques'))
 	$exec = 'import_all';
 else 
