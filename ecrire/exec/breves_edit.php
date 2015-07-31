@@ -167,7 +167,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		extra_saisie($extra, 'breves', $id_rubrique);
+		echo extra_saisie($extra, 'breves', $id_rubrique);
 	}
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {

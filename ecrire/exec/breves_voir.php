@@ -183,7 +183,7 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	// afficher les extra
 	if ($champs_extra AND $extra) {
 		include_spip('inc/extra');
-		extra_affichage($extra, "breves");
+		echo extra_affichage($extra, "breves");
 	}
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){

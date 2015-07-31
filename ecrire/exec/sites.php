@@ -506,7 +506,7 @@ else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 
 if ($champs_extra AND $extra) {
 		include_spip('inc/extra');
-		extra_affichage($extra, "sites");
+		echo extra_affichage($extra, "sites");
 	}
 
 fin_cadre_relief();

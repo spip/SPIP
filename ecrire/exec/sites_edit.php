@@ -189,9 +189,9 @@ else {
 
 
 if ($champs_extra) {
-		include_spip('inc/extra');
-		extra_saisie($extra, 'sites', intval($id_secteur));
-	}
+	include_spip('inc/extra');
+	echo extra_saisie($extra, 'sites', intval($id_secteur));
+}
 
 
 echo "\n<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";

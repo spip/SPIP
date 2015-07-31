@@ -141,7 +141,7 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		 ("\n<p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40' wrap=soft>" . $ps . "</textarea></p><p>\n") :
 		 '') .
 
-		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur, false)) .
+		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur)) .
 
 		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "' /></div>";
 

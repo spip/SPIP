@@ -148,7 +148,7 @@ function exec_rubriques_edit_dist()
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		extra_saisie($extra, 'rubriques', $id_secteur);
+		$form .= extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
 	$form .= "<input type='hidden' name='new' value='"

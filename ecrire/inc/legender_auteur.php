@@ -110,7 +110,7 @@ function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		$corps .= extra_saisie($auteur['extra'], 'auteurs', $auteur['statut'],'', false);
+		$corps .= extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
 	}
 
 //
@@ -276,7 +276,7 @@ function legender_auteur_voir($auteur, $redirect)
 
 	if ($champs_extra AND $extra) {
 		include_spip('inc/extra');
-		$res .= extra_affichage($extra, "auteurs", true);
+		$res .= extra_affichage($extra, "auteurs");
 	}
 
 	return $res;

@@ -88,15 +88,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
 // http://doc.spip.org/@extra_saisie
-function extra_saisie($extra, $type, $ensemble='', $aff=true) {
+function extra_saisie($extra, $type, $ensemble='') {
 	if ($affiche = extra_form($extra, $type, $ensemble)) {
-	  if ($aff) {
-		debut_cadre_enfonce();
-		echo $affiche;
-		fin_cadre_enfonce();
-	  } else {
-	    return debut_cadre_enfonce('',true) . $affiche . fin_cadre_enfonce(true);
-	  }
+		return debut_cadre_enfonce('',true)
+			. $affiche
+			. fin_cadre_enfonce(true);
 	}
 }
 
@@ -322,7 +318,7 @@ function extra_champ_valide($type, $nom_champ) {
 
 // a partir de la liste des champs, generer l'affichage
 // http://doc.spip.org/@extra_affichage
-function extra_affichage($extra, $type, $return=false) {
+function extra_affichage($extra, $type) {
 	$extra = unserialize ($extra);
 	if (!is_array($extra)) return;
 	$champs = $GLOBALS['champs_extra'][$type];
@@ -361,11 +357,10 @@ function extra_affichage($extra, $type, $return=false) {
 			.interdire_scripts($contenu)."<br /></div>\n";
 	}
 
-	if ($affiche) {
-		$affiche = debut_cadre_enfonce('',true) . $affiche . fin_cadre_enfonce(true);
-		if ($return) return $affiche; else echo $affiche;
-	}
-
+	if ($affiche)
+		return debut_cadre_enfonce('',true)
+			. $affiche
+			. fin_cadre_enfonce(true);
 }
 
 ?>

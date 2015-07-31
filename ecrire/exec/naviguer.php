@@ -92,7 +92,7 @@ function exec_naviguer_dist()
 
 	  if ($extra) {
 		include_spip('inc/extra');
-		extra_affichage($extra, "rubriques");
+		echo extra_affichage($extra, "rubriques");
 	  }
 
 /// Mots-cles
