@@ -57,7 +57,7 @@ $GLOBALS['spip_matrice']['couleur_4096'] = $inc_filtres_images;
 $GLOBALS['spip_matrice']['couleur_saturation'] = $inc_filtres_images;
 
 // http://doc.spip.org/@chercher_filtre
-function chercher_filtre($fonc) {
+function chercher_filtre($fonc, $default=NULL) {
 		foreach (
 		array('filtre_'.$fonc, 'filtre_'.$fonc.'_dist', $fonc) as $f)
 			if (function_exists($f)
@@ -66,12 +66,12 @@ function chercher_filtre($fonc) {
 			)) {
 				return $f;
 			}
-		return NULL;
+		return $default;
 }
 
 function appliquer_filtre($arg, $filtre) {
-	$f = chercher_filtre(preg_replace('/\W/','_', $filtre));
-	return $f ? $f($arg) : $arg;
+	$f = chercher_filtre(preg_replace('/\W/','_', $filtre),'filtre_text_txt_dist');
+	return $f($arg);
 }
 
 // Appliquer un filtre (eventuellement defini dans la matrice) aux donnees
@@ -91,7 +91,11 @@ function filtrer($filtre) {
 	}
 }
 
-function filtre_text_csv($t)
+function filtre_text_txt_dist($t) {
+	return '<pre>' . echapper_tags($t) . '</pre>';
+}
+
+function filtre_text_csv_dist($t)
 {
 	return propre("\n|" .
 		      str_replace(';','|',preg_replace('/\r?\n/', "|\n|",$t))
