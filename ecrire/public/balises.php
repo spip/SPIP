@@ -998,9 +998,9 @@ function balise_MODELE_dist($p) {
 		if (isset($p->boucles[$p->id_boucle]))
 			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 
-		$_options = "'trim'=>true, 'modele'=>true"
-		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'')
-		  . ", 'compil'=>array(" . memoriser_contexte_compil($p) .")";
+		$_options = memoriser_contexte_compil($p);
+		$_options = "'compil'=>array($_options), 'trim'=>true"
+		  . (isset($_contexte['ajax'])?", 'ajax'=>true":'');
 
 		$page = sprintf(CODE_RECUPERER_FOND, "'modeles/' . $nom", 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
 
