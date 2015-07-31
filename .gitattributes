@@ -93,7 +93,7 @@ ecrire/img_pack/image-24.gif -text
 ecrire/img_pack/jauge-fond.gif -text
 ecrire/img_pack/jauge-rouge.gif -text
 ecrire/img_pack/jauge-vert.gif -text
-ecrire/img_pack/langues-24.png svneol=native#unset
+ecrire/img_pack/langues-24.gif -text
 ecrire/img_pack/m_envoi.gif -text
 ecrire/img_pack/m_envoi_bleu.gif -text
 ecrire/img_pack/m_envoi_jaune.gif -text
@@ -151,5 +151,11 @@ ecrire/img_pack/visit-12.gif -text
 ecrire/img_pack/visiter-48.gif -text
 ecrire/img_pack/warning-24.gif -text
 ecrire/img_pack/warning.gif -text
+ecrire/lang/drap_de.gif -text
+ecrire/lang/drap_en.gif -text
+ecrire/lang/drap_es.gif -text
+ecrire/lang/drap_fr.gif -text
+ecrire/lang/drap_it.gif -text
+ecrire/lang/drap_ru.gif -text
 ecrire/puce.gif -text
 /puce.gif -text

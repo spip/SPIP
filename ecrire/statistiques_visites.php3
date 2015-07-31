@@ -216,7 +216,7 @@ else {
 
 
 $query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
-	"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 420 DAY) ORDER BY date";
+	"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 89 DAY) ORDER BY date";
 $result=spip_query($query);
 
 while ($row = spip_fetch_array($result)) {
@@ -260,7 +260,7 @@ if (count($log)>0){
 
 	$rapport = 200 / $maxgraph;
 
-	if (count($log) < 420) $largeur = floor(420 / ($nb_jours+1));
+	if (count($log) < 420) $largeur = floor(450 / ($nb_jours+1));
 	if ($largeur < 1) $largeur = 1;
 
 	debut_cadre_relief("statistiques-24.gif");

@@ -1011,6 +1011,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet(_T('onglet_intercativite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
+		onglet(_T('onglet_langue'), "config-lang.php3", "lang", $onglet, "langues-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){
@@ -1531,19 +1532,23 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	// choix de la langue
 	//
 	if (strpos(lire_meta('langues_proposees'), ',')) {
-		//echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.png' align='center'>";
+		//echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.gif' align='center'>";
+		echo "<td>   </td>";
 		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
 		$langues = explode(',', lire_meta('langues_proposees'));
 		while (list(,$langue) = each ($langues)) {
+			if (file_exists("lang/drap_$langue.gif")) $icone = "<img src='lang/drap_$langue.gif' border='0'>";
+			else $icone = "<font size=1 color='white'>".majuscules("$langue")."</font>";
+			
 			$lien = $clean_link;
 			$lien->addVar('set_lang', $langue);
 			if ($langue != $GLOBALS['spip_lang']) {
 				//echo "<span class='fondgris' color='white' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\">";
-				echo "<a href='". $lien->getUrl() ."' title='"._T("langue_$langue")."'><font color='white'>$langue</font></a>";
+				echo "<a href='". $lien->getUrl() ."' title='"._T("langue_$langue")."'>$icone</a>";
 				//echo "</span>";
 			}
 			else {
-				echo "<span class='fondgrison2'><b>$langue</b></span>";
+				echo "<b>$icone</b>";
 				//echo " <font color='#ffffff'>[$langue]</font>";
 			}
 			echo "&nbsp;";
