@@ -128,7 +128,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 		$scb = _T('avis_deplacement_rubrique',
 			array('contient_breves' => $contient_breves,
 			      'scb' => $scb));
-		$form .= "\n<div class='spip_small'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>&nbsp;" . $scb . "</label></div>\n";
+		$form .= "\n<div class='confirmer_deplacement verdana2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace' /><label for='confirme-deplace'>" . $scb . "</label></div>\n";
 	} else
 		$form .= "<input type='hidden' name='confirme_deplace' value='oui' />\n";
 
@@ -136,7 +136,7 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	. "</li>\n";
 
 	if (($GLOBALS['meta']['rubriques_descriptif'] == "oui") OR strlen($descriptif)) {
-		$form .= "<li class='haut'><label>"
+		$form .= "<li class='haut'><label for='descriptif'>"
 			. _T('texte_descriptif_rapide')
 			."</label>\n"
 			. "<div class='commentaire'>" 

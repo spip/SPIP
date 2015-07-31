@@ -113,6 +113,6 @@ function articles_edit_presentation($new, $id_rubrique, $lier_trad, $id_article,
 		icone_inline(_T('icone_retour'), $oups, "article-24.gif", "rien.gif",$spip_lang_right) .
 	 	_T('texte_modifier_article') .
 		gros_titre($titre,'',false) . 
-		"<hr />\n";
+		"<hr class='fin_article_presentation' />\n";
 }
 ?>

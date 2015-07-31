@@ -138,24 +138,28 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	// selecteur de rubrique (en general pas d'ajax car toujours racine)
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
 
-	$form = "<label for='titre'>" . _T('entree_titre_obligatoire') . "</label>"
-	. "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus />"
-	 . "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" /><br />"
+	$form = "<ol class='formfx'>";
+	$form .= "<li class='gauche gauche_obligatoire'><label for='titre'>" . _T('info_titre') . "</label>"
+	. "<input type='text' class='formo' name='titre' id='titre' value=\"$titre\" size='40' $onfocus /></li>"
+	 . "<input type='hidden' name='id_rubrique_old' value=\"$id_rubrique\" />"
+	 ."<li class='haut'>"
 	. debut_cadre_couleur($logo_parent, true, "",_T('entree_interieur_rubrique').aide ("brevesrub"))
 	. $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie')) 
 	. fin_cadre_couleur(true)
+	."</li>"
 	 . pipeline('affiche_gauche',array('args'=>array('exec'=>'breves_edit','id_breve'=>$id_breve),'data'=>''))
-	. "<br /><b>"._T('entree_texte_breve')."</b><br />\n"
+	. "<li class='haut'><label for='texte'>"._T('entree_texte_breve')."</label>\n"
 	  . afficher_textarea_barre($texte, false,
 				    "document.getElementById('form_breve')")
-	. "<br />\n"
+	. "</li>\n"
+	. "<fieldset><legend>"
 	. _T('entree_liens_sites')
 	. aide ("breveslien")
-	. "<br />\n"
-	. "<label for='lien_titre'>" . _T('info_titre')."</label><br />\n"
-	. "<input type='text' class='forml' name='lien_titre' id='lien_titre' value=\"$lien_titre\" size='40' /><br />\n"
-	. "<label for='lien_url'>" . _T('info_url')."</label><br />\n"
-	. "<input type='text' class='forml' name='lien_url' id='lien_url' value=\"$lien_url\" size='40' /><br />";
+	. "</legend>\n"
+	. "<li class='gauche'><label for='lien_titre'>" . _T('info_titre')."</label>\n"
+	. "<input type='text' class='forml' name='lien_titre' id='lien_titre' value=\"$lien_titre\" size='40' /></li>\n"
+	. "<li class='gauche'><label for='lien_url'>" . _T('info_url')."</label>\n"
+	. "<input type='text' class='forml' name='lien_url' id='lien_url' value=\"$lien_url\" size='40' /></li></fieldset>";
 
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
@@ -179,7 +183,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		. fin_cadre_relief(true);
 	}
 	$form .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
-
+	$form .= "</ol>";
 	echo generer_action_auteur('editer_breve',
 		$new ? $new : $id_breve,
 		generer_url_ecrire('breves_voir'),
