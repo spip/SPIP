@@ -662,7 +662,7 @@ function spip_log($message) {
 	if (!$gid = @getmygid()) $gid = '-';
 	if (!$ip = $GLOBALS['HTTP_SERVER_VARS']['REMOTE_ADDR']) $ip = '-';
 
-	$message = date("M d H:i:s")." $ip $uid"."[$pid] "
+	$message = date("M d H:i:s")." $ip $uid/$gid"."[$pid] "
 	.ereg_replace("\n*$", "\n", $message);
 
 	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
