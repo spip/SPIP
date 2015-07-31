@@ -114,17 +114,20 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 	$res .= '<br />' . message_de_signature($row);
 		
 	if (!$id) {
-			$r = sql_fetsel("titre, statut", "spip_articles", "id_article=$id_article");
-
-			$res .= "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"
-			. _T('info_numero_abbreviation')
-			. $id_article
-			. " </b></span><a href='"
-			  .  (($r['statut'] == 'publie') ? 
+			$r = sql_fetsel("titre, id_rubrique, statut", "spip_articles", "id_article=$id_article");
+			$id_rubrique = $r['id_rubrique'];
+			$publie = ($r['statut'] == 'publie');
+			$titre_a = $r['titre'];
+			$titre_r = supprimer_numero(sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique"));
+		        $href = generer_url_ecrire('naviguer', "id_rubrique=" . $id_rubrique);
+			$res .= "<a style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;' href='$href' title='$id_rubrique'>"
+			. typo($titre_r)
+			. " </a><a title='$id_article' href='"
+			  .  ($publie ? 
 			      generer_url_action('redirect', "id_article=$id_article") :
 			      generer_url_ecrire('articles', "id_article=$id_article"))
 			  . "'>"
-			  . typo($r['titre'])
+			  . typo($titre_a)
 			  . "</a>";
 	}
 	$res .= "</td></tr></table>";
