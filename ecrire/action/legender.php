@@ -20,8 +20,7 @@ include_spip('inc/actions');
 // spip_register_globals ne fournira donc pas les globales esperees
 // ==> passer par _request() qui simule $_REQUEST sans $_COOKIE
 
-// http://doc.spip.org/@action_documenter_dist
-function action_documenter_dist() {
+function action_legender_dist() {
 	
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
@@ -29,7 +28,7 @@ function action_documenter_dist() {
 	$arg = _request('arg');
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
-		 spip_log("action_documenter_dist $arg pas compris");
+		 spip_log("action_legender_dist $arg pas compris");
 	} else {
 
 		$id_document = $r[1];

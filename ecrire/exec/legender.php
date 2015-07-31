@@ -12,8 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@exec_documenter_dist
-function exec_documenter_dist()
+function exec_legender_dist()
 {
 	global $id_document, $id, $type, $ancre, $script;
 	$id = intval($id);
@@ -30,6 +29,6 @@ function exec_documenter_dist()
 	include_spip('inc/documents');
 	include_spip('inc/presentation');
 
-	return formulaire_documenter($id_document, array(), $script, $type, $id, $ancre);
+	return formulaire_legender($id_document, array(), $script, $type, $id, $ancre);
 }
 ?>

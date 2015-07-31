@@ -376,7 +376,7 @@ function afficher_portfolio(
 		$res .= formulaire_tourner($id_document, $document, $script, $flag_modif, $type);
 
 		if ($flag_modif)
-		  $res .= formulaire_documenter($id_document, $document, $script, $type, $document["id_$type"], $album);
+		  $res .= formulaire_legender($id_document, $document, $script, $type, $document["id_$type"], $album);
 
 		if (isset($document['info']))
 			$res .= "<div class='verdana1'>".$document['info']."</div>";
@@ -745,7 +745,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 			  "</font></div>";
 		}
 
-		echo formulaire_documenter($id_document, $document, $script, $type, $id, "document$id_document");
+		echo formulaire_legender($id_document, $document, $script, $type, $id, "document$id_document");
 
 		fin_cadre_enfonce();
 		}
@@ -791,7 +791,7 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier = fa
 		if ($doublon)
 			echo $raccourci_doc;
 
-		echo formulaire_documenter($id_document, $document, $script, $type, $id, "document$id_document");
+		echo formulaire_legender($id_document, $document, $script, $type, $id, "document$id_document");
 		
 		fin_cadre_relief();
 	}
@@ -808,9 +808,7 @@ function teste_doc_deplie($id_document) {
 	return in_array($id_document, $deplies);
 }
 
-
-// http://doc.spip.org/@date_formulaire_documenter
-function date_formulaire_documenter($date, $id_document) {
+function date_formulaire_legender($date, $id_document) {
 
 	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
 		$mois = $regs[2];
@@ -829,10 +827,9 @@ function date_formulaire_documenter($date, $id_document) {
 // En mode Ajax pour eviter de recharger toute la page ou il se trouve
 // (surtout si c'est un portfolio)
 
-// http://doc.spip.org/@formulaire_documenter
-function formulaire_documenter($id_document, $document, $script, $type, $id, $ancre) {
+function formulaire_legender($id_document, $document, $script, $type, $id, $ancre) {
 
-	// + securite (avec le script exec=documenter ca vient de dehors)
+	// + securite (avec le script exec=legender ca vient de dehors)
 	if (!preg_match('/^\w+$/',$type, $r)) {
 	  return;
 	}
@@ -897,7 +894,7 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 	  "<input type='text' name='titre_document' class='formo' value=\"".entites_html($titre).
 	  "\" size='40'	onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /><br />\n" .
 	  '<br />' . 
-	  date_formulaire_documenter($date, $id_document) .
+	  date_formulaire_legender($date, $id_document) .
 	  "<br /><b>".
 	  _T('info_description_2').
 	  "</b><br />\n" .
@@ -914,13 +911,13 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 	  "' type='submit' />" .
 	  "</div>\n";
 
-	$corps = ajax_action_auteur("documenter", $id_document, $script, "show_docs=$id_document&id_$type=$id#$ancre", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre");
+	$corps = ajax_action_auteur("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#$ancre", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre");
 
 	$corps .= 
 	  $vignette .
 	  icone_horizontale(_T('icone_supprimer_document'), redirige_action_auteur('supprimer', "document-$id_document", $script, "id_$type=$id#$ancre"), $supp,  "supprimer.gif", false);
 
-	$bloc = "documenter-aff-$id_document";
+	$bloc = "legender-aff-$id_document";
 
 	$corps = "<div style='text-align:center;height:1%'>"
 		. "<div style='float:".$GLOBALS['spip_lang_left']."'>"
@@ -935,7 +932,7 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 		. fin_block();
 
 	return ($flag_deplie === 'ajax') ? $corps :
-	   "<div id='documenter-$id_document' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] ."; padding: 5px; margin-top: 3px; background-color: white'>" .
+	   "<div id='legender-$id_document' class='verdana1' style='color: " . $GLOBALS['couleur_foncee'] . "; border: 1px solid ". $GLOBALS['couleur_foncee'] ."; padding: 5px; margin-top: 3px; background-color: white'>" .
 	   $corps .
 	  '</div>';
 }
