@@ -56,9 +56,6 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
 	$subdir = sous_repertoire(_DIR_CACHE, substr($md_cache, 0, 1), true);
 
-	include_spip('inc/acces');
-	verifier_htaccess(_DIR_CACHE);
-
 	return $subdir.$fichier_cache;
 }
 
@@ -276,6 +273,9 @@ function creer_cache(&$page, &$chemin_cache, $duree) {
 	include_spip('inc/invalideur');
 	maj_invalideurs($chemin_cache, $page, $duree);
 
+	// En profiter pour verifier que le .htaccess (deny all) est bien la
+	include_spip('inc/acces');
+	verifier_htaccess(_DIR_CACHE);
 }
 
 function restaurer_meta_donnees ($contenu) {
