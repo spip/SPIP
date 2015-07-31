@@ -155,7 +155,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 		$menu .= mySel('nouveau',$statut,_T('info_statut_auteur_a_confirmer'));
 
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
-	return "<select class='select fondl' name='statut' id='statut' size='1'
+	return "<select class='select' name='statut' id='statut' size='1'
 		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();"
 	. "(this.options[this.selectedIndex].value=='0minirezo')?jQuery('#choix-webmestre:hidden').slideDown():jQuery('#choix-webmestre:visible').slideUp();\">"
 	. $menu

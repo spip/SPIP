@@ -100,10 +100,10 @@ function joindre_formulaire(&$v) {
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
 			"<label for='url'>" .
 			_T('info_referencer_doc_distant') .
-			"</label><br />\n\t<input name='url' id='url' class='fondo' value='http://' />" .
+			"</label><br />\n\t<input name='url' id='url' value='http://' />" .
 			"\n\t<div style='text-align: $spip_lang_right'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir').
-			"' class='fondo' /></div>" .
+			"' /></div>" .
 			"\n</div>";
 	}
 
@@ -114,7 +114,7 @@ function joindre_formulaire(&$v) {
 	)
 	. "\n\t\t<div style='text-align: $spip_lang_right'><input name='sousaction1' type='submit' value='"
 	. _T('bouton_telecharger')
-	. "' class='fondo' /></div>";
+	. "' /></div>";
 
 	if ($vignette_de_doc)
 		$res = $milieu . $res;
@@ -202,7 +202,7 @@ function afficher_transferer_upload($texte_upload, $dir)
 		"\n<div style='color: #505050;'>"
 		."<label for='cheminupload'>" . _T('info_selectionner_fichier', $doc)
 		."</label>&nbsp;:<br />\n" .
-		"\n<select name='chemin' id='cheminupload' size='1' class='fondl' style='width:100%;overflow:hidden;'>"
+		"\n<select name='chemin' id='cheminupload' size='1' style='width:100%;overflow:hidden;'>"
 		. "<option value=''>&gt;&gt;</option>"
 		. $texte_upload .
 		"\n</select>" .
@@ -210,7 +210,7 @@ function afficher_transferer_upload($texte_upload, $dir)
 		$GLOBALS['spip_lang_right'] .
 		"'><input name='sousaction3' type='submit' value='" .
 		_T('bouton_choisir').
-		"' class='fondo' /></div>" .
+		"' /></div>" .
 		"</div>\n";
 	}
 }

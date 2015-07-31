@@ -245,17 +245,17 @@ function ajouter_auteurs_objet($type, $id, $cond_les_auteurs,$script_edit, $arg_
 	. "</b></label></span>\n";
 
 	if (!is_numeric($all)) {
-		$sel = "$text<select name='$new' id='$new' size='1' style='width:150px;' class='fondl' onchange=\"$js\">$all</select>";
+		$sel = "$text<select name='$new' id='$new' size='1' style='width:150px;' onchange=\"$js\">$all</select>";
 		$clic = _T('bouton_ajouter');
 	} else if  ((_SPIP_AJAX < 1) OR ($all >= _SPIP_SELECT_MAX_AUTEURS)) {
-		  $sel = "$text <input type='text' name='cherche_auteur' id='$new' onclick=\"$js\" class='fondl ' value='' size='20' />";
+		  $sel = "$text <input type='text' name='cherche_auteur' id='$new' onclick=\"$js\" value='' size='20' />";
 		  $clic = _T('bouton_chercher');
 	} else {
 		$sel = selecteur_auteur_ajax($type, $id, $js, $text, $idom);
 		$clic = _T('bouton_ajouter');
 	}
 
-	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, " class='fondo visible_au_chargement' id='$menu'",'', $arg_ajax);
+	return ajax_action_post('editer_auteurs', "$id,$type", $script_edit, "id_{$type}=$id", $sel, $clic, " class='visible_au_chargement' id='$menu'",'', $arg_ajax);
 }
 
 // http://doc.spip.org/@objet_auteur_select

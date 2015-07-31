@@ -121,7 +121,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 			$GLOBALS['spip_lang_right'] .
 			"'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir') .
-			"' class='fondo spip_xx-small'  /></div>";
+			"'  /></div>";
 	}
 */
 
@@ -132,7 +132,7 @@ function indiquer_logo($titre, $id_objet, $mode, $id, $script, $iframe_script) {
 		"<div style='text-align: " .  $GLOBALS['spip_lang_right'] . "'>" .
 		"\n<input name='sousaction1' type='submit' value='" .
 		_T('bouton_telecharger') .
-		"' class='fondo spip_xx-small' /></div>" .
+		"'  /></div>" .
 		$afficher;
 
 	$type = type_du_logo($id_objet);

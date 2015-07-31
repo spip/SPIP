@@ -147,7 +147,7 @@ function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $docum
 	  
 	  .controles_md5($document);
 
-	$att_bouton = " class='fondo spip_xx-small'";
+	$att_bouton = "";
 
 	$att_span = " id='valider_doc$id_document' "
 	. ($flag == 'ajax' ? '' : "class='display_au_chargement'")
@@ -164,7 +164,7 @@ function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $docum
 		       . $corps 
 		       . "<span"
 		       . $att_span
-		       . "><input type='submit' class='fondo' value='"
+		       . "><input type='submit' value='"
 		       . _T('bouton_enregistrer')
 		       ."' /></span></div>";
 		$redirect = parametre_url($script,'show_docs',$id_document,'&');
@@ -274,8 +274,8 @@ function formulaire_taille($document) {
 		OR $type_inclus == "embed"
 	)) {
 		return "\n<br /><label for='largeur_document$id_document'>"._T('entree_dimensions')."</label><br />\n" .
-		  "<input type='text' name='largeur_document' id='largeur_document$id_document' class='fondl spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
-		  " &times; <input type='text' name='hauteur_document' id='hauteur_document$id_document' class='fondl spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
+		  "<input type='text' name='largeur_document' id='largeur_document$id_document' class='spip_xx-small' value=\"".$document['largeur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" />" .
+		  " &times; <input type='text' name='hauteur_document' id='hauteur_document$id_document' class='spip_xx-small' value=\"".$document['hauteur']."\" size='5' onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /> "._T('info_pixels');
 	}
 }
 
@@ -291,13 +291,13 @@ function date_formulaire_legender($date, $id_document) {
 	}
 
 	return  "<div>"._T('info_mise_en_ligne')."<br />\n" .
-		afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
-		afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
+		afficher_jour($jour, "name='jour_doc' id='jour_doc$id_document' size='1' class='spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_mois($mois, "name='mois_doc' id='mois_doc$id_document' size='1' class='spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\"") .
+		afficher_annee($annee, "name='annee_doc' id='annee_doc$id_document' size='1' class='spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") .
 		"<br />".
-		afficher_heure($heure, "name='heure_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
+		afficher_heure($heure, "name='heure_doc' size='1' class='spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
 			" : ".
-		afficher_minute($minute, "name='minute_doc' size='1' class='fondl spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
+		afficher_minute($minute, "name='minute_doc' size='1' class='spip_xx-small'\n\tonchange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\"") . 
 		"<br /><br /></div>\n";
 
 }

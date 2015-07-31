@@ -225,11 +225,11 @@ return $GLOBALS[\'browser_layer\'];}
 	._T(\'texte_date_publication_article\')
 	. "</b></font></tr>"
 	. "<tr><td align=\'center\'>"
-	. afficher_jour($jour, "name=\'jour\' size=\'1\' class=\'fondl\'", true)
-	. afficher_mois($mois, "name=\'mois\' size=\'1\' class=\'fondl\'", true)
-	. afficher_annee($annee, "name=\'annee\' size=\'1\' class=\'fondl\'",1996)
+	. afficher_jour($jour, "name=\'jour\' size=\'1\'", true)
+	. afficher_mois($mois, "name=\'mois\' size=\'1\'", true)
+	. afficher_annee($annee, "name=\'annee\' size=\'1\'",1996)
 	. "</td><td align=\'right\'>"
-	. "<input type=\'submit\' name=\'Changer\' class=\'fondo\' value=\'"
+	. "<input type=\'submit\' name=\'Changer\'  value=\'"
 	. _T(\'bouton_changer\')
 	. "\'>"
 	. "</td></tr></table>"

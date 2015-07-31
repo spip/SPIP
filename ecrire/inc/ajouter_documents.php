@@ -501,7 +501,7 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 		. fin_block()
 
 
-		. "<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
+		. "<div style='text-align: right;'><input type='submit' value='".
 		_T('bouton_valider').
 		  "' />";
 

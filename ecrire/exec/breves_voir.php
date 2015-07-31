@@ -203,7 +203,7 @@ function langue_breve($id_breve, $row){
 	if ($menu = liste_options_langues('changer_lang', $langue_breve, $langue_parent)) {
 		$lien = "\nonchange=\"this.nextSibling.firstChild.style.visibility='visible';\"";
 		$menu = select_langues('changer_lang', $lien, $menu, _T('titre_langue_breve'))
-	. "<span><input type='submit' class='visible_au_chargement fondo' value='". _T('bouton_changer')."' /></span>";
+	. "<span><input type='submit' class='visible_au_chargement' value='". _T('bouton_changer')."' /></span>";
 	}
 	$res .= redirige_action_auteur('editer_breve', "$id_breve/$id_rubrique", "breves_voir","id_breve=$id_breve", $menu);
 	$res .= "</div>\n";
@@ -225,7 +225,7 @@ function afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
 	$form = $chercher_rubrique($id_rubrique, 'breve', ($statut == 'publie'));
 	if (strpos($form,'<select')!==false) {
 		$form .= "<div style='text-align: $spip_lang_right;'>"
-			. '<input class="fondo" type="submit" value="'._T('bouton_choisir').'"/>'
+			. '<input type="submit" value="'._T('bouton_choisir').'"/>'
 			. "</div>";
 	}
 

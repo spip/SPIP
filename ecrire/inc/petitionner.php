@@ -39,7 +39,7 @@ function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 			$class = $ajax ? '' : ' visible_au_chargement';
 	}
 
-	$atts = " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
+	$atts = " class='$class' style='float: $spip_lang_right;' id='valider_petition'";
 
 	$res = ajax_action_post('petitionner', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
 
@@ -69,7 +69,7 @@ function petitionner_choisir($petition)
 	}
 
 	return "<select name='change_petition' id='change_petition'
-		class='fondl spip_xx-small'
+		class='spip_xx-small'
 		onchange=\"\$('#valider_petition').css('visibility','visible');\"
 		>\n$res</select><br />\n";
 }

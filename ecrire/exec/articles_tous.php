@@ -63,7 +63,7 @@ var img_deplierbas = "'. chemin_image('noeud_moins.gif') . '";');
 		  echo couche_formulaire_tous();
 
 		$out = "<textarea cols='1' rows='1' id='deplacements' style='display:none;' name='deplacements'></textarea>"
-		  . "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
+		  . "\n<div id='apply' style='display:none;text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_changer')."' /></div>";
 
 		echo "\n<div id='cancel' class='verdana2' style='display:none;text-align:$spip_lang_left;float:$spip_lang_left'>",
 		  "<a href='javascript:annuler_deplacement();'>",
@@ -224,7 +224,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 				    'puce-poubelle-breve.gif',
 				    _T('texte_statut_poubelle'));
 	
-	$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
+	$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_changer')."' /></div>";
 	
 	
 	// GERER LE MULTILINGUISME
@@ -255,7 +255,7 @@ function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 			}
 			$out .= "</select></div>\n";
 	
-			$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' class='fondo' value='"._T('bouton_changer')."' /></div>";
+			$out .= "\n<div style='text-align: $spip_lang_right'><input type='submit' value='"._T('bouton_changer')."' /></div>";
 		}
 	}
 

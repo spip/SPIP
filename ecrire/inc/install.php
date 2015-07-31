@@ -156,7 +156,7 @@ function bouton_suivant($code = '') {
 	static $suivant = 0;
 	$id = 'suivant'.(($suivant>0)?strval($suivant):'');
 	$suivant +=1;
-	return "\n<span class='suivant'><input id='".$id."' type='submit' class='fondl'\nvalue=\"" .
+	return "\n<span class='suivant'><input id='".$id."' type='submit'\nvalue=\"" .
 		$code .
 		" >>\" /></span>\n";
 }

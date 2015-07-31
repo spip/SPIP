@@ -123,7 +123,7 @@ function ajax_action_post($action, $arg, $retour, $gra, $corps, $clic='', $atts_
 	}
 
 	if (!$atts_i) 
-		$atts_i = " class='fondo' style='float: $spip_lang_right'";
+		$atts_i = " style='float: $spip_lang_right'";
 
 	if (is_array($clic)) {
 		$submit = "";

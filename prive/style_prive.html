@@ -74,8 +74,9 @@ div.table_page { margin-top: 1em; }
 	margin: 0; 
 	padding: 0; 
 }
-#chemin li em { display: none; }
 #chemin li a { color: black;  }
+#chemin li a:hover { text-decoration: underline;  }
+
 #chemin ul, #chemin li, #chemin li .bloc {  
 	margin: 0; 
 	padding: 0; 
@@ -85,22 +86,16 @@ div.table_page { margin-top: 1em; }
 	display: inline; 
 }
 #chemin li .bloc {	
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{[(#ENV{couleur_claire})], center [(#GET{left})] no-repeat })]
 	padding: 2px;	
 	padding-bottom: 4px;
-	padding-#GET{left}: 10px;	
-	padding-#GET{right}: 12px;	
-	margin-#GET{left}: -5px;
 	display: -moz-inline-box; 
 	display: inline-block; 
 }
 #chemin li .bloc:hover {
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{aaaaaa, center [(#GET{left})] no-repeat })]
 }
 
 #chemin li li .bloc { 
 	margin-top: 2px; 
-	[(#EVAL{_DIR_IMG_PACK}|concat{chemin-fond-,#ENV{ltr},.gif}|background_image{eeeeee, center [(#GET{left})] no-repeat })]
 }
 #chemin li li .bloc a  {
 	color: #444;

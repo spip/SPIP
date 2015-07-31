@@ -116,7 +116,7 @@ function exec_message_edit_args($id_message, $new, $dest)
 	  . "</textarea></p><br />\n"
 	  . "\n<div style='text-align: right'><input type='submit' value='"
 	  . _T('bouton_valider')
-	  . "' class='fondo'/></div>"	
+	  . "' /></div>"	
 	  . "\n</div>";
 
 	echo redirige_action_post('editer_message', $id_message, 'message',"id_message=$id_message", $res);

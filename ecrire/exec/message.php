@@ -121,14 +121,14 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 	  "<input type='hidden' name='id_message' id='id_message' value=\"$id_message\" />";
 
 	if (is_numeric($all)) {
-		$res .=  "\n<input type='text' name='cherche_auteur' id='cherche_auteur' class='fondl' value='' size='20' />";
-		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' class='fondo' />";
+		$res .=  "\n<input type='text' name='cherche_auteur' id='cherche_auteur' value='' size='20' />";
+		$res .=  "\n<input type='submit' value='"._T('bouton_chercher')."' />";
 	} else {
 
-		$res .=  "<select name='nouv_auteur' id='nouv_auteur' size='1' style='width: 150px' class='fondl'>"
+		$res .=  "<select name='nouv_auteur' id='nouv_auteur' size='1' style='width: 150px'>"
 		. $all
 		.  "</select>"
-		.  "<input type='submit' value='"._T('bouton_ajouter')."' class='fondo' />";
+		.  "<input type='submit' value='"._T('bouton_ajouter')."' />";
 	}
 	return redirige_action_post('editer_message', "$id_message,", 'message', "id_message=$id_message", "<div style='text-align: left'>\n$res</div>\n");
 }

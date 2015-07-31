@@ -104,7 +104,7 @@ function exec_admin_vider_dist()
 
 		echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
 			redirige_action_post('purger', 'cache', "admin_vider", '',
-					 "\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
+					 "\n<div style='text-align: right'><input  type='submit' value=\"" .
 			 str_replace('"', '&quot;', _T('bouton_vider_cache')) .
 					 "\" /></div>");
 		echo fin_cadre_relief(true);
@@ -114,7 +114,7 @@ function exec_admin_vider_dist()
 		echo afficher_taille_cache_vignettes();
 
 		echo redirige_action_post('purger', 'vignettes', "admin_vider",'',
-					    "\n<div style='text-align: right'><input class='fondo' type='submit' value=\"" .
+					    "\n<div style='text-align: right'><input  type='submit' value=\"" .
 					    str_replace('"', '&quot;', _T('bouton_vider_cache')) .
 					    "\" /></div>");
 

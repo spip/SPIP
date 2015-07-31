@@ -219,13 +219,13 @@ function formulaire_mot_remplace($id_groupe, $id_mot, $url_base, $table, $table_
 	$jscript1 = "findObj_forcer('$ancre').style.visibility='visible';";
 
 	$corps = "\n<select name='nouv_mot' id='nouv_mot$id_groupe' onchange=\"$jscript1\""
-	. " class='fondl spip_xx-small' style='width:90px;'>"
+	. " class='spip_xx-small' style='width:90px;'>"
 	. join("\n", $res)
 	. "</select>\n&nbsp;" ;
 
 	$t =  _T('bouton_changer');
 
-	return ajax_action_post('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='fondo spip_xx-small visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
+	return ajax_action_post('editer_mots', "$id_objet,$id_mot,$table,$table_id,$objet", $url_base, "$table_id=$id_objet",$corps, $t, " class='visible_au_chargement' id='$ancre'", "", "&id_objet=$id_objet&objet=$objet");
 }
 
 // int $id_objet : id_article
@@ -279,7 +279,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 				"$table_id=$id_objet",
 				$corps,
 				$clic,
-				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'", "",
+				" class='visible_au_chargement spip_xx-small' id='valider_groupe_$id_groupe'", "",
 				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
 
 			// forcer la visibilite si au moins un mot obligatoire absent
@@ -359,11 +359,11 @@ function menu_mots($row, $id_groupes_vus, $cond_mots_vus)
 		$jscript = "onfocus=\"$jscript1 $jscript2\"";
 
 		if ($obligatoire)
-			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#E86519;' value=\"".entites_html($titre)."\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' style='width: 180px; background-color:#E86519;' value=\"".entites_html($titre)."\" size='20' $jscript />";
 		else if ($unseul) {
-			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' class='fondl' style='width: 180px; background-color:#cccccc;' value=\"".entites_html($titre)."\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe' style='width: 180px; background-color:#cccccc;' value=\"".entites_html($titre)."\" size='20' $jscript />";
 		} else
-			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe'  class='fondl' style='width: 180px; ' value=\"".entites_html($titre)."\" size='20' $jscript />";
+			$res = "<input type='text' name='cherche_mot' id='cherche_mot$id_groupe'  style='width: 180px; ' value=\"".entites_html($titre)."\" size='20' $jscript />";
 
 		$res .= "<input type='hidden' name='select_groupe'  value='$id_groupe' />&nbsp;";
 		return array($res, _T('bouton_chercher')); 
@@ -383,7 +383,7 @@ function menu_mots($row, $id_groupes_vus, $cond_mots_vus)
 				textebrut(typo($r['titre'])) .
 				"</option>";
 		}
-		$res = "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' class='fondl' style='$style' onchange=\"$jscript1\">"
+		$res = "<select name='nouv_mot' id='nouv_mot$id_groupe' size='1' style='$style' onchange=\"$jscript1\">"
 		. "\n<option value='x' style='font-variant: small-caps;'>"
 		. $titre
 		. "</option>\n"

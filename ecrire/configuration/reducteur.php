@@ -124,7 +124,7 @@ function format_choisi()
 	  . "<label for='taille_preview'>"
 	  ._T('info_taille_maximale_vignette')
 	  . "</label>"
-	  . "<br /><input type='text' name='taille_preview' id='taille_preview' value='$taille_preview' class='fondl' size='5' />";
+	  . "<br /><input type='text' name='taille_preview' id='taille_preview' value='$taille_preview' size='5' />";
 	$res .= " "._T('info_pixels');
 	
 	$res .= '<br /><br />';

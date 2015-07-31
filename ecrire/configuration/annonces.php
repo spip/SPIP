@@ -51,13 +51,13 @@ function configuration_annonces_dist()
 	else $style = "display: none;";			
 
 	$res .= "<div id='config-edito' style='$style'>"
-	. "\n<div style='text-align: center;'><input type='text' name='adresse_suivi' id='adresse_suivi' value='$adresse_suivi' size='30' class='fondl' /></div>"
+	. "\n<div style='text-align: center;'><input type='text' name='adresse_suivi' id='adresse_suivi' value='$adresse_suivi' size='30' /></div>"
 	. "\n<blockquote class='spip'><p>";
 
 	if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
 
 	$res .= "<label for='adresse_suivi_inscription'>"._T('info_config_suivi', array('adresse_suivi' => $adresse_suivi))."</label>"
-	. "<br />\n<input type='text' name='adresse_suivi_inscription' id='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' class='fondl' />"
+	. "<br />\n<input type='text' name='adresse_suivi_inscription' id='adresse_suivi_inscription' value='$adresse_suivi_inscription' size='50' />"
 	. "</p></blockquote>"
 	. "</div>"
 	. "<br />\n"
@@ -87,13 +87,13 @@ function configuration_annonces_dist()
 	$res .= "<div id='config-neuf' style='$style'>"
 	. "<ul>"
 	. "<li><label for='adresse_neuf'>"._T('info_adresse')."</label>"
-	. "\n<input type='text' name='adresse_neuf' id='adresse_neuf' value='$adresse_neuf' size='30' class='fondl' />"
+	. "\n<input type='text' name='adresse_neuf' id='adresse_neuf' value='$adresse_neuf' size='30' />"
 	. "</li><li><label for='jours_neuf'>"._T('info_tous_les')."</label>"
-	. "\n<input type='text' name='jours_neuf' id='jours_neuf' value='$jours_neuf' size='4' class='fondl' />\n"
+	. "\n<input type='text' name='jours_neuf' id='jours_neuf' value='$jours_neuf' size='4' />\n"
 	. _T('info_jours')
 	. " &nbsp;  &nbsp;  &nbsp;\n<input type='submit' name='envoi_now' id='envoi_now' value='"
 	. _T('info_envoyer_maintenant')
-	. "' class='fondl' onclick='AjaxNamedSubmit(this)' />"
+	. "' onclick='AjaxNamedSubmit(this)' />"
 	. "</li></ul>"
 	. "</div>";
 
@@ -111,7 +111,7 @@ function configuration_annonces_dist()
 	. "<table border='0' cellspacing='1' cellpadding='3' width=\"100%\">"
 	. "\n<tr><td class='verdana2'>"
 	. "<label for='email_envoi'>"._T('info_email_envoi_txt')."</label>"
-	. " <input type='text' name='email_envoi' id='email_envoi' value=\"$email_envoi\" size='20' class='fondl' />"
+	. " <input type='text' name='email_envoi' id='email_envoi' value=\"$email_envoi\" size='20' />"
 	. "</td></tr>"
 	. "\n<tr><td>&nbsp;</td></tr></table>"
 	. fin_cadre_relief(true);

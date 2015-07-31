@@ -71,7 +71,7 @@ function forum_envoi_form($id, $row, $script, $statut, $titre, $corps, $form, $o
 	  debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;', true) .
 $form
 	. "<div style='text-align: right'>"
-	. "<input class='fondo' type='submit' value='"
+	. "<input type='submit' value='"
 	. _T('bouton_voir_message')
 	. "' /></div>"
 	. fin_cadre_formulaire(true);
@@ -251,7 +251,7 @@ function forum_envoi_entete($parent, $titre_parent, $texte, $titre, $nom_site, $
 		.  debut_cadre_thread_forum("", true, "", typo($titre))
 		. propre($texte)
 		. (!$nom_site ? '' : "<p><a href='$url_site'>$nom_site</a></p>")
-		. "\n<div style='text-align: right'><input class='fondo' type='submit' name='valider_forum' value='"
+		. "\n<div style='text-align: right'><input type='submit' name='valider_forum' value='"
 		. _T('bouton_envoyer_message')
 		. "'\nonclick='AjaxNamedSubmit(this)' /></div>"
 		. fin_cadre_thread_forum(true)
