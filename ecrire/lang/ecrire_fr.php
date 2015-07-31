@@ -704,6 +704,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 
 // L
+'les_deux' => 'les deux',
 'lien_ajout_destinataire' => 'Ajouter ce destinataire',
 'lien_ajouter_auteur' => 'Ajouter cet auteur',
 'lien_ajouter_participant' => 'Ajouter un participant',
