@@ -53,7 +53,6 @@ function install_mode_appel($server_db, $tout=true)
 		. test_sql_mode_mysql($server_db)	);
 }
 
-
 // http://doc.spip.org/@analyse_fichier_connection
 function analyse_fichier_connection($file)
 {
@@ -171,7 +170,7 @@ function bouton_suivant($code = '') {
 	static $suivant = 0;
 	$id = 'suivant'.(($suivant>0)?strval($suivant):'');
 	$suivant +=1;
-	return "\n<span class='suivant'><input id='".$id."' type='submit' class='fondl'\nvalue=\"" .
+	return "\n<span class='suivant'><input id='".$id."' type='submit'\nvalue=\"" .
 		$code .
 		" >>\" /></span>\n";
 }

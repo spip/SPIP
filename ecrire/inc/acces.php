@@ -147,6 +147,47 @@ function initialiser_sel() {
 	else return "";
 }
 
+// Cette fonction ne sert qu'a la connexion en mode http_auth.non LDAP
+// Son role est de creer le fichier htpasswd
+// Voir le plugin "acces restreint"
+// http://doc.spip.org/@ecrire_acces
+function ecrire_acces() {
+	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
+	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
+
+	// Cette variable de configuration peut etre posee par un plugin
+	// par exemple acces_restreint ;
+	// si .htaccess existe, outrepasser spip_meta
+	if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
+	AND !@file_exists($htaccess)) {
+		spip_unlink($htpasswd);
+		spip_unlink($htpasswd."-admin");
+		return;
+	}
+
+	# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
+	# de devenir redacteur le cas echeant (auth http)... a nettoyer
+	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
+
+	if (spip_connect_ldap()) return;
+	$p1 = ''; // login:htpass pour tous
+	$p2 = ''; // login:htpass pour les admins
+	$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));
+	while ($t = sql_fetch($s)) {
+		if (strlen($t['login']) AND strlen($t['htpass'])) {
+			$p1 .= $t['login'].':'.$t['htpass']."\n";
+			if ($t['statut'] == '0minirezo')
+				$p2 .= $t['login'].':'.$t['htpass']."\n";
+		}
+	}
+	if ($p1) {
+	  ecrire_fichier($htpasswd, $p1);
+	  ecrire_fichier($htpasswd.'-admin', $p2);
+	  spip_log("Ecriture de $htpasswd et $htpasswd-admin");
+	}
+}
+
+
 // http://doc.spip.org/@generer_htpass
 function generer_htpass($pass) {
 	global $htsalt;
@@ -158,13 +199,12 @@ function generer_htpass($pass) {
 // Installe ou verifie un .htaccess, y compris sa prise en compte par Apache
 //
 // http://doc.spip.org/@verifier_htaccess
-function verifier_htaccess($rep) {
+function verifier_htaccess($rep, $force=false) {
 	$htaccess = rtrim($rep,"/") . "/" . _ACCESS_FILE_NAME;
-	if ((@file_exists($htaccess)) OR defined('_TEST_DIRS')) 
+	if (((@file_exists($htaccess)) OR defined('_TEST_DIRS')) AND !$force)
 		return true;
 	if ($_SERVER['SERVER_ADMIN'] == 'www@nexenservices.com')
 		return nexen($rep);
-	spip_log("Creation de $htaccess");
 	if ($ht = @fopen($htaccess, "w")) {
 		fputs($ht, "deny from all\n");
 		fclose($ht);
@@ -173,14 +213,15 @@ function verifier_htaccess($rep) {
 		if ($ht = @fopen($t, "w")) {
 			@fclose($ht);
 			include_spip('inc/distant');
-			$t = '/' . _DIR_RACINE . $t;
-			if (preg_match(',^(.*/)[^/]+/../(.*)$,',$t, $m))
-				$t = $m[1] . $m[2];
-			$f = $GLOBALS['meta']['adresse_site'] . $t;
-			$ht = !recuperer_lapage($f, false, 'HEAD', 0);
+			$t = substr($t,strlen(_DIR_RACINE));
+			$t = url_de_base() . $t;
+			$ht = recuperer_lapage($t, false, 'HEAD', 0);
+			// htaccess inoperant si on a recupere des entetes HTTP
+			// (ignorer la reussite si connexion par fopen)
+			$ht = !(isset($ht[0]) AND $ht[0]);
 		}
 	}
-	if (!$ht) spip_log("$htaccess inoperant sur $rep"); 
+	spip_log("Creation de $htaccess " . ($ht ? " reussie" : " manquee"));
 	return $ht;
 }	
 
@@ -197,6 +238,7 @@ function nexen($rep)
 			n&eacute;cessaire).<br />";
 	return false;
 }
+
 
 // http://doc.spip.org/@gerer_htaccess
 function gerer_htaccess() {

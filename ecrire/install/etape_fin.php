@@ -20,8 +20,7 @@ include_spip('inc/acces');
 // http://doc.spip.org/@install_etape_fin_dist
 function install_etape_fin_dist()
 {
-	include_spip('inc/auth');
-	auth_synchroniser_distant();
+	ecrire_acces();
 
 	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
 	if (file_exists(_FILE_CHMOD_TMP)) {
@@ -41,12 +40,36 @@ function install_etape_fin_dist()
 	}
 
 	// creer le repertoire cache, qui sert partout !
+	// deja fait en etape 4 en principe, on garde au cas ou
 	if(!@file_exists(_DIR_CACHE)) {
 		$rep = preg_replace(','._DIR_TMP.',', '', _DIR_CACHE);
 		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
 	}
 
-	// on l'envoie dans l'espace prive
-	redirige_url_ecrire('accueil');	
+	// Verifier la securite des htaccess
+	// Si elle ne fonctionne pas, prevenir
+	$msg = install_verifier_htaccess();
+	if ($msg) {
+		$cible = _T('public:accueil_site');
+		$cible = generer_form_ecrire('accueil', '','', $cible);
+		echo minipres('AUTO', $msg . $cible);
+	// ok, deboucher dans l'espace prive
+	} else redirige_url_ecrire('accueil');
+}
+
+function install_verifier_htaccess()
+{
+	if (verifier_htaccess(_DIR_TMP, true)
+	AND verifier_htaccess(_DIR_CONNECT, true))
+		return '';
+
+	$titre = _T('htaccess_inoperant');
+
+	$averti = _T('htaccess_a_simuler', 
+		array('htaccess' => '<tt>' . _ACCESS_FILE_NAME . '</tt>',
+			'constantes' =>  '<tt>_DIR_TMP &amp; _DIR_CONNECT</tt>',
+			'document_root' => '<tt>' . $_SERVER['DOCUMENT_ROOT'] . '</tt>'));
+
+	return "<p class='resultat echec'>$titre</p><p>$averti</p>";
 }
 ?>

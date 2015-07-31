@@ -17,114 +17,43 @@ include_spip('inc/headers');
 // http://doc.spip.org/@install_etape_4_dist
 function install_etape_4_dist()
 {
-	$login = _request('login');
-	$email = _request('email');
-	$nom = _request('nom');
-	$pass = _request('pass');
-	$pass_verif = _request('pass_verif');
 
-	$server_db = defined('_INSTALL_SERVER_DB')
-		? _INSTALL_SERVER_DB
-		: _request('server_db');
-
-	if($login) {
-		$echec = ($pass!=$pass_verif) ?
-		  _T('info_passes_identiques')
-		  : ((strlen($pass)<6) ?
-		     _T('info_passe_trop_court')
-		     : ((strlen($login)<3) ?
-			_T('info_login_trop_court')
-			: ''));
-		if ($echec) {
-			echo minipres(
-			'AUTO',
-			"<h2>$echec</h2>\n".
-			info_progression_etape(3,'etape_','install/', true).
-			"<p class='resultat echec'>"._T('avis_connexion_echec_2')."</p>"
-			);
-			exit;
-		}
+	// creer le repertoire cache, qui sert partout !
+	if(!@file_exists(_DIR_CACHE)) {
+		$rep = preg_replace(','._DIR_TMP.',', '', _DIR_CACHE);
+		$rep = sous_repertoire(_DIR_TMP, $rep, true,true);
 	}
 
-	if (@file_exists(_FILE_CHMOD_TMP))
-		include(_FILE_CHMOD_TMP);
-	else
-		redirige_url_ecrire('install');
-
-	if (!@file_exists(_FILE_CONNECT_TMP))
-		redirige_url_ecrire('install');
 
 	echo install_debut_html('AUTO', ' onload="document.getElementById(\'suivant\').focus();return false;"');
 	echo info_progression_etape(4,'etape_','install/');
+
+	echo "<p>"
+			._L('Les extensions ci-dessous sont charg&#233;es et activ&#233;es dans le r&#233;pertoire @extensions@.', array('extensions' => joli_repertoire(_DIR_EXTENSIONS)))
+			."</p>";
+
+	// installer les extensions
+	include_spip('inc/plugin');
+	$afficher = charger_fonction("afficher_liste",'plugins');
+	echo $afficher(self(), liste_plugin_files(_DIR_EXTENSIONS),array(), _DIR_EXTENSIONS,'afficher_nom_plugin');
+
+	installe_plugins();
 
 	echo info_etape(_T('info_derniere_etape'),
 			_T('info_utilisation_spip')
 	);
 
-	# maintenant on connait le vrai charset du site s'il est deja configure
-	# sinon par defaut lire_meta reglera _DEFAULT_CHARSET
-	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
+	// mettre a jour si necessaire l'adresse du site
+	// securite si on arrive plus a se loger
+	include_spip('inc/config');
+	$_POST['adresse_site'] = '';
+	appliquer_modifs_config();
 
-	lire_metas();
-	$suite = '';
-	if ($login) {
-		include_spip('inc/charsets');
-
-		$nom = (importer_charset($nom, _DEFAULT_CHARSET));
-		$login = (importer_charset($login, _DEFAULT_CHARSET));
-		$email = (importer_charset($email, _DEFAULT_CHARSET));
-		# pour le passwd, bizarrement il faut le convertir comme s'il avait
-		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
-		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');	
-		$mdpass = md5($pass);
-		$htpass = generer_htpass($pass);
-		$alea = creer_uniqid();
-		$id_auteur = sql_getfetsel("id_auteur", "spip_auteurs", "login=" . sql_quote($login));
-		if ($id_auteur !== NULL) {
-			sql_updateq('spip_auteurs', array("nom"=> $nom, 'email'=> $email, 'login'=>$login, 'pass'=>$mdpass, 'alea_actuel'=>'', 'alea_futur'=> $alea, 'htpass'=>$htpass, 'statut'=>'0minirezo','webmestre'=>'oui'), "id_auteur=$id_auteur");
-		}
-		else {
-			sql_insertq('spip_auteurs', array(
-				'nom' => $nom,
-				'email' => $email,
-				'login' => $login,
-				'pass' => $mdpass,
-				'htpass' => $htpass,
-				'alea_futur' => $alea,
-				'statut' =>'0minirezo',
-				'webmestre' => 'oui'));
-		}
-
-		// inserer email comme email webmaster principal
-		// (sauf s'il est vide: cas de la re-installation)
-		if ($email)
-			ecrire_meta('email_webmaster', $email);
-
-		// Connecter directement celui qui vient de (re)donner son login
-		// mais sans cookie d'admin ni connexion longue
-		$spip = charger_fonction('spip', 'auth', true);
-		$session = charger_fonction('session', 'inc', true);
-		$row = ($spip AND $session) ?  $spip($login, $pass) : ''; 
-		if ($row AND $cookie_session = $session($row)) {
-			spip_setcookie('spip_session', $cookie_session);
-		} elseif ($row == false) {
-			$suite = "<span style='color: red'>"
-			  . _L('Attention: htaccess inoperant')
-			  . '</span>';
-		}
-		    
-		if (!$row)
-			spip_log("login automatique impossible $spip $session");
-	}
-
-	$config = charger_fonction('config', 'inc');
-	$config();
-
-	$suite .=  "\n<input type='hidden' name='etape' value='fin' />" 
+	// aller a la derniere etape qui clos l'install et redirige
+	$suite =  "\n<input type='hidden' name='etape' value='fin' />"
 	  . bouton_suivant(_T('login_espace_prive'));
 
-	echo generer_form_ecrire('install', $suite);
-	echo install_fin_html();
+	echo generer_form_ecrire('install', $suite);	echo install_fin_html();
 }
 
 ?>
