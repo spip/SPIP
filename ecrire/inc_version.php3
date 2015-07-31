@@ -48,7 +48,7 @@ $mysql_rappel_connexion = false;
 $spip_version = 1.473;
 
 // version de spip
-$spip_version_affichee = "1.5.1pr1 CVS";
+$spip_version_affichee = "1.5.1pr2 CVS";
 
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
