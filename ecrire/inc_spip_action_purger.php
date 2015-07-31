@@ -1,0 +1,68 @@
+<?php
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2006                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+include_ecrire("inc_session");
+
+function spip_action_purger_dist()
+{
+  global $arg, $hash, $id_auteur, $action;
+
+  if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) exit;
+
+  include_ecrire("inc_invalideur");
+
+  switch ($arg) {
+
+  case 'cache': 
+      supprime_invalideurs();
+      purger_repertoire(_DIR_CACHE, 0);
+      break;
+
+  case 'squelettes':
+	purger_repertoire(_DIR_CACHE, 0, '^skel_');
+	break;
+
+  case 'vignettes':
+	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
+	spip_log('vider le cache');
+	supprime_invalideurs();
+	purger_repertoire(_DIR_CACHE, 0);
+	break;
+
+  case 'taille_vignettes':
+
+  	global $lang;
+	$handle = @opendir(_DIR_IMG);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_dir(_DIR_IMG.$fichier) AND ereg("^cache-", $fichier)) {
+			$taille += calculer_taille_dossier(_DIR_IMG.$fichier);
+		}
+	}
+	closedir($handle);
+	
+	include_ecrire("inc_filtres");
+	include_ecrire('inc_lang');
+	lang_select($lang);
+	echo "<html><body>\n";
+	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
+	echo "<p align='justify'>\n";
+	echo _T('ecrire:taille_cache_image', array('dir' => _DIR_IMG,
+		'taille' => "<b>".taille_en_octets($taille)."</b>"));
+	echo "</p></div></body></html>";
+	break;
+  }
+}

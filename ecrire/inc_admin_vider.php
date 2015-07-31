@@ -100,14 +100,16 @@ if ($quota_cache) {
 	echo _T('taille_cache_infinie');
 }
 
- $action = 'purger_cache';
- $hash = calculer_action_auteur($action);
+ $action = 'purger';
+ $arg = 'cache';
+ $hash = calculer_action_auteur("$action $arg");
 
  echo ' (', _T('cache_modifiable_webmestre'),')</p>', 
   "\n<form action='",
-  generer_url_public("spip_cache"),
+  generer_url_public("spip_action.php"),
   "' method='POST'>", 
   "\n<input type='hidden' name='action' value='$action' />",
+  "\n<input type='hidden' name='arg' value='$arg' />",
   "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />", 
   "\n<input type='hidden' name='hash' value='$hash' />", 
   "\n<input type='hidden' name='redirect' value='",
@@ -122,22 +124,25 @@ if ($quota_cache) {
 
  debut_cadre_relief("image-24.gif", false, "", _T('info_images_auto'));
 
- $action = 'calculer_cache_vignettes';
- $hash = calculer_action_auteur($action);
+ $action = 'purger';
+ $arg = 'taille_vignettes';
+ $hash = calculer_action_auteur("$action $arg");
 
  echo "<div style='text-align: center;'>",
    "<iframe width='530px' height='65px' src='",
-   generer_url_public("spip_cache", "action=$action&lang=$spip_lang&id_auteur=$connect_id_auteur&hash=$hash"),
+   generer_url_public("spip_action.php", "action=$action&arg=$arg&lang=$spip_lang&id_auteur=$connect_id_auteur&hash=$hash"),
    "'></iframe>",
    "</div>";
 
- $action = 'purger_cache_vignettes';
- $hash = calculer_action_auteur($action);
+ $action = 'purger';
+ $arg = 'vignettes';
+ $hash = calculer_action_auteur("$action $arg");
 
  echo   "\n<form action='",
-   generer_url_public("spip_cache"),
+   generer_url_public("spip_action.php"),
    "' method='POST'>",
    "\n<input type='hidden' name='action' value='$action' />",
+   "\n<input type='hidden' name='arg' value='$arg' />",
    "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />",
    "\n<input type='hidden' name='hash' value='$hash' />",
    "\n<input type='hidden' name='redirect' value='",
