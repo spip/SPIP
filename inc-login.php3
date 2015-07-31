@@ -6,11 +6,11 @@ if (defined("_INC_LOGIN")) return;
 define("_INC_LOGIN", "1");
 
 
-include_ecrire ("inc_meta.php3");
-include_ecrire ("inc_session.php3");
-include_ecrire ("inc_filtres.php3");
-include_ecrire ("inc_texte.php3");
-include_local ("inc-formulaires.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_session.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_texte.php3");
+include_local("inc-formulaires.php3");
 
 // gerer l'auth http
 function auth_http($url, $essai_auth_http) {
@@ -149,75 +149,68 @@ function login_pour_tous($cible, $prive, $message, $action) {
 		   
 	}
 
-	// javascript pour le focus
-	if ($login)
-		$js_focus = 'document.form_login.session_password.focus();';
-	else
-		$js_focus = 'document.form_login.var_login.focus();';
-
+# Affichage du formulaire de login avec un challenge MD5 en javascript
+# si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
+# sinon , le login est modifiable (puisque le challenge n'est pas utilise)
 
 	if ($login) {
-		// Affiche formulaire de login en incluant le javascript MD5
-		$flag_challenge_md5 = ($source_auteur == 'spip');
-		$src = _DIR_RESTREINT_ABS . 'md5.js';
 
-		if ($flag_challenge_md5) echo "<script type=\"text/javascript\" src=\"$src\"></script>\n";
-		echo "<form name='form_login' action='spip_cookie.php3' method='post'";
-		if ($flag_challenge_md5) echo " onSubmit='if (this.session_password.value) {
+		$session = "<br /><br /><label><b>"._T('login_login2')."</b><br /></label>\n<input type='text' name='session_login' class='forml' value=\"$login\" size='40' />";
+		if ($source_auteur != 'spip') 
+			$challenge = '';
+		else {
+			$challenge = 
+		  (" onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
 				this.session_password.value = \"\";
-			}'";
-		echo ">\n";
-		echo "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
-		if ($erreur) echo "<div class='reponse_formulaire'><b>$erreur</b></div><p>";
-
-		if ($flag_challenge_md5) {
-			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
-			echo "<script type=\"text/javascript\"><!--\n" .
-			  "document.write('".addslashes(_T('login_login'))." <b>$login</b><br /><a href=\"spip_cookie.php3?cookie_admin=non&amp;url=".rawurlencode($action)."\"><font size=\"2\">["._T('login_autre_identifiant')."]</font></a>');\n" .
-				"//--></script>\n";
-			echo "<input type='hidden' name='session_login_hidden' value='$login' />";
-
-			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
-			echo "<noscript>";
-			echo "<font face='Georgia, Garamond, Times, serif' size='3'>";
-			echo _T('login_non_securise')." <a href=\"".quote_amp($action)."\">"._T('login_recharger')."</a>.</font>\n";
+			}'");
+			echo http_script('', _DIR_RESTREINT_ABS . 'md5.js');
 		}
-		echo "<label><b>"._T('login_login2')."</b><br /></label>";
-		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40' />\n";
-		if ($flag_challenge_md5) echo "</noscript>\n";
-
-		echo "<p />\n<label><b>"._T('login_pass2')."</b><br /></label>";
-		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40' />\n";
-		echo "<input type='hidden' name='essai_login' value='oui' />\n";
-
-		echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'$rester_checked /> ";
-		echo "<label for='session_remember'>"._T('login_rester_identifie')."</label>";
-
-		echo "<input type='hidden' name='url' value='$cible' />\n";
-		echo "<input type='hidden' name='session_password_md5' value='' />\n";
-		echo "<input type='hidden' name='next_session_password_md5' value='' />\n";
-		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."' /></div>\n";
-		echo "</div>";
-		echo "</form>";
+		echo "<form name='form_login' action='spip_cookie.php3' method='post'",
+		  $challenge,
+		  ">\n",
+		  "<input type='hidden' name='session_login_hidden' value='$login' />\n",
+		  "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>\n",
+		  (!$erreur ? '' : "<div class='reponse_formulaire'><b>$erreur</b></div>\n"),
+		  (!$challenge ? $session :
+		   http_script("document.write('".addslashes(_T('login_login'))." <b>$login</b><br /><a href=\"spip_cookie.php3?cookie_admin=non&amp;url=".rawurlencode($action)."\"><font size=\"2\">["._T('login_autre_identifiant')."]</font></a>');",
+			       '',
+				"<font face='Georgia, Garamond, Times, serif' size='3'>" .
+				_T('login_non_securise') .
+			       "\n<a href=\"".quote_amp($action)."\">"._T('login_recharger')."</a>.\n</font>$session")),
+		  "\n<p /><label><b>"._T('login_pass2')."</b><br /></label>",
+		  "<input type='password' name='session_password' class='forml' value=\"\" size='40' />\n",
+		  "<input type='hidden' name='essai_login' value='oui' />\n",
+		  "<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'$rester_checked /> ",
+		  "<label for='session_remember'>",
+		  _T('login_rester_identifie'),
+		  "</label>",
+		  "<input type='hidden' name='url' value='$cible' />\n",
+		  "<input type='hidden' name='session_password_md5' value='' />\n",
+		  "<input type='hidden' name='next_session_password_md5' value='' />\n",
+		  "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."' /></div>\n",
+		  "</div>",
+		  "</form>";
 	}
 	else { // demander seulement le login
 		$action = quote_amp($action);
-		echo "<form name='form_login' action='$action' method='post'>\n";
-		echo "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
+		echo "<form name='form_login' action='$action' method='post'>\n",
+		  "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
 		if ($erreur) echo "<span style='color:red;'><b>$erreur</b></span><p />";
-		echo "<label><b>"._T('login_login2')."</b><br /></label>";
-		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40' />\n";
-
-		echo "<input type='hidden' name='var_url' value='$cible' />\n";
-		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'/></div>\n";
-		echo "</div>";
-		echo "</form>";
+		echo
+		  "<label><b>"._T('login_login2')."</b><br /></label>",
+		  "<input type='text' name='var_login' class='forml' value=\"\" size='40' />\n",
+		  "<input type='hidden' name='var_url' value='$cible' />\n",
+		  "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'/></div>\n",
+		  "</div>",
+		  "</form>";
 	}
 
 	// Gerer le focus
-	echo "<script type=\"text/javascript\"><!--\n" . $js_focus . "\n//--></script>\n";
+	echo http_script($login ?
+			 'document.form_login.session_password.focus();' :
+			 'document.form_login.var_login.focus();');
 
 	if ($echec_cookie == "oui" AND $php_module AND !$ignore_auth_http) {
 		echo "<form action='spip_cookie.php3' method='get'>";
@@ -236,7 +229,7 @@ function login_pour_tous($cible, $prive, $message, $action) {
 		echo " [<a $pass_popup>" . _T('login_sinscrire').'</a>]';
 
 	// bouton oubli de mot de passe
-	include_ecrire ("inc_mail.php3");
+	include_ecrire("inc_mail.php3");
 	if (tester_mail()) {
 		echo ' [<a href="spip_pass.php3?oubli_pass=oui" target="spip_pass" onclick="'
 			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;\">"
