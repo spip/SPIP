@@ -83,16 +83,18 @@ if (!defined('_ECRAN_SECURITE')
 AND @file_exists($f = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'ecran_securite.php'))
 	include $f;
 
-/*
- * detecteur de robot d'indexation
- * utilise en divers endroits, centralise ici si l'ecran l'a pas deja fait
+if (!defined('_IS_BOT')) {
+/**
+ * Détecteur de robot d'indexation
+ *
+ * Utilisé en divers endroits, centralisé ici
  */
-if (!defined('_IS_BOT'))
 	define('_IS_BOT',
 		isset($_SERVER['HTTP_USER_AGENT'])
 		AND preg_match(',bot|slurp|crawler|spider|webvac|yandex|INA dlweb|EC2LinkFinder|80legs,i',
 			$_SERVER['HTTP_USER_AGENT'])
 	);
+}
 
 //
 // *** Parametrage par defaut de SPIP ***
