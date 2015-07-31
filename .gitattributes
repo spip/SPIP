@@ -20,7 +20,6 @@ ecrire/action/documenter.php -text
 ecrire/action/editer_article.php -text
 ecrire/action/editer_auteur.php -text
 ecrire/action/editer_auteurs.php -text
-ecrire/action/editer_breve.php -text
 ecrire/action/editer_message.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/etre_webmestre.php -text
@@ -28,7 +27,6 @@ ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/instituer_article.php -text
 ecrire/action/instituer_auteur.php -text
-ecrire/action/instituer_breve.php -text
 ecrire/action/instituer_collaboration.php -text
 ecrire/action/instituer_langue_rubrique.php -text
 ecrire/action/joindre.php -text
@@ -94,8 +92,6 @@ ecrire/exec/auteur_infos.php -text
 ecrire/exec/auteurs.php -text
 ecrire/exec/base_delete_all.php -text
 ecrire/exec/base_repair.php -text
-ecrire/exec/breves_edit.php -text
-ecrire/exec/breves_voir.php -text
 ecrire/exec/brouteur.php -text
 ecrire/exec/brouteur_frame.php -text
 ecrire/exec/charger_plugin.php -text
@@ -192,7 +188,6 @@ ecrire/inc/informer_auteur.php -text
 ecrire/inc/install.php -text
 ecrire/inc/instituer_article.php -text
 ecrire/inc/instituer_auteur.php -text
-ecrire/inc/instituer_breve.php -text
 ecrire/inc/joindre.php -text
 ecrire/inc/journal.php -text
 ecrire/inc/json.php -text
@@ -347,20 +342,16 @@ prive/box.css -text
 prive/box_skins.css.html -text
 prive/cfg.html -text
 prive/contenu/article.html -text
-prive/contenu/breve.html -text
 prive/contenu/item_rss_plugin.html -text
 prive/contenu/rubrique.html -text
 prive/editer/article.html -text
 prive/editer/auteur.html -text
-prive/editer/breve.html -text
 prive/editer/logo.html -text
 prive/editer/rubrique.html -text
 prive/formulaires/configurer_annonces.html -text
 prive/formulaires/configurer_annonces.php -text
 prive/formulaires/configurer_articles.html -text
 prive/formulaires/configurer_articles.php -text
-prive/formulaires/configurer_breves.html -text
-prive/formulaires/configurer_breves.php -text
 prive/formulaires/configurer_documents.html -text
 prive/formulaires/configurer_documents.php -text
 prive/formulaires/configurer_flux.html -text
@@ -392,8 +383,6 @@ prive/formulaires/editer_article.html -text
 prive/formulaires/editer_article.php -text
 prive/formulaires/editer_auteur.html -text
 prive/formulaires/editer_auteur.php -text
-prive/formulaires/editer_breve.html -text
-prive/formulaires/editer_breve.php -text
 prive/formulaires/editer_logo.html -text
 prive/formulaires/editer_logo.php -text
 prive/formulaires/editer_rubrique.html -text
@@ -641,8 +630,6 @@ prive/informer_auteur_fonctions.php -text
 prive/infos/article.html -text
 prive/infos/article_fonctions.php -text
 prive/infos/auteur.html -text
-prive/infos/breve.html -text
-prive/infos/breve_fonctions.php -text
 prive/infos/rubrique.html -text
 prive/javascript/SearchHighlight.js -text
 prive/javascript/ajaxCallback.js -text
@@ -663,7 +650,6 @@ prive/javascript/sha256.js -text
 prive/listes/articles.html -text
 prive/listes/auteurs.html -text
 prive/listes/auteurs_fonctions.php -text
-prive/listes/breves.html -text
 prive/listes/rubriques.html -text
 prive/listes/visiteurs.html -text
 prive/listes/visiteurs_fonctions.php -text
@@ -695,7 +681,6 @@ prive/spip_style.css -text
 prive/squelettes/body.html -text
 prive/squelettes/contenu/page-admin_tech.html -text
 prive/squelettes/contenu/page-admin_vider.html -text
-prive/squelettes/contenu/page-breves.html -text
 prive/squelettes/contenu/page-charte.html -text
 prive/squelettes/contenu/page-configurer.html -text
 prive/squelettes/contenu/page-configurer_avancees.html -text
