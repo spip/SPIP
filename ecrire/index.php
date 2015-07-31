@@ -133,6 +133,8 @@ bgcolor='#f8f7f3' text='#000000'
 topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 	($spip_lang_rtl ? " dir='rtl'" : ""));
 
+define(_TRANCHES, 10);
+
 // charger l'affichage minimal et initialiser a la langue par defaut
 include_spip('inc/minipres');
 
