@@ -1,7 +1,7 @@
 <BOUCLE_langues(POUR){tableau #ENV*{name}|liste_options_langues}>
 	[(#VALEUR|=={#ENV*{herit}}|oui)
-		<option class='maj-debut on' value='herit'[(#VALEUR|=={#ENV*{default}}|oui)selected="selected"]>&#91;#VALEUR&#93; [(#VALEUR|traduire_nom_langue)] (<:info_multi_herit:>)</option>
+		<option class='maj-debut on' value='herit'[(#VALEUR|=={#ENV*{default}}|oui)selected="selected"] dir="[(#VALEUR|lang_dir{ltr,rtl})]">&#91;#VALEUR&#93; [(#VALEUR|traduire_nom_langue)] (<:info_multi_herit:>)</option>
 	][(#VALEUR|=={#ENV*{herit}}|non)
-		<option value='#VALEUR'[(#VALEUR|=={#ENV*{default}}|oui)selected="selected"]>&#91;#VALEUR&#93; [(#VALEUR|traduire_nom_langue)]</option>
+		<option value='#VALEUR'[(#VALEUR|=={#ENV*{default}}|oui)selected="selected"] dir="[(#VALEUR|lang_dir{ltr,rtl})]">&#91;#VALEUR&#93; [(#VALEUR|traduire_nom_langue)]</option>
 	]
 </BOUCLE_langues>
