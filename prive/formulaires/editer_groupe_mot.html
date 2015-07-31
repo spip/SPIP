@@ -28,6 +28,7 @@
 	    <li class="fieldset">
 	      <fieldset><h3 class="legend"><:info_mots_cles_association:></h3>
 	      <ul><li class="editer_groupe_mots_associer">
+				<input type='hidden' name='tables_liees&#91;&#93;' value='' />
 	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{tables_liees}})checked='checked'] id='articles' /><label for='articles'><:item_mots_cles_association_articles:></label></div>
 	    	[(#ENV{config}|table_valeur{activer_breves}|=={oui}|oui)
 	    	<div class='choix'><input type='checkbox' class='checkbox' name='tables_liees&#91;&#93;' value='breves'[(#VAL{breves}|in_any{#ENV{tables_liees}})checked='checked'] id='breves' /><label for='breves'><:item_mots_cles_association_breves:></label></div>
