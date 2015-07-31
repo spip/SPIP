@@ -450,6 +450,7 @@ ecrire/xml/valider.php -text
 local/remove.txt -text
 prive/aide_body.css -text
 prive/aide_menu.html -text
+prive/cfg.html -text
 prive/contenu/article.html -text
 prive/contenu/breve.html -text
 prive/contenu/item_rss_plugin.html -text

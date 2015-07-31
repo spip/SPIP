@@ -945,6 +945,12 @@ function url_de_($http,$host,$request,$prof=0){
 }
 
 
+function tester_url_ecrire($nom)
+{
+	if (find_in_path('prive/exec/' . $nom . '.html')) $nom = 'fond';
+	return charger_fonction($nom,'exec',true);
+}
+
 // Pour une redirection, la liste des arguments doit etre separee par "&"
 // Pour du code XHTML, ca doit etre &amp;
 // Bravo au W3C qui n'a pas ete capable de nous eviter ca

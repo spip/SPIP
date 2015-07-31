@@ -147,20 +147,15 @@ if ($var_f = _request('transformer_xml')) {
 	set_request('var_url', $exec);
 	$exec = $var_f;
 }
-elseif (find_in_path("prive/exec/$exec.html")) {
-	$exec = "fond";
-}
 
-// Trouver la fonction eventuellement surchargee
-// si absente, rerouter vers exec=404 au lieu d'echouer
+if ($var_f = tester_url_ecrire($exec))
+
+	$var_f(); // at last
+else {
+// Rien de connu: rerouter vers exec=404 au lieu d'echouer
 // ce qui permet de laisser la main a un plugin
-if (!$var_f = charger_fonction($exec,'exec',true)){
 	$var_f = charger_fonction('404');
 	$var_f($exec);
-}
-else {
-	// Z'y va
-	$var_f();
 }
 
 $debug = ((_request('var_mode') == 'debug') OR !empty($tableau_des_temps)) ? array(1) : array();
