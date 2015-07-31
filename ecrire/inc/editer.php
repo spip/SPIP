@@ -77,7 +77,7 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	
 
 	$contexte = $row;
-	if (!isset($contexte['id_parent']) && $id_parent)
+	if ($id_parent && (!isset($contexte['id_parent']) OR $new))
 		$contexte['id_parent']=$id_parent;
 	$contexte['config'] = $config = $config_fonc($row);
 	$att_text = " class='formo' "
