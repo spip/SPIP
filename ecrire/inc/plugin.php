@@ -33,20 +33,6 @@ function liste_plugin_files($dir_plugins = null){
 		foreach (fast_find_plugin_dirs($dir_plugins) as $plugin) {
 			$plugin_files[$dir_plugins][] = substr($plugin,strlen($dir_plugins));
 		}
-
-		// traitement des repertoires de plugins supplementaires (mutu)
-		// avec un hack affreux pour avoir le bon chemin
-		// puisqu'il est calcule par rapport a _DIR_PLUGINS.		
-		if ($dir_plugins == _DIR_PLUGINS AND defined('_DIR_PLUGINS_SUPPL')) {
-			$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
-			foreach($dir_plugins_suppl as $suppl) {
-				$suppl = _DIR_RACINE.$suppl.(substr($suppl, -1) != '/' ? '/' : '');
-				foreach (fast_find_plugin_dirs($suppl) as $plugin) {
-					if (!in_array($plugin, $plugin_files[$dir_plugins]))
-						$plugin_files[$dir_plugins][] = $plugin;
-				}
-			}
-		}
 		
 		sort($plugin_files[$dir_plugins]);
 		// et on lit le XML de tous les plugins pour le mettre en cache
@@ -101,12 +87,7 @@ function is_plugin_dir($dir,$dir_plugins = null){
 	if (is_null($dir_plugins))
 		$dir_plugins = _DIR_PLUGINS;
 	$search = array("$dir_plugins$dir/plugin.xml","$dir_plugins$dir/paquet.xml");
-	if ($dir_plugins==_DIR_PLUGINS AND defined('_DIR_PLUGINS_SUPPL')){
-		$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
-		foreach($dir_plugins_suppl as $ds)
-		$search[] = $ds."$dir/plugin.xml";
-		$search[] = $ds."$dir/paquet.xml";
-	}
+	
 	foreach($search as $s){
 		if (file_exists($s)){
 			return $dir;
@@ -204,7 +185,15 @@ function liste_plugin_valides($liste_plug, $force = false)
 	  if (isset($infos['_DIR_PLUGINS'][$plug]))
 	    plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS');
 	}
-
+	
+	if (defined('_DIR_PLUGINS_SUPPL') and _DIR_PLUGINS_SUPPL) {
+		$infos['_DIR_PLUGINS_SUPPL'] = $get_infos($liste_plug, false, _DIR_PLUGINS_SUPPL);
+		foreach($liste_plug as $plug) {
+			if (isset($infos['_DIR_PLUGINS_SUPPL'][$plug]))
+				plugin_valide_resume($liste_non_classee, $plug, $infos, '_DIR_PLUGINS_SUPPL');
+		}
+	}
+	
 	// les procure de core.xml sont consideres comme des plugins proposes,
 	// mais surchargeables (on peut activer un plugin qui procure ca pour l'ameliorer,
 	// donc avec le meme prefixe)
@@ -455,13 +444,18 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	if (!spip_connect()) return false;
 	if ($operation!='raz') {
 		$plugin_valides = liste_chemin_plugin_actifs();
+		$plugin_valides = is_plugin_dir($plugin_valides);
+		if(defined('_DIR_PLUGINS_SUPPL') && _DIR_PLUGINS_SUPPL){
+			$plugin_valides_supp = liste_chemin_plugin_actifs(_DIR_PLUGINS_SUPPL);
+			$plugin_valides_supp = is_plugin_dir($plugin_valides_supp,_DIR_PLUGINS_SUPPL);
+			$plugin_valides = array_merge($plugin_valides,$plugin_valides_supp);
+		}
 		// si des plugins sont en attentes (coches mais impossible a activer)
 		// on les reinjecte ici
 		if (isset($GLOBALS['meta']['plugin_attente'])
 		  AND $a = unserialize($GLOBALS['meta']['plugin_attente']))
 		$plugin_valides = $plugin_valides + liste_chemin_plugin($a);
-		$plugin_valides = is_plugin_dir($plugin_valides);
-
+		
 		if ($operation=='ajoute')
 			$plugin = array_merge($plugin_valides,$plugin);
 		elseif ($operation=='enleve')
@@ -522,11 +516,6 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 
 function plugins_precompile_chemin($plugin_valides, $ordre)
 {
-	$dir_plugins_suppl = "";
-	if (defined('_DIR_PLUGINS_SUPPL')) {
-		$dir_plugins_suppl = ":" . implode(array_filter(explode(':',_DIR_PLUGINS_SUPPL)),'|') . ":";
-	}
-
 	$chemins = array();
 	$contenu = "";
 	foreach($ordre as $p => $info){
@@ -537,11 +526,8 @@ function plugins_precompile_chemin($plugin_valides, $ordre)
 			// definir le plugin, donc le path avant l'include du fichier options
 			// permet de faire des include_spip pour attraper un inc_ du plugin
 
-			if ($dir_plugins_suppl && preg_match($dir_plugins_suppl,$plug)){
-				$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
-			} else {
-				$dir = $dir_type.".'" . $plug ."/'";
-			}
+			$dir = $dir_type.".'" . $plug ."/'";
+			
 			$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
 			if ($prefix!=="SPIP"){
 				$contenu .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
