@@ -126,6 +126,12 @@ function revisions_articles ($id_article, $c=false) {
 		$indexation = true;
 	}
 
+	if (_request('changer_virtuel') == 'oui') {
+		$r = _request('virtuel');
+		if ($r) $r = "=$r";
+		set_request('chapo', $r);
+	}
+
 	$r = modifier_contenu('article', $id_article,
 		array(
 			'champs' => array(
