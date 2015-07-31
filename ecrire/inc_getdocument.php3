@@ -210,55 +210,157 @@ function afficher_compactes($image_name /* not used */, $fichiers, $link) {
 	install_fin_html();
 }
 
+// Si on doit conserver une copie locale des fichiers distants, autant que ca
+// soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
+// mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
+// des filessystems
+function fichier_copie_locale($source, $extension) {
+	$dir = _DIR_IMG. creer_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
+	$dir2 = $dir . creer_repertoire($dir, $extension); 		# IMG/distant/pdf/
+	return $dir2 . substr(basename($source).'-'.md5($source),0,12).
+		substr(md5($source),0,4).'.'.$extension;
+}
+
+// Recuperer les infos d'un document distant, sans trop le telecharger
+function recuperer_infos_distantes($source, $max=0) {
+	include_ecrire('inc_sites.php3');
+
+	$a = array();
+
+	// On va directement charger le debut des images et des fichiers html,
+	// de maniere a attrapper le maximum d'infos (titre, taille, etc). Si
+	// ca echoue l'utilisateur devra les entrer...
+	if ($headers = recuperer_page($source, false, true, $max)) {
+		list($headers, $a['body']) = split("\n\n", $headers, 2);
+		if (preg_match(",\nContent-Type: *([^[:space:];]*),i",
+			"\n$headers", $regs)
+		AND $mime_type = addslashes(trim($regs[1]))
+		AND $s = spip_query("SELECT id_type,extension FROM spip_types_documents
+			WHERE mime_type='$mime_type'")
+		AND $t = spip_fetch_array($s)) {
+			spip_log("mime-type $mime_type ok");
+			$a['id_type'] = $t['id_type'];
+			$a['extension'] = $t['extension'];
+		} else {
+			spip_log("mime-type $mime_type inconnu");
+			return false;
+		}
+
+		if (preg_match(",\nContent-Length: *([^[:space:]]*),i",
+			"\n$headers", $regs))
+			$a['taille'] = intval($regs[1]);
+	}
+
+	// Si on n'a pas reussi avec une requete HEAD, ou si au contraire on a
+	// il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
+	// recharger le document en GET et recuperer des donnees supplementaires...
+	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
+		if ($max == 0
+		AND $taille < 1024*1024
+		AND ereg(",".$a['extension'].",",
+		','.lire_meta('formats_graphiques').',')){
+			$a = recuperer_infos_distantes($source, 1024*1024);
+		}
+		else if ($a['body']) {
+			$a['fichier'] = fichier_copie_locale($source, $a['extension']);
+			ecrire_fichier($a['fichier'], $a['body']);
+			$size_image = @getimagesize($a['fichier']);
+			$a['largeur'] = intval($size_image[0]);
+			$a['hauteur'] = intval($size_image[1]);
+			$a['type_image'] = true;
+		}
+	}
+	
+	if ($mime_type == 'text/html') {
+		$page = recuperer_page($source, true, false, 1024*1024);
+		if(preg_match(',<title>(.*?)</title>,ims', $page, $regs))
+			$a['titre'] = corriger_caracteres(trim($regs[1]));
+			if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
+	}
+
+	return $a;
+}
+
 
 //
 // Ajouter un document (au format $_FILES)
 //
 function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode, $id_document, &$documents_actifs) {
 
-	// type de document inconnu ?
-	if (!ereg("\.([^.]+)$", $nom_envoye, $match)) {
-		spip_log("nom envoye incorrect ($nom_envoye)");
-		return;
+	// Documents distants : pas trop de verifications bloquantes, mais un test
+	// via une requete HEAD pour savoir si la ressource existe (non 404), si le
+	// content-type est connu, et si possible recuperer la taille, voire plus.
+	if ($mode == 'distant') {
+		if ($a = recuperer_infos_distantes($source)) {
+			# fichier local pour creer la vignette (!!),
+			# on retablira la valeur de l'url a la fin
+			$fichier = $a['fichier'];
+
+			$id_type = $a['id_type'];
+			$taille = $a['taille'];
+			$titre = $a['titre'];
+			$largeur = $a['largeur'];
+			$hauteur = $a['hauteur'];
+			$ext = $a['extension'];
+			$type_image = $a['type_image'];
+
+			$distant = 'oui';
+			$mode = 'document';
+		}
+		else {
+			spip_log("Echec du lien vers le document $source, abandon");
+			return;
+		}
 	}
 
-	// tester le type de document :
-	// - interdit a l'upload ?
-	// - quel numero dans spip_types_documents ?  =-(
-	// - est-ce "inclus" comme une image ?
-	$ext = corriger_extension(addslashes(strtolower($match[1])));
+	else {
+	
+		$distant = 'non';
 
-	if (!$row = spip_fetch_array(spip_query(
-	"SELECT * FROM spip_types_documents
-	WHERE extension='$ext' AND upload='oui'"))) {
-		spip_log("Extension $ext interdite a l'upload");
-		return;
-	}
-	$id_type = $row['id_type'];	# numero du type dans spip_types_documents :(
-	$type_inclus_image = ($row['inclus'] == 'image');
+		// type de document inconnu ?
+		if (!ereg("\.([^.]+)$", $nom_envoye, $match)) {
+			spip_log("nom envoye incorrect ($nom_envoye)");
+			return;
+		}
 
-	// Recopier le fichier a son emplacement definitif
-	$definitif = copier_document($ext, $nom_envoye, $source);
-	if (!$definitif) {
-		spip_log("Impossible de copier_document($ext, $nom_envoye, $source)");
-		return;
-	}
+		// tester le type de document :
+		// - interdit a l'upload ?
+		// - quel numero dans spip_types_documents ?  =-(
+		// - est-ce "inclus" comme une image ?
+		$ext = corriger_extension(addslashes(strtolower($match[1])));
 
-	// Quelques infos sur le fichier
-	if (!@file_exists($definitif)
-	OR !$taille = @filesize($definitif))
-		return;
+		if (!$row = spip_fetch_array(spip_query(
+		"SELECT * FROM spip_types_documents
+		WHERE extension='$ext' AND upload='oui'"))) {
+			spip_log("Extension $ext interdite a l'upload");
+			return;
+		}
+		$id_type = $row['id_type'];	# numero du type dans spip_types_documents:(
+		$type_inclus_image = ($row['inclus'] == 'image');
 
-	// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
-	$size_image = @getimagesize($definitif);
-	$largeur = intval($size_image[0]);
-	$hauteur = intval($size_image[1]);
-	$type_image = decoder_type_image($size_image[2]);
+		// Recopier le fichier a son emplacement definitif
+		$fichier = copier_document($ext, $nom_envoye, $source);
+		if (!$fichier) {
+			spip_log("Impossible de copier_document($ext, $nom_envoye, $source)");
+			return;
+		}
 
-	// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
-	if ($mode == 'vignette' AND !($largeur * $hauteur)) {
-		@unlink($definitif);
-		return;
+		// Quelques infos sur le fichier
+		if (!@file_exists($fichier)
+		OR !$taille = @filesize($fichier))
+			return;
+
+		// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
+		$size_image = @getimagesize($fichier);
+		$largeur = intval($size_image[0]);
+		$hauteur = intval($size_image[1]);
+		$type_image = decoder_type_image($size_image[2]);
+
+		// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
+		if ($mode == 'vignette' AND !($largeur * $hauteur)) {
+			@unlink($fichier);
+			return;
+		}
 	}
 
 	// regler l'ancre du retour
@@ -288,7 +390,8 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	if (!$id_document) {
 		// Inserer le nouveau doc et recuperer son id_
 		$id_document = spip_abstract_insert("spip_documents",
-		"(id_type, titre, date)", "($id_type, '', NOW())");
+		"(id_type, titre, date, distant)",
+		"($id_type, '".texte_script($titre)."', NOW(), '$distant')");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
@@ -304,14 +407,14 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 				$mode = 'vignette';
 			else
 				$mode = 'document';
-			$update = "mode='$mode', ";
+		$update = "mode='$mode', ";
 	}
 
 	// Mise a jour des donnees
 	spip_query("UPDATE spip_documents
 		SET $update
 		taille='$taille', largeur='$largeur', hauteur='$hauteur',
-		fichier='$definitif'
+		fichier='$fichier'
 		WHERE id_document=$id_document");
 
 	if ($id_document_lie) {
@@ -325,10 +428,15 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		$documents_actifs[] = $id_document; 
 
 	// Creer la vignette des images
-	if ($mode == 'document'
-	AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')
+	if (ereg(",$ext,", ','.lire_meta('formats_graphiques').',')
+	AND $mode == 'document'
 	AND $type_image)
-		creer_fichier_vignette($definitif);
+		creer_fichier_vignette($fichier);
+
+	// Pour les fichiers distants remettre l'URL de base
+	if ($distant == 'oui')
+		spip_query("UPDATE spip_documents SET fichier='".addslashes($source)."'
+		WHERE id_document = $id_document");
 
 	return true;
 }
@@ -592,6 +700,48 @@ function creer_fichier_vignette($vignette, $test_cache_only=false) {
 		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }
+
+// Insertion d'une vignette dans la base
+function inserer_vignette_base($image, $vignette) {
+
+	$taille = @filesize($vignette);
+	
+	$size = @getimagesize($vignette);
+	$largeur = $size[0];
+	$hauteur = $size[1];
+	$type = $size[2];
+
+	if ($type == "2") $format = 1;			# spip_types_documents
+	else if ($type == "3") $format = 2;
+	else if ($type == "1") $format = 3;
+	else return;
+
+	$vignette = str_replace('../', '', $vignette);
+
+	spip_log("creation vignette($image) -> $vignette");
+
+	if ($t = spip_query("SELECT id_document FROM spip_documents
+	WHERE fichier='".addslashes($image)."'")) {
+		if ($row = spip_fetch_array($t)) {
+			$id_document = $row['id_document'];
+			$id_vignette = spip_abstract_insert("spip_documents", 
+				"(mode)",
+				"('vignette')");
+			spip_query("UPDATE spip_documents
+				SET id_vignette=$id_vignette WHERE id_document=$id_document");
+			spip_query("UPDATE spip_documents SET
+				id_type = '$format',
+				largeur = '$largeur',
+				hauteur = '$hauteur',
+				taille = '$taille',
+				fichier = '$vignette',
+				date = NOW()
+				WHERE id_document = $id_vignette");
+			spip_log("(document=$id_document, vignette=$id_vignette)");
+		}
+	}
+}
+
 
 // Effacer un doc (et sa vignette)
 function supprime_document_et_vignette($doc_supp) {

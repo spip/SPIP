@@ -254,6 +254,8 @@ function attribut_html($texte) {
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
 function vider_url($url) {
+	# un message pour abs_url
+	$GLOBALS['mode_abs_url'] = 'url';
 
 	$url = trim($url);
 	if (eregi("^(http:?/?/?|mailto:?)$", $url))
@@ -855,10 +857,10 @@ function http_script($script, $src='', $noscript='') {
 function tester_config($ignore, $quoi) {
 	switch ($quoi) {
 		case 'mode_inscription':
-			if (lire_meta("accepter_inscriptions") == "oui")       
+			if (lire_meta("accepter_inscriptions") == "oui")
 				return 'redac';
-			else if (lire_meta("accepter_visiteurs") == "oui" 
-			OR lire_meta('forums_publics') == 'abo')               
+			else if (lire_meta("accepter_visiteurs") == "oui"
+			OR lire_meta('forums_publics') == 'abo')
 				return 'forum';
 			else
 				return '';
@@ -883,24 +885,52 @@ function calendrier($date='', $type='mois', $echelle='', $partie_cal='', $script
      http_calendrier_init($date, $type, $echelle, $partie_cal, $script);
 }
 
+
+//
+// Filtres d'URLs
+//
+
+// Nettoyer une URL contenant des ../
+//
+// echo resolve_url('/.././/truc/chose/machin/./.././.././hopla/..');
+// inspire (de loin) par PEAR:NetURL:resolvePath
+//
+function resolve_path($url) {
+	while (preg_match(',/\.?/,', $url, $regs)		# supprime // et /./
+	OR preg_match(',/[^/]*/\.\./,', $url, $regs)	# supprime /toto/../
+	OR preg_match(',^/\.\./,', $url, $regs))		# supprime les /../ du haut
+		$url = str_replace($regs[0], '/', $url);
+
+	return $url;
+}
+
+// 
+// Suivre un lien depuis une adresse donnee -> nouvelle adresse
+//
+// echo suivre_lien('http://rezo.net/sous/dir/../ect/ory/fi.html..s#toto',
+// 'a/../../titi.coco.html/tata#titi');
+function suivre_lien($url, $lien) {
+	# lien absolu ? ok
+	if (preg_match(',^([a-z0-9]+://|mailto:),i', $lien))
+		return $lien;
+
+	# lien relatif, il faut verifier l'url de base
+	if (preg_match(',^(.*?://[^/]+)(/.*?/?)?[^/]*$,', $url, $regs)) {
+		$debut = $regs[1];
+		$dir = $regs[2];
+	}
+	if (substr($lien,0,1) == '/')
+		return $debut . resolve_path($lien);
+	else
+		return $debut . resolve_path($dir.$lien);
+}
+
 // un filtre pour transformer les URLs relatives en URLs absolues ;
 // ne s'applique qu'aux #URL_XXXX
 function url_absolue($url) {
-	$url = trim($url);
-
-	if (preg_match(',^[a-z0-9]+://,i', $url))
-		return $url;
-
-	$site = lire_meta('adresse_site');
-	if ($url[0] == '/') {
-		if (preg_match(',^([a-z0-9]+://)(.*?/)?,i', $site.'/', $regs))
-			$host = $regs[1].$regs[2];
-		else
-			$host = $site.'/';
-		return $host.substr($url,1);
-	}
-
-	return $site.'/'.$url;
+	if (strlen($url = trim($url)) == 0)
+		return '';
+	return suivre_lien(lire_meta('adresse_site').'/', $url);
 }
 
 // un filtre pour transformer les URLs relatives en URLs absolues ;
@@ -917,5 +947,14 @@ function liens_absolus($texte) {
 	return $texte;
 }
 
+//
+// Ce filtre public va traiter les URL ou les <a href>
+//
+function abs_url($texte) {
+	if ($GLOBALS['mode_abs_url'] == 'url')
+		return url_absolue($url);
+	else
+		return liens_absolus($texte);
+}
 
 ?>

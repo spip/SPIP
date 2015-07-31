@@ -369,6 +369,8 @@ $tables_auxiliaires  =
 				       'key' => &$spip_documents_rubriques_key),
 	'spip_documents_breves' => array('field' => &$spip_documents_breves,
 				    'key' => &$spip_documents_breves_key),
+	'spip_documents_syndic' => array('field' => &$spip_documents_syndic,
+				    'key' => &$spip_documents_syndic_key),
 	'spip_mots_articles' => array('field' => &$spip_mots_articles,
 				 'key' => &$spip_mots_articles_key),
 	'spip_mots_breves' => array('field' => &$spip_mots_breves,

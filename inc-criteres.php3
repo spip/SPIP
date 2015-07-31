@@ -401,8 +401,9 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 
 			}
 
-			if ($s = calculer_critere_externe($boucle, $id_field,$col, $type))
+			if ($s = calculer_critere_externe($boucle, $id_field,$col, $type)) {
 				$col_table = $s;
+			}
 
 			// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
 			else if ($type != 'mots'
@@ -442,7 +443,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			// Cas particulier : lier les articles syndiques
 			// au site correspondant
 			else if ($type == 'syndic_articles' AND
-			!ereg("^(id_syndic_article|titre|url|date|descriptif|lesauteurs)$",$col))
+			!ereg("^(id_syndic_article|titre|url|date|descriptif|lesauteurs|id_document)$",$col))
 				$col_table = 'syndic';
 
 			// Cas particulier : id_enfant => utiliser la colonne id_objet
@@ -562,12 +563,11 @@ function calculer_critere_externe(&$boucle, $id_field, $col, $type)
 	if ($col_table =  $tables_relations[$type][$col]) {
 		$externe = "$id_field=$col_table." . $boucle->primary;
 		if (!$boucle->where || (!in_array($externe, $boucle->where))) {
-
 			$boucle->lien = true;
 			$boucle->from[] = "spip_$col_table AS $col_table";
 			$boucle->where[] = $externe;
 			$boucle->group = $id_field;
-		// postgres exige que le champ pour GROUP soit dans le SELECT
+			// postgres exige que le champ pour GROUP soit dans le SELECT
 			$boucle->select[] = $id_field;
 		}
 	}

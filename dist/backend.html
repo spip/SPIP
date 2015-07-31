@@ -12,36 +12,35 @@
 
 	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
-		<url>#URL_SITE_SPIP[/(#LOGO_SITE_SPIP||extraire_attribut{src})]</url>
+		<url>[(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)]</url>
 		<link>#URL_SITE_SPIP/</link>
 		<description></description>
 	</image>
 
-	<BOUCLE_10recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{0,10}{unique}>
+	<BOUCLE_un_article(ARTICLES){id_article}>
 		<item>
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 		<date>#DATE</date>
-		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
+		<description>[(#LOGO_ARTICLE|right||liens_absolus|texte_backend)][(#TEXTE|liens_absolus|texte_backend)]</description>
 		<author><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
 		<dc:creator><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></dc:creator>
+		<BOUCLE_podcast(DOCUMENTS){id_article}{doublons}{extension==(mp3|zip)}>[
+			<enclosure url="(#URL_DOCUMENT|url_absolue|unique)" length="[(#TAILLE)]" type="#MIME_TYPE" />]
+		</BOUCLE_podcast>
+
 		</item>
+	</BOUCLE_un_article>
+
+
+	<BOUCLE_10recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{0,10}{unique}>
+		<BOUCLE_a(BOUCLE_un_article)></BOUCLE_a>
 	</BOUCLE_10recents>
 	<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{par date}{inverse}{age<3}{unique}>
-		<item>
-		<title>[(#TITRE|texte_backend)]</title>
-		<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-		<date>#DATE</date>
-		<description>[&lt;img src="#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
-		<author><BOUCLE_auteurs_t(AUTEURS){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_auteurs_t></author>
-		<dc:date>[(#DATE|date_iso)]</dc:date>
-		<dc:format>text/html</dc:format>
-		<dc:language>#LANG</dc:language>
-		<dc:creator><BOUCLE_auteurs_tb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs_tb></dc:creator>
-		</item>
+		<BOUCLE_b(BOUCLE_un_article)></BOUCLE_b>
 	</BOUCLE_tres_recents>
 
 </channel>

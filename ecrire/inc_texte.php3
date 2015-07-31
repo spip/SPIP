@@ -503,7 +503,13 @@ function typo_generale($letexte) {
 	$letexte = strtr($letexte, $illegal, $protege);
 
 	// Appeler la fonction de post-traitement
-	return spip_apres_typo ($letexte);
+	$letexte = spip_apres_typo ($letexte);
+
+	# un message pour abs_url - on est passe en mode texte
+	$GLOBALS['mode_abs_url'] = 'texte';
+
+	// et retour
+	return $letexte;
 }
 
 function typo($letexte) {

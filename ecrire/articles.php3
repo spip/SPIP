@@ -1422,7 +1422,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 			echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
-			echo "<div align='$spip_lang_right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
+			echo "<div align='$spip_lang_right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondl'></div>";
 			echo "</form>";
 			echo "</td>\n";
 			echo "<td background='' width='10'> &nbsp; </td>";
@@ -1502,9 +1502,9 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 	echo " &nbsp; ". http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'") . "  &nbsp; ";
 
-	// echo "<noscript><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'></noscript>";
+	// echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></noscript>";
 	echo "<span class='visible_au_chargement' id='valider_statut'>";
-	echo "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</span>";
 	echo aide ("artstatut");
 	echo "</CENTER>";

@@ -135,8 +135,10 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	$boucle->from[] =  "spip_documents AS $id_table";
 	$boucle->from[] =  "spip_types_documents AS types_documents";
 	$boucle->where[] = "$id_table.id_type=types_documents.id_type";
-	$boucle->where[] = "$id_table.taille > 0";
-	return calculer_boucle($id_boucle, $boucles); 
+	// on ne veut pas des fichiers de taille nulle,
+	// sauf s'ils sont distants (taille inconnue)
+	$boucle->where[] = "($id_table.taille > 0 OR $id_table.distant='oui')";
+	return calculer_boucle($id_boucle, $boucles);
 }
 
 

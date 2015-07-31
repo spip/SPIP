@@ -62,11 +62,17 @@ function generer_url_auteur($id_auteur) {
 function generer_url_document($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
-	if ((lire_meta("creer_htaccess")) == 'oui')
-		return "../spip_acces_doc.php3?id_document=$id_document";
-	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
-		return '../' . ($row['fichier']);
-	return '';
+	if ($row = @spip_fetch_array(spip_query("SELECT fichier,distant
+	FROM spip_documents WHERE id_document = $id_document"))) {
+		if ($row['distant'] == 'oui') {
+			$url = $row['fichier'];
+		} else {
+			$url = '../' . ($row['fichier']);
+			if ((lire_meta("creer_htaccess")) == 'oui')
+				$url = "../spip_acces_doc.php3?id_document=$id_document";
+		}
+	}
+	return $url;
 }
 
 ?>
