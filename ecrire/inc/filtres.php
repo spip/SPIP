@@ -3833,10 +3833,12 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 
 	// mettre a jour le fichier si il n'existe pas
 	// ou trop ancien
+	// le dernier fichier produit est toujours suffixe par .last
+	// et recopie sur le fichier cible uniquement si il change
 	if (!file_exists($filename)
-		OR (isset($cache['lastmodified']) AND $cache['lastmodified'] AND filemtime($filename)<$cache['lastmodified'])
-		OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul')) 
-	{
+		OR !file_exists($filename.".last")
+		OR (isset($cache['lastmodified']) AND $cache['lastmodified'] AND filemtime($filename.".last")<$cache['lastmodified'])
+		OR (defined('_VAR_MODE') AND _VAR_MODE=='recalcul')) {
 		$contenu = $cache['texte'];
 		// passer les urls en absolu si c'est une css
 		if ($extension=="css")
@@ -3847,10 +3849,18 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
 			$comment = "/* #PRODUIRE{fond=$fond";
 			foreach($contexte as $k=>$v)
 				$comment .= ",$k=$v";
-			$comment .="} le ".date("Y-m-d H:i:s")." */\n";
+			// pas de date dans le commentaire car sinon ca invalide le md5 et force la maj
+			// mais on peut mettre un md5 du contenu, ce qui donne un aperu rapide si la feuille a change ou non
+			$comment .="}\n   md5:".md5($contenu)." */\n";
 		}
 		// et ecrire le fichier
-		ecrire_fichier($filename,$comment.$contenu);
+		ecrire_fichier($filename.".last",$comment.$contenu);
+		// regarder si on recopie
+		if (!file_exists($filename)
+		  OR md5_file($filename)!==md5_file($filename.".last")){
+			@copy($filename.".last",$filename);
+			clearstatcache(true,$filename); // eviter que PHP ne reserve le vieux timestamp
+		}
 	}
 	
 	return $filename;
