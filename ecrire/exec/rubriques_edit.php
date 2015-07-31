@@ -18,11 +18,11 @@ include_spip('inc/documents');
 // http://doc.spip.org/@exec_rubriques_edit_dist
 function exec_rubriques_edit_dist()
 {
-	exec_rubriques_edit_args(intval(_request('id_rubrique')), intval(_request('id_parent')), _request('new'));
+	exec_rubriques_edit_args(intval(_request('id_rubrique')), intval(_request('id_parent')), _request('new'), intval(_request('lier_trad')));
 }
 
 // http://doc.spip.org/@exec_rubriques_edit_args
-function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
+function exec_rubriques_edit_args($id_rubrique, $id_parent, $new, $lier_trad=null)
 {
 	global $connect_toutes_rubriques, $connect_statut, $spip_lang_right;
 
@@ -86,7 +86,8 @@ function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 	'titre'=>$titre,
 	'new'=>$new == "oui"?$new:$id_rubrique,
 	'id_rubrique'=>$id_parent, // pour permettre la specialisation par la rubrique appelante
-	'config_fonc'=>'rubriques_edit_config'
+	'config_fonc'=>'rubriques_edit_config',
+	'lier_trad'=>$lier_trad
 	);
 
 	echo recuperer_fond("prive/editer/rubrique", $contexte);
