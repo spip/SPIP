@@ -1,0 +1,24 @@
+[(#REM)
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2010                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+]
+
+<h1><:titre_page_breves:></h1>
+
+<BOUCLE_secteurs(RUBRIQUES){statut?}{racine}{par num titre,titre}>
+	#SET{editable,#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}}
+	<INCLURE{fond=listes/breves,titre=#TITRE|concat{#AIDER{breves}},sinon=#TITRE|concat{#AIDER{breves}},status=#ARRAY{0,prop,1,publie,2,#GET{editable}|?{refuse,xx}},id_rubrique,par=date_heure}>
+
+	[(#GET{editable})
+	[(#URL_ECRIRE{breves_edit,new=oui}|parametre_url{id_rubrique,#ID_RUBRIQUE}|icone_verticale{<:icone_nouvelle_breve:>,breve,new,right})]
+	]
+	<br class='nettoyeur' />
+
+</BOUCLE_secteurs>

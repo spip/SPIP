@@ -121,7 +121,6 @@ ecrire/exec/articles_page.php -text
 ecrire/exec/articles_tous.php -text
 ecrire/exec/auteur_infos.php -text
 ecrire/exec/auteurs.php -text
-ecrire/exec/breves.php -text
 ecrire/exec/breves_edit.php -text
 ecrire/exec/breves_voir.php -text
 ecrire/exec/brouteur.php -text
@@ -736,6 +735,7 @@ prive/rss/signatures.html -text
 prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/body.html -text
+prive/squelettes/contenu/page-breves.html -text
 prive/squelettes/contenu/page-configurer.html -text
 prive/squelettes/contenu/page-configurer_identite.html -text
 prive/squelettes/contenu/page-configurer_langage.html -text
