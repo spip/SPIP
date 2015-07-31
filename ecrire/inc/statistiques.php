@@ -151,7 +151,7 @@ function cadre_stat($stats, $table, $id_article)
 // http://doc.spip.org/@statistiques_collecte_date
 function statistiques_collecte_date($count, $date, $table, $where, $serveur)
 {
-	$result = sql_select("$count AS n, $date AS d", $table, $where, 'd', '', '','', $serveur);
+	$result = sql_select("$count AS n, $date AS d", $table, $where, 'd', 'd', '','', $serveur);
 	$log = array();
 
 	while ($r = sql_fetch($result,$serveur)) $log[$r['d']] = $r['n'];
