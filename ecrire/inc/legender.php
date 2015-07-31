@@ -27,9 +27,11 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	// premier appel
 	if ($document) {
 		$flag = $deplier;
-	} else
+	} elseif (!$id_document) {
+		return '';
+	} else {
 	// retour d'Ajax
-	if ($id_document) {
+
 		$document = sql_fetsel("*", "spip_documents", "id_document = " . intval($id_document));
 
 		$document['vu'] = sql_getfetsel("vu", 'spip_documents_liens', "id_objet=" . intval($id) ." AND objet=" . sql_quote($type) . " AND id_document=".intval($id_document));
@@ -37,12 +39,6 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		if (!$document['vu']) $document['vu'] = 'non';
 		$flag = 'ajax';
 	}
-	else
-		return '';
-
-	$descriptif = $document['descriptif'];
-	$titre = $document['titre'];
-	$date = $document['date'];
 
 	if ($document['mode'] == 'image') {
 		$supp = 'image-24.gif';
@@ -56,13 +52,69 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$vignette = "<div style='margin-bottom: 10px;'>".vignette_formulaire_legender($id_document, $document, $script, $type, $id, $ancre)."</div>";
 	}
 
+	$s = ($ancre =='documents' ? '': '-');
+
+	$corps = legender_corps($ancre, $flag, $id, $id_document, $script, $type, $document, $label, $taille) .
+		$vignette .
+		"\n\n" .
+		legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $type);
+
+	if ($script == 'articles_edit')
+		$corps .= legender_image_doc($document, $id_document, $id, $type, $s, $ancre);
+
+	$corps = block_parfois_visible("legender-aff-$id_document", legender_entete($document), $corps, "text-align:center;", $flag);
+
+	return ajax_action_greffe("legender", $id_document, $corps);
+}
+
+
+function legender_entete($document)
+{
+	$titre = $document['titre'];
 	$entete = basename($document['fichier']);
 	if (($n=strlen($entete)) > 20)
 		$entete = substr($entete, 0, 7)."...".substr($entete, $n-7, $n);
-	if (strlen($document['titre']))
+	if (strlen($titre))
 		$entete = "<strong>". lignes_longues(typo($titre),25) . "</strong>";
+	return sinon($entete,_T('info_sans_titre'));
+}
+
+function legender_suppression($id, $id_document, $ancre, $s, $script, $supp, $type)
+{
+	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
+	// et ca buggue si on propose de supprimer => on ne propose pas
+	// Le cas id = 0 correspond au cas d'une mediatheque : l'action est alors
+	// sans doute a revoir car le document serait alors peut-etre orphelin
+
+	if ($id <= 0) return '';
+	// si plusieurs liens sur le doc, pas de bouton de suppression
+	if (sql_countsel('spip_documents_liens', 'id_document='.$id_document) > 1)
+		return '';
+
+	$texte = _T('icone_supprimer_document');
+
+	if (preg_match('/_edit$/', $script)) {
+		$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte), '', 'function() {jQuery(this).remove()}');
+	} else {
+		if (test_espace_prive())
+			$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
+		else{
+			$redirect = str_replace('&amp;','&',$script);
+			$action = generer_action_auteur('documenter', "$s$id/$type/$id_document", $redirect);
+			$action = "<a href='$action'>$texte</a>";
+		}
+	}
+
+	return icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
+}
+
+
+function legender_corps($ancre, $flag, $id, $id_document, $script, $type, $document, $label, $taille)
+{
+	include_spip('inc/editer');
 
 	$contenu = '';
+	$descriptif = $document['descriptif'];
 	if ($descriptif)
 	  $contenu .=  "<p>".PtoBR(lignes_longues(propre($descriptif),25)) . "</p>\n";
 	if ($document['largeur'] OR $document['hauteur'])
@@ -73,15 +125,15 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 
 	  $contenu .= taille_en_octets($document['taille']);
 
+	$date = $document['date'];
 	if ($date AND ($GLOBALS['meta']["documents_date"] == 'oui'))
 		$contenu .= "<br />\n" . affdate($date);
 
-	include_spip('inc/editer');
 	$corps = (!$contenu ? '' :
-	   "<div class='verdana1' style='text-align: center; margin-bottom: 10px;'>$contenu</div>") .
+		  "<div class='verdana1' style='text-align: center; margin-bottom: 10px;'>$contenu</div>") .
 	  "<div class='formulaire_spip formulaire_spip_compact'><ul><li class='editer_titre'><label for='titre_document$id_document'>$label</label>\n" .
 
-	  "<input type='text' name='titre_document' id='titre_document$id_document' class='text' value=\"".entites_html($titre).
+	  "<input type='text' name='titre_document' id='titre_document$id_document' class='text' value=\"".entites_html($document['titre']).
 	  "\" size='40'	onfocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" /></li>\n"
 	  . (($GLOBALS['meta']["documents_date"] == 'oui')
 	  	? "<li class='editer_date'>".date_formulaire_legender($date, $id_document)."</li>"
@@ -97,6 +149,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	  .controles_md5($document);
 
 	$att_bouton = " class='fondo spip_xx-small'";
+
 	$att_span = " id='valider_doc$id_document' "
 	. ($flag == 'ajax' ? '' : "class='display_au_chargement'")
 	.  " style='text-align:"
@@ -105,7 +158,7 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 	. "'";
 
 	if (test_espace_prive())
-		$corps = ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
+		return ajax_action_post("legender", $id_document, $script, "show_docs=$id_document&id_$type=$id#legender-$id_document", $corps, _T('bouton_enregistrer'), $att_bouton, $att_span, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre")
 		  . "<br class='nettoyeur' />";
 	else {
 		$corps = "<div class='boutons'>"
@@ -119,77 +172,38 @@ function inc_legender_dist($id_document, $document, $script, $type, $id, $ancre,
 		$redirect = parametre_url($redirect,"id_$type",$id,'&');
 		$redirect = parametre_url($redirect,"id_$type",$id,'&');
 		$redirect = ancre_url($redirect,"legender-$id_document");
-		$corps = generer_action_auteur("legender", $id_document, $redirect, $corps, "\nmethod='post'");
+		return generer_action_auteur("legender", $id_document, $redirect, $corps, "\nmethod='post'");
 	}
-	
-	$corps .=  $vignette . "\n\n";
+}
 
-	//
-	// Bouton de suppression
-	//
-	$texte = _T('icone_supprimer_document');
-	$s = ($ancre =='documents' ? '': '-');
-
-	if (preg_match('/_edit$/', $script)) {
-		$action = redirige_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre");
-	}
-	else {
-		if (test_espace_prive())
-			$action = ajax_action_auteur('documenter', "$s$id/$type/$id_document", $script, "id_$type=$id&type=$type&s=$s#$ancre", array($texte));
-		else{
-			$redirect = str_replace('&amp;','&',$script);
-			$action = generer_action_auteur('documenter', "$s$id/$type/$id_document", $redirect);
-			$action = "<a href='$action'>$texte</a>";
-		}
-	}
-
-	// le cas $id<0 correspond a un doc charge dans un article pas encore cree,
-	// et ca buggue si on propose de supprimer => on ne propose pas
-	// Le cas id = 0 correspond au cas d'une mediatheque : l'action est alors
-	// sans doute a revoir car le document serait alors peut-etre orphelin
-	$supprimer = true;
-	if ($id <= 0)
-		$supprimer = false;
-	else
-		$supprimer = (sql_countsel('spip_documents_liens', 'id_document='.$id_document) <= 1);
-
-	if ($supprimer)
-		$corps .= icone_horizontale($texte, $action, $supp, "supprimer.gif", false);
-
-	//
-	// Changement de mode image/document
-	//
+//
+// Changement de mode image/document
+//
+function legender_image_doc($document, $id_document, $id, $type, $s, $ancre)
+{
 	define('_INTERFACE_DOCUMENTS', false);
 	define('_BOUTON_MODE_IMAGE', true);
-	if (_INTERFACE_DOCUMENTS) {
-	if ($script == 'articles_edit'
-	AND _BOUTON_MODE_IMAGE
-	AND in_array($document['extension'], array('jpg', 'gif', 'png'))) {
-		if ($document['mode'] == 'image') {
-			$texte = _T('upload_info_mode_document');
-			$mode = 'document';
-			$logo = 'doc-24.gif';
-		} else {
-			$texte = _T('upload_info_mode_image');
-			$mode = 'image';
-			$logo = 'image-24.gif';
-		}
+	if (!_INTERFACE_DOCUMENTS) return '';
+	if (!_BOUTON_MODE_IMAGE
+	OR !in_array($document['extension'], array('jpg', 'gif', 'png'))) 
+		return '';
+	if ($document['mode'] == 'image') {
+				$texte = _T('upload_info_mode_document');
+				$mode = 'document';
+				$logo = 'doc-24.gif';
+	} else {
+				$texte = _T('upload_info_mode_image');
+				$mode = 'image';
+				$logo = 'image-24.gif';
+	}
 
-		$action = redirige_action_auteur('changer_mode_document', "$id_document/$mode", $script,
+	$action = redirige_action_auteur('changer_mode_document', "$id_document/$mode", $script,
 			(($id>0)
 				? "id_$type=$id"
 				: "new=oui"
 			) . "&type=$type&s=$s#$ancre");
 
-		$corps .= icone_horizontale($texte, $action, $logo, '', false);
-		
-	}
-	}
-
-
-
-	$corps = block_parfois_visible("legender-aff-$id_document", sinon($entete,_T('info_sans_titre')), $corps, "text-align:center;", $flag);
-	return ajax_action_greffe("legender", $id_document, $corps);
+	return icone_horizontale($texte, $action, $logo, '', false);
 }
 
 
