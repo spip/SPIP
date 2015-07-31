@@ -169,7 +169,7 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $
 debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').aide ("rubrub"));
 
 // Integrer la recherche de rubrique au clavier
-echo "<script language='JavaScript' type='text/javascript' src='filtery.js' />\n";
+echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
 echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_parent);\" onChange=\"filtery(this.value,this.form.id_parent);\"> ";
 
 echo "<SELECT NAME='id_parent' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
