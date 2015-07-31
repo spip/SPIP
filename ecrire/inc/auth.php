@@ -20,7 +20,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@acces_restreint_rubrique
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
-	global $connect_statut;
 
 	return (isset($connect_id_rubrique[$id_rubrique]));
 }
@@ -57,7 +56,7 @@ function acces_statut($id_auteur, $statut, $bio)
 // http://doc.spip.org/@inc_auth_dist
 function inc_auth_dist() {
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
-	global $connect_id_auteur, $connect_login, $connect_quand;
+	global $connect_id_auteur, $connect_login ;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -118,6 +117,7 @@ function inc_auth_dist() {
 	if (!$where) return "inconnu";
 
 	// Trouver les autres infos dans la table auteurs.
+	// le champ 'quand' est utilise par l'agenda
 	$result = @spip_query("SELECT *, UNIX_TIMESTAMP(en_ligne) AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
 	if (!$row = spip_fetch_array($result)) {
 		// il n'est PLUS connu. c'est SQL qui est desyncrho
@@ -155,7 +155,6 @@ function inc_auth_dist() {
 	}
 
 	// Indiquer la connexion. A la minute pres ca suffit.
-	// $connect_quand est une globale utilisee par l'agenda
 	$connect_quand = $row['quand'];
 	if ((time() - $connect_quand)  >= 60) {
 		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
