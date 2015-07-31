@@ -15,7 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/revisions');
-include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_versions_dist
 function exec_articles_versions_dist()

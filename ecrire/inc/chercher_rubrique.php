@@ -129,7 +129,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 				$niv+1, $data, $enfants, $exclus, $restreint, $type);
 
 	// si l'objet a deplacer est publie, verifier qu'on a acces aux rubriques
-	if ($restreint AND !acces_rubrique($root))
+	if ($restreint AND !autoriser('publierdans','rubrique',$root))
 		return $sous;
 
 	// sauter un cran pour les secteurs (sauf premier)

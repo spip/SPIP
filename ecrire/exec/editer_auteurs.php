@@ -21,7 +21,7 @@ function exec_editer_auteurs_dist()
 
 	$id = intval(_request("id_$type"));
 
-	if (! acces_article($id_article)) {
+	if (! autoriser('modifier','article',$id_article)) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

@@ -44,7 +44,6 @@ function debut_admin($script, $action, $commentaire='') {
 	}
 
 	include_spip('inc/minipres');
-	include_spip('inc/autoriser');
 
 
 	// Si on est un super-admin, un bouton de validation suffit

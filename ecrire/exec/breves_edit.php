@@ -164,7 +164,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		$form .= extra_saisie($extra, 'breves', $id_rubrique);
 	}
 
-	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {
+	if (autoriser('publierdans','rubrique',$id_rubrique)) {
 		$form .= debut_cadre_relief('', true)
 		. "<b>"._T('entree_breve_publiee')."</b>\n"
 		. "<select name='statut' size='1' class='fondl'>\n"

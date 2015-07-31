@@ -19,8 +19,8 @@ function exec_documents_colonne_dist()
 	$id = intval($id);
 
 	if (!($type == 'article' 
-		? acces_article($id)
-		: acces_rubrique($id))) {
+		? autoriser('modifier','article',$id)
+		: autoriser('publierdans','rubrique',$id))) {
 		include_spip('inc/minipres');
 		echo minipres();
 		exit;

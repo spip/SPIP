@@ -30,7 +30,7 @@ function exec_mots_tous_dist()
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 
-	if (acces_mots()  AND !$conf_mot){
+	if (autoriser('modifier','groupemots',$id_groupe)  AND !$conf_mot){
 		$res = icone_horizontale(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif",false);
 
 		echo bloc_des_raccourcis($res);
@@ -42,7 +42,7 @@ function exec_mots_tous_dist()
 	debut_droite();
 
 	gros_titre(_T('titre_mots_tous'));
-	if (acces_mots()) {
+	if (autoriser('modifier','groupemots',$id_groupe)) {
 	  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
 	}
 	echo "<br /><br />";
@@ -119,7 +119,7 @@ function exec_mots_tous_dist()
 
 		echo "</div>";
 
-		if (acces_mots()){
+		if (autoriser('modifier','groupemots',$id_groupe)){
 			echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 			echo "<tr>";
 			echo "<td>";

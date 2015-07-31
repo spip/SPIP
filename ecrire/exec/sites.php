@@ -43,7 +43,7 @@ function exec_sites_dist()
 		$mod = $row['moderation'];
 		$extra=$row["extra"];
 
-		$flag_administrable = acces_rubrique($id_rubrique);
+		$flag_administrable = autoriser('publierdans','rubrique',$id_rubrique);
 
 		$flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
 	

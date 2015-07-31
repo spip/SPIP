@@ -228,7 +228,7 @@ function exec_controle_forum_dist()
 	# TODO autoriser
 	$droit = (($connect_statut != "0minirezo") OR 
 		  (!$connect_toutes_rubriques AND
-		   (!$id_rubrique OR !acces_rubrique($id_rubrique))));
+		   (!$id_rubrique OR !autoriser('publierdans','rubrique',$id_rubrique))));
 
 	if (_request('var_ajaxcharset') AND !$droit) {
 		ajax_retour($mess);

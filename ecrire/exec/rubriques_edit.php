@@ -39,7 +39,7 @@ function exec_rubriques_edit_dist()
 		$texte = "";
 		$id_parent = intval($id_parent);
 
-		if (!acces_rubrique($id_parent)) {
+		if (!autoriser('publierdans','rubrique',$id_parent)) {
 			$id_parent = $GLOBALS['connect_id_rubrique'][0];
 		}
 	} else {
