@@ -163,6 +163,18 @@ function autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt) {
 			OR ($qui['statut']=='6forum' AND $GLOBALS['meta']["proposer_sites"]>=2) );
 }
 
+// Autoriser a modifier un site
+function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
+	if ($qui['statut'] == '0minirezo')
+		return true;
+
+	$s = spip_query("SELECT id_rubrique,statut FROM spip_syndic WHERE id_syndic="._q($id));
+	return ($t = spip_fetch_array($s)
+		AND autoriser('voir','rubrique',$t['id_rubrique'])
+		AND ($t['statut'] == 'prop')
+	);
+}
+
 // Autoriser a modifier la rubrique $id
 // = publierdans rubrique $id
 // http://doc.spip.org/@autoriser_rubrique_modifier_dist
