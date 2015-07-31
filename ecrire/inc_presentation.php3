@@ -1590,7 +1590,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 
 	// grand ecran
-	echo "<td style:'text-align:center;'>";
+	echo "<td style='text-align:center;'>";
 	$lien = $clean_link;
 
 	if ($spip_ecran == "large") {
