@@ -86,7 +86,7 @@ function forum_abonnement() {
 }
 
 
-function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic, $titre) {
+function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic) {
 	global $REQUEST_URI, $HTTP_GET_VARS, $PATH_TRANSLATED;
 	$forums_publics = lire_meta("forums_publics");
 
@@ -96,7 +96,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 	$retour = $HTTP_GET_VARS['retour'];
 	if ($retour)
-		$retour = $retour;
+		$retour = rawurlencode($retour);
 	else 
 		$retour = rawurlencode($lien);
 
@@ -118,8 +118,21 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	
 	$ret .= "\n";
 
-	if ($HTTP_GET_VARS['titre']){
-		$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
+	// recuperer le titre
+	if (! $titre) {
+		if ($id_parent)
+			$titre_select = "SELECT titre FROM spip_forum WHERE id_forum = $id_parent";
+		else if ($id_rubrique)
+			$titre_select = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $id_rubrique";
+		else if ($id_article)
+			$titre_select = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
+		else if ($id_breve)
+			$titre_select = "SELECT titre FROM spip_breves WHERE id_breve = $id_breve";
+		else if ($id_syndic)
+			$titre_select = "SELECT nom_site FROM spip_syndic WHERE id_syndic = $id_syndic";
+	
+		$res = mysql_fetch_object(mysql_query($titre_select));
+		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
 
 	$seed = (double) (microtime() + 1) * time() * 1000000;
