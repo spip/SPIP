@@ -525,7 +525,7 @@ function exposer ($id, $identique='on', $different='') {
 // Reduire la taille d'un logo
 //
 
-function reduire_img($img, $taille = 120) {
+function reduire_image($img, $taille = 120) {
 
 	if (strlen($img) > 0) {
 		// recuperer le nom du fichier
