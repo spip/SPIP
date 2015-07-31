@@ -137,31 +137,17 @@ if (!isset($reinstall)) {
 	}
  }
 
-### CAS SPECIAL : on a recupere un appel a un plugin
-### ecrire/?plugin=forms&page=forms_edit
-$var_f = '';
 
-if ($plug = $_GET['plugin']) {
-	if (!in_array($plug, $plugins)) {
-		## envoyer sur la page de configuration des plugins ??
-		die ("Le plugin '".htmlspecialchars($plug)."' n'est pas activ&eacute;, ou inexistant.");
-	}
-	if (preg_match(',^[0-9a-z_]*$,i', $_GET['page'])
-	AND (
-	file_exists($f = _DIR_PLUGINS.$plug.'/ecrire/'.$_GET['page'].'.php')
-	OR file_exists($f = _DIR_PLUGINS.$plug.'/ecrire/index.php')
-	)) {
-		include_ecrire("inc_presentation");
-		include($f);
-	} else {
-		die ("Le plugin '".htmlspecialchars($plug)."' n'a pas d'interface utilisateur.");
-	}
-}
+//
+// Determiner la fonction qui fabriquera la page demandee, et l'appeler
+//
 
-### cas general: on passe la main a la page demandee dans ecrire/
-else {
-	$var_f = include_fonction($SCRIPT_NAME);
-	$var_f();
-}
+## temporaire en attendant un truc general qui evitera $SCRIPT_NAME
+if ($_GET['page'] AND
+preg_match(',^[0-9a-z_]*$,i', $_GET['page']))
+	$SCRIPT_NAME = $_GET['page'];
+
+$var_f = include_fonction($SCRIPT_NAME);
+$var_f();
 
 ?>

@@ -539,23 +539,35 @@ function texte_script($texte) {
 //
 
 function find_in_path ($filename, $path='AUTO') {
+	static $autopath;
+
 	// Chemin standard depuis l'espace public
 
 	if ($path == 'AUTO') {
-		$path = _SPIP_PATH;
-		if ($GLOBALS['dossier_squelettes'])
-			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
+		if (!$autopath) {
+			$autopath = _SPIP_PATH;
+			// Ajouter les repertoires des plugins
+			foreach ($GLOBALS['plugins'] as $plug)
+				$autopath = _DIR_PLUGINS.$plug.'/:'.$autopath;
+
+			if ($GLOBALS['dossier_squelettes'])
+				$autopath = $GLOBALS['dossier_squelettes'].'/:'.$autopath;
+		}
+		$path = $autopath;
 	}
+#spip_log("path = $path");
 
 	// Parcourir le chemin
 	foreach (split(':', $path) as $dir) {
-	// Depuis l'espace prive, remonter d'un cran, sauf pour les absolus
-		$racine = ($dir[0]=='/') ?  '' : _DIR_RACINE;
-		if ($dir[0] == '.') $dir = "";
-		else if ($dir && $dir[strlen($dir)-1] <> '/') $dir .= "/";
-		$f = "$racine$dir$filename";
-#		spip_log("find_in_path: essai $racine $dir $filename");
-		if (@is_readable($f)) {
+		// Depuis l'espace prive, remonter d'un cran, sauf pour :
+		// - les absolus (/) ; - les locaux (./) ; les remontees (../)
+		$racine = preg_match('@^([.]{0,2}/)@', $dir) ?  '' : _DIR_RACINE;
+		// ajouter un / eventuellement manquant
+		if (substr($dir,_1) <> '/')
+			$dir .= "/";
+#spip_log("find_in_path: essai $racine $dir $filename");
+		if (@is_readable($f = "$racine$dir$filename")) {
+			#spip_log("trouve $f");
 			return $f;
 		}
 	}
