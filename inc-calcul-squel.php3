@@ -121,16 +121,13 @@ function calculer_boucle($id_boucle, &$boucles)
 	    $Pile[0]["id_parent"])') .
 	      ';
 	$h0 = ""; 
-	' .
-	      (!$limit ? 
-	       'while ($hierarchie)' :
-	       ('for($n=0;$n<' . $limit[2] . ';$n++)')) . 
-	      '{';       
+	for($n=-1;' .
+	      (!$limit ? '$hierarchie' : ('$n<' . $limit[2])) .
+	      ';$n++) {
+	';       
 	    $corps = '
-		$hierarchie = $Pile[$SP][id_parent];' .
-	      (!$limit ? $corps :
-	       ('
-		if ($n >=' . $limit[1] . ') {' . $corps  .'}'));
+		$hierarchie = $Pile[$SP][id_parent];
+		if ($n >=' . ($limit[1] ? $limit[1] : 0) . ') {' . $corps  .'}';
 	}
 
 	# si le corps est une constante, ne plus appeler le serveur
