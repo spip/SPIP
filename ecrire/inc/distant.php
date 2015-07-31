@@ -46,7 +46,7 @@ function copie_locale($source, $mode='auto') {
 	AND preg_match(',^\w+://,', $source)) {
 		if (($mode=='auto' AND !@file_exists(_DIR_RACINE.$local))
 		OR $mode=='force') {
-			$contenu = recuperer_page($source);
+			$contenu = recuperer_page($source,false,false,_COPIE_LOCALE_MAX_SIZE);
 			if (!$contenu) return false;
 			ecrire_fichier(_DIR_RACINE.$local, $contenu);
 
