@@ -259,7 +259,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$reindexer = true;
 	}
 
-	if ($flag_editable && ($supp_mot = intval($suppmot))) {
+	if ($flag_editable && ($supp_mot = intval($supp_mot))) {
 		$result = spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . 
 				     (($supp_mot == -1) ?  "" :  " AND id_mot=$supp_mot"));
 
@@ -535,40 +535,28 @@ if ($GLOBALS['connect_statut'] =="0minirezo") $aff_articles = "'prepa','prop','p
 else $aff_articles = "'prop','publie'";
 
  $articles = array();
- $result_articles = spip_query(
-	"SELECT COUNT(*) as cnt, lien.id_mot FROM spip_mots_articles AS lien, spip_articles AS article
-	WHERE article.id_article=lien.id_article AND article.statut IN ($aff_articles) GROUP BY lien.id_mot"
-);
+ $result_articles = spip_query("SELECT COUNT(*) as cnt, lien.id_mot FROM spip_mots_articles AS lien, spip_articles AS article	WHERE article.id_article=lien.id_article AND article.statut IN ($aff_articles) GROUP BY lien.id_mot");
  while ($row =  spip_fetch_array($result_articles)){
 	$articles[$row['id_mot']] = $row['cnt'];
 }
 
 
  $rubriques = array();
- $result_rubriques = spip_query(
-	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
-	WHERE rubrique.id_rubrique=lien.id_rubrique GROUP BY lien.id_mot"
-	);
+ $result_rubriques = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique WHERE rubrique.id_rubrique=lien.id_rubrique GROUP BY lien.id_mot");
 
  while ($row = spip_fetch_array($result_rubriques)){
 	$rubriques[$row['id_mot']] = $row['cnt'];
 }
 
  $breves = array();
- $result_breves = spip_query(
-	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve
-	WHERE breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot"
-	);
+ $result_breves = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve	WHERE breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot");
 
  while ($row = spip_fetch_array($result_breves)){
 	$breves[$row['id_mot']] = $row['cnt'];
 }
 
  $syndic = array(); 
- $result_syndic = spip_query(
-	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic
-	WHERE syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot"
-	);
+ $result_syndic = spip_query("SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic WHERE syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot");
  while ($row = spip_fetch_array($result_syndic)){
 	$sites[$row['id_mot']] = $row['cnt'];
 
@@ -597,8 +585,6 @@ function afficher_groupe_mots($id_groupe) {
 			
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
-
-
 	$occurrences = calculer_liens_mots();
 
 	$table = '';
@@ -612,7 +598,6 @@ function afficher_groupe_mots($id_groupe) {
 			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
-		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
 		if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var' style='position: relative;'>";
 
@@ -622,7 +607,7 @@ function afficher_groupe_mots($id_groupe) {
 		echo "<div class='liste'>";
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 
-		echo $tranches;
+		echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
 		$result = spip_query($query);
 		while ($row = spip_fetch_array($result)) {
