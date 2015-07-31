@@ -442,8 +442,8 @@ function _T($texte, $args=array()) {
 
 }
 
-// Remplacer les variables @....@ par leur valeur
-// aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
+// Remplacer les variables @....@ par leur valeur dans une chaine de langue.
+// Aussi appelee quand une chaine n'est pas encore dans les fichiers de langue
 // http://doc.spip.org/@_L
 function _L($text, $args=array(), $nostyle=false) {
 
@@ -452,12 +452,12 @@ function _L($text, $args=array(), $nostyle=false) {
 			$text = str_replace ("@$name@", $value, $text, $n);
 			if ($n) unset($args[$name]);
 		}
-		// Si des variables n'ont pas ete inserees, le faire a minima
+		// Si des variables n'ont pas ete inserees, le signaler
 		// (chaines de langues pas a jour)
-		foreach ($args as $name => $value) $texte .= " $value";
+		spip_log("$text:  variables inutilisées " . join(', ', $args));
 	}
 
-	if ($GLOBALS['test_i18n'] AND (!$nostyle OR $args))
+	if ($GLOBALS['test_i18n'] And (!$nostyle OR $args))
 		return "<span style='color:red;'>$text</span>";
 	else
 		return $text;
