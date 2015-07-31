@@ -456,6 +456,12 @@ if (($date - $date_opt) > 8 * 3600) {
 	calculer_visites();
 }
 
+// Optimiser les referers
+if (($date - $date_opt) > 19 * 3600) {
+	include ("inc_statistiques.php3");
+	optimiser_referers();
+}
+
 
 include_local ("inc_mail.php3");
 include_local ("inc_sites.php3");
