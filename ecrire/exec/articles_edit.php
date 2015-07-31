@@ -53,7 +53,6 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 	pipeline('exec_init',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
 	
 	if ($id_version) $titre.= ' ('._T('version')." $id_version)";
-	else $titre = $row['titre'];
 
 	echo $commencer_page(_T('titre_page_articles_edit', array('titre' => $titre)), "naviguer", "articles", $id_rubrique);
 
@@ -109,9 +108,9 @@ function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new,
 		: null
 	);
 
-	echo recuperer_fond("prive/editer/article", $contexte);
+	$milieu = recuperer_fond("prive/editer/article", $contexte);
 	
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_edit','id_article'=>$id_article),'data'=>$milieu));
 
 	echo fin_gauche(), fin_page();
 }
