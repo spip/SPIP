@@ -22,8 +22,9 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$result_groupes = spip_query($query_groupes);
 	while($row = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row['id_groupe'];
-		$type = entites_html($row['titre']);
+		$type = $row['titre'];
 		$ancien_type = $type;
+		$titre = typo($type);
 		$unseul = $row['unseul'];
 		$obligatoire = $row['obligatoire'];
 		$articles = $row['articles'];
@@ -36,7 +37,7 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	}
 }
 
-debut_page("&laquo; $type &raquo;", "documents", "mots");
+debut_page("&laquo; $titre &raquo;", "documents", "mots");
 
 debut_gauche();
 
@@ -59,7 +60,7 @@ echo "<tr width='100%'>";
 
 echo "<td width='100%' valign='top'>";
 echo "<font face='Verdana,Arial,Sans,sans-serif' size=1><b>"._T('titre_groupe_mots')."</b><br></font>";
-gros_titre($type);
+gros_titre($titre);
 echo aide("motsgroupes");
 
 if ($connect_statut =="0minirezo"){

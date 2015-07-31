@@ -9,7 +9,6 @@ if ($conf_mot>0) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = typo($row['titre']);
 		$type_mot = typo($row['type']);
-		$descriptif_mot = $row['descriptif'];
 
 		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
 		else $aff_articles="prop,publie";
@@ -178,7 +177,7 @@ $result_groupes = spip_query($query_groupes);
 
 while ($row_groupes = spip_fetch_array($result_groupes)) {
 	$id_groupe = $row_groupes['id_groupe'];
-	$titre_groupe = $row_groupes['titre'];
+	$titre_groupe = typo($row_groupes['titre']);
 	$unseul = $row_groupes['unseul'];
 	$obligatoire = $row_groupes['obligatoire'];
 	$articles = $row_groupes['articles'];
@@ -191,7 +190,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 	// Afficher le titre du groupe
 	debut_cadre_enfonce("groupe-mot-24.gif", false, '', $titre_groupe);
-	// Affichage des options du groupe (types d'éléments, permissions...)
+	// Affichage des options du groupe (types d'elements, permissions...)
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
 	if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
 	if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
@@ -226,8 +225,6 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 			
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-			$type_mot = $row['type'];
-			$descriptif_mot = $row['descriptif'];
 
 			if ($connect_statut == "0minirezo")
 				$aff_articles="prepa,prop,publie,refuse";
