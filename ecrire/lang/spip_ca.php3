@@ -372,7 +372,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Breus',
 'icone_calendrier' => 'Calendari',
-'icone_calendrier_messagerie' => '<MODIF>  Agenda',
+'icone_calendrier_messagerie' => 'Agenda i missatgeria',
 'icone_configuration_site' => 'Configuraci&oacute; del lloc',
 'icone_configurer_site' => 'Configurar el vostre lloc',
 'icone_creation_groupe_mots' => 'Crear un nou grup de paraules',
@@ -1257,7 +1257,7 @@ i tornar-vos a connectar al lloc.
 'text_article_propose_publication' => 'Article proposat a la seva publicaci&oacute;. No dubteu a donar la vostra opini&oacute; gr&agrave;cies al f&ograve;rum adjunt a aquest article (al capdavall de la p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidors LDAP no accepten accessos an&ograve;nims. En aquest cas &eacute;s necessari especificar un identificador d\'acc&eacute;s inicial per tal de poder buscar informacions en el directori. En la majoria de casos tanmateix, els camps seg&uuml;ents es podr&aacute;n deixar buits.',
 'texte_actualite_site_1' => 'Aquesta p&agrave;gina cont&eacute; l\'actualitat del lloc i us permet seguir les vostres contribucions. Hi trobareu els vostres articles en proc&eacute;s de redacci&oacute;, els articles i els breus sobre els que esteu convidats a opinar i tamb&eacute; un recordatori de les vostres contribucions anteriors. <p><hr><p>Quan estigueu familiaritzats amb la interf&iacute;cie, podeu clicar a &laquo;',
-'texte_actualite_site_2' => ' interfa&ccedil; completa',
+'texte_actualite_site_2' => 'interf&iacute;cie completa',
 'texte_actualite_site_3' => '" per obrir m&eacute;s possibilitats.',
 'texte_admin_effacer_01' => 'Aquesta comanda esborra <i>tot</i> el contingut de la base de dades,
 la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&eacute;s d\'haver-la executat, haureu de reinstal.lar l\'SPIP per refer una nova base i un primer acc&eacute;s per l\'administrador.',
@@ -1370,11 +1370,10 @@ Useu aquest formulari amb precauci&oacute;...',
 'texte_mise_a_niveau_base_1' => 'S\'han actualitzat els fitxers d\'SPIP.
  Cal ara actualitzar la base de dades del lloc.',
 'texte_modifier_article' => 'Modificar l\'article:',
-'texte_moteur_recherche_active' => '<b>El motor de recerca est&agrave; activat.</b> Es pot usar aquesta comanda
- si es desitja es pot fer una reindexaci&oacute; r&agrave;pida (despr&eacute;s de la restauraci&oacute;
- d\'una c&ograve;pia de seguritat per exemple). Hi ha que adonar-se que els documents modificats de
-forma normal(des de la interfa&ccedil; d\'SPIP) s&oacute;n autom&agrave;ticament
-reindexats: aquesta comanda no &eacute;s sempre utilitzable.',
+'texte_moteur_recherche_active' => '<b>El motor de cerca est&agrave; activat.</b> Utilitzeu aquesta comanda
+ si desitgeu fer una reindexaci&oacute; r&agrave;pida (despr&eacute;s de la restauraci&oacute;
+ d\'una c&ograve;pia de seguretat, per exemple). Heu d\'adonar-vos que els documents modificats de forma normal(des de la interf&iacute;cie d\'SPIP) s&oacute;n autom&agrave;ticament
+reindexats: aquesta comanda no &eacute;s &uacute;til nom&eacute;s que de manera excepcional.',
 'texte_moteur_recherche_non_active' => 'El motor de recerca no est&agrave; activat.',
 'texte_mots_cles' => 'Les paraules clau permeten crear enlla&ccedil;os tematics entre els articles
 independement del seu empla&ccedil;ament a les seccions.Es pot aix&iacute;

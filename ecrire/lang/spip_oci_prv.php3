@@ -368,7 +368,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Br&egrave;vas',
 'icone_calendrier' => 'Calendier',
-'icone_calendrier_messagerie' => 'Agenda',
+'icone_calendrier_messagerie' => '<MODIF> Agenda',
 'icone_configuration_site' => 'Configuracion dau sit',
 'icone_configurer_site' => 'Configurar v&ograve;stre sit',
 'icone_creation_groupe_mots' => 'Crear un nov&egrave;u grop de mots',

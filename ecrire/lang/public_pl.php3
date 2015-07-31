@@ -10,8 +10,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles' => 'Artyku&#322;y',
 'articles_populaires' => 'Najbardziej popularne artyku&#322;y',
 'articles_recents' => 'Najnowsze artyku&#322;y',
+'aucun_article' => 'Nie ma &#380;adnego artyku&#322;u pod tym adresem',
+'aucun_auteur' => 'Nie ma &#380;adnego autora pod tym adresem',
+'aucun_site' => 'Nie ma &#380;adnej strony pod tym adresem',
+'aucune_breve' => 'Nie ma &#380;adnego newsa pod tym adresem ',
+'aucune_rubrique' => 'Nie ma &#380;adnego dzia&#322;u pod tym adresem',
 'autres_breves' => 'Reszta aktualno&#347;ci',
-'autres_groupes_de_mots_clefs' => 'Inne grupy s&#322;&oacute;w kluczowych',
+'autres_groupes_mots_clefs' => 'Inne grupy s&#322;&oacute;w kluczowych',
 'autres_sites' => 'Inne strony',
 
 
@@ -25,20 +30,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'W tym samym dziale',
 'date' => 'Data',
 'dernier_ajout' => 'Dodane ostatnio',
 'dernieres_breves' => 'Najnowsze aktualno&#347;ci',
 'derniers_articles' => 'Najnowsze artyku&#322;y',
 'derniers_commentaires' => 'Ostatnie komentarze',
-'derniers_messages_des_forums' => 'Ostatnie wiadomo&#347;ci opublikowane w forum',
+'derniers_messages_forum' => 'Ostatnie wiadomo&#347;ci opublikowane w forum',
 
 
 // E
 'edition_mode_texte' => 'Edycja w trybie tekstowym',
 'en_reponse' => 'W odpowiedzi na&nbsp;:',
 'en_resume' => 'W skr&oacute;cie',
-'envoyer_un_message' => 'Wy&#347;lij wiadomo&#347;&#263;',
+'envoyer_message' => 'Wy&#347;lij wiadomo&#347;&#263;',
 'espace_prive' => 'Strefa prywatna',
 
 
@@ -56,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => 'Ten sam autor',
+'meme_rubrique' => 'W tym samym dziale',
 'memes_auteurs' => 'Tych samych autor&oacute;w',
 'message' => 'Wiadomo&#347;&#263;',
 'messages_forum' => 'Wiadomo&#347;ci na forum',
@@ -76,14 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'par_auteur' => 'przez',
 'participer_site' => 'Mo&#380;esz wzi&#261;&#263; udzia&#322; w tworzeniu tego serwisu i proponowa&#263; w&#322;asne artyku&#322;y. Aby mie&#263; tak&#261; mo&#380;liwo&#347;&#263;, musisz si&#281; zapisa&#263; poni&#380;ej. Na podany adres e-mail otrzymasz has&#322;o dost&#281;pu do strefy prywatnej serwisu.',
-'pas_d_article' => 'Nie ma artyku&#322;u pod tym adresem',
-'pas_d_auteur' => 'Nie ma takiego autora',
-'pas_de_breve' => 'Nie ma takiego newsa',
-'pas_de_rubrique' => 'Nie ma takiego dzia&#322;u',
-'pas_de_site' => 'Nie ma takiej strony',
-'plan_du_site' => 'Mapa strony',
+'plan_site' => 'Mapa strony',
 'popularite' => 'Popularno&#347;&#263;',
-'poster_un_message' => 'Napisz wiadomo&#347;&#263;',
+'poster_message' => 'Napisz wiadomo&#347;&#263;',
 
 
 // R
@@ -113,7 +113,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Zobacz on-line'
+'voir_en_ligne' => 'Zobacz on-line',
+
+
+// PLUS_UTILISE
+'autres_groupes_de_mots_clefs' => '-vide-',
+'dans_meme_rubrique' => 'W tym samym dziale',
+'derniers_messages_des_forums' => 'Ostatnie wiadomo&#347;ci opublikowane w forum',
+'envoyer_un_message' => 'Wy&#347;lij wiadomo&#347;&#263;',
+'pas_d_article' => 'Nie ma artyku&#322;u pod tym adresem',
+'pas_d_auteur' => 'Nie ma takiego autora',
+'pas_de_breve' => 'Nie ma takiego newsa',
+'pas_de_rubrique' => 'Nie ma takiego dzia&#322;u',
+'pas_de_site' => 'Nie ma takiej strony',
+'plan_du_site' => 'Mapa strony',
+'poster_un_message' => 'Napisz wiadomo&#347;&#263;'
 
 );
 
