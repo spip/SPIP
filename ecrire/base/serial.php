@@ -39,10 +39,8 @@ $spip_articles = array(
 		"lang"		=> "VARCHAR(10) DEFAULT '' NOT NULL",
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 		"id_trad"	=> "bigint(21) DEFAULT '0' NOT NULL",
-#		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"nom_site"	=> "tinytext DEFAULT '' NOT NULL",
 		"url_site"	=> "VARCHAR(255) DEFAULT '' NOT NULL",
-#		"url_propre" => "VARCHAR(255) DEFAULT '' NOT NULL"
 );
 
 $spip_articles_key = array(
@@ -52,7 +50,6 @@ $spip_articles_key = array(
 		"KEY id_trad"		=> "id_trad",
 		"KEY lang"		=> "lang",
 		"KEY statut"		=> "statut, date",
-#		"KEY url_propre"	=> "url_propre"
 );
 $spip_articles_join = array(
 		"id_article"=>"id_article",
@@ -86,7 +83,6 @@ $spip_auteurs_key = array(
 		"KEY login"	=> "login",
 		"KEY statut"	=> "statut",
 		"KEY en_ligne"	=> "en_ligne",
-#		"KEY url_propre"	=> "url_propre"
 );
 $spip_auteurs_join = array(
 		"id_auteur"=>"id_auteur",
@@ -115,7 +111,6 @@ $spip_rubriques_key = array(
 		"PRIMARY KEY"	=> "id_rubrique",
 		"KEY lang"	=> "lang",
 		"KEY id_parent"	=> "id_parent",
-#		"KEY url_propre"	=> "url_propre"
 );
 
 
