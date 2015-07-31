@@ -112,7 +112,7 @@ function rechercher_auteurs($cherche_auteur)
 {
 	include_spip('inc/mots');
 	include_spip('inc/charsets'); // pour tranlitteration
-	$result = spip_query("SELECT id_auteur, nom FROM spip_auteurs");
+	$result = sql_select("id_auteur, nom", "spip_auteurs");
 	$table_auteurs = array();
 	$table_ids = array();
 	while ($row = sql_fetch($result)) {

@@ -196,8 +196,7 @@ function revisions_sites ($id_syndic, $c=false) {
 				$champs['date'] = $d;
 			} else {
 				# on prend la date de MySQL pour eviter un decalage cf. #975
-				$d = spip_query("SELECT NOW() AS d");
-				$d = sql_fetch($d);
+				$d = sql_fetsel('NOW() AS d');
 				$champs['date'] = $d['d'];
 			}
 		}
