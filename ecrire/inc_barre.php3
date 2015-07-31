@@ -86,7 +86,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</td>";
 
 		// Insertion de caracteres difficiles a taper au clavier
-		$ret .= "<td align='center'>";
+		$ret .= "<td align='right'>";
 		$col++;
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", "Entourer de &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
@@ -104,14 +104,14 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		//$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
 		$ret .= "</td>";
 
-		$ret .= "<td> &nbsp; </td>";
-		$col++;
-
 		if ($flag_ecrire) {
+			$ret .= "<td> &nbsp; </td>";
+			$col++;
+
 			$ret .= "<td align='right' onMouseOver=\"helpline('En savoir plus sur les raccourcis typographiques',helpbox$texte)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">";
 			$col++;
-			$ret .= aide("raccourcis");
 			$ret .= "&nbsp;&nbsp;&nbsp;";
+			$ret .= aide("raccourcis");
 			$ret .= "</td>";
 		}
 		$ret .= "</tr>";
