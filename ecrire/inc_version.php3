@@ -1101,6 +1101,16 @@ function spip_header($h) {
 
 // envoyer le navigateur sur une nouvelle adresse
 function redirige_par_entete($url) {
+	$url = trim(strtr($url, "\n\r", "  "));
+	// ne pas laisser passer n'importe quoi dans l'url
+	$url = str_replace(array('<','"'),array('&lt;','&quot;'),$url);
+	// interdire les url inline avec des pseudo-protocoles :
+	if (
+		(preg_match(",data:,i",$url) AND preg_match("/base64\s*,/i",$url))
+		OR preg_match(",(javascript|mailto):,i",$url)
+		)
+		$url ="./";
+
 	header("Location: $url");
 	spip_log("redirige $url");
 	http_status(302);
