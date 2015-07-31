@@ -502,7 +502,7 @@ function url_var_recherche($url) {
 // http://doc.spip.org/@extraire_date
 function extraire_date($texte) {
 	// format = 2001-08
-	if (preg_match(",([1-2][0-9]{3})[^0-9]*(0?[1-9]|1[0-2]),",$texte,$regs))
+	if (preg_match(",([1-2][0-9]{3})[^0-9]*(1[0-2]|0?[1-9]),",$texte,$regs))
 		return $regs[1]."-".sprintf("%02d", $regs[2])."-01";
 }
 
