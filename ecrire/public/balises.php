@@ -409,7 +409,7 @@ function balise_LANG_dist ($p) {
 }
 
 // #LESAUTEURS
-// les auteurs d'un article (ou d'un article syndique)
+// les auteurs d'un objet
 // http://www.spip.net/fr_article902.html
 // http://www.spip.net/fr_article911.html
 // http://doc.spip.org/@balise_LESAUTEURS_dist
@@ -426,13 +426,21 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "safehtml($_lesauteurs)";
 		// $p->interdire_scripts = true;
 	} else {
-		$connect = !$p->id_boucle ? ''
-		  : $p->boucles[$p->id_boucle]->sql_serveur;
-
+		if(!$p->id_boucle){
+			$connect = '';
+			$objet = 'article';
+			$id_table_objet = 'id_article';
+		}
+		else{
+			$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+			$type_boucle = $p->boucles[$p->id_boucle]->type_requete;
+			$objet = objet_type($type_boucle);
+			$id_table_objet = id_table_objet($type_boucle);
+		}
 		$c = memoriser_contexte_compil($p);
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/lesauteurs'",
-				   "array('id_article' => ".champ_sql('id_article', $p) .")",
+				   "array('objet'=>'".$objet."','id_objet' => ".champ_sql($id_table_objet, $p) .")",
 				   "'trim'=>true, 'compil'=>array($c)",
 				   _q($connect));
 		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
