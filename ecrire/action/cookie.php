@@ -141,8 +141,8 @@ if ($cookie_admin == "non") {
 			'url='.rawurlencode($url), true);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
-	$redirect = ereg_replace("([?&])var_login=[^&]*&?", '\1', $retour);
-	$redirect = ereg_replace("([?&])var_erreur=[^&]*&?", '\1', $redirect);
+	$redirect = parametre_url($retour,'var_login','');
+	$redirect = parametre_url($redirect,'var_erreur','');
 	$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
 		. "var_login=-1";
 }
@@ -156,8 +156,7 @@ if ($var_lang) {
 
 	if (changer_langue($var_lang)) {
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
-		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
-		$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang";
+		$redirect = parametre_url($redirect,'lang',$var_lang);
 	}
  }
 
@@ -177,8 +176,7 @@ if ($var_lang_ecrire) {
 		}
 	}
 
-	$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
-	$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang_ecrire";
+	$redirect = parametre_url($redirect,'lang',$var_lang_ecrire);
  }
 
 // Redirection
