@@ -598,7 +598,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
 {
-  static $num=0;
+  static $num=array();
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
 
@@ -608,9 +608,9 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
   $id_table = "";
   foreach($res as $r) {
     list($d, $a, $j) = $r;
-    $num++;
-    $boucle->join[$num]= array(($id_table ? $id_table : $d), $j);
-    $boucle->from[$id_table = "L$num"] = $a[0];    
+    $n=++$num[$boucle->id_boucle];
+    $boucle->join[$n]= array(($id_table ? $id_table : $d), $j);
+    $boucle->from[$id_table = "L$n"] = $a[0];    
   }
 
   // pas besoin de group by 
@@ -634,7 +634,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
   }
 
   $boucle->lien = true;
-  return $num;
+  return $n;
 }
 
 function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
