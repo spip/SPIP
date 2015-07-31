@@ -60,9 +60,12 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 		foreach($couple as $n => $val) {
 			$var = $val[0];
 			if ($var->type != 'texte') {
-			  if ($n OR $k)
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'), $p);
-			  else $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
+			  if ($n OR $k) {
+			    $msg = array('zbug_parametres_inclus_incorrects',
+					 array('param' => $var->nom_champ));
+			    erreur_squelette($msg, $p);
+			  } 
+			  $l[1] = calculer_liste($val, $p->descr, $boucles, $id_boucle);
 			  break;
 			} else {
 				preg_match(",^([^=]*)(=?)(.*)$,", $var->texte,$m);
@@ -114,6 +117,9 @@ function argumenter_inclure($params, $rejet_filtres, $p, &$boucles, $id_boucle, 
 function calculer_inclure($p, &$boucles, $id_boucle) {
 
 	$_contexte = argumenter_inclure($p->param, false, $p, $boucles, $id_boucle);
+	// Eliminer le hack pour #INCLURE, 
+	// (s'il est la, c'est une erreur, mais ce n'est pas a  PHP de le dire)
+	if (isset($_contexte[1])) unset($_contexte[1]);
 	if (is_string($p->texte)) {
 		$fichier = $p->texte;
 		$code = "'$fichier'";

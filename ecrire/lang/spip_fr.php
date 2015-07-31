@@ -768,7 +768,7 @@ et vous reconnecter au site.
 'zbug_info_erreur_squelette' => 'Erreur sur le site',
 'zbug_inversion_ordre_inexistant' => 'Inversion d\'un ordre inexistant',
 'zbug_pagination_sans_critere' => 'Balise #PAGINATION sans crit&egrave;re {pagination} ou employ&eacute; dans une boucle recursive',
-'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects',
+'zbug_parametres_inclus_incorrects' => 'Param&egrave;tre d\'inclusion incorrect&nbsp: @param@',
 'zbug_profile' => 'Temps de calcul&nbsp;: @time@',
 'zbug_resultat' => 'r&eacute;sultat',
 'zbug_serveur_indefini' => 'Serveur SQL ind&eacute;fini',
