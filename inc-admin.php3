@@ -320,11 +320,13 @@ function debug_page($no_exit = false) {
 
 
 	@header("Content-Type: text/html; charset=".lire_meta('charset'));
-	echo afficher_boutons_admin();
 	if (!$GLOBALS['debug_objets']['sourcefile']) return;
-    echo "\n<body>\n<div id='spip_debug'>";
-	echo "\n<h1>Structure de la page</h1>\n";
-    echo "<ul>\n";
+
+	$page = "<html><head><title>Debug</title></head>\n";
+	$page .= "<body>\n<div id='spip-debug'>";
+	echo calcul_admin_page('', $page);
+
+	echo "<ul>\n";
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>".$sourcefile."</b>";
 		$link = $GLOBALS['clean_link'];
@@ -338,13 +340,16 @@ function debug_page($no_exit = false) {
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
 				echo "<li>";
-				echo "&lt;".$pretty."&gt;";
+				$aff = "&lt;".$pretty."&gt;";
+				if ($debug_objet == $nom)
+					$aff = "<b>$aff</b>";
+				echo $aff;
 				$link = $GLOBALS['clean_link'];
 				$link->addvar('debug_objet', $nom);
 				$link->delvar('debug_affiche');
 				echo " <a href='".$link->getUrl()."&debug_affiche=boucle' class='debug_link_boucle'>boucle</a>";
-				echo " <a href='".$link->getUrl()."&debug_affiche=code' class='debug_link_code'>code</a>";
 				echo " <a href='".$link->getUrl()."&debug_affiche=resultat' class='debug_link_resultat'>resultat</a>";
+				echo " <a href='".$link->getUrl()."&debug_affiche=code' class='debug_link_code'>code</a>";
 				echo "</li>\n";
 			}
 		echo "</ul>\n</li>\n";
@@ -353,10 +358,11 @@ function debug_page($no_exit = false) {
 
 	if ($debug_objet AND $debug_affiche == 'resultat' AND ($res = $debug_objets['resultats'][$debug_objet])) {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
-		echo "<p>les premiers appels &agrave; cette boucle ont donn&eacute; les r&eacute;sultats ci-dessous:</p>";
-		foreach ($res as $view) {
-			echo "<ul>".interdire_scripts($view)."</ul></fieldset></div>";
-		}
+		echo "<p class='spip-admin-bloc'>les premiers appels &agrave; cette boucle ont donn&eacute;&nbsp;:</p>";
+		foreach ($res as $view)
+			echo "<ul><fieldset>".interdire_scripts($view)."</fieldset></ul>";
+		echo "</fieldset></div>";
+
 	} else if ($debug_objet AND $debug_affiche == 'code' AND $res = $debug_objets['code'][$debug_objet]) {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
 		highlight_string("<"."?php\n".$res."\n?".">");
