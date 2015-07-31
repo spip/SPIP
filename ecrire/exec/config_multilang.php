@@ -13,96 +13,88 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/rubriques');
 include_spip('inc/config');
 
 // http://doc.spip.org/@exec_config_multilang_dist
 function exec_config_multilang_dist()
 {
-  global $connect_statut, $connect_toutes_rubriques, $spip_lang_right, $changer_config;
+	global $connect_statut, $connect_toutes_rubriques, $spip_lang_right, $changer_config;
 
-lire_metas();
+	lire_metas();
 
-pipeline('exec_init',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
-$commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
+	pipeline('exec_init',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
+	$commencer_page = charger_fonction('commencer_page', 'inc');
+	echo $commencer_page(_T('titre_page_config_contenu'), "configuration", "langues");
 
-echo "<br /><br /><br />";
-gros_titre(_T('info_langues'));
+	echo "<br /><br /><br />";
+	gros_titre(_T('info_langues'));
 
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		echo _T('avis_non_acces_page');
+		echo fin_gauche(), fin_page();
+		exit;
+	}
 
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo _T('avis_non_acces_page');
-	echo fin_gauche(), fin_page();
-	exit;
-}
+	init_config();
 
-init_config();
-if ($changer_config == 'oui') {
-	appliquer_modifs_config();
-	calculer_langues_rubriques();
-}
+	echo barre_onglets("config_lang", "multi");
 
-
-echo barre_onglets("config_lang", "multi");
-
-debut_gauche();
-
+	debut_gauche();
 	
-echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
-creer_colonne_droite();
-echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
+	creer_colonne_droite();
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 debut_droite();
 
-echo generer_url_post_ecrire('config_multilang');
-echo "<input type='hidden' name='changer_config' value='oui' />";
+	$action = generer_action_auteur('configurer_langue', '', generer_url_ecrire('config_multilang'));
 
-debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
-	echo "<p>"._T('texte_multilinguisme')."</p>";
-
-	echo "<div>";
-	echo _T('info_multi_articles');
-	echo "<div style='text-align: $spip_lang_right;'>";
-	echo afficher_choix('multi_articles', $GLOBALS['meta']['multi_articles'],
-		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-	echo "</div>";
-	echo "</div>";
-
-	echo "<div>";
-	echo _T('info_multi_rubriques');
-	echo "<div style='text-align: $spip_lang_right;'>";
-	echo afficher_choix('multi_rubriques', $GLOBALS['meta']['multi_rubriques'],
-		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-	echo "</div>";
-	echo "</div>";
+	$res = "<form action='$action' method='post'><div>"
+	.  form_hidden($action)
+	. "<input type='hidden' name='changer_config' value='oui' />"
+	. debut_cadre_couleur("traductions-24.gif", true, "", _T('info_multilinguisme'))
+	. "<p>"._T('texte_multilinguisme')."</p>"
+	. "<div>"
+	. _T('info_multi_articles')
+	. "<div style='text-align: $spip_lang_right;'>"
+	. afficher_choix('multi_articles', $GLOBALS['meta']['multi_articles'],
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+	. "</div>"
+	. "</div>"
+	. "<div>"
+	. _T('info_multi_rubriques')
+	. "<div style='text-align: $spip_lang_right;'>"
+	. afficher_choix('multi_rubriques', $GLOBALS['meta']['multi_rubriques'],
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+	. "</div>"
+	. "</div>";
 
 	if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
-		echo "\n<div>";
-		echo _T('info_multi_secteurs');
-		echo "<div style='text-align: $spip_lang_right;'>";
-		echo afficher_choix('multi_secteurs', $GLOBALS['meta']['multi_secteurs'],
-			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-		echo "</div>";
-		echo "</div>";
+		$res .= "\n<div>"
+		. _T('info_multi_secteurs')
+		. "<div style='text-align: $spip_lang_right;'>"
+		. afficher_choix('multi_secteurs', $GLOBALS['meta']['multi_secteurs'],
+			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+		. "</div>"
+		. "</div>";
 	} else
-		echo "<input type='hidden' name='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."' />";
+		$res .= "<input type='hidden' name='multi_secteurs' value='".$GLOBALS['meta']['multi_secteurs']."' />";
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
-		echo "<hr />";
-		echo "<p>"._T('texte_multilinguisme_trad')."</p>";
+		$res .= "<hr />"
+		. "<p>"._T('texte_multilinguisme_trad')."</p>";
 
-		echo _T('info_gerer_trad');
-		echo "<div style='text-align: $spip_lang_right;'>";
-		echo afficher_choix('gerer_trad', $GLOBALS['meta']['gerer_trad'],
-			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
-		echo "</div>";
+		$res .= _T('info_gerer_trad')
+		. "<div style='text-align: $spip_lang_right;'>"
+		. afficher_choix('gerer_trad', $GLOBALS['meta']['gerer_trad'],
+			array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ")
+		. "</div>";
 	} else
-		echo "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
+		$res .= "<input type='hidden' name='gerer_trad' value='".$GLOBALS['meta']['gerer_trad']."' />";
 
 
-	echo "\n<div style='text-align: $spip_lang_right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>";
+	$res .= "\n<div style='text-align: $spip_lang_right;'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 
-fin_cadre_couleur();
+	$res .= fin_cadre_couleur(true);
 
 
 	calculer_langues_utilisees();
@@ -111,10 +103,10 @@ fin_cadre_couleur();
 	OR $GLOBALS['meta']['multi_rubriques'] == "oui"
 	OR count(explode(',',$GLOBALS['meta']['langues_utilisees'])) > 1) {
 
-		debut_cadre_relief("langues-24.gif");
-		echo "<p class='verdana2'>";
-		echo _T('info_multi_langues_choisies');
-		echo '</p>';
+		$res .= debut_cadre_relief("langues-24.gif", true)
+		. "<p class='verdana2'>"
+		. _T('info_multi_langues_choisies')
+		. '</p>';
 
 		include_spip('inc/lang_liste');
 		$langues = $GLOBALS['codes_langues'];
@@ -136,59 +128,54 @@ fin_cadre_couleur();
 			$langues_bloquees[$l] = true;
 		}
 
-		echo "\n<table width='100%' cellspacing='10'><tr><td style='width: 50%'  class='verdana1'>";
+		$res .= "\n<table width='100%' cellspacing='10'><tr><td style='width: 50%'  class='verdana1'>";
 
 		while (list($code_langue) = each($langues_bloquees)) {
 			$i++;
 			$nom_langue = $langues[$code_langue];
-			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
+			if ($langues_trad[$code_langue]) $nom_langue = "<span style='text-decoration: underline'>$nom_langue</span>";
 
-			echo "\n<div class='ligne_foncee' style='font-weight: bold'>";
-			echo "\n<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
-			echo "\n<input type='checkbox' checked='checked' disabled='disabled' />";
-			echo  $nom_langue,"\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
-			echo "</div>";
+			$res .= "\n<div class='ligne_foncee' style='font-weight: bold'>";
+			$res .= "\n<input type='hidden' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
+			$res .= "\n<input type='checkbox' checked='checked' disabled='disabled' />";
+			$res .=  $nom_langue ."\n&nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
+			$res .= "</div>";
 
-			if ($i == $cesure) echo "\n</td><td style='width: 50%' class='verdana1'>";
+			if ($i == $cesure) $res .= "\n</td><td style='width: 50%' class='verdana1'>";
 		}
 
-		echo "\n<div>&nbsp;</div>";
+		$res .= "\n<div>&nbsp;</div>";
 
 		while (list($code_langue, $nom_langue) = each($langues)) {
 			if ($langues_bloquees[$code_langue]) continue;
 			$i++;
-			echo "\n<div>";
-			if ($langues_trad[$code_langue]) $nom_langue = "<u>$nom_langue</u>";
+			$res .= "\n<div>";
+			if ($langues_trad[$code_langue]) $nom_langue = "<span style='text-decoration: underline'>$nom_langue</span>";
 	
 			if ($langues_auth[$code_langue]) {
-				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked='checked' />";
+				$res .= "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' checked='checked' />";
 				$nom_langue = "<b>$nom_langue</b>";
 			}
 			else {
-				echo "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
+				$res .= "<input type='checkbox' name='langues_auth[]' value='$code_langue' id='langue_auth_$code_langue' />";
 			}
-			echo  "\n<label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
+			$res .=  "\n<label for='langue_auth_$code_langue'>$nom_langue</label> &nbsp; &nbsp;<span style='color: #777777'>[$code_langue]</span>";
 
-			echo "</div>";
+			$res .= "</div>";
 
-			if ($i == $cesure) echo "</td><td style='width: 50%' class='verdana1'>";
+			if ($i == $cesure) $res .= "</td><td style='width: 50%' class='verdana1'>";
 		}
 
-		echo "</td></tr>";
-		echo "<tr><td style='text-align:$spip_lang_right;' colspan='2'>";
-		echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' />";
-		echo "</td></tr></table>";
-		
-		
-		echo "<div class='verdana1'>"._T("info_multi_langues_soulignees")."</div>";
-
-		fin_cadre_relief();
+		$res .= "</td></tr>"
+		. "<tr><td style='text-align:$spip_lang_right;' colspan='2'>"
+		. "<input type='submit' value='"._T('bouton_valider')."' class='fondo' />"
+		. "</td></tr></table>"
+		. "<div class='verdana1'>"._T("info_multi_langues_soulignees")."</div>"
+		. fin_cadre_relief(true);
 	}
 
+	$res .= "</div></form>";
 
-
-echo "</form>";
-
-echo fin_gauche(), fin_page();
+	echo $res, fin_gauche(), fin_page();
 }
 ?>
