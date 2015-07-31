@@ -89,7 +89,6 @@ class IterateurDATA implements Iterator {
 		// sont : tableau=#ARRAY ; cle=...; valeur=...
 		// source URL
 		if (isset($this->command['source'])) {
-var_dump($this->command['source']);
 			if (isset($this->command['sourcemode'])
 			AND in_array($this->command['sourcemode'],
 				array('table', 'array', 'tableau'))
