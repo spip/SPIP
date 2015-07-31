@@ -326,12 +326,4 @@ function revision_groupe_mot($id_groupe, $c=false) {
 		$c);
 }
 
-// http://doc.spip.org/@revision_petition
-function revision_petition($id_article, $c=false) {
-
-	modifier_contenu('petition', $id_article,
-		array(),
-		$c);
-}
-
 ?>
