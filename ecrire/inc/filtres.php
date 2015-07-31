@@ -3082,7 +3082,7 @@ function produire_fond_statique($fond, $contexte=array(), $options = array(), $c
  * @return string
  */
 function timestamp($fichier){
-	if (!$fichier) return $fichier;
+	if (!file_exists($fichier)) return $fichier;
 	$m = filemtime($fichier);
 	return "$fichier?$m";
 }
