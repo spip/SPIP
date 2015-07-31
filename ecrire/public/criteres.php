@@ -686,7 +686,7 @@ function critere_IN_cas ($idb, &$boucles, $crit2, $arg, $op, $val, $col)
 	// et que l'on limite donc strictement aux cas necessaires :
 	// si ce n'est pas un !IN, et si il n'y a pas d'autre order dans la boucle
 	if (!$crit2){
-		$boucles[$idb]->default_order[] = "((sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
+		$boucles[$idb]->default_order[] = "((!sql_quote($var) OR sql_quote($var)===\"''\") ? 0 : ('FIELD($arg,' . sql_quote($var) . ')'))";
 	}
 	
 	return "sql_in('$arg',sql_quote($var)".($crit2=='NOT'?",'NOT'":"").")";
