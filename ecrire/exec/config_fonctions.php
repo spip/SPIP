@@ -46,7 +46,7 @@ function exec_config_fonctions_dist()
 	lire_metas();
 
 	echo generer_url_post_ecrire('config_fonctions');
-	echo "<input type='hidden' name='changer_config' value='oui'>";
+	echo "<input type='hidden' name='changer_config' value='oui' />";
 
 //
 // Activer/desactiver la creation automatique de vignettes
@@ -113,15 +113,11 @@ function afficher_choix_vignette($process) {
 	//global $taille_preview;
 	$taille_preview = 120;
 
-	$border = ($process == $GLOBALS['meta']['image_process']);
-
 	// Ici on va tester les capacites de GD independamment des tests realises
 	// dans les images spip_image -- qui servent neanmoins pour la qualite
 	/* if (function_exists('imageformats')) {
 		
 	} */
-
-	$retour = '';
 
 	if($cpt_cellule>=3) {
 		$cpt_cellule = 0;
@@ -129,16 +125,20 @@ function afficher_choix_vignette($process) {
 	}
 	else {
 		$cpt_cellule += 1;
+		$retour = '';
 	}
 
-	$retour .= "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'".
-	($border ? " style='border:2px;border-style: dotted; border-color: $couleur_foncee;'" : '').
-	"><a href='" . generer_url_ecrire("config_fonctions", "image_process=$process"). 
-	  "'><img src='". generer_url_action("tester", "arg=$process").
-	  "' /></a><br />";
-	$retour .= $border ? "<b>$process</b>" : "$process";
-	$retour .= "</div></td>\n";
-	return $retour;
+	$style = (($process == $GLOBALS['meta']['image_process'])
+	? " font-weight: bold;"
+	: " border: 2px; border-style: dotted; border-color: $couleur_foncee;");
+
+	return 	$retour . "\n<td  style='text-align: center; vertical-align:center; width: ".($taille_preview+4)."px;$style'"
+	. "><a href='"
+	. generer_url_ecrire("config_fonctions", "image_process=$process")
+	. "'><img src='"
+	. generer_url_action("tester", "arg=$process")
+	. "' alt='$process' /></a><br />$process</td>\n";
+
 }
 
 // http://doc.spip.org/@vignettes_config
@@ -238,26 +238,25 @@ function vignettes_config()
 		echo "<p class='verdana2'>";
 		echo _T('info_ajout_image');
 		echo "</p>\n";
-		echo "<p class='verdana2'>";
 
 
 		$block = "'block', 'none'"; 
+		echo "<div class='verdana2'>";
 		echo bouton_radio("creer_preview", "oui", _T('item_choix_generation_miniature'), $creer_preview == "oui", "changeVisible(this.checked, 'config-preview', $block);");
+		echo '</div>';
 
 		if ($creer_preview == "oui") $style = "display: block;";
 		else $style = "display: none;";
 	
-			echo "<div id='config-preview' class='verdana2' style='$style margin-$spip_lang_left: 40px;'>"._T('info_taille_maximale_vignette');
-			echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='taille_preview' value='$taille_preview' class='fondl' size='5' />";
-			echo " "._T('info_pixels').'<br /><br /></div>';
+		echo "<div id='config-preview' class='verdana2' style='$style margin-$spip_lang_left: 40px;'>"._T('info_taille_maximale_vignette');
+		echo "<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='taille_preview' value='$taille_preview' class='fondl' size='5' />";
+		echo " "._T('info_pixels').'<br /><br /></div>';
 			
 		$block= "'none', 'block'";
 		echo bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', $block);");
 	
 		echo "<div style='text-align:$spip_lang_right'><input type='submit' value='"._T('bouton_valider')."' class='fondo' /></div>";
 		
-		echo "</p>";
-
 		fin_cadre_trait_couleur();
 	}
 
@@ -289,7 +288,7 @@ function moteur_config()
 
 	fin_cadre_trait_couleur();
 		
-	echo "<p>";
+	echo "<br />";
 }
 
 // http://doc.spip.org/@statistiques_config
@@ -314,7 +313,7 @@ echo afficher_choix('activer_statistiques', $activer_statistiques,
 
 	fin_cadre_trait_couleur();
 	
-	echo "<p>";
+	echo "<br />";
 }
 
 // http://doc.spip.org/@notification_config
@@ -339,7 +338,7 @@ function notification_config()
 
 	fin_cadre_trait_couleur();
 
-	echo "<p>";
+	echo "<br />";
 }
 
 // http://doc.spip.org/@versions_config
@@ -364,7 +363,7 @@ function versions_config()
 	
 	fin_cadre_trait_couleur();
 
-	echo "<p>";
+	echo "<br />";
 }
 
 
@@ -395,7 +394,7 @@ function correcteur_config()
 	
 	fin_cadre_trait_couleur();
 
-	echo "<p>";
+	echo "<br />";
 }
 
 // http://doc.spip.org/@previsu_config
@@ -425,7 +424,7 @@ function previsu_config()
 	
 fin_cadre_trait_couleur();
 
-	echo "<p>";
+	echo "<br />";
 }
 
 // http://doc.spip.org/@proxy_config
@@ -443,7 +442,7 @@ function proxy_config()
 	}
 
 	echo "<div class='verdana2'>";
-	echo _T('texte_proxy');
+	echo propre(_T('texte_proxy'));
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
@@ -527,7 +526,7 @@ function htaccess_config()
 	
 	fin_cadre_trait_couleur();
 
-	echo "<p>";
+	echo "<br />";
 }
 
 ?>
