@@ -141,7 +141,7 @@ function alertes_auteur($id_auteur) {
 // http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes($id_auteur)
 {
-	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND en_ligne>DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).",INTERVAL 15 MINUTE) AND " . sql_in('statut', array('1comite', '0minirezo')));
+	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND " . sql_date_proche('en_ligne', -15, 'MINUTE') . " AND " . sql_in('statut', array('1comite', '0minirezo')));
 
 	if (!$result) return '';
 	$formater_auteur = charger_fonction('formater_auteur', 'inc');

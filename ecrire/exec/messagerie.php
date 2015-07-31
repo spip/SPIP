@@ -67,13 +67,13 @@ echo fin_cadre_relief(true);
 
  $messages_vus = array();
 
- echo afficher_ses_messages('<b>' . _T('infos_vos_pense_bete') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true,'pense-bete');
+ echo afficher_ses_messages('<b>' . _T('infos_vos_pense_bete') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (" . sql_date_proche('date_fin', -1, 'DAY') . " OR rv != 'oui')", $messages_vus, false, true,'pense-bete');
 
 
  echo afficher_ses_messages('<b>' . _T('info_nouveaux_message') . '</b>', ", spip_auteurs_messages AS A", "A.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND A.id_message=M.id_message", $messages_vus,  true, true,'message');
 
 
- echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS A", "A.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND A.id_message=M.id_message AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false,'message');
+ echo afficher_ses_messages('<b>' . _T('info_discussion_cours') . '</b>', ", spip_auteurs_messages AS A", "A.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND A.id_message=M.id_message AND (" . sql_date_proche('date_fin', -1, 'DAY') . "  OR rv != 'oui')",  $messages_vus, true, false,'message');
 
 
 // Afficher le lien RSS
@@ -114,7 +114,7 @@ echo bouton_spip_rss('messagerie', array('id_auteur' => $connect_id_auteur));
 
  echo afficher_ses_messages('<b>' . _T('info_pense_bete_ancien') . '</b>', '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false);
 
- echo afficher_ses_messages('<b>' . _T('info_tous_redacteurs') . '</b>', '', "statut='publie' AND type='affich' AND (date_fin > DATE_SUB(".sql_quote(date('Y-m-d H:i:s')).", INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, false, false);
+ echo afficher_ses_messages('<b>' . _T('info_tous_redacteurs') . '</b>', '', "statut='publie' AND type='affich' AND (" . sql_date_proche('date_fin', -1, 'DAY') . " OR rv != 'oui')",  $messages_vus, false, false);
 
 echo fin_gauche(), fin_page();
 

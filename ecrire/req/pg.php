@@ -74,6 +74,7 @@ $GLOBALS['spip_pg_functions_1'] = array(
 		'create' => 'spip_pg_create',
 		'create_base' => 'spip_pg_create_base',
 		'create_view' => 'spip_pg_create_view',
+		'date_proche' => 'spip_pg_date_proche',
 		'delete' => 'spip_pg_delete',
 		'drop_table' => 'spip_pg_drop_table',
 		'drop_view' => 'spip_pg_drop_view',
@@ -997,6 +998,21 @@ function spip_pg_hex($v)
 function spip_pg_quote($v, $type='')
 {
 	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+}
+
+function spip_pg_date_proche($champ, $interval, $unite)
+{
+	return '('
+	. $champ
+        . (($interval <= 0) ? '>' : '<')
+        . (($interval <= 0) ? 'DATE_SUB' : 'DATE_ADD')
+	. '('
+	. sql_quote(date('Y-m-d H:i:s'))
+	. ', INTERVAL '
+	. (($interval > 0) ? $interval : (0-$interval))
+	. ' '
+	. $unite
+	. '))';
 }
 
 // http://doc.spip.org/@spip_pg_in
