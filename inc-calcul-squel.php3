@@ -409,15 +409,24 @@ function parser_boucle($texte, $id_parent) {
 							$col_table = '';
 						}
 						else if ($col == 'age') {
-							$col = "(LEAST((TO_DAYS(now())-TO_DAYS($table.$col_date)),(DAYOFMONTH(now())-DAYOFMONTH($table.$col_date))+30.4368*(MONTH(now())-MONTH($table.$col_date))+365.2422*(YEAR(now())-YEAR($table.$col_date))))";
+							$col = "(LEAST((UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP($table.$col_date))/86400, TO_DAYS(now())-TO_DAYS($table.$col_date), DAYOFMONTH(now())-DAYOFMONTH($table.$col_date)+30.4368*(MONTH(now())-MONTH($table.$col_date))+365.2422*(YEAR(now())-YEAR($table.$col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_relatif') {
-							$col = "(LEAST((TO_DAYS('(\$date)')-TO_DAYS($table.$col_date)),(DAYOFMONTH('(\$date)')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('(\$date)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date)')-YEAR($table.$col_date))))";
+							$col = "LEAST((UNIX_TIMESTAMP('(\$date)')-UNIX_TIMESTAMP($table.$col_date))/86400,
+TO_DAYS('(\$date)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$date)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$date)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date)')-YEAR($table.$col_date)))";
 							$col_table = '';
 						}
-						else if ($col == 'age_mail_nouv') {
-							$col = "(LEAST((TO_DAYS('(\$date_nouv)')-TO_DAYS($table.$col_date)),(DAYOFMONTH('(\$date_nouv)')-DAYOFMONTH($table.$col_date))+30.4368*(MONTH('(\$date_nouv)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date_nouv)')-YEAR($table.$col_date))))";
+						else if ($col == 'jour_relatif') {
+							$col = "LEAST(TO_DAYS('(\$date)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$date)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$date)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date)')-YEAR($table.$col_date)))";
+							$col_table = '';
+						}
+						else if ($col == 'mois_relatif') {
+							$col = "(MONTH('(\$date)')-MONTH($table.$col_date)+12*(YEAR('(\$date)')-YEAR($table.$col_date)))";
+							$col_table = '';
+						}
+						else if ($col == 'annee_relatif') {
+							$col = "YEAR('(\$date)')-YEAR($table.$col_date)";
 							$col_table = '';
 						}
 						else if ($col == 'age_redac') {
@@ -823,7 +832,7 @@ function parser($texte) {
 		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE',
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_MAIL_NOUV', 'INCLUS',
+		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP',
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
@@ -880,7 +889,7 @@ function parser($texte) {
 	}
 
 	// Dates : ajouter le vidage des dates egales a 00-00-0000
-	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_MAIL_NOUV');
+	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'vider_date';
@@ -1344,7 +1353,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$code = "propre('- ')";
 		break;
 
-	case 'DATE_MAIL_NOUV':
+	case 'DATE_NOUVEAUTES':
 		$milieu = "if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv'))
 			\$$nom_var = date('Y-m-d H:i:s', lire_meta('majnouv'));
 		else
@@ -1721,7 +1730,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 
 	$texte .= "function $func".'($contexte) {
-	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $syn_rubriques, $rubriques_publiques, $id_article_img, $date_nouv;
+	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $syn_rubriques, $rubriques_publiques, $id_article_img;
 
 	';
 
