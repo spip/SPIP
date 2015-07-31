@@ -78,16 +78,23 @@ else {
 	}
 
 	include_local ("inc-public-global.php3");
+
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
 
-	// Afficher la page ; le cas PHP est assez rigolo
-	// avec le traitement d'erreurs
+	// Faut-il preparer les boutons d'admin ?
+	if ($affiche_boutons_admin = (!$flag_preserver
+	AND $HTTP_COOKIE_VARS['spip_admin'])) {
+		include_local('inc-admin.php3');
+	}
+
+	// Afficher la page ; le cas PHP est assez rigolo avec le traitement
+	// d'erreurs
 	if ($page['process_ins'] == 'php') {
 
 		// Envoyer le debugguer ?
 		afficher_page_si_demande_admin ('page', $page['texte'],
-		_L("Fond : ").$fond.".html ; ".($page['cache'] ?
+		_L("Fond : ").$page['squelette']." ; ".($page['cache'] ?
 		"fichier produit : ".$page['cache'] : "pas de fichier produit
 		(\$delais=0)"));
 
@@ -99,14 +106,15 @@ else {
 		// dans le eval : on envoie le bouton debug, et on le supprime
 		// de l'autre cote ; de cette facon, si on traverse sans encombre,
 		// on est propre, et sinon on a le bouton
-		if ($affiche_boutons_admin = (!$GLOBALS['flag_preserver']
-		AND $GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
-			include_local('inc-admin.php3');
+		if ($affiche_boutons_admin) {
 
 			// recuperer les parse errors etc.
-			$tableau_des_erreurs = array();
-			if (function_exists('set_error_handler'))
-				set_error_handler('spip_error_handler');
+			if ($auteur_session['statut'] == '0minirezo') {
+				$tableau_des_erreurs = array();
+				$page_principale = $page;
+				if (function_exists('set_error_handler'))
+					set_error_handler('spip_error_handler');
+			}
 
 			if ($flag_ob)
 				echo afficher_boutons_admin('', true).'<!-- @@START@@ -->';
@@ -118,32 +126,27 @@ else {
 		$s = eval('?' . '>' . $page['texte']); // page 'php'
 
 		// en cas d'erreur afficher un message + demander les boutons de debug
-		if ($affiche_boutons_admin AND ($s === false
-		OR count($tableau_des_erreurs) > 0)) {
-			echo "<div style='position: absolute; z-index: 1000; background-color: pink;'><hr /><h2>".
-			_L("Erreur dans le squelette")." $fond.html</h2>";
-			echo "<p>"._L("php a rencontr&eacute; les erreurs suivantes :")."<code><ul>";
-			foreach ($tableau_des_erreurs as $err) {
-				echo "<li>ligne $err[2]: $err[1] ($err[0])</li>\n";
-			}
-			if ($s === false)
-				echo "<li>Erreur de compilation</li>\n";
-			echo "</ul></code></div>";
-			$GLOBALS['bouton_admin_debug'] = true;
+		if ($affiche_boutons_admin
+		AND $auteur_session['statut'] == '0minirezo') {
+			if (function_exists('restore_error_handler'))
+				restore_error_handler();
+			if ($s === false
+			OR count($tableau_des_erreurs) > 0)
+				affiche_erreurs_execution_page ();
 		}
 
 		// supprimer les boutons de debug type "FATAL"
 		if ($affiche_boutons_admin AND $flag_ob) {
 			$contenu = ob_get_contents();
 			ob_end_clean();
-			$contenu = preg_replace('/^(.*?)<!-- @@START@@ -->/ms', '', $contenu);
+			$contenu = preg_replace('/^(.*?)<!-- @@START@@ -->/ms', '',
+				$contenu);
 			ob_start();
 			echo $contenu;
 		}
 
 	} else
 		echo $page['texte']; // page tout 'html'
-
 
 	//
 	// Et l'envoyer si on est bufferise (ce qu'il faut souhaiter)

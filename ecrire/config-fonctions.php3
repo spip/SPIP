@@ -262,7 +262,6 @@ echo "<p>";
 
 if ($flag_revisions AND $options == "avancees") {
 
-
 debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_titre'));
 	$articles_versions = lire_meta("articles_versions");
 
@@ -282,6 +281,34 @@ fin_cadre_trait_couleur();
 
 	echo "<p>";
 }
+
+//
+// Previsualisation sur le site public
+//
+
+debut_cadre_trait_couleur("naviguer-site.gif", false, "", _L('Pr&eacute;visualisation'));
+	$preview = lire_meta("preview");
+	# non = personne n'est autorise a previsualiser (defaut)
+	# oui = les admins
+	# 1comite = admins et redacteurs
+
+	echo "<div class='verdana2'>";
+	echo _L('Il est possible de pr&eacute;visualiser le site comme si tous les articles et les br&egrave;ves (ayant au moins le statut &laquo;&nbsp;propos&eacute;&nbsp;&raquo;) &eacute;taient publi&eacute;s. Cette possibilit&eacute; doit-elle &ecirc;tre ouverte aux administrateurs seulement, &agrave; tous les r&eacute;dacteurs, ou &agrave; personne&nbsp;?');
+	echo "</div>";
+
+	echo "<div class='verdana2'>";
+	afficher_choix('preview', $preview,
+		array('oui' => _L('Seuls les administrateurs peuvent pr&eacute;visualiser le site'),
+			'1comite' => _L('Tous les r&eacute;dacteurs peuvent pr&eacute;visualiser le site'),
+			'non' => _L('La pr&eacute;visualisation est totalement d&eacute;sactiv&eacute;e')
+		)
+	);
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+fin_cadre_trait_couleur();
+
+	echo "<p>";
 
 
 

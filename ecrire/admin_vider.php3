@@ -63,6 +63,43 @@ echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='$hash'>";
 echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
 echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='admin_vider.php3'>";
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_vider_cache')."'></FORM></DIV>";
+echo "</TD></TR>";
+echo "</TABLE>";
+
+
+//
+// Quota et taille du cache
+//
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
+echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
+echo _L('Taille du r&eacute;pertoire cache')."</FONT></B></TD></TR>";
+
+
+echo "<TR><TD class='serif'>";
+
+$row = spip_fetch_array(spip_query("SELECT SUM(taille) FROM spip_caches"));
+if ($row[0]>0)
+	$info = _L("La taille du cache est actuellement de "
+	.taille_en_octets($row[0]).".");
+else
+	$info = _L('Le cache est vide.');
+
+echo "<p align='justify'><b>$info</b></p>\n";
+
+echo "\n<p align='justify'>";
+if ($quota_cache) {
+	echo _L('SPIP essaie de limiter la taille du r&eacute;pertoire
+	<code>CACHE/</code> de ce site &agrave; environ')
+	.' <b>' .taille_en_octets($quota_cache*1024*1024).'</b> '._L('de donn&eacute;es.');
+} else {
+	echo _L('Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.');
+}
+
+	echo "\n";
+	echo _L('Les fichiers du cache sont enregistr&eacute;s en mode '
+	.($compresser_cache?'':'non ').'compress&eacute;.');
+	echo ' '._L('(Ces param&egrave;tres sont modifiables par l\'administrateur du site.)').'</p>';
 
 echo "</TD></TR>";
 echo "</TABLE>";
@@ -74,8 +111,8 @@ echo "</TABLE>";
 //
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('texte_effacer_donnees_indexation')."</FONT></B></TD></TR>";
 
 echo "<TR><TD class='serif'>";

@@ -2996,4 +2996,53 @@ function install_fin_html() {
 	';
 }
 
+// Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)
+function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
+	global $connect_statut;
+
+	$en_ligne = false;
+	if (lire_meta('preview') != 'non'
+		AND ($connect_statut == '0minirezo'
+			OR (lire_meta('preview')=='1comite' AND $connect_statut=='1comite')
+		))
+		$preview = 'preview';
+
+	switch ($type) {
+		case 'article':
+			if ($statut == "publie" AND lire_meta("post_dates") == 'non'
+			AND spip_fetch_array(spip_query("SELECT id_article
+			FROM spip_articles WHERE id_article=$id AND date<=NOW()")))
+				$statut = 'prop';
+			if ($statut == 'publie')
+				$en_ligne = 'recalcul';
+			else
+				$en_ligne = $preview;
+			break;
+		case 'rubrique':
+			if ($id > 0)
+				if ($statut == 'publie')
+					$en_ligne = 'recalcul';
+				else
+					$en_ligne = $preview;
+			break;
+		case 'breve':
+			if ($statut == 'publie')
+				$en_ligne = 'recalcul';
+			else if ($statut == 'prop')
+				$en_ligne = $preview;
+			break;
+		case 'mot':
+			$en_ligne = 'recalcul';
+			break;
+	}
+
+	if ($en_ligne == 'recalcul')
+		$message = _T('icone_voir_en_ligne');
+	else if ($en_ligne == 'preview')
+		$message = _L('Pr&eacute;visualiser');
+
+	if ($en_ligne)
+		icone_horizontale($message, "../spip_redirect.php3?id_$type=$id&$en_ligne=oui", $image, "rien.gif");
+}
+
 ?>

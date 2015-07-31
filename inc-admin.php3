@@ -37,6 +37,7 @@ function boutons_admin_debug($forcer_debug = false) {
 
 function afficher_boutons_admin($pop, $forcer_debug = false) {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
+	global $var_preview;
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_lang.php3");
 
@@ -74,26 +75,32 @@ function afficher_boutons_admin($pop, $forcer_debug = false) {
 		$ret .= bouton_admin(_T('admin_modifier_auteur')." ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
 
-	// Bouton Recalculer
-	$link = $GLOBALS['clean_link'];
-	$link->addVar('recalcul', 'oui');
-	$link->delVar('var_afficher_debug');
-	$lien = $link->getUrl();
-	$ret .= bouton_admin(_T('admin_recalculer').$pop, $lien);
+	// Si on est en preview rien d'autre ne fonctionne
+	if (!$var_preview) {
 
-	// Bouton statistiques
-	if (lire_meta("activer_statistiques") != "non" AND $id_article
-	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
-		if (spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article =".intval($id_article)))) {
-			include_local ("inc-stats.php3");
-			$ret .= bouton_admin(_T('stats_visites_et_popularite',
-			afficher_raccourci_stats($id_article)),
-			"./ecrire/statistiques_visites.php3?id_article=$id_article");
+		// Bouton Recalculer
+		$link = $GLOBALS['clean_link'];
+		$link->addVar('recalcul', 'oui');
+		$link->delVar('var_afficher_debug');
+		$lien = $link->getUrl();
+		$ret .= bouton_admin(_T('admin_recalculer').$pop, $lien);
+
+		// Bouton statistiques
+		if (lire_meta("activer_statistiques") != "non" AND $id_article
+		AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
+			if (spip_fetch_array(spip_query("SELECT id_article
+			FROM spip_articles WHERE statut='publie'
+			AND id_article =".intval($id_article)))) {
+				include_local ("inc-stats.php3");
+				$ret .= bouton_admin(_T('stats_visites_et_popularite',
+				afficher_raccourci_stats($id_article)),
+				"./ecrire/statistiques_visites.php3?id_article=$id_article");
+			}
 		}
-	}
 
-	// Boutons debug
-	$ret .= boutons_admin_debug($forcer_debug);
+		// Boutons debug
+		$ret .= boutons_admin_debug($forcer_debug);
+	}
 
 	$ret .= "</ul></div></div></div>";
 
@@ -140,5 +147,48 @@ function page_debug($type,$texte,$fichier) {
 	echo "</body></html>\n";
 }
 
+//
+// Leve un drapeau si le squelette donne une page generant de graves erreurs php
+//
+function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
+	global $tableau_des_erreurs, $page;
+
+	// On ne veut intercepter que les erreurs des $page['texte'], pas
+	// celles qui peuvent se trouver dans SPIP: $filename = inc-public + eval
+	if (($errno & (E_ERROR | E_WARNING | E_PARSE))
+	AND strpos($filename, 'inc-public.php3(')) {
+		$tableau = explode("\n", $page['texte']);
+		$format = "%0".strlen(count($tableau))."d";
+		for($i=max(1,$linenum-3); $i<=min(count($tableau),$linenum+3); $i++) {
+			$l = propre("<code>".sprintf($format, $i).'. '.$tableau[$i-1]."</code>");
+			if ($i == $linenum) $l = "<b><font color='red'>$l</font></b>";
+			$contexte .= "<br />".$l;
+		}
+
+		$tableau_des_erreurs[]
+		= array($errno, $errmsg, $linenum, $page['squelette'], $contexte);
+	}
+}
+
+function affiche_erreurs_execution_page() {
+	global $tableau_des_erreurs, $page_principale, $s;
+	echo "<div style='position: absolute; z-index: 1000;
+	background-color: pink;'><h2>".
+	_L("Erreur lors de l'ex&eacute;cution du squelette")."</h2>";
+	echo "<p>"._L("php a rencontr&eacute; les
+	erreurs suivantes :")."<code><ul>";
+	foreach ($tableau_des_erreurs as $err) {
+		$fichier_inclus = ($err[3] <> $page_principale['squelette'])
+		? ", fichier inclus $err[3].html" : '';
+		echo "<li>ligne $err[2]$fichier_inclus: $err[1]
+		($err[0])";
+		echo "<small>$err[4]</small>";
+		echo "</li>\n";
+	}
+	if ($s === false)
+		echo "<li>Erreur de compilation</li>\n";
+	echo "</ul></code></div>";
+	$GLOBALS['bouton_admin_debug'] = true;
+}
 
 ?>

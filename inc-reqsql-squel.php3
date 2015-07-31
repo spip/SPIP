@@ -19,13 +19,18 @@ function calculer_requete(&$boucle) {
     $boucle->from[] =  "articles AS $id_table";
     if (lire_meta("post_dates") == 'non') {
       $boucle->where[] = "$id_table.date < NOW()";}
-    $boucle->where[] = "$id_table.statut='publie'";
+
+	if (!$GLOBALS['var_preview'])
+		$boucle->where[] = "$id_table.statut='publie'";
+	else
+		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
     break;
 
   case 'auteurs':
     $boucle->from[] =  "auteurs AS $id_table";
     // Si pas de lien avec un article, selectionner
     // uniquement les auteurs d'un article publie
+	if (!$GLOBALS['var_preview'])
     if (!$boucle->lien AND !$boucle->tout) {
       $boucle->from[] =  "auteurs_articles AS lien";
       $boucle->from[] =  "articles AS articles";
@@ -40,8 +45,11 @@ function calculer_requete(&$boucle) {
     
   case 'breves':
     $boucle->from[] =  "breves AS $id_table";
-    $boucle->where[] = "$id_table.statut='publie'";
-    break;
+	if (!$GLOBALS['var_preview'])
+		$boucle->where[] = "$id_table.statut='publie'";
+	else
+		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
+	break;
     
   case 'forums':
     $boucle->from[] =  "forum AS $id_table";
@@ -84,6 +92,7 @@ function calculer_requete(&$boucle) {
     
   case 'rubriques':
     $boucle->from[] =  "rubriques AS $id_table";
+	if (!$GLOBALS['var_preview'])
     if (!$boucle->tout) $boucle->where[] = "$id_table.statut='publie'";
     break;
     

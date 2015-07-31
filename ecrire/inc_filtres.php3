@@ -193,11 +193,19 @@ function attribut_html($texte) {
 }
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
+// + hack pour rester en mode 'preview' dans l'espace public
 function vider_url($url) {
-	if (eregi("^(http:?/?/?|mailto:?)$", trim($url)))
-		return false;
+	global $flag_ecrire, $var_preview;
+
+	$url = trim($url);
+	if (eregi("^(http:?/?/?|mailto:?)$", $url))
+		return '';
 	else
-		return $url;
+		if (!$flag_ecrire AND $var_preview AND !eregi("[a-z]+://", $url))
+			$url .= ((strpos($url, '?') !== false) ? '&':'?')
+			. "var_preview=oui";
+
+	return $url;
 }
 
 // Extraire une date de n'importe quel champ (a completer...)

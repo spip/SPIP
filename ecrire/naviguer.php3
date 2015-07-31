@@ -283,9 +283,7 @@ if ($coll > 0) {
 	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$coll</B></FONT>";
 	echo "</CENTER>";
 
-	if ($coll > 0 AND $statut == 'publie') {
-		icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_rubrique=$coll&recalcul=oui", "racine-24.gif", "rien.gif");
-	}
+	voir_en_ligne ('rubrique', $coll, $statut);
 
 	fin_boite_info();
 }

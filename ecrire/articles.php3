@@ -372,24 +372,11 @@ debut_boite_info();
 
 echo "<div align='center'>\n";
 
-if ($statut_article == "publie") {
-	$post_dates = lire_meta("post_dates");
-	$voir_en_ligne = true;
-	if ($post_dates == "non") {
-		$query = "SELECT id_article FROM spip_articles WHERE id_article=$id_article AND date<=NOW()";
-		$result = spip_query($query);
-		if (!spip_num_rows($result)) {
-			$voir_en_ligne = false;
-		}
-	}
-}
 
 echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
 echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b></font>\n";
 
-if ($voir_en_ligne) {
-	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.gif", "rien.gif");
-}
+voir_en_ligne ('article', $id_article, $statut_article);
 
 if ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
 	$query = "SELECT count(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')";

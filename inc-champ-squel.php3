@@ -58,7 +58,7 @@ function champs_traitements ($nom_champ) {
 		'MESSAGE' => 'traiter_raccourcis(%s)',
 		'NOM_SITE_SPIP' => 'typo(%s)',
 		'NOM' => 'typo(%s)',
-		'PARAMETRES_FORUM' => 'htmlspecialchars(vider_url(%s))',
+		'PARAMETRES_FORUM' => 'htmlspecialchars(%s)',
 		'PS' => 'traiter_raccourcis(%s)',
 		'SOUSTITRE' => 'typo(%s)',
 		'SURTITRE' => 'typo(%s)',

@@ -87,7 +87,8 @@ function charger_squelette ($squelette) {
 		eval('?'.'>'.$skel_compile);
 
 		if (function_exists($nom)) {
-			ecrire_fichier ($phpfile, $skel_compile);
+			if (!$GLOBALS['var_preview'])
+				ecrire_fichier ($phpfile, $skel_compile);
 			return $nom;
 		}
 		else {
@@ -165,6 +166,9 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 			'documents' => '0'
 		)
 	);
+
+	// Memoriser le nom du squelette utilise (pour le debuggueur)
+	$page['squelette'] = $skel;
 
 	// Nettoyer le resultat si on est fou de XML
 	if ($GLOBALS['xhtml']) {
@@ -293,7 +297,8 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 
 	// Enregistrer le fichier cache
 	if ($delais>0)
-		ecrire_fichier($chemin_cache, $signal.$page['texte']);
+		if (!$GLOBALS['var_preview'])
+			ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;
 }
