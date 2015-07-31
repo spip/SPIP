@@ -420,10 +420,14 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
 		$col_id_as = primary_index_table($table_associe);
 		if (is_array($rel = $tables_jointures[$table])) {
 			foreach($rel as $joint) {
-				if (@in_array($col_id_as, $tables_auxiliaires['spip_' . $joint]['key']))
-				{$table_rel = $joint; break;}
-				if (@in_array($col_id_as, $tables_principales['spip_' . $joint]['key']))
+				if (@in_array($col_id_as, @array_keys($tables_auxiliaires['spip_' . $joint]['field'])))
 					{$table_rel = $joint; break;}
+				if (@in_array($col_id_as, @array_keys($tables_principales['spip_' . $joint]['field'])))
+					{$table_rel = $joint; break;}
+			}
+			if (!$table_rel){
+				spip_log("Indexation de $table echouee : element associe $table_associe, jointure sur $col_id_as introuvable");
+				return;
 			}
 
 			$select="assoc.$col_id_as";
@@ -432,7 +436,7 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
 			$r = spip_query("SELECT $select FROM $table_associe AS assoc,	spip_$table_rel AS lien	WHERE lien.$col_id=$id_objet AND assoc.$col_id_as=lien.$col_id_as");
 
 			while ($row = spip_fetch_array($r)) {
-	      indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
+				indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
 			}
 		}
  	}
