@@ -138,8 +138,11 @@ function genie_queue_watch_dist(){
 	if ($deja_la) return; // re-entrance si l'insertion des jobs echoue (pas de table spip_jobs a l'upgrade par exemple)
 	$deja_la = true;
 	$taches = taches_generales();
+	$programmees = sql_allfetsel('fonction','spip_jobs',sql_in('fonction',array_keys($taches)));
+	$programmees = array_map('reset',$programmees);
 	foreach($taches as $tache=>$periode){
-		queue_genie_replan_job($tache,$periode,time()-round(rand(1,$periode)));
+		if (!in_array($tache,$programmees))
+			queue_genie_replan_job($tache,$periode,time()-round(rand(1,$periode)),0);
 	}
 	$deja_la = false;
 	return 1;
@@ -156,25 +159,29 @@ function genie_queue_watch_dist(){
  *   date du dernier appel (timestamp)
  * @param int $time
  *   date de replanification
+ *   si null calculee automaitquement a partir de $last et $period
+ *   si 0  = asap mais on n'insere pas le job si deja en cours d'execution
  * @param int $priority
  *   priorite
  * @return void
  */
-function queue_genie_replan_job($function,$period,$last=null,$time=0, $priority=0){
-		if (!$time){
-			if (!is_null($last))
-				$time = $last+$period;
-			else
-				$time=time();
-		}
-		if (is_null($last))
-			$last = $time-$period;
-		spip_log("replan_job $function $period $last $time $priority",'queue');
-		include_spip('inc/queue');
-		// on replanifie un job cron
-		// uniquement si il n'y en a pas deja un avec le meme nom
-		// independament de l'argument
-		queue_add_job($function, _T('tache_cron_secondes', array('function'=>$function, 'nb'=>$period)), array($last), "genie/", 'function_only', $time, $priority);
+function queue_genie_replan_job($function,$period,$last=0,$time=null, $priority=0){
+	static $done = array();
+	if (isset($done[$function])) return;
+	$done[$function] = true;
+	if (is_null($time)){
+		$time=time();
+		if ($last)
+			$time = max($last+$period,$time);
+	}
+	if (!$last)
+		$last = $time-$period;
+	spip_log("replan_job $function $period $last $time $priority",'queue');
+	include_spip('inc/queue');
+	// on replanifie un job cron
+	// uniquement si il n'y en a pas deja un avec le meme nom
+	// independament de l'argument
+	queue_add_job($function, _T('tache_cron_secondes', array('function'=>$function, 'nb'=>$period)), array($last), "genie/", 'function_only', $time, $priority);
 }
 
 
