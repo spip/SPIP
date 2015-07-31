@@ -162,11 +162,14 @@ function supprimer_fichier($fichier, $lock=true) {
 	}
 	
 	// supprimer
-	unlink($fichier);
+	@unlink($fichier);
 }
 // Supprimer brutalement, si le fichier existe
 function spip_unlink($fichier) {
-	supprimer_fichier($fichier,false);
+	if (is_dir($fichier))
+		@rmdir($fichier);
+	else 
+		supprimer_fichier($fichier,false);
 }
 
 //
