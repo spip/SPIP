@@ -267,7 +267,10 @@ F.url_site,
 F.statut,
 F.ip,
 F.id_auteur
-$query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
+$query_forum ORDER BY F.date_heure DESC" .
+# LIMIT $limitnb OFFSET $limitdeb" #PG
+" LIMIT $limitnb, $limitdeb"
+);
 
   debut_gauche();
   debut_boite_info();

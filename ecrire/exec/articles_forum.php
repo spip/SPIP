@@ -85,9 +85,10 @@ $enplus = 200;	// intervalle affiche autour du debut
 $limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
 $limitnb = $debut + $enplus - $limitdeb;
 
-$query_forum = "SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop') LIMIT  $limitnb OFFSET $limitdeb";
-$result_forum = spip_query($query_forum);
-
+$result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" .
+#	" LIMIT  $limitnb OFFSET $limitdeb" # PG
+	" LIMIT $limitdeb, $limitnb"
+			   ); 
 
 $i = $limitdeb;
 if ($i>0)
