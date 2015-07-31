@@ -41,8 +41,8 @@ function exec_convert_sql_utf8_dist() {
 		$charset_supporte = false;
 		$utf8_supporte = false;	
 		// verifier que mysql gere le charset courant pour effectuer les conversions 
-		include_spip('base/db_mysql');
-		if ($c = spip_mysql_character_set($charset_spip)){
+		include_spip('base/abstract_sql');
+		if ($c = spip_sql_character_set($charset_spip)){
 			$sql_charset = $c['charset'];
 			$sql_collation = $c['collation'];
 			$charset_supporte = true;

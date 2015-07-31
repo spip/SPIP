@@ -61,6 +61,11 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='') {
 	return $ok ? 'spip_mysql_query' : false;
 }
 
+function spip_mysql_set_connect_charset($charset){
+	#spip_log("changement de charset sql : "."SET NAMES "._q($charset));
+	return mysql_query("SET NAMES "._q($charset));
+}
+
 // obsolete, ne plus utiliser
 // http://doc.spip.org/@spip_query_db
 function spip_query_db($query) {
@@ -252,30 +257,6 @@ function traite_query($query) {
 // cles: type-de-cle => champ(s)
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
 // Le nom des caches doit etre inferieur a 64 caracteres
-
-// http://doc.spip.org/@spip_mysql_character_set
-function spip_mysql_character_set($charset){
-	$sql_charset_coll = array(
-	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),
-	'cp1251'=>array('charset'=>'cp1251','collation'=>'cp1251_general_ci'),
-	'cp1256'=>array('charset'=>'cp1256','collation'=>'cp1256_general_ci'),
-	
-	'iso-8859-1'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-	//'iso-8859-6'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-	'iso-8859-9'=>array('charset'=>'latin5','collation'=>'latin5_turkish_ci'),
-	//'iso-8859-15'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
-	
-	'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci')
-	);
-	if (isset($sql_charset_coll[$charset])){
-		// verifier que le character set vise est bien supporte par mysql
-		$res = mysql_query("SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
-		if ($res && $row = mysql_fetch_assoc($res))
-			return $sql_charset_coll[$charset];
-	}
-
-	return false;
-}
 
 
 // http://doc.spip.org/@spip_mysql_selectdb

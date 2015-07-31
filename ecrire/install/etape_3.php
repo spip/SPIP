@@ -82,7 +82,8 @@ function install_bases(){
 
 	if ($nouvelle) {
 		// mettre les nouvelles install en utf-8 si mysql le supporte
-		if ($server_db == 'mysql' AND $charset = spip_mysql_character_set('utf-8')){
+		include_spip('base/abstract_sql');
+		if ($server_db == 'mysql' AND $charset = spip_sql_character_set('utf-8')){
 			$GLOBALS['meta']['charset_sql_base'] = $charset['charset'];
 			$GLOBALS['meta']['charset_collation_sql_base'] = $charset['collation'];
 			$GLOBALS['meta']['charset_sql_connexion'] = $charset['charset'];

@@ -145,7 +145,7 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 				}
 			}
 			else{
-			  spip_abstract_insert($table, join(',',array_keys($values)), join(',',array_map('_q', $values)));
+			  spip_abstract_insert($table, "(".join(',',array_keys($values)).")", "(".join(',',array_map('_q', $values)).")");
 			}
 		}
 	}

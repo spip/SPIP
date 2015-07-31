@@ -41,6 +41,11 @@ function spip_abstract_serveur($ins_sql, $serveur) {
 	return 'spip_log';
 }
 
+function spip_sql_set_connect_charset($charset,$serveur=''){
+	$f = spip_abstract_serveur('set_connect_charset', $serveur);
+	return $f($charset);
+}
+
 // Cette fonction est systematiquement appelee par les squelettes
 // pour constuire une requete SQL de type "lecture" (SELECT) a partir
 // de chaque boucle.
@@ -279,6 +284,30 @@ function test_sql_int($type)
 	return (strpos($type, 'bigint') === 0
 	OR strpos($type, 'int') === 0
 	OR strpos($type, 'tinyint') === 0);
+}
+
+// donner le character set sql fonction de celui utilise par spip
+function spip_sql_character_set($charset){
+	$sql_charset_coll = array(
+	'cp1250'=>array('charset'=>'cp1250','collation'=>'cp1250_general_ci'),
+	'cp1251'=>array('charset'=>'cp1251','collation'=>'cp1251_general_ci'),
+	'cp1256'=>array('charset'=>'cp1256','collation'=>'cp1256_general_ci'),
+	
+	'iso-8859-1'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
+	//'iso-8859-6'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
+	'iso-8859-9'=>array('charset'=>'latin5','collation'=>'latin5_turkish_ci'),
+	//'iso-8859-15'=>array('charset'=>'latin1','collation'=>'latin1_swedish_ci'),
+	
+	'utf-8'=>array('charset'=>'utf8','collation'=>'utf8_general_ci')
+	);
+	if (isset($sql_charset_coll[$charset])){
+		// verifier que le character set vise est bien supporte par mysql
+		$res = mysql_query("SHOW CHARACTER SET LIKE "._q($sql_charset_coll[$charset]['charset']));
+		if ($res && $row = mysql_fetch_assoc($res))
+			return $sql_charset_coll[$charset];
+	}
+
+	return false;
 }
 
 ?>

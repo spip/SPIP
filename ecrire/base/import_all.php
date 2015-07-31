@@ -110,6 +110,7 @@ function import_all_fin($request) {
 	effacer_meta('version_archive_restauration');
 	effacer_meta('tag_archive_restauration');
 	effacer_meta('restauration_session_id');
+	effacer_meta('restauration_charset_sql_connexion');
 	ecrire_metas();
 	if ($request['insertion'] == 'passe2') 
 		spip_query("DROP TABLE spip_translate");

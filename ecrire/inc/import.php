@@ -131,23 +131,6 @@ function import_debut($f, $gz='fread') {
 			return $r;
 		}
 	}
-	// basculer la connexion sql dans le bon charset si on est pas
-	// dans le mode par defaut de mysql
-	// ou si le charset de la base est iso-xx
-	// (on ne peut garder une connexion utf dans ce cas)
-	if (isset($GLOBALS['meta']['charset_sql_connexion'])
-		OR (strncmp($charset,'iso-',3)==0)
-		){
-		include_spip('base/db_mysql');
-		if ($sql_char = spip_mysql_character_set($charset)){
-			$sql_char = $sql_char[0];
-			ecrire_meta('charset_sql_connexion',$sql_char);
-			ecrire_metas();
-			spip_query("SET NAMES "._q($sql_char));
-		}
-		else
-			spip_log("charset de restauration inconnu de sql : $charset");
-	}
 }
 
 // on conserve ce tableau pour faire des translations
@@ -263,7 +246,11 @@ function import_tables($request, $dir) {
 		$_fseek = ($gz=='gzread') ? 'gzseek' : 'fseek';
 		$_fseek($file, $abs_pos);
 	}
-
+	
+	// placer la connexion sql dans le bon charset
+	spip_log('meta restauration_charset_sql_connexion:'.$GLOBALS['meta']['restauration_charset_sql_connexion']);
+	if (isset($GLOBALS['meta']['restauration_charset_sql_connexion']))
+		spip_sql_set_connect_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
 
 	@define('_DEBUG_IMPORT',false);
 	if (_DEBUG_IMPORT)
@@ -314,9 +301,29 @@ function import_init_meta($tag, $atts, $charset, $request)
 	ecrire_meta('attributs_archive_restauration', serialize($atts),'non');
 	ecrire_meta('version_archive_restauration', $version_archive,'non');
 	ecrire_meta('tag_archive_restauration', $tag,'non');
-	if ( $i = $request['insertion'])
-		ecrire_meta('charset_insertion', $charset,'non');
-	else	ecrire_meta('charset_restauration', $charset,'non');
+
+	// trouver le charset de la connexion sql qu'il faut utiliser pour la restauration
+	// ou si le charset de la base est iso-xx
+	// (on ne peut garder une connexion utf dans ce cas)
+	// on laisse sql gerer la conversion de charset !
+	if (isset($GLOBALS['meta']['charset_sql_connexion'])
+		OR (strncmp($charset,'iso-',4)==0)
+		){
+		include_spip('base/abstract_sql');
+		if ($sql_char = spip_sql_character_set($charset)){
+			$sql_char = $sql_char['charset'];
+			ecrire_meta('restauration_charset_sql_connexion',$sql_char);
+			ecrire_metas();
+		}
+		else {
+			// faire la conversion de charset en php :(
+			effacer_meta('restauration_charset_sql_connexion'); # precaution
+			spip_log("charset de restauration inconnu de sql : $charset");
+			if ( $i = $request['insertion'])
+				ecrire_meta('charset_insertion', $charset,'non');
+			else	ecrire_meta('charset_restauration', $charset,'non');
+		}
+	}
 	ecrire_metas();
 	spip_log("Debut de l'importation (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
 	return $version_archive;
