@@ -18,10 +18,18 @@ include_spip('inc/barre');
 // http://doc.spip.org/@inc_forum_envoi_dist
 function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message, $texte, $modif_forum, $nom_site, $url_site) {
 
-	// trouver a quoi on repond
+	$ajax = _request('var_ajaxcharset');
 	$id_parent= intval($id_parent);
 	$id = intval($id);
-	$row = forum_envoi_parent($id_parent);
+	$row = sql_fetsel("*", "spip_forum", "id_forum=$id_parent");
+
+	// s'il existe, afficher le message auquel on repond
+	// (mais pas en Ajax, il est deja sur la page)
+	if (!$row)
+		$row = array('titre' =>'', 'texte' =>'', 'id_message' =>'');
+	elseif (!$ajax)
+		$row = forum_envoi_parent($row);
+	else $row['texte'] ='';
 
 	// apres le premier appel, afficher la saisie precedente
 	if ($modif_forum == "oui") {
@@ -42,7 +50,7 @@ function inc_forum_envoi_dist($id, $id_parent, $script, $statut, $titre_message,
 		} else 	$titre_message = _T('texte_nouveau_message');
 	}
 
-	$h = _request('var_ajaxcharset') ? '' : generer_url_ecrire($script, $retour);
+	$h = $ajax ? '' : generer_url_ecrire($script, $retour);
 
 	$form = forum_envoi_formulaire($id, $h, $statut, $texte, $titre_message, $nom_site, $url_site);
 
@@ -68,20 +76,15 @@ $form
 	. fin_cadre_formulaire(true);
 
 	if (_request('var_ajaxcharset'))
-	  return ajax_action_post('poster_forum_prive',$cat, $script, $args, $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
+	  return ajax_action_post('poster_forum_prive',$cat, $script, "$args#poster_forum_prive", $corps, array(),'','', "&id=$id&id_parent=$id_parent&statut=$statut");
 	else return redirige_action_auteur('poster_forum_prive',$cat, $script, $args, $corps, "\nmethod='post' id='formulaire'");
 }
 
 // Chercher a quoi on repond pour l'afficher au debut
 
 // http://doc.spip.org/@forum_envoi_parent
-function forum_envoi_parent($id)
+function forum_envoi_parent($row)
 {
-	$row = sql_fetsel("*", "spip_forum", "id_forum=" . sql_quote($id));
-
-	if (!$row)
-		return array('titre' =>'', 'texte' =>'', 'id_message' =>'');
-
 	$titre = typo($row['titre']);
 	$texte = $row['texte'];
 	$auteur = $row['auteur'];
