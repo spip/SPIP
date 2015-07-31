@@ -288,6 +288,13 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		$hauteur = intval($size_image[1]);
 		$type_image = decoder_type_image($size_image[2]);
 
+		// Prevoir traitement specifique pour videos
+		// (http://www.getid3.org/ peut-etre
+		if ($ext == "mov") {
+			$largeur = 0;
+			$hauteur = 0;
+		}
+
 		$poids = filesize($fichier);
 		if (!$type_image) {
 			if (_DOC_MAX_SIZE > 0
