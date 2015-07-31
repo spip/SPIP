@@ -262,6 +262,7 @@ function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	global $spip_ecran, $couleur_claire, $couleur_foncee;
 
 	list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
+
 	if ($sansduree)
 		foreach($sansduree as $d => $r) 
 			{
@@ -1083,14 +1084,16 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 	$annee_avant = $annee - 1;
 	$annee_apres = $annee + 1;
 
+	$finurl = "&type=mois&echelle=$echelle" . $ancre; 
+
 	for ($i=$mois; $i < 13; $i++) {
 		$gadget .= http_href($script .
-				     calendrier_args_date($annee_avant, $i, 1) . $ancre,
+				     calendrier_args_date($annee_avant, $i, 1) . $finurl,
 				     nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
 			}
 	for ($i=1; $i < $mois - 1; $i++) {
 		$gadget .= http_href($script .
-				     calendrier_args_date($annee, $i, 1) . $ancre,
+				     calendrier_args_date($annee, $i, 1) . $finurl,
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 	$gadget .= "</td></tr>"
@@ -1105,12 +1108,12 @@ function http_calendrier_invisible($annee, $mois, $jour, $script, $ancre, $id)
 		. "\n<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
 	for ($i=$mois+2; $i <= 12; $i++) {
 				$gadget .= http_href($script .
-				     calendrier_args_date($annee, $i, 1) . $ancre,
+				     calendrier_args_date($annee, $i, 1) . $finurl,
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 	for ($i=1; $i < $mois+1; $i++) {
 		$gadget .= http_href($script . 
-				     calendrier_args_date($annee_apres, $i, 1) . $ancre,
+				     calendrier_args_date($annee_apres, $i, 1) . $finurl,
 					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
 			}
 	return $gadget . "</td></tr></table></div>";
@@ -1128,7 +1131,8 @@ function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved
   return 
     "<div class='calendrier-titre calendrier-arial10'>" .
     http_href($script .
-	      calendrier_args_date($annee, $mois, 1) . $ancre,
+	      calendrier_args_date($annee, $mois, 1) .
+	      '&type=mois' . $ancre,
 	      affdate_mois_annee("$annee-$mois-1"),
 	      '',
 	      'color: black;') .
@@ -1136,7 +1140,7 @@ function http_calendrier_agenda ($annee, $mois, $jour_ved, $mois_ved, $annee_ved
     http_calendrier_agenda_rv ($annee, $mois, $evt,				
 			        'http_calendrier_clic', array($script, $ancre),
 			        $jour_ved, $mois_ved, $annee_ved, 
-				$semaine) .
+				$semaine) . 
     "</table>" .
     "</div>";
 }

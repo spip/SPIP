@@ -1,0 +1,10 @@
+<BOUCLE_periode(ARTICLES)
+    {agenda date, periode,
+  #ENV{annee}, #ENV{mois}, #ENV{jour},
+  #ENV{annee_fin}, #ENV{mois_fin}, #ENV{jour_fin}}>[
+(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'periode'})
+]</BOUCLE_periode>
+[(#DATE|agenda_memo{'', '', '', 'periode', 'periode'})]
+</B_periode>
+<:aucun_article:>
+<//B_periode>

@@ -264,7 +264,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 
 // {inverse}
 // http://www.spip.net/@inverse
-// ancienne spec si pas d'argument, nouvelle sinon
+// obsolete. utiliser {!par ...}
 function critere_inverse_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
@@ -280,50 +280,74 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	    else
 	      erreur_squelette(_T('zbug_info_erreur_squelette'), "{inverse ?} BOUCLE$idb");
 	  }
-
-
 }
 
 function critere_agenda($idb, &$boucles, $crit)
 {
 	$params = $crit->param;
+
+	if (count($params) < 1)
+	      erreur_squelette(_T('zbug_info_erreur_squelette'),
+			       "{agenda ?} BOUCLE$idb");
+
 	$parent = $boucles[$idb]->id_parent;
 
 	// les valeur $date et $type doivent etre connus à la compilation
 	// autrement dit ne pas être des champs
+
 	$date = array_shift($params);
 	$date = $date[0]->texte;
 
-	$annee = array_shift($params);
-	$annee = "\n" . '((($x = ' .
-		calculer_liste($annee, array(), $boucles, $parent) .
-		') !== "") ? $x : date("Y"))';
+	$type = array_shift($params);
+	$type = $type[0]->texte;
 
-	$mois = array_shift($params);
-	$mois = "\n" . '(($x = ' .
+	$annee = $params ? array_shift($params) : "";
+	$annee = "\n" . 'sprintf("%04d", ($x = ' .
+		calculer_liste($annee, array(), $boucles, $parent) .
+		') ? $x : date("Y"))';
+
+	$mois =  $params ? array_shift($params) : "";
+	$mois = "\n" . 'sprintf("%02d", ($x = ' .
 		calculer_liste($mois, array(), $boucles, $parent) .
 		') ? $x : date("m"))';
 
-	$jour = array_shift($params);
-	$jour = "\n" . '(($x = ' .
+	$jour =  $params ? array_shift($params) : "";
+	$jour = "\n" . 'sprintf("%02d", ($x = ' .
 		calculer_liste($jour, array(), $boucles, $parent) .
 		') ? $x : date("d"))';
 
-	$type = array_shift($params);
-	$type = $type[0]->texte;
+	$annee2 = $params ? array_shift($params) : "";
+	$annee2 = "\n" . 'sprintf("%04d", ($x = ' .
+		calculer_liste($annee2, array(), $boucles, $parent) .
+		') ? $x : date("Y"))';
+
+	$mois2 =  $params ? array_shift($params) : "";
+	$mois2 = "\n" . 'sprintf("%02d", ($x = ' .
+		calculer_liste($mois2, array(), $boucles, $parent) .
+		') ? $x : date("m"))';
+
+	$jour2 =  $params ? array_shift($params) : "";
+	$jour2 = "\n" .  'sprintf("%02d", ($x = ' .
+		calculer_liste($jour2, array(), $boucles, $parent) .
+		') ? $x : date("d"))';
 
 	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table . ".$date";
 	if ($type == 'jour')
 	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m%d') = '\" .  $annee . $mois . $jour .\"'";
-	elseif ($type != 'semaine')
+	elseif ($type == 'mois')
 	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m') = '\" .  $annee . $mois .\"'";
-	else
+	elseif ($type == 'semaine')
 	  $boucle->where[] = 
 	  "DATE_FORMAT($date, '%Y%m%d') >= '\" . 
 		date_debut_semaine($annee, $mois, $jour) . \"' AND
 	  DATE_FORMAT($date, '%Y%m%d') <= '\" .
 		date_fin_semaine($annee, $mois, $jour) . \"'";
+	elseif ($annee && $jour2)
+	  $boucle->where[] = 
+	  "DATE_FORMAT($date, '%Y%m%d') >= '\" . $annee . $mois . $jour .\"' AND
+	  DATE_FORMAT($date, '%Y%m%d') <= '\" . $annee2 . $mois2 . $jour2 .\"'";
+	// sinon on veut tout
 }
 
 

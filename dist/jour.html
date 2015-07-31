@@ -1,5 +1,5 @@
 <BOUCLE_jour(ARTICLES)
-    {agenda date, #ENV{annee}, #ENV{mois}, #ENV{jour}, jour}>[
+    {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}>[
 (#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'jour'})
 ]</BOUCLE_jour>
 [(#DATE|agenda_memo{'', '', '', 'jour', 'jour'})]

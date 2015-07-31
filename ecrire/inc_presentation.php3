@@ -1277,7 +1277,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 				$s = "<div " . 
 				  http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px") .
-				  "><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
+				  "><a href='calendrier.php3?type=jour&jour=$jour&mois=$mois&annee=$annee'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
 			} else {
 				$s = "<font color='#999999'>$s</font>";
 			}
@@ -2275,7 +2275,7 @@ else {
 
 		echo http_img_pack("rien.gif", " ", "width='10'");
 
-		echo "<a href='calendrier_semaine.php3' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\">" .
+		echo "<a href='calendrier.php3?type=semaine' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\">" .
 		  http_img_pack("cal-rv.png", "", "width='26' height='20' border='0'") ."</a>";
 		echo "<a href='messagerie.php3' class='icone26' onMouseOver=\"changestyle('bandeaumessagerie','visibility','visible');\">" .
 		  http_img_pack("cal-messagerie.png", "", "width='26' height='20' border='0'") ."</a>";
@@ -2547,7 +2547,7 @@ else {
 
 		// Calendrier
 			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
-			$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
+			$gadget .= "<a href='calendrier.php3?type=semaine' class='lien_sous'>";
 			$gadget .= _T('icone_agenda');
 			$gadget .= "</a>";
 			
