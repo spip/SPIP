@@ -1461,13 +1461,16 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$alt = $texte;
 	}
 
+	$size = 24;
+	if (preg_match("/-([0-9]{1,3})[.](gif|png)$/i",$fond,$match))
+		$size = $match[1];
 	if ($spip_display != 1 AND $spip_display != 4){
 		if ($fonction != "rien.gif"){
-		  $icone = http_img_pack($fonction, $alt, "$title width='24' height='24'\n" .
+		  $icone = http_img_pack($fonction, $alt, "$title width='$size' height='$size'\n" .
 					  http_style_background($fond, "no-repeat center center"));
 		}
 		else {
-			$icone = http_img_pack($fond, $alt, "$title width='24' height='24'");
+			$icone = http_img_pack($fond, $alt, "$title width='$size' height='$size'");
 		}
 	} else $icone = '';
 
