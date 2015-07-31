@@ -184,7 +184,7 @@ function appliquer_modifs_config() {
 			include_spip('inc/distant');
 			$page = recuperer_page($test_proxy, true);
 			if ($page)
-				$retour_proxy = "<p>"._L('test proxy ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
+				$retour_proxy = "<p>"._T('info_proxy_ok')."</p>\n<tt>".couper(entites_html($page),300)."</tt>";
 			else
 				$retour_proxy = _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))." <tt>".no_password_proxy_url($http_proxy)."</tt>.".aide('confhttpproxy');
 		}

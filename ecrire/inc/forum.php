@@ -142,7 +142,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	if ($original) {
 		$controle .= "<div style='float:".$GLOBALS['spip_lang_right'].";color:green'>"
 		."("
-		._L('original')
+		._T('forum_info_original')
 		.")</div>";
 	}
 
