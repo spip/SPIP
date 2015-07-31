@@ -731,6 +731,7 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 function agenda_affiche($i)
 {
   include_ecrire('inc_calendrier.php');
+  include_ecrire('inc_minipres.php'); // pour http_href
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
   $sinon = array_shift($args);
