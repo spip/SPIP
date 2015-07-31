@@ -51,6 +51,7 @@ function base_admin_repair_dist() {
 	} else {
 		include_spip('inc/rubriques');
 		calculer_rubriques();
+		propager_les_secteurs();
 	}
 	include_spip('inc/minipres');
 	echo minipres(_T('texte_tentative_recuperation'),
