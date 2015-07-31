@@ -23,6 +23,7 @@ function _sqlite_init_functions(&$sqlite){
 	$fonctions = array(
 		'CONCAT'		=> array( '_sqlite_func_concat'			,2),
 		
+		'DATE_FORMAT'	=> array( '_sqlite_func_strftime'		,2),
 		'DAYOFMONTH'	=> array( '_sqlite_func_dayofmonth'		,1),
 		
 		'FIND_IN_SET'	=> array( '_sqlite_func_find_in_set'	,2),
@@ -196,6 +197,9 @@ function _sqlite_func_regexp_match($cherche, $quoi) {
 	return $return;
 }
 
+function _sqlite_func_strftime($date, $conv){
+	return strftime($conv, $date);	
+}
 
 function _sqlite_func_to_days ($d) {
 	$result = date("z", _sqlite_func_unix_timestamp($d));

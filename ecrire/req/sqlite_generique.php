@@ -365,15 +365,14 @@ function spip_sqlite_errno($serveur='',$requeter=true) {
 	$link  = _sqlite_link($serveur);
 	
 	if (_sqlite_is_version(3, $link)){
-		$s = $link->errorCode();
+		$t = $link->errorInfo();
+		$s = $t[1];
 	} elseif ($link) {
 		$s = sqlite_last_error($link);
 	} else {
 		$s = ": aucune ressource sqlite (link)";	
 	}
-	// si $s = '00000', ne pas croire a une erreur
-	if (!(int)$s) $s = 0;
-	
+		
 	if ($s) spip_log("Erreur sqlite $s");
 
 	return $s;
