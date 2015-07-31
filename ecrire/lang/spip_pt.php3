@@ -186,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'J&aacute; est&aacute; inscrito',
 'form_email_non_valide' => 'O seu endere&ccedil;o email n&atilde;o &eacute; v&aacute;lido',
 'form_forum_access_refuse' => 'Voc&ecirc; j&aacute; n&atilde;o tem acesso a este s&iacute;tio',
-'form_forum_bonjour' => 'Bom dia',
+'form_forum_bonjour' => '<MODIF>Bom dia',
 'form_forum_email_deja_enregistre' => 'Este endere&ccedil;o e-mail j&aacute; est&aacute; registado,pode portanto utilizar a sua palavra-passe habitual',
 'form_forum_identifiant_mail' => 'O seu novo identificador acabou de lhe ser enviado por email',
 'form_forum_identifiants' => 'Identificadores pessoais',
@@ -278,7 +278,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
  esse f&oacute;rum, deve estar previamente registado. Obrigado
   de indicar a seguir o identificador pessoal que lhe foi
  fornecido.Se n&atilde;o est&aacute; registado, deve  ',
-'forum_vous_inscrire' => 'inscrever-se </a> previamente.',
+'forum_vous_inscrire' => '<MODIF>inscrever-se </a> previamente.',
 
 
 // I
@@ -369,7 +369,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_contact_developpeur' => 'Favor contactar com um programador',
 'info_contenance' => 'Este s&iacute;tio contem&nbsp;:',
 'info_contribution' => 'contribui&ccedil;&otilde;es de f&oacute;rum',
-'info_copyright' => '&eacute; um software livre distribuido <a href=\'copyright_fr.html\'>sob licen&ccedil;a GPL.</a>',
+'info_copyright' => '<MODIF>&eacute; um software livre distribuido <a href=\'copyright_fr.html\'>sob licen&ccedil;a GPL.</a>',
 'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, ver o s&iacute;tio <a href=\'http://www.spip.net/pt\'>http://www.spip.net/pt</a>.',
 'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
 'info_cours_edition' => 'Os seus artigos em curso de reda&ccedil;&atilde;o',
