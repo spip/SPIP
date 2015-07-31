@@ -318,6 +318,11 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
 	}
+	
+	// Si on est inclus en POST, il faut ajouter les variables _POST dans
+	// le contexte inclus, sinon les formulaires ne marchent pas...
+	if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		$contexte_inclus = array_merge(calculer_contexte(), $contexte_inclus);
 
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
 	$use_cache, $fond, true);
@@ -337,7 +342,7 @@ function securise_script($texte) {
 # les balises dynamiques sont traitees comme des inclusions
 
 function synthetiser_balise_dynamique($nom, $args, $file, $lang) {
-  return
+	return
 		('<'.'?php 
 include_ecrire(\'inc_lang.php3\');
 lang_select("'.$lang.'");
