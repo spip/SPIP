@@ -54,7 +54,7 @@ function affiche_erreurs_page($tableau_des_erreurs, $message='') {
 	$anc = '';
 	$i = 1;
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<tr id='req$i'><td style='text-align: right'><a href='".$GLOBALS['REQUEST_URI']."#spip-debug'><b>"
+		$res .= "<tr id='req$i'><td style='text-align: right'><a href='".quote_amp($GLOBALS['REQUEST_URI'])."#spip-debug'><b>"
 		  . $i
 		  ."&nbsp;</b></a>\n</td><td>"
 		  .join("</td>\n<td>",$err)
@@ -113,7 +113,7 @@ function chrono_requete($temps)
 		$temps[$k] = $v;
 		$x = "<a style='font-family: monospace' title='"
 		  .  textebrut(preg_replace(',</tr>,', "\n",$v[0]))
-		  . "' href='".$GLOBALS['REQUEST_URI']."#req$i'>"
+		  . "' href='".quote_amp($GLOBALS['REQUEST_URI'])."#req$i'>"
 		  . str_replace(' ', '&nbsp;', sprintf("%5d",$i))
 		  . "</a>";
 		if (count($t[$boucle]) % 30 == 29) $x .= "<br />";
