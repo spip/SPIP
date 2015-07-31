@@ -1272,7 +1272,7 @@ function traiter_raccourcis($letexte) {
 			"http://@lang@.wikipedia.org/wiki/");
 		tester_variable('les_notes', '');
 		tester_variable('compt_note', 0);
-		tester_variable('toujours_paragrapher', false);
+		tester_variable('toujours_paragrapher', true);
 	}
 
 	// Gestion de la <poesie>
