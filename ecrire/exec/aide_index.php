@@ -172,7 +172,7 @@ function help_body($aide) {
 					. '_'));
 		return "<div align='center'>" .
 			_HELP_PANNEAU .
-			preg_replace(",<a ,i", "<a class='target_blank", $c) .
+			preg_replace(",<a ,i", "<a class='target_blank' ", $c) .
 			'</div>';
 	} elseif ($aide == 'spip') {
 		return "<table border='0' width='100%' height='60%'>
@@ -290,7 +290,7 @@ function help_frame_body($titre, $aide, $html, $lang_aide='')
 		$dir .
 		" lang='$lang'>".
 		help_body($aide) .
-	  	$html .
+		($aide ? $html : '').
 		'</body>';
 }
 
