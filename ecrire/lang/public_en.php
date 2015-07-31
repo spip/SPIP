@@ -85,7 +85,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_suivante' => 'next page',
 'par_auteur' => 'by ',
 'participer_site' => 'You can take an active part in this website and write your own articles by registering below. You will then receive immediately an email giving you an access code to the private area of the site.',
-'plan_du_site' => '<NEW><pLUS_UTILISE>Sitemap',
 'plan_site' => 'Site Map',
 'popularite' => 'Popularity',
 'poster_message' => 'To post a message',

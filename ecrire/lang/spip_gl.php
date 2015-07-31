@@ -81,9 +81,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
-'calendrier_synchro_prive' => '<NEW><NEW><pLUS_UTILISE><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
-'calendrier_synchro_public' => '<NEW><NEW><pLUS_UTILISE><NEW>El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW><NEW><pLUS_UTILISE><NEW>Sincronizar el fichero <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'choix_couleur_interface' => 'cor',
 'choix_interface' => 'escolla de interface',
 'confirm_changer_statut' => 'Coidado, pediches cambiar o estado deste elemento. &iquest;Desexas continuar?',
@@ -333,7 +330,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'icone_doc_rubrique' => 'Documento dos temas',
 'icone_ecrire_article' => 'Escribir un novo artigo',
 'icone_edition_site' => 'Edici&oacute;n',
-'icone_evolution_visites_2' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Evolution des visites',
 'icone_forum_administrateur' => 'Foro de xesti&oacute;n',
 'icone_forum_suivi' => 'Seguimento dos foros',
 'icone_gestion_langues' => 'Xesti&oacute;n das linguas',
@@ -497,8 +493,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_publie_1' => '[@nom_site_spip@] PUBLICADO: @titre@',
 'info_publie_2' => 'Artigo publicado
 --------------',
-'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Buscar',
 'info_rechercher_02' => 'Buscar:',
 'info_remplacer_vignette' => 'Trocar a vi&ntilde;eta por defecto por un logo persoal:',
@@ -537,10 +531,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'As t&uacute;as notas',
 'item_breve_proposee' => 'Breve proposta',
-'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
-'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -559,7 +549,6 @@ Grazas pola s&uacute;a participaci&oacute;n
 'lien_reessayer' => 'reintentar',
 'lien_repondre_message' => 'Responder esta mensaxe',
 'lien_supprimer' => 'Suprimir',
-'lien_test_format_image' => '<pLUS_UTILISE>Probar os formatos de imaxe que este lugar pode empregar para crear as vi&ntilde;etas.',
 'lien_tout_afficher' => 'Amosar todo',
 'lien_visite_site' => 'visitar este web',
 'lien_visites' => '@visites@ visitas',
