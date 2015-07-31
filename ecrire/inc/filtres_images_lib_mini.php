@@ -565,7 +565,7 @@ function _image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO',
 				// php5-imagemagick
 				$imagick = new Imagick();
 				$imagick->readImage($image);
-				$imagick->resizeImage($destWidth, $destHeight, $imagick::FILTER_LANCZOS, 1 );//, IMAGICK_FILTER_LANCZOS, _IMG_IMAGICK_QUALITE / 100);
+				$imagick->resizeImage($destWidth, $destHeight, Imagick::FILTER_LANCZOS, 1 );
 				$imagick->writeImage($vignette);
 			} else {
 				// php4-imagemagick
