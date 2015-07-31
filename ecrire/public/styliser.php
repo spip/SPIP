@@ -20,63 +20,95 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@public_styliser_dist
 function public_styliser_dist($fond, $id_rubrique, $lang='', $connect='', $ext='html') {
-	
-	// Trouver un squelette de base dans le chemin
-	if (!$base = find_in_path("$fond.$ext")) {
-		// Si pas de squelette regarder si c'est une table
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		if (preg_match('/^table:(.*)$/', $fond, $r)
-		AND $table = $trouver_table($r[1], $connect)
-		AND include_spip('inc/autoriser')
-		AND autoriser('webmestre')
-		) {
-				$fond = $r[1];
-				$base = _DIR_TMP . 'table_'.$fond . ".$ext";
-				if (!file_exists($base)
-				OR  $GLOBALS['var_mode']) {
-					$vertebrer = charger_fonction('vertebrer', 'public');
-					ecrire_fichier($base, $vertebrer($table));
-				}
-		} else { // on est gentil, mais la ...
-			include_spip('public/debug');
-			erreur_squelette(_T('info_erreur_squelette2',
-				array('fichier'=>"'$fond'")),
-				$GLOBALS['dossier_squelettes']);
-			$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
-			return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
-		}
-	}
 
+	// trouver un squelette du nom demande
+	$base = find_in_path("$fond.$ext");
+	
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
 	$squelette = substr($base, 0, - strlen(".$ext"));
 
-	// On selectionne, dans l'ordre :
-	// fond=10
-	if ($id_rubrique) {
-		$f = "$squelette=$id_rubrique";
-		if (@file_exists("$f.$ext"))
-			$squelette = $f;
-		else {
-			// fond-10 fond-<rubriques parentes>
-			do {
-				$f = "$squelette-$id_rubrique";
-				if (@file_exists("$f.$ext")) {
-					$squelette = $f;
-					break;
-				}
-			} while ($id_rubrique = quete_parent($id_rubrique));
-		}
-	}
+	// pipeline styliser
+	$squelette = pipeline('styliser', array(
+		'args' => array(
+			'id_rubrique' => $id_rubrique,
+			'ext' => $ext,
+			'fond' => $fond,
+			'lang' => $lang,
+			'connect' => $connect
+		),
+		'data' => $squelette,
+	));
 
-	// Affiner par lang
-	if ($lang) {
-		$l = lang_select($lang);
-		$f = "$squelette.".$GLOBALS['spip_lang'];
-		if ($l) lang_select();
-		if (@file_exists("$f.$ext"))
-			$squelette = $f;
+	// pas de squelette : erreur !
+	if (!$squelette) {
+		include_spip('public/debug');
+		erreur_squelette(_T('info_erreur_squelette2',
+			array('fichier'=>"'$fond'")),
+			$GLOBALS['dossier_squelettes']);
+		$f = find_in_path(".$ext"); // on ne renvoie rien ici, c'est le resultat vide qui provoquere un 404 si necessaire
+		return array(substr($f, 0, -strlen(".$ext")), $ext, $ext, $f);
 	}
 
 	return array($squelette, $ext, $ext, "$squelette.$ext");
+}
+
+
+/*
+ * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :
+ * Squelette par rubrique squelette-XX.html ou squelette=XX.html
+ */
+function styliser_squelette_par_rubrique($flux) {
+
+	// uniquement si un squelette a ete trouve
+	if ($squelette = $flux['data']) {
+		$ext = $flux['args']['ext'];
+
+		// On selectionne, dans l'ordre :
+		// fond=10
+		if ($id_rubrique = $flux['args']['id_rubrique']) {
+			$f = "$squelette=$id_rubrique";
+			if (@file_exists("$f.$ext"))
+				$squelette = $f;
+			else {
+				// fond-10 fond-<rubriques parentes>
+				do {
+					$f = "$squelette-$id_rubrique";
+					if (@file_exists("$f.$ext")) {
+						$squelette = $f;
+						break;
+					}
+				} while ($id_rubrique = quete_parent($id_rubrique));
+			}
+			// sauver le squelette
+			$flux['data'] = $squelette;
+		}		
+	}
+	
+	return $flux;
+}
+
+/*
+ * Options de recherche de squelette par le styliseur, appele par le pipeline 'styliser' :
+ * Squelette par langue squelette.en.html
+ */
+function styliser_squelette_par_langue($flux) {
+
+	// uniquement si un squelette a ete trouve
+	if ($squelette = $flux['data']) {
+		$ext = $flux['args']['ext'];
+
+		// Affiner par lang
+		if ($lang = $flux['args']['lang']) {
+			$l = lang_select($lang);
+			$f = "$squelette.".$GLOBALS['spip_lang'];
+			if ($l) lang_select();
+			if (@file_exists("$f.$ext")) {
+				// sauver le squelette
+				$flux['data'] = $f;
+			}
+		}
+	}
+	
+	return $flux;
 }
 ?>
