@@ -104,6 +104,11 @@ function depublier_branche_rubrique_if($id_rubrique)
 		if (sql_countsel("spip_documents_liens",  "id_objet=$id_pred AND objet='rubrique'"))
 			return $id_pred != $id_rubrique;;
 
+		$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_pred,'statut'=>'publie'),'data'=>array()));
+		foreach($compte as $objet => $n)
+			if ($n)
+				return $id_pred != $id_rubrique;
+
 		sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_pred");
 #		spip_log("depublier_rubrique $id_pred");
 
