@@ -12,7 +12,7 @@ define("_ECRIRE_INC_STATISTIQUES", "1");
 function stats_load_engines() {
 	// le moteur de recherche interne
 	$arr_engines = Array();
-	$arr_engines[] = Array('Recherche SPIP','recherche=',ereg_replace('^http://','',lire_meta('adresse_site')));
+	$arr_engines[] = Array('Recherche SPIP','recherche=',ereg_replace('^http://([^/]+)(/.*)?','\1',lire_meta('adresse_site')));
 
 	$file_name = 'data/engines-list.ini';
 	if ($fp = @fopen($file_name, 'r'))
