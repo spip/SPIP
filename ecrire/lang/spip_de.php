@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_recalculer' => 'Seite aus Cache l&ouml;schen',
 'alerte_maj_impossible' => '<b>Achtung!</b> Ihre MySQL Datenbank konnte nicht auf die Version @version@ umgestellt werden. M&ouml;glicherweise gibt es ein Problem mit den Zugriffsrechten. Bitte setzen Sie sich mit Ihrem Webspace-Provider in Verbindung.',
 'analyse_xml' => 'XML-Analyse',
+'antispam_champ_vide' => 'Bitte lassen Sie dieses Feld leer:',
 'avis_archive_incorrect' => 'Die archivierte Datei ist keine SPIP-Datei',
 'avis_archive_invalide' => 'Die archivierte Datei ist keine SPIP-Datei',
 'avis_attention' => 'ACHTUNG!',
