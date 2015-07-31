@@ -83,7 +83,8 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
-	if ($auteur_session AND !$logout) {
+	if ($auteur_session AND !$logout AND
+	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
 		$url = $cible->getUrl();
 		@Header("Location: $url");
 		echo "<a href='$url'>Vous &ecirc;tes enregistr&eacute;... par ici...</a>\n";
