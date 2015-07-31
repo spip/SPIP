@@ -72,19 +72,22 @@ if ($change_session == 'oui') {
 		// ainsi un eventuel voleur de cookie ne pourrait pas deconnecter
 		// sa victime, mais se ferait deconnecter par elle.
 		if ($auteur_session['hash_env'] == hash_env()) {
+			spip_log("rejoue session");
 			$auteur_session['ip_change'] = false;
 			$cookie = creer_cookie_session($auteur_session);
 			supprimer_session($spip_session);
 			spip_setcookie('spip_session', $cookie);
 		}
-		@header('Content-Type: image/gif');
-		@header('Expires: 0');
-		@header("Cache-Control: no-store, no-cache, must-revalidate");
-		@header('Pragma: no-cache');
-		@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		@readfile(_DIR_IMG_PACK . 'rien.gif');
-		exit;
+		else
+			spip_log("session non rejouee, changement d'IP ?");
 	}
+	@header('Content-Type: image/gif');
+	@header('Expires: 0');
+	@header("Cache-Control: no-store, no-cache, must-revalidate");
+	@header('Pragma: no-cache');
+	@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+	@readfile(_DIR_IMG_PACK . 'rien.gif');
+	exit;
 }
 
 // tentative de connexion en auth_http
