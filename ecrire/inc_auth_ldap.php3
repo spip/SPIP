@@ -7,7 +7,7 @@ define("_ECRIRE_INC_AUTH_LDAP", "1");
 
 class Auth_ldap {
 	var $user_dn;
-	var $nom, $login, $email, $pass, $statut;
+	var $nom, $login, $email, $pass, $statut, $bio;
 
 	function init() {
 		if (!$GLOBALS['ldap_present']) return false;
@@ -39,6 +39,8 @@ class Auth_ldap {
 		global $ldap_link, $ldap_base;
 		$this->nom = $this->email = $this->pass = $this->statut = '';
 
+		if (!$this->login) return false;
+
 		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($this->login)."' AND source='ldap'";
 		$result = spip_query($query);
 
@@ -46,10 +48,11 @@ class Auth_ldap {
 			$this->nom = $row['nom'];
 			$this->email = $row['email'];
 			$this->statut = $row['statut'];
+			$this->bio = $row['bio'];
 			return true;
 		}
 
-		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail"));
+		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail", "description"));
 		if (!$result) return false;
 		$info = @ldap_get_entries($ldap_link, $result);
 		if (!is_array($info)) return false;
@@ -59,6 +62,7 @@ class Auth_ldap {
 				if (!$this->nom) $this->nom = $val['cn'][0];
 				if (!$this->email) $this->email = $val['mail'][0];
 				if (!$this->login) $this->login = $val['uid'][0];
+				if (!$this->bio) $this->bio = $val['description'][0];
 			}
 		}
 /*		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("userPassword"));
@@ -75,6 +79,7 @@ class Auth_ldap {
 		$nom = addslashes($this->nom);
 		$login = addslashes($this->login);
 		$email = addslashes($this->email);
+		$bio = addslashes($this->bio);
 		$statut = lire_meta("ldap_statut_import");
 
 		if (!$statut) return false;
@@ -83,8 +88,8 @@ class Auth_ldap {
 		$result = spip_query($query);
 		if (mysql_num_rows($result)) return false;
 
-		$query = "INSERT IGNORE INTO spip_auteurs (source, nom, login, email, statut, pass) ".
-			"VALUES ('ldap', '$nom', '$login', '$email', '$statut', '')";
+		$query = "INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) ".
+			"VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')";
 		return spip_query($query);
 	}
 }
