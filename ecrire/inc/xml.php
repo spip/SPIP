@@ -97,7 +97,7 @@ function spip_xml_aplatit($arbre,$separateur = " "){
 					$f = spip_xml_aplatit($feuille);
 					if (strlen($f)) {
 						$tagf = explode(" ",$tag);
-						$tagf = $tag[0];
+						$tagf = $tagf[0];
 						$s.="<$tag>$f</$tagf>";
 					}
 					else $s.="<$tag/>";
