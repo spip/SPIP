@@ -189,7 +189,9 @@ function calculer_balise($nom, $p) {
 
 	// compatibilite: depuis qu'on accepte #BALISE{ses_args} sans [(...)] autour
 	// il faut recracher {...} quand ce n'est finalement pas des args
-	if ($p->param) {$p->code .= " . '{" . addslashes($p->param[0][1][0]->texte) . "}'";}
+	if ((!$p->fonctions[0][0]) AND $p->fonctions[0][1])
+
+	  {$p->code .= " . '" . addslashes($p->fonctions[0][1]) . "'";}
 	// ne pas passer le filtre securite sur les id_xxx
 	if (strpos($nom, 'ID_') === 0)
 		$p->interdire_scripts = false;

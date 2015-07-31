@@ -281,7 +281,7 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
 	$args = substr($args,1);
       }
       $n = strlen($suite) - strlen($args);
-      $pointeur_champ->param[] = $res;
+      if ($fonc || count($res) > 1) $pointeur_champ->param[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, substr($suite, 0, $n));
       $texte = ltrim($args);
