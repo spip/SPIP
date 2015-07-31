@@ -343,7 +343,7 @@ function parser_boucle($texte, $id_parent) {
 							$flag_lien = true;
 						}
 						// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
-						else if ($type != 'mots' AND ($col == 'type_mot' OR $col == 'titre_mot')) {
+						else if ($type != 'mots' AND ($col == 'type_mot' OR $col == 'titre_mot' OR $col == 'id_groupe')) {
 							if ($type == 'forums')
 								$col_lien = "spip_mots_forum";
 							else if ($type == 'syndication')
@@ -359,8 +359,10 @@ function parser_boucle($texte, $id_parent) {
 							$flag_lien = true;
 							if ($col == 'type_mot')
 								$col = 'type';
-							else
+							else if ($col == 'titre_mot')
 								$col = 'titre';
+							else if ($col == 'id_groupe')
+								$col = 'id_groupe';
 						}
 
 						// Cas particulier : selection des documents selon l'extension
@@ -1985,6 +1987,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$texte .= '
 		$contexte["id_mot"] = $row["id_mot"];
 		$contexte["type"] = $row["type"];
+		$contexte["id_groupe"] = $row["id_groupe"];
 		if ($instance->doublons == "oui") $id_doublons["mots"] .= ",".$row["id_mot"];
 		';
 		break;
