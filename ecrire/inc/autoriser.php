@@ -694,6 +694,33 @@ function autoriser_auteur_previsualiser_dist($faire, $type, $id, $qui, $opt) {
 	return $n ? true : false;
 }
 
+/**
+ * Autorisation de créer un auteur
+ *
+ * Il faut être administrateur (restreint compris).
+ *
+ * @note
+ *     Seuls les administrateurs complets ont accès à tous les
+ *     champs du formulaire d'édition d'un auteur. À la création
+ *     d'un auteur, son statut est 'poubelle'. C'est l'autorisation
+ *     de modifier qui permet de changer les informations sensibles
+ *     (statut, login, pass, etc.) à l'institution.
+ * 
+ * @see auteur_inserer()
+ * @see auteur_instituer()
+ * @see autoriser_auteur_modifier_dist() 
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_auteur_creer_dist($faire, $type, $id, $qui, $opt) {
+	return ($qui['statut'] == '0minirezo');
+}
+
 
 /**
  * Autorisation de modifier un auteur
@@ -1105,6 +1132,24 @@ function autoriser_rubriques_menu_dist($faire, $type, $id, $qui, $opt){return tr
 **/
 function autoriser_articlecreer_menu_dist($faire, $type, $id, $qui, $opt){
 	return verifier_table_non_vide();
+}
+
+/**
+ * Autorisation de voir le menu auteurcreer
+ *
+ * Il faut pouvoir créer un auteur !
+ * 
+ * @see autoriser_auteur_creer_dist()
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_auteurcreer_menu_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('creer', 'auteur', $id, $qui, $opt);
 }
 
 /**
