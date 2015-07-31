@@ -65,8 +65,8 @@ function action_redirect_dist()
 	if ($mode AND !strpos($redirect, 'var_mode')) {
 		$sep =  (strpos($redirect,'?') !== false) ? '&' : '?';
 		if (strpos($redirect,'#'))
-			$redirect = str_replace('#', "$sep$mode#", $redirect);
-		else $redirect .= "$sep$mode";
+			$redirect = str_replace('#', "$sep$suite#", $redirect);
+		else $redirect .= "$sep$suite";
 	}
 }
 ?>
