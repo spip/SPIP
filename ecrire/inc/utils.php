@@ -484,12 +484,17 @@ function action_cron() {
 
 // http://doc.spip.org/@cron
 function cron ($gourmand=false, $taches= array()) {
+	if (!defined(_CRON_DELAI_GOURMAND))
+		define('_CRON_DELAI_GOURMAND',60);
+	if (!defined(_CRON_DELAI))
+		define('_CRON_DELAI',is_int($gourmand) ? $gourmand : 2);
 
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
 	// ou est trop vieux (> 60 sec), on va voir si un cron est necessaire.
 	// Au passage si on est gourmand on le dit aux autres
-	if (spip_touch(_DIR_TMP.'cron.lock-gourmand', 60, $gourmand)
-	OR ($gourmand!==false)) {
+	if (!_CRON_DELAI_GOURMAND
+	 OR spip_touch(_DIR_TMP.'cron.lock-gourmand', _CRON_DELAI_GOURMAND, $gourmand)
+	 OR ($gourmand!==false)) {
 
 	// Le fichier cron.lock indique la date de la derniere tache
 	// Il permet d'imposer qu'il n'y ait qu'une tache a la fois
@@ -497,8 +502,8 @@ function cron ($gourmand=false, $taches= array()) {
 	// ca soulage le serveur et ca evite
 	// les conflits sur la base entre taches.
 
-	if (spip_touch(_DIR_TMP.'cron.lock',
-			(is_int($gourmand) ? $gourmand : 2))) {
+	if (!_CRON_DELAI 
+	  OR spip_touch(_DIR_TMP.'cron.lock',_CRON_DELAI)) {
 			// Si base inaccessible, laisser tomber.
 			if (!spip_connect()) return false;
 
