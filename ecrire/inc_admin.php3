@@ -32,22 +32,22 @@ function debut_admin($action, $commentaire='') {
 	}
 	if ($commentaire) {
 		include_ecrire ("inc_texte");
-		$commentaire = ("<p>".propre($commentaire)."</p>");
+		$commentaire = ("\n<p>".propre($commentaire)."</p>\n");
 	}
 	include_ecrire ("inc_minipres");
 	minipres(_T('info_action', array('action' => $action)),
 		  $commentaire
 		. $clean_link->getForm('POST')
-		. "<P><B>"._T('info_authentification_ftp')."</B>"
+		. "\n<p><b>"._T('info_authentification_ftp')."</b>"
 		. aide("ftp_auth")
-		. "<P>"
+		. "\n<p>"
 		. _T('info_creer_repertoire')
-		. "<P align='center'><INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"".
+		. "\n<p align='center'>\n<INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"".
 		 $fichier
 		. "\" size='30'>"
-		. "<P> "
+		. "\n<p>"
 		. _T('info_creer_repertoire_2', array('repertoire' => _DIR_SESSIONS))
-		. "<P align='right'><INPUT TYPE='submit' VALUE='"
+		. "\n<p align='right'><INPUT TYPE='submit' VALUE='"
 		. _T('bouton_recharger_page')
 		. "' CLASS='fondo'>"
 		. "</form>");
