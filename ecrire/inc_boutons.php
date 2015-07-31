@@ -272,10 +272,10 @@ function definir_barre_onglets($rubrique) {
 
 	case 'config_lang':
 		$onglets['langues']=
-		  new Bouton('langues-24.gif', 'info_multilinguisme',
+		  new Bouton('langues-24.gif', 'info_langue_principale',
 			generer_url_ecrire("config_lang"));
 		$onglets['multi']=
-		  new Bouton('traductions-24.gif', 'info_langue_principale',
+		  new Bouton('traductions-24.gif', 'info_multilinguisme',
 			generer_url_ecrire("config_multilang"));
 		if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
 			$onglets['fichiers']=
