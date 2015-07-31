@@ -83,6 +83,7 @@ class IterateurENUM implements Iterator {
 	 * @return void
 	 */
 	public function rewind() {
+		$this->pos = 0;
 		$this->n = $this->start;
 	}
 
