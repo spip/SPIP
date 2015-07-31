@@ -264,8 +264,14 @@ function recuperer_infos_distantes($source, $max=0) {
 			$a['id_type'] = $t['id_type'];
 			$a['extension'] = $t['extension'];
 		} else {
+			# par defaut on retombe sur '.bin' si c'est autorise
 			spip_log("mime-type $mime_type inconnu");
-			return false;
+			$t = spip_fetch_array(spip_query(
+				"SELECT id_type,extension FROM spip_types_documents
+				WHERE extension='bin'"));
+			if (!$t) return false;
+			$a['id_type'] = $t['id_type'];
+			$a['extension'] = $t['extension'];
 		}
 
 		if (preg_match(",\nContent-Length: *([^[:space:]]*),i",
@@ -343,23 +349,54 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	
 		$distant = 'non';
 
-		// type de document inconnu ?
-		if (!ereg("\.([^.]+)$", $nom_envoye, $match)) {
-			spip_log("nom envoye incorrect ($nom_envoye)");
-			return;
-		}
-
 		// tester le type de document :
 		// - interdit a l'upload ?
 		// - quel numero dans spip_types_documents ?  =-(
 		// - est-ce "inclus" comme une image ?
-		$ext = corriger_extension(addslashes(strtolower($match[1])));
+		ereg("\.([^.]+)$", $nom_envoye, $match);
+		$ext = addslashes(corriger_extension(strtolower($match[1])));
 
+		// Si le fichier est de type inconnu, on va le stocker en .zip
 		if (!$row = spip_fetch_array(spip_query(
 		"SELECT * FROM spip_types_documents
 		WHERE extension='$ext' AND upload='oui'"))) {
-			spip_log("Extension $ext interdite a l'upload");
-			return;
+
+/* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
+/*			$ext = 'bin';
+			$nom_envoye .= '.bin';
+			spip_log("Extension $ext");
+			if (!$row = spip_fetch_array(spip_query(
+			"SELECT * FROM spip_types_documents
+			WHERE extension='bin' AND upload='oui'"))) {
+				spip_log("Extension $ext interdite a l'upload");
+				return;
+			}
+*/
+
+/* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
+			$ext = 'zip';
+			spip_log("Extension $ext");
+			if (!$row = spip_fetch_array(spip_query(
+			"SELECT * FROM spip_types_documents
+			WHERE extension='zip' AND upload='oui'"))) {
+				spip_log("Extension $ext interdite a l'upload");
+				return;
+			}
+			if (!$tmp_dir = tempnam(_DIR_SESSIONS, 'tmp_upload')) return;
+			@unlink($tmp_dir); @mkdir($tmp_dir);
+			$tmp = $tmp_dir.'/'.translitteration($nom_envoye);
+			$fichier = deplacer_fichier_upload($source, $tmp);
+			require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+			$source = _DIR_IMG.'tmp/archive.zip';
+			$archive = new PclZip($source);
+			$v_list = $archive->create($tmp,
+				PCLZIP_OPT_REMOVE_PATH, $tmp_dir,
+				PCLZIP_OPT_ADD_PATH, '');
+			effacer_repertoire_temporaire($tmp_dir);
+			if (!$v_list) {
+				spip_log("Echec creation du zip ");
+				return;
+			}
 		}
 		$id_type = $row['id_type'];	# numero du type dans spip_types_documents:(
 		$type_inclus_image = ($row['inclus'] == 'image');
@@ -373,8 +410,10 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 		// Quelques infos sur le fichier
 		if (!@file_exists($fichier)
-		OR !$taille = @filesize($fichier))
+		OR !$taille = @filesize($fichier)) {
+			spip_log ("Echec copie du fichier $fichier");
 			return;
+		}
 
 		// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
 		$size_image = @getimagesize($fichier);

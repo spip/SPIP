@@ -335,11 +335,11 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
 	"SELECT id_syndic_article FROM spip_syndic_articles
 	WHERE id_syndic=$id_syndic AND url='$lelien'"));
 
-	// deja vu ?
-	if (spip_num_rows(spip_query("SELECT id_document FROM spip_documents_syndic
-	WHERE id_syndic_article=$id_syndic_article")) > 0)
-		return;
+	// Attention si cet article est deja vu, ne pas doubler les references
+	spip_query("DELETE FROM spip_documents_syndic
+	WHERE id_syndic_article=$id_syndic_article");
 
+	// Integrer les enclosures
 	foreach ($enclosures as $enclosure) {
 		// url et type sont obligatoires
 		if (preg_match(',[[:space:]]url=[\'"]?(https?://[^\'"]*),i',
@@ -353,7 +353,13 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
 			// Verifier que le content-type nous convient
 			list($id_type) = spip_fetch_array(spip_query("SELECT id_type
 			FROM spip_types_documents WHERE mime_type='$type'"));
-			if (!$id_type) {die ("pas de id_type pour $type");}#continue;
+			if (!$id_type) {
+				spip_log("enclosure de type inconnu ($type) $url");
+				list($id_type) = spip_fetch_array(spip_query("SELECT id_type
+				FROM spip_types_documents WHERE extension='bin'"));
+				// si les .bin ne sont pas autorises, on ignore ce document
+				if (!$id_type) continue;
+			}
 
 			// length : optionnel (non bloquant)
 			if (preg_match(',[[:space:]]length=[\'"]?([^\'"]*),i',

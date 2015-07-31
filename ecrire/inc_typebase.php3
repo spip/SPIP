@@ -55,6 +55,7 @@ $tables_sequences = array(
 $tables_documents = array(
 			  'ai' => 'Adobe Illustrator',
 			  'bz2' => 'BZip',
+			  'bin' => 'Binary Data',
 			  'c' => 'C source',
 			  'css' => 'Cascading Style Sheet',
 			  'deb' => 'Debian',
@@ -119,6 +120,7 @@ $tables_mime = array(
 
 		// Documents varies
 		'ai' =>'application/illustrator',
+		'bin' => 'application/octet-stream', # le tout-venant
 		'bz2'=>'application/x-bzip2',
 		'c'  =>'text/x-csrc',
 		'css'=>'text/css',
