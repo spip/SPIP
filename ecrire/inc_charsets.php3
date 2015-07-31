@@ -323,7 +323,11 @@ function unicode_to_utf_8($chaine) {
 function load_windows_1251() {
 	// extrait de la table
 	// http://www.slav.helsinki.fi/atk/codepages/win1251.html
-	return array(
+	static $table;
+	if(is_array($table))
+		return $table;
+	else
+		return $table = array(
 		chr(129)=>'&#1027;',chr(131)=>'&#1107;',chr(138)=>'&#1033;',chr(140)=>'&#1034;',chr(141)=>'&#1036;',
 		chr(142)=>'&#1035;',chr(143)=>'&#1039;',chr(144)=>'&#1106;',chr(154)=>'&#1113;',chr(156)=>'&#1114;',
 		chr(157)=>'&#1116;',chr(158)=>'&#1115;',chr(159)=>'&#1119;',chr(161)=>'&#1038;',chr(162)=>'&#1118;',
@@ -377,10 +381,9 @@ function translitteration ($texte, $charset='AUTO') {
 	if ($charset == 'iso-8859-1') {
 		$texte = translit_iso8859_1($texte);
 	} else if ($charset == 'windows-1251') {
-		$texte = strtolower(translit_windows_1251($texte));
+		$texte = translit_windows_1251($texte);
 	} else if ($GLOBALS['flag_iconv']) {
-		@iconv_set_encoding("internal_encoding", "UTF-8");
-		if ($iconv = @iconv($charset, 'ASCII//TRANSLIT', $texte)) {
+		if ($iconv = @iconv(strtoupper($charset), 'ASCII//TRANSLIT', $texte) && !ereg("^?+$",$iconv)) {
 			$texte = $iconv;
 		}
 	}
