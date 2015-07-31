@@ -23,6 +23,7 @@ include_spip('inc/texte');
 // http://doc.spip.org/@help_frame
 function help_frame ($aide, $lang) {
 	$aide = strtr($aide,'<>"\'', '____');
+	$lang = preg_replace(',[^\w-]+,', '', $lang);
 	$frame_menu = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=menu", false, true) . "' name=\"gauche\" scrolling=\"auto\" />\n";
 	$frame_body = "<frame src='" . generer_url_ecrire('aide_index', "aide=$aide&var_lang=$lang&frame=body", false, true) . "' name=\"droite\" scrolling=\"auto\" />\n";
 
