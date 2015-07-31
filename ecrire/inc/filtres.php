@@ -1959,6 +1959,8 @@ function charge_scripts($scripts) {
 // utile pour dist/jquery.js par exemple
 // http://doc.spip.org/@compacte_js
 function compacte_js($flux) {
+	if (!strlen($flux))
+		return $flux;
 	include_spip('inc/class.JavaScriptPacker');
 	$packer = new JavaScriptPacker($flux, 0, true, false);
 
