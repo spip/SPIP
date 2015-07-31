@@ -84,9 +84,13 @@ function spip_connect($serveur='', $version='') {
 			spip_log("spip_connect: absence de charset");
 			return false;
 		}
-	} else {
-		$charset = isset($GLOBALS['meta']['charset_sql_connexion']) ?
-		  $GLOBALS['meta']['charset_sql_connexion'] : 'utf8';
+	} else	{
+		$charset = -1;
+		if (($f = $connexions[$index][$version]['select'])
+		&& ($r = $f('valeur','spip_meta', "nom='charset_sql_connexion'",'','','','',$serveur))
+		&& ($f = $connexions[$index][$version]['fetch'])
+		&& ($r = $f($r, NULL,$serveur)))
+			$charset = $r['valeur'] ? $r['valeur'] : -1;
 	}
 	if ($charset != -1) {
 		$f = $GLOBALS[$jeu]['set_charset'];
