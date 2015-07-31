@@ -295,7 +295,7 @@ if (count($log)>0){
 				reset($tab_moyenne);
 				$moyenne = 0;
 				while (list($val_tab) = each($tab_moyenne))
-					$moyenne += $$val_tab;
+					$moyenne += $val_tab;
 				$moyenne = $moyenne / count($tab_moyenne);
 	
 				$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
