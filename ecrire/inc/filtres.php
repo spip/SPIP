@@ -2292,6 +2292,8 @@ function prepare_icone_base($type, $lien, $texte, $fond, $fonction="", $class=""
 		$class .= ' danger';
 	elseif ($fonction == "rien.gif")
 		$fonction = "";
+	elseif ($fonction == "delsafe")
+		$fonction = "del";
 
 	// remappage des icone : article-24.png+new => article-new-24.png
 	if ($icone_renommer = charger_fonction('icone_renommer','inc',true))
