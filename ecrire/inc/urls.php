@@ -33,7 +33,8 @@ function nettoyer_url_page($url, $contexte=array())
 		if ($type == 'syndic') $type = 'site';
 		$_id = id_table_objet($regs[1]);
 		$contexte[$_id] = $regs[2];
-		return array($contexte, $type, null, $type);
+		$suite = $regs[3];
+		return array($contexte, $type, null, $type, $suite);
 	}
 	return array();
 }

@@ -73,10 +73,18 @@ function assembler($fond, $connect='') {
 		// Informer les boutons d'admin du contexte
 		// (fourni par $renommer ci-dessous lors de la mise en cache)
 			$contexte = $page['contexte'];
+
+			// vider les globales url propres qui ne doivent plus etre utilisees en cas
+			// d'inversion url => objet
+			unset($_SERVER['REDIRECT_url_propre']);
+			unset($_ENV['url_propre']);
 		}
 		// ATTENTION, gestion des URLs transformee par le htaccess
 		// $renommer = 'urls_propres_dist';
-		// renvoie array($contexte, $fond, $url_redirect)
+		// renvoie array($contexte, $type, $url_redirect, $nfond)
+		// $nfond n'est retourne que si l'url est definie apres le ?
+		// et risque d'etre effacee par un form en get
+		// elle est utilisee par form_hidden exclusivement
 		// Compat ascendante si le retour est null:
 		// 1. $contexte est global car cette fonction le modifie.
 		// 2. $fond est passe par reference, pour la meme raison
@@ -109,6 +117,10 @@ function assembler($fond, $connect='') {
 			elseif (function_exists('recuperer_parametres_url'))
 				recuperer_parametres_url($fond, nettoyer_uri());
 
+			// vider les globales url propres qui ne doivent plus etre utilisees en cas
+			// d'inversion url => objet
+			unset($_SERVER['REDIRECT_url_propre']);
+			unset($_ENV['url_propre']);
 
 			// squelette par defaut
 			if (!strlen($fond))
