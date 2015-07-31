@@ -326,7 +326,7 @@ function sql_alltable($spip=NULL, $serveur='', $option=true)
 {
 	$q = sql_showbase($spip, $serveur, $option);
 	$r = array();
-	if ($q) while ($t = sql_fetch($q)) { $r[] = array_shift($t);}
+	if ($q) while ($t = sql_fetch($q, $serveur)) { $r[] = array_shift($t);}
 	return $r;
 }
 

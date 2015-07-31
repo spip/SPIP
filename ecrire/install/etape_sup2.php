@@ -28,19 +28,15 @@ function install_bases_sup($adresse_db, $login_db, $pass_db,  $server_db, $sup_d
 	if (!sql_selectdb($sup_db, $server_db))
 		return "<!-- base inaccessible -->";
 
+	$tables = sql_alltables('%', $server_db);
 
-	$q = sql_showbase('%', $server_db);
-
-	$tables = '';
-	while($r = sql_fetch($q)) {
-		$tables .= "<li>" . array_shift($r) . "</li>\n";
-	}
-	
 	if (!$tables)
 	  $res = _T('install_pas_table');
 	else {
 	  $res = _T('install_tables_base')
-	    . "<ol style='text-align: left'>" . $tables . "</ol>\n";
+	    . "<ol style='text-align: left'>\n<li>"
+	    . join("</li>\n<li>", $tables)
+	    . "</li>\n</ol>\n";
 	}
 
 	if (preg_match(',(.*):(.*),', $adresse_db, $r))
