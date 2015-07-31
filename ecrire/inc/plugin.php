@@ -249,6 +249,40 @@ function ordonne_plugin(){
 	ecrire_plugin_actifs($liste_triee);
 	ecrire_metas();
 }
+function installe_un_plugin($plug,$prefix,$install){
+	// faire les include qui vont bien
+	foreach($install as $file){
+		$file = trim($file);
+		@include_once(_DIR_PLUGINS."$plug/$file");
+	}
+	$prefix_install = $prefix."_install";
+	if (!function_exists($prefix_install))
+		return false;
+	// voir si on a besoin de faire l'install
+	$ok = $prefix_install('test');
+	if (!$ok) {
+		$prefix_install('install');
+		$ok = $prefix_install('test');
+	}
+	return $ok; // le plugin est deja installe et ok
+}
+
+function installe_plugins(){
+	$meta_plug_installes = array();
+	$liste = liste_chemin_plugin_actifs();
+	foreach($liste as $plug){
+		$infos = plugin_get_infos($plug);
+		if (isset($infos['install'])){
+			$ok = installe_un_plugin($plug,$infos['prefix'],$infos['install']);
+			// on peut enregistrer le chemin ici car il est mis a jour juste avant l'affichage
+			// du panneau -> cela suivra si le plugin demenage
+			if ($ok)
+				$meta_plug_installes[] = $plug;
+		}
+	}
+	ecrire_meta('plugin_installes',serialize($meta_plug_installes),'non');
+	ecrire_metas();
+}
 
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
@@ -297,6 +331,8 @@ function plugin_get_infos($plug){
 					$ret['etat'] = trim(end($arbre['etat']));
 				if (isset($arbre['options']))
 					$ret['options'] = $arbre['options'];
+				if (isset($arbre['install']))
+					$ret['install'] = $arbre['install'];
 				if (isset($arbre['fonctions']))
 					$ret['fonctions'] = $arbre['fonctions'];
 				$ret['prefix'] = trim(array_pop($arbre['prefix']));
