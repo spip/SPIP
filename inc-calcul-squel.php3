@@ -2127,14 +2127,10 @@ function calculer_texte($texte)
 {
 	global $dossier_squelettes;
 	$dossier = ($dossier_squelettes ? $dossier_squelettes.'/' : '');
-	if (@file_exists("$dossier/$fichier"))
-		$fichier = "$dossier/$fichier";
-
-
 	$code = "";
 
 	// Reperer les directives d'inclusion de squelette
-	while (ereg("<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z. ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>", $texte, $match)) {
+	while (ereg("<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>", $texte, $match)) {
 		$s = $match[0];
 		$p = strpos($texte, $s);
 		$debut = substr($texte, 0, $p);
