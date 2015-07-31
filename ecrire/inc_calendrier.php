@@ -643,13 +643,13 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			$d = $evenement['DTSTART'];
 			$e = $evenement['DTEND'];
 			$d_jour = substr($d,0,8);
-			$e_jour = substr($e,0,8);
+			$e_jour = $e ? substr($e,0,8) : $d_jour;
 			$debut_avant = false;
 			$fin_apres = false;
 			
 			$radius_top = " radius-top";
 			$radius_bottom = " radius-bottom";
-			
+
 			if ($d_jour <= $date AND $e_jour >= $date)
 			{
 
@@ -672,7 +672,6 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			{ 
 				$heure_fin = $heure_debut ;
 				$minutes_fin = $minutes_debut ;
-				$haut = 0;
 				$bordure = "border-bottom: dashed 2px";
 			}
 			else
@@ -694,9 +693,8 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			if ($debut_avant && $fin_apres)  $opacity = "-moz-opacity: 0.6; filter: alpha(opacity=60);";
 			else $opacity = "";
 						
-						
 			$haut = calendrier_top ("$heure_debut:$minutes_debut", $debut, $fin, $dimheure, $dimjour, $fontsize);
-			$bas = calendrier_top ("$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
+			$bas =  !$e ? $haut :calendrier_top ("$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			$hauteur = calendrier_height ("$heure_debut:$minutes_debut", "$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			if ($bas_prec > $haut) $decale += $modif_decalage;
 			else $decale = (4 * $fontsize);

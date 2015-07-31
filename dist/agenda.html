@@ -7,5 +7,6 @@
 <script type="text/javascript" src="ecrire/layer.js"></script>
 <script type="text/javascript" src="ecrire/presentation.js"></script>
 </head><body>
-[(#ENV{type, mois}|agenda_connu)<INCLURE(page.php3){fond=#ENV{type}}{type}{annee}{mois}{jour}{echelle}{partie_cal}>]
+[(#ENV{type, mois}|agenda_connu)<INCLURE(page.php3)
+ {fond=#ENV{type}}{type}{delais=900}{annee}{mois}{jour}{echelle}{partie_cal}>]
 </body></html>
