@@ -1218,6 +1218,28 @@ div.brouteur_rubrique_on div a {
 	z-index: 1;
 }
 
+
+/*
+ * Calendrier
+ */
+
+.navigation-calendrier { 
+	background-color: <?php echo $couleur_foncee; ?>;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+
+}
+#nav-cal-choix-display {
+	float: <?php echo $right; ?>;
+	padding-<?php echo $left; ?>: 10px;
+}
+#nav-cal-choix-calendrier {
+	float: <?php echo $right; ?>;
+	padding-<?php echo $left; ?>: 10px;	
+}
+
+
+
 /*
  * Styles generes par les raccourcis de mis en page
  */

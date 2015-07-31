@@ -264,9 +264,11 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 		$script .= (strpos($script,'?') ? '&' : '?');
 	$args = "jour=$jour&mois=$mois&annee=$annee$ancre";
 	  
-  	$retour = "<div class='navigation-calendrier' style='background-color: $couleur_foncee'>";
+  	$retour = "<div class='navigation-calendrier'>";
+
 
    	if ($type != "mois") {
+   		$retour .= "<div id='nav-cal-choix-display'>";
 		if ($partie_cal == "tout") $img_att = " class='calendrier-opacity'";
 		else $img_att = "";
 		$retour .= "<span$img_att>"
@@ -301,15 +303,17 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 					 "loupe-plus.gif",
 					 '', 
 					 _T('info_zoom'). '+');
- 		$retour .= "&nbsp;";
+ 		$retour .= "</div>";
  	}
 
-        $img_att = ($type == 'jour') ? " class='calendrier-opacity'" : '';
-	$retour .= http_href_img(($script . "type=jour&echelle=$echelle&$args"),"cal-jour.gif", $img_att, _T('cal_par_jour')) . "&nbsp;";
+	$retour .= "<div id='nav-cal-choix-calendrier'>";
+    $img_att = ($type == 'jour') ? " class='calendrier-opacity'" : '';
+	$retour .= http_href_img(($script . "type=jour&echelle=$echelle&$args"),"cal-jour.gif", $img_att, _T('cal_par_jour')) . "";
 	$img_att = ($type == 'semaine') ?  " class='calendrier-opacity'" : "" ;
-	$retour .= http_href_img($script . "type=semaine&echelle=$echelle&$args", "cal-semaine.gif", $img_att, _T('cal_par_semaine'))  . "&nbsp;";;
+	$retour .= http_href_img($script . "type=semaine&echelle=$echelle&$args", "cal-semaine.gif", $img_att, _T('cal_par_semaine'))  . "";;
 	$img_att = ($type == 'mois') ? " class='calendrier-opacity'" : "" ;
 	$retour .= http_href_img($script . "type=mois&echelle=$echelle&$args","cal-mois.gif", $img_att, _T('cal_par_mois'));
+	$retour .= "</div>";
 
 	$today=getdate(time());
 	$jour_today = $today["mday"];
