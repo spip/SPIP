@@ -1657,21 +1657,6 @@ function debut_gauche($rubrique = "asuivre") {
 //
 
 function debut_droite() {
-	/*
-	//
-	// Boite de recherche
-	//
-
-	echo '<p><form method="get" action="recherche.php3">';
-	debut_cadre_relief();
-	echo '<font face="verdana,arial,helvetica,sans-serif" size="2">';
-	echo 'Recherche sur les titres des articles et des br&egrave;ves&nbsp;:<br>';
-	echo '<input type="text" size="18" name="recherche" class="spip_recherche">';
-	echo "</font>\n";
-	fin_cadre_relief();
-	echo "</form>";
-	*/
-	
 	?>
 	<br></font>
 	&nbsp;
@@ -1682,16 +1667,32 @@ function debut_droite() {
 	<?php
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && $GLOBALS['zap']=='oui' && zap_sessions($GLOBALS['auteur_session']['login'], false)) {
+	if ($GLOBALS['spip_session'] && $GLOBALS['secu']=='oui') {
 		debut_cadre_enfonce();
-		echo propre('<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5"> Attention: une autre connexion
-			&agrave; votre nom est en cours. Probablement est-ce parce que vous ne vous
-			&ecirc;tes pas d&eacute;connect&eacute; apr&egrave;s votre dernier passage,
-			ou parce que vous vous connectez simultan&eacute;ment avec deux navigateurs.
-			Si tel est le cas, cela ne pr&ecirc;te pas &agrave; cons&eacute;quence.
-
-			En cas de doute, toutefois, [cliquez sur ce texte pour supprimer
-			l\'autre session->../spip_cookie.php3?zap_session=oui&redirect=./ecrire/].');
+		gros_titre("Informations de s&eacute;curit&eacute;");
+		echo "<p>";
+		if (zap_sessions($GLOBALS['auteur_session']['login'], false)) {
+			echo '<img src="img_pack/warning.gif" align="left" hspace="5" vspace="5"> ';
+			echo "<b>SPIP a conserv&eacute; en m&eacute;moire une autre connexion &agrave; votre nom.</b><br>";
+			echo "Le plus souvent c'est parce que vous ne vous &ecirc;tes pas d&eacute;connect&eacute; ";
+			echo "apr&egrave;s votre dernier passage, ou parce qu'il vous arrive de vous connecter ";
+			echo "depuis plusieurs navigateurs ou plusieurs ordinateurs diff&eacute;rents, ou encore ";
+			echo "parce que vous utilisez un identifiant partag&eacute; avec d'autres personnes.\n";
+			echo "<p>Si toutefois vous pensez que ces connexions n'ont pas lieu d'exister et que vous ";
+			echo "voulez emp&ecirc;cher au maximum tout probl&egrave;me de s&eacute;curit&eacute;, ";
+			echo "vous pouvez tuer toutes les autres connexions pr&eacute;sentes.\n";
+			echo "<form action='../spip_cookie.php3' method='post'>";
+			echo "<input type='hidden' name='zap_session' value='oui'>";
+			echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?secu=oui'>";
+			echo "<div align='right'>";
+			echo "<input type='submit' class='fondo' name='submit' value='Terminer les autres connexions'>";
+			echo "</form>\n";
+		}
+		else {
+			echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><br>";
+			echo "D'autre part, si vous voulez que votre connexion actuelle soit supprim&eacute;e de la ";
+			echo "m&eacute;moire de SPIP, il suffit de vous d&eacute;connecter en utilisant l'icone d&eacute;di&eacute;e.";
+		}
 		fin_cadre_enfonce();
 	}
 }

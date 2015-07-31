@@ -81,13 +81,14 @@ function sous_enfant($collection2){
 //
 
 echo "<p align='left'>";
-
 debut_cadre_relief("fiche-perso-24.gif");
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-echo bouton_block_invisible("info_perso");
+if ($bonjour == "oui") echo bouton_block_visible("info_perso");
+else echo bouton_block_invisible("info_perso");
 echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
 
-echo debut_block_invisible("info_perso");
+if ($bonjour == "oui") echo debut_block_visible("info_perso");
+else echo debut_block_invisible("info_perso");
 
 if ($connect_activer_messagerie != "non") {
 	echo "<br>Vous utilisez la messagerie interne de ce site. ";
@@ -103,8 +104,8 @@ else {
 	echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
 }
 
-
 icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
+
 
 //
 // Supprimer le cookie, se deconnecter...
@@ -113,10 +114,10 @@ icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?i
 if ($connect_statut == "0minirezo" AND $cookie_admin) {
 	icone_horizontale("Supprimer le cookie de correspondance" . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&redirect=".rawurlencode("./ecrire/index.php3"), "cookie-24.gif", "");
 }
-
-
+if ($options == "avancees") {
+	icone_horizontale("Afficher les informations de s&eacute;curit&eacute;", "index.php3?secu=oui", "base-24.gif", "");
+}
 echo fin_block();
-
 fin_cadre_relief();
 
 
@@ -362,15 +363,16 @@ if ($relief) {
 enfant(0);
 
 
-$les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
-if (strpos($les_enfants2,"<P>")){
-	$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<P>"),strlen($les_enfants2));
-	$les_enfants1=substr($les_enfants,0,strlen($les_enfants)-strlen($les_enfants2));
-}else{
-	$les_enfants1=$les_enfants;
-	$les_enfants2="";
-}
+if ($options == 'avancees') {
 
+	$les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
+	if (strpos($les_enfants2,"<P>")){
+		$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<P>"),strlen($les_enfants2));
+		$les_enfants1=substr($les_enfants,0,strlen($les_enfants)-strlen($les_enfants2));
+	}else{
+		$les_enfants1=$les_enfants;
+		$les_enfants2="";
+	}
 
 // Afficher les sous-rubriques
 	echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
@@ -381,8 +383,6 @@ if (strpos($les_enfants2,"<P>")){
 	echo "</td></tr>";
 	echo "</table>";
 
-
-if ($options == 'avancees') {
 
 	//
 	// Vos articles publies
