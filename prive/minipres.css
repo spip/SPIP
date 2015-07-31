@@ -119,7 +119,7 @@ body.pass #minipres {}
 
 /* Couleurs des liens
 ---------------------------------------------- */
-a { color: #e86519; text-decoration: none; }
-a:visited { color: #75507b; }
+a { color: #75507b; text-decoration: none; }
+a:focus,
+a:hover { color: #e86519; text-decoration: underline; }
 a:active { color: #8ae234; }
-a:hover { text-decoration: underline; }

@@ -34,8 +34,8 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 	
 	[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 	<p class="retour">
-		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onClick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
-		&#91;<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+		[<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onClick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a> | ]
+		<a href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>
 	</p>
 	<p class="generator">
 		<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="63" height="40" /></a>
