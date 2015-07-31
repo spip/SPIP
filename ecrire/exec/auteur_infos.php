@@ -41,7 +41,7 @@ function exec_auteur_infos_dist() {
 			$auteur['nom'] = _request('nom');
 	}
 
-	if (!$auteur AND !$new) {
+	if (!$auteur AND !$new AND !$echec) {
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('auteurs'));
 	}
