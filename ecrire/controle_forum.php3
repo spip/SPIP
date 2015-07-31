@@ -193,12 +193,32 @@ if (!$page) $page = "public";
 echo "<br><br><br>";
 gros_titre(_T('titre_forum_suivi'));
 barre_onglets("suivi_forum", $page);
+
+if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
+	echo "<B>"._T('avis_non_acces_page')."</B>";
+	exit;
+}
+
 debut_gauche();
 debut_boite_info();
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
 echo _T('info_gauche_suivi_forum_2');
 echo aide("suiviforum");
 echo "</FONT>";
+
+// Afficher le lien RSS
+include_ecrire('inc_sites.php3');
+$op = 'forums';
+$args = array(
+	'page' => $page
+);
+echo "<div style='text-align: "
+	. $GLOBALS['spip_lang_right']
+	. ";'>"
+	. bouton_spip_rss($op, $args)
+	."</div>";
+
+
 
 fin_boite_info();
 debut_droite();
@@ -207,25 +227,8 @@ debut_droite();
 // Debut de la page de controle
 //
 
-if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
-	echo "<B>"._T('avis_non_acces_page')."</B>";
-	exit;
-}
-
-switch ($page) {
-case 'public':
-	$query_forum = "statut IN ('publie', 'off', 'prop') AND texte!=''";
-	break;
-case 'interne':
-	$query_forum = "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
-	break;
-case 'vide':
-	$query_forum = "statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND texte=''";
-	break;
-default:
-	$query_forum = "0=1";
-	break;
-}
+// recuperer le critere SQL qui selectionne nos forums
+$query_forum = critere_statut_controle_forum($page);
 
 // Si un id_controle_forum est demande, on adapte le debut
 if ($debut_id_forum = intval($debut_id_forum)

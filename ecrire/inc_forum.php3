@@ -196,6 +196,28 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	return $controle;
 }
 
+// Selon ce qu'on veut suivre depuis ecrire/controle_forum, retourner le SQL
+function critere_statut_controle_forum($page) {
+	switch ($page) {
+	case 'public':
+		$query_forum = "statut IN ('publie', 'off', 'prop') AND texte!=''";
+		break;
+	case 'prop':
+		$query_forum = "statut='prop'";
+		break;
+	case 'interne':
+		$query_forum = "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
+		break;
+	case 'vide':
+		$query_forum = "statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND texte=''";
+		break;
+	default:
+		$query_forum = "0=1";
+		break;
+	}
+	return $query_forum;
+}
+
 // Index d'invalidation des forums
 function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 	if ($id_article) return 'a'.$id_article; 
@@ -277,5 +299,44 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 	}
 }
 
+// Interface pour SPIP RSS
+function rss_suivi_forums($a) {
+	include_ecrire("inc_forum.php3");
+
+	$query_forum = critere_statut_controle_forum($a['page']);
+
+	$result_forum = spip_query("
+	SELECT	*
+	FROM	spip_forum
+	WHERE " . $query_forum . "
+	ORDER BY date_heure DESC LIMIT 0,20"
+	);
+
+	while ($t = spip_fetch_array($result_forum)) {
+		$item = array();
+		$item['title'] = typo($t['titre']);
+		if ($a['page'] == 'public'
+		AND $t['statut']<>'publie'
+		)
+			$item['title'] .= ' ('.$t['statut'].')';
+		$item['date'] = $t['date_heure'];
+		$item['author'] = $t['auteur'];
+		if ($t['email_auteur'])
+			$item['author'] .= ' &lt;'.$t['email_auteur'].'&gt;';
+		$item['url'] = lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS
+			.'controle_forum.php3?page='.$a['page'].'&debut_id_forum='.$t['id_forum'];
+		$item['description'] = propre($t['texte']);
+		if ($GLOBALS['les_notes']) {
+			$item['description'] .= '<hr />'.$GLOBALS['les_notes'];
+			$GLOBALS['les_notes'] = '';
+		}
+		if ($t['nom_site'] OR vider_url($t['url_site']))
+			$item['description'] .= propre("\n- [".$t['nom_site']."->".$t['url_site']."]<br />");
+
+		$rss[] = $item;
+	}
+
+	return $rss;
+}
 
 ?>
