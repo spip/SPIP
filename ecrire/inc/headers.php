@@ -55,6 +55,7 @@ function redirige_par_entete($url, $equiv='') {
 	exit;
 }
 
+// http://doc.spip.org/@redirige_url_ecrire
 function redirige_url_ecrire($script='', $args='', $equiv='') {
 	return redirige_par_entete(generer_url_ecrire($script, $args, true), $equiv);
 }

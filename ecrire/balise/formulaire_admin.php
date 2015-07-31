@@ -91,6 +91,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 // Attention a l'ordre dans la boucle:
 //	on ne veut pas la rubrique si un autre bouton est possible
 
+// http://doc.spip.org/@admin_objet
 function admin_objet()
 {
 	include_spip('inc/urls');
@@ -125,6 +126,7 @@ function admin_objet()
 }
 
 
+// http://doc.spip.org/@admin_preview
 function admin_preview($id, $id_type)
 {
 	if ($GLOBALS['var_preview']) return '';
@@ -151,6 +153,7 @@ function admin_preview($id, $id_type)
 // Regler les boutons dans la langue de l'admin (sinon tant pis)
 //
 
+// http://doc.spip.org/@admin_lang
 function admin_lang()
 {
 	$alang = sql_getfetsel('lang', 'spip_auteurs', "login=" . sql_quote(preg_replace(',^@,','',@$_COOKIE['spip_admin'])));
@@ -162,6 +165,7 @@ function admin_lang()
 	return $alang;
 }
 
+// http://doc.spip.org/@admin_valider
 function admin_valider()
 {
 	global $xhtml;
@@ -173,6 +177,7 @@ function admin_valider()
 		 . rawurlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 }
 
+// http://doc.spip.org/@admin_debug
 function admin_debug()
 {
 	return (($GLOBALS['forcer_debug']
@@ -186,6 +191,7 @@ function admin_debug()
 	  ? parametre_url(self(),'var_mode', 'debug', '&'): '';
 }
 
+// http://doc.spip.org/@admin_stats
 function admin_stats($id, $id_type, $var_preview)
 {
 	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
