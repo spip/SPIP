@@ -26,6 +26,7 @@ function action_supprimer_traduction_dist() {
 	else action_supprimer_traduction_post($r);
 }
 
+// http://doc.spip.org/@action_supprimer_traduction_post
 function action_supprimer_traduction_post($r)
 {
 	spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);

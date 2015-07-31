@@ -27,6 +27,7 @@ function action_dater_dist() {
 	else action_dater_post($r);
 }
 
+// http://doc.spip.org/@action_dater_post
 function action_dater_post($r)
 {
 	include_spip('inc/date');

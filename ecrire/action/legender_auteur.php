@@ -33,6 +33,7 @@ function action_legender_auteur()
         } else action_legender_post($r);
 }
 
+// http://doc.spip.org/@action_legender_post
 function action_legender_post($r)
 {
 	global $auteur_session, $bio,

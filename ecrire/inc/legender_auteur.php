@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@inc_legender_auteur
+// http://doc.spip.org/@inc_legender_auteur_dist
 function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redirect='')
 {
 	$corps = (($mode < 0) OR !statut_modifiable_auteur($id_auteur, $auteur))
@@ -25,6 +25,7 @@ function inc_legender_auteur_dist($id_auteur, $auteur, $mode, $echec='', $redire
 
 }
 
+// http://doc.spip.org/@legender_auteur_saisir
 function legender_auteur_saisir($id_auteur, $auteur, $mode, $echec='', $redirect='')
 {
 	global $options, $connect_statut, $connect_id_auteur, $connect_toutes_rubriques;
@@ -225,6 +226,8 @@ function apparait_auteur_infos($id_auteur, $auteur)
 	. fin_cadre_formulaire(true);
 }
 
+
+// http://doc.spip.org/@legender_auteur_voir
 function legender_auteur_voir($auteur, $redirect)
 {
 	global $connect_toutes_rubriques, $connect_statut, $connect_id_auteur, $champs_extra, $options,$spip_lang_right ;

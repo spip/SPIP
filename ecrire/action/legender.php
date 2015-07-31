@@ -33,6 +33,7 @@ function action_legender_dist() {
 	} else action_legender_post($r);
 }
 
+// http://doc.spip.org/@action_legender_post
 function action_legender_post($r)
 {
 

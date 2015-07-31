@@ -26,6 +26,7 @@ function action_editer_mot_dist() {
 	else action_editer_mot_post($r);
 }
 
+// http://doc.spip.org/@action_editer_mot_post
 function action_editer_mot_post($r)
 {
 	$redirect = _request('redirect');

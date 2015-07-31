@@ -122,6 +122,7 @@ function cadre_auteur_infos($id_auteur, $auteur)
 }
 
 
+// http://doc.spip.org/@auteurs_interventions
 function auteurs_interventions($id_auteur, $statut)
 {
 	global $connect_statut, $connect_id_auteur;
