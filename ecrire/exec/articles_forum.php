@@ -13,16 +13,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/forum'); // pour boutons_controle_forum 
+include_spip('inc/autoriser');
 
 // http://doc.spip.org/@exec_articles_forum_dist
 function exec_articles_forum_dist()
 {
-  global $connect_statut, $debut, $id_article, $pack, $enplus;
+	$id_article = intval(_request('id_article'));
 
-	$id_article = intval($id_article);
-	$debut = intval($debut);
-	$pack = intval($pack);
-	$enplus = intval($enplus);
+	if (!autoriser('moderer_forum', 'article', $id_article))
+		return;
+
+	$debut = intval(_request('debut'));
+	$pack = intval(_request('pack'));
+	$enplus = intval(_request('enplus'));
 
 	if (!$pack) $pack = 5; // nb de forums affiches par page
 	if (!$enplus) $enplus = 200;	// intervalle affiche autour du debut
@@ -47,9 +50,7 @@ function exec_articles_forum_dist()
 	. '<br />'
 	. afficher_forum($res,"", '', $id_article);
 
-	$droit= acces_rubrique($id_rubrique);
-
-	if (_request('var_ajaxcharset') AND $droit) ajax_retour($mess);
+	if (_request('var_ajaxcharset')) ajax_retour($mess);
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
 
@@ -57,7 +58,6 @@ function exec_articles_forum_dist()
 
 	articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
 
-	if (!$droit) return;
 
 	echo "<div class='serif2' id='$ancre'>";
 	echo $mess;

@@ -164,4 +164,21 @@ function autoriser_voir_revisions_dist($faire, $type, $id, $qui, $opt) {
 		autoriser('voir', $type, $id, $qui, $opt);
 }
 
+// Moderer le forum ?
+// = modifier l'objet correspondant (si forum attache a un objet)
+// = droits par defaut sinon (admin complet pour moderation complete)
+function autoriser_moderer_forum_dist($faire, $type, $id, $qui, $opt) {
+	return
+		autoriser('modifier', $type, $id, $qui, $opt);
+}
+
+// Moderer la petition ?
+// = modifier l'article correspondant
+// = droits par defaut sinon (admin complet pour moderation de tout)
+function autoriser_moderer_petition_dist($faire, $type, $id, $qui, $opt) {
+	return
+		autoriser('modifier', $type, $id, $qui, $opt);
+}
+
+
 ?>

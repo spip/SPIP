@@ -29,23 +29,29 @@ function get_forums_publics($id_article=0) {
 
 // Cree le formulaire de modification du reglage des forums de l'article
 // http://doc.spip.org/@inc_regler_moderation_dist
-function inc_regler_moderation_dist($id_article, $script, $args, $flag=false) {
+function inc_regler_moderation_dist($id_article, $script, $args) {
 	include_spip('inc/presentation');
 
-	global $spip_lang_right, $options, $connect_statut;
-
-	if (!($options == "avancees" && $connect_statut=='0minirezo' && $flag))
-	  return '';
+	global $spip_lang_right;
 
 	$statut_forum = get_forums_publics($id_article);
 
-	$nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
+	$nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')"));
+	$nb_forums = $nb_forums['count'];
 
 	if ($nb_forums) {
-		$r = icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
-	} else 	$r = '';
+		$r = '<!-- visible -->' // message pour l'appelant
+		. icone_horizontale(
+			_T('icone_suivi_forum', array('nb_forums' => $nb_forums)),
+			generer_url_ecrire("articles_forum","id_article=$id_article"),
+			"suivi-forum-24.gif",
+			"",
+			false
+		);
+	} else
+		$r = '';
 
-	$r = "\n\t"
+	$r .= "\n\t"
 	. _T('info_fonctionnement_forum')
 	. "\n\t<select name='change_accepter_forum'
 		class='fondl'
