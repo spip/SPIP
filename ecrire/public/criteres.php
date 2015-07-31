@@ -247,7 +247,7 @@ function critere_logo_dist($idb, &$boucles, $crit) {
 }
 
 
-// http://doc.spip.org/@critere_groupby_dist
+// http://doc.spip.org/@critere_fusion_dist
 function critere_fusion_dist($idb,&$boucles, $crit) {
 	if (isset($crit->param[0])) {
 		$x = $crit->param[0];
@@ -259,6 +259,7 @@ function critere_fusion_dist($idb,&$boucles, $crit) {
 			"{groupby ?} BOUCLE$idb");
 }
 
+// http://doc.spip.org/@calculer_critere_arg_dynamique
 function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 {
 	global $table_des_tables, $tables_des_serveurs_sql;
