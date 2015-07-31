@@ -63,7 +63,9 @@ document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><b
 <script type="text/javascript"><!--
 document.getElementById('var_login[_(#ENV{login})]').focus();
 --></script>[
-	<form action="(#ENV{auth_http})" method="get">
+	<form action="(#ENV{auth_http})" method="get">[
+	(#ENV{auth_http}|form_hidden)
+	]
 		<fieldset>
 		<div>
 		<:login_preferez_refuser:>
