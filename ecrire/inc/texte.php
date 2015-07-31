@@ -941,18 +941,24 @@ function supprime_img($letexte) {
 // http://doc.spip.org/@traiter_modeles
 function traiter_modeles($texte, $doublons=false) {
 	// detecter les modeles (rapide)
-	if (preg_match_all('/<[a-z_-]{3,}[0-9|]+/iS',
+	if (preg_match_all('/<[a-z_-]{3,}\s*[0-9|]+/iS',
 	$texte, $matches, PREG_SET_ORDER)) {
 		include_spip('public/assembler');
 		foreach ($matches as $match) {
 			// Recuperer l'appel complet (y compris un eventuel lien)
-			// $regs : 1 => modele, 2 => type, 3 => id, 5 => params, 6 => a
+			// $regs : 1 => modele, 2 => type, 3 => id, 4 => params, 5 => a
 			$a = strpos($texte,$match[0]);
 			preg_match(
-			'/^(<([a-z_-]{3,})([0-9]*)([|](.*?))?'.'>)\s*(<\/a>)?/isS',
+			'/^' #debut
+			.'(<([a-z_-]{3,})' # <modele
+			.'\s*([0-9]*)\s*' # id
+			.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
+			.'>)' # fin du modele >
+			.'\s*(<\/a>)?' # eventuel </a>
+			.'/isS',
 			substr($texte, $a), $regs);
 
-			if ($regs[6] AND preg_match(
+			if ($regs[5] AND preg_match(
 			',<a\s.*>\s*$,Uis', substr($texte, 0, $a), $r)) {
 				$lien = array(
 					extraire_attribut($r[0],'href'),
@@ -967,7 +973,7 @@ function traiter_modeles($texte, $doublons=false) {
 
 			// calculer le modele
 			if ($doublons) $modele = ''; else # hack articles_edit, breves_edit
-			$modele = inclure_modele($regs[2], $regs[3], $regs[5], $lien);
+			$modele = inclure_modele($regs[2], $regs[3], $regs[4], $lien);
 
 			// le remplacer dans le texte
 			if ($modele !== false) {
