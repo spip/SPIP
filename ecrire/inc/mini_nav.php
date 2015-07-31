@@ -38,12 +38,14 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $list=array(), $col = 1,
 	$res = spip_query("SELECT rub1.id_rubrique, rub1.titre, rub1.id_parent, rub1.lang, rub1.langue_choisie FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$rub_exclus GROUP BY rub1.id_rubrique ORDER BY rub1.titre");
 
 	while ($row = spip_fetch_array($res)) {
-		$id = $row["id_rubrique"];
+		$id = $row['id_rubrique'];
+		$row['enfants'] = $rub[$id]['enfants'];
 		$rub[$id] = $row;
-		$rub[$row["id_parent"]]["enfants"] = true;
-		if ($row["id_parent"] == $id_rubrique)
+		$rub[$row['id_parent']]['enfants'] = true;
+
+		if ($row['id_parent'] == $id_rubrique)
 			$ordre[$id] = trim(typo($row['titre']))
-			. (($row["langue_choisie"] != "oui") ? '' : (" [" . $row["lang"] . "]"));
+			. (($row['langue_choisie'] != 'oui') ? '' : (' [' . $row['lang'] . ']'));
 
 	}
 
