@@ -52,7 +52,7 @@ function resize_logo($image) {
 }
 
 
-function afficher_boite_logo($racine, $titre, $toujours_afficher = 'false') {
+function afficher_boite_logo($racine, $titre) {
 	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur, $PHP_SELF;
 	global $couleur_foncee, $couleur_claire;
 
@@ -88,7 +88,7 @@ function afficher_boite_logo($racine, $titre, $toujours_afficher = 'false') {
 
 		echo "<BR>$taille_txt\n";
 		echo "<BR>[<A HREF='../spip_image.php3?";
-		$elements = array('id_article', 'id_breve', 'id_syndic', 'coll', 'id_mot');
+		$elements = array('id_article', 'id_breve', 'id_syndic', 'coll', 'id_mot', 'id_auteur');
 		while (list(,$element) = each ($elements)) {
 			if ($$element) {
 				echo $element.'='.$$element.'&';
