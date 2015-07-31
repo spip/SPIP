@@ -228,9 +228,10 @@ function pipeline($action, $val=null) {
  *   spip_log($message,_LOG_DEBUG)
  *   spip_log($message,'recherche.'._LOG_DEBUG)
  *   ```
- * 
+ *
+ * @api
  * @link http://doc.spip.org/@spip_log
- * @see inc_log_dist()
+ * @uses inc_log_dist()
  *
  * @param string $message
  *     Message à loger
@@ -251,7 +252,7 @@ function spip_log($message=NULL, $name=NULL) {
 	if (!isset($regs[2]) OR !$niveau = $regs[2])
 		$niveau = _LOG_INFO;
 
-	if ($niveau <= _LOG_FILTRE_GRAVITE) {
+	if ($niveau <= (defined('_LOG_FILTRE_GRAVITE') ? _LOG_FILTRE_GRAVITE : _LOG_INFO_IMPORTANTE)) {
 		if (!$pre){
 			$pre = array(
 				_LOG_HS=>'HS:',
@@ -269,9 +270,13 @@ function spip_log($message=NULL, $name=NULL) {
 	}
 }
 
-//
-// Enregistrement des journaux
-//
+/**
+ * Enregistrement des journaux
+ *
+ * @uses inc_journal_dist()
+ * @param string $phrase Texte du journal
+ * @param array $opt Tableau d'options
+**/
 function journal($phrase, $opt = array()) {
 	$journal = charger_fonction('journal', 'inc');
 	$journal($phrase, $opt);
