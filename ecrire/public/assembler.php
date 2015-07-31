@@ -43,10 +43,11 @@ function public_assembler_dist($fond) {
 		reponse_confirmation($_GET['var_confirm']);
 	}
 
-	//  refus du debug si l'admin n'est pas connecte
+	//  forcer la connexion si on veut le debusqueur
 	if ($var_mode=='debug') {
-		if ($auteur_session['statut'] == '0minirezo')
-			spip_log('debug !');
+		include_spip('inc/autoriser');
+		if (autoriser('configurer'))
+			spip_log($auteur_session['nom'] . " ausculte $fond");
 		else {
 			include_spip('inc/headers');
 			redirige_par_entete(generer_url_public('login',
