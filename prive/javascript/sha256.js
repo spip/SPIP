@@ -41,8 +41,14 @@ function core_sha256 (m, l) {
 }
 function str2binb (str) {
   var bin = Array();
+	var i;
+	chrsz=8;
+  for(i = 0; i < str.length; i ++)
+		if (str.charCodeAt(i)>0x7F)
+			chrsz = 16;
+	
   var mask = (1 << chrsz) - 1;
-  for(var i = 0; i < str.length * chrsz; i += chrsz)
+  for(i = 0; i < str.length * chrsz; i += chrsz)
     bin[i>>5] |= (str.charCodeAt(i / chrsz) & mask) << (24 - i%32);
   return bin;
 }

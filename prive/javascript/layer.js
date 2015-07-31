@@ -268,23 +268,43 @@ function onkey_rechercher(valeur, rac, url, img, nid, init) {
 // ici :
 // * retailler les input
 // * utiliser ctrl-s, F8 etc comme touches de sauvegarde
+var verifForm_clicked=false;
 function verifForm(racine) {
 	// Clavier pour sauver (cf. crayons)
-	jQuery('form', racine||document)
-	.keypress(function(e){
-		if (
-		(e.ctrlKey && (
-			/* ctrl-s ou ctrl-maj-S, firefox */
-			((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
-			/* ctrl-s, safari */
-			|| (e.charCode==19 && e.keyCode==19)
-		) || (!e.charCode && e.keyCode == 119 /* F8, windows */)
-		) {
-			jQuery(this).find('input[type=submit]')
-			.click();
-			return false;
-		}
-	});
+	// cf http://www.quirksmode.org/js/keys.html
+	if (!jQuery.browser.msie)
+		// keypress renvoie le charcode correspondant au caractere frappe (ici s)
+		jQuery('form', racine||document)
+		.keypress(function(e){
+			if (
+				((e.ctrlKey && (
+					/* ctrl-s ou ctrl-maj-S, firefox */
+					(((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
+					/* ctrl-s, safari */
+					|| (e.charCode==19 && e.keyCode==19)
+				 )
+				) /* ctrl-s, Opera Mac */
+				|| (e.keyCode==19 && jQuery.browser.opera))
+				&& !verifForm_clicked
+			) {
+				verifForm_clicked = true;
+				jQuery(this).find('input[type=submit]')
+				.click();
+				return false;
+			}
+		});
+	else
+		// keydown renvoie le keycode correspondant a la touche pressee (ici F8)
+		jQuery('form', racine||document)
+		.keydown(function(e){
+			//jQuery('#ps').after("<div>ctrl:"+e.ctrlKey+"<br />charcode:"+e.charCode+"<br />keycode:"+e.keyCode+"<hr /></div>");
+			if (!e.charCode && e.keyCode == 119 /* F8, windows */ && !verifForm_clicked){
+				verifForm_clicked = true;
+				jQuery(this).find('input[type=submit]')
+				.click();
+				return false;
+			}
+		});
 	
 	// vieux fonctionnement verifForm, desormais uniquement sur MSIE < 8:
 	// forcer la largeur des elements de formulaires a 100%
