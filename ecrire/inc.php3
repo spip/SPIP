@@ -44,6 +44,13 @@ if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }
 
+// Debloquer articles
+if ($debloquer_article) {
+	$query = "UPDATE spip_articles SET auteur_modif='0' WHERE id_article='$debloquer_article'";
+	spip_query ($query);
+}
+
+
 // deux globales (compatibilite ascendante)
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];

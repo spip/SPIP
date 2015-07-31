@@ -1532,6 +1532,30 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</tr></table>";
 	echo "</td></tr></table>";
 	
+	
+	// Enventuellement, liste des articles bloques
+	$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+	$result = spip_query($query);
+	if (@mysql_num_rows($result) > 0) {
+	
+		echo "\n<table cellpadding='0' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
+		echo "<table cellpadding='0' background='' width='750'><tr width='750'><td>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo propre("Vous travaillez actuellement sur les articles suivants; les autres participants &agrave; ce site sont invit&eacute;s &agrave; ne pas les modifier. Lorsque vous ne travaillez plus sur ces articles, pensez &agrave; l'indiquer ici en les &laquo;d&eacute;bloquant&raquo;.");
+		echo aide("artmodif");
+		while ($row = @mysql_fetch_array($result)) {
+			$ze_article = $row['id_article'];
+			$ze_titre = propre($row['titre']);
+			echo "<div><li><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+			echo " [<a href='$lien&debloquer_article=$ze_article'>d&eacute;bloquer cet article</a>]";
+			echo "</div>";
+		}
+		echo "</font>";
+		echo "</td>";
+		echo "</tr></table>";
+		echo "</td></tr></table>";
+	}
+	
 echo "<center>";
 }
 
