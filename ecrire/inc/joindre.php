@@ -193,8 +193,9 @@ function afficher_transferer_upload($texte_upload, $dir)
 		"\n<div style='color: #505050;'>"
 		."<label for='chemin'>" . _T('info_selectionner_fichier', $doc)
 		."</label>&nbsp;:<br />\n" .
-		"\n<select name='chemin' id='chemin' size='1' class='fondl' style='width:100%;overflow:hidden;'>" .
-		$texte_upload .
+		"\n<select name='chemin' id='chemin' size='1' class='fondl' style='width:100%;overflow:hidden;'>"
+		. "<option value=''>&gt;&gt;</option>"
+		. $texte_upload .
 		"\n</select>" .
 		"\n<div style='text-align: ".
 		$GLOBALS['spip_lang_right'] .
