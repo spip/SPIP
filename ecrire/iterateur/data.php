@@ -260,7 +260,7 @@ class IterateurDATA implements Iterator {
 
 		// grouper les resultats {fusion /x/y/z} ;
 		if ($this->command['groupby']
-		AND strlen($fusion = $this->command['groupby'][0][1])) {
+		AND strlen($fusion = $this->command['groupby'][0])) {
 			$vu = array();
 			foreach($this->tableau as $k => $v) {
 				$val = Iterateurs_table_valeur($v, $fusion);
@@ -360,15 +360,17 @@ function inc_json_to_array_dist($u) {
 		return (array) $json;
 }
 function inc_csv_to_array_dist($u) {
-	# decodage csv a passer en inc/csv
-	# cf. http://www.php.net/manual/en/function.str-getcsv.php#100579 et suiv.
-	if (function_exists('str_getcsv')) # PHP 5.3.0
-		$tableau = str_getcsv($u);
-	else
-	foreach(array_filter(preg_split('/\r?\n/',$u)) as $ligne)
-		$tableau[] = explode(',', $ligne);
+	include_spip('inc/csv');
+	list($entete,$csv) = analyse_csv($u);
+	array_unshift($csv,$entete);
 
-	return $tableau;
+	include_spip('inc/charsets');
+	foreach ($entete as $k => $v) {
+		$v = strtolower(preg_replace(',\W+,', '_', translitteration($v)));
+		foreach ($csv as &$item)
+			$item[$v] = &$item[$k];
+	}
+	return $csv;
 }
 function inc_rss_to_array_dist($u) {
 	include_spip('inc/syndic');
@@ -406,23 +408,23 @@ function inc_ls_to_array_dist($u) {
 }
 
 function ObjectToArray($object){
-  $xml_array = array();
-  for( $object->rewind(); $object->valid(); $object->next() ) {
-    if(!array_key_exists($object->key(), $xml_array)){
-      $xml_array[$object->key()] = array();
-    }
-    $vars = get_object_vars($object->current());
-    if (isset($vars['@attributes']))
-      foreach($vars['@attributes'] as $k => $v)
-      $xml_array[$object->key()][$k] = $v;
-    if($object->hasChildren()){
-      $xml_array[$object->key()][] = ObjectToArray(
-         $object->current());
-    }
-    else{
-      $xml_array[$object->key()][] = strval($object->current());
-    }
-  }
-  return $xml_array;
+	$xml_array = array();
+	for( $object->rewind(); $object->valid(); $object->next() ) {
+		if(!array_key_exists($object->key(), $xml_array)){
+			$xml_array[$object->key()] = array();
+		}
+		$vars = get_object_vars($object->current());
+		if (isset($vars['@attributes']))
+			foreach($vars['@attributes'] as $k => $v)
+			$xml_array[$object->key()][$k] = $v;
+		if($object->hasChildren()){
+			$xml_array[$object->key()][] = ObjectToArray(
+				$object->current());
+		}
+		else{
+			$xml_array[$object->key()][] = strval($object->current());
+		}
+	}
+	return $xml_array;
 }
 ?>
