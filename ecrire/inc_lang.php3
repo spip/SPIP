@@ -16,32 +16,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Charger un fichier langue
 //
 
-function include_lang($file) {
-	$file = _DIR_LANG . $file;
-	if (@$GLOBALS['included_files'][$file]++) return;
-	include($file);
-}
-
 function charger_langue($lang, $module = 'spip') {
 
-	$fichier_lang = $module.'_'.$lang._EXTENSION_PHP;
-	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
-
-	if ($fichier_lang_exists) {
+	if ($fichier_lang = find_in_path($module.'_'.$lang._EXTENSION_PHP,
+	'AUTO', _DIR_LANG)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
-		include_lang($fichier_lang);
+		include_local($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// la langue par defaut du site -- et au pire sur le francais, qui
 		// *par definition* doit exister, et on copie le tableau dans la
 		// var liee a la langue
 		$l = $GLOBALS['meta']['langue_site'];
-		if (!is_readable(_DIR_LANG . $module.'_'.$l._EXTENSION_PHP));
+		if (!$fichier_lang = find_lang_in_path($module.'_'.$l._EXTENSION_PHP,
+		'AUTO', _DIR_LANG)) {
 			$l = 'fr';
-		$fichier_lang = $module.'_' .$l . _EXTENSION_PHP;
-		if (is_readable(_DIR_LANG . $fichier_lang)) {
+			$fichier_lang = find_lang_in_path($module.'_'.$l._EXTENSION_PHP,
+			'AUTO', _DIR_LANG);
+		}
+		if ($fichier_lang) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
-			include_lang($fichier_lang);
+			include_local($fichier_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
 			#spip_log("module de langue : ${module}_$l.php");

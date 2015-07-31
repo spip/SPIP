@@ -69,11 +69,9 @@ function afficher_raccourcis($module = "public") {
 	global $couleur_foncee;
 	
 	$lang = $module.'_'.$spip_lang;
-	$fichier_lang = $lang._EXTENSION_PHP;
-
-	if (@file_exists(_DIR_LANG . $fichier_lang)) {
+	if ($fichier_lang = find_in_path($lang._EXTENSION_PHP, 'AUTO', _DIR_LANG)) {
 		$GLOBALS['idx_lang'] = 'i18n_' . $lang;
-		include_lang($fichier_lang);
+		include_local($fichier_lang);
 	
 		$tableau = $GLOBALS['i18n_' . $lang];
 		ksort($tableau);
