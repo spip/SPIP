@@ -49,23 +49,23 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'avis_operation_impossible' => 'Operação impossivel',
 	'avis_probleme_archive' => 'Erro na leitura do ficheiro @archive@',
 	'avis_suppression_base' => 'Atenção, a supressão dos dados é irreversível',
-	'avis_version_mysql' => 'A sua versão de SQL (@version_mysql@) não permite a auto-reparação das tabelas da base.', # MODIF
+	'avis_version_mysql' => 'A sua versão de SQL (@version_mysql@) não permite a auto-reparação das tabelas da base de dados.',
 
 	// B
-	'bouton_acces_ldap' => 'Acrescentar o acesso a LDAP >>', # MODIF
+	'bouton_acces_ldap' => 'Acrescentar o acesso a LDAP >>',
 	'bouton_ajouter' => 'Acrescentar ',
 	'bouton_ajouter_participant' => 'ACRESCENTAR UM PARTICIPANTE :',
 	'bouton_annonce' => 'ANÚNCIO',
 	'bouton_annuler' => 'Cancelar',
-	'bouton_cache_activer' => 'Reactivar a cache', # MODIF
-	'bouton_cache_desactiver' => 'Desactivar temporariamente a cache', # MODIF
+	'bouton_cache_activer' => 'Reactivar a cache',
+	'bouton_cache_desactiver' => 'Desactivar temporariamente a cache',
 	'bouton_checkbox_envoi_message' => 'possibilidade de enviar uma mensagem',
 	'bouton_checkbox_indiquer_site' => 'indicar obrigatoriamente um sítio Web',
 	'bouton_checkbox_signature_unique_email' => 'uma única assinatura por endereço email',
 	'bouton_checkbox_signature_unique_site' => 'uma única assinatura por sítio Web',
 	'bouton_demande_publication' => 'Pedir a publicação deste artigo ',
 	'bouton_desactive_tout' => 'Desactivar tudo',
-	'bouton_desinstaller' => 'Desinstalar', # MODIF
+	'bouton_desinstaller' => 'Desinstalar',
 	'bouton_effacer_index' => 'Apagar os índices',
 	'bouton_effacer_tout' => 'Apagar TUDO',
 	'bouton_envoi_message_02' => 'ENVIAR UMA MENSAGEM',
@@ -102,23 +102,23 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'calendrier_synchro' => 'Se utilizar um software de agenda compatível <b>iCal</b>, pode sincronizá-lo com as informações deste sítio.',
 	'config_activer_champs' => 'Activar os campos seguintes',
 	'config_choix_base_sup' => 'Escolher uma base de dados neste servidor',
-	'config_erreur_base_sup' => 'SPIP não tem acesso à lista de bases de dados disponíveis', # MODIF
+	'config_erreur_base_sup' => 'SPIP não tem acesso à lista de bases de dados disponíveis',
 	'config_info_base_sup' => 'Se precisar de consultar outras bases de dados usando SPIP, quer seja neste servidor SQL ou noutro, use este formulário para as declarar. Se deixar alguns campos por preencher, os identificadores de conexão à base de dados principal serão usados.',
 	'config_info_base_sup_disponibles' => 'Bases de dados adicionais que se podem consultar:',
 	'config_info_enregistree' => 'A nova configuração foi guardada',
-	'config_info_logos' => 'Cada elemento do site pode ter o seu próprio logo assim como um « mover o rato sobre o logo »', # MODIF
+	'config_info_logos' => 'Cada elemento do site pode ter o seu próprio logo, assim como um «mouseover»',
 	'config_info_logos_utiliser' => 'Utilizar os logos',
 	'config_info_logos_utiliser_non' => 'Não utilizar os logos',
-	'config_info_logos_utiliser_survol' => 'Usar os logos de "mover o rato sobre o logo"', # MODIF
-	'config_info_logos_utiliser_survol_non' => 'Não usar os logos de "mover o rato sobre o logo"', # MODIF
-	'config_info_redirection' => 'Activando esta opção, pode criar artigos virtuais, que são referências simples a artigos publicados noutros sites, não necessariamente usando SPIP.', # MODIF
+	'config_info_logos_utiliser_survol' => 'Usar os logos de "mouseover"',
+	'config_info_logos_utiliser_survol_non' => 'Não usar os logos de "mouseover"',
+	'config_info_redirection' => 'Activando esta opção, pode criar artigos virtuais, que são referências simples a artigos publicados noutros sítios, não necessariamente usando SPIP.',
 	'config_redirection' => 'Artigos virtuais',
-	'config_titre_base_sup' => 'Declaração de uma base de dados suplementar', # MODIF
-	'config_titre_base_sup_choix' => 'Escolher uma base de dados suplementar', # MODIF
+	'config_titre_base_sup' => 'Declaração de uma base de dados suplementar',
+	'config_titre_base_sup_choix' => 'Escolher uma base de dados suplementar',
 	'connexion_ldap' => 'Conexão:',
-	'copier_en_local' => 'Copiar para o site local', # MODIF
-	'creer_et_associer_un_auteur' => 'Criar e associar um autor', # MODIF
-	'creer_et_associer_une_rubrique' => 'Criar e associar uma rubrica', # MODIF
+	'copier_en_local' => 'Copiar para o sítio local',
+	'creer_et_associer_un_auteur' => 'Criar e associar um autor',
+	'creer_et_associer_une_rubrique' => 'Criar e associar uma rubrica',
 
 	// D
 	'date_mot_heures' => 'horas',
@@ -127,25 +127,25 @@ por razões de segurança (o que é o caso em muitos serviços de hospedagem).  
 	'ecran_securite' => ' + ecrã de segurança @version@',
 	'email' => 'email',
 	'email_2' => 'email :',
-	'en_savoir_plus' => 'Para saber mais', # MODIF
+	'en_savoir_plus' => 'Para saber mais',
 	'entree_adresse_annuaire' => 'Endereço do anuário',
 	'entree_adresse_email' => 'O seu endereço email',
-	'entree_adresse_email_2' => 'Endereço electrónico', # MODIF
+	'entree_adresse_email_2' => 'Endereço electrónico',
 	'entree_base_donnee_1' => 'Endereço da base de dados',
 	'entree_base_donnee_2' => '(Muitas vezes, este endereço corresponde ao do seu sítio, outras vezes, corresponde à menção «localhost», às vezes, fica totalmente vazio.)',
 	'entree_biographie' => 'Curta biografia',
-	'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso :', # MODIF
+	'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso :',
 	'entree_cle_pgp' => 'A sua chave PGP',
-	'entree_cle_pgp_2' => 'Chave PGP', # MODIF
+	'entree_cle_pgp_2' => 'Chave PGP',
 	'entree_contenu_rubrique' => '(Conteúdo da rubrica em poucas palavras.)',
 	'entree_identifiants_connexion' => 'Os seus identificadores de ligação',
-	'entree_identifiants_connexion_2' => 'Identifcadores de conexão', # MODIF
+	'entree_identifiants_connexion_2' => 'Identifcadores de conexão',
 	'entree_informations_connexion_ldap' => 'Por favor preencha este formulário com as informações de ligação ao seu anuário LDAP.
 Essas informações devem poder ser fornecidas pelo administrador do sistema ou da rede',
 	'entree_infos_perso' => 'Quem é você?',
 	'entree_infos_perso_2' => 'Quem é o autor?',
 	'entree_interieur_rubrique' => 'Dentro da rubrica :',
-	'entree_liens_sites' => '<b>Laço hipertexto</b> (referência, sítio a visitar ...)', # MODIF
+	'entree_liens_sites' => '<b>Ligação hipertexto</b> (referência, sítio a visitar...)',
 	'entree_login' => 'O seu login',
 	'entree_login_connexion_1' => 'O login de ligação',
 	'entree_login_connexion_2' => '(Corresponde às vezes ao seu login de acesso ao FTP; outras vezes deixado vazio.)',
@@ -156,30 +156,30 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'entree_nom_fichier' => 'Por favor introduza o nome do ficheiro @texte_compresse@:',
 	'entree_nom_pseudo' => 'O seu nome ou o seu pseudónimo',
 	'entree_nom_pseudo_1' => '(O seu nome ou o seu pseudónimo)',
-	'entree_nom_pseudo_2' => 'Nome ou pseudónimo', # MODIF
+	'entree_nom_pseudo_2' => 'Nome ou pseudónimo',
 	'entree_nom_site' => 'O nome do seu sítio',
-	'entree_nom_site_2' => 'Nome do site do autor', # MODIF
+	'entree_nom_site_2' => 'Nome do sítio do autor',
 	'entree_nouveau_passe' => 'Nova palavra-passe',
 	'entree_passe_ldap' => 'Palavra-passe',
 	'entree_port_annuaire' => 'O número de porta do anuário',
 	'entree_signature' => 'Assinatura',
-	'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
+	'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />',
 	'entree_url' => 'O endereço (URL) do seu sítio',
-	'entree_url_2' => 'Endereço (URL) do site', # MODIF
+	'entree_url_2' => 'Endereço (URL) do sítio',
 	'erreur_connect_deja_existant' => 'Já existe um servidor com esse nome',
-	'erreur_nom_connect_incorrect' => 'O nome de servidor não é autorizado', # MODIF
-	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, pode desactivá-lo.', # MODIF
-	'erreur_plugin_fichier_absent' => 'Ficheiro inexistente', # MODIF
-	'erreur_plugin_fichier_def_absent' => 'Ficheiro de definição inexistente', # MODIF
-	'erreur_plugin_nom_fonction_interdit' => 'Nome de função interdito', # MODIF
-	'erreur_plugin_nom_manquant' => 'Nome de plugin inexistente', # MODIF
-	'erreur_plugin_prefix_manquant' => 'Espaço de criação de nome não definido para este plugin ', # MODIF
-	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; inexistente no ficheiro de definição', # MODIF
-	'erreur_plugin_version_manquant' => 'Versão de plugin inexistente', # MODIF
+	'erreur_nom_connect_incorrect' => 'O nome de servidor não é autorizado',
+	'erreur_plugin_desinstalation_echouee' => 'A desinstalação do plugin falhou. No entanto, pode desactivá-lo.',
+	'erreur_plugin_fichier_absent' => 'Ficheiro inexistente',
+	'erreur_plugin_fichier_def_absent' => 'Ficheiro de definição inexistente',
+	'erreur_plugin_nom_fonction_interdit' => 'Nome de função interdito',
+	'erreur_plugin_nom_manquant' => 'Nome de plugin inexistente',
+	'erreur_plugin_prefix_manquant' => 'Espaço de criação de nome não definido para este plugin ',
+	'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; inexistente no ficheiro de definição',
+	'erreur_plugin_version_manquant' => 'Versão de plugin inexistente',
 
 	// H
 	'htaccess_a_simuler' => 'Atenção: a configuração do servidor HTTP ignora @htaccess@. Para garantir uma boa segurança, deve alterar esta configuração. Alternativamente, deve assegurar que as constantes @constantes@ (dfiníveis no ficheiro mes_options.php) têm como valores diretórios fora de @document_root@.', # MODIF
-	'htaccess_inoperant' => 'htaccess inoperacional', # MODIF
+	'htaccess_inoperant' => 'htaccess inoperacional',
 
 	// I
 	'ical_info1' => 'Esta página apresenta muitos modos de permanecer em contacto com as actividades deste sítio.',
@@ -194,35 +194,35 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'ical_titre_js' => 'Javascript',
 	'ical_titre_mailing' => 'Mailing-list',
 	'ical_titre_rss' => 'Ficheiros « backend »', # MODIF
-	'icone_accueil' => 'Início', # MODIF
+	'icone_accueil' => 'Início',
 	'icone_activer_cookie' => 'Activar o cookie de correspondência',
-	'icone_activite' => 'Actividade', # MODIF
-	'icone_admin_plugin' => 'Gerir plugins', # MODIF
-	'icone_administration' => 'Manutenção', # MODIF
+	'icone_activite' => 'Actividade',
+	'icone_admin_plugin' => 'Gerir plugins',
+	'icone_administration' => 'Manutenção',
 	'icone_afficher_auteurs' => 'Exibir os autores',
 	'icone_afficher_visiteurs' => 'Exibir os visitantes',
 	'icone_arret_discussion' => 'Não voltar a participar nesta discussão',
 	'icone_calendrier' => 'Calendário',
-	'icone_configuration' => 'Configuração', # MODIF
+	'icone_configuration' => 'Configuração',
 	'icone_creer_auteur' => 'Criar um novo autor e associá-lo a este artigo',
 	'icone_creer_mot_cle' => 'Criar uma nova palavra-chave e vinculá-la a este artigo',
 	'icone_creer_mot_cle_rubrique' => 'Criar uma nova palavra-chave e ligá-la a esta rubrica',
 	'icone_creer_mot_cle_site' => 'Criar uma nova palavra-chave e ligá-la a este sítio',
 	'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
-	'icone_edition' => 'Editar', # MODIF
+	'icone_edition' => 'Editar',
 	'icone_envoyer_message' => 'Enviar esta mensagem',
-	'icone_ma_langue' => 'Idioma', # MODIF
+	'icone_ma_langue' => 'Idioma',
 	'icone_mes_infos' => 'Minhas informações',
 	'icone_mes_preferences' => 'Preferências', # MODIF
 	'icone_modifier_article' => 'Modificar este artigo',
 	'icone_modifier_message' => 'Modificar esta mensagem',
 	'icone_modifier_rubrique' => 'Modificar esta rubrica',
 	'icone_publication' => 'Publicação',
-	'icone_relancer_signataire' => 'Contactar o signatário novamente', # MODIF
+	'icone_relancer_signataire' => 'Contactar o signatário novamente',
 	'icone_retour' => 'Voltar',
 	'icone_retour_article' => 'Voltar ao artigo',
 	'icone_squelette' => 'Modelos',
-	'icone_suivi_publication' => 'Monitorização da publicação', # MODIF
+	'icone_suivi_publication' => 'Monitorização da publicação',
 	'icone_supprimer_cookie' => 'Suprimir o cookie de correspondência',
 	'icone_supprimer_rubrique' => 'Suprimir esta rubrica',
 	'icone_supprimer_signature' => 'Suprimir esta assinatura',
@@ -242,7 +242,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
  permitirá passar facilmente do sítio público ao sítio privado ',
 	'info_admin_etre_webmestre' => 'Conceder-me os direitos de webmaster',
 	'info_admin_gere_rubriques' => 'Este administrador gere as seguintes rubricas:',
-	'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.', # MODIF
+	'info_admin_gere_toutes_rubriques' => 'Este administrador gere <b>todas as rubricas</b>.',
 	'info_admin_gere_toutes_rubriques_2' => 'Eu administro <b>todas as rubricas</b>',
 	'info_admin_je_suis_webmestre' => 'Eu sou <b>webmaster</b>',
 	'info_admin_statuer_webmestre' => 'Donner à cet administrateur les droits de webmestre', # NEW
@@ -280,7 +280,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_attente_validation' => 'Os seus artigos à espera de validação',
 	'info_aucun_article' => 'Nenhum artigo',
 	'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
-	'info_aucun_auteur' => 'Nenhum autor', # MODIF
+	'info_aucun_auteur' => 'Nenhum autor',
 	'info_aucun_message' => 'Aucun message', # NEW
 	'info_aucun_rubrique' => 'Aucune rubrique', # NEW
 	'info_aucun_site' => 'Aucun site', # NEW
@@ -339,7 +339,7 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
 	'info_ecrire_article' => 'Antes de poder escrever artigos, deve criar pelo menos uma rubrica.',
 	'info_email_envoi' => 'Endereço de email de envio (opcional)',
 	'info_email_envoi_txt' => 'Indique aqui o endereço a utilizar para enviar os emails (se não for o caso, o endereço do destinatário será utilizado como endereço de envio) :',
-	'info_email_webmestre' => 'Endereço e-mail do webmestre (opcional)', # MODIF
+	'info_email_webmestre' => 'Endereço e-mail do webmaster (opcional)', # MODIF
 	'info_entrer_code_alphabet' => 'Insira o código do alfabeto a utilizar :',
 	'info_envoi_email_automatique' => 'Envio automático de mails',
 	'info_envoyer_maintenant' => 'Enviar agora',
@@ -354,13 +354,13 @@ Essas informações devem poder ser fornecidas pelo administrador do sistema ou 
  publicação e das validações de artigos.',
 	'info_fichiers_authent' => 'Ficheiros de autenticação « .htpasswd »',
 	'info_forums_abo_invites' => 'O seu sítio contém fóruns por assinatura; os visitantes são convidados a registar-se no sítio público.',
-	'info_gauche_admin_effacer' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>', # MODIF
+	'info_gauche_admin_effacer' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>',
 	'info_gauche_admin_tech' => '<b>Esta página está acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website.</p>', # MODIF
-	'info_gauche_admin_vider' => '<b>Esta página é acessível apenas aos responsáveis pelo site.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao website</p>', # MODIF
+	'info_gauche_admin_vider' => '<b>Esta página é acessível apenas aos responsáveis pelo sítio.</b><p> Ela dá acesso às diferentes funções de manutenção técnica. Algumas dessas funções possuem um processo específico de autenticação que exige acesso FTP ao sítio web</p>',
 	'info_gauche_auteurs' => 'Encontrará aqui todos os autores do sítio.
 Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde; redactor = amarelo).',
-	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao sítio, são indicados por um ícone azul ;
- os autores apagados, por um caixote de lixo.', # MODIF
+	'info_gauche_auteurs_exterieurs' => 'Os autores externos, sem acesso ao sítio, são indicados por um ícone azul;
+os autores apagados, por um ícone cinzento.',
 	'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado (se for administrador).',
 	'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sítios que contêm links para o seu sítio, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
@@ -395,7 +395,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_login_existant' => 'Este login já existe.',
 	'info_login_trop_court' => 'Login demasiado curto.',
 	'info_login_trop_court_car_pluriel' => 'Le login doit contenir au moins @nb@ caractères.', # NEW
-	'info_logos' => 'Os logos', # MODIF
+	'info_logos' => 'Os logos',
 	'info_maximum' => 'máximo :',
 	'info_meme_rubrique' => 'Na mesma rubrica',
 	'info_message' => 'Mensagem de',
@@ -403,12 +403,12 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_message_en_redaction' => 'As suas mensagens em rascunho',
 	'info_message_technique' => 'Mensagem técnica:',
 	'info_messagerie_interne' => 'Correio interno',
-	'info_mise_a_niveau_base' => 'nivelação da sua base SQL', # MODIF
+	'info_mise_a_niveau_base' => 'melhoramento da sua base de dados SQL',
 	'info_mise_a_niveau_base_2' => '{{Atenção!}} Instalou uma versão
  dos ficheiros SPIP {anterior} à que se encontrava
  antes neste sítio: a sua base de dados corre o risco de se perder
  e o seu sítio já não funcionará .<br />{{Re-instalar os
- ficheiros de SPIP.}}', # MODIF
+ ficheiros de SPIP.}}',
 	'info_modification_enregistree' => 'Votre modification a été enregistrée', # NEW
 	'info_modifier_auteur' => 'Modifcar o autor :',
 	'info_modifier_rubrique' => 'Modificar a rubrica :',
@@ -452,7 +452,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_nouvel_article' => 'Novo artigo',
 	'info_nouvelle_traduction' => 'Nova tradução :',
 	'info_numero_article' => 'ARTIGO NÚMERO :',
-	'info_obligatoire_02' => '[Obigatório]', # MODIF
+	'info_obligatoire_02' => '[Obigatório]',
 	'info_option_accepter_visiteurs' => 'Aceitar a inscrição de visitantes do sítio público',
 	'info_option_faire_suivre' => 'Encaminhar as mensagens dos fóruns para os autores dos artigos',
 	'info_option_ne_pas_accepter_visiteurs' => 'Recusar a inscrição de visitantes',
@@ -462,13 +462,13 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_ou' => 'ou...',
 	'info_page_interdite' => 'Página proibida',
 	'info_par_nom' => 'par nom', # NEW
-	'info_par_nombre_article' => '(por número de artigos)', # MODIF
+	'info_par_nombre_article' => 'por número de artigos',
 	'info_par_statut' => 'par statut', # NEW
 	'info_par_tri' => '\'(par @tri@)\'', # NEW
 	'info_passe_trop_court' => 'Palavra-passe demasiado curta.',
 	'info_passe_trop_court_car_pluriel' => 'Le mot de passe doit contenir au moins @nb@ caractères.', # NEW
 	'info_passes_identiques' => 'As duas palavras-passe não são idênticas.',
-	'info_pense_bete_ancien' => 'Os seus antigos memorandos', # MODIF
+	'info_pense_bete_ancien' => 'Os seus antigos memorandos',
 	'info_plus_cinq_car' => 'mais de 5 caracteres',
 	'info_plus_cinq_car_2' => '(Mais de 5 caracteres)',
 	'info_plus_trois_car' => '(Mais de 3 caracteres)',
@@ -486,7 +486,7 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 	'info_procedure_maj_version' => 'o procedimento de actualização deve ser lançado para adaptar
 a base de dados à nova versão de SPIP.',
 	'info_proxy_ok' => 'Test du proxy réussi.', # NEW
-	'info_ps' => 'P.S', # MODIF
+	'info_ps' => 'P.S.',
 	'info_publier' => 'publicar',
 	'info_publies' => 'Os seus artigos publicados online',
 	'info_question_accepter_visiteurs' => 'Se os parâmetros do seu site prevêem o registo de visitantes sem acesso ao espaço privado, por favor, active a opção abaixo:',
@@ -517,8 +517,8 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 	'info_redirection_activee' => 'La redirection est activée.', # NEW
 	'info_redirection_desactivee' => 'La redirection a été supprimée.', # NEW
 	'info_refuses' => 'Os seus artigos recusados',
-	'info_reglage_ldap' => 'Opções : <b>Acerto da importação LDAP</b>', # MODIF
-	'info_renvoi_article' => '<b>Redirigir.</b> Este artigo remete para a página:', # MODIF
+	'info_reglage_ldap' => 'Opções : <b>Acerto da importação LDAP</b>',
+	'info_renvoi_article' => '<b>Redireccionar.</b> Este artigo remete para a página:',
 	'info_reserve_admin' => 'Só os administradores podem modificar este endereço.',
 	'info_restreindre_rubrique' => 'Limitar a gestão à rubrica : ',
 	'info_resultat_recherche' => 'Resultados da pesquisa ;',
@@ -533,7 +533,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 	'info_site_2' => 'sítio :',
 	'info_site_min' => 'sítio',
 	'info_site_reference_2' => 'Sítio referenciado',
-	'info_site_web' => 'SÍTIO WEB :', # MODIF
+	'info_site_web' => 'Sítio web :',
 	'info_sites' => 'sítios',
 	'info_sites_lies_mot' => 'Os sítios referenciados ligados a esta palavra-chave',
 	'info_sites_proxy' => 'Utilizar um proxy',
@@ -541,7 +541,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 	'info_sites_trouves_dans_texte' => 'Sítios encontrados (no texto)',
 	'info_sous_titre' => 'Sub-título :',
 	'info_statut_administrateur' => 'Administrador',
-	'info_statut_auteur' => 'Estatuto deste autor :', # MODIF
+	'info_statut_auteur' => 'Estatuto deste autor :',
 	'info_statut_auteur_2' => 'Je suis', # NEW
 	'info_statut_auteur_a_confirmer' => 'Inscription à confirmer', # NEW
 	'info_statut_auteur_autre' => 'Autre statut :', # NEW
@@ -560,7 +560,7 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 	'info_texte' => 'Texto',
 	'info_texte_explicatif' => 'Texto explicativo',
 	'info_texte_long' => '(o texto é comprido : aparece, por isso, em muitas partes que serão coladas depois da validação.)',
-	'info_texte_message' => 'Texto da sua mensagem :', # MODIF
+	'info_texte_message' => 'Texto da sua mensagem :',
 	'info_texte_message_02' => 'Texto da mensagem',
 	'info_titre' => 'Título :',
 	'info_total' => 'total :',
@@ -583,9 +583,9 @@ numa cor que indica o seu estado:',
 	'info_un_site' => 'um sítio',
 	'info_une_rubrique' => 'uma rubrica,',
 	'info_une_rubrique_02' => '1 rubrica',
-	'info_url' => 'URL :', # MODIF
+	'info_url' => 'URL :',
 	'info_url_proxy' => 'URL du proxy', # NEW
-	'info_url_site' => 'URL DO SÍTIO :', # MODIF
+	'info_url_site' => 'URL do sítio :',
 	'info_url_test_proxy' => 'URL de test', # NEW
 	'info_urlref' => 'Ligação hipertexto :',
 	'info_utilisation_spip' => 'Pode começar agora a utilizar o sistema de publicação assistida...',
@@ -701,12 +701,12 @@ numa cor que indica o seu estado:',
 	'lien_trier_nombre_articles' => 'seleccionar por número de artgos',
 	'lien_trier_statut' => 'Seleccionar por estatuto',
 	'lien_voir_en_ligne' => 'VER EM LINHA',
-	'logo_article' => 'LOGOTIPO DO ARTIGO', # MODIF
-	'logo_auteur' => 'LOGOTIPO DO AUTOR ', # MODIF
-	'logo_rubrique' => 'LOGOTIPO DA RUBRICA', # MODIF
-	'logo_site' => 'LOGOTIPO DESTE SÍTIO', # MODIF
-	'logo_standard_rubrique' => 'LOGOTIPO MODELO DAS RUBRICAS ', # MODIF
-	'logo_survol' => 'LOGOTIPO PARA  LEITURA  RÁPIDA', # MODIF
+	'logo_article' => 'Logotipo do artigo',
+	'logo_auteur' => 'Logotipo do autor ',
+	'logo_rubrique' => 'Logotipo da rubrica',
+	'logo_site' => 'Logotipo deste sítio',
+	'logo_standard_rubrique' => 'Logotipo modelo das rubricas',
+	'logo_survol' => 'Logotipo "mouseover"',
 
 	// M
 	'menu_aide_installation_choix_base' => 'Escolha da sua base',
@@ -815,20 +815,20 @@ numa cor que indica o seu estado:',
 
 	// S
 	'sans_heure' => 'sans heure', # NEW
-	'statut_admin_restreint' => '(admin restrito)', # MODIF
+	'statut_admin_restreint' => 'administrador restrito',
 	'statut_webmestre' => 'webmestre', # NEW
 
 	// T
 	'tache_cron_asap' => 'Tache CRON @function@ (ASAP)', # NEW
 	'tache_cron_secondes' => 'Tache CRON @function@ (toutes les @nb@ s)', # NEW
 	'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (miniaturas dos documentos, títulos apresentados sob forma gráfica, funções matemáticas no formato TeX...) ocupam no directório @dir@ um total de @taille@.',
-	'taille_cache_infinie' => 'Este site não prevê limitação de tamanho do diretório <code>CACHE/</code>.', # MODIF
-	'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diretório <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.', # MODIF
+	'taille_cache_infinie' => 'Este sítio não prevê limitação de tamanho do directório de cache <code>CACHE/</code>.',
+	'taille_cache_maxi' => 'SPIP tenta limitar o tamanho do diretório cache <code>CACHE/</code> deste sítio em cerca de <b>@octets@</b>.',
 	'taille_cache_moins_de' => 'La taille du cache est de moins de @octets@.', # NEW
-	'taille_cache_octets' => 'O tamanho da cache é atualmente de  @octets@.', # MODIF
+	'taille_cache_octets' => 'O tamanho da cache é actualmente cerca de  @octets@.',
 	'taille_cache_vide' => 'A cache está vazia.',
 	'taille_repertoire_cache' => 'Tamanho do directório cache',
-	'text_article_propose_publication' => 'Artigo proposto para publicação. Não hesite em dar a sua opinião graças ao fórum ligado a este artigo (no fundo da página).', # MODIF
+	'text_article_propose_publication' => 'Artigo proposto para publicação. Não hesite em dar a sua opinião graças ao fórum ligado a este artigo (no fundo da página).',
 	'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP não aceitam nenhum acesso anónimo. Nesse caso, é preciso especificar um identificador de acesso inicial a fim de poder depois procurar informações no anuário. Na maior parte dos casos, porém, os seguintes campos poderão ser deixados vazios.',
 	'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conteúdo da base de dados,
 inclusive <i>todos</i> os acessos de redactores e administradores. Depois de o ter executado, deverá
@@ -844,8 +844,8 @@ reinstalar SPIP para recriar uma nova base assim como uma primeira conta de admi
 	'texte_auteur_messagerie_1' => 'Este sítio permite a troca de mensagens e a constituição de fóruns de discussão privados entre os participantes do sítio. Pode decidir não participar nessas trocas.',
 	'texte_auteurs' => 'OS AUTORES',
 	'texte_choix_base_1' => 'Escolha a sua base de dados :',
-	'texte_choix_base_2' => 'O servidor SQL contem muitas bases de dados.', # MODIF
-	'texte_choix_base_3' => '<b>Seleccione</b> a seguir a que lhe foi atribuida pelo seu serviço de hospedagem.', # MODIF
+	'texte_choix_base_2' => 'O servidor SQL contém várias bases de dados.',
+	'texte_choix_base_3' => '<b>Seleccione</b> a seguir a que lhe foi atribuida pelo seu serviço de hospedagem.',
 	'texte_choix_table_prefix' => 'Préfixe des tables :', # NEW
 	'texte_commande_vider_tables_indexation' => 'Utilize este comando para esvaziar as tabelas de indexação utilizadas
   pelo motor integrado de pesquisa em SPIP. Isso permitir-lhe-á ganhar espaço em disco.',
@@ -863,7 +863,7 @@ que alguns elementos dos artigos não são utilizados.
 	'texte_crash_base' => 'Se a sua base de dados foi
  destruída, pode tentar uma reparação
  automática.',
-	'texte_creer_rubrique' => 'Antes de poder escrever artigos, <br /> deve criar uma rubrica.', # MODIF
+	'texte_creer_rubrique' => 'Antes de poder escrever artigos, <br /> deve criar uma rubrica.',
 	'texte_date_creation_article' => 'DATA DE CRIAÇÃO DO ARTIGO:',
 	'texte_date_creation_objet' => 'Date de création :', # on ajoute le ":" NEW
 	'texte_date_publication_anterieure' => 'Data de redacção anterior :',
@@ -875,7 +875,7 @@ que alguns elementos dos artigos não são utilizados.
 	'texte_effacer_base' => 'Apagar a base de dados SPIP',
 	'texte_effacer_donnees_indexation' => 'Apagar os dados de indexação',
 	'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
-	'texte_en_cours_validation' => 'Os artigos e notícias seguintes estão propostos para publicação. Não hesite em dar a sua opinião graças aos fóruns que lhes estão ligados.', # MODIF
+	'texte_en_cours_validation' => 'Os artigos e notícias seguintes estão propostos para publicação. Não hesite em dar a sua opinião graças aos fóruns que lhes estão ligados.',
 	'texte_enrichir_mise_a_jour' => 'Pode enriquecer a paginação do seu texto, utilizando « atalhos tipográficos ».',
 	'texte_fichier_authent' => '<b>SPIP deverá criar os ficheiros especiais<tt>.htpasswd-admin</tt> no repertório<tt>ecrire/data/<tt> ?</b><p>
   Estes ficheiros podem servir-lhe para restringir o acesso aos autores
@@ -885,7 +885,7 @@ e administradores em outros lugares do seu sites
 no seu valor por defeito (não há criação 
  dos ficheiros).', # MODIF
 	'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao sítio',
-	'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstalação e se o seu acesso continua funcional, pode', # MODIF
+	'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstalação e se o seu acesso continua funcional, pode',
 	'texte_introductif_article' => '(Texto introdutório do artigo.)',
 	'texte_jeu_caractere' => 'Esta opção é útil se o seu sítio precisa de exibir alfabetos
  diferentes do alfabeto romano ( ou  « ocidental ») e seus derivados.
@@ -916,7 +916,7 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
  reindexados : este comando portanto só é útil de maneira excepcional',
 	'texte_moteur_recherche_non_active' => 'O motor de pesquisa não está activado.',
 	'texte_multilinguisme' => 'Se desejar gerir artigos em muitas línguas, com uma navegação complexa, pode acrescentar um menu de língua aos artigos e/ou nas rubricas, em função da organização do seu sítio.', # MODIF
-	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de laços entre as diferentes traduções de um artigo.', # MODIF
+	'texte_multilinguisme_trad' => 'Pode também activar um sistema de gestão de ligações entre as diferentes traduções de um artigo.',
 	'texte_non_compresse' => '<i>não comprimido</i> ( o seu servidor não suporta esta funcionalidade)',
 	'texte_nouveau_message' => 'Nova mensagem',
 	'texte_nouvelle_version_spip_1' => 'Instalou uma nova versão de SPIP.',
@@ -926,7 +926,7 @@ de uma salvaguarda por exemplo). Note que os documentos modificados de
 	'texte_plusieurs_articles' => 'Muitos autores encontrados para "@cherche_auteur@":',
 	'texte_port_annuaire' => '(O valor indicado por defeito geralmente convém.)',
 	'texte_presente_plugin' => 'Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins nécessaires en cochant la case correspondante.', # NEW
-	'texte_proposer_publication' => 'Quando acabar o seu artigo, <br /> pode propor a sua publicação.', # MODIF
+	'texte_proposer_publication' => 'Quando terminar o seu artigo, <br /> pode propor a sua publicação.',
 	'texte_proxy' => 'Em alguns caso (intranet, redes protegidas...),
  pode ser necessário utilizar um <i>proxy HTTP</i>  para atingir os sítios vinculados.
  Se for o caso, indique a seguir o endereço, sob a forma
@@ -969,7 +969,7 @@ na cache SPIP. Isso permite, por exemplo, obrigar uma recomposição de todas as
 	'texte_test_proxy' => 'Para experimentar este proxy, indique aqui o endereço de um sítio Web
   que deseje testar;',
 	'texte_titre_02' => 'Título',
-	'texte_titre_obligatoire' => '<b>Título</b> [Obrigatório]', # MODIF
+	'texte_titre_obligatoire' => '<b>Título</b> [Obrigatório]',
 	'texte_travail_article' => '@nom_auteur_modif@ trabalhou sobre este artigo há @date_diff@ minutes',
 	'texte_travail_collaboratif' => 'Se é frequente muitos redactores
  trabalharem no mesmo artigo, o sistema
@@ -980,17 +980,14 @@ a fim de evitar as modificações simultâneas.
  intempestivas.',
 	'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@" ; por favor afine a pesquisa.',
 	'texte_unpack' => 'telecarregamento da última versão',
-	'texte_utilisation_moteur_syndiques' => 'Quando utilizar o motor integrado de pesquisa 
-  no SPIP, pode efectuar as pesquisas nos sítios e
- nos artigos vinculados de duas maneiras
+	'texte_utilisation_moteur_syndiques' => 'Quando utilizar o motor integrado de pesquisa  em SPIP, pode efectuar as pesquisas nos sítios e nos artigos vinculados de duas maneiras
  diferentes. <br /><img src=\'puce.gif\'> A mais
- simples consiste em pesquisar unicamente nos
- títulos e descrições dos artigos. <br /><img src=\'puce.gif\'>
-  Um segundo método, muito mais poderoso, permite
-ao SPIP pesquisar igualmente no texto dos
- sítios referenciados . Se referenciar
+ simples consiste em pesquisar unicamente nos títulos e descrições dos artigos. 
+<br /><img src=\'puce.gif\'>
+ Um segundo método, muito mais poderoso, permite ao SPIP pesquisar igualmente no texto dos
+ sítios referenciados. Se referenciar
  um sítio, SPIP vai então efectuar a
- pesquisa no texto do próprio sítio.', # MODIF
+ pesquisa no texto do próprio sítio.',
 	'texte_utilisation_moteur_syndiques_2' => 'Este método obriga SPIP a visitar
   regularmente os sítios referenciados,
   o que pode provocar uma pequena desaceleração do seu próprio sítio.',
@@ -1008,7 +1005,7 @@ ao SPIP pesquisar igualmente no texto dos
 	'titre_cadre_interieur_rubrique' => 'Dentro da rubrica',
 	'titre_cadre_numero_auteur' => 'AUTOR NÚMERO',
 	'titre_cadre_numero_objet' => '@objet@ NUMÉRO :', # NEW
-	'titre_cadre_signature_obligatoire' => '<b>Assinatura</b> [Obrigatório]<br />', # MODIF
+	'titre_cadre_signature_obligatoire' => '<b>Assinatura</b> [Obrigatória]<br />',
 	'titre_config_contenu_notifications' => 'Notifications', # NEW
 	'titre_config_contenu_prive' => 'Dans l’espace privé', # NEW
 	'titre_config_contenu_public' => 'Sur le site public', # NEW
