@@ -1,0 +1,9 @@
+2.0.0 -> 2.0.1 rapport de police (13469 ->13495) 
+
+- réparation d'un bug sur les urls standard et autres anciennes implémentations (13489) 
+- problème de création du répertoire cache à l'install (13487) 
+- correction mineure sur le calcul des visites  (13485) 
+- Compilateur : défaut sur la prise en compte sur le champ statut dans le cas d'une requête sur une table principale (13484) 
+- correction pour IE6/7 sur les formulaires de l'espace privé (13481)
+- il était impossible de déplacer SPIP dans un sous répertoire (13478 )
+
