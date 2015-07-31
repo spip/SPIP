@@ -373,7 +373,7 @@ function phraser_criteres($params, &$result) {
 		  {
 // plus d'un argument et pas le critere IN:
 // detecter comme on peut si c'est le critere implicite LIMIT debut, fin
-			array_shift($v); // $v[O] est vide
+
 			if (($var->type != 'texte') ||
 			    (strpos("0123456789-", $param[strlen($param)-1])
 			     !== false)) {
@@ -388,13 +388,14 @@ function phraser_criteres($params, &$result) {
 			  // et mettre son reliquat eventuel
 			  // Recopier pour ne pas alterer le texte source
 			  // utile au debusqueur
-			  array_shift($v);
+
 			  if ($m[3]) {
 			    $texte = new Texte;
 			    $texte->texte = $m[3]; 
-			    array_unshift($v, $texte);
-			  }
+			    $v[1][0]= $texte;
+			  } else array_shift($v[1]);
 			}
+			array_shift($v); // $v[O] est vide
 			$crit = new Critere;
 			$crit->op = $op;
 			$crit->not = $not;
