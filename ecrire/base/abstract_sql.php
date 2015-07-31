@@ -66,9 +66,14 @@ function sql_set_charset($charset,$serveur='', $option=true){
 // - le tableau des des post-conditions a remplir (Having)
 // - le serveur sollicite (pour retrouver la connexion)
 // - option peut avoir 3 valeurs : 
-//	true -> executer la requete, 
 //	false -> ne pas l'executer mais la retourner, 
-//	continue -> ne pas echouer en cas de serveur sql indisponible
+//	continue -> ne pas echouer en cas de serveur sql indisponible,
+//	autre -> executer la requete.
+// Le cas "autre" est, pour une requete produite par le compilateur,
+// un tableau donnnant le contexte afin d'indiquer le lieu de l'erreur au besoin
+// Retourne false en cas d'erreur, apres l'avoir denoncee.
+// Les portages doivent retourner la requete elle-meme en cas d'erreur,
+// afin de disposer du texte brut.
 
 // http://doc.spip.org/@sql_select
 function sql_select (
@@ -80,7 +85,7 @@ function sql_select (
 
 	$debug = (isset($GLOBALS['var_mode']) AND $GLOBALS['var_mode'] == 'debug' );
 	if (($option !== false) AND !$debug) {
-		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, $option);
+		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, is_array($option) ? true : $option);
 	} else {
 		$query = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, false);
 		if (!$option) return $query;
@@ -93,9 +98,16 @@ function sql_select (
 		$res = $f($select, $from, $where, $groupby, $orderby, $limit, $having, $serveur, true);
 	}
 
-	if (!is_array($res)) return $res;
-	list($query, $num, $msg) = $res;
-	erreur_squelette($msg, $num, $query);
+	if (is_resource($res)) return $res;
+	$errno = sql_errno();
+	$error = sql_error();
+	$msg = array($errno, $error, $query);
+	if (!is_array($option))
+		erreur_squelette($msg);
+	else {
+		include_spip('quete.php');
+		denoncer_inclure_dynamique($msg, $option);
+	}
 	return false;
 }
 

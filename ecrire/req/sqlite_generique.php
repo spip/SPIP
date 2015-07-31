@@ -440,7 +440,7 @@ function spip_sqlite_countsel($from = array(), $where = array(), $groupby = '', 
 	$r = spip_sqlite_select("COUNT($c)", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
 	
-	if ($r && $requeter) {
+	if (is_resource($r) && $requeter) {
 		if (_sqlite_is_version(3,'',$serveur)){
 			list($r) = spip_sqlite_fetch($r, SPIP_SQLITE3_NUM, $serveur);
 		} else {
@@ -561,7 +561,7 @@ function spip_sqlite_errno($serveur='',$requeter=true) {
 		
 	if ($s) spip_log("Erreur sqlite $s");
 
-	return $s;
+	return $s ? 1 : 0;
 }
 
 
@@ -697,8 +697,13 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 		if (_sqlite_is_version(3, $sqlite)) $nb = $sqlite->lastInsertId();
 		else $nb = sqlite_last_insert_rowid($sqlite);
 	} else {
-	  if ($e = spip_sqlite_errno($serveur))	// Log de l'erreur eventuelle
-		$e .= spip_sqlite_error($query, $serveur); // et du fautif
+		if (spip_sqlite_errno($serveur)) {
+			// Log de l'erreur eventuelle
+			$e = spip_sqlite_error($this->serveur)
+			  // et du fautif
+			.  spip_sqlite_error($this->query, $this->serveur);
+		}
+
 	}
 	return $t ? trace_query_end($query, $t, $nb, $e, $serveur) : $nb;
 
@@ -852,13 +857,8 @@ function spip_sqlite_select($select, $from, $where='', $groupby='', $orderby='',
 	// renvoyer la requete inerte si demandee
 	if ($requeter === false) return $query;
 
-	if (!($res = spip_sqlite_query($query, $serveur, $requeter))) {
-		$res = array(substr($query, 7),
-			spip_sqlite_errno($serveur),
-			spip_sqlite_error($query, $serveur) );
-	}
-
-	return $res;
+	$r = spip_sqlite_query($query, $serveur, $requeter);
+	return $r ? $r : $query;
 }
 
 
@@ -1630,8 +1630,12 @@ class sqlite_traiter_requete{
 		} else {
 			$r = false;	
 		}
-		if (!$r && $e = spip_sqlite_errno($this->serveur))	// Log de l'erreur eventuelle
-			$e .= spip_sqlite_error($this->query, $this->serveur); // et du fautif
+		if (!$r AND spip_sqlite_errno($this->serveur)) {
+			// Log de l'erreur eventuelle
+			$e = spip_sqlite_error($this->serveur)
+			  // et du fautif
+			.  spip_sqlite_error($this->query, $this->serveur);
+		}
 	
 		return $t ? trace_query_end($this->query, $t, $r, $e, $serveur) : $r;
 	}

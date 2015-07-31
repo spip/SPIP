@@ -460,11 +460,8 @@ function spip_pg_select($select, $from, $where='',
 	// renvoyer la requete inerte si demandee
 	if ($requeter === false) return $query;
 	
-	if (!($res = spip_pg_trace_query($query, $serveur))) {
-		$res = array($query, 0, 0);
-	}
-
-	return $res;
+	$r = spip_pg_trace_query($query, $serveur);
+	return $r ? $r : $query;;
 }
 
 // Le traitement des prefixes de table dans un Select se limite au FROM
@@ -714,7 +711,7 @@ function spip_pg_countsel($from = array(), $where = array(), $groupby=array(),
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
 	$r = spip_pg_select("COUNT($c)", $from, $where,'', '', '', $having, $serveur, $requeter);
 	if (!$requeter) return $r;
-	if (!$r) return 0;
+	if (!is_resource($r)) return 0;
 	list($c) = pg_fetch_array($r, NULL, PGSQL_NUM);
 	return $c;
 }
