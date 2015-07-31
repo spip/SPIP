@@ -59,7 +59,7 @@ function formulaire_signature($id_article) {
 				$id_article = $row['id_article'];
 				$date_time = $row['date_time'];
 				$nom_email = $row['nom_email'];
-				$ad_email = $row['ad_email'];
+				$adresse_email = $row['ad_email'];
 				$nom_site = $row['nom_site'];
 				$url_site = $row['url_site'];
 				$message = $row['message'];
@@ -69,7 +69,7 @@ function formulaire_signature($id_article) {
 			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 		 	$result_petition = spip_query($query_petition);
 
-			while($row = spip_fetch_array($result_petition)) {
+			while ($row = spip_fetch_array($result_petition)) {
 				$id_article = $row['id_article'];
 				$email_unique = $row['email_unique'];
 				$site_obli = $row['site_obli'];
