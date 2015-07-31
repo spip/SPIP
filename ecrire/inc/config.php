@@ -192,12 +192,15 @@ function appliquer_modifs_config() {
 
 	// Appliquer les changements de moderation forum
 	// forums_publics_appliquer : futur, saufnon, tous
-	
-	$sauf = _request('forums_publics_appliquer') == 'saufnon'
-	? "accepter_forum != 'non'"
-	: '';
-	
-	sql_updateq('spip_articles', array('accepter_forum'=>$accepter_forum), $sauf);
+	if (in_array($appliquer = _request('forums_publics_appliquer'),
+		array('tous', 'saufnon')
+	)) {
+		$sauf = ($appliquer == 'saufnon')
+			? "accepter_forum != 'non'"
+			: '';
+
+		sql_updateq('spip_articles', array('accepter_forum'=>$accepter_forum), $sauf);
+	}
 
 	if ($accepter_forum == 'abo')
 		ecrire_meta('accepter_visiteurs', 'oui');
