@@ -27,7 +27,7 @@ function action_instituer_auteur_dist() {
 	include_spip('action/editer_auteur');
 
 	$c = array(
-		array('statut'=>$statut,'id_parent'=>intval(_request('id_parent')),'restreintes'=>_request('restreintes'))
+		'statut'=>$statut,'id_parent'=>intval(_request('id_parent')),'restreintes'=>_request('restreintes')
 	);
 	instituer_auteur($id_auteur, $c);
 
