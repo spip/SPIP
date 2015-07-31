@@ -30,6 +30,7 @@ global
   $champs_extra,
   $cherche_mot,
   $connect_statut,
+  $descriptif,
   $id_parent,
   $id_syndic,
   $jour,
