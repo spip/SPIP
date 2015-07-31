@@ -209,6 +209,7 @@ function valider_skel($transformer_xml, $file, $dir)
 
 	$composer = charger_fonction('composer', 'public');
 	list($skel_nom, $skel_code) = $composer($skel, 'html', 'html', $file);
+
 	spip_log("compilation de $file en " . strlen($skel_code) .  " octets de nom $skel_nom");
 	$url = '';
 	if (!$skel_nom) return array('/', '/', $file,''); 
@@ -233,20 +234,21 @@ function valider_skel($transformer_xml, $file, $dir)
 function valider_contexte($code, $file)
 {
 	static $exceptions = array('action', 'doublons', 'lang');
-	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]]/', $code, $r, PREG_SET_ORDER);
+	preg_match_all('/(\S*)[$]Pile[[]0[]][[].(\w+).[]](\S*)/', $code, $r, PREG_SET_ORDER);
 	$args = array();
-
 	// evacuer les repetitions et les faux parametres
 	foreach($r as $v) {
-		list(,$f, $nom) = $v;
-		if (!in_array($nom, $exceptions))
-			@$args[$nom] .= $f;
+		list(,$f, $nom, $suite) = $v;
+		if (!in_array($nom, $exceptions)
+		AND (!isset($args[$nom]) OR !$args[$nom]))
+			$args[$nom] = ((strpos($f, 'sql_quote') !== false)
+				AND strpos($suite, "'int'") !==false);
 	}
 	$contexte= array(); // etudier l'ajout de:
 	// 'lang' => $GLOBALS['spip_lang'],
 	// 'date' => date('Y-m-d H:i:s'));
 	foreach ($args as $nom => $f) {
-		if (strpos($f,'intval') === false)
+		if (!$f)
 		  $val = 'id_article';
 		else {
 		  // on suppose que arg numerique => primary-key d'une table
