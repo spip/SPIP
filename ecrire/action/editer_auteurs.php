@@ -144,7 +144,7 @@ function revisions_auteurs($id_auteur, $c=false) {
 
 	// marquer le fait que l'auteur est travaille par toto a telle date
 	// une alerte sera donnee aux autres administrateurs sur exec=auteur_infos
-	if ($GLOBALS['meta']['auteurs_modif'] != 'non') {
+	if ($GLOBALS['meta']['articles_modif'] != 'non') {
 		include_spip('inc/drapeau_edition');
 		signale_edition ($id_auteur, $GLOBALS['auteur_session'], 'auteur');
 	}
