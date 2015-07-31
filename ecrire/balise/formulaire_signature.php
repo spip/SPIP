@@ -189,7 +189,7 @@ function reponse_confirmation($var_confirm = '') {
 // Recevabilite de la signature d'une petition
 //
 
-// http://doc.spip.org/@reponse_signature
+// http://doc.spip.org/@inc_controler_signature_dist
 function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
 	include_spip('inc/texte');
