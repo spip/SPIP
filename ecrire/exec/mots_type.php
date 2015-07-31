@@ -91,22 +91,16 @@ function exec_mots_type_dist()
 	. "<b>"._T('info_changer_nom_groupe')."</b><br />\n"
 	. "<input type='text' size='40' class='formo' name='change_type' value=\"$type\" $onfocus />\n";
 		
-	if ($options == 'avancees' OR $descriptif) {
-			$res .= "<br /><b>"._T('texte_descriptif_rapide')
-			. "</b><br />"
-			. "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
-			. entites_html($descriptif)
-			. "</textarea>\n";
-	} else
-			$res .= "<input type='hidden' name='descriptif' value=\"$descriptif\" />";
+	$res .= "<br /><b>"._T('texte_descriptif_rapide')
+	  . "</b><br />"
+	  . "<textarea name='descriptif' class='forml' rows='4' cols='40'>"
+	  . entites_html($descriptif)
+	  . "</textarea>\n";
 
-	if ($options == 'avancees' OR $texte) {
-			$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
-			$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
-			$res .= entites_html($texte);
-			$res .= "</textarea>\n";
-	} else
-		  $res .= "<input type='hidden' name='texte' value=\"$texte\" />";
+	$res .= "<br /><b>"._T('info_texte_explicatif')."</b><br />";
+	$res .= "<textarea name='texte' rows='8' class='forml' cols='40'>";
+	$res .= entites_html($texte);
+	$res .= "</textarea>\n";
 
 	$res .= "<div style='text-align: right'><input type='submit' class='fondo' value='"
 	. _T('bouton_valider')
