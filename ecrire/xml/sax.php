@@ -156,7 +156,7 @@ function coordonnees_erreur($xml_parser)
 	xml_get_current_column_number($xml_parser);
 }
 
-// http://doc.spip.org/@inc_sax_dist
+// http://doc.spip.org/@xml_sax_dist
 function xml_sax_dist($page, $apply=false)
 {
 	global $phraseur_xml;

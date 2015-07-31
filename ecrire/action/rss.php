@@ -315,6 +315,7 @@ function action_rss_dist()
 	spip_log("spip_rss s'applique sur '$op $args pour $id' en " . spip_timer('rss'));
 }
 
+// http://doc.spip.org/@xml_rss
 function xml_rss($rss) {
 	$u = '';
 	if (is_array($rss)) {
