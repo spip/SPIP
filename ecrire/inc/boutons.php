@@ -111,7 +111,7 @@ function definir_barre_boutons() {
 			$sousmenu['sites_tous']=
 			  new Bouton('site-24.gif', 'icone_sites_references');
 
-		$n = spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1"));
+		$n = spip_num_rows(spip_query("SELECT id_document FROM spip_documents_rubriques LIMIT 1"));
 		if ($n) {
 			$sousmenu['documents_liste']=
 			  new Bouton('doc-24.gif', 'icone_doc_rubrique');
@@ -127,12 +127,16 @@ function definir_barre_boutons() {
 		$sousmenu['forum_admin']=
 		  new Bouton('forum-admin-24.gif', 'icone_forum_administrateur');
 
-	$sousmenu['controle_forum']=
-		  new Bouton("suivi-forum-24.gif", "icone_suivi_forums");
-	$sousmenu['controle_petition']=
-		  new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
-	
-	$boutons_admin['forum']->sousmenu= $sousmenu;
+	if (spip_num_rows(spip_query("SELECT id_forum FROM spip_forum LIMIT 1")))
+		$sousmenu['controle_forum']=
+			new Bouton("suivi-forum-24.gif", "icone_suivi_forums");
+	if (spip_num_rows(spip_query("SELECT id_signature FROM spip_signatures LIMIT 1")))
+		$sousmenu['controle_petition']=
+			new Bouton("suivi-petition-24.gif", "icone_suivi_pettions");
+
+	if ($sousmenu)
+		$boutons_admin['forum']->sousmenu= $sousmenu;
+
 
 	// sous menu auteurs
 
