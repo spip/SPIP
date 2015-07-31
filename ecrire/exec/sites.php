@@ -69,11 +69,9 @@ $flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rub
 
 	if ($flag_administrable) {
 		if ($supprimer_lien = intval($supprimer_lien))
-			spip_query("UPDATE spip_syndic_articles SET statut='refuse'
-			WHERE id_syndic_article='$supprimer_lien'");
+			spip_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
 		if ($ajouter_lien = intval($ajouter_lien))
-			spip_query("UPDATE spip_syndic_articles SET statut='publie'
-			WHERE id_syndic_article='$ajouter_lien'");
+			spip_query("UPDATE spip_syndic_articles SET statut='publie'	WHERE id_syndic_article='$ajouter_lien'");
 	}
 
 if ($new == 'oui') {
@@ -120,11 +118,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$url_syndic = trim(addslashes($v['url_syndic']));
 		$descriptif = addslashes($v['descriptif']);
 		$syndication = $v[syndic] ? 'oui' : 'non';
-		$result = spip_query("UPDATE spip_syndic ".
-			"SET nom_site='$nom_site', url_site='$url_site',
-			url_syndic='$url_syndic', descriptif='$descriptif',
-			syndication='$syndication', statut='$statut'
-			WHERE id_syndic=$id_syndic");
+		$result = spip_query("UPDATE spip_syndic SET nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")), true);
 		$redirect_ok = 'oui';
@@ -138,11 +132,9 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 
 if ($nouveau_statut AND $flag_administrable) {
 	$statut = $nouveau_statut;
-	$result = spip_query("UPDATE spip_syndic SET statut='$statut'
-	WHERE id_syndic=$id_syndic");
+	$result = spip_query("UPDATE spip_syndic SET statut='$statut' WHERE id_syndic=$id_syndic");
 	if ($statut == 'publie')
-		spip_query("UPDATE spip_syndic SET date=NOW() WHERE
-		id_syndic=$id_syndic");
+		spip_query("UPDATE spip_syndic SET date=NOW() WHERE id_syndic=$id_syndic");
 
 	calculer_rubriques();
 	if ($statut == 'publie') {
@@ -169,10 +161,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	
 	
 	
-	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',
-	nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic',
-	descriptif='$descriptif', syndication='$syndication', statut='$statut'
-	$add_extra WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic',	descriptif='$descriptif', syndication='$syndication', statut='$statut' $add_extra WHERE id_syndic=$id_syndic");
 
 	propager_les_secteurs();
 
@@ -181,8 +170,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 		$reload = "oui";
 
 	if ($syndication_old != $syndication AND $syndication == "non")
-		spip_query("DELETE FROM spip_syndic_articles
-		WHERE id_syndic=$id_syndic");
+		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic=$id_syndic");
 
 	calculer_rubriques();
 
@@ -204,9 +192,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 if ($jour AND $flag_administrable) {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
-	spip_query("UPDATE spip_syndic SET date='" . 
-		   addslashes("$annee-$mois-$jour") . 
-		   "' WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET date='" . addslashes("$annee-$mois-$jour") . "' WHERE id_syndic=$id_syndic");
 	calculer_rubriques();
 }
 
@@ -216,11 +202,9 @@ if ($redirect AND $redirect_ok == 'oui') {
 
 // Appliquer le choix resume/fulltexte (necessite un reload)
 if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
-	list($old_resume) = spip_fetch_array(spip_query(
-		"SELECT resume FROM spip_syndic WHERE id_syndic=$id_syndic"));
-	if ($old_resume <> $resume) $reload = 'oui';
-	spip_query("UPDATE spip_syndic SET resume='$resume'
-		WHERE id_syndic=$id_syndic");
+	$old_resume = spip_fetch_array(spip_query("SELECT resume FROM spip_syndic WHERE id_syndic=$id_syndic"));
+	if ($old_resume['resume'] <> $resume) $reload = 'oui';
+	spip_query("UPDATE spip_syndic SET resume='$resume' WHERE id_syndic=$id_syndic");
 }
 
 
@@ -228,7 +212,7 @@ if ($flag_editable AND ($resume == 'oui' OR $resume == 'non')) {
 // reload
 //
 if ($reload) {
-	$result = spip_query ("SELECT id_syndic FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
+	$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE id_syndic=$id_syndic AND syndication IN ('oui', 'sus', 'off') LIMIT 1");
 	if ($result AND spip_num_rows($result)>0)
 		$erreur_syndic = syndic_a_jour ($id_syndic);
 }
@@ -435,8 +419,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 		// modifier la moderation
 		if ($moderation == 'oui' OR $moderation == 'non')
-			spip_query("UPDATE spip_syndic SET moderation='$moderation'
-			WHERE id_syndic=$id_syndic");
+			spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=$id_syndic");
 		else
 			$moderation = $mod;
 		if ($moderation != 'oui') $moderation='non';
@@ -455,11 +438,9 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		// Depublier les liens qui ne figurent plus ?
 		# appliquer les choix
 		if ($miroir == 'oui' OR $miroir == 'non')
-			spip_query("UPDATE spip_syndic SET miroir='$miroir'
-			WHERE id_syndic=$id_syndic");
+			spip_query("UPDATE spip_syndic SET miroir='$miroir'	WHERE id_syndic=$id_syndic");
 		if ($oubli == 'oui' OR $oubli == 'non')
-			spip_query("UPDATE spip_syndic SET oubli='$oubli'
-			WHERE id_syndic=$id_syndic");
+			spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
 
 		echo "<div align='left'>"._T('syndic_choix_oublier'), '</div>';
 
@@ -487,8 +468,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		// Prendre les resumes ou le texte integral ?
 		# appliquer les choix
 		if ($resume == 'oui' OR $resume == 'non')
-			spip_query("UPDATE spip_syndic SET resume='$resume'
-			WHERE id_syndic=$id_syndic");
+			spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
 		if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
 		echo "<div align='$spip_lang_left'>"
 			. _T('syndic_choix_resume') . "<br />\n";
@@ -563,8 +543,7 @@ echo "</div>";
 
 echo "<p align='left'>\n";
 
-$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive'
-AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
+$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20");
 afficher_forum($result_forum, $forum_retour);
 
 

@@ -42,15 +42,13 @@ function calculer_popularites() {
 	$b = log(2) * $periode / $demivie;
 
 	// oublier un peu le passe
-	spip_query("UPDATE spip_articles SET maj=maj,
-		popularite = popularite * $a");
+	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
 
 	// enregistrer les metas...
-	list($maxpop, $totalpop) = spip_fetch_array(spip_query(
-	"SELECT MAX(popularite), SUM(popularite) FROM spip_articles"
+	$row = spip_fetch_array(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"
 	));
-	ecrire_meta("popularite_max", $maxpop);
-	ecrire_meta("popularite_total", $totalpop);
+	ecrire_meta("popularite_max", $row['max']);
+	ecrire_meta("popularite_total", $row['tot']);
 
 
 	// Une fois par jour purger les referers du jour ; qui deviennent

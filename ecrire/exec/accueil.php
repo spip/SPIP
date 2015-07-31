@@ -61,14 +61,14 @@ if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirez
 
 	// Les articles syndiques en attente de validation
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
+		$result = spip_query("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
 			echo "<br><small><a href='" . generer_url_ecrire("sites_tous","") . "' style='color: black;'>".$row['compte']." "._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')."</a></small>";
 	}
 
 	// Les forums en attente de moderation
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
+		$result = spip_query("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
 		if (($row = spip_fetch_array($result)) AND $row['compte']) {
 			echo "<br><small> <a href='" . generer_url_ecrire("controle_forum","") . "' style='color: black;'>".$row['compte'];
 			if ($row['compte']>1)

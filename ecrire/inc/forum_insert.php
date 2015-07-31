@@ -56,14 +56,11 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 
 	$old_lang = $GLOBALS['spip_lang'];
 
-	$result = spip_query("SELECT auteurs.email, auteurs.lang FROM spip_auteurs AS auteurs,
-				spip_auteurs_articles AS lien
-				WHERE lien.id_article='$id_article'
-				AND auteurs.id_auteur=lien.id_auteur");
-	while (list($email, $salangue) = spip_fetch_array($result)) {
-		$email = trim($email);
+	$result = spip_query("SELECT auteurs.email, auteurs.lang FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article='$id_article' AND auteurs.id_auteur=lien.id_auteur");
+	while ($row = spip_fetch_array($result)) {
+		$email = trim($row['email']);
 		if (strlen($email) < 3) continue;
-		$GLOBALS['spip_lang'] = ($salangue ? $salangue : $old_lang);
+		$GLOBALS['spip_lang'] = ($row['lang'] ? $row['lang'] : $old_lang);
 		envoyer_mail($email, $sujet, $corps) ;
 	}
 	$GLOBALS['spip_lang'] = $old_lang;	
@@ -93,8 +90,7 @@ function controler_forum($id) {
 
 	// Reglage forums d'article
 	if ($id) {
-		$q = spip_query("SELECT accepter_forum FROM spip_articles
-			WHERE id_article=$id");
+		$q = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id");
 		if ($r = spip_fetch_array($q))
 			$id = $r['accepter_forum'];
 	}
@@ -109,8 +105,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 {
 	foreach ($ajouter_mot as $id_mot)
 		if ($id_mot = intval($id_mot))
-			spip_query("INSERT INTO spip_mots_forum (id_mot, id_forum)
-				VALUES ($id_mot, $id_message)");
+		  spip_abstract_insert('spip_mots_forum', '(id_mot, id_forum)', "($id_mot, $id_message)");
 }
 
 // Recalcule la signature faite dans formulaires/inc-formulaire-forum
@@ -208,8 +203,7 @@ function inc_forum_insert_dist() {
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
 
 	if ($id_forum)
-		list($id_thread) = spip_fetch_array(spip_query(
-		"SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
+		list($id_thread) = spip_fetch_array(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 

@@ -53,7 +53,7 @@ function insere_invalideur($inval, $fichier) {
 			$values = array();
 			foreach($a as $k => $v)
 				$values[] = "('$fichier', '$type/$k')";
-			spip_query ("INSERT IGNORE INTO spip_caches
+			spip_query("INSERT IGNORE INTO spip_caches
 				(fichier, id) VALUES " . join(", ", $values));
 		}
 	}

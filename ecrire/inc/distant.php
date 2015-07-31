@@ -40,8 +40,7 @@ function copie_locale($source, $mode='auto') {
 				ecrire_fichier($local, $contenu);
 
 				// signaler au moteur de recherche qu'il peut reindexer ce doc
-				$a = spip_query("SELECT id_document FROM spip_documents
-					WHERE fichier='".addslashes($source)."'");
+				$a = spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($source)."'");
 				list($id_document) = spip_fetch_array($a);
 				if ($id_document) {
 					include_spip('inc/indexation');
@@ -209,13 +208,11 @@ function fichier_copie_locale($source) {
 	// Si l'extension n'est pas precisee, aller la chercher dans la table
 	// des documents -- si la source n'est pas dans la table des documents,
 	// on ne fait rien
-	if ($t = spip_fetch_array(spip_query("SELECT * FROM spip_documents
-	WHERE fichier='".addslashes($source)."' AND distant='oui'")))
-		list($extension) = spip_fetch_array(spip_query("SELECT extension
-		FROM spip_types_documents WHERE id_type=".$t['id_type']));
-
-	if ($extension)
-		return nom_fichier_copie_locale($source, $extension);
+	if ($t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier='".addslashes($source)."' AND distant='oui'"))) {
+		$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type=".$t['id_type']));
+		if ($t)
+		  return nom_fichier_copie_locale($source, $t['extension']);
+	}
 }
 
 
@@ -232,8 +229,7 @@ function recuperer_infos_distantes($source, $max=0) {
 		if (preg_match(",\nContent-Type: *([^[:space:];]*),i",
 			"\n$headers", $regs)
 		AND $mime_type = addslashes(trim($regs[1]))
-		AND $s = spip_query("SELECT id_type,extension FROM spip_types_documents
-			WHERE mime_type='$mime_type'")
+		AND $s = spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type='$mime_type'")
 		AND $t = spip_fetch_array($s)) {
 			spip_log("mime-type $mime_type ok");
 			$a['id_type'] = $t['id_type'];
@@ -241,9 +237,7 @@ function recuperer_infos_distantes($source, $max=0) {
 		} else {
 			# par defaut on retombe sur '.bin' si c'est autorise
 			spip_log("mime-type $mime_type inconnu");
-			$t = spip_fetch_array(spip_query(
-				"SELECT id_type,extension FROM spip_types_documents
-				WHERE extension='bin'"));
+			$t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE extension='bin'"));
 			if (!$t) return false;
 			$a['id_type'] = $t['id_type'];
 			$a['extension'] = $t['extension'];

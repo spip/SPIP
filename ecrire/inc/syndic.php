@@ -335,8 +335,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 	$le_lien = substr($data['url'], 0,255);
-	if (spip_num_rows(spip_query(
-		"SELECT * FROM spip_syndic_articles
+	if (spip_num_rows(spip_query("SELECT * FROM spip_syndic_articles
 		WHERE url='".addslashes($le_lien)."'
 		AND id_syndic=$now_id_syndic"
 	)) == 0 and !spip_sql_error()) {
@@ -381,7 +380,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 	}
 
 	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
-	spip_query ("UPDATE spip_syndic_articles SET
+	spip_query("UPDATE spip_syndic_articles SET
 	titre='".addslashes($data['titre'])."',
 	".$update_date."
 	lesauteurs='".addslashes($data['lesauteurs'])."',
@@ -410,8 +409,8 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_spip('inc/texte');
 
-	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'");
+
 	if (!$row = spip_fetch_array($result))
 		return;
 

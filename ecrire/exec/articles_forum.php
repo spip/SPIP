@@ -57,7 +57,7 @@ function exec_articles_forum_dist()
 		AND thread.id_thread=pied.id_forum
 		GROUP BY id_thread
 		ORDER BY date DESC 
-		LIMIT $debut, $pack";
+		LIMIT $debut, $pack");
 
 	afficher_forum($res,"", $id_article);
 	

@@ -156,7 +156,7 @@ function propager_les_secteurs()
 // Calculer la langue des sous-rubriques et des articles
 //
 function calculer_langues_rubriques_etape() {
-	$s = spip_query ("SELECT fille.id_rubrique AS id_rubrique, mere.lang AS lang
+	$s = spip_query("SELECT fille.id_rubrique AS id_rubrique, mere.lang AS lang
 		FROM spip_rubriques AS fille, spip_rubriques AS mere
 		WHERE fille.id_parent = mere.id_rubrique
 		AND fille.langue_choisie != 'oui' AND mere.lang<>''
@@ -165,7 +165,7 @@ function calculer_langues_rubriques_etape() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
 		$id_rubrique = $row['id_rubrique'];
-		$t = spip_query ("UPDATE spip_rubriques
+		$t = spip_query("UPDATE spip_rubriques
 		SET lang='$lang', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 	}
 
@@ -176,13 +176,13 @@ function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
 	$langue_site = addslashes($GLOBALS['meta']['langue_site']);
-	spip_query ("UPDATE spip_rubriques
+	spip_query("UPDATE spip_rubriques
 	SET lang='$langue_site', langue_choisie='non'
 	WHERE id_parent=0 AND langue_choisie != 'oui'");
 	while (calculer_langues_rubriques_etape());
 
 	// articles
-	$s = spip_query ("SELECT fils.id_article AS id_article, mere.lang AS lang
+	$s = spip_query("SELECT fils.id_article AS id_article, mere.lang AS lang
 		FROM spip_articles AS fils, spip_rubriques AS mere
 		WHERE fils.id_rubrique = mere.id_rubrique
 		AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'')
@@ -190,12 +190,12 @@ function calculer_langues_rubriques() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
 		$id_article = $row['id_article'];
-		spip_query ("UPDATE spip_articles
+		spip_query("UPDATE spip_articles
 		SET lang='$lang', langue_choisie='non' WHERE id_article=$id_article");
 	}
 
 	// breves
-	$s = spip_query ("SELECT fils.id_breve AS id_breve, mere.lang AS lang
+	$s = spip_query("SELECT fils.id_breve AS id_breve, mere.lang AS lang
 		FROM spip_breves AS fils, spip_rubriques AS mere
 		WHERE fils.id_rubrique = mere.id_rubrique
 		AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'')
@@ -203,14 +203,14 @@ function calculer_langues_rubriques() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
 		$id_breve = $row['id_breve'];
-		spip_query ("UPDATE spip_breves
+		spip_query("UPDATE spip_breves
 		SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 		// Ecrire meta liste langues utilisees dans rubriques
 		include_spip('inc/meta');
-		$s = spip_query ("SELECT lang FROM spip_rubriques
+		$s = spip_query("SELECT lang FROM spip_rubriques
 		WHERE lang != '' GROUP BY lang");
 		while ($row = spip_fetch_array($s)) {
 			$lang_utilisees[] = $row['lang'];

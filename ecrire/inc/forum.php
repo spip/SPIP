@@ -144,8 +144,7 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 //
 function calculer_threads() {
 	// fixer les id_thread des debuts de discussion
-	spip_query("UPDATE spip_forum SET id_thread=id_forum
-	WHERE id_parent=0");
+	spip_query("UPDATE spip_forum SET id_thread=id_forum WHERE id_parent=0");
 
 	// reparer les messages qui n'ont pas l'id_secteur de leur parent
 	do {
@@ -176,8 +175,8 @@ function calculer_threads() {
 // Calculs des URLs des forums (pour l'espace public)
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
-	$query = "SELECT id_parent, id_rubrique, id_article, id_breve FROM spip_forum WHERE id_forum=".$id_forum;
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve FROM spip_forum WHERE id_forum=".$id_forum);
+
 	if($row = spip_fetch_array($result)){
 		if($row['id_parent']) {
 			return racine_forum($row['id_parent']);
@@ -218,8 +217,8 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 function get_forums_publics($id_article=0) {
 	$forums_publics = $GLOBALS['meta']["forums_publics"];
 	if ($id_article) {
-		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
-		$res = spip_query($query);
+		$res = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
+
 		if ($obj = spip_fetch_array($res))
 			$forums_publics = $obj['accepter_forum'];
 	} else { // dans ce contexte, inutile
@@ -230,7 +229,7 @@ function get_forums_publics($id_article=0) {
 
 // Modifier le reglage des forums publics de l'article x
 function modifier_forums_publics($id_article, $forums_publics) {
-		spip_query ("UPDATE spip_articles
+		spip_query("UPDATE spip_articles
 			SET accepter_forum='$forums_publics'
 			WHERE id_article=".intval($id_article));
 		if ($forums_publics == 'abo') {
