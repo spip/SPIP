@@ -1,4 +1,8 @@
 jQuery.spip=jQuery.spip || {};
+jQuery.spip.log = function(){
+	if (jQuery.spip.debug && window.console && window.console.log)
+		window.console.log.apply(this,arguments);
+}
 // A plugin that wraps all ajax calls introducing a fixed callback function on ajax complete
 if(!jQuery.spip.load_handlers) {
 	jQuery.spip.load_handlers = new Array();
@@ -22,8 +26,8 @@ if(!jQuery.spip.load_handlers) {
 	 * @param root
 	 */
 	jQuery.spip.triggerAjaxLoad = function (root) {
-		console.log('triggerAjaxLoad');
-		console.log(root);
+		jQuery.spip.log('triggerAjaxLoad');
+		jQuery.spip.log(root);
 		for ( var i = 0; i < jQuery.spip.load_handlers.length; i++ )
 			jQuery.spip.load_handlers[i].apply( root );
 	};
@@ -45,7 +49,7 @@ if(!jQuery.spip.load_handlers) {
 				params = null;
 			}
 		}
-		var callback2 = function() {console.log('jQuery.load');jQuery.spip.triggerAjaxLoad(this);callback.apply(this,arguments);};
+		var callback2 = function() {jQuery.spip.log('jQuery.load');jQuery.spip.triggerAjaxLoad(this);callback.apply(this,arguments);};
 		return jQuery.spip.intercepted.load.apply(this,[url, params, callback2]);
 	};
 
@@ -63,7 +67,7 @@ if(!jQuery.spip.load_handlers) {
 			if (typeof options=='function')
 					options = { success: options };
 			var callback = options.success || function(){};
-			options.success = function(){callback.apply(this,arguments);console.log('jQuery.ajaxSubmit');jQuery.spip.triggerAjaxLoad(me);}
+			options.success = function(){callback.apply(this,arguments);jQuery.spip.log('jQuery.ajaxSubmit');jQuery.spip.triggerAjaxLoad(me);}
 		}
 		return jQuery.spip.intercepted.ajaxSubmit.apply(this,[options]);
 	}
@@ -84,7 +88,7 @@ if(!jQuery.spip.load_handlers) {
 			var xml = !dataType && ct && ct.indexOf("xml") >= 0;
 			orig_complete.call( callbackContext, res, status);
 			if(!dataType && !xml || dataType == "html") {
-				console.log('jQuery.ajax');
+				jQuery.spip.log('jQuery.ajax');
 				if (typeof s.onAjaxLoad=="undefined" || s.onAjaxLoad!=false)
 					jQuery.spip.triggerAjaxLoad(s.ajaxTarget?s.ajaxTarget:document);
 			}
@@ -273,7 +277,7 @@ jQuery.spip.on_pagination = function(blocfrag,c,u) {
 	else {
 		//jQuery(blocfrag).positionner(false);
 	}
-	console.log('on_pagination');
+	jQuery.spip.log('on_pagination');
 	jQuery.spip.triggerAjaxLoad(blocfrag);
 	// si le fragment ajax est dans un form ajax,
 	// il faut remettre a jour les evenements attaches
