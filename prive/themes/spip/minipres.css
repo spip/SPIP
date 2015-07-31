@@ -23,7 +23,7 @@ ul.spip li li, ol.spip li li {margin-left:25px}
 
 /* LAYOUT / Disposition a l'ecran
 ---------------------------------------------- */
-body { padding: 5%; background: #F5F5F5 url(images/background.png) repeat fixed; }
+body { padding: 5%; }
 
 #minipres { position: relative; margin: 0 auto; padding: 20px; background: #fff repeat; }
 .quitter_fenetre { position: absolute; right: 20px; top: 20px; }
