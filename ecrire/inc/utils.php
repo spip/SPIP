@@ -1082,12 +1082,11 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 	define('_FILE_CHMOD_TMP', _DIR_CHMOD . _FILE_CHMOD_INS . _FILE_TMP_SUFFIX);
 
 	// Definition des droits d'acces en ecriture
-	if (!defined('_SPIP_CHMOD')) {
-		if(_FILE_CHMOD)
-			include_once _FILE_CHMOD;
-		else
-			define('_SPIP_CHMOD', 0777);
-	}
+	if (!defined('_SPIP_CHMOD') AND _FILE_CHMOD)
+		include_once _FILE_CHMOD;
+
+	// Se mefier des fichiers mal remplis!
+	if (!defined('_SPIP_CHMOD')) define('_SPIP_CHMOD', 0777);
 	
 	// le nom du repertoire plugins/
 	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
