@@ -30,7 +30,7 @@ function nettoyer_uri() {
 }
 
 //
-// Le format souhaite : "CACHE/a/(8400/)bout-d-url.md5(.gz)"
+// Le format souhaite : "CACHE/a/bout-d-url.md5(.gz)"
 // Attention a modifier simultanement le sanity check de
 // la fonction retire_cache()
 //
@@ -48,8 +48,6 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 			$fichier_requete .= "&$var=$val";
 	}
 
-	$md_cache = md5($fichier_requete);
-
 	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
 	$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
 	$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
@@ -62,20 +60,19 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	if (!$fichier_cache)
 		$fichier_cache = 'INDEX-';
 
-	// morceau de md5
+	// morceau de md5 selon HOST et $fond
+	$md_cache = md5($fichier_requete . $GLOBALS['HTTP_HOST'] . $fond);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
 	// Sous-repertoires 0...9a..f/
 	$subdir = creer_repertoire(_DIR_CACHE, substr($md_cache, 0, 1));
-	// Sous-sous-repertoires delais/ (inutile avec l'invalidation par 't')
-	# $subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
 	include_ecrire('inc_acces.php3');
 	verifier_htaccess(_DIR_CACHE);
 
 	$gzip = $flag_gz ? '.gz' : '';
 
-	return _DIR_CACHE . $subdir.$subdir2.$fichier_cache.$gzip;
+	return _DIR_CACHE . $subdir.$fichier_cache.$gzip;
 }
 
 //
