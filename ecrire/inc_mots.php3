@@ -537,6 +537,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut;
+	global $spip_lang_right;
 
 	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
 
@@ -564,8 +565,11 @@ function afficher_groupe_mots($id_groupe) {
 		}
 		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
-		if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var'>";
+		if (!$GLOBALS["t_$tmp_var"]) echo "<div id='$tmp_var' style='position: relative;'>";
 
+		echo "<img src='img_pack/searching.gif' id='img_$tmp_var' style='position: absolute; $spip_lang_right: 0px; top: -20px; visibility: hidden; border: 0px;' />";;
+
+		
 		echo "<div class='liste'>";
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 
