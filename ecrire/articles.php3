@@ -399,7 +399,7 @@ if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites 
 }
 
 if ($articles_versions AND $id_version>1 AND $options == "avancees") {
-	icone_horizontale(_L('Afficher l\'historique'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
+	icone_horizontale(_T('info_historique_lien'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
 echo "</div>\n";

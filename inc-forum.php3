@@ -150,7 +150,7 @@ VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")
 		  ."<div class='spip_encadrer'><b>" .
 		  _T('forum_texte') .
 		  "</b>\n<br />" .
-		  _T('forum_creer_paragraphes') .
+		  _T('info_creation_paragraphe') .
 		  "\n<br /> " .
 		  afficher_barre('formulaire', 'texte', true) .
 		  "<textarea name='texte' " .
