@@ -227,7 +227,7 @@ echo "<P><HR><P>";
 
 			$textes_supplement .= "<BR />";
 			$textes_supplement .= afficher_barre('document.formulaire.texte'.$nombre_textes);
-			$textes_supplement .= "<TEXTAREA NAME='texte_plus[$nombre_textes]'".
+			$textes_supplement .= "<TEXTAREA id='texte$nombre_textes' NAME='texte_plus[$nombre_textes]'".
 				" CLASS='formo' ".$GLOBALS['browser_caret']." ROWS='$rows' COLS='40' wrap=soft>" .
 				$texte1 . "</TEXTAREA><P>\n";
 		}
