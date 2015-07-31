@@ -268,7 +268,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		$cond_id_groupes_vus = '';
 	}
 
-	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "table REGEXP '(^|,)$table($|,)' AND obligatoire = 'oui'$cond_id_groupes_vus"));
+	$nb_groupes = sql_fetch(editer_mots_droits('count(*) AS n', "tables REGEXP '(^|,)$table($|,)' AND obligatoire = 'oui'$cond_id_groupes_vus"));
 	$nb_groupes = $nb_groupes['n'];
 
 	$res = debut_block_depliable($visible OR ($nb_groupes > 0),"lesmots");
@@ -278,7 +278,7 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 		. "</div><br />\n";
 	}
 
-	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "$table = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus)) ORDER BY multi");
+	$result = editer_mots_droits("id_groupe,unseul,obligatoire,titre, ".sql_multi ("titre", $spip_lang), "tables REGEXP '(^|,)$table($|,)' AND (unseul != 'oui'  OR (unseul = 'oui'$cond_id_groupes_vus)) ORDER BY multi");
 
 	// Afficher un menu par groupe de mots non vu
 	$ajouter ='';
@@ -290,14 +290,16 @@ function formulaire_mots_cles($id_objet, $les_mots, $table, $table_id, $url_base
 			$id_groupe = $row['id_groupe'];
 			list($corps, $clic) = $menu;
 
-			$ajouter .= ajax_action_post('editer_mots',
-				"$id_objet,,$table,$table_id,$objet",
-				$url_base,
-				"$table_id=$id_objet",
-				$corps,
-				$clic,
-				" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'", "",
-				"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
+			if (autoriser('editermots',$objet,$id_objet,NULL,array('id_groupe'=>$id_groupe,'groupe_champs'=>$row))){
+				$ajouter .= ajax_action_post('editer_mots',
+					"$id_objet,,$table,$table_id,$objet",
+					$url_base,
+					"$table_id=$id_objet",
+					$corps,
+					$clic,
+					" class='visible_au_chargement fondo spip_xx-small' id='valider_groupe_$id_groupe'", "",
+					"&id_objet=$id_objet&objet=$objet&select_groupe=$id_groupe");
+			}
 		}
 	}
 	if ($ajouter) {
@@ -399,6 +401,6 @@ function menu_mots($row, $id_groupes_vus, $les_mots)
 function editer_mots_droits($select, $cond)
 {
 	$droit = substr($GLOBALS['visiteur_session']['statut'],1);
-	return sql_select("$select", "spip_groupes_mots", "$droit = 'oui' AND $cond");
+	return sql_select("$select,$droit", "spip_groupes_mots", "$droit = 'oui' AND $cond");
 }
 ?>
