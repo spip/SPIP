@@ -1,0 +1,6 @@
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+<h3>[(#TITRE)]</h3>
+[<div class='descriptif'>(#DESCRIPTIF)</div>]
+[<p class='lesauteurs'>(#ENV{lesauteurs}|propre)</p>]
+[<p class='tags'>(#ENV{tags}|implode{' &mdash; '}|propre)</p>]
+<span class='url'><a href='[(#ENV{url}|attribut_html)]'>[(#ENV{url}|textebrut)]</a></span>

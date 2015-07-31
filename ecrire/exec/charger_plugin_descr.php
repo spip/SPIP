@@ -34,7 +34,20 @@ function exec_charger_plugin_descr_args($url_plugin) {
 		include_spip('inc/texte');
 		$liste = liste_plugins_distants($url_plugin);
 		$item = $liste[$url_plugin][2];
+		// les <multi> sont perdus par le lecteur de rss ou le rss lui meme
+		// on les reinsere ici, en attendant mieux
+		
+		$item['titre'] = "<multi>".$item['titre']."</multi>";
+		$item['descriptif'] = "<multi>".$item['descriptif']."</multi>";
+
 		include_spip('inc/presentation');
+		$res = debut_cadre_relief('', true)
+		. recuperer_fond('prive/contenu/item_rss_plugin',$item)
+		. fin_cadre_relief(true);
+		
+		include_spip('inc/actions');
+		ajax_retour($res);
+		/*
 		echo debut_cadre_relief('', true);
 		echo propre('<h3><multi>'
 			.sinon($item['titre'], $liste[$url_plugin][0]).'</multi></h3>'
@@ -45,7 +58,7 @@ function exec_charger_plugin_descr_args($url_plugin) {
 				:'')
 			. propre('[->'.$liste[$url_plugin][1].']')
 			);
-		echo fin_cadre_relief(true);
+		echo fin_cadre_relief(true);*/
 	}
 }
 
