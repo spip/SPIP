@@ -60,8 +60,8 @@ function interdire_acces($ok=false) {
 function f_title_auto($texte){
 	if (strpos($texte,'<title>')===false
 	  AND 
-			(preg_match(",<h1>(.+)</h1>,Uims", $texte, $match)
-		   OR preg_match(",<h[23]>(.+)</h[23]>,Uims", $texte, $match))
+			(preg_match(",<h1[^>]*>(.+)</h1>,Uims", $texte, $match)
+		   OR preg_match(",<h[23][^>]*>(.+)</h[23]>,Uims", $texte, $match))
 		AND $match = trim($match[1])
 		AND ($p = strpos($texte,'<head>'))!==FALSE) {
 		if (!$nom_site_spip = textebrut(typo($GLOBALS['meta']["nom_site"])))
