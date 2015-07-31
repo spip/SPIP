@@ -86,7 +86,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 function calculer_visites() {
 
 	// Selectionner les dates > 24 heures
-	$query_date= "SELECT date FROM spip_visites_temp WHERE date < DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY date";
+	$query_date= "SELECT date FROM spip_visites_temp WHERE date <= DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY date";
 	$result_date = spip_query($query_date);
 	while ($row_date = mysql_fetch_array($result_date)) {
 		$visites = "";
