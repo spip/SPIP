@@ -42,7 +42,7 @@ function stats_load_engines() {
 
 function stats_show_keywords($kw_referer, $kw_referer_host) {
 	global $arr_engines;
-	gloabl $flag_utf8_decode;
+	global $flag_utf8_decode;
 	
 	if (sizeof($arr_engines) == 0) {
 		// Charger les moteurs de recherche
