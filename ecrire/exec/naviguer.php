@@ -34,7 +34,7 @@ function exec_naviguer_dist()
 		$extra = $row["extra"];
 		$lang = $row["lang"];
 	} elseif ($id_rubrique)
-	      {include_spip('minipres');
+	      {
 		echo minipres();
 		exit;
 	      }

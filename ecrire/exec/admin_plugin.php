@@ -24,7 +24,6 @@ function exec_admin_plugin() {
 	global $connect_statut;
 	global $connect_toutes_rubriques;
 	global $spip_lang_right;
-	$surligne = "";
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -35,8 +34,6 @@ function exec_admin_plugin() {
 	}
 
 	verif_plugin();
-	if (isset($_GET['surligne']))
-		$surligne = $_GET['surligne'];
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
@@ -143,10 +140,10 @@ EOF;
 	. "\n<br />"
 	. $sub;
 
-	echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps);
+	echo redirige_action_auteur('activer_plugins','activer','admin_plugin','', $corps, " method='post'");
 
-	echo "</tr></table><br />\n";
-
+	echo "</td></tr></table><br />\n";
+	echo fin_cadre_relief(true);
 	echo fin_gauche(), fin_page();
 
 }
@@ -305,10 +302,10 @@ function ligne_plug($plug_file, $actif, $id){
 
 	if (!$erreur){
 		$name = 's' . substr(md5("statusplug_$plug_file"),0,16);
-		$s .= "<input type='checkbox' name='$name' value='O' id='label_$id_input'";
+		$s .= "\n<input type='checkbox' name='$name' value='O' id='label_$id_input'";
 		$s .= $actif?" checked='checked'":"";
 		$s .= " class='check' />";
-		$s .= "<label for='label_$id_input'>"._T('activer_plugin')."</label>";
+		$s .= "\n<label for='label_$id_input'>"._T('activer_plugin')."</label>";
 	}
 	$id_input++;
 

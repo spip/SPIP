@@ -26,7 +26,7 @@ function exec_iconifier_dist()
 	$id = intval(_request($type));
   
 	if (!preg_match('/^\w+$/', "$type$script"))
-	      {include_spip('minipres');
+	      {
 		echo minipres();
 		exit;
 	      }
@@ -46,7 +46,7 @@ function exec_iconifier_dist()
 	}
 
 	if (!$droit) {
-		include_spip('inc/minipres');
+
 		echo minipres();
 		exit;
 	}

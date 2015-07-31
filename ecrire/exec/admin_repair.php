@@ -24,7 +24,7 @@ $GLOBALS['connect_statut'] = '0minirezo';
 
 include_spip('inc/admin');
 include_spip('inc/texte');
-include_spip('inc/minipres');
+
 include_spip('base/db_mysql');
 
 // http://doc.spip.org/@verifier_base

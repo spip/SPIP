@@ -19,7 +19,7 @@ function exec_rechercher_auteur_dist()
 {
 	$idom = _request('idom');
 	if (!preg_match('/\w+/',$idom))
-	      {include_spip('minipres');
+	      {
 		echo minipres();
 		exit;
 	      }

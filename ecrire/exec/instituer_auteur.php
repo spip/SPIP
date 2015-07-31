@@ -18,7 +18,7 @@ function exec_instituer_auteur_dist()
 	$script = _request('script');
 	$id_auteur = intval(_request('id_auteur'));
 	if (!preg_match('/^\w+$/', $script))
-	      {include_spip('minipres');
+	      {
 		echo minipres();
 		exit;
 	      }

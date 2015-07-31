@@ -22,7 +22,7 @@ function exec_editer_auteurs_dist()
 	$id = intval(_request("id_$type"));
 
 	if (! autoriser('modifier',$type,$id)) {
-		include_spip('inc/minipres');
+
 		echo minipres();
 		exit;
 	}

@@ -21,17 +21,19 @@ function enregistre_modif_plugin(){
 	foreach(liste_plugin_files() as $file){
 	  $test['s'.substr(md5("statusplug_$file"),0,16)] = $file;
 	}
+	// ??
 	foreach($test as $postvar=>$file){
 		if (!isset($test[$alt_postvar]))
 	  	$test[$alt_postvar] = $file;
 	}
 	$plugin=array();
 	foreach($_POST as $choix=>$val){
+	  spip_log("test de $choix $val");
 		if (isset($test[$choix])&&$val=='O')
 			$plugin[]=$test[$choix];
 	}
 
-	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['auteur_session']['id_auteur']);
+	spip_log("Changement des plugins actifs par l'auteur " . $GLOBALS['auteur_session']['id_auteur'] . ": " . join(',', $plugin));
 	ecrire_plugin_actifs($plugin);
 	ecrire_metas();
 }
