@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.2.0'); // 2014-10-27
+define('_ECRAN_SECURITE', '1.2.1'); // 2014-11-15
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -27,7 +27,7 @@ if (!defined('_IS_BOT'))
 	    // mots generiques
 	    ',bot|slurp|crawler|spider|webvac|yandex|'
 	    // UA plus cibles
-	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|INA dlweb|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
+	    . '80legs|accoona|AltaVista|ASPSeek|Baidu|Charlotte|EC2LinkFinder|eStyle|Google|Genieo|INA dlweb|InfegyAtlas|Java VM|LiteFinder|Lycos|Rambler|Scooter|ScrubbyBloglines|Yahoo|Yeti'
 	    . ',i',(string) $_SERVER['HTTP_USER_AGENT'])
 	);
 
