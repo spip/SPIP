@@ -21,8 +21,8 @@ $GLOBALS['spip_sqlite3_functions_1'] = _sqlite_ref_fonctions();
 	
 	
 // http://doc.spip.org/@req_sqlite3_dist
-function req_sqlite3_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='') {
-	return req_sqlite_dist($addr, $port, $login, $pass, $db, $prefixe, $ldap, $sqlite_version=3);
+function req_sqlite3_dist($addr, $port, $login, $pass, $db='', $prefixe='') {
+	return req_sqlite_dist($addr, $port, $login, $pass, $db, $prefixe, $sqlite_version=3);
 }
 
 

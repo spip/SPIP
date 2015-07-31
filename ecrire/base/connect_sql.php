@@ -146,7 +146,7 @@ function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 // C'est un tableau egalement retourne en valeur, pour les appels a l'install'
 
 // http://doc.spip.org/@spip_connect_db
-function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $ldap='') {
+function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 	global $db_ok;
 
 	## TODO : mieux differencier les serveurs
@@ -165,8 +165,14 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 		spip_log("les requetes $type ne sont pas fournies");
 		return;
 	}
-	if ($g = $h($host, $port, $login, $pass, $db, $prefixe, $ldap)) {
+	if ($g = $h($host, $port, $login, $pass, $db, $prefixe)) {
 
+		if (!is_array($auth)) {
+			// compatibilité version 0.7 initiale
+			$g['ldap'] = $auth;
+			$auth = array('ldap' => $auth);
+		}
+		$g['authentification'] = $auth;
 		$g['type'] = $type;
 		return $db_ok = $g;
 	}
@@ -182,9 +188,10 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 // Premiere connexion au serveur principal:
 // retourner le charset donnee par la table principale
 // mais verifier que le fichier de connexion n'est pas trop vieux
-// Version courante = 0.7 (indication d'un LDAP comme 7e arg)
-// La version 0.6 indique le prefixe comme 6e arg
-// La version 0.5 indique le serveur comme 5e arg
+// Version courante = 0.7 
+// La version 0.7 indique un serveur d'authentification comme 8e arg
+// La version 0.6 indique le prefixe comme 7e arg
+// La version 0.5 indique le serveur comme 6e arg
 //
 // La version 0.0 (non numerotee) doit etre refaite par un admin
 // les autres fonctionnent toujours, meme si :
@@ -210,11 +217,15 @@ function spip_connect_main($connexion)
 // http://doc.spip.org/@spip_connect_ldap
 function spip_connect_ldap($serveur='') {
 	$connexion = spip_connect($serveur);
-	if ($connexion['ldap'] AND is_string($connexion['ldap'])) {
-		include_once( _DIR_CONNECT . $connexion['ldap']);
-		if ($GLOBALS['ldap_link'])
-		  $connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
+	if (!is_array($connexion['ldap'])) {
+		if (isset($connexion['authentification']['ldap'])) {
+			$f =  _DIR_CONNECT . $connexion['authentification']['ldap'];
+			unset($GLOBALS['ldap_link']);
+			if (is_readable($f)) include_once($f);
+			if (isset($GLOBALS['ldap_link']))
+				$connexion['ldap'] = array('link' => $GLOBALS['ldap_link'],
 					'base' => $GLOBALS['ldap_base']);
+		}
 	}
 	return $connexion['ldap'];
 }
