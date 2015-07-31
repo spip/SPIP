@@ -270,7 +270,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 			$filtrer = true;
 			if (isset($s['exception'])) {
 				foreach(is_array($s['exception'])?$s['exception']:array($s['exception']) as $m) {
-					if (isset($boucle->modificateur['criteres'][$m])) {
+					if (isset($boucle->modificateur[$m]) OR isset($boucle->modificateur['criteres'][$m])) {
 						$filtrer = false;
 						break;
 					}
