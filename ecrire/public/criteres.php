@@ -35,14 +35,10 @@ define('_CODE_QUOTE', ",^(\n//[^\n]*\n)? *'(.*)' *$,");
  *
  * @link http://www.spip.net/@racine
  * 
- * @param string $idb
- *     Identifiant de la boucle
- * @param array $boucles
- *     AST du squelette
- * @param array $crit
- *     Paramètres du critère dans cette boucle
- * @return
- *     AST complété de la gestion du critère
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
 **/
 function critere_racine_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
@@ -64,14 +60,10 @@ function critere_racine_dist($idb, &$boucles, $crit){
  * 
  * @link http://www.spip.net/@exclus
  *
- * @param string $idb
- *     Identifiant de la boucle
- * @param array $boucles
- *     AST du squelette
- * @param array $crit
- *     Paramètres du critère dans cette boucle
- * @return
- *     AST complété de la gestion du critère
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
 **/
 function critere_exclus_dist($idb, &$boucles, $crit){
 	$not = $crit->not;
@@ -95,14 +87,10 @@ function critere_exclus_dist($idb, &$boucles, $crit){
  * 
  * @link http://www.spip.net/@doublons
  * 
- * @param string $idb
- * 		Identifiant de la boucle
- * @param array $boucles
- * 		AST du squelette
- * @param array $crit
- * 		Paramètres du critère dans cette boucle
- * @return
- * 		AST complété de la gestion du critère
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
 **/
 function critere_doublons_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
@@ -185,14 +173,10 @@ function critere_doublons_dist($idb, &$boucles, $crit){
  * Sans définir de valeur au critère, celui-ci utilise 'oui' comme
  * valeur par défaut.
  * 
- * @param string $idb
- *     Identifiant de la boucle
- * @param array $boucles
- *     AST du squelette
- * @param array $crit
- *     Paramètres du critère dans cette boucle
- * @return
- *     AST complété de la gestion du critère
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
 **/
 function critere_lang_select_dist($idb, &$boucles, $crit){
 	if (!isset($crit->param[1][0]) OR !($param = $crit->param[1][0]->texte)) $param = 'oui';
@@ -201,9 +185,24 @@ function critere_lang_select_dist($idb, &$boucles, $crit){
 	$boucle->lang_select = $param;
 }
 
-// {debut_xxx}
-// http://www.spip.net/@debut_
-// http://doc.spip.org/@critere_debut_dist
+
+/**
+ * Compile le critère {debut_xxx}
+ *
+ * Limite le nombre d'éléments affichés.
+ * 
+ * Ce critère permet de faire commencer la limitation des résultats
+ * par une variable passée dans l’URL et commençant par 'debut_' tel que
+ * {debut_page,10}. Le second paramètre est le nombre de résultats à
+ * afficher.
+ *
+ * Note : il est plus simple d'utiliser le critère pagination.
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_debut_dist($idb, &$boucles, $crit){
 	list($un, $deux) = $crit->param;
 	$un = $un[0]->texte;
@@ -217,12 +216,29 @@ function critere_debut_dist($idb, &$boucles, $crit){
 	} else calculer_critere_DEFAUT_dist($idb, $boucles, $crit);
 }
 
-// {pagination}
-// {pagination 20}
-// {pagination #ENV{pages,5}} etc
-// {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
-// http://www.spip.net/@pagination
-// http://doc.spip.org/@critere_pagination_dist
+
+/**
+ * Compile le critère {pagination}
+ *
+ * Demande à paginer la boucle pour n'afficher qu'une partie des résultats,
+ * et gère l'affichage de la partie de page demandée par debut_xx dans
+ * dans l'environnement du squelette.
+ *
+ * Le premier paramètre indique le nombre d'éléments par page, le second,
+ * rarement utilisé permet de définir le nom de la variable désignant la
+ * page demandée (debut_xx), qui par défaut utilise l'identifiant de la boucle.
+ * 
+ * @example
+ *     {pagination}
+ *     {pagination 20}
+ *     {pagination #ENV{pages,5}} etc
+ *     {pagination 20 #ENV{truc,chose}} pour utiliser la variable debut_#ENV{truc,chose}
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_pagination_dist($idb, &$boucles, $crit){
 
 	$boucle = &$boucles[$idb];
@@ -268,9 +284,19 @@ function critere_pagination_dist($idb, &$boucles, $crit){
 }
 
 
-// {recherche} ou {recherche susan}
-// http://www.spip.net/@recherche
-// http://doc.spip.org/@critere_recherche_dist
+/**
+ * Compile le critère {recherche}
+ *
+ * Permet de sélectionner des résultats d'une recherche.
+ * 
+ * Le texte cherché est pris dans le premier paramètre {recherche xx}
+ * ou à défaut dans la clé 'recherche' de l'environnement du squelette.
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_recherche_dist($idb, &$boucles, $crit){
 
 	$boucle = &$boucles[$idb];
@@ -309,11 +335,20 @@ function critere_recherche_dist($idb, &$boucles, $crit){
 	$boucle->where[] = '$rech_where?$rech_where:\'\'';
 }
 
-// {traduction}
-// http://www.spip.net/@traduction
-//   (id_trad>0 AND id_trad=id_trad(precedent))
-//    OR id_article=id_article(precedent)
-// http://doc.spip.org/@critere_traduction_dist
+/**
+ * Compile le critère {traduction}
+ *
+ * Sélectionne toutes les traductions de l'élément courant (la boucle englobante)
+ * en différentes langues (y compris l'élément englobant)
+ * 
+ * Équivalent à
+ * (id_trad>0 AND id_trad=id_trad(precedent)) OR id_xx=id_xx(precedent)
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_traduction_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$prim = $boucle->primary;
@@ -333,10 +368,21 @@ function critere_traduction_dist($idb, &$boucles, $crit){
 		);
 }
 
-// {origine_traduction}
-//   (id_trad>0 AND id_article=id_trad) OR (id_trad=0)
-// http://www.spip.net/@origine_traduction
-// http://doc.spip.org/@critere_origine_traduction_dist
+
+
+/**
+ * Compile le critère {origine_traduction}
+ *
+ * Sélectionne les éléments qui servent de base à des versions traduites
+ * (par exemple les articles "originaux" sur une boucle articles)
+ * 
+ * Équivalent à (id_trad>0 AND id_xx=id_trad) OR (id_trad=0)
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_origine_traduction_dist($idb, &$boucles, $crit){
 	$boucle = &$boucles[$idb];
 	$prim = $boucle->primary;
@@ -350,9 +396,18 @@ function critere_origine_traduction_dist($idb, &$boucles, $crit){
 	$boucle->where[] = ($crit->not ? array("'NOT'", $c) : $c);
 }
 
-// {meme_parent}
-// http://www.spip.net/@meme_parent
-// http://doc.spip.org/@critere_meme_parent_dist
+
+/**
+ * Compile le critère {meme_parent}
+ * 
+ * Sélectionne les éléments ayant le même parent que la boucle parente,
+ * c'est à dire les frères et sœurs.
+ *
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_meme_parent_dist($idb, &$boucles, $crit){
 	global $exceptions_des_tables;
 	$boucle = &$boucles[$idb];
@@ -374,9 +429,9 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
 
 
 /**
- * Sélectionne dans une boucle les éléments appartenant à une branche d'une rubrique
+ * Compile le critère {branche}
  * 
- * Calcule une branche d'une rubrique et conditionne la boucle avec.
+ * Sélectionne dans une boucle les éléments appartenant à une branche d'une rubrique.
  * 
  * Cherche l'identifiant de la rubrique en premier paramètre du critère {branche XX}
  * s'il est renseigné, sinon, sans paramètre ({branche} tout court) dans les
@@ -389,15 +444,10 @@ function critere_meme_parent_dist($idb, &$boucles, $crit){
  *
  * @link http://www.spip.net/@branche
  * 
- * @param string $idb
- * 		Identifiant de la boucle
- * @param array $boucles
- * 		AST du squelette
- * @param Critere $crit
- * 		Paramètres du critère dans cette boucle
- * @return
- * 		AST complété de la condition where au niveau de la boucle,
- * 		restreignant celle ci aux rubriques de la branche
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
 **/
 function critere_branche_dist($idb, &$boucles, $crit){
 
@@ -433,8 +483,16 @@ function critere_branche_dist($idb, &$boucles, $crit){
 		("($arg ? $c : ".($not ? "'0=1'" : "'1=1'").')');
 }
 
-// {logo} liste les objets qui ont un logo
-// http://doc.spip.org/@critere_logo_dist
+/**
+ * Compile le critère {logo} 
+ *
+ * Liste les objets qui ont un logo
+ * 
+ * @param string $idb     Identifiant de la boucle
+ * @param array $boucles  AST du squelette
+ * @param Critere $crit   Paramètres du critère dans cette boucle
+ * @return array          AST complété des contraintes du critère
+**/
 function critere_logo_dist($idb, &$boucles, $crit){
 
 	$not = $crit->not;
