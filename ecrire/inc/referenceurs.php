@@ -145,8 +145,14 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		$path  = $url['path'];
 	} else $query = $host = $path ='';
 
-	// Cette fonction affecte directement les variables selon la query-string !
-	parse_str($query);
+	// affecter directement les variables depuis la query-string, sans remplacer celles existantes
+	foreach (explode('&', $query) as $chaine) {
+		if (count($Tchaine = explode('=', $chaine)) > 1) {
+			$p = str_replace(array('[', ']'), '', $Tchaine[0]);
+			if (!isset($$p))
+				$$p = $Tchaine[1];
+		}
+	}
 
 	$keywords = '';
 	$found = false;
