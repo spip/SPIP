@@ -800,7 +800,7 @@ if ($flag_editable) {
 				$nom_auteur_modif = $row_auteur["nom"];
 			}
 			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
-			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif est intervenu sur cet article<br>(il y a $date_diff minutes)</font>";
+			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
 			echo aide("artmodif");
 		}
 		else {
@@ -1356,7 +1356,7 @@ echo "\n\n<div align=right>";
 				$nom_auteur_modif = $row_auteur["nom"];
 			}
 			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
-			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif est intervenu sur cet article<br>(il y a $date_diff minutes)</font>";
+			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
 			echo aide("artmodif");
 		}
 		else {

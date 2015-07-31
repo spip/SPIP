@@ -37,6 +37,7 @@ if ($new == "oui") {
 
 // Indication de modif en cours
 $query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif='$connect_id_auteur'  WHERE id_article='$id_article'";
+echo $query;
 $result = spip_query($query);
 $id_article_bloque = $id_article;	// message pour inc_presentation
 

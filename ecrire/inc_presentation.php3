@@ -34,7 +34,7 @@ function bouton_imessage($destinataire, $row = '') {
 	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
 	global $connect_id_auteur;
 
-	$url = "message_edit.php3?";
+	$url = new Link("message_edit.php3");
 
 	// verifier que ce n'est pas un auto-message
 	if ($destinataire == $connect_id_auteur)
@@ -49,14 +49,15 @@ function bouton_imessage($destinataire, $row = '') {
 			return;
 		}
 	}
-	$url .= "dest=$destinataire&";
-	$url .= "new=oui&type=normal";
+	$url->addVar('dest',$destinataire);
+	$url->addVar('new','oui');
+	$url->addVar('type','normal');
 
 	if ($destinataire) $title = "Envoyer un message priv&eacute; &agrave; cet auteur";
 	else $title = "Ecrire un message priv&eacute;";
 
 	$texte_bouton = "<img src='img_pack/m_envoi.gif' width='14' height='7' border='0'>";
-	return "<a href='$url' title=\"$title\">$texte_bouton</a>";
+	return "<a href='". $url->getUrl() ."' title=\"$title\">$texte_bouton</a>";
 }
 
 //
@@ -1077,7 +1078,6 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
-//		$onClick = " onClick=\"document.location='$lien'\"";
 		$onClick = "";
 		$a_href = "<a href=\"$lien\">";
 		$a_href_icone = "<a href=\"$lien\" class='icone'>";
@@ -1279,10 +1279,16 @@ function bandeau_barre_verticale(){
 	echo "</td>";
 }
 
+
+// lien changement de couleur
+function lien_change_var($lien, $set, $couleur, $coords, $titre) {
+	$lien->addVar($set, $couleur);
+	return "\n<area shape='rect' href='". $lien->getUrl() ."' coords='$coords' title=\"$titre\">";
+}
+
 //
 // Debut du corps de la page
 //
-
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $couleur_foncee;
@@ -1293,43 +1299,40 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_activer_messagerie;
 	global $connect_toutes_rubriques;
 	global $REQUEST_URI;
-	global $requete_fichier;
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display;
 	$activer_messagerie = lire_meta("activer_messagerie");
+	global $clean_link;
 	
-	if (!$requete_fichier) {
-		$requete_fichier = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
-	}
-	$lien = ereg_replace("\&set_options=(basiques|avancees)", "", $requete_fichier);
-	$lien = ereg_replace("\&set_couleur=[0-9]+", "", $lien);
-	$lien = ereg_replace("\&set_disp=[0-9]", "", $lien);
-	if (!ereg('\?', $lien)) $lien .= '?';
-
+	// nettoyer le lien global
+	$clean_link->delVar('set_options');
+	$clean_link->delVar('set_couleur');
+	$clean_link->delVar('set_disp');
 	
 	if (strlen($adresse_site)<10) $adresse_site="../";
 
 	debut_html($titre);
 	
+		$ctitre = "Changer la couleur de l'interface";
 		echo "\n<map name='map_couleur'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=6' coords='0,0,10,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=1' coords='12,0,22,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=2' coords='24,0,34,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=3' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=4' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=5' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=7' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=8' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=9' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=10' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=11' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=12' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
+		echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 2, '24,0,34,10', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 3, '36,0,46,10', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 4, '48,0,58,10', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 5, '60,0,70,10', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 7, '0,11,10,21', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 8, '12,11,22,21', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 9, '24,11,34,21', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 10, '36,11,46,21', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 11, '48,11,58,21', $ctitre);
+		echo lien_change_var ($clean_link, 'set_couleur', 12, '60,11,70,21', $ctitre);
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
-		echo "\n<area shape='rect' href='$lien&set_disp=1' coords='0,0,20,15' alt=\"Afficher uniquement le texte\" title=\"Afficher uniquement le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=2' coords='19,0,40,15' alt=\"Afficher les icones et le texte\" title=\"Afficher les icones et le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=3' coords='41,0,59,15' alt=\"Afficher uniquement les icones\" title=\"Afficher uniquement les icones\">";
+		echo lien_change_var ($clean_link, 'set_disp', 1, '36,11,46,21', "Afficher uniquement le texte");
+		echo lien_change_var ($clean_link, 'set_disp', 2, '19,0,40,15', "Afficher les icones et le texte");
+		echo lien_change_var ($clean_link, 'set_disp', 3, '41,0,59,15', "Afficher uniquement les icones");
 		echo "\n</map>";
 	
 	// Icones principales
@@ -1425,16 +1428,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 	}
 	else if ($rubrique == "redacteurs"){
-		if ($options == "avancees") {
+		if ($options == "avancees")
 			icone_bandeau_secondaire ("Les auteurs", "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
-//			icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
-//			icone_bandeau_secondaire ("Administrateurs", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
-//			if ($connect_statut == "0minirezo"){
-//				bandeau_barre_verticale();
-//				icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
-//			}
-//			bandeau_barre_verticale();
-		}
+
 		icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 	}
 	else if ($rubrique == "messagerie"){
@@ -1445,10 +1441,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
 		}
-/*		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
-			bandeau_barre_verticale();
-			icone_bandeau_secondaire ("Messagerie interne", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
-		}*/
 	}
 	else if ($rubrique == "administration"){
 		if ($connect_toutes_rubriques) {
@@ -1522,8 +1514,29 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='Verdana,Arial,Helvetica,sans-serif'>";
-		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <span style='padding: 3px; margin: 1px; border: 1px solid $couleur_claire; color: $couleur_claire'><b>interface compl&egrave;te</b></span>";
-		else echo "<span class='fondgrison2'><b>Interface simplifi&eacute;e</b></span> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+		if ($options == "avancees") {
+			$lien = $clean_link;
+			$lien->addVar('set_options', 'basiques');
+			echo "<span class='fondgris'
+				onMouseOver=\"changeclass(this,'fondgrison2')\"
+				onMouseOut=\"changeclass(this,'fondgris')\"><a
+				href='". $lien->getUrl() ."'><font color='black'>Interface
+				simplifi&eacute;e</font></a></span> <span style='padding: 3px;
+				margin: 1px; border: 1px solid $couleur_claire; color:
+				$couleur_claire'><b>interface compl&egrave;te</b></span>";
+
+		}
+		else {
+			$lien = $clean_link;
+			$lien->addVar('set_options', 'avancees');
+			echo "<span class='fondgrison2'><b>Interface
+				simplifi&eacute;e</b></span> <span class='fondgris'
+				onMouseOver=\"changeclass(this,'fondgrison2')\"
+				onMouseOut=\"changeclass(this,'fondgris')\"><a
+				href='". $lien->getUrl() ."'><font color='black'>interface
+				compl&egrave;te</font></a></span>";
+		}
+
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
@@ -1532,34 +1545,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</tr></table>";
 	echo "</td></tr></table>";
 	
-	
-	// Enventuellement, liste des articles bloques
-	$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
-	$result = spip_query($query);
-	if (@mysql_num_rows($result) > 0) {
-	
-		echo "\n<table cellpadding='0' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
-		echo "<table cellpadding='0' background='' width='750'><tr width='750'><td>";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		//echo propre("Vous travaillez actuellement sur les articles suivants; les autres participants &agrave; ce site sont invit&eacute;s &agrave; ne pas les modifier. Lorsque vous ne travaillez plus sur ces articles, pensez &agrave; l'indiquer ici en les &laquo;d&eacute;bloquant&raquo;.");
-		while ($row = @mysql_fetch_array($result)) {
-			$i++;
-			$ze_article = $row['id_article'];
-			$ze_titre = typo($row['titre']);
-			echo "<div>Article r&eacute;serv&eacute; : <b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
-
-			// ne pas proposer de debloquer si c'est l'article en cours d'edition
-			if ($ze_article != $GLOBALS['id_article_bloque']) echo " [<a href='$lien&debloquer_article=$ze_article'>d&eacute;bloquer cet article</a>]";
-			if ($i == 1) echo aide("artmodif");
-			echo "</div>";
-		}
-		echo "</font>";
-		echo "</td>";
-		echo "</tr></table>";
-		echo "</td></tr></table>";
-	}
-	
-echo "<center>";
+	echo "<center>";
 }
 
 
@@ -1615,30 +1601,10 @@ function debut_gauche($rubrique = "asuivre") {
 	global $requete_fichier;
 	global $connect_id_auteur;
 
-	// tout ce qui suit est a remplacer par $this_link, non ?
-	if (!$requete_fichier) {
-		$requete_fichier = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
-	}
-	$lien = $requete_fichier;
-	if (!ereg('\?', $lien)) $lien .= '?';
-
-	$lapage=$lien;
-	if ($lapage=="?") $lapage="index.php3?";
-	if (ereg("&",$lapage)) $lapage=substr($lapage,0,strpos($lapage,"&"));
-	// fin de $this_link ?
-
+	echo "<br><table width=750 cellpadding=0 cellspacing=0 border=0>
+		<tr><td width=200 valign='top'><font face='Georgia,Garamond,Times,serif' size=2>\n";
 	
-	?>
-	<br>
 
-	<table width=750 cellpadding=0 cellspacing=0 border=0>
-
-	<tr>
-	<td width=200 valign="top">
-	<font face='Georgia,Garamond,Times,serif' size=2>
-	<?php
-	
-	
 	// Afficher les auteurs recemment connectes
 	
 	global $changer_config;
@@ -1817,9 +1783,59 @@ function debut_droite() {
 //
 
 function fin_html() {
+
+	echo "</font>";
+
+	// rejouer le cookie de session en mode parano
+	if ($GLOBALS['spip_session'] && $GLOBALS['prefs']['securite'] == 'strict') {
+		echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
+		echo "<script type='text/javascript'><!-- \n";
+		echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";
+		echo "// --></script>\n";
+	}
+
+	echo "</body></html>\n";
+	flush();
+}
+
+
+function fin_page() {
 	global $spip_version_affichee;
-?>
-</font><blockquote><p>&nbsp;</p>
+	global $connect_id_auteur;
+	global $clean_link;
+
+	// liste des articles bloques
+	$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+	$result = spip_query($query);
+	$num_articles_ouverts = mysql_num_rows($result);
+	if ($num_articles_ouverts) {
+		echo "<p>";
+		debut_cadre_enfonce('warning-24.gif');
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+
+		if ($num_articles_ouverts == 1)
+			echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
+		else
+			echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
+		echo typo("avant une heure.").aide("artmodif");
+		while ($row = @mysql_fetch_array($result)) {
+			$ze_article = $row['id_article'];
+			$ze_titre = typo($row['titre']);
+			echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+			// ne pas proposer de debloquer si c'est l'article en cours d'edition
+			if ($ze_article != $GLOBALS['id_article_bloque']) {
+				$lien = $clean_link;
+				$lien->addVar('debloquer_article', $ze_article);
+				echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+			}
+			echo "</div>";
+		}
+
+		fin_cadre_enfonce();
+	}
+
+	?>
+<p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
 est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
@@ -1832,25 +1848,11 @@ if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statist
 	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>, par Jean-Pierre D&eacute;z&eacute;lus";
 }
 ?>
-</font></div></blockquote>
+</font></div>
+</td></tr></table></center>
 
-<?php 
-// rejouer le cookie de session en mode parano
-if ($GLOBALS['spip_session'] && $GLOBALS['prefs']['securite'] == 'strict') {
-	echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
-	echo "<script type='text/javascript'><!-- \n";
-	echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";
-	echo "// --></script>\n";
-}
-?>
-</body></html>
-<?php
-	flush();
-}
+	<?php
 
-
-function fin_page() {
-	echo "</td></tr></table></center>\n";
 	fin_html();
 }
 
