@@ -10,8 +10,38 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/actions');
+
+function affiche_navigation_forum($script, $args, $debut, $i, $pack, $ancre, $query)
+{
+	$nav = ($i <=0) ? '' : ("<a href='" . generer_url_ecrire($script, $args) ."'>0</a> ... |\n");
+
+	$evt = ($_COOKIE['spip_accepte_ajax'] == 1 );
+
+	$n = spip_num_rows($query);
+
+	for (;$n;$n--){
+
+		if ($i == $pack*floor($i/$pack)) {
+			if ($i == $debut)
+				$nav .= "<FONT SIZE=3><B>$i</B></FONT> |\n";
+			else {
+				$h = generer_url_ecrire($script, $args . "&debut=$i", $evt);
+				if ($evt) $evt = "\nonclick='return !AjaxSqueeze(\"$h&amp;var_ajax=1\",\n\t\"$ancre\")'";
+				$nav .= "<a href='$h'$evt>$i</a> |\n";
+			}
+		}
+		$i ++;
+	}
+
+	$h = generer_url_ecrire($script, $args . "&debut=$i");
+
+	if ($evt) $evt = "\nonclick='return !AjaxSqueeze(\"$h&amp;var_ajax=1\",\n\t\"$ancre\")'";
+
+	return "$nav<a href='$h'$evt>...</a> |";
+}
+
 
 // tous les boutons de controle d'un forum
 // nb : les forums prives (privrac ou prive), une fois effaces
@@ -246,7 +276,7 @@ function formulaire_poster($id_article, $script, $args, $ajax=false) {
 	. "\n\t<select name='change_accepter_forum'
 		class='fondl'
 		style='font-size:10px;'
-		onChange=\"changeVisible(true, 'valider_poster_$id_article', 'block', 'block');\"
+		onchange=\"findObj_forcer('valider_poster_$id_article').style.visibility='visible';\"
 		>";
 
 	foreach (array(
@@ -257,13 +287,13 @@ function formulaire_poster($id_article, $script, $args, $ajax=false) {
 		as $val => $desc) {
 		$r .= "\n\t<option";
 		if ($statut_forum == $val)
-			$r .= " selected";
+			$r .= " selected='selected'";
 		$r .= " value='$val'>".$desc."</option>";
 	}
 	$r .= "\n\t</select>\n";
 
 	$r .= "<div align='$spip_lang_right' id='valider_poster_$id_article'"
-	. ($ajax ? '' : " class='display_au_chargement'")
+	. ($ajax ? '' : " class='visible_au_chargement'")
 	. ">\n\t<input type='submit' class='fondo' style='font-size:10px' value='"
 	. _T('bouton_changer')
 	. "' /></div>\n";

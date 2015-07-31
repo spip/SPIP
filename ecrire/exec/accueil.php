@@ -267,19 +267,16 @@ if ($spip_display != 4) {
 
 		if ($connect_id_rubrique) {
 
+			$q = spip_query("SELECT R.id_rubrique, R.titre, R.descriptif FROM spip_rubriques AS R, spip_auteurs_rubriques AS A WHERE A.id_auteur=$connect_id_auteur AND A.id_rubrique=R.id_rubrique ORDER BY titre");
+
 			$rubs = array();
-			foreach ($connect_id_rubrique as $id_rubrique) {
-				$r = spip_fetch_array(spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique=$id_rubrique AND id_parent=0"));
-				if ($r) {
-				  list($titre, $descr) = $r;
-				  $rubs[] = "<a title='" .
-				    typo($descr) .
-				    "' href='" . generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique") . "'>" .
-				    typo($titre) .
+			while ($r = spip_fetch_array($q)) {
+				$rubs[] = "<a title='" .
+				    typo($r['descriptif']) .
+				    "' href='" . generer_url_ecrire('naviguer', "id_rubrique=" .$r['id_rubrique']) . "'>" .
+				    typo($r['titre']) .
 				    '</a>';
-				}
 			}
-			sort($rubs);
 
 			echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>\n<li>", join("</li>\n<li>", $rubs), "\n</li></ul>";
 		}

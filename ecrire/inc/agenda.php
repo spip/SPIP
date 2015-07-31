@@ -78,14 +78,14 @@ function calendrier_href($script, $annee, $mois, $jour, $type, $fin, $ancre, $im
 	$t = ($titre ? " title=\"$titre\"" : '');
 	$s = ($style ? " style=\"$style\"" : '');
 
+	$moi = preg_match("/exec=" . $GLOBALS['exec'] .'$/', $script);
 	if ($img) $clic =  http_img_pack($img, ($alt ? $alt : $titre), $c);
 	  // pas d'Ajax pour l'espace public pour le moment ou si indispo
-	if (_DIR_RESTREINT || ($_COOKIE['spip_accepte_ajax'] != 1 ))
+	if (_DIR_RESTREINT || ($_COOKIE['spip_accepte_ajax'] != 1 ) || !$moi)
 
 		return http_href("$h$a", $clic, $titre, $style, $class, $evt);
 	else {
-		$h .= '&amp;var_ajax=1' . $a;
-		return "<span$t$c$s $evt\nonclick='AjaxSqueeze(\"$h\",\n\t\"$ancre\")'>$clic</span>";
+		return "<a$c$s\nhref='$h$a' $evt\nonclick='return !AjaxSqueeze(\"$h&var_ajax=1\",\n\t\"$ancre\")'>$clic</a>";
 	}
 }
 
@@ -933,9 +933,9 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	$id = 'nav-agenda' .ereg_replace('[^A-Za-z0-9]', '', $ancre);
 
 	return 
-	  "<div class='navigation-calendrier calendrier-moztop8'" 
+	  "\n<div class='navigation-calendrier calendrier-moztop8'" 
 	  . (!isset($couleur_foncee) ? "" : "\nstyle='background-color: $couleur_foncee;'")
-	  . "><div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
+	  . ">\n<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
 	     (calendrier_href($script, $annee, $mois, $jour, $type, "&amp;echelle=$echelle&amp;partie_cal=sansheure", $ancre,
 				 "sans-heure.gif",
