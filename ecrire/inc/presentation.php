@@ -425,7 +425,7 @@ function parametres_css_prive(){
 	
 	$v = "&v=".$GLOBALS['spip_version_code'];
 
-	$p = "&p=".substr(md5($GLOBALS['meta']['plugins_installes']),0,4);
+	$p = "&p=".substr(md5($GLOBALS['meta']['plugin']),0,4);
 	
 	$c = (is_array($visiteur_session)
 	AND is_array($visiteur_session['prefs']))
