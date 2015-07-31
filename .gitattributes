@@ -20,7 +20,6 @@ dist/formulaires/oubli.php -text
 dist/formulaires/recherche.php -text
 dist/formulaires/signature.php -text
 dist/formulaires/site.php -text
-dist/ical_prive.html -text
 dist/identifiants.html -text
 dist/inc-documents.html -text
 dist/inc-entete.html -text
@@ -483,6 +482,7 @@ prive/formulaires/editer_site_fonctions.php -text
 prive/formulaires/login.php -text
 prive/formulaires/selecteur_groupe_mot.html -text
 prive/formulaires/selecteur_groupe_mot_fonctions.php -text
+prive/ical_prive.html -text
 prive/icones_barre/agrave-maj.png -text
 prive/icones_barre/blanc.png -text
 prive/icones_barre/eacute-maj.png -text
