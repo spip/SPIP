@@ -366,6 +366,7 @@ prive/formulaires/rediriger_article.php -text
 prive/formulaires/selecteur/ajax.html -text
 prive/formulaires/selecteur/articles.html -text
 prive/formulaires/selecteur/generique.html -text
+prive/formulaires/selecteur/generique_fonctions.php -text
 prive/formulaires/selecteur/hierarchie-articles.html -text
 prive/formulaires/selecteur/hierarchie-racine.html -text
 prive/formulaires/selecteur/hierarchie-rubriques.html -text
