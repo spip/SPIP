@@ -1265,12 +1265,12 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		$revision_nbsp = $activer_revision_nbsp;
 
 		if (strlen($chapo) > 0) {
-			echo "<div $dir_lang style='font-size: small;'><b>";
+			echo "<div $dir_lang><b>";
 			echo propre($chapo);
 			echo "</b></div>\n\n";
 		}
 
-		echo "<div $dir_lang style='font-size: small;'>";
+		echo "<div $dir_lang>";
 #	echo reduire_image(propre($texte), 500,10000);
 		echo propre($texte);
 		echo "<br clear='both' />";
@@ -1278,7 +1278,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 
 		if ($ps) {
 			echo debut_cadre_enfonce();
-			echo "<div $dir_lang><font size=2 face='Verdana,Arial,Sans,sans-serif'>";
+			echo "<div $dir_lang><font style='font-family:Verdana,Arial,Sans,sans-serif; font-size: small;'>";
 			echo justifier("<b>"._T('info_ps')."</b> ".propre($ps));
 			echo "</font></div>";
 			echo fin_cadre_enfonce();
