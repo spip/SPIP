@@ -93,7 +93,7 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 		// On cree un marqueur de notes unique lie a cette composition
 		// et on enregistre l'etat courant des globales de notes...
 		$notes = charger_fonction('notes', 'inc');
-		$notes(true);
+		$notes('','empiler');
 
 		// Rajouter d'office ces deux parametres
 		// (mais vaudrait mieux que le compilateur sache le simuler
@@ -116,7 +116,14 @@ function public_parametrer_dist($fond, $contexte='', $cache='', $connect='')  {
 	// etre dans son resultat, autrement elles ne seraient pas prises en
 	// compte a chaque calcul d'un texte contenant un modele, mais seulement
 	// quand le modele serait calcule, et on aurait des resultats incoherents)
-		$notes(false);
+		$notes('','depiler');
+
+		// reinjecter en dynamique la pile des notes
+		// si il y a des inclure dynamiques
+		// si la pile n'est pas vide
+		// la generalisation de cette injection permettrait de corriger le point juste au dessus
+		// en faisant remonter les notes a l'incluant (A tester et valider avant application)
+		$page['notes'] = $notes('','sauver_etat');
 
 		// spip_log: un joli contexte
 		$infos = array();

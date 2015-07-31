@@ -276,9 +276,9 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 	// ne pas tenir compte des notes
 	$notes = charger_fonction('notes', 'inc');
-	$notes(true);
+	$notes('','empiler');
 	$texte = propre($texte,$connect);
-	$notes(false);
+	$notes('','depiler');
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	$texte = couper($texte, $longueur, _INTRODUCTION_SUITE);
@@ -396,8 +396,8 @@ function lister_objets_avec_logos ($type) {
 function calculer_notes() {
 	$notes = charger_fonction('notes', 'inc');
 	$r = $notes(array());
-	$notes(false);
-	$notes(true);
+	$notes('','depiler');
+	$notes('','empiler');
 	return $r;
 }
 
