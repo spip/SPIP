@@ -37,7 +37,6 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 
 // http://doc.spip.org/@recuperer_cookies_spip
 function recuperer_cookies_spip($cookie_prefix) {
-	global $_COOKIE;
 	$prefix_long = strlen($cookie_prefix);
 
 	foreach ($_COOKIE as $name => $value) {

@@ -42,8 +42,6 @@ charger_generer_url(); # pour recuperer_parametres_url
 //
 // http://doc.spip.org/@calculer_contexte
 function calculer_contexte() {
-	global $_GET, $_POST;
-
 	$contexte = array();
 	foreach($_GET as $var => $val) {
 		if (strpos($var, 'var_') !== 0)

@@ -270,12 +270,11 @@ function recuperer_parametres_url(&$fond, $url) {
 	}
 	/* Fin compatibilite anciennes urls */
 
-
 	// Chercher les valeurs d'environnement qui indiquent l'url-propre
 	if (isset($_SERVER['REDIRECT_url_propre']))
 		$url_propre = $_SERVER['REDIRECT_url_propre'];
-	elseif (isset($GLOBALS['HTTP_ENV_VARS']['url_propre']))
-		$url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
+	elseif (isset($_ENV['url_propre']))
+		$url_propre = $_ENV['url_propre'];
 	else {
 		$url = substr($url, strrpos($url, '/') + 1);
 		$url_propre = preg_replace(',[?].*,', '', $url);

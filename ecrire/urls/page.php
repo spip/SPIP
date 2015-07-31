@@ -117,7 +117,7 @@ function recuperer_parametres_url(&$fond, $url) {
 	// on ne redirige pas, on assume le nouveau contexte (si possible)
 	if (
 		 (isset($_SERVER['REDIRECT_url_propre']) AND $url_propre = $_SERVER['REDIRECT_url_propre'])
-	OR (isset($GLOBALS['HTTP_ENV_VARS']['url_propre']) AND $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'])
+	OR (isset($_ENV['url_propre']) AND $url_propre = $_ENV['url_propre'])
 	AND preg_match(',^(article|breve|rubrique|mot|auteur|site)$,', $fond)) {
 	  $url_propre = (preg_replace('/^[_+-]{0,2}(.*?)[_+-]{0,2}(\.html)?$/',
 			'$1', $url_propre));
