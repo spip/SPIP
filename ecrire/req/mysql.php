@@ -239,8 +239,14 @@ function spip_mysql_select_as($args)
 	} else $join ='';
 	$res = '';
 	foreach($args as $k => $v) {
-		$res .= ', ' . $v . (is_numeric($k) ? '' : " AS `$k`") . $join;
-		$join = '';
+	  if (!is_numeric($k)) {
+	  	$p = strpos($v, " ");
+		if ($p)
+		  $v = substr($v,0,$p) . " AS `$k`" . substr($v,$p);
+		else $v .= " AS `$k`";
+	  }
+	      
+	  $res .= ', ' . $v ;
 	}
 	return substr($res,2) . $join;
 }

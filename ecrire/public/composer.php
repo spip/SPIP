@@ -518,6 +518,7 @@ function calculer_select ($select = array(), $from = array(),
 	  reset($from);
 	  $e = '/\b(' . "$t\\." . join("|" . $t . '\.', $equiv) . ')\b/';
 	  if (!( count($equiv) <> 1 OR // a faire sauter un jour
+		 strpos($t, ' ') OR // jointure des le depart cf boucle_doc
 		 calculer_jointnul($t, $select, $e) OR
 		 calculer_jointnul($t, $join, $e) OR
 		 calculer_jointnul($t, $where, $e) OR
@@ -533,7 +534,6 @@ function calculer_select ($select = array(), $from = array(),
 	    $where = remplacer_jointnul($t, $where, $e);
 	    $having = remplacer_jointnul($t, $having, $e);
 	  }
-
 	  $from[-1] = $sfrom; 
 	}
 

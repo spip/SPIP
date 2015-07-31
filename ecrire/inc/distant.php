@@ -312,10 +312,11 @@ function fichier_copie_locale($source) {
 	}
 	// Ping  pour voir si son extension est connue et autorisee
 	$path_parts = recuperer_infos_distantes($source,0,false) ;
-	$ext = $path_part ? $path_parts['extension'] : '';
+	$ext = $path_parts ? $path_parts['extension'] : '';
 	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=".sql_quote($ext))) {
 		return nom_fichier_copie_locale($source, $ext);
 	}
+	spip_log("pas de copie locale pour $source");
 }
 
 

@@ -488,11 +488,18 @@ function spip_pg_select_as($args)
 	$argsas = "";
         foreach($args as $k => $v) {
 		$as = '';
+		  spip_log("$k : $v");
 		if (!is_numeric($k)) {
 			if (preg_match('/\.(.*)$/', $k, $r))
 				$v = $k;
-			elseif ($v != $k) $as = " AS $k"; 
+			elseif ($v != $k) {
+				$p = strpos($v, " ");
+				if ($p)
+				  $v = substr($v,0,$p) . " AS $k" . substr($v,$p);
+				else  $as = " AS $k"; 
+			}
 		}
+		  spip_log("subs $k : $v avec $as");
 		if (strpos($v, 'JOIN') === false)  $argsas .= ', ';
 		$argsas .= $v . $as; 
 	}

@@ -178,10 +178,9 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	AND !$boucle->modificateur['criteres']['id_rubrique']
 	AND !$boucle->modificateur['criteres']['id_document']
 	) {
-		# pallier un defaut du compilo sur le AS qui se met a la fin
-		unset($boucle->from[$id_table]);
-		$boucle->from[] = "spip_documents AS `${id_table}`
-		LEFT JOIN spip_documents_articles AS a
+		# Espace avant LEFT JOIN indispensable pour insertion de AS
+		# a refaire plus proprement
+		$boucle->from[$id_table] = "spip_documents LEFT JOIN spip_documents_articles AS a
 			ON `$id_table`.id_document=a.id_document
 			LEFT JOIN spip_articles AS aa
 				ON a.id_article=aa.id_article
