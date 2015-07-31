@@ -39,7 +39,7 @@ $auto_compress = true;
 $spip_version = 1.473;
 
 // version de spip
-$spip_version_affichee = "1.5pr4 CVS";
+$spip_version_affichee = "1.5";
 
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
