@@ -45,7 +45,7 @@ if(!jQuery.load_handlers) {
 			type.complete = function(res,status) {
 				// Do not fire OnAjaxLoad if the dataType is not html
 				var dataType = type.dataType;
-				var ct = (res && res.getResponseHeader)
+				var ct = (res && (typeof res.getResponseHeader == 'function'))
 					? res.getResponseHeader("content-type"): '';
 				var xml = !dataType && ct && ct.indexOf("xml") >= 0;
 				orig_complete(res,status);
