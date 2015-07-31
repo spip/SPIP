@@ -176,8 +176,14 @@ function action_legender_auteur_post($r) {
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
 			$auteur['id_auteur'] = $id_auteur = spip_abstract_insert("spip_auteurs", "(nom,statut)", "('temp','" . $statut . "')");
-			if ($ajouter_id_article)
-				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
+
+			// recuperer l'eventuel logo charge avant la creation
+			$id_hack = 0 - $GLOBALS['auteur_session']['id_auteur'];
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'on'))
+				rename($logo, str_replace($id_hack, $id_auteur, $logo));
+			if (list($logo) = $chercher_logo($id_hack, 'id_auteur', 'off'))
+				rename($logo, str_replace($id_hack, $id_auteur, $logo));
 		}
 
 		spip_query("UPDATE spip_auteurs SET $query_pass		nom=" . _q($auteur['nom']) . ",						login=" . _q($auteur['login']) . ",					bio=" . _q($auteur['bio']) . ",						email=" . _q($auteur['email']) . ",					nom_site=" . _q($auteur['nom_site']) . ",				url_site=" . _q($auteur['url_site']) . ",				pgp=" . _q($auteur['pgp']) .					(!$extra ? '' : (", extra = " . _q($extra) . "")) .			" WHERE id_auteur=".$auteur['id_auteur']);
@@ -220,7 +226,7 @@ function action_legender_auteur_post($r) {
 
 	// Lier a un article
 	if ($id_article = intval(_request('lier_id_article'))
-	#AND autoriser('modifier', 'article', $id_article)
+	AND autoriser('modifier', 'article', $id_article)
 	) {
 		spip_query("INSERT spip_auteurs_articles (id_article,id_auteur) VALUES ($id_article,$id_auteur)");
 	}

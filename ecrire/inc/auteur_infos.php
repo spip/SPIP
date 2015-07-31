@@ -242,9 +242,6 @@ function legender_auteur_saisir($auteur, $auteur_infos_voir, $bloc_statut, $redi
 	$corps .= "<div align='right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 
 
-	if (!$redirect)
-		$redirect = generer_url_ecrire('auteur_infos', "id_auteur=$id_auteur", '&');
-
 	$arg = intval($id_auteur);
 	$ret .= generer_action_auteur('editer_auteur', $arg, $redirect, $corps, ' method="POST"');
 

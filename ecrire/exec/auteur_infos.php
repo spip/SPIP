@@ -81,10 +81,17 @@ function exec_auteur_infos_dist() {
 
 
 		// Interface de logo
-		if ($id_auteur > 0
-		AND $spip_display != 4) {
+		if ($spip_display != 4) {
 			$iconifier = charger_fonction('iconifier', 'inc');
-			echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+
+			if ($id_auteur > 0)
+				echo $iconifier('id_auteur', $id_auteur, 'auteur_infos');
+
+			// nouvel auteur : le hack classique
+			else if ($fiche)
+				echo $iconifier('id_auteur',
+				0 - $GLOBALS['auteur_session']['id_auteur'],
+				'auteur_infos');
 		}
 
 		echo debut_droite();
