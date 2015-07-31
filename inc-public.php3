@@ -65,7 +65,7 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 	spip_log($HTTP_SERVER_VARS['REQUEST_METHOD'] . " $HTTP_IF_MODIFIED_SINCE $GLOBALS[PHP_SELF]");
 
 	// Code inoperant si le serveur HTTP traite ce champ en amont.
-	if ($HTTP_IF_MODIFIED_SINCE)
+	if ($HTTP_IF_MODIFIED_SINCE && $GLOBALS['recalcul'])
 	{
 		$headers_only = (trim(str_replace('GMT', '', ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE))) == $gmoddate);
 		if ($headers_only) http_status(304);
