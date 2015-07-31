@@ -350,18 +350,15 @@ if (lire_meta('activer_moteur') == 'oui') {
 // Mise a jour d'un (ou de zero) site syndique
 //
 
-if (!$timeout AND lire_meta("activer_syndic") != "non") {
-	include_ecrire("inc_connect.php3");
-	if ($db_ok) {
-		include_ecrire("inc_texte.php3");
-		include_ecrire("inc_filtres.php3");
-		include_ecrire("inc_sites.php3");
-		include_ecrire("inc_index.php3");
+if (!$timeout AND $db_ok AND lire_meta("activer_syndic") != "non") {
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
+	include_ecrire("inc_sites.php3");
+	include_ecrire("inc_index.php3");
 
-		executer_une_syndication();
-		executer_une_indexation_syndic();
-		$timeout = true;
-	}
+	executer_une_syndication();
+	executer_une_indexation_syndic();
+	$timeout = true;
 }
 
 ?>
