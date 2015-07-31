@@ -16,15 +16,17 @@ include_spip('inc/forum');
 include_spip('base/abstract_sql');
 spip_connect();
 
-function formulaires_forum_traiter_dist(
+function formulaires_forum_traiter_dist(/*
 $titre, $table, $type, $script,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
-$ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour){
+$ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour */) {
 
-	$message = 'ok';
 	$forum_insert = charger_fonction('forum_insert', 'inc');
+
+	$redirect = $forum_insert();
+
 	include_spip('inc/headers');
-	return $message . redirige_formulaire($forum_insert());
+	return redirige_formulaire($redirect);
 }
 
 ?>

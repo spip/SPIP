@@ -1,5 +1,7 @@
-<div class="formulaire_spip formulaire_forum"  id="formulaire_forum">
+<div class="formulaire_spip formulaire_forum ajax" id="formulaire_forum">
 [(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 
 [(#ENV{login_forum_abo})
 <INCLURE{fond=formulaires/inc-login_forum_abo}{env} />
@@ -7,7 +9,16 @@
 
 [(#ENV{editable})
 
-	[<form action="#ENV{url}#formulaire_forum" method="post" class='noajax'><div>
+
+[(#REM)
+	Bloc de previsualisation du forum envoye
+
+	Si on valide la previsu, on n'envoie pas en ajax car, si le post reussit
+	il faudra certainement redessiner toute la page pour afficher le nouveau
+	forum
+
+][<form action="#ENV{url}#formulaire_forum" method="post" class="noajax">
+	<div>
 	[(#ACTION_FORMULAIRE{#ENV{url_post}})]
 	[<input type="hidden" name="arg" value="(#ENV{arg})" />]
 	[<input type="hidden" name="hash" value="(#ENV{hash})" />]
@@ -21,9 +32,11 @@
 	[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
 	[(#INCLURE{fond=formulaires/inc-forum_ajouter_mot}{ajouter_mot})]
 	(#ENV*{erreurs}|table_valeur{previsu})
-	</div></form>]
+	</div>
+</form>]
 
-<form action="#ENV{url}#formulaire_forum" method="post" class='ajax' enctype='multipart/form-data'><div>
+
+<form action="#ENV{url}#formulaire_forum" method="post" enctype='multipart/form-data'><div>
 [(#ACTION_FORMULAIRE{#ENV{url_post}})]
 [<input type="hidden" name="arg" value="(#ENV{arg})" />]
 [<input type="hidden" name="hash" value="(#ENV{hash})" />]
@@ -49,7 +62,7 @@
 [(#CONFIG{forums_titre}|=={oui}|?{
 	<li class='saisie_titre[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]'>
 		<label for="titre"><:forum_titre:></label>
-		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
 		<input type="text" class="text" name="titre" id="titre"[ value="(#ENV{titre})"] size="60" />
 	</li>
 ,
@@ -59,7 +72,7 @@
 [(#CONFIG{forums_texte}|=={oui}|?{
 	<li class='saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
 		<label for='texte'><:forum_texte|typo:></label>
-		[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 		<p class='explication'><:info_creation_paragraphe:></p>
 		[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{texte}|barre_typo{#LANG,1}})]
 		<textarea name="texte" id="texte" rows="12" cols="60">[(#ENV{texte})]</textarea>
@@ -73,9 +86,10 @@
 	<p class='explication'><:forum_page_url:></p>
 	<ul>
 	<li class='saisie_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site}|oui)erreur]'><label for="nom_site"><:forum_titre:></label>
-	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site})</span>]
 	<input type="text" class="text" name="nom_site" id="nom_site" size="40" value="[(#ENV{nom_site})]" /></li>
 	<li class='saisie_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]'><label for="url_site"><:forum_url:></label>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>]
 	<input type="text" class="text" name="url_site" id="url_site" style="text-align: left;" dir="ltr" size="40" value="[(#ENV{url_site})]" /></li>
 	</ul></fieldset>
 })]
@@ -84,7 +98,7 @@
 	<fieldset>
 	<legend>Ajouter un document</legend><ul>
 	<li class='saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
-	[<span class='erreur'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
 	<input type="hidden" name="cle_ajouter_document" value="(#ENV{cle_ajouter_document})" />
 	[<div id="ajouter_document_up">(#ENV{ajouter_document})
 	<input type='checkbox' name='suprimer_document_ajoute' id='supprimer_document_ajoute' />
