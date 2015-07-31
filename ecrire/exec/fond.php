@@ -35,7 +35,9 @@ include_spip('inc/commencer_page');
 // il faudrait etre capable de flusher cela des que le contenu principal est genere
 // car c'est lui qui peut faire des appels a ce filtre
 ob_start();
-include "prive.php";
+# comme on est dans un exec, l'auth a deja ete testee
+# on peut appeler directement public.php
+include "public.php";
 // flushons si cela ne l'a pas encore ete
 ob_end_flush();
 /**
