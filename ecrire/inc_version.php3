@@ -1086,16 +1086,15 @@ function find_in_path ($filename, $path='AUTO') {
 
 	// Parcourir le chemin
 	foreach (split(':', $path) as $dir) {
-		if (substr($dir, 0,1)<>'/')
-			$f = "$racine$dir$filename";
-		else
-			$f = "$dir$filename";
-
+		if (substr($dir, 0,1)<>'/') $dir = "$racine$dir";
+		if (substr($dir, -1,1)<>'/') $dir .= "/";
+		$f = "$dir$filename";
+#		spip_log("find_in_path: essai $f");
 		if (@is_readable($f)) {
 			return $f;
 		}
 	}
-#	spip_log("find_in_path: pas de fichier '$filename' sur le chemin '$path'");
+
 }
 
 

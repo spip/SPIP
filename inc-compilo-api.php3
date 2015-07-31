@@ -83,8 +83,10 @@ class Champ {
 	var $statut;	// 'numerique, 'h'=texte (html) ou 'p'=script (php) ?
 			// -> definira les pre et post-traitements obligatoires
 	// champs pour la production de code dependant du contexte
-	var $id_mere;    // pour TOTAL_BOUCLE hors du corps
-	var $document;   // pour embed et img dans les textes
+	// $id_mere;  pour TOTAL_BOUCLE hors du corps
+	// $document; pour embed et img dans les textes
+	// sourcefile; pour DOSSIER_SQUELETTE
+	var $descr = array();
 }
 
 

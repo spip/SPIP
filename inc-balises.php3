@@ -63,7 +63,7 @@ function champs_traitements ($p) {
 	);
 	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
-	if ($p->documents) {
+	if ($p->descr['documents']) {
 		$ps = str_replace('traiter_raccourcis(', 
 			'traiter_raccourcis_doublon($doublons,',
 			str_replace('typo(', 'typo_doublon($doublons,', $ps));
@@ -180,6 +180,12 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 	return $p;
 }
 
+function balise_DOSSIER_SQUELETTE_dist($p) {
+	$p->code = "'" . addslashes(dirname($p->descr['sourcefile'])) . "'" ;
+	$p->statut = 'php';
+	return $p;
+}
+
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "lire_meta('adresse_site')";
 	$p->statut = 'php';
@@ -287,7 +293,7 @@ function balise_RECHERCHE_dist($p) {
 }
 
 function balise_COMPTEUR_BOUCLE_dist($p) {
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_mere;
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
 		erreur_squelette(
 			_T('zbug_champ_hors_boucle',
@@ -302,7 +308,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 }
 
 function balise_TOTAL_BOUCLE_dist($p) {
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_mere;
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
 	if ($b === '') {
 		erreur_squelette(
 			_T('zbug_champ_hors_boucle',
@@ -385,7 +391,7 @@ function balise_EMBED_DOCUMENT_dist($p) {
 	$_id_document = champ_sql('id_document',$p);
 	$p->code = "calcule_embed_document(intval($_id_document), '" .
 	texte_script($p->fonctions ? join($p->fonctions, "|") : "") .
-	  "', \$doublons, '" . $p->documents . "')";
+	  "', \$doublons, '" . $p->descr['documents'] . "')";
 	unset ($p->fonctions);
 	$p->statut = 'html';
 	return $p;
@@ -577,7 +583,7 @@ function calculer_balise_logo ($p) {
 			$c->nom_champ = $match[2];
 			$c->id_boucle = $p->id_boucle;
 			$c->boucles = &$p->boucles;
-			$c->id_mere = $p->id_mere;
+			$c->descr = $p->descr;
 			$c = calculer_champ($c);
 			$code_lien = str_replace('#'.$match[2], "'.".$c.".'", $code_lien);
 		}
@@ -596,7 +602,7 @@ function calculer_balise_logo ($p) {
 	// cas des documents
 	if ($type_objet == 'DOCUMENT') {
 		$code_logo = "calcule_document($_id_objet, '" .
-			$p->documents .
+			$p->descr['documents'] .
 		  '\', $doublons)';
 		if ($flag_fichier)
 		  $p->code = "calcule_fichier_logo($code_logo)";

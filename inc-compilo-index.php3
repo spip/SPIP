@@ -301,7 +301,7 @@ function filtres_arglist($args, $p, $sep) {
 			if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
 			elseif ($arg[0] =='<')
-			  $arg = calculer_texte($arg, $p->id_boucle, $p->boucles, $p->id_mere);
+			  $arg = calculer_texte($arg, $p->id_boucle, $p->boucles);
 			elseif (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $r2)) {
 				$p->nom_boucle = $r2[2];
 				$p->nom_champ = $r2[3];
