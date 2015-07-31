@@ -68,15 +68,8 @@ function inc_charger_php_extension_dist($module){
 		return false;
 	}
 
-	/* Once we require PHP >= 4.3, we might use PHP_SHLIB_SUFFIX here */
-	if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-		$module_file = 'php_' . $module . '.dll';
-	} elseif (PHP_OS=='HP-UX') {
-		$module_file = $module . '.sl';
-	} else {
-		$module_file = $module . '.so';
-	}
-
-	return @dl($module_file);
+	$prefix = (PHP_SHLIB_SUFFIX === 'dll') ? 'php_' : '';
+	
+	return @dl($prefix . $module_file . PHP_SHLIB_SUFFIX);
 }
 ?>
