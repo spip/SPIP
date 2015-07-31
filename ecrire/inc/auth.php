@@ -156,7 +156,7 @@ function inc_auth_dist() {
 			$connect_login = $_SERVER['REMOTE_USER'];
 	}    
 
-	$where = ($connect_id_auteur!==NULL) ?
+	$where = (is_numeric($connect_id_auteur)) ?
 	  "id_auteur=$connect_id_auteur" :
 	  (!$connect_login ? '' : "login=" . _q($connect_login));
 
