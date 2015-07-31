@@ -435,17 +435,17 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 			elseif (!$testv) {
 				unset($url[$n]);
 			}
-	// Ajout. Pour une variable, remplacer au meme endroit,
-	// pour un tableau ce sera fait dans la prochaine boucle
+			// Ajout. Pour une variable, remplacer au meme endroit,
+			// pour un tableau ce sera fait dans la prochaine boucle
 			elseif (substr($r[1],-2) != '[]') {
 				$url[$n] = $r[1].'='.$u;
 				unset($ajouts[$r[1]]);
 			}
-	// Pour les tableaux on laisse tomber les valeurs de
-  // départ, on remplira à l'étape suivante
+			// Pour les tableaux on laisse tomber les valeurs de
+			// départ, on remplira à l'étape suivante
 			else {
-	      unset($url[$n]);
-      }
+				unset($url[$n]);
+			}
 		}
 	}
 
