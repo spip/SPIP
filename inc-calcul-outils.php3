@@ -39,20 +39,20 @@ function calcule_fichier_logo($on) {
 
 function affiche_logos($logos, $lien, $align) {
 	static $num_survol=0;
-	global $espace_logos;
+
 	list ($arton, $artoff) = $logos;
 
 	if (!$arton) return $artoff;
 
 	$num_survol++;
-	$milieu = "<img src='$arton'\nname='image$num_survol' alt='image$num_survol'"
+	$milieu = "<img src='$arton'\nalt='image$num_survol'"
 		. ($align ? " align='$align' " : '') 
 		. " class='spip_logos' />";
 
 	if (!$artoff) return ($lien ? http_href($lien, $milieu) : $milieu);
 
-	$att =	"onmouseover=\"image$num_survol.src='$artoff'\" 
-		onmouseout=\"image$num_survol.src='$arton'\"";
+	$att =	"onmouseover=\"this.firstChild.src='$artoff'\" 
+		onmouseout=\"this.firstChild.src='$arton'\"";
 
 	return ($lien ? "<a href='$lien' $att>$milieu</a>" : "<div $att>$milieu</div>");
 
