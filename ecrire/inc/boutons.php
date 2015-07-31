@@ -64,8 +64,8 @@ function definir_barre_boutons() {
 		'auteurs' => new Bouton('redacteurs-48.png', 'icone_auteurs')
 	);
 
-	if ($GLOBALS['connect_statut'] == "0minirezo"
-	AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
+	if ($GLOBALS['meta']["activer_statistiques"] != 'non'
+	AND autoriser('voirstats')) {
 		$boutons_admin['statistiques_visites']=
 		  new Bouton('statistiques-48.png', 'icone_statistiques_visites');
 	}
