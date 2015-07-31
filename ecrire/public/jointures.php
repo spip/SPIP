@@ -55,7 +55,7 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 	}
 
   // la clause Group by est en conflit avec ORDER BY, a completer
-	if (!$pk) foreach(liste_champs_jointures($nom,$desc) as $id_prim){
+	if (!$pk) foreach(liste_champs_jointures($nom,$desc,true) as $id_prim){
 		$id_field = $nom . '.' . $id_prim;
 		if (!in_array($id_field, $boucle->group)) {
 			$boucle->group[] = $id_field;
@@ -72,9 +72,13 @@ function fabrique_jointures(&$boucle, $res, $cond=false, $desc=array(), $nom='',
 
 
 // http://doc.spip.org/@liste_champs_jointures
-function liste_champs_jointures($nom,$desc){
+function liste_champs_jointures($nom,$desc,$primary=false){
 
 	static $nojoin = array('idx','maj','date','statut');
+	
+	// si cle primaire demandee, la privilegier
+	if ($primary && isset($desc['key']['PRIMARY KEY']))
+		return split_key($desc['key']['PRIMARY KEY']);
 
 	// les champs declares explicitement pour les jointures
 	if (isset($desc['join'])) return $desc['join'];
@@ -84,7 +88,7 @@ function liste_champs_jointures($nom,$desc){
 	// si pas de cle, c'est fichu
 	if (!isset($desc['key'])) return array();
 
-	// si cle primaire, la privilegier
+	// si cle primaire
 	if (isset($desc['key']['PRIMARY KEY']))
 		return split_key($desc['key']['PRIMARY KEY']);
 	
