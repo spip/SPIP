@@ -1,5 +1,5 @@
 <div class='formulaire_spip formulaire_editer formulaire_editer_rubrique formulaire_editer_rubrique-#ENV{id_rubrique,nouveau}'>
-	<!-- <br class='spacer' /> -->
+	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -12,8 +12,8 @@
 	    <li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 			<label for="titre"><:info_titre:></label>
 			<em class="aide">#AIDER{arttitre}</em>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-			<input type='text' name='titre' id='titre' class='text' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_rubrique}|_T})]"
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+			<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{titre_nouvelle_rubrique}|_T})]"
 			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
 	
@@ -27,14 +27,14 @@
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 			<label for="descriptif"><:texte_descriptif_rapide:></label>
 			<div class='explication'><:entree_contenu_rubrique:></div>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>]
 			<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
 	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="text_area"><:info_texte_explicatif:></label>
 			<em class="aide">#AIDER{raccourcis}</em>
-			[<span class='erreur'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
 			[(#ENV**{_texte_trop_long,''})]
 			<div class="explication"><:texte_enrichir_mise_a_jour:><em>#AIDER{raccourcis}</em></div>
 			<textarea name='texte' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
@@ -43,7 +43,7 @@
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class="boutons"><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 	]
 </div>
