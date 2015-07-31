@@ -1299,13 +1299,17 @@ function init_var_mode(){
 						case 'preview':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'recalcul';
-							// truquer les boucles et ne pas enregistrer de cache
+							// truquer les boucles 
 							$GLOBALS['var_preview'] = true;
+							// et ne pas enregistrer de cache
+							$GLOBALS['var_nocache'] = true;
 							break;
 						case 'blocs':
 							// forcer le compilo et ignorer les caches existants
 							$GLOBALS['var_mode'] = 'calcul';
 							$GLOBALS['var_noisettes'] = true;
+							// et ne pas enregistrer de cache
+							$GLOBALS['var_nocache'] = true;
 							break;
 						case 'urls':
 							// forcer le compilo et ignorer les caches existants
