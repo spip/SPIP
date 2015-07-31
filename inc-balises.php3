@@ -31,7 +31,15 @@ define("_INC_BALISES", "1");
 function champs_traitements ($p) {
 	global $table_des_traitements;
 
-	$ps = $table_des_traitements[$p->nom_champ];
+	if (!is_array($table_des_traitements[$p->nom_champ]))
+	  // old style
+	  $ps = $table_des_traitements[$p->nom_champ];
+	else {
+		$ps = $table_des_traitements[$p->nom_champ][$p->type_requete];
+		if (!$ps)
+			$ps = $table_des_traitements[$p->nom_champ][0];
+	}
+
 	if (!$ps) return $p->code;
 	if ($p->descr['documents']) {
 		$ps = str_replace('traiter_raccourcis(', 
