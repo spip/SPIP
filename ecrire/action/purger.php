@@ -67,7 +67,7 @@ function action_purger_dist()
 	include_spip('inc/minipres');
         include_spip('inc/filtres');
 
-	minipres('', "<div style='font-family: verdana, arial, sans; font-size: 12px;'>" .
+	echo minipres('', "<div style='font-family: verdana, arial, sans; font-size: 12px;'>" .
  _T('ecrire:taille_cache_image',
 		     array('dir' => _DIR_VAR,
 			   'taille' => "<b>".taille_en_octets($taille)."</b>")) .'</div>'); 

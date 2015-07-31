@@ -136,7 +136,7 @@ function check_upload_error($error, $msg='') {
     exit;
   }
   
-	minipres($msg, '<form action="' .
+	echo minipres($msg, '<form action="' .
 		rawurldecode($GLOBALS['redirect']).
 		'" method="post"><div align="'.  #ici method='post' permet d'aller au bon endroit, alors qu'en GET on perd les variables... mais c'est un hack sale.
 		$spip_lang_right.
