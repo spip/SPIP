@@ -40,6 +40,7 @@ body{ font-size: 100%;font-family: Verdana, Geneva, Sans, sans-serif; }
 #page { font-size: small; }
 /* ecran etroit*/
 #conteneur,.table_page,div.messages { clear: both; margin-#GET{right}: auto; margin-#GET{left}: auto; text-align: #GET{left}; width: 750px; margin-top:0.5em;}
+#conteneur { margin: 0; }
 #navigation { float: #GET{left}; width: 200px; min-height: 100px; }
 #contenu { float: #GET{left} ; margin-#GET{left}: 30px; width: 505px; }
 #extra { float: #GET{left}; width: 200px; }
@@ -136,9 +137,9 @@ select.fondl { padding: 0; }
 #bandeau-principal .h-list .menu-item { margin: 0 auto}
 
 #bandeau-principal a {cursor:hand;}
-#bandeau-principal a .icon_fond { width: 48px; height: 48px; background: #GET{claire}; margin: auto; }
+#bandeau-principal a .icon_fond { width: 48px; height: 48px; background: [#(#ENV{couleur_claire}|couleur_eclaircir)]; margin: auto; }
 #bandeau-principal a.selection .icon_fond { width: 48px; margin:auto }
-#bandeau-principal a:hover span.icon_fond { background:url(#GET{chemin_img_pack}fond-gris-anim.gif); width: 48px; height: 48px; margin: auto; }
+#bandeau-principal a:hover span.icon_fond { background: [#(#ENV{couleur_claire})];  width: 48px; height: 48px; margin: auto; }
 #bandeau-principal li.boutons_admin:hover .bandeau_sec,
 #bandeau-principal li.boutons_admin.sfhover .bandeau_sec { display: block; }
 #bandeau-principal span.icon_fond span { background: center top no-repeat; height: 48px; display: block; width: 48px; margin: 0; }
@@ -178,7 +179,7 @@ select.fondl { padding: 0; }
 /* .bandeau_sec .gauche { margin-top: 0; padding: 2px; padding-top: 0; background-color: #fff; border-bottom: 1px solid #000; border-#GET{left}: 1px solid #000; border-#GET{right}: 1px solid #000; z-index: 100; } */
 /* .bandeau-icones.separateur { vertical-align: middle; height: 100%; width: 11px; margin: 0; padding: 0; background: url(#GET{chemin_img_pack}file=tirets-separation.gif); background-position: 5px 0px; } */
 .bandeau_couleur { padding-#GET{right}: 4px; padding-#GET{left}: 4px; font-family: verdana, helvetica, arial, sans; font-size: 11px; color: #000; text-align: center; font-weight: bold; height: 22px; }
-.bandeau_couleur_sous { position: absolute; visibility: hidden; top: 0; background-color: #GET{claire}; color: #000; padding: 5px; padding-top: 2px; font-family: verdana, helvetica, arial, sans; font-size: 11px; }
+.bandeau_couleur_sous { position: absolute; visibility: hidden; top: 1px; background-color: white; border: 1px solid #GET{claire}; color: #000; padding: 5px; padding-top: 2px; font-family: verdana, helvetica, arial, sans; font-size: 11px; }
 
 a.lien_sous { color: #666; }
 a.lien_sous:hover { color: #000; }
@@ -373,7 +374,7 @@ td.icone a img { border: 0; }
 .cadre_padding.padding_x { padding: 0 6px; }
 .padding_x .bloc_depliable { padding: 6px 0; }
 /* .cadre-titre { font-family: Verdana, Geneva, helvetica, sans; font-weight: bold; font-size: 12px; padding: 3px; }*/
-.cadre { margin: 0px 0 10px 0; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; position: relative; }
+.cadre { margin: 20px 0 10px 0; font-family: Verdana, Geneva, helvetica, sans; font-size: 11px; position: relative; }
 .cadre-fonce { background-color: #GET{foncee}; }
 .cadre-gris-fonce { background: #666; }
 .cadre-gris-clair { border: 1px solid #aaa; background-color: #ccc; }
@@ -385,7 +386,7 @@ td.icone a img { border: 0; }
 .cadre-trait-couleur div.cadre-titre { background-color: #GET{foncee}; border-bottom: 2px solid #GET{foncee}; color: #fff; }
 .cadre-r { background-color: #fff; border: 1px solid #bbb; color: #333; }
 .cadre-r div.cadre-titre { background-color: #aaa; border-bottom: 1px solid #666; color: #000; }
-.cadre-e { background-color: #ddd; border-top: 1px solid #aaa; border-#GET{left}: 1px solid #aaa; border-bottom: 1px solid #fff; border-#GET{right}: 1px solid #fff; border: 1px solid #666; }
+.cadre-e { background-color: #ddd; border: 1px solid #aaa; }
 .cadre-e div.cadre-titre { background-color: #GET{claire}; border-bottom: 1px solid #666; color: #000; }
 .cadre-forum { background-color: #fff; border: 1px solid #aaa; margin-bottom: 0; }
 .cadre-forum div.cadre-titre { background-color: #GET{claire}; border-bottom: 1px solid #aaa; color: #000; }
@@ -753,7 +754,7 @@ ul.instituer li.refuse.selected,ul.instituer li.refuse a:hover { background: #ff
 #voir.tabs-container { background: #fff; padding: 5px; border: 1px solid #999; }
 .no_onglets .tabs-container {background:#fff; border:none;padding-top:0;}
 .no_onglets .tabs-nav {display: none;}
-.no_onglets .fiche_objet { background:#fff;border:1px solid #999; padding:5px;margin-bottom:1em;}
+.no_onglets .fiche_objet { background:#fff;border:1px solid #aaa; padding:5px;margin-bottom:1em; margin-top: 20px;}
 .no_onglets #voir.tabs-container { background: #fff; padding:0; border: 0; }
 
 .no_onglets #contenu #wysiwyg div.label{ display: none; }
