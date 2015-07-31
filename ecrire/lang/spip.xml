@@ -195,6 +195,10 @@
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/spip?lang_cible=tr" total="636" traduits="545" relire="0" modifs="29" nouveaux="62" pourcent="85.69">
 	</langue>
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/spip?lang_cible=uk" total="636" traduits="597" relire="2" modifs="34" nouveaux="3" pourcent="93.87">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
+		<traducteur nom="Retenodus" lien="http://trad.spip.net/auteur/retenodus" />
+	</langue>
 	<langue code="vi" url="http://trad.spip.net/tradlang_module/spip?lang_cible=vi" total="636" traduits="495" relire="0" modifs="50" nouveaux="91" pourcent="77.83">
 	</langue>
 	<langue code="wo" url="http://trad.spip.net/tradlang_module/spip?lang_cible=wo" total="636" traduits="427" relire="0" modifs="56" nouveaux="153" pourcent="67.14">
