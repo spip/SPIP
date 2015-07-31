@@ -46,19 +46,28 @@ if (!function_exists('autoriser')) {
 }
 
 
-// API pour une fonction generique d'autorisation :
-// $qui est : vide (on prend alors visiteur_session)
-//            un id_auteur (on regarde dans la base)
-//            un tableau auteur complet, y compris [restreint]
-// $faire est une action ('modifier', 'publier'...)
-// $type est un type d'objet ou nom de table ('article')
-// $id est l'id de l'objet sur lequel on veut agir
-// $opt (inutilise pour le moment) = options sous forme de tableau associatif
-// (par exemple pour preciser si l'autorisation concerne tel ou tel champ)
-//
-// Seul le premier argument est obligatoire
-//
-// http://doc.spip.org/@autoriser_dist
+/**
+ * API pour une fonction generique d'autorisation :
+ * (par exemple pour preciser si l'autorisation concerne tel ou tel champ)
+ *
+ * Seul le premier argument est obligatoire
+ *
+ * http://doc.spip.org/@autoriser_dist
+ *
+ * @param string $faire
+ *   une action ('modifier', 'publier'...)
+ * @param string $type
+ *   type d'objet ou nom de table ('article')
+ * @param int $id
+ *   id de l'objet sur lequel on veut agir
+ * @param null|int|array $qui
+ *   si null on prend alors visiteur_session
+ *   un id_auteur (on regarde dans la base)
+ *   un tableau auteur complet, y compris [restreint]
+ * @param null|array $opt
+ *   options sous forme de tableau associatif
+ * @return bool
+ */
 function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 	// Qui ? visiteur_session ?
@@ -120,7 +129,18 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 
 // une globale pour aller au plus vite dans la fonction generique ci dessus
 $GLOBALS['autoriser_exception']=array();
-// http://doc.spip.org/@autoriser_exception
+/**
+ * Accorder une autorisation exceptionnel pour le hit en cours, ou la revoquer
+ *
+ * http://doc.spip.org/@autoriser_exception
+ *
+ * @param string $faire
+ * @param string $type
+ * @param null|int|array $id
+ * @param bool $autoriser
+ *   accorder (true) ou revoquer (false)
+ * @return bool
+ */
 function autoriser_exception($faire,$type,$id,$autoriser=true){
 	// une static innaccessible par url pour verifier que la globale est positionnee a bon escient
 	static $autorisation;
@@ -293,7 +313,7 @@ function autoriser_article_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 /**
  * Autoriser a creer un article :
- * Il faut qu'une rubrique existe et qu'on est le statut necessaire pour creer
+ * Il faut qu'une rubrique existe et qu'on ait le statut necessaire pour creer
  * 
  * @return bool
  */
