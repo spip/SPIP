@@ -194,4 +194,57 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur){
 
 }
 
+/**
+ * Synchroniser les fichiers htpasswd
+ * 
+ * @param int $id_auteur
+ * @param array $champs
+ * @param array $options
+ *	all=>true permet de demander la regeneration complete des acces apres operation en base (import, upgrade)
+ * @return void 
+ */
+function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array()){
+	// si un login, pass ou statut a ete modifie
+	// regenerer les fichier htpass
+	if (isset($champs['login'])
+		OR isset($champs['pass'])
+		OR isset($champs['statut'])
+		OR (isset($options['all']) AND $options['all'])
+	) {
+
+		$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
+		$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
+
+		// Cette variable de configuration peut etre posee par un plugin
+		// par exemple acces_restreint ;
+		// si .htaccess existe, outrepasser spip_meta
+		if (($GLOBALS['meta']['creer_htpasswd'] != 'oui')
+		AND !@file_exists($htaccess)) {
+			spip_unlink($htpasswd);
+			spip_unlink($htpasswd."-admin");
+			return;
+		}
+
+		# remarque : ici on laisse passer les "nouveau" de maniere a leur permettre
+		# de devenir redacteur le cas echeant (auth http)... a nettoyer
+		// attention, il faut au prealable se connecter a la base (necessaire car utilise par install)
+
+		$p1 = ''; // login:htpass pour tous
+		$p2 = ''; // login:htpass pour les admins
+		$s = sql_select("login, htpass, statut", "spip_auteurs", sql_in("statut",  array('1comite','0minirezo','nouveau')));
+		while ($t = sql_fetch($s)) {
+			if (strlen($t['login']) AND strlen($t['htpass'])) {
+				$p1 .= $t['login'].':'.$t['htpass']."\n";
+				if ($t['statut'] == '0minirezo')
+					$p2 .= $t['login'].':'.$t['htpass']."\n";
+			}
+		}
+		if ($p1) {
+			ecrire_fichier($htpasswd, $p1);
+			ecrire_fichier($htpasswd.'-admin', $p2);
+			spip_log("Ecriture de $htpasswd et $htpasswd-admin");
+		}
+	}
+}
+
 ?>

@@ -20,7 +20,8 @@ include_spip('inc/acces');
 // http://doc.spip.org/@install_etape_fin_dist
 function install_etape_fin_dist()
 {
-	ecrire_acces();
+	include_spip('inc/auth');
+	auth_synchroniser_distant();
 
 	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
 	if (file_exists(_FILE_CHMOD_TMP)) {

@@ -264,15 +264,6 @@ function revision_auteur($id_auteur, $c=false) {
 	$auth_methode = sql_getfetsel('source','spip_auteurs','id_auteur='.intval($id_auteur));
 	include_spip('inc/auth');
 	auth_synchroniser_distant($auth_methode, $id_auteur, $c);
-
-	// .. mettre a jour les fichiers .htpasswd et .htpasswd-admin
-	if (isset($c['login'])
-	OR isset($c['pass'])
-	OR isset($c['statut'])
-	) {
-		include_spip('inc/acces');
-		ecrire_acces();
-	}
 	
 	// Si on change login ou mot de passe, deconnecter cet auteur,
 	// sauf si c'est nous-meme !

@@ -35,8 +35,8 @@ function base_upgrade_dist($titre='', $reprise='')
 	spip_unlink(_DIR_TMP.'charger_plugins_options.php');
 	spip_unlink(_DIR_TMP.'verifier_plugins.txt');
 
-	include_spip('inc/acces');
-	ecrire_acces();
+	include_spip('inc/auth');
+	auth_synchroniser_distant();
 	$config = charger_fonction('config', 'inc');
 	$config();
 }

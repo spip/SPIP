@@ -487,13 +487,24 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
  * donnee lorsque des modifications sont faites dans la base auteur
  *
  * @param string $auth_methode
+ *   ici true permet de forcer la synchronisation de tous les acces pour toutes les methodes
  * @param int $id_auteur
  * @param array $champs
- * @return bool
+ * @param array $options
+ * @return void
  */
-function auth_synchroniser_distant($auth_methode, $id_auteur, $champs){
+function auth_synchroniser_distant($auth_methode=true, $id_auteur=0, $champs=array()){
 	$args = func_get_args();
-	return auth_administrer('synchroniser_distant',$args);
+	if ($auth_methode===true){
+		$args[] = array('all'=>true); // ajouter une option all=>true pour chaque auth
+		foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
+			array_shift($args);
+			array_unshift($args,$methode);
+			auth_administrer('synchroniser_distant',$args);
+		}
+	}
+	else
+		auth_administrer('synchroniser_distant',$args);
 }
 
 
