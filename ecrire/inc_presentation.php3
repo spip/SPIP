@@ -1244,12 +1244,13 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 
 function bandeau_barre_verticale(){
 	global $spip_ecran;
+	if ($spip_ecran == "large")
+		$decalage = "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
+	echo $decalage;
 	echo "<td background='img_pack/tirets-separation.gif' width='2'>";
 	echo "<img src='img_pack/rien.gif' alt='' width=2 height=2>";
 	echo "</td>";
-	if ($spip_ecran == "large") {
-		echo "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
-	}
+	echo $decalage;
 }
 
 
