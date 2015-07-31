@@ -1540,7 +1540,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "</b></font> &nbsp; ";
 		}
 
-	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") echo "<a href='calendrier_jour.php3' title='"._T('icone_agenda')."'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0'></a>";
+	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") echo "<a href='calendrier.php3' title='"._T('icone_agenda')."'><img src='img_pack/cal-mois.gif' alt='jour' width='26' height='20' border='0'></a>";
 	echo "</td>";
 	echo "<td>   </td>";
 	echo "<td>";
