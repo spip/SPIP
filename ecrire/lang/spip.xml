@@ -10,9 +10,10 @@
 	</langue>
 	<langue code="bg" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bg" total="636" traduits="479" relire="0" modifs="27" nouveaux="130" pourcent="75.31">
 	</langue>
-	<langue code="br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=br" total="636" traduits="568" relire="0" modifs="13" nouveaux="55" pourcent="89.31">
+	<langue code="br" url="http://trad.spip.net/tradlang_module/spip?lang_cible=br" total="636" traduits="603" relire="0" modifs="0" nouveaux="33" pourcent="94.81">
 		<traducteur nom="AudeB" lien="http://trad.spip.net/auteur/audeb" />
 		<traducteur nom="fa_b" lien="http://trad.spip.net/auteur/fa_b" />
+		<traducteur nom="kerivo" lien="http://trad.spip.net/auteur/kerivo" />
 	</langue>
 	<langue code="bs" url="http://trad.spip.net/tradlang_module/spip?lang_cible=bs" total="636" traduits="466" relire="0" modifs="42" nouveaux="128" pourcent="73.27">
 	</langue>
