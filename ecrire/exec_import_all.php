@@ -37,24 +37,50 @@ function verifier_version_sauvegarde ($archive) {
 		return _T('avis_probleme_archive', array('archive' => $archive));
 }
 
+function import_all_check() {
+
+	global $archive;
+
+	// cas de l'appel apres demande de confirmation
+	if ($archive) {
+			$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
+			$commentaire = verifier_version_sauvegarde ($archive);
+		}
+
+	// au tout premier appel, on ne revient pas de cette fonction
+	debut_admin(generer_url_post_ecrire("import_all","archive=$archive"), $action, $commentaire);
+
+	// on est revenu: l'authentification ftp est ok
+	fin_admin($action);
+	// dire qu'on commence
+	ecrire_meta("request_restauration", serialize($_REQUEST));
+	ecrire_meta("debut_restauration", "debut");
+	ecrire_meta("status_restauration", "0");
+	ecrire_metas();
+	// se rappeler pour montrer illico ce qu'on fait 
+	header('Location: ./');
+}
+
 function import_all_dist()
 {
-	global $archive;
-	if ($archive) {
-	$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
-	$commentaire = verifier_version_sauvegarde ($archive);
-	}
+	// si l'appel est explicite, passer par l'authentification ftp
+	if (!$GLOBALS['meta']["debut_restauration"])
+		import_all_check();
 
-  debut_admin(generer_url_post_ecrire("import_all","archive=$archive"), $action, $commentaire);
-
-  $archive = _DIR_SESSIONS . $archive;
-
-  ecrire_meta("debut_restauration", "debut");
-  ecrire_meta("fichier_restauration", $archive);
-  ecrire_meta("status_restauration", "0");
-  ecrire_metas();
-  
-  fin_admin($action);
-  header("Location: ./");
+	// puis commencer ou continuer
+	include_ecrire('inc_import');
+	import_all_continue(array(
+'spip_auteurs',
+'spip_articles',
+'spip_breves',
+'spip_documents',
+'spip_forum',
+'spip_mots',
+'spip_groupes_mots',
+'spip_petitions',
+'spip_rubriques',
+'spip_signatures',
+'spip_types_documents',
+'spip_visites'));		
 }
 ?>

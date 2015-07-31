@@ -10,11 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+include_ecrire('inc_presentation');
 include_ecrire ("inc_acces");
 
 
@@ -310,7 +308,6 @@ function import_objet_0_0($f, $gz=false) {
 
 	$p = $pos + $abs_pos;
 	ecrire_meta("status_restauration", "$p");
-//	ecrire_metas();
 
 	return $import_ok = true;
 }
@@ -321,8 +318,7 @@ function import_objet($f, $gz = false) {
 
 function import_fin() {
 	// Effacer l'ancien acces admin
-	$query = "DELETE FROM spip_auteurs WHERE id_auteur=0";
-	spip_query($query);
+	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
 
 	if ($charset = $GLOBALS['meta']['charset_restauration'])
 		ecrire_meta('charset', $charset);
@@ -344,8 +340,7 @@ function import_abandon() {
 	ecrire_metas();
 }
 
-
-function import_all($f, $gz=false) {
+function import_tables($f, $tables, $gz=false) {
 	global $import_ok;
 	global $auth_htaccess;
 	global $connect_id_auteur;
@@ -405,30 +400,7 @@ function import_all($f, $gz=false) {
 
 	// Destruction des entrees non restaurees
 
-	$query = "DELETE FROM spip_rubriques WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_breves WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_auteurs WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_articles WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_documents WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_types_documents WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_forum WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_mots WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_groupes_mots WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_petitions WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_signatures WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
-	$query = "DELETE FROM spip_visites WHERE UNIX_TIMESTAMP(maj) < $my_date";
-	spip_query($query);
+	detruit_non_restaurees($mydate, $tables);
 
 	import_fin();
 
@@ -438,9 +410,19 @@ function import_all($f, $gz=false) {
 }
 
 
+// Destruction des entrees non restaurees
+
+function detruit_non_restaurees($mydate, $tables)
+{
+	foreach ($tables as $v) 
+	  spip_query("DELETE FROM $v WHERE UNIX_TIMESTAMP(maj) < $my_date");
+}
+
+
 function affiche_progression_javascript($abs_pos) {
 	global $affiche_progression_pourcent;
 	include_ecrire('inc_charsets');
+
 	flush();
 	echo " -->\n<script type='text/javascript'><!--\n";
 
@@ -461,49 +443,60 @@ function affiche_progression_javascript($abs_pos) {
 	flush();
 }
 
-function import_init()
+function import_all_continue($tables)
 {
-  global $meta, $flag_gz, $buf, $pos, $abs_pos;
-	$archive = $meta["fichier_restauration"];
-	$my_pos = $meta["status_restauration"];
-	$ok = @is_readable($archive);
+	global $meta, $flag_gz, $buf, $pos, $abs_pos;
 
-	if ($ok) {
-		if (ereg("\.gz$", $archive)) {
+	@ignore_user_abort(1);
+
+	$request = unserialize($meta['request_restauration']);
+
+	$archive = _DIR_SESSIONS . $request['archive'];
+
+	debut_page(_T('titre_page_index'), "asuivre", "asuivre");
+
+	debut_gauche();
+
+	debut_droite();
+
+	if (!@is_readable($archive)) {
+		$texte_boite = _T('info_erreur_restauration');
+		debut_boite_alerte();
+		echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
+		fin_boite_alerte();
+		fin_html();
+		exit;
+	}
+
+	$my_pos = $meta["status_restauration"];
+
+	if (ereg("\.gz$", $archive)) {
 			$affiche_progression_pourcent = false;
 			$taille = taille_en_octets($my_pos);
 			$gz = true;
-		}
-		else {
+	} else {
 			$affiche_progression_pourcent = filesize($archive);
 			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
 			$gz = false;
 		}
-		$texte_boite = _T('info_base_restauration')."<p>
+	$texte_boite = _T('info_base_restauration')."<p>
 		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
 		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
-	}
-	else {
-		$texte_boite = _T('info_erreur_restauration');
-	}
 
 	debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
-	fin_page("jimmac");
+	fin_page();
 	echo "</HTML><font color='white'>\n<!--";
 	@flush();
 
-	if ($ok) {
-		$_fopen = ($gz) ? gzopen : fopen;
-		$f = $_fopen($archive, "rb");
-		$pos = 0;
-		$buf = "";
-		if (!import_all($f, $gz)) import_abandon();
-	}
-	else {
-		import_fin();
-	}
+	$_fopen = ($gz) ? gzopen : fopen;
+	$f = $_fopen($archive, "rb");
+	$pos = 0;
+	$buf = "";
+	if (!import_tables($f, $tables, $gz))
+		import_abandon();
+	else	import_fin();
 }
 
 ?>
