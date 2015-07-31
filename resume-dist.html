@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+
+<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
+<B_haut>
+	<TR BGCOLOR="#000000">
+	<TD ALIGN="center">
+	<A HREF="#URL_SITE_SPIP"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_haut(RUBRIQUES){id_parent=0}{par titre}{0,5}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut>
+	</TR>
+</B_haut>
+<B_haut2>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut2(RUBRIQUES){id_parent=0}{par titre}{5,6}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut2>
+	</TR>
+</B_haut2>
+<B_haut3>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut3(RUBRIQUES){id_parent=0}{par titre}{11,6}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut3>
+	</TR>
+</B_haut3>
+<B_haut4>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut4(RUBRIQUES){id_parent=0}{par titre}{17,5}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut4>
+	</TR>
+</B_haut4>
+</TABLE>
+
+<CENTER>
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=632>
+<TR>
+<TD WIDTH=300 ALIGN="left" VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
+	<p align='right'><font size='4'><b>Les articles les plus populaires</b></font>
+
+	<BOUCLE_articles(ARTICLES){tout}{par popularite}{inverse}{0,7}> 
+		<P align="right">
+		<FONT SIZE=2>
+		[(#SURTITRE)<BR>]
+		<FONT SIZE=3><A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A></FONT>
+		[<BR>(#SOUSTITRE)]
+		<B_AUTEUR2><BR><B>par 
+		<BOUCLE_AUTEUR2(AUTEURS){id_article}{", "}{par nom}>#NOM</BOUCLE_AUTEUR2>
+		</B></B_AUTEUR2>
+		</FONT>
+		[<BR><small>Popularité: (#POPULARITE)%</small>]
+	</BOUCLE_articles>
+
+	[
+	<P>
+	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+	<TR WIDTH=100%>
+	<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+	</TR>
+	</TABLE>
+	<P>
+	<DIV ALIGN="right">
+	<FONT SIZE="2">
+	<B>Rechercher</B> dans ce site : (#FORMULAIRE_RECHERCHE|recherche.php3)
+	</FONT>
+	</DIV>
+	]
+
+	</FONT>
+	<BR>
+</TD>
+
+<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=8 BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=300 VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+	<p align='left'><font size='4'><b>Les derniers commentaires</b></font>
+
+	<BOUCLE_Forums(FORUMS){plat}{par date}{inverse}{0,12}>
+	<p>
+	<BOUCLE_ArticleForum(ARTICLES){id_article}><a href="#URL_ARTICLE#forum#ID_FORUM"></BOUCLE_ArticleForum>
+	<BOUCLE_BreveForum(BREVES){id_breve}><a href="#URL_BREVE#forum#ID_FORUM"></BOUCLE_BreveForum>
+	<BOUCLE_RubriqueForum(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE#forum#ID_FORUM"></BOUCLE_RubriqueForum>
+	<//B_RubriqueForum><//B_BreveForum><//B_ArticleForum>
+	#TITRE
+	</a>
+	<br>
+	Le [(#DATE|nom_jour)] [(#DATE|affdate)][, par <b>(#NOM)</b>]
+	</BOUCLE_Forums>
+
+	</font>
+
+</TD>
+</TR>
+</TABLE>
+
+<INCLURE(pied.php3)>
+
+</CENTER>
+
+</BODY>
+</HTML>
+
+
