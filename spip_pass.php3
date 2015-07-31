@@ -17,6 +17,7 @@ utiliser_langue_visiteur();
 unset($erreur);
 
 $mode = $GLOBALS['mode'];
+if ($oubli_pass == 'oui') $mode = 'oubli_pass';	# backward compatible
 
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
