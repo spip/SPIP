@@ -44,7 +44,7 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 
 	$parauteur = (strlen($auteur) <= 2) ? '' :
 	  (" " ._T('forum_par_auteur', array('auteur' => $auteur)) . 
-	   ($email_auteur ? "" : (' <' . $email_auteur . '>')));
+	   ($email_auteur ? ' <' . $email_auteur . '>' : ''));
 
 	$corps = _T('form_forum_message_auto') .
 		"\n\n" .
