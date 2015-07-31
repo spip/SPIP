@@ -78,7 +78,11 @@
 		<titre>titre_admin_tech</titre>
 		<url>admin_tech</url>
 	</bouton>
-	
+	<bouton id="job_queue" parent='bando_administration'>
+		<icone>images/queue-process-16.png</icone>
+		<titre>queue_titre</titre>
+	</bouton>
+
 	
 	
 	<bouton id="bando_configuration">
@@ -185,6 +189,7 @@
 	</pipeline>
 	<pipeline><nom>affichage_final</nom><action>f_tidy</action></pipeline>
 	<pipeline><nom>affichage_final</nom><action>f_admin</action></pipeline>
+	<pipeline><nom>affichage_final</nom><action>f_queue</action></pipeline>
 	<pipeline><nom>affichage_final_prive</nom>
 		<action>affichage_final_prive_title_auto</action>
 		<inclure>inc/pipelines_ecrire.php</inclure>
@@ -200,7 +205,7 @@
 	<pipeline><nom>affiche_auteurs_interventions</nom><action></action></pipeline>
 	<pipeline><nom>affiche_droite</nom><action></action></pipeline>
 	<pipeline><nom>affiche_gauche</nom><action></action></pipeline>
-	<pipeline><nom>affiche_milieu</nom><action></action></pipeline>
+	<pipeline><nom>affiche_milieu</nom><action>f_queue_affiche_milieu</action></pipeline>
 	<pipeline><nom>affiche_enfants</nom><action></action></pipeline>
 	<pipeline><nom>affiche_hierarchie</nom><action></action></pipeline>
 	<pipeline><nom>affiche_formulaire_login</nom>

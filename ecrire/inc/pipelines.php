@@ -111,4 +111,31 @@ function f_recuperer_fond($flux) {
 	include_spip('inc/pipelines_ecrire');
 	return f_afficher_blocs_ecrire($flux);
 }
+
+// gerer le lancement du cron
+// si des taches sont en attentes
+function f_queue(&$texte){
+
+	// eviter une inclusion si rien a faire
+	if (queue_sleep_time_to_next_job() OR defined('_DEBUG_BLOCK_QUEUE')){
+		return $texte;
+	}
+
+	include_spip('inc/queue');
+	$code = queue_affichage_cron();
+
+	// si rien a afficher
+	// ou si on est pas dans une page html, on ne sait rien faire de mieux
+	if (!$code OR !$GLOBALS['html'])
+		return $texte;
+
+	// inserer avant le </body> fermant si on peut, a la fin de la page sinon
+	if (($p=strpos($texte,'</body>'))!==FALSE)
+		$texte = substr($texte,0,$p).$code.substr($texte,$p);
+	else
+		$texte .= $code;
+
+	return $texte;
+}
+
 ?>

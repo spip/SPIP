@@ -4,6 +4,7 @@ config/ecran_securite.php -text
 config/remove.txt -text
 ecrire/action/activer_plugins.php -text
 ecrire/action/ajouter_lien.php -text
+ecrire/action/annuler_job.php -text
 ecrire/action/auth.php -text
 ecrire/action/charger_plugin.php -text
 ecrire/action/confirmer_email.php -text
@@ -16,6 +17,7 @@ ecrire/action/editer_liens.php -text
 ecrire/action/editer_objet.php -text
 ecrire/action/editer_rubrique.php -text
 ecrire/action/etre_webmestre.php -text
+ecrire/action/forcer_job.php -text
 ecrire/action/iconifier.php -text
 ecrire/action/index.php -text
 ecrire/action/instituer_article.php -text
@@ -25,10 +27,12 @@ ecrire/action/logout.php -text
 ecrire/action/menu_rubriques.php -text
 ecrire/action/preferer.php -text
 ecrire/action/purger.php -text
+ecrire/action/purger_queue.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
 ecrire/action/reorganiser.php -text
 ecrire/action/session.php -text
+ecrire/action/super_cron.php -text
 ecrire/action/supprimer_lien.php -text
 ecrire/action/supprimer_rubrique.php -text
 ecrire/action/tester.php -text
@@ -139,6 +143,7 @@ ecrire/inc/prepare_recherche.php -text
 ecrire/inc/presentation_mini.php -text
 ecrire/inc/presenter_enfants.php -text
 ecrire/inc/puce_statut.php -text
+ecrire/inc/queue.php -text
 ecrire/inc/recherche_to_array.php -text
 ecrire/inc/rechercher.php -text
 ecrire/inc/securiser_action.php -text
@@ -701,6 +706,7 @@ prive/modeles/formulaire.html -text
 prive/modeles/image.html -text
 prive/modeles/img.html -text
 prive/modeles/mail_inscription.html -text
+prive/modeles/object_jobs_list.html -text
 prive/modeles/pagination.html -text
 prive/modeles/pagination_page.html -text
 prive/modeles/pagination_page_precedent_suivant.html -text
@@ -766,6 +772,7 @@ prive/squelettes/contenu/configurer_langue.html -text
 prive/squelettes/contenu/configurer_multilang.html -text
 prive/squelettes/contenu/configurer_preferences.html -text
 prive/squelettes/contenu/infos_perso.html -text
+prive/squelettes/contenu/job_queue.html -text
 prive/squelettes/contenu/navigation.html -text
 prive/squelettes/contenu/plan.html -text
 prive/squelettes/contenu/recherche.html -text
@@ -975,6 +982,9 @@ prive/themes/spip/images/puce-proposer-8.png -text
 prive/themes/spip/images/puce-publier-8.png -text
 prive/themes/spip/images/puce-refuser-8.png -text
 prive/themes/spip/images/puce-supprimer-8.png -text
+prive/themes/spip/images/queue-process-16.png -text
+prive/themes/spip/images/queue-process-24.png -text
+prive/themes/spip/images/queue-process-32.png -text
 prive/themes/spip/images/racine-16.png -text
 prive/themes/spip/images/racine-24.png -text
 prive/themes/spip/images/reaction-48.png -text

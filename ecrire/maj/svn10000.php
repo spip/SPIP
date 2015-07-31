@@ -342,4 +342,8 @@ $GLOBALS['maj'][17563] = array(
 	array('sql_update','spip_articles',array('virtuel'=>'SUBSTRING(chapo,2)','chapo'=>"''"),"chapo LIKE '=_%'"),
 );
 
+$GLOBALS['maj'][17577] = array(
+	array('maj_tables',array('spip_jobs','spip_jobs_liens')),
+);
+
 ?>

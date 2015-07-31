@@ -581,4 +581,12 @@ function autoriser_synchro_bouton_dist($faire, $type, $id, $qui, $opts){
 	return $qui['statut']=='0minirezo';
 }
 
+/**
+ * Autoriser la purge de la queue : il faut etre webmestre
+ * @return mixed
+ */
+function autoriser_queue_purger_dist(){
+	return autoriser('webmestre');
+}
+
 ?>

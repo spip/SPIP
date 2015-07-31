@@ -986,6 +986,14 @@ dans une couleur qui indique leur état :',
 'plugins_vue_liste' => 'Liste',
 'protocole_ldap' => 'Version du protocole :',
 
+// Q
+'queue_executer_maintenant' => 'Exécuter maintenant',
+'queue_nb_jobs_in_queue' => '@nb@ travaux en attente',
+'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s',
+'queue_one_job_in_queue' => '1 travail en attente',
+'queue_purger_queue' => 'Purger la liste des travaux',
+'queue_titre' => 'Liste de travaux',
+
 // R
 'repertoire_plugins' => 'Répertoire :',
 

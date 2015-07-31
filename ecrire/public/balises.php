@@ -330,20 +330,6 @@ function balise_FIN_SURLIGNE_dist($p) {
 }
 
 
-// #SPIP_CRON
-// a documenter
-// insere un <div> avec un lien background-image vers les taches de fond.
-// Si cette balise est presente sur la page de sommaire, le site ne devrait
-// quasiment jamais se trouver ralenti par des taches de fond un peu lentes
-// http://doc.spip.org/@balise_SPIP_CRON_dist
-function balise_SPIP_CRON_dist ($p) {
-	$p->code = '"<!-- SPIP-CRON --><div style=\"background-image: url(\'' .
-		generer_url_action('cron') .
-		'\');\"></div>"';
-	$p->interdire_scripts = false;
-	return $p;
-}
-
 // #INTRODUCTION
 // #INTRODUCTION{longueur}
 // http://www.spip.net/@introduction

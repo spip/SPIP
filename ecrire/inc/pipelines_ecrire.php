@@ -247,6 +247,26 @@ function f_afficher_blocs_ecrire($flux) {
 }
 
 /**
+ * Afficher les taches en attente liees a un objet
+ * @param string $flux
+ * @return string
+ */
+function f_queue_affiche_milieu($flux){
+	$args = $flux['args'];
+	$res = "";
+	foreach($args as $key=>$arg){
+		if (preg_match(",^id_,",$key)){
+			$objet = preg_replace(',^id_,', '', $key);
+			$res .= recuperer_fond('modeles/object_jobs_list',array('id_objet'=>$arg,'objet'=>$objet),array('ajax'=>true));
+		}
+	}
+	if ($res)
+		$flux['data'] = $res . $flux['data'];
+
+	return $flux;
+}
+
+/**
  * Trouver l'objet qui correspond
  * a l'exec de l'espace prive passe en argument
  * renvoie false si pas d'objet en cours, ou un tableau associatif
