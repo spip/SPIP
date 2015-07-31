@@ -193,6 +193,10 @@
 [<div class="texte">(#TEXTE)</div>]
 [<div class="ps">(#PS)</div>]
 [<div class="notes">(#NOTES)</div>]
+
+<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons} {"<br>"}>
+[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
+</BOUCLE_documents_joints>
 <br>
 
 
@@ -266,3 +270,5 @@
 
 
 </BOUCLE_article_principal>
+(Pas d'article &agrave; cette adresse.)
+<//B_article_principal>
