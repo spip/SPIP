@@ -287,8 +287,18 @@ function changer_statut_forum($id_forum, $statut) {
 			spip_query($query);
 		}
 	}
-	$query_forum = "UPDATE spip_forum SET statut='$statut' WHERE id_forum=$id_forum";
-	$result_forum = spip_query($query_forum);
+	$id_messages = array($id_forum);
+	while ($id_messages) {
+		$id_messages = join(',', $id_messages);
+		$query_forum = "UPDATE spip_forum SET statut='$statut' WHERE id_forum IN ($id_messages)";
+		$result_forum = spip_query($query_forum);
+		$query_forum = "SELECT id_forum FROM spip_forum WHERE id_parent IN ($id_messages)";
+		$result_forum = spip_query($query_forum);
+		unset($id_messages);
+		while ($row = spip_fetch_array($result_forum)) {
+			$id_messages[] = $row['id_forum'];
+		}
+	}
 }
 
 if ($supp_forum) changer_statut_forum($supp_forum, 'off');
