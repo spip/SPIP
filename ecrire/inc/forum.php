@@ -336,16 +336,11 @@ function parent_forum($id_forum) {
 } 
 
 
+// obsolete, maintenu poru compat
 // http://doc.spip.org/@generer_url_forum_dist
 function generer_url_forum_dist($id_forum, $args='', $ancre='') {
-	if ($id_forum = intval($id_forum)) {
-		list($type, $id,) = racine_forum($id_forum);
-		if ($type) {
-			if (!$ancre) $ancre = "forum$id_forum";
-			return generer_url_entite($id, $type, $args, $ancre);
-		}
-	}
-	return '';
+	$generer_url_externe = charger_fonction("generer_url_forum",'urls');
+	return $generer_url_externe($id_forum, $args, $ancre);
 }
 
 
