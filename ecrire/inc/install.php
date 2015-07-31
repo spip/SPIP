@@ -316,7 +316,8 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 				:'')
 		: ('<fieldset><legend>'
 		   ._T('install_select_type_db')
-		. "\n<select name='server_db' id='sql_serveur_db' >"
+		. "</legend>"
+		. "\n<div style='text-align: center;'><select name='server_db' id='sql_serveur_db' >"
 		. ($mysql
 			? "\n<option value='mysql'>"._T('install_select_type_mysql')."</option>"
 			: '')
@@ -329,7 +330,7 @@ function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
 		. (($sqlite3)
 			? "\n<option value='sqlite3'>"._T('install_select_type_sqlite3')."</option>"
 			: '')
-		   . "\n</select></legend></fieldset>")
+		   . "\n</select></div></fieldset>")
 	)
 	. '<div id="install_adresse_base_hebergeur">'
 	. ($predef[1]
