@@ -19,17 +19,28 @@ define('_REGEXP_DOCTYPE',
 // http://doc.spip.org/@inc_validateur_dist
 function inc_validateur_dist($data)
 {
-  global $phraseur_xml;
+	global $phraseur_xml;
 
 	if (!preg_match(_REGEXP_DOCTYPE, $data, $r))
 		return array();
 
 	list(,$ns, $type, $s, $nom, $s2, $grammaire) = $r;
 
-	include_spip('inc/distant');
-	$dtd = recuperer_page($grammaire);
+	$dtd = '';
+	$file = _DIR_CACHE . preg_replace('/[\W.]/','_', $grammaire);
+
+	if (@is_readable($file)) {
+		lire_fichier($file, $dtd);
+	} else {
+		include_spip('inc/distant');
+		// il faudrait verifier que $type=PUBLIC, et sinon agir
+		if ($dtd = recuperer_page($grammaire))
+			ecrire_fichier($file, $dtd); 
+		else	spip_log("DTD $grammaire inaccessible");
+	}
 
 	$res = array();
+
 	// on ignore les entites publiques. A ameliorer a terme
 	if (preg_match_all('/<!ENTITY\s+%\s+([.\w]+)\s+"([^"]*)"\s*>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
@@ -66,6 +77,7 @@ function inc_validateur_dist($data)
 	  }
 	}
 	$phraseur_xml->attributs = $res;
+	spip_log("DTD: " . count($phraseur_xml->entites)  . ' entites, ' . count($phraseur_xml->elements)  . ' elements');
 }
 
 // http://doc.spip.org/@expanserEntite
