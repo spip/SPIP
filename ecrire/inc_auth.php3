@@ -110,9 +110,9 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$url = (str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
-		redirige_par_entete(lire_meta("adresse_site") .
-				    "/spip_login.php3?var_url=$url");
+		$addr =lire_meta("adresse_site") . '/';
+		$url = $addr . (str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
+		redirige_par_entete($addr . "spip_login.php3?var_url=$url");
 	}
 
 

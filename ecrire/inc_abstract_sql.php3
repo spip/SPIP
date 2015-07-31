@@ -39,9 +39,8 @@ function spip_abstract_select (
 		$f = 'spip_' . $serveur . '_select';
 		if (!function_exists($f)) {
 		  // non, il est decrit dans le fichier ad hoc
-			$d = 'inc_connect-' . $serveur .'.php3';
-			if (@file_exists(_DIR_RESTREINT . $d))
-				include_ecrire($d);
+			$d = _DIR_RESTREINT . 'inc_connect-' . $serveur .'.php3';
+			if (@file_exists($d)) include($d);
 			$f = spip_abstract_serveur($f, $serveur);
 		}
 	}

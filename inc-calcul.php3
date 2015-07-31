@@ -41,7 +41,7 @@ function squelette_obsolete($skel, $squelette) {
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
 		OR (@filemtime('mes_fonctions.php3') > $date)
-		OR (@filemtime('ecrire/mes_options.php3') > $date)
+		OR (@filemtime(_FILE_OPTIONS) > $date)
 	);
 }
 

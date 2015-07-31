@@ -34,7 +34,7 @@ function effacer_meta($nom) {
 // Ne pas oublier d'appeler cette fonction apres ecrire_meta() et effacer_meta() !
 //
 function ecrire_metas() {
-	global $meta, $meta_maj, $dir_ecrire;
+	global $meta, $meta_maj;
 
 	lire_metas();
 

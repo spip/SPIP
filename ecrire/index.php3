@@ -1,9 +1,8 @@
 <?php
 
 include ("inc.php3");
-include_ecrire ("inc_calendrier.php");
 
-if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
+if ($HTTP_REFERER && !strpos($HTTP_REFERER, _DIR_RESTEINT_ABS)) $bonjour = 'oui';
 
 debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
@@ -34,7 +33,7 @@ if ($spip_display != 4) {
 	if ($connect_statut == "0minirezo" AND $cookie_admin) {
 		$texte = _T('icone_supprimer_cookie');
 		if ($spip_display != 1) $texte .= aide("cookie");
-		icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
+		icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
 	}
 
 
@@ -199,7 +198,7 @@ debut_droite();
 
 if ($meta["debut_restauration"]) {
 	@ignore_user_abort(1);
-	include ("inc_import.php3");
+	include_ecrire("inc_import.php3");
 
 	$archive = $meta["fichier_restauration"];
 	$my_pos = $meta["status_restauration"];
@@ -399,7 +398,7 @@ if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 		echo "<td width=10><img src='img_pack/rien.gif' width=10 alt='' />";
 		echo "</td>";
 		echo "<td width='250'>";
-		icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
+		icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
 		echo "</td></tr></table>";
 	}
 }

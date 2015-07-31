@@ -21,7 +21,7 @@ function maj_invalideurs ($fichier, $infosurpage, $delais) {
 	// invalidation des forums
 	insere_invalideur($infosurpage['id_forum'],'id_forum', $fichier);
 
-	// invalidation du reste - on peut desactiver dans ecrire/mes_options.php3
+	// invalidation du reste - on peut desactiver dans _FILE_OPTIONS
 	if ($GLOBALS['invalider_caches']) {
 		insere_invalideur($infosurpage['id_article'],'id_article', $fichier);
 
@@ -79,12 +79,12 @@ function applique_invalideur($depart) {
 		spip_query("UPDATE spip_caches SET type='x'"
 		. ' WHERE ' . calcul_mysql_in('fichier', $tous));
 
-		// Si on est dans ecrire/, demander a inc-public.php3
+		// Si on est dans ecrire, demander a inc-public.php3
 		// de retirer les caches invalide's ; sinon le faire soi-meme
 		// ce qui evite des chevauchements dans la validation des forums
 		// [ A valide un forum, B obtient de purger les invalides, et A
 		//   trouve son cache avant que B n'ait eu le temps de le purger ]
-		if ($GLOBALS['flag_ecrire']) {
+		if (!_DIR_RESTREINT) {
 			ecrire_meta('invalider', 'oui');
 			ecrire_metas();
 		} else {

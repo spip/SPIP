@@ -201,7 +201,7 @@ function reponse_signature($id_article) {
 					$reponse_signature .= erreur(_T('form_indiquer_nom_site'));
 					$refus = "oui";
 				}
-				include_local ("ecrire/inc_sites.php3");
+				include_ecrire("inc_sites.php3");
 	
 				if (!recuperer_page($url_site)) {
 					$reponse_signature .= erreur(_T('form_pet_url_invalide'));

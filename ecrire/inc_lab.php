@@ -15,18 +15,17 @@
 
 		// Appel depuis un fichier librairie
 		function include_spip($fichier) {
-			global $dir_ecrire;
 
 			switch ($fichier) {
 				case 'ecrire.php':
 					break;
 				default:
 					// charger la version spip-lab si presente
-					if (@file_exists($dir_ecrire.'lab_'.$fichier))
-						include_ecrire('lab_'.$fichier);
+					if (@file_exists(_DIR_RESTREINT.'lab_'.$fichier))
+						include('lab_'.$fichier);
 					// sinon prendre la version spip-stable
 					else
-						if (@file_exists($dir_ecrire.'inc_'.$fichier.'3'))
+						if (@file_exists(_DIR_RESTREINT.'inc_'.$fichier.'3'))
 							include_ecrire('inc_'.$fichier.'3');
 					else
 						die ("Fichier SPIP-Lab \"$fichier\" manquant.");

@@ -433,7 +433,7 @@ else {
 	if (!$html) {
 		// Renvoyer sur l'aide en ligne du serveur externe
 		if ($help_server)
-			@Header("Location: $help_server/ecrire/aide_index.php3?var_lang=$spip_lang");
+			@Header("Location: $help_server/" . _DIR_RESTREINT_ABS . "aide_index.php3?var_lang=$spip_lang");
 		// Ou alors message d'erreur
 		else {
 			include_ecrire('inc_presentation.php3');

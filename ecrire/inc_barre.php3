@@ -26,22 +26,22 @@ function test_claret() {
 
 
 function afficher_script_barre(){
-	global $flag_ecrire, $flag_script_deja_affiche;
+	global $flag_script_deja_affiche;
 
 	if ($flag_script_deja_affiche != 1) {
 		$flag_script_deja_affiche = 1;
-		$ret = '<script type="text/javascript" src="'.($flag_ecrire ? "../" : "").'spip_barre.js">';
+		$ret = '<script type="text/javascript" src="' . _DIR_PREFIX1. 'spip_barre.js">';
 		$ret .= "</script>\n";
 		return $ret;
 	}
 }
 
 function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
-	global $flag_ecrire;
+
 	$champ = "document.$formulaire.$texte";
 	$champhelp = "document.$formulaire.helpbox$texte";
 	$retour = "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\"";
-	if (!$flag_ecrire) $retour .= " onMouseOver=\"helpline('".addslashes(attribut_html($help))."',$champhelp)\" onMouseOut=\"helpline('".attribut_html(_T('barre_aide'))."', $champhelp)\"";
+	if (_DIR_RESTREINT) $retour .= " onMouseOver=\"helpline('".addslashes(attribut_html($help))."',$champhelp)\" onMouseOut=\"helpline('".attribut_html(_T('barre_aide'))."', $champhelp)\"";
 	$retour .= "><img src='".
 	  _DIR_IMG_ICONES_BARRE .
 	  $img."' border='0' height='16' width='16' align='middle' /></a>";
@@ -49,7 +49,7 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 }
 
 function afficher_barre($formulaire='',$texte='', $forum=false) {
-	global $spip_lang, $flag_ecrire, $options, $spip_lang_right, $spip_lang_left;
+	global $spip_lang, $options, $spip_lang_right, $spip_lang_left;
 
 	if (test_barre()) {
 		$ret = afficher_script_barre();
@@ -118,7 +118,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 		$col++;
 
-		if ($flag_ecrire) {
+		if (!_DIR_RESTREINT) {
 			$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
 			$col++;
 		//	$ret .= "&nbsp;&nbsp;&nbsp;";
@@ -129,7 +129,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</tr>";
 
 		// Sur les forums publics, petite barre d'aide en survol des icones
-		if (!$flag_ecrire)
+		if (_DIR_RESTREINT)
 			$ret .= "<tr><td colspan='$col'><input disabled='disabled' type='text' name='helpbox".$texte."' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;' value=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 		$ret .= "</table>";

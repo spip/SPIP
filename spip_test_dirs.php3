@@ -96,9 +96,9 @@ if ($bad_dirs OR $absent_dirs) {
 
 } else {
 	if (!_FILE_CONNECT)
-		header("Location: ./ecrire/install.php3?etape=1");
+		header("Location: " . _DIR_RESTREINT_ABS . "install.php3?etape=1");
 	else
-		header("Location: ./ecrire/");
+		header("Location: " . _DIR_RESTREINT_ABS);
 }
 
 ?>

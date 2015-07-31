@@ -100,7 +100,7 @@ function spip_apres_typo ($letexte) {
 	$letexte = str_replace("'", "&#8217;", $letexte);
 
 	// relecture des &nbsp;
-	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
+	if (!_DIR_RESTREINT AND $GLOBALS['revision_nbsp'])
 		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
 
 	$letexte = appliquer_fonction ("apres_typo", $letexte);
@@ -501,7 +501,6 @@ function typo_doublon(&$doublons, $letexte)
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place
 // et le lien "brut" a usage eventuel de redirection...
 function extraire_lien ($regs) {
-	global $flag_ecrire;
 
 	$lien_texte = $regs[1];
 
@@ -510,7 +509,7 @@ function extraire_lien ($regs) {
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
 		// Traitement des liens internes
-		if ($flag_ecrire)
+		if (!_DIR_RESTREINT)
 			include_ecrire('inc_urls.php3');
 		else
 		if (@file_exists("inc-urls.php3"))

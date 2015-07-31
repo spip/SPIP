@@ -57,33 +57,21 @@ function cron_archiver_stats($last_date) {
 // La fonction de base qui distribue les taches
 //
 function spip_cron() {
-	global $flag_ecrire,  $db_ok;
-
-	#echo "hum";	spip_log('hum');
-
-	include(_FILE_CONNECT);
-	if (!$db_ok) {
-		@touch(_FILE_MYSQL_OUT);
-		spip_log('pas de connexion DB pour taches de fond (cron)');
-		return;
-	}
-
-	@touch(_FILE_CRON_LOCK);
 
 	include_ecrire("inc_meta.php3");
 	$t = time();
-
 
 	//
 	// Envoi du mail quoi de neuf
 	
 	$adresse_neuf = lire_meta('adresse_neuf');
 	$jours_neuf = lire_meta('jours_neuf');
-	if (!$flag_ecrire
-	AND $adresse_neuf
-	AND $jours_neuf
-	AND (lire_meta('quoi_de_neuf') == 'oui') AND
-	(time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
+
+	if (_DIR_RESTREINT
+	    AND $adresse_neuf
+	    AND $jours_neuf
+	    AND (lire_meta('quoi_de_neuf') == 'oui') AND
+	    (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
 		if (timeout('quoide_neuf')) { 
 			ecrire_meta('majnouv', time());
 			ecrire_metas();
