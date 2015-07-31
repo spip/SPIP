@@ -201,7 +201,7 @@ if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 
 if ($connect_statut == "0minirezo")	{
 	echo "<p>";
-	icone_horizontale("Statistiques du site", "statistiques.php3", "statistiques-24.gif","rien.gif");
+	icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
 	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif","rien.gif");
 }
 
@@ -449,6 +449,11 @@ if (($date - $date_opt) > 24 * 3600) {
 	ecrire_meta("date_optimisation", "$date");
 	ecrire_metas();
 	include ("optimiser.php3");
+}
+// Traitement des statistiques
+if (($date - $date_opt) > 8 * 3600) {
+	include ("inc_statistiques.php3");
+	calculer_visites();
 }
 
 

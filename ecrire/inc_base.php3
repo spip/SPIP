@@ -256,6 +256,31 @@ function creer_base() {
 		KEY statut(statut))";
 	$result = spip_query($query);
 
+	$query = "CREATE TABLE spip_visites_temp (
+		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		ip varchar(16) NOT NULL,
+		type varchar(16) NOT NULL,
+		referer text NOT NULL)";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_visites (
+		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		type varchar(16) NOT NULL,
+		visites bigint(21) DEFAULT '0' NOT NULL)";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_visites_referers (
+		id_referer bigint(21) DEFAULT '0' NOT NULL auto_increment,
+		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		referer text,
+		referer_md5 varchar(16) NOT NULL,
+		type varchar(16) NOT NULL,
+		visites bigint(21) DEFAULT '0' NOT NULL,
+		PRIMARY KEY (id_referer),
+		KEY type (type),
+		KEY referer_md5 (referer_md5))";
+	$result = spip_query($query);
+	
 
 	//
 	// Relations

@@ -44,6 +44,7 @@ if ($changer_config == 'oui') {
 	ecrire_meta("activer_messagerie", $activer_messagerie);
 	ecrire_meta("activer_imessage", $activer_imessage);
 	ecrire_meta("activer_statistiques", $activer_statistiques);
+	ecrire_meta("activer_statistiques_ref", $activer_statistiques_ref);
 
 	ecrire_meta("suivi_edito", $suivi_edito);
 	if ($adresse_suivi) ecrire_meta("adresse_suivi", $adresse_suivi);
@@ -202,6 +203,7 @@ fin_cadre_relief();
 debut_cadre_relief("statistiques-24.gif");
 
 	$activer_statistiques=lire_meta("activer_statistiques");
+	$activer_statistiques_ref=lire_meta("activer_statistiques_ref");
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
@@ -226,11 +228,34 @@ debut_cadre_relief("statistiques-24.gif");
 		echo " &nbsp; <INPUT TYPE='radio' NAME='activer_statistiques' VALUE='non' id='statistiques_off'>";
 		echo " <label for='statistiques_off'>Ne pas g&eacute;rer les statistiques</label> ";
 	}
-
 	echo "</FONT>";
 	echo "</TD></TR>\n";
 
 
+
+
+	if ($activer_statistiques != "non") {
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Votre site doit-il conserver les <i>referers</i>&nbsp;?</FONT>";
+		echo "</TD></TR>";
+
+	
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+		if ($activer_statistiques_ref!="oui"){
+			echo "<INPUT TYPE='radio' NAME='activer_statistiques_ref' VALUE='oui' id='statistiques_ref_on'>";
+			echo " <label for='statistiques_ref_on'>G&eacute;rer les referers</label> ";
+			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_statistiques_ref' VALUE='non' id='statistiques_ref_off' CHECKED>";
+			echo " <B><label for='statistiques_ref_off'>Ne pas g&eacute;rer les referers</label></B> ";
+		}else{
+			echo "<INPUT TYPE='radio' NAME='activer_statistiques_ref' VALUE='oui' id='statistiques_ref_on' CHECKED>";
+			echo " <B><label for='statistiques_ref_on'>G&eacute;rer les referers</label></B> ";
+			echo " &nbsp; <INPUT TYPE='radio' NAME='activer_statistiques_ref' VALUE='non' id='statistiques_ref_off'>";
+			echo " <label for='statistiques_ref_off'>Ne pas g&eacute;rer les referers</label> ";
+		}
+		echo "</FONT>";
+		echo "</TD></TR>\n";
+	}
 
 
 	echo "<TR><TD ALIGN='right'>";
