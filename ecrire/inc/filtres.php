@@ -1294,6 +1294,7 @@ function affdate_base($numdate, $vue, $options = array()) {
 
 	if ($jour == 0) {
 		$jour = '';
+		$njour = 0;
 	} else {
 		$njour = intval($jour);
 		if ($jourth = _T('date_jnum'.$jour))
