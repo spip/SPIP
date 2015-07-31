@@ -49,6 +49,7 @@ function insert_rubrique($id_parent) {
 // $c est un tableau qu'on peut proposer en lieu et place de _request()
 // http://doc.spip.org/@revisions_rubriques
 function revisions_rubriques($id_rubrique, $c=false) {
+	include_spip('inc/autoriser');
 	include_spip('inc/filtres');
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_articles.x)
@@ -68,41 +69,32 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	// traitement de la rubrique parente
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
-	if ($id_parent = _request('id_parent', $c)) {
+	$parent = '';
+	if ($id_parent = intval(_request('id_parent', $c))
+	AND $id_parent != $id_rubrique // au fou
+	) {
 		$s = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=".intval($id_rubrique)));
 		$old_parent = $s['id_parent'];
 
-		$parent = '';
-		if ($id_parent != $old_parent) {
-			include_spip('inc/auth');
-			$r = auth_rubrique($GLOBALS['auteur_session']['id_auteur'], $GLOBALS['auteur_session']['statut']);
-
-			if (is_int($r)
-			OR (is_array($r)
-				AND $r[$id_parent]
-				AND (!$old_parent OR $r[$old_parent])))
-				$parent = "id_parent=" . intval($id_parent) . ", ";
-			else {
-				spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
-				$parent = '';
-			}
+		if ($id_parent != $old_parent
+		AND autoriser('publierdans', 'rubrique', $id_parent)
+		AND autoriser('publierdans', 'rubrique', $old_parent)
+		) {
+			$champs['id_parent'] = $id_parent;
+		} else {
+			spip_log("deplacement de $id_rubrique vers $id_parent refuse a " . $GLOBALS['auteur_session']['id_auteur'] . ' '.  $GLOBALS['auteur_session']['statut']);
 		}
 	}
-	else
-		$parent = '';
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
 	// breves en question
-	if ($parent
+	if ($champs['id_parent']
 	AND _request('confirme_deplace', $c) == 'oui') {
-		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=".intval($id_parent)));
+		$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		if ($id_secteur= $id_secteur['id_secteur'])
-			spip_query("UPDATE spip_breves	SET id_rubrique=$id_secteur	WHERE id_rubrique=$id_rubrique");
-	} else
-		$parent = '';
-
-	if ($id_parent == $id_rubrique) $parent = ''; // au fou
+			spip_query("UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique=$id_rubrique");
+	}
 
 	// recuperer les extras
 	if ($GLOBALS['champs_extra']) {
@@ -129,7 +121,6 @@ function revisions_rubriques($id_rubrique, $c=false) {
 	if (!count($update)) return;
 
 	spip_query("UPDATE spip_rubriques SET ".join(', ', $update)." WHERE id_rubrique=$id_rubrique");
-
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
