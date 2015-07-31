@@ -1493,4 +1493,9 @@ function match($texte,$expression,$modif="UimsS"){
   return preg_match("/$expression/$modif",$texte);
 }
 
+// filtre rien qui ne renvoie rien
+function rien($texte){
+	return "";
+}
+
 ?>
