@@ -419,6 +419,8 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 			}
 		} else {
 			$insert = '';
+			if ($les_notes)
+				$les_notes .= "\n<p class='spip_note'>";
 			if ($note_texte)
 				$les_notes .= traiter_raccourcis(trim($note_texte), $les_echap)."<p class='spip_note'>\n";
 		}
