@@ -66,7 +66,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 
 	$dater = charger_fonction('dater', 'inc');
 	$meme_rubrique = charger_fonction('meme_rubrique', 'inc');
-	$editer_mot = charger_fonction('editer_mot', 'inc');
+	$editer_mots = charger_fonction('editer_mots', 'inc');
 	if ($champs_extra AND $extra)
 		include_spip('inc/extra');
 
@@ -137,7 +137,7 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 			: ''
 		)
 
-	  . $editer_mot('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
+	  . $editer_mots('breve', $id_breve, $cherche_mot, $select_groupe, $flag_editable, true)
 	  . ((($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) ? langue_breve($id_breve,$row):"")
 	  . pipeline('affiche_milieu',array(
 			'args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),

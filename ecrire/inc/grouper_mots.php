@@ -24,7 +24,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 	// - a construire le nom du parametre d'URL indiquant la tranche
 	// - a donner un ID a la balise ou greffer le retour d'Ajax
 	// tant pour la prochaine tranche que pour le retrait de mot
-	$tmp_var = "editer_mot-$id_groupe";
+	$tmp_var = "editer_mots-$id_groupe";
 
 	$nb_aff = floor(1.5 * _TRANCHES);
 
@@ -71,7 +71,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 			
 	if (autoriser('modifier', 'mot', $id_mot, null, array('id_groupe' => $id_groupe))
 	OR $occurrences['articles'][$id_mot] > 0) {
-		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mot-$id_groupe");
+		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mots-$id_groupe");
 		if ($descriptif)  $descriptif = " title=\"$descriptif\"";
 		$titre = "<a href='$h' class='liste-mot'$descriptif>$titre</a>";
 	}
@@ -117,7 +117,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total, $deb_aff)
 
 		if ($nr OR $na OR $ns OR $nb)
 			$href = "<a href='"
-			. generer_url_ecrire("mots_tous","conf_mot=$id_mot&na=$na&nb=$nb&nr=$nr&ns=$ns&son_groupe=$id_groupe") . "#editer_mot-$id_groupe"
+			. generer_url_ecrire("mots_tous","conf_mot=$id_mot&na=$na&nb=$nb&nr=$nr&ns=$ns&son_groupe=$id_groupe") . "#editer_mots-$id_groupe"
 			. "'>$clic</a>";
 		else {
 			$href = generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff);
@@ -134,9 +134,9 @@ function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total, $deb_aff='')
 {
 	$cont = ($total > 1)
 	? ''
-	: "function(r) {jQuery('#editer_mot-$id_groupe-supprimer').css('visibility','visible');}";
+	: "function(r) {jQuery('#editer_mots-$id_groupe-supprimer').css('visibility','visible');}";
 
-	return ajax_action_auteur('editer_mot', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe&$deb_aff", array($clic,''), '', $cont);
+	return ajax_action_auteur('editer_mots', "$id_groupe,$id_mot,,,",'grouper_mots', "id_groupe=$id_groupe&$deb_aff", array($clic,''), '', $cont);
 }
 
 //

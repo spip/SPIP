@@ -12,19 +12,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_editer_mot_dist
-function action_editer_mot_dist() {
+// http://doc.spip.org/@action_editer_mots_dist
+function action_editer_mots_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	// arg = l'eventuel mot a supprimer pour d'eventuelles Row SQL
 	if (!preg_match(',^(\d*)\D(-?\d*)\W(\w*)\W(\w*)\W(\w*)\W?(\d*)$,', $arg, $r)) 
-		spip_log("action editer_mot: $arg pas compris");
-	else action_editer_mot_post($r);
+		spip_log("action editer_mots: $arg pas compris");
+	else action_editer_mots_post($r);
 }
 
-// http://doc.spip.org/@action_editer_mot_post
-function action_editer_mot_post($r)
+// http://doc.spip.org/@action_editer_mots_post
+function action_editer_mots_post($r)
 {
 	$redirect = _request('redirect');
 	$cherche_mot = _request('cherche_mot');
@@ -57,7 +57,7 @@ function action_editer_mot_post($r)
 		pipeline('post_edition',
 			array(
 				'args' => array(
-					'operation' => 'editer_mot',
+					'operation' => 'editer_mots',
 					'table' => 'spip_'.$table,
 					'id_objet' => $id_objet
 				),
@@ -69,7 +69,7 @@ function action_editer_mot_post($r)
 
 	// hack du retour croise editer/grouper 
 
-	if (preg_match('/^(.*exec=)editer_mot(&.*)script=(grouper_mots)(.*)$/', $redirect, $r))
+	if (preg_match('/^(.*exec=)editer_mots(&.*)script=(grouper_mots)(.*)$/', $redirect, $r))
 	    $redirect = $r[1] . $r[3] . $r[2] . $r[4];
 	if (preg_match(',exec=grouper_mots,',$redirect)){
 		// mettre a jour le total de mots dans la liste pour eviter les pb de cache navigateur avec ajax
