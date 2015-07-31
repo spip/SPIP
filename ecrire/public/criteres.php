@@ -2039,27 +2039,8 @@ function calculer_param_date($date_compare, $date_orig){
 		$init = $date_compare;
 
 	return
-		"LEAST((UNIX_TIMESTAMP(".
-		$init.
-		")-UNIX_TIMESTAMP(".
-		$date_orig.
-		"))/86400,\n\tTO_DAYS(".
-		$date_compare.
-		")-TO_DAYS(".
-		$date_orig.
-		"),\n\tDAYOFMONTH(".
-		$date_compare.
-		")-DAYOFMONTH(".
-		$date_orig.
-		")+30.4368*(MONTH(".
-		$date_compare.
-		")-MONTH(".
-		$date_orig.
-		"))+365.2422*(YEAR(".
-		$date_compare.
-		")-YEAR(".
-		$date_orig.
-		")))";
+		// optimisation : mais prevoir le support SQLite avant
+		"TIMESTAMPDIFF(DAY,$date_orig,$init)";
 }
 
 /**
