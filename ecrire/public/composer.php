@@ -286,6 +286,8 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 	// ne pas tenir compte des notes ;
 	// bug introduit en http://trac.rezo.net/trac/spip/changeset/12025
 	$mem = array($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']);
+	// memoriser l'etat de la pile unique
+	$mem_unique = unique('','_spip_raz_');
 
 
 	$texte = propre($texte,$connect);
@@ -293,6 +295,8 @@ function filtre_introduction_dist($descriptif, $texte, $longueur, $connect) {
 
 	// restituer les notes comme elles etaient avant d'appeler propre()
 	list($GLOBALS['les_notes'], $GLOBALS['compt_note'], $GLOBALS['marqueur_notes'], $GLOBALS['notes_vues']) = $mem;
+	// restituer l'etat de la pile unique
+	unique($mem_unique,'_spip_set_');
 
 
 	@define('_INTRODUCTION_SUITE', '&nbsp;(...)');

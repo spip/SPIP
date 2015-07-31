@@ -1372,6 +1372,17 @@ function extraire_multi ($letexte) {
 // http://doc.spip.org/@unique
 function unique($donnee, $famille='', $cpt = false) {
 	static $mem;
+	// permettre de vider la pile et de la restaurer
+	// pour le calcul de introduction...
+	if ($famille=='_spip_raz_'){
+		$tmp = $mem;
+		$mem = array();
+		return $tmp;
+	} elseif ($famille=='_spip_set_'){
+		$mem = $donnee;
+		return;
+	}
+
 	if ($cpt)
 		return count($mem[$famille]);
 	if (!($mem[$famille][$donnee]++))
