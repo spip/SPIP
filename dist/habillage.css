@@ -19,8 +19,7 @@ h3.spip {} /*Cf.: spip_style.css*/
 /* Divers */
 hr.spip {} /*Cf.: spip_style.css*/
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
-small { font-size: 0.71em; color: #666; }
-/* Attention : en dessous de 0.71em le texte devient illisible en text smallest sur IE/Win */
+small { font-size: 0.90em; color: #666; }
 
 /* Listes SPIP */
 .spip_puce {} /*Cf.: spip_style.css*/
@@ -64,7 +63,7 @@ div#contenu { padding-top: 0.30em; }
 div#navigation { float: right; width: 30%; overflow: hidden; }
 div#extra { float: right; clear: right; width: 30%; overflow: hidden; }
 
-div#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.77em; }
+div#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.90em; }
 div#pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
@@ -81,14 +80,14 @@ div#pied img { vertical-align: bottom; }
 /*  Habillage des elements du contenu
 /*  ------------------------------------------ */
 
-#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
+#hierarchie { clear: both; margin-bottom: 2em; font-size: 0.90em; color: #666; }
 
 .surtitre, .soustitre { font-size: 0.90em; color: #999; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
-.cartouche .traductions { font-size: 0.77em; }
+.cartouche .traductions { font-size: 0.90em; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
@@ -117,7 +116,7 @@ input, textarea, select { font-size: 100%; font-family: inherit; }
 /* Formulaires de SPIP */
 .formulaire_spip { background: #EEC; margin-bottom: 2em; padding: 1em; text-align: left; color: #330; }
 .formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
-.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #330; } /* preciser la couleur des legend pour IE/Win */
+.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #330; font-weight: bold; } /* preciser la couleur des legend pour IE/Win */
 .formulaire_spip label { display: block; font-size: 0.90em; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
@@ -178,7 +177,7 @@ ul ul ul ul ul .forum-message { border: 1px solid #E0E0E0; }
 ul ul ul ul ul ul .forum-message { border: 1px dotted #E0E0E0; }
 
 /* Boite de titre d'un forum : mise en couleur selon la profondeur du forum */
-ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; /*font-size: 0.88em;*/ background: #C4E0E0; }
+ul .forum-chapo { border: 0; border-bottom: 1px dotted #B8B8B8; margin: 0; padding: 3px 6px 2px 6px; background: #C4E0E0; }
 ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; border-bottom: 1px dotted #E0E0E0; }
@@ -187,13 +186,13 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /* Habillage des petitions
 ---------------------------------------------- */
-#signatures { clear: both; /*font-size: 0.77em;*/ }
-#signatures h2 { padding: 0.50em; text-align: center; font-size: 1.20em; font-weight: bold; }
+#signatures { clear: both; }
 #signatures table { width: 100%; margin: 1em 0; }
 #signatures thead { display: none; } /* On n'affiche pas les titres du tableau */
+#signatures td { border: 2px solid #fff; }
 #signatures td.signature-date { background: #E4F0F0; padding: 0.50em; white-space: nowrap; }
 #signatures td.signature-nom { background: #ECF4F4; padding: 0.20em; text-align: center; font-weight: bold; }
-#signatures td.signature-message { background: #F4F8F8; padding: 0.40em; /*font-size: 0.96em;*/ }
+#signatures td.signature-message { background: #F4F8F8; padding: 0.40em; }
 
 
 /*  ------------------------------------------
