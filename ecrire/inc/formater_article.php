@@ -46,33 +46,46 @@ function inc_formater_article_dist($row, $own='')
 		if ($logo = $chercher_logo($id_article, 'id_article', 'on')) {
 			list($fid, $dir, $nom, $format) = $logo;
 			include_spip('inc/filtres_images_mini');
-			$logo = image_reduire("<img src='$fid' alt='' />", 26, 20);
-		}
+			$logo = "<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" .
+			  image_reduire("<img src='$fid' alt='' />", 26, 20) .
+			  "</span>";
+		} else $logo = '';
 	} else $logo ='';
 
-	$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
+	$titre = supprime_img($row['titre'],'');
 	$id_rubrique = $row['id_rubrique'];
 	$date = $row['date'];
 	$statut = $row['statut'];
 	$descriptif = $row['descriptif'];
-	$lang_dir = lang_dir(($lang = $row['lang']) ? changer_typo($lang):'');
+	$lang = $row['lang'];
+	$dir = "dir='" . lang_dir($lang ? changer_typo($lang) : '') . "'";
+	if ($lang AND $afficher_langue AND $lang != $GLOBALS['meta']['langue_site'])
+		$lang = " <span class='spip_xx-small' style='color: #666666' "
+		  . $dir
+		  . '>('
+		  . traduire_nom_langue($lang)
+		  . ')</span>';
+	else $lang = '';
 
-	$lien  = "<div>"
-	. "<a href='"
-	. generer_url_ecrire("articles","id_article=$id_article")
-	. "'"
-	. (!$descriptif ? '' : 
-	     (' title="'.attribut_html(typo($descriptif)).'"'))
-	. " dir='$lang_dir'>"
-	. (!$logo ? '' :
-	   ("<span style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>" . $logo . "</span>"))
+	$arg = "id_article=$id_article";
+	$url_a = generer_url_ecrire("articles", $arg);
+	if (!$row['petition'])
+		$petition = '';
+	else
+		$petition = " <a href='" . generer_url_ecrire('controle_petition', $arg) . "' class='spip_xx-small' style='color: red'>"._T('lien_petitions') . "</a>";
+
+	$lien = "<div>"
+	. $logo
 	. (acces_restreint_rubrique($id_rubrique) ? $img_admin : '')
-	  . typo(supprime_img($titre,''))
-	. (!($afficher_langue AND $lang != $GLOBALS['meta']['langue_site'] AND strlen($lang)) ? '' :
-	   (" <span class='spip_xx-small' style='color: #666666' dir='$lang_dir'>(".traduire_nom_langue($lang).")</span>"))
-	  . (!$row['petition'] ? '' :
-	     ("</a> <a href='" . generer_url_ecrire('controle_petition', "id_article=$id_article") . "' class='spip_xx-small' style='color: red'>"._T('lien_petitions')))
+	. "<a href='"
+	. $url_a
+	. "'"
+	. (!$descriptif ? '': (' title="'.attribut_html(typo($descriptif)).'"'))
+	. " $dir>"
+	. typo($titre ? $titre : _T('ecrire:info_sans_titre'))
 	. "</a>"
+	. $lang
+	. $petition
 	. "</div>";
 	
 	if ($spip_display == 4) return array($lien);
