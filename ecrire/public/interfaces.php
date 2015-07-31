@@ -140,7 +140,7 @@ class Polyglotte {
 
 global $tables_des_serveurs_sql, $tables_principales; // (voir inc_serialbase)
 global $exceptions_des_tables, $table_des_tables;
-global $tables_relations,  $table_date;
+global $table_date;
 
  # cf. fonction table_objet dans inc_version
 $table_des_tables['articles']='articles';
