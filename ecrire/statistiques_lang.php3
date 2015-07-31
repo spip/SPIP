@@ -42,46 +42,11 @@ if ($connect_statut != '0minirezo') {
 }
 
 //
-// Statistiques sur le site
+// Statistiques par langue
 //
 
 
-function enfants($id_parent){
-	global $nombre_vis;
-	global $total_vis;
-	global $nombre_abs;
-	global $critere;
-
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_parent'";
-	$result = spip_query($query);
-	$nombre = 0;
-
-	while($row = spip_fetch_array($result)) {
-		$id_rubrique = $row['id_rubrique'];
-
-		$query2 = "SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique='$id_rubrique'";
-		$result2 = spip_query($query2);
-		$visites = 0;
-		if ($row2 = spip_fetch_array($result2)) {
-			$visites = $row2['cnt'];
-		}
-		$nombre_abs[$id_rubrique] = $visites;
-		$nombre_vis[$id_rubrique] = $visites;
-		$nombre += $visites;
-		$nombre += enfants($id_rubrique);
-	}
-	$nombre_vis[$id_parent] += $nombre;
-	return $nombre;
-}
-
-
-
-
-
-if ($total_vis<1) $total_vis=1;
-
 debut_cadre_enfonce("langues-24.gif");
-
 
 		$query = "SELECT SUM(".$critere.") AS total_visites FROM spip_articles";
 		$result = spip_query($query);
@@ -103,7 +68,8 @@ debut_cadre_enfonce("langues-24.gif");
 		while ($row = spip_fetch_array($result)) {
 			$lang = $row['lang'];
 			$visites = round($row['cnt'] / $total_visites * $taille);
-			
+			$pourcent = round($row['cnt'] / $total_visites * 100);
+
 			if ($visites > 0) {
 
 				if ($ifond==0){
@@ -116,7 +82,7 @@ debut_cadre_enfonce("langues-24.gif");
 	
 				echo "<tr bgcolor='$couleur'>";
 				$dir=lang_dir($lang,'',' dir=rtl');
-				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><div style='float: $spip_lang_right;'>$visites%</div>".traduire_nom_langue($lang)."</span></td>";
+				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><div style='float: $spip_lang_right;'>$pourcent%</div>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
 					echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='".($taille+5)."' HEIGHT=8>";

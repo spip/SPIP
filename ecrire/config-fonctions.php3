@@ -90,17 +90,13 @@ else {
 			// mettre a jour les formats graphiques lisibles
 			switch (lire_meta('image_process')) {
 				case 'gd1':
-					$formats_graphiques = lire_meta('gd_formats');
-					break;
 				case 'gd2':
-					$formats_graphiques = lire_meta('gd_formats');
+					$formats_graphiques = lire_meta('gd_formats_read');
 					break;
 				case 'netpbm':
 					$formats_graphiques = lire_meta('netpbm_formats');
 					break;
 				case 'convert':
-					$formats_graphiques = 'gif,jpg,png';
-					break;
 				case 'imagick':
 					$formats_graphiques = 'gif,jpg,png';
 					break;
