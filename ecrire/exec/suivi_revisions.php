@@ -77,8 +77,13 @@ function exec_suivi_revisions_dist()
 
 // lien vers le rss
 
-	echo bouton_spip_rss('revisions', array('id_secteur' => $id_secteur,'id_auteur' => $id_auteur,'lang_choisie' => $lang_choisie
-	));
+	$args = array('id_secteur' => $id_secteur);
+	if ($id_auteur) {
+		$args['id_auteur'] = $id_auteur;
+		$args['statut'] = 'prepa';
+	}
+
+	echo bouton_spip_rss('revisions', $args, $lang_choisie);
 
 	echo fin_cadre_relief(true);
 
