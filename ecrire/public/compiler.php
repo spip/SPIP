@@ -421,7 +421,7 @@ function memoriser_contexte_compil($p) {
 		_q($p->descr['nom']),
 		@_q($p->id_boucle),
 		intval($p->ligne),
-		_q($GLOBALS['spip_lang'])));
+		'$GLOBALS[\'spip_lang\']'));
 }
 
 function reconstruire_contexte_compil($context_compil)
