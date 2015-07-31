@@ -15,7 +15,7 @@
 if (defined("_ECRIRE_INC_VISITES")) return;
 define("_ECRIRE_INC_VISITES", "1");
 
-function calculer_visites($t) {
+function calculer_visites() {
 
 	// La date des enregistrements de spip_visites_temp correspond a la veille
 	// du calcul.
