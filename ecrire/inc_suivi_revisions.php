@@ -72,7 +72,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 		while ($row = mysql_fetch_array($result)) {
 			$id_version = $row['id_version'];
 			$id_auteur = $row['id_auteur'];
-			$date = affdate_court($row['date']);
+			$date = date_relative($row['date']);
 			$id_article = $row['id_article'];
 			$statut = $row['statut'];
 			$titre = propre($row['titre']);	
