@@ -724,7 +724,7 @@ function maj_base() {
 			$images = $row['images'];
 			$images = explode(",", $images);
 			reset($images);
-			$replace = 'texte';
+			$replace = '_orig_';
 			while (list (, $val) = each($images)) {
 				$image = explode("|", $val);
 				$fichier = $image[0];
@@ -741,7 +741,14 @@ function maj_base() {
 				mysql_query("INSERT spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
 				$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
 			}
-			$query = "UPDATE spip_articles SET texte=REPLACE($replace, '<IM_', '<IMG') WHERE id_article=$id_article";
+			$replace = "REPLACE($replace, '<IM_', '<IMG')";
+			$replace_chapo = ereg_replace('_orig_', 'chapo', $replace);
+			$replace_descriptif = ereg_replace('_orig_', 'descriptif', $replace);
+			$replace_texte = ereg_replace('_orig_', 'texte', $replace);
+			$replace_ps = ereg_replace('_orig_', 'ps', $replace);
+			$query = "UPDATE spip_articles ".
+				"SET chapo=$replace_chapo, descriptif=$replace_descriptif, texte=$replace_texte, ps=$replace_ps ".
+				"WHERE id_article=$id_article";
 			mysql_query($query);
 		}
 		mysql_query("ALTER TABLE spip_articles DROP images");
