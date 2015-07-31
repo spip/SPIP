@@ -26,7 +26,7 @@ if (!defined('_MARQUEUR_URL'))
 // http://doc.spip.org/@urls_libres_dist
 function urls_libres_dist($i, &$entite, $args='', $ancre='') {
 	$f = charger_fonction('propres', 'urls');
-	return $f($entite, $i, $args, $ancre);
+	return $f($i, $entite, $args, $ancre);
 }
 
 ?>
