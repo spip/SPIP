@@ -42,14 +42,16 @@ function lister_statuts_proposes($desc,$publiable = true){
  * @return array|bool
  */
 function formulaires_instituer_objet_charger_dist($objet,$id_objet,$retour=""){
-	if (!autoriser('modifier', 'objet', $id_objet))
-		return false;
+	$editable = true;
 
 	$table = table_objet_sql($objet);
 	$desc = lister_tables_objets_sql($table);
 
 	if (!isset($desc['statut_textes_instituer']))
 		return false;
+	
+	if (!autoriser('modifier', 'objet', $id_objet))
+		$editable = false;
 
 	// charger le contenu de l'objet
 	// dont son champ statut
@@ -59,11 +61,12 @@ function formulaires_instituer_objet_charger_dist($objet,$id_objet,$retour=""){
 	if (isset($v['id_rubrique'])
 		AND !autoriser('publierdans', 'rubrique', $v['id_rubrique'])) {
 		if ($v['statut'] == 'publie')
-			return false;
-
-		$publiable = false;
+			$editable = false;
+		else
+			$publiable = false;
 	}
 	$valeurs = array(
+		'editable' => $editable,
 		'statut' => $v['statut'],
 		'_objet' => $objet,
 		'_id_objet' => $id_objet,

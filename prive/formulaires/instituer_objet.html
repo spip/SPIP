@@ -1,40 +1,57 @@
-[(#ENV{_publiable}|non|et{#ENV{statut}|=={prepa}|oui})
-<p class="small"><:texte_proposer_publication:></p>
-]
-<div class="formulaire_spip formulaire_editer formulaire_instituer formulaire_#FORM formulaire_#FORM-#ENV{_objet} formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#ENV{action}'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire
-		parametre : url d'action ]
-		#ACTION_FORMULAIRE{#ENV{action}}
-		#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-	  <ul>
-			<li class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-				<label for="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</label>[
-				<span class='erreur_message'>(#GET{erreurs})</span>
-				]<span class="show"><select class="select" name="#GET{name}" id="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}"
-							onchange="jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style')).closest('form').find('.boutons').css('visibility',this.options[this.selectedIndex].value=='#ENV{#GET{name}}'?'hidden':'visible');"
-							onkeyup="jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style')).closest('form').find('.boutons').css('visibility',this.options[this.selectedIndex].value=='#ENV{#GET{name}}'?'hidden':'visible');"
-							>
-					[(#ENV{_statuts}|table_valeur{#ENV{#GET{name}}}|non)
-						<option value="#ENV{#GET{name}}">&nbsp;&nbsp;&nbsp;#ENV{#GET{name}}</option>
+<div class="instituer_objet">
+	[(#ENV{_publiable}|non|et{#ENV{statut}|=={prepa}|oui})
+	<p class="small"><:texte_proposer_publication:></p>
+	]
+	<div class="formulaire_spip formulaire_editer formulaire_instituer formulaire_#FORM formulaire_#FORM-#ENV{_objet} formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		[(#ENV{editable})
+		<form method='post' action='#ENV{action}'><div>
+			[(#REM) declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+		]
+			#SET{name,statut}#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<ul>
+				<li class="editer editer_[(#GET{name})] statut_#ENV{#GET{name}}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<span class="show">
+					[(#ENV{editable})
+						<select class="select statut" name="#GET{name}" id="formulaire_#FORM-#ENV{_objet}-#ENV{_id_objet}-#GET{name}">
+						[(#ENV{_statuts}|table_valeur{#ENV{#GET{name}}}|non)
+							<option value="#ENV{#GET{name}}">&nbsp;&nbsp;&nbsp;#ENV{#GET{name}}</option>
+						]
 					]
-					<BOUCLE_choix(POUR){tableau #ENV{_statuts}}>
-						<option value="#CLE"[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
-							style="background-image:url([(#CLE|puce_statut{#ENV{_objet}}|extraire_attribut{src})]);">&nbsp;&nbsp;&nbsp;[(#VALEUR|_T)]</option>
-					</BOUCLE_choix>
-				</select></span>
-			</li>
-		</ul>
-		<!--extra-->
-		<p class='boutons'><span class='image_loading'>&nbsp;</span>
-			<input type='submit' class='submit' value='<:bouton_changer:>' /></p>
-	</div></form>
+						<BOUCLE_choix(POUR){tableau #ENV{_statuts}}{si #ENV{editable}}>
+							<option value="#CLE"[(#ENV{#GET{name}}|=={#CLE}|oui)selected="selected"]
+								style="background-image:url([(#CLE|puce_statut{#ENV{_objet}}|extraire_attribut{src})]);">&nbsp;&nbsp;&nbsp;[(#VALEUR|_T)]</option>
+						</BOUCLE_choix>
+					[(#ENV{editable})
+					</select>
+					]
+					[(#ENV{editable}|non)
+						<span class="statut">[(#ENV{#GET{name}}|puce_statut{#ENV{_objet}})] [(#ENV{_statuts}|table_valeur{#ENV{#GET{name}}}|_T)]</span>
+					]
+				</span>
+				</li>
+			</ul>
+			<!--extra-->
+			[(#ENV{editable})
+			<p class='boutons'><span class='image_loading'>&nbsp;</span>
+				<input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+		</div></form>
+		]
+	</div>
 </div>
 <script type="text/javascript">
+	function update_select(statut_default){
+		jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style')).closest('form').find('.boutons').css('visibility',this.options[this.selectedIndex].value==statut_default?'hidden':'visible');
+	}
 	jQuery(function(){
-		jQuery(".formulaire_#FORM .show select").each(function(){jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style'))});
-		jQuery(".formulaire_#FORM .boutons").css('visibility','hidden');
-	})
+		jQuery(".formulaire_#FORM .show select")
+						.each(function(){update_select.apply(this,['#ENV{#GET{name}}']);})
+						.bind('change',function(){update_select.apply(this,['#ENV{#GET{name}}']);})
+						.bind('keyup',function(){update_select.apply(this,['#ENV{#GET{name}}']);});
+	});
 </script>
