@@ -197,10 +197,12 @@ function recuperer_page($url, $trans=false, $get_headers=false,
 
 	// dix tentatives maximum en cas d'entetes 301...
 	for ($i=0;$i<10;$i++) {
-		$url = recuperer_lapage($url, $trans, $get, $taille_max, $datas, $refuser_gz, $date_verif, $uri_referer);
+		$tmp = _DIR_TMP.'copielocale.'.getmypid();
+		$url = recuperer_lapage($url, $tmp, $get, $taille_max, $datas, $refuser_gz, $date_verif, $uri_referer);
 		if (!$url) return false;
 		if (is_array($url)) {
 			list($headers, $result) = $url;
+			rename($tmp,$trans);
 			return ($get_headers ? $headers."\n" : '').$result;
 		} else spip_log("recuperer page recommence sur $url");
 	}
