@@ -808,7 +808,7 @@ function fichier_copie_locale($source){
 		$path_parts = recuperer_infos_distantes($source, 0, false);
 		ecrire_fichier($cache, serialize($path_parts));
 	}
-	$ext = $path_parts ? $path_parts['extension'] : '';
+	$ext = !empty($path_parts['extension']) ? $path_parts['extension'] : '';
 	if ($ext AND sql_getfetsel("extension", "spip_types_documents", "extension=" . sql_quote($ext))){
 		return nom_fichier_copie_locale($source, $ext);
 	}
