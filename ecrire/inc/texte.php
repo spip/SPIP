@@ -1154,7 +1154,7 @@ function traiter_raccourci_glossaire($letexte)
 				$url = str_replace("%s", rawurlencode($_terme),	$glosateur);
 			else $url = $glosateur. $_terme;
 			list($terme, $bulle, $hlang) = traiter_raccourci_lien_atts($terme);
-			$url = traiter_raccourci_lien_lang($url, 'spip_glossaire', $terme, $hlang, $bulle);
+			$url = traiter_raccourci_lien_lang($url, 'spip_glossaire', $terme, $hlang, '', $bulle);
 			$letexte = str_replace($tout, $url, $letexte);
 		}
 	}
@@ -1205,11 +1205,11 @@ function traiter_raccourci_lien($regs, $connect='') {
 	list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($texte);
 	list ($lien, $class, $texte, $lang) =
 		calculer_url($url, $texte, 'tout', $connect);
-	return traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $bulle, $connect);
+	return traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect);
 }
 
 // http://doc.spip.org/@traiter_raccourci_lien_lang
-function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $bulle, $connect='')
+function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect='')
 {		
 	// Si l'objet n'est pas de la langue courante, on ajoute hreflang
 	if (!$hlang AND $lang!=$GLOBALS['spip_lang'])
