@@ -284,10 +284,11 @@ function ancre_url($url, $ancre) {
 // pour le nom du cache, les types_urls et self
 //
 // http://doc.spip.org/@nettoyer_uri
-function nettoyer_uri()
+function nettoyer_uri($reset = null)
 {
 	static $done = false;
 	static $propre = '';
+	if (!is_null($reset)) return $propre=$reset;
 	if ($done) return $propre;
 	$done = true;
 
@@ -890,12 +891,16 @@ function test_valeur_serveur($truc) {
 // racine de SPIP : par exemple, sur ecrire/ elle vaut 1, sur sedna/ 1, et a
 // la racine 0. Sur url/perso/ elle vaut 2
 // http://doc.spip.org/@url_de_base
-function url_de_base() {
+function url_de_base($profondeur=null) {
 
 	static $url = array();
+	if (is_array($profondeur)) return $url = $profondeur;
+	if ($profondeur===false) return $url;
 
-	if (isset($url[$GLOBALS['profondeur_url']]))
-		return $url[$GLOBALS['profondeur_url']];
+	if (is_null($profondeur)) $profondeur = $GLOBALS['profondeur_url'];
+
+	if (isset($url[$profondeur]))
+		return $url[$profondeur];
 
 	$http = (
 		(isset($_SERVER["SCRIPT_URI"]) AND
@@ -915,9 +920,9 @@ function url_de_base() {
 		}
 	}
 
-	$url[$GLOBALS['profondeur_url']] = url_de_($http,$_SERVER['HTTP_HOST'],$GLOBALS['REQUEST_URI'],$GLOBALS['profondeur_url']);
+	$url[$profondeur] = url_de_($http,$_SERVER['HTTP_HOST'],$GLOBALS['REQUEST_URI'],$profondeur);
 
-	return $url[$GLOBALS['profondeur_url']];
+	return $url[$profondeur];
 }
 /**
  * fonction testable de construction d'une url appelee par url_de_base()
