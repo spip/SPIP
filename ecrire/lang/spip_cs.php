@@ -820,7 +820,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'zxml_survoler' => 'to see the correct ones, hover with the cursor', # NEW
 'zxml_valeur_attribut' => 'attribute value', # NEW
 'zxml_vide_balise' => 'empty tag', # NEW
-'zxml_vu' => 'seen before', # NE
+'zxml_vu' => 'seen before' # NEW
 );
 
 ?>

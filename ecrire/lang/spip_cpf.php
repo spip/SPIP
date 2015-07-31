@@ -817,7 +817,7 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'zxml_survoler' => 'survoler pour voir les corrects', # NEW
 'zxml_valeur_attribut' => 'valeur de l\'attribut', # NEW
 'zxml_vide_balise' => 'balise vide', # NEW
-'zxml_vu' => 'vu auparavant', # NE
+'zxml_vu' => 'vu auparavant' # NEW
 );
 
 ?>
