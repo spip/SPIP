@@ -12,7 +12,7 @@
 	    <li class="editer editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
 				<label for="nom"><:titre_cadre_signature_obligatoire:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
-				]<p class='explication'><:entree_nom_pseudo:></p>
+				][<p class='explication'>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_nom_pseudo:>,<:entree_nom_pseudo_2:>})</p>]
 				<input type='text' class='text' name='nom' id='nom' placeholder="<:ecrire:item_nouvel_auteur|attribut_html:>" value="[(#ENV**{nom})]" />
 	    </li>
 	    [(#REM)
@@ -20,12 +20,12 @@
 			ou message disant que seuls les admins peuvent le modifier
 		]
 	    <li class="editer editer_email[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
-				<label for="email"><:entree_adresse_email:></label>[
+				[<label for="email">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_adresse_email:>,<:entree_adresse_email_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
 				]<input type='text' class='text' name='email' id='email' value="[(#ENV**{email})]" />
 	    </li>
 	    <li class="editer editer_bio[ (#ENV**{erreurs}|table_valeur{bio}|oui)erreur]">
-				<label for="bio"><:entree_infos_perso:></label>[
+				[<label for="bio">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_infos_perso:>,<:entree_infos_perso_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{bio})</span>
 				]<p class="explication"><:entree_biographie:></p>
 				<textarea name='bio' id='bio' rows='4' cols='40'>[(#ENV**{bio})]</textarea>
@@ -34,7 +34,7 @@
 	    	Cle PGP
 		]		  
 		<li class="editer editer_pgp[ (#ENV**{erreurs}|table_valeur{pgp}|oui)erreur]">
-			<label for="pgp"><:entree_cle_pgp:></label>[
+			[<label for="pgp">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_cle_pgp:>,<:entree_cle_pgp_2:>})</label>][
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pgp})</span>
 			]<textarea name='pgp' id='pgp' rows='4' cols='40'>[(#ENV**{pgp})]</textarea>
 		</li>
@@ -53,12 +53,12 @@
 		<legend><:info_site_web:></legend>
 		<ul>
 			<li class="editer editer_nom_site[ (#ENV**{erreurs}|table_valeur{nom_site_auteur}|oui)erreur]">
-				<label for="nom_site"><:entree_nom_site:></label>[
+				[<label for="nom_site">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_nom_site:>,<:entree_nom_site_2:>})</label>][
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_site_auteur})</span>
 				]<input type='text' class='text' name='nom_site' id='nom_site' value="[(#ENV**{nom_site})]" />
 			</li>
 			<li class="editer editer_url_site[ (#ENV**{erreurs}|table_valeur{url_site}|oui)erreur]">
-					<label for="url_site"><:entree_url:></label>[
+					[<label for="url_site">(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_url:>,<:entree_url_2:>})</label>][
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_site})</span>
 					]<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" />
 			</li>
@@ -71,7 +71,7 @@
 		]
 		<li class='editer_identification fieldset'>
 			<fieldset>
-				<legend><:entree_identifiants_connexion:></legend>
+				[<legend>(#ENV{id_auteur}|=={#SESSION{id_auteur}}|?{<:entree_identifiants_connexion:>,<:entree_identifiants_connexion_2:>})</legend>]
 				[(#REM) Avertissement en cas de modifs de ses propres donnees ]
 				[(#ENV{config}|table_valeur{edit_login}
 				  |or{#ENV{config}|table_valeur{edit_pass}}
