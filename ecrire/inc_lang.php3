@@ -297,8 +297,8 @@ function init_codes_langues() {
 	'sh_lat' => 'srpskohrvastski',
 	'sh_cyr' => '&#1057;&#1088;&#1087;&#1089;&#1082;&#1086;&#1093;&#1088;&#1074;&#1072;&#1090;&#1089;&#1082;&#1080;',
 	'si' => "Sinhalese",
-	'sk' => "sloven&#269;ina",
-	'sl' => "slovenski",
+	'sk' => "sloven&#269;ina",	// (Slovakia)
+	'sl' => "sloven&#353;&#269;ina",	// (Slovenia)
 	'sm' => "Samoan",
 	'sn' => "Shona",
 	'so' => "Somali",
