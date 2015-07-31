@@ -9,15 +9,7 @@
 
 	// En-tetes
 	$lastmodified = @filemtime("spip_style.php3");
-	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
-	$if_modified_since = ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE);
-	$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
-	if ($if_modified_since == $gmoddate) {
-		http_status(304);
-		$headers_only = true;
-	}
-	@Header ("Last-Modified: ".$gmoddate." GMT");
-	@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + 7 * 24 * 3600)." GMT");
+	$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
 	@Header ("Content-Type: text/css");
 
 	if ($headers_only) exit;

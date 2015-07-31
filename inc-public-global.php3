@@ -166,17 +166,8 @@ $effacer_cache |= $ecraser_cache;	// ecraser le cache de l'article x s'il n'est 
 // Envoyer les entetes
 $headers_only = ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD');
 if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui' && !$HTTP_COOKIE_VARS['spip_admin']) {
-	if ($lastmodified) {
-		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
-		$if_modified_since = ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE);
-		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
-		if ($if_modified_since == $gmoddate) {
-			http_status(304);
-			$headers_only = true;
-		}
-		@Header ("Last-Modified: ".$gmoddate." GMT");
-		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + $delais)." GMT");
-	}
+	if ($lastmodified) 
+		$headers_only |= http_last_modified($lastmodified, $lastmodified + $delais);
 }
 else {
 	@Header("Expires: 0");
