@@ -25,7 +25,7 @@ class IterFactory{
 		if (isset($command['si'])) {
 			foreach ($command['si'] as $si) {
 				if (!$si) {
-					return new IterDecorator(new IterDefaut(), $command, $info);
+					return new IterDecorator(new EmptyIterator(), $command, $info);
 				}
 			}
 		}
@@ -56,7 +56,7 @@ class IterFactory{
 				} catch (Exception $e) {
 					spip_log("Erreur de chargement de l'iterateur $iterateur");
 					spip_log($e->getMessage());
-					$iter = new IterDefaut();
+					$iter = new EmptyIterator();
 				}
 			}
 		} else {
@@ -68,7 +68,7 @@ class IterFactory{
 			  OR !class_exists($class)) {
 				die("Iterateur $iterateur non trouv&#233;");
 				// si l'iterateur n'existe pas, on se rabat sur le generique
-				$iter = new IterDefaut();
+				$iter = new EmptyIterator();
 			} else {
 				$iter = new $class($command, $info);
 			}
@@ -77,16 +77,6 @@ class IterFactory{
 	}
 }
 
-// mettre directement new Iterator() ne fonctionnait pas car c'est une classe d'implementation.
-// par defaut... ne rien faire :)
-class IterDefaut implements Iterator {
-	public function __construct() {}
-	public function next() {}
-	public function valid() { return false; }
-	public function rewind() {}
-	public function current() {}
-	public function key() {}
-}
 
 
 
