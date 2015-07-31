@@ -33,6 +33,7 @@ tester_variable('ouvre_note', '[');
 tester_variable('ferme_note', '] ');
 tester_variable('les_notes', '');
 tester_variable('compt_note', 0);
+tester_variable('nombre_surligne', 4);
 
 if (file_exists("puce.gif")) {
 	$imgsize = getimagesize('puce.gif');
