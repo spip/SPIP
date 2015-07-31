@@ -185,7 +185,7 @@ function calculer_balise($nom, $p) {
 // Inclusion du fichier associe a son nom.
 // Ca donne les arguments a chercher dans la pile,on compile leur localisation
 // Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
-// qui recevra a l'execution la valeurs des arguments, 
+// qui recevra a l'execution la valeur des arguments, 
 // ainsi que les filtres (qui ne sont donc pas traites a la compil)
 
 function calculer_balise_dynamique($p, $nom, $l) {
@@ -210,7 +210,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 function param_balise(&$p) {
 	$a = $p->fonctions;
 	if ($a) list(,$nom) = each($a) ; else $nom = '';
-	if (!ereg('^ *\{ *([^}]+) *\} *',$nom, $m))
+	if (!ereg('^ *\{([^{}]*(\{[^{}]*\})?[^{}]*)\} *',$nom, $m))
 	  return '';
 	else {
 		$filtres= array();
@@ -254,9 +254,8 @@ function applique_filtres($p) {
 	if ($fonctions) {
 		foreach($fonctions as $fonc) {
 			if ($fonc) {
-
 				$arglist = '';
-				if (ereg('([^\{\}]+)\{(.+)\}$', $fonc, $regs)) {
+				if (ereg('([^{}]+)\{([^{}]*(\{[^{}]*\})?[^{}]*)\}$', $fonc, $regs)) {
 					$fonc = $regs[1];
 
 				        $arglist = filtres_arglist($regs[2],$p, ($fonc == '?' ? ':' : ','));
@@ -313,7 +312,7 @@ function filtres_arglist($args, $p, $sep) {
 			else if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $r2)) {
 				$p->nom_boucle = $r2[2];
 				$p->nom_champ = $r2[3];
-				# faudrait verifier !trim(r2[5])
+				$p->fonctions = array($r2[5]);
 				$arg = calculer_champ($p);
 			} else if (is_numeric($arg))
 				$arg = $arg;
