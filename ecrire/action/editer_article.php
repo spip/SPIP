@@ -21,21 +21,14 @@ function action_editer_article_dist() {
 	$var_f();
 
 	$arg = _request('arg');
-	$lier_trad = _request('lier_trad');
-
-	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
-	if (!$id_rubrique = intval(_request('id_parent'))) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
-		$id_rubrique = $row['id_rubrique'];
-	}
 
 	if (!$id_article = intval($arg)) {
 		if ($arg != 'oui') redirige_par_entete('./');
-		$id_article = insert_article($id_rubrique);
+		$id_article = insert_article();
 	} 
 	  
 	// Enregistre l'envoi dans la BD
-	$err = articles_set($id_article, $id_rubrique, $lier_trad, $arg=='oui');
+	$err = articles_set($id_article, $arg=='oui', _request('lier_trad'));
 
 	$redirect = parametre_url(urldecode(_request('redirect')),
 		'id_article', $id_article, '&') . ($err ? '&trad_err=1' : '');
@@ -44,10 +37,17 @@ function action_editer_article_dist() {
 }
 
 // http://doc.spip.org/@insert_article
-function insert_article($id_rubrique)
-{
+function insert_article() {
 	include_spip('base/abstract_sql');
-	$id_auteur =  _request('id_auteur');
+	$id_auteur = _request('id_auteur');
+
+
+	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'article
+	// dans la premiere rubrique racine
+	if (!$id_rubrique = intval(_request('id_parent'))) {
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+		$id_rubrique = $row['id_rubrique'];
+	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 
@@ -63,16 +63,16 @@ function insert_article($id_rubrique)
 }
 
 // http://doc.spip.org/@articles_set
-function articles_set($id_article, $id_rubrique, $lier_trad, $new)
-{
+function articles_set($id_article, $new, $lier_trad) {
 	include_spip('inc/filtres');
 	include_spip('inc/rubriques');
 
 	// si editer_article='oui', on modifie le contenu
 	if (_request('editer_article') == 'oui') {
-		revisions_articles($id_article, $id_rubrique, $new);
+		revisions_articles($id_article, $new);
 	}
 
+	// Un lien de trad a prendre en compte
 	if ($lier_trad)
 		$err = article_referent($id_article, $lier_trad);
 
@@ -80,9 +80,8 @@ function articles_set($id_article, $id_rubrique, $lier_trad, $new)
 }
 
 // http://doc.spip.org/@revisions_articles
-function revisions_articles ($id_article, $id_rubrique, $new) {
-{
-	global $flag_revisions, $champs_extra;
+function revisions_articles ($id_article, $new) {
+	global $flag_revisions;
 
 	$id_auteur = _request('id_auteur');
 
@@ -99,6 +98,20 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 		if (($val = _request($champ)) !== NULL) {
 			$champs[$champ] = corriger_caracteres($val);
 		}
+	}
+
+	// Verifier que la rubrique demandee existe et est differente
+	// de la rubrique actuelle
+	if ($id_rubrique = intval(_request('id_parent'))
+	AND spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_rubrique"))
+	AND !spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article AND id_rubrique!=$id_rubrique"))) {
+		$champs['id_rubrique'] = $id_rubrique;
+	}
+
+	// recuperer les extras
+	if ($GLOBALS['champs_extra']) {
+		include_spip('inc/extra');
+		$champs['extra'] = extra_recup_saisie("articles", _request('id_secteur'));
 	}
 
 	// Stockage des versions : creer une premier version si non-existante
@@ -119,16 +132,11 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 		}
 	}
 
-	if ($champs_extra) {
-		include_spip('inc/extra');
-		$champs_extra = extra_recup_saisie("articles", _request('id_secteur'));
-	}
-
 	$update = '';
 	foreach ($champs as $champ => $val)
 		$update .= $champ . '=' . spip_abstract_quote($val).', ';
 
-	spip_query("UPDATE spip_articles SET id_rubrique=$id_rubrique, $update date_modif=NOW() " . ($champs_extra ? (", extra = " . spip_abstract_quote($champs_extra)) : '') . " WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET $update date_modif=NOW() WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -144,9 +152,12 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 	}
 
 
-	// Changer la langue heritee
-	if ($id_rubrique != _request('id_rubrique_old')) {
+	// Si on deplace l'article
+	// - propager les secteurs
+	// - changer sa langue (si heritee)
+	if (isset($champ['id_rubrique'])) {
 		propager_les_secteurs();
+
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
@@ -178,9 +189,12 @@ function revisions_articles ($id_article, $id_rubrique, $new) {
 		marquer_indexer('spip_articles', $id_article);
 	}
 
-	// Recalculer les rubriques (statuts et dates)
-	calculer_rubriques();
- }
+	// Recalculer les rubriques (statuts et dates) si l'on deplace
+	// un article publie
+	if ($statut == 'publie'
+	AND isset($champ['id_rubrique'])) {
+		calculer_rubriques();
+	}
 }
 
 
