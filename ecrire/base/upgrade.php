@@ -148,18 +148,6 @@ function serie_alter($serie, $q = array()) {
 }
 
 
-// A refaire pour PG
-// http://doc.spip.org/@convertir_un_champ_blob_en_text
-function convertir_un_champ_blob_en_text($table,$champ,$type){
-	$res = spip_query("SHOW FULL COLUMNS FROM $table LIKE '$champ'");
-	if ($row = sql_fetch($res)){
-		if (strtolower($row['Type'])!=strtolower($type)) {
-			$default = $row['Default']?(" DEFAULT ".sql_quote($row['Default'])):"";
-			$notnull = ($row['Null']=='YES')?"":" NOT NULL";
-			sql_alter("TABLE $table CHANGE $champ $champ $type $default $notnull");
-		}
-	}
-}
 
 // La fonction a appeler dans le tableau global $maj 
 // quand on rajoute des types MIME. cf par exemple la 1.953
