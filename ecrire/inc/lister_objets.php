@@ -27,15 +27,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function inc_lister_objets_dist($vue, $contexte=array(), $force=false){
 	$res = ""; // debug
-	if ($vue=='sites')
-		$vue='syndic';
-
 	if (!is_array($contexte))
 		return _L('$contexte doit etre un tableau dans inc/lister_objets');
 
 	$fond = "prive/listes/$vue";
-	if (!find_in_path($fond."."._EXTENSION_SQUELETTES))
-		return _L("vue $vue introuvable pour lister les objets");
+	if (!find_in_path($fond."."._EXTENSION_SQUELETTES)) {
+		// traiter les cas particuliers
+		include_spip('base/connect_sql');
+		$vue = table_objet($vue);
+		$fond = "prive/listes/$vue";
+		if (!find_in_path($fond."."._EXTENSION_SQUELETTES))
+			return _L("vue $vue introuvable pour lister les objets");
+	}
+		
 	
 	$contexte['sinon']=($force ? $contexte['titre']:'');
 
