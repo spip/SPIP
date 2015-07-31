@@ -363,7 +363,7 @@ function lang_dselect ($rien='') {
 // Afficher un menu de selection de langue
 //
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
-	global $couleur_foncee;
+	global $couleur_foncee, $couleur_claire;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
@@ -389,14 +389,28 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
 
 	while (list(, $l) = each ($langues)) {
-		$selected = ($l == $default) ? ' selected' : '';
+		if ($l == $default) {
+			$selected = ' selected';
+			$style = "background-color: $couleur_foncee; color: white; font-style: bold;";
+		} else {
+			$selected = '';
+			$style = "background-color: $couleur_claire;";
+		}
+		//$selected = ($l == $default) ? ' selected' : '';
 		if ($l == $herit) {
-			$selected = ($herit == $default) ? ' selected' : '';
-			$ret .= "<option style='font-style:italic' value='herit'$selected>"
+			//$selected = ($herit == $default) ? ' selected' : '';
+			if ($herit == $default) {
+				$selected = 'selected';
+				$style = "background-color: $couleur_foncee; color: white; font-style: bold;";
+			} else {
+				$selected = '';
+				$style = "background-color: white;";
+			}
+			$ret .= "<option style='$style' value='herit'$selected>"
 				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
 			if ($selected) $default = '';
 		}
-		else $ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+		else $ret .= "<option style='$style' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
 	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
