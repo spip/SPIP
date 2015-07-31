@@ -97,7 +97,7 @@ debut_cadre_relief("racine-24.gif");
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Adresse (URL) racine de votre site</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<input type='text' name='adresse_site' value=\"$adresse_site\" size='40' CLASS='forml'>";
+	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='forml'>";
 	echo "</TD></TR>";
 
 /*	A REACTIVER QUAND ON SAURA QUOI EN FAIRE (cf supra)
