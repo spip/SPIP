@@ -1268,7 +1268,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 }
 
 // http://doc.spip.org/@bouton_spip_rss
-function bouton_spip_rss($op, $args) {
+function bouton_spip_rss($op, $args=array()) {
 
 	include_spip('inc/acces');
 	$url = generer_url_low_sec($op, $args, $GLOBALS['connect_id_auteur'], $GLOBALS['spip_lang']);

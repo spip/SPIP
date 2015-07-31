@@ -223,6 +223,25 @@ function rss_sites($critere) {
 }
 
 
+function rss_signatures($critere) {
+	$rss = array();
+	$s = sql_select("S.id_article AS id_article, A.titre AS titre, S.date_time AS date, S.nom_email AS nom, S.ad_email AS email, S.message AS texte, S.url_site AS chapo", "spip_signatures AS S LEFT JOIN spip_articles AS A ON S.id_article=A.id_article", "S.statut='publie'", "", "date DESC", "50");
+	while ($t = sql_fetch($s)) {
+		$item = array(
+			'title' => typo($t['titre']),
+			'date' => $t['date'],
+			'author' => typo($t['nom']),
+			'email' => $t['email'],
+			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
+			'url' => generer_url_article($t['id_article']));
+
+		$rss[] = $item;
+	}
+	return array('(' . _T('titre_suivi_petition') . ')',
+		     $rss,
+		     generer_url_ecrire('controle_petition'));
+}
+
 # forum public
 function rss_forum($a)
 {
