@@ -819,7 +819,7 @@ function balise_FILTRE_dist($p) {
 		$args = array();
 		foreach ($p->param as $i => $ignore)
 			$args[] = interprete_argument_balise($i+1,$p);
-		$p->code = '\'<'
+		$p->code = "'<' . '"
 			.'?php header("X-Spip-Filtre: \'.'
 				.join('.\'|\'.', $args)
 			. " . '\"); ?'.'>'";
