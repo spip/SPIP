@@ -24,7 +24,7 @@
 	  	[(#ENV**{config}|table_valeur{rubriques_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|?{' '})
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:texte_descriptif_rapide:></label><div class='explication'><:entree_contenu_rubrique:></div>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{desctiptif})</span>
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif' rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{rubriques_texte}|=={non}|?{#ENV**{texte,''},' '}|?{' '})
