@@ -13,7 +13,7 @@ class Auth_spip {
 	}
 
 	function verifier_challenge_md5($login, $mdpass_actuel, $mdpass_futur) {
-		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle' AND source='spip'";
+		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle' AND source='spip'";
 		$result = spip_query($query);
 
 		if ($row = spip_fetch_array($result)) {
