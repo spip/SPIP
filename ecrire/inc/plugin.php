@@ -408,7 +408,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 					$dir = "_DIR_RACINE.'".str_replace(_DIR_RACINE,'',$plug)."/'";
 				}else{
 					$dir = $dir_type.".'"
-						. str_replace(constant($dir_type), '', $plug)
+						. $plug
 						."/'";
 				}
 				$info = $infos[$dir_type][$plug];
