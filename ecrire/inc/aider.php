@@ -21,7 +21,7 @@ function inc_aider_dist($aide='') {
 	if (!$aide OR $spip_display == 4) return;
 
 	$t = _T('titre_image_aide');
-	return "\n&nbsp;&nbsp;<a target='spip_aide' class='aide'\nhref='"
+	return "\n&nbsp;&nbsp;<a class='aide'\nhref='"
 	. generer_url_ecrire("aide_index", "aide=$aide&var_lang=$spip_lang")
 	. "'\nonclick=\"javascript:window.open(this.href,"
 	. "'spip_aide', "

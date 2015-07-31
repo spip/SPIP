@@ -35,6 +35,17 @@ function exec_brouteur_frame_dist() {
 	. "' />\n"
 	. envoi_link(_T('info_mon_site_spip'))	
 	. pipeline('header_prive', $head)
+	. '<script type="text/javascript"><!--
+
+jQuery(function(){
+	jQuery("a.iframe").click(function(){
+		window.open(this.href,"iframe"+this.rel);
+		return false;
+	});
+});
+	
+//--></script>
+	'
 	. "</head>\n<body>";
 
 	if ($spip_ecran == "large") {
@@ -128,14 +139,14 @@ onmouseover=\"changeclass(this, 'brouteur_rubrique_on');\"
 onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 
 			if ($id_parent == '0') 	{
-			  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe", ($frame+1), "'>",
+			  echo "\n<div style='", frame_background_image("secteur-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='", ($frame+1), "'>",
 			    $titre,
 			    "</a></div>";
 			}
 			else {
 				if ($frame+1 < $nb_col)
 				  echo "\n<div style='",
-				    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
+				    frame_background_image("rubrique-24.gif"), ";'><a href='", generer_url_ecrire('brouteur_frame', "rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",
 				    ($frame+1),
 				    "'>$titre</a></div>";
 				else  echo "\n<div style='",
@@ -197,7 +208,7 @@ onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 			if ($cpt['n']) {
 
 			  echo "\n<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
-			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",($frame+1),"'>",
+			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",($frame+1),"'>",
 			    _T("info_cours_edition"),"</a></b></div>";
 			}
 			
@@ -206,7 +217,7 @@ onmouseout=\"changeclass(this, 'brouteur_rubrique');\">";
 				$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE statut = 'prop'"));
 			if ($cpt['n'])
 				echo "\n<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
-			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
+			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui"), "' class='iframe' rel='",
 			    ($frame+1)."'>",
 			    _T("info_articles_proposes"),
 			    " / "._T("info_breves_valider")."</a></b></div>";

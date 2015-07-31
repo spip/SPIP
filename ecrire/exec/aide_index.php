@@ -157,7 +157,7 @@ function help_body($aide, $html, $lang_aide='') {
 			</div></center>
 			<div style="position:absolute; bottom: 10px; right:20px;
 			font-size: 12px; ">'.
-		preg_replace(",<a ,i", "<a target='_new' ",_T('info_copyright_doc')).
+		preg_replace(",<a ,i", "<a class='target_blank' ",_T('info_copyright_doc')).
 			'</div>';
 	}
 
@@ -174,7 +174,18 @@ function help_body($aide, $html, $lang_aide='') {
 		  generer_url_ecrire('aide_index', "img=$img", false, true);
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
+	
+	echo '<script type="text/javascript"><!--
 
+jQuery(function(){
+	jQuery("a.target_blank").click(function(){
+		window.open(this.href);
+		return false;
+	});
+});
+
+//--></script>
+';
 	echo _STYLE_AIDE_BODY, "</head>\n";
 
 	echo '<body bgcolor="#FFFFFF" text="#000000" topmargin="24" leftmargin="24" marginwidth="24" marginheight="24"';
@@ -198,7 +209,7 @@ function help_body($aide, $html, $lang_aide='') {
 
 	$html = justifier($html . $suite );
 	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
-	$html = ereg_replace('<a href="(http://[^"]+)"([^>]*)>', '<a href="\\1"\\2 target="_blank">', $html);
+	$html = ereg_replace('<a href="(http://[^"]+)"([^>]*)>', '<a href="\\1"\\2 class="target_blank">', $html);
 
 	echo $html, '</body>';
 }
@@ -297,12 +308,20 @@ var curr_article;
 // http://doc.spip.org/@activer_article
 function activer_article(id) {
 	if (curr_article)
-		document.getElementById(curr_article).className = "article-inactif";
+		jQuery("#"+curr_article).removeClass("article-actif").addClass("article-inactif");
 	if (id) {
-		document.getElementById(id).className = "article-actif";
+		jQuery("#"+id).removeClass("article-inactif").addClass("article-actif");
 		curr_article = id;
 	}
 }
+
+jQuery(function(){
+	jQuery("a.target_droite").click(function(){
+		window.open(this.href,"droite");
+		return false;
+	});
+});
+
 //--></script>
 ',
 	$GLOBALS['browser_layer'],
@@ -408,9 +427,9 @@ function article($titre, $lien, $statut = "redac") {
 		else {
 			$class = "article-inactif";
 		}
-		$texte[$ligne] .= "<a class='$class' id='$id'
+		$texte[$ligne] .= "<a class='$class target_droite' id='$id'
  href='" . generer_url_ecrire("aide_index", "aide=$lien&frame=body&var_lang=$spip_lang", false, true) .
-		  "' target='droite' onclick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;' />\n";
+		  "' onclick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;' />\n";
 	}
 }
 
@@ -468,6 +487,8 @@ else {
 	header("Content-Type: text/html; charset=utf-8");
 	echo _DOCTYPE_AIDE, html_lang_attributes();
 	echo "<head><title>", _T('info_aide_en_ligne'),	"</title>\n";
+	include_spip("inc/filtres");
+	echo f_jQuery("");
 
 	if ($frame == 'menu')
 		help_menu($aide, $html, $lang);
