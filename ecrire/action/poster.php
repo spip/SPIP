@@ -25,16 +25,19 @@ function action_poster_dist()
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		 spip_log("action_poster_dist $arg pas compris");
-	} else {
-		$id_article = $r[1];
-		$statut = _request('change_accepter_forum');
-		spip_query("UPDATE spip_articles SET accepter_forum='$statut' WHERE id_article=". $id_article);
-		if ($statut == 'abo') {
+	} else action_poster_post($r);
+}
+
+function action_poster_post($r)
+{
+	$id_article = $r[1];
+	$statut = _request('change_accepter_forum');
+	spip_query("UPDATE spip_articles SET accepter_forum='$statut' WHERE id_article=". $id_article);
+	if ($statut == 'abo') {
 			ecrire_meta('accepter_visiteurs', 'oui');
 			ecrire_metas();
-		}
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_forum/a$id_article'");
 	}
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_forum/a$id_article'");
 }
 ?>

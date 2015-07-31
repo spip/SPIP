@@ -25,27 +25,31 @@ function action_editer_rubrique_dist() {
 
 	if (!preg_match(";^(\d+),(\w*),(\d+)$;", $arg, $r)) {
 		 spip_log("action_editer_rubrique_dist $arg pas compris");
-	} else {
+	} else action_editer_rubrique_post($r);
+}
 
-		list($x, $old_parent, $new, $id_rubrique) = $r;
-		$id_parent = intval(_request('id_parent'));
-		if ($new == 'oui')
-			$id_rubrique = enregistre_creer_naviguer($id_parent);
+function action_editer_rubrique_post($r)
+{
 
-		enregistre_modifier_naviguer($id_rubrique,
+	list($x, $old_parent, $new, $id_rubrique) = $r;
+	$id_parent = intval(_request('id_parent'));
+	if ($new == 'oui')
+		$id_rubrique = enregistre_creer_naviguer($id_parent);
+
+	enregistre_modifier_naviguer($id_rubrique,
 				$id_parent,
 				_request('titre'),
 				_request('texte'),
 				_request('descriptif'),
 				$old_parent);
 
-		calculer_rubriques();
-		calculer_langues_rubriques();
+	calculer_rubriques();
+	calculer_langues_rubriques();
 
-		// invalider les caches marques de cette rubrique
-		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_rubrique/$id_rubrique'");
-	}
+	// invalider les caches marques de cette rubrique
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_rubrique/$id_rubrique'");
+
         $redirect = parametre_url(urldecode(_request('redirect')),
 				  'id_rubrique', $id_rubrique, '&');
         redirige_par_entete($redirect);

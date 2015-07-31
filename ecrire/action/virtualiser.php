@@ -28,10 +28,13 @@ function action_virtualiser_dist() {
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		 spip_log("action_virtualiser_dist $arg $url pas compris");
-	} else {
-		$url = eregi_replace("^ *https?://$", "", rtrim($url));
-		if ($url) $url = corriger_caracteres("=$url");
-		spip_query("UPDATE spip_articles SET chapo=" . spip_abstract_quote($url) . ", date_modif=NOW() WHERE id_article=" . $r[1]);
-	}
+	} else action_virtualiser_post($r);
+}
+
+function action_virtualiser_post($r)
+{
+	$url = eregi_replace("^ *https?://$", "", rtrim($url));
+	if ($url) $url = corriger_caracteres("=$url");
+	spip_query("UPDATE spip_articles SET chapo=" . spip_abstract_quote($url) . ", date_modif=NOW() WHERE id_article=" . $r[1]);
 }
 ?>

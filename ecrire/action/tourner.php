@@ -29,9 +29,11 @@ function action_tourner_dist() {
 
 	if (!preg_match(",^\W*(\d+)\W?(-?\d+)$,", $arg, $r)) {
 		spip_log("action_tourner_dist $arg pas compris");
-		return;
-	}
+	} else  action_tourner_post($r);
+}
 
+function action_tourner_post($r)
+{
 	$arg = $r[1];
 	$result = spip_query("SELECT fichier FROM spip_documents WHERE id_document=$arg");
 

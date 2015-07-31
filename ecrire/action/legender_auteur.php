@@ -20,6 +20,21 @@ include_spip('base/abstract_sql');
 // http://doc.spip.org/@action_legender_auteur
 function action_legender_auteur()
 {
+        $var_f = charger_fonction('controler_action_auteur', 'inc');
+        $var_f();
+
+        $arg = _request('arg');
+
+	$echec = array();
+
+        if (!preg_match(",^(\d+)\D(\d*)(\D?)(.*)$,", $arg, $r)) {
+		$r = "action_legender_auteur_dist $arg pas compris";
+		spip_log($r);
+        } else action_legender_post($r);
+}
+
+function action_legender_post($r)
+{
 	global $auteur_session, $bio,
 	  $champs_extra,
 	  $auteur_session,
@@ -35,19 +50,6 @@ function action_legender_auteur()
 	  $redirect,
 	  $statut,
 	  $url_site;
-
-        $var_f = charger_fonction('controler_action_auteur', 'inc');
-        $var_f();
-
-        $arg = _request('arg');
-
-	$echec = array();
-
-        if (!preg_match(",^(\d+)\D(\d*)(\D?)(.*)$,", $arg, $r)) {
-		$r = "action_legender_auteur_dist $arg pas compris";
-		spip_log($r);
-		$echec[]=$r;
-        } else {
 
 	  list($tout, $id_auteur, $ajouter_id_article,$s, $n) = $r;
 //
@@ -186,7 +188,6 @@ function action_legender_auteur()
 		}
 	// ..et mettre a jour les fichiers .htpasswd et .htpasswd-admin
 		ecrire_acces();
-	}
 	}
 
 	if ($echec) $echec = '&echec=' . join('@@@', $echec);

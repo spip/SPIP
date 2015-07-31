@@ -30,24 +30,28 @@ function action_legender_dist() {
 
 	if (!preg_match(",^\W*(\d+)$,", $arg, $r)) {
 		 spip_log("action_legender_dist $arg pas compris");
-	} else {
+	} else action_legender_post($r);
+}
 
-		$id_document = $r[1];
+function action_legender_post($r)
+{
 
-		$titre_document = (corriger_caracteres(_request('titre_document')));
-		$descriptif_document = (corriger_caracteres(_request('descriptif_document')));
+	$id_document = $r[1];
 
-			// taille du document (cas des embed)
-		if ($largeur_document = intval(_request('largeur_document'))
-		AND $hauteur_document = intval(_request('hauteur_document')))
+	$titre_document = (corriger_caracteres(_request('titre_document')));
+	$descriptif_document = (corriger_caracteres(_request('descriptif_document')));
+
+	// taille du document (cas des embed)
+	if ($largeur_document = intval(_request('largeur_document'))
+	AND $hauteur_document = intval(_request('hauteur_document')))
 				$wh = ", largeur='$largeur_document',
 					hauteur='$hauteur_document'";
-		else $wh = "";
+	else $wh = "";
 
 			// Date du document (uniquement dans les rubriques)
-		if (!_request('jour_doc'))
+	if (!_request('jour_doc'))
 		  $d = '';
-		else {
+	else {
 			$mois_doc = _request('mois_doc');
 			$jour_doc = _request('jour_doc');
 			if (_request('annee_doc') == "0000")
@@ -57,20 +61,19 @@ function action_legender_dist() {
 			$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc;
 
 			if (preg_match('/^[0-9-]+$/', $date)) $d=" date='$date',";
-		}
+	}
 				  
-		spip_query("UPDATE spip_documents SET$d titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
+	spip_query("UPDATE spip_documents SET$d titre=" . spip_abstract_quote($titre_document) . ", descriptif=" . spip_abstract_quote($descriptif_document) . " $wh WHERE id_document=".$id_document);
 
 
-		if ($date) {
+	if ($date) {
 			include_spip('inc/rubriques');
 			// Changement de date, ce qui nous oblige a :
 			calculer_rubriques();
-		}
-
-		// Demander l'indexation du document
-		include_spip('inc/indexation');
-		marquer_indexer('spip_documents', $id_document);
 	}
+
+	// Demander l'indexation du document
+	include_spip('inc/indexation');
+	marquer_indexer('spip_documents', $id_document);
 }
 ?>

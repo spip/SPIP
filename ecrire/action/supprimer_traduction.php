@@ -23,13 +23,18 @@ function action_supprimer_traduction_dist() {
 
 	if (!preg_match(",^(\d+)\D(\d+)$,", $arg, $r)) 
 		spip_log("action supprimer_traduction: $arg pas compris");
-	else {
-		spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);
-		// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
-		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
+	else action_supprimer_traduction_post($r);
+}
 
-		if ($cpt['n'] == 1)
-			spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad=" . $r[2]);
-	}
+function action_supprimer_traduction_post($r)
+{
+	spip_query("UPDATE spip_articles SET id_trad=0 WHERE id_article=" . $r[1]);
+	// Si l'ancien groupe ne comporte plus qu'un seul article
+	// mettre a zero.
+
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE id_trad=" . $r[2]));
+
+	if ($cpt['n'] == 1)
+		spip_query("UPDATE spip_articles SET id_trad = 0 WHERE id_trad=" . $r[2]);
 }
 ?>
