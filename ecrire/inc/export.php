@@ -61,8 +61,9 @@ define('_EXPORT_TRANCHES_LIMITE', 400);
 // La constante ci-dessus determine la taille des tranches,
 // chaque tranche etant copiee immediatement dans un fichier 
 // et son numero memorisee dans le serveur SQL.
-// En cas d'abandon sur Time-out, le travail pourra ainsi avancer
-// charge a l'appelant de coller tous les morceaux de 1 a N
+// En cas d'abandon sur Time-out, le travail pourra ainsi avancer.
+// Au final, on regroupe les tranches en un seul fichier
+// et on memorise dans le serveur qu'on va passer a la table suivante.
 
 // http://doc.spip.org/@export_objets
 function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total) {
@@ -72,9 +73,6 @@ function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total
 	$filetable = $dir . $archive . '_' . $etape . '.';
 
 	while (1){ // on ne connait pas le nb de paquets d'avance
-
-		if ($GLOBALS['flag_ob_flush']) ob_flush();
-		flush();
 
 		$string = build_while($debut, $table);
 		// attention $string vide ne suffit pas a sortir
@@ -95,9 +93,14 @@ function export_objets($table, $liens, $etape, $cpt, $dir, $archive, $gz, $total
 	// a la relecture on en profitera pour mettre le cache a jour
 		$status_dump = "$gz::$archive::$etape::$cpt";
 		ecrire_meta("status_dump", $status_dump,'non');
+
 	}
 	echo " $total."; 
-	return $cpt;
+	$filetable = $dir . $archive . '_' . $etape;
+	ramasse_parties($dir . $archive . ".$etape", $filetable, $cpt);
+	$status_dump = "$gz::$archive::" . ($etape+1) . "::0";
+	ecrire_meta("status_dump", $status_dump,'non');
+
 }
 
 // Construit la version xml  des champs d'une table
@@ -109,27 +112,16 @@ function build_while($debut, $table) {
 	static $table_fields=array();
 
 	$result = spip_query("SELECT * FROM $table LIMIT $debut," . _EXPORT_TRANCHES_LIMITE);
-	// Recuperer les noms des champs
-	// Ces infos sont donnees par le abstract_showtable
-	// les instructions natives mysql ne devraient pas apparaitre ici
-	if (!isset($table_fields[$table])){
-		$nfields = mysql_num_fields($result);
-		for ($i = 0; $i < $nfields; ++$i)
-		  $table_fields[$table][$i] = mysql_field_name($result, $i);
-	} else	$nfields = count($table_fields[$table]);
 
 	$string = '';
-
-	$all = $connect_toutes_rubriques
-	  ||(!in_array('id_rubrique',$table_fields[$table]));
-
 	while ($row = spip_fetch_array($result,SPIP_ASSOC)) {
 		if ((!isset($row['impt']) OR $row['impt']=='oui')
-		AND ($all OR autoriser('publierdans','rubrique',$row['id_rubrique']))) {
+		AND ($connect_toutes_rubriques
+		     OR !isset($row['id_rubrique'])
+		     OR autoriser('publierdans','rubrique',$row['id_rubrique']))) {
 			$attributs = "";
 			$string .= "<$table$attributs>\n";
-			for ($i = 0; $i < $nfields; ++$i) {
-				$k = $table_fields[$table][$i];
+			foreach ($row as $k => $v) {
 				$string .= "<$k>" . text_to_xml($row[$k]) . "</$k>\n";
 			}
 			$string .= "</$table>\n\n";

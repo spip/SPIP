@@ -142,8 +142,6 @@ function exec_export_all_dist()
 	echo "<div style='text-align: left'>\n";
 	$etape = 1;
 	foreach($tables_for_dump as $table){
-
-		$liens = $tables_for_link[$table];
 		if ($etape_actuelle <= $etape) {
 		  $r = spip_query("SELECT COUNT(*) FROM $table");
 		  $r = spip_fetch_array($r, SPIP_NUM);
@@ -151,14 +149,13 @@ function exec_export_all_dist()
 		  echo "\n<br /><strong>",$etape, '. ', $table,"</strong> ";
 		  if (!$r) echo _T('texte_vide');
 		  else {
-		    $cpt = export_objets($table, $liens, $etape, $sous_etape,$dir, $archive, $gz, $r);
-			$filetable = $dir . $archive . '_' . $etape;
-			ramasse_parties($dir . $archive . ".$etape", $filetable, $cpt);
+		    $liens = $tables_for_link[$table];
+		    export_objets($table, $liens, $etape, $sous_etape,$dir, $archive, $gz, $r);
 		  }
+		  if ($GLOBALS['flag_ob_flush']) ob_flush();
+		  flush();
 		  $etape++;
 		  $sous_etape = 0;
-		  $status_dump = "$gz::$archive::" . $etape . "::0";
-		  ecrire_meta("status_dump", $status_dump,'non');
 		}
 	}
 	echo "</div>\n";
