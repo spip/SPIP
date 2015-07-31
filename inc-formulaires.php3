@@ -433,29 +433,32 @@ function formulaire_site($la_rubrique) {
 function ecrire_auteur($id_auteur,$email_auteur) {
 	global $flag_wordwrap;
 	$affiche_formulaire = true;
-	if ($GLOBALS[texte_message_auteur]) {
-		if ($GLOBALS[sujet_message_auteur] == "")
+	if ($GLOBALS['texte_message_auteur']) {
+		if ($GLOBALS['sujet_message_auteur'] == "")
 			$erreur .= erreur("Veuillez indiquer un sujet");
-		else if (! email_valide($GLOBALS[email_message_auteur]) )
+		else if (! email_valide($GLOBALS['email_message_auteur']) )
 			$erreur .= erreur("Veuillez indiquer une adresse email valide");
-		else if ($GLOBALS[valide_message_auteur]) {  // verifier hash ?
+		else if ($GLOBALS['valide_message_auteur']) {  // verifier hash ?
 			include_local("ecrire/inc_mail.php3");
-			$GLOBALS[texte_message_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site').") --\n";
+			$GLOBALS['texte_message_auteur'] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site').") --\n";
 			envoyer_mail($email_auteur,
-				$GLOBALS[sujet_message_auteur],
-				$GLOBALS[texte_message_auteur], $GLOBALS[email_message_auteur],
-				"X-Originating-IP: ".$GLOBALS[REMOTE_ADDR]);
+				$GLOBALS['sujet_message_auteur'],
+				$GLOBALS['texte_message_auteur'], $GLOBALS['email_message_auteur'],
+				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
 			$erreur .= erreur("Message envoy&eacute;");
 			$affiche_formulaire = false;
 		} else { //preview
-			echo "<p><div class='spip_encadrer'>Sujet : <b>$GLOBALS[sujet_message_auteur]</b></div>";
+			echo "<p><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur']."</b></div>";
 			if ($flag_wordwrap)
-				$GLOBALS[texte_message_auteur] = wordwrap($GLOBALS[texte_message_auteur]);
-			echo "<pre>".entites_html($GLOBALS[texte_message_auteur])."</pre>";
+				$GLOBALS['texte_message_auteur'] = wordwrap($GLOBALS['texte_message_auteur']);
+			echo "<pre>".entites_html($GLOBALS['texte_message_auteur'])."</pre>";
 			$affiche_formulaire = false;
 			$link = $GLOBALS['clean_link'];
+			$link->addVar('email_message_auteur', $GLOBALS['email_message_auteur']);
+			$link->addVar('sujet_message_auteur', $GLOBALS['sujet_message_auteur']);
+			$link->addVar('texte_message_auteur', $GLOBALS['texte_message_auteur']);
+			$link->addVar('valide_message_auteur', 'oui');			
 			echo $link->getForm('POST');
-			echo "<input type='hidden' name='valide_message_auteur' value='oui'>";  // hash ?
 			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer l'envoi\">";
 			echo "</DIV></FORM>";
 		}
