@@ -185,13 +185,18 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[0]))
 		$quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	else
-		$quoi = '@$Pile[0]["recherche"]';
+		$quoi = '(isset($Pile[0]["recherche"])?$Pile[0]["recherche"]:(isset($GLOBALS["recherche"])?$GLOBALS["recherche"]:""))';
 
 	$_modificateur = var_export($boucle->modificateur,true);
 	$boucle->hash .= '
 	// RECHERCHE
-	$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
-	list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '",'.$_modificateur.',"'.$boucle->primary.'");
+	if ("'.$crit->cond.'" AND !strlen('.$quoi.')){
+		list($rech_select, $rech_where) = array("0 as points","");
+	}
+	else {
+		$prepare_recherche = charger_fonction(\'prepare_recherche\', \'inc\');
+		list($rech_select, $rech_where) = $prepare_recherche('.$quoi.', "'.$boucle->id_table.'", "'.$crit->cond.'","' . $boucle->sql_serveur . '",'.$_modificateur.',"'.$boucle->primary.'");
+	}
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
