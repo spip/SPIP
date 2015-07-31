@@ -1109,7 +1109,7 @@ function _sqlite_remplacements_definitions_table($query){
 	
 	$remplace = array(
 		// pour l'autoincrement, il faut des INTEGER NOT NULL PRIMARY KEY
-		'/(big)?int(eger)?'.$num.'/is' => 'INTEGER',		
+		'/(big|small|medium)?int(eger)?'.$num.'/is' => 'INTEGER',		
 		'/enum'.$enum.'/is' => 'VARCHAR',
 		'/binary/is' => ''
 	);
