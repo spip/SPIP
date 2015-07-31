@@ -767,7 +767,19 @@ function page_base_href(&$texte){
 	AND $GLOBALS['html']
 	AND $GLOBALS['profondeur_url']>0){
 		list($head, $body) = explode('</head>', $texte, 1);
-		if (strpos($head, '<base')===false){
+		$insert = false;
+		if (strpos($head, '<base')===false) 
+			$insert = true;
+		else {
+			// si aucun <base ...> n'a de href c'est bon quand meme !
+			$insert = true;
+			include_spip('inc/filtres');
+			$bases = extraire_balises($head,'base');
+			foreach ($bases as $base)
+				if (extraire_attribut($base,'href'))
+					$insert = false;
+		}
+		if ($insert) {
 			include_spip('inc/filtres_mini');
 			// ajouter un base qui reglera tous les liens relatifs
 			$base = url_absolue('./');
