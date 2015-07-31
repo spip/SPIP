@@ -196,7 +196,7 @@ function auteur_dissocier($id_auteur,$objets){
  */
 function auteur_qualifier($id_auteur,$objets,$qualif){
 	include_spip('action/editer_liens');
-	return objet_qualifier(array('auteur'=>$id_auteur), $objets, $qualif);
+	return objet_qualifier_liens(array('auteur'=>$id_auteur), $objets, $qualif);
 }
 
 

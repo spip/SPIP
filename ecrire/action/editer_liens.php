@@ -61,7 +61,7 @@ function objet_associer($objets_source, $objets_lies, $qualif = null){
 	$modifs = objet_traiter_laisons('lien_insert', $objets_source, $objets_lies);
 
 	if ($qualif)
-		objet_qualifier($objets_source, $objets, $qualif);
+		objet_qualifier_liens($objets_source, $objets_lies, $qualif);
 
 	return $modifs; // pas d'erreur
 }
@@ -108,12 +108,31 @@ function objet_dissocier($objets_source,$objets_lies){
  * @param array $objets_lies
  * @param array $qualif
  */
-function objet_qualifier($objets_source,$objets_lies,$qualif){
+function objet_qualifier_liens($objets_source,$objets_lies,$qualif){
 	return objet_traiter_laisons('lien_set',$objets_source,$objets_lies,$qualif);
 }
 
 
-
+/**
+ * Trouver les liens entre objets
+ * $objets_source et $objets sont de la forme
+ * array($objet=>$id_objets,...)
+ * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ *
+ * Les objets sources sont les pivots qui portent les liens
+ * et pour lesquels une table spip_xxx_liens existe
+ * (auteurs, documents, mots)
+ *
+ * un * pour $objet,$id_objet permet de traiter par lot
+ * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
+ *
+ * @param <type> $objets_source
+ * @param <type> $objets_lies
+ * @return <type>
+ */
+function objet_trouver_liens($objets_source,$objets_lies){
+	return objet_traiter_laisons('lien_find',$objets_source,$objets_lies,$qualif);
+}
 
 
 
@@ -160,7 +179,7 @@ function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = nu
 					$echec = true;
 				}
 				else
-					$modifs+=$res;
+					$modifs=($modifs?(is_array($res)?array_merge($modifs,$res):$modifs+$res):$res);
 			}
 		}
 		else
@@ -212,6 +231,15 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets) {
 	return ($echec?false:$ins);
 }
 
+/**
+ * Fabriquer la condition where en tenant compte des jokers *
+ *
+ * @param string $primary
+ * @param int/string/array $id_source
+ * @param string $objet
+ * @param int/string/array $id_objet
+ * @return <type>
+ */
 function lien_where($primary, $id_source, $objet, $id_objet){
 	if (!strlen($id_source) 
 	  OR !strlen($objet)
@@ -290,6 +318,12 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	$echec = null;
 	if (!$qualif)
 		return false;
+	// nettoyer qualif qui peut venir directement d'un objet_trouver_lien :
+	unset($qualif[$primary]);
+	unset($qualif[$objet_source]);
+	unset($qualif[$qualif['objet']]);
+	unset($qualif['objet']);
+	unset($qualif['id_objet']);
 	foreach($objets as $objet => $id_objets){
 		$objet = objet_type($objet); # securite
 		if (!is_array($id_objets)) $id_objets = array($id_objets);
@@ -303,5 +337,37 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 	return ($echec?false:true);
 }
 
+/**
+ * Sous fonction trouver
+ * qui cherche les liens pour un objet source dont la cle primaire
+ * et la table de lien sont fournies
+ *
+ * $objets et de la forme
+ * array($objet=>$id_objets,...)
+ * un * pour $id,$objet,$id_objets permet de traiter par lot
+ *
+ *
+ * @param string $objet_source
+ * @param string $primary
+ * @param sgring $table_lien
+ * @param int $id
+ * @param array $objets
+ */
+function lien_find($objet_source,$primary,$table_lien,$id,$objets){
+	$trouve = array();
+	foreach($objets as $objet => $id_objets){
+		$objet = objet_type($objet); # securite
+		// lien_where prend en charge les $id_objets sous forme int ou array
+		$where = lien_where($primary, $id, $objet, $id_objets);
+		$liens = sql_allfetsel('*',$table_lien,$where);
+		// ajouter les entrees objet_source et objet cible par convenance
+		foreach($liens as $l) {
+			$l[$objet_source] = $l[$primary];
+			$l[$objet] = $l['id_objet'];
+			$trouve[] = $l;
+		}
+	}
+	return $trouve;
+}
 
 ?>
