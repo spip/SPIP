@@ -91,7 +91,8 @@ function async_upload_article_edit(res,jForm){
 	            var anim = jQuery(this).css("height","");
 	            //bug explorer-opera-safari
 	            if(!jQuery.browser.mozilla) anim.css('width', this.orig.width-2);
-	            jQuery(anim).find("img[@onclick]").get(0).onclick();
+	            a = jQuery(anim).find("img[@onclick]")
+	            if (a.length) a.get(0).onclick();
 	        })
 	        .css('overflow','');
 	    }
