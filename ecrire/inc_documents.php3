@@ -712,7 +712,8 @@ entites_html($document['fichier'])."\" />\n";
 			// bloc vignette + rotation
 			echo "<div style='text-align:center;'>";
 			
-			afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_document, $id_vignette);
+			if ($flag_modif)
+				afficher_rotateurs($album, $document, $type, $id_article, $id_document, $id_vignette);
 
 			//
 			// Recuperer la vignette et afficher le doc
@@ -853,7 +854,7 @@ function block_document($id, $id_document, $type, $titre, $descriptif, $date, $d
 	icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id, $type, $id_document, $album), "image-24.gif",  "supprimer.gif");
 } 
 
-function  afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_document, $id_vignette) {
+function  afficher_rotateurs($album, $document, $type, $id_article, $id_document, $id_vignette) {
 	global $spip_lang_right;
 	static $ftype = array(1 => 'jpg', 2 => 'png', 3 => 'gif');
 
@@ -863,26 +864,26 @@ function  afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_do
 	// si c'est une image, qu'on sait la faire tourner, qu'elle
 	// n'est pas distante, et qu'elle n'a pas de vignette perso 
 	// et qu'on a la bibli !
-	if ($flag_modif  AND $document['distant']!='oui' AND !$id_vignette
+	if ($document['distant']!='oui' AND !$id_vignette
 	AND strstr($GLOBALS['meta']['formats_graphiques'],
 		   $ftype[$document['id_type']])
 	AND ($process == 'imagick' OR $process == 'gd2'
-	     OR $process == 'convert' OR $process == 'netpbm') ) {
+	OR $process == 'convert' OR $process == 'netpbm') )  {
 
 		echo "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
 		  // tournerr a gauche
-		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, -90), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
+		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, -90, $type), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
 		echo "<br />";
 
 		// tourner a droite
-		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, 90),
+		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, 90, $type),
 					   'tourner-droite.gif', "style='border-width: 0px;'",
 					   _T('image_tourner_droite'), '', 'bouton_rotation');
 		echo "<br />";
 
 		// tourner 180
-		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, 180),
+		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, 180, $type),
 				   'tourner-180.gif', "style='border-width: 0px;'",
 				   _T('image_tourner_180'), '', 'bouton_rotation');
 		
@@ -900,11 +901,11 @@ function retour_a_l_envoyeur($type)
 	}
 }
 
-function bouton_tourner_document($id_article, $id, $album, $rot)
+function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 {
 	$script = retour_a_l_envoyeur('article');
 	
-	$redirect = generer_url_ecrire($script, ("id_$type=$id_article&ancre=$album"));
+	$redirect = generer_url_ecrire($script, ("id_$type=$id_article&ancre=$album"), true);
 
 	return generer_action_auteur('tourner', $id, $redirect) .
 		("&amp;var_rot=$rot");
@@ -914,7 +915,7 @@ function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album,
 {
 
 	$script = retour_a_l_envoyeur($type);
-	$redirect = generer_url_ecrire($script, ("id_$type=$id_article$hidden&ancre=$album" . ($id_document ? "&show_docs=$id_document" : '')));
+	$redirect = generer_url_ecrire($script, ("id_$type=$id_article$hidden&ancre=$album" . ($id_document ? "&show_docs=$id_document" : '')), true);
 
 	return generer_action_auteur('supprimer', $id_v, $redirect);
 }
