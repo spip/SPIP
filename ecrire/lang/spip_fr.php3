@@ -449,6 +449,7 @@ Merci de votre participation
 'info_petit_ecran' => 'Petit &eacute;cran',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Plusieurs mots-cl&eacute;s trouv&eacute;s pour "@cherche_mot@":',
+'info_popularite_5' => 'popularit&eacute;&nbsp;:',
 'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Portfolio automatique&nbsp;:',
 'info_premier_resultat' => '[@debut_limit@ premiers r&eacute;sultats sur @total@]',
