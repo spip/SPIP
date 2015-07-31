@@ -2268,7 +2268,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = tr
 		if ($danger) $retour .= "<div class='danger'>";
 		if ($spip_display != 1) {
 			$retour .= "<a href='$lien' class='cellule-h' $javascript><table cellpadding='0' valign='middle'><tr>\n";
-			$retour .= "<td><a href='$lien'><div class='cell-i'>" .
+			$retour .= "<td><a href='$lien' class='cellule-h'><div class='cell-i'>" .
 			  http_img_pack($fonction, "", http_style_background($fond, "center center no-repeat")) .
 			  "</div></a></td>\n" .
 			  "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
