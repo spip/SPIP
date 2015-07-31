@@ -312,7 +312,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_boucle_fermant' => 'BOUCLE@id@: missing closing tag',
 'erreur_boucle_syntaxe' => 'Incorrect loop (BOUCLE) syntax ',
 'erreur_boucle_syntaxe2' => 'The loop (BOUCLE) @milieu@ is incorrect.',
-'erreur_filtre' => 'Error - undefined filter: <b>&laquo; @filtre@ &raquo;</b>',
+'erreur_filtre' => 'Error - undefined filter: <b>"@filtre@"</b>',
 
 
 // F
@@ -499,8 +499,8 @@ Thank you for your participation
 'icone_suivi_activite' => 'Follow-up of the site\'s activity',
 'icone_suivi_actualite' => 'Site\'s evolution',
 'icone_suivi_forum' => 'Follow-up of public forum: @nb_forums@ contribution(s)',
-'icone_suivi_forums' => 'Follow-up/manage forums',
-'icone_suivi_pettions' => 'Follow-up/manage petitions',
+'icone_suivi_forums' => 'Manage forums',
+'icone_suivi_pettions' => 'Manage petitions',
 'icone_supprimer_cookie' => 'Delete cookie',
 'icone_supprimer_document' => 'Delete this document',
 'icone_supprimer_groupe_mots' => 'Delete this group',
@@ -1388,10 +1388,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 the content of the database in a file stored in the directory <i>ecrire/data/</i>.
 Also remember to retrieve the whole <i>IMG/</i>, directory, which contains
 the images and the documents used in the articles and sections.',
-'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored
- in a site installed under the same version of SPIP. It is a common mistake
- to backup the database before upgrading
- SPIP... For more information refer to <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',
+'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href=\'http://www.spip.net/en_article2428.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
 'texte_adresse_annuaire_1' => '( If your directory is installed on the same machine as your Web site, it is probably &laquo;localhost&raquo;.)',

@@ -302,11 +302,11 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'entree_titre_image' => 'Tytu&#322; obrazka:',
 'entree_titre_obligatoire' => '<B>Tytu&#322;</b> [Obowi&#261;zkowo]<BR>',
 'entree_url' => 'URL Twojej strony',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: podw&oacute;jna definicja',
+'erreur_boucle_fermant' => 'BOUCLE@id@: brakuje znacznika zamykaj&#261;cego',
+'erreur_boucle_syntaxe' => 'Sk&#322;adnia p&#281;tli (boucle) nieprawid&#322;owa',
+'erreur_boucle_syntaxe2' => 'P&#281;tla (boucle) @milieu@ jest nieprawid&#322;owa.',
+'erreur_filtre' => 'B&#322;&#261;d : filtr <b>&laquo; @filtre@ &raquo;</b> nie zdefiniowany',
 
 
 // F
@@ -1380,7 +1380,7 @@ w&#322;&#261;cznie z <i>wszystkimi</i> parametrami dost&#281;pu dla redaktor&oac
 zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierwszego administratora.',
 'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu <i>ecrire/data/</i>.Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu <i>IMG/</i>, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
 'texte_admin_tech_02' => 'Uwaga: tej kopii bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
- TYLKO w serwisie opartym na tej samej wersji SPIP. B&#322;&#261;d
+ TYLKO w serwisie opartym na tej samej wersji SPIP. Nie wolno szczeg&oacute;lnie "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu.B&#322;&#261;d
  polegaj&#261;cy na wykonaniu kopii przed uaktualnieniem
  SPIP jest cz&#281;sty... Wi&#281;cej informacji w <a href="http://www.spip.net/fr_article1489.html">dokumentacji SPIP</a>.',
 'texte_admin_tech_03' => 'Mo&#380;esz wybra&#263; wykonanie kopii bezpiecze&#324;&#347;twa pod postaci&#261; skompresowan&#261;, w celu
