@@ -45,16 +45,15 @@ function aff_statistique_visites_popularite($serveur, $id_article, &$classement,
 	}
 
 	return !$out ? '' : (
-		"<br />\n"
-		."<div class='iconeoff' style='padding: 5px'>\n"
-		."<div class='verdana1 spip_x-small'>"
+		"<div class='cadre cadre-e'>\n"
+		."<div class='cadre_padding verdana1 spip_x-small'>"
 		.typo(_T('info_visites_plus_populaires'))
 		."<ul class='classement'>"
 		.$out
 
 		."</ul>"
-
-		."<b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau')
+		
+		."<div class='arial11'><b>"._T('info_comment_lire_tableau')."</b><br />"._T('texte_comment_lire_tableau')."</div>"
 
 		."</div>"
 		."</div>");
@@ -101,8 +100,8 @@ function aff_statistique_visites_par_visites($serveur='', $id_article=0, $classe
 
 	if (!$res) return '';
 
-	return "<br /><div class='iconeoff' style='padding: 5px;'>"
-	  . "<div style='overflow:hidden;' class='verdana1 spip_x-small'>"
+	return "<div class='cadre cadre-e' style='padding: 5px;'>"
+	  . "<div class='cadre_padding verdana1 spip_x-small'>"
 	  . typo(_T('info_affichier_visites_articles_plus_visites'))
 	  . "<ul class='classement'>"
 	  . $res

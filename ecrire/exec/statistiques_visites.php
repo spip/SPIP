@@ -74,9 +74,8 @@ function exec_statistiques_visites_args($id_article, $duree, $interval, $type, $
 	if ($titre) echo gros_titre($titre,'', false);
 
 	echo debut_gauche('', true);
-	echo "<br />";
-	echo "<div class='iconeoff' style='padding: 5px;'>";
-	echo "<div class='verdana1 spip_x-small'>";
+	echo "<div class='cadre cadre-e' style='padding: 5px;'>";
+	echo "<div class='cadre_padding verdana1 spip_x-small'>";
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 
