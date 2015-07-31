@@ -1930,12 +1930,11 @@ function balise_INCLURE_dist($p) {
 		}
 
 		// Critere d'inclusion {env} (et {self} pour compatibilite ascendante)
-		if (isset($_contexte['env'])
-		|| isset($_contexte['self'])
-		) {
+		$flag_env = false;
+		if (isset($_contexte['env']) OR isset($_contexte['self'])) {
 			$flag_env = true;
 			unset($_contexte['env']);
-		} else $flag_env = false;
+		}
 
 		$_options = array();
 		if (isset($_contexte['ajax'])) {
@@ -1950,10 +1949,14 @@ function balise_INCLURE_dist($p) {
 
 		$p->code = sprintf(CODE_RECUPERER_FOND, $f, $_l, join(',',$_options),"_request('connect')");
 
-	} elseif (!isset($_contexte[1])) {
+	}
+	elseif (!isset($_contexte[1])) {
 			$msg = array('zbug_balise_sans_argument', array('balise' => ' INCLURE'));
 			erreur_squelette($msg, $p);
-	} else 		$p->code = 'charge_scripts(' . $_contexte[1] . ',false)';
+	}
+	else 	{
+		$p->code = 'charge_scripts(' . $_contexte[1] . ',false)';
+	}
 
 	$p->interdire_scripts = false; // la securite est assuree par recuperer_fond
 	return $p;
@@ -1993,13 +1996,20 @@ function balise_MODELE_dist($p) {
 	if (!isset($_contexte[1])) {
 		$msg = array('zbug_balise_sans_argument', array('balise' => ' MODELE'));
 		erreur_squelette($msg, $p);
-	} else {
+	}
+	else {
 		$nom = $_contexte[1];
 		unset($_contexte[1]);
 
 		if (preg_match("/^\s*'[^']*'/s", $nom))
 			$nom = "'modeles/" . substr($nom,1);
 		else $nom = "'modeles/' . $nom";
+
+		$flag_env = false;
+		if (isset($_contexte['env'])){
+			$flag_env = true;
+			unset($_contexte['env']);
+		}
 
 		// Incoherence dans la syntaxe du contexte. A revoir.
 		// Reserver la cle primaire de la boucle courante si elle existe
@@ -2023,7 +2033,10 @@ function balise_MODELE_dist($p) {
 			unset($_contexte['ajax']);
 	  }
 
-		$page = sprintf(CODE_RECUPERER_FOND, $nom, 'array(' . join(',', $_contexte) .')', $_options, _q($connect));
+		$_l = 'array(' . join(",\n\t", $_contexte) .')';
+		if ($flag_env) $_l = "array_merge(\$Pile[0],$_l)";
+
+		$page = sprintf(CODE_RECUPERER_FOND, $nom, $_l , $_options, _q($connect));
 
 		$p->code = "\n\t(((\$recurs=(isset(\$Pile[0]['recurs'])?\$Pile[0]['recurs']:0))>=5)? '' :\n\t$page)\n";
 
