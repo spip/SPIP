@@ -12,6 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Ce script n'est plus utile qu'a la compatibilite avec les liens
+// produits par l'ancienne definition de bouton_spip_rss
+
 include_spip('inc/acces');
 include_spip('inc/texte'); // utile pour l'espace public, deja fait sinon
 
@@ -38,18 +41,20 @@ function action_rss_dist()
 	if (verifier_low_sec($id, $cle, "rss $op $args")) {
 		lang_select($lang);
 		$op = str_replace('-', '_', $op);
-		$contexte = array('fond' => 'prive/rss/' . $op);
-		foreach (split(':', $args) as $bout) {
+		$contexte = $_REQUEST;
+		$contexte['cle'] = afficher_low_sec($id, $op, $args);
+		$contexte['fond'] = 'prive/rss/' . $op;
+			foreach (split(':', $args) as $bout) {
 			list($var, $val) = split('-', $bout, 2);
 			$contexte[$var] = $val;
-		}
+			}
 		$f = charger_fonction($op, 'rss', true);
 		if ($f) $contexte = $f($contexte);
 	} else $contexte = '';
 	if ($contexte) {
 		$r = evaluer_fond ('', $contexte);
 		echo $r['texte'];
-		$message ="spip_rss s'applique sur " . $contexte['fond'] . " et $args pour $id par $f";
+		$message ="spip_rss s'applique sur " . $contexte['fond'] . " et $args pour $id par $f cle " . $contexte['cle'];
 	} else 	$message = ("spip_rss sur '$op $args pour $id' incorrect");
 	spip_log("$message (" . spip_timer('rss') .')');
 	exit;

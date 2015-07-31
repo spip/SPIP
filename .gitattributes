@@ -765,6 +765,7 @@ prive/modeles/text.html -text
 prive/modeles/video.html -text
 prive/puce_prive.gif -text
 prive/puce_prive_rtl.gif -text
+prive/rss.html -text
 prive/rss/a_suivre.html -text
 prive/rss/forums.html -text
 prive/rss/forums_interne.html -text

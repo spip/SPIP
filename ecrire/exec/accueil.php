@@ -87,7 +87,7 @@ function encours_accueil()
 			: '' )
 		)
 	. $res
-	. bouton_spip_rss('a-suivre')
+	. bouton_spip_rss('a_suivre')
 	. fin_cadre_couleur_foncee(true)
 	. "</div>";
 }
