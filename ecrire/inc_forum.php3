@@ -89,7 +89,7 @@ function controle_cache_forum($action, $id, $texte, $fond, $fonction, $but='') {
 	$link = $link->geturl() . "#id$id";
 
 	if ($but)
-		$link = $but . "&retour= ecrire/" . urlencode($link);
+		$link = $but . "&retour=ecrire/" . urlencode($link);
 
 	return icone($texte,
 		$link,
