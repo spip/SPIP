@@ -88,7 +88,7 @@ function inc_import_1_2_dist($f, $request, $gz='fread') {
 			}
 			else if ($fields==NULL or isset($fields[$col])) {
 				if ($char) 
-					$value = importer_charset($value, $charset);
+					$value = importer_charset($value, $char);
 				$values[$col] = $value;
 				if ($col == $id) $id_objet = $value;
 			}
