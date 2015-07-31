@@ -24,12 +24,12 @@ function couleur_html_to_hex($couleur){
 }
 
 // http://doc.spip.org/@couleur_foncer
-function couleur_foncer ($couleur) {
+function couleur_foncer ($couleur, $coeff=0.5) {
 	$couleurs = _couleur_hex_to_dec($couleur);
 
-	$red = $couleurs["red"] - round(($couleurs["red"])/2);
-	$green = $couleurs["green"] - round(($couleurs["green"])/2);
-	$blue = $couleurs["blue"] - round(($couleurs["blue"])/2);
+	$red = $couleurs["red"] - round(($couleurs["red"])*$coeff);
+	$green = $couleurs["green"] - round(($couleurs["green"])*$coeff);
+	$blue = $couleurs["blue"] - round(($couleurs["blue"])*$coeff);
 
 	$couleur = _couleur_dec_to_hex($red, $green, $blue);
 	
@@ -37,12 +37,12 @@ function couleur_foncer ($couleur) {
 }
 
 // http://doc.spip.org/@couleur_eclaircir
-function couleur_eclaircir ($couleur) {
+function couleur_eclaircir ($couleur, $coeff=0.5) {
 	$couleurs = _couleur_hex_to_dec($couleur);
 
-	$red = $couleurs["red"] + round((255 - $couleurs["red"])/2);
-	$green = $couleurs["green"] + round((255 - $couleurs["green"])/2);
-	$blue = $couleurs["blue"] + round((255 - $couleurs["blue"])/2);
+	$red = $couleurs["red"] + round((255 - $couleurs["red"])*$coeff);
+	$green = $couleurs["green"] + round((255 - $couleurs["green"])*$coeff);
+	$blue = $couleurs["blue"] + round((255 - $couleurs["blue"])*$coeff);
 
 	$couleur = _couleur_dec_to_hex($red, $green, $blue);
 	
