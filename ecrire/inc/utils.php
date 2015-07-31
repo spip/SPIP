@@ -1129,6 +1129,7 @@ function verifier_visiteur() {
 // selectionner une langue
 // http://doc.spip.org/@lang_select
 function lang_select ($lang='') {
+	if (!is_array($GLOBALS['pile_langues'])) $GLOBALS['pile_langues'] = array();
 	array_push($GLOBALS['pile_langues'], $GLOBALS['spip_lang']);
 	if ($lang != $GLOBALS['spip_lang']) {
 		include_spip('inc/lang');
