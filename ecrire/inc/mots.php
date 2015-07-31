@@ -583,10 +583,16 @@ function afficher_groupe_mots($id_groupe) {
 			
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
-	$multi = creer_objet_multi ("titre", "$spip_lang");
-	$query = "SELECT id_mot, titre, $multi FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
+	$select = 'id_mot, titre, ' . creer_objet_multi ("titre", "$spip_lang");
+	$requete = "FROM spip_mots WHERE id_groupe = '$id_groupe'" ;
+	$order = " ORDER BY multi";
 
-	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n $requete"));
+	$cpt = $cpt['n'];
+
+	$requete = "SELECT $select $requete $order";
+
+	$tranches = afficher_tranches_requete($requete, $cpt, 3, $tmp_var, $javascript);
 
 	if (strlen($tranches)) {
 
@@ -610,7 +616,7 @@ function afficher_groupe_mots($id_groupe) {
 
 		echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
-		$result = spip_query($query);
+		$result = spip_query($requete);
 		while ($row = spip_fetch_array($result)) {
 		
 			$vals = '';

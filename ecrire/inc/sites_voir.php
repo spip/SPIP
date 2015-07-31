@@ -16,8 +16,15 @@ function afficher_sites($titre_table, $requete) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 
-	$tranches = afficher_tranches_requete($requete, 3);
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
 
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+
+	  $tranches = afficher_tranches_requete($requete, $cpt, 3);
+	}
 	if ($tranches) {
 //		debut_cadre_relief("site-24.gif");
 		if ($titre_table) echo "<div style='height: 12px;'></div>";
@@ -155,7 +162,14 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	if ($connect_statut == '0minirezo') $cols ++;
 	if ($afficher_site) $cols ++;
 
-	$tranches = afficher_tranches_requete($requete, $cols);
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+
+	  $tranches = afficher_tranches_requete($requete, $cpt, $cols);
+	}
 
 	if (strlen($tranches)) {
 
