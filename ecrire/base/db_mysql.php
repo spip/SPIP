@@ -26,9 +26,6 @@ function base_db_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		$ok = spip_mysql_selectdb($db);
 		if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
 			mysql_query("set sql_mode=''");
-		$x = isset($GLOBALS['meta']['charset_sql_connexion']) ?
-		  $GLOBALS['meta']['charset_sql_connexion'] : 'utf8';
-		mysql_query("SET NAMES ". _q($x));
 	}
 #	spip_log("Connexion vers $host, base $db, prefixe $prefixe "
 #		 . ($ok ? "operationnelle sur $link" : 'impossible'));
@@ -117,9 +114,9 @@ function spip_mysql_explain($query, $serveur=''){
 // La parametre sous_requete n'est plus utilise
 
 // http://doc.spip.org/@spip_mysql_select
-function spip_mysql_select($select, $from, $where,
-			   $groupby, $orderby, $limit,
-			   $sousrequete, $having,
+function spip_mysql_select($select, $from, $where='',
+			   $groupby='', $orderby='', $limit='',
+			   $sousrequete='', $having='',
 			   $table='', $id='', $serveur='') {
 
 	$query = 'SELECT ' .

@@ -264,32 +264,49 @@ function spip_connect($serveur='') {
 	$connexions[$index] = $GLOBALS['db_ok'];
 	$connexions[$index]['spip_connect_version'] = isset($GLOBALS['spip_connect_version']) ? $GLOBALS['spip_connect_version'] : 0;
 
-	if ($serveur) return $connexions[$index];
+	// initialisation du charset utilise dans les connexions SQL
+	// celle du serveur principal l'impose aux serveurs secondaires
 
-	// Premiere connexion au serveur principal:
-	// verifier que la table principale est la
-	// et que le fichier de connexion n'est pas une version trop vieille
-	// Version courante = 0.6 (indication du prefixe comme 6e arg)
-	//
-	// La version 0.0 (non numerotee) doit etre refaite par un admin
-	// les autres fonctionnent toujours, meme si :
-	// - la version 0.1 est moins performante que la 0.2
-	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
-	// - la version 0.5 indique le serveur comme 5e arg
+	if (!$serveur) {
+		$charset = spip_connect_main($GLOBALS['db_ok']);
+		if (!$charset) {
+			unset($connexions[$index]);
+			spip_log("spip_connect: absence de charset");
+			return false;
+		}
+	} else {
+		$charset = isset($GLOBALS['meta']['charset_sql_connexion']) ?
+		  $GLOBALS['meta']['charset_sql_connexion'] : 'utf8';
+	}
+	$f = $GLOBALS['db_ok']['set_connect_charset'];
+	$f($charset);
+	return $connexions[$index];
+}
 
+// Premiere connexion au serveur principal: 
+// retourner le charset donnee par la table principale
+// mais verifier que le fichier de connexion n'est pas trop vieux
+// Version courante = 0.6 (indication du prefixe comme 6e arg)
+//
+// La version 0.0 (non numerotee) doit etre refaite par un admin
+// les autres fonctionnent toujours, meme si :
+// - la version 0.1 est moins performante que la 0.2
+// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
+// - la version 0.5 indique le serveur comme 5e arg
+
+function spip_connect_main($connexion)
+{
 	if ($GLOBALS['spip_connect_version']< 0.1 AND _DIR_RESTREINT){
 		include_spip('inc/headers');
 		redirige_par_entete(generer_url_ecrire('upgrade', 'reinstall=oui', true));
 	}
 
-	$f = $GLOBALS['db_ok']['countsel'];
-	if (!$f('spip_meta', '', '', '', '', '', '', $index)) {
-		unset($connexions[$index]);
-		spip_log("spip_connect: table meta vide ($index)");
+	$f = $connexion['select'];
+	if (!$r = $f('valeur','spip_meta', "nom='charset_sql_connexion'"))
 		return false;
-	}
-
-	return $connexions[$index];
+	$f = $connexion['fetch'];
+	$r = $f($r);
+	return ($r['valeur'] ? $r['valeur'] : 'utf8');
 }
 
 // http://doc.spip.org/@spip_query

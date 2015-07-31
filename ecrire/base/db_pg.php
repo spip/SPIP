@@ -149,9 +149,9 @@ function spip_pg_listdbs() {
 }
 
 // http://doc.spip.org/@spip_pg_select
-function spip_pg_select($select, $from, $where,
-                           $groupby, $orderby, $limit,
-                           $sousrequete, $having,
+function spip_pg_select($select, $from, $where='',
+                           $groupby='', $orderby='', $limit='',
+                           $sousrequete='', $having='',
                            $table='', $id='', $serveur=''){
 
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
