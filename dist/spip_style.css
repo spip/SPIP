@@ -99,3 +99,4 @@ a.spip_in { color: #900; } /* liens internes */
 a.spip_out { color: #009; } /* liens sortants */
 a.spip_url { color: #009; } /* liens url sortants */
 a.spip_glossaire { color: #060; } /* liens vers encyclopedie */
+.on { font-weight: bold; color: #000; } /* liens exposes */

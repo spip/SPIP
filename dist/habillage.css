@@ -329,6 +329,7 @@ q, blockquote { font-family: Georgia, Garamond, Times, serif; }
 .spip_bouton {
 	text-align: right;
 }
+
 /* Reponse du formulaire */
 .reponse_formulaire { font-weight: bold; color: #F00; }
 fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
@@ -337,6 +338,7 @@ fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 fieldset.previsu {
 	padding: 1em;
 	border: 1px solid; }
+
 /* Choix des mots-clefs */
 .choix_mots { width: 47%; float: left; } 
 .choix_mots label { display: inline; }
@@ -433,5 +435,4 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /*  Couleurs des liens
 /*  ------------------------------------------ */
 a { text-decoration: none; color: #333; }
-.on { font-weight: bold; color: #000; }
 a:hover { text-decoration: underline; }
