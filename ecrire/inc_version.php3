@@ -341,11 +341,6 @@ define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 define_once('_ACCESS_FILE_NAME', '.htaccess');
 define_once('_AUTH_USER_FILE', '.htpasswd');
 
-# obsoletes: utiliser les constantes ci-dessus.
-# Conserver pour compatibité vieilles contrib uniquement
-
-$flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
-$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -496,17 +491,22 @@ function spip_log($message, $logname='spip') {
 //
 
 // Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-if (!$REQUEST_URI) {
+if (!$REQUEST_URI)
 	$REQUEST_URI = $PHP_SELF;
-	if (!strpos($REQUEST_URI, '?') && $QUERY_STRING)
-		$REQUEST_URI .= '?'.$QUERY_STRING;
-}
+if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
+	$REQUEST_URI .= '?'.$QUERY_STRING;
 
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
 	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
 }
 
+# obsoletes: utiliser les constantes ci-dessus.
+# Conserver pour compatibité vieilles contrib uniquement
+$flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
+$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
+
+// API d'appel a la base de donnees
 function spip_query($query) {
 	if (!_FILE_CONNECT)  {$GLOBALS['db_ok'] = false; return;}
 	include_local(_FILE_CONNECT);
