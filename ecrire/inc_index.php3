@@ -458,18 +458,32 @@ function requete_hash ($rech) {
 			$dico_strict[] = $rq_strict;
 	}
 
+	// Attention en MySQL 3.x il faut passer par HEX(hash)
+	// alors qu'en MySQL 4.1 c'est interdit !
+	$vers = spip_fetch_array(spip_query("SELECT VERSION()"));
+	if (substr($vers[0], 0, 1) >= 4
+	AND substr($vers[0], 2, 1) >= 1 ) {
+		$hex_fmt = '';
+		$select_hash = 'hash AS h';
+	} else {
+		$hex_fmt = '0x';
+		$select_hash = 'HEX(hash) AS h';
+	}
+
 	// compose la recherche dans l'index
 	if ($dico_strict) {
-		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico_strict);
+		$query2 = "SELECT $select_hash FROM spip_index_dico WHERE "
+			.join(" OR ", $dico_strict);
 		$result2 = spip_query($query2);
 		while ($row2 = spip_fetch_array($result2))
-			$h_strict[] = "0x".$row2["hx"];
+			$h_strict[] = $hex_fmt.$row2['h'];
 	}
 	if ($dico) {
-		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
+		$query2 = "SELECT $select_hash FROM spip_index_dico WHERE "
+			.join(" OR ", $dico);
 		$result2 = spip_query($query2);
 		while ($row2 = spip_fetch_array($result2))
-			$h[] = "0x".$row2["hx"];
+			$h[] = $hex_fmt.$row2['h'];
 	}
 	if ($h_strict)
 		$hash_recherche_strict = join(",", $h_strict);
