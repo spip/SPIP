@@ -40,7 +40,7 @@ function surligner_mots($page, $mots) {
 	// de recherche par les choix correspondants en syntaxe regexp (!)
 	$mots = split("[[:space:]]+", $mots);
 	while (list(, $mot) = each ($mots)) {
-		if (strlen($mot) > 3) {
+		if (strlen($mot) >= 2) {
 			$mot = strtr($mot, $accents, "AAAAAAaaaaaaOOOOOOooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn");
 			$mot = strtr(strtolower($mot), $accents_regexp);
 			$mots_surligne[] = $mot;
