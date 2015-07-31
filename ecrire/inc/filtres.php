@@ -672,7 +672,7 @@ function normaliser_date($date) {
 		if (preg_match("#^([12][0-9]{3})([-/]00)?( [-0-9:]+)?$#", $date, $regs))
 			$date = $regs[1]."-01-01".$regs[3];
 		else if (preg_match("#^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$#", $date, $regs))
-			$date = preg_replace("@/@","-",$regs[1])."-00".$regs[3];
+			$date = preg_replace("@/@","-",$regs[1])."-01".$regs[3];
 		else
 			$date = date("Y-m-d H:i:s", strtotime($date));
 	}
