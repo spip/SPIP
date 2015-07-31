@@ -131,7 +131,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		marquer_doublons_documents($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc, $serveur);
 
 		// Notifications, gestion des revisions...
-		// en standard, appelle |nouvelle_revision ci-dessous
+		// appelle |enregistrer_nouvelle_revision @inc/revisions
 		pipeline('post_edition',
 			array(
 				'args' => array(
@@ -370,30 +370,6 @@ function revision_forum($id_forum, $c=false) {
 		// & meme ca ca pourrait etre optionnel
 		sql_updateq("spip_forum", array("date_thread" => date('Y-m-d H:i:s')), "id_thread=".$t);
 	}
-}
-
-
-// pipeline appelant la fonction de sauvegarde de la premiere revision
-// d'un article avant chaque modification de contenu
-// http://doc.spip.org/@premiere_revision
-function premiere_revision($x) {
-	// Stockage des versions : creer une premiere version si non-existante
-	if ($GLOBALS['meta']["articles_versions"]=='oui') {
-		include_spip('inc/revisions');
-		$x = enregistrer_premiere_revision($x);
-	}
-	return $x;
-}
-
-// pipeline appelant la fonction de sauvegarde de la nouvelle revision
-// d'un article apres chaque modification de contenu
-// http://doc.spip.org/@nouvelle_revision
-function nouvelle_revision($x) {
-	if ($GLOBALS['meta']["articles_versions"]=='oui') {
-		include_spip('inc/revisions');
-		$x = enregistrer_nouvelle_revision($x);
-	}
-	return $x;
 }
 
 ?>

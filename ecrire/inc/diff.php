@@ -259,7 +259,7 @@ class DiffPara {
 	function segmenter($texte) {
 		$paras = array();
 		$texte = trim($texte);
-		while (preg_match('/[\.!\?]+\s*/u', $texte, $regs)) {
+		while (preg_match('/[\.!\?\]]+\s*/u', $texte, $regs)) {
 			$p = strpos($texte, $regs[0]) + strlen($regs[0]);
 			$paras[] = substr($texte, 0, $p);
 			$texte = substr($texte, $p);
