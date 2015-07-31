@@ -257,7 +257,7 @@ function balise_NOM_SITE_dist($p) {
 # a part [(#ID_SYNDIC|generer_url_site)]
 
 // http://doc.spip.org/@balise_URL_FORUM_dist
-function balise_URL_FORUM_dist($p, $show_thread = 'false') {
+function balise_URL_FORUM_dist($p) {
 	$_id_forum = interprete_argument_balise(1,$p);
 	if (!$_id_forum)
 		$_id_forum = champ_sql('id_forum',$p);

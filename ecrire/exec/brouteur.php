@@ -57,7 +57,6 @@ function exec_brouteur_dist()
 			}
 		}
 
-		spip_log ("rub " . $dest[0] . ' ' . $dest[$nb_col-2]);
 		if ($dest[0] > 0 AND $dest[$nb_col-2]) {
 			
 			$la_rubrique = $dest[0];
