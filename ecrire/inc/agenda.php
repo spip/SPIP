@@ -695,10 +695,12 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			else $decale = (4 * $fontsize);
 			if ($bas > $bas_prec) $bas_prec = $bas;
 			
-			$url = $evenement['URL']; 
+			$url = isset($evenement['URL'])
+			  ? $evenement['URL'] : ''; 
 			$desc = propre($evenement['DESCRIPTION']);
 			$perso = substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
-			$lieu = $evenement['LOCATION'];
+			$lieu = isset($evenement['LOCATION']) ?
+				$evenement['LOCATION'] : '';
 			$sum = ereg_replace(' +','&nbsp;', typo($evenement['SUMMARY']));
 			if (!$sum) { $sum = $desc; $desc = '';}
 			if (!$sum) { $sum = $lieu; $lieu = '';}

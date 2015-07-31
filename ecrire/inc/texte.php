@@ -707,7 +707,7 @@ function calculer_url ($lien, $texte='', $pour='url') {
 	if (substr($lien,0,1) == '#')
 		$class = 'spip_ancre';
 
-	return ($pour == 'url') ? $lien : array($lien, $class, $texte, $lang);
+	return ($pour == 'url') ? $lien : array($lien, $class, $texte, '');
 }
 
 // http://doc.spip.org/@calculer_url_article
@@ -1147,6 +1147,7 @@ function paragrapher($letexte, $forcer=true) {
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
 
+	$bulle = $hlang = '';
 	// title et hreflang donnes par le raccourci ?
 	if (preg_match(',^(.*?)([|]([^<>]*?))?([{]([a-z_]+)[}])?$,', $regs[1], $m)) {
 		// |infobulle ?

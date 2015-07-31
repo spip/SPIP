@@ -26,16 +26,15 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	$distant = ($mode == 'document' AND $type);
 	if ($intitule) $intitule = "<span>$intitule</span><br />";
 
+	$dir_ftp = '';
 	if (!_DIR_RESTREINT AND !$vignette_de_doc AND $GLOBALS['flag_upload']) {
-		if($dir_ftp = determine_upload()) {
+		if($dir = determine_upload()) {
 			// quels sont les docs accessibles en ftp ?
-			$l = texte_upload_manuel($dir_ftp, '', $mode);
+			$l = texte_upload_manuel($dir, '', $mode);
 			// s'il n'y en a pas, on affiche un message d'aide
 			// en mode document, mais pas en mode vignette
 			if ($l OR ($mode == 'document'))
-				$dir_ftp = afficher_transferer_upload($l, $dir_ftp);
-			else
-				$dir_ftp = '';
+				$dir_ftp = afficher_transferer_upload($l, $dir);
 		}
 	}
   

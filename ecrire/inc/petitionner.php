@@ -96,7 +96,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 		$class = '';
 	} else $class =" visible_au_chargement";
 
-	$atts .= " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
+	$atts = " class='fondo spip_xx-small$class' style='float: $spip_lang_right;' id='valider_petition'";
 
 	$res = ajax_action_post('petitionner', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
 
