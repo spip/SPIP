@@ -229,7 +229,14 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$result->id_parent = $id_parent;
 		$result->id_boucle = $id_boucle;
 
-		$type = strtolower($match[2]);
+		$type = $match[2];
+		if ($p =strpos($type, ':'))
+		  {
+		    $result->sql_serveur = substr($type,0,$p);
+		    $type = substr($type,$p+1);
+		    spip_log($type);
+		  }
+		$type = strtolower($type);
 		if ($type == 'sites') $type = 'syndication'; # alias
 
 		//
