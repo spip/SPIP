@@ -518,7 +518,7 @@ function extraire_lien ($regs) {
 
 	$lien_texte = $regs[1];
 
-	$lien_url = trim($regs[3]);
+	$lien_url = entites_html(trim($regs[3]));
 	$compt_liens++;
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
@@ -747,13 +747,9 @@ function traiter_raccourcis_generale($letexte) {
 	//
 	// Notes de bas de page
 	//
-	$texte_a_voir = $letexte;
-	$texte_vu = '';
-	$regexp = "\[\[(([^]]|[^]]\][^]])*)\]\]";
-	/* signifie : deux crochets ouvrants, puis pas-crochet-fermant ou
-		crochet-fermant entoure de pas-crochets-fermants (c'est-a-dire
-		tout sauf deux crochets fermants), puis deux fermants */
-	while (ereg($regexp, $texte_a_voir, $regs)) {
+	$regexp = ',\[\[(.*?)\]\],ms';
+	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs) {
 		$note_source = $regs[0];
 		$note_texte = $regs[1];
 		$num_note = false;
@@ -787,20 +783,20 @@ function traiter_raccourcis_generale($letexte) {
 		}
 
 		// dans le texte, mettre l'appel de note a la place de la note
-		$pos = strpos($texte_a_voir, $note_source);
-		$texte_vu .= substr($texte_a_voir, 0, $pos) . $insert;
-		$texte_a_voir = substr($texte_a_voir, $pos + strlen($note_source));
+		$pos = strpos($letexte, $note_source);
+		$letexte = substr($letexte, 0, $pos) . $insert
+			. substr($letexte, $pos + strlen($note_source));
 	}
-	$letexte = $texte_vu . $texte_a_voir;
 
 	//
-	// Raccourcis automatiques vers un glossaire
+	// Raccourcis automatiques [?SPIP] vers un glossaire
 	// (on traite ce raccourci en deux temps afin de ne pas appliquer
 	//  la typo sur les URLs, voir raccourcis liens ci-dessous)
 	//
 	if ($url_glossaire_externe) {
-		$regexp = "\[\?+([^][<>]+)\]";
-		while (ereg($regexp, $letexte, $regs)) {
+		$regexp = "|\[\?+([^][<>]+)\]|";
+		if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
+		foreach ($matches as $regs) {
 			$terme = trim($regs[1]);
 			$terme_underscore = urlencode(ereg_replace('[[:space:]]+', '_', $terme));
 			if (strstr($url_glossaire_externe,"%s"))
@@ -815,18 +811,31 @@ function traiter_raccourcis_generale($letexte) {
 
 
 	//
-	// Raccourcis liens (cf. fonction extraire_lien ci-dessus)
+	// Raccourcis ancre [#ancre<-]
 	//
-	$regexp = "\[([^][]*)->(>?)([^]]*)\]";
+	$regexp = "|\[#?([^][]*)<-\]|";
+	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
+		foreach ($matches as $regs)
+			$letexte = str_replace($regs[0],
+			'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
+
+
+	//
+	// Raccourcis liens [xxx->url] (cf. fonction extraire_lien ci-dessus)
+	// Note : complique car c'est ici qu'on applique la typo() !
+	//
+	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|";
 	$texte_a_voir = $letexte;
 	$texte_vu = '';
-	while (ereg($regexp, $texte_a_voir, $regs)) {
+	while (preg_match($regexp, $texte_a_voir, $regs)) {
 		list($insert, $lien) = extraire_lien($regs);
 		$pos = strpos($texte_a_voir, $regs[0]);
 		$texte_vu .= typo(substr($texte_a_voir, 0, $pos)) . $insert;
 		$texte_a_voir = substr($texte_a_voir, $pos + strlen($regs[0]));
 	}
 	$letexte = $texte_vu.typo($texte_a_voir); // typo de la queue du texte
+
+
 
 	//
 	// Tableaux
@@ -968,35 +977,32 @@ function traiter_raccourcis_generale($letexte) {
 	return array($letexte,$mes_notes);
 }
 
-function traiter_les_notes($mes_notes, $les_echap)
-{
-  list($mes_notes,) = traiter_raccourcis_generale($mes_notes);
-  if (ereg('<p class="spip">',$mes_notes))
-    $mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
-  else
-    $mes_notes = '<p class="spip_note">'.$mes_notes."</p>\n";
-  $mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
-  $GLOBALS['les_notes'] .= interdire_scripts($mes_notes);
+function traiter_les_notes($mes_notes, $les_echap) {
+	list($mes_notes,) = traiter_raccourcis_generale($mes_notes);
+	if (ereg('<p class="spip">',$mes_notes))
+		$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+	else
+		$mes_notes = '<p class="spip_note">'.$mes_notes."</p>\n";
+	$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
+	$GLOBALS['les_notes'] .= interdire_scripts($mes_notes);
 }
 
-function traiter_raccourcis($letexte)
-{
-  // echapper les <a href>, <html>...< /html>, <code>...< /code>
-  list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
-  list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
-  if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
-  // Reinserer les echappements
-  return trim(echappe_retour($letexte, $les_echap, "SOURCEPROPRE"));
+function traiter_raccourcis($letexte) {
+	// echapper les <a href>, <html>...< /html>, <code>...< /code>
+	list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
+	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
+	if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
+	// Reinserer les echappements
+	return trim(echappe_retour($letexte, $les_echap, "SOURCEPROPRE"));
 }
 
-function traiter_raccourcis_doublon(&$doublons, $letexte)
-{
-  // echapper les <a href>, <html>...< /html>, <code>...< /code>
-  list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
-  list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
-  if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
-  // Reinserer les echappements
-  return trim(echappe_retour_doublon($letexte, $les_echap, "SOURCEPROPRE", $doublons));
+function traiter_raccourcis_doublon(&$doublons, $letexte) {
+	// echapper les <a href>, <html>...< /html>, <code>...< /code>
+	list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
+	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
+	if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
+	// Reinserer les echappements
+	return trim(echappe_retour_doublon($letexte, $les_echap, "SOURCEPROPRE", $doublons));
 }
 
 
