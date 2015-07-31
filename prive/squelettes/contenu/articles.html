@@ -15,6 +15,6 @@
 ]
 <INCLURE{fond=prive/objets/liste/articles,statut=#GET{status},par=date,id_auteur=#ENV{id_auteur,''},nb=30,env,ajax}>
 
-[(#AUTORISER{creer,article})
+[(#AUTORISER{bouton,articlecreer}|et{#AUTORISER{creer,article}})
 	[(#URL_ECRIRE{article_edit,new=oui}|parametre_url{id_rubrique,#ENV{id_rubrique}}|icone_verticale{<:icone_ecrire_article:>,article,new,right})]
 ]
