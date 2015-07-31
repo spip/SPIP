@@ -89,18 +89,87 @@ else {
 		$fond = 'sommaire';
 	}
 
-	// Particularites de certains squelettes
-	if ($fond == 'login')
-		$forcer_lang = true;
-
-
 	//
 	// Aller chercher la page
 	//
 
 	$tableau_des_erreurs = 	$tableau_des_temps = array();
-	$assembler = charger_fonction('assembler', 'public');
-	$page = $assembler($fond, _request('connect'));
+
+	// Particularites de certains squelettes
+	if ($fond == 'login')
+		$forcer_lang = true;
+
+	if ($forcer_lang AND ($forcer_lang!=='non') AND !_request('action')) {
+		include_spip('inc/lang');
+		verifier_lang_url();
+	}
+
+	$lang = !isset($_GET['lang']) ? '' : lang_select($_GET['lang']);
+
+	if ($ajax = _request('var_ajax'))
+		$ajax_env = ($ajax==='form') ? '' : _request('var_ajax_env');
+	else $ajax_env = '';
+
+	// cas de l'appel qui renvoie une redirection (302) ou rien (204)
+
+	if ($action = _request('action')) {
+		include_spip('inc/autoriser');
+		include_spip('inc/headers');
+		spip_log("je vais appliquer $action et revenir a \n".
+			 $_GET['redirect'] . " ou " .
+			 $_POST['redirect'] );
+		$url = _request('redirect');
+		// pas de urldecode:
+		// - en GET, PHP le fait automatiquement
+		// - en POST, SPIP n'a pas fait d'urlencode
+		if ($ajax_env AND $url) {
+			$url = parametre_url($url,'var_ajax',$ajax,'&');
+			$url = parametre_url($url,'var_ajax_env',$ajax_env,'&');
+			set_request('redirect', $url);
+		}
+		$var_f = charger_fonction($action, 'action');
+		$var_f();
+		spip_log("revenir a $url");
+		if (isset($GLOBALS['redirect'])
+		OR $GLOBALS['redirect'] = _request('redirect')) {
+			// pour les Ajax qui refabriquent le redirect
+			// (il y en a ?)
+			if ($ajax_env AND ($GLOBALS['redirect'] !== $url)) {
+				$GLOBALS['redirect'] = parametre_url($GLOBALS['redirect'],'var_ajax',$ajax,'&');	
+				$GLOBALS['redirect'] = parametre_url($url,'var_ajax_env',$ajax_env,'&');	
+			}
+			redirige_par_entete($GLOBALS['redirect']);
+		}
+		if (!headers_sent()
+			AND !ob_get_length())
+				http_status(204); // No Content
+		exit;
+	}
+
+	// Il y a du texte a produire, charger le metteur en page
+	include_spip('public/assembler');
+
+	// traiter les appels de bloc ajax (ex: pagination)
+
+	if ($ajax_env) {
+		include_spip('inc/filtres');
+		include_spip('inc/actions');
+		if ($args = decoder_contexte_ajax($ajax_env)
+		AND $fond = $args['fond']) {
+				$contexte = calculer_contexte();
+				$contexte = array_merge($args, $contexte);
+				$page = evaluer_fond($fond,$contexte);
+				$texte = $page['texte'];
+		} else $texte = _L('signature ajax bloc incorrecte');
+		ajax_retour($texte);
+		exit;
+	}
+
+	// cas des formulaires charger/verifier/traiter
+
+	if (traiter_formulaires_dynamiques()) exit;
+
+	$page = assembler($fond, _request('connect'), $lang);
 
 	if (isset($page['status'])) {
 		include_spip('inc/headers');

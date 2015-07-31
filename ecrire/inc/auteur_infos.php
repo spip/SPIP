@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redirect, $quoi="") {
 
 	if (!$new AND $quoi!="edit") {
-		$infos = legender_auteur_voir($auteur, $redirect);
+		$infos = legender_auteur_voir($auteur);
 	} else
 		$infos = '';
 
@@ -162,7 +162,7 @@ function legender_auteur_voir($auteur) {
 		$res .= icone_inline($clic, $h, "redacteurs-24.gif", "edit.gif", $spip_lang_right);
 
 		$res .= http_script("
-		var intitule_bouton = ".sql_quote($retour).";
+		var intitule_bouton = "._q($retour).";
 		jQuery('#bouton_modifier_auteur a')
 		.click(function() {
 			jQuery('#auteur_infos_edit')

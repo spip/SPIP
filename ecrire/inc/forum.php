@@ -86,7 +86,7 @@ function navigation_trouve_date($date, $nom_date, $pas, $query)
 // n'est pas effacable
 
 // http://doc.spip.org/@boutons_controle_forum
-function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
+function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip, $script, $args) {
 	$controle = $original = $spam = '';
 
 
@@ -164,7 +164,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			return;
 	}
 
-	$lien = self('&') . "#id$id_forum";
+	$lien = _DIR_RESTREINT_ABS . generer_url_ecrire($script, $args, true, true) . "#id$id_forum";
 	$boutons ='';
 	if ($suppression)
 	  $boutons .= icone_inline(_T('icone_supprimer_message'), generer_action_auteur('instituer_forum',"$id_forum-$suppression", $lien),
@@ -177,8 +177,8 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
-	  $dblret = rawurlencode(url_absolue($lien));
-	  $boutons .= icone_inline(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true)),
+	  $dblret = rawurlencode($lien);
+	  $boutons .= icone_inline(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer_forum',"$id_forum-$valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=$dblret", true, true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
 	}
@@ -400,7 +400,7 @@ function enregistre_et_modifie_forum($id_forum, $c=false) {
 //
 
 // http://doc.spip.org/@afficher_forum
-function afficher_forum($query, $retour, $arg, $controle_id_article = false) {
+function afficher_forum($query, $retour, $arg, $controle_id_article = false, $script='', $argscript='') {
 	global $spip_display;
 	static $compteur_forum = 0;
 	static $nb_forum = array();
@@ -425,8 +425,8 @@ function afficher_forum($query, $retour, $arg, $controle_id_article = false) {
 				'WHERE' => "id_parent='" . $row['id_forum'] . "'" . ($controle_id_article ? '':" AND statut<>'off'"),
 				'ORDER BY' => "date_heure");
 
-			$bloc = afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg)
-			. afficher_forum($query, $retour, $arg, $controle_id_article);
+			$bloc = afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $thread, $retour, $arg, $script, $argscript)
+			  . afficher_forum($query, $retour, $arg, $controle_id_article, $script, $argscript);
 
 			$res .= ajax_action_greffe('poster_forum_prive', $row['id_forum'], $bloc); 
 		}
@@ -441,7 +441,7 @@ function afficher_forum($query, $retour, $arg, $controle_id_article = false) {
 // plus les lignes verticales de conduite
 
 // http://doc.spip.org/@afficher_forum_thread
-function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg) {
+function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_forum, $i, $retour, $arg,  $script, $argscript) {
 	global $spip_lang_right, $spip_display;
 	static $voir_logo = array(); // pour ne calculer qu'une fois
 
@@ -509,7 +509,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 	$res .= "<table$style width='100%' cellpadding='5' cellspacing='0'>\n<tr><td>"
 	.  afficher_forum_auteur($row)
 	. (!$controle_id_article ? '' :
-	   boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip))
+	   boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$id_article", $ip,  $script, $argscript))
 	. "<div style='font-weight: normal;'>"
 	. safehtml(justifier(propre($texte)))
 	. "</div>\n"

@@ -105,7 +105,7 @@ function forum_parent($id_forum) {
 }
 
 // http://doc.spip.org/@controle_forum_boucle
-function controle_forum_boucle($row) {
+function controle_forum_boucle($row, $args) {
 
 	$id_forum = $row['id_forum'];
 	$forum_id_parent = $row['id_parent'];
@@ -176,7 +176,7 @@ function controle_forum_boucle($row) {
 	}
 	$controle .= safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>");
 
-	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
+	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip, 'controle_forum', $args);
 
 	$suite = "\n<br />$avant<b>$pref
 	<a href='$url'>$titre</a></b>"  
@@ -258,7 +258,7 @@ function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $r
 	
 	$res = '';
 	while ($row = sql_fetch($select)) 
-		$res .= controle_forum_boucle($row);
+		$res .= controle_forum_boucle($row, "$args$type&debut=$debut");
 	$res =  "<br />$nav<br />$res<br />$nav";	
 
 	if (_AJAX) {

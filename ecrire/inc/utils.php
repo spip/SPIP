@@ -935,21 +935,9 @@ function generer_form_public($script, $corps, $atts='') {
 // http://doc.spip.org/@generer_url_action
 function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
 
-	$url = _DIR_RACINE  ? generer_url_ecrire() :  generer_url_public();
-	$url = parametre_url($url,'action',$script);
-	if ($args) $url .= quote_amp('&'.$args);
-
-	if ($redirect = parametre_url($url,'redirect')){
-		// si jamais l'url d'action contient un redirect=ecrire/...
-		// supprimer ce ecrire/ si on y est deja puisqu'on ne le quitte pas
-		if (test_espace_prive()
-		  AND substr($redirect,0,strlen(_DIR_RESTREINT_ABS))==_DIR_RESTREINT_ABS)
-			$redirect = './'.substr($redirect,strlen(_DIR_RESTREINT_ABS));
-			$url = parametre_url($url,'redirect',$redirect);
-	}
-
-	if ($no_entities) $url = str_replace('&amp;','&',$url);
-	return $url;
+        return  generer_url_public('',
+                                  "action=$script" .($args ? "&$args" : ''),
+                                  $no_entities);
 }
 
 
