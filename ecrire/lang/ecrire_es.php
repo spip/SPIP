@@ -562,6 +562,7 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'info_url' => 'URL:',
 	'info_url_proxy' => 'URL del proxy',
 	'info_url_site' => 'URL del sitio:',
+	'info_url_site_pas_conforme' => 'la URL del sitio no es válida.',
 	'info_url_test_proxy' => 'URL de prueba',
 	'info_urlref' => 'Enlace hipertexto:',
 	'info_utilisation_spip' => 'Puede comenzar a utilizar el sistema de publicación asistida...',
