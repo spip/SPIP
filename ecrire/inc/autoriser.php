@@ -697,10 +697,10 @@ function autoriser_forum_admin_suivi_bouton_dist($faire, $type='', $id=0, $qui =
 	return $GLOBALS['visiteur_session']['statut']=='0minirezo';
 }
 function autoriser_messagerie_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
+	return $GLOBALS['meta']['messagerie_agenda']!=='non';
 }
 function autoriser_calendrier_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return true;
+	return $GLOBALS['meta']['messagerie_agenda']!=='non';
 }
 
 
