@@ -106,6 +106,7 @@ function exec_config_fonctions_dist()
 
 // http://doc.spip.org/@afficher_choix_vignette
 function afficher_choix_vignette($process) {
+	static $cpt_cellule = 0;
 	global $couleur_foncee;
 	//global $taille_preview;
 	$taille_preview = 120;
@@ -118,14 +119,24 @@ function afficher_choix_vignette($process) {
 		
 	} */
 
-	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'",
-	($border ? "style='border:2px;border-style: dotted; border-color: $couleur_foncee;'" : ''),
-	"><a href='" , generer_url_ecrire("config_fonctions","image_process=$process"), 
-	  "'><img src='", generer_url_action("tester", "arg=$process"),
+	$retour = '';
+
+	if($cpt_cellule>=3) {
+		$cpt_cellule = 0;
+		$retour .= "\n</tr><tr>\n";
+	}
+	else {
+		$cpt_cellule += 1;
+	}
+
+	$retour .= "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'".
+	($border ? "style='border:2px;border-style: dotted; border-color: $couleur_foncee;'" : '').
+	"><a href='" . generer_url_ecrire("config_fonctions", "image_process=$process"). 
+	  "'><img src='". generer_url_action("tester", "arg=$process").
 	  "' /></a><br />";
-	if ($border) echo "<b>$process</b>";
-	else echo "$process";
-	echo "</div></td>\n";
+	$retour .= $border ? "<b>$process</b>" : "$process";
+	$retour .= "</div></td>\n";
+	return $retour;
 }
 
 // http://doc.spip.org/@vignettes_config
@@ -175,24 +186,24 @@ function vignettes_config()
 	OR function_exists('ImagePng')
 	) {
 		$nb_process ++;
-		afficher_choix_vignette($p = 'gd1');
+		echo afficher_choix_vignette($p = 'gd1');
 
 		if (function_exists("ImageCreateTrueColor")) {
-			afficher_choix_vignette($p = 'gd2');
+			echo afficher_choix_vignette($p = 'gd2');
 			$nb_process ++;
 		}
 	}
 
-	afficher_choix_vignette($p = 'netpbm');
+	echo afficher_choix_vignette($p = 'netpbm');
 	$nb_process ++;
 
 	if (function_exists('imagick_readimage')) {
-		afficher_choix_vignette('imagick');
+		echo afficher_choix_vignette('imagick');
 		$nb_process ++;
 	}
 
 	if ($convert_command) {
-		afficher_choix_vignette($p = 'convert');
+		echo afficher_choix_vignette($p = 'convert');
 		$nb_process ++;
 	}
 
