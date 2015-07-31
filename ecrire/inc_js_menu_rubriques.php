@@ -157,9 +157,9 @@ function js_menu_rubriques_dist()
 	header('Content-type: text/javascript; charset='.$GLOBALS['meta']['charset']);
 	include_ecrire("inc_texte.php3");
 	echo "document.write(\"";
-	echo "<div valign='top' width='200'>";
+	echo "<table><tr><td valign='top' width='200'>";
 	echo bandeau_menu();
-	echo "</div>";
+	echo "</td></tr></table>";
 	echo "\");\n";
 }
 ?>
