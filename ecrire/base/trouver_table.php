@@ -37,7 +37,7 @@ function base_trouver_table_dist($nom, $serveur=''){
 	OR !preg_match('/^[a-zA-Z0-9._-]*/',$nom))
 		return null;
 
-	$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
+	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 
 	// le nom du cache depend du serveur mais aussi du nom de la db et du prefixe
 	// ce qui permet une auto invalidation en cas de modif manuelle du fichier
