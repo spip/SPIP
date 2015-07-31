@@ -152,9 +152,10 @@ if ($var_f = _request('transformer_xml')) {
 	$exec = $var_f;
 }
 
-if ($var_f = tester_url_ecrire($exec))
-
+if ($var_f = tester_url_ecrire($exec)) {
+	$var_f = charger_fonction ($var_f);
 	$var_f(); // at last
+}
 else {
 	// Rien de connu: rerouter vers exec=404 au lieu d'echouer
 	// ce qui permet de laisser la main a un plugin
