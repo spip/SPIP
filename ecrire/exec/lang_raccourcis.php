@@ -25,7 +25,7 @@ function exec_lang_raccourcis_dist() {
 	$fichiers = preg_files(repertoire_lang().'[a-z_]+\.php[3]?$');
 	foreach ($fichiers as $fichier) {
 		if (preg_match(',/([a-z]+)_([a-z_]+)\.php[3]?$,', $fichier, $r))
-			$modules[$r[1]] ++;
+			isset($modules[$r[1]])?($modules[$r[1]] ++):($modules[$r[1]]=1);
 	}
 
 	$modules = array_keys($modules);
@@ -76,6 +76,7 @@ function afficher_raccourcis($module = "public") {
 	$tableau = $GLOBALS['i18n_' . $module . '_' . $spip_lang];
 	ksort($tableau);
 
+	$aff_nom_module= "";
 	if ($module != "public" AND $module != "local")
 		$aff_nom_module = "$module:";
 
@@ -86,7 +87,7 @@ function afficher_raccourcis($module = "public") {
 		if (ereg("^".$module."\_([a-z_]+)\.php[3]?$", $f, $regs))
 				$langue_module[$regs[1]] = traduire_nom_langue($regs[1]);
 
-	if ($langue_module) {
+	if (isset($langue_module) && ($langue_module)) {
 		ksort($langue_module);
 		echo "<div class='arial2'>"._T('module_texte_traduction',
 			array('module' => $module));
@@ -97,6 +98,7 @@ function afficher_raccourcis($module = "public") {
 	echo "\n<table cellpadding='3' cellspacing='1' border='0'>";
 	echo "\n<tr style='background-color: $couleur_foncee; color:white;'><td class='verdana1'><b>"._T('module_raccourci')."</b></td>\n<td class='verdana2'><b>"._T('module_texte_affiche')."</b></td></tr>\n";
 
+	$i = 0;
 	foreach ($tableau as $raccourci => $val) {
 		$bgcolor = alterner($i++, '#eeeeee','white');
 		echo "\n<tr style='background-color: $bgcolor'><td class='verdana2'><b>&lt;:$aff_nom_module$raccourci:&gt;</b></td>\n<td class='arial2'>".$val."</td></tr>";
