@@ -49,8 +49,8 @@
     		</li></ul></fieldset>
     		]
 				<fieldset><h3 class="legend"><:info_qui_attribue_mot_cle:></h3><ul><li class="editer_groupe_mots_editeur">
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_minirezo' value='oui'[(#ENV{minirezo}|!={non}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_comite' value='oui'[(#ENV{comite}|!={non}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_minirezo' value='oui'[(#ENV{minirezo}|=={oui}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:bouton_checkbox_qui_attribue_mot_cle_administrateurs:></label></div>
+	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces_comite' value='oui'[(#ENV{comite}|=={oui}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_redacteurs:></label></div>
 				[(#ENV{config}|table_valeur{forums_publics}|=={non}|non)
 					[(#ENV{config}|table_valeur{mots_cles_forums}|=={oui}|ou{#ENV{forum}|=={oui}}|oui)
 	    		<div class='choix'><input type='checkbox' class='checkbox' name='acces_forum' value='oui'[(#ENV{forum}|=={oui}|oui)checked='checked'] id='acces_forum' /><label for='acces_comite'><:bouton_checkbox_qui_attribue_mot_cle_visiteurs:></label></div>
