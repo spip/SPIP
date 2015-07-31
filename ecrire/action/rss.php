@@ -190,9 +190,15 @@ function rss_sites($critere) {
 // http://doc.spip.org/@action_rss_dist
 function action_rss_dist()
 {
-  global $args, $cle, $fmt, $id, $lang, $op;
+	$args = _request('args');
+	$cle = _request('cle');
+	$fmt = _request('fmt');
+	$id = _request('id');
+	$lang = _request('lang');
+	$op  = _request('op');
 
-  charger_generer_url();
+	spip_log("$id $fmt $op");
+	charger_generer_url();
 
 //
 // Verifier la securite du lien et decoder les arguments
@@ -297,13 +303,13 @@ switch($op) {
 		break;
 }
 
- if (!$fmt) $fmt = 'rss';
- $f = charger_fonction($fmt, 'xml');
- $f($rss, array(
-	'title' => "[".$GLOBALS['meta']['nom_site']."] RSS ".$title,
-	'url' => $url,
-	'language'=> $GLOBALS['spip_lang']));
+	if (!$fmt) $fmt = 'rss';
+	$f = charger_fonction($fmt, 'xml');
+	$f($rss, array(
+		'title' => "[".$GLOBALS['meta']['nom_site']."] RSS ".$title,
+		'url' => $url,
+		'language'=> $GLOBALS['spip_lang']));
  
- spip_log("spip_rss applique $f sur '$fmt $opt $args' - " . spip_timer('rss'));
+	spip_log("spip_rss applique $f sur '$fmt $op $args $id $cle' - " . spip_timer('rss'));
 }
 ?>
