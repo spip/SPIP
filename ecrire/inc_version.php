@@ -320,6 +320,7 @@ $spip_pipeline = array(
 	'pre_edition' => '|premiere_revision',
 	'post_edition' => '|nouvelle_revision',
 	'pre_insertion' => '',
+	'post_insertion' => '',
 	'pre_syndication' => '',
 	'post_syndication' => '',
 	'pre_indexation' => '',

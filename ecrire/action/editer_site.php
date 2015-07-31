@@ -149,7 +149,18 @@ function insert_syndic($id_rubrique) {
 		)
 	);
 
-	return sql_insertq("spip_syndic", $champs);
+	$id_syndic = sql_insertq("spip_syndic", $champs);
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_syndic',
+				'id_objet' => $id_syndic
+			),
+			'data' => $champs
+		)
+	);
+
+	return $id_syndic;
 }
 
 

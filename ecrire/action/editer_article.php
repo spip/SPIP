@@ -141,7 +141,18 @@ function insert_article($id_rubrique) {
 			'data' => $champs
 		)
 	);
+
 	$id_article = sql_insertq("spip_articles", $champs);
+
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_articles',
+				'id_objet' => $id_article
+			),
+			'data' => $champs
+		)
+	);
 
 	// controler si le serveur n'a pas renvoye une erreur
 	if ($id_article > 0 AND $GLOBALS['visiteur_session']['id_auteur'])
