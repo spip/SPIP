@@ -925,16 +925,6 @@ function fin_page()
 		$chrono = chrono_requete($GLOBALS['tableau_des_temps']);
 	} else $chrono = '';
 
-	// cf. public/assembler, fonction f_msie()
-	// test si MSIE et sinon quitte
-	if (
-		strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'msie')
-		AND preg_match('/MSIE /i', $_SERVER['HTTP_USER_AGENT'])
-		AND $msiefix = charger_fonction('msiefix', 'inc')
-	)
-		$fix_png = presentation_msiefix();
-	else
-		$fix_png = '';
 
 	return debut_grand_cadre(true)
 	. (($spip_display == 4)
@@ -954,7 +944,6 @@ function fin_page()
 
 	. fin_grand_cadre(true)
 	. "</div>\n" // cf. div centered ouverte dans conmmencer_page()
-	. $fix_png
 	. $GLOBALS['rejoue_session']
 	. '<div style="background-image: url(\''
 	. generer_url_action('cron')
