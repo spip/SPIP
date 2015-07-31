@@ -20,7 +20,7 @@ function formulaires_editer_auteur_charger_dist($id_auteur='new', $retour='', $a
  * ne representent pas l'objet edite
  */
 function formulaires_editer_auteur_identifier_dist($id_auteur='new', $retour='', $associer_objet='', $config_fonc='auteurs_edit_config', $row=array(), $hidden=''){
-	return serialize(array($id_auteur,$associer_objet));
+	return serialize(array(intval($id_auteur),$associer_objet));
 }
 
 
