@@ -50,14 +50,22 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 
 // {doublons} ou {unique}
 // http://www.spip.net/@doublons
+// attention: boucle->doublons designe une variable qu'on affecte
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->doublons = "'" . $boucle->type_requete . "' . " .
-	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	$NOT_IN = $crit->not ? '' : 'NOT';
 	$boucle->where[] = '" .' .
-		"calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary."', "
-		.'"0".$doublons['.$boucle->doublons."], '$NOT_IN') . \"";
+	  "calcul_mysql_in('".$boucle->id_table . '.' . $boucle->primary .
+	  "', " .
+	  '"0".$doublons[' . 
+	  $boucle->doublons .
+	  " = ('" .
+	  $boucle->type_requete . 
+	  "' . " .
+	  calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) .
+	  ')], \'' . 
+	  $NOT_IN . 
+	  " ') . \"";
 }
 
 // {lang_select}

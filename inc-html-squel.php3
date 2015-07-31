@@ -381,11 +381,11 @@ function phraser_criteres($params, &$result) {
 			else { 
 			  // pas d'emplacement statique, faut un dynamique
 			  /// mais il y a 2 cas qui ont les 2 !
-			  if (($param == 'unique') || ($param == 'doublons'))
+			  if (($param == 'unique') || (ereg('^!?doublons *', $param)))
 			    {
-			      // sera remplace ensuite par la bonne valeur
-			      // mais il faut l'indiquer tout de suite
-			      $result->doublons = true;
+			      // cette variable sera inseree dans le code
+			      // et son nom sert d'indicateur des maintenant
+			      $result->doublons = '$doublons_index';
 			      $param = 'doublons';
 			    }
 			  elseif ($param == 'recherche')
@@ -489,7 +489,6 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 			$milieu = substr($result->apres,1);
 			$result->apres = "";
 			phraser_criteres($result->param, $result);
-
 		}
 		//
 		// Recuperer la partie conditionnelle avant
