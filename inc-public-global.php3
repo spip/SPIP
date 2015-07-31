@@ -186,6 +186,7 @@ $headers_only = ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD');
 if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui' && !$HTTP_COOKIE_VARS['spip_admin']) {
 	if ($lastmodified) 
 		$headers_only |= http_last_modified($lastmodified, $lastmodified + $delais);
+	if ($headers_only) exit;
 }
 else {
 	@Header("Expires: 0");
