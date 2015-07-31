@@ -66,7 +66,7 @@ class Boucle {
 	var $lien = false;
 	var $sous_requete = false;
 	var $hierarchie = '';
-	var $statut = false;
+	var $statut = false; # definition/surcharge du statut des elements retournes
 	// champs pour la construction du corps PHP
 	var $id_table;
 	var $primary;
@@ -98,8 +98,7 @@ class Champ {
 	var $boucles;
 	var $type_requete;
 	var $code;	// code du calcul
-	var $statut;	// 'numerique, 'h'=texte (html) ou 'p'=script (php) ?
-			// -> definira les pre et post-traitements obligatoires
+	var $interdire_scripts = true; // false si on est sur de cette balise
 	// tableau pour la production de code dependant du contexte
 	// id_mere;  pour TOTAL_BOUCLE hors du corps
 	// document; pour embed et img dans les textes
@@ -122,7 +121,7 @@ class Idiome {
 	var $boucles;
 	var $type_requete;
 	var $code;
-	var $statut;
+	var $interdire_scripts = false;
 	var $descr = array();
 	var $ligne = 0; 
 }
@@ -135,7 +134,7 @@ class Polyglotte {
 //
 // Globales de description de la base
 
-//ces variabales ne sont pas initialisees par "$var = array()"
+//ces variables ne sont pas initialisees par "$var = array()"
 // afin de permettre leur extension dans mes_options.php etc
 
 global $tables_des_serveurs_sql, $tables_principales; // (voir inc_serialbase)

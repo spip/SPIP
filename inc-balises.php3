@@ -76,47 +76,47 @@ function balise_distante_interdite($p) {
 //
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['nom_site']";
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
 function balise_EMAIL_WEBMASTER_dist($p) {
 	$p->code = "\$GLOBALS['meta']['email_webmaster']";
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
 function balise_CHARSET_dist($p) {
 	$p->code = "\$GLOBALS['meta']['charset']";
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
 function balise_LANG_LEFT_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'left','right')";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_LANG_RIGHT_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'right','left')";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_LANG_DIR_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),'ltr','rtl')";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_PUCE_dist($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "((lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),false,true) && \$GLOBALS['puce_rtl']) ? \$GLOBALS['puce_rtl'] : \$GLOBALS['puce'])";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -127,7 +127,7 @@ function balise_PUCE_dist($p) {
 function balise_DATE_dist ($p) {
 	$_date = champ_sql('date', $p);
 	$p->code = "$_date";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -136,7 +136,7 @@ function balise_DATE_dist ($p) {
 function balise_DATE_REDAC_dist ($p) {
 	$_date = champ_sql('date_redac', $p);
 	$p->code = "$_date";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -145,7 +145,7 @@ function balise_DATE_REDAC_dist ($p) {
 function balise_DATE_MODIF_dist ($p) {
 	$_date = champ_sql('date_modif', $p);
 	$p->code = "$_date";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -156,19 +156,19 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 	AND @file_exists(_DIR_SESSIONS . 'mail.lock')) ?
 	normaliser_date(@filemtime(_DIR_SESSIONS . 'mail.lock')) :
 	\"'0000-00-00'\")";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_DOSSIER_SQUELETTE_dist($p) {
 	$p->code = "'" . addslashes(dirname($p->descr['sourcefile'])) . "'" ;
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['adresse_site']";
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -190,7 +190,7 @@ function balise_URL_ARTICLE_dist($p) {
 			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -201,7 +201,7 @@ function balise_URL_RUBRIQUE_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -212,7 +212,7 @@ function balise_URL_BREVE_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -224,7 +224,7 @@ function balise_URL_MOT_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -241,7 +241,7 @@ function balise_URL_FORUM_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -249,7 +249,7 @@ function balise_URL_DOCUMENT_dist($p) {
 	$p->code = "generer_url_document(" .
 	champ_sql('id_document',$p) . ")";
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -259,20 +259,20 @@ function balise_URL_AUTEUR_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_NOTES_dist($p) {
 	// Recuperer les notes
 	$p->code = 'calculer_notes()';
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
 function balise_RECHERCHE_dist($p) {
 	$p->code = 'htmlspecialchars($GLOBALS["recherche"])';
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -287,7 +287,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 	} else {
 		$p->code = "\$Numrows['$b']['compteur_boucle']";
 		$p->boucles[$b]->cptrows = true;
-		$p->statut = 'num';
+		$p->interdire_scripts = false;
 		return $p;
 	}
 }
@@ -303,7 +303,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 	} else {
 		$p->code = "\$Numrows['$b']['total']";
 		$p->boucles[$b]->numrows = true;
-		$p->statut = 'num';
+		$p->interdire_scripts = false;
 	}
 	return $p;
 }
@@ -320,19 +320,19 @@ function balise_POPULARITE_ABSOLUE_dist($p) {
 	$p->code = 'ceil(' .
 	champ_sql('popularite', $p) .
 	')';
-	$p->statut = 'num';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_POPULARITE_SITE_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_total\'])';
-	$p->statut = 'num';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
 function balise_POPULARITE_MAX_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_max\'])';
-	$p->statut = 'num';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -388,7 +388,7 @@ function calculer_balise_expose($p, $on, $off)
 	$p->code = '(calcul_exposer('
 	.champ_sql($primary_key, $p)
 	.", '$primary_key', \$Pile[0]) ? $on : $off)";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -402,7 +402,7 @@ function balise_EMBED_DOCUMENT_dist($p) {
 	  argumenter_balise($p->fonctions, "|") .
 	  ", \$doublons, '" . $p->descr['documents'] . "')";
 	$p->param = array();
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -431,7 +431,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // ATTENTION: cette balise efface parfois les boutons admin implicites
 function balise_SPIP_CRON_dist ($p) {
 	$p->code = "'<div style=\\'position: absolute; background-image: url(\"spip_background.php3\"); height: 1px; width: 1px;\\'></div>'";
-	$p->statut='php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -445,7 +445,7 @@ function balise_INTRODUCTION_dist ($p) {
 	$_descriptif = champ_sql('descriptif', $p);
 	$p->code = "calcul_introduction('$_type', $_texte, $_chapo, $_descriptif)";
 
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -455,7 +455,7 @@ function balise_INTRODUCTION_dist ($p) {
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "($_lang ? $_lang : \$GLOBALS['spip_lang'])";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -488,7 +488,7 @@ function balise_LESAUTEURS_dist ($p) {
 			"')";
 	}
 
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -509,7 +509,7 @@ function balise_PETITION_dist ($p) {
 			"','" .
 			$p->boucles[$nom]->sql_serveur .
 			"', \$Cache)";
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -520,7 +520,7 @@ function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "(ceil(min(100, 100 * $_popularite
 	/ max(1 , 0 + \$GLOBALS['meta']['popularite_max']))))";
-	$p->statut = 'num';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -631,7 +631,7 @@ function calculer_balise_logo ($p) {
 			(($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
 			",  '$flag_fichier'), $code_lien)";
 	}
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -666,7 +666,7 @@ function balise_EXTRA_dist ($p) {
 		}
 	}
 
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -729,7 +729,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 
-	$p->statut = 'html';
+	#$p->interdire_scripts = true;
 	return $p;
 }
 
@@ -755,7 +755,7 @@ function code_invalideur_forums($p, $code) {
 // http://www.spip.net/@self
 function balise_SELF_dist($p) {
 	$p->code = 'quote_amp($GLOBALS["clean_link"]->getUrl())';
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -786,7 +786,7 @@ function balise_ENV_dist($p) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
 		$p->code = 'serialize($Pile[0])';
-		$p->statut = 'html';
+		#$p->interdire_scripts = true;
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
 		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
@@ -795,7 +795,7 @@ function balise_ENV_dist($p) {
 				$p->code
 				. compose_filtres_args($p, $sinon, ',')
 				. ')';
-		$p->statut = 'php';
+		$p->interdire_scripts = false;
 	}
 
 	return $p;
@@ -807,7 +807,7 @@ function balise_ENV_dist($p) {
 //
 function balise_REM_dist($p) {
 	$p->code="''";
-	$p->statut='php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
