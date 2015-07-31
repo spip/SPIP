@@ -1,4 +1,4 @@
-<div [class="(#ENV{divclass})" ]dir='#LANG_DIR'>[
+<div [class="(#ENV{divclass,spip-admin-bloc})" ]dir='#LANG_DIR'>[
 	<a href='(#ENV{analyser})' class='spip-admin-boutons'><:analyse_xml:>[(#ENV{xhtml_error}|?{' *',''})]</a>][
 	<a href='ecrire/articles.php3?id_article=(#ENV{id_article})' class='spip-admin-boutons'><:admin_modifier_article:> ([(#ENV{id_article})])</a>][
 	<a href='ecrire/breves_voir.php3?id_breve=(#ENV{id_breve})' class='spip-admin-boutons'><:admin_modifier_breve:> ([(#ENV{id_breve})])</a>][
