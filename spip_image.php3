@@ -168,6 +168,9 @@ function ajout_image($source, $dest) {
 function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='', $titre_automatique=true) {
 	global $hash_id_auteur, $hash, $id_article, $type;
 
+	//die ("<li>$orig<li>$source<li>$dest<li>$mode<li>$id_document");
+
+
 	//
 	// Securite
 	//
@@ -293,16 +296,90 @@ if (!$image_name AND $image2) {
 //
 if ($ajout_doc == 'oui') {
 
-	if (ereg("--unzip$",$image_name)){
-		
-		$nom_zip = substr($image_name, 0, strlen($image_name)-7);		
+	if (eregi(".zip$",$image_name) AND !$action_zip){
+		// Pretraitement des fichiers ZIP
+		// Recopier le fichier
+
+		creer_repertoire('IMG', "tmp");
+		creer_repertoire('IMG', "tmp_zip");
+
+		$dest = 'IMG/tmp_zip/';
+		$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($image_name)))));
+		$dest .= ".zip";
+		$n = 0;	
+		if (!deplacer_fichier_upload($image, $dest)) return false;
+
+		$image_name = "$dest";
+
 		
 		require_once('ecrire/pclzip.lib.php');
-  		$archive = new PclZip($nom_zip);
-		$list = $archive->extract(PCLZIP_OPT_PATH, "IMG/tmp", PCLZIP_OPT_REMOVE_ALL_PATH);
+  		$zip = new PclZip($image_name);
+  		
+  		
+		if (($list = $zip->listContent()) == 0) {
+			// pas possible de decompacter: installer comme fichier zip joint
+			$image = $image_name;
+			$supprimer_ecrire_upload = $image;
+		}
+		else {
+			// presenter une interface pour choisir si fichier joint ou decompacter
+			include_ecrire ("inc_presentation.php3");
+			install_debut_html("Fichier ZIP");
 		
-		$image_name = "IMG/tmp";
-		$effacer_tmp = true;
+			
+			echo "<p>Le fichier que vous proposez d'installer est un fichier Zip.</p><p> Ce fichier peut &ecirc;tre :</p>\n\n";
+			
+		
+			if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
+			else $vars = $HTTP_GET_VARS;
+			
+			$link = new Link("spip_image.php3");
+			
+			while (list ($key, $val) = each ($vars)) {
+				if ($key == "image" OR $key == "image2") {
+					$link->addVar("image_name", $image_name);
+				}
+				else {
+					$link->addVar($key, $val);
+				}
+			}		
+
+			echo $link->getForm('POST');
+			
+			echo "<div><input type='radio' name='action_zip' value='telquel'>install&eacute; tel quel, en tant qu'archive compress&eacute;e Zip,</div>";
+			echo "<div><input type='radio' name='action_zip' value='decompacter'>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu'il contient install&eacute; sur le site.</div>";
+			
+			echo "<div>&nbsp;</div>";
+			echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
+			
+			echo "</form>";
+			install_fin_html();
+				
+				
+			die();
+
+
+		}
+		  
+				
+  		
+  		
+		
+	}
+	else if (eregi(".zip$",$image_name)) {
+		if ($action_zip == "telquel") {
+			$effacer_tmp = true;
+			
+			$id_document = ajout_doc($image_name, $image_name, $fichier, "document", $id_document);
+			
+		} else {
+		
+			require_once('ecrire/pclzip.lib.php');
+  			$archive = new PclZip($image_name);
+			$list = $archive->extract(PCLZIP_OPT_PATH, "IMG/tmp", PCLZIP_OPT_REMOVE_ALL_PATH);
+			$image_name = "IMG/tmp";
+			$effacer_tmp = true;
+		}
 	}
 
 
@@ -331,7 +408,10 @@ if ($ajout_doc == 'oui') {
 	
 	if ($effacer_tmp) {
 		$d = opendir("IMG/tmp");
-
+		while ($f = readdir($d)) {
+			if (is_file("IMG/tmp/$f")) @unlink("IMG/tmp/$f");
+		}
+		$d = opendir("IMG/tmp_zip");
 		while ($f = readdir($d)) {
 			if (is_file("IMG/tmp/$f")) @unlink("IMG/tmp/$f");
 		}
