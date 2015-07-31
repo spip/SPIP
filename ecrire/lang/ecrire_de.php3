@@ -896,7 +896,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_page_forum_envoi' => 'Nachricht schicken',
 'titre_page_forum_suivi' => 'Foren moderieren',
 'titre_page_index' => 'Ihr Bereich',
-'titre_page_message_edit' => 'Nachricht weiterleiten',
+'titre_page_message_edit' => 'Nachricht verfassen',
 'titre_page_messagerie' => 'Ihr Nachrichtensystem',
 'titre_page_mots_tous' => 'Schlagworte',
 'titre_page_recherche' => 'Ergebnisse der Suche nach @recherche@',
