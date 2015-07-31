@@ -22,7 +22,8 @@ include_spip('inc/selectionner');
 // http://doc.spip.org/@inc_selectionner_auteur_dist
 function inc_selectionner_auteur_dist($id_article)
 {
-	$idom = 'bloc_selectionner_auteur';
+	static $n = 0;
+	$idom = "selectionner_auteur_$n";
 
     if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_article','inc',true))
         $determiner_non_auteurs = 'determiner_non_auteurs';
@@ -39,12 +40,14 @@ function inc_selectionner_auteur_dist($id_article)
 function selectionner_auteur_boucle($where, $idom)
 {
 	$info = generer_url_ecrire('informer_auteur', "id=");
-	$args = "'$idom" . "_selection', '$info', event";
+	$idom3 = $idom . '_selection';
+	$args = "'$idom3', '$info', event";
 	$res = '';
-	$query = sql_select("nom, id_auteur", "spip_auteurs", $where, '', "nom, statut");
-	while ($row = sql_fetch($query)) {
+	$all = sql_allfetsel("nom, id_auteur", "spip_auteurs", $where, '', "nom, statut");
+	foreach ($all as $row) {
 
 		$id = $row["id_auteur"];
+		$nom = typo(extraire_multi($row["nom"]));
 
 		// attention, les <a></a> doivent etre au premier niveau
 		// et se suivrent pour que changerhighligth fonctionne
@@ -58,12 +61,15 @@ function selectionner_auteur_boucle($where, $idom)
 		. $id
 		. "; aff_selection($id,$args); return false;"
 		. "\"\nondblclick=\""
-		. "findObj_forcer('nouv_auteur').value="
+		  // incomplet: le selecteur devient indisponible. A ameliorer
+		. "findObj_forcer('$idom').parentNode.innerHTML='"
+		. attribut_html($nom)
+		. "'; findObj_forcer('$idom').value="
 		. $id
 		. ";findObj_forcer('selection_auteur').style.display="
 		. "'none'; return false"
 		. "\"><b>"
-		. typo(extraire_multi($row["nom"]))
+		. $nom
 		. "</b></a>";
 	}
 
