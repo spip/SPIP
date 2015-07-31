@@ -43,7 +43,7 @@ function nettoyer_sessions() {
 	$handle = opendir($dir);
 	$t = time();
 	while (($fichier = readdir($handle)) != '') {
-		if (!eregi("^session_[0-9a-f].php3?$", $fichier)) continue;
+		if (!eregi("^session_[0-9a-f]+\.php3?$", $fichier)) continue;
 		$chemin = "$dir/$fichier";
 		if (($t - filemtime($chemin)) > 48 * 3600) {
 			@unlink($chemin);
