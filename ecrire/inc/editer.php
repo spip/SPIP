@@ -55,36 +55,22 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$table_objet = table_objet($type);
 	$table_objet_sql = table_objet_sql($type);
 	$id_table_objet = id_table_objet($type);
-	$new = $id;
-
-	// nouveau ou pas ?
-	if (is_numeric($id))
-		$new = '';
-	else
-		$new = $id;
+	$new = !is_numeric($id);
 
 	// Appel direct dans un squelette
 	if (!$row) {
-		if ($select = charger_fonction($type."_select",'inc',true)){
-			$row = $select($id, $id_parent, $lier_trad);
-		}
-		else {
-			$row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
-		}
-		if ($new OR !$row) {
+		if  (!$new) {
+			if ($select = charger_fonction($type."_select",'inc',true))
+				$row = $select($id, $id_parent, $lier_trad);
+			else $row = sql_fetsel('*',$table_objet_sql,$id_table_objet."=".intval($id));
+			if (!$row) return false; // interdit a l'edition
+			$md5 = controles_md5($row);
+		} else {
 			$trouver_table = charger_fonction('trouver_table','base');
 			if ($desc = $trouver_table($table_objet))
-				foreach($desc['field'] as $k=>$v)
-					if (!isset($row[$k]))
-						$row[$k]='';
+				foreach($desc['field'] as $k=>$v) $row[$k]='';
 		}
-
-		// Ajouter les controles md5 si l'article existe
-		// et n'a pas ete passe en valeur
-		if (!$new)
-			$md5 = controles_md5($row);
 	}
-
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
 	// (et donc: pas de lien de traduction)
 	$id = ($new OR $lier_trad)
