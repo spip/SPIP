@@ -586,7 +586,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_suivi_activite' => 'Sledov&aacute;n&iacute; redaktorsk&eacute; &#269;innosti',
 'info_supprimer_mot' => 'odstranit&nbsp;slovo',
 'info_surtitre' => 'Nad&#345;&iacute;zen&yacute; nadpis:',
-'info_syndication_integrale_1' => 'V&aacute;&#353; web nab&iacute;z&iacute; soubory pro syndikaci (viz &#147;<a href="@url@">@titre@</a>”).',
+'info_syndication_integrale_1' => 'V&aacute;&#353; web nab&iacute;z&iacute; soubory pro syndikaci (viz &#147;<a href="@url@">@titre@</a>â€).',
 'info_syndication_integrale_2' => 'Chcete poslat cel&eacute; &#269;l&aacute;nky, nebo jen prvn&iacute;ch p&aacute;r set znak&#367; jako shrnut&iacute;?',
 'info_taille_maximale_vignette' => 'Maxim&aacute;ln&iacute; velikost n&aacute;hled&#367; generovan&yacute;ch syst&eacute;mem:',
 'info_terminer_installation' => 'Nyn&iacute; m&#367;&#382;ete ukon&#269;it standardn&iacute; instalaci.',
