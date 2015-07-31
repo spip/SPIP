@@ -9,7 +9,9 @@
 		<input type="hidden" name="visible" value="#ENV{visible,0}" id="visible-#ENV{id}"/>
 	  <p class='boutons' style="display:none;"><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_changer:>' /></p>
 	]
+
 		<INCLURE{fond=prive/listes/#ENV{_vue_liee},env,ajax}>
+		[<div class="action"><input type="hidden" name="_oups" value='(#ENV**{_oups})' /><input type="submit" name="annuler_oups" value="Ooops" /></div>]
 
 		[(#ENV{visible,0}|et{#ENV{editable}}|oui)
 			<div class="selecteur[(#ENV{recherche}|oui)filtre]">
