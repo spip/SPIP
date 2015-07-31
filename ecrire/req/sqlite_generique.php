@@ -1184,7 +1184,6 @@ function spip_sqlite_showbase($match, $serveur = '', $requeter = true){
 
 // http://doc.spip.org/@spip_sqlite_showtable
 function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
-
 	$query =
 		'SELECT sql, type FROM'
 		.' (SELECT * FROM sqlite_master UNION ALL'
@@ -1220,17 +1219,22 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 			// par exemple s'il contiennent une virgule.
 			// /!\ cela peut aussi echapper le nom des champs si la table a eu des operations avec SQLite Manager !
 			list($dec, $echaps) = query_echappe_textes($dec);
-			
+
 			// separer toutes les descriptions de champs, separes par des virgules
 			# /!\ explode peut exploser aussi DECIMAL(10,2) !
 			foreach (explode(",", $dec) as $v){
+
 				preg_match("/^\s*([^\s]+)\s+(.*)/", $v, $r);
-				// trim car 'Sqlite Manager' (plugin Firefox) utilise des guillemets
-				// lorsqu'on modifie une table avec cet outil.
-				// possible que d'autres fassent de meme.
-				$k = trim(strtolower(query_reinjecte_textes($r[1], $echaps)), '"'); // nom du champ
+				// Les cles de champs peuvent etre entourees
+				// de guillements doubles " , simples ', graves ` ou de crochets [ ],  ou rien.
+				// http://www.sqlite.org/lang_keywords.html
+				$k = strtolower(query_reinjecte_textes($r[1], $echaps)); // champ, "champ", [champ]...
+				if ($char = strpbrk($k[0], '\'"[`')) {
+					$k = trim($k, $char);
+					if ($char == '[') $k = rtrim($k, ']');
+				}
 				$def = query_reinjecte_textes($r[2], $echaps); // valeur du champ
-				
+
 				# rustine pour DECIMAL(10,2)
 				if (false !== strpos($k, ')')) {
 					$fields[$k_precedent] .= ',' . $k . ' ' . $def;
