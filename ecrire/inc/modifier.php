@@ -126,14 +126,6 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 				}
 		}
 
-
-		// Cas particulier des groupes de mots dont le titre est repris
-		// dans la table spip_mots
-		if ($spip_table_objet == 'spip_groupes_mots'
-		AND isset($champs['titre']))
-			sql_updateq('spip_mots', array('type' => $champs['titre']),
-			'id_groupe='.$id);
-
 		// Invalider les caches
 		if ($options['invalideur']) {
 			include_spip('inc/invalideur');
