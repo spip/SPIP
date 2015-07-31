@@ -26,10 +26,11 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	include_spip('inc/xml');
 	static $infos=array();
 	static $plugin_xml_cache=NULL;
+	include_spip('inc/xml');
 	if (!isset($infos[$dir_plugins][$plug]) OR $force_reload){
 		if ($plugin_xml_cache==NULL){
 			$plugin_xml_cache = array();
-			if (is_file($f=_DIR_TMP."plugin_xml.cache")){
+			if (is_file($f=_DIR_TMP."plugin_xml_cache.gz")){
 				lire_fichier($f,$contenu);
 				$plugin_xml_cache = unserialize($contenu);
 				if (!is_array($plugin_xml_cache)) $plugin_xml_cache = array();
@@ -45,7 +46,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 				$ret = $info;
 		}
 		if (!count($ret)){
-		  if ((@file_exists($dir_plugins))&&(is_dir($dir_plugins))){
+			if ((@file_exists($dir_plugins))&&(is_dir($dir_plugins))){
 				if (@file_exists($f = $dir_plugins."$plug/plugin.xml")) {
 					$arbre = spip_xml_load($f);
 					if (!$arbre OR !isset($arbre['plugin']) OR !is_array($arbre['plugin']))
@@ -99,13 +100,14 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 
 				if ($t=@filemtime($f)){
 					$ret['filemtime'] = $t;
-					$plugin_xml_cache[$plug]=$ret;
-					ecrire_fichier(_DIR_TMP."plugin_xml.cache",serialize($plugin_xml_cache));
+					$plugin_xml_cache[$dir_plugins][$plug]=$ret;
+					ecrire_fichier(_DIR_TMP."plugin_xml_cache.gz",serialize($plugin_xml_cache));
 				}
 			}
 		}
 		$infos[$dir_plugins][$plug] = $ret;
 	}
+
 	return $infos[$dir_plugins][$plug];
 }
 
