@@ -1318,6 +1318,7 @@ function balise_TOTAL_UNIQUE_dist($p) {
 // pour creer un array php a partir d'arguments calcules
 // #ARRAY{key1,val1,key2,val2 ...} returne array(key1=>val1,...)
 //
+// http://doc.spip.org/@balise_ARRAY_dist
 function balise_ARRAY_dist($p) {
 	$_code= "";
 	$n=1;
