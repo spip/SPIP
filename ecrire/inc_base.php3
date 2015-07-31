@@ -452,7 +452,11 @@ function creer_base() {
 	//
 	// Pre-remplissage de la base
 	//
+	remplir_type_documents();
+}
 
+
+function remplir_type_documents() {
 	$query = "INSERT IGNORE spip_types_documents (id_type, extension, titre, inclus) VALUES ".
 		"(1, 'jpg', 'JPEG', 'image'), ".
 		"(2, 'png', 'PNG', 'image'), ".
@@ -498,7 +502,6 @@ function creer_base() {
 		"('zip', 'Zip', 'non')";
 	spip_query($query);
 }
-
 
 function stripslashes_base($table, $champs) {
 	$modifs = '';
@@ -990,6 +993,14 @@ function maj_base() {
 			}
 		}
 	}
+
+	if ($version_installee < 1.462) {
+		// nettoyer la table spip_types_documents pour retablir les embed
+		spip_query("DELETE FROM spip_types_documents WHERE extension IN (
+			'jpg','png','gif','bmp','psd','tif','aiff','asf','avi','bz2','doc','eps','gz','html','mid','mov','mp3','mpg','ogg','pdf','ppt','ps','qt','ra','ram','rm','rtf','sit','swf','tgz','txt','wav','xls','xml','wmv','zip')");
+		remplir_type_documents();
+	}
+
 
 	//
 	// Mettre a jour le numero de version installee
