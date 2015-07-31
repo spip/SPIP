@@ -3249,6 +3249,8 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
  *     Préfixe du plugin ou chaîne vide
  * @param string $type_info
  *     Type d'info demandée
+ * @param bool $reload
+ *     true (à éviter) pour forcer le recalcul du cache des informations des plugins.
  * @return array|string|bool
  *
  *     - Liste sérialisée des préfixe de plugins actifs (si $plugin = '')
@@ -3257,7 +3259,7 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
  *         - x : retourne l'information x du plugin si présente (et plugin actif)
  *         - tout : retourne toutes les informations du plugin actif
 **/
-function filtre_info_plugin_dist($plugin, $type_info) {
+function filtre_info_plugin_dist($plugin, $type_info, $reload = false) {
 	include_spip('inc/plugin');
 	$plugin = strtoupper($plugin);
 	$plugins_actifs = liste_plugin_actifs();
@@ -3278,7 +3280,7 @@ function filtre_info_plugin_dist($plugin, $type_info) {
 		} else {
 			$dir_plugins = $plugins_actifs[$plugin]['dir_type'];
 		}
-		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir'], false, $dir_plugins)) {
+		if (!$infos = $get_infos($plugins_actifs[$plugin]['dir'], $reload, $dir_plugins)) {
 			return '';
 		}
 		if ($type_info == 'tout') {
