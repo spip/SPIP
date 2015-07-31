@@ -211,8 +211,8 @@ function import_tables($request, $dir) {
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag);
 		if ( $i = $request['insertion'])
-			ecrire_meta('charset_restauration', $charset);
-		else	ecrire_meta('charset_insertion', $charset);
+			ecrire_meta('charset_insertion', $charset);
+		else	ecrire_meta('charset_restauration', $charset);
 		ecrire_metas();
 		spip_log("Debut de l'importation de $archive (charset: $charset, format: $version_archive)" . ($i ? " insertion $i" : ''));
 	} else {
