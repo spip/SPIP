@@ -199,7 +199,7 @@ function import_tables($request, $dir) {
 			$gz = 'gzread';
 	} else {
 			$size = @filesize($archive);
-			$taille = floor(100 * $abs_pos / $size)." %";
+			$taille = @floor(100 * $abs_pos / $size)." %";
 			$file = fopen($archive, 'rb');
 			$gz = 'fread';
 	}

@@ -12,19 +12,48 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/headers');
+
+// demande/verifie le droit de creation de repertoire par le demandeur;
+// memorise dans les meta que ce script est en cours d'execution
+// si elle y est deja c'est qu'il y a eu suspension du script, on reprend.
+
+function inc_admin_dist($script, $titre, $comment='', $retour='')
+{
+	if (!isset($GLOBALS['meta'][$script])) {
+		debut_admin($script, $titre, $comment); 
+		spip_log("meta: $script " . join(',', $_POST));
+		ecrire_meta($script, serialize($_POST));
+		ecrire_metas();
+	} else spip_log("reprise de $script");
+	$base = charger_fonction($script, 'base');
+	$base($titre);
+	effacer_meta($script);
+	ecrire_metas();
+	@unlink(_FILE_META);
+	fin_admin($script);
+	spip_log("efface meta: $script " . ($retour ? $retour : ''));
+	if ($retour) redirige_par_entete($retour);
+}
+
+
 // http://doc.spip.org/@fichier_admin
 function fichier_admin($action) {
 	global $connect_login;
 	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
 }
 
+// demande la creation d'un repertoire et sort
+// ou retourne sans rien faire si repertoire deja la.
+
 // http://doc.spip.org/@debut_admin
-function debut_admin($script, $action, $commentaire='') {
+function debut_admin($script, $action='', $commentaire='') {
 	global $connect_login, $connect_statut, $connect_toutes_rubriques;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_spip('inc/minipres');
-		echo minipres(_T('info_acces_refuse'));
+		echo minipres(_T('info_acces_refuse') .
+			      ($action ? " ($action)" : ''));
 		exit;
 	}
 	if ($connect_toutes_rubriques) {
@@ -33,7 +62,7 @@ function debut_admin($script, $action, $commentaire='') {
 		$dir = _DIR_TRANSFERT . $connect_login . '/';
 	}
 
-	$signal = fichier_admin($action);
+	$signal = fichier_admin($script);
 	if (@file_exists($dir . $signal)) {
 		spip_log ("Action admin: $action");
 		return true;
@@ -45,26 +74,19 @@ function debut_admin($script, $action, $commentaire='') {
 
 	include_spip('inc/minipres');
 
-
 	// Si on est un super-admin, un bouton de validation suffit
 	// nom de l'autorisation a revoir... 'webmestre' veut tout et rien dire...
 	if (autoriser('webmestre')) {
 		if (_request('validation_admin') == $signal) {
 			spip_log ("Action super-admin: $action");
-			return true;
+			return;
 		}
-		$form = $commentaire
-		  . copy_request($script,
-				 ('<input type="hidden" name="validation_admin" value="'.$signal.'" />'
-				  . bouton_suivant(_T('bouton_valider'))));
+		$form = ('<input type="hidden" name="validation_admin" value="'.$signal.'" />'
+			 . bouton_suivant(_T('bouton_valider')));
 
 		$js = '';
-	}
-
-	else {
-		$form =  $commentaire
-		  . copy_request($script,
-				 (fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
+	} else {
+		$form = fieldset(_T('info_authentification_ftp').aide("ftp_auth"),
 					   array(
 						 'fichier' => array(
 								    'label' => _T('info_creer_repertoire'),
@@ -72,7 +94,7 @@ function debut_admin($script, $action, $commentaire='') {
 								    )),
 					   ('<br />'
 					    . _T('info_creer_repertoire_2', array('repertoire' => joli_repertoire($dir)))
-					    . bouton_suivant(_T('bouton_recharger_page'))))));
+					    . bouton_suivant(_T('bouton_recharger_page'))));
 
 	// code volontairement tordu:
 	// provoquer la copie dans le presse papier du nom du repertoire
@@ -82,6 +104,7 @@ function debut_admin($script, $action, $commentaire='') {
 		$js = " onload='document.forms[0].fichier.value=\"\";barre_inserer(\"$signal\", document.forms[0].fichier)'";
 	}
 
+	$form = $commentaire . copy_request($script, $form);
 	echo minipres(_T('info_action', array('action' => $action)), $form, $js);
 	exit;
 }
@@ -103,17 +126,13 @@ function fin_admin($action) {
 // http://doc.spip.org/@copy_request
 function copy_request($script, $suite)
 {
-	$hidden = ""; 
-	$args = $_POST;
-	$args['exec'] = $script;
-	unset($args['fichier']);
         include_spip('inc/filtres');
-	foreach($args as $n => $c) {
-		$hidden .= "\n<input type='hidden' name='$n' value='" .
+	foreach($_POST as $n => $c) {
+	  if ($n != 'fichier')
+		$suite .= "\n<input type='hidden' name='$n' value='" .
 		  entites_html($c) .
 		  "'  />";
 	}
-	return "<form action='" . generer_url_ecrire() .
-	  "' method='post'><div>$hidden$suite</div></form>";
+	return  generer_post_ecrire($script, $suite);
 }
 ?>
