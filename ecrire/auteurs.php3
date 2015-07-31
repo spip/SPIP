@@ -117,15 +117,13 @@ unset($nombre_auteurs);
 $auteurs = Array();
 
 if ($type_requete == 'auteur') {
-	$result_auteurs = spip_query("SELECT id_auteur, statut, source, pass, login, nom, email, url_site, messagerie, UPPER(nom) AS unom
+	$result_auteurs = spip_query("SELECT id_auteur, statut, login, nom, email, url_site, messagerie, UPPER(nom) AS unom
 		FROM spip_auteurs AS auteurs
 		WHERE 1 $sql_statut_auteurs
 		$sql_order");
 	while ($row = spip_fetch_array($result_auteurs)) {
 		$auteurs[$row['id_auteur']] = $row;
 		$nombre_auteurs ++;
-
-		$nom_auteur = $row['nom'];
 	}
 
 	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur
@@ -162,8 +160,8 @@ if ($type_requete == 'auteur') {
 		$lettre_prec = $premiere_lettre;
 	}
 
-} else { // tri par nombre
-	$result_nombres = spip_query("SELECT auteurs.id_auteur, auteurs.statut, auteurs.source, auteurs.pass, auteurs.login, auteurs.nom, auteurs.email, auteurs.url_site, auteurs.messagerie, UPPER(nom) AS unom, COUNT(articles.id_article) AS compteur
+ } else { // tri par nombre
+	$result_nombres = spip_query("SELECT auteurs.id_auteur, auteurs.statut,  auteurs.login, auteurs.nom, auteurs.email, auteurs.url_site, auteurs.messagerie, UPPER(nom) AS unom, COUNT(articles.id_article) AS compteur
 		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
 		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
 		$sql_statut_auteurs $sql_statut_articles
@@ -183,7 +181,7 @@ if ($type_requete == 'auteur') {
 	else
 		$sql_statut_auteurs_ajout = " AND auteurs.statut = '0minirezo'";
 
-	$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.statut, auteurs.source, auteurs.pass, auteurs.login, auteurs.nom, auteurs.email, auteurs.url_site, auteurs.messagerie, UPPER(nom) AS unom, 0 as compteur
+	$result_auteurs = spip_query("SELECT auteurs.id_auteur, auteurs.statut, auteurs.login, auteurs.nom, auteurs.email, auteurs.url_site, auteurs.messagerie, UPPER(nom) AS unom, 0 as compteur
 		FROM spip_auteurs AS auteurs
 		WHERE id_auteur NOT IN (0$vus)
 		$sql_statut_auteurs_ajout
