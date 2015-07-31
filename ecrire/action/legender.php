@@ -33,14 +33,15 @@ function action_legender_dist() {
 // http://doc.spip.org/@action_legender_post
 function action_legender_post($r)
 {
-
 	$id_document = $r[1];
+
+	$modifs = array();
 
 	// taille du document (cas des embed)
 	if ($largeur_document = intval(_request('largeur_document'))
 	AND $hauteur_document = intval(_request('hauteur_document'))) {
-		set_request('largeur', $largeur_document);
-		set_request('hauteur', $hauteur_document);
+		$modifs['largeur'] = $largeur_document;
+		$modifs['hauteur'] = $hauteur_document;
 	}
 
 	// Date du document (uniquement dans les rubriques)
@@ -53,12 +54,16 @@ function action_legender_post($r)
 			$jour_doc = "00";
 		$date = _request('annee_doc').'-'.$mois_doc.'-'.$jour_doc;
 		if (preg_match('/^[0-9-]+$/', $date))
-			set_request('date', $date);
+			$modifs['date'] = $date;
 	}
+	
+	if (($t = _request('titre_document')) !== NULL)
+		$modifs['titre'] = $t;
+	if (($t = _request('descriptif_document')) !== NULL)
+		$modifs['descriptif'] = $t;
+
 	include_spip('inc/modifier');
 
-	revision_document($id_document,
-			  array ('titre' => _request('titre_document'),
-				 'descriptif' => _request('descriptif_document')));
+	revision_document($id_document, $modifs);
 }
 ?>
