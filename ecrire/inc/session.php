@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  */
 
-$GLOBALS['auteur_session'] = ''; # gloable decrivant l'auteur
+$GLOBALS['auteur_session'] = ''; # globale decrivant l'auteur
 $GLOBALS['rejoue_session'] = ''; # globale pour insertion de JS en fin de page
 
 //
@@ -114,6 +114,7 @@ function verifier_session($change=false) {
 
 	// Tester avec alea courant
 	$fichier_session = fichier_session($_COOKIE['spip_session'], $GLOBALS['meta']['alea_ephemere'], true);
+
 	if ($fichier_session AND @file_exists($fichier_session)) {
 		include($fichier_session);
 	} else {
