@@ -186,7 +186,8 @@ if ($flag_editable) {
 // Documents associes a l'article
 //
 
-if ($spip_display != 4) afficher_documents_non_inclus($id_article, "article", $flag_editable);
+ if ($spip_display != 4)
+ afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
 //
 // "Demander la publication"
@@ -1387,4 +1388,123 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	echo "</FORM>";
  }
 }
+
+//
+// Reunit les textes decoupes parce que trop longs
+//
+
+function trop_longs_articles($texte_plus)
+{
+	$nb_texte = 0;
+	while ($nb_texte ++ < count($texte_plus)+1){
+		$texte_ajout .= ereg_replace("<!--SPIP-->[\n\r]*","",
+					     $texte_plus[$nb_texte]);
+	}
+	return $texte_ajout;
+}
+
+
+// Passer les images/docs en "inclus=non"
+
+function inclus_non_articles($id_article)
+{
+$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
+$result = spip_query($query);
+
+while($row=spip_fetch_array($result)){
+	$ze_doc[]=$row['id_document'];
+}
+
+if (count($ze_doc)>0){
+	$ze_docs = join($ze_doc,",");
+	spip_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
+}
+
+}
+
+function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent, $flag_auteur, $articles_versions, $new, $champs, $id_rubrique_old) {
+{
+  global $connect_id_auteur;
+	// recoller les champs du extra
+	if ($champs_extra) {
+		include_ecrire("inc_extra.php3");
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
+	} else
+		$add_extra = '';
+
+	// Verifier qu'on envoie bien dans une rubrique autorisee
+	if ($id_rubrique=intval($id_parent)
+	AND ($flag_auteur OR acces_rubrique($id_rubrique))) {
+		$change_rubrique = "id_rubrique=$id_rubrique,";
+	} else {
+		$change_rubrique = "";
+	}
+
+	// Stockage des versions : creer une premier version si non-existante
+	if ($articles_versions) {
+		include("lab_revisions.php");
+		if  ($new != 'oui') {
+			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
+			if (!spip_num_rows(spip_query($query))) {
+				spip_log("version initiale de l'article $id_article");
+				$select = join(", ", array_keys($champs));
+				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
+				$champs_originaux = spip_fetch_array(spip_query($query));
+				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'), 0);
+
+				// Remettre une date un peu ancienne pour la version initiale 
+				if ($id_version == 1) // test inutile ?
+				spip_query("UPDATE spip_versions
+				SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
+				WHERE id_article=$id_article AND id_version=1");
+			}
+		}
+	}
+
+	$query = "UPDATE spip_articles SET surtitre='" .
+	  addslashes($champs['surtitre']) .
+	  "', titre='" .
+	  addslashes($champs['titre']) .
+	  "', soustitre='" .
+	  addslashes($champs['soustitre']) .
+	  "', $change_rubrique descriptif='" .
+	  addslashes($champs['descriptif']) .
+	  "', chapo='" .
+	  addslashes($champs['chapo']) .
+	  "', texte='" .
+	  addslashes($champs['texte']) .
+	  "', ps='" .
+	  addslashes($champs['ps']) .
+	  "', url_site='" .
+	  addslashes($champs['url_site']) .
+	  "', nom_site='" .
+	  addslashes($champs['nom_site']) .
+	  "' $add_extra WHERE id_article=$id_article";
+	$result = spip_query($query);
+	if ($change_rubrique) propager_les_secteurs();
+	calculer_rubriques();
+
+	// Stockage des versions
+	if ($articles_versions) {
+		ajouter_version($id_article, $champs_versions, '', $connect_id_auteur);
+	}
+
+	// Changer la langue heritee
+	if ($id_rubrique != $id_rubrique_old) {
+		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		$langue_old = $row['lang'];
+		$langue_choisie_old = $row['langue_choisie'];
+
+		if ($langue_choisie_old != "oui") {
+			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$langue_new = $row['lang'];
+			if ($langue_new != $langue_old) spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
+		}
+	}
+
+	// marquer l'article (important pour les articles nouvellement crees)
+	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
+
+ }}
+
 ?>
