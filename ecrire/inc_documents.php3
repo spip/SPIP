@@ -56,8 +56,7 @@ function afficher_upload($link, $intitule, $inclus = '') {
 	global $this_link, $connect_statut;
 
 	if (!$link->getVar('redirect')) {
-		$my_link = new Link("article_documents.php3");	// faute de mieux pour l'instant (Fil)
-		$link->addVar('redirect', $my_link->getUrl());
+		$link->addVar('redirect', $this_link->getUrl());
 	}
 
 	echo "<font face='verdana, arial, helvetica, sans-serif' size='2'>\n";
@@ -95,11 +94,13 @@ function afficher_upload($link, $intitule, $inclus = '') {
 // Afficher un document sous forme de ligne depliable
 //
 
-function afficher_document($id_document, $id_doc_actif = 0) {
+function afficher_document($id_document, $image_link, $redirect_url = "", $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
 	global $id_article;
+
+	if (!$redirect_url) $redirect_url = $this_link->getUrl();
 
 	$document = fetch_document($id_document);
 
@@ -121,7 +122,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	}
 
 	$block = "document $id_document";
-	if ($id_document == $id_doc_actif)
+	if ($deplier)
 		echo bouton_block_visible($block);
 	else
 		echo bouton_block_invisible($block);
@@ -136,11 +137,11 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	echo "</font>\n";
 
 	echo "<font size='1'>";
-	$link = new Link('../spip_image.php3');
-	$link->addVar('redirect', $this_link->getUrl());
+
+	$link = $image_link;
+	$link->addVar('redirect', $redirect_url);
 	$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 	$link->addVar('hash_id_auteur', $connect_id_auteur);
-	$link->addVar('id_article', $id_article);
 	$link->addVar('doc_supp', $id_document);
 
 	echo "[<b><a ".$link->getHref().">SUPPRIMER</a></b>]\n";
@@ -148,7 +149,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 
 	echo "</font>\n";
 
-	if ($id_document == $id_doc_actif)
+	if ($deplier)
 		echo debut_block_visible($block);
 	else
 		echo debut_block_invisible($block);
@@ -186,14 +187,14 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 
 	if ($type_inclus == 'image') {
 		if ($mode == 'vignette') {
-			$link = new Link();
-			$link->addVar('transformer_image','document');
-			$link->addVar('id_document',$id_document);
+			$link = new Link($redirect_url);
+			$link->addVar('transformer_image', 'document');
+			$link->addVar('id_document', $id_document);
 			$link_transformer = "<font size='1'>[<b><a ".$link->getHref().">Transformer en document</a></b>]</font>\n";
 		} else if ($mode == 'document') {
-			$link = new Link();
-			$link->addVar('transformer_image','vignette');
-			$link->addVar('id_document',$id_document);
+			$link = new Link($redirect_url);
+			$link->addVar('transformer_image', 'vignette');
+			$link->addVar('id_document', $id_document);
 			$link_transformer = "<font size='1'>[<b><a ".$link->getHref().">Transformer en image affichable</a></b>]</font>\n";
 		}
 	}
@@ -257,7 +258,14 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			echo texte_vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
 			echo "<font size='2'>\n";
 			$hash = calculer_action_auteur("supp_doc ".$id_vignette);
-			echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
+
+			$link = $image_link;
+			$link->addVar('redirect', $redirect_url);
+			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
+			$link->addVar('hash_id_auteur', $connect_id_auteur);
+			$link->addVar('doc_supp', $id_vignette);
+
+			echo "[<a ".$link->getHref().">";
 			echo "supprimer la vignette";
 			echo "</a>]</font><br>\n";
 			echo $raccourci_doc;
@@ -276,14 +284,14 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 
 			echo "<div align='left'>\n";
 			$hash = calculer_action_auteur("ajout_doc");
-			$link = new Link('../spip_image.php3');
-			$link->addVar('redirect', $this_link->getUrl());
+
+			$link = $image_link;
+			$link->addVar('redirect', $redirect_url);
+			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('ajout_doc', 'oui');
 			$link->addVar('id_document', $id_document);
-			$link->addVar('id_article', $id_article);
 			$link->addVar('mode', 'vignette');
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('hash', $hash);
 	
 			afficher_upload($link, 'Charger une vignette&nbsp;:', 'image');
 			echo "</div>\n";
@@ -307,10 +315,10 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 function pave_documents($id_article) {
 	global $puce;
 
-	$result_doc = mysql_query(("SELECT type.extension AS extension, COUNT(doc.id_document) AS cnt
+	$result_doc = mysql_query("SELECT type.extension AS extension, COUNT(doc.id_document) AS cnt
 		FROM spip_types_documents AS type, spip_documents AS doc, spip_documents_articles AS lien
 		WHERE lien.id_article=$id_article AND doc.id_document = lien.id_document AND doc.id_type = type.id_type
-		GROUP BY doc.id_type"));
+		GROUP BY doc.id_type");
 	while ($type = mysql_fetch_object($result_doc)) {
 		$documents .= $puce.$type->cnt." ".$type->extension."<br>";
 		$nbdoc += $type->cnt;

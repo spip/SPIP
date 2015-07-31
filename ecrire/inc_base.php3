@@ -375,6 +375,12 @@ function creer_base() {
 		"(3, 'gif', 'Image GIF', 'image')";
 	mysql_query($query);
 
+	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
+		"('bmp', 'Image BMP', 'image'), ".
+		"('psd', 'Image Photoshop', 'image'), ".
+		"('tif', 'Image TIFF', 'image')";
+	mysql_query($query);
+
 	$query = "INSERT IGNORE spip_types_documents (extension, titre) VALUES ".
 		"('txt', 'Document texte'), ".
 		"('htm', 'Fichier HTML'), ".
@@ -399,6 +405,7 @@ function creer_base() {
 		"('tgz', 'Archive TGZ'), ".
 		"('swf', 'Animation Flash')";
 	mysql_query($query);
+
 }
 
 
