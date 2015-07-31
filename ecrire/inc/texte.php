@@ -274,12 +274,12 @@ function echappe_retour($letexte, $source='', $filtre = "") {
 // Reinserer le javascript de confiance (venant des modeles)
 
 // http://doc.spip.org/@echappe_retour_modeles
-function echappe_retour_modeles($letexte)
+function echappe_retour_modeles($letexte, $interdire_scripts=false)
 {
 	$letexte = echappe_retour($letexte);
 
-	// Dans l'espace prive, securiser ici
-	if (!_DIR_RESTREINT)
+	// Dans les appels directs hors squelette, securiser aussi ici
+	if ($interdire_scripts)
 		$letexte = interdire_scripts($letexte);
 
 	return trim($letexte);
@@ -361,15 +361,6 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 // Les elements de propre()
 //
 
-/*
-// Securite : empecher l'execution de code PHP ou javascript ou autre malice
-// http://doc.spip.org/@interdire_scripts
-function interdire_scripts($source) {
-	$source = preg_replace(",<(\%|\?|/?[[:space:]]*(script|base)),imsS", "&lt;\\1", $source);
-	return $source;
-}
-*/
-
 // afficher joliment les <script>
 // http://doc.spip.org/@echappe_js
 function echappe_js($t,$class='') {
@@ -404,40 +395,39 @@ function protege_js_modeles($t) {
 }
 
 // Securite : empecher l'execution de code PHP, en le transformant en joli code
-// l'espace prive est securise globalement par un appel explicite un interdire_script
-// on desactive l'appel des squelettes tant que la protection globale est la
-// a terme (tout l'espace prive en skel) il faudra mettre $protege_espace_prive = true
+// dans l'espace prive, cette fonction est aussi appelee par propre et typo
+// si elles sont appelees en direct
+// il ne faut pas desactiver globalement la fonction dans l'espace prive car elle protege
+// aussi les balises des squelettes qui ne passent pas forcement par propre ou typo apres
 // http://doc.spip.org/@interdire_scripts
-function interdire_scripts($t, $protege_espace_prive = true) {
-	if (_DIR_RESTREINT || $protege_espace_prive) {
-	
-		// rien ?
-		if (!$t OR !strstr($t, '<')) return $t;
-	
-		// echapper les tags asp/php
-		$t = str_replace('<'.'%', '&lt;%', $t);
-	
-		// echapper le php
-		$t = str_replace('<'.'?', '&lt;?', $t);
-	
-		// echapper le < script language=php >
-		$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
-	
-		// Pour le js, trois modes : parano (-1), prive (0), ok (1)
-		switch($GLOBALS['filtrer_javascript']) {
-			case 0:
-				if (!_DIR_RESTREINT)
-					$t = echappe_js($t,' style="color:red"');
-				break;
-			case -1:
-				$t = echappe_js($t);
-				break;
-		}
-	
-		// pas de <base href /> svp !
-		$t = preg_replace(',<(base\b),iS', '&lt;\1', $t);
+function interdire_scripts($t) {
+	// rien ?
+	if (!$t OR !strstr($t, '<')) return $t;
+
+	// echapper les tags asp/php
+	$t = str_replace('<'.'%', '&lt;%', $t);
+
+	// echapper le php
+	$t = str_replace('<'.'?', '&lt;?', $t);
+
+	// echapper le < script language=php >
+	$t = preg_replace(',<(script\b[^>]+\blanguage\b[^\w>]+php\b),UimsS', '&lt;\1', $t);
+
+	// Pour le js, trois modes : parano (-1), prive (0), ok (1)
+	switch($GLOBALS['filtrer_javascript']) {
+		case 0:
+			if (!_DIR_RESTREINT)
+				$t = echappe_js($t,' style="color:red"');
+			break;
+		case -1:
+			$t = echappe_js($t);
+			break;
 	}
-	// Reinserer les echappements des modeles 
+
+	// pas de <base href /> svp !
+	$t = preg_replace(',<(base\b),iS', '&lt;\1', $t);
+
+	// Reinserer les echappements des modeles
 	if (defined('_PROTEGE_JS_MODELES'))
 		$t = echappe_retour($t,"javascript"._PROTEGE_JS_MODELES);
 	if (defined('_PROTEGE_PHP_MODELES'))
@@ -485,10 +475,21 @@ function echapper_faux_tags($letexte){
 }
 
 // http://doc.spip.org/@typo
-function typo($letexte, $echapper=true, $connect='') {
-
+function typo($letexte, $echapper=true, $connect=null) {
 	// Plus vite !
 	if (!$letexte) return $letexte;
+
+	// les appels directs a cette fonction depuis le php de l'espace
+	// prive etant historiquement ecrit sans argment $connect
+	// on utilise la presence de celui-ci pour distinguer les cas
+	// ou il faut passer interdire_script explicitement
+	// les appels dans les squelettes (de l'espace prive) fournissant un $connect
+	// ne seront pas perturbes
+	$interdire_script = false;
+	if (is_null($connect)){
+		$connect = '';
+		$interdire_script = true;
+	}
 
 	// Echapper les codes <html> etc
 	if ($echapper)
@@ -511,11 +512,9 @@ function typo($letexte, $echapper=true, $connect='') {
 	if ($echapper)
 		$letexte = echappe_retour($letexte, 'TYPO');
 
-	// Dans l'espace prive, securiser ici
-	// quand tout l'espace prive sera en skel, supprimer cette ligne et retablir
-	// $protege_espace_prive = true dans interdire_script
-	if (!_DIR_RESTREINT)
-		$letexte = interdire_scripts($letexte,true);
+	// Dans les appels directs hors squelette, securiser ici aussi
+	if ($interdire_script)
+		$letexte = interdire_scripts($letexte);
 
 	return $letexte;
 }
@@ -956,11 +955,22 @@ function traiter_raccourcis($letexte) {
 
 // Filtre a appliquer aux champs du type #TEXTE*
 // http://doc.spip.org/@propre
-function propre($t, $connect='') {
+function propre($t, $connect=null) {
+	// les appels directs a cette fonction depuis le php de l'espace
+	// prive etant historiquement ecrits sans argment $connect
+	// on utilise la presence de celui-ci pour distinguer les cas
+	// ou il faut passer interdire_script explicitement
+	// les appels dans les squelettes (de l'espace prive) fournissant un $connect
+	// ne seront pas perturbes
+	$interdire_script = false;
+	if (is_null($connect)){
+		$connect = '';
+		$interdire_script = true;
+	}
 
 	return !$t ? strval($t) :
 		echappe_retour_modeles(
 			traiter_raccourcis(
-				expanser_liens(echappe_html($t),$connect)));
+				expanser_liens(echappe_html($t),$connect)),$interdire_script);
 }
 ?>
