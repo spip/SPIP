@@ -11,7 +11,7 @@ function exec_info_plugin_dist() {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$plug = _request('plug');
+		$plug = _request('plugin');
 		$info = plugin_get_infos($plug);
 		ajax_retour(affiche_bloc_plugin($plug, $info));
 	}
