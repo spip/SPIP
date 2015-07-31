@@ -260,12 +260,15 @@ function couper($texte, $taille=50) {
 	$texte = substr($texte, 0, 400 + 2*$taille); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
 
 	// on utilise les \r pour passer entre les gouttes
-	$texte = str_replace("\n\r", "\n", $texte);
+	$texte = str_replace("\r\n", "\n", $texte);
 	$texte = str_replace("\r", "\n", $texte);
 
 	// sauts de ligne et paragraphes
 	$texte = ereg_replace("\n\n+", "\r", $texte);
 	$texte = ereg_replace("<(p|br)( [^>]*)?".">", "\r", $texte);
+
+	// supprimer les traits, lignes etc
+	$texte = ereg_replace("(^|\r|\n)(-[-#\*]*|_ )", "\r", $texte);
 
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
@@ -286,9 +289,6 @@ function couper($texte, $taille=50) {
 
 	// supprimer les tableaux
 	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
-
-	// supprimer les traits, lignes etc
-	$texte = ereg_replace("(^|\r)-[-#\*]*", "\r", $texte);
 
 	// couper au mot precedent
 	$long = substr($texte, 0, max($taille-4,1));
