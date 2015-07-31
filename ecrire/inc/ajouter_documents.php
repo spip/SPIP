@@ -223,7 +223,7 @@ function ajouter_un_document($source, $nom_envoye, $type_lien, $id_lien, $mode, 
 	// passe "mode=document" et "id_document=.." (pas utilise)
 	if (!$id_document) {
 		// Inserer le nouveau doc et recuperer son id_
-		$id_document = spip_abstract_insert("spip_documents", "(extension, titre, date, distant)", "("._q($extension).", " . _q($titre) . ", NOW(), '$distant')");
+		$id_document = spip_abstract_insert("spip_documents", "(extension, titre, date, distant)", "("._q($ext).", " . _q($titre) . ", NOW(), '$distant')");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite

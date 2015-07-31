@@ -283,16 +283,21 @@ function fichier_copie_locale($source) {
 	}
 
 	// Chercher d'abord le doc dans la table des documents, pour se baser sur son type reel
-	$s = spip_query("SELECT extension FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui'");
+	$s = spip_query("SELECT extension FROM spip_documents WHERE fichier=" . _q($source) . " AND distant='oui' AND extension>''");
 	if ($t = spip_fetch_array($s)) {
 		$extension = $t['extension'];
 
-	// si la source n'est pas dans la table des documents, on regarde si son extension est connue et autorisee
+
+	// si la source n'est pas dans la table des documents, on la ping
+	// regarde si son extension est connue et autorisee
 	} else {
-		$path_parts = pathinfo($source);
-		if (isset($path_parts['extension']) && strlen($path_parts['extension'])){
+		if (
+		($a = recuperer_infos_distantes($source) AND $ext = $a['extension'])
+		OR
+		($path_parts = pathinfo($source) AND $ext = $path_parts['extension'])
+		) {
 			// verifier que c'est un type autorise
-			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension="._q($path_parts['extension'])));
+			$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension="._q($ext)));
 			if ($t)
 				$extension = $t['extension'];
 		}
