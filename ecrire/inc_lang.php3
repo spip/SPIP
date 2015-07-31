@@ -137,7 +137,7 @@ function traduire_chaine($code, $args) {
 			charger_langue($spip_lang, $module);
 
 			// surcharge perso -- on cherche local(_xx).php dans le chemin
-			if ($f = find_in_path('local.php3'))
+			if ($f = find_in_path(http_php_script('local')))
 				surcharger_langue($f);
 			if ($f = find_in_path('local_'.$spip_lang._EXTENSION_PHP))
 				surcharger_langue($f);

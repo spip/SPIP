@@ -123,7 +123,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 			syndication='$syndication', statut='$statut'
 			WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-		$link = new Link('sites.php3');
+		$link = new Link(http_php_script('sites'));
 		$link->addVar('id_syndic');
 		$link->addVar('redirect');
 		$redirect = $link->getUrl();
@@ -197,7 +197,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
-	$link = new Link('sites.php3');
+	$link = new Link(http_php_script('sites'));
 	$link->addVar('id_syndic');
 	$link->addVar('redirect');
 	$link->addVar('reload', $reload);
@@ -348,7 +348,7 @@ if (strlen($descriptif) > 1) {
 echo "</td>";
 
 if ($flag_editable) {
-	$link = new Link('sites_edit.php3');
+	$link = new Link(http_php_script('sites_edit'));
 	$link->addVar('id_syndic');
 	$link->addVar('target', $clean_link->getUrl());
 	echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
@@ -566,7 +566,7 @@ echo "<br><br>\n";
 
 $forum_retour = "sites.php3?id_syndic=$id_syndic";
 
-$link = new Link('forum_envoi.php3');
+$link = new Link(http_php_script('forum_envoi'));
 $link->addVar('statut', 'prive');
 $link->addVar('adresse_retour', $forum_retour);
 $link->addVar('id_syndic');

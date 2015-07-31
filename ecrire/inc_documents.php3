@@ -981,7 +981,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	global $clean_link;
 	global $id_doc_actif;
 
-	$image_url = '../spip_image.php3';
+	$image_url = http_php_script('../spip_image');
 	if ($id_article) $image_url .= '?id_article='.$id_article;
 
 	# HACK!!! simule une mise en page pour affecter la globale id_doublons

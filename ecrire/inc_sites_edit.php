@@ -71,7 +71,7 @@ if ($new == 'oui'){
 	if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 		debut_cadre_relief("site-24.gif");
 		
-		$link = new Link('sites.php3');
+		$link = new Link(http_php_script('sites'));
 		$link->addVar('id_rubrique', $id_rubrique);
 		$link->addVar('new', 'oui');
 		$link->addVar('redirect', $clean_link->getUrl());

@@ -149,8 +149,8 @@ function install_6()
 	include_ecrire ("inc_acces");
 	ecrire_acces();
 
-	@unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
-	@unlink(_DIR_SESSIONS . 'meta_cache.php3');
+	@unlink(_DIR_SESSIONS . http_php_script('inc_meta_cache'));
+	@unlink(_DIR_SESSIONS . http_php_script('meta_cache'));
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
 		    _FILE_CONNECT_INS . _EXTENSION_PHP)) {
 		copy(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, 
