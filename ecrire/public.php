@@ -21,7 +21,6 @@ if (defined('_INC_PUBLIC')) {
 	if (is_array($fond)) $fonds=$fond;
 	foreach($fonds as $fond){
 		$subpage = inclure_page($fond, $contexte_inclus, _request('connect'));
-	
 		if ($subpage['process_ins'] == 'html'){
 			echo $subpage['texte'];
 		}

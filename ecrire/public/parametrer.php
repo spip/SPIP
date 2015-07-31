@@ -90,34 +90,34 @@ function analyse_resultat_skel($nom, $cache, $corps) {
 // http://doc.spip.org/@quete_rubrique_fond
 function quete_rubrique_fond($contexte) {
 
-	if (isset($contexte['id_rubrique'])) {
-		$id = intval($contexte['id_rubrique']);
-		$row = sql_fetsel('lang', 'spip_rubriques',"id_rubrique=$id");
+	if (isset($contexte['id_rubrique'])
+	AND $id = intval($contexte['id_rubrique'])
+	AND $row = sql_fetsel('lang', 'spip_rubriques',"id_rubrique=$id")) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array ($id, $lang);
 	}
 
-	if (isset($contexte['id_breve'])) {
-		$id = intval($contexte['id_breve']);
-		$row = sql_fetsel('id_rubrique, lang', 'spip_breves', "id_breve=$id");
-		$id_rubrique_fond = $row['id_rubrique'];
+	if (isset($contexte['id_breve'])
+	AND $id = intval($contexte['id_breve'])
+	AND $row = sql_fetsel('id_rubrique, lang', 'spip_breves', "id_breve=$id")
+	AND $id_rubrique_fond = $row['id_rubrique']) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
-	if (isset($contexte['id_syndic'])) {
-		$id = intval($contexte['id_syndic']);
-		$row = sql_fetsel('id_rubrique', 'spip_syndic', "id_syndic=$id");
-		$id_rubrique_fond = $row['id_rubrique'];
-		$row = sql_fetsel('lang', 'spip_rubriques', "id_rubrique=$id_rubrique_fond");
+	if (isset($contexte['id_syndic'])
+	AND $id = intval($contexte['id_syndic'])
+	AND $row = sql_fetsel('id_rubrique', 'spip_syndic', "id_syndic=$id")
+	AND $id_rubrique_fond = $row['id_rubrique']
+	AND $row = sql_fetsel('lang', 'spip_rubriques', "id_rubrique=$id_rubrique_fond")) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
 
-	if (isset($contexte['id_article'])) {
-		$id = intval($contexte['id_article']);
-		$row = sql_fetsel('id_rubrique, lang', 'spip_articles', "id_article=$id");
-		$id_rubrique_fond = $row['id_rubrique'];
+	if (isset($contexte['id_article'])
+	AND $id = intval($contexte['id_article'])
+	AND $row = sql_fetsel('id_rubrique, lang', 'spip_articles', "id_article=$id")
+	AND $id_rubrique_fond = $row['id_rubrique']) {
 		$lang = isset($row['lang']) ? $row['lang'] : '';
 		return array($id_rubrique_fond, $lang);
 	}
