@@ -49,7 +49,7 @@
 				<h2 class="invisible"><:articles:></h2>
 				<ul>
 					<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {pagination 10}>
-					<li class="extrait">
+					<li>
 						<h3 class="titre"><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></h3>
 						[<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
 						<small>[(#DATE|affdate_court)][, <:par_auteur:> (#LESAUTEURS)]</small>

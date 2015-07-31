@@ -68,7 +68,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 .spip_code, .spip_cadre { font-family: monospace; }
 
-.lien, blockquote, .spip_poesie, .spip_cadre, .liste-articles .extrait .texte {
+.lien, blockquote, .spip_poesie, .spip_cadre, .liste-articles li .texte {
 	margin: 1em;
 	padding: 1em;
 	border: 1pt dotted #CCC; }
@@ -87,12 +87,12 @@ table td, table th { padding: 4pt; text-align: left; vertical-align: top; border
 .forum-chapo .forum-titre { display: block; font-weight: bold; }
 ul .message { background: #EEE; border: 1pt solid #CCC; padding: 1em; margin-bottom: 1em; }
 
-/*  Listes et extraits introductifs 
----------------------------------------------- */
-.liste-articles .extrait { margin-bottom: 1em; padding-top: 0.3em; }
-.liste-articles .extrait .titre { font-size: 1.03em; font-weight: bold; }
-.liste-articles .extrait p { margin: 0; padding: 0; }
-.liste-articles .extrait small { display: block; font-size: 0.71em; }
+/* Listes d'articles et extraits introductifs
+----------------------------------------------- */
+.liste-articles li { margin-bottom: 1em; padding-top: 0.3em; }
+.liste-articles li .titre { font-size: 1.03em; font-weight: bold; }
+.liste-articles li p { margin: 0; padding: 0; }
+.liste-articles li small { display: block; font-size: 0.71em; }
 
 /*  Plan du site
 ---------------------------------------------- */

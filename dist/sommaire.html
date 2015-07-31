@@ -43,7 +43,7 @@
 				<h2 class="invisible"><:derniers_articles:></h2>
 				<ul>
 					<BOUCLE_articles_recents(ARTICLES) {par date}{inverse} {0,2} {doublons}>
-					<li class="extrait">
+					<li>
 						[(#LOGO_ARTICLE_RUBRIQUE|#URL_ARTICLE|reduire_image{120,100})]
 						[<p class="surtitre">(#SURTITRE)</p>]
 						<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
@@ -67,7 +67,7 @@
 					[(#ENV{debut_articles}|?{'',' '})<h2 class="invisible"><:articles_recents:></h2>]
 					<ul>
 						<BOUCLE_articles(ARTICLES) {par date}{inverse} {doublons} {pagination}>
-						<li class="extrait">
+						<li>
 							<h3 class="titre"><a href="#URL_ARTICLE">#TITRE</a></h3>
 							<small>[(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small>
 						</li>
