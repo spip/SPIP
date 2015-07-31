@@ -387,10 +387,14 @@ $GLOBALS['maj'][18310] = array(
 	array('sql_alter',"TABLE spip_auteurs_liens CHANGE vu vu VARCHAR(6) DEFAULT 'non' NOT NULL"),
 );
 
-$GLOBALS['maj'][18407] = array(
+$GLOBALS['maj'][18597] = array(
 	array('sql_alter',"TABLE spip_rubriques ADD profondeur smallint(5) DEFAULT '0' NOT NULL"),
-	array('include_spip','inc/rubriques'),
-	array('propager_les_secteurs'),
+	array('maj_propager_les_secteurs'),
 );
+
+function maj_propager_les_secteurs(){
+	include_spip('inc/rubriques');
+	propager_les_secteurs();
+}
 
 ?>
