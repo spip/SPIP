@@ -79,7 +79,7 @@ function breves_dist()
 			include_ecrire("inc_rubriques");
 			calculer_rubriques();
 		}
-		redirige_par_entete(http_php_scriptnq("naviguer","id_rubrique=$id_rubrique"));
+		redirige_par_entete(http_php_scriptnq("naviguer"),"id_rubrique=$id_rubrique");
 	} else {
 
 		debut_page(_T('titre_page_breves'), "documents", "breves");

@@ -56,7 +56,7 @@ function mots_tous_dist()
 
 		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
-		  redirige_par_entete(http_php_scriptnq("mots_edit","supp_mot=$id_mot&redirect_ok=oui&redirect=" . http_php_scriptnq('mots_tous')));
+		  redirige_par_entete(http_php_scriptnq("mots_edit"),"?supp_mot=$id_mot&redirect_ok=oui&redirect=" . http_php_scriptnq('mots_tous'));
 		} // else traite plus loin (confirmation de suppression)
 	}
 }
