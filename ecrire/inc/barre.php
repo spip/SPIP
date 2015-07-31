@@ -30,7 +30,7 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		  ."', $champhelp)\"")
 		."><img\nsrc='"
 	  // cas horrible de action/poster_forum_prive. cf commentaire dedans
-	  . ((test_espace_prive() AND !_DIR_RACINE AND _AJAX) ? '../' : '')
+	  . ((test_espace_prive() AND !_DIR_RACINE AND _AJAX AND _request('exec')=='poster_forum_prive') ? '../' : '')
 	  . _DIR_IMG_ICONES_BARRE
 		.$img
 		."' style=\"height: 16px; width: 16px; background-position: center center;\" alt=\"$a\"/></a>";
