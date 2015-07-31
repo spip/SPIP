@@ -13,7 +13,7 @@ function fichiers_plugins($dir) {
 	
 	while ($f = readdir($d)) {
 		if (is_file("$dir/$f") AND $f != 'remove.txt') {
-			if (ereg("^plug", $f)) {
+			if (ereg("^plug_.*\.php3?$", $f)) {
 				$fichiers[] = "$dir/$f";
 			}
 		} else if (is_dir("$dir/$f") AND $f != '.' AND $f != '..') {
