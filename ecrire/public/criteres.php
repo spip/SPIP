@@ -1071,7 +1071,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit){
 	}
 		// Cas particulier : expressions de date
 	else if ($c = calculer_critere_infixe_date($idb, $boucles, $col)){
-		$col = $c;
+		list($col,$date) = $c;
 		$table = '';
 	}
 	else if (preg_match('/^(.*)\.(.*)$/', $col, $r)){
@@ -1489,7 +1489,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 			       $date_orig.")";
 			break;
 	}
-	return $col;
+	return array($col,$regs);
 }
 
 // http://doc.spip.org/@calculer_param_date
