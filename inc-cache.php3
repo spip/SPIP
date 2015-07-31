@@ -273,7 +273,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
   else
     {
       spip_log("libère verrou $cle ($n octets, $fraicheur sec de validité.)");
-      fseek($lock2,0);
+      ftruncate($lock2,0);
       fwrite($lock2, "<!-- $fraicheur\t" . 
 	     $page['process_ins'] .
 	     "\t" .
