@@ -12,8 +12,15 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Authentifie et si ok retourne le tableau de la ligne SQL de l'utilisateur
-// Si risque de secu repere a l'installation retourne False
+/**
+ * Authentifie et si ok retourne le tableau de la ligne SQL de l'utilisateur
+ * Si risque de secu repere a l'installation retourne False
+ *
+ * @param string $login
+ * @param string $pass
+ * @param string $serveur
+ * @return array|bool
+ */
 function auth_spip_dist ($login, $pass, $serveur='') {
 
 	// retrouver le login
@@ -71,6 +78,12 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 	return $row;
 }
 
+/**
+ * Completer le formulaire de login avec le js ou les saisie specifiques a ce mode d'auth
+ *
+ * @param array $flux
+ * @return array
+ */
 function auth_spip_formulaire_login($flux){
 	// faut il encore envoyer md5 ?
 	// on regarde si il reste des pass md5 en base pour des auteurs en statut pas poubelle
@@ -105,8 +118,9 @@ function auth_spip_formulaire_login($flux){
 
 /**
  * Informer du droit de modifier ou non son login
+ * @param string $serveur
  * @return bool
- *	toujours true pour un auteur cree dans SPIP
+ *	 toujours true pour un auteur cree dans SPIP
  */
 function auth_spip_autoriser_modifier_login($serveur=''){
 	if (strlen($serveur))
@@ -120,6 +134,7 @@ function auth_spip_autoriser_modifier_login($serveur=''){
  * @param string $new_login
  * @param int $id_auteur
  *	si auteur existant deja
+ * @param string $serveur
  * @return string
  *	message d'erreur si login non valide, chaine vide sinon
  */
@@ -142,6 +157,7 @@ function auth_spip_verifier_login($new_login, $id_auteur=0, $serveur=''){
  *
  * @param string $new_login
  * @param int $id_auteur
+ * @param string $serveur
  * @return bool
  */
 function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
@@ -173,6 +189,7 @@ function auth_spip_modifier_login($new_login, $id_auteur, $serveur=''){
  * Reconnaitre aussi ceux qui donnent leur nom ou email au lieu du login
  *
  * @param string $login
+ * @param string $serveur
  * @return string
  */
 function auth_spip_retrouver_login($login, $serveur=''){
@@ -216,6 +233,7 @@ function auth_spip_informer_login($infos, $row, $serveur=''){
 
 /**
  * Informer du droit de modifier ou non le pass
+ * @param string $serveur
  * @return bool
  *	toujours true pour un auteur cree dans SPIP
  */
@@ -237,6 +255,7 @@ function auth_spip_autoriser_modifier_pass($serveur=''){
  *  meme a la creation lorsque l'auteur n'existe pas encore
  * @param int $id_auteur
  *	si auteur existant deja
+ * @param string $serveur
  * @return string
  *	message d'erreur si login non valide, chaine vide sinon
  */
@@ -248,6 +267,15 @@ function auth_spip_verifier_pass($login, $new_pass, $id_auteur=0, $serveur=''){
 	return '';
 }
 
+/**
+ * Modifier le mot de passe de l'auteur sur le serveur concerne
+ * en s'occupant du hash et companie
+ * @param string $login
+ * @param string $new_pass
+ * @param int $id_auteur
+ * @param string $serveur
+ * @return bool
+ */
 function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
 	if (is_null($new_pass) OR auth_spip_verifier_pass($login, $new_pass,$id_auteur,$serveur)!='')
 		return false;
@@ -282,6 +310,7 @@ function auth_spip_modifier_pass($login, $new_pass, $id_auteur, $serveur=''){
  * @param array $champs
  * @param array $options
  *	all=>true permet de demander la regeneration complete des acces apres operation en base (import, upgrade)
+ * @param string $serveur
  * @return void
  */
 function auth_spip_synchroniser_distant($id_auteur, $champs, $options = array(), $serveur=''){
