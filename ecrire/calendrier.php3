@@ -8,6 +8,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	global $les_articles;
 	global $les_breves;
 	global $spip_lang_rtl;
+	global $spip_ecran;
 
 	// calculer de nouveau la date du jour pour affichage en blanc
 	$ce_jour=date("Y-m-d");
@@ -18,7 +19,15 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	
 	if ($jour_semaine==0) $jour_semaine=7;
 	
-	echo "<TABLE border=0 CELLSPACING=1 CELLPADDING=3 WIDTH=700>";
+	if ($spip_ecran == "large") {
+		$largeur_table = 974;
+	} else {
+		$largeur_table = 700;
+	}
+	
+	$largeur_col = round($largeur_table/7);
+	
+	echo "<TABLE border=0 CELLSPACING=1 CELLPADDING=3 WIDTH='$largeur_table'>";
 
 		$mois_suiv=$mois_today+1;
 		$annee_suiv=$annee_today;
@@ -121,9 +130,9 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 
 		if (checkdate($mois_today,$jour,$annee_today)){
 			if ("$annee_today-$mois_today-$jour"==$ce_jour){
-				echo "<TD width=100 HEIGHT=80 BGCOLOR='#FFFFFF' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='red'><B>$jour</B></FONT>";
+				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#FFFFFF' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='red'><B>$jour</B></FONT>";
 			}else{		
-				echo "<TD width=100 HEIGHT=80 BGCOLOR='#E4E4E4' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$jour</B></FONT>";
+				echo "<TD width='$largeur_col' HEIGHT=80 BGCOLOR='#E4E4E4' VALIGN='top'><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$jour</B></FONT>";
 			}
 
 			$activer_messagerie = lire_meta("activer_messagerie");

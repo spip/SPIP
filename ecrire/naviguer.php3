@@ -371,6 +371,7 @@ if (strlen($texte) > 1) {
 	echo "&nbsp;</font></div>";
 }
 
+
 //
 // Langue de la rubrique
 //

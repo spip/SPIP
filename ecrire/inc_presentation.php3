@@ -357,6 +357,11 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+	
+	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
+		$afficher_langue = true;
+		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
+	}
 
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
 
@@ -381,6 +386,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$date = $row['date'];
 			$statut = $row['statut'];
 			$visites = $row['visites'];
+			$lang = $row['lang'];
 			$popularite = ceil(min(100,100 * $row['popularite'] / max(1, 0 + lire_meta('popularite_max'))));
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
@@ -438,6 +444,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif>".typo($titre)."</a>";
+			if ($afficher_langue) $s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
 			if ($petition) $s .= " <Font size=1 color='red'>"._T('lien_petitions')."</font>";
 
 			$vals[] = $s;
@@ -480,6 +487,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global $connect_id_auteur;
 
+	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
+		$afficher_langue = true;
+		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
+	}
+
+
 	$tranches = afficher_tranches_requete($requete, 2);
 
 	if (strlen($tranches)) {
@@ -510,6 +523,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$date_heure = $row['date_heure'];
 			$titre = $row['titre'];
 			$statut = $row['statut'];
+			$lang = $row['lang'];
 			$id_rubrique = $row['id_rubrique'];
 			switch ($statut) {
 			case 'prop':
@@ -531,6 +545,8 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'>";
 			$s .= typo($titre);
 			$s .= "</a>";
+			if ($afficher_langue) $s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
+
 			$vals[] = $s;
 
 			$s = "<div align=\"right\">";

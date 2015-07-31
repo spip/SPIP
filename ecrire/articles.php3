@@ -1371,11 +1371,11 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange='change_bouton(this)'>";
 
-	echo "<OPTION" . mySel("prepa", $statut_article) .">"._T('texte_statut_en_cours_redaction')."\n";
-	echo "<OPTION" . mySel("prop", $statut_article) . ">"._T('texte_statut_propose_evaluation')."\n";
-	echo "<OPTION" . mySel("publie", $statut_article) . ">"._T('texte_statut_publie')."\n";
-	echo "<OPTION" . mySel("poubelle", $statut_article) . ">"._T('texte_statut_poubelle')."\n";
-	echo "<OPTION" . mySel("refuse", $statut_article) . ">"._T('texte_statut_refuse')."\n";
+	echo "<OPTION" . mySel("prepa", $statut_article) ." style='background-color: white'>"._T('texte_statut_en_cours_redaction')."\n";
+	echo "<OPTION" . mySel("prop", $statut_article) . " style='background-color: #FFF1C6'>"._T('texte_statut_propose_evaluation')."\n";
+	echo "<OPTION" . mySel("publie", $statut_article) . " style='background-color: #B4E8C5'>"._T('texte_statut_publie')."\n";
+	echo "<OPTION" . mySel("poubelle", $statut_article) . " style='background:url(img_pack/rayures-sup.gif)'>"._T('texte_statut_poubelle')."\n";
+	echo "<OPTION" . mySel("refuse", $statut_article) . " style='background-color: #FFA4A4'>"._T('texte_statut_refuse')."\n";
 
 	echo "</SELECT>";
 
