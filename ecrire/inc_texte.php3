@@ -343,10 +343,10 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		
 		}
 		else if ($inclus == "embed" AND $real) {
-			$vignette .= embed_document ($id_document, "controls=ImageWindow|console=Console$id_document", false);
+			$vignette .= embed_document ($id_document, "controls=ImageWindow|console=Console$id_document|$les_parametres", false);
 			$vignette .= "<br>";
-			$vignette .= embed_document ($id_document, "controls=PlayButton|console=Console$id_document", false);
-			$vignette .= embed_document ($id_document, "controls=PositionSlider|console=Console$id_document", false);
+			$vignette .= embed_document ($id_document, "controls=PlayButton|console=Console$id_document|$les_parametres", false);
+			$vignette .= embed_document ($id_document, "controls=PositionSlider|console=Console$id_document|$les_parametres", false);
 		}
 		else if ($inclus == "image") {
 			$fichier_vignette = $fichier;
