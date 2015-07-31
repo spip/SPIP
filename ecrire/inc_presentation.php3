@@ -231,7 +231,7 @@ function afficher_icone_texte($url, $texte, $image, $largeur, $hauteur, $align =
 	echo " cellspacing='0' cellpadding='10'>";
 	echo "<tr><td width='".floor($largeur * 2.0)."' align='center'>\n";
 	echo "\t<a class='icone' href=\"$url\"><font face='Verdana, Arial, Helvetica, sans-serif' size='1'>\n";
-	echo "\t<img src='$image' border='0' alt='' width='$largeur' height='$hauteur'><br>\n";
+	echo "\t<img src='$image' border='0' alt='o' width='$largeur' height='$hauteur'><br>\n";
 	echo "\t<b>$texte</b></font></a>\n";
 	echo "\t</td></tr></table>\n";
 }
@@ -258,7 +258,7 @@ function afficher_icone($url, $texte, $image, $largeur, $hauteur, $align = "") {
 
 function tableau($texte,$lien,$image){
 	echo "<td width=15>&nbsp;</td>\n";
-	echo "<td width=80 valign='top' align='center'><a href='$lien'><img src='$image' border='0' alt=''></a><br><font size=1 face='arial,helvetica' color='#e86519'><b>$texte</b></font></td>";
+	echo "<td width=80 valign='top' align='center'><a href='$lien'><img src='$image' border='0' alt='o'></a><br><font size=1 face='arial,helvetica' color='#e86519'><b>$texte</b></font></td>";
 }
 
 function afficher_liste($largeurs, $table, $styles = '') {
@@ -635,7 +635,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 				if ($count==$compteur_forum){		
 					$fleche='img_pack/forum-droite.gif';
 				}
-				echo "<td width=10 valign='top' background=$fond[$count]><img src=$fleche alt='' width=10 height=13 border=0></td>\n";
+				echo "<td width=10 valign='top' background=$fond[$count]><img src=$fleche alt='o' width=10 height=13 border=0></td>\n";
 			}
 
 			echo "\n<td width=100% bgcolor='#eeeeee' valign='top'>";
@@ -864,7 +864,7 @@ afficher_script_layer();
 // Fonctions onglets
 
 function onglet_relief_inter(){
-	echo "<td background='img_pack/barre-noir.gif'><img src='img_pack/rien.gif' alt='' width='1' height='40'></td>";
+	echo "<td background='img_pack/barre-noir.gif'><img src='img_pack/rien.gif' alt='o' width='1' height='40'></td>";
 }
 
 function debut_onglet(){
@@ -900,7 +900,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 		onglet_relief_inter();
 		echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
 		if (strlen($icone)>3){
-			echo "&nbsp; <img src='img_pack/$icone'  alt='' border=0 align='middle'>";
+			echo "&nbsp; <img src='img_pack/$icone'  alt='o' border=0 align='middle'>";
 		}
 		echo "&nbsp; <a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a> &nbsp;";
 		echo "</td>";
@@ -980,7 +980,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	if ($rubrique_icone == $rubrique){
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\" $onClick>";
 		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
+		echo "<img src='img_pack/rien.gif' alt='o' width=$largeur height=1>";
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1){	
@@ -994,7 +994,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	else {
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
 		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
+		echo "<img src='img_pack/rien.gif' alt='o' width=$largeur height=1>";
 		echo "</td></tr>";
 		echo "<tr><td background='' align='center' width='$largeur' height='$hauteur'>";
 		if ($spip_display != 1){	
@@ -1030,11 +1030,11 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond' alt='' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr>";
 		}
 		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
+		echo "<img src='img_pack/rien.gif' alt='o' width=$largeur height=1>";
 		echo "</td></tr>";
 		echo "</table>";
 		if ($spip_display != 3){
@@ -1047,11 +1047,11 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond' alt='' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr>";
 		}
 		echo "<tr><td background=''>";
-		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
+		echo "<img src='img_pack/rien.gif' alt='o' width=$largeur height=1>";
 		echo "</td></tr>";
 		echo "</table>";
 		if ($spip_display != 3){
@@ -1090,18 +1090,18 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 		echo "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
 			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
-			echo "<a href='$lien'><img src='img_pack/$fonction' alt='' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fonction' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr></table>\n";
 		}
 		else {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
-			echo "<a href='$lien'><img src='img_pack/$fond' alt='' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr></table>\n";
 		}
 		echo "</td></tr>";
 	}
 	echo "<tr><td background=''>";
-	echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
+	echo "<img src='img_pack/rien.gif' alt='o' width=$largeur height=1>";
 	echo "</td></tr>";
 	if ($spip_display != 3){
 		echo "<tr><td background='' align='center'>";
@@ -1136,19 +1136,19 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 		echo "<td background='' align='center'>";
 		if ($fonction != "rien.gif"){
 			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
-			echo "<a href='$lien'><img src='img_pack/$fonction' alt='' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fonction' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr></table>\n";
 		}
 		else {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
-			echo "<a href='$lien'><img src='img_pack/$fond' alt='' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr></table>\n";
 		}
 		echo "</td>";
 	}
 
 		echo "<td background=''>";
-		echo "<img src='img_pack/rien.gif' alt='' width=5 height=1>";
+		echo "<img src='img_pack/rien.gif' alt='o' width=5 height=1>";
 		echo "</td>";
 
 	echo "<td background='' align='left'>";
@@ -1163,7 +1163,7 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 
 function bandeau_barre_verticale(){
 	echo "<td background='img_pack/tirets-separation.gif' width='2'>";
-	echo "<img src='img_pack/rien.gif' alt='' width=2 height=2>";
+	echo "<img src='img_pack/rien.gif' alt='o' width=2 height=2>";
 	echo "</td>";
 }
 
@@ -1213,9 +1213,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
-		echo "\n<area shape='rect' href='$lien&set_disp=1' alt='' coords='0,0,20,15' title=\"Afficher uniquement le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=2' alt='' coords='19,0,40,15' title=\"Afficher les logos et le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=3' alt='' coords='41,0,59,15' title=\"Afficher uniquement les logos\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=1' alt='o' coords='0,0,20,15' title=\"Afficher uniquement le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=2' alt='o' coords='19,0,40,15' title=\"Afficher les logos et le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=3' alt='o' coords='41,0,59,15' title=\"Afficher uniquement les logos\">";
 		echo "\n</map>";
 	
 	// Icones principales
@@ -1243,7 +1243,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
-		echo "<img src='img_pack/choix-layout.gif' alt='' vspace=3 border=0 usemap='#map_layout'>";
+		echo "<img src='img_pack/choix-layout.gif' alt='o' vspace=3 border=0 usemap='#map_layout'>";
 		//echo "<br><a href='$lien&set_disp=1'>Texte</a> | <a href='$lien&set_disp=2'>Icones+texte</a> | <a href='$lien&set_disp=3'>Icones</a>";
 	echo "</font></td>";
 	//bandeau_barre_verticale();
@@ -1360,7 +1360,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
-	echo "<img src='img_pack/barre-couleurs.gif' alt='' alt='barre-couleurs.gif' width='70' height='21' border='0' usemap='#map_couleur'>";
+	echo "<img src='img_pack/barre-couleurs.gif' alt='couleurs' width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
 	echo "</tr></table>";
 	echo "</td></tr></table>";
@@ -1373,7 +1373,7 @@ function gros_titre($titre, $ze_logo=''){
 	global $couleur_foncee;
 	
 	echo "<div>";
-	if (strlen($ze_logo) > 3) echo "<img src='img_pack/$ze_logo' alt='' border=0 align='middle'> &nbsp; ";
+	if (strlen($ze_logo) > 3) echo "<img src='img_pack/$ze_logo' alt='o' border=0 align='middle'> &nbsp; ";
 	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='verdana,arial,helvetica,sans-serif' color='$couleur_foncee'><b>";
 	echo propre("$titre");
 	echo "</b></font></span></div>\n";
@@ -1565,9 +1565,9 @@ function afficher_parents($collection){
 			}
 			else {
 				if ($id_parent == "0"){
-					$parents="~ <IMG SRC='img_pack/secteur-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
+					$parents="~ <IMG SRC='img_pack/secteur-24.gif' alt='o' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
 				} else {
-					$parents="~ <IMG SRC='img_pack/rubrique-24.gif' alt='' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
+					$parents="~ <IMG SRC='img_pack/rubrique-24.gif' alt='o' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
 				}
 			}
 		}
