@@ -224,7 +224,7 @@ while($row = spip_fetch_array($result_message)) {
 
 		if ($cherche_auteur) {
 			echo "<P ALIGN='left'>";
-			$query = "SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur'";
+			$query = "SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND login<>''";
 			$result = spip_query($query);
 			unset($table_auteurs);
 			unset($table_ids);
