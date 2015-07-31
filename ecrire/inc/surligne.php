@@ -63,7 +63,7 @@ function surligner_mots($page) {
             style_name:'spip_surligne',
             exact:'whole',
             style_name_suffix:false,
-            engines:[/^".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site'])."/i,/(?:recherche|s)=([^&]+)/i],
+            engines:[/^".str_replace(array("/","."),array("\/","\."),$GLOBALS['meta']['adresse_site'])."/i,/recherche=([^&]+)/i],
             highlight:'.surlignable',
             nohighlight:'.pas_surlignable'".
             ($surcharge_surligne?",
