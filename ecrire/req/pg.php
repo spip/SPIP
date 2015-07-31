@@ -56,6 +56,7 @@ function req_pg_dist($addr, $port, $login, $pass, $db='', $prefixe='', $ldap='')
 		'explain' => 'spip_pg_explain',
 		'fetch' => 'spip_pg_fetch',
 		'free' => 'spip_pg_free',
+		'hex' => 'spip_pg_hex',
 		'insert' => 'spip_pg_insert',
 		'insertq' => 'spip_pg_insertq',
 		'listdbs' => 'spip_pg_listdbs',
@@ -490,7 +491,7 @@ function spip_pg_insert($table, $champs, $valeurs, $desc=array(), $serveur='') {
 	  ? " DEFAULT VALUES"
 	  : "$champs VALUES $valeurs";
 	$r = pg_query($link, $q="INSERT INTO $table $ins $ret");
-
+#	spip_log($q);
 	if ($r) {
 		if (!$ret) return 0;
 		if ($r2 = pg_fetch_array($r, NULL, PGSQL_NUM))
@@ -585,6 +586,7 @@ function spip_pg_replace($table, $values, $desc, $serveur='') {
 
 	if ($couples) {
 	  $couples = pg_query($link, $q = "UPDATE $table SET $couples WHERE $where");
+#	  spip_log($q);
 	  if (!$couples) {
 	    $n = spip_pg_errno();
 	    $m = spip_pg_error($q);
@@ -646,9 +648,20 @@ function spip_pg_cite($v, $t)
 			return "date '$v'";
 		}
 	}
-	elseif  (test_sql_int($t))
-		  return intval($v);
+	elseif  (test_sql_int($t)
+		 AND (is_numeric($v)
+		      OR (strpos($v, 'CAST(') === 0)
+		      OR ($v[0]== 'x' ? 
+			  ctype_xdigit(substr($v,1)) :
+			  (ctype_xdigit(substr($v,2))
+			   AND $v[0]=='0' AND $v[1]=='x'))))
+		return $v[1]!=='x' ? $v : substr($v,1);
 	else return   ("'" . addslashes($v) . "'");
+}
+
+function spip_pg_hex($v)
+{
+	return "CAST(x'" . $v . "' as bigint)";
 }
 
 // http://doc.spip.org/@spip_pg_error

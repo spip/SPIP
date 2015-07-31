@@ -46,6 +46,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='', $ldap=
 		'explain' => 'spip_mysql_explain',
 		'fetch' => 'spip_mysql_fetch',
 		'free' => 'spip_mysql_free',
+		'hex' => 'spip_mysql_hex',
 		'insert' => 'spip_mysql_insert',
 		'insertq' => 'spip_mysql_insertq',
 		'listdbs' => 'spip_mysql_listdbs',
@@ -430,6 +431,7 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='') {
 
 	$t = !isset($_GET['var_profile']) ? 0 : trace_query_start();
 	$query="INSERT INTO $table $champs VALUES $valeurs";
+#	spip_log($query);
 	if (mysql_query($query, $link))
 		$r = mysql_insert_id($link);
 	else {
@@ -517,6 +519,22 @@ function spip_mysql_multi ($objet, $lang) {
 	return $retour;
 }
 
+function spip_mysql_hex($v)
+{
+	return "0x" . $v;
+}
+
+// http://doc.spip.org/@spip_mysql_cite
+function spip_mysql_cite($v, $type) {
+	if (test_sql_date($type) AND preg_match('/^\w+\(/', $v)
+	OR (test_sql_int($type)
+		 AND (is_numeric($v)
+		      OR (ctype_xdigit(substr($v,2))
+			  AND $v[0]=='0' AND $v[1]=='x'))))
+		return $v;
+	else return  ("'" . addslashes($v) . "'");
+}
+
 // Ces deux fonctions n'ont pas d'equivalent exact PostGres
 // et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
 
@@ -551,11 +569,4 @@ function spip_release_lock($nom) {
 	@mysql_query("SELECT RELEASE_LOCK(" . _q($nom) . ")");
 }
 
-// http://doc.spip.org/@spip_mysql_cite
-function spip_mysql_cite($val, $type) {
-	if (test_sql_date($type) AND preg_match('/^\w+\(/', $val)
-	OR (test_sql_int($type)))
-		return $val;
-	return _q($val);
-}
 ?>
