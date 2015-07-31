@@ -44,6 +44,7 @@ $mysql_profile = false;
 // la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
 $mysql_rappel_connexion = false;
 
+
 //
 // 	*** Fin du parametrage ***
 //
@@ -82,6 +83,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 // ** Securite **
 $auteur_session = '';
 $connect_statut = '';
+
 
 // - le dossier des squelettes, a preciser dans mes_fonctions.php3, sous
 //   la forme : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
@@ -743,15 +745,31 @@ function email_valide($adresse) {
 }
 
 
+//
 // internationalisation (i18n)
-function _T($text, $args=Array(), $lang='zg') {
+//
+
+// gettext
+function _T($text, $args=Array(), $lang='AUTO') {
 	include_ecrire('inc_gettext.php3');
+	if ($lang=='AUTO')
+		$lang = $GLOBALS['i18n'];
+
 	return spip_gettext($text, $args, $lang);
 }
 
+// chaines en cours de traduction
+function _L($text) {
+	return "<div style='font-color:red;'>$text</div>";
+}
 
+// initialisation
+$i18n = lire_meta('langue_site');
+$all_langs = 'fr,zg';
+
+//
 // Enregistrement des evenements
-
+//
 function spip_log($message) {
 	global $flag_ecrire;
 
