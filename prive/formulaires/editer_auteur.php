@@ -127,14 +127,13 @@ function formulaires_editer_auteur_traiter_dist($id_auteur='new', $retour='', $a
 		elseif(preg_match(',^\w+\|[0-9]+$,',$associer_objet)){
 			list($objet,$id_objet) = explode('|',$associer_objet);
 		}
-		if ($objet AND $id_objet){
+		if ($objet AND $id_objet AND autoriser('modifier',$objet,$id_objet)){
 			include_spip('action/editer_auteur');
 			auteur_associer($id_auteur, array($objet => $id_objet));
 			if (isset($res['redirect']))
 				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_auteur, '&');
 		}
 	}
-
 
 	return $res;
 }
