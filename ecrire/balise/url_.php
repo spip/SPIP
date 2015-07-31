@@ -203,7 +203,7 @@ function balise_URL_ACTION_AUTEUR_dist($p) {
 	$redirect = interprete_argument_balise(3,$p);
 	if ($redirect != "''" && $redirect!==NULL) {
 		if ($args == "''" || $args===NULL)
-			$p->code .= ",''".$args;
+			$p->code .= ",''";
 		$p->code .= ",".$redirect;
 	}
 
