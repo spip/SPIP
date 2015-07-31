@@ -1,0 +1,21 @@
+[(#REM) Formulaire de connexion pour les forums sur abonnement appele dans formulaire_forum.php ]
+
+<div class="formulaire_spip formulaire_login_forum">
+<a name="formulaire_login_forum" id="formulaire_login_forum"></a>
+
+<fieldset class="reponse_formulaire">
+<legend><:Forum:> <:bouton_radio_modere_abonnement:></legend>
+<p><:forum_vous_enregistrer:> <:forum_vous_inscrire:></p>
+</fieldset>
+
+#LOGIN_PUBLIC
+
+<p align="center">
+
+&#91;<a[ href="(#ENV{inscription})&amp;mode=forum[(&amp;id_rubrique=(#ENV{id_rubrique})]&amp;focus=nom_inscription"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;
+
+&#91;<a[ href="(#ENV{oubli})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+
+</p>
+
+</div>

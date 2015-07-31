@@ -3,6 +3,7 @@
 /UPGRADE.txt -text
 dist/favicon.ico -text
 dist/feed.png -text
+dist/formulaires/choix_mots.html -text
 dist/icones_barre/agrave-maj.png -text
 dist/icones_barre/blanc.png -text
 dist/icones_barre/eacute-maj.png -text

@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_signature">
+<a name="sp#ENV{id_article}" id="sp#ENV{id_article}"></a>
+
+[<p class="reponse_formulaire">(#ENV*{reponse})</p>]
+
+[<form method="post" action="(#ENV{self})[#sp(#ENV{id_article})]">
+<input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
+
+[<fieldset>
+	<legend><:info_descriptif:></legend>
+	(#ENV*{texte}|propre)
+</fieldset>]
+
+<fieldset>
+	<legend><:form_forum_identifiants:></legend>
+	<p><label for="nom_email"><:form_pet_votre_nom:></label>
+	<input type="text" class="forml" name="nom_email" id="nom_email" value="" size="20" /></p>
+	<p><label for="adresse_email"><:form_pet_votre_email:></label>
+	<input type="text" class="forml" name="adresse_email" id="adresse_email" value="" size="20" /></p>
+</fieldset>
+
+<fieldset>
+	<legend><:info_lien_hypertexte:></legend>
+	[<p>(#ENV{site_obli})<:form_pet_votre_site:></p>]
+	<p><label for="signature_nom_site"><:form_pet_nom_site2:></label>
+	<input type="text" class="forml" name="signature_nom_site" id="signature_nom_site" value="" size="20" /></p>
+	<p><label for="signature_url_site"><:form_pet_adresse_site:></label>
+	<input type="text" class="forml" name="signature_url_site" id="signature_url_site" style="text-align: left;" dir="ltr" value="http://" size="20" /></p>
+</fieldset>
+
+[(#ENV{message})
+	<fieldset>
+		<legend><:form_pet_message_commentaire:></legend>
+		<p><label for="message"><:info_texte_message:></label>
+		<textarea class="forml" name="message" id="message" rows="3" cols="20"></textarea></p>
+	</fieldset>]
+
+<div class="spip_bouton"><input type="submit" value="<:bouton_valider:>" /></div>
+</form>
+]
+
+
+</div>
