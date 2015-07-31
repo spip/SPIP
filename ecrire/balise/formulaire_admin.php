@@ -39,7 +39,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic;
 	static $dejafait = false;
 
-	if (!$GLOBALS['spip_admin'])
+	if (!@$_COOKIE['spip_admin'])
 		return '';
 
 	if (!is_array($debug)) {
@@ -141,7 +141,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	//
 
 	include_spip('base/abstract_sql');
-	$login = preg_replace(',^@,','',$GLOBALS['spip_admin']);
+	$login = preg_replace(',^@,','',@$_COOKIE['spip_admin']);
 	$alang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'),
 		array("login=" . _q($login)));
 	if ($alang['lang']) {
