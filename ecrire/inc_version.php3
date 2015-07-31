@@ -153,6 +153,7 @@ $ignore_remote_user = false;
 // serveurs externes
 $spip_server = array (
 	'math' => 'http://math.spip.org/tex.php',
+	'mathml' => 'http://arno.rezo.net/tex2mathml/latex.php',
 	'ortho' => 'http://ortho.spip.net/ortho_serveur.php'
 );
 
