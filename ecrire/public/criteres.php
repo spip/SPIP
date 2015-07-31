@@ -703,10 +703,12 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   return $n;
 }
 
-function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
+function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $milieu_prec = false)
 {
 	list($dnom,$ddesc) = $depart;
 	list($anom,$adesc) = $arrivee;
+	if (!count($vu))
+		$vu[] = $dnom; // ne pas oublier la table de depart
 
 	$keys = $ddesc['key'];
 	if ($v = $adesc['key']['PRIMARY KEY']) {
@@ -727,14 +729,16 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 			    ($def = trouver_def_table($v, $boucle))) {
 				list($table,$join) = $def;
 				$milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
-				foreach ($milieu as $k)	{
-					$new[] = $v;
-					$r = calculer_chaine_jointures($boucle, array($table, $join), $arrivee, $new);
-					if ($r)	{
-						array_unshift($r, array($dnom, $def, $k));
-						return $r;
+				$new[] = $v;
+				foreach ($milieu as $k)
+					if ($k!=$milieu_prec) // ne pas repasser par la meme cle car c'est un chemin inutilement long
+					{
+						$r = calculer_chaine_jointures($boucle, array($v, $join), $arrivee, $new, $k);
+						if ($r)	{
+							array_unshift($r, array($dnom, $def, $k));
+							return $r;
+						}
 					}
-				}
 			}
 		}
 	}
