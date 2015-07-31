@@ -223,7 +223,7 @@ function ajout_image($source, $dest) {
 		$type = decoder_type_image($size[2], true);
 
 		if ($type) deplacer_fichier_upload($source,
-						   _DIR_IMG . $dest . ".$type");
+						   _DIR_DOC . $dest . ".$type");
 	}
 }
 

@@ -62,8 +62,8 @@ if ($etape == 6) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
-	@unlink("data/inc_meta_cache.php3");
-	@unlink("data/meta_cache.php3");
+	@unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
+	@unlink(_DIR_SESSIONS . 'meta_cache.php3');
 	if (!@rename("inc_connect_install.php3", "inc_connect.php3")) {
 		copy("inc_connect_install.php3", "inc_connect.php3");
 		@unlink("inc_connect_install.php3");

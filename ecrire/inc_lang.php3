@@ -29,7 +29,7 @@ function ecrire_cache_lang($lang, $module) {
 	}
 	$contenu .= "\n\n?".">\n";
 
-	ecrire_fichier ('CACHE/lang_'.$module.'_'.$lang.'.php3', $contenu);
+	ecrire_fichier (_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3', $contenu);
 }
 
 function ecrire_caches_langues() {
@@ -51,11 +51,11 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 
 	// chercher dans le fichier cache ?
 	if (!$flag_ecrire AND $fichier_lang_exists) {
-		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')
-		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))
-		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/perso.php3'))) {
+		if (!$forcer AND @file_exists(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3')
+		AND (@filemtime(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))
+		AND (@filemtime(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-			if (lire_fichier('CACHE/lang_'.$module.'_'.$lang.'.php3',
+			if (lire_fichier(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3',
 			$contenu, array('phpcheck' => 'oui'))) {
 				eval ('?'.'>'.$contenu);
 				return;

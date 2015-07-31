@@ -30,10 +30,8 @@ function hash_env() {
 function fichier_session($id_session, $alea) {
 	if (ereg("^([0-9]+_)", $id_session, $regs))
 		$id_auteur = $regs[1];
-	$fichier_session = 'session_'.$id_auteur.md5($id_session.' '.$alea).'.php3';
-	$fichier_session = 'data/'.$fichier_session;
-	if (!$GLOBALS['flag_ecrire']) $fichier_session = 'ecrire/'.$fichier_session;
-	return $fichier_session;
+	return _DIR_SESSIONS . 'session_'.$id_auteur.md5($id_session.' '.$alea).'.php3';
+
 }
 
 //
@@ -147,16 +145,15 @@ function creer_uniqid() {
 // On en profite pour effacer toutes les sessions creees il y a plus de 48 h
 //
 function zap_sessions ($id_auteur, $zap) {
-	$dirname = $GLOBALS['flag_ecrire'] ? "data/" : "ecrire/data/";
 
 	// ne pas se zapper soi-meme
 	if ($s = $GLOBALS['spip_session'])
 		$fichier_session = fichier_session($s, lire_meta('alea_ephemere'));
 
-	$dir = opendir($dirname);
+	$dir = opendir(_DIR_SESSIONS);
 	$t = time();
 	while(($item = readdir($dir)) != '') {
-		$chemin = "$dirname$item";
+		$chemin = _DIR_SESSIONS . $item;
 		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php3$", $item, $regs)) {
 
 			// Si c'est une vieille session, on jette

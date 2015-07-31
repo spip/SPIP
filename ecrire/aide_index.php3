@@ -74,11 +74,11 @@ function fichier_aide($lang_aide = '') {
 	else if ($help_server) {
 		// Aide internet, en cache ?
 		include_ecrire('inc_sites.php3');
-		if (@file_exists($fichier_aide = "data/aide-$lang_aide-aide.html"))
+		if (@file_exists($fichier_aide = _DIR_SESSIONS . "aide-$lang_aide-aide.html"))
 			return array(file($fichier_aide), $lang_aide);
 		else {
 			// sinon aller la chercher sur le site d'aide
-			if (ecrire_fichier('data/aide-test', "test")
+			if (ecrire_fichier(_DIR_SESSIONS . 'aide-test', "test")
 			AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html"))) {
 				ecrire_fichier ($fichier_aide, $contenu);
 				return array($contenu, $lang_aide);
@@ -219,15 +219,15 @@ function help_img($regs) {
 	list ($cache, $rep, $lang, $file, $ext) = $regs;
 
 	header("Content-Type: image/$ext");
-	if (@file_exists('data/aide-'.$cache)) {
-		readfile('data/aide-'.$cache);
+	if (@file_exists(_DIR_SESSIONS . 'aide-'.$cache)) {
+		readfile(_DIR_SESSIONS . 'aide-'.$cache);
 	} else {
 		include_ecrire('inc_sites.php3');
-		if (ecrire_fichier('data/aide-test', "test")
+		if (ecrire_fichier(_DIR_SESSIONS . 'aide-test', "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {
 			echo $contenu;
-			ecrire_fichier ('data/aide-'.$cache, $contenu);
+			ecrire_fichier (_DIR_SESSIONS . 'aide-'.$cache, $contenu);
 		} else
 			header ("Location: $help_server/$rep/$lang/$file");
 	}

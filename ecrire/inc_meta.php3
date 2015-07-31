@@ -62,8 +62,7 @@ define("_DATA_META_CACHE", "1");
 	}
 	$s .= '?'.'>';
 
-	// ecrire le fichier
-	$ok = ecrire_fichier ($dir_ecrire . 'data/meta_cache.php3', $s);
+	$ok = ecrire_fichier (_DIR_SESSIONS . 'meta_cache.php3', $s);
 	if (!$ok) {
 		global $connect_statut;
 		if ($connect_statut == '0minirezo')

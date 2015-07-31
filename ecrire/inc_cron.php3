@@ -57,18 +57,18 @@ function cron_archiver_stats($last_date) {
 // La fonction de base qui distribue les taches
 //
 function spip_cron() {
-	global $flag_ecrire, $dir_ecrire, $db_ok;
+	global $flag_ecrire,  $db_ok;
 
 	#echo "hum";	spip_log('hum');
 
 	include_ecrire("inc_connect.php3");
 	if (!$db_ok) {
-		@touch($dir_ecrire.'data/mysql_out');
+		@touch(_FILE_MYSQL_OUT);
 		spip_log('pas de connexion DB pour taches de fond (cron)');
 		return;
 	}
 
-	@touch($dir_ecrire.'data/cron.lock');
+	@touch(_FILE_CRON_LOCK);
 
 	include_ecrire("inc_meta.php3");
 	$t = time();
@@ -219,9 +219,9 @@ function spip_cron() {
 	//
 	// Effacement de la poubelle (documents supprimes)
 	//
-	if (@file_exists($fichier_poubelle = $dir_ecrire.'data/.poubelle')) {
+	if (@file_exists(_FILE_GARBAGE)) {
 		if (timeout('poubelle')) {
-			if ($s = sizeof($suite = file($fichier_poubelle))) {
+			if ($s = sizeof($suite = file(_FILE_GARBAGE))) {
 				$s = $suite[$n = rand(0, $s)];
 				$s = trim($s);
 
@@ -238,12 +238,12 @@ function spip_cron() {
 					@unlink($s);
 
 				unset($suite[$n]);
-				$f = fopen($fichier_poubelle, 'wb');
+				$f = fopen(_FILE_GARBAGE, 'wb');
 				fwrite($f, join("", $suite));
 				fclose($f);
 			}
 		}
-		else @unlink($fichier_poubelle);
+		else @unlink(_FILE_GARBAGE);
 	}
 }
 

@@ -20,7 +20,7 @@ include_ecrire("inc_calendrier.php");
 include_ecrire("inc_forum.php3");
 
 
-if (!@file_exists("data/inc_meta_cache.php3")) ecrire_metas();
+if (!@file_exists(_DIR_SESSIONS . "inc_meta_cache.php3")) ecrire_metas();
 
 
 //
