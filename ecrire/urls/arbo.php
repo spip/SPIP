@@ -527,6 +527,14 @@ function urls_arbo_dist($i, &$entite, $args='', $ancre='') {
 			if ($p = url_arbo_parent($type))
 				$types_parents[]=end($p);
 		}
+		else {
+			// un segment est inconnu
+			// on genere une 404 comme il faut
+			include_spip('inc/headers');
+			http_status('404');
+			$entite = '404';
+			return;
+		}
 	}
 
 	// gerer le retour depuis des urls propres
