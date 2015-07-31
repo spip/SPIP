@@ -706,7 +706,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$lien_url = trim($regs[2]);
 		$compt_liens++;
 		$lien_interne = false;
-		if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot)? *([[:digit:]]+)$', $lien_url, $match)) {
+		if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site)? *([[:digit:]]+)$', $lien_url, $match)) {
 			// Traitement des liens internes
 			$id_lien = $match[6];
 			$type_lien = $match[1];
@@ -743,6 +743,14 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 						$req = "select titre from spip_mots where id_mot=$id_lien";
 						$row = @mysql_fetch_array(@spip_query($req));
 						$lien_texte = $row['titre'];
+					}
+					break;
+				case 'si':
+					$row = @mysql_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
+					if ($row) {
+						$lien_url = $row['url_site'];
+						if (!$lien_texte)
+							$lien_texte = typo($row['nom_site']);
 					}
 					break;
 				default:
