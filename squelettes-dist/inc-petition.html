@@ -3,9 +3,8 @@
 
 [(#REM) Signatures de la petition ]
 <B_signatures>
-<div id="signatures">
 <form method='get' action='#SELF'>
-	[(#SELF|form_hidden)]
+<div id="signatures">[(#SELF|form_hidden)]
 	#ANCRE_PAGINATION
 
 	<table summary="<:signatures_petition:>">
@@ -32,10 +31,11 @@
 	
 	[<p class="pagination">(#PAGINATION)</p>]
 
-	[(#REM) Afficher un moteur de recherche si plus de 30 signatures]
-	[(#_signatures:GRAND_TOTAL|>{30}|oui)
+	[(#REM) Afficher un moteur de recherche si plus de 30 signatures
+	ou s'il etait deja present au coup d'avant]
+	[(#ENV{recherche_signatures}|?{31,#_signatures:GRAND_TOTAL}|>{30}|oui)
 	<div class="formulaire_spip formulaire_recherche" id="formulaire_recherche_signatures"><label for="recherche_signatures"><:info_rechercher:></label> <input type="text" class="text" size="10" name="recherche_signatures" id="recherche_signatures" style='font-style: italic;' value=" <:entree_signature:>"/> <input type="submit" class="submit" value="<:info_rechercher:>" /></div>
 	]
-</form>
 </div><!--#signatures-->
+</form>
 </B_signatures>
