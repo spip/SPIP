@@ -1057,6 +1057,13 @@ div.brouteur_rubrique_on div a {
 p.spip {
 	line-height: 140%;
 }
+p.spip_note {
+	margin-bottom: 3px;
+	margin-top: 3px;
+	margin-<?php echo $left; ?>: 17px;
+	text-indent: -17px;
+}
+
 
 a.spip_in  {
 	background-color:#eeeeee;
