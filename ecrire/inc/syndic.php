@@ -470,7 +470,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_spip('inc/texte');
 
-	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=now_id_syndic");
+	$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$now_id_syndic");
 
 	if (!$row = spip_fetch_array($result))
 		return;
