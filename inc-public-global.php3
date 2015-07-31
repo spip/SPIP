@@ -6,6 +6,49 @@ include_local ("inc-cache.php3");
 
 
 //
+// Inclusions de squelettes
+//
+
+function inclure_fichier($fond, $delais, $contexte_inclus = "") {
+	static $seed = 0;
+	if (!$seed) {
+		$seed = (double) (microtime() + 1) * time();
+		srand($seed);
+	}
+
+	$fichier_requete = $fond;
+	if (is_array($contexte_inclus)) {
+		reset($contexte_inclus);
+		while(list($key, $val) = each($contexte_inclus)) $fichier_requete .= '&'.$key.'='.$val;
+	}
+	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
+	$chemin_cache = "CACHE/".$fichier_cache;
+
+	// Faire varier aleatoirement le delai (50 - 150 %)
+	// afin d'obtenir des recalculs non simultanes
+	$delais = $delais / 2 + $delais * rand(0, 255) / 256;
+
+	$use_cache = utiliser_cache($chemin_cache, $delais);
+
+	if (!$use_cache) {
+		include_ecrire("inc_connect.php3");
+		include_local("inc-calcul.php3");
+		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
+		$page = calculer_page($fond, $contexte_inclus);
+		if ($page) {
+			if ($GLOBALS['flag_apc']) {
+				apc_rm($chemin_cache);
+			}
+			$f = fopen($chemin_cache, "wb");
+			fwrite($f, $page);
+			fclose($f);
+		}
+	}
+	return $chemin_cache;
+}
+
+
+//
 // Gestion du cache et calcul de la page
 //
 
@@ -18,7 +61,6 @@ $chemin_cache = "CACHE/".$fichier_cache;
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
 
-//echo "$fichier_cache cache = $use_cache<p>";
 
 if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
 	include_ecrire("inc_meta_cache.php3");
@@ -72,6 +114,9 @@ if (!$use_cache) {
 			$url = substr($chapo, 1);
 			$texte = "<?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
+			if ($GLOBALS['flag_apc']) {
+				apc_rm($chemin_cache);
+			}
 			$file = fopen($chemin_cache, "wb");
 			fwrite($file, $texte);
 			fclose($file);
@@ -82,6 +127,9 @@ if (!$use_cache) {
 		include_local ("inc-calcul.php3");
 		$page = calculer_page_globale($fond);
 		if ($page) {
+			if ($GLOBALS['flag_apc']) {
+				apc_rm($chemin_cache);
+			}
 			$file = fopen($chemin_cache, "wb");
 			fwrite($file, $page);
 			fclose($file);
@@ -107,12 +155,10 @@ if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND 
 // Inclusion du cache pour envoyer la page au client
 //
 
+$effacer_cache = !$delais; // $delais peut etre modifie par une inclusion de squelette...
 if (file_exists($chemin_cache)) {
 	if ($lastmodified) @Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
 	include ($chemin_cache);
-	if ($GLOBALS['flag_apc']) {
-		apc_rm($chemin_cache);
-	}
 }
 
 
@@ -130,7 +176,7 @@ if ($var_recherche) {
 //
 
 @flush();
-if (!$delais) @unlink($chemin_cache);
+if ($effacer_cache) @unlink($chemin_cache);
 
 
 //
