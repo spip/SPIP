@@ -833,6 +833,13 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'typo';
 	}
 
+	// Chapo : ne pas l'afficher si article virtuel
+	$c = array('CHAPO');
+	reset($c);
+	while (list(, $val) = each($c)) {
+		$champs_traitement[$val][] = 'nettoyer_chapo';
+	}
+
 	// Textes longs : ajouter le traitement typographique + mise en forme
 	$c = array('DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'BIO', 'MESSAGE');
 	reset($c);

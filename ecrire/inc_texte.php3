@@ -65,6 +65,15 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 	return $texte;
 }
 
+// Ne pas afficher le chapo si article virtuel
+function nettoyer_chapo($chapo){
+	if (substr($chapo,0,1) == "="){
+		$chapo = "";	
+	}
+	return $chapo;
+}
+
+
 //
 // vignette pour les documents lies
 //

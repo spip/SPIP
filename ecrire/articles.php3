@@ -1207,9 +1207,19 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 echo "\n\n<DIV align=justify>";
 
-echo "<B>";
-echo justifier(propre($chapo));
-echo "</B>\n\n";
+if (substr($chapo, 0, 1) == '=') {
+	$chapo = substr($chapo, 1, strlen($chapo));
+	debut_boite_info();
+	echo "<B>Article virtuel.</b> ";
+	echo "Cet article correspond &agrave; l'adresse&nbsp;:";
+	echo "<center>$chapo</center>";
+	fin_boite_info();
+}
+else {
+	echo "<B>";
+	echo justifier(propre($chapo));
+	echo "</B>\n\n";
+}
 
 echo justifier(propre($texte));
 
