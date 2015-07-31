@@ -1186,7 +1186,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		// Fin edition des champs
 
 		echo "<p /><div align='center'>";
-		icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
+		icone_horizontale(_T('icone_supprimer_document'), $link_supp, "doc-24.gif", "supprimer.gif");
 		echo "</div>";
 
 
@@ -1297,7 +1297,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 
 		echo "<center>";
 		$link = bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'images');
-		icone_horizontale (_T('icone_supprimer_image'), $link->getUrl(), "image-24.gif", "supprimer.gif");
+		icone_horizontale (_T('icone_supprimer_image'), $link, "image-24.gif", "supprimer.gif");
 		echo "</center>\n";
 
 
