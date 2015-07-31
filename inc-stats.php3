@@ -7,7 +7,9 @@ define("_INC_STATS", "1");
 
 function ecrire_stats() {
 	global $id_article, $id_breve, $id_rubrique, $admin_ok;
-
+	include_ecrire("inc_connect.php3");
+	if (!$GLOBALS['db_ok'])
+		return;
 
 	// Essai de fichier de log simplifie
 	$log_ip = $GLOBALS['REMOTE_ADDR'];
@@ -39,38 +41,29 @@ function ecrire_stats() {
 	$last_date = lire_meta("date_statistiques");
 
 	if (lire_meta('calculer_referers_now') == 'oui') {
-		include_ecrire("inc_connect.php3");
-		if ($GLOBALS['db_ok']) {
-			include_ecrire("inc_meta.php3");
-			include_ecrire("inc_statistiques.php3");
-			ecrire_meta('calculer_referers_now', 'non');
-			ecrire_metas();
-			calculer_referers();
-		}
+		include_ecrire("inc_meta.php3");
+		include_ecrire("inc_statistiques.php3");
+		ecrire_meta('calculer_referers_now', 'non');
+		ecrire_metas();
+		calculer_referers();
 	} else if ($date != $last_date) {
-		include_ecrire("inc_connect.php3");
-		if ($GLOBALS['db_ok']) {
-			include_ecrire("inc_meta.php3");
-			include_ecrire("inc_statistiques.php3");
-			ecrire_meta("date_statistiques", $date);
+		include_ecrire("inc_meta.php3");
+		include_ecrire("inc_statistiques.php3");
+		ecrire_meta("date_statistiques", $date);
+		ecrire_metas();
+		calculer_visites($last_date);
+		// poser un message pour le prochain hit
+		if (lire_meta('activer_statistiques_ref') == 'oui') {
+			ecrire_meta('calculer_referers_now','oui');
 			ecrire_metas();
-			calculer_visites($last_date);
-			// poser un message pour le prochain hit
-			if (lire_meta('activer_statistiques_ref') == 'oui') {
-				ecrire_meta('calculer_referers_now','oui');
-				ecrire_metas();
-			}
 		}
 	}
 
 	// Log simple des visites
 	if ($log_type != "autre") {
-		include_ecrire("inc_connect.php3");
-		if ($GLOBALS['db_ok']) {
-			$query = "INSERT DELAYED IGNORE INTO spip_visites_temp (ip, type, id_objet) ".
-				"VALUES ($log_ip, '$log_type', $log_id_num)";
-			spip_query($query);
-		}
+		$query = "INSERT DELAYED IGNORE INTO spip_visites_temp (ip, type, id_objet) ".
+			"VALUES ($log_ip, '$log_type', $log_id_num)";
+		spip_query($query);
 	}
 
 	// Log complexe (referers)
@@ -80,13 +73,10 @@ function ecrire_stats() {
 		$log_referer = $GLOBALS['HTTP_REFERER'];
 		if (eregi($url_site_spip, $log_referer) AND !$GLOBALS['var_recherche']) $log_referer = "";
 		if ($log_referer) {
-			include_ecrire("inc_connect.php3");
-			if ($GLOBALS['db_ok']) {
-				$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
-				$query = "INSERT DELAYED IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
-					"VALUES ($log_ip, '$log_referer', $referer_md5, '$log_type', $log_id_num)";
-				spip_query($query);
-			}
+			$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
+			$query = "INSERT DELAYED IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
+				"VALUES ($log_ip, '$log_referer', $referer_md5, '$log_type', $log_id_num)";
+			spip_query($query);
 		}
 	}
 
@@ -94,35 +84,27 @@ function ecrire_stats() {
 	// popularite, mise a jour dix minutes
 	$date_popularite = lire_meta('date_stats_popularite');
 	if ((time() - $date_popularite) > 600) {
-		include_ecrire("inc_connect.php3");
-		if ($GLOBALS['db_ok']) {
-			include_ecrire("inc_statistiques.php3");
-			calculer_popularites();
-		}
+		include_ecrire("inc_statistiques.php3");
+		calculer_popularites();
 	}
 
 
 	// traiter les referers toutes les heures
 	$date_refs = lire_meta('date_stats_referers');
 	if ((time() - $date_refs) > 3600) {
-		include_ecrire("inc_connect.php3");
-		if ($GLOBALS['db_ok']) {
-			include_ecrire("inc_meta.php3");
-			ecrire_meta("date_stats_referers", time());
-			ecrire_meta('calculer_referers_now', 'oui');
-			ecrire_metas();
-		}
+		include_ecrire("inc_meta.php3");
+		ecrire_meta("date_stats_referers", time());
+		ecrire_meta('calculer_referers_now', 'oui');
+		ecrire_metas();
 	}
 	
 }
 
 
 function afficher_raccourci_stats($id_article) {
-	include_ecrire("inc_connect.php3");
-
 	$query = "SELECT visites, popularite FROM spip_articles WHERE id_article=$id_article AND statut='publie'";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = @mysql_fetch_array($result)) {
 		$visites = intval($row['visites']);
 		$popmax = lire_meta('popularite_max');
 		settype($popmax, 'double');

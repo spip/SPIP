@@ -4,7 +4,6 @@
 
 include ("ecrire/inc_version.php3");
 
-include_ecrire("inc_connect.php3");
 if (file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
 }

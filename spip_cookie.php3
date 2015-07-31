@@ -1,7 +1,7 @@
 <?php
 
 include ("ecrire/inc_version.php3");
-include_ecrire ("inc_connect.php3");
+
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
@@ -39,7 +39,6 @@ if ($logout) {
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 	if ($auteur_session['login'] == $logout) {
-		include_ecrire('inc_connect.php3');
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
 			supprimer_session($spip_session);

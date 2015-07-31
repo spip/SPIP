@@ -45,8 +45,7 @@ function erreur($zetexte){
 function formulaire_signature($id_article) {
 	global $val_confirm, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
 
-	include_ecrire("inc_connect.php3");
-	include_ecrire("inc_texte.php3");
+		include_ecrire("inc_texte.php3");
 	include_ecrire("inc_filtres.php3");
 
 	echo "<a name='sp$id_article'></a>\n";
@@ -297,8 +296,7 @@ function formulaire_inscription($type) {
 	}
 
 	if ($mail_inscription && $nom_inscription) {
-		include_ecrire("inc_connect.php3");
-		$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
+				$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
 		$result = spip_query($query);
 
 		echo "<div class='reponse_formulaire'>";
@@ -392,7 +390,6 @@ function formulaire_site($la_rubrique) {
 			$url_site = addslashes($url_site);
 			$description_site = addslashes($description_site);
 			
-			include_local ("ecrire/inc_connect.php3");
 			$query = "INSERT INTO spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) ".
 				"VALUES ('$nom_site', '$url_site', $la_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')";
 			$result = spip_query($query);

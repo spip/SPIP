@@ -31,8 +31,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	$use_cache = utiliser_cache($chemin_cache, $delais);
 
 	if (!$use_cache) {
-		include_ecrire("inc_connect.php3");
-		include_local("inc-calcul.php3");
+				include_local("inc-calcul.php3");
 		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
 		$page = calculer_page($fond, $contexte_inclus);
 		if ($page) {
@@ -66,7 +65,6 @@ if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
 	include_ecrire("inc_meta_cache.php3");
 }
 else {
-	include_ecrire("inc_connect.php3");
 	include_ecrire("inc_meta.php3");
 }
 
@@ -233,7 +231,6 @@ if (lire_meta('activer_moteur') == 'oui') {
 		}
 	}
 	if ($use_cache AND file_exists($fichier_index) AND $size = filesize($fichier_index)) {
-		include_ecrire("inc_connect.php3");
 		if ($db_ok) {
 			include_ecrire("inc_texte.php3");
 			include_ecrire("inc_filtres.php3");
@@ -259,8 +256,7 @@ if (lire_meta('activer_moteur') == 'oui') {
 //
 
 if ($use_cache && file_exists('CACHE/.purge2')) {
-	include_ecrire("inc_connect.php3");
-	if ($db_ok) {
+		if ($db_ok) {
 		unlink('CACHE/.purge2');
 		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
 		$result = spip_query($query);
@@ -277,7 +273,6 @@ if ($use_cache && file_exists('CACHE/.purge2')) {
 }
 
 if ($use_cache && file_exists('CACHE/.purge')) {
-	include_ecrire("inc_connect.php3");
 	if ($db_ok) {
 		unlink('CACHE/.purge');
 		$f = fopen('CACHE/.purge2', 'w');

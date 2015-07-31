@@ -2,7 +2,6 @@
 
 include ("ecrire/inc_version.php3");
 
-include_ecrire("inc_connect.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 
