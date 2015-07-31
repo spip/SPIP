@@ -625,7 +625,7 @@ function afficher_annee($annee){
 }
 
 function afficher_jour($jour){
-	my_sel("00","n.c.",$jour);
+	my_sel("00",_T('jour_non_connu_nc'),$jour);
 	for($i=1;$i<32;$i++){
 		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
 		my_sel($i,$aff,$jour);

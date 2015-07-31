@@ -892,6 +892,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_symbole_jaune' => 'Le symbole <B>jaune</B> indique une <B>annonce &agrave; tous les r&eacute;dacteurs</B>&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.',
 'info_symbole_vert' => 'Le symbole <B>vert</B> indique les <B>messages &eacute;chang&eacute;s avec d\'autres utilisateurs</B> du site.',
 'info_syndication' => 'syndication :',
+'info_syndication_articles' => 'article(s)',
 'info_taille_maximale_vignette' => 'Taille maximale des vignettes g&eacute;n&eacute;r&eacute;es par le syst&egrave;me&nbsp;:',
 'info_telecharger' => 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:',
 'info_telecharger_nouveau_logo' => 'T&eacute;l&eacute;charger un nouveau logo&nbsp;:',
@@ -1004,6 +1005,10 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'item_utiliser_mots_cles' => 'Utiliser les mots-cl&eacute;s',
 'item_utiliser_syndication' => 'Utiliser la syndication automatique',
 'item_visiteur' => 'visiteur',
+
+
+// J
+'jour_non_connu_nc' => 'n.c.',
 
 
 // L
