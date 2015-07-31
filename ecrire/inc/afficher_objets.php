@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['my_sites']=array();
 
 // http://doc.spip.org/@icone_table
@@ -233,11 +235,11 @@ function inc_afficher_objets_dist($type, $titre,$requete,$formater='', $force=fa
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
 	} else $afficher_langue = $langue_defaut = '';
 
-	$arg = array( $afficher_langue, false, $langue_defaut);
+	$arg = array($afficher_langue, false, $langue_defaut, $formater, $type,id_table_objet($type));
 	if (!function_exists($skel = "afficher_{$type}s_boucle")){
 		$skel = "afficher_objet_boucle";
-		$arg = array($type,id_table_objet($type),$afficher_langue, false, $langue_defaut);
 	}
+
 	$presenter_liste = charger_fonction('presenter_liste', 'inc');
 	$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);
 	$styles = array(array('arial11', 7), array('arial11'), array('arial1'), array('arial1'), array('arial1 centered', 100), array('arial1', 38));
@@ -263,7 +265,7 @@ function afficher_objet_boucle($row, $own)
 	global $connect_statut, $spip_lang_right;
 	static $chercher_logo = true;
 
-	list($type,$primary,$afficher_langue, $affrub, $langue_defaut) = $own;
+	list($afficher_langue, $affrub, $langue_defaut, $formater,$type,$primary) = $own;
 	$vals = array();
 	$id_objet = $row[$primary];
 	if (autoriser('voir',$type,$id_objet)){
@@ -560,7 +562,8 @@ function afficher_articles_trad_boucle($row, $own='')
 // http://doc.spip.org/@afficher_auteurs_boucle
 function afficher_auteurs_boucle($row, $own){
 	$vals = array();
-	$formater_auteur = charger_fonction('formater_auteur', 'inc');
+	list($afficher_langue, $affrub, $langue_defaut, $formater,$type,$primary) = $own;
+	$formater_auteur = $formater ? $formater : charger_fonction('formater_auteur', 'inc');
 	if ($row['statut'] == '0minirezo')
 		$row['restreint'] = sql_countsel('spip_auteurs_rubriques', "id_auteur=".intval($row['id_auteur']));
 
