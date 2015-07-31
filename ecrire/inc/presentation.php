@@ -1003,7 +1003,7 @@ function debloquer_article($arg, $texte) {
 
 	$lien = parametre_url(self(), 'debloquer_article', '', '&');
 	return "<a href='" .
-	  generer_action_auteur('instituer_collaboration', $arg, _DIR_RESTREINT_ABS . $lien) .
+	  generer_action_auteur('instituer_collaboration', $arg, $lien) .
 	  "' title=\"" .
 	  attribut_html($texte) .
 	  "\">"
