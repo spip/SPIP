@@ -1701,7 +1701,10 @@ jQuery.extend({
 				// Make sure that the request was successful or notmodified
 				if ( status != "error" ) {
 					// Cache Last-Modified header, if ifModified mode.
-					var modRes = xml.getResponseHeader("Last-Modified");
+					var modRes;
+          try {
+           modRes = xml.getResponseHeader("Last-Modified");
+          } catch(e) {}
 					if ( ifModified && modRes ) jQuery.lastModified[url] = modRes;
 					
 					// If a local callback was specified, fire it
