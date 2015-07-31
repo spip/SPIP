@@ -1,16 +1,16 @@
 <BOUCLE_afficher_contenu(SYNDIC){id_syndic=#ENV{id}}{statut?}>
-<span class="champ contenu_nom_site[ (#NOM_SITE*|?{'',vide})]">
-<span class='label'><:form_prop_nom_site:></span>
-<span dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'><a href='#URL_SITE'>#NOM_SITE</a></span>
-</span>
-<span class="champ contenu_descriptif[ (#DESCRIPTIF*|?{'',vide})]">
-<span class='label'><:info_descriptif:></span>
-<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</span>
-</span>
-[<span class="champ contenu_notes">
-<span class='label'><:info_notes:></span>
-<span dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</span>
-</span>]
+<div class="champ contenu_nom_site[ (#NOM_SITE*|?{'',vide})]">
+<div class='label'><:form_prop_nom_site:></div>
+<div dir='#LANG_DIR' class='#EDIT{hyperlien} nom_site'><a href='#URL_SITE'>#NOM_SITE</a></div>
+</div>
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
 [(#ENV{champs_extra}|?{' '})
 [(#EXTRA**|extra_affichage)]
 ]

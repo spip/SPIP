@@ -1,20 +1,20 @@
 <BOUCLE_afficher_contenu(RUBRIQUES){id_rubrique=#ENV{id}}{statut?}>
-<span class="champ contenu_titre[ (#TITRE*|?{'',vide})]">
-<span class='label'><:info_titre:></span>
-<span dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</span>
-</span>
-<span class="champ contenu_descriptif[ (#DESCRIPTIF*|?{'',vide})]">
-<span class='label'><:info_descriptif:></span>
-<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</span>
-</span>
-<span class="champ contenu_texte[ (#TEXTE*|?{'',vide})]">
-<span class='label'><:info_texte:></span>
-<span dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</span>
-</span>
-[<span class="champ contenu_notes">
-<span class='label'><:info_notes:></span>
-<span dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</span>
-</span>]
+<div class="champ contenu_titre[ (#TITRE*|?{'',vide})]">
+<div class='label'><:info_titre:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|?{'',vide})]">
+<div class='label'><:info_descriptif:></div>
+<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
+</div>
+<div class="champ contenu_texte[ (#TEXTE*|?{'',vide})]">
+<div class='label'><:info_texte:></div>
+<div dir='#LANG_DIR' class='#EDIT{texte} texte'>#TEXTE</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
 [(#ENV{champs_extra}|?{' '})
 [(#EXTRA**|extra_affichage)]
 ]
