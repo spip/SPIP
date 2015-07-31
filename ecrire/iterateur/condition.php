@@ -29,7 +29,7 @@ function iterateur_CONDITION_dist($b) {
 
 
 class IterateurCONDITION extends IterateurData {
-	protected function select() {
+	protected function select($command) {
 		$this->tableau = array(0=>1);
 	}
 }
