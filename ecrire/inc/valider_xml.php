@@ -17,6 +17,8 @@ include_spip('inc/sax');
 define('_REGEXP_DOCTYPE',
 	'/^\s*(<[?][^>]*>\s*)?<!DOCTYPE\s+(\w+)\s+(\w+)\s*([^>]*)>/');
 
+define('_REGEXP_ID', '/^[A-Za-z_][\w_:.]*$/');
+
 // http://doc.spip.org/@validateur
 function validateur($data)
 {
@@ -199,37 +201,57 @@ function validerAttribut($parser, $name, $val, $bal)
 		.  coordonnees_erreur($parser);
 	} else{
 		$type =  $a[$name][0];
-		if ($type[0]=='/') {
-		    if (!preg_match($a[$name][0], $val)) {
-		      $phraseur_xml->err[]= " <p><b>$val</b>"
-		      . _L(" valeur de l'attribut ")
-		      . "<b>$name</b>"
-		      . _L(' de ')
-		      . "<b>$bal</b>"
-		      . _L(" n'est pas conforme au motif</p><p>")
-		      . "<b>" . $a[$name][0] . "</b></p>"
-		      .  coordonnees_erreur($parser);
-		    }
-		} elseif ($type == 'ID') {
+		if ($type[0]=='/')
+			valider_motif($parser, $name, $val, $bal, $type);
+		elseif ($type == 'ID') {
 		  if (isset($phraseur_xml->ids[$val])) {
-		      $phraseur_xml->err[]= " <p><b>$val</b>"
-		      . _L(" valeur de l'attribut ")
-		      . "<b>$name</b>"
-		      . _L(' de ')
-		      . "<b>$bal</b>"
-		      . _L(" incorrect ")
-		      .  coordonnees_erreur($parser);
 		      list($l,$c) = $phraseur_xml->ids[$val];
 		      $phraseur_xml->err[]= " <p><b>$val</b>"
+		      . _L(" valeur de l'attribut ")
+		      . "<b>$name</b>"
+		      . _L(' de ')
+		      . "<b>$bal</b>"
 		      . _L(" vu auparavant ")
-		      . $l
-		      . "  "
-		      . $c;
-		  } else $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
+		      . "(L$l,C$c)"
+		      .  coordonnees_erreur($parser);
+		  } else {
+		    valider_motif($parser, $name, $val, $bal, _REGEXP_ID);
+		    $phraseur_xml->ids[$val] = array(xml_get_current_line_number($parser), xml_get_current_column_number($parser));
+		  }
 		} elseif ($type == 'IDREF') {
 			$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($parser), xml_get_current_column_number($parser));
+		} elseif ($type == 'IDREFS') {
+			$phraseur_xml->idrefss[] = array($val, xml_get_current_line_number($parser), xml_get_current_column_number($parser));
 		}
 	}
+}
+
+function valider_motif($parser, $name, $val, $bal, $motif)
+{
+	global $phraseur_xml;
+
+	if (!preg_match($motif, $val)) {
+		$phraseur_xml->err[]= " <p><b>$val</b>"
+		. _L(" valeur de l'attribut ")
+		. "<b>$name</b>"
+		. _L(' de ')
+		. "<b>$bal</b>"
+		. _L(" n'est pas conforme au motif</p><p>")
+		. "<b>" . $motif . "</b></p>"
+		.  coordonnees_erreur($parser);
+	}
+}
+
+function valider_idref($nom, $ligne, $col)
+{
+	global $phraseur_xml;
+
+	if (!isset($phraseur_xml->ids[$nom]))
+		$phraseur_xml->err[]= " <p><b>$nom</b>"
+		. _L(" ID inconnu ")
+		. $ligne
+		. " "
+		. $col;
 }
 
 class ValidateurXML {
@@ -237,7 +259,6 @@ class ValidateurXML {
 // http://doc.spip.org/@debutElement
 function debutElement($phraseur, $name, $attrs)
 { 
-
 	validerElement($phraseur, $name, $attrs);
 	xml_debutElement($phraseur, $name, $attrs);
 	foreach ($attrs as $k => $v) {
@@ -275,19 +296,18 @@ function phraserTout($phraseur, $data)
 	if (isset($phraseur_xml->entites['HTMLsymbol']))
 		$data = unicode2charset(html2unicode($data, true));
 
-
 	xml_parsestring($phraseur, $data);
 
 	if (!$phraseur_xml->err) {
-	  foreach ($this->idrefs as $idref) {
-		list($nom, $ligne, $col) = $idref;
-		if (!isset($phraseur_xml->ids[$nom]))
-		      $phraseur_xml->err[]= " <p><b>$nom</b>"
-		      . _L(" ID inconnu ")
-		      . $ligne
-		      . " "
-		      . $col;
-	  }
+		foreach ($this->idrefs as $idref) {
+			list($nom, $ligne, $col) = $idref;
+			valider_idref($nom, $ligne, $col);
+		}
+		foreach ($this->idrefss as $idref) {
+			list($noms, $ligne, $col) = $idref;
+			foreach(preg_split('/\s+/', $noms) as $nom)
+				valider_idref($nom, $ligne, $col);
+		}
 	}
 
 	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
@@ -304,6 +324,7 @@ function phraserTout($phraseur, $data)
  var $attributs = array();
  var $ids = array();
  var $idrefs = array();
+ var $idrefss = array();
  var $err = array();
 }
 
