@@ -333,7 +333,8 @@ if ($admin_ok AND !$flag_preserver) {
 	$link = new Link;
 	$link->addVar('recalcul', 'oui');
 	echo $link->getForm('GET');
-	if (!$use_cache) $pop = " *"; else $pop = "";
+	if ($use_cache) $pop = " *";
+	else $pop = "";
 	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page$pop'>";
 	echo "</form>\n";
 }
