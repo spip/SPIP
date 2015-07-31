@@ -29,37 +29,41 @@ tester_variable('espace_images',3);
 //
 
 function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
-  $table_logos = array (
+	$table_logos = array (
 	'ARTICLE' => 'art',
 	'AUTEUR' =>  'aut',
 	'BREVE' =>  'breve',
 	'MOT' => 'mot',
 	'RUBRIQUE' => 'rub',
 	'SITE' => 'site'
-);
-  $type = $table_logos[$type];
-  # attention au cas $id = '0' pour LOGO_SITE_SPIP
-  # utiliser intval et toujours faire au moins un essai
-  while (1) {
-    $on = cherche_image_nommee($type . $onoff . intval($id));
-    if ($on) 
-      { if ($ff)
-	  return  ("$on[1].$on[2]");
-	else
-	  {
-	    $off = ($onoff == 'off') ? '' : cherche_image_nommee($type . 'off' . $id);
-	    return affiche_logos(("$on[0]$on[1].$on[2]"),
-				 ($off ? ("$off[0]$off[1].$off[2]") : ''),
-				 $lien,
-				 $align);
-	  }
-      }
-    else if ($id_rubrique !== false)
-      {$type = 'rub'; $id = $id_rubrique; $id_rubrique = 0;}
-    else if ($type = 'rub') $id = sql_parent($id);
-    if (!$id) return '';
-  }
+	);
+	$type = $table_logos[$type];
+
+	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
+	while (1) {
+		$on = cherche_image_nommee($type . $onoff . intval($id));
+		if ($on) {
+			if ($ff)
+				return  ("$on[1].$on[2]");
+			else {
+				$off = ($onoff == 'off') ? '' :
+					cherche_image_nommee($type . 'off' . $id);
+				return affiche_logos(("$on[0]$on[1].$on[2]"),
+					($off ? ("$off[0]$off[1].$off[2]") : ''),
+					$lien,
+					$align);
+			}
+		}
+		else if ($id_rubrique) {
+			$type = 'rub';
+			$id = $id_rubrique;
+			$id_rubrique = 0;
+		} else if ($id AND $type == 'rub')
+			$id = sql_parent($id);
+		else return '';
+	}
 }
+
 
 // Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
 function affiche_logos($arton, $artoff, $lien, $align) {
