@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_conseil_selection_mot_cle' => '<b>Important group:</b> It is very strongly advised to select a keyword in this group.',
 'avis_deplacement_rubrique' => 'Warning! This section contains @contient_breves@ news item@scb@: if you move it , please check this box to confirm.',
 'avis_destinataire_obligatoire' => 'You must select a recipient before sending this message.',
-'avis_doublon_mot_cle' => 'A word with this title already exists. Are you sure you want to create another?', # MODIF
+'avis_doublon_mot_cle' => 'A word with this title already exists. Are you sure you want to create another?',
 'avis_erreur_connexion_mysql' => 'SQL connection error',
 'avis_erreur_version_archive' => '<b>Warning! The file @archive@ was created by
     a version of SPIP other than the one you have
