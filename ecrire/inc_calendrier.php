@@ -37,31 +37,27 @@ if ($GLOBALS['set_partie_cal']) {
 # avec des suffixes identiques pour les memes fonctionnalites des 3 types
 
 global $bleu, $vert, $jaune;
+$style = "style='width: 14px; height: 7px; border: 0px'";
+$bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', $style);
+$vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', $style);
+$jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', $style);
 
-$bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "width='14' height='7' border='0'");
-$vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "width='14' height='7' border='0'");
-$jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "width='14' height='7' border='0'");
-
-function http_calendrier_init($date='', $ltype='semaine', $lechelle='', $lpartie_cal='', $script='')
+function http_calendrier_init($date='', $ltype='mois', $lechelle='', $lpartie_cal='', $script='')
 {
 	global $mois, $annee, $jour, $type, $echelle, $partie_cal;
 
 	if (!isset($type)) $type = $ltype;
 	if (!isset($echelle)) $echelle = $lechelle;
 	if (!isset($lpartie_cal)) $partie_cal = $lpartie_cal;
-	if (!$date) {
-	  // sans arguments => mois courant
-	  if (!$mois){
-	    $today=getdate(time());
-	    $jour = $today["mday"];
-	    $mois = $today["mon"];
-	    $annee = $today["year"];
-	  } else {if (!isset($jour)) {$jour = 1; $type= 'mois';}}
-	}
-	$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
+	if (!$mois){
+		$today=getdate($date ? strtotime($date) : time());
+		$jour = $today["mday"];
+		$mois = $today["mon"];
+		$annee = $today["year"];
+	    } else {if (!isset($jour)) {$jour = 1; $type= 'mois';}}
+	    $date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
 	if (!$script) $script = $GLOBALS['REQUEST_URI']; 
-	$script = http_calendrier_retire_args($script,
-					      array('echelle','jour','mois','annee', 'type'));
+	$script = http_calendrier_retire_args($script);
 
 	if (!_DIR_RESTREINT) http_calendrier_titre($date, $type);
 	$f = 'http_calendrier_init_' . $type;
@@ -204,7 +200,6 @@ function http_calendrier_init_mois($date, $echelle, $partie_cal, $script)
 		$largeur_table = 730;
 	}
 
-	$fclic = 'http_calendrier_clics';
 	$premier_jour = '01';
 	$mois = mois($date);
 	$annee = annee($date);
@@ -231,7 +226,7 @@ function http_calendrier_init_mois($date, $echelle, $partie_cal, $script)
 	$total = "<div>&nbsp;</div>" .
 		"<table cellpadding='0' cellspacing='0' border='0' width='$largeur_table'>" .
 		"\n<tr><td width='$largeur_table' valign='top'>" .
-	  http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $messages, $fclic) .
+	  http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $messages, $script, 'http_calendrier_clics') .
 		"</td></tr>\n</table>";
 
 	# messages sans date ?
@@ -243,8 +238,7 @@ function http_calendrier_init_mois($date, $echelle, $partie_cal, $script)
 		"</font></td></tr>\n</table>";
 	}
 
-	if ($fclic == 'http_calendrier_clics')
-		$total .= http_calendrier_aide_mess();
+	$total .= http_calendrier_aide_mess();
 
 	return $total;
 }
@@ -262,12 +256,12 @@ function http_calendrier_aide_mess()
     "</font></td></tr>\n</table>";
  }
 
-function http_calendrier_retire_args($script, $args)
+function http_calendrier_retire_args($script)
 {
-	foreach($args as $arg) {
-		$script = ereg_replace("$arg=[^&]*&",'', $script);
-		$script = ereg_replace("$arg=[^#]*#",'#', $script);
-		$script = ereg_replace("$arg=[^&#]*$",'', $script);
+  foreach(array('echelle','jour','mois','annee', 'type', 'set_echelle', 'set_partie_cal') as $arg) {
+		$script = preg_replace("/([?&])$arg=[^&]*&/",'\1', $script);
+		$script = preg_replace("/([?&])$arg=[^#]*#/",'\1#', $script);
+		$script = preg_replace("/([?&])$arg=[^&#]*$/",'\1', $script);
 	}
 	return $script;
 }
@@ -285,7 +279,7 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 
   if (!isset($couleur_foncee)) $couleur_foncee = '#aaaaaa';
 	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
-	$script = http_calendrier_retire_args($script, array('echelle'));
+	$script = http_calendrier_retire_args($script);
 	if (!ereg('[?&]$', $script))
 		$script .= (strpos($script,'?') ? '&' : '?');
 	$args = "jour=$jour&mois=$mois&annee=$annee$ancre";
@@ -483,7 +477,7 @@ function http_calendrier_navigation_semaine($jour_today,$mois_today,$annee_today
 # et on place les boutons de navigations vers les autres mois et connexe;
 # sinon on considere que c'est un planning ferme et il n'y a pas de navigation
 
-function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $evenements, $fclic)
+function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $evenements, $script, $fclic)
 {
   global $couleur_claire, $couleur_foncee;
 
@@ -507,7 +501,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 	$suiv = "mois=$mois_suiv&annee=$annee_suiv";
 	$periode = affdate_mois_annee("$annee-$mois-1");
 	}
-	if (ereg('^(.*)(#[^=&]*)$',$script,$m)) {
+	if (ereg('^(.*)(#[^=&]*)$',$script, $m)) {
 	  $script = $m[1];
 	  $ancre = $m[2];
 	} else $ancre = '';
@@ -534,7 +528,7 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $part
 			    _T('date_jour_1')),
 		      $couleur_claire,
 		      $couleur_foncee) .
-    http_calendrier_suitede7($mois,$annee, $premier_jour, $dernier_jour,$evenements, $fclic) .
+	http_calendrier_suitede7($mois,$annee, $premier_jour, $dernier_jour,$evenements, $fclic, $script) .
     "\n</table>";
 }
 
@@ -555,9 +549,9 @@ function http_calendrier_les_jours($intitul, $claire, $foncee)
 # dispose les lignes d'un calendrier de 7 colonnes (les jours)
 # chaque case est garnie avec les evenements du jour figurant dans $evenements
 # et avec le resultat de l'application du parametre fonctionnel $fclic
-# sur les valeurs jour/mois/annee
+# sur les valeurs jour/mois/annee et script
 
-function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic)
+function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic, $script)
 {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	
@@ -607,7 +601,7 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 		else $border_left = "";
 
 		$ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond;$border_left height: 100px; width: 14%; vertical-align: top'>" .
-			$fclic($annee_en_cours, $mois_en_cours, $jour, $jour_mois) .
+		  $fclic($annee_en_cours, $mois_en_cours, $jour, $jour_mois, $script) .
 			(!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
 			"\n\t</td>";
 		if ($jour_semaine==0) 
@@ -622,16 +616,13 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 
 # 3 fonctions pour servir de parametre a la precedente
 
-function http_calendrier_sans_clics($annee, $mois, $jour, $clic)
+function http_calendrier_sans_clics($annee, $mois, $jour, $clic, $script)
 {
     return $clic;
 }
 
-function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic)
+function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic, $script)
 {
-  $script = http_calendrier_retire_args($GLOBALS['REQUEST_URI'], 
-					array('echelle','jour','mois','annee', 'type'));
-
   if (ereg('^(.*)(#[^=&]*)$',$script,$m)) {
     $script = $m[1];
     $ancre = $m[2];
@@ -652,11 +643,10 @@ function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic)
     "</td></tr>\n</table>";
 }
 
-function http_calendrier_clics($annee, $mois, $jour, $clic)
+function http_calendrier_clics($annee, $mois, $jour, $clic, $script)
 {
   global $bleu, $jaune, $vert;
   $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
-  $script =  $GLOBALS['PHP_SELF'] ;
   return "\n" .
     http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee", $clic) .
     "\n" .
@@ -911,7 +901,7 @@ function http_calendrier_image_et_typo($evenements)
 	      $i = 'puce-verte-breve.gif';
 	    else
 	      $i = 'puce-blanche-breve.gif';
-	    $v['SUMMARY'] = http_img_pack($i, ".", "width='8' height='9' border='0'") . '&nbsp;' . ($v['SUMMARY'] ? $v['SUMMARY'] : $v['DESCRIPTION']);
+	    $v['SUMMARY'] = http_img_pack($i, ".",  $style = "style='width: 8px; height: 9px; border: 0px'") . '&nbsp;' . ($v['SUMMARY'] ? $v['SUMMARY'] : $v['DESCRIPTION']);
 	  }
 	$res[$k] = $v;
       }
