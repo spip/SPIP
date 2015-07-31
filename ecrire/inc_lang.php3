@@ -510,7 +510,7 @@ function verifier_lang_url() {
 		$destination->addvar('lang', $lang_demandee);
 		if ($GLOBALS['recalcul'] == 'oui')
 			$destination->addvar('recalcul', 'oui');
-		calculer_action_auteur($destination->getUrl());
+		redirige_par_entete($destination->getUrl());
 	}
 
 	// Subtilite : si la langue demandee par cookie est la bonne
