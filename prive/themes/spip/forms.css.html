@@ -118,7 +118,8 @@ h3.titrem {position:relative;}
 .lte7 .formulaire_spip input.text,
 .lte7 .formulaire_spip input.password,
 .lte7 .formulaire_spip textarea,
-.lte7 .formulaire_spip select { width: 96%;margin:0;display: inline;}
+.lte7 .formulaire_spip select { width: 96%;margin:0;display: inline;margin-left:0;}
+.lte7 .formulaire_spip textarea {margin-left: 10px;}
 
 .formulaire_spip input.text,
 .formulaire_spip input.password,
@@ -200,6 +201,7 @@ input[type="submit"] {font-size: inherit;}
 .lat .formulaire_spip,.lat .formulaire_spip fieldset {padding:0 5px;}
 .lat .formulaire_spip ul,.lat .formulaire_spip fieldset,.lat .formulaire_spip .boutons,.lat .formulaire_spip .titrem,.lat .formulaire_spip .legend {margin-left: -5px;margin-right: -5px;}
 
+.lte7 .lat .formulaire_spip input.text,.lte7 .lat .formulaire_spip textarea {margin-left: 5px;} /* BUG IE7 */
 .lat .formulaire_spip {}
 .lat .formulaire_spip h3.titrem {font-size:1em;/*padding:[(#ENV{margin-bottom}|div{4})em] 5px;*/}
 
