@@ -31,7 +31,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscri
 			$login = test_login($mail_inscription);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
-			$r = spip_insert('spip_auteurs', 
+			$r = spip_abstract_insert('auteurs', 
 					 '(nom, email, login, pass, statut, htpass)',
 					 "('".addslashes($nom_inscription)."',  '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
 			ecrire_acces();
@@ -95,7 +95,6 @@ function envoyer_inscription($mail, $statut, $type, $login, $pass) {
 	  return _T('form_forum_probleme_mail');
 }
 
-
 function test_login($mail) {
 	if (strpos($mail, "@") > 0) $login_base = substr($mail, 0, strpos($mail, "@"));
 	else $login_base = $mail;
@@ -103,16 +102,15 @@ function test_login($mail) {
 	$login_base = strtolower($login_base);
 	$login_base = ereg_replace("[^a-zA-Z0-9]", "", $login_base);
 	if (!$login_base) $login_base = "user";
+	$login = $login_base;
 
-	for ($i = 0; ; $i++) {
-		if ($i) $login = $login_base.$i;
-		else $login = $login_base;
-		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-		$result = spip_query($query);
-		if (!spip_num_rows($result)) break;
+	for ($i = 1; ; $i++) {
+		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1";
+		if (!spip_num_rows(spip_query($query))) return $login;
+		$login = $login_base.$i;
 	}
 
-	return $login;
+
 }
 
 ?>
