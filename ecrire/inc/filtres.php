@@ -617,16 +617,20 @@ function recup_date($numdate){
 		} elseif ($annee<100) {
 			$annee = 1900 + $annee ;
 		}
+		list($heures, $minutes, $secondes) = recup_heure($numdate);
+
 	}
 	elseif (preg_match('#([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})#',$numdate, $regs)) {
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour = $regs[3];
+		list($heures, $minutes, $secondes) = recup_heure($numdate);
 	}
 	elseif (preg_match('#([0-9]{4})-([0-9]{2})#', $numdate, $regs)){
 		$annee = $regs[1];
 		$mois = $regs[2];
 		$jour ='';
+		list($heures, $minutes, $secondes) = recup_heure($numdate);
 	}
 	elseif (preg_match('#^([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})$#', $numdate, $regs)){
 		$annee = $regs[1];
