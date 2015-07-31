@@ -18,7 +18,10 @@ function genie_optimiser_dist($t) {
 
 	optimiser_base_une_table();
 	optimiser_base();
-	return 1;
+
+	// la date souhaitee pour le tour suivant = apres-demain a 4h du mat ;
+	// sachant qu'on a un delai de 48h, on renvoie aujourd'hui a 4h du mat
+	return -mktime(4,0,0);
 }
 
 // heure de reference pour le garbage collector = 24h auparavant
