@@ -303,8 +303,21 @@ function afficher_corps_articles($id_article, $virtuel, $row)
 		.  fin_boite_info(true);
 	}
 	else {
-		$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
-		$res .= $afficher_contenu_objet('article', $id_article,$row['id_rubrique']);
+		$type = 'article';
+		$id_rubrique = $row['id_rubrique'];
+		include_spip('public/assembler');
+		$contexte = array('id'=>$id_article,'id_rubrique'=>$id_rubrique);
+		$fond = recuperer_fond("prive/contenu/$type",$contexte);
+		// permettre aux plugin de faire des modifs ou des ajouts
+		$fond = pipeline('afficher_contenu_objet',
+			array(
+			'args'=>array(
+				'type'=>$type,
+				'id_objet'=>$id_article,
+				'contexte'=>$contexte),
+			'data'=> $fond));
+	
+		$res .= "<div id='wysiwyg'>$fond</div>";
 	}
 	return $res;
 }

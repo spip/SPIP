@@ -71,7 +71,6 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 	$editer_mots = charger_fonction('editer_mots', 'inc');
 	if ($flag_administrable)
 		$instituer_site = charger_fonction('instituer_site','inc');
-	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	echo debut_grand_cadre(true);
 	echo afficher_hierarchie($id_rubrique);
@@ -117,10 +116,25 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 		gros_titre($nom_site?$nom_site:"("._T('info_sans_titre_2').")", '' , false)
 	  . "<a href='$url_site' class='url_site'>$url_affichee</a>";
 
+	$type = 'site';
+	include_spip('public/assembler');
+	$contexte = array('id'=>$id_syndic,'id_rubrique'=>$id_rubrique);
+	$fond = recuperer_fond("prive/contenu/$type",$contexte);
+	// permettre aux plugin de faire des modifs ou des ajouts
+	$fond = pipeline('afficher_contenu_objet',
+			array(
+			'args'=>array(
+				'type'=>$type,
+				'id_objet'=>$id_syndic,
+				'contexte'=>$contexte),
+			'data'=> $fond));
+	
+	$fond.= "<div id='wysiwyg'>$fond</div>";
+
 	$onglet_contenu =
 		(_INTERFACE_ONGLETS?
 		($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
-		. $afficher_contenu_objet('site', $id_syndic,$id_rubrique):"")
+		 . $fond:"")
 
 		. (($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") ?
 		  "<p class='site_syndique'><a href='".htmlspecialchars($url_syndic)."'>"
@@ -159,7 +173,7 @@ function afficher_site($id_syndic, $id_rubrique, $nom_site, $row){
 
 	$onglet_proprietes =
 		(_INTERFACE_ONGLETS?"":
-		$afficher_contenu_objet('site', $id_syndic,$id_rubrique)
+		$fond
 		. ($statut == 'prop' ? "<p class='site_prop'>"._T('info_site_propose')." <b>".affdate($date_heure)."&nbsp;</b></p>" : "")
 		)
 		. afficher_site_rubrique($id_syndic, $id_rubrique, $id_secteur)

@@ -105,8 +105,6 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 	/* raccourcis ont disparu */
 	echo bloc_des_raccourcis(icone_horizontale(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif","creer.gif", 0));
 
-	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
-
 	$actions = $flag_editable
 		? icone_inline(
 			// TODO -- _L("Fil a travaille sur cette breve il y a x minutes")
@@ -123,10 +121,20 @@ function exec_breves_voir_args($id_breve, $cherche_mot, $select_groupe)
 		"<div class='bandeau_actions'>$actions</div>"
 		. gros_titre($titre,'', false);
 
-
-	$onglet_contenu = $afficher_contenu_objet('breve', $id_breve,$id_rubrique);
-
-
+	$type = 'breve';
+	include_spip('public/assembler');
+	$contexte = array('id'=>$id_breve,'id_rubrique'=>$id_rubrique);
+	$fond = recuperer_fond("prive/contenu/$type",$contexte);
+	// permettre aux plugin de faire des modifs ou des ajouts
+	$fond = pipeline('afficher_contenu_objet',
+			array(
+			'args'=>array(
+				'type'=>$type,
+				'id_objet'=>$id_breve,
+				'contexte'=>$contexte),
+			'data'=> $fond));
+	
+	$onglet_contenu = "<div id='wysiwyg'>$fond</div>";
 
 	$onglet_proprietes =
 		afficher_breve_rubrique($id_breve, $id_rubrique, $statut)
