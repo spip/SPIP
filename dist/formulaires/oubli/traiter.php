@@ -38,10 +38,7 @@ function message_oubli($email, $param)
 				     array('nom_site_spip' => $nom,
 					   'adresse_site' => url_de_base(),
 					   'sendcookie' => generer_url_public('spip_pass', 
-					   "$param=$cookie&formulaire_action="._request('formulaire_action')
-					   ."&formulaire_action_cle="._request('formulaire_action_cle')
-					   ."&formulaire_action_args="._request('formulaire_action_args')
-					   , true)))) )
+					   "$param=$cookie", true)))) )
 		  return _T('pass_recevoir_mail');
 		else
 		  return  _T('pass_erreur_probleme_technique');
