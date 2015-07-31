@@ -317,14 +317,9 @@ $spip_forum = array(
 
 $spip_forum_key = array(
 		"PRIMARY KEY"	=> "id_forum",
-		"KEY id_parent"	=> "id_parent",
-		"KEY id_article"	=> "id_article",
-		"KEY id_breve"	=> "id_breve",
 		"KEY id_message"	=> "id_message",
-		"KEY id_syndic"	=> "id_syndic",
-		"KEY id_rubrique"	=> "id_rubrique",
-		"KEY statut"	=> "statut, date_heure",
-		"KEY date_thread" => "date_thread");
+		"KEY optimal" => "statut,id_parent,id_article,date_heure,id_breve,id_syndic,id_rubrique");
+
 $spip_forum_join = array(
 		"id_forum"=>"id_forum",
 		"id_parent"=>"id_parent",
