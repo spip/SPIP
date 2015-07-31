@@ -862,6 +862,9 @@ function paragrapher($letexte, $forcer=true) {
 	if ($forcer OR (
 	strstr($letexte,'<') AND preg_match(',<p\b,iS',$letexte)
 	)) {
+		// toujours ouvrir un parapgraphe derriere une balise bloc fermante
+		// Fermer les paragraphes (y compris sur "STOP P")
+		$letexte = preg_replace(',</('._BALISES_BLOCS.')[^>]*>\s*?,UimsS',"\\0<p>", $letexte);
 
 		// Ajouter un espace aux <p> et un "STOP P"
 		// transformer aussi les </p> existants en <p>, nettoyes ensuite
@@ -887,7 +890,6 @@ function paragrapher($letexte, $forcer=true) {
 		// Renommer les paragraphes normaux
 		$letexte = str_replace('<p >', "<p$class_spip>",
 			$letexte);
-
 	}
 
 	return $letexte;
