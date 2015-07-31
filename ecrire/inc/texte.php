@@ -591,11 +591,11 @@ function calculer_url ($lien, $texte='', $pour='url') {
 
 	// Cherche un lien du type [->raccourci 123]
 	// associe a une fonction generer_url_raccourci()
-	if (preg_match(',^(\S*?)\s*(\d+)(#[^\s]*)?$,S', trim($lien), $match)) {
-		$ancre = isset($match[3]) ? $match[3] :'';
+	if (preg_match(',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S', trim($lien), $match)) {
+		list(,$objet,$id,$params,$ancre) = $match;
 
 		// valeur par defaut
-		if (!$f = $match[1]) $f = 'article';
+		if (!$f = $objet) $f = 'article';
 
 		// aliases (historique)
 		if ($f == 'art') $f = 'article';
@@ -611,9 +611,22 @@ function calculer_url ($lien, $texte='', $pour='url') {
 		$f=(($pour == 'url') ? 'generer' : 'calculer') . '_url_' . $f;
 		charger_generer_url();
 		if (function_exists($f)) {
-			if ($pour == 'url') return $f($match[2]) . $ancre;
-			$res = $f($match[2], $texte, $ancre);
-			return ($pour == 'titre') ? $res[2] : $res;
+			if ($pour == 'url') {
+				$url = $f($id);
+				if ($params)
+					$url .= (strstr($url, '?') ? '&amp;' : '?')
+						. substr($params,1);
+				return $url . $ancre;
+			}
+
+			$res = $f($id, $texte, $ancre);
+			if ($pour == 'titre')
+				return $res[2];
+			if ($params)
+				$res[0] .= (strstr($res[0], '?') ? '&amp;' : '?')
+					. substr($params,1);
+			$res[0] .= $ancre;
+			return $res;
 		}
 	}
   
@@ -647,9 +660,8 @@ function calculer_url ($lien, $texte='', $pour='url') {
 }
 
 // http://doc.spip.org/@calculer_url_article
-function calculer_url_article($id, $texte, $ancre)
-{
-	$lien = generer_url_article($id) . $ancre;
+function calculer_url_article($id, $texte) {
+	$lien = generer_url_article($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id"));
 		$texte = $row['titre'];
@@ -658,9 +670,9 @@ function calculer_url_article($id, $texte, $ancre)
 }
 
 // http://doc.spip.org/@calculer_url_rubrique
-function calculer_url_rubrique($id, $texte, $ancre)
+function calculer_url_rubrique($id, $texte)
 {
-	$lien = generer_url_rubrique($id) . $ancre;
+	$lien = generer_url_rubrique($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id"));
 		$texte = $row['titre'];
@@ -669,9 +681,9 @@ function calculer_url_rubrique($id, $texte, $ancre)
 }
 
 // http://doc.spip.org/@calculer_url_mot
-function calculer_url_mot($id, $texte, $ancre)
+function calculer_url_mot($id, $texte)
 {
-	$lien = generer_url_mot($id) . $ancre;
+	$lien = generer_url_mot($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id"));
 		$texte = $row['titre'];
@@ -680,9 +692,9 @@ function calculer_url_mot($id, $texte, $ancre)
 }
 
 // http://doc.spip.org/@calculer_url_breve
-function calculer_url_breve($id, $texte, $ancre)
+function calculer_url_breve($id, $texte)
 {
-	$lien = generer_url_breve($id) . $ancre;
+	$lien = generer_url_breve($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_breves WHERE id_breve=$id"));
 		$texte = $row['titre'];
@@ -691,9 +703,9 @@ function calculer_url_breve($id, $texte, $ancre)
 }
 
 // http://doc.spip.org/@calculer_url_auteur
-function calculer_url_auteur($id, $texte, $ancre)
+function calculer_url_auteur($id, $texte)
 {
-	$lien = generer_url_auteur($id) . $ancre;
+	$lien = generer_url_auteur($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$id"));
 		$texte = $row['nom'];
@@ -702,9 +714,9 @@ function calculer_url_auteur($id, $texte, $ancre)
 }
 
 // http://doc.spip.org/@calculer_url_document
-function calculer_url_document($id, $texte, $ancre)
+function calculer_url_document($id, $texte)
 {
-	$lien = generer_url_document($id) . $ancre;
+	$lien = generer_url_document($id);
 	if (!$texte) {
 		$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id"));
 		$texte = $row['titre'];
@@ -715,7 +727,7 @@ function calculer_url_document($id, $texte, $ancre)
 }
 
 // http://doc.spip.org/@calculer_url_site
-function calculer_url_site($id, $texte, $ancre)
+function calculer_url_site($id, $texte)
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
