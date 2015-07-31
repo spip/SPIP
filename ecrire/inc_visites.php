@@ -76,8 +76,8 @@ function calculer_visites($t) {
 			compte_fichier_visite($item,
 				$visites, $visites_a, $referers, $referers_a, $articles);
 			@unlink($item);
-		} else
-			spip_log("$item pas vieux");
+		}
+		#else spip_log("$item pas vieux");
 	}
 
 	if (!$visites) return;

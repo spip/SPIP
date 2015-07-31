@@ -819,7 +819,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_syndic ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
 		spip_query("ALTER TABLE spip_syndic ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_forum ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_forum ADD ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_forum ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_signatures ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
 		spip_query("ALTER TABLE spip_signatures ADD INDEX idx (idx)");
 		maj_version (1.730);
@@ -1023,7 +1023,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_mots ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_rubriques ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_syndic ADD INDEX idx (idx)");
-		spip_query("ALTER TABLE spip_forum ADD ADD INDEX idx (idx)");
+		spip_query("ALTER TABLE spip_forum ADD INDEX idx (idx)");
 		spip_query("ALTER TABLE spip_signatures ADD INDEX idx (idx)");
 		maj_version(1.820);
 	}
@@ -1151,6 +1151,12 @@ function maj_base() {
 		}
 		maj_version(1.906);
 	}
+
+	if ($version_installee < 1.907) {
+		spip_query("ALTER TABLE spip_forum ADD INDEX idx (idx)");
+		maj_version(1.907);
+	}
+
 
 	return true;
 }
