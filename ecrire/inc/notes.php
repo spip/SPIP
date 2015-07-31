@@ -129,7 +129,7 @@ function traiter_raccourci_notes($letexte, $marqueur_notes)
 		$att = ($notes_vues[$ancre]++) ? '' : " id='nh$ancre'";
 
 		// creer le popup 'title' sur l'appel de note
-		if ($title = supprimer_tags(propre($note_texte))) {
+		if ($title = supprimer_tags(nettoyer_raccourcis_typo($note_texte))) {
 			$title = " title='" . couper($title,80) . "'";
 		}
 
