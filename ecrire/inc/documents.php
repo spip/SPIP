@@ -271,8 +271,8 @@ function integre_image($id_document, $align, $type_aff) {
 	if (!$row) return '';
 
 	$id_type = $row['id_type'];
-	$titre = !$row['titre'] ? '' : 	typo($row['titre']);
-	$descriptif = !$row['descriptif'] ? '' : propre($row['descriptif']);
+	$titre = !strlen($row['titre']) ? '' : typo($row['titre']);
+	$descriptif = !strlen($row['descriptif']) ?'' : propre($row['descriptif']);
 	$fichier = $row['fichier'];
 	$url_fichier = generer_url_document($id_document);
 	$largeur = $row['largeur'];
@@ -338,7 +338,8 @@ function integre_image($id_document, $align, $type_aff) {
 	}
 
 	$vignette = inserer_attribut($vignette, 'alt', $alt);
-	if ($title) $vignette = inserer_attribut($vignette, 'title', $title);
+	if (strlen($title))
+		$vignette = inserer_attribut($vignette, 'title', $title);
 
 	// Preparer le texte sous l'image pour les <DOC>
 	if ($type_aff == 'DOC') {
