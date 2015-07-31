@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'Kh&ocirc;ng c&oacute; tin ng&#7855;n t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
 'aucune_rubrique' => 'Kh&ocirc;ng c&oacute; &#273;&#7873; m&#7909;c t&#7841;i &#273;&#7883;a ch&igrave; n&agrave;y',
 'autres_breves' => 'Nh&#7919;ng tin ng&#7857;n kh&aacute;c ',
-'autres_groupes_de_mots_clefs' => 'C&aacute;c nh&oacute;m t&#7915; then ch&#7889;t kh&aacute;c',
 'autres_groupes_mots_clefs' => 'Nh&#7919;ng nh&oacute;m t&#7915; then ch&#7889;t kh&aacute;c ',
 'autres_sites' => 'Nh&#7919;ng trang Web kh&aacute;c',
 
@@ -33,13 +32,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'Trong c&ugrave;ng &#273;&#7873; m&#7909;c',
 'date' => 'Ng&agrave;y',
 'dernier_ajout' => 'B&agrave;i &#273;&#432;&#7907;c th&ecirc;m sau ch&oacute;t',
 'dernieres_breves' => 'Nh&#7919;ng tin ng&#7855;n m&#7899;i nh&#7845;t ',
 'derniers_articles' => 'Nh&#7919;ng b&agrave;i m&#7899;i nh&#7845;t ',
 'derniers_commentaires' => 'C&aacute;c g&oacute;p &yacute; m&#7899;i nh&#7845;t',
-'derniers_messages_des_forums' => 'Trao &#273;&#7893;i m&#7899;i nh&#7845;t trong di&#7877;n &#273;&agrave;n',
 'derniers_messages_forum' => 'Trao &#273;&#7893;i m&#7899;i nh&#7845;t hi&#7879;n trong di&#7877;n &#273;&agrave;n',
 
 
@@ -48,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_reponse' => 'Tr&#7843; l&#7901;i cho&nbsp;:',
 'en_resume' => 'T&oacute;m t&#7855;t',
 'envoyer_message' => 'G&#7917;i th&#432; t&iacute;n m&#7899;i',
-'envoyer_un_message' => 'G&#7917;i th&#432; t&iacute;n',
 'espace_prive' => 'M&#7841;ng c&aacute; nh&acirc;n',
 
 
@@ -85,18 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'trang tr&#432;&#7899;c',
+'page_suivante' => 'trang sau',
 'par_auteur' => 'b&#7903;i',
 'participer_site' => 'B&#7841;n c&oacute; th&#7875; tham gia &#273;&oacute;ng g&oacute;p t&iacute;ch c&#7921;c v&agrave;o trang web n&agrave;y &#273;&#7875; so&#7841;n v&agrave; &#273;&#259;ng b&agrave;i v&#7903;. B&#7841;n ph&#7843;i ghi danh d&#432;&#7899;i &#273;&acirc;y. Sau &#273;&oacute; b&#7841;n s&#7869; nh&#7853;n email cho bi&#7871;t chi ti&#7871;t &#273;&#7875; v&agrave;o trang web.',
-'pas_d_article' => 'Kh&ocirc;ng t&igrave;m th&#7845;y b&agrave;i n&agrave;o &#7903; &#273;&#7883;a ch&#7881; n&agrave;y',
-'pas_d_auteur' => 'Kh&ocirc;ng t&igrave;m th&#7845;y t&aacute;c gi&#7843; n&agrave;o &#7903; &#273;&#7883;a ch&#7881; n&agrave;y',
-'pas_de_breve' => 'Kh&ocirc;ng t&igrave;m th&#7845;y tin ng&#7855;n n&agrave;o &#7903; &#273;&#7883;a ch&#7881; n&agrave;y',
-'pas_de_rubrique' => 'Kh&ocirc;ng t&igrave;m th&#7845;y &#273;&#7873; m&#7909;c n&agrave;o &#7903; &#273;&#7883;a ch&#7881; n&agrave;y',
-'pas_de_site' => 'Kh&ocirc;ng t&igrave;m th&#7845;y trang web n&agrave;o &#7903; &#273;&#7883;a ch&#7881; n&agrave;y',
-'plan_du_site' => 'S&#417; &#273;&#7891; trang web',
 'plan_site' => 'S&#417; &#273;&#7891;',
 'popularite' => 'M&#7913;c &#273;&#7897; ph&#7893; th&ocirc;ng',
 'poster_message' => '&#272;&#7875; &#273;&#259;ng tin',
-'poster_un_message' => '&#272;&#259;ng m&#7851;u tin',
 
 
 // R

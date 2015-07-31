@@ -302,11 +302,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'T&iacute;tulo da imaxe:',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obrigatorio]<BR>',
 'entree_url' => 'O enderezo (URL) do teu lugar',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: dobre definici&oacute;n',
+'erreur_boucle_fermant' => 'BOUCLE@id@: tag de cerre ausente',
+'erreur_boucle_syntaxe' => 'Sintaxe de bucle incorrecta',
+'erreur_boucle_syntaxe2' => 'O bucle @milieu@ est&aacute; incorrecto.',
+'erreur_filtre' => 'Erro : filtro <b>&laquo; @filtre@ &raquo;</b> non definido',
 
 
 // F
@@ -671,6 +671,12 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_envoyer_message_prive' => 'enviar unha mensaxe privada a esta persoa',
 'info_erreur_requete' => 'Erro na petici&oacute;n:',
 'info_erreur_restauration' => 'Erro de restauraci&oacute;n: o ficheiro non existe.',
+'info_erreur_squelette' => 'Erro no web',
+'info_erreur_squelette2' => 'Ning&uacute;n esqueleto <b>@fichier@</b> est&aacute; dispo&ntilde;ible...',
+'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
+'info_erreur_systeme2' => '<b>O disco duro pode ser que estea cheo, ou a base de datos danada. <br>
+ <font color=\'red\'>Probe a <a href=\'ecrire/admin_repair.php3\'>reparar a base</a>,
+ ou contacte co seu aloxador.</font><br></b>',
 'info_etape_suivante' => 'Pasar &aacute; etapa seguinte',
 'info_etape_suivante_1' => 'Podes pasar &aacute; etapa seguinte.',
 'info_etape_suivante_2' => 'Podes pasar &aacute; etapa seguinte.',
@@ -1381,9 +1387,7 @@ e reconectar co lugar.
 		que ser&aacute; almaceado no directorio <i>ecrire/data</i>.
 		Non esquezas recuperar todo o directorio <i>IMG/</i>, que &eacute; o que cont&eacute;n as imaxes
 		empregadas nos artigos e os temas.',
-'texte_admin_tech_02' => 'Atenci&oacute;n: esta copia de seguridade s&oacute; poder&aacute; ser restaurada
-  nun lugar que te&ntilde;a instalada a mesma versi&oacute;n de SPIP. O erro de facer unha copia de
-  seguridade antes de po&ntilde;er &oacute; d&iacute;a o SPIP &eacute; habitual... Para m&aacute;is detalles, consulta
+'texte_admin_tech_02' => '&iexcl;Atenci&oacute;n!: esta copia de seguridade s&oacute; poder&aacute; ser restaurada  nun web que te&ntilde;a instalada a MESMA versi&oacute;n de SPIP. Daquela de ningunha maneira &eacute; conveniente &laquo;&nbsp;baleirar a base&nbsp;&raquo; coa esperanza de reinstalar a copia de seguridade logo da actualizaci&oacute;n...Consulte
   <a href="http://www.spip.net/fr_article1489.html">a documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Podes escoller gardar o ficheiro en formato, para optimizar
 		a transferencia, e aforrar espazo no disco.',

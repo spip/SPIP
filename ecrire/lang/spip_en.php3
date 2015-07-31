@@ -677,6 +677,12 @@ Thank you for your participation
 'info_envoyer_message_prive' => 'Send a private message to this author',
 'info_erreur_requete' => 'Error in query:',
 'info_erreur_restauration' => 'Restoration error: file not found.',
+'info_erreur_squelette' => '<NEW> Erreur sur le site',
+'info_erreur_squelette2' => '<NEW> Aucun squelette <b>@fichier@</b> n\'est disponible...',
+'info_erreur_systeme' => '<NEW> Erreur syst&egrave;me (errno @errsys@)',
+'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
+	ou contactez votre h&eacute;bergeur.</font><br></b>',
 'info_etape_suivante' => 'Go to the next step',
 'info_etape_suivante_1' => 'You can move to the next step.',
 'info_etape_suivante_2' => 'You can move to the next step.',

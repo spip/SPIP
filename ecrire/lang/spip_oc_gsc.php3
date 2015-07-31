@@ -661,6 +661,12 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_envoyer_message_prive' => 'Mandar un messatge privat a aqueth autor',
 'info_erreur_requete' => 'Error dens la requ&egrave;sta',
 'info_erreur_restauration' => 'Error de restauracion: fichi&egrave;r inexistent.',
+'info_erreur_squelette' => 'Error suber lo sit',
+'info_erreur_squelette2' => 'Nada esqueleta <b>@fichier@</b> n\'ei pas disponibla...',
+'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Lo disc dur qu\'ei dilh&egrave;u plen, o la basa de dadas gastada. <br>
+ <font color=\'red\'>Ensajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
+ o contactatz lo v&ograve;ste aubergader.</font><br></b>',
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Que podetz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Que podetz passar a l\'estapa seguenta.',
