@@ -14,33 +14,51 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@affiche_navigation_forum
-function affiche_navigation_forum($script, $args, $debut, $pas, $ancre, $total, $enplus)
+function affiche_navigation_forum(&$query, $script, $args, $debut, $pas, $enplus)
 {
-	$tranche = ($debut > $enplus) ? $debut-$enplus : 0;
-	$h = generer_url_ecrire($script, $args);
-	$nav = "<a href='$h'> ... </a>|\n";
+	if (!$pas) $pas = 10;
+	if (!$enplus) $enplus = 100;
 
-	$e = (_SPIP_AJAX === 1 );
-	for (;$total;$total--){
+	// A revoir: ceci n'est pas equivalent a sql_countsel
+	// a cause du GroupBy
+	$total = sql_count(sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY']));
 
-		if ($tranche == $pas*floor($tranche/$pas)) {
+	// pas de navigation si tout tient
+	if ($total > $pas) {
+		if ($total <= $debut) $debut = $total-$pas;
+		$max = min($total, $debut+$enplus);
+		$tranche = $debut;
+		while (($tranche + $enplus) >= $max) 
+		  $tranche -= $pas;
+		if ($tranche <0) $tranche = 0;
+
+		$h = generer_url_ecrire($script, $args);
+		$nav = (!$tranche ? '' : "<a href='$h'>0</a>| ... |\n");
+
+		$e = (_SPIP_AJAX === 1 );
+
+		for (;$tranche<$max;$tranche+=$pas){
 			if ($tranche == $debut)
 				$nav .= "<span class='spip_medium'><b>$tranche</b></span> |\n";
 			else {
 				$h = "$args&debut=$tranche";
 				$h = generer_url_ecrire($script, $h);
-				if ($e)	$e = "\nonclick=" . ajax_action_declencheur($h,$ancre);
+				if ($e)	$e = "\nonclick=" . ajax_action_declencheur($h,$script);
 				$nav .= "<a href='$h'$e>$tranche</a> |\n";
 			}
 		}
-		$tranche ++;
+
+		if ($tranche  < $total) {
+		  $h = generer_url_ecrire($script, $args . "&debut=" . $total);
+		  if ($e) {
+		    $e = "\nonclick=" . ajax_action_declencheur($h,$script);
+		  }
+		  $nav .= "... | <a href='$h'$e>$total</a>";
+		}
 	}
 
-	$h = generer_url_ecrire($script, $args . "&debut=$tranche");
-
-	if ($e)	$e = "\nonclick=" . ajax_action_declencheur($h,$ancre);
-
-	return "$nav<a href='$h'$e>...</a> |";
+	$query['LIMIT'] = "$debut, $pas";
+	return $nav;
 }
 
 
@@ -356,7 +374,6 @@ function enregistre_et_modifie_forum($id_forum, $c=false) {
 	include_spip('inc/modifier');
 	return revision_forum($id_forum, $c);
 }
-
 
 //
 // Afficher les forums

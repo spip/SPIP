@@ -106,8 +106,7 @@ function forum_parent($id_forum) {
 	}
 }
 
-// http://doc.spip.org/@controle_un_forum
-function controle_un_forum($row) {
+function controle_forum_boucle($row) {
 
 	$id_forum = $row['id_forum'];
 	$forum_id_parent = $row['id_parent'];
@@ -208,22 +207,22 @@ function exec_controle_forum_dist()
 			   _request('type'),
 			   intval(_request('debut')),
 			   intval(_request('pas')),
+			   intval(_request('enplus')),
 			   _request('recherche'));
 }
 
 // http://doc.spip.org/@exec_controle_forum_args
-function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$pas, $recherche)
+function exec_controle_forum_args($id_rubrique, $type, $debut, $pas, $enplus, $recherche)
 {
 	if (!autoriser('publierdans','rubrique',$id_rubrique)) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
 
-	if (!$pas) $pas = 20;	// nb de forums affiches par page
 	if (!preg_match('/^\w+$/', $type)) $type = 'public';
 	$formulaire_recherche = formulaire_recherche("controle_forum","<input type='hidden' name='type' value='$type' />");
 
-	list($from,$where)=critere_statut_controle_forum($type, $id_rubrique, $recherche);
+	list($from,$where) = critere_statut_controle_forum($type, $id_rubrique, $recherche);
 
 	// Si un id_controle_forum est demande, on adapte le debut
 	if ($debut_id_forum = intval(_request('debut_id_forum'))
@@ -231,23 +230,32 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$pas, $recherche)
 	  $debut = sql_countsel($from, $where . (" AND F.date_heure > '$d'"));
 	}
 
-	$enplus = 200;	// intervalle affiche autour du debut
-	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
-	$limitnb = $debut + $enplus - $limitdeb;
-	$args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
 	if ($recherche)
-		$args = 'recherche='.rawurlencode($recherche).'&'.$args;
+	  $args = 'recherche='.rawurlencode($recherche).'&';
+	else $args = '';
 
-	$query = sql_select("F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur", $from,  $where,'', "F.date_heure DESC", "$limitdeb, $limitnb");
+	$args .= (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'type=';
+
+	$query = array('SELECT' => "F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur",
+		       'FROM' => $from,
+		       'WHERE' => $where,
+		       'GROUP BY' => "",
+		       'ORDER BY' => "F.date_heure DESC");
   
-	$ancre = 'controle_forum';
-	$n = sql_count($query);
-	$mess = affiche_navigation_forum('controle_forum', $args . $type, $debut, $pas, $ancre, $n, $enplus)
-	. affiche_tranche_forum($debut, $limitdeb, $pas, $query);
+	$nav = affiche_navigation_forum($query, 'controle_forum', $args . $type, $debut, $pas, $enplus);
+
+	$select = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY'], $query['LIMIT']);
+	
+	while ($row = sql_fetch($select)) 
+		$res .= controle_forum_boucle($row);
+
+	$res =  "<br />$nav<br />$res<br />$nav";	
 
 	if (_AJAX) {
-		ajax_retour($mess);
+		ajax_retour($res);
 	} else {
+		$ancre = 'controle_forum';
+		$res = "<div id='$ancre' class='serif2'>$res</div>";
 
 		pipeline('exec_init',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
@@ -296,23 +304,9 @@ function exec_controle_forum_args($id_rubrique,	$type,	$debut,	$pas, $recherche)
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'controle_forum', 'type'=>$type),'data'=>''));
 
 		echo $formulaire_recherche . "<br class='nettoyeur' />";
-
-		echo "<div id='$ancre' class='serif2'>$mess</div>";
+		echo $res; 
 		echo fin_gauche(), fin_page();
 	}
 	}
-}
-
-// http://doc.spip.org/@affiche_tranche_forum
-function affiche_tranche_forum($debut, $i, $pas, $query)
-{
-
-  $res = '';
-  while ($row = sql_fetch($query)) {
-	if (($i>=$debut) AND ($i<($debut + $pas)))
-		$res .= controle_un_forum($row);
-	$i ++;
-  }
-  return $res;
 }
 ?>

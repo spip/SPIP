@@ -17,55 +17,58 @@ include_spip('inc/forum'); // pour boutons_controle_forum
 // http://doc.spip.org/@exec_articles_forum_dist
 function exec_articles_forum_dist()
 {
-	$id_article = intval(_request('id_article'));
+	exec_articles_forum_args(intval(_request('id_article')),
+				 intval(_request('debut')),
+				 intval(_request('pas')),
+				 intval(_request('enplus')));
+}
 
-	if (!autoriser('modererforum', 'article', $id_article))
-		return;
-
-	$debut = intval(_request('debut'));
-	$pas = intval(_request('pas'));
-	$enplus = intval(_request('enplus'));
-
-	if (!$pas) $pas = 5; // nb de forums affiches par page
-	if (!$enplus) $enplus = 200;	// intervalle affiche autour du debut
-
-	$result = sql_select("titre, id_rubrique", "spip_articles", "id_article=$id_article");
-
-	if ($row = sql_fetch($result)) {
-		$titre = $row["titre"];
-		$id_rubrique = $row["id_rubrique"];
-	}
-	
-	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
-	$limitnb = $debut + $enplus - $limitdeb;
-
-	$ancre = 'navigation-forum';
-	$result = sql_select("id_forum", "spip_forum",  "id_article=$id_article AND id_parent=0 AND statut IN ('publie', 'off', 'prop', 'spam')", '', '', "$limitdeb, $limitnb");
-
-	$res = sql_select("pied.id_forum,pied.id_parent,pied.id_rubrique,pied.id_article,pied.id_breve,pied.id_message,pied.id_syndic,pied.date_heure,pied.titre,pied.texte,pied.auteur,pied.email_auteur,pied.nom_site,pied.url_site,pied.statut,pied.ip,pied.id_auteur, max(thread.date_heure) AS date", "spip_forum AS pied, spip_forum AS thread", "pied.id_article=$id_article AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop', 'spam') AND thread.id_thread=pied.id_forum", "thread.id_thread",  "date DESC",  "$debut, $pas");
-
-	$n = sql_count($result);
-
-	$mess = affiche_navigation_forum("articles_forum", "id_article=$id_article", $debut, $pas, $ancre, $total, $enplus)
-	. '<br />'
-	. afficher_forum($res,"", '', $id_article);
-
-	if (_AJAX) {
-		ajax_retour($mess);
+function exec_articles_forum_args($id_article, $debut, $pas, $enplus)
+{
+	if (!autoriser('modererforum', 'article', $id_article)) {
+		include_spip('inc/minipres');
+		echo minipres();
 	} else {
 
+	$query = array('SELECT' => "pied.id_forum,pied.id_parent,pied.id_rubrique,pied.id_article,pied.id_breve,pied.id_message,pied.id_syndic,pied.date_heure,pied.titre,pied.texte,pied.auteur,pied.email_auteur,pied.nom_site,pied.url_site,pied.statut,pied.ip,pied.id_auteur, max(thread.date_heure) AS date", 
+		       'FROM' => "spip_forum AS pied LEFT JOIN spip_forum AS thread ON pied.id_forum=thread.id_thread",
+		       'WHERE' => "pied.id_article=$id_article AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop', 'spam')",
+		       'GROUP BY' => "pied.id_forum",
+		       'ORDER BY' => "date DESC");
+
+	if (!$pas) $pas = 5;
+	$nav = affiche_navigation_forum($query, "articles_forum", "id_article=$id_article", $debut, $pas, $enplus);
+
+	$select = sql_select($query['SELECT'], $query['FROM'], $query['WHERE'], $query['GROUP BY'], $query['ORDER BY'], $query['LIMIT']);
+	
+	$res = afficher_forum($select, '', '', $id_article);
+#	$res = sql_count($select);
+	$res =  "<br />$nav<br />$res<br />$nav";	
+
+	if (_AJAX) {
+		ajax_retour($res);
+	} else {
+
+		$ancre = 'articles_forum';
+		$res =  "<div class='serif2' id='$ancre'>$res</div>";
+
 	 	pipeline('exec_init',array('args'=>array('exec'=>'articles_forum','id_article'=>$id_article),'data'=>''));
+
+		$row = sql_fetsel("titre, id_rubrique", "spip_articles", "id_article=$id_article");
+
+		if ($row) {
+			$titre = $row["titre"];
+			$id_rubrique = $row["id_rubrique"];
+		}
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page($titre, "naviguer", "articles", $id_rubrique);
 
 		articles_forum_cadres($id_rubrique, $id_article, $titre, 'articles', "id_article=$id_article");
 
-		echo "<div class='serif2' id='$ancre'>";
-		echo $mess;
-		echo '</div>';
-		
+		echo $res;
 		echo fin_gauche(), fin_page();
+	}
 	}
 }
 
