@@ -44,11 +44,7 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 		$s = ",";
 	}
 
-	$query = "CREATE TABLE IF NOT EXISTS $nom ($query" .
-		($keys ? ",$keys" : '') .
-		")\n";
-	spip_query_db($query);
-
+	spip_query_db("CREATE TABLE IF NOT EXISTS $nom ($query" . ($keys ? ",$keys" : '') . ")\n");
 }
 
 
@@ -90,8 +86,8 @@ function stripslashes_base($table, $champs) {
 	while (list(, $champ) = each($champs)) {
 		$modifs[] = $champ . '=REPLACE(REPLACE(' .$champ. ',"\\\\\'", "\'"), \'\\\\"\', \'"\')';
 	}
-	$query = "UPDATE $table SET ".join(',', $modifs);
-	spip_query($query);
+	spip_query("UPDATE $table SET ".join(',', $modifs));
+
 }
 
 ?>

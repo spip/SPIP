@@ -54,7 +54,7 @@ function exec_brouteur_frame_dist()
 	
 	}
 	else if ($special == "valider") {
-		$result=spip_query("SELECT articles.id_article, article.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC");
+		$result=spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC");
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
 			echo "<div class='plan-articles'>";

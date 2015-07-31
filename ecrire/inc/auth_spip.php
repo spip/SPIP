@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class Auth_spip {
@@ -26,8 +24,7 @@ class Auth_spip {
 		// Interdire mot de passe vide
 		if ($mdpass_actuel == '') return false;
 
-		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle'");
 
 		if ($row = spip_fetch_array($result)) {
 			$this->nom = $row['nom'];
@@ -46,8 +43,8 @@ class Auth_spip {
 		// Interdire mot de passe vide
 		if ($pass == '') return false;
 
-		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='".addslashes($login)."'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='".addslashes($login)."'");
+
 		if ($row = spip_fetch_array($result)) {
 			$md5pass = md5($row['alea_actuel'] . $pass);
 			$md5next = md5($row['alea_futur'] . $pass);
@@ -72,13 +69,9 @@ class Auth_spip {
 			include_spip('inc/session');
 			// fait tourner le codage du pass dans la base
 			$nouvel_alea_futur = creer_uniqid();
-			$query = "UPDATE spip_auteurs SET alea_actuel = alea_futur, ".
-				"pass = '".addslashes($this->md5next)."', alea_futur = '$nouvel_alea_futur' ".
-				"WHERE login='".$this->login."'";
-			@spip_query($query);
+			@spip_query("UPDATE spip_auteurs SET alea_actuel = alea_futur, pass = '".addslashes($this->md5next)."', alea_futur = '$nouvel_alea_futur' WHERE login='".$this->login."'");
+
 		}
 	}
 }
-
-
 ?>
