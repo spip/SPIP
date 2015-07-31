@@ -1558,7 +1558,6 @@ function extraire_trads($bloc) {
  * 
  * @filtre unique
  * @link http://www.spip.net/4320
- * @used-by balise_TOTAL_UNIQUE_dist()
  * @example
  *     ```
  *     [(#ID_SECTEUR|unique)] 
@@ -2492,7 +2491,6 @@ function filtre_foreach_dist($balise_deserializee, $modele = 'foreach') {
  * Obtient des informations sur les plugins actifs
  *
  * @filtre info_plugin
- * @used-by balise_PLUGIN_dist() Appelé par la balise #PLUGN
  * @uses liste_plugin_actifs() Voir liste_plugin_actifs() pour connaître les informations affichables
  * 
  * @param string $plugin
