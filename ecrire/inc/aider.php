@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/minipres');
+
 // http://doc.spip.org/@inc_aider_dist
 function inc_aider_dist($aide='') {
 	global $spip_lang, $spip_lang_rtl, $spip_display;

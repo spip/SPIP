@@ -13,20 +13,26 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
-include_spip('inc/barre');
 
 // http://doc.spip.org/@inc_editer_article
-function inc_editer_article($row, $lier_trad, $new, $champs_article) {
+function inc_editer_article_dist($new, $id_rubrique=0, $lier_trad=0, $retour='', $config=array(), $row=array()) {
 
-	global $champs_extra, $spip_lang, $options, $spip_ecran, $spip_display;
+	$articles_soustitre = $config['articles_soustitre'] != "non";
+	$articles_surtitre = $config['articles_surtitre'] != 'non';
+	$articles_urlref = $config['articles_urlref'] != "non";
+	$articles_descriptif = $config['articles_descriptif'] != "non";
+	$articles_chapeau = $config['articles_chapeau'] != "non";
+	$articles_ps = $config['articles_ps'] != "non";
 
-	$articles_surtitre = $champs_article['articles_surtitre'] != 'non';
-	$articles_soustitre = $champs_article['articles_soustitre'] != "non";
-	$articles_descriptif = $champs_article['articles_descriptif'] != "non";
-	$articles_urlref = $champs_article['articles_urlref'] != "non";
-	$articles_chapeau = $champs_article['articles_chapeau'] != "non";
-	$articles_ps = $champs_article['articles_ps']  != "non";
+	if ($afficher_barre = $config['afficher_barre'])
+		include_spip('inc/barre');
 
+	// Appel en tant que filtre d'un squelette 
+	if (!$row) {
+		include_spip('inc/presentation');
+		include_spip('inc/article_select');
+		$row = article_select($new, $id_rubrique, $lier_trad);
+	}
 	$id_trad = $row['id_article'];
 	$gros_titre = $row['titre'];
 	// Gaffe: sans ceci, on ecrase systematiquement l'article d'origine
@@ -54,16 +60,14 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
 	else $logo = "rubrique-24.gif";
 
-	if ($spip_ecran == "large") $rows = 28;	else $rows = 20;
+	$rows = $config['ligne'] +15;
 	$att_text = " class='formo' ".$GLOBALS['browser_caret']." rows='$rows' cols='40'";
 	if (strlen($texte)>29*1024) { // texte > 32 ko -> decouper en morceaux
 	  list($texte, $sup) = articles_edit_recolle($texte, $att_text);
 	} else $sup='';
 
-	if ($champs_extra) include_spip('inc/extra');
-
 	$chercher_rubrique = charger_fonction('chercher_rubrique', 'inc');
-	$redirect = generer_url_ecrire("articles");
+	$aider = charger_fonction('aider', 'inc');
 
 	$form = "<input type='hidden' name='editer_article' value='oui' />\n" .
 		 (!$lier_trad ? '' :
@@ -71,20 +75,20 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		  $lier_trad .
 		  "' />" .
 		  "\n<input type='hidden' name='changer_lang' value='" .
-		  $spip_lang .
+		  $config['langue'] .
 		  "' />")) .
 
-		(!(($options == "avancees" AND $articles_surtitre) OR $surtitre)?
+		(!($articles_surtitre OR $surtitre)?
 			("\n<input type='hidden' name='surtitre' value=\"$surtitre\" />") :
 			( "<b>" .
 			  _T('texte_sur_titre') .
 			  "</b>" .
-			  aide ("arttitre") .
+			  $aider ("arttitre") .
 			  "<br />\n<input type='text' name='surtitre' class='forml' value=\"" .
 			  $surtitre .
 			  "\" size='40' /><p>")) .
 		_T('texte_titre_obligatoire') .
-		aide ("arttitre") .
+		$aider ("arttitre") .
 		"\n<br /><input type='text' name='titre' style='font-weight: bold; font-size: 13px;' class='formo' value=\"" .
 		$titre .
 		"\" size='40' " .
@@ -95,84 +99,90 @@ function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 		 ("<b>" .
 		  _T('texte_sous_titre') .
 		  "</b>" .
-		  aide ("arttitre") .
+		  $aider ("arttitre") .
 		  "\n<br /><input type='text' name='soustitre' class='forml' value=\"" .
 		  $soustitre .
 		  "\" size='40' /><br /><br /></p>\n") :
 		 '') .
 
-		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). aide("artrub")) .
+		debut_cadre_couleur($logo, true, "", _T('titre_cadre_interieur_rubrique'). $aider("artrub")) .
 
 		$chercher_rubrique($id_rubrique, 'article', ($statut == 'publie')) .
 
 		fin_cadre_couleur(true) .
 	
-		((($options == "avancees" AND $articles_descriptif) OR strlen($descriptif))?
+		(($articles_descriptif OR strlen($descriptif))?
 		 ("\n<p><b>" ._T('texte_descriptif_rapide') ."</b>" .
-		  aide ("artdesc") .
+		  $aider ("artdesc") .
 		  "<br />" ._T('texte_contenu_article') ."<br />\n" .
 		  "<textarea name='descriptif' class='forml' rows='2' cols='40'>" .
 		  $descriptif .
 		  "</textarea>\n") :
 		 '') .
 
-		((($options == "avancees" AND $articles_urlref) OR $nom_site OR $url_site) ?
-		 (_T('entree_liens_sites') ."<br />\n" .
+		(($articles_urlref OR $nom_site OR $url_site) ?
+		 ('<br />' . _T('entree_liens_sites') ."<br />\n" .
 		  _T('info_titre') ." " .
 		  "\n<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n" .
 		  _T('info_url') .
 		  "\n<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>\n") : '') .
 
-		chapo_articles_edit($chapo, $articles_chapeau) .
+		chapo_articles_edit($chapo, $articles_chapeau, $config['lignes']) .
 
 		"</p><p><b>" ._T('info_texte') ."</b>" . 
-		aide ("arttexte") . "<br />\n" .
+		$aider ("arttexte") . "<br />\n" .
 		_T('texte_enrichir_mise_a_jour') .
-		aide("raccourcis") .
+		$aider("raccourcis") .
+		'<br />' .
 		$sup .
-		($spip_display==4 ? '' : afficher_barre('document.formulaire.texte')) .
+		(!$afficher_barre ? '' : afficher_barre('document.formulaire.texte')) .
 		"<textarea id='text_area' name='texte'$att_text>$texte</textarea>\n"
 		."<script type='text/javascript'><!--\njQuery(hauteurTextarea);\n//--></script>\n"
 
 		.
 
-		((($articles_ps AND $options == "avancees") OR strlen($ps)) ?
+		(($articles_ps OR strlen($ps)) ?
 		 ("\n</p><p><b>" . _T('info_post_scriptum') ."</b><br />" . "<textarea name='ps' class='forml' rows='5' cols='40'>" . $ps . "</textarea>\n") :
 		 '') .
 
-		(!$champs_extra ? '': extra_saisie($extra, 'articles', $id_secteur)) .
+		(!$config['extra'] ? '': extra_saisie($extra, 'articles', $id_secteur)) .
 
-		"<div align='right'><input class='fondo' type='submit' value='" . _T('bouton_enregistrer') . "' /></div></p>";
+		"<div align='right'><input class='fondo' type='submit' value='"
+		. _T('bouton_enregistrer')
+		. "' /></div></p>";
 
+	$oups = _DIR_RESTREINT ? ''
+	  : ($lier_trad ?
+	     generer_url_ecrire("articles","id_article=$lier_trad")
+	     : ($new
+		? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
+		: generer_url_ecrire("articles","id_article=$id_trad")
+		));
 	return
 		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>" .
 		"<tr>" .
 		"\n<td>" .
-		($lier_trad ?
-		 icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif", '',false) :
-		 icone(_T('icone_retour'),
-			$new=='oui'
-				? generer_url_ecrire("naviguer","id_rubrique=$id_rubrique")
-				: generer_url_ecrire("articles","id_article=$id_trad"),
-			"article-24.gif", "rien.gif",'',false)) .
+		(!$oups ? '' : icone(_T('icone_retour'), $oups, "article-24.gif", "rien.gif", '',false)) .
 		"</td>\n<td>" .
-		http_img_pack('rien.gif', " ", "width='10'") .
+		"<img src='" .
+	  	_DIR_IMG_PACK .	"rien.gif' width='10' />" .
 		"</td>\n" .
 		"<td width='100%'>" .
 	 	_T('texte_modifier_article') .
 		gros_titre($gros_titre,'',false) . 
 		"</td></tr></table><hr />\n<p>" .
-	  generer_action_auteur("editer_article", $new ? $new : $id_article, $redirect, $form, " method='post' name='formulaire'");
+	  generer_action_auteur("editer_article", $new ? $new : $id_article, $retour, $form, " method='post' name='formulaire'");
 
 }
 
 
 //
 // Gestion des textes trop longs (limitation brouteurs)
-//
+// utile pour les textes > 32ko
 
 // http://doc.spip.org/@coupe_trop_long
-function coupe_trop_long($texte){	// utile pour les textes > 32ko
+function coupe_trop_long($texte){
+	$aider = charger_fonction('aider', 'inc');
 	if (strlen($texte) > 28*1024) {
 		$texte = str_replace("\r\n","\n",$texte);
 		$pos = strpos($texte, "\n\n", 28*1024);	// coupe para > 28 ko
@@ -215,10 +225,9 @@ function articles_edit_recolle($texte, $att_text)
 
 
 // http://doc.spip.org/@chapo_articles_edit
-function chapo_articles_edit($chapo, $articles_chapeau)
+function chapo_articles_edit($chapo, $articles_chapeau, $rows)
 {
-	global $spip_ecran;
-
+	$aider = charger_fonction('aider', 'inc');
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1);
 		$chapo = "";
@@ -230,7 +239,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 			"<tr><td valign='top'>" .
 			"<font face='Verdana,Arial,Sans,sans-serif' size=2>" .
 			"<b><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></b>" .
-			aide ("artvirt") .
+			$aider ("artvirt") .
 			"</font>" .
 			"</td>" .
 			"<td width=10>&nbsp;</td>" .
@@ -246,10 +255,8 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 	} else {
 
 		if (($articles_chapeau) OR strlen($chapo)) {
-			if ($spip_ecran == "large") $rows = 8;
-			else $rows = 5;
 			return "<br /><b>"._T('info_chapeau')."</b>" .
-				aide ("artchap") .
+				$aider ("artchap") .
 				"\n<br />"._T('texte_introductif_article')."<br />\n" .
 				"<textarea name='chapo' class='forml' rows='$rows' cols='40'>" .
 				$chapo .
