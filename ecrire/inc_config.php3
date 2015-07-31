@@ -59,8 +59,6 @@ function init_config() {
 
 		'creer_htpasswd' => 'non',
 
-		'image_process' => '',
-
 		'langue_site' => $lang,
 
 		'multi_articles' => 'non',
@@ -227,7 +225,6 @@ function appliquer_modifs_config() {
 		'jours_neuf',
 		'forum_prive_admin',
 
-		'image_process',
 		'activer_moteur',
 		'activer_statistiques',
 

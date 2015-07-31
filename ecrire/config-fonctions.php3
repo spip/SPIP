@@ -19,7 +19,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 }
 
 init_config();
-if ($changer_config == 'oui' OR $image_process) {
+if ($changer_config == 'oui') {
 	appliquer_modifs_config();
 }
 
@@ -52,10 +52,16 @@ function afficher_choix_vignette($process) {
 if ($flag_gd OR $flag_imagick OR $convert_command) {
 	debut_cadre_relief("image-24.gif");
 
-	$gd_formats = lire_meta("gd_formats");
+	$formats_graphiques = lire_meta("formats_graphiques");
 	$creer_preview = lire_meta("creer_preview");
 	$taille_preview = lire_meta("taille_preview");
 	if ($taille_preview < 10) $taille_preview = 120;
+
+	// application du choix de vignette
+	if ($image_process) {
+		ecrire_meta('image_process', $image_process);
+		ecrire_metas();
+	}
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee'>";
@@ -99,19 +105,39 @@ if ($flag_gd OR $flag_imagick OR $convert_command) {
 
 			if ($nb_process>1) {
 				echo "<div>"._T('info_image_process');
-			} else if ($nb == 1 AND $process == '') {
+			} else if ($nb == 1 AND lire_meta('image_process') == '') {
 				ecrire_meta('image_process', $p);
 				ecrire_metas();
 			}
 
+
+			// mettre a jour les formats graphiques lisibles
+			switch (lire_meta('image_process')) {
+				case 'gd1':
+					$formats_graphiques = lire_meta('gd_formats');
+					break;
+				case 'gd2':
+					$formats_graphiques = lire_meta('gd_formats');
+					break;
+				case 'convert':
+					$formats_graphiques = 'gif,jpg,png';
+					break;
+				case 'imagick':
+					$formats_graphiques = 'gif,jpg,png';
+					break;
+			}
+			ecrire_meta('formats_graphiques', $formats_graphiques);
+			ecrire_metas();
+
+
 			echo "<div>";
 
-			if ($gd_formats AND (lire_meta('image_process')=='gd1' OR lire_meta('image_process')=='gd2'))
-				echo '<div>'._T('info_format_image', array('gd_formats' => $gd_formats)).'</div>';
+			if ($formats_affiche = str_replace(',', ',&nbsp;', $formats_graphiques))
+				echo '<div>'._T('info_format_image', array('gd_formats' => $formats_affiche)).'</div>';
 
-			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"._T('info_taille_maximale_vignette');
+			echo '<div>'._T('info_taille_maximale_vignette');
 			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-			echo " "._T('info_pixels');
+			echo " "._T('info_pixels').'</div>';
 
 			echo "</div>";
 		}

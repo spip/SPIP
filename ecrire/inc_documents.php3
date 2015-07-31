@@ -204,7 +204,8 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		$id_type = $row['id_type'];
 		$titre = typo($row['titre']);
 		$descriptif = propre($row['descriptif']);
-		$fichier = generer_url_document($id_document);
+		$fichier = $row['fichier'];
+		$url_fichier = generer_url_document($id_document);
 		$largeur = $row['largeur'];
 		$hauteur = $row['hauteur'];
 		$taille = $row['taille'];
@@ -222,31 +223,38 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = spip_query($query_vignette);
 			if ($row_vignette = @spip_fetch_array($result_vignette)) {
-				$fichier_vignette = generer_url_document($id_vignette);
+				$fichier_vignette = $row_vignette['fichier'];
+				$url_fichier_vignette = generer_url_document($id_vignette);
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
 
-				// verifier l'existence du fichier correspondant sinon le recreer
+				// verifier l'existence du fichier correspondant
 				$path = ($flag_ecrire?'../':'') . $fichier_vignette;
 				if (!@file_exists($path) AND (!$flag_ecrire OR !@file_exists('../IMG/test.jpg')))
-					$fichier_vignette = '';
+					$url_fichier_vignette = '';
 			}
 		}
 		else if ($mode == 'vignette') {
-			$fichier_vignette = $fichier;
+			$url_fichier_vignette = $url_fichier;
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
 		}
 
-		// si pas de vignette, essayer de creer une preview
-		if (!$fichier_vignette)
-			$fichier_vignette = ($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
+		// si pas de vignette, utiliser la vignette par defaut
+		// ou essayer de creer une preview (images)
+		if (!$url_fichier_vignette) {
+			if (!ereg(",$extension,", ','.lire_meta('formats_graphiques').',')) {
+				list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
+			} else {
+				$url_fichier_vignette = ($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
+			}
+		}
 
 		if ($type_aff=='fichier_vignette')
-			return $fichier_vignette;
+			return $url_fichier_vignette;
 
-		if ($fichier_vignette) {
-			$vignette = "<img src='$fichier_vignette' border=0";
+		if ($url_fichier_vignette) {
+			$vignette = "<img src='$url_fichier_vignette' border=0";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre) {
@@ -518,15 +526,11 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		}
 		echo ".";
 
-		if ($GLOBALS['flag_gd']) {
-			$creer_preview = lire_meta("creer_preview");
+		if (lire_meta("creer_preview") == 'oui') {
 			$taille_preview = lire_meta("taille_preview");
-			$gd_formats = lire_meta("gd_formats");
+			$formats_graphiques = lire_meta("formats_graphiques");
 			if ($taille_preview < 15) $taille_preview = 120;
-
-			if ($creer_preview == 'oui') {
-				echo "<p>"._T('texte_creation_automatique_vignette', array('gd_formats' => $gd_formats, 'taille_preview' => $taille_preview));
-			}
+			echo "<p>"._T('texte_creation_automatique_vignette', array('gd_formats' => $formats_graphiques, 'taille_preview' => $taille_preview));
 		}
 		echo "</td><td width=20>&nbsp;</td>";
 		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
