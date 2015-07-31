@@ -78,7 +78,7 @@ function aider_icone($url)
 	. "'spip_aide', "
 	. "'scrollbars=yes, resizable=yes, width=740, height=580'); "
 	. "return false;\">"
-	. http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl).".gif",
+	. http_img_pack("aide-12".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
 			_T('info_image_aide'),
 			" title=\"$t\" class='aide'")
 	. "</a>";
