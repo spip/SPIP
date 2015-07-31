@@ -90,45 +90,40 @@ function parser_champs($texte) {
 // Gestion des imbrications:
 // on cherches les [..] les plus internes et on les remplace par une  chaine
 // %###N@ où N indexe un tableau comportant le résultat de leur phrasé
-// et où le nombre de # vaut le nombre d'emboitement (0 pour les + internes)
 // on recommence tant qu'il y a des [...] en substituant à l'appel suivant
-// le code n'est ni optimal ni lisible. Vivement SAX!
 
 function parser_champs_etendus($debut) {
 	$sep = '##';
-	while (strpos($debut,$sep)!== false)
-		$sep .= '#';
+	while (strpos($debut,$sep)!== false) $sep .= '#';
 	return parser_champs_interieurs($debut, $sep, array());
 }
 
-
 function parser_champs_exterieurs($debut, $sep, $nested) {
 	$res = array();
-	foreach (split("%$sep",$debut) as $v) {
-		if (!ereg("^([0-9]+)@(.*)$", $v, $m))
-			$res = array_merge($res, parser_champs($v));
-		else  if ($m[2] == 'Object') {
-			$res[]= $nested[$m[1]];
-		} else	{
-		  $res = array_merge($res, parser_champs($m[2]));
-		}
+	while (($p=strpos($debut, "%$sep", $m))!==false) {
+	    if ($p) $res = array_merge($res, 
+					parser_champs(substr($debut,0,$p)));
+	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
+	    $res[]= $nested[$m[1]];
+	    $debut = $m[2];
 	}
+	if ($debut) $res = array_merge($res,parser_champs($debut));
 	return $res;
 }
 
-function parser_champs_interieurs($texte, $sep, $nested) {
-	$result = array();
+function parser_champs_interieurs($texte, $sep, $result) {
 	if (!$texte)
 		return $result;
 
-	$i = 0;
-	while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
+	$i = 1;
+	while (true) {	  $j=$i;
+	  while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[3];
 		$champ->nom_champ = $regs[4];
 		$champ->etoile = $regs[5];
-		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
-		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
+		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$result);
+		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$result);
 		$fonctions = $regs[6];
 
 		if ($fonctions) {
@@ -137,43 +132,22 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 		}
 
 		$p = strpos($texte, $regs[0]);
-		if ($p)
-		  {
-		    foreach (split("%$sep",substr($texte, 0, $p)) as $v) {
-		      if (!ereg("^([0-9]+)@(.*)$", $v, $m))
-			$result[$i++] = $v;
-		      else  if ($m[2] == 'Object') {
-			$result[$i++] =  $nested[$m[1]];
-		      } else	{
-			$result[$i++] =  $m[2];
-		      }
-		    }  
-		  }
-		$result[$i++] = $champ;
+		if ($p) {$result[$i] = substr($texte,0,$p);$i++; }
+		$result[$i] = $champ;
+		$i++;
 		$texte = $regs[8];
-		
-	}
-	if ($texte) { $result[$i++] = $texte;}
+	  }
+	  if ($texte) {$result[$i] = $texte; $i++;}
+	  $x ='';
 
-	$x ='';
-	$j=0;
-	while($j < $i)
-		$x .= "%#$sep$j@" . $result[$j++];
-
-	if (ereg(CHAMP_ETENDU, $x)) 
-		return (parser_champs_interieurs($x, "#$sep", $result));
-	$res2 = array();
-	foreach ($result as $k => $v) {
-		if (is_object($v))
-			$res2[]= $v;
-		else {
-			$c = parser_champs_exterieurs($v,$sep,$nested);
-			foreach($c as $val)
-				$res2[] = $val;
-		}
-	}
-	return $res2;
+	  while($j < $i) 
+	    { $z= $result[$j]; 
+	      if (is_object($z)) $x .= "%$sep$j@" ; else $x.=$z ;
+	      $j++;}
+	  if (ereg(CHAMP_ETENDU, $x)) $texte = $x;
+	  else return parser_champs_exterieurs($x, $sep, $result);}
 }
+
 
 function parser_param($params, &$result, $idb) {
 	$params2 = Array();
