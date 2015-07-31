@@ -60,6 +60,14 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'rechercher_jointures' => array(
 					'auteur' => array('nom' => 10),
 				),
+				'statut'=> array(
+					'champ' => 'statut',
+					'publie' => 'publie',
+					'previsu' => 'publie,prop',
+					'post_date' => 'date',
+					'exception' => 'statut'
+				),
+				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 			),
 			'spip_auteurs' => array(
 				'page'=>'auteur',
@@ -76,6 +84,31 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'rechercher_champs' => array(
 					'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
 				),
+				// 2 conditions pour les auteurs : statut!=poubelle,
+				// et avoir des articles publies
+				'statut'=> array(
+					array(
+						'champ' => 'statut',
+						'publie' => '!5poubelle',
+						'previsu' => '!5poubelle',
+						'exception' => 'statut'
+					),
+					array(
+						'champ' => array(
+							array('spip_auteurs_liens', 'id_auteur'),
+							array(
+								'spip_articles',
+								array('id_objet','id_article','objet','article')
+							),
+							'statut'
+						),
+						'publie' => 'publie',
+						'previsu' => '!',
+						'post_date' => 'date',
+						'exception' => array('statut','lien','tout')
+					),
+				),
+				'tables_jointures' => array('auteurs_liens'),
 			),
 			'spip_rubriques' => array(
 				'page'=>'rubrique',
@@ -94,6 +127,13 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 				'rechercher_champs' => array(
 					'titre' => 8, 'descriptif' => 5, 'texte' => 1
 				),
+				'statut' => array(
+					'champ' => 'statut',
+					'publie' => 'publie',
+					'previsu' => '!',
+					'exception' => array('statut','tout')
+				),
+				'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 			)
 		));
 		// completer les informations manquantes ou implicites
@@ -233,6 +273,13 @@ function renseigner_table_objet_sql($table_sql,$infos){
 		$infos['titre'] = isset($GLOBALS['table_titre'][$infos['table_objet']]) ? $GLOBALS['table_titre'][$infos['table_objet']] : '';
 	if (!isset($infos['date']))
 		$infos['date'] = isset($GLOBALS['table_date'][$infos['table_objet']]) ? $GLOBALS['table_date'][$infos['table_objet']] : '';
+	if (!isset($infos['statut']))
+		$infos['statut'] = isset($GLOBALS['table_statut'][$table_sql]) ? $GLOBALS['table_statut'][$table_sql] : '';
+	if (!isset($infos['tables_jointures']))
+		$infos['tables_jointures'] = array();
+	if (isset($GLOBALS['tables_jointures'][$table_sql]))
+		$infos['tables_jointures'] = array_merge($infos['tables_jointures'],$GLOBALS['tables_jointures'][$table_sql]);
+	
 
 	if (!isset($infos['champs_versionnes']))
 		$infos['champs_versionnes'] = array();
