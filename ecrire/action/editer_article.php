@@ -93,27 +93,36 @@ function articles_set($id_article, $new) {
 	return $err;
 }
 
+// Enregistre une revision d'article
+// $new indique si c'est un INSERT
+// $c est un contenu (par defaut on prend le contenu via _request())
 // http://doc.spip.org/@revisions_articles
-function revisions_articles ($id_article, $new) {
+function revisions_articles ($id_article, $new, $c = false) {
 	global $flag_revisions;
 
 	// unifier $texte en cas de texte trop long
 	trop_longs_articles();
 
 	// ne pas accepter de titre vide
+	if ($c!==false)
+		if ($c['titre'] === '')
+			$c['titre'] = _T('ecrire:info_sans_titre');
+	else
 	if (_request('titre') === '')
-		_request('titre', _T('ecrire:info_sans_titre'));
+		set_request('titre', _T('ecrire:info_sans_titre'));
 
 	foreach (array(
 	'surtitre', 'titre', 'soustitre', 'descriptif',
 	'nom_site', 'url_site', 'chapo', 'texte', 'ps') as $champ) {
-		if (($val = _request($champ)) !== NULL)
+		$val = is_array($c) ? $c[$champ] : _request($champ);
+		if ($val !== NULL)
 			$champs[$champ] = corriger_caracteres($val);
 	}
 
 	// Verifier que la rubrique demandee existe et est differente
 	// de la rubrique actuelle
-	if ($id_rubrique = intval(_request('id_parent'))
+	$id_parent = is_array($c) ? $c['id_parent'] : _request('id_parent');
+	if ($id_rubrique = intval($id_parent)
 	    AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_rubrique=$id_rubrique")))
 	    AND (spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article AND id_rubrique!=$id_rubrique")))) {
 		$champs['id_rubrique'] = $id_rubrique;
