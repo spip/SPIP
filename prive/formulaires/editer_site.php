@@ -48,9 +48,9 @@ function formulaires_editer_site_verifier_dist($id_syndic='new', $id_rubrique=0,
 		if ($auto = analyser_site($u)) {
 			foreach($auto as $k=>$v){
 				set_request($k,$v);
-				$erreurs[$k] = _L("Relisez avant d'enregistrer");
 			}
-			#$erreurs['message_erreur'] = ' '; # provoquer la resaisie de controle
+			$erreurs['message_erreur'] =
+			_T('texte_referencement_automatique_verifier', array('url' => $u));
 		}
 		else{
 			$erreurs['url_auto'] = _T('avis_site_introuvable');
