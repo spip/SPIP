@@ -11,6 +11,9 @@ include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 
 
+$spip_lang = lire_meta($langue_site);
+if (!$spip_lang) $spip_lang = "fr";
+
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {
 	if (!file_exists("inc_connect.php3")) {
@@ -33,6 +36,7 @@ if ($reinstall == 'oui') {
 	install_fin_html();
 	exit;
 }
+
 
 
 $upgrade_titre = _T('info_mise_a_niveau_base');
