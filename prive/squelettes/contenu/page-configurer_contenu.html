@@ -16,11 +16,12 @@
 	#FORMULAIRE_CONFIGURER_LOGOS
 </div>
 
+<div class="ajax">
+	#FORMULAIRE_CONFIGURER_DOCUMENTS
+</div>
+
 <?php
 include_spip('inc/presentation');
-
-	$documents = charger_fonction('documents', 'configuration');
-	echo $documents();
 
 	$syndications = charger_fonction('syndications', 'configuration');
 	echo $syndications();
