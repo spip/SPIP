@@ -394,8 +394,8 @@ $GLOBALS['maj'][18597] = array(
 );
 
 $GLOBALS['maj'][18955] = array(
-	array('sql_alter',"TABLE auteurs_liens ADD id_objet (id_objet)"),
-	array('sql_alter',"TABLE auteurs_liens ADD objet (objet)"),
+	array('sql_alter',"TABLE spip_auteurs_liens ADD id_objet (id_objet)"),
+	array('sql_alter',"TABLE spip_auteurs_liens ADD objet (objet)"),
 );
 
 
