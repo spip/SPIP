@@ -280,7 +280,10 @@ class IterateurDATA implements Iterator {
 				if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', $tri, $r)) {
 					// tri par cle
 					if ($r[1] == 'cle'){
-						ksort($this->tableau);
+						if ($r[2])
+							krsort($this->tableau);
+						else
+							ksort($this->tableau);
 					}
 					# {par hasard}
 					else if ($r[1] == 'alea') {
