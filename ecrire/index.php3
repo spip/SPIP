@@ -537,10 +537,13 @@ if (abs($t_jour - date('d')) > 2) {
 //
 if (!$bonjour) {
 	if ($optimiser == 'oui' || (time() - lire_meta('date_optimisation')) > 24 * 3600) {
-		if (timeout('optimisation')) {
+		if (!file_exists($lock = _DIR_SESSIONS.'optimisation.lock')
+		OR (time()-filemtime($lock) > 3600)) {
+			touch($lock);
 			ecrire_meta("date_optimisation", time());
 			ecrire_metas();
 			include ("optimiser.php3");
+			unlink($lock);
 		}
 	}
 }

@@ -46,14 +46,15 @@ function spip_cron($taches=array()) {
 	global $frequence_taches;
 	$t = time();
 
-	if (!@file_exists(_FILE_MYSQL_OUT)
-	OR ($t - @filemtime(_FILE_MYSQL_OUT) > 300)) {
-		include(_FILE_CONNECT);
-		if (!$GLOBALS['db_ok']) {
-			@touch(_FILE_MYSQL_OUT);
-			spip_log('pas de connexion DB pour taches de fond (cron)');
-			return;
-		}
+	if (@file_exists(_FILE_MYSQL_OUT)
+	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
+		return;
+
+	include(_FILE_CONNECT);
+	if (!$GLOBALS['db_ok']) {
+		@touch(_FILE_MYSQL_OUT);
+		spip_log('pas de connexion DB pour taches de fond (cron)');
+		return;
 	}
 
 	if (!$taches)

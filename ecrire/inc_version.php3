@@ -320,7 +320,6 @@ $test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
 
 // les fichiers qu'on y met, entre autres,
 
-define_once('_FILE_LOCK', _DIR_SESSIONS . 'lock');
 define_once('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
 define_once('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
 define_once('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
@@ -913,41 +912,6 @@ function table_objet($type) {
 		return $type.'s';
 }
 
-
-//
-// Savoir si on peut lancer de gros calculs, et eventuellement poser un lock SQL
-// Resultat : true=vas-y ; false=stop
-//
-function timeout($lock=false, $action=true, $connect_mysql=true) {
-	static $ok = true;
-	global $db_ok;
-
-	// Fichier lock hebergeur ?  (age maxi, 10 minutes)
-
-	if (@file_exists(_FILE_LOCK)
-	AND ((time() - @filemtime(_FILE_LOCK)) < 600))
-		return $ok = false;
-
-	// Ne rien faire ?
-	if (!$action || !$ok)
-		return $ok;
-
-	$ok = false;
-
-	// Base connectee ?
-	if ($connect_mysql) {
-		include_local(_FILE_CONNECT);
-		if (!$db_ok)
-			return false;
-
-		// Verrou demande ?
-		if ($lock AND !spip_get_lock($lock))
-			return false;
-	}
-
-	// C'est bon
-	return true;
-}
 
 //
 // spip_timer : on l'appelle deux fois et on a la difference, affichable

@@ -37,7 +37,6 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 
 	// Calmer le jeu avec MySQL (si jamais on est en saturation)
 	@touch(_FILE_MYSQL_OUT);	// pour spip_cron
-	@touch(_FILE_LOCK);		// lock hebergeur
 	spip_log('Erreur MySQL: on limite les acces quelques minutes');
 	$GLOBALS['bouton_admin_debug'] = true;
 
