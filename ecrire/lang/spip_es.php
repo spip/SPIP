@@ -645,6 +645,7 @@ Intenta',
 	'titre_image_auteur_supprime' => 'Autor suprimido',
 	'titre_image_redacteur' => 'Redactor o redactora sin acceso',
 	'titre_image_redacteur_02' => 'Redactor o redactora',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitante',
 	'titre_joindre_document' => 'Añadir un documento',
 	'titre_mots_cles' => 'Palabras clave',

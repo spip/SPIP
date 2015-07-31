@@ -665,6 +665,7 @@ sera ignorée) :
 	'titre_image_auteur_supprime' => '削除された著者',
 	'titre_image_redacteur' => 'アクセス無しのエディタ',
 	'titre_image_redacteur_02' => '編集者',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => '訪問者',
 	'titre_joindre_document' => 'ドキュメントを置く',
 	'titre_mots_cles' => 'キーワード',

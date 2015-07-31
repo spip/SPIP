@@ -643,6 +643,7 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 	'titre_image_auteur_supprime' => 'Qillqir apaqata',
 	'titre_image_redacteur' => 'Qillqir jan mantawimpi',
 	'titre_image_redacteur_02' => 'Qillqiri',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Tumpiri',
 	'titre_joindre_document' => 'Mä qillqa q\'ip yapayaña',
 	'titre_mots_cles' => 'Imt\'at aru',

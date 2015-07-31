@@ -53,6 +53,8 @@ Bu ithal istemini onaylamayın.
 	'bouton_ajouter_participant' => 'BİR KATILIMCI EKLE :',
 	'bouton_annonce' => 'DUYURU',
 	'bouton_annuler' => 'İptal',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'ileti gönderme olanağı',
 	'bouton_checkbox_indiquer_site' => 'bir Web sitesi belirtmek zorundasınız',
 	'bouton_checkbox_signature_unique_email' => 'e-posta adresi başına sadece bir imza',
@@ -288,6 +290,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_barre_outils' => 'alet çubuğuyla birlikte mi ?',
 	'info_base_installee' => 'Veritabanınızın yapısı kuruldu.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Giriş',
 	'info_chapeau_2' => 'Giriş :',
 	'info_chemin_acces_1' => 'Seçenekler : <b>Rehbere erişim yolu</b>',
@@ -423,6 +426,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'İsim',
 	'info_nom_destinataire' => 'Alıcının ismi',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Sitenizin ismi',
 	'info_nombre_articles' => '@nb_articles@ makale,',
 	'info_nombre_partcipants' => 'TARTIŞMAYA KATILANLAR :',
@@ -751,6 +755,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => '@url@ adresinden indirmeye ve @rep@ dizinine yüklemeye',
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Kurulu kütüphaneler',
 	'plugin_necessite_lib' => 'Bu eklenti @lib@ kütüphanesini gerektirir',
 	'plugin_necessite_plugin' => '@plugin@ plugin\'inin en az @version@ sürümünü gerektirir.',

@@ -29,14 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_deplacement_rubrique' => 'Uwaga! Ten dział zawiera @contient_breves@ news@scb@: jeśli chcesz go przenieść, proszę zaznacz to okienko.',
 	'avis_destinataire_obligatoire' => 'Aby wysłać tę wiadomość, musisz wybrać odbiorcę.',
 	'avis_erreur_connexion_mysql' => 'Błąd połączenia z SQL', # MODIF
-	'avis_erreur_version_archive' => '<b>Ostrzeżenie! Plik @archive@ odpowiada
-    wersji SPIP innej, niż
-    zainstalowana przez Ciebie.</b> Wiąże się to z poważnymi
-    trudnościami: ryzykiem zniszczenia Twojej bazy danych,
-    zakłóceniami funkcjonowania Twojej strony, etc. Nie
-    spełniaj żądania importu.<p>Więcej
-    informacji na <a href="@spipnet@">
-                                 w dokumentacji SPIP</a>.', # MODIF
+	'avis_erreur_version_archive' => '<b>Ostrzeżenie! Plik @archive@ odpowiada innej wersji SPIP od tej na Twoim systemie.</b> Wiąże się to z poważnymi trudnościami: ryzykiem zniszczenia Twojej bazy danych, zakłóceniami funkcjonowania Twojej strony, etc. Nie spełniaj żądania importu.<p>Więcej informacji na <a href="@spipnet@"> w dokumentacji SPIP</a>.</p>', # MODIF
 	'avis_espace_interdit' => '<b>Dostęp zabroniony</b><div>SPIP jest już zainstalowany.</div>',
 	'avis_lecture_noms_bases_1' => 'Program instalacyjny nie może odczytać nazw instalowanych baz danych.',
 	'avis_lecture_noms_bases_2' => 'Żadna baza danych nie jest dostępna, lub funkcja listingu baz danych nie działa
@@ -56,6 +49,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'DODAJ UCZESTNIKA:',
 	'bouton_annonce' => 'ZAWIADOMIENIE',
 	'bouton_annuler' => 'Anuluj',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'możliwość wysłania wiadomości',
 	'bouton_checkbox_indiquer_site' => 'Musisz wpisać nazwę strony internetowej',
 	'bouton_checkbox_signature_unique_email' => 'tylko jeden podpis na adres e-mail',
@@ -291,6 +286,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_barre_outils' => 'z jego paska narzędzi?',
 	'info_base_installee' => 'Struktura Twojej bazy danych została zainstalowana.',
 	'info_bio' => 'Biografia',
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Wstęp',
 	'info_chapeau_2' => 'Wstęp:',
 	'info_chemin_acces_1' => 'Opcje: <b>Ścieżka dostępu do katalogu</b>',
@@ -431,6 +427,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_visiteurs' => '@nb@ goście',
 	'info_nom' => 'Nazwisko',
 	'info_nom_destinataire' => 'Nazwisko odbiorcy',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nazwa Twojej strony',
 	'info_nombre_articles' => '@nb_articles@ artykułów,',
 	'info_nombre_partcipants' => 'UCZESTNICY DYSKUSJI:',
@@ -760,6 +757,7 @@ Przekłady są połączone z oryginałem, za pomocą koloru wskazującego na ich
 	'plugin_info_plugins_dist_1' => 'Następujące wtyczki są załadowane i uruchomione w katalogu @plugins_dist@.',
 	'plugin_info_plugins_dist_2' => 'Nie mogą zostać wyłączone.',
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Biblioteka programistyczna została zainstalowana',
 	'plugin_necessite_lib' => 'Ta wtyczka wymaga biblioteki programistycznej @lib@',
 	'plugin_necessite_plugin' => 'Potrzeba pluginu @plugin@ co najmniej w wersji @version@.',

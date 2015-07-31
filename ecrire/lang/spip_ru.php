@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_recents' => 'Свежие статьи',
 	'avis_archive_incorrect' => 'это неправильный архивный файл SPIP',
 	'avis_archive_invalide' => 'этот архивный файл не может быть использован',
-	'avis_attention' => 'ОСТОРОЖНО!',
+	'avis_attention' => 'Внимание!',
 	'avis_champ_incorrect_type_objet' => 'Неправильное поле @name@ для объекта типа @type@',
 	'avis_colonne_inexistante' => 'Колонка @col@ не существует',
 	'avis_erreur' => 'Ошибка: см. ниже',
@@ -671,6 +671,7 @@ and connect again to the site.
 	'titre_image_auteur_supprime' => 'Автор удален',
 	'titre_image_redacteur' => 'Редактор без доступа',
 	'titre_image_redacteur_02' => 'Редактор',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Посетитель',
 	'titre_joindre_document' => 'ПРИЛОЖИТЬ ДОКУМЕНТ',
 	'titre_mots_cles' => 'КЛЮЧИ',

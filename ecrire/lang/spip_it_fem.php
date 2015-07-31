@@ -660,6 +660,7 @@ funzionamento del sito. Non intervenire finché non conosci bene i meccanismi de
 	'titre_image_auteur_supprime' => 'Autrice eliminata',
 	'titre_image_redacteur' => 'Redattrice senza accesso',
 	'titre_image_redacteur_02' => 'Redattrice',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Visitatore',
 	'titre_joindre_document' => 'ALLEGA UN DOCUMENTO',
 	'titre_mots_cles' => 'PAROLE CHIAVE',

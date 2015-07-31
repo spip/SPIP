@@ -55,6 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'AJOUTE YON PATISIPAN :',
 	'bouton_annonce' => 'ANONS',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'posibilite voye yon mesaj',
 	'bouton_checkbox_indiquer_site' => 'fòk enskri yon sitwèb',
 	'bouton_checkbox_signature_unique_email' => 'yon sèl siyati pou yon ladrès imèl ',
@@ -293,6 +295,7 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'Strikti bazdone se enstale.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Chapo',
 	'info_chapeau_2' => 'Chapo :',
 	'info_chemin_acces_1' => 'Opsyion sa-yo: <b>Chemen pou laksè nan laniyè</b>',
@@ -430,6 +433,7 @@ pa mache mèm.<br />{{Fòk w instal ankò
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Kouman i rele',
 	'info_nom_destinataire' => 'Kouman destinatè i rele',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Kouman sit la li rele',
 	'info_nombre_articles' => '@nb_articles@ atik (yo),',
 	'info_nombre_partcipants' => 'PATISIPAN TO NAN KOZMAN :',
@@ -760,6 +764,7 @@ nan yon koulè ki bay lestati ali :',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW

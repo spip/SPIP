@@ -662,6 +662,7 @@ lès plitò jestyon paj sa-yo pou wèbmèt prensipal sou sit-la.</b>', # MODIF
 	'titre_image_auteur_supprime' => 'Lotè te kraze',
 	'titre_image_redacteur' => 'Redaktè ap gen pa aksè',
 	'titre_image_redacteur_02' => 'Redaktè',
+	'titre_image_selecteur' => 'Afficher la liste', # NEW
 	'titre_image_visiteur' => 'Vizitè',
 	'titre_joindre_document' => 'JWENN YON DOKIMAN',
 	'titre_mots_cles' => 'MOKLE YO',

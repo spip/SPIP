@@ -50,6 +50,8 @@ la documentacion d\'SPIP</a>.', # MODIF
 	'bouton_ajouter_participant' => 'APONDRE UN PARTICIPANT:',
 	'bouton_annonce' => 'ANONCI',
 	'bouton_annuler' => 'Annuler', # NEW
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 	'bouton_checkbox_indiquer_site' => 'indicar obligatoriament un sit web',
 	'bouton_checkbox_signature_unique_email' => 'Nonmàs una signatura per adreiça e-mail',
@@ -283,6 +285,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'L\'estructura de vòstra basa de donadas es installada.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Chapeu',
 	'info_chapeau_2' => 'Chapeu:',
 	'info_chemin_acces_1' => 'Opcions: <b>chamin d\'accès dins l\'annuari</b>',
@@ -416,6 +419,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Nom',
 	'info_nom_destinataire' => 'Nom dau destinatari',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nom de vòstre sit',
 	'info_nombre_articles' => '@nb_articles@ articles,',
 	'info_nombre_partcipants' => 'PARTICIPANTS A LA DISCUSSION:',
@@ -743,6 +747,7 @@ una color indica lor estat:',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW

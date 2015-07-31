@@ -48,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_participant' => 'AJUSTAR UN PARTICIPANT :',
 	'bouton_annonce' => 'ANONÇA',
 	'bouton_annuler' => 'Anular',
+	'bouton_cache_activer' => 'Réactiver le cache', # NEW
+	'bouton_cache_desactiver' => 'Désactiver temporairement le cache', # NEW
 	'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 	'bouton_checkbox_indiquer_site' => 'indicar obligatòriament un sit web',
 	'bouton_checkbox_signature_unique_email' => 'una soleta signatura per adreça e-mail',
@@ -280,6 +282,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 	'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 	'info_base_installee' => 'L\'estructura de la voastra basa de donadas es installada.',
 	'info_bio' => 'Biographie', # NEW
+	'info_cache_desactive' => 'Le cache est temporairement désactivé.', # NEW
 	'info_chapeau' => 'Capèu',
 	'info_chapeau_2' => 'Capèu :',
 	'info_chemin_acces_1' => 'Opcions: <b>camin d\'accès dins l\'annuari</b>',
@@ -408,6 +411,7 @@ Aqueli informacions vos devon poder èstre provesidi per l\'administrator dau si
 	'info_nb_visiteurs' => '@nb@ visiteurs', # NEW
 	'info_nom' => 'Nom',
 	'info_nom_destinataire' => 'Nom dau destinatari',
+	'info_nom_pas_conforme' => 'les tags html ne sont pas autorisés', # NEW
 	'info_nom_site' => 'Nom dau voastre site',
 	'info_nombre_articles' => '@nb_articles@ articles,',
 	'info_nombre_partcipants' => 'PARTICIPANTS À LA DISCUSSION :',
@@ -735,6 +739,7 @@ una color indica lo sieu estat :',
 	'plugin_info_plugins_dist_1' => 'Les extensions ci-dessous sont chargées et activées dans le répertoire @plugins_dist@.', # NEW
 	'plugin_info_plugins_dist_2' => 'Elles ne sont pas désactivables.', # NEW
 	'plugin_info_telecharger' => 'à télécharger depuis @url@ et à installer dans @rep@', # NEW
+	'plugin_info_upgrade_ok' => 'Mise à jour réussie', # NEW
 	'plugin_librairies_installees' => 'Librairies installées', # NEW
 	'plugin_necessite_lib' => 'Ce plugin nécessite la librairie @lib@', # NEW
 	'plugin_necessite_plugin' => 'Nécessite le plugin @plugin@ en version @version@ minimum.', # NEW
