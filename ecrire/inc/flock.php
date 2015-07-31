@@ -162,8 +162,8 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 	if (@file_exists("$path/.ok"))
 		return "$baseaff$subdir/";
 
-	@mkdir($path, _DIR_CHMOD);
-	@chmod($path, _DIR_CHMOD);
+	@mkdir($path, _SPIP_CHMOD);
+	@chmod($path, _SPIP_CHMOD);
 
 	$ok = false;
 	if ($f = @fopen("$path/dir_test.php", "w")) {

@@ -489,7 +489,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 	|| (@filemtime($fichier) < time() - $duree)) {
 		if ($touch) {
 			if (!@touch($fichier)) { @unlink($fichier); @touch($fichier); };
-			if (!$exists) @chmod($fichier, _DIR_CHMOD & ~0111);
+			if (!$exists) @chmod($fichier, _SPIP_CHMOD & ~0111);
 		}
 		return true;
 	}
@@ -1119,7 +1119,7 @@ function spip_desinfecte(&$t) {
 function verifier_visiteur() {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
 // que les constantes principales soient initialisees
-	spip_initialisation_parametree(_DIR_RACINE, _DIR_RESTREINT) ;
+	spip_initialisation_parametree(_DIR_CONFIG, _DIR_IMG, _DIR_TMP_IMG, _DIR_TMP) ;
 
 	if (isset($_COOKIE['spip_session']) OR
 	(isset($_SERVER['PHP_AUTH_USER'])  AND !$GLOBALS['ignore_auth_http'])) {

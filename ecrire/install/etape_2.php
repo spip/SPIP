@@ -13,7 +13,7 @@
 // http://doc.spip.org/@inc_install_2
 function install_etape_2_dist()
 {
-	global $adresse_db, $login_db, $pass_db, $spip_lang_right;
+	global $adresse_db, $login_db, $pass_db, $spip_lang_right,$chmod;
 
 	install_debut_html();
 
@@ -32,12 +32,13 @@ function install_etape_2_dist()
 		echo "<B>"._T('info_connexion_ok')."</B><P> "._T('info_etape_suivante_2');
 
 		echo generer_url_post_ecrire('install');
-		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='3'>";
-		echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
-		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
-		echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\"><P>";
+		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='3' />";
+		echo "<INPUT TYPE='hidden' NAME='chmod' VALUE='$chmod' />";
+		echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40' />";
+		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\" />";
+		echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\" />";
 
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
+		echo "</p>".bouton_suivant();
 		echo "</FORM>";
 	}
 	else {

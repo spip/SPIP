@@ -43,7 +43,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
 	$fichier_dest = "$nom_fichier-$effet";
 	$fichier_dest = md5($fichier_dest);
-	$fichier_dest = sous_repertoire(_DIR_IMG, "cache-gd2") . $fichier_dest . "." .$terminaison_dest;
+	$fichier_dest = sous_repertoire(_DIR_TMP_IMG, "cache-gd2") . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
 	if (@filemtime($fichier) < @filemtime($fichier_dest)) {
@@ -1623,7 +1623,7 @@ function produire_image_typo() {
 
 	$string = "$text-$taille-$couleur-$align-$police-$largeur-$hauteur_ligne-$padding";
 	$query = md5($string);
-	$dossier = sous_repertoire(_DIR_IMG, 'cache-texte');
+	$dossier = sous_repertoire(_DIR_TMP_IMG, 'cache-texte');
 	$fichier = "$dossier$query.png";
 
 	$flag_gd_typo = function_exists("imageftbbox")

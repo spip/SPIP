@@ -13,34 +13,35 @@
 // http://doc.spip.org/@inc_install_3
 function install_etape_3_dist()
 {
-	global $adresse_db, $login_db, $pass_db, $spip_lang_right;
+	global $adresse_db, $login_db, $pass_db, $spip_lang_right, $chmod;
 
 	install_debut_html();
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
 
 	echo aide ("install2");
-	echo "<P>\n";
+	echo "\n";
 
 	echo generer_url_post_ecrire('install');
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='4'>";
-	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
-	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
-	echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\"><P>\n";
+	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='4' />";
+	echo "<INPUT TYPE='hidden' NAME='chmod' VALUE='$chmod' />";
+	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40' />";
+	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\" />";
+	echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\" />\n";
 
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$result = @mysql_list_dbs();
 
-	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B><BR />\n</label>";
+	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B></label>\n";
 
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
 		echo "<B>"._T('texte_choix_base_2')."</B><P> "._T('texte_choix_base_3');
-		echo "<UL>";
+		echo "<ul class='sans_puce'>";
 		$bases = "";
 		for ($i = 0; $i < $n; $i++) {
 			$table_nom = mysql_dbname($result, $i);
-			$base = "<INPUT NAME=\"choix_db\" VALUE=\"".$table_nom."\" TYPE=Radio id='tab$i'";
-			$base_fin = "><label for='tab$i'>".$table_nom."</label><BR />\n\n";
+			$base = "<li><INPUT NAME=\"choix_db\" VALUE=\"".$table_nom."\" TYPE=Radio id='tab$i'";
+			$base_fin = " /><label for='tab$i'>".$table_nom."</label></li>\n\n";
 			if ($table_nom == $login_db) {
 				$bases = "$base CHECKED$base_fin".$bases;
 				$checked = true;
@@ -68,9 +69,9 @@ function install_etape_3_dist()
 			
 			if ($ok) {
 				echo _T('avis_lecture_noms_bases_3');
-				echo "<UL>";
-				echo "<INPUT NAME=\"choix_db\" VALUE=\"".$test_base."\" TYPE=Radio id='stand' CHECKED>";
-				echo "<label for='stand'>".$test_base."</label><BR />\n";
+				echo "<ul class='sans_puce'>";
+				echo "<li><INPUT NAME=\"choix_db\" VALUE=\"".$test_base."\" TYPE=Radio id='stand' CHECKED>";
+				echo "<label for='stand'>".$test_base."</label></li>\n";
 				echo "</UL>";
 				echo _T('info_ou')." ";
 				$checked = true;
@@ -79,12 +80,10 @@ function install_etape_3_dist()
 	}
 	echo "<INPUT NAME=\"choix_db\" VALUE=\"new_spip\" TYPE=Radio id='nou'";
 	if (!$checked) echo " CHECKED";
-	echo "> <label for='nou'>"._T('info_creer_base')."</label> ";
-	echo "<INPUT TYPE='text' NAME='table_new' CLASS='fondl' VALUE=\"spip\" SIZE='20'></fieldset><P>";
+	echo " /> <label for='nou'>"._T('info_creer_base')."</label> ";
+	echo "<INPUT TYPE='text' NAME='table_new' CLASS='fondl' VALUE=\"spip\" SIZE='20' /></fieldset>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
-
-
+	echo bouton_suivant();
 	echo "</FORM>";
 
 	install_fin_html();

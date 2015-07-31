@@ -13,7 +13,7 @@
 // http://doc.spip.org/@inc_install_4
 function install_etape_4_dist()
 {
-	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new;
+	global $adresse_db, $choix_db, $login_db, $pass_db, $spip_lang_right, $spip_version, $table_new, $chmod;
 
 	install_debut_html();
 
@@ -74,6 +74,7 @@ function install_etape_4_dist()
 		$conn = "<"."?php\n";
 		$conn .= "if (!defined(\"_ECRIRE_INC_VERSION\")) return;\n";
 		$conn .= "\$GLOBALS['spip_connect_version'] = 0.4;\n";
+		$conn .= "define('_SPIP_CHMOD', ".$chmod.");\n";
 		$conn .= $ligne_rappel;
 		$conn .= "spip_connect_db("
 			. "'$adresse_db','$port','$login_db','$pass_db','$sel_db'"
@@ -87,9 +88,9 @@ function install_etape_4_dist()
 		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
 
 		echo generer_url_post_ecrire('install');
-		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
+		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5' />";
 
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
+		echo bouton_suivant();
 
 		echo "</FORM>";
 	}

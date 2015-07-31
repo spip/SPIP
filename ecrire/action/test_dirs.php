@@ -22,13 +22,46 @@ include_spip('inc/minipres');
 //
 // http://doc.spip.org/@test_ecrire
 function test_ecrire($my_dir) {
-	$ok = true;
-	$nom_fich = "$my_dir/test.txt";
-	$f = @fopen($nom_fich, "w");
-	if (!$f) $ok = false;
-	else if (!@fclose($f)) $ok = false;
-	else if (!@unlink($nom_fich)) $ok = false;
-	return $ok;
+	static $chmod = 0;
+	
+	$ok = false;
+	$script = @file_exists('spip_loader.php') ? 'spip_loader.php' : $_SERVER['PHP_SELF'];
+	$self = basename($script);
+	$uid = @fileowner('.');
+	$uid2 = @fileowner($self);
+	$gid = @filegroup('.');
+	$gid2 = @filegroup($self);
+	$perms = @fileperms($self);
+
+	// Comparer l'appartenance d'un fichier cree par PHP
+	// avec celle du script et du repertoire courant
+	if(!$chmod) {
+		@rmdir('test');
+		@unlink('test'); // effacer au cas ou
+		@touch('test');
+		if ($uid > 0 && $uid == $uid2 && @fileowner('test') == $uid)
+			$chmod = 0700;
+		else if ($gid > 0 && $gid == $gid2 && @filegroup('test') == $gid)
+			$chmod = 0770;
+		else
+			$chmod = 0777;
+		// Appliquer de plus les droits d'acces du script
+		if ($perms > 0) {
+			$perms = ($perms & 0777) | (($perms & 0444) >> 2);
+			$chmod |= $perms;
+		}
+		@unlink('test');
+	}
+	// Verifier que les valeurs sont correctes
+	$f = @fopen($my_dir.'test.php', 'w');
+	if ($f) {
+		@fputs($f, '<'.'?php $ok = true; ?'.'>');
+		@fclose($f);
+		@chmod($my_dir.'test.php', $chmod);
+		include($my_dir.'test.php');
+	}
+	@unlink($my_dir.'test.php');
+	return $ok?$chmod:false;
 }
 
 //
@@ -40,6 +73,7 @@ function test_ecrire($my_dir) {
 function action_test_dirs_dist()
 {
   global $test_dir, $test_dirs;
+  $chmod = 0;
 
 if ($test_dir) {
   if (!ereg("/$", $test_dir)) $test_dir .= '/';
@@ -47,27 +81,21 @@ if ($test_dir) {
  }
 else {
 	if (!_FILE_CONNECT)
-	  $test_dirs[] = dirname(_FILE_CONNECT_INS);
+	  $test_dirs[] = dirname(_FILE_CONNECT_INS).'/';
 }
 
 $bad_dirs = array();
 $absent_dirs  = array();;
 
 while (list(, $my_dir) = each($test_dirs)) {
+	$test = test_ecrire($my_dir);
 	if (!test_ecrire($my_dir)) {
-		@umask(0);
 		if (@file_exists($my_dir)) {
-			@chmod($my_dir, 0777);
-			// ???
-			if (!test_ecrire($my_dir))
-				@chmod($my_dir, 0775);
-			if (!test_ecrire($my_dir))
-				@chmod($my_dir, 0755);
-			if (!test_ecrire($my_dir))
-				$bad_dirs[] = "<li>".$my_dir;
+				$bad_dirs[] = "<li>".$my_dir."</li>";
 		} else
-			$absent_dirs[] = "<li>". $my_dir;
+			$absent_dirs[] = "<li>".$my_dir."</li>";
 	}
+	$chmod = max($chmod, $test);
 }
 
 if ($bad_dirs OR $absent_dirs) {
@@ -101,13 +129,13 @@ if ($bad_dirs OR $absent_dirs) {
 	  (!$test_dir ? "" : 
 	   "<input type='hidden' name='test_dir' value='$test_dir' />") .
 	  "<DIV align='right'><input type='submit' class='fondl' value='". 
-	  _T('login_recharger')."'></DIV>" .
+	  _T('login_recharger')."' /></DIV>" .
 	  "</form>";
 	minipres($titre, $res);
 
  } else {
 	if (!_FILE_CONNECT)
-	  header("Location: " . generer_url_ecrire("install", "etape=1", true));
+	  header("Location: " . generer_url_ecrire("install", "etape=1&chmod=".$chmod, true));
 	else
 		header("Location: " . _DIR_RESTREINT_ABS);
  }

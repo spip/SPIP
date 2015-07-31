@@ -183,15 +183,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' afin de commencer r&eacute;ellement l\'installation',
 'dirs_preliminaire' => 'Pr&eacute;liminaire : <b>R&eacute;gler les droits d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => 'Probl&egrave;me de droits d\'acc&egrave;s',
-'dirs_repertoires_absents' => '<b>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Il est probable que cela soit d&ucirc; &agrave; un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+'dirs_repertoires_absents' => '<p><b>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;:</b></p><ul>@bad_dirs@</ul>
+  <p>Il est probable que cela soit d&ucirc; &agrave; un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
   V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
-  ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
-  <p />Une fois cette manipulation effectu&eacute;e, vous pourrez ',
-'dirs_repertoires_suivants' => '<b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <p />Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
-  de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.
-  <p />Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+  ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.</p>
+  <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+'dirs_repertoires_suivants' => '<p><b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;:</b></p><ul>@bad_dirs@</ul>
+  <p>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
+  de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.</p>
+  <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 
 
 // E
