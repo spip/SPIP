@@ -22,54 +22,6 @@ include_ecrire ("inc_abstract_sql.php3");
 $id_rubrique = intval($id_rubrique);
 $flag_mots = lire_meta("articles_mots");
 
-
-
-function my_sel($num,$tex,$comp){
-	if ($num==$comp){
-		echo "<OPTION VALUE='$num' SELECTED>$tex\n";
-	}else{
-		echo "<OPTION VALUE='$num'>$tex\n";
-	}
-
-}
-
-function afficher_mois($mois){
-	my_sel("00",_T('mois_non_connu'),$mois);
-	my_sel("01",_T('date_mois_1'),$mois);
-	my_sel("02",_T('date_mois_2'),$mois);
-	my_sel("03",_T('date_mois_3'),$mois);
-	my_sel("04",_T('date_mois_4'),$mois);
-	my_sel("05",_T('date_mois_5'),$mois);
-	my_sel("06",_T('date_mois_6'),$mois);
-	my_sel("07",_T('date_mois_7'),$mois);
-	my_sel("08",_T('date_mois_8'),$mois);
-	my_sel("09",_T('date_mois_9'),$mois);
-	my_sel("10",_T('date_mois_10'),$mois);
-	my_sel("11",_T('date_mois_11'),$mois);
-	my_sel("12",_T('date_mois_12'),$mois);
-}
-
-function afficher_annee($annee){
-	// Cette ligne permettrait de faire des articles sans date de publication
-	// my_sel("0000","n.c.",$annee); 
-
-	if($annee<1996 AND $annee <> 0){
-		echo "<OPTION VALUE='$annee' SELECTED>$annee\n";
-	}
-	for($i=1996;$i<date(Y)+2;$i++){
-		my_sel($i,$i,$annee);
-	}
-}
-
-function afficher_jour($jour){
-	my_sel("00",_T('jour_non_connu_nc'),$jour);
-	for($i=1;$i<32;$i++){
-		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
-		my_sel($i,$aff,$jour);
-	}
-}
-
-
 //
 // Gerer les modifications...
 //

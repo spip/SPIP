@@ -12,6 +12,7 @@
 
 
 include ("inc.php3");
+include_ecrire ("inc_date.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
 // Droits
@@ -37,58 +38,6 @@ if ($new=='oui') {
 		fin_page();
 		exit;
 	}
-}
-
-function my_sel($num, $tex, $comp) {
-  return "<option value='$num'" . (($num != $comp) ? '' : " selected='selected'") .
-    ">$tex</option>\n";
-}
-
-function afficher_mois($mois, $attributs){
-  return
-	"<select $attributs>\n" .
-	my_sel("01", _T('date_mois_1'), $mois) .
-	my_sel("02", _T('date_mois_2'), $mois) .
-	my_sel("03", _T('date_mois_3'), $mois) .
-	my_sel("04", _T('date_mois_4'), $mois) .
-	my_sel("05", _T('date_mois_5'), $mois) .
-	my_sel("06", _T('date_mois_6'), $mois) .
-	my_sel("07", _T('date_mois_7'), $mois) .
-	my_sel("08", _T('date_mois_8'), $mois) .
-	my_sel("09", _T('date_mois_9'), $mois) .
-	my_sel("10", _T('date_mois_10'), $mois) .
-	my_sel("11", _T('date_mois_11'), $mois) .
-	my_sel("12", _T('date_mois_12'), $mois) .
-	"</select>\n";
-}
-
-function afficher_annee($annee, $attributs) {
-	echo "<select $attributs>\n";
-	if ($annee < 1996) echo	my_sel($annee,$annee,$annee);
-	for ($i=date("Y") - 1; $i < date("Y") + 3; $i++) {
-		echo my_sel($i,$i,$annee);
-	}
-	echo "</select>\n";
-}
-
-function afficher_jour($jour, $attributs){
-	echo "<select $attributs>\n";
-	for($i=1;$i<32;$i++){
-		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
-		echo my_sel($i,$aff,$jour);
-	}
-	echo "</select>\n";
-}
-
-function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
-{
-  afficher_jour(jour($date), "name='jour$suffixe' size='1' class='fondl verdana1'");
-  echo afficher_mois(mois($date), "name='mois$suffixe' size='1' class='fondl verdana1'");
-//  echo '<br />';
- afficher_annee(annee($date), "name='annee$suffixe' size='1' class='fondl verdana1'");
-
-  echo "&nbsp;  <input type='text' class='fondl verdana1' name='heures$suffixe' value=\"".$heures."\" size='3'/>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;",
-    "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }
 
 function afficher_si_rdv($date_heure, $date_fin, $choix)
@@ -128,13 +77,11 @@ function afficher_si_rdv($date_heure, $date_fin, $choix)
 	
 	$display = ($choix ? "block" : "none");
 	
-	echo "<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>";
-
-	afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut);
-
-	echo " <br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ";
-	afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin');
-	echo "</div>";
+	echo "<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>",
+	  afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut),
+	  " <br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ",
+	  afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin'),
+	  "</div>";
 }
 
 
