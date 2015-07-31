@@ -30,7 +30,6 @@ dist/inc-pied.html -text
 dist/inc-rss-item.html -text
 dist/inc-rubriques.html -text
 dist/javascript/formfx.js -text
-dist/modeles/application.html -text
 dist/modeles/article_mots.html -text
 dist/modeles/article_traductions.html -text
 dist/modeles/foreach.html -text
@@ -746,6 +745,7 @@ prive/javascript/jquery.js -text
 prive/javascript/multilang.js -text
 prive/javascript/pause.js -text
 prive/minipres.css -text
+prive/modeles/application.html -text
 prive/modeles/audio.html -text
 prive/modeles/doc.html -text
 prive/modeles/emb.html -text
