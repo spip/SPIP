@@ -105,8 +105,9 @@
 	</langue>
 	<langue code="id" url="http://trad.spip.net/tradlang_module/spip?lang_cible=id" total="636" traduits="529" relire="0" modifs="28" nouveaux="79" pourcent="83.18">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/spip?lang_cible=it" total="636" traduits="631" relire="0" modifs="2" nouveaux="3" pourcent="99.21">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/spip?lang_cible=it" total="636" traduits="634" relire="2" modifs="0" nouveaux="0" pourcent="99.69">
 		<traducteur nom="Cap" lien="http://trad.spip.net/auteur/cap" />
+		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="http://trad.spip.net/auteur/phante" />
 	</langue>
 	<langue code="it_fem" url="http://trad.spip.net/tradlang_module/spip?lang_cible=it_fem" total="636" traduits="545" relire="0" modifs="29" nouveaux="62" pourcent="85.69">
