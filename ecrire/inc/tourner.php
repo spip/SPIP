@@ -12,9 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/actions'); // *action_auteur et determine_upload
+include_spip('inc/actions'); // *action_auteur
 include_spip('inc/documents');
-include_spip('inc/presentation');
 include_spip('inc/filtres');
 
 // http://doc.spip.org/@inc_tourner_dist

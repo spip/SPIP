@@ -19,6 +19,7 @@ include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('inc/indexation'); // pour la fonction primary_index_table 
 include_spip('inc/flock');
+include_spip('inc/actions');
 
 // NB: Ce fichier peut ajouter des tables (old-style)
 // donc il faut l'inclure "en globals"
@@ -72,26 +73,11 @@ function exec_export_all_dist()
 {
   global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive, $connect_login, $connect_toutes_rubriques;
 
-	if ($connect_toutes_rubriques) {
-		$repertoire = _DIR_DUMP;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
-		}
-		$dir = $repertoire;
-	} else {
-		$repertoire = _DIR_TRANSFERT;
-		if(!@file_exists($repertoire)) {
-			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
-			$repertoire = sous_repertoire(_DIR_TMP, $repertoire);
-		}
-		if(!@file_exists($repertoire.$connect_login)) {
-			$sous_rep = sous_repertoire($repertoire, $connect_login);
-		}
-		$dir = $sous_rep . '/';
-	}
+	if ($connect_toutes_rubriques AND file_exists(_DIR_DUMP))
+		$dir = _DIR_DUMP;
+	else $dir = determine_upload();
 
-  if (!$archive)
+	if (!$archive)
 		$archive = export_nom_fichier_dump($dir,$gz);
 	
   

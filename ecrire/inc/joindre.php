@@ -26,14 +26,14 @@ function inc_joindre_dist($script, $args, $id=0, $intitule='', $mode='', $type='
 	$distant = ($mode == 'document' AND $type);
 	if ($intitule) $intitule = "<span>$intitule</span><br />";
 
-	if (!_DIR_RESTREINT AND !$vignette_de_doc) {
+	if (!_DIR_RESTREINT AND !$vignette_de_doc AND $GLOBALS['flag_upload']) {
 		if($dir_ftp = determine_upload()) {
 			// quels sont les docs accessibles en ftp ?
 			$l = texte_upload_manuel($dir_ftp, '', $mode);
 			// s'il n'y en a pas, on affiche un message d'aide
 			// en mode document, mais pas en mode vignette
 			if ($l OR ($mode == 'document'))
-				$dir_ftp = afficher_transferer_upload($l);
+				$dir_ftp = afficher_transferer_upload($l, $dir_ftp);
 			else
 				$dir_ftp = '';
 		}
@@ -146,9 +146,9 @@ function texte_upload_manuel($dir, $inclus = '', $mode = 'document') {
 
 
 // http://doc.spip.org/@afficher_transferer_upload
-function afficher_transferer_upload($texte_upload)
+function afficher_transferer_upload($texte_upload, $dir)
 {
-	$doc = array('upload' => '<b>' . joli_repertoire(determine_upload()) . '</b>');
+	$doc = array('upload' => '<b>' . joli_repertoire($dir) . '</b>');
 	if (!$texte_upload) {
 		return "\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
 			_T('info_installer_ftp', $doc) .
