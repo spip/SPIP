@@ -35,7 +35,6 @@ function action_legender_auteur_post($r) {
 	global $auteur_session;
 
 	$bio = _request('bio');
-	$champs_extra = _request('champs_extra');
 	$email = _request('email');
 	$new_login = _request('new_login');
 	$new_pass = _request('new_pass');
@@ -169,7 +168,7 @@ function action_legender_auteur_post($r) {
 	// recoller les champs du extra
 	if ($GLOBALS['champs_extra']) {
 		include_spip('inc/extra');
-		$extra = extra_recup_saisie("auteurs");
+		$extra = extra_update('auteurs', $id_auteur);
 	} else
 		$extra = '';
 
