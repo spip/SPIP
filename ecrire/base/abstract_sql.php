@@ -314,7 +314,7 @@ function sql_showbase($spip=NULL, $serveur='', $option=true)
 {
 	if ($spip == NULL){
 		$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
-		$spip = $connexion['prefixe'] . '%';
+		$spip = $connexion['prefixe'] . '\_%';
 	}
 	
 	$f = sql_serveur('showbase', $serveur,  $option==='continue' OR $option===false);
