@@ -2258,19 +2258,17 @@ function concat(){
 
 
 // http://doc.spip.org/@charge_scripts
-function charge_scripts($scripts) {
+function charge_scripts($files, $script = true) {
   $flux = "";
-  $args = is_array($scripts)?$scripts:explode("|",$scripts);
-  foreach($args as $script) {
-    if(preg_match(",^\w+$,",$script)) {
-      $path = find_in_path("javascript/$script.js");
-      if($path) $flux .= spip_file_get_contents($path);
-    }
+  foreach(is_array($files)?$files:explode("|",$files) as $file) {
+      if (!is_string($file)) continue;
+      if ($script)
+          $file = preg_match(",^\w+$,",$file) ? "javascript/$file.js" : '';
+      if ($file) $path = find_in_path($file);
+      if ($path) $flux .= spip_file_get_contents($path);
   }
   return $flux;
 }
-
-
 
 
 // produit une balise img avec un champ alt d'office si vide
