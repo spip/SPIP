@@ -1,30 +1,6 @@
 <?php
 
-
-// reparation d'un eventuel inc_connect.php3 version "spip_query"
-if (file_exists("inc_connect.php3")
-AND ($conn = join('',file("inc_connect.php3")))
-AND ereg("@spip_query\('SELECT COUNT", $conn)) {
-	include ("inc_presentation.php3");
-	$conn = ereg_replace("@spip_query\(", "@spip_query_db(", $conn);
-	$myFile = @fopen("inc_connect.php3", "wb");
-	if ($myFile) {
-		fputs($myFile, $conn);
-		fclose($myFile);
-		$message = "OK. Le fichier <tt>inc_connect.php3</tt> a &eacute;t&eacute; mis &agrave; jour. Vous pouvez <a href='index.php3'>passer &agrave; la suite...</a>";
-	} else
-		$message = "Impossible de modifier <tt>inc_connect.php3</tt> : veuillez le supprimer par FTP puis r&eacute;installer la connexion &agrave; la base de donn&eacute;es.
-		<p>(Plus technique : vous pouvez aussi tenter de le modifier &laquo;&nbsp;&agrave; la main&nbsp;&raquo;
-		en transformant l'appel <tt>@spip_query</tt> en <tt>@spip_query_db</tt>.)";
-	
-	install_debut_html("R&eacute;paration : fichier ecrire/inc_connect.php3");
-	echo "<p>$message";
-	install_fin_html();
-	exit;
-}
-
 include ("inc_version.php3");
-
 
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_texte.php3");
