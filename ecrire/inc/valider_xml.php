@@ -88,33 +88,38 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 
 	$dtd = preg_replace('/<!--.*?-->/s','',$dtd);
 
-	if (preg_match_all('/<!ENTITY\s+(%?)\s*([.\w]+)\s+(PUBLIC|SYSTEM)?\s*"([^"]*)"\s*("([^"]*)")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
+	if (preg_match_all('/<!ENTITY\s+(%?)\s*([\w;.-]+)\s+(PUBLIC|SYSTEM)?\s*"([^"]*)"\s*("([^"]*)")?\s*>/', $dtd, $r, PREG_SET_ORDER)) {
 		foreach($r as $m) {
 		  list($t, $term, $nom, $type, $val, $q, $alt) = $m;
 		  if ($type AND $alt) {
 		    // valeur par defaut de $alt obscure. A etudier.
-			$dir = preg_replace(',/[^/]+$,', '/', $grammaire)
+		    if (strpos($alt, '/') === false)
+			$alt = preg_replace(',/[^/]+$,', '/', $grammaire)
 			. ($alt ? $alt : "loose.dtd")  ;
 		    // en cas d'inclusion, l'espace de nom est le meme
-		    analyser_dtd($dir, $type, $dtc);
+		    analyser_dtd($alt, $type, $dtc);
 		  }
 		  elseif (!$term) {
 		    $dtc->entites[$nom] = $val;
 		  }
-		  else 
+		  else {
 		    $dtc->macros[$nom] = expanserEntite($val, $dtc->macros) ;
+		  }
 		}
-	} 
+	}
 
 	// reperer pour chaque noeud ses fils potentiels.
 	// mais tant pis pour leur eventuel ordre de succession (, * +):
 	// les cas sont rares et si aberrants que interet/temps-de-calcul -> 0
-	if (preg_match_all('/<!ELEMENT\s+(\w+)([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
+	if (preg_match_all('/<!ELEMENT\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
+	    $nom = expanserEntite($nom, $dtc->macros);
 	    $val = expanserEntite($val, $dtc->macros);
-	    $val = array_values(preg_split('/\W+/', $val,-1,PREG_SPLIT_NO_EMPTY));
+	    $val = array_values(preg_split('/\W+/', $val,-1,
+					   PREG_SPLIT_NO_EMPTY));
 	    $dtc->elements[$nom]= $val;
+
 	    foreach ($val as $k) {
 		if (!isset($dtc->peres[$k])
 		OR !in_array($nom, $dtc->peres[$k]))
@@ -131,22 +136,23 @@ function analyser_dtd($grammaire, $avail, &$dtc)
 	if (preg_match_all('/<!ATTLIST\s+(\S+)\s+([^>]*)>/', $dtd, $r, PREG_SET_ORDER)) {
 	  foreach($r as $m) {
 	    list(,$nom, $val) = $m;
+	    $nom = expanserEntite($nom, $dtc->macros);
 	    $val = expanserEntite($val, $dtc->macros);
 	    $att = array();
+
 	    if (preg_match_all("/\s*(\S+)\s+(([(][^)]*[)])|(\S+))\s+(\S+)(\s*'[^']*')?/", $val, $r2, PREG_SET_ORDER)) {
 		foreach($r2 as $m2) {
 			$v = preg_match('/^\w+$/', $m2[2]) ? $m2[2]
 			  : ('/^' . preg_replace('/\s+/', '', $m2[2]) . '$/');
+			$m21 = expanserEntite($m2[1], $dtc->macros);
+			$m25 = expanserEntite($m2[5], $dtc->macros);
 			$trace[$v] = 1;
-			$att[$m2[1]] = array($v, $m2[5]);
+			$att[$m21] = array($v, $m25);
 		}
 	    }
 	    $dtc->attributs[$nom] = $att;
 	  }
 	}
-
-	// pour voir la liste des regep d'attributs:
-#	echo join('<br />', array_keys($trace));exit;
 
 	spip_log("DTD $avail $grammaire ". strlen($dtd) . ' octets ' . count($dtc->macros)  . ' macros, ' . count($dtc->elements)  . ' elements, ' . count($trace) . " types différents d'attributs " . count($dtc->entites) . " entites");
 }
@@ -156,8 +162,9 @@ function expanserEntite($val, $macros)
 {
 	if (preg_match_all('/%([.\w]+);/', $val, $r, PREG_SET_ORDER)) {
 		foreach($r as $m)
-			if ($x = $macros[$m[1]])
-				$val = str_replace($m[0], $x, $val);
+		  // il peut valoir ""
+			if (isset($macros[$m[1]]))
+				$val = str_replace($m[0], $macros[$m[1]], $val);
 	}
 	return $val;
 }
