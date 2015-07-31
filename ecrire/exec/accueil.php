@@ -468,7 +468,7 @@ function exec_accueil_dist()
 	}
 
 	if (!$connect_id_rubrique)
-		echo afficher_enfant_rub(0, false, true);
+		echo afficher_enfant_rub(0, false, true) . "<br class='nettoyeur' />";
 
  	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'accueil'),'data'=>''));
 
