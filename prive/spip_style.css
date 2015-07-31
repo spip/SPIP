@@ -32,6 +32,7 @@ table.spip tr.row_even { background: #DDD; }
 table.spip th, table.spip td { padding: 0.20em 0.40em; text-align: left; border: 1px solid; }
 table.spip th { vertical-align: bottom; font-weight: bold; }
 table.spip td { vertical-align: top; }
+table.spip td.numeric {text-align:right;}
 
 /* Logos, documents et images */
 img, .spip_logos { margin: 0; padding: 0; border: 0; }
