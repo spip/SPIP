@@ -14,7 +14,8 @@ else
 	$fond = '404';
 
 // Securite 
-if (strstr($fond, '/')) {
+if (strstr($fond, '/')
+OR preg_match(',^formulaire_,', $fond)) {
 	die ("Faut pas se gener");
 }
 if (!find_in_path("$fond.html")) {
