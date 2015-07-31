@@ -1,5 +1,4 @@
-<BOUCLE_article_principal(ARTICLES) {id_article}
-><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<BOUCLE_article_principal(ARTICLES) {id_article}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="#LANG">
 <head>
 <title>[(#TITRE|textebrut)]</title>
@@ -191,10 +190,35 @@
 <div class="notes">(#NOTES)</div>
 ]#FIN_SURLIGNE
 
+
+<BOUCLE_afficher_document(DOCUMENTS){id_document}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
+[<h3 class="spip">(#TITRE)</h3>]
+[<div>(#DESCRIPTIF)</div>]
+
+<div>#EMBED_DOCUMENT</div>
+</BOUCLE_afficher_document>
+
+<B_documents_portfolio>
+<div><hr>
+<BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{fichier==(png|jpg|gif)$}{doublons}>
+	<div style="float: left;">
+	[<a href="article.php3?id_article=#ID_ARTICLE&id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT||reduire_image{1000,52})</a>][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+	</div>
+</BOUCLE_documents_portfolio>
+</div>
+<div style="clear: both;"></div>
+</B_documents_portfolio>
+
+<B_documents_joints>
+<div><hr>
 <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons} {"<br>"}>
-[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
+	<div style="float: left;">
+	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div><b>(#TITRE)</b></div>][<div>(#DESCRIPTIF)</div>]
+	</div>
 </BOUCLE_documents_joints>
-<br>
+</div>
+<div style="clear: both;"></div>
+</B_documents_joints>
 
 
 <!-- Signatures petition -->
