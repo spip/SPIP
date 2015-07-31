@@ -583,6 +583,11 @@ function recuperer_fond($fond, $contexte=array(), $trim=true, $connect='') {
 	foreach(is_array($fond) ? $fond : array($fond) as $f){
 		$page = evaluer_fond($f, $contexte, $options, $connect);
 		$texte .= $trim ? rtrim($page['texte']) : $page['texte'];
+		// Lever un drapeau (global) si le modele utilise #SESSION
+		// a destination de public/parametrer
+		if (isset($page['invalideurs'])
+		AND isset($page['invalideurs']['session']))
+			$GLOBALS['cache_utilise_session'] = $page['invalideurs']['session'];
 	}
 
 	return $trim ? ltrim($texte) : $texte;
