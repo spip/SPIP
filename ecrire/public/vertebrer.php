@@ -108,6 +108,6 @@ function public_vertebrer_dist($desc)
 	"\n\t<tr>\n\t<th>Nb</th>" .
 	vertebrer_sort($field,'_') .
 	"\n</tr></table>" .
-"</B1><h2 style='text-align:center'><:texte_vide:></h2></div></body></html>";
+"</B1><h2 style='text-align:center'><:texte_vide:></h2><//B1></div></body></html>";
 }
 ?>
