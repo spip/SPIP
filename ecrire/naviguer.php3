@@ -134,6 +134,7 @@ if ($titre) {
 		$query = "INSERT INTO spip_rubriques (titre, id_parent) VALUES ('"._T('item_nouvelle_rubrique')."', '$id_parent')";
 		$result = spip_query($query);
 		$coll = spip_insert_id();
+		$clean_link->AddVar('coll', $coll);
 	}
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
@@ -420,6 +421,7 @@ if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_sect
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	$clean_link->AddVar('coll', $coll);
 	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent);
 	echo "</font></center>\n";
 	echo fin_block();
