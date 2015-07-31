@@ -2,18 +2,9 @@
 	<h3 class="spip"><:erreur_probleme_cookie:></h3>
 		<b><:login_cookie_oblige:></b>
 		  <:login_cookie_accepte:><p />
-][
-(#ENV*{message})
-	<br />
-	 <:forum_vous_enregistrer:>
-	[<a 
-	href='(#ENV{inscription})?mode=forum&amp;focus=nom_inscription&amp;target=spip_pass'
-	target="spip_pass"
-	onclick="javascript:window.open(this.href, 'spip_inscription', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;"><:forum_vous_inscrire:></a>]&nbsp;&nbsp;&#91;<a
-		href="spip_pass.php3"
-		target="spip_pass" 
-		onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;<br /><br />
-]<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">
+]
+
+<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">
 	<script type="text/javascript" src="ecrire/md5.js"></script>
 	<form	id="login[_(#ENV{login})]"
 		action="[(#ENV{action2})]"
