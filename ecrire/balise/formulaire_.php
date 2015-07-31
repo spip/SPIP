@@ -106,7 +106,7 @@ function balise_FORMULAIRE__dyn($form)
 	$valeurs = pipeline(
 		'formulaire_charger',
 		array(
-			'args'=>array('form'=>$form,'args'=>$args),
+			'args'=>array('form'=>$form,'args'=>$args,'je_suis_poste'=>$je_suis_poste),
 			'data'=>$valeurs)
 	);
 	
