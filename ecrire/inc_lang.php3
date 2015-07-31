@@ -276,7 +276,7 @@ function init_codes_langues() {
 	'no' => "norsk",
 	'nb' => "norsk bokm&aring;l",
 	'nn' => "norsk nynorsk",
-	'oc_lnc' => "&ograve;c",
+	'oc' => "&ograve;c",
 	'oc_lnc' => "&ograve;c lengadocian",
 	'oc_ni' => "&ograve;c ni&ccedil;ard",
 	'oc_ni_la' => "&ograve;c ni&ccedil;ard (larg)",
