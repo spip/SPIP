@@ -307,6 +307,8 @@ if ($options == 'avancees') {
 	echo "</TABLE>";
 
 	fin_cadre_relief();
+
+	echo "<p>";
 }
 
 
@@ -315,7 +317,7 @@ if ($options == 'avancees') {
 // Creer fichier .htpasswd ?
 //
 
-if (! @file_exists('.htaccess') AND ! $REMOTE_USER ) {
+if ($options == 'avancees' AND ! @file_exists('.htaccess') AND ! $REMOTE_USER ) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
