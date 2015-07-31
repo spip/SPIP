@@ -61,7 +61,7 @@ function _sqlite_init_functions(&$sqlite){
 
 		'SETTYPE'		=> array( 'settype'						,2), // CAST present en v3.2.3
 		'SQRT'			=> array( 'sqrt'						,1), 
-		'SUBSTRING'		=> array( 'substr'						,3), 
+		'SUBSTRING'		=> array( '_sqlite_func_substring'						/*,3*/), // peut etre appelee avec 2 ou 3 arguments, index base 1 et non 0
 		
 		'TO_DAYS'		=> array( '_sqlite_func_to_days'		,1),
 #		'TRIM'			=> array( 'trim'						,1), // present en theorie
@@ -231,6 +231,14 @@ function _sqlite_func_to_days ($d) {
 	return $result;
 }
 
+function _sqlite_func_substring($string,$start,$len=null){
+	// SQL compte a partir de 1, php a partir de 0
+	$start = ($start>0)?$start-1:$start;
+	if (is_null($len))
+		return substr($string,$start);
+	else
+		return substr($string,$start,$len);
+}
 
 // http://doc.spip.org/@_sqlite_func_unix_timestamp
 function _sqlite_func_unix_timestamp($d) {
