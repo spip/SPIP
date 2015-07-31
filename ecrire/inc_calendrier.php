@@ -6,6 +6,20 @@ if (defined("_ECRIRE_INC_CALENDRIER")) return;
 define("_ECRIRE_INC_CALENDRIER", "1");
 
 
+// Ecrire cookies
+
+if ($GLOBALS['set_echelle'] > 0) {
+	spip_setcookie('spip_calendrier_echelle', floor($GLOBALS['set_echelle']), time() + 365 * 24 * 3600);
+	$GLOBALS['echelle'] = floor($GLOBALS['set_echelle']);
+} else 
+	$GLOBALS['echelle'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_calendrier_echelle'];
+
+if ($GLOBALS['set_partie_cal']) {
+	spip_setcookie('spip_partie_cal', $GLOBALS['set_partie_cal'], time() + 365 * 24 * 3600);
+	$GLOBALS['partie_cal'] = $GLOBALS['set_partie_cal'];
+} else 
+	$GLOBALS['partie_cal'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_partie_cal'];
+
 
 # Typographie generale des calendriers de 3 type: jour/mois/annee
 # Il faudrait rationnaliser le nom des fonctions 
@@ -162,7 +176,7 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'>" .
 		"<tr><td width='$largeur_table' valign='top'>" .
 		http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, 
-			$GLOBALS['HTTP_GET_VARS']['echelle'], $messages, $fclic);
+			$GLOBALS['echelle'], $messages, $fclic);
 		"</td></tr></table>";
 
 	# messages sans date ?
@@ -262,17 +276,33 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 
  	if ($type != "mois") {
 		$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-		$retour .= http_calendrier_href($script . "type=$type&echelle=" .
+		$retour .= http_calendrier_href($script . "type=$type&set_echelle=" .
 				($echelle+$echelle) . "&$args",
 				"<img src='$img_dir/loupe.gif' alt='zoom-' />");
-		$retour .= http_calendrier_href(($script . "type=$type&echelle=" .
+		$retour .= http_calendrier_href(($script . "type=$type&set_echelle=" .
 			(($echelle > 2) ? floor($echelle / 2) : 1) .
 			"&$args"),
 					"<img src='$img_dir/loupe.gif'  alt='zoom-' />");
+ 	
+ 		$retour .= "<span style='font-size: 9px'>";
+		$retour .= http_calendrier_href(($script . "type=$type".
+			"&set_partie_cal=tout" .
+			"&$args"),
+					"&nbsp;[tout]");
+		$retour .= http_calendrier_href(($script . "type=$type".
+			"&set_partie_cal=matin" .
+			"&$args"),
+					"[AM]");
+		$retour .= http_calendrier_href(($script . "type=$type".
+			"&set_partie_cal=soir" .
+			"&$args"),
+					"[PM]");
+		$retour .= "</span>";
+ 	
  	}
  
  
- 	$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+ 	$retour .= "&nbsp;&nbsp;&nbsp;";
  	$retour .=  aide("messcalen");
  
 	$retour .= "</div>";    
@@ -426,7 +456,7 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 			$couleur_lien = "black";
 			$couleur_fond = "#eeeeee";
 		}
-
+		
 		if ($amj == $ce_jour) {
 			$couleur_lien = "red";
 			$couleur_fond = "white";
@@ -978,7 +1008,7 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 	}
 	$retour .= "\n<td width='$largeur_centre' valign='top'>"  .
 		"<div>" .
-		http_calendrier_navigation_jour($jour,$mois,$annee, $GLOBALS['HTTP_GET_VARS']['echelle'], 'calendrier.php3', '') .
+		http_calendrier_navigation_jour($jour,$mois,$annee, $GLOBALS['echelle'], 'calendrier.php3', '') .
 		"</div>".
 		http_calendrier_jour($jour,$mois,$annee, "large") .
 		'</td>';
@@ -998,6 +1028,19 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 {
 	global $spip_ecran, $spip_lang_left, $couleur_claire;	
+	global $partie_cal;
+	
+	if ($partie_cal == "soir") {
+		$debut_cal = 12;
+		$fin_cal = 23;
+	} else if ($partie_cal == "matin") {
+		$debut_cal = 4;
+		$fin_cal = 15;
+	} else {
+		$debut_cal = 7;
+		$fin_cal =20;
+	}
+	
 	
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
@@ -1025,8 +1068,8 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 		"<div>&nbsp;</div>" .
 		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>" .
 		"<td width='$largeur_table' valign='top'>" .
-		http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, 7,20,
-			$GLOBALS['HTTP_GET_VARS']['echelle'],
+		http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, $debut_cal,$fin_cal,
+			$GLOBALS['echelle'],
 			$articles, $breves, $messages,
 			'calendrier.php3',
 			'') .
@@ -1045,6 +1088,20 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
   global $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $bleu, $vert,$jaune;
 	global $calendrier_message_fermeture;
+	global $partie_cal;
+	
+	if ($partie_cal == "soir") {
+		$debut_cal = 12;
+		$fin_cal = 23;
+	} else if ($partie_cal == "matin") {
+		$debut_cal = 4;
+		$fin_cal = 15;
+	} else {
+		$debut_cal = 7;
+		$fin_cal =20;
+	}
+	
+	
 
 	$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
 	$jour = journum($date);
@@ -1110,11 +1167,9 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	} else {
 		$largeur = 50;
 	}
-	$echelle = $GLOBALS['HTTP_GET_VARS']['echelle'];
-	$debut = 7;
-	$fin = 20;
+	$echelle = $GLOBALS['echelle'];
 	list($dimheure, $dimjour, $fontsize, $padding) =
-	  calendrier_echelle($debut, $fin, $echelle);
+	  calendrier_echelle($debut_cal, $fin_cal, $echelle);
 	// faute de fermeture en PHP...
 	$calendrier_message_fermeture = $le_message;
 	return
@@ -1129,7 +1184,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 				      "position: absolute; $spip_lang_left: "
 				      . ($largeur - $padding) .
 				      "px; top: 0px;")) .
-	  http_calendrier_jour_ics($debut,$fin,$largeur, 'http_calendrier_message',
+	  http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 'http_calendrier_message',
 				   $echelle,
 				   $messages[$j],
 				   $j) .
