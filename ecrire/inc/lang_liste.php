@@ -26,6 +26,7 @@ $GLOBALS['codes_langues'] = array(
 	'ab' => "Abkhazian",
 	'af' => "Afrikaans",
 	'am' => "Amharic",
+	'an' => "Aragon&#233;s",
 	'ar' => "&#1593;&#1585;&#1576;&#1610;",
 	'as' => "Assamese",
 	'ast' => "asturiano",
