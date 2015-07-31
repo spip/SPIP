@@ -453,8 +453,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 		// l'ajouter "brut" dans les notes
 		if ($note_texte) {
-			if ($les_notes || $mes_notes)
-				$mes_notes .= "<p>";
+			if ($mes_notes)
+				$mes_notes .= "\n\n";
 			$mes_notes .= $appel . $note_texte;
 		}
 
@@ -653,17 +653,39 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}
 
-	if (ereg("<p class=\"spip\">",$letexte)){
-		$letexte = "<p class=\"spip\">".ereg_replace("<p class=\"spip\">", "</p>\n<p class=\"spip\">",$letexte)."</p>";
+	if (ereg('<p class="spip">',$letexte)){
+		$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
 	}
 
 	// Reinserer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCEPROPRE");
 
 	if ($mes_notes) {
-		$mes_notes = ereg_replace("<p class=\"spip\">", "<p class=\"spip_note\">",
-			traiter_raccourcis($mes_notes, $les_echap, 'non'));
-		$les_notes .= echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
+		$fin_notes = '';
+
+		// "paragrapher" les anciennes notes
+		if ($les_notes) {
+			if (!ereg('<p class="spip_note">', $les_notes)) {
+				$les_notes = '<p class="spip_note">' . $les_notes . '</p>';
+			}
+			$les_notes .= "\n".'<p class="spip_note">';
+			$fin_notes = '</p>';
+		}
+
+		// "paragrapher les nouvelles notes
+		$mes_notes = traiter_raccourcis($mes_notes, $les_echap, 'non');
+		if (ereg('<p class="spip">', $mes_notes)) {
+			$mes_notes = ereg_replace('^<p class="spip">', '', $mes_notes);
+			$mes_notes = ereg_replace('</p>$', '', $mes_notes);
+			$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+			$fin_notes = '</p>';
+		}
+
+		// nettoyer
+		$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
+
+		// ajouter
+		$les_notes .= $mes_notes . $fin_notes;
 	}
 
 	return $letexte;
