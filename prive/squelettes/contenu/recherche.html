@@ -10,7 +10,7 @@
 		(#SET{table,#CLE|table_objet})][
 		(#SET{statut,[(#CLE|=={article}|?{[(#SESSION{statut}|statuts_articles_visibles)],''})]})
 		][(#GET{table}|trouver_fond{prive/objets/liste/}
-			|?{#GET{table}|inclure_liste_recherche_par_id{#ENV{recherche},#GET{statut},#ENV**}})
+			|?{#GET{table}|inclure_liste_recherche_par_id{#ENV*{recherche},#GET{statut},#ENV**}})
 	]</BOUCLE_tablesid>
 	[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'})]
 	<//B_tablesid>
@@ -21,7 +21,7 @@
 	(#SET{table,#CLE|table_objet})][
 	(#SET{statut,[(#CLE|=={article}|?{[(#SESSION{statut}|statuts_articles_visibles)],''})]})
 	][(#GET{table}|trouver_fond{prive/objets/liste/}
-		|?{#INCLURE{fond=prive/objets/liste/#GET{table},env,recherche=#ENV{recherche},statut=#GET{statut},par=points}})
+		|?{#INCLURE{fond=prive/objets/liste/#GET{table},env,recherche=#ENV*{recherche},statut=#GET{statut},par=points}})
 ]</BOUCLE_tables>
 [(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}}|wrap{'<h3>'})]
 <//B_tables>
