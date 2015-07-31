@@ -97,7 +97,7 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 	. icone_horizontale(_T('trad_new'), generer_url_ecrire("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif", false)
 	. "</td>";
 
-	if ($flag AND $tableau) {
+	if ($flag AND $liste) {
 		$clic = _T('trad_delier');
 		$form .= "<td style='width: 10px'> &nbsp; </td>"
 		. "<td style='width: 2px; background: url(" . chemin_image("tirets-separation.gif") . ")'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>"
