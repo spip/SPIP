@@ -28,7 +28,7 @@ function init_config() {
 		'post_dates' => 'oui',
 		'creer_preview' => 'non',
 		'taille_preview' => 150,
-		'articles_modif' => 'non',
+		'articles_modif' => 'oui',
 
 		'activer_sites' => 'oui',
 		'proposer_sites' => 0,
@@ -53,7 +53,6 @@ function init_config() {
 		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1',
 
-		'secu_avertissement' => 'non',
 		'creer_htpasswd' => 'non'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
@@ -217,7 +216,7 @@ function appliquer_modifs_config() {
 
 	// modifs de secu (necessitent une authentification ftp)
 	$liste_meta = array(
-		'secu_avertissement',
+		// 'secu_avertissement',	// n'existe plus !
 		'creer_htpasswd'
 	);
 	while (list(,$i) = each($liste_meta))
