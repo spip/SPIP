@@ -1,4 +1,3 @@
-
 SPIP-Core spip-3.0.17 -> spip-3.0.18  26 avril 2015
 -------------------------------------------------------------
 
@@ -80,11 +79,62 @@ r21985 | cedric    |  (sam. 11 avril 2015)| Une constante pour le timeout de con
 r22001 | erationa  |  (mer. 22 avril 2015)| dans certains cas particuliers, les filtres ne sont pas chargés par le selecteur. on les charge donc.corrige https://core.spip.net/issues/3381(en SPIP 3.1, le chargement est global sur le selecteur et permet d'éviter le problème)
 r22006 | b_b       |  (sam. 25 avril 2015)| report tardif de r19980 : corriger le title du lien vers la config du site dans le bandeau (klaus)
 
+
+
 SPIP-plugins-dist spip-3.0.17 -> spip-3.0.18  26 avril 2015
 -------------------------------------------------------------
 
-r88571 | maieul    |  (sam. 11 avril 2015)| nous disions : #DESCRIPTION passe déjà par propre, pas la peine de le faire 2 fois (pas de report en 3.1 parce que celle-ci utilise #DESCRIPTION*)
-
+r84541 | franck    |  (mar. 09 sept. 2014) | Ce n'est plus spip-contrib.mais contrib.spip
+r84552 | cedric    |  (mer. 10 sept. 2014) | presenter les groupes dans l'ordre de la numerotation, puis par multi titre si pas de numerotation
+r84853 | cedric    |  (mer. 24 sept. 2014) | image_recadre peut recadrer une image pour respecter une proportion. Le premier argument est le ratio largeur:hauteur demandé, le second argument est alors un '+' pour agrandir avec des bandes ou un '-' pour reduire l'image.Exemple[(#LOGO_ARTICLE|image_recadre{16:9,'-'})]Permet d'avoir un logo au format 16:9 en recadrant l'image le moins possible.Cela permet de conserver l'image la plus grande possible qui respecte une proportion.
+r84938 | cedric    |  (mer. 01 oct. 2014) | Fix http://core.spip.org/issues/3278 : utiliser :hover et pas .hover comme selecteur CSS
+r84939 | cedric    |  (mer. 01 oct. 2014) | n'initialiser le padding de la box qu'au premier lancement et pas au chargement de la page car sinon certains navigateurs chargeent les images de background au chargement de la page, meme si la box ne sert jamais
+r84940 | cedric    |  (mer. 01 oct. 2014) | initialisation des dimensions de la box ne se faisait pas dans le cas modalbox, on deplace cette initialisation
+r84942 | cedric    |  (mer. 01 oct. 2014) | r83376 avait ressucité du code mort, mais manque de chance c'etait un bug en puissance et pas une feature : le resultat de la fonction depend d'un define qui n'est pas un argument de la fonction, on ne peut donc pas memoizer en fonction de ses arguments. Cela empechait la mise a jour des URLs, on retire donc cette appel (go0uz)
+r84944 | b_b       |  (mer. 01 oct. 2014) | report de r84899 / version 1.4.25: passer la taille max des urls propres et arbos à 80 caractères
+r84996 | cedric    |  (sam. 04 oct. 2014) | Ferme http://core.spip.org/issues/3272 : utiliser |ancre_url pour poser une ancre
+r85114 | cedric    |  (sam. 11 oct. 2014) | Fix http://core.spip.org/issues/3263 : les vignettes se calculent par leur URL, pas par le nom en clair du site (il est identique pour les sites courants mais pas pour les moteurs de recherche connus)
+r85122 | marcimat  |  (sam. 11 oct. 2014) | Report de r85121 : Chaîne de langue manquante
+r85219 | b_b       |  (mar. 14 oct. 2014) | version 0.8.9 : r83397 était insuffisant, il faut aussi définir cette propriété pour cboxLoadedContent (on pourrait l'appliquer directement à tous les éléments contenus dans la box mais ça peut poser problème)
+r85743 | cedric    |  (ven. 31 oct. 2014) | Report de r85728 : Quand on backup un SPIP qui utilise un prefixe de tables différent de 'spip', l'afficher pour rassurer le webmestre qui sait qu' il y a un prefixe et qui s'inquiète de ce que SPIP sauvegarde bien les bonnes tables.
+r85745 | cedric    |  (ven. 31 oct. 2014) | Report de r85731 : Afficher les erreurs rencontrees lors de la sauvegarde au lieu d'un message de reussite en cas d'echec
+r85750 | cedric    |  (ven. 31 oct. 2014) | eviter une erreur fatale eventuelle (si plugin migration present dans une vieille version)
+r85789 | cedric    |  (sam. 01 nov. 2014) | Tester l'existence du flag exist ET sa valeur
+r85817 | b_b       |  (mar. 04 nov. 2014) | version 0.8.10 : oubli dans r83397 et r85219, fix du box sizing aussi pour les boxes en rtl
+r85967 | maieul    |  (mar. 11 nov. 2014) | pas de raison que les forums privés ne réagissent pas au réglage de taille minimale
+r85968 | b_b       |  (mar. 11 nov. 2014) | revert de r85967 par svn merge -c -85967 .
+r85969 | maieul    |  (mar. 11 nov. 2014) | nous disons donc : pas de raison que les ofrums de l'espace privé échappe aux règles sur la longueur minimal. Merci à b_b pour le revert du commit trop fort
+r85973 | gilles    |  (mar. 11 nov. 2014) | report de [85972]
+r86007 | cedric    |  (mer. 12 nov. 2014) | Report de r86006 : ne pas generer une session anonyme a chaque POST de forum mais uniquement si un fichier a ete poste et si c'est une option autorisee+ generer toute de suite une erreur si un POST a ete fait alors que l'option n'est pas autorisee (car des BOTs qui spamment)(evite de generer des sessions anonymes en nombre pour rien)
+r86014 | cedric    |  (mer. 12 nov. 2014) | Report de r86013 : la bonne inclusion sur memoization (depuis http://zone.spip.org/trac/spip-zone/changeset/71370/_plugins_/memoization)
+r86132 | marcimat  |  (lun. 17 nov. 2014) | Report de r86131 : Résoudre une partie de #3345 : une url ​http://domain.tld/?2 acceptait par erreur (avec MYSQL) une url propre pouvant être "2-truc"
+r86211 | cedric    |  (ven. 21 nov. 2014) | report de r85649
+r86358 | tetue     |  (sam. 29 nov. 2014) | coquille
+r86393 | kent1     |  (lun. 01 déc. 2014) | Ne pas surcharger non plus ce formulaire
+r86394 | kent1     |  (lun. 01 déc. 2014) | oups
+r86418 | cedric    |  (mar. 02 déc. 2014) | Report de r86336 : Le header X-Spip-Visites ne fonctionnait plus depuis SPIP 3.0 suite a une salade de variables dans le pipeline affichage_entetes_final. On corrige.
+r86419 | cedric    |  (mar. 02 déc. 2014) | oups, mauvais numero de version dans r86418
+r86545 | cedric    |  (mar. 09 déc. 2014) | Bugfix temporisation 10s sur les revisions enfin trouve : la comparaison 0.0+titre_version < $date etait parfois vrai avec poutant titre_version qui contient $date, on rajoute donc une condition de non egalite au format texte pour exclure ce cas
+r86681 | cedric    |  (jeu. 11 déc. 2014) | eviter une erreur si extension n'est pas renseigne (cas tordus)
+r86686 | cedric    |  (ven. 12 déc. 2014) | Quand on minifie une CSS squelette, il faut prendre l'url de cette css, et pas l'url de la page courante comme base pour les urls absolues
+r86688 | cedric    |  (ven. 12 déc. 2014) | Retour sur r86686 : il faut fournir une url de 1er niveau publique si on est dans le public, et ecrire/ si on est dans ecrire/ puisque le fond css est calculé dans ce cas depuis ecrire/ et donc avec des urls relatives a ecrire/
+r86810 | xdjuj     |  (lun. 22 déc. 2014) | #3368 [Bug] [XML] [Validation] les urls de la forme http://domaine.com/spip.php?page=article&id_article=24 posent un problème de validation, les liens doivent être de la forme http://domaine.com/spip.php?page=article&amp;id_article=24 — problème également présent sur SPIP 2.x
+r86970 | cedric    |  (lun. 05 janv. 2015) | bugfix avec legendes longues sur la mediabox black-simple
+r87125 | cedric    |  (sam. 17 janv. 2015) | Un cache CSS qui ne dependait pas du host en cours, et donc qui entrainait parfois des injection croisees de domaine dans les css pour les sites etant visites sur plusieurs domaines
+r87162 | cedric    |  (mer. 21 janv. 2015) | Si une fonction wrap_embed_html est definie, on l'appelle en lui passant le contenu source et le html qu'on s'apprete a embed dans le contenu riche. Cette fonction peut etre utilisee pour encapsuler ce contenu dans un markup qui l'indique comme non editable dans un editeur wysiwyg et qui porte la trace du raccourci source pour permettre la conversion html=>raccourcis SPIP
+r87248 | cedric    |  (ven. 30 janv. 2015) | bugfix formulaire edition sur les modeles emb qui ont du js ou php
+r87340 | cedric    |  (mar. 03 févr. 2015) | Gerer une erreur eventuelle sur le formulaire mot de passe au lieu de faire croire que tout s'est bien passe
+r87399 | cedric    |  (mar. 10 févr. 2015) | Quand on vient de saisir 2 fois son nouveau mot de passe, on peut faire le cadeau de connexter directement l'utilisateur plutot que lui demander de le saisir une 3eme fois dans le formulaire de login (puisque de toute facon on lui rappelle son login, il a bien tout ce qu'il faut pour se connecter)
+r87400 | cedric    |  (mar. 10 févr. 2015) | Quand on vient de saisir 2 fois son nouveau mot de passe, on peut faire le cadeau de connexter directement l'utilisateur plutot que lui demander de le saisir une 3eme fois dans le formulaire de login (puisque de toute facon on lui rappelle son login, il a bien tout ce qu'il faut pour se connecter)
+r87489 | cedric    |  (mar. 17 févr. 2015) | Bugfix : sur les secteurs on affiche une icone pour voir tous les forums proposes sur les articles du secteur mais la page controler_forum n'affichait pas les resultats correspondants- on declare la jointure sur spip_articles pour le critere id_secteur- on filtre les messages sur id_secteur quand il est dans l'URL- on modifie l'url du lien pour passer les bons arguments et arriver sur les messages proposes dont le decompte correspond a ce qui est annonce sur l'icone
+r87514 | real3t    |  (mer. 18 févr. 2015) | Ajout du moteur de recherche Wow.com
+r87634 | cedric    |  (mer. 25 févr. 2015) | Les raccourcis glossaires sont deja personalisables avec une fonction glossaire_xxxx quand on mets une ancre #xxxx sur le raccourci glossaire.On etend un peu pour que si une ancre inconnue est passee on se rabatte sur la fonction glossaire_ si elle existe (c'est deja elle qui etait appelee si elle existait, en l'absence d'ancre)Du coup on passe l'ancre en 3eme argument pour que la fonction standard puisse l'utiliser pour savoir quoi faire.Exemple d'usage :<pre>define('_RACCOURCI_GLOSSAIRE', "/\[(@[^][<>]+)\]/S");function glossaire_($terme,$id,$ancre=null){	if ($ancre AND $ancre!="twitter") return $terme;	return glossaire_twitter($terme,$id,$ancre);}function glossaire_twitter($terme,$id,$ancre=null){	$terme = rawurlencode(ltrim($terme,"@"));	return "https://twitter.com/$terme";}function glossaire_seenthis($terme,$id,$ancre=null){	$terme = rawurlencode(ltrim($terme,"@"));	return "http://seenthis.net/people/$terme";}</pre>Et dans le texte on utilise[@spip] pour avoir un lien vers https://twitter.com/spip et [@spip#seenthis] pour avoir un lien vers http://senthis.net/people/spipdeclinable/personalisable a l'envie. Et si je mets [@spip#gplus] qui n'est pas defini je tombe sur @spip relative a mon site
+r87721 | pierrek   |  (mar. 03 mars 2015) | Ajout du moteur de recherche Assentice.com
+r87758 | marcimat  |  (ven. 06 mars 2015) | Report de r87757 : Déclarer le pipeline 'renseigner_document' ajouté par r74520.
+r87854 | cedric    |  (mer. 11 mars 2015) | Retablir l'affichage du message d'erreur quand le lien de changeemnt de mot de passe est invalide
+r88103 | erational |  (ven. 20 mars 2015) | report de  z88102. autoriser la lecture de css pour l'évalution du site en "mobile friendly"ttps://www.google.com/webmasters/tools/mobile-friendly/
+r88571 | maieul    |  (sam. 11 avril 2015) | nous disions : #DESCRIPTION passe déjà par propre, pas la peine de le faire 2 fois (pas de report en 3.1 parce que celle-ci utilise #DESCRIPTION*)
+r88815 | ben       |  (dim. 26 avril 2015) | Report de lang avant 3.0.18 ~/svn/spip-zone/_outils_/CReportLangTrunk30.ksh
 
 SPIP-Core spip-3.0.16 -> spip-3.0.17  13 août 2014
 -------------------------------------------------------------
