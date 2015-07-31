@@ -46,7 +46,7 @@ function hide_obj(obj) {
 
 function swap_couche(couche, rtl, dir, no_swap) {
 	var layer;
-	var triangle = findObj('triangle' + couche);
+	var triangle = document.getElementById('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (layer.style.display == "none"){
 		if (!no_swap && triangle) triangle.src = dir + 'deplierbas.gif';
@@ -58,14 +58,14 @@ function swap_couche(couche, rtl, dir, no_swap) {
 }
 function ouvrir_couche(couche, rtl,dir) {
 	var layer;
-	var triangle = findObj('triangle' + couche);
+	var triangle = document.getElementById('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (triangle) triangle.src = dir + 'deplierbas.gif';
 	layer.style.display = 'block';
 }
 function fermer_couche(couche, rtl, dir) {
 	var layer;
-	var triangle = findObj('triangle' + couche);
+	var triangle = document.getElementById('triangle' + couche);
 	if (!(layer = findObj('Layer' + couche))) return;
 	if (triangle) triangle.src = dir + 'deplierhaut' + rtl + '.gif';
 	layer.style.display = 'none';
