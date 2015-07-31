@@ -138,7 +138,6 @@ ecrire/exec_spip_action_instituer.php -text
 ecrire/exec_spip_action_joindre.php -text
 ecrire/exec_spip_action_purger.php -text
 ecrire/exec_spip_action_redirect.php -text
-ecrire/exec_spip_action_style.php -text
 ecrire/exec_spip_action_supprimer.php -text
 ecrire/exec_spip_action_test_dirs.php -text
 ecrire/exec_spip_action_tester.php -text
@@ -339,6 +338,7 @@ ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
 ecrire/inc_popularites.php -text
 ecrire/inc_sites_voir.php -text
+ecrire/inc_style.php -text
 ecrire/inc_suivi_versions.php -text
 ecrire/inc_syndic.php -text
 ecrire/inc_utils.php -text
