@@ -992,11 +992,6 @@ function spip_initialisation() {
 		}
 	}
 
-	// tidy en ligne de commande (si on ne l'a pas en module php,
-	// ou si le module php ne marche pas)
-	// '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
-	#define('_TIDY_COMMAND', 'tidy');
-
 	//
 	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
 	// (non surchargeable en l'etat ; attention si on utilise include_spip()

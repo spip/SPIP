@@ -180,7 +180,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 function gadget_navigation($id_rubrique) {
 	global $connect_id_auteur, $connect_login, $connect_statut, $couleur_claire,$couleur_foncee, $spip_lang_left, $spip_lang_right, $spip_ecran;
 
-	$gadget = '';
+	$gadget = '<div style="width: 300px;">';
 
 	$vos_articles = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5");
 	if (spip_num_rows($vos_articles) > 0) {
@@ -268,6 +268,8 @@ function gadget_navigation($id_rubrique) {
 			
 	}
 
+	$gadget .="</div>";
+
 	return $gadget;
 }
 
@@ -287,14 +289,14 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 
 	// GADGET Navigation rapide
-	$bandeau .= "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>"
+	$bandeau .= "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px;'>"
 	. "<a href='" . generer_url_ecrire("brouteur", ($id_rubrique ? "id_rubrique=$id_rubrique" : '')) . "' class='lien_sous'>" . _T('icone_brouteur') . "</a>"
 	. "<div id='gadget-navigation'></div>\n"
 	. "</div>\n";
 	// FIN GADGET Navigation rapide
 
 	// GADGET Recherche
-	$bandeau .= "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 146px; $spip_lang_left: 60px;'>"
+	$bandeau .= "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='$spip_lang_left: 60px;'>"
 	. "<form method='get' style='margin: 0px; position: relative;' action='" . generer_url_ecrire("recherche") . "'>"
 	. "<input type='hidden' name='exec' value='recherche' />"
 	. "<input type=\"text\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\""._T('info_rechercher')."\" name=\"recherche\" onkeypress=\"t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" autocomplete=\"off\" class=\"formo\" accesskey=\"r\" />"
@@ -314,7 +316,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 
 	// GADGET Messagerie
 	$gadget = '';
-	$gadget .= "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
+	$gadget .= "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
 	$gadget .= "<a href='" . generer_url_ecrire("messagerie") . "' class='lien_sous'>";
 	$gadget .= _T('icone_messagerie_personnelle');
 	$gadget .= "</a>";
@@ -335,7 +337,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 	$bandeau .= "</div>";
 	
 		// Infos perso
-	$bandeau .= "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_left: 200px;'>";
+	$bandeau .= "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='$spip_lang_left: 200px;'>";
 	$bandeau .= "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur") . "' class='lien_sous'>";
 	$bandeau .= _T('icone_informations_personnelles');
 	$bandeau .= "</a>";
@@ -359,7 +361,7 @@ function bandeau_gadgets($largeur, $options, $id_rubrique) {
 		
 	$decal = $decal + 70;
 		
-	$bandeau .= "<div id='bandeauecran' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+	$bandeau .= "<div id='bandeauecran' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 	if ($spip_ecran == "large") 
 			$bandeau .= "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 	else
