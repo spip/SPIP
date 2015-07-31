@@ -111,7 +111,7 @@ function afficher_rubriques_filles($id_parent) {
 				if ($article[$id_rubrique]) {
 					while(list(,$zarticle) = each($article[$id_rubrique]) ) {
 						
-						echo "<div>$zarticle</div>\n";
+						echo "$zarticle\n";
 					}
 								
 				}
@@ -135,6 +135,16 @@ function afficher_rubriques_filles($id_parent) {
 		$id_parent=$row['id_parent'];
 		
 		$les_rubriques[] = "rubrique$id_rubrique";
+		
+		$nom_block = "rubrique$id_rubrique";
+		if (!$numero_block["$nom_block"] > 0){
+			$compteur_block++;
+			$numero_block["$nom_block"] = $compteur_block;
+		}
+
+
+		$javasc_ouvrir .= "ouvrir_couche('$compteur_block', '$spip_lang_rtl');";
+		$javasc_fermer .= "fermer_couche('$compteur_block', '$spip_lang_rtl');";
 		
 		if ($id_parent == '0') 	{
 			$rubrique[$id_rubrique] = "$titre";
@@ -179,16 +189,22 @@ function afficher_rubriques_filles($id_parent) {
 
 	
 	// Demarrer l'affichage
-	/*	
 	if ($les_rubriques AND test_layer()) {
 		$les_rubriques = join($les_rubriques,",");
+		echo "<div>&nbsp;</div>";
 		echo "<b class='verdana2'>";
-		echo bouton_block_invisible("$les_rubriques");
-		echo " "._T('lien_tout_deplier');
-		echo "</div>";
+		echo "<a href=\"javascript:$javasc_ouvrir\">";
+		echo _T('lien_tout_deplier');
+		echo "</a>";
+		echo "</b>";
+		echo " | ";
+		echo "<b class='verdana2'>";
+		echo "<a href=\"javascript:$javasc_fermer\">";
+		echo _T('lien_tout_replier');
+		echo "</a>";
+		echo "</b>";
 		echo "<div>&nbsp;</div>";
 	}
-	*/
 	
 	afficher_rubriques_filles(0);
 

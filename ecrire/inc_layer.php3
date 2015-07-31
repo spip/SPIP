@@ -94,7 +94,7 @@ function bouton_block_invisible($nom_block) {
 			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\');";
 		}
 		$retour = "\n<script type='text/javascript'><!--\n";
-		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle$num_triangle\" src=\"img_pack/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";
+		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"img_pack/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
 
@@ -102,6 +102,7 @@ function bouton_block_invisible($nom_block) {
 		return $retour;
 	}
 }
+
 
 function bouton_block_visible($nom_block){
 	global $spip_lang_rtl;
