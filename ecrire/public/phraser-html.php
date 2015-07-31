@@ -292,51 +292,67 @@ function phraser_arg(&$texte, $fin, $sep, $result, &$pointeur_champ) {
 function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	$res = array();
 	while (($p=strpos($texte, "%$sep"))!==false) {
-	  if (!ereg("^%$sep([0-9]+)@(.*)$", substr($texte,$p),$m)) break;
-	  $debut = substr($texte,0,$p);
-	  if ($p) $res = phraser_inclure($debut, $ligne, $res);
-	  $ligne += substr_count($debut, "\n");
-	  $res[]= $nested[$m[1]];
-	  $texte = $m[2];
+		if (!preg_match(',^%'.preg_quote($sep).'([0-9]+)@,', substr($texte,$p), $m))
+			break;
+		$debut = substr($texte,0,$p);
+		$texte = substr($texte, $p+strlen($m[0]));
+		if ($p)
+			$res = phraser_inclure($debut, $ligne, $res);
+		$ligne += substr_count($debut, "\n");
+		$res[]= $nested[$m[1]];
 	}
-	return (($texte==="") ?  $res : phraser_inclure($texte, $ligne, $res));
+	return (($texte==='') ? $res : phraser_inclure($texte, $ligne, $res));
 }
 
 function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
-  $i = 0; // en fait count($result)
-  $x = "";
-	while (true) {	  $j=$i;   $n = $ligne;
-	  while (ereg(CHAMP_ETENDU, $texte, $match)) {
-		$p = strpos($texte, $match[0]);
-		$debut = substr($texte, 0, $p);
-		if ($p) {$result[$i] = $debut;$i++; }
-		$champ = new Champ;
-		// ca ne marche pas encore en cas de champ imbrique
-		$champ->ligne = $x ? 0 :($n+substr_count($debut, "\n"));
-		$champ->nom_boucle = $match[3];
-		$champ->nom_champ = $match[4];
-		$champ->etoile = $match[6];
-		// phraser_args indiquera ou commence apres
-		$result = phraser_args($match[7], ")", $sep, $result, $champ);
-		$champ->avant = phraser_champs_exterieurs($match[1],$n,$sep,$result);
-		$debut = substr($champ->apres,1);
-		$n += substr_count(substr($texte, 0, strpos($texte, $debut)), "\n");
-		$champ->apres = phraser_champs_exterieurs($debut,$n,$sep,$result);
+	$i = 0; // en fait count($result)
+	$x = "";
 
-		$result[$i] = $champ;
-		$i++;
-		$texte = substr($texte,$p+strlen($match[0]));
-	  }
-	  if ($texte!=="") {$result[$i] = $texte; $i++;}
-	  $x ='';
+	while (true) {
+		$j=$i;
+		$n = $ligne;
+		while (ereg(CHAMP_ETENDU, $texte, $match)) {
+			$p = strpos($texte, $match[0]);
+			$debut = substr($texte, 0, $p);
+			if ($p) {
+				$result[$i] = $debut;
+				$i++;
+			}
+			$champ = new Champ;
+			// ca ne marche pas encore en cas de champ imbrique
+			$champ->ligne = $x ? 0 :($n+substr_count($debut, "\n"));
+			$champ->nom_boucle = $match[3];
+			$champ->nom_champ = $match[4];
+			$champ->etoile = $match[6];
+			// phraser_args indiquera ou commence apres
+			$result = phraser_args($match[7], ")", $sep, $result, $champ);
+			$champ->avant =
+				phraser_champs_exterieurs($match[1],$n,$sep,$result);
+			$debut = substr($champ->apres,1);
+			$n += substr_count(substr($texte, 0, strpos($texte, $debut)), "\n");
+			$champ->apres = phraser_champs_exterieurs($debut,$n,$sep,$result);
 
-	  while($j < $i) 
-	    { $z= $result[$j]; 
-	      // j'aurais besoin de connaitre le nombre de lignes...
-	      if (is_object($z)) $x .= "%$sep$j@" ; else $x.=$z ;
-	      $j++;}
-	  if (ereg(CHAMP_ETENDU, $x)) $texte = $x;
-	  else return phraser_champs_exterieurs($x, $ligne, $sep, $result);}
+			$result[$i] = $champ;
+			$i++;
+			$texte = substr($texte,$p+strlen($match[0]));
+		}
+		if ($texte!=="") {$result[$i] = $texte; $i++;}
+		$x ='';
+
+		while($j < $i) {
+			$z= $result[$j]; 
+			// j'aurais besoin de connaitre le nombre de lignes...
+			if (is_object($z))
+				$x .= "%$sep$j@";
+			else
+				$x.=$z;
+			$j++;
+		}
+		if (ereg(CHAMP_ETENDU, $x))
+			$texte = $x;
+		else
+			return phraser_champs_exterieurs($x, $ligne, $sep, $result);
+	}
 }
 
 // analyse des criteres de boucle, 
@@ -622,6 +638,7 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		$ligne += substr_count(substr($texte, 0, strpos($texte, $suite)), "\n");
 		$texte = $suite;
 	}
+
 	return phraser_champs_etendus($texte, $ligne, $all_res);
 }
 ?>
