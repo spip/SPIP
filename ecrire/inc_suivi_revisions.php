@@ -93,7 +93,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 	
 			echo "<span class='arial2'>";
-			echo bouton_block_invisible("$id_version-$id_article-$id_auteur");
+			if (!$court) echo bouton_block_invisible("$id_version-$id_article-$id_auteur");
 			echo "<img src='img_pack/$logo_statut' border='0'>&nbsp;";
 			echo "<a class='$statut' style='font-weight: bold;' href='articles_versions.php3?id_article=$id_article'>$titre</a>";
 			echo "</span>";
@@ -101,68 +101,72 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo " $date $nom";
 			echo "</span>";
 		
-			$query_diff = "
-				SELECT id_version
-				FROM spip_versions
-				WHERE id_article=$id_article AND id_version<$id_version 
-				ORDER BY id_version DESC LIMIT 0,1";
-				if ($result_diff = spip_query($query_diff)) {
-					$row_diff = mysql_fetch_array($result_diff);
-					$id_diff = $row_diff['id_version'];
-			}
-	
-	
-			$query_art = "
-				SELECT *
-				FROM spip_articles
-				WHERE id_article='$id_article'";
-			$result_art = spip_query($query_art);
-			
-			if ($row_art = spip_fetch_array($result_art)) {
-				$id_article = $row_art["id_article"];
-				$id_rubrique = $row_art["id_rubrique"];
-				$date = $row_art["date"];
-				$statut_article = $row_art["statut"];
-				$maj = $row_art["maj"];
-				$date_redac = $row_art["date_redac"];
-				$visites = $row_art["visites"];
-				$referers = $row_art["referers"];
-				$extra = $row_art["extra"];
-				$id_trad = $row_art["id_trad"];
-			}
-			
-			$textes = recuperer_version($id_article, $id_version);		
-					
-			if ($id_version && $id_diff) {		
-				if ($id_diff > $id_version) {
-					$t = $id_version;
-					$id_version = $id_diff;
-					$id_diff = $t;
-					$old = $textes;
-					$new = $textes = recuperer_version($id_article, $id_version);
+			if (!$court) { 
+				$query_diff = "
+					SELECT id_version
+					FROM spip_versions
+					WHERE id_article=$id_article AND id_version<$id_version 
+					ORDER BY id_version DESC LIMIT 0,1";
+					if ($result_diff = spip_query($query_diff)) {
+						$row_diff = mysql_fetch_array($result_diff);
+						$id_diff = $row_diff['id_version'];
 				}
-				else {
-					$old = recuperer_version($id_article, $id_diff);
-					$new = $textes;
-				}		
-				$textes = array();			
-				foreach ($champs as $champ) {
-					if (!$new[$champ] && !$old[$champ]) continue;			
-					$diff = new Diff(new DiffTexte);
-					$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
+		
+		
+				$query_art = "
+					SELECT *
+					FROM spip_articles
+					WHERE id_article='$id_article'";
+				$result_art = spip_query($query_art);
+				
+				if ($row_art = spip_fetch_array($result_art)) {
+					$id_article = $row_art["id_article"];
+					$id_rubrique = $row_art["id_rubrique"];
+					$date = $row_art["date"];
+					$statut_article = $row_art["statut"];
+					$maj = $row_art["maj"];
+					$date_redac = $row_art["date_redac"];
+					$visites = $row_art["visites"];
+					$referers = $row_art["referers"];
+					$extra = $row_art["extra"];
+					$id_trad = $row_art["id_trad"];
 				}
-			}		
-			
-			echo debut_block_invisible("$id_version-$id_article-$id_auteur");
-			if (is_array($textes))
-			foreach ($textes as $var => $t) {
-				if (strlen($t) > 0) {
-					echo "<blockquote class='spip serif1'>";
-					echo propre($t)."";
-					echo "</blockquote>";
+				
+				$textes = recuperer_version($id_article, $id_version);		
+						
+				if ($id_version && $id_diff) {		
+					if ($id_diff > $id_version) {
+						$t = $id_version;
+						$id_version = $id_diff;
+						$id_diff = $t;
+						$old = $textes;
+						$new = $textes = recuperer_version($id_article, $id_version);
+					}
+					else {
+						$old = recuperer_version($id_article, $id_diff);
+						$new = $textes;
+					}		
+					$textes = array();			
+					foreach ($champs as $champ) {
+						if (!$new[$champ] && !$old[$champ]) continue;			
+						$diff = new Diff(new DiffTexte);
+						$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
+					}
+				}	
+				
+				echo debut_block_invisible("$id_version-$id_article-$id_auteur");
+				if (is_array($textes))
+				foreach ($textes as $var => $t) {
+					if (strlen($t) > 0) {
+						echo "<blockquote class='spip serif1'>";
+						echo propre($t)."";
+						echo "</blockquote>";
+					}		
 				}		
-			}		
-			echo fin_block();
+				echo fin_block();
+			
+			}
+			
 			echo "</div>";
 		}		
 		echo "</div>";
