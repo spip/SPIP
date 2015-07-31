@@ -2278,7 +2278,7 @@ function url_rss_forum($texte){return $texte;}
  * @param string $title
  * @return string
  */
-function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel=""){
+function lien_ou_expose($url,$libelle=NULL,$on=false,$class="",$title="",$rel=""){
 	return 
 	($on ?"<strong class='on'>":
 		"<a href='$url'"
@@ -2287,7 +2287,7 @@ function lien_ou_expose($url,$libelle,$on=false,$class="",$title="",$rel=""){
 	  	.($rel?" rel='".attribut_html($rel)."'":'')
 	  	.">"
 	)
-	. $libelle
+	. $libelle != NULL ? $libelle : $url
 	. ($on ? "</strong>":"</a>");
 }
 
