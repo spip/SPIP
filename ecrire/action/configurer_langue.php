@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_config_dist
+// http://doc.spip.org/@action_configurer_langue_dist
 function action_configurer_langue_dist() {
 	
 	$securiser_action = charger_fonction('securiser_action', 'inc');

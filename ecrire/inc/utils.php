@@ -942,6 +942,7 @@ function generer_url_prive($script, $args="", $no_entities=false) {
 	return url_de_base() . _DIR_RESTREINT_ABS . $action;
 }
 
+// http://doc.spip.org/@generer_post_ecrire
 function generer_post_ecrire($script, $corps, $atts='', $submit='') {
 	global $spip_lang_right;
 

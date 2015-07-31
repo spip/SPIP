@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/lang');
 
+// http://doc.spip.org/@inc_configurer_charset_dist
 function inc_configurer_charset_dist()
 {
 	global $spip_lang_right;

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-// http://doc.spip.org/@exec_discuter_dist
+// http://doc.spip.org/@exec_configurer_charset_dist
 function exec_configurer_charset_dist()
 {
 	$configurer_charset = charger_fonction('configurer_charset', 'inc');
