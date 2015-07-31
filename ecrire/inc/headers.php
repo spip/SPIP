@@ -47,10 +47,6 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
   include_spip('inc/cookie');
 	if ((!$equiv AND !spip_cookie_envoye()) OR ((strncmp("Apache", $_SERVER['SERVER_SOFTWARE'],6)==0) OR defined('_SERVER_APACHE'))) {
-		// eviter la mise en cache de la redirection par FF>5 & IE>9 (http://core.spip.org/issues/2537)
-		if ($status == 302) {
-			@header("Cache-Control: no-cache");
-		}
 		@header("Location: " . $url);
 		$equiv="";
 	} else {
