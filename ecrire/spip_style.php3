@@ -117,6 +117,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .profondeur { border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid }
 .hauteur { border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid }
 label { cursor: pointer; }
+.pointeur { cursor: pointer; }
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
 .arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
