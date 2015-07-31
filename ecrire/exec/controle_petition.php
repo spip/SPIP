@@ -17,15 +17,22 @@ function exec_controle_petition_dist()
 {
 	exec_controle_petition_args(intval(_request('id_article')),
 				    _request('type'),
-				    intval(_request('debut')));
+				    intval(_request('debut')),
+				    intval(_request('id_signature')));
 }
 
-function exec_controle_petition_args($id_article, $type, $debut)
+function exec_controle_petition_args($id_article, $type, $debut, $id_signature)
 {
 	include_spip('inc/presentation');
 
 	$titre =' ';
 	$statut='new';
+	$where = '';
+	if ($id_signature) {
+		$id_article = sql_getfetsel("id_article", "spip_signatures", "id_signature=$id_signature");
+		if ($id_article)
+			$where = '(id_signature=' . sql_quote($id_signature) . ') AND ';
+	}
 	if ($id_article) {
 		if ($row = sql_fetsel("titre,statut", "spip_articles", "id_article=$id_article"));
 		if (!$row)
@@ -50,7 +57,7 @@ function exec_controle_petition_args($id_article, $type, $debut)
 		$r = $signatures('controle_petition',
 			$id_article,
 			$debut, 
-			"(statut='publie' OR statut='poubelle')",
+			$where . "(statut='publie' OR statut='poubelle')",
 			"date_time DESC",
 			 10,
 			 $type);
