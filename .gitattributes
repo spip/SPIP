@@ -32,7 +32,6 @@ ecrire/action/purger.php -text
 ecrire/action/purger_queue.php -text
 ecrire/action/redirect.php -text
 ecrire/action/referencer_traduction.php -text
-ecrire/action/reorganiser.php -text
 ecrire/action/session.php -text
 ecrire/action/super_cron.php -text
 ecrire/action/supprimer_lien.php -text
