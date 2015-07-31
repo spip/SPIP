@@ -331,8 +331,15 @@ function ajouter_tags($matches, $item) {
 		AND !strlen($mot = extraire_attribut($match[0], 'label')))
 			break;
 		// rechercher un url
-		if ($url = extraire_attribut($match[0], 'domain')
-		OR $url = extraire_attribut($match[0], 'resource')
+		if ($url = extraire_attribut($match[0], 'domain')) {
+			// category@domain est la racine d'une url qui se prolonge
+			// avec le contenu text du tag <category> ; mais dans SPIP < 2.0
+			// on donnait category@domain = #URL_RUBRIQUE, et
+			// text = #TITRE_RUBRIQUE ; d'ou l'heuristique suivante sur le slash
+			if (substr($url, -1) == '/')
+				$url .= rawurlencode($mot);
+		}
+		else if ($url = extraire_attribut($match[0], 'resource')
 		OR $url = extraire_attribut($match[0], 'url')
 		)
 			{}
@@ -347,13 +354,15 @@ function ajouter_tags($matches, $item) {
 		}
 		else if (
 			// cas atom1, a faire apres flickr
-			$url = suivre_lien(extraire_attribut($match[0], 'scheme'),
-				extraire_attribut($match[0], 'term'))) {
+			$scheme = extraire_attribut($match[0], 'scheme')
+			AND $term = extraire_attribut($match[0], 'term')
+		) {
+				$url = suivre_lien($scheme,$term);
 		}
 		else {
-			# type del.icio.us
+			# type delicious.com
 			foreach(explode(' ', $mot) as $petit)
-				if (preg_match(',<rdf[^>]* resource=["\']([^>]*/'
+				if (preg_match(',<rdf\b[^>]*\bresource=["\']([^>]*/'
 				.preg_quote(rawurlencode($petit),',').')["\'],i',
 				$item, $m)) {
 					$mot = '';
