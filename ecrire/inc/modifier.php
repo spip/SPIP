@@ -113,6 +113,17 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 		// allez on commit la modif
 		sql_updateq($spip_table_objet, $champs, "$id_table_objet=$id", $serveur);
 
+		// on verifie si elle est bien passee
+		$moof = sql_fetsel(array_keys($champs), $spip_table_objet, "$id_table_objet=$id", array(), array(), '', array(), $serveur);
+		if ($moof != $champs) {
+			foreach($moof as $k=>$v)
+			if ($v !== $champs[$k]) {
+				$conflits[$k]['post'] = $champs[$k];
+				$conflits[$k]['save'] = $v;
+			}
+		}
+
+
 		// Cas particulier des groupes de mots dont le titre est repris
 		// dans la table spip_mots
 		if ($spip_table_objet == 'spip_groupes_mots'
@@ -150,7 +161,7 @@ function modifier_contenu($type, $id, $options, $c=false, $serveur='') {
 	}
 
 	// S'il y a un conflit, prevenir l'auteur de faire un copier/coller
-	if ($conflit AND count($conflits)) {
+	if ($conflits) {
 		$redirect = url_absolue(
 			parametre_url(rawurldecode(_request('redirect')), $id_table_objet, $id)
 		);
