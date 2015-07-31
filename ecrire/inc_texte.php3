@@ -181,7 +181,7 @@ function echappe_retour($letexte, $source='') {
 	if (strpos($letexte,"base64$source")) {
 		# echo htmlspecialchars($letexte);  ## pour les curieux
 		if (preg_match_all(
-		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*>,Ums',
+		',<(span|div) class=[\'"]base64'.$source.'[\'"]\s.*></\1>,Ums',
 		$letexte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
 				$rempl = base64_decode(extraire_attribut($reg[0], 'title'));
