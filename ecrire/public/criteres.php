@@ -55,21 +55,41 @@ function critere_exclus_dist($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_doublons_dist
 function critere_doublons_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	if (!$boucle->primary)
+	$primary = $boucle->primary;
+
+	if (!$primary)
 		erreur_squelette(_T('zbug_doublon_table_sans_index'), "BOUCLE$idb");
+	$not = ($crit->not ? '' : 'NOT');
+
 	$nom = !isset($crit->param[0]) ? "''" : calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	// mettre un tableau pour que ce ne soit pas vu comme une constante
-	$boucle->where[]= array("sql_in('".$boucle->id_table . '.' . $boucle->primary .
-	  "', " .
-	  '$doublons[' . 
-	  ($crit->not ? '' : ($boucle->doublons . "[]= ")) .
-	  "('" .
+
+	$nom = "'" .
 	  $boucle->type_requete . 
 	  "'" .
-	  ($nom == "''" ? '' : " . $nom") .
-	  ')], \'' . 
-	  ($crit->not ? '' : 'NOT') .
-				"')");
+	  ($nom == "''" ? '' : " . $nom");
+
+	$debutdoub = '$doublons['
+	.  (!$not ? '' : ($boucle->doublons . "[]= "));
+
+	$findoub = "($nom)]"; 
+
+	$debin = "sql_in('" . $boucle->id_table . '.' . $primary . "', ";
+
+	$suitin = $debin . $debutdoub;
+
+	// si autre critere doublon, fusionner pour avoir un seul In
+	foreach ($boucle->where as $k => $w) {
+		if (strpos($w[0], $suitin) ===0) {
+			$boucle->where[$k][0] = $debin . $debutdoub . $findoub . ' . ' . substr($w[0],strlen($debin));
+			return;
+		}
+	}
+	$boucle->where[]= array($suitin . $findoub . ", '" . $not . "')");
+
+
+
+
 # la ligne suivante avait l'intention d'eviter une collecte deja faite
 # mais elle fait planter une boucle a 2 critere doublons:
 # {!doublons A}{doublons B}
