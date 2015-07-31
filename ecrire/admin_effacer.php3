@@ -15,7 +15,7 @@ debut_gauche();
 
 debut_boite_info();
 
-echo _T('info_gauche_admin_effacer'));
+echo _T('info_gauche_admin_effacer');
 
 fin_boite_info();
 
