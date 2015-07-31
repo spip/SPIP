@@ -16,13 +16,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function bouton_barre_racc($action, $img, $help, $champhelp) {
 
+	$a = attribut_html($help);
 	return "<a\nhref=\"javascript:"
 		.$action
 		."\" class='spip_barre' tabindex='1000'\ntitle=\""
-		.attribut_html($help)
+		. $a
 		."\"" 
 		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
-		  .addslashes(attribut_html($help))
+		  .addslashes($a)
 		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
 		  ."', $champhelp)\"")
@@ -34,18 +35,19 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 
 // construit un tableau de raccourcis pour un noeud de DOM 
 
-function afficher_barre($champ, $forum=false) {
+function afficher_barre($champ, $forum=false, $lang='') {
+	global $spip_lang, $spip_lang_right, $spip_lang_left, $spip_lang;
 	static $num_barre = 0;
 	include_spip('inc/layer');
 	if (!$GLOBALS['browser_barre']) return '';
+	if (!$lang) $lang = $spip_lang;
 
-	global $spip_lang, $spip_lang_right, $spip_lang_left;
 
-	$ret = ($num_barre > 0)  ? '' :
-	  '<script type="text/javascript" src="' . _DIR_IMG_PACK. 'spip_barre.js"></script>';
 	$num_barre++;
 	$champhelp = "document.getElementById('barre_$num_barre')";
 
+	$ret = ($num_barre > 0)  ? '' :
+	  '<script type="text/javascript" src="' . _DIR_IMG_PACK. 'spip_barre.js"></script>';
 	$ret .= "<table class='spip_barre' width='100%' cellpadding='0' cellspacing='0' border='0'>";
 	$ret .= "\n<tr width='100%' class='spip_barre'>";
 	$ret .= "\n<td style='text-align: $spip_lang_left;' valign='middle'>";
@@ -78,11 +80,11 @@ function afficher_barre($champ, $forum=false) {
 	// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 	$ret .= "\n<td style='text-align:$spip_lang_left;' valign='middle'>";
 	$col++;
-	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
+	if ($lang == "fr" OR $lang == "eo" OR $lang == "cpf" OR $lang == "ar" OR $lang == "es") {
 		$ret .= bouton_barre_racc ("barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $champhelp);
 	}
-	else if ($spip_lang == "bg" OR $spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
+	else if ($lang == "bg" OR $lang == "de" OR $lang == "pl" OR $lang == "hr" OR $lang == "src") {
 		$ret .= bouton_barre_racc ("barre_raccourci('&bdquo;','&ldquo;',$champ)", "guillemets-de.png", _T('barre_guillemets'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&sbquo;','&lsquo;',$champ)", "guillemets-uniques-de.png", _T('barre_guillemets_simples'), $champhelp);
 	}
@@ -90,10 +92,10 @@ function afficher_barre($champ, $forum=false) {
 		$ret .= bouton_barre_racc ("barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_raccourci('&lsquo;','&rsquo;',$champ)", "guillemets-uniques.png", _T('barre_guillemets_simples'), $champhelp);
 	}
-	if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
+	if ($lang == "fr" OR $lang == "eo" OR $lang == "cpf") {
 		$ret .= bouton_barre_racc ("barre_inserer('&Agrave;',$champ)", "agrave-maj.png", _T('barre_a_accent_grave'), $champhelp);
 		$ret .= bouton_barre_racc ("barre_inserer('&Eacute;',$champ)", "eacute-maj.png", _T('barre_e_accent_aigu'), $champhelp);
-		if ($spip_lang == "fr") {
+		if ($lang == "fr") {
 			$ret .= bouton_barre_racc ("barre_inserer('&oelig;',$champ)", "oelig.png", _T('barre_eo'), $champhelp);
 			$ret .= bouton_barre_racc ("barre_inserer('&OElig;',$champ)", "oelig-maj.png", _T('barre_eo_maj'), $champhelp);
 		}
