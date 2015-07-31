@@ -33,10 +33,9 @@ function action_instituer_forum_dist() {
 	$id_messages = array($id_forum);
 	$old = $row['statut'];
 	while ($id_messages) {
-		$id_messages = join(',', $id_messages);
-		sql_updateq("spip_forum", array("statut" => $statut), "id_forum IN ($id_messages) AND statut = '$old'");
+		sql_updateq("spip_forum", array("statut" => $statut), sql_in("id_forum", $id_messages) ." AND statut = '$old'");
 
-		$result_forum = sql_select("id_forum", "spip_forum", "id_parent IN ($id_messages)");
+		$result_forum = sql_select("id_forum", "spip_forum", sql_in("id_parent", $id_messages));
 		$id_messages = array();
 		while ($row = sql_fetch($result_forum))
 			$id_messages[] = $row['id_forum'];

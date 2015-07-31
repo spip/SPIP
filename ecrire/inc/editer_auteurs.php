@@ -131,14 +131,13 @@ function determiner_auteurs_objet($type, $id, $cond='', $limit='')
 // http://doc.spip.org/@determiner_non_auteurs
 function determiner_non_auteurs($type, $id, $cond_les_auteurs, $order)
 {
-	$cond = '';
 	$res = determiner_auteurs_objet($type, $id, $cond_les_auteurs);
 	if (sql_count($res)<200){ // probleme de performance au dela, on ne filtre plus
-		while ($row = sql_fetch($res))
-			$cond .= ",".$row['id_auteur'];
-	}
-	if ($cond) $cond = "id_auteur NOT IN (" . substr($cond,1) . ')  ';
-
+		$cond = array();
+		while ($row = sql_fetch($res))$cond[] = $row['id_auteur'];
+		$cond = sql_in("id_auteur", $cond, 'NOT');
+	} else  $cond = '';
+	sql_free($res);
 	return auteurs_autorises($cond, $order);
 }
 
