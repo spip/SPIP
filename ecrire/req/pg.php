@@ -1020,7 +1020,7 @@ function spip_pg_cite($v, $t){
 		}
 	}
 	elseif (!sql_test_int($t))
-		return   ("'" . addslashes($v) . "'");
+		return   ("'" . pg_escape_string($v) . "'");
 	elseif (is_numeric($v) OR (strpos($v, 'CAST(') === 0))
 		return $v;
 	elseif ($v[0]== '0' AND $v[1]!=='x' AND  ctype_xdigit(substr($v,1)))
@@ -1039,7 +1039,12 @@ function spip_pg_hex($v)
 
 function spip_pg_quote($v, $type='')
 {
-	return ($type === 'int' AND !$v) ? '0' :  _q($v);
+	if (!is_array($v))
+		return spip_pg_cite($v,$type);
+	// si c'est un tableau, le parcourir en propageant le type
+	foreach($v as $k=>$r)
+		$v[$k] = spip_sqlite_quote($r, $type);
+	return join(",", $v);
 }
 
 function spip_pg_date_proche($champ, $interval, $unite)
