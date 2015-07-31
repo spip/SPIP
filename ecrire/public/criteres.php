@@ -181,7 +181,7 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (!in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
-	$boucle->select[]= 'recherches.points as points';
+	$boucle->select[]= 'recherches.points AS points';
 	$boucle->from['recherches']= 'spip_recherches';
 	$boucle->where[]= "'recherches.id=".$boucle->id_table.".".$boucle->primary."'";
 
