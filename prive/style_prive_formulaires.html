@@ -355,6 +355,10 @@ padding-top:10px;
 	text-align: #GET{right};
 	padding: 7px 1em;
 }
+#navigation .formulaire_spip .boutons,#navigation .boutons_formulaire,
+#extra .formulaire_spip .boutons,#extra .boutons_formulaire {
+	padding: 5px;
+}
 
 
 
@@ -467,17 +471,21 @@ padding-top:10px;
 
 
 
-/* Formulaire compact */
+/*
+ * Formulaires compactes
+ */
+
 .formulaire_spip_compact{
 	font-size: 100%;
 }
-.formulaire_spip_compact ul li {
+.formulaire_spip_compact ul li,
+#navigation .formulaire_spip li,#extra .formulaire_spip li {
 	padding: 2px 5px !important;
 }
 
 .formulaire_spip_compact li label,
-.formulaire_spip_compact li.editer_descriptif label
- {
+.formulaire_spip_compact li.editer_descriptif label,
+#navigation .formulaire_spip li label,#extra .formulaire_spip li label {
 	text-transform: none;
 	color: #444444;
 	
@@ -492,10 +500,14 @@ padding-top:10px;
 
 }
 
-.formulaire_spip_compact select { width:auto;}
-.formulaire_spip_compact input, 
-.formulaire_spip_compact textarea {
-	padding: 3px;
+.formulaire_spip_compact select,#navigation .formulaire_spip select,#extra .formulaire_spip select { font-size: 0.95em; width:auto;padding:1px 0;}
+.formulaire_spip_compact input,#navigation .formulaire_spip input,#extra .formulaire_spip input {
+	padding: 1px 0;
+	font-size: 0.95em;
+}
+.formulaire_spip_compact textarea, #navigation .formulaire_spip textarea, #extra .formulaire_spip textarea {
+	padding: 2px;
+	font-size: 0.95em;
 }
 
 /* Bouton de validation */
@@ -506,13 +518,17 @@ input[type="file"] {
 }
 
 
-.formulaire_spip ul.spip {
+.formulaire_spip ul.spip,.formulaire_spip ol.spip {
 	margin:10px 0;
 	margin-#GET{left}: 10px;
 	list-style-type: disc;
 	list-style-position: outside;
 }
-.formulaire_spip ul.spip li {
+.formulaire_spip ol.spip {
+	list-style-type: decimal;
+}
+
+.formulaire_spip ul.spip li,.formulaire_spip ol.spip li {
 	margin-#GET{left}: 10px;
 	padding: 0;
 	overflow:visible;
