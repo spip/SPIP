@@ -342,7 +342,11 @@ function inc_yql_to_array_dist($u) {
 	return (array) $w;
 }
 function inc_sql_to_array_dist($u) {
-	if ($s = sql_query($u)) {
+	# sortir le connecteur de $u
+	preg_match(',^(?:(\w+):)?(.*)$,S', $u, $v);
+	$serveur = (string) $v[1];
+	$req = trim($v[2]);
+	if ($s = sql_query($req, $serveur)) {
 		$r = array();
 		while ($t = sql_fetch($s))
 			$r[] = $t;
