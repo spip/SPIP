@@ -181,6 +181,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 		if ($mode == 'vignette')// le raccourci pour une image-document est propose avec la vignette
 			echo $raccourci_doc;
 
+		echo "</div>\n";
 		echo "</td>\n";
 	}
 
@@ -233,6 +234,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 
 	echo "</form>";
 	echo "</font>";
+	echo "</td>\n";
 
 	//
 	// Affichage de la vignette (pour les documents)
