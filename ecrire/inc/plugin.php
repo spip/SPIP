@@ -120,6 +120,12 @@ define('_EXTRAIRE_INTERVALLE', ',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*
 
 // http://doc.spip.org/@plugin_version_compatible
 function plugin_version_compatible($intervalle,$version){
+
+	// en phase de dev, on bypass le test
+	// les plugins présents sont déclarés compatibles avec la version du SPIP
+	// /!\  À RÉSERVER À LA PHASE DE TEST  /!\
+	if (defined('_DEV_PLUGINS')) return true;
+
 	if (!strlen($intervalle)) return true;
 	if (!preg_match(_EXTRAIRE_INTERVALLE,$intervalle,$regs)) return false;
 	// Extraction des bornes et traitement de * pour la borne sup :
