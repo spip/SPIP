@@ -145,25 +145,23 @@ function cache_valide($chemin_cache) {
 
 
 // retourne le nom du fichier cache, 
-// et affecte le 1er param selon les specs de la fonction cache_valide
+// et affecte le param use_cache selon les specs de la fonction cache_valide
 
 function determiner_cache(&$use_cache, $contexte,$fond) {
 	global $_SERVER, $recherche;
 
-	// cas sans jamais de cache pour raison interne
+	// pour tester si la base est dispo
 
-	if ($recherche || 
-	    ($_SERVER['REQUEST_METHOD'] == 'POST') ||
-	    ($GLOBALS['var_mode'] &&
-		($GLOBALS['_COOKIE']['spip_session']
-		 || $GLOBALS['_COOKIE']['spip_admin']
-		 || @file_exists(_ACCESS_FILE_NAME))))
+	include_ecrire('inc_connect.php3');
+
+	// cas ignorant le cache car complement dynamique
+
+	if ($recherche || $_SERVER['REQUEST_METHOD'] == 'POST')
 	  {
-		include_ecrire('inc_connect.php3');
 		$use_cache = -1;
 		return "";
 	  }
-
+	
 	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
 
 	// cas sans jamais de calcul pour raison interne
@@ -174,10 +172,17 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
 	if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok']) {
-		include_ecrire('inc_connect.php3');
 		include_ecrire('inc_meta.php3');
 		lire_metas();
 		retire_caches($chemin_cache);
+	}
+
+	// cas sans jamais de cache pour raison interne
+	if ($GLOBALS['var_mode'] &&
+		($GLOBALS['_COOKIE']['spip_session']
+		 || $GLOBALS['_COOKIE']['spip_admin']
+		 || @file_exists(_ACCESS_FILE_NAME))) {
+	    supprimer_fichier($chemin_cache);
 	}
 
 	$use_cache = cache_valide($chemin_cache);
