@@ -98,14 +98,24 @@ echo "<TR><TD BACKGROUND=''>";
 
 echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
-echo "\n<p align='justify'>Utilisez cette commande afin de vider les tables utilis&eacute;es
-par le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP. Cela permet de gagner de
-l'espace disque si vous avez d&eacute;sactiv&eacute; le moteur de recherche. Cela peut servir
-&eacute;galement &agrave; r&eacute;indexer les documents au cas o&ugrave; vous avez restaur&eacute; une sauvegarde.
+echo "\n<p align='justify'>";
+if (lire_meta('activer_moteur') == 'oui')
+	echo "<b>Le moteur de recherche est activ&eacute;.</b> Utilisez cette commande
+		si vous souhaitez proc&eacute;der &agrave; une r&eacute;indexation rapide (apr&egrave;s restauration
+		d'une sauvegarde par exemple). Notez que les documents modifi&eacute;s de
+		fa&ccedil;on normale (depuis l'interface SPIP) sont automatiquement
+		r&eacute;index&eacute;s&nbsp;: cette commande n'est donc utile que de fa&ccedil;on exceptionnelle.";
+else {
+	echo "<b>Le moteur de recherche n'est pas activ&eacute;.</b>";
+	$row = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_index_articles"));
+	if ($row['cnt'])
+		echo " Utilisez cette commande afin de vider les tables d'indexation utilis&eacute;es
+			par le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP. Cela vous permettra
+			de gagner de l'espace disque.";
+	else
+		echo " Les tables d'indexation du moteur sont vides.";
 
-<p align='justify'>Notez que les documents modifi&eacute;s de fa&ccedil;on normale (depuis l'interface
-SPIP) sont automatiquement r&eacute;index&eacute;s, cette commande n'est donc utile que de fa&ccedil;on exceptionnelle.";
-
+}
 
 echo "\n<FORM ACTION='admin_vider.php3' METHOD='post'>";
 

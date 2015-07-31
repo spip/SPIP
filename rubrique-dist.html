@@ -39,7 +39,7 @@
 	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
 	</li>
 	<li class="menu-item">
-	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	<a href="ecrire/" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
 	</li>
 </ul>
 </div>
@@ -177,6 +177,10 @@
 [<div class="chapo">(#TEXTE)</div>]
 [<div class="notes">(#NOTES)</div>]
 
+<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {doublons} {"<br>"}>
+[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
+</BOUCLE_documents_joints>
+<br>
 
 <!-- Articles recents -->
 

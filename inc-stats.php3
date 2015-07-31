@@ -6,12 +6,8 @@ if (defined("_INC_STATS")) return;
 define("_INC_STATS", "1");
 
 function ecrire_stats() {
-	global $id_article, $id_breve, $id_rubrique, $admin_ok;
-	include_ecrire("inc_connect.php3");
-	if (!$GLOBALS['db_ok'])
-		return;
+	global $id_article, $id_breve, $id_rubrique, $admin_ok, $timeout;
 
-	// Essai de fichier de log simplifie
 	$log_ip = $GLOBALS['REMOTE_ADDR'];
 	if ($id_rubrique > 0) {
 		$log_type = "rubrique";
@@ -36,40 +32,15 @@ function ecrire_stats() {
 	}
 	else return;
 
-	// Archivage des visites temporaires
-	$date = date("Y-m-d");
-	$last_date = lire_meta("date_statistiques");
 
-	if (lire_meta('calculer_referers_now') == 'oui') {
-		include_ecrire("inc_meta.php3");
-		include_ecrire("inc_statistiques.php3");
-		ecrire_meta('calculer_referers_now', 'non');
-		ecrire_metas();
-		calculer_referers();
-	} else if ($date != $last_date) {
-		include_ecrire("inc_meta.php3");
-		include_ecrire("inc_statistiques.php3");
-		ecrire_meta("date_statistiques", $date);
-		ecrire_metas();
-		calculer_visites($last_date);
-
-		if (lire_meta('activer_statistiques_ref') == 'oui') {
-			// purger les referers du jour
-			spip_query("UPDATE spip_referers SET visites_jour=0");
-			// poser un message pour traiter les referers au prochain hit
-			ecrire_meta('calculer_referers_now','oui');
-			ecrire_metas();
-		}
-	}
-
-	// Log simple des visites
+	//
+	// Loguer la visite dans la base si possible
+	//
 	if ($log_type != "autre") {
 		$query = "INSERT IGNORE INTO spip_visites_temp (ip, type, id_objet) ".
 			"VALUES ($log_ip, '$log_type', $log_id_num)";
 		spip_query($query);
 	}
-
-	// Log complexe (referers)
 	if (lire_meta('activer_statistiques_ref') == 'oui') {
 		$url_site_spip = lire_meta('adresse_site');
 		$url_site_spip = eregi_replace("^(https?|ftp://)www\.", "\\1(www)?\.", $url_site_spip);
@@ -84,11 +55,44 @@ function ecrire_stats() {
 	}
 
 
+	//
+	// Archivage des visites temporaires
+	//
+	if ($timeout) return;
+
+	$date = date("Y-m-d");
+	$last_date = lire_meta("date_statistiques");
+
+	if (lire_meta('calculer_referers_now') == 'oui') {
+		include_ecrire("inc_meta.php3");
+		include_ecrire("inc_statistiques.php3");
+		ecrire_meta('calculer_referers_now', 'non');
+		ecrire_metas();
+		calculer_referers();
+		$timeout = true;
+	} else if ($date != $last_date) {
+		include_ecrire("inc_meta.php3");
+		include_ecrire("inc_statistiques.php3");
+		ecrire_meta("date_statistiques", $date);
+		ecrire_metas();
+		calculer_visites($last_date);
+
+		if (lire_meta('activer_statistiques_ref') == 'oui') {
+			// purger les referers du jour
+			spip_query("UPDATE spip_referers SET visites_jour=0");
+			// poser un message pour traiter les referers au prochain hit
+			ecrire_meta('calculer_referers_now','oui');
+			ecrire_metas();
+		}
+		$timeout = true;
+	}
+
 	// popularite, mise a jour dix minutes
 	$date_popularite = lire_meta('date_stats_popularite');
-	if ((time() - $date_popularite) > 600) {
+	if (!$timeout AND ((time() - $date_popularite) > 600)) {
 		include_ecrire("inc_statistiques.php3");
 		calculer_popularites();
+		$timeout = true;
 	}
 
 
@@ -100,7 +104,6 @@ function ecrire_stats() {
 		ecrire_meta('calculer_referers_now', 'oui');
 		ecrire_metas();
 	}
-	
 }
 
 
