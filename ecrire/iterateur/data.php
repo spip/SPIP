@@ -142,7 +142,7 @@ class IterateurDATA implements Iterator {
 			)) {
 				$this->tableau = $cache['data'];
 			}
-			else {
+			else try {
 				# dommage que ca ne soit pas une option de yql_to_array...
 				if ($this->command['sourcemode'] == 'yql')
 					if (!isset($ttl)) $ttl = 3600;
@@ -159,14 +159,8 @@ class IterateurDATA implements Iterator {
 				else if (preg_match(',^https?://,', $this->command['source'])) {
 					include_spip('inc/distant');
 					$u = recuperer_page($this->command['source']);
-					if (!$u) {
-						spip_log("erreur sur $u");
-						$err = sprintf(":erreur chargement %s, %s",
-							$this->command['source'],
-							$this->command['sourcemode']);
-						erreur_squelette(array($err, array()));
-						$this->err = true;
-					}
+					if (!$u)
+						throw new Exception("404");
 					if (!isset($ttl)) $ttl = 24*3600;
 				} else if (@is_readable($this->command['source'])) {
 					$u = spip_file_get_contents($this->command['source']);
@@ -181,31 +175,31 @@ class IterateurDATA implements Iterator {
 					if (is_array($a = $g($u))) {
 						$this->tableau = $a;
 					}
-					else {
-						if (is_object($a)
-						AND method_exists($a, 'getMessage'))
-							$a = $a->getMessage();
-						spip_log("erreur sur $g(): $a");
-						$err = sprintf("[%s, %s] $a",
-							$this->command['source'],
-							$this->command['sourcemode']);
-						erreur_squelette(array($err, array()));
-					}
 				}
 
-				if (!is_array($this->tableau)) {
+				if (!is_array($this->tableau))
 					$this->err = true;
-				}
 
 				if (!$this->err AND $ttl>0)
 					$this->cache_set($cle, $ttl);
 
-				# en cas d'erreur http, utiliser le cache si encore dispo
-				if ($this->err) {
-					$this->tableau = $cache['data'];
-					$this->err = false;
-				}
 			}
+			catch (Exception $e) {
+				$e = $e->getMessage();
+				$err = sprintf("[%s, %s] $e",
+					$this->command['source'],
+					$this->command['sourcemode']);
+				erreur_squelette(array($err, array()));
+				$this->err = true;
+			}
+
+			# en cas d'erreur, utiliser le cache si encore dispo
+			if ($this->err
+			AND $cache) {
+				$this->tableau = $cache['data'];
+				$this->err = false;
+			}
+
 		}
 
 		// recuperer le critere {tableau=xxx} pour compat ascendante
@@ -351,14 +345,14 @@ function inc_plugins_to_array_dist($u) {
 	return liste_chemin_plugin_actifs();
 }
 function inc_xml_to_array_dist($u) {
-	return ObjectToArray(new SimpleXmlIterator($u));
+	return @ObjectToArray(new SimpleXmlIterator($u));
 }
 function inc_yql_to_array_dist($u) {
 	define('_YQL_ENDPOINT', 'http://query.yahooapis.com/v1/public/yql?&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&q=');
 	$v = recuperer_page($url = _YQL_ENDPOINT.urlencode($u).'&format=json');
 	$w = json_decode($v);
 	if (!$w) {
-		spip_log("erreur yql: $url");
+		throw new Exception('YQL: r&#233;ponse vide ou mal form&#233;e');
 		return false;
 	}
 	return (array) $w;
@@ -415,10 +409,6 @@ function inc_glob_to_array_dist($u) {
 	);
 }
 
-function XmlToArray($xml_file){
-  $object = new SimpleXmlIterator($xml_file, null, true);
-  return ObjectToArray($object);
-}
 function ObjectToArray($object){
   $xml_array = array();
   for( $object->rewind(); $object->valid(); $object->next() ) {
