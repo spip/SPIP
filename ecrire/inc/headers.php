@@ -116,7 +116,8 @@ function http_status($status) {
 		304 => '304 Not Modified',
 		401 => '401 Unauthorized',
 		403 => '403 Forbidden',
-		404 => '404 Not Found'
+		404 => '404 Not Found',
+		503 => '503 Service Unavailable'
 	);
 
 	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;

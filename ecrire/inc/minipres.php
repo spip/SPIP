@@ -89,7 +89,7 @@ function minipres($titre='', $corps="", $onload='')
 		$url = self('&',true);
 		foreach ($_POST as $v => $c)
 			$url = parametre_url($url, $v, $c, '&');
-		echo ajax_retour("<div>".$titre . redirige_formulaire($url)."</div>",false);
+		ajax_retour("<div>".$titre . redirige_formulaire($url)."</div>",false);
 	}
 }
 ?>

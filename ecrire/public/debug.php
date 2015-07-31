@@ -212,14 +212,15 @@ function erreur_squelette($message='', $lieu='') {
 
 	if (is_array($message)) list($message, $lieu) = $message;
 
-	spip_log("Erreur SQL: $message | $lieu (" . $GLOBALS['fond'] .")");
+	spip_log("Debug: $message | $lieu (" . $GLOBALS['fond'] .")" );
 	$GLOBALS['bouton_admin_debug'] = true;
 	$tableau_des_erreurs[] = array($message, $lieu);
 	// Eviter les boucles infernales
 	if (count($tableau_des_erreurs) > _DEBUG_MAX_SQUELETTE_ERREURS AND _DEBUG_MAX_SQUELETTE_ERREURS) {
+		include_spip('inc/minipres');
+		if (!headers_sent()) http_status(503);
 		if ($_COOKIE['spip_admin'] OR
 		($GLOBALS['var_mode'] == 'debug')) {
-			include_spip('inc/minipres');
 
 			$titre = 'SPIP '
 				. $GLOBALS['spip_version_affichee']
@@ -227,9 +228,11 @@ function erreur_squelette($message='', $lieu='') {
 				. _T('admin_debug')
 				. ' '
 				. supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
+
 			echo minipres($titre, affiche_erreurs_page($tableau_des_erreurs));
-			exit;
 		}
+		spip_log("je sors du debug, squelette " . $GLOBALS['fond']);
+		exit;
 	}
 }
 
