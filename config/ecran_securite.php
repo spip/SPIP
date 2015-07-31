@@ -5,7 +5,7 @@
  * ------------------
  */
 
-define('_ECRAN_SECURITE', '1.1.7'); // 24 mai 2013
+define('_ECRAN_SECURITE', '1.1.8'); // 2013-08-29
 
 /*
  * Documentation : http://www.spip.net/fr_article4200.html
@@ -253,11 +253,12 @@ if (strpos($_SERVER['REQUEST_URI'],"ecrire/")!==false){
 if (isset($_REQUEST['connect'])
 	AND
 	// cas qui permettent de sortir d'un commentaire PHP
-	(strpos($_REQUEST['connect'], "?".">")!==false
+	(strpos($_REQUEST['connect'], "?")!==false
+	 OR strpos($_REQUEST['connect'], ">")!==false
 	 OR strpos($_REQUEST['connect'], "\n")!==false
 	 OR strpos($_REQUEST['connect'], "\r")!==false)
 	) {
-	$_REQUEST['connect'] = str_replace(array("?".">", "\r", "\n"), "", $_REQUEST['connect']);
+	$_REQUEST['connect'] = str_replace(array("?", ">", "\r", "\n"), "", $_REQUEST['connect']);
 	if (isset($_GET['connect'])) $_GET['connect'] = $_REQUEST['connect'];
 	if (isset($_POST['connect'])) $_POST['connect'] = $_REQUEST['connect'];
 }
