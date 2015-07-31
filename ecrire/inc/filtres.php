@@ -762,7 +762,7 @@ function heures_minutes($numdate) {
 }
 
 // http://doc.spip.org/@recup_date
-function recup_date($numdate){
+function recup_date($numdate, $forcer_jour = true){
 	if (!$numdate) return '';
 	$heures = $minutes = $secondes = 0;
 	if (preg_match('#([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}|[0-9]{1,2})#', $numdate, $regs)) {
@@ -800,6 +800,8 @@ function recup_date($numdate){
 	if ($annee > 4000) $annee -= 9000;
 	if (substr($jour, 0, 1) == '0') $jour = substr($jour, 1);
 
+	if ($forcer_jour AND $jour == '0') $jour = '1';
+	if ($forcer_jour AND $mois == '0') $mois = '1';
 	if ($annee OR $mois OR $jour OR $heures OR $minutes OR $secondes)
 		return array($annee, $mois, $jour, $heures, $minutes, $secondes);
 }
@@ -912,7 +914,7 @@ function date_relativecourt($date, $decalage_maxi=0) {
 // http://doc.spip.org/@affdate_base
 function affdate_base($numdate, $vue, $param = '') {
 	global $spip_lang;
-	$date_array = recup_date($numdate);
+	$date_array = recup_date($numdate, false);
 	if (!$date_array) return;
 	list($annee, $mois, $jour, $heures, $minutes, $secondes)= $date_array;
 
@@ -971,8 +973,10 @@ function affdate_base($numdate, $vue, $param = '') {
 		if ($avjc) return $annee;
 		if ($jour)
 			return _T('date_fmt_jour_mois_annee', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
-		else
+		elseif ($mois)
 			return trim(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+		else
+			return $annee;
 
 	case 'nom_mois':
 		return $nommois;
