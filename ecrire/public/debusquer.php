@@ -489,15 +489,15 @@ function debusquer_navigation_boucles($boucles, $nom_skel, $self)
 			  "'><td  align='right'>$i</td><td>\n" .
 			  "<a  class='debug_link_boucle' href='" .
 			  $self2 .
-			  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
+			  "&amp;var_mode_affiche=boucle#$nom_skel$nom'>" .
 			  _T('zbug_boucle') .
 			  "</a></td><td>\n<a class='debug_link_boucle' href='" .
 			  $self2 .
-			  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
+			  "&amp;var_mode_affiche=resultat#$nom_skel$nom'>" .
 			  _T('zbug_resultat') .
 			  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 			  $self2 .
-			  "&amp;var_mode_affiche=code#$nom_skel'>" .
+			  "&amp;var_mode_affiche=code#$nom_skel$nom'>" .
 			  _T('zbug_code') .
 			  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 			  str_replace('var_mode=','var_profile=', $self2) .
@@ -529,7 +529,9 @@ function debusquer_source($objet, $affiche)
 		  $c = $GLOBALS['connexions'][$c ? $c : 0]['prefixe'];
 		  $req = traite_query($req,'', $c);
 		}
-		$res = ancre_texte($req, array(), true);
+		//  permettre le copier/coller facile
+		// $res = ancre_texte($req, array(), true);
+		$res = "<div id='T".md5($req)."'>\n<pre>\n" . $req . "</pre>\n</div>\n";
 		//  formatage et affichage des resultats bruts de la requete
 		$ress_req = spip_query($req);
 		$brut_sql = '';
