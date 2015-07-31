@@ -36,7 +36,7 @@ function inc_signatures_dist($script, $id, $debut, $pas, $where, $order, $type='
 	$request = sql_select('*', 'spip_signatures', $where, '', $order, $limit);
 
 	$res .= "<br />\n";
-
+	include_spip('inc/urls');
  	while($row=sql_fetch($request)){
 	  $res .= "<br />\n" . signatures_edit($script, $id, $debut, $row, $type);
 	}
@@ -114,7 +114,7 @@ function signatures_edit($script, $id, $debut, $row, $type) {
 			$titre_a = $r['titre'];
 			$titre_r = supprimer_numero(sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique"));
 		        $href = generer_url_ecrire('naviguer', "id_rubrique=" . $id_rubrique);
-			$h2 = generer_url_entite($id_article, 'article','','',true);
+			$h2 = generer_url_ecrire_article($id_article);
 			$res .= "<br class='nettoyeur' /><a title='$id_article' href='"
 			  . $h2
 			  . "'>"
