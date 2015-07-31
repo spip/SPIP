@@ -128,7 +128,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot";
 	$nombre_mots = spip_num_rows(spip_query($query));
 
-	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND $connect_statut = 'oui'";
+	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui'
+		AND ".substr($connect_statut,1)." = 'oui'";
 	$nombre_groupes = spip_num_rows(spip_query($query_groupes));
 
 	if (!$nombre_mots AND (!$nombre_groupes OR !$flag_editable)) return;
@@ -387,7 +388,9 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	if ($id_groupes_vus) $id_groupes_vus = join($id_groupes_vus, ",");
 	else $id_groupes_vus = "0";
 
-	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND $connect_statut = 'oui' AND obligatoire = 'oui' AND id_groupe NOT IN ($id_groupes_vus)";
+	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui'
+	AND ".substr($connect_statut,1)." = 'oui' AND obligatoire = 'oui'
+	AND id_groupe NOT IN ($id_groupes_vus)";
 	$nb_groupes = spip_num_rows(spip_query($query_groupes));
 
 	//
@@ -424,7 +427,10 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 
 		echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 
-		$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND $connect_statut = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY titre";
+		$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui'
+		AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR
+		(unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus)))
+		ORDER BY titre";
 		$result_groupes = spip_query($query_groupes);
 
 		// Afficher un menu par groupe de mots
