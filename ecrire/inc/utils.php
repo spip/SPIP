@@ -881,11 +881,11 @@ function generer_form_public($script, $corps, $atts='') {
 }
 
 // http://doc.spip.org/@generer_url_action
-function generer_url_action($script, $args="", $no_entities=false) {
+function generer_url_action($script, $args="", $no_entities=false ,$rel = false) {
 
 	return  generer_url_public('',
 				  "action=$script" .($args ? "&$args" : ''),
-				  $no_entities);
+				  $no_entities,$rel);
 }
 
 
