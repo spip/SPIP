@@ -12,9 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_instituer_article_dist($id_article, $statut)
+function inc_instituer_article_dist($id_article, $statut=-1)
 {
-  $res =
+	if ($statut == -1) return demande_publication($id_article);
+
+	$res =
 	"\n<div id='instituer_article-$id_article'>" .
 	"\n<center>" . 
 	"<b>" .
@@ -42,6 +44,26 @@ function inc_instituer_article_dist($id_article, $statut)
 	 "</center>"
 	. '</div>';
   
-  return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
+	return redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article", $res, " method='post'");
 }
+
+
+// http://doc.spip.org/@demande_publication
+function demande_publication($id_article)
+{
+	return debut_cadre_relief('',true) .
+		"<center>" .
+		"<b>" ._T('texte_proposer_publication') . "</b>" .
+		aide ("artprop") .
+			redirige_action_auteur('instituer_article', "$id_article-prop",
+			'articles',
+			"id_article=$id_article",
+			("<input type='submit' class='fondo' value=\"" . 
+			    _T('bouton_demande_publication') .
+			    "\" />\n"),
+			"method='post'") .
+		"</center>" .
+		fin_cadre_relief(true);
+}
+
 ?>

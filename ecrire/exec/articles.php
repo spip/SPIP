@@ -85,7 +85,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		$iconifier = charger_fonction('iconifier', 'inc');
 	else $iconifier = '';
 
-	if ($statut_rubrique)
+	if ($flag_editable)
 		$instituer_article = charger_fonction('instituer_article', 'inc');
 	else $instituer_article ='';
 
@@ -159,7 +159,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	 : articles_documents($flag_editable, 'article', $id_article))
 
 	. (($flag_auteur AND  $statut_article == 'prepa' AND !$statut_rubrique) 
-	 ? demande_publication($id_article)
+	 ? $instituer_article($id_article)
 	 : '')
 	. "</div></div>"
 
@@ -197,24 +197,6 @@ function articles_documents($flag_editable, $type, $id)
 	return $f($id, 'article', 'portfolio', $flag_editable)
 	. $f($id, 'article', 'documents', $flag_editable)
 	. $res;
-}
-
-// http://doc.spip.org/@demande_publication
-function demande_publication($id_article)
-{
-	return debut_cadre_relief('',true) .
-		"<center>" .
-		"<b>" ._T('texte_proposer_publication') . "</b>" .
-		aide ("artprop") .
-			redirige_action_auteur('instituer_article', "$id_article-prop",
-			'articles',
-			"id_article=$id_article",
-			("<input type='submit' class='fondo' value=\"" . 
-			    _T('bouton_demande_publication') .
-			    "\" />\n"),
-			"method='post'") .
-		"</center>" .
-		fin_cadre_relief(true);
 }
 
 // http://doc.spip.org/@boite_info_articles
@@ -270,12 +252,10 @@ function boites_de_config_articles($id_article)
 	$g = charger_fonction('petitionner', 'inc');
 
 	if ($nb_forums) {
-		$masque = "<br />\n"
-		.  icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
+		$masque = icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "", false);
 	} else 	$masque = '';
 
 	$masque .= $f($id_article,"articles","id_article=$id_article")
-	. '<br />'
 	. $g($id_article,"articles","id_article=$id_article");
 
 	return debut_cadre_relief("forum-interne-24.gif", true)

@@ -276,7 +276,7 @@ function contenu_naviguer($id_rubrique, $id_parent, $ze_logo,$flag_editable) {
 global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right;
 
 ///// Afficher les rubriques 
-afficher_enfant_rub($id_rubrique, $flag_editable);
+echo   afficher_enfant_rub($id_rubrique, $flag_editable, false);
 
 
 //echo "<div align='$spip_lang_left'>";

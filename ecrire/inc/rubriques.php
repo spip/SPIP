@@ -310,7 +310,7 @@ function sous_enfant_rub($collection2){
 }
 
 // http://doc.spip.org/@afficher_enfant_rub
-function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
+function afficher_enfant_rub($id_rubrique, $bouton=false, $return=false) {
 	global  $spip_lang_right;
 	
 	$les_enfants = enfant_rub($id_rubrique);
@@ -326,30 +326,29 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 		$les_enfants2="";
 	}
 	
-	echo "<div>&nbsp;</div>",
-		"\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>",
-		"\n<tr><td valign='top' width=50% rowspan=2>",
-		$les_enfants,
-		"</td>",
-		"\n<td width='20' rowspan='2'>",
-		http_img_pack("rien.gif", ' ', "width='20'"),
-	  	"</td>\n",
-		"\n<td valign='top' width='50%'>",
-		$les_enfants2,
-		"&nbsp;",
-		"</td></tr>",
-		"\n<tr><td style='text-align: ",
-		$spip_lang_right,
-		";' valign='bottom'><div align='",
-		$spip_lang_right,
-	 	"'>";
-
-	if ($afficher_bouton_creer) {
-		if ($id_rubrique == "0")
-			icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif");
-		else  icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif");
-	}
-	echo "</div></td></tr></table>";
+	$res = "<div>&nbsp;</div>"
+	. "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>"
+	. "\n<tr><td valign='top' width=50% rowspan=2>"
+	. $les_enfants
+	. "</td>"
+	. "\n<td width='20' rowspan='2'>"
+	. http_img_pack("rien.gif", ' ', "width='20'")
+	. "</td>\n"
+	. "\n<td valign='top' width='50%'>"
+	. $les_enfants2
+	. "&nbsp;"
+	. "</td></tr>"
+	. "\n<tr><td style='text-align: "
+	. $spip_lang_right
+	. ";' valign='bottom'><div align='"
+	. $spip_lang_right
+	. "'>"
+	. (!$bouton ? ''
+		 : (!$id_rubrique
+		    ? icone(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav"), "secteur-24.gif", "creer.gif",'', false)
+		    : icone(_T('icone_creer_sous_rubrique'), generer_url_ecrire("rubriques_edit","new=oui&retour=nav&id_parent=$id_rubrique"), "rubrique-24.gif", "creer.gif",'',false)))
+	. "</div></td></tr></table>";
+	if ($return) return $res; else echo $res;
 }
 
 // http://doc.spip.org/@calcul_generation
