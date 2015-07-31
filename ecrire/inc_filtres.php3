@@ -264,7 +264,8 @@ function majuscules($texte) {
 	}
 
 	// Cas general
-	return "<span style='text-transform: uppercase'>$texte</span>";
+	if (strlen($texte))
+		return "<span style='text-transform: uppercase'>$texte</span>";
 }
 
 // "127.4 ko" ou "3.1 Mo"
