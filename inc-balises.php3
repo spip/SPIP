@@ -383,8 +383,8 @@ function balise_EXPOSE_dist($p) {
 
 function balise_EXPOSER_dist($p)
 {
-	$on = 'on';
-	$off= '';
+	$on = "'on'";
+	$off= "''";
 	if ($a = ($p->fonctions)) {
 		// Gerer la notation [(#EXPOSER|on,off)]
 		$onoff = array_shift($a);
