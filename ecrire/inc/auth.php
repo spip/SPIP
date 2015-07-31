@@ -306,7 +306,7 @@ function auth_trace($row, $date=null)
  */
 function auth_administrer($fonction,$args,$defaut=false){
 	$auth_methode = array_shift($args);
-	if ($auth = charger_fonction($auth_methode,'inc',false)
+	if ($auth = charger_fonction($auth_methode,'auth',false)
 		AND function_exists($f="auth_{$auth_methode}_$fonction")
 	)
 		return call_user_func_array($f, $args);
@@ -326,7 +326,8 @@ function auth_administrer($fonction,$args,$defaut=false){
  * @return bool
  */
 function auth_autoriser_modifier_login($auth_methode){
-	return auth_administrer('autoriser_modifier_login',func_get_args());
+	$args = func_get_args();
+	return auth_administrer('autoriser_modifier_login',$args);
 }
 
 /**
@@ -340,7 +341,8 @@ function auth_autoriser_modifier_login($auth_methode){
  *  message d'erreur ou chaine vide si pas d'erreur
  */
 function auth_verifier_login($auth_methode, $new_login, $id_auteur=0){
-	return auth_administrer('verifier_login',func_get_args(),'');
+	$args = func_get_args();
+	return auth_administrer('verifier_login',$args,'');
 }
 
 /**
@@ -352,7 +354,8 @@ function auth_verifier_login($auth_methode, $new_login, $id_auteur=0){
  * @return bool
  */
 function auth_modifier_login($auth_methode, $new_login, $id_auteur){
-	return auth_administrer('modifier_login',func_get_args());
+	$args = func_get_args();
+	return auth_administrer('modifier_login',$args);
 }
 
 /**
@@ -364,7 +367,8 @@ function auth_modifier_login($auth_methode, $new_login, $id_auteur){
  *	succes ou echec
  */
 function auth_autoriser_modifier_pass($auth_methode){
-	return auth_administrer('autoriser_modifier_pass',func_get_args());
+	$args = func_get_args();
+	return auth_administrer('autoriser_modifier_pass',$args);
 }
 
 /**
@@ -379,7 +383,8 @@ function auth_autoriser_modifier_pass($auth_methode){
  *	message d'erreur ou chaine vide si pas d'erreur
  */
 function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0){
-	return auth_administrer('verifier_pass',func_get_args(),'');
+	$args = func_get_args();
+	return auth_administrer('verifier_pass',$args,'');
 }
 
 /**
@@ -394,7 +399,8 @@ function auth_verifier_pass($auth_methode, $login, $new_pass, $id_auteur=0){
  *	succes ou echec
  */
 function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
-	return auth_administrer('modifier_pass',func_get_args());
+	$args = func_get_args();
+	return auth_administrer('modifier_pass',$args);
 }
 
 /**
@@ -407,7 +413,8 @@ function auth_modifier_pass($auth_methode, $login, $new_pass, $id_auteur){
  * @return bool
  */
 function auth_synchroniser_distant($auth_methode, $id_auteur, $champs){
-	return auth_administrer('synchroniser_distant',func_get_args());
+	$args = func_get_args();
+	return auth_administrer('synchroniser_distant',$args);
 }
 
 ?>
