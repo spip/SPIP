@@ -20,9 +20,9 @@ class Boucle {
 	var $from;
 	var $where;
 	var $limit;
-	var $group = "''";
-	var $order = "''";
-	var $date = "date" ;
+	var $group = '';
+	var $order = '';
+	var $date = 'date' ;
 	var $hash = false ;
 	var $lien = false;
 	var $sous_requete = false;
@@ -49,4 +49,21 @@ class Champ {
 	var $cond_avant, $cond_apres; // tableaux d'objets
 	var $fonctions;
 }
+
+//
+// Structure de donnees pour parler aux fonctions calcul_champ_TOTO
+//
+class ParamChamp {
+	var $fonctions;
+	var $nom_champ;
+	var $id_boucle;
+	var $boucles;
+	var $id_mere;
+	var $code;
+
+	function retour() {
+		return applique_filtres($this->fonctions, $this->code, $this->id_boucle, $this->boucles, $this->id_mere);
+	}
+}
+
 ?>

@@ -134,7 +134,9 @@ function calcul_mysql_in($val, $valeurs, $tobeornotobe)
 function calcul_exposer ($pile, $reference) {
 	static $hierarchie;
 
-	if (!$hierarchie) {
+	$md5 = md5(serialize($reference));
+
+	if (!$hierarchie[$md5]) {
 		if ($id = $reference['id_article'])
 			$base = 'articles';
 		else if ($id = $reference['id_breve'])
@@ -147,41 +149,41 @@ function calcul_exposer ($pile, $reference) {
 			$base = 'rubriques';
 
 		if (!$base)
-			$hierarchie = '-';
+			$hierarchie[$md5] = '-';
 		else {
 			if ($base != 'rubriques') {
-				$hierarchie[$base][$id] = true;
+				$hierarchie[$md5][$base][$id] = true;
 				$id_element = 'id_'.ereg_replace('s$', '', $base);
 				$s = spip_fetch_array(spip_query(
 				"SELECT id_rubrique FROM spip_$base WHERE $id_element=$id"));
 				$id = $s['id_rubrique'];
 			}
 
-			$hierarchie['rubriques'][$id] = true;
+			$hierarchie[$md5]['rubriques'][$id] = true;
 
 			while (true) {
 				$s = spip_fetch_array(spip_query(
 				"SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id"));
 				if ($id = $s['id_parent'])
-					$hierarchie['rubriques'][$id] = true;
+					$hierarchie[$md5]['rubriques'][$id] = true;
 				else
 					break;
 			}
 		}
 	}
 
-	if ($hierarchie == '-')
+	if ($hierarchie[$md5] == '-')
 		return false;
 	else if ($id = $pile['id_article'])
-		return $hierarchie['articles'][$id];
+		return $hierarchie[$md5]['articles'][$id];
 	else if ($id = $pile['id_breve'])
-		return $hierarchie['breves'][$id];
+		return $hierarchie[$md5]['breves'][$id];
 	else if ($id = $pile['id_syndic'])
-		return $hierarchie['syndic'][$id];
+		return $hierarchie[$md5]['syndic'][$id];
 	else if ($id = $pile['id_rubrique'])
-		return $hierarchie['rubriques'][$id];
+		return $hierarchie[$md5]['rubriques'][$id];
 	else if ($id = $pile['id_secteur'])
-		return $hierarchie['rubriques'][$id];
+		return $hierarchie[$md5]['rubriques'][$id];
 
 }
 

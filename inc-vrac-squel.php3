@@ -12,14 +12,6 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
 	// Introduction (d'un article, d'une breve ou d'un message de forum)
 
-	case 'INTRODUCTION':
-		$code = 'calcul_introduction(\'' .
-			$boucles[$id_boucle]->type_requete . "',\n" .
-			index_pile($id_boucle, "texte", $boucles) . ",\n" .
-			index_pile($id_boucle, "chapo", $boucles) . ",\n" .
-			index_pile($id_boucle, "descriptif", $boucles) . ")\n"; 
-		break;
-
 	case 'NOM_SITE_SPIP':
 		$code = "lire_meta('nom_site')";
 		break;
@@ -189,7 +181,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		}
 
 		// Faut-il exposer ?
-		$code = "(calcul_exposer(\$Pile[\$SP], \$Pile[0]) ? '$on': '$off')";
+		$code = '(calcul_exposer($Pile[$SP], $Pile[0]) ? \'$on\': \'$off\')';
 
 		break;
 
@@ -291,5 +283,19 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 	return array($c,$milieu . $m);
 }
 
+
+//
+// Fonctions OK
+//
+
+function calculer_balise_INTRODUCTION($params) {
+	$params->code = 'calcul_introduction(\'' .
+		$params->boucles[$params->id_boucle]->type_requete . "',\n" .
+		index_pile($params->id_boucle, "texte", $params->boucles) . ",\n" .
+		index_pile($params->id_boucle, "chapo", $params->boucles) . ",\n" .
+		index_pile($params->id_boucle, "descriptif", $params->boucles) . ")\n"; 
+
+	return $params->retour();
+}
 
 ?>

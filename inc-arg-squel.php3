@@ -65,8 +65,8 @@ function calculer_params($type, $params, $idb, &$boucles) {
 
 			// Classement par ordre inverse
 			else if ($param == 'inverse') {
-				if ($boucle->order != "''") {
-					$boucle->order .= ". ' DESC'";
+				if ($boucle->order) {
+					$boucle->order .= ' DESC';
 				} else {
 					include_local("inc-debug-squel.php3");
 					erreur_squelette(_L("Inversion d'un ordre inexistant"), $param, $idb);
@@ -292,30 +292,31 @@ function calculer_params($type, $params, $idb, &$boucles) {
 				if ($tri == 'hasard') { // par hasard
 					$boucle->select[] = "MOD($id_field * UNIX_TIMESTAMP(),
 					32767) & UNIX_TIMESTAMP() AS alea";
-					$boucle->order = "'alea'";
+					$boucle->order = 'alea';
 				}
 				else if ($tri == 'titre_mot') { // par titre_mot
-					$boucle->order= "'mots.titre'";
+					$boucle->order= 'mots.titre';
 				}
 				else if ($tri == 'type_mot'){ // par type_mot
-					$boucle->order= "'mots.type'";
+					$boucle->order= 'mots.type';
 				}
 				else if ($tri == 'points'){ // par points
-					$boucle->order= "'points'";
+					$boucle->order= 'points';
 				}
 				else if (ereg("^num[[:space:]]+([^,]*)(,.*)?",$tri, $match2)) {
 					// par num champ
 					$boucle->select[] = "0+$id_table.".$match2[1]." AS num";
-					$boucle->order = "'num".$match2[2]."'";
+					$boucle->order = "num".$match2[2];
 				}
 				else if (ereg("^[a-z0-9]+$", $tri)) { // par champ
-					if ($tri == 'date') $tri = $table_date[$type];
-					$boucle->order = "'$id_table.$tri'";
+					if ($tri == 'date')
+						$tri = $table_date[$type];
+					$boucle->order = "$id_table.$tri";
 				}
 				else { 
 					// tris par critere bizarre
 					// (formule composee, virgules, etc).
-					$boucle->order = "'".addslashes($tri)."'";
+					$boucle->order = $tri;
 				}
 			}
 		}
