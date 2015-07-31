@@ -43,8 +43,7 @@ function exec_articles_versions_dist()
 //
 
     $id_article = intval($id_article);
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = spip_query($query);
+    $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
 
 if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
@@ -68,12 +67,8 @@ $textes = recuperer_version($id_article, $id_version);
 $id_diff = intval($id_diff);
 if (!$id_diff) {
 	$diff_auto = true;
-	$query = "SELECT id_version FROM spip_versions WHERE id_article=$id_article ".
-		"AND id_version<$id_version ORDER BY id_version DESC LIMIT 1";
-	if ($result = spip_query($query)) {
-		$row = spip_fetch_array($result);
-		$id_diff = $row['id_version'];
-	}
+	$row = spip_fetch_array("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1");
+	if ($row) $id_diff = $row['id_version'];
 }
 
 //
@@ -198,8 +193,8 @@ echo "</td>";
 echo "<td align='center'>";
 
 // L'article est-il editable ?
-$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
-$result_auteur = spip_query($query);
+ $result_auteur = spip_query("SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur");
+
 $flag_auteur = (spip_num_rows($result_auteur) > 0);
 $flag_editable = (acces_rubrique($id_rubrique)
 	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
@@ -240,9 +235,8 @@ while ($row = spip_fetch_array($result)) {
 	}
 
 	if ($row['id_auteur']) {
-		$t = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=".$row['id_auteur']);
-		list($nom) = spip_fetch_array($t);
-		echo " (".typo($nom).")";
+		$t = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=".$row['id_auteur']));
+		echo " (".typo($t['nom']).")";
 	}
 
 	if ($version_aff != $id_version) {

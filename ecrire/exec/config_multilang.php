@@ -123,18 +123,18 @@ fin_cadre_couleur();
 		}
 
 		$langues_bloquees[$GLOBALS['meta']['langue_site']] = 1;
-		$query = "SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'");
+
 		while ($row = spip_fetch_array($result)) {
 			$langues_bloquees[$row['lang']] = 1;
 		}
-		$query = "SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'");
+
 		while ($row = spip_fetch_array($result)) {
 			$langues_bloquees[$row['lang']] = 1;
 		}
-		$query = "SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'";
-		$result = spip_query($query);
+		$result = spip_query("SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'");
+
 		while ($row = spip_fetch_array($result)) {
 			$langues_bloquees[$row['lang']] = 1;
 		}
