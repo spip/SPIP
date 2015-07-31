@@ -236,6 +236,7 @@ define_once('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 define_once('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
 define_once('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
 define_once('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
+define_once('_FILE_META', _DIR_SESSIONS . 'meta_cache.txt');
 
 // sous-repertoires d'images 
 
