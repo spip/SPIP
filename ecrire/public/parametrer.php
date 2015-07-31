@@ -54,7 +54,7 @@ function calculer_contexte() {
 			$contexte[$var] = $val;
 	}
 
-	if (($a = _request('date')) !== null))
+	if (($a = _request('date')) !== null)
 		$contexte['date'] = $contexte['date_redac'] = normaliser_date($a);
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
