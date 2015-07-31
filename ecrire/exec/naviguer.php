@@ -76,6 +76,7 @@ function exec_naviguer_dist()
 
 ///// debut de la page
 
+	pipeline('exec_init',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
 	debut_page(($titre ? ("&laquo; ".textebrut(typo($titre))." &raquo;") :
 		    _T('titre_naviguer_dans_le_site')),

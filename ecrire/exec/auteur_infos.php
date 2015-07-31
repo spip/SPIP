@@ -40,7 +40,7 @@ global $ajouter_id_article,
 
  $id_auteur = intval($id_auteur);
  $ajouter_id_article = intval($ajouter_id_article);
- pipeline('exec_init',array('args'=>array('exec'=>'auteur_infos','$id_auteur'=>$id_auteur),'data'=>''));
+ pipeline('exec_init',array('args'=>array('exec'=>'auteur_infos','id_auteur'=>$id_auteur),'data'=>''));
 
 //
 // Recuperer id_auteur ou se preparer a l'inventer

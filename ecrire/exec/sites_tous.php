@@ -19,6 +19,7 @@ function exec_sites_tous_dist()
 {
 	global $connect_statut, $options;
 
+pipeline('exec_init',array('args'=>array('exec'=>'sites_tous'),'data'=>''));
 debut_page(_T('titre_page_sites_tous'),"documents","sites");
 debut_gauche();
 debut_droite();

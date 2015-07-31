@@ -22,6 +22,7 @@ function exec_config_multilang_dist()
 
 lire_metas();
 
+pipeline('exec_init',array('args'=>array('exec'=>'config_multilang'),'data'=>''));
 debut_page(_T('titre_page_config_contenu'), "administration", "langues");
 
 echo "<br><br><br>";

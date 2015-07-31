@@ -41,6 +41,7 @@ if ($row = spip_fetch_array($result)) {
 
 $flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
 
+pipeline('exec_init',array('args'=>array('exec'=>'breves_voir','id_breve'=>$id_breve),'data'=>''));
 
 debut_page("&laquo; $titre_breve &raquo;", "documents", "breves", "", "", $id_rubrique);
 

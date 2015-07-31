@@ -34,6 +34,7 @@ if ($changer_config == 'oui') {
 
 lire_metas();
 
+pipeline('exec_init',array('args'=>array('exec'=>'config_contenu'),'data'=>''));
 debut_page(_T('titre_page_config_contenu'), "administration", "configuration");
 
 echo "<br><br><br>";

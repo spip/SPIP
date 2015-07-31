@@ -435,6 +435,8 @@ function exec_accueil_dist()
   global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $flag_ob;
 
   $id_rubrique =  intval($id_rubrique);
+ 	pipeline('exec_init',array('args'=>array('exec'=>'accueil','id_rubrique'=>$id_rubrique),'data'=>''));
+ 
   debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
   debut_gauche();

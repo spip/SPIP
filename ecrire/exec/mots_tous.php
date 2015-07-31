@@ -77,6 +77,7 @@ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
  }
 
 
+pipeline('exec_init',array('args'=>array('exec'=>'mots_tous'),'data'=>''));
 debut_page(_T('titre_page_mots_tous'), "documents", "mots");
 debut_gauche();
 
