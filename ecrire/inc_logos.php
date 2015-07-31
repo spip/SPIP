@@ -367,8 +367,15 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	}
 
 	$size = @getimagesize($vignette);
+	
+	// Gaffe: en safe mode, pas d'acces a la vignette,
+	// donc risque de balancer "width='0'", ce qui masque l'image sous MSIE
+	if ($size[0] < 1) $size[0] = $destWidth;
+	if ($size[1] < 1) $size[1] = $destHeight;
+	
 	$retour['width'] = $largeur = $size[0];
 	$retour['height'] = $hauteur = $size[1];
+	
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
 	$retour['date'] = @filemtime($vignette);
