@@ -15,16 +15,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Les parametres generaux du site sont dans une table SQL;
 // Recopie dans le tableau PHP global meta, car on en a souvent besoin
 
+// duree maximale du cache. Le double pour l'antidater
+define('_META_CACHE_TIME', 1<<24);
+
 // http://doc.spip.org/@inc_meta_dist
 function inc_meta_dist()
 {
 	// Lire les meta, en cache si present, valide et lisible
-	if ($new = jeune_fichier(_FILE_META, 1<<24)
+	if ($new = jeune_fichier(_FILE_META, _META_CACHE_TIME)
 #   AND (@filemtime(_FILE_META) > @filemtime(_DIR_RESTREINT . '.svn/entries'))
 	    AND lire_fichier(_FILE_META, $meta))
 		$GLOBALS['meta'] = @unserialize($meta);
 	// sinon lire en base
-
+	spip_log("meta $new");
 	if (!$GLOBALS['meta']) $new = !lire_metas();
 	// renouveller l'alea au besoin
 	if (test_espace_prive()
@@ -39,7 +42,7 @@ function inc_meta_dist()
 		} else spip_log("impossible d'ecrire dans " . _FILE_META);
 	}
 	// et refaire le cache si on a du lire en base
-
+	spip_log("metareturn $new");
 	if (!$new) ecrire_fichier(_FILE_META, serialize($GLOBALS['meta']));
 }
 
@@ -68,9 +71,10 @@ function effacer_meta($nom) {
 	// c'est un peu moints bien qu'un vrai verrou mais ca suffira
 	// et utiliser une statique pour eviter des acces disques a repetition
 	static $touch = true;
-	if ($touch) {@touch(_FILE_META, 0);}
+	$antidate = time() - (_META_CACHE_TIME<<4);
+	if ($touch) {@touch(_FILE_META, $antidate);}
 	sql_delete("spip_meta", "nom='$nom'");
-	if ($touch) {@touch(_FILE_META, 0); $touch = false;}
+	if ($touch) {@touch(_FILE_META, $antidate); $touch = false;}
 }
 
 // http://doc.spip.org/@ecrire_meta
@@ -87,7 +91,8 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 	// et ne pas invalider le cache si affectation a l'identique
 	if ($res AND $valeur == $res['valeur']) return;
 	// cf effacer pour le double touch
-	if ($touch) {@touch(_FILE_META, 0);}
+	$antidate = time() - (_META_CACHE_TIME<<1);
+	if ($touch) {@touch(_FILE_META, $antidate);}
 	if ($res) {
 		$r = ($importable === NULL) ? ''
 		: (", impt=" .  _q($importable));
@@ -97,6 +102,6 @@ function ecrire_meta($nom, $valeur, $importable = NULL) {
 		  if ($importable) $r['impt'] = $importable;
 		  sql_insertq('spip_meta', $r);
 	}
-	if ($touch) {@touch(_FILE_META, 0); $touch = false;}
+	if ($touch) {@touch(_FILE_META, $antidate); $touch = false;}
 }
 ?>
