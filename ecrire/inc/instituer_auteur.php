@@ -55,6 +55,7 @@ function inc_instituer_auteur_dist($auteur, $modif = true) {
 	return $res;
 }
 
+// http://doc.spip.org/@traduire_statut_auteur
 function traduire_statut_auteur($statut){
 	$recom = array("info_administrateurs" => _T('item_administrateur_2'),
 		       "info_redacteurs" =>  _T('intem_redacteur'),
@@ -115,7 +116,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 		$menu .= mySel('nouveau',$statut,_T('info_statut_auteur_a_confirmer'));
 
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
-	return "<select class='select' name='statut' id='statut' size='1' class='fondl'
+	return "<select class='select fondl' name='statut' id='statut' size='1'
 		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
 	. $menu
 	. "\n<option" .
@@ -126,6 +127,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 	. "</select>\n";
 }
 
+// http://doc.spip.org/@afficher_rubriques_admin_restreintes
 function afficher_rubriques_admin_restreintes($auteur, $modif = true){
 	global $spip_lang;
 
