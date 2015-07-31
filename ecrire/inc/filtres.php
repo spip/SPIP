@@ -2215,8 +2215,8 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
-		if ($align == "right") $left_pos = $maxWidth - $largeur_ligne;
-		else if ($align == "center") $left_pos = floor(($maxWidth - $largeur_ligne)/2);
+		if ($align == "right") $left_pos = $largeur_max - $largeur_ligne;
+		else if ($align == "center") $left_pos = floor(($largeur_max - $largeur_ligne)/2);
 		else $left_pos = 0;
 		if ($fontps) {
 			$line = trim($line);
@@ -2250,8 +2250,8 @@ function image_typo() {
 	$largeur: la largeur maximale de l'image ; attention, l'image retournee a une largeur inferieure, selon les limites reelles du texte
 	$hauteur_ligne: la hauteur de chaque ligne de texte si texte sur plusieurs lignes
 	(equivalent a "line-height")
-	$alt: pour forcer l'affichage d'un alt; attention, comme utilisation d'un span invisible pour affiche le texte, generalement inutile
 	$padding: forcer de l'espace autour du placement du texte; necessaire pour polices a la con qui "depassent" beaucoup de leur boite 
+	$align: alignement left, right, center
 	*/
 
 
