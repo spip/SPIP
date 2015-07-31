@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Chamjar',
 'bouton_chercher' => 'Cerchar',
 'bouton_choisir' => 'Chausir',
+'bouton_download' => '<NEW>T&eacute;l&eacute;charger',
 'bouton_enregistrer' => 'Registrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_envoi_annonces' => 'Mandar los anoncis editoriaus',
