@@ -1,8 +1,22 @@
 <?php
-	include ("inc_version.php3");	// pour le register_globals
+	include("inc_version.php3");
+
+	// En-tetes
+	$lastmodified = @filemtime("spip_style.php3");
+	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+	$if_modified_since = ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE);
+	$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
+	if ($if_modified_since == $gmoddate) {
+		http_status(304);
+		$headers_only = true;
+	}
+	@Header ("Last-Modified: ".$gmoddate." GMT");
+	@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + 7 * 24 * 3600)." GMT");
 	@Header ("Content-Type: text/css");
-	@Header ("Expires: ".gmdate("D, d M Y H:i:s", time() + 7 * 24 * 3600)." GMT");
-	@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", @filemtime("spip_style.php3"))." GMT");
+
+	if ($headers_only) exit;
+	
+	// Envoyer la feuille de style
 	if (!isset($couleur_claire))
 		$couleur_claire = "#EDF3FE";
 	if (!isset($couleur_foncee))
@@ -188,53 +202,42 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	margin: 0px;
 }
 
+
 /*
  * Icones horizontales
  */
 
 a.cellule-h {
-	text-align: <?php echo $left; ?>;
 	display: block;
 }
 a.cellule-h {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	text-align: <?php echo $left; ?>;
 	text-decoration: none; 
 	color: #666666;
 }
-a.cellule-h:hover {
+a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	text-align: <?php echo $left; ?>;
 	text-decoration: none; 
 	color: #000000;
 }
 a.cellule-h div.cellule-h-icone {
 	background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
 }
-
 a.cellule-h:hover div.cellule-h-icone {
 	background: url(img_pack/pave-blanc-24.png) no-repeat center <?php echo $left; ?>;
-}
-
-.danger a.cellule-h {
-	text-decoration: none;
-}
-.danger a.cellule-h:hover {
-	text-decoration: none; 
 }
 a.cellule-h table {
 	border: none;
 	padding: 0px;
 	margin: 0px;
 }
-a.cellule-h td {
-	text-align: <?php echo $left; ?>;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	font-size: 10px;
-}
-a.cellule-h:hover td {
-	text-align: <?php echo $left; ?>;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	font-size: 10px;
-}
+
 a.cellule-h td.cellule-h-lien {
 	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 }
