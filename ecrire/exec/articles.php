@@ -17,7 +17,6 @@ include_spip('inc/texte');
 include_spip('inc/rubriques');
 include_spip('inc/actions');
 include_spip('inc/mots');
-include_spip('inc/petition');
 include_spip('inc/forum');
 include_spip('inc/documents');
 include_spip('base/abstract_sql');
@@ -276,16 +275,16 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 // http://doc.spip.org/@boites_de_config_articles
 function boites_de_config_articles($id_article)
 {
-	  debut_cadre_relief("forum-interne-24.gif");
 
-	  $nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
+	$nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
-	  $nb_signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
+	$nb_signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 
-	  $nb_forums = $nb_forums['count'];
-	  $nb_signatures = $nb_signatures['count'];
-	  $visible = $nb_forums || $nb_signatures;
+	$nb_forums = $nb_forums['count'];
+	$nb_signatures = $nb_signatures['count'];
+	$visible = $nb_forums || $nb_signatures;
 
+	debut_cadre_relief("forum-interne-24.gif");
 	echo "<div class='verdana1' style='text-align: center;'><b>";
 	if ($visible)
 		echo bouton_block_visible("forumpetition");
@@ -300,24 +299,18 @@ function boites_de_config_articles($id_article)
 
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
 
-	// Forums
-
 	if ($nb_forums) {
 		echo "<br />\n";
 		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
 	}
 
-	echo "<div id='poster-$id_article'>",
-	  formulaire_poster($id_article,"articles","id_article=$id_article"),
-	  '</div>';
+	$f = charger_fonction('poster', 'inc');
+	$g = charger_fonction('petitionner', 'inc');
 
-	echo '<br />';
-
-	// Petitions
-
-	echo "<div id='petitionner-$id_article'>",
-	  formulaire_petitionner($id_article,"articles","id_article=$id_article"),
-	  '</div>';
+	echo 
+	  $f($id_article,"articles","id_article=$id_article"),
+	  '<br />', 
+	  $g($id_article,"articles","id_article=$id_article");
 
 	echo fin_block();
 

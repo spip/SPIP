@@ -11,10 +11,13 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/presentation');
 include_spip('inc/actions');
+include_spip('inc/texte');
 
 // http://doc.spip.org/@formulaire_petitionner
-function formulaire_petitionner($id_article, $script, $args, $ajax=false)
+function inc_petitionner_dist($id_article, $script, $args, $ajax=false)
 {
 	global $spip_lang_right;
 
@@ -83,7 +86,7 @@ function formulaire_petitionner($id_article, $script, $args, $ajax=false)
 		$res .=" <label for='message'>"._T('bouton_checkbox_envoi_message')."</label>";
 
 		$res .= "<br />"._T('texte_descriptif_petition')."&nbsp;:<BR />";
-		$res .="<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
+		$res .="<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap='soft'>";
 		$res .=entites_html($texte_petition);
 		$res .="</TEXTAREA>\n";
 
@@ -91,7 +94,10 @@ function formulaire_petitionner($id_article, $script, $args, $ajax=false)
 	} else $res .="<span class='visible_au_chargement' id='valider_petition'>";
 	$res .="<input type='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px' />";
 	$res .="</span>";
+	$res = ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
 
-	return ajax_action_auteur('petitionner', $id_article, $script, $args, $res);
+	return ($ajax == 'ajax') 
+	? $res
+	: "<div id='petitionner-$id_article'>$res</div>";
 }
 ?>
