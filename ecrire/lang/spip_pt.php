@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'barre_a_accent_grave' => 'Inserir um A mai&uacute;sculo com acento grave',
 'barre_aide' => 'Utilize as abreviaturas tipogr&aacute;ficas para enriquecer a sua pagina&ccedil;&atilde;o.',
+'barre_aide_rac' => '<pLUS_UTILISE>Ter mais informa&ccedil;&otilde;es sobre as abreviaturas tipogr&aacute;ficas ',
 'barre_e_accent_aigu' => 'Inserir um E mai&uacute;sculo com acento agudo ',
 'barre_eo' => 'Inserir um E no O',
 'barre_eo_maj' => 'Inserir um E no O mai&uacute;sculo',
@@ -165,17 +166,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'outono',
 'date_semaines' => 'semanas',
 'dirs_commencer' => 'a fim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
-'dirs_preliminaire' => 'Preliminar : <B>Configurar os direitos de acesso</B>',
+'dirs_preliminaire' => 'Preliminar : <b>Configurar os direitos de acesso</b>',
 'dirs_probleme_droits' => '<MODIF>Problema de direitos de acesso',
 'dirs_repertoires_absents' => '<b>Os seguintes direct&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p>&Eacute; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes repert&oacute;rios concordam com o que est&aacute; exibido
  acima; se n&atilde;o for o caso, renomeie os repert&oacute;rios com o seu software FTP de modo a corrigir o erro.
   <p/>Terminada esta opera&ccedil;&atilde;o, poder&aacute;',
-'dirs_repertoires_suivants' => '<B>Os seguintes direct&oacute;rios n&atilde;o est&atilde;o acess&iacute;veis para escrita: <ul>@bad_dirs@.</ul> </B>
-  <P>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um
+'dirs_repertoires_suivants' => '<b>Os seguintes direct&oacute;rios n&atilde;o est&atilde;o acess&iacute;veis para escrita: <ul>@bad_dirs@.</ul> </b>
+  <p>Para corrigir, utilize o seu programa de FTP para configurar os direitos de acesso de cada um
   destes direct&oacute;rios. O procedimento est&aacute; explicado em detalhe no manual de instala&ccedil;&atilde;o.
-  <P>Uma vez efectuada esta altera&ccedil;&atilde;o, poder&aacute;',
+  <p>Uma vez efectuada esta altera&ccedil;&atilde;o, poder&aacute;',
 
 
 // E
@@ -260,7 +261,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'forum_cliquer_retour' => 'Clicar <a href=\'@retour_forum@\'>ici</a> para continuar.',
 'forum_forum' => 'f&oacute;rum',
 'forum_info_modere' => 'Este f&oacute;rum est&aacute; moderado a priori&nbsp;: a sua contribui&ccedil;&atilde;o s&oacute; aparecer&aacute; depois de ser validada por um administrador do s&iacute;tio.',
-'forum_lien_hyper' => '<B>Link hipertexto</B> (opcional)',
+'forum_lien_hyper' => '<b>Link hipertexto</b> (opcional)',
 'forum_message_definitif' => 'Mensagem definitiva: mandar para o s&iacute;tio',
 'forum_message_trop_long' => 'A sua mensagem &eacute; demasiado comprida. O tamanho m&aacute;ximo &eacute; 20000 car&aacute;cteres.',
 'forum_ne_repondez_pas' => 'N&atilde;o responder para este mail mas no f&oacute;rum, para o endere&ccedil;o seguinte:',
@@ -269,7 +270,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'forum_par_auteur' => 'por @auteur@',
 'forum_poste_par' => 'Mensagem posta@parauteur@ depois do seu artigo',
 'forum_probleme_database' => 'Problema de base de dados, a sua mensagem n&atilde;o foi registada.',
-'forum_qui_etes_vous' => '<B>Quem &eacute; voc&ecirc;?</B> (opcional)',
+'forum_qui_etes_vous' => '<b>Quem &eacute; voc&ecirc;?</b> (opcional)',
 'forum_texte' => 'Texto da sua mensagem:',
 'forum_titre' => 'T&iacute;tulo:',
 'forum_titre_erreur' => 'Erro...',
@@ -308,6 +309,8 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_doc_rubrique' => 'Documentos das rubricas',
 'icone_ecrire_article' => 'Escrever um novo artigo',
 'icone_edition_site' => 'Edi&ccedil;&atilde;o',
+'icone_etat_traductions' => '<pLUS_UTILISE>Estado das tradu&ccedil;&otilde;es',
+'icone_evolution_visites_2' => '<pLUS_UTILISE><MAIS_UTILIZADO>',
 'icone_forum_administrateur' => 'F&oacute;rum dos administradores',
 'icone_forum_suivi' => 'Seguimento dos f&oacute;runs',
 'icone_gestion_langues' => 'Gest&atilde;o das l&iacute;nguas',
@@ -398,7 +401,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_erreur_requete' => 'Erro no pedido :',
 'info_erreur_squelette2' => 'Template <b>@fichier@</b> n&atilde;o dispon&iacute;vel...',
 'info_erreur_systeme' => 'Erro de Sistema (errno @errsys@)',
-'info_erreur_systeme2' => '<MODIF>O disco r&iacute;gido poder&aacute; estar cheio, ou a base de dados danificada. <br>
+'info_erreur_systeme2' => '<MODIF>O disco r&iacute;gido poder&aacute; estar cheio, ou a base de dados danificada. <br />
  <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
  ou contacte o seu fornecedor de internet.</font>',
 'info_fini' => 'Acabou !',
@@ -407,7 +410,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_grand_ecran' => 'Ecr&atilde; total',
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'M&eacute;todo de fabrica&ccedil;ao das vinhetas',
-'info_impossible_lire_page' => '<B>Erro !</B> Imposs&iacute;vel ler a p&aacute;gina<tt><html>@test_proxy@</html></tt> atrav&eacute;s do proxy <tt>',
+'info_impossible_lire_page' => '<b>Erro !</b> Imposs&iacute;vel ler a p&aacute;gina<tt><html>@test_proxy@</html></tt> atrav&eacute;s do proxy <tt>',
 'info_inclusion_directe' => 'Inclus&atilde;o directa&nbsp;:',
 'info_inclusion_vignette' => 'Inclus&atilde;o da vinheta&nbsp;:',
 'info_installation_systeme_publication' => 'Instala&ccedil;&atilde;o do sistema de publica&ccedil;&atilde;o',
@@ -427,6 +430,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_langue_principale' => 'L&iacute;ngua principal do s&iacute;tio',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'por @les_auteurs@',
+'info_lien' => '<pLUS_UTILISE>liga&ccedil;&atilde;o',
 'info_logo_format_interdit' => 'Apenas os &iacute;cones nos formatos @formats@ est&atilde;o autorizados.',
 'info_logo_max_poids' => 'Os &iacute;cones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
 'info_logo_max_taille' => 'Os &iacute;cones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
@@ -469,6 +473,8 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_publie_1' => '[@nom_site_spip@] PUBLICA : @titre@',
 'info_publie_2' => 'Artigo publicado
 --------------',
+'info_question_referers' => '<pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>O seu site deve conservar <i>referers</i>
+  (endere&ccedil;os dos links externos direccionados para o seu site)?',
 'info_rechercher' => 'Procurar',
 'info_rechercher_02' => 'Procurar&nbsp;:',
 'info_remplacer_vignette' => 'Substituir a vinheta por defeito por um logotipo personalizado&nbsp;:',
@@ -483,9 +489,9 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_site_refuse' => 'S&iacute;tio Web recusado',
 'info_sites_referencer' => 'Referenciar este s&iacute;tio',
 'info_supprimer_vignette' => 'suprimir a vinheta',
-'info_symbole_bleu' => 'O s&iacute;mbolo <B>azul</B> indica um<B>memorando </B>: isto &eacute; uma mensagem para o seu uso pessoal.',
-'info_symbole_jaune' => 'O s&iacute;mbolo<B>amarelo</B> indica um <B>an&uacute;ncio a todos os redactores</B>&nbsp;: modific&aacute;vel por todos os administradores, e vis&iacute;vel por todos os redactores.',
-'info_symbole_vert' => 'O s&iacute;mbolo<B>verde</B> indica as <B>mensagens trocadas com outros utilizadores</B> do s&iacute;tio.',
+'info_symbole_bleu' => 'O s&iacute;mbolo <b>azul</b> indica um<b>memorando </b>: isto &eacute; uma mensagem para o seu uso pessoal.',
+'info_symbole_jaune' => 'O s&iacute;mbolo<b>amarelo</b> indica um <b>an&uacute;ncio a todos os redactores</b>&nbsp;: modific&aacute;vel por todos os administradores, e vis&iacute;vel por todos os redactores.',
+'info_symbole_vert' => 'O s&iacute;mbolo<b>verde</b> indica as <b>mensagens trocadas com outros utilizadores</b> do s&iacute;tio.',
 'info_syndication' => 'vincula&ccedil;&atilde;o:',
 'info_syndication_articles' => 'artigo(s)',
 'info_telecharger' => 'Telecarregar do seu computador&nbsp;:',
@@ -493,6 +499,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_telecharger_ordinateur' => 'Telecarregar do seu computador&nbsp;:',
 'info_tous_resultats_enregistres' => '[todos os  resultados est&atilde;o registados]',
 'info_tout_afficher' => 'Exibir tudo',
+'info_tout_site1' => '<pLUS_UTILISE><NEW>L&iacute;ngua do artigo.',
 'info_travaux_texte' => 'Este s&iacute;tio n&atilde;o est&aacute; configurado. Volte mais tarde...',
 'info_travaux_titre' => 'S&iacute;tio em obras',
 'info_trop_resultat' => 'Demasiado resultados para "@cherche_mot@" ; favor afinar a pesquisa.',
@@ -507,6 +514,10 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Os seus memorandos',
 'item_breve_proposee' => 'Not&iacute;cia proposta',
+'item_gerer_referers' => '<pLUS_UTILISE>Gerir os referers',
+'item_non_gerer_referers' => '<pLUS_UTILISE>N&atilde;o gerir os referers',
+'item_non_utiliser_moteur_recherche_forum' => '<pLUS_UTILISE>N&atilde;o indexar os f&oacute;runs',
+'item_utiliser_moteur_recherche_forum' => '<pLUS_UTILISE>Indexar os forums',
 
 
 // L
@@ -652,23 +663,29 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
  inseridos nele. Conforme a pagina&ccedil;&atilde;o do s&iacute;tio p&uacute;blico,
   poder&atilde;o aparecer sob forma de documentos anexados.',
 'texte_erreur_mise_niveau_base' => 'Erro de base de dados por ocasi&atilde;o do nivelamento.
-   A imagem <B>@fichier@</B> n&atilde;o passou (artigo @id_article@).
+   A imagem <b>@fichier@</b> n&atilde;o passou (artigo @id_article@).
   Notar bem esta refer&ecirc;ncia, voltar a tentar o nivelamento
 , e enfim verificar que as imagens aparecem
  sempre nos artigos.',
 'texte_inc_auth_1' => 'Voc&ecirc; est&aacute; identificado sob o
-   login <B>@auth_login@</B>, mas este j&aacute;/ n&atilde;o existe na base.
+   login <b>@auth_login@</b>, mas este j&aacute;/ n&atilde;o existe na base.
  Tente',
 'texte_inc_auth_2' => 'refazer a liga&ccedil;&atilde;o',
 'texte_inc_auth_3' => ', depois de eventualmente ter fechado e
  voltado a abrir o seu navegador.',
 'texte_inc_config' => 'As modifica&ccedil;&otilde;es efectuadas nestas p&aacute;ginas influenciam muito o
- funcionamento do seu s&iacute;tio. Recomendamos que n&atilde;o intervenha enquanto n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP. <P align="justify"><B>Em
+ funcionamento do seu s&iacute;tio. Recomendamos que n&atilde;o intervenha enquanto n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP. <p align="justify"><b>Em
  geral, &eacute; fortemente recomendado
- deixar a responsabilidade dessas p&aacute;ginas ao webmestre principal do seu s&iacute;tio. <B>',
+ deixar a responsabilidade dessas p&aacute;ginas ao webmestre principal do seu s&iacute;tio. <b>',
 'texte_inc_meta_1' => '<MODIF>O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',
 'texte_inc_meta_2' => 'verificar os direitos de escrita',
 'texte_inc_meta_3' => '<MODIF>no direct&oacute;rio <code>@repertoire@</code>.',
+'texte_plan_trad' => '<pLUS_UTILISE>Esta p&aacute;gina permite-lhe visualizar o estado das tradu&ccedil;&otilde;es para a l&iacute;ngua escolhida. 
+  A p&aacute;gina exibe os artigos cuja tradu&ccedil;&atilde;o est&aacute; em curso, os artigos cuja tradu&ccedil;&atilde;o deve ser actualizada,
+assim como os artigos que ainda n&atilde;o foram traduzidos.',
+'texte_plan_trad_en_cours' => '<pLUS_UTILISE>Este s&iacute;mbolo indica que um artigo est&aacute; em curso de tradu&ccedil;&atilde;o&nbsp;: isto quer dizer que uma tradu&ccedil;&atilde;o 
+  foi come&ccedil;ada mas n&atilde;o foi ainda publicada. Clique no s&iacute;mbolo para aceder
+ &agrave; tradu&ccedil;&atilde;o.',
 'texte_statut_en_cours_redaction' => 'em curso de reda&ccedil;&atilde;o',
 'texte_statut_poubelle' => 'no caixote de lixo',
 'texte_statut_propose_evaluation' => 'proposto para avalia&ccedil;&atilde;o',

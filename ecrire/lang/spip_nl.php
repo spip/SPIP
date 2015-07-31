@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_mot' => 'Trefwoord wijzigen',
 'admin_modifier_rubrique' => 'Rubriek wijzigen',
 'admin_recalculer' => 'Pagina vernieuwen',
+'afficher_trad' => '<NEW>afficher les traductions',
 'alerte_maj_impossible' => '<b>Waarshuwing&nbsp;!</b> Het updaten van de MySQL-gegevensbank naar versie @version@ is niet mogelijk. Mogelijk is dit te wijten aan onvoldoende schrijfrechten op de gegevensbank. Contacteer hiervoor je provider.',
 'analyse_xml' => 'XML Analyse',
 'antispam_champ_vide' => '<NEW>Veuillez laisser ce champ vide&nbsp;:',
@@ -38,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programmafout. Deze functie kan niet worden opgeroepen in deze context.',
 'avis_erreur_mysql' => 'MySQL fout',
 'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => '<NEW>Probl&egrave;me d\'acc&egrave;s &agrave; l\'espace priv&eacute;',
 
 
 // B
@@ -78,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'kalender per dag',
 'cal_par_mois' => 'kalender per maand',
 'cal_par_semaine' => 'kalender per week',
+'choix_couleur_interface' => '<NEW>couleur ',
+'choix_interface' => '<NEW>choix  de l\'interface',
 'confirm_changer_statut' => 'Opgelet. Je hebt gevraagd de status van dit element te wijzigen. Wil je verdergaan ?',
 'correcte' => 'juist',
 
@@ -183,12 +187,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'alvorens de installatie te beginnen',
 'dirs_preliminaire' => 'Vooraf: <b>Toegangsrechten regelen</b>',
 'dirs_probleme_droits' => 'Probleem met toegangsrechten',
-'dirs_repertoires_absents' => '<b>De volgende mappen werden niet gevonden: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<MODIF><b>De volgende mappen werden niet gevonden: <ul>@bad_dirs@.</ul> </b>
   <p />Waarschijnlijk is dit te wijten aan het door elkaar halen van grote en kleine letters.
   Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
  is dit niet het geval, hernoem dan de mappen met je FTP-programma om de fout zo te herstellen.
   <p />Eenmaal deze bewerking uitgevoerd is, kan je',
-'dirs_repertoires_suivants' => '<b>Je hebt geen schrijfrechten op de volgende mappen: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_suivants' => '<MODIF><b>Je hebt geen schrijfrechten op de volgende mappen: <ul>@bad_dirs@.</ul> </b>
   <p />Om dit te wijzigen, log je in met een FTP programma en wijzig je de toegangsrechten van elk van de genoemde mappen
  De procedure is gedetailleerd uitgelegd in de installatiehandleiding
   <p />Eenmaal deze wijziging doorgevoerd, kan je ',
@@ -284,7 +288,7 @@ Bedankt voor je deelname
 'forum_non_inscrit' => 'Je bent niet ingeschreven, ofwel is je adres of paswoord niet correct.',
 'forum_page_url' => '(Als je bericht naar een artikel op het web verwijst of naar een pagina die meer informatie bevat, kunt u hier de titel en de URL van deze webverwijzing invoeren.)',
 'forum_par_auteur' => 'door @auteur@',
-'forum_poste_par' => 'Bericht poste@parauteur@ als vervolg op je artikel.',
+'forum_poste_par' => '<MODIF>Bericht poste@parauteur@ als vervolg op je artikel.',
 'forum_probleme_database' => 'Probleem met databank, je bericht is niet geregistreerd.',
 'forum_qui_etes_vous' => '<b>Wie ben je ?</b> (optioneel)',
 'forum_texte' => 'Tekst van je bericht :',
@@ -415,7 +419,7 @@ Bedankt voor je deelname
 'info_erreur_requete' => 'Fout bij uitvoering van de opdracht :',
 'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
-'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd. <br>
+'info_erreur_systeme2' => '<MODIF>Misschien is de harde schijf vol of de gegevensbank beschadigd. <br />
  <font color=\'red\'>Probeer de <a href=\'@script@\'>de gegevensbank te herstellen</a>,
  of neem contact op met je provider.</font>',
 'info_fini' => 'Het is gedaan !',
@@ -424,7 +428,7 @@ Bedankt voor je deelname
 'info_grand_ecran' => 'Groot scherm',
 'info_image_aide' => 'HELP',
 'info_image_process_titre' => 'Methode voor aanmaak van miniatuurafbeeldingen',
-'info_impossible_lire_page' => '<B>Fout !</b> Kan de pagina <tt><html>@test_proxy@</html></tt> niet lezen via de proxy<tt>',
+'info_impossible_lire_page' => '<MODIF><b>Fout !</b> Kan de pagina <tt><html>@test_proxy@</html></tt> niet lezen via de proxy<tt>',
 'info_inclusion_directe' => 'Directe insluiting:',
 'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 'info_installation_systeme_publication' => 'Installatie van het publicatiesysteem...',
@@ -501,9 +505,9 @@ Bedankt voor je deelname
 'info_site_refuse' => 'Website weigerd',
 'info_sites_referencer' => 'Een site koppelen',
 'info_supprimer_vignette' => 'De mini-afbeelding verwijderen',
-'info_symbole_bleu' => 'Het <B>blauwe</b> symbool wijst op een <B>memo</b>: t.t.z een bericht ten persoonlijke titel.',
-'info_symbole_jaune' => 'Het <B>gele</B> symbool wijst op een <B>aankondiging voor alle redacteurs</B>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
-'info_symbole_vert' => 'Het <B>groene</B> symbool wijst op <B>uitgewisselde berichten met andere gebruikers</B> van deze site.',
+'info_symbole_bleu' => '<MODIF>Het <b>blauwe</b> symbool wijst op een <b>memo</b>: t.t.z een bericht ten persoonlijke titel.',
+'info_symbole_jaune' => '<MODIF>Het <b>gele</b> symbool wijst op een <b>aankondiging voor alle redacteurs</b>: te wijzigen door alle beheerders en zichtbaar voor alle redacteurs.',
+'info_symbole_vert' => '<MODIF>Het <b>groene</b> symbool wijst op <b>uitgewisselde berichten met andere gebruikers</b> van deze site.',
 'info_syndication' => 'nieuwsovername (syndicatie)&nbsp;:',
 'info_syndication_articles' => 'artikel(s)',
 'info_telecharger' => 'Opladen vanf je computer:',
@@ -583,6 +587,7 @@ Bedankt voor je deelname
 
 
 // M
+'masquer_trad' => '<NEW>masquer les traductions',
 'module_fichiers_langues' => 'Taalbestanden',
 
 
@@ -675,24 +680,25 @@ opnieuw verbinding maken met de site
     maar zijn niet rechtstreeks in de tekst opgenomen.
     Naargelang de opmaak van de publieke website
     zullen ze als bijlage verschijnen.',
-'texte_erreur_mise_niveau_base' => 'Fout met de databank bij het opladen.
- De afbeelding <B>@fichier@</B> is niet goed opgeladen
+'texte_erreur_mise_niveau_base' => '<MODIF>Fout met de databank bij het opladen.
+ De afbeelding <b>@fichier@</b> is niet goed opgeladen
  (artikel @id_article@).
  Noteer deze referentie en probeer andermaal het opladen
  van de afbeelding. Kijk vervolgens na of de afbeeldingen
  correct verschijnen in het artikel.',
-'texte_inc_auth_1' => 'Je bent ingelogd als
-  <B>@auth_login@</B>, maar deze aanmeldingsnaam komt niet (meer) voor in de databank. 
+'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
+'texte_inc_auth_1' => '<MODIF>Je bent ingelogd als
+  <b>@auth_login@</b>, maar deze aanmeldingsnaam komt niet (meer) voor in de databank. 
   Probeer je',
 'texte_inc_auth_2' => 'Opnieuw verbinden',
 'texte_inc_auth_3' => ', nadat je je bladerprogramma eventueel gesloten en opnieuw herstart hebt.',
-'texte_inc_config' => 'De wijzigingen die op deze pagina worden aangebracht,
+'texte_inc_config' => '<MODIF>De wijzigingen die op deze pagina worden aangebracht,
  be&iuml;nvloeden de werking van de volledige website. We raden
  je aan hier niets aan te wijzigen tot je voldoende bekend
  bent met het functioneren van het SPIP systeem.
- <P align="justify"><B>Algemeen gesproken laat je het
+ <p align="justify"><b>Algemeen gesproken laat je het
  beheer van deze pagina best over aan de webmaster van je
- site.</B>',
+ site.</b>',
 'texte_inc_meta_1' => 'Het systeem merkt een fout bij het wegschrijven van het bestand <code>@fichier@</code>. Gelieve, als beheerder van de site,',
 'texte_inc_meta_2' => 'de schrijfrechten na te kijken',
 'texte_inc_meta_3' => 'op de map <code>@repertoire@</code>.',

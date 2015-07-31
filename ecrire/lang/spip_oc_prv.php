@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_lien' => 'Recuperar lo fichier <i>iCal</i>',
 'calendrier_synchro_prive' => 'Lo calendier seguent, d\'us estrictament personau, vos informa de l\'activitat editoriala privada d\'aquest sit (&ograve;bras e rend&egrave;tz-vos personaus, articles e br&egrave;vas prepausats...).',
 'calendrier_synchro_public' => 'Lo calendier seguent permet de seguir l\'activitat de l\'espaci public d\'aquest sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br /> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz de contunhar? ',
 'correcte' => '<NEW>corr&egrave;cte',
 
@@ -171,17 +171,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'auton',
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'per comen&ccedil;ar vertadierament l\'installacion',
-'dirs_preliminaire' => 'Preliminar: <B>Reglar lei drechs d\'acc&egrave;s</b>',
+'dirs_preliminaire' => 'Preliminar: <b>Reglar lei drechs d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => 'Probl&egrave;ma de drechs d\'acc&egrave;s',
-'dirs_repertoires_absents' => '<B>S\'es pas trobat lei repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
-  <P>Se p&ograve;t que venga d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
+'dirs_repertoires_absents' => '<b>S\'es pas trobat lei repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
+  <p>Se p&ograve;t que venga d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
   Verificatz que lei minusculas e majusculas d\'aquelei repert&ograve;ris corresp&ograve;ndan ben amb &ccedil;&ograve; afichat
   &ccedil;ai subre; s\'es pas lo cas, tornatz nommar lei repert&ograve;ris amb v&ograve;stre logiciau FTP en corregissent l\'error.
-  <P>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
-'dirs_repertoires_suivants' => '<B>Lei repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
+  <p>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
+'dirs_repertoires_suivants' => '<b>Lei repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
   <p />Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP per fin de reglar lei drechs d\'acc&egrave;s de cadun
   d\'aquelei repert&ograve;ris. La guida d\'installacion explica en detalh coma cau procedir.
-  <P>Tre qu\'auretz facha aquela manipulacion, poiretz ',
+  <p>Tre qu\'auretz facha aquela manipulacion, poiretz ',
 
 
 // E
@@ -266,7 +266,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aic&iacute;</a> per contunhar.',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'Aquest forum es moderat a pri&ograve;ri: v&ograve;stra contribucion pareisser&agrave; ren qu\'apr&egrave;s qu\'un administrator dau sit l\'aga validada.',
-'forum_lien_hyper' => '<B>Liame ipert&egrave;xt</b> (opcionau)',
+'forum_lien_hyper' => '<b>Liame ipert&egrave;xt</b> (opcionau)',
 'forum_message_definitif' => 'Messatge definitiu: mandar au sit',
 'forum_message_trop_long' => 'V&ograve;stre messatge es tr&ograve;p l&ograve;ng. La longor maximala es de 20&nbsp;000 caract&egrave;rs.',
 'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mai per lo forum a l\'adrei&ccedil;a seguenta: ',
@@ -275,7 +275,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Messatge poste@parauteur@ que fa seguida a v&ograve;stre article.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donadas, v&ograve;stre messatge s\'es pas registrat.',
-'forum_qui_etes_vous' => '<B>Quau siatz?</b> (opcionau)',
+'forum_qui_etes_vous' => '<b>Quau siatz?</b> (opcionau)',
 'forum_texte' => 'T&egrave;xt de v&ograve;stre messatge:',
 'forum_titre' => 'T&iacute;tol:',
 'forum_titre_erreur' => 'Error...',
@@ -412,7 +412,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_erreur_requete' => 'Error dins la requista',
 'info_erreur_squelette2' => 'Ges d\'esqueleta <b>@fichier@</b> es disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br>
+'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br />
  <font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>,
  o contactatz v&ograve;stre aubergador.</font>',
 'info_fini' => 'Es acabat!',
@@ -421,7 +421,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_grand_ecran' => 'Ecran grand',
 'info_image_aide' => 'AJUDA',
 'info_image_process_titre' => 'Met&ograve;de de fabricacion dei vinhetas',
-'info_impossible_lire_page' => '<B>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs dau proxy <tt>',
+'info_impossible_lire_page' => '<b>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs dau proxy <tt>',
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sist&egrave;ma de publicacion...',
@@ -506,9 +506,9 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_sites_referencer' => 'Referenciar un sit',
 'info_supprimer_vignette' => 'suprimir la vinheta',
 'info_sur_site_public' => '',
-'info_symbole_bleu' => 'Lo simb&egrave;u <B>blau</b> marca un <B>memento</b>: valent a dire un messatge per v&ograve;stre usatge personau.',
-'info_symbole_jaune' => 'Lo simb&egrave;u <B>jaune</b> marca un <B>anonci per totei lei redactors </b>: leis administrators lo p&ograve;don modificar, cada redactor lo p&ograve;t veire.',
-'info_symbole_vert' => 'Lo simb&egrave;u <B>verd</b> marca lei <B>messatges escambiats amb d\'autreis utilizaires</b> dau sit.',
+'info_symbole_bleu' => 'Lo simb&egrave;u <b>blau</b> marca un <b>memento</b>: valent a dire un messatge per v&ograve;stre usatge personau.',
+'info_symbole_jaune' => 'Lo simb&egrave;u <b>jaune</b> marca un <b>anonci per totei lei redactors </b>: leis administrators lo p&ograve;don modificar, cada redactor lo p&ograve;t veire.',
+'info_symbole_vert' => 'Lo simb&egrave;u <b>verd</b> marca lei <b>messatges escambiats amb d\'autreis utilizaires</b> dau sit.',
 'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
 'info_telecharger' => 'Telecargar a partir de v&ograve;stre ordenador:',
@@ -703,19 +703,19 @@ e vos tornar connectar au sit.
  mai s\'inserisson pas
  directament. Segon la compaginacion dau sit public,
  poir&agrave;n apar&eacute;isser sota forma de documents jonchs.',
-'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;u. L\'imatge <B>@fichier@</b> es pas passat (article @id_article@).
+'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela refer&eacute;ncia, tornatz assajar la mesa a
  niv&egrave;u, e verificatz puei que leis imatges aparegan
  encara dins leis articles.',
 'texte_inc_auth_1' => 'Siatz identificat/ada coma
-   <B>@auth_login@</b>, mai aqueu login exist&iacute;s pas o pus dins la basa.
+   <b>@auth_login@</b>, mai aqueu login exist&iacute;s pas o pus dins la basa.
   Assajatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',
 'texte_inc_auth_3' => ', apr&egrave;s qu\'auretz quitat eventualament, puei
   tornat lan&ccedil;ar v&ograve;stre navigador.',
 'texte_inc_config' => 'Lei modificacions fachas dins aquestei paginas influ&eacute;ncian bravament lo
  foncionament de v&ograve;stre sit. Vos aconselham de pas i intervenir tant que siatz pas
- acostumat/ada au foncionament dau sist&egrave;ma SPIP. <P align="justify"><B>
+ acostumat/ada au foncionament dau sist&egrave;ma SPIP. <p align="justify"><b>
  En generau, se conselha f&ograve;rt
  de laissar la carga d\'aquestei paginas au webm&egrave;stre principau de v&ograve;stre sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichier <code>@fichier@</code>.Vougatz, coma administrator/tritz dau sit,',

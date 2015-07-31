@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Eroare de programare. Aceast&#259; func&#355;ie nu trebuie chemat&#259; &icirc;n acest context.',
 'avis_erreur_mysql' => 'Eroare MySQL',
 'avis_erreur_sauvegarde' => 'Eroare &icirc;n timpul salv&#259;rii (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => '<NEW>Problema de acces la spatiul privat',
 
 
 // B
@@ -429,7 +430,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_erreur_requete' => 'Eroare &icirc;n cererea :',
 'info_erreur_squelette2' => 'Nici un schelet <b>@fichier@</b> nu este disponibil...',
 'info_erreur_systeme' => 'Eroare sistem (errno @errsys@)',
-'info_erreur_systeme2' => 'Discul este probabil plin sau baza de date este corupt&#259;.
+'info_erreur_systeme2' => '<MODIF>Discul este probabil plin sau baza de date este corupt&#259;.
  <font color=\'red\'>&Icirc;ncerca&#355;i s&#259; <a href=\'@script@\'>repara&#355;i baza de date</a>,
  sau contacta&#355;i-l pe furnizorul dumneavoastr&#259; de internet.</font>
 ',
@@ -439,7 +440,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_grand_ecran' => 'Ecran mare',
 'info_image_aide' => 'AJUTOR',
 'info_image_process_titre' => 'Metoda pentru elaborarea vinietelor',
-'info_impossible_lire_page' => '<B>Eroare !</B> Imposibil de citit pagina <tt><html>@test_proxy@</html></tt> prin intermediul proxy-ului <tt>',
+'info_impossible_lire_page' => '<MODIF><b>Eroare !</b> Imposibil de citit pagina <tt><html>@test_proxy@</html></tt> prin intermediul proxy-ului <tt>',
 'info_inclusion_directe' => 'Includere direct&#259;&nbsp;:',
 'info_inclusion_vignette' => 'Includerea vinietei&nbsp;:',
 'info_installation_systeme_publication' => 'Instalarea sistemului de publicare...',
@@ -527,9 +528,9 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_sites_referencer' => 'Referen&#355;iere site',
 'info_supprimer_vignette' => '&nbsp;suprima&#355;i vinieta',
 'info_sur_site_public' => '[pe site-ul public]',
-'info_symbole_bleu' => 'Simbolul <B>albastru</B> indic&#259; o <B>ciorn&#259;</B>: adic&#259; un mesaj pentru folosin&#355;a dumneavoastr&#259; personal&#259;.',
-'info_symbole_jaune' => 'Simbolul <B>galben</B> indic&#259; un <B>anun&#355; c&#259;tre to&#355;i redactorii</B>&nbsp;: modificabil de c&#259;tre to&#355;i administratorii &#351;i vizibil pentru to&#355;i redactorii.',
-'info_symbole_vert' => 'Simbolul <B>verde</B> indic&#259; un <B>mesaj schimbat cu ceilal&#355;i utilizatori</B> ai site-ului.',
+'info_symbole_bleu' => '<MODIF>Simbolul <b>albastru</b> indic&#259; o <b>ciorn&#259;</b>: adic&#259; un mesaj pentru folosin&#355;a dumneavoastr&#259; personal&#259;.',
+'info_symbole_jaune' => '<MODIF>Simbolul <b>galben</b> indic&#259; un <b>anun&#355; c&#259;tre to&#355;i redactorii</b>&nbsp;: modificabil de c&#259;tre to&#355;i administratorii &#351;i vizibil pentru to&#355;i redactorii.',
+'info_symbole_vert' => '<MODIF>Simbolul <b>verde</b> indic&#259; un <b>mesaj schimbat cu ceilal&#355;i utilizatori</b> ai site-ului.',
 'info_syndication' => 'sindicare&nbsp;:',
 'info_syndication_articles' => 'articol(e)',
 'info_telecharger' => '&Icirc;nc&#259;rca&#355;i de pe calculatorul dumneavoastr&#259;&nbsp;:',
@@ -722,16 +723,17 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'texte_documents_associes' => 'Documentele urm&#259;toare sunt asociate articolului,
    dar nu au fost inserate &icirc;n mod direct. &Icirc;n func&#355;ie de punerea &icirc;n pagin&#259; a site-ului public,
   acestea ar putea ap&#259;rea ca documente ata&#351;ate.',
-'texte_erreur_mise_niveau_base' => 'Eroare la nivelul bazei de date &icirc;n timpul actualiz&#259;rii.
+'texte_erreur_mise_niveau_base' => '<MODIF>Eroare la nivelul bazei de date &icirc;n timpul actualiz&#259;rii.
   Imaginea <b>@fichier@</b> nu a trecut (articolul @id_article@).
   Nota&#355;i aceast&#259; referin&#355;&#259;, re-&icirc;ncerca&#355;i o actualizare &#537;i nota&#355;i dac&#259; imaginile apar
   &icirc;n articol.',
-'texte_inc_auth_1' => 'V-a&#355;i identificat cu
-  login <B>@auth_login@</B>, dar acesta nu (mai) exist&#259; &icirc;n baza de date.
+'texte_erreur_visiteur' => '<NEW>Vous avez tent&eacute; de d\'acc&eacute;der &agrave; l\'espace priv&eacute; avec un login qui ne le permet pas.',
+'texte_inc_auth_1' => '<MODIF>V-a&#355;i identificat cu
+  login <b>@auth_login@</b>, dar acesta nu (mai) exist&#259; &icirc;n baza de date.
   &Icirc;ncerca&#355;i s&#259;',
 'texte_inc_auth_2' => 'v&#259; reconecta&#355;i',
 'texte_inc_auth_3' => ', dup&#259; ce, eventual, a&#355;i p&#259;r&#259;sit &#351;i redemarat navigatorul de web.',
-'texte_inc_config' => 'Modific&#259;rile efectuate &icirc;n aceste pagini au influen&#355;&#259; direct&#259; asupra func&#355;ion&#259;rii site-ului. V&#259; recomand&#259;m s&#259; nu interveni&#355;i at&acirc;t timp c&acirc;t nu sunte&#355;i familiarizat cu func&#355;ionarea sistemului SPIP. <p align="justify"><b>&Icirc;n
+'texte_inc_config' => '<MODIF>Modific&#259;rile efectuate &icirc;n aceste pagini au influen&#355;&#259; direct&#259; asupra func&#355;ion&#259;rii site-ului. V&#259; recomand&#259;m s&#259; nu interveni&#355;i at&acirc;t timp c&acirc;t nu sunte&#355;i familiarizat cu func&#355;ionarea sistemului SPIP. <p align="justify"><b>&Icirc;n
  general, este recomandat s&#259; l&#259;sa&#355;i aceste pagini &icirc;n sarcina webmaster-ului principal al acestui site.</b></p>',
 'texte_inc_meta_1' => 'Sistemul a &icirc;nt&acirc;lnit o eroare la scrierea fi&#351;ierului <code>@fichier@</code>. V&#259; rugam ca, &icirc;n calitate de administrator al acestui site,',
 'texte_inc_meta_2' => 's&#259; verifica&#355;i drepturile de scriere',

@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erro de programaci&oacute;n. Esta funci&oacute;n non se debe chamar neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
+'avis_erreur_visiteur' => 'Problema de acceso ao espazo privado',
 
 
 // B
@@ -694,6 +695,7 @@ e reconectar co web.
   Tome nota deste aviso, reintente a posta ao d&amp;iacute;a, 
   e finalmente verifique que as imaxes aparecen sempre
   nos artigos.',
+'texte_erreur_visiteur' => 'Vostede tentou de acceder ao espazo privado cun identificador que non o permite',
 'texte_inc_auth_1' => 'Identificouse baixo o
   identificador <b>@auth_login@</b>, por&amp;eacute;n este xa/non existe na base de datos.
   Probe',

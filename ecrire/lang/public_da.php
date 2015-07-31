@@ -118,7 +118,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'ver_imprimer' => 'Printbar version',
-'voir_en_ligne' => 'Se online'
+'voir_en_ligne' => 'Se online',
+'voir_squelette' => 'Hent skabelonen til denne side'
 
 );
 

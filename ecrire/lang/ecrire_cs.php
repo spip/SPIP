@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_2' => '(Tato adresa v&#283;t&#353;inou odpov&iacute;d&aacute; adrese va&#353;eho webu n&#283;kdy v&yacute;razu "localhost", n&#283;kdy je pr&aacute;zdn&aacute;.)',
 'entree_biographie' => 'Stru&#269;n&yacute; &#382;ivotopis.',
 'entree_breve_publiee' => 'M&aacute; b&yacute;t tato novinka publikov&aacute;na?',
-'entree_chemin_acces' => '<B>Zadejte</B> cestu:',
+'entree_chemin_acces' => '<b>Zadejte</b> cestu:',
 'entree_cle_pgp' => 'V&aacute;&#353; kl&iacute;&#269; PGP',
 'entree_contenu_rubrique' => '(Stru&#269;n&yacute; obsah sekce.)',
 'entree_description_site' => 'Popis webu',
@@ -149,7 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  Tyto &uacute;daje by v&aacute;m m&#283;l sd&#283;lit spr&aacute;vce syst&eacute;mu nebo s&iacute;t&#283;.',
 'entree_infos_perso' => 'Kdo jste?',
 'entree_interieur_rubrique' => 'Uvnit&#345; sekce:',
-'entree_liens_sites' => '<B>Hypertextov&yacute; odkaz</B> (odkaz, web, kter&yacute; se m&aacute; nav&#353;t&iacute;vit...)',
+'entree_liens_sites' => '<b>Hypertextov&yacute; odkaz</b> (odkaz, web, kter&yacute; se m&aacute; nav&#353;t&iacute;vit...)',
 'entree_login' => 'Va&#353;e p&#345;ihla&#353;ovac&iacute; &uacute;daje',
 'entree_login_connexion_1' => 'P&#345;ihla&#353;ovac&iacute; &uacute;daje pro p&#345;ipojen&iacute;',
 'entree_login_connexion_2' => '(N&#283;kdy odpov&iacute;d&aacute; va&#353;im p&#345;ihla&#353;ovac&iacute;m &uacute;daj&#367;m k FTP, n&#283;kdy z&#367;st&aacute;vaj&iacute; nevypln&#283;n&eacute;)',
@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_port_annuaire' => '&#268;&iacute;slo portu adres&aacute;&#345;e',
 'entree_signature' => 'Podpis',
 'entree_texte_breve' => 'Text novinky',
-'entree_titre_obligatoire' => '<B>Titul</B> [povinn&yacute; &uacute;daj]<BR>',
+'entree_titre_obligatoire' => '<b>Titul</b> [povinn&yacute; &uacute;daj]<br />',
 'entree_url' => 'Adresa (URL) va&#353;eho webu',
 'erreur_plugin_fichier_absent' => 'Soubor chyb&iacute;',
 'erreur_plugin_fichier_def_absent' => 'Chyb&iacute; defini&#269;n&iacute; soubor',
@@ -202,7 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Vytvo&#345;it novou sekci',
 'icone_ecrire_nouvel_article' => 'Novinky v t&eacute;to sekci',
 'icone_envoyer_message' => 'Odeslat zpr&aacute;vu',
-'icone_evolution_visites' => 'V&yacute;voj n&aacute;v&#353;t&#283;vnosti<br>@visites@ visites',
+'icone_evolution_visites' => 'V&yacute;voj n&aacute;v&#353;t&#283;vnosti<br />@visites@ visites',
 'icone_modif_groupe_mots' => 'Zm&#283;nit skupinu slov',
 'icone_modifier_article' => 'Zm&#283;nit &#269;l&aacute;nek',
 'icone_modifier_breve' => 'Zm&#283;nit novinku',
@@ -229,8 +229,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_1_site' => '1 web',
 'info_activer_cookie' => 'M&#367;&#382;ete nastavit <b>administr&aacute;torsk&eacute; cookie</b>, kter&eacute; v&aacute;m dovol&iacute;
  snadno p&#345;ech&aacute;zet mezi prohl&iacute;&#382;en&iacute;m webu a jeho editac&iacute;.',
-'info_activer_forum_public' => '<I>Chcete-li zapnout ve&#345;ejn&eacute; diskusn&iacute; skupiny mus&iacute;te zvolit jejich 
- standardn&iacute; zp&#367;sob moderov&aacute;n&iacute;:</I>',
+'info_activer_forum_public' => '<i>Chcete-li zapnout ve&#345;ejn&eacute; diskusn&iacute; skupiny mus&iacute;te zvolit jejich 
+ standardn&iacute; zp&#367;sob moderov&aacute;n&iacute;:</i>',
 'info_admin_gere_rubriques' => 'Tento spr&aacute;vce ospov&iacute;d&aacute; za n&aacute;sleduj&iacute;c&iacute; sekce:',
 'info_admin_gere_toutes_rubriques' => 'Tento spr&aacute;vce odpov&iacute;d&aacute; ua <b>v&#353;echny sekce</b>.',
 'info_administrateur' => 'Spr&aacute;vce',
@@ -283,9 +283,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_changer_nom_groupe' => 'Zm&#283;nit n&aacute;zev skupiny:',
 'info_chapeau' => 'St&#345;&iacute;&#353;ka',
 'info_chapeau_2' => 'St&#345;&iacute;&#353;ka:',
-'info_chemin_acces_1' => 'Voliteln&yacute; &uacute;daj: <B>P&#345;&iacute;stup k adres&aacute;&#345;i</B>',
+'info_chemin_acces_1' => 'Voliteln&yacute; &uacute;daj: <b>P&#345;&iacute;stup k adres&aacute;&#345;i</b>',
 'info_chemin_acces_2' => 'Mus&iacute;te nastavit p&#345;&iacute;stup k &uacute;daj&#367;m v adres&aacute;&#345;i. Tento &uacute;daj je nezbytn&yacute; pro &#269;ten&iacute; u&#382;ivatelsk&yacute;ch profil&#367;, kter&eacute; jsou v n&#283;m ulo&#382;eny.',
-'info_chemin_acces_annuaire' => 'Voliteln&yacute; &uacute;daj: <B>Cesta k adres&aacute;&#345;i',
+'info_chemin_acces_annuaire' => 'Voliteln&yacute; &uacute;daj: <b>Cesta k adres&aacute;&#345;i',
 'info_choix_base' => 'T&#345;et&iacute; krok:',
 'info_classement_1' => 'z @liste@',
 'info_classement_2' => '<sup>e</sup> z @liste@',
@@ -294,25 +294,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_config_suivi' => 'Jedn&aacute;-li se o adresu diskusn&iacute; skupiny, m&#367;&#382;ete zde uv&eacute;st adresu, na kter&eacute; se mohou &uacute;&#269;astn&iacute;ci webu p&#345;ihl&aacute;sit. M&#367;&#382;e se jednat o adresu URL (nap&#345;&iacute;klad webov&aacute; str&aacute;nka pro p&#345;ihl&aacute;&#353;en&iacute; do skupiny) nebo o elektronickou adresu s uveden&iacute;m specifick&eacute;ho p&#345;edm&#283;tu (nap&#345;.: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'M&#367;&#382;ete se p&#345;ihl&aacute;sit na mailing-list tohoto webu. Potom budete dost&aacute;vat ozn&aacute;men&iacute; o &#269;l&aacute;nc&iacute;ch a novink&aacute;ch p&#345;ipraven&yacute;ch k publikov&aacute;n&iacute;.',
 'info_confirmer_passe' => 'Potvrdit nov&eacute; heslo:',
-'info_connexion_base' => 'Druh&yacute; krok : <B>Pokus o p&#345;ipojen&iacute; k datab&aacute;zi</B>',
+'info_connexion_base' => 'Druh&yacute; krok : <b>Pokus o p&#345;ipojen&iacute; k datab&aacute;zi</b>',
 'info_connexion_ldap_ok' => 'P&#345;ipojen&iacute; k LDAP bylo &uacute;sp&#283;&#353;n&eacute;.</b><p /> M&#367;&#382;ete p&#345;istoupit k dal&#353;&iacute;mu kroku.',
-'info_connexion_mysql' => 'Prvn&iacute; krok: <B>P&#345;ipojen&iacute; k datab&aacute;zi MySQL</B>',
+'info_connexion_mysql' => 'Prvn&iacute; krok: <b>P&#345;ipojen&iacute; k datab&aacute;zi MySQL</b>',
 'info_connexion_ok' => 'Spojen&iacute; bylo &uacute;sp&#283;&#353;n&eacute;.',
 'info_contact' => 'Kontakt',
 'info_contenu_articles' => 'Obsah &#269;l&aacute;nk&#367;',
 'info_creation_mots_cles' => 'Vytvo&#345;te a nastavte kl&iacute;&#269;ov&aacute; slova webu',
 'info_creation_paragraphe' => '(Odstavce vytvo&#345;&iacute;te ponech&aacute;n&iacute;m voln&yacute;ch &#345;&aacute;dk&#367;.)',
-'info_creation_rubrique' => '&#268;l&aacute;nky m&#367;&#382;ete ps&aacute;t teprve,<BR> kdy&#382; vytvo&#345;&iacute;te alespo&#328; jednu sekci.<BR>',
-'info_creation_tables' => '&#268;tvrt&yacute; krok: <B>Vytvo&#345;en&iacute; datab&aacute;zov&yacute;ch tabulek</B>',
-'info_creer_base' => '<B>Vytvo&#345;it</B> novou datab&aacute;zi:',
+'info_creation_rubrique' => '&#268;l&aacute;nky m&#367;&#382;ete ps&aacute;t teprve,<br /> kdy&#382; vytvo&#345;&iacute;te alespo&#328; jednu sekci.<br />',
+'info_creation_tables' => '&#268;tvrt&yacute; krok: <b>Vytvo&#345;en&iacute; datab&aacute;zov&yacute;ch tabulek</b>',
+'info_creer_base' => '<b>Vytvo&#345;it</b> novou datab&aacute;zi:',
 'info_dans_groupe' => 'Ve skupin&#283;:',
 'info_dans_rubrique' => 'V sekci:',
 'info_date_publication_anterieure' => 'Datum posledn&iacute; &uacute;pravy:',
 'info_date_referencement' => 'Datum vytvo&#345;en&iacute; odkazu na tento web:',
 'info_delet_mots_cles' => 'Zadali jste odstran&#283;n&iacute; kl&iacute;&#269;ov&eacute;ho slova
-<B>@titre_mot@</B> (@type_mot@). Proto&#382;e je spojeno s
+<b>@titre_mot@</b> (@type_mot@). Proto&#382;e je spojeno s
 <b>@texte_lie@</b>, mus&iacute;te to potvrdit:',
-'info_derniere_etape' => 'Posledn&iacute; krok: <B>byl dokon&#269;en!',
+'info_derniere_etape' => 'Posledn&iacute; krok: <b>byl dokon&#269;en!',
 'info_derniere_syndication' => 'Posledn&iacute; syndikace tohoto webu byla pro vedena ',
 'info_derniers_articles_publies' => 'Va&#353;e posledn&iacute; publikovan&eacute; &#269;l&aacute;nky.',
 'info_desactiver_forum_public' => 'Vypnout ve&#345;ejn&eacute; diskusn&iacute; skupiny
@@ -360,8 +360,8 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_gauche_numero_auteur' => '&#268;&Iacute;SLO AUTORA',
 'info_gauche_numero_breve' => '&#268;&Iacute;SLO NOVINKY',
 'info_gauche_statistiques_referers' => 'Na t&eacute;to str&aacute;nce je seznam <i>referenc&iacute;</i>, to je web&#367;, ze kter&yacute;ch vede odkaz na v&aacute;&#353; vlastn&iacute; web. &Uacute;daje jsou pouze za v&#269;erej&#353;ek a dne&#353;ek. Seznam se ka&#382;d&yacute;ch 24 hodin vynuluje.',
-'info_gauche_suivi_forum' => 'Str&aacute;nka pro <I>sledov&aacute;n&iacute; diskusn&iacute;ch skupin</I> je ur&#269;ena ke spr&aacute;v&#283; va&#353;eho webu (nejedn&aacute; se o prostor pro diskusi ani pro redigov&aacute;n&iacute;). Jsou na n&iacute; zobrazeny v&#353;echny diskusn&iacute; p&#345;&iacute;sp&#283;vky z ve&#345;ejn&eacute; skupiny a umo&#382;&#328;uje v&aacute;m jejich spr&aacute;vu.',
-'info_gauche_suivi_forum_2' => 'Str&aacute;nka pro <I>sledov&aacute;n&iacute; diskusn&iacute;ch skupin</I> je ur&#269;ena ke spr&aacute;v&#283; va&#353;eho webu (nejedn&aacute; se o prostor pro diskusi ani pro redigov&aacute;n&iacute;). Jsou na n&iacute; zobrazeny v&#353;echny diskusn&iacute; p&#345;&iacute;sp&#283;vky z ve&#345;ejn&eacute; skupiny a umo&#382;&#328;uje v&aacute;m jejich spr&aacute;vu.',
+'info_gauche_suivi_forum' => 'Str&aacute;nka pro <i>sledov&aacute;n&iacute; diskusn&iacute;ch skupin</i> je ur&#269;ena ke spr&aacute;v&#283; va&#353;eho webu (nejedn&aacute; se o prostor pro diskusi ani pro redigov&aacute;n&iacute;). Jsou na n&iacute; zobrazeny v&#353;echny diskusn&iacute; p&#345;&iacute;sp&#283;vky z ve&#345;ejn&eacute; skupiny a umo&#382;&#328;uje v&aacute;m jejich spr&aacute;vu.',
+'info_gauche_suivi_forum_2' => 'Str&aacute;nka pro <i>sledov&aacute;n&iacute; diskusn&iacute;ch skupin</i> je ur&#269;ena ke spr&aacute;v&#283; va&#353;eho webu (nejedn&aacute; se o prostor pro diskusi ani pro redigov&aacute;n&iacute;). Jsou na n&iacute; zobrazeny v&#353;echny diskusn&iacute; p&#345;&iacute;sp&#283;vky z ve&#345;ejn&eacute; skupiny a umo&#382;&#328;uje v&aacute;m jejich spr&aacute;vu.',
 'info_gauche_visiteurs_enregistres' => 'Zde naleznete n&aacute;v&#353;t&#283;vn&iacute;ky zaregistrovan&eacute;
  ve ve&#345;ejn&eacute; &#269;&aacute;sti webu (diskusn&iacute; skupiny, do kter&yacute;ch je nutno se p&#345;ihl&aacute;sit).',
 'info_generation_miniatures_images' => 'Generov&aacute;n&iacute; n&aacute;hled&#367;',
@@ -383,7 +383,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_image_process' => 'Nejlep&#353;&iacute; metodu tvorby n&aacute;hled&#367; zvol&iacute;te klepnut&iacute;m na p&#345;&iacute;slu&#353;n&yacute; obr&aacute;zek.',
 'info_image_process2' => '<b>Pozn.:</b> <i>Neobjev&iacute;-li se &#382;&aacute;dn&yacute; obr&aacute;zek, nen&iacute; hostitelsk&yacute; server va&#353;eho webu nastaven k pou&#382;&iacute;v&aacute;n&iacute; t&#283;chto n&aacute;stroj&#367;. Chcete-li je pou&#382;&iacute;vat, spojete se s p&#345;&iacute;slu&#353;nou technickou podporou a po&#382;&aacute;dejte o roz&#353;&iacute;&#345;en&iacute; "GD" nebo "Imagick".</i>',
 'info_images_auto' => 'Automaticky vypo&#269;t&#283;n&eacute; obr&aacute;zky',
-'info_informations_personnelles' => 'P&aacute;t&yacute; krok: <B>Osobn&iacute; &uacute;daje</B>',
+'info_informations_personnelles' => 'P&aacute;t&yacute; krok: <b>Osobn&iacute; &uacute;daje</b>',
 'info_inscription_automatique' => 'Automatick&yacute; z&aacute;pis nov&yacute;ch redaktor&#367;',
 'info_jeu_caractere' => 'Znakov&aacute; sada webu',
 'info_jours' => 'dny',
@@ -412,7 +412,7 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_mise_a_niveau_base_2' => '{{Pozor!}} Nainstalovali jste (star&#353;&iacute;) soubor 
   syst&eacute;mu  SPIP ne&#382; ten, kter&yacute; byl na tomto webu p&#345;edt&iacute;m.
   vystavujete se riziku ztr&aacute;ty datab&aacute;ze a nefunk&#269;nosti va&#353;eho webu. 
-             <br>{{Nainstalujte znovu
+             <br />{{Nainstalujte znovu
   soubor syst&eacute;mu SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Standardn&iacute; re&#382;im ve&#345;ejn&yacute;ch diskusn&iacute;ch skupin',
 'info_modifier_breve' => 'Zm&#283;nit novinku:',
@@ -521,8 +521,8 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_redirection' => 'P&#345;esm&#283;rov&aacute;n&iacute;',
 'info_referencer_doc_distant' => 'Odkaz na dokument na internetu:',
 'info_refuses' => 'Va&#353;e odm&iacute;tnut&eacute; &#269;l&aacute;nky',
-'info_reglage_ldap' => 'Mo&#382;nost: <B>Nastaven&iacute; importu LDAP</B>',
-'info_renvoi_article' => '<B>P&#345;esm&#283;rov&aacute;n&iacute;.</B> Tento &#269;l&aacute;nek odkazuje na str&aacute;nku:',
+'info_reglage_ldap' => 'Mo&#382;nost: <b>Nastaven&iacute; importu LDAP</b>',
+'info_renvoi_article' => '<b>P&#345;esm&#283;rov&aacute;n&iacute;.</b> Tento &#269;l&aacute;nek odkazuje na str&aacute;nku:',
 'info_reserve_admin' => 'Pouze administr&aacute;to&#345;i sm&#283;j&iacute; modifikovat tuto adresu.',
 'info_restauration_sauvegarde' => 'obnova ulo&#382;en&iacute; @archive@',
 'info_restreindre_rubrique' => 'Omezit spr&aacute;vu sekce :',
@@ -815,7 +815,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
  stru&#269;n&eacute; informace, redigovat p&#345;ehled tisku, p&#345;ehled ud&aacute;lost&iacute;...',
 'texte_choix_base_1' => 'Zvolte datab&aacute;zi:',
 'texte_choix_base_2' => 'Na serveru MySQL je n&#283;kolik datab&aacute;z&iacute;.',
-'texte_choix_base_3' => '<B>Zvolte</B> datab&aacute;zi, kter&aacute; v&aacute;m byla p&#345;id&#283;lena poskytovatelem webov&eacute;ho prostoru:',
+'texte_choix_base_3' => '<b>Zvolte</b> datab&aacute;zi, kter&aacute; v&aacute;m byla p&#345;id&#283;lena poskytovatelem webov&eacute;ho prostoru:',
 'texte_commande_vider_tables_indexation' => 'Tento p&#345;&iacute;kaz slou&#382;&iacute; k vy&#269;i&#353;t&#283;n&iacute; indexov&yacute;ch tabulek, kter&eacute; pou&#382;&iacute;v&aacute;
    vyhled&aacute;va&#269;, jen&#382; je sou&#269;&aacute;st&iacute; syst&eacute;mu SPIP. Umo&#382;n&iacute; v&aacute;m z&iacute;skat v&iacute;ce
    m&iacute;sta na disku.',
@@ -839,7 +839,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
   Pro ozna&#269;en&iacute; funkc&iacute;, kter&eacute; jsou k dispozici, pou&#382;ijte n&iacute;&#382;e uveden&yacute; seznam.',
 'texte_crash_base' => 'Do&#353;lo-li ke zhroucen&iacute; datab&aacute;ze,
    m&#367;&#382;ete zkusit jej&iacute; automatickou obnovu.',
-'texte_creer_rubrique' => 'Ne&#382; m&#367;&#382;ete za&#269;&iacute;t ps&aacute;t &#269;l&aacute;nky,<BR> mus&iacute;te vytvo&#345;it sekci.',
+'texte_creer_rubrique' => 'Ne&#382; m&#367;&#382;ete za&#269;&iacute;t ps&aacute;t &#269;l&aacute;nky,<br /> mus&iacute;te vytvo&#345;it sekci.',
 'texte_date_creation_article' => 'DATUM NAPS&Aacute;N&Iacute; &#268;L&Aacute;NKU:',
 'texte_date_publication_anterieure' => 'Datum posledn&iacute; &uacute;pravy:',
 'texte_date_publication_anterieure_nonaffichee' => 'Nezobrazovat datum posledn&iacute; &uacute;pravy.',
@@ -907,9 +907,9 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_plusieurs_articles' => 'Pro "@cherche_auteur@" bylo nalezeno n&#283;kolik autor&#367;:',
 'texte_port_annuaire' => '(V&#283;t&#353;inou vyhovuje p&#345;ednastaven&aacute; hodnota.)',
 'texte_presente_plugin' => 'Tato str&aacute;nka zobrazuje v&#353;echny dostupn&eacute; pluginy. Aktivujte pot&#345;ebn&eacute; pluginy za&#353;krtnut&iacute;m p&#345;&iacute;slu&#353;n&eacute;ho pol&iacute;&#269;ka.',
-'texte_proposer_publication' => 'Po dops&aacute;n&iacute; &#269;l&aacute;nku,<br> m&#367;&#382;ete navrhnout jeho zve&#345;ejn&#283;n&iacute;.',
+'texte_proposer_publication' => 'Po dops&aacute;n&iacute; &#269;l&aacute;nku,<br /> m&#367;&#382;ete navrhnout jeho zve&#345;ejn&#283;n&iacute;.',
 'texte_proxy' => 'V n&#283;kter&yacute;ch p&#345;&iacute;padech (intranet, chr&aacute;n&#283;n&eacute; s&iacute;t&#283;...),
-  je t&#345;eba pou&#382;&iacute;vat <I>HTTP proxy</I>.  Jinak se k syndikovan&yacute;m web&#367;m nedostanete.
+  je t&#345;eba pou&#382;&iacute;vat <i>HTTP proxy</i>.  Jinak se k syndikovan&yacute;m web&#367;m nedostanete.
   V takov&eacute;m p&#345;&iacute;pad&#283; uve&#271;te adresu proxy n&iacute;&#382;e ve form&aacute;tu
   <tt><html>http://proxy:8080</html></tt>. Obvykle
   je toto pole pr&aacute;zdn&eacute;.',
@@ -921,7 +921,7 @@ p&#345;ejd&#283;te rad&#283;ji do ve&#345;ejn&eacute; &#269;&aacute;sti a pou&#3
 'texte_recapitiule_liste_documents' => 'Na t&eacute;to str&aacute;nkce je p&#345;ehled dokument&#367; um&iacute;stn&#283;n&yacute;ch v sekc&iacute;ch. Informace o dokumentech zm&#283;n&iacute;te klepnut&iacute;m na odkaz na str&aacute;nku p&#345;&iacute;slu&#353;n&eacute; sekce.',
 'texte_recuperer_base' => 'Opravit datab&aacute;zi',
 'texte_reference_mais_redirige' => 'Na &#269;l&aacute;nek je na va&#353;em webu SPIP odkaz, ale je p&#345;esm&#283;rov&aacute;n na jinou adresu URL.',
-'texte_referencement_automatique' => '<b>Automatick&yacute; odkaz na web</b><br>Odkaz na web snadno vytvo&#345;&iacute;te zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho syndika&#269;n&iacute;ho souboru. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
+'texte_referencement_automatique' => '<b>Automatick&yacute; odkaz na web</b><br />Odkaz na web snadno vytvo&#345;&iacute;te zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho syndika&#269;n&iacute;ho souboru. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
 'texte_requetes_echouent' => '<b>Pokud n&#283;kter&eacute; dotazy MySQL neust&aacute;le
   selh&aacute;vaj&iacute; bez zjevn&eacute; p&#345;&iacute;&#269;iny, m&#367;&#382;e to b&yacute;t kv&#367;li samotn&eacute; datab&aacute;zi.</b><p />
   Datab&aacute;ze MySQL umo&#382;&#328;uje opravu n&aacute;hodn&#283; po&#353;kozen&yacute;ch datab&aacute;zov&yacute;ch tabulek.
@@ -964,7 +964,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'texte_test_proxy' => 'Proxy otestujete zad&aacute;n&iacute;m adresy webu,
     kter&yacute; chcete odzkou&#353;et.',
 'texte_titre_02' => 'N&aacute;zev:',
-'texte_titre_obligatoire' => '<B>N&aacute;zev</B> [povinn&yacute; &uacute;daj]',
+'texte_titre_obligatoire' => '<b>N&aacute;zev</b> [povinn&yacute; &uacute;daj]',
 'texte_travail_article' => '@nom_auteur_modif@ upravoval tento &#269;l&aacute;nek p&#345;ed @date_diff@ minutou/minutami',
 'texte_travail_collaboratif' => 'Pokud na jednom &#269;l&aacute;nku &#269;asto pracuje n&#283;kolik
   redaktor&#367;, m&#367;&#382;e syst&eacute;m zobrazit &#269;l&aacute;nky "otev&#345;en&eacute;"
@@ -975,8 +975,8 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'texte_unpack' => 'odes&iacute;l&aacute;n&iacute;/stahov&aacute;n&iacute; posledn&iacute; verze',
 'texte_utilisation_moteur_syndiques' => 'Vestav&#283;n&yacute; prohled&aacute;vac&iacute; n&aacute;stroj syst&eacute;mu SPIS,
     m&#367;&#382;ete vyhled&aacute;vat i na syndikovan&yacute;ch webech a v syndikovan&yacute;ch
-    &#269;l&aacute;nc&iacute;ch, a to dv&#283;ma r&#367;zn&yacute;mi zp&#367;soby.    <br>- Nejjednodu&#353;&#353;&iacute; je
-    hledat pouze v n&aacute;zvech a popisech &#269;l&aacute;nk&#367;. <br>-    Druh&yacute;, mnohem &uacute;&#269;inn&#283;j&#353;&iacute; zp&#367;sob, umo&#382;&#328;uje syst&eacute;mu SPIP
+    &#269;l&aacute;nc&iacute;ch, a to dv&#283;ma r&#367;zn&yacute;mi zp&#367;soby.    <br />- Nejjednodu&#353;&#353;&iacute; je
+    hledat pouze v n&aacute;zvech a popisech &#269;l&aacute;nk&#367;. <br />-    Druh&yacute;, mnohem &uacute;&#269;inn&#283;j&#353;&iacute; zp&#367;sob, umo&#382;&#328;uje syst&eacute;mu SPIP
     hledat i v textech web&#367;, na kter&eacute; vedou odkazy.
     Pokud se odkazujete n&#283;jak&yacute; web, syst&eacute;m SPIP
     bude vyhled&aacute;vat v textech tohoto webu.',
@@ -997,7 +997,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'titre_cadre_forum_interne' => 'Intern&iacute; diskusn&iacute; skupina',
 'titre_cadre_interieur_rubrique' => 'V r&aacute;mci sekce',
 'titre_cadre_numero_auteur' => '&#268;&Iacute;SLO AUTORA',
-'titre_cadre_signature_obligatoire' => '<B>Podpis</B> [povinn&yacute; &uacute;daj]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Podpis</b> [povinn&yacute; &uacute;daj]<br />',
 'titre_config_fonctions' => 'Nastaven&iacute; webu',
 'titre_config_groupe_mots_cles' => 'Nastaven&iacute; skupin kl&iacute;&#269;ov&yacute;ch slov',
 'titre_configuration' => 'Nastaven&iacute; webu',

@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // B
-'bouton_acces_ldap' => 'Incluir o acesso ao LDAP >>',
+'bouton_acces_ldap' => 'Incluir o acesso ao LDAP',
 'bouton_ajouter' => 'Incluir',
 'bouton_ajouter_participant' => 'INCLUIR UM PARTICIPANTE:',
 'bouton_annonce' => 'AVISO',
@@ -198,8 +198,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'icone_creer_rubrique_2' => 'Criar uma nova se&ccedil;&atilde;o',
 'icone_ecrire_nouvel_article' => 'As notas contidas nesta se&ccedil;&atilde;o',
 'icone_envoyer_message' => 'Enviar esta mensagem',
-'icone_evolution_visites' => 'Evolu&ccedil;&atilde;o das visitas
-@visites@ visitas',
+'icone_evolution_visites' => 'Evolu&ccedil;&atilde;o das visitas<br />@visites@ visitas',
 'icone_modif_groupe_mots' => 'Editar este grupo de palavras',
 'icone_modifier_article' => 'Editar esta mat&eacute;ria',
 'icone_modifier_breve' => 'Editar esta nota',
@@ -388,7 +387,7 @@ os autores exclu&iacute;dos por uma lixeira.',
 'info_message_technique' => 'Mensagem t&eacute;cnica:',
 'info_messagerie_interne' => 'Mensagem interna',
 'info_mise_a_niveau_base' => 'atualiza&ccedil;&atilde;o da sua base MySQL',
-'info_mise_a_niveau_base_2' => '{{Aten&ccedil;&atilde;o!}} Voc&ecirc; instalou uma vers&atilde;o de arquivos SPIP {anterior} &agrave; que estava instalada no site: a sua base de dados corre o risco de se corrompere o seu site n&atilde;o funcionar mais.<br>{{Reinstale os arquivos SPIP.}}',
+'info_mise_a_niveau_base_2' => '{{Aten&ccedil;&atilde;o!}} Voc&ecirc; instalou uma vers&atilde;o de arquivos SPIP {anterior} &agrave; que estava instalada no site: a sua base de dados corre o risco de se corromper e o seu site n&atilde;o funcionar mais.<br />{{Reinstale os arquivos SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo de funcionamento padr&atilde;o dos f&oacute;runs p&uacute;blicos',
 'info_modifier_breve' => 'Editar a nota:',
 'info_modifier_rubrique' => 'Editar a se&ccedil;&atilde;o:',
@@ -779,7 +778,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_compresse_ou_non' => '(pode ser compactado ou n&atilde;o)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
-'texte_config_groupe_mots_cles' => 'Voc&ecirc; deseja ativar a configura&ccedil;&atilde;o avan&ccedil;ada das palavras-chave, indicando, por exemplo, que se pode selecionar uma &uacute;nica palavra-chave por grupo, ou que um grupo &eacute; importante...&nbsp;?',
+'texte_config_groupe_mots_cles' => 'Voc&ecirc; deseja ativar a configura&ccedil;&atilde;o avan&ccedil;ada das palavras-chave, indicando, por exemplo, que se pode selecionar uma &uacute;nica palavra-chave por grupo, ou que um grupo &eacute; importante...?',
 'texte_connexion_mysql' => 'Consulte as informa&ccedil;&otilde;es que lhe foram fornecidas pelo seu servi&ccedil;o de hospedagem: nelas voc&ecirc; dever&aacute; descobrir se o seu servi&ccedil;o suporta MySQL e os c&oacute;digos de conex&atilde;o ao servidor MySQL.',
 'texte_contenu_article' => '(Conte&uacute;do da mat&eacute;ria em poucas palavras.)',
 'texte_contenu_articles' => 'De acoordo com o layout adotado pelo seu site, voc&ecirc; poder&aacute; decidir se certos elementos das mat&eacute;rias ser&atilde;o utilizados. Use a listagem abaixo para indicar quais elementos est&atilde;o dispon&iacute;veis.',
@@ -844,7 +843,7 @@ Nesse caso, informe abaixo o endere&ccedil;o, no formato
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;gina compila a lista de documentos que voc&ecirc; anexou &agrave;s se&ccedil;&otilde;es. Para modificar as informa&ccedil;&otilde;es de cada documento, siga o link para a p&aacute;gina da respectiva se&ccedil;&atilde;o.',
 'texte_recuperer_base' => 'Reparar a base de dados',
 'texte_reference_mais_redirige' => 'mat&eacute;ria referenciada no seu site em  SPIP, mas redirecionada para outro URL.',
-'texte_referencement_automatique' => '<b>Referenciamento automatizado de um site</b><br>Voc&ecirc; pode referenciar rapidamente um websites indicando abaixo o URL desejado, ou o endere&ccedil;o do seu arquivo de sindica&ccedil;&atilde;o. O SPIP recuperar&aacute; automaticamente as informa&ccedil;&otilde;es relativas ao site (t&iacute;tulo, descri&ccedil;&atilde;o...).',
+'texte_referencement_automatique' => '<b>Referenciamento automatizado de um site</b><br />Voc&ecirc; pode referenciar rapidamente um websites indicando abaixo o URL desejado, ou o endere&ccedil;o do seu arquivo de sindica&ccedil;&atilde;o. O SPIP recuperar&aacute; automaticamente as informa&ccedil;&otilde;es relativas ao site (t&iacute;tulo, descri&ccedil;&atilde;o...).',
 'texte_requetes_echouent' => 'J&aacute; que certas solicita&ccedil;&otilde;es MySQL falharam sistematicamente e sem raz&atilde;o aparente, &eacute; poss&iacute;vel que a causa esteja na base de dados em si.</b><p />
 O MySQL disp&otilde;e de uma funcionalidade de repara&ccedil;&atilde;o das suas tabelas quando elas s&atilde;o danificadas por acidente. Voc&ecirc; poder&aacute; tentar esta repara&ccedil;&atilde;o; em caso de falha, conserve uma c&oacute;pia da mensagem de erro, que poder&aacute; conter ind&iacute;cios do que n&atilde;o est&aacute; funcionando...<p />
 Se o problema persistir, contate o seu servi&ccedil;o de hospedagem.<p />',
@@ -881,7 +880,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'texte_travail_collaboratif' => 'Se &eacute; frequente acontecer de mais de um redator trabalhar em uma mesma mat&eacute;ria, o sistema pode exibir as mat&eacute;rias recentemente &laquo;abertas&raquo;, de modo a evitar modifica&ccedil;&otilde;es concorrentes.Esta op&ccedil;&atilde;o est&aacute; desativada por padr&atilde;o para evitar a exibi&ccedil;&atilde;o de mensagens de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@"; por favor, refine a pesquisa.',
 'texte_unpack' => 'transfer&ecirc;ncia da &uacute;ltima vers&atilde;o',
-'texte_utilisation_moteur_syndiques' => 'J&aacute; que voc&ecirc; utiliza o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar procuras nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br>- A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br>- O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
+'texte_utilisation_moteur_syndiques' => 'Ao utilizar o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar buscas nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br />- A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br />- O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
 'texte_utilisation_moteur_syndiques_2' => 'Este m&eacute;todo obriga o SPIP a visitar regularmente os sites referenciados, o que pode provocar um ligeiro retardamento do seu pr&oacute;prio site.',
 'texte_vide' => 'vazia',
 'texte_vider_cache' => 'Esvaziar o cache',

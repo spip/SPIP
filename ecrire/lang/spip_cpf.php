@@ -170,23 +170,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'otonn an Frans - find s&eacute;zon s&egrave;k / d&eacute;bu dla grands&eacute;zon la R&eacute;inyon',
 'date_semaines' => 'sem&egrave;n',
 'dirs_commencer' => 'pou komans fransv&eacute;rit&eacute; linstalasyon ',
-'dirs_preliminaire' => 'Dabor : <B> R&egrave;g out bann drwa-laks&eacute;</b>',
+'dirs_preliminaire' => 'Dabor : <b> R&egrave;g out bann drwa-laks&eacute;</b>',
 'dirs_probleme_droits' => 'Ast&egrave;r, n&eacute;na inn larlik &egrave;k out bann drwa-laks&eacute;',
-'dirs_repertoires_absents' => '<B>L&eacute; pa posib giny bann r&eacute;p&egrave;rtwar-la&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Ni pans n&eacute;na inn larlik &egrave;k l&eacute;kritir bann l&egrave;t maziskil o miniskil
+'dirs_repertoires_absents' => '<b>L&eacute; pa posib giny bann r&eacute;p&egrave;rtwar-la&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p>Ni pans n&eacute;na inn larlik &egrave;k l&eacute;kritir bann l&egrave;t maziskil o miniskil
   Ogad byin n&eacute;na okinn diskord ant bann zot maziskil o miniskil andann bann r&eacute;p&egrave;rtwar &eacute; sak l&eacute; afis&eacute;
   anl&egrave;r ; si ou trouv i l&eacute; pa par&egrave;y, ardonn inn ot non bann r&eacute;p&egrave;rtwar-la sanm out lozisy&egrave;l FTP. Komsa lo larlik i sra pou aranz&eacute;.
-  <P>Kank ou lora fini ou sra kav ',
-'dirs_repertoires_suivants' => '<B>Bann r&eacute;pertwar-la l&eacute; pa ouv&egrave;r pou l&eacute;ktritir&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p>Kank ou lora fini ou sra kav ',
+'dirs_repertoires_suivants' => '<b>Bann r&eacute;pertwar-la l&eacute; pa ouv&egrave;r pou l&eacute;ktritir&nbsp;: <ul>@bad_dirs@.</ul> </b>
 
 
-<P> Anserv out kliyan FTP, pou r&egrave;g bann drwa-lakostaz sir sakin
+<p> Anserv out kliyan FTP, pou r&egrave;g bann drwa-lakostaz sir sakin
 
 
  r&eacute;pertwar-la. Lo guid linstalasyon i esplik aou, &egrave;k tout bann d&eacute;tay itil, kouk sa ou dwa f&egrave;r pou f&eacute; zw&eacute; bann drwa-la.
 
 
-<P>Kank ou lora fini,i sra kav',
+<p>Kank ou lora fini,i sra kav',
 
 
 // E
@@ -238,7 +238,7 @@ Pou konfirm out sinyatir-la, i fo s&egrave;lman akost ladr&egrave;s anba (si l&e
 Mersi aou m&egrave;t ansanm isi
 ',
 'form_pet_message_commentaire' => 'Inn mod&eacute;kri, inn ti lavi, inn komant&egrave;r&nbsp;?',
-'form_pet_nom_site2' => '<B>Lo non out sitw&egrave;b ',
+'form_pet_nom_site2' => '<b>Lo non out sitw&egrave;b ',
 'form_pet_probleme_technique' => 'Ast&egrave;r, nana inn larlik &egrave;k lat&eacute;knik : bann sinyatir l&eacute; bar&eacute; pou inn moman.',
 'form_pet_signature_pasprise' => 'L&eacute; pa posib antyen pa out sinyatir.',
 'form_pet_signature_validee' => 'Out sinyatir l&eacute; konfirm&eacute;. Mersi aou&nbsp;!',
@@ -268,7 +268,7 @@ Mersi aou m&egrave;t ansanm isi
 'forum_info_modere' => 'Forom kozman l&eacute; mod&eacute;r&eacute;-dovan&nbsp;: l&eacute; n&eacute;s&eacute;ser inn komander la finn konfirm ali pour out kontribusyon i apar&eacute; an liyn.
 
 ',
-'forum_lien_hyper' => '<B>Gatiraz</B> (l&eacute; pa obligatwar)',
+'forum_lien_hyper' => '<b>Gatiraz</b> (l&eacute; pa obligatwar)',
 'forum_message_definitif' => 'Mod&eacute;kri-la l&eacute; fini : anvwa ali si lo sitw&egrave;b',
 'forum_message_trop_long' => 'Out mod&eacute;kri l&eacute; tro lon. Li dwa pa d&eacute;pas plid 20000 karakt&egrave;r-linprimri.',
 'forum_ne_repondez_pas' => 'Pou r&eacute;ponn lim&eacute;l-la, anserv lo forom kozman ou sava trouv t&egrave;rla (r&eacute;ponn pa &egrave;k inn ot lim&egrave;l m&eacute; zizt inn mod&eacute;kri sir lo sitw&egrave;b):',
@@ -277,7 +277,7 @@ Mersi aou m&egrave;t ansanm isi
 'forum_par_auteur' => 'sanm @auteur@',
 'forum_poste_par' => 'Mod&eacute;kri-la, @parauteur@ la post ali pou r&eacute;ponn out lartik.',
 'forum_probleme_database' => 'Ast&egrave;r n&eacute;na inn larlik &egrave;k out bazdodn&eacute;. Por&eacute;zon sa minm, out mod&eacute;kri la pwinn finn d&egrave;t anrozistr&eacute;.',
-'forum_qui_etes_vous' => '<B>Kisa ou l&eacute; ?</B> (r&eacute;ponn l&eacute; pa obligatwar)',
+'forum_qui_etes_vous' => '<b>Kisa ou l&eacute; ?</b> (r&eacute;ponn l&eacute; pa obligatwar)',
 'forum_texte' => 'Lo t&egrave;ks out mod&eacute;kri :',
 'forum_titre' => 'Non :',
 'forum_titre_erreur' => 'Kanard...',
@@ -403,7 +403,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_erreur_requete' => 'Kanard dann rok&egrave;t-la :',
 'info_erreur_squelette2' => 'N&eacute;na pa okin l&eacute;sk&eacute;l&egrave;t <b>@fichier@</b> sat l&eacute; disponib...',
 'info_erreur_systeme' => 'Kanar sist&egrave;m (errno @errsys@)',
-'info_erreur_systeme2' => 'Lo diksodir li sr&eacute; byin po &egrave;t kompl&egrave;tman ragoul&eacute; o labazdodn&eacute; l&eacute; gat&eacute;<br>
+'info_erreur_systeme2' => 'Lo diksodir li sr&eacute; byin po &egrave;t kompl&egrave;tman ragoul&eacute; o labazdodn&eacute; l&eacute; gat&eacute;<br />
  <font color=\'red\'>Anon esay&eacute; <a href=\'@script@\'>aranz&eacute; labaz</a>,
  ou kontakt&eacute; out l&eacute;b&egrave;rz&egrave;r.</font>',
 'info_fini' => 'Ast&egrave;r sa l&egrave; fini !',
@@ -412,7 +412,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_grand_ecran' => 'Gran l&eacute;kran',
 'info_image_aide' => 'KOUDMIN',
 'info_image_process_titre' => 'Koman ou p&eacute; kr&eacute; bann tit-zimaz',
-'info_impossible_lire_page' => '<B>Kanard !</b> L&eacute; inposib lir pazw&egrave;b-la <tt><html>@test_proxy@</html></tt> &egrave;k lo proksi <tt>',
+'info_impossible_lire_page' => '<b>Kanard !</b> L&eacute; inposib lir pazw&egrave;b-la <tt><html>@test_proxy@</html></tt> &egrave;k lo proksi <tt>',
 'info_inclusion_directe' => 'Linklizyon dir&egrave;k&nbsp;:',
 'info_inclusion_vignette' => 'Linklizyon limaz-minyatir&nbsp;:',
 'info_installation_systeme_publication' => 'Pou f&eacute; zw&eacute; (instal) lo sist&egrave;m lapiblikasyon...',
@@ -488,9 +488,9 @@ Mersi aou m&egrave;t ansanm isi
 'info_site_refuse' => 'Sitw&egrave;b-la l&eacute; arfiz&eacute;',
 'info_sites_referencer' => 'R&eacute;f&eacute;rans inn sitw&egrave;b',
 'info_supprimer_vignette' => 'd&eacute;gr&egrave;n viny&egrave;t-la',
-'info_symbole_bleu' => 'Lo sinbol <B>bl&eacute;</B> li mark <B>inn gardant&egrave;t</B>: inn mod&eacute;kri pour out prop lisaz.',
-'info_symbole_jaune' => 'Lo sinbol <B>zon</B> li mark <B>inn zanons pou tout bann lot&egrave;r</B>&nbsp;: banna i p&eacute; vwar ali an liyn ; bann komand&egrave;r i p&eacute; sanz ali.',
-'info_symbole_vert' => 'Lo sinbol <B>v&egrave;r</B> i mark <B>bann mod&eacute;kri &egrave;k dot bann zitilizat&egrave;r</B> lo sitw&egrave;b.',
+'info_symbole_bleu' => 'Lo sinbol <b>bl&eacute;</b> li mark <b>inn gardant&egrave;t</b>: inn mod&eacute;kri pour out prop lisaz.',
+'info_symbole_jaune' => 'Lo sinbol <b>zon</b> li mark <b>inn zanons pou tout bann lot&egrave;r</b>&nbsp;: banna i p&eacute; vwar ali an liyn ; bann komand&egrave;r i p&eacute; sanz ali.',
+'info_symbole_vert' => 'Lo sinbol <b>v&egrave;r</b> i mark <b>bann mod&eacute;kri &egrave;k dot bann zitilizat&egrave;r</b> lo sitw&egrave;b.',
 'info_syndication' => 'Lasindikasyon :',
 'info_syndication_articles' => '(bann) lartik',
 'info_telecharger' => 'T&eacute;l&eacute;sarz dopwi out prop lordinat&egrave;r&nbsp;:',
@@ -657,10 +657,10 @@ Apr&eacute;sa, ou i poura m&egrave;t in nouvo modpas
 m&eacute; zot l&eacute; pa plas&eacute; dann kor-minm lartik-la. S&eacute;lon lamanyir ou sava m&egrave;t an paz lo sit piblik,
 zot i sra pou apar&egrave;t kom bann dokiman zwinn.',
 'texte_erreur_mise_niveau_base' => 'Kanard do bazdodn&eacute; dann tan larmizanivo .
-Limaz <B>@fichier@</b> la pa pas&eacute; dann (article @id_article@).
+Limaz <b>@fichier@</b> la pa pas&eacute; dann (article @id_article@).
 Gard byin an t&egrave;t r&eacute;f&eacute;rans-la, &eacute;s&egrave;y inn ot fwa inn larmizanivo, &eacute; v&eacute;y byin sak bann zimaz i apar&eacute; touzour dann bann zartik.',
 'texte_inc_auth_1' => 'Ou l&eacute; konu sir lo sit &egrave;k lo
- nondkod <B>@auth_login@</b>, m&eacute; li l&eacute; pa/pli pr&eacute;zan ast&egrave;r dann labaz. 
+ nondkod <b>@auth_login@</b>, m&eacute; li l&eacute; pa/pli pr&eacute;zan ast&egrave;r dann labaz. 
 Es&egrave;y',
 'texte_inc_auth_2' => 'rakost inn ot fwa',
 'texte_inc_auth_3' => 'apr&eacute; ou la pet&egrave;t sort &egrave;k ard&eacute;mar out
@@ -668,7 +668,7 @@ navigat&egrave;r.',
 'texte_inc_config' => 'Bann sanzman sir bann paz-la na inn l&eacute;f&eacute; importan sir lamanyir
 out sit i mars. Ni kons&egrave;y aou pa tous a ryin si ou l&eacute; pa fransv&eacute;rit&eacute; byin abity&eacute; &egrave;k lo sist&egrave;m SPIP.
 
- <P align="justify"><B>&Eacute; minm, ni kons&eacute;y
+ <p align="justify"><b>&Eacute; minm, ni kons&eacute;y
 aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prinsipal.</b>',
 'texte_inc_meta_1' => 'Sist&egrave;m-la la finn trov&eacute; inn larlik &egrave;k l&eacute;kritir lo fisy&eacute; <code>@fichier@</code>.  Mersi, kom komand&egrave;r lo sit,',
 'texte_inc_meta_2' => 'v&eacute;rify&eacute; bann drwa l&eacute;kritir',

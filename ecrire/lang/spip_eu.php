@@ -441,6 +441,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publie_1' => '[@nom_site_spip@] Argitaratzen du: @titre@',
 'info_publie_2' => 'Artikuluaargitaratua 
 --------------',
+'info_question_referers' => '<pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+  (adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Bilatu',
 'info_rechercher_02' => 'Bilatu&nbsp;:',
 'info_remplacer_vignette' => 'Ikono lehenetsiaren ordez zuk aukeratutako irudi batjarri&nbsp;:',

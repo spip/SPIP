@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'N\'eus berrskrid ebet er chomlec\'h-ma&ntilde;',
 'aucune_rubrique' => 'N\'eus rummad ebet er chomlec\'h-ma&ntilde;',
 'autres_breves' => 'Berrskrido&ugrave; all',
-'autres_groupes_mots_clefs' => 'Strollado&ugrave; gerio&ugrave;-alc\'hwez all',
+'autres_groupes_mots_clefs' => 'Strollado&ugrave; gerio&ugrave;-stur all',
 'autres_sites' => 'Lec\'hienno&ugrave; all',
 
 
@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dernieres_breves' => 'Berrskrido&ugrave; diwezha&ntilde;',
 'derniers_articles' => 'Pennado&ugrave; diwezha&ntilde;',
 'derniers_commentaires' => 'Evezhiadenno&ugrave; diwezha&ntilde;',
-'derniers_messages_forum' => 'Kemennadenno&ugrave; diwezha&ntilde; embannet er forumo&ugrave;',
+'derniers_messages_forum' => 'Kemennadenno&ugrave; diwezha&ntilde; embannet er foromo&ugrave;',
 
 
 // E
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'forum' => 'Forum',
+'forum' => 'Forom',
 
 
 // H
@@ -65,10 +65,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meme_rubrique' => 'Er rummad-ma&ntilde;',
 'memes_auteurs' => 'Gant ar skridaozerien-ma&ntilde;',
 'message' => 'Kemennadenn',
-'messages_forum' => 'Kemennadenno&ugrave; forum',
-'messages_recents' => 'Kemennadenno&ugrave; forum an nevesha&ntilde;',
-'mots_clefs' => 'Gerio&ugrave;-alc\'hwez',
-'mots_clefs_meme_groupe' => 'Gerio&ugrave;-alc\'hwez er strollad-ma&ntilde;',
+'messages_forum' => 'Kemennadenno&ugrave; forom',
+'messages_recents' => 'Kemennadenno&ugrave; forom an nevesha&ntilde;',
+'mots_clefs' => 'Gerio&ugrave;-stur',
+'mots_clefs_meme_groupe' => 'Gerio&ugrave;-stur er strollad-ma&ntilde;',
 
 
 // N
@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repondre_breve' => 'Respont d\'ar berrskrid-ma&ntilde;',
 'repondre_message' => 'Respont d\'ar c\'hemennadenn-ma&ntilde;',
 'resultats_recherche' => 'Disoc\'ho&ugrave; an enklask',
-'retour_debut_forums' => 'Distro da benn-kenta&ntilde; ar forumo&ugrave;',
+'retour_debut_forums' => 'Distro da benn-kenta&ntilde; ar foromo&ugrave;',
 'rubrique' => 'Rummad',
 'rubriques' => 'Rummado&ugrave;',
 

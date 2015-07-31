@@ -398,7 +398,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_erreur_requete' => 'Hiba a lek&eacute;rdez&eacute;sben :',
 'info_erreur_squelette2' => 'Egyetlen csontv&aacute;z (template) <b>@fichier@</b> sem &aacute;ll rendelkez&eacute;sre...',
 'info_erreur_systeme' => 'Rendszer hiba (errno @errsys@)',
-'info_erreur_systeme2' => 'A merevlemez tal&aacute;n tele van, vagy megs&eacute;r&uuml;lt az adatb&aacute;zis. <br>
+'info_erreur_systeme2' => 'A merevlemez tal&aacute;n tele van, vagy megs&eacute;r&uuml;lt az adatb&aacute;zis. <br />
  <font color=\'red\'>prob&aacute;ljon <a href=\'@script@\'>jav&iacute;tani az adatb&aacute;zis</a>,
  vagy keresse fel a rendszergazd&aacute;t.</font>',
 'info_fini' => 'K&eacute;szen van !',
@@ -407,7 +407,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_grand_ecran' => 'Nagy k&eacute;perny&#337;',
 'info_image_aide' => 'S&Uacute;G&Oacute;',
 'info_image_process_titre' => 'B&eacute;lyegk&eacute;pek k&eacute;sz&iacute;t&eacute;si m&oacute;dszer',
-'info_impossible_lire_page' => '<B>Hiba !</B> Az opdal nem olvashat&oacute;  <tt><html>@test_proxy@</html></tt> a proxyn kereszt&uuml;l <tt>',
+'info_impossible_lire_page' => '<b>Hiba !</b> Az opdal nem olvashat&oacute;  <tt><html>@test_proxy@</html></tt> a proxyn kereszt&uuml;l <tt>',
 'info_inclusion_directe' => 'K&ouml;zvetlen besz&uacute;r&aacute;s&nbsp;:',
 'info_inclusion_vignette' => 'B&eacute;lyegk&eacute;p besz&uacute;r&aacute;sa&nbsp;:',
 'info_installation_systeme_publication' => 'A publik&aacute;l&aacute;si rendszer telep&iacute;t&eacute;se...',
@@ -483,9 +483,9 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_site_refuse' => 'Elutas&iacute;tott honlap',
 'info_sites_referencer' => 'Honlap felv&eacute;tele',
 'info_supprimer_vignette' => 'a b&eacute;lyegk&eacute;p t&ouml;rl&eacute;se',
-'info_symbole_bleu' => 'A <B>k&eacute;k</B> jel <B>eml&eacute;keztet&#337;t</B> jelez: vagyis egy szem&eacute;lyes jelleg&#369; &uuml;zenetet.',
-'info_symbole_jaune' => 'A <B>s&aacute;rga</B> jel <B>minden szerz&#337;nek sz&oacute;l&oacute; h&iacute;rt</B> jelez&nbsp;: minden adminisztr&aacute;tor m&oacute;dos&iacute;thatja, &eacute;s minden szerz&#337; l&aacute;thatja.',
-'info_symbole_vert' => 'A <B>z&ouml;ld</B> jel a honlap <B>t&ouml;bbi felhaszn&aacute;l&oacute;ival cser&eacute;lt &uuml;zeneteket</B> jelzi.',
+'info_symbole_bleu' => 'A <b>k&eacute;k</b> jel <b>eml&eacute;keztet&#337;t</b> jelez: vagyis egy szem&eacute;lyes jelleg&#369; &uuml;zenetet.',
+'info_symbole_jaune' => 'A <b>s&aacute;rga</b> jel <b>minden szerz&#337;nek sz&oacute;l&oacute; h&iacute;rt</b> jelez&nbsp;: minden adminisztr&aacute;tor m&oacute;dos&iacute;thatja, &eacute;s minden szerz&#337; l&aacute;thatja.',
+'info_symbole_vert' => 'A <b>z&ouml;ld</b> jel a honlap <b>t&ouml;bbi felhaszn&aacute;l&oacute;ival cser&eacute;lt &uuml;zeneteket</b> jelzi.',
 'info_syndication' => 'szindik&aacute;l&aacute;s :',
 'info_syndication_articles' => 'cikk(ek)',
 'info_telecharger' => 'Felt&ouml;lt&eacute;s a g&eacute;p&eacute;r&#337;l&nbsp;:',
@@ -652,9 +652,9 @@ Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
    besz&uacute;rva. A nyilv&aacute;nos r&eacute;sz oldalbe&aacute;ll&iacute;t&aacute;sa szerint,
   csatolt dokumentumok form&aacute;ban jelenhetnek meg.',
 'texte_erreur_mise_niveau_base' => 'Adatb&aacute;zis hiba verzi&oacute;friss&iacute;t&eacute;skor.
-  A <B>@fichier@</B> k&eacute;p nem ment &aacute;t (@id_article@ cikk).
+  A <b>@fichier@</b> k&eacute;p nem ment &aacute;t (@id_article@ cikk).
  Jegyezze meg ezt a nevet, pr&oacute;bl&aacute;ja &uacute;jra a friss&iacute;t&eacute;st, &eacute;s v&eacute;g&uuml;l ellen&#337;rizze, hogy a k&eacute;pek mindig jelennek meg a cikkekben.',
-'texte_inc_auth_1' => '&Ouml;n a <B>@auth_login@</B> loginnal
+'texte_inc_auth_1' => '&Ouml;n a <b>@auth_login@</b> loginnal
 van azonos&iacute;tva, nem ez l&eacute;tezik/l&eacute;tezett az adatb&aacute;zisban. 
 Pr&oacute;b&aacute;ljon',
 'texte_inc_auth_2' => '&uacute;jra csatlakozni',
@@ -662,8 +662,8 @@ Pr&oacute;b&aacute;ljon',
 &uacute;jraind&iacute;totta a b&ouml;ng&eacute;sz&#337;j&eacute;t.',
 'texte_inc_config' => 'Az ezeken az oldalokon v&eacute;gzett m&oacute;dos&iacute;t&aacute;sok jelent&#337;sen befoly&aacute;solj&aacute;k a
  honlap m&#369;k&ouml;d&eacute;s&eacute;t. Javasoljuk, hogy ne  avatkozzon bele, amig &Ouml;n nem j&aacute;r&aacute;tos
- az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <P align="justify"><B>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
- a honlap f&#337; webmester&eacute;re.</B>',
+ az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <p align="justify"><b>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
+ a honlap f&#337; webmester&eacute;re.</b>',
 'texte_inc_meta_1' => 'A rendszer hib&aacute;t &eacute;szlelt a <code>@fichier@</code> f&aacute;jl &iacute;r&aacute;s&aacute;kor. Mint honlap adminisztr&aacute;tor, legyen sz&iacute;ves',
 'texte_inc_meta_2' => 'ellen&#337;rizni a ir&aacute;si jogokat',
 'texte_inc_meta_3' => 'a <code>@repertoire@</code> nev&#369; mapp&aacute;n.',

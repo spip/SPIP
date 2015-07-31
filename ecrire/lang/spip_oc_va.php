@@ -170,17 +170,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'endarrier',
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'per comen&ccedil;ar verament l\'installacion',
-'dirs_preliminaire' => 'Preliminar: <B>Reglar los dreches d\'acc&egrave;s</b>',
+'dirs_preliminaire' => 'Preliminar: <b>Reglar los dreches d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => 'Probl&egrave;ma de dreches d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<b>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
   <p/>Se p&ograve;t que vena d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
   Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
   &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar los repert&ograve;ris amb v&ograve;stre logiciau FTP en corregissent l\'error.
-  <P>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
+  <p>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
 'dirs_repertoires_suivants' => '<b>Los repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
-  <P>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP a fin de reglar los dreches d\'acc&egrave;s de chascun
+  <p>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP a fin de reglar los dreches d\'acc&egrave;s de chascun
   d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coma chau procedir.
-  <P>Tre qu\'auretz facha aquela manipulacion, poiretz ',
+  <p>Tre qu\'auretz facha aquela manipulacion, poiretz ',
 
 
 // E
@@ -315,6 +315,7 @@ Merc&eacute; per v&ograve;stra participacion
 'icone_ecrire_article' => 'Escriure un article n&ograve;u',
 'icone_edition_site' => 'Edicion',
 'icone_etat_traductions' => 'Ont ne\'n son las reviraas',
+'icone_evolution_visites_2' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dels administrators',
 'icone_forum_interne' => 'Forum int&egrave;rne',
 'icone_forum_suivi' => 'Seguit dels forums',
@@ -409,7 +410,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_erreur_requete' => 'Error dins la requ&egrave;sta',
 'info_erreur_squelette2' => 'Ges d\'esqueleta <b>@fichier@</b> es disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donaas degalhaa. <br>
+'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donaas degalhaa. <br />
  <font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>,
  o contactatz v&ograve;stre auberjaor.</font>',
 'info_fini' => 'Aqu&ograve;\'s achabat!',
@@ -418,7 +419,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_grand_ecran' => 'Ecran grand',
 'info_image_aide' => 'AJUA',
 'info_image_process_titre' => 'Met&ograve;de de fabricacion de las vinhetas',
-'info_impossible_lire_page' => '<B>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs dau proxy <tt>',
+'info_impossible_lire_page' => '<b>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs dau proxy <tt>',
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sist&egrave;ma de publicacion...',
@@ -486,6 +487,8 @@ Merc&eacute; per v&ograve;stra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
+'info_question_referers' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Cerchar',
 'info_rechercher_02' => 'Cerchar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinia per un l&ograve;go personalizat:',
@@ -502,9 +505,9 @@ Merc&eacute; per v&ograve;stra participacion
 'info_sites_referencer' => 'Referenciar un sit',
 'info_supprimer_vignette' => 'suprimir la vinheta',
 'info_sur_site_public' => '[sobre lo sit public]',
-'info_symbole_bleu' => 'Lo simb&egrave;u <B>blau</b> marca un <B>memento</b>: aqu&ograve; v&ograve;u dire un messatge per v&ograve;stre usatge personau.',
-'info_symbole_jaune' => 'Lo simb&egrave;u <B>jaune</b> marca un <B>anonci per tots los redactors </b>: los administrators lo p&ograve;on modificar, chasque redactor lo p&ograve;t veire.',
-'info_symbole_vert' => 'Lo simb&egrave;u <B>verd</b> marca los <B>messatges eschambiats amb d\'autres utilizaires</b> dau sit.',
+'info_symbole_bleu' => 'Lo simb&egrave;u <b>blau</b> marca un <b>memento</b>: aqu&ograve; v&ograve;u dire un messatge per v&ograve;stre usatge personau.',
+'info_symbole_jaune' => 'Lo simb&egrave;u <b>jaune</b> marca un <b>anonci per tots los redactors </b>: los administrators lo p&ograve;on modificar, chasque redactor lo p&ograve;t veire.',
+'info_symbole_vert' => 'Lo simb&egrave;u <b>verd</b> marca los <b>messatges eschambiats amb d\'autres utilizaires</b> dau sit.',
 'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
 'info_telecharger' => 'Telecharjar a partir de v&ograve;stre ordenaor:',
@@ -530,8 +533,12 @@ Merc&eacute; per v&ograve;stra participacion
 'item_administrateur' => 'Administrator',
 'item_breve_proposee' => 'Br&egrave;va prepausaa',
 'item_efface' => 'Esfa&ccedil;at',
+'item_gerer_referers' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
 'item_premier' => '1ier',
 'item_redacteur' => 'Redactor',
+'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -692,19 +699,19 @@ e vos tornar connectar au sit.
  mas s\'inserisson pas
  directament. Segon la compaginacion dau sit public,
  poir&agrave;n apar&eacute;isser sos forma de documents jonches.',
-'texte_erreur_mise_niveau_base' => 'Error de basa de donaas pendent la mesa a niv&egrave;u. L\'imatge <B>@fichier@</b> es pas passat (article @id_article@).
+'texte_erreur_mise_niveau_base' => 'Error de basa de donaas pendent la mesa a niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela refer&eacute;ncia, tornatz assajar la mesa a
  niv&egrave;u, e verificatz puei que los imatges apareissan
  encara dins los articles.',
 'texte_inc_auth_1' => 'Siatz identificat/aa coma
-   <B>@auth_login@</b>, mas aqueu login exist&iacute;s pas o pas pus dins la basa.
+   <b>@auth_login@</b>, mas aqueu login exist&iacute;s pas o pas pus dins la basa.
   Assajatz de vos',
 'texte_inc_auth_2' => 'tornar connectar',
 'texte_inc_auth_3' => ', apr&egrave;s qu\'auretz quitat eventualament, puei
   tornat lan&ccedil;ar v&ograve;stre navigaor.',
 'texte_inc_config' => 'Las modificacions fachas dins aquestas paginas influ&eacute;ncian ferme lo
  foncionament de v&ograve;stre sit. Vos aconselham de pas i intervenir tant que sieiatz pas
- acostumat/aa au foncionament dau sist&egrave;ma SPIP. <P align="justify"><B>
+ acostumat/aa au foncionament dau sist&egrave;ma SPIP. <p align="justify"><b>
  En generau, se conselha f&ograve;rt
  de laissar la charja d\'aquestas paginas au webm&egrave;stre principau de v&ograve;stre sit.</b>',
 'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichier <code>@fichier@</code>.Volhatz, coma administrator/tritz dau sit,',

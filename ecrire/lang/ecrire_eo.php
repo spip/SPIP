@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_chemin_invalide_2' => 'ne &#349;ajnas ta&#365;gi. Bonvolu reveni al la anta&#365;a pa&#285;o kaj kontroli la entajpitajn datenojn.',
 'avis_connexion_echec_1' => 'Konekti&#285;o al MySQL-servilo malsukcesis.',
 'avis_connexion_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu entajpitajn datenojn.',
-'avis_connexion_echec_3' => '<B>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivigon de via aliro al MySQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi ja faris tiun demar&#349;on.',
+'avis_connexion_echec_3' => '<b>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivigon de via aliro al MySQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi ja faris tiun demar&#349;on.',
 'avis_connexion_ldap_echec_1' => 'Konekti&#285;o al LDAP-servilo malsukcesis.',
 'avis_connexion_ldap_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu la entajpitajn datenojn. ',
 'avis_connexion_ldap_echec_3' => 'Eventuale, provu ne uzi LDAP-materialon por importi uzantojn.',
@@ -135,7 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpujo restas malplena.)',
 'entree_biographie' => 'Mallonga kelkvorta biografio.',
 'entree_breve_publiee' => '&#264;u tiun fulm-informon oni publikigu?',
-'entree_chemin_acces' => '<B>Entajpi</b> aliran vojon&nbsp;:',
+'entree_chemin_acces' => '<b>Entajpi</b> aliran vojon&nbsp;:',
 'entree_cle_pgp' => 'Via PGP-&#349;losilo ',
 'entree_contenu_rubrique' => '(Enhavo de la rubriko per kelkaj vortoj.)',
 'entree_description_site' => 'Priskribo de la retejo',
@@ -143,7 +143,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_informations_connexion_ldap' => 'En tiun formularon, bonvolu entajpi informojn por konekti al via LDAP-dosierujilo. Tiujn informojn disponigu al vi la sistema a&#365; reta mastrumanto.',
 'entree_infos_perso' => 'Kiu vi estas ?',
 'entree_interieur_rubrique' => 'En la rubriko&nbsp;:',
-'entree_liens_sites' => '<B>Hiperligilo</b> (referenco, vizitinda retejo...)',
+'entree_liens_sites' => '<b>Hiperligilo</b> (referenco, vizitinda retejo...)',
 'entree_login' => 'Via salutnomo',
 'entree_login_connexion_1' => 'La salutnomo',
 'entree_login_connexion_2' => '(Foje estas via salutnomo por eniri la FTP-ejon; foje &#285;i restas malplena)',
@@ -160,7 +160,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_port_annuaire' => 'Numero de la dosierujila pordo',
 'entree_signature' => 'Subskribo',
 'entree_texte_breve' => 'Teksto de la fulm-informo',
-'entree_titre_obligatoire' => '<B>Titolo</b> [Deviga]<BR>',
+'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 'entree_url' => 'Retadreso de via retejo',
 'erreur_plugin_fichier_absent' => 'Foresta dosiero',
 'erreur_plugin_fichier_def_absent' => 'Difina dosiero forestas',
@@ -196,7 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_creer_rubrique_2' => 'Krei novan rubrikon',
 'icone_ecrire_nouvel_article' => 'La fulm-informoj trovi&#285;antaj en tiu rubriko',
 'icone_envoyer_message' => 'Sendi tiun mesa&#285;on',
-'icone_evolution_visites' => 'Evoluado de la vizitoj<br>@visites@ vizitoj',
+'icone_evolution_visites' => 'Evoluado de la vizitoj<br />@visites@ vizitoj',
 'icone_modif_groupe_mots' => 'Modifi tiun vortgrupon',
 'icone_modifier_article' => 'Modifi tiun artikolon',
 'icone_modifier_breve' => 'Modifi tiun fulm-informon',
@@ -277,7 +277,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_chapeau_2' => '&#264;apo&nbsp;:',
 'info_chemin_acces_1' => 'Opcioj : <b>Alirvojo en la LDAP-dosierujilo</b>',
 'info_chemin_acces_2' => 'Ekde nun vi devas konfiguri la alirvojon al la LDAP-dosierujilo. Tiu informo estas nepre necesa por legi la profilojn de uzantoj stokataj en la dosierujilo.',
-'info_chemin_acces_annuaire' => 'Opcioj: <B>Aliro en la LDAP-dosierujilo',
+'info_chemin_acces_annuaire' => 'Opcioj: <b>Aliro en la LDAP-dosierujilo',
 'info_choix_base' => 'Tria etapo&nbsp;: ',
 'info_classement_1' => '<sup>a</sup> en @liste@',
 'info_classement_2' => '<sup>a</sup> en @liste@',
@@ -288,21 +288,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_confirmer_passe' => 'Konfirmi tiun novan pasvorton:',
 'info_connexion_base' => 'Dua etapo: <b>Konekti&#285;o-provo al la datenbazo</b>',
 'info_connexion_ldap_ok' => 'La konekti&#285;o al LDAP sukcesis.</b><p /> Vi povas iri al la sekvanta etapo',
-'info_connexion_mysql' => 'Unua etapo: <B>Via MySQL-a konekti&#285;o</b>',
+'info_connexion_mysql' => 'Unua etapo: <b>Via MySQL-a konekti&#285;o</b>',
 'info_connexion_ok' => 'La konekti&#285;o sukcesis.',
 'info_contact' => 'Kontakt-adreso',
 'info_contenu_articles' => 'Enhavo de la artikoloj',
 'info_creation_mots_cles' => '&#264;i tie, kreu kaj konfiguru la &#349;losilvortojn de la retejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
-'info_creation_rubrique' => 'Anta&#365; ol skribi artikolojn,<br> vi kreu almena&#365; unu rubrikon.<br>',
+'info_creation_rubrique' => 'Anta&#365; ol skribi artikolojn,<br /> vi kreu almena&#365; unu rubrikon.<br />',
 'info_creation_tables' => 'Kvara etapo: <b>Kreo de la datenbazaj tabeloj</b>',
-'info_creer_base' => '<B>Krei</b> novan datenbazon&nbsp;:',
+'info_creer_base' => '<b>Krei</b> novan datenbazon&nbsp;:',
 'info_dans_groupe' => 'En la grupo:',
 'info_dans_rubrique' => 'En la rubriko:',
 'info_date_publication_anterieure' => 'Dato de anta&#365;a redakto :',
 'info_date_referencement' => 'REFERENCIGO-DATO DE TIU RETEJO&nbsp;:',
 'info_delet_mots_cles' => 'Vi petis forigon de la &#349;losilvorto
- <B>@titre_mot@</b> (@type_mot@). &#264;ar la &#349;losilvorto estas ligita al
+ <b>@titre_mot@</b> (@type_mot@). &#264;ar la &#349;losilvorto estas ligita al
  <b>@texte_lie@</b>, vi devas konfirmi tiun decidon&nbsp;:',
 'info_derniere_etape' => 'Lasta etapo: <b>Finite!',
 'info_derniere_syndication' => 'La lasta abonrilato-&#285;isdatigo de tiu retejo estis farita la ',
@@ -369,7 +369,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_image_process' => 'Bonvolu elekti la plej bonan metodon por fabriki vinjetojn musklakante la&#365;cele bildon.',
 'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, tio signifas ke la servilo kiu gastigas vian retejon ne estas konfigurita por uzi tiajn ilojn. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika repondeculo.</i>',
 'info_images_auto' => 'Bildoj a&#365;tomate komputitaj',
-'info_informations_personnelles' => 'Kvina etapo: <B>Personaj datenoj</b>',
+'info_informations_personnelles' => 'Kvina etapo: <b>Personaj datenoj</b>',
 'info_inscription_automatique' => 'A&#365;tomata registri&#285;ado de novaj redaktantoj',
 'info_jeu_caractere' => 'Litertiparo de la retejo',
 'info_jours' => 'tagoj',
@@ -395,7 +395,7 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_message_technique' => 'Teknika mesa&#285;o:',
 'info_messagerie_interne' => 'Interna mesa&#285;ilo',
 'info_mise_a_niveau_base' => 'alniveligo de via MySQL-datenbazo',
-'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj ke via retejo ne plu funkcios.<br>{{Reinstalu la
+'info_mise_a_niveau_base_2' => '{{Atentu!}} Vi &#309;us instalis version de la SPIP-dosieroj {pli malnovan} ol tiun, kiu estis instalita anta&#365;e &#265;e via retejo: eblas ke via datenbazo perdi&#285;os kaj ke via retejo ne plu funkcios.<br />{{Reinstalu la
  SPIP-dosierojn.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'Defa&#365;lta funkcimodo de la publikaj forumoj',
 'info_modifier_breve' => 'Modifi la fulm-informon:',
@@ -502,8 +502,8 @@ postulas disponi je FTP-alirrajto al la retejo.',
 'info_redirection' => 'Alidirektigo',
 'info_referencer_doc_distant' => 'Referencigi dokumenton &#265;e la reto&nbsp;:',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
-'info_reglage_ldap' => 'Opcioj: <B>Agordo de la LDAP-&#349;argo</b>',
-'info_renvoi_article' => '<B>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
+'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-&#349;argo</b>',
+'info_renvoi_article' => '<b>Alidirektigo.</b> Tiu artikolo alidirektas al la pa&#285;o:',
 'info_reserve_admin' => 'Nur la mastrumantoj povas modifi tiun adreson.',
 'info_restauration_sauvegarde' => 'Resta&#365;ro de la savkopio @archive@',
 'info_restreindre_rubrique' => 'Limigi la mastrumadon al la rubriko:',
@@ -797,7 +797,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
  gazetar-revuon, kalendaron de eventoj...',
 'texte_choix_base_1' => 'Elektu vian datenbazon:',
 'texte_choix_base_2' => 'La MySQL-servilo enhavas plurajn datenbazojn.',
-'texte_choix_base_3' => '<B>Elektu</B> &#265;i-poste tiun, kiun atribuis al vi via retgastiganto:',
+'texte_choix_base_3' => '<b>Elektu</b> &#265;i-poste tiun, kiun atribuis al vi via retgastiganto:',
 'texte_commande_vider_tables_indexation' => 'Uzu tiun komandon por malplenigi la indeksajn tabelojn uzatajn
    de la SPIP-integrita ser&#265;ilo. Tio ebligos al vi
    gajni diskospacon.',
@@ -822,7 +822,7 @@ NUR por retejo starigita per la sama versio de SPIP. Nepre ne "&nbsp;malplenigu 
 'texte_crash_base' => 'Se via datenbazo kolapsis,
    vi povas provi
    a&#365;tomatan riparon.',
-'texte_creer_rubrique' => 'Anta&#365; ol povi skribi artikolojn,<BR> vi devas krei rubrikon.',
+'texte_creer_rubrique' => 'Anta&#365; ol povi skribi artikolojn,<br /> vi devas krei rubrikon.',
 'texte_date_creation_article' => 'KREO-DATO DE LA ARTIKOLO&nbsp;:',
 'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A REDAKTO&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a redakto.',
@@ -894,9 +894,9 @@ ligilojn al jena a&#365; alia retejo.',
 'texte_plusieurs_articles' => 'Pluraj a&#365;toroj trovitaj por"@cherche_auteur@":',
 'texte_port_annuaire' => 'La defa&#365;lte indikita valoro &#285;enerale ta&#365;gas.)',
 'texte_presente_plugin' => 'Tiu pa&#285;o listigas kromprogramojn disponeblajn &#265;e tiu retejo. Vi povas aktivigi la necesajn kromprogramojn no&#265;ante la kongruan no&#265;ujon.',
-'texte_proposer_publication' => 'Kiam via artikolo estas finita,<br> vi povas proponi &#285;ian publikigon.',
+'texte_proposer_publication' => 'Kiam via artikolo estas finita,<br /> vi povas proponi &#285;ian publikigon.',
 'texte_proxy' => 'En iuj okazoj (intrareto, protektitaj retoj...),
-  povas esti necese uzi na <I>proxy HTTP</I> por atingi la abonrilatajn retejojn.
+  povas esti necese uzi na <i>proxy HTTP</i> por atingi la abonrilatajn retejojn.
   Eventuale, indiku &#265;i-sube ties retadreson, la&#365; la formo
   <tt><html>http://proxy:8080</html></tt>. &#284;enerale,
   lasu tiun tajpujon malplena.',
@@ -909,7 +909,7 @@ rekalkuli ununuran pa&#285;on, pasu prefere tra la publika spaco kaj tie uzu la 
 'texte_recapitiule_liste_documents' => 'Tiu &#265;i pa&#285;o montras la liston de dokumentoj, kiujn vi metis en la rubrikojn. Por modifi la informojn pri &#265;iu dokumento, sekvu la ligilon al la pa&#285;o de ties rubriko.',
 'texte_recuperer_base' => 'Ripari la datenbazon',
 'texte_reference_mais_redirige' => 'artikolo referencigita &#265;e via SPIP-retejo, sed redirektita al alia URL.',
-'texte_referencement_automatique' => '<b>A&#365;tomata referenciga procezo de retejo</b><br>Vi povas rapide referencigi retejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de ties abonrilatiga dosiero. SPIP a&#365;tomate elprenos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
+'texte_referencement_automatique' => '<b>A&#365;tomata referenciga procezo de retejo</b><br />Vi povas rapide referencigi retejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de ties abonrilatiga dosiero. SPIP a&#365;tomate elprenos la informojn kiuj koncernas tiun retejon (titolon, priskribon...).',
 'texte_requetes_echouent' => '<b>Kiam iuj MySQL-ser&#265;petoj sisteme
 kaj senkiale malsukcesas, estas eble
 ke tio okazas pro la datenbazo
@@ -956,7 +956,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_tenter_reparation' => 'Provi riparon de la datenbazo',
 'texte_test_proxy' => 'Por testi tiun prokuran servilon, indiku &#265;i tie la adreson de retejo, kiun vi deziras testi.',
 'texte_titre_02' => 'Titolo:',
-'texte_titre_obligatoire' => '<B>Titolo</B> [Deviga]',
+'texte_titre_obligatoire' => '<b>Titolo</b> [Deviga]',
 'texte_travail_article' => '@nom_auteur_modif@ prilaboris tiun artikolon anta&#365; @date_diff@ minutoj',
 'texte_travail_collaboratif' => 'Se pluraj redaktantoj laboras ofte
   pri sama artikolo, la sistemo
@@ -969,9 +969,9 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'texte_unpack' => 'El&#349;uto de la lasta versio',
 'texte_utilisation_moteur_syndiques' => 'Kiam vi uzas la SPIP-internan ser&#265;ilon,
     vi povas fari ser&#265;procezojn &#265;e retejoj abonrilatigitaj la&#365; du malsamaj manieroj.
-    <br><img src=\'puce.gif\'> La plej simpla
+    <br /><img src=\'puce.gif\'> La plej simpla
     estas ser&#265;i nur en la titoloj
-    kaj en la priskriboj de la artikoloj. <br><img src=\'puce.gif\'>
+    kaj en la priskriboj de la artikoloj. <br /><img src=\'puce.gif\'>
     La dua metodo, multe pli potenca, ebligas
     al SPIP ser&#265;i anka&#365; en la teksto de la
     referencigitaj retejoj&nbsp;. Se vi referencigas
@@ -995,7 +995,7 @@ faris gravajn &#349;an&#285;ojn en la grafiko a&#365; strukturo de la retejo.',
 'titre_cadre_forum_interne' => 'Interna forumo',
 'titre_cadre_interieur_rubrique' => 'Ene de la rubriko',
 'titre_cadre_numero_auteur' => 'A&#364;TORO NUMERO',
-'titre_cadre_signature_obligatoire' => '<B>Subskribo</B> [deviga]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Subskribo</b> [deviga]<br />',
 'titre_config_fonctions' => 'Agordo de la retejo',
 'titre_config_groupe_mots_cles' => 'Agordo de la &#349;losilvortaj grupoj',
 'titre_configuration' => 'Agordo de la retejo',

@@ -431,7 +431,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_erreur_requete' => 'Chyba p&#345;i datab&aacute;zov&eacute;m dotazu:',
 'info_erreur_squelette2' => 'Neexistuj&iacute;c&iacute; &#353;ablona <b>@fichier@</b>...',
 'info_erreur_systeme' => 'Syst&eacute;mov&aacute; chyba (&#269;&iacute;slo: @errsys@)',
-'info_erreur_systeme2' => 'Pevn&yacute; disk m&#367;&#382;e b&yacute;t pln&yacute; nebo m&#367;&#382;e b&yacute;t po&#353;kozen. <br>
+'info_erreur_systeme2' => 'Pevn&yacute; disk m&#367;&#382;e b&yacute;t pln&yacute; nebo m&#367;&#382;e b&yacute;t po&#353;kozen. <br />
  <font color=\'red\'>Zkuste <a href=\'@script@\'>opravit datab&aacute;zi</a>,
  nebo kontaktujte sv&eacute;ho poskytovatele prostoru pro web.</font>',
 'info_fini' => 'Hotovo!',
@@ -440,7 +440,7 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_grand_ecran' => 'Velk&eacute; zobrazen&iacute;',
 'info_image_aide' => 'N&Aacute;POV&#282;DA',
 'info_image_process_titre' => 'N&aacute;vod k vytvo&#345;en&iacute; n&aacute;hled&#367;',
-'info_impossible_lire_page' => '<B>Chyba!</b> Str&aacute;nku nelze &#269;&iacute;st <tt><html>@test_proxy@</html></tt> p&#345;es proxy br&aacute;nu <tt>',
+'info_impossible_lire_page' => '<b>Chyba!</b> Str&aacute;nku nelze &#269;&iacute;st <tt><html>@test_proxy@</html></tt> p&#345;es proxy br&aacute;nu <tt>',
 'info_inclusion_directe' => 'P&#345;&iacute;m&eacute; vlo&#382;en&iacute;:',
 'info_inclusion_vignette' => 'Vlo&#382;it n&aacute;hled:',
 'info_installation_systeme_publication' => 'Instalace publika&#269;n&iacute;ho syst&eacute;mu ...',
@@ -525,9 +525,9 @@ D&#283;kujeme v&aacute;m za &uacute;&#269;ast
 'info_sites_referencer' => 'Zadat odkaz na web',
 'info_supprimer_vignette' => 'odstranit n&aacute;hled',
 'info_sur_site_public' => 'Nepou&#382;&iacute;v&aacute; se',
-'info_symbole_bleu' => '<B>Modr&yacute;m</B> symbolem je ozna&#269;ena <B>intern&iacute; pozn&aacute;mka</B>, tj. zpr&aacute;va ur&#269;en&aacute; pro osobn&iacute; pot&#345;ebu.',
-'info_symbole_jaune' => '<B>&#381;lut&yacute;m</B> symbolem je ozna&#269;ena <B>zpr&aacute;va pro v&#353;echny redaktory</B>: m&#367;&#382;e ji upravovat kter&yacute;koli ze spr&aacute;vc&#367; a zobrazuje se v&#353;em redaktor&#367;m.',
-'info_symbole_vert' => '<B>Zelen&yacute;m</B> symbolem jsou ozna&#269;eny <B>zpr&aacute;vy vym&#283;&#328;ovan&eacute; s ostatn&iacute;mi u&#382;ivateli</B> webu.',
+'info_symbole_bleu' => '<b>Modr&yacute;m</b> symbolem je ozna&#269;ena <b>intern&iacute; pozn&aacute;mka</b>, tj. zpr&aacute;va ur&#269;en&aacute; pro osobn&iacute; pot&#345;ebu.',
+'info_symbole_jaune' => '<b>&#381;lut&yacute;m</b> symbolem je ozna&#269;ena <b>zpr&aacute;va pro v&#353;echny redaktory</b>: m&#367;&#382;e ji upravovat kter&yacute;koli ze spr&aacute;vc&#367; a zobrazuje se v&#353;em redaktor&#367;m.',
+'info_symbole_vert' => '<b>Zelen&yacute;m</b> symbolem jsou ozna&#269;eny <b>zpr&aacute;vy vym&#283;&#328;ovan&eacute; s ostatn&iacute;mi u&#382;ivateli</b> webu.',
 'info_syndication' => 'syndikace:',
 'info_syndication_articles' => '&#269;l&aacute;nek/&#269;l&aacute;nk&#367;',
 'info_telecharger' => 'Odeslat z po&#269;&iacute;ta&#269;e:',
@@ -724,19 +724,19 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
     vlo&#382;eny. Podle ve&#345;ejn&eacute;ho vzhledu str&aacute;nek
     se mohou zobrazit jako p&#345;ilo&#382;en&eacute; dokumenty.',
 'texte_erreur_mise_niveau_base' => 'P&#345;i aktualizaci datab&aacute;ze do&#353;lo k chyb&#283;.
-      Obr&aacute;zek <B>@fichier@</B> nebylo mo&#382;n&eacute; p&#345;edat (&#269;l&aacute;nek @id_article@).<p>
+      Obr&aacute;zek <b>@fichier@</b> nebylo mo&#382;n&eacute; p&#345;edat (&#269;l&aacute;nek @id_article@).<p>
       Pe&#269;liv&#283; si poznamenejte toto &#269;&iacute;slo, zkuste aktualizaci
       a p&#345;esv&#283;d&#269;te se, &#382;e obr&aacute;zky jsou i nad&aacute;le v &#269;l&aacute;nc&iacute;ch
       zobrazeny.',
 'texte_inc_auth_1' => 'P&#345;ihl&aacute;sili jsgte se jako
-  <B>@auth_login@</B>, ale toto u&#382;ivatelsk&eacute; jm&eacute;no (ji&#382;) v datab&aacute;zi neexistuje. 
+  <b>@auth_login@</b>, ale toto u&#382;ivatelsk&eacute; jm&eacute;no (ji&#382;) v datab&aacute;zi neexistuje. 
   Zkuste',
 'texte_inc_auth_2' => 'znovu p&#345;ipojit',
 'texte_inc_auth_3' => 'po opu&#353;t&#283;n&iacute;
   restartujte v p&#345;&iacute;pad&#283; pot&#345;eby prohl&iacute;&#382;e&#269;.',
 'texte_inc_config' => 'N&iacute;&#382;e uveden&eacute; &uacute;pravy v&yacute;znamn&#283; ovliv&#328;uj&iacute;
   fungov&aacute;n&iacute; webu. M&#283;nit tato nastaven&iacute; by m&#283;li jenom u&#382;ivatel&eacute;, kte&#345;&iacute; dob&#345;e v&#283;d&iacute;,
- jak syst&eacute;m SPIP funguje. <P align="justify"><B>Obecn&#283;
+ jak syst&eacute;m SPIP funguje. <p align="justify"><b>Obecn&#283;
  plat&iacute;, &#382;e s t&#283;mito str&aacute;nkami by m&#283;l pracovat pouze hlavn&iacute; spr&aacute;vce va&#353;eho webu.</b>',
 'texte_inc_meta_1' => 'P&#345;i pokusu o z&aacute;pis do souboru  <code>@fichier@</code> do&#353;lo k syst&eacute;mov&eacute; chyb&#283;. Jako&#382;to spr&aacute;vce webu',
 'texte_inc_meta_2' => 'zkontrolujte opr&aacute;vn&#283;n&iacute; k z&aacute;pisu ',
@@ -770,6 +770,7 @@ a znovu se ke str&aacute;nk&aacute;m p&#345;ipoj&iacute;te.
 'titre_liens_entrants' => 'P&#345;&iacute;choz&iacute; odkazy',
 'titre_mots_cles' => 'KL&Iacute;&#268;OV&Aacute; SLOVA',
 'titre_page_admin_vider' => 'Nepou&#382;&iacute;v&aacute; se',
+'titre_page_etat_traductions' => '<pLUS_UTILISE><NEW><NEW><NEW><NEW><NEW>Estado de las traducciones',
 'titre_probleme_technique' => 'Varov&aacute;n&iacute;: Z technick&yacute;ch d&#367;vod&#367; (server MySQL) je tato &#269;&aacute;st webu nep&#345;&iacute;stupn&aacute;.<p>D&#283;kujeme v&aacute;m za pochopen&iacute;.',
 'titre_publier_document' => 'ZVE&#344;EJNIT DOKUMENT V T&Eacute;TO &#268;&Aacute;STI',
 'titre_statistiques' => 'Statistiky str&aacute;nek',

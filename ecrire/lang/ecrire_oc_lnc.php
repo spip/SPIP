@@ -135,7 +135,7 @@ la documentacion d\'SPIP</a>.',
 'entree_base_donnee_2' => '(Sovent, aquela adrei&ccedil;a correspond a la del v&ograve;stre sit, de c&ograve;ps correspond a la men&ccedil;on "localhost", de c&ograve;ps, se daissa vu&egrave;ja completament.)',
 'entree_biographie' => 'Biografia braca, en qualques mots.',
 'entree_breve_publiee' => 'Aquela br&egrave;va la cal publicar?',
-'entree_chemin_acces' => '<B>Intrar</b> lo camin d\'acc&egrave;s:',
+'entree_chemin_acces' => '<b>Intrar</b> lo camin d\'acc&egrave;s:',
 'entree_cle_pgp' => 'La v&ograve;stra clau PGP',
 'entree_contenu_rubrique' => '(Contengut de la rubrica en qualques mots.)',
 'entree_description_site' => 'Descripcion del sit',
@@ -145,7 +145,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
  aquelas informacions.',
 'entree_infos_perso' => 'Qual s&egrave;tz?',
 'entree_interieur_rubrique' => 'Dintre la rubrica:',
-'entree_liens_sites' => '<B>Ligam ipert&egrave;xt</b> (refer&eacute;ncia, sit de vesitar...)',
+'entree_liens_sites' => '<b>Ligam ipert&egrave;xt</b> (refer&eacute;ncia, sit de vesitar...)',
 'entree_login' => 'Lo v&ograve;stre login',
 'entree_login_connexion_1' => 'Lo login de connexion',
 'entree_login_connexion_2' => '(Correspond de c&ograve;ps al v&ograve;stre login d\'acc&egrave;s a l\'FTP; de c&ograve;ps se daissa vu&egrave;g)',
@@ -162,7 +162,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'entree_port_annuaire' => 'Lo num&egrave;ro de p&ograve;rt de l\'annuari',
 'entree_signature' => 'Signatura',
 'entree_texte_breve' => 'T&egrave;xt de la br&egrave;va',
-'entree_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]<BR>',
+'entree_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]<br />',
 'entree_url' => 'L\'adrei&ccedil;a (URL) del v&ograve;stre sit',
 'erreur_plugin_fichier_absent' => 'Fichi&egrave;r absent',
 'erreur_plugin_fichier_def_absent' => 'Fichi&egrave;r de definicion absent',
@@ -198,7 +198,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'icone_creer_rubrique_2' => 'Crear una rubrica n&ograve;va',
 'icone_ecrire_nouvel_article' => 'Las br&egrave;vas contengudas dins aquela rubrica',
 'icone_envoyer_message' => 'Mandar aquel messatge',
-'icone_evolution_visites' => 'Evolucion de las vesitas<br>@visites@ vesitas',
+'icone_evolution_visites' => 'Evolucion de las vesitas<br />@visites@ vesitas',
 'icone_modif_groupe_mots' => 'Modificar aquel grop de mots',
 'icone_modifier_article' => 'Modificar aquel article',
 'icone_modifier_breve' => 'Modificar aquela br&egrave;va',
@@ -224,7 +224,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_1_breve' => '1 br&egrave;va',
 'info_1_site' => '1 sit',
 'info_activer_cookie' => 'Pod&egrave;tz activar un <b>cookie de correspond&eacute;ncia</b>; aqu&ograve; vos permetr&agrave; de passar aisit del sit public al sit privat.',
-'info_activer_forum_public' => '<I>Per activar los forums publics, volgatz causir lor m&ograve;de de moderacion predefinit:</i>',
+'info_activer_forum_public' => '<i>Per activar los forums publics, volgatz causir lor m&ograve;de de moderacion predefinit:</i>',
 'info_admin_gere_rubriques' => 'Aquel administrator ger&iacute;s las rubricas seguentas&nbsp;:',
 'info_admin_gere_toutes_rubriques' => 'Aquel administrator ger&iacute;s <b>totas las rubricas</b>.',
 'info_administrateur' => 'Administrator',
@@ -274,9 +274,9 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_changer_nom_groupe' => 'Cambiar lo nom d\'aquel grop&nbsp;:',
 'info_chapeau' => 'Cap&egrave;l',
 'info_chapeau_2' => 'Cap&egrave;l&nbsp;:',
-'info_chemin_acces_1' => 'Opcions&nbsp;: <B>camin d\'acc&egrave;s dins l\'annuari</b>',
+'info_chemin_acces_1' => 'Opcions&nbsp;: <b>camin d\'acc&egrave;s dins l\'annuari</b>',
 'info_chemin_acces_2' => 'Ara dev&egrave;tz configurar lo camin d\'acc&egrave;s a las informacions dins l\'annuari.',
-'info_chemin_acces_annuaire' => 'Opcions:<B>camin d\'acc&egrave;s dins l\'annuari',
+'info_chemin_acces_annuaire' => 'Opcions:<b>camin d\'acc&egrave;s dins l\'annuari',
 'info_choix_base' => 'Tresena estapa:',
 'info_classement_1' => '<sup>i&egrave;r</sup> de @liste@',
 'info_classement_2' => '<sup>nd</sup> de @liste@',
@@ -285,23 +285,23 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_config_suivi' => 'S\'aquela adrei&ccedil;a correspond a una lista de corri&egrave;r, pod&egrave;tz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants al sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista pel web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la lista de difusion d\'aqueste sit. Alara recebretz per e-mail los anoncis d\'articles e de br&egrave;vas que se prepausa a la publicacion.',
 'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara nov&egrave;l&nbsp;:',
-'info_connexion_base' => 'Segonda estapa: <B>Ensag de connexion a la basa</b>',
+'info_connexion_base' => 'Segonda estapa: <b>Ensag de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p /> Pod&egrave;tz passar a l\'estapa seguenta.',
-'info_connexion_mysql' => 'Primi&egrave;ra estapa:<B>V&ograve;stra connexion MySQL</b>',
+'info_connexion_mysql' => 'Primi&egrave;ra estapa:<b>V&ograve;stra connexion MySQL</b>',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_contact' => 'Contacte',
 'info_contenu_articles' => 'Contengut dels articles',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots clau del sit',
 'info_creation_paragraphe' => '(Per crear de paragrafes, basta que daissetz de linhas vu&egrave;jas.)',
-'info_creation_rubrique' => 'Abans de poder escriure d\'articles,<BR> dev&egrave;tz crear almens una rubrica.<BR>',
-'info_creation_tables' => 'Quatrena estapa: <B>Creacion de las taulas de la basa</b>',
-'info_creer_base' => '<B>Crear</b> una basa de donadas nov&egrave;la:',
+'info_creation_rubrique' => 'Abans de poder escriure d\'articles,<br /> dev&egrave;tz crear almens una rubrica.<br />',
+'info_creation_tables' => 'Quatrena estapa: <b>Creacion de las taulas de la basa</b>',
+'info_creer_base' => '<b>Crear</b> una basa de donadas nov&egrave;la:',
 'info_dans_groupe' => 'Dins lo grop&nbsp;:',
 'info_dans_rubrique' => 'Dins la rubrica&nbsp;:',
 'info_date_publication_anterieure' => 'Data de redaccion anteriora:',
 'info_date_referencement' => 'DATA DE REFER&Eacute;NCIAMENT D\'AQUEL SIT:',
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
-<B>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
+<b>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
  <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
 'info_derniere_etape' => 'Darri&egrave;ra estapa: Es acabat!',
 'info_derniere_syndication' => 'La darri&egrave;ra sindicacion d\'aquel sit se fagu&egrave;t lo',
@@ -339,9 +339,9 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'escambiar de messatges entre redactors, de servar de mementos (per v&ograve;stre usatge personal) o d\'afichar d\'anoncis sus la pagina d\'acu&egrave;lh de l\'espaci privat (se s&egrave;tz administrator/tritz).',
 'info_gauche_numero_auteur' => 'AUTOR NUM&Egrave;RO',
 'info_gauche_numero_breve' => 'BR&Egrave;VA NUM&Egrave;RO',
-'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista dels <I>referidors</i>, valent a dire dels sits que contenon de ligams menant cap a v&ograve;stre quite sit, mas unicament per i&egrave;r e u&egrave;i: aquela lista s\'actualiza cada 24 oras.',
-'info_gauche_suivi_forum' => 'La pagina de <I>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions del forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
-'info_gauche_suivi_forum_2' => 'La pagina de <I>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions del forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
+'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista dels <i>referidors</i>, valent a dire dels sits que contenon de ligams menant cap a v&ograve;stre quite sit, mas unicament per i&egrave;r e u&egrave;i: aquela lista s\'actualiza cada 24 oras.',
+'info_gauche_suivi_forum' => 'La pagina de <i>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions del forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
+'info_gauche_suivi_forum_2' => 'La pagina de <i>seguit dels forums</i> es una aisina de gestion del v&ograve;stre sit (mas es pas un espaci per discutir o per redigir). Aficha totas las contribucions del forum public d\'aquel article e vos permet de gerir aquelas contribucions.',
 'info_gauche_visiteurs_enregistres' => 'Trobaretz aqu&iacute; los vesitaires registrats
  dins l\'espaci public del sit (forums amb abonament).',
 'info_generation_miniatures_images' => 'Congreacion de miniaturas dels imatges',
@@ -363,7 +363,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_image_process' => 'Volgatz seleccionar lo melhor met&ograve;de de fabricacion de las vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se cap d\'imatge apareis pas, aladonc lo servidor qu\'alb&egrave;rga v&ograve;stre sit l\'an pas configurat per utilizar d\'aisinas talas. Se desiratz d\'utilizar aquelas foncions, contactatz lo responsable tecnic e demandatz las extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
 'info_images_auto' => 'Imatges calculats automaticament',
-'info_informations_personnelles' => 'Cinquena estapa: <B>Informacions personalas</b>',
+'info_informations_personnelles' => 'Cinquena estapa: <b>Informacions personalas</b>',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors nov&egrave;ls',
 'info_jeu_caractere' => 'J&ograve;c de caract&egrave;rs del sit',
 'info_jours' => 'jorns',
@@ -392,7 +392,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_mise_a_niveau_base_2' => '{{Atencion!}} Av&egrave;tz installada una version
   dels fichi&egrave;rs SPIP {anteriora} a la que i avi&aacute;
   abans sus aqueste sit: riscatz de p&egrave;rdre v&ograve;stra basa de donadas
-   e v&ograve;stre sit foncionar&agrave; pas mai.<br>{{Tornatz installar los
+   e v&ograve;stre sit foncionar&agrave; pas mai.<br />{{Tornatz installar los
   fichi&egrave;rs d\'SPIP.}}',
 'info_mode_fonctionnement_defaut_forum_public' => 'M&ograve;de de foncionament predefinit dels forums publics',
 'info_modifier_breve' => 'Modificar la br&egrave;va:',
@@ -490,7 +490,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_recharger_page' => 'Volgatz tornar cargar aquela pagina dins un momenton.',
 'info_recherche_auteur_a_affiner' => 'Tr&ograve;p de resultats per "@cherche_auteur@"; volgatz afinar la c&egrave;rca.',
 'info_recherche_auteur_ok' => 'Mai d\'un redactor trobat per "@cherche_auteur@":',
-'info_recherche_auteur_zero' => '<B>Pas cap de resultat trobat per &laquo;&nbsp;@cherche_auteur@&nbsp;&raquo;.',
+'info_recherche_auteur_zero' => '<b>Pas cap de resultat trobat per &laquo;&nbsp;@cherche_auteur@&nbsp;&raquo;.',
 'info_recommencer' => 'Volgatz tornar comen&ccedil;ar.',
 'info_redacteur_1' => 'Redactor',
 'info_redacteur_2' => 'qu\'acced&iacute;s a l\'espaci privat (<i>recomandat</i>)',
@@ -499,8 +499,8 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_redirection' => 'Redireccion',
 'info_referencer_doc_distant' => 'Referenciar un document dins l\'Internet:',
 'info_refuses' => 'V&ograve;stres articles refusats',
-'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</b>',
-'info_renvoi_article' => '<B>Redireccion.</b> Aquel article remanda a la pagina:',
+'info_reglage_ldap' => 'Opcions: <b>Reglatge de l\'importacion LDAP</b>',
+'info_renvoi_article' => '<b>Redireccion.</b> Aquel article remanda a la pagina:',
 'info_reserve_admin' => 'Sonque los administrators p&ograve;don modificar aquela adrei&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la salvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
@@ -792,7 +792,7 @@ una color indica lor estat:',
  una revista de premsa, un calendi&egrave;r d\'eveniments...',
 'texte_choix_base_1' => 'Causiss&egrave;tz v&ograve;stra basa:',
 'texte_choix_base_2' => 'Lo servidor MySQL conten mai d\'una basa de donadas.',
-'texte_choix_base_3' => '<B>Causiss&egrave;tz</b> &ccedil;ai sota la que v&ograve;stre albergador vos a atribuida:',
+'texte_choix_base_3' => '<b>Causiss&egrave;tz</b> &ccedil;ai sota la que v&ograve;stre albergador vos a atribuida:',
 'texte_commande_vider_tables_indexation' => 'Utilizatz aquela comanda per vojar las taulas d\'indexacion utilizadas pel cercador integrat a SPIP. Aqu&ograve; permetr&agrave;
  de ganhar d\'espaci disc.',
 'texte_comment_lire_tableau' => 'Lo reng de l\'article,
@@ -814,7 +814,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_crash_base' => 'Se v&ograve;stra basa de donadas a
  abocat, pod&egrave;tz ensajar una reparacion
  automatica.',
-'texte_creer_rubrique' => 'Abans de poder escriure d\'articles,<BR> dev&egrave;tz crear una rubrica.',
+'texte_creer_rubrique' => 'Abans de poder escriure d\'articles,<br /> dev&egrave;tz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE:',
 'texte_date_publication_anterieure' => 'Data de redaccion anteriora:',
 'texte_date_publication_anterieure_nonaffichee' => 'Afichar pas cap de data de redaccion anteriora.',
@@ -887,9 +887,9 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor indicada coma predefinida conven en general.)',
 'texte_presente_plugin' => 'Aquela pagina lista los ajustons disponibles sus lo sit. Pod&egrave;tz activar los ajustons necessaris en marcar la casa correspondenta.',
-'texte_proposer_publication' => 'Quora auretz acabat v&ograve;stre article,<br> poiretz prepausar que si&aacute; publicat.',
+'texte_proposer_publication' => 'Quora auretz acabat v&ograve;stre article,<br /> poiretz prepausar que si&aacute; publicat.',
 'texte_proxy' => 'Dins d\'unes cases (intranet, rets protegidas...),
-  se p&ograve;t que calga utilizar un <I>proxy HTTP</i> per at&eacute;nher los sits sindicats.
+  se p&ograve;t que calga utilizar un <i>proxy HTTP</i> per at&eacute;nher los sits sindicats.
   En aquel cas, marcatz &ccedil;ai sota son adrei&ccedil;a, jos la forma
   <tt><html>http://proxy:8080</html></tt>. En general,
   daissaretz vu&egrave;ja aquela casa.',
@@ -902,7 +902,7 @@ tornar calcular sonque una pagina, passatz pusl&egrave;u per l\'espaci public e 
 'texte_recapitiule_liste_documents' => 'Aquesta pagina recapitula la ti&egrave;ra dels documents qu\'av&egrave;tz pla&ccedil;ats dins las rubricas. Per modificar las informacions de cada document, seguiss&egrave;tz lo ligam cap a la pagina de sa rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit cap a una autra URL.',
-'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br> Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;ai sota l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichi&egrave;r de sindicacion. SPIP agantar&agrave; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br /> Pod&egrave;tz referenciar l&egrave;u-l&egrave;u un sit web en indicar &ccedil;ai sota l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fichi&egrave;r de sindicacion. SPIP agantar&agrave; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
 'texte_requetes_echouent' => '<b>Quora d\'unas requistas MySQL abocan
   sistematicament e sens rason aparenta, se p&ograve;t
   qu\'aqu&ograve; venga de la quita basa de donadas.  </b><p />
@@ -949,7 +949,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'texte_test_proxy' => 'Per ensajar aquel proxy, indicatz aic&iacute; l\'adrei&ccedil;a d\'un sit web
     que lo voldriatz esprovar.',
 'texte_titre_02' => 'T&iacute;tol:',
-'texte_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]',
+'texte_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]',
 'texte_travail_article' => '@nom_auteur_modif@ a trabalhat sus aquel article fa @date_diff@ minutas',
 'texte_travail_collaboratif' => 'Quora es frequent que mai d\'un redactor 
   trabalhe sul meteis article, lo sist&egrave;ma
@@ -963,9 +963,9 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercador integrat 
     a SPIP, pod&egrave;tz far las c&egrave;rcas suls sits e
     articles sindicats de dos biaisses
-    diferents. <br>- Lo mai
+    diferents. <br />- Lo mai
     simple consist&iacute;s a recercar sonque dins los
-    t&iacute;tols e descriptius dels articles. <br>-
+    t&iacute;tols e descriptius dels articles. <br />-
     Lo segond biais, plan mai potent, permet
     a SPIP de cercar tanben dins lo t&egrave;xt dels
     sits referenciats. 
@@ -989,7 +989,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'titre_cadre_forum_interne' => 'Forum int&egrave;rne',
 'titre_cadre_interieur_rubrique' => 'Dintre la rubrica',
 'titre_cadre_numero_auteur' => 'AUTOR NUM&Egrave;RO',
-'titre_cadre_signature_obligatoire' => '<B>Signatura</b> [Obligat&ograve;ria]<BR>',
+'titre_cadre_signature_obligatoire' => '<b>Signatura</b> [Obligat&ograve;ria]<br />',
 'titre_config_fonctions' => 'Configuracion del sit',
 'titre_config_groupe_mots_cles' => 'Configuracion dels grops de mots clau',
 'titre_configuration' => 'Configuracion del sit',

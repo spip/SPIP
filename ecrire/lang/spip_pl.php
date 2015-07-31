@@ -167,17 +167,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_4' => 'jesie&#324;',
 'date_semaines' => 'tygodnie',
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
-'dirs_preliminaire' => 'Wst&#281;p: <B>Ustawienia pozwole&#324; dost&#281;pu</b>',
+'dirs_preliminaire' => 'Wst&#281;p: <b>Ustawienia pozwole&#324; dost&#281;pu</b>',
 'dirs_probleme_droits' => 'Problem z prawami dost&#281;pu',
-'dirs_repertoires_absents' => '<B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej pomylone zosta&#322;y du&#380;e i ma&#322;e litery.
+'dirs_repertoires_absents' => '<b>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej pomylone zosta&#322;y du&#380;e i ma&#322;e litery.
   Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i du&#380;ych liter.
   Je&#347;li rzeczywi&#347;cie wielko&#347;&#263; liter jest r&oacute;&#380;na, zmie&#324; nazwy katalog&oacute;w za pomoc&#261; dowolnego programu FTP
-  <P>Po wykonaniu tej operacji b&#281;dziesz m&oacute;g&#322;',
-'dirs_repertoires_suivants' => '<B>Nast&#281;puj&#261;ce katalogi nie s&#261; skonfigurowane do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
+  <p>Po wykonaniu tej operacji b&#281;dziesz m&oacute;g&#322;',
+'dirs_repertoires_suivants' => '<b>Nast&#281;puj&#261;ce katalogi nie s&#261; skonfigurowane do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
   do tych katalog&oacute;w. Procedura jest wyt&#322;umaczona od A-Z w przewodniku instalacji.
-  <P>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
+  <p>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
 
 
 // E
@@ -403,7 +403,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_erreur_requete' => 'B&#322;&#261;d zapytania :',
 'info_erreur_squelette2' => '&#379;aden szkielet <b>@fichier@</b> nie jest dost&#281;pny ...',
 'info_erreur_systeme' => 'B&#322;&#261;d systemu (errno @errsys@)',
-'info_erreur_systeme2' => 'Albo dysk twardy jest pe&#322;ny albo uszkodzona jest baza danych. <br>
+'info_erreur_systeme2' => 'Albo dysk twardy jest pe&#322;ny albo uszkodzona jest baza danych. <br />
  <font color=\'red\'>Spr&oacute;buj <a href=\'@script@\'>naprawi&#263; baz&#281; danych</a>,
  lub skontaktuj si&#281; z administratorem serwera.</font>',
 'info_fini' => 'Zako&#324;czono!',
@@ -412,7 +412,7 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_grand_ecran' => 'Ca&#322;y ekran',
 'info_image_aide' => 'POMOC',
 'info_image_process_titre' => 'Spos&oacute;b generowania miniaturek',
-'info_impossible_lire_page' => '<B>B&#322;&#261;d !</B> Nie mo&#380;na odczyta&#263; strony<tt><html>@test_proxy@</html></tt> za po&#347;rednictwem proxy<tt>',
+'info_impossible_lire_page' => '<b>B&#322;&#261;d !</b> Nie mo&#380;na odczyta&#263; strony<tt><html>@test_proxy@</html></tt> za po&#347;rednictwem proxy<tt>',
 'info_inclusion_directe' => 'Bezpo&#347;rednie do&#322;&#261;czenie&nbsp;:',
 'info_inclusion_vignette' => 'Do&#322;&#261;czenie miniaturki&nbsp;:',
 'info_installation_systeme_publication' => 'Instalacja systemu publikacji...',
@@ -474,6 +474,8 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_publie_1' => '[@nom_site_spip@] PUBLIKUJE: @titre@',
 'info_publie_2' => 'Artyku&#322; opublikowany
 -----------------',
+'info_question_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Szukaj',
 'info_rechercher_02' => 'Szukaj:',
 'info_remplacer_vignette' => 'Zamie&#324; domy&#347;ln&#261; miniaturk&#281; na wybrane przez ciebie logo&nbsp;:',
@@ -488,9 +490,9 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_site_refuse' => 'Strona internetowa odrzucona',
 'info_sites_referencer' => 'Dodaj link',
 'info_supprimer_vignette' => 'usu&#324; winiet&#281;',
-'info_symbole_bleu' => 'Symbol <B>niebieski</B> oznacza  <B>notatk&#281;</B>: n.p. wiadomo&#347;&#263; do prywatnego u&#380;ytku.',
-'info_symbole_jaune' => 'Symbol <B>&#380;&oacute;&#322;ty</B> oznacza <B>zawiadomienie dla wszystkich redaktor&oacute;w</B>: mo&#380;e by&#263; opublikowana przez wszystkich administrator&oacute;w, i jest widoczna dla wszystkich redaktor&oacute;w.',
-'info_symbole_vert' => 'Symbol <B>zielony</B> oznacza <B>wiadomo&#347;ci wymieniane z innymi u&#380;ytkownikami</B> strony.',
+'info_symbole_bleu' => 'Symbol <b>niebieski</b> oznacza  <b>notatk&#281;</b>: n.p. wiadomo&#347;&#263; do prywatnego u&#380;ytku.',
+'info_symbole_jaune' => 'Symbol <b>&#380;&oacute;&#322;ty</b> oznacza <b>zawiadomienie dla wszystkich redaktor&oacute;w</b>: mo&#380;e by&#263; opublikowana przez wszystkich administrator&oacute;w, i jest widoczna dla wszystkich redaktor&oacute;w.',
+'info_symbole_vert' => 'Symbol <b>zielony</b> oznacza <b>wiadomo&#347;ci wymieniane z innymi u&#380;ytkownikami</b> strony.',
 'info_syndication' => 'syndykacja&nbsp;:',
 'info_syndication_articles' => 'artyku&#322;(y)',
 'info_telecharger' => 'Za&#322;aduj ze swojego komputera:',
@@ -512,6 +514,10 @@ Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Twoje notatki',
 'item_breve_proposee' => 'Zaproponowany news',
+'item_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><pLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -661,19 +667,19 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
     do&#322;&#261;czone. Zale&#380;nie od uk&#322;adu stron publicznych,
     b&#281;d&#281; mog&#322;y pojawi&#263; si&#281; na nich jako za&#322;&#261;czniki.',
 'texte_erreur_mise_niveau_base' => 'B&#322;&#261;d bazy danych zaistnia&#322;y w trakcie uaktualniania.
-  Obrazek <B>@fichier@</B> nie przeszed&#322; (artyku&#322; @id_article@).
+  Obrazek <b>@fichier@</b> nie przeszed&#322; (artyku&#322; @id_article@).
   Zapisz te dane, i spr&oacute;buj ponownego uaktualnienia,
 a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyku&#322;ach.',
 'texte_inc_auth_1' => 'Jeste&#347; zalogowany za pomoc&#261;
-  loginu <B>@auth_login@</B>, ale nie istnieje on (ju&#380;) w bazie danych. 
+  loginu <b>@auth_login@</b>, ale nie istnieje on (ju&#380;) w bazie danych. 
   Spr&oacute;bujcie si&#281;',
 'texte_inc_auth_2' => 'po&#322;&#261;czy&#263;',
 'texte_inc_auth_3' => ', opuszczj&#261;c ewentualnie przegl&#261;dark&#281;
   i w&#322;&#261;czaj&#261;c j&#261; na powr&oacute;t.',
 'texte_inc_config' => 'Zmiany dokonane na tych stronach znacz&#261;co wp&#322;yn&#261; na
  funkcjonowanie Twojego serwisu. Radzimy nie zatwierdza&#263; tych zmian do momentu, w kt&oacute;rym nie b&#281;dziecie
- dobrze obeznani z funkcjonowaniem systemu SPIP. <P align="justify"><B>Najbardziej
- zalecamy, poproszenie o dokonanie zmian g&#322;&oacute;wnego adminsitratora serwisu.</B>',
+ dobrze obeznani z funkcjonowaniem systemu SPIP. <p align="justify"><b>Najbardziej
+ zalecamy, poproszenie o dokonanie zmian g&#322;&oacute;wnego adminsitratora serwisu.</b>',
 'texte_inc_meta_1' => 'System nie mo&#380;e zapisa&#263; plik&oacute;w <code>@fichier@</code>. Jako administrator strony,',
 'texte_inc_meta_2' => 'sprawd&#378; pozwolenia zapisu',
 'texte_inc_meta_3' => 'dla katalogu <code>@repertoire@</code>.',

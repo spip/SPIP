@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => ' Error de programaci&oacute;. Aquesta funci&oacute; no ha de ser cridada dins d\'aquest context.',
 'avis_erreur_mysql' => ' Error MySQL',
 'avis_erreur_sauvegarde' => ' Error al desar (@type@ @id_objet@) !',
+'avis_erreur_visiteur' => 'Problema d\'acc&eacute;s a l\'espai privat',
 
 
 // B
@@ -713,6 +714,7 @@ i tornar-vos a connectar al lloc.
   Anoteu aquesta refer&egrave;ncia, proveu altre cop
  l\'actualitzaci&oacute; i, finalment, verifiqueu que les imatges
  apareixen sempre als articles.',
+'texte_erreur_visiteur' => 'Heu intentat accedir a l\'espai privat amb una clau d\'acc&eacute;s que no ho permet.',
 'texte_inc_auth_1' => 'Us heu identificat amb el login
  (nom d\'usuari/&agrave;ria) <b>@auth_login@</b>, per&ograve; aquest no existeix a la base de dades.
   Proveu de ',
