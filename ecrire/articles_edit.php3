@@ -319,7 +319,7 @@ if ($new != "oui") {
 		while($entryName = readdir($myDir)){
 			if (!ereg("^\.", $entryName) AND eregi("(gif|jpg|png)$", $entryName)) {
 				$entryName = addslashes($entryName);
-				$afficher .= "\n<OPTION VALUE='ecrire/upload/$entryName'>$entryName";
+				$afficher .= "\n<OPTION VALUE='ecrire/upload/$entryName'>$entryName</OPTION>";
 			}
 		}
 		closedir($myDir);
