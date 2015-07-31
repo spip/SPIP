@@ -1134,11 +1134,14 @@ function calculer_critere_infixe_externe($boucle, $crit, $op, $desc, $col, $col_
 	else
 		$t =''; // jointure non declaree. La trouver.
 
+	// ici on construit le from pour fournir $col en piochant dans les jointures
 	$table = $calculer_critere_externe($boucle, $boucle->jointures, $col, $desc, ($crit->cond OR $op !='='), $t);
 
 	if (!$table) return '';
 
-	list($nom, $desc) = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
+	// il ne reste plus qu'a trouver le champ dans les from
+	list($nom, $desc) = trouver_champ_exterieur($col, $boucle->from, $boucle);
+
 	if (count(trouver_champs_decomposes($col,$desc))>1){
 		$col_alias = $col; // id_article devient juste le nom d'origine
 		$e = decompose_champ_id_objet($col);
