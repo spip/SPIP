@@ -156,15 +156,25 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	return $r;
 }
 
-// http://doc.spip.org/@selecteur_rubrique_ajax
+/**
+ * http://doc.spip.org/@selecteur_rubrique_ajax
+ *
+ * $restreint indique qu'il faut limiter les rubriques affichees
+ * aux rubriques editables par l'admin restreint... or, ca ne marche pas.
+ * Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
+ * je laisse ca aux specialistes de l'ajax & des admins restreints
+ * note : toutefois c'est juste un pb d'interface, car question securite
+ * la verification est faite a l'arrivee des donnees (Fil)
+ *
+ *
+ * @param int $id_rubrique
+ * @param string $type
+ * @param bool $restreint
+ * @param int $idem
+ * @param string $do
+ * @return string
+ */
 function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) {
-
-       ## $restreint indique qu'il faut limiter les rubriques affichees
-       ## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
-       ## Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
-       ## je laisse ca aux specialistes de l'ajax & des admins restreints
-       ## note : toutefois c'est juste un pb d'interface, car question securite
-       ## la verification est faite a l'arrivee des donnees (Fil)
 
 	if ($id_rubrique) {
 		$titre = sql_fetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique");
@@ -178,7 +188,8 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0, $do) 
 	$init = " disabled='disabled' type='text' value=\"" . $titre . "\"\nstyle='width:300px;'";
 
 	$url = generer_url_ecrire('selectionner',"id=$id_rubrique&type=$type&do=$do"
-	. (!$idem ? '' : ("&exclus=$idem&racine=" . ($restreint ? 'non' : 'oui'))) 
+	. (!$idem ? '' : "&exclus=$idem")
+	. ($restreint ? "" : "&racine=oui")
 	. (isset($GLOBALS['var_profile']) ? '&var_profile=1' : ''));
 
 

@@ -66,6 +66,7 @@ function changerhighlight (couche) {
 	.siblings()
 		.not(couche)
 		.removeClass('on');
+	jQuery('.petite-racine.on').removeClass('on');
 }
 
 function aff_selection (arg, idom, url, event) {
