@@ -548,17 +548,22 @@ function spip_sqlite_drop_index($nom, $table, $serveur='', $requeter=true) {
 	return spip_sqlite_query($query, $serveur, $requeter);
 }
 
+/**
+ * Retourne la derniere erreur generee
+ *
+ * @param $serveur nom de la connexion
+ * @return string erreur eventuelle
+**/
 // http://doc.spip.org/@spip_sqlite_error
-function spip_sqlite_error($query='', $serveur='',$requeter=true) {
+function spip_sqlite_error($serveur='') {
 	$link  = _sqlite_link($serveur);
 	
-	if (_sqlite_is_version(3, $link)){
+	if (_sqlite_is_version(3, $link)) {
 		$errs = $link->errorInfo();
 		$s = '';
 		foreach($errs as $n=>$e){
 			$s .= "\n$n : $e";
 		}
-		
 	} elseif ($link) {
 		$s = sqlite_error_string(sqlite_last_error($link));
 	} else {
@@ -568,9 +573,15 @@ function spip_sqlite_error($query='', $serveur='',$requeter=true) {
 	return $s;
 }
 
-
+/**
+ * Retourne le numero de la derniere erreur SQL
+ * (sauf que SQLite semble ne connaitre que 0 ou 1)
+ *
+ * @param $serveur nom de la connexion
+ * @return int 0 pas d'erreur / 1 une erreur
+**/
 // http://doc.spip.org/@spip_sqlite_errno
-function spip_sqlite_errno($serveur='',$requeter=true) {
+function spip_sqlite_errno($serveur='') {
 	$link  = _sqlite_link($serveur);
 	
 	if (_sqlite_is_version(3, $link)){
@@ -1207,7 +1218,7 @@ function _sqlite_charger_version($version=''){
 
 
 
-/*
+/**
  * Gestion des requetes ALTER non reconnues de SQLite :
  * ALTER TABLE table DROP column
  * ALTER TABLE table CHANGE [COLUMN] columnA columnB definition
@@ -1617,6 +1628,9 @@ class sqlite_traiter_requete{
  
 # spip_log("requete: $this->serveur >> $this->query",'query'); // boum ? pourquoi ?
 		if ($this->link){
+			// sauver la derniere requete
+			$GLOBALS['connexions'][$this->serveur ? $this->serveur : 0]['last'] = $this->query;
+			
 			if ($this->sqlite_version == 3) {
 				$r = $this->link->query($this->query);
 				// sauvegarde de la requete (elle y est deja dans $r->queryString)
