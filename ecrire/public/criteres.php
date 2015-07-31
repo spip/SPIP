@@ -241,7 +241,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 
 	//Trouver une jointure
 	$type = $boucle->type_requete;
-	$desc = trouver_table($type, $boucle);
+	$desc = trouver_table($type, $boucle->sql_serveur);
 	//Seulement si necessaire
 	if (!array_key_exists('id_rubrique', $desc['field'])) {
 		$cle = trouver_champ_exterieur('id_rubrique', $boucle->jointures, $boucle);
@@ -316,7 +316,7 @@ function calculer_critere_arg_dynamique($idb, &$boucles, $crit, $suffix='')
 {
 	$boucle = $boucles[$idb];
 	$arg = calculer_liste($crit, array(), $boucles, $boucle->id_parent);
-	$desc = trouver_table($boucle->type_requete, $boucle);
+	$desc = trouver_table($boucle->type_requete, $boucle->sql_serveur);
 	if (is_array($desc['field'])){
 		$liste_field = implode(',',array_map('_q',array_keys($desc['field'])));
 		return	"((\$x = preg_replace(\"/\\W/\",'',$arg)) ? ( in_array(\$x,array($liste_field))  ? ('$boucle->id_table.' . \$x$suffix):(\$x$suffix) ) : '')";
@@ -400,7 +400,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens='') {
 		}
 		// par champ. Verifier qu'ils sont presents.
 		else {
-			$desc = trouver_table($boucle->type_requete, $boucle);
+			$desc = trouver_table($boucle->type_requete, $boucle->sql_serveur);
 			if ($desc['field'][$par])
 				$par = $boucle->id_table.".".$par;
 		  // sinon tant pis, ca doit etre un champ synthetise (cf points)
@@ -431,7 +431,7 @@ function critere_par_jointure(&$boucle, $join)
   $t = array_search($table, $boucle->from);
   if (!$t) {
 	$type = $boucle->type_requete;
-	$desc = trouver_table($type, $boucle);
+	$desc = trouver_table($type, $boucle->sql_serveur);
 	$cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
 
 	if ($cle)
@@ -703,7 +703,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
 	$table = $boucle->id_table;
-	$desc = trouver_table($type, $boucle);
+	$desc = trouver_table($type, $boucle->sql_serveur);
 
 	list($fct, $col, $op, $val, $args_sql) =
 	  calculer_critere_infixe_ops($idb, $boucles, $crit);
@@ -800,7 +800,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 // http://doc.spip.org/@critere_secteur_forum
 function critere_secteur_forum($idb, &$boucles, $val, $crit)
 {
-	$desc = trouver_table('articles', $boucles[$idb]);
+	$desc = trouver_table('articles', $boucles[$idb]->sql_serveur);
 	return calculer_critere_externe_init($boucles[$idb], array($desc['table']), 'id_secteur', $desc, $crit->cond, true);
 }
 
@@ -953,7 +953,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array(), $mi
 		$new = $vu;
 		foreach($boucle->jointures as $v) {
 			if ($v && (!in_array($v,$vu)) && 
-			    ($def = trouver_table($v, $boucle))) {
+			    ($def = trouver_table($v, $boucle->sql_serveur))) {
 				$milieu = array_intersect($ddesc['key'], trouver_cles_table($def['key']));
 				$new[] = $v;
 				foreach ($milieu as $k)
@@ -993,7 +993,7 @@ function trouver_cles_table($keys)
 function trouver_champ_exterieur($cle, $joints, &$boucle, $checkarrivee = false)
 {
   foreach($joints as $k => $join) {
-    if ($join && $table = trouver_table($join, $boucle)) {
+    if ($join && $table = trouver_table($join, $boucle->sql_serveur)) {
       if (isset($table['field']) && array_key_exists($cle, $table['field'])
       	&& ($checkarrivee==false || $checkarrivee==$table['table'])) // si on sait ou on veut arriver, il faut que ca colle
 	return  array($table['table'], $table);
@@ -1120,7 +1120,7 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 	if ($suite) {
 	# Recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
-		$t = trouver_table($boucle->type_requete, $boucle);
+		$t = trouver_table($boucle->type_requete, $boucle->sql_serveur);
 		if ($t['field']["date$suite"])
 			$date_orig = 'date'.$suite;
 		else
