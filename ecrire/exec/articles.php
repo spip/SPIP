@@ -251,19 +251,17 @@ function boites_de_config_articles($id_article)
 	if (!$masque)
 		return '';
 
-	$invite = "<span class='verdana1'><b>"
+	$invite = "<b>"
 	. _T('bouton_forum_petition')
 	. aide('confforums')
-	. "</b></span>";
+	. "</b>";
 
-	return debut_cadre_relief("forum-interne-24.gif", true)
-	. block_parfois_visible('forumpetition',
-		$invite,
-		$masque,
-		'text-align: center;',
-		$visible = strstr($masque, '<!-- visible -->')
-	)
-	. fin_cadre_relief(true);
+	return 
+		cadre_depliable("forum-interne-24.gif",
+		  $invite,
+		  $visible = strstr($masque, '<!-- visible -->'),
+		  $masque,
+		  'forumpetition');
 }
 
 // http://doc.spip.org/@boite_article_virtuel
@@ -276,16 +274,17 @@ function boite_article_virtuel($id_article, $virtuel, $flag)
 
 	if (!$masque) return '';
 
-	$invite = "<span class='verdana1'>"
-	. '<b>'
+	$invite = '<b>'
 	._T('bouton_redirection')
 	. '</b>'
-	. aide ("artvirt")
-	. "</span>";
+	. aide ("artvirt");
 
-	$f = block_parfois_visible('redirection', $invite, $masque, 'text-align: center;', $virtuel);
-
-	return debut_cadre_relief("site-24.gif", true) . $f . fin_cadre_relief(true);
+	return
+		cadre_depliable("site-24.gif",
+		  $invite,
+		  $virtuel,
+		  $masque,
+		  'redirection');
 }
 
 // http://doc.spip.org/@bouton_modifier_articles
