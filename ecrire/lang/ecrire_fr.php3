@@ -307,7 +307,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_creer_base' => '<B>Cr&eacute;er</B> une nouvelle base de donn&eacute;es&nbsp;:',
 'info_dans_groupe' => 'Dans le groupe :',
 'info_dans_rubrique' => 'Dans la rubrique :',
-'info_date_publication_anterieure' => 'Date de publication ant&eacute;rieure :',
+'info_date_publication_anterieure' => 'Date de r&eacute;daction ant&eacute;rieure :',
 'info_date_referencement' => 'DATE DE R&Eacute;F&Eacute;RENCEMENT DE CE SITE&nbsp;:',
 'info_delet_mots_cles' => 'Vous avez	demand&eacute; &agrave; supprimer le mot-cl&eacute;
 <B>@titre_mot@</B> (@type_mot@). Ce mot-cl&eacute; &eacute;tant li&eacute; &agrave;
@@ -817,8 +817,8 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 			automatique.',
 'texte_creer_rubrique' => 'Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er une rubrique.',
 'texte_date_creation_article' => 'DATE DE CR&Eacute;ATION DE L\'ARTICLE&nbsp;:',
-'texte_date_publication_anterieure' => 'DATE DE PUBLICATION ANT&Eacute;RIEURE&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de publication ant&eacute;rieure.',
+'texte_date_publication_anterieure' => 'Date de r&eacute;daction ant&eacute;rieure&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de r&eacute;daction ant&eacute;rieure.',
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE&nbsp;:',
 'texte_demander_blocage_priori' => 'Les prochains liens en
 				provenance de ce site seront bloqu&eacute;s a priori.',

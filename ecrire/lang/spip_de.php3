@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Syndikation fehlgeschlagen: Backend-Datei dieser Website ist nicht erreichbar.',
 'avis_erreur' => 'Fehler: Siehe unten',
 'avis_erreur_connexion' => 'Verbindungsfehler',
+'avis_erreur_cookie' => 'Cookie-Problem',
 'avis_erreur_fonction_contexte' => 'Programmfehler. Diese Funktion darf nicht in diesem Zusammenhang aufgerufen werden.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => '&Auml;ndern',
 'bouton_chercher' => 'Suchen',
 'bouton_choisir' => 'Ausw&auml;hlen',
+'bouton_enregistrer' => 'Speichern',
 'bouton_radio_desactiver_messagerie_interne' => 'Interne Nachrichten abschalten',
 'bouton_radio_envoi_annonces' => 'Editorische Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_annonces' => 'Keine Ank&uuml;ndigungen verschicken',
@@ -181,6 +183,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Datei @fichier@ unauffindbar',
 'form_deja_inscrit' => 'Sie sind bereits eingetragen.',
 'form_email_non_valide' => 'Ihre E-Mail-Adresse ist ung&uuml;ltig.',
 'form_forum_access_refuse' => 'Sie haben keinen Zugang mehr zu dieser Website.',

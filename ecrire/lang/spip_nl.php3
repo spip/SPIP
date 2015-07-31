@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'De syndicatie is mislukt : het is onmogelijk de backend van deze site te bereiken.',
 'avis_erreur' => 'Fout : zie hieronder',
 'avis_erreur_connexion' => 'Verbinding mislukt',
+'avis_erreur_cookie' => 'Probleem met koekie',
 'avis_erreur_fonction_contexte' => 'Programmafout. Deze functie kan niet worden opgeroepen in deze context.',
 'avis_erreur_mysql' => 'MySQL fout',
 'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Wijzigen',
 'bouton_chercher' => 'Zoeken',
 'bouton_choisir' => 'Selecteren',
+'bouton_enregistrer' => '<NEW>Enregistrer',
 'bouton_radio_desactiver_messagerie_interne' => 'Intern berichtensysteem desactiveren',
 'bouton_radio_envoi_annonces' => 'versturen van editoriale aankondigingen',
 'bouton_radio_non_envoi_annonces' => 'Geen aankondigingen versturen',
@@ -183,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
 'form_deja_inscrit' => 'Je bent reeds ingeschreven.',
 'form_email_non_valide' => 'Je e-mailadres is niet geldig.',
 'form_forum_access_refuse' => 'Je hebt geen toegang meer tot deze website.',

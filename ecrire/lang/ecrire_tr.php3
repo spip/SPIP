@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'aide_non_disponible' => '&Ccedil;evrimi&ccedil;i yard&#305;m&#305;n bu k&#305;sm&#305; hen&uuml;z bu dilde mevcut de&#287;il.',
-'avis_acces_interdit' => 'Giri&#351; yasak.',
+'avis_acces_interdit' => 'Eri&#351;im yasak.',
 'avis_article_modifie' => 'Dikkat, @nom_auteur_modif@ bu metin &uuml;zerinde @date_diff@ dakika &ouml;nce &ccedil;al&#305;&#351;t&#305;',
 'avis_aucun_resultat' => 'Hi&ccedil; sonu&ccedil; yok.',
 'avis_chemin_invalide_1' => 'Se&ccedil;ti&#287;iniz yol',
@@ -40,7 +40,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'avis_site_syndique_probleme' => 'Dikkat : bu site ile haber payla&#351;&#305;m&#305;nda sorun &ccedil;&#305;kt&#305;&nbsp;; sistem ge&ccedil;ici bir s&uuml;re i&ccedil;in durduruldu. Bu sitenin haber payla&#351;&#305;m dosyas&#305;n&#305;n adresini kontrol edin (<b>@url_syndic@</b>), ve bilgileri almay&#305; yeniden deneyin.',
 'avis_sites_probleme_syndication' => 'Bu siteler haber payla&#351;&#305;m i&#351;leminde sorunla kar&#351;&#305;la&#351;t&#305;',
 'avis_sites_syndiques_probleme' => 'Haber payla&#351;&#305;lan bu sitelerde sorun &ccedil;&#305;kt&#305;',
-'avis_suppression_base' => 'D&#304;KKAT, silme i&#351;lemi temellidir',
+'avis_suppression_base' => 'D&#304;KKAT, verileri silme i&#351;lemi geri al&#305;namaz',
 'avis_version_mysql' => 'Kulland&#305;&#287;&#305;n&#305;z MySQL s&uuml;r&uuml;m&uuml; veri taban&#305; tablolar&#305;n&#305;n otomatik onar&#305;m&#305;na izin vermiyor.',
 
 
@@ -58,7 +58,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'bouton_checkbox_signature_unique_site' => 'site ba&#351;&#305;na sadece bir imza',
 'bouton_demande_publication' => 'Bu makalenin yay&#305;nlanmas&#305;n&#305; iste',
 'bouton_effacer_index' => 'Listeleri sil',
-'bouton_effacer_tout' => 'HEPSINI sil',
+'bouton_effacer_tout' => 'HEPS&#304;N&#304; sil',
 'bouton_envoi_message_02' => '&#304;LET&#304; YOLLA',
 'bouton_envoyer_message' => '&#304;letinin son hali : yolla',
 'bouton_forum_petition' => 'FORUM &amp; &#304;MZA KAMPANYASI',
@@ -77,7 +77,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'bouton_radio_envoi_annonces_adresse' => 'A&ccedil;&#305;klamalar&#305; bu adrese yolla :',
 'bouton_radio_envoi_liste_nouveautes' => 'Yenilikler listesini yolla',
 'bouton_radio_moderation_priori' => '&Ouml;nceden onay (yaz&#305;lan iletiler onayland&#305;ktan sonra yay&#305;nlan&#305;yor).',
-'bouton_radio_modere_abonnement' => 'abonmanl&#305;k sistemiyle y&ouml;netilir',
+'bouton_radio_modere_abonnement' => 'abonelik sistemiyle y&ouml;netilir',
 'bouton_radio_modere_posteriori' => 'sonradan onay',
 'bouton_radio_modere_priori' => '&ouml;nceden onay',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Yazarlar listesinde g&ouml;z&uuml;kme',
@@ -103,7 +103,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'bouton_restaurer_base' => 'Veri taban&#305;n&#305;n eski haline getirilmesi',
 'bouton_suivant' => 'Bir sonraki ',
 'bouton_tenter_recuperation' => 'Tamir denemesi',
-'bouton_test_proxy' => 'Vekilin denenmesi',
+'bouton_test_proxy' => 'Vekili (proxy) dene',
 'bouton_vider_cache' => '&Ouml;nbelle&#287;in bo&#351;alt&#305;lmas&#305;',
 'bouton_voir_message' => 'Bu iletiyi ge&ccedil;erli k&#305;lmadan &ouml;nce g&ouml;r&uuml;nt&uuml;lenmesi',
 
@@ -111,7 +111,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 // C
 'cache_mode_compresse' => '&Ouml;nbellek dosyalar&#305; s&#305;k&#305;&#351;t&#305;r&#305;lm&#305;&#351; kipte saklan&#305;yor.',
 'cache_mode_non_compresse' => '&Ouml;nbellek dosyalar&#305; s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; kipte saklan&#305;yor.',
-'cache_modifiable_webmestre' => 'Bu parametreler sitenin Webmasteri (A&#287; Y&ouml;neticisi) taraf&#305;ndan de&#287;i&#351;tirilebilir.',
+'cache_modifiable_webmestre' => 'Bu parametreler site y&ouml;neticisi taraf&#305;ndan de&#287;i&#351;tirilebilir.',
 'calendrier_synchro' => 'iCal uyumlu bir g&uuml;nl&uuml;k uygulama yaz&#305;l&#305;m&#305; kullan&#305;yorsan&#305;z, onu bu sitedeki bilgilerle e&#351;zamanla&#351;t&#305;rabilirsiniz. ',
 
 
@@ -123,6 +123,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'diff_texte_ajoute' => 'Eklenmi&#351; metin',
 'diff_texte_deplace' => 'Yeri de&#287;i&#351;tirilmi&#351; metin',
 'diff_texte_supprime' => 'Silinmi&#351; metin',
+'double_clic_inserer_doc' => 'Bu k&#305;sayolu metne eklemek i&ccedil;in &ccedil;ift t&#305;klay&#305;n&#305;z',
 
 
 // E
@@ -139,16 +140,16 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'entree_chemin_acces' => 'Eri&#351;im yolunu giriniz',
 'entree_cle_pgp' => 'PGP anahtar&#305;n&#305;z',
 'entree_contenu_rubrique' => '(Bir ka&ccedil; s&ouml;zc&uuml;kle b&ouml;l&uuml;m i&ccedil;eri&#287;i.)',
-'entree_description_site' => 'Sitenin tarifi',
+'entree_description_site' => 'Sitenin tan&#305;m&#305;',
 'entree_identifiants_connexion' => 'Ba&#287;lant&#305; kimlik tan&#305;mlay&#305;c&#305;lar&#305;n&#305;z',
 'entree_informations_connexion_ldap' => 'L&uuml;tfen bu forma LDAP dizininize ba&#287;lant&#305; bilgilerini giriniz. Bu bilgiler size sistem ya da &#351;ebeke y&ouml;neticisi taraf&#305;ndan verilebilmeli.',
 'entree_infos_perso' => 'Siz kimsiniz ?',
 'entree_interieur_rubrique' => 'B&ouml;l&uuml;m i&ccedil;erisinde :',
 'entree_liens_sites' => '&Uuml;stmetin ba&#287;lant&#305;s&#305; (at&#305;flar, ziyaret edilecek site...)',
-'entree_login' => 'Login (giri&#351;) iniz',
-'entree_login_connexion_1' => 'Ba&#287;lant&#305; logini (giri&#351;i)',
-'entree_login_connexion_2' => '(Bazen FTP\'ye eri&#351;im logininize tekab&uuml;l eder, bazen bo&#351; b&#305;rak&#305;l&#305;r) ',
-'entree_login_ldap' => 'Ba&#351;lang&#305;&ccedil;taki LDAP logini',
+'entree_login' => 'Giri&#351;iniz',
+'entree_login_connexion_1' => 'Ba&#287;lant&#305; giri&#351;i',
+'entree_login_connexion_2' => '(Bazen FTP\'ye eri&#351;im giri&#351;inize kar&#351;&#305; d&uuml;&#351;er, bazen bo&#351; b&#305;rak&#305;l&#305;r) ',
+'entree_login_ldap' => 'Ba&#351;lang&#305;&ccedil;taki LDAP giri&#351;i',
 'entree_mot_passe' => 'Parolan&#305;z',
 'entree_mot_passe_1' => 'Ba&#287;lant&#305; parolas&#305;',
 'entree_mot_passe_2' => '(Bazen FTP parolan&#305;za tekab&uuml;l eder ; bazen bo&#351; b&#305;rak&#305;l&#305;r)',
@@ -172,8 +173,8 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'ical_methode_http' => 'Y&uuml;kleme',
 'ical_methode_webcal' => 'E&#351;zamanlama (webcal://)',
 'ical_texte_js' => 'Bir javascript sat&#305;r&#305; gayet basit bir&#351;ekilde, size ait herhangi bir sitede, bu sitede yay&#305;nlanan son makaleleri g&ouml;r&uuml;nt&uuml;lemenizi sa&#287;lar. ',
-'ical_texte_prive' => 'Tamamen ki&#351;isel kullan&#305;ma ayr&#305;lm&#305;&#351; bu takvim size, bu sitenin &ouml;zel edit&ouml;r faaliyetleri hakk&#305;nda bilgi verir (ki&#351;isel i&#351;ler ve randevular, &ouml;nerilen makaleler ve haberler...).',
-'ical_texte_public' => 'Bu takvim bu sitenin kamu faaliyetini izlemenizi sa&#287;lar (yay&#305;nlanan makeleler ve haberler).',
+'ical_texte_prive' => 'Tamamen ki&#351;isel kullan&#305;ma ayr&#305;lm&#305;&#351; bu takvim size, bu sitenin &ouml;zel edit&ouml;r etkinlikleri hakk&#305;nda bilgi verir (ki&#351;isel i&#351;ler ve randevular, &ouml;nerilen makaleler ve haberler...).',
+'ical_texte_public' => 'Bu takvim bu sitenin kamu etkinli&#287;ini izlemenizi sa&#287;lar (yay&#305;nlanan makeleler ve haberler).',
 'ical_texte_rss' => 'Bu sitenin yeniliklerini herhangi bir XML/RSS (Rich Site Summary) format&#305;ndaki dosya okuyucusunda sendikala&#351;t&#305;rabilirsiniz. SPIP\'e, uyumlu de&#287;i&#351;-toku&#351; format&#305; kullanan (sendikal&#305;)  ba&#351;ka sitelerde yay&#305;nlanan yenilikleri okuma olana&#287;&#305; veren de bu formatt&#305;r.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list ',
@@ -365,6 +366,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_identification_publique' => 'Kamu kimli&#287;iniz ...',
 'info_image_process' => 'L&uuml;tfen, uygun resime t&#305;klayarak, en iyi etiket yaratma y&ouml;ntemini se&ccedil;iniz. ',
 'info_image_process2' => '<b>NOT:</b> <i> Hi&ccedil; resim &ccedil;&#305;km&#305;yorsa, sitenizi a&#287;&#305;rlayan sunucu bu t&uuml;r ara&ccedil;lar kullanmak i&ccedil;in d&uuml;zenle&#351;tirilmemi&#351; demektir. E&#287;er bu i&#351;levleri kullanmak istiyorsan&#305;z, teknik yetkiliye ba&#351;vurun ve &laquo;GD&raquo; ya da &laquo;Imagick&raquo; aksesuarlar&#305;n&#305; isteyin.</i>',
+'info_images_auto' => 'Otomatik olarak hesaplanan resimler',
 'info_informations_personnelles' => 'Be&#351;inci a&#351;ama : ki&#351;isel bilgiler',
 'info_inscription_automatique' => 'Yeni edit&ouml;rlerin otomatik kayd&#305;',
 'info_jeu_caractere' => 'Sitedeki karakter &ccedil;e&#351;idi',
@@ -497,6 +499,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_redacteurs' => 'Edit&ouml;rler',
 'info_redaction_en_cours' => 'YAZILMA A&#350;AMASINDA',
 'info_redirection' => 'Y&ouml;nlendirme',
+'info_referencer_doc_distant' => 'Internet &uuml;zerinde bir dok&uuml;man&#305; i&#351;aret etmek&nbsp;:',
 'info_refuses' => 'Reddedilen makaleleriniz',
 'info_reglage_ldap' => 'LDAP ithalinin ayarlanmas&#305;.',
 'info_renvoi_article' => 'Y&ouml;nlendirme : bu makalenin at&#305;fta bulundu&#287;u sayfa :',
@@ -602,6 +605,9 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_visiteur_2' => 'Kamu sitesi i&ccedil;in',
 'info_visiteurs' => 'Ziyaret&ccedil;iler',
 'info_visiteurs_02' => 'Kamu sitesi ziyaret&ccedil;ileri ',
+'install_echec_annonce' => 'Kurulum b&uuml;y&uuml;k olas&#305;l&#305;kla ba&#351;ar&#305;s&#305;z olacak veya site &ccedil;al&#305;&#351;mayacak...',
+'install_extension_mbstring' => 'SPIP belirtilen programla &ccedil;al&#305;&#351;amaz&nbsp;:',
+'install_extension_php_obligatoire' => 'SPIP i&ccedil;in php uzant&#305;s&#305; zorunludur&nbsp;:',
 'install_select_langue' => 'Bir dil se&ccedil;iniz, sonra &laquo;&nbsp;bir sonraki&nbsp;&raquo; d&uuml;&#287;mesini t&#305;klay&#305;p y&uuml;kleme i&#351;lemini ba&#351;lat&#305;n&#305;z.',
 'intem_redacteur' => 'Edit&ouml;r',
 'item_accepter_inscriptions' => 'Kay&#305;tlar&#305;n kabul edilmesi',
@@ -732,6 +738,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 
 
 // T
+'taille_cache_image' => 'SPIP taraf&#305;ndan otomatik olarak hesaplanan resimler (dok&uuml;man ikonlar&#305;, grafik olarak g&ouml;sterilen ba&#351;l&#305;klar, TeX bi&ccedil;imindeki matematik i&#351;levler...) @dir@ dizininde toplam @taille@ yer tutuyor.',
 'taille_cache_infinie' => 'Bu site &Ouml;NBELLEK dizini/ i&ccedil;in &ouml;l&ccedil;&uuml; s&#305;n&#305;r&#305; &ouml;ng&ouml;rmemi&#351;tir.',
 'taille_cache_maxi' => 'SPIP, bu sitenin &Ouml;NBELLEK dizini/ &ouml;l&ccedil;&uuml;s&uuml;n&uuml; yakla&#351;&#305;k @octets@ lik veriyle s&#305;n&#305;rlamaya &ccedil;al&#305;&#351;&#305;yor.',
 'taille_cache_octets' => '&Ouml;nbelle&#287;in &ouml;l&ccedil;&uuml;s&uuml; &#351;u anda  @octets@ dir.',

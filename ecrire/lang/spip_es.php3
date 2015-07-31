@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'La sindicaci&oacute;n fall&oacute;: imposible acceder al &laquo;backend&raquo; de este sitio.',
 'avis_erreur' => 'Error: ver aqui abajo',
 'avis_erreur_connexion' => 'Error de conexi&oacute;n',
+'avis_erreur_cookie' => 'problema de cookie ',
 'avis_erreur_fonction_contexte' => 'Error de programacion.  No se debe llamar esta funcion en este contexto.',
 'avis_erreur_mysql' => 'Error MySQL',
 'avis_erreur_sauvegarde' => 'Error al hacer la copia de respaldo (@type@ @id_objet@)!',
@@ -168,14 +169,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <b>Regular los derechos de acceso</b>',
 'dirs_probleme_droits' => '<b>Problema de derechos de acceso</b>',
-'dirs_repertoires_absents' => '<B>No se pudieron encontrar las carpetas siguientes&nbsp;: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<B>No se pudieron encontrar las carpetas siguientes: <ul>@bad_dirs@.</ul> </b>
 <P>Es probable que se deba a un problema de escritura entre may&uacute;sculas y min&uacute;sculas.
   Verifica que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si no es el caso, cambia el nombre de las carpetas con tu software de FTP, de modo que se corrijan los errores.
   <P>Cuando hayas hecho esta manipulaci&oacute;n podr&aacute;s  ',
-'dirs_repertoires_suivants' => '<b>Los siguientes directorios no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
-<p>Para solucionar el problema debes utilizar un cliente FTP con el objetivo de regular los derechos de acceso de cada uno
-de los directorios mencionados. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
-<P>Una vez terminado este proceso, puedes 
+'dirs_repertoires_suivants' => '<b>Las carpetas siguientes no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
+<p>Para solucionar el problema debes utilizar un cliente FTP para cambiar los derechos de acceso a cada una
+de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.
+<P>Una vez terminado este proceso, podr&aacute;s  
 ',
 
 
@@ -187,7 +188,7 @@ de los directorios mencionados. El procedimiento se explica detalladamente en la
 
 
 // F
-'fichier_introuvable' => 'No se encuentra el fichero @fichier@',
+'fichier_introuvable' => 'No se encuentra el archivo @fichier@',
 'form_deja_inscrit' => 'Ya est&aacute;s inscrito.',
 'form_email_non_valide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
 'form_forum_access_refuse' => 'Ya no tienes acceso a este sitio.',
@@ -310,7 +311,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'icone_ecrire_article' => 'Nuevo art&iacute;culo',
 'icone_edition_site' => 'Edici&oacute;n del sitio',
 'icone_forum_administrateur' => 'Foro de administradoras y administradores',
-'icone_forum_suivi' => 'Gesti&oacute;n de los foros',
+'icone_forum_suivi' => 'Seguimiento de los foros',
 'icone_gestion_langues' => 'Gesti&oacute;n de idiomas',
 'icone_informations_personnelles' => 'Informaciones personales',
 'icone_interface_complet' => 'Interfaz completa',
@@ -330,9 +331,9 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'icone_statistiques_visites' => 'Estad&iacute;sticas de visitas',
 'icone_suivi_activite' => 'Seguir la vida del sitio',
 'icone_suivi_actualite' => 'Evoluci&oacute;n del&nbsp;sitio',
-'icone_suivi_forums' => 'Gesti&oacute;n de los foros',
+'icone_suivi_forums' => 'Seguir y administrar los foros',
 'icone_suivi_pettions' => 'Gesti&oacute;n de las peticiones',
-'icone_suivi_revisions' => 'Modificaciones de los art&iacute;culos',
+'icone_suivi_revisions' => 'Modificaciones de art&iacute;culos',
 'icone_supprimer_document' => 'Suprimir este documento',
 'icone_supprimer_image' => 'Suprimir esta imagen',
 'icone_supprimer_message' => 'Suprimir este mensaje',
@@ -433,7 +434,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_message_2' => 'MENSAJE',
 'info_message_supprime' => 'Mensaje suprimido',
 'info_mise_en_ligne' => 'Fecha de puesta en l&iacute;nea',
-'info_modification_parametres_securite' => 'modificaci&oacute;n de los par&aacute;metros de seguridad.',
+'info_modification_parametres_securite' => 'modificaciones de los par&aacute;metros de seguridad',
 'info_mois_courant' => 'En el mes corriente de :',
 'info_mot_cle_ajoute' => 'La palabra clave siguiente ha sido a&ntilde;adida al art&iacute;culo',
 'info_multi_herit' => 'Idioma por omisi&oacute;n',
@@ -590,7 +591,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'pass_choix_pass' => 'Escoged la nueva contrase&ntilde;a:',
 'pass_erreur' => 'Error',
 'pass_erreur_acces_refuse' => '<b>Error:</b> ya no tienes acceso a este sitio.',
-'pass_erreur_code_inconnu' => '<b>Error:</b> este c&oacute;digo no corresponde a ning&uacute;n visitante de los que tienen acceso a este sitio.',
+'pass_erreur_code_inconnu' => '<b>Error:</b> este c&oacute;digo no corresponde a ning&uacute;n visitante que tenga acceso a este sitio.',
 'pass_erreur_non_enregistre' => '<b>Error:</b> la direcci&oacute;n <tt>@email_oubli@</tt> no est&aacute; registrada en este sitio.',
 'pass_erreur_non_valide' => '<b>Error:</b> esta direcci&oacute;n <tt>@email_oubli@</tt> no es v&aacute;lida.',
 'pass_erreur_probleme_technique' => '<b>Error:</b> por un problema t&eacute;cnico, el mensaje no ha podido ser enviado.',
@@ -683,7 +684,7 @@ Debes intentar',
 'upload_fichier_zip_texte' => 'El archivo que te propones instalar es un archivo Zip.',
 'upload_fichier_zip_texte2' => 'Este archivo puede ser:',
 'upload_limit' => 'Este archivo es demasiado grande para el servidor; el tama&ntilde;o m&aacute;ximo autorizado en <i>upload</i> es de @max@.',
-'upload_zip_decompacter' => 'descomprimido y cada uno de los elementos que contiene instalados en el sitio. Los archivos que se van a instalar en el sitio son:',
+'upload_zip_decompacter' => 'descomprimido y cada elemento que contiene instalado en el sitio. Los archivos que se van a instalar en el sitio son:',
 'upload_zip_telquel' => 'instalado tal cual, como archivo Zip comprimido;',
 
 
