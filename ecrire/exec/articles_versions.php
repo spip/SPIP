@@ -44,7 +44,7 @@ function exec_articles_versions_dist()
 // Lire l'article
 //
 
-	if(!autoriser('voir_revisions', 'article', $id_article))
+	if(!autoriser('voirrevisions', 'article', $id_article))
 		return;
 
 

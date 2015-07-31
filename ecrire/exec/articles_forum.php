@@ -20,7 +20,7 @@ function exec_articles_forum_dist()
 {
 	$id_article = intval(_request('id_article'));
 
-	if (!autoriser('moderer_forum', 'article', $id_article))
+	if (!autoriser('modererforum', 'article', $id_article))
 		return;
 
 	$debut = intval(_request('debut'));
