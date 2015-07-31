@@ -85,7 +85,7 @@ function assembler($fond, $connect='') {
 			$renommer = generer_url_entite();
 			if ($renommer) {
 				$url = nettoyer_uri();
-				$a = $renommer($url, $fond);
+				$a = $renommer($url, $fond, $contexte);
 				if (is_array($a)) {
 					list($ncontexte, $type, $url_redirect, $nfond) = $a;
 					if (strlen($url_redirect)

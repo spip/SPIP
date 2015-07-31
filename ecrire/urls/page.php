@@ -44,6 +44,7 @@ function _generer_url_page($type,$id, $args='', $ancre='') {
 }
 
 // retrouve le fond et les parametres d'une URL abregee
+// le contexte deja existant est fourni dans args sous forme de tableau ou query string
 // http://doc.spip.org/@urls_page_dist
 function urls_page_dist($i, &$entite, $args='', $ancre='')
 {
@@ -56,8 +57,12 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	}
 
 	// voir s'il faut recuperer le id_* implicite et les &debut_xx;
+	if (is_array($args))
+		$contexte = $args;
+	else
+		parse_str($args,$contexte);
 	include_spip('inc/urls');
-	$r = nettoyer_url_page($i, $GLOBALS['contexte']);
+	$r = nettoyer_url_page($i, $contexte);
 	if ($r) return $r;
 
 	/*
@@ -82,7 +87,7 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 			$urls_anciennes = charger_fonction('propres','urls',true);
 		else
 			$urls_anciennes = charger_fonction('arbo','urls',true);
-		return $urls_anciennes?$urls_anciennes($url_propre, $entite):'';
+		return $urls_anciennes?$urls_anciennes($url_propre, $entite, $contexte):'';
 	}
 	/* Fin du bloc compatibilite url-propres */
 }

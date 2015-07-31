@@ -1700,20 +1700,15 @@ function regledetrois($a,$b,$c)
 }
 
 // Fournit la suite de Input-Hidden correspondant aux parametres de
-// l'URL donnee en argument, compatible avec les types_urls depuis [14444].
-// S'il s'agit de l'URL de la page d'appel, 
-// il sait retrouver les parametres implicites des types_urls cryptiques.
-// Si c'est un type_url cryptique sur autre chose, c'est parfois incomplet.
+// l'URL donnee en argument, compatible avec les types_urls depuis [14447].
 // cf. tests/filtres/form_hidden.html
 // http://doc.spip.org/@form_hidden
 function form_hidden($action) {
-	static $uri = '';
-  
-	if (!$uri) $uri = url_absolue(nettoyer_uri());
+
+	$fond = ''; // inutilise mais necessaire
 	$contexte = array();
-	if ($uri == url_absolue($action)
-	AND $renommer = generer_url_entite()
-	AND $p = $renommer($action, $contexte)
+	if ($renommer = generer_url_entite()
+	AND $p = $renommer($action, $fond, $contexte)
 	AND $p[3]) {
 		$contexte = $p[0];
 		$contexte['page'] = $p[3];
