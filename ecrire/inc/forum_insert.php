@@ -114,14 +114,13 @@ function mots_du_forum($ajouter_mot, $id_message)
 
 function forum_insert_secure($alea, $hash)
 {
-	include_spip('inc/session');
-
 	$ids = array();
 
 	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
 		$ids[$o] = ($x = intval($_POST[$o])) ? $x : '';
 	}
 
+	include_spip('inc/actions');
 	if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
 		$hash)) {
 		spip_log('erreur hash forum');

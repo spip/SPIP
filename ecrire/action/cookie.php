@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 function action_cookie_dist() {
-	include_spip('inc/session');
+	include_spip('inc/actions');
 	include_spip('inc/cookie');
 	action_spip_cookie_dist();
 }

@@ -52,7 +52,6 @@ function login_explicite($login, $cible) {
 			$cible = _DIR_RESTREINT ;
 	}
 
-	include_spip('inc/session');
 	verifier_visiteur();
 
 	// Si on est connecte, envoyer vers la destination

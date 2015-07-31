@@ -26,7 +26,7 @@ function action_joindre_dist()
     $sousaction5,
     $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
-	include_spip('inc/session');
+	include_spip('inc/actions');
 	if (!verifier_action_auteur("$action-$arg", $hash, $id_auteur)) {
 		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));

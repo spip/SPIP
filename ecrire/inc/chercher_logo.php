@@ -101,8 +101,9 @@ function afficher_boite_logo($id_objet, $id, $texteon, $texteoff, $script) {
 
 function indiquer_logo($titre, $id_objet, $mode, $id, $script) {
 
-		$afficher = "";
+		include_spip('inc/actions');
 		$dir_ftp = determine_upload();
+		$afficher = "";
 		if ($dir_ftp
 		AND $fichiers = preg_files($dir_ftp, '[.](gif|jpg|png)$')) {
 			foreach ($fichiers as $f) {
