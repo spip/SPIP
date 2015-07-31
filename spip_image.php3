@@ -355,10 +355,10 @@ if ($ajout_doc == 'oui') {
 			else $vars = $HTTP_GET_VARS;
 			
 			$link = new Link("spip_image.php3");
-			
+			$link->addVar("image_name", $image_name);
 			while (list ($key, $val) = each ($vars)) {
 				if ($key == "image" OR $key == "image2") {
-					$link->addVar("image_name", $image_name);
+					//$link->addVar("image_name", $image_name);
 				}
 				else {
 					$link->addVar($key, $val);
