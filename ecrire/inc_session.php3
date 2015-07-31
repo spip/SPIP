@@ -132,74 +132,20 @@ function creer_cookie_session($auteur) {
 }
 
 
-// $login est optionnel
-/*function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
-	global $flag_js;
-
-	if ($GLOBALS['flag_ecrire']) $dir = "../";
-	if (!$redirect_echec) $redirect_echec = $redirect;
-
-	// Si Javascript, creer un formulaire fantome dans lequel sera recopie le md5
-	if ($flag_js) {
-		// Inclure les fonctions de calcul du MD5
-		echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
-
-		echo "<form action='$dir"."spip_cookie.php3' method='post' name='form_md5'>\n";
-		echo "<input type='hidden' name='session_login' value=''>\n";
-		echo "<input type='hidden' name='session_password_md5' value=''>\n";
-		echo "<input type='hidden' name='essai_login' value='oui'>\n";
-		echo "<input type='hidden' name='redirect' value='$redirect'>\n";
-		echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
-		echo "</form>\n";
-
-		// A la soumission du formulaire visible, recopier les valeurs
-		// dans le formulaire fantome et valider ce dernier
-		echo "<form name='form_login' onSubmit='".
-			"document.form_md5.session_login.value = this.session_login.value; ".
-			"document.form_md5.session_password_md5.value = calcMD5(this.session_password.value); ".
-			"this.action=\"javascript:document.form_md5.submit()\";".
-			"'>\n";
-	}
-	else {
-		echo "<form action='$dir"."spip_cookie.php3' method='post'>\n";
-	}
-	echo "<fieldset>\n";
-
-	echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
-	echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'><p>\n";
-
-	echo "<label><b>Mot de passe</b><br></label>";
-	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
-
-	if (!$flag_js) {
-		echo "<input type='hidden' name='essai_login' value='oui'>\n";
-		echo "<input type='hidden' name='redirect' value='$redirect'>\n";
-		echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
-	}
-	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
-
-	echo "</fieldset>\n";
-
-	echo "</form>";
-}*/
-
 function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
-	global $flag_js;
-
 	if ($GLOBALS['flag_ecrire']) $dir = "../";
 	if (!$redirect_echec) $redirect_echec = $redirect;
 
-	if ($flag_js) {
-		// Inclure les fonctions de calcul du MD5
-		echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
-	}
+	// Inclure les fonctions de calcul du MD5
+	echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
+
 	echo "<form action='$dir"."spip_cookie.php3' method='post'";
-	if ($flag_js) {
-		// Si Javascript, calculer le MD5 au submit et vider le mot de passe en clair
-		echo " onSubmit='".
-			"this.session_password_md5.value = calcMD5(this.session_password.value); ".
-			"this.session_password.value = \"\";'";
-	}
+
+	// Javascript, calculer le MD5 au submit et vider le mot de passe en clair
+	echo " onSubmit='".
+		"if (!(navigator.appName == \"Netscape\" && parseInt(navigator.appVersion) <= 4)) { this.session_password_md5.value = calcMD5(this.session_password.value); ".
+		"this.session_password.value = \"\"; }'";
+
 	echo ">\n";
 	echo "<fieldset>\n";
 
