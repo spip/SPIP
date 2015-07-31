@@ -95,17 +95,19 @@
       return query;
     },
 		regexAccent : [
-      [/[\xC0-\xC5]/ig,'a'],
-      [/[\xD2-\xD6\xD8]/ig,'o'],
+      [/[\xC0-\xC5\u0100-\u0105]/ig,'a'],
+      [/\xC7\u0106-\u010D/ig,'c'],
       [/[\xC8-\xCB]/ig,'e'],
-      [/\xC7/ig,'c'],
       [/[\xCC-\xCF]/ig,'i'],
+      [/\xD1/ig,'n'],
+      [/[\xD2-\xD6\xD8]/ig,'o'],
+      [/\u015A-\u0161/ig,'s'],
+      [/\u0162-\u0167/ig,'t'],
       [/[\xD9-\xDC]/ig,'u'],
       [/\xFF/ig,'y'],
-      [/\xD1/ig,'n'],
       [/[\x91\x92\u2018\u2019]/ig,'\'']
     ],
-    matchAccent : /[\x91\x92\u2018\u2019\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF]/ig,  
+    matchAccent : /[\x91\x92\xC0-\xC5\xC7-\xCF\xD1-\xD6\xD8-\xDC\xFF\u0100-\u010D\u015A-\u0167\u2018\u2019]/ig,  
 		replaceAccent: function(q) {
 		  SearchHighlight.matchAccent.lastIndex = 0;
       if(SearchHighlight.matchAccent.test(q)) {
