@@ -26,24 +26,37 @@ function exec_articles_dist()
 	$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$id_article"));
 
 	if (!$row) {
-		$res = _T('public:aucun_article');
-		debut_page("&laquo; $res &raquo;", "naviguer", "articles");
-		debut_grand_cadre();
-		fin_grand_cadre();
-	} else $res = articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('debut'), _request('trad_err'));
+		$res = $row['titre'] = _T('public:aucun_article');
+		$row['id_rubrique'] = 0;
+	} else {
+		$discuter = charger_fonction('discuter', 'inc');
+		$row['titre'] = sinon($row["titre"],_T('info_sans_titre'));
 
-	echo $res, fin_page();
+		$res = articles_affiche($id_article, $row, _request('cherche_auteur'), _request('ids'), _request('cherche_mot'), _request('select_groupe'), _request('trad_err'))
+		. "<br /><br />\n<div align='center'>"
+		. icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=" .rawurlencode($row['titre']) . "&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif", '', false)
+		. "</div><br />"
+		. $discuter($id_article, false,  _request('debut'));
+	}
+
+	debut_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "articles", "", $row['id_rubrique']);
+
+	echo debut_grand_cadre(true),
+		afficher_hierarchie($id_rubrique),
+		fin_grand_cadre(true),
+		$res,
+		fin_page();
 }
 
-function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $debut, $trad_err)
+function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot,  $select_groupe, $trad_err)
 {
 	global $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 	global $connect_id_auteur, $connect_statut, $options;
 
 	$id_rubrique = $row['id_rubrique'];
 	$statut_article = $row['statut'];
+	$titre = $row["titre"];
 	$surtitre = $row["surtitre"];
-	$titre = sinon($row["titre"],_T('info_sans_titre'));
 	$soustitre = $row["soustitre"];
 	$descriptif = $row["descriptif"];
 	$nom_site = $row["nom_site"];
@@ -79,7 +92,6 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 
 	$dater = charger_fonction('dater', 'inc');
 	$editer_auteurs = charger_fonction('editer_auteurs', 'inc');
-	$discuter = charger_fonction('discuter', 'inc');
 
 	if ($flag_editable AND ($spip_display != 4)) 
 		$iconifier = charger_fonction('iconifier', 'inc');
@@ -99,12 +111,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 		$traduction = charger_fonction('referencer_traduction', 'inc');
 	else $traduction ='';
 
-	debut_page("&laquo; $titre &raquo;", "naviguer", "articles", "", $id_rubrique);
-
-	$res =	debut_grand_cadre(true)
-	.	afficher_hierarchie($id_rubrique)
-	.	fin_grand_cadre(true)
-	.	debut_gauche('accueil',true)
+	$res = debut_gauche('accueil',true)
 
 	.	boite_info_articles($id_article, $statut_article, $visites, $id_version)
 
@@ -162,13 +169,7 @@ function articles_affiche($id_article, $row, $cherche_auteur, $ids, $cherche_mot
 	 ? $instituer_article($id_article)
 	 : '')
 	. "</div></div>"
-
-	. fin_cadre_relief(true)
-
-	. "<br /><br />\n<div align='center'>"
-	. icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&id_article=$id_article&titre_message=" .rawurlencode($titre) . "&url=" . generer_url_retour("articles","id_article=$id_article")), "forum-interne-24.gif", "creer.gif", '', false)
-	. "</div><br />"
-	. $discuter($id_article, false, $debut);
+	. fin_cadre_relief(true);
 }
 
 function articles_documents($flag_editable, $type, $id)

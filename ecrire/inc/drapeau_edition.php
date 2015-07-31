@@ -127,7 +127,7 @@ function debloquer_tous($id_auteur) {
 // http://doc.spip.org/@debloquer_edition
 function debloquer_edition($id_auteur, $debloquer_article, $type='article') {
 	$edition = lire_tableau_edition();
-var_dump($edition);
+
 	foreach ($edition as $objet => $data)
 		if ($data[0] == $id_auteur
 		AND $objet == $type.$debloquer_article) {
