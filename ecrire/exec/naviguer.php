@@ -18,37 +18,30 @@ include_spip('inc/forum');
 // http://doc.spip.org/@exec_naviguer_dist
 function exec_naviguer_dist()
 {
-	global $connect_toutes_rubriques;
-	global $spip_display,$spip_lang_left,$spip_lang_right;
-
 	$cherche_mot = _request('cherche_mot');
 	$id_rubrique = intval(_request('id_rubrique'));
 	$select_groupe = intval(_request('select_groupe'));
 
-	$row = sql_fetch(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-	if ($row) {
+	if (!$id_rubrique) {
+		$lang = $statut = $titre = $extra = $id_parent=$id_secteur='';
+		$ze_logo = "racine-site-24.gif";
+	} else {
+		$row = sql_fetsel('id_parent, id_secteur, titre, statut, extra,  lang, descriptif, texte', 'spip_rubriques', "id_rubrique=$id_rubrique");
+
+		if (!$row OR !autoriser('voir','rubrique',$id_rubrique)) {
+			include_spip('inc/minipres');
+			echo minipres();
+			exit;
+		}
 		$id_parent=$row['id_parent'];
 		$id_secteur=$row['id_secteur'];
 		$titre=$row['titre'];
-		$descriptif=$row['descriptif'];
-		$texte=$row['texte'];
 		$statut = $row['statut'];
-		$extra = $row["extra"];
 		$lang = $row["lang"];
-	} elseif ($id_rubrique)
-	      {
-		include_spip('inc/minipres');
-		echo minipres();
-		exit;
-	      }
 
-	else $lang = $statut = $titre = $descriptif = $texte = $extra = $id_parent='';
-
-	if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";
-	else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
-	else $ze_logo = "rubrique-24.gif";
-
-	$flag_editable = autoriser('publierdans','rubrique',$id_rubrique);
+		if ($id_parent == 0) $ze_logo = "secteur-24.gif";
+		else $ze_logo = "rubrique-24.gif";
+	}
 
 	pipeline('exec_init',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
 
@@ -64,67 +57,64 @@ function exec_naviguer_dist()
 	else $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 	echo fin_grand_cadre(true);
 
-	changer_typo($lang);
-	  
-	if (!autoriser('voir','rubrique',$id_rubrique)){
-		echo "<strong>"._T('avis_acces_interdit')."</strong>";
-		echo fin_page();
-		exit;
-  }
-
 	echo debut_gauche('', true);
 	
-	if (autoriser('publierdans','rubrique',$id_rubrique)) {
-		$parent = sql_fetch(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		if (!$parent['id_parent']) {
-		  list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
-		  $n_forums = sql_countsel($from, $where);
-		}
-	}
-	$iconifier = charger_fonction('iconifier', 'inc');
+	$flag_editable = autoriser('publierdans','rubrique',$id_rubrique);
 
-	echo infos_naviguer($id_rubrique, $statut, $ze_logo, $n_forums);
+	if ($flag_editable AND !$id_parent) {
+		list($from, $where) = critere_statut_controle_forum('prop', $id_rubrique);
+		$n_forums = sql_countsel($from, $where);
+	} else 	$n_forums = 0;
+
+	changer_typo($lang);
+	echo infos_naviguer($id_rubrique, $statut, $row, $n_forums);
+
+	$iconifier = charger_fonction('iconifier', 'inc');
 	echo ($iconifier('id_rubrique', $id_rubrique, 'naviguer', false));
 
-
-	echo bloc_des_raccourcis(icone_horizontale(_T('icone_tous_articles'), generer_url_ecrire("articles_page"), "article-24.gif", '', false, false));
-
+	echo raccourcis_naviguer($id_rubrique, $id_parent);
 
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));
-
-	//
-	// Afficher les boutons de creation d'article et de breve
-	//
-	/*if ($spip_display != 4) {
-		raccourcis_naviguer($id_rubrique, $id_parent);
-	}*/
 
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''));	  
 	echo debut_droite('', true);
 
-
 	$haut = montre_naviguer($id_rubrique, $titre, $id_parent, $ze_logo, $flag_editable);
-	if ($extra)
-		include_spip('inc/extra');
-	if ($id_rubrique > 0)
+
+	$boucles = contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
+
+	if ($id_rubrique > 0) {
 		$editer_mot = charger_fonction('editer_mot', 'inc');
+		$editer_mot = $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true);
+	} else $editer_mot = '';
+
+	if ($row['extra']) {
+		include_spip('inc/extra');
+		$extra = extra_affichage($extra, "rubriques");
+	} else $extra = "";
+
+	echo naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mot, $flag_editable, $boucles, $extra),
+	  fin_gauche(),
+	  fin_page();
+}
+
+function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $n_forums, $editer_mot, $flag_editable, $boucles, $extra)
+{
+	global $spip_lang_right, $connect_toutes_rubriques;
+
+	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
 
 	$onglet_proprietes = 
 		afficher_rubrique_rubrique($id_rubrique, $id_parent, $id_secteur, $connect_toutes_rubriques)
-		/// Mots-cles
-		. ($editer_mot ? $editer_mot('rubrique', $id_rubrique,  $cherche_mot,  $select_groupe, $flag_editable, true):"")
+		. $editer_mot
 		. langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 		. pipeline('affiche_milieu',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>''))
 	;
 
-	$afficher_contenu_objet = charger_fonction('afficher_contenu_objet', 'inc');
-
-	$onglet_contenu = 
-		($extra?extra_affichage($extra, "rubriques"):"")
+	$onglet_contenu = $extra
 		. $afficher_contenu_objet('rubrique', $id_rubrique,$row)
-		. (_INTERFACE_ONGLETS?contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable):"")
-	;
+		. (_INTERFACE_ONGLETS? $boucles:"");
 
 	$onglet_enfants = 
 	  afficher_enfant_rub($id_rubrique, false, true)
@@ -136,47 +126,40 @@ function exec_naviguer_dist()
 	    :"")
 	    . "</div>")
 	  . "<br class='nettoyeur' />"
-	  . contenu_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
+	  . $boucles;
 
-
-	// Logos de la rubrique
 	$onglet_documents = 
-		/// Documents associes a la rubrique
 		($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
 	;
 	
-	$onglet_interactivite = "";
-  if ($n_forums)
-    $onglet_interactivite = icone_inline(_T('icone_suivi_forum', array('nb_forums' => $n_forums)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "", 'center');
-	$onglet_interactivite = 
-	  $onglet_interactivite
-		;
+	if ($n_forums)
+	  $onglet_interactivite = icone_inline(_T('icone_suivi_forum', array('nb_forums' => $n_forums)), generer_url_ecrire("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "", 'center');
+	else $onglet_interactivite = "";
 
-	echo 
-	  "<div class='fiche_objet'>",
-		$haut,
+	return
+	  "<div class='fiche_objet'>".
+		$haut.
 		(_INTERFACE_ONGLETS?
-	  afficher_onglets_pages(array(
-	    'sousrub'=>_L('Sous-rubriques'),
-	  	'voir' =>_L('Contenu'),
-	  	'props' => _L('Propri&eacute;t&eacute;s'),
-	  	'docs' => _L('Documents'),
-	  	'interactivite' => _L('Interactivit&eacute;')),
-	  	array(
-	    'voir'=>$onglet_contenu,
-	    'sousrub'=>$onglet_enfants,
-	    'props'=>$onglet_proprietes,
-	    'docs'=>$onglet_documents,
-	    'interactivite'=>$onglet_interactivite
-	    )):$onglet_contenu.$onglet_proprietes),
-	  "</div>",
-	  (_INTERFACE_ONGLETS?"":$onglet_enfants.$onglet_interactivite),
-	  fin_gauche(),
-	  fin_page();
+		 afficher_onglets_pages(array(
+			'sousrub'=>_L('Sous-rubriques'),
+			'voir' =>_L('Contenu'),
+			'props' => _L('Propri&eacute;t&eacute;s'),
+			'docs' => _L('Documents'),
+			'interactivite' => _L('Interactivit&eacute;')),
+					array(
+			'voir'=>$onglet_contenu,
+			'sousrub'=>$onglet_enfants,
+			'props'=>$onglet_proprietes,
+			'docs'=>$onglet_documents,
+			'interactivite'=>$onglet_interactivite
+			))
+		 :$onglet_contenu.$onglet_proprietes).
+	  "</div>".
+	  (_INTERFACE_ONGLETS?"":$onglet_enfants.$onglet_interactivite);
 }
 
 // http://doc.spip.org/@infos_naviguer
-function infos_naviguer($id_rubrique, $statut, $ze_logo, $n_forums)
+function infos_naviguer($id_rubrique, $statut, $row, $n_forums)
 {
 	$boite = pipeline ('boite_infos', array('data' => '',
 		'args' => array(
