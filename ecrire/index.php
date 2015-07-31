@@ -194,7 +194,6 @@ AND isset($GLOBALS['meta']["debut_restauration"]))
 if ($exec!='upgrade'
 AND $auteur_session['statut']=='0minirezo'
 AND lire_fichier(_DIR_TMP.'verifier_plugins.txt',$l)
-AND false
 AND $l = @unserialize($l)) {
 	foreach ($l as $fichier) {
 		if (!@is_readable($fichier)) {
