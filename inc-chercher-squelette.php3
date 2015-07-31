@@ -24,7 +24,7 @@ function chercher_squelette($fond, $id_rubrique, $lang) {
 	// Accrocher un squelette de base dans le chemin
 	if (!$base = find_in_path("$fond.$ext")) {
 		// erreur webmaster : $fond ne correspond a rien
-		erreur_squelette(_T('zbug_info_erreur_squelette2',
+		erreur_squelette(_T('info_erreur_squelette2',
 			 array('fichier'=>$fond)),
 			 $dossier);
 		return '';
