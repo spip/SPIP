@@ -58,11 +58,8 @@ function definir_puce() {
 // dont on souhaite qu'ils provoquent un saut de paragraphe
 
 if (!defined('_BALISES_BLOCS')) define('_BALISES_BLOCS',
-	'p|div|pre|ul|ol|li|blockquote|h[1-6r]|'
-	.'t(able|[rdh]|head|body|foot|extarea)|'
-	.'form|object|center|marquee|address|'
-	.'applet|iframe|'
-	.'d[ltd]|script|noscript|map|button|fieldset|style');
+	'address|applet|article|aside|blockquote|button|center|d[ltd]|div|fieldset|fig(ure|caption)|footer|form|h[1-6r]|hgroup|head|header|iframe|li|map|marquee|nav|noscript|object|ol|pre|section|t(able|[rdh]|body|foot|extarea)|ul|script|style'
+);
 
 if (!defined('_BALISES_BLOCS_REGEXP'))
 	define('_BALISES_BLOCS_REGEXP',',</?('._BALISES_BLOCS.')[>[:space:]],iS');
