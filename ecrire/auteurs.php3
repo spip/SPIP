@@ -117,7 +117,7 @@ if ($type_requete == 'auteur') {
 		$nom_auteur = $row['nom'];
 		$premiere_lettre = addslashes(strtoupper(substr($nom_auteur,0,1)));
 		if ($premiere_lettre != $lettre_prec) {
-			$lettre[$premiere_lettre] = $nombre_auteurs;
+			$lettre[$premiere_lettre] = $nombre_auteurs-1;
 		}
 		$lettre_prec = $premiere_lettre;
 	}
