@@ -27,9 +27,12 @@ if (!@file_exists("data/inc_meta_cache.php3")) ecrire_metas();
 // Preferences de presentation
 //
 
-if ($lang = $GLOBALS['HTTP_COOKIE_VARS']['spip_lang_ecrire'] AND $lang <> $auteur_session['lang'] AND changer_langue($lang)) {
-	spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($lang)."' WHERE id_auteur = $connect_id_auteur");
-	$auteur_session['lang'] = $lang;
+if ($spip_lang_ecrire = $GLOBALS['HTTP_COOKIE_VARS']['spip_lang_ecrire']
+AND $spip_lang_ecrire <> $auteur_session['lang']
+AND changer_langue($spip_lang_ecrire)) {
+	spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($spip_lang_ecrire)
+	."' WHERE id_auteur = $connect_id_auteur");
+	$auteur_session['lang'] = $spip_lang_ecrire;
 	ajouter_session($auteur_session, $spip_session);
 }
 

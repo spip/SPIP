@@ -34,18 +34,18 @@ else {
 	include_ecrire("inc_meta.php3");
 
 	// multilinguisme
-	if ($GLOBALS['HTTP_COOKIE_VARS']['spip_session'] OR
-	($GLOBALS['PHP_AUTH_USER'] AND !$ignore_auth_http)) {
+	if ($HTTP_COOKIE_VARS['spip_session'] OR
+	($PHP_AUTH_USER AND !$ignore_auth_http)) {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
-	if ($GLOBALS['forcer_lang']) {
+	if ($forcer_lang) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
-	if ($lang = $GLOBALS['HTTP_GET_VARS']['lang']) {
+	if ($HTTP_GET_VARS['lang']) {
 		include_ecrire('inc_lang.php3');
-		lang_select($lang);     
+		lang_select($HTTP_GET_VARS['lang']);     
 	}
 
 
