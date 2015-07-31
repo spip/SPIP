@@ -590,6 +590,7 @@ Merci de votre participation
 'item_breve_proposee' => 'Brève proposée',
 
 // L
+'label_poids_fichier' => 'Taille',
 'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
 'lien_afficher_texte_icones' => 'Afficher les icones et le texte',
 'lien_afficher_texte_seul' => 'Afficher uniquement le texte',
