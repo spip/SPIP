@@ -106,7 +106,7 @@ function auth() {
 		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
 		$url = str_replace('/./', '/', 'ecrire/'.$clean_link->getUrl());
-		$link->addVar($url);
+		$link->addVar('url', $url);
 		@header("Location: ".$link->getUrl());
 		exit;
 	}
