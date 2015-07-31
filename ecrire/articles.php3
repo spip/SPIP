@@ -235,7 +235,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	if ($articles_versions) {
 		include("lab_revisions.php");
 		if  ($new != 'oui') {
-			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1 OFFSET 0";
+			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
 			if (!spip_num_rows(spip_query($query))) {
 				spip_log("version initiale de l'article $id_article");
 				$select = join(", ", $champs);
@@ -607,7 +607,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 //
 
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.id_rubrique='$id_rubrique' AND (articles.statut = 'publie' OR articles.statut = 'prop') AND articles.id_article != '$id_article' ".
-			" ORDER BY articles.date DESC LIMIT 30 OFFSET 0");
+			" ORDER BY articles.date DESC LIMIT 30");
 		if (spip_num_rows($vos_articles) > 0) {
 			echo "<div>&nbsp;</div>";
 			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";

@@ -50,7 +50,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 	
 	icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
 	
-	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1 OFFSET 0")) > 0) {
+	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1")) > 0) {
 		if ($id_rubrique > 0)
 			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif","creer.gif");
 	
@@ -125,25 +125,25 @@ echo "<P>";
 $relief = false;
 
 if (!$relief) {
-	$query = "SELECT id_article FROM spip_articles AS articles WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1 OFFSET 0";
+	$query = "SELECT id_article FROM spip_articles AS articles WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief) {
-	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') LIMIT 1 OFFSET 0";
+	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') LIMIT 1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non') {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1 OFFSET 0";
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') LIMIT 1 OFFSET 0";
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') LIMIT 1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }

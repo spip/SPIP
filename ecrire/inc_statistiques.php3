@@ -186,7 +186,7 @@ function calculer_n_referers($nb_referers) {
 	$date = date("Y-m-d");
 
 	$result = spip_query("SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
-			     "FROM spip_referers_temp GROUP BY referer_md5 LIMIT $nb_referers OFFSET 0");
+			     "FROM spip_referers_temp GROUP BY referer_md5 LIMIT $nb_referers");
 
 	$tous = spip_num_rows($result);
 
@@ -267,7 +267,7 @@ function aff_referers ($query, $limit=10, $plus = true) {
 	// Charger les moteurs de recherche
 	$arr_engines = stats_load_engines();
 
-	$query .= " LIMIT $limit OFFSET 0";
+	$query .= " LIMIT $limit";
 	$result = spip_query($query);
 	
 	while ($row = spip_fetch_array($result)) {

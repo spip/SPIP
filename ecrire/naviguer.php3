@@ -48,7 +48,7 @@ else {
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
 
-	if ((spip_num_rows(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1 OFFSET 0")) > 0)
+	if ((spip_num_rows(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1")) > 0)
 	AND ($confirme_deplace != 'oui')) {
 		$id_parent = 0;
 	}

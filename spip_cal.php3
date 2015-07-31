@@ -238,7 +238,7 @@ while($row=spip_fetch_array($result_messages)){
 			if ($id_auteur == $id_utilisateur) ligne ("ORGANIZER:$nom_auteur <$email>");
 			else  ligne ("ATTENDEE:$nom_auteur <$email>");
 		}
-		$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' ORDER BY date_heure DESC LIMIT 1 OFFSET 0";
+		$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' ORDER BY date_heure DESC LIMIT 1";
 		$result_forum = spip_query($query_forum);
 		if ($row_forum = spip_fetch_array($result_forum)) {
 			$date_heure = $row_forum["date_heure"];
