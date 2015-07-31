@@ -38,7 +38,7 @@ function inc_petitionner_dist($id_article, $script, $args)
 
 	$res = ajax_action_post('petitionner', $id_article, $script, $args, $res,_T('bouton_changer'), $atts);
 
-	return ajax_action_greffe("petitionner-$id_article", $res);
+	return ajax_action_greffe("petitionner", $id_article, $res);
 }
 
 // http://doc.spip.org/@petitionner_choisir

@@ -87,6 +87,6 @@ function configuration_locuteur_dist()
 	. ajax_action_post('configurer', 'locuteur', 'config_multilang', '', $res)
 	. fin_cadre_relief(true);
 
-	return ajax_action_greffe("configurer-locuteur", $res);
+	return ajax_action_greffe("configurer-locuteur", '', $res);
 }
 ?>

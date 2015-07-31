@@ -1101,7 +1101,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 
 	$res = "<br /><table class='table_page' width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
 		<tr>\n<td style='width: 200px' class='colonne_etroite serif' valign='top' $rspan>
-		\n<div style='width: 200px; overflow:hidden;'>
+		\n<div id='navigation' style='width: 200px; overflow:hidden;'>
 \n";
 		
 	if ($spip_display == 4) $res .= "<!-- ";
@@ -1146,7 +1146,7 @@ function creer_colonne_droite($rubrique="", $return= false){
 	. $largeur 
 	. "px' rowspan='2' align='"
 	. $spip_lang_left
-	. "' valign='top' class='colonne_etroite'><div style='width:$largeur'>";
+	. "' valign='top' class='colonne_etroite'><div id='extra' style='width:$largeur'>";
 
 	if ($return) return $res; else echo $res;
 }
@@ -1180,7 +1180,7 @@ function debut_droite($rubrique="", $return= false) {
 	else
 		$largeur = 500;
 
-	$res .= "\n<td style='width:" . $largeur. "px' valign='top' align='" . $spip_lang_left."' rowspan='1' class='serif'>";
+	$res .= "\n<td id='contenu' style='width:" . $largeur. "px' valign='top' align='" . $spip_lang_left."' rowspan='1' class='serif'>";
 
 	// touche d'acces rapide au debut du contenu : z
 	// Attention avant c'etait 's' mais c'est incompatible avec

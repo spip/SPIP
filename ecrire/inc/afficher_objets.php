@@ -430,7 +430,7 @@ function afficher_articles_trad($titre_table, $requete, $formater, $tmp_var, $ha
 	. fin_block()
 	. fin_cadre();
 
-	return ajax_action_greffe($tmp_var,$res);
+	return ajax_action_greffe($tmp_var, '', $res);
 }
 
 // http://doc.spip.org/@afficher_articles_trad_boucle

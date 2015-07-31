@@ -44,6 +44,6 @@ function configuration_langue_dist()
 	  $res .
 	   fin_cadre_couleur(true);
 
- return ajax_action_greffe("configurer-langue", $res);
+ return ajax_action_greffe("configurer-langue", '', $res);
 }
 ?>

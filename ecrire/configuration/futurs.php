@@ -39,6 +39,6 @@ function configuration_futurs_dist()
 	. ajax_action_post('configurer', 'futurs', 'configuration','',$res)
  	. fin_cadre_relief(true);
 
-	return ajax_action_greffe('configurer-futurs', $res);
+	return ajax_action_greffe('configurer-futurs', '', $res);
 }
 ?>

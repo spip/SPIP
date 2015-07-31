@@ -138,6 +138,6 @@ function configuration_annonces_dist()
 	. ajax_action_post('configurer', 'annonces', 'config_contenu','',$res) 
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-annonces', $res);
+	return ajax_action_greffe('configurer-annonces', '', $res);
 }
 ?>

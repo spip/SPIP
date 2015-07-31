@@ -41,6 +41,6 @@ function configuration_visiteurs_dist()
 	. $res
 	. fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-visiteurs', $res);
+	return ajax_action_greffe('configurer-visiteurs', '', $res);
 }
 ?>

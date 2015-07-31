@@ -71,7 +71,7 @@ EOF;
 		}
 	}
 
-	return ajax_action_greffe("iconifier-$id", $res).$js;
+	return ajax_action_greffe("iconifier", $id, $res).$js;
 
 }
 

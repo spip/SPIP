@@ -14,8 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 // http://doc.spip.org/@inc_virtualiser_dist
-function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
-{
+function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args){
 	global $spip_lang_right, $connect_statut;
 
 	if (!($connect_statut=='0minirezo' && $flag))
@@ -33,6 +32,6 @@ function inc_virtualiser_dist($id_article, $flag, $virtuel, $script, $args)
 
 	$res = ajax_action_post('virtualiser', $id_article, $script, $args, $res, _T('bouton_changer'), " class='fondo spip_xx-small' style='float: $spip_lang_right'")
 	  . "<br class='nettoyeur' />";
-	return ajax_action_greffe("virtualiser-$id_article", $res);
+	return ajax_action_greffe("virtualiser", $id_article, $res);
 }
 ?>

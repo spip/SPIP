@@ -48,6 +48,6 @@ function configuration_transcodeur_dist()
 	  $res .
 	  fin_cadre_relief(true);
 
-	return ajax_action_greffe("configurer-transcodeur", $res);
+	return ajax_action_greffe("configurer-transcodeur", '', $res);
 }
 ?>

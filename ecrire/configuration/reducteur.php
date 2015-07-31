@@ -82,7 +82,7 @@ function configuration_reducteur_dist()
 	while($cell--)
 		$res .= "\n".'<td>&nbsp;</td>';
 
-	return ajax_action_greffe("configurer-reducteur", 
+	return ajax_action_greffe("configurer-reducteur", '', 
 	  debut_cadre_trait_couleur("image-24.gif", true)
 	. debut_cadre_relief("", true, "", _T("info_image_process_titre"))
 	.  "<p class='verdana2'>"

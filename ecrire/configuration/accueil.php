@@ -49,6 +49,6 @@ function configuration_accueil_dist()
 	. ajax_action_post('configurer', 'accueil', 'configuration','',$res)
 	. fin_cadre_couleur(true);
 
-	return ajax_action_greffe('configurer-accueil', $res);
+	return ajax_action_greffe('configurer-accueil','', $res);
 }
 ?>

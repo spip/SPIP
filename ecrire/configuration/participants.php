@@ -80,6 +80,6 @@ $res .= "\n<tr><td style='text-align: $spip_lang_left' class='verdana2'>";
 	  . ajax_action_post('configurer', 'participants', 'config_contenu','',$res)
 	  . fin_cadre_trait_couleur(true);
 
-	return ajax_action_greffe('configurer-participants', $res);
+	return ajax_action_greffe('configurer-participants', '', $res);
 }
 ?>
