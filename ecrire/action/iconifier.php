@@ -19,6 +19,7 @@ function action_iconifier_dist()
 	$var_f = charger_fonction('controler_action_auteur', 'inc');
 	$var_f();
 	$arg = _request('arg');
+  $iframe_redirect = _request('iframe_redirect');
 
 	$arg = rawurldecode($arg);
 	if (!preg_match(',^\d*(\D)(.*)$,',$arg, $r))
@@ -26,6 +27,11 @@ function action_iconifier_dist()
 	elseif ($r[1] == '+')
 		action_spip_image_ajouter_dist($r[2]);
 	else	action_spip_image_effacer_dist($r[2]);
+	
+	if(_request("iframe") == 'iframe') {
+		$redirect = urldecode($iframe_redirect)."&iframe=iframe";
+		redirige_par_entete(urldecode($redirect));
+	}
 }
 
 // http://doc.spip.org/@action_spip_image_effacer_dist

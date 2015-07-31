@@ -132,6 +132,11 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
+  if(_request("iframe")=="iframe") {
+    echo "<div class='upload_answer upload_error'>$msg</div>";
+    exit;
+  }
+  
 	minipres($msg, '<form action="' .
 		rawurldecode($GLOBALS['redirect']).
 		'" method="post"><div align="'.  #ici method='post' permet d'aller au bon endroit, alors qu'en GET on perd les variables... mais c'est un hack sale.
@@ -145,13 +150,15 @@ function check_upload_error($error, $msg='') {
 // depuis qu'on est sortis de spip_image.php, apparemment).
 function erreur_upload_trop_gros() {
 	include_spip('inc/filtres');
-	minipres(_T('pass_erreur'),
-		"<p>"
+	
+	$msg = 		"<p>"
 		.taille_en_octets($_SERVER["CONTENT_LENGTH"])
 		.'<br />'
 		._T('upload_limit',
 		array('max' => ini_get('upload_max_filesize')))
-		."</p>");
+		."</p>";
+	
+  minipres(_T('pass_erreur'),"<div class='upload_answer upload_error'>".$msg."</div>");
 	exit;
 }
 
@@ -488,7 +495,7 @@ function traite_svg($file)
 //
 
 // http://doc.spip.org/@examiner_les_fichiers
-function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs)
+function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $redirect, &$actifs, $iframe_redirect)
 {
 	if (function_exists('gzopen') 
 	AND !($mode == 'distant')
@@ -512,7 +519,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 			if ($archive) {
 			  $valables = verifier_compactes($archive);
 			  if ($valables) {
-			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip);
+			    liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect);
 			    exit;
 			  }
 			}
@@ -529,8 +536,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 // Afficher un formulaire de choix: decompacter et/ou garder tel quel.
 // Passer ca en squelette un de ces jours.
 
-// http://doc.spip.org/@liste_archive_jointe
-function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip)
+function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash, $redirect, $zip, $iframe_redirect)
 {
 	$arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
 	$texte =
@@ -550,11 +556,25 @@ function liste_archive_jointe($valables, $mode, $type, $id, $id_document, $hash,
 		"<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='".
 		_T('bouton_valider').
 		  "'></div>";
-	$action = (construire_upload($texte, array(
+	echo "<p>build form $iframe_redirect</p>";
+  $action = construire_upload($texte, array(
 					 'redirect' => $redirect,
+					 'iframe_redirect' => $iframe_redirect,
 					 'hash' => $hash,
 					 'chemin' => $zip,
-					 'arg' => $arg)));
+					 'arg' => $arg));
+	
+	if(_request("iframe")=="iframe") {
+    echo "<div class='upload_answer upload_zip_list'><p>" .
+		_T('upload_fichier_zip_texte') .
+	  "</p><p>" .
+		_T('upload_fichier_zip_texte2') .
+	  "</p>" .
+	  $action.
+	  "</div>";
+    exit;
+  }
+  				 
 	minipres(_T('upload_fichier_zip'),
 	  "<p>" .
 		_T('upload_fichier_zip_texte') .

@@ -20,7 +20,7 @@ function exec_documenter_dist()
 {
 	$type = _request("type");
 	$script = _request("script"); // generalisation a tester
-	$album = !_request("s") ? 'documents' :  'portfolio'; 
+  $album = !_request("s") ? 'documents' :  'portfolio'; 
 	$id = intval(_request(($type == 'article') ? 'id_article' : 'id_rubrique'));
 	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$statut = $GLOBALS['auteur_session']['statut'];
@@ -48,6 +48,11 @@ function exec_documenter_dist()
 	}
 
 	$documenter = charger_fonction('documenter', 'inc');
-	ajax_retour($documenter($id, $type, $album, 'ajax', '', $script));
+	if(_request("iframe")=="iframe") { 
+	 $res = $documenter($id, $type, "portfolio", 'ajax', '', $script).
+	        $documenter($id, $type, "documents", 'ajax', '', $script);
+	 echo "<div class='upload_answer upload_document_added'>".$res."</div>";
+	}	else 
+	 ajax_retour($documenter($id, $type, $album, 'ajax', '', $script));
 }
 ?>
