@@ -107,11 +107,7 @@ function controle_petition_page($id_article, $titre,  $ong, $statut, $corps)
 
 	echo $ong; 
 
-	echo "<div style='text-align: "
-	. $GLOBALS['spip_lang_right']
-	. ";'>"
-	. bouton_spip_rss('signatures')
-	. "</div>";
+	echo bouton_spip_rss('signatures');
 
 	if ($id_article) {
 		echo  "<a href='",

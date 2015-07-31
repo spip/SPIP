@@ -77,15 +77,8 @@ function exec_suivi_revisions_dist()
 
 // lien vers le rss
 
-
-	$args = array(
-	'id_secteur' => $id_secteur,
-	'id_auteur' => $id_auteur,
-	'lang_choisie' => $lang_choisie
-	);
-	$op =  bouton_spip_rss('revisions', $args);
-
-	echo "<div style='text-align: ", $GLOBALS['spip_lang_right'], ";'>", $op, "</div>";
+	echo bouton_spip_rss('revisions', array('id_secteur' => $id_secteur,'id_auteur' => $id_auteur,'lang_choisie' => $lang_choisie
+	));
 
 	echo fin_cadre_relief(true);
 

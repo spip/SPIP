@@ -89,11 +89,7 @@ function articles_forum_cadres($id_rubrique, $id_article, $titre, $script, $args
 	  aide ("suiviforum"),
 	  "</p>";
 
-	echo "<div style='text-align: "
-	  . $GLOBALS['spip_lang_right']
-	  . ";'>"
-	  . bouton_spip_rss('forum', array('id_article' => $id_article))
-	  . "</div>";
+	echo bouton_spip_rss('forum', array('id_article' => $id_article));
 
 	echo fin_boite_info(true);
 
