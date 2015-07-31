@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // new=oui = article a creer si on valide le formulaire
 // http://doc.spip.org/@article_select
 function article_select($id_article, $id_rubrique, $lier_trad, $new) {
-  global $connect_id_auteur, $spip_lang; 
+  global $connect_id_auteur, $connect_id_rubrique, $spip_lang; 
   $id_article = intval($id_article);
   $id_rubrique =  intval($id_rubrique);
   $lier_trad =  intval($lier_trad);
@@ -60,6 +60,18 @@ else if ($new=='oui') {
 	// Si c'est une demande de nouvelle traduction, on procede autrement
 	if ($lier_trad)
 		$row = article_select_trad($lier_trad);
+
+	// appel du script a la racine, faut choisir 
+	// admin restreint ==> sa premiere rubrique
+	// autre ==> la derniere rubrique cree
+	if (!$row['id_rubrique']) {
+		if ($connect_id_rubrique)
+			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0]; 
+		else {
+			$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_rubrique DESC LIMIT 1"));
+			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
+		}
+	}
 
 	// recuperer le secteur, pour affecter les bons champs extras
 	if (!$row['id_secteur']) {
