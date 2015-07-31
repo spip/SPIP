@@ -44,6 +44,7 @@ function inc_instituer_article_dist($id_article, $statut, $id_rubrique)
 	  ."<ul>";
 	
 	$href = redirige_action_auteur('instituer_article',$id_article,'articles', "id_article=$id_article");
+	$href = parametre_url($href,'statut_old',$statut);
 
 	foreach($etats as $affiche => $s){
 		$puce = puce_statut($s) . _T($affiche);
