@@ -17,7 +17,6 @@ include_spip('inc/presentation');
 // http://doc.spip.org/@exec_auteurs_dist
 function exec_auteurs_dist()
 {
-
 	$tri = preg_replace('/\W/', '', _request('tri'));
 	if (!$tri) $tri='nom'; 
 	$statut = preg_replace('/\W/', '', _request('statut'));
@@ -38,8 +37,12 @@ function exec_auteurs_dist()
 	else {
 
 		pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
-
-		bandeau_auteurs($tri, $statut);
+		// Chaine indiquant le mode de tri est obsolète depuis Ajax
+		$commencer_page = charger_fonction('commencer_page', 'inc');
+		echo $commencer_page(_T('info_auteurs_par_tri',
+					array('partri' => '')),
+				     "auteurs","redacteurs");
+		bandeau_auteurs($tri, $statut=='6forum');
 
 		echo "<div id='auteurs'>", $res, "</div>";
 		echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs'),'data'=>''));
@@ -75,28 +78,15 @@ function lettres_d_auteurs($query, $debut, $max_par_page, $tri)
 	return array($auteurs, $lettre);
 }
 
-
 // http://doc.spip.org/@bandeau_auteurs
-function bandeau_auteurs($tri, $statut)
+function bandeau_auteurs($tri, $visiteurs)
 {
 	global $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
-	if ($tri=='nom') $s = ' (' . _T('info_par_nom') . ')';
-	elseif ($tri=='statut') $s = ' (' . _T('info_par_statut') . ')';
-	elseif ($tri=='nombre') $s = ' (' . _T('info_par_nombre_articles') . ')';
-	else $s = ''; 
-
-	if ($statut == '6forum') {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
-	} else {
-		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
-	}
 	debut_gauche();
 
 	debut_boite_info();
-	if ($statut == '6forum') 
+	if ($visiteurs) 
 		echo "\n<p class='arial1'>"._T('info_gauche_visiteurs_enregistres'), '</p>';
 	else 
 		echo "\n<p class='arial1'>"._T('info_gauche_auteurs'), '</p>';
@@ -118,7 +108,7 @@ function bandeau_auteurs($tri, $statut)
 
 		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
 		if ($n) {
-			if ($statut == '6forum')
+			if ($visiteurs)
 				$res .= icone_horizontale (_T('icone_afficher_auteurs'), generer_url_ecrire("auteurs"), "auteur-24.gif", "", false);
 			else
 				$res .= icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","statut=6forum"), "auteur-24.gif", "", false);
@@ -130,10 +120,7 @@ function bandeau_auteurs($tri, $statut)
 	debut_droite();
 
 	echo "\n<br />";
-	if ($statut == '6forum') 
-		gros_titre(_T('info_visiteurs'));
-	else
-		gros_titre(_T('info_auteurs'));
+	gros_titre($visiteurs ? _T('info_visiteurs') :  _T('info_auteurs'));
 	echo "\n<br />";
 }
 
@@ -288,8 +275,7 @@ default:
 // La requete de base est tres sympa
 // (pour les visiteurs, ca postule que les messages concernent des articles)
 
- $row = spip_query($q = "SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . (($statut == '6forum') ? 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
- spip_log($q);
+ $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.nom AS nom,								UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur							$sql_sel									FROM spip_auteurs as aut " . (($statut == '6forum') ? 			"LEFT JOIN spip_forum AS lien ON aut.id_auteur=lien.id_auteur " :		("LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	 LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)")) .	" WHERE $sql_visible GROUP BY aut.id_auteur ORDER BY $sql_order");
  return $row;
 }
 
