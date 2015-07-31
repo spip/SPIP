@@ -1538,13 +1538,14 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "\n<table cellpadding='0' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 		echo "<table cellpadding='0' background='' width='750'><tr width='750'><td>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
-		echo propre("Vous travaillez actuellement sur les articles suivants; les autres participants &agrave; ce site sont invit&eacute;s &agrave; ne pas les modifier. Lorsque vous ne travaillez plus sur ces articles, pensez &agrave; l'indiquer ici en les &laquo;d&eacute;bloquant&raquo;.");
-		echo aide("artmodif");
+		//echo propre("Vous travaillez actuellement sur les articles suivants; les autres participants &agrave; ce site sont invit&eacute;s &agrave; ne pas les modifier. Lorsque vous ne travaillez plus sur ces articles, pensez &agrave; l'indiquer ici en les &laquo;d&eacute;bloquant&raquo;.");
 		while ($row = @mysql_fetch_array($result)) {
+			$i++;
 			$ze_article = $row['id_article'];
 			$ze_titre = propre($row['titre']);
-			echo "<div><li><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+			echo "<div>Article r&eacute;serv&eacute; : <b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
 			echo " [<a href='$lien&debloquer_article=$ze_article'>d&eacute;bloquer cet article</a>]";
+			if ($i == 1) echo aide("artmodif");
 			echo "</div>";
 		}
 		echo "</font>";
