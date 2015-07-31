@@ -66,6 +66,24 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 		return "<img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'>\n";
 }
 
+function texte_vignette_previ($largeur_vignette, $hauteur_vignette, $fichier_vignette,$fichier_document) {
+	if ($largeur_vignette > 220) {
+		$rapport = 220.0 / $largeur_vignette;
+		$largeur_vignette = 220;
+		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
+	}
+	if ($hauteur_vignette > 150) {
+		$rapport = 150.0 / $hauteur_vignette;
+		$hauteur_vignette = 150;
+		$largeur_vignette = ceil($largeur_vignette * $rapport);
+	}
+	
+	if (strlen($fichier_document)>0)
+		return "<a href='../$fichier_document'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'></a>\n";
+	else
+		return "<img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'>\n";
+}
+
 function texte_vignette_non_inclus($largeur_vignette, $hauteur_vignette, $fichier_vignette,$fichier_document) {
 	if ($largeur_vignette > 80) {
 		$rapport = 80.0 / $largeur_vignette;
@@ -575,6 +593,18 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			
 			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
 			echo "</font>";
+
+			if (ereg("^jpg|gif|png$",$type_extension)){
+				$vignette = fetch_document($id_document);
+				$fichier_vignette = $vignette->get('fichier');
+				$largeur_vignette = $vignette->get('largeur');
+				$hauteur_vignette = $vignette->get('hauteur');
+				$taille_vignette = $vignette->get('taille');
+				echo "<div align='center'>";
+				echo texte_vignette_previ($largeur_vignette, $hauteur_vignette, $fichier_vignette, "$fichier");
+				echo "</div>";
+			}
+
 
 			echo debut_block_invisible($block);
 			$link = new Link($redirect_url);
