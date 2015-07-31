@@ -872,9 +872,6 @@ function hauteur($img) {
 // Fonctions de traitement d'image
 // uniquement pour GD2
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
-	include_ecrire("inc_logos");
-
-
 	if (strlen($img)==0) return false;
 
 	
@@ -941,8 +938,6 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 // alpha = 127: completement transparent
 function image_alpha($im, $alpha = 63)
 {
-	include_ecrire('inc_logos');
-	
 	$image = valeurs_image_trans($im, "alpha-$alpha", "png");
 	if (!$image) return("");
 	
@@ -1002,8 +997,6 @@ function image_alpha($im, $alpha = 63)
 
 function image_flip_vertical($im)
 {
-	include_ecrire('inc_logos');
-	
 	$image = valeurs_image_trans($im, "flip_v");
 	if (!$image) return("");
 	
@@ -1044,8 +1037,6 @@ function image_flip_vertical($im)
 
 function image_flip_horizontal($im)
 {
-	include_ecrire('inc_logos');
-	
 	$image = valeurs_image_trans($im, "flip_h");
 	if (!$image) return("");
 	
@@ -1093,7 +1084,6 @@ function image_masque($im, $masque) {
 	// Si l'image source est plus grande que le masque, alors cette image est reduite a la taille du masque.
 	// Sinon, c'est la taille de l'image source qui est utilisee.
 
-	include_ecrire('inc_logos');
 	
 	$nom = ereg_replace("\.png", "", $masque);
 	$image = valeurs_image_trans($im, "$nom", "png");
@@ -1109,6 +1099,7 @@ function image_masque($im, $masque) {
 
 
 	if ($creer) {
+		include_ecrire('inc_logos'); // bicoz presence reduire_image
 	
 		$masque = find_in_path($masque);	
 		$mask = valeurs_image_trans($masque,"");
@@ -1179,9 +1170,6 @@ function image_masque($im, $masque) {
 				
 				$a_ = $a + $a2 - round($a*$a2/127);
 
-
-
-
 				$color = ImageColorAllocateAlpha( $im_, $r2, $g2, $b2 , $a_ );
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
@@ -1207,7 +1195,6 @@ function image_masque($im, $masque) {
 
 function image_nb($im)
 {
-	include_ecrire('inc_logos');
 	
 	$image = valeurs_image_trans($im, "nb");
 	if (!$image) return("");
@@ -1373,7 +1360,7 @@ function imageRotateBicubic($src_img, $angle, $bicubic=0) {
        $y0 = floor($yo);
        $y1 = ceil($yo);
        
-
+		// on prend chaque point, mais on pondere en fonction de la distance
 		$rgb = ImageColorAt($src_img, $x0, $y0); 
 		$a1 = ($rgb >> 24) & 0xFF;
 		$r1 = ($rgb >> 16) & 0xFF;
@@ -1426,8 +1413,7 @@ function imageRotateBicubic($src_img, $angle, $bicubic=0) {
 // la fonction "crop" n'est pas implementee...
 function image_rotation($im, $angle, $crop=false)
 {
-	include_ecrire('inc_logos');
-	
+
 	$image = valeurs_image_trans($im, "rot-$angle-$crop", "png");
 	if (!$image) return("");
 	
@@ -1472,8 +1458,6 @@ function decal_couleur($coul, $gamma) {
 // ou plus foncee (gamma < 0)
 function image_gamma($im, $gamma = 0)
 {
-	include_ecrire('inc_logos');
-	
 	$image = valeurs_image_trans($im, "gamma-$gamma");
 	if (!$image) return("");
 	
@@ -1485,7 +1469,7 @@ function image_gamma($im, $gamma = 0)
 	
 	$creer = $image["creer"];
 	
-	if ($creer OR 1==1) {
+	if ($creer) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
@@ -1540,7 +1524,6 @@ function decal_couleur_127 ($coul, $val) {
 //function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
 function image_sepia($im, $rgb = "896f5e")
 {
-	include_ecrire('inc_logos');
 	
 	$couleurs = couleur_hex_to_dec($rgb);
 	$dr= $couleurs["red"];
