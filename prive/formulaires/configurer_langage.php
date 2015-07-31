@@ -32,9 +32,13 @@ function formulaires_configurer_langage_charger_dist(){
 function formulaires_configurer_langage_traiter_dist(){
 	include_spip('action/converser');
 	action_converser_changer_langue(true);
+	
 	refuser_traiter_formulaire_ajax();
 
-	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true);
+	// on ne peut pas changer la langue pour tout le hit ici,
+	// car CVT repasse derriere et retablit la langue avant l'appel a traiter()
+	// il faut rediriger !
+	return array('message_ok'=>_T('config_info_enregistree'),'editable'=>true,'redirect'=>self());
 }
 
 function afficher_langues_choix($langues,$name,$id,$selected){
