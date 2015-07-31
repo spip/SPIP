@@ -1253,12 +1253,26 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 		// appeler la fonction de definition de la boucle
 
 		if ($req = $boucle->type_requete) {
-			$f = 'boucle_'.strtoupper($req);
-		// si pas de definition perso, definition spip
-			if (!function_exists($f)) $f = $f.'_dist';
-			// laquelle a une definition par defaut
-			if (!function_exists($f)) $f = 'boucle_DEFAUT';
-			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
+			// boucle personnalisée ?
+			$table = strtoupper($boucle->type_requete);
+			$serveur = strtolower($boucle->sql_serveur);
+			if (
+				// fonction de boucle avec serveur & table
+				(!$serveur OR
+				 ((!function_exists($f = "boucle_".$serveur."_".$table))
+				  AND (!function_exists($f = $f."_dist"))
+				 )
+				)
+				// fonction de boucle avec table
+				AND (!function_exists($f = "boucle_".$table))
+					AND (!function_exists($f = $f."_dist"))
+			){
+				// fonction de boucle standard 
+				if (!function_exists($f = 'boucle_DEFAUT')) {
+					$f = 'boucle_DEFAUT_dist';
+				}
+			}
+
 			$req = "\n\n\tstatic \$command = array();\n\t" .
 					"static \$connect;\n\t" .
 					"\$command['connect'] = \$connect = " .
