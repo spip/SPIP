@@ -305,7 +305,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			$url = "mots_edit.php3?id_mot=$id_mot&redirect=".rawurlencode($url_base.'#mots');
 	
-			$vals[] = "<A HREF='$url'><img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'></A>";
+			$vals[] = "<A HREF='$url'>" . http_img_pack('petite-cle.gif', "alt='' width='23' height='12' border='0'") ."</A>";
 			
 	
 			// Changer
@@ -342,7 +342,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			if ($flag_editable){
 				$s = "";
 				if ($flag_groupe)
-					$s .= "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
+				  $s .= "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "alt='X' width='7' height='7' border='0' align='middle'") ."</A>";
 				else $s .= "&nbsp;";
 			}
 			$vals[] = $s;

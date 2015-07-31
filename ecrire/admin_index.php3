@@ -74,7 +74,7 @@ debut_cadre_relief();
 
 function jauge($couleur,$pixels) {
 	if ($pixels)
-		echo "<img src='img_pack/jauge-$couleur.gif' height='10' width='$pixels' alt='$couleur' />";
+	  echo http_img_pack('jauge-$couleur.gif', "height='10' width='$pixels' alt='$couleur'");
 }
 
 echo "<table>";
@@ -87,7 +87,7 @@ while (list(,$type) = each($types)) if ($index_total[$type]>0) {
 					$ifond=0;
 					$couleur="#FFFFFF";
 				}
-	echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif'><TD WIDTH=\"100\">";
+	echo "<TR BGCOLOR='$couleur' BACKGROUND='" . _DIR_RESTREINT . "rien.gif'><TD WIDTH=\"100\">";
 	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=2>";	
 	echo $type;
 	echo "</FONT><TD>";

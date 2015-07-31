@@ -19,7 +19,6 @@ function copier_document($ext, $orig, $source) {
 	$n = 0;
 	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
 	$r = deplacer_fichier_upload($source, $newFile);
-	spip_log("ajout_doc: copie de $source dans $newFile impossible");
 	return (!$r ? '' : $newFile);
 }
 
@@ -255,7 +254,7 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 	// Preparation
 	if ($mode == 'vignette') {
 		$id_document_lie = $id_document;
-		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
+		$query = "UPDATE spip_documents SET mode='document' where id_document='$id_document_lie'";
 		spip_query($query); // requete inutile a mon avis (Fil)...
 		$id_document = 0;
 	}

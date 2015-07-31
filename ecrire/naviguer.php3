@@ -99,7 +99,8 @@ function sous_enfant($collection2){
 			$titre2=$row['titre'];
 			changer_typo($row['lang']);
 
-			$retour.="<div class='arial11' style='background: url(img_pack/rubrique-12.gif) left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px;'><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
+			$retour.="<div class='arial11' " .
+			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
 		}
 		$retour .= "</ul>\n\n".fin_block()."\n\n";
 	}

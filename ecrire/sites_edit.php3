@@ -65,13 +65,18 @@ function enfant($leparent){
 			for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
 
+		$img = _DIR_IMG_PACK . 'rubrique-12.gif';
 		switch ($i) {
 		case 1:
 			$espace= "";
+			$img = _DIR_IMG_PACK . 'secteur-12.gif';
 			$style .= "font-weight: bold;";
+			$style .= "background-color: $couleur_claire;";
 			break;
 		case 2:
 			$style .= "color: #202020;";
+			$style .= "font-weight: bold;";
+			$style .= "border-bottom: 1px solid $couleur_claire;";
 			break;
 		case 3:
 			$style .= "color: #404040;";
@@ -86,19 +91,8 @@ function enfant($leparent){
 			$style .= "color: #A0A0A0;";
 			break;
 		}
-		if ($i==1) {
-			$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat;";
-			$style .= "background-color: $couleur_claire;";
-			$style .= "font-weight: bold;";
-		}
-		else if ($i==2) {
-			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
-			$style .= "border-bottom: 1px solid $couleur_claire;";
-			$style .= "font-weight: bold;";
-		}
-		else {
-			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
-		}
+
+		$style .= "background: url($img) $spip_lang_left no-repeat;";
 
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs

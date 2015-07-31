@@ -685,7 +685,7 @@ function ajoute_popup_multi($langue_demandee, $trads, $texte) {
 
 	if ($survol) {
 		$num_multi ++;
-		$texte .= " <img src=\"img_pack/langues-modif-12.gif\" alt=\"(multi)\" title=\"$survol\" height=\"12\" width=\"12\" border=\"0\" onclick=\"return openmulti($num_multi)\" />";
+		$texte .= " <img src=\"" . _DIR_IMG_PACK . "langues-modif-12.gif\" alt=\"(multi)\" title=\"$survol\" height=\"12\" width=\"12\" border=\"0\" onclick=\"return openmulti($num_multi)\" />";
 		$multi_popup .= "textes_multi[$num_multi] = '".addslashes($texte_popup)."';\n";
 	}
 

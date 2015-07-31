@@ -3408,9 +3408,9 @@ function http_img_pack($img, $att)
     ($att ? ("' " . $att) : "'") . " />";
 }
 
-function http_style_background($img, $att)
+function http_style_background($img, $att='')
 {
-  return "style='background: url(\"" . _DIR_IMG_PACK . $img . 
-    ($att ? ('") ' . $att) : '")') . ";'";
+  return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
+    ($att ? (' ' . $att) : '') . ";'";
 }
 ?>
