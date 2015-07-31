@@ -259,11 +259,11 @@ function calculer_threads() {
 // Calculs des URLs des forums (pour l'espace public)
 // http://doc.spip.org/@racine_forum
 function racine_forum($id_forum){
-	if (!$id_forum = intval($id_forum)) return;
-	$result = sql_select("id_parent, id_rubrique, id_article, id_breve, id_syndic, id_message, id_thread", "spip_forum", "id_forum=".$id_forum);
+	if (!$id_forum = intval($id_forum)) return false;
 
-	if (!$row = sql_fetch($result))
-		return false;
+	$row = sql_fetsel("id_parent, id_rubrique, id_article, id_breve, id_syndic, id_message, id_thread", "spip_forum", "id_forum=".$id_forum);
+
+	if (!$row) return false;
 
 	if ($row['id_parent']
 	AND $row['id_thread'] != $id_forum) // eviter boucle infinie
@@ -290,8 +290,8 @@ function racine_forum($id_forum){
 // http://doc.spip.org/@parent_forum
 function parent_forum($id_forum) {
 	if (!$id_forum = intval($id_forum)) return;
-	$result = sql_select("id_parent, id_rubrique, id_article, id_breve, id_syndic", "spip_forum", "id_forum=".$id_forum);
-	if($row = sql_fetch($result)){
+	$row = sql_fetsel("id_parent, id_rubrique, id_article, id_breve, id_syndic", "spip_forum", "id_forum=".$id_forum);
+	if($row) {
 		if($row['id_parent']) return array('forum', $row['id_parent']);
 		if($row['id_rubrique']) return array('rubrique', $row['id_rubrique']);
 		if($row['id_article']) return array('article', $row['id_article']);

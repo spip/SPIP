@@ -207,8 +207,8 @@ function autoriser_site_modifier_dist($faire, $type, $id, $qui, $opt) {
 	if ($qui['statut'] == '0minirezo' AND !$qui['restreint'])
 		return true;
 
-	$s = sql_select("id_rubrique,statut", "spip_syndic", "id_syndic=".sql_quote($id));
-	return ($t = sql_fetch($s)
+	$t = sql_fetsel("id_rubrique,statut", "spip_syndic", "id_syndic=".sql_quote($id));
+	return ($t
 		AND autoriser('voir','rubrique',$t['id_rubrique'])
 		AND ($t['statut'] == 'prop'
 			OR autoriser('modifier', 'rubrique', $t['id_rubrique'])
@@ -504,9 +504,8 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 					return true;
 			}
 			else if ($id_auteur = intval($id)) {
-				$s = sql_select("statut", "spip_auteurs", "id_auteur=$id_auteur");
-				if ($t = sql_fetch($s)
-				AND $t['statut'] != '0minirezo')
+				$t = sql_fetsel("statut", "spip_auteurs", "id_auteur=$id_auteur");
+				if ($t AND $t['statut'] != '0minirezo')
 					return true;
 				else
 					return false;

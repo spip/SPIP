@@ -87,9 +87,8 @@ function notifier_publication_article($id_article) {
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
-		$result = sql_select("*", "spip_articles", "id_article = $id_article");
-
-		if ($row = sql_fetch($result)) {
+		$row = sql_fetsel("*", "spip_articles", "id_article = $id_article");
+		if ($row) {
 
 			$l = lang_select($row['lang']);
 

@@ -19,18 +19,17 @@ function inc_auth_spip_dist ($login, $pass, $md5pass="", $md5next="") {
 
   // si envoi non crypte, crypter maintenant
 	if (!$md5pass AND $pass) {
-			$result = sql_select("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
+		$row = sql_fetsel("alea_actuel, alea_futur", "spip_auteurs", "login=" . sql_quote($login));
 
-			if ($row = sql_fetch($result)) {
-				$md5pass = md5($row['alea_actuel'] . $pass);
-				$md5next = md5($row['alea_futur'] . $pass);
-			}
+		if ($row) {
+			$md5pass = md5($row['alea_actuel'] . $pass);
+			$md5next = md5($row['alea_futur'] . $pass);
 		}
+	}
 	// login inexistant ou mot de passe vide
 	if (!$md5pass) return array();
 
-	$result = sql_select("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'");
-	$row = sql_fetch($result);
+	$row = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND pass=" . sql_quote($md5pass) . " AND statut<>'5poubelle'");
 
 	// login/mot de passe incorrect
 	if (!$row) return array(); 

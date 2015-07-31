@@ -21,8 +21,8 @@ function inc_informer_dist($id, $col, $exclus, $rac, $type, $do='aff')
 
 	include_spip('inc/texte');
 	if ($type == "rubrique") {
-		$res = sql_select("titre, descriptif", "spip_rubriques", "id_rubrique = $id");
-		if ($row = sql_fetch($res)) {
+		$row = sql_fetsel("titre, descriptif", "spip_rubriques", "id_rubrique = $id");
+		if ($row) {
 			$titre = typo($row["titre"]);
 			$descriptif = propre($row["descriptif"]);
 		} else {
