@@ -249,7 +249,7 @@ function import_tables($request, $archive) {
 	if (isset($GLOBALS['meta']['restauration_charset_sql_connexion']))
 		sql_set_charset($GLOBALS['meta']['restauration_charset_sql_connexion']);
 
-	@define('_DEBUG_IMPORT',false);
+	if (!defined("_DEBUG_IMPORT")) define('_DEBUG_IMPORT', false);
 	if (_DEBUG_IMPORT)
 		ecrire_fichier(_DIR_TMP."debug_import.log","#####".date('Y-m-d H:i:s')."\n",false,false);
 	$fimport = import_charge_version($version_archive);

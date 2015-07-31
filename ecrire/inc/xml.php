@@ -27,7 +27,7 @@ function spip_xml_load($fichier, $strict=true, $clean=true, $taille_max = 104857
 	return count($arbre)?$arbre:false;
 }
 
-@define ('_SPIP_XML_TAG_SPLIT',"{<([^:>][^>]*?)>}sS");
+if (!defined("_SPIP_XML_TAG_SPLIT")) define ('_SPIP_XML_TAG_SPLIT', "{<([^:>][^>]*?)>}sS");
 // http://doc.spip.org/@spip_xml_parse
 function spip_xml_parse(&$texte, $strict=true, $clean=true, $profondeur = -1){
 	$out = array();
