@@ -166,9 +166,20 @@ function spip_version_compare($v1,$v2,$op=null){
 	return $op?version_compare($v1, $v2,$op):version_compare($v1, $v2);
 }
 
-// Cette fonction retourne la meta "plugin" deserialisee
-// mais en fait une mise a jour qui aurait du intervenir au chgt de version
-// http://doc.spip.org/@liste_plugin_actifs
+
+/**
+ * Retourne un tableau des plugins activés sur le site
+ * 
+ * Retourne la meta `plugin` désérialisée.
+ * Chaque élément du tableau est lui-même un tableau contenant
+ * les détails du plugin en question : répertoire et version.
+ *
+ * @note
+ *   Si le contenu de la meta n’est pas un tableau, cette fonction transforme
+ *   l’ancien format en tableau sérialisé pour être conforme au nouveau fonctionnement (SPIP >= 1.9.2)
+ *
+ * @return array Tableau des plugins actifs
+**/
 function liste_plugin_actifs(){
 	$liste = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
 	if (!$liste) return array();

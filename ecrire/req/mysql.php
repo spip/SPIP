@@ -126,14 +126,14 @@ function spip_mysql_set_charset($charset, $serveur='',$requeter=true,$requeter=t
 	return mysql_query($connexion['last'] = "SET NAMES "._q($charset));
 }
 
-// http://doc.spip.org/@spip_mysql_get_charset
-/**
 
- * @param array $charset
+/**
+ * Teste si le charset indiqué est disponible sur le serveur SQL
+ * 
+ * @param array|string $charset Nom du charset à tester.
  * @param string $serveur
  * @param bool $requeter
  * @return array
- *
  */
 function spip_mysql_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];

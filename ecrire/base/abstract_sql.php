@@ -66,19 +66,19 @@ function sql_serveur($ins_sql='', $serveur='', $continue=false) {
  * Demande si un charset est disponible
  *
  * Demande si un charset (tel que utf-8) est disponible
- * sur le gestionnaire de base de donnees de la connexion utilisee
+ * sur le gestionnaire de base de données de la connexion utilisée
  *
  * @api
  * @see sql_set_charset() pour utiliser un charset
  * 
  * @param string $charset
- * 		Le charset souhaite
+ *     Le charset souhaité
  * @param string $serveur
- * 		Le nom du connecteur
+ *     Le nom du connecteur
  * @param bool $option
- * 		Inutilise
+ *     Inutilise
  * @return string|bool
- * 		Retourne le nom du charset si effectivement trouve, sinon false.
+ *     Retourne le nom du charset si effectivement trouvé, sinon false.
 **/
 function sql_get_charset($charset, $serveur='', $option=true){
   // le nom http du charset differe parfois du nom SQL utf-8 ==> utf8 etc.
@@ -592,7 +592,25 @@ function sql_replace_multi($table, $tab_couples, $desc=array(), $serveur='', $op
 	return $r;
 }
 
-// http://doc.spip.org/@sql_drop_table
+/**
+ * Supprime une table SQL (structure et données)
+ *
+ * @api
+ * @param string $table
+ *     Nom de la table
+ * @param string $exist
+ *     true pour ajouter un test sur l'existence de la table, false sinon
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * @return bool|string
+ *     - True en cas de succès,
+ *     - Texte de la requête si demandé,
+ *     - False en cas d'erreur.
+**/
 function sql_drop_table($table, $exist='', $serveur='', $option=true)
 {
 	$f = sql_serveur('drop_table', $serveur,  $option==='continue' OR $option===false);
@@ -949,37 +967,38 @@ function sql_allfetsel($select = array(), $from = array(), $where = array(),
  * un unique champ demande
  * 
  * @example
- * 		<code>
- * 		$id_rubrique = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article='.sql_quote($id_article));
- * 		</code>
+ *     ```
+ *     $id_rubrique = sql_getfetsel('id_rubrique', 'spip_articles', 'id_article='.sql_quote($id_article));
+ *     ```
  *
  * @api
  * @uses sql_fetsel()
  * 
  * @param array|string $select
- * 		Liste des champs a recuperer (Select)
+ *     Liste des champs à récupérer (Select)
  * @param array|string $from
- * 		Tables a consulter (From)
+ *     Tables à consulter (From)
  * @param array|string $where
- * 		Conditions a remplir (Where)
+ *     Conditions à remplir (Where)
  * @param array|string $groupby
- * 		Critere de regroupement (Group by)
+ *     Critère de regroupement (Group by)
  * @param array|string $orderby
- * 		Tableau de classement (Order By)
+ *     Tableau de classement (Order By)
  * @param string $limit
- * 		Critere de limite (Limit)
+ *     Critère de limite (Limit)
  * @param array $having
- * 		Tableau des des post-conditions a remplir (Having)
+ *     Tableau des des post-conditions à remplir (Having)
  * @param string $serveur
- * 		Le serveur sollicite (pour retrouver la connexion)
+ *     Le serveur sollicité (pour retrouver la connexion)
  * @param bool|string $option
- * 		Peut avoir 3 valeurs : 
- * 		- true -> executer la requete.
- * 		- continue -> ne pas echouer en cas de serveur sql indisponible.
- * 		- false -> ne pas l'executer mais la retourner.
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - true -> executer la requete.
+ *     - continue -> ne pas echouer en cas de serveur sql indisponible.
+ *     - false -> ne pas l'executer mais la retourner.
  * 
  * @return mixed
- * 		Contenu de l'unique valeur demandee du premier enregistrement retourne
+ *     Contenu de l'unique valeur demandee du premier enregistrement retourne
  *
 **/
 function sql_getfetsel($select, $from = array(), $where = array(), $groupby = array(), 
@@ -1137,8 +1156,10 @@ function sql_hex($val, $serveur='', $option=true)
  * Echappe du contenu selon ce qu'attend le type de serveur SQL
  * et en fonction du type de contenu.
  * 
- * Cette fonction est automatiquement appelee par les fonctions sql_*q
- * tel que sql_instertq ou sql_updateq
+ * Permet entre autres de se protéger d'injections SQL.
+ * 
+ * Cette fonction est automatiquement appelée par les fonctions `sql_*q`
+ * tel que `sql_instertq` ou `sql_updateq`
  *
  * @api
  * @param string $val
