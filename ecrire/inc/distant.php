@@ -544,7 +544,7 @@ function recuperer_infos_distantes($source, $max = 0, $charger_si_petite_image =
 	// Echec avec HEAD, on tente avec GET
 	if (!$a AND !$max){
 		spip_log("tenter GET $source");
-		$a = recuperer_infos_distantes($source, 1024*1024);
+		$a = recuperer_infos_distantes($source, _COPIE_LOCALE_MAX_SIZE);
 	}
 
 	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
