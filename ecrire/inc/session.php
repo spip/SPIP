@@ -112,12 +112,7 @@ function ajouter_session($auteur) {
 	// Attention un visiteur peut avoir une session et un id=0,
 	// => ne pas melanger les sessions des differents visiteurs
 	$id_auteur = intval($auteur['id_auteur']);
-	if (!isset($_COOKIE['spip_session'])
-	OR !preg_match(',^'.$id_auteur.'_,', $_COOKIE['spip_session']))
-		$_COOKIE['spip_session'] = $id_auteur.'_'.md5(uniqid(rand(),true));
 
-	$fichier_session = fichier_session('alea_ephemere');
-	
 	// Si ce n'est pas un inscrit (les inscrits ont toujours des choses en session)
 	// on va vérifier s'il y a vraiment des choses à écrire
 	if (!$id_auteur){
@@ -134,14 +129,28 @@ function ajouter_session($auteur) {
 				unset($auteur_verif[$variable]);
 			}
 		}
-		
-		// Si après ça la session est vide alors on supprime l'éventuel fichier et on arrête là
-		if (!$auteur_verif){
-			if (@file_exists($fichier_session)) spip_unlink($fichier_session);
+		// Si après ça la session est vide et qu'on a pas de cookie session, on arrete
+		if (!isset($_COOKIE['spip_session'])){
 			return false;
 		}
 	}
-	
+
+	if (!isset($_COOKIE['spip_session'])
+	  OR !preg_match(',^'.$id_auteur.'_,', $_COOKIE['spip_session'])){
+		$_COOKIE['spip_session'] = $id_auteur.'_'.md5(uniqid(rand(),true));
+	}
+
+	$fichier_session = fichier_session('alea_ephemere');
+
+	// Si la session est vide alors on supprime l'éventuel fichier et on arrête là
+	if (!$id_auteur AND !$auteur_verif){
+		if (@file_exists($fichier_session)) spip_unlink($fichier_session);
+		// unset le COOKIE de session
+		// car il est pris en compte dans spip_session() qui va croire a tort qu'on est pas un visiteur anonyme
+		unset($_COOKIE['spip_session']);
+		return false;
+	}
+
 	// Maintenant on sait qu'on a des choses à écrire
 	// On s'assure d'avoir au moins ces valeurs
 	$auteur['id_auteur'] = $id_auteur;
@@ -278,9 +287,17 @@ function session_get($nom) {
  * @return void
  */
 function session_set($nom, $val=null) {
-	// On ajoute la valeur dans la globale
-	$GLOBALS['visiteur_session'][$nom] = $val;
-	
+
+	if (is_null($val)){
+		// rien a faire
+		if (!isset($GLOBALS['visiteur_session'][$nom])) return;
+		unset($GLOBALS['visiteur_session'][$nom]);
+	}
+	else {
+		// On ajoute la valeur dans la globale
+		$GLOBALS['visiteur_session'][$nom] = $val;
+	}
+
 	ajouter_session($GLOBALS['visiteur_session']);
 	actualiser_sessions($GLOBALS['visiteur_session']);
 }
