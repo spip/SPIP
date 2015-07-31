@@ -250,7 +250,7 @@ sera ignorée) :
 
     @url@
 ',
-	'form_deja_inscrit' => 'Vous êtes déjà inscrit.',
+	'form_deja_inscrit' => 'Vous êtes déjà inscrit(e).',
 	'form_email_non_valide' => 'Votre adresse email n\'est pas valide.',
 	'form_forum_access_refuse' => 'Vous n\'avez plus accès à ce site.',
 	'form_forum_bonjour' => 'Bonjour @nom@,',
@@ -283,7 +283,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'form_prop_non_enregistre' => 'Votre proposition n\'a pas été enregistrée.',
 	'form_prop_sujet' => 'Sujet',
 	'form_prop_url_site' => 'Adresse URL du site',
-	'forum_non_inscrit' => 'Vous n\'êtes pas inscrit, ou l\'adresse ou le mot de passe sont erronés.',
+	'forum_non_inscrit' => 'Vous n\'êtes pas inscrit(e), ou l\'adresse ou le mot de passe sont erronés.',
 	'forum_par_auteur' => 'par @auteur@',
 	'forum_titre_erreur' => 'Erreur...',
 
@@ -377,7 +377,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'info_dimension' => 'Dimensions :',
 	'info_documents_nb' => '@nb@ documents',
 	'info_documents_un' => '1 document',
-	'info_ecire_message_prive' => 'Ecrire un message privé',
+	'info_ecire_message_prive' => 'Écrire un message privé',
 	'info_email_invalide' => 'Adresse email invalide.',
 	'info_en_cours_validation' => 'Vos articles en cours de rédaction',
 	'info_en_ligne' => 'Actuellement en ligne :',
@@ -446,7 +446,7 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'info_propose_2' => 'Article proposé
 ---------------',
 	'info_propose_3' => 'L\'article "@titre@" est proposé à la publication.',
-	'info_propose_4' => 'Vous êtes invité à venir le consulter et à donner votre opinion',
+	'info_propose_4' => 'Vous êtes invité(e) à venir le consulter et à donner votre opinion',
 	'info_propose_5' => 'dans le forum qui lui est attaché. Il est disponible à l\'adresse :',
 	'info_publie_01' => 'L\'article "@titre@" a été validé par @connect_nom@.',
 	'info_publie_1' => '[@nom_site_spip@] PUBLIE : @titre@',
@@ -522,11 +522,11 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 			intercepté sur le réseau, veuillez activer Javascript
 			dans votre navigateur et',
 	'login_nouvelle_tentative' => 'Nouvelle tentative',
-	'login_par_ici' => 'Vous êtes enregistré... par ici...',
+	'login_par_ici' => 'Vous êtes enregistré(e)... par ici...',
 	'login_pass2' => 'Mot de passe :',
 	'login_preferez_refuser' => '<b>Si vous préférez refuser les cookies</b>, une autre méthode de connexion (moins sécurisée) est à votre disposition :',
 	'login_recharger' => 'recharger cette page',
-	'login_rester_identifie' => 'Rester identifié quelques jours',
+	'login_rester_identifie' => 'Rester identifié(e) quelques jours',
 	'login_retour_public' => 'Retour au site public',
 	'login_retour_site' => 'Retour au site public',
 	'login_retoursitepublic' => 'retour au site public',
@@ -568,13 +568,13 @@ le site "@nom_site_spip@" (@adresse_login@) :',
 	'pass_erreur_non_valide' => '<b>Erreur :</b> cet email <tt>@email_oubli@</tt> n\'est pas valide !',
 	'pass_erreur_probleme_technique' => '<b>Erreur :</b> à cause d\'un problème technique, l\'email ne peut pas être envoyé.',
 	'pass_espace_prive_bla' => 'L\'espace privé de ce site est ouvert aux
-		visiteurs, après inscription. Une fois enregistré,
+		visiteurs, après inscription. Une fois enregistré(e),
 		vous pourrez consulter les articles en cours de rédaction,
 		proposer des articles et participer à tous les forums.',
 	'pass_forum_bla' => 'Vous avez demandé à intervenir sur un forum
 		réservé aux visiteurs enregistrés.',
 	'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
-			vous êtes précédemment enregistré. Vous
+			vous êtes précédemment enregistré(e). Vous
 			recevrez un email vous indiquant la marche à suivre pour
 			récupérer votre accès.',
 	'pass_mail_passcookie' => '(ceci est un message automatique)
@@ -635,7 +635,7 @@ et vous reconnecter au site.
 		niveau, et enfin vérifiez que les images apparaissent
 		toujours dans les articles.',
 	'texte_erreur_visiteur' => 'Vous avez tenté d\'accéder à l\'espace privé avec un login qui ne le permet pas.',
-	'texte_inc_auth_1' => 'Vous êtes identifié sous le
+	'texte_inc_auth_1' => 'Vous êtes identifié(e) sous le
 		login <b>@auth_login@</b>, mais celui-ci n\'existe pas/plus dans la base.
 		Essayez de vous',
 	'texte_inc_auth_2' => 'reconnecter',
@@ -701,7 +701,7 @@ et vous reconnecter au site.
 	'zbug_hors_compilation' => 'Hors Compilation',
 	'zbug_info_erreur_squelette' => 'Erreur sur le site',
 	'zbug_inversion_ordre_inexistant' => 'Inversion d\'un ordre inexistant',
-	'zbug_pagination_sans_critere' => 'Balise #PAGINATION sans critère {pagination} ou employé dans une boucle recursive',
+	'zbug_pagination_sans_critere' => 'Balise #PAGINATION sans critère {pagination} ou employée dans une boucle récursive',
 	'zbug_parametres_inclus_incorrects' => 'Paramètre d\'inclusion incorrect : @param@',
 	'zbug_profile' => 'Temps de calcul : @time@',
 	'zbug_resultat' => 'résultat',
