@@ -52,7 +52,8 @@ function menu_lang_pour_tous($nom, $default) {
 	if (!$opt)
 		return '';
 
-	$cible = str_replace('&amp;', '&', parametre_url(self( /* racine */ true), 'lang' , '')); # lien a partir de /
+	# lien a partir de /
+	$cible = parametre_url(self('&', /* racine */ true), 'lang' , '', '&');
 	$post = generer_url_action('converser', 'redirect='. rawurlencode($cible), '&');
 
 	return array('formulaires/menu_lang',

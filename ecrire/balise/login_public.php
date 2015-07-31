@@ -172,7 +172,7 @@ function login_pour_tous($login, $cible, $action) {
 					'echec_visiteur' => $echec_visiteur,
 					'login' => $login,
 					'login_alt' => (isset($login_alt) ? $login_alt : $login),
-					'self' => str_replace('&amp;', '&', self()),
+					'self' => self('&'),
 					'rester_connecte' => $rester_connecte
 					)
 				)

@@ -443,7 +443,7 @@ function nettoyer_uri() {
 // les trucs inutiles
 //
 // http://doc.spip.org/@self
-function self($root = false) {
+function self($amp = '&amp;', $root = false) {
 	$url = nettoyer_uri();
 	if (!$root)
 		$url = preg_replace(',^[^?]*/,', '', $url);
@@ -464,6 +464,10 @@ function self($root = false) {
 
 	// eviter les hacks
 	$url = htmlspecialchars($url);
+
+	// &amp; ?
+	if ($amp != '&amp;')
+		$url = str_replace('&amp;', $amp, $url);
 
 	// Si c'est vide, donner './'
 	$url = preg_replace(',^$,', './', $url);

@@ -908,7 +908,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 // http://www.spip.net/@self
 // http://doc.spip.org/@balise_SELF_dist
 function balise_SELF_dist($p) {
-	$p->code = 'quote_amp(self())';
+	$p->code = 'self()';
 	$p->interdire_scripts = false;
 	return $p;
 }

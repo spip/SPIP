@@ -156,7 +156,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	// Preparer le #ENV des boutons
 	$env = array(
 		'ecrire' => $ecrire,
-		'action' => self(),
+		'action' => self('&'),
 		'divclass' => $float,
 		'lang' => $lang,
 		'calcul' => (_request('var_mode') ? 'recalcul' : 'calcul'),

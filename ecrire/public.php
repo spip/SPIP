@@ -123,8 +123,7 @@ if (defined('_INC_PUBLIC')) {
 
 	if ($var_preview AND $html) {
 		include_spip('inc/minipres'); // pour http_img_pack
-		$x = _T('previsualisation');
-		$page['texte'] .= '<div class="spip_large" style="
+		$x = '<div class="spip_large" style="
 		display: block;
 		color: #eeeeee;
 		background-color: #111111;
@@ -135,8 +134,11 @@ if (defined('_INC_PUBLIC')) {
 		left: 0px;
 		position: absolute;
 		">' 
-		. http_img_pack('naviguer-site.png', $x, '')
-		. '&nbsp;' . majuscules($x) . '</div>';
+		. http_img_pack('naviguer-site.png', _T('previsualisation'), '')
+		. '&nbsp;' . majuscules(_T('previsualisation')) . '</div>';
+		if (!$pos = strpos($page['texte'], '</body>'))
+			$pos = strlen($page['texte']);
+		$page['texte'] = substr_replace($page['texte'], $x, $pos, 0);
 	}
 
 	// est-on admin ?
