@@ -21,6 +21,7 @@ if (!defined('_INC_DISTANT_VERSION_HTTP')) define('_INC_DISTANT_VERSION_HTTP', "
 if (!defined('_INC_DISTANT_CONTENT_ENCODING')) define('_INC_DISTANT_CONTENT_ENCODING', "gzip");
 if (!defined('_INC_DISTANT_USER_AGENT')) define('_INC_DISTANT_USER_AGENT', 'SPIP-' . $GLOBALS['spip_version_affichee'] . " (" . $GLOBALS['home_server'] . ")");
 if (!defined('_INC_DISTANT_MAX_SIZE')) define('_INC_DISTANT_MAX_SIZE',2097152);
+if (!defined('_INC_DISTANT_CONNECT_TIMEOUT')) define('_INC_DISTANT_CONNECT_TIMEOUT',10);
 
 define('_REGEXP_COPIE_LOCALE', ',' .
        preg_replace('@^https?:@', 'https?:', $GLOBALS['meta']['adresse_site'])
@@ -680,7 +681,8 @@ function init_http($method, $url, $refuse_gz = false, $referer = '', $datas = ""
 	if (!$f){
 		// fallback : fopen
 		if (!need_proxy($host)
-			AND !_request('tester_proxy')){
+		  AND !_request('tester_proxy')
+		  AND (!isset($GLOBALS['inc_distant_allow_fopen']) OR $GLOBALS['inc_distant_allow_fopen'])){
 			$f = @fopen($url, "rb");
 			spip_log("connexion vers $url par simple fopen");
 			$fopen = true;
@@ -724,10 +726,10 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 
 	if ($connect){
 		$streamContext = stream_context_create(array('ssl' => array('verify_peer' => false, 'allow_self_signed' => true)));
-		$f = @stream_socket_client("tcp://$first_host:$port", $nError, $sError, 10, STREAM_CLIENT_CONNECT, $streamContext);
+		$f = @stream_socket_client("tcp://$first_host:$port", $nError, $sError, _INC_DISTANT_CONNECT_TIMEOUT, STREAM_CLIENT_CONNECT, $streamContext);
 		spip_log("Recuperer $path sur $first_host:$port par $f (via CONNECT)","connect");
 		if (!$f) return false;
-		stream_set_timeout($f, 10);
+		stream_set_timeout($f, _INC_DISTANT_CONNECT_TIMEOUT);
 
 		fputs($f, $connect);
 		fputs($f, "\r\n");
@@ -746,9 +748,13 @@ function lance_requete($method, $scheme, $user, $host, $path, $port, $noproxy, $
 		spip_log("OK CONNECT sur $first_host:$port","connect");
 	}
 	else {
-		$f = @fsockopen($first_host, $port);
+		$f = @fsockopen($first_host, $port, $errno, $errstr, _INC_DISTANT_CONNECT_TIMEOUT);
 		spip_log("Recuperer $path sur $first_host:$port par $f");
-		if (!$f) return false;
+		if (!$f) {
+			spip_log("Erreur connexion $errno $errstr",_LOG_ERREUR);
+			return false;
+		}
+		stream_set_timeout($f, _INC_DISTANT_CONNECT_TIMEOUT);
 	}
 
 	$site = $GLOBALS['meta']["adresse_site"];
