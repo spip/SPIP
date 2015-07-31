@@ -450,7 +450,7 @@ function parser_boucle($texte, $id_parent) {
 						else if ($tri == 'points'){ // par points
 							$req_order= " ORDER BY points";
 						}
-						else if (ereg("^num[[:space:]]+([^,]*)(,.*)",$tri, $match2)) { // par num champ
+						else if (ereg("^num[[:space:]]+([^,]*)(,.*)?",$tri, $match2)) { // par num champ
 							$req_select[] = "0+$table.".$match2[1]." AS num";
 							$req_order = " ORDER BY num".$match2[2];
 						}
