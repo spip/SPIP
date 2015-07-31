@@ -83,24 +83,24 @@ function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id
 	$previsu = ' ';
 
 	// Recuperer le message a previsualiser
-	if ($id_message = intval($GLOBALS[HTTP_POST_VARS][id_message]))  {
-		$titre = $GLOBALS[HTTP_POST_VARS][titre];
-		$texte = $GLOBALS[HTTP_POST_VARS][texte];
-		$auteur = $GLOBALS[HTTP_POST_VARS][auteur];
-		$email_auteur = $GLOBALS[HTTP_POST_VARS][email_auteur];
-		$nom_site_forum = $GLOBALS[HTTP_POST_VARS][nom_site_forum];
-		$url_site = $GLOBALS[HTTP_POST_VARS][url_site];
+	if ($id_message = intval($GLOBALS['HTTP_POST_VARS']['id_message']))  {
+		$titre = $GLOBALS['HTTP_POST_VARS']['titre'];
+		$texte = $GLOBALS['HTTP_POST_VARS']['texte'];
+		$auteur = $GLOBALS['HTTP_POST_VARS']['auteur'];
+		$email_auteur = $GLOBALS['HTTP_POST_VARS']['email_auteur'];
+		$nom_site_forum = $GLOBALS['HTTP_POST_VARS']['nom_site_forum'];
+		$url_site = $GLOBALS['HTTP_POST_VARS']['url_site'];
 
 		if ($afficher_texte != 'non') {
 			$previsu = 
-			  "<div style='font-size: 120%; font-weigth: bold;'>"
-			  . htmlspecialchars($titre)
+			  "<div style='font-size: 120%; font-weight: bold;'>"
+			  . interdire_scripts(typo($titre))
 			  . "</div><p /><b><a href=\"mailto:"
-			  . htmlspecialchars($email_auteur) . "\">"
-			  . htmlspecialchars($auteur) . "</a></b><p />"
-			  . htmlspecialchars($texte) . "<p /><a href=\""
-			  . htmlspecialchars($url_site) . "\">"
-			  . htmlspecialchars($nom_site_forum) . "</a>";
+			  . interdire_scripts(typo($email_auteur)) . "\">"
+			  . interdire_scripts(typo($auteur)) . "</a></b><p />"
+			  . propre($texte) . "<p /><a href=\""
+			  . interdire_scripts($url_site) . "\">"
+			  . interdire_scripts(typo($nom_site_forum)) . "</a>";
 
 			// Verifier mots associes au message
 			$result_mots = spip_query("SELECT mots.id_mot, mots.titre, mots.type
@@ -113,7 +113,8 @@ function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id
 					$les_mots[$row['id_mot']] = "checked='checked'";
 					$presence_mots = true;
 					$previsu .= "<li class='font-size=80%'> "
-					. $row['type'] . "&nbsp;: <b>" . $row['titre'] ."</b></li>";
+					. typo($row['type']) . "&nbsp;: <b>"
+					. typo($row['titre']) ."</b></li>";
 				}
 				$previsu .= '</ul>';
 			}
@@ -373,9 +374,10 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	if ($idf)
 		$r = "SELECT titre FROM spip_forum WHERE id_forum = $idf";
 
-	if ($r)
+	if ($r) {
 		list($titre) = spip_fetch_array(spip_query($r));
-	else {
+		$titre = '> ' . supprimer_numero($titre);
+	} else {
 		$titre = _T('forum_titre_erreur');
 		$table = '';
 	}
@@ -393,8 +395,4 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	return array ($titre, $table, $accepter_forum);
 }
 
-function supprimer_prefixe($texte, $prefixe)
-{
-  return ereg_replace("^[$prefixe" . '[:space:]]*', '', $texte);
-}
 ?>
