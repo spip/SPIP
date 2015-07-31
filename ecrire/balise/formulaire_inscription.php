@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('base/abstract_sql');
+include_spip('inc/filtres');
 
 // Balise independante du contexte
 
