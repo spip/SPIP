@@ -1528,7 +1528,9 @@ function fin_html() {
 <p align='right'><font face="Verdana, Arial, Helvetica, sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
 est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>.</p>
-</body></html>
+<?php if ($GLOBALS['spip_session']) {
+	echo '<script src="../spip_cookie.php3?rejoue=oui"></script>';
+} ?></body></html>
 <?php
 	flush();
 }

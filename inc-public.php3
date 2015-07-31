@@ -319,6 +319,10 @@ if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserv
 	echo "</form>\n";
 }
 
+// protection contre tentative de piratage de cookie de session
+if ($spip_session) {
+    echo '<script src="spip_cookie.php3?rejoue=oui"></script>';
+}
 
 //
 // Gestion des statistiques par article

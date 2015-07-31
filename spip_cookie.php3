@@ -6,6 +6,19 @@ include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
 
+// rejoue le cookie pour renouveler spip_session
+if ($rejoue==oui) {
+	if (verifier_session($spip_session)) {
+		$cookie = creer_cookie_session($auteur_session);
+		supprimer_session($spip_session);
+		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
+		setcookie ('spip_session', $cookie, time() + 24 * 7 * 3600);
+		@header('Content-Type: text/javascript')
+		echo " \n";	// ne pas renvoyer un fichier vide, ca fait ramer.
+		exit;
+	}
+}
+
 // tentative de login
 if ($cookie_session == "non") {
 	supprimer_session($spip_session);
