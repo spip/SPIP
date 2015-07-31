@@ -255,7 +255,9 @@ function fieldset_champs($champs = array())
 		else {
 			$fieldset .= "<label for='".$nom."'>".$contenu['label']."</label>\n";
 			$fieldset .= "<input ".$class."type='".$type."' id='" . $nom . "' name='".$nom."'\nvalue='".$contenu['valeur']."'"
-							  .(preg_match(',^(pass|login),', $nom)?" autocomplete='off'":'') .	" />\n";
+							  .(preg_match(',^(pass|login),', $nom)?" autocomplete='off'":'')
+			          . ((isset($contenu['required']) AND $contenu['required'])?" required='required'":"")
+			          .	" />\n";
 		}
 	}
 	return $fieldset;
