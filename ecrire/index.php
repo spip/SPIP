@@ -166,13 +166,4 @@ else {
 	$var_f($exec);
 }
 
-$debug = ((_request('var_mode') == 'debug') OR !empty($tableau_des_temps)) ? array(1) : array();
-if ($debug) {
-	$var_mode_affiche = _request('var_mode_affiche');
-	$GLOBALS['debug_objets'][$var_mode_affiche][$var_mode_objet . 'tout'] = ($var_mode_affiche== 'validation' ? $page['texte'] :"");
-	echo erreur_squelette();
-}
-if (isset($tableau_des_erreurs) AND count($tableau_des_erreurs) AND $affiche_boutons_admin)
-	echo affiche_erreurs_page($tableau_des_erreurs);
-
 ?>
