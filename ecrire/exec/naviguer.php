@@ -391,7 +391,7 @@ EOF;
 			"<script type='text/javascript'>\n".
 			"var multilang_def_lang='".$GLOBALS["spip_lang"]."';var multilang_avail_langs=[$active_langs];\n".
 			"$(function(){\n".
-			"multilang_init_lang({'root':'#portfolio,#documents','fields':'input,textarea'});\n".
+			"multilang_init_lang({'root':'#portfolio,#documents','forms':'form:not(.form_upload)','fields':'input,textarea'});\n".
 			"onAjaxLoad(function(){forms_init_multi({'target':this})});\n".
 			"});\n".
 			"</script>\n";
