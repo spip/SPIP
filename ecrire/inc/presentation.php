@@ -1330,7 +1330,7 @@ function debut_javascript($admin, $stat)
 	  // pour le pied de page
 		define('_TESTER_NOSCRIPT',
 			"<noscript>\n<div style='display:none;'><img src='"
-		        . $testeur
+		        . generer_url_ecrire('test_ajax', 'var_ajaxcharset=utf-8&js=-1')
 		        . "' width='1' height='1' alt='' /></div></noscript>\n"); 
 	}
 
