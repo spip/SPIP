@@ -642,7 +642,6 @@ ecrire/exec/sites_tous.php -text
 ecrire/exec/statistiques_lang.php -text
 ecrire/exec/statistiques_referers.php -text
 ecrire/exec/statistiques_repartition.php -text
-ecrire/exec/statistiques_svg.php -text
 ecrire/exec/statistiques_visites.php -text
 ecrire/exec/synchro.php -text
 ecrire/exec/tourner.php -text

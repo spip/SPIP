@@ -148,35 +148,6 @@ function verif_butineur() {
 	if (!$browser_name) $browser_name = "Mozilla";
 }
 
-
-// teste si accepte le SVG et pose un cookie en cas de demande explicite
-// (fonction a appeler en debut de page, avant l'envoi de contenu)
-// http://doc.spip.org/@flag_svg
-function flag_svg() {
-	global $browser_name, $browser_rev;
-
-	// SVG est une preference definie par le visiteur ?
-	if (_request('var_svg') == 'oui') {
-		include_spip('inc/cookie');
-		spip_setcookie('spip_svg', 'oui', time() + 365 * 24 * 3600);
-		return true;
-	}
-	if (_request('var_svg') == 'non') {
-		include_spip('inc/cookie');
-		spip_setcookie('spip_svg', 'non', time() + 365 * 24 * 3600);
-		return false;
-	}
-	if (@$_COOKIE['spip_svg'] == 'oui')
-		return true;
-	if (@$_COOKIE['spip_svg'] == 'non')
-		return false;
-
-	// Sinon, proceder a l'autodetection
-	if (!$browser_name)
-		verif_butineur();
-	return ($browser_name == "Mozilla" AND $browser_rev >= 1.8);
-}
-
 verif_butineur();
 
 $GLOBALS['browser_caret'] =  (!$GLOBALS['browser_barre'] ? '' : "
