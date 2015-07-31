@@ -361,21 +361,30 @@ function apparier_paras($src, $dest, $flou = true) {
 //
 // http://doc.spip.org/@recuperer_version
 function recuperer_version($id_article, $id_version) {
-	$result = spip_query("SELECT champs FROM spip_versions WHERE id_article=$id_article AND id_version=$id_version");
-	
-	if (!($row = sql_fetch($result))) return false;
 
-	$fragments = recuperer_fragments($id_article, $id_version);
-	$champs = unserialize($row['champs']);
-	$textes = array();
-	foreach ($champs as $nom_champ => $code) {
-		$textes[$nom_champ] = "";
-		$code = explode(' ', $code);
-		foreach ($code as $id_fragment) {
-			$textes[$nom_champ] .= isset($fragments[$id_fragment])?$fragments[$id_fragment]:("["._T('forum_titre_erreur').$id_fragment."]");
+	$row = sql_fetch(spip_query("SELECT champs FROM spip_versions WHERE id_article=$id_article AND id_version=$id_version"));
+	if (!$row OR !is_array($champs = unserialize($row['champs'])))
+		return array();
+	else return reconstuire_version($champs,
+			 recuperer_fragments($id_article, $id_version));
+}
+
+function reconstuire_version($champs, $fragments, $res=array()) {
+
+	static $msg;
+	if (!$msg) $msg = _T('forum_titre_erreur');
+
+	foreach ($champs as $nom => $code) {
+		if (!isset($res[$nom])) {
+			$t = '';
+			foreach (explode(' ', $code) as $id) {
+				$t .= isset($fragments[$id])?$fragments[$id]:"[$msg$id]";
+			}
+			$res[$nom] = $t;
 		}
+		spip_log("recon $nom $t");
 	}
-	return $textes;
+	return $res;
 }
 
 // http://doc.spip.org/@supprimer_versions
@@ -390,60 +399,56 @@ function supprimer_versions($id_article, $version_min, $version_max) {
 //
 // http://doc.spip.org/@ajouter_version
 function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) {
-	$paras_old = $fragments = $paras_new = $paras_champ = array();
-
-	// Eviter les validations entremelees
-	$lock = "ajout_version $id_article";
-	spip_get_lock($lock, 10);
+	$paras = $paras_old = $paras_champ = $fragments = array();
 
 	// Attention a une edition anonyme (type wiki): id_auteur n'est pas
 	// definie, on enregistre alors le numero IP
 
 	$str_auteur = intval($id_auteur) ? intval($id_auteur) : $GLOBALS['ip'];
+	$permanent = empty($titre_version) ? 'non' : 'oui';
+
+	// Eviter les validations entremelees
+	$lock = "ajout_version $id_article";
+	spip_get_lock($lock, 10);
 
 	// Examiner la derniere version
-	$result = sql_select("id_version, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); 	// le champ id_auteur est un varchar dans cette table
+	$result = sql_select("id_version, champs, (id_auteur='$str_auteur' AND date > DATE_SUB(NOW(), INTERVAL 1 MINUTE) AND permanent!='oui') AS flag", "spip_versions", "id_article=$id_article", '', "id_version DESC", "1"); 	// le champ id_auteur est un varchar dans cette table
 
 	if ($row = sql_fetch($result)) {
 		$nouveau = !$row['flag'];
 		$id_version = $row['id_version'];
+		$paras_old = recuperer_fragments($id_article, $id_version);
 		if ($nouveau) {
-			$id_version_new = $id_version + 1;
+			$id_version++;
 		} else {
 			// On reprend une version existante ; pour qu'elle soit complete
 			// il faut merger ses champs avec ceux qu'on met a jour
-			$id_version_new = $id_version;
-			$champs = array_merge(
-				recuperer_version($id_article, $id_version),
-				$champs
-			);
+			$champs = reconstuire_version(unserialize($row['champs']), $pars_old, $champs);
 		}
-		$paras_old = recuperer_fragments($id_article, $id_version);
-	} else {
-		$id_version = $id_version_new = $nouveau = 1;
 
-	}
+	} else { $id_version = $nouveau = 1;}
+
 	// Preparer la place
 	if ($nouveau)
-		sql_insert('spip_versions', '(id_article, id_version)', "($id_article, $id_version_new)");
+		sql_insert('spip_versions', '(id_article, id_version)', "($id_article, $id_version)");
 
 	$row = sql_fetch(spip_query("SELECT id_fragment FROM spip_versions_fragments WHERE id_article=$id_article ORDER BY id_fragment DESC LIMIT 1"));
 
 	$id_fragment_next = !$row  ? 1 : ($row['id_fragment'] + 1);
 
 	// Generer les nouveaux fragments
-
+	$codes = array();
 	foreach ($champs as $nom_champ => $texte) {
 		$codes[$nom_champ] = array();
-		$paras_new = separer_paras($texte, $paras_new);
-		$paras_champ[$nom_champ] = count($paras_new);
+		$paras = separer_paras($texte, $paras);
+		$paras_champ[$nom_champ] = count($paras);
 	}
 
 	// Apparier les fragments de maniere optimale
-	$n = count($paras_new);
+	$n = count($paras);
 	if ($n) {
 		// Tables d'appariement dans les deux sens
-		list($trans, $trans_rev) = apparier_paras($paras_old, $paras_new);
+		list($trans, $trans_rev) = apparier_paras($paras_old, $paras);
 		reset($champs);
 		$nom_champ = '';
 		for ($i = 0; $i < $n; $i++) {
@@ -452,7 +457,7 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 			if (isset($trans_rev[$i])) $id_fragment = $trans_rev[$i];
 			else $id_fragment = $id_fragment_next++;
 			$codes[$nom_champ][] = $id_fragment;
-			$fragments[$id_fragment] = $paras_new[$i];
+			$fragments[$id_fragment] = $paras[$i];
 		}
 	}
 	foreach ($champs as $nom_champ => $t) {
@@ -461,18 +466,15 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	}
 
 	// Enregistrer les modifications
-	ajouter_fragments($id_article, $id_version_new, $fragments);
-	if (!$codes) $codes = array();
-	$codes = (serialize($codes));
-	$permanent = empty($titre_version) ? 'non' : 'oui';
+	ajouter_fragments($id_article, $id_version, $fragments);
 
-	spip_query("UPDATE spip_versions SET date=NOW(), id_auteur='$str_auteur', champs=" . _q($codes) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
+	spip_query("UPDATE spip_versions SET date=NOW(), id_auteur='$str_auteur', champs=" . _q(serialize($codes)) . ", permanent='$permanent', titre_version=" . _q($titre_version) . " WHERE id_article=$id_article AND id_version=$id_version");
 
-	spip_query("UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET id_version=$id_version WHERE id_article=$id_article");
 
 	spip_release_lock($lock);
 
-	spip_log("creation version $id_version_new de l'article $id_article $titre_version");
+	spip_log("memoise la version $id_version de l'article $id_article $titre_version");
 
 	return $id_version_new;
 }
