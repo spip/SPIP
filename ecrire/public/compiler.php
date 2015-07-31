@@ -615,7 +615,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	$racine = $f($squelette, '',$boucles, $nom);
 
 	// tableau des informations sur le squelette
-	$descr = array('nom' => $nom, 'documents' => false, 'sourcefile' => $sourcefile);
+	$descr = array('nom' => $nom, 'sourcefile' => $sourcefile);
 
 	// une boucle documents est conditionnee par tout le reste!
 	foreach($boucles as $idb => $boucle) {

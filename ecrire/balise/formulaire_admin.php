@@ -54,6 +54,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 	$dejafait = true;
 	include_spip('inc/urls');
+	$objet_affiche = '';
 
 	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
 	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
