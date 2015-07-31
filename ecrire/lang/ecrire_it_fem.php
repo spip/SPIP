@@ -161,7 +161,6 @@ cancellarli successivamente).',
 'entree_base_donnee_1' => 'Indirizzo del database',
 'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell\'intero sito, qualche volta corrisponde a "localhost", altre volte invece non è necessario specificarlo.)',
 'entree_biographie' => 'La tua biografia in breve.',
-'entree_breve_publiee' => 'Questa breve deve essere pubblicata?',
 'entree_chemin_acces' => '<b>Inserire</b> il percorso d\'accesso:',
 'entree_cle_pgp' => 'Chiave PGP',
 'entree_contenu_rubrique' => '(Contenuto della rubrica in qualche parola)',
@@ -187,7 +186,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'entree_passe_ldap' => 'Password',
 'entree_port_annuaire' => 'Il numero di porta della rubrica',
 'entree_signature' => 'Firma',
-'entree_texte_breve' => 'Testo della breve',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Obbligatorio]<br />',
 'entree_url' => 'Indirizzo (URL) del sito',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -240,7 +238,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_creer_mot_cle_rubrique' => 'Creare una nuova parola chiave e collegarla a questa rubrica',
 'icone_creer_mot_cle_site' => 'Creare una nuova parola chiave e collegarla a questo sito',
 'icone_creer_rubrique_2' => 'Crea una nuova rubrica',
-'icone_ecrire_nouvel_article' => 'Le brevi contenute nella rubrica',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Invia questo messaggio',
 'icone_evolution_visites' => 'Evoluzione delle visite<br />@visites@ visite',
@@ -249,7 +246,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Modifica questo gruppo',
 'icone_modifier_article' => 'Modifica l\'articolo',
-'icone_modifier_breve' => 'Modifica la breve',
 'icone_modifier_message' => 'Modifica il messaggio',
 'icone_modifier_mot' => 'Modifica questa parola chiave',
 'icone_modifier_rubrique' => 'Modifica la rubrica',
@@ -276,7 +272,6 @@ Se non conosci queste informazioni, richiedile all\'amministratrice del sistema 
 'info_1_article' => '1 articolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 breve',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -328,7 +323,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -344,7 +338,6 @@ immagini inserite. Ciò permette ad esempio di creare in automatico una galleria
 'info_barre_outils' => 'con la barra degli strumenti?',
 'info_base_installee' => 'La struttura del vostro database è installata.',
 'info_bloquer' => 'bloccare',
-'info_breves' => 'Il tuo sito dovrà utilizzare il sistema di brevi?',
 'info_breves_03' => 'brevi',
 'info_breves_liees_mot' => 'Le brevi collegate a questa parola chiave',
 'info_breves_touvees' => 'Brevi trovate',
@@ -441,7 +434,6 @@ Il loro status è indicato dal colore dell\'icona (redattrice = giallo; amminist
 le autrici eliminate, invece, da un cestino.',
 'info_gauche_messagerie' => 'Il sistema di messaggistica permette di scambiare dei messaggi tra redattrici, di conservare dei memo (promemoria ad uso personale) o di pubblicare degli annunci nel pannello di controllo dell\'area riservata (se sei amministratrice).',
 'info_gauche_numero_auteur' => 'AUTRICE NUMERO',
-'info_gauche_numero_breve' => 'BREVE NUMERO',
 'info_gauche_statistiques_referers' => 'Questa pagina presenta un elenco dei siti che contengono link verso il tuo (<i>referrer</i>). Questo elenco è valido però solo per oggi essendo azzerato ogni 24 ore.',
 'info_gauche_suivi_forum' => 'La pagina di <i>monitoraggio dei forum</i> è uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi del forum pubblico di quest\'articolo, permettendone la gestione.',
 'info_gauche_suivi_forum_2' => 'La pagina di <i>monitoraggio dei forum</i> è uno strumento di gestione del sito (e non uno spazio di discussione o di redazione). In essa sono pubblicati tutti i contributi dei forum del sito, sia quelli del sito pubblico che quelli dell\'area riservata, permettendone la gestione.',
@@ -519,7 +511,6 @@ le informazioni contenute nel database sono probabilmente andate perse.<br />{{R
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -755,8 +746,6 @@ Le traduzioni sono associate all\'originale,
 'item_autoriser_selectionner_date_en_ligne' => 'Permetti di modificare la data di ogni documento',
 'item_autoriser_syndication_integrale' => 'Diffondere la versione integrale degli articoli nei file di syndication',
 'item_bloquer_liens_syndiques' => 'Blocca i link in syndication per la convalida',
-'item_breve_refusee' => 'NO - Breve rifiutata',
-'item_breve_validee' => 'SI - Breve convalidata',
 'item_choix_administrateurs' => 'le amministratrici',
 'item_choix_generation_miniature' => 'Genera automaticamente le thumbnail delle immagini.',
 'item_choix_non_generation_miniature' => 'Non creare le thumbnail delle immagini.',
@@ -795,7 +784,6 @@ Le traduzioni sono associate all\'originale,
 'item_non_limiter_recherche' => 'Estendi la ricerca al contenuto dei siti in syndication',
 'item_non_messagerie_agenda' => 'Disattiva la messaggistica e l’agenda',
 'item_non_publier_articles' => 'Non pubblicare gli articoli prima della data impostata.',
-'item_non_utiliser_breves' => 'Non utilizzare le brevi',
 'item_non_utiliser_config_groupe_mots_cles' => 'Non utilizzare la configurazione avanzata dei gruppi di parole chiave',
 'item_non_utiliser_moteur_recherche' => 'Non utilizzare il motore di ricerca',
 'item_non_utiliser_mots_cles' => 'Non utilizzare le parole chiave',
@@ -806,7 +794,6 @@ Le traduzioni sono associate all\'originale,
 'item_oui' => 'Sì',
 'item_publier_articles' => 'Pubblica gli articoli indipendentemente dalla data impostata.',
 'item_reponse_article' => 'Risposta all\'articolo ',
-'item_utiliser_breves' => 'Utilizza le brevi',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizza la configurazione avanzata dei gruppi di parole chiave',
 'item_utiliser_moteur_recherche' => 'Utilizza il motore di ricerca',
 'item_utiliser_mots_cles' => 'Utilizza le parole chiave',
@@ -997,9 +984,6 @@ Le traduzioni sono associate all\'originale,
 'texte_auteur_messagerie' => 'Questo sito può costantemente visualizzare la lista delle redattrici collegate, permettendo lo scambio di messaggi in tempo reale. Si può però decidere di non comparire in questo elenco (rendendosi quindi «invisibili» alle altre utenti).',
 'texte_auteur_messagerie_1' => 'Questo sito permette lo scambio di messaggi e la costituzione di forum di discussione privati tra le partecipanti al sito. Puoi però decidere di non partecipare a questi scambi.',
 'texte_auteurs' => 'LE AUTRICI',
-'texte_breves' => 'Le brevi sono dei testi corti e semplici che consentono
-di mettere on line rapidamente delle news di attualità,
-di gestire una rassegna stampa o un calendario di eventi, ecc.',
 'texte_choix_base_1' => 'Scegli il database:',
 'texte_choix_base_2' => 'Il server SQL contiene diversi database.',
 'texte_choix_base_3' => '<b>Seleziona</b> quello che è stato attribuito al tuo dominio:',
@@ -1180,7 +1164,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Articoli in syndication raccolti da questo sito',
-'titre_breves' => 'Le brevi',
 'titre_cadre_afficher_article' => 'Visualizza gli articoli',
 'titre_cadre_afficher_traductions' => 'Visualizzare lo stato delle traduzioni per le seguenti lingue:',
 'titre_cadre_ajouter_auteur' => 'AGGIUNGI UN\'AUTRICE: ',
@@ -1228,7 +1211,6 @@ in tal caso si può verificare un leggero rallentamento del tuo sito.',
 'titre_page_articles_page' => 'Gli articoli',
 'titre_page_articles_tous' => 'Tutto il sito',
 'titre_page_auteurs' => 'Visitatori',
-'titre_page_breves' => 'Brevi',
 'titre_page_breves_edit' => 'Modifica la breve: «@titre@»',
 'titre_page_calendrier' => 'Calendario @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Configurazione del sito',

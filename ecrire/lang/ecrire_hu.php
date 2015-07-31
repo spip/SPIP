@@ -159,7 +159,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'entree_base_donnee_1' => 'Adatbázis címe',
 'entree_base_donnee_2' => '(Gyakran ez a cím a honlapé, néha «localhost», néha teljesen üres marad.)',
 'entree_biographie' => 'Rövid önéletrajz pár szóban.',
-'entree_breve_publiee' => 'Ezt a hírt publikálni kell?',
 'entree_chemin_acces' => '<b>Beírni</b> az elerési utat :', # MODIF
 'entree_cle_pgp' => 'Az Ön PGP kulcsa',
 'entree_contenu_rubrique' => '(Rovat tartalma pár szóban.)',
@@ -185,7 +184,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'entree_passe_ldap' => 'Jelszó',
 'entree_port_annuaire' => 'A címtár port száma',
 'entree_signature' => 'Aláírás',
-'entree_texte_breve' => 'Hír szövege',
 'entree_titre_obligatoire' => '<b>Cím</b> [Kötelező]<br />', # MODIF
 'entree_url' => 'A honlapja címe (URL)',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -238,7 +236,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Új rovat létrehozása',
-'icone_ecrire_nouvel_article' => 'E rovatban szereplő hírek',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Üzenet küldése',
 'icone_evolution_visites' => 'Látógatások kialakulása<br />@visites@ látógatás', # MODIF
@@ -247,7 +244,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'A szócsoport módosítása',
 'icone_modifier_article' => 'A cikk módosítása',
-'icone_modifier_breve' => 'A hír módosítása',
 'icone_modifier_message' => 'Az üzenet módosítása',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'A rovat módosítása',
@@ -274,7 +270,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_1_article' => '1 cikk',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 hír',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -325,7 +320,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -341,7 +335,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Az Ön adatbázisának struktúrája telepítve van.',
 'info_bloquer' => 'blokkol',
-'info_breves' => 'Az Ön honlapja használja-e a hírek rendszerét ?',
 'info_breves_03' => 'hírek',
 'info_breves_liees_mot' => 'A kulcsszóhoz kötött hírek',
 'info_breves_touvees' => 'Talált hírek',
@@ -432,7 +425,6 @@ SPIP dokumentációja (franciául)</a>.', # MODIF
 a törölt szerzők pedig kukával vannak jelölve.',
 'info_gauche_messagerie' => 'A levelezés lehetővé tesz szerzők közti üzenetcserét, emlékeztetők (saját használatra) megtartását, vagy hírdetések megjelenítését a privát rész főoldalán (amennyiben Ön adminisztrátor).',
 'info_gauche_numero_auteur' => 'SZERZŐ SZÁMA',
-'info_gauche_numero_breve' => 'HÍR SZÁMA',
 'info_gauche_statistiques_referers' => 'Ez az oldal a <i>referers</i> listáját mutat, vagyis olyan honlapokat, melyeken az Ön honlapjához hivatkozó linkek találhatók, de csak a tegnapi és a mai napra : ez a lista nullázva van 24 óra után.',
 'info_gauche_suivi_forum' => 'A <i>fórumok megfigyelése</i> nevű oldal  a honlap egyik kezelési eszkőze (és nem pedig egy vitás, vagy szerzői rész). A cikk nyilvános fórumának összes hozzzászólását jeleníti meg és lehetővé teszi e hozzászólások kezelését.', # MODIF
 'info_gauche_suivi_forum_2' => 'A <i>fórumok megfigyelése</i> nevű oldal a honlap egyik kezelési eszkőze (és nem pedig vitás, vagy szerzői rész). A honlap összes (nyilvános, ill. privát rész) fórumainak hozzászólásait jeleníti meg, és ezeknek kezelését teszi lehetővé.', # MODIF
@@ -506,7 +498,6 @@ a törölt szerzők pedig kukával vannak jelölve.',
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -738,8 +729,6 @@ ami állapotát jelzi :',
 'item_autoriser_selectionner_date_en_ligne' => 'Pouvoir sélectionner la date de mise en ligne de chaque document', # MODIF
 'item_autoriser_syndication_integrale' => 'A cikkek teljes tartalma a szindikálási fájlokban',
 'item_bloquer_liens_syndiques' => 'Szindikált linkek tiltása jóváhagyás érdekében',
-'item_breve_refusee' => 'NEM - Elutasított hír',
-'item_breve_validee' => 'IGEN - Elfogadott hír',
 'item_choix_administrateurs' => 'az adminisztrátorok',
 'item_choix_generation_miniature' => 'Bélyegképek automatikus létrehozása.',
 'item_choix_non_generation_miniature' => 'A bélyegképeket nem kell létrehozni.',
@@ -778,7 +767,6 @@ ami állapotát jelzi :',
 'item_non_limiter_recherche' => 'Keresés bővítése a felvett honlapok tartalmáig',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Nem kell publikálni a cikkeket az adott publikálási dátum előtt.',
-'item_non_utiliser_breves' => 'Nem kell használni a híreket',
 'item_non_utiliser_config_groupe_mots_cles' => 'Nem kell használni a kulcsszó csoportok bővitett konfigurálását',
 'item_non_utiliser_moteur_recherche' => 'Nem kell motort használni',
 'item_non_utiliser_mots_cles' => 'Nem kell használni a kulcsszavakat',
@@ -789,7 +777,6 @@ ami állapotát jelzi :',
 'item_oui' => 'Igen',
 'item_publier_articles' => 'A cikkek publikálása, publikálási dátumtól függetlenül.',
 'item_reponse_article' => 'Hozzászólás a cikkhez',
-'item_utiliser_breves' => 'Hírek használata',
 'item_utiliser_config_groupe_mots_cles' => 'A kulcsszó csoportok bővített konfigurálásának használata',
 'item_utiliser_moteur_recherche' => 'Kereső motor használata',
 'item_utiliser_mots_cles' => 'Kulcsszavak használata',
@@ -981,7 +968,6 @@ SPIP újratélépítését egy újabb adatbázis létrehozására, valamint egy 
 'texte_auteur_messagerie' => 'A honlap állandóan jelezheti a csatlakozott szerzők listáját, ami közvetlen üzenetcserét tesz lehetővé.  Úgy is döntheti, hogy nem szerepel a listában (Ön "láthatatlan" a többi felhasználók számára).',
 'texte_auteur_messagerie_1' => 'Ez a honlap engedi az üzenetcserét és a magán fórumok létrehozását a résztvevők között. Úgy dönhet, hogy nem vesz részt ezekben.',
 'texte_auteurs' => 'A SZERZŐ',
-'texte_breves' => 'A hírek olyan rövid és egyszerű szövegek, melyeknek segítségével lehet gyorsan publikálni rövid információkat, napszemlét, eseménynaptárt...',
 'texte_choix_base_1' => 'Válassza az adatbázist :',
 'texte_choix_base_2' => 'A SQL szerver több adatbázist tartalmaz.', # MODIF
 'texte_choix_base_3' => '<b>Jelölje</b> azt, amit az Ön Web szolgaltatója adta:', # MODIF
@@ -1156,7 +1142,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Szindikált cikkek erről a honlapról',
-'titre_breves' => 'A hírek',
 'titre_cadre_afficher_article' => 'Cikkek megjelenítése',
 'titre_cadre_afficher_traductions' => 'A fordítások állápotának megjelenítése a következő nyelvekről :',
 'titre_cadre_ajouter_auteur' => 'ÚJ SZERZŐ :',
@@ -1204,7 +1189,6 @@ dans le cache SPIP. Ez például eröltethet az összes oldal frissítését, ha
 'titre_page_articles_page' => 'A cikkek',
 'titre_page_articles_tous' => 'Az egész honlap',
 'titre_page_auteurs' => 'Vendégek',
-'titre_page_breves' => 'Hírek',
 'titre_page_breves_edit' => 'A hír módosítása : « @titre@ »',
 'titre_page_calendrier' => 'Naptár @annee@ @nom_mois@',
 'titre_page_config_contenu' => 'A honlap konfigurálása',

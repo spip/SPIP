@@ -157,7 +157,6 @@ forviŝi ilin poste).',
 'entree_base_donnee_1' => 'Adreso de la datenbazo',
 'entree_base_donnee_2' => '(Tiu adreso ofte estas tiu de via retejo, foje estas "localhost", alifoje la entajpujo restas malplena.)',
 'entree_biographie' => 'Mallonga kelkvorta biografio.',
-'entree_breve_publiee' => 'Ĉu tiun fulm-informon oni publikigu?',
 'entree_chemin_acces' => '<b>Entajpi</b> alirvojon :',
 'entree_cle_pgp' => 'Via PGP-ŝlosilo ',
 'entree_contenu_rubrique' => '(Enhavo de la rubriko per kelkaj vortoj.)',
@@ -182,7 +181,6 @@ forviŝi ilin poste).',
 'entree_passe_ldap' => 'Pasvorto',
 'entree_port_annuaire' => 'Numero de la dosierujila pordo',
 'entree_signature' => 'Subskribo',
-'entree_texte_breve' => 'Teksto de la fulm-informo',
 'entree_titre_obligatoire' => '<b>Titolo</b> [Deviga]<br />',
 'entree_url' => 'Retadreso de via retejo',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -235,7 +233,6 @@ forviŝi ilin poste).',
 'icone_creer_mot_cle_rubrique' => 'Krei novan ŝlosilvorton kaj ligi ĝin kun tiu ĉi rubriko',
 'icone_creer_mot_cle_site' => 'Krei novan ŝlosilvorton kaj ligi ĝin kun tiu ĉi retejo',
 'icone_creer_rubrique_2' => 'Krei novan rubrikon',
-'icone_ecrire_nouvel_article' => 'La fulm-informoj troviĝantaj en tiu rubriko',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Sendi tiun ĉi mesaĝon',
 'icone_evolution_visites' => 'Evoluado de la vizitoj<br />@visites@ vizitoj',
@@ -244,7 +241,6 @@ forviŝi ilin poste).',
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Modifi tiun ĉi vortgrupon',
 'icone_modifier_article' => 'Modifi tiun ĉi artikolon',
-'icone_modifier_breve' => 'Modifi tiun ĉi fulm-informon',
 'icone_modifier_message' => 'Modifi tiun ĉi mesaĝon',
 'icone_modifier_mot' => 'Modifi tiun ĉi ŝlosilvorton',
 'icone_modifier_rubrique' => 'Modifi tiun ĉi rubrikon',
@@ -271,7 +267,6 @@ forviŝi ilin poste).',
 'info_1_article' => '1 artikolo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 fulm-informo',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -322,7 +317,6 @@ forviŝi ilin poste).',
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -338,7 +332,6 @@ forviŝi ilin poste).',
 'info_barre_outils' => 'ĉu per ĝia ilobreto?',
 'info_base_installee' => 'La strukturo de via datenbazo estas instalita.',
 'info_bloquer' => 'bloki',
-'info_breves' => 'Ĉu via retejo uzas la fulm-informilon ?',
 'info_breves_03' => 'fulm-informoj',
 'info_breves_liees_mot' => 'La fulm-informoj ligitaj kun tiu ŝlosilvorto',
 'info_breves_touvees' => 'Trovitaj fulm-informoj',
@@ -432,7 +425,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
  la aŭtoroj forviŝitaj per bildo de rubujo.',
 'info_gauche_messagerie' => 'La mesaĝilo ebligas al vi interŝanĝi mesaĝojn inter aŭtoroj, konservi memorigilojn (por via propra uzado) aŭ afiŝi anoncojn ĉe la hejmpaĝo de la privata spaco (se vi estas mastrumanto).',
 'info_gauche_numero_auteur' => 'AŬTORA NUMERO',
-'info_gauche_numero_breve' => 'FULM-INFORMA NUMERO',
 'info_gauche_statistiques_referers' => 'Tiu paĝo prezentas la liston de la  <i>referencoj</i>, tio estas retejoj enhavantaj ligilojn al via propra retejo, nur koncerne hieraŭ kaj hodiaŭ : tiu listo estas prastatigita ĉiujn 24 horojn.',
 'info_gauche_suivi_forum' => 'La paĝo pri <i>superkontrolo de la forumoj</i> estas mastrumilo de via retejo (kaj ne diskutejo aŭ redaktejo). Ĝi afiŝas ĉiujn kontribuaĵojn de la publika forumo pri tiu artikolo, kaj ebligas al vi mastrumi tiujn kontribuaĵojn.',
 'info_gauche_suivi_forum_2' => 'La paĝo pri <i>superkontrolo de la forumoj</i> estas mastrumilo por via retejo (kaj ne diskutejo aŭ redaktejo). Ĝi afiŝas ĉiujn kontribuaĵojn de la forumoj (de la publika spaco same kiel de la privata), kaj ebligas al vi mastrumi tiujn kontribuaĵojn.',
@@ -508,7 +500,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -741,8 +732,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_autoriser_selectionner_date_en_ligne' => 'Povi elekti la ĉeretigodaton de ĉiu dokumento', # MODIF
 'item_autoriser_syndication_integrale' => 'Disponigi la tuton de la artikoloj en la abondosieroj',
 'item_bloquer_liens_syndiques' => 'Bloki la abonligilojn por validigo',
-'item_breve_refusee' => 'NE - Fulm-informo rifuzita',
-'item_breve_validee' => 'JES - Fulm-informo validigita',
 'item_choix_administrateurs' => 'la mastrumantoj',
 'item_choix_generation_miniature' => 'Aŭtomatigi miniaturigadon de la bildoj.',
 'item_choix_non_generation_miniature' => 'Ne generi bildajn miniaturojn.',
@@ -781,7 +770,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_non_limiter_recherche' => 'Etendi la serĉadon al la enhavo de la referencigitaj retejoj',
 'item_non_messagerie_agenda' => 'Malaktivigi la mesaĝilon kaj la agendon',
 'item_non_publier_articles' => 'Ne publikigi la artikolojn antaŭ la fiksita publikig-dato.',
-'item_non_utiliser_breves' => 'Ne uzi la fulm-informojn',
 'item_non_utiliser_config_groupe_mots_cles' => 'Ne uzi la fajnan konfiguron de la grupoj de ŝlosilvortoj',
 'item_non_utiliser_moteur_recherche' => 'Ne uzi la serĉilon',
 'item_non_utiliser_mots_cles' => 'Ne uzi la ŝlosilvortojn',
@@ -792,7 +780,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_oui' => 'Jes',
 'item_publier_articles' => 'Publikigi la artikolojn, kiu ajn estas ties publikig-dato.',
 'item_reponse_article' => 'Respondo al la artikolo',
-'item_utiliser_breves' => 'Uzi la fulm-informojn',
 'item_utiliser_config_groupe_mots_cles' => 'Uzi la fajnan konfiguron de la ŝlosilvortoj-grupoj',
 'item_utiliser_moteur_recherche' => 'Uzi la serĉilon',
 'item_utiliser_mots_cles' => 'Uzi la ŝlosilvortojn',
@@ -984,9 +971,6 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_auteur_messagerie' => 'Tiu retejo povas konstante indiki la liston de la konektitaj redaktantoj. Tio ebligas al vi rekte interŝanĝi mesaĝojn. Vi povas decidi ne aperi en tia listo (vi estas « nevidebla » al la aliaj uzantoj).',
 'texte_auteur_messagerie_1' => 'Tiu retejo ebligas la interŝanĝon de mesaĝoj kaj la estigon de privataj forumoj inter la partoprenantoj de la retejo. Vi povas decidi ne partopreni en tiaj interŝanĝoj.',
 'texte_auteurs' => 'LA AŬTOROJ',
-'texte_breves' => 'La fulm-informoj estas mallongaj kaj simplaj tekstoj ebligantaj
- rapide ĉeretigi koncizajn informojn, mastrumi
- gazetarrevuon, kalendaron de eventoj...',
 'texte_choix_base_1' => 'Elektu vian datenbazon:',
 'texte_choix_base_2' => 'La SQL-servilo enhavas plurajn datenbazojn.',
 'texte_choix_base_3' => '<b>Elektu</b> ĉi-poste tiun, kiun atribuis al vi via retejgastiganto:',
@@ -1187,7 +1171,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Artikoloj abonŝutitaj el tiu retejo',
-'titre_breves' => 'La fulm-informoj',
 'titre_cadre_afficher_article' => 'Afiŝi la artikolojn',
 'titre_cadre_afficher_traductions' => 'Afiŝi la traduk-staton por tiuj lingvoj :',
 'titre_cadre_ajouter_auteur' => 'ALDONI AŬTORON:',
@@ -1235,7 +1218,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_page_articles_page' => 'La artikoloj',
 'titre_page_articles_tous' => 'La tuta retejo',
 'titre_page_auteurs' => 'Vizitantoj',
-'titre_page_breves' => 'Fulm-informoj',
 'titre_page_breves_edit' => 'Modifi la fulm-informon: « @titre@ »',
 'titre_page_calendrier' => 'Kalendaro @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Agordo de la retejo',

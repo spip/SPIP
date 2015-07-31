@@ -162,7 +162,6 @@ utilizadores devem ter uma assinatura ao fornecer o seu endereço e-mail antes d
 'entree_base_donnee_1' => 'Endereço da base de dados',
 'entree_base_donnee_2' => '(Muitas vezes, este endereço corresponde ao do seu sítio, outras vezes, corresponde à menção «localhost», às vezes, fica totalmente vazio.)',
 'entree_biographie' => 'Curta biografia, em poucas palavras',
-'entree_breve_publiee' => 'Deve-se publicar esta notícia?',
 'entree_chemin_acces' => '<b>Introduzir</b> o caminho de acesso :', # MODIF
 'entree_cle_pgp' => 'A sua chave PGP',
 'entree_contenu_rubrique' => '(Conteúdo da rubrica em poucas palavras.)',
@@ -189,7 +188,6 @@ ou da rede',
 'entree_passe_ldap' => 'Palavra-passe',
 'entree_port_annuaire' => 'O número de porta do anuário',
 'entree_signature' => 'Assinatura',
-'entree_texte_breve' => 'Texto da notícia',
 'entree_titre_obligatoire' => '<b>Título</b> [Obrigatório]<br />', # MODIF
 'entree_url' => 'O endereço (URL) do seu sítio',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -242,7 +240,6 @@ ou da rede',
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Criar uma nova rubrica',
-'icone_ecrire_nouvel_article' => 'As notícias contidas nesta rubrica',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Enviar esta mensagem',
 'icone_evolution_visites' => 'Evolução das visitas <br />@visites@ visitas', # MODIF
@@ -251,7 +248,6 @@ ou da rede',
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Modificar este grupo de palavras',
 'icone_modifier_article' => 'Modificar este artigo',
-'icone_modifier_breve' => 'Modificar esta notícia',
 'icone_modifier_message' => 'Modificar esta mensagem',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Modificar esta rubrica',
@@ -278,7 +274,6 @@ ou da rede',
 'info_1_article' => '1 artigo',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 notícia',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -331,7 +326,6 @@ ou da rede',
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -347,7 +341,6 @@ ou da rede',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'A estrutura da sua base de dados está instalada',
 'info_bloquer' => 'bloquear',
-'info_breves' => 'O seu sítio utiliza o sistema de notícias',
 'info_breves_03' => 'notícias',
 'info_breves_liees_mot' => 'As notícias ligadas a esta palavra-chave',
 'info_breves_touvees' => 'Notícias encontradas',
@@ -443,7 +436,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
  os autores apagados, por um caixote de lixo.',
 'info_gauche_messagerie' => 'A caixa de correio permite-lhe trocar mensagens entre redactores, conservar memorandos (para o seu uso pessoal) ou exibir anúncios na página de abertura do espaço privado ( se for administrador).',
 'info_gauche_numero_auteur' => 'AUTOR NÚMERO',
-'info_gauche_numero_breve' => 'NOTÍCIA NÚMERO',
 'info_gauche_statistiques_referers' => 'Esta página apresenta a lista dos  <i>referers</i>, ou seja, dos sites que contêm links para o seu site, unicamente para ontem e hoje; esta lista é actualizada a cada 24 horas.',
 'info_gauche_suivi_forum' => 'A página de <i>acompanhamento dos fóruns </i> é um instrumento de gestão do seu sítio (e não um espaço de discussão ou de redacção). Exibe todas as contribuições do fórum público deste artigo e permite-lhe gerir essas contribuições. ', # MODIF
 'info_gauche_suivi_forum_2' => 'A página <i>acompanhamento dos fóruns </i> é um instrumento de gestão do seu sítio (e não um espaço de discussão ou de redacção). Exibe todas as contribuições do fórum público deste artigo e permite-lhe gerir essas contribuições. ', # MODIF
@@ -524,7 +516,6 @@ Os estatuto dos autores é indicado pela cor dos ícones (administrador = verde;
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -761,8 +752,6 @@ numa cor que indica o seu estado:',
 'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Impedir os laços vinculados para validação',
-'item_breve_refusee' => 'NÃO - Notícia recusada',
-'item_breve_validee' => 'SIM - Notícia validada',
 'item_choix_administrateurs' => 'os administradores',
 'item_choix_generation_miniature' => 'Gerar automaticamente as miniaturas das imagens.',
 'item_choix_non_generation_miniature' => 'Não gerar miniaturas das imagens.',
@@ -801,7 +790,6 @@ numa cor que indica o seu estado:',
 'item_non_limiter_recherche' => 'Alargar a pesquisa ao conteúdo dos sítios referenciados',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Não publicar os artigos antes da data de publicação fixada.',
-'item_non_utiliser_breves' => 'Não utilizar as notícias',
 'item_non_utiliser_config_groupe_mots_cles' => 'Não utilizar a configuração avançada dos grupos de palavras-chave',
 'item_non_utiliser_moteur_recherche' => 'Não utilizar o motor',
 'item_non_utiliser_mots_cles' => 'Não utilizar as palavras-chave',
@@ -812,7 +800,6 @@ numa cor que indica o seu estado:',
 'item_oui' => 'Sim',
 'item_publier_articles' => 'Publicar os artigos, seja qual for a sua data de publicação.',
 'item_reponse_article' => 'Resposta ao artigo',
-'item_utiliser_breves' => 'Utilizar as notícias',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizar a configuração avançada dos grupos de palavras-chave',
 'item_utiliser_moteur_recherche' => 'Utilizar o motor de pesquisa',
 'item_utiliser_mots_cles' => 'Utilizar as palavras-chave',
@@ -1004,9 +991,6 @@ reinstalação de SPIP para recriar uma nova base assim como um primeiro acesso 
 'texte_auteur_messagerie' => 'Este site pode indicar permanentemente a lista dos redactores ligados, o que lhe permite trocar mensagens  em directo ( quando o correio está desactivado mais acima, a lista dos redactores está desactivada). Pode decidir não aparecer nesta lista (estando « invisível » para os outros utilizadores).',
 'texte_auteur_messagerie_1' => 'Este sítio permite a troca de mensagens e a constituição de fóruns de discussão privados entre os participantes do sítio. Pode decidir não participar nessas trocas.',
 'texte_auteurs' => 'OS AUTORES',
-'texte_breves' => 'As notícias são textos curtos e simples que permitem
- pôr rapidamente em linha informações concisas, gerir
-uma revista de imprensa, um calendário dos acontecimentos...',
 'texte_choix_base_1' => 'Escolher a sua base',
 'texte_choix_base_2' => 'O servidor SQL contem muitas bases de dados.', # MODIF
 'texte_choix_base_3' => '<b>Seleccione</b> a seguir a que lhe foi atribuida pelo seu serviço de hospedagem.', # MODIF
@@ -1207,7 +1191,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Artigos vinculados tirados deste sítio',
-'titre_breves' => 'As notícias',
 'titre_cadre_afficher_article' => 'Exibir os artigos',
 'titre_cadre_afficher_traductions' => 'Exibir o estado das traduções para estas línguas:',
 'titre_cadre_ajouter_auteur' => 'ACRESCENTAR UM AUTOR :',
@@ -1255,7 +1238,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_page_articles_page' => 'Os artigos',
 'titre_page_articles_tous' => 'Todo o sítio',
 'titre_page_auteurs' => 'Visitantes',
-'titre_page_breves' => 'Notícias',
 'titre_page_breves_edit' => 'Modificar a notícia : « @titre@ »',
 'titre_page_calendrier' => 'Calendário @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Configuração do sítio',

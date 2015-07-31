@@ -161,7 +161,6 @@ patisipasyon yo zitilizatè tout ke pa afiche sou sitwèb piblik si yon komandé
 'entree_base_donnee_1' => 'Ladrès bazdone',
 'entree_base_donnee_2' => '(Souvan ladrès-la se paréy sak ladrès sitwèb w-a, osnon lès senpman «localhost»,  oubyen lès ali vid.)',
 'entree_biographie' => 'Ki se w (kèk mo sèlman).',
-'entree_breve_publiee' => 'Eske tinouvèl-la gen pibliye ?',
 'entree_chemin_acces' => '<b>Rantre</b> chemen pou aksè :',
 'entree_cle_pgp' => 'Ou klé PGP',
 'entree_contenu_rubrique' => '(Kisa ribrik-la gen kontni nan kèk mo.)',
@@ -189,7 +188,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'entree_passe_ldap' => 'Modpas',
 'entree_port_annuaire' => 'Niméwo por lanyè',
 'entree_signature' => 'Siyati',
-'entree_texte_breve' => 'Tèks pou tinouvèl-la',
 'entree_titre_obligatoire' => '<b>Kouman bagay la rele</b> [Nesesè]<br />',
 'entree_url' => 'Ladrès (URL) sit-w',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -242,7 +240,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'icone_creer_mot_cle_rubrique' => 'Créer un nouveau mot-clé et le lier à cette rubrique', # NEW
 'icone_creer_mot_cle_site' => 'Créer un nouveau mot-clé et le lier à ce site', # NEW
 'icone_creer_rubrique_2' => 'Kreye yon nouvo ribrik',
-'icone_ecrire_nouvel_article' => 'Tinouvèl yo andan ribrik la',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Voye mesaj la',
 'icone_evolution_visites' => 'Evolisyon vizit yo<br />@visites@ vizit yo',
@@ -251,7 +248,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Chanje gwoup mokle a',
 'icone_modifier_article' => 'Chanje atik la',
-'icone_modifier_breve' => 'Chanje tinouvèl',
 'icone_modifier_message' => 'Chanje mesaj la',
 'icone_modifier_mot' => 'Modifier ce mot-clé', # NEW
 'icone_modifier_rubrique' => 'Chanje ribrik la',
@@ -278,7 +274,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_1_article' => '1 atik',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 tinouvèl',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -331,7 +326,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -347,7 +341,6 @@ Tout informasyon-nan,  komandèr-sistèm ou komandèr-rézo li dwa donn a w.',
 'info_barre_outils' => 'avec sa barre d\'outils ?', # NEW
 'info_base_installee' => 'Strikti bazdone se enstale.',
 'info_bloquer' => 'bloké',
-'info_breves' => 'Eske w sit ap itlize sistèm tinouvèl yo?',
 'info_breves_03' => 'tinouvèl yo',
 'info_breves_liees_mot' => 'Tinouvèl yo ki jwenn ak mokle-a',
 'info_breves_touvees' => 'Tinouvèl yo ki te fin rannkont',
@@ -441,7 +434,6 @@ Koulè imaj rannkont stati yo (komandè = vèr; redaktè = jon).',
  lòtè yo ki te kraze se yon bwat poubèl.',
 'info_gauche_messagerie' => 'Mesajri rann w kapab voye tout mesaj ant redaktè, gade pansbèt (pèsonel) osnon fè parèt annons sou paj akey nan espas prive (si w se komandè).',
 'info_gauche_numero_auteur' => 'LOTE NIMEWO',
-'info_gauche_numero_breve' => 'TINOUVÈL NIMÈWO',
 'info_gauche_statistiques_referers' => 'Paj-la se paj ki done lis <i>referers</i>, se dir tout sit sa-yo ki genyen lyen ki rive sou sit w, yer ak jodila ; li repar zéwo tout 24èr la.',
 'info_gauche_suivi_forum' => 'Paj <i>swivi fowom yo</i> se outiy pou sit ou (kontrè yon espas pou soutni ek ekri ant zot itlizatè). Li afich tout patisipasyon nan fowom piblik yon atik ak rann w kapab okipe yo.',
 'info_gauche_suivi_forum_2' => 'Paj <i>swivi fowom yo</i> se outiy pou sit w (kontrè yon espas pou soutni ek ekri ant zot itlizatè. Li afich tout patispasyon nan fowom sou sit piblik tankou espas privé ak li ran aw kapab okipe yo.',
@@ -522,7 +514,6 @@ pa mache mèm.<br />{{Fòk w instal ankò
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -759,8 +750,6 @@ nan yon koulè ki bay lestati ali :',
 'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Bloke lyen lasendikasyon sa-yo ki pou konfime',
-'item_breve_refusee' => 'NON - tinouvèl ki refize',
-'item_breve_validee' => 'WI - Tinouvèl ki konfime',
 'item_choix_administrateurs' => 'komandè yo',
 'item_choix_generation_miniature' => 'Kreye otomatikman vèsyon miyati (viyèt) pou tout imaj.',
 'item_choix_non_generation_miniature' => 'Pa kreye miyati pou limaj.',
@@ -799,7 +788,6 @@ nan yon koulè ki bay lestati ali :',
 'item_non_limiter_recherche' => 'Tann chèche nan kontni sit ki referansé',
 'item_non_messagerie_agenda' => 'Désactiver la messagerie et l’agenda', # NEW
 'item_non_publier_articles' => 'Pa pibliyé atik sa-yo avan ladat ki présizé.',
-'item_non_utiliser_breves' => 'Itilize pa tinouvèl',
 'item_non_utiliser_config_groupe_mots_cles' => 'Itilize pa kofigirasyon presi pou group mokle.',
 'item_non_utiliser_moteur_recherche' => 'Itilize pa motè-rechèche',
 'item_non_utiliser_mots_cles' => 'Itilize pa mokle yo',
@@ -810,7 +798,6 @@ nan yon koulè ki bay lestati ali :',
 'item_oui' => 'Wi',
 'item_publier_articles' => 'Fè parèt tout atik kiswa dat piblikasyon ali.',
 'item_reponse_article' => 'Repons sou atik sa-a',
-'item_utiliser_breves' => 'Itilize tinouvel yo',
 'item_utiliser_config_groupe_mots_cles' => 'Itilize konfigirasyon presi pou group  mokle',
 'item_utiliser_moteur_recherche' => 'Itilize motè-rechèche',
 'item_utiliser_mots_cles' => 'Itilize mokle yo',
@@ -1002,7 +989,6 @@ lenstalasyon SPIP pou w kreye yon lòt nouvo baz ak son promyé laksé komandè'
 'texte_auteur_messagerie' => 'Sit-la kapab bay w lalis redaktè an liy kounyen-a, bagay-la pèmè w voye mesaj direk ansamn moun. W pe chwazi pa parèt a liy nan lis-la (w kembe « envisib » pou tout zot itilizatè).',
 'texte_auteur_messagerie_1' => 'Sit-la pémè a w voye mesaj fowom pou pale nan kozman privé ant tout patisipan ki soutni nan sit.W pé chwazi pa soutni pale nan kontak-la.',
 'texte_auteurs' => 'LOTÈ YO',
-'texte_breves' => 'Ti-nouvèl yo se ti tèks senp ki pèmè w fè parèt kèk ti enfòmasyon taptap, osnon debouye w ek yon revi-laprès, ek mèm yon kalandrye pou anonse kisa moun kap soutni.',
 'texte_choix_base_1' => 'Ann chwazi labaz ou :',
 'texte_choix_base_2' => 'Sèvè SQL-la, li ka kembe kèk bazdoné.', # MODIF
 'texte_choix_base_3' => '<b>Chwazi</b> issit anba labaz ki lébérjè  te bay aw:',
@@ -1201,7 +1187,6 @@ ou nan dékripsyon atik sa-yo
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Atik sendike ki rale yo sit la',
-'titre_breves' => 'Tinouvèl yo',
 'titre_cadre_afficher_article' => 'Fè parèt atik yo',
 'titre_cadre_afficher_traductions' => 'Fè parèt kouman se tradiksyon yo pou tout lanng swivan :',
 'titre_cadre_ajouter_auteur' => 'KREYE YON LOTE :',
@@ -1249,7 +1234,6 @@ ou nan dékripsyon atik sa-yo
 'titre_page_articles_page' => 'Atik yo',
 'titre_page_articles_tous' => 'Tout sit sa-mèm',
 'titre_page_auteurs' => 'Vizitè yo',
-'titre_page_breves' => 'Tinouvèl yo',
 'titre_page_breves_edit' => 'Chanje tinouvèl-la : « @titre@ »',
 'titre_page_calendrier' => 'Kalandriye @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Konfigire sit-la',

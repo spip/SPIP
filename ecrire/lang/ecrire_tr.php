@@ -155,7 +155,6 @@ sonradan yok edebilir).',
 'entree_base_donnee_1' => 'Veritabanı adresi',
 'entree_base_donnee_2' => '(Bu adres çoğunlukla site adresinize karşı düşer, bazen «localhost» ifadesine karşı düşer, bazen tamamen boş bırakılır.)',
 'entree_biographie' => 'Bir kaç sözcükle kısa biyografi.',
-'entree_breve_publiee' => 'Bu kısa haber yayınlanmalı mı ?',
 'entree_chemin_acces' => 'Erişim yolunu <b>giriniz</b> :',
 'entree_cle_pgp' => 'PGP anahtarınız',
 'entree_contenu_rubrique' => '(Bir kaç sözcükle bölüm içeriği.)',
@@ -180,7 +179,6 @@ sonradan yok edebilir).',
 'entree_passe_ldap' => 'Şifre',
 'entree_port_annuaire' => 'Rehberin kapı numarası',
 'entree_signature' => 'İmza',
-'entree_texte_breve' => 'Kısa haber özeti',
 'entree_titre_obligatoire' => '<b>Başlık</b>  [Zorunlu]',
 'entree_url' => 'Sitenizin adresi (URL)',
 'erreur_connect_deja_existant' => 'Un serveur existe déjà avec ce nom', # NEW
@@ -233,7 +231,6 @@ sonradan yok edebilir).',
 'icone_creer_mot_cle_rubrique' => 'Yeni bir anahtar sözcük oluştur ve bu başlığa bağla',
 'icone_creer_mot_cle_site' => 'Yeni bir anahtar sözcük oluştur ve bu siteye bağla',
 'icone_creer_rubrique_2' => 'Yeni bir bölüm oluştur',
-'icone_ecrire_nouvel_article' => 'Bu bölümdeki kısa haberler',
 'icone_edition' => 'Édition', # NEW
 'icone_envoyer_message' => 'Bu iletiyi gönder',
 'icone_evolution_visites' => 'Ziyaretlerin gelişimi<br /> @visites@ ziyaret',
@@ -242,7 +239,6 @@ sonradan yok edebilir).',
 'icone_mes_preferences' => 'Mes préférences', # NEW
 'icone_modif_groupe_mots' => 'Bu sözcük gurubunu değiştir',
 'icone_modifier_article' => 'Bu makaleyi değiştir',
-'icone_modifier_breve' => 'Bu kısa haberi değiştir',
 'icone_modifier_message' => 'Bu iletiyi değiştir',
 'icone_modifier_mot' => 'Bu anahtar sözcüğü değiştir',
 'icone_modifier_rubrique' => 'Bu bölümü değiştir',
@@ -269,7 +265,6 @@ sonradan yok edebilir).',
 'info_1_article' => '1 makale',
 'info_1_article_syndique' => '1 article syndiqué', # NEW
 'info_1_auteur' => '1 auteur', # NEW
-'info_1_breve' => '1 kısa haber',
 'info_1_message' => '1 message', # NEW
 'info_1_mot_cle' => '1 mot-clé', # NEW
 'info_1_rubrique' => '1 rubrique', # NEW
@@ -321,7 +316,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_aucun_article' => 'Aucun article', # NEW
 'info_aucun_article_syndique' => 'Aucun article syndiqué', # NEW
 'info_aucun_auteur' => 'Aucun auteur', # NEW
-'info_aucun_breve' => 'Aucune brève', # NEW
 'info_aucun_message' => 'Aucun message', # NEW
 'info_aucun_mot_cle' => 'Aucun mot-clé', # NEW
 'info_aucun_rubrique' => 'Aucune rubrique', # NEW
@@ -337,7 +331,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_barre_outils' => 'alet çubuğuyla birlikte mi ?',
 'info_base_installee' => 'Veritabanınızın yapısı kuruldu.',
 'info_bloquer' => 'engelle',
-'info_breves' => 'Siteniz kısa haber sistemini kullanıyor mu ?',
 'info_breves_03' => 'kısa haberle',
 'info_breves_liees_mot' => 'Bu anahtar sözcüğe bağlı kısa haberler',
 'info_breves_touvees' => 'Bulunan haberler',
@@ -429,7 +422,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_gauche_auteurs_exterieurs' => 'Siteye erişimi olmayan dış yazarlar, mavi bir simgeyle belirtilmiştir ; silinen yazarlar ise bir çöp kutusu ile belirtilmiştir.',
 'info_gauche_messagerie' => 'Mesajlaşma sizin yazarlar ile ileti alışverişinde bulunmanızı, hatırlatmaları saklamanızı (kişisel amaçlı) veya özel alanın erişim sayfasına duyuru koymanızı sağlar (yöneticiyseniz).',
 'info_gauche_numero_auteur' => 'YAZAR NUMARASI',
-'info_gauche_numero_breve' => 'KISA HABER NUMARASI',
 'info_gauche_statistiques_referers' => 'Bu sayfa atıflar listesini, yani sizin sitenize yönlendiren bağlar bulunduran sitelerin listesini sunar, ancak sadece dün ve bugün içindir ; bu liste her 24 saatte bir sıfırlanır.',
 'info_gauche_suivi_forum' => '<i>Forumları izleme</i> sayfası sitenizi yönetme aracıdır (sohbet, ya da yazı yazma alanı değildir). Bir makaleye kamu forumundan yapılan tüm katkıları gösterir ve bu katkıları yönetmenizi sağlar.',
 'info_gauche_suivi_forum_2' => '<i>Forumları izleme</i> sayfası sitenizi yönetme aracıdır (sohbet, ya da yazı yazma alanı değildir). Bir makaleye kamu forumundan yapılan tüm katkılarını gösterir ve bu katkıları yönetmenizi sağlar.',
@@ -510,7 +502,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_nb_articles' => '@nb@ articles', # NEW
 'info_nb_articles_syndiques' => '@nb@ articles syndiqués', # NEW
 'info_nb_auteurs' => '@nb@ auteurs', # NEW
-'info_nb_breves' => '@nb@ brèves', # NEW
 'info_nb_messages' => '@nb@ messages', # NEW
 'info_nb_mots_cles' => '@nb@ mots-clés', # NEW
 'info_nb_rubriques' => '@nb@ rubriques', # NEW
@@ -745,8 +736,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_autoriser_selectionner_date_en_ligne' => 'Her belgenin çevrimiçi yayınlanma tarihinin değiştirilmesine izin vermek',
 'item_autoriser_syndication_integrale' => 'Makaleleri paylaşım dosyalarında oldukları gibi yayınla',
 'item_bloquer_liens_syndiques' => 'Paylaşımlı bağların onay için engellenmesi',
-'item_breve_refusee' => 'HAYIR - Kısa haber reddedildi',
-'item_breve_validee' => 'EVET - Kısa haber onaylandı',
 'item_choix_administrateurs' => 'Yöneticiler ',
 'item_choix_generation_miniature' => 'Resimlerin minyatürlerini otomatik olarak üret',
 'item_choix_non_generation_miniature' => 'Resimlerin minyatürlerini otomatik olarak üretme',
@@ -785,7 +774,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_non_limiter_recherche' => 'Aramayı atıfta bulunulan sitelere genişlet',
 'item_non_messagerie_agenda' => 'Mesajlaşmayı ve ajandayı dezaktive et',
 'item_non_publier_articles' => 'Makaleleri yayın tarihinden önce yayınlama',
-'item_non_utiliser_breves' => 'Kısa haberleri kullanma',
 'item_non_utiliser_config_groupe_mots_cles' => 'Anahtar sözcük guruplarının gelişmiş konfigürasyonunu kullanma',
 'item_non_utiliser_moteur_recherche' => 'Motoru kullanma',
 'item_non_utiliser_mots_cles' => 'Anahtar sözcükleri kullanma',
@@ -796,7 +784,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_oui' => 'Evet  ',
 'item_publier_articles' => 'Makaleleri yayın tarihlerine bakmadan yayınla',
 'item_reponse_article' => 'Makaleye yanıt ',
-'item_utiliser_breves' => 'Kısa haberleri kullan',
 'item_utiliser_config_groupe_mots_cles' => 'Anahtar sözcük guruplarının gelişmiş konfigürasyonunu kullan',
 'item_utiliser_moteur_recherche' => 'Arama motorunu kullan',
 'item_utiliser_mots_cles' => 'Anahtar sözcükleri kullan',
@@ -990,9 +977,6 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_auteur_messagerie' => 'Bu site size bağlı olan yazarların listesini sürekli olarak belirtebilir, bu da sizin doğrudan ileti alışverişinde bulunmanızı sağlar.  Bu listede görünmemeyi seçebilirsiniz (bu durumda diğer kullanıcılara « görünmez »sinizdir).',
 'texte_auteur_messagerie_1' => 'Bu site ileti alışverişini ve site katılımcıları arasında özel sohbet forumları oluşturmayı sağlar. Bunlara katılmamayı tercih edebilirsiniz. ',
 'texte_auteurs' => 'YAZARLAR',
-'texte_breves' => 'Kısa haberler kısa ve sade metinler olup,
-    özlü bilgileri süratle çevrimiçi iletmeye,
-    bir basın özeti, bir olaylar takvimi  yaratmaya yarar...',
 'texte_choix_base_1' => 'Veritabanınızı seçiniz :',
 'texte_choix_base_2' => 'SQL sunucusu bir çok veritabanı içeriyor.',
 'texte_choix_base_3' => 'Aşağıda servis sağlayıcınız tarafından size ayrılmış olanı <b>seçiniz</b>.',
@@ -1127,7 +1111,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_ajouter_un_auteur' => 'Ajouter un auteur', # NEW
 'titre_ajouter_un_mot' => 'Ajouter un mot-clé', # NEW
 'titre_articles_syndiques' => 'Bu siteden alınan paylaşımlı makaleler',
-'titre_breves' => 'Kısa haberler  ',
 'titre_cadre_afficher_article' => 'Makaleleri göster',
 'titre_cadre_afficher_traductions' => 'Aşağıdaki dillerin çevirilerinin durumunu göster :',
 'titre_cadre_ajouter_auteur' => 'BİR YAZAR EKLE :',
@@ -1175,7 +1158,6 @@ SQL\'in, kazayla zarar gören tablolarını onarma yeteneği vardır. Burada bu 
 'titre_page_articles_page' => 'Makaleler  ',
 'titre_page_articles_tous' => 'Tüm site',
 'titre_page_auteurs' => 'Ziyaretçiler',
-'titre_page_breves' => 'Kısa haberler',
 'titre_page_breves_edit' => 'Kısa haberi değiştir : « @titre@ »',
 'titre_page_calendrier' => 'Takvim @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Site konfigürasyonu',
