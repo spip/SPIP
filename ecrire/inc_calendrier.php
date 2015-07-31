@@ -642,6 +642,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			$haut = calendrier_top ("$heure_debut:$minutes_debut", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			$bas =  !$e ? $haut :calendrier_top ("$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			$hauteur = calendrier_height ("$heure_debut:$minutes_debut", "$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
+
 			if ($bas_prec >= $haut) $decale += $modif_decalage;
 			else $decale = (4 * $fontsize);
 			if ($bas > $bas_prec) $bas_prec = $bas;
@@ -736,7 +737,10 @@ function http_calendrier_ics_trois($evt, $largeur, $dimjour, $fontsize, $border)
 	global $spip_lang_left; 
 
 	$types = array();
-	foreach($evt as $v)	$types[$v['CATEGORIES']][] = $v;
+	foreach($evt as $v)
+	  $types[isset($v['DESCRIPTION']) ? 'info_articles' :
+		 (isset($v['DTSTART']) ? 'info_liens_syndiques_3' :
+		  'info_breves_02')][] = $v;
 	$res = '';
 	foreach ($types as $k => $v) {
 	  $res2 = '';
@@ -810,22 +814,16 @@ function http_calendrier_sans_date($annee, $mois, $evenements)
 }
 
 
-function http_calendrier_sans_heure($evenement)
+function http_calendrier_sans_heure($ev)
 {
-	if ($evenement['CATEGORIES'] == 'info_articles')
-	  $i = 'puce-verte-breve.gif';
-	elseif ($evenement['CATEGORIES'] == 'info_breves')
-	  $i = 'puce-blanche-breve.gif';
-	else
-	  $i = 'puce-orange-breve.gif';
-	$desc = propre($evenement['DESCRIPTION']);
-	$sum = $evenement['SUMMARY'];
+	$desc = propre($ev['DESCRIPTION']);
+	$sum = $ev['SUMMARY'];
 	if (!$sum) $sum = $desc;
-	$sum = http_img_pack($i, $desc,  "style='width: 8px; height: 9px; border: 0px'") . '&nbsp;' . $sum;
-	if ($evenement['URL']) {
-		$sum = http_href($evenement['URL'], $sum, $desc);
-	}
-	return "\n<div class='calendrier-noir calendrier-arial10'>$sum\n</div>\n"; 
+	$i = isset($ev['DESCRIPTION']) ? 11 : 9; // 11: article; 9:autre
+	if ($ev['URL'])
+	  $sum = http_href($ev['URL'], $sum, $desc);
+	return "\n<div class='calendrier-arial$i calendrier-evenement'>" .
+	  "<span class='" . $ev['CATEGORIES'] . "'>&nbsp;</span>&nbsp;$sum</div>"; 
 }
 
 function http_calendrier_avec_heure($evenement, $amj)
@@ -839,9 +837,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	$desc = propre($evenement['DESCRIPTION']);
 	$sum = $evenement['SUMMARY'];
 	if (!$sum) $sum = $desc;
-	$sum = "<span class='calendrier-noir'>" .
-	  ereg_replace(' +','&nbsp;', typo($sum)) .
-	  "</span>";
+	$sum = ereg_replace(' +','&nbsp;', typo($sum));
 	if ($evenement['URL'])
 	  $sum = http_href($evenement['URL'], $sum, $desc);
 	$opacity = "";
@@ -866,10 +862,10 @@ function http_calendrier_avec_heure($evenement, $amj)
 	  if ($amj == $jour_debut OR $amj == $jour_fin) {
 	    $sum = "<div>$deb-$fin</div>$sum";
 	  } else {
-	    $opacity ='calendrier-opacity';
+	    $opacity =' calendrier-opacity';
 	  }
 	}
-	return "\n<div class='$opacity calendrier-evenement calendrier-arial10 " . $evenement['CATEGORIES'] ."'>$sum\n</div>\n"; 
+	return "\n<div class='calendrier-arial10 calendrier-evenement " . $evenement['CATEGORIES'] ."$opacity'>$sum\n</div>\n"; 
 }
 
 function http_calendrier_aide_mess()
@@ -1226,7 +1222,21 @@ function http_calendrier_rv($messages, $type) {
 	  fin_cadre_enfonce(true);
 }
 
-
+function calendrier_categories($table, $num)
+{
+  if (function_exists('generer_calendrier_class'))
+    return generer_calendrier_class($table, $num);
+  else {
+    // cf calendrier.css
+    $result= spip_fetch_array(spip_query("
+SELECT	" . (($table == 'spip_articles') ? 'id_secteur' : 'id_rubrique') . "
+FROM	$table
+WHERE	". (($table == 'spip_articles') ? 'id_article' : 'id_breve') . "=$num
+"));
+    if ($result) $num = $result[0];
+    return 'calendrier-couleur' . (($num%14)+1);
+  }
+}
 
 //------- fonctions d'appel MySQL. 
 // au dela cette limite, pas de production HTML
@@ -1272,7 +1282,7 @@ function sql_calendrier_interval($limites) {
 function  sql_calendrier_interval_forums($limites, &$evenements) {
 	list($avant, $apres) = $limites;
 	$result=spip_query("
-SELECT	DISTINCT titre, date_heure, id_article
+SELECT	DISTINCT titre, date_heure, id_forum
 FROM	spip_forum
 WHERE	date_heure >= $avant
  AND	date_heure < $apres
@@ -1280,20 +1290,13 @@ ORDER BY date_heure
 ");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
-		if (_DIR_RESTREINT)
-		  {
-		    $script = 'article';
-		    $id = $row['id_article'];
-		  }
-		else {
-		    $script = 'articles_forum';
-		    $id = $row['id_article'];
-		}
+		$id = $row['id_forum'];
 		$evenements[$amj][]=
 		array(
-			'URL' => $script . _EXTENSION_PHP . "?id_article=$id",
-			'CATEGORIES' => 'info_liens_syndiques_3',
-			'SUMMARY' => $row['titre']);
+			'URL' => generer_url_forum($id),
+			'CATEGORIES' => 'calendrier-couleur7',
+			'SUMMARY' => $row['titre'],
+			'DTSTART' => date_ical($row['date_heure']));
 	}
 }
 
@@ -1307,36 +1310,28 @@ ORDER BY date_heure
 function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 	
 	$result=spip_query("
-SELECT	id_article, titre, date, descriptif, chapo
+SELECT	id_article, titre, date, descriptif, chapo, id_secteur
 FROM	spip_articles
 WHERE	statut='publie'
  AND	date >= $avant
  AND	date < $apres
 ORDER BY date
 ");
-	if (!_DIR_RESTREINT)
-	  $script = 'articles' . _EXTENSION_PHP . "?id_article=";
-	else
-	  {
-	    $now = date("Ymd");
-	    $script = 'article' . _EXTENSION_PHP . "?id_article=";
-	  }
-
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
-		$url = generer_url_article($row['id_article']);
+		$id = $row['id_article'];
 		$evenements[$amj][]=
 		    array(
-			'CATEGORIES' => 'info_articles',
+			'CATEGORIES' => calendrier_categories('articles', $id),
 			'DESCRIPTION' => $row['descriptif'],
 			'SUMMARY' => $row['titre'],
-			'URL' =>  $url);
+			'URL' => generer_url_article($id));
 	}
 }
 
 function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
 	$result=spip_query("
-SELECT	id_breve, titre, date_heure
+SELECT	id_breve, titre, date_heure, id_rubrique
 FROM	spip_breves
 WHERE	statut='publie'
  AND	date_heure >= $avant
@@ -1345,12 +1340,13 @@ ORDER BY date_heure
 ");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
-		$script = generer_url_breve($row['id_breve']);
+		$id = $row['id_breve'];
+		$ir = $row['id_rubrique'];
 		$evenements[$amj][]=
 		array(
-			'URL' => $script,
-			'CATEGORIES' => 'info_breves_02',
-			'SUMMARY' => $row['titre']);
+		      'URL' => generer_url_breve($id),
+		      'CATEGORIES' => calendrier_categories('breves', $ir),
+		      'SUMMARY' => $row['titre']);
 	}
 }
 
