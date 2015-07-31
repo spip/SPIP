@@ -567,10 +567,10 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'info_visiteur_2' => 'gune publikoaren',
 	'info_visiteurs' => 'Bisitariak',
 	'info_visiteurs_02' => 'Gune publikoaren bisitariak',
-	'info_webmestre_forces' => 'Les webmestres sont actuellement définis dans <tt>@file_options@</tt>.', # NEW
+	'info_webmestre_forces' => 'Webmaster-ak fitxategi honetan definituak dira : <tt>@file_options@</tt>.',
 	'install_adresse_base_hebergeur' => 'Aterbetzaileak emandako datu-basearen helbidea',
 	'install_base_ok' => '@base@ basea ezagutua izan da',
-	'install_connect_ok' => 'La nouvelle base a bien été déclarée sous le nom de serveur @connect@.', # NEW
+	'install_connect_ok' => 'Datu-base berria behar bezala deklaratua izan da zerbitzari izen honekin @connect@.',
 	'install_echec_annonce' => 'Instalazioak seguraski huts eginen du, edo martxan izanen ez den gune bat sortuko du...',
 	'install_extension_mbstring' => 'SPIP ez da ibilki hunekin :',
 	'install_extension_php_obligatoire' => 'SPIPek beharesten du php luzapena :',
@@ -590,8 +590,8 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'install_tables_base' => 'Baseko mahaiak',
 	'install_types_db_connus' => 'SPIPek <b>MySQL</b> (erabiliena) eta <b>SQLite</b> badakizka erabiltzen.',
 	'install_types_db_connus_avertissement' => '<b>PostgreSQL</b> euskarria proposatua da ere, esperientzia gisa',
-	'instituer_erreur_statut_a_change' => 'Le statut a déjà été modifié', # NEW
-	'instituer_erreur_statut_non_autorise' => 'Vous ne pouvez pas choisir ce statut', # NEW
+	'instituer_erreur_statut_a_change' => 'Egoera jadanik aldatua izan da',
+	'instituer_erreur_statut_non_autorise' => 'ezin duzu egoera hau aukeratu',
 	'intem_redacteur' => 'idazlaria',
 	'intitule_licence' => 'Lizenzia',
 	'item_accepter_inscriptions' => 'Inskripzioak onartu',
@@ -633,7 +633,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'item_publier_articles' => 'Artikuluak argitaratu argitaratze-eguna kontuan izan gabe ',
 	'item_reponse_article' => 'Artikuluari erantzuna',
 	'item_utiliser_moteur_recherche' => 'Bilaketa-motorra erabili',
-	'item_version_html_max_html4' => 'Se limiter au HTML4 sur le site public', # NEW
+	'item_version_html_max_html4' => 'HTML4-ean mugatu gune publikoarentzat.',
 	'item_version_html_max_html5' => 'HTML5 baimendu',
 	'item_visiteur' => 'bisitaria',
 
@@ -643,15 +643,15 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	// L
 	'label_bando_outils' => 'Tresna barra',
 	'label_bando_outils_afficher' => 'Tresnak erakutsi',
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_bando_outils_masquer' => 'Tresnak ezkutatu',
 	'label_choix_langue' => 'Hizkuntza aukera ezazu',
-	'label_nom_fichier_connect' => 'Indiquez le nom utilisé pour ce serveur', # NEW
+	'label_nom_fichier_connect' => 'Zerbitzari honendako erabilitako izena ezar ezazu',
 	'label_slogan_site' => 'Gunearen lema',
-	'label_taille_ecran' => 'Largeur de l\'ecran', # NEW
+	'label_taille_ecran' => 'Panatila zabalera',
 	'label_texte_et_icones_navigation' => 'Nabigazio menua',
-	'label_texte_et_icones_page' => 'Affichage dans la page', # NEW
-	'ldap_correspondance' => 'héritage du champ @champ@', # NEW
-	'ldap_correspondance_1' => 'Héritage des champs LDAP', # NEW
+	'label_texte_et_icones_page' => 'Orria erakutsi',
+	'ldap_correspondance' => '@champ@ eremuaren jaurantsia',
+	'ldap_correspondance_1' => 'LDAP eremuen jaraunspena',
 	'ldap_correspondance_2' => 'Pour chacun des champs SPIP suivants, indiquer le nom du champ LDAP correspondant. Laisser vide pour ne pas le remplir, séparer par des espaces ou des virgules pour essayer plusieurs champs LDAP.', # NEW
 	'lien_ajout_destinataire' => 'Jasotzaile hau erantsi',
 	'lien_ajouter_auteur' => 'Egile hau erantsi',
@@ -661,7 +661,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'lien_nom_site' => 'Lekuaren izena',
 	'lien_retirer_auteur' => 'Egile hau baztertu',
 	'lien_retirer_rubrique' => 'Atala kendu',
-	'lien_retirer_tous_auteurs' => 'Autore guziak kendu', # NEW
+	'lien_retirer_tous_auteurs' => 'Autore guziak kendu',
 	'lien_retirer_toutes_rubriques' => 'Retirer toutes les rubriques', # NEW
 	'lien_retrait_particpant' => 'Parte-hartzailehau baztertu',
 	'lien_site' => 'lekua',
@@ -758,7 +758,7 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'plugins_actif_aucun' => 'Aucun plugin activé.', # NEW
 	'plugins_actif_un' => 'Un plugin activé.', # NEW
 	'plugins_actifs' => '@count@ plugin aktibatuak.',
-	'plugins_actifs_liste' => 'Actifs', # NEW
+	'plugins_actifs_liste' => 'Aktiboak',
 	'plugins_compte' => '@count@ plugin',
 	'plugins_disponible_un' => 'Plugin bat eskuragarri.',
 	'plugins_disponibles' => '@count@ plugin erabilgarriak',
@@ -845,7 +845,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 <p>Fitxategi hauek egileei eta administrazaileei zure guneko inguru batzutan (adibidez, kanpoko estatistika-programa) sarbidea murrizteko baliatzen ahal ditzakezu.</p>
 <p>Ez bazaizu baliagarri, aukera hau bere lehentasunezko balioan utz dezakezu (fitxategien sortzerik ez).</p>',
 	'texte_informations_personnelles_1' => 'Sistemak oraintokirako norberako sarrera sortuko du.',
-	'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen duela, ahal duzu', # MODIF
+	'texte_informations_personnelles_2' => '(Oharra : berrinstalazio batez ari bagara, eta zure sarbidea beti funtzionatzen bada, ahal duzu',
 	'texte_introductif_article' => '(Artikuluaren sarrera.)',
 	'texte_jeu_caractere' => 'Aukera hau probetxugarria da zure guneak alfabeto erromatarreko (edo « mendebaldarrekoa ») alfabetodesberdinak eta bere eratorriak erakutsi behar baditu. Kasu honetan, komenigarria izango litzatekekonfigurazio lehenetsia aldatzea karaktere-joko egoki baterako ; kasu guztietan probak egiteagomendatzen dizugu irtenbide on bat aurkitzeko. Parametro hau aldatzen baduzu,ez ahaztu ondorioko gune publikoa egokitzen (#CHARSET marka).',
 	'texte_jeu_caractere_2' => 'Konfigurazio honek ez du atzeraeraginezko efekturik. Beraz,dagoeneko sartutako testuak gaizki bistaratu ahal dira konfigurazioaren aldaketa batenondorioz. Kasu guztietan, kalteri gabe aurreko konfiguraziora itzuli ahalizango zara.',
@@ -864,7 +864,7 @@ zure ostapen zuzkitzaileak SQL jasaten badu, han aurkitu beharko zenituzke SQL z
 berrindexazio bizkor bati ekin nahi badiozu (adibidez babeskopiabat berreskuratu ondoren). Modu arruntean aldatutako dokumentuak (SPIP interfazetik)automatikoki berrindexatuak direla antzeman : 
 beraz komando hau salbuespenezkomodurako bakarrik da probetxugarria.',
 	'texte_moteur_recherche_non_active' => 'Bilaketarako motorea ez dago aktibaturik.',
-	'texte_multilinguisme' => 'Hizkuntza batbaino gehiago erabili nahi baldin baduzu, nabigatze zailarekin, zure tokiarenantolakuntzaren arabera, artikuluentzat edota atalentzat hizkuntza aukeratzeko menu baterantsi ahal duzu.', # MODIF
+	'texte_multilinguisme' => 'Objektu batzuk hizkuntza anitzetan kudeatu nahi badituzu, nabigazio konplexu batekin, zure gunearen antolakuntzaren arabera, objektu horiei hizkuntza aukeratzeko menu bat erantsi diezakezu.',
 	'texte_multilinguisme_trad' => 'Elementu batzuen itzulpenen arteko loturak kudeatzeko sistema bat ere aktiba dezakezu.',
 	'texte_non_compresse' => 'konpresiorikgabe (zure zerbitzariak ez du funtzionalitate hau jasaten)',
 	'texte_nouveau_message' => 'Mezu berria',
