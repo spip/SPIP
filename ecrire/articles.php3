@@ -152,11 +152,6 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		}
 	}
 	
-	
-	// Passer les documents en inclus=non
-	mysql_query("UPDATE spip_documents SET inclus='non' WHERE id_article='$id_article'");
-	
-
 	// afficher le nouveau titre dans la barre de fenetre
 	$titre_article = stripslashes($titre);
 }
