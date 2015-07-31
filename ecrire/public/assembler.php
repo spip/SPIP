@@ -435,6 +435,7 @@ function f_insert_head($texte) {
 // Inserer au besoin les boutons admins
 // http://doc.spip.org/@f_admin
 function f_admin ($texte) {
+	if (!$GLOBALS['html']) return $texte;
 	if ($GLOBALS['affiche_boutons_admin']) {
 		include_spip('public/admin');
 		$texte = affiche_boutons_admin($texte);
