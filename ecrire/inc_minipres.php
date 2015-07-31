@@ -102,6 +102,32 @@ function info_dist() {
 	if ($connect_statut == '0minirezo') phpinfo();
 }
 
+
+// normalement il faudrait definir inc_iframe_action.php, mais pour mettre juste ca:
+
+function iframe_action_dist()
+{
+	global $connect_statut, $id, $action, $statut, $redirect;
+	if ($id && ($connect_statut == "0minirezo")) {
+
+		$var_f = find_in_path('inc_' . $action . '.php');
+		if ($var_f) 
+		  include($var_f);
+		else
+		  include_ecrire('inc_' . $action . '.php');
+
+		$var_nom = 'changer_statut_' . $action;
+		if (function_exists($var_nom))
+		  $var_nom($id, $statut);
+		else spip_log("fonction $var_nom indisponible dans $var_f");
+	}
+	
+	if (!$redirect)
+	  header("Cache-Control: no-store, no-cache, must-revalidate");
+	else
+	  header("Location: " . urldecode($redirect));
+}
+
 // Afficher le bouton "preview" dans l'espace public
 function afficher_bouton_preview() {
 		$x = majuscules(_T('previsualisation'));

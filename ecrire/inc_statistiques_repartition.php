@@ -125,11 +125,11 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	}
 }
 
-function statistiques_repartition_dist($critere)
+function statistiques_repartition_dist()
 {
 
   global $connect_statut, $connect_toutes_rubriques, $spip_ecran, $taille,
-    $abs_total, $nombre_vis;
+    $abs_total, $nombre_vis, $critere;
 
 	debut_page(_T('titre_page_statistiques'), "suivi", "repartition");
 	
