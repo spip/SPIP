@@ -24,45 +24,48 @@
 /* * Style des icones */
 /* structure html : <span class="icone danger horizontale s24 left"><a><img><b>texte</b></span> */
 .icone { display:block; margin:0;padding:0;text-align: center; font-size: 10px;}
-.icone a {display:block;margin:0 auto;width:72px;padding: 5px 0; }
+.icone a,.icone .submit {display:block;margin:0 auto;width:72px;padding: 5px 0;border:0;cursor:hand;cursor:pointer; }
 .icone a:hover {text-decoration:none;}
-.icone a img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #GET{foncee}; }
-.icone a:hover img { background-color: #fff; border-color: #666; }
-.icone a b,.box .icone a b { font-weight: bold; color: #GET{foncee}; display: block; margin: 2px auto; width: 100%; height: 3em; }
-.icone a:hover b { color: #000;}
+.icone a img,.icone .submit img {margin: 0 auto; display: inline; padding: 4px; background-color: #eee; border: 2px solid #GET{foncee}; }
+.icone a:hover img,.icone .submit:hover img  { background-color: #fff; border-color: #666; }
+.icone a b,.box .icone a b,.icone .submit b,.box .icone .submit b { font-weight: bold; color: #GET{foncee}; display: block; margin: 2px auto; width: 100%; height: 3em; }
+.icone a:hover b,.icone .submit:hover b { color: #000;}
+
+/*form.bouton_action_post.icone,form.bouton_action_post.icone div,form.bouton_action_post.icone .submit {display:block;}*/
+
 
 /* alignement */
 .icone.left {float:#GET{left};}
 .icone.right {float:#GET{right};}
-.icone.center a {margin:0 auto;}
+.icone.center a,.icone.center .submit {margin:0 auto;}
 
 /* icone horizontale */
 .icone.horizontale { display:block; clear: both;position:relative;margin:0;padding:2px;text-align: #GET{left};padding-#GET{left}:32px;}
-.icone.horizontale a {display:inline;width:auto;padding:0;}
+.icone.horizontale a,.icone.horizontale .submit {display:inline;width:auto;padding:0;}
 /* pour les navigateurs modernes */
-.icone.horizontale a {display:table-cell;vertical-align:middle;height:28px;}
+.icone.horizontale a,.icone.horizontale .submit {display:table-cell;vertical-align:middle;height:28px;}
 .icone.horizontale.right {text-align: #GET{right};padding-#GET{right}:32px;padding-#GET{left}:2px;}
-.icone.horizontale a img {padding:0;border:0;background:none;position:absolute;#GET{left}:4px;top:50%;margin-top:-12px;}
-.icone.horizontale a b {color:#666;display:inline;}
-.icone.horizontale a:hover b { color: #000;}
+.icone.horizontale a img,.icone.horizontale .submit img {padding:0;border:0;background:none;position:absolute;#GET{left}:4px;top:50%;margin-top:-12px;}
+.icone.horizontale a b,.icone.horizontale .submit b {color:#666;display:inline;}
+.icone.horizontale a:hover b,.icone.horizontale .submit:hover b { color: #000;}
 
 /* variantes sans texte ou sans image */
 .icones_img .icone.verticale b {display:none;}
 .icones_texte .icone img {display:none;}
 
 .icones_texte .icone.horizontale {padding:2px;}
-.icones_texte .icone.horizontale a {display:block;padding:4px;color: #606060;border: 1px solid #ddd; background-color: #f0f0f0;}
-.icones_texte .icone.horizontale a:hover { text-decoration: none; color: #000; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
+.icones_texte .icone.horizontale a,.icones_texte .icone.horizontale .submit {display:block;padding:4px;color: #606060;border: 1px solid #ddd; background-color: #f0f0f0;}
+.icones_texte .icone.horizontale a:hover,.icones_texte .icone.horizontale .submit:hover  { text-decoration: none; color: #000; border-#GET{right}: solid 1px #fff; border-bottom: solid 1px #fff; border-#GET{left}: solid 1px #666; border-top: solid 1px #666; background-color: #eee; }
 
 /* danger */
 .icone.danger {background:none;}
-.icone.danger a { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
-.icone.danger a img { background-color: #fff; border-color: #ff9999; }
-.icone.danger a:hover img { background-color: #fff; border-color: red; }
-.icone.horizontale.danger a { background: none; }
+.icone.danger a,.icone.danger .submit { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+.icone.danger a img,.icone.danger .submit img { background-color: #fff; border-color: #ff9999; }
+.icone.danger a:hover img,.icone.danger .submit:hover img { background-color: #fff; border-color: red; }
+.icone.horizontale.danger a,.icone.horizontale.danger .submit { background: none; }
 .icone.horizontale.danger { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
 .icones_texte .icone.horizontale.danger {background:none;}
-.icones_texte .icone.horizontale.danger a { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
+.icones_texte .icone.horizontale.danger a,.icones_texte .icone.horizontale.danger .submit { background: url(#CHEMIN_IMAGE{rayures-sup.gif}); }
 
 /* cas particuliers */
 .icone.verticale.historique-24 { width: 90px; }
