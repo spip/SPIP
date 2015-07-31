@@ -193,7 +193,14 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		//debut_cadre_enfonce("doc-24.gif");
 		if ($documents_lies) {
 	
-			if ($type == "article") echo propre("<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>Les documents suivants sont associ&eacute;s &agrave; votre article. Vous ne les avez pas ins&eacute;r&eacute;s directement dans le texte de votre article, ils appara&icirc;tront sur le site public sous forme de &laquo;documents attach&eacute;s&raquo;.</font>");
+			if ($type == "article") echo propre("<font size=2
+			face='Verdana,Arial,Helvetica,sans-serif'>Les documents suivants
+			sont associ&eacute;s &agrave; votre article, mais ils n'y ont
+			pas &eacute;t&eacute; directement ins&eacute;r&eacute;s. Ils
+			appara&icirc;tront donc sous forme de &laquo;documents
+			joints&raquo; (remarque: il se peut que ce site n'ait pas
+			&eacute;t&eacute; programm&eacute; pour afficher les documents
+			joints - dans ce cas ils n'appara&icirc;tront pas du tout).</font>");
 
 			$case = "gauche";
 			echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
