@@ -43,9 +43,10 @@ function traiter_raccourci_notes($letexte)
 		list($note_source, $note_texte, $ref, $nom) = $r;
 
 		// note nommee ou pas ?
-		if ($nom AND strpos($note_texte, '</' . $nom .'>') === false) {
+		if (isset($nom) AND strpos($note_texte, '</' . $nom .'>') === false) {
 			$note_texte = str_replace($ref,'',$note_texte);
-		} else 	$nom = ++$compt_note;
+		} else if (!isset($nom))
+			$nom = ++$compt_note;
 
 		// eliminer '%' pour l'attribut id
 		$ancre = $mn . str_replace('%','_', rawurlencode($nom));
@@ -66,7 +67,9 @@ function traiter_raccourci_notes($letexte)
 		// dans le texte, mettre l'appel de note a la place de la note
 		$pos = strpos($letexte, $note_source);
 		$letexte = substr($letexte, 0, $pos) .
-			code_echappement("$ouvre_ref<a href='#nb$ancre' class='spip_note' rel='footnote'$title$att>$nom</a>$ferme_ref") .
+			code_echappement($nom
+				? "$ouvre_ref<a href='#nb$ancre' class='spip_note' rel='footnote'$title$att>$nom</a>$ferme_ref"
+				: '') .
 			substr($letexte, $pos + strlen($note_source));
 	}
 	return array($letexte, $mes_notes);
@@ -83,7 +86,9 @@ function traiter_les_notes($notes) {
 		list($ancre, $nom, $texte) = $r;
 		$atts = " href='#nh$ancre' id='nb$ancre' class='spip_note' title='$title $ancre' rev='footnote'";
 		$mes_notes .= "\n\n"
-		. code_echappement("$ouvre_note<a$atts>$nom</a>$ferme_note")
+		. code_echappement($nom
+			? "$ouvre_note<a$atts>$nom</a>$ferme_note"
+			: '')
 		. $texte;
 	}
 	$mes_notes= propre($mes_notes);
