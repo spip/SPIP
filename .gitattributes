@@ -267,11 +267,6 @@ ecrire/typographie/fr.php -text
 ecrire/typographie/index.php -text
 ecrire/urls/index.php -text
 ecrire/urls/page.php -text
-ecrire/xml/analyser_dtd.php -text
-ecrire/xml/indenter.php -text
-ecrire/xml/index.php -text
-ecrire/xml/interfaces.php -text
-ecrire/xml/valider.php -text
 /index.php -text
 local/remove.txt -text
 prive/aide_body.css -text
