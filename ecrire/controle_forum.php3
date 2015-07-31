@@ -108,7 +108,12 @@ function forum_parent($id_forum) {
 				$date_heure = $row[1];
 				$titre = $row[2];
 			}
-			return "<B>R&eacute;ponse &agrave; la br&egrave;ve <A HREF='".generer_url_breve($id_breve)."'>$titre</A></B>";
+			if ($forum_stat == "prive") {
+				return "<B>R&eacute;ponse &agrave; la br&egrave;ve <A HREF='breves_voir.php3?id_breve=$id_breve'>$titre</A></B>";
+			}
+			else {
+				return "<B>R&eacute;ponse &agrave; la br&egrave;ve <A HREF='".generer_url_breve($id_breve)."'>$titre</A></B>";
+			}
 		}
 		else if ($forum_stat == "privadm") {
 			$retour = forum_parent($forum_id_parent);
