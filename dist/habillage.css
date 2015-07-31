@@ -37,20 +37,21 @@ div#pied img { vertical-align: bottom; }
 body { font-size: 100%; color: #333; }
 
 /* Typo pour les menus et la navigation */
-body, #navigation, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans-serif; }
+body, #navigation, #extra, .formulaire_spip { font-family: Verdana, Tahoma, Geneva, sans-serif; }
 
 /* Typo pour le contenu */
-#contenu { font-family: "Trebuchet MS", Helvetica, sans-serif; }
+#contenu, #top { font-family: "Trebuchet MS", Helvetica, sans-serif; }
 
-/* Typo pour les citations et extraits introductifs */
-/*q, blockquote, .introduction, .spip_serif { font-family: Georgia, Times, serif; }*/
+/* * */
+#navigation, #extra { font-size: .7em; }
+#contenu { font-size: .9em; }
 
 
 /* Blocs du contenu
 ---------------------------------------------- */
 
 /* Fil d'Ariane */
-#hierarchie { clear: both; margin-bottom: 2em; /*font-size: 0.77em;*/ }
+#hierarchie { clear: both; margin-bottom: 2em; padding-top: .5em; font-size: 0.77em; color: #666; }
 #hierarchie a { text-decoration: none; }
 
 .surtitre, .soustitre { /*font-size: 0.82em;*/ text-transform: uppercase; color: #666; color: #CCCC66; }
