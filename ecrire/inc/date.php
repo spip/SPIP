@@ -108,27 +108,4 @@ function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
     "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }
 
-// http://doc.spip.org/@afficher_formulaire_date
-function afficher_formulaire_date($script, $args, $texte, $jour, $mois, $annee)
-{
-  global $couleur_foncee;
-  return generer_url_post_ecrire($script, $args)
-	. "<table cellpadding='5' cellspacing='0' border='0' width='100%' background='"
-	.  _DIR_IMG_PACK
-	. "rien.gif'>"
-	. "<tr><td bgcolor='$couleur_foncee' colspan='2'><font size='2' color='#ffffff'><b>"
-	._T('texte_date_publication_article')
-	. "</b></font></tr>"
-	. "<tr><td align='center'>"
-	. afficher_jour($jour, "name='jour' size='1' class='fondl'", true)
-	. afficher_mois($mois, "name='mois' size='1' class='fondl'", true)
-	. afficher_annee($annee, "name='annee' size='1' class='fondl'",1996)
-	. "</td><td align='right'>"
-	. "<input type='submit' name='Changer' class='fondo' value='"
-	. _T('bouton_changer')
-	. "'>"
-	. "</td></tr></table>"
-	. "</form>";
-}
-
 ?>

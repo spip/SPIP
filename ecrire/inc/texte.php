@@ -786,7 +786,7 @@ function calculer_url_site($id, $texte='')
 {
 	# attention dans le cas des sites le lien pointe non pas sur
 	# la page locale du site, mais directement sur le site lui-meme
-	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site,lang FROM spip_syndic WHERE id_syndic=$id"));
+	$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id"));
 	if ($row) {
 		$lien = $row['url_site'];
 		if ($texte=='')

@@ -14,16 +14,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/actions');
-include_spip('inc/date');
 include_spip('base/abstract_sql');
 include_spip("inc/indexation");
 
 // http://doc.spip.org/@afficher_breves_voir
-function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_groupe)
+function afficher_breves_voir($id_breve, $cherche_mot, $select_groupe)
 {
 	global $champs_extra, $options, $connect_statut, $les_notes,$spip_display;
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve'");
-
 
 	if ($row = spip_fetch_array($result)) {
 		$id_breve=$row['id_breve'];
@@ -36,7 +34,8 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 		$lien_url=$row['lien_url'];
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
-	}
+	} else 
+		die ('breve inexistante');
 
 	$flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
 
@@ -138,18 +137,10 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 	if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 	
 		if ($statut == 'publie') {	
-			echo "<p>";
-	
-			if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_heure, $regs)) {
-			        $mois = $regs[2];
-			        $jour = $regs[3];
-			        $annee = $regs[1];
-			}
-			echo "</p>";	
 	
 			debut_cadre_enfonce();
-			echo afficher_formulaire_date("breves_voir", "id_breve=$id_breve&options=$options",
-						      _T('texte_date_publication_article'), $jour, $mois, $annee);
+			$dater = charger_fonction('dater', 'inc');
+			echo $dater($id_breve, $flag_editable, $statut, 'breve', 'breves_voir', $date_heure);
 			fin_cadre_enfonce();	
 		}
 		else {
@@ -249,25 +240,8 @@ function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $select_gr
 // http://doc.spip.org/@exec_breves_voir_dist
 function exec_breves_voir_dist()
 {
-	global $connect_statut;
-
-	$id_breve = intval(_request('id_breve'));
-
-	if ($row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve=$id_breve")))
-		$id_rubrique = $row['id_rubrique'];
-	else
-		die ('breve inexistante');
-
-	// TODO: passer ce qui reste de l'update dans action/editer_breve.php
-	if (_request('jour') AND $connect_statut == '0minirezo') {
-		$annee = _request('annee');
-		$mois = _request('mois');
-		$jour = _request('jour');
-		if ($annee == "0000") $mois = "00";
-		if ($mois == "00") $jour = "00";
-		spip_query("UPDATE spip_breves SET date_heure='$annee-$mois-$jour' WHERE id_breve=$id_breve");
-	}
-
-	afficher_breves_voir($id_breve, _request('changer_lang'), _request('cherche_mot'), _request('select_groupe'));
+	afficher_breves_voir(intval(_request('id_breve')), _request('cherche_mot'), _request('select_groupe'));
 }
+
+
 ?>
