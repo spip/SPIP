@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************************\
+/* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2012                                                *
@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier contient les fonctions gerant
+ * les instructions SQL pour Sqlite
+ *
+ * @package SQL\SQLite
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 # todo : get/set_caracteres ?
@@ -117,12 +124,17 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db = '', $prefixe = '', $
 
 /**
  * Fonction de requete generale, munie d'une trace a la demande
- * http://doc.spip.org/@spip_sqlite_query
  *
- * @param  $query
+ * @param string $query
+ * 		Requete a executer
  * @param string $serveur
+ * 		Nom du connecteur
  * @param bool $requeter
+ * 		Effectuer la requete ?
+ * 		- true pour executer
+ * 		- false pour retourner le texte de la requete
  * @return bool|SQLiteResult|string
+ * 		Resultat de la requete
  */
 function spip_sqlite_query($query, $serveur = '', $requeter = true){
 	#spip_log("spip_sqlite_query() > $query",'sqlite.'._LOG_DEBUG);
@@ -377,9 +389,9 @@ function spip_sqlite_alter($query, $serveur = '', $requeter = true){
  * Fonction de creation d'une table SQL nommee $nom
  * http://doc.spip.org/@spip_sqlite_create
  *
- * @param  $nom
- * @param  $champs
- * @param  $cles
+ * @param string $nom
+ * @param array $champs
+ * @param array $cles
  * @param bool $autoinc
  * @param bool $temporary
  * @param string $serveur
@@ -439,11 +451,20 @@ function spip_sqlite_create_base($nom, $serveur = '', $option = true){
  * Fonction de creation d'une vue SQL nommee $nom
  * http://doc.spip.org/@spip_sqlite_create_view
  *
- * @param  $nom
- * @param  $query_select
+ * @param string $nom
+ * 		Nom de la vue a creer
+ * @param string $query_select
+ * 		Texte de la requete de selection servant de base a la vue
  * @param string $serveur
+ * 		Nom du connecteur
  * @param bool $requeter
+ * 		Effectuer la requete ?
+ * 		- true pour executer
+ * 		- false pour retourner le texte de la requete
  * @return bool|SQLiteResult|string
+ * 		Resultat de la requete ou
+ * 		- false si erreur ou si la vue existe deja
+ * 		- string texte de la requete si $requeter vaut false
  */
 function spip_sqlite_create_view($nom, $query_select, $serveur = '', $requeter = true){
 	if (!$query_select) return false;
@@ -1077,7 +1098,20 @@ function spip_sqlite_select($select, $from, $where = '', $groupby = '', $orderby
 }
 
 
-// http://doc.spip.org/@spip_sqlite_selectdb
+/**
+ * Selectionne un fichier de base de donnees
+ *
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool $requeter
+ * 		Inutilise
+ * 
+ * @return bool|string
+ * 		Nom de la base en cas de success.
+ * 		False en cas d'erreur.
+**/
 function spip_sqlite_selectdb($db, $serveur = '', $requeter = true){
 	_sqlite_init();
 

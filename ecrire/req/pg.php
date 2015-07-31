@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************************\
+/* *************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
  *  Copyright (c) 2001-2012                                                *
@@ -10,6 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Ce fichier contient les fonctions gerant
+ * les instructions SQL pour PostgreSQL
+ *
+ * @package SQL\PostgreSQL
+ */
+ 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_DEFAULT_DB', 'spip');
@@ -413,7 +420,21 @@ function spip_pg_explain($query, $serveur='',$requeter=true){
 	return spip_pg_fetch($r, NULL, $serveur);
 }
 
-// http://doc.spip.org/@spip_pg_selectdb
+
+/**
+ * Selectionne une base de donnees
+ *
+ * @param string $nom
+ * 		Nom de la base a utiliser
+ * @param string $serveur
+ * 		Nom du connecteur
+ * @param bool $requeter
+ * 		Inutilise
+ * 
+ * @return bool|string
+ * 		Nom de la base en cas de success.
+ * 		False en cas d'erreur.
+**/
 function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 	// se connecter a la base indiquee
 	// avec les identifiants connus
@@ -421,7 +442,7 @@ function spip_pg_selectdb($db, $serveur='',$requeter=true) {
 
 	if ($link = spip_connect_db('', '', '', '', $db, 'pg', '', '')){
 		if (($db==$link['db']) && $GLOBALS['connexions'][$index] = $link)
-			return $db;					
+			return $db;
 	} else
 		return false;
 }
