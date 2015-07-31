@@ -346,7 +346,7 @@ echo "<P><HR><P>";
 				list($texte1,$texte) = coupe_trop_long($texte);
 
 				$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
-					" CLASS='forml' ROWS='20' COLS='40'>" .
+					" CLASS='forml' ROWS='20' COLS='40' wrap=soft>" .
 					$texte1 . "</TEXTAREA><P>\n";
 			}
 		}
