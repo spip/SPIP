@@ -1328,7 +1328,7 @@ function resolve_path($url) {
 // http://doc.spip.org/@suivre_lien
 function suivre_lien($url, $lien) {
 	# lien absolu ? ok
-	if (preg_match(',^([a-z0-9]+://|mailto:),iS', $lien))
+	if (preg_match(',^([a-z0-9]+://|mailto:|javascript:),iS', $lien))
 		return $lien;
 
 	# lien relatif, il faut verifier l'url de base
