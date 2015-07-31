@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_semaine' => 'deiziataer sizhun-ha-sizhun',
 'choix_couleur_interface' => 'liv',
 'choix_interface' => 'dibab ar c\'hetal',
+'colonne' => 'Bann',
 'confirm_changer_statut' => 'Diwallit, goulennet ho peus ma vo kemmet statud an elfenn-ma&ntilde;. Ha c\'hoant ho peus da genderc\'hel ?',
 'correcte' => 'reizh',
 
@@ -203,6 +204,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_document' => 'Titl an teuliad&nbsp;:',
 'entree_titre_image' => 'Titl ar skeudenn&nbsp;:',
 'envoi_via_le_site' => 'Kas dre al lec\'hienn',
+'erreur' => 'Fazi',
+'erreur_texte' => 'fazi',
 
 
 // F
@@ -546,6 +549,7 @@ Trugarez da gemer perzh
 'lien_visite_site' => 'gweladenni&ntilde; al lec\'hienn-ma&ntilde;',
 'lien_visites' => '@visites@&nbsp;gweladenn',
 'lien_voir_auteur' => 'Gwelet ar skridaozer-ma&ntilde;',
+'ligne' => 'Linenn',
 'login_acces_prive' => 'tizhout al lodenn brevez',
 'login_autre_identifiant' => 'Kennaska&ntilde; gant un anv-tremen all',
 'login_connexion_refusee' => 'Kennaskadenn bet nac\'het.',
@@ -584,9 +588,11 @@ Trugarez da gemer perzh
 
 // N
 'navigateur_pas_redirige' => 'Klikit ama&ntilde; ma ne vez ket adsturiet ho merdeer',
+'numero' => 'Niverenn',
 
 
 // O
+'occurence' => 'Reveziadenn',
 'onglet_affacer_base' => 'Diverka&ntilde; an diaz',
 'onglet_auteur' => 'Ar skridaozer',
 'onglet_contenu_site' => 'Endalc\'had al lec\'hienn',
@@ -649,6 +655,7 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 
 
 // S
+'spip_conforme_dtd' => 'SPIP a gav dezha&ntilde; e klot an teul-ma&ntilde; gant e DOCTYPE :',
 'squelette' => 'framm',
 'squelette_inclus_ligne' => 'framm gann, linenn',
 'squelette_ligne' => 'framm, linenn',
@@ -730,15 +737,18 @@ Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 'zbug_code' => 'kod',
 'zbug_critere_inconnu' => 'muzul dianavez @critere@',
 'zbug_distant_interdit' => 'diavaez difennet',
+'zbug_doublon_table_sans_index' => 'doublenn war un diaz hep roll',
 'zbug_erreur_boucle_double' => 'BLOUK@id@: daoudermen',
 'zbug_erreur_boucle_fermant' => 'BLOUK@id@: tag o serri&ntilde; a vank',
 'zbug_erreur_boucle_syntaxe' => 'Ereadurezh direizh',
+'zbug_erreur_compilation' => 'Fazi o kempuna&ntilde;',
 'zbug_erreur_execution_page' => 'fazi o kas ar bajenn da benn',
 'zbug_erreur_filtre' => 'Fazi : sil <b>&laquo; @filtre@ &raquo;</b> ket termenet',
 'zbug_erreur_meme_parent' => '{meme_parent} n\'hall beza&ntilde; implijet nemet war ar blouko&ugrave; (FORUMO&Ugrave;) pe (RUMMADO&Ugrave;)',
 'zbug_erreur_squelette' => 'Fazi(o&ugrave;) er framm',
 'zbug_info_erreur_squelette' => 'Fazi war al lec\'hienn',
 'zbug_inversion_ordre_inexistant' => 'eilpenna&ntilde; un urzh n\'eus ket outa&ntilde;',
+'zbug_pagination_sans_critere' => '#PAJENNAOUI&Ntilde; hep dezverk ebet, pe impijet en un droiad askizat',
 'zbug_parametres_inclus_incorrects' => 'Arventerio&ugrave;-ensoc\'ha&ntilde; direizh',
 'zbug_resultat' => 'disoc\'h',
 'zbug_serveur_indefini' => 'servijer SQL didermen',

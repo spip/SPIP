@@ -197,6 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   <p>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
   de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.</p>
   <p>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+'double_occurence' => 'Double occurence',
 
 
 // E
@@ -205,6 +206,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Titre de l\'image&nbsp;:',
 'envoi_via_le_site' => 'Envoi via le site',
 'erreur' => 'Erreur',
+'erreur_balise_non_fermee' => 'derni&egrave;re balise non referm&eacute;e :',
 'erreur_texte' => 'erreur(s)',
 
 

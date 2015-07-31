@@ -103,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Enrollet eo restro&ugrave; ar memroet, met ket en doare gwaeget.',
 'cache_modifiable_webmestre' => 'Gant webmestr al lec\'hienn e c\'hell an dilenn-se beza&ntilde; kemmet',
 'calendrier_synchro' => 'Ma implijit ur meziant deiziataer heglot gant <b>iCal</b> e c\'hellit e adkenamzeria&ntilde; ouzh titouro&ugrave; al lec\'hienn-ma&ntilde;.',
+'connexion_ldap' => 'Kennaska&ntilde; :',
 
 
 // D
@@ -471,12 +472,12 @@ Risklo&ugrave; \'zo ma vefe distrujet ho tiaz-titouro&ugrave; pe ma n\'afe ket e
 'info_question_accepter_visiteurs' => 'Ma vez savet ho frammo&ugrave; evit ma enrollfe ar gweladennerien hep gallout dont-tre el lodenn brevez, enaouit ar poent ama&ntilde;-dindan&nbsp;:',
 'info_question_gerer_statistiques' => 'Ha rankout a ra ho lec\'hienn mera&ntilde; statistiko&ugrave; ar gweladenno&ugrave;&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => 'Hag aotrea&ntilde; a rit ma c\'hellfe skridaozerien nevez en em enrolla&ntilde; adalek al lodenn foran&nbsp;?
-		Ma asantit e c\'hello ar weladennerien en em eskriva&ntilde; adalek ur furmskrid emgefreek, 
-		ha gouest e vint neuze da dizhout al lodenn brevez evit kinnig o fennado&ugrave;.
-		<blockquote><i>Da vare an enrolla&ntilde; e vez kaset ur postel emgefreek d\'ar skridaozerien
-		enna&ntilde; ar c\'hodo&ugrave; da c\'hallout dont-tre el lec\'hienn.
-		Gant boderien \'zo e vez difennet kas postelio&ugrave; adalek o servijourien,
-		en degouezh-se ne vo ket posupl an enrolla&ntilde; emgefreek.',
+  Ma asantit e c\'hello ar weladennerien en em eskriva&ntilde; adalek ur furmskrid emgefreek, 
+  ha gouest e vint neuze da dizhout al lodenn brevez evit kinnig o fennado&ugrave;.
+  <blockquote><i>Da vare an enrolla&ntilde; e vez kaset ur postel emgefreek d\'ar skridaozerien
+  enna&ntilde; ar c\'hodo&ugrave; da c\'hallout dont-tre el lec\'hienn.
+  Gant boderien \'zo e vez difennet kas postelio&ugrave; adalek o servijourien,
+  en degouezh-se ne vo ket posupl an enrolla&ntilde; emgefreek.',
 'info_question_mots_cles' => 'Ha c\'hoant ho peus ober gant ar gerio&ugrave;-stur war ho lec\'hienn&nbsp;?',
 'info_question_proposer_site' => 'Piv a c\'hell kinnig lec\'hienno&ugrave; listennet&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Ha c\'hoant ho peus ober gant benvegad-enklask diabarzh SPIP&nbsp;?
@@ -606,6 +607,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'install_echec_annonce' => 'Moarvat e c\'hwito ar staliadur pe e kaso d\'ul lec\'hiennha n\'ay ket en-dro...',
 'install_extension_mbstring' => 'N\'ez a ket SPIP en-dro gant&nbsp;:',
 'install_extension_php_obligatoire' => 'Ezhomm en deus SPIP ouzh an astenn php&nbsp;:',
+'install_php_version' => 'n\'eo ket trawalc\'h arreval @version@ PHP (@minimum@ d\'an nebeuta&ntilde;)',
 'install_select_langue' => 'Diuzit ur yezh, ha klikit war &laquo;&nbsp;Da-heul&nbsp;&raquo; evit kregi&ntilde; gant ar stalia&ntilde;.',
 'intem_redacteur' => 'skridaozer',
 'item_accepter_inscriptions' => 'Degemer an enrolladenno&ugrave;',
@@ -740,6 +742,7 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'plugin_etat_stable' => 'stabil',
 'plugin_etat_test' => 'war-arnodi&ntilde;',
 'plugins_liste' => 'Listenn an astenno&ugrave;',
+'protocole_ldap' => 'Arreval ar protokol :',
 
 
 // R
@@ -1005,6 +1008,7 @@ Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'titre_sites_tous' => 'Al lec\'hienno&ugrave; listennet',
 'titre_suivi_petition' => 'Heulia&ntilde; ar sinadego&ugrave;',
 'titre_syndication' => 'Listenna&ntilde; lec\'hienno&ugrave; dre RSS',
+'tls_ldap' => 'Surentez Treuzborzh a-Wiskado&ugrave; :',
 'tout_dossier_upload' => 'An teul @upload@ a-bezh',
 'trad_article_inexistant' => 'N\'eus pennad ebet gant an niverenn-ma&ntilde;.',
 'trad_article_traduction' => 'Holl doareo&ugrave; ar pennad-ma&ntilde; :',
