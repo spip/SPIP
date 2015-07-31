@@ -1,0 +1,13 @@
+<BOUCLE_G(GROUPES_MOTS)
+	{forum=(#CONFIG{mots_cles_forums}|choixsiegal{oui,oui,jamais})}
+	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
+	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}
+	{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}
+	{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
+>
+[(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
+	<fieldset>
+	<legend><:mots_clefs:> : #TITRE</legend>
+		<INCLURE{fond=formulaires/choix_mots}{id_groupe}{ajouter_mot}{unseul}>
+	</fieldset>
+]</BOUCLE_G>

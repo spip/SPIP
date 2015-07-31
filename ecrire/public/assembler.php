@@ -189,12 +189,14 @@ function public_assembler_dist($fond, $connect='') {
 	}
 
 	// Si envoi pour un forum, enregistrer puis rediriger
-	if (isset($_POST['confirmer_forum'])
+	// old style, ne devrait plus etre utilise, sauf sur de vieux formulaires de forum !
+	// doit disparaitre pour raison de securite
+	/*if (isset($_POST['confirmer_forum'])
 	OR (isset($_POST['ajouter_mot']) AND $GLOBALS['afficher_texte']=='non')) {
 		include_spip('inc/headers');
 		$forum_insert = charger_fonction('forum_insert', 'inc');
 		redirige_par_entete($forum_insert());
-	}
+	}*/
 	
 	traiter_formulaires_dynamiques();
 	

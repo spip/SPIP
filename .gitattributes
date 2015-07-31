@@ -17,6 +17,11 @@ dist/formulaires/editer_rubrique.php -text
 dist/formulaires/editer_site.html -text
 dist/formulaires/editer_site.php -text
 dist/formulaires/editer_site_fonctions.php -text
+dist/formulaires/forum/charger.php -text
+dist/formulaires/forum/traiter.php -text
+dist/formulaires/forum/verifier.php -text
+dist/formulaires/forum_ajouter_mot.html -text
+dist/formulaires/forum_bloc_choix_mots.html -text
 dist/formulaires/login.php -text
 dist/formulaires/login_forum_abo.html -text
 dist/formulaires/logo_auteur.html -text
@@ -265,6 +270,7 @@ dist/images/wrapper.php -text
 dist/images/xml.gif -text
 dist/inc-documents.html -text
 dist/inc-entete.html -text
+dist/inc-forum-repondre.html -text
 dist/inc-forum.html -text
 dist/inc-head.html -text
 dist/inc-petition.html -text
@@ -277,6 +283,7 @@ dist/javascript/articles_tous_edite.js -text
 dist/javascript/async_upload.js -text
 dist/javascript/bgiframe.js -text
 dist/javascript/dragdrop_interface.js -text
+dist/javascript/formfx.js -text
 dist/javascript/jquery.cookie.js -text
 dist/javascript/jquery.form.js -text
 dist/javascript/jquery.ifixpng.js -text
