@@ -363,6 +363,7 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 // par defaut tout le monde (y compris visiteurs non enregistres)
 // peut lire tous les documents dans IMG/
 //
+// http://doc.spip.org/@autoriser_document_voir_dist
 function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
