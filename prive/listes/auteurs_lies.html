@@ -41,7 +41,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_aut(AUTEURS){tout}{id_objet?}{objet}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} autl}{!compteur_articles_filtres #ENV{filtre_statut_articles,"'poubelle'"}}>
+	<BOUCLE_liste_aut(AUTEURS){tout}{id_objet?}{objet}{where?}{statut?}{tri #ENV{par,multi nom},#GET{defaut_tri}}{pagination #ENV{nb,10} autl}{!compteur_articles_filtres #ENV*{filtre_statut_articles,poubelle}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#NOM**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_AUTEUR|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='statut'>[(#ID_AUTEUR|puce_changement_statut{#STATUT,0,auteur})]</td>
 			<td class='nom[ (#NOM|non)vide]'>[(#LOGO_AUTEUR|image_reduire{20,20})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#NOM|sinon{<:texte_vide:>})]</a></td>
