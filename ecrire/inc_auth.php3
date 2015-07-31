@@ -116,7 +116,9 @@ function auth() {
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
 		$url = urlencode(str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
-		redirige_par_entete($addr . "../spip_login.php3?url=$url");
+		redirige_par_entete("../spip_login.php3?url=$url&inscription=" .
+			     ((lire_meta("accepter_inscriptions") == "oui")?
+			      ('spip_inscription.php3') : ''));
 		exit;
 	}
 
@@ -214,7 +216,9 @@ function auth() {
 	}
 
 	if (!$auth_pass_ok) {
-		redirige_par_entete("../spip_login.php3?var_erreur=pass");
+		redirige_par_entete("../spip_login.php3?var_erreur=pass&inscription=" .
+			     ((lire_meta("accepter_inscriptions") == "oui")?
+			      ('spip_inscription.php3') : ''));
 	}
 
 	if ($connect_statut == 'nouveau') {
