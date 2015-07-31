@@ -1224,7 +1224,7 @@ function traiter_raccourcis($letexte) {
 			else
 				$name_id = "";
 
-			$lien = "<a href=\"#nb$ancre\"$name_id class=\"spip_note\">";
+			$lien = "<a href=\"#nb$ancre\"$name_id class=\"spip_note\" rel=\"footnote\">";
 
 			// creer le popup 'title' sur l'appel de note
 			if ($title = supprimer_tags(propre($note_texte))) {
@@ -1238,7 +1238,7 @@ function traiter_raccourcis($letexte) {
 			// on l'echappe
 			$insert = code_echappement($insert);
 
-			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\" title=\"" . _T('info_notes') . " $ancre\">$num_note</a>$ferme_note";
+			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\" title=\"" . _T('info_notes') . " $ancre\" rev=\"footnote\">$num_note</a>$ferme_note";
 		} else {
 			$insert = '';
 			$appel = '';
