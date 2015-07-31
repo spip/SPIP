@@ -20,8 +20,8 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 
 		spip_timer('calculer_page');
 		$page = calculer_page($chemin_cache,
-			array('fond' => $fond,
-				'contexte' => $contexte),
+				      array('fond' => $fond,
+					    'contexte' => $contexte),
 			$delais,
 			$inclusion);
 
@@ -37,9 +37,11 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		// qu'il faut changer d'invalideur a la prochaine lecture et donner
 		// un invalideur 't' dans 1 heure
 		// NB: cet invalideur connait aussi la taille du fichier
-		if ($fichier = addslashes($chemin_cache)) {
+		spip_log("cache" . $page['process_ins']);
+		if (file_exists($chemin_cache)) {
 			$bedtime = time() + 3600;
 			$taille = @filesize($chemin_cache);
+			$fichier = addslashes($chemin_cache);
 			spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille)
 			VALUES ('$fichier','$bedtime','t','$taille')");
 			@touch($chemin_cache.'.NEW');

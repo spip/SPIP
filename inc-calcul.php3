@@ -47,7 +47,8 @@ function squelette_obsolete($skel, $squelette) {
 }
 
 
-# Charge un squelette (au besoin le compile)
+# Charge un squelette (au besoin le compile) 
+# et retoune le nom de sa fonction principale, ou '' s'il est indefini
 # Charge egalement un fichier homonyme de celui du squelette
 # mais de suffixe '_fonctions.php3' pouvant contenir:
 # - des filtres
@@ -87,37 +88,26 @@ function charger_squelette ($squelette) {
 	if (file_exists($f)) include($f);
 
 	if (function_exists($nom))  return $nom;
+
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
+
 	// Tester si le compilateur renvoie une erreur
 
-	if (is_array($skel_code)) 
-		{
-			erreur_squelette($skel_code[0], $skel_code[1]) ; 
-			$skel_compile = '';
-			$skel_code = '';
-		  }
-	else
-		$skel_compile = "<"."?php\n" . $skel_code ."\n?".">";
-
-	// Parler au debugguer
-	if ($GLOBALS['var_debug'] AND 
-	    $GLOBALS['debug_objet'] == $nom
-	    AND $GLOBALS['debug_affiche'] == 'code')
-		debug_dumpfile ($skel_compile);
-		
-		// Evaluer le squelette
-	eval($skel_code);
-	if (function_exists($nom)) {
-		ecrire_fichier ($phpfile, $skel_compile);
-		return $nom;
+	if (!is_array($skel_code)) {
+// Parler au debugguer
+		if ($GLOBALS['var_debug'] AND 
+		    $GLOBALS['debug_objet'] == $nom AND 
+		    $GLOBALS['debug_affiche'] == 'code')
+			debug_dumpfile ($skel_code);
+		eval($skel_code);
+		if (function_exists($nom)) {
+		  ecrire_fichier ($phpfile, 
+				  "<"."?php\n" . $skel_code ."\n?".">");
+		  return $nom;
+		}
 	}
-
-		// en cas d'erreur afficher les boutons de debug
-	echo "<hr /><h2>".
-		_L("Erreur dans la compilation du squelette").
-		" $sourcefile</h2>" .
-		$GLOBALS['bouton_admin_debug'] = true;
-		debug_dumpfile ($skel_compile);
+	erreur_squelette($skel_code[0], $skel_code[1]) ; 
+	return '';
 }
 
 # Provoque la recherche du squelette $fond d'une $lang donnee,
@@ -129,7 +119,7 @@ function charger_squelette ($squelette) {
 
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-# La recherche est assuree par la fonction cherche_squelette,
+# La recherche est assuree par la fonction chercher_squelette,
 # definie dans inc-chercher, fichier non charge si elle est deja definie
 # (typiquement dans mes_fonctions.php3)
 
@@ -146,26 +136,25 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 			$lang);
 
 	// Charger le squelette et recuperer sa fonction principale
-	// (compilation automatique au besoin)
+	// (compilation automatique au besoin) et calculer
 
-	$fonc = charger_squelette($skel);
+	if ($skel) {
+		if ($fonc = charger_squelette($skel));
+			$page = $fonc(array('cache' => $cache), array($contexte));
 
-	// Calculer la page a partir du main() du skel compile
-	$page =  $fonc(array('cache' => $cache), array($contexte));
-
-	// Passer la main au debuggueur)
-	if ($GLOBALS['var_debug'] AND $GLOBALS['debug_objet'] == $fonc
-	AND $GLOBALS['debug_affiche'] == 'resultat') {
-		debug_dumpfile ($page['texte']);
+			// Passer la main au debuggueur)
+		if ($GLOBALS['var_debug'] AND 
+		    $GLOBALS['debug_objet'] == $fonc AND
+		    $GLOBALS['debug_affiche'] == 'resultat')
+			debug_dumpfile ($page['texte']);
 	}
-
 	# flag pour spip_error_handler(), cf inc-admin ??
 	$page['squelette'] = $skel;
 
 	// Nettoyer le resultat si on est fou de XML
 	if ($GLOBALS['xhtml']) {
-		include_ecrire("inc_tidy.php");
-		$page['texte'] = xhtml($page['texte']);
+		  include_ecrire("inc_tidy.php");
+		  $page['texte'] = xhtml($page['texte']);
 	}
 
 	// Entrer les invalideurs dans la base
@@ -332,7 +321,7 @@ function spip_abstract_select (
 			$d = 'inc_connect-' . $serveur .'.php3';
 			if (file_exists('ecrire/' . $d))
 				include_ecrire($d);
-			serveur_defini($f, $serveur);
+			$f = spip_abstract_serveur($f, $serveur);
 		}
 	}
 	return $f($select, $from, $where,
@@ -341,12 +330,13 @@ function spip_abstract_select (
 		  $table, $id, $serveur);
 }
 
-function serveur_defini($f, $serveur) {
+function spip_abstract_serveur($f, $serveur) {
   if (function_exists($f)) return $f;
   include_local("inc-admin.php3");
-  erreur_squelette(_T('info_erreur_squelette'),
-		   $serveur . 
-		   _L(' serveur SQL indefini'));
+  erreur_squelette(_L(' serveur SQL indefini'), $serveur);
+		   
+  // hack pour continuer la chasse aux erreurs
+  return 'array';
 }
 
 // Les 3 fonctions suivantes exploitent le resultat de la precedente,
@@ -355,21 +345,21 @@ function serveur_defini($f, $serveur) {
 function spip_abstract_fetch($res, $serveur='')
 {
   if (!$serveur) return spip_fetch_array($res);
-  $f = serveur_defini('spip_' . $serveur . '_fetch', $serveur);
+  $f = spip_abstract_serveur('spip_' . $serveur . '_fetch', $serveur);
   return $f($res);
 }
 
 function spip_abstract_count($res, $serveur='')
 {
   if (!$serveur) return spip_num_rows($res);
-  $f = serveur_defini('spip_' . $serveur . '_count', $serveur);
+  $f = spip_abstract_serveur('spip_' . $serveur . '_count', $serveur);
   return $f($res);
 }
 
 function spip_abstract_free($res, $serveur='')
 {
   if (!$serveur) return spip_free_result($res);
-  $f = serveur_defini('spip_' . $serveur . '_free', $serveur);
+  $f = spip_abstract_serveur('spip_' . $serveur . '_free', $serveur);
   return $f($res);
 }
 
