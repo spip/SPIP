@@ -8,7 +8,7 @@
 		    	id='mot#ID_MOT' 
 			[(#ID_MOT|in_any{#ENV*{ajouter_mot}, ''}|?
 				{'checked="checked"',''})] />
-		    #LOGO_MOT
+		    [(#LOGO_MOT|lien)]
 		<b><label for='mot#ID_MOT'>#TITRE</label></b><br />
 	</BOUCLE_M>
 		  </td></tr></table>
