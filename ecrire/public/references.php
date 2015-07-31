@@ -29,7 +29,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	$i = 0;
 	if (strlen($explicite)) {
 	// Recherche d'un champ dans un etage superieur
-	  while (($idb != $explicite) && ($idb !='')) {
+	  while (($idb !== $explicite) && ($idb !=='')) {
 #		spip_log("Cherchexpl: $nom_champ '$explicite' '$idb' '$i'");
 			$i++;
 			$idb = $boucles[$idb]->id_parent;
