@@ -259,7 +259,7 @@ if ($connect_statut == "0minirezo") {
 		echo "<td width=10><img src='img_pack/rien.gif' width=10>";
 		echo "</td>";
 		echo "<td width='250'>";
-		icone_horizontale("Activer le cookie de correspondance", "../spip_cookie.php3?cookie_admin=@$connect_login&redirect=./ecrire/index.php3", "cookie-24.gif", "");
+		icone_horizontale("Activer le cookie de correspondance", "../spip_cookie.php3?cookie_admin=".rawurlencode(@$connect_login)."&redirect=".rawurlencode("./ecrire/index.php3"), "cookie-24.gif", "");
 		echo "</td></tr></table>";
 		echo "<p><hr><p>";
 	}
