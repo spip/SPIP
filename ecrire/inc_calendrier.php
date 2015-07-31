@@ -837,9 +837,8 @@ function http_calendrier_avec_heure($evenement, $amj)
 {
 	$jour_debut = substr($evenement['DTSTART'], 0,8);
 	$jour_fin = substr($evenement['DTEND'], 0, 8);
-	if (!($jour_fin > 0)) $jour_fin = $jour_debut;
-	if (!(($jour_debut > 0) AND
-	      (($jour_debut <= $amj) AND ($jour_fin >= $amj))))
+	if ($jour_fin <= 0) $jour_fin = $jour_debut;
+	if (($jour_debut <= 0) OR ($jour_debut > $amj) OR ($jour_fin < $amj))
 	  return array();
 	
 	$desc = propre($evenement['DESCRIPTION']);
