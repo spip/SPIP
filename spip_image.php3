@@ -8,28 +8,28 @@ include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
 
-/// verifier les formats acceptes par GD
+// verifier les formats acceptes par GD
 
-if (($test_formats=="oui") AND $flag_function_exists){
+if (($test_formats == "oui") AND $flag_function_exists) {
 	if (function_exists('ImageCreateFromJPEG')) {
 		$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
 		if ($srcImage) {
 			$gd_formats[] = "jpg";
-			ImageDestroy( $srcImage ); 
+			ImageDestroy( $srcImage );
 		}
 	}
 	if (function_exists('ImageCreateFromGIF')) {
 		$srcImage = @ImageCreateFromGIF("IMG/test.gif");
 		if ($srcImage) {
 			$gd_formats[] = "gif";
-			ImageDestroy( $srcImage ); 
+			ImageDestroy( $srcImage );
 		}
 	}
 	if (function_exists('ImageCreateFromPNG')) {
 		$srcImage = @ImageCreateFromPNG("IMG/test.png");
 		if ($srcImage) {
 			$gd_formats[] = "png";
-			ImageDestroy( $srcImage ); 
+			ImageDestroy( $srcImage );
 		}
 	}
 
@@ -40,69 +40,83 @@ if (($test_formats=="oui") AND $flag_function_exists){
 
 
 //
-// creation automatique d'une vignette
+// Creation automatique d'une vignette
 //
 
-
-function RatioResizeImg( $image, $newWidth, $newHeight, $format){ 
-
-	if ($format == "jpg"){
-		$srcImage = @ImageCreateFromJPEG( $image );		 
+function creer_vignette($image, $newWidth, $newHeight, $format) {
+	// Recuperer l'image d'origine
+	if ($format == "jpg") {
+		$srcImage = @ImageCreateFromJPEG($image);
 	}
 	else if ($format == "gif"){
-		$srcImage = @ImageCreateFromGIF( $image );		 
+		$srcImage = @ImageCreateFromGIF($image);
 	}
 	else if ($format == "png"){
-		$srcImage = @ImageCreateFromPNG( $image );		 
+		$srcImage = @ImageCreateFromPNG($image);
 	}
-	
-	if ($srcImage){
-		$srcWidth = ImageSX( $srcImage ); 
-		$srcHeight = ImageSY( $srcImage ); 
-	
-		$ratioWidth = $srcWidth/$newWidth;
-		$ratioHeight = $srcHeight/$newHeight;
-	
-		if( $ratioWidth < $ratioHeight){ 
-			$destWidth = $srcWidth/$ratioHeight;
-			$destHeight = $newHeight; 
-		}else{ 
-			$destWidth = $newWidth; 
-			$destHeight = $srcHeight/$ratioWidth; 
-		} 
-		
-		
-		// creating the destination image with the new Width and Height 
-/*		if ($format=='jpg' && $GLOBALS['flag_function_exists'] && function_exists('imagecreatetruecolor'))
-			$destImage = imagecreatetruecolor( $destWidth, $destHeight); 
-		else
-*/			$destImage = imagecreate( $destWidth, $destHeight); 
-		
-		//copy the srcImage to the destImage 
-		ImageCopyResized( $destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight ); 
-		
-		$destination = ereg_replace('\.(.*)$','-s.\1',$image);
-		//Header("Content-type: image/jpeg");
-		if ($format == "jpg") {
-			ImageJPEG($destImage, "$destination", 40);
-		}
-		else if ($format == "gif") {
-			ImageGIF($destImage, "$destination");
-		}
-		else if ($format == "png") {
-			ImagePNG($destImage, "$destination");
-		}
-	
-		ImageDestroy( $srcImage ); 
-		ImageDestroy( $destImage ); 
-	
-		$retour['width'] = $destWidth;
-		$retour['height'] = $destHeight;
-		$retour['fichier'] = $destination;
-		$retour['format'] = $format;
-		return $retour;
+	if (!$srcImage) return;
+
+	// Calculer le ratio
+	$srcWidth = ImageSX($srcImage);
+	$srcHeight = ImageSY($srcImage);
+
+	$ratioWidth = $srcWidth/$newWidth;
+	$ratioHeight = $srcHeight/$newHeight;
+
+	if ($ratioWidth < $ratioHeight) {
+		$destWidth = $srcWidth/$ratioHeight;
+		$destHeight = $newHeight;
+	}
+	else {
+		$destWidth = $newWidth;
+		$destHeight = $srcHeight/$ratioWidth;
 	}
 
+	// Choisir le format destination
+	// - on sauve de preference en JPEG (meilleure compression)
+	// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
+	$gd_formats = lire_meta("gd_formats");
+	if (ereg("jpg", $gd_formats))
+		$destFormat = "jpg";
+	else if ($format == "gif" AND ereg("gif", $gd_formats) AND $GLOBALS['flag_ImageGif'])
+		$destFormat = "gif";
+	else if (ereg("png", $gd_formats))
+		$destFormat = "png";
+	if (!$destFormat) return;
+
+	// Initialisation de l'image destination
+	if ($GLOBALS['flag_ImageCreateTrueColor'] AND $destFormat != "gif")
+		$destImage = ImageCreateTrueColor($destWidth, $destHeight);
+	if (!$destImage)
+		$destImage = ImageCreate($destWidth, $destHeight);
+
+	// Recopie de l'image d'origine avec adaptation de la taille
+	$ok = false;
+	if ($GLOBALS['flag_ImageCopyResampled'])
+		$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+	if (!$ok)
+		$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+
+	// Sauvegarde de l'image destination
+	$destination = ereg_replace('\.(.*)$','-s',$image);
+	if ($destFormat == "jpg") {
+		ImageJPEG($destImage, "$destination.jpg", 60);
+	}
+	else if ($destFormat == "gif") {
+		ImageGIF($destImage, "$destination.gif");
+	}
+	else if ($destFormat == "png") {
+		ImagePNG($destImage, "$destination.png");
+	}
+	ImageDestroy($srcImage);
+	ImageDestroy($destImage);
+
+	//exit;
+	$retour['width'] = $destWidth;
+	$retour['height'] = $destHeight;
+	$retour['fichier'] = $destination;
+	$retour['format'] = $format;
+	return $retour;
 }
 
 
@@ -283,9 +297,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	
 	if ($taille_preview < 10) $taille_preview = 120;
 
-	if ($mode == 'document' AND strlen($format_img) == 3 AND ereg("$format_img", $gd_formats) AND $creer_preview == 'oui') {
-
-		$preview = RatioResizeImg($dest_path, $taille_preview, $taille_preview, $format_img);
+	if ($mode == 'document' AND $format_img AND ereg($format_img, $gd_formats) AND $creer_preview == 'oui') {
+		$preview = creer_vignette($dest_path, $taille_preview, $taille_preview, $format_img);
 		$hauteur_prev = $preview['height'];
 		$largeur_prev = $preview['width'];
 		$fichier_prev = $preview['fichier'];
@@ -293,7 +306,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		if ($format_prev == "jpg") $format_prev = 1;
 		else if ($format_prev == "png") $format_prev = 2;
 		else if ($format_prev == "gif") $format_prev = 3;
-		
+
 		$query = "INSERT INTO spip_documents (id_type, titre, largeur, hauteur, fichier, date) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev', NOW())";
 		spip_query($query);
 		$id_preview = spip_insert_id();
