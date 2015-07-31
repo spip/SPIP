@@ -447,6 +447,7 @@ prive/editer/article.html -text
 prive/editer/auteur.html -text
 prive/editer/breve.html -text
 prive/editer/groupe_mot.html -text
+prive/editer/logo.html -text
 prive/editer/mot.html -text
 prive/editer/rubrique.html -text
 prive/editer/site.html -text
@@ -465,6 +466,8 @@ prive/formulaires/editer_breve.html -text
 prive/formulaires/editer_breve.php -text
 prive/formulaires/editer_groupe_mot.html -text
 prive/formulaires/editer_groupe_mot.php -text
+prive/formulaires/editer_logo.html -text
+prive/formulaires/editer_logo.php -text
 prive/formulaires/editer_mot.html -text
 prive/formulaires/editer_mot.php -text
 prive/formulaires/editer_rubrique.html -text
@@ -1001,6 +1004,7 @@ prive/themes/spip/images/puce-refuser-8.png -text
 prive/themes/spip/images/puce-supprimer-8.png -text
 prive/themes/spip/images/racine-16.png -text
 prive/themes/spip/images/racine-24.png -text
+prive/themes/spip/images/reaction-48.png -text
 prive/themes/spip/images/referer-16.png -text
 prive/themes/spip/images/referer-24.png -text
 prive/themes/spip/images/reseau-16.png -text
