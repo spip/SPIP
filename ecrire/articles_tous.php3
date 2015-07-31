@@ -53,7 +53,12 @@ while ($row = spip_fetch_array($result)) {
 }
 
 // Recuperer tous les articles
-if (!$sel_lang) $sel_lang[$spip_lang] = $spip_lang;
+if (is_array($sel_lang)) {
+	while (list(,$l) = each($sel_lang))
+		$sel[$l] = $l;
+	$sel_lang = $sel;
+}
+$sel_lang[$spip_lang] = $spip_lang;
 
 if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles ORDER BY date DESC";
 else $query = "SELECT articles.id_article, articles.titre, articles.statut, articles.id_rubrique, articles.lang, articles.id_trad, articles.date_modif FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
@@ -188,8 +193,10 @@ if ($aff_statut["poubelle"]) {
 echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 
 
-// bloc legende
+// GERER LE MULTILINGUISME
 if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
+
+	// bloc legende
 	$lf = lire_meta('langue_site');
 	echo "<hr /><div class='verdana2'>";
 	echo _T('info_tout_site6');
@@ -198,23 +205,24 @@ if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'ou
 	echo "<div><a class='claire'>$lf</a> ". _T('info_tout_site3'). " </div>";
 	echo "<div><a class='foncee'>$lf</a> ". _T('info_tout_site4'). " </div>";
 	echo "</div>\n";
-}
 
-
-// bloc choix de langue
-if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
+	// bloc choix de langue
 	$langues = explode(',', lire_meta('langues_multilingue'));
 	if (count($langues) > 1) {
 		sort($langues);
-		echo "<hr /><B>"._T('titre_cadre_afficher_traductions')."</B><BR>";
+		echo "<br /><div class='verdana2'><b>"._T('titre_cadre_afficher_traductions')."</b><br />";
+		echo "<SELECT STYLE='width:100%' NAME='sel_lang[]' size='".count($langues)."' ORDERED MULTIPLE>";
 		while (list(, $l) = each ($langues)) {
 			if ($sel_lang[$l])
-				echo "<div><input type='checkbox' name='sel_lang[$l]' value='$l' CHECKED> <span class='lang_base'$direction_generale>$l</span> ".traduire_nom_langue($l)." </div>\n"; 
+				echo "<option value='$l' selected>".traduire_nom_langue($l)."</option>\n"; 
 			else
-				echo "<div><input type='checkbox' name='sel_lang[$l]' value='$l'> <span class='lang_base'$direction_generale>$l</span> ".traduire_nom_langue($l)." </div>\n"; 
+				echo "<option value='$l'>".traduire_nom_langue($l)."</option>\n"; 
 		}
+		echo "</select></div>\n";
+
 		echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 	}
+
 }
 
 
