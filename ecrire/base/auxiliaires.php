@@ -35,7 +35,7 @@ $spip_visites_key = array(
 
 $spip_visites_articles = array(
 		"date"	=> "DATE NOT NULL",
-		"id_article"	=> "INT UNSIGNED",
+		"id_article"	=> "INT UNSIGNED NOT NULL",
 		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
@@ -44,11 +44,11 @@ $spip_visites_articles_key = array(
 
 $spip_referers = array(
 		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
-		"date"		=> "DATE",
+		"date"		=> "DATE NOT NULL",
 		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"visites_jour"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"visites_veille"=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"visites"	=> "INT UNSIGNED NOT NULL",
+		"visites_jour"	=> "INT UNSIGNED NOT NULL",
+		"visites_veille"=> "INT UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_key = array(
@@ -56,10 +56,10 @@ $spip_referers_key = array(
 
 $spip_referers_articles = array(
 		"id_article"	=> "INT UNSIGNED NOT NULL",
-		"referer_md5"	=> "BIGINT UNSIGNED",
-		"date"		=> "DATE",
+		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
+		"date"		=> "DATE NOT NULL",
 		"referer"	=> "VARCHAR (255)",
-		"visites"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"visites"	=> "INT UNSIGNED NOT NULL",
 		"maj"		=> "TIMESTAMP");
 
 $spip_referers_articles_key = array(
@@ -179,8 +179,8 @@ $spip_meta_key = array(
 $spip_index = array(
  		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
  		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_objet"	=> "INT UNSIGNED",
-		"id_table"	=> "TINYINT UNSIGNED"	);
+		"id_objet"	=> "INT UNSIGNED NOT NULL",
+		"id_table"	=> "TINYINT UNSIGNED NOT NULL"	);
 
 $spip_index_key = array(
  		"KEY `hash`"	=> "`hash`",
@@ -212,8 +212,8 @@ $spip_versions_fragments = array(
 		"id_fragment"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"version_min"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"version_max"	=> "int unsigned DEFAULT '0' NOT NULL",
-		"id_article"	=> "bigint(21)",
-		"compress"	=> "tinyint",
+		"id_article"	=> "bigint(21) NOT NULL",
+		"compress"	=> "tinyint NOT NULL",
 		"fragment"	=> "longblob"  # ici c'est VRAIMENT un blob (on y stocke du gzip)
 	);
 
