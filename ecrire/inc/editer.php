@@ -43,7 +43,7 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 			objet_dupliquer_liens($type,$lier_trad,$id);
 		}
 
-		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
+		$res['message_ok'] = _T('info_modification_enregistree');
 		if ($retour) {
 			if (strncmp($retour,'javascript:',11)==0){
 				$res['message_ok'] .= '<script type="text/javascript">/*<![CDATA[*/'.substr($retour,11).'/*]]>*/</script>';
