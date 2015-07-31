@@ -116,10 +116,11 @@ function install_bases(){
 	  $r = $fquery("SELECT valeur FROM spip_meta WHERE nom='version_installee'", $server_db);
 
 	  if ($r) $r = sql_fetch($r, $server_db);
-	  if ($r) $version_installee = (double) $r['valeur'];
-	  if (!$version_installee OR ($spip_version < $version_installee))
-		$fquery("UPDATE spip_meta SET valeur=$spip_version, impt='non'
-			WHERE nom='version_installee'", $server_db);
+	  $version_installee = !$r ? 0 : (double) $r['valeur'];
+	  if (!$version_installee OR ($spip_version < $version_installee)) {
+	    sql_updateq('spip_meta', array('valeur'=>$spip_version, 'impt'=>'non'), "nom='version_installee'", $server_db);
+	    spip_log("nouvelle version installee: $spip_version");
+	  }
 	  // eliminer la derniere operation d'admin mal terminee
 	  // notamment la mise a jour 
 	  @$fquery("DELETE FROM spip_meta WHERE nom='import_all' OR  nom='admin'", $server_db);

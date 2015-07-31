@@ -89,7 +89,7 @@ $message = '';
 		if ($oubli) {
 			$mdpass = md5($oubli);
 			$htpass = generer_htpass($oubli);
-			spip_query("UPDATE spip_auteurs SET htpass='$htpass', pass='$mdpass', alea_actuel='',	cookie_oubli='' WHERE cookie_oubli=" . _q($p));
+			sql_updateq('spip_auteurs', array('htpass' =>$htpass, 'pass'=>$mdpass, 'alea_actuel'=>'', 'cookie_oubli'=>''), "cookie_oubli=" . _q($p));
 
 			$login = $row['login'];
 			$message = "<b>" . _T('pass_nouveau_enregistre') . "</b>".
