@@ -200,7 +200,7 @@ function import_objet_1_2($f, $gz=false) {
 
 	if ($type == 'article') {
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
-		spip_query("DELETE FROM spip_auteurs_documents WHERE id_article=$id_objet");
+		spip_query("DELETE FROM spip_documents_articles WHERE id_article=$id_objet");
 	}
 	else if ($type == 'mot') {
 		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
