@@ -24,7 +24,10 @@ function inc_selectionner_auteur_dist($id_article)
 {
 	$idom = 'bloc_selectionner_auteur';
 
-	$futurs = selectionner_auteur_boucle(determiner_non_auteurs('article',$id_article,'', "nom, statut"), $idom);
+    if (!$determiner_non_auteurs = charger_fonction('determiner_non_auteurs_article','inc',true))
+        $determiner_non_auteurs = 'determiner_non_auteurs';
+
+	$futurs = selectionner_auteur_boucle($determiner_non_auteurs('article',$id_article,'', "nom, statut"), $idom);
 
 	// url completee par la fonction JS onkeypress_rechercher
 	$url = generer_url_ecrire('rechercher_auteur', "idom=$idom&nom=");
