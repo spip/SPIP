@@ -1,3 +1,16 @@
+2.0.25-> 2.0.26 (juin 2015 )  
+
+r22210 | brunobergot | 2015-06-09 19:52:56 +0200 (mar. 09 juin 2015) | 2 lignes
+report de r22201 / Fixe #3418 : complément à r22119 ajouter une seconde à la durée de opcache.revalidate_freq, sans quoi on retombe dans le cache
+r22127 | cedric| 2015-05-10 11:40:03 +0200 (dim. 10 mai 2015) | 1 ligne
+Report de r22126 : Report minimal de r22116 r22118 r22119 : #3418 : Octave utilise une configuration foireuse de opcode cache, qui persiste 2s apres modification du fichier sans possibilite de l'invalider ma
+nuellement. On essaye donc de detecter cette configuration et de faire un sleep() le temps que le cache soit invalide
+r21953 | gitosis | 2015-03-19 16:22:15 +0100 (jeu. 19 mars 2015) | 6 lignes
+Limiter l'impact d'un GoneAway Mysql lors de longues requetes PHP
+r21540 | brunobergot| 2014-09-09 21:01:26 +0200 (mar. 09 sept. 2014) | 2 lignes
+report de r21538 cf #3264 : maj de l'url de spip-contrib
+
+
 2.0.15 -> 2.0.17 ( 16 novembre 2011 )
 
 r18628 | cedric    | 2011-10-22 18:02:46 | verifier le droit de l'auteur connecte a modifier le statut de l'auteur modifie (merci à Davy Douhine)
