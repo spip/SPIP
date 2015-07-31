@@ -383,7 +383,7 @@ function naviguer_doc ($id, $type = "article", $script, $flag_editable) {
 	// a cause des position:relative incompris de MSIE
 
 	  if ($GLOBALS['browser_name']!="MSIE") {
-		$res = "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td>&nbsp;</td><td width='50%' style='text-align: $spip_lang_left;'>\n$res</td></tr></table>";
+		$res = "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td>&nbsp;</td><td style='text-align: $spip_lang_left;width: 50%;'>\n$res</td></tr></table>";
 	  }
 
 	  $res .= "<script src='"._DIR_JAVASCRIPT."async_upload.js' type='text/javascript'></script>\n";

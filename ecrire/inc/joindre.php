@@ -161,7 +161,7 @@ function afficher_transferer_upload($texte_upload, $dir)
 		"\n<select name='chemin' size='1' class='fondl'>" .
 		$texte_upload .
 		"\n</select>" .
-		"\n<div style=text-align: ".
+		"\n<div style='text-align: ".
 		$GLOBALS['spip_lang_right'] .
 		"'><input name='sousaction3' type='submit' value='" .
 		_T('bouton_choisir').
