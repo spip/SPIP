@@ -3,7 +3,7 @@
 	passer en 4e argument le flag qui indique qu'on veut aussi gerer les trad
 ]
 #SET{table,#ENV{objet}|table_objet_sql}
-[(#GET{table}|in_any{#CONFIG{multi_objets}|explode{','}}|oui)
+[(#GET{table}|in_any{#CONFIG{multi_objets}|explode{','}}|ou{#GET{table}|in_any{#CONFIG{gerer_trad_objets}|explode{','}}})
 <div class="ajax">
 	#FORMULAIRE_TRADUIRE{#ENV{objet},#ENV{id_objet},#ENV{retour,''},#GET{table}|in_any{#CONFIG{gerer_trad_objets}|explode{','}}}
 </div>
