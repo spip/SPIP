@@ -923,28 +923,27 @@ function compiler_squelette($squelette, $boucles, $nom, $descr, $sourcefile, $co
 
 	foreach($boucles as $id => $boucle) {
 		$boucle = $boucles[$id] = pipeline('pre_boucle', $boucle);
-
+		if ($boucle->return === false) continue;
 		// appeler la fonction de definition de la boucle
-		$req = $boucle->type_requete;
-		if ($req) {
+		if ($boucle->type_requete) {
 			$f = 'boucle_'.strtoupper($req);
 		// si pas de definition perso, definition spip
 			if (!function_exists($f)) $f = $f.'_dist';
 			// laquelle a une definition par defaut
 			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			if (!function_exists($f)) $f = 'boucle_DEFAUT_dist';
-			$req = $f($id, $boucles);
-		}
-		if ($boucle->return !== false) {
-				$boucles[$id]->return = 
-				"function BOUCLE" . strtr($id,"-","_") . $nom .
-				'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
-				"\n\n\tstatic \$connect = " .
-				_q($boucles[$id]->sql_serveur) .
+			$req = "\n\n\tstatic \$connect = " .
+				_q($boucle->sql_serveur) .
 				";" .
-				$req .
-				"\n}\n\n";
-		}
+				$f($id, $boucles);
+		} else $req = ("\n\treturn '';");
+
+		$boucles[$id]->return = 
+			"function BOUCLE" . strtr($id,"-","_") . $nom .
+			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
+			$req .
+			"\n}\n\n";
+
 		if ($debug)
 			$GLOBALS['debug_objets']['code'][$nom.$id] = $boucles[$id]->return;
 	}
