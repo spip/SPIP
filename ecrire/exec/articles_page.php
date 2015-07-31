@@ -21,7 +21,9 @@ function exec_articles_page_dist()
 
  	pipeline('exec_init',array('args'=>array('exec'=>'articles_page'),'data'=>''));
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('titre_page_articles_page'), "naviguer", "articles");
+	echo $commencer_page(_T('titre_page_articles_page'), "suivi_edito", "tous_articles");
+
+	echo gros_titre(_T("icone_tous_articles"), '', false);
 
 	echo debut_gauche('', true);
 
