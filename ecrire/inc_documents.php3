@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_session.php3"); // action_auteur
 include_ecrire ("inc_date.php3");
+include_ecrire ("inc_urls.php3");
 
 //
 // Vignette pour les documents lies
