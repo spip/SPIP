@@ -1298,20 +1298,33 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'FORMULAIRE_SIGNATURE':
 
 		$milieu = '
-		$request_uri = $GLOBALS["REQUEST_URI"];
-		$accepter_inscriptions = lire_meta("accepter_inscriptions");
 		$spip_lang = $GLOBALS["spip_lang"];
+		$id_petition = $contexte["id_article"];
 
-		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$contexte[id_article]";
+		$query_petition = "SELECT id_article FROM spip_petitions WHERE id_article=$id_petition";
  		$result_petition = spip_query($query_petition);
 
 		if ($row_petition = spip_fetch_array($result_petition)) {
-			$'.$nom_var.' = "<"."?php
-				include_local(\"inc-formulaires.php3\");
-				lang_select(\"$spip_lang\");
-				formulaire_signature($contexte[id_article]);
-				lang_dselect();
+			include_local("inc-formulaires.php3");
+			$texte_formulaire = formulaire_signature($id_petition);
+			$'.$nom_var.' = "<div class=\'formulaire\'><a name=\'sp$id_petition\'></a>\n";
+			$'.$nom_var.' .= "<"."?php
+				if (\$GLOBALS[\'val_confirm\']) {
+					include_local(\'inc-formulaires.php3\');
+					lang_select(\'$spip_lang\');
+					reponse_confirmation($id_petition);
+					lang_dselect();
+				}
+				else if (\$GLOBALS[\'nom_email\'] AND \$GLOBALS[\'adresse_email\']) {
+					include_local(\'inc-formulaires.php3\');
+					lang_select(\'$spip_lang\');
+					reponse_signature($id_petition);
+					lang_dselect();
+				}
+				else {?".">".$texte_formulaire."<"."?php
+				}
 				?".">";
+			$'.$nom_var.' .= "</div>\n";
 		}
 		else {
 			$'.$nom_var.' = "";
