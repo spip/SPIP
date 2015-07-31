@@ -59,7 +59,6 @@ fin_boite_info();
 
 $suivi_edito=$GLOBALS['meta']["suivi_edito"];
 $adresse_suivi=$GLOBALS['meta']["adresse_suivi"];
-$adresse_site=$GLOBALS['meta']["adresse_site"];
 $adresse_suivi_inscription=$GLOBALS['meta']["adresse_suivi_inscription"];
 
 debut_droite();
