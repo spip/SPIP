@@ -27,6 +27,8 @@ if (ereg("^[0-9]+$", $recherche)) {
 	$query_sites .= " (id_syndic = $recherche) OR ";
 }
 
+// Eviter les symboles '%', caracteres SQL speciaux
+$recherche = str_replace("%","\%",$recherche);
 $rech2 = split("[[:space:]]+", addslashes($recherche));
 if ($rech2)
 	$where = " (titre LIKE '%".join("%' AND titre LIKE '%", $rech2)."%') ";
