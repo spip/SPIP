@@ -30,7 +30,7 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = _TRANCHES; 
-		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe", true), $nb_aff);
+		$tranches = afficher_tranches_requete($cpt, $tmp_var, generer_url_ecrire('grouper_mots',"id_groupe=$id_groupe"), $nb_aff);
 	} else $tranches = '';
 
 
@@ -58,8 +58,8 @@ function inc_grouper_mots_dist($id_groupe, $cpt) {
 
 	return http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id='img_$tmp_var'") 
 	  . "<div class='liste'>"
-	  . "<table border='0' cellspacing='0' cellpadding='3' width='100%'>"
 	  . $tranches
+	  . "<table border='0' cellspacing='0' cellpadding='3' width='100%'>"
 	  . afficher_liste($largeurs, $table, $styles)
 	  . "</table>"
 	  . "</div>";
