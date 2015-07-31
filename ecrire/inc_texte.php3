@@ -838,10 +838,10 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
 		   permet de gagner un peu de temps chez les hergeurs nazes */
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "<@@SPIP_ligne_horizontale@@>", $letexte);
-		$letexte = ereg_replace("\n-- *", "<br />&mdash&nbsp;",$letexte);
-		$letexte = ereg_replace("\n- *", "<br />$puce&nbsp;",$letexte);
-		$letexte = ereg_replace("\n_ +", "<br />",$letexte);
-		$letexte = ereg_replace("(( *)\n){2,}", "<p>", $letexte);
+		$letexte = ereg_replace("\n-- *", "\n<br />&mdash&nbsp;",$letexte);
+		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
+		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
+		$letexte = ereg_replace("(( *)\n){2,}(<br[[:space:]]*\/?".">)?", "<p>", $letexte);
 		$letexte = str_replace("{{{", "<@@SPIP_debut_intertitre@@>", $letexte);
 		$letexte = str_replace("}}}", "<@@SPIP_fin_intertitre@@>", $letexte);
 		$letexte = str_replace("{{", "<b class=\"spip\">", $letexte);
@@ -861,7 +861,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 1 */ 	"/\n-- */",
 			/* 2 */ 	"/\n- */",
 			/* 3 */ 	"/\n_ +/",
-			/* 4 */ 	"/(( *)\n){2,}/",
+			/* 4 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/",
 			/* 5 */ 	"/\{\{\{/",
 			/* 6 */ 	"/\}\}\}/",
 			/* 7 */ 	"/\{\{/",
@@ -877,9 +877,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		);
 		$remplace1 = array(
 			/* 0 */ 	"<@@SPIP_ligne_horizontale@@>",
-			/* 1 */ 	"<br />&mdash;&nbsp;",
-			/* 2 */ 	"<br />$puce&nbsp;",
-			/* 3 */ 	"<br />",
+			/* 1 */ 	"\n<br />&mdash;&nbsp;",
+			/* 2 */ 	"\n<br />$puce&nbsp;",
+			/* 3 */ 	"\n<br />",
 			/* 4 */ 	"<p>",
 			/* 5 */ 	"<@@SPIP_debut_intertitre@@>",
 			/* 6 */ 	"<@@SPIP_fin_intertitre@@>",
