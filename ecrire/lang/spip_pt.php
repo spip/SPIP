@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => ' ATENÇÂO!',
 'avis_champ_incorrect_type_objet' => 'Nome de campo incorrecto @name@ para objecto de tipo @type@',
 'avis_colonne_inexistante' => 'A coluna  @col@ não existe',
-'avis_echec_syndication_01' => 'A ligação falhou: o backend indicado é indecifrável ou não propõe nenhum artigo. ',
-'avis_echec_syndication_02' => 'A ligação falhou: impossível aceder ao  backend deste sítio.',
 'avis_erreur' => 'Erro: ver mais acima ',
 'avis_erreur_connexion' => 'Erro de ligação ',
 'avis_erreur_cookie' => 'problema de cookie',
@@ -273,7 +271,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Favor indicar o nome do sítio.',
 'form_prop_indiquer_sujet' => 'Favor indicar um assunto',
 'form_prop_message_envoye' => 'Mensagem mandada',
-'form_prop_nom_site' => 'Nome do sítio',
 'form_prop_non_enregistre' => 'A sua proposta não foi registada.',
 'form_prop_sujet' => 'Assunto',
 'form_prop_url_site' => 'Endereço (URL) do sítio',
@@ -331,7 +328,6 @@ sera ignorée) :
 'img_indisponible' => 'imagem indisponível',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'A SEGUIR »',
-'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acesso proibido',
 'info_acces_refuse' => 'Acesso recusado',
 'info_action' => 'Acção : @action@',
@@ -353,7 +349,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor(es) :',
 'info_authentification_ftp' => 'Autenticação (por FTP)',
-'info_bloquer_lien' => 'bloquear este vínculo',
 'info_breves_2' => 'notícias',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -432,7 +427,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'TEM @total_messages@ NOVAS MENSAGENS',
 'info_numero_abbreviation' => '<N° >',
 'info_obligatoire' => '<NEW>Esta informação é obrigatória',
-'info_panne_site_syndique' => 'Sítio vinculado avariado',
 'info_pense_bete' => 'MEMORANDO',
 'info_petit_ecran' => 'Ecrã Pequeno',
 'info_petition_close' => 'Pétition close', # NEW
@@ -442,7 +436,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Portfolio automático :',
 'info_premier_resultat' => '[@debut_limit@ primeiros resultados em @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeiros resultados em @total@]',
-'info_probleme_grave' => 'problema de',
 'info_propose_1' => '[@nom_site_spip@] Propõe : @titre@',
 'info_propose_2' => 'Artigos propostos
 ----------------',
@@ -456,24 +449,17 @@ sera ignorée) :
 'info_rechercher' => 'Procurar',
 'info_rechercher_02' => 'Procurar :',
 'info_remplacer_vignette' => 'Substituir a vinheta por defeito por um logotipo personalizado :',
-'info_retablir_lien' => 'restabelecer este vínculo',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'sem título',
 'info_selectionner_fichier' => 'Pode seleccionar um ficheiro do dossier @upload@', # MODIF
 'info_selectionner_fichier_2' => 'Seleccionar um ficheiro :',
-'info_site_attente' => 'Sítio Web à espera de validação',
-'info_site_reference' => 'Sítio referenciado em linha',
-'info_site_refuse' => 'Sítio Web recusado',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Referenciar este sítio',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'suprimir a vinheta',
 'info_symbole_bleu' => 'O símbolo <b>azul</b> indica um<b>memorando </b>: isto é uma mensagem para o seu uso pessoal.', # MODIF
 'info_symbole_jaune' => 'O símbolo<b>amarelo</b> indica um <b>anúncio a todos os redactores</b> : modificável por todos os administradores, e visível por todos os redactores.', # MODIF
 'info_symbole_vert' => 'O símbolo<b>verde</b> indica as <b>mensagens trocadas com outros utilizadores</b> do sítio.', # MODIF
-'info_syndication' => 'vinculação:',
-'info_syndication_articles' => 'artigo(s)',
 'info_telecharger_nouveau_logo' => 'Telecarregar um novo logotipo :',
 'info_telecharger_ordinateur' => 'Telecarregar do seu computador :',
 'info_tous_resultats_enregistres' => '[todos os  resultados estão registados]',

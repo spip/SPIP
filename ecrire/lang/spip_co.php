@@ -37,8 +37,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'ATTENTI !',
 'avis_champ_incorrect_type_objet' => 'Nome di campu sbagliatu @name@ per oggettu di tippu @type@',
 'avis_colonne_inexistante' => 'A culonna @col@ ùn esiste micca',
-'avis_echec_syndication_01' => 'Hè fiascata a sindicazione : U backend indettatu ùn hè micca leghjitoghju, o puru prupone nisun artìculu.',
-'avis_echec_syndication_02' => 'Hè fiascata a sindicazione : Impussìbule d\'accede à u backend di stu situ.',
 'avis_erreur' => 'Errore: vede quì sottu',
 'avis_erreur_connexion' => 'Errore di cunnessione',
 'avis_erreur_cookie' => 'problemu di cookie',
@@ -273,7 +271,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Date u nome di u situ.',
 'form_prop_indiquer_sujet' => 'Date puru un sugettu',
 'form_prop_message_envoye' => 'Messagiu mandatu',
-'form_prop_nom_site' => 'Nome di u situ',
 'form_prop_non_enregistre' => 'Ùn hè micca stata arregistrata a vostra pruposta.',
 'form_prop_sujet' => 'Sugettu',
 'form_prop_url_site' => 'Indirizzu (URL) di u situ',
@@ -332,7 +329,6 @@ sera ignorée) :
 'img_indisponible' => 'imàgine micca dispunìbule',
 'impossible' => 'impussìbule',
 'info_a_suivre' => 'À SUIVRE »',
-'info_a_valider' => '[Da cunvalidà]',
 'info_acces_interdit' => 'Accessu interdettu',
 'info_acces_refuse' => 'Accessu rifiutatu',
 'info_action' => 'Azzione : @action@',
@@ -354,7 +350,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autore/i :',
 'info_authentification_ftp' => 'Autentificazione (cù FTP).',
-'info_bloquer_lien' => 'bluccà sta lea',
 'info_breves_2' => 'dispacci',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -435,7 +430,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'AVETE @total_messages@ NUVELLI MESSAGI',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Hè ubbligatoria st\'infurmazione',
-'info_panne_site_syndique' => 'Situ sindicatu for\'d\'adopru',
 'info_pense_bete' => 'MEMENTU',
 'info_petit_ecran' => 'Pìcculu screnu',
 'info_petition_close' => 'Petizione chjosa',
@@ -445,7 +439,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Purtafogliu autumàticu :',
 'info_premier_resultat' => '[@debut_limit@ primi risultati nant\'à @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primi risultati nant\'à @total@]',
-'info_probleme_grave' => 'prublemu di',
 'info_propose_1' => '[@nom_site_spip@] Prupone : @titre@',
 'info_propose_2' => 'Artìculu prupostu
 ---------------',
@@ -459,24 +452,17 @@ sera ignorée) :
 'info_rechercher' => 'Ricircà',
 'info_rechercher_02' => 'Ricircà :',
 'info_remplacer_vignette' => 'Rimpiazzà a figuretta predefinita cù un logo persunalizatu :',
-'info_retablir_lien' => 'ristabbilisce sta lea',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'senza tìtulu',
 'info_selectionner_fichier' => 'Pudete sceglie un scedariu da u cartulare @upload@',
 'info_selectionner_fichier_2' => 'Sceglie un schedariu :',
-'info_site_attente' => 'Situ Web in attesa di cunvàlida',
-'info_site_reference' => 'Situ riferitu in ligna',
-'info_site_refuse' => 'Situ Web rifiutatu',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Riferisce un situ',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'sguassà a figuretta',
 'info_symbole_bleu' => 'U sìmbulu <b>turchinu</b> indetta un <b>mementu</b>: vale à dì un messagiu à usu persunale vostru.',
 'info_symbole_jaune' => 'U sìmbulu <b>giallu</b> indetta un <b>annunciu à tuttu i scrittori</b> : mudifichèvule da tutti l\'amministratori, è visìbule da tutti i scrittori.',
 'info_symbole_vert' => 'U sìmbulu <b>verde</b> indetta <b>messagi scambiati cù altri utilizatori</b> di u situ.',
-'info_syndication' => 'sindicazione :',
-'info_syndication_articles' => 'artìculu/i',
 'info_telecharger_nouveau_logo' => 'Scaricà un nuvellu logo :',
 'info_telecharger_ordinateur' => 'Scaricà da u vostru urdinatore :',
 'info_tous_resultats_enregistres' => '[sò arregistrati tutti i risultati]',

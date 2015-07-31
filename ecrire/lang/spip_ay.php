@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => '¡AMUYAM!',
 'avis_champ_incorrect_type_objet' => 'Akjawx sutix janiw askikiti @name@ uka kastataki @type@',
 'avis_colonne_inexistante' => 'Sayt\'atax @col@ janiw utjkiti',
-'avis_echec_syndication_01' => 'Apxasiwix janiw walt\'kiti: el «backend» uñacht\'atax janiw yatiñjamakiti  ni mä qillqatch amuyt\'aykiti.',
-'avis_echec_syndication_02' => ' Apxasiñax janiw walt\'kiti: janiw ukar jak\'achañjamakiti «backend» aka qamawita.',
 'avis_erreur' => 'Pantjawi: aka manqhax uñjaña',
 'avis_erreur_connexion' => 'Naktaw ukjax pantjawiw utji',
 'avis_erreur_cookie' => 'Cookie jan wali ukata',
@@ -276,7 +274,6 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'form_prop_indiquer_nom_site' => 'Qamawin sutip uñachayama.',
 'form_prop_indiquer_sujet' => 'Yatsuw uñachayaña',
 'form_prop_message_envoye' => 'Yatiyaw apayata',
-'form_prop_nom_site' => 'Qamawin sutipa',
 'form_prop_non_enregistre' => 'Amuyt\'awimax janiw qillqatakiti.',
 'form_prop_sujet' => 'Yatsuwi',
 'form_prop_url_site' => 'Qamawin (URL) utjawipa',
@@ -336,7 +333,6 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'img_indisponible' => 'Salta wakita',
 'impossible' => 'janipini',
 'info_a_suivre' => 'NAN LURAWINAKAJAXA',
-'info_a_valider' => '[Iyaw saña]',
 'info_acces_interdit' => 'Mantawj jark\'ata',
 'info_acces_refuse' => 'Mantawj janiw sata',
 'info_action' => 'Lurawi: @action@',
@@ -358,7 +354,6 @@ en el sitio \\&quot;@nom_site_spip@\\&quot; (@adresse_login@):   ',
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'Qillqirinaka:',
 'info_authentification_ftp' => 'Iyasawi (por FTP).',
-'info_bloquer_lien' => 'Aka chinu jark\'antaña',
 'info_breves_2' => 'jisk\'aptatanaka',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -441,7 +436,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_nouveaux_messages' => 'Utjtam @total_messages@ machaq yatiyawinaka',
 'info_numero_abbreviation' => 'N°',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Apxasit qamawix jan waliniwa',
 'info_pense_bete' => 'Katxasiñatak amtayiri',
 'info_petit_ecran' => 'Jisk\'a uñachayiri',
 'info_petition_close' => 'Pétition close', # NEW
@@ -451,7 +445,6 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_portfolio_automatique' => 'Justup imañ q\'ìpi',
 'info_premier_resultat' => '[@debut_limit@ pnayraqat askichawinakat @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ nayraqat askichawinakat @total@]',
-'info_probleme_grave' => 'jan wali',
 'info_propose_1' => '[@nom_site_spip@] Amtata: @titre@',
 'info_propose_2' => 'Amtat qillqatanak
 -----------------',
@@ -465,24 +458,17 @@ Sitix uka arunak ajlltax.Walja sapa mayanaka jach\'a qamawita (urunaka, phuqañ 
 'info_rechercher' => 'Thaqhaña',
 'info_rechercher_02' => 'Thaqhaña',
 'info_remplacer_vignette' => 'Nayrt\'at jisk\'a salta lantiñawa mä salta ajllitampi:',
-'info_retablir_lien' => 'chinu askichaña',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'Jan sutichawimpi',
 'info_selectionner_fichier' => 'Jach\'a q\'ipitxa mä qillqa q\'ip ajllismaw @upload@',
 'info_selectionner_fichier_2' => 'Mä qillqa q\'ipi ajlliña...',
-'info_site_attente' => 'Iyaw satañapatakix Web ukax suyaski',
-'info_site_reference' => 'Qamaw naktat aytata',
-'info_site_refuse' => 'Web qamaw janiw sata',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Mä qamaw aytaña',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'Aka salta apaqaña',
 'info_symbole_bleu' => '&lt;b&gt;Laram&lt;/b&gt; chimpux sañ muni sapa mayni amtawi mä amtawjamawa.   ',
 'info_symbole_jaune' => '&lt;b&gt;Q\'illu&lt;/b&gt; chimpux sañ muniwa taqinir yatiyañataki qamaw apnaqirinakakiw mayjt\'ayi ukhamarak taqpach qillqirinakat qhana uñjataw.',
 'info_symbole_vert' => '&lt;b&gt;Ch\'uxña&lt;/b&gt; chimpux turkat yatiyawinaka yaqha qamaw jaqinakamp uk uñachayi',
-'info_syndication' => 'apxasiwi:',
-'info_syndication_articles' => 'qillqat(anaka)',
 'info_telecharger_nouveau_logo' => 'Mä machaq uñachir chimpu apkataña:',
 'info_telecharger_ordinateur' => 'Computaturamat apkataña:',
 'info_tous_resultats_enregistres' => '[taqpach askichatawinak qillqatawa]',

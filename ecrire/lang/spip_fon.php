@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'Mi cɔ mi ɖé',
 'avis_champ_incorrect_type_objet' => 'nyikɔmasɔgbe@name@ nu kwin alɔkpa@type@',
 'avis_colonne_inexistante' => 'Akpa a tin a ',
-'avis_echec_syndication_01' => 'Mimamɛ ɔ gblé : yè mɔ nu jɛ  backend wu a kabi mà sɛ wekpa ɖebu doo',
-'avis_echec_syndication_02' => 'Mimamɛ ɔ gblé : mɛ dé siwu yi backend gblogbloji é lɔ tɔn a ',
 'avis_erreur' => 'afɔkiklɛn : mi kpɔn do',
 'avis_erreur_connexion' => 'afɔkiklɛn do cacadomɛ',
 'avis_erreur_cookie' => '',
@@ -264,7 +262,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Mì gblogblo ɔ jí sín nyíkɔ.',
 'form_prop_indiquer_sujet' => 'mì xlɛ xógbè ɔ ',
 'form_prop_message_envoye' => 'wɛn ɔ yí',
-'form_prop_nom_site' => 'gblogblojí nyíkɔ',
 'form_prop_non_enregistre' => 'E siwú wlí Xógbè mì tɔn hɛn á',
 'form_prop_sujet' => 'Xógbè',
 'form_prop_url_site' => 'nɔtɛn (URLU) gblogblojí ɔ tɔn',
@@ -322,7 +319,6 @@ sera ignorée) :
 'img_indisponible' => 'Yɛ ɖébú ɖò àtɛ ɔ jí a',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'mi ná kpɔn',
-'info_a_valider' => '[sɔ kɛn ná]',
 'info_acces_interdit' => 'yé ná gbè á',
 'info_acces_refuse' => 'yé ná gbè á',
 'info_action' => 'àzɔ',
@@ -344,7 +340,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'Nyɔwlántɔ (lɛ̂):',
 'info_authentification_ftp' => 'Acɛ yíyí (FTP).',
-'info_bloquer_lien' => 'mi ján cácádó é lɔ',
 'info_breves_2' => 'xó kléwún lɛ',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -421,7 +416,6 @@ sera ignorée) :
 'info_nouveaux_messages' => '@total_messages@ wɛn yɔyɔ',
 'info_numero_abbreviation' => 'N° ',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'mimámɛ gblogblojí ɔ tɔn kú àfɔ',
 'info_pense_bete' => 'Lìntámɛ-Agúɖàgɔ',
 'info_petit_ecran' => 'Atɛ kpɛví',
 'info_petition_close' => 'Pétition close', # NEW
@@ -431,7 +425,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Portfolio càcà :',
 'info_premier_resultat' => '[@debut_limit@ premiers résultats sur @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premiers résultats sur @total@]',
-'info_probleme_grave' => 'xótɛ',
 'info_propose_1' => '[@nom_site_spip@] Propose : @titre@',
 'info_propose_2' => 'Wékpá
 ---------------',
@@ -445,24 +438,17 @@ sera ignorée) :
 'info_rechercher' => 'Bìbà',
 'info_rechercher_02' => 'Bìbà :',
 'info_remplacer_vignette' => 'mi ɖyo syɔ :',
-'info_retablir_lien' => 'Mi lɛ vɔ bló càcàdó ɔ',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'Xótá ɖè á',
 'info_selectionner_fichier' => 'Mi síwú cyán gbètákɛn <i>cyán</i>', # MODIF
 'info_selectionner_fichier_2' => 'Mi cyán gbètákɛn :',
-'info_site_attente' => 'E kpò mi ná sɔ kɛn nú gblogblojí ɔ',
-'info_site_reference' => ' Gblogblojí yé ɖèkúnú ɖò kánú',
-'info_site_refuse' => 'Yè gbɛ gblogblojí ɔ ',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'ɖèkúnú nú gblogblojí ɔ',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'gbìdí  ɖìɖè ɔ ',
 'info_symbole_bleu' => 'kwínnɔ xlɛ gɔgúnɔ: é nyí wɛn mi ɖɛ ɖésú tɔn', # MODIF
 'info_symbole_jaune' => 'kwín  júnɔ nɔ xlɛ tìtòtɔ kpó nyɔwlántɔn hɛn ná ɖyɔ ', # MODIF
 'info_symbole_vert' => 'kwín   àmàmú nɔ xlɛ wɛn yé má xá mɛ ɖévó', # MODIF
-'info_syndication' => 'mìmámɛ :',
-'info_syndication_articles' => 'wěmà lɛ',
 'info_telecharger_nouveau_logo' => 'ɖɔn sín mɔxwítíxwítí ɔ mɛ :',
 'info_telecharger_ordinateur' => 'ɖɔn sín mɔxwítíxwítí ɔ mɛ :',
 'info_tous_resultats_enregistres' => '[yé wlí xógbè lɛ bí hɛn]',

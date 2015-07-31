@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'ВНИМАНИЕ!',
 'avis_champ_incorrect_type_objet' => 'Името на полето @name@ е погрешно за обозначаване обект от типа @type@',
 'avis_colonne_inexistante' => 'Колоната @col@ не съществува',
-'avis_echec_syndication_01' => 'Обединението пропадна: или избраната крайна точка не се чете, или там няма статия.',
-'avis_echec_syndication_02' => 'Обединението пропадна: няма връзка с информацията от сайта',
 'avis_erreur' => 'Грешка: прочети по-долу;',
 'avis_erreur_connexion' => 'Грешка при свързването',
 'avis_erreur_cookie' => 'cookie - грешка',
@@ -275,7 +273,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Попълнете името на сайта.',
 'form_prop_indiquer_sujet' => 'Попълнете поле Относно',
 'form_prop_message_envoye' => 'Съобщението бе изпратено',
-'form_prop_nom_site' => 'Име на сайта',
 'form_prop_non_enregistre' => 'Предложението не беше запазено.',
 'form_prop_sujet' => 'Относно',
 'form_prop_url_site' => 'URL на сайта',
@@ -333,7 +330,6 @@ sera ignorée) :
 'img_indisponible' => 'изображението липсва',
 'impossible' => 'невъзможно',
 'info_a_suivre' => 'НАЧАЛО»',
-'info_a_valider' => '[за одобрение]',
 'info_acces_interdit' => 'Забранен достъп',
 'info_acces_refuse' => 'Невъзможен достъп',
 'info_action' => 'Действие: @action@',
@@ -355,7 +351,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'автор(и):',
 'info_authentification_ftp' => 'Удостоверяване автентичността (чрез FTP).',
-'info_bloquer_lien' => 'блокиране на препратката',
 'info_breves_2' => 'новини',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -434,7 +429,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'ИМАТЕ @total_messages@ НОВИ СЪОБЩЕНИЯ',
 'info_numero_abbreviation' => 'Не',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Обединеният сайт не работи',
 'info_pense_bete' => 'БЕЛЕЖКА',
 'info_petit_ecran' => 'Малък дисплей',
 'info_petition_close' => 'Pétition close', # NEW
@@ -444,7 +438,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Автоматична папка за документи:',
 'info_premier_resultat' => '[@debut_limit@ първи резултати от общо @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ първи резултати от общо @total@]',
-'info_probleme_grave' => 'грешка с',
 'info_propose_1' => '[@nom_site_spip@] Изпратени: @titre@',
 'info_propose_2' => 'Изпратена статия
 -----------------',
@@ -458,24 +451,17 @@ sera ignorée) :
 'info_rechercher' => 'Търсене',
 'info_rechercher_02' => 'Търсене:',
 'info_remplacer_vignette' => 'Смяна на винетката по подразбиране с лого по избор:',
-'info_retablir_lien' => 'възстановяване на препратката',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'без заглавие',
 'info_selectionner_fichier' => 'Избиране на файл от папка @upload@',
 'info_selectionner_fichier_2' => 'Изберете файл:',
-'info_site_attente' => 'Сайт очакващ одобрение',
-'info_site_reference' => 'Свързани сайтове',
-'info_site_refuse' => 'Интернет страницата е отхвърлена',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Свързване на сайт',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'изтриване на винетката',
 'info_symbole_bleu' => 'Символът <b>синьо</b> указва <b>бележка</b>: т.е. съобщение за лично ползване.',
 'info_symbole_jaune' => 'Символът <b>жълто</b> указва  <b>съобщение към всички редактори</b>: то може да се вписва само от администратори и да се вижда от всички редактори.',
 'info_symbole_vert' => 'Символът <b>зелено</b> указва <b>съобщения, обменени с други потребители</b> на сайта.',
-'info_syndication' => 'обединение:',
-'info_syndication_articles' => 'статия (статии)',
 'info_telecharger_nouveau_logo' => 'Качване на ново лого:',
 'info_telecharger_ordinateur' => 'Качете от своя компютър на сайта:',
 'info_tous_resultats_enregistres' => '[всички резултати са записани]',

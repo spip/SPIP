@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'Vigyázat !',
 'avis_champ_incorrect_type_objet' => 'Érvénytelen mezőnév @name@ a(z) @type@ típusú objektumhoz',
 'avis_colonne_inexistante' => 'A(z) @col@ nevű oszlop nem létezik',
-'avis_echec_syndication_01' => 'A szindikálás sikertelen: a kijelölt backend nem dolgozható fel, vagy egyetlen cikket sem ajánl fel.',
-'avis_echec_syndication_02' => 'A szindikálás sikertelen: nem lehet elérni a honlap backend-jét.',
 'avis_erreur' => 'Hiba: lásd lejjebb',
 'avis_erreur_connexion' => 'Csatlakozási hiba',
 'avis_erreur_cookie' => 'Cookie hiba',
@@ -271,7 +269,6 @@ the address below. (Otherwise your request will be ignored.):
 'form_prop_indiquer_nom_site' => 'Kérjük, adja meg a honlap nevét.',
 'form_prop_indiquer_sujet' => 'Kérjük, adja meg a tárgyat',
 'form_prop_message_envoye' => 'Üzenet elküldve',
-'form_prop_nom_site' => 'Honlap neve',
 'form_prop_non_enregistre' => 'A javaslatát nem rögzítettük.',
 'form_prop_sujet' => 'Tárgy',
 'form_prop_url_site' => 'Honlap címe',
@@ -329,7 +326,6 @@ the address below. (Otherwise your request will be ignored.):
 'img_indisponible' => 'hiányzó kép',
 'impossible' => 'nem lehetséges',
 'info_a_suivre' => 'FOLYTATNI »',
-'info_a_valider' => '[érvényesítendő]',
 'info_acces_interdit' => 'Hozzáférés tilos',
 'info_acces_refuse' => 'Elutasított hozzáférés',
 'info_action' => 'Művelet : @action@',
@@ -351,7 +347,6 @@ the address below. (Otherwise your request will be ignored.):
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'szerző(k) :',
 'info_authentification_ftp' => 'Autentifikálás (FTP-vel).',
-'info_bloquer_lien' => 'blokkolni a linket',
 'info_breves_2' => 'hírek',
 'info_breves_nb' => '@nb@ news items', # NEW
 'info_breves_un' => '1 news item', # NEW
@@ -430,7 +425,6 @@ the address below. (Otherwise your request will be ignored.):
 'info_nouveaux_messages' => 'ÖNNEK @total_messages@ ÚJ ÜZENETE VAN',
 'info_numero_abbreviation' => 'sz. ',
 'info_obligatoire' => 'This information is required', # NEW
-'info_panne_site_syndique' => 'Hibás szindikált honlap',
 'info_pense_bete' => 'EMLÉKEZTET?',
 'info_petit_ecran' => 'Kisebb képerny?',
 'info_petition_close' => 'Kérelem lezárva',
@@ -440,7 +434,6 @@ the address below. (Otherwise your request will be ignored.):
 'info_portfolio_automatique' => 'Automatikus portfolio :',
 'info_premier_resultat' => '[@debut_limit@ első eredmények, @total@ összesen]',
 'info_premier_resultat_sur' => '[@debut_limit@ eredmény, összesen @total@]',
-'info_probleme_grave' => 'probléma',
 'info_propose_1' => '[@nom_site_spip@] ezt javasolta : @titre@',
 'info_propose_2' => 'Javasolt cikk
 ---------------',
@@ -454,24 +447,17 @@ the address below. (Otherwise your request will be ignored.):
 'info_rechercher' => 'Keresés',
 'info_rechercher_02' => 'Keresés :',
 'info_remplacer_vignette' => 'Az alapértelmezett bélyegkép helyettesítése egy személyes logoval :',
-'info_retablir_lien' => 'visszaállítani ezt a linket',
 'info_rubriques_nb' => '@nb@ sections', # NEW
 'info_rubriques_un' => '1 section', # NEW
 'info_sans_titre_2' => 'cím nélkül',
 'info_selectionner_fichier' => 'Kijelölhet egy fájlt az @upload@ mappából',
 'info_selectionner_fichier_2' => 'Válasszon egy fájlt :',
-'info_site_attente' => 'Jóvahagyás alatti honlap',
-'info_site_reference' => 'Felvett honlap',
-'info_site_refuse' => 'Elutasított honlap',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Honlap felvétele',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'a bélyegkép törlése',
 'info_symbole_bleu' => 'A <b>kék</b> jel <b>emlékeztetőt</b> jelez: vagyis egy személyes jellegű üzenetet.', # MODIF
 'info_symbole_jaune' => 'A <b>sárga</b> jel <b>minden szerzőnek szóló hírt</b> jelez : minden adminisztrátor módosíthatja, és minden szerző láthatja.', # MODIF
 'info_symbole_vert' => 'A <b>zöld</b> jel a honlap <b>többi felhasználóival cserélt üzeneteket</b> jelzi.', # MODIF
-'info_syndication' => 'szindikálás :',
-'info_syndication_articles' => 'cikk(ek)',
 'info_telecharger_nouveau_logo' => 'Új logo feltöltése :',
 'info_telecharger_ordinateur' => 'Feltöltés a gépéről :',
 'info_tous_resultats_enregistres' => '[minden eredmény mentve]',

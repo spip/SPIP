@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'שים לב!',
 'avis_champ_incorrect_type_objet' => 'שם שדה פסול @name@ לאובייקט מסוג @type@',
 'avis_colonne_inexistante' => 'העמוד @col@ לא נמצא.',
-'avis_echec_syndication_01' => 'נכשלה הסינדיקציה :את  הbackend אי אפשר לפענח או אינו כולל שום מאמר.',
-'avis_echec_syndication_02' => 'נכשלה הסינדיקציה : אי אפשר להיכנס לbackend של האתר',
 'avis_erreur' => 'שגיאה: ראה להלן',
 'avis_erreur_connexion' => 'שגיאת חיבור',
 'avis_erreur_cookie' => 'בעיית קוקי',
@@ -276,7 +274,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'נא רשום את שם האתר',
 'form_prop_indiquer_sujet' => 'נא רשום נושא',
 'form_prop_message_envoye' => 'ההודעה נשלחה',
-'form_prop_nom_site' => 'שם האתר',
 'form_prop_non_enregistre' => 'ההצעה שלך לא נרשמה',
 'form_prop_sujet' => 'נושא',
 'form_prop_url_site' => 'הכתובת הכללית של האתר',
@@ -334,7 +331,6 @@ sera ignorée) :
 'img_indisponible' => 'תמונה לא נמצאת',
 'impossible' => 'אי אפשר',
 'info_a_suivre' => 'לעיקוב »',
-'info_a_valider' => '[לאישור]',
 'info_acces_interdit' => 'גישה אסורה',
 'info_acces_refuse' => '"שלילת גישה"',
 'info_action' => 'פעולה: @action@',
@@ -356,7 +352,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => ':(מחבר(ים',
 'info_authentification_ftp' => '.(.אישור (על ידי אף.טי.פי',
-'info_bloquer_lien' => 'חסום את הקישור הזה',
 'info_breves_2' => 'מבזקים',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -435,7 +430,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'יש לך @total_messages@ הודעות חדשות',
 'info_numero_abbreviation' => 'מס\'',
 'info_obligatoire' => 'מידע זה הינו הכרחי',
-'info_panne_site_syndique' => 'אתר עם סינדיקציה מקולקל',
 'info_pense_bete' => 'תזכיר',
 'info_petit_ecran' => 'מסך קטן',
 'info_petition_close' => 'עצומה נסגרה',
@@ -445,7 +439,6 @@ sera ignorée) :
 'info_portfolio_automatique' => ':תיק ממוכן',
 'info_premier_resultat' => '[@debut_limit@ תוצאות ראשונות מתוך @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ תוצאות ראשונות מתוך @total@]',
-'info_probleme_grave' => 'שגיאה של',
 'info_propose_1' => '[@nom_site_spip@] טעונים: @titre@',
 'info_propose_2' => 'מאמר מוצע
 -----------------',
@@ -459,24 +452,17 @@ sera ignorée) :
 'info_rechercher' => 'חיפוש',
 'info_rechercher_02' => ':חיפוש',
 'info_remplacer_vignette' => 'החלפת הגפנית שבברירת מחדל ללוגו מותאם :',
-'info_retablir_lien' => 'החזרת קישור זה',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'ללא כותרת',
 'info_selectionner_fichier' => 'בחירת קובץ בתיקיה @upload@',
 'info_selectionner_fichier_2' => 'בחירת קובץ :',
-'info_site_attente' => 'האתר בציפיית הוולידציה',
-'info_site_reference' => 'מראי מקום אתרים מקוונים',
-'info_site_refuse' => 'האתר נדחה',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'הוספת אתר למראי מקום',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'מחיקת הגפנית',
 'info_symbole_bleu' => 'הסימן <b>הכחול</b> מציין <b>תזכיר</b> אחד : כלומר הודעה לשימושך האישי.',
 'info_symbole_jaune' => 'הסימן <b>הצהוב</b> מציין <b>מודעה לכל העורכים </b>: כל מנהלן יכול לערוך אותה, וכל העורכים יכולים לראות אותה.',
 'info_symbole_vert' => 'הסמל <b> הירוק</b> מסמל <b>הודעות מוחלפות בין משתמשי </b> האתר.',
-'info_syndication' => 'סינדיקציה:',
-'info_syndication_articles' => 'מאמר(ים)',
 'info_telecharger_nouveau_logo' => 'העלה לוגו חדש:',
 'info_telecharger_ordinateur' => 'העלה מהמחשב שלך:',
 'info_tous_resultats_enregistres' => '[כל התוצאות נרשמו]',

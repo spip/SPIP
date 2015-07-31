@@ -36,8 +36,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_attention' => 'OPREZ!',
 'avis_champ_incorrect_type_objet' => 'Pogresno ime polja @name@ za objekat tipa @type@',
 'avis_colonne_inexistante' => 'Colona @col@ ne postoji',
-'avis_echec_syndication_01' => 'Sindikacija nije uspjela: odabrani backend nije citljiv ili ne nudi nijedan clanak.',
-'avis_echec_syndication_02' => 'Sindikacija nije uspjela: nije moguce dostici backend ove stranice',
 'avis_erreur' => 'Greska: vidi ispod',
 'avis_erreur_connexion' => 'Greska u konekciji',
 'avis_erreur_cookie' => 'Problem sa cookiem',
@@ -269,7 +267,6 @@ sera ignorée) :
 'form_prop_indiquer_nom_site' => 'Naznacite ime strancie.',
 'form_prop_indiquer_sujet' => 'Naznacite temu',
 'form_prop_message_envoye' => 'Poruka poslana',
-'form_prop_nom_site' => 'Naziv stranice',
 'form_prop_non_enregistre' => 'Vas prijedlog nije registrovan.',
 'form_prop_sujet' => 'Tema',
 'form_prop_url_site' => 'URL adresa stranice',
@@ -327,7 +324,6 @@ sera ignorée) :
 'img_indisponible' => 'fotografija je nedostupna',
 'impossible' => 'impossible', # NEW
 'info_a_suivre' => 'LAUNCH PAD»',
-'info_a_valider' => '[za ovjeriti]',
 'info_acces_interdit' => 'zabranjen pristup',
 'info_acces_refuse' => 'pristup odbijen',
 'info_action' => 'Akcija: @action@',
@@ -349,7 +345,6 @@ sera ignorée) :
 'info_articles_un' => '1 article', # NEW
 'info_auteurs_nombre' => 'autor/i:',
 'info_authentification_ftp' => 'Authentifikacija (FTP-om).',
-'info_bloquer_lien' => 'blokiraj ovaj link',
 'info_breves_2' => 'obavjestenja',
 'info_breves_nb' => '@nb@ brèves', # NEW
 'info_breves_un' => '1 brève', # NEW
@@ -427,7 +422,6 @@ sera ignorée) :
 'info_nouveaux_messages' => 'IMATE @total_messages@ NOVIH PORUKA',
 'info_numero_abbreviation' => 'N°',
 'info_obligatoire' => 'Cette information est obligatoire', # NEW
-'info_panne_site_syndique' => 'Sindikovana stranica nije u funkciji',
 'info_pense_bete' => 'BILJESKA',
 'info_petit_ecran' => 'Mali prikaz',
 'info_petition_close' => 'Pétition close', # NEW
@@ -437,7 +431,6 @@ sera ignorée) :
 'info_portfolio_automatique' => 'Automatski portfolio:',
 'info_premier_resultat' => '[@debut_limit@ prvih rezultata od ukupno @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ prvih rezultata od ukupno @total@]',
-'info_probleme_grave' => 'problem sa',
 'info_propose_1' => '[@nom_site_spip@] Poslano: @titre@',
 'info_propose_2' => 'Clanak je poslan
 ---------------',
@@ -451,24 +444,17 @@ sera ignorée) :
 'info_rechercher' => 'Pretraga',
 'info_rechercher_02' => 'Pretraga:',
 'info_remplacer_vignette' => 'Automatski zamijeni vinjetu sa pesonalizovanim logotipom:',
-'info_retablir_lien' => 'obnovi ovaj link',
 'info_rubriques_nb' => '@nb@ rubriques', # NEW
 'info_rubriques_un' => '1 rubrique', # NEW
 'info_sans_titre_2' => 'bez naslova',
 'info_selectionner_fichier' => 'Mozete izabrati dokument iz foldera <i>upload</i>',
 'info_selectionner_fichier_2' => 'Izaberite dokument:',
-'info_site_attente' => 'Web stranica ceka na ovjeru',
-'info_site_reference' => 'Preporucene stranice online',
-'info_site_refuse' => 'Web stranica odbijena',
 'info_sites_nb' => '@nb@ sites', # NEW
-'info_sites_referencer' => 'Preporuci stranicu',
 'info_sites_un' => '1 site', # NEW
 'info_supprimer_vignette' => 'izbrisi vinjetu',
 'info_symbole_bleu' => 'Simbol <b>bleu</b> ukazuje na <b>pense-bête</b>: to jeste poruku za vasu licnu upotrebu.', # MODIF
 'info_symbole_jaune' => 'Simbol <b>jaune</b> ukazuje na <b>najavu za sve urednike: Svi urednici ga mogu vidjeti i izmijeniti.', # MODIF
 'info_symbole_vert' => 'Simbol <b>vert</b> ukazuje na <b>poruke razmijene sa drugim korisnicima</b> stranicama.', # MODIF
-'info_syndication' => 'sindikacija:',
-'info_syndication_articles' => 'clanak/ci',
 'info_telecharger_nouveau_logo' => 'Upload novi logotip:',
 'info_telecharger_ordinateur' => 'Upload sa vaseg kompjutera:',
 'info_tous_resultats_enregistres' => '[registrovani su svi rezultati]',
