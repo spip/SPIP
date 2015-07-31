@@ -285,7 +285,16 @@ function auteurs_lister_statuts($quoi='tous',$en_base=true) {
 	return array_values($GLOBALS['liste_des_statuts']);
 }
 
-
+/**
+ * Determiner la rubrique pour la creation d'un objet
+ * heuristique : rubrique courante si possible,
+ * sinon rubrique administree pour les admin restreint
+ * sinon premiere rubrique de premier niveau autorisee que l'on trouve
+ *
+ * @param int $id_rubrique
+ * @param string $objet
+ * @return int
+ */
 function trouver_rubrique_creer_objet($id_rubrique,$objet){
 	global $connect_id_rubrique;
 	if (!$id_rubrique){
@@ -306,6 +315,13 @@ function trouver_rubrique_creer_objet($id_rubrique,$objet){
   return $id_rubrique;
 }
 
+/**
+ * Afficher le lien de redirection d'un article virtuel si il y a lieu
+ * (rien si l'article n'est pas redirige)
+ * 
+ * @param string $chapo
+ * @return string
+ */
 function lien_article_virtuel($chapo){
 	include_spip('inc/lien');
   if (!chapo_redirigetil($chapo))
@@ -372,27 +388,6 @@ function alertes_auteur($id_auteur) {
 		return "<div class='wrap-messages'><div class='messages'>".
 			join('<hr />', $alertes)
 			."</div></div>";
-}
-
-// http://doc.spip.org/@auteurs_recemment_connectes
-function auteurs_recemment_connectes($id_auteur)
-{
-	$result = sql_allfetsel("*", "spip_auteurs",  "id_auteur!=" .intval($id_auteur) .  " AND " . sql_date_proche('en_ligne', -15, 'MINUTE') . " AND " . sql_in('statut', array('1comite', '0minirezo')));
-
-	if (!$result) return '';
-	$formater_auteur = charger_fonction('formater_auteur', 'inc');
-	$res = '';
-	foreach ($result as $row) {
-		$id = $row['id_auteur'];
-		$mail = formater_auteur_mail($row, $id);
-		$auteurs = "<a href='" . generer_url_ecrire("auteur", "id_auteur=$id") . "'>" . typo($row['nom']) . "</a>";
-		$res .= "$mail&nbsp;$auteurs" . ", ";
-	}
-
-	return "<div class='en_lignes' style='color:#666;'>" .
-	  "<b>"._T('info_en_ligne'). "&nbsp;</b>" .
-	  substr($res,0,-2) .
-	  "</div>";
 }
 
 ?>

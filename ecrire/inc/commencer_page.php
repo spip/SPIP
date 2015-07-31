@@ -98,5 +98,9 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" alt=\"$titre\" $mouseOver />";
 }
 
+// http://doc.spip.org/@auteurs_recemment_connectes
+function auteurs_recemment_connectes($id_auteur){
+	return recuperer_fond('prive/objets/liste/auteurs_enligne');
+}
 
 ?>
