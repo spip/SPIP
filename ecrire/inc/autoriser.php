@@ -43,13 +43,11 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	static $restreint = array();
 
 	// Qui ? auteur_session ?
-	if (!is_array($qui)) {
-		if (is_int($qui)) {
-			$qui = spip_fetch_array(spip_query(
-			"SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
-		} else {
-			$qui = $GLOBALS['auteur_session'];
-		}
+	if ($qui === NULL)
+		$qui = $GLOBALS['auteur_session'];
+	elseif (!is_array($qui)) {
+		$qui = spip_fetch_array(spip_query(
+		"SELECT * FROM spip_auteurs WHERE id_auteur=".$qui));
 	}
 
 	// Admins restreints, les verifier ici (pas generique mais...)
@@ -65,7 +63,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 		$qui['restreint'] = $restreint[$qui['id_auteur']];
 	}
 
-	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ?");
+	if (_DEBUG_AUTORISER) spip_log("autoriser $faire $type $id ($qui[nom]) ?");
 
 	// Chercher une fonction d'autorisation explicite
 	if (
@@ -99,7 +97,7 @@ function autoriser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL) {
 	)
 		$a = $f($faire,$type,intval($id),$qui,$opt);
 
-	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id): ".($a?'OK':'niet'));
+	if (_DEBUG_AUTORISER) spip_log("$f($faire,$type,$id,$qui[nom]): ".($a?'OK':'niet'));
 
 	return $a;
 }

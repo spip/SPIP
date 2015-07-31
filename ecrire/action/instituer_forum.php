@@ -52,6 +52,13 @@ function action_instituer_forum_dist() {
 		include_spip('inc/indexation');
 		marquer_indexer ('spip_forum', $id_parent);
 	}
+
+	// Notifier de la publication du message, s'il etait 'prop'
+	if ($old=='prop' AND $statut=='publie') {
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('forumvalide', $id_forum);
+		}
+	}
 }
 
 ?>
