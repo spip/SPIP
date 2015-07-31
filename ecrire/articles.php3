@@ -955,6 +955,8 @@ if (mysql_num_rows($result)) {
 		$id_auteur = $row["id_auteur"];
 		$nom_auteur = $row["nom"];
 		$email_auteur = $row["email"];
+		if ($bio_auteur = attribut_html(propre(couper($row["bio"], 100))))
+			$bio_auteur = " TITLE=\"$bio_auteur\"";
 		$url_site_auteur = $row["url_site"];
 		$statut_auteur = $row["statut"];
 		if ($row['messagerie'] == 'non' OR $row['login'] == '') $messagerie = 'non';
@@ -1001,7 +1003,7 @@ if (mysql_num_rows($result)) {
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2'>";
-		echo "<A HREF=\"$url_auteur\">$nom_auteur</A>";
+		echo "<A HREF=\"$url_auteur\"$bio_auteur>$nom_auteur</A>";
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2'>";
