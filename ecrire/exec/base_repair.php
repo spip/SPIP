@@ -33,15 +33,8 @@ function exec_base_repair_dist()
 		if (!$version_sql)
 			$message = _T('avis_erreur_connexion_mysql');
 		else {
-			$s = $GLOBALS['connexions'][0]['type'];
-		  
-			if ($s == 'mysql'
-			AND version_compare($version_sql,'3.23.14','<'))
-			  $message = _T('avis_version_mysql', array('version_mysql' => " MySQL $version_sql"));
-			else {
-				$message = _T('texte_requetes_echouent');
-				$ok = true;
-			}
+			$message = _T('texte_requetes_echouent');
+			$ok = true;
 		}
 		$action = _T('texte_tenter_reparation');
 	}
