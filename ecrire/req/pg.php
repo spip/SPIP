@@ -861,6 +861,7 @@ function spip_pg_drop_table($table, $exist='', $serveur='',$requeter=true)
 }
 
 // supprime une vue 
+// http://doc.spip.org/@spip_pg_drop_view
 function spip_pg_drop_view($view, $exist='', $serveur='',$requeter=true) {
 	if ($exist) $exist =" IF EXISTS";
 	return spip_pg_query("DROP VIEW$exist $view", $serveur, $requeter);
@@ -983,7 +984,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 
 
 // Fonction de creation d'une vue SQL nommee $nom
-// http://doc.spip.org/@spip_sqlite_create
+// http://doc.spip.org/@spip_pg_create_view
 function spip_pg_create_view($nom, $query_select, $serveur='',$requeter=true) {
 	if (!$query_select) return false;
 	// vue deja presente

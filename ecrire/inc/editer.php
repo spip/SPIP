@@ -15,6 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Produit la liste des md5 d'un tableau de donnees, sous forme
 // de inputs html
+// http://doc.spip.org/@controles_md5
 function controles_md5($data, $prefixe='ctr_', $format='html'){
 	if (!is_array($data))
 		return false;
@@ -42,6 +43,7 @@ function controles_md5($data, $prefixe='ctr_', $format='html'){
 
 // Controle la liste des md5 envoyes, supprime les inchanges,
 // signale les modifies depuis telle date
+// http://doc.spip.org/@controler_md5
 function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 	$table_objet = table_objet($type);
 	$spip_table_objet = table_objet_sql($type);
@@ -100,6 +102,7 @@ function controler_md5(&$champs, $ctr, $type, $id, $serveur) {
 	return $conflits;
 }
 
+// http://doc.spip.org/@display_conflit_champ
 function display_conflit_champ($x) {
 	if (strstr($x, "\n") OR strlen($x)>80)
 		return "<textarea style='width:99%; height:10em;'>".entites_html($x)."</textarea>\n";
@@ -107,6 +110,7 @@ function display_conflit_champ($x) {
 		return "<input type='text' size='40' style='width:99%' value=\"".entites_html($x)."\" />\n";
 }
 
+// http://doc.spip.org/@signaler_conflits_edition
 function signaler_conflits_edition($conflits, $redirect='') {
 	include_spip('inc/minipres');
 	include_spip('inc/revisions');

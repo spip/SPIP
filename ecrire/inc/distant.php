@@ -236,6 +236,7 @@ function recuperer_lapage($url, $trans=false, $get='GET', $taille_max = 1048576,
 	return array($headers, $result);
 }
 
+// http://doc.spip.org/@recuperer_body
 function recuperer_body($f, $taille_max=1048576)
 {
 	$result = '';
@@ -249,6 +250,7 @@ function recuperer_body($f, $taille_max=1048576)
 // la valeur (numerique) du statut si different de 200, notamment Not-Modified
 // le tableau des entetes dans tous les autres cas
 
+// http://doc.spip.org/@recuperer_entetes
 function recuperer_entetes($f, $date_verif='')
 {
 	$s = @trim(fgets($f, 16384));
