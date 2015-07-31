@@ -576,8 +576,7 @@ function inclure_modele($type, $id, $params, $lien, $connect='') {
 		$retour = inserer_attribut($retour, 'class',
 			trim(str_replace(' spip_lien_ok ', ' ', " $classes ")));
 	} else if ($lien)
-		$retour = "<a href='".$lien[0]."' class='".$lien[1]."'>".$retour."</a>";
-
+		$retour = "<a href='".$lien['href']."' class='".$lien['class']."'>".$retour."</a>";
 	$compteur--;
 
 	return  (isset($arg_list['ajax'])AND $arg_list['ajax']=='ajax')
