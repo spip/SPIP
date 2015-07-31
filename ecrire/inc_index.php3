@@ -38,7 +38,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	$texte = nettoyer_chaine_indexation($texte);
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, "                                                           ");
-	$table = split(" +([^ ]{0,$min_long} +)*", $texte);
+	$table = split(" +([^ ]{0,$min_long} +)*", ' '.$texte);
 	while (list(, $mot) = each($table)) {
 		$h = substr(md5($mot), 0, 16);
 		$index[$h] += $val;

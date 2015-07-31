@@ -28,7 +28,7 @@ debut_gauche();
 debut_boite_info();
 
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo propre("La page de {suivi des forums} est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l'espace priv&eacute; et vous permet de g&eacute;rer ces contributions.");
+echo propre("La page de {suivi des forums} est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l'espace priv&eacute; et vous permet de g&eacute;rer ces contributions. Seuls les messages propos&eacute;s depuis 30~jours s'affichent ici.");
 
 echo aide ("suiviforum");
 echo "</FONT>";
