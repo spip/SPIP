@@ -931,7 +931,6 @@ if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
 	if (!is_array($meta) AND _FILE_CONNECT) {
 
 		include_ecrire('inc_meta.php3');
-		lire_metas();
 		ecrire_metas();
 	}
 }
@@ -1175,7 +1174,8 @@ function redirige_par_entete($url)
 {
 	header("Location: $url");
 	include_ecrire('inc_cron.php3');
-	spip_cron();
+#	spip_cron();
+	spip_log("redirige $url");
 	exit;
 }
 

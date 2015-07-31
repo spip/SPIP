@@ -144,7 +144,7 @@ else if ($etape == 4) {
 
 	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
 
-	echo "<"."!--";
+	echo "<"."!-- $link ";
 
 	if ($choix_db == "new_spip") {
 		$sel_db = $table_new;
@@ -153,25 +153,24 @@ else if ($etape == 4) {
 	else {
 		$sel_db = $choix_db;
 	}
+	echo $sel_db;
 	mysql_select_db("$sel_db");
 
 	// Test si SPIP deja installe
-	spip_query_db("SELECT COUNT(*) FROM spip_meta");
-	$deja_installe = !spip_sql_errno();
+	@spip_query_db("SELECT COUNT(*) FROM spip_meta");
+	$nouvelle = spip_sql_errno();
 
 	creer_base();
 	$maj_ok = maj_base();
 
-	$query = "SELECT COUNT(*) FROM spip_articles";
-	$result = spip_query_db($query);
-	$result_ok = (spip_num_rows($result) > 0);
-	if (!$deja_installe) {
-		$query = "INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')";
-		spip_query_db($query);
+	if ($nouvelle) {
+		spip_query_db("INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
 		$result_ok = !spip_sql_errno();
+	} else {
+		$result = spip_query_db("SELECT COUNT(*) FROM spip_articles");
+		$result_ok = (spip_num_rows($result) > 0);
 	}
-
-	echo "-->";
+	echo "($result_ok && $maj_ok) -->";
 
 
 	if ($result_ok && $maj_ok) {
@@ -357,13 +356,13 @@ else if ($etape == 1) {
 
 }
 else if ($etape == 'dirs') {
-	redirige_par_entete("../spip_test_dirs.php3");
+	header("Location: ../spip_test_dirs.php3");
 }
 else if (!$etape) {
 	$menu_langues = menu_langues('var_lang_ecrire');
 
 	if (!$menu_langues)
-	  redirige_par_entete("../spip_test_dirs.php3");
+		header("Location: ../spip_test_dirs.php3");
 	else {
 		install_debut_html();
 

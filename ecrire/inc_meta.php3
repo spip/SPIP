@@ -38,11 +38,8 @@ function ecrire_metas() {
 
 	lire_metas();
 
-	$s = '<'.'?php
+	$s = '';
 
-if (defined("_DATA_META_CACHE")) return;
-define("_DATA_META_CACHE", "1");
-';
 	if ($meta) {
 		reset($meta);
 		while (list($key, $val) = each($meta)) {
@@ -60,16 +57,20 @@ define("_DATA_META_CACHE", "1");
 		}
 		$s .= "\n";
 	}
-	$s .= '?'.'>';
 
-	$ok = ecrire_fichier (_DIR_SESSIONS . 'meta_cache.php3', $s);
-	if (!$ok) {
-		global $connect_statut;
-		if ($connect_statut == '0minirezo')
-			echo "<h4 font color=red>"._T('texte_inc_meta_1')." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";
+	if ($s) {
+		$ok = ecrire_fichier (_DIR_SESSIONS . 'meta_cache.php3',
+				      '<'.'?php
+
+if (defined("_DATA_META_CACHE")) return;
+define("_DATA_META_CACHE", "1");
+' 
+				      . $s . '?'.'>');
+		spip_log("!$ok && " . $GLOBALS['connect_statut'] . "== '0minirezo')");
+		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
+		  echo "<h4 font color=red>"._T('texte_inc_meta_1')." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";
 	}
 }
-
 
 lire_metas();
 
