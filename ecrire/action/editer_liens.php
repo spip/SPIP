@@ -126,6 +126,9 @@ function objet_qualifier($objets_source,$objets_lies,$qualif){
  * @return string
  */
 function objet_traiter_laisons($operation,$objets_source,$objets_lies, $set = null){
+	// accepter une syntaxe minimale pour supprimer tous les liens
+	if ($objets_lies=='*') $objets_lies = array('*'=>'*');
+	
 	$trouver_table = charger_fonction('trouver_table','base');
 	foreach($objets_source as $objet=>$ids){
 		$table = table_objet_sql($objet);
