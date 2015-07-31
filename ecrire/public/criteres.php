@@ -1920,7 +1920,8 @@ function calculer_critere_infixe_date($idb, &$boucles, $col){
 
 	$boucle = $boucles[$idb];
 	$table = $boucle->show;
-	if (!$table['date']) return '';
+	if (!$table['date'] && !isset($GLOBALS['table_date'][$table['id_table']])) return '';
+	$pred = $date_orig = isset($GLOBALS['table_date'][$table['id_table']])? $GLOBALS['table_date'][$table['id_table']] : $table['date'];
 	$pred = $date_orig = $table['date'];
 	$col = $regs[1];
 	if (isset($regs[3]) AND $suite = $regs[3]){
