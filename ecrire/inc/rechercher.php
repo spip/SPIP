@@ -248,7 +248,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array()) {
 				"SELECT ".id_table_objet($table).", ".id_table_objet($jtable)
 				." FROM spip_${jtable}s_${table}s"
 				." WHERE ". calcul_mysql_in('id_'.${jtable}, array_keys($jj)));
-				while ($t = spip_fetch_array($s)) {
+				while ($t = sql_fetch($s)) {
 					$id = $t[id_table_objet($table)];
 					$joint = $jj[$t[id_table_objet($jtable)]];
 					if (!isset($results[$table]))

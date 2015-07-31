@@ -59,7 +59,7 @@ function inc_prepare_recherche_dist($recherche, $primary = 'id_article', $id_tab
 		if ($x == 'forum' AND $points) {
 			$p2 = array();
 			$s = spip_query("SELECT id_thread, id_forum FROM spip_forum WHERE statut='publie' AND ".calcul_mysql_in('id_forum', array_keys($points)));
-			while ($t = spip_fetch_array($s))
+			while ($t = sql_fetch($s))
 				$p2[intval($t['id_thread'])]['score']
 					+= $points[intval($t['id_forum'])]['score'];
 			$points = $p2;
