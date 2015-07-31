@@ -148,7 +148,7 @@ q, blockquote, .liste-articles li .texte, h3.spip {
 
 #navigation p, .encart p { margin: 0; padding: 0.2em 0.7em; text-align: left;  }
 #navigation ul, .encart ul { padding: 0.2em 0; text-align: left; }
-#navigation li, .encart li { padding: 0 0.7em; color: red; }
+#navigation li, .encart li { padding: 0 0.7em; }
 
 /*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
