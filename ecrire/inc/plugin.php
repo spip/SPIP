@@ -294,7 +294,7 @@ function liste_plugin_actifs(){
   		list($liste,,) = liste_plugin_valides($t);
 			include_spip('inc/meta');
 			ecrire_meta('plugin',serialize($liste));
-			return $liste;
+        return $liste;
   	}
   }
 	else
@@ -323,16 +323,13 @@ function liste_chemin_plugin_actifs($dir_plugins=_DIR_PLUGINS){
 	return $liste;
 }
 
+// Activateur/desactivateur de plugins
+// retourne la liste des plugins actifs, sous forme de chaine serialisee
 // http://doc.spip.org/@ecrire_plugin_actifs
 function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
-	static $liste_pipe_manquants=array();
 
 	// creer le repertoire cache/ si necessaire ! (installation notamment)
 	sous_repertoire(_DIR_CACHE, '', false,true);
-
-	$liste_fichier_verif = array();
-	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
-		$liste_pipe_manquants[]=$pipe_recherche;
 
 	if ($operation!='raz'){
 		$plugin_actifs = liste_chemin_plugin_actifs();
@@ -347,17 +344,34 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 	// recharger le xml des plugins a activer
 	list($plugin_valides,$ordre,$infos) = liste_plugin_valides($plugin,true);
 
-	ecrire_meta('plugin',serialize($plugin_valides));
-	effacer_meta('message_crash_plugins'); // baisser ce flag !
-	$plugin_header_info = array();
-	foreach($plugin_valides as $p=>$resume){
-		$plugin_header_info[]= $p.($resume['version']?"(".$resume['version'].")":"");
-	}
-	ecrire_meta('plugin_header',substr(strtolower(implode(",",$plugin_header_info)),0,900));
+    // Calcul des metas
+    $plugin_s = serialize($plugin_valides);
+    $plugin_header = array();
+    foreach($plugin_valides as $p=>$r){
+            $plugin_header[]= $p.($r['version']?"(".$r['version'].")":"");
+    }
+    $plugin_header = strtolower(substr(implode(",",$plugin_header), 0,900));
 
-	$start_file = "<"."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n";
-	$end_file = "}\n?".">";
+    // Mettre a jour les meta
+    // Les ecrire_meta() doivent en principe aussi initialiser la valeur a vide
+    // si elle n'existe pas
+    // risque en php5 a cause du typage ou de null (verifier dans la doc php)
+    
+    effacer_meta('message_crash_plugins'); // baisser ce flag !
+    ecrire_meta('plugin', $plugin_s);
+    ecrire_meta('plugin_header', $plugin_header);
+    ecrire_plugin_actifs2($plugin_valides, $ordre, $infos, $pipe_recherche);
+    return $plugin_s;
+}
 
+function ecrire_plugin_actifs2($plugin_valides, $ordre, $infos, $pipe_recherche)
+{	
+	static $liste_pipe_manquants=array();
+
+	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
+		$liste_pipe_manquants[]=$pipe_recherche;
+
+	$liste_fichier_verif = array();
 	if (is_array($infos)){
 		// construire tableaux de boutons et onglets
 		$liste_boutons = array();
@@ -446,7 +460,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 			$s .= "if (!function_exists('boutons_plugins')){function boutons_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_boutons))."');}}\n";
 			$s .= "if (!function_exists('onglets_plugins')){function onglets_plugins(){return unserialize('".str_replace("'","\'",serialize($liste_onglets))."');}}\n";
 		}
-		ecrire_fichier($fileconf, $start_file . $splugs . $s . $end_file);
+		ecrire_fichier_actif($fileconf, "$splugs$s");
 	}
 
 	if (is_array($infos)){
@@ -529,8 +543,6 @@ function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
 	$liste_fichier_verif = array();
 
-	$start_file = "<"."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n";
-	$end_file = "}\n?".">";
 	$content = "";
 	foreach($spip_pipeline as $action=>$pipeline){
 		$s_inc = "";
@@ -564,8 +576,14 @@ function pipeline_precompile(){
 		$content .= $s_call;
 		$content .= "return \$val;\n}\n\n";
 	}
-	ecrire_fichier(_CACHE_PIPELINES, $start_file . $content . $end_file);
+	ecrire_fichier_actif(_CACHE_PIPELINES, $content);
 	return $liste_fichier_verif;
+}
+
+function ecrire_fichier_actif($nom, $corps)
+{
+    $corps = '<'."?php\nif (defined('_ECRIRE_INC_VERSION')) {\n$corps}\n?".'>';
+    ecrire_fichier($nom, $corps);
 }
 
 // pas sur que ca serve...
@@ -574,19 +592,16 @@ function liste_plugin_inactifs(){
 	return array_diff (liste_plugin_files(),liste_chemin_plugin_actifs());
 }
 
-// mise a jour du meta en fonction de l'etat du repertoire
-// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide
-// si elle n'existe pas
-// risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
+// mise a jour des fichiers rendant actifs les plugins choisis,
+// en fonction du contenu de leurs repertoires
 function actualise_plugins_actifs($pipe_recherche = false){
-	if (!spip_connect()) return false;
 	$plugin_actifs = liste_chemin_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
-	$actifs_avant = $GLOBALS['meta']['plugin'];
-	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
+	$avant = isset($GLOBALS['meta']['plugin']) ? $GLOBALS['meta']['plugin'] : '';
+    $apres = ecrire_plugin_actifs($plugin_new,$pipe_recherche);
 	// retourner -1 si la liste des plugins actifs a change
-	return (strcmp($GLOBALS['meta']['plugin'],$actifs_avant)==0) ? 1 : -1;
+	return (strcmp($apres,$avant)==0) ? 1 : -1;
 }
 
 // http://doc.spip.org/@spip_plugin_install
