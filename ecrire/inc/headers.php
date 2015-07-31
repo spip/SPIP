@@ -32,6 +32,9 @@ function redirige_par_entete($url, $equiv='', $status = 302) {
 
 	if (defined('_AJAX') AND _AJAX)
 		$url = parametre_url($url, 'var_ajax_redir', 1, '&');
+		
+	// ne pas laisser passer n'importe quoi dans l'url
+	$url = str_replace(array('<','"'),array('&lt;','&quot;'),$url);
 
 	// Il n'y a que sous Apache que setcookie puis redirection fonctionne
 
