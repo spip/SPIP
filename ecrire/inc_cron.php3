@@ -56,31 +56,35 @@ function spip_cron($taches=array()) {
 		}
 	}
 
-	if (!$taches) $taches =  taches_generales();
+	if (!$taches)
+		$taches = taches_generales();
 
 	include_ecrire("inc_meta.php3");
-	foreach ($taches as $tache)
-	  {
-	    $lock = _DIR_SESSIONS . $tache . '.lock';
-	    clearstatcache();
-	    $last = (@file_exists($lock) ? filemtime($lock) : 0);
 
-	    if (($t - $frequence_taches[$tache]) > $last) {
-		@touch($lock);
-		include_ecrire('inc_' . $tache . _EXTENSION_PHP);
-		$fonction = 'cron_' . $tache;
-		$code_de_retour = $fonction($t);
-		if ($code_de_retour) {
-			$msg = $GLOBALS['PHP_SELF'] . ": tache $tache";
-			if ($code_de_retour < 0) {
-				@touch($lock, $last);
-				spip_log($msg . " en cours");
+	foreach ($taches as $tache) {
+		$lock = _DIR_SESSIONS . $tache . '.lock';
+		clearstatcache();
+		$last = (@file_exists($lock) ? filemtime($lock) : 0);
+
+		if (($t - $frequence_taches[$tache]) > $last) {
+			@touch($lock);
+			spip_timer('tache');
+			include_ecrire('inc_' . $tache . _EXTENSION_PHP);
+			$fonction = 'cron_' . $tache;
+			$code_de_retour = $fonction($t);
+			if ($code_de_retour) {
+				$msg = "cron: $tache";
+				if ($code_de_retour < 0) {
+					@touch($lock, $last);
+					spip_log($msg . " (en cours, " . spip_timer('tache') .")");
+					spip_timer('tache');
+				}
+				else
+					spip_log($msg . " (" . spip_timer('tache') . ")");
+				break;
 			}
-			else spip_log($msg . " faite en " . (time() - $t) . " secondes");
-			break;
 		}
-	      }
-	  }
+	}
 }
 
 // Construction de la liste ordonnee des taches.
