@@ -687,20 +687,27 @@ function http_calendrier_ics_div($evts, $date, $debut, $fin, $dimheure, $dimjour
 		else $decale = ($echelle >= 120) ? 4 : 3;
 		if ($bas > $bas_prec) $bas_prec = $bas;
 			
+		$colors = $evenement['CATEGORIES'];
 		$url = isset($evenement['URL']) ? $evenement['URL'] : ''; 
 		$desc = PtoBR(propre($evenement['DESCRIPTION']));
-		$perso = substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
+		$perso = construire_personne_ics($evenement['ATTENDEE']);
 		$lieu = isset($evenement['LOCATION']) ?	$evenement['LOCATION'] : '';
 		$sum = typo($evenement['SUMMARY']);
 		if (!$sum) { $sum = $desc; $desc = '';}
 		if (!$sum) { $sum = $lieu; $lieu = '';}
-		if (!$sum) { $sum = $perso; $perso = '';}
-		if ($sum)
-			$sum = "<span class='calendrier-verdana'><span  style='font-weight: bold;'>$sum</span>$lieu $perso</span>";
+		if (!$sum) { $sum = textebrut($perso);}
+		if ($sum) {
+			if ($url)
+			  $sum = http_href(quote_amp($url), $sum, attribut_html($desc), '', "calendrier-summary calendrier-url $colors");
+			else $sum = "<span class='calendrier-summary'>$sum</span>";
+		}
+
 		if (($largeur > 90) && $desc)
 			$sum .=  "\n<br /><span class='calendrier-noir'>$desc</span>";
-		$colors = $evenement['CATEGORIES'];
-		$sum = ((!$url) ? $sum : http_href(quote_amp($url), $sum, attribut_html($desc),"border: 0",$colors));
+		if ($lieu)
+			$sum .= "\n<span class='calendrier-location'>$lieu</span>";
+		if ($perso AND $perso != $sum)
+			$sum .= "\n<span class='calendrier-attendee $colors'>$perso</span>";
 		$sum = pipeline('agenda_rendu_evenement',array('args'=>array('evenement'=>$evenement,'type'=>'ics'),'data'=>$sum));
 
 		$width = ($largeur - 2 * ($padding+1));
@@ -840,8 +847,8 @@ function http_calendrier_avec_heure($evenement, $amj)
 	if (!$sum) $sum = $desc;
 	if ($lieu = $evenement['LOCATION'])
 	  $sum .= '<br />' . $lieu;
-	if ($perso = $evenement['ATTENDEE'])
-	  $sum .=  '<br />' . substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
+	if ($perso = construire_personne_ics($evenement['ATTENDEE']))
+	  $sum .=  '<br />' . $perso;
 	if ($evenement['URL'])
 	  $sum = http_href(quote_amp($evenement['URL']), $sum, attribut_html($desc), 'border: 0');
 
@@ -870,6 +877,19 @@ function http_calendrier_avec_heure($evenement, $amj)
 	  }
 	}
 	return "\n<div class='calendrier-arial10 calendrier-evenement $opacity'>$sum\n</div>\n"; 
+}
+
+// Gestion du sous-tableau ATTENDEE.
+// dans les version anterieures, ce n'etait pas un tableau
+
+function construire_personne_ics($personnes)
+{
+  $r = is_array($personnes) ? $personnes : array($personnes);
+  foreach ($r as $k => $p) {
+    if ($a = email_valide($p) AND preg_match('/^[^@]+/', $a, $m))
+      $r[$k] = "<a href='mailto:$a'>".preg_replace('/[.]/', ' ', $m[0]). "</a>";
+  }
+  return join(' ', $r);
 }
 
 // fabrique un agenda sur 3 mois. 
@@ -1449,7 +1469,7 @@ function quete_calendrier_interval_breves($avant, $apres, &$evenements) {
 // http://doc.spip.org/@quete_calendrier_interval_rv
 function quete_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
-	$evenements= array();
+	$evenements= $auteurs = array();
 	if (!$connect_id_auteur) return $evenements;
 	$result=sql_select("M.id_message, M.titre, M.texte, M.date_heure, M.date_fin, M.type", "spip_messages AS M LEFT JOIN spip_auteurs_messages AS L ON (L.id_message=M.id_message)", "(L.id_auteur=$connect_id_auteur OR M.type='affich') AND M.rv='oui'  AND ((M.date_fin >= $avant OR M.date_heure >= $avant) AND M.date_heure <= $apres) AND M.statut='publie'", "M.id_message", "M.date_heure");
 	while($row=sql_fetch($result)){
@@ -1495,7 +1515,7 @@ function quete_calendrier_interval_rv($avant, $apres) {
 				'DESCRIPTION' => $row['texte'],
 				'SUMMARY' => $row['titre'],
 				'CATEGORIES' => $cat,
-				'ATTENDEE' => (count($auteurs) == 0) ? '' : join($auteurs,", "));
+				'ATTENDEE' => $auteurs);
 			
 			$j ++; 
 			$ladate = date("Y-m-d",mktime (1,1,1,$mois_avant, ($j + $jour_avant), $annee_avant));

@@ -63,7 +63,6 @@ tr.calendrier-3jours > td > div {border: 0;}
 
 .calendrier-evt { cursor: auto; position: absolute; overflow: hidden; -moz-opacity: 0.6; filter: alpha(opacity=60); font-family: Arial, Sans, sans-serif;}
 
-
 .calendrier-annee { background: #AAA; padding: 3px; margin: 1px; font-family: Verdana, Geneva, Sans, sans-serif; font-size: 10px; font-weight: bold; color: #FFF; }
 .calendrier-annee:hover { color: #000; background-color: #FFF; }
 
@@ -119,3 +118,11 @@ span.calendrier-jour-m { font-weight: normal; }
 .calendrier-couleur13i { background: #666500; border: 1px solid #FFFFE0; color: #FFFFE0; } /* Caca d'oie */
 .calendrier-couleur14 { background: #F5EEE5; border: 1px solid #8C6635; color: #8C6635; } /* Marron */
 .calendrier-couleur14i { background: #8C6635; border: 1px solid #F5EEE5; color: #F5EEE5; } /* Marron */
+
+.calendrier-summary {font-family: Verdana, Geneva, Sans, sans-serif; font-weight: bold;}
+
+.calendrier-location {font-family: Verdana, Geneva, Sans, sans-serif; border:0}
+
+.calendrier-attendee {border:0}
+
+.calendrier-url {border: 0}
