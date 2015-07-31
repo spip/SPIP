@@ -135,6 +135,27 @@ function objet_trouver_liens($objets_source,$objets_lies){
 }
 
 
+/**
+ * Nettoyer les liens morts vers des objets qui n'existent plus
+ * $objets_source et $objets sont de la forme
+ * array($objet=>$id_objets,...)
+ * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
+ *
+ * Les objets sources sont les pivots qui portent les liens
+ * et pour lesquels une table spip_xxx_liens existe
+ * (auteurs, documents, mots)
+ *
+ * un * pour $objet,$id_objet permet de traiter par lot
+ * seul le type de l'objet source ne peut pas accepter de joker et doit etre explicite
+ *
+ * @param array $objets_source
+ * @param array $objets_lies
+ * @return int
+ */
+function objet_optimiser_liens($objets_source,$objets_lies){
+	return objet_traiter_laisons('lien_optimise',$objets_source,$objets_lies);
+}
+
 
 
 /**
@@ -302,6 +323,58 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets){
 
 	return ($echec?false:$dels);
 }
+
+
+/**
+ * Sous fonction optimisation
+ * qui nettoie les liens morts (vers un objet inexistant)
+ * pour un objet source dont la cle primaire
+ * et la table de lien sont fournies
+ *
+ * $objets et de la forme
+ * array($objet=>$id_objets,...)
+ * un * pour $id,$objet,$id_objets permet de traiter par lot
+ *
+ * @param string $objet_source
+ * @param string $primary
+ * @param sgring $table_lien
+ * @param int $id
+ * @param array $objets
+ * @return int
+ */
+function lien_optimise($objet_source,$primary,$table_lien,$id,$objets){
+	$echec = false;
+	$dels = 0;
+	foreach($objets as $objet => $id_objets){
+		$objet = objet_type($objet); # securite
+		if (!is_array($id_objets)) $id_objets = array($id_objets);
+		foreach($id_objets as $id_objet) {
+			$where = lien_where($primary, $id, $objet, $id_objet);
+			# les liens des objets qui sont lies a un objet inexistant
+			$r = sql_select("DISTINCT objet",$table_lien,$where);
+			while ($t = sql_fetch($r)){
+				$type = $t['objet'];
+				$spip_table_objet = table_objet_sql($type);
+				$id_table_objet = id_table_objet($type);
+				$res = sql_select("L.$primary AS id,id_objet",
+								"$table_lien AS L
+									LEFT JOIN $spip_table_objet AS O
+										ON O.$id_table_objet=L.id_objet AND L.objet=".sql_quote($type),
+						"O.$id_table_objet IS NULL");
+				// sur une cle primaire composee, pas d'autres solutions que de virer un a un
+				while ($row = sql_fetch($res)){
+					$e = sql_delete($table_lien, array("$primary=".$row['id'],"id_objet=".$row['id_objet'],"objet=".sql_quote($type)));
+					if ($e!=false){
+						$dels+=$e;
+						spip_log("Entree ".$row['id']."/".$row['id_objet']."/$type supprimee dans la table $table_lien");
+					}
+				}
+			}
+		}
+	}
+	return ($echec?false:$dels);
+}
+
 
 /**
  * Sous fonction qualification
