@@ -44,9 +44,9 @@ function exec_auteurs_edit_dist()
 				    _T('logo_auteur').aide ("logoart"), _T('logo_survol'), 'auteurs_edit');
 	}
 
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteur_edit','id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
 	table_auteurs_edit($auteur);
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteur_edit','id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
 
 	fin_page();
 }
@@ -66,7 +66,7 @@ function table_auteurs_edit($auteur)
 	$extra = $auteur["extra"];
 
 	creer_colonne_droite();
-	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteur_edit','id_auteur'=>$id_auteur),'data'=>''));
+	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs_edit','id_auteur'=>$id_auteur),'data'=>''));
 	debut_droite();
 
 	debut_cadre_relief("redacteurs-24.gif");
