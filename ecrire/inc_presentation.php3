@@ -774,7 +774,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
-				$query2 = "SELECT auteurs.id_auteur, nom, messagerie, login, en_ligne ".
+				$query2 = "SELECT auteurs.id_auteur, nom, messagerie, login, bio ".
 					"FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
 					"WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur";
 				$result_auteurs = spip_query($query2);
@@ -783,8 +783,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$id_auteur = $row['id_auteur'];
 					$nom_auteur = typo($row['nom']);
 					$auteur_messagerie = $row['messagerie'];
-					
-					$les_auteurs .= ", <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom_auteur</a>";
+
+					if ($bio = entites_html(supprimer_tags(couper($row['bio'],50))))
+						$bio = " title=\"$bio\"";
+
+
+					$les_auteurs .= ", <a href='auteurs_edit.php3?id_auteur=$id_auteur'$bio>$nom_auteur</a>";
 					if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non") {
 						$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
 					}
