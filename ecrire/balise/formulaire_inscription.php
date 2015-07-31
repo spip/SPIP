@@ -28,7 +28,8 @@ function balise_FORMULAIRE_INSCRIPTION ($p) {
 
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 	list($mode, $id, $focus) = $args;
-	if(!$mode) $mode = calcul_mode_inscription();
+	//initialiser_mode_inscription
+	if(!$mode) $mode = $GLOBALS['meta']['accepter_inscriptions'] == 'oui' ? 'redac' : ''; 
 	if (!test_mode_inscription($mode))
 		return '';
 	else return array($mode, $focus, $id);
@@ -75,15 +76,6 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id=0) {
 				'nom_inscription' => _request('nom_inscription'),
 				'mail_inscription' => _request('mail_inscription'),
 				'self' => str_replace('&amp;','&',(self()))));
-}
-
-function calcul_mode_inscription() {
- if($GLOBALS['meta']['accepter_inscriptions'] == 'oui')
-  return 'redac';
- if($GLOBALS['meta']['accepter_visiteurs'] == 'oui'
-  OR $GLOBALS['meta']['forums_publics'] == 'abo')
-  return 'forum';
- return '';
 }
 
 function test_mode_inscription($mode) {
