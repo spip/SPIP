@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modyfikuj dzia&#322;',
 'admin_recalculer' => 'Od&#347;wie&#380; ',
 'alerte_maj_impossible' => '<b>Uwaga&nbsp;!</b> Uaktualnienie bazy danych MySQL do wersji @version@ jest nie mo&#380;liwe. Powodem jest prawdopodobnie brak mo&#380;liwo&#347;ci modyfikacji bazy danych. Skontaktuj si&#281; z administratorem.',
+'analyse_xml' => 'Analiza XML',
 'avis_archive_incorrect' => 'ten plik archiwalny nie nale&#380;y do SPIP',
 'avis_archive_invalide' => 'plik archiwalny jest nieprawid&#322;owy',
 'avis_attention' => 'UWAGA&nbsp;!',
@@ -77,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'wg miesi&#281;cy',
 'cal_par_semaine' => 'wg tygodni',
 'confirm_changer_statut' => 'Uwaga, czy na pewno chcesz zmieni&#263; status tego elementu ? Kontynuowa&#263; ?',
+'correcte' => 'poprawna',
 
 
 // D
@@ -165,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'tygodnie',
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
 'dirs_preliminaire' => 'Wst&#281;p: <B>Ustawienia pozwole&#324; dost&#281;pu</b>',
-'dirs_probleme_droits' => 'Problem z pozwoleniami dost&#281;pu',
+'dirs_probleme_droits' => 'Problem z prawami dost&#281;pu',
 'dirs_repertoires_absents' => '<B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej pomylone zosta&#322;y du&#380;e i ma&#322;e litery.
   Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i du&#380;ych liter.
@@ -200,8 +202,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_probleme_mail' => 'Problem z poczt&#261;: Tw&oacute;j identyfikator nie mo&#380;e zosta&#263; wys&#322;any.',
 'form_forum_voici1' => 'Oto Tw&oacute;je dane, kt&oacute;re pozwol&#261; Ci wzi&#261;&#263; udzia&#322; w rozwoju serwisu
 "@nom_site_spip@" (@adresse_site@):',
-'form_forum_voici2' => 'Oto Tw&oacute;j identyfikator do zatwierdzania artyku&#322;&oacute;w dla
-strony "@nom_site_spip@" (@adresse_login@):',
+'form_forum_voici2' => 'Oto Tw&oacute;j identyfikator do proponowania artyku&#322;&oacute;w w
+serwisie "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Prosz&#281; wpisa&#263; sw&oacute;j adres e-mail.',
 'form_indiquer_nom' => 'Prosz&#281; wpisa&#263; swoje nazwisko.',
 'form_indiquer_nom_site' => 'Prosz&#281; wpisa&#263; nazw&#281; swoich stron\\y.',
@@ -219,14 +221,17 @@ Zg&#322;osi&#322;e&#347; ch&#281;&#263; podpisania petycji:
 Poda&#322;e&#347; nast&#281;puj&#261;ce informacje:
     Name: @nom_email@
     Site: @nom_site@ - @url_site@
+    @message@
 
 WA&#379;NE...
 Aby zatwierdzi&#263; sw&oacute;j podpis, musisz po&#322;&#261;czy&#263; si&#281; z
 poni&#380;szym adresem (w przeciwnym razie, Twoja pro&#347;ba
 zostanie odrzucona):
+
     @url@
 
-Dzi&#281;kujemy za uczestnictwo
+
+Dzi&#281;kujemy za wzi&#281;cie udzia&#322;u.
 ',
 'form_pet_message_commentaire' => 'Jakie&#347; wiadomo&#347;ci lub komentarze?',
 'form_pet_nom_site2' => 'Nazwa Twojej strony internetowej',
@@ -251,8 +256,8 @@ Dzi&#281;kujemy za uczestnictwo
 'form_prop_sujet' => 'Temat',
 'form_prop_url_site' => 'URL stron\\y',
 'forum_acces_refuse' => 'Nie masz ju&#380; dost&#281;pu do tego forum.',
-'forum_attention_dix_caracteres' => '<MODIF><b>Uwaga!</b> Twoja wiadomo&#347;&#263; ma mniej ni&#380; dziesi&#281;&#263; znak&oacute;w.',
-'forum_attention_trois_caracteres' => '<MODIF><b>Uwaga!</b> Tw&oacute;j temat ma mniej ni&#380; trzy znaki d&#322;ugo&#347;ci.',
+'forum_attention_dix_caracteres' => '<b>Uwaga!</b> Twoja wiadomo&#347;&#263; powinna mie&#263; conajmniej 10 znak&oacute;w.',
+'forum_attention_trois_caracteres' => '<b>Uwaga!</b> Tw&oacute;j temat powinien mie&#263; conajmniej 3 znaki.',
 'forum_avez_selectionne' => 'Wybra&#322;e&#347;:',
 'forum_cliquer_retour' => 'Kliknij <a href=\'@retour_forum@\'>tutaj</a> aby kontynuowa&#263;.',
 'forum_forum' => 'forum',
@@ -342,6 +347,7 @@ Dzi&#281;kujemy za uczestnictwo
 'image_tourner_droite' => 'Obr&oacute;t o 90&deg; w prawo',
 'image_tourner_gauche' => 'Obr&oacute;t o 90&deg; w lewo',
 'img_indisponible' => 'obrazek niedost&#281;pny',
+'impossible' => 'niemo&#380;liwe',
 'info_a_suivre' => 'KONTYNUUJ&nbsp;&raquo;',
 'info_a_valider' => '[do zatwierdzenia]',
 'info_acces_interdit' => 'Dost&#281;p zabroniony',
@@ -376,7 +382,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_copyright_gpl' => 'na licencji GPL',
 'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
 'info_creer_repertoire' => 'Utw&oacute;rz plik lub katalog o nazwie:',
-'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a nast&#281;pnie',
+'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a nast&#281;pnie:',
 'info_creer_vignette' => 'generowanie miniaturki',
 'info_deplier' => 'Rozwi&#324;',
 'info_descriptif_nombre' => 'opis(y):',
@@ -398,7 +404,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_erreur_systeme' => 'B&#322;&#261;d systemu (errno @errsys@)',
 'info_erreur_systeme2' => 'Albo dysk twardy jest pe&#322;ny albo uszkodzona jest baza danych. <br>
  <font color=\'red\'>Spr&oacute;buj <a href=\'@script@\'>naprawi&#263; baz&#281; danych</a>,
- lub skontaktuj si&#281; z providerem.</font>',
+ lub skontaktuj si&#281; z administratorem serwera.</font>',
 'info_fini' => 'Zako&#324;czono!',
 'info_format_image' => 'Formaty plik&oacute;w obrazk&oacute;w, kt&oacute;re mog&#261; by&#263; u&#380;ywane do tworzenia minitaturek&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'format niezdefiniowany',
@@ -409,8 +415,8 @@ Dzi&#281;kujemy za uczestnictwo
 'info_inclusion_directe' => 'Bezpo&#347;rednie do&#322;&#261;czenie&nbsp;:',
 'info_inclusion_vignette' => 'Do&#322;&#261;czenie miniaturki&nbsp;:',
 'info_installation_systeme_publication' => 'Instalacja systemu publikacji...',
-'info_installer_documents' => 'Mo&#380;esz automatycznie instalowa&#263; wszystkie dokumenty znajduj&#261;ce si&#281; w folderze @upload@.',
-'info_installer_ftp' => 'Jako administrator mo&#380;esz umieszcza&#263; (przez FTP) pliki w folderze @upload@, aby p&oacute;&#378;niej wybiera&#263; je bezpo&#347;rednio stamt&#261;d.',
+'info_installer_documents' => 'Mo&#380;esz automatycznie dodawa&#263; wszystkie dokumenty znajduj&#261;ce si&#281; w folderze @upload@.',
+'info_installer_ftp' => 'Jako administrator mo&#380;esz umieszcza&#263; (przez FTP) pliki w folderze @upload@, aby p&oacute;&#378;niej wybiera&#263; je bezpo&#347;rednio st&#261;d.',
 'info_installer_images' => 'Mo&#380;esz umieszcza&#263; obrazki w formatach JPEG, GIF i PNG.',
 'info_installer_images_dossier' => 'Umie&#347;&#263; obrazki w folderze @upload@ aby m&oacute;c je st&#261;d wybiera&#263;.',
 'info_installer_tous_documents' => 'Umie&#347;&#263; wszystkie dokumenty',
@@ -611,6 +617,7 @@ Aby odzyska&#263; dost&#281;p do strony
 @nom_site_spip@ (@adresse_site@)
 
 Prosz&#281; wej&#347;&#263; na stron&#281;:
+
     @sendcookie@
 
 Po wpisaniu nowego has&#322;a
@@ -633,6 +640,9 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 
 
 // S
+'squelette' => 'szkielet',
+'squelette_inclus_ligne' => 'szkielet zainkludowany, linia',
+'squelette_ligne' => 'szkielet, linia',
 'stats_visites_et_popularite' => '@visites@ odwiedzin; popularno&#347;&#263;: @popularite@',
 'suivant' => 'nast&#281;pny',
 

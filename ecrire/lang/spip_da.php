@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => '<NEW>calendrier par mois',
 'cal_par_semaine' => '<NEW>calendrier par semaine',
 'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
+'correcte' => '<NEW>correcte',
 
 
 // D
@@ -167,7 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => '<NEW>semaines',
 'dirs_commencer' => ' for at kunne begynde installationen',
 'dirs_preliminaire' => 'Forberedelser: <B>Ops&aelig;tning af adgangsrettigheder</b>',
-'dirs_probleme_droits' => 'Problem med adgangsrettigheder',
+'dirs_probleme_droits' => '<MODIF>Problem med adgangsrettigheder',
 'dirs_repertoires_absents' => '<B>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
   <P>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
   Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist ovenfor.
@@ -202,8 +203,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(dette er en automatisk udkrevet meddelelse)',
 'form_forum_pass' => 'adgangskode:',
 'form_forum_probleme_mail' => 'E-mail-problem: adgangsoplysninger kunne ikke sendes.',
-'form_forum_voici1' => 'Her er dine adgangsoplysninger for at kunne deltage i forummer p&aring; webstedet "@nom_site_spip@" (@adresse_site@):',
-'form_forum_voici2' => 'Her er dine adgangsoplysninger for at kunne indsende artikler til webstedet "@nom_site_spip@" (@adresse_login@):',
+'form_forum_voici1' => '<MODIF>Her er dine adgangsoplysninger for at kunne deltage i forummer p&aring; webstedet "@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici2' => '<MODIF>Her er dine adgangsoplysninger for at kunne indsende artikler til webstedet "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indtast venligst din e-mail-adresse.',
 'form_indiquer_nom' => 'Indtast venligst dit navn.',
 'form_indiquer_nom_site' => 'Indtast venligst dit websteds navn.',
@@ -213,7 +214,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_pet_deja_enregistre' => 'Webstedet er allerede registreret',
 'form_pet_deja_signe' => 'Du har allerede signeret denne tekst.',
 'form_pet_envoi_mail_confirmation' => 'En e-mail er netop sendt til dig som bekr&aelig;ftelse. Du b&oslash;r g&aring; ind p&aring; den URL, som er angivet i denne mail, for at bekr&aelig;fte din signatur.',
-'form_pet_mail_confirmation' => 'Goddag,
+'form_pet_mail_confirmation' => '<MODIF>Goddag,
 
 Du har &oslash;nsket at st&oslash;tte denne appel:
 @titre@.
@@ -347,6 +348,7 @@ Tak for din deltagelse
 'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
 'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
 'img_indisponible' => '<NEW>image indisponible',
+'impossible' => '<NEW>impossible',
 'info_a_suivre' => 'OPGAVER&raquo;',
 'info_a_valider' => '[at kontrollere]',
 'info_acces_interdit' => 'Adgang forbudt',
@@ -381,7 +383,7 @@ Tak for din deltagelse
 'info_copyright_gpl' => 'under GPL licens',
 'info_cours_edition' => 'Artikler undervejs',
 'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',
-'info_creer_repertoire_2' => 'i underkataloget <b>@repertoire@</b>, og derefter',
+'info_creer_repertoire_2' => '<MODIF>i underkataloget <b>@repertoire@</b>, og derefter',
 'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_dans_espace_prive' => '[i det private omr&aring;de]',
 'info_deplier' => 'Luk op',
@@ -402,7 +404,7 @@ Tak for din deltagelse
 'info_erreur_requete' => 'Fejl i foresp&oslash;rgsel:',
 'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System fejl (errno @errsys@)',
-'info_erreur_systeme2' => 'Harddisken er m&aring;ske fyldt eller databasen er skadet. <br>
+'info_erreur_systeme2' => '<MODIF>Harddisken er m&aring;ske fyldt eller databasen er skadet. <br>
  <font color=\'red\'>pr&oslash;v <a href=\'@script@\'>at reparere databasen</a>,
 eller kontakt din internetudbyder.</font>',
 'info_fini' => 'Det er overst&aring;et!',
@@ -415,10 +417,10 @@ eller kontakt din internetudbyder.</font>',
 'info_inclusion_directe' => 'Direkte indlejring:',
 'info_inclusion_vignette' => 'Medtag piktogram:',
 'info_installation_systeme_publication' => 'Installation af publiceringssystemet ...',
-'info_installer_documents' => 'Du kan automatisk installere alle dokumenter, som findes i kataloget @upload@.',
-'info_installer_ftp' => 'Som administrator kan du via FTP indl&aelig;se filer i kataloget @upload@, s&aring; du senere kan hente dem der.',
+'info_installer_documents' => '<MODIF>Du kan automatisk installere alle dokumenter, som findes i kataloget @upload@.',
+'info_installer_ftp' => '<MODIF>Som administrator kan du via FTP indl&aelig;se filer i kataloget @upload@, s&aring; du senere kan hente dem der.',
 'info_installer_images' => 'Du kan indl&aelig;se filer i formaterne JPEG, GIF og PNG.',
-'info_installer_images_dossier' => 'Indl&aelig;s billeder i kataloget @upload@ for at kunne hente dem her.',
+'info_installer_images_dossier' => '<MODIF>Indl&aelig;s billeder i kataloget @upload@ for at kunne hente dem her.',
 'info_installer_tous_documents' => 'Indl&aelig;s alle dokumenter',
 'info_interface_complete' => 'Fuld brugergr&aelig;nseflade',
 'info_interface_simple' => 'Forenklet brugergr&aelig;nseflade',
@@ -487,7 +489,7 @@ eller kontakt din internetudbyder.</font>',
 'info_retirer_mot' => 'Slet dette n&oslash;gleord',
 'info_retirer_mots' => 'Slet alle n&oslash;gleord',
 'info_sans_titre_2' => 'uden overskrift',
-'info_selectionner_fichier' => 'Du kan v&aelig;lge en fil fra mappen @upload@',
+'info_selectionner_fichier' => '<MODIF>Du kan v&aelig;lge en fil fra mappen @upload@',
 'info_selectionner_fichier_2' => 'V&aelig;lg en fil:',
 'info_site_attente' => 'Websted afventer godkendelse',
 'info_site_reference' => 'Online henvisning',
@@ -633,7 +635,7 @@ eller kontakt din internetudbyder.</font>',
 	N&aring;r du har tilmeldt dig, kan du gennemse artikler der er p&aring; vej, indsende artikler og deltage i alle fora.',
 'pass_forum_bla' => 'Du har bedt om adgang til et forum, der er forbeholdt registrerede brugere.',
 'pass_indiquez_cidessous' => 'Indtast nedenfor den e-mail-adresse, du tidligere har registreret. Du vil modtage en e-mail, der forklarer, hvordan du f&aring;r adgang.',
-'pass_mail_passcookie' => '(dette er en automatisk dannet e-mail)
+'pass_mail_passcookie' => '<MODIF>(dette er en automatisk dannet e-mail)
 
 For at f&aring; adgang til webstedet 
 @nom_site_spip@ (@adresse_site@)
@@ -660,6 +662,9 @@ og igen f&aring; adgang til webstedet.',
 
 
 // S
+'squelette' => '<NEW>squelette',
+'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
+'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ bes&oslash;g; popularitet: @popularite@',
 'suivant' => '<NEW>suivant',
 
@@ -686,9 +691,9 @@ og igen f&aring; adgang til webstedet.',
 'texte_inc_config' => '&AElig;ndringer nedenfor vil markant p&aring;virke webstedets funktion. 
 	 Du r&aring;des til ikke at &aelig;ndre dem, med mindre du er fortrolig med SPIP-systemets funktion.
 	<P align="justify"><B>I almindelighed r&aring;des du kraftigt til at lade den hovedansvarlige webmaster p&aring; dit websted tage sig af denne side.</b>',
-'texte_inc_meta_1' => 'Kontroller venligst som administrator',
+'texte_inc_meta_1' => '<MODIF>Kontroller venligst som administrator',
 'texte_inc_meta_2' => 'skriveadgangen',
-'texte_inc_meta_3' => 'til kataloget ecrire/',
+'texte_inc_meta_3' => '<MODIF>til kataloget ecrire/',
 'texte_plan_trad' => 'P&Aring; denne side kan du se overs&aelig;ttelsesstatus for det valgte sprog. 
   Siden viser artikler, hvor overs&aelig;ttelsen er i gang, artikler hvis overs&aelig;ttelse skal ajourf&oslash;res, 
   og artikler der endnu ikke er oversat. ',

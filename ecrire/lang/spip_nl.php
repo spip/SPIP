@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'kalender per maand',
 'cal_par_semaine' => 'kalender per week',
 'confirm_changer_statut' => 'Opgelet. Je hebt gevraagd de status van dit element te wijzigen. Wil je verdergaan ?',
+'correcte' => '<NEW>correcte',
 
 
 // D
@@ -199,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(Dit is een automatisch verzonden bericht)',
 'form_forum_pass' => 'paswoord :',
 'form_forum_probleme_mail' => 'Probleem met e-mail: de logingegevens konden niet worden verstuurd.',
-'form_forum_voici1' => 'Ziehier je nieuwe logingegevens om een bijdrage te kunnen leveren aan de website
+'form_forum_voici1' => 'Zie hier je nieuwe logingegevens om een bijdrage te kunnen leveren aan de website
  "@nom_site_spip@" (@adresse_site@) :',
-'form_forum_voici2' => 'Hierbij je logingegevens om artikels voor artikels voor te stellen op
+'form_forum_voici2' => '<MODIF>Hierbij je logingegevens om artikels voor artikels voor te stellen op
 de website "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Vul hier je e-mailadres in.',
 'form_indiquer_nom' => 'Vul hier je naam in.',
@@ -220,7 +221,7 @@ Je hebt gevraagd om deze petitie te ondertekenen :
 Je hebt ons de volgende informatie bezorgd :
     Naam: @nom_email@
     Site: @nom_site@ - @url_site@
-
+    @message@
 
 BELANGRIJK...
 Om je gegevens te valideren, volstaat het het onderstaande adres
@@ -344,6 +345,7 @@ Bedankt voor je deelname
 'image_tourner_droite' => '90&deg; naar rechts draaien',
 'image_tourner_gauche' => '90&deg; naar links draaien',
 'img_indisponible' => 'beeld onbeschikbaar',
+'impossible' => '<NEW>impossible',
 'info_a_suivre' => 'TAKEN&raquo;',
 'info_a_valider' => '[ter goedkeuring]',
 'info_acces_interdit' => 'Geen toegang',
@@ -378,7 +380,7 @@ Bedankt voor je deelname
 'info_copyright_gpl' => 'onder GPL licentie',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
-'info_creer_repertoire_2' => 'binnen in de map <b>@repertoire@</b>, vervolgens:',
+'info_creer_repertoire_2' => '<MODIF>binnen in de map <b>@repertoire@</b>, vervolgens:',
 'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
 'info_deplier' => 'Uitvouwen',
 'info_descriptif_nombre' => 'Beschrijving(en):',
@@ -397,7 +399,7 @@ Bedankt voor je deelname
 'info_erreur_requete' => 'Fout bij uitvoering van de opdracht :',
 'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
-'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd. <br>
+'info_erreur_systeme2' => '<MODIF>Misschien is de harde schijf vol of de gegevensbank beschadigd. <br>
  <font color=\'red\'>Probeer de <a href=\'@script@\'>de gegevensbank te herstellen</a>,
  of neem contact op met je provider.</font>',
 'info_fini' => 'Het is gedaan !',
@@ -410,10 +412,10 @@ Bedankt voor je deelname
 'info_inclusion_directe' => 'Directe insluiting:',
 'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 'info_installation_systeme_publication' => 'Installatie van het publicatiesysteem...',
-'info_installer_documents' => 'Je kan alle documenten in de map @upload@ automatisch als bijlage toevoegen.',
-'info_installer_ftp' => 'Via FTP kan een beheerder bestanden in de map @upload@ plaatsen en ze vervolgens hier meteen selecteren.',
+'info_installer_documents' => '<MODIF>Je kan alle documenten in de map @upload@ automatisch als bijlage toevoegen.',
+'info_installer_ftp' => '<MODIF>Via FTP kan een beheerder bestanden in de map @upload@ plaatsen en ze vervolgens hier meteen selecteren.',
 'info_installer_images' => 'Afbeelden kunnen toegevoegd worden in JPEG, GIF en PNG formaat.',
-'info_installer_images_dossier' => 'Afbeeldingen plaatsen in de map @upload@ om ze hier te selecteren.',
+'info_installer_images_dossier' => '<MODIF>Afbeeldingen plaatsen in de map @upload@ om ze hier te selecteren.',
 'info_installer_tous_documents' => 'Alle documenten installeren',
 'info_interface_complete' => 'Volledige interface',
 'info_interface_simple' => 'Vereenvoudigde interface',
@@ -476,7 +478,7 @@ Bedankt voor je deelname
 'info_retirer_mot' => 'Trek dat woord',
 'info_retirer_mots' => 'Alle trefwoorden intrekken',
 'info_sans_titre_2' => 'zonder titel',
-'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map @upload@',
+'info_selectionner_fichier' => '<MODIF>Je kan een bestand selecteren uit de map @upload@',
 'info_selectionner_fichier_2' => 'Een bestand selecteren:',
 'info_site_attente' => 'website ter goedkeuring voorgelegd',
 'info_site_reference' => 'Online gekoppelde site',
@@ -609,7 +611,7 @@ dat gereserveerd is voor geregistreerde gebruikers.',
 'pass_indiquez_cidessous' => 'Vul hieronder het e-mailadres in waarmee je je eerder
 hebt geregistreerd. Je
 zal een e-mail ontvangen met uitleg over hoe je opnieuw toegang kan verwerven tot de site.',
-'pass_mail_passcookie' => '(dit is een automatisch gegenereerd bericht)
+'pass_mail_passcookie' => '<MODIF>(dit is een automatisch gegenereerd bericht)
 
 Om opnieuw toegang te krijgen tot de site
 @nom_site_spip@ (@adresse_site@)
@@ -637,6 +639,9 @@ verbinding maken met de site
 
 
 // S
+'squelette' => '<NEW>squelette',
+'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
+'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ bezoeken; populariteit: @popularite@',
 'suivant' => 'volgende',
 
@@ -671,9 +676,9 @@ verbinding maken met de site
  <P align="justify"><B>Algemeen gesproken laat je het
  beheer van deze pagina best over aan de webmaster van je
  site.</B>',
-'texte_inc_meta_1' => 'Het systeem ziet een fout bij het schrijven van het bestand <code>@fichier@</code>.Gelieve, als beheerder van de site,',
+'texte_inc_meta_1' => '<MODIF>Het systeem ziet een fout bij het schrijven van het bestand <code>@fichier@</code>.Gelieve, als beheerder van de site,',
 'texte_inc_meta_2' => 'de schrijfrechten na te kijken',
-'texte_inc_meta_3' => 'van de map <code>@repertoire@</code>.',
+'texte_inc_meta_3' => '<MODIF>van de map <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'in redactie',
 'texte_statut_poubelle' => 'in de vuilnisbak',
 'texte_statut_propose_evaluation' => 'voorgesteld voor evaluatie',
