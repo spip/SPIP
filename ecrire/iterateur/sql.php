@@ -154,12 +154,20 @@ class IterateurSQL implements Iterator {
 	 * @return int
 	 */
 	public function count() {
-		if (is_null($this->total))
-			if (!$this->sqlresult)
+		if (is_null($this->total)) {
+			if (!$this->sqlresult) {
 				$this->total = 0;
-			else
-				$this->total = sql_count($this->sqlresult, $this->command['connect']);
-	  return $this->total;
+			} else {
+				# cas count(*)
+				if (in_array('count(*)', $this->command['select'])) {
+					$this->valid();
+					$s = $this->current();
+					$this->total = $s['count(*)'];
+				} else
+					$this->total = sql_count($this->sqlresult, $this->command['connect']);
+			}
+		}
+		return $this->total;
 	}
 }
 
