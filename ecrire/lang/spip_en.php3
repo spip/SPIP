@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modify this section',
 'admin_recalculer' => 'Refresh this page',
 'alerte_maj_impossible' => '<b>Warning!</b> Failed to update the MySQL database to version @version@, maybe due to a permissions problem on the database. Please contact your ISP.',
+'analyse_xml' => 'Parsing XML',
 'avis_archive_incorrect' => 'archive file is not a valid SPIP file',
 'avis_archive_invalide' => 'archive file is not valid',
 'avis_attention' => 'CAUTION!',

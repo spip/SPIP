@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; de&#287;i&#351;tiriniz',
 'admin_recalculer' => 'Bu sayfayi yeniden yaratiniz',
 'alerte_maj_impossible' => '<b>Dikkat&nbsp;!</b> MySQL veri tabaninin @version@ s&uuml;r&uuml;m&uuml;ne g&uuml;ncellenmesi imkansiz. Sorun haklardan kaynaklaniyor olabilir, l&uuml;tfen sitenizi barindiran sirkete basvurunuz.',
+'analyse_xml' => 'XML analizi',
 'avis_archive_incorrect' => 'arsiv dosyasi SPIP dosyasi degil',
 'avis_archive_invalide' => 'dosya ge&ccedil;erli degil',
 'avis_attention' => 'D&#304;KKAT&nbsp;!',

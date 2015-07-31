@@ -85,9 +85,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
  contribucions no apareixen p&uacute;blicament fins que no han estat
  validades des de l\'adminsitraci&oacute; del
  lloc).',
-'bouton_radio_modere_abonnement' => 'moderat (nom&eacute;s per abonats)',
-'bouton_radio_modere_posteriori' => 'moderat a posteriori',
-'bouton_radio_modere_priori' => 'moderat a priori',
+'bouton_radio_modere_abonnement' => 'per subscripci&oacute;',
+'bouton_radio_modere_posteriori' => 'moderaci&oacute; a posteriori',
+'bouton_radio_modere_priori' => 'moderaci&oacute; a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'No apar&egrave;ixer a la llista de redactors/es ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar anuncis editorials',
 'bouton_radio_non_syndication' => 'Cap sindicaci&oacute;',
@@ -243,7 +243,6 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_ajout_participant' => 'El seg&uuml;ent participant ha estat afegit:',
 'info_ajouter_rubrique' => 'Afegir una altra secci&oacute; per administrar:',
 'info_annonce_nouveautes' => 'Av&iacute;s de les novetats',
-'info_annuler_blocage_priori' => 'Anular el bloqueig a priori',
 'info_anterieur' => 'anterior',
 'info_appliquer_choix_moderation' => 'Aplicar aquesta opci&oacute; de moderaci&oacute;:',
 'info_article' => 'article',
@@ -265,6 +264,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_avertissement' => 'Av&iacute;s',
 'info_base_installee' => 'L\'estructura de la vostra bases de dades s\'ha instal&middot;lat.',
 'info_base_restauration' => 'La restauraci&oacute; de la base de dades est&agrave; en curs.',
+'info_bloquer' => 'blocar',
 'info_breves' => 'El vostre lloc fa servir el sistema de breus?',
 'info_breves_03' => 'breus',
 'info_breves_liees_mot' => 'Les breus lligades a aquesta paraula clau',
@@ -302,8 +302,6 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_delet_mots_cles' => 'Heu sol&middot;licitat la supressi&oacute; de la
  paraula clau <B>@titre_mot@</B> (@type_mot@). Donat que la paraula-clau est&agrave; lligada a
 <b>@texte_lie@</b> heu de confirmar aquesta decisi&oacute;:',
-'info_demander_blocage_priori' => 'Sol&middot;licitar
-    un blocatge a priori',
 'info_derniere_etape' => '&Uacute;ltim pas: <B>S\'ha acabat!',
 'info_derniere_syndication' => 'La &uacute;ltima sindicaci&oacute; d\'aquest lloc ha estat realitzada el',
 'info_derniers_articles_publies' => 'El m&eacute;s nou dels vostres articles editats',
@@ -467,6 +465,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_procedez_par_etape' => 'procediu pas per pas',
 'info_procedure_maj_version' => 'El proc&eacute;s d\'actualitzaci&oacute; s\'ha de tornar a arrancar per tal d\'adaptar la base de dades a la nova versi&oacute; d\'SPIP.',
 'info_ps' => 'P.D.',
+'info_publier' => 'publicar',
 'info_publies' => 'Els vostres articles publicats en l&iacute;nia',
 'info_question_accepter_visiteurs' => 'Si a les plantilles (esquelets) del vostre lloc Web es preveu l\'enregistrament de visitants sense acc&eacute;s a l\'espai privat, vulgueu activar la seg&uuml;ent opci&oacute;:',
 'info_question_gerer_statistiques' => 'El vostre lloc ha de gestionar les estad&iacute;stiques de les visites?',
@@ -723,6 +722,12 @@ amb un color que indica el seu estat:',
 
 // S
 'statut_admin_restreint' => '(admin restringida)',
+'syndic_choix_moderation' => 'Qu&egrave; fer dels seg&uuml;ents enlla&ccedil;os que procedeixin d\'aquest lloc Web?',
+'syndic_choix_oublier' => 'Qu&egrave; fer dels enlla&ccedil;os que ja no figuren en el fitxer de sindicaci&oacute;?',
+'syndic_lien_obsolete' => 'enlla&ccedil; obsolet',
+'syndic_option_miroir' => 'blocar-los autom&agrave;ticament',
+'syndic_option_oubli' => 'esborrar-los (despr&eacute;s @mois@&nbsp;mois)',
+'syndic_options' => 'Opcions de sindicaci&oacute;:',
 
 
 // T
@@ -779,8 +784,6 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_date_publication_anterieure' => 'Data de redacci&oacute; anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles de data de redacci&oacute; anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICACI&Oacute; EN L&Iacute;NIA&nbsp;:',
-'texte_demander_blocage_priori' => 'Els pr&ograve;xims enlla&ccedil;os 
- procedents d\'aquest lloc ser&agrave;n bloquejats a priori.',
 'texte_descriptif_petition' => 'Descripci&oacute; de la petici&oacute;',
 'texte_descriptif_rapide' => 'Descripci&oacute; r&agrave;pida',
 'texte_documents_joints' => 'Es pot permetre afegir documents (fitxers ofim&agrave;tics, imatges, multim&egrave;dia, etc.) als articles i/o a les seccions. Aquests fitxers poden estar referenciats dins l\'article, o mostrats separadament.<p>',
@@ -807,7 +810,6 @@ ser bloquejats a priori; la norma
 que apareix a continuaci&oacute; indica  la regla per defecte dels llocs sindicats despr&eacute;s de la seua creaci&oacute;. &Eacute;s
 possible inmediatament desbloquejar cada enlla&ccedil; de forma individual, o 
 triar, web per web, bloquejar els enlla&ccedil;os que vinguen d\'un o altre web.',
-'texte_liens_syndication' => 'Els pr&ograve;xims enlla&ccedil;os que provinguen d\'aquesta web seran afegits inmediatament al lloc p&uacute;blic.',
 'texte_login_ldap_1' => '(Deixar buit per un acc&eacute;s an&ograve;nim, o ficar l\'ordre sencera, per exemple "&nbsp;<tt>uid=Ferrer, ou=users, dc=el-meu-domini, dc=com</tt>".)',
 'texte_login_precaution' => 'Atenci&oacute;! Aquest &eacute;s el login o nom d\'usuari amb el qual esteu connectats actualment.
 Useu aquest formulari amb precauci&oacute;...',

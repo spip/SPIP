@@ -78,8 +78,8 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'bouton_radio_envoi_liste_nouveautes' => 'Yenilikler listesini yolla',
 'bouton_radio_moderation_priori' => '&Ouml;nceden onay (yaz&#305;lan iletiler onayland&#305;ktan sonra yay&#305;nlan&#305;yor).',
 'bouton_radio_modere_abonnement' => 'abonelik sistemiyle y&ouml;netilir',
-'bouton_radio_modere_posteriori' => 'sonradan onay',
-'bouton_radio_modere_priori' => '&ouml;nceden onay',
+'bouton_radio_modere_posteriori' => 'sonradan onayla y&ouml;netim',
+'bouton_radio_modere_priori' => '&ouml;nceden onayla y&ouml;netim',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Yazarlar listesinde g&ouml;z&uuml;kme',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Yazar a&ccedil;&#305;klamalas&#305; yollama',
 'bouton_radio_non_syndication' => 'Yay&#305;n (syndication) yok',
@@ -240,8 +240,6 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_ajout_participant' => 'Eklenen kat&#305;l&#305;mc&#305; :',
 'info_ajouter_rubrique' => 'Y&ouml;netecek ba&#351;ka bir b&ouml;l&uuml;m ekle:',
 'info_annonce_nouveautes' => 'Yeniliklerin il&acirc;n&#305; :',
-'info_annuler_blocage_priori' => 'Bu &ouml;nsel kilitlenmenin
-                                      ipt&acirc;l edilmesi',
 'info_anterieur' => 'Bir &ouml;nceki',
 'info_appliquer_choix_moderation' => 'Bu &#305;l&#305;mlama se&ccedil;ene&#287;inin uygulanmas&#305; :',
 'info_article' => 'makale ',
@@ -263,6 +261,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_avertissement' => 'Uyar&#305;',
 'info_base_installee' => 'Veri taban&#305;n&#305;z&#305;n yap&#305;s&#305; y&uuml;klendi',
 'info_base_restauration' => 'Veri taban&#305;n&#305;n eski haline getirilme i&#351;lemi s&uuml;r&uuml;yor',
+'info_bloquer' => 'engelle',
 'info_breves' => 'Siteniz haber sistemini kullan&#305;yor mu ?',
 'info_breves_03' => 'haberler',
 'info_breves_liees_mot' => 'Bu anahtar s&ouml;zc&uuml;&#287;e ba&#287;l&#305; haberler',
@@ -299,8 +298,6 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_date_referencement' => 'BU SI&#304;TEYE ATIFTA BULUNULMA TAR&#304;H&#304;:',
 'info_delet_mots_cles' => '<b>@titre_mot@</b>(@type_mot@) anahtar s&ouml;zc&uuml;&#287;&uuml;n&uuml;n ipt&acirc;lini istediniz. Bu anahtar s&ouml;zc&uuml;k  
 <b>@texte_lie@<b> \'e ba&#287;l&#305; oldu&#287;undan, bu karar&#305; teyit etmeniz gerekiyor&nbsp;:',
-'info_demander_blocage_priori' => '&Ouml;nsel 
-                                    kilitleme iste',
 'info_derniere_etape' => 'Son a&#351;ama : Bitti !',
 'info_derniere_syndication' => 'Bu sitenin son sendikala&#351;mas&#305;n&#305;n ger&ccedil;ekle&#351;ti&#287;i tarih:',
 'info_derniers_articles_publies' => 'Yay&#305;nlanan son makaleleriniz',
@@ -473,6 +470,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'info_procedure_maj_version' => 'Veri taban&#305;n&#305; yeni SPIP uyarlamas&#305;na uyarlamak i&ccedil;in
               seviye y&uuml;kseltme i&#351;lemi ba&#351;lat&#305;lmal&#305;.',
 'info_ps' => 'Not :',
+'info_publier' => 'yay&#305;nla',
 'info_publies' => '&Ccedil;evrimi&ccedil;i (online) yay&#305;nlanan makaleleriniz',
 'info_question_accepter_visiteurs' => 'E&#287;er sitenizin &#351;ablonu &ouml;zel alana eri&#351;imi olmayan ziyaret&ccedil;ilerin kayd&#305;n&#305; &ouml;ng&ouml;r&uuml;yorsa, a&#351;a&#287;&#305;daki se&ccedil;ene&#287;i &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z&nbsp;:',
 'info_question_gerer_statistiques' => 'Siteniz ziyaretlerin istatisti&#287;ini y&ouml;netmeli mi ?',
@@ -735,6 +733,12 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 
 // S
 'statut_admin_restreint' => '(s&#305;n&#305;rl&#305; y&ouml;netim)',
+'syndic_choix_moderation' => 'Bu siteden ileride gelecek ba&#287;lar&#305; ne yapmal&#305;&nbsp;?',
+'syndic_choix_oublier' => '&Ouml;neri (sendikasyon) dosyas&#305;nda art&#305;k bulunmayan ba&#287;lar&#305; ne yapmal&#305;&nbsp;?',
+'syndic_lien_obsolete' => '&ouml;l&uuml; ba&#287;',
+'syndic_option_miroir' => 'hepsini otomatik olarak engelle',
+'syndic_option_oubli' => 'hepsini sil (@mois@&nbsp;mois sonra)',
+'syndic_options' => '&Ouml;neri (sendikasyon) se&ccedil;enekleri&nbsp;:',
 
 
 // T
@@ -797,8 +801,6 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'texte_date_publication_anterieure' => 'Bir &ouml;nceki yay&#305;n tarihi&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Yay&#305;n tarihinin g&ouml;r&uuml;nt&uuml;lenmemesi',
 'texte_date_publication_article' => '&Ccedil;EVR&#304;M&#304;&Ccedil;&#304; (ONLINE) YAYINLANMA TAR&#304;H&#304;:',
-'texte_demander_blocage_priori' => 'Bu siteden gelecek olan bundan sonraki
-    ba&#287;lant&#305;lar &ouml;nsel olarak kilitlenecektir.',
 'texte_descriptif_petition' => 'Dilek&ccedil;enin tan&#305;m&#305;',
 'texte_descriptif_rapide' => 'H&#305;zl&#305; tan&#305;m',
 'texte_documents_joints' => 'Makale ve/veya b&ouml;l&uuml;mlere dok&uuml;man eklenmesine izin verebilirsiniz
@@ -818,7 +820,6 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
 'texte_jeu_caractere_2' => 'Bu ayar&#305;n geriye d&ouml;n&uuml;k etkisi yoktur. Dolay&#305;s&#305;yla, ayarda bir de&#287;i&#351;iklik sonras&#305;nda, daha &ouml;nce girilmi&#351; olan metinler yanl&#305;&#351; g&ouml;r&uuml;nt&uuml;lenebilir. Her hal&uuml;karda, bir zarar vermeden bir &ouml;nceki ayara d&ouml;nebilirsiniz.',
 'texte_lien_hypertexte' => '(E&#287;er iletiniz Web\'de yay&#305;nlanan bir makaleye, ya da daha fazla bilgi veren bir sayfaya at&#305;fta bulunuyorsa, l&uuml;tfen buraya sayfan&#305;n ba&#351;l&#305;&#287;&#305;n&#305; ve URL adresini belirtiniz.)',
 'texte_liens_sites_syndiques' => 'Sendikal&#305; sitelerden ileri gelen ba&#287;lant&#305;lar &ouml;nsel olarak kilitlenebilir&nbsp;; a&#351;a&#287;&#305;daki ayarlama yarat&#305;lmalar&#305;ndan sonra sendikala&#351;an sitelerin varsay&#305;lan ayarlamas&#305;n&#305; belirtir. Sonradan her bir ba&#287;lant&#305;n&#305;n kilidini tek tek a&ccedil;mak, ya da her site i&ccedil;in, gelecekteki ba&#287;lant&#305;lar&#305; kilitlemeyi tek tek se&ccedil;mek herhal&uuml;karda olanakl&#305;d&#305;r.',
-'texte_liens_syndication' => 'Bu siteden gelecek bundan sonraki ba&#287;lar derhal kamu sitesinde g&ouml;r&uuml;nt&uuml;lenecektir.',
 'texte_login_ldap_1' => '(Ya anonim bir eri&#351;im i&ccedil;in bo&#351; b&#305;rak&#305;lmas&#305;, ya da t&uuml;m yolun belirtilmesi, &ouml;rne&#287;in; &laquo;&nbsp;uid=dupont, ou=users, dc=mon-domaine, dc=com&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Dikkat&nbsp;! Bu, &#351;u andaki ba&#287;lant&#305; i&ccedil;in kullan&#305;lan logindir.
  Bu formu tedbirli kullan&#305;n&#305;z...',

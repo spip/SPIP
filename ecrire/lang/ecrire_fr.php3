@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_moderation_priori' => 'Mod&eacute;ration &agrave; priori (les
 	contributions ne s\'affichent publiquement qu\'apr&egrave;s validation par les
 	administrateurs).',
-'bouton_radio_modere_abonnement' => 'mod&eacute;ration sur abonnement',
+'bouton_radio_modere_abonnement' => 'sur abonnement',
 'bouton_radio_modere_posteriori' => 'mod&eacute;ration &agrave; posteriori',
 'bouton_radio_modere_priori' => 'mod&eacute;ration &agrave; priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne pas appara&icirc;tre dans la liste des r&eacute;dacteurs',
@@ -252,8 +252,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'Le participant suivant est ajout&eacute;&nbsp;:',
 'info_ajouter_rubrique' => 'Ajouter une autre rubrique &agrave; administrer&nbsp;:',
 'info_annonce_nouveautes' => 'Annonce des nouveaut&eacute;s',
-'info_annuler_blocage_priori' => 'Annuler
-				ce blocage a priori',
 'info_anterieur' => 'ant&eacute;rieure',
 'info_appliquer_choix_moderation' => 'Appliquer ce choix de mod&eacute;ration&nbsp;:',
 'info_article' => 'article',
@@ -313,8 +311,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Vous avez	demand&eacute; &agrave; supprimer le mot-cl&eacute;
 <B>@titre_mot@</B> (@type_mot@). Ce mot-cl&eacute; &eacute;tant li&eacute; &agrave;
 <b>@texte_lie@</b> vous devez confirmer cette d&eacute;cision&nbsp;:',
-'info_demander_blocage_priori' => 'Demander
-				un blocage a priori',
 'info_derniere_etape' => 'Derni&egrave;re &eacute;tape : <B>C\'est termin&eacute; !',
 'info_derniere_syndication' => 'La derni&egrave;re syndication de ce site a &eacute;t&eacute; effectu&eacute;e le',
 'info_derniers_articles_publies' => 'Vos derniers articles publi&eacute;s en ligne',
@@ -828,8 +824,6 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_date_publication_anterieure' => 'Date de r&eacute;daction ant&eacute;rieure&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Ne pas afficher de date de r&eacute;daction ant&eacute;rieure.',
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE&nbsp;:',
-'texte_demander_blocage_priori' => 'Les prochains liens en
-				provenance de ce site seront bloqu&eacute;s a priori.',
 'texte_descriptif_petition' => 'Descriptif de la p&eacute;tition',
 'texte_descriptif_rapide' => 'Descriptif rapide',
 'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
@@ -871,8 +865,6 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 			d&eacute;bloquer chaque lien individuellement, ou de
 			choisir, site par site, de bloquer les liens &agrave; venir
 			de tel ou tel site.',
-'texte_liens_syndication' => 'Les prochains liens en
-				provenance de ce site seront affich&eacute;s imm&eacute;diatement sur le site public.',
 'texte_login_ldap_1' => '(Laisser vide pour un acc&egrave;s anonyme, ou entrer le chemin complet, par exemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
 	Utilisez ce formulaire avec pr&eacute;caution...',
