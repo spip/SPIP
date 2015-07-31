@@ -314,25 +314,29 @@ function balise_POPULARITE_MAX_dist($p) {
 
 function balise_EXPOSER_dist($p) {
 	global  $table_primary;
+	$type_boucle = $p->type_requete;
+	$primary_key = $table_primary[$type_boucle];
+	if (!$primary_key) {
+		include_local("inc-admin.php3");
+		erreur_squelette(_L("Champ #EXPOSER hors boucle"), $p->id_boucle);
+	}
 	$on = 'on';
 	$off= '';
 	if ($p->fonctions) {
-	// Gerer la notation [(#EXPOSER|on,off)]
-	reset($p->fonctions);
-	list(, $onoff) = each($p->fonctions);
-	ereg("([^,]*)(,(.*))?", $onoff, $regs);
-	$on = addslashes($regs[1]);
-	$off = addslashes($regs[3]);
-	
-	// autres filtres
-	$filtres=Array();
-	while (list(, $nom) = each($p->fonctions))
-	  $filtres[] = $nom;
-	$p->fonctions = $filtres;
+		// Gerer la notation [(#EXPOSER|on,off)]
+		reset($p->fonctions);
+		list(, $onoff) = each($p->fonctions);
+		ereg("([^,]*)(,(.*))?", $onoff, $regs);
+		$on = addslashes($regs[1]);
+		$off = addslashes($regs[3]);
+		
+		// autres filtres
+		$filtres=Array();
+		while (list(, $nom) = each($p->fonctions))
+		  $filtres[] = $nom;
+		$p->fonctions = $filtres;
 	}
 
-	$type_boucle = $p->type_requete;
-	$primary_key = $table_primary[$type_boucle];
 
 	$p->code = '(calcul_exposer('
 	.champ_sql($primary_key, $p)
@@ -374,20 +378,20 @@ function balise_FIN_SURLIGNE_dist($p) {
 
 // Formulaire de changement de langue
 function balise_MENU_LANG_dist($p) {
-	$p->code = '"<"."?php
+	$p->code = '("<"."?php
 include_ecrire(\"inc_lang.php3\");
 echo menu_langues(\"var_lang\", \$menu_lang);
-?".">"';
+?".">")';
 	$p->statut = 'php';
 	return $p;
 }
 
 // Formulaire de changement de langue / page de login
 function balise_MENU_LANG_ECRIRE_dist($p) {
-	$p->code = '"<"."?php
+	$p->code = '("<"."?php
 include_ecrire(\"inc_lang.php3\");
 echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
-?".">"';
+?".">")';
 	$p->statut = 'php';
 	return $p;
 }
@@ -396,7 +400,7 @@ echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 // Formulaires de login
 //
 function balise_LOGIN_PRIVE_dist($p) {
-	$p->code = '"<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">"'; 
+	$p->code = '("<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">")'; 
 	$p->statut = 'php';
 	return $p;
 }
@@ -406,7 +410,7 @@ function balise_LOGIN_PUBLIC_dist($p) {
 	$lacible = "new Link('".$nom."')";
 	else
 	$lacible = '\$GLOBALS[\'clean_link\']';
-	$p->code = '"<"."?php include(\'inc-login.php3\'); login(' . $lacible . ', false); ?".">"';
+	$p->code = '("<"."?php include(\'inc-login.php3\'); login(' . $lacible . ', false); ?".">")';
 	$p->fonctions = array();
 	$p->statut = 'php';
 	return $p;
@@ -419,8 +423,8 @@ function balise_URL_LOGOUT_dist($p) {
 	} else {
 	$url = '&url=\'.urlencode(\$clean_link->getUrl()).\'';
 	}
-	$p->code = '"<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
-{ echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'' . $url . '\'; } ?".">"';
+	$p->code = '("<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
+{ echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'' . $url . '\'; } ?".">")';
 	$p->statut = 'php';
 	return $p;
 }
@@ -488,8 +492,8 @@ function balise_PETITION_dist ($p) {
 // http://www.spip.net/fr_article1846.html
 function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
-	$p->code = "ceil(min(100, 100 * $_popularite
-	/ max(1 , 0 + lire_meta('popularite_max'))))";
+	$p->code = "(ceil(min(100, 100 * $_popularite
+	/ max(1 , 0 + lire_meta('popularite_max')))))";
 	$p->statut = 'php';
 	return $p;
 }
@@ -670,8 +674,8 @@ function balise_FORMULAIRE_RECHERCHE_dist($p) {
 //
 function balise_FORMULAIRE_INSCRIPTION_dist($p) {
 
-	$p->code = '(lire_meta("accepter_inscriptions") != "oui") ? "" :
-		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">")';
+	$p->code = '((lire_meta("accepter_inscriptions") != "oui") ? "" :
+		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
 
 	$p->statut = 'php';
 	return $p;
@@ -684,11 +688,11 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 	$_id_auteur = champ_sql('id_auteur', $p);
 	$_mail_auteur = champ_sql('email', $p);
 
-	$p->code = '!email_valide('.$_mail_auteur.') ? "" :
+	$p->code = '(!email_valide('.$_mail_auteur.') ? "" :
 		("<'.'?php include_local(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\');
 		formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\');
-		lang_dselect(); ?'.'>")';
+		lang_dselect(); ?'.'>"))';
 
 	$p->statut = 'php';
 	return $p;
@@ -715,11 +719,11 @@ function balise_FORMULAIRE_SIGNATURE_dist($p) {
 function balise_FORMULAIRE_SITE_dist($p) {
 	$_id_rubrique = champ_sql('id_rubrique', $p);
 
-	$p->code = '(lire_meta("proposer_sites") != 2) ? "":
-		"<"."?php include_local(\'inc-formulaires.php3\');
+	$p->code = '((lire_meta("proposer_sites") != 2) ? "":
+		("<"."?php include_local(\'inc-formulaires.php3\');
 		lang_select(\'".$GLOBALS[\'spip_lang\']."\');
-		formulaire_site(".'.$_id_rubrique.'.");
-		lang_dselect(); ?".">"';
+		formulaire_site(\'".'.$_id_rubrique.'."\');
+		lang_dselect(); ?".">"))';
 
 	$p->statut = 'php';
 	return $p;
