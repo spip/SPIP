@@ -22,7 +22,7 @@ include_spip('base/abstract_sql');
 function creer_base($server='') {
 	global $tables_principales, $tables_auxiliaires, $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 
-	// Note: les mises à jour reexecutent ce code pour s'assurer
+	// Note: les mises a jour reexecutent ce code pour s'assurer
 	// de la conformite de la base
 	// pas de panique sur  "already exists" et "duplicate entry" donc.
 
@@ -61,10 +61,10 @@ function creer_base($server='') {
 			 $desc);
 
 	foreach ($tables_mime as $extension => $type_mime)
-		$freplace('spip_types_documents',
-			 array("mime_type" => $type_mime,
-			       "extension" => $extension),
-			 $desc);
+		$fupdate('spip_types_documents',
+			 'mime_type = '._q($type_mime),
+			 'extension='._q($extension)
+		);
 }
 
 // http://doc.spip.org/@stripslashes_base
