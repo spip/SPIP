@@ -220,7 +220,7 @@ fin_cadre_relief();
 echo "<BR><BR>";
 
 echo "\n<div align='center'>";
- icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id_breve=$id_breve&titre_message=".rawurlencode($titre) . "&adresse_retour=".urlencode( generer_url_ecrire("breves_voir", "id_breve=$id_breve"))),
+ icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi", "statut=prive&id_breve=$id_breve&titre_message=".rawurlencode($titre) . "&adresse_retour=".rawurlencode( generer_url_ecrire("breves_voir", "id_breve=$id_breve"))),
        "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 

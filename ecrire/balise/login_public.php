@@ -47,7 +47,7 @@ function login_explicite($login, $cible) {
 		$cible = parametre_url($cible, 'var_login', '', '&');
 	} else {
 		if (ereg("[?&]url=([^&]*)", $action, $m))
-			$cible = urldecode($m[1]);
+			$cible = rawurldecode($m[1]);
 		else
 			$cible = _DIR_RESTREINT ;
 	}
