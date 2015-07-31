@@ -446,5 +446,107 @@ function maj_v019_dist($version_installee, $version_cible)
 		spip_query("ALTER TABLE spip_documents CHANGE hauteur hauteur integer");
 		maj_version('1.944');
 	}
+	if (upgrade_vers(1.945, $version_installee, $version_cible)) {
+		spip_query("ALTER TABLE spip_petitions CHANGE email_unique email_unique CHAR (3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_petitions CHANGE site_obli site_obli CHAR (3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_petitions CHANGE site_unique site_unique CHAR (3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_petitions CHANGE message message CHAR (3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_petitions CHANGE texte texte LONGTEXT DEFAULT '' NOT NULL");
+		
+		spip_query("ALTER TABLE spip_articles CHANGE surtitre surtitre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE soustitre soustitre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE chapo chapo mediumtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE texte texte longtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE ps ps mediumtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE nom_site nom_site tinytext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE url_site url_site VARCHAR(255) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_articles CHANGE url_propre url_propre VARCHAR(255) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_auteurs CHANGE nom nom text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE bio bio text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE email email tinytext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE nom_site nom_site tinytext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE url_site url_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE pass pass tinytext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE low_sec low_sec tinytext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE pgp pgp TEXT DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs CHANGE htpass htpass tinytext DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_breves CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_breves CHANGE texte texte longtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_breves CHANGE lien_titre lien_titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_breves CHANGE lien_url lien_url text DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_messages CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_messages CHANGE texte texte longtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_messages CHANGE type type varchar(6) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_messages CHANGE rv rv varchar(3) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_mots CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_mots CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_mots CHANGE texte texte longtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_mots CHANGE type type text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_mots CHANGE url_propre url_propre VARCHAR(255) DEFAULT '' NOT NULL");
+		
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE texte texte longtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE unseul unseul varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE obligatoire obligatoire varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE articles articles varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE breves breves varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE rubriques rubriques varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE syndic syndic varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE minirezo minirezo varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE comite comite varchar(3) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE forum forum varchar(3) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_rubriques CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques CHANGE texte texte longtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques CHANGE url_propre url_propre VARCHAR(255) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_documents CHANGE extension extension VARCHAR(10) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_documents CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_documents CHANGE date date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+		spip_query("ALTER TABLE spip_documents CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_documents CHANGE fichier fichier varchar(255) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_types_documents CHANGE extension extension varchar(10) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_types_documents CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_types_documents CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_types_documents CHANGE mime_type mime_type varchar(100) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_syndic CHANGE nom_site nom_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic CHANGE url_site url_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic CHANGE url_syndic url_syndic text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic CHANGE url_propre url_propre VARCHAR(255) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic CHANGE syndication syndication VARCHAR(3) DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_syndic_articles CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles CHANGE url url VARCHAR(255) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles CHANGE lesauteurs lesauteurs text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles CHANGE descriptif descriptif text DEFAULT '' NOT NULL");
+
+		spip_query("ALTER TABLE spip_forum CHANGE titre titre text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE texte texte mediumtext DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE auteur auteur text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE email_auteur email_auteur text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE nom_site nom_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE url_site url_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_forum CHANGE ip ip varchar(16) DEFAULT '' NOT NULL");
+		
+		spip_query("ALTER TABLE spip_signatures CHANGE nom_email nom_email text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_signatures CHANGE ad_email ad_email text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_signatures CHANGE nom_site nom_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_signatures CHANGE url_site url_site text DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_signatures CHANGE message message mediumtext DEFAULT '' NOT NULL");
+
+		maj_version('1.945');
+	}
 }
 ?>
