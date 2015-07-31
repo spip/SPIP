@@ -1404,4 +1404,31 @@ function critere_args_dist($idb, &$boucles, $crit) {
 	}
 	$boucle->where['args'] = '$command[\'args\']';
 }
+
+/*
+ * Passer une liste de donnees a l'iterateur DATA 
+ * (DATA){liste X1, X2, X3}
+ */
+function critere_liste_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	foreach($crit->param as $param) {
+		$boucle->hash .= '
+			$command[\'liste\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+	}
+	$boucle->where['liste'] = '$command[\'liste\']';
+}
+
+/*
+ * Extraire un chemin d'un tableau de donnees
+ * (DATA){datapath query.results}
+ */
+function critere_datapath_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	foreach($crit->param as $param) {
+		$boucle->hash .= '
+			$command[\'datapath\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
+	}
+	$boucle->where['datapath'] = '$command[\'datapath\']';
+}
+
 ?>

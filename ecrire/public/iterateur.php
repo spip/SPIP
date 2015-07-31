@@ -97,7 +97,6 @@ class IterDecorator implements Iterator {
 		$this->info = $info;
 		$this->pos = 0;
 
-
 		if (is_array($this->command['where'])) {
 			foreach ($this->command['where'] as $k => $com) {
 				if ($com[0] == 'NOT') {
