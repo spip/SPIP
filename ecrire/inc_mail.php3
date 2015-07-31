@@ -22,10 +22,10 @@ function envoyer_queue_mails() {
 }
 
 //
-// Chez multimania, envoyer un mail coupe la connection MySQL (sic)
+// Chez lyconiania, envoyer un mail coupe la connection MySQL (sic)
 //
 
-if ($GLOBALS['hebergeur'] == 'multimania') {
+if ($GLOBALS['hebergeur'] == 'lycos') {
 	register_shutdown_function(envoyer_queue_mails);
 }
 
@@ -50,7 +50,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
 	switch($hebergeur) {
-	case 'multimania':
+	case 'lycos':
 		$queue_mails[] = array(
 			'email' => $email,
 			'sujet' => $sujet,
