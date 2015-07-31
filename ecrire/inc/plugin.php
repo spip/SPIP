@@ -409,7 +409,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz') {
 				// permet de faire des include_spip pour attraper un inc_ du plugin
 				if ($charge=='chemins'){
 					$prefix = strtoupper(preg_replace(',\W,','_',$info['prefix']));
-					$splugs .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
+					if ($dir) // cas de SPIP : dir='' :> ignorer ici
+						$splugs .= "define('_DIR_PLUGIN_$prefix',$dir);\n";
 					if (count($info['path']))
 						foreach($info['path'] as $chemin){
 							if (!isset($chemin['version']) OR plugin_version_compatible($chemin['version'],$GLOBALS['spip_version_branche'])){
