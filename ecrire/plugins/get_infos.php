@@ -101,6 +101,8 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	$ret['bouton'] = $les_boutons['bouton'];
 	$ret['onglet'] = $les_boutons['onglet'];
 
+	$ret['traduire'] = $arbre['traduire'];
+
 	if (isset($arbre['erreur'])) {
 		spip_log("get_infos $plug " . @join(' ', $arbre['erreur']));
 	} else {
