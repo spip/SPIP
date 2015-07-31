@@ -291,7 +291,6 @@ sera ignorée) :
 'form_prop_url_site' => 'nɔtɛn (URLU) gblogblojí ɔ tɔn',
 'forum_non_inscrit' => 'mì ná nyíkɔ , kàbí nɔtɛn, cávì lɛ nyɔ á.',
 'forum_par_auteur' => '@nyɔwlántɔ ɖókpóɖókpó@',
-'forum_probleme_database' => 'gbètákɛnxòkplé ɔ gbàfɔ, yè sìwú wlí wɛn mì tɔn hɛn á',
 'forum_titre_erreur' => 'mì klɛn àfɔ',
 
 // I
@@ -316,8 +315,6 @@ sera ignorée) :
 'icone_doc_rubrique' => 'Wěmà àkpáxwé',
 'icone_ecrire_article' => 'Wlán wékpá dévó',
 'icone_edition_site' => 'Wègbó',
-'icone_forum_administrateur' => 'kpékpé gán lɛ tɔn',
-'icone_forum_suivi' => 'àgun cícɔ',
 'icone_gestion_langues' => 'tìtòmɛ gbè lɛ tɔn ',
 'icone_informations_personnelles' => 'xógbè mi tɔn',
 'icone_interface_complet' => 'àtɛ ɔ bí',
@@ -398,7 +395,6 @@ sera ignorée) :
 'info_documents' => 'Wêmà lɛ',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'xó kpó ɖò yìyì wɛ',
 'info_ecire_message_prive' => 'wlán wɛn nú mɛ ɖê',
 'info_email_invalide' => 'yé sɔ kɛn ná e-mailù é lɔ á.',
 'info_en_cours_validation' => 'mi kpó ɖò wékpá lɛ wlán wɛ tion',

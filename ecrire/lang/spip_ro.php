@@ -317,7 +317,6 @@ Mulţumim pentru participarea dumneavoastră
 'form_prop_url_site' => 'Adresa (URL-ul) site-ului',
 'forum_non_inscrit' => 'Nu sunteţi înscris, sau adresa ori parola dumneavoastră nu sunt corecte.',
 'forum_par_auteur' => 'de @auteur@',
-'forum_probleme_database' => 'Problemă tehnică cu baza de date, mesajul dumneavoastră nu a fost înregistrat.',
 'forum_titre_erreur' => 'Eroare...',
 
 // I
@@ -342,8 +341,6 @@ Mulţumim pentru participarea dumneavoastră
 'icone_doc_rubrique' => 'Documentele rubricilor',
 'icone_ecrire_article' => 'Scrieţi un nou articol',
 'icone_edition_site' => 'Editaţi',
-'icone_forum_administrateur' => 'Forum-ul administratorilor',
-'icone_forum_suivi' => 'Urmărirea forum-urilor',
 'icone_gestion_langues' => 'Gestiunea limbilor',
 'icone_informations_personnelles' => 'Informaţii personale',
 'icone_interface_complet' => 'interfaţa completă',
@@ -424,9 +421,6 @@ Mulţumim pentru participarea dumneavoastră
 'info_documents' => 'Documente',
 'info_documents_nb' => '@nb@ documente',
 'info_documents_un' => '1 document',
-'info_echange_message' => 'SPIP permite schimbul de mesaje şi constituirea de forumuri de discuţie
- private între participanţii site-ului. Puteţi activa sau
- dezactiva această funcţionalitate.',
 'info_ecire_message_prive' => 'Scrieţi un nou mesaj privat',
 'info_email_invalide' => 'Adresă invalidă de email.',
 'info_en_cours_validation' => 'Articolele dvs. în curs de redactare',

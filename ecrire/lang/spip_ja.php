@@ -318,7 +318,6 @@ sera ignorée) :
 'form_prop_url_site' => 'サイトのURL',
 'forum_non_inscrit' => 'あなたが未登録なのか、アドレスかパスワードが間違っているのかどちらかです。',
 'forum_par_auteur' => 'by @auteur@',
-'forum_probleme_database' => 'データベースの問題、あなたのメッセージを記録することが出来ませんでした。',
 'forum_titre_erreur' => 'エラー...',
 
 // I
@@ -343,8 +342,6 @@ sera ignorée) :
 'icone_doc_rubrique' => '添付しているドキュメント',
 'icone_ecrire_article' => '新しい記事を書く',
 'icone_edition_site' => 'サイトの編集',
-'icone_forum_administrateur' => '管理者用の掲示板',
-'icone_forum_suivi' => '掲示板の続報',
 'icone_gestion_langues' => '言語管理',
 'icone_informations_personnelles' => '個人情報',
 'icone_interface_complet' => '完全なインターフェース',
@@ -425,8 +422,6 @@ sera ignorée) :
 'info_documents' => 'ドキュメント',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIPSはメッセージの交換を可能とし、サイトの参加者との私的な議論用の掲示板を作ります。あなたはこの機能を
-  有効または無効にすることが出来ます。',
 'info_ecire_message_prive' => 'プライベートなメッセージを書く',
 'info_email_invalide' => '無効なe-mailアドレス。',
 'info_en_cours_validation' => '進行中のあなたの記事',

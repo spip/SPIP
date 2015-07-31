@@ -316,7 +316,6 @@ Merci fir är Participatioun
 'form_prop_url_site' => 'Adress (URL) vum Site',
 'forum_non_inscrit' => 'Dir sidd nët ugemellt, oder d\'Adress oder d\'Passwuert si falsch.',
 'forum_par_auteur' => 'No @auteur@',
-'forum_probleme_database' => 'Problem mat der Datebank, äre Message gouf nët enregistréiert.',
 'forum_titre_erreur' => 'Fehler...',
 
 // I
@@ -341,8 +340,6 @@ Merci fir är Participatioun
 'icone_doc_rubrique' => 'Dokumenter',
 'icone_ecrire_article' => 'Neien Artikel schreiwen',
 'icone_edition_site' => 'Editioun',
-'icone_forum_administrateur' => 'Forum vun den Adminstrateuren',
-'icone_forum_suivi' => 'Suivi vun den Forum\'en',
 'icone_gestion_langues' => 'Gestioun vun de Sproochen',
 'icone_informations_personnelles' => 'Perséinlëch Informatiounen',
 'icone_interface_complet' => 'Kompletten Interface',
@@ -423,7 +420,6 @@ Merci fir är Participatioun
 'info_documents' => 'Dokumenter',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP erlaabt d\'Schécken vu Messagen a privat Forum\'en tëschent den Mataarbechter vum Site. Dir kënnt dës Fonktionnalitéit an- oder ausschalten.',
 'info_ecire_message_prive' => 'E privaten Message schécken',
 'info_email_invalide' => 'Falsch Email-Adress.',
 'info_en_cours_validation' => 'Är Artikelen an der Aarbecht',

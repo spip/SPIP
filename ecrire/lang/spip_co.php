@@ -319,7 +319,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'form_prop_url_site' => 'Indirizzu (URL) di u situ',
 'forum_non_inscrit' => 'Ùn site micca iscrittu, o l\'indirizzu o u password sò sbagliati.',
 'forum_par_auteur' => 'da @auteur@',
-'forum_probleme_database' => 'Prublemu di basa di dati, ùn hè statu arregistratu u vostru messagiu.',
 'forum_titre_erreur' => 'Errore ...',
 
 // I
@@ -345,8 +344,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'icone_doc_rubrique' => 'Ducumenti di e rùbbriche',
 'icone_ecrire_article' => 'Scrive un nuvellu artìculu',
 'icone_edition_site' => 'Scrittura',
-'icone_forum_administrateur' => 'Foru di l\'amministratori',
-'icone_forum_suivi' => 'Guardia di i fori',
 'icone_gestion_langues' => 'Gestione di e lingue',
 'icone_informations_personnelles' => 'Infurmazioni persunale',
 'icone_interface_complet' => 'interfaccia sana',
@@ -427,8 +424,6 @@ l\'indirizzu quì sottu (o sinnò, serà rifiutata a vostra dumanda) :
 'info_documents' => 'Ducumenti',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP permette u scambiu di messagi è a creazione di fori privati di ragiunate
-		frà i participanti di u situ. Pudete puru attivà o disattivà sta funziunalità.',
 'info_ecire_message_prive' => 'Scrive un messagiu privatu',
 'info_email_invalide' => 'Indirizzu email invàlida.',
 'info_en_cours_validation' => 'I vostri artìculi in corsu di scrittura',

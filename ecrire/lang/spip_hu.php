@@ -316,7 +316,6 @@ Köszönjük részvételét!
 'form_prop_url_site' => 'Honlap címe',
 'forum_non_inscrit' => 'Nincs regisztrálva, vagy a cím vagy a jelszó hibás.',
 'forum_par_auteur' => 'Írta: @auteur@',
-'forum_probleme_database' => 'Adatbázis hiba, az Ön üzenetét nem rögzítettük.',
 'forum_titre_erreur' => 'Hiba...',
 
 // I
@@ -341,8 +340,6 @@ Köszönjük részvételét!
 'icone_doc_rubrique' => 'Mellékelt dokumentumok',
 'icone_ecrire_article' => 'Új cikk írása',
 'icone_edition_site' => 'Szerkesztés',
-'icone_forum_administrateur' => 'Adminisztrátorok fóruma',
-'icone_forum_suivi' => 'Fórumok megfigyelése',
 'icone_gestion_langues' => 'Nyelvek kezelése',
 'icone_informations_personnelles' => 'Személyes adatok',
 'icone_interface_complet' => 'teljes felület',
@@ -423,8 +420,6 @@ Köszönjük részvételét!
 'info_documents' => 'Dokumentumok',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP engedi a magán üzenetcserét és vitafórumok alakítását
-  a honlap résztvevői között. Ezt a lehetőséget lehet aktiválni, vagy inaktiválni.',
 'info_ecire_message_prive' => 'Magán üzenet írása',
 'info_email_invalide' => 'Érvénytelen email cím.',
 'info_en_cours_validation' => 'Az Ön szerkesztés alatti cikkei',

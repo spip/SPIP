@@ -317,7 +317,6 @@ Merci de votre participation
 'form_prop_url_site' => 'Adresse (URL) du site',
 'forum_non_inscrit' => 'Vous n\'êtes pas inscrit, ou l\'adresse ou le mot de passe sont erronés.',
 'forum_par_auteur' => 'par @auteur@',
-'forum_probleme_database' => 'Problème de base de données, votre message n\'a pas été enregistré.',
 'forum_titre_erreur' => 'Erreur...',
 
 // I
@@ -342,8 +341,6 @@ Merci de votre participation
 'icone_doc_rubrique' => 'Documents des rubriques',
 'icone_ecrire_article' => 'Écrire un nouvel article',
 'icone_edition_site' => 'Édition',
-'icone_forum_administrateur' => 'Forum des administrateurs',
-'icone_forum_suivi' => 'Suivi des forums',
 'icone_gestion_langues' => 'Gestion des langues',
 'icone_informations_personnelles' => 'Informations personnelles',
 'icone_interface_complet' => 'interface complète',
@@ -424,9 +421,6 @@ Merci de votre participation
 'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents',
 'info_documents_un' => '1 document',
-'info_echange_message' => 'SPIP permet l\'échange de messages et la constitution de forums de discussion
-		privés entre les participants du site. Vous pouvez activer ou
-		désactiver cette fonctionnalité.',
 'info_ecire_message_prive' => 'Ecrire un message privé',
 'info_email_invalide' => 'Adresse email invalide.',
 'info_en_cours_validation' => 'Vos articles en cours de rédaction',

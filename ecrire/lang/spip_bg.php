@@ -319,7 +319,6 @@ sera ignorée) :
 'form_prop_url_site' => 'URL на сайта',
 'forum_non_inscrit' => 'Или не сте регистрирани, или адресът/ паролата са погрешни.',
 'forum_par_auteur' => 'от @auteur@',
-'forum_probleme_database' => 'Проблем с базата данни: съобщението Ви не бе запаметено.',
 'forum_titre_erreur' => 'Грешка',
 
 // I
@@ -344,8 +343,6 @@ sera ignorée) :
 'icone_doc_rubrique' => 'Документи от рубриките',
 'icone_ecrire_article' => 'Писане на нова статия',
 'icone_edition_site' => 'Редактиране на сайта',
-'icone_forum_administrateur' => 'Форум на администраторите',
-'icone_forum_suivi' => 'Допълнения във форумите',
 'icone_gestion_langues' => 'Управление на езиците',
 'icone_informations_personnelles' => 'Лични данни',
 'icone_interface_complet' => 'Пълен интерфейс',
@@ -426,9 +423,6 @@ sera ignorée) :
 'info_documents' => 'Документи',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'СПИП позволява обмяната на съобщения и създаването на лични
-  форуми за дискусия между участниците на сайта. Това свойство може
-  да се включва или изключва по желание.',
 'info_ecire_message_prive' => 'Писане на лично съобщение',
 'info_email_invalide' => 'Погрешен електронен адрес.',
 'info_en_cours_validation' => 'Статии в процес на обработка',

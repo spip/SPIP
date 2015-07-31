@@ -312,7 +312,6 @@ sera ignorée) :
 'form_prop_url_site' => 'អាសយដ្ឋាន URL នៃវ៉ែបសៃថ៍',
 'forum_non_inscrit' => '​អ្នកគ្មានបាន​ចុះ​ឈ្មោះ, ឬ ​អាសយដ្ឋាន ឬ ពាក្យសំងាត់ ខុស​។',
 'forum_par_auteur' => 'ដោយ @auteur@',
-'forum_probleme_database' => 'បញ្ហា​មូលដ្ឋានទិន្នន័យ, សារ​របស់​អ្នក ​មិនត្រូវបានរក្សា​ទុក។',
 'forum_titre_erreur' => 'កំហុស​...',
 
 // I
@@ -337,8 +336,6 @@ sera ignorée) :
 'icone_doc_rubrique' => 'ឯកសារ​ នៃមាតិកា',
 'icone_ecrire_article' => 'សរសេរ មួយ​អត្ថបទ​ថ្មី',
 'icone_edition_site' => 'កំណែសំរួល',
-'icone_forum_administrateur' => 'វេទិកា​ នៃអ្នកអភិបាល',
-'icone_forum_suivi' => 'ការ​តាមដាន​ នៃវេទិកា',
 'icone_gestion_langues' => 'ការ​គ្រប់គ្រង​ ភាសា',
 'icone_informations_personnelles' => 'ពត៌មាន​ផ្ទាល់ខ្លួន',
 'icone_interface_complet' => 'ផ្ទាំង​ប្រទាក់​ ពេញ',
@@ -419,7 +416,6 @@ sera ignorée) :
 'info_documents' => 'ឯកសារ',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP អនុញាត បណ្តូរសារ និង​ការ​បង្កើត​វេទិកា​ពិភាក្សា​ឯកជន ​រវាង​អ្នកចូលរួម នៃវ៉ែបសៃថ៍។ អ្នក​អាច​សកម្ម ឬ អសកម្ម មុខងារ នេះ។',
 'info_ecire_message_prive' => 'សរសេរ​ សារ​ឯកជន',
 'info_email_invalide' => 'អាសយដ្ឋាន​អ៊ីមែវល៍​ គ្មាន​សុពលភាព។',
 'info_en_cours_validation' => 'អត្ថបទ​ របស់​អ្នក ​កំពុង​ ត្រូវបានតែង',

@@ -307,7 +307,6 @@ Tack för ditt deltagande
 'form_prop_url_site' => 'Sajtens URL',
 'forum_non_inscrit' => 'Antingen är du inte registrerad eller så är adressen eller lösenordet felaktigt.',
 'forum_par_auteur' => 'av @auteur@',
-'forum_probleme_database' => 'Databas-problem, ditt meddelande kunde inte sparas.',
 'forum_titre_erreur' => 'Fel...',
 
 // I
@@ -332,8 +331,6 @@ Tack för ditt deltagande
 'icone_doc_rubrique' => 'Bifogade dokument',
 'icone_ecrire_article' => 'Skriv en ny artikel',
 'icone_edition_site' => 'Redigera sajten',
-'icone_forum_administrateur' => 'Administratörernas forum',
-'icone_forum_suivi' => 'Vidare till forumen',
 'icone_gestion_langues' => 'Språk-hantering',
 'icone_informations_personnelles' => 'Personlig information',
 'icone_interface_complet' => 'Fullständigt gränssnitt',
@@ -414,9 +411,6 @@ Tack för ditt deltagande
 'info_documents' => 'Dokument',
 'info_documents_nb' => '@nb@ dokument',
 'info_documents_un' => '1 dokument',
-'info_echange_message' => 'SPIP tillåter utbyte av meddelanden och skapandet av privata
-  diskussionsforum bland sajtens deltagare. Du kan tillåta
-  eller förbjuda det.',
 'info_ecire_message_prive' => 'Skriv ett privat meddelande',
 'info_email_invalide' => 'Ogiltigt epost-adress.',
 'info_en_cours_validation' => 'Dina artiklar under arbete',

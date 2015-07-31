@@ -296,7 +296,6 @@ sera ignorée) :
 'form_prop_url_site' => 'URL adresa stranice',
 'forum_non_inscrit' => 'Niste registrovani ili adresa i lozinka nisu ispravni.',
 'forum_par_auteur' => 'od @auteur@',
-'forum_probleme_database' => 'Problem sa bazom podataka, Vasa poruka nije registrovana.',
 'forum_titre_erreur' => 'Greska...',
 
 // I
@@ -321,8 +320,6 @@ sera ignorée) :
 'icone_doc_rubrique' => 'Prilozeni dokumenti',
 'icone_ecrire_article' => 'Napisi novi clanak',
 'icone_edition_site' => 'Izmjena',
-'icone_forum_administrateur' => 'Forum administratora',
-'icone_forum_suivi' => 'Pracenje foruma',
 'icone_gestion_langues' => 'Menadzer jezika',
 'icone_informations_personnelles' => 'Licne informacije',
 'icone_interface_complet' => 'cjelokupni interfejs',
@@ -403,7 +400,6 @@ sera ignorée) :
 'info_documents' => 'Dokumenti',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'SPIP dozvoljava razmjenu poruka izmedju ucesnika stranice i kreiranje privatnih foruma za diskusiju. Mozete ukljuciti ili iskljuciti ovu funkciju.',
 'info_ecire_message_prive' => 'Napisi privatnu poruku',
 'info_email_invalide' => 'Pogresna e-mail adresa.',
 'info_en_cours_validation' => 'Vasi clanci u toku uredjivanja',

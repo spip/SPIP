@@ -323,7 +323,6 @@ Arsusiwitamatxa yuspagara
 'form_prop_url_site' => 'Qamawin (URL) utjawipa',
 'forum_non_inscrit' => 'Janiw qillqataktati, utjawich imt\'atach pantjatawa.',
 'forum_par_auteur' => 'lurata @auteur@',
-'forum_probleme_database' => 'Pirwan yatiyawinakax jan waliru puritaw, yatiyawimax janiw qillqaskiti',
 'forum_titre_erreur' => 'Pantjata...',
 
 // I
@@ -349,8 +348,6 @@ Arsusiwitamatxa yuspagara
 'icone_doc_rubrique' => 'T\'aqanakan qillqa q\'ipinaka',
 'icone_ecrire_article' => 'Machaq qillqata',
 'icone_edition_site' => 'Qamaw askiptawi',
-'icone_forum_administrateur' => 'Aruskipañawi apnaqirinakana',
-'icone_forum_suivi' => 'Aruskipañanakat uñch\'ukiwi',
 'icone_gestion_langues' => 'Arunakat apnaqawi',
 'icone_informations_personnelles' => 'Sapa maynit yatiyawinaka
 ',
@@ -432,7 +429,6 @@ Arsusiwitamatxa yuspagara
 'info_documents' => 'Qillqa q\'ipinaka',
 'info_documents_nb' => '@nb@ documents', # NEW
 'info_documents_un' => '1 document', # NEW
-'info_echange_message' => 'Kuntix lurañatak muntaxa, spip ukax yatiyawinak turkakipi ukhamarak jark\'at aruskipañanak qamawit arsurinakkam utji. Akax naktataspaw ukjamarak jiwt\'ayataspaw.',
 'info_ecire_message_prive' => 'Mä jark\'at yatiyaw qillqaña',
 'info_email_invalide' => 'Aruskipayirin utjawix janiw walikiti.',
 'info_en_cours_validation' => 'Qillqatanakamax lurasiskiwa',

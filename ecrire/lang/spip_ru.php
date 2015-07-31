@@ -316,7 +316,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_prop_url_site' => 'URL сайта',
 'forum_non_inscrit' => 'Или Вы не регистрированы, или адрес или пароль неправильны.',
 'forum_par_auteur' => ' @auteur@',
-'forum_probleme_database' => 'Проблема базы данных, ваше сообщение не могло быть записано.',
 'forum_titre_erreur' => 'Ошибка...',
 
 // I
@@ -341,8 +340,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_doc_rubrique' => 'Приложенные документы',
 'icone_ecrire_article' => 'Написать новую статью',
 'icone_edition_site' => 'Редактор сайта',
-'icone_forum_administrateur' => 'Форум администраторов',
-'icone_forum_suivi' => 'Отслеживать форумы',
 'icone_gestion_langues' => 'Языковые настройки',
 'icone_informations_personnelles' => 'Персональная информация',
 'icone_interface_complet' => 'Полный интерфейс',
@@ -423,9 +420,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_documents' => 'Документы',
 'info_documents_nb' => '@nb@ файлов',
 'info_documents_un' => '1 файл',
-'info_echange_message' => 'SPIP позволяет организовывать приватные
-  форумы для обсуждений между участниками сайта. Вы можете включить или 
-  отключить эту функцию.',
 'info_ecire_message_prive' => 'Написать личное сообщение',
 'info_email_invalide' => 'Неправильный e-mail адрес',
 'info_en_cours_validation' => 'Ваша статья в прогрессе',
