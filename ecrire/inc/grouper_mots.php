@@ -75,7 +75,8 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 	$titre = typo($row['titre']);
 	$descriptif = entites_html($row['descriptif']);
 			
-	if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0) {
+	if (autoriser('modifier', 'groupemots', $id_groupe)
+	OR $occurrences['articles'][$id_mot] > 0) {
 		$h = generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_retour('mots_tous') . "#editer_mot-$id_groupe");
 		if ($descriptif)  $descriptif = " title=\"$descriptif\"";
 		$titre = "<a href='$h' class='liste-mot'$descriptif>$titre</a>";
@@ -109,14 +110,16 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 		$texte_lie[] = $nr." "._T('info_rubriques_02');
 
 	$texte_lie = join($texte_lie,", ");
-				
+
 	$vals[] = $texte_lie;
 
 	if (autoriser('modifier','groupemots',$id_groupe)) {
-		$clic =  _T('info_supprimer_mot')
+		$clic =  '<small>'
+		._T('info_supprimer_mot')
 		. "&nbsp;<img src='"
 		. _DIR_IMG_PACK
-		. "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' />";
+		. "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' />"
+		. '</small>';
 
 		if ($nr OR $na OR $ns OR $nb)
 			$href = "<a href='"
@@ -129,7 +132,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 		$vals[] = "<div style='text-align:right;'>$href</div>";
 	} 
 	
-	return $vals;			
+	return $vals;
 }
 
 // http://doc.spip.org/@generer_supprimer_mot
