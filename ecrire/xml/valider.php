@@ -12,34 +12,38 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Validateur XML en deux passes, fonde sur SAX pour la premiere
+// Faudrait faire deux classes car pour la premiere passe
+// on a les memes methodes et variables que l'indenteur
+
+class ValidateurXML {
+
 // http://doc.spip.org/@validerElement
 function validerElement($phraseur, $name, $attrs)
 {
-	global $phraseur_xml;
-
-	if (!($p = isset($phraseur_xml->dtc->elements[$name]))) {
+	if (!($p = isset($this->dtc->elements[$name]))) {
 		if ($p = strpos($name, ':')) {
 			$name = substr($name, $p+1);
-			$p = isset($phraseur_xml->dtc->elements[$name]);
+			$p = isset($this->dtc->elements[$name]);
 		}
 		if (!$p) {
-			$phraseur_xml->err[]= " <b>$name</b> "
+			$this->err[]= " <b>$name</b> "
 			  . _T('zxml_inconnu_balise')
 			  . ' '
-			  .  coordonnees_erreur($phraseur);
+			  .  coordonnees_erreur($this);
 			return; 
 		}
 	}
 	// controler les filles illegitimes, ca suffit 
-	$depth = $phraseur_xml->depth;
-	$ouvrant = $phraseur_xml->ouvrant;
+	$depth = $this->depth;
+	$ouvrant = $this->ouvrant;
 #	spip_log("trouve $name apres " . $ouvrant[$depth]);
 	if (isset($ouvrant[$depth])) {
 	    if (preg_match('/^\s*(\w+)/', $ouvrant[$depth], $r)) {
 	      $pere = $r[1];
 #	      spip_log("pere $pere");
-	      if (isset($phraseur_xml->dtc->elements[$pere])) {
-		$fils = $phraseur_xml->dtc->elements[$pere];
+	      if (isset($this->dtc->elements[$pere])) {
+		$fils = $this->dtc->elements[$pere];
 #		spip_log("rejeton $name fils " . @join(',',$fils));
 		if (!($p = @in_array($name, $fils))) {
 			if ($p = strpos($name, ':')) {
@@ -48,32 +52,32 @@ function validerElement($phraseur, $name, $attrs)
 			}
 		}
 		if (!$p) {
-	          $bons_peres = @join ('</b>, <b>', $phraseur_xml->dtc->peres[$name]);
-	          $phraseur_xml->err[]= " <b>$name</b> "
+	          $bons_peres = @join ('</b>, <b>', $this->dtc->peres[$name]);
+	          $this->err[]= " <b>$name</b> "
 	            . _T('zxml_non_fils')
 	            . ' <b>'
 	            .  $pere
 	            . '</b>'
 	            . (!$bons_peres ? ''
 	               : ('<p style="font-size: 80%"> '._T('zxml_mais_de').' <b>'. $bons_peres . '</b></p>'))
-		    .  coordonnees_erreur($phraseur);
-		} else if ($phraseur_xml->dtc->regles[$pere][0]=='/') {
-		  $phraseur_xml->fratrie[substr($depth,2)].= "$name ";
+		    .  coordonnees_erreur($this);
+		} else if ($this->dtc->regles[$pere][0]=='/') {
+		  $this->fratrie[substr($depth,2)].= "$name ";
 		}
 	      }
 	    }
 	}
 	// Init de la suite des balises a memoriser si regle difficile
-	if ($phraseur_xml->dtc->regles[$name][0]=='/')
-	    $phraseur_xml->fratrie[$depth]='';
-	if (isset($phraseur_xml->dtc->attributs[$name])) {
-		  foreach ($phraseur_xml->dtc->attributs[$name] as $n => $v)
+	if ($this->dtc->regles[$name][0]=='/')
+	    $this->fratrie[$depth]='';
+	if (isset($this->dtc->attributs[$name])) {
+		  foreach ($this->dtc->attributs[$name] as $n => $v)
 		    { if (($v[1] == '#REQUIRED') AND (!isset($attrs[$n])))
-			$phraseur_xml->err[]= " <b>$n</b>"
+			$this->err[]= " <b>$n</b>"
 			  . '&nbsp;:&nbsp;'
 			  . _T('zxml_obligatoire_attribut')
 			  . " <b>$name</b>"
-			  .  coordonnees_erreur($phraseur);
+			  .  coordonnees_erreur($this);
 		    }
 	}
 }
@@ -81,13 +85,11 @@ function validerElement($phraseur, $name, $attrs)
 // http://doc.spip.org/@validerAttribut
 function validerAttribut($phraseur, $name, $val, $bal)
 {
-	global $phraseur_xml;
-
 	// Si la balise est inconnue, eviter d'insister
-	if (!isset($phraseur_xml->dtc->attributs[$bal]))
+	if (!isset($this->dtc->attributs[$bal]))
 		return ;
 		
-	$a = $phraseur_xml->dtc->attributs[$bal];
+	$a = $this->dtc->attributs[$bal];
 	if (!isset($a[$name])) {
 		$bons = join(', ',array_keys($a));
 		if ($bons)
@@ -98,64 +100,58 @@ function validerAttribut($phraseur, $name, $val, $bal)
 		    "'";
 		$bons .= " style='font-weight: bold'";
 
-		$phraseur_xml->err[]= " <b>$name</b> "
+		$this->err[]= " <b>$name</b> "
 		. _T('zxml_inconnu_attribut').' '._T('zxml_de')
 		. " <a$bons>$bal</a> ("
 		. _T('zxml_survoler')
 		. ")"
-		.  coordonnees_erreur($phraseur);
+		.  coordonnees_erreur($this);
 	} else{
 		$type =  $a[$name][0];
 		if (!preg_match('/^\w+$/', $type))
-			valider_motif($phraseur, $name, $val, $bal, $type);
-		else if (function_exists($f = 'validerAttribut_' . $type))
-			$f($phraseur, $name, $val, $bal);
+			$this->valider_motif($phraseur, $name, $val, $bal, $type);
+		else if (method_exists($this, $f = 'validerAttribut_' . $type))
+			$this->$f($phraseur, $name, $val, $bal);
+#		else spip_log("$type type d'attribut inconnu");
 	}
 }
 
 // http://doc.spip.org/@validerAttribut_ID
 function validerAttribut_ID($phraseur, $name, $val, $bal)
 {
-	global $phraseur_xml;
-
-	if (isset($phraseur_xml->ids[$val])) {
-		list($l,$c) = $phraseur_xml->ids[$val];
-		$phraseur_xml->err[]= " <p><b>$val</b> "
+	if (isset($this->ids[$val])) {
+		list($l,$c) = $this->ids[$val];
+		$this->err[]= " <p><b>$val</b> "
 		      . _T('zxml_valeur_attribut')
 		      . " <b>$name</b> "
 		      . _T('zxml_de')
 		      . " <b>$bal</b> "
 		      . _T('zxml_vu')
 		      . " (L$l,C$c)"
-		      .  coordonnees_erreur($phraseur);
+		      .  coordonnees_erreur($this);
 	} else {
-		valider_motif($phraseur, $name, $val, $bal, _REGEXP_ID);
-		$phraseur_xml->ids[$val] = array(xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+		$this->valider_motif($phraseur, $name, $val, $bal, _REGEXP_ID);
+		$this->ids[$val] = array(xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 	}
 }
 
 // http://doc.spip.org/@validerAttribut_IDREF
 function validerAttribut_IDREF($phraseur, $name, $val, $bal)
 {
-	global $phraseur_xml;
-	$phraseur_xml->idrefs[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+	$this->idrefs[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 }
 
 // http://doc.spip.org/@validerAttribut_IDREFS
 function validerAttribut_IDREFS($phraseur, $name, $val, $bal)
 {
-	global $phraseur_xml;
-
-	$phraseur_xml->idrefss[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
+	$this->idrefss[] = array($val, xml_get_current_line_number($phraseur), xml_get_current_column_number($phraseur));
 }
 
 // http://doc.spip.org/@valider_motif
 function valider_motif($phraseur, $name, $val, $bal, $motif)
 {
-	global $phraseur_xml;
-
 	if (!preg_match($motif, $val)) {
-		$phraseur_xml->err[]= " <p><b>$val</b> "
+		$this->err[]= " <p><b>$val</b> "
 		. _T('zxml_valeur_attribut')
 		. " <b>$name</b> "
 		. _T('zxml_de')
@@ -163,15 +159,15 @@ function valider_motif($phraseur, $name, $val, $bal, $motif)
 		. _T('zxml_non_conforme')
 		. "</p><p>"
 		. "<b>" . $motif . "</b></p>"
-		.  coordonnees_erreur($phraseur);
+		.  coordonnees_erreur($this);
 	}
 }
 
 // http://doc.spip.org/@valider_idref
-function valider_idref(&$own, $nom, $ligne, $col)
+function valider_idref($nom, $ligne, $col)
 {
-	if (!isset($own->ids[$nom]))
-		$own->err[]= " <p><b>$nom</b> "
+	if (!isset($this->ids[$nom]))
+		$this->err[]= " <p><b>$nom</b> "
 		. _T('zxml_inconnu_id')
 		. " "
 		. $ligne
@@ -179,104 +175,96 @@ function valider_idref(&$own, $nom, $ligne, $col)
 		. $col;
 }
 
-// http://doc.spip.org/@xml_valider_passe2_dist
-function xml_valider_passe2_dist(&$own)
+function valider_passe2()
 {
-	if (!$own->err) {
-		foreach ($own->idrefs as $idref) {
+	if (!$this->err) {
+		foreach ($this->idrefs as $idref) {
 			list($nom, $ligne, $col) = $idref;
-			valider_idref($own, $nom, $ligne, $col);
+			$this->valider_idref($nom, $ligne, $col);
 		}
-		foreach ($own->idrefss as $idref) {
+		foreach ($this->idrefss as $idref) {
 			list($noms, $ligne, $col) = $idref;
 			foreach(preg_split('/\s+/', $noms) as $nom)
-				valider_idref($own, $nom, $ligne, $col);
+				$this->valider_idref($nom, $ligne, $col);
 		}
 	}
 }
 
-class ValidateurXML {
-
 // http://doc.spip.org/@debutElement
 function debutElement($phraseur, $name, $attrs)
 { 
-	global $phraseur_xml;
+	if ($this->dtc->elements)
+		$this->validerElement($phraseur, $name, $attrs);
 
-	if ($phraseur_xml->dtc->elements)
-		validerElement($phraseur, $name, $attrs);
-
-	xml_debutElement($phraseur, $name, $attrs);
-	$depth = &$phraseur_xml->depth;
-	$phraseur_xml->debuts[$depth] =  strlen($phraseur_xml->res);
+	xml_debutElement($this, $name, $attrs);
+	$depth = $this->depth;
+	$this->debuts[$depth] =  strlen($this->res);
 	foreach ($attrs as $k => $v) {
-		validerAttribut($phraseur, $k, $v, $name);
+		$this->validerAttribut($phraseur, $k, $v, $name);
 	}
 }
 
 // http://doc.spip.org/@finElement
 function finElement($phraseur, $name)
 {
-	global $phraseur_xml;
+	$depth = $this->depth;
+	$contenu = $this->contenu;
 
-	$depth = &$phraseur_xml->depth;
-	$contenu = &$phraseur_xml->contenu;
-
-	$n = strlen($phraseur_xml->res);
+	$n = strlen($this->res);
 	$c = strlen(trim($contenu[$depth]));
-	$k = $phraseur_xml->debuts[$depth];
+	$k = $this->debuts[$depth];
 
-	$regle = $phraseur_xml->dtc->regles[$name];
+	$regle = $this->dtc->regles[$name];
 	$vide = ($regle  == 'EMPTY');
 	// controler que les balises devant etre vides le sont 
 	if ($vide) {
-	  if ($n <> ($k + $c))
-			$phraseur_xml->err[]= " <p><b>$name</b> "
+		if ($n <> ($k + $c))
+			$this->err[]= " <p><b>$name</b> "
 			. _T('zxml_nonvide_balise')
-			.  coordonnees_erreur($phraseur);
+			.  coordonnees_erreur($this);
 	// pour les regles PCDATA ou iteration de disjonction, tout est fait
 	} elseif ($regle AND ($regle != '*')) {
 		if ($regle == '+') {
 		    // iteration de disjonction non vide: 1 balise au -
 			if ($n == $k) {
-				$phraseur_xml->err[]= " <p>\n<b>$name</b> "
+				$this->err[]= " <p>\n<b>$name</b> "
 				  . _T('zxml_vide_balise')
-				  .  coordonnees_erreur($phraseur);
+				  .  coordonnees_erreur($this);
 			}
 		} else {
-			$f = $phraseur_xml->fratrie[substr($depth,2)];
+			$f = $this->fratrie[substr($depth,2)];
 			if (!preg_match($regle, $f))
-				$phraseur_xml->err[]= " <p>\n<b>$name</b> "
+				$this->err[]= " <p>\n<b>$name</b> "
 				  .  _T('zxml_succession_fils_incorrecte')
 				  . '&nbsp;: <b>'
 				  . $f
 				  . '</b>'
-				  .  coordonnees_erreur($phraseur);
+				  .  coordonnees_erreur($this);
 		}
 
 	}
-	xml_finElement($phraseur, $name, $vide);
+	xml_finElement($this, $name, $vide);
 }
 
 // http://doc.spip.org/@textElement
 function textElement($phraseur, $data)
 {	
-	global $phraseur_xml;
 	if (trim($data)) {
-		$d = $phraseur_xml->depth;
-		$d = $phraseur_xml->ouvrant[$d];
+		$d = $this->depth;
+		$d = $this->ouvrant[$d];
 		preg_match('/^\s*(\S+)/', $d, $m);
-		if ($phraseur_xml->dtc->pcdata[$m[1]]) {
-			$phraseur_xml->err[]= " <p><b>". $m[1] . "</b> "
+		if ($this->dtc->pcdata[$m[1]]) {
+			$this->err[]= " <p><b>". $m[1] . "</b> "
 			. _T('zxml_nonvide_balise') // message a affiner
-			.  coordonnees_erreur($phraseur);
+			.  coordonnees_erreur($this);
 		}
 	}
-	xml_textElement($phraseur, $data);
+	xml_textElement($this, $data);
 }
 
 // http://doc.spip.org/@PiElement
 function PiElement($phraseur, $target, $data)
-{	xml_PiElement($phraseur, $target, $data);}
+{	xml_PiElement($this, $target, $data);}
 
 // Denonciation des entitees XML inconnues
 // Pour contourner le bug de conception de SAX qui ne signale pas si elles
@@ -288,59 +276,60 @@ function PiElement($phraseur, $target, $data)
 // http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
 {	
-	global $phraseur_xml;
-
 	if (!preg_match('/^<!--/', $data)
 	AND (preg_match_all('/&([^;]*)?/', $data, $r, PREG_SET_ORDER)))
 		foreach ($r as $m) {
 			list($t,$e) = $m;
-			if (!isset($phraseur_xml->dtc->entites[$e]))
-				$phraseur_xml->err[]= " <b>$e</b> "
+			if (!isset($this->dtc->entites[$e]))
+				$this->err[]= " <b>$e</b> "
 				  . _T('zxml_inconnu_entite')
 				  . ' '
-				  .  coordonnees_erreur($phraseur);
+				  .  coordonnees_erreur($this);
 		}
 
-	xml_defautElement($phraseur, $data);
+	xml_defautElement($this, $data);
 }
 
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 { 
-	xml_parsestring($phraseur, $data);
+	xml_parsestring($this, $data);
 
 	if (!$this->dtc OR preg_match(',^' . _MESSAGE_DOCTYPE . ',', $data)) {
 		$GLOBALS['xhtml_error'] .= 'DOCTYPE ? 0 0<br />';
 		$this->err[]= ('DOCTYPE ? 0 0<br />');
 	} else {
-		$valider_passe2 = charger_fonction('valider_passe2', 'xml');
-		$valider_passe2($this);
+		$this->valider_passe2($this);
 	}
-	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
 }
 
  var $depth = "";
  var $res = "";
+ var $err = array();
  var $contenu = array();
  var $ouvrant = array();
  var $reperes = array();
-
+ var $entete = '';
+ var $page = '';
  var $dtc = NULL;
- var $err = array();
+ var $sax = NULL;
+
  var $ids = array();
  var $idrefs = array();
  var $idrefss = array();
  var $debuts = array();
  var $fratrie = array();
+
 }
 
 // http://doc.spip.org/@xml_valider_dist
 function xml_valider_dist($page, $apply=false)
 {
-	spip_timer('valider');
 	$sax = charger_fonction('sax', 'xml');
-	$sax = $sax($page, $apply, $GLOBALS['phraseur_xml'] = new ValidateurXML());
-	spip_log("validation : " . spip_timer('valider'));
-	return $sax;
+	$f = new ValidateurXML();
+	$sax($page, $apply, $f);
+	if (!$f->err) return $f->entete . $f->res;
+	$GLOBALS['xhtml_error'] = join('<br />', $f->err) . '<br />';
+	return $f->entete . $f->page;
 }
 ?>

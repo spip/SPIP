@@ -16,29 +16,28 @@ class IndenteurXML {
 
 // http://doc.spip.org/@debutElement
 function debutElement($phraseur, $name, $attrs)
-{ xml_debutElement($phraseur, $name, $attrs);}
+{ xml_debutElement($this, $name, $attrs);}
 
 // http://doc.spip.org/@finElement
 function finElement($phraseur, $name)
-{ xml_finElement($phraseur, $name);}
+{ xml_finElement($this, $name);}
 
 // http://doc.spip.org/@textElement
 function textElement($phraseur, $data)
-{ xml_textElement($phraseur, $data);}
+{ xml_textElement($this, $data);}
 
 // http://doc.spip.org/@PiElement
 function PiElement($phraseur, $target, $data)
-{ xml_PiElement($phraseur, $target, $data);}
+{ xml_PiElement($this, $target, $data);}
 
 // http://doc.spip.org/@defautElement
 function defautElement($phraseur, $data)
-{  xml_defautElement($phraseur, $data);}
+{  xml_defautElement($this, $data);}
 
 // http://doc.spip.org/@phraserTout
 function phraserTout($phraseur, $data)
 {
-	xml_parsestring($phraseur, $data);
-	return !$this->err ?  $this->res : join('<br />', $this->err) . '<br />';
+	xml_parsestring($this, $data);
 }
 
  var $depth = "";
@@ -47,16 +46,21 @@ function phraserTout($phraseur, $data)
  var $contenu = array();
  var $ouvrant = array();
  var $reperes = array();
-
+ var $entete = '';
+ var $page = '';
  var $dtc = NULL;
+ var $sax = NULL;
 }
 
 // http://doc.spip.org/@xml_indenter_dist
 function xml_indenter_dist($page, $apply=false)
 {
 	$sax = charger_fonction('sax', 'xml');
-	return $sax($page, $apply, $GLOBALS['phraseur_xml'] = new IndenteurXML());
-
+	$f = new IndenteurXML();
+	$sax($page, $apply, $f);
+	if (!$f->err) return $f->entete . $f->res;
+	spip_log("indentation impossible " . count($f->err) . " erreurs de validation");
+	return $f->entete . $f->page;
 }
 
 ?>
