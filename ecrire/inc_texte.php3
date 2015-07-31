@@ -839,13 +839,19 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	$letexte = trim($letexte);
 
+
+	if ($flag_str_replace && !$flag_preg_replace) {
+		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
+	} else {
+		$letexte = ereg_remplace("/\n(----+|____+)/", "\n<hr class=\"spip\">\n", $letexte);
+	}
+		
 	// les listes
 	if (ereg("\n-[*#]", "\n".$letexte))
 		$letexte = traiter_listes($letexte);
 
 	// autres raccourcis
 	if ($flag_str_replace && !$flag_preg_replace) {
-		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
 		$letexte = str_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
 		$letexte = str_replace("\n_ +", "\n<br>",$letexte);
@@ -862,7 +868,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 	else {
 		$cherche1 = array(
-			/* 0 */ 	"/\n(----+|____+)/",
+			//* 0 */ 	"/\n(----+|____+)/",
 			/* 1 */ 	"/^- */",
 			/* 2 */ 	"/\n- */",
 			/* 3 */ 	"/\n_ +/",
@@ -879,7 +885,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 14 */	"/\n/"
 		);
 		$remplace1 = array(
-			/* 0 */ 	"\n<hr class=\"spip\">\n",
+			//* 0 */ 	"\n<hr class=\"spip\">\n",
 			/* 1 */ 	"$puce&nbsp;",
 			/* 2 */ 	"\n<br>$puce&nbsp;",
 			/* 3 */ 	"\n<br>",
