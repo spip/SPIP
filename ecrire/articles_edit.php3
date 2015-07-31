@@ -312,7 +312,7 @@ echo "<P><HR><P>";
 	if (($articles_soustitre != "non") OR strlen($soustitre) > 0) {
 		echo "<B>Sous-titre</B>";
 		echo aide ("arttitre");
-		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><P>";
+		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><br><br>";
 	}
 	else {
 		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";	
@@ -447,7 +447,7 @@ echo "<P><HR><P>";
 
 	echo "<DIV ALIGN='right'>";
 	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
-	echo "</FORM>";
+	echo "</DIV></FORM>";
 
 fin_cadre_formulaire();
 

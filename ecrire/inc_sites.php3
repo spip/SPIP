@@ -100,15 +100,16 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 	
 	$query="SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result=spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	if ($row = mysql_fetch_array($result))
 		$la_query=$row["url_syndic"];
+	else
+		return;
 
-		$moderation = $row['moderation'];
-		if ($moderation == 'oui')
-			$moderation = 'dispo';	// a valider
-		else
-			$moderation = 'publie';	// en ligne sans validation
-	}
+	$moderation = $row['moderation'];
+	if ($moderation == 'oui')
+		$moderation = 'dispo';	// a valider
+	else
+		$moderation = 'publie';	// en ligne sans validation
 
 	$le_retour=recuperer_page($la_query);
 
@@ -154,10 +155,9 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 					
 					// Indexation pour moteur
 					$id_syndic_article=mysql_insert_id();
-					//if (lire_meta('activer_moteur') == 'oui') {
-					//	indexer_syndic_article($id_syndic_article);
-					//}
-					
+					if (lire_meta('activer_moteur') == 'oui') {
+						indexer_syndic_article($id_syndic_article);
+					}
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
@@ -190,7 +190,7 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
 				$result_deja=spip_query($query_deja);
 				if (mysql_num_rows($result_deja)==0){
-					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='publie'";
+					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='$moderation'";
 					$result_syndic=spip_query($query_syndic);
 					
 					// Indexation pour moteur
