@@ -40,7 +40,7 @@ function install_etape_ldap2_dist()
 	}
 	$ldap_link = ldap_connect($adresse_ldap, $port_ldap);
 	$erreur = "ldap_connect($adresse_ldap, $port_ldap)";
-	echo "$ldap_link = ldap_connect($adresse_ldap, $port_ldap)";
+
 	if ($ldap_link) {
 		if ( !ldap_set_option($ldap_link, LDAP_OPT_PROTOCOL_VERSION, $protocole_ldap) ) {
 			$protocole_ldap = 2 ;
@@ -59,8 +59,7 @@ function install_etape_ldap2_dist()
 	}
 
 	if ($ldap_link) {
-		echo info_etape(_T('titre_connexion_ldap'),info_progression_etape(2,'etape_ldap','install/'),_T('info_connexion_ldap_ok'));
-
+		echo info_etape(_T('titre_connexion_ldap'),info_progression_etape(2,'etape_ldap','install/')), _T('info_connexion_ldap_ok');
 		echo generer_form_ecrire('install', (
 		  "\n<input type='hidden' name='etape' value='ldap3' />"
 		. "\n<input type='hidden' name='adresse_ldap' value=\"$adresse_ldap\" />"
