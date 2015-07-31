@@ -28,22 +28,22 @@ function separer_paras($texte, $paras = "") {
 
 // http://doc.spip.org/@replace_fragment
 function replace_fragment($id_article, $version_min, $version_max, $id_fragment, $fragment) {
-	global $flag_gz;
-
 	$fragment = serialize($fragment);
 	$compress = 0;
-	/* pour le portage en PG il faut l'equivalente au mysql_escape_string
-	 et deporter son appel dans les fonctions d'abstraction. A revoir.
-		if ($flag_gz) {
+
+	// pour le portage en PG il faut l'equivalente au mysql_escape_string
+	// et deporter son appel dans les fonctions d'abstraction.
+	if ($GLOBALS['flag_gz']
+	AND $GLOBALS['connexions'][0]['type'] == 'mysql') {
 		$s = gzcompress($fragment);
 		if (strlen($s) < strlen($fragment)) {
-			//spip_log("gain gz: ".(100 - 100 * strlen($s) / strlen($fragment)));
+			# spip_log("gain gz: ".intval(100 - 100 * strlen($s) / strlen($fragment)));
 			$compress = 1;
 			$fragment = $s;
 		}
-	// Attention a bien echapper le $fragment qui est en binaire
-		} */
+	}
 
+	// Attention a echapper $fragment, binaire potentiellement gz
 	return array(
 		     'id_article' => intval($id_article),
 		     'id_fragment' => intval($id_fragment),
@@ -588,7 +588,7 @@ function propre_diff($texte) {
 function liste_champs_versionnes($table) {
 	if ($table == 'spip_articles')
 		return array('surtitre', 'titre', 'soustitre', 'descriptif',
-		'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+		'nom_site', 'url_site', 'chapo', 'texte', 'ps', 'id_rubrique');
 	else
 		return array();
 }

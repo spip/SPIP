@@ -25,17 +25,18 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 {
 	global $les_notes, $champs_extra, $spip_lang_left, $spip_lang_right;
 
-	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
-
 	if (!autoriser('voirrevisions', 'article', $id_article) 
-		OR !$row) {
+	OR !$row = sql_fetsel("*", "spip_articles", "id_article="._q($id_article))){
 		include_spip('inc/minipres');
 		echo minipres();
-	} else {
+		return;
+	}
+
 	include_spip('inc/suivi_versions');
 	include_spip('inc/presentation');
 	include_spip('inc/revisions');
-	$commencer_page = charger_fonction('commencer_page', 'inc');
+
+	// recuperer les donnees actuelles de l'article
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
 	$titre_defaut = $titre = $row["titre"];
@@ -57,20 +58,8 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 	$id_trad = $row["id_trad"];
 	$lang = $row["lang"];
 
-	$last_version = false;
-	if (!$id_version) {
-		$id_version = $row['id_version'];
-		$last_version = true;
-	}
-
-	$textes = revision_comparee($id_article, $id_version, 'complet', $id_diff);
-	if (is_array($textes)) foreach ($textes as $var => $t) 
-	  { 
-	    //	cles de $textes = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-	    // defini dans suivi_versions.
-	    // Suicidaire. A reerire.
-	    $$var = $t;}
-
+	// Afficher le debut de la page (y compris rubrique)
+	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('info_historique')." &laquo; $titre &raquo;", "naviguer", "articles", $id_rubrique);
 
 	echo debut_grand_cadre(true);
@@ -101,15 +90,46 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 
 	echo debut_cadre_relief('', true);
 
+
+//
+// recuperer les donnees versionnees
+//
+	$last_version = false;
+	if (!$id_version) {
+		$id_version = $row['id_version'];
+		$last_version = true;
+	}
+	$textes = revision_comparee($id_article, $id_version, 'complet', $id_diff);
+
+	unset($id_rubrique); # on n'en n'aura besoin que si on affiche un diff
+
+	if (is_array($textes)) foreach ($textes as $var => $t) 
+	  { 
+	    //	cles de $textes = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
+	    // defini dans suivi_versions.
+	    // Suicidaire. A reerire.
+	    $$var = $t;
+	  }
+
+
+
+
 //
 // Titre, surtitre, sous-titre
 //
 
 	echo "\n<table id='diff' cellpadding='0' cellspacing='0' border='0' width='100%'>";
 	echo "<tr><td style='width: 100%' valign='top'>";
+
+	if (isset($id_rubrique)) {
+		echo "<div dir='$lang_dir' class='arial1 spip_x-small'>",
+		$id_rubrique,
+		"</div>\n";
+	}
+
 	if ($surtitre) {
 		echo "<span  dir='$lang_dir'><span class='arial1 spip_medium'><b>", propre_diff($surtitre), "</b></span></span>\n";
-}
+	}
 	echo gros_titre(propre_diff($titre), puce_statut($statut_article, " style='vertical-align: center'") . " &nbsp; ", false);
 
 	if ($soustitre) {
@@ -149,7 +169,10 @@ function exec_articles_versions_args($id_article, $id_version, $id_diff)
 //
 
 
-	$result = sql_select("id_version, titre_version, date, id_auteur	", "spip_versions", "id_article=$id_article", "", "id_version DESC");
+	$result = sql_select("id_version, titre_version, date, id_auteur",
+		"spip_versions",
+		"id_article="._q($id_article)." AND  id_version>0",
+		"", "id_version DESC");
 
 	$zap = sql_count($result);
 
@@ -268,7 +291,7 @@ echo fin_cadre_relief(true);
 
 
 echo  fin_gauche(), fin_page();
-	}
+
 }
 
 ?>
