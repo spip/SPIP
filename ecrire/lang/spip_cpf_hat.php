@@ -269,7 +269,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'icone_sites_references' => 'Sit referansé yo',
 	'icone_statistiques' => 'Rezilta estatistik sit la',
 	'icone_suivi_activite' => 'Gad lavi sit la',
-	'icone_suivi_actualite' => 'Evolisyon  sit la',
+	'icone_suivi_actualite' => 'Evolisyon sit la',
 	'icone_suivi_pettions' => 'Swiv/ okipe tout petisyon  ',
 	'icone_suivi_revisions' => 'Chanjman nan atik yo',
 	'icone_supprimer_document' => 'Kraze dokiman nan',
@@ -326,7 +326,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'info_erreur_squelette2' => 'Oken leskelèt <b>@fichier@</b> se pa disponib...',
 	'info_erreur_systeme' => 'Erè sistèm (errno @errsys@)',
 	'info_erreur_systeme2' => 'Diskédir se petèt plen osnon bazdoné gen domaj <br />
- <font color=\'red\'>Esey w<a href=\'@script@\'>aranje baz-la</a>,
+ <font color=’red’>Esey w<a href=’@script@’>aranje baz-la</a>,
  osnon kontak lébèjè ou.</font>', # MODIF
 	'info_fini' => 'W gen fin fini !',
 	'info_format_image' => 'Kèk sòt imaj SPIP kapab itilize pou kreye vinyèt : @gd_formats@.',
@@ -365,9 +365,9 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'info_multilinguisme' => 'Miltilengwism',
 	'info_nom_non_utilisateurs_connectes' => 'Kouman ou rele pap parèt nan lis zitilizatè an liy.',
 	'info_nom_utilisateurs_connectes' => 'Kouman w rele ap parèt nan lis zitilizatè  an liy.',
-	'info_nombre_en_ligne' => 'Moun se an liy  :',
+	'info_nombre_en_ligne' => 'Moun se an liy :',
 	'info_non_resultat' => 'gen pa oken rézilta pou "@cherche_mot@"',
-	'info_non_utilisation_messagerie' => 'W p\'ap itilize lakazmodékri andan sit-la.',
+	'info_non_utilisation_messagerie' => 'W p’ap itilize lakazmodékri andan sit-la.',
 	'info_nouveau_message' => 'W GEN YON NOUVO MESAJ',
 	'info_nouveaux_messages' => 'W GEN @total_messages@ NOUVO MESAJ YO',
 	'info_numero_abbreviation' => 'N° ',
@@ -486,7 +486,7 @@ sit "@nom_site_spip@" (@adresse_login@) :', # MODIF
 	'pass_choix_pass' => 'Mèsi chwazi nouvo modpas ou :',
 	'pass_erreur' => 'Erè',
 	'pass_erreur_acces_refuse' => '<b>Erè :</b> w gen pa pli oken aksé sou sit-la.',
-	'pass_erreur_code_inconnu' => '<b>Erè :</b> kod-la ap\'pa koresponn oken vizitè ki genyen aksé sou sit-la.',
+	'pass_erreur_code_inconnu' => '<b>Erè :</b> kod-la ap’pa koresponn oken vizitè ki genyen aksé sou sit-la.',
 	'pass_erreur_non_enregistre' => '<b>Erè :</b> ladrès <tt>@email_oubli@</tt> ap pa enskri sou sit-la.',
 	'pass_erreur_non_valide' => '<b>Erè :</b> limèl sa-a <tt>@email_oubli@</tt> ki pa mache !',
 	'pass_erreur_probleme_technique' => '<b>Erè :</b> akoz yon pwoblèm teknik, se pa posib voye limèl sa-a.',
@@ -589,7 +589,7 @@ lès plitò jestyon paj sa-yo pou wèbmèt prensipal sou sit-la.</b>', # MODIF
 
 	// Z
 	'zbug_balise_b_aval' => ' : baliz B anba',
-	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
+	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n’existe pas', # MODIF
 	'zbug_boucle' => 'boukle',
 	'zbug_boucle_recursive_undef' => 'boukle rekisiv ki pa défini', # MODIF
 	'zbug_champ_hors_boucle' => 'Chan @champ@ ki pa nan boukle',

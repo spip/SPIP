@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'barre_euro' => 'Inserir o símbolo € (euro)',
 	'barre_gras' => 'Escrever em {{negrito}}',
 	'barre_guillemets' => 'envolver em "aspas"',
-	'barre_guillemets_simples' => 'Envolver em \'plicas\'',
+	'barre_guillemets_simples' => 'Envolver em ’plicas’',
 	'barre_intertitre' => 'Transformar em {{{entretítulo}}}',
 	'barre_italic' => 'Escrever em {itálico}',
 	'barre_lien' => 'Transformar em [link hipertexto->http://...]',
@@ -382,7 +382,7 @@ Para confirmar o seu novo endereço, basta acessar o endereço abaixo (cas contr
 	'info_erreur_squelette2' => 'Nenhum template <b>@fichier@</b> está disponível...',
 	'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'É possível que não haja espaço livre em disco, ou que a base de dados esteja corrompida.<br />
- <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
+ <font color=’red’>Tente <a href=’@script@’>reparar a base</a>,
  ou contate o seu serviço de hospedagem.</font>',
 	'info_fini' => 'Terminou!',
 	'info_format_image' => 'Formatos das imagens que podem ser utilizados para criar os ícones @gd_formats@.',
