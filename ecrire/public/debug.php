@@ -483,7 +483,10 @@ function debug_dumpfile ($texte, $fonc, $type) {
 // Fonction pour l'espace de redaction, appeler par ecrire/index.php
 
 // http://doc.spip.org/@debug_script
-function debug_script ($t) {
+function debug_script ($f, $apply=false) {
+
+	$transformer_xml=charger_fonction($GLOBALS['transformer_xml'], 'inc');
+	$t = $transformer_xml($f, $apply);
 
 	debug_debut($GLOBALS['exec']);
 	if (!isset($GLOBALS['xhtml_error'])) {

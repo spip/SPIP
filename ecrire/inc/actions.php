@@ -131,17 +131,14 @@ function ajax_action_greffe($idom, $corps)
 // http://doc.spip.org/@ajax_retour
 function ajax_retour($corps)
 {
-	if (isset($GLOBALS['ajax_xml'])) {
-		include_spip('public/debug');
-		include_spip('inc/commencer_page');
-		$transformer_xml=charger_fonction($GLOBALS['ajax_xml'], 'inc');
-		$corps= init_entete('Debug Spip Ajax')
-			  .  "<body>\n\n"
-			  . "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n"
-			  . $corps
-			  . '</body></html>';
-		debug_script($transformer_xml($corps, false));
-		exit;
+	if (isset($GLOBALS['transformer_xml'])) {
+	 	echo _DOCTYPE_ECRIRE
+		. "<html><head><title>Debug Spip Ajax</title></head>"
+		.  "<body>\n\n"
+		. "<!-- %%%%%%%%%%%%%%%%%%% Ajax %%%%%%%%%%%%%%%%%%% -->\n"
+		. $corps
+		. '</body></html>';
+		return;
 	}
 
 	$c = $GLOBALS['meta']["charset"];
