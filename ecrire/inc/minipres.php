@@ -62,6 +62,7 @@ function install_fin_html() {
 // http://doc.spip.org/@minipres
 function minipres($titre='', $corps="", $onload='')
 {
+	@define('_AJAX',false); // par securite
 	if (!$titre) {
 		if (!_AJAX)
 			http_status(403);
