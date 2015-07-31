@@ -167,6 +167,9 @@ la documentacion d\'SPIP</a>.',
 // C
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo podetz sincronizar emb l\'actualitat dau sit.',
 'calendrier_synchro_lien' => 'Anar querre lo fichier <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo chalendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada de queu sit (pretzfachs et rendetz-vos personaus, articles et brevas prepausats...).',
+'calendrier_synchro_public' => 'Lo chalendier seguent vos permet de s&egrave;gre l\'activitat publica de queu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -385,6 +388,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_creer_rubrique_2' => 'Crear una rubrica nu&ograve;va',
 'icone_creer_sous_rubrique' => 'Crear una sosrubrica',
 'icone_deconnecter' => 'Se desconnectar',
+'icone_discussions' => 'Discussions',
 'icone_doc_rubrique' => 'Documents de las rubricas',
 'icone_ecrire_article' => 'Escriure un article nu&ograve;u',
 'icone_ecrire_nouvel_article' => 'Las brevas contengudas dins quela rubrica',
@@ -397,6 +401,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_forum_interne' => 'Forum interne',
 'icone_forum_suivi' => 'Segut daus forums',
 'icone_forums_petitions' => 'Forums e peticions',
+'icone_gestion_langues' => 'Gestion de las lengas',
 'icone_informations_personnelles' => 'Informacions personalas',
 'icone_interface_complet' => 'Interf&agrave;cia completa',
 'icone_interface_simple' => 'Interf&agrave;cia simplificada',
@@ -417,6 +422,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_refuser_breve' => 'Refusar quela breva',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion dempuei lo comen&ccedil;ament',
+'icone_repartition_visites' => 'Reparticion de las vesitas',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_rubriques' => 'Rubricas',
@@ -425,6 +431,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_sites_references' => 'Sits referenciats',
 'icone_statistiques' => 'Estadisticas dau sit',
 'icone_statistiques_visites' => 'Estadisticas de las vesitas',
+'icone_suivi_activite' => 'Seguir l\'activitat editoriala',
+'icone_suivi_actualite' => 'Evolucion dau&nbsp;sit',
 'icone_suivi_forum' => 'Segut dau forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Segre/gerir los forums',
 'icone_suivi_pettions' => 'Segre/gerir las peticions',
@@ -531,6 +539,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;stres c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir queu tableu',
+'info_config_suivi' => 'Se quela adre&ccedil;a correspond a una mailing-list, podetz indicar &ccedil;ai jos l\'adre&ccedil;a ont los participants au sit se p&ograve;den inscriure. Quela adre&ccedil;a p&ograve;t estre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adre&ccedil;a e-mail tenent un subjecte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => '<NEW> <NEW> Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
+'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'Confirmar queu mot de santa Clara noveu:',
 'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><P> Podetz passar a l\'estapa seguenta.',
@@ -673,6 +684,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_mail_fournisseur' => 'vos@fornidor.com',
 'info_maximum' => 'maximum:',
 'info_message' => 'Messatge dau',
+'info_message_2' => '<NEW> <NEW> MESSAGE',
 'info_message_efface' => 'MESSATGE ESFA&Ccedil;AT',
 'info_message_en_redaction' => 'V&ograve;stres messatges en cors de redaccion',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -703,6 +715,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Volhatz seleccionar &ccedil;ai sos las lengas que son a posita daus redactors de v&ograve;stre sit.
   Las lengas ja emplejadas dins v&ograve;stre sit (afichadas primieras) se p&ograve;den pas desactivar.',
+'info_multi_langues_soulignees' => '<NEW> <NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
 'info_multi_secteurs' => '... nonm&agrave;s per las rubricas a la rai&ccedil; dau sit?',
 'info_multilinguisme' => 'Multiling&uuml;isme',
@@ -772,6 +785,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_pour' => 'per',
 'info_premier_resultat' => '[@debut_limit@ primiers resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primiers resultats de @total@]',
+'info_principaux_correspondants' => 'V&ograve;stres correspondents principaus',
 'info_probleme_grave' => 'problema de',
 'info_procedez_par_etape' => 'procedissetz estapa per estapa',
 'info_procedure_maj_version' => 'Chau lan&ccedil;ar la procedura d\'actualizacion per adaptar
@@ -1564,6 +1578,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
 'titre_liens_entrants' => 'Los liams entrants per uei',
+'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_mots_cles_dans_forum' => 'Mots claus dins los forums dau sit public',
 'titre_mots_tous' => 'Los mots claus',
@@ -1623,11 +1638,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas mai liar queste article a sas reviradas ',
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
 'trad_new' => 'Escriure una revirada novela de queste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// PLUS_UTILISE
-'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

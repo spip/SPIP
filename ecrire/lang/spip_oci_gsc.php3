@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Non cau pas aperar aquera foncion dens aqueth cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dens la sauvagarda (@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<B>Atencion! Lo fichi&egrave;r @archive@ que correspon a ua auta version d\'SPIP que la qui avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
+'avis_erreur_version_archive' => '<B>Atencion! Lo fichi&egrave;r @archive@ que correspond a ua auta version d\'SPIP que la qui avetz installada.</b> Qu\'anatz de cap t&agrave; dificultats de la b&egrave;ras: risc de destruccion de la v&ograve;sta basa de dadas, disfoncionaments div&egrave;rs deu sit, etc. Non validetz pas aquera demanda d\'importacion.<p> Ent&agrave; mei informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP qu\'ei ja installat.',
@@ -167,6 +167,9 @@ la documentacion d\'SPIP</a>.',
 // C
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), que\'u podetz sincronizar dab l\'actualitat deu sit.',
 'calendrier_synchro_lien' => 'Anar cu&eacute;lher lo fichi&egrave;r <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calend&egrave;r seguent, d\'usatge estrictament personau, que vs\'informa suber l\'activitat editoriau privada d\'aqueth sit (pr&egrave;tzh&egrave;its et rendetz-vse personaus, articles et br&egrave;vas perpausats...).',
+'calendrier_synchro_public' => 'Lo calend&egrave;r seguent que\'vs permet de seguir l\'activitat publica d\'aqueth sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -223,7 +226,7 @@ la documentacion d\'SPIP</a>.',
 'entree_adresse_fichier_syndication' => 'Adre&ccedil;a deu fichi&egrave;r "backend" t&agrave; la sindicacion:',
 'entree_adresse_site' => '<b>Adre&ccedil;a deu sit</b> [Obligat&ograve;ria]',
 'entree_base_donnee_1' => 'Adre&ccedil;a de la basa de dadas',
-'entree_base_donnee_2' => '(Sovent, aquera adre&ccedil;a que correspon a la deu v&ograve;ste sit, a c&ograve;ps que correspon a la men&ccedil;on "localhost", a c&ograve;ps, que\'s d&egrave;isha vueita completament.)',
+'entree_base_donnee_2' => '(Sovent, aquera adre&ccedil;a que correspond a la deu v&ograve;ste sit, a c&ograve;ps que correspond a la men&ccedil;on "localhost", a c&ograve;ps, que\'s d&egrave;isha vueita completament.)',
 'entree_biographie' => 'Biografia braca, en quauques mots.',
 'entree_breve_publiee' => 'Aquera br&egrave;va e cau publicar-la?',
 'entree_chemin_acces' => '<B>Entrar</b> lo camin d\'acc&egrave;s:',
@@ -240,11 +243,11 @@ L\'administrator deu sist&egrave;ma o de l\'arret que\'vs deu poder hornir
 'entree_liens_sites' => '<B>Ligam ipert&egrave;xt</b> (refer&eacute;ncia, sit de vesitar...)',
 'entree_login' => 'Lo v&ograve;ste login',
 'entree_login_connexion_1' => 'Lo login de connexion',
-'entree_login_connexion_2' => '(Que correspon a c&ograve;ps au v&ograve;ste login d\'acc&egrave;s a l\'FTP; a c&ograve;ps qu\'es d&egrave;isha vueit)',
+'entree_login_connexion_2' => '(Que correspond a c&ograve;ps au v&ograve;ste login d\'acc&egrave;s a l\'FTP; a c&ograve;ps qu\'es d&egrave;isha vueit)',
 'entree_login_ldap' => 'Login LDAP iniciau',
 'entree_mot_passe' => 'Lo v&ograve;ste mot de santa Clara',
 'entree_mot_passe_1' => 'Mot de santa Clara t&agrave; la connexion',
-'entree_mot_passe_2' => '(Que correspon a c&ograve;ps au v&ograve;ste mot de santa Clara t&agrave; l\'FTP; a c&ograve;ps que\'s d&egrave;isha vueit)',
+'entree_mot_passe_2' => '(Que correspond a c&ograve;ps au v&ograve;ste mot de santa Clara t&agrave; l\'FTP; a c&ograve;ps que\'s d&egrave;isha vueit)',
 'entree_nom_fichier' => 'Volhatz entrar lo nom deu fichi&egrave;r @texte_compresse@:',
 'entree_nom_pseudo' => 'Lo v&ograve;ste nom o lo v&ograve;ste pseudonim',
 'entree_nom_pseudo_1' => '(Lo v&ograve;ste nom o lo v&ograve;ste pseudonim)',
@@ -281,7 +284,7 @@ deu sit "@nom_site_spip@" (@adresse_site@/):',
 'form_indiquer_nom' => 'Volhatz indicar lo v&ograve;ste nom.',
 'form_indiquer_nom_site' => 'Volhatz indicar lo nom deu v&ograve;ste sit.',
 'form_pet_adresse_site' => 'Adre&ccedil;a deu v&ograve;ste sit',
-'form_pet_aucune_signature' => 'Nada signatura non correspon pas a aqueth c&ograve;de...',
+'form_pet_aucune_signature' => 'Nada signatura non correspond pas a aqueth c&ograve;de...',
 'form_pet_confirmation' => 'Volhatz confirmar la v&ograve;sta signatura:',
 'form_pet_deja_enregistre' => 'Ja aqueth sit qu\'ei registrat',
 'form_pet_deja_signe' => 'Qu\'avetz ja signat aqueth t&egrave;xt.',
@@ -385,6 +388,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_creer_rubrique_2' => 'Crear ua rubrica nava',
 'icone_creer_sous_rubrique' => 'Crear ua sosrubrica',
 'icone_deconnecter' => 'Desconnect&agrave;\'s',
+'icone_discussions' => 'Discussions',
 'icone_doc_rubrique' => 'Documents de las rubricas',
 'icone_ecrire_article' => 'Escr&iacute;ver un article nau',
 'icone_ecrire_nouvel_article' => 'Las br&egrave;vas contengudas dens aquera rubrica',
@@ -397,6 +401,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_forum_interne' => 'Forum int&egrave;rne',
 'icone_forum_suivi' => 'Seguit deus forums',
 'icone_forums_petitions' => 'Forums e peticions',
+'icone_gestion_langues' => 'Gestion de las lengas',
 'icone_informations_personnelles' => 'Informacions personaus',
 'icone_interface_complet' => 'Interf&agrave;cia completa',
 'icone_interface_simple' => 'Interf&agrave;cia simplificada',
@@ -417,6 +422,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_refuser_breve' => 'Arrefusar aquera br&egrave;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuau',
 'icone_repartition_debut' => 'Afichar la reparticion dempuish la comen&ccedil;an&ccedil;a',
+'icone_repartition_visites' => 'Reparticion de las vesitas',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_rubriques' => 'Rubricas',
@@ -425,6 +431,8 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_sites_references' => 'Sits referenciats',
 'icone_statistiques' => 'Estadisticas deu sit',
 'icone_statistiques_visites' => 'Estadisticas de las vesitas',
+'icone_suivi_activite' => 'Seguir l\'activitat editoriau',
+'icone_suivi_actualite' => 'Evolucion deu sit',
 'icone_suivi_forum' => 'Seguit deu forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Seguir/gerir los forums',
 'icone_suivi_pettions' => 'Seguir/gerir las peticions',
@@ -531,6 +539,9 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_classement_2' => '<sup>au</sup> de @liste@',
 'info_code_acces' => 'N\'oblidetz pas los v&ograve;stes c&ograve;des d\'acc&egrave;s pr&ograve;pis!',
 'info_comment_lire_tableau' => 'Quin legir aqueth tabl&egrave;u',
+'info_config_suivi' => 'S\'aquera adre&ccedil;a correspond a ua mailing-list, que podetz indicar &ccedil;a devath l\'adre&ccedil;a on los participants au sit e p&ograve;den inscrive\'s. Aquera adre&ccedil;a que p&ograve;t estar ua URL (per exemple la pagina d\'inscripcion a la lista peu web), o ua adre&ccedil;a e-mail tienent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => '<NEW> <NEW> Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
+'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'Confirmar aqueth mot de santa Clara nav&egrave;th:',
 'info_connexion_base' => 'Dusau estapa: <B>Ensai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP que s\'i ei escaduda.</b><P> Que podetz passar a l\'estapa seguenta.',
@@ -673,6 +684,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_mail_fournisseur' => 'vos@hornider.com',
 'info_maximum' => 'maximum:',
 'info_message' => 'Messatge deu',
+'info_message_2' => '<NEW> <NEW> MESSAGE',
 'info_message_efface' => 'MESSATGE ESFA&Ccedil;AT',
 'info_message_en_redaction' => 'Los v&ograve;stes messatges en cors de redaccion',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -703,6 +715,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Volhatz seleccionar &ccedil;a devath las lengas qui son a posita deus redactors deu v&ograve;ste sit.
   Las lengas ja emplegadas dens lo v&ograve;ste sit (afichadas en perm&egrave;ras) ne\'s p&ograve;den pas desactivar.',
+'info_multi_langues_soulignees' => '<NEW> <NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
 'info_multi_secteurs' => '... sonque t&agrave; las rubricas a l\'arradit deu sit?',
 'info_multilinguisme' => 'Multiling&uuml;isme',
@@ -772,6 +785,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_pour' => 'ent&agrave;',
 'info_premier_resultat' => '[@debut_limit@ perm&egrave;rs resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ perm&egrave;rs resultats de @total@]',
+'info_principaux_correspondants' => 'Los v&ograve;stes correspondents principaus',
 'info_probleme_grave' => 'probl&egrave;ma de',
 'info_procedez_par_etape' => 'proceditz estapa per estapa',
 'info_procedure_maj_version' => 'Que cau lan&ccedil;ar la procedura d\'actualizacion t&agrave; adaptar
@@ -1210,7 +1224,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'pass_choix_pass' => 'Volhatz causir lo v&ograve;ste mot de santa Clara nav&egrave;th:',
 'pass_erreur' => 'Error',
 'pass_erreur_acces_refuse' => '<b>Error:</b> non podetz plus accedir a aqueth sit.',
-'pass_erreur_code_inconnu' => '<b>Error:</b> aqueth c&ograve;de non correspon pas a nat vesitaire qui p&ograve;sca accedir a aqueth sit.',
+'pass_erreur_code_inconnu' => '<b>Error:</b> aqueth c&ograve;de non correspond pas a nat vesitaire qui posca accedir a aqueth sit.',
 'pass_erreur_non_enregistre' => '<b>Error:</b> l\'adre&ccedil;a <tt>@email_oubli@</tt> n\'ei pas registrada sus aqueth sit.',
 'pass_erreur_non_valide' => '<b>Error:</b> aqueth e-mail <tt>@email_oubli@</tt> n\'ei pas valid!',
 'pass_erreur_probleme_technique' => '<b>Error:</b> pr\'amor d\'un probl&egrave;ma tecnic, l\'e-mail ne\'s p&ograve;t pas mandar. ',
@@ -1622,11 +1636,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_delier' => 'Non ligar plus aqueste article a las soas arreviradas ',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// PLUS_UTILISE
-'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

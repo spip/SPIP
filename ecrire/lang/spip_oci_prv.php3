@@ -77,8 +77,8 @@ la documentacion d\'SPIP</a>.',
 'barre_eo_maj' => 'Inserir una E dins l\'O majuscula',
 'barre_euro' => 'Inserir lo simb&egrave;u de l\'&egrave;uro: &#8364;',
 'barre_gras' => 'Metre en {{gras}}',
-'barre_guillemets' => 'Enrodar amb de &laquo; verguetas francesas &raquo;',
-'barre_guillemets_simples' => 'Enrodar amb de &#8222;verguetas&#8220;',
+'barre_guillemets' => '<MODIF> Enrodar amb de &laquo; verguetas francesas &raquo;',
+'barre_guillemets_simples' => '<MODIF> Enrodar amb de &#8222;verguetas&#8220;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [liame ipert&egrave;xt->http://...]',
@@ -167,6 +167,9 @@ la documentacion d\'SPIP</a>.',
 // C
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronizar amb l\'actualitat dau sit.',
 'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa subre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfachs et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -366,7 +369,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_admin_site' => 'Administracion dau sit',
 'icone_afficher_auteurs' => 'Afichar leis autors',
 'icone_afficher_visiteurs' => 'Afichar lei vesitaires',
-'icone_agenda' => 'Agenda e messatjari&aacute;',
+'icone_agenda' => '<MODIF> Agenda e messatjari&aacute;',
 'icone_aide_ligne' => 'Ajuda en linha',
 'icone_arret_discussion' => 'Quitar aquela discussion',
 'icone_articles' => 'Articles',
@@ -385,10 +388,11 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_creer_rubrique_2' => 'Crear una rubrica n&ograve;va',
 'icone_creer_sous_rubrique' => 'Crear una sosrubrica',
 'icone_deconnecter' => 'Se desconnectar',
+'icone_discussions' => 'Discussions',
 'icone_doc_rubrique' => 'Documents dei rubricas',
 'icone_ecrire_article' => 'Escriure un article n&ograve;u',
 'icone_ecrire_nouvel_article' => 'Lei br&egrave;vas contengudas dins aquela rubrica',
-'icone_edition_site' => 'Edicion dau sit',
+'icone_edition_site' => '<MODIF> Edicion dau sit',
 'icone_envoyer_message' => 'Mandar aqueu messatge',
 'icone_etat_traductions' => 'Ont ne\'n son lei reviradas',
 'icone_evolution_visites' => 'Evolucion dei vesitas<br>@visites@ vesitas@aff_ref@',
@@ -397,6 +401,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_forum_interne' => 'Forum int&egrave;rne',
 'icone_forum_suivi' => 'Seguit dei forums',
 'icone_forums_petitions' => 'Forums e peticions',
+'icone_gestion_langues' => 'Gestion dei lengas',
 'icone_informations_personnelles' => 'Informacions personalas',
 'icone_interface_complet' => 'Interf&agrave;cia completa',
 'icone_interface_simple' => 'Interf&agrave;cia simplificada',
@@ -417,6 +422,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_refuser_breve' => 'Refusar aquela br&egrave;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion dempuei la comen&ccedil;an&ccedil;a',
+'icone_repartition_visites' => 'Reparticion dei vesitas',
 'icone_retour' => 'Tornar',
 'icone_retour_article' => 'Tornar a l\'article',
 'icone_rubriques' => 'Rubricas',
@@ -425,6 +431,8 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_sites_references' => 'Sits referenciats',
 'icone_statistiques' => 'Estadisticas dau sit',
 'icone_statistiques_visites' => 'Estadisticas dei vesitas',
+'icone_suivi_activite' => 'Seguir l\'activitat editoriala',
+'icone_suivi_actualite' => 'Evolucion dau sit',
 'icone_suivi_forum' => 'Seguit dau forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Seguir/gerir lei forums',
 'icone_suivi_pettions' => 'Seguir/gerir lei peticions',
@@ -468,7 +476,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_adresse_email' => 'ADREI&Ccedil;A E-MAIL:',
 'info_adresse_non_indiquee' => 'Av&egrave;tz pas indicat l\'adrei&ccedil;a de testar!',
 'info_adresse_url' => 'Adrei&ccedil;a (URL) dau sit public',
-'info_afficher_visites' => 'Afichar lei vesitas per:',
+'info_afficher_visites' => '<MODIF> Afichar lei vesitas per:',
 'info_affichier_visites_articles_plus_visites' => 'Afichar lei vesitas per leis <b>articles mai vesitats dempuei lo comen&ccedil;ament:</b>',
 'info_aide' => 'AJUDA:',
 'info_aide_en_ligne' => 'Ajuda en linha SPIP',
@@ -531,6 +539,9 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;strei c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir aqueu tabl&egrave;u',
+'info_config_suivi' => 'S\'aquela adrei&ccedil;a corresp&ograve;nd a una mailing-list, pod&egrave;tz indicar &ccedil;ai sota l\'adrei&ccedil;a ont lei participants au sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => '<NEW> <NEW> Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
+'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'Confirmar aqueu mot de santa Clara nov&egrave;u:',
 'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><P> Pod&egrave;tz passar a l\'estapa seguenta.',
@@ -673,6 +684,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_mail_fournisseur' => 'vos@fornidor.com',
 'info_maximum' => 'maximum:',
 'info_message' => 'Messatge dau',
+'info_message_2' => '<NEW> <NEW> MESSAGE',
 'info_message_efface' => 'MESSATGE ESCAFAT',
 'info_message_en_redaction' => 'V&ograve;strei messatges en cors de redaccion',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -703,6 +715,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Vougatz seleccionar &ccedil;ai sota lei lengas que son a posita dei redactors de v&ograve;stre sit.
   Lei lengas ja emplegadas dins v&ograve;stre sit (afichadas d\'en primier) se p&ograve;don pas desactivar.',
+'info_multi_langues_soulignees' => '<NEW> <NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per lei rubricas?',
 'info_multi_secteurs' => '... ren que per lei rubricas a la rai&ccedil; dau sit?',
 'info_multilinguisme' => 'Multiling&uuml;isme',
@@ -772,6 +785,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_pour' => 'per',
 'info_premier_resultat' => '[@debut_limit@ primiers resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primiers resultats de @total@]',
+'info_principaux_correspondants' => 'V&ograve;strei correspondents principaus',
 'info_probleme_grave' => 'probl&egrave;ma de',
 'info_procedez_par_etape' => 'procediss&egrave;tz estapa per estapa',
 'info_procedure_maj_version' => 'Cau lan&ccedil;ar la procedura d\'actualizacion per adaptar
@@ -1623,11 +1637,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Cessar de liar aquest article a sei reviradas ',
 'trad_lier' => 'Aquest article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aquest article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// PLUS_UTILISE
-'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

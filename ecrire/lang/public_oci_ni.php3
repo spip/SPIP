@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'Dins la meteissa rubrica',
+'dans_meme_rubrique' => 'Dins la mema rubrica',
 'date' => 'Data',
 'dernier_ajout' => 'Darri&egrave;r ajust',
 'dernieres_breves' => 'Darri&egrave;ras br&egrave;vas',
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // E
-'edition_mode_texte' => 'Edicion en m&ograve;de testo de',
+'edition_mode_texte' => 'Edicion en m&ograve;de t&egrave;xt de',
 'en_reponse' => 'En responsa a:',
 'en_resume' => 'En resumit',
 'envoyer_message' => 'Mandar un messatge',
@@ -65,14 +65,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // M
-'meme_auteur' => 'Dau meteis autor',
-'meme_rubrique' => 'Dins la meteissa rubrica',
-'memes_auteurs' => 'Dei meteisses autors',
+'meme_auteur' => 'Dau meme autor',
+'meme_rubrique' => 'Dins la mema rubrica',
+'memes_auteurs' => 'Dei memes autors',
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Lu messatges de forums mai recents',
 'mots_clefs' => 'M&ograve;ts claus',
-'mots_clefs_meme_groupe' => 'M&ograve;ts claus dins lo meteis grop',
+'mots_clefs_meme_groupe' => 'M&ograve;ts claus dins lo meme grop',
 
 
 // N
@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_auteur' => 'per',
-'participer_site' => 'Pod&egrave;tz participar a la vida d\'aqueu sit e prepauar lu v&ograve;stres articles en vos inscriure &ccedil;ai sota. Recebretz un e-mail que vos indicar&agrave; lu v&ograve;stres c&ograve;des per accedir a l\'espaci privat dau sit.',
+'participer_site' => 'Pod&egrave;tz participar a la vida d\'aqueu sit e prepauar lu v&ograve;stres articles en vos inscriure &ccedil;ai sota. Receberetz un e-mail que vos indicar&agrave; lu v&ograve;stres c&ograve;des per accedir a l\'espaci privat dau sit.',
 'pas_d_article' => 'I a pas d\'article a aquela adre&ccedil;a',
 'pas_d_auteur' => 'I a pas d\'autor a aquela adre&ccedil;a',
 'pas_de_breve' => 'I a pas de br&egrave;va a aquela adre&ccedil;a',

@@ -115,23 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => '<NEW> Voir en ligne',
-
-
-// PLUS_UTILISE
-'autres_groupes_de_mots_clefs' => 'Otros grupos de palabras claves',
-'dans_meme_rubrique' => 'En la misma secci&oacute;n',
-'derniers_messages_des_forums' => '&Uacute;ltimos mensajes publicados en los foros',
-'envoyer_un_message' => '<NEW> Envoyer un message',
-'pas_d_article' => '<NEW> Il n\'y a pas d\'article &agrave; cette adresse',
-'pas_d_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
-'pas_de_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
-'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
-'plan_du_site' => 'Plan del sitio',
-'poster_un_message' => '<NEW> Poster un message',
-'test' => 'nada',
-'test2' => 'vaciiiio'
+'voir_en_ligne' => '<NEW> Voir en ligne'
 
 );
 

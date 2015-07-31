@@ -115,11 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Anon vwar an liyn',
-
-
-// PLUS_UTILISE
-'plan_du_site' => 'Ousa i l&eacute; andan sit-la'
+'voir_en_ligne' => 'Anon vwar an liyn'
 
 );
 
