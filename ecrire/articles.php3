@@ -537,11 +537,39 @@ if ($boite_ouverte) {
 
 
 
-//
-// Pave "documents associes a l'article"
-//
 
-//boite_documents_article($id_article);
+
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+debut_cadre_enfonce();
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+echo "<b>RACCOURCIS :</b><p>";
+
+$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+$result = spip_query($query);
+
+icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.png");
+
+if ($connect_statut == '0minirezo') {
+	echo "<p>";
+	$retour = urlencode("articles.php3?id_article=$id_article");
+	icone_horizontale("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.png", "creer.gif");
+	
+	$articles_mots = lire_meta('articles_mots');
+	if ($articles_mots != "non") {
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mots-cle-24.png", "creer.gif");
+	}
+}
+
+
+echo "</font>";
+fin_cadre_enfonce();
+
+
+
+
 
 
 

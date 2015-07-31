@@ -6,28 +6,57 @@ include ("inc.php3");
 debut_page("Suivi des forums", "messagerie", "forum-controle");
 debut_gauche();
 
-$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE date_time>DATE_SUB(NOW(),INTERVAL 30 DAY) AND (statut='publie' OR statut='poubelle')";
-$result_petition = spip_query($query_petition);
-
-if ($row = mysql_fetch_array($result_petition)){
-	$nombre_petition = $row[0];
-}
-	
-if ($nombre_petition > 0) {
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-	echo "<A HREF='controle_petition.php3'><IMG SRC='puce.gif' BORDER=0> $nombre_petition signatures de p&eacute;titions</A>";
-	echo "</FONT><P>";
-}
 
 debut_boite_info();
 
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo "<P align=left>".propre("La page de {suivi des forums} est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l'espace priv&eacute; et vous permet de g&eacute;rer ces contributions.");
+echo propre("La page de {suivi des forums} est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l'espace priv&eacute; et vous permet de g&eacute;rer ces contributions.");
 
 echo aide ("suiviforum");
 echo "</FONT>";
 
 fin_boite_info();
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+if ($connect_statut == '0minirezo') {
+	debut_cadre_enfonce();
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<b>RACCOURCIS :</b><p>";
+	
+	
+	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png", "rien.gif");
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png", "rien.gif");
+		
+	/*
+	$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)) {
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.png", "rien.gif");
+	}
+	*/
+
+
+	$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)){
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.png", "rien.gif");
+	}
+	
+	
+	
+	echo "</font>";
+	fin_cadre_enfonce();
+}
 
 
 
@@ -254,6 +283,8 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
  
 if ($connect_statut == "0minirezo") {
 
+	gros_titre("Suivi des forums");
+
 	if (!$debut) $debut = 0;
 
 	$query_forum = "SELECT COUNT(*) FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
@@ -262,7 +293,7 @@ if ($connect_statut == "0minirezo") {
  	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
 
 	if ($total > 10) {
-		echo "<CENTER>";
+		echo "<p>";
 		for ($i = 0; $i < $total; $i = $i + 10){
 			$y = $i + 9;
 			if ($i == $debut)
@@ -270,7 +301,6 @@ if ($connect_statut == "0minirezo") {
 			else
 				echo "[<A HREF='controle_forum.php3?debut=$i'>$i-$y</A>] ";
 		}
-		echo "</CENTER>";
 	}
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' ORDER BY date_heure DESC LIMIT $debut,10";

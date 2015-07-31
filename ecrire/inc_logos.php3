@@ -51,7 +51,8 @@ function resize_logo($image) {
 
 function afficher_boite_logo($racine, $titre) {
 	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur, $PHP_SELF;
-
+	global $couleur_foncee, $couleur_claire;
+	
 	$redirect = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
 	$logo = get_image($racine);
 	if ($logo) {
@@ -63,11 +64,15 @@ function afficher_boite_logo($racine, $titre) {
 		}
 	}
 
-	echo "<CENTER><TABLE WIDTH=100% CELLPADDING=2 BORDER=1 CLASS='hauteur'><TR><TD WIDTH=100% ALIGN='center' BGCOLOR='#FFCC66'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#333333'><B>";
+	echo "<font size=2 FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	//echo "<CENTER><TABLE WIDTH=100% CELLPADDING=2 BORDER=1 CLASS='hauteur'><TR><TD WIDTH=100% ALIGN='center' BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='white'><B>";
+	echo "<div style='border-left: 1px solid white; border-top: 1px solid white; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; '>";
+	echo "<div style='background-color: white; border:  1px solid $couleur_foncee; padding: 3px; text-align: center;'><b>";
 	echo bouton_block_invisible("$racine");
 	echo $titre;
-	echo "</B></FONT></TD></TR></TABLE></CENTER>";
-	echo "<BR><font size=2 FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "</b></div>";
+	echo "</div>";
+	//echo "</B></FONT></TD></TR></TABLE></CENTER>";
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
@@ -105,8 +110,8 @@ function afficher_boite_logo($racine, $titre) {
 		echo "\n<INPUT NAME='logo' TYPE=Hidden VALUE='$racine'>";
 		if (tester_upload()){
 			echo "\nT&eacute;l&eacute;charger un nouveau logo&nbsp;:<BR>";
-			echo "\n<INPUT NAME='image' TYPE=File CLASS='forml' SIZE=15>";
-			echo "\n   <INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'>";
+			echo "\n<INPUT NAME='image' TYPE=File CLASS='forml' style='font-size:9px;' SIZE=15>";
+			echo "\n <div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo' style='font-size:9px;'></div>";
 		} else {
 		
 			$myDir = opendir("upload");

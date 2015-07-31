@@ -6,25 +6,55 @@ debut_page("Forum interne", "messagerie", "forum-interne");
 debut_gauche();
 
 
-debut_boite_info();
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1>";
-echo "<center><font size=2 color='black'><b>FORUM INTERNE</b></font></center>";
 
-echo "Ce forum interne est accessible &agrave; tous les r&eacute;dacteurs du site.";
+//
+// Afficher les boutons de creation d'article et de breve
+//
+if ($connect_statut == '0minirezo') {
+	debut_cadre_enfonce();
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<b>RACCOURCIS :</b><p>";
+	
+	
+	//icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png", "rien.gif");
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png", "rien.gif");
+		
 
-if ($connect_statut=="0minirezo"){
+	$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)) {
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.png", "rien.gif");
+	}
 
-	echo "<p><font color='red'>Il existe &eacute;galement un <a href='forum_admin.php3'>forum des administrateurs</a>, r&eacute;serv&eacute; aux administrateurs.</font>";
+
+
+	$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)){
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.png", "rien.gif");
+	}
+	
+	
+	
+	echo "</font>";
+	fin_cadre_enfonce();
 }
 
-
-echo "</font>";
-fin_boite_info();
 
 
 
 
 debut_droite();
+
+gros_titre("Forum interne");
 
 
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
@@ -36,7 +66,8 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
  	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
 
 	if ($total > 10) {
-		echo "<CENTER>";
+		echo "<p>";
+		//echo "<CENTER>";
 		for ($i = 0; $i < $total; $i = $i + 10){
 			$y = $i + 9;
 			if ($i == $debut)
@@ -44,7 +75,7 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 			else
 				echo "[<A HREF='forum.php3?debut=$i'>$i-$y</A>] ";
 		}
-		echo "</CENTER>";
+		//echo "</CENTER>";
 	}
 
 

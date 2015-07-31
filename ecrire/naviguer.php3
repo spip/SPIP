@@ -179,6 +179,48 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'a
 
 
 
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+debut_cadre_enfonce();
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+echo "<b>RACCOURCIS :</b><p>";
+
+$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+$result = spip_query($query);
+
+icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.png");
+echo "<p>";
+
+
+if (mysql_num_rows($result) > 0) {
+	if ($coll > 0)
+		icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.png","creer.gif");
+
+	$activer_breves = lire_meta("activer_breves");
+	if ($activer_breves != "non" AND $id_parent == "0") {
+		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.png","creer.gif");
+	}
+}
+else {
+	if ($connect_statut == '0minirezo') {
+		echo "<p>Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>";
+	}
+}
+if ($connect_statut == '0minirezo') {
+	icone_horizontale("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.png","creer.gif");
+}
+
+
+echo "</font>";
+fin_cadre_enfonce();
+
+
+
+
+
+
 debut_droite();
 ///// Editable ?
 $flag_editable = ($connect_statut == '0minirezo' AND acces_rubrique($coll));

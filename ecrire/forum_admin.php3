@@ -7,19 +7,53 @@ debut_gauche();
 
 
 
-debut_boite_info();
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1>";
-echo "<center><font size=2 color='red'><b>FORUM DES ADMINISTRATEURS</b></font></center>";
 
-echo "Cet espace est un forum interne r&eacute;serv&eacute; aux administrateurs. Contrairement au <b>forum interne g&eacute;n&eacute;ral</b>, les r&eacute;dacteurs n'y ont pas acc&egrave;s.";
+//
+// Afficher les boutons de creation d'article et de breve
+//
+if ($connect_statut == '0minirezo') {
+	debut_cadre_enfonce();
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<b>RACCOURCIS :</b><p>";
+	
+	
+	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png", "rien.gif");
+	//icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png", "rien.gif");
+		
 
-echo "<p>Pour les discussions qui concernent <b>tous les participants</b>, il faut donc utiliser le <a href='forum.php3'>forum interne g&eacute;n&eacute;ral</a>.";
+	$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)) {
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.png", "rien.gif");
+	}
 
-echo "</font>";
-fin_boite_info();
+
+
+	$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)){
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.png", "rien.gif");
+	}
+	
+	
+	
+	echo "</font>";
+	fin_cadre_enfonce();
+}
+
 
 
 debut_droite();
+gros_titre("Forum priv&eacute; des administrateurs");
+
 
 if ($connect_statut == "0minirezo"){
 
@@ -33,7 +67,8 @@ if ($connect_statut == "0minirezo"){
 
 
 	if ($total > 10) {
-		echo "<CENTER>";
+		echo "<p>";
+		//echo "<CENTER>";
 		for ($i = 0; $i < $total; $i = $i + 10){
 			$y = $i + 9;
 			if ($i == $debut)
@@ -41,7 +76,7 @@ if ($connect_statut == "0minirezo"){
 			else
 				echo "[<A HREF='forum_admin.php3?debut=$i'>$i-$y</A>] ";
 		}
-		echo "</CENTER>";
+		//echo "</CENTER>";
 	}
 
 

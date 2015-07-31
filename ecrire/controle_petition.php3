@@ -7,31 +7,59 @@ include ("inc.php3");
 debut_page("Suivi des p&eacute;titions", "messagerie", "suivi-petition");
 debut_gauche();
 
-$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
-$result_petition = spip_query($query_petition);
-
-if ($row = mysql_fetch_array($result_petition)) {
-	$nombre_petition = $row[0];
-}
-
-if ($nombre_petition > 0) {
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-	echo "<A HREF='controle_forum.php3'><IMG SRC='puce.gif' BORDER=0> $nombre_petition messages de forums</A>";
-	echo "</FONT><P>";
-}
-
-
-
 debut_boite_info();
 
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo "<P align=left>".propre("La page de {suivi des p&eacute;titions} vous permet de suivre les signatures de vos p&eacute;titions.");
+echo propre("La page de {suivi des p&eacute;titions} vous permet de suivre les signatures de vos p&eacute;titions.");
 
 echo aide ("suiviforum");
 echo "</FONT>";
 
 fin_boite_info();
 
+
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+if ($connect_statut == '0minirezo') {
+	debut_cadre_enfonce();
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<b>RACCOURCIS :</b><p>";
+	
+	
+	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png", "rien.gif");
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png", "rien.gif");
+		
+
+	$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)) {
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.png", "rien.gif");
+	}
+
+
+	/*
+	$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
+	$result_petition = spip_query($query_petition);
+	if ($row = mysql_fetch_array($result_petition)){
+		$nombre_petition = $row[0];
+	}
+	if ($nombre_petition > 0) {
+		echo "<p>";
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.png", "rien.gif");
+	}
+	*/
+	
+	
+	
+	echo "</font>";
+	fin_cadre_enfonce();
+}
 
 
 
@@ -108,6 +136,7 @@ function controle_forum($request,$adresse_retour) {
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
  
 if ($connect_statut == "0minirezo") {
+	gros_titre("Suivi des p&eacute;titions");
 
 	if ($supp_petition){
 		$query_forum = "UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$supp_petition";
@@ -121,13 +150,13 @@ if ($connect_statut == "0minirezo") {
 
 	if (!$debut) $debut = 0;
 
-	$query_forum = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') AND date_time>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$query_forum = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
  	$result_forum = spip_query($query_forum);
  	$total = 0;
  	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
 
 	if ($total > 10) {
-		echo "<CENTER>";
+		echo "<p>";
 		for ($i = 0; $i < $total; $i = $i + 10){
 			$y = $i + 9;
 			if ($i == $debut)
@@ -135,7 +164,6 @@ if ($connect_statut == "0minirezo") {
 			else
 				echo "[<A HREF='controle_petition.php3?debut=$i'>$i-$y</A>] ";
 		}
-		echo "</CENTER>";
 	}
 
 	$query_forum = "DELETE FROM spip_signatures WHERE NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)";

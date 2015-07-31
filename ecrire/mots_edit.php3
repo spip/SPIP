@@ -73,6 +73,7 @@ if ($row = mysql_fetch_array($result)) {
 	$descriptif = propre($row['descriptif']);
 	$texte = propre($row['texte']);
 	$type = $row['type'];
+	$id_groupe = $row['id_groupe'];
 }
 
 debut_page("&laquo; $titre &raquo;", "documents", "mots");
@@ -96,7 +97,6 @@ if ($new == 'oui') {
 }else {
 	$adresse_retour = "mots_edit.php3?redirect=$redirect&redirect_ok=oui";
 }
-icone("Voir tous les mots-cl&eacute;s", $adresse_retour, "mot-cle-24.png", "rien.gif");
 echo "</center>";
 
 //////////////////////////////////////////////////////
@@ -118,6 +118,31 @@ if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
 	}
 	fin_boite_info();
 }
+
+
+
+//
+// Afficher les boutons de creation d'article et de breve
+//
+debut_cadre_enfonce();
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+echo "<b>RACCOURCIS :</b><p>";
+
+
+icone_horizontale("Voir tous les mots-cl&eacute;s", $adresse_retour, "mot-cle-24.png", "rien.gif");
+
+if ($connect_statut == '0minirezo')
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.png", "creer.gif");
+
+
+
+echo "</font>";
+fin_cadre_enfonce();
+
+
+
+
+
 
 debut_droite();
 
