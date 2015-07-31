@@ -87,7 +87,7 @@ function ecrire_logins($fichier, $tableau_logins) {
 
 function ecrire_acces() {
 	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
-	$htpasswd = _DIR_SESSIONS . '.htpasswd';
+	$htpasswd = _DIR_SESSIONS . _AUTH_USER_FILE;
 
 	// si .htaccess existe, outrepasser spip_meta
 	if ((lire_meta('creer_htpasswd') == 'non') AND !@file_exists($htaccess)) {

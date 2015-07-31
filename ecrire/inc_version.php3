@@ -271,6 +271,7 @@ define_once('_DIR_TeX', _DIR_IMG . "TeX/");
 // qq chaines standard
 
 define_once('_ACCESS_FILE_NAME', '.htaccess');
+define_once('_AUTH_USER_FILE', '.htpasswd');
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -1021,13 +1022,18 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 //
 function verifier_htaccess($rep) {
 	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
-	spip_log($htaccess);
 	if (!@file_exists($htaccess)) {
-		spip_log("creation $htaccess");
+		spip_log("demande de creation de $htaccess");
 		if ($GLOBALS['hebergeur'] != 'nexenservices'){
-			$f = fopen($htaccess, "w");
-			fputs($f, "deny from all\n");
-			fclose($f);
+			if (!$f = fopen($htaccess, "w"))
+				echo "<b>" .
+				  _L("ECHEC DE LA CREATION DE $htaccess") .
+				  "</b>";
+			else
+			  {
+				fputs($f, "deny from all\n");
+				fclose($f);
+			  }
 		} else {
 			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
 			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
