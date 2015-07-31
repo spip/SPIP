@@ -336,7 +336,7 @@ function calculer_prochain_postdate($check= false) {
 		while ($row = sql_fetch($r))
 			publier_branche_rubrique($row['id']);
 	}
-	$t = sql_fetch(spip_query("SELECT date FROM spip_articles WHERE statut='publie' AND date > NOW() ORDER BY date LIMIT 1"));
+	$t = sql_fetsel("date", "spip_articles", "statut='publie' AND date > NOW()", "", "date", "1");
 	
 	if ($t) {
 		$t =  $t['date'];

@@ -265,7 +265,7 @@ function spip_ical_messages($id_utilisateur, $nom_site)
 				if ($id_auteur == $id_utilisateur) echo filtrer_ical ("ORGANIZER:$nom_auteur <$email>"), "\n";
 				else  echo filtrer_ical ("ATTENDEE:$nom_auteur <$email>"), "\n";
 			}
-			$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='perso' AND id_message=$id_message ORDER BY date_heure DESC LIMIT 1");
+			$result_forum = sql_select("*", "spip_forum", "statut='perso' AND id_message=$id_message", "", "date_heure DESC", "1");
 
 			if ($row_forum = sql_fetch($result_forum)) {
 				$date_heure = $row_forum["date_heure"];

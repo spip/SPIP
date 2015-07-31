@@ -100,7 +100,7 @@ jQuery(function(){
 			echo "</div>";
 		}
 	
-		$result=spip_query("SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20");
+		$result=sql_select("*", "spip_breves", "statut = 'prop'", "", "date_heure DESC", "20");
 		if (sql_count($result)>0) {
 			echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
 			echo "\n<div class='plan-articles'>";
@@ -188,7 +188,7 @@ jQuery(function(){
 				echo "</div>";
 			}
 	
-			$result=spip_query("SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT  20");
+			$result=sql_select("*", "spip_breves", "id_rubrique=$id_rubrique", "", "date_heure DESC", "20");
 			if (sql_count($result)>0) {
 				echo "\n<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
 				echo "\n<div class='plan-articles'>";

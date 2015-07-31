@@ -110,7 +110,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 function affiche_mots_ressemblant($cherche_mot, $objet, $id_objet, $resultat, $table, $table_id, $url_base)
 {
 	$les_mots = join(',', $resultat);
-	$result = spip_query("SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre LIMIT 17");
+	$result = sql_select("*", "spip_mots", "id_mot IN ($les_mots)", "", "titre", "17");
 
 	$res ="<ul>\n";
 	while ($row = sql_fetch($result)) {
