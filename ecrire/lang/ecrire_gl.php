@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'activer_plugin' => 'Activar o m&oacute;dulo',
+'affichage' => 'Presentaci&oacute;n',
 'aide_non_disponible' => 'Esta parte da axuda en li&ntilde;a a&iacute;nda non est&aacute; dispo&ntilde;ible nesta lingua.',
 'auteur' => 'Autor&nbsp;:',
 'avis_acces_interdit' => 'Acceso prohibido.',
@@ -295,6 +296,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_auteurs_trouves' => 'Autores/as atopados',
 'info_authentification_externe' => 'Autentificaci&oacute;n externa',
 'info_avertissement' => 'Aviso',
+'info_barre_outils' => 'coa barra de utilidades?',
 'info_base_installee' => 'A estrutura da base de datos foi instalada.',
 'info_base_restauration' => 'A base est&aacute; en proceso de restauraci&oacute;n.',
 'info_bloquer' => 'bloquear',
@@ -314,11 +316,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '<sup>a</sup> en @liste@',
 'info_code_acces' => 'Non esquezas os teus c&oacute;digos de acceso!',
 'info_comment_lire_tableau' => 'C&oacute;mo interpretar este cadro',
+'info_compresseur_gzip' => '<b>N.&nbsp;B.&nbsp;:</b> Recom&eacute;ndaselle comprobar antes de nada se o aloxador comprime xa sistematicamente os  scripts php&nbsp;; para iso, pode utilizar por exemplo o servizo seguinte&nbsp;: @testgzip@',
 'info_compresseur_texte' => 'No caso de que o seu servidor non comprima automaticamente as p&aacute;xinas html para enviarllas aos internautas, pode probar a forzar esta compresi&oacute;n para diminu&iacute;r o peso das p&aacute;xinas para descarga. <b>Alerta</b> : isto pode ralentizar considerablemente certos servidores.',
 'info_compresseur_titre' => 'Optimizaci&oacute;n e compresi&oacute;n',
+'info_config_forums_prive' => 'No espazo privado do web, pode activar varios tipos de foros&nbsp;:',
+'info_config_forums_prive_admin' => 'Un foro reservado aos administradores do web&nbsp;:',
+'info_config_forums_prive_global' => 'Un foro global, aberto a todos os redactores&nbsp;:',
+'info_config_forums_prive_objets' => 'Un foro sobre cada artigo, breve, web referido, etc.&nbsp;:',
 'info_config_suivi' => 'Se este enderezo corresponde &aacute; unha lista de correo, vostede pode indicar aqu&iacute; abaixo o enderezo co cal os participantes no web se poden inscribir. Este enderezo pode ser un URL (por exemplo a p&aacute;xina de inscrici&oacute;n &aacute; lista via web), ou un enderezo de correo electr&oacute;nico dotado dun asunto espec&iacute;fico (por exemplo: <tt>@adresse_suivi@?subject=subscribirse</tt>):',
 'info_config_suivi_explication' => 'Pode subscribirse &aacute; lista de correo deste web. Recibir&aacute; ent&oacute;n por correo os anuncios de artigos e de breves propostas para publicaci&oacute;n.',
 'info_confirmer_passe' => 'Confirmar a nova chave:',
+'info_conflit_edition_avis_non_sauvegarde' => 'Aviso, os campos seguintes foron modificados por outros. As s&uacute;as modificaci&oacute;ns nestes campos non foron rexistradas.',
+'info_conflit_edition_differences' => 'Diferenzas&nbsp;:',
+'info_conflit_edition_version_enregistree' => 'A versi&oacute;n rexistrada&nbsp;:',
+'info_conflit_edition_votre_version' => 'A s&uacute;a versi&oacute;n&nbsp;:',
 'info_connexion_base' => 'Proba de conexi&oacute;n coa base de datos',
 'info_connexion_base_donnee' => 'Conexi&oacute;n &aacute;s s&uacute;a base de datos',
 'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</b><p/> Pode pasar &aacute; etapa seguinte.',
@@ -481,9 +492,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_numero_article' => 'ARTIGO N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obrigatorio]',
 'info_option_accepter_visiteurs' => 'Aceptar a inscrici&oacute;n de visitantes do web p&uacute;blico',
-'info_option_email' => '<MODIF>Cando unha visita env&iacute;a unha nova mensaxe no foro
-  vencellado a un artigo, a persoa responsable do artigo pode recibir
-  aviso desta mensaxe por correo-e. Quere empregar esta opci&oacute;n?',
+'info_option_email' => 'Cando unha visita env&iacute;a unha nova mensaxe no foro
+  vencellado a un artigo, os autores relacionados co artigo poden recibir
+  aviso desta mensaxe por correo-e. Quere preguntar para cada tipo de foro se c&oacute;mpre empregar esta opci&oacute;n?',
 'info_option_faire_suivre' => 'Enviar aviso das mensaxes dos foros &aacute;s persoas responsabeis dos artigos',
 'info_option_ne_pas_accepter_visiteurs' => 'Rexeitar a inscrici&oacute;n de visitantes',
 'info_option_ne_pas_faire_suivre' => 'Non enviar avisos das mensaxes dos foros',
@@ -524,6 +535,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_publier' => 'publicar',
 'info_publies' => 'Os teus artigos publicados en li&ntilde;a',
 'info_question_accepter_visiteurs' => 'Se os esqueletos do seu web prev&eacute;n o rexistro de visitantes sen acceso &aacute; parte web privada, active a opci&oacute;n aqu&iacute; abaixo&nbsp;:',
+'info_question_activer_compactage_css' => 'Quere activar a compactaci&oacute;n das follas de estilo(CSS) ?',
+'info_question_activer_compactage_js' => 'Quere activar a compactaci&oacute;n de scripts (javascript) ?',
+'info_question_activer_compresseur' => 'Quere activar a compactaci&oacute;n do fluxo  HTTP ?',
 'info_question_gerer_statistiques' => 'O seu web ten que xerar as estat&iacute;sticas das visitas?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aceptar&aacute; as inscrici&oacute;ns de novos redactores
   dende o web p&uacute;blico? De aceptalos, os visitantes poderanse rexistrar cun
@@ -540,6 +554,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_question_vignettes_referer' => 'Cando vostede consulte as estat&iacute;sticas, pode visualizar resumos dos webs que orixinan as visitas.',
 'info_question_vignettes_referer_non' => 'Non mostrar as capturas de webs de orixe das visitas',
 'info_question_vignettes_referer_oui' => 'Mostrar as capturas de web de orixe das visitas',
+'info_question_visiteur_ajout_document_forum' => 'Quere autorizar os visitantes para que poidan anexar documentos (imaxes, sons...) nas s&uacute;as mensaxes dos foros&nbsp;?',
+'info_question_visiteur_ajout_document_forum_format' => 'Chegado o caso, indique a seguir a lista das extensi&oacute;ns de documentos autorizados para os foros (ex: gif, jpg, png, mp3).',
 'info_qui_attribue_mot_cle' => 'As palabras deste grupo poden ser atribuidas a:',
 'info_racine_site' => 'Ra&iacute;z do web',
 'info_recharger_page' => 'Recarga a p&aacute;xina nuns intres.',
@@ -696,6 +712,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'item_ajout_mots_cles' => 'Permitir palabras chave nos foros',
 'item_autoriser_documents_joints' => 'Autorizar os documentos adxuntos cos artigos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar os documentos nos temas',
+'item_autoriser_selectionner_date_en_ligne' => 'Poder seleccionar a data da posta en li&ntilde;a de cada documento',
 'item_autoriser_syndication_integrale' => 'Difundir integramente os artigos nos ficheiros de sindicaci&oacute;n',
 'item_bloquer_liens_syndiques' => 'Bloquear as ligaz&oacute;ns afiliadas para validaci&oacute;n',
 'item_breve_refusee' => 'NON - Breve rexeitada',
@@ -705,12 +722,16 @@ cunha cor que indica o seu estado&nbsp;:',
 'item_choix_non_generation_miniature' => 'Non crear miniaturas das imaxes.',
 'item_choix_redacteurs' => 'o equipo de redacci&oacute;n',
 'item_choix_visiteurs' => 'as visitas do web p&uacute;blico',
+'item_compresseur' => 'Activar a compactaci&oacute;n',
+'item_config_forums_prive_global' => 'Activar o foro dos redactores',
+'item_config_forums_prive_objets' => 'Activar estes foros',
 'item_creer_fichiers_authent' => 'Crear os ficheiros &laquo;.htpasswd&raquo;',
 'item_desactiver_forum_administrateur' => 'Desactivar o foro do equipo de xesti&oacute;n',
 'item_gerer_annuaire_site_web' => 'Xestionar unha gu&iacute;a de webs',
 'item_gerer_statistiques' => 'Xestionar as estat&iacute;sticas',
 'item_limiter_recherche' => 'Limitar a procura &aacute;s informaci&oacute;ns contidas neste web',
 'item_login' => 'Identificador',
+'item_messagerie_agenda' => 'Activar a mensaxer&iacute;a e a axenda',
 'item_mots_cles_association_articles' => '&oacute;s artigos',
 'item_mots_cles_association_breves' => '&aacute;s breves',
 'item_mots_cles_association_rubriques' => '&oacute;s temas',
@@ -722,12 +743,17 @@ cunha cor que indica o seu estado&nbsp;:',
 'item_non_ajout_mots_cles' => 'Prohibir o uso de palabras chave nos foros',
 'item_non_autoriser_documents_joints' => 'Non permitir documentos nos artigos',
 'item_non_autoriser_documents_joints_rubriques' => 'Non permitir documentos nos temas',
+'item_non_autoriser_selectionner_date_en_ligne' => 'Que non se poida cambiar manualmente a data dos documentos',
 'item_non_autoriser_syndication_integrale' => 'Non difundir sen&oacute;n un resumo',
 'item_non_bloquer_liens_syndiques' => 'Non bloquear as ligaz&oacute;ns afiliadas',
+'item_non_compresseur' => 'Desactivar a compactaci&oacute;n',
+'item_non_config_forums_prive_global' => 'Desactivar o foro dos redactores',
+'item_non_config_forums_prive_objets' => 'Desactivar estes foros',
 'item_non_creer_fichiers_authent' => 'Non crear estes ficheiros',
 'item_non_gerer_annuaire_site_web' => 'Desactivar o directorio/gu&iacute;a de webs',
 'item_non_gerer_statistiques' => 'Non xestionar as estat&iacute;sticas',
 'item_non_limiter_recherche' => 'Estender a procura &oacute; contido dos webs referidos',
+'item_non_messagerie_agenda' => 'Desactivar a mensaxer&iacute;a e a axenda',
 'item_non_publier_articles' => 'Non publicar os artigos antes da data de publicaci&oacute;n fixada.',
 'item_non_utiliser_breves' => 'Non usar as breves',
 'item_non_utiliser_config_groupe_mots_cles' => 'Non usar a configuraci&oacute;n avanzada dos grupos de palabras chave',
@@ -794,8 +820,14 @@ cunha cor que indica o seu estado&nbsp;:',
 'mois_non_connu' => 'desco&ntilde;ecido',
 
 // O
+'onglet_contenu' => 'Contido',
 'onglet_declarer_une_autre_base' => 'Declarar algunha outra base de datos',
+'onglet_discuter' => 'Discutir',
+'onglet_documents' => 'Documentos',
+'onglet_interactivite' => 'Interactividade',
+'onglet_proprietes' => 'Propiedades',
 'onglet_repartition_actuelle' => 'actualmente',
+'onglet_sous_rubriques' => 'Subsecci&oacute;ns',
 'ortho_ajouter_ce_mot' => 'Engadir a palabra ao dicionario',
 'ortho_aucune_suggestion' => 'Non hai suxesti&oacute;n relacionada con este termo',
 'ortho_avis_privacy' => 'Un comprobador ortogr&aacute;fico foi integrado en SPIP. De todas maneiras, antes de o activar, lea con atenci&oacute;n o par&aacute;grafo seguinte&nbsp;:',
@@ -928,12 +960,19 @@ cunha cor que indica o seu estado&nbsp;:',
 		consulta se mant&eacute;n) e o n&uacute;mero de visitas recibidas
 		dende o principio son amosadas no bolo que
 		aparece cando pasas co rato por riba do t&iacute;tulo.',
+'texte_compacter_avertissement' => 'Atenci&oacute;n para non activar estas opci&oacute;ns durante o desenvolvemento do seu web: os elementos compactados perden toda a s&uacute;a lexibilidade.',
+'texte_compacter_script_css' => 'SPIP pode compactar os scripts javascript e as follas de estilo CSS, para rexistralos nas fichas est&aacute;ticas ; iso acelera a presentaci&oacute;n do web.',
 'texte_compresse_ou_non' => '(comprimido ou non)',
+'texte_compresseur_page' => 'SPIP pode comprimir automaticamente cada p&aacute;xina que env&iacute;a ao
+visitante do web. Esta regraxe permite optimizar o ancho de banda (o 
+web &eacute; m&aacute;is r&aacute;pido ao seguirse unha ligaz&oacute;n de baixa velocidade), mais
+demanda m&aacute;is potencia do servidor.',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
 'texte_config_groupe_mots_cles' => 'Quere activar a configuraci&amp;oacute;n avanzada das palabras clave,
   para indicar, por exemplo que se pode seleccionar unha palabra &amp;uacute;nica
   por grupo, que un grupo &amp;eacute; importante...&nbsp;?',
+'texte_conflit_edition_correction' => 'Controle a seguir as diferenzas entre as d&uacute;as versi&oacute;ns do texto; pode tam&eacute;n copiar as s&uacute;as modificaci&oacute;ns e volver comezar.',
 'texte_connexion_mysql' => 'Consulte os datos que lle proporcionou o seu aloxador: deber&aacute; encontrar a&iacute; o servidor de bases de datos do que disp&oacute;n e os identificadores para conectar con el (claves de conexi&oacute;n).',
 'texte_contenu_article' => '(Contido do artigo en poucas palabras.)',
 'texte_contenu_articles' => 'Dependendo da maquetaci&oacute;n adoptada para o seu web, pode decidir
@@ -955,14 +994,14 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_effacer_statistiques' => 'Borrar as estat&iacute;sticas',
 'texte_en_cours_validation' => 'Estes artigos e as breves de aqu&iacute; embaixo foron propostos para a s&uacute;a publicaci&oacute;n. Non dubide en deixar un aviso nos foros que levan engadidos.',
 'texte_enrichir_mise_a_jour' => 'P&oacute;dese mellorar a presentaci&oacute;n do texto empregando os &laquo;atallos tipogr&aacute;ficos&raquo;.',
-'texte_fichier_authent' => '<MODIF><b>SPIP ten que crear os ficheiros especiais <tt>.htpasswd</tt>
-  e <tt>.htpasswd-admin</tt> no directorio @dossier@?</b><p />
+'texte_fichier_authent' => '<b>SPIP ten que crear os ficheiros especiais <tt>.htpasswd</tt>
+  e <tt>.htpasswd-admin</tt> no cartafol @dossier@?</b><p />
   Estes ficheiros p&oacute;denlle servir para restrinxir o acceso, tanto aos autores
   coma aos administradores a outras partes do seu web (ao programa
-  externo de estat&iacute;sticas, por exemplo).
-<p />  Se non o utiliza, pode deixar esta opci&oacute;n
- co seu valor por defecto  (non crear
- ficheiros).',
+  externo de estat&iacute;sticas, por exemplo).<p />
+  Se non o utiliza, pode deixar esta opci&oacute;n
+ co seu valor predeterminado (non crear
+estes ficheiros).',
 'texte_informations_personnelles_1' => 'O sistema vaiche crear agora un acceso personalizado ao web',
 'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalaci&oacute;n, e o teu acceso vai sen atrancos, podes',
 'texte_introductif_article' => '(Texto introdutorio do artigo.)',
@@ -985,6 +1024,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_message_edit' => 'Atenci&oacute;n: esta mensaxe pode ser modificada por calquera dos xestores,
 e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&oacute; para avisar
   de eventos importantes da vida do web.',
+'texte_messagerie_agenda' => 'A mensaxer&iacute;a perm&iacute;telles aos redactores do web comunicarse entre eles directamente no espazo privado do web. Est&aacute; asociado a unha axenda.',
 'texte_messages_publics' => 'Mensaxes p&uacute;blicas do artigo:',
 'texte_mise_a_niveau_base_1' => 'Acaba de por ao d&iacute;a os ficheiros do SPIP.
   Agora ten que actualizar a base de datos do web.',
@@ -1055,7 +1095,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
   na cach&eacute; do Spip. Isto permite, por exemplo, forzar un novo c&aacute;lculo de todas as p&aacute;xinas cando se fagan
   grandes cambios gr&aacute;ficos ou de estrutura do web.',
 'texte_sur_titre' => 'Sobret&iacute;tulo',
-'texte_syndication' => '<MODIF>P&oacute;dese recuperar automaticamente, e sempre que o sitio web o permita, 
+'texte_syndication' => 'P&oacute;dese recuperar automaticamente, e sempre que o sitio web o permita, 
   a s&uacute;a lista de novidades. Para isto, ten que activar a afiliaci&oacute;n.
   <blockquote><i>Alg&uacute;ns aloxadores desactivan esta funcionalidade;
   nese caso, non poder&aacute; empregar a afiliaci&oacute;n de contido
@@ -1075,7 +1115,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
   desactivada por defecto para evitar mostrar mensaxes de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Resultados de m&aacute;is para "@cherche_auteur@"; por favor, afine a procura.',
 'texte_unpack' => 'descarga da &uacute;ltima versi&oacute;n',
-'texte_utilisation_moteur_syndiques' => '<MODIF>Cando emprega o motor de procura integrado
+'texte_utilisation_moteur_syndiques' => 'Cando emprega o motor de procura integrado
   no SPIP, pode efectuar as procuras nos webs e nos artigos afiliados
   de dous xeitos diferentes.
   <br />-  O m&aacute;is
@@ -1102,9 +1142,16 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'titre_cadre_interieur_rubrique' => 'Dentro do tema',
 'titre_cadre_numero_auteur' => 'AUTOR/A N&Uacute;MERO',
 'titre_cadre_signature_obligatoire' => '<b>Sinatura</b> [Obrigado]<br />',
+'titre_compacter_script_css' => 'Compactaci&oacute;n de scripts e CSS',
+'titre_compresser_flux_http' => 'Compactaci&oacute;n do fluxo HTTP',
+'titre_config_contenu_notifications' => 'Notificaci&oacute;ns',
+'titre_config_contenu_prive' => 'No espazo privado',
+'titre_config_contenu_public' => 'No web p&uacute;blico',
 'titre_config_fonctions' => 'Configuraci&oacute;n do web',
+'titre_config_forums_prive' => 'Foros do espazo privado',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute;n dos grupos de palabras chave',
 'titre_configuration' => 'Configuraci&oacute;n do web',
+'titre_conflit_edition' => 'Conflito tras a edici&oacute;n',
 'titre_connexion_ldap' => 'Opci&oacute;ns: <b>A s&uacute;a conexi&oacute;n LDAP</b>',
 'titre_dernier_article_syndique' => '&Uacute;ltimos artigos afiliados',
 'titre_documents_joints' => 'Documentos adxuntos',
@@ -1117,6 +1164,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'titre_langue_rubrique' => 'LINGUA DA SECCI&Oacute;N',
 'titre_langue_trad_article' => 'LINGUA E TRADUCI&Oacute;NS DO ARTIGO',
 'titre_les_articles' => 'OS ARTIGOS',
+'titre_messagerie_agenda' => 'Mensaxer&iacute;a e axenda',
 'titre_mots_cles_dans_forum' => 'Palabras chave nos foros do web p&uacute;blico',
 'titre_mots_tous' => 'As palabras chave',
 'titre_naviguer_dans_le_site' => 'Navegar no web...',
@@ -1148,6 +1196,7 @@ e ser&aacute; visible para todo o equipo de redacci&oacute;n. Use os anuncios s&
 'titre_page_recherche' => 'Resultados da procura de @recherche@',
 'titre_page_sites_tous' => 'Os webs referidos',
 'titre_page_statistiques' => 'Estat&iacute;sticas por temas',
+'titre_page_statistiques_messages_forum' => 'Mensaxes de foro',
 'titre_page_statistiques_referers' => 'Estat&iacute;sticas (ligaz&oacute;ns entrantes)',
 'titre_page_statistiques_signatures_jour' => 'N&uacute;mero de sinaturas por d&iacute;a',
 'titre_page_statistiques_signatures_mois' => 'N&uacute;mero de sinaturas por mes',
