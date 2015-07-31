@@ -455,9 +455,9 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		  $debut = substr($texte, 0, $p);
 		  $milieu = substr($texte, $p);
 		  $k = strpos($milieu, '(');
-		  $id_boucle = substr($milieu,
-				       strlen(BALISE_BOUCLE),
-				       $k - strlen(BALISE_BOUCLE));
+		  $id_boucle = trim(substr($milieu,
+					   strlen(BALISE_BOUCLE),
+					   $k - strlen(BALISE_BOUCLE)));
 		  $milieu = substr($milieu, $k);
 
 		  /* a adapter: si $n pointe sur $id_boucle ...
