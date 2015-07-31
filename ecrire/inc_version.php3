@@ -395,8 +395,6 @@ $flag_gz = function_exists("gzencode"); #php 4.0.4
 $flag_ob = ($flag_ini_get
 	&& !ereg("ob_", ini_get('disable_functions'))
 	&& function_exists("ob_start"));
-$flag_obgz = ($flag_ob && ($php_version<>'4.0.4')
-	&& function_exists("ob_gzhandler"));
 $flag_pcre = function_exists("preg_replace");
 $flag_crypt = function_exists("crypt");
 $flag_wordwrap = function_exists("wordwrap");
@@ -640,6 +638,8 @@ function test_obgz () {
 	return
 	$GLOBALS['auto_compress']
 	&& $GLOBALS['flag_ob']
+	&& ($php_version<>'4.0.4')
+	&& function_exists("ob_gzhandler")
 	&& $GLOBALS['flag_obgz']
 	// special bug de proxy
 	&& !eregi("NetCache|Hasd_proxy", $GLOBALS['HTTP_VIA'])
@@ -655,8 +655,8 @@ function test_obgz () {
 // si un buffer est deja ouvert, stop
 if ($flag_ob AND !strlen(@ob_get_contents())) {
 	@header("Vary: Cookie, Accept-Encoding");
-#	if (test_obgz())
-#		ob_start('ob_gzhandler');
+	if (test_obgz())
+		ob_start('ob_gzhandler');
 }
 
 
@@ -671,12 +671,6 @@ class Link {
 	//
 	function Link($url = '', $reentrant = false) {
 		static $link = '';
-
-/*		// If root link not defined, create it
-		if (!$link && !$reentrant) {
-			$link = new Link('', true);
-		}
-*/
 
 		$this->vars = array();
 		$this->arrays = array();
@@ -723,8 +717,12 @@ class Link {
 			else $v = strrpos($url, '/');
 			$url = substr($url, $v + 1);
 			if (!$url) $url = "./";
-			if (count($GLOBALS['HTTP_POST_VARS']))
-				$vars = $GLOBALS['HTTP_POST_VARS'];
+			if (count($GLOBALS['HTTP_POST_VARS'])) {
+				$vars = array();
+				foreach ($GLOBALS['HTTP_POST_VARS'] as $var => $val)
+					if (preg_match('/^(id_.*|coll)$/', $var))
+						$vars[$var] = $val;
+			}
 		}
 		$v = split('[\?\&]', $url);
 		list(, $this->file) = each($v);

@@ -35,8 +35,7 @@ function calculer_popularites($t) {
 		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count visites
 	}
 
-	reset ($count_article);
-	while (list($count,$articles) = each($count_article)) {
+	foreach($count_article as $count => $articles) {
 		$query = "UPDATE spip_articles
 			SET maj=maj, popularite = GREATEST(1,popularite) + $b * $count
 			WHERE id_article IN (0$articles)";
@@ -51,8 +50,7 @@ function calculer_popularites($t) {
 		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count referers
 	}
 
-	reset ($count_article);
-	while (list($count,$articles) = each($count_article)) {
+	foreach($count_article as $count => $articles) {
 		$query = "UPDATE spip_articles
 			SET maj=maj, popularite = GREATEST(1,popularite) + $b * $count
 			WHERE id_article IN (0$articles)";
