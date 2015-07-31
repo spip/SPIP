@@ -557,8 +557,8 @@ function normaliser_date($date) {
 
 // http://doc.spip.org/@vider_date
 function vider_date($letexte) {
-	if (ereg("^0000-00-00", $letexte)) return;
-	if (ereg("^1970-01-01", $letexte)) return;	// eviter le bug GMT-1
+	if (preg_match("@^0000-00-00@", $letexte)) return;
+	if (preg_match("@^1970-01-01@", $letexte)) return;	// eviter le bug GMT-1
 	return $letexte;
 }
 

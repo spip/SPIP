@@ -214,7 +214,7 @@ function calculer_balise($nom, $p) {
 	}
 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $nom)) {
+	if (preg_match('@^LOGO_@', $nom)) {
 		if (!function_exists($f = 'calculer_balise_logo')) $f .= '_dist';
 		$res = $f($p);
 		if ($res !== NULL)

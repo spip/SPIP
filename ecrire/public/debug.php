@@ -75,7 +75,7 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
 
-	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
+	if (preg_match('/err(no|code):?[[:space:]]*([0-9]+)/i', $erreur, $regs))
 		$errno = $regs[2];
 	else if (($errno == 1030 OR $errno <= 1026)
 		AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
