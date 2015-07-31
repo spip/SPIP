@@ -189,56 +189,19 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
 			$lecode = ereg_replace("\r", "\n", $lecode);
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
-			
-	//		$les_echap[$num_echap] = "</p>".propre($lecode)."<p class=\"spip\">";
 			$les_echap[$num_echap] = propre($lecode);
 		} 
-		/*else
-		if ($regs[17]) {
-			$lecode = $regs[19];
-			$les_echap[$num_echap] = image_math($lecode);
-		}
-		*/
 
 		$pos = strpos($letexte, $regs[0]);
 		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
 	}
 
-
-	$texte_a_voir = $letexte;
-	while (ereg("<math>", $texte_a_voir)) {
-		$debut =strpos($texte_a_voir, "<math>");
-		$fin = strpos($texte_a_voir,"</math>") + strlen("</math>");
-
-		$texte_debut = substr($texte_a_voir, 0, $debut);
-		
-		$texte_milieu = substr($texte_a_voir, $debut+strlen("<math>"), $fin-$debut-strlen("<math></math>"));
-		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
-
-		$traiter_math = "image_math";	// "mathml_math";
-
-		while((ereg("[$][$]([^$]+)[$][$]",$texte_milieu, $regs))) {
-			$num_echap++;
-			$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".$traiter_math($regs[1])."</p>\n";
-			$pos = strpos($texte_milieu, $regs[0]);
-			$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-				.substr($texte_milieu,$pos+strlen($regs[0]));
-		}
-		while((ereg("[$]([^$]+)[$]",$texte_milieu, $regs))) {
-			$num_echap++;
-			$les_echap[$num_echap] = $traiter_math($regs[1]);
-			$pos = strpos($texte_milieu, $regs[0]);
-			$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
-				.substr($texte_milieu,$pos+strlen($regs[0]));
-		}
-
-		$texte_a_voir = $texte_debut.$texte_milieu.$texte_fin;
-		
+	// Gestion du TeX
+	if (!(strpos($letexte, "<math>") === false)) {
+		include_ecrire("inc_math.php3");
+		$letexte = traiter_math($letexte, &$les_echap, &$num_echap, $source);
 	}
-	$letexte = $texte_a_voir;
-
-
 
 	//
 	// Insertion d'images et de documents utilisateur

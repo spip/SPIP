@@ -144,12 +144,15 @@ $champs_extra_proposes = false;
 $ignore_auth_http = false;
 $ignore_remote_user = false;
 
-// serveurs externes
+// Serveurs externes
 $spip_server = array (
-	'math' => 'http://math.spip.org/tex.php',
+	'tex' => 'http://math.spip.org/tex.php',
 	'mathml' => 'http://arno.rezo.net/tex2mathml/latex.php',
 	'ortho' => 'http://ortho.spip.net/ortho_serveur.php'
 );
+
+// Produire du TeX ou de MathML ?
+$traiter_math = 'tex';
 
 //
 // *** Fin du parametrage ***
