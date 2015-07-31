@@ -506,7 +506,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'install_select_langue' => 'Выберите язык, потом нажмите на кнопку "далее", чтобы начать процедуру установки.',
 	'install_select_type_db' => 'Укажите тип базы данных:',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

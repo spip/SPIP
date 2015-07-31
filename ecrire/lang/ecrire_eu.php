@@ -495,7 +495,6 @@ Itzulpenak originalari asoziatuta daude, bere egoera adierazten duten kolore bat
 	'install_select_langue' => 'Hizkuntza bat aukeratu eta « hurrengoa » botoian klikatu instalazio-prozedura hasteko.',
 	'install_select_type_db' => 'Zehaztu datu-base mota :',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',

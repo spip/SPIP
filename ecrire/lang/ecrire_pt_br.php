@@ -493,7 +493,6 @@ As traduções estão associadas ao original, numa côr que indica o seu status:
 	'install_select_langue' => 'Escolha um idioma e clique no botão «avançar» para iniciar o procedimento de instalação.',
 	'install_select_type_db' => 'Indicar o tipo de base de dados:',
 	'install_select_type_mysql' => 'MySQL',
-	'install_select_type_mysqli' => 'MySQLi',
 	'install_select_type_pg' => 'PostgreSQL',
 	'install_select_type_sqlite2' => 'SQLite 2',
 	'install_select_type_sqlite3' => 'SQLite 3',
