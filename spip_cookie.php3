@@ -70,23 +70,26 @@ else if ($essai_login == "oui") {
 			$row_auteur['statut'] = '1comite';
 		}
 
-		if ($row_auteur['statut'] == '0minirezo') { // force le cookie pour les admins
-			$cookie_admin = "@".$row_auteur['login'];
+		if ($zap_sessions == 'oui') {
+			zap_sessions($row_auteur['login'], true);
 		}
-		if ($zap_sessions) zap_sessions($row_auteur['login'], true);
-		$cookie_session = creer_cookie_session($row_auteur);
-		setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
-
-
-		// ici on fait tourner le codage du pass dans la base
-		// retournera une erreur si la base n'est pas mise a jour...
-		$nouvel_alea_futur = creer_uniqid();
-		$query = "UPDATE spip_auteurs
-			SET alea_actuel = alea_futur,
-				pass = '$md5next',
-				alea_futur = '$nouvel_alea_futur'
-			WHERE login='$login'";
-		@spip_query($query);
+		else {
+			if ($row_auteur['statut'] == '0minirezo') { // force le cookie pour les admins
+				$cookie_admin = "@".$row_auteur['login'];
+			}
+			$cookie_session = creer_cookie_session($row_auteur);
+			setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
+	
+			// ici on fait tourner le codage du pass dans la base
+			// retournera une erreur si la base n'est pas mise a jour...
+			$nouvel_alea_futur = creer_uniqid();
+			$query = "UPDATE spip_auteurs
+				SET alea_actuel = alea_futur,
+					pass = '$md5next',
+					alea_futur = '$nouvel_alea_futur'
+				WHERE login='$login'";
+			@spip_query($query);
+		}
 	}
 	else if ($redirect_echec) {
 		@header("Location: $redirect_echec?login=$login&erreur=pass");
