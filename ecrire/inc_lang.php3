@@ -398,7 +398,9 @@ function lang_dselect ($rien='') {
 // - 'changer_lang' = langue de l'article, espace prive
 // 
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
-	global $couleur_foncee, $couleur_claire, $flag_ecrire, $connect_id_auteur;
+	global $couleur_foncee, $couleur_claire, $flag_ecrire, $connect_id_auteur, $multilang;
+
+	if (!$flag_ecrire AND !$multilang AND ($nom_select == 'var_lang' OR $nom_select == 'var_lang_ecrire')) return;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];

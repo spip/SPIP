@@ -967,7 +967,6 @@ function debut_html($titre = "") {
 	afficher_script_layer();
 ?>
 <script type='text/javascript'><!--
-
 function changeclass(objet, myClass)
 {
 		objet.className = myClass;
@@ -976,10 +975,7 @@ function changesurvol(iddiv, myClass)
 {
 		document.getElementById(iddiv).className = myClass;
 }
-
-
-
-
+var antifocus=false; // effacement titre quand new=oui
 //--></script>
 </head>
 <?php
@@ -1519,7 +1515,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		global $recherche;
 		if ($recherche == '' AND $spip_display != 2) {
 			$recherche_aff = _T('info_rechercher');
-			$onfocus = " onfocus=\"if(!done){this.value='';done=true;}\"";
+			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		} else
 			$recherche_aff = $recherche;
 		bandeau_barre_verticale();
