@@ -161,7 +161,7 @@ function analyse_resultat_skel($nom, $cache, $corps, $source='') {
 		// proteger les <INCLUDE> et tous les morceaux de php
 		if ($process_ins == 'php')
 			$corps = preg_replace_callback(',<[?](\s|php|=).*[?]>,UimsS',
-				echapper_php_callback, $corps);
+				'echapper_php_callback', $corps);
 		foreach (explode('|', $headers['X-Spip-Filtre']) as $filtre) {
 			$corps = appliquer_filtre($corps, $filtre);
 		}
