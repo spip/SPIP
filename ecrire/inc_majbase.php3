@@ -1141,6 +1141,17 @@ function maj_base() {
 		maj_version(1.905);
 	}
 
+
+	// cette table est desormais geree par le plugin "podcast_client", on la
+	// supprime si le plugin n'est pas active ; risque inherent a l'utilisation
+	// de versions alpha :-)
+	if ($version_installee < 1.906) {
+		if (!in_array('podcast_client', $GLOBALS['plugins'])) {
+			spip_query("DROP TABLE spip_documents_syndic");
+		}
+		maj_version(1.906);
+	}
+
 	return true;
 }
 

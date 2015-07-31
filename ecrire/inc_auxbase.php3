@@ -116,17 +116,6 @@ $spip_documents_breves_key = array(
 		"KEY id_document"	=> "id_document",
 		"KEY id_breve"	=> "id_breve");
 
-$spip_documents_syndic = array(
-		"id_document"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_syndic"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-		"id_syndic_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL"
-		);
-
-$spip_documents_syndic_key = array(
-		"KEY id_document"	=> "id_document",
-		"KEY id_syndic"	=> "id_syndic",
-		"KEY id_syndic_article"	=> "id_syndic_article");
-
 $spip_mots_articles = array(
 		"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 		"id_article"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
@@ -284,8 +273,6 @@ $tables_auxiliaires  =
 				       'key' => &$spip_documents_rubriques_key),
 	'spip_documents_breves' => array('field' => &$spip_documents_breves,
 				    'key' => &$spip_documents_breves_key),
-	'spip_documents_syndic' => array('field' => &$spip_documents_syndic,
-				    'key' => &$spip_documents_syndic_key),
 	'spip_mots_articles' => array('field' => &$spip_mots_articles,
 				 'key' => &$spip_mots_articles_key),
 	'spip_mots_breves' => array('field' => &$spip_mots_breves,
@@ -334,9 +321,6 @@ $tables_relations['rubriques']['id_document'] = 'documents_rubriques';
 
 $tables_relations['documents']['id_breve'] = 'documents_breves';
 $tables_relations['breves']['id_document'] = 'documents_breves';
-
-$tables_relations['documents']['id_syndic'] = 'documents_syndic';
-$tables_relations['syndic']['id_document'] = 'documents_syndic';
 
 $tables_relations['mots']['id_article'] = 'mots_articles';
 $tables_relations['articles']['id_mot'] = 'mots_articles';
