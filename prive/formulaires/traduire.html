@@ -42,7 +42,7 @@
 				]
 				[(#ENV{_lister_id_trad}|non)
 				<li class="editer editer_id_trad long_label[(#ENV**{erreurs}|table_valeur{id_trad}|oui)erreur][(#ENV{_saisie_en_cours}|non)none-js]">
-					<label for="id_trad"><:trad_lier:></label>[
+					<label for="id_trad">[(#ENV{_objet}|objet_info{texte_definir_comme_traduction_objet}|_T)]</label>[
 					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_trad})</span>
 					]<input type="text" class="text" name="id_trad" id="id_trad" value="[(#ENV{id_trad}|?{#ENV{id_trad}})]"
 						onkeypress="$(this).parents('form').find('.boutons').slideDown();"/>
