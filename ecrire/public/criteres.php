@@ -695,7 +695,14 @@ function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $crit, $c
 	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
-		if ($t) if (!trouver_champ('/\b' . $t  . ".$col" . '\b/', $boucle->where)) return $t;
+		if ($t) {
+		  $c = '/\b' . $t  . ".$col" . '\b/';
+		  if (!trouver_champ($c, $boucle->where)) {
+		    // mais ca peut etre dans le FIELD pour le Having
+		    $c = "/FIELD.$t" .".$col,/";
+		    if (!trouver_champ($c, $boucle->select)) return $t;
+		  }
+		}
 		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $crit->cond);
 		if ($cle) return "L$cle";
 	}
@@ -745,7 +752,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // cf http://article.gmane.org/gmane.comp.web.spip.devel/30555
 
-  if ($pk = (count($res) == 1) && !$cond) {
+  if ($pk = (count($boucle->from) == 1) && !$cond) {
     if ($pk = $a[1]['key']['PRIMARY KEY']) {
 	$pk=preg_match("/^$id_primary, *$col$/", $pk) OR
 	  preg_match("/^$col, *$id_primary$/", $pk);
@@ -753,9 +760,10 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
   }
   // la clause Group by est en conflit avec ORDER BY, a completer
 
+  if (!$pk)
 	foreach($keys as $id_prim){
 		$id_field = $dnom . '.' . $id_prim;
-		if (!$pk && !in_array($id_field, $boucle->group)) {
+		if (!in_array($id_field, $boucle->group)) {
 			$boucle->group[] = $id_field;
 			// postgres exige que le champ pour GROUP soit dans le SELECT
 			if (!in_array($id_field, $boucle->select))
