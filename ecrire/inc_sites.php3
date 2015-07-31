@@ -84,7 +84,13 @@ function analyser_site($url) {
 		if (ereg('<link[^>]*>([^<]*)</link>', $channel, $r)) {
 			$result['url_site'] = $r[1];
 		}
-		if (ereg('<description[^>]*>([^<]*)</description>', $channel, $r)) {
+
+		// si le channel n'a pas de description, ne pas prendre celle d'un article
+		if ($a = strpos($channel, '<item>'))
+			$channel_desc = substr ($channel, 0, $a);
+		else
+			$channel_desc = $channel;
+		if (ereg('<description[^>]*>([^<]*)</description>', $channel_desc, $r)) {
 			$result['descriptif'] = $r[1];
 		}
 	}
