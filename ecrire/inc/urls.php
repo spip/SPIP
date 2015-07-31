@@ -76,14 +76,13 @@ function urls_decoder_url($url, $fond='', $contexte=array(), $assembler=false){
 		unset($_ENV['url_propre']);
 		include_spip('inc/filtres_mini');
 		if (strpos($url,"://")===false){
-            $GLOBALS['profondeur_url'] = substr_count(ltrim(resolve_path("/$url"),'/'),'/');
-    }
-    else {
-            $GLOBALS['profondeur_url'] = max(0,substr_count($url,"/")-substr_count($current_base,"/"));
-    }
+			$GLOBALS['profondeur_url'] = substr_count(ltrim(resolve_path("/$url"),'/'),'/');
+		}
+		else {
+			$GLOBALS['profondeur_url'] = max(0,substr_count($url,"/")-substr_count($current_base,"/"));
+		}
 	}
 
-	
 	$url_redirect = "";
 	$renommer = generer_url_entite('','','','',true);
 	if (!$renommer AND !function_exists('recuperer_parametres_url'))
@@ -182,14 +181,14 @@ function nettoyer_url_page($url, $contexte=array())
 	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?]('. $url_objets .')([0-9]+)(&.*)?$,';
 
 	if (preg_match($raccourci_url_page_html, $url, $regs)
-	OR preg_match($raccourci_url_page_id, $url, $regs)
-	OR preg_match($raccourci_url_page_spip, $url, $regs)) {
-		$regs = array_pad($regs, 4, null);
-		$type = objet_type($regs[1]);
-		$_id = id_table_objet($type);
-		$contexte[$_id] = $regs[2];
-		$suite = $regs[3];
-		return array($contexte, $type, null, $type, $suite);
+		OR preg_match($raccourci_url_page_id, $url, $regs)
+		OR preg_match($raccourci_url_page_spip, $url, $regs)) {
+			$regs = array_pad($regs, 4, null);
+			$type = objet_type($regs[1]);
+			$_id = id_table_objet($type);
+			$contexte[$_id] = $regs[2];
+			$suite = $regs[3];
+			return array($contexte, $type, null, $type, $suite);
 	}
 	return array();
 }
@@ -215,7 +214,7 @@ function generer_url_ecrire_objet($objet,$id, $args='', $ancre='', $public=null,
 		if (function_exists($f = 'generer_url_ecrire_' . $objet)
 			// ou definie par un plugin
 			OR $f = charger_fonction($f,'urls',true))
-			$furls[$objet] = $f;
+				$furls[$objet] = $f;
 		else
 			$furls[$objet] = '';
 	}
