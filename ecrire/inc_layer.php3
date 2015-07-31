@@ -132,6 +132,10 @@ function verif_butineur() {
 	if (!$browser_name) $browser_name = "Mozilla";
 }
 
+// Obsolete. Present pour compatibilite 
+function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
+function test_layer(){return $GLOBALS['browser_layer'];}
+
 verif_butineur();
 
 $GLOBALS['browser_caret'] =  (!$GLOBALS['browser_barre'] ? '' : "
