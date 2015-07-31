@@ -546,7 +546,7 @@ function autoriser_document_voir_dist($faire, $type, $id, $qui, $opt) {
 	foreach(array('article','rubrique','breve') as $objet){
 		$table_sql = table_objet_sql($objet);
 		$id_table = id_table_objet($objet);
-		if (sql_countsel('spip_documents_liens AS rel, $table_sql AS o', "rel.id_objet = articles.$id_table AND rel.objet='$objet' AND o.statut = 'publie' AND rel.id_document = $id") > 0)
+		if (sql_countsel('spip_documents_liens AS rel, '.$table_sql.' AS o', "rel.id_objet = o.$id_table AND rel.objet='$objet' AND o.statut = 'publie' AND rel.id_document = $id") > 0)
 			return 'htaccess';
 	}
 	return false;
