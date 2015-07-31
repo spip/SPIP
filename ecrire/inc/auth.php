@@ -30,6 +30,7 @@ function auteurs_article($id_article, $cond='')
 	return spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article". ($cond ? " AND $cond" : ''));
 }
 
+// http://doc.spip.org/@auteurs_autorises
 function auteurs_autorises($cond='', $order='')
 {
   return spip_query("SELECT * FROM spip_auteurs WHERE statut IN ('0minirezo','1comite')" . ($cond ? " AND $cond" : '') . ($order ? " ORDER BY $order" : ''));
