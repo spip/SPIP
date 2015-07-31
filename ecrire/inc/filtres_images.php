@@ -2031,6 +2031,7 @@ function image_renforcement($im, $k=0.5)
 // attention, seul 128 est supporte en l'etat (production d'images avec palette reduite pas satisfaisante)
 // http://doc.spip.org/@image_aplatir
 // 3/ $transparence a "true" permet de conserver la transparence (utile pour conversion GIF)
+// http://doc.spip.org/@image_aplatir
 function image_aplatir($im, $format='jpg', $coul='000000', $qualite=NULL, $transparence=false)
 {
 	if ($qualite===NULL){
