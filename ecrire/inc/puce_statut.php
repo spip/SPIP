@@ -233,7 +233,7 @@ function puce_statut_auteur_dist($id, $statut, $id_parent, $type, $ajax='', $men
 	else {
 	}
 	*/
-	return http_img_pack($img, $alt, $fond, $titre);
+	return http_img_pack($img, $alt, $fond, $alt);
 }
 
 
