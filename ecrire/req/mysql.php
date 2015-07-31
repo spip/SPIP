@@ -496,7 +496,7 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	// dans le cas d'une LIMIT on ne peut pas appeler COUNT(*)
 	$r = $limit
 		? spip_mysql_select("$c", $from, $where,'', '', $limit,
-			$having, $serveur, $requeter);
+			$having, $serveur, $requeter)
 		: spip_mysql_select("COUNT($c)", $from, $where,'', '', $limit,
 			$having, $serveur, $requeter);
 
