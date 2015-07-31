@@ -245,13 +245,13 @@ function inc_controler_signature_dist($id_article, $nom_email, $adresse_email, $
 				$texte = _T('form_pet_deja_signe');
 		}
 		if (!$texte AND $site_obli == "oui") {
-			if (!$nom_site) {
+			if (!strlen($nom_site)
+			OR !vider_url($url_site)) {
 				$texte = _T('form_indiquer_nom_site');
 			}
-		}
-		include_spip('inc/sites');
-		if (!$texte) {
-			if (!recuperer_page($url_site, false, true, 0))
+			include_spip('inc/sites');
+			if (!$texte
+			AND !recuperer_page($url_site, false, true, 0))
 				$texte = _T('form_pet_url_invalide');
 		}
 		if (!$texte AND $site_unique == "oui") {
