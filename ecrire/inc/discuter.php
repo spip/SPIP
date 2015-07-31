@@ -62,7 +62,7 @@ function inc_discuter_dist($id, $script, $objet, $statut='prive', $debut=1, $pas
 		$clic = _T('icone_poster_message');
 		$logo = ($script == 'forum_admin') ?
 		  "forum-admin-24.gif" : "forum-interne-24.gif";
-		$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id=$id&script=$script") ."#formulaire";
+		$lien = generer_url_ecrire("poster_forum_prive", "statut=$statut&id=$id&script=$script");
 		$res = icone_inline($clic, $lien, $logo, "creer.gif",'center', $ancre);
 
 		$where = ((!$objet OR !$id) ? '' : ($objet . "=" . sql_quote($id) . " AND "))
