@@ -255,6 +255,7 @@
 	<pipeline><nom>declarer_tables_principales</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_auxiliaires</nom><action></action></pipeline>
 	<pipeline><nom>declarer_tables_objets_surnoms</nom><action></action></pipeline>
+	<pipeline><nom>declarer_type_surnoms</nom><action></action></pipeline>
 	<pipeline><nom>declarer_url_objets</nom><action></action></pipeline>
 	<pipeline><nom>definir_session</nom><action></action></pipeline>
 	<pipeline><nom>delete_tables</nom><action></action></pipeline>
