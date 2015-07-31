@@ -16,7 +16,7 @@ $spip_version = 1.444;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
-$spip_version_affichee = "1.4d5 CVS";
+$spip_version_affichee = "1.4d6 CVS";
 
 // version de spip / tag
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
