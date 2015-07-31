@@ -61,12 +61,11 @@ function squelette_obsolete($skel, $squelette) {
 # - des fonctions de traduction de balise, de critere et de boucle
 # - des declaration de tables SQL supplementaires
 
-function charger_squelette ($squelette, $mime_type, $gram) {
+function charger_squelette ($squelette, $mime_type, $gram, $sourcefile) {
 
 	$nom = $mime_type . '_' . md5($squelette);
-	$sourcefile = $squelette . ".$gram";
 
-	// le squelette est-il deja en memoire (INCLURE  a repetition)
+	// si squelette est deja en memoire (INCLURE  a repetition)
 	if (function_exists($nom))
 		return $nom;
 
@@ -87,9 +86,6 @@ function charger_squelette ($squelette, $mime_type, $gram) {
 	// Le fichier suivant peut contenir entre autres:
 	// 1. les filtres utilises par le squelette
 	// 2. des ajouts au compilateur
-	// Le point 1 exige qu'il soit lu dans tous les cas.
-	// Le point 2 exige qu'il soit lu apres inc-compilo
-	// (car celui-ci initialise $tables_principales) mais avant la compil
 
 	@include_once($squelette . '_fonctions'.'.php3');	# compatibilite
 	@include_once($squelette . '_fonctions'.'.php');
@@ -145,7 +141,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 		lang_select($lang);
 
 	$f = include_fonction('trouver_squelette', 'public');
-	list($skel,$mime_type, $gram) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
+	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
 	// Compiler le squelette en specifiant les langages cibles et source
 	// (cette compilation n'intervient qu'en cas de modif du squelette)
@@ -154,7 +150,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 
 	$page = array();
 
-	if ($fonc = charger_squelette($skel, $mime_type, $gram)) {
+	if ($fonc = charger_squelette($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer('calcul page');
 		$page = $fonc(array('cache' => $cache), array($contexte));
 		spip_log("calcul ("
