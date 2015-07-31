@@ -238,39 +238,38 @@ var ajaxbloc_selecteur;
 jQuery.fn.ajaxbloc = function() {
 	if (this.length)
 		initReaderBuffer();
+	var on_pagination = function(blocfrag,c,u) {
+		jQuery(blocfrag)
+		.html(c)
+		.removeClass('loading');
+		if (typeof u != undefined)
+			jQuery(blocfrag).attr('data-url',u);
+		var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
+		if (a.length
+			&& a.is('a[name=ajax_ancre]')
+			&& jQuery(a.attr('href'),blocfrag).length){
+				a = a.attr('href')
+			setTimeout(function(){
+				jQuery(a,blocfrag).positionner(false);
+				//a = a.split('#');
+				//window.location.hash = a[1];
+			},10);
+		}
+		else {
+			//jQuery(blocfrag).positionner(false);
+		}
+		// si le fragment ajax est dans un form ajax,
+		// il faut remettre a jour les evenements attaches
+		// car le fragment peut comporter des submit ou button
+		a = jQuery(blocfrag).parents('form.hasajax')
+		if (a.length)
+			a.eq(0).removeClass('noajax').parents('div.ajax').formulaire_dyn_ajax();
+		updateReaderBuffer();
+	}
 
   return this.each(function() {
 	  jQuery('div.ajaxbloc',this).ajaxbloc(); // traiter les enfants d'abord
 		var blocfrag = jQuery(this);
-
-		var on_pagination = function(c,u) {
-			jQuery(blocfrag)
-			.html(c)
-			.removeClass('loading');
-			if (typeof u != undefined)
-				jQuery(blocfrag).attr('data-url',u);
-			var a = jQuery('a:first',jQuery(blocfrag)).eq(0);
-			if (a.length
-			  && a.is('a[name=ajax_ancre]')
-			  && jQuery(a.attr('href'),blocfrag).length){
-			  	a = a.attr('href')
-				setTimeout(function(){
-					jQuery(a,blocfrag).positionner(false);
-					//a = a.split('#');
-					//window.location.hash = a[1];
-				},10);
-			}
-			else {
-				//jQuery(blocfrag).positionner(false);
-			}
-			// si le fragment ajax est dans un form ajax, 
-			// il faut remettre a jour les evenements attaches
-			// car le fragment peut comporter des submit ou button
-			a = jQuery(blocfrag).parents('form.hasajax')
-			if (a.length)
-				a.eq(0).removeClass('noajax').parents('div.ajax').formulaire_dyn_ajax();
-			updateReaderBuffer();
-		}
 
 		var ajax_env = (""+blocfrag.attr('class')).match(/env-([^ ]+)/);
 		if (!ajax_env || ajax_env==undefined) return;
@@ -292,7 +291,7 @@ jQuery.fn.ajaxbloc = function() {
 		  .animeajax()
 		  .addClass('loading').positionner(false);
 		  if (preloaded_urls[url] && !force) {
-			  on_pagination(preloaded_urls[url],href);
+			  on_pagination(blocfrag,preloaded_urls[url],href);
 			  console.log('loadAjax');
 			  triggerAjaxLoad(blocfrag);
 		  } else {
@@ -300,7 +299,7 @@ jQuery.fn.ajaxbloc = function() {
 				  url: url,
 				  ajaxTarget:blocfrag,
 				  success: function(c){
-					  on_pagination(c,href);
+					  on_pagination(blocfrag,c,href);
 					  preloaded_urls[url] = c;
 					  if (callback && typeof callback == "function")
 					    callback.apply(blocfrag);
@@ -353,7 +352,7 @@ jQuery.fn.ajaxbloc = function() {
 					jQuery(blocfrag).addClass('loading').animeajax().positionner(false);
 				},
 				success: function(c){
-					on_pagination(c);
+					on_pagination(blocfrag,c);
 					preloaded_urls = {}; // on vide le cache des urls car on a fait une action en bdd
 					// on le refait a la main ici car onAjaxLoad intervient sur une iframe dans IE6 et non pas sur le document
 					jQuery(blocfrag)
