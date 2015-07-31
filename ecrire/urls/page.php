@@ -85,22 +85,17 @@ function urls_page_dist($i, &$entite, $args='', $ancre='')
 	}
 	/* Fin du bloc compatibilite url-propres */
 }
-
-	// Decoder l'url html, page ou standard
-
-define('_URL_OBJETS', 'article|breve|rubrique|mot|auteur|site|syndic');
-define('_RACCOURCI_URL_PAGE_HTML',
-	 ',^(?:[^?]*/)?('. _URL_OBJETS . ')([0-9]+)(?:\.html)?([?&].*)?$,');
-define('_RACCOURCI_URL_PAGE_ID',
-	',^(?:[^?]*/)?('. _URL_OBJETS .')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,');
-define('_RACCOURCI_URL_PAGE_SPIP',
-	',^(?:[^?]*/)?(?:spip[.]php)?[?]('. _URL_OBJETS .')([0-9]+)(&.*)?$,');
  
 function nettoyer_url_page($url, $contexte=array())
 {
-	if (preg_match(_RACCOURCI_URL_PAGE_HTML, $url, $regs)
-	OR preg_match(_RACCOURCI_URL_PAGE_ID, $url, $regs)
-	OR preg_match(_RACCOURCI_URL_PAGE_SPIP, $url, $regs)) {
+	$url_objets = pipeline('url_objets');
+	$raccourci_url_page_html = ',^(?:[^?]*/)?('. $url_objets . ')([0-9]+)(?:\.html)?([?&].*)?$,';
+	$raccourci_url_page_id = ',^(?:[^?]*/)?('. $url_objets .')\.php3?[?]id_\1=([0-9]+)([?&].*)?$,';
+	$raccourci_url_page_spip = ',^(?:[^?]*/)?(?:spip[.]php)?[?]('. $url_objets .')([0-9]+)(&.*)?$,';
+	
+	if (preg_match($raccourci_url_page_html, $url, $regs)
+	OR preg_match($raccourci_url_page_id, $url, $regs)
+	OR preg_match($raccourci_url_page_spip, $url, $regs)) {
 		$type = preg_replace(',s$,', '', table_objet($regs[1]));
 		if ($type == 'syndic') $type = 'site';
 		$_id = id_table_objet($regs[1]);
