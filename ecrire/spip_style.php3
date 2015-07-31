@@ -330,8 +330,10 @@ a.icone26:hover img {
 .cellule36 a img {
 	margin: 0px; 
 	display: inline;
-	padding: 4px;
+	padding: 3px;
 	border: 0px;
+	border: 1px solid white;
+	-moz-border-radius: 5px;
 }
 .cellule36 a.selection img{
 	margin: 0px; 
@@ -345,9 +347,9 @@ a.icone26:hover img {
 	margin: 0px; 
 	display: inline;
 	padding: 3px;
-	background-color: #dddddd;
+	background-color: #e4e4e4;
 	background: url(img_pack/fond-gris-anim.gif);
-	border: 1px solid #999999;
+	border: 1px solid <?php echo $couleur_foncee; ?>;
 	-moz-border-radius: 5px;
 }
 .cellule36 a span, .cellule48 a span {
@@ -397,12 +399,16 @@ a.icone26:hover img {
 	color: #606060;
 }
 .cellule-texte a.selection {
-	padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;
+	padding: 3px; margin: 1px; 
+	border: 1px solid <?php echo $couleur_foncee; ?>; 
+	background-color: <?php echo $couleur_claire; ?>;
 	-moz-border-radius: 5px;
 	color: #000000;
 }
 .cellule-texte a:hover {
-	padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;
+	padding: 3px; margin: 1px; 
+	border: 1px solid <?php echo $couleur_foncee; ?>; 
+	background-color: white;
 	-moz-border-radius: 5px;
 	color: #333333;
 }
@@ -440,14 +446,15 @@ a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover 
 	color: #000000;
 }
 a.cellule-h div.cell-i {
-	padding: 1px;
-	border: 0px;
+	padding: 0px;
+	border: 1px solid white;
+	-moz-border-radius: 5px;
 	margin: 0px;
 	margin-<?php echo $right; ?>: 3px;
 }
 a.cellule-h:hover div.cell-i {
 	padding: 0px;
-	border: 1px solid #999999;
+	border: 1px solid <?php echo $couleur_foncee; ?>;
 	background-color: white;
 	-moz-border-radius: 5px;
 	margin: 0px;
