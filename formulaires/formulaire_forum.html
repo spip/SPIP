@@ -7,7 +7,6 @@
 <input type='hidden' name='retour_forum' value='(#ENV*{retour_forum}|rawurlencode)' />][
 <p>(#ENV{modere})<:forum_info_modere:></p>
 ][(#ENV*{previsu})]
-<p>
 <BOUCLE_G(GROUPES_MOTS){forum=oui}
 	{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}
 	{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}

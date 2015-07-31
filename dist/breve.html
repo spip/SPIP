@@ -31,7 +31,7 @@
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><strong>#NOM_SITE_SPIP</strong></a>]
 	</li>
 	<li class="menu-item">
 	<a href="#URL_PAGE{plan}"><:plan_site:></a>
@@ -136,7 +136,7 @@
 		<ul>
 	<BOUCLE_breves_rubrique(BREVES) {id_rubrique} {exclus} {par date} {inverse} {0,8}>
 		<li class="menu-item">
-		<i>[(#DATE|affdate_court)]</i>:
+		<em>[(#DATE|affdate_court)]</em>:
 		<a href="#URL_BREVE">#TITRE</a>
 		</li>
 	</BOUCLE_breves_rubrique>
@@ -157,7 +157,7 @@
 
 <!-- Forums -->
 
-<div class="forum-repondre"><b><a  href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></b></div>]
+<div class="forum-repondre"><strong><a  href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_breve:></a></strong></div>]
 <br />
 
 <h1 class="structure"><:forum:></h1>
