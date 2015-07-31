@@ -125,7 +125,7 @@ function plugin_resume($info, $dir_plugins, $plug_file, $url_page){
 
 	return "<div class='resume'>"
 	. "<h3><a href='$url' rel='info'>"
-	. typo($info['nom'])
+	. typo(attribut_html($info['nom']))
 	. "</a></h3>"
 	. " <span class='version'>".$info['version']."</span>"
 	. " <span class='etat'> - "
@@ -177,26 +177,30 @@ function affiche_bloc_plugin($plug_file, $info, $dir_plugins=null) {
 	$s = "";
 	// TODO: le traiter_multi ici n'est pas beau
 	// cf. description du plugin/_stable_/ortho/plugin.xml
-	if (isset($info['description'])) {
-		$lien = "";
-		if (trim($info['lien'])) {
-			$lien = $info['lien'];
-			if (!preg_match(',^https?://,iS', $lien))
-				$lien = extraire_attribut(extraire_balise(propre($lien),'a'),'href');
-			$lien = "\n_ <em class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></em>';
-		}
-		$s .= "<dd class='desc'>".plugin_propre($info['description'] . $lien, $dir);
-		$s .= "</dd>\n";
+	$description = "";
+	if (isset($info['description']))
+		$description = plugin_propre($info['description'], $dir);
+
+	if (isset($info['documentation'])
+	  AND $lien = $info['documentation']){
+		$description .= "<p><em class='site'><a href='$lien' class='spip_out'>" . _T('en_savoir_plus') .'</a></em></p>';
 	}
+	$s .= "<dd class='desc'>".$description."</dd>\n";
 
 	if (isset($info['auteur'])){
 		if (is_array($info['auteur']))
 			$a = implode(', ',$info['auteur']);
+		// pour compat mais ne doit plus arriver
 		else
 			$a = trim($info['auteur']);
 		if ($a)
 			$s .= "<dt class='auteurs'>" . _T('public:par_auteur') ."</dt><dd class='auteurs'>". PtoBR(plugin_propre($a, $dir)) . "</dd>\n";
 	}
+	if (isset($info['credit'])){
+		if ($a = implode(', ',$info['credit']))
+			$s .= "<dt class='credits'>" . _T('plugin_info_credit') ."</dt><dd class='credits'>". PtoBR(plugin_propre($a, $dir)) . "</dd>\n";
+	}
+
 	if (isset($info['licence']))
 	  $s .= "<dt class='licence'>" . _T('intitule_licence') ."</dt><dd class='licence'>". PtoBR(plugin_propre($info['licence'], $dir)) . "</dd>\n";
 	$s = "<dl>$s</dl>";
