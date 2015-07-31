@@ -150,6 +150,39 @@ function filtrer($filtre) {
 	}
 }
 
+/*
+ *
+ * [(#CALCUL|set{toto})] enregistre le résultat de #CALCUL
+ *           dans la variable toto et renvoie vide
+ *
+ * [(#CALCUL|set{toto,1})] enregistre le résultat de #CALCUL
+ *           dans la variable toto et renvoie la valeur
+ *
+ */
+function filtre_set($val, &$Pile, $key, $continue = null) {
+	$Pile['vars'][$key] = $val;
+	return $continue ? $val : '';
+}
+
+/*
+ * [(#TRUC|debug{avant}|calcul|debug{apres}|etc)] affiche
+ *   la valeur de #TRUC avant et après le calcul
+ */
+function filtre_debug($val, $key=null) {
+	$debug = (
+		is_null($key) ? '' :  (var_export($key,true)." = ")
+	) . var_export($val, true);
+
+	include_spip('inc/autoriser');
+	if (autoriser('webmestre'))
+		echo "<div class='spip_debug'>\n",$debug,"</div>\n";
+
+	spip_log($debug, 'debug');
+
+	return $val;
+}
+
+
 // fonction generique d'entree des filtres images
 // accepte en entree un texte complet, un img-log (produit par #LOGO_XX),
 // un tag <img ...> complet, ou encore un nom de fichier *local* (passer
