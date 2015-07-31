@@ -28,13 +28,11 @@ function inc_auth_ldap_dist ($login, $pass) {
 	if (!($dn = auth_ldap_search($login, $pass))) return array();
 
 	// Si l'utilisateur figure deja dans la base, y recuperer les infos
-	$result = sql_select("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'");
+	$result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'");
 
 	// sinon importer les infos depuis LDAP, 
 	// avec le statut par defaut a l'install
-	if (!sql_count($result))
-		$result = auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
-	return $result ? sql_fetch($result) : array(); 
+	return $result ? $result : auth_ldap_inserer($dn, $GLOBALS['meta']["ldap_statut_import"]);
 }
 
 // http://doc.spip.org/@auth_ldap_search
@@ -80,14 +78,14 @@ function auth_ldap_inserer($dn, $statut)
 	$ldap_link = $ldap_link['link'];
 
 	// refuser d'importer n'importe qui 
-	if (!$statut) return false;
+	if (!$statut) return array();
 
 	// Lire les infos sur l'uid de l'utilisateur depuis LDAP 
 	$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("uid", "cn", "mail", "description"));
 		
 	// Si ça ne marche pas, essayer avec le samaccountname
 	if (!$result)
-		$result = @ldap_read($ldap_link, $dn, array("samaccountname", "cn", "mail", "description"));
+		$result = @ldap_read($ldap_link, $dn, "objectClass=*", array("samaccountname", "cn", "mail", "description"));
 
 	if (!$result) return array();
 
@@ -111,7 +109,6 @@ function auth_ldap_inserer($dn, $statut)
 	$bio = importer_charset($bio, 'utf-8');
 	$login = strtolower(importer_charset($login, 'utf-8'));
 
-	include_spip('base/abstract_sql');
 	$n = sql_insertq('spip_auteurs', array(
 			'source' => 'ldap',
 			'nom' => $nom,
@@ -121,6 +118,8 @@ function auth_ldap_inserer($dn, $statut)
 			'statut' => $statut,
 			'pass' => ''));
 
-	return sql_select("*", "spip_auteurs", "id_auteur=$n");
+	if ($n)	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
+	spip_log("Creation de l'auteur '$nom' impossible");
+	return array();
 }
 ?>
