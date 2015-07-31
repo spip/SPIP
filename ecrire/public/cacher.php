@@ -26,14 +26,40 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function generer_nom_fichier_cache($contexte, $page) {
 	$u = md5(var_export(array($contexte, $page),true));
-	$d = substr($u,0,2);
-	$u = substr($u,2,2);
+	return $u . ".cache";
+}
 
-	// Sous-repertoires [0-9a-f][0-9a-f]/ ; ne pas prendre la base _DIR_CACHE
+/**
+ * ecrire le cache dans un casier
+ * @param string $nom_cache
+ * @param $valeur
+ * @return bool
+ */
+function ecrire_cache($nom_cache,$valeur){
+	$d = substr($nom_cache,0,2);
+	$u = substr($nom_cache,2,2);
 	$rep = _DIR_CACHE;
 	$rep = sous_repertoire($rep, '', false,true);
-	$rep = sous_repertoire($rep, $d, true,true);
-	return $rep . $u . ".cache";
+	$rep = sous_repertoire($rep, $d, false,true);
+	return ecrire_fichier($rep . $u . ".cache",serialize(array("nom_cache"=>$nom_cache,"valeur"=>$valeur)));
+}
+
+/**
+ * lire le cache depuis un casier
+ * @param string $nom_cache
+ * @return mixed
+ */
+function lire_cache($nom_cache){
+	$d = substr($nom_cache,0,2);
+	$u = substr($nom_cache,2,2);
+	if (file_exists($f=_DIR_CACHE."$d/$u.cache")
+	  AND lire_fichier($f,$tmp)
+	  AND $tmp = unserialize($tmp)
+	  AND $tmp['nom_cache']==$nom_cache
+	  AND isset($tmp['valeur']))
+		return $tmp['valeur'];
+
+	return false;
 }
 
 // Parano : on signe le cache, afin d'interdire un hack d'injection
@@ -177,14 +203,13 @@ function creer_cache(&$page, &$chemin_cache) {
 		// on verifie que le contenu du chemin cache indique seulement
 		// "cache sessionne" ; sa date indique la date de validite
 		// des caches sessionnes
-		if (!lire_fichier(_DIR_CACHE . $chemin_cache, $tmp)
-		OR !$tmp = @unserialize($tmp)) {
+		if (!$tmp = lire_cache($chemin_cache)) {
 			spip_log('Creation cache sessionne '.$chemin_cache);
 			$tmp = array(
 				'invalideurs' => array('session' => ''),
 				'lastmodified' => $_SERVER['REQUEST_TIME']
 			);
-			ecrire_fichier(_DIR_CACHE . $chemin_cache, serialize($tmp));
+			ecrire_cache($chemin_cache, $tmp);
 		}
 		$chemin_cache = generer_nom_fichier_cache(array("chemin_cache"=>$chemin_cache), array("session"=>$page['invalideurs']['session']));
 	}
@@ -197,8 +222,7 @@ function creer_cache(&$page, &$chemin_cache) {
 	$page['sig']= cache_signature($page);
 
 	// l'enregistrer, compresse ou non...
-	$ok = ecrire_fichier(_DIR_CACHE . $chemin_cache,
-		serialize(gzip_page($page)));
+	$ok = ecrire_cache($chemin_cache,gzip_page($page));
 
 	spip_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'),_LOG_INFO_IMPORTANTE);
@@ -262,7 +286,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	# $use_cache = -1; return;
 	
 	// Second appel, destine a l'enregistrement du cache sur le disque
-	if (isset($chemin_cache)) return creer_cache($page, $chemin_cache);
+	if (isset($chemin_cache)){
+		return creer_cache($page, $chemin_cache);
+	}
 
 	// Toute la suite correspond au premier appel
 	$contexte_implicite = $page['contexte_implicite'];
@@ -281,18 +307,16 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	$chemin_cache = generer_nom_fichier_cache($contexte, $page);
 	$lastmodified = 0;
 
-	// charger le cache s'il existe
-	if (lire_fichier(_DIR_CACHE . $chemin_cache, $page))
-		$page = @unserialize($page);
-	else
+	// charger le cache s'il existe (et si il a bien le bon hash = anticollision)
+	if (!$page = lire_cache($chemin_cache)){
 		$page = array();
+	}
 
 	// s'il est sessionne, charger celui correspondant a notre session
 	if (isset($page['invalideurs'])
 	AND isset($page['invalideurs']['session'])) {
 		$chemin_cache_session = generer_nom_fichier_cache(array("chemin_cache"=>$chemin_cache), array("session"=>spip_session()));
-		if (lire_fichier(_DIR_CACHE . $chemin_cache_session, $page_session)
-		AND $page_session = @unserialize($page_session)
+		if ($page_session = lire_cache($chemin_cache_session)
 		AND $page_session['lastmodified'] >= $page['lastmodified'])
 			$page = $page_session;
 		else
