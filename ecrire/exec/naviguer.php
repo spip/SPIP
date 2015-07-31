@@ -135,6 +135,8 @@ function naviguer_droite($row, $id_rubrique, $id_parent, $id_secteur, $haut, $in
 	  . "<br class='nettoyeur' />"
 	  . $boucles;
 
+	$onglet_enfants = pipeline('affiche_enfants',array('args'=>array('exec'=>'naviguer','id_rubrique'=>$id_rubrique),'data'=>$onglet_enfants));
+
 	$onglet_documents =
 		($id_rubrique > 0 ? naviguer_doc($id_rubrique, "rubrique", 'naviguer', $flag_editable) :"" )
 	;
