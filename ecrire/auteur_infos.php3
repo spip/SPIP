@@ -92,7 +92,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	// login et mot de passe
 	unset ($modif_login);
 	$old_login = $auteur['login'];
-	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $auteur['source'] == 'spip') {
+	if (($login<>$old_login) AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $auteur['source'] == 'spip') {
 		if ($login) {
 			if (strlen($login) < 4)
 				$echec .= "<p>Login trop court.";
@@ -104,7 +104,10 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 			}
 		}
 		// suppression du login
-		else if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) $auteur['login'] = '';
+		else {
+			$auteur['login'] = '';
+			$modif_login = true;
+		}
 	}
 
 	// changement de pass, a securiser en jaja ?
