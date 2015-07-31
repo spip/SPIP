@@ -249,6 +249,8 @@ function lignes_longues($texte, $l = 70) {
 
 // Majuscules y compris accents, en HTML
 function majuscules($texte) {
+	if (!strlen($texte)) return '';
+
 	// Cas du turc
 	if ($GLOBALS['spip_lang'] == 'tr') {
 		# remplacer hors des tags et des entites
@@ -264,8 +266,7 @@ function majuscules($texte) {
 	}
 
 	// Cas general
-	if (strlen($texte))
-		return "<span style='text-transform: uppercase'>$texte</span>";
+	return "<span style='text-transform: uppercase'>$texte</span>";
 }
 
 // "127.4 ko" ou "3.1 Mo"
