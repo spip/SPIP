@@ -57,7 +57,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 	if ($avail == 'SYSTEM')
 	  $file = $loc;
 	else {
-	  $file = sous_repertoire(_DIR_DTD);
+	  $file = sous_repertoire(_DIR_CACHE_XML);
 	  $file .= preg_replace('/[^\w.]/','_', $loc);
 	}
 
@@ -68,7 +68,7 @@ function analyser_dtd($loc, $avail, &$dtc)
 		if ($avail == 'PUBLIC') {
 			include_spip('inc/distant');
 			if ($dtd = recuperer_page($loc))
-				ecrire_fichier($file, $dtd); 
+				ecrire_fichier($file, $dtd, true); 
 		}
 	}
 

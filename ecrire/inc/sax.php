@@ -220,13 +220,14 @@ function sax_bug($data)
 		$data = html2unicode($data, true);
 	else  {
 		list ($topelement, $avail, $grammaire, $rotlvl) = $r;
-		$file = _DIR_DTD . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
+		$file = _DIR_CACHE_XML . preg_replace('/[^\w.]/','_', $rotlvl) . '.gz';
 		if (lire_fichier($file, $r))
 			$phraseur_xml->dtc = unserialize($r);
 		else {
 			include_spip('xml/analyser_dtd');
 		    	$phraseur_xml->dtc = charger_dtd($grammaire, $avail);
-			ecrire_fichier($file, serialize($phraseur_xml->dtc));
+			if ($avail == 'PUBLIC')
+				ecrire_fichier($file, serialize($phraseur_xml->dtc), true);
 		}
 		$trans = array();
 		
