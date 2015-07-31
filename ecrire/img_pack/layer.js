@@ -179,13 +179,16 @@ function charger_id_url(myUrl, myField, jjscript)
 				if (xmlhttp[myField].responseText != '') {
 					Field.innerHTML = xmlhttp[myField].responseText;
 					url_chargee['mem_'+myUrl] = Field.innerHTML;
+				
+					Field.style.visibility = "visible";
+					Field.style.display = "block";
+					if (image_search[myField]) {
+						image_search[myField].style.visibility = "hidden";
+					}
+					if(jjscript) eval(jjscript);
+				} else {
+					charger_id_url(myUrl, myField, jjscript);
 				}
-				Field.style.visibility = "visible";
-				Field.style.display = "block";
-				if (image_search[myField]) {
-					image_search[myField].style.visibility = "hidden";
-				}
-				if(jjscript) eval(jjscript);
 			}
 		}
 		xmlhttp[myField].send(null); 

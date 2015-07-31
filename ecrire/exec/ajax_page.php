@@ -29,7 +29,8 @@ function exec_ajax_page_dist()
 			ob_start();
 			$charset = $GLOBALS['meta']["charset"];
 		}
-		@header('Content-type: text/html; charset=$charset');
+// Curieux: le content-type bloque MSIE!
+//		@header('Content-type: text/html; charset=$charset');
 		echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 		$var_nom($id, $exclus, $col, $id_ajax_fonc, $type, $rac);
 
