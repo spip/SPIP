@@ -49,51 +49,59 @@ while ($auteur = spip_fetch_array($result)) {
 	if ($tri == 'nom') {
 		$premiere_lettre = strtoupper(spip_substr(extraire_multi($auteur['nom']),0,1));
 		if ($premiere_lettre != $lettre_prec) {
-#			echo " - $auteur[nom] -";
 			$lettre[$premiere_lettre] = $lettres_nombre_auteurs;
 		}
 		$lettres_nombre_auteurs ++;
 		$lettre_prec = $premiere_lettre;
 	}
  }
- pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 
-affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs);
+ $res = auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
+
+  if (_request('var_ajaxcharset')) return $res;
+
+  pipeline('exec_init',array('args'=>array('exec'=>'auteurs'),'data'=>''));
+
+  bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs);
+
+  echo "<div id='auteurs'>$res</div>";
+
+  fin_page();
 }
 
 // http://doc.spip.org/@affiche_auteurs
-function affiche_auteurs($auteurs, $lettre, $max_par_page, $nombre_auteurs)
+function bandeau_auteurs($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
 {
-  global $debut, $options, $spip_lang_right, $tri, $visiteurs, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
+  global $options, $spip_lang_right, $connect_id_auteur,   $connect_statut,   $connect_toutes_rubriques;
 
 
-if ($tri=='nom') $s = _T('info_par_nom');
-if ($tri=='statut') $s = _T('info_par_statut');
-if ($tri=='nombre') $s = _T('info_par_nombre_articles');
-$partri = ' ('._T('info_par_nombre_article').')';
+  if ($tri=='nom') $s = _T('info_par_nom');
+  if ($tri=='statut') $s = _T('info_par_statut');
+  if ($tri=='nombre') $s = _T('info_par_nombre_articles');
+  $s = ' ('._T('info_par_nombre_article').')';
 
-if ($visiteurs == "oui") {
+  if ($visiteurs == "oui") {
 	debut_page(_T('titre_page_auteurs'),"auteurs","redacteurs");
 	$visiteurs = '&visiteurs=oui';
  } else {
-	debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"auteurs","redacteurs");
+	debut_page(_T('info_auteurs_par_tri', array('partri' => $s)),"auteurs","redacteurs");
 	$visiteurs = "";
  }
-debut_gauche();
+ debut_gauche();
 
-debut_boite_info();
-if ($visiteurs)
+ debut_boite_info();
+ if ($visiteurs)
 	echo "<p class='arial1'>"._T('info_gauche_visiteurs_enregistres');
-else {
+ else {
 	echo "<p class='arial1'>"._T('info_gauche_auteurs');
 
 	if ($connect_statut == '0minirezo')
 		echo '<br>'. _T('info_gauche_auteurs_exterieurs');
-}
-fin_boite_info();
+ }
+ fin_boite_info();
 
 
-if ($connect_statut == '0minirezo') {
+ if ($connect_statut == '0minirezo') {
 
 	debut_raccourcis();
 	if ($connect_toutes_rubriques) icone_horizontale(_T('icone_creer_nouvel_auteur'), generer_url_ecrire("auteur_infos"), "auteur-24.gif", "creer.gif");
@@ -107,117 +115,121 @@ if ($connect_statut == '0minirezo') {
 			icone_horizontale (_T('icone_afficher_visiteurs'), generer_url_ecrire("auteurs","visiteurs=oui"), "auteur-24.gif", "");
 	}
 	fin_raccourcis();
-}
+ }
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'auteurs'),'data'=>''));
 	creer_colonne_droite();
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'auteurs'),'data'=>''));
-debut_droite();
+	debut_droite();
 
-echo "<br>";
-if ($visiteurs)
-	gros_titre(_T('info_visiteurs'));
-else
-	gros_titre(_T('info_auteurs'));
-echo "<p>";
-
-
-debut_cadre_relief('auteur-24.gif');
-echo "<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0 WIDTH='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
-echo "<tr bgcolor='#DBE1C5'>";
-echo "<td width='20'>";
-if ($tri=='statut')
-  echo http_img_pack('admin-12.gif','', "border='0'");
- else
-   echo http_href_img(generer_url_ecrire('auteurs','tri=statut'),'admin-12.gif', "border='0'", _T('lien_trier_statut'));
-
-echo "</td><td>";
-	if ($tri == '' OR $tri=='nom')
-		echo '<b>'._T('info_nom').'</b>';
+	echo "<br>";
+	if ($visiteurs)
+		gros_titre(_T('info_visiteurs'));
 	else
-		echo "<a href='" . generer_url_ecrire("auteurs","tri=nom") . "' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>";
+		gros_titre(_T('info_auteurs'));
+	echo "<p>";
+}
 
-if ($options == 'avancees') echo "</td><td colspan='2'>"._T('info_contact');
-echo "</td><td>";
+function auteurs_tranches($auteurs, $debut, $lettre, $tri, $visiteurs, $max_par_page, $nombre_auteurs)
+{
+	global $options, $spip_lang_right;
+
+	$res ="<TABLE BORDER='0' CELLPADDING='2' CELLSPACING='0' WIDTH='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
+	. "<tr bgcolor='#DBE1C5'>"
+	. "<td width='20'>";
+	if ($tri=='statut')
+  		$res .= http_img_pack('admin-12.gif','', "border='0'");
+	else {
+	  $t =  _T('lien_trier_statut');
+	  $res .= auteurs_href(http_img_pack('admin-12.gif', $t, "border='0'"),'tri=statut', " title=\"$t\"");
+	}
+	$res .= "</td><td>";
+	if ($tri == '' OR $tri=='nom')
+			$res .= '<b>'._T('info_nom').'</b>';
+	else
+	  $res .= auteurs_href(_T('info_nom'), "tri=nom", " title='"._T('lien_trier_nom'). "'");
+
+	if ($options == 'avancees')
+	 	$res .= "</td><td colspan='2'>"._T('info_contact');
+
+	$res .= "</td><td>";
+
 	if (!$visiteurs) {
 		if ($tri=='nombre')
-			echo '<b>'._T('info_articles').'</b>';
+			$res .= '<b>'._T('info_articles').'</b>';
 		else
-			echo "<a href='" . generer_url_ecrire("auteurs","tri=nombre") . "' title=\""._T('lien_trier_nombre_articles')."\">"._T('info_articles_2')."</a>"; //'
+			$res .= auteurs_href(_T('info_articles_2'), "tri=nombre", " title='"._T('lien_trier_nombre_articles'). "'");
 	}
-echo "</td></tr>\n";
+	$res .= "</td></tr>\n";
 
-if ($nombre_auteurs > $max_par_page) {
-	echo "<tr bgcolor='white'><td class='arial1' colspan='".($options == 'avancees' ? 5 : 3)."'>";
-	//echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
-	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
-		if ($j > 0) echo " | ";
+	if ($nombre_auteurs > $max_par_page) {
+		$res .= "<tr bgcolor='white'><td class='arial1' colspan='".($options == 'avancees' ? 5 : 3)."'>";
 
-		if ($j == $debut)
-			echo "<b>$j</b>";
-		else if ($j > 0)
-		  echo "<a href='", generer_url_ecrire('auteurs',"tri=$tri$visiteurs&debut=$j"), "'>$j</a>";
-		else
-		  echo " <a href='",  generer_url_ecrire('auteurs',"tri=$tri$visiteurs"), "'>0</a>";
+		for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
+			if ($j > 0) 	$res .= " | ";
 
-		if ($debut > $j  AND $debut < $j+$max_par_page){
-			echo " | <b>$debut</b>";
-		}
-
-	}
-	//echo "</font>";
-	echo "</td></tr>\n";
-
-	if ($tri == 'nom' AND $options == 'avancees') {
-		// affichage des lettres
-		echo "<tr bgcolor='white'><td class='arial11' colspan='5'>";
-		foreach ($lettre as $key => $val) {
-			if ($val == $debut)
-				echo "<b>$key</b> ";
+			if ($j == $debut)
+				$res .= "<b>$j</b>";
+			else if ($j > 0)
+				$res .= auteurs_href($j, "tri=$tri$visiteurs&debut=$j");
 			else
-			  echo "<a href='", generer_url_ecrire('auteurs',"tri=$tri$visiteurs&debut=$val"),"'>$key</a> ";
+				$res .= auteurs_href('0', "tri=$tri$visiteurs");
+			if ($debut > $j  AND $debut < $j+$max_par_page){
+				$res .= " | <b>$debut</b>";
+			}
 		}
-		echo "</td></tr>\n";
+		$res .= "</td></tr>\n";
+
+		if ($tri == 'nom' AND $options == 'avancees') {
+			$res .= "<tr bgcolor='white'><td class='arial11' colspan='5'>";
+			foreach ($lettre as $key => $val) {
+				if ($val == $debut)
+					$res .= "<b>$key</b>\n";
+				else
+					$res .= auteurs_href($key, "tri=$tri$visiteurs&debut=$val") . "\n";
+			}
+			$res .= "</td></tr>\n";
+		}
+		$res .= "<tr height='5'></tr>";
 	}
-	echo "<tr height='5'></tr>";
+
+	$res .= afficher_n_auteurs($auteurs)
+	. "</table>\n"
+	. "<a name='bas'>"
+	. "<table width='100%' border='0'>";
+
+	$debut_suivant = $debut + $max_par_page;
+	if ($visiteurs)
+		$visiteurs = '&visiteurs=oui';
+	if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
+		$res .= "<tr height='10'></tr>"
+		. "<tr bgcolor='white'><td align='left'>";
+
+		if ($debut > 0) {
+			$debut_prec = max($debut - $max_par_page, 0);
+			$res .= auteurs_href('&lt;&lt;&lt;',"tri=$tri&debut=$debut_prec$visiteurs");
+		}
+		$res .= "</td><td style='text-align: $spip_lang_right'>";
+		if ($debut_suivant < $nombre_auteurs) {
+			$res .= auteurs_href('&gt;&gt;&gt;',"tri=$tri&debut=$debut_suivant$visiteurs");
+		}
+		$res .= "</td></tr>\n";
+	}
+
+	$res .= "</table>\n";
+
+	return 	debut_cadre_relief('auteur-24.gif',true) . $res . fin_cadre_relief(true);
 }
 
-afficher_n_auteurs($auteurs);
+function auteurs_href($clic, $args='', $att='')
+{
+	$h = generer_url_ecrire('auteurs', $args);
+	$a = 'auteurs';
+	if ($_COOKIE['spip_accepte_ajax'] != 1 )
+		$evt = '';
+        else 
+		$evt = "\nonclick='return AjaxSqueeze(\"$h\",\n\t\"$a\")'";
 
-echo "</table>\n";
-
-echo "<a name='bas'>";
-echo "<table width='100%' border='0'>";
-
-$debut_suivant = $debut + $max_par_page;
- if ($visiteurs) $visiteurs = "\n<input type='hidden' name='visiteurs' value='oui' />";
-if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
-	echo "<tr height='10'></tr>";
-	echo "<tr bgcolor='white'><td align='left'>";
-	if ($debut > 0) {
-		$debut_prec = max($debut - $max_par_page, 0);
-		echo generer_url_post_ecrire("auteurs","tri=$tri&debut=$debut_prec"),
-		  "\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
-		  $visiteurs,
-		  "\n</form>";
-	}
-	echo "</td><td style='text-align: $spip_lang_right'>";
-	if ($debut_suivant < $nombre_auteurs) {
-		echo generer_url_post_ecrire("auteurs","tri=$tri&debut=$debut_suivant"),
-		  "\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",
-		  $visiteurs,
-		  "\n</form>";
-	}
-	echo "</td></tr>\n";
-}
-
-echo "</table>\n";
-
-
-
-fin_cadre_relief();
-
-
-fin_page();
+	return "<a$att href='$h#$a'$evt>$clic</a>";
 }
 
 // http://doc.spip.org/@requete_auteurs
@@ -279,50 +291,56 @@ default:
 function afficher_n_auteurs($auteurs) {
 	global $connect_statut, $options, $messagerie;
 
- foreach ($auteurs as $row) {
+	$res = '';
+	foreach ($auteurs as $row) {
 
-	echo "<tr style='background-color: #eeeeee;'>";
+		$res .= "<tr style='background-color: #eeeeee;'>";
 
 	// statut auteur
-	echo "<td style='border-top: 1px solid #cccccc;'>";
-	echo bonhomme_statut($row);
+		$res .= "<td style='border-top: 1px solid #cccccc;'>";
+		$res .= bonhomme_statut($row);
 
 	// nom
-	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
-	echo "<a href='", generer_url_ecrire('auteurs_edit',"id_auteur=".$row['id_auteur']), "'>",typo($row['nom']),'</a>';
+		$res .= "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>"
+		. "<a href='"
+		. generer_url_ecrire('auteurs_edit',"id_auteur=".$row['id_auteur'])
+		."'>"
+		. typo($row['nom'])
+		. '</a>';
 
-	if (isset($row['restreint']) AND $row['restreint'])
-		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
+		if (isset($row['restreint']) AND $row['restreint'])
+			$res .= " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
 
 
 	// contact
-	if ($options == 'avancees') {
-		echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
-		if ($row['messagerie'] != 'non' AND $row['login']
-		AND $messagerie != "non")
-			echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
-		if ($connect_statut=="0minirezo")
-			if (strlen($row['email'])>3)
-				echo "<A HREF='mailto:".$row['email']."'>"._T('lien_email')."</A>";
-			else
-				echo "&nbsp;";
+		if ($options == 'avancees') {
+			$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
+			if ($row['messagerie'] != 'non' AND $row['login']
+			    AND $messagerie != "non")
+				$res .= bouton_imessage($row['id_auteur'],"force")."&nbsp;";
+			if ($connect_statut=="0minirezo")
+				if (strlen($row['email'])>3)
+					$res .= "<A HREF='mailto:".$row['email']."'>"._T('lien_email')."</A>";
+				else
+					$res .= "&nbsp;";
 
-		if (strlen($row['url_site'])>3)
-			echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'><A HREF='".$row['url_site']."'>"._T('lien_site')."</A>";
-		else
-			echo "</td><td style='border-top: 1px solid #cccccc;'>&nbsp;";
-	}
+			if (strlen($row['url_site'])>3)
+				$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'><A HREF='".$row['url_site']."'>"._T('lien_site')."</A>";
+			else
+				$res .= "</td><td style='border-top: 1px solid #cccccc;'>&nbsp;";
+		}
 
 	// nombre d'articles
-	echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
-	if ($row['compteur'] > 1)
-		echo $row['compteur']."&nbsp;"._T('info_article_2');
-	else if($row['compteur'] == 1)
-		echo "1&nbsp;"._T('info_article');
-	else
-		echo "&nbsp;";
+		$res .= "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
+		if ($row['compteur'] > 1)
+			$res .= $row['compteur']."&nbsp;"._T('info_article_2');
+		else if($row['compteur'] == 1)
+			$res .= "1&nbsp;"._T('info_article');
+		else
+			$res .= "&nbsp;";
 
-	echo "</td></tr>\n";
- }
+		$res .= "</td></tr>\n";
+	}
+	return $res;
 }
 ?>
