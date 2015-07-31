@@ -52,7 +52,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 	elseif (isset($field_desc[$boucle][$table]))
 		$desc = $field_desc[$boucle][$table];
 	else {
-// recuperer la description de la table pour connaitre ses champs valides
+		// recuperer la description de la table pour connaitre ses champs valides
 		$desc = description_table($table);
 		if (!isset($desc['field']))
 			$desc = $defaut;
@@ -60,6 +60,7 @@ function inc_import_1_3_dist($lecteur, $request, $gz='fread', $atts=array()) {
 		AND $request['insertion']=='on')
 			$desc['field'] = import_collecte($desc); 
 		$field_desc[$boucle][$table] = $desc;
+		#spip_log("$table :".var_export($field_desc[$boucle][$table],1),'dbrest');
 	}
 
 	$values = import_lire_champs($lecteur,
@@ -135,6 +136,7 @@ function import_replace($values, $table, $desc, $request, $atts='') {
 			if ($where) {
 				$where = substr($where,4);
 				$impt = sql_getfetsel('impt', $table, $where);
+				#spip_log("IMPT : $table/$where/impt=$impt/",'dbrest');
 				if ($impt === NULL)
 					sql_insertq($table, $values);
 				elseif ($impt == 'oui') {

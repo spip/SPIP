@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_EXPORT_TRANCHES_LIMITE', 400);
+define('_EXPORT_TRANCHES_LIMITE', 200);
 define('_EXTENSION_PARTIES', '.gz');
 
 // http://doc.spip.org/@exec_export_all_args
@@ -95,9 +95,13 @@ function inc_export_dist($meta)
 		echo "<div style='text-align: left'>\n";
 		$etape = 1;
 		foreach($tables_for_dump as $table){
-			if ($etape_actuelle <= $etape) { // sauter les deja faits
+			if ($etape_actuelle > $etape) {
+				 // sauter les deja faits, mais rappeler qu'ils sont fait
+				echo ( "\n<br /><strong>".$etape. '. '."</strong>". $tables_sauvegardees[$table]);
+			}
+			else {
+				echo ( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
 			  $r = sql_countsel($table);
-			  echo ( "\n<br /><strong>".$etape. '. '. $table."</strong> ");
 			  flush();
 			  if (!$r) $r = ( _T('texte_vide'));
 			  else {
@@ -107,7 +111,7 @@ function inc_export_dist($meta)
 			    // info pas fiable si interruption+partiel
 			    if ($rub AND $etape_actuelle > 1) $r = ">= $r";
 			  }
-			  echo $r; 
+			  echo " $r";
 			  flush();
 			  $sous_etape = 0;
 			  // on utilise l'index comme ca c'est pas grave si on ecrit plusieurs fois la meme
@@ -241,7 +245,7 @@ function export_objets($table, $cpt, $total, $filetable, $les_rubriques, $les_me
 		  include_spip('inc/headers');
 		  redirige_par_entete("./?exec=export_all&rub=$rub&x=$s");
 		  } /* */
-		echo(" $debut");
+		echo(". ");
 		flush();
 	}
 
