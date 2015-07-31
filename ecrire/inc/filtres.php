@@ -1814,12 +1814,8 @@ function filtre_pagination_dist($total, $nom, $position, $pas, $liste = true, $m
 
 // passer les url relatives a la css d'origine en url absolues
 // http://doc.spip.org/@urls_absolues_css
-function urls_absolues_css($contenu, $path=null) {
-	if (!isset($path)) {
-		$self = url_absolue(self(true));
-		$path = $path = pathinfo($self);
-		$path = $path['dirname'].'/';
-	}
+function urls_absolues_css($contenu, $source) {
+	$path = dirname(url_absolue($source)).'/';
 
 	return preg_replace_callback(
 		",url\s*\(\s*['\"]?([^'\"/][^:]*)['\"]?\s*\),Uims",
@@ -1851,8 +1847,6 @@ function direction_css ($css, $voulue='') {
 
 	if ($voulue == $dir)
 		return $css;
-
-	$path = dirname(url_absolue($css))."/"; // pour mettre sur les images
 
 	// 1.
 	$f = preg_replace(',(_rtl)?\.css$,i', '_'.$ndir.'.css', $css);
@@ -1903,7 +1897,7 @@ function direction_css ($css, $voulue='') {
 	}
 	$contenu = str_replace($src,$src_direction_css,$contenu);
 
-	$contenu = urls_absolues_css($contenu);
+	$contenu = urls_absolues_css($contenu, $css);
 
 	// virer les fausses url absolues que l'on a mis dans les import
 	if (count($src_faux_abs))
@@ -1944,7 +1938,7 @@ function url_absolue_css ($css) {
 		return $css;
 
 	// passer les url relatives a la css d'origine en url absolues
-	$contenu = urls_absolues_css($contenu, dirname($url_absolue_css)."/");
+	$contenu = urls_absolues_css($contenu, $css);
 
 	// ecrire la css
 	if (!ecrire_fichier($f, $contenu))
@@ -2284,7 +2278,7 @@ function filtre_cache_static($scripts,$type='js'){
 		  			parse_str($script[1],$contexte);
 		  			$contenu = recuperer_fond($script[0],$contexte);
 		  			if ($type=='css')
-						$contenu = urls_absolues_css($contenu);
+						$contenu = urls_absolues_css($contenu, self('&'));
 		  		}
 				$f = 'compacte_'.$type;
 	  			$fichier .= "/* $comm */\n". $f($contenu) . "\n\n";
