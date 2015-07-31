@@ -10,25 +10,38 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/**
+ * Gestion des drapeaux d'édition
+ *
+ * Drapeau d'edition : on regarde qui a ouvert quel objet éditorial en
+ * édition, et on le signale aux autres redacteurs pour éviter de se marcher 
+ * sur les pieds
+ *
+ * Le format est une meta drapeau_edition qui contient un tableau sérialisé
+ * `type_objet => (id_objet => (id_auteur => (nom_auteur => (date_modif))))`
+ *
+ * À chaque mise à jour de ce tableau on oublie les enregistrements datant
+ * de plus d'une heure
+ *
+ * Attention ce n'est pas un verrou "bloquant", juste un drapeau qui signale
+ * que l'on bosse sur cet objet editorial ; les autres peuvent passer outre
+ * (en cas de communication orale c'est plus pratique)
+ * 
+ * @package SPIP\Core\Drapeaux\Edition
+**/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// Drapeau d'edition : on regarde qui a ouvert quel objet editorial en 
-// edition, et on le signale aux autres redacteurs pour eviter de se marcher 
-// sur les pieds
-
-// Le format est une meta drapeau_edition qui contient un tableau
-// serialise
-// type_objet => (id_objet => (id_auteur => (nom_auteur => (date_modif))))
-
-// a chaque mise a jour de ce tableau on oublie les enregistrements datant
-// de plus d'une heure
-
-// Attention ce n'est pas un verrou "bloquant", juste un drapeau qui signale
-// que l'on bosse sur cet objet editorial ; les autres peuvent passer outre
-// (en cas de communication orale c'est plus pratique)
 
 
-// http://doc.spip.org/@lire_tableau_edition
+
+/**
+ * Retourne le tableau des éléments édités en cours après avoir supprimé 
+ * les éléments trop vieux (de plus d'une heure) du tableau.
+ *
+ * @return array
+ *     Tableau des éléments édités actuellement, par objet et auteur, du type :
+ *     `[ type d'objet ][id_objet][id_auteur][nom de l'auteur] = time()`
+**/
 function lire_tableau_edition () {
 	$edition = @unserialize($GLOBALS['meta']['drapeau_edition']);
 	if (!$edition) return array();
@@ -61,22 +74,32 @@ function lire_tableau_edition () {
 	return $edition;
 }
 
-// http://doc.spip.org/@ecrire_tableau_edition
+/**
+ * Enregistre la liste des éléments édités
+ *
+ * @param array $edition
+ *     Tableau des éléments édités actuellement, par objet et auteur, du type :
+ *     `[ type d'objet ][id_objet][id_auteur][nom de l'auteur] = time()`
+**/
 function ecrire_tableau_edition($edition) {
 	ecrire_meta('drapeau_edition', serialize($edition));
 }
 
 /**
- * J'edite tel objet
- * si l'objet est non editable dans l'espace prive, ne pas retenir le signalement
- * qui correspond a un process unique
+ * Signale qu'un auteur édite tel objet
+ * 
+ * Si l'objet est non éditable dans l'espace privé, ne pas retenir le signalement
+ * qui correspond à un process unique.
  *
- * http://doc.spip.org/@signale_edition
- *
+ * @see lire_tableau_edition()
+ * @see ecrire_tableau_edition()
+ * 
  * @param int $id
- * @param $auteur
+ *     Identifiant de l'objet
+ * @param array $auteur
+ *     Session de l'auteur
  * @param string $type
- * @return mixed
+ *     Type d'objet édité
  */
 function signale_edition ($id, $auteur, $type='article') {
 	include_spip('base/objets');
@@ -126,10 +149,10 @@ function mention_qui_edite ($id, $type='article') {
 /**
  * Quels sont les objets en cours d'edition par X ?
  *
- * http://doc.spip.org/@liste_drapeau_edition
- *
- * @param $id_auteur
+ * @param int $id_auteur
+ *     Identifiant de l'auteur
  * @return array
+ *     Liste de tableaux `['objet' => x, 'id_objet' => n]`
  */
 function liste_drapeau_edition ($id_auteur) {
 	$edition = lire_tableau_edition();

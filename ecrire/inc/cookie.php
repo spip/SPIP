@@ -72,6 +72,18 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 	return $a;
 }
 
+/**
+ * Teste si un cookie a déjà été envoyé ou pas
+ *
+ * Permet par exemple à `redirige_par_entete()` de savoir le type de
+ * redirection à appliquer (serveur ou navigateur)
+ *
+ * @see redirige_par_entete()
+ * 
+ * @param bool|string $set
+ *     true pour déclarer les cookies comme envoyés
+ * @return bool
+**/
 function spip_cookie_envoye($set = '') {
   static $envoye = false;
   if($set)
@@ -79,7 +91,21 @@ function spip_cookie_envoye($set = '') {
   return $envoye;
 }
 
-// http://doc.spip.org/@recuperer_cookies_spip
+/**
+ * Adapte le tableau PHP `$_COOKIE` pour prendre en compte le préfixe
+ * des cookies de SPIP
+ *
+ * Si le préfixe des cookies de SPIP est différent de `spip_` alors
+ * la fonction modifie les `$_COOKIE` ayant le préfixe spécifique
+ * pour remettre le préfixe `spip_` à la place.
+ *
+ * Ainsi les appels dans le code n'ont pas besoin de gérer le préfixe,
+ * ils appellent simplement `$_COOKIE['spip_xx']` qui sera forcément
+ * la bonne donnée.
+ * 
+ * @param string $cookie_prefixe
+ *     Préfixe des cookies de SPIP
+**/
 function recuperer_cookies_spip($cookie_prefix) {
 	$prefix_long = strlen($cookie_prefix);
 
@@ -99,11 +125,21 @@ function recuperer_cookies_spip($cookie_prefix) {
 
 }
 
-// Idem faudrait creer exec/test_ajax, mais c'est si court.
-// Tester si Ajax fonctionne pour ce brouteur
-// (si on arrive la c'est que c'est bon, donc poser le cookie)
 
-// http://doc.spip.org/@exec_test_ajax_dist
+/**
+ * Teste si javascript est supporté par le navigateur et pose un cookie en conséquence
+ *
+ * Si la valeur d'environnement `js` arrive avec la valeur
+ * 
+ * - `-1` c'est un appel via une balise `<noscript>`.
+ * - `1` c'est un appel via javascript
+ *
+ * Inscrit le résultat dans le cookie `spip_accepte_ajax`
+ *
+ * @see html_tests_js()
+ * @uses spip_setcookie()
+ * 
+**/
 function exec_test_ajax_dist() {
 	switch (_request('js')) {
 		// on est appele par <noscript>
