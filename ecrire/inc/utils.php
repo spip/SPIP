@@ -205,11 +205,15 @@ function spip_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $pr
 	if (!$prefixe) 
 		$prefixe = isset($GLOBALS['table_prefix'])
 		? $GLOBALS['table_prefix'] : $db;
-	$db_ok = charger_fonction('db_' . $type, 'base', true);
-	if ($db_ok
-	AND $db_ok = $db_ok($host, $port, $login, $pass, $db, $prefixe)) 
+	$h = charger_fonction($g = 'db_' . $type, 'base', true);
+	if (!$h) {
+		spip_log("$g est indefinie");
+		return;
+	}
+	  
+	if ($g = $h($host, $port, $login, $pass, $db, $prefixe))
 
-		return $db_ok;
+		return $db_ok = $g;
 
 	// En cas d'indisponibilite du serveur, eviter de le bombarder
 	if (!defined('_ECRIRE_INSTALL')) {
@@ -249,7 +253,6 @@ function spip_connect($serveur='') {
 	unset($GLOBALS['spip_connect_version']);
 	if ($f AND is_readable($f)) include($f);
 	if (!isset($GLOBALS['db_ok'])) {
-		if ($install) return 'spip_' . $serveur . '_query';
 		spip_log("spip_connect: serveur $index mal defini dans '$f'.");
 		return $connexions[$index]=false;
 	}
