@@ -13,6 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@base_serial
 function base_serial(&$tables_principales){
 $spip_articles = array(
 		"id_article"	=> "bigint(21) NOT NULL",

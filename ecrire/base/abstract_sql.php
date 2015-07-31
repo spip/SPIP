@@ -378,6 +378,7 @@ function sql_fetsel_cache(
 //   - si le resultat est en cache, il sera donne
 //   - sinon, la requete est executee, mise en cache et renvoyee
 // * si $req === false, le cache est vide (cf. sql_purge_cache)
+// http://doc.spip.org/@sql_fetsel_en_cache
 function sql_fetsel_en_cache($req, $serveur=""){
 	static $cache=array();
 	// purger
@@ -395,6 +396,7 @@ function sql_fetsel_en_cache($req, $serveur=""){
 }
 
 // purge le cache de sql_fetsel_en_cache()
+// http://doc.spip.org/@sql_purge_cache
 function sql_purge_cache($serveur="") {
 	return sql_fetsel_en_cache(false, $serveur);
 }
