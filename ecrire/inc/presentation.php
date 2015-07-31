@@ -1270,18 +1270,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif', $af =
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
 	include_spip('inc/acces');
-	$a = '';
-	if (is_array($args))
-		foreach ($args as $val => $var)
-			if ($var) $a .= ':' . $val.'-'.$var;
-	$a = substr($a,1);
-
-	$url = generer_url_action('rss', "op=$op"
-			    . (!$a ? "" : "&args=$a")
-			    . ('&id=' . $GLOBALS['connect_id_auteur'])
-			    . ('&cle=' . afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a"))
-			    . ('&lang=' . $GLOBALS['spip_lang']));
-
+	$url = generer_url_low_sec($op, $args, $GLOBALS['connect_id_auteur'], $GLOBALS['spip_lang']);
 	switch($fmt) {
 		case 'ical':
 			$url = preg_replace(',^.*?://,', 'webcal://', $url)
@@ -1293,15 +1282,10 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 			break;
 		case 'rss':
 		default:
-
 			$button = 'RSS';
 			break;
 	}
-
-	return "<a href='"
-	. $url
-	. "'>"
-	. http_img_pack('feed.png', $button, '', 'RSS')
-	. "</a>";
+	$img = http_img_pack('feed.png', $button, '', 'RSS');
+	return "<a href='$url'>$img</a>";
 }
 ?>
