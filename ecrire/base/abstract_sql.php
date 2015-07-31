@@ -38,19 +38,18 @@ function spip_abstract_select (
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
 
-	spip_connect();
-
 	if (!$serveur)
-	  // le serveur par defaut est celui de inc_connect.php
-	  // tout est deja pret, notamment la fonction suivante:
-	  $f = 'spip_mysql_select';
+	  // le serveur par defaut est celui defini dans inc_connect.php
+	  { spip_connect();
+	    $f = 'spip_mysql_select';
+	  }
 	else {
 	  // c'est un autre; est-il deja charge ?
 		$f = 'spip_' . $serveur . '_select';
 		if (!function_exists($f)) {
 		  // non, il est decrit dans le fichier ad hoc
-			$d = dirname(_FILE_CONNECT) . 'inc_connect-' . $serveur . '.php';
-			if (@file_exists($d)) include($d);
+			$d = find_in_path('inc_connect-' . $serveur . '.php');
+			if (@file_exists($d)) include($d); else spip_log("pas de fichier $d pour decrire le serveur '$serveur'");
 			$f = spip_abstract_serveur($f, $serveur);
 		}
 	}
