@@ -83,8 +83,10 @@ function public_styliser_par_z_dist($flux){
 				if (!isset($disponible[$fond]))
 					$disponible[$fond] = z_contenu_disponible($prefix_path,$z_contenu,$fond,$ext);
 
-				if ($disponible[$fond])
-					$flux['data'] = substr(find_in_path($prefix_path."page.$ext"), 0, - strlen(".$ext"));
+				if ($disponible[$fond]) {
+					$flux['data'] = trouver_fond("page",$prefix_path,true);
+			    $flux['data'] = $flux['data']['fond'];
+				}
 			}
 
 			// echaffaudage :
@@ -142,8 +144,9 @@ function public_styliser_par_z_dist($flux){
 			AND $dir = explode('/',$dir)
 			AND $dir = reset($dir)
 			AND in_array($dir,$z_blocs)
-			AND $f=find_in_path($prefix_path.$fond."-".$flux['args']['contexte']['composition'].".$ext")){
-			$flux['data'] = substr($f,0,-strlen(".$ext"));
+			AND $f=trouver_fond($fond."-".$flux['args']['contexte']['composition'],$prefix_path,true)
+			AND $f['fond']){
+			$flux['data'] = $f['fond'];
 		}
 	}
 	return $flux;
@@ -194,10 +197,12 @@ function z_contenu_disponible($prefix_path,$z_contenu,$type,$ext){
  * @return string
  */
 function z_trouver_bloc($prefix_path,$bloc,$fond,$ext){
-	if ($f = find_in_path("$prefix_path$bloc/$bloc.$fond.$ext")
-		OR $f = find_in_path("$prefix_path$bloc/$fond.$ext"))
-		return substr($f, 0, - strlen(".$ext"));
-	return "";
+	$f = trouver_fond("$bloc.$fond","$prefix_path$bloc/",true);
+	if ($f['fond']) return $f['fond'];
+
+	$f = trouver_fond($fond,"$prefix_path$bloc/",true);
+	// vide si rien trouve
+	return $f['fond'];
 }
 /**
  * Tester si un type est echaffaudable

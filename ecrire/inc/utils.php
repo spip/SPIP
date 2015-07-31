@@ -1826,22 +1826,51 @@ function recuperer_fond($fond, $contexte=array(), $options = array(), $connect='
 		return $options['trim'] ? ltrim($texte) : $texte;
 }
 
-// Trouve un squelette, par defaut dans le repertoire modeles/
-// Attention, si le 2arg fourni, il doit avoir le / final 
-function trouve_modele($nom, $dir='modeles/')
-{
-	return find_in_path($nom.'.'. _EXTENSION_SQUELETTES, $dir);
+/**
+ * Trouve un squelette dans le repertoire modeles/
+ *
+ * @param  $nom
+ * @return string
+ */
+function trouve_modele($nom) {
+	return trouver_fond($nom,'modeles/');
+}
+
+/**
+ * Trouver un squelette dans le chemin
+ * on peut specifier un sous-dossier dans $dir
+ * si $pathinfo est a true, retourne un tableau avec
+ * les composantes du fichier trouve
+ * + le chemin complet sans son extension dans fond
+ *
+ * @param string $nom
+ * @param string $dir
+ * @param bool $pathinfo
+ * @return array|string
+ */
+function trouver_fond($nom, $dir='', $pathinfo = false) {
+	$f = find_in_path($nom.'.'. _EXTENSION_SQUELETTES, $dir?rtrim($dir,'/').'/':'');
+  if (!$pathinfo) return $f;
+  // renvoyer un tableau detaille si $pathinfo==true
+	$p = pathinfo($f);
+  if (!$p['extension'])
+	  $p['extension'] = _EXTENSION_SQUELETTES;
+  if (!$p['filename'])
+	   $p['filename'] = ($p['basename']?substr($p['basename'],0,-strlen($p['extension'])-1):'');
+	$p['fond'] = ($f?substr($f,0,-strlen($p['extension'])-1):'');
+  return $p;
 }
 
 function tester_url_ecrire($nom){
 	// tester si c'est une page en squelette
-	if (trouve_modele($nom, 'prive/squelettes/contenu/'))
+	if (trouver_fond($nom, 'prive/squelettes/contenu/'))
 		return 'fond';
 	// compat skels orthogonaux version precedente
-	elseif (trouve_modele($nom, 'prive/exec/'))
+	elseif (trouver_fond($nom, 'prive/exec/'))
 		return 'fond_monobloc';
-	// attention, il ne faut pas inclure l'exec ici car sinon on modifie l'environnement
-	// par un simple #URL_ECRIRE dans un squelette (cas d'un define en debut d'exec/nom )
+	// attention, il ne faut pas inclure l'exec ici
+	// car sinon #URL_ECRIRE provoque des inclusions
+	// et des define intrusifs potentiels
 	return (find_in_path("{$nom}.php",'exec/') OR charger_fonction($nom,'exec',true))?$nom:'';
 }
 

@@ -35,7 +35,7 @@ function existe_formulaire($form)
 
 	if (!$form) return ''; // on ne sait pas, le nom du formulaire n'est pas fourni ici
 
-	return trouve_modele($form, 'formulaires/') ? $form : false;
+	return trouver_fond($form, 'formulaires/') ? $form : false;
 }
 
 
