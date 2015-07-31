@@ -65,7 +65,6 @@ function verifier_sauvegarde ($archive, $dir) {
 function import_charge_version($version_archive)
 {
 	if (preg_match("{^phpmyadmin::}is",$version_archive)){
-	#spip_log("restauration phpmyadmin : version $version_archive tag $tag_archive");
 		$fimport = 'import_1_3'; 
 	} else 	$fimport = 'import_' . str_replace('.','_',$version_archive);
 
@@ -120,7 +119,7 @@ function exec_import_all_dist()
 
 	echo $res, "</body></html>\n";
 
-	if ($request['insertion'] == 'on' AND $res) {
+	if ($request['insertion'] == 'on' AND !$res) {
 			$request['insertion'] = 'passe2';
 			if ($request['url_site']
 			AND substr($request['url_site'],-1) != '/')
