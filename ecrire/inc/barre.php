@@ -112,14 +112,6 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		. "</td>";
 */
 
-	if (test_espace_prive()) {
-		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
-		$col++;
-	//	$ret .= "&nbsp;&nbsp;&nbsp;";
-		$ret .= aide("raccourcis");
-		$ret .= "&nbsp;";
-		$ret .= "</td>";
-	}
 	$ret .= "</tr>";
 
 	// Sur les forums publics, petite barre d'aide en survol des icones
