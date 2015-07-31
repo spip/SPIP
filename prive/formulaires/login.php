@@ -115,14 +115,20 @@ function formulaires_login_verifier_dist($cible="",$login="",$prive=null){
 
 	include_spip('inc/auth');
 	$auteur = auth_identifier_login($session_login, $session_password);
-	if (!$auteur) {
+	if (!is_array($auteur)) {
+		$erreurs = array();
+		if (is_string($auteur))
+			$erreurs['message_erreur'] = $auteur;
 		include_spip('inc/cookie');
 		spip_setcookie("spip_admin", "", time() - 3600);
 		if (strlen($session_password))
-			return array('password' => _T('login_erreur_pass'));
+			$erreurs['password'] = _T('login_erreur_pass');
 		// sinon c'est un login en deux passe old style (ou js en panne)
 		// pas de message d'erreur
-		else return array('password' => ' ');
+		else 
+			$erreurs['password'] = ' ';
+		return
+			$erreurs;
 	}
 	// on a ete authentifie, construire la session
 	// en gerant la duree demandee pour son cookie 

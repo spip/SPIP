@@ -403,15 +403,20 @@ function auth_informer_login($login, $serveur=''){
  * @return mixed
  */
 function auth_identifier_login($login, $password, $serveur=''){
+	$erreur = "";
 	foreach ($GLOBALS['liste_des_authentifications'] as $methode) {
-		if ($auth = charger_fonction($methode, 'auth',true)
-		AND $auteur = $auth($login, $password, $serveur)) {
-			spip_log("connexion de $login par methode $methode");
-			$auteur['auth'] = $methode;
-			return $auteur;
+		if ($auth = charger_fonction($methode, 'auth',true)){
+			$auteur = $auth($login, $password, $serveur);
+			if (is_array($auteur) AND count($auteur)) {
+				spip_log("connexion de $login par methode $methode");
+				$auteur['auth'] = $methode;
+				return $auteur;
+			}
+			elseif (is_string($auteur))
+				$erreur .= "$auteur ";
 		}
 	}
-	return false;
+	return $erreur;
 }
 
 /**
@@ -538,8 +543,12 @@ function lire_php_auth($login, $pw, $serveur=''){
 		OR !$auth = charger_fonction($auth_methode, 'auth', true))
 		$auth = charger_fonction('spip', 'auth', true);
 
+	$auteur='';
 	if ($auth)
-		return $auth($login, $pw, $serveur);
+		$auteur = $auth($login, $pw, $serveur);
+	// verifier que ce n'est pas un message d'erreur
+	if (is_array($auteur) AND count($auteur))
+		return $auteur;
 	return false;
 }
 
