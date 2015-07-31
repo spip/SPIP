@@ -251,6 +251,7 @@ ecrire/inc_ajax.php3 -text
 ecrire/inc_articles.php -text
 ecrire/inc_barre.php3 -text
 ecrire/inc_breves.php -text
+ecrire/inc_controle_forum.php -text
 ecrire/inc_mini_nav.php -text
 ecrire/inc_naviguer.php -text
 ecrire/lang/ecrire_ru.php3 -text

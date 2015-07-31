@@ -2390,7 +2390,7 @@ else {
 	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
 	icone_bandeau_principal (_T('titre_forum'), "forum.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
-	if ($connect_statut == "0minirezo"  AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
+	if ($connect_statut == "0minirezo"  AND lire_meta("activer_statistiques") != 'non') {
 		//bandeau_barre_verticale();
 		icone_bandeau_principal (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
 	}
