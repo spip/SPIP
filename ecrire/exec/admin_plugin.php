@@ -6,7 +6,7 @@ include_spip('inc/config');
 include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/layer');
-
+include_spip('inc/actions');
 
 // http://doc.spip.org/@exec_admin_plugin
 function exec_admin_plugin() {
