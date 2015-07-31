@@ -110,7 +110,7 @@ function coupe_trop_long($texte){
 function editer_article_recolle($texte, $att_text)
 {
 	if ((strlen($texte)<29*1024)
-	 /*OR pas le navigateur qui pose probleme */ )
+	 OR (include_spip('inc/layer') AND ($GLOBALS['browser_name']!="MSIE")) )
 	 return array($texte,"");
 	 
 	include_spip('inc/barre');
