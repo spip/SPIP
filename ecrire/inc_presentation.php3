@@ -2432,7 +2432,7 @@ else {
 
 		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
 			echo "<img src='img_pack/rien.gif' width='10' alt='' />";
-			echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\"><img src='img_pack/fiche-perso.gif' border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\">";
+			echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\"><img src='img_pack/fiche-perso.png' border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\">";
 			echo "</a>";
 		}
 		
@@ -2496,9 +2496,7 @@ else {
 					$link->addVar('set_couleur', $key);
 					
 					echo "<a href=\"".$link->getUrl()."\"><img src='img_pack/rien.gif' width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' /></a>";
-
 			}
-			
 			// echo "<img src='img_pack/rien.gif' width='10' height='1' />";
 		echo "</td>";
 	//
