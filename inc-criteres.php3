@@ -550,11 +550,6 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		else $col = "$col_table.$col";
 	}
 	if (strtoupper($op) == 'IN') {
-	  // traitement special d'une suite de valeurs
-	  foreach ($val as $k => $v) {
-	    if (!ereg("^$", $v))
-	      $val[$k] = "\n'\" . addslashes(" . ($v) . ") . \"'";
-	  }
 	  $val = join(', ',$val);
 
 	  if (!ereg("^ *\(.*) *$", $val)) $val = "($val)";
