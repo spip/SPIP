@@ -27,7 +27,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['nom']))
 		$ret['nom'] = charset2unicode(spip_xml_aplatit($arbre['nom']));
 	if (isset($arbre['icon']))
-		$ret['icon'] = trim(spip_xml_aplatit($arbre['icon']));
+		$ret['logo'] = trim(spip_xml_aplatit($arbre['icon']));
 	if (isset($arbre['auteur']))
 		$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
 	if (isset($arbre['licence']))
@@ -35,7 +35,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	if (isset($arbre['version']))
 		$ret['version'] = trim(spip_xml_aplatit($arbre['version']));
 	if (isset($arbre['version_base']))
-		$ret['version_base'] = trim(spip_xml_aplatit($arbre['version_base']));
+		$ret['schema'] = trim(spip_xml_aplatit($arbre['version_base']));
 	if (isset($arbre['etat']))
 		$ret['etat'] = trim(spip_xml_aplatit($arbre['etat']));
 
@@ -60,19 +60,19 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
 
 	$necessite = info_plugin_normalise_necessite($arbre['necessite']);
-	$ret['compatible'] = isset($necessite['compatible'])?$necessite['compatible']:'';
+	$ret['compatibilite'] = isset($necessite['compatible'])?$necessite['compatible']:'';
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
 	$ret['procure'] = $arbre['procure'];
 
-	$ret['path'] = $arbre['path'];
+	$ret['chemin'] = $arbre['path'];
 	if (isset($arbre['pipeline']))
 		$ret['pipeline'] = $arbre['pipeline'];
 
 	$extraire_boutons = charger_fonction('extraire_boutons','plugins');
 	$les_boutons = $extraire_boutons($arbre);
-	$ret['bouton'] = $les_boutons['bouton'];
+	$ret['menu'] = $les_boutons['bouton'];
 	$ret['onglet'] = $les_boutons['onglet'];
 
 	$ret['traduire'] = $arbre['traduire'];
@@ -86,7 +86,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['erreur'] = $arbre['erreur'];
 		if ($plug) spip_log("infos_plugin $plug " . @join(' ', $arbre['erreur']));
 	}
-	
+
 	return $ret;
 }
 // Un attribut de nom "id" a une signification particuliere en XML

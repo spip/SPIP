@@ -44,11 +44,11 @@ function plugins_installer_dist($plug, $action, $dir_type='_DIR_PLUGINS')
 			include_once($file);
 		}
 	}
-	$version = isset($infos['version_base'])?$infos['version_base']:'';
+	$version = isset($infos['schema'])?$infos['schema']:'';
 	$arg = $infos ;
 	$f = $infos['prefix']."_install";
 	if (!function_exists($f))
-		$f = isset($infos['version_base']) ? 'spip_plugin_install' : '';
+		$f = isset($infos['schema']) ? 'spip_plugin_install' : '';
 	else
 		$arg = $infos['prefix']; // stupide: info deja dans le nom
 
