@@ -228,7 +228,9 @@ function spip_connect_db($host, $port, $login, $pass, $db) {
 
 	if (defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL'))
 		mysql_query("set sql_mode=''");
-
+	if (isset($GLOBALS['meta']['charset_sql_base']))
+		mysql_query("SET NAMES "._q($GLOBALS['meta']['charset_sql_base']));
+	
 	$GLOBALS['db_ok'] = $ok
 	AND !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));
 
