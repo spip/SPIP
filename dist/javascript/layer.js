@@ -244,6 +244,10 @@ function AjaxSqueezeNode(trig, target, f, event)
   }
 	valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
 
+  valid = false;
+  if (typeof(window['_OUTILS_DEVELOPPEURS']) != 'undefined')
+		valid = (typeof event != 'object') ? false : ((event.altKey || event.metaKey) == true);
+
 	if (typeof(trig) == 'string') {
 		i = trig.split('?');
 		trig = i[0] +'?var_ajaxcharset=utf-8&' + i[1];
