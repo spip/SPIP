@@ -55,6 +55,7 @@ function redirige_par_entete($url, $equiv='') {
 	exit;
 }
 
+// http://doc.spip.org/@redirige_formulaire
 function redirige_formulaire($url, $equiv = '') {
 	if (!_request('var_ajax'))
 		redirige_par_entete($url, $equiv);
