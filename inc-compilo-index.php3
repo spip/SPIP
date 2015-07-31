@@ -29,11 +29,11 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		}
 	}
 
+#	spip_log("Cherche: $nom_champ a partir de '$idb'");
 	$c = strtolower($nom_champ);
 	// attention: entre la boucle nommee 0, "" et le tableau vide,
 	// il y a incoherences qu'il vaut mieux eviter
 	while ($boucles[$idb]) {
-#		spip_log("Cherche: $nom_champ '$idb' '$c'");
 		$r = $boucles[$idb]->type_requete;
 		$s = $boucles[$idb]->sql_serveur;
 		if (!$s) 
@@ -45,7 +45,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		if (!$t) {$nom_table = $t = $r; }
 		else $nom_table = 'spip_' . $t;
 
-		#spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
+#		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
 		$desc = $tables_des_serveurs_sql[$s][$nom_table];
 		if (!$desc) {
 			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
@@ -82,13 +82,13 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 			$boucles[$idb]->select[] = $t . "." . $e;
 			return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
 		}
-
+#		spip_log("On remonte vers $i");
 		// Sinon on remonte d'un cran
 		$idb = $boucles[$idb]->id_parent;
 		$i++;
 	}
 
-#	spip_log("Pas vu $nom_champ dans les " . count($boucles) . " boucles");
+#	spip_log("Pas vu $nom_champ");
 	// esperons qu'il y sera
 	return('$Pile[0][\''.$nom_champ.'\']');
 }
@@ -305,12 +305,13 @@ function filtres_arglist($args, $p, $sep) {
 // 
 function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 
-	// recursif ?
+	// si recursif, forcer l'extraction du champ SQL mais ignorer le code
 	if ($boucles[$idb]->externe)
-		index_pile ($idb, $nom_champ, $boucles); // reserver chez soi-meme
-	// reserver chez le parent et renvoyer l'habituel $Pile[$SP]['nom_champ']
-#	spip_log("boucles[$idb]->id_parent " . $boucles[$idb]->id_parent);
-	return index_pile ($boucles[$idb]->id_parent, $nom_champ, $boucles);
+		index_pile ($idb, $nom_champ, $boucles); 
+	// retourner $Pile[$SP] et pas $Pile[0] (bug recursion en 1ere boucle)
+	$prec = $boucles[$idb]->id_parent;
+	return (!$prec ? ('$Pile[$SP][\''.$nom_champ.'\']') : 
+		index_pile($prec, $nom_champ, $boucles));
 }
 
 function rindex_pile($p, $champ, $motif) 
