@@ -390,4 +390,9 @@ function alertes_auteur($id_auteur) {
 			."</div></div>";
 }
 
+
+function filtre_afficher_enfant_rub_dist($id_rubrique){
+	include_spip('inc/presenter_enfants');
+	return afficher_enfant_rub(intval($id_rubrique));
+}
 ?>

@@ -702,7 +702,6 @@ prive/objets/contenu/article.html -text
 prive/objets/contenu/auteur.html -text
 prive/objets/contenu/plugin_item_rss.html -text
 prive/objets/contenu/rubrique-enfants.html -text
-prive/objets/contenu/rubrique-enfants_fonctions.php -text
 prive/objets/contenu/rubrique.html -text
 prive/objets/editer/liens.html -text
 prive/objets/editer/logo.html -text
@@ -739,6 +738,7 @@ prive/spip_pass.html -text
 prive/spip_style.css -text
 prive/squelettes/ajax.html -text
 prive/squelettes/body.html -text
+prive/squelettes/contenu/accueil.html -text
 prive/squelettes/contenu/admin_tech.html -text
 prive/squelettes/contenu/admin_vider.html -text
 prive/squelettes/contenu/article.html -text
@@ -783,6 +783,7 @@ prive/squelettes/inclure/barre-nav_fonctions.php -text
 prive/squelettes/inclure/configurer.html -text
 prive/squelettes/inclure/head.html -text
 prive/squelettes/inclure/pied.html -text
+prive/squelettes/navigation/accueil.html -text
 prive/squelettes/navigation/admin_tech.html -text
 prive/squelettes/navigation/article.html -text
 prive/squelettes/navigation/article_edit.html -text
