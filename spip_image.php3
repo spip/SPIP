@@ -207,7 +207,7 @@ function corriger_extension($ext) {
 
 function ajout_image($source, $dest) {
 	global $redirect_url, $hash_id_auteur, $hash, $num_img;
-
+	spip_log("$source, $dest");
 	// Securite
 	if (verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)) {
 

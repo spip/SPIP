@@ -400,7 +400,7 @@ fin_cadre_trait_couleur();
 // Creer fichier .htpasswd ?
 //
 
-if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
+if ($options == "avancees" AND !@file_exists(_ACCESS_FILE_NAME) AND !$REMOTE_USER ) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
