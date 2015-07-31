@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 
 // http://doc.spip.org/@inc_selectionner_dist
-function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_racine=false, $recur=true) {
+function inc_selectionner_dist ($sel, $idom="", $exclus=0, $aff_racine=false, $recur=true) {
 
 	if ($recur) $recur = mini_hier($sel); else $sel = 0;
 
