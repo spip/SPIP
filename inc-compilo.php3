@@ -379,10 +379,10 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 	// {1/3}
 	if ($op1 == '/') {
 		$retour .= "\n	"
-			.'$debut_boucle = 1 + ceil(($nombre_boucle * '
+			.'$debut_boucle = ceil(($nombre_boucle * '
 			. ($partie - 1) . ')/' . $total_parties . ");\n	"
 			. '$fin_boucle = ceil (($nombre_boucle * '
-			. $partie . ')/' . $total_parties . ");";
+			. $partie . ')/' . $total_parties . ") - 1;";
 	}
 
 	// {1,x}
