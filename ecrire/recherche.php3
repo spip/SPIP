@@ -45,8 +45,8 @@ if ($rech) // texte integral
 	$query_articles = requete_txt_integral('article', $hash_recherche);
 	$query_breves = requete_txt_integral('breve', $hash_recherche);
 	$query_rubriques = requete_txt_integral('rubrique', $hash_recherche);
-//	$query_auteurs = requete_txt_integral('auteur', $hash_recherche);
 	$query_sites = requete_txt_integral('syndic', $hash_recherche);
+	$query_auteurs = requete_txt_integral('auteur', $hash_recherche);
 }
 
 if ($query_articles)
@@ -55,8 +55,8 @@ if ($query_breves)
 	$nbb = afficher_breves ("Br&egrave;ves trouv&eacute;es", $query_breves);
 if ($query_rubriques)
 	$nbr = afficher_rubriques ("Rubriques trouv&eacute;es", $query_rubriques);
-// if ($query_sites)
-//	$nbt = afficher_auteurs ("Auteurs trouv&eacute;s", $query_auteurs);
+if ($query_auteurs AND $connect_statut == '0minirezo')
+	$nbt = afficher_auteurs ("Auteurs trouv&eacute;s", $query_auteurs);
 if ($query_sites)
 	$nbs = afficher_sites ("Sites trouv&eacute;s", $query_sites);
 

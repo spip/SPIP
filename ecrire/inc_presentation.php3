@@ -620,6 +620,87 @@ function afficher_rubriques($titre_table, $requete) {
 	return $tous_id;
 }
 
+
+//
+// Afficher des auteurs sur requete SQL
+//
+function bonhomme_statut($row) {
+	global $connect_statut;
+
+	switch($row['statut']){
+		case "0minirezo":
+			$image = "<img src='img_pack/bonhomme-noir.gif' alt='Admin' border='0'>";
+			break;
+		case "1comite":
+			if ($connect_statut == '0minirezo' AND !($row['pass'] AND $row['login']))
+				$image = "<img src='img_pack/bonhomme-rouge.gif' alt='Sans acc&egrave;s' border='0'>";
+			else
+				$image = "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur' border='0'>";
+			break;
+		case "5poubelle":
+			$image = "<img src='img_pack/supprimer.gif' alt='Effac&eacute;' border='0'>";
+			break;
+		case "nouveau":
+		default:
+			$image = '';
+			break;
+	}
+	if ($image && $connect_statut=="0minirezo")
+		$image = "<A HREF='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>$image</a>";
+
+	return $image;
+}
+
+function afficher_auteurs ($titre_table, $requete) {
+	$tranches = afficher_tranches_requete($requete, 2);
+
+	if (strlen($tranches)) {
+
+		debut_cadre_relief("redacteurs-24.gif");
+
+		if ($titre_table) {
+			echo "<p><table width=100% cellpadding=0 cellspacing=0 border=0 background=''>";
+			echo "<tr><td width=100% background=''>";
+			echo "<table width=100% cellpadding=3 cellspacing=0 border=0>";
+			echo "<tr bgcolor='#333333'><td width=100% colspan=2><font face='Verdana,Arial,Helvetica,sans-serif' size=3 color='#FFFFFF'>";
+			echo "<b>$titre_table</b></font></td></tr>";
+		}
+		else {
+			echo "<p><table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
+		}
+
+		echo $tranches;
+
+		$result = spip_query($requete);
+
+		$table = '';
+		while ($row = mysql_fetch_array($result)) {
+			$vals = '';
+
+			$id_auteur = $row['id_auteur'];
+			$tous_id[] = $id_auteur;
+			$nom = $row['nom'];
+
+			$s = bonhomme_statut($row);
+			$s .= "<a href=\"auteur_edit.php3?id_auteur=$id_auteur\">";
+			$s .= typo($nom);
+			$s .= "</a>";
+			$vals[] = $s;
+			$table[] = $vals;
+		}
+		mysql_free_result($result);
+
+		$largeurs = array('');
+		$styles = array('arial2');
+		afficher_liste($largeurs, $table, $styles);
+
+		if ($titre_table) echo "</TABLE></TD></TR>";
+		echo "</TABLE>";
+		fin_cadre_relief();
+	}
+	return $tous_id;
+}
+
 //
 // Afficher les forums
 //

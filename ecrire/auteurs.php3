@@ -267,28 +267,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 
 	// statut auteur
 	echo "<td width='50'>";
-	switch($row['statut']){
-		case "0minirezo":
-			$image = "<img src='img_pack/bonhomme-noir.gif' alt='Admin' border='0'>";
-			break;
-		case "1comite":
-			if ($connect_statut == '0minirezo' AND !($row['pass'] AND $row['login']))
-				$image = "<img src='img_pack/bonhomme-rouge.gif' alt='Sans acc&egrave;s' border='0'>";
-			else
-				$image = "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur' border='0'>";
-			break;
-		case "5poubelle":
-			$image = "<img src='img_pack/supprimer.gif' alt='Effac&eacute;' border='0'>";
-			break;
-		case "nouveau":
-		default:
-			$image = '';
-			break;
-	}
-	if ($image && $connect_statut=="0minirezo")
-		$image = "<A HREF='auteurs_edit.php3?id_auteur=".$row['id_auteur']."&redirect=$retour'>$image</a>";
-
-	echo $image;
+	echo bonhomme_statut($row);
 
 	// nom
 	echo '</td><td>';
