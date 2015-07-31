@@ -34,6 +34,6 @@ $translit_c = array (
 
 foreach($translit_c as $u=>$t)
 	$trans[$u] = $t;
-$GLOBALS['CHARSET'][$charset] = $trans;
+$GLOBALS['CHARSET']['translitcomplexe'] = $trans;
 
 ?>

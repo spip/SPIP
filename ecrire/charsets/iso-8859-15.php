@@ -14,6 +14,6 @@ $trans[188]=338;
 $trans[189]=339;
 $trans[190]=376;
 
-$GLOBALS['CHARSET'][$charset] = $trans;
+$GLOBALS['CHARSET']['iso-8859-15'] = $trans;
 
 ?>

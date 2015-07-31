@@ -2,7 +2,7 @@
 
 // entites html (a completer eventuellement)
 
-$GLOBALS['CHARSET'][$charset] = array (
+$GLOBALS['CHARSET']['html'] = array (
 'ldquo'=>'&#147;', 'rdquo'=>'&#148;', 'cent'=>'&#162;', 'pound'=>'&#163;',
 'curren'=>'&#164;', 'yen'=>'&#165;', 'brvbar'=>'&#166;', 'sect'=>'&#167;',
 'uml'=>'&#168;', 'ordf'=>'&#170;', 'laquo'=>'&#171;', 'not'=>'&#172;',

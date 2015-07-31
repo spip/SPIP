@@ -2,7 +2,7 @@
 
 // translitteration simple
 
-$GLOBALS['CHARSET'][$charset] = array (
+$GLOBALS['CHARSET']['translit'] = array (
 // latin
 128=>'euro', 131=>'f', 140=>'OE', 147=>'\'\'', 148=>'\'\'', 153=>'TM', 156=>'oe', 159=>'Y', 160=>' ',
 161=>'!', 162=>'c', 163=>'L', 164=>'O', 165=>'yen',166=>'|',

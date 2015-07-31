@@ -23,6 +23,6 @@ $mod = Array(
 foreach ($mod as $num=>$val)
 	$trans[$num]=$val;
 
-$GLOBALS['CHARSET'][$charset] = $trans;
+$GLOBALS['CHARSET']['iso-8859-6'] = $trans;
 
 ?>
