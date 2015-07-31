@@ -1383,14 +1383,14 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
-function critere_datasource($idb, &$boucles, $crit) {
+function critere_datasource_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
 	$command[\'source\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';
 	$command[\'sourcemode\'] = '.calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent).';';
 }
 
-function critere_datacache($idb, &$boucles, $crit) {
+function critere_datacache_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$boucle->hash .= '
 	$command[\'datacache\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';';
