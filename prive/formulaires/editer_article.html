@@ -78,13 +78,6 @@
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
 			][(#ENV**{_texte_trop_long,''})]
 				<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
-				
-				<script type='text/javascript'><!--
-				jQuery('document').ready(function(){
-				jQuery('#text_area')
-				.height((jQuery(window).height()-80)+'px');
-				});
-				//--></script>
 	    </li>]
 	  	[(#ENV**{config}|table_valeur{articles_ps}|=={non}|?{#ENV**{ps,''},' '}|oui)
 	    <li class="editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
