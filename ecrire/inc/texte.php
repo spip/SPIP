@@ -1062,7 +1062,12 @@ function expanser_liens($letexte, $connect='')
 	if (preg_match_all(_RACCOURCI_LIEN, $letexte, $matches, PREG_SET_ORDER)) {
 		$i = 0;
 		foreach ($matches as $regs) {
-			$inserts[++$i] = traiter_raccourci_lien($regs, $connect);
+			$n = count($regs);
+			list($texte, $bulle, $hlang) = traiter_raccourci_lien_atts($regs[1]);
+			list ($lien, $class, $texte, $lang) =
+			  calculer_url($regs[$n-1], $texte, 'tout', $connect);
+			$inserts[++$i] = traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect);
+
 			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@",
 				$letexte);
 		}
@@ -1075,14 +1080,15 @@ function expanser_liens($letexte, $connect='')
 	return $letexte;
 }
 
-//
+/*
 // Inserer un lien a partir du preg_match du raccourci [xx->url]
+// Le preg-match a change, cette fonction est inutilisable
 // $regs:
 // 0=>tout le raccourci
 // 1=>texte (ou texte|hreflang ou texte|bulle ou texte|bulle{hreflang})
 // 2=>double fleche (historiquement, liens ouvrants)
 // 3=>url
-// A terme, il faudrait tenir compte de $connect
+
 // http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs, $connect='') {
 
@@ -1092,6 +1098,7 @@ function traiter_raccourci_lien($regs, $connect='') {
 		calculer_url($url, $texte, 'tout', $connect);
 	return traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect);
 }
+*/
 
 // http://doc.spip.org/@traiter_raccourci_lien_lang
 function traiter_raccourci_lien_lang($lien, $class, $texte, $hlang, $lang, $bulle, $connect='')
