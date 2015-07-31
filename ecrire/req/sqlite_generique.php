@@ -965,7 +965,7 @@ function spip_sqlite_quote($v, $type = ''){
  * @return string expression SQL
  **/
 function spip_sqlite_date_proche($champ, $interval, $unite){
-	$op = $interval>0 ? '>' : '<';
+	$op = (($interval <= 0) ? '>' : '<');
 	return "($champ $op datetime('".date("Y-m-d H:i:s")."', '$interval $unite'))";
 }
 
