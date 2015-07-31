@@ -112,7 +112,7 @@ function signatures_edit($script, $id, $arg, $row) {
 			$titre_r = supprimer_numero(sql_getfetsel("titre", "spip_rubriques", "id_rubrique=$id_rubrique"));
 		        $href = generer_url_ecrire('naviguer', "id_rubrique=" . $id_rubrique);
 			$h2 = generer_url_ecrire_article($id_article);
-			$res .= "<br class='nettoyeur' /><a title='$id_article' href='"
+			$res .= "<div class='nettoyeur' /></div><a title='$id_article' href='"
 			  . $h2
 			  . "'>"
 			  . typo($titre_a)

@@ -92,7 +92,7 @@ function configuration_reducteur_dist()
 	. _T('info_image_process')
 	. "</p>"
 	. $res
-	. "<br class='nettoyeur' />"
+	. "<div class='nettoyeur' /></div>"
 	. "<p class='verdana2'>"
 	. _T('info_image_process2')
 	. "</p>"

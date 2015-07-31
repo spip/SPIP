@@ -97,7 +97,7 @@ function export_all_fin($file, $meta, $rub)
 			$n = floor(count($tables_sauvegardees)/2);
 			$corps .= "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,0,$n)) . "</li></ul></div>"
 			. "<div style='width:49%;float:left;'><ul><li>" . join('</li><li>', array_slice($tables_sauvegardees,$n)) . "</li></ul></div>"
-			. "<br class='nettoyeur' />";
+			. "<div class='nettoyeur' /></div>";
 	}
 	include_spip('inc/minipres');
 	echo minipres(_T('info_sauvegarde'), $corps);

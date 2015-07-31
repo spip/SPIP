@@ -56,7 +56,7 @@ function afficher_onglets_pages($ordre,$onglets){
 	}
 	$res = "<ul class='tabs-nav'>$res</ul>";
 	foreach((_INTERFACE_ONGLETS ? array_keys($ordre):array_keys($onglets)) as $id){
-		$res .= "<div id='$id' class='tabs-container'>" . $onglets[$id] . "<br class='nettoyeur' /></div>";
+		$res .= "<div id='$id' class='tabs-container'>" . $onglets[$id] . "<div class='nettoyeur' /></div></div></div>";
 	}
 	$onglet_compteur++;
 	return "<div class='boite_onglets' id='boite_onglet_$onglet_compteur'>$res</div>"
@@ -822,7 +822,7 @@ function debut_gauche($rubrique = "accueil", $return=false) {
 // http://doc.spip.org/@fin_gauche
 function fin_gauche()
 {
-	return "</div></div><br class='nettoyeur' />";
+	return "</div></div><div class='nettoyeur' /></div>";
 }
 
 //
