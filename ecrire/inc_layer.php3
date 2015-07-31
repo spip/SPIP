@@ -26,20 +26,17 @@ function init_layer() {
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
 	}
+
 }
 
 function test_layer(){
-	global $browser_name;
-	global $browser_version;
+	global $browser_name, $browser_version, $browser_description;
 
-	if (eregi("msie", $browser_name) AND $browser_version >= 5) {
+	if (
+	(eregi("msie", $browser_name) AND $browser_version >= 5)
+	|| (eregi("mozilla", $browser_name) AND $browser_version >= 5)
+	)
 		return true;
-	} else if (eregi("mozilla", $browser_name) AND $browser_version >= 5){
-		return true;
-	}
-	else {
-		return false;
-	}
 }
 
 
