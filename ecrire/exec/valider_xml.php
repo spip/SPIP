@@ -116,7 +116,7 @@ function valider_resultats($res, $ext)
 			$color = ";color: red";
 		} else  {$color = '';}
 
-		$h = $ext!='php'
+		$h = !strpos($ext,'php')
 		? ($appel . '&var_mode=debug&var_mode_affiche=validation')
 		  : generer_url_ecrire('valider_xml', "var_url=" . urlencode($appel));
 		
