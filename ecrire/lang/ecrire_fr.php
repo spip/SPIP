@@ -1131,6 +1131,8 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 		afin d\'&eacute;viter d\'afficher des messages d\'avertissement
 		intempestifs.',
 'texte_trop_resultats_auteurs' => 'Trop de r&eacute;sultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
+'texte_type_urls' => 'Vous pouvez choisir ci-dessous le mode de calcul de l\'adresse des pages.',
+'texte_type_urls_attention' => 'Attention ce r&eacute;glage ne fonctionnera que si le fichier @htaccess@ est correctement install&eacute; &agrave; la racine du site.',
 'texte_unpack' => 't&eacute;l&eacute;chargement de la derni&egrave;re version',
 'texte_utilisation_moteur_syndiques' => 'Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute;
     &agrave; SPIP, vous pouvez effectuer les recherches sur les sites et
@@ -1234,6 +1236,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_sites_tous' => 'Les sites r&eacute;f&eacute;renc&eacute;s',
 'titre_suivi_petition' => 'Suivi des p&eacute;titions',
 'titre_syndication' => 'Syndication de sites',
+'titre_type_urls' => 'Type d\'adresses URL',
 'tls_ldap' => 'Transport Layer Security :',
 'tout_dossier_upload' => 'Tout le dossier @upload@',
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce num&eacute;ro.',
