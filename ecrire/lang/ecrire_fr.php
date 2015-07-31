@@ -771,9 +771,10 @@ dans une couleur qui indique leur état :',
 'queue_executer_maintenant' => 'Exécuter maintenant',
 'queue_nb_jobs_in_queue' => '@nb@ travaux en attente',
 'queue_next_job_in_nb_sec' => 'Prochain travail dans @nb@ s',
+'queue_no_job_in_queue' => 'Aucun travail en attente',
 'queue_one_job_in_queue' => '1 travail en attente',
 'queue_purger_queue' => 'Purger la liste des travaux',
-'queue_titre' => 'Liste de travaux',
+'queue_titre' => 'Liste des travaux',
 
 // R
 'repertoire_plugins' => 'Répertoire :',

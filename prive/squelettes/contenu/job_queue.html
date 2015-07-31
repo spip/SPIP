@@ -25,11 +25,18 @@
 		[<p class="pagination">(#PAGINATION{prive})</p>]
 		[(#AUTORISER{'purger','queue'}|oui)
 		<div class="actions">
-			[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'',#SELF},ajax})]
+			[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
 		</div>
 		]
-	</div>
+		</div>
 </B_jobs>
+	<h3><:queue_no_job_in_queue:></h3>
+	[(#AUTORISER{'purger','queue'}|oui)
+	<div class="actions">
+		[(#BOUTON_ACTION{<:queue_purger_queue:>,#URL_ACTION_AUTEUR{purger_queue,'x',#SELF},ajax})]
+	</div>
+	]
+<//B_jobs>
 <script type="text/javascript">/*<![CDATA[*/
 function queue_reload(){jQuery('h1').ajaxReload();}
 if (window.jQuery) setTimeout(queue_reload,60000);
