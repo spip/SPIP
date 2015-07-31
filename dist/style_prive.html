@@ -52,7 +52,7 @@ ul#chemin { font-size: 0.9em; overflow: hidden; }
 ul#chemin li em { display: none; }
 ul#chemin li a { color: white; }
 ul#chemin, ul#chemin ul, ul#chemin li { margin: 0; padding: 0;  list-style-type: none;}
-ul#chemin li span {
+ul#chemin li>span {
 	list-style: none;
 	display: block;
 	float: #GET{left}; 
@@ -63,7 +63,7 @@ ul#chemin li span {
 	padding-#GET{right}: 12px;
 	margin-#GET{left}: -5px; 
 }
-ul#chemin li li span { background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
+ul#chemin li li>span { background: url([(#REM|sinon{[(#EVAL{ _DIR_IMG_PACK})]chemin-fond-[(#ENV{ltr})].gif}|image_sepia{#ENV{couleur_foncee,3874b0}}|extraire_attribut{src})]) center [(#GET{left})] no-repeat;}
 ul#chemin .aide {margin-top: 3px;}
 h1 { color: #GET{foncee}; font-size:large; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
 h2 { color: #000; font-size: medium; font-family: Arial, Sans, sans-serif; margin: 0.5em 0 0.25em 0; }
@@ -759,6 +759,10 @@ div.navigation-calendrier { background-color: #GET{foncee}; }
 #contenu td.document .titrem { background-color: #FFF; }
 td.vu { background: #CCC; }
 
+/* messages d'upload (zip etc) */
+.upload_message {border: dotted [(#GET{foncee})] 1px; padding:0px 5px 5px 10px; font-size: x-small}
+.upload_message ol {padding: 2px;list-style: none; font-size: xx-small; max-height:20em; overflow:auto}
+.upload_message ol li {padding: 2px;}
 
 /* config/reducteur */
 .vignette_reducteur { text-align: center; vertical-align: center; float: #GET{left}; padding:2px; border:2px solid #FFF; width:150px; height:170px; }
