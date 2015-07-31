@@ -1022,7 +1022,7 @@ function balise_INSERT_HEAD_dist($p) {
 		.'?php header("X-Spip-Filtre: \'.'
 			.'\'insert_head_css_conditionnel\''
 		. " . '\"); ?'.'>'";
-	$p->code = ". pipeline('insert_head','<!-- insert_head -->')";
+	$p->code .= ". pipeline('insert_head','<!-- insert_head -->')";
 	$p->interdire_scripts = false;
 	return $p;
 }
