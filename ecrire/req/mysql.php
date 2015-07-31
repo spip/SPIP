@@ -37,10 +37,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	if (!charger_php_extension('mysqli')) return false;
-	if ($port > 0) $host = "$host:$port";
-	$link = @mysqli_connect($host, $login, $pass);
+	if ($port != "0") {
+		$link = mysqli_connect($host, $login, $pass, $db, $port);
+	} elseif (strpos($host,':')) {
+		list($host,$port) = split(':',$host);
+		$link = mysqli_connect($host, $login, $pass, $db, $port);
+	} else {
+		$link = mysqli_connect($host, $login, $pass);
+	}
+
 	if (!$link) {
-		spip_log('Echec mysql_connect. Erreur : ' . mysqli_error(),'mysql.'._LOG_HS);
+		spip_log('Echec mysqli_connect. Erreur : ' . mysqli_connect_error(),'mysql.'._LOG_HS);
 		return false;
 	}
 	$last = '';
