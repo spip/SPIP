@@ -26,6 +26,10 @@ function puce_statut_document_dist($id, $statut, $id_rubrique, $type, $ajax='') 
 	return "<img src='" . chemin_image("attachment.gif") . "' alt=''  />";
 }
 
+function puce_statut_signature_dist($id, $statut, $id_rubrique, $type, $ajax='') {
+	return "<img src='" . chemin_image("visit-12.gif") . "' alt=''  />";
+}
+
 // http://doc.spip.org/@puce_statut_auteur_dist
 // Hack de compatibilite: les appels directs ont un  $type != 'auteur'
 // si l'auteur ne peut pas se connecter
