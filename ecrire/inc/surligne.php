@@ -104,7 +104,7 @@ function surligner_mots($page, $mots) {
 			$mots_surligne[] = $mot;
 		}
 	}
-var_dump($mots_surligne);
+
 	if (!$mots_surligne) return $page;
 
 	// en cas de surlignement limite' (champs #SURLIGNE), 
