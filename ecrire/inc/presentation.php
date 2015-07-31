@@ -577,7 +577,7 @@ function puce_statut_article($id, $statut, $id_rubrique, $type='article', $ajax 
 }
 
 // http://doc.spip.org/@puce_statut_breve
-function puce_statut_breve($id, $statut, $type, $droit='AUTO') {
+function puce_statut_breve($id, $statut, $id_rubrique, $type) {
 	global $spip_lang_left, $dir_lang;
 
 	$puces = array(
@@ -611,24 +611,20 @@ function puce_statut_breve($id, $statut, $type, $droit='AUTO') {
 	$type1 = "statut$type$id"; 
 	$inser_puce = http_img_pack($puce, $title, "id='img$type1' style='margin: 1px;'");
 
-	if (!$droit || $droit=='AUTO') return $inser_puce;
+	if (!is_numeric($id_rubrique)) return $inser_puce;
 	
-	/*	if ($droit == 'AUTO') { # id_rubrique indefinie. a revoir.
-		$droit = autoriser('publierdans', 'rubrique', $id_rubrique);
-		} */
-
 	$type2 = "statutdecal$type$id";
 	$action = "\nonmouseover=\"montrer('$type2');\"";
 
-	return	"<div class='puce_breve' id='$type1'$dir_lang>"
-		. "<div class='puce_breve_fixe' $action>"
+	return	"<span class='puce_breve' id='$type1'$dir_lang>"
+		. "<span class='puce_breve_fixe' $action>"
 		. $inser_puce
-		. "</div>"
-		. "<div class='puce_breve_popup' id='$type2'\nonmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
+		. "</span>"
+		. "<span class='puce_breve_popup' id='$type2'\nonmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
 		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
 		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
 	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
-		.  "</div></div>";
+		.  "</span></span>";
 }
 
 // http://doc.spip.org/@afficher_script_statut
@@ -908,8 +904,11 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 		  changer_typo($lang = $row['lang']);
 		else $lang = $langue_defaut;
 		$id_rubrique = $row['id_rubrique'];
-				
-		$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && autoriser('publierdans','rubrique',$id_rubrique)));
+		$t= ($droit AND autoriser('publierdans','rubrique',$id_rubrique))
+		  ? $id_rubrique
+		  : false;
+		
+		$vals[] = puce_statut_breve($id_breve, $statut, $t, 'breve');
 	
 		$s = "\n<div>";
 		$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
@@ -1812,18 +1811,22 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$limit = $n - $limit;
 	$retour = '';
 	$fstatut = 'puce_statut_' . $type;
-	$type = 'rubrique_' . $table;
+	$idom = 'rubrique_' . $table;
 
 	if (_MODE_MEME_RUBRIQUE == 'oui') {
 		$statut = 'prop';// arbitraire
-		$puce_rubrique = puce_statut_article(0, $statut, $id_rubrique, $type).'&nbsp;';
+
+		$puce_rubrique = ($type == 'article')
+		  ?  (puce_statut_article(0, $statut, $id_rubrique, $idom).'&nbsp;')
+		  : ''; 
+# (puce_statut_breve(0, $statut, $id_rubrique, $type) .'&nbsp;'); manque Ajax
 	}
 
 	while($row = spip_fetch_array($voss)) {
 		$id = $row['id'];
 		$num = afficher_numero_edit($id, $key, $type);
 		$statut = $row['statut'];
-		$statut = $fstatut($id, $statut, $id_rubrique);
+		$statut = $fstatut($id, $statut, $id_rubrique, $type);
 		$href = "<a class='verdana1' href='"
 		. generer_url_ecrire($table,"$key=$id")
 		. "'>"
@@ -1835,8 +1838,8 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	$icone =  $puce_rubrique . '<b>' . _T('info_meme_rubrique')  . '</b>';
 	
 
-	$retour = bandeau_titre_boite2($icone,  'article-24.gif','','',false)
-	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px;'>"
+	$retour = bandeau_titre_boite2($icone,  'article-24.gif','white','black',false)
+	. "\n<table class='spip_x-small' style='background-color: #e0e0e0;border: 0px; padding-left:4px; width: 100%;'>"
 	. $retour;
 	
 	if (_MODE_MEME_RUBRIQUE == 'oui')
@@ -1849,7 +1852,7 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 
 	// id utilise dans puce_statut_article
 	return "\n<div>&nbsp;</div>"
-	. "\n<div id='imgstatut$type$id_rubrique' class='bandeau_rubriques' style='z-index: 1;'>$retour</div>";
+	. "\n<div id='imgstatut$idom$id_rubrique' class='bandeau_rubriques' style='z-index: 1;'>$retour</div>";
 }
 
 // http://doc.spip.org/@afficher_numero_edit
