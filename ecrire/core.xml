@@ -25,12 +25,6 @@
 		<url>naviguer</url>
 	</bouton>
 
-	<bouton id='sites' parent="bando_edition">
-		<icone>images/site-16.png</icone>
-		<titre>icone_sites_references</titre>
-		<url>sites_tous</url>
-	</bouton>
-
 	<bouton id="bando_publication">
 		<icone>images/publication-48.png</icone>
 		<titre>icone_publication</titre>
@@ -150,12 +144,6 @@
 		<titre>icone_creer_nouvel_auteur</titre>
 		<url>auteur_infos</url>
 		<args>new=oui</args>
-	</bouton>
-	<bouton id='site_creer' parent="outils_rapides">
-		<icone>images/site-new-16.png</icone>
-		<titre>icone_referencer_nouveau_site</titre>
-		<url>sites_edit</url>
-		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
 	</bouton>
 
 	<onglet id='infos_perso' parent="infos_perso">
