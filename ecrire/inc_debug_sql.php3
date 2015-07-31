@@ -190,8 +190,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
 	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
-	    return;
-	spip_setcookie('spip_debug', 'oui', time()+12*3600);
+		return;
 
 	$link = new Link;
 	$link->delvar('var_mode_affiche');
@@ -205,7 +204,6 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	ob_end_clean();
 
 	@header('Content-Type: text/html; charset='.lire_meta('charset'));
-
 	echo debut_entete('Spip ' . _T('admin_debug')), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
 	  "</head>\n<body style='margin:0 10px;'>",

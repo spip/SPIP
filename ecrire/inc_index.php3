@@ -426,7 +426,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 		$critere = critere_indexation($type);
 
-		if ($type == 'syndic' /* OR $type == 'document' */)
+		if ($type == 'syndic' OR $type == 'document')
 			$limit = 1;
 		else
 			$limit = $nombre_indexations;
