@@ -929,7 +929,7 @@ function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 	$vals[] = $s;
 			
 	if ($options == "avancees") {
-		$vals[] = "<b>"._T('info_numero_abbreviation')."$id_breve</b>";
+		$vals[] = afficher_numero_edit($id_breve, 'id_breve', 'breves_edit');
 	}
 			
 	return $vals;
@@ -1775,29 +1775,28 @@ function debloquer_article($arg, $texte) {
 // http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 {
-	global $spip_lang_right, $spip_lang_left, $options;
+	global $options;
 
 	if ($options != "avancees") return '';
 
 	$table = $type . 's';
+	$script = $type . 's_edit';
 	$key = 'id_' . $type;
 
 	$voss = spip_query("SELECT $key AS id, titre, statut FROM spip_$table WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND ($key != $id) ORDER BY $order DESC LIMIT $limit");
 
 	if (!spip_num_rows($voss)) return '';
 
-	$numero = _T('info_numero_abbreviation');
-	$style = "float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;";
 	$retour = '';
 
 	while($row = spip_fetch_array($voss)) {
-		$ze = $row['id'];
-		$retour .= "<a class='"
+		$n = $row['id'];
+		$retour .= afficher_numero_edit($n, $key, $script)
+		. "<a class='"
 		. $row['statut']
 		. "' style='font-size: 10px;' href='"
-		  . generer_url_ecrire($table,"$key=$ze")
+		. generer_url_ecrire($table,"$key=$n")
 		. "'>"
-		. "<span class='arial1' style='$style'><b>$numero$ze</b></span>"
 		. typo($row['titre'])
 		. "</a>";
 	}
@@ -1808,6 +1807,25 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 	. "\n<div class='plan-articles'>"
 	. $retour
 	. "</div></div>";
+}
+
+function afficher_numero_edit($id, $key, $script)
+{
+	global $spip_lang_right, $spip_lang_left;
+	static $numero , $style='' ;
+	
+	if (!$style) {
+		$style = " style='float: $spip_lang_right; padding-$spip_lang_left: 4px;font-size: 10px; color: black; '"; 
+
+		$numero = _T('info_numero_abbreviation');
+	}
+
+	return "<a$style\nhref='"
+	. generer_url_ecrire($script,"$key=$id")
+	. "'><b>"
+	. $numero
+	. $id
+	. "</b></a>";
 }
 
 //
