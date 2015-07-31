@@ -45,7 +45,6 @@ function action_logout_dist()
 				       	"redirect=". _DIR_RESTREINT_ABS, 
 				       _T('login_test_navigateur'),
 				       true);
-			  exit;
 			}
 		}
 	}

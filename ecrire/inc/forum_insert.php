@@ -28,18 +28,16 @@ function controler_forum_abo($retour)
 {
 	global $auteur_session;
 	if ($auteur_session) {
-			$statut = $auteur_session['statut'];
-			if (!$statut OR $statut == '5poubelle') {
-				ask_php_auth(_T('forum_acces_refuse'),
-					     _T('forum_cliquer_retour',
-						array('retour_forum' => $retour)));
-				exit;
-			}
-	} else {
-			ask_php_auth(_T('forum_non_inscrit'),
+		$statut = $auteur_session['statut'];
+		if (!$statut OR $statut == '5poubelle') {
+			ask_php_auth(_T('forum_acces_refuse'),
 				     _T('forum_cliquer_retour',
+						array('retour_forum' => $retour)));
+		}
+	} else {
+		ask_php_auth(_T('forum_non_inscrit'),
+			     _T('forum_cliquer_retour',
 					array('retour_forum' => $retour)));
-			exit;
 		}
 }
 
@@ -128,7 +126,6 @@ function inc_forum_insert_dist() {
 		ask_php_auth(_T('forum_message_trop_long'),
 			_T('forum_cliquer_retour',
 				array('retour_forum' => $retour_forum)));
-		exit;
 	}
 
 	// Verifier hash securite pour les forums avec previsu
