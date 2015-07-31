@@ -877,6 +877,15 @@ function date_iso($date_heure) {
 	return gmdate('Y-m-d\TH:i:s\Z', $time);
 }
 
+// date_822 retourne la date au format "RFC 822"
+// utilise pour <pubdate> dans certains feeds RSS
+function date_822($date_heure) {
+	list($annee, $mois, $jour) = recup_date($date_heure);
+	list($heures, $minutes, $secondes) = recup_heure($date_heure);
+	$time = mktime($heures, $minutes, $secondes, $mois, $jour, $annee);
+	return date('r', $time);
+}
+
 // http://doc.spip.org/@date_anneemoisjour
 function date_anneemoisjour($d)  {
 	if (!$d) $d = date("Y-m-d");
