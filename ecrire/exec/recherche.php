@@ -17,27 +17,30 @@ include_spip('inc/sites_voir');
 
 function exec_recherche_dist()
 {
-  global $couleur_foncee, $recherche;
+	global $couleur_foncee, $recherche;
 
-  $recherche = addslashes(entites_html($recherche));
+	$recherche = addslashes(entites_html($recherche));
 
 
- debut_page(_T('titre_page_recherche', array('recherche' => $recherche)));
+	debut_page(_T('titre_page_recherche', array('recherche' => $recherche)));
  
- debut_gauche();
+	debut_gauche();
 
- $recherche_aff = _T('info_rechercher');
- $onfocus = "onfocus=this.value='';";
-			echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'>";
-			echo "<input type='hidden' name='exec' value='recherche' />";
-			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" '.$onfocus.'>';
-			echo "</form>";
+	if ($recherche) {
+	  $recherche_aff = $recherche;
+	  $onfocus = "this.value='$recherche';";
+	} else {
+	  $recherche_aff = _T('info_rechercher');
+	  $onfocus = "this.value='';";
+	}
+	echo "<form method='get' style='margin: 0px;' action='" . generer_url_ecrire("recherche","") . "'>";
+	echo "<input type='hidden' name='exec' value='recherche' />";
+	echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" onfocus="'.$onfocus . '">';
+	echo "</form>";
 
+	debut_droite();
 
-
-debut_droite();
-
-if (strlen($recherche) > 0) {
+	if (strlen($recherche) > 0) {
 
 	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
 	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>$recherche</B></FONT><p>";
