@@ -65,7 +65,7 @@ function ajouter_session($auteur) {
 	$texte .= "?".">\n";
 
 	if (!ecrire_fichier($fichier_session, $texte))
-		redirige_par_entete(generer_url_action('test_dirs','',true));
+		redirige_par_entete(generer_url_action('test_dirs','test_dir=' . _DIR_SESSIONS,true));
 	else return $spip_session;
 }
 
