@@ -440,7 +440,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo fin_block();
 	
 	if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
-		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND FIND_IN_SET(statut,'publie,off,prop')";
+		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')";
 		if ($row = mysql_fetch_row(spip_query($req))) {
 			$nb_forums = $row[0];
 			if ($nb_forums) {

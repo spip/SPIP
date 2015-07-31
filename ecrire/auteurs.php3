@@ -53,10 +53,10 @@ debut_droite();
 
 // limiter les statuts affiches
 if ($connect_statut != '0minirezo') {
-	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite')";
-	$sql_statut_articles = " AND FIND_IN_SET(articles.statut,'prop,publie')";
+	$sql_statut_auteurs = " AND auteurs.statut IN ('0minirezo', '1comite')";
+	$sql_statut_articles = " AND articles.statut IN ('prop', 'publie')";
 } else {
-	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite,5poubelle')";
+	$sql_statut_auteurs = " AND auteurs.statut IN ('0minirezo', '1comite', '5poubelle')";
 	$sql_statut_articles = "";
 }
 
@@ -144,7 +144,7 @@ if ($type_requete == 'auteur') {
 	if ($connect_statut == '0minirezo')
 		$sql_statut_auteurs_ajout = $sql_statut_auteurs;
 	else
-		$sql_statut_auteurs_ajout = " AND FIND_IN_SET(auteurs.statut,'0minirezo')";
+		$sql_statut_auteurs_ajout = " AND auteurs.statut = '0minirezo'";
 
 	$result_auteurs = spip_query("SELECT auteurs.*, UPPER(nom) AS unom, 0 as compteur
 		FROM spip_auteurs AS auteurs

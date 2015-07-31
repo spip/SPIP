@@ -142,8 +142,6 @@ if ($nouveau_statut AND $flag_administrable) {
 			indexer_syndic($id_syndic);
 		}
 	}
-
-
 }
 
 if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
@@ -195,7 +193,7 @@ if ($redirect AND $redirect_ok == 'oui') {
 // recalcul
 //
 if ($recalcul ==  "oui") {
-	$result = spip_query ("SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic' AND FIND_IN_SET(syndication, 'oui,off')");
+	$result = spip_query ("SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic' AND syndication IN ('oui', 'sus', 'off')");
 	if ($result AND mysql_num_rows($result)>0)
 		$erreur_syndic = syndic_a_jour ($id_syndic);
 }
@@ -407,7 +405,7 @@ if ($flag_administrable) {
 	echo "</form>\n";
 }
 
-if ($syndication == "oui" OR $syndication == "off") {
+if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	echo "<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><b>Ce site est syndiqu&eacute;...</b></font>";
 
 	if ($erreur_syndic)

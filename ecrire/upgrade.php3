@@ -39,11 +39,11 @@ creer_base();
 maj_base();
 ecrire_acces();
 
-$hash = calculer_action_auteur("purger_squelettes");
+$hash = calculer_action_auteur("purger_cache");
 $redirect = rawurlencode("index.php3");
 
 fin_admin($upgrade_titre);
 
-@header ("Location: ../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect");
+@header ("Location: ../spip_cache.php3?purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect");
 
 ?>
