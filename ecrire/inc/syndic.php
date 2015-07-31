@@ -154,12 +154,15 @@ function analyser_backend($rss, $url_syndic='') {
 
 		// Auteur(s)
 		if (preg_match_all(
-		',<(author|creator)>(.*)</\1>,Uims',
+		',<(author|creator)\b[^>]*>(.*)</\1>,Uims',
 		$item, $regs, PREG_SET_ORDER)) {
 			$auteurs = array();
 			foreach ($regs as $reg) {
 				$nom = $reg[2];
-				if (preg_match(',<name>(.*)</name>,Uims', $nom, $reg))
+				if (preg_match(',<name\b[^>]*>(.*)</name>,Uims', $nom, $reg))
+					$nom = $reg[1];
+				// Cas particulier d'un auteur Flickr
+				if (preg_match(',nobody@flickr.com \((.*)\),Uims', $nom, $reg))
 					$nom = $reg[1];
 				$auteurs[] = trim(textebrut(filtrer_entites($nom)));
 			}
