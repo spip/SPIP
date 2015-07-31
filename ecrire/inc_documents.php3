@@ -369,8 +369,8 @@ function texte_upload_manuel($dir, $inclus = '') {
 			
 			
 			if ($ext == "zip") {
-	$texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier (en tant que fichier zip)</option>";				
-	$texte_upload .= "\n<option value=\"$f--unzip\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier (d&eacute;compacter et installer les documents s&eacute;par&eacute;s)</option>";
+				$texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier (en tant que fichier zip)</option>";				
+				$texte_upload .= "\n<option value=\"$f--unzip\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier (d&eacute;compacter et installer les documents s&eacute;par&eacute;s)</option>";
 			}
 			else if ($exts[$ext] == 'oui') $texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier</option>";
 		}
@@ -381,9 +381,9 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 
 function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
-	if ($largeur_vignette > 140) {
-		$rapport = 140.0 / $largeur_vignette;
-		$largeur_vignette = 140;
+	if ($largeur_vignette > 120) {
+		$rapport = 120.0 / $largeur_vignette;
+		$largeur_vignette = 120;
 		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
 	}
 	if ($hauteur_vignette > 130) {
@@ -550,38 +550,39 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "<div style='text-align: center;'><a href='../$fichier'><img src='$fichier_vignette' border='0'></a></div>";
 			}
 						
-			$process = lire_meta('image_process');
-			 // imagick (php4-imagemagick)
-			 if ($process == 'imagick') {
-				echo "<div class='verdana1' style='text-align:center'>";		
-				$link_rot = $image_link;
-				$link_rot->addVar('redirect', $redirect_url);
-				$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-				$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-				$link_rot->addVar('doc_rotate', $id_document);
-				$link_rot->addVar('vignette_aff', $id_document);
-				$link_rot->addVar('var_rot', -90);
-				echo "<a href='".$link_rot->getUrl("portfolio")."'>gauche</a> |";
-
-				$link_rot = $image_link;
-				$link_rot->addVar('redirect', $redirect_url);
-				$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-				$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-				$link_rot->addVar('doc_rotate', $id_document);
-				$link_rot->addVar('vignette_aff', $id_document);
-				$link_rot->addVar('var_rot', 90);
-				echo "<a href='".$link_rot->getUrl("portfolio")."'>droite</a> |";
-
-				$link_rot = $image_link;
-				$link_rot->addVar('redirect', $redirect_url);
-				$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-				$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-				$link_rot->addVar('doc_rotate', $id_document);
-				$link_rot->addVar('vignette_aff', $id_document);
-				$link_rot->addVar('var_rot', 180);
-				echo "<a href='".$link_rot->getUrl("portfolio")."'>180&deg;</a>";
+			if ($flag_modif) {
+				$process = lire_meta('image_process');
+				 // imagick (php4-imagemagick)
+				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
+					echo "<div class='verdana1' style='text-align:center'>";		
+					$link_rot = $image_link;
+					$link_rot->addVar('redirect', $redirect_url);
+					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+					$link_rot->addVar('doc_rotate', $id_document);
+					$link_rot->addVar('vignette_aff', $id_document);
+					$link_rot->addVar('var_rot', -90);
+					echo "<a href='".$link_rot->getUrl("portfolio")."'>gauche</a> |";
+	
+					$link_rot = $image_link;
+					$link_rot->addVar('redirect', $redirect_url);
+					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+					$link_rot->addVar('doc_rotate', $id_document);
+					$link_rot->addVar('vignette_aff', $id_document);
+					$link_rot->addVar('var_rot', 90);
+					echo "<a href='".$link_rot->getUrl("portfolio")."'>droite</a> |";
+	
+					$link_rot = $image_link;
+					$link_rot->addVar('redirect', $redirect_url);
+					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+					$link_rot->addVar('doc_rotate', $id_document);
+					$link_rot->addVar('vignette_aff', $id_document);
+					$link_rot->addVar('var_rot', 180);
+					echo "<a href='".$link_rot->getUrl("portfolio")."'>180&deg;</a>";
+				}
 			}
-			
 			
 			if ($flag_modif) {
 				if ($flag_deplier) $triangle = bouton_block_visible("port$id_document");
