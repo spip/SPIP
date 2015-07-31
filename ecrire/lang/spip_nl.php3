@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'weken',
 'dirs_commencer' => 'alvorens de installatie te beginnen',
 'dirs_preliminaire' => 'Vooraf: <b>Toegangsrechten regelen</b>',
-'dirs_probleme_droits' => '<b>Probleem met toegangsrechten</b>',
+'dirs_probleme_droits' => 'Probleem met toegangsrechten',
 'dirs_repertoires_absents' => '<b>De volgende mappen werden niet gevonden: <ul>@bad_dirs@.</ul> </b>
   <p />Waarschijnlijk is dit te wijten aan het door elkaar halen van grote en kleine letters.
   Kijk na of kleine en hoofdletters van deze mappen overeenstemmen met wat hieronder getoond wordt;
@@ -200,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'paswoord :',
 'form_forum_probleme_mail' => 'Probleem met e-mail: de logingegevens konden niet worden verstuurd.',
 'form_forum_voici1' => 'Ziehier je nieuwe logingegevens om een bijdrage te kunnen leveren aan de website
- "@nom_site_spip@" (@adresse_site@/) :',
+ "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Hierbij je logingegevens om artikels voor artikels voor te stellen op
-de website "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+de website "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Vul hier je e-mailadres in.',
 'form_indiquer_nom' => 'Vul hier je naam in.',
 'form_indiquer_nom_site' => 'Gelieve de naam van je site op te geven.',
@@ -378,7 +378,7 @@ Bedankt voor je deelname
 'info_copyright_gpl' => 'onder GPL licentie',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
-'info_creer_repertoire_2' => 'binnen in de map <b>ecrire/data/</b>, vervolgens:',
+'info_creer_repertoire_2' => 'binnen in de map <b>@repertoire@</b>, vervolgens:',
 'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
 'info_deplier' => 'Uitvouwen',
 'info_descriptif_nombre' => 'Beschrijving(en):',
@@ -398,8 +398,8 @@ Bedankt voor je deelname
 'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
 'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
 'info_erreur_systeme2' => 'Misschien is de harde schijf vol of de gegevensbank beschadigd. <br>
- <font color=\'red\'>Probeer de <a href=\'ecrire/admin_repair.php3\'>de gegevensbank te herstellen</a>,
- of neem contact op met je provider.</font><br></b>',
+ <font color=\'red\'>Probeer de <a href=\'@script@\'>de gegevensbank te herstellen</a>,
+ of neem contact op met je provider.</font>',
 'info_fini' => 'Het is gedaan !',
 'info_format_image' => 'Beeldformaten die gebruikt kunnen worden om vignettes (miniatuurafbeeldingen) aan te maken: @gd_formats@.',
 'info_format_non_defini' => 'Ongedefinieerd formaat',
@@ -410,10 +410,10 @@ Bedankt voor je deelname
 'info_inclusion_directe' => 'Directe insluiting:',
 'info_inclusion_vignette' => 'Insluiten van de miniatuurafbeelding:',
 'info_installation_systeme_publication' => 'Installatie van het publicatiesysteem...',
-'info_installer_documents' => 'Je kan alle documenten in de map <i>upload</i> automatisch als bijlage toevoegen.',
-'info_installer_ftp' => 'Via FTP kan een beheerder bestanden in de map ecrire/upload plaatsen en ze vervolgens hier meteen selecteren.',
+'info_installer_documents' => 'Je kan alle documenten in de map @upload@ automatisch als bijlage toevoegen.',
+'info_installer_ftp' => 'Via FTP kan een beheerder bestanden in de map @upload@ plaatsen en ze vervolgens hier meteen selecteren.',
 'info_installer_images' => 'Afbeelden kunnen toegevoegd worden in JPEG, GIF en PNG formaat.',
-'info_installer_images_dossier' => 'Afbeeldingen plaatsen in de map /ecrire/upload om ze hier te selecteren.',
+'info_installer_images_dossier' => 'Afbeeldingen plaatsen in de map @upload@ om ze hier te selecteren.',
 'info_installer_tous_documents' => 'Alle documenten installeren',
 'info_interface_complete' => 'Volledige interface',
 'info_interface_simple' => 'Vereenvoudigde interface',
@@ -476,7 +476,7 @@ Bedankt voor je deelname
 'info_retirer_mot' => 'Trek dat woord',
 'info_retirer_mots' => 'Alle trefwoorden intrekken',
 'info_sans_titre_2' => 'zonder titel',
-'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map <i>upload</i>',
+'info_selectionner_fichier' => 'Je kan een bestand selecteren uit de map @upload@',
 'info_selectionner_fichier_2' => 'Een bestand selecteren:',
 'info_site_attente' => 'website ter goedkeuring voorgelegd',
 'info_site_reference' => 'Online gekoppelde site',
@@ -615,7 +615,7 @@ Om opnieuw toegang te krijgen tot de site
 @nom_site_spip@ (@adresse_site@)
 
 Ga naar het volgende adres:
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Je kan je paswoord opnieuw invoegen en 
 verbinding maken met de site
@@ -671,9 +671,9 @@ verbinding maken met de site
  <P align="justify"><B>Algemeen gesproken laat je het
  beheer van deze pagina best over aan de webmaster van je
  site.</B>',
-'texte_inc_meta_1' => 'Het systeem ziet een fout bij het schrijven van het bestand <code>ecrire/data/meta_cache.php3</code>.Gelieve, als beheerder van de site,',
+'texte_inc_meta_1' => 'Het systeem ziet een fout bij het schrijven van het bestand <code>@fichier@</code>.Gelieve, als beheerder van de site,',
 'texte_inc_meta_2' => 'de schrijfrechten na te kijken',
-'texte_inc_meta_3' => 'van de map <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'van de map <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'in redactie',
 'texte_statut_poubelle' => 'in de vuilnisbak',
 'texte_statut_propose_evaluation' => 'voorgesteld voor evaluatie',

@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'per comen&ccedil;ar vertadi&egrave;rament l\'installacion',
 'dirs_preliminaire' => 'Preliminar: <b>Reglar los dreches d\'acc&egrave;s</b>',
-'dirs_probleme_droits' => '<b>Probl&egrave;ma de dreches d\'acc&egrave;s</b>',
+'dirs_probleme_droits' => 'Probl&egrave;ma de dreches d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<b>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
   <p />Se p&ograve;t que venga d\'un probl&egrave;ma de majusculas o minusculas mal mesas.
   Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
@@ -204,9 +204,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'mot de santa Clara :',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail: se p&ograve;t pas mandar l\'identificant.',
 'form_forum_voici1' => 'Vaic&iacute; v&ograve;stres identificants per poder participar als forums
-del sit "@nom_site_spip@" (@adresse_site@/) :',
+del sit "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Vaqu&iacute; v&ograve;stres identificants per prepausar d\'articles 
- sul sit "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+ sul sit "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Volgatz indicar v&ograve;stra adrei&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Volgatz indicar v&ograve;stre nom.',
 'form_indiquer_nom_site' => 'Volgatz indicar lo nom de v&ograve;stre sit.',
@@ -382,7 +382,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_copyright_gpl' => 'jos lic&eacute;ncia GPL',
 'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Volgatz crear un fichi&egrave;r o un repert&ograve;ri nommat',
-'info_creer_repertoire_2' => 'dintre lo sosrepert&ograve;ri   <b>ecrire/data/</b>, pu&egrave;i:',
+'info_creer_repertoire_2' => 'dintre lo sosrepert&ograve;ri   <b>@repertoire@</b>, pu&egrave;i:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descriptiu(s)&nbsp;:',
@@ -400,9 +400,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_erreur_requete' => 'Error dins la requista',
 'info_erreur_squelette2' => 'Ges d\'esqueleta <b>@fichier@</b> es pas disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br>
- <font color=\'red\'>Assajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
- o contactatz v&ograve;stre albergador.</font><br></b>',
+'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br>
+ <font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>,
+ o contactatz v&ograve;stre albergador.</font>',
 'info_fini' => 'Es acabat&nbsp;!',
 'info_format_image' => 'Formats d\'imatges que se p&ograve;don utilizar per crear de vinhetas: @gd_formats@.',
 'info_format_non_defini' => 'format non definit',
@@ -413,10 +413,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion del sist&egrave;ma de publicacion...',
-'info_installer_documents' => 'Pod&egrave;tz installar automaticament totes los documents contenguts dins lo repert&ograve;ri <i>upload</i>.',
-'info_installer_ftp' => 'Coma administrator, pod&egrave;tz installar (per FTP) de fichi&egrave;rs dins lo dorsi&egrave;r ecrire/upload,  pu&egrave;i los  seleccionar dir&egrave;ctament aic&iacute;.',
+'info_installer_documents' => 'Pod&egrave;tz installar automaticament totes los documents contenguts dins lo repert&ograve;ri @upload@.',
+'info_installer_ftp' => 'Coma administrator, pod&egrave;tz installar (per FTP) de fichi&egrave;rs dins lo dorsi&egrave;r @upload@,  pu&egrave;i los  seleccionar dir&egrave;ctament aic&iacute;.',
 'info_installer_images' => 'Pod&egrave;tz installar d\'imatges als formats JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsi&egrave;r /ecrire/upload per los poder seleccionar aic&iacute;.',
+'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsi&egrave;r @upload@ per los poder seleccionar aic&iacute;.',
 'info_installer_tous_documents' => 'Installar totes los documents ',
 'info_interface_complete' => 'Interf&agrave;cia completa',
 'info_interface_simple' => 'Interf&agrave;cia simplificada',
@@ -478,7 +478,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_retirer_mot' => 'Quitar aquel mot',
 'info_retirer_mots' => 'Quitar totes los mots ',
 'info_sans_titre_2' => 'sens t&iacute;tol',
-'info_selectionner_fichier' => 'Pod&egrave;tz seleccionar un fichi&egrave;r del dorsi&egrave;r <i>upload</i>',
+'info_selectionner_fichier' => 'Pod&egrave;tz seleccionar un fichi&egrave;r del dorsi&egrave;r @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichi&egrave;r:',
 'info_site_attente' => 'Sit web en esp&egrave;ra de validacion',
 'info_site_reference' => 'Sit referenciat en linha',
@@ -616,7 +616,7 @@ Per tornar trobar v&ograve;stre acc&egrave;s al sit
 
 Volgatz anar a l\'adrei&ccedil;a seguenta:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Alavetz poiretz intrar un mot de santa Clara nov&egrave;l
 e vos tornar connectar al sit.
@@ -670,9 +670,9 @@ e vos tornar connectar al sit.
  acostumat/ada al foncionament del sist&egrave;ma SPIP. <P align="justify"><B>
  En general, se conselha f&ograve;rt
  de daissar la carga d\'aquestas paginas al webm&egrave;stre principal de v&ograve;stre sit.</b>',
-'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura del fichi&egrave;r <code>ecrire/data/meta_cache.php3</code>.Volgatz, coma administrator/tritz del sit,',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura del fichi&egrave;r <code>@fichier@</code>.Volgatz, coma administrator/tritz del sit,',
 'texte_inc_meta_2' => 'verificar los dreches d\'escritura',
-'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>@repertoire@</code>.',
 'texte_plan_trad_note' => '',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'al bordilhi&egrave;r',

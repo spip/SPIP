@@ -165,7 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'tygodnie',
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
 'dirs_preliminaire' => 'Wst&#281;p: <B>Ustawienia pozwole&#324; dost&#281;pu</b>',
-'dirs_probleme_droits' => '<b>Problem z pozwoleniami dost&#281;pu</b>',
+'dirs_probleme_droits' => 'Problem z pozwoleniami dost&#281;pu',
 'dirs_repertoires_absents' => '<B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej pomylone zosta&#322;y du&#380;e i ma&#322;e litery.
   Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i du&#380;ych liter.
@@ -199,9 +199,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'has&#322;o:',
 'form_forum_probleme_mail' => 'Problem z poczt&#261;: Tw&oacute;j identyfikator nie mo&#380;e zosta&#263; wys&#322;any.',
 'form_forum_voici1' => 'Oto Tw&oacute;je dane, kt&oacute;re pozwol&#261; Ci wzi&#261;&#263; udzia&#322; w rozwoju serwisu
-"@nom_site_spip@" (@adresse_site@/):',
+"@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Oto Tw&oacute;j identyfikator do zatwierdzania artyku&#322;&oacute;w dla
-strony "@nom_site_spip@" (@adresse_site@/ecrire/):',
+strony "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Prosz&#281; wpisa&#263; sw&oacute;j adres e-mail.',
 'form_indiquer_nom' => 'Prosz&#281; wpisa&#263; swoje nazwisko.',
 'form_indiquer_nom_site' => 'Prosz&#281; wpisa&#263; nazw&#281; swoich stron\\y.',
@@ -376,7 +376,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_copyright_gpl' => 'na licencji GPL',
 'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
 'info_creer_repertoire' => 'Utw&oacute;rz plik lub katalog o nazwie:',
-'info_creer_repertoire_2' => 'w podkatalogu <b>ecrire/data/</b>, a nast&#281;pnie',
+'info_creer_repertoire_2' => 'w podkatalogu <b>@repertoire@</b>, a nast&#281;pnie',
 'info_creer_vignette' => 'generowanie miniaturki',
 'info_deplier' => 'Rozwi&#324;',
 'info_descriptif_nombre' => 'opis(y):',
@@ -396,9 +396,9 @@ Dzi&#281;kujemy za uczestnictwo
 'info_erreur_requete' => 'B&#322;&#261;d zapytania :',
 'info_erreur_squelette2' => '&#379;aden szkielet <b>@fichier@</b> nie jest dost&#281;pny ...',
 'info_erreur_systeme' => 'B&#322;&#261;d systemu (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Albo dysk twardy jest pe&#322;ny albo uszkodzona jest baza danych. <br>
- <font color=\'red\'>Spr&oacute;buj <a href=\'ecrire/admin_repair.php3\'>naprawi&#263; baz&#281; danych</a>,
- lub skontaktuj si&#281; z providerem.</font><br></b>',
+'info_erreur_systeme2' => 'Albo dysk twardy jest pe&#322;ny albo uszkodzona jest baza danych. <br>
+ <font color=\'red\'>Spr&oacute;buj <a href=\'@script@\'>naprawi&#263; baz&#281; danych</a>,
+ lub skontaktuj si&#281; z providerem.</font>',
 'info_fini' => 'Zako&#324;czono!',
 'info_format_image' => 'Formaty plik&oacute;w obrazk&oacute;w, kt&oacute;re mog&#261; by&#263; u&#380;ywane do tworzenia minitaturek&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'format niezdefiniowany',
@@ -409,10 +409,10 @@ Dzi&#281;kujemy za uczestnictwo
 'info_inclusion_directe' => 'Bezpo&#347;rednie do&#322;&#261;czenie&nbsp;:',
 'info_inclusion_vignette' => 'Do&#322;&#261;czenie miniaturki&nbsp;:',
 'info_installation_systeme_publication' => 'Instalacja systemu publikacji...',
-'info_installer_documents' => 'Mo&#380;esz automatycznie instalowa&#263; wszystkie dokumenty znajduj&#261;ce si&#281; w folderze <i>upload</i>.',
-'info_installer_ftp' => 'Jako administrator mo&#380;esz umieszcza&#263; (przez FTP) pliki w folderze ecrire/upload, aby p&oacute;&#378;niej wybiera&#263; je bezpo&#347;rednio stamt&#261;d.',
+'info_installer_documents' => 'Mo&#380;esz automatycznie instalowa&#263; wszystkie dokumenty znajduj&#261;ce si&#281; w folderze @upload@.',
+'info_installer_ftp' => 'Jako administrator mo&#380;esz umieszcza&#263; (przez FTP) pliki w folderze @upload@, aby p&oacute;&#378;niej wybiera&#263; je bezpo&#347;rednio stamt&#261;d.',
 'info_installer_images' => 'Mo&#380;esz umieszcza&#263; obrazki w formatach JPEG, GIF i PNG.',
-'info_installer_images_dossier' => 'Umie&#347;&#263; obrazki w folderze /ecrire/upload aby m&oacute;c je st&#261;d wybiera&#263;.',
+'info_installer_images_dossier' => 'Umie&#347;&#263; obrazki w folderze @upload@ aby m&oacute;c je st&#261;d wybiera&#263;.',
 'info_installer_tous_documents' => 'Umie&#347;&#263; wszystkie dokumenty',
 'info_interface_complete' => 'ca&#322;y interfejs',
 'info_interface_simple' => 'Uproszczony interfejs',
@@ -474,7 +474,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_retirer_mot' => 'Usu&#324; to s&#322;owo kluczowe',
 'info_retirer_mots' => 'Usu&#324; wszystkie s&#322;owa kluczowe',
 'info_sans_titre_2' => 'bez tytu&#322;u',
-'info_selectionner_fichier' => 'Mo&#380;esz wybra&#263; plik z folderu <i>upload</i>',
+'info_selectionner_fichier' => 'Mo&#380;esz wybra&#263; plik z folderu @upload@',
 'info_selectionner_fichier_2' => 'Wybierz plik:',
 'info_site_attente' => 'Strona internetowa oczekuj&#261;ca na zatwierdzenie',
 'info_site_reference' => 'Strona zlinkowana on-line',
@@ -611,7 +611,7 @@ Aby odzyska&#263; dost&#281;p do strony
 @nom_site_spip@ (@adresse_site@)
 
 Prosz&#281; wej&#347;&#263; na stron&#281;:
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Po wpisaniu nowego has&#322;a
 mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
@@ -663,9 +663,9 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
  funkcjonowanie Twojego serwisu. Radzimy nie zatwierdza&#263; tych zmian do momentu, w kt&oacute;rym nie b&#281;dziecie
  dobrze obeznani z funkcjonowaniem systemu SPIP. <P align="justify"><B>Najbardziej
  zalecamy, poproszenie o dokonanie zmian g&#322;&oacute;wnego adminsitratora serwisu.</B>',
-'texte_inc_meta_1' => 'System nie mo&#380;e zapisa&#263; plik&oacute;w <code>ecrire/data/meta_cache.php3</code>. Jako administrator strony,',
+'texte_inc_meta_1' => 'System nie mo&#380;e zapisa&#263; plik&oacute;w <code>@fichier@</code>. Jako administrator strony,',
 'texte_inc_meta_2' => 'sprawd&#378; pozwolenia zapisu',
-'texte_inc_meta_3' => 'dla katalogu <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'dla katalogu <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'redakcja w toku',
 'texte_statut_poubelle' => 'do kosza',
 'texte_statut_propose_evaluation' => 'zaproponowany do oceny',

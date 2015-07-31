@@ -165,7 +165,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'h&eacute;t',
 'dirs_commencer' => 'ahhoz, hogy val&oacute;ban kezdhesse a telep&iacute;t&eacute;st',
 'dirs_preliminaire' => 'El&#337;zm&eacute;ny : <b>Be&aacute;ll&iacute;t&aacute;ni a hozz&aacute;f&eacute;r&eacute;si jogokat</b>',
-'dirs_probleme_droits' => '<b>Jogosults&aacute;gi hiba</b>',
+'dirs_probleme_droits' => 'Jogosults&aacute;gi hiba',
 'dirs_repertoires_absents' => 'A k&ouml;vetkez&#337; mapp&aacute;k nem tal&aacute;lhat&oacute;k&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />Ez val&oacute;sz&iacute;n&uuml;leg egy nagy-, kisbet&#369;s probl&eacute;ma.
   Ellen&#337;rizze, hogy a fenti mapp&aacute;k nagy-, &eacute;s kisbet&#369;i megfelelnek annak, ami feljebb megjelent
@@ -198,9 +198,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(ez egy automatikus &uuml;zenet)',
 'form_forum_pass' => 'jelsz&oacute; :',
 'form_forum_probleme_mail' => 'email probl&eacute;ma&nbsp;: az azonos&iacute;t&oacute; nem k&uuml;ldhet&#337; el.',
-'form_forum_voici1' => '&Iacute;me az azonos&iacute;t&oacute;i a honlap "@nom_site_spip@" (@adresse_site@/) f&oacute;rumai hozz&aacute;f&eacute;r&eacute;s&eacute;hez :',
+'form_forum_voici1' => '&Iacute;me az azonos&iacute;t&oacute;i a honlap "@nom_site_spip@" (@adresse_site@) f&oacute;rumai hozz&aacute;f&eacute;r&eacute;s&eacute;hez :',
 'form_forum_voici2' => '&Iacute;me az azonos&iacute;t&oacute;i a javasolt cikkek k&uuml;ld&eacute;s&eacute;hez arra a honlapra
- "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+ "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Jelezze az email c&iacute;m&eacute;t.',
 'form_indiquer_nom' => 'Jelezze a nev&eacute;t.',
 'form_indiquer_nom_site' => 'Jelezze a saj&aacute;t honlapja c&iacute;m&eacute;t.',
@@ -376,7 +376,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_copyright_gpl' => 'GPL licenz&uacute;',
 'info_cours_edition' => 'Az &Ouml;n szerkeszt&eacute;s alatti cikkei',
 'info_creer_repertoire' => 'Hozzon l&eacute;tre f&aacute;jlt, vagy mapp&aacute;t, melynek a neve&nbsp;:',
-'info_creer_repertoire_2' => 'az almapp&aacute;n <b>ecrire/data/</b> bel&uuml;l, ez&uacute;t&aacute;n&nbsp;:',
+'info_creer_repertoire_2' => 'az almapp&aacute;n <b>@repertoire@</b> bel&uuml;l, ez&uacute;t&aacute;n&nbsp;:',
 'info_creer_vignette' => 'a b&eacute;lyegk&eacute;p automatikus l&eacute;trehoz&aacute;sa',
 'info_deplier' => 'Kibont&aacute;s',
 'info_descriptif_nombre' => 'R&ouml;vid ismertet&#337;(k)&nbsp;:',
@@ -396,8 +396,8 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_erreur_squelette2' => 'Egyetlen csontv&aacute;z (template) <b>@fichier@</b> sem &aacute;ll rendelkez&eacute;sre...',
 'info_erreur_systeme' => 'Rendszer hiba (errno @errsys@)',
 'info_erreur_systeme2' => 'A merevlemez tal&aacute;n tele van, vagy megs&eacute;r&uuml;lt az adatb&aacute;zis. <br>
- <font color=\'red\'>prob&aacute;ljon <a href=\'ecrire/admin_repair.php3\'>jav&iacute;tani az adatb&aacute;zis</a>,
- vagy keresse a rendszergazd&aacute;t.</font><br></b>',
+ <font color=\'red\'>prob&aacute;ljon <a href=\'@script@\'>jav&iacute;tani az adatb&aacute;zis</a>,
+ vagy keresse a rendszergazd&aacute;t.</font>',
 'info_fini' => 'K&eacute;szen van !',
 'info_format_image' => 'Haszn&aacute;lhat&oacute; k&eacute;pform&aacute;tumok a b&eacute;lyegk&eacute;pek k&eacute;sz&iacute;t&eacute;s&eacute;re&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'Hat&aacute;rozatlan form&aacute;tum',
@@ -408,10 +408,10 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_inclusion_directe' => 'K&ouml;zvetlen besz&uacute;r&aacute;s&nbsp;:',
 'info_inclusion_vignette' => 'B&eacute;lyegk&eacute;p besz&uacute;r&aacute;sa&nbsp;:',
 'info_installation_systeme_publication' => 'A publik&aacute;l&aacute;si rendszer telep&iacute;t&eacute;se...',
-'info_installer_documents' => 'Automatikusan telep&iacute;theti az &ouml;sszes dokumentumot, ami szerepel az <i>upload</i> mapp&aacute;ban.',
-'info_installer_ftp' => 'Mint adminisztr&aacute;tor, az ecrire/upload mapp&aacute;ban f&aacute;jlokat m&aacute;solhat (FTP-vel), &eacute;s k&eacute;s&#337;bb k&ouml;zvetlen&uuml;l kijel&ouml;lni itt.',
+'info_installer_documents' => 'Automatikusan telep&iacute;theti az &ouml;sszes dokumentumot, ami szerepel az @upload@ mapp&aacute;ban.',
+'info_installer_ftp' => 'Mint adminisztr&aacute;tor, az @upload@ mapp&aacute;ban f&aacute;jlokat m&aacute;solhat (FTP-vel), &eacute;s k&eacute;s&#337;bb k&ouml;zvetlen&uuml;l kijel&ouml;lni itt.',
 'info_installer_images' => 'JPEG, GIF &eacute;s PNG tipus&uacute; k&eacute;pek telep&iacute;thet&#337;k.',
-'info_installer_images_dossier' => 'K&eacute;peket m&aacute;solni a /ecrire/upload mapp&aacute;ba ahhoz, hogy itt lehessen kijel&ouml;lni.',
+'info_installer_images_dossier' => 'K&eacute;peket m&aacute;solni a @upload@ mapp&aacute;ba ahhoz, hogy itt lehessen kijel&ouml;lni.',
 'info_installer_tous_documents' => 'Az &ouml;sszes dokumentum telep&iacute;t&eacute;se',
 'info_interface_complete' => 'teljes fel&uuml;let',
 'info_interface_simple' => 'Egyszer&#369;s&iacute;tett fel&uuml;let',
@@ -473,7 +473,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_retirer_mot' => 'A sz&oacute; t&ouml;rl&eacute;se',
 'info_retirer_mots' => 'Az &ouml;sszes sz&oacute; t&ouml;rl&eacute;se',
 'info_sans_titre_2' => 'c&iacute;m n&eacute;lk&uuml;l',
-'info_selectionner_fichier' => 'Egy f&aacute;jlt v&aacute;laszhat az <i>upload</i> mapp&aacute;b&oacute;l',
+'info_selectionner_fichier' => 'Egy f&aacute;jlt v&aacute;laszhat az @upload@ mapp&aacute;b&oacute;l',
 'info_selectionner_fichier_2' => 'V&aacute;lasszon egy f&aacute;jlt&nbsp;:',
 'info_site_attente' => 'J&oacute;vahagy&aacute;s alatti honlap',
 'info_site_reference' => 'Felvett honlap',
@@ -606,7 +606,7 @@ A @nom_site_spip@ (@adresse_site@)
 honlaphozz&aacute;f&eacute;r&eacute;s visszaszerz&eacute;s&eacute;re
 Menjen a k&ouml;vetkez&#337; c&iacute;mre :
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
 &eacute;s csatlakozhat a honlapra.
@@ -658,9 +658,9 @@ Pr&oacute;b&aacute;ljon',
  honlap m&#369;k&ouml;d&eacute;s&eacute;t. Javasoljuk, hogy ne  avatkozzon bele, amig &Ouml;n nem j&aacute;r&aacute;tos
  az SPIP m&#369;k&ouml;d&eacute;s&eacute;ben. <P align="justify"><B>&Aacute;ltal&aacute;ban nagyon tan&aacute;csos b&iacute;zni ezeket az oldalakat
  a honlap f&#337; webmester&eacute;re.</B>',
-'texte_inc_meta_1' => 'A rendszer &eacute;szlelt egy hib&aacute;t a <code>ecrire/data/meta_cache.php3</code> f&aacute;jl &iacute;r&aacute;s&aacute;kor. Mint honlap adminisztr&aacute;tor, legyen sz&iacute;ves',
+'texte_inc_meta_1' => 'A rendszer &eacute;szlelt egy hib&aacute;t a <code>@fichier@</code> f&aacute;jl &iacute;r&aacute;s&aacute;kor. Mint honlap adminisztr&aacute;tor, legyen sz&iacute;ves',
 'texte_inc_meta_2' => 'ellen&#337;rizni a ir&aacute;si jogokat',
-'texte_inc_meta_3' => 'az <code>ecrire/data/</code> mapp&aacute;ban.',
+'texte_inc_meta_3' => 'az <code>@repertoire@</code> mapp&aacute;ban.',
 'texte_statut_en_cours_redaction' => 'szerkeszt&eacute;s alatt',
 'texte_statut_poubelle' => 'szemetesbe',
 'texte_statut_propose_evaluation' => 'felm&eacute;r&eacute;sre javasolt',

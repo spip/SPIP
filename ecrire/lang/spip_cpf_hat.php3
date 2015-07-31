@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'sem&egrave;n yo',
 'dirs_commencer' => 'pou koumanse vreman lenstalasyon',
 'dirs_preliminaire' => 'Dab&ograve; : <b> ann swen drwa aks&egrave;</b>',
-'dirs_probleme_droits' => '<b>Pwobl&egrave;m ak drwa laks&egrave;</b>',
+'dirs_probleme_droits' => 'Pwobl&egrave;m ak drwa laks&egrave;',
 'dirs_repertoires_absents' => '<b>Oken r&eacute;pertwa sa-yo te fin rannkont&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />Pet&egrave;t yon pwobl&egrave;m ek majiskil ousinon miniskil ki pa bon.
   Gad yo ap mache kom kisa ap par&egrave;t isit anl&egrave;
@@ -200,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'modpas :',
 'form_forum_probleme_mail' => 'Pwobl&egrave;m pou lim&egrave;l&nbsp;: lidantifyan pa posib anvway w.',
 'form_forum_voici1' => 'Lidantifyan y perm&eacute; w soutni lavi
- sit-la "@nom_site_spip@" (@adresse_site@/) :',
+ sit-la "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Lidantifyan ou pou pwopoze atik yo sou
-sit "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+sit "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'M&egrave;si enskri ladr&egrave;s lim&egrave;l ou.',
 'form_indiquer_nom' => 'M&egrave;si enskri kouman w rele',
 'form_indiquer_nom_site' => 'M&egrave;si enskri kouman sit ou-a li rele',
@@ -375,7 +375,7 @@ M&egrave;si  w soutni petisyon-nan
 'info_copyright_gpl' => 'nan lisans GPL',
 'info_cours_edition' => 'Tout atik yo w ka ekri ank&ograve;',
 'info_creer_repertoire' => 'Kreye yon fichye ousinon yon r&eacute;p&egrave;twa sak i rele&nbsp;:',
-'info_creer_repertoire_2' => 'nan sou-rep&egrave;twa <b>ecrire/data/</b>, epi&nbsp;:',
+'info_creer_repertoire_2' => 'nan sou-rep&egrave;twa <b>@repertoire@</b>, epi&nbsp;:',
 'info_creer_vignette' => 'kreyasyon viy&egrave;t otomatik ',
 'info_deplier' => 'Etann',
 'info_descriptif_nombre' => 'dekrisyon(yo)&nbsp;:',
@@ -394,9 +394,9 @@ M&egrave;si  w soutni petisyon-nan
 'info_erreur_requete' => 'Er&egrave; nan rek&egrave;t :',
 'info_erreur_squelette2' => 'Oken leskel&egrave;t <b>@fichier@</b> se pa disponib...',
 'info_erreur_systeme' => 'Er&egrave; sist&egrave;m (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Disk&eacute;dir se pet&egrave;t plen osnon bazdon&eacute; gen domaj <br>
- <font color=\'red\'>Esey w<a href=\'ecrire/admin_repair.php3\'>aranje baz-la</a>,
- osnon kontak l&eacute;b&egrave;j&egrave; ou.</font><br></b>',
+'info_erreur_systeme2' => 'Disk&eacute;dir se pet&egrave;t plen osnon bazdon&eacute; gen domaj <br>
+ <font color=\'red\'>Esey w<a href=\'@script@\'>aranje baz-la</a>,
+ osnon kontak l&eacute;b&egrave;j&egrave; ou.</font>',
 'info_fini' => 'W gen fin fini !',
 'info_format_image' => 'K&egrave;k s&ograve;t imaj SPIP kapab itilize pou kreye viny&egrave;t&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'f&ograve;ma ki pa defini',
@@ -407,10 +407,10 @@ M&egrave;si  w soutni petisyon-nan
 'info_inclusion_directe' => 'Enklizyon dir&egrave;k&nbsp;:',
 'info_inclusion_vignette' => 'Enklizyon viy&egrave;t sa-a&nbsp;:',
 'info_installation_systeme_publication' => 'Enstalasyon sist&egrave;m de piblikasyon...',
-'info_installer_documents' => 'W kap enstal&eacute; otomatikman tout dokiman yo ki kontni nan dosy&eacute;-a <i>upload</i>.',
-'info_installer_ftp' => 'Tankou komand&egrave;, w kap enstal&eacute;(pa FTP)k&egrave;k fichy&eacute; nn dosy&eacute;-a ecrire/upload pou apr&egrave; w kap chwazi yo isit-la direkman.',
+'info_installer_documents' => 'W kap enstal&eacute; otomatikman tout dokiman yo ki kontni nan dosy&eacute;-a @upload@.',
+'info_installer_ftp' => 'Tankou komand&egrave;, w kap enstal&eacute;(pa FTP)k&egrave;k fichy&eacute; nn dosy&eacute;-a @upload@ pou apr&egrave; w kap chwazi yo isit-la direkman.',
 'info_installer_images' => 'W kapab enstale k&egrave;k imaj nan f&ograve;ma sa-yo JPEG, GIF ak PNG.',
-'info_installer_images_dossier' => 'Enstal imaj nan dosye /ecrire/upload pou w ke kapab swazi yo isit apr&egrave;.',
+'info_installer_images_dossier' => 'Enstal imaj nan dosye @upload@ pou w ke kapab swazi yo isit apr&egrave;.',
 'info_installer_tous_documents' => 'Enstal tout dokiman',
 'info_interface_complete' => 'ent&egrave;fas konpl&eacute;',
 'info_interface_simple' => 'Ent&egrave;fas senp',
@@ -472,7 +472,7 @@ M&egrave;si  w soutni petisyon-nan
 'info_retirer_mot' => 'Kraze mokle-a',
 'info_retirer_mots' => 'Kraze tout mokle yo',
 'info_sans_titre_2' => 'ki pa rele',
-'info_selectionner_fichier' => 'W kapab chwazi yon fichye nan dosy&eacute; <i>upload</i>',
+'info_selectionner_fichier' => 'W kapab chwazi yon fichye nan dosy&eacute; @upload@',
 'info_selectionner_fichier_2' => 'Chwazi yon fichye&nbsp;:',
 'info_site_attente' => 'Sit web ki tann yon komand&egrave; konfime ali',
 'info_site_reference' => 'Sit referanse an liy',
@@ -609,7 +609,7 @@ Pou w genyen ank&ograve; lakse ou sou sit-la
 
 M&egrave;si f&egrave; yon vir&eacute; sou ladr&egrave;s la :
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 W ke kapab al&ograve; enskri yon nouvo modpas
 ak tounyen d&eacute;y&eacute; konekte sou sit-la.
@@ -662,9 +662,9 @@ ak tounyen d&eacute;y&eacute; konekte sou sit-la.
  L&egrave;s azot bagay-la sou kote kounyen-a, si w genyen p&ograve;k&ograve; gran abitid ak manyen kouman SPIP mache.
 <P align="justify"><B> Ann
 l&egrave;s plit&ograve; jestyon paj sa-yo pou w&egrave;bm&egrave;t prensipal sou sit-la.</B>',
-'texte_inc_meta_1' => 'Sist&egrave;m la ki genyen yon er&egrave; ak l&eacute;kriti fichye <code>ecrire/data/meta_cache.php3</code>. M&egrave;si, w ki komand&egrave; sit-la,',
+'texte_inc_meta_1' => 'Sist&egrave;m la ki genyen yon er&egrave; ak l&eacute;kriti fichye <code>@fichier@</code>. M&egrave;si, w ki komand&egrave; sit-la,',
 'texte_inc_meta_2' => 'gade tout drwa l&eacute;kriti se korek',
-'texte_inc_meta_3' => 'nan r&eacute;p&egrave;twa <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'nan r&eacute;p&egrave;twa <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'ank&ograve; pou ekri',
 'texte_statut_poubelle' => 'nan bwat poub&egrave;l',
 'texte_statut_propose_evaluation' => 'pwopoze pou jijman',

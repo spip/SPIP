@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semanas',
 'dirs_commencer' => ' para escomezar realmente a instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <B>Regular os permisos de acceso</B>',
-'dirs_probleme_droits' => '<b>Problema de permisos de acceso</b>',
+'dirs_probleme_droits' => 'Problema de permisos de acceso',
 'dirs_repertoires_absents' => '<B>Os directorios seguintes non foron encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>&Eacute; probable que iso se deba a un problema de uso de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que se amosa
@@ -201,8 +201,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'chave:',
 'form_forum_probleme_mail' => 'Problema de mail: non se puido enviar o identificador.',
 'form_forum_voici1' => 'Velaqu&iacute; os seus identificadores para participar na vida
-do web "@nom_site_spip@" (@adresse_site@/):',
-'form_forum_voici2' => 'Estes son os datos que precisas para propor artigos en "@nom_site_spip@" (@adresse_site@/ecrire/):',
+do web "@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici2' => 'Estes son os datos que precisas para propor artigos en "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indique o seu enderezo de correo-e.',
 'form_indiquer_nom' => 'Indica o teu nome.',
 'form_indiquer_nom_site' => 'Indique o nome do seu web.',
@@ -379,7 +379,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_copyright_gpl' => 'con licenza GPL',
 'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n',
 'info_creer_repertoire' => 'Crea un ficheiro ou cartafol chamado:',
-'info_creer_repertoire_2' => 'dentro do subcartafol <b>ecrire/data/</b>, e logo:',
+'info_creer_repertoire_2' => 'dentro do subcartafol <b>@repertoire@</b>, e logo:',
 'info_creer_vignette' => 'creaci&oacute;n autom&aacute;tica da vi&ntilde;eta',
 'info_deplier' => 'Despregar',
 'info_descriptif_nombre' => 'descrici&oacute;n(s):',
@@ -399,9 +399,9 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_erreur_requete' => 'Erro na petici&oacute;n:',
 'info_erreur_squelette2' => 'Ning&uacute;n esqueleto <b>@fichier@</b> est&aacute; dispo&ntilde;ible...',
 'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
-'info_erreur_systeme2' => '<b>O disco duro pode ser que estea cheo, ou a base de datos danada. <br>
- <font color=\'red\'>Probe a <a href=\'ecrire/admin_repair.php3\'>reparar a base</a>,
- ou contacte co seu aloxador.</font><br></b>',
+'info_erreur_systeme2' => 'O disco duro pode ser que estea cheo, ou a base de datos danada. <br>
+ <font color=\'red\'>Probe a <a href=\'@script@\'>reparar a base</a>,
+ ou contacte co seu aloxador.</font>',
 'info_fini' => 'Rematou!',
 'info_format_image' => 'Formatos de imaxes posibles para crear as vi&ntilde;etas: @gd_formats@.',
 'info_format_non_defini' => 'formato non definido',
@@ -412,10 +412,10 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n da vi&ntilde;eta:',
 'info_installation_systeme_publication' => 'Instalaci&oacute;n do sistema de publicaci&oacute;n...',
-'info_installer_documents' => 'Podes instalar automaticamente todos os documentos contidos no cartafol ou directorio<i>upload</i>.',
-'info_installer_ftp' => 'Como administrador/a, podes instalar (por FTP) os ficheiros no directorio  /ecrire/upload para podelas seleccionar directamente aqu&iacute;.',
+'info_installer_documents' => 'Podes instalar automaticamente todos os documentos contidos no cartafol ou directorio@upload@.',
+'info_installer_ftp' => 'Como administrador/a, podes instalar (por FTP) os ficheiros no directorio  /@upload@ para podelas seleccionar directamente aqu&iacute;.',
 'info_installer_images' => 'Podes instalar imaxes nos formatos PNG, JPEG e GIF.',
-'info_installer_images_dossier' => 'Instalar imaxes no cartafol /ecrire/upload para poder seleccionalas.',
+'info_installer_images_dossier' => 'Instalar imaxes no cartafol @upload@ para poder seleccionalas.',
 'info_installer_tous_documents' => 'Instalar todos os documentos',
 'info_interface_complete' => 'Interface completa',
 'info_interface_simple' => 'Interface sinxela',
@@ -477,7 +477,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_retirer_mot' => 'Retirar esta palabra',
 'info_retirer_mots' => 'Retirar todas as palabras',
 'info_sans_titre_2' => 'sen t&iacute;tulo',
-'info_selectionner_fichier' => 'Podes seleccionar un ficheiro do directorio <i>upload</i>',
+'info_selectionner_fichier' => 'Podes seleccionar un ficheiro do directorio @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
 'info_site_attente' => 'Sitio web agardando pola validaci&oacute;n',
 'info_site_reference' => 'Lugar referido en li&ntilde;a',
@@ -613,7 +613,7 @@ Para recuperar o seu acceso a
 Dir&iacute;xase ao seguinte enderezo:
 
 
-     @adresse_site@/spip_pass.php3?p=@cookie@
+     @sendcookie@
 
 Daquela, poder&aacute; elixir unha nova chave
 e reconectar co web.
@@ -666,9 +666,9 @@ e reconectar co web.
   un pouco &oacute; tanto do funcionamento do sistema SPIP.
   <P align="justify"><B>En xeral, &eacute; moi recomendable que estas p&aacute;xinas sexan
   xestionadas polo/a webm&aacute;ster principal do web.</B>',
-'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>ecrire/data/meta_cache.php3</code>.  Rev&iacute;seo como administrador/a do web.',
+'texte_inc_meta_1' => 'O sistema encontrou un erro trala escritura do ficheiro <code>@fichier@</code>.  Rev&iacute;seo como administrador/a do web.',
 'texte_inc_meta_2' => 'Comprobar os dereitos de escritura',
-'texte_inc_meta_3' => 'no directorio <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'no directorio <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'en proceso de redacci&oacute;n',
 'texte_statut_poubelle' => 'no lixo',
 'texte_statut_propose_evaluation' => 'proposto para evaluaci&oacute;n',

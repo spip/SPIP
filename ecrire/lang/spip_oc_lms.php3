@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'per comen&ccedil;ar vertadierament l\'installacion',
 'dirs_preliminaire' => 'Preliminar: <B>Reglar los drechs d\'acc&egrave;s</b>',
-'dirs_probleme_droits' => '<b>Problema de drechs d\'acc&egrave;s</b>',
+'dirs_probleme_droits' => 'Problema de drechs d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<B>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
   <P>Se p&ograve;t que venha d\'un problema de majusculas o minusculas mau mesas.
   Verificatz que las minusculas e majusculas de quilhs repert&ograve;ris correspondan be emb qu&ograve; afichat
@@ -204,9 +204,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'mot de santa Clara:',
 'form_forum_probleme_mail' => 'Problema d\'e-mail: se p&ograve;t pas mandar l\'identificant.',
 'form_forum_voici1' => 'Veiqu&iacute; v&ograve;stres identificants per poder participar a la vida
-dau sit "@nom_site_spip@" (@adresse_site@/):',
+dau sit "@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Veiqu&iacute; v&ograve;stres identificants per prepausar daus articles 
- subre lo sit "@nom_site_spip@" (@adresse_site@/ecrire/):',
+ subre lo sit "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Volhatz indicar v&ograve;stra adrei&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Volhatz indicar v&ograve;stre nom.',
 'form_indiquer_nom_site' => 'Volhatz indicar lo nom de v&ograve;stre sit.',
@@ -383,7 +383,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_copyright_gpl' => 'sos lic&eacute;ncia GPL',
 'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Volhatz crear un fichier o un repert&ograve;ri nommat',
-'info_creer_repertoire_2' => 'dedins lo sosrepert&ograve;ri   <b>ecrire/data/</b>, puei:',
+'info_creer_repertoire_2' => 'dedins lo sosrepert&ograve;ri   <b>@repertoire@</b>, puei:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_deplier' => 'Desplejar',
 'info_descriptif_nombre' => 'descriptiu(s):',
@@ -401,9 +401,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_erreur_requete' => 'Error dins la requesta',
 'info_erreur_squelette2' => 'Brisa d\'esqueleta <b>@fichier@</b> es disponibla...',
 'info_erreur_systeme' => 'Error sistema (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Lo disc dur es benleu plen, o la basa de donadas degalhada. <br>
- <font color=\'red\'>Assajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
- o contactatz v&ograve;stre auberjador.</font><br></b>',
+'info_erreur_systeme2' => 'Lo disc dur es benleu plen, o la basa de donadas degalhada. <br>
+ <font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>,
+ o contactatz v&ograve;stre auberjador.</font>',
 'info_fini' => 'Quo es \'chabat!',
 'info_format_image' => 'Formats d\'imatges que se p&ograve;den utilizar per crear de las vinhetas: @gd_formats@.',
 'info_format_non_defini' => 'format non definit',
@@ -414,10 +414,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_inclusion_directe' => 'Inclusion directa:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sistema de publicacion...',
-'info_installer_documents' => 'Podetz installar automaticament tots los documents contenguts dins lo repert&ograve;ri <i>upload</i>.',
-'info_installer_ftp' => 'Coma administrator, podetz installar (per FTP) daus fichiers dins lo dorsier ecrire/upload,  puei los  seleccionar directament aic&iacute;.',
+'info_installer_documents' => 'Podetz installar automaticament tots los documents contenguts dins lo repert&ograve;ri @upload@.',
+'info_installer_ftp' => 'Coma administrator, podetz installar (per FTP) daus fichiers dins lo dorsier @upload@,  puei los  seleccionar directament aic&iacute;.',
 'info_installer_images' => 'Podetz installar daus imatges aus formats JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installar daus imatges dins lo dorsier /ecrire/upload per los poder seleccionar aic&iacute;.',
+'info_installer_images_dossier' => 'Installar daus imatges dins lo dorsier @upload@ per los poder seleccionar aic&iacute;.',
 'info_installer_tous_documents' => 'Installar tots los documents ',
 'info_interface_complete' => 'Interf&agrave;cia completa',
 'info_interface_simple' => 'Interf&agrave;cia simplificada',
@@ -479,7 +479,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_retirer_mot' => 'Tirar queu mot',
 'info_retirer_mots' => 'Tirar tots los mots ',
 'info_sans_titre_2' => 'sens t&iacute;tol',
-'info_selectionner_fichier' => 'Podetz seleccionar un fichier dau dorsier <i>upload</i>',
+'info_selectionner_fichier' => 'Podetz seleccionar un fichier dau dorsier @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichier:',
 'info_site_attente' => 'Sit web en espera de validacion',
 'info_site_reference' => 'Sit referenciat en linha',
@@ -618,7 +618,7 @@ Per tornar trobar v&ograve;stre acc&egrave;s au sit
 
 Volhatz \'nar a l\'adrei&ccedil;a seguenta:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Aladonc poiretz entrar un mot de santa Clara noveu
 e vos tornar connectar au sit.
@@ -672,9 +672,9 @@ e vos tornar connectar au sit.
  acostumat/ada au foncionament dau sistema SPIP. <P align="justify"><B>
  En generau, se conselha f&ograve;rt
  de laissar la charja de questas paginas au webmestre principau de v&ograve;stre sit.</b>',
-'texte_inc_meta_1' => 'Lo sistema a rescontrat una error durant l\'escritura dau fichier <code>ecrire/data/meta_cache.php3</code>. Volhatz, coma administrator/tritz dau sit,',
+'texte_inc_meta_1' => 'Lo sistema a rescontrat una error durant l\'escritura dau fichier <code>@fichier@</code>. Volhatz, coma administrator/tritz dau sit,',
 'texte_inc_meta_2' => 'verificar los drechs d\'escritura',
-'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>@repertoire@</code>.',
 'texte_plan_trad_note' => '',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'au bordilhier',
