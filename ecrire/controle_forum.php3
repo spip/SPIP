@@ -139,12 +139,6 @@ function controle_forum($row, $rappel) {
 	
 	$controle = "\n<br /><br /><a id='$id_forum'></a>";
 	
-//	$controle.=  "[$forum_stat]";
-	if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
-	else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
-	else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
-	else $logo = "forum-public-24.gif";
-
 	$controle .= debut_cadre_thread_forum("", true, "", typo($forum_titre));
 
 	if ($forum_stat=="off" OR $forum_stat == "privoff") {
@@ -166,47 +160,8 @@ function controle_forum($row, $rappel) {
 		$controle .= "<span class='arial2'> / <B>$forum_auteur</B></span>";
 	}
 
-	if ($forum_stat != "off" AND $forum_stat != "privoff") {
-		if ($forum_stat == "publie" OR $forum_stat == "prop")
-			$controle .= 
-		  controle_cache_forum('supp_forum',
-				       $id_forum,
-				       _T('icone_supprimer_message'), 
-				       $logo,
-				       "supprimer.gif");
-		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
-			$controle .= 
-		  controle_cache_forum('supp_forum_priv',
-				       $id_forum,
-				       _T('icone_supprimer_message'), 
-				       $logo,
-				       "supprimer.gif");
-		    }
-	else {
-		$controle .= "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
-		if($forum_id_auteur>0)
-			$controle .= " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>"._T('lien_voir_auteur')."</A>";
-	}
+	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur");
 
-	if ($forum_stat=="prop")
-	  {
-		$redirect = "../forum.php3?$type=$valeur&id_forum=$id_forum";
-
-		$controle .=
-		  controle_cache_forum('valid_forum',
-				       $id_forum,
-				       _T('icone_valider_message'), 
-				       $logo,
-				       "creer.gif") .
-		  controle_cache_forum('valid_forum',
-				       $id_forum,
-				       _T('icone_valider_message') . " &amp; " .
-			           _T('lien_repondre_message'),
-				       $logo,
-				       "creer.gif",
-				       $redirect
-				       );
-	  }
 	$controle .= "<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
 	  "<P align='justify'>".propre($forum_texte);
 
