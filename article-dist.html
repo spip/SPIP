@@ -33,7 +33,7 @@
 	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3"><:plan_du_site:></a>
+	<a href="plan.php3"><:plan_site:></a>
 	</li>
 	<li class="menu-item">
 	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
@@ -171,9 +171,9 @@
 
 	<div class="menu">
 	<div class="breves">
-		<h2 class="structure"><:dans_meme_rubrique:></h2>
+		<h2 class="structure"><:meme_rubrique:></h2>
 		<div class="menu-titre">
-		<:dans_meme_rubrique:>
+		<:meme_rubrique:>
 		</div>
 		<ul>
 	<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par hasard} {exclus} {0,8}>
@@ -300,5 +300,5 @@
 
 
 </BOUCLE_article_principal>
-<:pas_d_article:>
+<:aucun_article:>
 <//B_article_principal>
