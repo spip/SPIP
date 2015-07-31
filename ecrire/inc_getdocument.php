@@ -123,13 +123,12 @@ function check_upload_error($error, $msg='') {
 	spip_log ("erreur upload $error");
 
 	minipres($msg, '<form action="' .
-	  _DIR_RESTREINT_ABS.
-	  urldecode($GLOBALS['redirect']).
-	  '"><div align="'.
-	  $spip_lang_right.
-	  '"><input type="submit" class="fondl"  value="'.
-	  _T('ecrire:bouton_suivant').
-		 ' >>"></div></form>');
+		urldecode($GLOBALS['redirect']).
+		'" method="post"><div align="'.  #ici method='post' permet d'aller au bon endroit, alors qu'en GET on perd les variables... mais c'est un hack sale.
+		$spip_lang_right.
+		'"><input type="submit" class="fondl"  value="'.
+		_T('ecrire:bouton_suivant').
+		' &gt;&gt;"></div></form>');
 }
 
 
