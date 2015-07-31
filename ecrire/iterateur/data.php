@@ -405,6 +405,10 @@ function ObjectToArray($object){
     if(!array_key_exists($object->key(), $xml_array)){
       $xml_array[$object->key()] = array();
     }
+    $vars = get_object_vars($object->current());
+    if (isset($vars['@attributes']))
+      foreach($vars['@attributes'] as $k => $v)
+      $xml_array[$object->key()][$k] = $v;
     if($object->hasChildren()){
       $xml_array[$object->key()][] = ObjectToArray(
          $object->current());
