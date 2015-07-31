@@ -61,7 +61,7 @@ function exec_upgrade_dist()
 		if ($res) echo $res;
 		else {
 			$res = redirige_action_auteur('purger', 'cache', 'admin_plugin', '', true);
-			redirige_par_entete($res);
+			echo redirige_formulaire($res);
 		}
 	}
 }
