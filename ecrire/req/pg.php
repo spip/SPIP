@@ -382,15 +382,16 @@ function spip_pg_frommysql($arg)
 	$res = preg_replace('/UNIX_TIMESTAMP\s*[(]([^)]*)[)]/',
 			    ' EXTRACT(epoch FROM \1)', $res);
 
-	$res = preg_replace('/\bDAYOFMONTH\s*[(]([^()]*([(][^)]*[)][()]*)*[^)]*)[)]/',
+
+	$res = preg_replace('/\bDAYOFMONTH\s*[(]([^()]*([(][^()]*[)][^()]*)*[^)]*)[)]/',
 			    ' EXTRACT(day FROM \1)',
 			    $res);
 
-	$res = preg_replace('/\bMONTH\s*[(]([^()]*([(][^)]*[)][()]*)*[^)]*)[)]/',
+	$res = preg_replace('/\bMONTH\s*[(]([^()]*([(][^)]*[)][^()]*)*[^)]*)[)]/',
 			    ' EXTRACT(month FROM \1)',
 			    $res);
 
-	$res = preg_replace('/\bYEAR\s*[(]([^()]*([(][^)]*[)][()]*)*[^)]*)[)]/',
+	$res = preg_replace('/\bYEAR\s*[(]([^()]*([(][^)]*[)][^()]*)*[^)]*)[)]/',
 			    ' EXTRACT(year FROM \1)',
 			    $res);
 
@@ -439,7 +440,7 @@ function spip_pg_fromfield($arg)
 function calculer_pg_where($v)
 {
 	if (!is_array($v))
-	  return spip_pg_frommysql($v);
+		return spip_pg_frommysql($v);
 
 	$op = str_replace('REGEXP', '~', array_shift($v));
 	if (!($n=count($v)))
