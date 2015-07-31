@@ -68,7 +68,8 @@ function creer_base() {
 		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
-		KEY statut (statut))";
+		KEY statut (statut),
+		KEY en_ligne (en_ligne))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_breves (
@@ -242,7 +243,8 @@ function creer_base() {
 		KEY id_rubrique(id_rubrique),
 		KEY id_article(id_article),
 		KEY id_breve(id_breve),
-		KEY id_message(id_message))";
+		KEY id_message(id_message),
+		KEY statut (statut, date_heure))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_petitions (
@@ -1059,6 +1061,11 @@ function maj_base() {
 		// gestion de listes de diff
 		spip_query("ALTER TABLE spip_auteurs ADD abonne TEXT NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD abonne_pass TINYTEXT NOT NULL");
+	}
+
+	if ($version_installee < 1.468) {
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX en_ligne (en_ligne)");
+		spip_query("ALTER TABLE spip_forum ADD INDEX statut (statut, date_heure)");
 	}
 
 	//
