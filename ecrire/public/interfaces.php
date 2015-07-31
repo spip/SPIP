@@ -287,10 +287,10 @@ define('_TRAITEMENT_RACCOURCIS', 'propre(%s, $connect)');
 
 $table_des_traitements['BIO'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['CHAPO'][]= _TRAITEMENT_RACCOURCIS;
-$table_des_traitements['DATE'][]= 'vider_date(%s)';
-$table_des_traitements['DATE_MODIF'][]= 'vider_date(%s)';
-$table_des_traitements['DATE_NOUVEAUTES'][]= 'vider_date(%s)';
-$table_des_traitements['DATE_REDAC'][]= 'vider_date(%s)';
+$table_des_traitements['DATE'][]= 'normaliser_date(%s)';
+$table_des_traitements['DATE_REDAC'][]= 'normaliser_date(%s)';
+$table_des_traitements['DATE_MODIF'][]= 'normaliser_date(%s)';
+$table_des_traitements['DATE_NOUVEAUTES'][]= 'normaliser_date(%s)';
 $table_des_traitements['DESCRIPTIF'][]= _TRAITEMENT_RACCOURCIS;
 $table_des_traitements['FICHIER']['documents']= 'get_spip_doc(%s)';
 $table_des_traitements['INTRODUCTION'][]= 'PtoBR('. _TRAITEMENT_RACCOURCIS .')';
