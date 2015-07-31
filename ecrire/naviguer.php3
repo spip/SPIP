@@ -171,10 +171,14 @@ if ($titre) {
 	// creation, le cas echeant
 	if ($new == 'oui' AND $flag_editable AND !$id_rubrique) {
 		$id_rubrique = spip_abstract_insert("spip_rubriques", 
-				    "(titre, id_parent)",
-				    "('"._T('item_nouvelle_rubrique')."', '$id_parent')");
+			"(titre, id_parent)",
+			"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 		$result = spip_query($query);
-		$clean_link->AddVar('id_rubrique', $id_rubrique);
+
+		// Modifier le lien de base pour qu'il prenne en compte le nouvel id
+		unset($GLOBALS['_POST']['id_parent']);
+		$GLOBALS['_POST']['id_rubrique'] = $id_rubrique;
+		$clean_link = new Link();
 	}
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
@@ -262,36 +266,6 @@ if ($titre)
 	$titre_page = "&laquo; ".textebrut(typo($titre))." &raquo;";
 else
 	$titre_page = _T('titre_naviguer_dans_le_site');
-
-
-if ($id_document) {
-	$query_doc = "SELECT * FROM spip_documents_rubriques WHERE id_document=$id_document AND id_rubrique=$id_rubrique";
-	$result_doc = spip_query($query_doc);
-	$flag_document_editable = (spip_num_rows($result_doc) > 0);
-} else {
-	$flag_document_editable = false;
-}
-
-
-$modif_document = $GLOBALS['modif_document'];
-if ($modif_document == 'oui' AND $flag_document_editable) {
-	$titre_document = addslashes(corriger_caracteres($titre_document));
-	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
-
-	$query = "UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document'";
-	if ($largeur_document AND $hauteur_document) $query .= ", largeur='$largeur_document', hauteur='$hauteur_document'";
-	$query .= " WHERE id_document=$id_document";
-	spip_query($query);
-
-	if ($jour_doc AND $connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) {
-		if ($annee_doc == "0000") $mois_doc = "00";
-		if ($mois_doc == "00") $jour_doc = "00";
-		$query = "UPDATE spip_documents SET date='$annee_doc-$mois_doc-$jour_doc' WHERE id_document=$id_document";
-		$result = spip_query($query);
-		calculer_rubriques();
-	}
-
-}
 
 
 ///// debut de la page
@@ -643,9 +617,11 @@ if (lire_meta("activer_sites") == 'oui') {
 
 /// Documents associes a la rubrique
 
-if ($id_rubrique>0)
+if ($id_rubrique>0) {
+	# modifs de la description d'un des docs joints
+	if ($flag_editable) maj_documents($id_rubrique, 'rubrique');
 	 afficher_documents_non_inclus($id_rubrique, "rubrique", $flag_editable);
-
+}
 
 
 

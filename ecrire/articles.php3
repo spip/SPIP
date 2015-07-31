@@ -33,12 +33,16 @@ if ($id_article==0) {
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
 
 		$id_article = spip_abstract_insert("spip_articles",
-					     "(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
-					     "($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
-
+			"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
+			"($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
 
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
 		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
+
+		// Modifier le lien de base pour qu'il prenne en compte le nouvel id
+		unset($GLOBALS['_POST']['id_rubrique']);
+		$GLOBALS['_POST']['id_article'] = $id_article;
+		$clean_link = new Link();
 	} else {
 		redirige_par_entete("./index.php3");
 	}
@@ -71,18 +75,6 @@ $flag_auteur = (spip_num_rows($result_auteur) > 0);
 $flag_editable = (acces_rubrique($rubrique_article)
 	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
-
-
-/// En double avec articles_edit.php3, mais necessite le flag_editable
-$modif_document = $GLOBALS['modif_document'];
-if ($modif_document == 'oui' AND $flag_editable) {
-	$titre_document = addslashes(corriger_caracteres($titre_document));
-	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
-	$query = "UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document'";
-	if ($largeur_document AND $hauteur_document) $query .= ", largeur='$largeur_document', hauteur='$hauteur_document'";
-	$query .= " WHERE id_document=$id_document";
-	spip_query($query);
-}
 
 
 //
@@ -177,6 +169,10 @@ if (count($ze_doc)>0){
 	$ze_docs = join($ze_doc,",");
 	spip_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
 }
+
+
+# modifs de la description d'un des docs joints
+if ($flag_editable) maj_documents($id_article, 'article');
 
 
 //

@@ -135,26 +135,6 @@ if (!$flag_editable) {
 	die ("<H3>"._T('info_acces_interdit')."</H3>");
 }
 
-if ($id_article && $id_document) {
-	$query_doc = "SELECT * FROM spip_documents_articles WHERE id_document=$id_document AND id_article=$id_article";
-	$result_doc = spip_query($query_doc);
-	$flag_document_editable = (spip_num_rows($result_doc) > 0);
-} else {
-	$flag_document_editable = false;
-}
-
-$modif_document = $GLOBALS['modif_document'];
-if ($modif_document == 'oui' AND $flag_document_editable) {
-	$titre_document = addslashes(corriger_caracteres($titre_document));
-	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
-	$query = "UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document'";
-	if ($largeur_document AND $hauteur_document) $query .= ", largeur='$largeur_document', hauteur='$hauteur_document'";
-	$query .= " WHERE id_document=$id_document";
-	spip_query($query);
-}
-
-
-
 
 //
 // Gestion des textes trop longs (limitation brouteurs)
@@ -201,6 +181,10 @@ debut_gauche();
 //
 
 if ($new != 'oui'){
+	# modifs de la description d'un des docs joints
+	if ($flag_editable) maj_documents($id_article, 'article');
+
+	# affichage
 	afficher_documents_colonne($id_article, 'article', $flag_editable);
 }
 
