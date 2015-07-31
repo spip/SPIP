@@ -341,7 +341,7 @@ class Boucle {
 	 * internes différentes. Soit $expr un tableau d'expressions quelconques de 3 valeurs :
 	 * $expr = array(operateur, val1, val2)
 	 * 
-	 * Ces 3 valeurs sont des expressions PHP. L'opérateur désigne l'opérande
+	 * Ces 3 valeurs sont des expressions PHP. L'index 0 désigne l'opérateur
 	 * à réaliser tel que :
 	 * - "'='" , "'>='", "'<'", "'IN'", "'REGEXP'", "'LIKE'", ... :
 	 *    val1 et val2 sont des champs et valeurs à utiliser dans la comparaison
