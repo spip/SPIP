@@ -38,14 +38,20 @@ function req_sqlite_dist($addr, $port, $login, $pass, $db='', $prefixe='', $sqli
 
 	/*
 	 * En sqlite, seule l'adresse du fichier est importante.
-	 * Ce sera $db le nom, et le path _DIR_DB
+	 * Ce sera $db le nom,
+	 * le path est $addr
+	 * (_DIR_DB si $addr est vide)
 	 */
 	_sqlite_init();
 
-	// un nom de base demande et impossible d'obtenir la base, on s'en va
-	if ($db && !is_file($f = _DIR_DB . $db . '.sqlite') && !is_writable(_DIR_DB))
-			return false;
+	// determiner le dossier de la base : $addr ou _DIR_DB
+	$f = _DIR_DB;
+	if ($addr)
+		$f = rtrim($addr,'/').'/';
 
+	// un nom de base demande et impossible d'obtenir la base, on s'en va
+	if ($db AND !is_file($f .= $db . '.sqlite') AND !is_writable(dirname($f)))
+			return false;
 	
 	// charger les modules sqlite au besoin
 	if (!_sqlite_charger_version($sqlite_version)) {
@@ -372,7 +378,9 @@ function spip_sqlite_create($nom, $champs, $cles, $autoinc=false, $temporary=fal
  * @return bool true si la base est creee.
 **/
 function spip_sqlite_create_base($nom, $serveur='', $option=true) {
-	$f = _DIR_DB . $nom . '.sqlite';
+	$f = $nom . '.sqlite';
+	if (strpos($nom, "/")===false)
+		$f = _DIR_DB . $f;
 	if (_sqlite_is_version(2, '', $serveur)) {
 		$ok = new sqlite_open($f, _SQLITE_CHMOD, $err);
 	} else {
