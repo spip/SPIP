@@ -118,11 +118,14 @@ function definir_puce() {
 // dont on souhaite qu'ils provoquent un saut de paragraphe
 
 if (!defined('_BALISES_BLOCS')) define('_BALISES_BLOCS',
-	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
+	'p|div|pre|ul|ol|li|blockquote|h[1-6r]|'
 	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
 	.'applet|iframe|'
 	.'d[ltd]|script|noscript|map|button|fieldset|style');
+
+if (!defined('_BALISES_BLOCS_REGEXP'))
+	define('_BALISES_BLOCS_REGEXP',',</?('._BALISES_BLOCS.')[>[:space:]],iS');
 
 //
 // Echapper les elements perilleux en les passant en base64
