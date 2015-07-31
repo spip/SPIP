@@ -196,7 +196,6 @@ function formulaire_taille($document) {
 	$type_inclus = $t['inclus'];
 	$extension = $t['extension'];
 
-var_dump($t);
 	# TODO -- pour le MP3 "l x h pixels" ne va pas
 	if (($type_inclus == "embed" OR $type_inclus == "image")
 	AND (
