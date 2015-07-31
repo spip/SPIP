@@ -112,6 +112,9 @@ function convert_utf8_dist() {
 
 	install_debut_html($action);
 
+	if (!spip_get_lock('conversion_charset'))
+		die(_L('Attendez quelques instants et rechargez cette page.'));
+
 	// preparer un fichier de sauvegarde au cas ou
 	// on met 'a' car ca peut demander plusieurs rechargements
 	$f = @fopen(_DIR_SESSIONS.'convert_utf8_backup.sql', 'a');
@@ -152,11 +155,14 @@ function convert_utf8_dist() {
 
 			// Mais on la transcode
 			if ($charset_source != 'utf-8') {
-				$query = unicode_to_utf_8(
+				$query2 = unicode_to_utf_8(
 					charset2unicode($query, $charset_source));
-				spip_query($query
-				." AND $champ LIKE '<CONVERT %'" # eviter une double conversion
-				);
+				# ne pas up la base si l'objet n'a pas change
+				if ($query2 != $query)
+					spip_query($query2
+						# eviter une double conversion
+						." AND $champ LIKE '<CONVERT %'"
+					);
 				echo '.           '; flush();
 			}
 		}
@@ -166,6 +172,7 @@ function convert_utf8_dist() {
 	if ($f) fclose($f);
 
 	echo _L("<p><b>C'est termin&eacute;&nbsp;!</b>");
+	echo _L("<p>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde au format SQL a &eacute;t&eacute; r&eacute;alis&eacute;e dans le r&eacute;pertoire "._DIR_SESSIONS);
 	effacer_meta('conversion_charset');
 	ecrire_metas();
 
