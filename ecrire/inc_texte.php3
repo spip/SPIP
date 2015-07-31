@@ -317,13 +317,13 @@ function typo_en($letexte) {
 	return ereg_replace(" *~+ *", "&nbsp;", $letexte);
 }
 
-// Typographie generale : francaise si la langue principale du site est 'fr', sinon anglaise (minimaliste)
+// Typographie generale : francaise si la langue principale du site est 'fr' ou 'eo', sinon anglaise (minimaliste)
 function typo($letexte) {
 	global $langue_site;
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if ($langue_site == 'fr')
+	if (($langue_site == 'fr') OR ($langue_site == 'eo'))
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
