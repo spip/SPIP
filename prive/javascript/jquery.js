@@ -1067,7 +1067,10 @@ jQuery.extend({
 					if ( name == "type" && jQuery.nodeName( elem, "input" ) && elem.parentNode )
 						throw "type property can't be changed";
 
-					elem[ name ] = value;
+  				if( jQuery.nodeName( elem, "form" ) && elem.getAttributeNode(name) )
+  					elem.setAttribute( name, "" + value );
+          else
+					  elem[ name ] = value;
 				}
 
 				// browsers index elements by id/name on forms, give priority to attributes.
