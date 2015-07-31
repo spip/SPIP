@@ -116,7 +116,8 @@ function http_status($status) {
 // Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
 // http://doc.spip.org/@http_no_cache
 function http_no_cache() {
-	if (headers_sent()) return;
+	if (headers_sent())
+		{ spip_log("http_no_cache arrive trop tard"); return;}
 	$charset = empty($GLOBALS['meta']['charset']) ? 'utf-8' : $GLOBALS['meta']['charset'];
 
 	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
