@@ -455,6 +455,13 @@ function autoriser_auteur_modifier_dist($faire, $type, $id, $qui, $opt) {
 		return true;
 }
 
+// Associer un auteur à un objet ?
+// par défaut : pouvoir modifier l'objet en question
+// http://doc.spip.org/@autoriser_associerauteurs_dist
+function autoriser_associerauteurs_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('modifier', $type, $id, $qui, $opt);
+}
+
 
 //
 // Peut-on faire de l'upload ftp ?

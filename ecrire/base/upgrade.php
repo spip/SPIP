@@ -200,6 +200,7 @@ function maj_plugin($nom_meta_base_version, $version_cible, $maj, $table_meta='m
  * @return void
  */
 function relance_maj($meta,$table,$redirect=''){
+	include_spip('inc/headers');
 	if (!$redirect){
 		// recuperer la valeur installee en cours
 		// on la tronque numeriquement, elle ne sert pas reellement

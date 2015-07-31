@@ -82,7 +82,6 @@ function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 		'objet_source'=>$objet_source,
 		'recherche'=>'',
 		'visible'=>0,
-		'editable'=>autoriser('modifier',$objet,$id_objet),
 		'ajouter_lien'=>'',
 		'supprimer_lien'=>'',
 		'_oups' => _request('_oups'),
