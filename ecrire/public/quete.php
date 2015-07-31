@@ -76,9 +76,10 @@ function quete_profondeur($id, $connect='') {
 // http://doc.spip.org/@quete_date_postdates
 function quete_date_postdates() {
 	return
-		($GLOBALS['meta']['date_prochain_postdate'] > time())
-			? date('Y-m-d H:i:s', $GLOBALS['meta']['date_prochain_postdate'])
-			: '9999-12-31';
+	  date('Y-m-d H:i:s', 
+	       ($GLOBALS['meta']['date_prochain_postdate'] > time())
+			? $GLOBALS['meta']['date_prochain_postdate']
+	       : (time()+(3600*24*10000))) ;
 }
 
 
