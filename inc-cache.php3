@@ -75,14 +75,11 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 // Securite : est sur que c'est un cache
 function retire_cache($cache) {
 	if ($GLOBALS['flag_ecrire']) return;
-#	spip_log("kill $cache ?");
 	if (preg_match('|^' . _DIR_CACHE .
 		"([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
 		       $cache)) {
 		// supprimer le fichier (de facon propre)
 		supprimer_fichier($cache);
-		// et le fichier compagnon s'il existe
-		@unlink($cache.'.NEW');
 	} else
 		spip_log("Impossible de retirer $cache");
 }
