@@ -105,6 +105,11 @@ function afficher_barre($champ, $forum=false, $lang='') {
 
 	$ret .= "</td>";
 
+	$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>"
+		. bouton_barre_racc ("barre_inserer('\\n\\n',$champ)", "paragraphe.png", _T('barre_paragraphe'), $champhelp)
+		. "</td>";
+
+
 	if (test_espace_prive()) {
 		$ret .= "\n<td style='text-align:$spip_lang_right;' valign='middle'>";
 		$col++;
