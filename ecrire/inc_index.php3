@@ -81,6 +81,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 
 	if (!$id_objet OR (!$forcer_reset AND deja_indexe($type, $id_objet))) return;
 
+	spip_log("indexation $type $id_objet");
 	$index = '';
 	$mots = "INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES (0,'')";
 
