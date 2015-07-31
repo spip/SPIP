@@ -253,7 +253,7 @@ function calculer_balise($nom, $p) {
 
 
 // fonction speciale d'appel a un modele modeles/truc.html pour la balise #TRUC
-// exemples : #LESAUTEURS, #TRADUCTIONS, #DOC, #IMG...
+// exemples : #TRADUCTIONS, #DOC, #IMG...
 // http://doc.spip.org/@calculer_balise_modele_dist
 function calculer_balise_modele_dist($p){
 	$nom = strtolower($p->nom_champ);
@@ -271,8 +271,9 @@ function calculer_balise_modele_dist($p){
 	$code_contexte = argumenter_inclure($champ, $p->descr, $p->boucles, $p->id_boucle, false);
 
 	// Si le champ existe dans la pile, on le met dans le contexte
-	// (exemple : #LESAUTEURS dans spip_syndic_articles)
-	$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
+	// (a priori c'est du code mort ; il servait pour #LESAUTEURS dans
+	// le cas spip_syndic_articles)
+	#$code_contexte[] = "'$nom='.".champ_sql($nom, $p);
 
 	// Reserver la cle primaire de la boucle courante
 	if ($primary = $p->boucles[$p->id_boucle]->primary) {

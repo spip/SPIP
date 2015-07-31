@@ -423,8 +423,7 @@ function balise_EXPOSE_dist($p) {
 	return calculer_balise_expose($p, $on, $off);
 }
 
-// obsolete. utiliser la precedente
-
+// #EXPOSER est obsolete. utiliser #EXPOSE ci-dessus
 // http://doc.spip.org/@balise_EXPOSER_dist
 function balise_EXPOSER_dist($p)
 {
@@ -535,6 +534,34 @@ function balise_LANG_dist ($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
+
+
+// #LESAUTEURS
+// les auteurs d'un article (ou d'un article syndique)
+// http://www.spip.net/fr_article902.html
+// http://www.spip.net/fr_article911.html
+// http://doc.spip.org/@balise_LESAUTEURS_dist
+function balise_LESAUTEURS_dist ($p) {
+	// Cherche le champ 'lesauteurs' dans la pile
+	$_lesauteurs = champ_sql('lesauteurs', $p); 
+
+	// Si le champ n'existe pas (cas de spip_articles), on applique
+	// le modele lesauteurs.html en passant id_article dans le contexte;
+	// dans le cas contraire on prend le champ 'lesauteurs' (cas de
+	// spip_syndic_articles)
+	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][\'lesauteurs\']') {
+		$p->code = "safehtml($_lesauteurs)";
+		// $p->interdire_scripts = true;
+	} else {
+		$p->code = "recuperer_fond(
+			'modeles/lesauteurs',
+			array('id_article' => ".champ_sql('id_article', $p)."))";
+		$p->interdire_scripts = false; // securite apposee par recuperer_fond()
+	}
+
+	return $p;
+}
+
 
 // #RANG
 // affiche le "numero de l'article" quand on l'a titre '1. Premier article';

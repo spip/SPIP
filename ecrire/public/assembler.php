@@ -447,7 +447,7 @@ function inclure_modele($squelette, $type, $id) {
 
 	if ($class)
 		$contexte['class'] = $class;
-#print_r($contexte);
+
 	// Traiter les parametres
 	// par exemple : <img1|center>, <emb12|autostart=true> ou <doc1|lang=en>
 	$contexte = array_merge($contexte, 
