@@ -66,8 +66,8 @@ function exec_admin_tech_dist()
  else
    $dir_img = _DIR_IMG;
 
- echo "<TABLE BORDER='0' CELLSPACING='0' CELLPADDING='5' WIDTH=\"100%\">",
-   "<tr><td BGCOLOR='", $couleur_foncee, "' background=''><b>",
+ echo "<table border='0' cellspacing='0' cellpadding='5' width=\"100%\">",
+   "<tr><td bgcolor='", $couleur_foncee, "' background=''><b>",
    "<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#FFFFFF'>",
    _T('texte_sauvegarde'),
    "</font></b></td></tr><tr><td class='serif'>",
@@ -76,25 +76,25 @@ function exec_admin_tech_dist()
    http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'"),
    _T('texte_admin_tech_01',
      array('dossier' => '<i>'.$dir_dump.'</i>', 'img'=>'<i>'.$dir_img.'</i>')),
-   "<p>",
-   _T('texte_admin_tech_02');
+   _T('texte_admin_tech_02'),
+  "</p>";
 
 if ($flag_gz) {
-	echo "\n<p align='justify'>"._T('texte_admin_tech_03')."<p>";
-	echo "\n<INPUT TYPE='radio' NAME='gz' VALUE='1' id='gz_on' CHECKED><label for='gz_on'> "._T('bouton_radio_sauvegarde_compressee',
-	array('fichier'=>'<b>'.$zfile.'</b>'))." </label><BR>\n";
-	echo "\n<INPUT TYPE='radio' NAME='gz' VALUE='0' id='gz_off'><label for='gz_off'> "._T('bouton_radio_sauvegarde_non_compressee',
-	array('fichier'=>'<b>'.$file.'</b>'))." </label><BR>\n";
+	echo "\n<p align='justify'>"._T('texte_admin_tech_03')."</p>\n<p>";
+	echo "\n<input type='radio' name='gz' value='1' id='gz_on' checked='checked' /><label for='gz_on'> "._T('bouton_radio_sauvegarde_compressee',
+	array('fichier'=>'<b>'.$zfile.'</b>'))." </label><br />\n";
+	echo "\n<input type='radio' name='gz' value='0' id='gz_off' /><label for='gz_off'> "._T('bouton_radio_sauvegarde_non_compressee',
+	array('fichier'=>'<b>'.$file.'</b>'))." </label><br /></p>\n";
 }
 else {
 	echo "\n<p align='justify'>"._T('texte_sauvegarde_compressee', array('fichier'=>'<b>'.$file.'</b>'));
-	echo "\n<INPUT TYPE='hidden' NAME='gz' VALUE='0' />";
+	echo "\n<input type='hidden' name='gz' value='0' />";
 }
 
-echo "\n<div align='right'><input class='fondo' type='submit' VALUE='"._T('texte_sauvegarde_base')."'></div></form>";
+echo "\n<div align='right'><input class='fondo' type='submit' value='"._T('texte_sauvegarde_base')."' /></div></form>";
 
 echo "</td></tr>";
-echo "</TABLE>";
+echo "</table>";
 
 
 //
@@ -107,8 +107,8 @@ echo "</TABLE>";
  	$liste_choix = "<p><ul>"; 
  	foreach($liste_dump as $key=>$fichier){
  		$affiche_fichier = substr($fichier,strlen(_DIR_DUMP));
- 		$liste_choix.="<li><input type='radio' name='archive' value='$affiche_fichier' id='dump_$key' ".
- 			(($fichier==$selected)?"checked='checked' ":"")."/><label for='dump_$key'>$affiche_fichier</label></li>\n";
+ 		$liste_choix.="\n<li><input type='radio' name='archive' value='$affiche_fichier' id='dump_$key' ".
+ 			(($fichier==$selected)?"checked='checked' ":"")."/>\n<label for='dump_$key'>$affiche_fichier</label></li>";
  	}
  	
 	if ($flag_gz) {
@@ -119,22 +119,31 @@ echo "</TABLE>";
 		$texte_compresse = _T('texte_non_compresse')."&nbsp;";
 	}
 
-	echo	"<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">",
-	"<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>",
-	"<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>",
-	_T('texte_restaurer_base')."</FONT></B></TD></TR>",
-	"<TR><td class='serif'>\n",
+	echo	"\n<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">",
+	"<tr><td bgcolor='#eeeecc' background=''><b>",
+	"<font face='Verdana,Arial,Sans,sans-serif' size='3' color='#000000'>",
+	_T('texte_restaurer_base')."</font></b></td></tr>",
+	"<tr><td class='serif'>\n",
 	generer_url_post_ecrire("import_all"),
 	"\n<p align='justify'> ",
 	_T('texte_restaurer_sauvegarde', array('dossier' => '<i>'.$dir_dump.'</i>')),
-	"\n<p>",
+	  '</p>',
 	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
 	$liste_choix,
-	"<li><input type='radio' name='archive' value='' />",
-	"\n<FONT SIZE=3><INPUT TYPE='text' NAME='archive_perso' VALUE='$fichier_defaut' SIZE='30'></FONT></li></ul>",
-	"\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>",
-	"\n</td></tr>",
-	"</TABLE>";
+	"\n<li><input type='radio' name='archive' value='' />",
+	"\n<font size='3'><input type='text' name='archive_perso' value='$fichier_defaut' size='30' /></font></li></ul>";
+	  
+	debut_cadre_relief();
+	echo  "<p><input name='insertion' type='radio' />&nbsp;",
+	  _L('Fusionner la base actuelle et la sauvegarde'),
+	  '</p>';
+	fin_cadre_relief();
+
+	echo "\n</p><div align='right'><input class='fondo' type='submit' value='",
+	  _T('bouton_restaurer_base'),
+	  "' /></div></form>",
+	  "\n</td></tr>",
+	  "</table>";
 
  }
 
@@ -145,29 +154,25 @@ echo "</TABLE>";
 if ($options == "avancees" AND 	$connect_toutes_rubriques) {
 	$res = spip_mysql_version();
 	if ($res >= '3.23.14') {
-		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
-		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
+		echo "<table border='0' cellspacing='1' cellpadding='8' width=\"100%\">";
+		echo "<tr><td bgcolor='#eeeecc' background=''><b>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size='3' COLOR='#000000'>";
 		echo _T('texte_recuperer_base'),
-			"</FONT></B></TD></TR>",
-			"<TR><TD class='serif'>",
+			"</font></b></td></tr>",
+			"<tr><td class='serif'>",
 			generer_url_post_ecrire("admin_repair"),
 			"\n<p align='justify'>"._T('texte_crash_base'),
-			"\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='",
+			"\n</p><div align='right'><input class='fondo' type='submit' value='",
 		 	_T('bouton_tenter_recuperation'),
-			"'></DIV></FORM>",
-			"</TD></TR>",
-			"</TABLE>";
+			"' /></div></form>",
+			"</td></tr>",
+			"</table>";
 	}
 }
 
-
 fin_cadre_relief();
 
-echo "<BR>";
-
-
-
+echo "<br />";
 
 echo fin_page();
 }
