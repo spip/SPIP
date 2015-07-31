@@ -19,7 +19,8 @@ function enfant($leparent) {
 	global $id_rubrique;
 	global $spip_lang_left;
 	
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent'";
+ 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent'
+ 		ORDER BY 0+titre,titre";
  	$result=spip_query($query);
 	$style = http_style_background('secteur-12.gif',  "$spip_lang_left no-repeat; padding-$spip_lang_left: 16px");
 
