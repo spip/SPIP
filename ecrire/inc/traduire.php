@@ -18,8 +18,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-if (!defined('_LANGUE_PAR_DEFAUT')) define('_LANGUE_PAR_DEFAUT','fr');
-
 /**
  * Rechercher tous les lang/file dans le path
  * qui seront ensuite chargés dans l'ordre du path

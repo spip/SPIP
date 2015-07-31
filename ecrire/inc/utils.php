@@ -1952,6 +1952,9 @@ function spip_initialisation_core($pi=NULL, $pa=NULL, $ti=NULL, $ta=NULL) {
 		#if (!defined('_SPIP_LOCK_MODE')) define('_SPIP_LOCK_MODE',2); // utiliser le nfslock de spip mais link() est tres souvent interdite
 	}
 
+	// Langue par defaut
+	if (!defined('_LANGUE_PAR_DEFAUT')) define('_LANGUE_PAR_DEFAUT','fr');
+
 	//
 	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
 	// (non surchargeable en l'etat ; attention si on utilise include_spip()
