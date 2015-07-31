@@ -7,7 +7,8 @@
 	{mode=document}
 	{extension IN png,jpg,gif}
 	{par num titre, date}
-	{doublons}>[
+	{doublons}
+	{vu=non}>[
 		<a href="(#URL_DOCUMENT)" type="#MIME_TYPE"
 		onClick="location.href='[(#URL_ARTICLE
 			|parametre_url{id_document,#ID_DOCUMENT}
@@ -41,16 +42,19 @@
 		Si un seul document est joint a l'article, et si le texte est vide,
 		on incruste automatiquement ce document
 	]
-	<BOUCLE_documents_decompte(DOCUMENTS) {id_article}
+	<BOUCLE_documents_decompte(DOCUMENTS spip_documents_articles spip_articles)
+	{id_article}
 	{mode=document}
-	{doublons}
-	{doublons A}
+	{texte=''}
+	{extension !IN gif,jpg,png}
+	{vu=non}
 	>[(#TOTAL_BOUCLE|=={1}
-		|?{#ENV{incruster}}
-		|?{[(#INCLURE{fond=modeles/emb}{id_document}|trim)]})]</BOUCLE_documents_decompte>
+		|?{[(#INCLURE{fond=modeles/emb}{id_document}
+		|trim)]})]</BOUCLE_documents_decompte>
+
 
 	[(#REM)
-		Liste des autres documents joints
+		Sinon, liste des autres documents joints
 	]
 	<B_documents_joints>
 		<div class="menu" id="documents_joints">
@@ -58,7 +62,9 @@
 		<ul>
 	<BOUCLE_documents_joints(DOCUMENTS)
 	{id_article}
-	{!doublons A} {par num titre, date}>[
+	{extension !IN gif,jpg,png}
+	{vu=non}
+	{par num titre, date}>[
 		<li>
 		<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>"
 			type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
