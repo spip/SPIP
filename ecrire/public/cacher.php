@@ -271,7 +271,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 
 	// cas ignorant le cache car complement dynamique
 	if (($_SERVER['REQUEST_METHOD'] == 'POST')
-		OR (isset($contexte['fond']) AND (substr($contexte['fond'],0,7)=='modeles'))
+		OR substr($contexte['fond'],0,8)=='modeles/')
 	) {
 		$use_cache = -1;
 		$lastmodified = 0;
