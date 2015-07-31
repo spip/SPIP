@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #pied { 
 	clear: both;
 	width: 100%;
-	margin-top: 32em;
+	margin-top: 4em;
 	border-top: 1px dotted #CCCCCC;
 	padding: 2px;
 	text-align: center; }
