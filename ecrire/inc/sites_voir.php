@@ -130,7 +130,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 			$styles[] = 'arial1';
 	}
 
-	return affiche_tranche_bandeau($requete, "site-24.gif", $col, "#999999", "white", $tmp_var, $titre_table, $obligatoire, $largeurs, $styles, 'afficher_syndic_articles_boucle', array($tmp_var, $id));
+	return affiche_tranche_bandeau($requete, "site-24.gif", "#999999", "white", $tmp_var, $titre_table, $obligatoire, $largeurs, $styles, 'afficher_syndic_articles_boucle', array($tmp_var, $id));
 }
 
 // http://doc.spip.org/@afficher_syndic_articles_boucle
