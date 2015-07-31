@@ -334,8 +334,8 @@ function afficher_liste($largeurs, $table, $styles = '') {
 
 // http://doc.spip.org/@afficher_liste_display_neq4
 function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
-
 	global $spip_lang_left,$browser_name;
+	if (!is_array($t) or !count($t)) return "";
 
 	$evt = (preg_match(",msie,i", $browser_name) ? " onmouseover=\"changeclass(this,'tr_liste_over');\" onmouseout=\"changeclass(this,'tr_liste');\"" :'');
 
@@ -359,6 +359,7 @@ function afficher_liste_display_neq4($largeurs, $t, $styles = '') {
 // http://doc.spip.org/@afficher_liste_display_eq4
 function afficher_liste_display_eq4($largeurs, $t, $styles = '') {
 	global $spip_lang_left;
+	if (!is_array($t) or !count($t)) return "";
 
 	$res = "\n<li>";
 	reset($largeurs);
