@@ -328,18 +328,21 @@ function executer_balise_dynamique($nom, $args, $context_compil) {
 
 	// verifier que la fonction dyn est la, 
 	// sinon se replier sur la generique si elle existe
+
 	if (!function_exists('balise_' . $nom . '_dyn')) {
+		$file = include_spip("balise/" .strtolower($nom2));
 		if (function_exists('balise_' . $nom2 . '_dyn')) {
 			// et lui injecter en premier arg le nom de la balise 
-			array_unshift($args,$nom);
+			array_unshift($r,$nom);
 			$nom = $nom2;
 		} else {
-		echo "\n<br>@@@@$nom2";
+
 			$msg =  "<span class='spip-debug-arg'>$nom</span> " .
 			  _T('zxml_inconnu_balise');
 			return denoncer_balise_dynamique($msg, $context_compil);
 		}
 	}
+
 	if (!_DIR_RESTREINT) 
 		$file = _DIR_RESTREINT_ABS . $file;
 	return synthetiser_balise_dynamique($nom, $r, $file, $context_compil);
