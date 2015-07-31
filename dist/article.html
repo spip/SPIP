@@ -40,14 +40,12 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_aute
             #MODELE{article_traductions}
 
         </div>
-
-        <div class="surlignable">
-		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
-		[<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>]
-        </div>
-
-        [(#REM) Portfolio : album d'images ]
-        <B_documents_portfolio>
+        <div class="surlignable">[
+		<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>
+		][<div class="#EDIT{texte} texte entry-content">(#TEXTE|image_reduire{500,0})</div>
+        ]</div>[
+	(#REM) Portfolio : album d'images
+        ]<B_documents_portfolio>
         <div id="documents_portfolio">
             <h2><:info_portfolio:></h2>
             <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
@@ -65,14 +63,20 @@ href="[(#URL_PAGE{backend})]<BOUCLE_URLAUTEURS(AUTEURS){id_article}>&amp;id_aute
 		
 		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
         
-		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>]
+		[<div class="ps surlignable"><h2 class="pas_surlignable"><:info_ps:></h2><div class="#EDIT{ps}">(#PS|image_reduire{500,0})</div></div>][
 
-        [(#REM) Autres documents joints a l'article ]
+        (#REM) Autres documents joints a l'article. 
+	Si un seul et texte vide, incrustation automatique
+
+	]<BOUCLE_documents_decompte(DOCUMENTS) {id_article} {mode=document} {par num titre, date}{doublons}{doublons A}></BOUCLE_documents_decompte>[
+	(#TOTAL_BOUCLE|<>{1}|?{' ',#TEXTE}|?{'',' '})
+	<INCLURE{fond=inc-documents}{id_article}>]
+	<//B_documents_decompte>
         <B_documents_joints>
         <div class="menu" id="documents_joints">
             <h2><:titre_documents_joints:></h2>
             <ul>
-                <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {doublons}>
+                <BOUCLE_documents_joints(DOCUMENTS){!doublons A}>
                 <li>
                     <strong><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
                     <small>(#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)])</small>
