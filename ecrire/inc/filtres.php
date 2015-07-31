@@ -322,7 +322,7 @@ function image_filtrer($args){
 	AND !preg_match(',^/|[<>]|\s,S', $texte)
 	AND (
 		file_exists(preg_replace(',[?].*$,','',$texte))
-		OR preg_match(';^(\w{3,7}://);', $texte) 
+		OR tester_url_absolue($texte)
 		)) {
 		array_unshift($args,"<img src='$texte' />");
 		$res = call_user_func_array($filtre, $args);
@@ -401,7 +401,7 @@ function taille_image($img) {
 
 	// ne jamais operer directement sur une image distante pour des raisons de perfo
 	// la copie locale a toutes les chances d'etre la ou de resservir
-	if (preg_match(';^(\w{3,7}://);', $logo)){
+	if (tester_url_absolue($logo)){
 		include_spip('inc/distant');
 		$fichier = copie_locale($logo);
 		$logo = $fichier ? _DIR_RACINE . $fichier : $logo;

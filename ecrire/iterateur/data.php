@@ -284,7 +284,7 @@ class IterateurDATA implements Iterator {
 					$this->tableau = $a;
 			}
 			else {
-				if (preg_match(',^https?://,', $src)) {
+				if (tester_url_absolue($src)) {
 					include_spip('inc/distant');
 					$u = recuperer_page($src, false, false, _DATA_SOURCE_MAX_SIZE);
 					if (!$u)
