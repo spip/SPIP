@@ -6,7 +6,7 @@ function changestyle(id_couche, element, style) {
 	if (init_gauche) {
 		init_gauche = false;
 		if (bug_offsetwidth) {
-			$('#haut-page').find('div.sous-menu').each(function(){
+			$('#haut-page div.bandeau-principal').find('div.bandeau').each(function(){
 				if (parseInt(this.style.left) > 0) {
 					demilargeur = Math.floor( this.offsetWidth / 2 );
 					if (demilargeur == 0) demilargeur = 100; // bug offsetwidth MSIE, on fixe une valeur arbitraire
@@ -29,7 +29,6 @@ function changestyle(id_couche, element, style) {
 	// Afficher, le cas echeant, celui qui est demande
 	$('#'+id_couche).css(element||'visibility',style||'visible');
 }
-
 
 var accepter_change_statut = false;
 
