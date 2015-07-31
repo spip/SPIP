@@ -1,0 +1,57 @@
+/**************************************************************************/
+/*  SPIP, Systeme de publication pour l'internet                          */
+/*                                                                        */
+/*  Copyright (c) 2001-2010                                               */
+/*  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James */
+/*                                                                        */
+/*  Ce programme est un logiciel libre distribue sous licence GNU/GPL.    */
+/*  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.  */ 
+/**************************************************************************/
+
+.spip_cadre {
+	width : 100%;
+	background-color: #FFFFFF;
+	padding: 5px;
+}
+.spip_quote {
+	margin-left : 40px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	border : solid 1px #aaaaaa;
+	background-color: #dddddd;
+	padding: 5px;
+}
+
+a { text-decoration: none; }
+a:focus,a:hover,a:active { color: #FF9900; text-decoration: underline; }
+
+body {
+	font-family: Georgia, Garamond, Times New Roman, serif;
+}
+h3.spip {
+	font-family: Verdana, Geneva, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 115%;
+	text-align: center;
+}
+
+table.spip {
+}
+
+table.spip tr.row_first {
+	background-color: #FCF4D0;
+}
+
+table.spip tr.row_odd {
+	background-color: #C0C0C0;
+}
+
+table.spip tr.row_even {
+	background-color: #F0F0F0;
+}
+
+table.spip td {
+	padding: 1px;
+	text-align: left;
+	vertical-align: middle;
+}

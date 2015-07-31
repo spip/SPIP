@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2009                                                *
+ *  Copyright (c) 2001-2010                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -49,33 +49,55 @@ function help_fichier($lang_aide, $path, $help_server) {
 	include_spip('inc/distant');
 	foreach ($help_server as $k => $server) {
 		// Remplacer les liens aux images par leur gestionnaire de cache
-		$page = help_replace_img(recuperer_page("$server/$path"),$k);
+		$url = "$server/$path";
+		$page = help_replace_img(recuperer_page($url),$k);
+		// les liens internes ne doivent pas etre deguises en externes
+		$url = parse_url($url);
+		$re = '@(<a\b[^>]*\s+href=["\'])' .
+		  '(?:' . $url['scheme'] . '://' . $url['host'] . ')?' .
+		  $url['path'] . '([^"\']*)@ims';
+		$page = preg_replace($re,'\\1\\2', $page);
+
 		preg_match_all(_SECTIONS_AIDE, $page, $sections, PREG_SET_ORDER);
-		// Fusionner les aides
+		// Fusionner les aides ayant meme nom de section
+		$vus = array();
 		foreach ($sections as $section) {
-		    list($tout,$prof, $sujet,) = $section;
-		    $corps = help_section($sujet, $page, $prof);
-		    foreach ($contenu as $k => $s) {
-		      if ($sujet == $k) {
-			$contenu[$k] .= $corps;
-			$corps = '';
-			break;
-		      }
-		    }
-		    if ($corps) $contenu[$sujet] = $tout . "\n" . $corps;
+			list($tout,$prof, $sujet,) = $section;
+			if (in_array($sujet, $vus)) continue;
+			$corps = help_section($sujet, $page, $prof);
+			foreach ($contenu as $k => $s) {
+			  if ($sujet == $k) {
+			    // Section deja vue qu'il faut completer
+			    // Si le complement a des sous-sections,
+			    // ne pas en tenir compte quand on les rencontrera
+			    // lors des prochains passages dans la boucle
+			    preg_match_all(_SECTIONS_AIDE, $corps, $s, PREG_PATTERN_ORDER);
+			    if ($s) {$vus = array_merge($vus, $s[2]);}
+			    $contenu[$k] .= $corps;
+			    $corps = '';
+			    break;
+			  }
+			}
+			// Si totalement nouveau, inserer le titre
+			// mais pas le corps s'il contient des sous-sections:
+			// elles vont venir dans les passages suivants
+			if ($corps) {
+			  $corps = help_section($sujet, $page);
+			  $contenu[$sujet] = $tout . "\n" . $corps;
+			}
 		}
 	}
 
 	$contenu = '<div>' . join('',$contenu) . '</div>';
 
-	// Neutraliser les liens externes pour ne pas perturber le frame
+	// Renvoyer les liens vraiment externes dans une autre fenetre
 	$contenu = preg_replace('@<a href="(http://[^"]+)"([^>]*)>@',
 				'<a href="\\1"\\2 target="_blank">',
 				$contenu);
 
 	// Correction typo dans la langue demandee
 	changer_typo($lang_aide);
-	$contenu = justifier($contenu);
+	$contenu = '<body>' . justifier($contenu) . '</body>';
 
 	if (strlen($contenu) <= 100) return array(false, false);
 	// mettre en cache (tant pis si echec)
@@ -169,8 +191,9 @@ function help_body($aide) {
 
 function help_section($aide, $contenu, $prof=2)
 {
+	$maxprof = ($prof >=2) ? "12" : "1";
 	$r = "@<h$prof" . '(?: class="spip")?' . '>\s*' . $aide 
-	  ."\s*(?:/.+?)?</h$prof>(.*?)<(?:(?:h[12])|/body)@ism";
+	  ."\s*(?:/.+?)?</h$prof>(.*?)<(?:(?:h[$maxprof])|/body)@ism";
 
 	if (preg_match($r, $contenu, $m))
 	  return $m[1];
