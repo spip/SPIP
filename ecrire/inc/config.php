@@ -80,8 +80,9 @@ function liste_metas()
 
 		'documents_article' => 'non',
 		'documents_rubrique' => 'non',
-		'charset' => _DEFAULT_CHARSET,
 		'syndication_integrale' => 'oui',
+		'charset' => _DEFAULT_CHARSET,
+		'dir_img' => substr(_DIR_IMG,strlen(_DIR_RACINE)),
 
 		'multi_articles' => 'non',
 		'multi_rubriques' => 'non',
@@ -196,8 +197,6 @@ function appliquer_modifs_config() {
 		set_request('langues_multilingue', join($i, ","));
 	}
 
-	$liste_meta = array_keys(liste_metas());
-
 	// Modification du reglage accepter_inscriptions => vider le cache
 	// (pour repercuter la modif sur le panneau de login)
 	if ($i = _request('accepter_inscriptions')
@@ -206,9 +205,12 @@ function appliquer_modifs_config() {
 		suivre_invalideur("1"); # tout effacer
 	}
 
-	foreach($liste_meta as $i)
-		if (!(_request($i)===NULL))
-			ecrire_meta($i, _request($i));
+	foreach(liste_metas() as $i => $v) {
+		if (($x =_request($i))!==NULL)
+			ecrire_meta($i, $x);
+		elseif  (!isset($GLOBALS['meta'][$i]))
+			ecrire_meta($i, $v);
+	}
 
 	if ($lang = _request('changer_langue_site')) {
 		include_spip('inc/lang');
