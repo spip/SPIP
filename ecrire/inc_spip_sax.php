@@ -69,8 +69,8 @@ function finElement($parser, $name)
   $t = $contenu[$depth];
   $depth = substr($depth, 2);
   $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
-  // fusion <balise></balise> en <balise /> sauf pour textarea qui hallucine!
-  if ($t || ($name == 'textarea'))
+  // fusion <balise></balise> en <balise /> sauf pour qq unes qui hallucinent
+  if ($t || ($name == 'a') || ($name == 'textarea'))
     $res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
   else
     $res .= ($ouv ? ('<' . $ouv  . ' />') : ("</" .  $name . ">"));
