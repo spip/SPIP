@@ -139,6 +139,36 @@ function formulaires_editer_auteur_verifier_dist($id_auteur='new', $retour='', $
 	if (!nom_acceptable(_request('nom'))) {
 		$erreurs['nom'] = _T("info_nom_pas_conforme");
 	}
+    # Ne pas autoriser d'avoir deux auteurs avec le même email
+    # cette fonctionalité nécessite que la base soit clean à l'activation : pas de
+    # doublon sur la requête select email,count(*) from spip_auteurs group by email ;
+    if (defined('_INTERDIRE_AUTEUR_MEME_EMAIL') )
+    {
+        #un email a été renseigné
+        if ($email = _request('email'))
+        {
+            #Nouvel auteur
+            if (intval($id_auteur)==0)
+            {
+                #Un auteur existe deja avec cette adresse ?
+                if ( sql_countsel("spip_auteurs", "email='$email'") >0 )
+                {
+                    $erreurs['email'] = _T('erreur_email_deja_existant');
+                }
+            }
+            else
+            {
+                #Un auteur existe deja avec cette adresse ?
+                if ( sql_countsel("spip_auteurs", "email='$email'") >0 )
+                {
+                    if ( $id_auteur!= ($id_auteur_ancien=sql_getfetsel('id_auteur', 'spip_auteurs', "email='$email'")))
+                    {
+                        $erreurs['email'] = _T('erreur_email_deja_existant');
+                    }
+                }
+            }
+        }
+    }
 	if ($email = _request('email')){
 		include_spip('inc/filtres');
 		include_spip('inc/autoriser');
