@@ -82,17 +82,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_auteur' => 'sanm',
-'participer_site' => '<NEW> Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
-'plan_site' => '<NEW> Plan du site',
-'popularite' => '<NEW> Popularit&eacute;',
-'poster_message' => '<NEW> Poster un message',
+'participer_site' => 'Ou p&eacute; m&egrave;t ansanm bann zot dalon po la vi lo sit-la, &egrave; propoz&eacute; out prop bann zartik, si ou l&eacute; inskri anba-la. Inskri aou : ou sar gayn inn lim&egrave;l i don aou out bann kodlaks&eacute; po l&eacute;spas priv&eacute; lo sit. ',
+'plan_site' => 'Lakart lo sit',
+'popularite' => 'Koman l&eacute; popil&egrave;r',
+'poster_message' => 'Anvwa in mod&eacute;kri',
 
 
 // R
-'repondre_article' => '<NEW> R&eacute;pondre &agrave; cet article',
-'repondre_breve' => '<NEW> R&eacute;pondre &agrave; cette br&egrave;ve',
-'repondre_message' => '<NEW> R&eacute;pondre &agrave; ce message',
-'resultats_recherche' => '<NEW> R&eacute;sultats de la recherche',
+'repondre_article' => 'Po r&eacute;ponn si lartik-la',
+'repondre_breve' => 'Po r&eacute;ponn la tite-nouv&egrave;l-la',
+'repondre_message' => 'Po r&eacute;ponn mod&eacute;kri-la',
+'resultats_recherche' => 'Kosa lo rod&egrave;r la finn trouv&eacute;',
 'retour_debut_forums' => 'Artourn bann d&eacute;bi bann forom',
 'rubrique' => 'Ribrik',
 'rubriques' => 'Bann ribrik',
@@ -106,16 +106,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suite' => 'laswit',
 'sur_web' => 'Si lo w&egrave;b',
 'syndiquer_rubrique' => 'Po sindik&eacute; ribrik-la',
-'syndiquer_site' => '<NEW> Syndiquer tout le site',
+'syndiquer_site' => 'Po sindik&eacute; si lo sit',
 
 
 // T
-'texte_lettre_information' => '<NEW> Voici la lettre d\'information du site',
-'texte_lettre_information_2' => '<NEW> Cette lettre recense les articles et les br&egrave;ves publi&eacute;s depuis',
+'texte_lettre_information' => 'Ala lal&egrave;t zinformasyon lo sit',
+'texte_lettre_information_2' => 'L&egrave;t-la i ramas tout bann zartik &egrave;k bann tite-nouv&egrave;l dopwi',
 
 
 // V
-'voir_en_ligne' => '<NEW> Voir en ligne',
+'voir_en_ligne' => 'Anon vwar an liyn',
 
 
 // PLUS_UTILISE
