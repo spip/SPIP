@@ -9,23 +9,22 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 div#page { width: 48em; margin: 0 auto; text-align: left; }
 
-div#top { margin: 0; border-bottom: 2px solid #8B6F92; line-height: 5em; }
+div#top { margin: 0; border-bottom: 2px solid #8B6F92; padding-top: 1em; }
 div#top #nom_site_spip, #top a .spip_logos { display: block; float: left; font-weight: bold; font-size: 1.50em; }
-div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 0; }
+div#top .formulaire_recherche { float: right; width: 30%; background: none; margin: 0; padding: 1em 0; }
 div#top .formulaire_recherche label { display: none; }
-div#top #nom_site_spip, div#top .formulaire_recherche {}
 
-div#conteneur { width: 100%; }
-div#contenu { float: left; width: 67%; padding-top: 0.30em; overflow: hidden; }
+div#conteneur { clear: both; float: left; width: 67%; min-height: 450px; overflow: hidden; }
+div#contenu { padding-top: 0.30em; }
 
 div#navigation { float: right; width: 30%; overflow: hidden; }
 div#extra { float: right; clear: right; width: 30%; overflow: hidden; }
 
-div#pied { clear: both; width: 100%; margin: 1em 0; border-top: 2px solid #8B6F92; text-align: center; }
+div#pied { clear: both; width: 100%; margin: 1em 0 0 0; padding: 0.20em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.77em; }
 div#pied img { vertical-align: bottom; }
 
 /* Espaceur de blocs */
-.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: none; line-height: 1px; font-size: 1px; }
 
 /* Non visible a l'ecran */
 .invisible { position: absolute; top: -3000em; height: 1%; }
@@ -46,10 +45,10 @@ body, .formulaire_spip, #hierarchie, .pagination, small { font-family: Verdana, 
 
 /* Titraille */
 h1 { margin: 0; font-size: 1.50em; font-weight: bold; color: #000; }
-h2 { margin: 0; padding: 0.20em; background: #8B6F92; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
+h2 { background: #8B6F92; margin: 0; padding: 0.20em; font-size: 1em; font-weight: normal; text-transform: uppercase; letter-spacing: 0.10em; }
 h2, h2 a, h2 a:hover { color: #EEE; }
-h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #CCCC66; font-size: 1.10em; font-weight: bold; }
-h3.spip { color: #CCCC66; }
+h3 { margin: 2em 0 1em 0; border-bottom: 2px solid #CC6; font-size: 1.10em; font-weight: bold; }
+h3.spip { color: #CC6; }
 
 /* Divers */
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
@@ -97,7 +96,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 #hierarchie { clear: both; margin-bottom: 2em; font-size: 0.77em; color: #666; }
 
-.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #CCCC66; }
+.surtitre, .soustitre { font-size: 0.90em; text-transform: uppercase; color: #CC6; }
 
 .cartouche { margin-bottom: 2em; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
@@ -106,7 +105,7 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 .cartouche .traductions * { display: inline; }
 .cartouche .traductions li { padding-left: 1em; }
 
-.chapo { margin-bottom: 1.50em; font-weight: bold; line-height: 1.40em; color: #666699; }
+.chapo { margin-bottom: 1.50em; font-weight: bold; line-height: 1.40em; color: #669; }
 .texte { line-height: 1.60em; }
 .ps, .notes { line-height: 1.40em; margin-bottom: 2em; }
 .notes { clear: both; }
@@ -118,16 +117,18 @@ span.spip_documents_center { display: block; margin-top: 1em; }
 
 /* Portfolio */
 #documents_portfolio { clear: both; margin-top: 1.40em; margin-bottom: 2em; text-align: center; }
-#documents_portfolio .spip_logos { margin: 0.10em; }
+#documents_portfolio .spip_logos { margin: 6px 2px 0 2px; padding: 4px; border: 1px solid #DDD; }
+#documents_portfolio a:hover .spip_logos { border-color: #F57900; }
+#documents_portfolio a.on .spip_logos { border-color: #8B6F92; }
 #document_actif { margin-top: 1em; }
 
 
 /* Habillage des formulaires
 ---------------------------------------------- */
-.formulaire_spip { background: #CCCC99 url(pale.gif); margin-bottom: 2em; padding: 1em; text-align: left; }
-.formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CCCC99; }
-.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #666633; }
-.formulaire_spip label { display: block; color: #404040; color: #666633; font-size: 0.90em; }
+.formulaire_spip { background: #CC9 url(pale.gif); margin-bottom: 2em; padding: 1em; text-align: left; }
+.formulaire_spip fieldset { margin: 0; margin-bottom: 1em; padding: 0; border: 0; border-top: 1px solid #CC9; }
+.formulaire_spip legend { margin: 0; padding: 0; padding-right: 0.50em; color: #663; }
+.formulaire_spip label { display: block; color: #404040; color: #663; font-size: 0.90em; }
 .forml, textarea, select { width: 99%; background: #F4F8F8; border: 1px inset; font-family: inherit; font-size: inherit; color: #000; }
 .formulaire_spip textarea { margin-bottom: 1em; }
 
@@ -157,6 +158,7 @@ ul.choix_mots label { display: inline; }
 
 /* menu langues */
 #menu_langues { background: none; margin: 0; padding: 1em 0; vertical-align: top; }
+.formulaire_menu_lang { background: none; margin: 0; padding: 1em 0; }
 
 /* Barre de raccourcis typographiques */
 table.spip_barre { width: 100%; }
@@ -231,7 +233,7 @@ ul ul ul ul ul .forum-chapo { background: #FFF; }
 /* Listes d'articles et extraits introductifs */
 .articles ul li { clear: both; padding: 0.40em 0.20em; }
 .articles ul li h3 { margin: 0; padding: 0; border: 0; font-weight: bold; }
-.articles ul li .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
+.articles .spip_logos { float: right; clear: right; margin: 0 0 4px 16px; }
 .articles ul li .enclosures { float: right; text-align: right; max-width: 60%; margin: 0; }
 .articles ul li .introduction { margin-top: 0.30em; line-height: 1.40em; }
 

@@ -1,7 +1,6 @@
-/*  ------------------------------------------ */
-/*  Styles pour l'agenda de SPIP
-/*  ------------------------------------------ */
-
+/* ------------------------------------------ */
+/* Styles pour l'agenda de SPIP
+/* ------------------------------------------ */
 .calendrier-arial9 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
 .calendrier-arial10 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
 .calendrier-arial11 { font-family: Arial, Sans, sans-serif; font-size: 11px; }
@@ -19,11 +18,11 @@ div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; 
 .calendrier-td { width: 14%; vertical-align: top; }
 .calendrier-th { width: 14%; padding: 5px; text-align: center; vertical-align: middle; font-size: 10px; font-weight: bold; font-family: Verdana, Geneva, Sans, sans-serif; }
 .calendrier-th a { color: #000; }
-.calendrier-table-etroit  .calendrier-td-gauche { width: 0; vertical-align: top; }
-.calendrier-table-large  .calendrier-td-gauche { width: 150px; vertical-align: top; }
-.calendrier-table-etroit  .calendrier-td-droit { width: 150px; vertical-align: top; }
-.calendrier-table-large  .calendrier-td-droit { width: 150px; vertical-align: top; }
-.calendrier-jour { position: relative; color: #999; /*background-color: #FFF; */ border: 1px solid #AAA; }
+.calendrier-table-etroit .calendrier-td-gauche { width: 0; vertical-align: top; }
+.calendrier-table-large .calendrier-td-gauche { width: 150px; vertical-align: top; }
+.calendrier-table-etroit .calendrier-td-droit { width: 150px; vertical-align: top; }
+.calendrier-table-large .calendrier-td-droit { width: 150px; vertical-align: top; }
+.calendrier-jour { position: relative; color: #999; /*background-color: #FFF;*/ border: 1px solid #AAA; }
 .calendrier-agenda { margin-left: 1px; margin-top: 1px; padding: 1px; text-align: center; background-color: #FFF; }
 .calendrier-demiagenda { margin-left: 0; margin-top: 0; padding: 0; text-align: center; background-color: #FFF; }
 .calendrier-tripleagenda { vertical-align: top; width: 33%; }
@@ -33,21 +32,18 @@ div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; 
 .calendrier-heurepile { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; font-weight: bold; }
 .calendrier-heureface { position: absolute; margin-left: 2px; margin-right: 2px; border-top: 1px solid #CCC; }
 
-.calendrier-mozleft { }
-.calendrier-mozright { }
-.calendrier-moztop8 { }
-.calendrier-mozbottom8 { }
-.calendrier-moztop6 { }
-.calendrier-mozbottom6 { }
+.calendrier-mozleft {}
+.calendrier-mozright {}
+.calendrier-moztop8 {}
+.calendrier-mozbottom8 {}
+.calendrier-moztop6 {}
+.calendrier-mozbottom6 {}
 
 .calendrier-opacity { -moz-opacity: 0.3; filter: alpha(opacity=30); }
-
 .calendrier-png { width: 12px; height: 12px; behavior: url(win_png.htc); } /* URL a revoir */
 .calendrier-icone { width: 14px; height: 7px; border: 0; }
-
-.calendrier-noir  { color: #000; } /*  style anar */
-.calendrier-nb  { background-color: #FFF; border: 1px solid #000; color: #000; } /*  style cinemat(yp)ographe */
-
+.calendrier-noir  { color: #000; } /* style anar */
+.calendrier-nb  { background-color: #FFF; border: 1px solid #000; color: #000; } /* style cinemat(yp)ographe */
 .calendrier-couleur1 { background: #FDE5F2; border: 1px solid #CD006F; color: #CD006F; } /* Fushia */
 .calendrier-couleur1i { background: #CD006F; border: 1px solid #FDE5F2; color: #FDE5F2; } /* Fushia */
 .calendrier-couleur2 { background: #EDF3FE; border: 1px solid #5da7c5; color: #5da7c5; } /* Bleu */
@@ -78,18 +74,16 @@ div.navigation-calendrier img { border: 0; vertical-align: middle; margin: 1px; 
 .calendrier-couleur14i { background: #8C6635; border: 1px solid #F5EEE5; color: #F5EEE5; } /* Marron */
 
 /* agenda */
-.bandeau_agenda { background: #ddd; }
-.jour_dimanche { background: #eee;color:#000; }
-.jour_encours { background: #FFF;color:#000; }
-.jour_gris { background: #eee;color:#000; }
-.jour_pris { background: #FFF;color:#000; }
-.calendrier-cadreagenda { background: #eee; }
-
-/* grille du calendrier pour espace public */
+.bandeau_agenda { background: #DDD; }
+.jour_dimanche { background: #eee;color: #000; }
+.jour_encours { background: #FFF;color: #000; }
+.jour_gris { background: #eee;color: #000; }
+.jour_pris { background: #FFF;color: #000; }
+.calendrier-cadreagenda { background: #eee; } /* grille du calendrier pour espace public */
 /* (pour le prive, style_prive predomine */
 
-.bordure_claire { border: 1px solid gray; }
-.bordure_foncee { border: 1px solid black; }
-.bordure_claire_basse { border-bottom: 1px solid gray; }
-.bordure_claire_left { border-left: 1px solid gray; }
-.bordure_claire_right { border-right: 1px solid gray;}
+.bordure_claire { border: 1px solid #666; }
+.bordure_foncee { border: 1px solid #000; }
+.bordure_claire_basse { border-bottom: 1px solid #666; }
+.bordure_claire_left { border-left: 1px solid #666; }
+.bordure_claire_right { border-right: 1px solid #666; }
