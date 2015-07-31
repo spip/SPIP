@@ -130,8 +130,9 @@ function exec_export_all_dist()
 	echo "<div style='text-align: left'>\n";
 	$etape = 1;
 
+	// Les sauvegardes partielles prennent le temps d'indiquer les logos
 	// Instancier une fois pour toutes, car on va boucler un max.
-	if (isset($GLOBALS['EXPORT_logos']) && $GLOBALS['EXPORT_logos']==true)
+	if ($GLOBALS['connect_id_rubrique'])
 		$GLOBALS['chercher_logo'] = charger_fonction('chercher_logo', 'inc',true);
 	else	$GLOBALS['chercher_logo'] = false;
 
