@@ -7,6 +7,7 @@ dist/feed.png -text
 dist/formulaires/choix_mots.html -text
 dist/formulaires/formulaire_.html -text
 dist/formulaires/login_forum_abo.html -text
+dist/formulaires/logo_auteur.html -text
 dist/formulaires/oubli/charger.php -text
 dist/formulaires/oubli/modifier.php -text
 dist/formulaires/oubli/valider.php -text
