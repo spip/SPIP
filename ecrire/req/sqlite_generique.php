@@ -736,7 +736,7 @@ function spip_sqlite_insert($table, $champs, $valeurs, $desc='', $serveur='',$re
 		$t = trace_query_start();
 	} else $t = 0 ;
  
-	$query="INSERT OR REPLACE INTO $table ".($champs?"$champs VALUES $valeurs":"DEFAULT VALUES");
+	$query="INSERT INTO $table ".($champs?"$champs VALUES $valeurs":"DEFAULT VALUES");
 	
 	
 	if ($r = spip_sqlite_query($query, $serveur, $requeter)) {
