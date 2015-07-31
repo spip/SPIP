@@ -881,17 +881,17 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
 		   permet de gagner un peu de temps chez les hergeurs nazes */
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
-		$letexte = ereg_replace("\n-- *", "\n<br />&mdash&nbsp;",$letexte);
-		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
-		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
-		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
+		$letexte = ereg_replace("\n-- *", "<br />&mdash&nbsp;",$letexte);
+		$letexte = ereg_replace("\n- *", "<br />$puce&nbsp;",$letexte);
+		$letexte = ereg_replace("\n_ +", "<br />",$letexte);
+		$letexte = ereg_replace("(( *)\n){2,}", "<p>", $letexte);
 		$letexte = str_replace("{{{", "@@SPIP_debut_intertitre@@", $letexte);
 		$letexte = str_replace("}}}", "@@SPIP_fin_intertitre@@", $letexte);
 		$letexte = str_replace("{{", "<b class=\"spip\">", $letexte);
 		$letexte = str_replace("}}", "</b>", $letexte);
 		$letexte = str_replace("{", "<i class=\"spip\">", $letexte);
 		$letexte = str_replace("}", "</i>", $letexte);
-		$letexte = eregi_replace("(<br[[:space:]]*/?".">)+(<p>|<br[[:space:]]*/?".">)", "\n<p class=\"spip\">", $letexte);
+		$letexte = eregi_replace("(<br[[:space:]]*/?".">)+(<p>|<br[[:space:]]*/?".">)", "<p class=\"spip\">", $letexte);
 		$letexte = str_replace("<p>", "<p class=\"spip\">", $letexte);
 		$letexte = str_replace("\n", " ", $letexte);
 		$letexte = str_replace("<quote>", "<div class=\"spip_quote\">", $letexte);
@@ -920,18 +920,18 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		);
 		$remplace1 = array(
 			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
-			/* 1 */ 	"\n<br />&mdash;&nbsp;",
-			/* 2 */ 	"\n<br />$puce&nbsp;",
-			/* 3 */ 	"\n<br />",
-			/* 4 */ 	"\n<p>",
+			/* 1 */ 	"<br />&mdash;&nbsp;",
+			/* 2 */ 	"<br />$puce&nbsp;",
+			/* 3 */ 	"<br />",
+			/* 4 */ 	"<p>",
 			/* 5 */ 	"@@SPIP_debut_intertitre@@",
 			/* 6 */ 	"@@SPIP_fin_intertitre@@",
 			/* 7 */ 	"<b class=\"spip\">",
 			/* 8 */ 	"</b>",
 			/* 9 */ 	"<i class=\"spip\">",
 			/* 10 */	"</i>",
-			/* 11 */	"\n<p class=\"spip\">",
-			/* 12 */	"\n<p class=\"spip\">",
+			/* 11 */	"<p class=\"spip\">",
+			/* 12 */	"<p class=\"spip\">",
 			/* 13 */	"<p class=\"spip\">",
 			/* 14 */	" ",
 			/* 15 */	"<blockquote class=\"spip\">",
