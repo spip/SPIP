@@ -32,14 +32,42 @@ function liste_plugin_files(){
 	return $plugin_files;
 }
 
+function liste_plugin_valides($liste_plug,&$infos){
+	$liste = array();
+	$infos = array();
+	if (is_array($liste_plug))
+		foreach($liste_plug as $plug){
+			$infos[$plug] = plugin_get_infos($plug);
+			if (!isset($infos[$plug]['erreur']) && !isset($plugin_valides[$p=strtoupper($infos[$plug]['prefix'])]))
+				$liste[$p] = array('dir'=>$plug,'version'=>isset($infos[$plug]['version'])?$infos[$plug]['version']:NULL);
+		}
+	return $liste;
+}
+
 //  A utiliser pour initialiser ma variable globale $plugin
 // http://doc.spip.org/@liste_plugin_actifs
 function liste_plugin_actifs(){
   $meta_plugin = isset($GLOBALS['meta']['plugin'])?$GLOBALS['meta']['plugin']:'';
-  if (strlen($meta_plugin)>0)
-		return explode(",",$meta_plugin); // mieux avec un unserialize ?
+  if (strlen($meta_plugin)>0){
+  	if (is_array($t=unserialize($meta_plugin)))
+  		return $t;
+  	else{ // compatibilite pre 1.9.2, mettre a jour la meta
+  		$t = explode(",",$meta_plugin);
+  		$liste = liste_plugin_valides($t,$infos);
+			ecrire_meta('plugin',serialize($liste));
+			ecrire_metas();
+			return $liste;
+  	}
+  }
 	else
 		return array();
+}
+function liste_chemin_plugin_actifs(){
+	$liste = liste_plugin_actifs();
+	foreach ($liste as $prefix=>$infos) {
+		$liste[$prefix] = $infos['dir'];
+	}
+	return $liste;
 }
 
 // http://doc.spip.org/@ecrire_plugin_actifs
@@ -50,7 +78,7 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 		$liste_pipe_manquants[]=$pipe_recherche;
 	
 	if ($operation!='raz'){
-		$plugin_actifs = liste_plugin_actifs();
+		$plugin_actifs = liste_chemin_plugin_actifs();
 		$plugin_liste = liste_plugin_files();
 		$plugin_valides = array_intersect($plugin_actifs,$plugin_liste);
 		if ($operation=='ajoute')
@@ -59,20 +87,8 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false,$operation='raz'){
 			$plugin = array_diff($plugin_valides,$plugin);
 	}
 	
-	$plugin_valides = array();
-	if (is_array($plugin)){
-		// charger les infos de plugin en memoire
-		$infos = array();
-		foreach ($plugin as $plug) {
-			$infos[$plug] = plugin_get_infos($plug);
-			if (!isset($infos[$plug]['erreur']) && !isset($plugin_valides[$p=strtoupper($infos[$plug]['prefix'])]))
-				$plugin_valides[$p] = $plug;
-			else
-				unset($infos[$plug]);
-		}
-	}
-
-	ecrire_meta('plugin',implode(",", $plugin_valides)); // mieux avec un serialize ?
+	$plugin_valides = liste_plugin_valides($plugin,$infos);
+	ecrire_meta('plugin',serialize($plugin_valides));
 
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
 	$end_file = "\n?".">";
@@ -194,7 +210,7 @@ function pipeline_precompile(){
 // pas sur que ca serve...
 // http://doc.spip.org/@liste_plugin_inactifs
 function liste_plugin_inactifs(){
-	return array_diff (liste_plugin_files(),liste_plugin_actifs());
+	return array_diff (liste_plugin_files(),liste_chemin_plugin_actifs());
 }
 
 // mise à jour du meta en fonction de l'état du répertoire
@@ -203,7 +219,7 @@ function liste_plugin_inactifs(){
 // risque de pb en php5 à cause du typage ou de null (vérifier dans la doc php)
 // http://doc.spip.org/@verif_plugin
 function verif_plugin($pipe_recherche = false){
-	$plugin_actifs = liste_plugin_actifs();
+	$plugin_actifs = liste_chemin_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
 	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
@@ -243,7 +259,7 @@ function enregistre_modif_plugin(){
 
 // http://doc.spip.org/@ordonne_plugin
 function ordonne_plugin(){
-	$liste = liste_plugin_actifs();
+	$liste = liste_chemin_plugin_actifs();
 	$liste_triee = array();
 	$i=2;
 	foreach($liste as $plug){
