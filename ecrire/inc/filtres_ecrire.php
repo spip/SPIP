@@ -20,24 +20,6 @@ include_spip('inc/pipelines_ecrire');
  * Fonctions utilises au calcul des squelette du prive.
  */
 
-/**
- * Bloquer l'acces a une page en renvoyant vers 403
- * @param bool $ok
- * @return string
- */
-function sinon_interdire_acces($ok=false) {
-	if ($ok) return '';
-	// vider tous les tampons
-	while (ob_get_level())
-		ob_end_clean();
-	$echec = charger_fonction('403','exec');
-	$echec();
-
-	#include_spip('inc/headers');
-	#redirige_formulaire(generer_url_ecrire('403','acces='._request('exec')));
-	exit;
-}
-
 
 /**
  * Retourne les parametres de personnalisation css de l'espace prive

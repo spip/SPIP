@@ -2959,4 +2959,57 @@ function filtre_chercher_rubrique_dist($titre,$id_objet, $id_parent, $objet, $id
 	return chercher_rubrique($titre,$id_objet, $id_parent, $objet, $id_secteur, $restreint,$actionable, $retour_sans_cadre);
 }
 
+/**
+ * Rediriger une page suivant une autorisation,
+ * et ce, n'importe où dans un squelette, même dans les inclusions.
+ * Exemple :
+ * [(#AUTORISER{non}|sinon_interdire_acces)]
+ * [(#AUTORISER{non}|sinon_interdire_acces{#URL_PAGE{login}, 401})]
+ *
+ * @param bool $ok Indique si l'on doit rediriger ou pas
+ * @param string $url Adresse vers laquelle rediriger
+ * @param int $statut Statut HTML avec lequel on redirigera
+ * @return string
+ */
+function sinon_interdire_acces($ok=false, $url='', $statut=0){
+	if ($ok) return '';
+	
+	// Vider tous les tampons
+	while (ob_get_level())
+		ob_end_clean();
+	
+	include_spip('inc/headers');
+	$statut = intval($statut);
+	
+	// Si aucun argument on essaye de deviner quoi faire par défaut
+	if (!$url and !$statut){
+		// Si on est dans l'espace privé, on génère du 403 Forbidden
+		if (test_espace_prive()){
+			http_status(403);
+			$echec = charger_fonction('403','exec');
+			$echec();
+		}
+		// Sinon dans l'espace public on redirige vers une 404 par défaut, car elle toujours présente normalement
+		else{
+			$statut = 404;
+		}
+	}
+	
+	// On suit les directives indiquées dans les deux arguments
+	
+	// S'il y a un statut
+	if ($statut){
+		// Dans tous les cas on modifie l'entité avec ce qui est demandé
+		http_status($statut);
+		// Si le statut est une erreur et qu'il n'y a pas de redirection on va chercher le squelette du même nom
+		if ($statut >= 400 and !$url)
+			echo recuperer_fond("$statut");
+	}
+	
+	// S'il y a une URL, on redirige (si pas de statut, la fonction mettra 302 par défaut)
+	if ($url) redirige_par_entete($url, '', $statut);
+	
+	exit;
+}
+
 ?>
