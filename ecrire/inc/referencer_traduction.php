@@ -93,8 +93,8 @@ function inc_referencer_traduction_dist($id_article, $flag, $id_rubrique, $id_tr
 				$id_article,
 				'articles',
 				"id_article=$id_article",
-				(_T('trad_lier') .
-				 "\n<input type='text' class='fondl' name='lier_trad' size='5' />\n"),
+				("<label for='lier_trad'>" . _T('trad_lier') . "</label>" .
+				 "\n<input type='text' class='fondl' name='lier_trad' id='lier_trad' size='5' />\n"),
 				_T('bouton_valider'),
 				" class='fondl'")
 		. "</td>\n"

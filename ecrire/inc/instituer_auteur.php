@@ -85,7 +85,7 @@ function choix_statut_auteur($statut, $id_auteur, $ancre) {
 
 	// Calculer le menu
 	$statut_rubrique = str_replace(',', '|', _STATUT_AUTEUR_RUBRIQUE);
-	return "<select name='statut' size='1' class='fondl'
+	return "<select name='statut' id='statut' size='1' class='fondl'
 		onchange=\"(this.options[this.selectedIndex].value.match(/^($statut_rubrique)\$/))?jQuery('#$ancre:hidden').slideDown():jQuery('#$ancre:visible').slideUp();\">"
 	. liste_statuts_instituer($statut, $id_auteur) 
 	. $autres

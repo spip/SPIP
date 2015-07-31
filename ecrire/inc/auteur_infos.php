@@ -39,50 +39,51 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 	$corps = _T('titre_cadre_signature_obligatoire')
 	. "("
-	. _T('entree_nom_pseudo')
+	. "<label for='nom'>" . _T('entree_nom_pseudo') . "</label>"
 	. ")<br />\n"
-	. "<input type='text' name='nom' class='formo' size='40' value=\""
+	. "<input type='text' name='nom' id='nom' class='formo' size='40' value=\""
 	. entites_html(sinon($auteur['nom'], _T('ecrire:item_nouvel_auteur')))
 	. "\" "
 	. (strlen($auteur['nom']) ? '' : ' onfocus="if(!antifocus){this.value=\'\';antifocus=true;}"')
-	. " />\n<br />"
-	. "<b>"._T('entree_adresse_email')."</b>";
+	. " />\n<br />";
 
 	// Modification de l'email
 	// ou message disant que seuls les admins peuvent le modifier
 	if (autoriser('modifier', 'auteur', $id_auteur, NULL, array('email'=>'?'))) {
-		$corps .= "<br /><input type='text' name='email' class='formo' size='40' value=\""
+		$corps .= "<label for='email'><b>"._T('entree_adresse_email')."</b></label>"
+		. "<br /><input type='text' name='email' id='email' class='formo' size='40' value=\""
 		. entites_html($auteur['email'])
 		. "\"  />\n<br />\n";
 	} else {
-		$corps .= "&nbsp;: <tt>".$auteur['email']."</tt>"
+		$corps .= "<b>"._T('entree_adresse_email')."</b>"
+		. "&nbsp;: <tt>".$auteur['email']."</tt>"
 		. "<br />("._T('info_reserve_admin').")\n"
 		. "\n<br />";
 	}
 
-	$corps .= "<b>"._T('entree_infos_perso')."</b><br />\n"
+	$corps .= "<label for='bio'><b>"._T('entree_infos_perso')."</b></label><br />\n"
 	. "("._T('entree_biographie')
 	. ")<br />\n"
-	. "<textarea name='bio' class='forml' rows='4' cols='40'>"
+	. "<textarea name='bio' id='bio' class='forml' rows='4' cols='40'>"
 	. entites_html($auteur['bio'])
 	. "</textarea><br />\n"
 	. debut_cadre_enfonce("site-24.gif", true, "", _T('info_site_web'))
-	. "<b>"._T('entree_nom_site')."</b><br />\n"
-	. "<input type='text' name='nom_site_auteur' class='forml' value=\""
+	. "<label for='nom_site_auteur'><b>"._T('entree_nom_site')."</b></label><br />\n"
+	. "<input type='text' name='nom_site_auteur' id='nom_site_auteur' class='forml' value=\""
 	. entites_html($auteur['nom_site'])
 	. "\" size='40' /><br />\n"
-	. "<b>"
+	. "<label for='url_site'><b>"
 	. _T('entree_url')
-	. "</b><br />\n"
-	. "<input type='text' name='url_site' class='forml' value=\""
+	. "</b></label><br />\n"
+	. "<input type='text' name='url_site' id='url_site' class='forml' value=\""
 	. entites_html($auteur['url_site'])
 	. "\" size='40' />\n"
 	. fin_cadre_enfonce(true)
 	. "\n<br />";
 
 	if ($auteur['pgp']) {
-		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", _T('entree_cle_pgp'))
-		. "<textarea name='pgp' class='forml' rows='4' cols='40'>"
+		$corps .= debut_cadre_enfonce("cadenas-24.gif", true, "", "<label for='pgp'>" . _T('entree_cle_pgp') . "</label>")
+		. "<textarea name='pgp' id='pgp' class='forml' rows='4' cols='40'>"
 		. entites_html($auteur['pgp'])
 		. "</textarea>\n"
 		. fin_cadre_enfonce(true);
@@ -131,9 +132,9 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 // Un redacteur n'a pas le droit de modifier son login !
 	if ($edit_login) {
-		$corps .= "<b>"._T('item_login')."</b> "
+		$corps .= "<label for='new_login'><b>"._T('item_login')."</b></label>"
 		. "<span style='color: red'>("._T('texte_plus_trois_car').")</span> :<br />\n"
-		. "<input type='text' name='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><br />\n";
+		. "<input type='text' name='new_login' id='new_login' class='formo' value=\"".entites_html($auteur['login'])."\" size='40' /><br />\n";
 	} else {
 		$corps .= "<fieldset style='padding:5'><legend><b>"._T('item_login')."</b><br />\n</legend><br /><b>".$auteur['login']."</b> "
 		. "<i> ("._T('info_non_modifiable').")</i>\n<br />";
@@ -141,11 +142,11 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 // On ne peut modifier le mot de passe en cas de source externe (par exemple LDAP)
 	if ($edit_pass) {
-		$res = "<b>"._T('entree_nouveau_passe')."</b> "
+		$res = "<label for='new_pass'><b>"._T('entree_nouveau_passe')."</b></label>"
 		. "<span style='color: red'>("._T('info_plus_cinq_car').")</span> :<br />\n"
-		. "<input type='password' name='new_pass' class='formo' value=\"\" size='40' /><br />\n"
-		. _T('info_confirmer_passe')."<br />\n"
-		. "<input type='password' name='new_pass2' class='formo' value=\"\" size='40' /><br />\n";
+		. "<input type='password' name='new_pass' id='new_pass' class='formo' value=\"\" size='40' /><br />\n"
+		. "<label for='new_pass2'>" . _T('info_confirmer_passe')."</label><br />\n"
+		. "<input type='password' name='new_pass2' id='new_pass2' class='formo' value=\"\" size='40' /><br />\n";
 		$corps .= $res;
 	}
 
@@ -178,11 +179,11 @@ function inc_auteur_infos_dist($auteur, $new, $echec, $edit, $id_article, $redir
 
 	// Lier a un article (creation d'un auteur depuis un article)
 	if ($id_article)
-		$corps .= "<input type='hidden' name='lier_id_article' value='$id_article' />\n";
+		$corps .= "<input type='hidden' name='lier_id_article' id='lier_id_article' value='$id_article' />\n";
 
 	// Redirection apres enregistrement ?
 	if ($redirect)
-		$corps .= "<input type='hidden' name='redirect' value=\"".attribut_html($redirect)."\" />\n";
+		$corps .= "<input type='hidden' name='redirect' id='redirect' value=\"".attribut_html($redirect)."\" />\n";
 
 	$corps .= "<div style='text-align: right'><input type='submit' value='"._T('bouton_enregistrer')."' class='fondo' /></div>";
 

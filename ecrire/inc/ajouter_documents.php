@@ -389,16 +389,16 @@ function liste_archive_jointe($valables, $zip, $type, $id, $mode, $id_document, 
 <input type='hidden' name='hash' value='$hash' />
 <input type='hidden' name='chemin' value='$zip' />
 <input type='hidden' name='arg' value='$arg' />
-<input type='radio' checked='checked' name='sousaction5' value='5' />" .
-	  	_T('upload_zip_telquel').
+<input type='radio' checked='checked' name='sousaction5' id='sousaction5_5' value='5' />" .
+	  "<label for='sousaction5_5'>" . _T('upload_zip_telquel'). "</label>" .
 		"<br />".
-		"<input type='radio' name='sousaction5' value='6' />".
-		_T('upload_zip_decompacter').
+		"<input type='radio' name='sousaction5' id='sousaction5_6' value='6' />".
+		"<label for='sousaction5_6'>" . _T('upload_zip_decompacter') . "</label>" .
 		"<ol>" .
 		liste_archive_taille($valables) .
 		"</ol>".
-		"<br /><input type='checkbox' name='sousaction4' value='4' />".
-		_T('les_deux').
+		"<br /><input type='checkbox' name='sousaction4' id='sousaction4_4' value='4' />".
+		"<label for='sousaction4_4'>" . _T('les_deux') . "</label>" .
 		"</div>".
 		"<div style='text-align: right;'><input class='fondo spip_xx-small' type='submit' value='".
 		_T('bouton_valider').

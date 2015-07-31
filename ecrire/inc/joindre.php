@@ -70,15 +70,16 @@ function inc_joindre_dist($v) {
 		$distant = "<br />\n<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
 			"\n\t<img src='"._DIR_IMG_PACK.'attachment.gif' .
 			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
+			"<label for='url'>" .
 			_T('info_referencer_doc_distant') .
-			"<br />\n\t<input name='url' class='fondo' value='http://' />" .
+			"</label><br />\n\t<input name='url' id='url' class='fondo' value='http://' />" .
 			"\n\t<div style='text-align: $spip_lang_right'><input name='sousaction2' type='submit' value='".
 			_T('bouton_choisir').
 			"' class='fondo' /></div>" .
 			"\n</div>";
 	}
 
-	$res = "<input name='fichier' type='file' class='forml spip_xx-small' size='15' />"
+	$res = "<input name='fichier' id='fichier' type='file' class='forml spip_xx-small' size='15' />"
 	. ($v['ancre']
 		? "\n\t\t<input type='hidden' name='ancre' value='".$v['ancre']."' />"
 		: ''
@@ -183,9 +184,9 @@ function afficher_transferer_upload($texte_upload, $dir)
 		}
 	else {  return
 		"\n<div style='color: #505050;'>"
-		._T('info_selectionner_fichier', $doc)
-		."&nbsp;:<br />\n" .
-		"\n<select name='chemin' size='1' class='fondl' style='width:100%;overflow:hidden;'>" .
+		."<label for='chemin'>" . _T('info_selectionner_fichier', $doc)
+		."</label>&nbsp;:<br />\n" .
+		"\n<select name='chemin' id='chemin' size='1' class='fondl' style='width:100%;overflow:hidden;'>" .
 		$texte_upload .
 		"\n</select>" .
 		"\n<div style='text-align: ".
