@@ -14,8 +14,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // $messages_vus en reference pour interdire l'affichage de message en double
 
-// http://doc.spip.org/@afficher_messages
-function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
+
+function afficher_ses_messages($titre, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
 
 	$requete = array('SELECT' => 'messages.id_message, messages.date_heure, messages.date_fin, messages.titre, messages.type, messages.rv', 'FROM' => "spip_messages AS messages$from", 'WHERE' => $where .(!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')'), 'ORDER BY'=> 'date_heure DESC');
 
@@ -41,7 +41,6 @@ function afficher_messages($titre, $from, $where, &$messages_vus, $afficher_aute
 	     . fin_cadre_couleur(true));
 }
 
-// http://doc.spip.org/@afficher_message_boucles
 function presenter_message_boucles($row, $afficher_auteurs)
 {
 	global $connect_id_auteur, $spip_lang_left, $spip_lang_rtl;
