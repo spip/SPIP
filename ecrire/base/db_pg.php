@@ -553,12 +553,12 @@ function spip_pg_errno() {
 }
 
 // http://doc.spip.org/@spip_pg_showtable
-function spip_pg_showtable($nom_table)
+function spip_pg_showtable($nom_table, $serveur='')
 {
 	$connexion = $GLOBALS['connexions'][$serveur ? $serveur : 0];
 	$link = $connexion['link'];
 
-	$res = pg_query($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name=" . _q($nom_table));
+	$res = pg_query($link, "SELECT column_name, column_default, data_type FROM information_schema.columns WHERE table_name ILIKE " . _q($nom_table));
 
 	if (!$res) return false;
 
@@ -567,13 +567,13 @@ function spip_pg_showtable($nom_table)
 		$fields[$field[0]] = $field[2] . (!$field[1] ? '' : (" DEFAULT " . $field[1]));
 	}
 
-	$res = pg_query($link, "SELECT indexdef FROM pg_indexes WHERE tablename=" . _q($nom_table));
+	$res = pg_query($link, "SELECT indexdef FROM pg_indexes WHERE tablename ILIKE " . _q($nom_table));
 	$keys = array();
 	while($index = pg_fetch_array($res, NULL, PGSQL_NUM)) {
 		if (preg_match('/CREATE\s+(UNIQUE\s+)?INDEX.*\((.*)\)$/',
 			       $index[0],$r)) {
 			$index = split(',', $r[2]);
-			$keys[($r[1] ? "PRIMARY KEY " : "KEY ") . $index[0]] = 
+			$keys[($r[1] ? "PRIMARY KEY" : ("KEY " . $index[0]))] = 
 			  $r[2];
 		}
 	}
@@ -667,7 +667,7 @@ function spip_pg_create($nom, $champs, $cles, $autoinc=false, $temporary=false, 
 	if (!$r)
 		spip_log("table $nom deja la");
 	else {
-		foreach($keys as $index) {@pg_query($link, $index);}
+		foreach($keys as $index) {pg_query($link, $index);}
 	} 
 	return $r;
 }
