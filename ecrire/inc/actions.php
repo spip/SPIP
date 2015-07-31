@@ -94,15 +94,15 @@ function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
 	if (is_string($corps))
 		return redirige_action_auteur($action,
 				$id,
-				'ajax_page',
-				"fonction=$action&script=$script$args_ajax",
+				$action,
+				"var_ajax=1&script=$script$args_ajax",
 				$corps,
 				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $pere)'");
 	list($clic, $class) = $corps;
 	$href = redirige_action_auteur($action,
 				$id,
-				'ajax_page',
-				"fonction=$action&script=$script$args_ajax");
+				$action,
+				"var_ajax=1&script=$script$args_ajax");
 	return "<div class='$class' onclick='AjaxSqueeze(\"$href\",$pere)'>$clic</div>";
 			
 }

@@ -12,19 +12,15 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-# afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
-
-function inc_ajax_plonger_dist()
+function exec_petitionner_dist()
 {
-	global $id, $exclus, $col, $rac;
-	$id = intval($id);
-	$exclus = intval($exclus);
-	$col = intval($col);
+	global $id_article, $script;
+	$id_article = intval($id_article);
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_afficher_rubrique ($id, htmlentities($rac), "", $col, $exclus);
+	include_spip('inc/petition');
+	include_spip('inc/presentation');
+	include_spip('inc/actions');
+
+	echo formulaire_petitionner($id_article, $script, "&id_article=$id_article", true);
 }
-
 ?>

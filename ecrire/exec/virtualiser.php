@@ -42,7 +42,7 @@ function formulaire_virtualiser($id_article, $virtuel, $script, $args)
 	return ajax_action_auteur('virtualiser', $id_article, $r, $script, $args, $args);
 }
 
-function inc_ajax_virtualiser_dist()
+function exec_virtualiser_dist()
 {
 	global $id_article, $script;
 	$id_article = intval($id_article);

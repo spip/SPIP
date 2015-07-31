@@ -12,16 +12,19 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# petit moteur de recherche sur les rubriques
 
-function inc_ajax_naviguer_dist()
+# afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
+
+function exec_plonger_dist()
 {
-	global $id;
+	global $id, $exclus, $col, $rac;
 	$id = intval($id);
+	$exclus = intval($exclus);
+	$col = intval($col);
 
 	include_spip('inc/texte');
 	include_spip('inc/mini_nav');
-	return mini_nav ($id, "aff_nav_recherche", 
-			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
-			"';", 0, true);
+	return mini_afficher_rubrique ($id, htmlentities($rac), "", $col, $exclus);
 }
+
+?>

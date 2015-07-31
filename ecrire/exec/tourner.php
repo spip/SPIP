@@ -12,17 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-# afficher un mini-navigateur de rubriques
-
-function inc_ajax_selectionner_dist()
+function exec_tourner_dist()
 {
-	global $id, $exclus, $rac;
+	global $id_document, $script, $id, $type, $ancre;
 	$id = intval($id);
-	$exclus = intval($exclus);
+	$id_document = intval($id_document);
 
-	include_spip('inc/texte');
-	include_spip('inc/mini_nav');
-	return mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac);
+	include_spip('inc/documents');
+	include_spip('inc/presentation');
 
+	echo formulaire_tourner($id_document, array(), $script, 'ajax', $type);
 }
+
 ?>

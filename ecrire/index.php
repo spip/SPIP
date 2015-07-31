@@ -182,17 +182,13 @@ else
 		verifie_include_plugins();
 	}
 
-if ($exec != 'ajax_page') {
-	$var_f = charger_fonction($exec);
-	$var_f();
- } else {
-	$var_f = 'ajax_' . _request('fonction');
-	$var_f = charger_fonction($var_f, 'inc');
-	
-// recuperer le resulat pour reencodage et envoi du prefixe
-// (attention: ca peut envoyer des entetes ==> envoyer le prefixe apres)
-	$r = $var_f(); 
+$var_f = charger_fonction($exec);
+$r = $var_f(); 
 
+if (isset($var_ajax)) {
+	
+// reencodage du resultat et envoi du prefixe si retour d'Ajax
+// (attention: le result pouvant envoyer des entetes, envoyer le prefixe apres)
 	include_spip('inc/charsets');
 	$charset = $GLOBALS['meta']["charset"];
 

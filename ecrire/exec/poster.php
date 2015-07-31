@@ -12,15 +12,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function inc_ajax_documenter_dist()
+function exec_poster_dist()
 {
-	global $id_document, $script, $id, $type, $ancre;
-	$id = intval($id);
-	$id_document = intval($id_document);
+	global $id_article, $script;
+	$id_article = intval($id_article);
 
-	include_spip('inc/documents');
-	include_spip('inc/presentation');
+	include_spip('inc/forum');
+	include_spip('inc/actions');
 
-	echo formulaire_documenter($id_document, array(), $script, $type, $id, $ancre);
+	echo formulaire_poster($id_article, $script, "&id_article=$id_article", true);
 }
 ?>
