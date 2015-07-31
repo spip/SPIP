@@ -14,6 +14,8 @@
  * Ce fichier contient les fonctions gérant
  * les instructions SQL pour MySQL
  *
+ * Ces instructions utilisent la librairie PHP Mysqli
+ *
  * @package SPIP\Core\SQL\MySQL
  */
  
@@ -21,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Crée la première connexion à un serveur MySQL
+ * Crée la première connexion à un serveur MySQL via MySQLi
  * 
  * @param string $host     Chemin du serveur
  * @param int $port        Port de connexion
@@ -34,11 +36,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     - tableau décrivant la connexion sinon
  */
 function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
-	if (!charger_php_extension('mysql')) return false;
+	if (!charger_php_extension('mysqli')) return false;
 	if ($port > 0) $host = "$host:$port";
-	$link = @mysql_connect($host, $login, $pass, true);
+	$link = @mysqli_connect($host, $login, $pass);
 	if (!$link) {
-		spip_log('Echec mysql_connect. Erreur : ' . mysql_error(),'mysql.'._LOG_HS);
+		spip_log('Echec mysql_connect. Erreur : ' . mysqli_error(),'mysql.'._LOG_HS);
 		return false;
 	}
 	$last = '';
@@ -46,13 +48,14 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		$ok = $link;
 		$db = 'spip';
 	} else {
-		$ok = spip_mysql_selectdb($db);
+		$ok = mysqli_select_db($link, $db);
 		if (defined('_MYSQL_SET_SQL_MODE') 
 		  OR defined('_MYSQL_SQL_MODE_TEXT_NOT_NULL') // compatibilite
 		  )
-			mysql_query($last = "set sql_mode=''");
+			mysqli_query($link, $last = "set sql_mode=''");
 	}
-	spip_log("Connexion vers $host, base $db, prefixe $prefixe " . ($ok ? "operationnelle sur $link" : 'impossible'), _LOG_DEBUG);
+
+	spip_log("Connexion MySQLi vers $host, base $db, prefixe $prefixe " . ($ok ? "operationnelle" : 'impossible'), _LOG_DEBUG);
 
 	return !$ok ? false : array(
 		'db' => $db,
@@ -62,44 +65,45 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 		);
 }
 
+
 $GLOBALS['spip_mysql_functions_1'] = array(
-		'alter' => 'spip_mysql_alter',
-		'count' => 'spip_mysql_count',
-		'countsel' => 'spip_mysql_countsel',
-		'create' => 'spip_mysql_create',
+		'alter'       => 'spip_mysql_alter',
+		'count'       => 'spip_mysql_count',
+		'countsel'    => 'spip_mysql_countsel',
+		'create'      => 'spip_mysql_create',
 		'create_base' => 'spip_mysql_create_base',
 		'create_view' => 'spip_mysql_create_view',
 		'date_proche' => 'spip_mysql_date_proche',
-		'delete' => 'spip_mysql_delete',
-		'drop_table' => 'spip_mysql_drop_table',
-		'drop_view' => 'spip_mysql_drop_view',
-		'errno' => 'spip_mysql_errno',
-		'error' => 'spip_mysql_error',
-		'explain' => 'spip_mysql_explain',
-		'fetch' => 'spip_mysql_fetch',
-		'seek' => 'spip_mysql_seek',
-		'free' => 'spip_mysql_free',
-		'hex' => 'spip_mysql_hex',
-		'in' => 'spip_mysql_in', 
-		'insert' => 'spip_mysql_insert',
-		'insertq' => 'spip_mysql_insertq',
+		'delete'      => 'spip_mysql_delete',
+		'drop_table'  => 'spip_mysql_drop_table',
+		'drop_view'   => 'spip_mysql_drop_view',
+		'errno'       => 'spip_mysql_errno',
+		'error'       => 'spip_mysql_error',
+		'explain'     => 'spip_mysql_explain',
+		'fetch'       => 'spip_mysql_fetch',
+		'seek'        => 'spip_mysql_seek',
+		'free'        => 'spip_mysql_free',
+		'hex'         => 'spip_mysql_hex',
+		'in'          => 'spip_mysql_in', 
+		'insert'      => 'spip_mysql_insert',
+		'insertq'     => 'spip_mysql_insertq',
 		'insertq_multi' => 'spip_mysql_insertq_multi',
-		'listdbs' => 'spip_mysql_listdbs',
-		'multi' => 'spip_mysql_multi',
-		'optimize' => 'spip_mysql_optimize',
-		'query' => 'spip_mysql_query',
-		'quote' => 'spip_mysql_quote',
-		'replace' => 'spip_mysql_replace',
+		'listdbs'     => 'spip_mysql_listdbs',
+		'multi'       => 'spip_mysql_multi',
+		'optimize'    => 'spip_mysql_optimize',
+		'query'       => 'spip_mysql_query',
+		'quote'       => 'spip_mysql_quote',
+		'replace'     => 'spip_mysql_replace',
 		'replace_multi' => 'spip_mysql_replace_multi',
-		'repair' => 'spip_mysql_repair',
-		'select' => 'spip_mysql_select',
-		'selectdb' => 'spip_mysql_selectdb',
+		'repair'      => 'spip_mysql_repair',
+		'select'      => 'spip_mysql_select',
+		'selectdb'    => 'spip_mysql_selectdb',
 		'set_charset' => 'spip_mysql_set_charset',
 		'get_charset' => 'spip_mysql_get_charset',
-		'showbase' => 'spip_mysql_showbase',
-		'showtable' => 'spip_mysql_showtable',
-		'update' => 'spip_mysql_update',
-		'updateq' => 'spip_mysql_updateq',
+		'showbase'    => 'spip_mysql_showbase',
+		'showtable'   => 'spip_mysql_showtable',
+		'update'      => 'spip_mysql_update',
+		'updateq'     => 'spip_mysql_updateq',
 
   // association de chaque nom http d'un charset aux couples MySQL 
 		'charsets' => array(
@@ -115,6 +119,18 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 
 
 /**
+ * Retrouver un link d'une connexion MySQL via MySQLi
+ * 
+ * @param string $serveur Nom du serveur
+ * @return Object Information de connexion pour mysqli
+ */
+function _mysql_link($serveur = ''){
+	$link = &$GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
+	return $link;
+}
+
+
+/**
  * Définit un charset pour la connexion avec Mysql
  * 
  * @param string $charset Charset à appliquer
@@ -125,7 +141,7 @@ $GLOBALS['spip_mysql_functions_1'] = array(
 function spip_mysql_set_charset($charset, $serveur='',$requeter=true){
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	spip_log("changement de charset sql : "."SET NAMES "._q($charset), _LOG_DEBUG);
-	return mysql_query($connexion['last'] = "SET NAMES "._q($charset));
+	return mysqli_query($connexion['link'], $connexion['last'] = "SET NAMES "._q($charset));
 }
 
 
@@ -142,8 +158,9 @@ function spip_mysql_get_charset($charset=array(), $serveur='',$requeter=true){
 	$connexion['last'] = $c = "SHOW CHARACTER SET"
 	. (!$charset ? '' : (" LIKE "._q($charset['charset'])));
 
-	return spip_mysql_fetch(mysql_query($c), NULL, $serveur);
+	return spip_mysql_fetch(mysqli_query($connexion['link'], $c), NULL, $serveur);
 }
+
 
 /**
  * Exécute une requête Mysql (obsolète, ne plus utiliser)
@@ -178,7 +195,7 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	$query = traite_query($query, $db, $prefixe);
+	$query = _mysql_traite_query($query, $db, $prefixe);
 
 	// renvoyer la requete inerte si demandee
 	if (!$requeter) return $query;
@@ -187,7 +204,7 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 		include_spip('public/tracer');
 		$t = trace_query_start();
 	} else $t = 0 ;
- 
+
 	$connexion['last'] = $query;
 
 	// ajouter un debug utile dans log/mysql-slow.log ?
@@ -201,7 +218,7 @@ function spip_mysql_query($query, $serveur='',$requeter=true) {
 		$debug = ' /*'.str_replace('*/','@/',$debug).' */';
 	}
 
-	$r = $link ? mysql_query($query.$debug, $link) : mysql_query($query.$debug);
+	$r = mysqli_query($link, $query.$debug);
 
 	if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
@@ -227,6 +244,7 @@ function spip_mysql_alter($query, $serveur='',$requeter=true){
 	return spip_mysql_query("ALTER ".$query, $serveur, $requeter); # i.e. que PG se debrouille
 }
 
+
 /**
  * Optimise une table MySQL
  * 
@@ -239,6 +257,7 @@ function spip_mysql_optimize($table, $serveur='',$requeter=true){
 	spip_mysql_query("OPTIMIZE TABLE ". $table);
 	return true;
 }
+
 
 /**
  * Retourne une explication de requête (Explain) MySQL
@@ -255,8 +274,8 @@ function spip_mysql_explain($query, $serveur='',$requeter=true){
 	$link = $connexion['link'];
 	$db = $connexion['db'];
 
-	$query = 'EXPLAIN ' . traite_query($query, $db, $prefixe);
-	$r = $link ? mysql_query($query, $link) : mysql_query($query);
+	$query = 'EXPLAIN ' . _mysql_traite_query($query, $db, $prefixe);
+	$r = mysqli_query($link, $query);
 	return spip_mysql_fetch($r, NULL, $serveur);
 }
 
@@ -305,6 +324,7 @@ function spip_mysql_select($select, $from, $where='',
 	$r = spip_mysql_query($query, $serveur, $requeter);
 	return $r ? $r : $query;
 }
+
 
 /**
  * Prépare une clause order by
@@ -390,6 +410,7 @@ function calculer_mysql_expression($expression, $v, $join = 'AND'){
 	}
 }
 
+
 /**
  * Renvoie des `nom AS alias`
  * 
@@ -418,12 +439,14 @@ function spip_mysql_select_as($args)
 	return substr($res,2);
 }
 
+
 /**
  * Changer les noms des tables ($table_prefix)
  * 
  * TODO: Quand tous les appels SQL seront abstraits on pourra l'améliorer
  */
-define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
+define('_SQL_PREFIXE_TABLE_MYSQL', '/([,\s])spip_/S');
+
 
 /**
  * Prépare le texte d'une requête avant son exécution
@@ -435,7 +458,7 @@ define('_SQL_PREFIXE_TABLE', '/([,\s])spip_/S');
  * @param string $prefixe   Préfixe de tables à appliquer
  * @return string           Requête préparée
  */
-function traite_query($query, $db='', $prefixe='') {
+function _mysql_traite_query($query, $db='', $prefixe='') {
 
 	if ($GLOBALS['mysql_rappel_nom_base'] AND $db)
 		$pref = '`'. $db.'`.';
@@ -455,13 +478,13 @@ function traite_query($query, $db='', $prefixe='') {
 		if (stripos($suite,"SELECT")!==false) {
 			list($suite,$textes) = query_echappe_textes($suite);
 			if (preg_match('/^(.*?)([(]\s*SELECT\b.*)$/si', $suite, $r))
-		    $suite = $r[1] . traite_query($r[2], $db, $prefixe);
+		    $suite = $r[1] . _mysql_traite_query($r[2], $db, $prefixe);
 			$suite = query_reinjecte_textes($suite, $textes);
 		}
 	}
-	$r = preg_replace(_SQL_PREFIXE_TABLE, '\1'.$pref, $query) . $suite;
+	$r = preg_replace(_SQL_PREFIXE_TABLE_MYSQL, '\1'.$pref, $query) . $suite;
 
-	#spip_log("traite_query: " . substr($r,0, 50) . ".... $db, $prefixe", _LOG_DEBUG);
+	#spip_log("_mysql_traite_query: " . substr($r,0, 50) . ".... $db, $prefixe", _LOG_DEBUG);
 	return $r;
 }
 
@@ -470,25 +493,31 @@ function traite_query($query, $db='', $prefixe='') {
  *
  * @param string $db
  *     Nom de la base à utiliser
+ * @param string $serveur
+ *     Nom du connecteur
+ * @param bool $requeter
+ *     Inutilisé
  * 
  * @return bool
  *     - True cas de succès.
  *     - False en cas d'erreur.
 **/
-function spip_mysql_selectdb($db) {
-	$ok = mysql_select_db($db);
+function spip_mysql_selectdb($db, $serveur = '', $requeter = true) {
+	$link = _mysql_link($serveur);
+	$ok = mysqli_select_db($link, $db);
 	if (!$ok)
-		spip_log('Echec mysql_selectdb. Erreur : ' . mysql_error(),'mysql.'._LOG_CRITIQUE);
+		spip_log('Echec mysql_selectdb. Erreur : ' . mysqli_error($link), 'mysql.'._LOG_CRITIQUE);
 	return $ok;
 }
 
 
 /**
- * Retourne les bases de donnees accessibles 
+ * Retourne les bases de données accessibles 
  *
- * Retourne un tableau du nom de toutes les bases de donnees
+ * Retourne un tableau du nom de toutes les bases de données
  * accessibles avec les permissions de l'utilisateur SQL
  * de cette connexion.
+ * 
  * Attention on n'a pas toujours les droits !
  * 
  * @param string $serveur
@@ -501,11 +530,12 @@ function spip_mysql_selectdb($db) {
 function spip_mysql_listdbs($serveur='',$requeter=true) {
 	$dbs = array();
 	if ($res = spip_mysql_query("SHOW DATABASES", $serveur)){
-		while($row = mysql_fetch_assoc($res))
+		while($row = mysqli_fetch_assoc($res))
 			$dbs[] = $row['Database'];
 	}
 	return $dbs;
 }
+
 
 /**
  * Crée une table SQL
@@ -535,7 +565,7 @@ function spip_mysql_create($nom, $champs, $cles, $autoinc=false, $temporary=fals
 		return;
 
 	$res = spip_mysql_query("SELECT version() as v", $serveur);
-	if ($row = mysql_fetch_array($res)
+	if ($row = mysqli_fetch_array($res)
 	 && (version_compare($row['v'],'5.0','>=')))
 		spip_mysql_query("SET sql_mode=''");
 
@@ -597,6 +627,7 @@ function _mysql_remplacements_definitions_table($query){
 	$query = preg_replace(array_keys($remplace), $remplace, $query);
 	return $query;
 }
+
 
 /**
  * Crée une base de données MySQL
@@ -708,6 +739,7 @@ function spip_mysql_repair($table, $serveur='',$requeter=true)
 	return spip_mysql_query("REPAIR TABLE `$table`", $serveur, $requeter);
 }
 
+
 define('_MYSQL_RE_SHOW_TABLE', '/^[^(),]*\(((?:[^()]*\((?:[^()]*\([^()]*\))?[^()]*\)[^()]*)*)\)[^()]*$/');
 /**
  * Obtient la description d'une table ou vue MySQL
@@ -733,7 +765,7 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	if (!$s) return '';
 	if (!$requeter) return $s;
 
-	list(,$a) = mysql_fetch_array($s ,MYSQL_NUM);
+	list(,$a) = mysqli_fetch_array($s ,MYSQLI_NUM);
 	if (preg_match(_MYSQL_RE_SHOW_TABLE, $a, $r)){
 		$desc = $r[1];
 		// extraction d'une KEY éventuelle en prenant garde de ne pas
@@ -795,20 +827,21 @@ function spip_mysql_showtable($nom_table, $serveur='',$requeter=true)
 	return "";
 }
 
+
 /**
  * Rècupère une ligne de résultat
  *
  * Récupère la ligne suivante d'une ressource de résultat
  * 
  * @param Ressource $r     Ressource de résultat (issu de sql_select)
- * @param string $t        Structure de résultat attendu (défaut MYSQL_ASSOC)
+ * @param string $t        Structure de résultat attendu (défaut MYSQLI_ASSOC)
  * @param string $serveur  Nom de la connexion
  * @param bool $requeter   Inutilisé
  * @return array           Ligne de résultat
  */
 function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
-	if (!$t) $t = MYSQL_ASSOC;
-	if ($r) return mysql_fetch_array($r, $t);
+	if (!$t) $t = MYSQLI_ASSOC;
+	if ($r) return mysqli_fetch_array($r, $t);
 }
 
 /**
@@ -821,8 +854,9 @@ function spip_mysql_fetch($r, $t='', $serveur='',$requeter=true) {
  * @return bool True si déplacement réussi, false sinon.
 **/
 function spip_mysql_seek($r, $row_number, $serveur='',$requeter=true) {
-	if ($r and mysql_num_rows($r)) return mysql_data_seek($r,$row_number);
+	if ($r and mysqli_num_rows($r)) return mysqli_data_seek($r,$row_number);
 }
+
 
 
 /**
@@ -844,13 +878,14 @@ function spip_mysql_countsel($from = array(), $where = array(),
 	$c = !$groupby ? '*' : ('DISTINCT ' . (is_string($groupby) ? $groupby : join(',', $groupby)));
 
 	$r = spip_mysql_select("COUNT($c)", $from, $where,'', '', '', $having, $serveur, $requeter);
-
 	if (!$requeter) return $r;
-	if (!is_resource($r)) return 0;
-	list($c) = mysql_fetch_array($r, MYSQL_NUM);
-	mysql_free_result($r);
+	if (!$r instanceof mysqli_result) return 0;
+	list($c) = mysqli_fetch_array($r, MYSQLI_NUM);
+	mysqli_free_result($r);
 	return $c;
 }
+
+
 
 /**
  * Retourne la dernière erreur generée
@@ -870,10 +905,11 @@ function spip_mysql_countsel($from = array(), $where = array(),
  **/
 function spip_mysql_error($query='', $serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0]['link'];
-	$s = $link ? mysql_error($link) : mysql_error();
+	$s = mysqli_error($link);
 	if ($s) spip_log("$s - $query", 'mysql.'._LOG_ERREUR);
 	return $s;
 }
+
 
 /**
  * Retourne le numero de la dernière erreur SQL
@@ -887,7 +923,7 @@ function spip_mysql_error($query='', $serveur='',$requeter=true) {
  **/
 function spip_mysql_errno($serveur='',$requeter=true) {
 	$link = $GLOBALS['connexions'][$serveur ? $serveur : 0]['link'];
-	$s = $link ? mysql_errno($link) : mysql_errno();
+	$s = mysqli_errno($link);
 	// 2006 MySQL server has gone away
 	// 2013 Lost connection to MySQL server during query
 	if (in_array($s, array(2006,2013)))
@@ -895,6 +931,7 @@ function spip_mysql_errno($serveur='',$requeter=true) {
 	if ($s) spip_log("Erreur mysql $s", _LOG_ERREUR);
 	return $s;
 }
+
 
 /**
  * Retourne le nombre de lignes d’une ressource de sélection obtenue
@@ -906,8 +943,9 @@ function spip_mysql_errno($serveur='',$requeter=true) {
  * @return int               Nombre de lignes
  */
 function spip_mysql_count($r, $serveur='',$requeter=true) {
-	if ($r)	return mysql_num_rows($r);
+	if ($r)	return mysqli_num_rows($r);
 }
+
 
 
 /**
@@ -922,8 +960,9 @@ function spip_mysql_count($r, $serveur='',$requeter=true) {
  * @return bool              True si réussi
  */
 function spip_mysql_free($r, $serveur='',$requeter=true) {
-	return (is_resource($r)?mysql_free_result($r):false);
+	return (($r instanceof mysqli_result)?mysqli_free_result($r):false);
 }
+
 
 /**
  * Insère une ligne dans une table 
@@ -966,8 +1005,8 @@ function spip_mysql_insert($table, $champs, $valeurs, $desc=array(), $serveur=''
 
 	$connexion['last'] = $query;
 	#spip_log($query, 'mysql.'._LOG_DEBUG);
-	if (mysql_query($query, $link))
-		$r = mysql_insert_id($link);
+	if (mysqli_query($link, $query))
+		$r = mysqli_insert_id($link);
 	else {
 	  if ($e = spip_mysql_errno($serveur))	// Log de l'erreur eventuelle
 		$e .= spip_mysql_error($query, $serveur); // et du fautif
@@ -1153,13 +1192,13 @@ function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
 			$serveur, $requeter);
 	if (!$requeter) return $res;
 	if ($res){
-		$connexion = &$GLOBALS['connexions'][$serveur ? $serveur : 0];
-		$link = $connexion['link'];
-		return $link ? mysql_affected_rows($link) : mysql_affected_rows();
+		$link = _mysql_link($serveur);
+		return mysqli_affected_rows($link);
 	}
 	else
 		return false;
 }
+
 
 /**
  * Insère où met à jour une entrée d’une table SQL
@@ -1167,7 +1206,7 @@ function spip_mysql_delete($table, $where='', $serveur='',$requeter=true) {
  * La clé ou les cles primaires doivent être présentes dans les données insérés.
  * La fonction effectue une protection automatique des données.
  *
- * Préférer à cette fonction updateq ou insertq.
+ * Préférez updateq ou insertq.
  * 
  * @param string $table
  *     Nom de la table SQL
@@ -1225,6 +1264,7 @@ function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur=
 }
 
 
+
 /**
  * Retourne l'instruction SQL pour obtenir le texte d'un champ contenant
  * une balise `<multi>` dans la langue indiquée
@@ -1235,7 +1275,7 @@ function spip_mysql_replace_multi($table, $tab_couples, $desc=array(), $serveur=
  * @param string $lang  Langue à extraire
  * @return string       Texte de sélection pour la requête
  */
-function spip_mysql_multi ($objet, $lang) {
+function spip_mysql_multi($objet, $lang) {
 	$lengthlang = strlen("[$lang]");
 	$posmulti = "INSTR(".$objet.", '<multi>')";
 	$posfinmulti = "INSTR(".$objet.", '</multi>')";
@@ -1333,6 +1373,7 @@ function spip_mysql_date_proche($champ, $interval, $unite)
 	. '))';
 }
 
+
 /**
  * Retourne une expression IN pour le gestionnaire de base de données
  *
@@ -1391,6 +1432,8 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	return spip_mysql_in($val, $valeurs, $not);
 }
 
+
+
 /**
  * Renvoie les bons echappements (mais pas sur les fonctions comme NOW())
  *
@@ -1413,6 +1456,8 @@ function spip_mysql_cite($v, $type) {
 	}
 	return  ("'" . addslashes($v) . "'");
 }
+
+
 
 // Ces deux fonctions n'ont pas d'equivalent exact PostGres
 // et ne sont la que pour compatibilite avec les extensions de SPIP < 1.9.3
@@ -1470,15 +1515,16 @@ function spip_release_lock($nom) {
 	@mysql_query($q);
 }
 
+
 /**
- * Teste si on a les fonctions MySQL (pour l'install)
+ * Teste si on a les fonctions MySQLi (pour l'install)
  * 
  * @return bool
  *     True si on a les fonctions, false sinon
  */
 function spip_versions_mysql() {
-	charger_php_extension('mysql');
-	return function_exists('mysql_query');
+	charger_php_extension('mysqli');
+	return function_exists('mysqli_query');
 }
 
 
@@ -1505,7 +1551,6 @@ function test_rappel_nom_base_mysql($server_db)
 		"/* echec de test_rappel_nom_base_mysql a l'installation. */\n";
 	}
 }
-
 
 /**
  * Teste si on peut changer les modes de MySQL
