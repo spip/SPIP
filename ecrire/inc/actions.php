@@ -105,15 +105,15 @@ function redirige_action_auteur($action, $arg, $ret, $gra='', $mode=false, $atts
 		$atts);
 }
 
-
 // Retourne un formulaire d'execution de $action sur $id,
 // revenant a l'envoyeur $script d'arguments $args.
 // Utilise Ajax si dispo, en ecrivant le resultat dans le innerHTML du noeud
 // d'attribut  id = $action-$id (cf. AjaxSqueeze dans layer.js)
 
 // http://doc.spip.org/@ajax_action_auteur
-function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
+function ajax_action_auteur($action, $id, $script, $args, $corps=false, $args_ajax='')
 {
+	$ancre = "$action-" . intval($id);
 
 	// Methode traditionnelle
 	if ($_COOKIE['spip_accepte_ajax'] != 1) {
@@ -121,40 +121,45 @@ function ajax_action_auteur($action, $id, $corps, $script, $args_ajax, $args)
 			return redirige_action_auteur($action,
 				$id,
 				$script,
-				$args,
+				"$args#$ancre",
 				$corps,
 				"\nmethod='post'");
 		} else {
-			list($clic, $class) = $corps;
-			$href = redirige_action_auteur($action,
-				$id,
-				$script,
-				$args,
-				null,
-				"\nmethod='post'");
-			return "<div class='$class'><a href='$href'>$clic</a></div>";
+			list($clic, $att) = $corps;
+
+			$clic = "<a href='"
+			.  redirige_action_auteur($action,
+						  $id,
+						  $script,
+						  "$args#$ancre",
+						  false)
+			. "'>$clic</a>";
+
+			return (!$att)
+			? $clic
+			: "<div$att'>$clic</div>";
 		}
 	}
 
 	//
 	// Ajax
 	//
-	$pere = '"' . "$action-" . intval($id) . '"';
-
+	$ancre = '"' . $ancre . '"';
+	if ($args AND !$args_ajax) $args_ajax = "&$args";
 	if (is_string($corps)) {
 		return redirige_action_auteur($action,
 				$id,
 				$action,
 				"var_ajax=1&script=$script$args_ajax",
 				$corps,
-				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $pere)'");
+				"\nmethod='post' onsubmit='return AjaxSqueeze(this, $ancre)'");
 	} else {
-		list($clic, $class) = $corps;
+		list($clic, $att) = $corps;
 		$href = redirige_action_auteur($action,
 				$id,
 				$action,
 				"var_ajax=1&script=$script$args_ajax");
-		return "<div class='$class' onclick='AjaxSqueeze(\"$href\",$pere)'>$clic</div>";
+		return "<div$att><a onclick='AjaxSqueeze(\"$href\",$ancre)'>$clic</a></div>";
 	}
 }
 

@@ -480,11 +480,11 @@ function bouton_tourner_document($id, $id_document, $script, $rot, $type, $img, 
 {
   return ajax_action_auteur("tourner",
 			    "$id_document-$rot",
-			    array(http_img_pack($img, $title, ''),
-				  'bouton_rotation'),
 			    $script,
-"&id_document=$id_document&id=$id&type=$type",
-"&show_docs=$id_document&id_$type=$id#tourner-$id_document");
+			    "show_docs=$id_document&id_$type=$id#tourner-$id_document",
+			    array(http_img_pack($img, $title, ''),
+				  " class='bouton_rotation'"),
+			    "&id_document=$id_document&id=$id&type=$type");
 }
 
 //
@@ -926,7 +926,7 @@ function formulaire_documenter($id_document, $document, $script, $type, $id, $an
 	  "' type='submit' />" .
 	  "</div>\n";
 
-	$corps = ajax_action_auteur("documenter", $id_document, $corps, $script, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre","show_docs=$id_document&id_$type=$id#$ancre");
+	$corps = ajax_action_auteur("documenter", $id_document, $script, "show_docs=$id_document&id_$type=$id#$ancre", $corps, "&id_document=$id_document&id=$id&type=$type&ancre=$ancre");
 
 	$corps .= 
 	  $vignette .
