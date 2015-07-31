@@ -12,7 +12,7 @@ define("_ECRIRE_INC_VERSION", "1");
 // (utilise pour les modifs de la base de donnees)
 //
 
-$spip_version = 1.411; // version de la base
+$spip_version = 1.412; // version de la base
 
 // dernier tag connu ou date si cvs
 if (! ereg('Name: v(.*) ','$Name$', $regs))

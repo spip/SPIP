@@ -14,7 +14,6 @@ $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
-$forums_publics = lire_meta("forums_publics");
 
 $requete_fichier = "articles.php3?id_article=$id_article";
 
@@ -200,6 +199,22 @@ echo "</div>\n";
 // Suivi forums publics
 //
 
+// fonction dupliquee dans inc-forum.php3
+function get_forums_publics($id_article=0) {
+	$forums_publics = lire_meta("forums_publics");
+	if ($id_article) {
+		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
+		$res = mysql_query($query);
+		if ($obj = mysql_fetch_object($res))
+			$forums_publics = $obj->accepter_forum;
+	} else { // dans ce contexte, inutile
+		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+	}
+	return $forums_publics;
+}
+
+$forums_publics = get_forums_publics($id_article);
+
 if ($forums_publics != 'non' AND acces_rubrique($rubrique_article) AND $connect_statut == '0minirezo' AND $options == 'avancees' AND $statut_article == 'publie') {
 	echo "<p align='center'>\n";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><b>";
@@ -246,20 +261,14 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND ($o
 // Accepter forums...
 //
 
-$forums_publics = lire_meta("forums_publics");
+/* $forums_publics = lire_meta("forums_publics"); */
 
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == 'avancees' AND $forums_publics != "non") {
+if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == 'avancees') {
 
 	if ($change_accepter_forum) {
-		$query_pet="UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";	
+		$query_pet="UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";
 		$result_pet=mysql_query($query_pet);
-	}
-
-	$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-	$result = mysql_query($query);
-
-	if ($row = mysql_fetch_array($result)) {
-		$accepter_forum=$row["accepter_forum"];
+		$forums_publics = $change_accepter_forum;
 	}
 
 	if (!$boite_ouverte) {
@@ -277,18 +286,36 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 	echo "\n<form action='articles.php3' method='get'>";
 	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
-	if ($accepter_forum != "non") {
-		echo "<P><input type='radio' name='change_accepter_forum' value='oui' id='accepterforum' checked>";
-		echo "<B><label for='accepterforum'>Article avec forum (fonctionnement normal)</label></B>";
-		echo "<P><input type='radio' name='change_accepter_forum' value='non' id='refuserforum'>";
-		echo "<label for='refuserforum'>Ne pas afficher de forum pour cet article.</label>";
+
+	if ($forums_publics == "pos") {
+		echo "<P><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos' checked>";
+		echo "<B><label for='accepterforumpos'> mod&eacute;r&eacute; &agrave; posteriori</label></B>";
+	} else {
+		echo "<P><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos'>";
+		echo "<label for='accepterforumpos'> mod&eacute;r&eacute; &agrave; posteriori</label>";
 	}
-	else {
-		echo "<P><input type='radio' name='change_accepter_forum' value='oui' id='accepterforum'>";
-		echo "<label for='accepterforum'>Article avec forum (fonctionnement normal)</label>";
-		echo "<P><input type='radio' name='change_accepter_forum' value='non' id='refuserforum' checked>";
-		echo "<B><label for='refuserforum'>Ne pas afficher de forum pour cet article.</label></B>";
+	if ($forums_publics == "pri") {
+		echo "<P><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri' checked>";
+		echo "<B><label for='accepterforumpri'> mod&eacute;r&eacute; &agrave; priori</label></B>";
+	} else {
+		echo "<P><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri'>";
+		echo "<label for='accepterforumpri'> mod&eacute;r&eacute; &agrave; priori</label>";
 	}
+	if ($forums_publics == "abo") {
+		echo "<P><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo' checked>";
+		echo "<B><label for='accepterforumabo'> mod&eacute;r&eacute; sur abonnement</label></B>";
+	} else {
+		echo "<P><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo'>";
+		echo "<label for='accepterforumabo'> mod&eacute;r&eacute; sur abonnement</label>";
+	}
+	if ($forums_publics == "non") {
+		echo "<P><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon' checked>";
+		echo "<B><label for='accepterforumnon'>pas de forum</label></B>";
+	} else {
+		echo "<P><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon'>";
+		echo "<label for='accepterforumnon'>pas de forum</label>";
+	}
+
 	echo "<p align='right'><input type='submit' name='Changer' class='fondo' value='Changer'></p>\n";
 	echo "</form>";
 	echo fin_block();

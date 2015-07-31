@@ -32,6 +32,18 @@ if ($changer_config == 'oui') {
 		OR ($forums_publics AND ($forums_publics != lire_meta("forums_publics"))))
 		$purger_skel = true;
 
+	// appliquer les changements de moderation forum
+	// forums_publics_appliquer : futur, saufnon, tous
+	$requete_appliquer = '';
+	$accepter_forum = substr($forums_publics,0,3);
+	if ($forums_publics_appliquer == 'saufnon') {
+		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE NOT (accepter_forum='non')";
+	} else if ($forums_publics_appliquer == 'tous') {
+		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum'";
+	}
+	if ($requete_appliquer) mysql_query($requete_appliquer);
+
+
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 
 	ecrire_meta("nom_site", $nom_site);
@@ -396,82 +408,91 @@ debut_cadre_relief();
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='IMG2/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Mode de fonctionnement des forums publics</FONT></B> ".aide ("confforums")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='IMG2/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Mode de fonctionnement par d&eacute;faut des forums publics</FONT></B> ".aide ("confforums")."</TD></TR>";
 
 
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='IMG2/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>D&eacute;sactiver les forums publics</FONT></B></TD></TR>";
+/*	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='IMG2/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>D&eacute;sactiver les forums publics</FONT></B></TD></TR>"; */
 
 	echo "<TR><TD BACKGROUND='IMG2/rien.gif' ALIGN='left'>";
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-
-
 	if ($forums_publics=="non") {
-		echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='non' id='forums_non' CHECKED>";
-		echo " <B><label for='forums_non'>D&eacute;sactiver l'utilisation des forums publics.</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='non' id='forums_non'>";
-		echo " <label for='forums_non'>D&eacute;sactiver l'utilisation des forums publics.</label> ";
-	
-	}
+		$checked = ' CHECKED';
+		$gras = '<b>'; $fingras = '</b>';
+	} else {
+		$checked = '';
+		$gras = ''; $fingras = '';
+	};
+	echo "<INPUT$checked TYPE='radio' NAME='forums_publics' VALUE='non' id='forums_non'>";
+	echo " $gras<label for='forums_non'>D&eacute;sactiver l'utilisation des forums publics. Les forums publics pourront &ecirc;tre autoris&eacute;s au cas par cas sur les articles ; ils seront interdits sur les rubriques, br&egrave;ves, etc. </label>$fingras ";
 	echo "</TD></TR>";
-
-
-	echo "<TR><TD>&nbsp;</TD></TR>";
-
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='IMG2/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Activer les forums publics</FONT></B></TD></TR>";
-
 
 	echo "<TR><TD BACKGROUND='IMG2/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Veuillez d&eacute;finir le mode de mod&eacute;ration des forums publics...</FONT>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'><i>Pour activer les forums publics, veuillez choisir leur mode de mod&eacute;ration par d&eacute;faut :</i></FONT>";
 	echo "</TD></TR>";
-
-
 
 	echo "<TR><TD BACKGROUND='IMG2/rien.gif' ALIGN='left'>";
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 
 
-	if ($forums_publics == "posteriori") {
-		echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='posteriori' id='forums_posteriori' CHECKED>";
-		echo " <B><label for='forums_posteriori'>Mod&eacute;ration &agrave; post&eacute;riori (les contributions s'affichent imm&eacute;diatement en ligne, les administrateurs peuvent les supprimer ensuite).</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='posteriori' id='forums_posteriori'>";
-		echo " <label for='forums_posteriori'>Mod&eacute;ration &agrave; post&eacute;riori (les contributions s'affichent imm&eacute;diatement en ligne, les administrateurs peuvent les supprimer ensuite).</label> ";
-	
-	}
+	if ($forums_publics=="posteriori") {
+		$checked = ' CHECKED';
+		$gras = '<b>'; $fingras = '</b>';
+	} else {
+		$checked = '';
+		$gras = ''; $fingras = '';
+	};
+	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='posteriori' id='forums_posteriori'>";
+	echo " $gras<label for='forums_posteriori'>Mod&eacute;ration &agrave; post&eacute;riori (les contributions s'affichent imm&eacute;diatement en ligne, les administrateurs peuvent les supprimer ensuite).</label>$fingras\n<br>";
 
-
-	echo "\n<BR>";
-	if ($forums_publics == "priori") {
-		echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='priori' id='forums_priori' CHECKED>";
-		echo " <B><label for='forums_priori'>Mod&eacute;ration &agrave; priori (les contributions ne s'affichent publiquement qu'apr&egrave;s validation par les administrateurs).</label></B> ";
-	}
-	else {
-		echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='priori' id='forums_priori'>";
-		echo " <label for='forums_priori'>Mod&eacute;ration &agrave; priori (les contributions ne s'affichent publiquement qu'apr&egrave;s validation par les administrateurs).</label> ";
-	}
+	if ($forums_publics=="priori") {
+		$checked = ' CHECKED';
+		$gras = '<b>'; $fingras = '</b>';
+	} else {
+		$checked = '';
+		$gras = ''; $fingras = '';
+	};
+	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='priori' id='forums_priori'>";
+	echo " $gras<label for='forums_priori'>Mod&eacute;ration &agrave; priori (les contributions ne s'affichent publiquement qu'apr&egrave;s validation par les administrateurs).</label>$fingras ";
 		
 	if (tester_mail()){
 		echo "\n<BR>";
-		if ($forums_publics == "abonnement") {
-			echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='abonnement' id='forums_abonnement' CHECKED>";
-			echo " <B><label for='forums_abonnement'>Sur abonnement (les utilisateurs doivent fournir leur adresse email avant de pouvoir poster des contributions).</label></B> ";
-		}
-		else {
-			echo "<INPUT TYPE='radio' NAME='forums_publics' VALUE='abonnement' id='forums_abonnement'>";
-			echo " <label for='forums_abonnement'>Sur abonnement (les utilisateurs doivent fournir leur adresse email avant de pouvoir poster des contributions). <font color='red'>Cette fonction utilise l'envoi automatique de courrier &eacute;lectronique. Si votre h&eacute;bergeur a d&eacute;sactiv&eacute; les fonctions de courrier &eacute;lectronique sur ses machines, ce mode d'utilisation des forums est impossible.</font></label> ";
-		
-		}
+		if ($forums_publics=="abonnement") {
+			$checked = ' CHECKED';
+			$gras = '<b>'; $fingras = '</b>';
+		} else {
+			$checked = '';
+			$gras = ''; $fingras = '';
+		};
+		echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='abonnement' id='forums_abonnement'>";
+		echo " $gras<label for='forums_abonnement'>Sur abonnement (les utilisateurs doivent fournir leur adresse email avant de pouvoir poster des contributions).</label>$fingras ";
 	}
-	
 
 	echo "</FONT>";
 	echo "</TD></TR>\n";
 
+	echo "<TR><TD BACKGROUND='IMG2/rien.gif' ALIGN='left'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 
+	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
+	echo "<tr><td width='100%' bgcolor='#FFCC66'>\n";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
+	echo bouton_block_invisible("forumappliquer");
+	echo "OPTIONS AVANC&Eacute;ES";
+	echo "</b></font></td></tr>";
+	echo debut_block_invisible("forumappliquer");
+	echo "<tr><td><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "Appliquer ce choix de mod&eacute;ration :<br>";
 
+	echo "<INPUT TYPE='radio' CHECKED NAME='forums_publics_appliquer' VALUE='futur' id='forums_appliquer_futur'>";
+	echo " <b><label for='forums_appliquer_futur'>aux articles futurs uniquement (pas d'action sur la base de donn&eacute;es).</label></b><br>";
+	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='saufnon' id='forums_appliquer_saufnon'>";
+	echo " <label for='forums_appliquer_saufnon'>&agrave; tous les articles, sauf ceux dont le forum est d&eacute;sactiv&eacute;.</label><br>";
+	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='tous' id='forums_appliquer_tous'>";
+	echo " <label for='forums_appliquer_tous'>&agrave; tous les articles sans exception.</label><br>";
+	echo "</FONT>";
+	echo "</TD></TR>\n";
+	echo fin_block("forumappliquer");
+	echo "</table></center>";
 
 	echo "<TR><TD ALIGN='right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";

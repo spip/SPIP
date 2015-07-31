@@ -735,6 +735,13 @@ function maj_base() {
 		mysql_query("ALTER TABLE spip_articles DROP images");
 	}
 
+	if ($version_installee < 1.412) {
+		// Forum par defaut "en dur" dans les spip_articles
+		// -> non, prio (priori), pos (posteriori), abo (abonnement)
+		$accepter_forum = substr(lire_meta("forums_publics"),0,3) ;
+		$query = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE NOT (accepter_forum='non')";
+		$result = mysql_query($query);
+	}
 
 	//
 	// Mettre a jour le numero de version installee

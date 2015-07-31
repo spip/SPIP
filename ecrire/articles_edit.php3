@@ -23,7 +23,9 @@ if ($new == "oui") {
 	$query = "DELETE FROM spip_articles WHERE (statut = 'poubelle') && (maj < $mydate)";
 	$result = mysql_query($query);
 
-	$query = "INSERT INTO spip_articles (titre, id_rubrique, date, statut) VALUES ('Nouvel article', '$id_rubrique', NOW(), 'poubelle')";
+	$forums_publics = substr(lire_meta('forums_publics'),0,3);
+
+	$query = "INSERT INTO spip_articles (titre, id_rubrique, date, statut, accepter_forum) VALUES ('Nouvel article', '$id_rubrique', NOW(), 'poubelle', '$forums_publics')";
 	$result = mysql_query($query);
 	$id_article = mysql_insert_id();
 
