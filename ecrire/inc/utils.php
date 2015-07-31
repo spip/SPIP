@@ -790,14 +790,17 @@ function action_cron() {
  * @return bool
  */
 function cron ($taches=array(), $taches_old= array()) {
-	// si pas en mode cron force
-	// ou si base inaccessible, laisser tomber.
-	if (!defined('_DIRECT_CRON_FORCE') OR !spip_connect()) return false;
-	spip_log("cron !",'jq'._LOG_DEBUG);
+	// si pas en mode cron force, laisser tomber.
+	if (!defined('_DIRECT_CRON_FORCE')) return false;
 	if (!is_array($taches)) $taches = $taches_old; // compat anciens appels
+	// si taches a inserer en base et base inaccessible, laisser tomber
+	// sinon on ne verifie pas la connexion tout de suite, car si ca se trouve
+	// queue_sleep_time_to_next_job() dira qu'il n'y a rien a faire
+	// et on evite d'ouvrir une connexion pour rien (utilisation de _DIRECT_CRON_FORCE dans mes_options.php)
+	if ($taches AND count($taches) AND !spip_connect())  return false;
+	spip_log("cron !",'jq'._LOG_DEBUG);
 	if ($genie = charger_fonction('genie', 'inc', true)) {
-		$genie($taches);
-		return true;
+		return $genie($taches);
 	}
 	return false;
 }
