@@ -137,8 +137,7 @@ echo "<P><HR><P>";
 	$texte = entites_html($texte);
 	$ps = entites_html($ps);
 
-	echo "<form action='", generer_url_ecrire('articles', 
-			  ($id_article ? "id_article=$id_article" : "")),
+	echo "<form action='", generer_url_ecrire('articles', ($id_article ? "id_article=$id_article" : "")),
 	  "' method='POST' name='formulaire'>\n";
 
 	if ($id_article)

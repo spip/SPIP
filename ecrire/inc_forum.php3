@@ -70,8 +70,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$supprimer = false;
 			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 			if($forum_id_auteur)
-				$controle .= " - <a href='" . generer_url_ecrire('auteurs_edit',
-						  "id_auteur=$forum_id_auteur") .
+				$controle .= " - <a href='" . generer_url_ecrire('auteurs_edit', "id_auteur=$forum_id_auteur") .
 				  "'>" ._T('lien_voir_auteur'). "</a>";
 			break;
 		# forum propose (a moderer) sur le site public
@@ -101,10 +100,8 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 
 	if ($valider_repondre) {
 
-		$controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_url_ecrire('iframe_action',
-						     "action=forum_admin&id=$id_forum&statut=$valider&redirect=", 
-						     _DIR_RACINE . 'forum',
-						     "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link)),
+	  $redirect =  urlencode(generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link), true));
+	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$redirect"),
 				   $logo,
 				   "creer.gif", 'right', 'non');
 	}

@@ -52,7 +52,7 @@ echo "<div class='arial11'><ul>";
 echo "<p>";
 
 if (!$id_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
-else echo "<li><a href='" . generer_url_ecrire("suivi_revisions","") . "'>"._T('info_tout_site')."</a>";
+else echo "<li><a href='" . generer_url_ecrire("suivi_revisions") . "'>"._T('info_tout_site')."</a>";
 
 echo "<p>";
 
@@ -176,7 +176,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 		if (!$rss) {
 			$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
 			if ($court)
-				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions",""))
+				$titre_table = afficher_plus(generer_url_ecrire("suivi_revisions"))
 				. $titre_table;
 
 			echo "<div style='height: 12px;'></div>";
@@ -193,7 +193,10 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 				for ($i = 0; $i < $nb_tranches; $i++) {
 					if ($i > 0) echo " | ";
 					if ($i*$nb_aff == $debut) echo "<b>";
-					else echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
+					else {
+					  $next = ($i * $nb_aff);
+echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
+					}
 					echo (($i * $nb_aff) + 1);
 					if ($i*$nb_aff == $debut) echo "</b>";
 					else echo "</a>";

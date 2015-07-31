@@ -608,36 +608,35 @@ function charger_generer_url() {
 		include_local("inc-urls-".$GLOBALS['type_urls']);
 }
 
+// Fonctions de fabriction des URL des scripts de Spip
+// Pour une redirection, la liste des arguments doit etre separee par "&"
+// Pour du code XHTML, ca doit etre &amp;
+// Bravo au W3C qui n'a pas ete capable de nous eviter ca
+// faute de separer proprement langage et meta-langage
 
-// cette fonction fabrique un appel a un script php
-// elle est destinee a assurer la transition
-// entre les scripts ecrire/*.php[3] et le script generique ecrire/index.php
-
-function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
+function generer_url_ecrire($script, $args="", $no_entities=false) {
 	$site = $GLOBALS['meta']["adresse_site"];
 	if ($site)
 	  $site .= ((substr($site,-1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
 	else $site =  _DIR_RESTREINT;
 
-	$args = str_replace('&', '&amp;', $args);
+	if (substr($site,-1) == '/') $site = substr($site, 0, -1);
+	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
 
-	return $site . $script . $ext . $args .
-		(!$retour ? "" : 
-		urlencode($retour . _EXTENSION_PHP .
-			  (!$retour_args ? "" : ('?' . $retour_args))));
+	return "$site/$script$ext$args";
 }
 
 // scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
 
-function generer_url_public($script, $args="") {
+function generer_url_public($script, $args="", $no_entities=false) {
 	$site = $GLOBALS['meta']["adresse_site"];
-	if ($site && (substr($site,-1) <> '/')) $site .= '/';
-	$site = _DIR_RACINE;
-
-	return $site . $script .
-	  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP) .
-	  (!$args ? "" : ('?'  .str_replace('&', '&amp;', $args)));
+	if ($site)
+	  $site .= ((substr($site,-1) <> '/') ? '/' : '');
+	else $site = _DIR_RACINE;
+	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
+	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+	return $site . $script . $ext . $args;
 }
 
 ?>
