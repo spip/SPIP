@@ -433,6 +433,7 @@ ecrire/inc/discuter.php -text
 ecrire/inc/distant.php -text
 ecrire/inc/documenter.php -text
 ecrire/inc/drapeau_edition.php -text
+ecrire/inc/editer_article.php -text
 ecrire/inc/editer_auteurs.php -text
 ecrire/inc/editer_mot.php -text
 ecrire/inc/envoyer_mail.php -text
