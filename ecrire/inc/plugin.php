@@ -40,8 +40,8 @@ function liste_plugin_files($dir_plugins = null){
 		if ($dir_plugins == _DIR_PLUGINS AND defined('_DIR_PLUGINS_SUPPL')) {
 			$dir_plugins_suppl = array_filter(explode(':',_DIR_PLUGINS_SUPPL));
 			foreach($dir_plugins_suppl as $suppl) {
-				$suppl = _DIR_RACINE.$suppl;
-				foreach (fast_find_plugin_dirs($suppl, 100, false) as $plugin) {
+				$suppl = _DIR_RACINE.$suppl.(substr($suppl, -1) != '/' ? '/' : '');
+				foreach (fast_find_plugin_dirs($suppl) as $plugin) {
 					if (!in_array($plugin, $plugin_files[$dir_plugins]))
 						$plugin_files[$dir_plugins][] = $plugin;
 				}
@@ -57,14 +57,13 @@ function liste_plugin_files($dir_plugins = null){
 	return $plugin_files[$dir_plugins];
 }
 
-function fast_find_plugin_dirs($dir, $max_prof=100, $racine=true) {
+function fast_find_plugin_dirs($dir, $max_prof=100) {
 	$fichiers = array();
-	// si $racine = true revenir au repertoire racine si on a recu dossier/truc
+	// revenir au repertoire racine si on a recu dossier/truc
 	// pour regarder dossier/truc/ ne pas oublier le / final
-	if ($racine) {
-		$dir = preg_replace(',/[^/]*$,', '', $dir);
-		if ($dir == '') $dir = '.';
-	}
+	$dir = preg_replace(',/[^/]*$,', '', $dir);
+	if ($dir == '') $dir = '.';
+
 	if (!is_dir($dir))
 		return $fichiers;
 	if (is_plugin_dir($dir,'')) {
