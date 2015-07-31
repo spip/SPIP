@@ -329,7 +329,8 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
 		# supprimer le IMG/
-		return calcule_fichier_logo(extraire_attribut($lien_logo, 'src'));
+		return calcule_fichier_logo(extraire_attribut($logo, 'src'));
+
 
 	// Calculer le code html complet (cf. calcule_logo)
 	$logo = inserer_attribut($logo, 'alt', '');
