@@ -20,6 +20,26 @@ include_ecrire ("inc_meta.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 
+
+//
+// Preferences de presentation
+//
+
+include_ecrire ("inc_lang.php3");
+utiliser_langue_visiteur();
+
+/* pourquoi rajouter une session ? Je remplace par les 2 lignes ci-dessus 
+
+if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
+AND $spip_lang_ecrire <> $auteur_session['lang']
+AND changer_langue($spip_lang_ecrire)) {
+	spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($spip_lang_ecrire)
+	."' WHERE id_auteur = $connect_id_auteur");
+	$auteur_session['lang'] = $spip_lang_ecrire;
+	ajouter_session($auteur_session, $spip_session);
+}
+*/
+
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
 	global $flag_gz;
