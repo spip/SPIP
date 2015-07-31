@@ -1669,6 +1669,14 @@ function alterner($i) {
 	return $args[(intval($i)-1)%($num-1)+1];
 }
 
+// recuperer une balise HTML de type "xxx"
+// exemple : [(#DESCRIPTIF|extraire_attribut{img})] (pour flux RSS-photo)
+function extraire_tag($texte, $tag) {
+	if (preg_match(",<$tag(\\s.*)?".">,Uims", $texte, $regs))
+		return $regs[0];
+}
+
+
 // recuperer un attribut html d'une balise
 // ($complet demande de retourner $r)
 function extraire_attribut($balise, $attribut, $complet = false) {
