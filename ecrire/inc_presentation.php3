@@ -1634,7 +1634,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 			else if (clip == 3) puce = 'rouge';
 			else if (clip == 4) puce = 'poubelle';
 	
-			findObj('imgstatut'+id_article).src= 'img_pack/puce-'+puce +'.gif';
+			findObj('imgstatut'+id_article).src= '<?php echo _DIR_IMG_PACK; ?>puce-'+puce +'.gif';
 			
 			frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_article&id_article='+id_article+'&statut='+statut;
 		}
@@ -1657,7 +1657,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 			else if (clip == 1) puce = 'verte';
 			else if (clip == 2) puce = 'rouge';
 	
-			findObj('imgstatutbreve'+id_breve).src= 'img_pack/puce-'+puce +'-breve.gif';
+			findObj('imgstatutbreve'+id_breve).src= '<?php echo _DIR_IMG_PACK; ?>puce-'+puce +'-breve.gif';
 			
 			frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_breve&id_breve='+id_breve+'&statut='+statut;
 		}
