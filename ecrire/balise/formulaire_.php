@@ -86,7 +86,9 @@ function balise_FORMULAIRE__dyn($form)
 	$action = parametre_url($action,'formulaire_action_args',''); // nettoyer l'url des champs qui vont etre saisis
 
 	$ajaxid = "";
-	if (!$ajax=_request('var_ajax')){
+	if ((!$ajax=_request('var_ajax'))
+	 AND (isset($valeurs['_ajax']))
+	 AND $valeurs['_ajax']){
 		include_spip('inc/acces');
 		$ajaxid = substr(md5(creer_uniqid()),0,8);
 	}
@@ -98,21 +100,20 @@ function balise_FORMULAIRE__dyn($form)
 		. "<input type='hidden' name='hash' value='".$secu['hash']."' />";
 	}
 
-	return array($ajax?"formulaires/$form":"formulaires/formulaire_", 0, 
+	return array($ajaxid?"formulaires/formulaire_":"formulaires/$form", 0, 
 		array_merge(
 		$valeurs, 
 		array(
 			'form' => $form,
 			'action' => $action,
 			'formulaire_args' => base64_encode(serialize($args)),
-			'redirect' => '',
 			'id' => isset($valeurs['id'])?$valeurs['id']:'new',
 			'erreurs' => $erreurs,
 			'message_ok' => $message_ok,
 			'message_erreur' => $message_erreur,
 			'editable' => $editable?' ':'',
-			'ajaxid' => "id$ajaxid",
-		))
+		),
+		$ajaxid?array('ajaxid' => "id$ajaxid"):array())
 	);
 }
 
