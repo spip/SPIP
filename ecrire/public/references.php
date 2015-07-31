@@ -286,7 +286,10 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 // http://doc.spip.org/@balise_distante_interdite
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
-	if ($nom AND $p->boucles[$nom]->sql_serveur) {
+
+	if ($nom 
+		AND $p->boucles[$nom]->sql_serveur
+		AND !in_array($p->boucles[$nom]->sql_serveur,$GLOBALS['exception_des_connect'])) {
 		spip_log( $nom .':' . $p->nom_champ .' '._T('zbug_distant_interdit'));
 		return false;
 	}
