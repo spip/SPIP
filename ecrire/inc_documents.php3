@@ -43,6 +43,26 @@ function vignette_par_defaut($type_extension, $size=true) {
 }
 
 
+function vignette_previsu_ou_par_defaut($fichier, $extension) {
+  // si pas de vignette, utiliser la vignette par defaut
+  // ou essayer de creer une previsu si permis
+  $formats = ','.lire_meta('formats_graphiques').',';
+  if ((strpos($formats, ",$extension,") === false) || 
+      (lire_meta("creer_preview") != 'oui')) {
+    return vignette_par_defaut($extension ? $extension : 'txt', true);
+  } else {
+    return array(($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier)), 0, 0);
+  }
+}
+
+function document_et_vignette($document) 
+{
+	eregi('\.([a-z0-9]+)$', $document, $regs);
+	list($fichier, $largeur, $hauteur) = 
+		vignette_previsu_ou_par_defaut($document, $regs[1]);
+	return "<a href='../$document'><img src='$fichier' border='0'></a>";
+}
+
 //
 // Integration (embed) multimedia
 //
@@ -233,18 +253,8 @@ function integre_image($id_document, $align, $type_aff) {
 			$hauteur_vignette = $hauteur;
 		}
 
-		// si pas de vignette, utiliser la vignette par defaut
-		// ou essayer de creer une preview (images)
-		if (!$url_fichier_vignette) {
-			if (!ereg(",$extension,", ','.lire_meta('formats_graphiques').',')) {
-				list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
-			} else {
-				$url_fichier_vignette = ($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode(str_replace('../', '', $fichier));
-			}
-		}
-
-		if ($type_aff=='fichier_vignette')
-			return $url_fichier_vignette;
+		if (!$url_fichier_vignette) 
+		  list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_previsu_ou_par_defaut($fichier, $extension);
 
 		if ($url_fichier_vignette) {
 			$vignette = "<img src='$url_fichier_vignette' border='0'";
@@ -375,6 +385,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 
 function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
+#  spip_log("texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document)");
 	if ($largeur_vignette > 120) {
 		$rapport = 120.0 / $largeur_vignette;
 		$largeur_vignette = 120;
@@ -448,8 +459,6 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $afficher
 }
 
 
-
-
 //
 // Afficher les documents non inclus
 // (page des articles)
@@ -512,14 +521,14 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$titre = $document->get('titre');
 			$descriptif = $document->get('descriptif');
 			$fichier = generer_url_document($id_document);
+
 			$fichier = substr($fichier, 3, strlen($fichier));
 			$largeur = $document->get('largeur');
 			$hauteur = $document->get('hauteur');
 			$taille = $document->get('taille');
 			$date = $document->get('date');
 			$mode = $document->get('mode');
-			
-					
+
 			echo "<div style='text-align:center;'>";
 			if ($flag_modif) {
 			
@@ -582,25 +591,21 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			//
 			// Recuperer la vignette
 			//
+
 			if ($id_vignette >0) {
-				$vignette = fetch_document($id_vignette);
-			
+				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 				if ($vignette) {
 					$fichier_vignette = generer_url_document($id_vignette);
-					$largeur_vignette = $vignette->get('largeur');
-					$hauteur_vignette = $vignette->get('hauteur');
-					$taille_vignette = $vignette->get('taille');
+					$largeur_vignette = $vignette['largeur'];
+					$hauteur_vignette = $vignette['hauteur'];
+					$taille_vignette = $vignette['taille'];
 			
 			
 					echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "../$fichier");
 				}
 			}
-			else {
-				$fichier_vignette = "../spip_image.php3?vignette=$fichier";
-				echo "<a href='../$fichier'><img src='$fichier_vignette' border='0'></a>";
-			}
-				echo "</div>";
-					
+			else { echo document_et_vignette($fichier); }
+			echo "</div>";
 					
 			if ($flag_modif) {
 					
@@ -723,7 +728,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	}
 
 
-
 	//// Documents associes
 	$query = "SELECT * FROM #table AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
@@ -787,21 +791,22 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			
 		
 			if ($id_vignette > 0) {
-				$vignette = fetch_document($id_vignette);
+				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 			
 				if ($vignette) {
 					$fichier_vignette = generer_url_document($id_vignette);
-					$largeur_vignette = $vignette->get('largeur');
-					$hauteur_vignette = $vignette->get('hauteur');
-					$taille_vignette = $vignette->get('taille');
+					$largeur_vignette = $vignette['largeur'];
+					$hauteur_vignette = $vignette['hauteur'];
+					$taille_vignette = $vignette['taille'];
 				}
 				echo "<div style='text-align:center;'>";
 				echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "../$fichier");
 				echo "</div>";
 			}
 			else {
-				$fichier_vignette = "../spip_image.php3?vignette=$fichier";
-				echo "<div style='text-align: center;'><a href='../$fichier'><img src='$fichier_vignette' border='0'></a></div>";
+				echo "<div style='text-align: center;'>",
+				  document_et_vignette($fichier), 
+				  "</div>";
 			}
 			
 			
@@ -996,12 +1001,12 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	//
 	// Recuperer la vignette
 	//
-	if ($id_vignette) $vignette = fetch_document($id_vignette);
+	if ($id_vignette) $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 	if ($vignette) {
 		$fichier_vignette = generer_url_document($id_vignette);
-		$largeur_vignette = $vignette->get('largeur');
-		$hauteur_vignette = $vignette->get('hauteur');
-		$taille_vignette = $vignette->get('taille');
+		$largeur_vignette = $vignette['largeur'];
+		$hauteur_vignette = $vignette['hauteur'];
+		$taille_vignette = $vignette['taille'];
 	}
 
 	echo "<p></p><div style='border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;'>";
@@ -1362,12 +1367,12 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		// Edition de la vignette
 		//
 
-		if ($id_vignette) $vignette = fetch_document($id_vignette);
+		if ($id_vignette) $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 		if ($vignette) {
 			$fichier_vignette = generer_url_document($id_vignette);
-			$largeur_vignette = $vignette->get('largeur');
-			$hauteur_vignette = $vignette->get('hauteur');
-			$taille_vignette = $vignette->get('taille');
+			$largeur_vignette = $vignette['largeur'];
+			$hauteur_vignette = $vignette['hauteur'];
+			$taille_vignette = $vignette['taille'];
 		}
 
 		echo "<p></p><div style='border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;'>";
