@@ -2095,16 +2095,18 @@ function charge_scripts($scripts) {
  * @param $alt
  * @param string $atts
  * @param string $title
- * @param bool $utiliser_suffixe_size
- *   utiliser ou non le suffixe de taille dans le nom de fichier de l'image
- *   sous forme -xx.png (pour les icones essentiellement)
+ * @param array $options
+ *   chemin_image : utiliser chemin_image sur $img fourni, ou non (oui par dafaut)
+ *   utiliser_suffixe_size : utiliser ou non le suffixe de taille dans le nom de fichier de l'image
+ *   sous forme -xx.png (pour les icones essentiellement) (oui par defaut)
  * @return string
  */
-function http_img_pack($img, $alt, $atts='', $title='', $utiliser_suffixe_size = true) {
-	$img = chemin_image($img);
+function http_img_pack($img, $alt, $atts='', $title='', $options = array()) {
+	if (!isset($options['chemin_image']) OR $options['chemin_image']==true)
+		$img = chemin_image($img);
 	if (stripos($atts, 'width')===false){
 		// utiliser directement l'info de taille presente dans le nom
-		if ($utiliser_suffixe_size
+		if ((!isset($options['utiliser_suffixe_size']) OR $options['utiliser_suffixe_size']==true)
 		    AND preg_match(',-([0-9]+)[.](png|gif)$,',$img,$regs)){
 			$largeur = $hauteur = intval($regs[1]);
 		}
@@ -2144,7 +2146,7 @@ function http_style_background($img, $att=''){
  * @return string
  */
 function filtre_balise_img_dist($img,$alt="",$class=""){
-	return http_img_pack($img, $alt, $class?" class='".attribut_html($class)."'":'', '', false);
+	return http_img_pack($img, $alt, $class?" class='".attribut_html($class)."'":'', '', array('chemin_image'=>false,'utiliser_suffixe_size'=>false));
 }
 
 
