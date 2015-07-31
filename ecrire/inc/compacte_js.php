@@ -56,7 +56,6 @@ class SourceMap {
          * @param	string		generic source code
          * @param	array		array with nested array with code rules
 	 */
-// http://doc.spip.org/@getMap
 	function getMap(&$source, &$delimeters) {
 		
 		# "unsigned" integer variables
@@ -151,7 +150,6 @@ class SourceMap {
 		return $tempMap;
 	}
 	
-// http://doc.spip.org/@__endCharNoSlash
 	function __endCharNoSlash(&$source, $position, &$find, &$len) {
 		$temp = strlen($find);
 		do {
@@ -161,7 +159,6 @@ class SourceMap {
 		return $position + $temp;
 	}
 	
-// http://doc.spip.org/@__charNoSlash
 	function __charNoSlash(&$source, &$position) {
 		$next = 1; $len = $position - $next;
 		while($len > 0 && $source{$len} === '\\') $len = $position - (++$next);
@@ -196,13 +193,11 @@ class BaseConvert {
 	
 	var	$base, $baseLength;
 	
-// http://doc.spip.org/@BaseConvert
 	function BaseConvert($base) {
 		$this->base = &$base;
 		$this->baseLength = strlen($base);
 	}
 	
-// http://doc.spip.org/@toBase
 	function toBase($num) {
 		$module = 0; $result = '';
 		while($num) {
@@ -212,7 +207,6 @@ class BaseConvert {
 		return $result !== '' ? $result : $this->base{0};
 	}
 	
-// http://doc.spip.org/@fromBase
 	function fromBase($str) {
 		$pos = 0; $len = strlen($str) - 1; $result = 0;
 		while($pos < $len)
@@ -312,7 +306,6 @@ class JavaScriptCompressor {
 	 * public constructor
          * 	creates a new BaseConvert class variable (base 36)
 	 */
-// http://doc.spip.org/@JavaScriptCompressor
 	function JavaScriptCompressor() {
 		$this->__SourceMap = new SourceMap();
 		$this->__BC = new BaseConvert('0123456789abcdefghijklmnopqrstuvwxyz');
@@ -331,7 +324,6 @@ class JavaScriptCompressor {
          *      compress JavaScript removing comments and somespaces (on by default)
          * @param	mixed		view example and notes on class comments
 	 */
-// http://doc.spip.org/@getClean
 	function getClean($jsSource) {
 		return $this->__commonInitMethods($jsSource, false);
 	}
@@ -342,24 +334,20 @@ class JavaScriptCompressor {
          *      compress JavaScript replaceing words and removing comments and some spaces
          * @param	mixed		view example and notes on class comments
 	 */
-// http://doc.spip.org/@getPacked
 	function getPacked($jsSource) {
 		return $this->__commonInitMethods($jsSource, true);
 	}
 	
 	/** 'private' methods, any comment sorry */
-// http://doc.spip.org/@__addCleanCode
 	function __addCleanCode($str) {
 		return preg_replace($this->__cleanFinder, $this->__cleanReplacer, trim($str));
 	}
-// http://doc.spip.org/@__addClean
 	function __addClean(&$arr, &$str, &$start, &$end, $clean) {
 		if($clean)
 			array_push($arr, $this->__addCleanCode(substr($str, $start, $end - $start)));
 		else
 			array_push($arr, substr($str, $start, $end - $start));
 	}
-// http://doc.spip.org/@__clean
 	function __clean(&$str) {
 		$len = strlen($str);
 		$type = '';
@@ -380,7 +368,6 @@ class JavaScriptCompressor {
  		}
 		return preg_replace("/(\n)+/", "\n", trim(implode('', $clean)));
 	}
-// http://doc.spip.org/@__commonInitMethods
 	function __commonInitMethods(&$jsSource, $packed) { 
 		$header = '';
 		$this->__startTime = $this->__getTime();
@@ -398,7 +385,6 @@ class JavaScriptCompressor {
 		$this->__setStats();
 		return $header.$this->__sources;
 	}
-// http://doc.spip.org/@__getHeader
 	function __getHeader() {
 		return implode('', array(
 			'/* ',$this->__getScriptNames(),'JavaScriptCompressor ',$this->version,' [www.devpro.it], ',
@@ -406,7 +392,6 @@ class JavaScriptCompressor {
 			" */\r\n"		
 		));
 	}
-// http://doc.spip.org/@__getScriptNames
 	function __getScriptNames() {
 		$a = 0;
 		$result = array();
@@ -419,7 +404,6 @@ class JavaScriptCompressor {
 			$result[$a] .= ' with ';
 		return $a < 0 ? '' : implode(', ', $result);
 	}
-// http://doc.spip.org/@__getSize
 	function __getSize($size, $dec = 2) {
 		$toEval = '';
 		$type = array('bytes', 'Kb', 'Mb', 'Gb');
@@ -438,7 +422,6 @@ class JavaScriptCompressor {
 		}
 		return $fSize;
 	}
-// http://doc.spip.org/@__getTime
 	function __getTime($startTime = null) {
 		list($usec, $sec) = explode(' ', microtime());
 		$newtime = (float)$usec + (float)$sec;
@@ -446,14 +429,12 @@ class JavaScriptCompressor {
 			$newtime = number_format(($newtime - $startTime), 3);
 		return $newtime;
 	}
-// http://doc.spip.org/@__pack
 	function __pack(&$str) {
 		$container = array();
 		$str = preg_replace("/(\w+)/e", '$this->__BC->toBase($this->__wordsParser("\\1",$container));', $this->__clean($str));
 		$str = str_replace("\n", '\n', addslashes($str));
 		return 'eval(function(A,G){return A.replace(/(\\w+)/g,function(a,b){return G[parseInt(b,36)]})}("'.$str.'","'.implode(',', $container).'".split(",")));';
 	}
-// http://doc.spip.org/@__setStats
 	function __setStats() {
 		$this->stats = implode(' ', array(
 			$this->__getSize($this->__sourceLength),
@@ -464,7 +445,6 @@ class JavaScriptCompressor {
 			'seconds'
 		));
 	}
-// http://doc.spip.org/@__sourceManager
 	function __sourceManager(&$jsSource) {
 		$b = count($jsSource);
 		$this->__sources = array();
@@ -484,12 +464,10 @@ class JavaScriptCompressor {
 		}
 		$this->__totalSources = count($this->__sources);
 	}
-// http://doc.spip.org/@__sourcePusher
 	function __sourcePusher(&$code, $name) {
 		$this->__sourceLength += strlen($code);
 		array_push($this->__sources, array('code'=>$code, 'name'=>$name));
 	}
-// http://doc.spip.org/@__wordsParser
 	function __wordsParser($str, &$d) {
 		if(is_null($key = array_shift($key = array_keys($d,$str))))
 			$key = array_push($d, $str) - 1;

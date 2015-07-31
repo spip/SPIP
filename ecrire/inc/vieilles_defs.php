@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /* qui ont fait partie des fichiers de configurations de Spip	*/
 /* mais en ont ete retires ensuite.				*/
 /* Ce fichier n'est donc jamais charge par la presente version	*/
-/* mais est present pour que les contributions à Spip puissent	*/
+/* mais est present pour que les contributions a Spip puissent	*/
 /* fonctionner en chargeant ce fichier, en attendant d'etre	*/
 /* reecrites conformement a la nouvelle interface.		*/
 
@@ -167,7 +167,6 @@ spip_log('debut_page() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 
 }
 
 // obsolete, utiliser calculer_url
-
 // http://doc.spip.org/@extraire_lien
 function extraire_lien ($regs) {
 spip_log('extraire_lien() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
@@ -204,11 +203,18 @@ spip_log('afficher_formulaire_date() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['S
 
 // http://doc.spip.org/@ratio_image
 function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs) {
+spip_log('ratio_image() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
 	// $logo est le nom complet du logo ($logo = "chemin/$nom.$format)
 	// $nom et $format ne servent plus du fait du passage par le filtre image_reduire
 	include_spip('inc/filtres_images');
 	$res = image_reduire("<img src='$logo' $attributs />", $taille, $taille_y);
 	return $res;
+}
+
+// http://doc.spip.org/@entites_unicode
+function entites_unicode($texte) {
+spip_log('entites_unicode() '.$GLOBALS['REQUEST_URI'].' - '.$_SERVER['SCRIPT_NAME'], 'vieilles_defs');
+	return charset2unicode($texte);
 }
 
 ?>
