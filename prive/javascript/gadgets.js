@@ -1,8 +1,8 @@
-function init_gadgets(url_toutsite,url_navrapide,url_agenda,html_messagerie){
+function init_gadgets(){
 	jQuery('#boutonbandeautoutsite').one('mouseover',function(){
 		jQuery(this).siblings('ul').animeajax();
 		jQuery.ajax({
-						url: url_toutsite,
+						url: url_menu_rubrique,
 						success: function(c){
 							jQuery('#boutonbandeautoutsite').siblings('ul').remove();
 							jQuery('#boutonbandeautoutsite')
@@ -17,6 +17,7 @@ function focus_zone(selecteur){
 	return false;
 }
 jQuery(document).ready(function(){
+	init_gadgets();
 	var is_open = 0;
 	jQuery.fn.menuItemOpen = function(){
 		jQuery(this)
@@ -103,4 +104,6 @@ jQuery(document).ready(function(){
 		.blur(function(){
 			jQuery('#bando_liens_rapides').removeClass('actif');
 		});
+	if (typeof window.test_accepte_ajax != "undefined")
+		test_accepte_ajax();
 });

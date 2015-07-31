@@ -58,19 +58,14 @@ function init_head($titre='', $dummy=0, $minipres=false) {
 		. "<meta http-equiv='Content-Type' content='text/html"
 		. (($c = $GLOBALS['meta']['charset']) ?
 			"; charset=$c" : '')
-		. "' />\n"
-		. envoi_link($nom_site_spip,$minipres);
+		. "' />\n";
 
-	$head .= "
-	<script type='text/javascript'><!--
-	jQuery(document).ready(function(){
-	" .	repercuter_gadgets() . '
-	});
-	var style = document.createElement("style");
-	style.innerHTML = ".jsnone {display:none;}";
-	document.getElementsByTagName("head")[0].appendChild(style);
-	// --></script>
-	';
+	$head .= "<script type='text/javascript'>/*<![CDATA[*/\n"
+	."var url_menu_rubrique='./?exec=menu_rubriques\\x26date=" .  $GLOBALS['meta']['date_calcul_rubriques']."';\n"
+	."(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);\n"
+	."/*]]>*/</script>\n";
+	$head .= envoi_link($nom_site_spip,$minipres);
+
 	return pipeline('header_prive', $head);
 }
 

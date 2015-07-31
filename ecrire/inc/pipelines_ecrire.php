@@ -28,7 +28,13 @@ function f_jQuery_prive ($texte) {
 	))) as $script)
 		if ($script = find_in_path($script))
 			$x .= "\n<script src=\"$script\" type=\"text/javascript\"></script>\n";
-	$texte = $x.$texte;
+	// inserer avant le premier script externe ou a la fin
+	if (preg_match(",<script[^><]*src=,",$texte,$match)
+	  AND $p = strpos($texte,$match[0])){
+	  $texte = substr_replace($texte,$x,$p,0);
+	}
+	else
+		$texte .= $x;
 	return $texte;
 }
 

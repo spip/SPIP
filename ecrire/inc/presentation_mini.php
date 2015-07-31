@@ -87,10 +87,6 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	// CSS espace prive : la vraie
 	. '<link rel="stylesheet" type="text/css" href="'
 	. generer_url_public('style_prive', $paramcss) .'" />' . "\n"
-	. "<!--[if lt IE 8]>\n"
-	. '<link rel="stylesheet" type="text/css" href="'
-	. generer_url_public('style_prive_ie', $paramcss) .'" />' . "\n"
-	. "<![endif]-->\n"
 
 	// CSS optionelle minipres
 	. ($minipres?'<link rel="stylesheet" type="text/css" href="'
@@ -103,9 +99,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 	. url_absolue($favicon)
 	. "\" type='image/x-icon' />\n";
 	
-	$js = debut_javascript();
-
-	if ($spip_display == 4) return $res . $js;
+	list($inlinejs,$js) = debut_javascript();
 
 	$nom = entites_html($nom_site_spip);
 
@@ -121,7 +115,7 @@ function envoi_link($nom_site_spip, $minipres=false) {
 			. " ("._T("info_breves_03")
 			. ")\" href='" . generer_url_public('backend-breves') . "' />\n";
 
-	return $res . $js;
+	return $inlinejs . $res . $js;
 }
 
 // http://doc.spip.org/@debut_javascript
@@ -148,13 +142,11 @@ function debut_javascript()
 
 	if (!defined('_LARGEUR_ICONES_BANDEAU'))
 		include_spip('inc/bandeau');
-	return
-	// envoi le fichier JS de config si browser ok.
-		$GLOBALS['browser_layer'] .
-	 	http_script(
-			((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
+	return array(
+	 	"<script type='text/javascript'>/*<![CDATA[*/"
+			.((isset($_COOKIE['spip_accepte_ajax']) && $_COOKIE['spip_accepte_ajax'] >= 1)
 			? ''
-			: "jQuery.ajax({'url':'$testeur'});") .
+			: "\nfunction test_accepte_ajax(){jQuery.ajax({'url':'$testeur'});}") .
 			(_OUTILS_DEVELOPPEURS ?"var _OUTILS_DEVELOPPEURS=true;":"") .
 			"\nvar ajax_image_searching = \n'<img src=\"".url_absolue(chemin_image("searching.gif"))."\" alt=\"\" />';" .
 			"\nvar stat = " . (($GLOBALS['meta']["activer_statistiques"] != 'non') ? 1 : 0) .
@@ -167,11 +159,12 @@ function debut_javascript()
 			   ($browser_version >= 6))) ? 1 : 0) .
 			"\nvar confirm_changer_statut = '" .
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) .
-			"';\n") .
-		//plugin needed to fix the select showing through the submenus o IE6
-    (($browser_name == "MSIE" && $browser_version <= 6) ? http_script('', 'bgiframe.js'):'' ) .
-    http_script('', 'presentation.js') . 
-    http_script('', 'gadgets.js');
+			"';\n/*]]>*/</script>\n",
+	// envoi le fichier JS de config si browser ok.
+		$GLOBALS['browser_layer'] .
+    http_script('', 'presentation.js') .
+    http_script('', 'gadgets.js')
+		);
 }
 
 //

@@ -605,9 +605,9 @@ function http_script($script, $src='', $noscript='') {
 	}
 	else $src = '';
 	if ($script)
-		$script = ("<!--\n" .
+		$script = ("/*<![CDATA[*/\n" .
 		preg_replace(',</([^>]*)>,','<\/\1>', $script) .
-		"\n//-->\n");
+		"/*]]>*/");
 	if ($noscript)
 		$noscript = "<noscript>\n\t$noscript\n</noscript>\n";
 

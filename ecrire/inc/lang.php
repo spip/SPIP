@@ -349,11 +349,9 @@ function init_langues() {
 // http://doc.spip.org/@html_lang_attributes
 function html_lang_attributes()
 {
-	return  "<html xmlns='http://www.w3.org/1999/xhtml' lang='"
-	. $GLOBALS['spip_lang']
-	. "' dir='"
-	. ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')
-	  . "'>\n" ;
+	$lang = $GLOBALS['spip_lang'];
+	$dir = ($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr');
+	return  "<html class='$dir $lang no-js' xmlns='http://www.w3.org/1999/xhtml' lang='$lang' dir='$dir'>\n" ;
 }
 init_langues();
 utiliser_langue_site();
