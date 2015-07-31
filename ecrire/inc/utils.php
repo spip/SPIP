@@ -312,6 +312,7 @@ function spip_connect($serveur='', $version='') {
 // Elle existe en tant que gestionnaire de versions,
 // connue seulement des convertisseurs automatiques
 
+// http://doc.spip.org/@spip_connect_sql
 function spip_connect_sql($version, $ins='', $serveur='', $cont=false) {
 	$desc = spip_connect($serveur, $version);
 	if (function_exists($f = @$desc[$version][$ins])) return $f;
