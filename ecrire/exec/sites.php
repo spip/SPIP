@@ -168,7 +168,7 @@ function exec_sites_dist()
 		$corps = "\n<div style='text-align: center'><b>"
 		. _T('info_statut_site_1')
 		. "</b> &nbsp;&nbsp; \n"
-		.  "<select name='nouveau_statut' size='1' class='fondl'>\n"
+		.  "<select name='statut' size='1' class='fondl'>\n"
 		.  my_sel("prop",_T('info_statut_site_3'),$statut)
 		.  my_sel("publie",_T('info_statut_site_2'),$statut)
 		.  my_sel("refuse",_T('info_statut_site_4'),$statut)

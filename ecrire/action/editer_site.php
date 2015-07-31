@@ -36,10 +36,9 @@ function action_editer_site_dist() {
 			(_request('syndication') AND _request('syndication') != $t['syndication'])
 			OR
 			(_request('resume') AND _request('resume') != $t['resume'])
-			))
+			)
+		)
 			set_request('reload', 'oui');
-		else if (_request('nouveau_statut'))
-			spip_query("UPDATE spip_syndic SET statut="._q(_request('nouveau_statut'))." WHERE id_syndic=$id_syndic");
 
 		revisions_sites($id_syndic);
 	}
@@ -123,6 +122,7 @@ function insert_syndic($id_rubrique) {
 function revisions_sites ($id_syndic, $c=false) {
 
 	include_spip('inc/filtres');
+	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 
 	// Ces champs seront pris nom pour nom (_POST[x] => spip_syndic.x)
@@ -241,9 +241,10 @@ function revisions_sites ($id_syndic, $c=false) {
 	}
 
 	// Recalculer les rubriques (statuts et dates) si l'on deplace
-	// un site publie
-	if ($statut == 'publie'
-	AND isset($champ['id_rubrique'])) {
+	// un site publie ou si on le publie/depublie
+	if (isset($champs['statut'])
+	OR ($statut == 'publie' AND isset($champ['id_rubrique']))
+	) {
 		calculer_rubriques();
 	}
 
