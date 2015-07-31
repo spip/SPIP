@@ -79,15 +79,32 @@ function install_etape_sup1_dist()
 
 function install_etape_sup1_form($hidden, $checked, $bases, $etape)
  {
+	if ($bases) {
+		$bases = "\n<fieldset><legend>"
+		  . _L('Choisissez une base suppl&eacute;mentaire')
+		  . "</legend>\n"
+		  . "<ul>\n<li>"
+		  . join("</li>\n<li>",$bases)
+		  . "</li>\n</ul><p>"
+		  . _T('info_ou');
+		$type = " type='radio'" . ($checked ? '' : " checked='checked'");
+
+	} else {
+		$bases = _L("SPIP n'a pas acc&egrave;s &agrave; la liste des bases accessibles") . '<br /><br >';
+		$type = " type='hidden'";
+	}
+
 	return generer_form_ecrire('install', (
 	  "\n<input type='hidden' name='etape' value='$etape' />"
 	  . $hidden
-	  .  "\n<fieldset><legend>"
-	  . _L('Choisissez une base suppl&eacute;mentaire')
-	  . "</legend>\n"
-	  . "<ul>\n<li>"
-	  . join("</li>\n<li>",$bases)
-	  . "</li>\n</ul>"
+	  . $bases
+	  . "\n<input name=\"choix_db\" value='-1' id='nou'"
+	  . $type
+	  . " />\n"
+	  . "<label for='nou'><b>"
+	  ._L('indiquer une base sur ce serveur')
+	  ."</b></label></p>\n"
+	  . "\n<input type='text' name='table_new' class='fondl' size='20' /></p></fieldset>\n"
 	  . bouton_suivant()));
 }
 ?>
