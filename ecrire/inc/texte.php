@@ -267,7 +267,7 @@ function couper($texte, $taille=50) {
 	// supprimer l'eventuelle entite finale mal coupee
 	$texte = preg_replace('/&#?[a-z0-9]*$/', '', $texte);
 
-	return trim($texte).$points;
+	return quote_amp(trim($texte)).$points;
 }
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
