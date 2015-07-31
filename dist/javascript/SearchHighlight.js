@@ -79,7 +79,12 @@
     ],
     subs: {},
     decodeURL: function(URL,reg) {
-      URL = decodeURIComponent(URL);
+      //try to properly escape not UTF-8 URI encoded chars
+			try {
+				URL = decodeURIComponent(URL);
+			} catch (e) {
+				URL = unescape(URL);
+			}
       var query = null;
       $.each(reg,function(i,n){
         if(n[0].test(URL)) {
