@@ -217,8 +217,8 @@ function inclure_page($fond, $contexte, $connect='') {
 
 	// enlever le fond de contexte inclus car sinon il prend la main
 	// dans les sous inclusions -> boucle infinie d'inclusion identique
+	// (cette precaution n'est probablement plus utile)
 	unset($contexte['fond']);
-	// mais le donner pour le calcul du cache
 	$page = $fond; 
 	$cacher = charger_fonction('cacher', 'public');
 	// Les quatre derniers parametres sont modifies par la fonction:
@@ -248,7 +248,6 @@ function inclure_page($fond, $contexte, $connect='') {
 
 // http://doc.spip.org/@inclure_balise_dynamique
 function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
-	global $contexte_inclus; # provisoire : c'est pour le debuggueur
 
 	if (is_array($texte)) {
 
@@ -258,15 +257,10 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$d = isset($GLOBALS['delais']) ? $GLOBALS['delais'] : NULL;
 		$GLOBALS['delais'] = $delainc;
 
-		// les balises dynamiques passent toujours leur $fond
-		// si un 'fond' est present dans le contexte il vient d'autre part (de la bdd par exemple:p)
-		// et c'est le crash assure
-		$contexte_inclus['fond'] = $fond;
 		$page = recuperer_fond($fond,$contexte_inclus,array('trim'=>false, 'raw' => true));
 
 		$texte = $page['texte'];
 
-		// attention $contexte_inclus a pu changer pendant l'eval ci dessus
 		$GLOBALS['delais'] = $d;
 		// Faire remonter les entetes
 		if (is_array($page['entetes'])) {

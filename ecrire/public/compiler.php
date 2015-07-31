@@ -183,16 +183,10 @@ function calculer_inclure($p, &$boucles, $id_boucle) {
 		if ($ajax)
 			$_options[] = "\"ajax\"=>true";
 		$code = " ' . argumenter_squelette($code) . '"; 
-		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, '$contexte_inclus', implode(',',$_options), "_request(\"connect\")") . ';';
+		$code = "echo " . sprintf(CODE_RECUPERER_FOND, $code, $contexte, implode(',',$_options), "_request(\"connect\")") . ';';
 	}
 
-
-	$code = "\n'<".
-		"?php\n".'$contexte_inclus = '.$contexte.";\n"
-		. $code
-		. "\n?'." . "'>'";
-
-	return $code;
+	return	"\n'<".	"?php ". $code . "\n?'." . "'>'";
 }
 
 //
