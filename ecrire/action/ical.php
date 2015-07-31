@@ -28,8 +28,6 @@ function ligne_uid ($texte) {
 // http://doc.spip.org/@action_ical_dist
 function action_ical_dist()
 {
-	global $titres;
-
 	$id_auteur = _request('id_auteur');
 	$action = _request('action');
 	$arg = _request('arg');
@@ -70,12 +68,13 @@ function action_ical_dist()
 	spip_ical_rendez_vous($id_utilisateur, $nom_site);
 	spip_ical_taches($id_utilisateur, $nom_site);
 
-	$titre_prop = array();
 	$titres = spip_ical_articles($nom_site);
-	$nb_breves = spip_ical_breves($nom_site);
-	if ($titres || $nb_breves) {
+	$titres_breves = spip_ical_breves($nom_site);
+	if ($titres || $titres_breves) {
+		$titre_prop = array();
+
 		if ($titres) $titre_prop[] = _T('info_articles_proposes').": ". count($titres);
-		if ($nb_breves > 0) $titre_prop[] = _T('info_breves_valider').": ".$nb_breves;
+		if ($titres_breves) $titre_prop[] = _T('info_breves_valider').": ". count($titres_breves);
 		$titre = join($titre_prop," / ");
 		echo	filtrer_ical ("BEGIN:VTODO"), "\n",
 			filtrer_ical ("SUMMARY:[$nom_site] $titre"), "\n";
@@ -200,6 +199,7 @@ function spip_ical_taches($id_utilisateur, $nom_site)
 function spip_ical_articles($nom_site)
 {
 	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'prop'");
+	$titres = array();
 	while($row=spip_fetch_array($result_articles)){
 		$id_article=$row['id_article'];
 		$titre = supprimer_numero($row['titre']);
@@ -214,6 +214,7 @@ function spip_ical_articles($nom_site)
 			filtrer_ical ("URL:" . generer_url_ecrire("articles","id_article=$id_article")), "\n",
 			filtrer_ical ("END:VEVENT"), "\n";
 	}
+
 	return $titres;
 }
 
@@ -221,14 +222,13 @@ function spip_ical_articles($nom_site)
 // http://doc.spip.org/@spip_ical_breves
 function spip_ical_breves($nom_site)
 {
-	global $titres;
+	$titres = array();
 	$result = spip_query("SELECT id_breve, titre, date_heure FROM spip_breves WHERE statut = 'prop'");
 	while($row=spip_fetch_array($result)){
 		$id_breve=$row['id_breve'];
 		$titre = supprimer_numero($row['titre']);
 		$titres[] = $titre;
 		$date_heure = $row['date_heure'];
-		$nb_breves++;
 		echo filtrer_ical ("BEGIN:VEVENT"), "\n",
 			filtrer_ical ("SUMMARY:[$nom_site] $titre ("._T('item_breve_proposee').")"), "\n";
 		ligne_uid ("breve$id_breve");
@@ -238,7 +238,7 @@ function spip_ical_breves($nom_site)
 			filtrer_ical ("URL:" . generer_url_ecrire("breves_voir","id_breve=$id_breve")), "\n",
 			filtrer_ical ("END:VEVENT"), "\n";
 	}
-	return $nb_breves;
+	return $titres;
 }
 
 
@@ -308,6 +308,7 @@ function spip_ical_forums($id_utilisateur, $nom_site)
 {
 	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut = 'prop'");
 
+	$nb_forum = 0;
 	while($row=spip_fetch_array($result_forum)){
 		$nb_forum ++;
 	
