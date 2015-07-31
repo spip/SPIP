@@ -19,6 +19,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // reperer un code ne calculant rien, meme avec commentaire
 define('CODE_MONOTONE', ",^(\n//[^\n]*\n)?\(?'([^'])*'\)?$,");
+// s'il faut commenter le code produit
+define('CODE_COMMENTE', true);
 
 // definition des structures de donnees
 include_spip('public/interfaces');
@@ -994,15 +996,18 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile, $connect='')
 		.preg_replace(',\.html$,', '', $sourcefile)
 		."] $nom.php");
 
-	$code = "<"."?php
+	if (!CODE_COMMENTE)
+		$head = '';
+	else $head = "
 /*
  * Squelette : $sourcefile
  * Date :      ".gmdate("D, d M Y H:i:s", @filemtime($sourcefile))." GMT
  * Compile :   ".gmdate("D, d M Y H:i:s", time())." GMT ($secondes)
  * " . (!$boucles ?  "Pas de boucle" :
 	("Boucles :   " . join (', ', array_keys($boucles)))) ."
- */ " .
-	  $code . '
+ */ " ;
+
+	$code = '<'.'?php' . $head .  $code . '
 
 //
 // Fonction principale du squelette ' . $sourcefile . 
