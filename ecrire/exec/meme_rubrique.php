@@ -22,7 +22,7 @@ function exec_meme_rubrique_dist()
 function exec_meme_rubrique_args($id, $type, $order)
 {
         if ((!autoriser('publierdans','rubrique',$id))
-	OR (!preg_match('/^[\w_-]+$/',$order))) {
+	OR (!preg_match('/^[\w_-]*$/',$order))) {
 		include_spip('inc/minipres');
                 echo minipres();
         } else {

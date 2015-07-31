@@ -1355,7 +1355,11 @@ function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=NULL, $aj
 	global $spip_lang_right, $spip_lang_left;
 	include_spip('inc/afficher_objets');
 
-	if (!($table = table_objet_sql($type))) return '';
+	if (!($table = table_objet_sql($type))) {
+		spip_log("meme_rubrique: $type table inconnue");
+		$type = 'article';
+		$table = table_objet_sql($type);
+	}
 
 	if (!$limit) $limit = 10;
 
