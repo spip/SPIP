@@ -304,6 +304,7 @@ function calcul_exposer ($id, $type, $reference) {
 		$exposer = array();
 		foreach ($reference as $element=>$id_element) {
 			if ($element == 'id_secteur') $element = 'id_rubrique';
+			if (!$id_element) $id_element = "''";
 			if ($x = table_from_primary($element)) {
 				list($table,$hierarchie) = $x;
 				$exposer[$element][$id_element] = true;
