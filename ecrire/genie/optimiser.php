@@ -167,6 +167,8 @@ function optimiser_base_disparus($attente = 86400) {
 
 	$n+= optimiser_sansref('spip_articles', 'id_article', $res);
 
+	// les articles a la poubelle
+	sql_delete("spip_articles", "statut='poubelle' AND maj < $mydate");
 
 	//
 	// Auteurs
