@@ -389,6 +389,7 @@ class Link {
 		if (!$url) {
 			$url = $GLOBALS['REQUEST_URI'];
 			$url = substr($url, strrpos($url, '/') + 1);
+			if (!$url) $url = "./";
 			if (count($GLOBALS['HTTP_POST_VARS'])) $vars = $GLOBALS['HTTP_POST_VARS'];
 		}
 		$v = split('[\?\&]', $url);
