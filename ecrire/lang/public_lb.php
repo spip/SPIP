@@ -54,6 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // J
 'jours' => 'Deg',
 
+// L
+'lien_connecter' => 'Verbannen',
+
 // M
 'meme_auteur' => 'Vum selwechten Auteur',
 'meme_rubrique' => 'An der selwechter Rubrik',
