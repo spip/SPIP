@@ -349,7 +349,7 @@ function fin_page()
 			. "</a></div>")
 		: ("<div id='copyright'>"
 
-		. info_maj ()
+			. info_maj ('spip', 'SPIP', $GLOBALS['spip_version_branche'])
 			. info_copyright()
 			. "<br />"
 		 	. _T('info_copyright_doc',
@@ -400,22 +400,22 @@ function info_copyright() {
 }
 
 define('_VERSIONS_SERVEUR', 'http://files.spip.org/');
-define('_VERSIONS_LISTE', 'spip/archives.xml');
+define('_VERSIONS_LISTE', 'archives.xml');
 
-function info_maj ()
+function info_maj ($dir, $file, $version)
 {
-	global $spip_version_branche;
 	if (!autoriser('webmestre')) return '';
-	list($maj,$min,$rev) = preg_split('/\D+/', $spip_version_branche);
+	list($maj,$min,$rev) = preg_split('/\D+/', $version);
 #	list($maj,$min,$rev) = preg_split('/\D+/', '1.9.2i'); # pour test
 	include_spip('inc/distant');
-	$liste = _VERSIONS_SERVEUR . _VERSIONS_LISTE;
+	$dir = _VERSIONS_SERVEUR . $dir . '/';
+	$liste = $dir . _VERSIONS_LISTE;
 	if (!$page = copie_locale($liste, 'modif')) return '';
 	$page = file_get_contents(_DIR_RACINE . $page);
 	// reperer toutes les versions de numero majeur superieur ou egal
 	// (a revoir quand on arrivera a SPIP V10 ...)
 	$p = substr("0123456789", intval($maj));
-	$re = ',archives/SPIP\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?[\w.-]*,';
+	$re = ',/' . $file . '\D+([' . $p . ']+)\D+(\d+)(\D+(\d+))?.*?[.]zip",i';
 	preg_match_all($re, $page, $m,  PREG_SET_ORDER);
 	$new = '';
 	foreach ($m as $v) {
@@ -431,7 +431,7 @@ function info_maj ()
 	}
 
 	if (!$new) return "";
-	return "<br /><a style='color: red' href='" . _VERSIONS_SERVEUR . "'>" . 
+	return "<br /><a style='color: red' href='$dir'>" . $new .
 	    _L('De nouvelles_versions_de_SPIP_sont_disponibles') .
 	    '</a><br />';
 }
