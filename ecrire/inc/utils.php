@@ -958,10 +958,16 @@ function spip_initialisation() {
 	//
 
 	// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-	if (!$GLOBALS['REQUEST_URI'])
-		$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
-	if ($_SERVER['QUERY_STRING'] AND !strpos($_SERVER['REQUEST_URI'], '?'))
-		$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
+	if (!isset($GLOBALS['REQUEST_URI'])) {
+		if (isset($_SERVER['REQUEST_URI'])) {
+			$GLOBALS['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
+		} else {
+			$GLOBALS['REQUEST_URI'] = $_SERVER['PHP_SELF'];
+			if ($_SERVER['QUERY_STRING']
+			AND !strpos($_SERVER['REQUEST_URI'], '?'))
+				$GLOBALS['REQUEST_URI'] .= '?'.$_SERVER['QUERY_STRING'];
+		}
+	}
 
 	// tidy en ligne de commande (si on ne l'a pas en module php,
 	// ou si le module php ne marche pas)
