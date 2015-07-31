@@ -56,7 +56,6 @@ function action_legender_auteur_post($r) {
 	  }
 	if (!$auteur) {
 		$id_auteur = 0;
-		$source = 'spip';
 		if ($s) {
 		  if (in_array($s,$GLOBALS['liste_des_statuts']))
 		    $statut = $s;
@@ -68,6 +67,7 @@ function action_legender_auteur_post($r) {
 		  }
 		}
 		$auteur = array();
+		$auteur['source'] = 'spip';
 	  }
 
 	  // login et mot de passe
@@ -110,7 +110,7 @@ function action_legender_auteur_post($r) {
 		}
 	}
 
-	if ($new_pass AND $id_auteur) {
+	if ($new_pass AND ($id_auteur OR $auteur['source'] == 'spip')) {
 		$htpass = generer_htpass($new_pass);
 		$alea_actuel = creer_uniqid();
 		$alea_futur = creer_uniqid();
