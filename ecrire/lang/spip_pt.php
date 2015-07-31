@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avis_erreur_connexion' => 'Erro de ligação ',
 	'avis_erreur_cookie' => 'problema de cookie',
 	'avis_erreur_fonction_contexte' => 'Erro de programação. Não se pode chamar esta função neste contexto.',
-	'avis_erreur_mysql' => 'Erro SQL', # MODIF
+	'avis_erreur_mysql' => 'Erro SQL',
 	'avis_erreur_sauvegarde' => 'Erro na cópia de segurança  (@type@ @id_objet@) !',
 	'avis_erreur_visiteur' => 'Problème d\'accès à l\'espace privé', # NEW
 
@@ -64,8 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_changer' => 'Modificar',
 	'bouton_chercher' => 'Procurar',
 	'bouton_choisir' => 'Seleccionar',
-	'bouton_deplacer' => 'Déplacer', # NEW
-	'bouton_download' => 'Télécharger', # MODIF
+	'bouton_deplacer' => 'Mover',
+	'bouton_download' => 'Download',
 	'bouton_enregistrer' => 'Guardar',
 	'bouton_radio_desactiver_messagerie_interne' => 'Desactivar a caixa de correio interno',
 	'bouton_radio_envoi_annonces' => 'Enviar os anúncios editoriais',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_radio_non_envoi_liste_nouveautes' => 'Não enviar a lista das novidades',
 	'bouton_recharger_page' => 'recarregar esta página',
 	'bouton_telecharger' => 'Carregar',
-	'bouton_upload' => 'Telecarregar', # MODIF
+	'bouton_upload' => 'Carregar',
 	'bouton_valider' => 'Submeter',
 
 	// C
@@ -216,7 +216,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_une_semaine' => 'semaine', # NEW
 	'dirs_commencer' => 'a fim de começar realmente a instalação',
 	'dirs_preliminaire' => 'Preliminar : <b>Configurar os direitos de acesso</b>',
-	'dirs_probleme_droits' => 'Problema de direitos de acesso', # MODIF
+	'dirs_probleme_droits' => 'Problema de direitos de acesso',
 	'dirs_repertoires_absents' => '<b>Os seguintes directórios não foram encontrados : <ul>@bad_dirs@.</ul> </b>
   <p>É provável que resulte de um problema de má colocação de maiúsculas ou minúsculas.
   Verifique que as minúsculas e maiúsculas destes repertórios concordam com o que está exibido
@@ -230,7 +230,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'en_cours' => 'en cours', # NEW
-	'envoi_via_le_site' => 'Envio pelo site',
+	'envoi_via_le_site' => 'Envio pelo sítio',
 	'erreur' => 'Erreur', # NEW
 	'erreur_balise_non_fermee' => 'dernière balise non refermée :', # NEW
 	'erreur_technique_ajaxform' => 'Ooops. Une erreur innatendue a empêché de soumettre le formulaire. Vous pouvez essayer à nouveau.', # NEW
@@ -253,39 +253,39 @@ sera ignorée) :
 
     @url@
 ', # NEW
-	'form_deja_inscrit' => 'Já está inscrito',
+	'form_deja_inscrit' => 'Já está inscrito.',
 	'form_email_non_valide' => 'O seu endereço email não é válido',
 	'form_forum_access_refuse' => 'Você já não tem acesso a este sítio',
 	'form_forum_bonjour' => 'Bom dia @nom@,',
 	'form_forum_confirmer_email' => 'Pour confirmer votre adresse email, rendez vous à cette adresse : @url_confirm@', # NEW
 	'form_forum_email_deja_enregistre' => 'Este endereço e-mail já está registado,pode portanto utilizar a sua palavra-passe habitual',
-	'form_forum_identifiant_mail' => 'O seu novo identificador acabou de lhe ser enviado por email',
+	'form_forum_identifiant_mail' => 'O seu novo identificador acabou de lhe ser enviado por email.',
 	'form_forum_identifiants' => 'Identificadores pessoais',
 	'form_forum_indiquer_nom_email' => 'Indicar aqui o seu nome e o seu endereço email. O seu identificador pessoal ser-lhe-á enviado rapidamente por correio electrónico.',
 	'form_forum_login' => 'login:',
-	'form_forum_message_auto' => '(isto é uma mensagem automática)',
+	'form_forum_message_auto' => '(esta é uma mensagem automática)',
 	'form_forum_pass' => 'palavra-passe',
-	'form_forum_probleme_mail' => 'Problema de mail :o identificador não pode ser mandado ',
+	'form_forum_probleme_mail' => 'Problema de mail :o identificador não pôde ser enviado',
 	'form_forum_voici1' => 'Estes são os seus dados para poder participar nos fóruns
  do sítio  "@nom_site_spip@" (@adresse_site@):', # MODIF
 	'form_forum_voici2' => 'Eis os seus identificadores para propor artigos no
- sítio "@nom_site_spip@" (@adresse_login@):', # MODIF
-	'form_indiquer_email' => 'Favor indicar o seu endereço email.',
-	'form_indiquer_nom' => 'Favor indicar o seu nome.',
-	'form_indiquer_nom_site' => 'Favor indicar o nome do seu sítio.',
+ sítio "@nom_site_spip@" (@adresse_login@):',
+	'form_indiquer_email' => 'Por favor indique o seu endereço email.',
+	'form_indiquer_nom' => 'Por favor indique o seu nome.',
+	'form_indiquer_nom_site' => 'Por favor indique o nome do seu sítio.',
 	'form_pet_deja_enregistre' => 'Este sítio já está registado',
 	'form_pet_signature_pasprise' => 'A sua assinatura não está tomada em conta.',
 	'form_prop_confirmer_envoi' => 'Confirmar o envio',
 	'form_prop_description' => 'Descrição/comentário',
-	'form_prop_enregistre' => 'A sua proposta foi registada, aparecerá em linha depois da validação pelos responsáveis deste sítio.',
-	'form_prop_envoyer' => 'Mandar uma mensagem',
-	'form_prop_indiquer_email' => 'Favor indicar um endereço email válido',
-	'form_prop_indiquer_nom_site' => 'Favor indicar o nome do sítio.',
-	'form_prop_indiquer_sujet' => 'Favor indicar um assunto',
-	'form_prop_message_envoye' => 'Mensagem mandada',
+	'form_prop_enregistre' => 'A sua proposta foi registada. Aparecerá online após a validação pelos responsáveis deste sítio.',
+	'form_prop_envoyer' => 'Enviar uma mensagem',
+	'form_prop_indiquer_email' => 'Por favor indique um endereço email válido',
+	'form_prop_indiquer_nom_site' => 'Por favor indique o nome do sítio.',
+	'form_prop_indiquer_sujet' => 'Por favor indique um tema',
+	'form_prop_message_envoye' => 'Mensagem enviada',
 	'form_prop_non_enregistre' => 'A sua proposta não foi registada.',
-	'form_prop_sujet' => 'Assunto',
-	'form_prop_url_site' => 'Endereço (URL) do sítio', # MODIF
+	'form_prop_sujet' => 'Tema',
+	'form_prop_url_site' => 'Endereço (URL) do sítio',
 	'forum_non_inscrit' => 'Não está inscrito, ou o endereço ou a palavra-passe estão errados.',
 	'forum_par_auteur' => 'por @auteur@',
 	'forum_titre_erreur' => 'Erro...',
@@ -306,24 +306,24 @@ sera ignorée) :
 	'icone_creer_nouvel_auteur' => 'Criar um novo autor',
 	'icone_creer_rubrique' => 'Criar uma rubrica',
 	'icone_creer_sous_rubrique' => 'Criar uma sub-rubrica',
-	'icone_deconnecter' => 'Desligar-se',
+	'icone_deconnecter' => 'Sair',
 	'icone_discussions' => 'Discussões',
 	'icone_doc_rubrique' => 'Documentos das rubricas',
 	'icone_ecrire_article' => 'Escrever um novo artigo',
 	'icone_edition_site' => 'Edição',
-	'icone_gestion_langues' => 'Gestão das línguas',
+	'icone_gestion_langues' => 'Opções de idiomas',
 	'icone_informations_personnelles' => 'Informações pessoais',
 	'icone_interface_complet' => 'interface completa',
 	'icone_interface_simple' => 'Interface simplificada',
 	'icone_maintenance_site' => 'Manutenção do sítio',
-	'icone_messagerie_personnelle' => 'Correio pessoal',
+	'icone_messagerie_personnelle' => 'Mensagens privadas',
 	'icone_repartition_debut' => 'Exibir a distribuição desde o início',
 	'icone_rubriques' => 'Rubricas',
-	'icone_sauver_site' => 'Salvaguarda do sítio',
+	'icone_sauver_site' => 'Cópia de segurança do sítio',
 	'icone_site_entier' => 'Todo o sítio',
 	'icone_sites_references' => 'Sítios referenciados',
 	'icone_statistiques' => 'Estatísticas do sítio',
-	'icone_suivi_activite' => 'Acompanhar a vida do sítio',
+	'icone_suivi_activite' => 'Acompanhar a actividade do sítio',
 	'icone_suivi_actualite' => 'Evolução do sítio',
 	'icone_suivi_pettions' => 'Seguir/gerir os abaixo-assinados',
 	'icone_suivi_revisions' => 'Modificações dos artigos',
@@ -332,8 +332,8 @@ sera ignorée) :
 	'icone_tous_articles' => 'Todos os seus artigos',
 	'icone_tous_auteur' => 'Todos os autores',
 	'icone_tous_visiteur' => 'Tous les visiteurs', # NEW
-	'icone_visiter_site' => 'Visitar', # MODIF
-	'icone_voir_en_ligne' => 'Ver em linha',
+	'icone_visiter_site' => 'Visitar o sítio público',
+	'icone_voir_en_ligne' => 'Ver online',
 	'img_indisponible' => 'imagem indisponível',
 	'impossible' => 'impossible', # NEW
 	'info_a_suivre' => 'A SEGUIR »',
@@ -362,16 +362,16 @@ sera ignorée) :
 	'info_breves_nb' => '@nb@ brèves', # NEW
 	'info_breves_un' => '1 brève', # NEW
 	'info_connexion_refusee' => 'Ligação recusada',
-	'info_contact_developpeur' => 'Favor contactar com um programador',
-	'info_contenance' => 'Este sítio contem :',
-	'info_contribution' => 'contribuições de fórum', # MODIF
+	'info_contact_developpeur' => 'Por favor contacte um programador',
+	'info_contenance' => 'Este sítio contém :',
+	'info_contribution' => 'contribuições de fórum',
 	'info_copyright' => '@spip@ é um software livre distribuído @lien_gpl@.',
 	'info_copyright_doc' => 'Para mais informações, ver o sítio <a href="@spipnet@">http://www.spip.net/pt</a>.', # MODIF
 	'info_copyright_gpl' => 'sob licença GPL',
 	'info_cours_edition' => 'Os seus artigos em curso de redacção',
-	'info_creer_repertoire' => 'Favor criar um ficheiro ou um repertório chamado :',
+	'info_creer_repertoire' => 'Por favor crie um ficheiro ou um directório chamado :',
 	'info_creer_repertoire_2' => 'dentro do sub-repertório <b>@repertoire@</b>, depois :', # MODIF
-	'info_creer_vignette' => 'criação automática do ícone',
+	'info_creer_vignette' => 'criação automática de miniatura',
 	'info_creerdansrubrique_non_autorise' => 'Vous n\'avez pas de droits suffisants pour créer un contenu dans cette rubrique', # NEW
 	'info_deplier' => 'Desenvolver',
 	'info_descriptif_nombre' => 'descritivo(s) :',
@@ -383,26 +383,26 @@ sera ignorée) :
 	'info_ecire_message_prive' => 'Escrever uma mensagem privada',
 	'info_email_invalide' => 'Endereço email inválido.',
 	'info_en_cours_validation' => 'Os seus artigos em curso de redação',
-	'info_en_ligne' => 'Actualmente em linha :',
+	'info_en_ligne' => 'Actualmente online:',
 	'info_envoyer_message_prive' => 'Enviar uma mensagem privada a este autor',
 	'info_erreur_requete' => 'Erro no pedido :',
-	'info_erreur_squelette2' => 'Template <b>@fichier@</b> não disponível...',
+	'info_erreur_squelette2' => 'Modelo <b>@fichier@</b> não disponível...',
 	'info_erreur_systeme' => 'Erro de Sistema (errno @errsys@)',
 	'info_erreur_systeme2' => 'O disco rígido poderá estar cheio, ou a base de dados danificada. <br />
  <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
  ou contacte o seu fornecedor de internet.</font>', # MODIF
-	'info_fini' => 'Acabou !',
+	'info_fini' => 'Terminou !',
 	'info_format_image' => 'Formatos de imagens que podem ser utilizadas para criar vinhetas : @gd_formats@.',
 	'info_format_non_defini' => 'formato não definido',
 	'info_grand_ecran' => 'Ecrã total',
 	'info_image_aide' => 'AJUDA',
-	'info_image_process_titre' => 'Método de fabricaçao das vinhetas',
-	'info_impossible_lire_page' => '<b>Erro !</b> Impossível ler a página<tt><html>@test_proxy@</html></tt> através do proxy <tt>', # MODIF
+	'info_image_process_titre' => 'Como criar miniaturas',
+	'info_impossible_lire_page' => '<b>Erro !</b> Impossível ler a página<tt><html>@test_proxy@</html></tt> através do proxy <tt>',
 	'info_installation_systeme_publication' => 'Instalação do sistema de publicação',
 	'info_installer_documents' => 'Pode instalar automaticamente todos os documentos contidos no processo @upload@.', # MODIF
 	'info_installer_ftp' => 'Como administrador, pode instalar (por FTP) ficheiros no dossier @upload@ para depois seleccioná-los directamente aqui.', # MODIF
 	'info_installer_images' => 'Pode instalar imagens nos formatos JPEG, GIF e PNG.',
-	'info_installer_images_dossier' => 'Instalar imagens no dossier @upload@ para poder seleccioná-los aqui.', # MODIF
+	'info_installer_images_dossier' => 'Instalar imagens na pasta @upload@ para poder seleccioná-los aqui.',
 	'info_interface_complete' => 'Interface completa',
 	'info_interface_simple' => 'Interface simplificada',
 	'info_joindre_document_article' => 'Pode juntar a este artigo documentos de tipo',
@@ -411,26 +411,26 @@ sera ignorée) :
 	'info_l_article' => 'o artigo',
 	'info_la_breve' => 'a notícia',
 	'info_la_rubrique' => 'a rubrica',
-	'info_langue_principale' => 'Língua principal do sítio',
+	'info_langue_principale' => 'Idioma principal do sítio',
 	'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 	'info_les_auteurs_1' => 'por @les_auteurs@',
 	'info_logo_format_interdit' => 'Apenas os ícones nos formatos @formats@ estão autorizados.',
 	'info_logo_max_poids' => 'Os ícones devem obrigatoriamente ter menos de @maxi@ (este arquivo tem @actuel@).',
 	'info_mail_fournisseur' => 'você@seucorreio.com',
 	'info_message_2' => 'MENSAGEM',
-	'info_message_supprime' => 'MENSAGEM SUPRIMIDA',
+	'info_message_supprime' => 'MENSAGEM ELIMINADA',
 	'info_messages_nb' => '@nb@ messages', # NEW
 	'info_messages_un' => '1 message', # NEW
-	'info_mise_en_ligne' => 'Data de colocação em linha :',
+	'info_mise_en_ligne' => 'Data de colocação online :',
 	'info_modification_parametres_securite' => 'modificação dos parâmetros de segurança',
 	'info_mois_courant' => 'Durante o mês :',
 	'info_mot_cle_ajoute' => 'A seguinte palavra-chave foi acrescentada a',
-	'info_multi_herit' => 'Língua por defeito',
+	'info_multi_herit' => 'Idioma por defeito',
 	'info_multi_langues_soulignees' => 'As <u>línguas sublinhadas</u> beneficiam de uma tradução de todos os textos da interface. Se seleccionar essas línguas, muitos elementos do sítio público (datas, formulários) serão automaticamente traduzidos. Para as línguas não sublinhadas, esses elementos aparecerão na língua principal do sítio.', # MODIF
 	'info_multilinguisme' => 'Multilinguismo',
 	'info_nom_non_utilisateurs_connectes' => 'O seu nome não aparece na lista dos utilizadores ligados.',
 	'info_nom_utilisateurs_connectes' => 'O seu nome aparece na lista dos utilizadores ligados.',
-	'info_nombre_en_ligne' => 'Actualmente em linha :',
+	'info_nombre_en_ligne' => 'Actualmente online :',
 	'info_non_resultat' => 'Nenhum resultado para "@cherche_mot@"',
 	'info_non_utilisation_messagerie' => 'Não utiliza o correio interno deste sítio.',
 	'info_nouveau_message' => 'TEM UMA NOVA MENSAGEM',
@@ -445,19 +445,19 @@ sera ignorée) :
 	'info_portfolio_automatique' => 'Portfolio automático :',
 	'info_premier_resultat' => '[@debut_limit@ primeiros resultados em @total@]',
 	'info_premier_resultat_sur' => '[@debut_limit@ primeiros resultados em @total@]',
-	'info_propose_1' => '[@nom_site_spip@] Propõe : @titre@',
+	'info_propose_1' => '[@nom_site_spip@] Proposto : @titre@',
 	'info_propose_2' => 'Artigos propostos
 ----------------',
 	'info_propose_3' => 'O artigo "@titre@" é proposto para publicação.',
 	'info_propose_4' => 'Está convidado a vir consultá-lo e a dar a sua opinião',
 	'info_propose_5' => 'no fórum que lhe está ligado. Está disponível no endereço:',
 	'info_publie_01' => 'O artigo "@titre@" foi validado por @connect_nom@.',
-	'info_publie_1' => '[@nom_site_spip@] PUBLICA : @titre@',
+	'info_publie_1' => '[@nom_site_spip@] PUBLICADO : @titre@',
 	'info_publie_2' => 'Artigo publicado
 --------------',
 	'info_rechercher' => 'Procurar',
 	'info_rechercher_02' => 'Procurar :',
-	'info_remplacer_vignette' => 'Substituir a vinheta por defeito por um logotipo personalizado :',
+	'info_remplacer_vignette' => 'Substituir a miniatura por defeito por um logotipo personalizado :',
 	'info_rubriques_nb' => '@nb@ rubriques', # NEW
 	'info_rubriques_un' => '1 rubrique', # NEW
 	'info_sans_titre_2' => 'sem título',
@@ -465,7 +465,7 @@ sera ignorée) :
 	'info_selectionner_fichier_2' => 'Seleccionar um ficheiro :',
 	'info_sites_nb' => '@nb@ sites', # NEW
 	'info_sites_un' => '1 site', # NEW
-	'info_supprimer_vignette' => 'suprimir a vinheta',
+	'info_supprimer_vignette' => 'suprimir a miniatura',
 	'info_symbole_bleu' => 'O símbolo <b>azul</b> indica um<b>memorando </b>: isto é uma mensagem para o seu uso pessoal.', # MODIF
 	'info_symbole_jaune' => 'O símbolo<b>amarelo</b> indica um <b>anúncio a todos os redactores</b> : modificável por todos os administradores, e visível por todos os redactores.', # MODIF
 	'info_symbole_vert' => 'O símbolo<b>verde</b> indica as <b>mensagens trocadas com outros utilizadores</b> do sítio.', # MODIF
@@ -473,17 +473,17 @@ sera ignorée) :
 	'info_telecharger_ordinateur' => 'Telecarregar do seu computador :',
 	'info_tous_resultats_enregistres' => '[todos os  resultados estão registados]',
 	'info_tout_afficher' => 'Exibir tudo',
-	'info_travaux_texte' => 'Este sítio não está configurado. Volte mais tarde...',
-	'info_travaux_titre' => 'Sítio em obras',
-	'info_trop_resultat' => 'Demasiado resultados para "@cherche_mot@" ; favor afinar a pesquisa.',
+	'info_travaux_texte' => 'Este sítio ainda não está configurado. Volte mais tarde...',
+	'info_travaux_titre' => 'Sítio em construção',
+	'info_trop_resultat' => 'Demasiado resultados para "@cherche_mot@". Por favor afine a pesquisa.',
 	'info_utilisation_messagerie_interne' => 'Você utiliza o correio interno deste sítio.',
-	'info_valider_lien' => 'validar este laço',
-	'info_verifier_image' => ', favor verificar que as suas imagens foram transferidas correctamente.',
-	'info_vignette_defaut' => 'Vinheta por defeito',
-	'info_vignette_personnalisee' => 'Vinheta personalizada',
+	'info_valider_lien' => 'validar esta ligação',
+	'info_verifier_image' => ', Por favor verifique se as suas imagens foram transferidas correctamente.',
+	'info_vignette_defaut' => 'Miniatura por defeito',
+	'info_vignette_personnalisee' => 'Miniatura personalizada',
 	'info_visite' => 'visita :',
 	'info_vos_rendez_vous' => 'Os seus futuros encontros',
-	'infos_vos_pense_bete' => 'Os seus memorandos', # MODIF
+	'infos_vos_pense_bete' => 'Os seus memorandos',
 
 	// L
 	'label_ajout_id_rapide' => 'Ajout rapide', # NEW
@@ -496,12 +496,12 @@ sera ignorée) :
 	'lien_nouvea_pense_bete' => 'NOVO MEMORANDO',
 	'lien_nouveau_message' => 'NOVA MENSAGEM',
 	'lien_nouvelle_annonce' => 'NOVO ANÚNCIO',
-	'lien_petitions' => 'ABAIXO-ASSINADO',
+	'lien_petitions' => 'PETIÇÃO',
 	'lien_popularite' => 'popularidade : @popularite@%',
 	'lien_racine_site' => 'RAIZ DO SÍTIO',
 	'lien_reessayer' => 'tentar de novo',
 	'lien_repondre_message' => 'Responder a esta mensagem',
-	'lien_supprimer' => 'suprimir',
+	'lien_supprimer' => 'eliminar',
 	'lien_tout_afficher' => 'Exibir tudo',
 	'lien_visite_site' => 'visitar este sítio',
 	'lien_visites' => '@visites@ visitas',
@@ -510,11 +510,11 @@ sera ignorée) :
 	'login' => 'Connexion', # NEW
 	'login_acces_prive' => 'acesso ao espaço privado',
 	'login_autre_identifiant' => 'ligar-se sob um outro identificador',
-	'login_cookie_accepte' => 'Favor configurar o seu navegador para que os aceite ( pelo menos para este sítio).',
+	'login_cookie_accepte' => 'Por favor configure o seu navegador para que os aceite (pelo menos para este sítio).',
 	'login_cookie_oblige' => 'Para se identificar de maneira segura neste sítio, deve aceitar os cookies.',
 	'login_deconnexion_ok' => 'Ligação terminada.',
 	'login_erreur_pass' => 'Erro de palavra-passe',
-	'login_espace_prive' => 'espaço privado',
+	'login_espace_prive' => 'área privada',
 	'login_identifiant_inconnu' => 'O identificador « @login@ » é desconhecido.',
 	'login_login' => 'Login :',
 	'login_login2' => 'Login (identificador de conexão ao sítio) :', # MODIF
@@ -522,7 +522,7 @@ sera ignorée) :
 	'login_motpasseoublie' => 'palavra - passe esquecida ?',
 	'login_non_securise' => 'Atenção, este formulário não é seguro.
  Se não quiser que a sua palavra-passe seja
- interceptada na rede, favor active Javascript
+ interceptada na rede, por favor active Javascript
  no seu navegador e',
 	'login_nouvelle_tentative' => 'Nova tentativa',
 	'login_par_ici' => 'Você está registado... por aqui....',
@@ -542,15 +542,15 @@ sera ignorée) :
 	// M
 	'masquer_colonne' => 'Masquer cette colonne', # NEW
 	'masquer_trad' => 'masquer les traductions', # NEW
-	'module_fichiers_langues' => 'Ficheiros de língua',
+	'module_fichiers_langues' => 'Ficheiros de idioma',
 
 	// N
-	'navigateur_pas_redirige' => 'Se o seu browser não está redireccionado, clique aqui para continuar.',
+	'navigateur_pas_redirige' => 'Se o seu navegador não está redireccionado, clique aqui para continuar.',
 	'numero' => 'Numéro', # NEW
 
 	// O
 	'occurence' => 'Occurrence', # NEW
-	'onglet_affacer_base' => 'Apagar a base',
+	'onglet_affacer_base' => 'Apagar a base de dados',
 	'onglet_auteur' => 'O autor',
 	'onglet_contenu_site' => 'Conteúdo do sítio',
 	'onglet_evolution_visite_mod' => 'Evolução',
@@ -559,17 +559,17 @@ sera ignorée) :
 	'onglet_interactivite' => 'Interactividade',
 	'onglet_messagerie' => 'Correio',
 	'onglet_repartition_rubrique' => 'Distribuição das rubricas',
-	'onglet_save_restaur_base' => 'Salvaguardar/restaurar a base',
+	'onglet_save_restaur_base' => 'Guardar uma cópia/restaurar a base',
 	'onglet_vider_cache' => 'Esvaziar a cache',
 
 	// P
-	'pass_choix_pass' => 'Favor escolher a sua nova palavra-passe',
+	'pass_choix_pass' => 'Por favor escolha a sua nova palavra-passe',
 	'pass_erreur' => 'Erro',
 	'pass_erreur_acces_refuse' => '<b>Erro :</b> já não tem acesso a este sítio.',
 	'pass_erreur_code_inconnu' => '<b>Erro :</b> este código não corresponde a nenhum dos visitantes com acesso a este sítio.',
 	'pass_erreur_non_enregistre' => '<b>Erro :</b> o endereço <tt>@email_oubli@</tt> não está registado neste sítio. ',
 	'pass_erreur_non_valide' => '<b>Erro :</b> este email <tt>@email_oubli@</tt> não é válido !  ',
-	'pass_erreur_probleme_technique' => '<b>Erro :</b> por causa de um problema técnico, o email não pode ser enviado.',
+	'pass_erreur_probleme_technique' => '<b>Erro :</b> por causa de um problema técnico, o email não pôde ser enviado.',
 	'pass_espace_prive_bla' => 'O espaço privado deste sítio está aberto aos
  visitantes, após inscrição. Uma vez registado poderá consultar os artigos em curso de redacção,
 propor artigos e participar em todos os fóruns.',
@@ -594,17 +594,17 @@ Poderá então introduzir uma nova palavra-passe
 	'pass_nouveau_enregistre' => 'A sua nova palavra-passe foi registada',
 	'pass_nouveau_pass' => 'Nova palavra-passe',
 	'pass_ok' => 'OK',
-	'pass_oubli_mot' => 'Esquecida a palavra-passe',
+	'pass_oubli_mot' => 'Palavra-passe esquecida',
 	'pass_procedure_changer' => 'Pour changer votre mot de passe, nous devons d\'abord vérifier votre identité. Pour cela indiquez nous l\'adresse email associée à votre compte.', # NEW
-	'pass_quitter_fenetre' => 'Deixar esta janela',
+	'pass_quitter_fenetre' => 'Fechar esta janela',
 	'pass_rappel_login' => 'Recorde : o seu identificador (login) é « @login@ ».',
 	'pass_recevoir_mail' => 'Vai receber um email que indica como recuperar o seu acesso ao sítio.',
 	'pass_retour_public' => 'Regresso ao sítio público',
 	'pass_rien_a_faire_ici' => 'Nada a fazer aqui.',
 	'pass_vousinscrire' => 'Inscrever-se neste sítio',
-	'precedent' => 'precedente',
+	'precedent' => 'anterior',
 	'previsualisation' => 'Visualização',
-	'previsualiser' => 'Visualizar',
+	'previsualiser' => 'Pré-visualizar',
 
 	// R
 	'retour' => 'Retour', # NEW
@@ -622,10 +622,10 @@ Poderá então introduzir uma nova palavra-passe
 	'taille_ko' => '@taille@ kb',
 	'taille_mo' => '@taille@ Mb',
 	'taille_octets' => ' @taille@ bytes',
-	'texte_actualite_site_1' => 'Quando estiver familiarizado(a) com a interface, poderá clicar sobre «',
+	'texte_actualite_site_1' => 'Quando estiver familiarizado(a) com a interface, poderá clicar em «',
 	'texte_actualite_site_2' => 'interface completa',
 	'texte_actualite_site_3' => '» para abrir mais possibilidades.',
-	'texte_creation_automatique_vignette' => 'A criação automática de vinhetas de previsualização está activada neste sítio. Se instalar a partir deste formulário imagens de formato(s) @gd_formats@, serão acompanhadas de uma vinheta de um tamanho máximo de @taille_preview@ pixels.',
+	'texte_creation_automatique_vignette' => 'A criação automática de miniaturas de pré-visualização está activada neste sítio. Se instalar a partir deste formulário imagens de formato(s) @gd_formats@, serão acompanhadas de uma miniatura de um tamanho máximo de @taille_preview@ pixels.',
 	'texte_documents_associes' => 'Os documentos seguintes estão associados ao artigo,
   mas não foram directamente
  inseridos nele. Conforme a paginação do sítio público,
@@ -647,12 +647,12 @@ Poderá então introduzir uma nova palavra-passe
  geral, é fortemente recomendado
  deixar a responsabilidade dessas páginas ao webmestre principal do seu sítio. <b>', # MODIF
 	'texte_inc_meta_1' => 'O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,', # MODIF
-	'texte_inc_meta_2' => 'verificar os direitos de escrita',
+	'texte_inc_meta_2' => 'verificar as permissões de escrita',
 	'texte_inc_meta_3' => 'no directório <code>@repertoire@</code>.', # MODIF
-	'texte_statut_en_cours_redaction' => 'em curso de redação',
-	'texte_statut_poubelle' => 'no caixote de lixo',
+	'texte_statut_en_cours_redaction' => 'em curso de redacção',
+	'texte_statut_poubelle' => 'para o caixote de lixo',
 	'texte_statut_propose_evaluation' => 'proposto para avaliação',
-	'texte_statut_publie' => 'publicado em linha',
+	'texte_statut_publie' => 'publicado online',
 	'texte_statut_refuse' => 'recusado',
 	'titre_ajouter_mot_cle' => 'ACRESCENTAR UMA PALAVRA-CHAVE',
 	'titre_cadre_raccourcis' => 'ATALHOS :',
@@ -660,7 +660,7 @@ Poderá então introduzir uma nova palavra-passe
 	'titre_image_admin_article' => 'Pode administrar este artigo',
 	'titre_image_administrateur' => 'Administrador',
 	'titre_image_aide' => 'Ajuda sobre este elemento',
-	'titre_image_auteur_supprime' => 'Autor suprimido',
+	'titre_image_auteur_supprime' => 'Autor eliminado',
 	'titre_image_redacteur' => 'Redactor sem acesso',
 	'titre_image_redacteur_02' => 'Redactor',
 	'titre_image_selecteur' => 'Afficher la liste', # NEW
@@ -677,13 +677,13 @@ Poderá então introduzir uma nova palavra-passe
 	'trad_reference' => '(artigo de referência)', # MODIF
 
 	// Z
-	'zbug_balise_b_aval' => ': tag B colocada após BOUCLE',
+	'zbug_balise_b_aval' => ': tag B colocada demasiado tarde no laço infinito',
 	'zbug_balise_inexistante' => 'erreur @from@: la balise #@balise@ n\'existe pas', # MODIF
 	'zbug_balise_sans_argument' => 'Argument manquant dans la balise @balise@', # NEW
-	'zbug_boucle' => 'laço',
+	'zbug_boucle' => 'laço infinito',
 	'zbug_boucle_recursive_undef' => 'laço recursivo não definido', # MODIF
 	'zbug_calcul' => 'calcul', # NEW
-	'zbug_champ_hors_boucle' => 'Campo @champ@ fora do laço',
+	'zbug_champ_hors_boucle' => 'Campo @champ@ fora do laço infinito',
 	'zbug_champ_hors_motif' => 'Campo @champ@ fora de um laço de motivo @motif@', # MODIF
 	'zbug_code' => 'código',
 	'zbug_critere_inconnu' => 'critério @critere@ desconhecido', # MODIF
@@ -697,7 +697,7 @@ Poderá então introduzir uma nova palavra-passe
 	'zbug_erreur_execution_page' => 'erro de execução da página', # MODIF
 	'zbug_erreur_filtre' => 'Erro : filtro <b>« @filtre@ »</b> indefinido', # MODIF
 	'zbug_erreur_meme_parent' => '{meme_parent} aplica-se exclusivamente aos links (FORUMS) ou (RUBRIQUES)', # MODIF
-	'zbug_erreur_squelette' => 'Erro(s) no gabarito',
+	'zbug_erreur_squelette' => 'Erro(s) no modelo',
 	'zbug_hors_compilation' => 'Hors Compilation', # NEW
 	'zbug_info_erreur_squelette' => 'Erro no sítio',
 	'zbug_inversion_ordre_inexistant' => 'inversão de uma ordem inexistente', # MODIF
