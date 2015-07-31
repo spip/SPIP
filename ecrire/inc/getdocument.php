@@ -516,6 +516,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 // passer ca en squelette un de ces jours.
 
 			  include_spip('inc/documents');
+			  $arg = (intval($id) .'/' .intval($id_document) . "/$mode/$type");
 			  $texte =
 			"<div><input type='radio' checked='checked' name='sousaction5' value='5'>" .
 			_T('upload_zip_telquel').
@@ -533,10 +534,8 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 			  afficher_compactes(construire_upload($texte, array(
 					 'redirect' => $redirect,
 					 'hash' => $hash,
-					 'id' => $id,
 					 'chemin' => $zip,
-					 'arg' => $mode,
-					 'type' => $type)));
+					 'arg' => $arg)));
 			  // a tout de suite en joindre5 ou joindre6
 			  exit;
 			}

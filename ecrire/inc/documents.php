@@ -249,6 +249,7 @@ function formulaire_upload($retour, $id=0, $intitule='', $inclus = '', $mode='',
 	}
 
 	$res = "<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />"
+	. "\n\t\t<input type='hidden' name='ancre' value='$ancre' />"
 	. "\n\t\t<div align='$spip_lang_right'><input name='sousaction1' type='submit' value='"
 	. _T('bouton_telecharger')
 	. "' class='fondo' /></div>";
@@ -263,14 +264,10 @@ function formulaire_upload($retour, $id=0, $intitule='', $inclus = '', $mode='',
 	. $res
 	. $dir_ftp
 	. $distant
-	. "\n\t\t<input type='hidden' name='id' value='$id' />"
-	. "\n\t\t<input type='hidden' name='id_document' value='$id_document' />"
-	. "\n\t\t<input type='hidden' name='type' value='$type' />"
-	. "\n\t\t<input type='hidden' name='ancre' value='$ancre' />"
 	. $fin;
 
 	return generer_action_auteur('joindre',
-		$mode,
+		(intval($id) .'/' .intval($id_document) . "/$mode/$type"),
 		$retour,
 		$res,
 		" method='post' enctype='multipart/form-data' style='border: 0px; margin: 0px;'");
