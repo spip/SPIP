@@ -204,7 +204,20 @@ function auth() {
 		}
 	}
 	else {
-		$auth_pass_ok = false;
+		// ici on est dans un cas limite : l'auteur a ete identifie OK
+		// mais il n'existe pas dans la table auteur. Cause possible,
+		// notamment, une restauration de base de donnees dans laquelle
+		// il n'existe pas. 
+		include_ecrire('inc_presentation.php3');
+		include_ecrire('inc_texte.php3');
+		install_debut_html("Erreur de connexion");
+		echo "<br><br><p>".propre("Vous &ecirc;tes identifi&eacute; sous le
+		login {{$auth_login}}, mais celui-ci n'existe pas/plus dans la base. 
+		Essayez de vous [reconnecter->../spip_login.php3], apr&egrave;s
+		avoir &eacute;ventuellement quitt&eacute; puis
+		red&eacute;marr&eacute; votre navigateur.");
+		install_fin_html();
+		exit;
 	}
 
 	if (!$auth_pass_ok) {
