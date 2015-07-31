@@ -93,7 +93,7 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
 		$desc = decrire_logo($logon);
 		afficher_logo($logon, $texteon, $desc, $id_objet, $id);
 
-		if ($desc) {
+		if ($desc AND $texteoff) {
 			echo "<br /><br />";
 			$desc = decrire_logo($logoff);
 			afficher_logo($logoff, $texteoff, $desc, $id_objet, $id);

@@ -206,7 +206,7 @@ else if ($ajout_logo == "oui" and $logo) {
 
 // Suppression d'un logo
 else if ($image_supp) {
-	if (verifier_action_auteur("supp_logo $nom",
+	if (verifier_action_auteur("supp_logo $image_supp",
 	$hash, $hash_id_auteur))
 		effacer_logo($image_supp);
 }
