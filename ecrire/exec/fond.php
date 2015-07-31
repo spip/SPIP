@@ -30,8 +30,14 @@ else
 // quelques inclusions et ini prealables
 include_spip('inc/commencer_page');
 
+// on retient l'envoi de html pour pouvoir tout jeter et generer une 403
+// si on tombe sur un filtre sinon_interdire_acces
+// il faudrait etre capable de flusher cela des que le contenu principal est genere
+// car c'est lui qui peut faire des appels a ce filtre
+ob_start();
 include "prive.php";
-
+// flushons si cela ne l'a pas encore ete
+ob_end_flush();
 /**
  * Un exec generique qui branche sur un squelette Z pour ecrire
  * La fonction ne fait rien, c'est l'inclusion du fichier qui declenche le traitement
