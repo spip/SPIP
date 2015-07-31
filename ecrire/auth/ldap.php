@@ -42,8 +42,7 @@ function auth_ldap_dist ($login, $pass) {
 }
 
 // http://doc.spip.org/@auth_ldap_search
-function auth_ldap_search($login, $pass)
-{
+function auth_ldap_search($login, $pass){
 	$ldap = spip_connect_ldap();
 	$ldap_link = $ldap['link'];
 	$ldap_base = $ldap['base'];
@@ -124,4 +123,40 @@ function auth_ldap_inserer($dn, $statut, $login='', $desc='')
 				'bio' => $val['bio'],
 				'pass' => ''));
 }
+
+
+/**
+ * Retrouver le login de quelqu'un qui cherche a se loger
+ *
+ * @param string $login
+ * @return string
+ */
+function auth_ldap_retrouver_login($login){
+	// Si l'utilisateur figure deja dans la base, y recuperer les infos
+	$result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='ldap'");
+	$ldap = spip_connect_ldap();
+	$ldap_link = $ldap['link'];
+	$ldap_base = $ldap['base'];
+
+	// Attributs testes pour egalite avec le login
+	$atts = array('sAMAccountName', 'uid', 'login', 'userid', 'cn', 'sn');
+	$login_search = preg_replace("/[^-@._\s\d\w]/", "", $login); // securite
+
+	// Tenter une recherche pour essayer de retrouver le DN
+	reset($atts);
+	while (list(, $att) = each($atts)) {
+		$result = @ldap_search($ldap_link, $ldap_base, "$att=$login_search", array("dn"));
+		$info = @ldap_get_entries($ldap_link, $result);
+		// Ne pas accepter les resultats si plus d'une entree
+		// (on veut un attribut unique)
+		if (is_array($info) AND $info['count'] == 1) {
+			$dn = $info[0]['dn'];
+			return $login;
+		}
+	}
+
+	// sans le mot de passe, on ne peut faire de devinettes
+	return '';
+}
+
 ?>
