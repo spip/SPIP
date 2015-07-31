@@ -681,19 +681,49 @@ function creer_chemin() {
 }
 
 
+function get_skins(){
+	static $skins = null;
+	if (is_null($skins)){
+		// si pas encore definie
+		if (!defined('_SPIP_SKIN'))
+			@define('_SPIP_SKIN','spip');
+		$skins = array(_SPIP_SKIN);
+		$prefs = $GLOBALS['visiteur_session']['prefs'];
+		if (is_string($prefs))
+			$prefs = unserialize($GLOBALS['visiteur_session']['prefs']);
+		if (
+			((isset($prefs['skin']) AND $skin = $prefs['skin'])
+			OR (isset($GLOBALS['skin_defaut']) AND $skin = $GLOBALS['skin_defaut']))
+			AND $skin != _SPIP_SKIN)
+			array_unshift($skins,$skin); // placer la skin choisie en tete
+	}
+	return $skins;
+}
+
+function find_in_skin($file, $dirname='', $include=false){
+	$skins = get_skins();
+	foreach($skins as $skin){
+		if ($f = find_in_path($file,"prive/skins/$skin/$dirname",$include))
+			return $f;
+	}
+	spip_log("$dirname/$file introuvable dans la skin ".reset($skins),'skin');
+	return "";
+}
 
 // Cherche une image dans les dossiers images
+// gere le renommage des icones de facon temporaire (le temps de la migration)
 // definis par _NOM_IMG_PACK et _DIR_IMG_PACK
 // peut se trouver dans un dossier plugin, donc on passe par un find_in_path si elle n'est pas
 // dans _DIR_IMG_PACK
 // http://doc.spip.org/@chemin_image
-function chemin_image($file){
-	if (file_exists(_DIR_IMG_PACK . $file))
-		return _DIR_IMG_PACK . $file;
-	else
-		return find_in_path ($file, _NOM_IMG_PACK);
+function chemin_image($icone){
+	if ($icone_renommer = charger_fonction('icone_renommer','inc',true)){
+		list($icone,$fonction) = $icone_renommer($icone,"");
+		if (file_exists($icone))
+			return $icone;
+	}
+	return find_in_path ($icone, _NOM_IMG_PACK);
 }
-
 
 //
 // chercher un fichier $file dans le SPIP_PATH

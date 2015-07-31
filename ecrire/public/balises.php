@@ -676,6 +676,20 @@ function balise_CHEMIN_dist($p) {
 	return $p;
 }
 
+function balise_CHEMIN_IMAGE_dist($p) {
+	$arg = interprete_argument_balise(1,$p);
+	if (!$arg) {
+		erreur_squelette(_T('zbug_balise_sans_argument',
+					array('balise' => ' CHEMIN_IMAGE')),
+			$p->id_boucle);
+		$p->code = "''";
+	} else
+	  $p->code = 'chemin_image(' . $arg .')';
+
+	#$p->interdire_scripts = true;
+	return $p;
+}
+
 //
 // #ENV
 // l'"environnement", id est le $contexte (ou $contexte_inclus)
@@ -1272,5 +1286,11 @@ function balise_BOUTON_ACTION_dist($p){
 	return $p;
 }
 
+
+function balise_SLOGAN_SITE_SPIP_dist($p) {
+	$p->code = "\$GLOBALS['meta']['slogan_site']";
+	#$p->interdire_scripts = true;
+	return $p;
+}
 
 ?>

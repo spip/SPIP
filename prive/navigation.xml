@@ -1,0 +1,208 @@
+<plugin>
+	
+	<bouton id="bando_accueil">
+		<icone>images/accueil-48.png</icone>
+		<titre>icone_accueil</titre>
+		<url>accueil</url>
+	</bouton>
+	
+	<bouton id="bando_edition">
+		<icone>images/edition-48.png</icone>
+		<titre>icone_edition</titre>
+		<url>navigation</url>
+		<args>menu=bando_edition</args>
+	</bouton>
+	<bouton id='rubriques' parent="bando_edition">
+		<icone>images/rubrique-16.png</icone>
+		<titre>info_rubriques</titre>		
+		<url>naviguer</url>
+	</bouton>
+	<bouton id='articles' parent="bando_edition">
+		<icone>images/article-16.png</icone>
+		<titre>icone_tous_articles</titre>		
+		<url>articles_page</url>
+	</bouton>
+	<bouton id='auteurs' parent="bando_edition">
+		<icone>images/auteur-16.png</icone>
+		<titre>icone_auteurs</titre>
+	</bouton>
+	<bouton id='breves' parent="bando_edition">
+		<icone>images/breve-16.png</icone>
+		<titre>icone_breves</titre>
+	</bouton>
+	<bouton id='mots' parent="bando_edition">
+		<icone>images/mot-16.png</icone>
+		<titre>icone_mots_cles</titre>
+		<url>mots_tous</url>
+	</bouton>
+	<bouton id='sites' parent="bando_edition">
+		<icone>images/site-16.png</icone>
+		<titre>icone_sites_references</titre>
+		<url>sites_tous</url>
+	</bouton>
+
+	<bouton id="bando_publication">
+		<icone>images/publication-48.png</icone>
+		<titre>icone_publication</titre>
+		<url>navigation</url>
+		<args>menu=bando_publication</args>
+	</bouton>
+	<bouton id='suivi_edito' parent="bando_publication">
+		<icone>images/suivi-16.png</icone>
+		<titre>icone_suivi_publication</titre>
+	</bouton>
+	<bouton id='suivi_revisions' parent="bando_publication">
+		<icone>images/revision-16.png</icone>
+		<titre>info_historique_titre</titre>
+	</bouton>
+	<bouton id='synchro' parent="bando_publication">
+		<icone>images/rss-16.png</icone>
+		<titre>icone_suivi_activite</titre>
+	</bouton>
+	
+	<bouton id="bando_activite">
+		<icone>images/activite-48.png</icone>
+		<titre>icone_activite</titre>
+		<url>navigation</url>
+		<args>menu=bando_reactions</args>
+	</bouton>
+	<bouton id='petitions_reactions' parent='bando_activite'>
+		<icone>images/petition-16.png</icone>
+		<titre>icone_suivi_pettions</titre>
+		<url>controle_petition</url>
+	</bouton>
+	<bouton id='visiteurs' parent="bando_activite">
+		<icone>images/auteur-6forum-16.png</icone>
+		<titre>icone_afficher_visiteurs</titre>
+		<url>auteurs</url>
+		<args>statut=!1comite,0minirezo,nouveau</args>
+	</bouton>
+	
+	
+	<bouton id="bando_administration">
+		<icone>images/administration-48.png</icone>
+		<titre>icone_administration</titre>		
+		<url>navigation</url>
+		<args>menu=bando_administration</args>
+	</bouton>
+	<bouton id='admin_vider' parent='bando_administration'>
+		<icone>images/cache-empty-16.png</icone>
+		<titre>onglet_vider_cache</titre>
+	</bouton>
+	<bouton id='admin_sauvegarder' parent='bando_administration'>
+		<icone>images/base-backup-16.png</icone>
+		<titre>texte_sauvegarde_base</titre>
+		<url>admin_backup</url>
+	</bouton>
+	<bouton id='admin_restaurer' parent='bando_administration'>
+		<icone>images/base-restore-16.png</icone>
+		<titre>bouton_restaurer_base</titre>
+		<url>admin_restore</url>
+	</bouton>
+	<bouton id='admin_maintenir' parent='bando_administration'>
+		<icone>images/base-maintenance-16.png</icone>
+		<titre>titre_admin_tech</titre>
+		<url>admin_tech</url>
+	</bouton>
+	
+	
+	
+	<bouton id="bando_configuration">
+		<icone>images/configuration-48.png</icone>
+		<titre>icone_configuration</titre>		
+		<url>navigation</url>
+		<args>menu=bando_configuration</args>
+	</bouton>
+	<bouton id='config_identite' parent="bando_configuration">
+		<icone>images/identite-16.png</icone>
+		<titre>titre_identite_site</titre>		
+		<url>config_identite</url>
+	</bouton>
+	<bouton id='config_lang' parent="bando_configuration">
+		<icone>images/langue-16.png</icone>
+		<titre>icone_gestion_langues</titre>		
+	</bouton>
+	<bouton id='config_contenu' parent="bando_configuration">
+		<icone>images/config-contenu-16.png</icone>
+		<titre>onglet_contenu_site</titre>		
+		<url>configuration</url>
+	</bouton>
+	<bouton id='config_interactivite' parent="bando_configuration">
+		<icone>images/config-interaction-16.png</icone>
+		<titre>onglet_interactivite</titre>		
+		<url>config_contenu</url>
+	</bouton>
+	<bouton id='config_avancee' parent="bando_configuration">
+		<icone>images/configuration-16.png</icone>
+		<titre>onglet_fonctions_avances</titre>		
+		<url>config_fonctions</url>
+	</bouton>
+	
+	<bouton id='admin_plugin' parent="bando_configuration">
+		<icone>images/plugin-16.png</icone>
+		<titre>icone_admin_plugin</titre>		
+	</bouton>
+
+	<bouton id="outils_collaboratifs">
+		<titre></titre>
+	</bouton>
+	<bouton id='calendrier' parent="outils_collaboratifs">
+		<icone>images/calendrier-16.png</icone>
+		<titre>Agenda interne</titre>
+	</bouton>
+	<bouton id='messagerie' parent="outils_collaboratifs">
+		<icone>images/message-16.png</icone>
+		<titre>info_messagerie_interne</titre>
+	</bouton>
+
+	<bouton id="outils_rapides">
+		<titre></titre>
+	</bouton>
+	<bouton id='rubrique_creer' parent="outils_rapides">
+		<icone>images/rubrique-new-16.png</icone>
+		<titre>icone_creer_rubrique_2</titre>
+		<url>rubriques_edit</url>
+		<args>new=oui&amp;id_parent=@id_rubrique@</args>
+	</bouton>
+	<bouton id='article_creer' parent="outils_rapides">
+		<icone>images/article-new-16.png</icone>
+		<titre>icone_ecrire_article</titre>
+		<url>articles_edit</url>
+		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
+	</bouton>
+	<bouton id='auteur_creer' parent="outils_rapides">
+		<icone>images/auteur-new-16.png</icone>
+		<titre>icone_creer_nouvel_auteur</titre>
+		<url>auteur_infos</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='mot_creer' parent="outils_rapides">
+		<icone>images/mot-new-16.png</icone>
+		<titre>icone_creation_mots_cles</titre>
+		<url>mots_edit</url>
+		<args>new=oui</args>
+	</bouton>
+	<bouton id='site_creer' parent="outils_rapides">
+		<icone>images/site-new-16.png</icone>
+		<titre>icone_referencer_nouveau_site</titre>
+		<url>sites_edit</url>
+		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
+	</bouton>
+	<bouton id='breve_creer' parent="outils_rapides">
+		<icone>images/breve-new-16.png</icone>
+		<titre>icone_nouvelle_breve</titre>
+		<url>breves_edit</url>
+		<args>new=oui&amp;id_rubrique=@id_rubrique@</args>
+	</bouton>
+
+	<onglet id='infos_perso' parent="infos_perso">
+		<titre>icone_mes_infos</titre>
+	</onglet>
+	<onglet id='config_langage' parent="infos_perso">
+		<titre>icone_ma_langue</titre>
+	</onglet>
+	<onglet id='config_preferences' parent="infos_perso">
+		<titre>icone_mes_preferences</titre>
+	</onglet>
+
+</plugin>
