@@ -288,6 +288,7 @@ Le programme est n&eacute; en 2001 d'une initiative du minir&eacute;zo, un colle
 		<action>cvtautosave_formulaire_traiter</action>
 		<inclure>inc/cvt_autosave.php</inclure>
 	</pipeline>
+	<pipeline><nom>formulaire_fond</nom><action></action></pipeline>
 	<pipeline><nom>formulaire_admin</nom><action></action></pipeline>
 	<pipeline><nom>header_prive</nom>
 		<action>f_jQuery_prive</action>

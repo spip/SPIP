@@ -202,6 +202,23 @@ function formulaire__charger($form, $args, $poste)
 			'args'=>array('form'=>$form,'args'=>$args,'je_suis_poste'=>$poste),
 			'data'=>$valeurs)
 	);
+
+	if (!isset($valeurs['_pipelines'])) $valeurs['_pipelines']=array();
+	// l'ancien argument _pipeline devient maintenant _pipelines
+	// reinjectons le vieux _pipeline au debut de _pipelines
+	if (isset($valeurs['_pipeline'])) {
+		$pipe = is_array($valeurs['_pipeline'])?reset($valeurs['_pipeline']):$valeurs['_pipeline'];
+		$args = is_array($valeurs['_pipeline'])?end($valeurs['_pipeline']):array();
+
+		$pipelines = array($pipe=>$args);
+		$valeurs['_pipelines'] = array_merge($pipelines,$valeurs['_pipelines']);
+	}
+
+	// et enfin, ajoutons systematiquement un pipeline sur le squelette du formulaire
+	// qui constitue le cas le plus courant d'utilisation du pipeline recuperer_fond
+	// (performance, cela evite de s'injecter dans recuperer_fond utilise pour *tous* les squelettes)
+	$valeurs['_pipelines']['formulaire_fond'] = array('form'=>$form,'args'=>$args,'je_suis_poste'=>$poste);
+
 	return $valeurs;
 }
 
