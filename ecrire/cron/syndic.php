@@ -413,7 +413,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 
 	// Si l'article n'existe pas, on le cree
 	if (!isset($id_syndic_article)) {
-		if (spip_sql_error()) {
+		if (sql_error()) {
 			return;
 		} else {
 			include_spip('base/abstract_sql');

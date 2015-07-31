@@ -96,7 +96,7 @@ function import_insere($values, $table, $desc, $request, $atts) {
 		if ($table == 'spip_types_documents') return;
 		$n = sql_insert($table, '', '()');
 		if (!$n) {
-			$GLOBALS['erreur_restauration'] = spip_sql_error();
+			$GLOBALS['erreur_restauration'] = sql_error();
 			return;
 		}
 		$ajout = 1;

@@ -144,8 +144,7 @@ function sql_multi($sel, $lang, $serveur='')
 	return $f($sel, $lang);
 }
 
-// http://doc.spip.org/@spip_sql_error
-function spip_sql_error($serveur='') {
+function sql_error($serveur='') {
   	$f = sql_serveur('error', $serveur);
 	return $f();
 }
