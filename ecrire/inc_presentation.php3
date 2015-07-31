@@ -351,8 +351,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $toujours_afficher = false, $afficher_cadre = true) {
 	global $connect_id_auteur;
 
-		$activer_messagerie = lire_meta("activer_messagerie");
-		$activer_statistiques = lire_meta("activer_statistiques");
+	$activer_messagerie = lire_meta("activer_messagerie");
+	$activer_statistiques = lire_meta("activer_statistiques");
 
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
 
@@ -387,7 +387,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
-			 	$query2 = "SELECT spip_auteurs.id_auteur, nom, messagerie, login, en_ligne FROM spip_auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND spip_auteurs.id_auteur=lien.id_auteur";
+			 	$query2 = "SELECT auteurs.id_auteur, nom, messagerie, login, en_ligne ".
+			 		"FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
+			 		"WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur";
 				$result_auteurs = spip_query($query2);
 
 				while ($row = mysql_fetch_array($result_auteurs)) {
@@ -423,7 +425,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
 			$s = affdate($date);
-			if ($activer_statistiques == "oui" AND $afficher_visites AND $visites > 0) {
+			if ($activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\">($visites&nbsp;visites)</font>";
 			}
 			$vals[] = $s;
