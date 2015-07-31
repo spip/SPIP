@@ -213,7 +213,7 @@ function options_moderation($row) {
 
 	global $spip_lang_left;
 
-	if ($row['syndication'] == 'non') return '';
+	if ($row['syndication'] == 'non' or $row['syndication'] == '') return '';
 
 	$id_syndic = $row['id_syndic'];
 	$moderation = $row['moderation'];
