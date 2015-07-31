@@ -814,29 +814,18 @@ function debut_html($titre = "") {
 
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 	if (!$charset = lire_meta('charset')) $charset = 'iso-8859-1';
-	?>
-<html>
-<head>
-<title>[<?php echo $nom_site_spip; ?>] <?php echo $titre; ?></TITLE>
-<meta http-equiv="Expires" content="0">
-<meta http-equiv="cache-control" content="no-cache,no-store">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>">
-<link rel="stylesheet" type="text/css" href="<?php if (!$flag_ecrire) echo "ecrire/"; ?>spip_style.css">
-<style type="text/css"><!--
-.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
-.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
-.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
-.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
-.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
 
-.sanscadre {padding: 4px; margin: 0px; }
-.aveccadre {cursor: pointer; padding: 3px; margin: 0px; border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
+	@Header("Expires: 0");
+	@Header("Cache-Control: no-cache,no-store");
+	@Header("Pragma: no-cache");
+	@Header("Content-Type: text/html; charset=$charset");
+	
+	echo "<html>\n<head>\n<title>[$nom_site_spip] $titre</title>\n";
+	echo '<link rel="stylesheet" type="text/css" href="';
+	if (!$flag_ecrire) echo 'ecrire/';
+	echo "spip_style.php3?couleur_claire=".urlencode($couleur_claire)."&couleur_foncee=" . urlencode($couleur_foncee) ."\">\n";
 
-.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
-//--></style>
-<?php
-afficher_script_layer();
+	afficher_script_layer();
 ?>
 <script language="JavaScript"><!--
 function changeclass(objet, myClass)
@@ -846,10 +835,8 @@ function changeclass(objet, myClass)
 //--></script>
 </head>
 <body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
-
 <?php
 }
-
 
 // Fonctions onglets
 
@@ -871,7 +858,7 @@ function debut_onglet(){
 		echo "\n";
 		echo "<p><table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td>";
-		echo "<img src='img_pack/barre-g.gif' alt='<' width='16' height='40'>";
+		echo "<img src='img_pack/barre-g.gif' alt='&lt;' width='16' height='40'>";
 		echo "</td>";
 	}
 }
@@ -884,7 +871,7 @@ function fin_onglet(){
 		echo "</table>";
 	} else {
 		echo "<td>";
-		echo "<img src='img_pack/barre-d.gif' alt='>' width='16' height='40'>";
+		echo "<img src='img_pack/barre-d.gif' alt='&gt;' width='16' height='40'>";
 		echo "</td></tr>";
 		echo "</table>";
 	}
@@ -908,9 +895,9 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 		if ($onglet_ref == $onglet){
 			onglet_relief_inter();
 			if (strlen($icone)>3){
-			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='top'>";
+				echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='top'>";
 				echo "&nbsp; <img src='img_pack/$icone' border=0>";
-			echo "</td>";
+				echo "</td>";
 			}
 			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
 			echo "&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font> &nbsp;";
