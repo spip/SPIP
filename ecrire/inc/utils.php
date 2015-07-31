@@ -860,6 +860,9 @@ function find_in_theme($file, $subdir='', $include=false){
 // http://doc.spip.org/@chemin_image
 function chemin_image($icone){
 	static $icone_renommer;
+	// gerer le cas d'un double appel en evitant de refaire le travail inutilement
+	if (strpos($icone,"/")!==false AND file_exists($icone)) return $icone;
+	
 	// si c'est un nom d'image complet (article-24.png) essayer de le renvoyer direct
 	if (preg_match(',[.](png|gif|jpg)$,',$icone) AND $f = find_in_theme("images/$icone"))
 		return $f;
