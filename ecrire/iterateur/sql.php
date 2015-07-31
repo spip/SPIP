@@ -42,6 +42,7 @@ class IterateurSQL implements Iterator {
 		$v = &$this->command;
 		$this->sqlresult = calculer_select($v['select'], $v['from'], $v['type'], $v['where'], $v['join'], $v['groupby'], $v['orderby'], $v['limit'], $v['having'], $v['table'], $v['id'], $v['connect'], $this->info);
 		$this->err = !$this->sqlresult;
+		$this->firstseek = false;
 		$this->pos = -1;
 		$this->total = $this->count();
 	}
@@ -105,6 +106,7 @@ class IterateurSQL implements Iterator {
 			if ($this->pos>$n){
 				$this->free();
 				$this->select();
+				$this->valid();
 			}
 			// et utiliser la methode par defaut pour se deplacer au bon endroit
 			// (sera fait en cas d'echec de cette fonction)
