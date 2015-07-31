@@ -1,70 +1,100 @@
 <?php
 
+
 # Fonctions de traitement de champs Spip homonymes de champs SQL
 # mais non e'quivalent
 
-function calculer_champ_EXTRA ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
-{
-  $code = 'trim(' . index_pile($id_boucle,  "extra", $boucles) . ')';
-  if ($fonctions) {
+
+// #EXTRA [(#EXTRA|isbn)]
+// Champs extra
+// Non documentes, en voie d'obsolescence, cf. ecrire/inc_extra.php3
+function balise_EXTRA_dist ($p) {
+	$_extra = champ_sql('extra', $p);
+	$p->code = 'trim($_extra)';
+
     // Gerer la notation [(#EXTRA|isbn)]
-    include_ecrire("inc_extra.php3");
-    reset($fonctions);
-    list($key, $champ_extra) = each($fonctions);
-    $type_extra = $boucles[$id_boucle]->type_requete;
-    if (extra_champ_valide($type_extra, $champ_extra)) {
-      unset($fonctions[$key]);
-      $code = "extra($code, '".addslashes($champ_extra  )."')";
-    }
-    // Appliquer les filtres definis par le webmestre
-    $filtres = extra_filtres($type_extra, $champ_extra);
-    if ($filtres) {
-      reset($filtres);
-      while (list(, $f) = each($filtres)) $code = "$f($code)";
-    }
-  }
-  return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+	if ($p->fonctions) {
+		include_ecrire("inc_extra.php3");
+		foreach ($p->fonctions as $key => $champ_extra)
+			$type_extra = $p->boucles[$p->id_boucle]->type_requete;
+			// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
+			// depuis un sous-objet sans champ extra d'un objet a champ extra,
+			// on aura le type_extra du sous-objet (!)
+		if (extra_champ_valide($type_extra, $champ_extra)) {
+			unset($p->fonctions[$key]);
+			$p->code = "extra($p->code, '".addslashes($champ_extra)."')";
+		}
+		// Appliquer les filtres definis par le webmestre
+		$filtres = extra_filtres($type_extra, $champ_extra);
+		if ($filtres) foreach ($filtres as $f)
+			$p->code = "$f($p->code)";
+	}
+	return $p;
 }
 
-function calculer_champ_LANG ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
- {
-	$code = '(($x = '.index_pile($id_boucle,  "lang", $boucles).') ? $x : $GLOBALS[spip_lang])';
-   return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+
+// #LANG
+// non documente ?
+function balise_LANG_dist ($p) {
+	$_lang = champ_sql('lang', $p);
+	$p->code = '($_lang ? $_lang : $GLOBALS[spip_lang])';
+	return $p;
 }
 
-function calculer_champ_LESAUTEURS ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
-{
-  $code = index_pile($id_boucle, 'lesauteurs', $boucles);
-  if ((!$code) || ($code == '$Pile[0][lesauteurs]'))
-    $code = 'sql_auteurs(' .
-      index_pile($id_boucle,  "id_article", $boucles) .
-      ')';    
-   return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+
+// #LESAUTEURS
+// les auteurs d'un article (ou d'un article syndique)
+// http://www.spip.net/fr_article902.html
+// http://www.spip.net/fr_article911.html
+function balise_LESAUTEURS_dist ($p) {
+	// Cherche le champ 'lesauteurs' dans la pile
+	$_lesauteurs = champ_sql('lesauteurs', $p);
+
+	// Si le champ n'existe pas (cas de spip_articles), on donne la
+	// construction speciale sql_auteurs(id_article) ;
+	// dans le cas contraire on prend le champ 'les_auteurs' (cas de
+	// spip_syndic_articles)
+	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][lesauteurs]') {
+		$p->code = $_lesauteurs;
+	} else {
+		$_id_article = champ_sql('id_article', $p);
+		$p->code = "sql_auteurs($_id_article)";
+	}
+
+	return $p;
 }
 
-function calculer_champ_PETITION ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
- {
-   $code = 'sql_petitions(' .
-     index_pile($id_boucle,  'id_article', $boucles)
-     . '")) ? " " : "")';
-  return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
+
+// #PETITION
+// Champ testant la presence d'une petition
+// non documente ???
+function balise_PETITION_dist ($p) {
+	$_id_article = champ_sql('id_article', $p);
+	$p->code = 'sql_petitions($_id_article)';
+	return $p;
 }
 
-function calculer_champ_POPULARITE ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
- {
-   $code = 'ceil(min(100, 100 * ' .
-     index_pile($id_boucle,  "popularite", $boucles) .
-     '/ max(1 , 0 + lire_meta(\'popularite_max\'))))';
-  return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
- }
 
-
-function calculer_champ_DATE ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-# Uniquement hors-boucles, pour date passee dans l'URL ou  contexte_inclus
-  return applique_filtres($fonctions,
-			  index_pile($id_boucle,  'date', $boucles),
-			  $id_boucle, $boucles, $id_mere);
+// #POPULARITE
+// http://www.spip.net/fr_article1846.html
+function balise_POPULARITE_dist ($p) {
+	$_popularite = champ_sql('popularite', $p);
+	$p->code = "ceil(min(100, 100 * $_popularite
+	/ max(1 , 0 + lire_meta('popularite_max'))))";
+	return $p;
 }
+
+
+// #DATE
+// Cette fonction n'est utile que parce qu'on a besoin d'aller chercher
+// dans le contexte general quand #DATE est en dehors des boucles
+// http://www.spip.net/fr_article1971.html
+function balise_DATE_dist ($p) {
+	$_date = champ_sql('date', $p);
+	$p->code = "$_date";
+	return $p;
+}
+
 
 # Fonction commune aux logos (rubriques, articles...)
 

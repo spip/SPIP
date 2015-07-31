@@ -83,28 +83,32 @@ function index_pile($idb, $nom_champ, &$boucles) {
 # on lui passe la main et elle est cense retourner le tableau ci-dessus
 # (Essayer de renvoyer une suite vide, ca diminue les allocations a l'exec)
 
-
+// cette fonction sert d'API pour demander le champ '$champ' dans la pile
+function champ_sql($champ, $p) {
+	return index_pile($p->id_boucle, $champ, $p->boucles);
+}
 
 function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
 	// Preparer les parametres
-	$params = new ParamChamp;
-	$params->fonctions = $fonctions;
-	$params->nom_champ = $nom_champ;
-	$params->id_boucle = $id_boucle;
-	$params->boucles = $boucles;
-	$params->id_mere = $id_mere;
+	$p = new ParamChamp;
+	$p->fonctions = $fonctions;
+	$p->nom_champ = $nom_champ;
+	$p->id_boucle = $id_boucle;
+	$p->boucles = $boucles;
+	$p->id_mere = $id_mere;
 
-	// regarder s'il existe une fonction perso pour #NOM
-	$f = 'perso_' . $nom_champ;
-	if (function_exists($f))
-		return $f($params);
+	// regarder s'il existe une fonction personnalisee balise_NOM()
+	$f = 'balise_' . $nom_champ;
+	if (function_exists($f) AND $p = $f($p))
+		return $p->retour();
 
-	// regarder s'il existe une fonction new style pour #NOM
-	$f = 'calculer_balise_' . $nom_champ;
-	if (function_exists($f)) 
-		return $f($params);
+	// regarder s'il existe une fonction standard balise_NOM_dist()
+	$f = 'balise_' . $nom_champ . '_dist';
+	if (function_exists($f) AND $p = $f($p))
+		return $p->retour();
 
-	// regarder s'il existe une fonction old style pour #NOM
+	# A SUPPRIMER
+	// regarder s'il existe une fonction old style calculer_champ_NOM()
 	$f = 'calculer_champ_' . $nom_champ;
 	if (function_exists($f)) 
 		return $f($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);

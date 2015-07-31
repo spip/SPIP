@@ -26,10 +26,9 @@ function calculer_params($idb, &$boucles) {
 				$params2[]=$param;
 		$params = $params2;
 
-		$boucle->hierarchie = '
-		$hierarchie = calculer_hierarchie('
+		$boucle->hierarchie = '$hierarchie = calculer_hierarchie('
 		.calculer_argument_precedent($idb, 'id_rubrique', $boucles)
-		.", false);\n";
+		.', false);';
 	}
 
 
