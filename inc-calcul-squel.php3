@@ -1833,7 +1833,7 @@ function calculer_texte($texte)
 		//
 		$chaine = strtolower($match[4]);
 		if (!($module = $match[3]))
-			$module = 'local';
+			$module = 'local/public/spip';	// ordre des modules a explorer
 		$remplace = "_T('$module:$chaine')";
 		if ($filtres = $match[5]) {
 			$filtres = explode('|',substr($filtres,1));
