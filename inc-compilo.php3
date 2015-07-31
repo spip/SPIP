@@ -474,13 +474,15 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		    if (($res != $t) || ($altern != "''"))
 		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
 		  }
-
-		$codes[]= #$code;
-		  (!$commentaire ? "" : ("/* $commentaire */ ")) . $code;
+		if ($code != "''")
+		  $codes[]= $code .
+		    // produire les commentaires à la fin, pour l'optimiseur.
+		    (!$commentaire ? "" : ("/* $commentaire */ "));
 	} // foreach
 
-	return ((count($codes)==1) ? $codes[0] : 
-		"(" . join ("\n$tab. ", $codes) . ")");
+	$n = count($codes);
+	return (!$n  ?  "''" : (($n==1) ? $codes[0] : 
+				"(" . join ("\n$tab. ", $codes) . ")"));
 }
 
 // Prend en argument le source d'un squelette, sa grammaire et un nom.
