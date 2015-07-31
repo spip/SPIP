@@ -46,7 +46,7 @@ function exec_export_all_dist()
 		$archive = $gz 
 		?  (_request('znom_sauvegarde') . '.xml.gz')
 		:  (_request('nom_sauvegarde') . '.xml');
-		if (!preg_match(',^[\w_][\w_.]*$,', $nom)) 
+		if (!preg_match(',^[\w_][\w_.]*$,', $archive)) 
 		  $archive = 'dump.xml' . ($gz ? '.gz' : '');
 		//  creer l'en tete du fichier a partir de l'espace public
 		include_spip('inc/headers');
