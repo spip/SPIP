@@ -64,7 +64,7 @@ function plugins_get_infos_dist($plug, $force_reload=false, $dir_plugins = _DIR_
 	if (isset($arbre['auteur']))
 		$ret['auteur'] = spip_xml_aplatit($arbre['auteur']);
 	if (isset($arbre['icon']))
-		$ret['icon'] = spip_xml_aplatit($arbre['icon']);
+		$ret['icon'] = trim(spip_xml_aplatit($arbre['icon']));
 	if (isset($arbre['description']))
 		$ret['description'] = spip_xml_aplatit($arbre['description']);
 	if (isset($arbre['lien']))
