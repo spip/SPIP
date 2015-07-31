@@ -1249,7 +1249,7 @@ function maj_base($version_cible = 0) {
 	if (upgrade_vers(1.925, $version_installee, $version_cible)) {
 		include_spip('inc/flock');
 		/* deplacement des sessions */
-		$f_session = preg_fis('data', 'session_');
+		$f_session = preg_files('data', 'session_');
 		$repertoire = _DIR_SESSIONS;
 		if(!@file_exists($repertoire)) {
 			$repertoire = preg_replace(','._DIR_TMP.',', '', $repertoire);
