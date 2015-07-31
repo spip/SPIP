@@ -143,11 +143,22 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($type_boucle == 'boucle')
 	    return ("$corps\n	return $return;");
 
+	// Cas general : appeler la fonction de definition de la boucle
+	$f = 'boucle_'.strtoupper($type_boucle);	// definition perso
+	if (!function_exists($f)) $f = $f.'_dist';			// definition spip
+	if (!function_exists($f)) $f = 'boucle_DEFAUT';		// definition par defaut
+	$id_table = $table_des_tables[$type_boucle];
+	$id_field = $id_table . "." . $table_primary[$type_boucle];
+	$f($boucle, $boucles, $type_boucle, $id_table, $id_field);
+
+
 	// La boucle doit-elle selectionner la langue ?
 	// 1. par defaut 
 	$lang_select = (
-		$type_boucle == 'articles' OR $type_boucle == 'rubriques'
-		OR $type_boucle == 'hierarchie' OR $type_boucle == 'breves'
+		$type_boucle == 'articles'
+		OR $type_boucle == 'rubriques'
+		OR $type_boucle == 'hierarchie'
+		OR $type_boucle == 'breves'
 	);
 	// 2. si forcer_lang, le defaut est non
 	if ($GLOBALS['forcer_lang']) $lang_select = false;
@@ -156,7 +167,11 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->lang_select == 'non') $lang_select = false;
 	// 4. penser a demander le champ lang
 	if ($lang_select)
-		$boucle->select[] = (($id_table = $table_des_tables[$type_boucle]) ? $id_table.'.' : '') .'lang';
+		$boucle->select[] = 
+			// cas des tables SPIP
+			(($id_table = $table_des_tables[$type_boucle]) ? $id_table.'.' : '')
+			// cas general ({lang_select} sur une table externe)
+			. 'lang';
 
 	// Qui sommes-nous ?
 	$primary_key = $table_primary[$type_boucle];
@@ -234,7 +249,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$corps .= "\n		}\n";
 
 
-	// Gestion de la hierarchie (voir inc-arg-squel)
+	// Gestion de la hierarchie (voir inc-boucles.php3)
 	if ($boucle->hierarchie)
 		$texte .= "\n	".$boucle->hierarchie;
 
@@ -293,18 +308,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$init .= "\$result = ";
 
 
-	// Appeler la fonction de definition de la boucle
-	$f = 'boucle_'.strtoupper($boucle->type_requete);	// definition perso
-	if (!function_exists($f)) $f = $f.'_dist';			// definition spip
-	if (!function_exists($f)) $f = 'boucle_DEFAUT';		// definition par defaut
-
-	$type = $boucle->type_requete;
-	$id_table = $table_des_tables[$type];
-	$id_field = $id_table . "." . $table_primary[$type];
-
-	$f($boucle, $boucles, $type, $id_table, $id_field);
-
-
 	// En absence de champ c'est un decompte : on prend la primary pour
 	// avoir qqch (le marteau-pilon * est trop couteux, et le COUNT
 	// incompatible avec le cas general)	$init .= 
@@ -322,7 +325,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		'".addslashes($boucle->group)."', # GROUP
 		" . ($boucle->order ? $boucle->order : "''") .", # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
-			"'$boucle->limit'" :
+			"'".$boucle->limit."'" :
 			$boucle->limit). ", # LIMIT
 		'".$boucle->sous_requete."', # sous
 		".$boucle->compte_requete.", # compte
@@ -658,7 +661,7 @@ $code
 //
 // Fonction principale du squelette $sourcefile
 //
-function $nom (\$Cache, \$Pile) {
+function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
 $corps
 \$t0 = $return;
 
