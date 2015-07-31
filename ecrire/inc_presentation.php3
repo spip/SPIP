@@ -738,6 +738,31 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 
 
+
+	// Preparation pour basculter vers liens de traductions
+	$afficher_trad = (lire_meta('gerer_trad') == "oui");
+	if ($afficher_trad) {
+		$jjscript_trad["fonction"] = "afficher_articles_trad";
+		$jjscript_trad["titre_table"] = $titre_table;
+		$jjscript_trad["requete"] = $requete;
+		$jjscript_trad["afficher_visites"] = $afficher_visites;
+		$jjscript_trad["afficher_auteurs"] = $afficher_auteurs;
+		$jjscript_trad = addslashes(serialize($jjscript_trad));
+		$hash = "0x".substr(md5($connect_id_auteur.$jjscript_trad), 0, 16);
+	
+		$div_trad = substr(md5($requete), 0, 4);
+
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res_proch)) {
+			$id_ajax_trad = $row["id_ajax_fonc"];
+		} else  {
+			include_ecrire ("inc_abstract_sql.php3");
+			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
+		}
+
+
+	}
+
 	$activer_messagerie = "oui";
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
@@ -764,7 +789,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	else $ajout_col = 0;
 
 	
-	$jjscript["function"] = "afficher_articles";
+	$jjscript["fonction"] = "afficher_articles";
 	$jjscript["titre_table"] = $titre_table;
 	$jjscript["requete"] = $requete;
 	$jjscript["afficher_visites"] = $afficher_visites;
@@ -772,50 +797,42 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$jjscript = addslashes(serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
+
+
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
-	
-	// Voir si deja stocke
-	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
-	if ($row = spip_fetch_array($res_proch)) {
-		$id_ajax_fonc = $row["id_ajax_fonc"];
-	} else {
-		$creer_lien_ajax = true;
-		// Recuperer l'incrementation actuelle d'id_ajax_fonc 
-		// (l'insert ne sera fait qu'apres tranche)
-		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc ORDER BY id_ajax_fonc DESC LIMIT 0,1");
-		if ($row = spip_fetch_array($res_proch)) {
-			$id_ajax_fonc = $row["id_ajax_fonc"];
-		} 
-		else $id_ajax_fonc = 0;
-		if (!$GLOBALS["t_$tmp_var"]) $id_ajax_fonc ++;
-	}
-		
-	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=$id_ajax_fonc::deb::\',\'$tmp_var\')";
+			
+	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::\',\'$tmp_var\')";
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
-
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
 	if (strlen($tranches) OR $toujours_afficher) {
-		$result = spip_query($requete);
 
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res_proch)) {
+			$id_ajax_fonc = $row["id_ajax_fonc"];
+		} else  {
+			include_ecrire ("inc_abstract_sql.php3");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
+		}
 
 		if (!$GLOBALS["t_$tmp_var"]) {
-			if ($creer_lien_ajax) {
-				include_ecrire ("inc_abstract_sql.php3");
-				$id_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, fonction, variables, hash, date)", "($connect_id_auteur, 'afficher_articles', '$jjscript', $hash, NOW())");
+
+			if ($afficher_trad) {
+				$tmp_trad = substr(md5($requete_trad), 0, 4);
+
+				echo "<div id='$div_trad'>";
+				
 			}
-			
-
-
 
 			echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 
 			$id_img = "img_".$tmp_var;
-			$texte_img .= "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; border: 0px; float: $spip_lang_right' />";
+			$texte_img = "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; border: 0px; float: $spip_lang_right' />";
 
+			if ($afficher_trad) $texte_img .= "<img src='img_pack/searching.gif' id='img_$div_trad' style='visibility: hidden; border: 0px; float: $spip_lang_right;' /><div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -827,8 +844,10 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 		echo afficher_liste_debut_tableau();
 
+		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 		echo $tranches;
 
+		$result = spip_query($requete);
 		while ($row = spip_fetch_array($result)) {
 			$vals = '';
 
@@ -937,6 +956,213 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$styles = array('', 'arial2', 'arial1');
 			}
 		}
+		afficher_liste($largeurs, $table, $styles);
+
+		//echo "</table>";
+		echo afficher_liste_fin_tableau();
+		echo "</div>";
+		
+		if (!$GLOBALS["t_$tmp_var"]) {
+			echo "</div>";
+			if ($afficher_trad) echo "</div>";
+			
+		}
+		
+		//if ($afficher_cadre) fin_cadre_gris_clair();
+
+	}
+
+	return $tous_id;
+}
+
+function afficher_articles_trad($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
+		$toujours_afficher = false, $afficher_cadre = true, $afficher_descriptif = true) {
+
+	global $connect_id_auteur, $connect_statut, $dir_lang;
+	global $options, $spip_display;
+	global $spip_lang_left, $spip_lang_right;
+
+	$langues_site = explode(',', lire_meta('langues_multilingue'));
+
+	// Preparation pour basculter vers liste normale
+		$jjscript_trad["fonction"] = "afficher_articles";
+		$jjscript_trad["titre_table"] = $titre_table;
+		$jjscript_trad["requete"] = $requete;
+		$jjscript_trad["afficher_visites"] = $afficher_visites;
+		$jjscript_trad["afficher_auteurs"] = $afficher_auteurs;
+		$jjscript_trad = addslashes(serialize($jjscript_trad));
+		$hash = "0x".substr(md5($connect_id_auteur.$jjscript_trad), 0, 16);
+	
+		$div_trad = substr(md5($requete), 0, 4);
+
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res_proch)) {
+			$id_ajax_trad = $row["id_ajax_fonc"];
+		} else  {
+			include_ecrire ("inc_abstract_sql.php3");
+			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
+		}
+
+
+	$activer_messagerie = "oui";
+	$activer_statistiques = lire_meta("activer_statistiques");
+	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
+
+	// Preciser la requete (alleger les requetes)
+	if (!ereg("^SELECT", $requete)) {
+		$select = "SELECT articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date, articles.id_trad, articles.lang";
+		$requete = $select . " FROM spip_articles AS articles " . $requete;
+	}
+	
+	if ($options == "avancees")  $ajout_col = 1;
+	else $ajout_col = 0;
+
+	
+	$jjscript["fonction"] = "afficher_articles_trad";
+	$jjscript["titre_table"] = $titre_table;
+	$jjscript["requete"] = $requete;
+	$jjscript["afficher_visites"] = $afficher_visites;
+	$jjscript["afficher_auteurs"] = $afficher_auteurs;
+	$jjscript = addslashes(serialize($jjscript));
+	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
+
+
+
+	$tmp_var = substr(md5($jjscript), 0, 4);
+	
+			
+	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::\',\'$tmp_var\')";
+	$tranches = afficher_tranches_requete($requete, 4, $tmp_var, $javascript);
+
+	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
+
+	if (strlen($tranches) OR $toujours_afficher) {
+
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res_proch)) {
+			$id_ajax_fonc = $row["id_ajax_fonc"];
+		} else  {
+			include_ecrire ("inc_abstract_sql.php3");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
+		}
+
+		if (!$GLOBALS["t_$tmp_var"]) {
+
+			echo "<div id='$div_trad'>";
+
+			echo "<div style='height: 12px;'></div>";
+			echo "<div class='liste'>";
+
+			$id_img = "img_".$tmp_var;
+			$texte_img = "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; border: 0px; float: $spip_lang_right' />";
+
+			$texte_img .= "<img src='img_pack/searching.gif' id='img_$div_trad' style='visibility: hidden; border: 0px; float: $spip_lang_right;' /><div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
+
+			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
+
+			echo "<div id='$tmp_var'>";
+
+		}
+		
+
+		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+		echo afficher_liste_debut_tableau();
+
+		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
+		echo $tranches;
+
+		$result = spip_query($requete);
+		while ($row = spip_fetch_array($result)) {
+			$vals = '';
+
+			$id_article = $row['id_article'];
+			$tous_id[] = $id_article;
+			$titre = $row['titre'];
+			$id_rubrique = $row['id_rubrique'];
+			$date = $row['date'];
+			$statut = $row['statut'];
+			$id_trad = $row['id_trad'];
+			$lang = $row['lang'];
+
+
+			// La petite puce de changement de statut
+			$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
+
+			// Le titre (et la langue)
+			
+			$langues_art = "";
+			$dates_art = "";
+			$l = "";
+			$res_trad = spip_query("SELECT id_article, lang, date_modif  FROM spip_articles WHERE id_trad = $id_trad AND id_trad > 0");
+			while ($row_trad = spip_fetch_array($res_trad)) {
+				$id_article_trad = $row_trad["id_article"];
+				$lang_trad = $row_trad["lang"];
+				$date_trad = $row_trad["date_modif"];
+				
+				$dates_art[$lang_trad] = $date_trad;
+				$langues_art[$lang_trad] = $id_article_trad;
+				if ($id_article_trad == $id_trad) $date_ref = $date;
+				
+			//	if ($id_article_trad == $id_trad) $langues_art[$lang_trad] = "<img src='img_pack/langues-12.gif' border='0' align='middle' />";
+			//	else $langues_art[$lang_trad] = "<b>[$lang_trad]</b>";
+				
+			//	
+			}
+
+			reset($langues_site);
+			$span_lang = false;
+			while (list(,$k) = each($langues_site)) {
+				if ($langues_art[$k]) {
+					if ($langues_art[$k] == $id_trad) {
+						$span_lang = "<a href='articles.php3?id_article=".$langues_art[$k]."'><span class='lang_base'>$k</a></a>";
+						$l .= $span_lang;
+					} else {
+						$date = $dates_art[$k];
+						if ($date < $date_ref) $l .= "<a href='articles.php3?id_article=".$langues_art[$k]."' class='claire'>$k</a>";
+						else $l .= "<a href='articles.php3?id_article=".$langues_art[$k]."' class='foncee'>$k</a>";
+					}			
+				}
+				else $l.= "<span class='creer'>$k</span>";
+			}
+			
+			if (!$span_lang)
+				$span_lang = "<a href='articles.php3?id_article=$id_article'><span class='lang_base'>$lang</a></a>";
+
+			
+			$vals[] = "<div style='text-align: center;'>$span_lang</div>";
+			
+			
+			$s = "<div>";
+			$s .= "<div style='float: $spip_lang_right; margin-right: -10px;'>$l</div>";
+
+			if (acces_restreint_rubrique($id_rubrique))
+				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+
+			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
+
+			
+			
+			
+			if ($id_article == $id_trad) $titre = "<b>$titre</b>";
+			
+			$s .= typo($titre);
+			if ($afficher_langue AND $lang != $langue_defaut)
+				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
+			if ($petition) $s .= " <font size=1 color='red'>"._T('lien_petitions')."</font>";
+			$s .= "</a>";
+			$s .= "</div>";
+			
+			$vals[] = $s;
+			
+			$vals[] = "";
+
+			$table[] = $vals;
+		}
+		spip_free_result($result);
+
+		$largeurs = array(11, 24, '', '1');
+		$styles = array('', 'arial1', 'arial1', '');
+
 		afficher_liste($largeurs, $table, $styles);
 
 		//echo "</table>";

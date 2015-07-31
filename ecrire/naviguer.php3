@@ -399,6 +399,8 @@ if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 afficher_articles(_T('info_tous_articles_presents'),
 	"WHERE statut='publie' AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
 
+
+
 if ($id_rubrique > 0){
 	echo "<div align='$spip_lang_right'>";
 	icone(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif", "creer.gif");
