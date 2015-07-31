@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/lang');
+include_spip('inc/texte');
 
 //
 // Presentation des pages d'installation et d'erreurs
@@ -312,7 +313,7 @@ function http_img_pack($img, $alt, $att, $title='') {
 
 	return  "<img src='" . http_wrapper($img)
 	  . ("'\nalt=\"" .
-	     str_replace('"','', ($alt ? $alt : ($title ? $title : '')))
+	     str_replace('"','', textebrut($alt ? $alt : ($title ? $title : '')))
 	     . '" ')
 	  . ($title ? " title=\"$title\"" : '')
 	  . $att

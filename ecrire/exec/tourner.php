@@ -24,7 +24,7 @@ function exec_tourner_dist()
 		: acces_rubrique($id))) {
 		spip_log("Tentative d'intrusion de " . $GLOBALS['auteur_session']['nom'] . " dans " . $GLOBALS['exec']);
 		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
+		echo minipres(_T('info_acces_interdit'));
 	}
 
 	$tourner = charger_fonction('tourner', 'inc');

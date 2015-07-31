@@ -158,7 +158,7 @@ function erreur_upload_trop_gros() {
 		array('max' => ini_get('upload_max_filesize')))
 		."</p>";
 	
-  minipres(_T('pass_erreur'),"<div class='upload_answer upload_error'>".$msg."</div>");
+  echo minipres(_T('pass_erreur'),"<div class='upload_answer upload_error'>".$msg."</div>");
 	exit;
 }
 

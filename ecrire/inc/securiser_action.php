@@ -25,7 +25,7 @@ function inc_securiser_action_dist($action='', $arg='', $redirect="", $mode=fals
 		return securiser_action_auteur($action, $arg, $redirect, $mode, $att);
 	elseif (!verifier_action_auteur(_request('action') . '-' . _request('arg'), _request('hash'))) {
 		include_spip('inc/minipres');
-		minipres(_T('info_acces_interdit'));
+		echo minipres(_T('info_acces_interdit'));
 	}
 }
 
