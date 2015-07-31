@@ -24,7 +24,9 @@ if (defined("_INC_PUBLIC")) {
 
 } else {
 	define ("_INC_PUBLIC", 1);
-	include ("ecrire/inc_version.php3");
+	if (!function_exists('include_local')) { # cas de page.php3
+		include ("ecrire/inc_version.php3");
+	}
 	include_local('inc-public-global.php3');
 
 	// Calculer la page sans evaluer le php qu'elle contient
