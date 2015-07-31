@@ -403,6 +403,8 @@ function balise_SPIP_VERSION_dist($p) {
  * Cette balise interroge les colonnes `nom_site` ou `url_site`
  * dans la boucle la plus proche.
  *
+ * @balise NOM_SITE
+ * @see calculer_url()
  * @example
  *     ```
  *     <a href="#URL_SITE">#NOM_SITE</a>
