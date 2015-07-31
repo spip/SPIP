@@ -318,7 +318,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	@header('Content-Type: text/html; charset='.lire_meta('charset'));
 	echo debut_entete('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 			  _T('admin_debug') . ' ' .
-			  _T('info_mon_site_spip')), 
+			  supprimer_tags(extraire_multi(lire_meta('nom_site')))), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css'>",
 	  "</head>\n<body style='margin:0 10px;'>",
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
