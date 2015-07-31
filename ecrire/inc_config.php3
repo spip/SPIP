@@ -39,10 +39,11 @@ function init_config() {
 		'forums_publics' => 'posteriori',
 		'accepter_inscriptions' => 'non',
 		'prevenir_auteurs' => 'non',
-		'activer_messagerire' => 'oui',
+		'activer_messagerie' => 'oui',
 		'activer_imessage' => 'oui',
 		'suivi_edito' => 'non',
 		'quoi_de_neuf' => 'non',
+		'forum_prive_admin' => 'non',
 
 		'activer_moteur' => 'non',
 		'activer_statistiques' => 'oui',
@@ -200,6 +201,7 @@ function appliquer_modifs_config() {
 		'quoi_de_neuf',
 		'adresse_neuf',
 		'jours_neuf',
+		'forum_prive_admin',
 
 		'activer_moteur',
 		'activer_statistiques',

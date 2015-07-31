@@ -214,6 +214,20 @@ if ($options == "avancees") {
 		echo "</TD></TR>\n";
 	}
 
+	echo "<TR><TD>&nbsp;</TD></TR>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT
+		FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Forums internes</FONT></B></TD></TR>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo propre("Outre la messagerie interne, un forum est disponible dans l'espace priv&eacute;
+		du site, ouvert &agrave; tous les r&eacute;dacteurs enregistr&eacute;s; vous pouvez choisir
+		d'y ajouter un forum r&eacute;serv&eacute; aux seuls administrateurs.");
+	echo "</TD></TR>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
+		array('oui' => 'Activer le forum des administrateurs',
+			'non' => 'D&eacute;sactiver le forum des administrateurs'));
+	echo "</TD></TR>\n";
+
 	echo "<TR><TD ALIGN='right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
 	echo "</TD></TR>";
