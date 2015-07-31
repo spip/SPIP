@@ -207,25 +207,16 @@ function inserer_vignette_base($image, $vignette) {
 
 	$vignette = str_replace(_DIR_RACINE, '', $vignette);
 
-	spip_log("creation vignette($image) -> $vignette");
-
-	if ($t = spip_query("SELECT id_document FROM spip_documents
-	WHERE fichier='".addslashes($image)."'")) {
+	$t = spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($image)."'");
+	spip_log("creation vignette($image) -> $vignette $t");
+	if ($t) {
 		if ($row = spip_fetch_array($t)) {
 			$id_document = $row['id_document'];
 			$id_vignette = spip_abstract_insert("spip_documents", 
 				"(mode)",
 				"('vignette')");
-			spip_query("UPDATE spip_documents
-				SET id_vignette=$id_vignette WHERE id_document=$id_document");
-			spip_query("UPDATE spip_documents SET
-				id_type = '$format',
-				largeur = '$largeur',
-				hauteur = '$hauteur',
-				taille = '$taille',
-				fichier = '$vignette',
-				date = NOW()
-				WHERE id_document = $id_vignette");
+			spip_query("UPDATE spip_documents SET id_vignette=$id_vignette WHERE id_document=$id_document");
+			spip_query("UPDATE spip_documents SET				id_type = '$format',								largeur = '$largeur',								hauteur = '$hauteur',								taille = '$taille',								fichier = '$vignette',								date = NOW()									WHERE id_document = $id_vignette");
 			spip_log("(document=$id_document, vignette=$id_vignette)");
 		}
 	}

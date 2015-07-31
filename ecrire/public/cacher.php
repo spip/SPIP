@@ -122,8 +122,7 @@ function retire_caches($chemin = '') {
 		spip_log ("Retire $n caches");
 		foreach ($suppr as $cache => $ignore)
 			retire_cache($cache);
-		spip_query("DELETE FROM spip_caches WHERE "
-		.calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
+		spip_query("DELETE FROM spip_caches WHERE " . calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
 	}
 
 	// Si on a regarde (compte > 0), signaler s'il reste des caches invalides
