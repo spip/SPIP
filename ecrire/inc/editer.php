@@ -73,7 +73,6 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 	$contexte = $row;
 	if (!isset($contexte['id_parent']) && $id_parent)
 		$contexte['id_parent']=$id_parent;
-	$contexte['new'] = $id;
 	$contexte['config'] = $config = $config_fonc($row);
 	$att_text = " class='formo' "
 	. $GLOBALS['browser_caret']
@@ -99,7 +98,8 @@ function formulaires_editer_objet_charger($type, $id='new', $id_parent=0, $lier_
 		  "' />" .
 		  "\n<input type='hidden' name='changer_lang' value='" .
 		  $config['langue'] .
-		  "' />")) . $hidden;
+		  "' />")) 
+		  . $hidden;
 
 	// Ajouter le controles md5
 	if (intval($id)) {
