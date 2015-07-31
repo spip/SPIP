@@ -25,9 +25,10 @@ function ecrire_stats() {
 	else return;
 
 	$url_site_spip = lire_meta('adresse_site');
+	$url_site_spip = eregi_replace("http://www\.","",$url_site_spip);
 	$log_referer = $GLOBALS['HTTP_REFERER'];
 	if ($url_site_spip == '' OR eregi($url_site_spip, $log_referer)) $log_referer = "";
-
+	
 	$log_date = date("Y-m-d");
 
 	$query = "INSERT DELAYED INTO spip_visites_temp (date, ip, type, referer) ".
