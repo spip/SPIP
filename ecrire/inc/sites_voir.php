@@ -162,12 +162,11 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	if ($connect_statut == '0minirezo') $cols ++;
 	if ($afficher_site) $cols ++;
 
-	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/ms', 
 			$requete,
 		       $r)) {
 	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
 	  $cpt = $cpt['n'];
-
 	  $tranches = afficher_tranches_requete($requete, $cpt, $cols);
 	}
 
