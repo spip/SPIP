@@ -115,7 +115,7 @@ function inc_forum_insert_dist($force_statut = NULL) {
 		elseif ($id_breve)
 			$retour_forum = generer_url_breve($id_breve);
 		elseif ($id_syndic)
-			$retour_forum = generer_url_syndic($id_syndic);
+			$retour_forum = generer_url_site($id_syndic);
 		elseif ($id_rubrique) # toujours en dernier
 			$retour_forum = generer_url_rubrique($id_rubrique);
 		$retour_forum = str_replace('&amp;','&',$retour_forum);
