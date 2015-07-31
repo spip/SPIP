@@ -27,10 +27,10 @@ body { padding: 5%; }
 
 #minipres { position: relative; margin: 0 auto; padding: 20px; background: #fff repeat; }
 .quitter_fenetre { position: absolute; right: 20px; top: 20px; }
-.quitter_fenetre a { display: block; width: 20px; height: 20px; background: url(images/fermer-16.png) no-repeat right center; color: #FFF; text-indent: -999em; }
+.quitter_fenetre a { display: block; width: 20px; height: 20px; background: url(images/fermer-16.png) no-repeat right center; color: #fff; text-indent: -999em; }
 
 @media (min-width: 640px) {
-#minipres { width: 540px; border: 1px solid #EEE;
+#minipres { width: 540px; border: 1px solid #eee;
 -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px;
 -webkit-box-shadow: 0 0 20px #666; -moz-box-shadow: 0 0 20px #666; box-shadow: 0 0 20px #666; }
 }
@@ -54,7 +54,7 @@ body { -webkit-text-size-adjust: 70%; }
 
 .formulaire_spip fieldset,
 fieldset,
-.fieldset { margin: 0 0 20px; padding: 20px; padding-bottom: 1px; background: #fff; border: 1px solid #CCC; border-radius: 3px; text-align: left; }
+.fieldset { margin: 0 0 20px; padding: 20px; padding-bottom: 1px; background: #fff; border: 1px solid #ccc; border-radius: 3px; text-align: left; }
 legend { font-weight: bold; color: #333; } /* Preciser la couleur des legend pour IE/Win */
 label {}
 
@@ -78,11 +78,11 @@ select { font-size: 120%; }
 
 /* erreur */
 .formulaire_spip fieldset ul li.erreur {}
-.formulaire_spip fieldset ul li.erreur input { border-color: red; background-color: #FCC; }
+.formulaire_spip fieldset ul li.erreur input { border-color: red; background-color: #fcc; }
 .reponse_formulaire,
 .erreur_message { font-weight: bold; color: red; }
 
-.reponse_formulaire.reponse_formulaire_ok {border:2px solid; font-weight: normal; padding: 10px; margin-bottom: 20px; color: #264409; border-color: #C6D880; background-color: #E6EFC2;}
+.reponse_formulaire.reponse_formulaire_ok { border: 2px solid; font-weight: normal; padding: 10px; margin-bottom: 20px; color: #264409; border-color: #c6d880; background-color: #e6efc2; }
 
 
 /* Habillage (en vrac)
@@ -117,9 +117,9 @@ select { font-size: 120%; }
 .error,
 .success,
 .notice {border:2px solid; font-weight: normal;padding:10px;margin-bottom:20px;}
-.success {color: #264409;border-color: #C6D880;background-color:#E6EFC2;}
-.error {color: #8A1F11;border-color: #FBC2C4;background-color:#FBE3E4;}
-.notice {color: #514721;border-color: #FFD324;background-color:#FFF6BF;}
+.success {color: #264409;border-color: #c6d880;background-color:#e6efc2;}
+.error {color: #8a1f11;border-color: #fbc2c4;background-color:#fbe3e4;}
+.notice {color: #514721;border-color: #ffd324;background-color:#fff6bf;}
 
 .install-plugins {position:relative;margin-bottom: 0;}
 .install-plugins.success + .install-plugins.success {margin-top: 0;border-top: 0;}
