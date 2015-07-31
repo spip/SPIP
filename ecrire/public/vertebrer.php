@@ -26,6 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // qui sert de lien vers la meme page, avec la table triee selon ce champ
 // distingue champ numerique et non numerique
 
+// http://doc.spip.org/@vertebrer_sort
 function vertebrer_sort($fields, $direction)
 {
 	$res = '';
@@ -45,6 +46,7 @@ function vertebrer_sort($fields, $direction)
 
 // Autant de criteres conditionnels que de champs
 
+// http://doc.spip.org/@vertebrer_crit
 function vertebrer_crit($v)
 {
 	 $res = "{pagination}" 
@@ -58,6 +60,7 @@ function vertebrer_crit($v)
 // Si une colonne reference une table, ajoute un href sur sa page dynamique.
 // Ce serait encore mieux d'aller chercher sa cle primaire.
 
+// http://doc.spip.org/@vertebrer_cell
 function vertebrer_cell($fields)
 {
   $res = "\n\t<tr class='[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]'>\n\t\t<td>#COMPTEUR_BOUCLE</td>";
@@ -74,6 +77,7 @@ function vertebrer_cell($fields)
   return $res;
 }
 
+// http://doc.spip.org/@public_vertebrer_dist
 function public_vertebrer_dist($desc)
 {
 	$nom = $desc['table'];
