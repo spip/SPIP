@@ -344,7 +344,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_admin_vider' => '<b>Esta página sólo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento técnico. Algunas de ellas dan lugar a un proceso de autentificación para el cual es necesario tener acceso por FTP al sitio web.</p>',
 	'info_gauche_auteurs' => 'Aquí figuran todos los autores y autoras del sitio.
  Su estado se indica con el color de su icono (administrador/a = verde; redactor/a = amarillo).',
-	'info_gauche_auteurs_exterieurs' => 'Los autores y autoras exteriores, sin acceso al sitio, están indicados con un icono azul; los que están borrados con una papelera.', # MODIF
+	'info_gauche_auteurs_exterieurs' => 'Los/as autores/as exteriores, sin acceso al sitio, están indicados/as con un icono azul; los/as que están borrados/as con una papelera.',
 	'info_gauche_messagerie' => 'La mensajería permite comunicarse, crear recordatorios para traer a la memoria algo o publicar anuncios (en el caso de pertenecer al grupo de administración).',
 	'info_gauche_numero_auteur' => 'AUTOR O AUTORA NÚMERO',
 	'info_gauche_statistiques_referers' => 'Esta página presenta la lista de los <i>referers</i>, es decir de los sitios que contienen enlaces que llevan a tu propio sitio, sólo para ayer y hoy; esta lista se pone a cero cada 24 horas.',
@@ -640,9 +640,9 @@ Las traducciones están asociadas al original, en un color que indica su estado:
 	'jour_non_connu_nc' => 'n.c.',
 
 	// L
-	'label_bando_outils' => 'ميل ابزار ',
-	'label_bando_outils_afficher' => 'نمايش ابزارها',
-	'label_bando_outils_masquer' => 'پنهان سازي ابزارها',
+	'label_bando_outils' => 'Barra de herramientas',
+	'label_bando_outils_afficher' => 'Mostrar herramientas',
+	'label_bando_outils_masquer' => 'Ocultar herramientas',
 	'label_choix_langue' => 'Seleccione su idioma',
 	'label_nom_fichier_connect' => 'Indica el nombre utilizado para este servidor',
 	'label_slogan_site' => 'Slogan del sitio',
