@@ -120,6 +120,7 @@ define('_BALISES_BLOCS',
 	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
 	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
+	.'applet|del|ins|iframe|'
 	.'d[ltd]|script|noscript|map|button|fieldset|style');
 
 //
