@@ -10,24 +10,22 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_config.php3");
 
-function config_lang_dist($changer_config)
+function config_lang_dist()
 { 
-	global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $all_langs;
+global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $all_langs, $changer_config;
 
 debut_page(_T('titre_page_config_contenu'), "administration", "langues");
 
 echo "<br><br><br>";
 gros_titre(_T('info_langues'));
 
-
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 		echo _T('avis_non_acces_page');
 		exit;
 

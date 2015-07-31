@@ -10,17 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_config.php3");
 
-
-function config_multilang_dist($changer_config)
+function config_multilang_dist()
 {
-	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $spip_lang_right;
+  global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $spip_lang_right, $changer_config;
 
 lire_metas();
 
