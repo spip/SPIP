@@ -190,7 +190,9 @@ jQuery.fn.formulaire_dyn_ajax = function(target) {
 			},
 			iframe: jQuery.browser.msie
 		})
-		.addClass('noajax') // previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+		// previent qu'on n'ajaxera pas deux fois le meme formulaire en cas de ajaxload
+		// mais le marquer comme ayant l'ajax au cas ou on reinjecte du contenu ajax dedans
+		.addClass('noajax hasajax') 
 		;
 		});
   });
@@ -240,6 +242,12 @@ jQuery.fn.ajaxbloc = function() {
 			else {
 				//jQuery(blocfrag).positionner(false);
 			}
+			// si le fragment ajax est dans un form ajax, 
+			// il faut remettre a jour les evenements attaches
+			// car le fragment peut comporter des submit ou button
+			a = jQuery(blocfrag).parents('form.hasajax')
+			if (a.length)
+				a.eq(0).removeClass('noajax').parents('div.ajax').formulaire_dyn_ajax();
 			updateReaderBuffer();
 		}
 
@@ -284,6 +292,8 @@ jQuery.fn.ajaxbloc = function() {
 				return false;
 			});
 		}).addClass('noajax'); // previent qu'on ajax pas deux fois le meme lien
+		// ajaxer les boutons actions qui sont techniquement des form minimaux
+		// mais se comportent comme des liens
 		jQuery('form.bouton_action_post.ajax:not(.noajax)', this).each(function(){
 			var leform = this;
 			var url = jQuery(this).attr('action').split('#');
