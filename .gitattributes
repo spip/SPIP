@@ -481,6 +481,7 @@ ecrire/inc/sites_voir.php -text
 ecrire/inc/suivi_versions.php -text
 ecrire/inc/syndic.php -text
 ecrire/inc/tourner.php -text
+ecrire/inc/traduire.php -text
 ecrire/inc/utils.php -text
 ecrire/inc/vieilles_defs.php -text
 ecrire/inc/virtualiser.php -text

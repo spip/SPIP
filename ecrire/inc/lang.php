@@ -15,68 +15,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 
 //
-// Charger un fichier langue
-//
-// http://doc.spip.org/@chercher_module_lang
-function chercher_module_lang($module, $lang = '') {
-	if ($lang)
-		$lang = '_'.$lang;
-
-	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
-	if ($f = include_spip('lang/'.$module.$lang, false))
-		return $f;
-
-	// 2) directement dans le chemin (old style)
-	return include_spip($module.$lang, false);
-}
-
-// http://doc.spip.org/@charger_langue
-function charger_langue($lang, $module = 'spip') {
-	if ($lang AND $fichier_lang = chercher_module_lang($module, $lang)) {
-		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
-		include_once($fichier_lang);
-	} else {
-		// si le fichier de langue du module n'existe pas, on se rabat sur
-		// la langue par defaut du site -- et au pire sur le francais, qui
-		// *par definition* doit exister, et on copie le tableau dans la
-		// var liee a la langue
-		$l = $GLOBALS['meta']['langue_site'];
-		if (!$fichier_lang = chercher_module_lang($module, $l))
-			$fichier_lang = chercher_module_lang($module, 'fr');
-
-		if ($fichier_lang) {
-			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
-			include($fichier_lang);
-			$GLOBALS['i18n_'.$module.'_'.$lang]
-				= &$GLOBALS['i18n_'.$module.'_'.$l];
-			#spip_log("module de langue : ${module}_$l.php");
-		}
-	}
-}
-
-//
-// Surcharger le fichier de langue courant avec un autre (tordu, hein...)
-//
-// http://doc.spip.org/@surcharger_langue
-function surcharger_langue($fichier) {
-
-	$idx_lang_normal = $GLOBALS['idx_lang'];
-	$idx_lang_surcharge = $GLOBALS['idx_lang'].'_temporaire';
-	$GLOBALS['idx_lang'] = $idx_lang_surcharge;
-	include($fichier);
-	if (is_array($GLOBALS[$idx_lang_surcharge])) {
-		$GLOBALS[$idx_lang_normal] = array_merge(
-			$GLOBALS[$idx_lang_normal],
-			$GLOBALS[$idx_lang_surcharge]
-		);
-	}
-	unset ($GLOBALS[$idx_lang_surcharge]);
-	$GLOBALS['idx_lang'] = $idx_lang_normal;
-}
-
-
-
-//
 // Changer la langue courante
 //
 // http://doc.spip.org/@changer_langue
@@ -107,77 +45,6 @@ function changer_langue($lang) {
 		return false;
 
 }
-
-//
-// Regler la langue courante selon les infos envoyees par le brouteur
-//
-// http://doc.spip.org/@regler_langue_navigateur
-function regler_langue_navigateur() {
-	$accept_langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-	if (is_array($accept_langs)) {
-		while(list(, $s) = each($accept_langs)) {
-			if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
-				$lang = strtolower($r[1]);
-				if (changer_langue($lang)) return $lang;
-			}
-		}
-	}
-	return false;
-}
-
-
-//
-// Traduire une chaine internationalisee
-//
-// http://doc.spip.org/@traduire_chaine
-function traduire_chaine($code) {
-	global $spip_lang;
-
-	// modules par defaut
-
-	$modules = array('spip', 'ecrire');
-
-	// modules demandes explicitement
-	$code_ori = $code; # le garder pour le fallback plus tard
-	if (strpos($code, ':')) {
-		if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
-			$modules = explode("/",$regs[1]);
-			$code = $regs[2];
-		}
-	}
-	$text = '';
-	// parcourir tous les modules jusqu'a ce qu'on trouve
-	foreach ($modules as $module) {
-		$var = "i18n_".$module."_".$spip_lang;
-		if (empty($GLOBALS[$var])) {
-			charger_langue($spip_lang, $module);
-
-			// surcharge perso -- on cherche (lang/)local_xx.php ...
-			if ($f = chercher_module_lang('local', $spip_lang))
-				surcharger_langue($f);
-			// ... puis (lang/)local.php
-			if ($f = chercher_module_lang('local'))
-				surcharger_langue($f);
-		}
-		if (isset($GLOBALS[$var][$code])) {
-			$text = $GLOBALS[$var][$code];
-			break;
-		}
-	}
-
-	// fallback langues pas finies ou en retard (eh oui, c'est moche...)
-	if ($spip_lang<>'fr') {
-		$text = ereg_replace("^<(NEW|MODIF)>","",$text);
-		if (!$text) {
-			$spip_lang_temp = $spip_lang;
-			$spip_lang = 'fr';
-			$text = traduire_chaine($code_ori);
-			$spip_lang = $spip_lang_temp;
-		}
-	}
-	return $text;
-}
-
 
 // http://doc.spip.org/@traduire_nom_langue
 function traduire_nom_langue($lang) {
@@ -414,18 +281,22 @@ function utiliser_langue_site() {
 
 // http://doc.spip.org/@utiliser_langue_visiteur
 function utiliser_langue_visiteur() {
-	global $_COOKIE;
 
-	if (!regler_langue_navigateur())
-		utiliser_langue_site();
+	$l = (_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire');
+	if (isset($_COOKIE[$l]))
+		if (changer_langue($l = $_COOKIE[$l])) return $l;
 
-	if (!empty($GLOBALS['auteur_session']['lang']))
-		changer_langue($GLOBALS['auteur_session']['lang']);
+	if (isset($GLOBALS['auteur_session']['lang']))
+		if (changer_langue($l = $GLOBALS['auteur_session']['lang']))
+			return $l;
 
-	$cookie_lang = (_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire');
-	if (!empty($_COOKIE[$cookie_lang]))
+	foreach (explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']) as $s)  {
+		if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
+			if (changer_langue($l=strtolower($r[1]))) return $l;
+		}
+	}
 
-		changer_langue($_COOKIE[$cookie_lang]);
+	return changer_langue($GLOBALS['langue_site']);
 }
 
 // Une fonction qui donne le repertoire ou trouver des fichiers de langue

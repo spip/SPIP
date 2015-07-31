@@ -20,7 +20,6 @@ include_spip('inc/headers');
 // http://doc.spip.org/@action_inscription_dist
 function action_inscription_dist() {
 
-	utiliser_langue_site();
 	utiliser_langue_visiteur();
 	http_no_cache();
 

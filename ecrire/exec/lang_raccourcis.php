@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
-include_spip('inc/lang');
+include_spip('inc/traduire');
 
 // http://doc.spip.org/@exec_lang_raccourcis_dist
 function exec_lang_raccourcis_dist() {
