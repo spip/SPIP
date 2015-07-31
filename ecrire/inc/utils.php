@@ -285,8 +285,6 @@ function set_request($var, $val = NULL, $c=false) {
 // Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
 //            [(#SELF|parametre_url{suite,''})] (supprime)
 //            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
-// http://www.spip.net/@parametre_url
-//
 // http://doc.spip.org/@parametre_url
 function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 
@@ -683,6 +681,9 @@ function creer_chemin() {
 // http://doc.spip.org/@memoriser_fichiers
 function memoriser_fichiers($dir) {
 	$fichiers = array();
+
+	if ($dir === '') $dir = '.';
+
 	if (@is_dir($dir)
 	AND $t = @opendir($dir)) {
 		while (($f = readdir($t)) !== false) {
@@ -695,7 +696,6 @@ function memoriser_fichiers($dir) {
 // http://doc.spip.org/@find_in_path
 function find_in_path ($filename) {
 	static $ram;
-	$dirs = creer_chemin();
 
 	$a = strrpos($filename,'/');
 	if ($a === false) {
@@ -705,7 +705,7 @@ function find_in_path ($filename) {
 		$dirname = substr($filename, 0, $a+1);
 		$basename = substr($filename, $a+1);
 	}
-	foreach($dirs as $dir) {
+	foreach(creer_chemin() as $dir) {
 		$sous = $dir.$dirname;
 		if (!isset($ram[$sous]))
 			$ram[$sous] = memoriser_fichiers($sous);
