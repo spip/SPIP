@@ -222,7 +222,10 @@ $xml_indent = false;
 // - Alexa, equivalent Thumbshots, avec vignettes beaucoup plus grandes mais avertissement si pas de preview
 //   Pour Alexa, penser a indiquer l'url du site dans l'id.
 //   Dans Alexa, si on supprimer size=small, alors vignettes tres grandes
-$source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
+// - On abandonne thumbshots.com qui demande une inscription et on passe sous apercite.fr en conservant exactement la même
+//   expression pour insérer l'url du site
+$source_vignettes = "http://www.apercite.fr/api/apercite/120x90/oui/oui/http://";
+// $source_vignettes = "http://open.thumbshots.org/image.pxf?url=http://";
 // $source_vignettes = "http://msnsearch.srv.girafa.com/srv/i?s=MSNSEARCH&r=http://";
 // $source_vignettes = "http://pthumbnails.alexa.com/image_server.cgi?id=www.monsite.net&size=small&url=http://";
 
