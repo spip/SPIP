@@ -91,8 +91,6 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 .cartouche .spip_logos { float: right; margin-left: 16px; margin-bottom: 4px; }
 .cartouche p { margin: 0; padding: 0; clear: left; }
 .cartouche .traductions { font-size: 0.90em; }
-.cartouche .traductions * { display: inline; }
-.cartouche .traductions li { padding-left: 1em; }
 
 .chapo { margin-bottom: 1.50em; line-height: 1.40em; font-weight: bold; color: #669; }
 .texte { line-height: 1.60em; }
