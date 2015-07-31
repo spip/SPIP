@@ -428,7 +428,7 @@ Merci de votre participation
 'info_document_indisponible' => 'Ce document n\'est pas disponible',
 'info_documents' => 'Documents',
 'info_documents_nb' => '@nb@ documents',
-'info_documents_un' => '1 documents',
+'info_documents_un' => '1 document',
 'info_echange_message' => 'SPIP permet l\'&eacute;change de messages et la constitution de forums de discussion
 		priv&eacute;s entre les participants du site. Vous pouvez activer ou
 		d&eacute;sactiver cette fonctionnalit&eacute;.',
@@ -531,7 +531,7 @@ Merci de votre participation
 'info_site_refuse' => 'Site Web refus&eacute;',
 'info_sites_referencer' => 'R&eacute;f&eacute;rencer un site',
 'info_sites_nb' => '@nb@ sites',
-'info_sites_un' => '1 sites',
+'info_sites_un' => '1 site',
 'info_supprimer_vignette' => 'supprimer la vignette',
 'info_symbole_bleu' => 'Le symbole <b>bleu</b> indique un <b>pense-b&ecirc;te</b>: c\'est-&agrave;-dire un message &agrave; votre usage personnel.',
 'info_symbole_jaune' => 'Le symbole <b>jaune</b> indique une <b>annonce &agrave; tous les r&eacute;dacteurs</b>&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.',
