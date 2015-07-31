@@ -68,9 +68,9 @@ function generer_action_auteur($action, $arg, $redirect="", $mode=false, $att=''
 		"\n\t</div>\n</form>\n";
 }
 
-function redirige_action_auteur($action, $arg, $ret, $gra)
+function redirige_action_auteur($action, $arg, $ret, $gra, $mode=false, $atts='')
 {
-	return generer_action_auteur($action, $arg, generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS));
+	return generer_action_auteur($action, $arg, generer_url_ecrire($ret, $gra, true, _DIR_RESTREINT_ABS), $mode, $atts);
 }
 
 

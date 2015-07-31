@@ -192,37 +192,35 @@ if ($flag_editable) {
  if ($spip_display != 4)
  afficher_documents_non_inclus($id_article, "article", $flag_editable);
 
-//
-// "Demander la publication"
-//
+ if ($flag_auteur AND $statut_article == 'prepa')
+	echo demande_publication($id_article);
 
-
-if ($flag_auteur AND $statut_article == 'prepa') {
-	echo "<P>";
-	debut_cadre_relief();
-	echo	"<center>",
-		"<B>"._T('texte_proposer_publication')."</B>",
-		aide ("artprop"),
-		"\n<form method='post' action='",
-		redirige_action_auteur("instituer", "article-$id_article-prop", 'articles', "id_article=$id_article"),
-      "'>",
-		"<input type='submit' class='fondo' value=\"", 
-		_T('bouton_demande_publication'),
-		"\" />\n",
-		"</form>",
-		"</center>";
-	fin_cadre_relief();
-}
-
-echo "</div>";
-
-echo "</div>";
-fin_cadre_relief();
+ echo "</div>";
+ echo "</div>";
+ fin_cadre_relief();
 
  affiche_forums_article($id_article, $id_rubrique, $titre, $debut);
 
 fin_page();
 
+}
+
+function demande_publication($id_article)
+{
+	return debut_cadre_relief('',true) .
+		"<center>" .
+		"<b>" ._T('texte_proposer_publication') . "</b>" .
+		aide ("artprop") .
+		redirige_action_auteur("instituer", 
+			"article-$id_article-prop",
+			'articles',
+			"id_article=$id_article",
+			("<input type='submit' class='fondo' value=\"" . 
+			    _T('bouton_demande_publication') .
+			    "\" />\n"),
+			"method='post'") .
+		"</center>" .
+		fin_cadre_relief(true);
 }
 
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
@@ -698,9 +696,9 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			$langue_article = $langue_parent;
 
 		debut_cadre_couleur();
-		echo "<div style='text-align: center;'>";
-		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent);
-		echo "</div>\n";
+		echo "<div style='text-align: center;'>",
+			menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $langue_parent, redirige_action_auteur('instituer', "langue_article-$id_article-$id_rubrique","articles","id_article=$id_article")),
+			"</div>\n";
 		fin_cadre_couleur();
 
 		echo fin_block();
@@ -1248,12 +1246,11 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 
 function afficher_statut_articles($id_article, $rubrique_article, $statut_article)
 {
-  return "\n<form method='post' action='" .
-	redirige_action_auteur("instituer", "article-$id_article",'articles', "id_article=$id_article") .
-      "'>" .
+  return redirige_action_auteur("instituer", "article-$id_article",'articles', "id_article=$id_article",
+	(
 	debut_cadre_relief("", true) .
-	"\n<center>" . "<B>" ._T('texte_article_statut') ."</B>" .
-	"\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n" .
+	"\n<center>" . "<b>" ._T('texte_article_statut') ."</b>" .
+	"\n<select name='statut_nouv' size='1' class='fondl'\n" .
 	"onChange=\"document.statut.src='" .
 	_DIR_IMG_PACK .
 	"' + puce_statut(options[selectedIndex].value);" .
@@ -1264,7 +1261,7 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	"<option"  . mySel("poubelle", $statut_article) .
 	http_style_background('rayures-sup.gif')  . '>'  ._T('texte_statut_poubelle') ."</option>\n" .
 	"<option"  . mySel("refuse", $statut_article)  . " style='background-color: #FFA4A4'>" ._T('texte_statut_refuse') ."</option>\n" .
-	"</SELECT>" .
+	"</select>" .
 	" &nbsp; " .
 	http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'") .
 	"  &nbsp;\n" .
@@ -1273,8 +1270,8 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	"</span>" .
 	aide("artstatut") .
 	"</center>" .
-	fin_cadre_relief('', true) .
-	"\n</form>";
+	fin_cadre_relief('', true)), 
+			   " method='post'");
 }
 
 //
@@ -1289,24 +1286,6 @@ function trop_longs_articles($texte_plus)
 					     $texte_plus[$nb_texte]);
 	}
 	return $texte_ajout;
-}
-
-
-function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
-{
-
-// Appliquer la modification de langue
- if ($GLOBALS['meta']['multi_articles'] == 'oui') {
-	$langue_parent = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
-	$langue_parent=$langue_parent['lang'];
-	if ($changer_lang) {
-		if ($changer_lang != "herit")
-			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui' WHERE id_article=$id_article");
-		else
-			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($langue_parent) . ", langue_choisie='non' WHERE id_article=$id_article");
-                calculer_langues_utilisees();
-	}
- }
 }
 
 // Passer les images/docs en "inclus=non"
@@ -1427,7 +1406,7 @@ function insert_article($id_parent)
 
 function exec_articles_dist()
 {
-  global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new, $jour, $jour_redac, $langue_article, $lier_trad, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $supp_auteur, $supp_mot, $titre, $titre_article, $virtuel; 
+  global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new, $jour, $jour_redac, $langue_article, $lier_trad, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $supp_auteur, $supp_mot, $titre, $titre_article, $virtuel; 
 
 
  $id_parent = intval($id_parent);
@@ -1481,9 +1460,6 @@ if ($jour_redac) {
 
 	spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."' WHERE id_article=$id_article");
 }
-
-
-modif_langue_articles($id_article, $id_rubrique, $changer_lang);
 
 maj_documents($id_article, 'article');
 

@@ -260,7 +260,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, redirige_action_auteur('instituer', "langue-$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique"), $ze_logo, "supprimer.gif");
+	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, redirige_action_auteur('instituer', "langue_rubrique-$id_rubrique-$id_parent","naviguer","id_rubrique=$id_rubrique"), $ze_logo, "supprimer.gif");
 	echo "</div>\n";
 	echo fin_block();
 
