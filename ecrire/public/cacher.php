@@ -244,10 +244,9 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))
 	) {
+		supprimer_fichier(_DIR_CACHE . $f);
 		if (in_array($GLOBALS['var_mode'], array('calcul', 'recalcul')))
-			array_map('supprimer_fichier', preg_files(_DIR_CACHE.$f, '.'));
-		else 
-			supprimer_fichier(_DIR_CACHE . $f);
+			array_map('supprimer_fichier', preg_files(_DIR_CACHE . $f));
 	}
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
