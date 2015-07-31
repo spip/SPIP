@@ -170,7 +170,7 @@ function quete_logo($type, $onoff, $id, $id_rubrique, $flag) {
 // http://doc.spip.org/@calcule_logo_document
 function quete_logo_file($row, $connect=NULL) {
 	include_spip('inc/documents');
-	$logo = vignette_logo_document($row['id_vignette'], $connect);
+	$logo = vignette_logo_document($row, $connect);
 	if (!$logo) $logo = image_du_document($row);
 	if (!$logo) $logo = vignette_par_defaut($row['extension'], false);
 	return get_spip_doc($logo);
@@ -178,7 +178,7 @@ function quete_logo_file($row, $connect=NULL) {
 
 function quete_logo_document($row, $lien, $align, $x, $y, $connect=NULL) {
 	include_spip('inc/documents');
-	$logo = vignette_logo_document($row['id_vignette'], $connect);
+	$logo = vignette_logo_document($row, $connect);
 	return vignette_automatique($logo, $row, $lien, $x, $y, $align);
 }
 

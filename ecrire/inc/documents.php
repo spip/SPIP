@@ -152,6 +152,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 			$y = 120;
 		} else 	$x = $y =-1; 
 	}
+	if (!$url) $url = generer_url_document_dist($document['id_document'], 'document');
 	return vignette_automatique($image, $document, $url, $x, $y, '', "miniature_document");
 }
 
@@ -371,9 +372,12 @@ function est_inclus($id_document) {
 }
 
 //
-// Afficher un document sous forme de ligne depliable (pages xxx_edit)
-//
-// TODO: il y a du code a factoriser avec inc/documenter
+// Afficher un document sous forme de bloc depliable 
+// en donnant un apercu
+// et en indiquer le raccourci permettant l'incrustation
+// Pour les distant, donner un bouton pour rappatriement (trombone)
+// Pour les images, donnner les boutons de rotations
+
 
 // http://doc.spip.org/@afficher_case_document
 function afficher_case_document($id_document, $id, $script, $type, $deplier=false) {
@@ -385,76 +389,45 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 
 	$id_vignette = $document['id_vignette'];
 	$extension = $document['extension'];
-	$titre = $document['titre'];
 	$descriptif = $document['descriptif'];
-	$url = generer_url_entite($id_document, 'document');
 	$fichier = $document['fichier'];
 	$largeur = $document['largeur'];
 	$hauteur = $document['hauteur'];
-	$taille = $document['taille'];
 	$mode = $document['mode'];
 	$distant = $document['distant'];
+	$titre = $document['titre'];
+	$legender = charger_fonction('legender', 'inc');
+	$dist = '';
 
-	// le doc est-il appele dans le texte ?
-	$doublon = est_inclus($id_document);
-
-	$cadre = strlen($titre) ? $titre : basename($fichier);
-
-	$letype = sql_fetsel("titre,inclus", "spip_types_documents", "extension=".sql_quote($extension));
-	if ($letype) {
-		$type_inclus = $letype['inclus'];
-		$type_titre = $letype['titre'];
+	$r = sql_fetsel("titre,inclus", "spip_types_documents", "extension=".sql_quote($extension));
+	if ($r) {
+		$type_inclus = $r['inclus'];
+		$type_titre = $r['titre'];
 	}
-	//
-	// Afficher un document
-	//
-	$ret = "";
+
 	if ($mode == 'document') {
 
-		$ret .= debut_cadre_enfonce("doc-24.gif", true, "", lignes_longues(typo($cadre),20), "document$id_document");
-		$ret .= "<a name='document$id_document'></a>\n";
-
 		if ($distant == 'oui') {
-			$dist = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
-
-			// Signaler les documents distants par une icone de trombone
-			$dist .= "\n<img src='" . chemin_image('attachment.gif') . "'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n";
-			// Bouton permettant de copier en local le fichier
 			include_spip('inc/tourner');
-			$dist .= bouton_copier_local($document, $type, $id, $id_document, $script);
-			
-			$dist .="</div>\n";
-		} else {
-			$dist = '';
+			$dist = "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>"
+			. "\n<img src='" . chemin_image('attachment.gif') . "'\n\talt=\"$fichier\"\n\ttitle=\"$fichier\" />\n"
+			. bouton_copier_local($document, $type, $id, $id_document, $script)
+			. "</div>\n";
 		}
 
-		//
-		// Affichage de la vignette
-		//
-		$ret .= "\n<div style='text-align: center'>"
-		. $dist
-		. document_et_vignette($document, $url, true)
-		. '</div>'
-		. "\n<div class='verdana1' style='text-align: center; color: black;'>\n"
-		. ($type_titre ? $type_titre : 
-		      ( _T('info_document').' '.majuscules($extension)))
-		. "</div>";
-
-		// Affichage du raccourci <doc...> correspondant
-		$raccourci = '';
-		if ($doublon)
-			$raccourci .= affiche_raccourci_doc('doc', $id_document, '');
+		if (est_inclus($id_document))
+			$raccourci = affiche_raccourci_doc('doc', $id_document, '');
 		else {
-			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
-				$raccourci .= "<b>"._T('info_inclusion_vignette')."</b><br />";
-			}
+			$vign= (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0);
+			$raccourci = $vign ? ("<b>"._T('info_inclusion_vignette')."</b><br />") : '';
+
 			$raccourci .= "<div style='color: 333333'>"
 			. affiche_raccourci_doc('doc', $id_document, 'left')
 			. affiche_raccourci_doc('doc', $id_document, 'center')
 			. affiche_raccourci_doc('doc', $id_document, 'right')
 			. "</div>\n";
 	
-			if (($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
+			if ($vign) {
 				$raccourci .= "<div style='padding:2px; ' class='arial1 spip_xx-small'>";
 				$raccourci .= "<b>"._T('info_inclusion_directe')."</b><br />";
 				$raccourci .= "<div style='color: 333333'>"
@@ -465,60 +438,47 @@ function afficher_case_document($id_document, $id, $script, $type, $deplier=fals
 				$raccourci .= "</div>";
 			}
 		}
-
-		$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
-			. $raccourci."</div>\n";
-
-		$legender = charger_fonction('legender', 'inc');
-		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
-
-		$ret .= fin_cadre_enfonce(true);
+		$ninclus = false;
+		$icone = 'doc-24.gif';
+		$style = 'e';
 
 	} else if ($mode == 'image') {
 
-	//
-	// Afficher une image inserable dans l'article
-	//
-	
-	  $ret .= debut_cadre_relief("image-24.gif", true, "", lignes_longues(typo($cadre),20), "document$id_document");
+		$icone = 'image-24.gif';
+		$style = 'r';
+		$ninclus = ($type_inclus !== 'image');
+		$doc = ($descriptif OR $titre) ? 'doc' : 'img';
 
-		//
-		// Afficher un apercu (pour les images)
-		//
-		if ($type_inclus == 'image') {
-			$ret .= "<div style='text-align: center; padding: 2px;'>\n";
-			$ret .= document_et_vignette($document, $url, true);
-			$ret .= "</div>\n";
-		}
-
-		//
-		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
-		//
-		$raccourci = "";
-		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
-			$doc = 'doc';
-		else
-			$doc = 'img';
-
-		if ($doublon)
-			$raccourci .= affiche_raccourci_doc($doc, $id_document, '');
+		if (est_inclus($id_document))
+			$raccourci = affiche_raccourci_doc($doc, $id_document, '');
 		else {
-			$raccourci .=
+			$raccourci =
 				affiche_raccourci_doc($doc, $id_document, 'left')
 				. affiche_raccourci_doc($doc, $id_document, 'center')
 				. affiche_raccourci_doc($doc, $id_document, 'right');
 		}
 
-		$ret .= "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
-			. $raccourci."</div>\n";
-
-
-		$legender = charger_fonction('legender', 'inc');
-		$ret .= $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier);
-		
-		$ret .= fin_cadre_relief(true);
 	}
-	return "<div>$ret</div>"; // on encapsule chaque document dans un container pour permettre son remplacement en ajax
+	$cadre = lignes_longues(typo($titre ? $titre : basename($fichier)), 20);
+	// encapsuler chaque document dans un container pour permettre son remplacement en ajax
+	return  '<div>'
+		. debut_cadre($style, $icone, '', $cadre, "document$id_document")
+		. ($ninclus ? '' :
+		   ("\n<div style='text-align: center'>"
+		    . $dist
+		    . document_et_vignette($document, '', true)
+		    . '</div>'
+		    . "\n<div class='verdana1' style='text-align: center; color: black;'>\n"
+		    . ($type_titre ? $type_titre : 
+		       ( _T('info_document').' '.majuscules($extension)))
+		    . "</div>"))
+		. $apercu
+		. "\n<div style='padding:2px; ' class='arial1 spip_xx-small'>"
+		. $raccourci
+		. "</div>\n"
+		. $legender($id_document, $document, $script, $type, $id, "document$id_document", $deplier)
+		. fin_cadre($style)
+		. '</div>'; 
 }
 
 // Etablit la liste des documents orphelins, c'est-a-dire qui ne sont lies
