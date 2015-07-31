@@ -219,7 +219,7 @@ function html2unicode($texte) {
 		$traduit .= substr($texte,0,$a-1);
 		$texte = substr($texte,$a-1);
 		if (eregi('^&([a-z][a-z0-9]+);',$texte,$match)) {
-			if ($s = $GLOBALS['CHARSET'][$trans][$i])
+			if ($s = $GLOBALS['CHARSET'][$trans][$match[1]])
 				$texte = ereg_replace($match[0], $s, $texte);
 		}
 		// avancer d'un cran
