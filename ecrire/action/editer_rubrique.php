@@ -145,6 +145,7 @@ function revisions_rubriques($id_rubrique, $c=false) {
 // que si $confirme_deplace == 'oui', et changer l'id_rubrique des
 // breves en question
 
+// http://doc.spip.org/@editer_rubrique_breves
 function editer_rubrique_breves($id_rubrique, $id_parent)
 {
 	$t = sql_countsel('spip_breves', "id_rubrique=$id_rubrique",'',1);
