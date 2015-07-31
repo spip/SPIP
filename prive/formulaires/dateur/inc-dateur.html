@@ -1,13 +1,6 @@
 <script type='text/javascript'>/*<![CDATA[*/
-if (window.jQuery){
-	jQuery(function(){
-		if (jQuery('input.date').length)
-			jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.widget.js}',function(){
-				jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.datepicker.js}',function(){
-					jQuery('input.date')
-						.addClass('datePicker')
-						.datepicker({
-							showOn: 'button',
+function date_picker_options(){
+	return {
 							buttonText: '<:afficher_calendrier|texte_script:>',
 							buttonImage: '#CHEMIN_IMAGE{calendrier-16.png}',
 							buttonImageOnly: true,
@@ -72,10 +65,25 @@ if (window.jQuery){
 							changeMonth: true,
 							changeYear: true,
 							showOtherMonths: true,
-							selectOtherMonths: true[,
+							selectOtherMonths: true
+	};
+}
+
+if (window.jQuery){
+	jQuery(function(){
+		if (jQuery('input.date').length)
+			jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.widget.js}',function(){
+				jQuery.getScript('#CHEMIN{prive/javascript/ui/jquery.ui.datepicker.js}',function(){
+					jQuery('input.date')
+						.addClass('datePicker')
+						.datepicker(jQuery.extend(date_picker_options(),
+							{
+							showOn: 'button'[,
 							minDate:'(#ENV{startDate})'][,
 							maxDate:'(#ENV{endDate})']
-						});
+							})
+						)
+						.trigger('datePickerLoaded');
 				});
 			});
 		if (jQuery('input.heure').length)
