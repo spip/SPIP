@@ -217,6 +217,7 @@ function notifications_forumvalide_dist($quoi, $id_forum) {
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/mail');
+	include_spip('inc/autoriser');
 
 
 	// Qui va-t-on prevenir ?
@@ -293,6 +294,7 @@ function notifications_forumposte_dist($quoi, $id_forum) {
 	include_spip('inc/texte');
 	include_spip('inc/filtres');
 	include_spip('inc/mail');
+	include_spip('inc/autoriser');
 
 
 	// Qui va-t-on prevenir ?
