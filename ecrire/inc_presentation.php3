@@ -1581,34 +1581,55 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		<?php } ?>
 		
 	}	
+
+	var accepter_change_statut;
 	
 	function selec_statut_art(id_article, clip, statut) {
-		decal = -1 * ((clip*11) + 1);
-		changestyle ('statutdecal'+id_article, 'marginLeft', decal+'px');
-		cacher ('statutdecal'+id_article);
 
-		if (clip == 0) puce = 'blanche';
-		else if (clip == 1) puce = 'orange';
-		else if (clip == 2) puce = 'verte';
-		else if (clip == 3) puce = 'rouge';
-		else if (clip == 4) puce = 'poubelle';
+		if (!accepter_change_statut) {
+			accepter_change_statut = confirm ('<?php 
+				include_ecrire("inc_charsets.php3");
+				echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>');
+		}
 
-		findObj('imgstatut'+id_article).src= 'img_pack/puce-'+puce +'.gif';
-		
-		frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_article&id_article='+id_article+'&statut='+statut;
+		if (accepter_change_statut) {
+			decal = -1 * ((clip*11) + 1);
+			changestyle ('statutdecal'+id_article, 'marginLeft', decal+'px');
+			cacher ('statutdecal'+id_article);
+	
+			if (clip == 0) puce = 'blanche';
+			else if (clip == 1) puce = 'orange';
+			else if (clip == 2) puce = 'verte';
+			else if (clip == 3) puce = 'rouge';
+			else if (clip == 4) puce = 'poubelle';
+	
+			findObj('imgstatut'+id_article).src= 'img_pack/puce-'+puce +'.gif';
+			
+			frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_article&id_article='+id_article+'&statut='+statut;
+		}
 	}
+	
 	function selec_statut_breve(id_breve, clip, statut) {
-		decal = -1 * ((clip*9) + 1);
-		changestyle ('statutdecalbreve'+id_breve, 'marginLeft', decal+'px');
-		cacher ('statutdecalbreve'+id_breve);
+	
+		if (!accepter_change_statut) {
+			accepter_change_statut = confirm ('<?php 
+				include_ecrire("inc_charsets.php3");
+				echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>');
+		}
 
-		if (clip == 0) puce = 'orange';
-		else if (clip == 1) puce = 'verte';
-		else if (clip == 2) puce = 'rouge';
-
-		findObj('imgstatutbreve'+id_breve).src= 'img_pack/puce-'+puce +'-breve.gif';
-		
-		frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_breve&id_breve='+id_breve+'&statut='+statut;
+		if (accepter_change_statut) {
+			decal = -1 * ((clip*9) + 1);
+			changestyle ('statutdecalbreve'+id_breve, 'marginLeft', decal+'px');
+			cacher ('statutdecalbreve'+id_breve);
+	
+			if (clip == 0) puce = 'orange';
+			else if (clip == 1) puce = 'verte';
+			else if (clip == 2) puce = 'rouge';
+	
+			findObj('imgstatutbreve'+id_breve).src= 'img_pack/puce-'+puce +'-breve.gif';
+			
+			frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_breve&id_breve='+id_breve+'&statut='+statut;
+		}
 	}
 	
 	function changeclass(objet, myClass)
