@@ -161,32 +161,6 @@ function spip_xml_match_nodes($regexp,&$arbre,&$matches){
 		}
 	return (count($matches));
 }
-// http://doc.spip.org/@spip_xml_aplatit
-/*
-function spip_xml_aplatit_coupe($arbre,$separateur = " ", $long){
-	$s = "";
-	if (is_array($arbre))
-		foreach($arbre as $tag=>$feuille){
-			if (is_array($feuille)){
-				if ($tag!==intval($tag)){
-					$f = spip_xml_aplatit($feuille, $separateur, $long);
-					if (strlen($f)) {
-						if ($long!==NULL) AND strlen($f)>strlen($long))
-							$f = couper($f,$long,""); 
-						$tagf = explode(" ",$tag);
-						$tagf = $tagf[0];
-						$s.="<$tag>$f</$tagf>";
-					}
-					else $s.="<$tag />";
-				}
-				else
-					$s.=spip_xml_aplatit($feuille);
-				$s .= $separateur;
-			}
-			else
-				$s.="$feuille$separateur";
-		}
-	return substr($s,0,-strlen($separateur));
-}*/
+
 
 ?>
