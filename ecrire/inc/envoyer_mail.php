@@ -111,7 +111,8 @@ function inc_envoyer_mail_dist($email, $sujet, $texte, $from = "", $headers = ""
 			$email = _TEST_EMAIL_DEST;
 	}
 
-	// Ajouter le \n final	if ($headers = trim($headers)) $headers .= "\n";
+	// Ajouter le \n final
+	if ($headers = trim($headers)) $headers .= "\n";
 	if (function_exists('wordwrap'))
 		$texte = wordwrap($texte);
 
