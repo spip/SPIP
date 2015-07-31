@@ -363,12 +363,12 @@ if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
 	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
-	verif_plugin();
-	if (@is_readable(_DIR_TMP."charger_plugins_options.php")){
-		include_once(_DIR_TMP."charger_plugins_options.php");
+	if (verif_plugin()) {
+		if (@is_readable(_DIR_TMP."charger_plugins_options.php"))
+			include_once(_DIR_TMP."charger_plugins_options.php");
+		else
+			spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
 	}
-	else
-		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
 }
 
 define('_OUTILS_DEVELOPPEURS',true);

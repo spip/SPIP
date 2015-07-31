@@ -414,16 +414,17 @@ function liste_plugin_inactifs(){
 }
 
 // mise a jour du meta en fonction de l'etat du repertoire
-// penser a faire une maj du cache =>  ecrire_meta()
-// en principe cela doit aussi initialiser la valeur a vide si elle n'esite pas
+// Les  ecrire_meta() doivent en principe aussi initialiser la valeur a vide 
+// si elle n'existe pas
 // risque de pb en php5 a cause du typage ou de null (verifier dans la doc php)
 // http://doc.spip.org/@verif_plugin
 function verif_plugin($pipe_recherche = false){
-	if (!spip_connect()) return;
+	if (!spip_connect()) return false;
 	$plugin_actifs = liste_chemin_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
 	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
+	return true;
 }
 
 // http://doc.spip.org/@ordonne_plugin
