@@ -15,7 +15,7 @@ include_spip('inc/meta');
 include_spip('inc/headers');
 
 // Tester nos capacites a creer des images avec GD2 (taille memoire)
-// http://doc.spip.org/@action_tester_dist
+// http://doc.spip.org/@action_tester_taille_dist
 function action_tester_taille_dist() {
 	global $arg;
 	//$securiser_action = charger_fonction('securiser_action', 'inc');
