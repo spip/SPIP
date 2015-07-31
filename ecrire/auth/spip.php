@@ -12,7 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Authentifie et retourne la ligne SQL decrivant l'utilisateur si ok
+// Authentifie et si ok retourne le tableau de la ligne SQL de l'utilisateur
+// Si risque de secu repere a l'installation retourne False
 function auth_spip_dist ($login, $pass, $serveur='') {
 
 	// retrouver le login
@@ -65,7 +66,9 @@ function auth_spip_dist ($login, $pass, $serveur='') {
 		include_spip('inc/acces'); // pour creer_uniqid
 		@sql_update('spip_auteurs', array('alea_actuel' => 'alea_futur', 'pass' => sql_quote($shanext), 'alea_futur' => sql_quote(creer_uniqid())), "id_auteur=" . $row['id_auteur'],'',$serveur);
 		// En profiter pour verifier la securite de tmp/
-		verifier_htaccess(_DIR_TMP);
+		// Si elle ne fonctionne pas a l'installation, prevenir
+		if (!verifier_htaccess(_DIR_TMP) AND defined('_ECRIRE_INSTALL'))
+			return false;
 	}
 	return $row;
 }
