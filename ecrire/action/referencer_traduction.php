@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function action_referencer_traduction_dist($objet, $id_objet, $id_trad) {
 
 	// ne rien faire si id_trad est ambigu
-	if (!is_numeric($id_trad)) return;
+	if (!is_numeric($id_trad)) return false;
 
 	$table_objet_sql = table_objet_sql($objet);
 	$id_table_objet = id_table_objet($objet);

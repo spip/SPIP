@@ -39,6 +39,7 @@ function action_editer_auteur_dist($arg=null) {
 	}
 
 	// Enregistre l'envoi dans la BD
+	$err = "";
 	if ($id_auteur > 0)
 		$err = auteur_modifier($id_auteur);
 
@@ -110,7 +111,7 @@ function auteur_modifier($id_auteur, $set = null, $force_update=false) {
 		$set
 	);
 
-	$r = modifier_contenu('auteur', $id_auteur,
+	modifier_contenu('auteur', $id_auteur,
 		array(
 			'nonvide' => array('nom' => _T('ecrire:item_nouvel_auteur'))
 		),
@@ -202,6 +203,7 @@ function auteur_dissocier($id_auteur,$objets){
  * @param int $id_auteur
  * @param array $objets
  * @param array $qualif
+ * @return bool|int
  */
 function auteur_qualifier($id_auteur,$objets,$qualif){
 	include_spip('action/editer_liens');

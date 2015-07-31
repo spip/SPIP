@@ -50,7 +50,7 @@ function enregistre_modif_plugin(){
 function action_activer_plugins_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	$securiser_action();
 
 	if (!autoriser('configurer', 'plugins'))
 		die('erreur');

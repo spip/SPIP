@@ -198,7 +198,7 @@ function action_charger_plugin_dist() {
 					. $retour;
 
 			if (_request('extract')) {
-				$afficher = charger_fonction('afficher_plugin','plugins'); // pour plugin_propre
+				charger_fonction('afficher_plugin','plugins'); // pour plugin_propre
 				$texte = plugin_propre($description)
 				. '<p>'._T('plugin_zip_installe_finie',array('zip'=>$zip)).'</p>'
 				. "<h2 style='text-align:center;'>"._T('plugin_zip_active')."</h2>";

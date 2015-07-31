@@ -40,8 +40,8 @@ function action_editer_rubrique_dist($arg=null) {
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
-	else 
-		return array($id_rubrique,$err);
+
+	return array($id_rubrique,$err);
 }
 
 
@@ -126,12 +126,20 @@ function rubrique_modifier($id_rubrique, $set=null) {
 	return '';
 }
 
-// si c'est une rubrique-secteur contenant des breves, ne deplacer
-// que si $confirme_deplace == 'oui', et changer l'id_rubrique des
-// breves en question
-// A deporter dans les breves via un pipeline ?
-// http://doc.spip.org/@editer_rubrique_breves
-function editer_rubrique_breves($id_rubrique, $id_parent, $c=false)
+/**
+ * si c'est une rubrique-secteur contenant des breves, ne deplacer
+ * que si $confirme_deplace == 'oui', et changer l'id_rubrique des
+ * breves en question
+ * A deporter dans les breves via un pipeline ?
+ *
+ * http://doc.spip.org/@editer_rubrique_breves
+ *
+ * @param int $id_rubrique
+ * @param int $id_parent
+ * @param array $c
+ * @return bool
+ */
+function editer_rubrique_breves($id_rubrique, $id_parent, $c=array())
 {
 	if (!sql_countsel('spip_breves', "id_rubrique=$id_rubrique"))
 		return true;
@@ -159,7 +167,6 @@ function rubrique_instituer($id_rubrique, $c) {
 	// interdiction de deplacer vers ou a partir d'une rubrique
 	// qu'on n'administre pas.
 
-	$statut_ancien = $parent = '';
 	if (NULL !== ($id_parent = $c['id_parent'])) {
 		$id_parent = intval($id_parent);
 		$filles = calcul_branche($id_rubrique);
@@ -194,11 +201,10 @@ function rubrique_instituer($id_rubrique, $c) {
 					effacer_meta("date_calcul_rubriques");
 
 				calculer_langues_rubriques();
-
-				return ''; // pas d'erreur
 			}
 		}
 	}
+	return ''; // pas d'erreur
 }
 
 // obsoletes

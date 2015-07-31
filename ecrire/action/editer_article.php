@@ -70,6 +70,7 @@ function article_modifier($id_article, $set=null) {
 
 	// Si l'article est publie, invalider les caches et demander sa reindexation
 	$t = sql_getfetsel("statut", "spip_articles", "id_article=".intval($id_article));
+	$invalideur = $indexation = false;
 	if ($t == 'publie') {
 		$invalideur = "id='article/$id_article'";
 		$indexation = true;
@@ -242,12 +243,13 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 				'id_objet' => $id_article,
 				'action'=>'instituer',
 				'statut_ancien' => $statut_ancien,
+				'date_ancienne' => $date_ancienne,
 			),
 			'data' => $champs
 		)
 	);
 
-	if (!count($champs)) return;
+	if (!count($champs)) return '';
 
 	// Envoyer les modifs.
 
@@ -273,6 +275,7 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 				'id_objet' => $id_article,
 				'action'=>'instituer',
 				'statut_ancien' => $statut_ancien,
+				'date_ancienne' => $date_ancienne,
 			),
 			'data' => $champs
 		)
@@ -281,7 +284,7 @@ function article_instituer($id_article, $c, $calcul_rub=true) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('instituerarticle', $id_article,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date)
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date, 'date_ancienne' => $date_ancienne)
 		);
 	}
 

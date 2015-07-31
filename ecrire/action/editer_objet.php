@@ -62,8 +62,6 @@ function objet_modifier($objet, $id, $set=null) {
 	  AND function_exists($modifier = $objet."_modifier"))
 		return $modifier($id,$set);
 
-	$err = '';
-
 	$table_sql = table_objet_sql($objet);
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table($table_sql);
@@ -323,12 +321,13 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 				'id_objet' => $id,
 				'action'=>'instituer',
 				'statut_ancien' => $statut_ancien,
+				'date_ancienne' => $date_ancienne,
 			),
 			'data' => $champs
 		)
 	);
 
-	if (!count($champs)) return;
+	if (!count($champs)) return '';
 
 	// Envoyer les modifs.
 	objet_editer_heritage($objet, $id, $id_rubrique, $statut_ancien, $champs, $calcul_rub);
@@ -354,6 +353,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 				'id_objet' => $id,
 				'action'=>'instituer',
 				'statut_ancien' => $statut_ancien,
+				'date_ancienne' => $date_ancienne,
 			),
 			'data' => $champs
 		)
@@ -362,7 +362,7 @@ function objet_instituer($objet, $id, $c, $calcul_rub=true) {
 	// Notifications
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications("instituer$objet", $id,
-			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date)
+			array('statut' => $statut, 'statut_ancien' => $statut_ancien, 'date'=>$date, 'date_ancienne' => $date_ancienne)
 		);
 	}
 
