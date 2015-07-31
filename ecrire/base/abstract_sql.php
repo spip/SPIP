@@ -654,7 +654,42 @@ function sql_insertq_multi($table, $couples=array(), $desc=array(), $serveur='',
 	return $r;
 }
 
-// http://doc.spip.org/@sql_update
+/**
+ * Met à jour des enregistrements d'une table SQL
+ *
+ * Les valeurs ne sont pas échappées, ce qui permet de modifier une colonne
+ * en utilisant la valeur d'une autre colonne ou une expression SQL.
+ * 
+ * Il faut alors protéger avec sql_quote() manuellement les valeurs qui
+ * en ont besoin.
+ *
+ * Dans les autres cas, préférer sql_updateq().
+ *
+ * @api
+ * @see sql_updateq()
+ * 
+ * @param string $table
+ *     Nom de la table
+ * @param array $exp
+ *     Couples (colonne => valeur)
+ * @param string|array $where
+ *     Conditions a remplir (Where)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom de la connexion
+ * @param bool|string $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
+ * @return array|bool|string
+ *     - string : texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
+ */
 function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option=true)
 {
 	$f = sql_serveur('update', $serveur,  $option==='continue' OR $option===false);
@@ -664,9 +699,6 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option
 	return $r;
 }
 
-// Update est presque toujours appelee sur des constantes ou des dates
-// Cette fonction est donc plus utile que la precedente,d'autant qu'elle
-// permet de gerer les differences de representation des constantes.
 
 /**
  * Met à jour du contenu d’une table SQL
@@ -682,6 +714,10 @@ function sql_update($table, $exp, $where='', $desc=array(), $serveur='', $option
  *     sql_updateq('table', array('colonne' => $valeur), 'id_table=' . intval($id_table));
  *     sql_updateq("spip_auteurs", array("statut" => '6forum'), "id_auteur=$id_auteur") ;
  *     ```
+ * @note
+ *   sql_update() est presque toujours appelée sur des constantes ou des dates
+ *   Cette fonction (sql_updateq) est donc plus utile que la précédente,
+ *   d'autant qu'elle permet de gerer les différences de représentation des constantes.
  *
  * @param string $table
  *     Nom de la table SQL
@@ -1200,7 +1236,12 @@ function sql_repair($table, $serveur='', $option=true) {
  * @api
  * @param string $ins      Requête
  * @param string $serveur  Nom de la connexion
- * @param bool   $requeter Exécuter la requête, sinon la retourner
+ * @param bool $option
+ *     Peut avoir 3 valeurs :
+ * 
+ *     - false : ne pas l'exécuter mais la retourner, 
+ *     - true : exécuter la requête
+ *     - 'continue' : ne pas échouer en cas de serveur sql indisponible
  * @return array|resource|string|bool
  *     - string : Texte de la requête si on ne l'exécute pas
  *     - ressource|bool : Si requête exécutée

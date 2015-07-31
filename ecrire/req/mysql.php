@@ -934,7 +934,7 @@ function spip_mysql_free($r, $serveur='',$requeter=true) {
  *     - False en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
 **/
-function spip_mysql_insert($table, $champs, $valeurs, $desc='', $serveur='',$requeter=true) {
+function spip_mysql_insert($table, $champs, $valeurs, $desc=array(), $serveur='',$requeter=true) {
 
 	$connexion = &$GLOBALS['connexions'][$serveur ? strtolower($serveur) : 0];
 	$prefixe = $connexion['prefixe'];
@@ -1044,17 +1044,28 @@ function spip_mysql_insertq_multi($table, $tab_couples=array(), $desc=array(), $
 	return $r; // dans le cas d'une table auto_increment, le dernier insert_id
 }
 
-// http://doc.spip.org/@spip_mysql_update
 /**
- * @param $table
- * @param $champs
- * @param string $where
- * @param string $desc
+ * Met à jour des enregistrements d'une table SQL
+ * 
+ * @param string $table
+ *     Nom de la table
+ * @param array $champs
+ *     Couples (colonne => valeur)
+ * @param string|array $where
+ *     Conditions a remplir (Where)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
  * @param string $serveur
+ *     Nom de la connexion
  * @param bool $requeter
- * @return array|null|resource|string
+ *     Exécuter la requête, sinon la retourner
+ * @return array|bool|string
+ *     - string : texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
  */
-function spip_mysql_update($table, $champs, $where='', $desc='', $serveur='',$requeter=true) {
+function spip_mysql_update($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
 	$set = array();
 	foreach ($champs as $champ => $val)
 		$set[] = $champ . "=$val";
@@ -1066,17 +1077,33 @@ function spip_mysql_update($table, $champs, $where='', $desc='', $serveur='',$re
 			$serveur, $requeter);
 }
 
-// idem, mais les valeurs sont des constantes a mettre entre apostrophes
-// sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
-// http://doc.spip.org/@spip_mysql_updateq
 /**
- * @param $table
- * @param $champs
- * @param string $where
+ * Met à jour des enregistrements d'une table SQL et protège chaque valeur
+ *
+ * Protège chaque valeur transmise avec sql_quote(), adapté au type
+ * de champ attendu par la table SQL
+ *
+ * @note
+ *   Les valeurs sont des constantes à mettre entre apostrophes
+ *   sauf les expressions de date lorsqu'il s'agit de fonctions SQL (NOW etc)
+ * 
+ * @param string $table
+ *     Nom de la table
+ * @param array $champs
+ *     Couples (colonne => valeur)
+ * @param string|array $where
+ *     Conditions a remplir (Where)
  * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
  * @param string $serveur
+ *     Nom de la connexion
  * @param bool $requeter
- * @return array|null|resource|string
+ *     Exécuter la requête, sinon la retourner
+ * @return array|bool|string
+ *     - string : texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
  */
 function spip_mysql_updateq($table, $champs, $where='', $desc=array(), $serveur='',$requeter=true) {
 

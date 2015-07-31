@@ -964,7 +964,7 @@ function spip_sqlite_in($val, $valeurs, $not = '', $serveur = '', $requeter = tr
  *     - False en cas d'erreur,
  *     - Tableau de description de la requête et du temps d'exécution, si var_profile activé
 **/
-function spip_sqlite_insert($table, $champs, $valeurs, $desc = '', $serveur = '', $requeter = true){
+function spip_sqlite_insert($table, $champs, $valeurs, $desc = array(), $serveur = '', $requeter = true){
 
 	$query = "INSERT INTO $table ".($champs ? "$champs VALUES $valeurs" : "DEFAULT VALUES");
 	if ($r = spip_sqlite_query($query, $serveur, $requeter)){
@@ -1593,7 +1593,27 @@ function spip_sqlite_showtable($nom_table, $serveur = '', $requeter = true){
 }
 
 
-// http://doc.spip.org/@spip_sqlite_update
+/**
+ * Met à jour des enregistrements d'une table SQL
+ * 
+ * @param string $table
+ *     Nom de la table
+ * @param array $champs
+ *     Couples (colonne => valeur)
+ * @param string|array $where
+ *     Conditions a remplir (Where)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom de la connexion
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return array|bool|string
+ *     - string : texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
+ */
 function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur = '', $requeter = true){
 	// recherche de champs 'timestamp' pour mise a jour auto de ceux-ci
 	$champs = _sqlite_ajouter_champs_timestamp($table, $champs, $desc, $serveur);
@@ -1610,7 +1630,30 @@ function spip_sqlite_update($table, $champs, $where = '', $desc = '', $serveur =
 }
 
 
-// http://doc.spip.org/@spip_sqlite_updateq
+/**
+ * Met à jour des enregistrements d'une table SQL et protège chaque valeur
+ *
+ * Protège chaque valeur transmise avec sql_quote(), adapté au type
+ * de champ attendu par la table SQL
+ *
+ * @param string $table
+ *     Nom de la table
+ * @param array $champs
+ *     Couples (colonne => valeur)
+ * @param string|array $where
+ *     Conditions a remplir (Where)
+ * @param array $desc
+ *     Tableau de description des colonnes de la table SQL utilisée
+ *     (il sera calculé si nécessaire s'il n'est pas transmis).
+ * @param string $serveur
+ *     Nom de la connexion
+ * @param bool $requeter
+ *     Exécuter la requête, sinon la retourner
+ * @return array|bool|string
+ *     - string : texte de la requête si demandé
+ *     - true si la requête a réussie, false sinon
+ *     - array Tableau décrivant la requête et son temps d'exécution si var_profile est actif
+ */
 function spip_sqlite_updateq($table, $champs, $where = '', $desc = array(), $serveur = '', $requeter = true){
 
 	if (!$champs) return;
