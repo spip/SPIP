@@ -813,7 +813,9 @@ function parametre_url(url,c,v,sep,force_vide){
 	// lire les variables et agir
 	for(var n=0;n<args.length;n++){
 		var val = args[n];
-		val = decodeURIComponent(val);
+		try {
+			val = decodeURIComponent(val);
+		} catch(e) {}
 		var r=val.match(regexp);
 		if (r && r.length){
 			if (v==null){
