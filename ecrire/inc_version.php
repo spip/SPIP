@@ -234,10 +234,7 @@ $spip_version = 1.916;
 $spip_version_affichee = '1.9';
 
 // ** Securite **
-$auteur_session = '';
-$connect_statut = '';
-$hash_recherche = '';
-$hash_recherche_strict = '';
+$auteur_session = $connect_statut = $connect_toutes_rubriques = $connect_id_rubrique = $hash_recherche = $hash_recherche_strict = '';
 
 // Fonction definissant les repertoires et fichiers non partageables
 // Elle indique dans $test_dirs ceux devant etre accessibles en ecriture

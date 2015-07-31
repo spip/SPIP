@@ -55,7 +55,7 @@ function exec_mots_tous_dist()
 }
 
 
-if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
+  if (acces_mots()) {
 	if ($modifier_groupe == "oui") {
 		$change_type = (corriger_caracteres($change_type));
 		$texte = (corriger_caracteres($texte));
@@ -87,7 +87,7 @@ echo pipeline('affiche_droite',array('args'=>array('exec'=>'mots_tous'),'data'=>
 debut_droite();
 
 gros_titre(_T('titre_mots_tous'));
-if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
+ if (acces_mots()) {
   echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
   }
 echo "<br><br>";
@@ -195,7 +195,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	//
 	$supprimer_groupe = afficher_groupe_mots($id_groupe);
 
-	if ($connect_statut =="0minirezo" AND $connect_toutes_rubriques AND !$conf_mot){
+	if (acces_mots() AND !$conf_mot){
 		echo "\n<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		echo "<tr>";
 		echo "<td>";
@@ -218,7 +218,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 }
 
-if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot){
+ if (acces_mots()  AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
 	icone(_T('icone_creation_groupe_mots'), generer_url_ecrire("mots_type","new=oui"), "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";

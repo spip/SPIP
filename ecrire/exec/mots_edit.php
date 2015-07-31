@@ -47,7 +47,7 @@ global
 //
 // modifications mot
 //
-if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+ if (acces_mots()) {
 	if ($supp_mot) {
 		spip_query("DELETE FROM spip_mots WHERE id_mot=$supp_mot");
 		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$supp_mot");
@@ -138,7 +138,7 @@ if ($id_mot) {
 // Logos du mot-clef
 //
 
- if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques AND ($spip_display != 4)) {
+if ($id_mot > 0 AND acces_mots() AND ($spip_display != 4)) {
 	include_spip('inc/chercher_logo');
 	echo afficher_boite_logo('id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
  }
@@ -148,7 +148,7 @@ if ($id_mot) {
 //
 debut_raccourcis();
 
- if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques AND $id_groupe) {
+if (acces_mots() AND $id_groupe) {
 	icone_horizontale(_T('icone_modif_groupe_mots'), generer_url_ecrire("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
 	icone_horizontale(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit", "new=oui&id_groupe=$id_groupe&redirect=" . generer_url_retour('mots_tous')),  "mot-cle-24.gif",  "creer.gif");
  }
@@ -221,7 +221,7 @@ fin_cadre_relief();
 
 
 
-if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
+if (acces_mots()){
 	echo "<P>";
 	debut_cadre_formulaire();
 
