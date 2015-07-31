@@ -162,6 +162,7 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 			reconstruire_image_intermediaire($fichier);
 		}
 	}
+	// todo: si une image png est nommee .jpg, le reconnaitre avec le bon $f
 	$f = "imagecreatefrom".$term_fonction;
 	if (!function_exists($f)) return false;
 	$ret["fonction_imagecreatefrom"] = $f;
@@ -558,7 +559,7 @@ function image_creer_vignette($valeurs, $maxWidth, $maxHeight, $process='AUTO', 
 			$fonction_imagecreatefrom = $valeurs['fonction_imagecreatefrom'];
 			if (!function_exists($fonction_imagecreatefrom))
 				return '';
-			$srcImage = $fonction_imagecreatefrom($image);
+			$srcImage = @$fonction_imagecreatefrom($image);
 			if (!$srcImage) { 
 				spip_log("echec gd1/gd2"); 
 				return; 
