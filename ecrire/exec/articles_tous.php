@@ -130,7 +130,7 @@ function texte_articles_tous(&$sel_lang, $flag_trad, $aff_art){
 		$date_modif = $row['date_modif'];
 		
 		$aff_statut[$statut] = true; // signale qu'il existe de tels articles
-		$text_article[$id_article]["titre"] = $titre;
+		$text_article[$id_article]["titre"] = strlen($titre)?$titre:_T('ecrire:info_sans_titre');
 		$text_article[$id_article]["statut"] = $statut;
 		$text_article[$id_article]["lang"] = $lang;
 		$text_article[$id_article]["id_trad"] = $id_trad;
