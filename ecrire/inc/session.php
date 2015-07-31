@@ -86,17 +86,19 @@ function supprimer_sessions($id_auteur) {
 }
 
 //
-// Verifie et inclut une session. 
+// Verifie si le cookie spip_session indique une session valide.
+// Si oui, la decrit dans le tableau $auteur_session et retourne id_auteur
 // La rejoue si IP change puis accepte le changement si $change=true
 //
 
 function verifier_session($change=false) {
 
-	global $spip_session; // issu du cookie
+	global $auteur_session, $spip_session; 
 
-	// Tester avec alea courant
+	// si pas de cookie, c'est fichu
 	if (!$spip_session) return false;
 
+	// Tester avec alea courant
 	$fichier_session = fichier_session($spip_session, $GLOBALS['meta']['alea_ephemere']);
 	if (@file_exists($fichier_session)) {
 		include($fichier_session);
@@ -133,7 +135,7 @@ function verifier_session($change=false) {
 		spip_setcookie('spip_session', $cookie);
 	  }
 	}
-	return 	true;
+	return 	$auteur_session['id_auteur'];
 }
 
 // Code a inserer par inc/presentation pour rejouer la session

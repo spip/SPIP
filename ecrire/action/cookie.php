@@ -87,12 +87,11 @@ if ($logout_public) {
  }
 // tentative de logout
 if ($logout) {
-	if ($auteur_session['login'] == $logout) {
+	if ($auteur_session['login'] == $logout) { // init verifier_visiteur
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
 			$var_f = charger_fonction('session', 'inc');
 			$var_f($auteur_session['id_auteur']);
-			spip_setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
 		
 		if ($_SERVER['PHP_AUTH_USER']
@@ -100,9 +99,9 @@ if ($logout) {
 		AND verifier_php_auth()) {
 			auth_http(($url ? $url : _DIR_RESTREINT_ABS), 'logout');
 		}
-		unset ($auteur_session);
 	}
 	spip_log("logout: $logout");
+	spip_setcookie('spip_session', $spip_session, 0);
 	redirige_par_entete($url ? $url : generer_url_public('login'));
 }
 
@@ -131,6 +130,7 @@ if ($essai_login == "oui") {
 	// Essayer l'authentification par MySQL
 	$f = charger_fonction('auth_spip', 'inc', true);
 	if ($f) $row_auteur = $f($session_login, $session_password);		
+
 	// Marche pas: essayer l'authentification par LDAP si present
 	if (!$row_auteur AND $GLOBALS['ldap_present']) {
 		$f = charger_fonction('auth_ldap', 'inc', true);
@@ -157,10 +157,22 @@ if ($essai_login == "oui") {
 		if ($row_auteur['statut'] == '0minirezo')
 			$cookie_admin = "@".$session_login;
 	        
-		$var_f = charger_fonction('session', 'inc');
-		$cookie_session = $var_f($row_auteur);
+		if (!$_COOKIE['spip_session']) {
+			$var_f = charger_fonction('session', 'inc');
+			$cookie_session = $var_f($row_auteur);
+		}
+
+		if ($session_remember == 'oui')
+			spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
+		else
+			spip_setcookie('spip_session', $cookie_session);
+
+		$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
+		$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
+
+		spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
 	}
-}
+ }
 
 // cookie d'admin ?
 if ($cookie_admin == "non") {
@@ -178,18 +190,6 @@ else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	spip_setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
 }
 
-// cookie de session ?
-if ($cookie_session) {
-	if ($session_remember == 'oui')
-		spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
-	else
-		spip_setcookie('spip_session', $cookie_session);
-
-	$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
-	$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
-
-	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote(serialize($prefs)) . " WHERE id_auteur = " . $row_auteur['id_auteur']);
- }
 
 // changement de langue espace public
 if ($var_lang) {

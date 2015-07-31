@@ -68,19 +68,16 @@ function acces_statut($id_auteur, $statut, $bio)
 }
 
 function inc_auth_dist() {
-	global $_GET, $_COOKIE, $_SERVER;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
-
-	global $connect_id_auteur, $connect_login;
+	global $prefs, $connect_id_auteur, $connect_login;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
-
-	global $auteur_session, $prefs;
 
 	//
 	// Initialiser variables (eviter hacks par URL)
 	//
 
 	$connect_login = '';
+	$connect_id_auteur = 0;
 	$connect_id_rubrique = array();
 	$auth_can_disconnect = false;
 	$connect_toutes_rubriques = false;
@@ -88,85 +85,95 @@ function inc_auth_dist() {
 	//
 	// Recuperer les donnees d'identification
 	//
-
-	// Authentification session
-	if ($cookie_session = $_COOKIE['spip_session']) {
+	
+	// Session valide en cours ?
+	if ($_COOKIE['spip_session']) {
 		$var_f = charger_fonction('session', 'inc');
-		if ($var_f()) {
-			if ($auteur_session['statut'] == '0minirezo'
-			OR $auteur_session['statut'] == '1comite') {
-				$connect_login = $auteur_session['login'];
-				$auth_can_disconnect = true;
-			}
-		}
-	}
-
-	// Peut-etre sommes-nous en auth http?
-	else if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
-	&& !$ignore_auth_http) {
-
-		// Si le login existe dans la base, se loger
-		if (verifier_php_auth()) {
-			$connect_login = $_SERVER['PHP_AUTH_USER'];
+		if ($connect_id_auteur = $var_f()) {
 			$auth_can_disconnect = true;
-			$_SERVER['PHP_AUTH_PW'] = '';
 		}
-		// Sinon c'est un login d'intranet independant de spip, on ignore
 	}
+	
+	// sinon, essayer auth http si significatif
+	// (ignorer les login d'intranet independants de spip)
+	if (!$ignore_auth_http AND !$connect_id_auteur) {
+		if ($_SERVER['PHP_AUTH_USER'] AND $_SERVER['PHP_AUTH_PW']) {
+			include_spip('inc/actions');
+			if (verifier_php_auth()) {
+				$connect_login = $_SERVER['PHP_AUTH_USER'];
+				$auth_can_disconnect = true;
+				$_SERVER['PHP_AUTH_PW'] = '';
+			}
+
+		} else if ($GLOBALS['_SERVER']['REMOTE_USER'])
 
 	// Authentification .htaccess old style, car .htaccess semble
 	// souvent definir *aussi* PHP_AUTH_USER et PHP_AUTH_PW
-	else if ($GLOBALS['_SERVER']['REMOTE_USER']
-	&& !$ignore_remote_user) {
-		$connect_login = $GLOBALS['_SERVER']['REMOTE_USER'];
-	}
+
+			$connect_login = $GLOBALS['_SERVER']['REMOTE_USER'];
+	}    
+
+	$where = $connect_id_auteur ?
+	  "id_auteur=$connect_id_auteur" :
+	  (!$connect_login ? '' : "login=" . spip_abstract_quote($connect_login));
 
 	// pas authentifie par cookie ni rien: demander login / mdp
 
-	if (!$connect_login) {
-		return auth_arefaire();
-	}
-	//
-	// Trouver le login dans la table auteurs pour avoir les autres infos
-	//
+	if (!$where) return auth_arefaire();
 
-	$result = @spip_query("SELECT UNIX_TIMESTAMP(en_ligne) AS quand, id_auteur, pass, statut, bio, prefs FROM spip_auteurs WHERE login=" . spip_abstract_quote($connect_login) . " AND statut!='5poubelle'");
+	// Trouver les autres infos dans la table auteurs.
+
+	$result = @spip_query("SELECT *, UNIX_TIMESTAMP(en_ligne) AS quand FROM spip_auteurs WHERE $where AND statut!='5poubelle'");
 
 	if (!$row = spip_fetch_array($result)) {
+
 		auth_areconnecter($connect_login);
 		exit;
-	}
-
-	// Le tableau global auteur_session  contient toutes les infos
-	// mais on duplique les plus utiles dans des variables simples
-
-	$GLOBALS['auteur_session']['id_auteur'] = $connect_id_auteur = $row['id_auteur'];
-	$GLOBALS['auteur_session']['pass'] = $row['pass'] ? $row['pass'] : $connect_login;
-	$GLOBALS['auteur_session']['statut'] = $connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
-
-	$GLOBALS['auteur_session']['prefs'] = $prefs = unserialize($row['prefs']);
-
-	if ($connect_statut == '6forum') return auth_arefaire();
-	if ($connect_statut == '0minirezo') auth_rubrique();
-
-	// ceci n'arrive qu'a la premiere connexion il me semble
-	// si oui ce serait mieux de le mettre a la creation de l'auteur
-	if (! isset($prefs['display'])) {
-
-		if (!$GLOBALS['set_disp'] = $GLOBALS['_COOKIE']['spip_display'])
-			$GLOBALS['set_disp'] = 2;
-		if (!$GLOBALS['set_couleur'] = $GLOBALS['_COOKIE']['spip_couleur'])
-			$GLOBALS['set_couleur'] = 6;
-		if (!$GLOBALS['set_options'] = $GLOBALS['_COOKIE']['spip_options'])
-			$GLOBALS['set_options'] = 'basiques';
 	}
 
 	// Indiquer la connexion. A la minute pres ca suffit.
 	if ((time() - $row['quand']) >= 60) {
 		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 	}
+
+	$connect_id_auteur = $row['id_auteur'];
+	$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
+	if ($connect_statut == '0minirezo') auth_rubrique();
+	else if ($connect_statut != '1comite') return auth_arefaire();
+
+	$prefs = unserialize($row['prefs']);
+	$connect_login = $row['login'];
+	if (!$row['pass']) $row['pass'] = $connect_login; // pour LDAP
+
+	// Le tableau global auteur_session contient toutes les infos.
+	// Les plus utiles sont aussi dans les variables simples ci-dessus
+
+	$GLOBALS['auteur_session'] = $row;
+
+	// rajouter les sessions meme en mode auth_http
+	// pour permettre les connexions multiples
+	if (!$_COOKIE['spip_session']) {
+		$var_f = charger_fonction('session', 'inc');
+		if ($session = $var_f($row))
+			spip_setcookie('spip_session', $session, time() + 3600 * 24 * 14);
+	}
+
+	// ceci n'arrive qu'a la premiere connexion il me semble
+	// si oui ce serait mieux de le mettre a la creation de l'auteur
+	if (! isset($prefs['display'])) auth_prefs();
+
 	// vide = pas de message d'erreur (cf exit(0) Unix)
 	return "";
+}
+
+function auth_prefs()
+{
+	if (!$GLOBALS['set_disp'] = $GLOBALS['_COOKIE']['spip_display'])
+		$GLOBALS['set_disp'] = 2;
+	if (!$GLOBALS['set_couleur'] = $GLOBALS['_COOKIE']['spip_couleur'])
+		$GLOBALS['set_couleur'] = 6;
+	if (!$GLOBALS['set_options'] = $GLOBALS['_COOKIE']['spip_options'])
+		$GLOBALS['set_options'] = 'basiques';
 }
 
 // Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
