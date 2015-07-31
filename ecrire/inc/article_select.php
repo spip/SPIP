@@ -65,7 +65,7 @@ function inc_article_select_dist($id_article, $id_rubrique=0, $lier_trad=0, $id_
 	// autre ==> la derniere rubrique cree
 	if (!$row['id_rubrique']) {
 		if ($connect_id_rubrique)
-			$row['id_rubrique'] = $id_rubrique = $connect_id_rubrique[0]; 
+			$row['id_rubrique'] = $id_rubrique = current($connect_id_rubrique); 
 		else {
 			$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "", "", "id_rubrique DESC", 1);
 			$row['id_rubrique'] = $id_rubrique = $row_rub['id_rubrique'];
