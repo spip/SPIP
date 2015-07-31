@@ -739,7 +739,7 @@ function generer_url_entite($id='', $entite='', $args='', $ancre='', $public=NUL
 	if (!$public) {
 		include_spip('inc/urls');
 		$f = 'generer_url_ecrire_' . $entite;
-	        $res = !function_exists($f) ? '' : $f($id, $args, $ancre);
+	        $res = !function_exists($f) ? '' : $f($id, $args, $ancre, ' ');
 	} else {
 		if (is_string($public)) {
 			$id_type = ($entite !== 'site') ? "id_$entite" : 'id_syndic';
