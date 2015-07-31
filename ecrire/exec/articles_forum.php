@@ -106,31 +106,4 @@ function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 	echo "</td></tr></table>";
 	echo "<p>";
 }
-
-// http://doc.spip.org/@articles_forum_liens
-function articles_forum_liens($n, $script, $args, $curseur, $pack, $i)
-{
-
-
-	if ($i>0)
-		echo "<a href='" . generer_url_ecrire($script,$args) . "'>0</a> ... | ";
-	for (;$n;$n--){
-
-	// barre de navigation
-		if ($i == $pack*floor($i/$pack)) {
-			if ($i == $curseur)
-				echo "<font size='3'><b>$i</b></font>";
-			else
-				echo "<a href='", generer_url_ecrire($script,"$args&debut=$i") , "'>$i</a>";
-			echo " | ";
-		}
-
-		$i ++;
-	}
-
-	echo "<a href='", generer_url_ecrire($script,"$args&debut=$i") , "'>...</a>";
-
-	echo "</div>";
-}
-
 ?>
