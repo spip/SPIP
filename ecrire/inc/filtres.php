@@ -1643,7 +1643,10 @@ function enclosure2microformat($e) {
 	if (!$url = filtrer_entites(extraire_attribut($e, 'url')))
 		$url = filtrer_entites(extraire_attribut($e, 'href'));
 	$type = extraire_attribut($e, 'type');
-	$length = extraire_attribut($e, 'length');
+	if (!$length = extraire_attribut($e, 'length')) {
+		# <media:content : longeur dans fileSize. On tente.
+		$length = extraire_attribut($e, 'fileSize');
+	}
 	$fichier = basename($url);
 	return '<a rel="enclosure"'
 		. ($url? ' href="'.htmlspecialchars($url).'"' : '')
