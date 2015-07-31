@@ -93,7 +93,7 @@ if (defined("_INC_PUBLIC")) {
 	}
 
 	// Appliquer tidy au besoin
-	if (trim($page) AND $xhtml AND !$flag_preserver) {
+	if (trim($page) AND $xhtml AND !$flag_preserver AND !headers_sent()) {
 		include_ecrire('inc_tidy.php');
 		$page = xhtml($page);
 	}

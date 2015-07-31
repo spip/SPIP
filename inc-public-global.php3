@@ -115,12 +115,9 @@ function calcule_header_et_page ($fond, $delais) {
 		}
 	}
 
-	// Content-type: xml ou html ; charset
-	if ($GLOBALS['xhtml'] AND !defined('_erreur_tidy') AND !$flag_preserver) {
-		include_ecrire("inc_tidy.php");
-		entetes_xhtml(); # attention, elle peut demarrer le contenu
-	} else
-		@header("Content-Type: text/html; charset=".lire_meta('charset'));
+	// Content-type: par defaut html+charset (poss surcharge par la suite)
+	if (!headers_sent())
+		header("Content-Type: text/html; charset=".lire_meta('charset'));
 
 	return $page;
 }
