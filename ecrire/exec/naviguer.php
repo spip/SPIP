@@ -45,9 +45,12 @@ function exec_naviguer_dist()
 			);
 
 			// Suite a une creation, rediriger vers l'objet cree
-			if (is_int($res) AND $id_rubrique != $res)
-				redirige_par_entete(generer_url_ecrire('naviguer',
-					'id_rubrique='.$res, true));
+			if (is_int($res) AND $id_rubrique != $res) {
+				$id_rubrique = $res;
+				$redirect = generer_url_ecrire('naviguer',
+					'id_rubrique='.$res, true);
+			} else
+				$redirect = '';
 
 			// toute action entraine ceci:
 			calculer_rubriques();
@@ -56,6 +59,9 @@ function exec_naviguer_dist()
 			// invalider les caches marques de cette rubrique
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='id_rubrique/$id_rubrique'");
+
+			if ($redirect)
+				redirige_par_entete($redirect);
 		}
 	}
 
