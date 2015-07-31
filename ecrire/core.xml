@@ -111,20 +111,17 @@
 		<titre>info_multilinguisme</titre>
 	</bouton>
 
-	<bouton id='config_contenu' parent="bando_configuration">
+	<bouton id='configurer_contenu' parent="bando_configuration">
 		<icone>images/config-contenu-16.png</icone>
 		<titre>onglet_contenu_site</titre>		
-		<url>configurer_contenu</url>
 	</bouton>
-	<bouton id='config_interactivite' parent="bando_configuration">
+	<bouton id='configurer_interactions' parent="bando_configuration">
 		<icone>images/config-interaction-16.png</icone>
 		<titre>onglet_interactivite</titre>		
-		<url>config_contenu</url>
 	</bouton>
-	<bouton id='config_avancee' parent="bando_configuration">
+	<bouton id='configurer_avancees' parent="bando_configuration">
 		<icone>images/configuration-16.png</icone>
 		<titre>onglet_fonctions_avances</titre>		
-		<url>config_fonctions</url>
 	</bouton>
 	
 	<bouton id='admin_plugin' parent="bando_configuration" position="0">
