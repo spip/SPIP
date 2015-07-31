@@ -92,9 +92,12 @@ function image_valeurs_trans($img, $effet, $forcer_format = false, $fonction_cre
 		$ret['hauteur_dest'] = $destHeight;
 		$effet = "L{$destWidth}xH$destHeight";
 		$cache = "cache-vignettes";
-		$fichier_dest = basename($fichier_dest).'-'.substr(md5("$fichier_dest-$effet"),0,5);
+		$fichier_dest = basename($fichier_dest);
 		if (($ret['largeur']<=$maxWidth)&&($ret['hauteur']<=$maxHeight))
-			$terminaison_dest = $terminaison; // on garde la terminaison initiale car image simplement copiee
+			// on garde la terminaison initiale car image simplement copiee, et on ne change pas son nom
+			$terminaison_dest = $terminaison;
+		else
+			$fichier_dest .= '-'.substr(md5("$fichier_dest-$effet"),0,5);
 		$cache = sous_repertoire(_DIR_VAR, $cache);
 		$cache = sous_repertoire($cache, $effet);
 		# cherche un cache existant
