@@ -32,7 +32,7 @@ function formulaires_configurer_reducteur_charger_dist(){
 		"creer_preview",
 		"taille_preview",
 		) as $m)
-		$valeurs[$m] = $GLOBALS['meta'][$m];
+		$valeurs[$m] = isset($GLOBALS['meta'][$m]) ? $GLOBALS['meta'][$m] : null;
 
 	$valeurs['taille_preview'] = intval($valeurs['taille_preview']);
 	if ($valeurs['taille_preview']<10)
