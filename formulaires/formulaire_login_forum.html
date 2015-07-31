@@ -1,7 +1,7 @@
 <!--
 
 	Formulaire de connexion pour les forums sur abonnement
-	cf. inc-formulaire_forum.php3
+	appele dans inc-formulaire_forum.php 
 
 -->
 
@@ -11,12 +11,12 @@
 
 <div align='center' style='font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;'>
 
-&#91;<a href='spip_inscription.php3?mode=forum&amp;focus=nom_inscription'
+&#91;<a [href='(#ENV{inscription})?mode=forum&amp;focus=nom_inscription']
 	target="spip_pass"
 	onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;
 
 &#91;<a
-		href="spip_pass.php3"
+		[href="(#ENV{oubli})"]
 		target="spip_pass" 
 		onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 

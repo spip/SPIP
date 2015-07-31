@@ -92,7 +92,9 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 	// verifier l'identite des posteurs pour les forums sur abo
 	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"])) {
-		return array('formulaire_login_forum', 0, array());
+		return array('formulaire_login_forum', 0,
+			     array('inscription' => generer_url_public('spip_inscription'),
+				   'oubli' => generer_url_public('spip_pass')));
 	}
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.

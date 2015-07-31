@@ -82,7 +82,10 @@ $message = '';
 		}
 	}
  }
- return array('formulaire_oubli', 0, array('p' => $p, 'message' => $message));
+ return array('formulaire_oubli', 0, 
+	      array('p' => $p,
+		    'message' => $message,
+		    'action' => generer_url_public('spip_pass')));
 }
 
 function spip_pass_dist()
