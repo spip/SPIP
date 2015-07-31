@@ -147,6 +147,7 @@
 	</langue>
 	<langue code="oc_ni" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni" total="636" traduits="567" relire="0" modifs="2" nouveaux="67" pourcent="89.15">
 		<traducteur nom="Bastian" lien="http://trad.spip.net/auteur/bastian" />
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/spip?lang_cible=oc_ni_la" total="636" traduits="475" relire="0" modifs="24" nouveaux="137" pourcent="74.69">
 	</langue>
