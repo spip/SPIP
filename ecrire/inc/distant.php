@@ -204,6 +204,8 @@ function fichier_copie_locale($source) {
 	// Si c'est une image de IMG/ pas de souci
 	if (preg_match(',^'._DIR_IMG.',', $source))
 		return $source;
+	else if (preg_match(',^'._DIR_IMG_PACK.',', $source))
+		return $source;
 
 	// Si l'extension n'est pas precisee, aller la chercher dans la table
 	// des documents -- si la source n'est pas dans la table des documents,

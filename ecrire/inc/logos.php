@@ -16,6 +16,8 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
 	if (ereg("^" . _DIR_IMG, $nom)) {
 		$nom = substr($nom,strlen(_DIR_IMG));
+	} else 	if (ereg("^" . _DIR_IMG_ICONES_DIST, $nom)) {
+		$nom = substr($nom,strlen(_DIR_IMG_ICONES_DIST));
 	}
 	$pos = strrpos($nom, "/");
 	if ($pos > 0) {
@@ -29,6 +31,8 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	while (list(, $format) = each($formats)) {
 		if (@file_exists(_DIR_IMG . "$chemin$nom.$format")){ 
 			return array((_DIR_IMG . $chemin), $nom, $format);
+		} else if (@file_exists(_DIR_IMG_ICONES_DIST . "$chemin$nom.$format")){ 
+			return array((_DIR_IMG_ICONES_DIST . $chemin), $nom, $format);
 		}
 	}
 }
