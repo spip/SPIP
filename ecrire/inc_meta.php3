@@ -49,7 +49,7 @@ function ecrire_metas() {
 
 	lire_metas();
 
-	$s = '<?php
+	$s = '<'.'?php
 
 if (defined("_ECRIRE_INC_META_CACHE")) return;
 define("_ECRIRE_INC_META_CACHE", "1");
