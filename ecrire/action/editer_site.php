@@ -19,12 +19,15 @@ function action_editer_site_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
+	if (preg_match(',options/(\d+),',$arg, $r)) {
+		$id_syndic = $r[1];
+		editer_site_options($id_syndic);
 	// Envoi depuis le formulaire d'edition d'un site existant
-	if ($id_syndic = intval($arg)) {
+	} else if ($id_syndic = intval($arg)) {
 
 		// reload si on change une des valeurs de syndication
 		if (
-		(_request('url_syndic') OR _request('syndication')  OR _request('resume') OR _request('syndication'))
+		(_request('url_syndic') OR _request('resume') OR _request('syndication'))
 		AND $s = spip_query("SELECT url_syndic,syndication,resume FROM spip_syndic WHERE id_syndic="._q($id_syndic))
 		AND $t = spip_fetch_array($s)
 		AND (
@@ -323,6 +326,27 @@ function analyser_site($url) {
 			$result['url_syndic'] = $feeds[0];
 	}
 	return $result;
+}
+
+function editer_site_options($id_syndic)
+{
+	$moderation = _request('moderation');
+	$miroir = _request('miroir');
+	$oubli = _request('oubli');
+	$resume = _request('resume');
+
+	if ($moderation == 'oui' OR $moderation == 'non')
+		spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=$id_syndic");
+	if ($miroir == 'oui' OR $miroir == 'non')
+		spip_query("UPDATE spip_syndic SET miroir='$miroir'	WHERE id_syndic=$id_syndic");
+	if ($oubli == 'oui' OR $oubli == 'non')
+		spip_query("UPDATE spip_syndic SET oubli='$oubli' WHERE id_syndic=$id_syndic");
+
+	if ($resume == 'oui' OR $resume == 'non') {
+		spip_query("UPDATE spip_syndic SET resume='$resume'	WHERE id_syndic=$id_syndic");
+		include_spip('inc/syndic');
+		syndic_a_jour($id_syndic);
+	}
 }
 
 ?>
