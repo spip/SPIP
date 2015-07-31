@@ -386,7 +386,7 @@ class IterateurDATA implements Iterator {
 			if (preg_match(',^\.?([/\w]+)( DESC)?$,iS', ltrim($tri, '/'), $r)) {
 				// tri par cle
 				if ($r[1] == 'cle'){
-					if ($r[2])
+					if (isset($r2) and $r[2])
 						krsort($this->tableau);
 					else
 						ksort($this->tableau);
