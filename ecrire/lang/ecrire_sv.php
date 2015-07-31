@@ -130,7 +130,6 @@ om import.<p>För mer information se <a href="@spipnet@">SPIP-dokumentationen</a
 'diff_texte_ajoute' => 'Tillaggd text',
 'diff_texte_deplace' => 'Flyttad text',
 'diff_texte_supprime' => 'Raderad text',
-'double_clic_inserer_doc' => 'Dubbelklicka för att sätta in den här genvägen i texten',
 
 // E
 'email' => 'e-post',
@@ -552,7 +551,6 @@ funktioner hos SPIP inte användas.',
 'info_redacteurs' => 'Redaktörer',
 'info_redaction_en_cours' => 'UNDER ARBETE',
 'info_redirection' => 'Ompekning',
-'info_referencer_doc_distant' => 'Länka till ett dokument på internet:',
 'info_refuses' => 'Refuserade artiklar',
 'info_reglage_ldap' => 'inställningar: <b>anpassar LDAP import</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -677,7 +675,6 @@ med en färg som visar deras status:',
 'item_ajout_mots_cles' => 'Tillåt nya nyckelord till forumen',
 'item_autoriser_documents_joints' => 'Tillåt dokument bifogade till artiklarna',
 'item_autoriser_documents_joints_rubriques' => 'Tillåt dokument i avdelningarna',
-'item_autoriser_selectionner_date_en_ligne' => 'Tillåt förändringar av publiseringsdatum',
 'item_autoriser_syndication_integrale' => 'Inkludera hela artiklar i syndikeringsfilerna',
 'item_bloquer_liens_syndiques' => 'Stoppa syndikerade länkar från godkännande',
 'item_choix_administrateurs' => 'administratörer',
@@ -701,7 +698,6 @@ med en färg som visar deras status:',
 'item_non_ajout_mots_cles' => 'Tillåt inte tillägg av nyckelord till forumen',
 'item_non_autoriser_documents_joints' => 'Tillåt inte dokument i artiklarna',
 'item_non_autoriser_documents_joints_rubriques' => 'Tillåt inte dokument i avdelningarna',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Publiceringsdatum är det datum då dokumentet publicerades.',
 'item_non_autoriser_syndication_integrale' => 'Skicka bara en sammanfattning',
 'item_non_bloquer_liens_syndiques' => 'Blockera inte länkar som kommer ifrån syndikering',
 'item_non_compresseur' => 'Avaktivera komprimering',
@@ -941,11 +937,6 @@ installera om SPIP för att skapa en ny databas och den första administratören
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :', # NEW
 'texte_descriptif_petition' => 'Descriptif de la pétition', # NEW
 'texte_descriptif_rapide' => 'Descriptif rapide', # NEW
-'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
- multimédia, etc.) aux articles et/ou aux rubriques. Ces fichiers
- peuvent ensuite être référencés dans
- l\'article, ou affichés séparément.', # MODIF
-'texte_documents_joints_2' => 'Ce réglage n\'empêche pas l\'insertion d\'images directement dans les articles.', # NEW
 'texte_effacer_base' => 'Effacer la base de données SPIP', # NEW
 'texte_effacer_donnees_indexation' => 'Effacer les données d\'indexation', # NEW
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1113,7 +1104,6 @@ you can perform searches on sites and
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Optioner: <b>Din LDAP koppling</b>',
 'titre_dernier_article_syndique' => 'Senaste syndikerade artiklar',
-'titre_documents_joints' => 'Bifogade dokument',
 'titre_evolution_visite' => 'Besöksnivå',
 'titre_gauche_mots_edit' => 'NYCKELORDSNUMMER:',
 'titre_groupe_mots' => 'NYCKELORDSGRUPP:',
@@ -1167,7 +1157,6 @@ you can perform searches on sites and
 'titre_syndication' => 'Syndication de sites', # NEW
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Hela @upload@-katalogen',
 'trad_article_inexistant' => 'Det finns ingen artikel med det här numret',
 'trad_article_traduction' => 'Alla versioner av den här artikeln:',
 'trad_deja_traduit' => 'Den här artikeln är i sig en översättning av den nuvarande artikeln.', # MODIF
@@ -1176,16 +1165,8 @@ you can perform searches on sites and
 'trad_new' => 'Skriv en ny översättning av den här artikeln', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP fil',
-'upload_fichier_zip_texte' => 'Filen du försöker installera är en ZIP-fil.',
-'upload_fichier_zip_texte2' => 'Den här filen kan:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Den här filen är för stor för servern; Den maimala storleken som kan <i>laddas upp</i> är @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'uppackad och alla filerna kommer ahh bli installerade på sajten. De filer som kommer att installeras är:',
-'upload_zip_telquel' => 'installerad som den är, som en ZIP-fil;',
-'upload_zip_titrer' => 'Lägg till titlar efter vad filerna kallas',
 'utf8_convert_attendez' => 'Vänta några sekunder och ladda sedan om den här sidan.',
 'utf8_convert_avertissement' => 'Du håller på att konvertera innehållet i din databas (artiklar, notiser, etc) från teckenkodningen <b>@orig@</b> till teckenkodningen <b>@charset@</b>',
 'utf8_convert_backup' => 'Glöm inte bort att göra en fullständig säkerhetskopia av din webbplats. Du behöver också kontrollera att dina dokumentmallar och språkfiler är kompatibla med @charset@. Om spårning av revideringar är påslaget kommer den hur som helst att bli skadad.', # MODIF

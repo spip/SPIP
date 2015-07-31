@@ -131,7 +131,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'diff_texte_ajoute' => 'テキストを追加した',
 'diff_texte_deplace' => 'テキストを変更した',
 'diff_texte_supprime' => '文章を削除した',
-'double_clic_inserer_doc' => 'ダブルクリックして文章にこのショートカットを挿入',
 
 // E
 'email' => 'メール',
@@ -533,7 +532,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'info_redacteurs' => 'エディターズ',
 'info_redaction_en_cours' => '進行中の編集',
 'info_redirection' => 'リダイレクション',
-'info_referencer_doc_distant' => 'インターネット上の文章を参照:',
 'info_refuses' => 'あなたの記事は拒絶された',
 'info_reglage_ldap' => 'オプション：<b>LDAPインポートの調整</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -658,7 +656,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_ajout_mots_cles' => '掲示板へキーワードの追加を許可',
 'item_autoriser_documents_joints' => 'ドキュメントが記事に結びつくのを許可する',
 'item_autoriser_documents_joints_rubriques' => 'セクション内のドキュメントを許可する',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files', # NEW
 'item_bloquer_liens_syndiques' => '供給（シンジケート）リンクを検査前、妨害する',
 'item_choix_administrateurs' => '管理者たち',
@@ -682,7 +679,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'item_non_ajout_mots_cles' => '掲示板へのキーワードの付加を許可しない',
 'item_non_autoriser_documents_joints' => '記事内のドキュメントを許可しない',
 'item_non_autoriser_documents_joints_rubriques' => 'セクション内のドキュメントを許可しない',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Only send a summary', # NEW
 'item_non_bloquer_liens_syndiques' => '供給（シンジケート）から生じるリンクを妨害しない',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -906,8 +902,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'texte_date_publication_article' => 'オンラインに公表された日時:',
 'texte_descriptif_petition' => '署名内容の説明',
 'texte_descriptif_rapide' => '短い記述',
-'texte_documents_joints' => 'あなたは記事やセクションにドキュメント（オフィスファイル、画像、マルチメディア、その他）を追加することが出来ます。それらファイルは記事内で参照されるか、別に表示されます。', # MODIF
-'texte_documents_joints_2' => 'この設定は、記事へ直接画像を挿入することを止めません。',
 'texte_effacer_base' => 'SPIPデータベースを削除',
 'texte_effacer_donnees_indexation' => 'インデックスデータを削除',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1022,7 +1016,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'オプションズ: <b>あなたのLDAPコネクション</b>',
 'titre_dernier_article_syndique' => '最新の配給された記事',
-'titre_documents_joints' => '付加されている書類',
 'titre_evolution_visite' => '訪れるレベル',
 'titre_gauche_mots_edit' => 'キーワード番号:',
 'titre_groupe_mots' => 'キーワードグループ:',
@@ -1076,7 +1069,6 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'titre_syndication' => 'サイトの配給',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => '@upload@ディレクトリ全体',
 'trad_article_inexistant' => 'この番号には記事はありません',
 'trad_article_traduction' => '記事のすべてのバージョン:',
 'trad_deja_traduit' => 'この記事は、それ自身現在の記事の翻訳です。',
@@ -1085,16 +1077,8 @@ SPIPドキュメント</a>をご覧ください。</p>', # MODIF
 'trad_new' => 'この記事の新しい翻訳を書く', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIPファイル',
-'upload_fichier_zip_texte' => 'ZIPファイルをSPIPに登録します。',
-'upload_fichier_zip_texte2' => 'このファイルを:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'このファイルはサーバーにとって大きすぎます; 許可された<i>upload</i>の最大サイズは、@max@です。',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => '解凍して、ファイルをそれぞれ別で登録する。登録されるファイル群は下の通り。:',
-'upload_zip_telquel' => 'そのまま。ZIPファイル１つを登録。',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Wait a few seconds and then reload this page.', # NEW
 'utf8_convert_avertissement' => 'You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@. If revision tracking is enabled it will in any case be damaged.', # NEW

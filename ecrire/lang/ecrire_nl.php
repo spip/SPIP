@@ -131,7 +131,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Toegevoegde tekst',
 'diff_texte_deplace' => 'Verplaatste tekst',
 'diff_texte_supprime' => 'Verwijderde tekst',
-'double_clic_inserer_doc' => 'Dubbelklik om deze snelkoppeling in de tekst te lassen.',
 
 // E
 'email' => 'e-mail',
@@ -553,7 +552,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Redacteurs',
 'info_redaction_en_cours' => 'IN REDACTIE',
 'info_redirection' => 'Omleiding',
-'info_referencer_doc_distant' => 'Naar een document op internet verwijzen :',
 'info_refuses' => 'Uw geweigerde artikels',
 'info_reglage_ldap' => 'Opties : <b>Instellen van de LDAP invoer</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -678,7 +676,6 @@ een kleur geeft hun status aan :',
 'item_ajout_mots_cles' => 'Gebruik van trefwoorden toestaan op de forums',
 'item_autoriser_documents_joints' => 'Gebruik van bijlagen bij artikels toestaan',
 'item_autoriser_documents_joints_rubriques' => 'Gebruik van bijlagen bij rubrieken toestaan',
-'item_autoriser_selectionner_date_en_ligne' => 'Het mogelijk maken om de datum van elk document te wijzigen',
 'item_autoriser_syndication_integrale' => 'Volledige artikels verspreiden via syndicatie',
 'item_bloquer_liens_syndiques' => 'Gesyndiceerde koppelingen tegenhouden voor goedkeuring ',
 'item_choix_administrateurs' => 'de beheerders',
@@ -702,7 +699,6 @@ een kleur geeft hun status aan :',
 'item_non_ajout_mots_cles' => 'Gebruik van trefwoorden in de forums niet toestaan',
 'item_non_autoriser_documents_joints' => 'Bijlagen bij artikels niet toestaan',
 'item_non_autoriser_documents_joints_rubriques' => 'Bijlagen bij rubrieken niet toestaan',
-'item_non_autoriser_selectionner_date_en_ligne' => 'De datum van de documenten is die van hun toevoegsel op de plaats',
 'item_non_autoriser_syndication_integrale' => 'Enkel een samenvatting verspreiden',
 'item_non_bloquer_liens_syndiques' => 'Koppelingen komende van de syndicatie niet blokkeren',
 'item_non_compresseur' => 'De samendrukking desactiveren',
@@ -943,10 +939,6 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE :',
 'texte_descriptif_petition' => 'Beschrijving van de petitie.',
 'texte_descriptif_rapide' => 'Korte beschrijving.',
-'texte_documents_joints' => 'Je kan het toevoegen van documenten (teksten, afbeeldingen, multimedia, ...) bij artikels of rubrieken toelaten. De bijgevoegde bestanden 
-kunnen vervolgens gekoppeld worden in het 
-artikel of afzonderlijk getoond worden.', # MODIF
-'texte_documents_joints_2' => 'Deze instelling verhindert de directe opname van beelden in artikels niet.',
 'texte_effacer_base' => 'Verwijder de SPIP databank',
 'texte_effacer_donnees_indexation' => 'Verwijder de geïndexeerde gegevens',
 'texte_effacer_statistiques' => 'De statistieken uitwissen',
@@ -1109,7 +1101,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_conflit_edition' => 'Conflict bij de uitgave',
 'titre_connexion_ldap' => 'Opties: <b>Je LDAP-verbinding</b>',
 'titre_dernier_article_syndique' => 'Meest recente gesyndiceerde artikels',
-'titre_documents_joints' => 'Bijlagen',
 'titre_evolution_visite' => 'Evolutie van de bezoeken',
 'titre_gauche_mots_edit' => 'WOORD NUMMER:',
 'titre_groupe_mots' => 'WOORDENGROEP:',
@@ -1163,7 +1154,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_syndication' => 'Syndicatie van websites',
 'titre_type_urls' => 'Soort adressen URL',
 'tls_ldap' => 'Transport Layer Security :',
-'tout_dossier_upload' => 'Alles in de map @upload@',
 'trad_article_inexistant' => 'Er is geen artikel met dit nummer.',
 'trad_article_traduction' => 'Alle versies van dit artikel:',
 'trad_deja_traduit' => 'Fout: onmogelijk om dit artikel te verbinden met het gevraagde nummer.',
@@ -1172,16 +1162,8 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'trad_new' => 'Een nieuwe vertaling maken van dit artikel', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP bestand',
-'upload_fichier_zip_texte' => 'Het bestand dat je wil installeren is een ZIP bestand.',
-'upload_fichier_zip_texte2' => 'Dit bestand kan zijn :',
 'upload_info_mode_document' => 'Dit beeld in portfolio neerzetten',
 'upload_info_mode_image' => 'Dit beeld van portfolio terugtrekken',
-'upload_limit' => 'Dit bestand is te groot voor de server ; de maximale bestandsgrootte voor <i>upload</i> is @max@.',
-'upload_zip_conserver' => 'Het archief behouden na winning',
-'upload_zip_decompacter' => 'uitgepakt en elk bestand geïnstalleerd op de site. De bestanden die op de site komen, zijn :',
-'upload_zip_telquel' => 'geïnstalleerd als gezipt (gecomprimeerd) bestand ;',
-'upload_zip_titrer' => 'Volgens de naam bestanden betitelen',
 'utf8_convert_attendez' => 'Wacht enkele ogenblikken en herlaadt deze pagina.',
 'utf8_convert_avertissement' => 'U heeft zich klaargemaakt om de inhoud van uw site (artikels, berichten, enz) om te zetten van karakterset <b>@orig@</b> naar karakterset <b>@charset@</b>.',
 'utf8_convert_backup' => 'Vergeet niet om vooraf uw volledige site te bewaren. U dient ook na te gaan of uw sjablonen en taalbestanden @charset@ compatibel zijn.',

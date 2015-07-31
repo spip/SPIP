@@ -131,7 +131,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Teksto aldonita',
 'diff_texte_deplace' => 'Teksto translokita',
 'diff_texte_supprime' => 'Teksto forviŝita',
-'double_clic_inserer_doc' => 'Dufoje musklaku por enigi tiun rapidligilon en la tekston',
 
 // E
 'email' => 'retpoŝtadreso',
@@ -540,7 +539,6 @@ postulas disponi je FTP-alirrajto al la retejo.</p>', # MODIF
 'info_redacteurs' => 'Redaktantoj',
 'info_redaction_en_cours' => 'REDAKTATA',
 'info_redirection' => 'Alidirektigo',
-'info_referencer_doc_distant' => 'Referencigi dokumenton ĉe la reto :',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
 'info_reglage_ldap' => 'Opcioj: <b>Agordo de la LDAP-elŝuto</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -664,7 +662,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_ajout_mots_cles' => 'Permesi la aldonon de ŝlosilvortoj al la forumoj',
 'item_autoriser_documents_joints' => 'Permesi alkroĉon de dokumentoj al la artikoloj',
 'item_autoriser_documents_joints_rubriques' => 'Permesi dokumentojn en la rubrikoj',
-'item_autoriser_selectionner_date_en_ligne' => 'Povi elekti la ĉeretigodaton de ĉiu dokumento', # MODIF
 'item_autoriser_syndication_integrale' => 'Disponigi la tuton de la artikoloj en la abondosieroj',
 'item_bloquer_liens_syndiques' => 'Bloki la abonligilojn por validigo',
 'item_choix_administrateurs' => 'la mastrumantoj',
@@ -688,7 +685,6 @@ La tradukoj estas kunligitaj al la originalo, kun koloro kiu indikas ties staton
 'item_non_ajout_mots_cles' => 'Malpermesi la uzadon de ŝlosilvortoj en la forumoj',
 'item_non_autoriser_documents_joints' => 'Ne permesi dokumentojn en la artikoloj',
 'item_non_autoriser_documents_joints_rubriques' => 'Ne permesi dokumentojn en la rubrikoj',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Ne povi mane ŝanĝi datojn de la dokumentoj', # MODIF
 'item_non_autoriser_syndication_integrale' => 'Nur disponigi po unu resumo',
 'item_non_bloquer_liens_syndiques' => 'Ne bloki la ligilojn naskitajn de abonrilato',
 'item_non_compresseur' => 'Malaktivigi la densigon',
@@ -928,11 +924,6 @@ SPIP-reinstalon por rekrei novan bazon kaj unuan mastrumulan alirrajton.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO :',
 'texte_descriptif_petition' => 'Priskribo de petskribo',
 'texte_descriptif_rapide' => 'Konciza priskribo',
-'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficikajn dosierojn, bildojn,
- aŭd-vidaĵojn, ktp.) al la artikoloj kaj/aŭ al la rubrikoj. Tiuj dosieroj
- povas poste esti referencigitaj en la artikolo
- aŭ sendepende afiŝitaj.<p>', # MODIF
-'texte_documents_joints_2' => 'Tiu aranĝo ne malhelpas la inkludon de bildoj rekte en la artikolojn.',
 'texte_effacer_base' => 'Forviŝi la SPIP-datenbazon',
 'texte_effacer_donnees_indexation' => 'Forviŝi la indeksajn datenojn',
 'texte_effacer_statistiques' => 'Forviŝi statistikojn',
@@ -1101,7 +1092,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcioj: <b>Via konekto LDAP</b>',
 'titre_dernier_article_syndique' => 'Laste abonŝutitaj artikoloj',
-'titre_documents_joints' => 'Alkroĉitaj dokumentoj',
 'titre_evolution_visite' => 'Evoluo de la vizitoj',
 'titre_gauche_mots_edit' => 'VORTO NUMERO:',
 'titre_groupe_mots' => 'GRUPO DE VORTOJ:',
@@ -1155,7 +1145,6 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'titre_syndication' => 'Reteja abonligo',
 'titre_type_urls' => 'Tipo de retadreso',
 'tls_ldap' => 'Transŝuta tavolsekureco (TLS):',
-'tout_dossier_upload' => 'La tuta dosierujo @upload@',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 'trad_article_traduction' => 'Ĉiuj versioj de tiu ĉi artikolo :',
 'trad_deja_traduit' => 'Eraro: ne eblas ligi tiun artikolon al la petita numero.',
@@ -1164,16 +1153,8 @@ faris gravajn ŝanĝojn en la grafiko aŭ strukturo de la retejo.',
 'trad_new' => 'Skribi novan tradukon de tiu artikolo', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP-Dosiero (densigita)',
-'upload_fichier_zip_texte' => 'La dosiero, kiun vi proponas instali estas densigita dosiero (zip).',
-'upload_fichier_zip_texte2' => 'Tiu dosiero povas esti :',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Tiu dosiero estas tro granda por la servilo ; la maksimuma grandeco permesata en <i>upload</i> estas @max@.',
-'upload_zip_conserver' => 'Konservi arkivon post maldensigo',
-'upload_zip_decompacter' => 'maldensigita kaj ĉiu elemento, kiun ĝi enhavas estas instalita ĉe la retejo. La dosieroj kiuj estos sekve instalitaj ĉe la retejo estas :',
-'upload_zip_telquel' => 'instalita tia, kia ĝi estas, kiel densigita Zip-arkivo ;',
-'upload_zip_titrer' => 'Titoligi laŭ dosiernomo',
 'utf8_convert_attendez' => 'Atendu kelkajn momentojn kaj refreŝigu tiun paĝon.',
 'utf8_convert_avertissement' => 'Vi estas konvertonta la enhavon de via datenbazo (artikoloj, fulm-informoj, ktp...) kun la litertiparo <b>@orig@</b> al la litertiparo <b>@charset@</b>.',
 'utf8_convert_backup' => 'Antaŭe, ne forgesu fari kompletan savkopion de via retejo. Vi devos ankaŭ kontroli, ke viaj skeletoj kaj lingvaj dosieroj kungruas kun @charset@.',

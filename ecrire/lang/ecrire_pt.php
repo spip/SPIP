@@ -133,7 +133,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Texto acrescentado',
 'diff_texte_deplace' => 'Texto alterado',
 'diff_texte_supprime' => 'Texto suprimido',
-'double_clic_inserer_doc' => 'Faça duplo clique para inserir este atalho no texto',
 
 // E
 'email' => 'email',
@@ -555,7 +554,6 @@ serviços de hospedagem desactivam o envio de mails a partir dos seus
 'info_redacteurs' => 'Redactores',
 'info_redaction_en_cours' => 'EM CURSO DE REDACÇÃO',
 'info_redirection' => 'Redirigir',
-'info_referencer_doc_distant' => 'Referenciar um documento na internet :',
 'info_refuses' => 'Os seus artigos recusados',
 'info_reglage_ldap' => 'Opções : <b>Acerto da importação LDAP</b>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -680,7 +678,6 @@ numa cor que indica o seu estado:',
 'item_ajout_mots_cles' => 'Autorizar a adição de palavras-chave aos fóruns',
 'item_autoriser_documents_joints' => 'Autorizar os documentos juntos aos artigos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar os documentos nas rubricas',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Impedir os laços vinculados para validação',
 'item_choix_administrateurs' => 'os administradores',
@@ -704,7 +701,6 @@ numa cor que indica o seu estado:',
 'item_non_ajout_mots_cles' => 'Proibir a utilização das palavras-chave nos fóruns',
 'item_non_autoriser_documents_joints' => 'Não autorizar os documentos nos artigos',
 'item_non_autoriser_documents_joints_rubriques' => 'Não autorizar os documentos nas rubricas',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Não impedir os laços resultantes da vinculação',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -942,8 +938,6 @@ que alguns elementos dos artigos não são utilizados.
 'texte_date_publication_article' => 'DATA DE PUBLICAÇÃO ONLINE:',
 'texte_descriptif_petition' => 'Descrição do abaixo-assinado',
 'texte_descriptif_rapide' => 'Descrição rápida',
-'texte_documents_joints' => 'Pode autorizar a inclusão de documentos (ficheiros, imagens,  multimédia etc.) nos artigos e/ou nas secções. Estes ficheiros podem, em seguida, ser referenciados no artigo, ou exibidos separadamente.', # MODIF
-'texte_documents_joints_2' => 'Esta combinação não impede a inserção de imagens directamente nos artigos.',
 'texte_effacer_base' => 'Apagar a base de dados SPIP',
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexação',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1117,7 +1111,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opções: <b>Sua ligação LDAP</b>',
 'titre_dernier_article_syndique' => 'Últimos artigos vinculados',
-'titre_documents_joints' => 'Documentos anexados',
 'titre_evolution_visite' => 'Evolução das visitas',
 'titre_gauche_mots_edit' => 'PALAVRA NÚMERO :',
 'titre_groupe_mots' => 'GRUPO DE PALAVRAS :',
@@ -1171,7 +1164,6 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_syndication' => 'Vinculação de sítios',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Todo o diretório @upload@',
 'trad_article_inexistant' => 'Não há artigo com este número',
 'trad_article_traduction' => 'Todas as versões deste artigo :',
 'trad_deja_traduit' => 'Este artigo é já uma tradução do presente artigo.', # MODIF
@@ -1180,16 +1172,8 @@ ao SPIP pesquisar igualmente no texto dos
 'trad_new' => 'Escrever uma nova tradução deste artigo', # MODIF
 
 // U
-'upload_fichier_zip' => 'Ficheiro ZIP',
-'upload_fichier_zip_texte' => 'O ficheiro que propôs instalar é um ficheiro Zip.',
-'upload_fichier_zip_texte2' => 'Este ficheiro pode ser:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Este ficheiro é grande demais para o servidor; o tamanho máximo autorizado para <i>upload</i> é de @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'expandido e cada elemento que ele contém gravados no site. Os ficheiros que serão então gravados são:',
-'upload_zip_telquel' => 'instalado; como ficheiro compactado Zip;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW

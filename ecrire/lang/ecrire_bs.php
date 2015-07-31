@@ -124,7 +124,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Dodan tekst',
 'diff_texte_deplace' => 'Premjesten tekst',
 'diff_texte_supprime' => 'Izbrisan paragraf',
-'double_clic_inserer_doc' => 'Kliknite dva puta ako ovu precicu zelite dodati tekstu',
 
 // E
 'email' => 'e-mail',
@@ -514,7 +513,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Urednici',
 'info_redaction_en_cours' => 'U TOKU UREDJIVANJA',
 'info_redirection' => 'Preusmjerenje',
-'info_referencer_doc_distant' => 'Preporuciti dokument na internetu:',
 'info_refuses' => 'Vasi odbijeni clanci',
 'info_reglage_ldap' => 'Opcije: namijestanje LDAP importa</b>', # MODIF
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -638,7 +636,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'item_ajout_mots_cles' => 'Odobri dodavanje kljucnih rijeci u forum',
 'item_autoriser_documents_joints' => 'Ododbri dokumente pridruzene clancima',
 'item_autoriser_documents_joints_rubriques' => 'Odobri dokumente u rubrikama',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Blokiraj sindikovane linkove za validaciju',
 'item_choix_administrateurs' => 'administratori',
@@ -662,7 +659,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'item_non_ajout_mots_cles' => 'Zabrani upotrebu kljucnih rijeci u forumu',
 'item_non_autoriser_documents_joints' => 'Ne odobravaj dokumente bez clanaka',
 'item_non_autoriser_documents_joints_rubriques' => 'Ne odobravaj dokumente u rubrikama',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Ne blokiraj linkove koji su rezultat sindikacije',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -886,8 +882,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'texte_date_publication_article' => 'DATUM OBJAVLJIVANJA:',
 'texte_descriptif_petition' => 'Opis peticije',
 'texte_descriptif_rapide' => 'Brzi opis',
-'texte_documents_joints' => 'Mozete odobriti dodavanje dokumenata (birokratskih dokumenata, slika, multimedija, itd.) clancima i/ili rubrikama. Ti dokumenti mogu zatim biti preporuceni u clanku ili postavljeni odvojeno.', # MODIF
-'texte_documents_joints_2' => 'Ova postavka ne sprijecava direktno unosenje slika u clanke.',
 'texte_effacer_base' => 'Izbrisati SPIP bazu podataka',
 'texte_effacer_donnees_indexation' => 'Izbrisati podatke indexiranja',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -994,7 +988,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opcije: <b>Vasa LDAP konekcija</b>',
 'titre_dernier_article_syndique' => 'Posljednji sindikovani clanci',
-'titre_documents_joints' => 'Pridruzeni dokumenti',
 'titre_evolution_visite' => 'Napredovanje posjeta',
 'titre_gauche_mots_edit' => 'RIJEC BROJ:',
 'titre_groupe_mots' => 'GRUPA RIJECI:',
@@ -1048,7 +1041,6 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'titre_syndication' => 'Sindikacija stranica',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Cjelokupan dosije @upload@',
 'trad_article_inexistant' => 'Ne postoji clanak koji nosi ovaj broj.',
 'trad_article_traduction' => 'Sve verzije ovog clanka:',
 'trad_deja_traduit' => 'Ovaj clanak je vec prevod prethodnog clanka.', # MODIF
@@ -1057,16 +1049,8 @@ Prevodi su (sa bojom koja ukazuje na njihovo stanje) povezani sa originalnim cla
 'trad_new' => 'Napisati novi prevod ovog clanka', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP dokument',
-'upload_fichier_zip_texte' => 'Dokument koji predlazete za upload, je ZIP dokument.',
-'upload_fichier_zip_texte2' => 'Ovaj dokument moze biti:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Ovaj dokument je prevelik za server; dozvoljena maksimalna velicina za <i>upload</i> je @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'dekompresovan i svaki sadrzani dokument ce biti instaliran na stranicu. Dokumenti koji ce biti instalirani su:',
-'upload_zip_telquel' => 'instaliran kakav jeste, u ZIP formatu;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW

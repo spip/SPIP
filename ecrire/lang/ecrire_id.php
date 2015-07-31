@@ -132,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Teks yang ditambah',
 'diff_texte_deplace' => 'Teks yang dipindahkan',
 'diff_texte_supprime' => 'Teks yang dihapus',
-'double_clic_inserer_doc' => 'Klik ganda untuk memasukkan jalan pintas ini ke dalam teks',
 
 // E
 'email' => 'e-mail',
@@ -550,7 +549,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Editor',
 'info_redaction_en_cours' => 'PENGEDITAN DALAM PROSES',
 'info_redirection' => 'Pengalihan tujuan',
-'info_referencer_doc_distant' => 'Referensi dokumen di internet:',
 'info_refuses' => 'Artikel anda ditolak',
 'info_reglage_ldap' => 'Pilihan: <b>Menyesuaikan impor LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -675,7 +673,6 @@ dalam warna yang menunjukkan statusnya:',
 'item_ajout_mots_cles' => 'Otorisasi penambahan kata-kata kunci ke forum',
 'item_autoriser_documents_joints' => 'Otorisasi dokumen yang terlampir di artikel',
 'item_autoriser_documents_joints_rubriques' => 'Otorisasi dokumen dalam bagian',
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Ikut sertakan semua artikel dalam berkas sindikasi',
 'item_bloquer_liens_syndiques' => 'Blokir tautan sindikasi untuk validasi',
 'item_choix_administrateurs' => 'administrator',
@@ -699,7 +696,6 @@ dalam warna yang menunjukkan statusnya:',
 'item_non_ajout_mots_cles' => 'Jangan otorisasi penambahan kata-kata kunci ke forum',
 'item_non_autoriser_documents_joints' => 'Jangan otorisasi dokumen dalam artikel',
 'item_non_autoriser_documents_joints_rubriques' => 'Jangan otorisasi dokumen dalam bagian',
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Kirim ringkasan saja',
 'item_non_bloquer_liens_syndiques' => 'Jangan blokir tautan web yang berasal dari sindikasi',
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -938,10 +934,6 @@ menginstal kembali SPIP untuk membuat database baru dan akses administrator pert
 'texte_date_publication_article' => 'TANGGAL PUBLIKASI ONLINE:',
 'texte_descriptif_petition' => 'Deskripsi petisi',
 'texte_descriptif_rapide' => 'Deskripsi singkat',
-'texte_documents_joints' => 'Anda dapat mengizinkan penambahan dokumen (berkas-berkas office, gambar,
- multimedia, dll.) ke artikel dan/atau bagian. Berkas-berkas ini
- kemudian dapat direferensi dalam artikel atau ditampilkan terpisah.', # MODIF
-'texte_documents_joints_2' => 'Pengaturan ini tidak menghentikan penambahan gambar secara langsung dalam artikel.',
 'texte_effacer_base' => 'Hapus database SPIP',
 'texte_effacer_donnees_indexation' => 'Hapus data terindeksasi',
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1099,7 +1091,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Opsi: <b>Koneksi LDAP anda</b>',
 'titre_dernier_article_syndique' => 'Artikel-artikel sindikasi terbaru',
-'titre_documents_joints' => 'Lampiran',
 'titre_evolution_visite' => 'Tingkat kunjungan',
 'titre_gauche_mots_edit' => 'NOMOR KATA KUNCI:',
 'titre_groupe_mots' => 'KELOMPOK KATA KUNCI:',
@@ -1153,7 +1144,6 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'titre_syndication' => 'Sindikasi situs',
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Pengamanan layer transportasi:',
-'tout_dossier_upload' => 'Seluruh direktori @upload@',
 'trad_article_inexistant' => 'Tidak ada artikel dengan nomor ini',
 'trad_article_traduction' => 'Semua versi artikel ini:',
 'trad_deja_traduit' => 'Artikel ini adalah terjemahan dari artikel yang sekarang.',
@@ -1162,16 +1152,8 @@ anda memasukkan modifikasi yang penting di grafik atau struktur situs.',
 'trad_new' => 'Tulis terjemahan baru untuk artikel ini', # MODIF
 
 // U
-'upload_fichier_zip' => 'berkas ZIP',
-'upload_fichier_zip_texte' => 'Berkas yang hendak anda instal adalah berkas ZIP.',
-'upload_fichier_zip_texte2' => 'Berkas ini bisa jadu:',
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Berkas ini terlalu besar untuk server; ukuran maksimum yang diperbolehkan untuk <i>unggah</i> adalah @max@.',
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'diekstrak dan setiap berkas yang terdapat di dalamnya akan diinstal di situs. Berkas-berkas yang akan diinstal adalah:',
-'upload_zip_telquel' => 'diinstal seperti apa adanya, sebagai berkas ZIP;',
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Tunggu beberapa saat dan perbaharui halaman ini.',
 'utf8_convert_avertissement' => 'Anda akan mengubah isi database anda (artikel, berita, dll) dari set karakter <b>@orig@</b> ke set karakter <b>@charset@</b>.',
 'utf8_convert_backup' => 'Jangan lupa membuat backup lengkap situs anda terlebih dahulu. Anda juga perlu memeriksa bahawa templat dan bahasa anda kompatibel dengan @charset@.',

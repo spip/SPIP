@@ -132,7 +132,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'نص مضاف',
 'diff_texte_deplace' => 'نص منقول',
 'diff_texte_supprime' => 'نص محذوف',
-'double_clic_inserer_doc' => 'النقر المزدوج لإدراج هذا الاختصار في النص',
 
 // E
 'email' => 'البريد الالكتروني',
@@ -558,7 +557,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'محررون',
 'info_redaction_en_cours' => 'قيد التحرير',
 'info_redirection' => 'إعادة توجيه',
-'info_referencer_doc_distant' => 'تبويب مستند على شبكة انترنت:',
 'info_refuses' => 'مقالاتك المرفوضة',
 'info_reglage_ldap' => 'خيارات: <b>ضبط جلب LDAP </b>',
 'info_remplacer_mot' => 'استبدال "@titre@"',
@@ -683,7 +681,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_ajout_mots_cles' => 'السماح بإضافة المفاتيح الى المنتديات',
 'item_autoriser_documents_joints' => 'السماح بربط المستندات بالمقالات',
 'item_autoriser_documents_joints_rubriques' => 'إجازة المستندات في الأقسام',
-'item_autoriser_selectionner_date_en_ligne' => 'السماح بتعديل تاريخ كل مستند',
 'item_autoriser_syndication_integrale' => 'نشر كامل المقالات في ملفات الترخيص',
 'item_bloquer_liens_syndiques' => 'صد الوصلات المرخصة بانتظار تصديقها',
 'item_choix_administrateurs' => 'المدراء',
@@ -707,7 +704,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_ajout_mots_cles' => 'عدم السماح باستخدام المفاتيح في المنتديات',
 'item_non_autoriser_documents_joints' => 'عدم السماح بربط المستندات بالمقالات',
 'item_non_autoriser_documents_joints_rubriques' => 'عدم إجازة المستندات في الأقسام',
-'item_non_autoriser_selectionner_date_en_ligne' => 'تاريخ المستندات هو تاريخ تحميلهم في الموقع',
 'item_non_autoriser_syndication_integrale' => 'الاكتفاء بنشر ملخص',
 'item_non_bloquer_liens_syndiques' => 'عدم صد الوصلات الآتية من الترخيص',
 'item_non_compresseur' => 'تعطيل الصغط',
@@ -947,11 +943,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_date_publication_article' => 'تاريخ النشر:',
 'texte_descriptif_petition' => 'وصف العريضة',
 'texte_descriptif_rapide' => 'وصف مقتضب',
-'texte_documents_joints' => 'يمكنك السماح بإضافة مستندات (ملفات مكتبية، صور،
-وسائط متعددة، الخ.) الى المقالات و/او الأقسام. ويمكن حينها
-ان يتم ادراج هذه الملفات في
-المقال او عرضها منفصلة.',
-'texte_documents_joints_2' => 'هذا الإعداد لا يمنع إدراج الصور مباشرة في المقالات.',
 'texte_effacer_base' => 'حذف قاعدة بيانات SPIP',
 'texte_effacer_donnees_indexation' => 'حذف بيانات الفهرسة',
 'texte_effacer_statistiques' => 'حذف الاحصاءات',
@@ -1121,7 +1112,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_conflit_edition' => 'تضارب لدى التحرير',
 'titre_connexion_ldap' => 'خيارات: <b>إتصالLDAP </b>',
 'titre_dernier_article_syndique' => 'أحدث المقالات المرخصة',
-'titre_documents_joints' => 'المستندات المرفقة',
 'titre_evolution_visite' => 'تطور الزيارات',
 'titre_gauche_mots_edit' => 'مفتاح رقم:',
 'titre_groupe_mots' => 'مجموعة مفاتيح:',
@@ -1175,7 +1165,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_syndication' => 'ترخيص المواقع',
 'titre_type_urls' => 'نوع عناوين URL',
 'tls_ldap' => 'أمان طبقة النقل:',
-'tout_dossier_upload' => 'كامل الدليل @upload@',
 'trad_article_inexistant' => 'لا يوجد اي مقال يحمل هذا الرقم.',
 'trad_article_traduction' => 'كل اصدارات هذا المقال:',
 'trad_deja_traduit' => 'خطأ: لا يمكن ربط هذا المقال بالرقم المطلوب.',
@@ -1184,16 +1173,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trad_new' => 'كتابة ترجمة جديدة',
 
 // U
-'upload_fichier_zip' => 'ملف ZIP',
-'upload_fichier_zip_texte' => 'الملف الذي تنوي تثبيته هو ملف ZIP.',
-'upload_fichier_zip_texte2' => 'قد يكون هذا الملف:',
 'upload_info_mode_document' => 'وضع هذه الصورة في صالة العرض',
 'upload_info_mode_image' => 'سحب هذه الصورة من صالة العرض',
-'upload_limit' => 'هذا الملف كبير جداً لجهاز الخدمة. الحجم الاقصى المسموح به خلال <i>التحميل</i> هو @max@. ',
-'upload_zip_conserver' => 'الحفاظ على الملف المضغوط بعد سحب المحتوى',
-'upload_zip_decompacter' => 'غير مضغوط و كل عنصر يحتويه مثبت في الموقع. الملفات التي سيتم تثبيتها في الموقع هي:',
-'upload_zip_telquel' => 'مثبت كما هو على شكل ملف ZIP مضغوط.',
-'upload_zip_titrer' => 'عنونة حسب اسماء الملفات',
 'utf8_convert_attendez' => 'انتظر للحظات قليلة ثم أعد تحميل هذه الصفحة.',
 'utf8_convert_avertissement' => 'أنت تستعد لتحويل محتوى قاعدة بياناتك (مقالات وأخبار الخ.) من طقم حروف <b>@orig@</b> الى طقم حروف <b>@charset@</b>.',
 'utf8_convert_backup' => 'لا تنسى إنشاء نسخة احتياطية كاملة من موقعك اولاً. يجب ان تتأكد ايضاً من ان صفحاتك النموذجية وملفات لغاتك تتوافق مع @charset@.  ',

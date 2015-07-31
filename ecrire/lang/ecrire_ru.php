@@ -129,7 +129,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Добавленный текст',
 'diff_texte_deplace' => 'Перемещенный текст',
 'diff_texte_supprime' => 'Удаленный текст',
-'double_clic_inserer_doc' => 'Дважды щелкните, чтобы вставить этот ярлык в текст',
 
 // E
 'email' => 'адрес электронной почты',
@@ -551,7 +550,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Редакторы',
 'info_redaction_en_cours' => 'РЕДАКТИРОВАНИЕ В ХОДЕ РАБОТЫ',
 'info_redirection' => 'Перенаправление',
-'info_referencer_doc_distant' => 'Ссылка на документ в интернете (URL):',
 'info_refuses' => 'Ваши отклоненные статьи',
 'info_reglage_ldap' => 'Опции<b> Настройка импорта LDAP</b>',
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -676,7 +674,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_ajout_mots_cles' => 'Разрешить дополнение форумов ключевыми словами',
 'item_autoriser_documents_joints' => 'Разрешить прикреплять документы к статьям',
 'item_autoriser_documents_joints_rubriques' => 'Разрешить документы в разделах',
-'item_autoriser_selectionner_date_en_ligne' => 'Разрешить изменения даты каждого документа',
 'item_autoriser_syndication_integrale' => 'Включать целые статьи в объединенные файлы ',
 'item_bloquer_liens_syndiques' => 'Блокировать объединенные ссылки для утверждения',
 'item_choix_administrateurs' => 'администраторы',
@@ -700,7 +697,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'item_non_ajout_mots_cles' => 'Не разрешать дополнение форумов ключевыми словами',
 'item_non_autoriser_documents_joints' => '<MODIF>Отключить документы к статьям',
 'item_non_autoriser_documents_joints_rubriques' => 'Не разрешать документов в разделах',
-'item_non_autoriser_selectionner_date_en_ligne' => 'Дата документа - это дата, которая была добавлена к сайту',
 'item_non_autoriser_syndication_integrale' => 'Отправка только краткого изложения',
 'item_non_bloquer_liens_syndiques' => 'Не блокировать ссылки, поступающие от объединений в синдикаты',
 'item_non_compresseur' => 'Отключить сжатие',
@@ -940,11 +936,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_date_publication_article' => 'ДАТА ОНЛАЙН ПУБЛИКАЦИИ:',
 'texte_descriptif_petition' => 'Описание комментария',
 'texte_descriptif_rapide' => 'Краткое описание',
-'texte_documents_joints' => 'Вы можете позволить дополнять документами (офисными файлами, изображениями, 
- мультимедиа, и т.д.) статьи и/или разделы. Эти 
- файлы могут быть ссылками на 
- статью или показываться отдельно. ', # MODIF
-'texte_documents_joints_2' => '<MODIF>Этот параметр не позволяет вставку изображений непосредственно в статьи.',
 'texte_effacer_base' => 'Удалить базу данных SPIP',
 'texte_effacer_donnees_indexation' => 'Удалить индексацию данных',
 'texte_effacer_statistiques' => 'Удалить статистику',
@@ -1105,7 +1096,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_conflit_edition' => 'Противоречие в процессе редактирования',
 'titre_connexion_ldap' => 'Опции: <b>Ваше LDAP соединение</b>',
 'titre_dernier_article_syndique' => 'Последний обмен статей по RSS.',
-'titre_documents_joints' => 'Прилагаемые документы',
 'titre_evolution_visite' => 'Уровень посещений',
 'titre_gauche_mots_edit' => 'НОМЕР КЛЮЧЕВОГО СЛОВА:',
 'titre_groupe_mots' => 'ГРУППА КЛЮЧЕВЫХ СЛОВ:',
@@ -1159,7 +1149,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_syndication' => 'Объединение сайтов',
 'titre_type_urls' => 'Ввести адреса ',
 'tls_ldap' => 'Transport Layer Security :',
-'tout_dossier_upload' => 'Весь @upload@ каталог',
 'trad_article_inexistant' => 'Нет  статьи с таким номером',
 'trad_article_traduction' => 'Все версии этой статьи:',
 'trad_deja_traduit' => 'Ошибка: невозможно связать эту статью с запрашиваемым номером.',
@@ -1168,16 +1157,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trad_new' => 'Написать новый перевод этой статьи', # MODIF
 
 // U
-'upload_fichier_zip' => 'ZIP файл',
-'upload_fichier_zip_texte' => 'Файл, который Вы хотите установить является ZIP-файлом .',
-'upload_fichier_zip_texte2' => 'Этот файл может быть:',
 'upload_info_mode_document' => 'Поместить это изображение в галерею',
 'upload_info_mode_image' => 'Удалить это изображение с галереи',
-'upload_limit' => 'Этот файл является слишком большим для сервера; максимально допустимый размер для <i>upload</i> является @max@.',
-'upload_zip_conserver' => 'Хранить архив файла после извлечения его содержания',
-'upload_zip_decompacter' => 'разархивировать и установить содержание каждого файла на сайт. Файлы, которые будут установлены:',
-'upload_zip_telquel' => 'установливать как ZIP файл;',
-'upload_zip_titrer' => 'Добавить названия в соответствии с именами файлов',
 'utf8_convert_attendez' => 'Подождите несколько секунд, а затем перезагрузите страницу.',
 'utf8_convert_avertissement' => 'Вы собираетесь преобразовать содержание Вашей базы данных  (новости, статьи и т. д.) с набора символов <b>@orig@</b> в набор символов <b>@charset@</b>.',
 'utf8_convert_backup' => 'Не забудьте вначале сделать полную резервную копию Вашего сайта. Вам также нужно проверить, что Ваши шаблоны и языковые файлы совместимы с @charset@.',

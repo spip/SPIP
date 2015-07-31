@@ -136,7 +136,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Yapat sawu',
 'diff_texte_deplace' => 'Jan yäqat sawu',
 'diff_texte_supprime' => 'Apaqat sawu',
-'double_clic_inserer_doc' => 'Pä limt\'aw luram  aka jisk\'a thakhi uchantañataki sawut ukan',
 
 // E
 'email' => 'aruskipayiri',
@@ -560,7 +559,6 @@ exige d\'avoir un accès FTP au site Web.</p>', # NEW
 'info_redacteurs' => 'Rédacteurs', # NEW
 'info_redaction_en_cours' => 'EN COURS DE RÉDACTION', # NEW
 'info_redirection' => 'Redirection', # NEW
-'info_referencer_doc_distant' => 'Référencer un document sur l\'internet :', # NEW
 'info_refuses' => 'Vos articles refusés', # NEW
 'info_reglage_ldap' => 'Options : <b>Réglage de l\'importation LDAP</b>', # NEW
 'info_remplacer_mot' => 'Remplacer "@titre@"', # NEW
@@ -685,7 +683,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_ajout_mots_cles' => 'Autoriser l\'ajout de mots-clés aux forums', # NEW
 'item_autoriser_documents_joints' => 'Autoriser les documents joints aux articles', # NEW
 'item_autoriser_documents_joints_rubriques' => 'Autoriser les documents dans les rubriques', # NEW
-'item_autoriser_selectionner_date_en_ligne' => 'Permettre de modifier la date de chaque document', # NEW
 'item_autoriser_syndication_integrale' => 'Diffuser l\'intégralité des articles dans les fichiers de syndication', # NEW
 'item_bloquer_liens_syndiques' => 'Bloquer les liens syndiqués pour validation', # NEW
 'item_choix_administrateurs' => 'les administrateurs', # NEW
@@ -709,7 +706,6 @@ dans une couleur qui indique leur état :', # NEW
 'item_non_ajout_mots_cles' => 'Interdire l\'utilisation des mots-clés dans les forums', # NEW
 'item_non_autoriser_documents_joints' => 'Ne pas autoriser les documents dans les articles', # NEW
 'item_non_autoriser_documents_joints_rubriques' => 'Ne pas autoriser les documents dans les rubriques', # NEW
-'item_non_autoriser_selectionner_date_en_ligne' => 'La date des documents est celle de leur ajout sur le site', # NEW
 'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un résumé', # NEW
 'item_non_bloquer_liens_syndiques' => 'Ne pas bloquer les liens issus de la syndication', # NEW
 'item_non_compresseur' => 'Désactiver la compression', # NEW
@@ -949,11 +945,6 @@ réinstallation de SPIP pour recréer une nouvelle base ainsi qu\'un premier acc
 'texte_date_publication_article' => 'DATE DE PUBLICATION EN LIGNE :', # NEW
 'texte_descriptif_petition' => 'Descriptif de la pétition', # NEW
 'texte_descriptif_rapide' => 'Descriptif rapide', # NEW
-'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
- multimédia, etc.) aux articles et/ou aux rubriques. Ces fichiers
- peuvent ensuite être référencés dans
- l\'article, ou affichés séparément.</p>', # NEW
-'texte_documents_joints_2' => 'Ce réglage n\'empêche pas l\'insertion d\'images directement dans les articles.', # NEW
 'texte_effacer_base' => 'Effacer la base de données SPIP', # NEW
 'texte_effacer_donnees_indexation' => 'Effacer les données d\'indexation', # NEW
 'texte_effacer_statistiques' => 'Effacer les statistiques', # NEW
@@ -1123,7 +1114,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_conflit_edition' => 'Conflit lors de l\'édition', # NEW
 'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>', # NEW
 'titre_dernier_article_syndique' => 'Derniers articles syndiqués', # NEW
-'titre_documents_joints' => 'Documents joints', # NEW
 'titre_evolution_visite' => 'Évolution des visites', # NEW
 'titre_gauche_mots_edit' => 'MOT NUMÉRO :', # NEW
 'titre_groupe_mots' => 'GROUPE DE MOTS :', # NEW
@@ -1177,7 +1167,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'titre_syndication' => 'Syndication de sites', # NEW
 'titre_type_urls' => 'Type d\'adresses URL', # NEW
 'tls_ldap' => 'Transport Layer Security :', # NEW
-'tout_dossier_upload' => 'Tout le dossier @upload@', # NEW
 'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce numéro.', # NEW
 'trad_article_traduction' => 'Toutes les versions de cet article :', # NEW
 'trad_deja_traduit' => 'Erreur : impossible de relier cet article au numéro demandé. ', # NEW
@@ -1186,16 +1175,8 @@ avez fait des modifications importantes de graphisme ou de structure du site.', 
 'trad_new' => 'Écrire une nouvelle traduction', # NEW
 
 // U
-'upload_fichier_zip' => 'Fichier ZIP', # NEW
-'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.', # NEW
-'upload_fichier_zip_texte2' => 'Ce fichier peut être :', # NEW
 'upload_info_mode_document' => 'Déposer cette image dans le portfolio', # NEW
 'upload_info_mode_image' => 'Retirer cette image du portfolio', # NEW
-'upload_limit' => 'Ce fichier est trop gros pour le serveur ; la taille maximum autorisée en <i>upload</i> est de @max@.', # NEW
-'upload_zip_conserver' => 'Conserver l’archive après extraction', # NEW
-'upload_zip_decompacter' => 'décompressé et chaque élément qu\'il contient installé sur le site. Les fichiers qui seront alors installés sur le site sont :', # NEW
-'upload_zip_telquel' => 'installé tel quel, en tant qu\'archive compressée Zip ;', # NEW
-'upload_zip_titrer' => 'Titrer selon le nom des fichiers', # NEW
 'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.', # NEW
 'utf8_convert_avertissement' => 'Vous vous apprêtez à convertir le contenu de votre base de données (articles, brèves, etc) du jeu de caractères <b>@orig@</b> vers le jeu de caractères <b>@charset@</b>.', # NEW
 'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde complète de votre site. Vous devrez aussi vérifier que vos squelettes et fichiers de langue sont compatibles @charset@.', # NEW
