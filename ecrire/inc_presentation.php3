@@ -483,7 +483,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	echo "\n";
 }
 
-function afficher_tranches_requete(&$query, $colspan) {
+function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascript=false) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
 
@@ -505,7 +505,9 @@ function afficher_tranches_requete(&$query, $colspan) {
 	$texte = "\n";
 
 	if ($num_rows > $nb_aff) {
-		$tmp_var = 't_'.substr(md5($query), 0, 4);
+		if (!$tmp_var) $tmp_var = substr(md5($query), 0, 4);
+		$tmp_var = 't_'. $tmp_var;
+		
 		$deb_aff = intval($GLOBALS[$tmp_var]);
 		$ancre++;
 
@@ -523,9 +525,19 @@ function afficher_tranches_requete(&$query, $colspan) {
 			else {
 				$link = new Link;
 				$link->addVar($tmp_var, strval($deb - 1));
-				$texte .= "<a href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
+				if ($javascript) {
+					$jj = ereg_replace("::deb::", "&$tmp_var=$deb", $javascript);
+					$texte .= "<a onMouseOver=\"this.href='javascript:$jj;'; \" href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
+				}
+				else $texte .= "<a href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
 			}
 		}
+	
+		if ($javascript) {
+			$id_img = "img_".substr($tmp_var, 2, strlen($tmp_var));
+			$texte .= "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; margin-left: 10px; border: 0px; vertical-align: middle;' />";
+		}
+
 		if ($spip_display != 4) {
 			$texte .= "</td>\n";
 			$texte .= "<td class=\"arial2\" style='border-bottom: 1px solid #444444; text-align: $spip_lang_right;' colspan=\"1\" align=\"right\" valign=\"top\">";
@@ -538,14 +550,20 @@ function afficher_tranches_requete(&$query, $colspan) {
 		} else {
 			$link = new Link;
 			$link->addVar($tmp_var, -1);
-			$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</A>";
+				if ($javascript) {
+					$jj = ereg_replace("::deb::", "&$tmp_var=-1", $javascript);
+					$texte .= "<a onMouseOver=\"this.href='javascript:$jj;'; \" href=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</a>";
+				}
+				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</A>";
 		}
+
 
 		if ($spip_display != 4) $texte .= "</td>\n";
 		if ($spip_display != 4) $texte .= "</tr>\n";
 
 
 		if ($deb_aff != -1) {
+			if ($deb_aff > 0) $deb_aff --;  // Correction de bug: si on affiche "de 1 a 10", alors LIMIT 0,10
 			$query = eregi_replace('LIMIT[[:space:]].*$', '', $query);
 			$query .= " LIMIT $deb_aff, $nb_aff";
 		}
@@ -723,6 +741,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	global $spip_lang_left, $spip_lang_right;
 
 
+
 	$activer_messagerie = "oui";
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
@@ -748,15 +767,52 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if ($options == "avancees")  $ajout_col = 1;
 	else $ajout_col = 0;
 
-	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col);
+	
+	$jjscript["function"] = "afficher_articles";
+	$jjscript["titre_table"] = $titre_table;
+	$jjscript["requete"] = $requete;
+	$jjscript["afficher_visites"] = $afficher_visites;
+	$jjscript["afficher_auteurs"] = $afficher_auteurs;
+	$jjscript = addslashes(serialize($jjscript));
+	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
+
+	$tmp_var = substr(md5($jjscript), 0, 4);
+	
+	
+	// Voir si deja stocke
+	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+	if ($row = spip_fetch_array($res_proch)) {
+		$id_ajax_fonc = $row["id_ajax_fonc"];
+	} else {
+		$creer_lien_ajax = true;
+		// Recuperer l'incrementation actuelle d'id_ajax_fonc 
+		// (l'insert ne sera fait qu'apres tranche)
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc ORDER BY id_ajax_fonc DESC LIMIT 0,1");
+		if ($row = spip_fetch_array($res_proch)) {
+			$id_ajax_fonc = $row["id_ajax_fonc"];
+		} 
+		else $id_ajax_fonc = 0;
+		if (!$GLOBALS["t_$tmp_var"]) $id_ajax_fonc ++;
+	}
+		
+	$javascript = "charger_id_url(\'ajax_page.php?id_ajax_fonc=$id_ajax_fonc::deb::\',\'$tmp_var\')";
+	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
+
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
 	if (strlen($tranches) OR $toujours_afficher) {
 		$result = spip_query($requete);
 
-		// if ($afficher_cadre) debut_cadre_gris_clair("article-24.gif");
 
+		if (!$GLOBALS["t_$tmp_var"]) {
+			if ($creer_lien_ajax) {
+				include_ecrire ("inc_abstract_sql.php3");
+				$id_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, fonction, variables, hash, date)", "($connect_id_auteur, 'afficher_articles', '$jjscript', $hash, NOW())");
+			}
+			echo "<div id='$tmp_var'>";
+		
+		}
 
 		echo "<div style='height: 12px;'></div>";
 		echo "<div class='liste'>";
@@ -880,6 +936,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		//echo "</table>";
 		echo afficher_liste_fin_tableau();
 		echo "</div>";
+		
+		if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
+		
 		//if ($afficher_cadre) fin_cadre_gris_clair();
 
 	}

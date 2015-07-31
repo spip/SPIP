@@ -1045,6 +1045,10 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_mots CHANGE type type TEXT NOT NULL");
 		maj_version(1.822);
 	}
+	// ajouter une table de fonctions pour ajax
+	if ($version_installee < 1.825) {
+		maj_version(1.825);
+	}
 
 	return true;
 }

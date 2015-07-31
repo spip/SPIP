@@ -332,6 +332,20 @@ $spip_signatures_key = array(
 		"KEY idx"		=> "idx",
 		"KEY statut" => "statut");
 
+
+$spip_ajax_fonc = array(
+		"id_ajax_fonc" => "bigint(21) NOT NULL",
+		"id_auteur" => "bigint(21) NOT NULL",
+		"fonction" => "varchar(50) DEFAULT '0' NOT NULL",
+		"variables" => "text NOT NULL",
+		"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+		"`hash`"	=> "BIGINT UNSIGNED NOT NULL" );
+
+$spip_ajax_fonc_key = array(
+		"PRIMARY KEY"		=> "id_ajax_fonc",
+		"KEY `hash`"	=> "`hash`");
+
+
 global $tables_principales;
 
 /// Attention: mes_fonctions peut avoir deja defini cette variable
@@ -363,5 +377,7 @@ $tables_principales['spip_forum'] =
 	array('field' => &$spip_forum,	'key' => &$spip_forum_key);
 $tables_principales['spip_signatures'] =
 	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key);
+$tables_principales['spip_ajax_fonc'] =
+	array('field' => &$spip_ajax_fonc, 'key' => &$spip_ajax_fonc_key);
 
 ?>
