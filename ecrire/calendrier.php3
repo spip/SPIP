@@ -73,7 +73,7 @@ if (!_DIR_RESTREINT)
  else debut_html($titre);
 
 $f = 'http_calendrier_init_' . $type;
-echo $f($jour,$mois,$annee, $date);
+echo $f($jour,$mois,$annee, $date, $GLOBALS['PHP_SELF']);
 
 if (!_DIR_RESTREINT) fin_page(); else 	echo "</body></html>\n";
 

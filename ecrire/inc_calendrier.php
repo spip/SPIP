@@ -143,7 +143,7 @@ function http_calendrier_ics($evenements, $amj = "")
 
 # affiche un mois en grand, avec des tableau de clics vers d'autres mois
 
-function http_calendrier_init_mois($premier_jour, $mois, $annee, $date)
+function http_calendrier_init_mois($premier_jour, $mois, $annee, $date, $script)
 {
 	global $spip_lang_left, $largeur_table, $largeur_gauche, $spip_ecran;
 
@@ -608,9 +608,9 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
 {
   global $bleu, $jaune, $vert;
   $href = "message_edit.php3?rv=$annee-$mois-$jour&new=oui";
-
+  $script = 'calendrier.php3' ; // ok pour espace de redac, pas pour public
   return "\n" .
-    http_href("calendrier.php3?type=jour&jour=$jour&mois=$mois&annee=$annee", $clic) .
+    http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee", $clic) .
     "\n" .
     (_DIR_RESTREINT ? '' : (
     http_href("$href&type=pb", 
@@ -733,8 +733,9 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 
 // Calcule un agenda mensuel et l'affiche
 
-function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false,  $script='calendrier.php3?', $ancre='') {
+function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false,  $script='', $ancre='') {
 
+  if (!$script) $script =  'calendrier.php3?' ;
   if (!$mois) {$mois = 12; $annee--;}
   elseif ($mois==13) {$mois = 1; $annee++;}
   return 
@@ -1097,7 +1098,8 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 }
 
 
-function http_calendrier_init_jour($jour_today,$mois_today,$annee_today, $date){
+function http_calendrier_init_jour($jour_today,$mois_today,$annee_today, $date, $script){
+
 	global $largeur_table, $largeur_gauche, $spip_ecran;
 	$jour = journum($date);
 	$mois = mois($date);
@@ -1122,7 +1124,7 @@ function http_calendrier_init_jour($jour_today,$mois_today,$annee_today, $date){
 	}
 	$retour .= "\n<td width='$largeur_centre' valign='top'>"  .
 		"<div>" .
-		http_calendrier_navigation_jour($jour,$mois,$annee, $GLOBALS['echelle'], 'calendrier.php3', '') .
+		http_calendrier_navigation_jour($jour,$mois,$annee, $GLOBALS['echelle'], $script, '') .
 		"</div>".
 		http_calendrier_jour($jour,$mois,$annee, "large") .
 		'</td>';
@@ -1139,7 +1141,7 @@ function http_calendrier_init_jour($jour_today,$mois_today,$annee_today, $date){
 	return $retour;
 }
 
-function http_calendrier_init_semaine($jour_today,$mois_today,$annee_today,$date)
+function http_calendrier_init_semaine($jour_today,$mois_today,$annee_today,$date, $script)
 {
 	global $spip_ecran, $spip_lang_left, $couleur_claire;	
 	
@@ -1170,7 +1172,7 @@ function http_calendrier_init_semaine($jour_today,$mois_today,$annee_today,$date
 		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>" .
 		"<td width='$largeur_table' valign='top'>" .
 		http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, 			$articles, $breves, $messages,
-			'calendrier.php3',
+			$script,
 			'') .
 		"</td></tr></table>" .
 		(!(strlen($breves["0"]) > 0 OR $articles["0"] > 0) ? '' :
@@ -1187,6 +1189,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	global $calendrier_message_fermeture;
 	global $partie_cal;
 	
+	$script =  'calendrier.php3' ; // ok pour espace de redac, pas pour public
 	if ($partie_cal == "soir") {
 		$debut_cal = 12;
 		$fin_cal = 23;
@@ -1221,14 +1224,14 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 
 	if ($large == "col" ) {
 	  $entete = "<div align='center' style='padding: 5px;'><b class='verdana1'>" .
-	    http_href("calendrier.php3?type=jour&jour=$jour&mois=$mois&annee=$annee",
+	    http_href("$script?type=jour&jour=$jour&mois=$mois&annee=$annee",
 				 affdate_jourcourt("$annee-$mois-$jour"),
 				 '',
 				 'color:black;') .
 	    "</b></div>";
 	}
 	else {
-		if ($large == "large") 
+	  if (($large == "large") && !_DIR_RESTREINT)
 			$entete = "<div align='center' style='padding: 5px;'>" .
 			http_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb",
 				$bleu ._T("lien_nouvea_pense_bete"),
