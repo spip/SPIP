@@ -165,9 +165,11 @@ if ($options == "avancees") {
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 		echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
 
-		if ($forums_publics<>'abo'
-		AND !spip_num_rows(spip_query("SELECT id_article
-		FROM spip_articles WHERE accepter_forum='abo'"))) {
+		if ($n = ($forums_publics<>'abo')) {
+			$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles WHERE accepter_forum='abo' LIMIT 1"));
+			$n = !$n['n'];
+		}
+		if ($n) {
 			echo _T('info_question_accepter_visiteurs');
 			echo "</TD></TR>";
 			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";

@@ -52,9 +52,7 @@ function demander_conversion($tables_a_convertir, $action) {
 		ecrire_metas();
 		foreach ($tables_a_convertir as $table => $champ) {
 			spip_log("demande update charset table $table ($champ)");
-			spip_query("UPDATE $table
-			SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)
-			WHERE $champ NOT LIKE '<CONVERT %'");
+			spip_query("UPDATE $table SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)	WHERE $champ NOT LIKE '<CONVERT %'");
 		}
 		return;
 	}
@@ -128,8 +126,7 @@ function exec_convert_utf8_dist() {
 
 	foreach ($tables_a_convertir as $table => $champ) {
 		echo "<br /><b>$table</b> &nbsp; ";
-		$s = spip_query("SELECT * FROM $table
-		WHERE $champ LIKE '<CONVERT %'");
+		$s = spip_query("SELECT * FROM $table WHERE $champ LIKE '<CONVERT %'");
 
 		// recuperer 'id_article' (encore un truc a faire dans table_objet)
 		preg_match(',^spip_(.*?)s?$,', $table, $r);
@@ -152,20 +149,19 @@ function exec_convert_utf8_dist() {
 					$query[] = "$c='".addslashes($v)."'";
 			}
 
+			$set = join(', ', $query);
+			$where = "$id_champ = ".$t[$id_champ];
 			// Cette query ne fait que retablir les donnees existantes
-			$query = "UPDATE $table SET ".join(', ', $query)."
-			WHERE $id_champ = ".$t[$id_champ];
+			
+			$query = "UPDATE $table SET $set WHERE $where" ;
 
 			// On l'enregistre telle quelle sur le fichier de sauvegarde
 			if ($f) fwrite($f, $query.";\n");
 
 			// Mais on la transcode
+			// en evitant une double conversion
 			if ($charset_source != 'utf-8') {
-				spip_query(unicode_to_utf_8(charset2unicode($query, $charset_source)) .
-
-					# eviter une double conversion
-					" AND $champ LIKE '<CONVERT %'"
-					   );
+				spip_query("UPDATE $table SET " . unicode_to_utf_8(charset2unicode($set, $charset_source)) . " WHERE " . unicode_to_utf_8(charset2unicode($where, $charset_source)) . " AND $champ LIKE '<CONVERT %'");
 				echo '.           '; flush();
 			}
 		}
