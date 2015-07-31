@@ -7,30 +7,23 @@ define("_ECRIRE_INC_TEXTE", "1");
 
 include_local("inc_filtres.php3");
 
-function tester_variable($nom_var, $val){
-	if ($_GET[$nom_var] OR $GLOBALS['HTTP_GET_VARS'][$nom_var]) {
-		$GLOBALS[$nom_var] = $val;
-	}
-	else if (!$GLOBALS[$nom_var]) {
-		$GLOBALS[$nom_var] = $val;
-	}
-}
-
-
 //
 // Initialisation de quelques variables globales
-// (on peut les modifier dans mes_fonctions.php3)
+// (on peut les modifier globalement dans mes_fonctions.php3,
+//  OU individuellement pour chaque type de page dans article.php3,
+//  rubrique.php3, etc. cf doc...)
+// Par securite ne pas accepter les variables passees par l'utilisateur
 //
-/*
-$GLOBALS['debut_intertitre'] = "\n&nbsp;<h3 class=\"spip\">\n";   // sale mais historique
-$GLOBALS['fin_intertitre'] = "\n</h3><br>\n";
-$GLOBALS['ouvre_ref']  = '&nbsp;[';
-$GLOBALS['ferme_ref']  = ']';
-$GLOBALS['ouvre_note'] = '[';
-$GLOBALS['ferme_note'] = '] ';
-$GLOBALS['les_notes']  = '';
-$GLOBALS['compt_note'] = 0;
-*/
+function tester_variable($nom_var, $val){
+	if (! $GLOBALS[$nom_var]
+		OR $_GET[$nom_var] OR $GLOBALS['HTTP_GET_VARS'][$nom_var]
+		OR $_PUT[$nom_var] OR $GLOBALS['HTTP_PUT_VARS'][$nom_var]
+		OR $_POST[$nom_var] OR $GLOBALS['HTTP_POST_VARS'][$nom_var]
+		OR $_COOKIE[$nom_var] OR $GLOBALS['HTTP_COOKIE_VARS'][$nom_var]
+		OR $_REQUEST[$nom_var]
+	)
+		$GLOBALS[$nom_var] = $val;
+}
 
 tester_variable('debut_intertitre', "\n&nbsp;<h3 class=\"spip\">\n");   // sale mais historique
 tester_variable('fin_intertitre', "\n</h3><br>\n");
