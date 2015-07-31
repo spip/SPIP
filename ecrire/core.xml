@@ -330,7 +330,10 @@
 	<pipeline><nom>taches_generales_cron</nom><action></action></pipeline>
 	<pipeline><nom>rechercher_liste_des_champs</nom><action></action></pipeline>
 	<pipeline><nom>rechercher_liste_des_jointures</nom><action></action></pipeline>
-	<pipeline><nom>recuperer_fond</nom><action></action></pipeline>
+	<pipeline><nom>recuperer_fond</nom>
+		<action>f_recuperer_fond</action>
+		<inclure>inc/pipelines.php</inclure>
+	</pipeline>
 	<pipeline><nom>styliser</nom><action></action></pipeline>
 	<pipeline><nom>trig_calculer_prochain_postdate</nom><action></action></pipeline>
 	<pipeline><nom>trig_calculer_langues_rubriques</nom><action></action></pipeline>

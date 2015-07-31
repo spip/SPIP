@@ -68,4 +68,25 @@ function f_boite_infos($flux) {
 	return $flux;
 }
 
+
+/**
+ * Branchement automatise de affiche_gauche, affiche_droite, affiche_milieu
+ * pour assurer la compat avec les versions precedentes des exec en php
+ *
+ * Les pipelines ne recevront plus exactement le meme contenu en entree,
+ * mais la compat multi vertions pourra etre assuree
+ * par une insertion au bon endroit quand le contenu de depart n'est pas vide
+ * 
+ * @param array $flux
+ */
+function f_afficher_blocs_ecrire($flux) {
+	if (strncmp($flux['args']['fond'],"prive/squelettes/navigation/",28)==0)
+		$flux['data'] = pipeline('affiche_gauche',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']));
+	if (strncmp($flux['args']['fond'],"prive/squelettes/extra/",23)==0)
+		$flux['data'] = pipeline('affiche_droite',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']));
+	if (strncmp($flux['args']['fond'],"prive/squelettes/contenu/",25)==0)
+		$flux['data'] = pipeline('affiche_milieu',array('args'=>$flux['args']['contexte'],'data'=>$flux['data']));
+
+	return $flux;
+}
 ?>
