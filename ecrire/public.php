@@ -38,7 +38,7 @@ if (isset($GLOBALS['_INC_PUBLIC'])) {
 
 	// fond demande dans l'url par page=xxxx ?
 	else if (isset($_GET[_SPIP_PAGE])) {
-		$fond = $_GET[_SPIP_PAGE];
+		$fond = (string)$_GET[_SPIP_PAGE];
 
 		// Securite
 		if (strstr($fond, '/')

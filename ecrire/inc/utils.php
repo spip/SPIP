@@ -210,6 +210,16 @@ function set_request($var, $val = NULL, $c=false) {
 	return false; # n'affecte pas $c
 }
 
+
+/**
+ * Tester si une url est absolue
+ * @param  $url
+ * @return bool
+ */
+function tester_url_absolue($url){
+	return preg_match(";^([a-z]+:)?//;Uims",trim($url))?true:false;
+}
+
 //
 // Prend une URL et lui ajoute/retire un parametre.
 // Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
