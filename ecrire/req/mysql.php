@@ -40,7 +40,7 @@ function req_mysql_dist($host, $port, $login, $pass, $db='', $prefixe='') {
 	if ($port != "0") {
 		$link = mysqli_connect($host, $login, $pass, $db, $port);
 	} elseif (strpos($host,':')) {
-		list($host,$port) = split(':',$host);
+		list($host,$port) = explode(':',$host);
 		$link = mysqli_connect($host, $login, $pass, $db, $port);
 	} else {
 		$link = mysqli_connect($host, $login, $pass);
