@@ -143,12 +143,14 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[0]))
 		$quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
 	else
-		$quoi = '$Pile[0]["recherche"]';
+		$quoi = '@$Pile[0]["recherche"]';
 
 	// Ne pas executer la requete en cas de hash vide
 	$boucle->hash = '
 	// RECHERCHE
+	spip_timer("rech");
 	list($rech_select, $rech_where) = prepare_recherche('.$quoi.', "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$t.'", "'.$crit->cond.'");
+	spip_log("indexation ".'.$quoi.'." : ".spip_timer("rech"));
 	';
 
 	// Sauf si le critere est conditionnel {recherche ?}

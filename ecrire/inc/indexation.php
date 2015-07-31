@@ -701,23 +701,6 @@ function purger_index() {
 		spip_query("DELETE FROM spip_index_dico");
 }
 
-// cree la requete pour une recherche en txt integral
-// http://doc.spip.org/@requete_txt_integral
-function requete_txt_integral($table, $hash_recherche) {
-	$index_table = "spip_index";
-	$id_objet = primary_index_table($table);
-	$id_table = id_index_table($table);
-	return array(
-		     'SELECT' => "objet.*, SUM(rec.points) AS points",
-		     'FROM' => "$table AS objet, $index_table AS rec",
-		     'WHERE' => "objet.$id_objet = rec.id_objet
-AND rec.hash IN ($hash_recherche)
-AND rec.id_table = $id_table",
-		     'GROUP BY' => "objet.$id_objet",
-		     'ORDER BY' => "points DESC",
-		     'LIMIT' => "10");
-}
-
 // rechercher un mot dans le dico
 // retourne deux methodes : lache puis strict
 // http://doc.spip.org/@requete_dico
