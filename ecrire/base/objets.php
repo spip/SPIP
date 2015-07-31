@@ -329,7 +329,6 @@ function lister_tables_objets_sql($table_sql=null, $desc=array()){
 						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = array_merge($GLOBALS[$principale_ou_auxiliaire][$table][$k],$mem[$k]);
 					else
 						$GLOBALS[$principale_ou_auxiliaire][$table][$k] = $mem[$k];
-				var_dump($GLOBALS[$principale_ou_auxiliaire][$table]);
 			}
 		}
 		$deja_la = false;
