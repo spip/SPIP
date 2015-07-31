@@ -83,7 +83,7 @@ function document_et_vignette($document, $url, $portfolio = false) {
 		if (!_DIR_RESTREINT)
 			$image = prive_lien_image_reduite ($document['largeur'], $document['hauteur'], $document['fichier']);
 		else
-			$image = reduire_image($document['fichier']);
+			$image = reduire_image(copie_locale($document['fichier']));
 	}
 
 	if (!$image) {
