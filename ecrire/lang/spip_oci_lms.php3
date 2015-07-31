@@ -164,6 +164,11 @@ la documentacion d\'SPIP</a>.',
 'bouton_voir_message' => 'Veire queu messatge avans de lo validar',
 
 
+// C
+'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo podetz sincronizar emb l\'actualitat dau sit.',
+'calendrier_synchro_lien' => 'Anar querre lo fichier <i>iCal</i>',
+
+
 // D
 'date_avant_jc' => 'avans lo Crist',
 'date_fmt_heures_minutes' => '@h@h@m@min',
@@ -385,6 +390,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_ecrire_nouvel_article' => 'Las brevas contengudas dins quela rubrica',
 'icone_edition_site' => 'Edicion dau sit',
 'icone_envoyer_message' => 'Mandar queu messatge',
+'icone_etat_traductions' => 'Ont ne\'n son las reviradas',
 'icone_evolution_visites' => 'Evolucion de las vesitas<br>@visites@ vesitas@aff_ref@',
 'icone_evolution_visites_2' => 'Evolucion de las vesitas',
 'icone_forum_administrateur' => 'Forum daus administrators',
@@ -1178,8 +1184,10 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'onglet_affacer_base' => 'Esfa&ccedil;ar la basa',
 'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'autor',
+'onglet_bilan_traductions' => 'Bilan&ccedil; de las reviradas',
 'onglet_calendrier' => 'Chalendier',
 'onglet_contenu_site' => 'Contengut dau sit',
+'onglet_detail_traductions' => 'Los articles de revirar',
 'onglet_evolution_visite_mod' => 'Evolucion',
 'onglet_fonctions_avances' => 'Foncions avan&ccedil;adas',
 'onglet_informations_personnelles' => 'Informacions personalas',
@@ -1275,6 +1283,7 @@ Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</
 'texte_auteur_messagerie' => 'Queu sit vos p&ograve;t indicar de contunha la tiera daus redactors connectats, &ccedil;&ograve; que vos permet d\'eschamjar daus messatges en directe (quand la messatjari&aacute; es desactivada &ccedil;ai subre, quitament la tiera daus redactors es desactivada). Podetz decidir de pas apar&eacute;isser dins quela tiera (setz "invisible/a" per los autres utilizaires).',
 'texte_auteur_messagerie_1' => 'Queu sit permet d\'eschamjar daus messatges e de constituir daus forums de discussion privats entre los participants dau sit. Podetz decidir de pas participar a quilhs eschamges.',
 'texte_auteurs' => 'LOS AUTORS',
+'texte_bilan_traductions' => 'Dins queu grafic, las barras verdas representan los articles revirats e actualizats, las barras rojas las reviradas que son d\'actualizar.',
 'texte_breves' => 'Las brevas son daus texts corts e simples que permeten de metre en linha regde de las informacions concisas, de gerir
  una revista de premsa, un chalendier d\'eveniments...',
 'texte_choix_base_1' => 'Chausissetz v&ograve;stra basa:',
@@ -1402,6 +1411,15 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_nouvelle_version_spip_1' => 'Avetz installada una version novela d\'SPIP.',
 'texte_nouvelle_version_spip_2' => 'Questa version novela demanda una actualizacion mai completa que de costuma. Se setz webmestre/webmestra dau sit, volhatz esfa&ccedil;ar lo fichier <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar prene l\'installacion per fin d\'actualizar v&ograve;stres parametres de connexion a la basa de donadas.<p> (NB: s\'avetz oblidat v&ograve;stres parametres de connexion, agachatz lo fichier  <tt>inc_connect.php3</tt> avans de lo suprimir...)',
 'texte_operation_echec' => 'Tornatz a la pagina precedenta, chausissetz una autra basa o creatz-ne\'n una novela. Verificatz las informacions que v&ograve;stre auberjador a fornidas.',
+'texte_plan_trad' => 'Quela pagina vos permet de visualizar l\'estat de las reviradas per la lenga chausida. 
+  La pagina aficha los articles que son a se revirar, los articles que chau actualizar lor revirada 
+  e los articles que son pas enquera revirats. ',
+'texte_plan_trad_en_cours' => 'Queu simbeu indica qu\'un article es en cors de revirada: qu&ograve; v&ograve;u dire qu\'an comen&ccedil;ada
+  \'na revirada mas que l\'an pas enquera publicada. Clicatz sus lo simbeu per accedir
+  a la revirada. ',
+'texte_plan_trad_modif' => 'Queu simbeu indica qu\'an modificat un article ja revirat. En queu cas, se conselha d\'actualizar la
+  revirada en foncion de las modificacions portadas a l\'article originau. ',
+'texte_plan_trad_note' => 'N&ograve;ta: quela pagina aficha sonque los articles revirats.',
 'texte_plus_trois_car' => 'mai de 3 caracters',
 'texte_plusieurs_articles' => 'Mai d\'un autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor indicada coma predefinida conven en generau.)',
@@ -1512,6 +1530,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_breve_refusee' => 'Breva refusada',
 'titre_breves' => 'Las brevas',
 'titre_cadre_afficher_article' => 'Afichar los articles',
+'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las reviradas per quela lenga',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',
 'titre_cadre_forum_administrateur' => 'Forum privat daus administrators',
 'titre_cadre_forum_interne' => 'Forum interne',
@@ -1545,7 +1564,6 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
 'titre_liens_entrants' => 'Los liams entrants per uei',
-'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_mots_cles_dans_forum' => 'Mots claus dins los forums dau sit public',
 'titre_mots_tous' => 'Los mots claus',
@@ -1569,6 +1587,7 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_page_controle_petition' => 'Segut de las peticions',
 'titre_page_delete_all' => 'supression totala e irreversibla',
 'titre_page_documents_liste' => 'Los documents de las rubricas',
+'titre_page_etat_traductions' => 'Estat de las reviradas',
 'titre_page_forum' => 'Forum per los administrators',
 'titre_page_forum_envoi' => 'Mandar un messatge',
 'titre_page_forum_suivi' => 'Segut daus forums',
@@ -1604,7 +1623,11 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas mai liar queste article a sas reviradas ',
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
 'trad_new' => 'Escriure una revirada novela de queste article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
+
+
+// PLUS_UTILISE
+'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but'
 
 );
 

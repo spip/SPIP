@@ -8,16 +8,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'accueil_site' => 'Portada del sitio',
 'articles' => 'Art&iacute;culos',
+'articles_auteur' => 'Art&iacute;culos de este/a autor/a',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s populares',
 'articles_recents' => 'Los art&iacute;culos m&aacute;s recientes',
-'aucun_article' => '<NEW> Il n\'y a pas d\'article &agrave; cette adresse',
-'aucun_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
-'aucun_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
-'aucune_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'aucune_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
+'articles_rubrique' => 'Art&iacute;culos de esta secci&oacute;n',
+'aucun_article' => 'No hay ning&uacute;n art&iacute;culo en esta direcci&oacute;n ',
+'aucun_auteur' => 'No hay autor ni autora en esta direcci&oacute;n ',
+'aucun_site' => 'No hay ning&uacute;n sitio en esta direcci&oacute;n',
+'aucune_breve' => 'No hay ninguna breve en esta direcci&oacute;n',
+'aucune_rubrique' => 'No hay ninguna secci&oacute;n en esta direcci&oacute;n',
 'autres_breves' => 'Otros breves',
-'autres_groupes_de_mots_clefs' => 'Otros grupos de palabras claves',
-'autres_groupes_mots_clefs' => '<NEW> Autres groupes de mots-cl&eacute;s',
+'autres_groupes_mots_clefs' => 'Otros grupos de palabras clave',
 'autres_sites' => 'Otros sitios',
 
 
@@ -31,31 +32,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'En la misma secci&oacute;n',
 'date' => 'Fecha',
 'dernier_ajout' => '&Uacute;ltimo a&ntilde;ado',
 'dernieres_breves' => '&Uacute;ltimos breves',
 'derniers_articles' => '&Uacute;ltimos art&iacute;culos',
 'derniers_commentaires' => '&Uacute;ltimos comentarios',
-'derniers_messages_des_forums' => '&Uacute;ltimos mensajes publicados en los foros',
-'derniers_messages_forum' => '<NEW> Derniers messages publi&eacute;s dans les forums',
+'derniers_messages_forum' => '&Uacute;ltimos mensajes publicados en los foros',
 
 
 // E
 'edition_mode_texte' => 'Edici&oacute;n en modo texto de',
-'en_reponse' => '<NEW> En r&eacute;ponse &agrave;&nbsp;:',
-'en_resume' => '<NEW> En r&eacute;sum&eacute;',
-'envoyer_message' => '<NEW> Envoyer un message',
-'envoyer_un_message' => '<NEW> Envoyer un message',
-'espace_prive' => '<NEW> Espace priv&eacute;',
+'en_reponse' => 'En respuesta a:',
+'en_resume' => 'En resumen',
+'envoyer_message' => 'Enviar un mensaje',
+'espace_prive' => 'Espacio privado',
 
 
 // F
-'forum' => '<NEW> Forum',
+'forum' => 'Foro',
 
 
 // H
-'hierarchie_site' => '<NEW> Hi&eacute;rarchie du site',
+'hierarchie_site' => 'Jerarqu&iacute;a del sitio',
 
 
 // J
@@ -85,20 +83,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'par_auteur' => '<NEW> par ',
 'participer_site' => '<NEW> Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
-'pas_d_article' => '<NEW> Il n\'y a pas d\'article &agrave; cette adresse',
-'pas_d_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
-'pas_de_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
-'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
-'plan_du_site' => 'Plan del sitio',
 'plan_site' => '<NEW> Plan du site',
 'popularite' => '<NEW> Popularit&eacute;',
 'poster_message' => '<NEW> Poster un message',
-'poster_un_message' => '<NEW> Poster un message',
 
 
 // R
-'repondre_article' => '<NEW> Rpondre ˆ cet article',
+'repondre_article' => '<NEW> R&eacute;pondre &agrave; cet article',
 'repondre_breve' => '<NEW> R&eacute;pondre &agrave; cette br&egrave;ve',
 'repondre_message' => '<NEW> R&eacute;pondre &agrave; ce message',
 'resultats_recherche' => '<NEW> R&eacute;sultats de la recherche',
@@ -119,14 +110,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'test' => 'nada',
-'test2' => 'vaciiiio',
 'texte_lettre_information' => '<NEW> Voici la lettre d\'information du site',
 'texte_lettre_information_2' => '<NEW> Cette lettre recense les articles et les br&egrave;ves publi&eacute;s depuis',
 
 
 // V
-'voir_en_ligne' => '<NEW> Voir en ligne'
+'voir_en_ligne' => '<NEW> Voir en ligne',
+
+
+// PLUS_UTILISE
+'autres_groupes_de_mots_clefs' => 'Otros grupos de palabras claves',
+'dans_meme_rubrique' => 'En la misma secci&oacute;n',
+'derniers_messages_des_forums' => '&Uacute;ltimos mensajes publicados en los foros',
+'envoyer_un_message' => '<NEW> Envoyer un message',
+'pas_d_article' => '<NEW> Il n\'y a pas d\'article &agrave; cette adresse',
+'pas_d_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
+'pas_de_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
+'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
+'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
+'plan_du_site' => 'Plan del sitio',
+'poster_un_message' => '<NEW> Poster un message',
+'test' => 'nada',
+'test2' => 'vaciiiio'
 
 );
 
