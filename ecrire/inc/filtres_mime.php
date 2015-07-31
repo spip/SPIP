@@ -69,7 +69,8 @@ function filtre_text_csv_dist($t)
 
 	$lignes = explode("\n", $corps);
 	// retrait des lignes vides finales
-	while(preg_match("/^$sep*$/", $lignes[count($lignes)-1]))
+	while(count($lignes) > 0
+	AND preg_match("/^$sep*$/", $lignes[count($lignes)-1]))
 	  unset($lignes[count($lignes)-1]);
 	//  calcul du  nombre de colonne a chaque ligne
 	$nbcols = array();
