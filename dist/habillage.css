@@ -53,10 +53,11 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 
 #page { position: relative; width: 58em; margin: 0 auto; text-align: left; }
 
-#top { width: 58em; margin: 0; padding-top: 1em; border-bottom: 1px solid #8B6F92; }
-#top #nom_site_spip, #top a .spip_logos { font-size: 2em; font-family: Georgia, Times, serif; }
+#top { width: 58em; margin: 0; padding-top: 1em; border-bottom: 2px solid #8B6F92; }
+#top a img.spip_logos { vertical-align: bottom; line-height: 1em; }
+#top #nom_site_spip { font-size: 2.2em; font-family: Georgia, Times, serif; }
 #top #formulaire_recherche { position: absolute; right: 0; top: 1em; text-align: right; }
-#top #formulaire_recherche input.text { width: 12em; text-align: left; }
+#top #formulaire_recherche input.text { width: 10em; text-align: left; }
 
 #conteneur { clear: both; float: left; width: 67%; overflow: hidden; }
 #contenu { padding-top: 0.30em; }
@@ -64,8 +65,8 @@ body { background: #FFF; margin: 0; padding: 0; text-align: center; }
 #navigation { float: right; width: 30%; margin-top: 1em; overflow: hidden; }
 #extra { float: right; clear: right; width: 30%; margin-top: 1em; overflow: hidden; }
 
-#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.92em; }
-#pied img { vertical-align: bottom; }
+#pied { clear: both; width: 100%; margin: 0; padding: 0.40em 0; border-top: 1px solid #8B6F92; text-align: center; font-size: 0.90em; }
+#pied img { vertical-align: middle; }
 
 /* Espaceur de blocs */
 .nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
@@ -138,8 +139,6 @@ ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; border-bottom: 1px dotted #E0E0E0; }
 ul ul ul ul ul .forum-chapo { background: #FFF; }
-
-ul .forum-message.on {border:2px solid #666;background:#eee;}
 
 
 /* Habillage des petitions
