@@ -218,16 +218,6 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 	$id = sql_insertq($table_sql, $champs);
 
 	if ($id){
-		pipeline('post_insertion',
-			array(
-				'args' => array(
-					'table' => $table_sql,
-					'id_objet' => $id,
-				),
-				'data' => $champs
-			)
-		);
-
 		// controler si le serveur n'a pas renvoye une erreur
 		// et associer l'auteur sinon
 		// si la table n'a pas deja un champ id_auteur
@@ -242,6 +232,17 @@ function objet_inserer($objet, $id_parent=null, $set=null) {
 				auteur_associer($id_auteur, array($objet=>$id));
 		  }
 		}
+
+		pipeline('post_insertion',
+			array(
+				'args' => array(
+					'table' => $table_sql,
+					'id_objet' => $id,
+				),
+				'data' => $champs
+			)
+		);
+
 	}
 
 	return $id;
