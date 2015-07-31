@@ -31,10 +31,17 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 }
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
+
+	if ($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site'])
+		$lang = $GLOBALS['spip_lang'];
+	else
+		$lang='';
+
 	return array('formulaire_recherche', 3600, 
 		array(
 			'lien' => ($lien ? $lien : generer_url_public('recherche')),
-			'recherche' => _request('recherche')
+			'recherche' => _request('recherche'),
+			'lang' => $lang
 		));
 }
 
