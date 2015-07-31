@@ -939,11 +939,13 @@ function parametre_url(url,c,v,sep,force_vide){
 			}
 			// Ajout. Pour une variable, remplacer au meme endroit,
 			// pour un tableau ce sera fait dans la prochaine boucle
-			else if (r[1].substring(-2) != '[]') {
+			else if (r[1].substr(-2) != '[]') {
 				na.push(r[1]+'='+u);
 				ajouts.push(r[1]);
 			}
-			else na.push(args[n]);
+			/* Pour les tableaux ont laisse tomber les valeurs de départ, on
+			remplira à l'étape suivante */
+			// else na.push(args[n]);
 		}
 		else
 			na.push(args[n]);

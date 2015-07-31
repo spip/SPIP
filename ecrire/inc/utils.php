@@ -441,6 +441,11 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 				$url[$n] = $r[1].'='.$u;
 				unset($ajouts[$r[1]]);
 			}
+	// Pour les tableaux on laisse tomber les valeurs de
+  // départ, on remplira à l'étape suivante
+			else {
+	      unset($url[$n]);
+      }
 		}
 	}
 
