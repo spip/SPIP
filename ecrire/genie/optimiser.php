@@ -110,33 +110,6 @@ function optimiser_base_disparus($attente = 86400) {
 	$n+= optimiser_sansref('spip_articles', 'id_article', $res);
 
 
-	# les droits d'auteurs sur une id_rubrique inexistante
-	# (plusieurs entrees seront eventuellement detruites pour chaque rub)
-	$res = sql_select("A.id_objet AS id",
-	 	        "spip_auteurs_liens AS A
-		        LEFT JOIN spip_rubriques AS R
-		          ON A.id_objet=R.id_rubrique",
-			"A.objet='rubrique' AND R.id_rubrique IS NULL");
-
-	$n+= optimiser_sansref('spip_auteurs_liens', 'id_objet', $res, "objet='rubrique'");
-
-	//
-	// Articles
-	//
-
-	sql_delete("spip_articles", "statut='poubelle' AND maj < $mydate");
-
-	# les liens d'auteurs d'articles effaces
-	$res = sql_select("L.id_objet AS id",
-		      "spip_auteurs_liens AS L
-		        LEFT JOIN spip_articles AS A
-		          ON L.id_objet=A.id_article",
-			"L.objet='article' AND A.id_article IS NULL");
-
-	$n+= optimiser_sansref('spip_auteurs_liens', 'id_objet', $res, "objet='article'");
-
-
-
 	//
 	// Auteurs
 	//
