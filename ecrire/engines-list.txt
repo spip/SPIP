@@ -148,4 +148,6 @@ imp(.*)\.free\.fr
 fc\.kayenta\.com
 courrielweb\.cmaisonneuve\.qc\.ca
 (.*)mail\.(.*)\.([a-z]+)$
+webmail([0-9]*)\.wanadoo\.fr
+www\.laposte\.net
 
