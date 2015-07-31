@@ -23,7 +23,7 @@
 			<title>[(#TITRE|texte_backend)]</title>
 			<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 			<date>#DATE</date>
-			<description>[(#INTRODUCTION|texte_backend)]</description>
+			<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
 			<author><BOUCLE23(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE23></author>
 		</item>
 	</BOUCLE1>
@@ -36,7 +36,7 @@
 	      <title>[(#TITRE|texte_backend)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 	      <date>#DATE</date>
-	      <description>[(#INTRODUCTION|texte_backend)]</description>
+	      <description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
 	      <author><BOUCLE_aut2(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2></author>
 	      <dc:creator><BOUCLE_aut2b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut2b></dc:creator>
 	    </item>
@@ -46,7 +46,7 @@
 	      <title>[(#TITRE|texte_backend)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
 	      <date>#DATE</date>
-	      <description>[(#INTRODUCTION|texte_backend)]</description>
+	      <description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#INTRODUCTION|texte_backend)]</description>
 	      <author><BOUCLE_aut3(auteurs){id_article}{","}>[(#NOM|texte_backend)]</BOUCLE_aut3></author>
 	      <dc:creator><BOUCLE_aut3b(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_aut3b></dc:creator>
 	    </item>
