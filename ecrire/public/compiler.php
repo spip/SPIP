@@ -661,7 +661,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	$squelette = transcoder_page($squelette);
 
 	// Hacke un eventuel tag xml "<?xml" pour qu'il ne soit pas traite comme php
-	$squelette = str_replace('<'.'?xml', "#HTTP_HEADER{X-Xml-Hack: ok}[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<\1?xml", $squelette);
+	$squelette = str_replace('<'.'?xml', "#HTTP_HEADER{X-Xml-Hack: ok}<\1?xml", $squelette);
 
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
