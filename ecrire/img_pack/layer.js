@@ -187,7 +187,7 @@ function ajahReady(xhr, f) {
 
 function AjaxSqueeze(trig, id)
 {
-	var i, s;
+	var i, s, g;
 	var u = '';
 	
 	// pere du demandeur dans le DOM (le donner direct serait mieux)
@@ -195,11 +195,13 @@ function AjaxSqueeze(trig, id)
 	if (!noeud) return true;
 
 	if (typeof ajax_image_searching != 'undefined') {
-		noeud.innerHTML = ajax_image_searching + noeud.innerHTML;
+		g = ajax_image_searching + noeud.innerHTML;
 	}
 
-	if (typeof(trig) == 'string')
-	  return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
+	if (typeof(trig) == 'string') {
+		noeud.innerHTML = g;
+		return ajah('GET', trig, null, function(r) { noeud.innerHTML = r;});
+	}
 
 	s = trig.getAttribute('action');
 	for (i=0;i < trig.elements.length;i++) {
@@ -207,6 +209,7 @@ function AjaxSqueeze(trig, id)
 		if (n)  u += n+"="+ encodeURIComponent(trig.elements[i].value) + '&';
 	}
 
+	noeud.innerHTML = g;
 	return !ajah('POST', // ou 'GET'
 		     s ,     // s + '?'+ u,
 		     u,      // null,
