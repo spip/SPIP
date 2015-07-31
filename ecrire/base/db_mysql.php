@@ -23,6 +23,7 @@ define('SPIP_NUM', MYSQL_NUM);
 
 // fonction pour la premiere connexion
 
+// http://doc.spip.org/@base_db_mysql_dist
 function base_db_mysql_dist()
 {
 	// fichier d'init present ?

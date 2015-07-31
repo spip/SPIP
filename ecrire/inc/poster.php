@@ -28,7 +28,7 @@ function get_forums_publics($id_article=0) {
 }
 
 // Cree le formulaire de modification du reglage des forums de l'article
-// http://doc.spip.org/@formulaire_poster
+// http://doc.spip.org/@inc_poster_dist
 function inc_poster_dist($id_article, $script, $args, $flag=false) {
 
 	global $spip_lang_right, $options, $connect_statut;

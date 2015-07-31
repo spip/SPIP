@@ -17,6 +17,7 @@ include_spip('inc/texte');
 include_spip('inc/actions');
 include_spip('inc/date');
 
+// http://doc.spip.org/@inc_dater_dist
 function inc_dater_dist($id_article, $flag, $statut_article, $date, $date_redac)
 {
 	global $spip_lang_left, $spip_lang_right, $options;

@@ -22,7 +22,7 @@ include_spip('inc/presentation');
 // les admins restreints les voient mais 
 // ne peuvent les utiliser que pour mettre un auteur a la poubelle
 
-// http://doc.spip.org/@auteur_voir_rubriques
+// http://doc.spip.org/@inc_instituer_auteur_dist
 function inc_instituer_auteur_dist($id_auteur, $statut, $url_self)
 {
 	global $connect_toutes_rubriques, $connect_id_auteur, $connect_statut, $spip_lang_right, $spip_lang;

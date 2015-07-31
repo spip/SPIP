@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_gadgets_dist
 function exec_gadgets_dist()
 {
 	$id_rubrique = intval(_request('id_rubrique'));

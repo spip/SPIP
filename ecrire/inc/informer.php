@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # Les information d'une rubrique selectionnee dans le mini navigateur
 
+// http://doc.spip.org/@inc_informer_dist
 function inc_informer_dist($id, $col, $exclus, $rac, $type)
 {
 	global $couleur_foncee,$spip_display,$spip_lang_right ;

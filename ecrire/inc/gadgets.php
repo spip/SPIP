@@ -24,6 +24,7 @@ include_spip('inc/presentation');
 //
 
 
+// http://doc.spip.org/@inc_gadgets_dist
 function inc_gadgets_dist($id_rubrique, $gadget)
 {
 	$gadget = 'gadget_' . $gadget;
@@ -469,6 +470,7 @@ function gadget_messagerie() {
 	return $gadget;
 }
 
+// http://doc.spip.org/@repercuter_gadgets
 function repercuter_gadgets($id_rubrique) {
 	if ($_COOKIE['spip_accepte_ajax'] == -1) return '';
 

@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_legender_dist
 function exec_legender_dist()
 {
 	global $id_document, $id, $type, $ancre, $script;

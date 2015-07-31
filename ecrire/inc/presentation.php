@@ -382,6 +382,7 @@ function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $
 // La boite des raccourcis
 // Se place a droite si l'ecran est en mode panoramique.
 
+// http://doc.spip.org/@bloc_des_raccourcis
 function bloc_des_raccourcis($bloc) {
 	global $spip_display;
 
@@ -1839,6 +1840,7 @@ function largeur_icone_bandeau_principal($texte) {
 	return $largeur;
 }
 
+// http://doc.spip.org/@bandeau_principal
 function bandeau_principal($rubrique, $sous_rubrique, $largeur)
 {
 	$res = '';
@@ -2386,6 +2388,7 @@ if (true /*$bandeau_colore*/) {
 }
 
 
+// http://doc.spip.org/@avertissement_messagerie
 function avertissement_messagerie() {
 	global $couleur_foncee;
 	global $connect_id_auteur;
@@ -2402,6 +2405,7 @@ function avertissement_messagerie() {
 }
 
 
+// http://doc.spip.org/@auteurs_recemment_connectes
 function auteurs_recemment_connectes()
 {	
 	global $connect_id_auteur;
@@ -2597,6 +2601,7 @@ function debut_droite($rubrique="", $return= false) {
 	if ($return) return $res; else echo $res;
 }
 
+// http://doc.spip.org/@liste_articles_bloques
 function liste_articles_bloques()
 {
 	global $connect_id_auteur, $couleur_foncee;
@@ -2672,6 +2677,7 @@ function debloquer_article($arg, $texte) {
 	  "</a>";
 }
 
+// http://doc.spip.org/@meme_rubrique
 function meme_rubrique($id_rubrique, $id, $type, $order='date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left, $options;

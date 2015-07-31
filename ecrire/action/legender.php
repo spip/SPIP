@@ -20,6 +20,7 @@ include_spip('inc/actions');
 // spip_register_globals ne fournira donc pas les globales esperees
 // ==> passer par _request() qui simule $_REQUEST sans $_COOKIE
 
+// http://doc.spip.org/@action_legender_dist
 function action_legender_dist() {
 	
 	$var_f = charger_fonction('controler_action_auteur', 'inc');

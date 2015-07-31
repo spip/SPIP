@@ -289,6 +289,7 @@ function code_invalideur_forums($p, $code) {
 
 
 // Fonction permettant au compilo de calculer les invalideurs d'une page
+// http://doc.spip.org/@calcul_invalideurs
 function calcul_invalideurs($corps, $primary, &$boucles, $id_boucle) {
 	if ($primary == 'id_forum'
 	OR in_array($primary, explode(',', $GLOBALS['invalider_caches']))) {

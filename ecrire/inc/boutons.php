@@ -25,7 +25,7 @@ class Bouton {
   var $target= null;  /* pour ouvrir dans une fenetre a part */
   var $sousmenu= null;/* sous barre de boutons / onglets */
 
-  // http://doc.spip.org/@Bouton
+// http://doc.spip.org/@Bouton
   function Bouton($icone, $libelle, $url=null, $urlArg=null,
 				  $url2=null, $target=null) {
 	$this->icone  = $icone;

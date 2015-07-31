@@ -1700,6 +1700,7 @@ function f_jQuery ($texte) {
 
 // Concatenet des chaines
 // #TEXTE|concat{texte1,texte2,...}
+// http://doc.spip.org/@concat
 function concat(){
 	$tous = func_get_args();
 	$texte = "";

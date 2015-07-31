@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/barre');
 
-// http://doc.spip.org/@formulaire_articles_edit
+// http://doc.spip.org/@inc_editer_article
 function inc_editer_article($row, $lier_trad, $new, $champs_article) {
 
 	global $champs_extra, $spip_lang, $options, $spip_ecran, $spip_display;

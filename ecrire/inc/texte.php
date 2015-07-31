@@ -112,11 +112,13 @@ function code_echappement($rempl, $source='') {
 }
 
 // Echapper les <html>...</ html>
+// http://doc.spip.org/@traiter_echap_html_dist
 function traiter_echap_html_dist($regs) {
 	return $regs[3];
 }
 
 // Echapper les <code>...</ code>
+// http://doc.spip.org/@traiter_echap_code_dist
 function traiter_echap_code_dist($regs) {
 	$echap = entites_html($regs[3]);
 	// supprimer les sauts de ligne debut/fin
@@ -140,6 +142,7 @@ function traiter_echap_code_dist($regs) {
 }
 
 // Echapper les <cadre>...</ cadre> aka <frame>...</ frame>
+// http://doc.spip.org/@traiter_echap_cadre_dist
 function traiter_echap_cadre_dist($regs) {
 	$echap = trim(entites_html($regs[3]));
 	$total_lignes = substr_count($echap, "\n") + 1;
@@ -150,10 +153,12 @@ function traiter_echap_cadre_dist($regs) {
 	."</textarea></div></form>";
 	return $echap;
 }
+// http://doc.spip.org/@traiter_echap_frame_dist
 function traiter_echap_frame_dist($regs) {
 	return traiter_echap_cadre_dist($regs);
 }
 
+// http://doc.spip.org/@traiter_echap_script_dist
 function traiter_echap_script_dist($regs) {
 	return $regs[0];
 }
@@ -364,6 +369,7 @@ function interdire_scripts($source) {
 */
 
 // afficher joliment les <script>
+// http://doc.spip.org/@echappe_js
 function echappe_js($t,$class='') {
 	if (preg_match_all(',<script.*?($|</script.),isS', $t, $r, PREG_SET_ORDER))
 	foreach ($r as $regs)
@@ -1123,6 +1129,7 @@ function paragrapher($letexte, $forcer=true) {
 // 2=>double fleche (historiquement, liens ouvrants)
 // 3=>url
 //
+// http://doc.spip.org/@traiter_raccourci_lien
 function traiter_raccourci_lien($regs) {
 
 	// title et hreflang donnes par le raccourci ?

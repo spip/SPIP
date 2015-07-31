@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Affiche un mini-navigateur ajax positionne sur la rubrique $sel
 //
 
+// http://doc.spip.org/@inc_selectionner_dist
 function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_racine=false, $recur=true) {
 
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
@@ -87,7 +88,7 @@ function inc_selectionner_dist ($sel, $idom="",$fonction="", $exclus=0, $aff_rac
 	. "</div></div>\n<div id='$idom3'></div></div>\n";
 }
 
-// http://doc.spip.org/@mini_afficher_hierarchie
+// http://doc.spip.org/@mini_hier
 function mini_hier ($id_rubrique) {
 	
 	$id_parent = $id_rubrique;

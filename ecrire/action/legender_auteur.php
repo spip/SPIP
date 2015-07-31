@@ -17,6 +17,7 @@ include_spip('inc/actions');
 include_spip('inc/acces');
 include_spip('base/abstract_sql');
 
+// http://doc.spip.org/@action_legender_auteur
 function action_legender_auteur()
 {
   global $auteur_session, $bio,
@@ -208,6 +209,7 @@ if ($nom OR $statut) {
  redirige_par_entete($redirect);
 }
 
+// http://doc.spip.org/@admin_general
 function admin_general($id_auteur)
 {
 	include_spip('inc/auth');

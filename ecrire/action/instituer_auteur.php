@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_instituer_collaboration_dist
+// http://doc.spip.org/@action_instituer_auteur_dist
 function action_instituer_auteur_dist() {
 
 	include_spip('inc/actions');

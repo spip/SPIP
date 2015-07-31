@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_editer_mot_dist
 function exec_editer_mot_dist()
 {
 	include_spip('inc/actions');

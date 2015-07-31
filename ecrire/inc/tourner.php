@@ -17,7 +17,7 @@ include_spip('inc/documents');
 include_spip('inc/presentation');
 include_spip('inc/filtres');
 
-// http://doc.spip.org/@formulaire_tourner
+// http://doc.spip.org/@inc_tourner_dist
 function inc_tourner_dist($id_document, $document, $script, $flag, $type)
 {
 	global $spip_lang_right;

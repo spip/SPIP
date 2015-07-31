@@ -59,6 +59,7 @@ function acces_article($id_article)
 	return ($s == 'prepa' OR $s == 'prop' OR $s == 'poubelle');
 }
 
+// http://doc.spip.org/@auteurs_article
 function auteurs_article($id_article, $cond='')
 {
 	return spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article". ($cond ? " AND $cond" : ''));

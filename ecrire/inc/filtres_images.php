@@ -171,6 +171,7 @@ function image_alpha($im, $alpha = 63)
 	return "<img src='$dest'$tags />";
 }
 
+// http://doc.spip.org/@image_recadre
 function image_recadre($im,$width,$height,$position='center')
 {
 	$image = image_valeurs_trans($im, "recadre-$width-$height-$position");
@@ -1356,6 +1357,7 @@ function image_couleur_extraire($img, $x=10, $y=6) {
 	return $GLOBALS["couleur_extraite"]["$fichier-$x-$y"];
 }
 
+// http://doc.spip.org/@couleur_html_to_hex
 function couleur_html_to_hex($couleur){
 	$couleurs_html=array(
 		'aqua'=>'00FFFF','black'=>'000000','blue'=>'0000FF','fuchsia'=>'FF00FF','gray'=>'808080','green'=>'008000','lime'=>'00FF00','maroon'=>'800000',

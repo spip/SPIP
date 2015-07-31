@@ -16,7 +16,7 @@ include_spip('inc/presentation');
 include_spip('inc/actions');
 include_spip('base/abstract_sql');
 
-// http://doc.spip.org/@afficher_groupe_mots
+// http://doc.spip.org/@inc_grouper_mots_dist
 function inc_grouper_mots_dist($id_groupe, $cpt) {
 	global $connect_statut, $spip_lang_right, $spip_lang;
 
@@ -131,6 +131,7 @@ function afficher_groupe_mots_boucle($row, $occurrences, $total)
 	return $vals;			
 }
 
+// http://doc.spip.org/@generer_supprimer_mot
 function generer_supprimer_mot($id_mot, $id_groupe, $clic, $total)
 {
 	$cont = ($total > 1)

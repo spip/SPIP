@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('action/supprimer');
 
+// http://doc.spip.org/@action_documenter_dist
 function action_documenter_dist()
 {
 	$var_f = charger_fonction('controler_action_auteur', 'inc');

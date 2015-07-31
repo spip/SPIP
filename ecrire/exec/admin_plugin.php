@@ -300,6 +300,7 @@ function ligne_plug($plug_file, $actif, $id){
 	return $s;
 }
 
+// http://doc.spip.org/@affiche_bloc_plugin
 function affiche_bloc_plugin($plug_file, $info) {
 	$s .= debut_block_invisible("$plug_file");
 	$s .= "<div class='detailplugin'>";

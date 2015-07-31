@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
 
+// http://doc.spip.org/@inc_iconifier_dist
 function inc_iconifier_dist($id_objet, $id,  $script) {
 
 	$texteon = $GLOBALS['logo_libelles'][($id OR $id_objet != 'id_rubrique') ? $id_objet : 'id_racine'];

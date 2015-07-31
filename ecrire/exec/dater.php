@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@exec_dater_dist
 function exec_dater_dist()
 {
 	global $id_article;

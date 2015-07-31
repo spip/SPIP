@@ -22,6 +22,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// http://doc.spip.org/@interprete_argument_balise
 function interprete_argument_balise($n,$p){
 	if (($p->param) && (!$p->param[0][0]) && (count($p->param[0])>$n))
 		return calculer_liste($p->param[0][$n],
@@ -1252,7 +1253,7 @@ function balise_GET_dist($p) {
 // #PIPELINE{insert_body}
 // #PIPELINE{insert_body,flux}
 //
-// http://doc.spip.org/@balise_INSERT_HEAD_dist
+// http://doc.spip.org/@balise_PIPELINE_dist
 function balise_PIPELINE_dist($p) {
 	$_pipe = interprete_argument_balise(1,$p);
 	$_flux = interprete_argument_balise(2,$p);

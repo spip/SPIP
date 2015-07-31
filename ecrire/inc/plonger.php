@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@mini_afficher_rubrique
+// http://doc.spip.org/@inc_plonger_dist
 function inc_plonger_dist($id_rubrique, $idom="", $list=array(), $col = 1, $exclu=0) {
 	global  $spip_lang_left;
 	

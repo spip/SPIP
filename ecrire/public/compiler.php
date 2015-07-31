@@ -133,6 +133,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 // il suffit (ET IL FAUT) sauvegarder les valeurs des arguments passes par
 // reference, car par definition un tel passage ne les sauvegarde pas
 
+// http://doc.spip.org/@calculer_boucle_rec
 function calculer_boucle_rec($id_boucle, &$boucles) {
 	$nom = $boucles[$id_boucle]->param[0];
 	return "\n\t\$save_numrows = (\$Numrows['$nom']);"

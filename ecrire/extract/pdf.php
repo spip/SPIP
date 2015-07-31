@@ -51,7 +51,7 @@ class Format_PDF {
 	var $trans_chars;
 	var $flag_mono, $flag_brut;
 
-	// http://doc.spip.org/@convertir_caracteres
+// http://doc.spip.org/@convertir_caracteres
 	function convertir_caracteres($texte) {
 		if (!$this->trans_chars) {
 			// Caracteres speciaux
@@ -75,7 +75,7 @@ class Format_PDF {
 		return $texte;
 	}
 
-	// http://doc.spip.org/@recoller_texte
+// http://doc.spip.org/@recoller_texte
 	function recoller_texte($stream) {
 		static $chars_voyelles, $chars_fusion, $chars_caps, $chars_nums, $bichars_fusion;
 		if (!$chars_voyelles) {
@@ -171,7 +171,7 @@ class Format_PDF {
 		return $extrait;
 	}
 
-	// http://doc.spip.org/@extraire_texte
+// http://doc.spip.org/@extraire_texte
 	function extraire_texte($fichier) {
 
 		$source_len = 1024*1024;

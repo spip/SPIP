@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-// http://doc.spip.org/@formulaire_auteur_infos
+// http://doc.spip.org/@inc_legender_auteur
 function inc_legender_auteur($id_auteur, $auteur, $initial, $ajouter_id_article, $redirect)
 {
 	global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
