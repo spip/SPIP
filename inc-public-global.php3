@@ -7,7 +7,7 @@ define("_INC_PUBLIC_GLOBAL", "1");
 //
 // Aller chercher la page dans le cache ou pas
 //
-function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $inclusion=false) {
+function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $inclusion=false) {
 	global $lastmodified;
 
 	if (!$use_cache) {
@@ -79,8 +79,8 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 // Appeler cette fonction pour obtenir la page principale
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
-	global $flag_preserver, $flag_dynamique, $recalcul, $lastmodified;
-	global $var_preview;
+	global $flag_preserver, $flag_dynamique, $lastmodified;
+	global $var_preview, $var_debug;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
@@ -91,7 +91,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$statut = $GLOBALS['auteur_session']['statut'];
 		if ($statut=='0minirezo' OR
 		(lire_meta('preview')=='1comite' AND $statut=='1comite')) {
-			$recalcul = 'oui';
+			$var_debug = 'recalcul';
 			$delais = 0;
 			$var_preview = true;
 			spip_log('preview !');
@@ -116,8 +116,8 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	// (ici on ne tient pas compte d'une obsolence du cache ou des
 	// eventuels fichiers inclus modifies depuis la date
 	// HTTP_IF_MODIFIED_SINCE du client)
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND $recalcul != oui
-	AND $chemin_cache AND !$flag_dynamique) {
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND !$var_debug
+	    AND $chemin_cache AND !$flag_dynamique) {
 		$lastmodified = @filemtime($chemin_cache);
 		$headers_only = http_last_modified($lastmodified);
 	}
@@ -190,7 +190,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 }
 
 
-function terminer_public_global($use_cache, $chemin_cache='') {
+function terminer_public_global() {
 
 	// Mise a jour des fichiers langues de l'espace public
 	if ($GLOBALS['cache_lang_modifs']) {
@@ -198,9 +198,9 @@ function terminer_public_global($use_cache, $chemin_cache='') {
 		ecrire_caches_langues();
 	}
 
-	// Si on a pu utiliser un cache,
-	// il reste du temps pour une tache de fond, notamment le cache
-	if ($use_cache) {
+	// S'il n'y a pas eu plus de 3 executions de squelette
+	// il reste du temps pour une tache de fond, 
+	if ($GLOBALS['included_files']['inc-calcul.php3'] <= 3) {
 		include_ecrire('inc_cron.php3');
 		spip_cron();
 	}
@@ -262,14 +262,4 @@ function inclure_formulaire($r) {
 	}
 }
 
-//
-// Le bouton des administrateurs
-//
-function admin_page($cached, $texte) {
-	if (!$GLOBALS['flag_preserver']
-	&& ($GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
-		return calcul_admin_page($cached, $texte);
-	}
-	return false; // pas de boutons admin
-}
 ?>

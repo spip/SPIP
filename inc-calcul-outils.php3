@@ -150,7 +150,7 @@ function calculer_formulaire($nom, $args, $filtres) {
 
 	$f = $nom . '_stat';
 	$r = $f($args, $filtres);
-	if (is_string($r))
+	if (!is_array($r))
 		return $r;
 	else { 
 		return

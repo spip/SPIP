@@ -556,7 +556,7 @@ function afficher_compactes($image_name) {
 		echo "<ul>$aff_fichiers</ul>";
 		
 		echo "<div>&nbsp;</div>";
-		echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
+		echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' type='submit' value='"._T('bouton_valider')."'></div>";
 		
 		echo "</form>";
 		install_fin_html();

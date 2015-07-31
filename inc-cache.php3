@@ -13,7 +13,7 @@ define("_INC_CACHE", "1");
 function nettoyer_uri() {
 	$fichier_requete = $GLOBALS['REQUEST_URI'];
 	$fichier_requete = eregi_replace
-		('[?&](submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*',
+		('[?&](PHPSESSID|(var_[^=&]*))=[^&]*',
 		'', $fichier_requete);
 	return $fichier_requete;
 }
@@ -109,39 +109,31 @@ function retire_caches() {
 }
 
 //
-// Doit-on recalculer le cache ?
+// Retourne 0 s'il faut recalculer le cache, 1 sinon
 //
 
-function utiliser_cache(&$chemin_cache, $delais) {
+function utiliser_cache($chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS;
 
-	// Existence du fichier
-	$ok_cache = @file_exists($chemin_cache);
-
-	// Date de creation du fichier
-	if ($ok_cache) {
-		$t = @filemtime($chemin_cache);
-		$age = time() - $t;
-		$age_ok = (($age < $delais) AND ($age >= 0));
-
-		// fichier cache trop vieux ?
-		if (!$age_ok)
-			$ok_cache = false;
-	}
-
-	// recalcul obligatoire
-
-	$recalcul = (($GLOBALS['recalcul'] == 'oui') &&
-		     ($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
-		      || $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
-		      || @file_exists(_ACCESS_FILE_NAME))); # insuffisant...
-
-	$ok_cache &= !$recalcul;
-	// ne jamais recalculer pour les moteurs de recherche, proxies...
+	// ne jamais calculer pour les moteurs de recherche, proxies...
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
-		$ok_cache = true;
-	#spip_log("'$ok_cache'");
-	return $ok_cache;
+		return 1;
+
+	//  calcul par forcage
+
+	if ($GLOBALS['var_debug'] &&
+	    ($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
+	     || $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
+	     || @file_exists(_ACCESS_FILE_NAME))) # insuffisant...
+	  return 0;
+
+	// calcul par absence
+
+	if (!@file_exists($chemin_cache)) return 0;
+
+	// calcul par obsolescence
+
+	return ((time() - @filemtime($chemin_cache)) < $delais) ? 0 : 1;
 }
 
 
@@ -185,7 +177,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 
 	// Le fichier cache est-il valide ?
 	if ($delais == 0 OR !empty($GLOBALS['HTTP_POST_VARS'])) {
-		$use_cache = false;
+		$use_cache = 0;
 		$chemin_cache = '';
 	} else {
 		$use_cache = utiliser_cache($chemin_cache, $delais);
@@ -196,7 +188,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 		include_local(_FILE_CONNECT);
 		if (!$GLOBALS['db_ok']) {
 			if ($chemin_cache AND @file_exists($chemin_cache)) {
-				$use_cache = true;
+				$use_cache = 1;
 			}
 			else {
 				spip_log("Erreur base de donnees & "
@@ -204,7 +196,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 				if (!$GLOBALS['flag_preserver']) {
 					include_ecrire('inc_presentation.php3');
 					install_debut_html(_T('info_travaux_titre'));
-					echo "<p>"._T('titre_probleme_technique')."</p>\n";
+					echo _T('titre_probleme_technique');
 					install_fin_html();
 				}
 				exit;

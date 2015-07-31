@@ -223,7 +223,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$p = strpos($texte, '<BOUCLE'.$nom_boucle);
 
 		// envoyer la boucle au debugueur
-		if ($GLOBALS['var_debug']) {
+		if ($GLOBALS['var_debug']== 'oui') {
 			$preg = "@<B($nom_boucle|OUCLE${nom_boucle}[^-_.a-zA-Z0-9][^>]*)>"
 				. ".*</(BOUCLE|/?B)$nom_boucle>@ms";
 			preg_match($preg, $texte, $match);

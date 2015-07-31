@@ -1,6 +1,6 @@
 <?php
 // redirige vers l'URL canonique de l'article,
-// en passant le parametre recalcul=oui
+// en indiquant recalcul et previsu
 
 include ("ecrire/inc_version.php3");
 
@@ -37,7 +37,7 @@ if (strpos($url,'?')) {
 else {
 	$super='?';
 }
-if ($recalcul) $url .= $super."recalcul=oui";
+if ($recalcul) $url .= $super."var_debug=recalcul";
 else if ($preview) $url .= $super."var_preview=oui";
 @header("Location: $url");
 

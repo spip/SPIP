@@ -16,10 +16,9 @@ include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_documents.php3");
 include_ecrire("inc_abstract_sql.php3");
-include_local("inc-forum.php3");
+include_ecrire("inc_forum.php3");
+include_ecrire("inc_debug_sql.php3");
 include_local("inc-calcul-outils.php3");
-include_local("inc-admin.php3");
-
 
 // Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
 // le repertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
@@ -38,7 +37,7 @@ else
 // Le squelette compile est-il trop vieux ?
 function squelette_obsolete($skel, $squelette) {
 	return (
-		($GLOBALS['recalcul'] == 'oui')
+		$GLOBALS['var_debug']
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
 		OR (@filemtime('mes_fonctions.php3') > $date)
@@ -87,7 +86,6 @@ function charger_squelette ($squelette) {
 	$f = $squelette . '_fonctions.php3';
 	if (@file_exists($f)) include($f);
 
-
 	if (function_exists($nom)) return $nom;
 
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
@@ -96,11 +94,9 @@ function charger_squelette ($squelette) {
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
-		if ($GLOBALS['var_debug']
-		    AND $GLOBALS['debug_objet'] == $nom
-		    AND $GLOBALS['debug_affiche'] == 'code') {
+		if ($GLOBALS['var_debug'] == 'oui') {
 			include_ecrire("inc_debug_sql.php3");
-			debug_dumpfile ($skel_code);
+			debug_dumpfile ($skel_code, $nom, 'code');
 		}
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
@@ -156,12 +152,11 @@ function cherche_page ($cache, $contexte, $fond)  {
 		  $page = $fonc(array('cache' => $cache), array($contexte));
 
 		// Passer la main au debuggueur)
-		if ($GLOBALS['var_debug']
-		    AND $GLOBALS['debug_objet'] == $fonc
-		    AND $GLOBALS['debug_affiche'] == 'resultat') {
+		if ($GLOBALS['var_debug'] == 'oui')
+		  {
 			include_ecrire("inc_debug_sql.php3");
-			debug_dumpfile ($page['texte']);
-		}
+			debug_dumpfile ($page['texte'], $fonc, 'resultat');
+		  }
 	}
 
 	// Nettoyer le resultat si on est fou de XML
@@ -181,14 +176,14 @@ function cherche_page ($cache, $contexte, $fond)  {
 	return $page;
 }
 
-// Etablit le contexte initial a partir des globales
+// Contexte: les parametres HHTP sauf ceux ajoutés par spip + la globale date
 function calculer_contexte() {
 	foreach($GLOBALS['HTTP_GET_VARS'] as $var => $val) {
-		if (!eregi("^(recalcul|submit|var_.*)$", $var))
+		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
 	foreach($GLOBALS['HTTP_POST_VARS'] as $var => $val) {
-		if (!eregi("^(recalcul|submit|var_.*)$", $var))
+		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
 
@@ -273,7 +268,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	serialize($page['signal']))." -->\n";
 
 	// Enregistrer le fichier cache
-	if ($delais > 0 AND !$GLOBALS['var_debug']
+	if ($delais > 0 AND $GLOBALS['var_debug'] != 'oui'
 	AND empty($GLOBALS['HTTP_POST_VARS']))
 		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 

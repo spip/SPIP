@@ -58,10 +58,10 @@ function login($cible, $prive = 'prive') {
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
 		if (($cible != $action) &&  !headers_sent())
 			redirige_par_entete($cible);
-		echo "<a href='$cible'>"._T('login_par_ici')."</a>\n";
-		return;
+		return "<a href='$cible'>"._T('login_par_ici')."</a>\n";
+		;
 	}
-	echo login_pour_tous($cible, $prive, '', $action, $prive?'redac':'forum');
+	return login_pour_tous($cible, $prive, '', $action, $prive?'redac':'forum');
 }
 
 
@@ -75,15 +75,6 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	global $spip_admin;
 	global $php_module;
 
-	$login = $GLOBALS['var_login'];
-	// Le login est memorise dans le cookie d'admin eventuel
-	if (!$login) {
-		if (ereg("^@(.*)$", $spip_admin, $regs))
-			$login = $regs[1];
-	} else if ($login == '-1')
-		$login = '';
-
-	$flag_autres_sources = $GLOBALS['ldap_present'];
 	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
 	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
 	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
@@ -91,7 +82,15 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	if ($GLOBALS['var_echec_cookie'])
 	  $echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
 
-
+	$login = $GLOBALS['var_login'];
+	// Le login est memorise dans le cookie d'admin eventuel
+	if (!$login) {
+		if (ereg("^@(.*)$", $spip_admin, $regs))
+			$login = $regs[1];
+	} else if ($login == '-1')
+	  $login = '';
+		
+	$source_auteur = false ;
 	// quels sont les aleas a passer ?
 	if ($login) {
 		$statut_login = 0; // statut inconnu
@@ -99,30 +98,29 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
 		$row = spip_fetch_array(spip_query($query));
 		if ($row) {
-		  if ($row['statut'] == '5poubelle' OR ($row['source'] == 'spip' AND $row['pass'] == '')) {
+		  $source_auteur = ($row['source'] == 'spip') ;
+		  if ($row['statut'] == '5poubelle' OR ((!$source_auteur) AND $row['pass'] == '')) {
 				$statut_login = -1; // refus
 			} else {
 
 				$statut_login = 1; // login connu
 
 				// Quels sont les aleas a passer pour le javascript ?
-				if ($row['source'] == 'spip') {
-					$id_auteur = $row['id_auteur'];
-					$source_auteur = $row['source'];
+				if ($source_auteur) {
 					$alea_actuel = $row['alea_actuel'];
 					$alea_futur = $row['alea_futur'];
 				}
 
 				// Bouton duree de connexion
-				if ($row['prefs']) {
-					$prefs = unserialize($row['prefs']);
+				if ($prefs = unserialize($row['prefs'])) {
+					
 					$rester_checked = ($prefs['cnx'] == 'perma' ? ' checked=\'checked\'':'');
 				}
 			}
 		}
 
 		// login inconnu (sauf LDAP) ou refuse
-		if ($statut_login == -1 OR ($statut_login == 0 AND !$flag_autres_sources)) {
+		if ($statut_login == -1 OR ($statut_login == 0 AND !$GLOBALS['ldap_present'])) {
 			$erreur = _T('login_identifiant_inconnu', array('login' => htmlspecialchars($login)));
  			$login = '';
 			@spip_setcookie("spip_admin", "", time() - 3600);
@@ -153,7 +151,7 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	if ($login) {
 
 		$session = "<br /><br /><label><b>"._T('login_login2')."</b><br /></label>\n<input type='text' name='session_login' class='forml' value=\"$login\" size='40' />";
-		if ($source_auteur != 'spip') 
+		if (!$source_auteur) 
 			$challenge = '';
 		else {
 			$challenge = 
@@ -210,13 +208,12 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 			 'document.form_login.var_login.focus();');
 
 	if ($echec_cookie AND $php_module AND !$ignore_auth_http) {
-		$res .= "<form action='spip_cookie.php3' method='get'>";
-		$res .= "<fieldset>\n<p>";
-		$res .= _T('login_preferez_refuser')." \n";
-		$res .= "<input type='hidden' name='essai_auth_http' value='oui'/> ";
-		$res .= "<input type='hidden' name='url' value='$cible'/>\n";
-		$res .= "<div align='right'><input type='submit' class='spip_bouton' value='"._T('login_sans_cookiie')."'/></div>\n";
-		$res .= "</fieldset></form>\n";
+		$res .= "<form action='spip_cookie.php3' method='get'><fieldset>\n<p>"
+			. _T('login_preferez_refuser')
+			. "<input type='hidden' name='essai_auth_http' value='oui'/>\n"
+			. "<input type='hidden' name='url' value='$cible'/>\n"
+			. "<div align='right'><input type='submit' class='spip_bouton' value='"._T('login_sans_cookiie')."'/></div>\n"
+			.  "</fieldset></form>\n";
 	}
 
 	$res .= "\n<div align='center' style='font-size: 12px;' >"; // debut du pied de login
@@ -243,9 +240,7 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 	  $res .= " [<a href='$url_site'>"._T('login_retoursitepublic')."</a>]";
 	}
 
-	$res .= "</div>\n";
-
-	return $res .  "</div></div>";
+	return $res .  "</div></div></div>";
 
 }
 

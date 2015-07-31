@@ -626,7 +626,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			##    compile vers boucle_debug_compile()
 			## 2) le resultat de la boucle, lui, sera plus tard envoye vers
 			##    boucle_debug_resultat()
-			if ($GLOBALS['var_debug']) {
+			if ($GLOBALS['var_debug'] == 'oui') {
 				boucle_debug_compile ($id, $nom, $pretty,
 					$sourcefile, $codeboucle.$fincode);
 				$codedebug = "\n	boucle_debug_resultat
@@ -670,9 +670,9 @@ function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
 
 ?".">";
 
-	if ($GLOBALS['var_debug'])
+	if ($GLOBALS['var_debug'] == 'oui')
 		squelette_debug_compile($nom, $sourcefile, $squelette_compile);
-#	spip_log($squelette_compile);
+
 	return $squelette_compile;
 
 }
