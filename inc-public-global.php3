@@ -263,4 +263,28 @@ function inclure_formulaire($r) {
 	}
 }
 
+// Pour Fil
+
+function perso_admin($texte) {
+// Inserer la feuille de style selon les normes, dans le <head>
+// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
+
+	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />";
+	if (@file_exists('spip_admin_perso.css'))
+		$css2 = "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
+	else $css2 = '';
+	$x = strpos($texte,$css);
+	if ($x !== false) {
+		if ($css2) {
+			$x+=strlen($css);
+			return substr($texte,0,$x) . $css2 . substr($texte,$x+1);
+		} else 	return $texte;
+	} else {
+		if (eregi('<(/head|body)', $texte, $regs)) {
+			$texte = explode($regs[0], $texte, 2);
+			return $texte[0].$css."\n" . $css2.$regs[0].$texte[1];
+		} else  return $texte . $css . "\n" . $css2;
+	}
+}
+
 ?>
