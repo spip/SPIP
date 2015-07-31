@@ -10,42 +10,39 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // http://doc.spip.org/@inc_install_1
 function install_etape_1_dist()
 {
-
 	echo install_debut_html();
 
 	// stopper en cas de grosse incompatibilite de l'hebergement
 	tester_compatibilite_hebergement();
 
-	list($adresse_db, $login_db) = login_hebergeur();
-	$pass_db = '';
+	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
+	$s = !@is_readable(_FILE_CONNECT_TMP) ? ''
+	  : analyse_fichier_connection(_FILE_CONNECT_TMP);
+
+	list($adresse_db, $login_db) = $s ? $s : login_hebergeur();
 
 	$chmod = (isset($_GET['chmod']) AND preg_match(',^[0-9]+$,', $_GET['chmod']))? sprintf('%04o', $_GET['chmod']):'0777';
-	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
-	if (@file_exists(_FILE_CONNECT_TMP)) {
-		$s = @join('', @file(_FILE_CONNECT_TMP));
-		if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
-			$adresse_db = $regs[1];
-			$login_db = $regs[2];
-		}
-		else if (preg_match("#spip_connect_db\('(.*)','(.*)','(.*)','(.*)'#", $s, $regs)) {
-			$adresse_db = $regs[1];
-			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
-			$login_db = $regs[3];
-		}
-	}
-	if(@file_exists(_FILE_CHMOD_TMP)){
+
+	if(@is_readable(_FILE_CHMOD_TMP)){
 		$s = @join('', @file(_FILE_CHMOD_TMP));
 		if(preg_match("#define\('_SPIP_CHMOD', (.*)\)#", $s, $regs)) {
 			$chmod = $regs[1]; 
 		}
 	}
 
-	$req = array($adresse_db,$login_db,$pass_db);
+	$db = array($adresse_db, _T('entree_base_donnee_2'));
+	$login = array($login_db, _T('entree_login_connexion_2'));
+	$pass = array($pass_db, _T('entree_mot_passe_2'));
 
-	$predef = array(defined('_INSTALL_SERVER_DB'), defined('_INSTALL_HOST_DB'), defined('_INSTALL_USER_DB'), defined('_INSTALL_PASS_DB'));
+	$predef = array(defined('_INSTALL_SERVER_DB'), 
+			defined('_INSTALL_HOST_DB'),
+			defined('_INSTALL_USER_DB'),
+			defined('_INSTALL_PASS_DB'));
 
 	// ces deux chaines de langues doivent etre reecrites
 #	echo info_etape(_T('info_connexion_mysql'), _T('texte_connexion_mysql').aide ("install1"));
@@ -57,86 +54,10 @@ function install_etape_1_dist()
 			. _L("SPIP sait utiliser MySQL (le plus r&eacute;pandu) et PostGreSQL (support encore exp&eacute;rimental).")
 			.'</p>'
 			);
-	echo install_etape_1_form($req, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
+	echo install_connexion_form($db, $login, $pass, $predef, "\n<input type='hidden' name='chmod' value='$chmod' />", 2);
 	echo info_progression_etape(1,'etape_','install/');
 	echo install_fin_html();
 }
 
-function install_etape_1_form($req, $predef, $hidden, $etape)
-{
-
-	if ($predef[0])
-		$server_db = _INSTALL_SERVER_DB;
-	else if (
-	abs(function_exists('pg_connect'))
-	+ abs(function_exists('mysql_connect'))
-	<= 1)
-		$server_db = function_exists('mysql_connect')
-			? 'mysql'
-			: 'pg';
-	else
-		$server_db ='';
-
-  return generer_form_ecrire('install', (
-	  "\n<input type='hidden' name='etape' value='$etape' />" 
-	. $hidden
-	. (_request('echec')?
-			("<p><b>"._T('avis_connexion_echec_1').
-			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
-			:"")
-
-	. ($server_db
-		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
-		: 
-		'<fieldset><legend>'._L('Indiquer le type de base de donn&eacute;es :')
-		. "\n<select name='server_db'>"
-		. (function_exists('mysql_connect')
-			? "<option value='mysql'>"._L('MySQL')."</option>"
-			: '')
-		. (function_exists('pg_connect')
-			? "<option value='pg'>"._L('PostGreSQL')."</option>"
-			: '')
-		. "</select></legend></fieldset>"
-	)
-
-	. ($predef[1]
-	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
-	: fieldset(_T('entree_base_donnee_1'),
-		array(
-			'adresse_db' => array(
-				'label' => _T('entree_base_donnee_2'),
-				'valeur' => $req[0]
-			),
-		)
-	)
-	)
-
-	. ($predef[2]
-	? '<h3>'._T('install_login_base_hebergeur').'</h3>'
-	: fieldset(_T('entree_login_connexion_1'),
-		array(
-			'login_db' => array(
-				'label' => _T('entree_login_connexion_2'),
-				'valeur' => $req[1]
-			),
-		)
-	)
-	)
-
-	. ($predef[3]
-	? '<h3>'._T('install_pass_base_hebergeur').'</h3>'
-	: fieldset(_T('entree_mot_passe_1'),
-		array(
-			'pass_db' => array(
-				'label' => _T('entree_mot_passe_2'),
-				'valeur' => $req[2]
-			),
-		)
-	)
-	)
-
-	. bouton_suivant()));
-
-}
 
 ?>

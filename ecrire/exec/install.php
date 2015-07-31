@@ -45,6 +45,33 @@ function install_fichier_connexion($nom, $texte)
 	ecrire_fichier($nom, $texte);
 }
 
+function analyse_fichier_connection($file)
+{
+  
+	$s = @join('', @file($file));
+	if (preg_match("#mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)#", $s, $regs)) {
+		array_shift($regs);
+		return $regs;
+	} else if (preg_match("#spip_connect_db\('([^']*)','([^']*)','([^']*)','(.*)'#", $s, $regs)) {
+			if ($port_db = $regs[2]) $regs[1] .= ':'.$port_db;
+			$regs[2] = $regs[3];
+			array_shift($regs);
+			return $regs;
+	}
+	return '';
+}
+
+function bases_referencees($exclu='')
+{
+	$tables = array();
+	foreach(preg_files(_DIR_CONNECT, '.php$') as $f) {
+		if ($f != $exclu AND analyse_fichier_connection($f))
+			$tables[]= basename($f, '.php');
+	}
+	return $tables;
+}
+
+
 //
 // Verifier que l'hebergement est compatible SPIP ... ou l'inverse :-)
 // (sert a l'etape 1 de l'installation)
@@ -181,4 +208,141 @@ function fieldset($legend, $champs = array(), $horchamps='') {
 	return $fieldset;
 }
 
+function install_connexion_form($db, $login, $pass, $predef, $hidden, $etape)
+{
+	$pg = function_exists('pg_connect');
+	$mysql = function_exists('mysql_connect');
+
+	if ($predef[0] AND !is_string($predef[0]))
+		$server_db = _INSTALL_SERVER_DB;
+	else if (!($pg AND $mysql))
+		$server_db = $mysql ? 'mysql' : 'pg';
+	else {
+	  $server_db ='';
+	  $m = ($predef != 'mysql') ? '' : " selected='selected'";
+	  $p = ($predef != 'pg') ? '' : " selected='selected'";
+	}
+
+	return generer_form_ecrire('install', (
+	  "\n<input type='hidden' name='etape' value='$etape' />" 
+	. $hidden
+	. (_request('echec')?
+			("<p><b>"._T('avis_connexion_echec_1').
+			"</b></p><p>"._T('avis_connexion_echec_2')."</p><p style='font-size: small;'>"._T('avis_connexion_echec_3')."</p>")
+			:"")
+
+	. ($server_db
+		? '<input type="hidden" name="server_db" value="'.$server_db.'" />'
+		: ('<fieldset><legend>'
+		._L('Indiquer le type de base de donn&eacute;es :')
+		. "\n<select name='server_db'>"
+		. ($mysql
+			? "<option value='mysql'$m>"._L('MySQL')."</option>"
+			: '')
+		. ($pg
+			? "<option value='pg'$p>"._L('PostGreSQL')."</option>"
+			: '')
+		   . "</select></legend></fieldset>")
+	)
+
+	. ($predef[1]
+	? '<h3>'._T('install_adresse_base_hebergeur').'</h3>'
+	: fieldset(_T('entree_base_donnee_1'),
+		array(
+			'adresse_db' => array(
+				'label' => $db[1],
+				'valeur' => $db[0]
+			),
+		)
+	)
+	)
+
+	. ($predef[2]
+	? '<h3>'._T('install_login_base_hebergeur').'</h3>'
+	: fieldset(_T('entree_login_connexion_1'),
+		array(
+			'login_db' => array(
+					'label' => $login[1],
+					'valeur' => $login[0]
+			),
+		)
+	)
+	)
+
+	. ($predef[3]
+	? '<h3>'._T('install_pass_base_hebergeur').'</h3>'
+	: fieldset(_T('entree_mot_passe_1'),
+		array(
+			'pass_db' => array(
+				'label' => $pass[1],
+				'valeur' => $pass[0]
+			),
+		)
+	)
+	)
+
+	. bouton_suivant()));
+
+}
+
+// 4 valeurs qu'on reconduit d'un script a l'autre
+// sauf s'ils sont predefinis.
+
+function predef_ou_cache($adresse_db, $login_db, $pass_db, $server_db)
+{
+	return (defined('_INSTALL_HOST_DB')
+		? ''
+		: "\n<input type='hidden' name='adresse_db'  value=\"".htmlspecialchars($adresse_db)."\" />"
+	)
+	. (defined('_INSTALL_USER_DB')
+		? ''
+		: "\n<input type='hidden' name='login_db' value=\"".htmlspecialchars($login_db)."\" />"
+	)
+	. (defined('_INSTALL_PASS_DB')
+		? ''
+		: "\n<input type='hidden' name='pass_db' value=\"".htmlspecialchars($pass_db)."\" />"
+	)
+
+	. (defined('_INSTALL_SERVER_DB')
+		? ''
+		: "\n<input type='hidden' name='server_db' value=\"".htmlspecialchars($server_db)."\" />"
+	   );
+}
+
+// presentation des bases existantes
+
+function install_etape_liste_bases($server_db, $disabled=array())
+{
+	$result = sql_listdbs($server_db);
+	if (!$result) return '';
+	$bases = $checked = array();
+
+	while ($row = sql_fetch($result, $server_db)) {
+
+		$nom = array_shift($row);
+		$id = htmlspecialchars($nom);
+		$dis = in_array($nom, $disabled) ? " disabled='disabled'" : '';
+		$base = " name=\"choix_db\" value=\""
+		  . $nom
+		  . '"'
+		  . $dis
+		  . " type='radio' id='$id'";
+		$label = "<label for='$id'>"
+		. ($dis ? "<i>$nom</i>" : $nom)
+		. "</label>";
+
+		if (!$checked AND !$dis AND
+		    (($nom == $login_db) OR
+			($GLOBALS['table_prefix'] == $nom))) {
+			$checked = "<input$base checked='checked' />\n$label";
+		} else {
+			$bases[]= "<input$base />\n$label";
+		}
+	}
+	if (!$bases) return false;
+
+	if ($checked) {array_unshift($bases, $checked); $checked = true;}
+
+	return array($checked, $bases);
+}
 ?>

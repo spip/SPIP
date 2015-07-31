@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/headers');
-include_spip('inc/acces');
 
 function install_etape_4_dist()
 {
@@ -98,30 +97,50 @@ function install_etape_4_dist()
 	$config = charger_fonction('config', 'inc');
 	$config();
 
-	$htpasswd = _DIR_TMP . _AUTH_USER_FILE;
-	spip_unlink($htpasswd);
-	spip_unlink($htpasswd."-admin");
-	ecrire_acces();
+	$suite =  "\n<input type='hidden' name='etape' value='fin' />" 
+	  . bouton_suivant(_T('login_espace_prive'));
 
-	// on l'envoie dans l'espace prive
-	echo generer_form_ecrire('accueil', bouton_suivant());
+	$adresse_db = defined('_INSTALL_HOST_DB')
+		? _INSTALL_HOST_DB
+		: _request('adresse_db');
+
+	$login_db = defined('_INSTALL_USER_DB')
+		? _INSTALL_USER_DB
+		: _request('login_db');
+
+	$pass_db = defined('_INSTALL_PASS_DB')
+		? _INSTALL_PASS_DB
+		: _request('pass_db');
+
+	$server_db = defined('_INSTALL_SERVER_DB')
+		? _INSTALL_SERVER_DB
+		: _request('server_db');
+
+	$choix = defined('_INSTALL_NAME_DB')
+		? ''
+	  : ("\n<input type='hidden' name='sel_db' value='" . _request('sel_db') . "' />\n");
+
+	echo generer_form_ecrire('install', $suite);
 	echo info_progression_etape(4,'etape_','install/');
+	echo autres_bases($adresse_db, $login_db, $pass_db, $server_db, $choix);
 	echo install_fin_html();
-
-	// et on perennise
-
-	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CHMOD_TMP);
-	if (!@rename(_FILE_CHMOD_TMP, $f)) {
-		if (@copy(_FILE_CHMOD_TMP, $f))
-			spip_unlink(_FILE_CHMOD_TMP);
-	}
-
-	$f = str_replace( _FILE_TMP_SUFFIX, '.php', _FILE_CONNECT_TMP);
-	if (!@rename(_FILE_CONNECT_TMP, $f)) {
-		if (@copy(_FILE_CONNECT_TMP, $f))
-			@spip_unlink(_FILE_CONNECT_TMP);
-	}
-
 }
 
+function autres_bases($adresse_db, $login_db, $pass_db, $server_db, $hidden)
+{
+	$tables =  bases_referencees(_FILE_CONNECT_TMP);
+
+	if ($tables)
+		$tables = '<br /><br />'
+		  . _L('Bases d&eacute;j&agrave; interrogeables:')
+		  . "<ul>\n<li>"
+		  . join("</li>\n<li>",  $tables)
+		  . "</li>\n</ul>";
+
+	return "<br ><div style='padding: 10px; border: 1px solid; text-align: left'>" 
+	.  _L("Toutefois, si vous avez une autre base de donn&eacute;es &agrave; interroger avec SPIP, sur ce serveur ou un autre, d&eacute;clarez-la d&egrave;s maintenant.")
+	  . $tables
+	  .  install_connexion_form(array($adresse_db), array($login_db), array($pass_db), array(), $hidden, 'sup1')
+	.  "</div>";
+}
 ?>

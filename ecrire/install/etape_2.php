@@ -57,10 +57,10 @@ function install_etape_2_dist()
 
 		$hidden = (defined('_SPIP_CHMOD')
 		? ''
-		: "\n<input type='hidden' name='chmod' value='".htmlspecialchars($chmod)."' />"
-			   );
+		: ("\n<input type='hidden' name='chmod' value='".htmlspecialchars($chmod)."' />"))
+		. predef_ou_cache($adresse_db,$login_db,$pass_db, $server_db);
 
-		echo install_etape_2_form($adresse_db,$login_db,$pass_db, $server_db, $hidden, $checked, $res);
+		echo install_etape_2_form($hidden, $checked, $res, 3);
 	} else  {
 		echo info_etape(_T('info_connexion_base'));
 		echo "<p class='resultat'><b>",
@@ -83,36 +83,28 @@ function install_etape_2_dist()
 
 function install_etape_2_bases($login_db, $server_db)
 {
-
-	$result = sql_listdbs($server_db);
-
-	$bases = $checked = '';
-	if ($result) {
-		while ($row = sql_fetch($result, $server_db)) {
-
-			$table_nom = array_shift($row);
-			$base = "<li>\n<input name=\"choix_db\" value=\"".$table_nom."\" type='radio' id='tab$i'";
-			$base_fin = " /><label for='tab$i'>".$table_nom."</label>\n</li>";
-			if (!$checked AND
-			    (($table_nom == $login_db) OR
-			     ($GLOBALS['table_prefix'] == $table_nom))) {
-				$checked = "$base checked='checked'$base_fin";
-			} else {
-				$bases .= "$base$base_fin\n";
-			}
-		}
-	}
-
-	if ($bases) 
+	$res =  install_etape_liste_bases($server_db);
+	if ($res) {
+		list($checked, $bases) = $res;
 		return array($checked, 
-		       "<label for='choix_db'><b>"._T('texte_choix_base_2')."</b><br />"._T('texte_choix_base_3')."</label>"
-		       .  "<ul>$checked$bases</ul><p>"._T('info_ou')." ");
-
+			     "<label for='choix_db'><b>"
+			     ._T('texte_choix_base_2')
+			     ."</b><br />"
+			     ._T('texte_choix_base_3')
+			     ."</label>"
+			     . "<ul>\n<li>"
+			     . join("</li>\n<li>",$bases)
+			     . "</li>\n</ul><p>"
+			     . _T('info_ou')
+			     . " "
+			     );
+	}
 	$res = "<b>"._T('avis_lecture_noms_bases_1')."</b>
 		"._T('avis_lecture_noms_bases_2')."<p>";
+
 	if ($login_db) {
-			// Si un login comporte un point, le nom de la base est plus
-			// probablement le login sans le point -- testons pour savoir
+		// Si un login comporte un point, le nom de la base est plus
+		// probablement le login sans le point -- testons pour savoir
 			$test_base = $login_db;
 			$ok = sql_selectdb($test_base, $server_db);
 			$test_base2 = str_replace('.', '_', $test_base);
@@ -135,29 +127,11 @@ function install_etape_2_bases($login_db, $server_db)
 	return array($checked, $res);
 }
 
-function install_etape_2_form($adresse_db,$login_db,$pass_db, $server_db, $hidden, $checked, $res)
+function install_etape_2_form($hidden, $checked, $res, $etape)
  {
 	return generer_form_ecrire('install', (
-	  "\n<input type='hidden' name='etape' value='3' />"
+	  "\n<input type='hidden' name='etape' value='$etape' />"
 	 . $hidden
-	. (defined('_INSTALL_HOST_DB')
-		? ''
-		: "\n<input type='hidden' name='adresse_db'  value=\"".htmlspecialchars($adresse_db)."\" />"
-	)
-	. (defined('_INSTALL_USER_DB')
-		? ''
-		: "\n<input type='hidden' name='login_db' value=\"".htmlspecialchars($login_db)."\" />"
-	)
-	. (defined('_INSTALL_PASS_DB')
-		? ''
-		: "\n<input type='hidden' name='pass_db' value=\"".htmlspecialchars($pass_db)."\" />"
-	)
-
-	. (defined('_INSTALL_SERVER_DB')
-		? ''
-		: "\n<input type='hidden' name='server_db' value=\"".htmlspecialchars($server_db)."\" />"
-	)
-
 	. (defined('_INSTALL_NAME_DB')
 		? '<h3>'._T('install_nom_base_hebergeur'). ' <tt>'._INSTALL_NAME_DB.'</tt>'.'</h3>'
 		: "\n<fieldset><legend>"._T('texte_choix_base_1')."</legend>\n"
@@ -180,5 +154,4 @@ function install_etape_2_form($adresse_db,$login_db,$pass_db, $server_db, $hidde
 
 	. bouton_suivant()));
 }
-
 ?>
