@@ -33,8 +33,9 @@ function formulaires_editer_objet_traiter($type, $id='new', $id_parent=0, $lier_
 			$referencer_traduction = charger_fonction('referencer_traduction','action');
 			$referencer_traduction($type, $id, $lier_trad);
 			// dupliquer tous les liens
-			// TODO
 			// cf API editer_liens
+			include_spip('action/editer_liens');
+			objet_dupliquer_liens($type,$lier_trad,$id);
 		}
 
 		$res['message_ok'] = ""; // il faudrait faire mieux que cela !
