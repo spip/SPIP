@@ -173,7 +173,8 @@ function sous_repertoire($base, $subdir, $nobase = false) {
 		fclose($f);
 	else {
 		spip_log("echec creation $base${subdir}_");
-		redirige_par_entete(generer_url_action('test_dirs','',true));
+		redirige_par_entete(
+			generer_url_action('test_dirs',"test_dir=$base${subdir}_",true));
 	}
 	spip_log("faux sous-repertoire $base${subdir}_");
 	return "$baseaff${subdir}_";
