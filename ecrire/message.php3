@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_mots.php3");
+include_ecrire ("inc_agenda.php3");
 
 
 
