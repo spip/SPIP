@@ -392,7 +392,7 @@ if (_DIR_RESTREINT AND _request('action')===NULL AND $flag_ob AND strlen(ob_get_
 	// special bug Netscape Win 4.0x
 	&& !preg_match(",Mozilla/4\.0[^ ].*Win,i", $GLOBALS['HTTP_USER_AGENT'])
 	// special bug Apache2x
-	#&& !preg_match(",Apache(-[^ ]+)?/2,i", $GLOBALS['SERVER_SOFTWARE'])
+	&& !preg_match(",Apache(-[^ ]+)?/2,i", $GLOBALS['SERVER_SOFTWARE'])
 	// test suspendu: http://article.gmane.org/gmane.comp.web.spip.devel/32038/
 	#&& !($GLOBALS['flag_sapi_name'] AND preg_match(",^apache2,", @php_sapi_name()))
 	// si la compression est deja commencee, stop
