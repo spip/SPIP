@@ -108,7 +108,8 @@ function image_valeurs_trans($img, $effet, $forcer_format = false) {
 	$fichier_dest = $cache . $fichier_dest . "." .$terminaison_dest;
 	
 	$creer = true;
-	if (($date_src = @filemtime($fichier)) < @filemtime($fichier_dest)) {
+	if (@file_exists($fichier_dest) AND 
+		(($date_src = @filemtime($fichier)) < @filemtime($fichier_dest))) {
 		$creer = false;
 	}
 	
