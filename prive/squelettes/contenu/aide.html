@@ -1,0 +1,33 @@
+<div class="menu" style="float:left;width:200px;">
+	#SET{close,''}
+	<ul class="menu-items">
+	<BOUCLE_menu(DATA){source tableau,#ENV{aide}|aide_menu}>
+		[(#VALEUR{1}|=={1}|oui)
+		#GET{close}
+		<li class="item"><h3>[(#VALEUR{2})]</h3>
+			<ul class="menu-items">
+
+		#SET{close,</ul></li>}
+		][(#VALEUR{1}|=={2}|oui)
+			<li class="item[(#VALEUR{2}|=={#ENV{aide}}|oui)on]"><a href='[(#SELF|parametre_url{aide,#VALEUR{2}})]' class="ajax">[(#VALEUR{3})]</a></li>
+		]
+	</BOUCLE_menu>
+	</ul>
+</div>
+
+<div lang="[(#EVAL{_request('var_lang_r')}|aide_changer_langue{#ENV{lang_r}})]" style="position:relative;margin-left:220px;">
+	[(#ENV{aide}|aide_extrait_section|image_reduire{500}|sinon{
+		[<div style='text-align:center;'>
+			(#CHEMIN_IMAGE{logo-spip.gif}|balise_img{SPIP})
+			<div style='font-variant: small-caps;'>
+			Syst&egrave;me de publication pour l'Internet
+			</div>
+		</div>
+		<p>
+		#SET{doc,#EVAL{$GLOBALS}|table_valeur{home_server}|concat{/,#EVAL{$GLOBALS}|table_valeur{spip_lang},'_'}}
+		<:info_copyright_doc{spipnet=#GET{doc}}:>
+		</p>]
+	})]
+</div>
+
+
