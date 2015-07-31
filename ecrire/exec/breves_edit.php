@@ -24,6 +24,7 @@ function exec_breves_edit_dist()
 		_request('new'));
 }
 
+// http://doc.spip.org/@exec_breves_edit_args
 function exec_breves_edit_args($id_breve, $id_rubrique, $new)
 {
 	global $connect_id_rubrique;

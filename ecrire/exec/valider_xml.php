@@ -22,6 +22,7 @@ function exec_valider_xml_dist()
 	} else valider_xml_ok(_request('var_url'));
 }
 
+// http://doc.spip.org/@valider_xml_ok
 function valider_xml_ok($url)
 {
 	$url = urldecode($url);
@@ -83,6 +84,7 @@ function valider_xml_ok($url)
 	  fin_page();
 }
 
+// http://doc.spip.org/@valider_resultats
 function valider_resultats($res)
 {
 	$i = 0;
@@ -112,6 +114,7 @@ function valider_resultats($res)
 	  . "</table>";
 }
 
+// http://doc.spip.org/@controle_une_url
 function controle_une_url($transformer_xml, $script, $dir)
 {
 // ne pas se controler soi-meme

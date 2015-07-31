@@ -27,7 +27,7 @@ function exec_articles_edit_dist()
 }
 
 
-// http://doc.spip.org/@articles_edit
+// http://doc.spip.org/@exec_articles_edit_args
 function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_version, $new)
 {
 	$row = article_select($id_article ? $id_article : $new, $id_rubrique,  $lier_trad, $id_version);
@@ -41,6 +41,7 @@ function exec_articles_edit_args($id_article, $id_rubrique,$lier_trad,  $id_vers
 	} else articles_edit($id_article, $id_rubrique,$lier_trad, $id_version, $new, 'articles_edit_config', $row);
 }
 
+// http://doc.spip.org/@articles_edit
 function articles_edit($id_article, $id_rubrique, $lier_trad, $id_version, $new, $config_fonc, $row)
 {
 	$id_article = $row['id_article'];

@@ -21,6 +21,7 @@ function exec_sites_dist()
 	exec_sites_args(intval(_request('id_syndic')));
 }
 
+// http://doc.spip.org/@exec_sites_args
 function exec_sites_args($id_syndic)
 {
 	if (!autoriser('voir','site',$id_syndic)

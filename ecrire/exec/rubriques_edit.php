@@ -21,6 +21,7 @@ function exec_rubriques_edit_dist()
 	exec_rubriques_edit_args(intval(_request('id_rubrique')), intval(_request('id_parent')), _request('new'));
 }
 
+// http://doc.spip.org/@exec_rubriques_edit_args
 function exec_rubriques_edit_args($id_rubrique, $id_parent, $new)
 {
 	global $connect_toutes_rubriques, $champs_extra, $connect_statut, $spip_lang_right;
