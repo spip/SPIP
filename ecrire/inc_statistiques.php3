@@ -134,7 +134,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	if ($keywords != '')
 	{
 		if (strlen($keywords) > 50) $keywords = substr($keywords, 0, 48);
-		$buffer["keywords"] = trim(htmlspecialchars(stripslashes($keywords)));
+		$buffer["keywords"] = trim(entites_html(stripslashes($keywords)));
 	}
 
 	return $buffer;
