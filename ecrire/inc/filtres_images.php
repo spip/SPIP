@@ -2967,8 +2967,8 @@ function rtl_visuel($texte, $rtl_global) {
 
 		/*
 		$rtl = false;		
-		for ($i = 0; $i < mb_strlen($mot); $i++) {
-			$lettre = mb_substr($mot, $i, 1);
+		for ($i = 0; $i < spip_strlen($mot); $i++) {
+			$lettre = spip_substr($mot, $i, 1);
 			$code = rtl_mb_ord($lettre);
 			if (($code >= 54928 && $code <= 56767) ||  ($code >= 15708336 && $code <= 15711164)) $rtl = true;
 		}
@@ -3016,8 +3016,8 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text
 	}
 
 	$rtl_global = false;
-	for ($i = 0; $i < mb_strlen($text); $i++) {
-		$lettre = mb_substr($text, $i, 1);
+	for ($i = 0; $i < spip_strlen($text); $i++) {
+		$lettre = spip_substr($text, $i, 1);
 		$code = rtl_mb_ord($lettre);
 		if (($code >= 54928 && $code <= 56767) ||  ($code >= 15707294 && $code <= 15711164)) {
 			$rtl_global = true;
