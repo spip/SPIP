@@ -854,7 +854,7 @@ function table_objet($type) {
 //
 // Enregistrement des evenements
 //
-function spip_log($message) {
+function spip_log($message, $logname='spip') {
 	global $flag_ecrire;
 
 	$pid = '(pid '.@getmypid().')';
@@ -863,7 +863,7 @@ function spip_log($message) {
 	$message = date("M d H:i:s")." $ip $pid "
 		.ereg_replace("\n*$", "\n", $message);
 
-	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
+	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/$logname.log";
 	if (@filesize($logfile) > 10*1024) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
@@ -957,9 +957,9 @@ function verif_butineur() {
 	if (!$browser_name) $browser_name = "Mozilla";
 }
 
-function spip_debug($message) {
+function spip_debug($message, $logname='spip') {
 	if ($GLOBALS['debug'])
-		spip_log($message);
+		spip_log($message, $logname);
 }
 
 
