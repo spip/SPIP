@@ -924,7 +924,7 @@ function generer_url_action($script, $args="", $no_entities=false ,$rel = false)
 
 	$url = './';
 	$url = parametre_url($url,'action',$script);
-	if ($args) $url .= '&amp;'.$args;
+	if ($args) $url .= quote_amp('&'.$args);
 	if ($redirect = parametre_url($url,'redirect')){
 		if (test_espace_prive() 
 		  AND substr($redirect,0,strlen(_DIR_RESTREINT_ABS))==_DIR_RESTREINT_ABS)
