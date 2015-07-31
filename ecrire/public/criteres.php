@@ -590,10 +590,14 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	if ($col == 'id_enfant')
 	  $col = $boucle->primary;
 
-	// Cas particulier : id_secteur = id_rubrique pour certaines tables
-	else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
-	  $col = 'id_rubrique';
-
+	// Cas particulier : id_secteur pour certaines tables
+	else if ($col == 'id_secteur') {
+		if ($type == 'breves')
+		    $col = 'id_rubrique';
+		else if ($type == 'forums') {
+		  $table = critere_secteur_forum($idb, $boucles, $val, $crit);
+		}
+	}
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
 	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
@@ -614,7 +618,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 		if (isset($exceptions_des_jointures[$col]))
 		  // on ignore la table, quel luxe!
 			list($t, $col) = $exceptions_des_jointures[$col];
-		$table = calculer_critere_externe_init($boucle, $col, $desc, $crit, $t);
+		$table = calculer_critere_externe_init($boucle, $boucle->jointures, $col, $desc, $crit, $t);
 	  }
 	}
 	// ajout pour le cas special d'une condition sur le champ statut:
@@ -640,9 +644,23 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	} else $arg = $col;
 
 	// inserer la fonction SQL
-	if ($fct) $arg = "$fct($col$args_sql)";
+	if ($fct) $arg = "$fct($arg$args_sql)";
 
 	return array($arg, $op, $val, $col);
+}
+
+// Faute de copie du champ id_secteur dans la table des forums,
+// faut le retrouver par jointure
+// Pour chaque Row il faudrait tester si le forum est 
+// d'article, de breve, de rubrique, ou de syndication.
+// Pour le moment on ne traite que les articles,
+// les 3 autres cas ne marcheront donc pas: ca ferait 4 jointures
+// qu'il faut traiter optimalement ou alors pas du tout.
+
+function critere_secteur_forum($idb, &$boucles, $val, $crit)
+{
+	list($nom, $desc) = trouver_def_table('articles', $boucles[$idb]);
+	return calculer_critere_externe_init($boucles[$idb], array($nom), 'id_secteur', $desc, $crit, true);
 }
 
 // Champ hors table, ca ne peut etre qu'une jointure.
@@ -653,9 +671,9 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 // (Exemple: criteres {type_mot=...}{type_mot=...} donne 2 jointures
 // pour selectioner ce qui a exactement ces 2 mots-cles.
 
-function calculer_critere_externe_init(&$boucle, $col, $desc, $crit, $checkarrivee = false)
+function calculer_critere_externe_init(&$boucle, $joints, $col, $desc, $crit, $checkarrivee = false)
 {
-	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle, $checkarrivee);
+	$cle = trouver_champ_exterieur($col, $joints, $boucle, $checkarrivee);
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
 		if ($t) if (!trouver_champ('/\b' . $t  . ".$col" . '\b/', $boucle->where)) return $t;
