@@ -366,10 +366,11 @@ function definir_barre_onglets($script) {
 	// ajouter les onglets issus des plugin via plugin.xml
 	if (function_exists('onglets_plugins')){
 		$liste_onglets_plugins = onglets_plugins();
+
 		foreach($liste_onglets_plugins as $id => $infos){
-			if (($parent = $infos['parent']) 
-				&& $parent == $rubrique
-				&& autoriser('onglet',$id)) {
+			if (($parent = $infos['parent'])
+				&& $parent == $script
+				&& autoriser('onglet',$id)) { spip_log('OK');
 					$onglets[$id] = new Bouton(
 					  _DIR_PLUGINS . $infos['icone'],  // icone
 					  $infos['titre'],	// titre
