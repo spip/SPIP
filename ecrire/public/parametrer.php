@@ -281,7 +281,7 @@ function generer_generer_url($type, $p)
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
 // http://doc.spip.org/@public_parametrer_dist
-function public_parametrer_dist($fond, $local='', $cache='')  {
+function public_parametrer_dist($fond, $local='', $cache='', $connect='')  {
 	// verifier que la fonction assembler est bien chargee (cf. #608)
 	$assembler = charger_fonction('assembler', 'public');
 
@@ -366,7 +366,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	if ($GLOBALS['var_mode'] == 'debug')
 		$GLOBALS['debug_objets']['contexte'][$sourcefile] = $local;
 
-	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile)){
+	if ($fonc = $composer($skel, $mime_type, $gram, $sourcefile, $connect)){
 		spip_timer($a = 'calcul page '.rand(0,1000));
 		$notes = calculer_notes(); // conserver les notes...
 

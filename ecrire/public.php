@@ -20,7 +20,7 @@ if (defined('_INC_PUBLIC')) {
 	$fonds = array($fond);
 	if (is_array($fond)) $fonds=$fond;
 	foreach($fonds as $fond){
-		$subpage = inclure_page($fond, $contexte_inclus);
+		$subpage = inclure_page($fond, $contexte_inclus, _request('connect'));
 	
 		if ($subpage['process_ins'] == 'html'){
 			echo $subpage['texte'];
@@ -116,7 +116,7 @@ if (defined('_INC_PUBLIC')) {
 
 	$tableau_des_erreurs = 	$tableau_des_temps = array();
 	$assembler = charger_fonction('assembler', 'public');
-	$page = $assembler($fond);
+	$page = $assembler($fond, _request('connect'));
 
 	if (isset($page['status'])) {
 		include_spip('inc/headers');
